@@ -22,10 +22,6 @@ If you have any Issues/Suggestions, please Submit them in [Issues](https://githu
 
 * Example: `devmap cp_zmb`
 
-### Known Issues
-
-* Weapons don't come with the Default Attachments, so Snipers don't have Scopes, the Forge Freeze can't shatter frozen enemies, etc.
-
 ## Credits
 
 This menu is based on [M203](https://github.com/Xeirh/M203) by [Xeirh](https://github.com/Xeirh)
