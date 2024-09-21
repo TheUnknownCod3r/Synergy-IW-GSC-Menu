@@ -1,12 +1,16 @@
-# Synergy GSC Menu
+# Synergy IW GSC Menu
 
 Infinite Warfare Zombies GSC Mod Menu that uses [IW7-Mod](https://github.com/auroramod/iw7-mod)
 
 If you have any Issues/Suggestions, please Submit them in [Issues](https://github.com/SyndiShanX/Synergy-IW-GSC-Menu/issues)
 
+Preview:
+
+![Mod Menu](https://syndishanx.github.io/Synergy-IW-GSC-Menu/Synergy-IW-GSC-Menu.png)
+
 ### Requirements: [IW7-Mod](https://github.com/auroramod/iw7-mod)
 
-* Download [Synergy.gsc](https://github.com/SyndiShanX/Synergy-IW-GSC-Menu/Synergy.gsc)
+* Download [Synergy.gsc](https://syndishanx.github.io/Synergy-IW-GSC-Menu/Synergy.gsc)
 
 * Place it into `iw7-mod/custom_scripts/cp`
 

@@ -187,18 +187,23 @@ check_option(player, menu, cursor) {
 	return false;
 }
 
-create_text(text, font, font_scale, align_x, align_y, x, y, color, alpha, z_index, hide_when_in_menu) {
+create_text(text, font, font_scale, align_x, align_y, x, y, color, alpha, z_index, hide_when_in_menu, archive) {
 	textElement = newHudElem();
 	textElement.font = font;
 	textElement.fontscale = font_scale;
 	textElement.alpha = alpha;
 	textElement.sort = z_index;
-	textElement.archived = false;
 	textElement.foreground = true;
 	if(isDefined(hide_when_in_menu)) {
 		textElement.hideWhenInMenu = hide_when_in_menu;
 	} else {
 		textElement.hideWhenInMenu = true;
+	}
+	
+	if(isDefined(archive)) {
+		textElement.archived = archive;
+	} else {
+		textElement.archived = false;
 	}
 	
 	textElement.x = x;
@@ -481,33 +486,92 @@ initial_variable() {
 	self.syn["weapons"]["cp_disco"][1] = ["Katana", "Nunchucks"];
 	self.syn["weapons"]["cp_disco"][2] = ["", ""];
 	self.syn["weapons"]["cp_disco"][3] = ["", ""];
-	self.syn["weapons"]["cp_town"][0] =  ["iw7_cutie_zm", "iw7_knife_zm_cleaver", "iw7_knife_zm_crowbar"];
-	self.syn["weapons"]["cp_town"][1] =  ["Modular Atomic Disintegrator", "Cleaver", "Crowbar"];
+	self.syn["weapons"]["cp_town"][0] =  ["iw7_cutie_zm"];
+	self.syn["weapons"]["cp_town"][1] =  ["Modular Atomic Disintegrator"];
 	self.syn["weapons"]["cp_town"][2] =  ["", "", ""];
 	self.syn["weapons"]["cp_town"][3] =  ["", "", ""];
 	self.syn["weapons"]["cp_final"][0] = ["iw7_venomx_zm"];					 				 
 	self.syn["weapons"]["cp_final"][1] = ["Venom-X"];
 	self.syn["weapons"]["cp_final"][2] = [""];
 	self.syn["weapons"]["cp_final"][3] = [""];
-	self.syn["weapons"]["other"][0] =    ["iw7_knife_zm", "iw7_fists_zm", "iw7_entangler_zm", "super_default_zm"];	
-	self.syn["weapons"]["other"][1] =    ["Knife", "Fists", "Entangler", "Default Weapon"];
+	self.syn["weapons"]["other"][0] =    ["iw7_fists_zm", "iw7_entangler_zm"];	
+	self.syn["weapons"]["other"][1] =    ["Fists", "Entangler"];
 	self.syn["weapons"]["other"][2] =    ["", "", "", ""];
 	self.syn["weapons"]["other"][3] =    ["", "", "", ""];
-	self.syn["Main Teleports"]["cp_zmb"][0] =            ["PaP Room", "Spawn", "Main Portal", "Astrocade"];
+	self.syn["camos"]["cp_zmb"] = ["+camo1", "+camo4"];
+	self.syn["camos"]["cp_rave"] = ["+camo204", "+camo205"];
+	self.syn["camos"]["cp_disco"] = ["+camo211", "+camo212"];
+	self.syn["camos"]["cp_town"] = ["+camo92", "+camo93"];
+	self.syn["camos"]["cp_final"] = ["+camo32", "+camo34"];
+	self.syn["Main Teleports"]["cp_zmb"][0] =            ["PaP Room", "Spawn", "Main Portal", "Afterlife Arcade"];
 	self.syn["Map Setup Teleports"]["cp_zmb"][0] =       ["Spawn Power", "Journey Power", "Kepler Power", "Polar Peak Power", "Arcade Power", "Journey Teleporter", "Kepler Teleporter", "Polar Peak Teleporter", "Arcade Teleporter"];
-	self.syn["Mystery Wheel Teleports"]["cp_zmb"][0] =   ["Journey 1", "Journey 2", "Journey 3", "Polar Peak", "Kepler 1", "Kepler 2", "Kepler 3"];
+	self.syn["Mystery Wheel Teleports"]["cp_zmb"][0] =   ["Journey 1", "Journey 2", "Journey 3", "Astrocade", "Polar Peak", "Kepler 1", "Kepler 2", "Kepler 3"];
 	self.syn["Main Quest Teleports"]["cp_zmb"][0] =      ["Calculator 1", "Calculator 2", "Calculator 3", "Boom Box 1", "Boom Box 2", "Boom Box 3", "Umbrella 1", "Umbrella 2", "Umbrella 3", "DJ Booth 1", "DJ Booth 2", "DJ Booth 3"];
 	self.syn["Extra Teleports"]["cp_zmb"][0] =           ["N31L's Head", "N31L Auxiliary Battery 1", "N31L Auxiliary Battery 2", "N31L Auxiliary Battery 3", "N31L Auxiliary Battery 4", "N31L Auxiliary Battery 5", "N31L Auxiliary Battery 6", "N31L Floppy Disk 1", "N31L Floppy Disk 2", "N31L Floppy Disk 3", "N31L Floppy Disk 4", "N31L Floppy Disk 5"];
-	self.syn["Main Teleports"]["cp_zmb"][1] =            [(-10245, 740, -1630), (465, 3680, 0), (650, 970, 0), (2575, -865, 240)];
+	self.syn["Main Teleports"]["cp_zmb"][1] =            [(-10245, 740, -1630), (465, 3680, 0), (650, 970, 0), (-9885, -70, -1795)];
 	self.syn["Map Setup Teleports"]["cp_zmb"][1] =       [(1075, 3720, 0), (4695, 1250, 115), (-1365, -65, 380), (-695, -2795, 560), (2390, -1825, 115), (3640, 1165, 55), (-2150, -35, 225), (-1490, -2650, 360), (2285, -1615, 115)];
-	self.syn["Mystery Wheel Teleports"]["cp_zmb"][1] =   [(1470, 1045, 0), (4065, 2135, 55), (3690, 420, 55), (955, -2260, 440), (-1950, 1830, 365), (-1900, -530, 380), (-845, -1492, 360)];
+	self.syn["Mystery Wheel Teleports"]["cp_zmb"][1] =   [(1470, 1045, 0), (4065, 2135, 55), (3690, 420, 55), (2575, -865, 240), (955, -2260, 440), (-1950, 1830, 365), (-1900, -530, 380), (-845, -1492, 360)];
 	self.syn["Main Quest Teleports"]["cp_zmb"][1] =      [(540, 1060, 0), (-2520, 805, 365), (2960, -850, 240), (595, 2125, -65), (-1415, -175, 380), (1375, -590, -195), (155, -505, 0), (-1890, -3040, 360), (3640, 2335, 115), (-1000, 1495, 225), (-2710, -2480, 360), (2926, 1305, 0)];
 	self.syn["Extra Teleports"]["cp_zmb"][1] =           [(475, -265, 0), (-1800, -2825, 360), (-535, -3265, 390), (-757, -2415, 560), (-2775, 1565, 365), (-3045, 730, 365), (-1230, 1625, 225), (000, 000, 000), (000, 000, 000), (000, 000, 000), (000, 000, 000), (000, 000, 000)];
-	self.syn["Main Teleports"]["cp_zmb"][2] =            [90, -90, -90, -90];
+	self.syn["Main Teleports"]["cp_zmb"][2] =            [90, -90, -90];
 	self.syn["Map Setup Teleports"]["cp_zmb"][2] =       [-90, 0, -90, 90, 180, 0, -45, 20, -90];
-	self.syn["Mystery Wheel Teleports"]["cp_zmb"][2] =   [180, 90, 0, 0, -45, -90, 0];
+	self.syn["Mystery Wheel Teleports"]["cp_zmb"][2] =   [180, 90, 0, -90, 0, -45, -90, 0];
 	self.syn["Main Quest Teleports"]["cp_zmb"][2] =      [0, 0, 90, 45, 0, 90, 160, 90, -90, 0, -90, 0];
 	self.syn["Extra Teleports"]["cp_zmb"][2] =           [-90, 180, -90, 0, 0, 0, 90, 0, 0, 0, 0, 0];
+	self.syn["Main Teleports"]["cp_rave"][0] =           ["PaP Room", "Spawn", "Cellar", "Kevin's Cabin", "Afterlife Arcade"];
+	self.syn["Mystery Wheel Teleports"]["cp_rave"][0] =  ["Rave Stage", "Dock", "Main Fire", "Mess Hall", "Cellar", "Bear Lodge", "Camp Wolf"];
+	self.syn["Main Teleports"]["cp_rave"][1] =           [(-10245, 750, -1630), (-940, -1620, 225), (-395, -1815, 55), (-6035, 4890, 120), (-9885, -70, -1795)];
+	self.syn["Map Setup Teleports"]["cp_rave"][1] =      [(000, 000, 000), (000, 000, 000)];
+	self.syn["Mystery Wheel Teleports"]["cp_rave"][1] =  [(2205, -1390, -15), (-2900, 2275, -150), (145, 1125, 50), (-3355, -3365, 150), (-560, -1895, 55), (-950, -1150, 390), (-2585, -4575, 255)];
+	self.syn["Main Quest Teleports"]["cp_rave"][1] =     [(000, 000, 000), (000, 000, 000)];
+	self.syn["Extra Teleports"]["cp_rave"][1] =          [(000, 000, 000), (000, 000, 000)];
+	self.syn["Main Teleports"]["cp_rave"][2] =           [90, 165, 130, 100, 0];
+	self.syn["Map Setup Teleports"]["cp_rave"][2] =      [0, 0];
+	self.syn["Mystery Wheel Teleports"]["cp_rave"][2] =  [100, 140, 90, -50, -180, -90, -75];
+	self.syn["Main Quest Teleports"]["cp_rave"][2] =     [0, 0];
+	self.syn["Extra Teleports"]["cp_rave"][2] =          [0, 0];
+	self.syn["Main Teleports"]["cp_disco"][0] =          ["PaP Room", "Spawn", "Sewer", "Afterlife Arcade"];
+	self.syn["Mystery Wheel Teleports"]["cp_disco"][0] = ["Alleyway", "Rooftop", "Garden", "Disco Roof", "Subway Station 1", "Subway Station 2", "Disco"];
+	self.syn["Extra Teleports"]["cp_disco"][0] =         ["Pink Cat Flier 1", "Pink Cat Flier 2", "Pink Cat Flier 3", "Pink Cat Flier 4", "Token"];
+	self.syn["Main Teleports"]["cp_disco"][1] =          [(-10245, 750, -1630), (580, 3025, 285), (-875, 1820, 180), (-9885, -35, -1795)];
+	self.syn["Map Setup Teleports"]["cp_disco"][1] =     [(-1915, 4620, 750), (1590, 1290, 750), (-810, 765, 925), (-1110, 3435, 1120), (-1075, 2795, 260)];
+	self.syn["Mystery Wheel Teleports"]["cp_disco"][1] = [(105, 1300, 750), (15, 665, 935), (-3515, 1165, 975), (-2100, 2795, 1175), (375, 2065, 525), (-2450, 3610, 500), (-1185, 3735, 750)];
+	self.syn["Main Quest Teleports"]["cp_disco"][1] =    [(000, 000, 000), (000, 000, 000)];
+	self.syn["Extra Teleports"]["cp_disco"][1] =         [(000, 000, 000), (000, 000, 000)];
+	self.syn["Main Teleports"]["cp_disco"][2] =          [90, -145, 90, 0];
+	self.syn["Map Setup Teleports"]["cp_disco"][2] =     [-180, -30, 90, 0, 180];
+	self.syn["Mystery Wheel Teleports"]["cp_disco"][2] = [-90, 90, -180, 180, -180, 90. -20];
+	self.syn["Main Quest Teleports"]["cp_disco"][2] =    [0, 0];
+	self.syn["Extra Teleports"]["cp_disco"][2] =         [0, 0];
+	self.syn["Main Teleports"]["cp_town"][0] =           ["PaP Room", "Spawn", "Studio", "Afterlife Arcade"];
+	self.syn["Map Setup Teleports"]["cp_town"][0] =      ["Power Handle", "Power Station", "Telepad 1", "Telepad 2", "Telepad 3", "Telepad 4"];
+	self.syn["Mystery Wheel Teleports"]["cp_town"][0] =  ["Power Station", "Beach Mart", "RV Park", "Pool", "Studio", "Trail"];
+	self.syn["Main Quest Teleports"]["cp_town"][0] =     ["Elvira's Book", "Zombie Head", "Zombie Torso", "Zombie Arm 1", "Zombie Arm 2", "Zombie Leg"];
+	self.syn["Extra Teleports"]["cp_town"][0] =          ["Cleaver", "Crowbar", "M.A.D. Attachment 1", "M.A.D. Attachment 2", "M.A.D. Attachment 3"];
+	self.syn["Main Teleports"]["cp_town"][1] =           [(-10245, 750, -1630), (3939, -4515, 15), (235, -2555, 520), (-9885, -70, -1795)];
+	self.syn["Map Setup Teleports"]["cp_town"][1] =      [(3205, 1815, -105), (6440, -2770, 105), (5375, -2800, 195), (4795, -180, 330), (490, 4115, 395), (-937, -2695, 520)];
+	self.syn["Mystery Wheel Teleports"]["cp_town"][1] =  [(6440, -1955, 105), (6210, 1075, 330), (-790, 3840, 400), (-255, -590, 410), (-480, -3410, 515), (340, -4710, 255)];
+	self.syn["Main Quest Teleports"]["cp_town"][1] =     [(5405, -4720, -15), (-295, 3665, 425), (6245, -550, 335), (3205, 1815, -105), (470, 2200, 395), (-1175, -4219, 335)];
+	self.syn["Extra Teleports"]["cp_town"][1] =          [(6015, -820, 335), (1270, -130, 475), (-1055, 3505, 400), (4260, 1620, 335), (-130, -3045, 520)];
+	self.syn["Main Teleports"]["cp_town"][2] =           [90, 60, 0, 0];
+	self.syn["Map Setup Teleports"]["cp_town"][2] =      [65, 20, -160, -90, 100, -180];
+	self.syn["Mystery Wheel Teleports"]["cp_town"][2] =  [-65, 0, 150, 180, -90, -80];
+	self.syn["Main Quest Teleports"]["cp_town"][2] =     [45, -170, 75, 65, 30, 80];
+	self.syn["Extra Teleports"]["cp_town"][2] =          [-85, -30, 100, -180, 90];
+	self.syn["Main Teleports"]["cp_final"][0] =          ["PaP Room", "Spawn", "Control Room", "Theatre", "Afterlife Arcade"];
+	self.syn["Map Setup Teleports"]["cp_final"][0] =     ["N31L's Head", "N31L", "Open Theatre Portal"];
+	self.syn["Mystery Wheel Teleports"]["cp_final"][0] = ["Spawn", "Water Room", "Main Room", "Hallway", "Storage Room", "Theatre", "Outside"];
+	self.syn["Extra Teleports"]["cp_final"][0] =         ["PaP Bridge Part 1", "PaP Bridge Part 2", "PaP Bridge Part 3", "PaP Bridge", "Mephistopheles Arena"];
+	self.syn["Main Teleports"]["cp_final"][1] =          [(5135, -5180, 285), (-760, 2920, 90), (730, 5065, 90), (5515, -4515, -20), (2080, -4520, 330)];
+	self.syn["Map Setup Teleports"]["cp_final"][1] =     [(-1210, 5040, -70), (45, 3840, 25), (1920, 3470, 15)];
+	self.syn["Mystery Wheel Teleports"]["cp_final"][1] = [(-90, 2880, 25), (-1215, 4755, -205), (645, 5710, 60), (1510, 4010, 15), (1470, 3565, -175), (5700, -4050, -70), (2185, 6275, 95)];
+	self.syn["Main Quest Teleports"]["cp_final"][1] =    [(000, 000, 000), (000, 000, 000)];
+	self.syn["Extra Teleports"]["cp_final"][1] =         [(-855, 5435, -70), (1755, 3110, -290), (4990, -6835, 50), (3465, 6640, 165), (-13300, -325, -105)];
+	self.syn["Main Teleports"]["cp_final"][2] =          [90, 20, -45, 90, 0];
+	self.syn["Map Setup Teleports"]["cp_final"][2] =     [-155, 90, 90];
+	self.syn["Mystery Wheel Teleports"]["cp_final"][2] = [-90, -130, 180, 90, 60, 0, -50];
+	self.syn["Main Quest Teleports"]["cp_final"][2] =    [0, 0];
+	self.syn["Extra Teleports"]["cp_final"][2] =         [-55, 60, -100, 45, 0];
 	self.syn["zombies"]["cp_zmb"][0] =   ["generic_zombie", "zombie_clown", "zombie_brute", "zombie_grey", "zombie_ghost", "the_hoff"];
 	self.syn["zombies"]["cp_zmb"][1] =   ["Normal Zombie", "Clown", "Brute", "Alien", "Ghost", "David Hasselhoff"];
 	self.syn["zombies"]["cp_zmb"][2] =   ["axis", "axis", "axis", "axis", "allies"];
@@ -531,9 +595,7 @@ initial_variable() {
 	self.syn["perks"]["cp_town"][1] = ["Deadeye Dewdrops", "Change Chews"];
 	self.syn["perks"]["cp_final"][0] = ["perk_machine_deadeye", "perk_machine_change"];
 	self.syn["perks"]["cp_final"][1] = ["Deadeye Dewdrops", "Change Chews"];
-	
 	self.syn["utility"].interaction = true;
-	
 	self.syn["utility"].color[0] = (0.752941176, 0.752941176, 0.752941176);
 	self.syn["utility"].color[1] = (0.074509804, 0.070588235, 0.078431373);
 	self.syn["utility"].color[2] = (0.074509804, 0.070588235, 0.078431373);
@@ -695,6 +757,13 @@ create_option() {
 				self.syn["hud"]["toggle"][1][index] = self create_shader("white", "left", "CENTER", (self.syn["utility"].x_offset + 4), (self.syn["utility"].y_offset + ((i * self.syn["utility"].option_spacing) + 17)), 8, 8, color[1], 1, 10);
 			}
 			
+			for(x = 0; x < 10; x++) {
+				if(isDefined(self.syn["hud"]["arrow"][0][x])) {
+					self.syn["hud"]["arrow"][0][x] destroy();
+					self.syn["hud"]["arrow"][1][x] destroy();
+				}
+			}
+			
 			if(return_toggle(self.structure[index].slider)) {
 				if(isDefined(self.structure[index].array)) {
 					self.syn["hud"]["slider"][0][index] = self create_text(self.structure[index].array[self.slider[self get_menu() + "_" + index]], self.syn["utility"].font, self.syn["utility"].font_scale, "left", "CENTER", (self.syn["utility"].x_offset + 155), (self.syn["utility"].y_offset + ((i * self.syn["utility"].option_spacing) + 16)), color[0], 1, 10);
@@ -736,7 +805,7 @@ create_option() {
 	self update_resize();
 }
 
-update_scrolling(scrolling) {
+update_scrolling(scrolling) {	
 	if(return_toggle(self.structure[self get_cursor()].category)) {
 		self set_cursor((self get_cursor() + scrolling));
 		return self update_scrolling(scrolling);
@@ -950,6 +1019,7 @@ menu_index() {
 			self add_option("Zombie Options", ::new_menu, "Zombie Options");
 			self add_option("Visual Options", ::new_menu, "Visual Options");
 			self add_option("Teleport Options", ::new_menu, "Teleport Options");
+			self add_option("Debug Options", ::new_menu, "Debug Options");
 			
 			break;
 		case "Basic Options":
@@ -967,7 +1037,6 @@ menu_index() {
 			self add_option("Give Perma Perkaholic", ::give_perkaholic);
 			
 			self add_increment("Set Points", ::set_points, 100, 100, 100000, 100);
-			self add_increment("Set Tickets", ::set_tickets, 100, 100, 100000, 100);
 			
 			break;
 		case "Account Options":
@@ -1052,10 +1121,18 @@ menu_index() {
 				self add_option(self.syn["Main Teleports"][map][0][i], ::set_position, self.syn["Main Teleports"][map][1][i], (0, self.syn["Main Teleports"][map][2][i], 0));
 			}
 			
-			self add_option("Map Setup Teleports", ::new_menu, "Map Setup Teleports");
-			self add_option("Mystery Wheel Teleports", ::new_menu, "Mystery Wheel Teleports");
-			self add_option("Main Quest Teleports", ::new_menu, "Main Quest Teleports");
-			self add_option("Extra Teleports", ::new_menu, "Extra Teleports");
+			if(isDefined(self.syn["Map Setup Teleports"][map][0])) {
+				self add_option("Map Setup Teleports", ::new_menu, "Map Setup Teleports");
+			}
+			if(isDefined(self.syn["Mystery Wheel Teleports"][map][0])) {
+				self add_option("Mystery Wheel Teleports", ::new_menu, "Mystery Wheel Teleports");
+			}
+			if(isDefined(self.syn["Main Quest Teleports"][map][0])) {
+				self add_option("Main Quest Teleports", ::new_menu, "Main Quest Teleports");
+			}
+			if(isDefined(self.syn["Extra Teleports"][map][0])) {
+				self add_option("Extra Teleports", ::new_menu, "Extra Teleports");
+			}
 			
 			break;
 		case "Map Setup Teleports":
@@ -1133,6 +1210,12 @@ menu_index() {
 			
 			for(i = 0; i < self.syn["perks"][0].size; i++) {
 				self add_option(self.syn["perks"][1][i], ::take_zombies_perk, self.syn["perks"][0][i]);
+			}
+			
+			if(map == "cp_disco" || map == "cp_town" || map == "cp_final") {
+				for(i = 0; i < self.syn["perks"][map][0].size; i++) {
+					self add_option(self.syn["perks"][map][1][i], ::take_zombies_perk, self.syn["perks"][map][0][i], 0);
+				}
 			}
 
 			break;
@@ -1260,18 +1343,6 @@ menu_index() {
 			self.syn["hud"]["title"][0].x = self.syn["utility"].x_offset + 86 - menu.size;
 			
 			category = level.mapName;
-			
-			for(i = 0; i < self.syn["weapons"][category][0].size; i++) {
-				self add_option(self.syn["weapons"][category][1][i], ::give_weapon, self.syn["weapons"][category][0][i], category, i);
-			}
-			
-			break;
-		case "Arcade Weapons":
-			self add_menu(menu);
-			
-			self.syn["hud"]["title"][0].x = self.syn["utility"].x_offset + 86 - menu.size;
-			
-			category = "arcade";
 			
 			for(i = 0; i < self.syn["weapons"][category][0].size; i++) {
 				self add_option(self.syn["weapons"][category][1][i], ::give_weapon, self.syn["weapons"][category][0][i], category, i);
@@ -1438,11 +1509,11 @@ give_weapon(weapon, category, index) {
 		papLevel = "";
 		if(self.give_packed_weapon == 1) {
 			papText = "pap1";
-			papCamo = "+camo1";
+			papCamo = self.syn["camos"][level.mapName][0];
 			papLevel = "1";
 		} else if(self.give_double_packed_weapon == 1) {
 			papText = "pap2";
-			papCamo = "+camo4";
+			papCamo = self.syn["camos"][level.mapName][1];
 			papLevel = "2";
 		}
 	
@@ -1566,10 +1637,6 @@ set_vision(vision) {
 	self visionSetNakedForPlayer("ac130_enhanced_mp", 0.1);
 	wait .1;
 	self visionSetNakedForPlayer(vision, 0.1);
-}
-
-get_position() {
-	self iPrintln(self.origin + " | " + self.angles);
 }
 
 set_position(origin, angles) {
