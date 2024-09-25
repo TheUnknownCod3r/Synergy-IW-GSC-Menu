@@ -514,7 +514,7 @@ initial_variable() {
 	self.syn["Main Quest Teleports"]["cp_zmb"][1] =      [(540, 1060, 0), (-2520, 805, 365), (2960, -850, 240), (595, 2125, -65), (-1415, -175, 380), (1375, -590, -195), (155, -505, 0), (-1890, -3040, 360), (3640, 2335, 115), (-1000, 1495, 225), (-2710, -2480, 360), (2926, 1305, 0)];
 	self.syn["Extra Teleports"]["cp_zmb"][1] =           [(475, -265, 0), (-1800, -2825, 360), (-535, -3265, 390), (-757, -2415, 560), (-2775, 1565, 365), (-3045, 730, 365), (-1230, 1625, 225), (000, 000, 000), (000, 000, 000), (000, 000, 000), (000, 000, 000), (000, 000, 000)];
 	self.syn["Main Teleports"]["cp_zmb"][2] =            [90, -90, -90];
-	self.syn["Map Setup Teleports"]["cp_zmb"][2] =       [-90, 0, -90, 90, 180, 0, -45, 20, -90];
+	self.syn["Map Setup Teleports"]["cp_zmb"][2] =       [-90, 0, -90, 90, 180, 0, -45, 20, 0];
 	self.syn["Mystery Wheel Teleports"]["cp_zmb"][2] =   [180, 90, 0, -90, 0, -45, -90, 0];
 	self.syn["Main Quest Teleports"]["cp_zmb"][2] =      [0, 0, 90, 45, 0, 90, 160, 90, -90, 0, -90, 0];
 	self.syn["Extra Teleports"]["cp_zmb"][2] =           [-90, 180, -90, 0, 0, 0, 90, 0, 0, 0, 0, 0];
@@ -1019,7 +1019,6 @@ menu_index() {
 			self add_option("Zombie Options", ::new_menu, "Zombie Options");
 			self add_option("Visual Options", ::new_menu, "Visual Options");
 			self add_option("Teleport Options", ::new_menu, "Teleport Options");
-			self add_option("Debug Options", ::new_menu, "Debug Options");
 			
 			break;
 		case "Basic Options":
@@ -1027,10 +1026,11 @@ menu_index() {
 			
 			self.syn["hud"]["title"][0].x = self.syn["utility"].x_offset + 86 - (menu.size - 1);
 			
-			self add_toggle("God Mode", ::god_mode, self.god_mode);
+			self add_toggle("Demi God Mode", ::demi_god_mode, self.demi_god_mode);
 			self add_toggle("No Clip", ::no_clip, self.no_clip);
-			self add_toggle("UFO", ::ufo_mode, self.ufo_mode);
 			self add_toggle("Infinite Ammo", ::infinite_ammo, self.infinite_ammo);
+			self add_toggle("Self Revive", ::self_revive, self.self_revive);
+			self add_toggle("Super Speed", ::super_speed, self.super_speed);
 			
 			self add_option("Give Perks", ::new_menu, "Give Perks");
 			self add_option("Take Perks", ::new_menu, "Take Perks");
@@ -1069,12 +1069,14 @@ menu_index() {
 			
 			self.syn["hud"]["title"][0].x = self.syn["utility"].x_offset + 86 - menu.size;
 			
-			self add_toggle("One Shot Zombies", ::one_shot_zombies, self.one_shot_zombies);
-			self add_toggle("Freeze Zombies", ::freeze_zombies, self.freeze_zombies);
+			self add_toggle("No Target", ::no_target, self.no_target);
 			
 			self add_option("Spawn Zombies", ::new_menu, "Spawn Zombies");
 			self add_option("Kill All Zombies", ::kill_all_zombies);
 			self add_option("Teleport Zombies to Me", ::teleport_zombies);
+			
+			self add_toggle("One Shot Zombies", ::one_shot_zombies, self.one_shot_zombies);
+			self add_toggle("Freeze Zombies", ::freeze_zombies, self.freeze_zombies);
 			
 			break;
 		case "Visual Options":
@@ -1084,6 +1086,9 @@ menu_index() {
 			
 			self add_toggle("Fullbright", ::fullbright, self.fullbright);
 			self add_toggle("Third Person", ::third_person, self.third_person);
+			
+			self add_increment("Move Menu X", ::modify_x_position, 0, -590, 50, 10);
+			self add_increment("Move Menu Y", ::modify_y_position, 0, -90, 150, 10);
 			
 			self add_option("Visions", ::new_menu, "Visions");
 			
@@ -1375,36 +1380,59 @@ get_map_name() {
 	level.mapName = getDvar("mapname");
 }
 
-god_mode() {
-	self.god_mode = !return_toggle(self.god_mode);
-	executeCommand("god");
-	wait .01;
-	if(self.god_mode) {
-		self iPrintln("God Mode [^2ON^7]");
+modify_x_position(offset) {
+	self.syn["utility"].x_offset = 600 + offset;
+	for(x = 0; x < 10; x++) {
+		if(isDefined(self.syn["hud"]["arrow"][0][x])) {
+			self.syn["hud"]["arrow"][0][x] destroy();
+			self.syn["hud"]["arrow"][1][x] destroy();
+		}
+	}
+	self close_menu();
+	open_menu("Menu Options");
+}
+
+modify_y_position(offset) {
+	self.syn["utility"].y_offset = 100 + offset;
+	for(x = 0; x < 10; x++) {
+		if(isDefined(self.syn["hud"]["arrow"][0][x])) {
+			self.syn["hud"]["arrow"][0][x] destroy();
+			self.syn["hud"]["arrow"][1][x] destroy();
+		}
+	}
+	self close_menu();
+	open_menu("Menu Options");
+}
+
+demi_god_mode() {
+	self.demi_god_mode = !return_toggle(self.demi_god_mode);
+	if(self.demi_god_mode) {
+		self iPrintln("Demi God Mode [^2ON^7]");
+		demi_god_mode_loop();
 	} else {
-		self iPrintln("God Mode [^1OFF^7]");
+		self iPrintln("Demi God Mode [^1OFF^7]");
+		self notify("stop_demi_god_mode");
+	}
+}
+
+demi_god_mode_loop() {
+	self endOn("stop_demi_god_mode");
+	self endOn("game_ended");
+	
+	for(;;) {
+		self.health = self.maxHealth;
+		wait .05;
 	}
 }
 
 no_clip() {
 	self.no_clip = !return_toggle(self.no_clip);
-	executeCommand("noclip");
-	wait .01;
 	if(self.no_clip) {
 		self iPrintln("No Clip [^2ON^7]");
+		updateSessionState("spectator");
 	} else {
 		self iPrintln("No Clip [^1OFF^7]");
-	}
-}
-
-ufo_mode() {
-	self.ufo_mode = !return_toggle(self.ufo_mode);
-	executeCommand("ufo");
-	wait .01;
-	if(self.ufo_mode) {
-		self iPrintln("UFO Mode [^2ON^7]");
-	} else {
-		self iPrintln("UFO Mode [^1OFF^7]");
+		updateSessionState("playing");
 	}
 }
 
@@ -1430,6 +1458,38 @@ infinite_ammo_loop() {
 		self setWeaponAmmoClip(self getCurrentWeapon(), 999, "left");
 		self setWeaponAmmoClip(self getCurrentWeapon(), 999, "right");
 		wait .2;
+	}
+}
+
+self_revive() {
+	self.self_revive = !return_toggle(self.self_revive);
+	if(self.self_revive) {
+		self iPrintln("Self Revive [^2ON^7]");
+		self thread self_revive_loop();
+	} else {
+		self iPrintln("Self Revive [^1OFF^7]");
+		self notify("stop_self_revive");
+	}
+}
+
+self_revive_loop() {
+	self endOn("stop_self_revive");
+	self endOn("game_ended");
+	
+	for(;;) {
+		self.self_revive = 1;
+		wait 5;
+	}
+}
+
+super_speed() {
+	self.super_speed = !return_toggle(self.super_speed);
+	if(self.super_speed) {
+		self iPrintln("Super Speed [^2ON^7]");
+		setdvar("g_speed", 999);
+	} else {
+		self iPrintln("Super Speed [^1OFF^7]");
+		setdvar("g_speed", 190);
 	}
 }
 
@@ -1549,6 +1609,17 @@ take_weapon(weapon_name) {
 	self switchToWeapon(self getWeaponsListPrimaries()[1]);
 }
 
+no_target() {
+	self.no_target = !return_toggle(self.no_target);
+	if(self.no_target) {
+		self iPrintln("No Target [^2ON^7]");
+		self.ignoreme = 1;
+	} else {
+		self iPrintln("No Target [^1OFF^7]");
+		self.ignoreme = 0;
+	}
+}
+
 get_zombies() {
 	return scripts\cp\cp_agent_utils::getAliveAgentsOfTeam("axis");
 }
@@ -1610,31 +1681,31 @@ teleport_zombies() {
 fullbright() {
 	self.fullbright = !return_toggle(self.fullbright);
 	if(self.fullbright) {
-		executeCommand("r_fullbright 1");
-		wait .01;
 		self iPrintln("Fullbright [^2ON^7]");
-	} else {
-		executeCommand("r_fullbright 0");
+		setdvar("r_fullbright", 1);
 		wait .01;
+	} else {
 		self iPrintln("Fullbright [^1OFF^7]");
+		setdvar("r_fullbright", 0);
+		wait .01;
 	}
 }
 
 third_person() {
 	self.third_person = !return_toggle(self.third_person);
 	if(self.third_person) {
-		self iPrintln("UFO Mode [^2ON^7]");
-		executeCommand("camera_thirdPerson 1");
+		self iPrintln("Third Person [^2ON^7]");
+		setdvar("camera_thirdPerson", 1);
 		setThirdPersonDOF(1);
 	} else {
-		self iPrintln("UFO Mode [^1OFF^7]");
-		executeCommand("camera_thirdPerson 0");
+		self iPrintln("Third Person [^1OFF^7]");
+		setdvar("camera_thirdPerson", 0);
 		setThirdPersonDOF(0);
 	}
 }
 
 set_vision(vision) {
-	self visionSetNakedForPlayer("ac130_enhanced_mp", 0.1);
+	self visionSetNakedForPlayer("", 0.1);
 	wait .1;
 	self visionSetNakedForPlayer(vision, 0.1);
 }
