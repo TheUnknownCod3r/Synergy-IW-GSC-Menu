@@ -31,9 +31,6 @@ on_ended() {
 	
 	level notify("on_close_ended");
 	level endOn("on_close_ended");
-	if(return_toggle(level.debug_leave)) {
-		exitlevel(false);
-	}
 }
 
 return_toggle(variable) {
@@ -118,31 +115,7 @@ set_slider(scrolling, index) {
 		self.slider[storage] = isDefined(self.structure[index].array) ? 0 : self.structure[index].start;
 	}
 	
-	if(isDefined(self.structure[index].array)) {
-		self notify("string_slider");
-		if(scrolling == -1) {
-			self.slider[storage]++;
-		}
-		
-		if(scrolling == 1) {
-			self.slider[storage]--;
-		}
-		
-		if(self.slider[storage] > (self.structure[index].array.size - 1)) {
-			self.slider[storage] = 0;
-		}
-		
-		if(self.slider[storage] < 0) {
-			self.slider[storage] = (self.structure[index].array.size - 1);
-		}
-		
-		if(!self.structure[index].slider_text) {
-			self.syn["hud"]["slider"][0][index] set_text(self.structure[index].array[self.slider[storage]]);
-		} else {
-			self.syn["hud"]["slider"][0][index] set_text(self.syn["zombies"][1][self.structure[index].array[self.slider[storage]]]);
-		}
-	}
-	else {
+	if(!isDefined(self.structure[index].array)) {
 		self notify("increment_slider");
 		if(scrolling == -1)
 			self.slider[storage] += self.structure[index].increment;
@@ -161,7 +134,7 @@ set_slider(scrolling, index) {
 		if(!self.structure[index].slider_text) {
 			self.syn["hud"]["slider"][0][index] setValue(self.slider[storage]);
 		} else {
-			self.syn["hud"]["slider"][0][index] setText(self.syn["zombies"][1][self.slider[storage]]);
+			self.syn["hud"]["slider"][0][index] setText(self.syn["outline_colors"][self.slider[storage]]);
 			self.syn["hud"]["slider"][0][index].x = self.syn["utility"].x_offset + 85;
 		}
 		self.syn["hud"]["slider"][2][index].x = (self.syn["hud"]["slider"][1][index].x + (abs((self.slider[storage] - self.structure[index].minimum)) / position));
@@ -372,29 +345,12 @@ add_string(text, function, array, argument_1, argument_2, argument_3) {
 	self.structure[self.structure.size] = option;
 }
 
-add_increment(text, function, start, minimum, maximum, increment, argument_1, argument_2, argument_3) {
+add_increment(text, function, start, minimum, maximum, increment, slider_text, argument_1, argument_2, argument_3) {
 	option = spawnStruct();
 	option.text = text;
 	option.function = function;
 	option.slider = true;
-	option.slider_text = false;
-	option.start = start;
-	option.minimum = minimum;
-	option.maximum = maximum;
-	option.increment = increment;
-	option.argument_1 = argument_1;
-	option.argument_2 = argument_2;
-	option.argument_3 = argument_3;
-	
-	self.structure[self.structure.size] = option;
-}
-
-add_text_increment(text, function, start, minimum, maximum, increment, argument_1, argument_2, argument_3) {
-	option = spawnStruct();
-	option.text = text;
-	option.function = function;
-	option.slider = true;
-	option.slider_text = true;
+	option.slider_text = slider_text;
 	option.start = start;
 	option.minimum = minimum;
 	option.maximum = maximum;
@@ -595,7 +551,11 @@ initial_variable() {
 	self.syn["perks"]["cp_town"][1] = ["Deadeye Dewdrops", "Change Chews"];
 	self.syn["perks"]["cp_final"][0] = ["perk_machine_deadeye", "perk_machine_change"];
 	self.syn["perks"]["cp_final"][1] = ["Deadeye Dewdrops", "Change Chews"];
+	
+	self.syn["outline_colors"] = ["White", "Red", "Green", "Aqua", "Orange", "Yellow"];
+	
 	self.syn["utility"].interaction = true;
+	
 	self.syn["utility"].color[0] = (0.752941176, 0.752941176, 0.752941176);
 	self.syn["utility"].color[1] = (0.074509804, 0.070588235, 0.078431373);
 	self.syn["utility"].color[2] = (0.074509804, 0.070588235, 0.078431373);
@@ -1014,11 +974,12 @@ menu_index() {
 			self.syn["hud"]["title"][0].x = self.syn["utility"].x_offset + 86;
 			
 			self add_option("Basic Options", ::new_menu, "Basic Options");
-			self add_option("Account Options", ::new_menu, "Account Options");
+			self add_option("Off-Host Options", ::new_menu, "Off-Host Options");
 			self add_option("Weapon Options", ::new_menu, "Weapon Options");
 			self add_option("Zombie Options", ::new_menu, "Zombie Options");
 			self add_option("Visual Options", ::new_menu, "Visual Options");
 			self add_option("Teleport Options", ::new_menu, "Teleport Options");
+			self add_option("Account Options", ::new_menu, "Account Options");
 			
 			break;
 		case "Basic Options":
@@ -1026,8 +987,9 @@ menu_index() {
 			
 			self.syn["hud"]["title"][0].x = self.syn["utility"].x_offset + 86 - (menu.size - 1);
 			
-			self add_toggle("Demi God Mode", ::demi_god_mode, self.demi_god_mode);
+			self add_toggle("God Mode", ::god_mode, self.god_mode);
 			self add_toggle("No Clip", ::no_clip, self.no_clip);
+			self add_toggle("UFO", ::ufo_mode, self.ufo_mode);
 			self add_toggle("Infinite Ammo", ::infinite_ammo, self.infinite_ammo);
 			self add_toggle("Self Revive", ::self_revive, self.self_revive);
 			self add_toggle("Super Speed", ::super_speed, self.super_speed);
@@ -1039,13 +1001,13 @@ menu_index() {
 			self add_increment("Set Points", ::set_points, 100, 100, 100000, 100);
 			
 			break;
-		case "Account Options":
+		case "Off-Host Options":
 			self add_menu(menu);
 			
 			self.syn["hud"]["title"][0].x = self.syn["utility"].x_offset + 86 - menu.size;
 			
-			self add_increment("Set Prestige", ::set_prestige, 0, 0, 20, 1);
-			self add_increment("Set Level", ::set_rank, 1, 1, 999, 1);
+			self add_toggle("Demi God Mode", ::demi_god_mode, self.demi_god_mode);
+			self add_toggle("Spectator No Clip", ::spectator_no_clip, self.spectator_no_clip);
 			
 			break;
 		case "Weapon Options":
@@ -1071,12 +1033,16 @@ menu_index() {
 			
 			self add_toggle("No Target", ::no_target, self.no_target);
 			
+			self add_increment("Set Round", ::set_round, 1, 1, 255, 1);
+			
 			self add_option("Spawn Zombies", ::new_menu, "Spawn Zombies");
 			self add_option("Kill All Zombies", ::kill_all_zombies);
 			self add_option("Teleport Zombies to Me", ::teleport_zombies);
 			
 			self add_toggle("One Shot Zombies", ::one_shot_zombies, self.one_shot_zombies);
 			self add_toggle("Freeze Zombies", ::freeze_zombies, self.freeze_zombies);
+			self add_toggle("Zombie ESP", ::outline_zombies, self.outline_zombies);
+			self add_increment("Set ESP Color", ::set_outline_color, 0, 0, 5, 1, true);
 			
 			break;
 		case "Visual Options":
@@ -1091,28 +1057,6 @@ menu_index() {
 			self add_increment("Move Menu Y", ::modify_y_position, 0, -90, 150, 10);
 			
 			self add_option("Visions", ::new_menu, "Visions");
-			
-			break;
-		case "Visions":
-			self add_menu(menu);
-			
-			self.syn["hud"]["title"][0].x = self.syn["utility"].x_offset + 86 - menu.size;
-			
-			for(i = 0; i < self.syn["visions"].size; i++) {
-				self add_option(self.syn["visions"][i], ::set_vision, self.syn["visions"][i]);
-			}
-
-			break;
-		case "Spawn Zombies":
-			self add_menu(menu);
-			
-			self.syn["hud"]["title"][0].x = self.syn["utility"].x_offset + 86 - menu.size;
-			
-			map = level.mapName;
-			
-			for(i = 0; i < self.syn["zombies"][map][0].size; i++) {
-				self add_option("Spawn " + self.syn["zombies"][map][1][i], ::spawn_zombie, self.syn["zombies"][map][0][i], self.syn["zombies"][map][2][i]);
-			}
 			
 			break;
 		case "Teleport Options":
@@ -1137,6 +1081,37 @@ menu_index() {
 			}
 			if(isDefined(self.syn["Extra Teleports"][map][0])) {
 				self add_option("Extra Teleports", ::new_menu, "Extra Teleports");
+			}
+			
+			break;
+		case "Account Options":
+			self add_menu(menu);
+			
+			self.syn["hud"]["title"][0].x = self.syn["utility"].x_offset + 86 - menu.size;
+			
+			self add_increment("Set Prestige", ::set_prestige, 0, 0, 20, 1);
+			self add_increment("Set Level", ::set_rank, 1, 1, 999, 1);
+			
+			break;
+		case "Visions":
+			self add_menu(menu);
+			
+			self.syn["hud"]["title"][0].x = self.syn["utility"].x_offset + 86 - menu.size;
+			
+			for(i = 0; i < self.syn["visions"].size; i++) {
+				self add_option(self.syn["visions"][i], ::set_vision, self.syn["visions"][i]);
+			}
+
+			break;
+		case "Spawn Zombies":
+			self add_menu(menu);
+			
+			self.syn["hud"]["title"][0].x = self.syn["utility"].x_offset + 86 - menu.size;
+			
+			map = level.mapName;
+			
+			for(i = 0; i < self.syn["zombies"][map][0].size; i++) {
+				self add_option("Spawn " + self.syn["zombies"][map][1][i], ::spawn_zombie, self.syn["zombies"][map][0][i], self.syn["zombies"][map][2][i]);
 			}
 			
 			break;
@@ -1404,35 +1379,36 @@ modify_y_position(offset) {
 	open_menu("Menu Options");
 }
 
-demi_god_mode() {
-	self.demi_god_mode = !return_toggle(self.demi_god_mode);
-	if(self.demi_god_mode) {
-		self iPrintln("Demi God Mode [^2ON^7]");
-		demi_god_mode_loop();
+god_mode() {
+	self.god_mode = !return_toggle(self.god_mode);
+	executeCommand("god");
+	wait .01;
+	if(self.god_mode) {
+		self iPrintln("God Mode [^2ON^7]");
 	} else {
-		self iPrintln("Demi God Mode [^1OFF^7]");
-		self notify("stop_demi_god_mode");
-	}
-}
-
-demi_god_mode_loop() {
-	self endOn("stop_demi_god_mode");
-	self endOn("game_ended");
-	
-	for(;;) {
-		self.health = self.maxHealth;
-		wait .05;
+		self iPrintln("God Mode [^1OFF^7]");
 	}
 }
 
 no_clip() {
 	self.no_clip = !return_toggle(self.no_clip);
+	executecommand("noclip");
+	wait .01;
 	if(self.no_clip) {
 		self iPrintln("No Clip [^2ON^7]");
-		updateSessionState("spectator");
 	} else {
 		self iPrintln("No Clip [^1OFF^7]");
-		updateSessionState("playing");
+	}
+}
+
+ufo_mode() {
+	self.ufo_mode = !return_toggle(self.ufo_mode);
+	executecommand("ufo");
+	wait .01;
+	if(self.ufo_mode) {
+		self iPrintln("UFO Mode [^2ON^7]");
+	} else {
+		self iPrintln("UFO Mode [^1OFF^7]");
 	}
 }
 
@@ -1457,6 +1433,8 @@ infinite_ammo_loop() {
 		self setWeaponAmmoClip(self getCurrentWeapon(), 999);
 		self setWeaponAmmoClip(self getCurrentWeapon(), 999, "left");
 		self setWeaponAmmoClip(self getCurrentWeapon(), 999, "right");
+		self scripts\cp\powers\coop_powers::power_adjustcharges(2, "primary", 2);
+		self scripts\cp\powers\coop_powers::power_adjustcharges(2, "secondary", 2);
 		wait .2;
 	}
 }
@@ -1501,18 +1479,36 @@ set_points(value) {
 	self setPlayerData("cp","alienSession", "currency", value);
 }
 
-set_tickets(value) {
-	self playLocalSound("zmb_ui_earn_tickets");
-	self setClientOmnVar("zombie_number_of_ticket", int(value));
+demi_god_mode() {
+	self.demi_god_mode = !return_toggle(self.demi_god_mode);
+	if(self.demi_god_mode) {
+		self iPrintln("Demi God Mode [^2ON^7]");
+		demi_god_mode_loop();
+	} else {
+		self iPrintln("Demi God Mode [^1OFF^7]");
+		self notify("stop_demi_god_mode");
+	}
 }
 
-set_prestige(value){
-	self setPlayerData("cp","progression","playerLevel","prestige", value);
+demi_god_mode_loop() {
+	self endOn("stop_demi_god_mode");
+	self endOn("game_ended");
+	
+	for(;;) {
+		self.health = self.maxHealth;
+		wait .05;
+	}
 }
 
-set_rank(value) {
-	value--;
-	self setPlayerData("cp", "progression", "playerLevel", "xp", Int(TableLookup("cp/zombies/rankTable.csv", 0, value, (value == Int(TableLookup("cp/zombies/rankTable.csv", 0, "maxrank", 1))) ? 7 : 2)));
+spectator_no_clip() {
+	self.spectator_no_clip = !return_toggle(self.spectator_no_clip);
+	if(self.spectator_no_clip) {
+		self iPrintln("Spectator No Clip [^2ON^7]");
+		updateSessionState("spectator");
+	} else {
+		self iPrintln("Spectator No Clip [^1OFF^7]");
+		updateSessionState("playing");
+	}
 }
 
 double_pack() {
@@ -1620,8 +1616,16 @@ no_target() {
 	}
 }
 
+set_round(value) {
+	level.wave_num = value;
+}
+
 get_zombies() {
 	return scripts\cp\cp_agent_utils::getAliveAgentsOfTeam("axis");
+}
+
+spawn_zombie(archetype, team) {
+	scripts\mp\mp_agent::spawnNewAgent(archetype, team, self.origin + (0, 200, 0), self.angles);
 }
 
 kill_all_zombies() {
@@ -1630,12 +1634,15 @@ kill_all_zombies() {
 	}
 }
 
-spawn_zombie(archetype, team) {
-	scripts\mp\mp_agent::spawnNewAgent(archetype, team, self.origin + (0, 200, 0), self.angles);
+teleport_zombies() {
+	forEach(zombie in get_zombies()) {
+		zombie setOrigin(self.origin + (20, 200, 20));
+	}
 }
 
 one_shot_zombies() {
 	if(!isDefined(self.one_shot_zombies)) {
+		self iPrintln("One Shot Zombies [^2ON^7]");
 		self.one_shot_zombies = true;
 		zombies = get_zombies();
 		level.prevHealth = zombies[0].health;
@@ -1647,6 +1654,7 @@ one_shot_zombies() {
 			wait 0.01;
 		}
 	} else {
+		self iPrintln("One Shot Zombies [^1OFF^7]");
 		self.one_shot_zombies = undefined;
 		forEach(zombie in get_zombies()) {
 			zombie.maxHealth = level.prevHealth;
@@ -1657,6 +1665,7 @@ one_shot_zombies() {
 
 freeze_zombies() {
 	if(!isDefined(self.freeze_zombies)) {
+		self iPrintln("Freeze Zombies [^2ON^7]");
 		self.freeze_zombies = true;
 		while(isDefined(self.freeze_zombies)) {
 			forEach(zombie in get_zombies()) {
@@ -1665,6 +1674,7 @@ freeze_zombies() {
 			wait 0.01;
 		}
 	} else {
+		self iPrintln("Freeze Zombies [^1OFF^7]");
 		self.freeze_zombies = undefined;
 		forEach(zombie in get_zombies()) {
 			zombie freezeControls(false);
@@ -1672,10 +1682,38 @@ freeze_zombies() {
 	}
 }
 
-teleport_zombies() {
-	forEach(zombie in get_zombies()) {
-		zombie setOrigin(self.origin + (20, 200, 20));
+outline_zombies() {
+	self.outline_zombies = !return_toggle(self.outline_zombies);
+	if(self.outline_zombies) {
+		self iPrintln("Zombie ESP [^2ON^7]");
+		outline_zombies_loop();
+	} else {
+		self iPrintln("Zombie ESP [^1OFF^7]");
+		self notify("stop_outline_zombies");
+		foreach(zombie in get_zombies()) {
+			scripts\cp\cp_outline::disable_outline_for_players(zombie, level.players);
+		}
 	}
+}
+
+outline_zombies_loop() {
+	self endOn("stop_outline_zombies");
+	self endOn("game_ended");
+	
+	if(!isDefined(self.outline_color)) {
+		self.outline_color = 0;
+	}
+	
+	for(;;) {
+		foreach(zombie in get_zombies()) {
+			scripts\cp\cp_outline::enable_outline_for_players(zombie, level.players, self.outline_color, 0, 0, "high");
+		}
+		wait 0.2;
+	}
+}
+
+set_outline_color(value) {
+	self.outline_color = value;
 }
 
 fullbright() {
@@ -1713,4 +1751,13 @@ set_vision(vision) {
 set_position(origin, angles) {
 	self setOrigin(origin);
 	self setPlayerAngles(angles);
+}
+
+set_prestige(value){
+	self setPlayerData("cp","progression","playerLevel","prestige", value);
+}
+
+set_rank(value) {
+	value--;
+	self setPlayerData("cp", "progression", "playerLevel", "xp", Int(TableLookup("cp/zombies/rankTable.csv", 0, value, (value == Int(TableLookup("cp/zombies/rankTable.csv", 0, "maxrank", 1))) ? 7 : 2)));
 }
