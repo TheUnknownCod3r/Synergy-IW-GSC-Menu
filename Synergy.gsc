@@ -1,8 +1,4 @@
-#include scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave;
-#include scripts\cp\utility;
-#include scripts\mp\mp_agent;
 #include scripts\cp\cp_weapon;
-#include scripts\cp\zombies\zombies_perk_machines;
 
 init() {
 	level thread onPlayerConnect();
@@ -393,7 +389,7 @@ initial_variable() {
 	self.syn["utility"].y_offset = 100;
 	self.syn["utility"].element_list = ["text", "subMenu", "toggle", "category", "slider", "slider_text"];
 	self.syn["visions"] = ["ac130", "ac130_enhanced_mp", "ac130_inverted", "aftermath", "aftermath_glow", "aftermath_post", "apex_mp", "black_bw", "cp_frontend", "cp_zmb", "cp_zmb_afterlif e", "cp_zmb_alien", "cp_zmb_bw", "cp_zmb_ghost_path", "cp_zmb_int_basement", "cp_zmb_int_triton_main", "default", "default_night", "default_night_mp", "dronehive_mp", "end_game", "europa", "jackal_streak_mp", "last_stand_cp_zmb", "map_select_mp", "missilecam", "mpintro", "mpnuke", "mpnuke_aftermath", "mpoutro", "mp_frontier", "mp_frontier_alt", "mp_frontier_basement", "mp_frontier_mainfog", "mp_out_of_bounds", "near_death", "near_death_mp", "nuke_global_flash", "opticwave_mp", "overcharge_mp", "phase_shif t_mp", "rc8_mp", "thermal_mp", "thermal_snowlevel_mp", "thorbright_mp", "thor_mp", "venomgas_mp"];
-	self.syn["weapons"]["category"] = ["Assault Rifles", "Sub Machine Guns", "Light Machine Guns", "Sniper Rifles", "Shotguns", "Pistols", "Launchers", "Classic Weapons", "Melee Weapons", "Map Specific Weapons", "Arcade Weapons", "Other Weapons"];
+	self.syn["weapons"]["category"] = ["Assault Rifles", "Sub Machine Guns", "Light Machine Guns", "Sniper Rifles", "Shotguns", "Pistols", "Launchers", "Classic Weapons", "Melee Weapons", "Map Specific Weapons", "Other Weapons"];
 	self.syn["weapons"]["assault_rifles"][0] =     ["iw7_m4_zm", "iw7_sdfar_zm", "iw7_ar57_zm", "iw7_fmg_zm+akimbofmg_zm", "iw7_ake_zmr", "iw7_rvn_zm+meleervn", "iw7_vr_zm", "iw7_gauss_zm", "iw7_erad_zm"];
 	self.syn["weapons"]["sub_machine_guns"][0] =   ["iw7_fhr_zm", "iw7_crb_zml+crblscope_camo", "iw7_ripper_zmr", "iw7_ump45_zml+ump45lscope_camo", "iw7_crdb_zm", "iw7_mp28_zm", "iw7_tacburst_zm+gltacburst"];
 	self.syn["weapons"]["light_machine_guns"][0] = ["iw7_sdflmg_zm", "iw7_mauler_zm", "iw7_lmg03_zm", "iw7_minilmg_zm", "iw7_unsalmg_zm"];
@@ -430,16 +426,16 @@ initial_variable() {
 	self.syn["weapons"]["launchers"][3] =          ["+lockonscope_camo", "+glproxscope_camo", ""];
 	self.syn["weapons"]["classics"][3] =           ["", "", "", "", "+glarclassic", "+cheytacscope_camo"];
 	self.syn["weapons"]["melees"][3] =             [""];
-	self.syn["weapons"]["cp_zmb"][0] =   ["iw7_forgefreeze_zm", "iw7_dischord_zm", "iw7_facemelter_zm", "iw7_headcutter_zm", "iw7_shredder_zm"];
-	self.syn["weapons"]["cp_zmb"][1] =   ["Forge Freeze", "Dischord", "Face Melter", "Head Cutter", "Shredder"];
-	self.syn["weapons"]["cp_zmb"][2] =   ["", "", "", "", ""];
-	self.syn["weapons"]["cp_zmb"][3] =   ["", "", " ", "", ""];														 
-	self.syn["weapons"]["cp_rave"][0] =  ["iw7_golf_club_mp", "iw7_spiked_bat_mp", "iw7_two_headed_axe_mp", "iw7_machete_mp"];
-	self.syn["weapons"]["cp_rave"][1] =  ["Golf Club", "Spiked Bat", "2 Headed Axe", "Machete"];
+	self.syn["weapons"]["cp_zmb"][0] =   ["iw7_forgefreeze_zm+forgefreezealtfire", "iw7_dischord_zm", "iw7_facemelter_zm", "iw7_headcutter_zm", "iw7_shredder_zm", "iw7_spaceland_wmd"];
+	self.syn["weapons"]["cp_zmb"][1] =   ["Forge Freeze", "Dischord", "Face Melter", "Head Cutter", "Shredder", "NX 2.0"];
+	self.syn["weapons"]["cp_zmb"][2] =   ["", "", "", "", "", ""];
+	self.syn["weapons"]["cp_zmb"][3] =   ["", "", " ", "", "", ""];													 
+	self.syn["weapons"]["cp_rave"][0] =  ["iw7_golf_club_mp", "iw7_spiked_bat_mp", "iw7_two_headed_axe_mp", "iw7_machete_mp", "iw7_harpoon1_zm", "iw7_harpoon2_zm", "iw7_harpoon3_zm+akimbo", "iw7_harpoon4_zm"];
+	self.syn["weapons"]["cp_rave"][1] =  ["Golf Club", "Spiked Bat", "2 Headed Axe", "Machete", "Harpoon Gun 1", "Harpoon Gun 2", "Harpoon Gun 3", "Harpoon Gun 4"];
 	self.syn["weapons"]["cp_rave"][2] =  ["", "", "", ""];
 	self.syn["weapons"]["cp_rave"][3] =  ["", "", "", ""];
-	self.syn["weapons"]["cp_disco"][0] = ["iw7_katana_zm", "iw7_nunchucks_zm"];					 
-	self.syn["weapons"]["cp_disco"][1] = ["Katana", "Nunchucks"];
+	self.syn["weapons"]["cp_disco"][0] = ["iw7_katana_zm", "iw7_nunchucks_zm", "crane", "snake", "dragon", "tiger"];					 
+	self.syn["weapons"]["cp_disco"][1] = ["Katana", "Nunchucks", "Crane Chi", "Snake Chi", "Dragon Chi", "Tiger Chi"];
 	self.syn["weapons"]["cp_disco"][2] = ["", ""];
 	self.syn["weapons"]["cp_disco"][3] = ["", ""];
 	self.syn["weapons"]["cp_town"][0] =  ["iw7_cutie_zm"];
@@ -470,7 +466,7 @@ initial_variable() {
 	self.syn["Main Quest Teleports"]["cp_zmb"][1] =      [(540, 1060, 0), (-2520, 805, 365), (2960, -850, 240), (595, 2125, -65), (-1415, -175, 380), (1375, -590, -195), (155, -505, 0), (-1890, -3040, 360), (3640, 2335, 115), (-1000, 1495, 225), (-2710, -2480, 360), (2926, 1305, 0)];
 	self.syn["Extra Teleports"]["cp_zmb"][1] =           [(475, -265, 0), (-1800, -2825, 360), (-535, -3265, 390), (-757, -2415, 560), (-2775, 1565, 365), (-3045, 730, 365), (-1230, 1625, 225), (000, 000, 000), (000, 000, 000), (000, 000, 000), (000, 000, 000), (000, 000, 000)];
 	self.syn["Main Teleports"]["cp_zmb"][2] =            [90, -90, -90];
-	self.syn["Map Setup Teleports"]["cp_zmb"][2] =       [-90, 0, -90, 90, 180, 0, -45, 20, 0];
+	self.syn["Map Setup Teleports"]["cp_zmb"][2] =       [-90, 0, -90, 90, 180, 0, -45, 20, -90];
 	self.syn["Mystery Wheel Teleports"]["cp_zmb"][2] =   [180, 90, 0, -90, 0, -45, -90, 0];
 	self.syn["Main Quest Teleports"]["cp_zmb"][2] =      [0, 0, 90, 45, 0, 90, 160, 90, -90, 0, -90, 0];
 	self.syn["Extra Teleports"]["cp_zmb"][2] =           [-90, 180, -90, 0, 0, 0, 90, 0, 0, 0, 0, 0];
@@ -528,8 +524,8 @@ initial_variable() {
 	self.syn["Mystery Wheel Teleports"]["cp_final"][2] = [-90, -130, 180, 90, 60, 0, -50];
 	self.syn["Main Quest Teleports"]["cp_final"][2] =    [0, 0];
 	self.syn["Extra Teleports"]["cp_final"][2] =         [-55, 60, -100, 45, 0];
-	self.syn["zombies"]["cp_zmb"][0] =   ["generic_zombie", "zombie_clown", "zombie_brute", "zombie_grey", "zombie_ghost", "the_hoff"];
-	self.syn["zombies"]["cp_zmb"][1] =   ["Normal Zombie", "Clown", "Brute", "Alien", "Ghost", "David Hasselhoff"];
+	self.syn["zombies"]["cp_zmb"][0] =   ["generic_zombie", "zombie_clown", "zombie_brute", "zombie_ghost", "the_hoff"];
+	self.syn["zombies"]["cp_zmb"][1] =   ["Normal Zombie", "Clown", "Brute", "Ghost", "David Hasselhoff"];
 	self.syn["zombies"]["cp_zmb"][2] =   ["axis", "axis", "axis", "axis", "allies"];
 	self.syn["zombies"]["cp_rave"][0] =  ["generic_zombie", "lumberjack", "zombie_sasquatch", "slasher", "superslasher"];
 	self.syn["zombies"]["cp_rave"][1] =  ["Normal Zombie", "Lumberjack", "Sasquatch", "Slasher", "Super Slasher"];
@@ -543,29 +539,31 @@ initial_variable() {
 	self.syn["zombies"]["cp_final"][0] = ["generic_zombie", "alien_goon", "alien_phantom", "alien_rhino", "zombie_skeleton", "dlc4_boss"];
 	self.syn["zombies"]["cp_final"][1] = ["Normal Zombie", "Cryptid", "Phantom", "Rhino", "Skeleton", "Mephistopheles"];
 	self.syn["zombies"]["cp_final"][2] = ["axis", "axis", "axis", "axis", "axis", "axis"];
-	self.syn["perks"][0] = ["perk_machine_revive", "perk_machine_tough", "perk_machine_rat_a_tat", "perk_machine_flash", "perk_machine_run", "perk_machine_boom", "perk_machine_more", "perk_machine_zap", "perk_machine_smack", "perk_machine_fwoosh"];
-	self.syn["perks"][1] = ["Up N' Atoms", "Tuff Nuff", "Bang Bangs", "Quickies", "Racin' Stripes", "Bombstoppers", "Mule Munchies", "Blue Bolts", "Slappy Taffy", "Trail Blazers"];
+	self.syn["perks"][0] = ["perk_machine_revive", "perk_machine_tough", "perk_machine_rat_a_tat", "perk_machine_flash", "perk_machine_run", "perk_machine_boom", "perk_machine_more", "perk_machine_zap", "perk_machine_fwoosh"];
+	self.syn["perks"][1] = ["Up N' Atoms", "Tuff Nuff", "Bang Bangs", "Quickies", "Racin' Stripes", "Bombstoppers", "Mule Munchies", "Blue Bolts", "Trail Blazers"];
+	self.syn["perks"]["cp_zmb"][0] = ["perk_machine_smack"];
+	self.syn["perks"]["cp_zmb"][1] = ["Slappy Taffy"];
 	self.syn["perks"]["cp_disco"][0] = ["perk_machine_deadeye"];
 	self.syn["perks"]["cp_disco"][1] = ["Deadeye Dewdrops"];
-	self.syn["perks"]["cp_town"][0] = ["perk_machine_deadeye", "perk_machine_change"];
-	self.syn["perks"]["cp_town"][1] = ["Deadeye Dewdrops", "Change Chews"];
-	self.syn["perks"]["cp_final"][0] = ["perk_machine_deadeye", "perk_machine_change"];
-	self.syn["perks"]["cp_final"][1] = ["Deadeye Dewdrops", "Change Chews"];
-	
+	self.syn["perks"]["cp_town"][0] = ["perk_machine_smack", "perk_machine_deadeye", "perk_machine_change"];
+	self.syn["perks"]["cp_town"][1] = ["Slappy Taffy", "Deadeye Dewdrops", "Change Chews"];
+	self.syn["perks"]["cp_final"][0] = ["perk_machine_smack", "perk_machine_deadeye", "perk_machine_change"];
+	self.syn["perks"]["cp_final"][1] = ["Slappy Taffy", "Deadeye Dewdrops", "Change Chews"];
+	self.syn["maps"]["cp_zmb"] = "Zombies in Spaceland";
+	self.syn["maps"]["cp_rave"] = "Rave in the Redwoods";
+	self.syn["maps"]["cp_disco"] = "Shaolin Shuffle";
+	self.syn["maps"]["cp_town"] = "Attack of the Radioactive Thing";
+	self.syn["maps"]["cp_final"] = "The Beast from Beyond";
 	self.syn["outline_colors"] = ["White", "Red", "Green", "Aqua", "Orange", "Yellow"];
-	
 	self.syn["utility"].interaction = true;
-	
 	self.syn["utility"].color[0] = (0.752941176, 0.752941176, 0.752941176);
 	self.syn["utility"].color[1] = (0.074509804, 0.070588235, 0.078431373);
 	self.syn["utility"].color[2] = (0.074509804, 0.070588235, 0.078431373);
 	self.syn["utility"].color[3] = (0.243137255, 0.22745098, 0.247058824);
 	self.syn["utility"].color[4] = (1, 1, 1);
 	self.syn["utility"].color[5] = "rainbow";
-	
 	self.cursor = [];
 	self.previous = [];
-	
 	self set_menu("Synergy");
 	self set_title(self get_menu());
 }
@@ -980,6 +978,9 @@ menu_index() {
 			self add_option("Visual Options", ::new_menu, "Visual Options");
 			self add_option("Teleport Options", ::new_menu, "Teleport Options");
 			self add_option("Account Options", ::new_menu, "Account Options");
+			if(level.mapName == "cp_final") {
+				self add_option("The Beast from Beyond Options", ::new_menu, "The Beast from Beyond");
+			}
 			
 			break;
 		case "Basic Options":
@@ -1092,6 +1093,61 @@ menu_index() {
 			self add_increment("Set Prestige", ::set_prestige, 0, 0, 20, 1);
 			self add_increment("Set Level", ::set_rank, 1, 1, 999, 1);
 			
+			self add_option("Set Weapons to Max Level", ::set_max_weapons);
+			
+			self add_option("Complete All Challenges", ::complete_challenges);
+			self add_option("Complete Active Contracts", ::complete_active_contracts);
+			
+			self add_option("Give All Soul Keys", ::unlock_soul_keys);
+			self add_option("Unlock " + self.syn["maps"][level.mapName] + " Talisman", ::unlock_talismans);
+			self add_toggle("Temp Director's Cut", ::temp_directors_cut, self.directorsCut);
+			
+			break;
+		case "Give Perks":
+			self add_menu(menu);
+			
+			self.syn["hud"]["title"][0].x = self.syn["utility"].x_offset + 86 - (menu.size - 5);
+			
+			map = level.mapName;
+			
+			for(i = 0; i < self.syn["perks"][0].size; i++) {
+				self add_option(self.syn["perks"][1][i], scripts\cp\zombies\zombies_perk_machines::give_zombies_perk, self.syn["perks"][0][i], 0);
+			}
+			
+			if(map == "cp_zmb" || map == "cp_disco" || map == "cp_town" || map == "cp_final") {
+				for(i = 0; i < self.syn["perks"][map][0].size; i++) {
+					self add_option(self.syn["perks"][map][1][i], scripts\cp\zombies\zombies_perk_machines::give_zombies_perk, self.syn["perks"][map][0][i], 0);
+				}
+			}
+
+			break;
+		case "Take Perks":
+			self add_menu(menu);
+			
+			self.syn["hud"]["title"][0].x = self.syn["utility"].x_offset + 86 - (menu.size - 5);
+			
+			map = level.mapName;
+			
+			for(i = 0; i < self.syn["perks"][0].size; i++) {
+				self add_option(self.syn["perks"][1][i], scripts\cp\zombies\zombies_perk_machines::take_zombies_perk, self.syn["perks"][0][i]);
+			}
+			
+			if(map == "cp_zmb" || map == "cp_disco" || map == "cp_town" || map == "cp_final") {
+				for(i = 0; i < self.syn["perks"][map][0].size; i++) {
+					self add_option(self.syn["perks"][map][1][i], scripts\cp\zombies\zombies_perk_machines::take_zombies_perk, self.syn["perks"][map][0][i], 0);
+				}
+			}
+
+			break;
+		case "Give Weapons":
+			self add_menu(menu);
+			
+			self.syn["hud"]["title"][0].x = self.syn["utility"].x_offset + 86 - menu.size;
+			
+			for(i = 0; i < self.syn["weapons"]["category"].size; i++) {
+				self add_option(self.syn["weapons"]["category"][i], ::new_menu, self.syn["weapons"]["category"][i]);
+			}
+			
 			break;
 		case "Visions":
 			self add_menu(menu);
@@ -1163,51 +1219,13 @@ menu_index() {
 			}
 			
 			break;
-		case "Give Perks":
+		case "The Beast from Beyond":
 			self add_menu(menu);
 			
-			self.syn["hud"]["title"][0].x = self.syn["utility"].x_offset + 86 - (menu.size - 5);
+			self.syn["hud"]["title"][0].x = self.syn["utility"].x_offset + 86 - menu.size - 5;
 			
-			map = level.mapName;
-			
-			for(i = 0; i < self.syn["perks"][0].size; i++) {
-				self add_option(self.syn["perks"][1][i], ::give_zombies_perk, self.syn["perks"][0][i], 0);
-			}
-			
-			if(map == "cp_disco" || map == "cp_town" || map == "cp_final") {
-				for(i = 0; i < self.syn["perks"][map][0].size; i++) {
-					self add_option(self.syn["perks"][map][1][i], ::give_zombies_perk, self.syn["perks"][map][0][i], 0);
-				}
-			}
+			self add_option("Complete Venom-X Quest", ::complete_venom_x);
 
-			break;
-		case "Take Perks":
-			self add_menu(menu);
-			
-			self.syn["hud"]["title"][0].x = self.syn["utility"].x_offset + 86 - (menu.size - 5);
-			
-			map = level.mapName;
-			
-			for(i = 0; i < self.syn["perks"][0].size; i++) {
-				self add_option(self.syn["perks"][1][i], ::take_zombies_perk, self.syn["perks"][0][i]);
-			}
-			
-			if(map == "cp_disco" || map == "cp_town" || map == "cp_final") {
-				for(i = 0; i < self.syn["perks"][map][0].size; i++) {
-					self add_option(self.syn["perks"][map][1][i], ::take_zombies_perk, self.syn["perks"][map][0][i], 0);
-				}
-			}
-
-			break;
-		case "Give Weapons":
-			self add_menu(menu);
-			
-			self.syn["hud"]["title"][0].x = self.syn["utility"].x_offset + 86 - menu.size;
-			
-			for(i = 0; i < self.syn["weapons"]["category"].size; i++) {
-				self add_option(self.syn["weapons"]["category"][i], ::new_menu, self.syn["weapons"]["category"][i]);
-			}
-			
 			break;
 		case "Assault Rifles":
 			self add_menu(menu);
@@ -1416,11 +1434,11 @@ infinite_ammo() {
 	self.infinite_ammo = !return_toggle(self.infinite_ammo);
 	if(self.infinite_ammo) {
 		self iPrintln("Infinite Ammo [^2ON^7]");
-		enable_infinite_ammo(self.infinite_ammo);
+		scripts\cp\utility::enable_infinite_ammo(self.infinite_ammo);
 		self thread infinite_ammo_loop();
 	} else {
 		self iPrintln("Infinite Ammo [^1OFF^7]");
-		enable_infinite_ammo(self.infinite_ammo);
+		scripts\cp\utility::enable_infinite_ammo(self.infinite_ammo);
 		self notify("stop_infinite_ammo");
 	}
 }
@@ -1472,11 +1490,11 @@ super_speed() {
 }
 
 give_perkaholic() {
-	give_gns_base_reward(self);
+	scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::give_gns_base_reward(self);
 }
 
 set_points(value) {
-	self setPlayerData("cp","alienSession", "currency", value);
+	self setPlayerData("cp", "alienSession", "currency", value);
 }
 
 demi_god_mode() {
@@ -1504,10 +1522,10 @@ spectator_no_clip() {
 	self.spectator_no_clip = !return_toggle(self.spectator_no_clip);
 	if(self.spectator_no_clip) {
 		self iPrintln("Spectator No Clip [^2ON^7]");
-		updateSessionState("spectator");
+		scripts\cp\utility::updateSessionState("spectator");
 	} else {
 		self iPrintln("Spectator No Clip [^1OFF^7]");
-		updateSessionState("playing");
+		scripts\cp\utility::updateSessionState("playing");
 	}
 }
 
@@ -1560,9 +1578,9 @@ give_double_packed_weapon() {
 
 give_weapon(weapon, category, index) {
 	if(isDefined(self.give_packed_weapon) && self.give_packed_weapon == 1 || isDefined(self.give_double_packed_weapon) && self.give_double_packed_weapon == 1) {
-		papText = "";
-		papCamo = "";
-		papLevel = "";
+		papText = undefined;
+		papCamo = undefined;
+		papLevel = undefined;
 		if(self.give_packed_weapon == 1) {
 			papText = "pap1";
 			papCamo = self.syn["camos"][level.mapName][0];
@@ -1574,17 +1592,41 @@ give_weapon(weapon, category, index) {
 		}
 	
 		if(weapon == "iw7_axe_zm") {
-			weapon = "iw7_axe_zm_pap" + papLevel + "+axe" + papText;
+			weapon += "_pap" + papLevel + "+axe" + papText;
+		} else if(weapon == "iw7_dischord_zm") {
+			weapon += "_pap1+dischordpap1+camo20";
+		} else if(weapon == "iw7_facemelter_zm") {
+			weapon += "_pap1+fmpap1+camo22";
+		} else if(weapon == "iw7_headcutter_zm") {
+			weapon += "_pap1+hcpap1+camo21";
+		} else if(weapon == "iw7_shredder_zm") {
+			weapon += "_pap1+shredderpap1+camo23";
+		} else if(weapon == "iw7_katana_zm") {
+			weapon += "_pap" + papLevel + "+camo222";
+		} else if(weapon == "iw7_nunchucks_zm") {
+			weapon += "_pap" + papLevel + "+camo222";
 		} else if(weapon == "iw7_forgefreeze_zm+forgefreezealtfire") {
-			weapon = "iw7_forgefreeze_zm_pap" + papLevel + "+freeze" + papText + papCamo + "+forgefreezealtfire";
-		} else if(self.syn["weapons"][category][3][index] != "") {
-			weapon += "+" + self.syn["weapons"][category][2][index] + papText + self.syn["weapons"][category][3][index] + papCamo;
+			weapon += "+freeze" + papText;
+		} else if(weapon == "iw7_spaceland_wmd" || weapon == "iw7_fists_zm" || weapon == "iw7_entangler_zm") {
 		} else {
-			weapon += "+" + self.syn["weapons"][category][2][index] + papText + papCamo;
+			weapon = build_custom_weapon(weapon, undefined, [papText]);
 		}
 	} else {
-		if(self.syn["weapons"][category][3][index] != "") {
-			weapon += self.syn["weapons"][category][3][index];
+		switch(weapon) {
+			case "iw7_axe_zm":
+			case "iw7_dischord_zm":
+			case "iw7_facemelter_zm":
+			case "iw7_headcutter_zm":
+			case "iw7_shredder_zm":
+			case "iw7_katana_zm":
+			case "iw7_nunchucks_zm":
+			case "iw7_forgefreeze_zm+forgefreezealtfire":
+			case "iw7_spaceland_wmd":
+			case "iw7_fists_zm":
+			case "iw7_entangler_zm":
+				break;
+			default:
+				weapon = build_custom_weapon(weapon, undefined, undefined);
 		}
 	}
 	
@@ -1593,10 +1635,30 @@ give_weapon(weapon, category, index) {
 			self takeWeapon(self getCurrentWeapon());
 		}
 		
-		self giveWeapon(return_weapon_name_with_like_attachments(weapon));
-		self switchToWeapon(return_weapon_name_with_like_attachments(weapon));
+		if(weapon == "iw7_spaceland_wmd") {
+			self giveWeapon(weapon);
+			self switchToWeapon(weapon);
+		} else {
+			self giveWeapon(return_weapon_name_with_like_attachments(weapon));
+			self switchToWeapon(return_weapon_name_with_like_attachments(weapon));
+		}
 	} else {
 		self switchToWeaponImmediate(return_weapon_name_with_like_attachments(weapon));
+	}
+}
+
+build_custom_weapon(weapon, camo, extra_attachments) {
+	weapon_name = scripts\cp\utility::getrawbaseweaponname(weapon);
+	
+	if (isdefined(self.weapon_build_models[weapon_name])) {
+		weapon_model = self.weapon_build_models[weapon_name];
+		weapon_attachments = getweaponattachments(weapon_model);
+		weapon_build = scripts\engine\utility::array_combine(extra_attachments, weapon_attachments);
+		weapon_custom = self scripts\cp\cp_weapon::return_weapon_name_with_like_attachments(getweaponbasename(weapon), undefined, weapon_build, 1, camo);
+		return weapon_custom;
+	} else {
+		weapon_custom = scripts\engine\utility::array_combine(extra_attachments, weapon);
+		return weapon_custom;
 	}
 }
 
@@ -1625,8 +1687,14 @@ get_zombies() {
 }
 
 spawn_zombie(archetype, team) {
-	scripts\mp\mp_agent::spawnNewAgent(archetype, team, self.origin + (0, 200, 0), self.angles);
+	if(archetype == "the_hoff") {
+		weapon = "iw7_ake_zmr+akepap2";
+	} else {
+		weapon = undefined;
+	}
+	scripts\mp\mp_agent::spawnNewAgent(archetype, team, self.origin + (0, 200, 0), self.angles, weapon);
 }
+
 
 kill_all_zombies() {
 	forEach(zombie in get_zombies()) {
@@ -1734,11 +1802,11 @@ third_person() {
 	if(self.third_person) {
 		self iPrintln("Third Person [^2ON^7]");
 		setdvar("camera_thirdPerson", 1);
-		setThirdPersonDOF(1);
+		scripts\cp\utility::setThirdPersonDOF(1);
 	} else {
 		self iPrintln("Third Person [^1OFF^7]");
 		setdvar("camera_thirdPerson", 0);
-		setThirdPersonDOF(0);
+		scripts\cp\utility::setThirdPersonDOF(0);
 	}
 }
 
@@ -1754,10 +1822,130 @@ set_position(origin, angles) {
 }
 
 set_prestige(value){
-	self setPlayerData("cp","progression","playerLevel","prestige", value);
+	self setPlayerData("cp", "progression", "playerLevel", "prestige", value);
 }
 
 set_rank(value) {
 	value--;
 	self setPlayerData("cp", "progression", "playerLevel", "xp", Int(TableLookup("cp/zombies/rankTable.csv", 0, value, (value == Int(TableLookup("cp/zombies/rankTable.csv", 0, "maxrank", 1))) ? 7 : 2)));
+}
+
+set_max_weapons() {
+	for(x = 1; x < 62; x++) {
+		weapon = TableLookup("mp/statstable.csv", 0, x, 4);
+
+		if(!isDefined(weapon) || weapon == "")
+			continue;
+
+		self setPlayerData("common", "sharedProgression", "weaponLevel", weapon, "cp", 54300);
+		self setPlayerData("common", "sharedProgression", "weaponLevel", weapon, "prestige", 3);
+		
+		self iPrintln(weapon + " Set to Max Level");
+
+		wait 0.175;
+	}
+}
+
+complete_challenges() {
+	merits = getArrayKeys(level.meritinfo);
+	
+	if(!isDefined(merits) || !merits.size) {
+		return;
+	}
+	
+	foreach(merit in merits) {
+		meritInfo = level.meritinfo[merit]["targetval"];
+		meritState = self getRankedPlayerData("cp", "meritState", merit);
+		meritProgress = self getRankedPlayerData("cp", "meritProgress", merit);
+	
+		if(!isDefined(meritInfo)) {
+			continue;
+		}
+	
+		if(meritState < meritInfo.size || meritProgress < meritInfo[(meritInfo.size - 1)]) {
+			if(meritProgress < meritInfo[(meritInfo.size - 1)]) {
+				self setPlayerData("cp", "meritProgress", merit, meritInfo[(meritInfo.size - 1)]);
+				self iPrintln("Completed Challenge " + merit);
+			}
+	
+			if(meritState < meritInfo.size) {
+				self setPlayerData("cp", "meritState", merit, meritInfo.size);
+				self iPrintln("Completed Challenge " + merit);
+			}
+	
+			wait 0.175;
+		}
+	}
+}
+
+complete_active_contracts() {
+	contracts = getArrayKeys(self.contracts);
+
+	if(!isDefined(contracts) || !contracts.size) {
+		return;
+	}
+
+	foreach(contract in contracts) {
+		target = self.contracts[contract].target;
+		progress = self getRankedPlayerData("cp", "contracts", "challenges", contract, "progress");
+
+		if(!isDefined(progress) || !isDefined(target) || progress >= target) {
+			continue;
+		}
+
+		self setPlayerData("cp", "contracts", "challenges", contract, "progress", target);
+		self setPlayerData("cp", "contracts", "challenges", contract, "completed", 1);
+
+		wait 0.01;
+	}
+}
+
+unlock_soul_keys() {
+	self setPlayerData("cp", "haveSoulKeys", "soul_key_1", 1);
+	self setPlayerData("cp", "haveSoulKeys", "soul_key_2", 1);
+	self setPlayerData("cp", "haveSoulKeys", "soul_key_3", 1);
+	self setPlayerData("cp", "haveSoulKeys", "soul_key_4", 1);
+	self setPlayerData("cp", "haveSoulKeys", "soul_key_5", 1);
+	self iPrintln("Soul Keys [^2Given^7]");
+	wait 2.5;
+	self iPrintln("Activate the Soul Jar to Unlock Perma Director's Cut");
+	set_position((-10250, 875, -1630), (0, 90, 0));
+}
+
+unlock_talismans() {
+	if (level.script == "cp_zmb") {
+		self scripts\cp\cp_merits::processMerit("mt_tali_1"); 
+	} else if (level.script == "cp_rave") {
+		self scripts\cp\cp_merits::processMerit("mt_tali_2");
+	} else if (level.script == "cp_disco") {
+		self scripts\cp\cp_merits::processMerit("mt_tali_3");
+	} else if (level.script == "cp_town") {
+		self scripts\cp\cp_merits::processMerit("mt_tali_4");
+	} else if (level.script == "cp_final") {
+		self scripts\cp\cp_merits::processMerit("mt_tali_5");
+	}
+	self setPlayerData("cp", "haveItems", "item_1", 1);
+	self setPlayerData("cp", "haveItems", "item_2", 1);
+	self setPlayerData("cp", "haveItems", "item_3", 1);
+	self setPlayerData("cp", "haveItems", "item_4", 1);
+	self setPlayerData("cp", "haveItems", "item_5", 1);
+	self iPrintln(self.syn["maps"][level.mapName] + " Talisman [^2Unlocked^7]");
+}
+
+temp_directors_cut() {
+	self.directorsCut = !return_toggle(self.directorsCut);
+	if(self.directorsCut) {
+		self iPrintln("Temp Director's Cut [^2Unlocked^7]");
+		self setPlayerData("cp", "dc", 1);
+	} else {
+		self iPrintln("Temp Director's Cut [^1Locked^7]");
+		self setPlayerData("cp", "dc", 0);
+	}
+}
+
+complete_venom_x() {
+	scripts\engine\utility::flag_set("completepuzzles_step4");
+	getent("venomx_locker_door","script_noteworthy") rotateTo((0,105,0),0.1);
+	level.completed_venomx_pap1_challenges = 1;
+	level.completed_venomx_pap2_challenges = 1;
 }
