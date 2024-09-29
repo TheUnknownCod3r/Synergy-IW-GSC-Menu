@@ -288,13 +288,14 @@ clear_all(array) {
 	}
 }
 
-add_menu(title, shader) {
+add_menu(title, menu_size, extra) {
 	if(isDefined(title)) {
 		self set_title(title);
-	}
-
-	if(isDefined(shader)) {
-		self.shader_option[self get_menu()] = true;
+		if(isDefined(extra)) {
+			self.syn["hud"]["title"][0].x = self.syn["utility"].x_offset + 86 - menu_size - extra;
+		} else {
+			self.syn["hud"]["title"][0].x = self.syn["utility"].x_offset + 86 - menu_size;
+		}
 	}
 
 	self.structure = [];
@@ -388,8 +389,12 @@ initial_variable() {
 	self.syn["utility"].x_offset = 600;
 	self.syn["utility"].y_offset = 100;
 	self.syn["utility"].element_list = ["text", "subMenu", "toggle", "category", "slider", "slider_text"];
+	
 	self.syn["visions"] = ["ac130", "ac130_enhanced_mp", "ac130_inverted", "aftermath", "aftermath_glow", "aftermath_post", "apex_mp", "black_bw", "cp_frontend", "cp_zmb", "cp_zmb_afterlif e", "cp_zmb_alien", "cp_zmb_bw", "cp_zmb_ghost_path", "cp_zmb_int_basement", "cp_zmb_int_triton_main", "default", "default_night", "default_night_mp", "dronehive_mp", "end_game", "europa", "jackal_streak_mp", "last_stand_cp_zmb", "map_select_mp", "missilecam", "mpintro", "mpnuke", "mpnuke_aftermath", "mpoutro", "mp_frontier", "mp_frontier_alt", "mp_frontier_basement", "mp_frontier_mainfog", "mp_out_of_bounds", "near_death", "near_death_mp", "nuke_global_flash", "opticwave_mp", "overcharge_mp", "phase_shif t_mp", "rc8_mp", "thermal_mp", "thermal_snowlevel_mp", "thorbright_mp", "thor_mp", "venomgas_mp"];
+	
 	self.syn["weapons"]["category"] = ["Assault Rifles", "Sub Machine Guns", "Light Machine Guns", "Sniper Rifles", "Shotguns", "Pistols", "Launchers", "Classic Weapons", "Melee Weapons", "Map Specific Weapons", "Other Weapons"];
+	
+	// Weapon IDs Plus 1 Default Attachment
 	self.syn["weapons"]["assault_rifles"][0] =     ["iw7_m4_zm", "iw7_sdfar_zm", "iw7_ar57_zm", "iw7_fmg_zm+akimbofmg_zm", "iw7_ake_zmr", "iw7_rvn_zm+meleervn", "iw7_vr_zm", "iw7_gauss_zm", "iw7_erad_zm"];
 	self.syn["weapons"]["sub_machine_guns"][0] =   ["iw7_fhr_zm", "iw7_crb_zml+crblscope_camo", "iw7_ripper_zmr", "iw7_ump45_zml+ump45lscope_camo", "iw7_crdb_zm", "iw7_mp28_zm", "iw7_tacburst_zm+gltacburst"];
 	self.syn["weapons"]["light_machine_guns"][0] = ["iw7_sdflmg_zm", "iw7_mauler_zm", "iw7_lmg03_zm", "iw7_minilmg_zm", "iw7_unsalmg_zm"];
@@ -399,6 +404,7 @@ initial_variable() {
 	self.syn["weapons"]["launchers"][0] =          ["iw7_lockon_zm", "iw7_glprox_zm", "iw7_chargeshot_zm+chargeshotscope_camo"];
 	self.syn["weapons"]["classics"][0] =           ["iw7_m1c_zm", "iw7_g18c_zm", "iw7_ump45c_zm", "iw7_spasc_zm", "iw7_arclassic_zm", "iw7_cheytacc_zm"];
 	self.syn["weapons"]["melees"][0] =             ["iw7_axe_zm"];
+	// Weapon Names
 	self.syn["weapons"]["assault_rifles"][1] =     ["NV4", "R3K", "KBAR-32", "Type-2", "Volk", "R-VN", "X-Con", "G-Rail", "Erad"];
 	self.syn["weapons"]["sub_machine_guns"][1] =   ["FHR-40", "Karma-45", "RPR Evo", "HVR", "VPR", "Trencher", "Raijin-EMX"];
 	self.syn["weapons"]["light_machine_guns"][1] = ["R.A.W.", "Mauler", "Titan", "Auger", "Atlas"];
@@ -408,6 +414,7 @@ initial_variable() {
 	self.syn["weapons"]["launchers"][1] =          ["Spartan SA3", "Howitzer", "P-Law"];
 	self.syn["weapons"]["classics"][1] =           ["M1", "Hornet", "MacTav-45", "S-Ravage", "OSA", "TF-141"];
 	self.syn["weapons"]["melees"][1] =             ["Axe"];
+	// Weapon Pack-a-Punch Prefixes
 	self.syn["weapons"]["assault_rifles"][2] =     ["m4", "sdfar", "ar57", "fmg", "ake", "rvn", "vr", "gauss", "erad"];
 	self.syn["weapons"]["sub_machine_guns"][2] =   ["fhr", "crb", "ripper", "ump", "crdb", "mp28", "tacburst"];
 	self.syn["weapons"]["light_machine_guns"][2] = ["sdflmg", "mauler", "lmg03", "minilmg", "unsalmg"];
@@ -417,6 +424,7 @@ initial_variable() {
 	self.syn["weapons"]["launchers"][2] =          ["lockon", "gl", "cs"];
 	self.syn["weapons"]["classics"][2] =           ["m1c", "g18c", "umpc", "spasc", "arc", "cheytacc"];
 	self.syn["weapons"]["melees"][2] =             [""];
+	// Weapon Additional Default Attachments
 	self.syn["weapons"]["assault_rifles"][3] =     ["", "", "", "+fmgscope_camo", "", "+rvnscope", "+vrscope", "+gaussscope", "+eradscope_camo"];
 	self.syn["weapons"]["sub_machine_guns"][3] =   ["", "", "+ripperrscope_zm", "", "", "", "+tacburstscope"];
 	self.syn["weapons"]["light_machine_guns"][3] = ["", "", "+lmg03scope_camo", "+minilmgscope", ""];
@@ -426,144 +434,185 @@ initial_variable() {
 	self.syn["weapons"]["launchers"][3] =          ["+lockonscope_camo", "+glproxscope_camo", ""];
 	self.syn["weapons"]["classics"][3] =           ["", "", "", "", "+glarclassic", "+cheytacscope_camo"];
 	self.syn["weapons"]["melees"][3] =             [""];
+	// Spaceland Weapons
 	self.syn["weapons"]["cp_zmb"][0] =   ["iw7_forgefreeze_zm+forgefreezealtfire", "iw7_dischord_zm", "iw7_facemelter_zm", "iw7_headcutter_zm", "iw7_shredder_zm", "iw7_spaceland_wmd"];
 	self.syn["weapons"]["cp_zmb"][1] =   ["Forge Freeze", "Dischord", "Face Melter", "Head Cutter", "Shredder", "NX 2.0"];
 	self.syn["weapons"]["cp_zmb"][2] =   ["", "", "", "", "", ""];
-	self.syn["weapons"]["cp_zmb"][3] =   ["", "", " ", "", "", ""];													 
+	self.syn["weapons"]["cp_zmb"][3] =   ["", "", " ", "", "", ""];
+	// Rave in the Redwoods Weapons															 
 	self.syn["weapons"]["cp_rave"][0] =  ["iw7_golf_club_mp", "iw7_spiked_bat_mp", "iw7_two_headed_axe_mp", "iw7_machete_mp", "iw7_harpoon1_zm", "iw7_harpoon2_zm", "iw7_harpoon3_zm+akimbo", "iw7_harpoon4_zm"];
 	self.syn["weapons"]["cp_rave"][1] =  ["Golf Club", "Spiked Bat", "2 Headed Axe", "Machete", "Harpoon Gun 1", "Harpoon Gun 2", "Harpoon Gun 3", "Harpoon Gun 4"];
 	self.syn["weapons"]["cp_rave"][2] =  ["", "", "", ""];
 	self.syn["weapons"]["cp_rave"][3] =  ["", "", "", ""];
+	// Shaolin Shuffle Weapons
 	self.syn["weapons"]["cp_disco"][0] = ["iw7_katana_zm", "iw7_nunchucks_zm", "crane", "snake", "dragon", "tiger"];					 
 	self.syn["weapons"]["cp_disco"][1] = ["Katana", "Nunchucks", "Crane Chi", "Snake Chi", "Dragon Chi", "Tiger Chi"];
 	self.syn["weapons"]["cp_disco"][2] = ["", ""];
 	self.syn["weapons"]["cp_disco"][3] = ["", ""];
+	// Attack of the Radioactive Thing Weapons
 	self.syn["weapons"]["cp_town"][0] =  ["iw7_cutie_zm"];
 	self.syn["weapons"]["cp_town"][1] =  ["Modular Atomic Disintegrator"];
 	self.syn["weapons"]["cp_town"][2] =  ["", "", ""];
 	self.syn["weapons"]["cp_town"][3] =  ["", "", ""];
+	// Beast from Beyond Weapons
 	self.syn["weapons"]["cp_final"][0] = ["iw7_venomx_zm"];					 				 
 	self.syn["weapons"]["cp_final"][1] = ["Venom-X"];
 	self.syn["weapons"]["cp_final"][2] = [""];
 	self.syn["weapons"]["cp_final"][3] = [""];
+	// Misc Weapons
 	self.syn["weapons"]["other"][0] =    ["iw7_fists_zm", "iw7_entangler_zm"];	
 	self.syn["weapons"]["other"][1] =    ["Fists", "Entangler"];
 	self.syn["weapons"]["other"][2] =    ["", "", "", ""];
 	self.syn["weapons"]["other"][3] =    ["", "", "", ""];
+	// PaP Camos
 	self.syn["camos"]["cp_zmb"] = ["+camo1", "+camo4"];
 	self.syn["camos"]["cp_rave"] = ["+camo204", "+camo205"];
 	self.syn["camos"]["cp_disco"] = ["+camo211", "+camo212"];
 	self.syn["camos"]["cp_town"] = ["+camo92", "+camo93"];
 	self.syn["camos"]["cp_final"] = ["+camo32", "+camo34"];
+	
+	// Spaceland Teleport Names
 	self.syn["Main Teleports"]["cp_zmb"][0] =            ["PaP Room", "Spawn", "Main Portal", "Afterlife Arcade"];
 	self.syn["Map Setup Teleports"]["cp_zmb"][0] =       ["Spawn Power", "Journey Power", "Kepler Power", "Polar Peak Power", "Arcade Power", "Journey Teleporter", "Kepler Teleporter", "Polar Peak Teleporter", "Arcade Teleporter"];
 	self.syn["Mystery Wheel Teleports"]["cp_zmb"][0] =   ["Journey 1", "Journey 2", "Journey 3", "Astrocade", "Polar Peak", "Kepler 1", "Kepler 2", "Kepler 3"];
 	self.syn["Main Quest Teleports"]["cp_zmb"][0] =      ["Calculator 1", "Calculator 2", "Calculator 3", "Boom Box 1", "Boom Box 2", "Boom Box 3", "Umbrella 1", "Umbrella 2", "Umbrella 3", "DJ Booth 1", "DJ Booth 2", "DJ Booth 3"];
 	self.syn["Extra Teleports"]["cp_zmb"][0] =           ["N31L's Head", "N31L Auxiliary Battery 1", "N31L Auxiliary Battery 2", "N31L Auxiliary Battery 3", "N31L Auxiliary Battery 4", "N31L Auxiliary Battery 5", "N31L Auxiliary Battery 6", "N31L Floppy Disk 1", "N31L Floppy Disk 2", "N31L Floppy Disk 3", "N31L Floppy Disk 4", "N31L Floppy Disk 5"];
+	// Spaceland Teleport Origins
 	self.syn["Main Teleports"]["cp_zmb"][1] =            [(-10245, 740, -1630), (465, 3680, 0), (650, 970, 0), (-9885, -70, -1795)];
 	self.syn["Map Setup Teleports"]["cp_zmb"][1] =       [(1075, 3720, 0), (4695, 1250, 115), (-1365, -65, 380), (-695, -2795, 560), (2390, -1825, 115), (3640, 1165, 55), (-2150, -35, 225), (-1490, -2650, 360), (2285, -1615, 115)];
 	self.syn["Mystery Wheel Teleports"]["cp_zmb"][1] =   [(1470, 1045, 0), (4065, 2135, 55), (3690, 420, 55), (2575, -865, 240), (955, -2260, 440), (-1950, 1830, 365), (-1900, -530, 380), (-845, -1492, 360)];
 	self.syn["Main Quest Teleports"]["cp_zmb"][1] =      [(540, 1060, 0), (-2520, 805, 365), (2960, -850, 240), (595, 2125, -65), (-1415, -175, 380), (1375, -590, -195), (155, -505, 0), (-1890, -3040, 360), (3640, 2335, 115), (-1000, 1495, 225), (-2710, -2480, 360), (2926, 1305, 0)];
 	self.syn["Extra Teleports"]["cp_zmb"][1] =           [(475, -265, 0), (-1800, -2825, 360), (-535, -3265, 390), (-757, -2415, 560), (-2775, 1565, 365), (-3045, 730, 365), (-1230, 1625, 225), (000, 000, 000), (000, 000, 000), (000, 000, 000), (000, 000, 000), (000, 000, 000)];
+	// Spaceland Teleport Angles
 	self.syn["Main Teleports"]["cp_zmb"][2] =            [90, -90, -90];
 	self.syn["Map Setup Teleports"]["cp_zmb"][2] =       [-90, 0, -90, 90, 180, 0, -45, 20, -90];
 	self.syn["Mystery Wheel Teleports"]["cp_zmb"][2] =   [180, 90, 0, -90, 0, -45, -90, 0];
 	self.syn["Main Quest Teleports"]["cp_zmb"][2] =      [0, 0, 90, 45, 0, 90, 160, 90, -90, 0, -90, 0];
 	self.syn["Extra Teleports"]["cp_zmb"][2] =           [-90, 180, -90, 0, 0, 0, 90, 0, 0, 0, 0, 0];
+	// Rave in the Redwoods Teleport Names
 	self.syn["Main Teleports"]["cp_rave"][0] =           ["PaP Room", "Spawn", "Cellar", "Kevin's Cabin", "Afterlife Arcade"];
 	self.syn["Mystery Wheel Teleports"]["cp_rave"][0] =  ["Rave Stage", "Dock", "Main Fire", "Mess Hall", "Cellar", "Bear Lodge", "Camp Wolf"];
+	// Rave in the Redwoods Teleport Origins
 	self.syn["Main Teleports"]["cp_rave"][1] =           [(-10245, 750, -1630), (-940, -1620, 225), (-395, -1815, 55), (-6035, 4890, 120), (-9885, -70, -1795)];
 	self.syn["Map Setup Teleports"]["cp_rave"][1] =      [(000, 000, 000), (000, 000, 000)];
 	self.syn["Mystery Wheel Teleports"]["cp_rave"][1] =  [(2205, -1390, -15), (-2900, 2275, -150), (145, 1125, 50), (-3355, -3365, 150), (-560, -1895, 55), (-950, -1150, 390), (-2585, -4575, 255)];
 	self.syn["Main Quest Teleports"]["cp_rave"][1] =     [(000, 000, 000), (000, 000, 000)];
 	self.syn["Extra Teleports"]["cp_rave"][1] =          [(000, 000, 000), (000, 000, 000)];
+	// Rave in the Redwoods Teleport Angles
 	self.syn["Main Teleports"]["cp_rave"][2] =           [90, 165, 130, 100, 0];
 	self.syn["Map Setup Teleports"]["cp_rave"][2] =      [0, 0];
 	self.syn["Mystery Wheel Teleports"]["cp_rave"][2] =  [100, 140, 90, -50, -180, -90, -75];
 	self.syn["Main Quest Teleports"]["cp_rave"][2] =     [0, 0];
 	self.syn["Extra Teleports"]["cp_rave"][2] =          [0, 0];
+	// Shaolin Shuffle Teleport Names
 	self.syn["Main Teleports"]["cp_disco"][0] =          ["PaP Room", "Spawn", "Sewer", "Afterlife Arcade"];
 	self.syn["Mystery Wheel Teleports"]["cp_disco"][0] = ["Alleyway", "Rooftop", "Garden", "Disco Roof", "Subway Station 1", "Subway Station 2", "Disco"];
 	self.syn["Extra Teleports"]["cp_disco"][0] =         ["Pink Cat Flier 1", "Pink Cat Flier 2", "Pink Cat Flier 3", "Pink Cat Flier 4", "Token"];
+	// Shaolin Shuffle Teleport Origins
 	self.syn["Main Teleports"]["cp_disco"][1] =          [(-10245, 750, -1630), (580, 3025, 285), (-875, 1820, 180), (-9885, -35, -1795)];
 	self.syn["Map Setup Teleports"]["cp_disco"][1] =     [(-1915, 4620, 750), (1590, 1290, 750), (-810, 765, 925), (-1110, 3435, 1120), (-1075, 2795, 260)];
 	self.syn["Mystery Wheel Teleports"]["cp_disco"][1] = [(105, 1300, 750), (15, 665, 935), (-3515, 1165, 975), (-2100, 2795, 1175), (375, 2065, 525), (-2450, 3610, 500), (-1185, 3735, 750)];
 	self.syn["Main Quest Teleports"]["cp_disco"][1] =    [(000, 000, 000), (000, 000, 000)];
 	self.syn["Extra Teleports"]["cp_disco"][1] =         [(000, 000, 000), (000, 000, 000)];
+	// Shaolin Shuffle Teleport Angles
 	self.syn["Main Teleports"]["cp_disco"][2] =          [90, -145, 90, 0];
 	self.syn["Map Setup Teleports"]["cp_disco"][2] =     [-180, -30, 90, 0, 180];
 	self.syn["Mystery Wheel Teleports"]["cp_disco"][2] = [-90, 90, -180, 180, -180, 90. -20];
 	self.syn["Main Quest Teleports"]["cp_disco"][2] =    [0, 0];
 	self.syn["Extra Teleports"]["cp_disco"][2] =         [0, 0];
+	// Attack of the Radioactive Thing Teleport Names
 	self.syn["Main Teleports"]["cp_town"][0] =           ["PaP Room", "Spawn", "Studio", "Afterlife Arcade"];
 	self.syn["Map Setup Teleports"]["cp_town"][0] =      ["Power Handle", "Power Station", "Telepad 1", "Telepad 2", "Telepad 3", "Telepad 4"];
 	self.syn["Mystery Wheel Teleports"]["cp_town"][0] =  ["Power Station", "Beach Mart", "RV Park", "Pool", "Studio", "Trail"];
 	self.syn["Main Quest Teleports"]["cp_town"][0] =     ["Elvira's Book", "Zombie Head", "Zombie Torso", "Zombie Arm 1", "Zombie Arm 2", "Zombie Leg"];
 	self.syn["Extra Teleports"]["cp_town"][0] =          ["Cleaver", "Crowbar", "M.A.D. Attachment 1", "M.A.D. Attachment 2", "M.A.D. Attachment 3"];
+	// Attack of the Radioactive Thing Teleport Origins
 	self.syn["Main Teleports"]["cp_town"][1] =           [(-10245, 750, -1630), (3939, -4515, 15), (235, -2555, 520), (-9885, -70, -1795)];
 	self.syn["Map Setup Teleports"]["cp_town"][1] =      [(3205, 1815, -105), (6440, -2770, 105), (5375, -2800, 195), (4795, -180, 330), (490, 4115, 395), (-937, -2695, 520)];
 	self.syn["Mystery Wheel Teleports"]["cp_town"][1] =  [(6440, -1955, 105), (6210, 1075, 330), (-790, 3840, 400), (-255, -590, 410), (-480, -3410, 515), (340, -4710, 255)];
 	self.syn["Main Quest Teleports"]["cp_town"][1] =     [(5405, -4720, -15), (-295, 3665, 425), (6245, -550, 335), (3205, 1815, -105), (470, 2200, 395), (-1175, -4219, 335)];
 	self.syn["Extra Teleports"]["cp_town"][1] =          [(6015, -820, 335), (1270, -130, 475), (-1055, 3505, 400), (4260, 1620, 335), (-130, -3045, 520)];
+	// Attack of the Radioactive Thing Teleport Angles
 	self.syn["Main Teleports"]["cp_town"][2] =           [90, 60, 0, 0];
 	self.syn["Map Setup Teleports"]["cp_town"][2] =      [65, 20, -160, -90, 100, -180];
 	self.syn["Mystery Wheel Teleports"]["cp_town"][2] =  [-65, 0, 150, 180, -90, -80];
 	self.syn["Main Quest Teleports"]["cp_town"][2] =     [45, -170, 75, 65, 30, 80];
 	self.syn["Extra Teleports"]["cp_town"][2] =          [-85, -30, 100, -180, 90];
+	// Beast from Beyond Teleport Names
 	self.syn["Main Teleports"]["cp_final"][0] =          ["PaP Room", "Spawn", "Control Room", "Theatre", "Afterlife Arcade"];
 	self.syn["Map Setup Teleports"]["cp_final"][0] =     ["N31L's Head", "N31L", "Open Theatre Portal"];
 	self.syn["Mystery Wheel Teleports"]["cp_final"][0] = ["Spawn", "Water Room", "Main Room", "Hallway", "Storage Room", "Theatre", "Outside"];
 	self.syn["Extra Teleports"]["cp_final"][0] =         ["PaP Bridge Part 1", "PaP Bridge Part 2", "PaP Bridge Part 3", "PaP Bridge", "Mephistopheles Arena"];
+	// Beast from Beyond Teleport Origins
 	self.syn["Main Teleports"]["cp_final"][1] =          [(5135, -5180, 285), (-760, 2920, 90), (730, 5065, 90), (5515, -4515, -20), (2080, -4520, 330)];
 	self.syn["Map Setup Teleports"]["cp_final"][1] =     [(-1210, 5040, -70), (45, 3840, 25), (1920, 3470, 15)];
 	self.syn["Mystery Wheel Teleports"]["cp_final"][1] = [(-90, 2880, 25), (-1215, 4755, -205), (645, 5710, 60), (1510, 4010, 15), (1470, 3565, -175), (5700, -4050, -70), (2185, 6275, 95)];
 	self.syn["Main Quest Teleports"]["cp_final"][1] =    [(000, 000, 000), (000, 000, 000)];
 	self.syn["Extra Teleports"]["cp_final"][1] =         [(-855, 5435, -70), (1755, 3110, -290), (4990, -6835, 50), (3465, 6640, 165), (-13300, -325, -105)];
+	// Beast from Beyond Teleport Angles
 	self.syn["Main Teleports"]["cp_final"][2] =          [90, 20, -45, 90, 0];
 	self.syn["Map Setup Teleports"]["cp_final"][2] =     [-155, 90, 90];
 	self.syn["Mystery Wheel Teleports"]["cp_final"][2] = [-90, -130, 180, 90, 60, 0, -50];
 	self.syn["Main Quest Teleports"]["cp_final"][2] =    [0, 0];
 	self.syn["Extra Teleports"]["cp_final"][2] =         [-55, 60, -100, 45, 0];
+	
+	// Spaceland Zombies
 	self.syn["zombies"]["cp_zmb"][0] =   ["generic_zombie", "zombie_clown", "zombie_brute", "zombie_ghost", "the_hoff"];
 	self.syn["zombies"]["cp_zmb"][1] =   ["Normal Zombie", "Clown", "Brute", "Ghost", "David Hasselhoff"];
 	self.syn["zombies"]["cp_zmb"][2] =   ["axis", "axis", "axis", "axis", "allies"];
+	// Rave in the Redwoods Zombies
 	self.syn["zombies"]["cp_rave"][0] =  ["generic_zombie", "lumberjack", "zombie_sasquatch", "slasher", "superslasher"];
 	self.syn["zombies"]["cp_rave"][1] =  ["Normal Zombie", "Lumberjack", "Sasquatch", "Slasher", "Super Slasher"];
 	self.syn["zombies"]["cp_rave"][2] =  ["axis", "axis", "axis", "axis", "axis"];
+	// Shaolin Shuffle Zombies
 	self.syn["zombies"]["cp_disco"][0] = ["generic_zombie", "karatemaster", "skater", "ratking", "pamgrier"];
 	self.syn["zombies"]["cp_disco"][1] = ["Normal Zombie", "Karate Zombie", "Skater", "Rat King", "Pam Grier"];
 	self.syn["zombies"]["cp_disco"][2] = ["axis", "axis", "axis", "axis", "allies"];
+	// Attack of the Radioactive Thing Zombies
 	self.syn["zombies"]["cp_town"][0] =  ["generic_zombie", "crab_mini", "crab_brute", "crab_boss", "elvira"];
 	self.syn["zombies"]["cp_town"][1] =  ["Normal Zombie", "Crog", "Crog Brute", "Crog Boss", "Elvira"];
 	self.syn["zombies"]["cp_town"][2] =  ["axis", "axis", "axis", "axis", "allies"];
+	// Beast from Beyond Zombies
 	self.syn["zombies"]["cp_final"][0] = ["generic_zombie", "alien_goon", "alien_phantom", "alien_rhino", "zombie_skeleton", "dlc4_boss"];
 	self.syn["zombies"]["cp_final"][1] = ["Normal Zombie", "Cryptid", "Phantom", "Rhino", "Skeleton", "Mephistopheles"];
 	self.syn["zombies"]["cp_final"][2] = ["axis", "axis", "axis", "axis", "axis", "axis"];
+	
+	// Common Perks
 	self.syn["perks"][0] = ["perk_machine_revive", "perk_machine_tough", "perk_machine_rat_a_tat", "perk_machine_flash", "perk_machine_run", "perk_machine_boom", "perk_machine_more", "perk_machine_zap", "perk_machine_fwoosh"];
 	self.syn["perks"][1] = ["Up N' Atoms", "Tuff Nuff", "Bang Bangs", "Quickies", "Racin' Stripes", "Bombstoppers", "Mule Munchies", "Blue Bolts", "Trail Blazers"];
+	// Zombies in Spaceland Perk
 	self.syn["perks"]["cp_zmb"][0] = ["perk_machine_smack"];
 	self.syn["perks"]["cp_zmb"][1] = ["Slappy Taffy"];
+	// Shaolin Shuffle Extra Perk
 	self.syn["perks"]["cp_disco"][0] = ["perk_machine_deadeye"];
 	self.syn["perks"]["cp_disco"][1] = ["Deadeye Dewdrops"];
+	// Attack of the Radioactive Thing and Beast from Beyond Extra Perks
 	self.syn["perks"]["cp_town"][0] = ["perk_machine_smack", "perk_machine_deadeye", "perk_machine_change"];
 	self.syn["perks"]["cp_town"][1] = ["Slappy Taffy", "Deadeye Dewdrops", "Change Chews"];
 	self.syn["perks"]["cp_final"][0] = ["perk_machine_smack", "perk_machine_deadeye", "perk_machine_change"];
 	self.syn["perks"]["cp_final"][1] = ["Slappy Taffy", "Deadeye Dewdrops", "Change Chews"];
+	
 	self.syn["maps"]["cp_zmb"] = "Zombies in Spaceland";
 	self.syn["maps"]["cp_rave"] = "Rave in the Redwoods";
 	self.syn["maps"]["cp_disco"] = "Shaolin Shuffle";
 	self.syn["maps"]["cp_town"] = "Attack of the Radioactive Thing";
 	self.syn["maps"]["cp_final"] = "The Beast from Beyond";
+
+	
 	self.syn["outline_colors"] = ["White", "Red", "Green", "Aqua", "Orange", "Yellow"];
+	
 	self.syn["utility"].interaction = true;
-	self.syn["utility"].color[0] = (0.752941176, 0.752941176, 0.752941176);
-	self.syn["utility"].color[1] = (0.074509804, 0.070588235, 0.078431373);
-	self.syn["utility"].color[2] = (0.074509804, 0.070588235, 0.078431373);
-	self.syn["utility"].color[3] = (0.243137255, 0.22745098, 0.247058824);
-	self.syn["utility"].color[4] = (1, 1, 1);
-	self.syn["utility"].color[5] = "rainbow";
+	
+	self.syn["utility"].color[0] = (0.752941176, 0.752941176, 0.752941176); // Selected Slider Thumb and Category Text
+	self.syn["utility"].color[1] = (0.074509804, 0.070588235, 0.078431373); // Title Background and Unselected Slider Background
+	self.syn["utility"].color[2] = (0.074509804, 0.070588235, 0.078431373); // Main Background, Selected Slider Background
+	self.syn["utility"].color[3] = (0.243137255, 0.22745098, 0.247058824); // Cursor, Scrollbar Background, Unselected Slider Thumb, and Unchecked Toggle
+	self.syn["utility"].color[4] = (1, 1, 1); // Text Color
+	self.syn["utility"].color[5] = "rainbow"; // Outline and Separators
+	
 	self.cursor = [];
 	self.previous = [];
+	
 	self set_menu("Synergy");
 	self set_title(self get_menu());
 }
@@ -611,7 +660,7 @@ initial_monitor() {
 						self set_cursor((cursor + scrolling));
 						self update_scrolling(scrolling);
 					}
-					wait .25;
+					wait .25; // Scroll Cooldown
 				}
 				else if(self fragButtonPressed() && !self secondaryOffhandButtonPressed() || self secondaryOffhandButtonPressed() && !self fragButtonPressed()) {
 					if(return_toggle(self.structure[cursor].slider)) {
@@ -655,14 +704,14 @@ open_menu(menu) {
 	}
 	
 	self.syn["hud"] = [];
-	self.syn["hud"]["title"][0] = self create_text(self get_title(), self.syn["utility"].font, self.syn["utility"].font_scale, "left", "CENTER", (self.syn["utility"].x_offset + 86), (self.syn["utility"].y_offset + 2), self.syn["utility"].color[4], 1, 10);
-	self.syn["hud"]["title"][1] = self create_text("______", self.syn["utility"].font, self.syn["utility"].font_scale * 1.5, "left", "CENTER", (self.syn["utility"].x_offset + 4), (self.syn["utility"].y_offset - 4), self.syn["utility"].color[5], 1, 10);
-	self.syn["hud"]["title"][2] = self create_text("______", self.syn["utility"].font, self.syn["utility"].font_scale * 1.5, "left", "CENTER", (self.syn["utility"].x_offset + 157), (self.syn["utility"].y_offset - 4), self.syn["utility"].color[5], 1, 10);
+	self.syn["hud"]["title"][0] = self create_text(self get_title(), self.syn["utility"].font, self.syn["utility"].font_scale, "left", "CENTER", (self.syn["utility"].x_offset + 86), (self.syn["utility"].y_offset + 2), self.syn["utility"].color[4], 1, 10); // Title Text
+	self.syn["hud"]["title"][1] = self create_text("______", self.syn["utility"].font, self.syn["utility"].font_scale * 1.5, "left", "CENTER", (self.syn["utility"].x_offset + 4), (self.syn["utility"].y_offset - 4), self.syn["utility"].color[5], 1, 10); // Title Separator
+	self.syn["hud"]["title"][2] = self create_text("______", self.syn["utility"].font, self.syn["utility"].font_scale * 1.5, "left", "CENTER", (self.syn["utility"].x_offset + 157), (self.syn["utility"].y_offset - 4), self.syn["utility"].color[5], 1, 10); // Title Separator
 			
-	self.syn["hud"]["background"][0] = self create_shader("white", "left", "CENTER", self.syn["utility"].x_offset - 1, (self.syn["utility"].y_offset - 1), 202, 30, self.syn["utility"].color[5], 1, 1);
-	self.syn["hud"]["background"][1] = self create_shader("white", "left", "CENTER", (self.syn["utility"].x_offset), self.syn["utility"].y_offset, 200, 28, self.syn["utility"].color[1], 1, 2);
-	self.syn["hud"]["foreground"][1] = self create_shader("white", "left", "CENTER", (self.syn["utility"].x_offset), (self.syn["utility"].y_offset + 14), 194, 14, self.syn["utility"].color[3], 1, 4);
-	self.syn["hud"]["foreground"][2] = self create_shader("white", "left", "CENTER", (self.syn["utility"].x_offset + 195), (self.syn["utility"].y_offset + 14), 4, 14, self.syn["utility"].color[3], 1, 4);
+	self.syn["hud"]["background"][0] = self create_shader("white", "left", "CENTER", self.syn["utility"].x_offset - 1, (self.syn["utility"].y_offset - 1), 202, 30, self.syn["utility"].color[5], 1, 1); // Outline
+	self.syn["hud"]["background"][1] = self create_shader("white", "left", "CENTER", (self.syn["utility"].x_offset), self.syn["utility"].y_offset, 200, 28, self.syn["utility"].color[1], 1, 2); // Main Background
+	self.syn["hud"]["foreground"][1] = self create_shader("white", "left", "CENTER", (self.syn["utility"].x_offset), (self.syn["utility"].y_offset + 14), 194, 14, self.syn["utility"].color[3], 1, 4); // Cursor
+	self.syn["hud"]["foreground"][2] = self create_shader("white", "left", "CENTER", (self.syn["utility"].x_offset + 195), (self.syn["utility"].y_offset + 14), 4, 14, self.syn["utility"].color[3], 1, 4); // Scrollbar Background
 	
 	self set_menu(menu);
 	self create_option();
@@ -712,10 +761,10 @@ create_option() {
 			}
 			
 			if(isDefined(self.structure[index].toggle)) {
-				self.syn["hud"]["toggle"][1][index] = self create_shader("white", "left", "CENTER", (self.syn["utility"].x_offset + 4), (self.syn["utility"].y_offset + ((i * self.syn["utility"].option_spacing) + 17)), 8, 8, color[1], 1, 10);
+				self.syn["hud"]["toggle"][1][index] = self create_shader("white", "left", "CENTER", (self.syn["utility"].x_offset + 4), (self.syn["utility"].y_offset + ((i * self.syn["utility"].option_spacing) + 17)), 8, 8, color[1], 1, 10); // Toggle Box
 			}
 			
-			for(x = 0; x < 10; x++) {
+			for(x = 0; x < 15; x++) {
 				if(isDefined(self.syn["hud"]["arrow"][0][x])) {
 					self.syn["hud"]["arrow"][0][x] destroy();
 					self.syn["hud"]["arrow"][1][x] destroy();
@@ -728,15 +777,15 @@ create_option() {
 				} else {
 					if(cursor) {
 						self.syn["hud"]["slider"][0][index] = self create_text(self.slider[self get_menu() + "_" + index], self.syn["utility"].font, (self.syn["utility"].font_scale - 0.1), "left", "CENTER", (self.syn["utility"].x_offset + 155), (self.syn["utility"].y_offset + ((i * self.syn["utility"].option_spacing) + 17)), self.syn["utility"].color[4], 1, 10);
-						self.syn["hud"]["arrow"][0][index] = self create_text("<", self.syn["utility"].font, self.syn["utility"].font_scale, "left", "CENTER", (self.syn["utility"].x_offset + 129), (self.syn["utility"].y_offset + ((i * self.syn["utility"].option_spacing) + 16)), self.syn["utility"].color[4], 1, 10);
-						self.syn["hud"]["arrow"][1][index] = self create_text(">", self.syn["utility"].font, self.syn["utility"].font_scale, "left", "CENTER", (self.syn["utility"].x_offset + 185), (self.syn["utility"].y_offset + ((i * self.syn["utility"].option_spacing) + 16)), self.syn["utility"].color[4], 1, 10);
+						self.syn["hud"]["arrow"][0][index] = self create_text("<", self.syn["utility"].font, self.syn["utility"].font_scale, "left", "CENTER", (self.syn["utility"].x_offset + 129), (self.syn["utility"].y_offset + ((i * self.syn["utility"].option_spacing) + 16)), self.syn["utility"].color[4], 1, 10); // Slider Arrow
+						self.syn["hud"]["arrow"][1][index] = self create_text(">", self.syn["utility"].font, self.syn["utility"].font_scale, "left", "CENTER", (self.syn["utility"].x_offset + 185), (self.syn["utility"].y_offset + ((i * self.syn["utility"].option_spacing) + 16)), self.syn["utility"].color[4], 1, 10); // Slider Arrow
 					} else {
 						self.syn["hud"]["arrow"][0][index] destroy();
 						self.syn["hud"]["arrow"][1][index] destroy();
 					}
 				
-					self.syn["hud"]["slider"][1][index] = self create_shader("white", "left", "CENTER", (self.syn["utility"].x_offset + 135), (self.syn["utility"].y_offset + ((i * self.syn["utility"].option_spacing) + 17)), 50, 8, cursor ? self.syn["utility"].color[2] : self.syn["utility"].color[1], 1, 8);
-					self.syn["hud"]["slider"][2][index] = self create_shader("white", "left", "CENTER", (self.syn["utility"].x_offset + 149), (self.syn["utility"].y_offset + ((i * self.syn["utility"].option_spacing) + 17)), 8, 8, cursor ? self.syn["utility"].color[0] : self.syn["utility"].color[3], 1, 9);
+					self.syn["hud"]["slider"][1][index] = self create_shader("white", "left", "CENTER", (self.syn["utility"].x_offset + 135), (self.syn["utility"].y_offset + ((i * self.syn["utility"].option_spacing) + 17)), 50, 8, cursor ? self.syn["utility"].color[2] : self.syn["utility"].color[1], 1, 8); // Slider Background
+					self.syn["hud"]["slider"][2][index] = self create_shader("white", "left", "CENTER", (self.syn["utility"].x_offset + 149), (self.syn["utility"].y_offset + ((i * self.syn["utility"].option_spacing) + 17)), 8, 8, cursor ? self.syn["utility"].color[0] : self.syn["utility"].color[3], 1, 9); // Slider Thumb
 				}
 				
 				self set_slider(undefined, index);
@@ -744,8 +793,8 @@ create_option() {
 			
 			if(return_toggle(self.structure[index].category)) {
 				self.syn["hud"]["category"][0][index] = self create_text(self.structure[index].text, self.syn["utility"].font, self.syn["utility"].font_scale, "left", "CENTER", (self.syn["utility"].x_offset + 88), (self.syn["utility"].y_offset + ((i * self.syn["utility"].option_spacing) + 17)), self.syn["utility"].color[0], 1, 10);
-				self.syn["hud"]["category"][1][index] = self create_text("______", self.syn["utility"].font, self.syn["utility"].font_scale * 1.5, "left", "CENTER", (self.syn["utility"].x_offset + 4), (self.syn["utility"].y_offset + ((i * self.syn["utility"].option_spacing) + 11)), self.syn["utility"].color[5], 1, 10);
-				self.syn["hud"]["category"][2][index] = self create_text("______", self.syn["utility"].font, self.syn["utility"].font_scale * 1.5, "left", "CENTER", (self.syn["utility"].x_offset + 157), (self.syn["utility"].y_offset + ((i * self.syn["utility"].option_spacing) + 11)), self.syn["utility"].color[5], 1, 10);
+				self.syn["hud"]["category"][1][index] = self create_text("______", self.syn["utility"].font, self.syn["utility"].font_scale * 1.5, "left", "CENTER", (self.syn["utility"].x_offset + 4), (self.syn["utility"].y_offset + ((i * self.syn["utility"].option_spacing) + 11)), self.syn["utility"].color[5], 1, 10); // Category Separator
+				self.syn["hud"]["category"][2][index] = self create_text("______", self.syn["utility"].font, self.syn["utility"].font_scale * 1.5, "left", "CENTER", (self.syn["utility"].x_offset + 157), (self.syn["utility"].y_offset + ((i * self.syn["utility"].option_spacing) + 11)), self.syn["utility"].color[5], 1, 10); // Category Separator
 			}
 			else {
 				if(return_toggle(self.shader_option[self get_menu()])) {
@@ -785,11 +834,11 @@ update_resize() {
 	position = (self.structure.size - 1) / (height - adjust);
 	if(!return_toggle(self.shader_option[self get_menu()])) {
 		if(!isDefined(self.syn["hud"]["foreground"][1])) {
-			self.syn["hud"]["foreground"][1] = self create_shader("white", "left", "CENTER", (self.syn["utility"].x_offset), (self.syn["utility"].y_offset + 14), 194, 14, self.syn["utility"].color[3], 1, 4);
+			self.syn["hud"]["foreground"][1] = self create_shader("white", "left", "CENTER", (self.syn["utility"].x_offset), (self.syn["utility"].y_offset + 14), 194, 14, self.syn["utility"].color[3], 1, 4); // Cursor
 		}
 		
 		if(!isDefined(self.syn["hud"]["foreground"][2])) {
-			self.syn["hud"]["foreground"][2] = self create_shader("white", "left", "CENTER", (self.syn["utility"].x_offset + 195), (self.syn["utility"].y_offset + 14), 4, 14, self.syn["utility"].color[3], 1, 4);
+			self.syn["hud"]["foreground"][2] = self create_shader("white", "left", "CENTER", (self.syn["utility"].x_offset + 195), (self.syn["utility"].y_offset + 14), 4, 14, self.syn["utility"].color[3], 1, 4); // Scrollbar
 		}
 	}
 	
@@ -924,14 +973,30 @@ onPlayerSpawned() {
 	}
 }
 
+/*
+^0 = Black
+^1 = Red
+^2 = Green
+^3 = Gold
+^4 = Blue
+^5 = Aqua
+^6 = Purple
+^7 = White
+^8 is a color that changes depending what level you are on.
+American maps = Dark Green
+Russian maps = Dark red/marroon
+British maps = Dark Blue
+^9 = Gray
+*/
+
 open_controls_menu() {
 	self.syn["controls-hud"] = [];
-	self.syn["controls-hud"]["title"][0] = self create_text("Controls", self.syn["utility"].font, self.syn["utility"].font_scale, "left", "CENTER", (self.syn["utility"].x_offset + 86), (self.syn["utility"].y_offset + 2), self.syn["utility"].color[4], 1, 10);
-	self.syn["controls-hud"]["title"][1] = self create_text("______", self.syn["utility"].font, self.syn["utility"].font_scale * 1.5, "left", "CENTER", (self.syn["utility"].x_offset + 4), (self.syn["utility"].y_offset - 4), self.syn["utility"].color[5], 1, 10);
-	self.syn["controls-hud"]["title"][2] = self create_text("______", self.syn["utility"].font, self.syn["utility"].font_scale * 1.5, "left", "CENTER", (self.syn["utility"].x_offset + 157), (self.syn["utility"].y_offset - 4), self.syn["utility"].color[5], 1, 10);
+	self.syn["controls-hud"]["title"][0] = self create_text("Controls", self.syn["utility"].font, self.syn["utility"].font_scale, "left", "CENTER", (self.syn["utility"].x_offset + 86), (self.syn["utility"].y_offset + 2), self.syn["utility"].color[4], 1, 10); // Title Text
+	self.syn["controls-hud"]["title"][1] = self create_text("______", self.syn["utility"].font, self.syn["utility"].font_scale * 1.5, "left", "CENTER", (self.syn["utility"].x_offset + 4), (self.syn["utility"].y_offset - 4), self.syn["utility"].color[5], 1, 10); // Title Separator
+	self.syn["controls-hud"]["title"][2] = self create_text("______", self.syn["utility"].font, self.syn["utility"].font_scale * 1.5, "left", "CENTER", (self.syn["utility"].x_offset + 157), (self.syn["utility"].y_offset - 4), self.syn["utility"].color[5], 1, 10); // Title Separator
 	
-	self.syn["controls-hud"]["background"][0] = self create_shader("white", "left", "CENTER", self.syn["utility"].x_offset - 1, (self.syn["utility"].y_offset - 1), 202, 97, self.syn["utility"].color[5], 1, 1);
-	self.syn["controls-hud"]["background"][1] = self create_shader("white", "left", "CENTER", (self.syn["utility"].x_offset), self.syn["utility"].y_offset, 200, 95, self.syn["utility"].color[1], 1, 2);
+	self.syn["controls-hud"]["background"][0] = self create_shader("white", "left", "CENTER", self.syn["utility"].x_offset - 1, (self.syn["utility"].y_offset - 1), 202, 97, self.syn["utility"].color[5], 1, 1); // Outline
+	self.syn["controls-hud"]["background"][1] = self create_shader("white", "left", "CENTER", (self.syn["utility"].x_offset), self.syn["utility"].y_offset, 200, 95, self.syn["utility"].color[1], 1, 2); // Main Background
 	
 	self.syn["controls-hud"]["controls"][0] = self create_text("Open: ^3[{+speed_throw}] ^7and ^3[{+melee}]", self.syn["utility"].font, 1, "left", "CENTER", (self.syn["utility"].x_offset + 5), (self.syn["utility"].y_offset + 15), self.syn["utility"].color[4], 1, 10);
 	self.syn["controls-hud"]["controls"][1] = self create_text("Scroll: ^3[{+speed_throw}] ^7and ^3[{+attack}]", self.syn["utility"].font, 1, "left", "CENTER", (self.syn["utility"].x_offset + 5), (self.syn["utility"].y_offset + 35), self.syn["utility"].color[4], 1, 10);
@@ -967,7 +1032,7 @@ menu_index() {
 	
 	switch(menu) {
 		case "Synergy":
-			self add_menu(menu);
+			self add_menu(menu, menu.size, menu.size);
 			
 			self.syn["hud"]["title"][0].x = self.syn["utility"].x_offset + 86;
 			
@@ -981,12 +1046,11 @@ menu_index() {
 			if(level.mapName == "cp_final") {
 				self add_option("The Beast from Beyond Options", ::new_menu, "The Beast from Beyond");
 			}
+			self add_option("Debug Options", ::new_menu, "Debug Options");
 			
 			break;
 		case "Basic Options":
-			self add_menu(menu);
-			
-			self.syn["hud"]["title"][0].x = self.syn["utility"].x_offset + 86 - (menu.size - 1);
+			self add_menu(menu, menu.size, 1);
 			
 			self add_toggle("God Mode", ::god_mode, self.god_mode);
 			self add_toggle("No Clip", ::no_clip, self.no_clip);
@@ -994,6 +1058,7 @@ menu_index() {
 			self add_toggle("Infinite Ammo", ::infinite_ammo, self.infinite_ammo);
 			self add_toggle("Self Revive", ::self_revive, self.self_revive);
 			self add_toggle("Super Speed", ::super_speed, self.super_speed);
+			self add_toggle("Exo Movement", ::exo_movement, self.exo_movement);
 			
 			self add_option("Give Perks", ::new_menu, "Give Perks");
 			self add_option("Take Perks", ::new_menu, "Take Perks");
@@ -1001,20 +1066,20 @@ menu_index() {
 			
 			self add_increment("Set Points", ::set_points, 100, 100, 100000, 100);
 			
+			if(level.mapName == "cp_zmb") {
+				self add_increment("Give Tickets", ::give_tickets, 50, 50, 950, 50);
+			}
+			
 			break;
 		case "Off-Host Options":
-			self add_menu(menu);
-			
-			self.syn["hud"]["title"][0].x = self.syn["utility"].x_offset + 86 - menu.size;
+			self add_menu(menu, menu.size);
 			
 			self add_toggle("Demi God Mode", ::demi_god_mode, self.demi_god_mode);
 			self add_toggle("Spectator No Clip", ::spectator_no_clip, self.spectator_no_clip);
 			
 			break;
 		case "Weapon Options":
-			self add_menu(menu);
-			
-			self.syn["hud"]["title"][0].x = self.syn["utility"].x_offset + 86 - menu.size;
+			self add_menu(menu, menu.size);
 			
 			self add_toggle("Double Pack-a-Punch", ::double_pack, self.double_pack);
 			self add_toggle("Mystery Wheel Pack-a-Punch", ::upgraded_box_weapons, self.upgraded_box_weapons);
@@ -1028,9 +1093,7 @@ menu_index() {
 			
 			break;
 		case "Zombie Options":
-			self add_menu(menu);
-			
-			self.syn["hud"]["title"][0].x = self.syn["utility"].x_offset + 86 - menu.size;
+			self add_menu(menu, menu.size);
 			
 			self add_toggle("No Target", ::no_target, self.no_target);
 			
@@ -1047,9 +1110,7 @@ menu_index() {
 			
 			break;
 		case "Visual Options":
-			self add_menu(menu);
-			
-			self.syn["hud"]["title"][0].x = self.syn["utility"].x_offset + 86 - menu.size;
+			self add_menu(menu, menu.size);
 			
 			self add_toggle("Fullbright", ::fullbright, self.fullbright);
 			self add_toggle("Third Person", ::third_person, self.third_person);
@@ -1061,9 +1122,7 @@ menu_index() {
 			
 			break;
 		case "Teleport Options":
-			self add_menu(menu);
-			
-			self.syn["hud"]["title"][0].x = self.syn["utility"].x_offset + 86 - menu.size;
+			self add_menu(menu, menu.size);
 			
 			map = level.mapName;
 			
@@ -1086,9 +1145,7 @@ menu_index() {
 			
 			break;
 		case "Account Options":
-			self add_menu(menu);
-			
-			self.syn["hud"]["title"][0].x = self.syn["utility"].x_offset + 86 - menu.size;
+			self add_menu(menu, menu.size);
 			
 			self add_increment("Set Prestige", ::set_prestige, 0, 0, 20, 1);
 			self add_increment("Set Level", ::set_rank, 1, 1, 999, 1);
@@ -1104,9 +1161,7 @@ menu_index() {
 			
 			break;
 		case "Give Perks":
-			self add_menu(menu);
-			
-			self.syn["hud"]["title"][0].x = self.syn["utility"].x_offset + 86 - (menu.size - 5);
+			self add_menu(menu, menu.size, 5);
 			
 			map = level.mapName;
 			
@@ -1122,9 +1177,7 @@ menu_index() {
 
 			break;
 		case "Take Perks":
-			self add_menu(menu);
-			
-			self.syn["hud"]["title"][0].x = self.syn["utility"].x_offset + 86 - (menu.size - 5);
+			self add_menu(menu, menu.size, 5);
 			
 			map = level.mapName;
 			
@@ -1140,9 +1193,7 @@ menu_index() {
 
 			break;
 		case "Give Weapons":
-			self add_menu(menu);
-			
-			self.syn["hud"]["title"][0].x = self.syn["utility"].x_offset + 86 - menu.size;
+			self add_menu(menu, menu.size);
 			
 			for(i = 0; i < self.syn["weapons"]["category"].size; i++) {
 				self add_option(self.syn["weapons"]["category"][i], ::new_menu, self.syn["weapons"]["category"][i]);
@@ -1150,9 +1201,7 @@ menu_index() {
 			
 			break;
 		case "Visions":
-			self add_menu(menu);
-			
-			self.syn["hud"]["title"][0].x = self.syn["utility"].x_offset + 86 - menu.size;
+			self add_menu(menu, menu.size);
 			
 			for(i = 0; i < self.syn["visions"].size; i++) {
 				self add_option(self.syn["visions"][i], ::set_vision, self.syn["visions"][i]);
@@ -1160,9 +1209,7 @@ menu_index() {
 
 			break;
 		case "Spawn Zombies":
-			self add_menu(menu);
-			
-			self.syn["hud"]["title"][0].x = self.syn["utility"].x_offset + 86 - menu.size;
+			self add_menu(menu, menu.size);
 			
 			map = level.mapName;
 			
@@ -1172,9 +1219,7 @@ menu_index() {
 			
 			break;
 		case "Map Setup Teleports":
-			self add_menu(menu);
-			
-			self.syn["hud"]["title"][0].x = self.syn["utility"].x_offset + 86 - menu.size;
+			self add_menu(menu, menu.size);
 			
 			map = level.mapName;
 			
@@ -1184,9 +1229,7 @@ menu_index() {
 			
 			break;
 		case "Mystery Wheel Teleports":
-			self add_menu(menu);
-			
-			self.syn["hud"]["title"][0].x = self.syn["utility"].x_offset + 86 - menu.size;
+			self add_menu(menu, menu.size);
 			
 			map = level.mapName;
 			
@@ -1196,9 +1239,7 @@ menu_index() {
 			
 			break;
 		case "Main Quest Teleports":
-			self add_menu(menu);
-			
-			self.syn["hud"]["title"][0].x = self.syn["utility"].x_offset + 86 - menu.size;
+			self add_menu(menu, menu.size);
 			
 			map = level.mapName;
 			
@@ -1208,9 +1249,7 @@ menu_index() {
 			
 			break;
 		case "Extra Teleports":
-			self add_menu(menu);
-			
-			self.syn["hud"]["title"][0].x = self.syn["utility"].x_offset + 86 - menu.size;
+			self add_menu(menu, menu.size);
 			
 			map = level.mapName;
 			
@@ -1220,17 +1259,13 @@ menu_index() {
 			
 			break;
 		case "The Beast from Beyond":
-			self add_menu(menu);
-			
-			self.syn["hud"]["title"][0].x = self.syn["utility"].x_offset + 86 - menu.size - 5;
+			self add_menu(menu, menu.size, 5);
 			
 			self add_option("Complete Venom-X Quest", ::complete_venom_x);
 
 			break;
 		case "Assault Rifles":
-			self add_menu(menu);
-			
-			self.syn["hud"]["title"][0].x = self.syn["utility"].x_offset + 86 - menu.size;
+			self add_menu(menu, menu.size);
 			
 			category = "assault_rifles";
 			
@@ -1240,9 +1275,7 @@ menu_index() {
 			
 			break;
 		case "Sub Machine Guns":
-			self add_menu(menu);
-			
-			self.syn["hud"]["title"][0].x = self.syn["utility"].x_offset + 86 - menu.size;
+			self add_menu(menu, menu.size);
 			
 			category = "sub_machine_guns";
 			
@@ -1252,9 +1285,7 @@ menu_index() {
 			
 			break;
 		case "Light Machine Guns":
-			self add_menu(menu);
-			
-			self.syn["hud"]["title"][0].x = self.syn["utility"].x_offset + 86 - menu.size;
+			self add_menu(menu, menu.size);
 			
 			category = "light_machine_guns";
 			
@@ -1264,9 +1295,7 @@ menu_index() {
 			
 			break;
 		case "Sniper Rifles":
-			self add_menu(menu);
-			
-			self.syn["hud"]["title"][0].x = self.syn["utility"].x_offset + 86 - menu.size;
+			self add_menu(menu, menu.size);
 			
 			category = "sniper_rifles";
 			
@@ -1276,9 +1305,7 @@ menu_index() {
 			
 			break;
 		case "Shotguns":
-			self add_menu(menu);
-			
-			self.syn["hud"]["title"][0].x = self.syn["utility"].x_offset + 86 - menu.size;
+			self add_menu(menu, menu.size);
 			
 			category = "shotguns";
 			
@@ -1288,9 +1315,7 @@ menu_index() {
 			
 			break;
 		case "Pistols":
-			self add_menu(menu);
-			
-			self.syn["hud"]["title"][0].x = self.syn["utility"].x_offset + 86 - menu.size;
+			self add_menu(menu, menu.size);
 			
 			category = "pistols";
 			
@@ -1300,9 +1325,7 @@ menu_index() {
 			
 			break;
 		case "Launchers":
-			self add_menu(menu);
-			
-			self.syn["hud"]["title"][0].x = self.syn["utility"].x_offset + 86 - menu.size;
+			self add_menu(menu, menu.size);
 			
 			category = "launchers";
 			
@@ -1312,9 +1335,7 @@ menu_index() {
 			
 			break;
 		case "Classic Weapons":
-			self add_menu(menu);
-			
-			self.syn["hud"]["title"][0].x = self.syn["utility"].x_offset + 86 - menu.size;
+			self add_menu(menu, menu.size);
 			
 			category = "classics";
 			
@@ -1324,9 +1345,7 @@ menu_index() {
 			
 			break;
 		case "Melee Weapons":
-			self add_menu(menu);
-			
-			self.syn["hud"]["title"][0].x = self.syn["utility"].x_offset + 86 - menu.size;
+			self add_menu(menu, menu.size);
 			
 			category = "melees";
 			
@@ -1336,9 +1355,7 @@ menu_index() {
 			
 			break;
 		case "Map Specific Weapons":
-			self add_menu(menu);
-			
-			self.syn["hud"]["title"][0].x = self.syn["utility"].x_offset + 86 - menu.size;
+			self add_menu(menu, menu.size);
 			
 			category = level.mapName;
 			
@@ -1348,9 +1365,7 @@ menu_index() {
 			
 			break;
 		case "Other Weapons":
-			self add_menu(menu);
-			
-			self.syn["hud"]["title"][0].x = self.syn["utility"].x_offset + 86 - menu.size;
+			self add_menu(menu, menu.size);
 			
 			category = "other";
 			
@@ -1360,14 +1375,14 @@ menu_index() {
 			
 			break;
 		case "Empty Menu":
-			self add_menu(menu);
-			
-			self.syn["hud"]["title"][0].x = self.syn["utility"].x_offset + 86 - menu.size;
+			self add_menu(menu, menu.size);
 			
 			self add_option("Unassigned Menu");
 			break;
 	}
 }
+
+// Common Functions
 
 get_map_name() {
 	level.mapName = getDvar("mapname");
@@ -1375,7 +1390,7 @@ get_map_name() {
 
 modify_x_position(offset) {
 	self.syn["utility"].x_offset = 600 + offset;
-	for(x = 0; x < 10; x++) {
+	for(x = 0; x < 15; x++) {
 		if(isDefined(self.syn["hud"]["arrow"][0][x])) {
 			self.syn["hud"]["arrow"][0][x] destroy();
 			self.syn["hud"]["arrow"][1][x] destroy();
@@ -1387,7 +1402,7 @@ modify_x_position(offset) {
 
 modify_y_position(offset) {
 	self.syn["utility"].y_offset = 100 + offset;
-	for(x = 0; x < 10; x++) {
+	for(x = 0; x < 15; x++) {
 		if(isDefined(self.syn["hud"]["arrow"][0][x])) {
 			self.syn["hud"]["arrow"][0][x] destroy();
 			self.syn["hud"]["arrow"][1][x] destroy();
@@ -1396,6 +1411,8 @@ modify_y_position(offset) {
 	self close_menu();
 	open_menu("Menu Options");
 }
+
+// Basic Options
 
 god_mode() {
 	self.god_mode = !return_toggle(self.god_mode);
@@ -1489,6 +1506,21 @@ super_speed() {
 	}
 }
 
+exo_movement() {
+	self.exo_movement = !return_toggle(self.exo_movement);
+	if(self.exo_movement) {
+		self iPrintln("Exo Movement [^2ON^7]");
+		self allowdoublejump(1);
+		self allowwallrun(1);
+		self allowdodge(1);
+	} else {
+		self iPrintln("Exo Movement [^1OFF^7]");
+		self allowdoublejump(0);
+		self allowwallrun(0);
+		self allowdodge(0);
+	}
+}
+
 give_perkaholic() {
 	scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::give_gns_base_reward(self);
 }
@@ -1496,6 +1528,13 @@ give_perkaholic() {
 set_points(value) {
 	self setPlayerData("cp", "alienSession", "currency", value);
 }
+
+give_tickets(value) {
+	self playLocalSound("zmb_ui_earn_tickets");
+	scripts\cp\zombies\arcade_game_utility::give_player_tickets(self, value);
+}
+
+// Off Host Options
 
 demi_god_mode() {
 	self.demi_god_mode = !return_toggle(self.demi_god_mode);
@@ -1528,6 +1567,8 @@ spectator_no_clip() {
 		scripts\cp\utility::updateSessionState("playing");
 	}
 }
+
+// Weapon Options
 
 double_pack() {
 	self.double_pack = !return_toggle(self.double_pack);
@@ -1630,8 +1671,13 @@ give_weapon(weapon, category, index) {
 		}
 	}
 	
-	if(self getCurrentWeapon() != weapon && self getWeaponsListPrimaries()[1] != weapon && self getWeaponsListPrimaries()[2] != weapon && self getWeaponsListPrimaries()[3] != weapon) {
-		if(self getWeaponsListPrimaries().size >= 3) {
+	if(self getCurrentWeapon() != weapon && self getWeaponsListPrimaries()[1] != weapon && self getWeaponsListPrimaries()[2] != weapon && self getWeaponsListPrimaries()[3] != weapon&& self getWeaponsListPrimaries()[4] != weapon) {
+		if(self scripts\cp\utility::has_zombie_perk("perk_machine_more")) {
+			max_weapon_num = 4;
+		} else {
+			max_weapon_num = 3;
+		}
+		if(self getWeaponsListPrimaries().size >= max_weapon_num) {
 			self takeWeapon(self getCurrentWeapon());
 		}
 		
@@ -1667,6 +1713,8 @@ take_weapon(weapon_name) {
 	self switchToWeapon(self getWeaponsListPrimaries()[1]);
 }
 
+// Zombie Options
+
 no_target() {
 	self.no_target = !return_toggle(self.no_target);
 	if(self.no_target) {
@@ -1687,7 +1735,9 @@ get_zombies() {
 }
 
 spawn_zombie(archetype, team) {
-	if(archetype == "the_hoff") {
+	if(archetype == "zombie_grey") {
+		weapon = "iw7_zapper_grey";
+	} else if(archetype == "the_hoff") {
 		weapon = "iw7_ake_zmr+akepap2";
 	} else {
 		weapon = undefined;
@@ -1784,6 +1834,8 @@ set_outline_color(value) {
 	self.outline_color = value;
 }
 
+// Visual Options
+
 fullbright() {
 	self.fullbright = !return_toggle(self.fullbright);
 	if(self.fullbright) {
@@ -1816,10 +1868,14 @@ set_vision(vision) {
 	self visionSetNakedForPlayer(vision, 0.1);
 }
 
+// Teleport Options
+
 set_position(origin, angles) {
 	self setOrigin(origin);
 	self setPlayerAngles(angles);
 }
+
+// Account Options
 
 set_prestige(value){
 	self setPlayerData("cp", "progression", "playerLevel", "prestige", value);
@@ -1837,10 +1893,10 @@ set_max_weapons() {
 		if(!isDefined(weapon) || weapon == "")
 			continue;
 
-		self setPlayerData("common", "sharedProgression", "weaponLevel", weapon, "cp", 54300);
+		self setPlayerData("common", "sharedProgression", "weaponLevel", weapon, "cpXP", 54300);
 		self setPlayerData("common", "sharedProgression", "weaponLevel", weapon, "prestige", 3);
 		
-		self iPrintln(weapon + " Set to Max Level");
+		self iPrintln("Set ^3" + weapon + "^7 to Max Level");
 
 		wait 0.175;
 	}
@@ -1943,6 +1999,9 @@ temp_directors_cut() {
 	}
 }
 
+// Map Specific
+
+// Beast from Beyond
 complete_venom_x() {
 	scripts\engine\utility::flag_set("completepuzzles_step4");
 	getent("venomx_locker_door","script_noteworthy") rotateTo((0,105,0),0.1);
