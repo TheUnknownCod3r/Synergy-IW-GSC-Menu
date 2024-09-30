@@ -127,11 +127,13 @@ set_slider(scrolling, index) {
 		
 		position = abs((self.structure[index].maximum - self.structure[index].minimum)) / ((50 - 8));
 		
-		if(!self.structure[index].slider_text) {
+		if(!self.structure[index].text_slider) {
 			self.syn["hud"]["slider"][0][index] setValue(self.slider[storage]);
 		} else {
-			self.syn["hud"]["slider"][0][index] setText(self.syn["outline_colors"][self.slider[storage]]);
 			self.syn["hud"]["slider"][0][index].x = self.syn["utility"].x_offset + 85;
+			if(self.structure[index].slider_text == "outline") {
+				self.syn["hud"]["slider"][0][index] setText(self.syn["outline_colors"][self.slider[storage]]);
+			}
 		}
 		self.syn["hud"]["slider"][2][index].x = (self.syn["hud"]["slider"][1][index].x + (abs((self.slider[storage] - self.structure[index].minimum)) / position));
 	}
@@ -342,11 +344,12 @@ add_string(text, function, array, argument_1, argument_2, argument_3) {
 	self.structure[self.structure.size] = option;
 }
 
-add_increment(text, function, start, minimum, maximum, increment, slider_text, argument_1, argument_2, argument_3) {
+add_increment(text, function, start, minimum, maximum, increment, text_slider, slider_text, argument_1, argument_2, argument_3) {
 	option = spawnStruct();
 	option.text = text;
 	option.function = function;
 	option.slider = true;
+	option.text_slider = text_slider;
 	option.slider_text = slider_text;
 	option.start = start;
 	option.minimum = minimum;
@@ -388,11 +391,11 @@ initial_variable() {
 	self.syn["utility"].option_spacing = 14;
 	self.syn["utility"].x_offset = 600;
 	self.syn["utility"].y_offset = 100;
-	self.syn["utility"].element_list = ["text", "subMenu", "toggle", "category", "slider", "slider_text"];
+	self.syn["utility"].element_list = ["text", "subMenu", "toggle", "category", "slider"];
 	
-	self.syn["visions"] = ["ac130", "ac130_enhanced_mp", "ac130_inverted", "aftermath", "aftermath_glow", "aftermath_post", "apex_mp", "black_bw", "cp_frontend", "cp_zmb", "cp_zmb_afterlif e", "cp_zmb_alien", "cp_zmb_bw", "cp_zmb_ghost_path", "cp_zmb_int_basement", "cp_zmb_int_triton_main", "default", "default_night", "default_night_mp", "dronehive_mp", "end_game", "europa", "jackal_streak_mp", "last_stand_cp_zmb", "map_select_mp", "missilecam", "mpintro", "mpnuke", "mpnuke_aftermath", "mpoutro", "mp_frontier", "mp_frontier_alt", "mp_frontier_basement", "mp_frontier_mainfog", "mp_out_of_bounds", "near_death", "near_death_mp", "nuke_global_flash", "opticwave_mp", "overcharge_mp", "phase_shif t_mp", "rc8_mp", "thermal_mp", "thermal_snowlevel_mp", "thorbright_mp", "thor_mp", "venomgas_mp"];
+	self.syn["visions"] = ["ac130", "ac130_enhanced_mp", "ac130_inverted", "aftermath", "aftermath_glow", "aftermath_post", "apex_mp", "black_bw", "cp_frontend", "cp_zmb", "cp_zmb_afterlife", "cp_zmb_alien", "cp_zmb_bw", "cp_zmb_ghost_path", "cp_zmb_int_basement", "cp_zmb_int_triton_main", "default", "default_night", "default_night_mp", "dronehive_mp", "end_game", "europa", "jackal_streak_mp", "last_stand_cp_zmb", "map_select_mp", "missilecam", "mpintro", "mpnuke", "mpnuke_aftermath", "mpoutro", "mp_frontier", "mp_frontier_alt", "mp_frontier_basement", "mp_frontier_mainfog", "mp_out_of_bounds", "near_death", "near_death_mp", "nuke_global_flash", "opticwave_mp", "overcharge_mp", "phase_shif t_mp", "rc8_mp", "thermal_mp", "thermal_snowlevel_mp", "thorbright_mp", "thor_mp", "venomgas_mp"];
 	
-	self.syn["weapons"]["category"] = ["Assault Rifles", "Sub Machine Guns", "Light Machine Guns", "Sniper Rifles", "Shotguns", "Pistols", "Launchers", "Classic Weapons", "Melee Weapons", "Map Specific Weapons", "Other Weapons"];
+	self.syn["weapons"]["category"] = ["Assault Rifles", "Sub Machine Guns", "Light Machine Guns", "Sniper Rifles", "Shotguns", "Pistols", "Launchers", "Classic Weapons", "Melee Weapons", "Specialist Weapons", "Map Specific Weapons", "Other Weapons"];
 	
 	// Weapon IDs Plus 1 Default Attachment
 	self.syn["weapons"]["assault_rifles"][0] =     ["iw7_m4_zm", "iw7_sdfar_zm", "iw7_ar57_zm", "iw7_fmg_zm+akimbofmg_zm", "iw7_ake_zmr", "iw7_rvn_zm+meleervn", "iw7_vr_zm", "iw7_gauss_zm", "iw7_erad_zm"];
@@ -404,6 +407,7 @@ initial_variable() {
 	self.syn["weapons"]["launchers"][0] =          ["iw7_lockon_zm", "iw7_glprox_zm", "iw7_chargeshot_zm+chargeshotscope_camo"];
 	self.syn["weapons"]["classics"][0] =           ["iw7_m1c_zm", "iw7_g18c_zm", "iw7_ump45c_zm", "iw7_spasc_zm", "iw7_arclassic_zm", "iw7_cheytacc_zm"];
 	self.syn["weapons"]["melees"][0] =             ["iw7_axe_zm"];
+	self.syn["weapons"]["specials"][0] =           ["iw7_atomizer_mp", "iw7_penetrationrail_mp+penetrationrailscope", "iw7_steeldragon_mp", "iw7_claw_mp", "iw7_blackholegun_mp+blackholegunscope"];
 	// Weapon Names
 	self.syn["weapons"]["assault_rifles"][1] =     ["NV4", "R3K", "KBAR-32", "Type-2", "Volk", "R-VN", "X-Con", "G-Rail", "Erad"];
 	self.syn["weapons"]["sub_machine_guns"][1] =   ["FHR-40", "Karma-45", "RPR Evo", "HVR", "VPR", "Trencher", "Raijin-EMX"];
@@ -414,6 +418,7 @@ initial_variable() {
 	self.syn["weapons"]["launchers"][1] =          ["Spartan SA3", "Howitzer", "P-Law"];
 	self.syn["weapons"]["classics"][1] =           ["M1", "Hornet", "MacTav-45", "S-Ravage", "OSA", "TF-141"];
 	self.syn["weapons"]["melees"][1] =             ["Axe"];
+	self.syn["weapons"]["specials"][1] =           ["Eraser", "Ballista EM3", "Steel Dragon", "Claw", "Gravity Vortex Gun", "Arm-2 Akimbo", "Turdlet"];
 	// Weapon Pack-a-Punch Prefixes
 	self.syn["weapons"]["assault_rifles"][2] =     ["m4", "sdfar", "ar57", "fmg", "ake", "rvn", "vr", "gauss", "erad"];
 	self.syn["weapons"]["sub_machine_guns"][2] =   ["fhr", "crb", "ripper", "ump", "crdb", "mp28", "tacburst"];
@@ -424,6 +429,7 @@ initial_variable() {
 	self.syn["weapons"]["launchers"][2] =          ["lockon", "gl", "cs"];
 	self.syn["weapons"]["classics"][2] =           ["m1c", "g18c", "umpc", "spasc", "arc", "cheytacc"];
 	self.syn["weapons"]["melees"][2] =             [""];
+	self.syn["weapons"]["specials"][2] =           ["", "", "", "", "", "", ""];
 	// Weapon Additional Default Attachments
 	self.syn["weapons"]["assault_rifles"][3] =     ["", "", "", "+fmgscope_camo", "", "+rvnscope", "+vrscope", "+gaussscope", "+eradscope_camo"];
 	self.syn["weapons"]["sub_machine_guns"][3] =   ["", "", "+ripperrscope_zm", "", "", "", "+tacburstscope"];
@@ -434,6 +440,7 @@ initial_variable() {
 	self.syn["weapons"]["launchers"][3] =          ["+lockonscope_camo", "+glproxscope_camo", ""];
 	self.syn["weapons"]["classics"][3] =           ["", "", "", "", "+glarclassic", "+cheytacscope_camo"];
 	self.syn["weapons"]["melees"][3] =             [""];
+	self.syn["weapons"]["specials"][3] =           ["", "", "", "", "", "", ""];
 	// Spaceland Weapons
 	self.syn["weapons"]["cp_zmb"][0] =   ["iw7_forgefreeze_zm+forgefreezealtfire", "iw7_dischord_zm", "iw7_facemelter_zm", "iw7_headcutter_zm", "iw7_shredder_zm", "iw7_spaceland_wmd"];
 	self.syn["weapons"]["cp_zmb"][1] =   ["Forge Freeze", "Dischord", "Face Melter", "Head Cutter", "Shredder", "NX 2.0"];
@@ -557,9 +564,9 @@ initial_variable() {
 	self.syn["Extra Teleports"]["cp_final"][2] =         [-55, 60, -100, 45, 0];
 	
 	// Spaceland Zombies
-	self.syn["zombies"]["cp_zmb"][0] =   ["generic_zombie", "zombie_clown", "zombie_brute", "zombie_ghost", "the_hoff"];
-	self.syn["zombies"]["cp_zmb"][1] =   ["Normal Zombie", "Clown", "Brute", "Ghost", "David Hasselhoff"];
-	self.syn["zombies"]["cp_zmb"][2] =   ["axis", "axis", "axis", "axis", "allies"];
+	self.syn["zombies"]["cp_zmb"][0] =   ["generic_zombie", "zombie_clown", "zombie_cop", "zombie_brute", "zombie_ghost", "the_hoff"];
+	self.syn["zombies"]["cp_zmb"][1] =   ["Normal Zombie", "Clown", "Cop", "Brute", "Ghost", "David Hasselhoff"];
+	self.syn["zombies"]["cp_zmb"][2] =   ["axis", "axis", "axis", "axis", "axis", "allies"];
 	// Rave in the Redwoods Zombies
 	self.syn["zombies"]["cp_rave"][0] =  ["generic_zombie", "lumberjack", "zombie_sasquatch", "slasher", "superslasher"];
 	self.syn["zombies"]["cp_rave"][1] =  ["Normal Zombie", "Lumberjack", "Sasquatch", "Slasher", "Super Slasher"];
@@ -573,9 +580,9 @@ initial_variable() {
 	self.syn["zombies"]["cp_town"][1] =  ["Normal Zombie", "Crog", "Crog Brute", "Crog Boss", "Elvira"];
 	self.syn["zombies"]["cp_town"][2] =  ["axis", "axis", "axis", "axis", "allies"];
 	// Beast from Beyond Zombies
-	self.syn["zombies"]["cp_final"][0] = ["generic_zombie", "alien_goon", "alien_phantom", "alien_rhino", "zombie_skeleton", "dlc4_boss"];
-	self.syn["zombies"]["cp_final"][1] = ["Normal Zombie", "Cryptid", "Phantom", "Rhino", "Skeleton", "Mephistopheles"];
-	self.syn["zombies"]["cp_final"][2] = ["axis", "axis", "axis", "axis", "axis", "axis"];
+	self.syn["zombies"]["cp_final"][0] = ["generic_zombie", "alien_goon", "alien_phantom", "alien_rhino", "dlc4_boss"];
+	self.syn["zombies"]["cp_final"][1] = ["Normal Zombie", "Cryptid", "Phantom", "Rhino", "Mephistopheles"];
+	self.syn["zombies"]["cp_final"][2] = ["axis", "axis", "axis", "axis", "axis"];
 	
 	// Common Perks
 	self.syn["perks"][0] = ["perk_machine_revive", "perk_machine_tough", "perk_machine_rat_a_tat", "perk_machine_flash", "perk_machine_run", "perk_machine_boom", "perk_machine_more", "perk_machine_zap", "perk_machine_fwoosh"];
@@ -647,7 +654,7 @@ initial_monitor() {
 						self close_menu();
 					}
 					
-					wait .15;
+					wait 1;
 				}
 				else if(self adsButtonPressed() && !self attackButtonPressed() || self attackButtonPressed() && !self adsButtonPressed()) {
 					if(isDefined(self.structure) && self.structure.size >= 2) {
@@ -937,6 +944,7 @@ start_rainbow() {
 onPlayerConnect() {
 	for(;;) {
 		level waitTill("connected", player);
+		executeCommand("sv_cheats 1");
 		get_map_name();
 		player thread onPlayerSpawned();
 	}
@@ -1043,10 +1051,7 @@ menu_index() {
 			self add_option("Visual Options", ::new_menu, "Visual Options");
 			self add_option("Teleport Options", ::new_menu, "Teleport Options");
 			self add_option("Account Options", ::new_menu, "Account Options");
-			if(level.mapName == "cp_final") {
-				self add_option("The Beast from Beyond Options", ::new_menu, "The Beast from Beyond");
-			}
-			self add_option("Debug Options", ::new_menu, "Debug Options");
+			self add_option(self.syn["maps"][level.mapName] + " Options", ::new_menu, self.syn["maps"][level.mapName]);
 			
 			break;
 		case "Basic Options":
@@ -1065,10 +1070,6 @@ menu_index() {
 			self add_option("Give Perma Perkaholic", ::give_perkaholic);
 			
 			self add_increment("Set Points", ::set_points, 100, 100, 100000, 100);
-			
-			if(level.mapName == "cp_zmb") {
-				self add_increment("Give Tickets", ::give_tickets, 50, 50, 950, 50);
-			}
 			
 			break;
 		case "Off-Host Options":
@@ -1105,8 +1106,10 @@ menu_index() {
 			
 			self add_toggle("One Shot Zombies", ::one_shot_zombies, self.one_shot_zombies);
 			self add_toggle("Freeze Zombies", ::freeze_zombies, self.freeze_zombies);
+			self add_toggle("Disable Zombie Spawns", ::zombies_spawn, self.zombies_spawn);
+			
 			self add_toggle("Zombie ESP", ::outline_zombies, self.outline_zombies);
-			self add_increment("Set ESP Color", ::set_outline_color, 0, 0, 5, 1, true);
+			self add_increment("Set ESP Color", ::set_outline_color, 0, 0, 5, 1, true, "outline");
 			
 			break;
 		case "Visual Options":
@@ -1157,7 +1160,7 @@ menu_index() {
 			
 			self add_option("Give All Soul Keys", ::unlock_soul_keys);
 			self add_option("Unlock " + self.syn["maps"][level.mapName] + " Talisman", ::unlock_talismans);
-			self add_toggle("Temp Director's Cut", ::temp_directors_cut, self.directorsCut);
+			self add_toggle("Temp Director's Cut", ::temp_directors_cut, self.temp_directors_cut);
 			
 			break;
 		case "Give Perks":
@@ -1258,9 +1261,41 @@ menu_index() {
 			}
 			
 			break;
+		case "Zombies in Spaceland":
+			self add_menu(menu, menu.size, 2);
+			
+			self add_increment("Give Tickets", ::give_tickets, 50, 50, 950, 50);
+			self add_option("Turn on Power & Open Doors", scripts\cp\zombies\direct_boss_fight::open_sesame);
+			self add_option("Move UFO to Main Portal", ::move_ufo_to_center_portal);
+			self add_option("Move UFO to Spawn", ::move_ufo_to_spawn);
+			self add_toggle("UFO Follows Player", ::ufo_follow_player, self.ufo_follow_player);
+			self add_toggle("Random UFO Colors", ::cycle_ufo_colors, self.cycle_ufo_colors);
+			self add_option("Spawn Alien Fuses", ::drop_alien_fuses);
+			
+			break;
+		case "Rave in the Redwoods":
+			self add_menu(menu, menu.size, 2);
+			
+			self add_option("Turn on Power & Open Doors", scripts\cp\zombies\direct_boss_fight::open_sesame);
+		
+			break;
+		case "Shaolin Shuffle":
+			self add_menu(menu, menu.size, 4);
+			
+			self add_option("Turn on Power & Open Doors", scripts\cp\zombies\direct_boss_fight::open_sesame);
+		
+			break;
+		case "Attack of the Radioactive Thing":
+			self add_menu(menu, menu.size, 8);
+			
+			self add_option("Turn on Power & Open Doors", scripts\cp\zombies\direct_boss_fight::open_sesame);
+			self add_toggle("Full Color", ::attack_toggle_full_color, self.full_color);
+		
+			break;
 		case "The Beast from Beyond":
 			self add_menu(menu, menu.size, 5);
 			
+			self add_option("Turn on Power & Open Doors", ::beast_open_sesame);
 			self add_option("Complete Venom-X Quest", ::complete_venom_x);
 
 			break;
@@ -1348,6 +1383,16 @@ menu_index() {
 			self add_menu(menu, menu.size);
 			
 			category = "melees";
+			
+			for(i = 0; i < self.syn["weapons"][category][0].size; i++) {
+				self add_option(self.syn["weapons"][category][1][i], ::give_weapon, self.syn["weapons"][category][0][i], category, i);
+			}
+			
+			break;
+		case "Specialist Weapons":
+			self add_menu(menu, menu.size);
+			
+			category = "specials";
 			
 			for(i = 0; i < self.syn["weapons"][category][0].size; i++) {
 				self add_option(self.syn["weapons"][category][1][i], ::give_weapon, self.syn["weapons"][category][0][i], category, i);
@@ -1529,11 +1574,6 @@ set_points(value) {
 	self setPlayerData("cp", "alienSession", "currency", value);
 }
 
-give_tickets(value) {
-	self playLocalSound("zmb_ui_earn_tickets");
-	scripts\cp\zombies\arcade_game_utility::give_player_tickets(self, value);
-}
-
 // Off Host Options
 
 demi_god_mode() {
@@ -1648,9 +1688,9 @@ give_weapon(weapon, category, index) {
 			weapon += "_pap" + papLevel + "+camo222";
 		} else if(weapon == "iw7_forgefreeze_zm+forgefreezealtfire") {
 			weapon += "+freeze" + papText;
-		} else if(weapon == "iw7_spaceland_wmd" || weapon == "iw7_fists_zm" || weapon == "iw7_entangler_zm") {
+		} else if(weapon == "iw7_spaceland_wmd" || weapon == "iw7_fists_zm" || weapon == "iw7_entangler_zm" || weapon == "iw7_atomizer_mp" || weapon == "iw7_penetrationrail_mp+penetrationrailscope" || weapon == "iw7_steeldragon_mp" || weapon == "iw7_claw_mp" || weapon == "iw7_blackholegun_mp+blackholegunscope" || weapon == "iw7_cutie_zm") {
 		} else {
-			weapon = build_custom_weapon(weapon, undefined, [papText]);
+			weapon = build_custom_weapon(weapon, papCamo, [papText]);
 		}
 	} else {
 		switch(weapon) {
@@ -1663,8 +1703,14 @@ give_weapon(weapon, category, index) {
 			case "iw7_nunchucks_zm":
 			case "iw7_forgefreeze_zm+forgefreezealtfire":
 			case "iw7_spaceland_wmd":
+			case "iw7_cutie_zm":
 			case "iw7_fists_zm":
 			case "iw7_entangler_zm":
+			case "iw7_atomizer_mp":
+			case "iw7_penetrationrail_mp+penetrationrailscope":
+			case "iw7_steeldragon_mp":
+			case "iw7_claw_mp":
+			case "iw7_blackholegun_mp+blackholegunscope":
 				break;
 			default:
 				weapon = build_custom_weapon(weapon, undefined, undefined);
@@ -1681,15 +1727,28 @@ give_weapon(weapon, category, index) {
 			self takeWeapon(self getCurrentWeapon());
 		}
 		
-		if(weapon == "iw7_spaceland_wmd") {
+		if(weapon == "iw7_spaceland_wmd" || weapon == "iw7_fists_zm" || weapon == "iw7_entangler_zm" || weapon == "iw7_atomizer_mp" || weapon == "iw7_penetrationrail_mp+penetrationrailscope" || weapon == "iw7_steeldragon_mp" || weapon == "iw7_claw_mp" || weapon == "iw7_blackholegun_mp+blackholegunscope" || weapon == "iw7_cutie_zm") {
 			self giveWeapon(weapon);
 			self switchToWeapon(weapon);
+			wait 1;
+			self setWeaponAmmoClip(self getCurrentWeapon(), 999);
+			self setWeaponAmmoClip(self getCurrentWeapon(), 999, "left");
+			self setWeaponAmmoClip(self getCurrentWeapon(), 999, "right");
+			
 		} else {
 			self giveWeapon(return_weapon_name_with_like_attachments(weapon));
 			self switchToWeapon(return_weapon_name_with_like_attachments(weapon));
+			wait 1;
+			self setWeaponAmmoClip(self getCurrentWeapon(), 999);
+			self setWeaponAmmoClip(self getCurrentWeapon(), 999, "left");
+			self setWeaponAmmoClip(self getCurrentWeapon(), 999, "right");
 		}
 	} else {
 		self switchToWeaponImmediate(return_weapon_name_with_like_attachments(weapon));
+		wait 1;
+		self setWeaponAmmoClip(self getCurrentWeapon(), 999);
+		self setWeaponAmmoClip(self getCurrentWeapon(), 999, "left");
+		self setWeaponAmmoClip(self getCurrentWeapon(), 999, "right");
 	}
 }
 
@@ -1797,6 +1856,21 @@ freeze_zombies() {
 		forEach(zombie in get_zombies()) {
 			zombie freezeControls(false);
 		}
+	}
+}
+
+zombies_spawn() {
+	self.zombies_spawn = !return_toggle(self.zombies_spawn);
+	if(self.zombies_spawn) {
+		self iPrintln("Disable Zombie Spawns [^2ON^7]");
+		scripts\engine\utility::flag_set("pause_wave_progression");
+		level.zombies_paused = 1;
+		level.dont_resume_wave_after_solo_afterlife = 1;
+	} else {
+		self iPrintln("Disable Zombie Spawns [^1OFF^7]");
+		level.dont_resume_wave_after_solo_afterlife = undefined;
+		level.zombies_paused = 0;
+		scripts\engine\utility::flag_clear("pause_wave_progression");
 	}
 }
 
@@ -1989,8 +2063,8 @@ unlock_talismans() {
 }
 
 temp_directors_cut() {
-	self.directorsCut = !return_toggle(self.directorsCut);
-	if(self.directorsCut) {
+	self.temp_directors_cut = !return_toggle(self.temp_directors_cut);
+	if(self.temp_directors_cut) {
 		self iPrintln("Temp Director's Cut [^2Unlocked^7]");
 		self setPlayerData("cp", "dc", 1);
 	} else {
@@ -2001,7 +2075,222 @@ temp_directors_cut() {
 
 // Map Specific
 
+// Zombies in Spaceland
+
+give_tickets(value) {
+	self playLocalSound("zmb_ui_earn_tickets");
+	scripts\cp\zombies\arcade_game_utility::give_player_tickets(self, value);
+}
+
+// UFO
+
+cycle_ufo_colors() {
+	self.cycle_ufo_colors = !return_toggle(self.cycle_ufo_colors);
+	if(self.cycle_ufo_colors) {
+		self iPrintln("Cycle UFO Colors [^2ON^7]");
+		self thread cycle_ufo_loop();
+	} else {
+		self iPrintln("Cycle UFO Colors [^1OFF^7]");
+		self notify("stop_cycle_ufo_colors");
+	}
+}
+
+cycle_ufo_loop() {
+	self endOn("stop_cycle_ufo_colors");
+	for(;;) {
+		for(i = 1; i < 6; i++) {
+			level.ufo setmodel(get_ufo_model(i));
+			wait 0.5;
+		}
+	}
+}
+
+get_ufo_model(color) {
+	switch(color) {
+		case 1:
+			return "zmb_spaceland_ufo_blue";
+		case 2:
+			return "zmb_spaceland_ufo_green";
+		case 3:
+			return "zmb_spaceland_ufo_yellow";
+		case 4:
+			return "zmb_spaceland_ufo_red";
+		case 5:
+			return "zmb_spaceland_ufo";
+		default:
+			break;
+	}
+}
+
+play_ufo_start_vfx() {
+	snow_vfx_1 = (-1066.27, -2577.7, 2051.62);
+	snow_vfx_2 = (-2164.96, -2780.52, 1923.13);
+	snow_vfx_3 = (-1710.99, -2499.7, 1618.13);
+	playSoundAtPos((-1198, -2137, 1946), "zmb_ufo_break_free_ice");
+	playFx(level._effect["vfx_ufo_snow"], snow_vfx_1);
+	playFx(level._effect["vfx_ufo_snow"], snow_vfx_2);
+	wait .8;
+	playFx(level._effect["vfx_ufo_snow"], snow_vfx_3);
+}
+
+move_ufo_to_center_portal() {
+	if(!isDefined(level.ufo_spawned)) {
+		level.ufo_spawned = 1;
+		level thread play_ufo_start_vfx();
+		ufo = level.ufo;
+		ufo.angles = vectorToAngles((1, 0, 0));
+		ufo playLoopSound("ufo_movement_lp");
+		ufo.origin = (647, 621, 901);
+		ufo.angles = (0, 0, 0);
+		ufo scriptModelPlayAnim("zmb_spaceland_ufo_breakaway", 1);
+		ufo setScriptablePartState("thrusters", "on");
+		wait(7);
+		ufo scriptModelPlayAnim("zmb_spaceland_ufo_idle");
+		scripts\engine\utility::flag_set("ufo_intro_reach_center_portal");
+	} else {
+		level.ufo moveto((647, 621, 901), 5);
+		level.ufo waittill("movedone");
+	}
+}
+
+move_ufo_to_spawn() {
+	level.ufo moveto((650, 2265, 901), 5);
+	level.ufo waittill("movedone");
+}
+
+ufo_follow_player() {
+	self.ufo_follow_player = !return_toggle(self.ufo_follow_player);
+	if(self.ufo_follow_player) {
+		self iPrintln("UFO Follows Player [^2ON^7]");
+		self thread ufo_follow_player_loop();
+	} else {
+		self iPrintln("UFO Follows Player [^1OFF^7]");
+		self notify("stop_ufo_follow_player");
+	}
+}
+
+ufo_follow_player_loop() {
+	self endOn("stop_ufo_follow_player");
+	for(;;) {
+		level.ufo moveto((level.players[0].origin[0], level.players[0].origin[1], 901), 5);
+		level.ufo waittill("movedone");
+	}
+}
+
+// Zombies
+
+toggle_clowns() {
+	foreach(zombie in level.spawned_enemies) {
+		if(isdefined(zombie.agent_type) && zombie.agent_type == "generic_zombie") {
+			zombie scripts\asm\zombie\zombie::turnintosuicidebomber(1);
+			zombie setavoidanceradius(4);
+			wait(randomFloatRange(0.3, 0.7));
+		}
+	}
+}
+
+// Fuses
+
+drop_alien_fuses() {
+	var_00 = spawn("script_model", (657, 765, 105));
+	var_00 setModel("park_alien_gray_fuse");
+	var_00.angles = (randomIntRange(0, 360), randomIntRange(0, 360), randomIntRange(0, 360));
+	var_01 = spawn("script_model", (641, 765, 105));
+	var_01 setModel("park_alien_gray_fuse");
+	var_01.angles = (randomIntRange(0, 360), randomIntRange(0, 360), randomIntRange(0, 360));
+	var_01 thread delay_spawn_glow_vfx_on(var_01, "souvenir_glow");
+	var_01 thread item_keep_rotating(var_01);
+	var_00 thread delay_spawn_glow_vfx_on(var_00, "souvenir_glow");
+	var_00 thread item_keep_rotating(var_00);
+	var_00 thread fuse_pick_up_monitor(var_00, var_01);
+}
+
+delay_spawn_glow_vfx_on(param_00, param_01) {
+	param_00 endOn("death");
+	wait(0.3);
+	playFxOnTag(level._effect[param_01], param_00, "tag_origin");
+}
+
+item_keep_rotating(param_00) {
+	param_00 endOn("death");
+	var_01 = param_00.angles;
+	for(;;) {
+		param_00 rotateTo(var_01 + (randomIntRange(-40, 40), randomIntRange(-40, 90), randomIntRange(-40, 90)), 3);
+		wait(3);
+	}
+}
+
+fuse_pick_up_monitor(param_00, param_01) {
+	param_00 endOn("death");
+	param_00 makeUsable();
+	param_00 setHintString(&"CP_ZMB_UFO_PICK_UP_FUSE");
+	foreach(var_03 in level.players) {
+		var_03 thread scripts\cp\cp_vo::add_to_nag_vo("nag_ufo_fusefail", "zmb_comment_vo", 60, 15, 6, 1);
+	}
+
+	for(;;) {
+		param_00 waitTill("trigger", var_03);
+		if(isplayer(var_03)) {
+			var_03 playLocalSound("part_pickup");
+			var_03 thread scripts\cp\cp_vo::try_to_play_vo("quest_ufo_collect_alienfuse_2", "zmb_comment_vo", "highest", 10, 0, 0, 1, 100);
+			break;
+		}
+	}
+
+	level.num_fuse_in_possession++;
+	scripts\cp\cp_interaction::add_to_current_interaction_list(scripts\engine\utility::getStruct("pap_upgrade", "script_noteworthy"));
+	scripts\cp\cp_interaction::remove_from_current_interaction_list(scripts\engine\utility::getStruct("weapon_upgrade", "script_noteworthy"));
+	level thread scripts\cp\cp_vo::remove_from_nag_vo("nag_ufo_fusefail");
+	foreach(var_03 in level.players) {
+		var_03 setClientOmnvar("zm_special_item", 1);
+	}
+
+	param_01 delete();
+	param_00 delete();
+}
+
+// Attack of the Radioactive Thing
+
+attack_toggle_full_color() {
+	self.full_color = !return_toggle(self.full_color);
+	if(self.full_color) {
+		self iPrintln("Full Color [^2On^7]");
+		level.current_vision_set = "cp_town_color";
+		level.vision_set_override = level.current_vision_set;
+		self visionsetnakedforplayer("cp_town_color", 1);
+		level.film_grain_off = 1;
+	} else {
+		self iPrintln("Full Color [^1Off^7]");
+		level.current_vision_set = "cp_town_bw";
+		level.vision_set_override = level.current_vision_set;
+		self visionsetnakedforplayer("cp_town_bw", 1);
+		level.film_grain_off = 0;
+	}
+}
+
 // Beast from Beyond
+
+beast_open_sesame() {
+	scripts\engine\utility::flag_set("neil_head_found");
+	scripts\engine\utility::flag_set("neil_head_placed");
+	scripts\engine\utility::flag_set("restorepower_step1");
+	scripts\engine\utility::flag_set("power_on");
+	level notify("power_on");
+	
+	scripts\cp\utility::set_quest_icon(6);
+	var_00 = scripts\engine\utility::getstructarray("neil_head","script_noteworthy");
+	foreach(var_02 in var_00) {
+		if(isdefined(var_02.headmodel)) {
+			var_02.headmodel delete();
+		}
+	}
+	
+	foreach(door in level.allslidingdoors) {
+		door.player_opened = 1;
+		thread [[level.interactions[door.script_noteworthy].activation_func]](door,undefined);
+	}
+}
+
 complete_venom_x() {
 	scripts\engine\utility::flag_set("completepuzzles_step4");
 	getent("venomx_locker_door","script_noteworthy") rotateTo((0,105,0),0.1);
