@@ -1796,7 +1796,7 @@ get_zombies() {
 spawn_zombie(archetype, team) {
 	if(archetype == "zombie_grey") {
 		weapon = "iw7_zapper_grey";
-	} else if(archetype == "the_hoff") {
+	} else if(archetype == "the_hoff" || archetype == "elvira") {
 		weapon = "iw7_ake_zmr+akepap2";
 	} else {
 		weapon = undefined;
