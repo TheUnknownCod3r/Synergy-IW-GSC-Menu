@@ -8,7 +8,7 @@ If you have any Issues/Suggestions, please Submit them in [Issues](https://githu
 
 #### Youtube Showcase:
 
-[![Showcase](https://img.youtube.com/vi/RgkMBqLNRxY/0.jpg)](https://www.youtube.com/watch?v=RgkMBqLNRxY "Synergy GSC Mod Menu Showcase")
+[![Showcase](https://syndishanx.github.io/Synergy-IW-GSC-Menu/Youtube-Thumbnail.png)](https://www.youtube.com/watch?v=RgkMBqLNRxY "Synergy GSC Mod Menu Showcase")
 
 #### Preview:
 
