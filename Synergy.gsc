@@ -654,7 +654,7 @@ initial_monitor() {
 						self close_menu();
 					}
 					
-					wait 1;
+					wait .75; // Knife Cooldown
 				}
 				else if(self adsButtonPressed() && !self attackButtonPressed() || self attackButtonPressed() && !self adsButtonPressed()) {
 					if(isDefined(self.structure) && self.structure.size >= 2) {
@@ -772,9 +772,11 @@ create_option() {
 			}
 			
 			for(x = 0; x < 15; x++) {
-				if(isDefined(self.syn["hud"]["arrow"][0][x])) {
-					self.syn["hud"]["arrow"][0][x] destroy();
-					self.syn["hud"]["arrow"][1][x] destroy();
+				if(x != self get_cursor()) {
+					if(isDefined(self.syn["hud"]["arrow"][0][x])) {
+						self.syn["hud"]["arrow"][0][x] destroy();
+						self.syn["hud"]["arrow"][1][x] destroy();
+					}
 				}
 			}
 			
@@ -784,8 +786,8 @@ create_option() {
 				} else {
 					if(cursor) {
 						self.syn["hud"]["slider"][0][index] = self create_text(self.slider[self get_menu() + "_" + index], self.syn["utility"].font, (self.syn["utility"].font_scale - 0.1), "left", "CENTER", (self.syn["utility"].x_offset + 155), (self.syn["utility"].y_offset + ((i * self.syn["utility"].option_spacing) + 17)), self.syn["utility"].color[4], 1, 10);
-						self.syn["hud"]["arrow"][0][index] = self create_text("<", self.syn["utility"].font, self.syn["utility"].font_scale, "left", "CENTER", (self.syn["utility"].x_offset + 129), (self.syn["utility"].y_offset + ((i * self.syn["utility"].option_spacing) + 16)), self.syn["utility"].color[4], 1, 10); // Slider Arrow
-						self.syn["hud"]["arrow"][1][index] = self create_text(">", self.syn["utility"].font, self.syn["utility"].font_scale, "left", "CENTER", (self.syn["utility"].x_offset + 185), (self.syn["utility"].y_offset + ((i * self.syn["utility"].option_spacing) + 16)), self.syn["utility"].color[4], 1, 10); // Slider Arrow
+						self.syn["hud"]["arrow"][0][self get_cursor()] = self create_text("<", self.syn["utility"].font, self.syn["utility"].font_scale, "left", "CENTER", (self.syn["utility"].x_offset + 129), (self.syn["utility"].y_offset + ((i * self.syn["utility"].option_spacing) + 16)), self.syn["utility"].color[4], 1, 10); // Slider Arrow
+						self.syn["hud"]["arrow"][1][self get_cursor()] = self create_text(">", self.syn["utility"].font, self.syn["utility"].font_scale, "left", "CENTER", (self.syn["utility"].x_offset + 185), (self.syn["utility"].y_offset + ((i * self.syn["utility"].option_spacing) + 16)), self.syn["utility"].color[4], 1, 10); // Slider Arrow
 					} else {
 						self.syn["hud"]["arrow"][0][index] destroy();
 						self.syn["hud"]["arrow"][1][index] destroy();
@@ -1062,8 +1064,8 @@ menu_index() {
 			self add_toggle("UFO", ::ufo_mode, self.ufo_mode);
 			self add_toggle("Infinite Ammo", ::infinite_ammo, self.infinite_ammo);
 			self add_toggle("Self Revive", ::self_revive, self.self_revive);
-			self add_toggle("Super Speed", ::super_speed, self.super_speed);
 			self add_toggle("Exo Movement", ::exo_movement, self.exo_movement);
+			self add_increment("Set Speed", ::set_speed, 190, 190, 1190, 50);
 			
 			self add_option("Give Perks", ::new_menu, "Give Perks");
 			self add_option("Take Perks", ::new_menu, "Take Perks");
@@ -1540,17 +1542,6 @@ self_revive_loop() {
 	}
 }
 
-super_speed() {
-	self.super_speed = !return_toggle(self.super_speed);
-	if(self.super_speed) {
-		self iPrintln("Super Speed [^2ON^7]");
-		setdvar("g_speed", 999);
-	} else {
-		self iPrintln("Super Speed [^1OFF^7]");
-		setdvar("g_speed", 190);
-	}
-}
-
 exo_movement() {
 	self.exo_movement = !return_toggle(self.exo_movement);
 	if(self.exo_movement) {
@@ -1564,6 +1555,10 @@ exo_movement() {
 		self allowwallrun(0);
 		self allowdodge(0);
 	}
+}
+
+set_speed(value) {
+	setdvar("g_speed", value);
 }
 
 give_perkaholic() {
