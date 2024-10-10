@@ -393,7 +393,11 @@ initial_variable() {
 	self.syn["utility"].y_offset = 100;
 	self.syn["utility"].element_list = ["text", "subMenu", "toggle", "category", "slider"];
 	
-	self.syn["visions"] = ["ac130", "ac130_enhanced_mp", "ac130_inverted", "aftermath", "aftermath_glow", "aftermath_post", "apex_mp", "black_bw", "cp_frontend", "cp_zmb", "cp_zmb_afterlife", "cp_zmb_alien", "cp_zmb_bw", "cp_zmb_ghost_path", "cp_zmb_int_basement", "cp_zmb_int_triton_main", "default", "default_night", "default_night_mp", "dronehive_mp", "end_game", "europa", "jackal_streak_mp", "last_stand_cp_zmb", "map_select_mp", "missilecam", "mpintro", "mpnuke", "mpnuke_aftermath", "mpoutro", "mp_frontier", "mp_frontier_alt", "mp_frontier_basement", "mp_frontier_mainfog", "mp_out_of_bounds", "near_death", "near_death_mp", "nuke_global_flash", "opticwave_mp", "overcharge_mp", "phase_shif t_mp", "rc8_mp", "thermal_mp", "thermal_snowlevel_mp", "thorbright_mp", "thor_mp", "venomgas_mp"];
+	self.syn["visions"][0] = ["None", "AC-130", "AC-130 Enhanced", "AC-130 inverted", "Aftermath", "Aftermath Glow", "Aftermath Post", "Apex", "Black & White", "Lobby", "Afterlife", "Zombies", "Zombies in Spaceland", "Zombies in Spaceland Black & White", "Zombies in Spaceland Ghost Path", "Zombies in Spaceland Basement", "Zombies in Spaceland Triton", "Default", "Default Night", "Night Vision", "Dronehive", "Endgame", "Europa", "Jackal", "Last Stand", "MP Map Select", "Missile Cam", "MP Intro", "MP Outro", "MP Nuke", "MP Nuke Aftermath", "Frontier", "Out of Bounds", "Nuke Flash", "Optic Wave", "RC8", "Thor Bright", "Thor", "Venom Gas"];
+	self.syn["visions"][1] = ["", "ac130", "ac130_enhanced_mp", "ac130_inverted", "aftermath", "aftermath_glow", "aftermath_post", "apex_mp", "black_bw", "cp_frontend", "cp_zmb_afterlife", "cp_zmb_alien", "cp_zmb", "cp_zmb_bw", "cp_zmb_ghost_path", "cp_zmb_int_basement", "cp_zmb_int_triton_main", "default", "default_night", "default_night_mp", "dronehive_mp", "end_game", "europa", "jackal_streak_mp", "last_stand_cp_zmb", "map_select_mp", "missilecam", "mpintro", "mpoutro", "mpnuke", "mpnuke_aftermath", "mp_frontier", "mp_out_of_bounds", "nuke_global_flash", "opticwave_mp", "rc8_mp", "thorbright_mp", "thor_mp", "venomgas_mp"];
+	
+	self.syn["powerups"][0] = ["Nuke", "Max Ammo", "Instakill", "Double Money", "Carpenter", "Pack-a-Punch", "Fire Sale", "Infinite Ammo", "Infinite Grenades"];
+	self.syn["powerups"][1] = ["kill_50", "ammo_max", "instakill_30", "cash_2", "board_windows", "upgrade_weapons", "fire_30", "infinite_20", "grenade_30"];
 	
 	self.syn["weapons"]["category"] = ["Assault Rifles", "Sub Machine Guns", "Light Machine Guns", "Sniper Rifles", "Shotguns", "Pistols", "Launchers", "Classic Weapons", "Melee Weapons", "Specialist Weapons", "Map Specific Weapons", "Other Weapons"];
 	
@@ -445,22 +449,22 @@ initial_variable() {
 	self.syn["weapons"]["cp_zmb"][0] =   ["iw7_forgefreeze_zm+forgefreezealtfire", "iw7_dischord_zm", "iw7_facemelter_zm", "iw7_headcutter_zm", "iw7_shredder_zm", "iw7_spaceland_wmd"];
 	self.syn["weapons"]["cp_zmb"][1] =   ["Forge Freeze", "Dischord", "Face Melter", "Head Cutter", "Shredder", "NX 2.0"];
 	self.syn["weapons"]["cp_zmb"][2] =   ["", "", "", "", "", ""];
-	self.syn["weapons"]["cp_zmb"][3] =   ["", "", " ", "", "", ""];
+	self.syn["weapons"]["cp_zmb"][3] =   ["", "", "", "", "", ""];
 	// Rave in the Redwoods Weapons															 
 	self.syn["weapons"]["cp_rave"][0] =  ["iw7_golf_club_mp", "iw7_spiked_bat_mp", "iw7_two_headed_axe_mp", "iw7_machete_mp", "iw7_harpoon1_zm", "iw7_harpoon2_zm", "iw7_harpoon3_zm+akimbo", "iw7_harpoon4_zm"];
 	self.syn["weapons"]["cp_rave"][1] =  ["Golf Club", "Spiked Bat", "2 Headed Axe", "Machete", "Harpoon Gun 1", "Harpoon Gun 2", "Harpoon Gun 3", "Harpoon Gun 4"];
-	self.syn["weapons"]["cp_rave"][2] =  ["", "", "", ""];
-	self.syn["weapons"]["cp_rave"][3] =  ["", "", "", ""];
+	self.syn["weapons"]["cp_rave"][2] =  ["", "", "", "", "", "", "", ""];
+	self.syn["weapons"]["cp_rave"][3] =  ["", "", "", "", "", "", "", ""];
 	// Shaolin Shuffle Weapons
 	self.syn["weapons"]["cp_disco"][0] = ["iw7_katana_zm", "iw7_nunchucks_zm", "crane", "snake", "dragon", "tiger"];					 
 	self.syn["weapons"]["cp_disco"][1] = ["Katana", "Nunchucks", "Crane Chi", "Snake Chi", "Dragon Chi", "Tiger Chi"];
-	self.syn["weapons"]["cp_disco"][2] = ["", ""];
-	self.syn["weapons"]["cp_disco"][3] = ["", ""];
+	self.syn["weapons"]["cp_disco"][2] = ["", "", "", "", "", ""];
+	self.syn["weapons"]["cp_disco"][3] = ["", "", "", "", "", ""];
 	// Attack of the Radioactive Thing Weapons
 	self.syn["weapons"]["cp_town"][0] =  ["iw7_cutie_zm"];
 	self.syn["weapons"]["cp_town"][1] =  ["Modular Atomic Disintegrator"];
-	self.syn["weapons"]["cp_town"][2] =  ["", "", ""];
-	self.syn["weapons"]["cp_town"][3] =  ["", "", ""];
+	self.syn["weapons"]["cp_town"][2] =  [""];
+	self.syn["weapons"]["cp_town"][3] =  [""];
 	// Beast from Beyond Weapons
 	self.syn["weapons"]["cp_final"][0] = ["iw7_venomx_zm"];					 				 
 	self.syn["weapons"]["cp_final"][1] = ["Venom-X"];
@@ -469,8 +473,11 @@ initial_variable() {
 	// Misc Weapons
 	self.syn["weapons"]["other"][0] =    ["iw7_fists_zm", "iw7_entangler_zm"];	
 	self.syn["weapons"]["other"][1] =    ["Fists", "Entangler"];
-	self.syn["weapons"]["other"][2] =    ["", "", "", ""];
-	self.syn["weapons"]["other"][3] =    ["", "", "", ""];
+	self.syn["weapons"]["other"][2] =    ["", ""];
+	self.syn["weapons"]["other"][3] =    ["", ""];
+	// Melee Weapons
+	self.syn["melee"]["cp_town"][0] =    ["iw7_knife_zm_cleaver", "iw7_knife_zm_crowbar"];	
+	self.syn["melee"]["cp_town"][1] =    ["Cleaver", "Crowbar"];
 	// PaP Camos
 	self.syn["camos"]["cp_zmb"] = ["+camo1", "+camo4"];
 	self.syn["camos"]["cp_rave"] = ["+camo204", "+camo205"];
@@ -1047,8 +1054,8 @@ menu_index() {
 			self.syn["hud"]["title"][0].x = self.syn["utility"].x_offset + 86;
 			
 			self add_option("Basic Options", ::new_menu, "Basic Options");
-			self add_option("Off-Host Options", ::new_menu, "Off-Host Options");
 			self add_option("Weapon Options", ::new_menu, "Weapon Options");
+			self add_option("Spawn Powerups", ::new_menu, "Spawn Powerups");
 			self add_option("Zombie Options", ::new_menu, "Zombie Options");
 			self add_option("Visual Options", ::new_menu, "Visual Options");
 			self add_option("Teleport Options", ::new_menu, "Teleport Options");
@@ -1073,12 +1080,15 @@ menu_index() {
 			
 			self add_increment("Set Points", ::set_points, 100, 100, 100000, 100);
 			
-			break;
-		case "Off-Host Options":
-			self add_menu(menu, menu.size);
+			self add_option("Off-Host Options", ::new_menu, "Off-Host Options");
 			
-			self add_toggle("Demi God Mode", ::demi_god_mode, self.demi_god_mode);
-			self add_toggle("Spectator No Clip", ::spectator_no_clip, self.spectator_no_clip);
+			break;
+		case "Spawn Powerups":
+			self add_menu(menu, menu.size, 1);
+			
+			for(i = 0; i < self.syn["powerups"][0].size; i++) {
+				self add_option(self.syn["powerups"][0][i], ::spawn_powerup, self.syn["powerups"][1][i]);
+			}
 			
 			break;
 		case "Weapon Options":
@@ -1165,6 +1175,13 @@ menu_index() {
 			self add_toggle("Temp Director's Cut", ::temp_directors_cut, self.temp_directors_cut);
 			
 			break;
+		case "Off-Host Options":
+			self add_menu(menu, menu.size);
+			
+			self add_toggle("Demi God Mode", ::demi_god_mode, self.demi_god_mode);
+			self add_toggle("Spectator No Clip", ::spectator_no_clip, self.spectator_no_clip);
+			
+			break;
 		case "Give Perks":
 			self add_menu(menu, menu.size, 5);
 			
@@ -1208,8 +1225,8 @@ menu_index() {
 		case "Visions":
 			self add_menu(menu, menu.size);
 			
-			for(i = 0; i < self.syn["visions"].size; i++) {
-				self add_option(self.syn["visions"][i], ::set_vision, self.syn["visions"][i]);
+			for(i = 0; i < self.syn["visions"][0].size; i++) {
+				self add_option(self.syn["visions"][0][i], ::set_vision, self.syn["visions"][1][i]);
 			}
 
 			break;
@@ -1268,6 +1285,7 @@ menu_index() {
 			
 			self add_increment("Give Tickets", ::give_tickets, 50, 50, 950, 50);
 			self add_option("Turn on Power & Open Doors", scripts\cp\zombies\direct_boss_fight::open_sesame);
+			self add_toggle("Show Dischord Targets", ::show_dischord_targets, self.show_dischord_targets);
 			self add_option("Move UFO to Main Portal", ::move_ufo_to_center_portal);
 			self add_option("Move UFO to Spawn", ::move_ufo_to_spawn);
 			self add_toggle("UFO Follows Player", ::ufo_follow_player, self.ufo_follow_player);
@@ -1279,18 +1297,21 @@ menu_index() {
 			self add_menu(menu, menu.size, 2);
 			
 			self add_option("Turn on Power & Open Doors", scripts\cp\zombies\direct_boss_fight::open_sesame);
-		
+			self add_toggle("Rave Mode", ::enable_rave_mode, self.enable_rave_mode);
+			self add_option("Complete Vlad Quest", ::complete_vlad);
+
 			break;
 		case "Shaolin Shuffle":
 			self add_menu(menu, menu.size, 4);
 			
 			self add_option("Turn on Power & Open Doors", scripts\cp\zombies\direct_boss_fight::open_sesame);
+			self add_toggle("Unlimited Chi", ::unlimited_chi, self.unlimited_chi);
 		
 			break;
 		case "Attack of the Radioactive Thing":
 			self add_menu(menu, menu.size, 8);
 			
-			self add_option("Turn on Power & Open Doors", scripts\cp\zombies\direct_boss_fight::open_sesame);
+			self add_option("Open Doors", scripts\cp\zombies\direct_boss_fight::open_sesame);
 			self add_toggle("Full Color", ::attack_toggle_full_color, self.full_color);
 		
 			break;
@@ -1388,6 +1409,14 @@ menu_index() {
 			
 			for(i = 0; i < self.syn["weapons"][category][0].size; i++) {
 				self add_option(self.syn["weapons"][category][1][i], ::give_weapon, self.syn["weapons"][category][0][i], category, i);
+			}
+			
+			map = level.mapName;
+			
+			if(map == "cp_town") {
+				for(i = 0; i < self.syn["melee"][map][0].size; i++) {
+					self add_option(self.syn["melee"][map][1][i], ::give_melee, self.syn["melee"][map][0][i]);
+				}
 			}
 			
 			break;
@@ -1569,6 +1598,12 @@ set_points(value) {
 	self setPlayerData("cp", "alienSession", "currency", value);
 }
 
+// Powerups
+
+spawn_powerup(powerup) {
+	level scripts\cp\loot::drop_loot(self.origin + anglesToForward(self.angles) * 115, undefined, powerup, undefined, undefined, 1);
+}
+
 // Off Host Options
 
 demi_god_mode() {
@@ -1650,6 +1685,16 @@ give_double_packed_weapon() {
 	if(isDefined(self.give_packed_weapon) && self.give_packed_weapon == true) {
 		self.give_packed_weapon = !return_toggle(self.give_packed_weapon);
 	}
+}
+
+give_melee(weapon) {
+	if(isDefined(self.currentMeleeWeapon)) {
+		self takeWeapon(self.currentMeleeWeapon);
+	}
+	self giveWeapon(weapon);
+	self.default_starting_melee_weapon = weapon;
+	self.currentMeleeWeapon = weapon;
+	self.melee_weapon = weapon;
 }
 
 give_weapon(weapon, category, index) {
@@ -1750,7 +1795,7 @@ give_weapon(weapon, category, index) {
 build_custom_weapon(weapon, camo, extra_attachments) {
 	weapon_name = scripts\cp\utility::getrawbaseweaponname(weapon);
 	
-	if (isdefined(self.weapon_build_models[weapon_name])) {
+	if (isDefined(self.weapon_build_models[weapon_name])) {
 		weapon_model = self.weapon_build_models[weapon_name];
 		weapon_attachments = getweaponattachments(weapon_model);
 		weapon_build = scripts\engine\utility::array_combine(extra_attachments, weapon_attachments);
@@ -1796,7 +1841,7 @@ spawn_zombie(archetype, team) {
 	} else {
 		weapon = undefined;
 	}
-	scripts\mp\mp_agent::spawnNewAgent(archetype, team, self.origin + (0, 200, 0), self.angles, weapon);
+	scripts\mp\mp_agent::spawnNewAgent(archetype, team, self.origin + anglesToForward(self.angles) * 200, self.angles, weapon);
 }
 
 
@@ -1808,7 +1853,7 @@ kill_all_zombies() {
 
 teleport_zombies() {
 	forEach(zombie in get_zombies()) {
-		zombie setOrigin(self.origin + (20, 200, 20));
+		zombie setOrigin(self.origin + anglesToForward(self.angles) * 200);
 	}
 }
 
@@ -1933,7 +1978,7 @@ third_person() {
 
 set_vision(vision) {
 	self visionSetNakedForPlayer("", 0.1);
-	wait .1;
+	wait .25;
 	self visionSetNakedForPlayer(vision, 0.1);
 }
 
@@ -2077,6 +2122,17 @@ give_tickets(value) {
 	scripts\cp\zombies\arcade_game_utility::give_player_tickets(self, value);
 }
 
+show_dischord_targets() {
+	self.show_dischord_targets = !return_toggle(self.show_dischord_targets);
+	if(self.show_dischord_targets) {
+		self iPrintln("Show Dischord Targets [^2ON^7]");
+		self.wearing_dischord_glasses = 1;
+	} else {
+		self iPrintln("Show Dischord Targets [^1OFF^7]");
+		self.wearing_dischord_glasses = 0;
+	}
+}
+
 // UFO
 
 cycle_ufo_colors() {
@@ -2176,7 +2232,7 @@ ufo_follow_player_loop() {
 
 toggle_clowns() {
 	foreach(zombie in level.spawned_enemies) {
-		if(isdefined(zombie.agent_type) && zombie.agent_type == "generic_zombie") {
+		if(isDefined(zombie.agent_type) && zombie.agent_type == "generic_zombie") {
 			zombie scripts\asm\zombie\zombie::turnintosuicidebomber(1);
 			zombie setavoidanceradius(4);
 			wait(randomFloatRange(0.3, 0.7));
@@ -2244,18 +2300,50 @@ fuse_pick_up_monitor(param_00, param_01) {
 	param_00 delete();
 }
 
+// Rave in the Redwoods
+
+enable_rave_mode() {
+	self.enable_rave_mode = !return_toggle(self.enable_rave_mode);
+	if(self.enable_rave_mode) {
+		self iPrintln("Rave Mode [^2ON^7]");
+		self.rave_mode = 1;
+		self visionsetnakedforplayer("cp_rave_rave_mode", 0.1);
+	} else {
+		self iPrintln("Rave Mode [^1OFF^7]");
+		self.rave_mode = 0;
+		self visionsetnakedforplayer("", 0.1);
+	}
+}
+
+complete_vlad() {
+	scripts\engine\utility::flag_set("chains_unlocked");
+}
+
+// Shaolin Shuffle
+
+unlimited_chi() {
+	self.unlimited_chi = !return_toggle(self.unlimited_chi);
+	if(self.unlimited_chi) {
+		self iPrintln("Unlimited Chi [^2ON^7]");
+		self.unlimited_chi = 1;
+	} else {
+		self iPrintln("Unlimited Chi [^1OFF^7]");
+		self.unlimited_chi = 0;
+	}
+}
+
 // Attack of the Radioactive Thing
 
 attack_toggle_full_color() {
 	self.full_color = !return_toggle(self.full_color);
 	if(self.full_color) {
-		self iPrintln("Full Color [^2On^7]");
+		self iPrintln("Full Color [^2ON^7]");
 		level.current_vision_set = "cp_town_color";
 		level.vision_set_override = level.current_vision_set;
 		self visionsetnakedforplayer("cp_town_color", 1);
 		level.film_grain_off = 1;
 	} else {
-		self iPrintln("Full Color [^1Off^7]");
+		self iPrintln("Full Color [^1OFF^7]");
 		level.current_vision_set = "cp_town_bw";
 		level.vision_set_override = level.current_vision_set;
 		self visionsetnakedforplayer("cp_town_bw", 1);
@@ -2275,7 +2363,7 @@ beast_open_sesame() {
 	scripts\cp\utility::set_quest_icon(6);
 	var_00 = scripts\engine\utility::getstructarray("neil_head","script_noteworthy");
 	foreach(var_02 in var_00) {
-		if(isdefined(var_02.headmodel)) {
+		if(isDefined(var_02.headmodel)) {
 			var_02.headmodel delete();
 		}
 	}
