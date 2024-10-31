@@ -450,13 +450,13 @@ initial_variable() {
 	self.syn["weapons"]["cp_zmb"][1] =   ["Forge Freeze", "Dischord", "Face Melter", "Head Cutter", "Shredder", "NX 2.0"];
 	self.syn["weapons"]["cp_zmb"][2] =   ["", "", "", "", "", ""];
 	self.syn["weapons"]["cp_zmb"][3] =   ["", "", "", "", "", ""];
-	// Rave in the Redwoods Weapons															 
+	// Rave in the Redwoods Weapons															
 	self.syn["weapons"]["cp_rave"][0] =  ["iw7_golf_club_mp", "iw7_spiked_bat_mp", "iw7_two_headed_axe_mp", "iw7_machete_mp", "iw7_harpoon1_zm", "iw7_harpoon2_zm", "iw7_harpoon3_zm+akimbo", "iw7_harpoon4_zm"];
 	self.syn["weapons"]["cp_rave"][1] =  ["Golf Club", "Spiked Bat", "2 Headed Axe", "Machete", "Harpoon Gun 1", "Harpoon Gun 2", "Harpoon Gun 3", "Harpoon Gun 4"];
 	self.syn["weapons"]["cp_rave"][2] =  ["", "", "", "", "", "", "", ""];
 	self.syn["weapons"]["cp_rave"][3] =  ["", "", "", "", "", "", "", ""];
 	// Shaolin Shuffle Weapons
-	self.syn["weapons"]["cp_disco"][0] = ["iw7_katana_zm", "iw7_nunchucks_zm", "crane", "snake", "dragon", "tiger"];					 
+	self.syn["weapons"]["cp_disco"][0] = ["iw7_katana_zm", "iw7_nunchucks_zm", "crane", "snake", "dragon", "tiger"];					
 	self.syn["weapons"]["cp_disco"][1] = ["Katana", "Nunchucks", "Crane Chi", "Snake Chi", "Dragon Chi", "Tiger Chi"];
 	self.syn["weapons"]["cp_disco"][2] = ["", "", "", "", "", ""];
 	self.syn["weapons"]["cp_disco"][3] = ["", "", "", "", "", ""];
@@ -466,7 +466,7 @@ initial_variable() {
 	self.syn["weapons"]["cp_town"][2] =  [""];
 	self.syn["weapons"]["cp_town"][3] =  [""];
 	// Beast from Beyond Weapons
-	self.syn["weapons"]["cp_final"][0] = ["iw7_venomx_zm"];					 				 
+	self.syn["weapons"]["cp_final"][0] = ["iw7_venomx_zm"];					 				
 	self.syn["weapons"]["cp_final"][1] = ["Venom-X"];
 	self.syn["weapons"]["cp_final"][2] = [""];
 	self.syn["weapons"]["cp_final"][3] = [""];
@@ -1001,7 +1001,7 @@ onPlayerSpawned() {
 ^7 = White
 ^8 is a color that changes depending what level you are on.
 American maps = Dark Green
-Russian maps = Dark red/marroon
+Russian maps = Dark Red
 British maps = Dark Blue
 ^9 = Gray
 */
@@ -2084,7 +2084,7 @@ unlock_soul_keys() {
 
 unlock_talismans() {
 	if (level.script == "cp_zmb") {
-		self scripts\cp\cp_merits::processMerit("mt_tali_1"); 
+		self scripts\cp\cp_merits::processMerit("mt_tali_1");
 	} else if (level.script == "cp_rave") {
 		self scripts\cp\cp_merits::processMerit("mt_tali_2");
 	} else if (level.script == "cp_disco") {
