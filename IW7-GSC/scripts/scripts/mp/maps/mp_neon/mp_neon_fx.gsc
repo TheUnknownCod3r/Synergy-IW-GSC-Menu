@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\mp\maps\mp_neon\mp_neon_fx.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 1
- * Decompile Time: 103 ms
- * Timestamp: 10/27/2023 12:13:52 AM
-*******************************************************************/
+/**********************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\mp\maps\mp_neon\mp_neon_fx.gsc
+**********************************************************/
 
-//Function Number: 1
-main()
-{
+main() {
 	level._effect["vfx_level_regen_ping_bg"] = loadfx("vfx/iw7/levels/mp_neon/vfx_level_regen_ping_bg.vfx");
 	level._effect["vfx_corner_regen_ping"] = loadfx("vfx/iw7/levels/mp_neon/vfx_corner_regen_ping.vfx");
 	level._effect["vfx_bb_distant"] = loadfx("vfx/iw7/levels/mp_neon/vfx_bb_distant.vfx");

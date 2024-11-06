@@ -1,24 +1,15 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: 944.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 3
- * Decompile Time: 0 ms
- * Timestamp: 10/27/2023 12:32:11 AM
-*******************************************************************/
+/***************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\944.gsc
+***************************/
 
-//Function Number: 1
-func_F170(param_00)
-{
+func_F170(param_00) {
 	return scripts/aitypes/melee::melee_init(param_00,self.bt.var_F15D);
 }
 
-//Function Number: 2
-func_2AD0()
-{
-	if(isdefined(level.var_119E["seeker"]))
-	{
+func_2AD0() {
+	if(isdefined(level.var_119E["seeker"])) {
 		return;
 	}
 
@@ -37,9 +28,7 @@ func_2AD0()
 	level.var_119E["seeker"] = var_00;
 }
 
-//Function Number: 3
-func_DEE8()
-{
+func_DEE8() {
 	func_2AD0();
 	function_02D8("seeker");
 }

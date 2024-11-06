@@ -1,18 +1,11 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\anim\traverse\combatrun_forward_72.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 1
- * Decompile Time: 76 ms
- * Timestamp: 10\26\2023 11:59:24 PM
-*******************************************************************/
+/******************************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\anim\traverse\combatrun_forward_72.gsc
+******************************************************************/
 
-//Function Number: 1
-main()
-{
-	if(getdvarint("ai_iw7",0) == 1)
-	{
+main() {
+	if(getdvarint("ai_iw7",0) == 1) {
 		self waittill("killanimscript");
 		return;
 	}

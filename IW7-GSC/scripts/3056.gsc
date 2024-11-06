@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: 3056.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 3
- * Decompile Time: 1 ms
- * Timestamp: 10/27/2023 12:26:05 AM
-*******************************************************************/
+/****************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\3056.gsc
+****************************/
 
-//Function Number: 1
-main(param_00,param_01,param_02)
-{
+main(param_00,param_01,param_02) {
 	scripts/sp/vehicle_build::func_31C5("support_drone",param_00,param_01,param_02);
 	scripts/sp/vehicle_build::func_31A6(::init_location);
 	scripts/sp/vehicle_build::func_3186(param_00);
@@ -26,9 +20,7 @@ main(param_00,param_01,param_02)
 	scripts/sp/vehicle_build::func_31A0();
 }
 
-//Function Number: 2
-init_location()
-{
+init_location() {
 	self endon("death");
 	self.var_ED12 = 0;
 	self.var_5958 = 1;
@@ -39,19 +31,14 @@ init_location()
 	self makeentitysentient(self.script_team);
 }
 
-//Function Number: 3
-func_B786()
-{
+func_B786() {
 	self endon("death");
 	var_00 = level.var_13203[self.classname];
-	for(;;)
-	{
+	for(;;) {
 		self waittill("damage");
 		playfxontag(level._effect["_mini_drone_smoke"],self,"tag_engine");
-		if(self.health - self.var_8CB6 <= var_00 * 0.5)
-		{
-			while(isalive(self))
-			{
+		if(self.health - self.var_8CB6 <= var_00 * 0.5) {
+			while(isalive(self)) {
 				playfxontag(level._effect["_mini_drone_smoke"],self,"tag_engine");
 				playfxontag(level._effect["_mini_drone_spark"],self,"tag_engine");
 				wait(randomfloatrange(1,2));

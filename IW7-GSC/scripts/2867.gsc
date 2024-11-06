@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: 2867.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 1
- * Decompile Time: 0 ms
- * Timestamp: 10/27/2023 12:24:21 AM
-*******************************************************************/
+/****************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\2867.gsc
+****************************/
 
-//Function Number: 1
-func_95F3()
-{
+func_95F3() {
 	scripts\engine\utility::add_func_ref_MAYBE("setsaveddvar",::function_01C5);
 	scripts\engine\utility::add_func_ref_MAYBE("useanimtree",::glinton);
 	scripts\engine\utility::add_func_ref_MAYBE("setanim",::give_attacker_kill_rewards);

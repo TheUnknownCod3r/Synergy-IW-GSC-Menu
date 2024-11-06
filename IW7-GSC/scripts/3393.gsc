@@ -1,42 +1,30 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: 3393.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 18
- * Decompile Time: 28 ms
- * Timestamp: 10/27/2023 12:26:55 AM
-*******************************************************************/
+/****************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\3393.gsc
+****************************/
 
-//Function Number: 1
-init_all_weapon_upgrades()
-{
+init_all_weapon_upgrades() {
 	var_00 = scripts\engine\utility::getstructarray("weapon_upgrade","script_noteworthy");
 	level.get_weapon_level_func = ::scripts\cp\cp_weapon::get_weapon_level;
-	foreach(var_02 in var_00)
-	{
+	foreach(var_02 in var_00) {
 		var_02.powered_on = 1;
 		var_02 thread init_upgrade_weapon();
 	}
 }
 
-//Function Number: 2
-init_upgrade_weapon()
-{
-	if(scripts\engine\utility::istrue(self.requires_power))
-	{
+init_upgrade_weapon() {
+	if(scripts\engine\utility::istrue(self.requires_power)) {
 		level scripts\engine\utility::waittill_any_3("power_on",self.power_area + " power_on");
 	}
 
 	var_00 = getent("pap_machine","targetname");
-	if(!isdefined(var_00))
-	{
+	if(!isdefined(var_00)) {
 		return;
 	}
 
-	if(isdefined(level.pap_room_func))
-	{
-		[[ level.pap_room_func ]](self,var_00);
+	if(isdefined(level.pap_room_func)) {
+		[[level.pap_room_func]](self,var_00);
 		return;
 	}
 
@@ -45,41 +33,31 @@ init_upgrade_weapon()
 	self.powered_on = 1;
 }
 
-//Function Number: 3
-func_9A40(param_00,param_01)
-{
-	if(scripts\cp\utility::is_codxp())
-	{
+func_9A40(param_00,param_01) {
+	if(scripts\cp\utility::is_codxp()) {
 		return;
 	}
 
 	param_01 thread weapon_upgrade(param_00);
 }
 
-//Function Number: 4
-weapon_upgrade_hint_logic(param_00,param_01)
-{
-	if(scripts\engine\utility::istrue(param_01.wor_phase_shift))
-	{
+weapon_upgrade_hint_logic(param_00,param_01) {
+	if(scripts\engine\utility::istrue(param_01.wor_phase_shift)) {
 		return "";
 	}
 
 	var_02 = param_01 getcurrentweapon();
 	var_03 = scripts\cp\cp_weapon::get_weapon_level(var_02);
-	if(var_03 == level.pap_max)
-	{
+	if(var_03 == level.pap_max) {
 		return &"COOP_INTERACTIONS_UPGRADE_MAXED";
 	}
-	else if(param_01 scripts\cp\utility::is_melee_weapon(var_02,1))
-	{
+	else if(param_01 scripts\cp\utility::is_melee_weapon(var_02,1)) {
 		return "";
 	}
-	else if(!scripts\cp\cp_weapon::can_upgrade(var_02))
-	{
+	else if(!scripts\cp\cp_weapon::can_upgrade(var_02)) {
 		return &"CP_ZMB_INTERACTIONS_UPGRADE_WEAPON_FAIL";
 	}
-	else if(var_03 == 1)
-	{
+	else if(var_03 == 1) {
 		return &"CP_ZMB_INTERACTIONS_UPGRADE_WEAPON";
 	}
 	else
@@ -90,9 +68,7 @@ weapon_upgrade_hint_logic(param_00,param_01)
 	return &"CP_ZMB_INTERACTIONS_UPGRADE_WEAPON_FAIL";
 }
 
-//Function Number: 5
-weapon_upgrade(param_00,param_01)
-{
+weapon_upgrade(param_00,param_01) {
 	param_01 endon("disconnect");
 	var_02 = param_01 getcurrentweapon();
 	var_03 = scripts\cp\utility::getrawbaseweaponname(var_02);
@@ -102,25 +78,20 @@ weapon_upgrade(param_00,param_01)
 	var_07 = "none";
 	var_08 = undefined;
 	var_09 = 0;
-	if(var_03 == "dischord" || var_03 == "facemelter" || var_03 == "headcutter" || var_03 == "shredder")
-	{
-		if(!scripts\engine\utility::flag("fuses_inserted") && !scripts\cp\zombies\directors_cut::directors_cut_is_activated())
-		{
+	if(var_03 == "dischord" || var_03 == "facemelter" || var_03 == "headcutter" || var_03 == "shredder") {
+		if(!scripts\engine\utility::flag("fuses_inserted") && !scripts\cp\zombies\directors_cut::directors_cut_is_activated()) {
 			return;
 		}
 	}
 
-	if(var_04 < level.pap_max)
-	{
+	if(var_04 < level.pap_max) {
 		var_0A = scripts\engine\utility::getstruct(param_00.target,"targetname");
 		var_0B = vectornormalize(anglestoforward(param_01.angles)) * 16;
 		scripts\cp\cp_interaction::remove_from_current_interaction_list(param_00);
 		var_0C = param_01 getweaponslistprimaries();
 		param_01 scripts\cp\cp_merits::processmerit("mt_upgrade_weapons");
-		foreach(var_0E in var_0C)
-		{
-			if(!issubstr(var_02,var_0E) && !scripts\cp\utility::isstrstart(var_0E,"alt_") && !issubstr(var_0E,"knife"))
-			{
+		foreach(var_0E in var_0C) {
+			if(!issubstr(var_02,var_0E) && !scripts\cp\utility::isstrstart(var_0E,"alt_") && !issubstr(var_0E,"knife")) {
 				var_05 = var_0E;
 				break;
 			}
@@ -129,26 +100,20 @@ weapon_upgrade(param_00,param_01)
 		var_04 = int(var_04);
 		var_04++;
 		var_10 = var_02;
-		if(isdefined(level.pap_1_camo) && isdefined(var_04) && var_04 == 2)
-		{
+		if(isdefined(level.pap_1_camo) && isdefined(var_04) && var_04 == 2) {
 			var_08 = level.pap_1_camo;
 		}
-		else if(isdefined(level.pap_2_camo) && isdefined(var_04) && var_04 == 3)
-		{
+		else if(isdefined(level.pap_2_camo) && isdefined(var_04) && var_04 == 3) {
 			var_08 = level.pap_2_camo;
 		}
 
-		if(isdefined(level.no_pap_camos) && scripts\engine\utility::array_contains(level.no_pap_camos,var_03))
-		{
+		if(isdefined(level.no_pap_camos) && scripts\engine\utility::array_contains(level.no_pap_camos,var_03)) {
 			var_08 = undefined;
 		}
 
-		if(var_04 == 2)
-		{
-			if(isdefined(var_03))
-			{
-				switch(var_03)
-				{
+		if(var_04 == 2) {
+			if(isdefined(var_03)) {
+				switch(var_03) {
 					case "dischord":
 						var_02 = "iw7_dischord_zm_pap1";
 						var_08 = "camo20";
@@ -175,70 +140,55 @@ weapon_upgrade(param_00,param_01)
 			}
 		}
 
-		if(var_03 == "axe")
-		{
-			if(var_04 == 2)
-			{
+		if(var_03 == "axe") {
+			if(var_04 == 2) {
 				var_02 = "iw7_axe_zm_pap1";
 			}
-			else if(var_04 == 3)
-			{
+			else if(var_04 == 3) {
 				var_02 = "iw7_axe_zm_pap2";
 			}
 
 			var_09 = 1;
 		}
 
-		if(var_03 == "nunchucks")
-		{
-			if(var_04 == 2)
-			{
+		if(var_03 == "nunchucks") {
+			if(var_04 == 2) {
 				var_02 = "iw7_nunchucks_zm_pap1";
 			}
-			else if(var_04 == 3)
-			{
+			else if(var_04 == 3) {
 				var_02 = "iw7_nunchucks_zm_pap2";
 			}
 
 			var_09 = 1;
 		}
 
-		if(var_03 == "katana")
-		{
-			if(var_04 == 2)
-			{
+		if(var_03 == "katana") {
+			if(var_04 == 2) {
 				var_02 = "iw7_katana_zm_pap1";
 			}
-			else if(var_04 == 3)
-			{
+			else if(var_04 == 3) {
 				var_02 = "iw7_katana_zm_pap2";
 			}
 
 			var_09 = 1;
 		}
 
-		if(var_03 == "venomx")
-		{
-			if(var_04 == 2)
-			{
+		if(var_03 == "venomx") {
+			if(var_04 == 2) {
 				var_02 = "iw7_venomx_zm_pap1";
 			}
-			else if(var_04 == 3)
-			{
+			else if(var_04 == 3) {
 				var_02 = "iw7_venomx_zm_pap2";
 			}
 
 			var_09 = 1;
 		}
 
-		if(var_03 == "forgefreeze")
-		{
-			if(var_04 == 2)
-			{
+		if(var_03 == "forgefreeze") {
+			if(var_04 == 2) {
 				var_02 = "iw7_forgefreeze_zm_pap1";
 			}
-			else if(var_04 == 3)
-			{
+			else if(var_04 == 3) {
 				var_02 = "iw7_forgefreeze_zm_pap2";
 			}
 
@@ -250,28 +200,22 @@ weapon_upgrade(param_00,param_01)
 		param_01 scripts/cp/zombies/achievement::update_achievement("GET_PACKED",1);
 		param_01 thread scripts\cp\cp_vo::try_to_play_vo("weapon_pap","zmb_pap_vo","high",undefined,undefined,undefined,1);
 		var_07 = return_pap_attachment(param_01,var_04,var_03,var_02);
-		if(isdefined(var_07) && var_07 == "replace_me")
-		{
+		if(isdefined(var_07) && var_07 == "replace_me") {
 			var_07 = undefined;
 		}
 
 		var_11 = function_00E3(var_02);
-		if(issubstr(var_02,"g18_z"))
-		{
-			foreach(var_13 in var_11)
-			{
-				if(issubstr(var_13,"akimbo"))
-				{
+		if(issubstr(var_02,"g18_z")) {
+			foreach(var_13 in var_11) {
+				if(issubstr(var_13,"akimbo")) {
 					var_11 = scripts\engine\utility::array_remove(var_11,var_13);
 				}
 			}
 		}
 
 		var_15 = var_11;
-		foreach(var_13 in var_15)
-		{
-			if(issubstr(var_13,"silencer") || issubstr(var_13,"arcane") || issubstr(var_13,"ark"))
-			{
+		foreach(var_13 in var_15) {
+			if(issubstr(var_13,"silencer") || issubstr(var_13,"arcane") || issubstr(var_13,"ark")) {
 				var_15 = scripts\engine\utility::array_remove(var_15,var_13);
 			}
 		}
@@ -279,8 +223,7 @@ weapon_upgrade(param_00,param_01)
 		var_02 = param_01 scripts\cp\cp_weapon::return_weapon_name_with_like_attachments(var_02,undefined,var_15);
 		var_18 = param_01 scripts\cp\cp_weapon::return_weapon_name_with_like_attachments(var_02,var_07,var_15,undefined,var_08);
 		var_19 = param_01 scripts\cp\cp_weapon::return_weapon_name_with_like_attachments(var_02,var_07,var_11,undefined,var_08);
-		if(var_09)
-		{
+		if(var_09) {
 			var_1A = spawn("script_weapon",param_01 geteye() + var_0B,0,0,var_10);
 		}
 		else
@@ -305,8 +248,7 @@ weapon_upgrade(param_00,param_01)
 		var_1C playsound("zmb_packapunch_machine_on");
 		var_1C setscriptablepartstate("door","close");
 		wait(0.75);
-		if(!scripts\engine\utility::flag("fuses_inserted"))
-		{
+		if(!scripts\engine\utility::flag("fuses_inserted")) {
 			var_1C setscriptablepartstate("papfx","normal");
 		}
 		else
@@ -324,10 +266,8 @@ weapon_upgrade(param_00,param_01)
 		wait(0.5);
 		var_1A makeusable();
 		var_1A setuserange(100);
-		foreach(var_1F in level.players)
-		{
-			if(var_1F == param_01)
-			{
+		foreach(var_1F in level.players) {
+			if(var_1F == param_01) {
 				var_1A enableplayeruse(var_1F);
 				continue;
 			}
@@ -335,8 +275,7 @@ weapon_upgrade(param_00,param_01)
 			var_1A disableplayeruse(var_1F);
 		}
 
-		if(var_03 == "dischord" || var_03 == "facemelter" || var_03 == "headcutter" || var_03 == "shredder")
-		{
+		if(var_03 == "dischord" || var_03 == "facemelter" || var_03 == "headcutter" || var_03 == "shredder") {
 			param_01 thread scripts\cp\cp_vo::try_to_play_vo("pap_wor","zmb_pap_vo","high",undefined,undefined,undefined,1);
 		}
 
@@ -353,14 +292,10 @@ weapon_upgrade(param_00,param_01)
 	}
 }
 
-//Function Number: 6
-return_pap_attachment(param_00,param_01,param_02,param_03,param_04)
-{
+return_pap_attachment(param_00,param_01,param_02,param_03,param_04) {
 	var_05 = undefined;
-	if(isdefined(param_02))
-	{
-		switch(param_02)
-		{
+	if(isdefined(param_02)) {
+		switch(param_02) {
 			case "spiked":
 			case "golf":
 			case "two":
@@ -371,13 +306,11 @@ return_pap_attachment(param_00,param_01,param_02,param_03,param_04)
 				return "replace_me";
 
 			default:
-				if(scripts\engine\utility::istrue(param_04))
-				{
+				if(scripts\engine\utility::istrue(param_04)) {
 					return undefined;
 				}
 	
-				if(isdefined(param_00.pap[param_02]))
-				{
+				if(isdefined(param_00.pap[param_02])) {
 					return "pap" + param_00.pap[param_02].lvl;
 				}
 				else
@@ -392,9 +325,7 @@ return_pap_attachment(param_00,param_01,param_02,param_03,param_04)
 	return var_05;
 }
 
-//Function Number: 7
-playpapgesture(param_00,param_01,param_02,param_03,param_04)
-{
+playpapgesture(param_00,param_01,param_02,param_03,param_04) {
 	var_05 = "iw7_fists_zm";
 	param_00 scripts\cp\utility::_giveweapon(var_05,undefined,undefined,1);
 	param_00 switchtoweaponimmediate(var_05);
@@ -402,34 +333,25 @@ playpapgesture(param_00,param_01,param_02,param_03,param_04)
 	wait(1);
 	thread scripts\cp\utility::firegesturegrenade(param_00,param_01);
 	wait(2.5);
-	if(isdefined(param_02))
-	{
+	if(isdefined(param_02)) {
 		param_00 switchtoweaponimmediate(param_02);
-		if(param_00 hasweapon(var_05))
-		{
+		if(param_00 hasweapon(var_05)) {
 			param_00 takeweapon(var_05);
 		}
 	}
 }
 
-//Function Number: 8
-getcharactercardgesturelength()
-{
-	if(isdefined(self.pap_gesture_anim))
-	{
+getcharactercardgesturelength() {
+	if(isdefined(self.pap_gesture_anim)) {
 		return self getgestureanimlength(self.pap_gesture_anim);
 	}
 
 	return 3;
 }
 
-//Function Number: 9
-getpos1offset(param_00)
-{
-	if(isdefined(param_00))
-	{
-		switch(param_00)
-		{
+getpos1offset(param_00) {
+	if(isdefined(param_00)) {
+		switch(param_00) {
 			case "forgefreeze":
 				return (-32,0,24);
 
@@ -443,9 +365,7 @@ getpos1offset(param_00)
 	return (-32,0,16);
 }
 
-//Function Number: 10
-releasemachineonplayerdisconnect(param_00,param_01,param_02,param_03)
-{
+releasemachineonplayerdisconnect(param_00,param_01,param_02,param_03) {
 	level endon("pap_machine_activated");
 	param_00 waittill("disconnect");
 	param_03 setscriptablepartstate("door","decomp");
@@ -458,12 +378,9 @@ releasemachineonplayerdisconnect(param_00,param_01,param_02,param_03)
 	level notify("pap_machine_activated");
 }
 
-//Function Number: 11
-getoffsetfrombaseweaponname(param_00)
-{
+getoffsetfrombaseweaponname(param_00) {
 	var_01 = scripts\cp\utility::getbaseweaponname(param_00);
-	switch(var_01)
-	{
+	switch(var_01) {
 		case "iw7_devastator":
 		case "iw7_erad":
 		case "iw7_ar57":
@@ -543,32 +460,25 @@ getoffsetfrombaseweaponname(param_00)
 	}
 }
 
-//Function Number: 12
-wait_for_player_to_take_weapon(param_00,param_01,param_02)
-{
+wait_for_player_to_take_weapon(param_00,param_01,param_02) {
 	self endon("death");
 	self waittill("trigger",var_03);
 	param_01 = "iw7_fists_zm";
-	if(var_03 hasweapon(param_01))
-	{
+	if(var_03 hasweapon(param_01)) {
 		var_03 takeweapon(param_01);
 	}
 
-	if(var_03 scripts\cp\cp_weapon::has_weapon_variation(param_00))
-	{
+	if(var_03 scripts\cp\cp_weapon::has_weapon_variation(param_00)) {
 		var_04 = scripts\cp\utility::getrawbaseweaponname(param_00);
-		foreach(var_06 in var_03 getweaponslistall())
-		{
+		foreach(var_06 in var_03 getweaponslistall()) {
 			var_07 = scripts\cp\utility::getrawbaseweaponname(var_06);
-			if(var_04 == var_07)
-			{
+			if(var_04 == var_07) {
 				var_03 takeweapon(var_06);
 			}
 		}
 	}
 
-	if(should_take_players_current_weapon(var_03))
-	{
+	if(should_take_players_current_weapon(var_03)) {
 		var_09 = var_03 getcurrentweapon();
 		var_0A = scripts\cp\utility::getrawbaseweaponname(var_09);
 		var_03 takeweapon(var_09);
@@ -578,15 +488,11 @@ wait_for_player_to_take_weapon(param_00,param_01,param_02)
 	param_00 = var_03 scripts\cp\utility::_giveweapon(param_00,undefined,undefined,0);
 	var_03 givemaxammo(param_00);
 	var_0B = var_03 getweaponslistprimaries();
-	foreach(var_06 in var_0B)
-	{
-		if(issubstr(var_06,param_00))
-		{
-			if(scripts\cp\utility::isaltmodeweapon(var_06))
-			{
+	foreach(var_06 in var_0B) {
+		if(issubstr(var_06,param_00)) {
+			if(scripts\cp\utility::isaltmodeweapon(var_06)) {
 				var_04 = getweaponbasename(var_06);
-				if(isdefined(level.mode_weapons_allowed) && scripts\engine\utility::array_contains(level.mode_weapons_allowed,var_04))
-				{
+				if(isdefined(level.mode_weapons_allowed) && scripts\engine\utility::array_contains(level.mode_weapons_allowed,var_04)) {
 					param_00 = "alt_" + param_00;
 					break;
 				}
@@ -601,20 +507,15 @@ wait_for_player_to_take_weapon(param_00,param_01,param_02)
 	var_03 notify("weapon_level_changed");
 }
 
-//Function Number: 13
-should_take_players_current_weapon(param_00)
-{
+should_take_players_current_weapon(param_00) {
 	var_01 = 3;
-	if(param_00 scripts\cp\utility::has_zombie_perk("perk_machine_more"))
-	{
+	if(param_00 scripts\cp\utility::has_zombie_perk("perk_machine_more")) {
 		var_01 = 4;
 	}
 
 	var_02 = param_00 getweaponslistprimaries("primary");
-	foreach(var_04 in var_02)
-	{
-		if(scripts\cp\utility::isstrstart(var_04,"alt_"))
-		{
+	foreach(var_04 in var_02) {
+		if(scripts\cp\utility::isstrstart(var_04,"alt_")) {
 			var_02 = scripts\engine\utility::array_remove(var_02,var_04);
 		}
 	}
@@ -622,39 +523,28 @@ should_take_players_current_weapon(param_00)
 	return var_02.size >= var_01;
 }
 
-//Function Number: 14
-canupgradefunctionreroute(param_00,param_01)
-{
-	if(isdefined(level.max_pap_func))
-	{
-		return self [[ level.max_pap_func ]](param_00,param_01);
+canupgradefunctionreroute(param_00,param_01) {
+	if(isdefined(level.max_pap_func)) {
+		return self [[level.max_pap_func]](param_00,param_01);
 	}
 
 	return scripts\cp\cp_weapon::can_upgrade(param_00,param_01);
 }
 
-//Function Number: 15
-func_12F73()
-{
-	foreach(var_01 in level.players)
-	{
+func_12F73() {
+	foreach(var_01 in level.players) {
 		var_02 = var_01 getweaponslistall();
 		var_03 = 1;
 		var_04 = [];
 		var_05 = scripts\cp\utility::getrawbaseweaponname(var_01 scripts\cp\utility::getvalidtakeweapon());
-		foreach(var_07 in var_02)
-		{
+		foreach(var_07 in var_02) {
 			var_08 = scripts\cp\utility::getrawbaseweaponname(var_07);
-			if(!scripts\engine\utility::istrue(var_04[var_08]))
-			{
+			if(!scripts\engine\utility::istrue(var_04[var_08])) {
 				var_04[var_08] = 1;
-				if(isdefined(var_01.pap[var_08]))
-				{
-					if(var_01 canupgradefunctionreroute(var_07))
-					{
+				if(isdefined(var_01.pap[var_08])) {
+					if(var_01 canupgradefunctionreroute(var_07)) {
 						var_09 = func_12F72(var_01,var_07);
-						if(var_08 == var_05 && !scripts\engine\utility::istrue(var_01.kung_fu_mode))
-						{
+						if(var_08 == var_05 && !scripts\engine\utility::istrue(var_01.kung_fu_mode)) {
 							var_01 switchtoweaponimmediate(var_09);
 						}
 					}
@@ -664,33 +554,25 @@ func_12F73()
 	}
 }
 
-//Function Number: 16
-func_12F72(param_00,param_01,param_02)
-{
+func_12F72(param_00,param_01,param_02) {
 	var_03 = scripts\cp\utility::getrawbaseweaponname(param_01);
 	var_04 = undefined;
-	if(isdefined(param_00.pap[var_03]))
-	{
-		if(param_00 canupgradefunctionreroute(param_01,param_02))
-		{
+	if(isdefined(param_00.pap[var_03])) {
+		if(param_00 canupgradefunctionreroute(param_01,param_02)) {
 			var_05 = param_00 scripts\cp\cp_weapon::get_weapon_level(var_03);
 			var_05 = int(var_05);
 			var_05++;
-			if(isdefined(level.no_pap_camos) && scripts\engine\utility::array_contains(level.no_pap_camos,var_03))
-			{
+			if(isdefined(level.no_pap_camos) && scripts\engine\utility::array_contains(level.no_pap_camos,var_03)) {
 				var_04 = undefined;
 			}
-			else if(isdefined(level.pap_1_camo) && isdefined(var_05) && var_05 == 2)
-			{
+			else if(isdefined(level.pap_1_camo) && isdefined(var_05) && var_05 == 2) {
 				var_04 = level.pap_1_camo;
 			}
-			else if(isdefined(level.pap_2_camo) && isdefined(var_05) && var_05 == 3)
-			{
+			else if(isdefined(level.pap_2_camo) && isdefined(var_05) && var_05 == 3) {
 				var_04 = level.pap_2_camo;
 			}
 
-			switch(var_03)
-			{
+			switch(var_03) {
 				case "dischord":
 					var_06 = "iw7_dischord_zm_pap1";
 					var_04 = "camo20";
@@ -717,14 +599,12 @@ func_12F72(param_00,param_01,param_02)
 					break;
 
 				case "venomx":
-					if(var_05 == 2)
-					{
+					if(var_05 == 2) {
 						var_06 = "iw7_venomx_zm_pap1";
 						var_04 = "camo32";
 						break;
 					}
-					else if(var_05 == 3)
-					{
+					else if(var_05 == 3) {
 						var_06 = "iw7_venomx_zm_pap2";
 						var_04 = "camo34";
 						break;
@@ -733,62 +613,47 @@ func_12F72(param_00,param_01,param_02)
 					break;
 			}
 
-			if(var_03 == "axe")
-			{
-				if(var_05 == 2)
-				{
+			if(var_03 == "axe") {
+				if(var_05 == 2) {
 					var_06 = "iw7_axe_zm_pap1";
 				}
-				else if(var_05 == 3)
-				{
+				else if(var_05 == 3) {
 					var_06 = "iw7_axe_zm_pap2";
 				}
 			}
 
-			if(var_03 == "nunchucks")
-			{
-				if(var_05 == 2)
-				{
+			if(var_03 == "nunchucks") {
+				if(var_05 == 2) {
 					var_06 = "iw7_nunchucks_zm_pap1";
 				}
-				else if(var_05 == 3)
-				{
+				else if(var_05 == 3) {
 					var_06 = "iw7_nunchucks_zm_pap2";
 				}
 			}
 
-			if(var_03 == "katana")
-			{
-				if(var_05 == 2)
-				{
+			if(var_03 == "katana") {
+				if(var_05 == 2) {
 					var_06 = "iw7_katana_zm_pap1";
 				}
-				else if(var_05 == 3)
-				{
+				else if(var_05 == 3) {
 					var_06 = "iw7_katana_zm_pap2";
 				}
 			}
 
-			if(var_03 == "forgefreeze")
-			{
-				if(var_05 == 2)
-				{
+			if(var_03 == "forgefreeze") {
+				if(var_05 == 2) {
 					var_06 = "iw7_forgefreeze_zm_pap1";
 				}
-				else if(var_05 == 3)
-				{
+				else if(var_05 == 3) {
 					var_06 = "iw7_forgefreeze_zm_pap2";
 				}
 			}
 
-			if(var_03 == "venomx")
-			{
-				if(var_05 == 2)
-				{
+			if(var_03 == "venomx") {
+				if(var_05 == 2) {
 					var_06 = "iw7_venomx_zm_pap1";
 				}
-				else if(var_05 == 3)
-				{
+				else if(var_05 == 3) {
 					var_06 = "iw7_venomx_zm_pap2";
 				}
 			}
@@ -796,18 +661,14 @@ func_12F72(param_00,param_01,param_02)
 			param_00 takeweapon(param_01);
 			param_01 = validate_current_weapon(var_05,var_03,param_01);
 			var_07 = return_pap_attachment(param_00,var_05,var_03,param_01);
-			if(isdefined(var_07) && var_07 == "replace_me")
-			{
+			if(isdefined(var_07) && var_07 == "replace_me") {
 				var_07 = undefined;
 			}
 
 			var_08 = function_00E3(param_01);
-			if(issubstr(param_01,"g18_z"))
-			{
-				foreach(var_0A in var_08)
-				{
-					if(issubstr(var_0A,"akimbo"))
-					{
+			if(issubstr(param_01,"g18_z")) {
+				foreach(var_0A in var_08) {
+					if(issubstr(var_0A,"akimbo")) {
 						var_08 = scripts\engine\utility::array_remove(var_08,var_0A);
 					}
 				}
@@ -825,101 +686,80 @@ func_12F72(param_00,param_01,param_02)
 	return undefined;
 }
 
-//Function Number: 17
-validate_current_weapon(param_00,param_01,param_02)
-{
-	if(isdefined(level.weapon_upgrade_path) && isdefined(level.weapon_upgrade_path[getweaponbasename(param_02)]))
-	{
+validate_current_weapon(param_00,param_01,param_02) {
+	if(isdefined(level.weapon_upgrade_path) && isdefined(level.weapon_upgrade_path[getweaponbasename(param_02)])) {
 		param_02 = level.weapon_upgrade_path[getweaponbasename(param_02)];
 	}
-	else if(isdefined(param_01))
-	{
-		switch(param_01)
-		{
+	else if(isdefined(param_01)) {
+		switch(param_01) {
 			case "two":
-				if(param_00 == 2)
-				{
+				if(param_00 == 2) {
 					param_02 = "iw7_two_headed_axe_mp";
 				}
-				else if(param_00 == 3)
-				{
+				else if(param_00 == 3) {
 					param_02 = "iw7_two_headed_axe_mp";
 				}
 				break;
 
 			case "golf":
-				if(param_00 == 2)
-				{
+				if(param_00 == 2) {
 					param_02 = "iw7_golf_club_mp";
 				}
-				else if(param_00 == 3)
-				{
+				else if(param_00 == 3) {
 					param_02 = "iw7_golf_club_mp";
 				}
 				break;
 
 			case "machete":
-				if(param_00 == 2)
-				{
+				if(param_00 == 2) {
 					param_02 = "iw7_machete_mp";
 				}
-				else if(param_00 == 3)
-				{
+				else if(param_00 == 3) {
 					param_02 = "iw7_machete_mp";
 				}
 				break;
 
 			case "spiked":
-				if(param_00 == 2)
-				{
+				if(param_00 == 2) {
 					param_02 = "iw7_spiked_bat_mp";
 				}
-				else if(param_00 == 3)
-				{
+				else if(param_00 == 3) {
 					param_02 = "iw7_spiked_bat_mp";
 				}
 				break;
 
 			case "axe":
-				if(param_00 == 2)
-				{
+				if(param_00 == 2) {
 					param_02 = "iw7_axe_zm_pap1";
 				}
-				else if(param_00 == 3)
-				{
+				else if(param_00 == 3) {
 					param_02 = "iw7_axe_zm_pap2";
 				}
 				break;
 
 			case "katana":
-				if(param_00 == 2)
-				{
+				if(param_00 == 2) {
 					param_02 = "iw7_katana_zm_pap1";
 				}
-				else if(param_00 == 3)
-				{
+				else if(param_00 == 3) {
 					param_02 = "iw7_katana_zm_pap2";
 				}
 				break;
 
 			case "nunchucks":
-				if(param_00 == 2)
-				{
+				if(param_00 == 2) {
 					param_02 = "iw7_nunchucks_zm_pap1";
 				}
-				else if(param_00 == 3)
-				{
+				else if(param_00 == 3) {
 					param_02 = "iw7_nunchucks_zm_pap2";
 				}
 				break;
 
 			case "venomx":
-				if(param_00 == 2)
-				{
+				if(param_00 == 2) {
 					param_02 = "iw7_venomx_zm_pap1";
 				}
-				else if(param_00 == 3)
-				{
+				else if(param_00 == 3) {
 					param_02 = "iw7_venomx_zm_pap2";
 				}
 
@@ -933,11 +773,8 @@ validate_current_weapon(param_00,param_01,param_02)
 	return param_02;
 }
 
-//Function Number: 18
-func_9CCD(param_00)
-{
-	if(param_00 == "iw7_zm1coaster_zm" || param_00 == "iw7_cpbasketball_mp" || param_00 == "iw7_shootgallery_zm_blue" || param_00 == "iw7_shootgallery_zm_red" || param_00 == "iw7_shootgallery_zm_yellow" || param_00 == "iw7_shootgallery_zm_green")
-	{
+func_9CCD(param_00) {
+	if(param_00 == "iw7_zm1coaster_zm" || param_00 == "iw7_cpbasketball_mp" || param_00 == "iw7_shootgallery_zm_blue" || param_00 == "iw7_shootgallery_zm_red" || param_00 == "iw7_shootgallery_zm_yellow" || param_00 == "iw7_shootgallery_zm_green") {
 		return 1;
 	}
 

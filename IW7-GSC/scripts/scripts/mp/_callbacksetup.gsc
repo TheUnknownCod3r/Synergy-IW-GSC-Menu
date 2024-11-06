@@ -1,182 +1,133 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\mp\_callbacksetup.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 16
- * Decompile Time: 561 ms
- * Timestamp: 10/27/2023 12:32:08 AM
-*******************************************************************/
+/*************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\mp\_callbacksetup.gsc
+*************************************************/
 
-//Function Number: 1
-codecallback_startgametype()
-{
-	if(getdvar("r_reflectionProbeGenerate") == "1")
-	{
+codecallback_startgametype() {
+	if(getdvar("r_reflectionProbeGenerate") == "1") {
 		level waittill("eternity");
 	}
 
-	if(!isdefined(level.gametypestarted) || !level.gametypestarted)
-	{
-		[[ level.callbackstartgametype ]]();
+	if(!isdefined(level.gametypestarted) || !level.gametypestarted) {
+		[[level.callbackstartgametype]]();
 		level.gametypestarted = 1;
 	}
 }
 
-//Function Number: 2
-codecallback_playerconnect()
-{
-	if(getdvar("r_reflectionProbeGenerate") == "1")
-	{
+codecallback_playerconnect() {
+	if(getdvar("r_reflectionProbeGenerate") == "1") {
 		level waittill("eternity");
 	}
 
 	self endon("disconnect");
-	[[ level.callbackplayerconnect ]]();
+	[[level.callbackplayerconnect]]();
 }
 
-//Function Number: 3
-codecallback_playerdisconnect(param_00)
-{
+codecallback_playerdisconnect(param_00) {
 	self notify("disconnect");
-	[[ level.callbackplayerdisconnect ]](param_00);
+	[[level.callbackplayerdisconnect]](param_00);
 }
 
-//Function Number: 4
-codecallback_playerdamage(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08,param_09,param_0A,param_0B)
-{
+codecallback_playerdamage(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08,param_09,param_0A,param_0B) {
 	self endon("disconnect");
-	if(isdefined(level.weaponmapfunc))
-	{
-		param_05 = [[ level.weaponmapfunc ]](param_05,param_00);
+	if(isdefined(level.weaponmapfunc)) {
+		param_05 = [[level.weaponmapfunc]](param_05,param_00);
 	}
 
-	[[ level.callbackplayerdamage ]](param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08,param_09,param_0A,param_0B);
+	[[level.callbackplayerdamage]](param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08,param_09,param_0A,param_0B);
 }
 
-//Function Number: 5
-func_00B4(param_00,param_01,param_02,param_03)
-{
+func_00B4(param_00,param_01,param_02,param_03) {
 	self endon("disconnect");
-	if(isdefined(level.weaponmapfunc))
-	{
-		param_00 = [[ level.weaponmapfunc ]](param_00);
+	if(isdefined(level.weaponmapfunc)) {
+		param_00 = [[level.weaponmapfunc]](param_00);
 	}
 
-	if(isdefined(level.weaponmapfunc))
-	{
-		param_02 = [[ level.weaponmapfunc ]](param_02);
+	if(isdefined(level.weaponmapfunc)) {
+		param_02 = [[level.weaponmapfunc]](param_02);
 	}
 }
 
-//Function Number: 6
-func_00B5(param_00,param_01)
-{
+func_00B5(param_00,param_01) {
 	self endon("disconnect");
-	if(isdefined(level.weaponmapfunc))
-	{
-		param_00 = [[ level.weaponmapfunc ]](param_00);
+	if(isdefined(level.weaponmapfunc)) {
+		param_00 = [[level.weaponmapfunc]](param_00);
 	}
 }
 
-//Function Number: 7
-func_00B6(param_00,param_01,param_02,param_03)
-{
+func_00B6(param_00,param_01,param_02,param_03) {
 	self endon("disconnect");
-	if(isdefined(level.weaponmapfunc))
-	{
-		param_00 = [[ level.weaponmapfunc ]](param_00);
+	if(isdefined(level.weaponmapfunc)) {
+		param_00 = [[level.weaponmapfunc]](param_00);
 	}
 
-	if(isdefined(level.weaponmapfunc))
-	{
-		param_02 = [[ level.weaponmapfunc ]](param_02);
+	if(isdefined(level.weaponmapfunc)) {
+		param_02 = [[level.weaponmapfunc]](param_02);
 	}
 
-	if(isdefined(level.callbackfinishweaponchange))
-	{
-		[[ level.callbackfinishweaponchange ]](param_02,param_00,param_03,param_01);
+	if(isdefined(level.callbackfinishweaponchange)) {
+		[[level.callbackfinishweaponchange]](param_02,param_00,param_03,param_01);
 	}
 }
 
-//Function Number: 8
-codecallback_playerimpaled(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07)
-{
+codecallback_playerimpaled(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07) {
 	self endon("disconnect");
-	if(isdefined(level.weaponmapfunc))
-	{
-		param_01 = [[ level.weaponmapfunc ]](param_01);
+	if(isdefined(level.weaponmapfunc)) {
+		param_01 = [[level.weaponmapfunc]](param_01);
 	}
 
-	[[ level.callbackplayerimpaled ]](param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07);
+	[[level.callbackplayerimpaled]](param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07);
 }
 
-//Function Number: 9
-codecallback_playerkilled(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08,param_09)
-{
+codecallback_playerkilled(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08,param_09) {
 	self endon("disconnect");
-	if(isdefined(level.weaponmapfunc))
-	{
-		param_05 = [[ level.weaponmapfunc ]](param_05,param_00);
+	if(isdefined(level.weaponmapfunc)) {
+		param_05 = [[level.weaponmapfunc]](param_05,param_00);
 	}
 
-	[[ level.callbackplayerkilled ]](param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08,param_09);
+	[[level.callbackplayerkilled]](param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08,param_09);
 }
 
-//Function Number: 10
-codecallback_vehicledamage(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08,param_09,param_0A,param_0B)
-{
-	if(isdefined(level.weaponmapfunc))
-	{
-		param_05 = [[ level.weaponmapfunc ]](param_05,param_00);
+codecallback_vehicledamage(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08,param_09,param_0A,param_0B) {
+	if(isdefined(level.weaponmapfunc)) {
+		param_05 = [[level.weaponmapfunc]](param_05,param_00);
 	}
 
-	if(isdefined(self.nullownerdamagefunc))
-	{
-		var_0C = [[ self.nullownerdamagefunc ]](param_01);
-		if(isdefined(var_0C) && var_0C)
-		{
+	if(isdefined(self.nullownerdamagefunc)) {
+		var_0C = [[self.nullownerdamagefunc]](param_01);
+		if(isdefined(var_0C) && var_0C) {
 			return;
 		}
 	}
 
-	if(isdefined(self.damagecallback))
-	{
-		self [[ self.damagecallback ]](param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08,param_09,param_0A,param_0B);
+	if(isdefined(self.damagecallback)) {
+		self [[self.damagecallback]](param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08,param_09,param_0A,param_0B);
 		return;
 	}
 
 	self vehicle_finishdamage(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08,param_09,param_0A,param_0B);
 }
 
-//Function Number: 11
-codecallback_playerlaststand(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08)
-{
+codecallback_playerlaststand(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08) {
 	self endon("disconnect");
-	if(isdefined(level.weaponmapfunc))
-	{
-		param_04 = [[ level.weaponmapfunc ]](param_04,param_00);
+	if(isdefined(level.weaponmapfunc)) {
+		param_04 = [[level.weaponmapfunc]](param_04,param_00);
 	}
 
-	[[ level.callbackplayerlaststand ]](param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08);
+	[[level.callbackplayerlaststand]](param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08);
 }
 
-//Function Number: 12
-codecallback_playermigrated()
-{
+codecallback_playermigrated() {
 	self endon("disconnect");
-	[[ level.callbackplayermigrated ]]();
+	[[level.callbackplayermigrated]]();
 }
 
-//Function Number: 13
-codecallback_hostmigration()
-{
-	[[ level.callbackhostmigration ]]();
+codecallback_hostmigration() {
+	[[level.callbackhostmigration]]();
 }
 
-//Function Number: 14
-setupdamageflags()
-{
+setupdamageflags() {
 	level.idflags_radius = 1;
 	level.idflags_no_armor = 2;
 	level.idflags_no_knockback = 4;
@@ -191,9 +142,7 @@ setupdamageflags()
 	level.idflags_passthru = 2048;
 }
 
-//Function Number: 15
-abortlevel()
-{
+abortlevel() {
 	level.callbackstartgametype = ::callbackvoid;
 	level.callbackplayerconnect = ::callbackvoid;
 	level.callbackplayerdisconnect = ::callbackvoid;
@@ -207,7 +156,4 @@ abortlevel()
 	exitlevel(0);
 }
 
-//Function Number: 16
-callbackvoid()
-{
-}
+callbackvoid() {}

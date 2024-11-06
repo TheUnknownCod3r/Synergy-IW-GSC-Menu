@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\cp\maps\cp_final\cp_final_mpq.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 173
- * Decompile Time: 8912 ms
- * Timestamp: 10/27/2023 12:05:22 AM
-*******************************************************************/
+/*************************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\cp\maps\cp_final\cp_final_mpq.gsc
+*************************************************************/
 
-//Function Number: 1
-mpq_init()
-{
+mpq_init() {
 	initmpqflags();
 	thread initmpqsystems();
 	mpqstepregistration();
@@ -18,9 +12,7 @@ mpq_init()
 	level.neilvotime = 0;
 }
 
-//Function Number: 2
-initmpqflags()
-{
+initmpqflags() {
 	scripts\engine\utility::flag_init("neil_head_found");
 	scripts\engine\utility::flag_init("neil_head_placed");
 	scripts\engine\utility::flag_init("fuse_puzzle_completed");
@@ -36,9 +28,7 @@ initmpqflags()
 	scripts\engine\utility::flag_init("completed_toggle_puzzle_once");
 }
 
-//Function Number: 3
-initmpqsystems()
-{
+initmpqsystems() {
 	scripts\engine\utility::flag_wait("interactions_initialized");
 	level.neil_console = getent("neil_console","targetname");
 	level.neil_console.nextneilvotime = 0;
@@ -61,39 +51,29 @@ initmpqsystems()
 	level.struct_class_names["targetname"]["dlc4_poster"][level.struct_class_names["targetname"]["dlc4_poster"].size] = var_00;
 }
 
-//Function Number: 4
-initneilconsolehead()
-{
+initneilconsolehead() {
 	var_00 = scripts\engine\utility::getstruct("console_neil_head","targetname");
 	var_00.entanglerangleupdate = ::updateneilheadangles;
 	var_00.nextneilvotime = 0;
 }
 
-//Function Number: 5
-updateneilheadangles(param_00,param_01,param_02)
-{
+updateneilheadangles(param_00,param_01,param_02) {
 	param_00 endon("disconnect");
 	var_03 = gettime();
-	if(var_03 >= param_01.nextneilvotime)
-	{
-		if(scripts\engine\utility::cointoss())
-		{
-			if(playneilvofromconsoleorhead("final_n31l_evil_quest_pap"))
-			{
+	if(var_03 >= param_01.nextneilvotime) {
+		if(scripts\engine\utility::cointoss()) {
+			if(playneilvofromconsoleorhead("final_n31l_evil_quest_pap")) {
 				param_01.nextneilvotime = var_03 + -5536;
 			}
 		}
-		else if(playneilvofromconsoleorhead("final_n31l_evil_quest_pap_b"))
-		{
+		else if(playneilvofromconsoleorhead("final_n31l_evil_quest_pap_b")) {
 			param_01.nextneilvotime = var_03 + -5536;
 		}
 	}
 
 	var_04 = scripts\engine\utility::getstruct("pap_portal","script_noteworthy");
-	if(isdefined(param_02.pathtogoal))
-	{
-		if(scripts\engine\utility::istrue(param_00.isfasttravelling))
-		{
+	if(isdefined(param_02.pathtogoal)) {
+		if(scripts\engine\utility::istrue(param_00.isfasttravelling)) {
 			param_02.fasttravelling = 1;
 			var_05 = param_00.origin;
 		}
@@ -102,15 +82,13 @@ updateneilheadangles(param_00,param_01,param_02)
 			var_06 = var_05.origin;
 			var_07 = undefined;
 			var_08 = param_02.pathtogoal;
-			if(var_08.size > 1)
-			{
+			if(var_08.size > 1) {
 				var_06 = var_08[1];
 				var_07 = 1;
 			}
 
 			var_09 = param_00 findpath(param_02.origin,var_06,1,1);
-			if(var_09.size > 1)
-			{
+			if(var_09.size > 1) {
 				var_05 = var_09[1];
 			}
 			else
@@ -118,37 +96,28 @@ updateneilheadangles(param_00,param_01,param_02)
 				var_05 = var_06;
 			}
 
-			if(param_02.pathtogoal.size >= 1)
-			{
-				if(isdefined(var_07) && distance2dsquared(var_06,param_02.origin) <= 9216)
-				{
+			if(param_02.pathtogoal.size >= 1) {
+				if(isdefined(var_07) && distance2dsquared(var_06,param_02.origin) <= 9216) {
 					param_02.pathtogoal = scripts\cp\utility::array_remove_index(param_02.pathtogoal,var_07,0);
 				}
 			}
 
 			var_0A = scripts\engine\utility::getclosest(param_02.origin,level.allslidingdoors,96);
-			if(isdefined(var_0A))
-			{
-				if(scripts\engine\utility::istrue(var_0A.var_4284))
-				{
+			if(isdefined(var_0A)) {
+				if(scripts\engine\utility::istrue(var_0A.var_4284)) {
 					var_0B = anglestoforward(param_00.angles);
 					var_0C = 0;
-					if(!var_0C && vectordot(vectornormalize(var_06 - param_00.origin),var_0B) > 0.75 && vectordot(vectornormalize(var_0A.origin - param_00.origin),var_0B) > 0.75)
-					{
-						if(distance(param_00.origin,var_06) > distance(param_00.origin,param_02.origin))
-						{
-							if(scripts\engine\utility::istrue(var_0A.var_4284))
-							{
+					if(!var_0C && vectordot(vectornormalize(var_06 - param_00.origin),var_0B) > 0.75 && vectordot(vectornormalize(var_0A.origin - param_00.origin),var_0B) > 0.75) {
+						if(distance(param_00.origin,var_06) > distance(param_00.origin,param_02.origin)) {
+							if(scripts\engine\utility::istrue(var_0A.var_4284)) {
 								var_0D = scripts\engine\utility::getstructarray(var_0A.script_noteworthy,"script_noteworthy");
-								foreach(var_0F in var_0D)
-								{
-									if(var_0F.target == var_0F.target)
-									{
+								foreach(var_0F in var_0D) {
+									if(var_0F.target == var_0F.target) {
 										var_0F.nointeraction = undefined;
 									}
 								}
 
-								thread [[ level.interactions[var_0A.script_noteworthy].activation_func ]](var_0A,undefined);
+								thread [[level.interactions[var_0A.script_noteworthy].activation_func]](var_0A,undefined);
 							}
 						}
 					}
@@ -156,8 +125,7 @@ updateneilheadangles(param_00,param_01,param_02)
 			}
 		}
 
-		if(isdefined(var_05))
-		{
+		if(isdefined(var_05)) {
 			return var_05;
 		}
 
@@ -167,12 +135,9 @@ updateneilheadangles(param_00,param_01,param_02)
 	return vectortoangles(param_00.origin - param_02.origin);
 }
 
-//Function Number: 6
-initmedbaybutton()
-{
+initmedbaybutton() {
 	var_00 = scripts\engine\utility::getstruct("button_entangle_target","targetname");
-	if(isdefined(var_00.model))
-	{
+	if(isdefined(var_00.model)) {
 		var_00.model scripts\cp\cp_weapon::placeequipmentfailed("pillage",1,var_00.model.origin);
 		var_00.model delete();
 	}
@@ -187,19 +152,15 @@ initmedbaybutton()
 	var_01.collisionfunc = ::checkbuttoncollision;
 }
 
-//Function Number: 7
-checkbuttoncollision(param_00,param_01,param_02)
-{
+checkbuttoncollision(param_00,param_01,param_02) {
 	level endon("game_ended");
 	param_00 waittill("collision");
 	var_03 = param_00.origin;
 	var_04 = scripts\engine\utility::getstructarray("dlc4_poster","targetname");
 	param_00 notify("end_entangler_funcs");
 	var_05 = scripts\engine\utility::getclosest(var_03,var_04);
-	if(distance(var_03,var_05.origin) <= 36)
-	{
-		if(isdefined(param_02))
-		{
+	if(distance(var_03,var_05.origin) <= 36) {
+		if(isdefined(param_02)) {
 			playfx(level._effect["energy_door_impact"],var_05.origin,vectortoangles(var_05.origin - param_02.origin) * 6,anglestoup(var_05.angles));
 		}
 		else
@@ -215,9 +176,7 @@ checkbuttoncollision(param_00,param_01,param_02)
 	thread initmedbaybutton();
 }
 
-//Function Number: 8
-mpqstepregistration()
-{
+mpqstepregistration() {
 	finalqueststepregistration("MPQ",undefined,::blank,::retrieveneilshead,::completeretrieveneilshead,::debugretrieveneilshead,0,"Retrieve N31L\'s head");
 	finalqueststepregistration("MPQ",undefined,::blank,::placeneilshead,::completeplaceneilshead,::debugplaceneilshead,0,"Place Neil\'s Head");
 	finalqueststepregistration("MPQ",undefined,::blank,::waitforsecuritydoorsdestroyed,::securitydoorsdestroyed,::debugsecuritydoorsdestroyed,0,"Destroy Energy Doors");
@@ -228,71 +187,48 @@ mpqstepregistration()
 	finalqueststepregistration("MPQ",undefined,::blank,::enterbossfight,::completeenterbossfight,::debugcompleteenterbossfight,0,"Enter Bossfight");
 }
 
-//Function Number: 9
-entanglebutton()
-{
+entanglebutton() {
 	scripts\engine\utility::flag_wait("button_entered_poster");
 }
 
-//Function Number: 10
-completeentanglebutton()
-{
+completeentanglebutton() {
 	activateinteractionsbynoteworthy("puzzle_door_button");
 }
 
-//Function Number: 11
-debugcompleteentanglebutton()
-{
+debugcompleteentanglebutton() {
 	scripts\engine\utility::flag_set("button_entered_poster");
 }
 
-//Function Number: 12
-pressbutton()
-{
+pressbutton() {
 	scripts\engine\utility::flag_wait("toggle_puzzle_button_pressed");
 }
 
-//Function Number: 13
-completepressbutton()
-{
+completepressbutton() {
 	openpuzzledoors();
 }
 
-//Function Number: 14
-debugcompletepressbutton()
-{
+debugcompletepressbutton() {
 	scripts\engine\utility::flag_set("toggle_puzzle_button_pressed");
 }
 
-//Function Number: 15
-togglepuzzle()
-{
+togglepuzzle() {
 	scripts\engine\utility::flag_wait("neils_head_placed_in_pap");
 }
 
-//Function Number: 16
-completetogglepuzzle()
-{
+completetogglepuzzle() {
 	activateinteractionsbynoteworthy("neil_head_final_pos");
 }
 
-//Function Number: 17
-debugcompletetogglepuzzle()
-{
+debugcompletetogglepuzzle() {
 	scripts\engine\utility::flag_set("neils_head_placed_in_pap");
 }
 
-//Function Number: 18
-enterbossfight()
-{
+enterbossfight() {
 	scripts\engine\utility::flag_wait("players_triggered_bossfight");
 }
 
-//Function Number: 19
-completeenterbossfight()
-{
-	foreach(var_01 in level.players)
-	{
+completeenterbossfight() {
+	foreach(var_01 in level.players) {
 		var_01 scripts\cp\utility::allow_player_interactions(1);
 		var_01.kicked_out = undefined;
 	}
@@ -303,27 +239,20 @@ completeenterbossfight()
 	scripts\cp\maps\cp_final\cp_final_rhino_boss::start_rhino_fight();
 }
 
-//Function Number: 20
-debugcompleteenterbossfight()
-{
+debugcompleteenterbossfight() {
 	scripts\engine\utility::flag_set("players_triggered_bossfight");
 }
 
-//Function Number: 21
-finalqueststepregistration(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07)
-{
-	if(!isdefined(level.var_13F4D[param_00]))
-	{
+finalqueststepregistration(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07) {
+	if(!isdefined(level.var_13F4D[param_00])) {
 		level.var_13F4D[param_00] = [];
 	}
 
-	if(!isdefined(param_01))
-	{
+	if(!isdefined(param_01)) {
 		param_01 = level.var_13F4D[param_00].size;
 	}
 
-	if(!isdefined(level.var_13F4C[param_00]))
-	{
+	if(!isdefined(level.var_13F4C[param_00])) {
 		level.var_13F4C[param_00] = -1;
 	}
 
@@ -336,9 +265,7 @@ finalqueststepregistration(param_00,param_01,param_02,param_03,param_04,param_05
 	level.var_13F4D[param_00][param_01] = var_08;
 }
 
-//Function Number: 22
-registermpqinteractions()
-{
+registermpqinteractions() {
 	scripts\cp\maps\cp_final\cp_final_interactions::levelinteractionregistration(1,"neil_head",undefined,undefined,::headhintfunc,::headusefunc,0,0,::blank);
 	scripts\cp\maps\cp_final\cp_final_interactions::levelinteractionregistration(1,"neil_console",undefined,undefined,::consolehintfunc,::consoleusefunc,0,0,::initneilconsole);
 	scripts\cp\maps\cp_final\cp_final_interactions::levelinteractionregistration(1,"fuse_puzzle",undefined,undefined,::fusepuzzlehintfunc,::fusepuzzleusefunc,0,0,::initfusepuzzleinteraction);
@@ -352,21 +279,15 @@ registermpqinteractions()
 	spawnastronauts();
 }
 
-//Function Number: 23
-initneilfinalpos()
-{
+initneilfinalpos() {
 	var_00 = scripts\engine\utility::getstructarray("neil_head_final_pos","script_noteworthy");
-	foreach(var_02 in var_00)
-	{
+	foreach(var_02 in var_00) {
 		var_02.custom_search_dist = 96;
 	}
 }
 
-//Function Number: 24
-neilheadfinalusefunc(param_00,param_01)
-{
-	if(!isdefined(param_00.var_127C9))
-	{
+neilheadfinalusefunc(param_00,param_01) {
+	if(!isdefined(param_00.var_127C9)) {
 		param_00.var_127C9 = [];
 	}
 
@@ -374,24 +295,19 @@ neilheadfinalusefunc(param_00,param_01)
 	param_01 thread playeractivatedbossfight(param_00,param_01);
 }
 
-//Function Number: 25
-playeractivatedbossfight(param_00,param_01)
-{
+playeractivatedbossfight(param_00,param_01) {
 	level endon("game_ended");
 	param_01 notify("playerActivatedBossFight");
 	param_01 endon("playerActivatedBossFight");
 	param_01 endon("disconnect");
-	if(!scripts\engine\utility::array_contains(param_00.var_127C9,param_01))
-	{
+	if(!scripts\engine\utility::array_contains(param_00.var_127C9,param_01)) {
 		param_00.var_127C9 = scripts\engine\utility::array_add(param_00.var_127C9,param_01);
 	}
 
 	param_00.var_127C9 = scripts\engine\utility::array_remove_duplicates(param_00.var_127C9);
-	if(param_00.var_127C9.size >= level.players.size)
-	{
+	if(param_00.var_127C9.size >= level.players.size) {
 		deactivateinteractionsbynoteworthy(param_00.script_noteworthy);
-		foreach(var_03 in level.players)
-		{
+		foreach(var_03 in level.players) {
 			var_03 notify("left_hidden_room_early");
 			var_03.kicked_out = 1;
 			var_03 scripts\cp\utility::allow_player_interactions(0);
@@ -403,29 +319,22 @@ playeractivatedbossfight(param_00,param_01)
 	}
 
 	param_01 scripts\engine\utility::waittill_any_timeout_1(2,"left_hidden_room_early","kicked_out","last_stand");
-	if(scripts\engine\utility::array_contains(param_00.var_127C9,param_01))
-	{
+	if(scripts\engine\utility::array_contains(param_00.var_127C9,param_01)) {
 		param_00.var_127C9 = scripts\engine\utility::array_remove(param_00.var_127C9,param_01);
 	}
 
-	if(param_00.var_127C9.size <= 0)
-	{
+	if(param_00.var_127C9.size <= 0) {
 		param_00.var_127C9 = [];
 	}
 }
 
-//Function Number: 26
-completeneilfinalspot()
-{
+completeneilfinalspot() {
 	scripts\engine\utility::flag_set("players_triggered_bossfight");
 	deactivateinteractionsbynoteworthy("neil_head_final_pos");
 }
 
-//Function Number: 27
-usepuzzlebutton(param_00,param_01)
-{
-	if(scripts\engine\utility::flag("fuse_puzzle_completed") && scripts\engine\utility::flag("button_entered_poster") && !param_01 isjumping() && param_01 getstance() != "stand")
-	{
+usepuzzlebutton(param_00,param_01) {
+	if(scripts\engine\utility::flag("fuse_puzzle_completed") && scripts\engine\utility::flag("button_entered_poster") && !param_01 isjumping() && param_01 getstance() != "stand") {
 		scripts\cp\utility::playsoundatpos_safe(param_00.origin,"zmb_mpq_puzzle_turn");
 		scripts\engine\utility::flag_set("toggle_puzzle_button_pressed");
 		deactivateinteractionsbynoteworthy("puzzle_door_button");
@@ -434,24 +343,18 @@ usepuzzlebutton(param_00,param_01)
 	}
 }
 
-//Function Number: 28
-startairventfx()
-{
+startairventfx() {
 	var_00 = scripts\engine\utility::getstructarray("air_suck_loc","targetname");
-	foreach(var_02 in var_00)
-	{
+	foreach(var_02 in var_00) {
 		thread playventfx(var_02);
 	}
 }
 
-//Function Number: 29
-playventfx(param_00)
-{
+playventfx(param_00) {
 	level endon("end_vent_fx");
 	level endon("game_ended");
 	var_01 = level._effect["air_vent_in"];
-	for(;;)
-	{
+	for(;;) {
 		var_02 = 5;
 		playfx(var_01,param_00.origin,anglestoforward(param_00.angles),anglestoup(param_00.angles));
 		wait(0.5);
@@ -460,25 +363,19 @@ playventfx(param_00)
 	}
 }
 
-//Function Number: 30
-checkfornearbydisk(param_00)
-{
+checkfornearbydisk(param_00) {
 	level endon("game_ended");
 	level notify("checkForNearbyDisk");
 	level endon("checkForNearbyDisk");
 	level endon("end_vent_fx");
-	for(;;)
-	{
-		if(isdefined(level.undergratepuzzlepiece))
-		{
+	for(;;) {
+		if(isdefined(level.undergratepuzzlepiece)) {
 			var_01 = distance(param_00.origin,level.undergratepuzzlepiece.origin);
-			if(scripts\engine\utility::istrue(level.undergratepuzzlepiece.hasbeenthrown) && var_01 <= 96)
-			{
+			if(scripts\engine\utility::istrue(level.undergratepuzzlepiece.hasbeenthrown) && var_01 <= 96) {
 				param_00 notify("stop_watching_for_entangler_damage");
 				var_02 = 750;
 				var_03 = var_01 / var_02;
-				if(var_03 < 0.25)
-				{
+				if(var_03 < 0.25) {
 					var_03 = 0.25;
 				}
 
@@ -494,26 +391,20 @@ checkfornearbydisk(param_00)
 	}
 }
 
-//Function Number: 31
-initneilmonitors()
-{
+initneilmonitors() {
 	level.currentneilstate = "neutral";
 	var_00 = scripts\engine\utility::getstructarray("neil_monitors","script_noteworthy");
 	level.special_mode_activation_funcs["neil_monitors"] = ::setneilstatepent;
 	level.normal_mode_activation_funcs["neil_monitors"] = ::setneilstatepent;
-	foreach(var_02 in var_00)
-	{
+	foreach(var_02 in var_00) {
 		scripts\cp\maps\cp_final\cp_final::addtopersonalinteractionlist(var_02);
 	}
 }
 
-//Function Number: 32
-setneilstatepent(param_00,param_01,param_02,param_03)
-{
+setneilstatepent(param_00,param_01,param_02,param_03) {
 	var_04 = undefined;
 	var_05 = getmodelfromstruct(param_01);
-	switch(level.currentneilstate)
-	{
+	switch(level.currentneilstate) {
 		case "happy":
 			param_00 setmodel(var_05 + "_happy");
 			break;
@@ -547,47 +438,35 @@ setneilstatepent(param_00,param_01,param_02,param_03)
 	}
 }
 
-//Function Number: 33
-getmodelfromstruct(param_00)
-{
-	if(isdefined(param_00.script_label))
-	{
+getmodelfromstruct(param_00) {
+	if(isdefined(param_00.script_label)) {
 		return param_00.script_label;
 	}
 
 	return "cp_final_monitor_small";
 }
 
-//Function Number: 34
-cleanupsoundsonrelease(param_00,param_01)
-{
+cleanupsoundsonrelease(param_00,param_01) {
 	param_00 notify("cleanUpSoundsOnRelease");
 	param_00 endon("cleanUpSoundsOnRelease");
 	var_02 = scripts\engine\utility::waittill_any_ents(param_01,"disconnect",param_00,"p_ent_reset",param_01,"zone_change",param_01,"rave_status_changed",param_01,"rave_interactions_updated",level,"game_ended");
-	if(isdefined(param_00.playingsound))
-	{
+	if(isdefined(param_00.playingsound)) {
 		param_00 stoploopsound();
 	}
 
 	param_00.playingsound = undefined;
 }
 
-//Function Number: 35
-initpuzzlebutton()
-{
+initpuzzlebutton() {
 	thread initpuzzlebuttoninternal();
 }
 
-//Function Number: 36
-initpuzzlebuttoninternal()
-{
+initpuzzlebuttoninternal() {
 	level endon("game_ended");
 	scripts\engine\utility::flag_wait("button_entered_poster");
 	var_00 = scripts\engine\utility::getstructarray("puzzle_door_button","script_noteworthy");
-	foreach(var_02 in var_00)
-	{
-		if(isdefined(var_02.target))
-		{
+	foreach(var_02 in var_00) {
+		if(isdefined(var_02.target)) {
 			var_03 = scripts\engine\utility::getstructarray(var_02.target,"targetname")[0];
 		}
 		else
@@ -596,8 +475,7 @@ initpuzzlebuttoninternal()
 		}
 
 		var_04 = spawn("script_model",var_03.origin);
-		if(isdefined(var_03.angles))
-		{
+		if(isdefined(var_03.angles)) {
 			var_04.angles = var_03.angles;
 		}
 
@@ -605,37 +483,26 @@ initpuzzlebuttoninternal()
 	}
 }
 
-//Function Number: 37
-initentanglerspawner()
-{
+initentanglerspawner() {
 	var_00 = scripts\engine\utility::getstruct("entangler_spawner","script_noteworthy");
 	var_00.groupname = "locOverride";
 }
 
-//Function Number: 38
-useentanglerweaponhint(param_00,param_01)
-{
+useentanglerweaponhint(param_00,param_01) {
 	return "";
 }
 
-//Function Number: 39
-useentanglerweapon(param_00,param_01)
-{
-	if(!scripts\engine\utility::istrue(param_01.hascollectedentangler))
-	{
+useentanglerweapon(param_00,param_01) {
+	if(!scripts\engine\utility::istrue(param_01.hascollectedentangler)) {
 		param_01 playlocalsound("zmb_item_pickup");
 		scripts\cp\crafted_entangler::give_crafted_entangler(param_00,param_01);
 	}
 }
 
-//Function Number: 40
-entanglerbuttonhint(param_00,param_01)
-{
-	if(scripts\engine\utility::flag("toggle_puzzle_doors_opened"))
-	{
+entanglerbuttonhint(param_00,param_01) {
+	if(scripts\engine\utility::flag("toggle_puzzle_doors_opened")) {
 		thread watchforplayerlookat(param_01);
-		if(isdefined(param_01.current_button))
-		{
+		if(isdefined(param_01.current_button)) {
 			return "";
 		}
 
@@ -645,18 +512,12 @@ entanglerbuttonhint(param_00,param_01)
 	return "";
 }
 
-//Function Number: 41
-entanglerbuttonuse(param_00,param_01)
-{
-	if(scripts\engine\utility::flag("toggle_puzzle_doors_opened"))
-	{
-		if(isdefined(param_01.current_button))
-		{
+entanglerbuttonuse(param_00,param_01) {
+	if(scripts\engine\utility::flag("toggle_puzzle_doors_opened")) {
+		if(isdefined(param_01.current_button)) {
 			var_02 = gettime();
-			if(var_02 >= param_00.nextneilvotime)
-			{
-				if(playneilvo("final_n31l_evil_hacked",param_01.vo_prefix))
-				{
+			if(var_02 >= param_00.nextneilvotime) {
+				if(playneilvo("final_n31l_evil_hacked",param_01.vo_prefix)) {
 					param_00.nextneilvotime = var_02 + 10000;
 				}
 			}
@@ -675,20 +536,15 @@ entanglerbuttonuse(param_00,param_01)
 	}
 }
 
-//Function Number: 42
-setneilstate(param_00)
-{
+setneilstate(param_00) {
 	level.currentneilstate = param_00;
-	foreach(var_02 in level.players)
-	{
+	foreach(var_02 in level.players) {
 		var_02 thread scripts\cp\maps\cp_final\cp_final::update_special_mode_for_player(var_02);
 	}
 
-	switch(param_00)
-	{
+	switch(param_00) {
 		case "happy":
-			if(isdefined(level.var_BEC5))
-			{
+			if(isdefined(level.var_BEC5)) {
 				level.var_BEC5 setscriptablepartstate("happy","show",1);
 			}
 	
@@ -696,8 +552,7 @@ setneilstate(param_00)
 			break;
 
 		case "happy_line":
-			if(isdefined(level.var_BEC5))
-			{
+			if(isdefined(level.var_BEC5)) {
 				level.var_BEC5 setscriptablepartstate("happy_line","show",1);
 			}
 	
@@ -705,8 +560,7 @@ setneilstate(param_00)
 			break;
 
 		case "straight":
-			if(isdefined(level.var_BEC5))
-			{
+			if(isdefined(level.var_BEC5)) {
 				level.var_BEC5 setscriptablepartstate("oface","show",1);
 			}
 	
@@ -714,8 +568,7 @@ setneilstate(param_00)
 			break;
 
 		case "angry":
-			if(isdefined(level.var_BEC5))
-			{
+			if(isdefined(level.var_BEC5)) {
 				level.var_BEC5 setscriptablepartstate("angry","show",1);
 			}
 	
@@ -723,8 +576,7 @@ setneilstate(param_00)
 			break;
 
 		case "angry_line":
-			if(isdefined(level.var_BEC5))
-			{
+			if(isdefined(level.var_BEC5)) {
 				level.var_BEC5 setscriptablepartstate("angry_line","show",1);
 			}
 	
@@ -732,8 +584,7 @@ setneilstate(param_00)
 			break;
 
 		case "sad":
-			if(isdefined(level.var_BEC5))
-			{
+			if(isdefined(level.var_BEC5)) {
 				level.var_BEC5 setscriptablepartstate("sad","show",1);
 			}
 	
@@ -741,10 +592,8 @@ setneilstate(param_00)
 			break;
 
 		default:
-			if(isdefined(level.var_BEC5))
-			{
-				if(scripts\engine\utility::cointoss())
-				{
+			if(isdefined(level.var_BEC5)) {
+				if(scripts\engine\utility::cointoss()) {
 					level.var_BEC5 setscriptablepartstate("happy","show",1);
 				}
 				else
@@ -758,9 +607,7 @@ setneilstate(param_00)
 	}
 }
 
-//Function Number: 43
-disabledoorswhenentangled(param_00,param_01)
-{
+disabledoorswhenentangled(param_00,param_01) {
 	level endon("game_ended");
 	level endon("inFinalPosition");
 	param_01 endon("end_entangler_funcs");
@@ -775,9 +622,7 @@ disabledoorswhenentangled(param_00,param_01)
 	disableslidingdoorinteractions();
 }
 
-//Function Number: 44
-watchforitemdeleted(param_00,param_01)
-{
+watchforitemdeleted(param_00,param_01) {
 	param_01 endon("death");
 	param_01 endon("reset");
 	param_01 endon("inFinalPosition");
@@ -786,9 +631,7 @@ watchforitemdeleted(param_00,param_01)
 	thread resetneilhead(param_00,param_01);
 }
 
-//Function Number: 45
-resetneilhead(param_00,param_01)
-{
+resetneilhead(param_00,param_01) {
 	param_01 notify("end_entangler_funcs");
 	param_01 notify("reset");
 	param_01 endon("inFinalPosition");
@@ -815,13 +658,9 @@ resetneilhead(param_00,param_01)
 	thread reenableneilheadentangleitem(param_00,param_01);
 }
 
-//Function Number: 46
-disableslidingdoorinteractions(param_00)
-{
-	foreach(var_02 in level.allslidingdoors)
-	{
-		if(scripts\engine\utility::istrue(param_00) && !scripts\engine\utility::istrue(var_02.player_opened))
-		{
+disableslidingdoorinteractions(param_00) {
+	foreach(var_02 in level.allslidingdoors) {
+		if(scripts\engine\utility::istrue(param_00) && !scripts\engine\utility::istrue(var_02.player_opened)) {
 			continue;
 		}
 
@@ -830,22 +669,16 @@ disableslidingdoorinteractions(param_00)
 	}
 }
 
-//Function Number: 47
-resetslidingdoorstonormalstate()
-{
-	foreach(var_01 in level.allslidingdoors)
-	{
+resetslidingdoorstonormalstate() {
+	foreach(var_01 in level.allslidingdoors) {
 		var_01.nointeraction = undefined;
-		if(scripts\engine\utility::istrue(var_01.var_4284))
-		{
+		if(scripts\engine\utility::istrue(var_01.var_4284)) {
 			scripts\cp\cp_interaction::add_to_current_interaction_list(var_01);
 		}
 	}
 }
 
-//Function Number: 48
-watchforitementangled(param_00,param_01)
-{
+watchforitementangled(param_00,param_01) {
 	level endon("game_ended");
 	param_01 notify("watchForItemEntangled");
 	param_01 endon("watchForItemEntangled");
@@ -853,8 +686,7 @@ watchforitementangled(param_00,param_01)
 	param_01 endon("inFinalPosition");
 	level endon("inFinalPosition");
 	scripts\engine\utility::flag_waitopen("disable_evil_neil");
-	if(scripts\engine\utility::istrue(param_01.entangled))
-	{
+	if(scripts\engine\utility::istrue(param_01.entangled)) {
 		param_01 notify("end_entangle_move_to_logic");
 		param_01 notify("released");
 		param_01.sendbacktospawn = 1;
@@ -862,16 +694,13 @@ watchforitementangled(param_00,param_01)
 	}
 }
 
-//Function Number: 49
-neilheadlaunchfunc(param_00,param_01,param_02)
-{
+neilheadlaunchfunc(param_00,param_01,param_02) {
 	param_01 notify("launched");
 	param_01 endon("reset");
 	param_01 endon("inFinalPosition");
 	level endon("inFinalPosition");
 	param_01 endon("released");
-	if(scripts\engine\utility::istrue(param_01.sendbacktospawn))
-	{
+	if(scripts\engine\utility::istrue(param_01.sendbacktospawn)) {
 		param_00.entangledmodel = undefined;
 		thread resetneilhead(param_00,param_01);
 		return;
@@ -880,9 +709,7 @@ neilheadlaunchfunc(param_00,param_01,param_02)
 	scripts\cp\crafted_entangler::launchitem(param_00,param_01,param_02);
 }
 
-//Function Number: 50
-reenableneilheadentangleitem(param_00,param_01)
-{
+reenableneilheadentangleitem(param_00,param_01) {
 	level endon("game_ended");
 	param_01 notify("reenableNeilHeadEntangleItem");
 	param_01 endon("reenableNeilHeadEntangleItem");
@@ -894,8 +721,7 @@ reenableneilheadentangleitem(param_00,param_01)
 	wait(0.1);
 	param_01 show();
 	level waittill("wave_starting");
-	if(scripts\engine\utility::flag("disable_evil_neil") && level.currentneilstate != "straight")
-	{
+	if(scripts\engine\utility::flag("disable_evil_neil") && level.currentneilstate != "straight") {
 		level.var_BEC5 setscriptablepartstate("happy","show",1);
 	}
 	else
@@ -910,32 +736,26 @@ reenableneilheadentangleitem(param_00,param_01)
 	thread watchforitemdeleted(param_00,param_01);
 }
 
-//Function Number: 51
-itemallowentangle(param_00,param_01)
-{
+itemallowentangle(param_00,param_01) {
 	thread scripts\cp\crafted_entangler::outlineitemforplayers(param_00,param_01);
 	thread scripts\cp\crafted_entangler::watchforentanglerdamage(param_00,param_01);
 }
 
-//Function Number: 52
-checkneilheadcollision(param_00,param_01,param_02)
-{
+checkneilheadcollision(param_00,param_01,param_02) {
 	level endon("game_ended");
 	param_00 waittill("collision");
 	var_03 = param_00.origin;
 	var_04 = scripts\engine\utility::getstruct("neil_head_final_pos","script_noteworthy");
 	var_05 = scripts\engine\utility::getstruct(var_04.target,"targetname");
 	param_00 notify("end_entangler_funcs");
-	if(distance(var_03,var_05.origin) <= 48)
-	{
+	if(distance(var_03,var_05.origin) <= 48) {
 		deactivateinteractionsbynoteworthy("entangler_button");
 		playsoundatpos(var_03,"zmb_neil_head_placement_mpq");
 		level notify("neil_doing_something_evil");
 		level notify("inFinalPosition");
 		param_00 notify("inFinalPosition");
 		scripts\engine\utility::flag_set("disable_evil_neil");
-		if(isdefined(param_02))
-		{
+		if(isdefined(param_02)) {
 			playfx(level._effect["energy_door_impact"],var_05.origin,vectortoangles(var_05.origin - param_02.origin) * 8,anglestoup(var_05.angles));
 		}
 		else
@@ -970,18 +790,14 @@ checkneilheadcollision(param_00,param_01,param_02)
 	scripts\cp\loot::process_loot_content(level.players[0],"kill_50",var_06,0);
 }
 
-//Function Number: 53
-resetplaceneilshead(param_00,param_01,param_02)
-{
+resetplaceneilshead(param_00,param_01,param_02) {
 	param_00 endon("reset");
 	param_00 endon("inFinalPosition");
 	level endon("inFinalPosition");
 	thread resetneilhead(param_02,param_00);
 }
 
-//Function Number: 54
-deactivateneil()
-{
+deactivateneil() {
 	level notify("deactivateNeil");
 	level endon("deactivateNeil");
 	level endon("game_ended");
@@ -990,22 +806,19 @@ deactivateneil()
 	resetslidingdoorstonormalstate();
 	deactivateinteractionsbynoteworthy("entangler_button");
 	scripts\engine\utility::flag_set("disable_evil_neil");
-	foreach(var_01 in level.players)
-	{
+	foreach(var_01 in level.players) {
 		var_01 scripts\cp\cp_merits::processmerit("mt_dlc4_hack_neil");
 	}
 
 	var_03 = scripts\engine\utility::ter_op(level.players[0] scripts\cp\utility::isplayingsolo() || level.only_one_player,int(240),int(180));
 	var_04 = level scripts\engine\utility::waittill_any_timeout_1(var_03 - 5,"makeNeilEvil");
 	setneilstate("straight");
-	if(isdefined(var_04) && var_04 != "makeNeilEvil")
-	{
+	if(isdefined(var_04) && var_04 != "makeNeilEvil") {
 		level scripts\engine\utility::waittill_any_timeout_1(5,"makeNeilEvil");
 	}
 
 	scripts\engine\utility::flag_clear("disable_evil_neil");
-	if(isdefined(level.var_BEC5))
-	{
+	if(isdefined(level.var_BEC5)) {
 		level.var_BEC5 notify("end_entangler_funcs");
 	}
 
@@ -1015,11 +828,8 @@ deactivateneil()
 	thread neildoevilstuff();
 }
 
-//Function Number: 55
-runtogglepuzzlevalidation(param_00,param_01)
-{
-	if(validatepuzzle(param_00))
-	{
+runtogglepuzzlevalidation(param_00,param_01) {
+	if(validatepuzzle(param_00)) {
 		scripts\engine\utility::flag_set("completed_toggle_puzzle_once");
 		thread deactivateneil();
 		var_02 = scripts\engine\utility::getstruct("console_neil_head","targetname");
@@ -1033,19 +843,14 @@ runtogglepuzzlevalidation(param_00,param_01)
 	}
 }
 
-//Function Number: 56
-validatepuzzle(param_00)
-{
+validatepuzzle(param_00) {
 	var_01 = param_00.var_32F7[0].color;
-	foreach(var_04, var_03 in param_00.var_32F7)
-	{
-		if(var_04 < 1)
-		{
+	foreach(var_04, var_03 in param_00.var_32F7) {
+		if(var_04 < 1) {
 			continue;
 		}
 
-		if(var_03.color != var_01)
-		{
+		if(var_03.color != var_01) {
 			return 0;
 		}
 	}
@@ -1054,11 +859,8 @@ validatepuzzle(param_00)
 	return 1;
 }
 
-//Function Number: 57
-togglebutton(param_00)
-{
-	switch(param_00.color)
-	{
+togglebutton(param_00) {
+	switch(param_00.color) {
 		case "horizontal":
 			param_00.color = "vertical";
 			param_00 rotateto((0,90,90),0.1);
@@ -1071,9 +873,7 @@ togglebutton(param_00)
 	}
 }
 
-//Function Number: 58
-initentanglerbutton()
-{
+initentanglerbutton() {
 	var_00 = scripts\engine\utility::getstruct("entangler_button","script_noteworthy");
 	var_00.nextneilvotime = 0;
 	var_00.dontdelaytrigger = 1;
@@ -1082,14 +882,11 @@ initentanglerbutton()
 	var_00.var_32F7 = [];
 	var_01 = scripts\engine\utility::array_randomize_objects(var_01);
 	var_00.currentcolorstate = undefined;
-	foreach(var_06, var_03 in var_01)
-	{
+	foreach(var_06, var_03 in var_01) {
 		var_04 = undefined;
-		if(!isdefined(var_03.var_32D9))
-		{
+		if(!isdefined(var_03.var_32D9)) {
 			var_04 = spawn("script_model",var_03.origin);
-			if(isdefined(var_03.angles))
-			{
+			if(isdefined(var_03.angles)) {
 				var_04.angles = var_03.angles;
 			}
 		}
@@ -1099,8 +896,7 @@ initentanglerbutton()
 		}
 
 		var_05 = "cp_final_pod_wall_handle";
-		if(var_06 < 8)
-		{
+		if(var_06 < 8) {
 			var_04.color = "horizontal";
 			var_04 rotateto((0,90,0),0.1);
 		}
@@ -1118,14 +914,11 @@ initentanglerbutton()
 	}
 }
 
-//Function Number: 59
-solvetogglepuzzle()
-{
+solvetogglepuzzle() {
 	level endon("game_ended");
 	var_00 = scripts\engine\utility::getstruct("entangler_button","script_noteworthy");
 	var_01 = scripts\engine\utility::getstructarray(var_00.target,"targetname");
-	foreach(var_03 in var_01)
-	{
+	foreach(var_03 in var_01) {
 		var_03.var_32D9.color = "horizontal";
 		var_03.var_32D9 rotateto((0,90,0),0.1);
 	}
@@ -1134,9 +927,7 @@ solvetogglepuzzle()
 	runtogglepuzzlevalidation(var_00,level.players[0]);
 }
 
-//Function Number: 60
-choosedoordecoys(param_00)
-{
+choosedoordecoys(param_00) {
 	param_00.reachedfirstdoor = undefined;
 	param_00.reachedseconddoor = undefined;
 	var_01 = level.allslidingdoors;
@@ -1152,9 +943,7 @@ choosedoordecoys(param_00)
 	param_00.thirddoorpath = var_05[2];
 }
 
-//Function Number: 61
-getneilheadpath(param_00,param_01)
-{
+getneilheadpath(param_00,param_01) {
 	choosedoordecoys(param_01);
 	var_02 = scripts\engine\utility::getstruct("pap_portal","script_noteworthy");
 	var_03 = scripts\engine\utility::getstruct("neil_head_final_pos","script_noteworthy");
@@ -1167,22 +956,17 @@ getneilheadpath(param_00,param_01)
 	param_01.pathtogoal = var_08;
 }
 
-//Function Number: 62
-buildpath(param_00,param_01,param_02)
-{
+buildpath(param_00,param_01,param_02) {
 	var_03 = [];
 	var_04 = level.allslidingdoors;
 	var_05 = 0;
 	var_06 = undefined;
-	for(;;)
-	{
-		if(!isdefined(param_00))
-		{
+	for(;;) {
+		if(!isdefined(param_00)) {
 			param_00 = level.players[0];
 		}
 
-		if(var_03.size == 0)
-		{
+		if(var_03.size == 0) {
 			var_03 = param_00 findpath(param_01,param_02,1,1);
 		}
 		else
@@ -1191,36 +975,30 @@ buildpath(param_00,param_01,param_02)
 			var_03 = scripts\engine\utility::array_combine(var_03,var_07);
 		}
 
-		if(distance2dsquared(param_02,var_03[var_03.size - 1]) <= 4096)
-		{
+		if(distance2dsquared(param_02,var_03[var_03.size - 1]) <= 4096) {
 			return var_03;
 		}
 
 		var_04 = sortbydistance(var_04,var_03[var_03.size - 1]);
 		var_08 = [];
 		var_09 = undefined;
-		foreach(var_0B in var_04)
-		{
-			if(var_05 && var_0B == var_04[0] || var_0B == var_06)
-			{
+		foreach(var_0B in var_04) {
+			if(var_05 && var_0B == var_04[0] || var_0B == var_06) {
 				continue;
 			}
 
 			var_08 = param_00 findpath(var_03[var_03.size - 1],var_0B.origin,1,1);
-			if(distance2dsquared(var_0B.origin,var_08[var_08.size - 1]) <= 4096)
-			{
+			if(distance2dsquared(var_0B.origin,var_08[var_08.size - 1]) <= 4096) {
 				var_09 = var_0B;
 				break;
 			}
 		}
 
-		if(!var_05)
-		{
+		if(!var_05) {
 			var_05 = 1;
 		}
 
-		if(!isdefined(var_09))
-		{
+		if(!isdefined(var_09)) {
 			return var_03;
 		}
 		else
@@ -1228,13 +1006,11 @@ buildpath(param_00,param_01,param_02)
 			var_06 = var_09;
 		}
 
-		if(isdefined(var_09.target))
-		{
+		if(isdefined(var_09.target)) {
 			var_08 = [];
 			var_08[var_08.size] = var_09.origin;
 			var_0D = scripts\engine\utility::getstruct(var_09.target,"targetname");
-			if(function_02A4(var_0D))
-			{
+			if(function_02A4(var_0D)) {
 				var_08[var_08.size] = var_0D.origin;
 				var_03 = scripts\engine\utility::array_combine(var_03,var_08);
 			}
@@ -1250,9 +1026,7 @@ buildpath(param_00,param_01,param_02)
 	}
 }
 
-//Function Number: 63
-assignbuttonindex(param_00,param_01)
-{
+assignbuttonindex(param_00,param_01) {
 	var_02 = [-472.8,-486.8,-500.8,-514.8];
 	var_03 = [128.8,114.8,100.8,86.8];
 	var_04 = [];
@@ -1279,19 +1053,16 @@ assignbuttonindex(param_00,param_01)
 	var_19 = [];
 	var_1A = [];
 	var_1B = [];
-	foreach(var_1D in param_00)
-	{
+	foreach(var_1D in param_00) {
 		var_1E = var_1D.origin[0];
 		var_1F = var_1D.origin[2];
 		var_1D.id = 1;
 		var_1D.rulegroup = [];
-		if(isdefined(var_1D.script_noteworthy))
-		{
+		if(isdefined(var_1D.script_noteworthy)) {
 			var_1D.id = int(var_1D.script_noteworthy);
 		}
 
-		switch(var_1D.id)
-		{
+		switch(var_1D.id) {
 			case 1:
 				var_05[var_05.size] = var_1D;
 				var_06[var_06.size] = var_1D;
@@ -1561,14 +1332,10 @@ assignbuttonindex(param_00,param_01)
 	thread assignbuttonrules(param_00,param_01);
 }
 
-//Function Number: 64
-assignbuttonrules(param_00,param_01)
-{
+assignbuttonrules(param_00,param_01) {
 	var_02 = randomint(6);
-	foreach(var_04 in param_00)
-	{
-		switch(var_04.id)
-		{
+	foreach(var_04 in param_00) {
+		switch(var_04.id) {
 			case 1:
 				var_04.rulegroup[var_04.rulegroup.size] = param_01.group1;
 				var_04.rulegroup[var_04.rulegroup.size] = param_01.group8;
@@ -1714,8 +1481,7 @@ assignbuttonrules(param_00,param_01)
 				break;
 		}
 
-		if(scripts\engine\utility::flag("completed_toggle_puzzle_once"))
-		{
+		if(scripts\engine\utility::flag("completed_toggle_puzzle_once")) {
 			var_04.ruletouse = var_04.rulegroup[var_02];
 			continue;
 		}
@@ -1724,16 +1490,12 @@ assignbuttonrules(param_00,param_01)
 	}
 }
 
-//Function Number: 65
-runbuttonrules(param_00,param_01)
-{
+runbuttonrules(param_00,param_01) {
 	togglebutton(param_01);
 	var_02 = param_01.ruletouse;
-	foreach(var_04 in var_02)
-	{
+	foreach(var_04 in var_02) {
 		var_05 = var_04.var_32D9;
-		if(var_05 == param_01)
-		{
+		if(var_05 == param_01) {
 			continue;
 		}
 
@@ -1741,15 +1503,11 @@ runbuttonrules(param_00,param_01)
 	}
 }
 
-//Function Number: 66
-buttonrule2(param_00,param_01)
-{
+buttonrule2(param_00,param_01) {
 	togglebutton(param_01);
-	foreach(var_03 in param_00.group2)
-	{
+	foreach(var_03 in param_00.group2) {
 		var_04 = var_03.var_32D9;
-		if(var_04 == param_01)
-		{
+		if(var_04 == param_01) {
 			continue;
 		}
 
@@ -1757,15 +1515,11 @@ buttonrule2(param_00,param_01)
 	}
 }
 
-//Function Number: 67
-buttonrule3(param_00,param_01)
-{
+buttonrule3(param_00,param_01) {
 	togglebutton(param_01);
-	foreach(var_03 in param_00.group3)
-	{
+	foreach(var_03 in param_00.group3) {
 		var_04 = var_03.var_32D9;
-		if(var_04 == param_01)
-		{
+		if(var_04 == param_01) {
 			continue;
 		}
 
@@ -1773,15 +1527,11 @@ buttonrule3(param_00,param_01)
 	}
 }
 
-//Function Number: 68
-buttonrule4(param_00,param_01)
-{
+buttonrule4(param_00,param_01) {
 	togglebutton(param_01);
-	foreach(var_03 in param_00.group4)
-	{
+	foreach(var_03 in param_00.group4) {
 		var_04 = var_03.var_32D9;
-		if(var_04 == param_01)
-		{
+		if(var_04 == param_01) {
 			continue;
 		}
 
@@ -1789,9 +1539,7 @@ buttonrule4(param_00,param_01)
 	}
 }
 
-//Function Number: 69
-watchforplayerlookat(param_00)
-{
+watchforplayerlookat(param_00) {
 	level endon("game_ended");
 	param_00 endon("disconnect");
 	param_00 endon("watchForPlayerLookat");
@@ -1801,20 +1549,15 @@ watchforplayerlookat(param_00)
 	var_02 = var_01.var_32F7;
 	var_03 = undefined;
 	var_04 = undefined;
-	for(;;)
-	{
+	for(;;) {
 		var_05 = 0;
-		foreach(var_07 in var_02)
-		{
-			if(param_00 worldpointinreticle_circle(var_07.origin,65,20))
-			{
+		foreach(var_07 in var_02) {
+			if(param_00 worldpointinreticle_circle(var_07.origin,65,20)) {
 				var_05 = 1;
 				param_00.current_button = var_07;
 				var_04 = 2;
-				if(isdefined(var_03))
-				{
-					if(var_03 != var_07)
-					{
+				if(isdefined(var_03)) {
+					if(var_03 != var_07) {
 						var_03 hudoutlinedisableforclient(param_00);
 						var_07 hudoutlineenableforclient(param_00,var_04,0,0);
 					}
@@ -1828,10 +1571,8 @@ watchforplayerlookat(param_00)
 			}
 		}
 
-		if(!scripts\engine\utility::istrue(var_05))
-		{
-			if(isdefined(var_03))
-			{
+		if(!scripts\engine\utility::istrue(var_05)) {
+			if(isdefined(var_03)) {
 				var_03 hudoutlinedisableforclient(param_00);
 			}
 
@@ -1843,32 +1584,24 @@ watchforplayerlookat(param_00)
 	}
 }
 
-//Function Number: 70
-unsetplayerlookat(param_00)
-{
+unsetplayerlookat(param_00) {
 	param_00 endon("disconnect");
 	param_00 endon("watchForPlayerLookat");
 	param_00 waittill("stop_interaction_logic");
-	if(isdefined(param_00.current_button))
-	{
+	if(isdefined(param_00.current_button)) {
 		param_00.current_button hudoutlinedisableforclient(param_00);
 		param_00.current_button = undefined;
 	}
 }
 
-//Function Number: 71
-watchforentanglerdamage(param_00)
-{
+watchforentanglerdamage(param_00) {
 	level endon("game_ended");
 	level endon("endMonitorDamageLoop");
 	scripts\engine\utility::flag_wait("restorepower_step1");
-	for(;;)
-	{
+	for(;;) {
 		level waittill("entangler_item_collision",var_01);
-		if(distance(var_01,sortbydistance(param_00,var_01)[0].origin) <= 56)
-		{
-			foreach(var_03 in param_00)
-			{
+		if(distance(var_01,sortbydistance(param_00,var_01)[0].origin) <= 56) {
+			foreach(var_03 in param_00) {
 				var_03 setmodel("cp_final_monitor_large_screen_cracked");
 			}
 
@@ -1880,69 +1613,50 @@ watchforentanglerdamage(param_00)
 	level notify("endMonitorDamageLoop");
 }
 
-//Function Number: 72
-initneilconsole()
-{
-	foreach(var_01 in scripts\engine\utility::getstructarray("neil_console","script_noteworthy"))
-	{
+initneilconsole() {
+	foreach(var_01 in scripts\engine\utility::getstructarray("neil_console","script_noteworthy")) {
 		var_01.nextneilvotime = 0;
 	}
 
 	deactivateinteractionsbynoteworthy("neil_console");
 }
 
-//Function Number: 73
-initfusepuzzleinteraction()
-{
+initfusepuzzleinteraction() {
 	deactivateinteractionsbynoteworthy("fuse_puzzle");
 	deactivateinteractionsbynoteworthy("puzzle_pieces");
 }
 
-//Function Number: 74
-deactivateinteractionsbynoteworthy(param_00)
-{
+deactivateinteractionsbynoteworthy(param_00) {
 	var_01 = scripts\engine\utility::getstructarray(param_00,"script_noteworthy");
-	foreach(var_03 in var_01)
-	{
+	foreach(var_03 in var_01) {
 		scripts\cp\cp_interaction::remove_from_current_interaction_list(var_03);
 	}
 }
 
-//Function Number: 75
-deletemodelsbynoteworthy(param_00)
-{
+deletemodelsbynoteworthy(param_00) {
 	var_01 = scripts\engine\utility::getstructarray(param_00,"script_noteworthy");
-	foreach(var_03 in var_01)
-	{
-		if(isdefined(var_03.model))
-		{
+	foreach(var_03 in var_01) {
+		if(isdefined(var_03.model)) {
 			var_03.model delete();
 		}
 	}
 }
 
-//Function Number: 76
-activateinteractionsbynoteworthy(param_00)
-{
+activateinteractionsbynoteworthy(param_00) {
 	var_01 = scripts\engine\utility::getstructarray(param_00,"script_noteworthy");
-	foreach(var_03 in var_01)
-	{
+	foreach(var_03 in var_01) {
 		scripts\cp\cp_interaction::add_to_current_interaction_list(var_03);
 	}
 }
 
-//Function Number: 77
-initpuzzlecombinations()
-{
+initpuzzlecombinations() {
 	var_00 = "cp/zombies/cp_final_puzzle_combos.csv";
 	level.puzzle_combinations = [];
 	level.insertedpieces = [];
 	var_01 = 0;
-	for(;;)
-	{
+	for(;;) {
 		var_02 = tablelookupbyrow(var_00,var_01,0);
-		if(var_02 == "")
-		{
+		if(var_02 == "") {
 			break;
 		}
 
@@ -1951,17 +1665,13 @@ initpuzzlecombinations()
 	}
 }
 
-//Function Number: 78
-spawnmodelatstruct(param_00,param_01)
-{
-	if(!isdefined(param_01))
-	{
+spawnmodelatstruct(param_00,param_01) {
+	if(!isdefined(param_01)) {
 		param_01 = "tag_origin";
 	}
 
 	var_02 = spawn("script_model",param_00.origin);
-	if(isdefined(param_00.angles))
-	{
+	if(isdefined(param_00.angles)) {
 		var_02.angles = param_00.angles;
 	}
 	else
@@ -1973,21 +1683,16 @@ spawnmodelatstruct(param_00,param_01)
 	return var_02;
 }
 
-//Function Number: 79
-initmedbaymonitors()
-{
+initmedbaymonitors() {
 	var_00 = scripts\engine\utility::getstructarray("med_bay_monitors","targetname");
 	var_01 = [];
-	foreach(var_03 in var_00)
-	{
+	foreach(var_03 in var_00) {
 		var_04 = spawn("script_model",var_03.origin);
-		if(isdefined(var_03.angles))
-		{
+		if(isdefined(var_03.angles)) {
 			var_04.angles = var_03.angles;
 		}
 
-		if(isdefined(var_03.script_modelname))
-		{
+		if(isdefined(var_03.script_modelname)) {
 			var_04 setmodel(var_03.script_modelname);
 		}
 
@@ -1997,33 +1702,25 @@ initmedbaymonitors()
 	level thread watchforentanglerdamage(var_01);
 }
 
-//Function Number: 80
-spawnpuzzlepieces()
-{
+spawnpuzzlepieces() {
 	var_00 = scripts\engine\utility::getstructarray("puzzle_pieces","script_noteworthy");
 	level.puzzlestates = getvalidpuzzlestates();
 	level.phantomdisk = level.puzzlestates[level.puzzlestates.size - 1];
-	foreach(var_03, var_02 in var_00)
-	{
+	foreach(var_03, var_02 in var_00) {
 		spawnpuzzlepiece(var_03,var_02);
 	}
 }
 
-//Function Number: 81
-spawnpuzzlepiece(param_00,param_01)
-{
-	if(isdefined(param_01.model))
-	{
+spawnpuzzlepiece(param_00,param_01) {
+	if(isdefined(param_01.model)) {
 		param_01.model delete();
 	}
 
-	if(isdefined(param_01.screenmodel))
-	{
+	if(isdefined(param_01.screenmodel)) {
 		param_01.screenmodel delete();
 	}
 
-	if(isdefined(param_01.target))
-	{
+	if(isdefined(param_01.target)) {
 		var_02 = scripts\engine\utility::getstruct(param_01.target,"targetname");
 	}
 	else
@@ -2033,8 +1730,7 @@ spawnpuzzlepiece(param_00,param_01)
 
 	var_03 = spawn("script_model",var_02.origin);
 	var_04 = level.puzzlestates[param_00];
-	switch(int(var_04))
-	{
+	switch(int(var_04)) {
 		case 1:
 			var_03 setmodel("cp_final_floppydisk_01");
 			break;
@@ -2084,16 +1780,14 @@ spawnpuzzlepiece(param_00,param_01)
 			break;
 	}
 
-	if(isdefined(var_02.angles))
-	{
+	if(isdefined(var_02.angles)) {
 		var_03.angles = var_02.angles;
 	}
 
 	param_01.id = param_00;
 	param_01.model = var_03;
 	param_01.state = level.puzzlestates[param_00];
-	if(isdefined(param_01.groupname))
-	{
+	if(isdefined(param_01.groupname)) {
 		var_03.hasbeenthrown = undefined;
 		param_01 notify("new_model_created");
 		param_01.entanglemodel = var_03;
@@ -2107,9 +1801,7 @@ spawnpuzzlepiece(param_00,param_01)
 	}
 }
 
-//Function Number: 82
-disableaftermovethroughvent(param_00)
-{
+disableaftermovethroughvent(param_00) {
 	param_00 endon("new_model_created");
 	level waittill("vent_grabbed_puzzle_piece",var_01);
 	level.undergratepuzzlepiece = undefined;
@@ -2140,8 +1832,7 @@ disableaftermovethroughvent(param_00)
 	var_07.state = param_00.state;
 	level.struct_class_names["targetname"]["interaction"][level.struct_class_names["targetname"]["interaction"].size] = var_07;
 	level.struct_class_names["script_noteworthy"]["puzzle_pieces"][level.struct_class_names["script_noteworthy"]["puzzle_pieces"].size] = var_07;
-	if(scripts\engine\utility::flag("neil_head_placed"))
-	{
+	if(scripts\engine\utility::flag("neil_head_placed")) {
 		scripts\cp\cp_interaction::add_to_current_interaction_list(var_07);
 	}
 
@@ -2149,34 +1840,27 @@ disableaftermovethroughvent(param_00)
 	level notify("end_vent_fx");
 }
 
-//Function Number: 83
-diskcustomcollisionfunc(param_00,param_01,param_02)
-{
+diskcustomcollisionfunc(param_00,param_01,param_02) {
 	level endon("game_ended");
 	var_03 = scripts\engine\utility::getstructarray("air_suck_loc","targetname");
-	for(var_04 = 0;var_04 <= 100;var_04++)
-	{
+	for(var_04 = 0;var_04 <= 100;var_04++) {
 		var_05 = param_00.origin;
 		var_06 = param_00.angles;
 		param_00 scripts\engine\utility::waittill_any_timeout_1(0.1,"collision");
 		level notify("entangler_item_collision",param_00.origin);
-		if(distance(var_05,param_00.origin) < 1 && var_06 == param_00.angles)
-		{
+		if(distance(var_05,param_00.origin) < 1 && var_06 == param_00.angles) {
 			break;
 		}
 	}
 
-	if(var_04 >= 100)
-	{
+	if(var_04 >= 100) {
 		param_00.forcedrespawn = 1;
 	}
 
 	param_00.hasbeenthrown = 1;
 	param_00.launched = undefined;
-	foreach(var_08 in var_03)
-	{
-		if(distance(var_08.origin,param_00.origin) <= 96)
-		{
+	foreach(var_08 in var_03) {
+		if(distance(var_08.origin,param_00.origin) <= 96) {
 			param_00 notify("released",undefined,1,36);
 			return;
 		}
@@ -2185,38 +1869,30 @@ diskcustomcollisionfunc(param_00,param_01,param_02)
 	param_00 notify("released",1);
 }
 
-//Function Number: 84
-entanglemovetocheckforcollision(param_00,param_01,param_02,param_03)
-{
+entanglemovetocheckforcollision(param_00,param_01,param_02,param_03) {
 	var_04 = scripts\engine\utility::array_combine(level.players,[param_02]);
 	var_05 = scripts\common\trace::create_contents(1,1,1,1,0,0,1);
 	var_06 = scripts\common\trace::capsule_trace((param_00.origin[0],param_00.origin[1],param_03.origin[2]),param_03.origin,16,32,undefined,var_04,var_05,24);
 	var_07 = var_06["hittype"];
-	if(isdefined(var_07) && var_07 != "hittype_none")
-	{
+	if(isdefined(var_07) && var_07 != "hittype_none") {
 		return 0;
 	}
 
 	return 1;
 }
 
-//Function Number: 85
-getvalidpuzzlestates()
-{
+getvalidpuzzlestates() {
 	var_00 = randomint(level.puzzle_combinations.size);
 	var_01 = strtok(level.puzzle_combinations[var_00],",");
 	level.correctneilpuzzleanswer = var_01;
 	return scripts\engine\utility::array_randomize_objects(var_01);
 }
 
-//Function Number: 86
-spawnn31lhead()
-{
+spawnn31lhead() {
 	var_00 = scripts\engine\utility::getstructarray("neil_head","script_noteworthy");
 	var_00 = scripts\engine\utility::array_randomize_objects(var_00);
 	var_01 = var_00[0];
-	if(isdefined(var_01.target))
-	{
+	if(isdefined(var_01.target)) {
 		var_02 = scripts\engine\utility::getstruct(var_01.target,"targetname");
 	}
 	else
@@ -2228,10 +1904,8 @@ spawnn31lhead()
 	var_01.headmodel = var_03;
 	var_01.nextneilvotime = 0;
 	level.var_BEC5 = var_03;
-	foreach(var_05 in var_00)
-	{
-		if(var_05 == var_01)
-		{
+	foreach(var_05 in var_00) {
+		if(var_05 == var_01) {
 			continue;
 		}
 
@@ -2239,16 +1913,11 @@ spawnn31lhead()
 	}
 }
 
-//Function Number: 87
-consolehintfunc(param_00,param_01)
-{
-	if(scripts\engine\utility::flag("neil_head_placed") && !scripts\engine\utility::flag("fuse_puzzle_completed"))
-	{
+consolehintfunc(param_00,param_01) {
+	if(scripts\engine\utility::flag("neil_head_placed") && !scripts\engine\utility::flag("fuse_puzzle_completed")) {
 		var_02 = gettime();
-		if(var_02 >= param_00.nextneilvotime)
-		{
-			if(playneilvofromconsoleorhead("final_n31l_misc_reaction",1))
-			{
+		if(var_02 >= param_00.nextneilvotime) {
+			if(playneilvofromconsoleorhead("final_n31l_misc_reaction",1)) {
 				param_00.nextneilvotime = param_00.nextneilvotime + 10000;
 			}
 		}
@@ -2257,14 +1926,10 @@ consolehintfunc(param_00,param_01)
 	return "";
 }
 
-//Function Number: 88
-headhintfunc(param_00,param_01)
-{
+headhintfunc(param_00,param_01) {
 	var_02 = gettime();
-	if(var_02 >= param_00.nextneilvotime)
-	{
-		if(playneilvofromconsoleorhead("final_n31l_found"))
-		{
+	if(var_02 >= param_00.nextneilvotime) {
+		if(playneilvofromconsoleorhead("final_n31l_found")) {
 			param_00.nextneilvotime = var_02 + 10000;
 		}
 	}
@@ -2272,13 +1937,9 @@ headhintfunc(param_00,param_01)
 	return &"CP_FINAL_PICKUP_ITEM";
 }
 
-//Function Number: 89
-puzzlepiecehintfunc(param_00,param_01)
-{
-	if(!isdefined(param_01.haspuzzlepiece) || isdefined(param_01.haspuzzlepiece) && param_01.haspuzzlepiece != param_00.state)
-	{
-		if(isdefined(level.phantomdisk) && param_00.state == level.phantomdisk)
-		{
+puzzlepiecehintfunc(param_00,param_01) {
+	if(!isdefined(param_01.haspuzzlepiece) || isdefined(param_01.haspuzzlepiece) && param_01.haspuzzlepiece != param_00.state) {
+		if(isdefined(level.phantomdisk) && param_00.state == level.phantomdisk) {
 			return &"CP_FINAL_PICKUP_ITEM";
 		}
 
@@ -2288,13 +1949,9 @@ puzzlepiecehintfunc(param_00,param_01)
 	return "";
 }
 
-//Function Number: 90
-puzzlepieceusefunc(param_00,param_01)
-{
-	if(!isdefined(param_01.haspuzzlepiece) || isdefined(param_01.haspuzzlepiece) && param_01.haspuzzlepiece != param_00.state)
-	{
-		if(isdefined(param_00.target))
-		{
+puzzlepieceusefunc(param_00,param_01) {
+	if(!isdefined(param_01.haspuzzlepiece) || isdefined(param_01.haspuzzlepiece) && param_01.haspuzzlepiece != param_00.state) {
+		if(isdefined(param_00.target)) {
 			var_02 = scripts\engine\utility::getstruct(param_00.target,"targetname");
 		}
 		else
@@ -2309,23 +1966,17 @@ puzzlepieceusefunc(param_00,param_01)
 	}
 }
 
-//Function Number: 91
-consoleusefunc(param_00,param_01)
-{
-	if(!scripts\engine\utility::flag("neil_head_placed"))
-	{
+consoleusefunc(param_00,param_01) {
+	if(!scripts\engine\utility::flag("neil_head_placed")) {
 		scripts\engine\utility::flag_set("neil_head_placed");
 		scripts\cp\utility::playsoundatpos_safe(param_00.origin,"zmb_neil_head_placement");
-		if(level.players.size >= 4)
-		{
-			if(scripts\engine\utility::cointoss())
-			{
+		if(level.players.size >= 4) {
+			if(scripts\engine\utility::cointoss()) {
 				level thread foundpowervo(param_01);
 				return;
 			}
 
-			if(scripts\engine\utility::cointoss())
-			{
+			if(scripts\engine\utility::cointoss()) {
 				param_01 thread scripts\cp\cp_vo::try_to_play_vo("quest_n31l_head_place","zmb_comment_vo");
 				return;
 			}
@@ -2334,8 +1985,7 @@ consoleusefunc(param_00,param_01)
 			return;
 		}
 
-		if(scripts\engine\utility::cointoss())
-		{
+		if(scripts\engine\utility::cointoss()) {
 			param_01 thread scripts\cp\cp_vo::try_to_play_vo("quest_n31l_head_place","zmb_comment_vo");
 			return;
 		}
@@ -2345,40 +1995,32 @@ consoleusefunc(param_00,param_01)
 	}
 }
 
-//Function Number: 92
-foundpowervo(param_00)
-{
-	if(isdefined(param_00.vo_prefix))
-	{
-		switch(param_00.vo_prefix)
-		{
+foundpowervo(param_00) {
+	if(isdefined(param_00.vo_prefix)) {
+		switch(param_00.vo_prefix) {
 			case "p1_":
-				if(!isdefined(level.completed_dialogues["conv_poweron_sally_1_1"]))
-				{
+				if(!isdefined(level.completed_dialogues["conv_poweron_sally_1_1"])) {
 					level thread scripts\cp\cp_vo::try_to_play_vo("conv_poweron_sally_1_1","rave_dialogue_vo","highest",666,0,0,0,100);
 					level.completed_dialogues["conv_poweron_sally_1_1"] = 1;
 				}
 				break;
 
 			case "p2_":
-				if(!isdefined(level.completed_dialogues["conv_poweron_pdex_1_1"]))
-				{
+				if(!isdefined(level.completed_dialogues["conv_poweron_pdex_1_1"])) {
 					level thread scripts\cp\cp_vo::try_to_play_vo("conv_poweron_pdex_1_1","rave_dialogue_vo","highest",666,0,0,0,100);
 					level.completed_dialogues["conv_poweron_pdex_1_1"] = 1;
 				}
 				break;
 
 			case "p3_":
-				if(!isdefined(level.completed_dialogues["conv_poweron_andre_1_1"]))
-				{
+				if(!isdefined(level.completed_dialogues["conv_poweron_andre_1_1"])) {
 					level thread scripts\cp\cp_vo::try_to_play_vo("conv_poweron_andre_1_1","rave_dialogue_vo","highest",666,0,0,0,100);
 					level.completed_dialogues["conv_poweron_andre_1_1"] = 1;
 				}
 				break;
 
 			case "p4_":
-				if(!isdefined(level.completed_dialogues["conv_poweron_aj_1_1"]))
-				{
+				if(!isdefined(level.completed_dialogues["conv_poweron_aj_1_1"])) {
 					level thread scripts\cp\cp_vo::try_to_play_vo("conv_poweron_aj_1_1","rave_dialogue_vo","highest",666,0,0,0,100);
 					level.completed_dialogues["conv_poweron_aj_1_1"] = 1;
 				}
@@ -2387,13 +2029,9 @@ foundpowervo(param_00)
 	}
 }
 
-//Function Number: 93
-validatepuzzleslot(param_00,param_01)
-{
-	for(var_02 = 0;var_02 < level.correctneilpuzzleanswer.size;var_02++)
-	{
-		if(level.correctneilpuzzleanswer[var_02] != level.insertedpieces[var_02])
-		{
+validatepuzzleslot(param_00,param_01) {
+	for(var_02 = 0;var_02 < level.correctneilpuzzleanswer.size;var_02++) {
+		if(level.correctneilpuzzleanswer[var_02] != level.insertedpieces[var_02]) {
 			return 0;
 		}
 	}
@@ -2401,20 +2039,15 @@ validatepuzzleslot(param_00,param_01)
 	return 1;
 }
 
-//Function Number: 94
-headusefunc(param_00,param_01)
-{
+headusefunc(param_00,param_01) {
 	scripts\engine\utility::flag_set("neil_head_found");
 	param_01 thread scripts\cp\cp_vo::try_to_play_vo("quest_n31l_head_find","zmb_comment_vo");
 	scripts\cp\maps\cp_final\cp_final_interactions::generic_pickup_gesture_and_fx(param_01,param_00.headmodel.origin);
 	scripts\cp\cp_interaction::remove_from_current_interaction_list(param_00);
 }
 
-//Function Number: 95
-fusepuzzlehintfunc(param_00,param_01)
-{
-	if(isdefined(param_01.haspuzzlepiece))
-	{
+fusepuzzlehintfunc(param_00,param_01) {
+	if(isdefined(param_01.haspuzzlepiece)) {
 		param_01.interaction_trigger sethintstringparams(int(param_00.name));
 		return &"CP_FINAL_INSERT_DISK";
 	}
@@ -2423,17 +2056,13 @@ fusepuzzlehintfunc(param_00,param_01)
 	return "";
 }
 
-//Function Number: 96
-fusepuzzleusefunc(param_00,param_01)
-{
-	if(isdefined(param_01.haspuzzlepiece))
-	{
+fusepuzzleusefunc(param_00,param_01) {
+	if(isdefined(param_01.haspuzzlepiece)) {
 		scripts\cp\utility::set_quest_icon(11);
 		param_01 setclientomnvar("zm_hud_inventory_1",0);
 		var_02 = param_01.haspuzzlepiece;
 		var_03 = "disk_slot_" + param_00.name;
-		switch(int(var_02))
-		{
+		switch(int(var_02)) {
 			case 1:
 				level.neil_console setscriptablepartstate(var_03,"disk01");
 				break;
@@ -2491,10 +2120,8 @@ fusepuzzleusefunc(param_00,param_01)
 		param_01 setclientomnvar("zm_special_item",0);
 		scripts\cp\cp_interaction::remove_from_current_interaction_list(param_00);
 		setomnvar("zm_floppy_count",level.insertedpieces.size);
-		if(level.insertedpieces.size == 4)
-		{
-			if(!validatepuzzleslot(param_00,param_01))
-			{
+		if(level.insertedpieces.size == 4) {
+			if(!validatepuzzleslot(param_00,param_01)) {
 				playsoundatpos(param_00.origin,"mpq_fail_buzzer");
 				wait(1);
 				setomnvar("zm_floppy_count",0);
@@ -2523,10 +2150,8 @@ fusepuzzleusefunc(param_00,param_01)
 
 		param_01 thread scripts\cp\cp_vo::try_to_play_vo("quest_n31l_part_" + level.insertedpieces.size,"zmb_comment_vo");
 		var_05 = gettime();
-		if(var_05 >= level.neil_console.nextneilvotime)
-		{
-			if(playneilvofromconsoleorhead(scripts\engine\utility::random(["final_n31l_return_part_1","final_n31l_return_part_2","final_n31l_return_part_3"]),1))
-			{
+		if(var_05 >= level.neil_console.nextneilvotime) {
+			if(playneilvofromconsoleorhead(scripts\engine\utility::random(["final_n31l_return_part_1","final_n31l_return_part_2","final_n31l_return_part_3"]),1)) {
 				level.neil_console.nextneilvotime = var_05 + 15000;
 				return;
 			}
@@ -2536,70 +2161,49 @@ fusepuzzleusefunc(param_00,param_01)
 	}
 }
 
-//Function Number: 97
-removeinvalidpuzzlepieces(param_00)
-{
+removeinvalidpuzzlepieces(param_00) {
 	var_01 = scripts\engine\utility::getstructarray("puzzle_pieces","script_noteworthy");
-	foreach(var_03 in var_01)
-	{
-		if(param_00 == var_03.state)
-		{
+	foreach(var_03 in var_01) {
+		if(param_00 == var_03.state) {
 			scripts\cp\cp_interaction::remove_from_current_interaction_list(var_03);
 		}
 	}
 
-	foreach(var_06 in level.players)
-	{
-		if(isdefined(var_06.haspuzzlepiece) && var_06.haspuzzlepiece == param_00)
-		{
+	foreach(var_06 in level.players) {
+		if(isdefined(var_06.haspuzzlepiece) && var_06.haspuzzlepiece == param_00) {
 			var_06 setclientomnvar("zm_hud_inventory_1",0);
 			var_06.haspuzzlepiece = undefined;
 		}
 	}
 }
 
-//Function Number: 98
-blank(param_00,param_01)
-{
-}
+blank(param_00,param_01) {}
 
-//Function Number: 99
-retrieveneilshead()
-{
+retrieveneilshead() {
 	scripts\engine\utility::flag_wait("neil_head_found");
 }
 
-//Function Number: 100
-completeretrieveneilshead()
-{
+completeretrieveneilshead() {
 	scripts\cp\utility::set_quest_icon(6);
 	activateinteractionsbynoteworthy("neil_console");
 	var_00 = scripts\engine\utility::getstructarray("neil_head","script_noteworthy");
 	deactivateinteractionsbynoteworthy("neil_head");
-	foreach(var_02 in var_00)
-	{
-		if(isdefined(var_02.headmodel))
-		{
+	foreach(var_02 in var_00) {
+		if(isdefined(var_02.headmodel)) {
 			var_02.headmodel delete();
 		}
 	}
 }
 
-//Function Number: 101
-debugretrieveneilshead()
-{
+debugretrieveneilshead() {
 	scripts\engine\utility::flag_set("neil_head_found");
 }
 
-//Function Number: 102
-placeneilshead()
-{
+placeneilshead() {
 	scripts\engine\utility::flag_wait("neil_head_placed");
 }
 
-//Function Number: 103
-completeplaceneilshead()
-{
+completeplaceneilshead() {
 	turnonfacilitypower();
 	scripts\engine\utility::flag_set("canFiresale");
 	activateinteractionsbynoteworthy("fuse_puzzle");
@@ -2619,37 +2223,28 @@ completeplaceneilshead()
 	scripts\cp\maps\cp_final\cp_final::enablepa("pa_facility");
 	wait(0.5);
 	setneilstate("happy");
-	foreach(var_03 in level.players)
-	{
+	foreach(var_03 in level.players) {
 		var_03 scripts\cp\cp_merits::processmerit("mt_dlc4_neil_upgrade");
 	}
 
 	thread playneilnag(["final_n31l_nag_missing_pieces","final_n31l_request_pieces"],"fuse_puzzle_completed");
 }
 
-//Function Number: 104
-debugplaceneilshead()
-{
+debugplaceneilshead() {
 	scripts\engine\utility::flag_set("neil_head_placed");
 }
 
-//Function Number: 105
-playneilnag(param_00,param_01)
-{
+playneilnag(param_00,param_01) {
 	level endon("game_ended");
 	level notify("playNeilNag");
 	level endon("playNeilNag");
-	while(isdefined(param_01) && !scripts\engine\utility::flag(param_01))
-	{
+	while(isdefined(param_01) && !scripts\engine\utility::flag(param_01)) {
 		wait(randomintrange(30,60));
 		var_02 = scripts\engine\utility::random(param_00);
 		var_03 = gettime();
-		if(var_03 >= level.neilvotime)
-		{
-			foreach(var_05 in level.players)
-			{
-				if(isdefined(var_05.currentlocation) && var_05.currentlocation == "facility")
-				{
+		if(var_03 >= level.neilvotime) {
+			foreach(var_05 in level.players) {
+				if(isdefined(var_05.currentlocation) && var_05.currentlocation == "facility") {
 					var_05 scripts\cp\utility::playlocalsound_safe(var_02);
 				}
 			}
@@ -2660,23 +2255,17 @@ playneilnag(param_00,param_01)
 	}
 }
 
-//Function Number: 106
-playneilvo(param_00,param_01)
-{
+playneilvo(param_00,param_01) {
 	var_02 = gettime();
-	if(var_02 >= level.neilvotime)
-	{
-		foreach(var_04 in level.players)
-		{
-			if(isdefined(var_04.currentlocation) && var_04.currentlocation == "facility")
-			{
+	if(var_02 >= level.neilvotime) {
+		foreach(var_04 in level.players) {
+			if(isdefined(var_04.currentlocation) && var_04.currentlocation == "facility") {
 				var_04 scripts\cp\utility::playlocalsound_safe(param_00);
 			}
 		}
 
 		var_06 = lookupsoundlength(param_00);
-		if(isdefined(param_01))
-		{
+		if(isdefined(param_01)) {
 			var_07 = getsoundaliasfromvoprefix(param_01,1);
 			thread playplayernameaftertime(var_06,var_07);
 			var_06 = var_06 + lookupsoundlength(var_07);
@@ -2689,14 +2278,10 @@ playneilvo(param_00,param_01)
 	return 0;
 }
 
-//Function Number: 107
-getsoundaliasfromvoprefix(param_00,param_01)
-{
-	switch(param_00)
-	{
+getsoundaliasfromvoprefix(param_00,param_01) {
+	switch(param_00) {
 		case "p1_":
-			if(scripts\engine\utility::istrue(param_01))
-			{
+			if(scripts\engine\utility::istrue(param_01)) {
 				return "final_n31l_name_sally_pa";
 			}
 			else
@@ -2707,8 +2292,7 @@ getsoundaliasfromvoprefix(param_00,param_01)
 			break;
 
 		case "p2_":
-			if(scripts\engine\utility::istrue(param_01))
-			{
+			if(scripts\engine\utility::istrue(param_01)) {
 				return "final_n31l_name_poindexter_pa";
 			}
 			else
@@ -2719,8 +2303,7 @@ getsoundaliasfromvoprefix(param_00,param_01)
 			break;
 
 		case "p3_":
-			if(scripts\engine\utility::istrue(param_01))
-			{
+			if(scripts\engine\utility::istrue(param_01)) {
 				return "final_n31l_name_andre_pa";
 			}
 			else
@@ -2731,43 +2314,32 @@ getsoundaliasfromvoprefix(param_00,param_01)
 			break;
 
 		case "p4_":
-			if(scripts\engine\utility::istrue(param_01))
-			{
+			if(scripts\engine\utility::istrue(param_01)) {
 				return "final_n31l_name_aj_pa";
 			}
 			return "final_n31l_name_aj";
 	}
 }
 
-//Function Number: 108
-playplayernameaftertime(param_00,param_01)
-{
+playplayernameaftertime(param_00,param_01) {
 	level endon("game_ended");
 	wait(param_00 / 1000);
-	foreach(var_03 in level.players)
-	{
-		if(isdefined(var_03.currentlocation) && var_03.currentlocation == "facility")
-		{
+	foreach(var_03 in level.players) {
+		if(isdefined(var_03.currentlocation) && var_03.currentlocation == "facility") {
 			var_03 scripts\cp\utility::playlocalsound_safe(param_01);
 		}
 	}
 }
 
-//Function Number: 109
-playneilvofromconsoleorhead(param_00,param_01,param_02)
-{
+playneilvofromconsoleorhead(param_00,param_01,param_02) {
 	var_03 = gettime();
-	if(var_03 >= level.neilvotime)
-	{
-		if(scripts\engine\utility::istrue(param_01))
-		{
-			if(isdefined(level.neil_console))
-			{
+	if(var_03 >= level.neilvotime) {
+		if(scripts\engine\utility::istrue(param_01)) {
+			if(isdefined(level.neil_console)) {
 				level.neil_console stopsounds();
 				level.neil_console playsound(param_00);
 				var_04 = lookupsoundlength(param_00);
-				if(isdefined(param_02))
-				{
+				if(isdefined(param_02)) {
 					var_05 = getsoundaliasfromvoprefix(param_02);
 					thread playplayernameaftertime(var_04,var_05);
 					var_04 = var_04 + lookupsoundlength(var_05);
@@ -2780,13 +2352,11 @@ playneilvofromconsoleorhead(param_00,param_01,param_02)
 			return 0;
 		}
 
-		if(isdefined(level.var_BEC5))
-		{
+		if(isdefined(level.var_BEC5)) {
 			level.var_BEC5 stopsounds();
 			level.var_BEC5 playsound(param_01);
 			var_04 = lookupsoundlength(param_01);
-			if(isdefined(param_02))
-			{
+			if(isdefined(param_02)) {
 				var_05 = getsoundaliasfromvoprefix(param_02);
 				thread playplayernameaftertime(var_04,var_05);
 				var_04 = var_04 + lookupsoundlength(var_05);
@@ -2802,24 +2372,18 @@ playneilvofromconsoleorhead(param_00,param_01,param_02)
 	return 0;
 }
 
-//Function Number: 110
-setnextneilvotime(param_00)
-{
+setnextneilvotime(param_00) {
 	level.neilvotime = gettime() + param_00;
 }
 
-//Function Number: 111
-turnonfacilitypower()
-{
+turnonfacilitypower() {
 	level notify("power_on");
 	scripts\engine\utility::flag_set("restorepower_step1");
 	scripts\engine\utility::flag_set("power_on");
 	level.var_D746 = 1;
 	var_00 = getentarray("spawn_volume","targetname");
-	foreach(var_02 in var_00)
-	{
-		if(isdefined(var_02.basename))
-		{
+	foreach(var_02 in var_00) {
+		if(isdefined(var_02.basename)) {
 			var_03 = var_02.basename;
 		}
 		else
@@ -2828,19 +2392,15 @@ turnonfacilitypower()
 		}
 
 		level notify(var_03 + " power_on");
-		if(scripts\engine\utility::flag_exist(var_03 + " power_on"))
-		{
+		if(scripts\engine\utility::flag_exist(var_03 + " power_on")) {
 			scripts\engine\utility::flag_set(var_03 + " power_on");
 		}
 	}
 }
 
-//Function Number: 112
-initpuzzledoors()
-{
+initpuzzledoors() {
 	var_00 = scripts\engine\utility::getstructarray("toggle_puzzle_doors","targetname");
-	foreach(var_02 in var_00)
-	{
+	foreach(var_02 in var_00) {
 		var_03 = spawn("script_model",var_02.origin);
 		var_03.angles = var_02.angles;
 		var_03 setmodel("building_pod_wall_panel_01_thin");
@@ -2848,18 +2408,13 @@ initpuzzledoors()
 	}
 }
 
-//Function Number: 113
-waitforsecuritydoorsdestroyed()
-{
+waitforsecuritydoorsdestroyed() {
 	scripts\engine\utility::flag_wait("security_doors_deactivated");
 }
 
-//Function Number: 114
-securitydoorsdestroyed()
-{
+securitydoorsdestroyed() {
 	level notify("kill_energy_doors");
-	foreach(var_01 in level.all_quest_doors)
-	{
+	foreach(var_01 in level.all_quest_doors) {
 		playsoundatpos(var_01.origin,"zmb_forcefield_destroyed");
 		var_01 delete();
 	}
@@ -2869,36 +2424,26 @@ securitydoorsdestroyed()
 	activateinteractionsbynoteworthy("entangler_button");
 }
 
-//Function Number: 115
-openpuzzledoors()
-{
+openpuzzledoors() {
 	level endon("game_ended");
 	var_00 = scripts\engine\utility::getstructarray("toggle_puzzle_doors","targetname");
-	foreach(var_02 in var_00)
-	{
+	foreach(var_02 in var_00) {
 		var_02.doormodel delete();
 	}
 
 	scripts\engine\utility::flag_set("toggle_puzzle_doors_opened");
 }
 
-//Function Number: 116
-debugsecuritydoorsdestroyed()
-{
+debugsecuritydoorsdestroyed() {
 	scripts\engine\utility::flag_set("security_doors_deactivated");
 }
 
-//Function Number: 117
-fusepuzzle()
-{
+fusepuzzle() {
 	scripts\engine\utility::flag_wait("fuse_puzzle_completed");
 }
 
-//Function Number: 118
-completefusepuzzle()
-{
-	foreach(var_01 in level.players)
-	{
+completefusepuzzle() {
+	foreach(var_01 in level.players) {
 		var_01 scripts\cp\utility::stoplocalsound_safe("final_n31l_nag_missing_pieces");
 	}
 
@@ -2906,27 +2451,22 @@ completefusepuzzle()
 	thread neildoevilstuff();
 	scripts\cp\utility::set_quest_icon(10);
 	setneilstate("straight");
-	foreach(var_01 in level.players)
-	{
+	foreach(var_01 in level.players) {
 		var_01 scripts/cp/zombies/achievement::update_achievement("FRIENDS_FOREVER",1);
 	}
 
 	deactivateinteractionsbynoteworthy("fuse_puzzle");
 	deactivateinteractionsbynoteworthy("puzzle_pieces");
 	var_05 = scripts\engine\utility::getstructarray("puzzle_pieces","script_noteworthy");
-	foreach(var_07 in var_05)
-	{
-		if(isdefined(var_07.model))
-		{
+	foreach(var_07 in var_05) {
+		if(isdefined(var_07.model)) {
 			var_07.model delete();
 		}
 	}
 
-	foreach(var_0C, var_0A in level.correctneilpuzzleanswer)
-	{
+	foreach(var_0C, var_0A in level.correctneilpuzzleanswer) {
 		var_0B = "disk_slot_" + var_0C + 1;
-		switch(int(var_0A))
-		{
+		switch(int(var_0A)) {
 			case 1:
 				level.neil_console setscriptablepartstate(var_0B,"disk01");
 				break;
@@ -2980,18 +2520,13 @@ completefusepuzzle()
 	}
 }
 
-//Function Number: 119
-debugfusepuzzle()
-{
+debugfusepuzzle() {
 	scripts\engine\utility::flag_set("fuse_puzzle_completed");
 }
 
-//Function Number: 120
-initbridgepieces()
-{
+initbridgepieces() {
 	var_00 = scripts\engine\utility::getstructarray("pap_bridge","script_noteworthy");
-	foreach(var_02 in var_00)
-	{
+	foreach(var_02 in var_00) {
 		var_02.name = "pap_quest";
 		var_03 = spawn("script_model",var_02.origin);
 		var_03 setmodel("debris_exterior_damaged_metal_panels_08_scl50");
@@ -3002,17 +2537,13 @@ initbridgepieces()
 	scripts\engine\utility::flag_init("bridge_pieces_collected");
 }
 
-//Function Number: 121
-spawnastronauts()
-{
+spawnastronauts() {
 	level.astronautsshot = 0;
 	var_00 = scripts\engine\utility::getstructarray("hidden_song_nick","script_noteworthy");
 	var_00 = sortbydistance(var_00,(5715,-4040,131));
 	level.astronaut_structs = [];
-	foreach(var_04, var_02 in var_00)
-	{
-		if(var_04 == 0)
-		{
+	foreach(var_04, var_02 in var_00) {
+		if(var_04 == 0) {
 			continue;
 		}
 
@@ -3021,8 +2552,7 @@ spawnastronauts()
 		var_03 setmodel("zmb_arcade_toy_astronaut_white");
 		var_03.angles = var_02.angles;
 		var_03.script_noteworthy = "astronaut_model";
-		if(isdefined(var_02.var_336))
-		{
+		if(isdefined(var_02.var_336)) {
 			var_03.var_336 = var_02.var_336 + "_model";
 		}
 
@@ -3030,67 +2560,52 @@ spawnastronauts()
 	}
 
 	var_05 = getent("astronaut_aide_trigger","script_noteworthy");
-	if(isdefined(var_05))
-	{
+	if(isdefined(var_05)) {
 		var_05 thread astronautaidetriggerwatch(var_05);
 	}
 }
 
-//Function Number: 122
-astronautwatchfordamage()
-{
+astronautwatchfordamage() {
 	level endon("game_ended");
 	self endon("released");
 	self.health = 9999999;
 	self.maxhealth = 9999999;
 	self setcandamage(1);
-	for(;;)
-	{
+	for(;;) {
 		self waittill("damage",var_00,var_01,var_02,var_03,var_04,var_00,var_00,var_00,var_00,var_05);
 		tryreleaseastronaut(var_01,var_05);
 	}
 }
 
-//Function Number: 123
-astronautaidetriggerwatch(param_00)
-{
+astronautaidetriggerwatch(param_00) {
 	param_00 = getent(self.target + "_model","targetname");
 	param_00 endon("released");
-	for(;;)
-	{
+	for(;;) {
 		self waittill("damage",var_01,var_02,var_03,var_04,var_05,var_01,var_01,var_01,var_01,var_06);
-		if(isdefined(param_00))
-		{
+		if(isdefined(param_00)) {
 			thread scripts\cp\utility::debugprintline("release");
 			param_00 tryreleaseastronaut(var_02,var_06);
 		}
 	}
 }
 
-//Function Number: 124
-tryreleaseastronaut(param_00,param_01)
-{
-	if(isplayer(param_00))
-	{
+tryreleaseastronaut(param_00,param_01) {
+	if(isplayer(param_00)) {
 		wait(0.2);
 		level.astronautsshot++;
-		if(isdefined(param_00))
-		{
+		if(isdefined(param_00)) {
 			thread generic_interaction_no_gesture(param_00,self);
 		}
 
 		self.released = 1;
 		self hide();
-		if(level.astronautsshot >= level.astronaut_structs.size)
-		{
-			foreach(var_03 in level.players)
-			{
+		if(level.astronautsshot >= level.astronaut_structs.size) {
+			foreach(var_03 in level.players) {
 				var_03 thread scripts\cp\cp_vo::try_to_play_vo("song_quest_success","final_comment_vo");
 				var_03 scripts/cp/zombies/achievement::update_achievement("BROKEN_RECORD",1);
 			}
 
-			if(isdefined(param_00))
-			{
+			if(isdefined(param_00)) {
 				built_bridge_feedback(param_00);
 			}
 
@@ -3104,32 +2619,23 @@ tryreleaseastronaut(param_00,param_01)
 	}
 }
 
-//Function Number: 125
-play_hidden_song(param_00,param_01,param_02)
-{
-	if(!isdefined(param_02))
-	{
+play_hidden_song(param_00,param_01,param_02) {
+	if(!isdefined(param_02)) {
 		level endon("game_ended");
 	}
 
-	if(param_01 == "mus_pa_final_hidden_track")
-	{
+	if(param_01 == "mus_pa_final_hidden_track") {
 		level endon("add_hidden_song_to_playlist");
 	}
 
-	if(soundexists(param_01))
-	{
+	if(soundexists(param_01)) {
 		wait(2.5);
-		if(param_01 == "mus_pa_final_hidden_track")
-		{
-			foreach(var_04 in level.players)
-			{
+		if(param_01 == "mus_pa_final_hidden_track") {
+			foreach(var_04 in level.players) {
 				var_04 thread scripts\cp\cp_vo::try_to_play_vo("song_quest_start","final_comment_vo");
-				if(scripts\engine\utility::istrue(level.onlinegame))
-				{
+				if(scripts\engine\utility::istrue(level.onlinegame)) {
 					var_04 setplayerdata("cp","hasSongsUnlocked","any_song",1);
-					if(param_01 == "mus_pa_final_hidden_track")
-					{
+					if(param_01 == "mus_pa_final_hidden_track") {
 						var_04 setplayerdata("cp","hasSongsUnlocked","song_6",1);
 					}
 				}
@@ -3137,8 +2643,7 @@ play_hidden_song(param_00,param_01,param_02)
 		}
 
 		var_06 = undefined;
-		if(isdefined(var_06))
-		{
+		if(isdefined(var_06)) {
 			level thread scripts\cp\cp_vo::try_to_play_vo(var_06,"zmb_dj_vo","high",60,1,0,1);
 			var_07 = lookupsoundlength(var_06) / 1000;
 			wait(var_07);
@@ -3148,16 +2653,14 @@ play_hidden_song(param_00,param_01,param_02)
 		var_08 = spawn("script_origin",param_00);
 		var_09 = "ee";
 		var_0A = 1;
-		foreach(var_04 in level.players)
-		{
+		foreach(var_04 in level.players) {
 			var_04 scripts\cp\cp_persistence::give_player_xp(2000,1);
 		}
 
 		var_08 playloopsound(param_01);
 		var_08 thread scripts\cp\zombies\zombie_jukebox::earlyendon(var_08);
 		var_0D = lookupsoundlength(param_01) / 1000;
-		if(!isdefined(param_02))
-		{
+		if(!isdefined(param_02)) {
 			level scripts\engine\utility::waittill_any_timeout_1(var_0D,"skip_song");
 		}
 		else
@@ -3181,12 +2684,9 @@ play_hidden_song(param_00,param_01,param_02)
 	level thread scripts\cp\zombies\zombie_jukebox::jukebox_start(param_00,1);
 }
 
-//Function Number: 126
-generic_interaction_no_gesture(param_00,param_01)
-{
+generic_interaction_no_gesture(param_00,param_01) {
 	param_00 endon("disconnect");
-	if(function_02A6(param_01) || !function_02A5(param_01))
-	{
+	if(function_02A6(param_01) || !function_02A5(param_01)) {
 		param_01 = param_01.origin;
 	}
 
@@ -3194,13 +2694,9 @@ generic_interaction_no_gesture(param_00,param_01)
 	param_00 playlocalsound("part_pickup");
 }
 
-//Function Number: 127
-trigger_goon_event(param_00)
-{
-	foreach(var_02 in level.players)
-	{
-		if(distancesquared(var_02.origin,param_00) > 6000)
-		{
+trigger_goon_event(param_00) {
+	foreach(var_02 in level.players) {
+		if(distancesquared(var_02.origin,param_00) > 6000) {
 			continue;
 		}
 
@@ -3208,22 +2704,17 @@ trigger_goon_event(param_00)
 	}
 }
 
-//Function Number: 128
-trigger_goon_event_single(param_00,param_01)
-{
+trigger_goon_event_single(param_00,param_01) {
 	level endon("game_ended");
-	if(!isdefined(param_01))
-	{
+	if(!isdefined(param_01)) {
 		param_01 = 3;
 	}
 
 	var_02 = 0;
-	while(var_02 < param_01)
-	{
+	while(var_02 < param_01) {
 		var_03 = scripts\cp\zombies\cp_final_spawning::get_scored_goon_spawn_location();
 		var_04 = var_03 scripts\cp\zombies\cp_final_spawning::spawn_brute_wave_enemy("alien_goon");
-		if(isdefined(var_04))
-		{
+		if(isdefined(var_04)) {
 			var_02++;
 		}
 
@@ -3231,9 +2722,7 @@ trigger_goon_event_single(param_00,param_01)
 	}
 }
 
-//Function Number: 129
-pickupbridgepiece(param_00,param_01)
-{
+pickupbridgepiece(param_00,param_01) {
 	param_00 scripts\cp\cp_interaction::remove_from_current_interaction_list(param_00);
 	var_02 = getentarray("pap_bridge_model","targetname");
 	var_03 = scripts\engine\utility::get_array_of_closest(param_00.origin,var_02,undefined,2);
@@ -3242,16 +2731,12 @@ pickupbridgepiece(param_00,param_01)
 	trigger_goon_event(param_00.origin);
 }
 
-//Function Number: 130
-incrementbridgequest(param_00,param_01)
-{
-	if(!isdefined(level.bridgepiecesfound))
-	{
+incrementbridgequest(param_00,param_01) {
+	if(!isdefined(level.bridgepiecesfound)) {
 		level.bridgepiecesfound = [];
 	}
 
-	if(!isdefined(param_00))
-	{
+	if(!isdefined(param_00)) {
 		var_02 = "debugPiece";
 	}
 	else
@@ -3266,10 +2751,8 @@ incrementbridgequest(param_00,param_01)
 	var_03 = level.bridgepiecesfound.size;
 	scripts\cp\utility::set_quest_icon(6 + var_03);
 	setomnvar("zm_scrap_count",var_03);
-	if(isdefined(param_01) && isplayer(param_01))
-	{
-		switch(int(var_03))
-		{
+	if(isdefined(param_01) && isplayer(param_01)) {
+		switch(int(var_03)) {
 			case 1:
 				param_01 thread scripts\cp\cp_vo::try_to_play_vo("quest_pap_bridge_piece_1","zmb_comment_vo");
 				break;
@@ -3284,26 +2767,18 @@ incrementbridgequest(param_00,param_01)
 		}
 	}
 
-	if(var_03 >= 3)
-	{
+	if(var_03 >= 3) {
 		scripts\engine\utility::flag_set("bridge_pieces_collected");
 	}
 }
 
-//Function Number: 131
-showbridgepieces()
-{
+showbridgepieces() {
 	scripts\engine\utility::array_thread(scripts\engine\utility::getstructarray("pap_bridge","script_noteworthy"),::draw_debug_sphere);
 }
 
-//Function Number: 132
-draw_debug_sphere()
-{
-}
+draw_debug_sphere() {}
 
-//Function Number: 133
-givehelmetdebug()
-{
+givehelmetdebug() {
 	scripts\engine\utility::flag_set("has_film_reel");
 	scripts\engine\utility::flag_set("set_movie_spaceland");
 	scripts\engine\utility::flag_set("pulled_out_helmet");
@@ -3316,36 +2791,27 @@ givehelmetdebug()
 	level.helmet_on_brute = var_00;
 }
 
-//Function Number: 134
-movieswapdebug()
-{
+movieswapdebug() {
 	scripts\engine\utility::flag_set("has_film_reel");
 	scripts\engine\utility::flag_set("set_movie_spaceland");
 }
 
-//Function Number: 135
-constructbridgeinit()
-{
+constructbridgeinit() {
 	scripts\engine\utility::flag_init("bridge_constructed");
 	level.bridgepiecesplaced = 0;
 	scripts\engine\utility::getstruct("construct_bridge","script_noteworthy").name = "construct_bridge";
 }
 
-//Function Number: 136
-constructbridgehint(param_00,param_01)
-{
-	if(!isdefined(level.bridgepiecesfound))
-	{
+constructbridgehint(param_00,param_01) {
+	if(!isdefined(level.bridgepiecesfound)) {
 		level.bridgepiecesfound = [];
 	}
 
-	if(level.bridgepiecesfound.size >= 3)
-	{
+	if(level.bridgepiecesfound.size >= 3) {
 		return &"CP_FINAL_INTERACTIONS_FINISH_BRIDGE";
 	}
 
-	if(level.bridgepiecesfound.size > level.bridgepiecesplaced)
-	{
+	if(level.bridgepiecesfound.size > level.bridgepiecesplaced) {
 		return &"CP_FINAL_INTERACTIONS_ADD_BRIDGE_PIECE";
 	}
 
@@ -3353,9 +2819,7 @@ constructbridgehint(param_00,param_01)
 	return &"CP_FINAL_INTERACTIONS_NEED_PIECES";
 }
 
-//Function Number: 137
-bridgeconstructionfeedback(param_00,param_01)
-{
+bridgeconstructionfeedback(param_00,param_01) {
 	var_02 = scripts\engine\utility::getstruct("construction_point_" + param_00,"targetname");
 	playfx(level._effect["bridge_place"],var_02.origin,anglestoforward(var_02.angles));
 	wait(1.2);
@@ -3371,22 +2835,17 @@ bridgeconstructionfeedback(param_00,param_01)
 	level.bridgepiecesplaced++;
 }
 
-//Function Number: 138
-constructbridgeuse(param_00,param_01)
-{
+constructbridgeuse(param_00,param_01) {
 	param_01 endon("disconnect");
 	var_02 = level.bridgepiecesfound.size - level.bridgepiecesplaced;
-	if(var_02 > 0)
-	{
+	if(var_02 > 0) {
 		scripts\cp\maps\cp_final\cp_final_interactions::generic_place_gesture_and_fx(param_01,param_00.origin + (30,45,0));
-		for(var_03 = level.bridgepiecesplaced;var_03 < level.bridgepiecesplaced + var_02;var_03++)
-		{
+		for(var_03 = level.bridgepiecesplaced;var_03 < level.bridgepiecesplaced + var_02;var_03++) {
 			thread bridgeconstructionfeedback(var_03 + 1,param_00);
 		}
 
 		wait(1.205);
-		if(scripts\engine\utility::flag("bridge_pieces_collected"))
-		{
+		if(scripts\engine\utility::flag("bridge_pieces_collected")) {
 			openbridge();
 			built_bridge_feedback(param_01);
 			scripts\cp\cp_interaction::remove_from_current_interaction_list(param_00);
@@ -3397,9 +2856,7 @@ constructbridgeuse(param_00,param_01)
 	}
 }
 
-//Function Number: 139
-openbridge()
-{
+openbridge() {
 	var_00 = getent("bridge_blocker","targetname");
 	var_00 notsolid();
 	var_00 connectpaths();
@@ -3410,41 +2867,33 @@ openbridge()
 	scripts\cp\zombies\zombies_spawning::update_volume_adjacency_by_name("planet_outside","pap_island");
 }
 
-//Function Number: 140
-bridgeconstructedvo()
-{
+bridgeconstructedvo() {
 	var_00 = scripts\engine\utility::random(level.players);
-	if(isdefined(var_00.vo_prefix))
-	{
-		switch(var_00.vo_prefix)
-		{
+	if(isdefined(var_00.vo_prefix)) {
+		switch(var_00.vo_prefix) {
 			case "p1_":
-				if(!isdefined(level.completed_dialogues["conv_pap_ee_sally_1_1"]))
-				{
+				if(!isdefined(level.completed_dialogues["conv_pap_ee_sally_1_1"])) {
 					level thread scripts\cp\cp_vo::try_to_play_vo("conv_pap_ee_sally_1_1","rave_dialogue_vo","highest",666,0,0,0,100);
 					level.completed_dialogues["conv_pap_ee_sally_1_1"] = 1;
 				}
 				break;
 
 			case "p2_":
-				if(!isdefined(level.completed_dialogues["conv_pap_ee_pdex_1_1"]))
-				{
+				if(!isdefined(level.completed_dialogues["conv_pap_ee_pdex_1_1"])) {
 					level thread scripts\cp\cp_vo::try_to_play_vo("conv_pap_ee_pdex_1_1","rave_dialogue_vo","highest",666,0,0,0,100);
 					level.completed_dialogues["conv_pap_ee_pdex_1_1"] = 1;
 				}
 				break;
 
 			case "p3_":
-				if(!isdefined(level.completed_dialogues["conv_pap_ee_andre_1_1"]))
-				{
+				if(!isdefined(level.completed_dialogues["conv_pap_ee_andre_1_1"])) {
 					level thread scripts\cp\cp_vo::try_to_play_vo("conv_pap_ee_andre_1_1","rave_dialogue_vo","highest",666,0,0,0,100);
 					level.completed_dialogues["conv_pap_ee_andre_1_1"] = 1;
 				}
 				break;
 
 			case "p4_":
-				if(!isdefined(level.completed_dialogues["conv_pap_ee_aj_1_1"]))
-				{
+				if(!isdefined(level.completed_dialogues["conv_pap_ee_aj_1_1"])) {
 					level thread scripts\cp\cp_vo::try_to_play_vo("conv_pap_ee_aj_1_1","rave_dialogue_vo","highest",666,0,0,0,100);
 					level.completed_dialogues["conv_pap_ee_aj_1_1"] = 1;
 				}
@@ -3453,21 +2902,15 @@ bridgeconstructedvo()
 	}
 }
 
-//Function Number: 141
-givefuses()
-{
+givefuses() {
 	scripts\engine\utility::flag_set("picked_up_uncharged_fuses");
-	foreach(var_01 in level.players)
-	{
+	foreach(var_01 in level.players) {
 		var_01 setclientomnvar("zm_special_item",5);
 	}
 }
 
-//Function Number: 142
-built_bridge_feedback(param_00)
-{
-	if(isdefined(param_00) && isplayer(param_00))
-	{
+built_bridge_feedback(param_00) {
+	if(isdefined(param_00) && isplayer(param_00)) {
 		var_01 = ["fistpump","fingercrossed","kissfist"];
 		var_02 = scripts\engine\utility::random(var_01);
 		var_03 = "iw7_" + var_02 + "_zm";
@@ -3475,14 +2918,11 @@ built_bridge_feedback(param_00)
 	}
 }
 
-//Function Number: 143
-spawnenergydoor()
-{
+spawnenergydoor() {
 	var_00 = [(16,5583,115),(144,6168,115)];
 	var_01 = [(0,0,0),(0,90,0)];
 	level.all_quest_doors = [];
-	for(var_02 = 0;var_02 < var_00.size;var_02++)
-	{
+	for(var_02 = 0;var_02 < var_00.size;var_02++) {
 		var_03 = scripts\engine\utility::drop_to_ground(var_00[var_02],12,-400);
 		var_04 = spawn("script_model",var_03);
 		var_04.angles = var_01[var_02];
@@ -3493,9 +2933,7 @@ spawnenergydoor()
 	}
 }
 
-//Function Number: 144
-watchfordamageondoor(param_00)
-{
+watchfordamageondoor(param_00) {
 	level endon("game_ended");
 	level endon("kill_energy_doors");
 	var_01 = getent("med_bay_door_clip","targetname");
@@ -3503,30 +2941,24 @@ watchfordamageondoor(param_00)
 	var_01.maxhealth = 9999999;
 	var_01 setcandamage(1);
 	var_01.next_block_fx_time = 0;
-	for(;;)
-	{
+	for(;;) {
 		var_01 waittill("damage",var_02,var_03,var_04,var_05,var_02,var_02,var_02,var_02,var_02,var_06);
 		var_07 = gettime();
-		if(isdefined(var_01.next_block_fx_time) && isdefined(var_05) && isdefined(var_04) && var_07 >= var_01.next_block_fx_time)
-		{
+		if(isdefined(var_01.next_block_fx_time) && isdefined(var_05) && isdefined(var_04) && var_07 >= var_01.next_block_fx_time) {
 			var_01.next_block_fx_time = var_07 + 250;
 			playfx(level._effect["energy_door_impact"],var_05 + var_04 * -5,var_04 * -150);
 		}
 	}
 }
 
-//Function Number: 145
-neilclosedoors()
-{
-	if(scripts\cp\utility::isplayingsolo() || level.only_one_player)
-	{
+neilclosedoors() {
+	if(scripts\cp\utility::isplayingsolo() || level.only_one_player) {
 		thread setzombiemovespeed(["walk"]);
 		setspawndelayoverride(0.5);
 	}
 	else
 	{
-		if(level.players.size >= 3)
-		{
+		if(level.players.size >= 3) {
 			thread setzombiemovespeed(["run","sprint"]);
 		}
 		else
@@ -3549,9 +2981,7 @@ neilclosedoors()
 	pausenormalwavespawning(0);
 }
 
-//Function Number: 146
-watchfornearbyzombies(param_00)
-{
+watchfornearbyzombies(param_00) {
 	param_00 notify("watchForNearbyZombies");
 	param_00 endon("watchForNearbyZombies");
 	level endon("game_ended");
@@ -3559,14 +2989,11 @@ watchfornearbyzombies(param_00)
 	level endon("neilIsEvil");
 	level endon("inFinalPosition");
 	level endon("neil_doing_something_evil");
-	for(;;)
-	{
+	for(;;) {
 		var_01 = sortbydistance(scripts\cp\cp_agent_utils::getaliveagentsofteam("axis"),param_00.origin);
-		if(var_01.size > 0 && distance(var_01[0].origin,param_00.origin) <= 72)
-		{
-			if(scripts\engine\utility::istrue(param_00.var_4284))
-			{
-				thread [[ level.interactions[param_00.script_noteworthy].activation_func ]](param_00,undefined);
+		if(var_01.size > 0 && distance(var_01[0].origin,param_00.origin) <= 72) {
+			if(scripts\engine\utility::istrue(param_00.var_4284)) {
+				thread [[level.interactions[param_00.script_noteworthy].activation_func]](param_00,undefined);
 				break;
 			}
 		}
@@ -3575,12 +3002,9 @@ watchfornearbyzombies(param_00)
 	}
 }
 
-//Function Number: 147
-pausenormalwavespawning(param_00)
-{
+pausenormalwavespawning(param_00) {
 	scripts\engine\utility::flag_set("pause_wave_progression");
-	if(scripts\engine\utility::istrue(param_00))
-	{
+	if(scripts\engine\utility::istrue(param_00)) {
 		level.zombies_paused = 1;
 		return;
 	}
@@ -3588,17 +3012,13 @@ pausenormalwavespawning(param_00)
 	level.zombies_paused = 0;
 }
 
-//Function Number: 148
-resume_spawn_wave()
-{
+resume_spawn_wave() {
 	level.dont_resume_wave_after_solo_afterlife = undefined;
 	level.zombies_paused = 0;
 	scripts\engine\utility::flag_clear("pause_wave_progression");
 }
 
-//Function Number: 149
-storewavespawningcounters()
-{
+storewavespawningcounters() {
 	var_00 = spawnstruct();
 	var_00.cop_spawn_percent = level.cop_spawn_percent;
 	var_00.current_enemy_deaths = level.current_enemy_deaths;
@@ -3608,14 +3028,10 @@ storewavespawningcounters()
 	level.storedspawncounters = var_00;
 }
 
-//Function Number: 150
-restorewavespawningcounters()
-{
-	if(isdefined(level.storedspawncounters))
-	{
+restorewavespawningcounters() {
+	if(isdefined(level.storedspawncounters)) {
 		var_00 = level.storedspawncounters;
-		if(level.wave_num == var_00.wave_num)
-		{
+		if(level.wave_num == var_00.wave_num) {
 			level.current_enemy_deaths = var_00.current_enemy_deaths;
 			level.max_static_spawned_enemies = var_00.max_static_spawned_enemies;
 			level.desired_enemy_deaths_this_wave = var_00.desired_enemy_deaths_this_wave;
@@ -3631,56 +3047,42 @@ restorewavespawningcounters()
 	}
 }
 
-//Function Number: 151
-stop_spawn_wave()
-{
+stop_spawn_wave() {
 	level.current_enemy_deaths = 0;
 	scripts\engine\utility::flag_set("pause_wave_progression");
 	level.zombies_paused = 1;
 	level.dont_resume_wave_after_solo_afterlife = 1;
 }
 
-//Function Number: 152
-unpausenormalwavespawning()
-{
+unpausenormalwavespawning() {
 	scripts\engine\utility::flag_clear("pause_wave_progression");
 	level.zombies_paused = 0;
 }
 
-//Function Number: 153
-waitforvalidwavepause()
-{
-	while(level.current_enemy_deaths == level.desired_enemy_deaths_this_wave)
-	{
+waitforvalidwavepause() {
+	while(level.current_enemy_deaths == level.desired_enemy_deaths_this_wave) {
 		wait(0.05);
 	}
 }
 
-//Function Number: 154
-clearexistingenemies()
-{
+clearexistingenemies() {
 	var_00 = scripts\cp\cp_agent_utils::getaliveagentsofteam("axis");
-	foreach(var_02 in var_00)
-	{
+	foreach(var_02 in var_00) {
 		var_02.died_poorly = 1;
 		var_02.nocorpse = 1;
 		var_02 suicide();
 	}
 }
 
-//Function Number: 155
-get_max_static_enemies(param_00)
-{
-	if(scripts\cp\utility::is_escape_gametype() && param_00 < 5)
-	{
+get_max_static_enemies(param_00) {
+	if(scripts\cp\utility::is_escape_gametype() && param_00 < 5) {
 		var_01 = level.players.size * 6;
 		var_02 = [0,0.25,0.3,0.5,0.7,0.9];
 		var_03 = 1;
 		var_04 = 1;
 		var_03 = var_02[param_00];
 		var_05 = level.players.size - 1;
-		if(var_05 < 1)
-		{
+		if(var_05 < 1) {
 			var_05 = 0.5;
 		}
 
@@ -3691,23 +3093,18 @@ get_max_static_enemies(param_00)
 	return 24;
 }
 
-//Function Number: 156
-get_total_spawned_enemies(param_00)
-{
-	if(scripts\cp\utility::is_escape_gametype())
-	{
+get_total_spawned_enemies(param_00) {
+	if(scripts\cp\utility::is_escape_gametype()) {
 		return 9000;
 	}
 
 	var_01 = [0,0.25,0.3,0.5,0.7,0.9];
 	var_02 = 1;
 	var_03 = 1;
-	if(param_00 < 6)
-	{
+	if(param_00 < 6) {
 		var_02 = var_01[param_00];
 	}
-	else if(param_00 < 10)
-	{
+	else if(param_00 < 10) {
 		var_03 = param_00 / 5;
 	}
 	else
@@ -3716,8 +3113,7 @@ get_total_spawned_enemies(param_00)
 	}
 
 	var_04 = level.players.size - 1;
-	if(var_04 < 1)
-	{
+	if(var_04 < 1) {
 		var_04 = 0.5;
 	}
 
@@ -3725,84 +3121,62 @@ get_total_spawned_enemies(param_00)
 	return int(var_05);
 }
 
-//Function Number: 157
-setwavenumoverride(param_00)
-{
+setwavenumoverride(param_00) {
 	level.wave_num_override = param_00;
 }
 
-//Function Number: 158
-unsetwavenumoverride(param_00)
-{
+unsetwavenumoverride(param_00) {
 	level.wave_num_override = undefined;
 }
 
-//Function Number: 159
-setspawndelayoverride(param_00)
-{
+setspawndelayoverride(param_00) {
 	level.spawndelayoverride = param_00;
 }
 
-//Function Number: 160
-unsetspawndelayoverride(param_00)
-{
+unsetspawndelayoverride(param_00) {
 	level.spawndelayoverride = undefined;
 }
 
-//Function Number: 161
-unsetzombiemovespeed()
-{
+unsetzombiemovespeed() {
 	level notify("unsetZombieMoveSpeed");
 }
 
-//Function Number: 162
-setzombiemovespeed(param_00)
-{
+setzombiemovespeed(param_00) {
 	level endon("game_ended");
 	level notify("unsetZombieMoveSpeed");
 	level endon("unsetZombieMoveSpeed");
-	foreach(var_02 in scripts\cp\cp_agent_utils::getaliveagentsofteam("axis"))
-	{
-		if(isdefined(var_02.agent_type) && var_02.agent_type != "ratking")
-		{
+	foreach(var_02 in scripts\cp\cp_agent_utils::getaliveagentsofteam("axis")) {
+		if(isdefined(var_02.agent_type) && var_02.agent_type != "ratking") {
 			var_03 = scripts\engine\utility::random(param_00);
 			var_02 thread adjustmovespeed(var_02,0,var_03);
 		}
 	}
 
-	for(;;)
-	{
+	for(;;) {
 		level waittill("agent_spawned",var_05);
 		var_03 = scripts\engine\utility::random(param_00);
 		var_05 thread adjustmovespeed(var_05,1,var_03);
 	}
 }
 
-//Function Number: 163
-adjustmovespeed(param_00,param_01,param_02)
-{
+adjustmovespeed(param_00,param_01,param_02) {
 	param_00 endon("death");
-	if(isdefined(param_00.agent_type) && param_00.agent_type == "ratking")
-	{
+	if(isdefined(param_00.agent_type) && param_00.agent_type == "ratking") {
 		return;
 	}
 
-	if(scripts\engine\utility::istrue(param_00.is_suicide_bomber))
-	{
+	if(scripts\engine\utility::istrue(param_00.is_suicide_bomber)) {
 		return;
 	}
 
-	if(scripts\engine\utility::istrue(param_01))
-	{
+	if(scripts\engine\utility::istrue(param_01)) {
 		wait(0.5);
 	}
 
 	param_00 scripts/asm/asm_bb::bb_requestmovetype(param_02);
 }
 
-//Function Number: 164
-neiltriggertrap()
-{
+neiltriggertrap() {
 	var_00 = scripts\engine\utility::getstructarray("laser_trap","script_noteworthy");
 	var_01 = scripts\engine\utility::getstructarray("electric_trap","script_noteworthy");
 	var_02 = scripts\engine\utility::getstructarray("acid_rain_trap","script_noteworthy");
@@ -3811,9 +3185,7 @@ neiltriggertrap()
 	level thread scripts\cp\maps\cp_final\cp_final_traps::use_rain_trap(var_02[0],undefined);
 }
 
-//Function Number: 165
-neildoevilstuff()
-{
+neildoevilstuff() {
 	level notify("neilIsEvil");
 	level endon("neilIsEvil");
 	level endon("game_ended");
@@ -3825,14 +3197,11 @@ neildoevilstuff()
 	var_03 = scripts\engine\utility::getstructarray("acid_rain_trap","script_noteworthy");
 	var_04 = scripts\engine\utility::array_combine(var_01,var_02,var_03);
 	wait(5);
-	for(;;)
-	{
+	for(;;) {
 		level notify("neil_doing_something_evil");
 		setneilstate("angry");
-		if(scripts\engine\utility::cointoss())
-		{
-			if(scripts\engine\utility::cointoss())
-			{
+		if(scripts\engine\utility::cointoss()) {
+			if(scripts\engine\utility::cointoss()) {
 				thread activatedoorsastraps();
 				level thread play_bad_neil_dialogues();
 			}
@@ -3848,24 +3217,19 @@ neildoevilstuff()
 		{
 			var_05 = 2000;
 			var_06 = undefined;
-			foreach(var_08 in level.players)
-			{
+			foreach(var_08 in level.players) {
 				var_09 = scripts\engine\utility::getclosest(var_08.origin,var_04,1000);
-				if(isdefined(var_09) && distance(var_08.origin,var_09.origin) < var_05)
-				{
-					if(scripts\engine\utility::array_contains(level.current_interaction_structs,var_09))
-					{
+				if(isdefined(var_09) && distance(var_08.origin,var_09.origin) < var_05) {
+					if(scripts\engine\utility::array_contains(level.current_interaction_structs,var_09)) {
 						var_06 = var_09;
 					}
 				}
 			}
 
-			if(isdefined(var_06))
-			{
+			if(isdefined(var_06)) {
 				resetslidingdoorstonormalstate();
 				playneilvo("final_n31l_evil_manipulate_cost");
-				switch(var_06.script_noteworthy)
-				{
+				switch(var_06.script_noteworthy) {
 					case "laser_trap":
 						level thread scripts\cp\maps\cp_final\cp_final_traps::use_lasers_trap(var_01[0],undefined);
 						break;
@@ -3883,8 +3247,7 @@ neildoevilstuff()
 			}
 			else
 			{
-				if(scripts\engine\utility::cointoss())
-				{
+				if(scripts\engine\utility::cointoss()) {
 					thread activatedoorsastraps();
 				}
 				else
@@ -3902,45 +3265,36 @@ neildoevilstuff()
 	}
 }
 
-//Function Number: 166
-play_bad_neil_dialogues()
-{
+play_bad_neil_dialogues() {
 	wait(7);
-	if(!scripts\engine\utility::istrue(level.played_bad_neil_vo))
-	{
+	if(!scripts\engine\utility::istrue(level.played_bad_neil_vo)) {
 		level.played_bad_neil_vo = 1;
 		var_00 = scripts\engine\utility::random(level.players);
-		if(isdefined(var_00.vo_prefix))
-		{
-			switch(var_00.vo_prefix)
-			{
+		if(isdefined(var_00.vo_prefix)) {
+			switch(var_00.vo_prefix) {
 				case "p1_":
-					if(!isdefined(level.completed_dialogues["conv_bad_n31l_sally_1_1"]))
-					{
+					if(!isdefined(level.completed_dialogues["conv_bad_n31l_sally_1_1"])) {
 						level thread scripts\cp\cp_vo::try_to_play_vo("conv_bad_n31l_sally_1_1","rave_dialogue_vo","highest",666,0,0,0,100);
 						level.completed_dialogues["conv_bad_n31l_sally_1_1"] = 1;
 					}
 					break;
 
 				case "p2_":
-					if(!isdefined(level.completed_dialogues["conv_bad_n31l_pdex_1_1"]))
-					{
+					if(!isdefined(level.completed_dialogues["conv_bad_n31l_pdex_1_1"])) {
 						level thread scripts\cp\cp_vo::try_to_play_vo("conv_bad_n31l_pdex_1_1","rave_dialogue_vo","highest",666,0,0,0,100);
 						level.completed_dialogues["conv_bad_n31l_pdex_1_1"] = 1;
 					}
 					break;
 
 				case "p3_":
-					if(!isdefined(level.completed_dialogues["conv_bad_n31l_andre_1_1"]))
-					{
+					if(!isdefined(level.completed_dialogues["conv_bad_n31l_andre_1_1"])) {
 						level thread scripts\cp\cp_vo::try_to_play_vo("conv_bad_n31l_andre_1_1","rave_dialogue_vo","highest",666,0,0,0,100);
 						level.completed_dialogues["conv_bad_n31l_andre_1_1"] = 1;
 					}
 					break;
 
 				case "p4_":
-					if(!isdefined(level.completed_dialogues["conv_bad_n31l_aj_1_1"]))
-					{
+					if(!isdefined(level.completed_dialogues["conv_bad_n31l_aj_1_1"])) {
 						level thread scripts\cp\cp_vo::try_to_play_vo("conv_bad_n31l_aj_1_1","rave_dialogue_vo","highest",666,0,0,0,100);
 						level.completed_dialogues["conv_bad_n31l_aj_1_1"] = 1;
 					}
@@ -3950,9 +3304,7 @@ play_bad_neil_dialogues()
 	}
 }
 
-//Function Number: 167
-waittoreactivate()
-{
+waittoreactivate() {
 	level endon("game_ended");
 	level endon("makeNeilEvil");
 	level endon("deactivateNeil");
@@ -3962,9 +3314,7 @@ waittoreactivate()
 	level scripts\engine\utility::waittill_any_timeout_1(5,"makeNeilEvil");
 }
 
-//Function Number: 168
-activatedoorsastraps()
-{
+activatedoorsastraps() {
 	level notify("activateDoorsAsTraps");
 	level endon("activateDoorsAsTraps");
 	level endon("game_ended");
@@ -3973,27 +3323,18 @@ activatedoorsastraps()
 	resetslidingdoorstonormalstate();
 }
 
-//Function Number: 169
-openalldoors()
-{
-	foreach(var_01 in level.allslidingdoors)
-	{
-		if(scripts\engine\utility::istrue(var_01.player_opened) && scripts\engine\utility::istrue(var_01.var_4284))
-		{
-			thread [[ level.interactions[var_01.script_noteworthy].activation_func ]](var_01,undefined);
+openalldoors() {
+	foreach(var_01 in level.allslidingdoors) {
+		if(scripts\engine\utility::istrue(var_01.player_opened) && scripts\engine\utility::istrue(var_01.var_4284)) {
+			thread [[level.interactions[var_01.script_noteworthy].activation_func]](var_01,undefined);
 		}
 	}
 }
 
-//Function Number: 170
-closealldoors(param_00)
-{
-	foreach(var_02 in level.allslidingdoors)
-	{
-		if(scripts\engine\utility::istrue(var_02.player_opened) && scripts\engine\utility::istrue(var_02.opened))
-		{
-			if(scripts\engine\utility::istrue(param_00))
-			{
+closealldoors(param_00) {
+	foreach(var_02 in level.allslidingdoors) {
+		if(scripts\engine\utility::istrue(var_02.player_opened) && scripts\engine\utility::istrue(var_02.opened)) {
+			if(scripts\engine\utility::istrue(param_00)) {
 				thread watchfornearbyzombies(var_02);
 			}
 
@@ -4002,15 +3343,12 @@ closealldoors(param_00)
 	}
 }
 
-//Function Number: 171
-rundoorsastrapsloop()
-{
+rundoorsastrapsloop() {
 	level endon("game_ended");
 	level endon("neil_doing_something_evil");
 	level endon("deactivateNeil");
 	level endon("inFinalPosition");
-	while(!scripts\engine\utility::flag("disable_evil_neil"))
-	{
+	while(!scripts\engine\utility::flag("disable_evil_neil")) {
 		disableslidingdoorinteractions(1);
 		thread closealldoors();
 		wait(1.5);
@@ -4020,13 +3358,8 @@ rundoorsastrapsloop()
 	}
 }
 
-//Function Number: 172
-initmpqdebug()
-{
+initmpqdebug() {
 	scripts\engine\utility::flag_wait("interactions_initialized");
 }
 
-//Function Number: 173
-questdevguientries(param_00,param_01,param_02,param_03)
-{
-}
+questdevguientries(param_00,param_01,param_02,param_03) {}

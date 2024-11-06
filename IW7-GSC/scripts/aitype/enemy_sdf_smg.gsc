@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: aitype\enemy_sdf_smg.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 3
- * Decompile Time: 136 ms
- * Timestamp: 10\26\2023 11:58:17 PM
-*******************************************************************/
+/********************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\aitype\enemy_sdf_smg.gsc
+********************************************/
 
-//Function Number: 1
-main()
-{
+main() {
 	self.var_17DB = "";
 	self.team = "axis";
 	self.type = "human";
@@ -24,8 +18,7 @@ main()
 	self.var_101B4 = lib_0A2F::func_7BEC("pistol");
 	self.behaviortreeasset = "enemy_combatant";
 	self.var_1FA9 = "soldier";
-	if(isai(self))
-	{
+	if(isai(self)) {
 		self _meth_82DC(256,0);
 		self _meth_82DB(768,1024);
 	}
@@ -33,8 +26,7 @@ main()
 	self.var_394 = lib_0A2F::func_7BEC("smg");
 	var_00 = undefined;
 	var_01 = ["character_sdf_army_ftl_1","character_sdf_army_light_1","character_sdf_army_heavy_4"];
-	switch(scripts\code\character::get_random_character(3,var_00,var_01))
-	{
+	switch(scripts\code\character::get_random_character(3,var_00,var_01)) {
 		case 0:
 			lib_04D6::main();
 			break;
@@ -49,15 +41,11 @@ main()
 	}
 }
 
-//Function Number: 2
-spawner()
-{
+spawner() {
 	self _meth_833A("axis");
 }
 
-//Function Number: 3
-precache()
-{
+precache() {
 	lib_04D6::precache();
 	lib_04FF::precache();
 	lib_04EE::precache();

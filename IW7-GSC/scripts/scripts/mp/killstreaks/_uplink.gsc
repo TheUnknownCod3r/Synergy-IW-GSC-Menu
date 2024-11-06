@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\mp\killstreaks\_uplink.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 32
- * Decompile Time: 1463 ms
- * Timestamp: 10/27/2023 12:29:55 AM
-*******************************************************************/
+/******************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\mp\killstreaks\_uplink.gsc
+******************************************************/
 
-//Function Number: 1
-init()
-{
+init() {
 	level.uplinks = [];
 	scripts\mp\killstreaks\_killstreaks::registerkillstreak("uplink",::func_1290C);
 	scripts\mp\killstreaks\_killstreaks::registerkillstreak("uplink_support",::func_1290C);
@@ -25,8 +19,7 @@ init()
 	unblockteamradar("allies");
 	level thread func_12F82();
 	level thread func_12F83();
-	if(level.var_768F)
-	{
+	if(level.var_768F) {
 		level thread func_C799();
 	}
 
@@ -64,29 +57,21 @@ init()
 	level.placeableconfigs["uplink_support"] = var_00;
 }
 
-//Function Number: 2
-func_C799()
-{
-	if(!level.teambased)
-	{
+func_C799() {
+	if(!level.teambased) {
 		return;
 	}
 
-	for(;;)
-	{
+	for(;;) {
 		level waittill("joined_team",var_00);
 		var_00 thread func_1383D();
 	}
 }
 
-//Function Number: 3
-func_1383D()
-{
+func_1383D() {
 	self waittill("spawned_player");
-	foreach(var_01 in level.players)
-	{
-		if(var_01.team == "spectator")
-		{
+	foreach(var_01 in level.players) {
+		if(var_01.team == "spectator") {
 			continue;
 		}
 
@@ -94,25 +79,19 @@ func_1383D()
 	}
 }
 
-//Function Number: 4
-func_12F82()
-{
+func_12F82() {
 	level endon("game_ended");
-	for(;;)
-	{
+	for(;;) {
 		level waittill("update_uplink");
 		level childthread func_12E5B();
 	}
 }
 
-//Function Number: 5
-func_12E5B()
-{
+func_12E5B() {
 	self notify("updateAllUplinkThreads");
 	self endon("updateAllUplinkThreads");
 	level childthread func_4419();
-	if(level.teambased)
-	{
+	if(level.teambased) {
 		level childthread func_12F41("axis");
 		level childthread func_12F41("allies");
 	}
@@ -124,18 +103,14 @@ func_12E5B()
 	level childthread func_12E79();
 }
 
-//Function Number: 6
-func_4419()
-{
+func_4419() {
 	var_00 = [];
-	if(!level.teambased)
-	{
+	if(!level.teambased) {
 		level waittill("radar_status_change_players");
 	}
 	else
 	{
-		while(var_00.size < 2)
-		{
+		while(var_00.size < 2) {
 			level waittill("radar_status_change",var_01);
 			var_00[var_00.size] = var_01;
 		}
@@ -144,21 +119,17 @@ func_4419()
 	level notify("start_com_exp");
 }
 
-//Function Number: 7
-func_12F41(param_00)
-{
+func_12F41(param_00) {
 	var_01 = disableusability(param_00);
 	var_02 = var_01 == 1;
 	var_03 = var_01 >= 2;
 	var_04 = var_01 >= 3;
 	var_05 = var_01 >= 4;
-	if(var_03)
-	{
+	if(var_03) {
 		unblockteamradar(param_00);
 	}
 
-	if(var_04)
-	{
+	if(var_04) {
 		level.createprintchannel[param_00] = "fast_radar";
 	}
 	else
@@ -166,15 +137,12 @@ func_12F41(param_00)
 		level.createprintchannel[param_00] = "normal_radar";
 	}
 
-	foreach(var_07 in level.participants)
-	{
-		if(!isdefined(var_07))
-		{
+	foreach(var_07 in level.participants) {
+		if(!isdefined(var_07)) {
 			continue;
 		}
 
-		if(var_07.team != param_00)
-		{
+		if(var_07.team != param_00) {
 			continue;
 		}
 
@@ -190,13 +158,9 @@ func_12F41(param_00)
 	level notify("radar_status_change",param_00);
 }
 
-//Function Number: 8
-func_12EF4()
-{
-	foreach(var_01 in level.participants)
-	{
-		if(!isdefined(var_01))
-		{
+func_12EF4() {
+	foreach(var_01 in level.participants) {
+		if(!isdefined(var_01)) {
 			continue;
 		}
 
@@ -209,14 +173,10 @@ func_12EF4()
 	level notify("radar_status_change_players");
 }
 
-//Function Number: 9
-func_12E79()
-{
+func_12E79() {
 	level waittill("start_com_exp");
-	foreach(var_01 in level.participants)
-	{
-		if(!isdefined(var_01))
-		{
+	foreach(var_01 in level.participants) {
+		if(!isdefined(var_01)) {
 			continue;
 		}
 
@@ -225,23 +185,17 @@ func_12E79()
 	}
 }
 
-//Function Number: 10
-setturretmodechangewait()
-{
-	if(scripts\mp\_utility::_hasperk("specialty_comexp"))
-	{
+setturretmodechangewait() {
+	if(scripts\mp\_utility::_hasperk("specialty_comexp")) {
 		var_00 = _meth_80A6(self);
 		func_F7F7(self,var_00);
 		func_12F09();
 	}
 }
 
-//Function Number: 11
-func_12F09(param_00)
-{
+func_12F09(param_00) {
 	var_01 = 0;
-	if(isdefined(param_00))
-	{
+	if(isdefined(param_00)) {
 		var_01 = disableusability(param_00);
 	}
 	else
@@ -249,13 +203,11 @@ func_12F09(param_00)
 		var_01 = _meth_80A7(self);
 	}
 
-	if(scripts\mp\_utility::_hasperk("specialty_comexp"))
-	{
+	if(scripts\mp\_utility::_hasperk("specialty_comexp")) {
 		var_01 = _meth_80A6(self);
 	}
 
-	if(var_01 > 0)
-	{
+	if(var_01 > 0) {
 		self setclientomnvar("ui_satcom_active",1);
 		return;
 	}
@@ -263,9 +215,7 @@ func_12F09(param_00)
 	self setclientomnvar("ui_satcom_active",0);
 }
 
-//Function Number: 12
-func_E0DF()
-{
+func_E0DF() {
 	self.var_FFC7 = 0;
 	self _meth_82DF(0);
 	self.cylinder = 0;
@@ -274,9 +224,7 @@ func_E0DF()
 	self.randomint = 0;
 }
 
-//Function Number: 13
-func_F7F7(param_00,param_01)
-{
+func_F7F7(param_00,param_01) {
 	var_02 = param_01 == 1;
 	var_03 = param_01 >= 2;
 	var_04 = param_01 >= 3;
@@ -287,18 +235,14 @@ func_F7F7(param_00,param_01)
 	param_00.createprintchannel = "normal_radar";
 	param_00.playcinematicforall = var_03;
 	param_00.randomint = 0;
-	if(var_04)
-	{
+	if(var_04) {
 		param_00.createprintchannel = "fast_radar";
 	}
 }
 
-//Function Number: 14
-func_1290C(param_00,param_01)
-{
+func_1290C(param_00,param_01) {
 	var_02 = scripts\mp\killstreaks\_placeable::giveplaceable(param_01,1);
-	if(var_02)
-	{
+	if(var_02) {
 		scripts\mp\_matchdata::logkillstreakevent("uplink",self.origin);
 	}
 
@@ -306,70 +250,52 @@ func_1290C(param_00,param_01)
 	return var_02;
 }
 
-//Function Number: 15
-oncarried(param_00)
-{
+oncarried(param_00) {
 	var_01 = self getentitynumber();
-	if(isdefined(level.uplinks[var_01]))
-	{
+	if(isdefined(level.uplinks[var_01])) {
 		func_11099();
 	}
 }
 
-//Function Number: 16
-func_13A7B()
-{
+func_13A7B() {
 	self waittill("satComTimedOut");
-	foreach(var_01 in level.participants)
-	{
-		if(isdefined(var_01.var_2A3B))
-		{
+	foreach(var_01 in level.participants) {
+		if(isdefined(var_01.var_2A3B)) {
 			var_01.var_2A3B delete();
 		}
 	}
 }
 
-//Function Number: 17
-func_12AEF()
-{
+func_12AEF() {
 	self endon("satComTimedOut");
 	var_00 = 3;
 	var_01 = 3;
 	var_02 = 0.5;
 	thread func_13A7B();
-	for(;;)
-	{
-		foreach(var_04 in level.participants)
-		{
-			if(!isdefined(var_04))
-			{
+	for(;;) {
+		foreach(var_04 in level.participants) {
+			if(!isdefined(var_04)) {
 				continue;
 			}
 
-			if(level.teambased && var_04.team == self.team)
-			{
+			if(level.teambased && var_04.team == self.team) {
 				continue;
 			}
 
-			if(var_04 scripts\mp\_utility::_hasperk("specialty_gpsjammer"))
-			{
+			if(var_04 scripts\mp\_utility::_hasperk("specialty_gpsjammer")) {
 				continue;
 			}
 
-			if(!scripts\mp\_utility::isreallyalive(var_04))
-			{
-				if(isdefined(var_04.var_2A3B))
-				{
+			if(!scripts\mp\_utility::isreallyalive(var_04)) {
+				if(isdefined(var_04.var_2A3B)) {
 					var_04.var_2A3B delete();
 				}
 
 				continue;
 			}
 
-			if(isdefined(var_04.var_12AF1))
-			{
-				if(isdefined(var_04.var_2A3B))
-				{
+			if(isdefined(var_04.var_12AF1)) {
+				if(isdefined(var_04.var_2A3B)) {
 					var_04.var_2A3B delete();
 				}
 
@@ -396,21 +322,16 @@ func_12AEF()
 	}
 }
 
-//Function Number: 18
-func_B37E()
-{
+func_B37E() {
 	var_00 = 3;
 	var_01 = 3;
 	var_02 = 0.5;
-	if(!isdefined(self))
-	{
+	if(!isdefined(self)) {
 		return;
 	}
 
-	if(isdefined(self.var_12AF1))
-	{
-		if(isdefined(self.var_2A3B))
-		{
+	if(isdefined(self.var_12AF1)) {
+		if(isdefined(self.var_2A3B)) {
 			self.var_2A3B delete();
 		}
 
@@ -432,21 +353,17 @@ func_B37E()
 
 	self.var_2A3B = function_0173(scripts\engine\utility::getfx("uav_beam"),var_00,self.origin);
 	wait(var_01);
-	if(isdefined(self.var_2A3B))
-	{
+	if(isdefined(self.var_2A3B)) {
 		self.var_2A3B delete();
 	}
 }
 
-//Function Number: 19
-func_6AB8(param_00,param_01)
-{
+func_6AB8(param_00,param_01) {
 	self notify("fadeOut");
 	self endon("fadeOut");
 	var_02 = param_00 - param_01;
 	wait(0.05);
-	if(!isdefined(self))
-	{
+	if(!isdefined(self)) {
 		return;
 	}
 
@@ -454,9 +371,7 @@ func_6AB8(param_00,param_01)
 	self.alpha = 0;
 }
 
-//Function Number: 20
-onplaced(param_00)
-{
+onplaced(param_00) {
 	var_01 = level.placeableconfigs[param_00];
 	self.triggerportableradarping notify("uplink_deployed");
 	self setmodel(var_01.modelbase);
@@ -464,8 +379,7 @@ onplaced(param_00)
 	self setotherent(self.triggerportableradarping);
 	scripts\mp\sentientpoolmanager::registersentient("Killstreak_Ground",self.triggerportableradarping);
 	self.config = var_01;
-	if(level.var_768F)
-	{
+	if(level.var_768F) {
 		thread func_12AEF();
 	}
 
@@ -473,20 +387,15 @@ onplaced(param_00)
 	thread watchempdamage();
 }
 
-//Function Number: 21
-func_10E04(param_00)
-{
+func_10E04(param_00) {
 	func_1868(self);
 	self playloopsound(self.config.var_1673);
 }
 
-//Function Number: 22
-func_11099()
-{
+func_11099() {
 	scripts\mp\_weapons::stopblinkinglight();
 	self scriptmodelclearanim();
-	if(isdefined(self.bombsquadmodel))
-	{
+	if(isdefined(self.bombsquadmodel)) {
 		self.bombsquadmodel scriptmodelclearanim();
 	}
 
@@ -494,81 +403,60 @@ func_11099()
 	self stoploopsound();
 }
 
-//Function Number: 23
-func_C4F2(param_00,param_01,param_02,param_03)
-{
+func_C4F2(param_00,param_01,param_02,param_03) {
 	param_01 notify("destroyed_equipment");
 }
 
-//Function Number: 24
-ondeath_clearscriptedanim(param_00,param_01,param_02,param_03)
-{
+ondeath_clearscriptedanim(param_00,param_01,param_02,param_03) {
 	scripts\mp\_weapons::stopblinkinglight();
 	scripts\mp\_weapons::equipmentdeathvfx();
 	func_E188(self);
 	self scriptmodelclearanim();
-	if(!self.var_933C)
-	{
+	if(!self.var_933C) {
 		wait(3);
 	}
 
 	scripts\mp\_weapons::equipmentdeletevfx();
 }
 
-//Function Number: 25
-func_1868(param_00)
-{
+func_1868(param_00) {
 	var_01 = param_00 getentitynumber();
 	level.uplinks[var_01] = param_00;
 	level notify("update_uplink");
 }
 
-//Function Number: 26
-func_E188(param_00)
-{
+func_E188(param_00) {
 	param_00 notify("satComTimedOut");
 	var_01 = param_00 getentitynumber();
 	level.uplinks[var_01] = undefined;
 	level notify("update_uplink");
 }
 
-//Function Number: 27
-disableusability(param_00)
-{
+disableusability(param_00) {
 	var_01 = 0;
-	foreach(var_03 in level.uplinks)
-	{
-		if(isdefined(var_03) && var_03.team == param_00)
-		{
+	foreach(var_03 in level.uplinks) {
+		if(isdefined(var_03) && var_03.team == param_00) {
 			var_01++;
 		}
 	}
 
-	if(var_01 == 0 && isdefined(level.var_8DD7) && level.var_8DD7.team == param_00)
-	{
+	if(var_01 == 0 && isdefined(level.var_8DD7) && level.var_8DD7.team == param_00) {
 		var_01++;
 	}
 
-	if(var_01 == 1)
-	{
+	if(var_01 == 1) {
 		var_01 = 2;
 	}
 
 	return clamp(var_01,0,4);
 }
 
-//Function Number: 28
-_meth_80A7(param_00)
-{
+_meth_80A7(param_00) {
 	var_01 = 0;
-	foreach(var_03 in level.uplinks)
-	{
-		if(isdefined(var_03))
-		{
-			if(isdefined(var_03.triggerportableradarping))
-			{
-				if(var_03.triggerportableradarping.guid == param_00.guid)
-				{
+	foreach(var_03 in level.uplinks) {
+		if(isdefined(var_03)) {
+			if(isdefined(var_03.triggerportableradarping)) {
+				if(var_03.triggerportableradarping.guid == param_00.guid) {
 					var_01++;
 				}
 
@@ -580,48 +468,37 @@ _meth_80A7(param_00)
 		}
 	}
 
-	if(!level.teambased && var_01 > 0)
-	{
+	if(!level.teambased && var_01 > 0) {
 		var_01++;
 	}
 
 	return clamp(var_01,0,4);
 }
 
-//Function Number: 29
-_meth_80A6(param_00)
-{
+_meth_80A6(param_00) {
 	var_01 = 0;
-	foreach(var_03 in level.uplinks)
-	{
-		if(isdefined(var_03))
-		{
+	foreach(var_03 in level.uplinks) {
+		if(isdefined(var_03)) {
 			var_01++;
 		}
 	}
 
-	if(!level.teambased && var_01 > 0)
-	{
+	if(!level.teambased && var_01 > 0) {
 		var_01++;
 	}
 
 	return clamp(var_01,0,4);
 }
 
-//Function Number: 30
-func_12F80(param_00)
-{
+func_12F80(param_00) {
 	self.var_933C = 1;
 	self notify("death");
 }
 
-//Function Number: 31
-watchempdamage()
-{
+watchempdamage() {
 	self endon("death");
 	level endon("game_ended");
-	for(;;)
-	{
+	for(;;) {
 		self waittill("emp_damage",var_00,var_01);
 		scripts\mp\_weapons::equipmentempstunvfx();
 		func_11099();
@@ -630,12 +507,9 @@ watchempdamage()
 	}
 }
 
-//Function Number: 32
-func_12F83()
-{
+func_12F83() {
 	level endon("game_ended");
-	for(;;)
-	{
+	for(;;) {
 		level waittill("player_spawned",var_00);
 		var_01 = isdefined(var_00.var_FFC7) && var_00.var_FFC7;
 		var_00 _meth_82DF(var_01);

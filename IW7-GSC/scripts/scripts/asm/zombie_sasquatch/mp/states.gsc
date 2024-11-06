@@ -1,18 +1,11 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\asm\zombie_sasquatch\mp\states.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 5
- * Decompile Time: 342 ms
- * Timestamp: 10\27\2023 12:03:04 AM
-*******************************************************************/
+/**************************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\asm\zombie_sasquatch\mp\states.gsc
+**************************************************************/
 
-//Function Number: 1
-func_2371()
-{
-	if(scripts\asm\asm::func_232E("zombie_sasquatch"))
-	{
+func_2371() {
+	if(scripts\asm\asm::func_232E("zombie_sasquatch")) {
 		return;
 	}
 
@@ -136,26 +129,18 @@ func_2371()
 	scripts\asm\asm::func_2327();
 }
 
-//Function Number: 2
-trans_start_state_to_spawn_fx0(param_00,param_01,param_02,param_03)
-{
+trans_start_state_to_spawn_fx0(param_00,param_01,param_02,param_03) {
 	return scripts\asm\zombie\zombie::func_BE96();
 }
 
-//Function Number: 3
-trans_start_state_to_spawn1(param_00,param_01,param_02,param_03)
-{
+trans_start_state_to_spawn1(param_00,param_01,param_02,param_03) {
 	return scripts\asm\zombie\zombie::func_BE97();
 }
 
-//Function Number: 4
-trans_spawn_to_idle0(param_00,param_01,param_02,param_03)
-{
+trans_spawn_to_idle0(param_00,param_01,param_02,param_03) {
 	return self.hasplayedvignetteanim;
 }
 
-//Function Number: 5
-trans_spawn_fx_to_spawn0(param_00,param_01,param_02,param_03)
-{
+trans_spawn_fx_to_spawn0(param_00,param_01,param_02,param_03) {
 	return isdefined(self.var_8C12) && self.var_8C12;
 }

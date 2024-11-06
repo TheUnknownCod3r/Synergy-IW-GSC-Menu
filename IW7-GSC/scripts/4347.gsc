@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: 4347.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 1
- * Decompile Time: 39 ms
- * Timestamp: 10/27/2023 12:32:07 AM
-*******************************************************************/
+/****************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\4347.gsc
+****************************/
 
-//Function Number: 1
-main()
-{
+main() {
 	var_00 = scripts\engine\utility::createoneshoteffect("vfx_fish_tk_lrg_skywy");
 	var_00 scripts\common\createfx::set_origin_and_angles((2504.9,2864.51,8.50696),(0,0,0));
 	var_00.v["fxid"] = "vfx_fish_tk_lrg_skywy";

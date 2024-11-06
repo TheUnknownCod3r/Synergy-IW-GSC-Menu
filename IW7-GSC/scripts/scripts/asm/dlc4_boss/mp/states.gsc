@@ -1,18 +1,11 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\asm\dlc4_boss\mp\states.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 5
- * Decompile Time: 313 ms
- * Timestamp: 10\27\2023 12:01:36 AM
-*******************************************************************/
+/*******************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\asm\dlc4_boss\mp\states.gsc
+*******************************************************/
 
-//Function Number: 1
-func_2371()
-{
-	if(scripts\asm\asm::func_232E("dlc4_boss"))
-	{
+func_2371() {
+	if(scripts\asm\asm::func_232E("dlc4_boss")) {
 		return;
 	}
 
@@ -185,26 +178,18 @@ func_2371()
 	scripts\asm\asm::func_2327();
 }
 
-//Function Number: 2
-trans_move_loop_to_move_arrival0(param_00,param_01,param_02,param_03)
-{
+trans_move_loop_to_move_arrival0(param_00,param_01,param_02,param_03) {
 	return self.var_1198.movereadyforarrival;
 }
 
-//Function Number: 3
-trans_move_exit_pass_to_move_fireball0(param_00,param_01,param_02,param_03)
-{
+trans_move_exit_pass_to_move_fireball0(param_00,param_01,param_02,param_03) {
 	return self.var_1198.strafeaction == "fireball";
 }
 
-//Function Number: 4
-trans_move_exit_pass_to_move_clap1(param_00,param_01,param_02,param_03)
-{
+trans_move_exit_pass_to_move_clap1(param_00,param_01,param_02,param_03) {
 	return self.var_1198.strafeaction == "clap";
 }
 
-//Function Number: 5
-trans_move_back_loop_to_move_back_arrival0(param_00,param_01,param_02,param_03)
-{
+trans_move_back_loop_to_move_back_arrival0(param_00,param_01,param_02,param_03) {
 	return self.var_1198.movereadyforarrival;
 }

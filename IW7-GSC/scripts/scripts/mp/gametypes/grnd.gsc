@@ -1,27 +1,19 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\mp\gametypes\grnd.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 7
- * Decompile Time: 385 ms
- * Timestamp: 10/27/2023 12:12:34 AM
-*******************************************************************/
+/*************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\mp\gametypes\grnd.gsc
+*************************************************/
 
-//Function Number: 1
-main()
-{
-	if(getdvar("mapname") == "mp_background")
-	{
+main() {
+	if(getdvar("mapname") == "mp_background") {
 		return;
 	}
 
 	scripts\mp\_globallogic::init();
 	scripts\mp\_globallogic::setupcallbacks();
-	if(function_011C())
-	{
+	if(function_011C()) {
 		level.initializematchrules = ::initializematchrules;
-		[[ level.initializematchrules ]]();
+		[[level.initializematchrules]]();
 		level thread scripts\mp\_utility::reinitializematchrulesonmigration();
 	}
 	else
@@ -43,26 +35,21 @@ main()
 	level.getspawnpoint = ::scripts\mp\gametypes\koth::getspawnpoint;
 	level.onplayerkilled = ::scripts\mp\gametypes\koth::onplayerkilled;
 	level.onrespawndelay = ::scripts\mp\gametypes\koth::getrespawndelay;
-	if(level.matchrules_damagemultiplier || level.matchrules_vampirism)
-	{
+	if(level.matchrules_damagemultiplier || level.matchrules_vampirism) {
 		level.modifyplayerdamage = ::scripts\mp\_damage::gamemodemodifyplayerdamage;
 	}
 
 	game["dialog"]["gametype"] = "dropzone";
-	if(getdvarint("g_hardcore"))
-	{
+	if(getdvarint("g_hardcore")) {
 		game["dialog"]["gametype"] = "hc_" + game["dialog"]["gametype"];
 	}
-	else if(getdvarint("camera_thirdPerson"))
-	{
+	else if(getdvarint("camera_thirdPerson")) {
 		game["dialog"]["gametype"] = "thirdp_" + game["dialog"]["gametype"];
 	}
-	else if(getdvarint("scr_diehard"))
-	{
+	else if(getdvarint("scr_diehard")) {
 		game["dialog"]["gametype"] = "dh_" + game["dialog"]["gametype"];
 	}
-	else if(getdvarint("scr_" + level.gametype + "_promode"))
-	{
+	else if(getdvarint("scr_" + level.gametype + "_promode")) {
 		game["dialog"]["gametype"] = game["dialog"]["gametype"] + "_pro";
 	}
 
@@ -75,9 +62,7 @@ main()
 	level.dangerovalscale["drop_zone"] = 1;
 }
 
-//Function Number: 2
-initializematchrules()
-{
+initializematchrules() {
 	scripts\mp\_utility::setcommonrulesfrommatchdata();
 	setdynamicdvar("scr_grnd_dropTime",getmatchrulesdata("grndData","dropTime"));
 	setdynamicdvar("scr_grnd_enableVariantDZ",getmatchrulesdata("grndData","enableVariantDZ"));
@@ -94,19 +79,15 @@ initializematchrules()
 	setdynamicdvar("scr_grnd_promode",0);
 }
 
-//Function Number: 3
-onstartgametype()
-{
+onstartgametype() {
 	setclientnamemode("auto_change");
-	if(!isdefined(game["switchedsides"]))
-	{
+	if(!isdefined(game["switchedsides"])) {
 		game["switchedsides"] = 0;
 	}
 
 	scripts\mp\_utility::setobjectivetext("allies",&"OBJECTIVES_GRND");
 	scripts\mp\_utility::setobjectivetext("axis",&"OBJECTIVES_GRND");
-	if(level.splitscreen)
-	{
+	if(level.splitscreen) {
 		scripts\mp\_utility::setobjectivescoretext("allies",&"OBJECTIVES_GRND");
 		scripts\mp\_utility::setobjectivescoretext("axis",&"OBJECTIVES_GRND");
 	}
@@ -126,15 +107,12 @@ onstartgametype()
 	level thread scripts\mp\gametypes\koth::setupzoneareabrushes();
 	scripts\mp\gametypes\koth::initspawns();
 	level thread scripts\mp\gametypes\koth::hardpointmainloop();
-	if(level.droptime > 0)
-	{
+	if(level.droptime > 0) {
 		level thread randomdrops();
 	}
 }
 
-//Function Number: 4
-updategametypedvars()
-{
+updategametypedvars() {
 	scripts\mp\gametypes\common::updategametypedvars();
 	level.droptime = scripts\mp\_utility::dvarfloatvalue("dropTime",15,0,60);
 	level.zoneduration = scripts\mp\_utility::dvarfloatvalue("zoneLifetime",60,0,300);
@@ -148,18 +126,14 @@ updategametypedvars()
 	level.enablevariantdrops = scripts\mp\_utility::dvarintvalue("enableVariantDZ",0,0,1);
 }
 
-//Function Number: 5
-randomdrops()
-{
+randomdrops() {
 	level endon("game_ended");
 	scripts\mp\_utility::gameflagwait("prematch_done");
 	level.grnd_previouscratetypes = [];
-	for(;;)
-	{
+	for(;;) {
 		var_00 = getbestplayer();
 		var_01 = 1;
-		if(isdefined(var_00) && scripts\mp\_utility::currentactivevehiclecount() < scripts\mp\_utility::maxvehiclesallowed() && level.fauxvehiclecount + var_01 < scripts\mp\_utility::maxvehiclesallowed() && level.numdropcrates < 8)
-		{
+		if(isdefined(var_00) && scripts\mp\_utility::currentactivevehiclecount() < scripts\mp\_utility::maxvehiclesallowed() && level.fauxvehiclecount + var_01 < scripts\mp\_utility::maxvehiclesallowed() && level.numdropcrates < 8) {
 			scripts\mp\_utility::playsoundonplayers("mp_dropzone_obj_taken",var_00.team);
 			scripts\mp\_utility::playsoundonplayers("mp_dropzone_obj_lost",level.otherteam[var_00.team]);
 			var_02 = function_00B7(level.zone.gameobject.trigger);
@@ -185,21 +159,16 @@ randomdrops()
 	}
 }
 
-//Function Number: 6
-getbestplayer()
-{
+getbestplayer() {
 	var_00 = undefined;
 	var_01 = 0;
 	var_02 = level.zone.gameobject scripts\mp\_gameobjects::getownerteam();
-	if(var_02 == "neutral")
-	{
+	if(var_02 == "neutral") {
 		return var_00;
 	}
 
-	foreach(var_04 in level.zone.gameobject.touchlist[var_02])
-	{
-		if(var_01 == 0 || var_01 > var_04.starttime)
-		{
+	foreach(var_04 in level.zone.gameobject.touchlist[var_02]) {
+		if(var_01 == 0 || var_01 > var_04.starttime) {
 			var_01 = var_04.starttime;
 			var_00 = var_04.player;
 		}
@@ -208,23 +177,17 @@ getbestplayer()
 	return var_00;
 }
 
-//Function Number: 7
-getdropzonecratetype()
-{
+getdropzonecratetype() {
 	var_00 = undefined;
-	if(!isdefined(level.grnd_previouscratetypes["mega"]) && level.numdropcrates == 0 && randomintrange(0,100) < 5)
-	{
+	if(!isdefined(level.grnd_previouscratetypes["mega"]) && level.numdropcrates == 0 && randomintrange(0,100) < 5) {
 		var_00 = "mega";
 	}
 	else
 	{
-		if(level.grnd_previouscratetypes.size)
-		{
-			for(var_01 = 200;var_01;var_01--)
-			{
+		if(level.grnd_previouscratetypes.size) {
+			for(var_01 = 200;var_01;var_01--) {
 				var_00 = scripts\mp\killstreaks\_airdrop::getrandomcratetype("dronedrop_grnd");
-				if(isdefined(level.grnd_previouscratetypes[var_00]))
-				{
+				if(isdefined(level.grnd_previouscratetypes[var_00])) {
 					var_00 = undefined;
 					continue;
 				}
@@ -233,15 +196,13 @@ getdropzonecratetype()
 			}
 		}
 
-		if(!isdefined(var_00))
-		{
+		if(!isdefined(var_00)) {
 			var_00 = scripts\mp\killstreaks\_airdrop::getrandomcratetype("dronedrop_grnd");
 		}
 	}
 
 	level.grnd_previouscratetypes[var_00] = 1;
-	if(level.grnd_previouscratetypes.size == 15)
-	{
+	if(level.grnd_previouscratetypes.size == 15) {
 		level.grnd_previouscratetypes = [];
 	}
 

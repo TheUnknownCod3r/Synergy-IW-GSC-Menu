@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\cp\crafted_trap_robot.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 26
- * Decompile Time: 1263 ms
- * Timestamp: 10/27/2023 12:10:28 AM
-*******************************************************************/
+/*****************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\cp\crafted_trap_robot.gsc
+*****************************************************/
 
-//Function Number: 1
-init()
-{
+init() {
 	level.robot_trap_settings = [];
 	var_00 = spawnstruct();
 	var_00.var_39B = "zmb_robotprojectile_mp";
@@ -32,9 +26,7 @@ init()
 	level.robot_trap_settings["crafted_ims"] = var_00;
 }
 
-//Function Number: 2
-give_crafted_robot_trap(param_00,param_01)
-{
+give_crafted_robot_trap(param_00,param_01) {
 	param_01 thread watch_dpad();
 	param_01 notify("new_power","crafted_robot");
 	param_01 setclientomnvar("zom_crafted_weapon",12);
@@ -42,34 +34,27 @@ give_crafted_robot_trap(param_00,param_01)
 	scripts\cp\utility::set_crafted_inventory_item("crafted_ims",::give_crafted_robot_trap,param_01);
 }
 
-//Function Number: 3
-watch_dpad()
-{
+watch_dpad() {
 	self endon("death");
 	self endon("disconnect");
 	self notify("craft_dpad_watcher");
 	self endon("craft_dpad_watcher");
 	self notifyonplayercommand("pullout_ims","+actionslot 3");
-	for(;;)
-	{
+	for(;;) {
 		self waittill("pullout_ims");
-		if(scripts\engine\utility::istrue(self.iscarrying))
-		{
+		if(scripts\engine\utility::istrue(self.iscarrying)) {
 			continue;
 		}
 
-		if(scripts\engine\utility::istrue(self.linked_to_coaster))
-		{
+		if(scripts\engine\utility::istrue(self.linked_to_coaster)) {
 			continue;
 		}
 
-		if(isdefined(self.allow_carry) && self.allow_carry == 0)
-		{
+		if(isdefined(self.allow_carry) && self.allow_carry == 0) {
 			continue;
 		}
 
-		if(scripts\cp\utility::is_valid_player())
-		{
+		if(scripts\cp\utility::is_valid_player()) {
 			break;
 		}
 	}
@@ -77,9 +62,7 @@ watch_dpad()
 	thread give_robot_trap("crafted_ims");
 }
 
-//Function Number: 4
-give_robot_trap(param_00)
-{
+give_robot_trap(param_00) {
 	self endon("disconnect");
 	scripts\cp\utility::clearlowermessage("msg_power_hint");
 	var_01 = create_robot_trap_for_player(param_00,self);
@@ -93,57 +76,46 @@ give_robot_trap(param_00)
 	return var_02;
 }
 
-//Function Number: 5
-func_F684(param_00,param_01,param_02)
-{
+func_F684(param_00,param_01,param_02) {
 	self endon("disconnect");
 	param_00 thread robot_trap_setcarried(self);
 	scripts\engine\utility::allow_weapon(0);
 	self notifyonplayercommand("place_ims","+attack");
 	self notifyonplayercommand("place_ims","+attack_akimbo_accessible");
 	self notifyonplayercommand("cancel_ims","+actionslot 3");
-	if(!level.console)
-	{
+	if(!level.console) {
 		self notifyonplayercommand("cancel_ims","+actionslot 5");
 		self notifyonplayercommand("cancel_ims","+actionslot 6");
 		self notifyonplayercommand("cancel_ims","+actionslot 7");
 	}
 
-	for(;;)
-	{
+	for(;;) {
 		var_03 = scripts\engine\utility::waittill_any_return("place_ims","cancel_ims","force_cancel_placement","player_action_slot_restart");
-		if(!isdefined(var_03))
-		{
+		if(!isdefined(var_03)) {
 			var_03 = "force_cancel_placement";
 		}
 
-		if(var_03 == "cancel_ims" || var_03 == "force_cancel_placement" || var_03 == "player_action_slot_restart")
-		{
-			if(!param_01 && var_03 == "cancel_ims")
-			{
+		if(var_03 == "cancel_ims" || var_03 == "force_cancel_placement" || var_03 == "player_action_slot_restart") {
+			if(!param_01 && var_03 == "cancel_ims") {
 				continue;
 			}
 
 			param_00 robot_trap_setcancelled(var_03 == "force_cancel_placement" && !isdefined(param_00.firstplacement));
-			if(var_03 != "force_cancel_placement")
-			{
+			if(var_03 != "force_cancel_placement") {
 				thread watch_dpad();
 			}
-			else if(param_01)
-			{
+			else if(param_01) {
 				scripts\cp\utility::remove_crafted_item_from_inventory(self);
 			}
 
 			return 0;
 		}
 
-		if(!param_00.canbeplaced)
-		{
+		if(!param_00.canbeplaced) {
 			continue;
 		}
 
-		if(param_01)
-		{
+		if(param_01) {
 			scripts\cp\utility::remove_crafted_item_from_inventory(self);
 		}
 
@@ -154,11 +126,8 @@ func_F684(param_00,param_01,param_02)
 	}
 }
 
-//Function Number: 6
-create_robot_trap_for_player(param_00,param_01)
-{
-	if(isdefined(param_01.iscarrying) && param_01.iscarrying)
-	{
+create_robot_trap_for_player(param_00,param_01) {
+	if(isdefined(param_01.iscarrying) && param_01.iscarrying) {
 		return;
 	}
 
@@ -177,9 +146,7 @@ create_robot_trap_for_player(param_00,param_01)
 	return var_02;
 }
 
-//Function Number: 7
-create_robot_trap(param_00,param_01)
-{
+create_robot_trap(param_00,param_01) {
 	var_02 = param_00.triggerportableradarping;
 	var_03 = param_00.robot_trap_type;
 	var_04 = spawn("script_model",param_00.origin + (0,0,2));
@@ -197,8 +164,7 @@ create_robot_trap(param_00,param_01)
 	var_04.var_8BF0 = [];
 	var_04.config = level.robot_trap_settings[var_03];
 	var_04 thread robot_trap_handleuse();
-	if(isdefined(param_01))
-	{
+	if(isdefined(param_01)) {
 		var_04 thread scripts\cp\utility::item_timeout(param_01);
 	}
 	else
@@ -209,26 +175,20 @@ create_robot_trap(param_00,param_01)
 	return var_04;
 }
 
-//Function Number: 8
-func_936D(param_00)
-{
+func_936D(param_00) {
 	self.var_933C = 1;
 	self notify("death");
 }
 
-//Function Number: 9
-func_9367(param_00)
-{
+func_9367(param_00) {
 	self endon("carried");
 	self waittill("death");
-	if(!isdefined(self))
-	{
+	if(!isdefined(self)) {
 		return;
 	}
 
 	robot_trap_setinactive();
-	if(isdefined(self.inuseby))
-	{
+	if(isdefined(self.inuseby)) {
 		self.inuseby scripts\cp\utility::restore_player_perk();
 		self notify("deleting");
 		wait(1);
@@ -238,9 +198,7 @@ func_9367(param_00)
 	self delete();
 }
 
-//Function Number: 10
-func_66A7()
-{
+func_66A7() {
 	self setscriptablepartstate("main","anim_death");
 	wait(3);
 	playsoundatpos(self.origin + (0,0,60),"disco_toy_robot_explo");
@@ -251,38 +209,30 @@ func_66A7()
 	physicsexplosionsphere(self.origin,256,256,2);
 }
 
-//Function Number: 11
-robot_trap_handleuse()
-{
+robot_trap_handleuse() {
 	self endon("death");
 	level endon("game_ended");
-	for(;;)
-	{
+	for(;;) {
 		self waittill("trigger",var_00);
-		if(!var_00 scripts\cp\utility::is_valid_player())
-		{
+		if(!var_00 scripts\cp\utility::is_valid_player()) {
 			continue;
 		}
 
-		if(scripts\engine\utility::istrue(var_00.iscarrying))
-		{
+		if(scripts\engine\utility::istrue(var_00.iscarrying)) {
 			continue;
 		}
 
-		if(scripts\engine\utility::istrue(var_00.kung_fu_mode))
-		{
+		if(scripts\engine\utility::istrue(var_00.kung_fu_mode)) {
 			continue;
 		}
 
 		var_01 = create_robot_trap_for_player(self.robot_trap_type,var_00);
-		if(!isdefined(var_01))
-		{
+		if(!isdefined(var_01)) {
 			continue;
 		}
 
 		robot_trap_setinactive();
-		if(isdefined(self getlinkedparent()))
-		{
+		if(isdefined(self getlinkedparent())) {
 			self unlink();
 		}
 
@@ -292,19 +242,15 @@ robot_trap_handleuse()
 	}
 }
 
-//Function Number: 12
-robot_trap_setplaced(param_00)
-{
+robot_trap_setplaced(param_00) {
 	self endon("death");
 	level endon("game_ended");
-	if(isdefined(self.carriedby))
-	{
+	if(isdefined(self.carriedby)) {
 		self.carriedby getrigindexfromarchetyperef();
 	}
 
 	self.carriedby = undefined;
-	if(isdefined(self.triggerportableradarping))
-	{
+	if(isdefined(self.triggerportableradarping)) {
 		self.triggerportableradarping.iscarrying = 0;
 	}
 
@@ -316,8 +262,7 @@ robot_trap_setplaced(param_00)
 	self notify("placed");
 	var_01 thread robot_trap_setactive();
 	var_02 = spawnstruct();
-	if(isdefined(self.moving_platform))
-	{
+	if(isdefined(self.moving_platform)) {
 		var_02.linkparent = self.moving_platform;
 	}
 
@@ -328,11 +273,8 @@ robot_trap_setplaced(param_00)
 	self delete();
 }
 
-//Function Number: 13
-robot_trap_setcancelled(param_00)
-{
-	if(isdefined(self.carriedby))
-	{
+robot_trap_setcancelled(param_00) {
+	if(isdefined(self.carriedby)) {
 		var_01 = self.carriedby;
 		var_01 getrigindexfromarchetyperef();
 		var_01.iscarrying = undefined;
@@ -340,8 +282,7 @@ robot_trap_setcancelled(param_00)
 		var_01 scripts\engine\utility::allow_weapon(1);
 	}
 
-	if(isdefined(param_00) && param_00)
-	{
+	if(isdefined(param_00) && param_00) {
 		func_66A7();
 	}
 
@@ -349,9 +290,7 @@ robot_trap_setcancelled(param_00)
 	self delete();
 }
 
-//Function Number: 14
-robot_trap_setcarried(param_00)
-{
+robot_trap_setcarried(param_00) {
 	self setsentrycarrier(param_00);
 	self setcontents(0);
 	self setcandamage(0);
@@ -361,17 +300,14 @@ robot_trap_setcarried(param_00)
 	thread scripts\cp\utility::item_oncarrierdeath(param_00);
 	thread func_936F(param_00);
 	thread func_9371(param_00);
-	if(isdefined(level.var_5CF2))
-	{
-		self thread [[ level.var_5CF2 ]](param_00);
+	if(isdefined(level.var_5CF2)) {
+		self thread [[level.var_5CF2]](param_00);
 	}
 
 	self notify("carried");
 }
 
-//Function Number: 15
-func_936F(param_00)
-{
+func_936F(param_00) {
 	self endon("placed");
 	self endon("death");
 	param_00 endon("last_stand");
@@ -379,9 +315,7 @@ func_936F(param_00)
 	robot_trap_setcancelled();
 }
 
-//Function Number: 16
-func_9371(param_00)
-{
+func_9371(param_00) {
 	self endon("placed");
 	self endon("death");
 	param_00 endon("last_stand");
@@ -389,9 +323,7 @@ func_9371(param_00)
 	robot_trap_setcancelled();
 }
 
-//Function Number: 17
-robot_trap_setactive()
-{
+robot_trap_setactive() {
 	self endon("death");
 	self setcursorhint("HINT_NOICON");
 	self sethintstring(level.robot_trap_settings[self.robot_trap_type].pow);
@@ -405,8 +337,7 @@ robot_trap_setactive()
 	self.alt_attackheightpos = self.var_2514;
 	var_01 = bullettrace(self.var_2514,self.var_2514 + (0,0,500),0,self);
 	var_02 = var_01["position"] - (0,0,20) - self.origin;
-	if(var_02[2] > 250)
-	{
+	if(var_02[2] > 250) {
 		self.var_2514 = self gettagorigin("tag_rocket_tube_01") + (0,0,250);
 	}
 
@@ -423,8 +354,7 @@ robot_trap_setactive()
 	self setscriptablepartstate("head_coils","on");
 	self setscriptablepartstate("LED_Panel","Idle");
 	thread rotate_robot();
-	if(isdefined(self.triggerportableradarping))
-	{
+	if(isdefined(self.triggerportableradarping)) {
 		thread robot_usability_monitor(self.triggerportableradarping);
 	}
 
@@ -432,30 +362,23 @@ robot_trap_setactive()
 	thread scripts\cp\utility::item_handleownerdisconnect("robot_disconnect");
 }
 
-//Function Number: 18
-rotate_robot()
-{
+rotate_robot() {
 	self endon("death");
 	self playloopsound("disco_toy_robot_mvmt_lp");
-	for(;;)
-	{
+	for(;;) {
 		self rotateyaw(15,2);
 		wait(2);
 	}
 }
 
-//Function Number: 19
-robot_trap_setinactive()
-{
+robot_trap_setinactive() {
 	self makeunusable();
 	self stoploopsound();
-	if(isdefined(self.var_2536))
-	{
+	if(isdefined(self.var_2536)) {
 		self.var_2536 delete();
 	}
 
-	if(isdefined(self.var_69F6))
-	{
+	if(isdefined(self.var_69F6)) {
 		self.var_69F6 delete();
 		self.var_69F6 = undefined;
 	}
@@ -463,19 +386,13 @@ robot_trap_setinactive()
 	scripts\cp\utility::removefromtraplist();
 }
 
-//Function Number: 20
-robot_usability_monitor(param_00)
-{
+robot_usability_monitor(param_00) {
 	self endon("death");
 	param_00 endon("disconnect");
-	for(;;)
-	{
-		foreach(var_02 in level.players)
-		{
-			if(var_02 == param_00)
-			{
-				if(scripts\engine\utility::istrue(param_00.kung_fu_mode))
-				{
+	for(;;) {
+		foreach(var_02 in level.players) {
+			if(var_02 == param_00) {
+				if(scripts\engine\utility::istrue(param_00.kung_fu_mode)) {
 					self makeunusable();
 					self disableplayeruse(param_00);
 				}
@@ -498,42 +415,33 @@ robot_usability_monitor(param_00)
 	}
 }
 
-//Function Number: 21
-robot_trap_attackzombies()
-{
+robot_trap_attackzombies() {
 	self endon("death");
 	level endon("game_ended");
 	self setscriptablepartstate("LED_Face","Smile");
-	for(;;)
-	{
-		if(!isdefined(self.var_2536))
-		{
+	for(;;) {
+		if(!isdefined(self.var_2536)) {
 			break;
 		}
 
 		self.var_2536 waittill("trigger",var_00);
-		if(isplayer(var_00))
-		{
+		if(isplayer(var_00)) {
 			continue;
 		}
 
-		if(!scripts\cp\utility::should_be_affected_by_trap(var_00,0,1))
-		{
+		if(!scripts\cp\utility::should_be_affected_by_trap(var_00,0,1)) {
 			continue;
 		}
 
-		if(var_00.agent_type == "ratking")
-		{
+		if(var_00.agent_type == "ratking") {
 			continue;
 		}
 
-		if(isdefined(var_00.robot_target))
-		{
+		if(isdefined(var_00.robot_target)) {
 			continue;
 		}
 
-		if(distancesquared(var_00.origin,self.origin) < 9216)
-		{
+		if(distancesquared(var_00.origin,self.origin) < 9216) {
 			var_00.robot_target = 1;
 			self setscriptablepartstate("LED_Face","Sad");
 			self setscriptablepartstate("LED_Panel","ZAP");
@@ -546,63 +454,52 @@ robot_trap_attackzombies()
 
 		var_01 = var_00.origin + (0,0,50);
 		var_02 = 0;
-		if(!sighttracepassed(self.var_2514,var_01,0,self))
-		{
-			if(!sighttracepassed(self.alt_attackheightpos,var_01,0,self))
-			{
+		if(!sighttracepassed(self.var_2514,var_01,0,self)) {
+			if(!sighttracepassed(self.alt_attackheightpos,var_01,0,self)) {
 				continue;
 			}
 
 			var_02 = 1;
 		}
 
-		if(!isdefined(self.var_2536))
-		{
+		if(!isdefined(self.var_2536)) {
 			break;
 		}
 
-		if(!isdefined(self.var_8BF0[self.var_252E]))
-		{
+		if(!isdefined(self.var_8BF0[self.var_252E])) {
 			var_00.robot_target = 1;
 			self.var_8BF0[self.var_252E] = 1;
 			self.var_252E++;
 			thread launch_rocket(var_00,self.var_252E,var_02);
 		}
 
-		if(self.var_252E % 2)
-		{
+		if(self.var_252E % 2) {
 			self waittill("firework_exploded");
 		}
 
 		wait(self.config.var_DDAC);
-		if(!isdefined(self.triggerportableradarping))
-		{
+		if(!isdefined(self.triggerportableradarping)) {
 			break;
 		}
 
-		if(self.var_252E >= level.robot_trap_settings["crafted_ims"].var_C228)
-		{
+		if(self.var_252E >= level.robot_trap_settings["crafted_ims"].var_C228) {
 			break;
 		}
 	}
 
-	if(isdefined(self.carriedby) && isdefined(self.triggerportableradarping) && self.carriedby == self.triggerportableradarping)
-	{
+	if(isdefined(self.carriedby) && isdefined(self.triggerportableradarping) && self.carriedby == self.triggerportableradarping) {
 		return;
 	}
 
 	self notify("death");
 }
 
-//Function Number: 22
-robot_zap(param_00)
-{
+robot_zap(param_00) {
 	param_00.dontmutilate = 1;
 	param_00.electrocuted = 1;
 	thread electrocute_zombie(param_00);
 	param_00 setscriptablepartstate("electrocuted","on");
-	if(isdefined(self.triggerportableradarping))
-	{
+	if(isdefined(self.triggerportableradarping)) {
 		var_01 = self.triggerportableradarping;
 	}
 	else
@@ -613,9 +510,7 @@ robot_zap(param_00)
 	param_00 dodamage(param_00.health + 100,self.origin,var_01,self,"MOD_UNKNOWN","iw7_robotzap_zm");
 }
 
-//Function Number: 23
-electrocute_zombie(param_00)
-{
+electrocute_zombie(param_00) {
 	param_00 endon("death");
 	var_01 = ["J_SpineLower","J_Chest","J_Head","J_Neck","J_Crotch"];
 	var_02 = self gettagorigin("tag_fx_laser_dish");
@@ -625,16 +520,12 @@ electrocute_zombie(param_00)
 	function_02E0(level._effect["robot_zap"],var_02,vectortoangles(var_04 - var_02),var_04);
 }
 
-//Function Number: 24
-launch_rocket(param_00,param_01,param_02)
-{
-	if(!isdefined(self.last_launch_tube))
-	{
+launch_rocket(param_00,param_01,param_02) {
+	if(!isdefined(self.last_launch_tube)) {
 		self.last_launch_tube = 0;
 	}
 
-	if(self.last_launch_tube == 0)
-	{
+	if(self.last_launch_tube == 0) {
 		var_03 = self.attacklaunchpos[1];
 		self setscriptablepartstate("right_launch","launch");
 	}
@@ -645,8 +536,7 @@ launch_rocket(param_00,param_01,param_02)
 	}
 
 	thread launch_anim();
-	if(self.last_launch_tube == 0)
-	{
+	if(self.last_launch_tube == 0) {
 		self.last_launch_tube = 1;
 	}
 	else
@@ -660,16 +550,14 @@ launch_rocket(param_00,param_01,param_02)
 	var_05 = self.config.var_39B;
 	var_06 = self.triggerportableradarping;
 	var_07 = self.var_2514;
-	if(param_02)
-	{
+	if(param_02) {
 		var_07 = self.alt_attackheightpos;
 	}
 
 	var_04 moveto(var_07,self.var_2528,self.var_2528 * 0.5,0);
 	wait(self.var_2528);
 	var_04 setscriptablepartstate("rocket","explode");
-	if(isdefined(var_06))
-	{
+	if(isdefined(var_06)) {
 		var_08 = magicbullet(var_05,var_04.origin,(param_00.origin[0],param_00.origin[1],var_04.origin[2] - 5),var_06);
 	}
 	else
@@ -685,16 +573,13 @@ launch_rocket(param_00,param_01,param_02)
 	self notify("firework_exploded");
 }
 
-//Function Number: 25
-launch_anim()
-{
+launch_anim() {
 	self endon("death");
 	self setscriptablepartstate("main","anim_launch");
 	self setscriptablepartstate("LED_Panel","Boom");
 	self setscriptablepartstate("LED_Face","Sad");
 	wait(1);
-	if(self.var_252E % 2)
-	{
+	if(self.var_252E % 2) {
 		self setscriptablepartstate("main","anim_headspin");
 		wait(1);
 	}
@@ -704,9 +589,7 @@ launch_anim()
 	self setscriptablepartstate("main","anim_idle");
 }
 
-//Function Number: 26
-watch_for_death()
-{
+watch_for_death() {
 	self waittill("death");
 	earthquake(0.35,1,self.origin,196);
 	playrumbleonposition("artillery_rumble",self.origin);

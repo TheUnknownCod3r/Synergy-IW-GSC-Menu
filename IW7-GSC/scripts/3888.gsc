@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: 3888.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 1
- * Decompile Time: 0 ms
- * Timestamp: 10/27/2023 12:31:08 AM
-*******************************************************************/
+/****************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\3888.gsc
+****************************/
 
-//Function Number: 1
-main()
-{
+main() {
 	level._effect["vfx_vr_enemy_death"] = loadfx("vfx/iw7/levels/vr/vfx_vr_enemy_death_01.vfx");
 	level._effect["vfx_vr_enemy_spawn"] = loadfx("vfx/iw7/levels/vr/vfx_vr_enemy_spawnin_core_01.vfx");
 	level._effect["vfx_vr_bp_point"] = loadfx("vfx/iw7/levels/vr/vfx_vr_bp_point.vfx");

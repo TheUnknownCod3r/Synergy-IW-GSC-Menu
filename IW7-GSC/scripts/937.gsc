@@ -1,30 +1,19 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: 937.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 4
- * Decompile Time: 1 ms
- * Timestamp: 10/27/2023 12:32:10 AM
-*******************************************************************/
+/***************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\937.gsc
+***************************/
 
-//Function Number: 1
-func_3387(param_00)
-{
+func_3387(param_00) {
 	return scripts/aitypes/combat::func_9E8B(param_00,0);
 }
 
-//Function Number: 2
-func_3388(param_00)
-{
+func_3388(param_00) {
 	return lib_0A09::func_13157(param_00,[distance(self.origin,self.isnodeoccupied.origin),512,1024]);
 }
 
-//Function Number: 3
-func_2AD0()
-{
-	if(isdefined(level.var_119E["c6_mp"]))
-	{
+func_2AD0() {
+	if(isdefined(level.var_119E["c6_mp"])) {
 		return;
 	}
 
@@ -75,9 +64,7 @@ func_2AD0()
 	level.var_119E["c6_mp"] = var_00;
 }
 
-//Function Number: 4
-func_DEE8()
-{
+func_DEE8() {
 	func_2AD0();
 	function_02D8("c6_mp");
 }

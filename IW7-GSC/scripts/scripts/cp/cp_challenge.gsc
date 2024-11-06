@@ -1,46 +1,33 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\cp\cp_challenge.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 32
- * Decompile Time: 1076 ms
- * Timestamp: 10/27/2023 12:23:29 AM
-*******************************************************************/
+/***********************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\cp\cp_challenge.gsc
+***********************************************/
 
-//Function Number: 1
-init_coop_challenge()
-{
+init_coop_challenge() {
 	func_956D();
-	if(!isdefined(level.challenge_scalar_func))
-	{
+	if(!isdefined(level.challenge_scalar_func)) {
 		level.challenge_scalar_func = ::func_4FE2;
 	}
 
 	func_97B0();
 }
 
-//Function Number: 2
-func_C9B9()
-{
-	[[ level.challenge_pause_func ]]();
+func_C9B9() {
+	[[level.challenge_pause_func]]();
 }
 
-//Function Number: 3
-func_956D()
-{
+func_956D() {
 	scripts\engine\utility::flag_init("pause_challenges");
 	var_00 = getdvar("ui_mapname");
 	level.zombie_challenge_table = "cp/zombies/" + var_00 + "_challenges.csv";
-	if(!tableexists(level.zombie_challenge_table))
-	{
+	if(!tableexists(level.zombie_challenge_table)) {
 		level.zombie_challenge_table = undefined;
 	}
 
 	level.challenge_data = [];
-	if(isdefined(level.challenge_registration_func))
-	{
-		[[ level.challenge_registration_func ]]();
+	if(isdefined(level.challenge_registration_func)) {
+		[[level.challenge_registration_func]]();
 	}
 
 	level.current_challenge_index = -1;
@@ -58,59 +45,45 @@ func_956D()
 	level.var_110AC = 0;
 }
 
-//Function Number: 4
-update_challenge(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08,param_09)
-{
-	if(!current_challenge_is(param_00) || !scripts\cp\utility::coop_mode_has("challenge"))
-	{
+update_challenge(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08,param_09) {
+	if(!current_challenge_is(param_00) || !scripts\cp\utility::coop_mode_has("challenge")) {
 		return;
 	}
 
-	if(level.var_D7B7)
-	{
+	if(level.var_D7B7) {
 		return;
 	}
 
 	var_0A = level.challenge_data[level.current_challenge];
-	var_0A thread [[ var_0A.var_12E9C ]](param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08,param_09);
+	var_0A thread [[var_0A.var_12E9C]](param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08,param_09);
 }
 
-//Function Number: 5
-func_62C6()
-{
-	if(current_challenge_exist() && scripts\cp\utility::coop_mode_has("challenge"))
-	{
+func_62C6() {
+	if(current_challenge_exist() && scripts\cp\utility::coop_mode_has("challenge")) {
 		deactivate_current_challenge();
 	}
 }
 
-//Function Number: 6
-deactivate_current_challenge()
-{
-	if(!current_challenge_exist())
-	{
+deactivate_current_challenge() {
+	if(!current_challenge_exist()) {
 		return;
 	}
 
 	var_00 = level.challenge_data[level.current_challenge];
 	func_12BF7();
-	if(var_00 [[ var_00.var_9F82 ]]())
-	{
+	if(var_00 [[var_00.var_9F82]]()) {
 		func_56AD("challenge_success",0);
-		var_00 [[ var_00.var_E4C5 ]]();
+		var_00 [[var_00.var_E4C5]]();
 		var_01 = "challenge";
-		if(isdefined(level.var_3C24))
-		{
+		if(isdefined(level.var_3C24)) {
 			var_01 = level.var_3C24;
 		}
 
 		scripts/cp/cp_gamescore::update_players_encounter_performance(var_01,"challenge_complete");
 		scripts\cp\cp_persistence::update_lb_aliensession_challenge(1);
 		scripts\cp\cp_analytics::update_challenges_status(var_00.ref,1);
-		if(func_9F17(var_00))
-		{
-			if(level.current_challenge_timer - level.storechallengetime <= 0.01)
-			{
+		if(func_9F17(var_00)) {
+			if(level.current_challenge_timer - level.storechallengetime <= 0.01) {
 				scripts\cp\zombies\zombie_analytics::func_AF63(var_00.ref,level.wave_num,level.storechallengetime - level.current_challenge_timer);
 			}
 			else
@@ -118,8 +91,7 @@ deactivate_current_challenge()
 				scripts\cp\zombies\zombie_analytics::func_AF63(var_00.ref,level.wave_num,level.current_challenge_timer);
 			}
 
-			foreach(var_03 in level.players)
-			{
+			foreach(var_03 in level.players) {
 				var_03 thread scripts\cp\cp_vo::try_to_play_vo("challenge_success_generic","zmb_comment_vo");
 			}
 
@@ -129,15 +101,12 @@ deactivate_current_challenge()
 	else
 	{
 		func_56AD("challenge_failed",0);
-		if(func_9F17(var_00))
-		{
-			if(isdefined(level.var_3C2B[var_00.ref]) && func_9F17(var_00))
-			{
+		if(func_9F17(var_00)) {
+			if(isdefined(level.var_3C2B[var_00.ref]) && func_9F17(var_00)) {
 				level.var_3C2B[var_00.ref]++;
 			}
 
-			if(var_00.ref == "no_laststand" || var_00.ref == "no_bleedout" || var_00.ref == "protect_player")
-			{
+			if(var_00.ref == "no_laststand" || var_00.ref == "no_bleedout" || var_00.ref == "protect_player") {
 				scripts\cp\zombies\zombie_analytics::func_AF64(var_00.ref,level.wave_num,0,level.var_3C2B[var_00.ref]);
 			}
 			else
@@ -145,10 +114,8 @@ deactivate_current_challenge()
 				scripts\cp\zombies\zombie_analytics::func_AF64(var_00.ref,level.wave_num,var_00.current_progress / var_00.objective_icon * 100,level.var_3C2B[var_00.ref]);
 			}
 
-			foreach(var_03 in level.players)
-			{
-				if(!scripts\cp\utility::isplayingsolo() && level.players.size > 1)
-				{
+			foreach(var_03 in level.players) {
+				if(!scripts\cp\utility::isplayingsolo() && level.players.size > 1) {
 					scripts\cp\cp_vo::try_to_play_vo_on_all_players("challenge_fail_team");
 					continue;
 				}
@@ -157,21 +124,18 @@ deactivate_current_challenge()
 			}
 		}
 
-		var_00 [[ var_00.var_6AD0 ]]();
+		var_00 [[var_00.var_6AD0]]();
 		level.var_1BE8 = 0;
 		scripts\cp\cp_persistence::update_lb_aliensession_challenge(0);
 		scripts\cp\cp_analytics::update_challenges_status(var_00.ref,0);
 	}
 
 	level notify("challenge_deactivated");
-	var_00 [[ var_00.var_4DDE ]]();
+	var_00 [[var_00.var_4DDE]]();
 }
 
-//Function Number: 7
-func_9F17(param_00)
-{
-	switch(param_00.ref)
-	{
+func_9F17(param_00) {
+	switch(param_00.ref) {
 		case "challenge_success":
 		case "challenge_failed":
 		case "next_challenge":
@@ -182,20 +146,15 @@ func_9F17(param_00)
 	}
 }
 
-//Function Number: 8
-activate_new_challenge(param_00)
-{
+activate_new_challenge(param_00) {
 	var_01 = level.challenge_data[param_00];
-	if(!isdefined(level.var_3C2B[param_00]) && param_00 != "next_challenge")
-	{
+	if(!isdefined(level.var_3C2B[param_00]) && param_00 != "next_challenge") {
 		level.var_3C2B[param_00] = 0;
 	}
 
-	if(var_01 [[ var_01.var_386E ]]())
-	{
+	if(var_01 [[var_01.var_386E]]()) {
 		var_02 = func_7897(param_00);
-		if(isdefined(var_02))
-		{
+		if(isdefined(var_02)) {
 			level.challenge_data[param_00].objective_icon = var_02;
 			level.current_challenge_scalar = var_02;
 		}
@@ -207,33 +166,27 @@ activate_new_challenge(param_00)
 		func_56AD(param_00,1,var_02);
 		func_F31A(param_00);
 		level.current_challenge_pre_challenge = 0;
-		var_01 [[ var_01.var_1609 ]]();
+		var_01 [[var_01.var_1609]]();
 		return;
 	}
 
-	var_01 [[ var_01.var_6ACB ]]();
+	var_01 [[var_01.var_6ACB]]();
 }
 
-//Function Number: 9
-func_7897(param_00)
-{
-	return [[ level.challenge_scalar_func ]](param_00);
+func_7897(param_00) {
+	return [[level.challenge_scalar_func]](param_00);
 }
 
-//Function Number: 10
-func_3C15()
-{
+func_3C15() {
 	level endon("game_ended");
 	var_00 = int(gettime() + 5000);
-	foreach(var_02 in level.players)
-	{
+	foreach(var_02 in level.players) {
 		var_02 setclientomnvar("ui_intel_title",1);
 	}
 
 	level.current_challenge_title = 1;
 	wait(5);
-	foreach(var_02 in level.players)
-	{
+	foreach(var_02 in level.players) {
 		var_02 setclientomnvar("ui_intel_title",-1);
 	}
 
@@ -241,16 +194,11 @@ func_3C15()
 	wait(0.5);
 }
 
-//Function Number: 11
-func_56AD(param_00,param_01,param_02)
-{
+func_56AD(param_00,param_01,param_02) {
 	var_03 = tablelookup(level.zombie_challenge_table,1,param_00,0);
-	foreach(var_05 in level.players)
-	{
-		if(param_01)
-		{
-			if(isdefined(param_02))
-			{
+	foreach(var_05 in level.players) {
+		if(param_01) {
+			if(isdefined(param_02)) {
 				var_05 setclientomnvar("ui_intel_challenge_scalar",param_02);
 				var_05 setclientomnvar("ui_intel_progress_max",param_02);
 			}
@@ -263,8 +211,7 @@ func_56AD(param_00,param_01,param_02)
 			var_05 setclientomnvar("ui_intel_active_index",int(var_03));
 			level.current_challenge_index = int(var_03);
 			level.current_challenge_pre_challenge = 1;
-			if(param_00 == "next_challenge")
-			{
+			if(param_00 == "next_challenge") {
 				var_05 playlocalsound("zmb_challenge_config");
 			}
 			else
@@ -277,26 +224,20 @@ func_56AD(param_00,param_01,param_02)
 		}
 	}
 
-	if(param_01)
-	{
+	if(param_01) {
 		return;
 	}
 
-	if(level.current_zm_show_challenge != 2 && level.current_zm_show_challenge != 3 && level.current_zm_show_challenge != 4)
-	{
+	if(level.current_zm_show_challenge != 2 && level.current_zm_show_challenge != 3 && level.current_zm_show_challenge != 4) {
 		level thread func_100CB(param_00,var_03);
 	}
 }
 
-//Function Number: 12
-func_100CB(param_00,param_01)
-{
+func_100CB(param_00,param_01) {
 	level endon("game_ended");
 	wait(1);
-	foreach(var_03 in level.players)
-	{
-		if(param_00 == "challenge_failed")
-		{
+	foreach(var_03 in level.players) {
+		if(param_00 == "challenge_failed") {
 			var_03 playlocalsound("zmb_challenge_fail");
 			var_03 setclientomnvar("zm_show_challenge",2);
 			level.current_zm_show_challenge = 2;
@@ -309,8 +250,7 @@ func_100CB(param_00,param_01)
 	}
 
 	wait(3);
-	foreach(var_03 in level.players)
-	{
+	foreach(var_03 in level.players) {
 		var_03 thread reset_omnvars();
 	}
 
@@ -325,9 +265,7 @@ func_100CB(param_00,param_01)
 	level.current_challenge_pre_challenge = 0;
 }
 
-//Function Number: 13
-reset_omnvars()
-{
+reset_omnvars() {
 	wait(0.5);
 	self setclientomnvar("ui_intel_active_index",-1);
 	self setclientomnvar("ui_intel_progress_current",-1);
@@ -339,59 +277,48 @@ reset_omnvars()
 	self setclientomnvar("ui_intel_challenge_scalar",-1);
 }
 
-//Function Number: 14
-register_challenge(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08,param_09,param_0A)
-{
+register_challenge(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08,param_09,param_0A) {
 	var_0B = spawnstruct();
 	var_0B.ref = param_00;
 	var_0B.objective_icon = param_01;
 	var_0B.default_success = param_02;
 	var_0B.var_9F82 = ::func_4FFA;
-	if(isdefined(param_03))
-	{
+	if(isdefined(param_03)) {
 		var_0B.var_9F82 = param_03;
 	}
 
 	var_0B.var_386E = ::func_4FDD;
-	if(isdefined(param_04))
-	{
+	if(isdefined(param_04)) {
 		var_0B.var_386E = param_04;
 	}
 
 	var_0B.var_1609 = param_05;
 	var_0B.var_4DDE = param_06;
 	var_0B.var_6ACB = ::func_4FED;
-	if(isdefined(param_07))
-	{
+	if(isdefined(param_07)) {
 		var_0B.var_6ACB = param_07;
 	}
 
 	var_0B.var_12E9C = param_08;
 	var_0B.var_E4C5 = ::func_5011;
-	if(isdefined(param_09))
-	{
+	if(isdefined(param_09)) {
 		var_0B.var_E4C5 = param_09;
 	}
 
 	var_0B.var_6AD0 = ::func_4FEE;
-	if(isdefined(param_0A))
-	{
+	if(isdefined(param_0A)) {
 		var_0B.var_6AD0 = param_0A;
 	}
 
 	level.challenge_data[param_00] = var_0B;
 }
 
-//Function Number: 15
-update_challenge_progress(param_00,param_01)
-{
-	if(scripts\engine\utility::flag("pause_challenges"))
-	{
+update_challenge_progress(param_00,param_01) {
+	if(scripts\engine\utility::flag("pause_challenges")) {
 		return;
 	}
 
-	foreach(var_03 in level.players)
-	{
+	foreach(var_03 in level.players) {
 		var_03 setclientomnvar("zm_show_challenge",1);
 		var_03 setclientomnvar("ui_intel_progress_current",param_00);
 		level.current_zm_show_challenge = 1;
@@ -402,97 +329,64 @@ update_challenge_progress(param_00,param_01)
 	level.current_challenge_progress_current = param_00;
 }
 
-//Function Number: 16
-func_4FDD()
-{
+func_4FDD() {
 	return 1;
 }
 
-//Function Number: 17
-func_4FED()
-{
-}
+func_4FED() {}
 
-//Function Number: 18
-func_4FFA()
-{
-	if(isdefined(self.success))
-	{
+func_4FFA() {
+	if(isdefined(self.success)) {
 		return self.success;
 	}
 
 	return 0;
 }
 
-//Function Number: 19
-default_successfunc()
-{
-	if(isdefined(self.success))
-	{
+default_successfunc() {
+	if(isdefined(self.success)) {
 		return self.success;
 	}
 
 	return self.default_success;
 }
 
-//Function Number: 20
-func_4FEE()
-{
-}
+func_4FEE() {}
 
-//Function Number: 21
-default_resetsuccess()
-{
+default_resetsuccess() {
 	self.success = self.default_success;
 }
 
-//Function Number: 22
-func_5011()
-{
-}
+func_5011() {}
 
-//Function Number: 23
-current_challenge_exist()
-{
+current_challenge_exist() {
 	return isdefined(level.current_challenge);
 }
 
-//Function Number: 24
-current_challenge_is(param_00)
-{
+current_challenge_is(param_00) {
 	return current_challenge_exist() && level.current_challenge == param_00;
 }
 
-//Function Number: 25
-func_12BF7()
-{
+func_12BF7() {
 	level.current_challenge = undefined;
 }
 
-//Function Number: 26
-func_F31A(param_00)
-{
+func_F31A(param_00) {
 	level.current_challenge = param_00;
 	scripts\cp\zombies\zombie_analytics::func_AF62(level.current_challenge,level.wave_num);
 	level.var_110AC = gettime() / 1000;
 }
 
-//Function Number: 27
-func_7B31()
-{
-	if(!isdefined(level.var_C1E1))
-	{
+func_7B31() {
+	if(!isdefined(level.var_C1E1)) {
 		return 0;
 	}
 
 	return level.var_C1E1;
 }
 
-//Function Number: 28
-func_97B0()
-{
-	if(!isdefined(level.zombie_challenge_table))
-	{
+func_97B0() {
+	if(!isdefined(level.zombie_challenge_table)) {
 		return;
 	}
 
@@ -505,18 +399,15 @@ func_97B0()
 	var_06 = 6;
 	var_07 = 7;
 	var_08 = 8;
-	for(var_09 = var_02;var_09 <= var_03;var_09++)
-	{
+	for(var_09 = var_02;var_09 <= var_03;var_09++) {
 		var_0A = tablelookup(var_00,var_01,var_09,var_04);
-		if(var_0A == "")
-		{
+		if(var_0A == "") {
 			break;
 		}
 
 		var_0B = tablelookup(var_00,var_01,var_09,var_05);
 		var_0C = tablelookup(var_00,var_01,var_09,var_08);
-		if(isdefined(level.challenge_data[var_0A]))
-		{
+		if(isdefined(level.challenge_data[var_0A])) {
 			level.challenge_data[var_0A].var_1C81 = var_0B;
 			level.challenge_data[var_0A].var_1C8C = int(tablelookup(var_00,var_01,var_09,var_06));
 			level.challenge_data[var_0A].active_time = strtok(var_0C," ");
@@ -524,85 +415,66 @@ func_97B0()
 	}
 }
 
-//Function Number: 29
-func_4FE2(param_00)
-{
+func_4FE2(param_00) {
 	return 1;
 }
 
-//Function Number: 30
-update_death_challenges(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08)
-{
-	if(scripts\engine\utility::istrue(self.died_poorly))
-	{
+update_death_challenges(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08) {
+	if(scripts\engine\utility::istrue(self.died_poorly)) {
 		return;
 	}
 
-	if(!isdefined(level.current_challenge))
-	{
+	if(!isdefined(level.current_challenge)) {
 		return;
 	}
 
 	var_09 = level.current_challenge;
-	if(isdefined(level.custom_death_challenge_func))
-	{
-		var_0A = self [[ level.custom_death_challenge_func ]](param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08);
-		if(!scripts\engine\utility::istrue(var_0A))
-		{
+	if(isdefined(level.custom_death_challenge_func)) {
+		var_0A = self [[level.custom_death_challenge_func]](param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08);
+		if(!scripts\engine\utility::istrue(var_0A)) {
 			return;
 		}
 	}
 }
 
-//Function Number: 31
-update_current_challenge_timer(param_00)
-{
+update_current_challenge_timer(param_00) {
 	level endon("stop_challenge_timer");
 	level endon("game_ended");
 	level endon("challenge_deactivated");
 	self endon("success");
 	var_01 = 0;
 	var_02 = level.current_challenge_timer;
-	while(level.current_challenge_timer > 0)
-	{
+	while(level.current_challenge_timer > 0) {
 		wait(0.1);
-		if(scripts\engine\utility::flag("pause_challenges"))
-		{
-			foreach(var_04 in level.players)
-			{
+		if(scripts\engine\utility::flag("pause_challenges")) {
+			foreach(var_04 in level.players) {
 				var_04 setclientomnvar("ui_intel_timer",-1);
 				var_04 setclientomnvar("zm_show_challenge",10);
 			}
 
 			scripts\engine\utility::flag_waitopen("pause_challenges");
 			var_06 = int(gettime() + level.current_challenge_timer * 1000);
-			foreach(var_04 in level.players)
-			{
+			foreach(var_04 in level.players) {
 				var_04 setclientomnvar("ui_intel_timer",var_06);
 				var_04 setclientomnvar("zm_show_challenge",level.current_zm_show_challenge);
 			}
 		}
 
 		level.current_challenge_timer = level.current_challenge_timer - 0.1;
-		if(isdefined(param_00))
-		{
+		if(isdefined(param_00)) {
 			update_challenge_progress(int(var_02 - level.current_challenge_timer),int(var_02));
 		}
 	}
 }
 
-//Function Number: 32
-default_timer(param_00)
-{
+default_timer(param_00) {
 	level endon("game_ended");
 	level endon("challenge_deactivated");
 	self endon("success");
 	var_01 = param_00;
-	while(var_01 > 0)
-	{
+	while(var_01 > 0) {
 		wait(0.1);
-		if(scripts\engine\utility::flag("pause_challenges"))
-		{
+		if(scripts\engine\utility::flag("pause_challenges")) {
 			continue;
 		}
 

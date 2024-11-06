@@ -1,21 +1,13 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\cp\maps\cp_disco\rat_king.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 6
- * Decompile Time: 336 ms
- * Timestamp: 10/27/2023 12:04:35 AM
-*******************************************************************/
+/*********************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\cp\maps\cp_disco\rat_king.gsc
+*********************************************************/
 
-//Function Number: 1
-rat_king_init()
-{
+rat_king_init() {
 	var_00 = scripts\engine\utility::getstructarray("rat_king_spawner","targetname");
-	foreach(var_02 in var_00)
-	{
-		if(isdefined(var_02.script_noteworthy))
-		{
+	foreach(var_02 in var_00) {
+		if(isdefined(var_02.script_noteworthy)) {
 			continue;
 		}
 
@@ -27,22 +19,16 @@ rat_king_init()
 	setuprkbouncestructs();
 }
 
-//Function Number: 2
-setuprkbouncestructs()
-{
+setuprkbouncestructs() {
 	level.rat_king_bounce_structs = scripts\engine\utility::getstructarray("shield_bounce_loc","targetname");
 }
 
-//Function Number: 3
-spawn_rat_king(param_00,param_01,param_02)
-{
+spawn_rat_king(param_00,param_01,param_02) {
 	level notify("spawn_rat_king");
 	level endon("spawn_rat_king");
 	scripts\engine\utility::flag_wait("interactions_initialized");
-	if(isdefined(level.rat_king))
-	{
-		if(scripts\engine\utility::istrue(param_02))
-		{
+	if(isdefined(level.rat_king)) {
+		if(scripts\engine\utility::istrue(param_02)) {
 			level.rat_king suicide();
 		}
 		else
@@ -51,27 +37,22 @@ spawn_rat_king(param_00,param_01,param_02)
 		}
 	}
 
-	if(!isdefined(param_00))
-	{
+	if(!isdefined(param_00)) {
 		param_00 = level.rat_king_spawn_loc;
 	}
 
-	if(!isdefined(param_01))
-	{
+	if(!isdefined(param_01)) {
 		param_01 = level.rat_king_spawn_angles;
 	}
 
-	for(;;)
-	{
+	for(;;) {
 		level.rat_king = scripts\mp\mp_agent::spawnnewagent("ratking","axis",param_00,param_01);
-		if(isdefined(level.rat_king))
-		{
+		if(isdefined(level.rat_king)) {
 			level.rat_king.voprefix = level.rat_king_vo_prefix;
 			level.rat_king thread setrkscriptablestates();
 			level.rat_king thread rkaudiomonitor();
 			level.spawned_enemies[level.spawned_enemies.size] = level.rat_king;
-			if(scripts\engine\utility::flag("rk_fight_started"))
-			{
+			if(scripts\engine\utility::flag("rk_fight_started")) {
 				playsoundatpos(level.rat_king_spawn_loc + (0,0,100),"rk_spawn_in_lr");
 			}
 
@@ -85,20 +66,15 @@ spawn_rat_king(param_00,param_01,param_02)
 	}
 }
 
-//Function Number: 4
-setrkscriptablestates()
-{
+setrkscriptablestates() {
 	wait(2);
-	if(scripts\aitypes\ratking\behaviors::rk_isonplatform())
-	{
+	if(scripts\aitypes\ratking\behaviors::rk_isonplatform()) {
 		self setscriptablepartstate("movement","neutral");
 		self setscriptablepartstate("rat_skirt","platform");
 	}
 }
 
-//Function Number: 5
-runspawnlogic()
-{
+runspawnlogic() {
 	self.precacheleaderboards = 1;
 	self.scripted_mode = 1;
 	self.outofplayspace = 1;
@@ -110,19 +86,15 @@ runspawnlogic()
 	self.scripted_mode = 0;
 }
 
-//Function Number: 6
-rkaudiomonitor()
-{
+rkaudiomonitor() {
 	level endon("game_ended");
 	self endon("death");
 	var_00 = 10;
 	self.playing_stumble = 0;
-	for(;;)
-	{
+	for(;;) {
 		var_01 = scripts\engine\utility::waittill_any_in_array_or_timeout(["spawn","summon","pain","melee","shield_throw","over","under","stomp"],var_00);
 		var_00 = randomintrange(4,10);
-		switch(var_01)
-		{
+		switch(var_01) {
 			case "spawn":
 				level thread scripts/cp/zombies/zombies_vo::play_zombie_vo(self,"spawn",0);
 				break;

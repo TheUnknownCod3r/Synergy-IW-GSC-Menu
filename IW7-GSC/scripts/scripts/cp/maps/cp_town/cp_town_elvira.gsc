@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\cp\maps\cp_town\cp_town_elvira.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 27
- * Decompile Time: 1375 ms
- * Timestamp: 10/27/2023 12:07:18 AM
-*******************************************************************/
+/**************************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\cp\maps\cp_town\cp_town_elvira.gsc
+**************************************************************/
 
-//Function Number: 1
-init_elvira()
-{
+init_elvira() {
 	scripts\engine\utility::flag_init("spellbook_found");
 	scripts\engine\utility::flag_init("vial_filled");
 	scripts\engine\utility::flag_init("spellbook_placed");
@@ -21,8 +15,7 @@ init_elvira()
 	scripts\engine\utility::flag_init("elvira_summoned");
 	wait(10);
 	var_00 = scripts\engine\utility::getstruct("elvira","targetname");
-	if(!isdefined(var_00))
-	{
+	if(!isdefined(var_00)) {
 		var_00 = spawnstruct();
 		var_00.origin = (353.5,-2560,534.5);
 		var_00.angles = (0,175,0);
@@ -38,9 +31,7 @@ init_elvira()
 	level thread open_safe();
 }
 
-//Function Number: 2
-open_safe()
-{
+open_safe() {
 	var_00 = scripts\engine\utility::getstruct("take_spellbook","script_noteworthy");
 	scripts\cp\cp_interaction::remove_from_current_interaction_list(var_00);
 	var_01 = getent("elvira_safe","targetname");
@@ -50,9 +41,7 @@ open_safe()
 	scripts\cp\cp_interaction::add_to_current_interaction_list(var_00);
 }
 
-//Function Number: 3
-register_elvira_interactions()
-{
+register_elvira_interactions() {
 	level.interaction_hintstrings["elvira_talk"] = &"CP_TOWN_INTERACTIONS_SPEAK_WITH_ELVIRA";
 	level.interaction_hintstrings["take_spellbook"] = "";
 	level.interaction_hintstrings["spell_page"] = "";
@@ -66,18 +55,13 @@ register_elvira_interactions()
 	level thread elvira_interaction_monitor();
 }
 
-//Function Number: 4
-elvira_interaction_monitor()
-{
+elvira_interaction_monitor() {
 	var_00 = scripts\engine\utility::getstruct("elvira_beach","script_noteworthy");
 	var_01 = scripts\engine\utility::getstruct("elvira_talk","script_noteworthy");
-	for(;;)
-	{
-		if(scripts\engine\utility::istrue(level.vo_system_busy))
-		{
+	for(;;) {
+		if(scripts\engine\utility::istrue(level.vo_system_busy)) {
 			scripts\cp\cp_interaction::remove_from_current_interaction_list(var_01);
-			while(scripts\engine\utility::istrue(level.vo_system_busy))
-			{
+			while(scripts\engine\utility::istrue(level.vo_system_busy)) {
 				wait(0.05);
 			}
 
@@ -89,9 +73,7 @@ elvira_interaction_monitor()
 	}
 }
 
-//Function Number: 5
-init_elvira_beach()
-{
+init_elvira_beach() {
 	var_00 = scripts\engine\utility::getstruct("elvira_beach","script_noteworthy");
 	scripts\cp\cp_interaction::remove_from_current_interaction_list(var_00);
 	scripts\engine\utility::flag_wait("boss_fight_active");
@@ -123,67 +105,52 @@ init_elvira_beach()
 	scripts\cp\cp_interaction::remove_from_current_interaction_list(var_00);
 }
 
-//Function Number: 6
-delay_elvira_ready_vo()
-{
+delay_elvira_ready_vo() {
 	level endon("game_ended");
 	level endon("elvira_summoned");
 	wait(45);
-	if(isdefined(level.elvira_ai))
-	{
+	if(isdefined(level.elvira_ai)) {
 		return;
 	}
 
-	if(isdefined(level.elvira_available_again) && gettime() < level.elvira_available_again)
-	{
+	if(isdefined(level.elvira_available_again) && gettime() < level.elvira_available_again) {
 		return;
 	}
 
-	if(!scripts\engine\utility::flag("vial_filled"))
-	{
+	if(!scripts\engine\utility::flag("vial_filled")) {
 		return;
 	}
 
 	level thread play_elvira_sound_in_space_vo("el_nag_beachboss_combat_ready");
 }
 
-//Function Number: 7
-elvira_beach_hint(param_00,param_01)
-{
-	if(isdefined(level.elvira_ai))
-	{
+elvira_beach_hint(param_00,param_01) {
+	if(isdefined(level.elvira_ai)) {
 		return &"CP_TOWN_INTERACTIONS_ELVIRA_GONE";
 	}
 
-	if(isdefined(level.elvira_available_again) && gettime() < level.elvira_available_again)
-	{
+	if(isdefined(level.elvira_available_again) && gettime() < level.elvira_available_again) {
 		return &"CP_TOWN_INTERACTIONS_ELVIRA_GONE";
 	}
 
-	if(scripts\engine\utility::flag("vial_filled"))
-	{
+	if(scripts\engine\utility::flag("vial_filled")) {
 		return &"CP_TOWN_INTERACTIONS_GIVE_VIAL";
 	}
 
 	return level.interaction_hintstrings["elvira_beach"];
 }
 
-//Function Number: 8
-elvira_beach(param_00,param_01)
-{
-	if(isdefined(level.elvira_available_again) && gettime() < level.elvira_available_again)
-	{
+elvira_beach(param_00,param_01) {
+	if(isdefined(level.elvira_available_again) && gettime() < level.elvira_available_again) {
 		level thread play_elvira_sound_in_space_vo("el_nag_beachboss_combat_cooldown");
 		return;
 	}
 
-	if(isdefined(level.elvira_ai))
-	{
+	if(isdefined(level.elvira_ai)) {
 		return;
 	}
 
-	if(!scripts\engine\utility::flag("vial_filled"))
-	{
+	if(!scripts\engine\utility::flag("vial_filled")) {
 		scripts\cp\cp_interaction::remove_from_current_interaction_list(param_00);
 		param_00 thread elvira_talks(5);
 		wait(5);
@@ -191,8 +158,7 @@ elvira_beach(param_00,param_01)
 		return;
 	}
 
-	if(scripts\engine\utility::flag("vial_filled"))
-	{
+	if(scripts\engine\utility::flag("vial_filled")) {
 		scripts\cp\cp_interaction::remove_from_current_interaction_list(param_00);
 		scripts\engine\utility::flag_set("elvira_summoned");
 		wait(0.5);
@@ -202,8 +168,7 @@ elvira_beach(param_00,param_01)
 		level thread play_elvira_sound_in_space_vo("el_nag_beachboss_combat_inbound");
 		wait(1);
 		scripts\cp\cp_interaction::add_to_current_interaction_list(param_00);
-		foreach(param_01 in level.players)
-		{
+		foreach(param_01 in level.players) {
 			param_01 scripts\cp\cp_merits::processmerit("mt_dlc3_elvira_summon");
 			param_01 notify("elvira_summoned_notify");
 		}
@@ -212,11 +177,8 @@ elvira_beach(param_00,param_01)
 	}
 }
 
-//Function Number: 9
-play_elvira_sound_in_space_vo(param_00)
-{
-	if(!scripts\engine\utility::istrue(level.pause_nag_vo) && !scripts\engine\utility::istrue(level.vo_system_busy))
-	{
+play_elvira_sound_in_space_vo(param_00) {
+	if(!scripts\engine\utility::istrue(level.pause_nag_vo) && !scripts\engine\utility::istrue(level.vo_system_busy)) {
 		scripts\cp\cp_vo::set_vo_system_busy(1);
 		scripts\engine\utility::play_sound_in_space(param_00,level.elvira.origin,0,level.elvira);
 		var_01 = scripts\cp\cp_vo::get_sound_length(param_00);
@@ -225,43 +187,33 @@ play_elvira_sound_in_space_vo(param_00)
 	}
 }
 
-//Function Number: 10
-elvira_hint(param_00,param_01)
-{
-	if(isdefined(level.elvira_ai))
-	{
+elvira_hint(param_00,param_01) {
+	if(isdefined(level.elvira_ai)) {
 		return &"CP_TOWN_INTERACTIONS_ELVIRA_GONE";
 	}
 
-	if(isdefined(level.elvira_available_again) && gettime() < level.elvira_available_again)
-	{
+	if(isdefined(level.elvira_available_again) && gettime() < level.elvira_available_again) {
 		return &"CP_TOWN_INTERACTIONS_ELVIRA_GONE";
 	}
 
-	if(scripts\engine\utility::flag("spellbook_found") && !scripts\engine\utility::flag("spellbook_placed"))
-	{
+	if(scripts\engine\utility::flag("spellbook_found") && !scripts\engine\utility::flag("spellbook_placed")) {
 		return &"CP_TOWN_INTERACTIONS_GIVE_BOOK";
 	}
 
-	if(scripts\engine\utility::flag("spellbook_placed") && scripts\engine\utility::flag("spellbook_page1_found") && !scripts\engine\utility::flag("spellbook_page1_placed"))
-	{
+	if(scripts\engine\utility::flag("spellbook_placed") && scripts\engine\utility::flag("spellbook_page1_found") && !scripts\engine\utility::flag("spellbook_page1_placed")) {
 		return &"CP_TOWN_INTERACTIONS_GIVE_PAGES";
 	}
 
-	if(scripts\engine\utility::flag("vial_filled"))
-	{
+	if(scripts\engine\utility::flag("vial_filled")) {
 		return &"CP_TOWN_INTERACTIONS_GIVE_VIAL";
 	}
 
 	return level.interaction_hintstrings["elvira_talk"];
 }
 
-//Function Number: 11
-play_elvira_first_meet_vo(param_00)
-{
+play_elvira_first_meet_vo(param_00) {
 	var_01 = "";
-	switch(self.vo_prefix)
-	{
+	switch(self.vo_prefix) {
 		case "p1_":
 			var_01 = "sally_meet_elvira_1";
 			break;
@@ -279,33 +231,26 @@ play_elvira_first_meet_vo(param_00)
 			break;
 	}
 
-	if(!isdefined(var_01) || var_01 == "")
-	{
+	if(!isdefined(var_01) || var_01 == "") {
 		return;
 	}
 
 	scripts\cp\cp_vo::try_to_play_vo(var_01,"elvira_player_dialogue_vo","highest",70,0,0,1);
 }
 
-//Function Number: 12
-interact_with_elvira(param_00,param_01)
-{
-	if(isdefined(level.elvira_available_again) && gettime() < level.elvira_available_again)
-	{
+interact_with_elvira(param_00,param_01) {
+	if(isdefined(level.elvira_available_again) && gettime() < level.elvira_available_again) {
 		elvira_mirror_check(param_01);
 		return;
 	}
 
-	if(isdefined(level.elvira_ai))
-	{
+	if(isdefined(level.elvira_ai)) {
 		elvira_mirror_check(param_01);
 		return;
 	}
 
-	if(!scripts\engine\utility::istrue(level.first_meeting_elvira) && !scripts\engine\utility::flag("spellbook_found"))
-	{
-		if(param_01.vo_prefix != "p5_")
-		{
+	if(!scripts\engine\utility::istrue(level.first_meeting_elvira) && !scripts\engine\utility::flag("spellbook_found")) {
+		if(param_01.vo_prefix != "p5_") {
 			param_01 thread play_elvira_first_meet_vo(param_00);
 			level.first_meeting_elvira = 1;
 			scripts\cp\cp_interaction::remove_from_current_interaction_list(param_00);
@@ -316,19 +261,16 @@ interact_with_elvira(param_00,param_01)
 		else
 		{
 			scripts\cp\cp_interaction::remove_from_current_interaction_list(param_00);
-			if(!scripts\engine\utility::istrue(level.pause_nag_vo) && !scripts\engine\utility::istrue(level.vo_system_busy))
-			{
+			if(!scripts\engine\utility::istrue(level.pause_nag_vo) && !scripts\engine\utility::istrue(level.vo_system_busy)) {
 				level.first_meeting_elvira = 1;
 				scripts\cp\cp_vo::set_vo_system_busy(1);
 				var_02 = "el_sally_meet_elvira_10";
 				param_01 thread scripts\cp\cp_vo::try_to_play_vo(var_02,"elvira_player_dialogue_vo","highest",70,0,0,1);
 				var_03 = scripts\cp\cp_vo::get_sound_length(var_02);
 				param_00 thread elvira_talks(var_03);
-				for(;;)
-				{
+				for(;;) {
 					level waittill("dialogue_done",var_04);
-					if(var_04 != "elvira_player_dialogue_vo")
-					{
+					if(var_04 != "elvira_player_dialogue_vo") {
 						continue;
 					}
 
@@ -347,12 +289,10 @@ interact_with_elvira(param_00,param_01)
 		}
 	}
 
-	if(scripts\engine\utility::flag("spellbook_placed") && scripts\engine\utility::flag("spellbook_page1_found") && !scripts\engine\utility::flag("spellbook_page1_placed"))
-	{
+	if(scripts\engine\utility::flag("spellbook_placed") && scripts\engine\utility::flag("spellbook_page1_found") && !scripts\engine\utility::flag("spellbook_page1_placed")) {
 		playfx(level._effect["vfx_cp_town_book_place"],level.elvira_spellbook.origin + (0,0,10),anglestoforward(level.elvira_spellbook.angles),anglestoup(level.elvira_spellbook.angles));
 		scripts\cp\cp_interaction::remove_from_current_interaction_list(param_00);
-		if(!scripts\engine\utility::istrue(level.pause_nag_vo) && !scripts\engine\utility::istrue(level.vo_system_busy))
-		{
+		if(!scripts\engine\utility::istrue(level.pause_nag_vo) && !scripts\engine\utility::istrue(level.vo_system_busy)) {
 			level thread scripts\cp\maps\cp_town\cp_town::play_willard_elvira_exchange("elvira_upgrade2",param_00);
 		}
 		else
@@ -365,22 +305,18 @@ interact_with_elvira(param_00,param_01)
 		return;
 	}
 
-	if(!scripts\engine\utility::flag("spellbook_found"))
-	{
+	if(!scripts\engine\utility::flag("spellbook_found")) {
 		scripts\cp\cp_interaction::remove_from_current_interaction_list(param_00);
-		if(!scripts\engine\utility::istrue(level.pause_nag_vo) && !scripts\engine\utility::istrue(level.vo_system_busy))
-		{
+		if(!scripts\engine\utility::istrue(level.pause_nag_vo) && !scripts\engine\utility::istrue(level.vo_system_busy)) {
 			scripts\cp\cp_vo::set_vo_system_busy(1);
 			var_05 = ["el_pap_nag_spellbook_prior","el_pap_nag_spellbook_prior_2","el_pap_nag_spellbook_prior_3","el_pap_nag_spellbook_prior_4"];
 			var_02 = scripts\engine\utility::random(var_05);
 			param_01 thread scripts\cp\cp_vo::try_to_play_vo(var_02,"elvira_player_dialogue_vo","highest",70,0,0,1);
 			var_03 = scripts\cp\cp_vo::get_sound_length(var_02);
 			param_00 thread elvira_talks(var_03);
-			for(;;)
-			{
+			for(;;) {
 				level waittill("dialogue_done",var_04);
-				if(var_04 != "elvira_player_dialogue_vo")
-				{
+				if(var_04 != "elvira_player_dialogue_vo") {
 					continue;
 				}
 
@@ -398,12 +334,10 @@ interact_with_elvira(param_00,param_01)
 		return;
 	}
 
-	if(scripts\engine\utility::flag("spellbook_found") && !scripts\engine\utility::flag("spellbook_placed"))
-	{
+	if(scripts\engine\utility::flag("spellbook_found") && !scripts\engine\utility::flag("spellbook_placed")) {
 		level thread place_elvira_spellbook(param_01);
 		scripts\cp\cp_interaction::remove_from_current_interaction_list(param_00);
-		if(!scripts\engine\utility::istrue(level.pause_nag_vo) && !scripts\engine\utility::istrue(level.vo_system_busy))
-		{
+		if(!scripts\engine\utility::istrue(level.pause_nag_vo) && !scripts\engine\utility::istrue(level.vo_system_busy)) {
 			level thread found_book_vo(param_00,param_01);
 			wait(32);
 		}
@@ -420,11 +354,9 @@ interact_with_elvira(param_00,param_01)
 		return;
 	}
 
-	if(scripts\engine\utility::flag("spellbook_placed") && !scripts\engine\utility::flag("vial_filled"))
-	{
+	if(scripts\engine\utility::flag("spellbook_placed") && !scripts\engine\utility::flag("vial_filled")) {
 		scripts\cp\cp_interaction::remove_from_current_interaction_list(param_00);
-		if(!scripts\engine\utility::istrue(level.pause_nag_vo) && !scripts\engine\utility::istrue(level.vo_system_busy))
-		{
+		if(!scripts\engine\utility::istrue(level.pause_nag_vo) && !scripts\engine\utility::istrue(level.vo_system_busy)) {
 			scripts\cp\cp_vo::set_vo_system_busy(1);
 			var_06 = ["el_pap_nag_generic_vial","el_pap_nag_generic_vial_2","el_pap_nag_generic_vial_3","el_pap_nag_generic_vial_4"];
 			var_02 = scripts\engine\utility::random(var_06);
@@ -439,11 +371,9 @@ interact_with_elvira(param_00,param_01)
 		return;
 	}
 
-	if(scripts\engine\utility::flag("vial_filled"))
-	{
+	if(scripts\engine\utility::flag("vial_filled")) {
 		scripts\cp\cp_interaction::remove_from_current_interaction_list(param_00);
-		if(!scripts\engine\utility::istrue(level.pause_nag_vo) && !scripts\engine\utility::istrue(level.vo_system_busy))
-		{
+		if(!scripts\engine\utility::istrue(level.pause_nag_vo) && !scripts\engine\utility::istrue(level.vo_system_busy)) {
 			scripts\cp\cp_vo::set_vo_system_busy(1);
 			scripts\engine\utility::play_sound_in_space("el_pap_returned_vial",level.elvira.origin,0,level.elvira);
 			var_03 = scripts\cp\cp_vo::get_sound_length("el_pap_returned_vial");
@@ -459,8 +389,7 @@ interact_with_elvira(param_00,param_01)
 		wait(1);
 		scripts\cp\cp_interaction::add_to_current_interaction_list(param_00);
 		level thread play_escort_elvira_vo(param_00);
-		foreach(var_08 in level.players)
-		{
+		foreach(var_08 in level.players) {
 			var_08 scripts\cp\cp_merits::processmerit("mt_dlc3_elvira_summon");
 			var_08 notify("elvira_summoned_notify");
 		}
@@ -471,30 +400,22 @@ interact_with_elvira(param_00,param_01)
 	}
 }
 
-//Function Number: 13
-found_book_vo(param_00,param_01)
-{
+found_book_vo(param_00,param_01) {
 	scripts\cp\maps\cp_town\cp_town::play_willard_elvira_exchange("evirasbook",param_00);
 }
 
-//Function Number: 14
-play_escort_elvira_vo(param_00)
-{
+play_escort_elvira_vo(param_00) {
 	wait(20);
 	scripts\cp\maps\cp_town\cp_town::play_willard_elvira_exchange("escortingelvira",param_00);
-	if(randomint(100) > 80)
-	{
+	if(randomint(100) > 80) {
 		wait(20);
 		level thread scripts\cp\maps\cp_town\cp_town::play_willard_elvira_exchange("elvira_upgrade1",param_00);
 	}
 }
 
-//Function Number: 15
-elvira_mirror_check(param_00)
-{
+elvira_mirror_check(param_00) {
 	var_01 = "elvira_mirror";
-	if(isdefined(level.mirrors_picked_up[var_01]))
-	{
+	if(isdefined(level.mirrors_picked_up[var_01])) {
 		return;
 	}
 
@@ -506,9 +427,7 @@ elvira_mirror_check(param_00)
 	level.mirrors_picked_up[var_01] = 1;
 }
 
-//Function Number: 16
-place_elvira_spellbook(param_00)
-{
+place_elvira_spellbook(param_00) {
 	scripts\engine\utility::flag_set("spellbook_placed");
 	param_00 playlocalsound("zmb_coin_sounvenir_place");
 	playfx(level._effect["vfx_cp_town_book_place"],level.elvira_spellbook.origin + (0,0,10),anglestoforward(level.elvira_spellbook.angles),anglestoup(level.elvira_spellbook.angles));
@@ -517,9 +436,7 @@ place_elvira_spellbook(param_00)
 	playfx(level._effect["vfx_cp_town_book_idle"],level.elvira_spellbook.origin + (0,0,10),anglestoforward(level.elvira_spellbook.angles),anglestoup(level.elvira_spellbook.angles));
 }
 
-//Function Number: 17
-take_elvira_spellbook(param_00,param_01)
-{
+take_elvira_spellbook(param_00,param_01) {
 	scripts\cp\cp_interaction::remove_from_current_interaction_list(param_00);
 	scripts\engine\utility::flag_set("spellbook_found");
 	var_02 = getent(param_00.target,"targetname");
@@ -529,9 +446,7 @@ take_elvira_spellbook(param_00,param_01)
 	scripts\cp\utility::set_quest_icon(19);
 }
 
-//Function Number: 18
-take_spellbook_page(param_00,param_01)
-{
+take_spellbook_page(param_00,param_01) {
 	scripts\cp\cp_interaction::remove_from_current_interaction_list(param_00);
 	scripts\engine\utility::flag_set("spellbook_page1_found");
 	var_02 = getent(param_00.target,"targetname");
@@ -542,20 +457,16 @@ take_spellbook_page(param_00,param_01)
 	scripts\cp\utility::set_quest_icon(22);
 }
 
-//Function Number: 19
-elvira_idle_loop()
-{
+elvira_idle_loop() {
 	level notify("elvira_stop_talk_loop");
 	level endon("elvira_summoned");
 	level endon("elvira_stop_idle_loop");
 	var_00 = [%iw7_cp_elvira_idle_01,%iw7_cp_elvira_idle_02];
 	var_01 = ["IW7_cp_elvira_idle_01","IW7_cp_elvira_idle_02"];
-	for(;;)
-	{
+	for(;;) {
 		var_02 = scripts\engine\utility::random(var_01);
 		var_03 = undefined;
-		switch(var_02)
-		{
+		switch(var_02) {
 			case "IW7_cp_elvira_idle_01":
 				var_03 = %iw7_cp_elvira_idle_01;
 				break;
@@ -568,19 +479,15 @@ elvira_idle_loop()
 		var_04 = getanimlength(var_03);
 		level.elvira scriptmodelplayanimdeltamotionfrompos(var_02,level.elvira_struct.origin,level.elvira_struct.angles,1);
 		wait(var_04);
-		if(scripts\engine\utility::flag("elvira_summoned"))
-		{
+		if(scripts\engine\utility::flag("elvira_summoned")) {
 			level notify("elvira_ready");
 			break;
 		}
 	}
 }
 
-//Function Number: 20
-elvira_talks(param_00,param_01)
-{
-	if(isdefined(level.elvira_talking))
-	{
+elvira_talks(param_00,param_01) {
+	if(isdefined(level.elvira_talking)) {
 		return;
 	}
 
@@ -592,21 +499,17 @@ elvira_talks(param_00,param_01)
 	level.elvira_talking = undefined;
 }
 
-//Function Number: 21
-elvira_talk_loop()
-{
+elvira_talk_loop() {
 	level notify("elvira_stop_idle_loop");
 	level endon("elvira_summoned");
 	level endon("elvira_stop_talk_loop");
 	var_00 = [%iw7_cp_elvira_talk_01,%iw7_cp_elvira_talk_02,%iw7_cp_elvira_talk_03,%iw7_cp_elvira_talk_04];
 	var_01 = ["IW7_cp_elvira_talk_01","IW7_cp_elvira_talk_02","IW7_cp_elvira_talk_03","IW7_cp_elvira_talk_04"];
 	var_02 = 0;
-	for(;;)
-	{
+	for(;;) {
 		var_03 = scripts\engine\utility::random(var_01);
 		var_04 = undefined;
-		switch(var_03)
-		{
+		switch(var_03) {
 			case "IW7_cp_elvira_talk_01":
 				var_04 = %iw7_cp_elvira_talk_01;
 				break;
@@ -627,17 +530,14 @@ elvira_talk_loop()
 		var_05 = getanimlength(var_04);
 		level.elvira scriptmodelplayanimdeltamotionfrompos(var_03,level.elvira_struct.origin,level.elvira_struct.angles,1);
 		wait(var_05);
-		if(scripts\engine\utility::flag("elvira_summoned"))
-		{
+		if(scripts\engine\utility::flag("elvira_summoned")) {
 			level notify("elvira_ready");
 			break;
 		}
 	}
 }
 
-//Function Number: 22
-elvira_finger_snap()
-{
+elvira_finger_snap() {
 	scripts\engine\utility::flag_set("elvira_summoned");
 	scripts\cp\zombies\zombies_spawning::increase_reserved_spawn_slots(1);
 	wait(1);
@@ -650,12 +550,9 @@ elvira_finger_snap()
 	wait(1);
 }
 
-//Function Number: 23
-spawn_elvira()
-{
+spawn_elvira() {
 	level.elvira_ai = undefined;
-	if(!isdefined(level.elvira_spawn_struct))
-	{
+	if(!isdefined(level.elvira_spawn_struct)) {
 		var_00 = spawnstruct();
 		var_00.origin = (261,-2560,520);
 		var_00.angles = (0,180,0);
@@ -665,11 +562,9 @@ spawn_elvira()
 		var_00 = level.elvira_spawn_struct;
 	}
 
-	for(;;)
-	{
+	for(;;) {
 		level.elvira_ai = scripts\cp\zombies\zombies_spawning::func_33B1("elvira",var_00.origin,var_00.angles,"allies",undefined,"iw7_erad_zm");
-		if(!isdefined(level.elvira_ai))
-		{
+		if(!isdefined(level.elvira_ai)) {
 			wait(0.2);
 			continue;
 		}
@@ -693,53 +588,40 @@ spawn_elvira()
 	level scripts\cp\utility::set_completed_quest_mark(2);
 }
 
-//Function Number: 24
-elvira_spawned_vo()
-{
+elvira_spawned_vo() {
 	wait(90);
-	if(!scripts\engine\utility::istrue(level.anomaly_revealed))
-	{
-		if(isdefined(level.elvira_ai))
-		{
+	if(!scripts\engine\utility::istrue(level.anomaly_revealed)) {
+		if(isdefined(level.elvira_ai)) {
 			scripts\engine\utility::play_sound_in_space("el_pap_nag_energy_warn_timeout",level.elvira_ai.origin,0,level.elvira_ai);
 			return;
 		}
 
-		if(isdefined(level.elvira))
-		{
+		if(isdefined(level.elvira)) {
 			scripts\engine\utility::play_sound_in_space("el_pap_nag_energy_warn_timeout",level.elvira.origin,0,level.elvira);
 			return;
 		}
 	}
 }
 
-//Function Number: 25
-crog_vial_meter()
-{
+crog_vial_meter() {
 	var_00 = 0;
-	for(;;)
-	{
+	for(;;) {
 		var_01 = level scripts\engine\utility::waittill_any_return("cleaver_kill","cleaver_kill_zombie","cleaver_damage_zombie");
-		if(scripts\engine\utility::flag("vial_filled"))
-		{
+		if(scripts\engine\utility::flag("vial_filled")) {
 			continue;
 		}
 
-		if(var_01 == "cleaver_kill")
-		{
+		if(var_01 == "cleaver_kill") {
 			var_00 = var_00 + 0.1;
 		}
-		else if(var_01 == "cleaver_kill_zombie")
-		{
+		else if(var_01 == "cleaver_kill_zombie") {
 			var_00 = var_00 + 0.05;
 		}
-		else if(var_01 == "cleaver_damage_zombie")
-		{
+		else if(var_01 == "cleaver_damage_zombie") {
 			var_00 = var_00 + 0.01;
 		}
 
-		if(var_00 >= 1)
-		{
+		if(var_00 >= 1) {
 			setomnvar("zom_general_fill_percent_2",1);
 			scripts\engine\utility::flag_set("vial_filled");
 			scripts\engine\utility::flag_waitopen("vial_filled");
@@ -752,59 +634,47 @@ crog_vial_meter()
 	}
 }
 
-//Function Number: 26
-elvira_timely_torrent(param_00)
-{
+elvira_timely_torrent(param_00) {
 	wait(1);
 	level endon("game_ended");
 	var_01 = [];
 	var_02 = 0;
 	var_03 = scripts\cp\cp_agent_utils::get_alive_enemies();
-	foreach(var_06, var_05 in var_03)
-	{
-		if(isdefined(var_05.flung))
-		{
+	foreach(var_06, var_05 in var_03) {
+		if(isdefined(var_05.flung)) {
 			continue;
 		}
 
-		if(!isdefined(var_05.agent_type))
-		{
+		if(!isdefined(var_05.agent_type)) {
 			continue;
 		}
 
-		if(distancesquared(var_05.origin,self.origin) > 810000)
-		{
+		if(distancesquared(var_05.origin,self.origin) > 810000) {
 			continue;
 		}
 
-		if(scripts\engine\utility::within_fov(self.origin,self.angles,var_05.origin,cos(60)))
-		{
+		if(scripts\engine\utility::within_fov(self.origin,self.angles,var_05.origin,cos(60))) {
 			level thread torrent_kill_zombie(var_05,var_06);
 		}
 	}
 }
 
-//Function Number: 27
-torrent_kill_zombie(param_00,param_01)
-{
+torrent_kill_zombie(param_00,param_01) {
 	param_00 endon("death");
 	level endon("game_ended");
-	if(param_01 % 3 == 0)
-	{
+	if(param_01 % 3 == 0) {
 		playsoundatpos(param_00.origin,"zmb_fnf_timely_torrent_lava");
 	}
 
 	playfx(level._effect["lava_torrent"],param_00.origin,undefined,anglestoup((0,0,90)));
-	if(param_00.agent_type != "crab_brute")
-	{
+	if(param_00.agent_type != "crab_brute") {
 		param_00.flung = 1;
 		param_00.do_immediate_ragdoll = 1;
 		param_00.disable_armor = 1;
 		param_00 setsolid(0);
 		param_00 setvelocity((0,0,600));
 		wait(0.1);
-		if(isdefined(param_00))
-		{
+		if(isdefined(param_00)) {
 			param_00 dodamage(10000,param_00.origin);
 			return;
 		}
@@ -812,8 +682,7 @@ torrent_kill_zombie(param_00,param_01)
 		return;
 	}
 
-	if(isdefined(param_00))
-	{
+	if(isdefined(param_00)) {
 		param_00 dodamage(1000,param_00.origin);
 	}
 }

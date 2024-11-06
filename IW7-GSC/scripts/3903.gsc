@@ -1,18 +1,11 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: 3903.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 11
- * Decompile Time: 3 ms
- * Timestamp: 10/27/2023 12:31:11 AM
-*******************************************************************/
+/****************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\3903.gsc
+****************************/
 
-//Function Number: 1
-func_2371()
-{
-	if(scripts/asm/asm::func_232E("shoot_grey"))
-	{
+func_2371() {
+	if(scripts/asm/asm::func_232E("shoot_grey")) {
 		return;
 	}
 
@@ -48,62 +41,42 @@ func_2371()
 	scripts/asm/asm::func_2327();
 }
 
-//Function Number: 2
-func_124B0(param_00,param_01,param_02,param_03)
-{
+func_124B0(param_00,param_01,param_02,param_03) {
 	return scripts/asm/asm_bb::func_291C();
 }
 
-//Function Number: 3
-func_124BA(param_00,param_01,param_02,param_03)
-{
+func_124BA(param_00,param_01,param_02,param_03) {
 	return self.a.pose == "crouch";
 }
 
-//Function Number: 4
-func_124A9(param_00,param_01,param_02,param_03)
-{
+func_124A9(param_00,param_01,param_02,param_03) {
 	return self._blackboard.shootparams.var_FF0B == 1;
 }
 
-//Function Number: 5
-func_124A1(param_00,param_01,param_02,param_03)
-{
+func_124A1(param_00,param_01,param_02,param_03) {
 	return self._blackboard.shootparams.var_1119D == "full";
 }
 
-//Function Number: 6
-func_124A5(param_00,param_01,param_02,param_03)
-{
+func_124A5(param_00,param_01,param_02,param_03) {
 	return 1;
 }
 
-//Function Number: 7
-func_12047(param_00,param_01,param_02,param_03)
-{
+func_12047(param_00,param_01,param_02,param_03) {
 	return scripts/asm/asm_bb::func_291C();
 }
 
-//Function Number: 8
-func_1204C(param_00,param_01,param_02,param_03)
-{
+func_1204C(param_00,param_01,param_02,param_03) {
 	return self.a.pose != "crouch";
 }
 
-//Function Number: 9
-func_1203F(param_00,param_01,param_02,param_03)
-{
+func_1203F(param_00,param_01,param_02,param_03) {
 	return self._blackboard.shootparams.var_FF0B == 1;
 }
 
-//Function Number: 10
-func_12037(param_00,param_01,param_02,param_03)
-{
+func_12037(param_00,param_01,param_02,param_03) {
 	return self._blackboard.shootparams.var_1119D == "full";
 }
 
-//Function Number: 11
-func_1203B(param_00,param_01,param_02,param_03)
-{
+func_1203B(param_00,param_01,param_02,param_03) {
 	return 1;
 }

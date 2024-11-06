@@ -1,18 +1,11 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\asm\dlc4\alien_anim_utils.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 2
- * Decompile Time: 144 ms
- * Timestamp: 10\27\2023 12:01:33 AM
-*******************************************************************/
+/*********************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\asm\dlc4\alien_anim_utils.gsc
+*********************************************************/
 
-//Function Number: 1
-func_97C5()
-{
-	if(isdefined(level.var_1BBA))
-	{
+func_97C5() {
+	if(isdefined(level.var_1BBA)) {
 		return;
 	}
 
@@ -24,9 +17,7 @@ func_97C5()
 	level.var_1B73 = 900;
 }
 
-//Function Number: 2
-func_97C8(param_00)
-{
+func_97C8(param_00) {
 	level.var_1BBA.var_A4E2 = 907.0294;
 	level.var_1BBA.var_A4E6 = 16.8476;
 	level.var_1BBA.var_A4E7 = 0.111111;

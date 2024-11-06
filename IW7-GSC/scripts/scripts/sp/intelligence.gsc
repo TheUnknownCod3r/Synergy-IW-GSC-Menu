@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\sp\intelligence.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 21
- * Decompile Time: 1053 ms
- * Timestamp: 10/27/2023 12:24:35 AM
-*******************************************************************/
+/***********************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\sp\intelligence.gsc
+***********************************************/
 
-//Function Number: 1
-main()
-{
+main() {
 	precachestring(&"SCRIPT_INTELLIGENCE_OF_EIGHTEEN");
 	precachestring(&"SCRIPT_RORKEFILE_PREV_FOUND");
 	precachestring(&"SCRIPT_RORKEFILE_PICKUP");
@@ -25,21 +19,15 @@ main()
 	func_995C();
 }
 
-//Function Number: 2
-func_DFC0()
-{
-	foreach(var_01 in level.var_9953)
-	{
-		if(!isdefined(var_01.var_E0E2))
-		{
+func_DFC0() {
+	foreach(var_01 in level.var_9953) {
+		if(!isdefined(var_01.var_E0E2)) {
 			var_01 func_E041();
 		}
 	}
 }
 
-//Function Number: 3
-func_E041()
-{
+func_E041() {
 	self.var_E0E2 = 1;
 	self.randomintrange hide();
 	self.randomintrange notsolid();
@@ -49,23 +37,16 @@ func_E041()
 	self notify("end_trigger_thread");
 }
 
-//Function Number: 4
-func_9858()
-{
-	foreach(var_01 in level.var_9953)
-	{
+func_9858() {
+	foreach(var_01 in level.var_9953) {
 		var_02 = var_01.origin;
 		var_01.var_C1D5 = func_7B42(var_02);
 	}
 }
 
-//Function Number: 5
-func_995C()
-{
-	foreach(var_01 in level.var_9953)
-	{
-		if(var_01 func_3DAD())
-		{
+func_995C() {
+	foreach(var_01 in level.var_9953) {
+		if(var_01 func_3DAD()) {
 			var_01 func_E041();
 			continue;
 		}
@@ -75,14 +56,10 @@ func_995C()
 	}
 }
 
-//Function Number: 6
-poll_for_found()
-{
+poll_for_found() {
 	self endon("end_loop_thread");
-	if(isdefined(self))
-	{
-		if(func_3DAD())
-		{
+	if(isdefined(self)) {
+		if(func_3DAD()) {
 			func_E041();
 		}
 	}
@@ -91,21 +68,16 @@ poll_for_found()
 		return;
 	}
 
-	while(!func_3DAD())
-	{
+	while(!func_3DAD()) {
 		wait(0.05);
 	}
 
 	func_E041();
 }
 
-//Function Number: 7
-func_3DAD()
-{
-	foreach(var_01 in level.players)
-	{
-		if(!var_01 _meth_8153(self.var_C1D5))
-		{
+func_3DAD() {
+	foreach(var_01 in level.players) {
+		if(!var_01 _meth_8153(self.var_C1D5)) {
 			return 0;
 		}
 	}
@@ -113,12 +85,9 @@ func_3DAD()
 	return 1;
 }
 
-//Function Number: 8
-func_48A0()
-{
+func_48A0() {
 	var_00 = getentarray("intelligence_item","targetname");
-	for(var_01 = 0;var_01 < var_00.size;var_01++)
-	{
+	for(var_01 = 0;var_01 < var_00.size;var_01++) {
 		var_00[var_01].randomintrange = getent(var_00[var_01].target,"targetname");
 		var_00[var_01].found = 0;
 	}
@@ -126,19 +95,14 @@ func_48A0()
 	return var_00;
 }
 
-//Function Number: 9
-func_48A1()
-{
+func_48A1() {
 	var_00 = 20;
 	var_01 = [];
-	for(var_02 = 1;var_02 <= var_00;var_02++)
-	{
+	for(var_02 = 1;var_02 <= var_00;var_02++) {
 		var_03 = tablelookup("sp/intel_items.csv",0,var_02,4);
-		if(isdefined(var_03) && var_03 != "undefined")
-		{
+		if(isdefined(var_03) && var_03 != "undefined") {
 			var_04 = strtok(var_03,",");
-			for(var_05 = 0;var_05 < var_04.size;var_05++)
-			{
+			for(var_05 = 0;var_05 < var_04.size;var_05++) {
 				var_04[var_05] = int(var_04[var_05]);
 			}
 
@@ -152,21 +116,16 @@ func_48A1()
 	return var_01;
 }
 
-//Function Number: 10
-func_26CA()
-{
+func_26CA() {
 	func_EB60();
 	function_022A();
 	waittillframeend;
 	func_E041();
 }
 
-//Function Number: 11
-func_135F5()
-{
+func_135F5() {
 	self endon("end_trigger_thread");
-	if(self.classname == "trigger_use")
-	{
+	if(self.classname == "trigger_use") {
 		self sethintstring(&"SCRIPT_RORKEFILE_PICKUP");
 		self usetriggerrequirelookat(1);
 	}
@@ -178,12 +137,9 @@ func_135F5()
 	func_26CA();
 }
 
-//Function Number: 12
-func_12F84()
-{
+func_12F84() {
 	level.player.var_906B = 0;
-	while(level.player.var_906B < 30 && isdefined(self))
-	{
+	while(level.player.var_906B < 30 && isdefined(self)) {
 		level.player.var_906B = 0;
 		self stoploopsound("intelligence_pickup_loop");
 		self waittill("trigger",var_00);
@@ -200,14 +156,10 @@ func_12F84()
 	setdvar("ui_securing","");
 }
 
-//Function Number: 13
-func_906C()
-{
+func_906C() {
 	self endon("stopped_pressing");
-	while(isdefined(self) && isdefined(level.player))
-	{
-		if(level.player usebuttonpressed() && distance(level.player.origin,self.origin) < 128 && isalive(level.player))
-		{
+	while(isdefined(self) && isdefined(level.player)) {
+		if(level.player usebuttonpressed() && distance(level.player.origin,self.origin) < 128 && isalive(level.player)) {
 			level.player.var_906B++;
 		}
 		else
@@ -217,8 +169,7 @@ func_906C()
 			self notify("stopped_pressing");
 		}
 
-		if(level.player.var_906B >= 30)
-		{
+		if(level.player.var_906B >= 30) {
 			setdvar("ui_securing","");
 			self notify("stopped_pressing");
 			self stoploopsound("intelligence_pickup_loop");
@@ -228,35 +179,27 @@ func_906C()
 	}
 }
 
-//Function Number: 14
-func_D9DA()
-{
+func_D9DA() {
 	self endon("stopped_pressing");
 	var_00 = 30;
 	var_01 = 8;
-	for(var_02 = 0;var_02 < var_00;var_02++)
-	{
+	for(var_02 = 0;var_02 < var_00;var_02++) {
 		setdvar("ui_securing_progress",getdvarfloat("ui_securing_progress") + 1 / var_00);
 		scripts\engine\utility::waitframe();
 	}
 }
 
-//Function Number: 15
-func_9961(param_00,param_01)
-{
+func_9961(param_00,param_01) {
 	self endon("stopped_pressing");
 	var_02 = 30;
 	var_03 = 10;
 	var_04 = 0;
-	for(var_05 = 0;var_05 < var_02;var_05++)
-	{
-		if(var_04 > var_03)
-		{
+	for(var_05 = 0;var_05 < var_02;var_05++) {
+		if(var_04 > var_03) {
 			var_04 = 0;
 		}
 
-		if(var_04 < var_03 / 2)
-		{
+		if(var_04 < var_03 / 2) {
 			param_00 settext(&"SCRIPT_INTELLIGENCE_UPLOADING");
 		}
 		else
@@ -275,13 +218,9 @@ func_9961(param_00,param_01)
 	param_01 settext(&"SCRIPT_INTELLIGENCE_PERCENT");
 }
 
-//Function Number: 16
-func_EB60()
-{
-	foreach(var_01 in level.players)
-	{
-		if(var_01 _meth_8153(self.var_C1D5))
-		{
+func_EB60() {
+	foreach(var_01 in level.players) {
+		if(var_01 _meth_8153(self.var_C1D5)) {
 			continue;
 		}
 
@@ -292,26 +231,20 @@ func_EB60()
 	scripts\sp\_endmission::func_12F24();
 }
 
-//Function Number: 17
-setplayerangles()
-{
+setplayerangles() {
 	var_00 = self _meth_8139("cheatPoints");
 	self _meth_8302("cheatPoints",var_00 + 1);
 }
 
-//Function Number: 18
-func_9952(param_00)
-{
+func_9952(param_00) {
 	self.randomintrange hide();
 	self.randomintrange notsolid();
 	function_0178("intelligence_pickup",self.randomintrange.origin);
 	var_01 = 3000;
 	var_02 = 700;
 	var_03 = var_01 + var_02 / 1000;
-	foreach(var_05 in level.players)
-	{
-		if(param_00 != var_05 && var_05 _meth_8153(self.var_C1D5))
-		{
+	foreach(var_05 in level.players) {
+		if(param_00 != var_05 && var_05 _meth_8153(self.var_C1D5)) {
 			continue;
 		}
 
@@ -322,8 +255,7 @@ func_9952(param_00)
 		var_06.y = -50;
 		var_06 setpulsefx(60,var_01,var_02);
 		var_07 = 0;
-		if(param_00 == var_05 && var_05 _meth_8153(self.var_C1D5))
-		{
+		if(param_00 == var_05 && var_05 _meth_8153(self.var_C1D5)) {
 			var_06.label = &"SCRIPT_RORKEFILE_PREV_FOUND";
 		}
 		else
@@ -334,8 +266,7 @@ func_9952(param_00)
 			var_06 setvalue(var_07);
 		}
 
-		if(var_07 == 18)
-		{
+		if(var_07 == 18) {
 			var_05 scripts\sp\_utility::func_D0A1("EXT_1");
 		}
 
@@ -343,9 +274,7 @@ func_9952(param_00)
 	}
 }
 
-//Function Number: 19
-func_F99F()
-{
+func_F99F() {
 	self.color = (1,1,1);
 	self.alpha = 1;
 	self.x = 0;
@@ -356,64 +285,47 @@ func_F99F()
 	self.foreground = 1;
 }
 
-//Function Number: 20
-func_23AF()
-{
+func_23AF() {
 	var_00 = [];
-	for(var_01 = 1;var_01 < 65;var_01++)
-	{
+	for(var_01 = 1;var_01 < 65;var_01++) {
 		var_02 = tablelookup("sp/intel_items.csv",0,var_01,4);
 		var_03 = strtok(var_02,",");
-		for(var_01 = 0;var_01 < var_03.size;var_01++)
-		{
+		for(var_01 = 0;var_01 < var_03.size;var_01++) {
 			var_03[var_01] = int(var_03[var_01]);
 		}
 
 		var_00[var_01] = (var_03[0],var_03[1],var_03[2]);
 	}
 
-	for(var_01 = 0;var_01 < var_00.size;var_01++)
-	{
-		if(!isdefined(var_00[var_01]))
-		{
+	for(var_01 = 0;var_01 < var_00.size;var_01++) {
+		if(!isdefined(var_00[var_01])) {
 			continue;
 		}
 
-		if(var_00[var_01] == "undefined")
-		{
+		if(var_00[var_01] == "undefined") {
 			continue;
 		}
 
-		for(var_04 = 0;var_04 < var_00.size;var_04++)
-		{
-			if(!isdefined(var_00[var_04]))
-			{
+		for(var_04 = 0;var_04 < var_00.size;var_04++) {
+			if(!isdefined(var_00[var_04])) {
 			}
-			else if(var_00[var_04] == "undefined")
-			{
+			else if(var_00[var_04] == "undefined") {
 			}
-			else if(var_01 == var_04)
-			{
+			else if(var_01 == var_04) {
 			}
-			else if(var_00[var_01] == var_00[var_04])
-			{
+			else if(var_00[var_01] == var_00[var_04]) {
 			}
 		}
 	}
 }
 
-//Function Number: 21
-func_7B42(param_00)
-{
-	for(var_01 = 1;var_01 < level.var_113C7.size + 1;var_01++)
-	{
-		if(!isdefined(level.var_113C7[var_01]))
-		{
+func_7B42(param_00) {
+	for(var_01 = 1;var_01 < level.var_113C7.size + 1;var_01++) {
+		if(!isdefined(level.var_113C7[var_01])) {
 			continue;
 		}
 
-		if(distancesquared(param_00,level.var_113C7[var_01]) < squared(75))
-		{
+		if(distancesquared(param_00,level.var_113C7[var_01]) < squared(75)) {
 			return var_01;
 		}
 	}

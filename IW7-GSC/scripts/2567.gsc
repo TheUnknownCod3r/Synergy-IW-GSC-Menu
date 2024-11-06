@@ -1,19 +1,12 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: 2567.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 9
- * Decompile Time: 1 ms
- * Timestamp: 10/27/2023 12:23:21 AM
-*******************************************************************/
+/****************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\2567.gsc
+****************************/
 
-//Function Number: 1
-func_B29B(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08,param_09,param_0A,param_0B,param_0C,param_0D)
-{
+func_B29B(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08,param_09,param_0A,param_0B,param_0C,param_0D) {
 	var_0E = [];
-	if(isdefined(param_00))
-	{
+	if(isdefined(param_00)) {
 		var_0E[0] = param_00;
 	}
 	else
@@ -21,8 +14,7 @@ func_B29B(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_0
 		return var_0E;
 	}
 
-	if(isdefined(param_01))
-	{
+	if(isdefined(param_01)) {
 		var_0E[1] = param_01;
 	}
 	else
@@ -30,8 +22,7 @@ func_B29B(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_0
 		return var_0E;
 	}
 
-	if(isdefined(param_02))
-	{
+	if(isdefined(param_02)) {
 		var_0E[2] = param_02;
 	}
 	else
@@ -39,8 +30,7 @@ func_B29B(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_0
 		return var_0E;
 	}
 
-	if(isdefined(param_03))
-	{
+	if(isdefined(param_03)) {
 		var_0E[3] = param_03;
 	}
 	else
@@ -48,8 +38,7 @@ func_B29B(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_0
 		return var_0E;
 	}
 
-	if(isdefined(param_04))
-	{
+	if(isdefined(param_04)) {
 		var_0E[4] = param_04;
 	}
 	else
@@ -57,8 +46,7 @@ func_B29B(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_0
 		return var_0E;
 	}
 
-	if(isdefined(param_05))
-	{
+	if(isdefined(param_05)) {
 		var_0E[5] = param_05;
 	}
 	else
@@ -66,8 +54,7 @@ func_B29B(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_0
 		return var_0E;
 	}
 
-	if(isdefined(param_06))
-	{
+	if(isdefined(param_06)) {
 		var_0E[6] = param_06;
 	}
 	else
@@ -75,8 +62,7 @@ func_B29B(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_0
 		return var_0E;
 	}
 
-	if(isdefined(param_07))
-	{
+	if(isdefined(param_07)) {
 		var_0E[7] = param_07;
 	}
 	else
@@ -84,8 +70,7 @@ func_B29B(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_0
 		return var_0E;
 	}
 
-	if(isdefined(param_08))
-	{
+	if(isdefined(param_08)) {
 		var_0E[8] = param_08;
 	}
 	else
@@ -93,8 +78,7 @@ func_B29B(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_0
 		return var_0E;
 	}
 
-	if(isdefined(param_09))
-	{
+	if(isdefined(param_09)) {
 		var_0E[9] = param_09;
 	}
 	else
@@ -102,8 +86,7 @@ func_B29B(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_0
 		return var_0E;
 	}
 
-	if(isdefined(param_0A))
-	{
+	if(isdefined(param_0A)) {
 		var_0E[10] = param_0A;
 	}
 	else
@@ -111,8 +94,7 @@ func_B29B(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_0
 		return var_0E;
 	}
 
-	if(isdefined(param_0B))
-	{
+	if(isdefined(param_0B)) {
 		var_0E[11] = param_0B;
 	}
 	else
@@ -120,8 +102,7 @@ func_B29B(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_0
 		return var_0E;
 	}
 
-	if(isdefined(param_0C))
-	{
+	if(isdefined(param_0C)) {
 		var_0E[12] = param_0C;
 	}
 	else
@@ -129,23 +110,19 @@ func_B29B(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_0
 		return var_0E;
 	}
 
-	if(isdefined(param_0D))
-	{
+	if(isdefined(param_0D)) {
 		var_0E[13] = param_0D;
 	}
 
 	return var_0E;
 }
 
-//Function Number: 2
-func_97ED(param_00)
-{
+func_97ED(param_00) {
 	self.var_71A8 = ::func_7FD3;
 	self.var_71AE = ::lib_0F3C::isaimedataimtarget;
 	self.var_71A0 = ::func_4F66;
 	self.var_71A6 = ::func_7EFC;
-	if(isdefined(self.var_394))
-	{
+	if(isdefined(self.var_394)) {
 		self.bulletsinclip = weaponclipsize(self.var_394);
 		self.primaryweapon = self.var_394;
 	}
@@ -160,13 +137,11 @@ func_97ED(param_00)
 	anim.var_32BF = func_B29B(1,2,2,2,3,3,3,3,4,4,5);
 	anim.var_6B93 = func_B29B(2,3,3,3,4,4,4,5,5);
 	anim.var_F217 = func_B29B(1,2,2,3,3,4,4,4,4,5,5,5);
-	if(!isdefined(level.shootenemywrapper_func))
-	{
+	if(!isdefined(level.shootenemywrapper_func)) {
 		anim.shootenemywrapper_func = ::func_FE9D;
 	}
 
-	if(!isdefined(level.var_FED3))
-	{
+	if(!isdefined(level.var_FED3)) {
 		anim.var_FED3 = ::func_FED2;
 	}
 
@@ -178,8 +153,7 @@ func_97ED(param_00)
 	self.assertmsg = 0;
 	self.var_DCAF = 256;
 	self.var_B781 = 750;
-	if(self.team == "allies")
-	{
+	if(self.team == "allies") {
 		self.suppressionthreshold = 0.5;
 	}
 	else
@@ -191,9 +165,7 @@ func_97ED(param_00)
 	return level.success;
 }
 
-//Function Number: 3
-func_F724()
-{
+func_F724() {
 	anim.covercrouchleanpitch = 55;
 	anim.var_1A52 = 10;
 	anim.var_1A50 = 4096;
@@ -207,56 +179,42 @@ func_F724()
 	anim.var_B47F = 65;
 }
 
-//Function Number: 4
-func_FA33()
-{
+func_FA33() {
 	self.var_B4C3 = 130;
 	self.var_E878 = 0.4615385;
 	self.var_E876 = 0.3;
 }
 
-//Function Number: 5
-func_7FD3()
-{
-	if(isdefined(self.var_10AB7) && self.var_10AB7)
-	{
+func_7FD3() {
+	if(isdefined(self.var_10AB7) && self.var_10AB7) {
 		return "sprint";
 	}
 
-	if(isdefined(self.objective_position) && isdefined(self.isnodeoccupied) && self.objective_additionalcurrent == 1)
-	{
-		if(distancesquared(self.origin,self.isnodeoccupied.origin) > 90000)
-		{
+	if(isdefined(self.objective_position) && isdefined(self.isnodeoccupied) && self.objective_additionalcurrent == 1) {
+		if(distancesquared(self.origin,self.isnodeoccupied.origin) > 90000) {
 			return "sprint";
 		}
 	}
 
-	if(isdefined(self.var_527B))
-	{
+	if(isdefined(self.var_527B)) {
 		return self.var_527B;
 	}
 
-	if(isdefined(self.isnodeoccupied) || isdefined(self.var_6571))
-	{
+	if(isdefined(self.isnodeoccupied) || isdefined(self.var_6571)) {
 		return "combat";
 	}
 
 	return "walk";
 }
 
-//Function Number: 6
-func_4F66()
-{
+func_4F66() {
 	var_00 = self.bulletsinclip;
-	if(weaponclass(self.var_394) == "mg")
-	{
+	if(weaponclass(self.var_394) == "mg") {
 		var_01 = randomfloat(10);
-		if(var_01 < 3)
-		{
+		if(var_01 < 3) {
 			var_00 = randomintrange(2,6);
 		}
-		else if(var_01 < 8)
-		{
+		else if(var_01 < 8) {
 			var_00 = randomintrange(6,12);
 		}
 		else
@@ -268,29 +226,21 @@ func_4F66()
 	return var_00;
 }
 
-//Function Number: 7
-func_FE9D(param_00)
-{
+func_FE9D(param_00) {
 	self.var_A9ED = gettime();
 	var_01 = lib_0F3C::_meth_811C();
 	var_02 = lib_0F3C::_meth_811E(var_01);
 	func_FED2(var_02,param_00);
 }
 
-//Function Number: 8
-func_FED2(param_00,param_01)
-{
+func_FED2(param_00,param_01) {
 	self shoot(1,param_00,1,0,1);
 }
 
-//Function Number: 9
-func_7EFC()
-{
-	if(isdefined(self.target_getindexoftarget))
-	{
+func_7EFC() {
+	if(isdefined(self.target_getindexoftarget)) {
 		var_00 = self.target_getindexoftarget gethighestnodestance();
-		if(var_00 == "prone" && self.unittype == "c6")
-		{
+		if(var_00 == "prone" && self.unittype == "c6") {
 			var_00 = "crouch";
 		}
 

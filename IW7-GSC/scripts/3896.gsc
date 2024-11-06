@@ -1,37 +1,25 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: 3896.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 9
- * Decompile Time: 2 ms
- * Timestamp: 10/27/2023 12:31:09 AM
-*******************************************************************/
+/****************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\3896.gsc
+****************************/
 
-//Function Number: 1
-func_B063(param_00,param_01,param_02,param_03)
-{
+func_B063(param_00,param_01,param_02,param_03) {
 	self setscriptablepartstate("run","active",0);
 	self gib_fx_override("gravity");
 	scripts/asm/asm_mp::func_2364(param_00,param_01,param_02,1.3);
 }
 
-//Function Number: 2
-func_F173(param_00,param_01,param_02,param_03)
-{
+func_F173(param_00,param_01,param_02,param_03) {
 	self setscriptablepartstate("run","activeEnd",0);
 }
 
-//Function Number: 3
-func_F178(param_00,param_01,param_02,param_03)
-{
+func_F178(param_00,param_01,param_02,param_03) {
 	self.var_9FB2 = 0;
 	self setscriptablepartstate("jump","activeEnd",0);
 }
 
-//Function Number: 4
-func_D560(param_00,param_01,param_02,param_03)
-{
+func_D560(param_00,param_01,param_02,param_03) {
 	self endon("death");
 	self.var_9FB2 = 1;
 	self setscriptablepartstate("jump","active",0);
@@ -53,9 +41,7 @@ func_D560(param_00,param_01,param_02,param_03)
 	func_11701(param_00,param_01);
 }
 
-//Function Number: 5
-func_D562(param_00,param_01,param_02,param_03)
-{
+func_D562(param_00,param_01,param_02,param_03) {
 	self endon("death");
 	var_04 = self getspectatepoint();
 	var_05 = self _meth_8145();
@@ -69,15 +55,13 @@ func_D562(param_00,param_01,param_02,param_03)
 	self setanimstate(param_01,0);
 	var_09 = undefined;
 	var_0A = var_04.origin[2] - var_05.origin[2];
-	if(var_0A < -16)
-	{
+	if(var_0A < -16) {
 		var_09 = var_05.origin + (0,0,32);
 		self ghostexplode(self.origin,var_09,var_08);
 		wait(var_08);
 		self setanimstate(param_01,1);
 	}
-	else if(var_0A > 16)
-	{
+	else if(var_0A > 16) {
 		var_09 = (var_05.origin[0],var_05.origin[1],var_04.origin[2]);
 		self ghostexplode(self.origin,var_09,var_08 * 0.5);
 		wait(var_08 * 0.5);
@@ -93,25 +77,19 @@ func_D562(param_00,param_01,param_02,param_03)
 	func_11701(param_00,param_01);
 }
 
-//Function Number: 6
-func_BBC2(param_00)
-{
+func_BBC2(param_00) {
 	self endon("stop_motion_hack");
-	for(;;)
-	{
+	for(;;) {
 		self setorigin(param_00.origin,1);
 		self.angles = param_00.angles;
 		wait(0.05);
 	}
 }
 
-//Function Number: 7
-func_11701(param_00,param_01)
-{
+func_11701(param_00,param_01) {
 	var_02 = level.asm[param_00].states[param_01];
 	var_03 = undefined;
-	if(isarray(var_02.var_116FB))
-	{
+	if(isarray(var_02.var_116FB)) {
 		var_03 = var_02.var_116FB[0];
 	}
 	else
@@ -124,18 +102,13 @@ func_11701(param_00,param_01)
 	self notify("killanimscript");
 }
 
-//Function Number: 8
-func_F16E(param_00,param_01,param_02,param_03)
-{
+func_F16E(param_00,param_01,param_02,param_03) {
 	self notify("terminate_ai_threads");
 	self notify("killanimscript");
 }
 
-//Function Number: 9
-isfactorinuse(param_00,param_01,param_02,param_03)
-{
-	if(!isdefined(self.vehicle_getspawnerarray))
-	{
+isfactorinuse(param_00,param_01,param_02,param_03) {
+	if(!isdefined(self.vehicle_getspawnerarray)) {
 		return 0;
 	}
 

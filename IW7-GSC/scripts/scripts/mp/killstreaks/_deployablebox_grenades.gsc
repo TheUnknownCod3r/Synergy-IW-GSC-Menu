@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\mp\killstreaks\_deployablebox_grenades.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 5
- * Decompile Time: 210 ms
- * Timestamp: 10/27/2023 12:28:22 AM
-*******************************************************************/
+/**********************************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\mp\killstreaks\_deployablebox_grenades.gsc
+**********************************************************************/
 
-//Function Number: 1
-init()
-{
+init() {
 	var_00 = spawnstruct();
 	var_00.var_39B = "deployable_vest_marker_mp";
 	var_00.modelbase = "afr_mortar_ammo_01";
@@ -45,12 +39,9 @@ init()
 	level.deployable_box["deployable_grenades"] = [];
 }
 
-//Function Number: 2
-func_128DF(param_00,param_01)
-{
+func_128DF(param_00,param_01) {
 	var_02 = scripts\mp\killstreaks\_deployablebox::begindeployableviamarker(param_00,"deployable_grenades");
-	if(!isdefined(var_02) || !var_02)
-	{
+	if(!isdefined(var_02) || !var_02) {
 		return 0;
 	}
 
@@ -58,30 +49,21 @@ func_128DF(param_00,param_01)
 	return 1;
 }
 
-//Function Number: 3
-onusedeployable(param_00)
-{
+onusedeployable(param_00) {
 	func_DE4E();
 }
 
-//Function Number: 4
-func_DE4E()
-{
+func_DE4E() {
 	var_00 = self getweaponslistall();
-	if(isdefined(var_00))
-	{
-		foreach(var_02 in var_00)
-		{
-			if(scripts\mp\_weapons::func_9E18(var_02) || scripts\mp\_weapons::func_9EC0(var_02))
-			{
+	if(isdefined(var_00)) {
+		foreach(var_02 in var_00) {
+			if(scripts\mp\_weapons::func_9E18(var_02) || scripts\mp\_weapons::func_9EC0(var_02)) {
 				self givestartammo(var_02);
 			}
 		}
 	}
 }
 
-//Function Number: 5
-func_3937(param_00)
-{
+func_3937(param_00) {
 	return !scripts\mp\_utility::isjuggernaut();
 }

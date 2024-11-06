@@ -1,18 +1,11 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\asm\superslasher\mp\states.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 1
- * Decompile Time: 112 ms
- * Timestamp: 10\27\2023 12:02:14 AM
-*******************************************************************/
+/**********************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\asm\superslasher\mp\states.gsc
+**********************************************************/
 
-//Function Number: 1
-func_2371()
-{
-	if(scripts\asm\asm::func_232E("superslasher"))
-	{
+func_2371() {
+	if(scripts\asm\asm::func_232E("superslasher")) {
 		return;
 	}
 

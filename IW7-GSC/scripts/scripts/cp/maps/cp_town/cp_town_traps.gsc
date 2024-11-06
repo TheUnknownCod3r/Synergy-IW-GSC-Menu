@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\cp\maps\cp_town\cp_town_traps.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 50
- * Decompile Time: 2705 ms
- * Timestamp: 10/27/2023 12:07:44 AM
-*******************************************************************/
+/*************************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\cp\maps\cp_town\cp_town_traps.gsc
+*************************************************************/
 
-//Function Number: 1
-register_traps()
-{
+register_traps() {
 	level.interaction_hintstrings["fix_electric_trap"] = &"CP_TOWN_INTERACTIONS_MISSING_COMPONENTS";
 	level.interaction_hintstrings["add_component"] = &"CP_TOWN_INTERACTIONS_ADD_COMPONENT";
 	level.interaction_hintstrings["trap_electric_part"] = "";
@@ -56,33 +50,24 @@ register_traps()
 	scripts\cp\cp_interaction::register_interaction("elvira_trap","trap",undefined,undefined,::elvira_trap_use,750,1,::init_elvira_trap);
 }
 
-//Function Number: 2
-check_for_trap_master_achievement(param_00)
-{
-	if(!isdefined(self.used_traps))
-	{
+check_for_trap_master_achievement(param_00) {
+	if(!isdefined(self.used_traps)) {
 		self.used_traps = [];
 	}
 
 	self.used_traps = scripts\engine\utility::array_add_safe(self.used_traps,param_00);
 	self.used_traps = scripts\engine\utility::array_remove_duplicates(self.used_traps);
-	if(self.used_traps.size > 4)
-	{
+	if(self.used_traps.size > 4) {
 		scripts/cp/zombies/achievement::update_achievement("BAIT_AND_SWITCH",1);
 	}
 }
 
-//Function Number: 3
-trap_debug_devgui()
-{
-	for(;;)
-	{
+trap_debug_devgui() {
+	for(;;) {
 		wait(1);
-		if(getdvar("scr_craft_pickup") != "")
-		{
+		if(getdvar("scr_craft_pickup") != "") {
 			var_00 = getdvar("scr_craft_pickup");
-			switch(var_00)
-			{
+			switch(var_00) {
 				case "freeze":
 					var_01 = scripts\engine\utility::getstruct("trap_freeze_part","script_noteworthy");
 					freeze_trap_take_part(var_01,level.players[0]);
@@ -109,23 +94,18 @@ trap_debug_devgui()
 	}
 }
 
-//Function Number: 4
-electric_trap_init()
-{
+electric_trap_init() {
 	var_00 = scripts\engine\utility::getstructarray("trap_electric_part","script_noteworthy");
 	var_01 = randomint(var_00.size);
 	var_02 = var_00[var_01];
 	var_03 = scripts\engine\utility::getstructarray("trap_electric","script_noteworthy");
-	foreach(var_05 in var_03)
-	{
+	foreach(var_05 in var_03) {
 		scripts\cp\cp_interaction::remove_from_current_interaction_list(var_05);
 		level thread func_13611(var_05);
 	}
 
-	foreach(var_08 in var_00)
-	{
-		if(var_08 == var_02)
-		{
+	foreach(var_08 in var_00) {
+		if(var_08 == var_02) {
 			continue;
 		}
 		else
@@ -135,8 +115,7 @@ electric_trap_init()
 	}
 
 	var_0A = scripts\engine\utility::getstruct(var_02.target,"targetname");
-	if(isdefined(var_0A.angles))
-	{
+	if(isdefined(var_0A.angles)) {
 		var_0B = (322.4,26,-6.6);
 	}
 	else
@@ -156,35 +135,26 @@ electric_trap_init()
 	scripts\cp\cp_interaction::add_to_current_interaction_list(var_0C);
 }
 
-//Function Number: 5
-elec_trap_sparks()
-{
+elec_trap_sparks() {
 	level endon("electric_trap_part_added");
 	var_00 = scripts\engine\utility::getstructarray("electric_trap_sparks","targetname");
-	for(;;)
-	{
+	for(;;) {
 		var_01 = scripts\engine\utility::random(var_00).origin;
 		playfx(level._effect["elec_trap_sparks"],var_01);
 		wait(randomintrange(2,6));
 	}
 }
 
-//Function Number: 6
-electric_trap_fix_hint(param_00,param_01)
-{
-	if(!scripts\engine\utility::flag("electric_trap_part_taken"))
-	{
+electric_trap_fix_hint(param_00,param_01) {
+	if(!scripts\engine\utility::flag("electric_trap_part_taken")) {
 		return level.interaction_hintstrings["fix_electric_trap"];
 	}
 
 	return level.interaction_hintstrings["add_component"];
 }
 
-//Function Number: 7
-electric_trap_fix(param_00,param_01)
-{
-	if(!scripts\engine\utility::flag("electric_trap_part_taken"))
-	{
+electric_trap_fix(param_00,param_01) {
+	if(!scripts\engine\utility::flag("electric_trap_part_taken")) {
 		return;
 	}
 
@@ -194,8 +164,7 @@ electric_trap_fix(param_00,param_01)
 	var_03.angles = var_02.angles;
 	var_03 setmodel("container_electrical_box_01_components");
 	var_04 = scripts\engine\utility::getstructarray("trap_electric","script_noteworthy");
-	foreach(var_06 in var_04)
-	{
+	foreach(var_06 in var_04) {
 		scripts\cp\cp_interaction::add_to_current_interaction_list(var_06);
 		var_07 = getent(var_06.target,"targetname");
 		var_07 setmodel("mp_frag_button_on");
@@ -213,23 +182,18 @@ electric_trap_fix(param_00,param_01)
 	taketrapparticon("electric");
 }
 
-//Function Number: 8
-ww_activate_trap_vo(param_00)
-{
-	if(!isdefined(param_00))
-	{
+ww_activate_trap_vo(param_00) {
+	if(!isdefined(param_00)) {
 		return;
 	}
 
 	wait(1);
-	if(randomint(100) >= 50 && randomint(100) < 60)
-	{
+	if(randomint(100) >= 50 && randomint(100) < 60) {
 		thread scripts\cp\cp_vo::try_to_play_vo("activate_trap_generic","zmb_comment_vo","highest",10,0,0,1,25);
 		return;
 	}
 
-	if(randomint(100) > 60)
-	{
+	if(randomint(100) > 60) {
 		level thread scripts\cp\cp_vo::try_to_play_vo("ww_activate_trap_" + param_00,"rave_announcer_vo","highest",70,0,0,1);
 		return;
 	}
@@ -237,9 +201,7 @@ ww_activate_trap_vo(param_00)
 	level thread scripts\cp\cp_vo::try_to_play_vo("ww_activate_trap_generic","rave_announcer_vo","highest",70,0,0,1);
 }
 
-//Function Number: 9
-electric_trap_take_part(param_00,param_01)
-{
+electric_trap_take_part(param_00,param_01) {
 	scripts\cp\cp_interaction::remove_from_current_interaction_list(param_00);
 	scripts\engine\utility::flag_set("electric_trap_part_taken");
 	param_01 playlocalsound("part_pickup");
@@ -248,17 +210,13 @@ electric_trap_take_part(param_00,param_01)
 	givetrapparticon("electric");
 }
 
-//Function Number: 10
-electric_trap_use(param_00,param_01)
-{
-	if(!scripts\engine\utility::istrue(param_00.powered_on))
-	{
+electric_trap_use(param_00,param_01) {
+	if(!scripts\engine\utility::istrue(param_00.powered_on)) {
 		return;
 	}
 
 	var_02 = scripts\engine\utility::getstructarray("trap_electric","script_noteworthy");
-	foreach(var_04 in var_02)
-	{
+	foreach(var_04 in var_02) {
 		level thread scripts\cp\cp_interaction::interaction_cooldown(var_04,325);
 		var_05 = getent(var_04.target,"targetname");
 		var_05 setmodel("mp_frag_button_on");
@@ -281,29 +239,23 @@ electric_trap_use(param_00,param_01)
 	var_08 stoploopsound();
 	var_08 delete();
 	wait(300);
-	foreach(var_04 in var_02)
-	{
+	foreach(var_04 in var_02) {
 		var_05 = getent(var_04.target,"targetname");
 		var_05 setmodel("mp_frag_button_on_green");
 	}
 }
 
-//Function Number: 11
-electric_trap_damage(param_00,param_01)
-{
+electric_trap_damage(param_00,param_01) {
 	level endon("stop_electric_trap");
 	var_02 = gettime();
 	var_03 = getent("electric_trap_trig","targetname");
-	for(;;)
-	{
+	for(;;) {
 		var_03 waittill("trigger",var_04);
-		if(isdefined(level.elvira_ai) && var_04 == level.elvira_ai)
-		{
+		if(isdefined(level.elvira_ai) && var_04 == level.elvira_ai) {
 			continue;
 		}
 
-		if(isplayer(var_04) && isalive(var_04) && !scripts\cp\cp_laststand::player_in_laststand(var_04) && !isdefined(var_04.padding_damage))
-		{
+		if(isplayer(var_04) && isalive(var_04) && !scripts\cp\cp_laststand::player_in_laststand(var_04) && !isdefined(var_04.padding_damage)) {
 			playsoundatpos(var_04.origin,"trap_electric_shock");
 			playfxontagforclients(level._effect["electric_shock_plyr"],var_04,"tag_eye",var_04);
 			var_04.padding_damage = 1;
@@ -312,18 +264,15 @@ electric_trap_damage(param_00,param_01)
 			continue;
 		}
 
-		if(scripts\engine\utility::istrue(var_04.is_turned) || !scripts\cp\utility::should_be_affected_by_trap(var_04,0,1))
-		{
+		if(scripts\engine\utility::istrue(var_04.is_turned) || !scripts\cp\utility::should_be_affected_by_trap(var_04,0,1)) {
 			continue;
 		}
 
-		if(var_04 is_crog())
-		{
+		if(var_04 is_crog()) {
 			continue;
 		}
 
-		if(gettime() > var_02 + 1000)
-		{
+		if(gettime() > var_02 + 1000) {
 			playsoundatpos(var_04.origin,"trap_electric_shock");
 			var_02 = gettime();
 		}
@@ -332,15 +281,11 @@ electric_trap_damage(param_00,param_01)
 	}
 }
 
-//Function Number: 12
-is_crog()
-{
+is_crog() {
 	return self.agent_type == "crab_mini" || self.agent_type == "crab_brute";
 }
 
-//Function Number: 13
-electrocute_zombie(param_00,param_01)
-{
+electrocute_zombie(param_00,param_01) {
 	param_00 endon("death");
 	wait(randomfloat(3));
 	var_02 = scripts\engine\utility::getstructarray("electric_trap_spots","targetname");
@@ -352,8 +297,7 @@ electrocute_zombie(param_00,param_01)
 	param_00.dontmutilate = 1;
 	param_00.electrocuted = 1;
 	param_00 setscriptablepartstate("electrocuted","on");
-	if(param_01 scripts\cp\utility::is_valid_player(1))
-	{
+	if(param_01 scripts\cp\utility::is_valid_player(1)) {
 		var_06 = param_01;
 	}
 	else
@@ -366,21 +310,16 @@ electrocute_zombie(param_00,param_01)
 	param_00 dodamage(param_00.health + 100,param_00.origin,var_06,var_06,"MOD_UNKNOWN","iw7_electrictrap_zm");
 }
 
-//Function Number: 14
-remove_padding_damage()
-{
+remove_padding_damage() {
 	self endon("disconnect");
 	wait(0.5);
 	self.padding_damage = undefined;
 }
 
-//Function Number: 15
-electric_trap_rumble()
-{
+electric_trap_rumble() {
 	level endon("stop_electric_trap");
 	var_00 = getent("electric_trap_trig","targetname");
-	for(;;)
-	{
+	for(;;) {
 		wait(0.2);
 		earthquake(0.18,1,var_00.origin,784);
 		wait(0.05);
@@ -388,22 +327,17 @@ electric_trap_rumble()
 	}
 }
 
-//Function Number: 16
-freeze_trap_init()
-{
+freeze_trap_init() {
 	var_00 = scripts\engine\utility::getstructarray("trap_freeze_part","script_noteworthy");
 	var_01 = randomint(var_00.size);
 	var_02 = var_00[var_01];
 	var_03 = scripts\engine\utility::getstructarray("trap_freeze","script_noteworthy");
-	foreach(var_05 in var_03)
-	{
+	foreach(var_05 in var_03) {
 		scripts\cp\cp_interaction::remove_from_current_interaction_list(var_05);
 	}
 
-	foreach(var_08 in var_00)
-	{
-		if(var_08 == var_02)
-		{
+	foreach(var_08 in var_00) {
+		if(var_08 == var_02) {
 			continue;
 		}
 		else
@@ -413,8 +347,7 @@ freeze_trap_init()
 	}
 
 	var_0A = scripts\engine\utility::getstruct(var_02.target,"targetname");
-	if(isdefined(var_0A.angles))
-	{
+	if(isdefined(var_0A.angles)) {
 		var_0B = var_0A.angles;
 	}
 	else
@@ -426,33 +359,26 @@ freeze_trap_init()
 	var_02.part.angles = var_0B;
 	var_02.part setmodel("ship_hallway_fuse_box");
 	level thread freeze_trap_panel_fx();
-	foreach(var_05 in var_03)
-	{
+	foreach(var_05 in var_03) {
 		level thread func_13611(var_05);
 	}
 
-	while(!scripts\engine\utility::istrue(var_03[0].powered_on))
-	{
+	while(!scripts\engine\utility::istrue(var_03[0].powered_on)) {
 		wait(0.1);
 	}
 
 	scripts\engine\utility::exploder(75);
 	var_03 = scripts\engine\utility::getstructarray("trap_freeze","script_noteworthy");
-	foreach(var_05 in var_03)
-	{
+	foreach(var_05 in var_03) {
 		var_0F = getent(var_05.target,"targetname");
 		var_0F setmodel("mp_frag_button_on_green");
 	}
 }
 
-//Function Number: 17
-func_13611(param_00)
-{
-	if(scripts\engine\utility::istrue(param_00.requires_power))
-	{
+func_13611(param_00) {
+	if(scripts\engine\utility::istrue(param_00.requires_power)) {
 		var_01 = undefined;
-		if(isdefined(param_00.script_area))
-		{
+		if(isdefined(param_00.script_area)) {
 			var_01 = param_00.script_area;
 		}
 		else
@@ -460,8 +386,7 @@ func_13611(param_00)
 			var_01 = scripts\cp\cp_interaction::get_area_for_power(param_00);
 		}
 
-		if(isdefined(var_01))
-		{
+		if(isdefined(var_01)) {
 			level scripts\engine\utility::waittill_any_3("power_on",var_01 + " power_on");
 		}
 	}
@@ -470,15 +395,10 @@ func_13611(param_00)
 	level notify("power_active");
 }
 
-//Function Number: 18
-check_traps_fixed_merit()
-{
-	if(scripts\engine\utility::istrue(level.traps_fixed_freeze) && scripts\engine\utility::istrue(level.traps_fixed_electric) && scripts\engine\utility::istrue(level.traps_fixed_pool) && scripts\engine\utility::istrue(level.traps_fixed_propane))
-	{
-		if(!scripts\engine\utility::istrue(level.traps_fixed_merit_awarded))
-		{
-			foreach(var_01 in level.players)
-			{
+check_traps_fixed_merit() {
+	if(scripts\engine\utility::istrue(level.traps_fixed_freeze) && scripts\engine\utility::istrue(level.traps_fixed_electric) && scripts\engine\utility::istrue(level.traps_fixed_pool) && scripts\engine\utility::istrue(level.traps_fixed_propane)) {
+		if(!scripts\engine\utility::istrue(level.traps_fixed_merit_awarded)) {
+			foreach(var_01 in level.players) {
 				var_01 scripts\cp\cp_merits::processmerit("mt_dlc3_traps_fixed");
 			}
 
@@ -487,35 +407,26 @@ check_traps_fixed_merit()
 	}
 }
 
-//Function Number: 19
-freeze_trap_panel_fx()
-{
+freeze_trap_panel_fx() {
 	level endon("freeze_trap_fixed");
 	var_00 = scripts\engine\utility::getstruct("fix_freeze_trap","script_noteworthy");
 	var_01 = getent(var_00.target,"targetname");
-	for(;;)
-	{
+	for(;;) {
 		playfx(level._effect["elec_trap_sparks"],var_01.origin);
 		wait(randomintrange(2,6));
 	}
 }
 
-//Function Number: 20
-freeze_trap_fix_hint(param_00,param_01)
-{
-	if(!scripts\engine\utility::flag("freeze_trap_part_taken"))
-	{
+freeze_trap_fix_hint(param_00,param_01) {
+	if(!scripts\engine\utility::flag("freeze_trap_part_taken")) {
 		return level.interaction_hintstrings["fix_freeze_trap"];
 	}
 
 	return level.interaction_hintstrings["replace_freeze_panel"];
 }
 
-//Function Number: 21
-freeze_trap_fix(param_00,param_01)
-{
-	if(!scripts\engine\utility::flag("freeze_trap_part_taken"))
-	{
+freeze_trap_fix(param_00,param_01) {
+	if(!scripts\engine\utility::flag("freeze_trap_part_taken")) {
 		return;
 	}
 
@@ -525,8 +436,7 @@ freeze_trap_fix(param_00,param_01)
 	var_02 setmodel("ship_hallway_fuse_box");
 	playfx(level._effect["elec_trap_sparks"],var_02.origin);
 	var_03 = scripts\engine\utility::getstructarray("trap_freeze","script_noteworthy");
-	foreach(var_05 in var_03)
-	{
+	foreach(var_05 in var_03) {
 		scripts\cp\cp_interaction::add_to_current_interaction_list(var_05);
 	}
 
@@ -539,9 +449,7 @@ freeze_trap_fix(param_00,param_01)
 	taketrapparticon("freeze");
 }
 
-//Function Number: 22
-freeze_trap_take_part(param_00,param_01)
-{
+freeze_trap_take_part(param_00,param_01) {
 	scripts\cp\cp_interaction::remove_from_current_interaction_list(param_00);
 	scripts\engine\utility::flag_set("freeze_trap_part_taken");
 	param_01 playlocalsound("part_pickup");
@@ -550,12 +458,9 @@ freeze_trap_take_part(param_00,param_01)
 	givetrapparticon("freeze");
 }
 
-//Function Number: 23
-freeze_trap_use(param_00,param_01)
-{
+freeze_trap_use(param_00,param_01) {
 	var_02 = scripts\engine\utility::getstructarray("trap_freeze","script_noteworthy");
-	foreach(var_04 in var_02)
-	{
+	foreach(var_04 in var_02) {
 		var_04.cooling_down = 1;
 		var_05 = getent(var_04.target,"targetname");
 		var_05 setmodel("mp_frag_button_on");
@@ -571,17 +476,14 @@ freeze_trap_use(param_00,param_01)
 	wait(25);
 	level notify("end_freeze_trap");
 	wait(300);
-	foreach(var_04 in var_02)
-	{
+	foreach(var_04 in var_02) {
 		var_04.cooling_down = undefined;
 		var_05 = getent(var_04.target,"targetname");
 		var_05 setmodel("mp_frag_button_on_green");
 	}
 }
 
-//Function Number: 24
-freeze_trap_sfx()
-{
+freeze_trap_sfx() {
 	var_00 = scripts\engine\utility::play_loopsound_in_space("town_freezer_trap_wind6_lp",(6102,-507,396));
 	scripts\engine\utility::waitframe();
 	var_01 = scripts\engine\utility::play_loopsound_in_space("town_freezer_trap_wind_lp",(6297,-589,396));
@@ -600,46 +502,36 @@ freeze_trap_sfx()
 	var_02 delete();
 }
 
-//Function Number: 25
-freeze_players()
-{
+freeze_players() {
 	level endon("end_freeze_trap");
-	for(;;)
-	{
+	for(;;) {
 		self waittill("trigger",var_00);
-		if(isdefined(level.elvira_ai) && var_00 == level.elvira_ai)
-		{
+		if(isdefined(level.elvira_ai) && var_00 == level.elvira_ai) {
 			continue;
 		}
 
-		if(isplayer(var_00))
-		{
-			if(!scripts\engine\utility::istrue(var_00.padding_damage))
-			{
+		if(isplayer(var_00)) {
+			if(!scripts\engine\utility::istrue(var_00.padding_damage)) {
 				var_00.padding_damage = 1;
 				var_00 dodamage(10,self.origin,self,self,"MOD_UNKNOWN","iw7_electrictrap_zm");
 				var_00 thread remove_padding_damage();
 			}
 
-			if(!isdefined(var_00.scrnfx))
-			{
+			if(!isdefined(var_00.scrnfx)) {
 				var_00 thread chill_scrnfx();
 			}
 
 			continue;
 		}
 
-		if(!scripts\cp\utility::should_be_affected_by_trap(var_00) || scripts\engine\utility::istrue(var_00.is_turned))
-		{
+		if(!scripts\cp\utility::should_be_affected_by_trap(var_00) || scripts\engine\utility::istrue(var_00.is_turned)) {
 			continue;
 		}
 
-		if(var_00 is_crog())
-		{
+		if(var_00 is_crog()) {
 			continue;
 		}
-		else if(!isdefined(var_00.isfrozen))
-		{
+		else if(!isdefined(var_00.isfrozen)) {
 			var_00.isfrozen = 1;
 			var_00.health = 1;
 			var_00 thread kill_frozen_guys_after_time();
@@ -647,17 +539,13 @@ freeze_players()
 	}
 }
 
-//Function Number: 26
-kill_frozen_guys_after_time()
-{
+kill_frozen_guys_after_time() {
 	self endon("death");
 	wait(randomintrange(3,8));
 	self dodamage(self.health + 100,self.origin);
 }
 
-//Function Number: 27
-chill_scrnfx()
-{
+chill_scrnfx() {
 	self endon("disconnect");
 	self.scrnfx = function_01E1(level._effect["vfx_freezer_frost_scrn"],self geteye(),self);
 	wait(0.1);
@@ -667,22 +555,17 @@ chill_scrnfx()
 	self.scrnfx = undefined;
 }
 
-//Function Number: 28
-pool_trap_init()
-{
+pool_trap_init() {
 	var_00 = scripts\engine\utility::getstructarray("trap_pool_part","script_noteworthy");
 	var_01 = randomint(var_00.size);
 	var_02 = var_00[var_01];
 	var_03 = scripts\engine\utility::getstructarray("trap_pool","script_noteworthy");
-	foreach(var_05 in var_03)
-	{
+	foreach(var_05 in var_03) {
 		scripts\cp\cp_interaction::remove_from_current_interaction_list(var_05);
 	}
 
-	foreach(var_08 in var_00)
-	{
-		if(var_08 == var_02)
-		{
+	foreach(var_08 in var_00) {
+		if(var_08 == var_02) {
 			continue;
 		}
 		else
@@ -692,8 +575,7 @@ pool_trap_init()
 	}
 
 	var_0A = scripts\engine\utility::getstruct(var_02.target,"targetname");
-	if(isdefined(var_0A.angles))
-	{
+	if(isdefined(var_0A.angles)) {
 		var_0B = var_0A.angles;
 	}
 	else
@@ -706,30 +588,23 @@ pool_trap_init()
 	var_02.part setmodel("gas_canister_iw6");
 }
 
-//Function Number: 29
-pool_trap_fix_hint(param_00,param_01)
-{
-	if(!scripts\engine\utility::flag("pool_trap_part_taken"))
-	{
+pool_trap_fix_hint(param_00,param_01) {
+	if(!scripts\engine\utility::flag("pool_trap_part_taken")) {
 		return level.interaction_hintstrings["fix_pool_trap"];
 	}
 
 	return level.interaction_hintstrings["pool_trap_gas"];
 }
 
-//Function Number: 30
-pool_trap_fix(param_00,param_01)
-{
-	if(!scripts\engine\utility::flag("pool_trap_part_taken"))
-	{
+pool_trap_fix(param_00,param_01) {
+	if(!scripts\engine\utility::flag("pool_trap_part_taken")) {
 		return;
 	}
 
 	level notify("pool_trap_fixed");
 	scripts\engine\utility::flag_set("pool_trap_part_added");
 	var_02 = scripts\engine\utility::getstructarray("trap_pool","script_noteworthy");
-	foreach(var_04 in var_02)
-	{
+	foreach(var_04 in var_02) {
 		scripts\cp\cp_interaction::add_to_current_interaction_list(var_04);
 	}
 
@@ -740,9 +615,7 @@ pool_trap_fix(param_00,param_01)
 	taketrapparticon("pool");
 }
 
-//Function Number: 31
-pool_trap_take_part(param_00,param_01)
-{
+pool_trap_take_part(param_00,param_01) {
 	scripts\cp\cp_interaction::remove_from_current_interaction_list(param_00);
 	scripts\engine\utility::flag_set("pool_trap_part_taken");
 	param_01 playlocalsound("part_pickup");
@@ -751,13 +624,10 @@ pool_trap_take_part(param_00,param_01)
 	givetrapparticon("pool");
 }
 
-//Function Number: 32
-pool_trap_use(param_00,param_01)
-{
+pool_trap_use(param_00,param_01) {
 	param_00.cooling_down = 1;
 	level thread generator_sfx();
-	if(isdefined(level.radiation_extraction_interaction))
-	{
+	if(isdefined(level.radiation_extraction_interaction)) {
 		scripts\cp\cp_interaction::remove_from_current_interaction_list(level.radiation_extraction_interaction);
 	}
 
@@ -772,8 +642,7 @@ pool_trap_use(param_00,param_01)
 	wait(25);
 	level notify("end_pool_trap");
 	var_02 stoploopsound();
-	if(isdefined(level.radiation_extraction_interaction))
-	{
+	if(isdefined(level.radiation_extraction_interaction)) {
 		scripts\cp\cp_interaction::add_to_current_interaction_list(level.radiation_extraction_interaction);
 	}
 
@@ -782,9 +651,7 @@ pool_trap_use(param_00,param_01)
 	param_00.cooling_down = undefined;
 }
 
-//Function Number: 33
-generator_sfx()
-{
+generator_sfx() {
 	scripts\cp\utility::playsoundinspace("town_electric_trap_gen_power_up",(488,-714,460));
 	wait(1);
 	var_00 = spawn("script_origin",(488,-714,460));
@@ -795,22 +662,17 @@ generator_sfx()
 	var_00 stoploopsound("town_electric_trap_gen_on_lp");
 }
 
-//Function Number: 34
-pool_dmg_players(param_00)
-{
+pool_dmg_players(param_00) {
 	level endon("end_pool_trap");
 	var_01 = gettime();
 	var_02 = getent("pool_dmg","targetname");
-	for(;;)
-	{
+	for(;;) {
 		var_02 waittill("trigger",var_03);
-		if(isdefined(level.elvira_ai) && var_03 == level.elvira_ai)
-		{
+		if(isdefined(level.elvira_ai) && var_03 == level.elvira_ai) {
 			continue;
 		}
 
-		if(isplayer(var_03) && isalive(var_03) && !scripts\cp\cp_laststand::player_in_laststand(var_03) && !isdefined(var_03.padding_damage))
-		{
+		if(isplayer(var_03) && isalive(var_03) && !scripts\cp\cp_laststand::player_in_laststand(var_03) && !isdefined(var_03.padding_damage)) {
 			playsoundatpos(var_03.origin,"trap_electric_shock");
 			playfxontagforclients(level._effect["electric_shock_plyr"],var_03,"tag_eye",var_03);
 			var_03.padding_damage = 1;
@@ -819,18 +681,15 @@ pool_dmg_players(param_00)
 			continue;
 		}
 
-		if(scripts\engine\utility::istrue(var_03.is_turned) || !scripts\cp\utility::should_be_affected_by_trap(var_03,0,1))
-		{
+		if(scripts\engine\utility::istrue(var_03.is_turned) || !scripts\cp\utility::should_be_affected_by_trap(var_03,0,1)) {
 			continue;
 		}
 
-		if(var_03 is_crog())
-		{
+		if(var_03 is_crog()) {
 			continue;
 		}
 
-		if(gettime() > var_01 + 1000)
-		{
+		if(gettime() > var_01 + 1000) {
 			playsoundatpos(var_03.origin,"trap_electric_shock");
 			var_01 = gettime();
 		}
@@ -840,17 +699,14 @@ pool_dmg_players(param_00)
 	}
 }
 
-//Function Number: 35
-pool_damage_zombie(param_00,param_01)
-{
+pool_damage_zombie(param_00,param_01) {
 	param_00 endon("death");
 	wait(randomfloatrange(1,4));
 	param_00.marked_for_death = 1;
 	param_00.dontmutilate = 1;
 	param_00.electrocuted = 1;
 	param_00 setscriptablepartstate("electrocuted","on");
-	if(param_01 scripts\cp\utility::is_valid_player(1))
-	{
+	if(param_01 scripts\cp\utility::is_valid_player(1)) {
 		var_02 = param_01;
 	}
 	else
@@ -862,22 +718,17 @@ pool_damage_zombie(param_00,param_01)
 	param_00 dodamage(param_00.health + 100,param_00.origin,var_02,var_02,"MOD_UNKNOWN","iw7_electrictrap_zm");
 }
 
-//Function Number: 36
-propane_trap_init()
-{
+propane_trap_init() {
 	var_00 = scripts\engine\utility::getstructarray("trap_propane_part","script_noteworthy");
 	var_01 = randomint(var_00.size);
 	var_02 = var_00[var_01];
 	var_03 = scripts\engine\utility::getstructarray("trap_propane","script_noteworthy");
-	foreach(var_05 in var_03)
-	{
+	foreach(var_05 in var_03) {
 		scripts\cp\cp_interaction::remove_from_current_interaction_list(var_05);
 	}
 
-	foreach(var_08 in var_00)
-	{
-		if(var_08 == var_02)
-		{
+	foreach(var_08 in var_00) {
+		if(var_08 == var_02) {
 			continue;
 		}
 		else
@@ -887,8 +738,7 @@ propane_trap_init()
 	}
 
 	var_0A = scripts\engine\utility::getstruct(var_02.target,"targetname");
-	if(isdefined(var_0A.angles))
-	{
+	if(isdefined(var_0A.angles)) {
 		var_0B = var_0A.angles;
 	}
 	else
@@ -901,30 +751,23 @@ propane_trap_init()
 	var_02.part setmodel("cp_town_pipe_t_valve");
 }
 
-//Function Number: 37
-propane_trap_fix_hint(param_00,param_01)
-{
-	if(!scripts\engine\utility::flag("propane_trap_part_taken"))
-	{
+propane_trap_fix_hint(param_00,param_01) {
+	if(!scripts\engine\utility::flag("propane_trap_part_taken")) {
 		return level.interaction_hintstrings["fix_propane_trap"];
 	}
 
 	return level.interaction_hintstrings["propane_trap_attach_hose"];
 }
 
-//Function Number: 38
-propane_trap_fix(param_00,param_01)
-{
-	if(!scripts\engine\utility::flag("propane_trap_part_taken"))
-	{
+propane_trap_fix(param_00,param_01) {
+	if(!scripts\engine\utility::flag("propane_trap_part_taken")) {
 		return;
 	}
 
 	level notify("propane_trap_fixed");
 	scripts\engine\utility::flag_set("propane_trap_part_added");
 	var_02 = scripts\engine\utility::getstructarray("trap_propane","script_noteworthy");
-	foreach(var_04 in var_02)
-	{
+	foreach(var_04 in var_02) {
 		scripts\cp\cp_interaction::add_to_current_interaction_list(var_04);
 	}
 
@@ -940,9 +783,7 @@ propane_trap_fix(param_00,param_01)
 	taketrapparticon("propane");
 }
 
-//Function Number: 39
-propane_trap_take_part(param_00,param_01)
-{
+propane_trap_take_part(param_00,param_01) {
 	scripts\cp\cp_interaction::remove_from_current_interaction_list(param_00);
 	scripts\engine\utility::flag_set("propane_trap_part_taken");
 	param_01 playlocalsound("part_pickup");
@@ -951,13 +792,10 @@ propane_trap_take_part(param_00,param_01)
 	givetrapparticon("propane");
 }
 
-//Function Number: 40
-propane_trap_use(param_00,param_01)
-{
+propane_trap_use(param_00,param_01) {
 	param_00.cooling_down = 1;
 	var_02 = scripts\engine\utility::getstruct("propane_tank_fx","targetname");
-	if(!isdefined(var_02))
-	{
+	if(!isdefined(var_02)) {
 		var_02 = spawnstruct();
 		var_02.origin = (831.5,3601,440);
 		var_02.angles = (330.478,214.339,-63.6374);
@@ -975,9 +813,7 @@ propane_trap_use(param_00,param_01)
 	param_00.cooling_down = undefined;
 }
 
-//Function Number: 41
-propane_trap_sfx()
-{
+propane_trap_sfx() {
 	level thread scripts\engine\utility::play_sound_in_space("town_propane_tank_turn_valve",(1002,3536,456));
 	var_00 = scripts\engine\utility::play_loopsound_in_space("town_propane_tank_air_lp",(1002,3536,456));
 	wait(0.9);
@@ -999,21 +835,16 @@ propane_trap_sfx()
 	var_00 delete();
 }
 
-//Function Number: 42
-propane_dmg_players(param_00,param_01)
-{
+propane_dmg_players(param_00,param_01) {
 	level endon("end_propane_trap");
 	var_02 = getent("propane_dmg_trig","targetname");
-	for(;;)
-	{
+	for(;;) {
 		var_02 waittill("trigger",var_03);
-		if(isdefined(level.elvira_ai) && var_03 == level.elvira_ai)
-		{
+		if(isdefined(level.elvira_ai) && var_03 == level.elvira_ai) {
 			continue;
 		}
 
-		if(isplayer(var_03) && isalive(var_03) && !scripts\cp\cp_laststand::player_in_laststand(var_03) && !isdefined(var_03.padding_damage))
-		{
+		if(isplayer(var_03) && isalive(var_03) && !scripts\cp\cp_laststand::player_in_laststand(var_03) && !isdefined(var_03.padding_damage)) {
 			playfxontagforclients(level._effect["player_scr_fire"],var_03,"tag_eye",var_03);
 			var_03.padding_damage = 1;
 			var_03 dodamage(20,param_01.origin + (0,0,30),var_02,var_02,"MOD_UNKNOWN","iw7_electrictrap_zm");
@@ -1021,13 +852,11 @@ propane_dmg_players(param_00,param_01)
 			continue;
 		}
 
-		if(scripts\engine\utility::istrue(var_03.is_turned) || !scripts\cp\utility::should_be_affected_by_trap(var_03,0,1))
-		{
+		if(scripts\engine\utility::istrue(var_03.is_turned) || !scripts\cp\utility::should_be_affected_by_trap(var_03,0,1)) {
 			continue;
 		}
 
-		if(var_03 is_crog())
-		{
+		if(var_03 is_crog()) {
 			continue;
 		}
 
@@ -1037,17 +866,14 @@ propane_dmg_players(param_00,param_01)
 	}
 }
 
-//Function Number: 43
-propane_damage_zombie(param_00,param_01)
-{
+propane_damage_zombie(param_00,param_01) {
 	param_00 endon("death");
 	wait(randomfloatrange(1,4));
 	param_00.marked_for_death = 1;
 	param_00.dontmutilate = 1;
 	param_00.is_burning = 1;
 	param_00 setscriptablepartstate("burning","active");
-	if(param_01 scripts\cp\utility::is_valid_player(1))
-	{
+	if(param_01 scripts\cp\utility::is_valid_player(1)) {
 		var_02 = param_01;
 	}
 	else
@@ -1059,9 +885,7 @@ propane_damage_zombie(param_00,param_01)
 	param_00 dodamage(param_00.health + 100,param_00.origin,var_02,var_02,"MOD_UNKNOWN","iw7_electrictrap_zm");
 }
 
-//Function Number: 44
-elvira_trap_use(param_00,param_01)
-{
+elvira_trap_use(param_00,param_01) {
 	param_00.cooling_down = 1;
 	param_01 check_for_trap_master_achievement("elvira");
 	var_02 = getent(param_00.target,"targetname");
@@ -1079,45 +903,35 @@ elvira_trap_use(param_00,param_01)
 	param_00.cooling_down = undefined;
 }
 
-//Function Number: 45
-elvira_trap_sound(param_00)
-{
+elvira_trap_sound(param_00) {
 	level endon("end_elvira_trap");
-	for(;;)
-	{
+	for(;;) {
 		playsoundatpos(param_00,"town_door_spear_close");
 		wait(1);
 	}
 }
 
-//Function Number: 46
-elvira_trap_dmg(param_00)
-{
+elvira_trap_dmg(param_00) {
 	level endon("end_elvira_trap");
 	var_01 = getent("elvira_trap_trig","targetname");
-	for(;;)
-	{
+	for(;;) {
 		var_01 waittill("trigger",var_02);
-		if(isdefined(level.elvira_ai) && var_02 == level.elvira_ai)
-		{
+		if(isdefined(level.elvira_ai) && var_02 == level.elvira_ai) {
 			continue;
 		}
 
-		if(isplayer(var_02) && isalive(var_02) && !scripts\cp\cp_laststand::player_in_laststand(var_02) && !isdefined(var_02.padding_damage))
-		{
+		if(isplayer(var_02) && isalive(var_02) && !scripts\cp\cp_laststand::player_in_laststand(var_02) && !isdefined(var_02.padding_damage)) {
 			var_02.padding_damage = 1;
 			var_02 dodamage(20,var_01.origin,var_01,var_01,"MOD_UNKNOWN","iw7_electrictrap_zm");
 			var_02 thread remove_padding_damage();
 			continue;
 		}
 
-		if(scripts\engine\utility::istrue(var_02.is_turned) || !scripts\cp\utility::should_be_affected_by_trap(var_02,0,1))
-		{
+		if(scripts\engine\utility::istrue(var_02.is_turned) || !scripts\cp\utility::should_be_affected_by_trap(var_02,0,1)) {
 			continue;
 		}
 
-		if(var_02 is_crog())
-		{
+		if(var_02 is_crog()) {
 			continue;
 		}
 
@@ -1127,16 +941,13 @@ elvira_trap_dmg(param_00)
 	}
 }
 
-//Function Number: 47
-elvira_trap_damage_zombie(param_00,param_01)
-{
+elvira_trap_damage_zombie(param_00,param_01) {
 	param_00 endon("death");
 	param_00.marked_for_death = 1;
 	param_00.full_gib = 1;
 	param_00.customdeath = 1;
 	param_00.nocorpse = 1;
-	if(param_01 scripts\cp\utility::is_valid_player(1))
-	{
+	if(param_01 scripts\cp\utility::is_valid_player(1)) {
 		var_02 = param_01;
 	}
 	else
@@ -1148,13 +959,10 @@ elvira_trap_damage_zombie(param_00,param_01)
 	param_00 dodamage(param_00.health + 100,param_00.origin,var_02,var_02,"MOD_UNKNOWN","iw7_electrictrap_zm");
 }
 
-//Function Number: 48
-init_elvira_trap()
-{
+init_elvira_trap() {
 	var_00 = scripts\engine\utility::getstruct("elvira_trap","script_noteworthy");
 	var_01 = undefined;
-	if(isdefined(var_00.script_area))
-	{
+	if(isdefined(var_00.script_area)) {
 		var_01 = var_00.script_area;
 	}
 	else
@@ -1162,8 +970,7 @@ init_elvira_trap()
 		var_01 = scripts\cp\cp_interaction::get_area_for_power(var_00);
 	}
 
-	if(isdefined(var_01))
-	{
+	if(isdefined(var_01)) {
 		level scripts\engine\utility::waittill_any_3("power_on",var_01 + " power_on");
 	}
 
@@ -1172,12 +979,9 @@ init_elvira_trap()
 	var_02 setmodel("mp_frag_button_on_green");
 }
 
-//Function Number: 49
-taketrapparticon(param_00)
-{
+taketrapparticon(param_00) {
 	var_01 = 0;
-	switch(param_00)
-	{
+	switch(param_00) {
 		case "electric":
 			var_01 = 6;
 			break;
@@ -1202,21 +1006,16 @@ taketrapparticon(param_00)
 			break;
 	}
 
-	if(var_01 > 0)
-	{
-		foreach(var_03 in level.players)
-		{
+	if(var_01 > 0) {
+		foreach(var_03 in level.players) {
 			var_03 setclientomnvarbit("zm_charms_active",var_01,0);
 		}
 	}
 }
 
-//Function Number: 50
-givetrapparticon(param_00)
-{
+givetrapparticon(param_00) {
 	var_01 = 0;
-	switch(param_00)
-	{
+	switch(param_00) {
 		case "electric":
 			var_01 = 6;
 			break;
@@ -1241,8 +1040,7 @@ givetrapparticon(param_00)
 			break;
 	}
 
-	foreach(var_03 in level.players)
-	{
+	foreach(var_03 in level.players) {
 		var_03 setclientomnvarbit("zm_charms_active",var_01,1);
 	}
 }

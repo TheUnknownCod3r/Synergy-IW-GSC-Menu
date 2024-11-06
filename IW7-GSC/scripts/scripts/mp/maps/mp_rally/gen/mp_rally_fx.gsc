@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\mp\maps\mp_rally\gen\mp_rally_fx.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 1
- * Decompile Time: 340 ms
- * Timestamp: 10/27/2023 12:14:10 AM
-*******************************************************************/
+/****************************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\mp\maps\mp_rally\gen\mp_rally_fx.gsc
+****************************************************************/
 
-//Function Number: 1
-main()
-{
+main() {
 	var_00 = scripts\common\utility::func_49FA("vfx_grnd_heat_distort");
 	var_00 scripts\common\createfx::func_F4AD((999.238,-1147.9,0),(0,0,0));
 	var_00.var_13125["fxid"] = "vfx_grnd_heat_distort";

@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\mp\maps\mp_flip\mp_flip_fx.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 1
- * Decompile Time: 92 ms
- * Timestamp: 10/27/2023 12:13:31 AM
-*******************************************************************/
+/**********************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\mp\maps\mp_flip\mp_flip_fx.gsc
+**********************************************************/
 
-//Function Number: 1
-main()
-{
+main() {
 	level._effect["vfx_stream_thin_splashes2"] = loadfx("vfx/iw7/levels/mp_flip/vfx_stream_thin_splashes2.vfx");
 	level._effect["vfx_stream_thin_splashes"] = loadfx("vfx/iw7/levels/mp_flip/vfx_stream_thin_splashes.vfx");
 	level._effect["vfx_stream_spout_base"] = loadfx("vfx/iw7/levels/mp_flip/vfx_stream_spout_base.vfx");

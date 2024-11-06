@@ -1,30 +1,20 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: 3352.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 17
- * Decompile Time: 3 ms
- * Timestamp: 10/27/2023 12:26:44 AM
-*******************************************************************/
+/****************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\3352.gsc
+****************************/
 
-//Function Number: 1
-setrewind()
-{
+setrewind() {
 	thread func_13A62();
 }
 
-//Function Number: 2
-unsetrewind()
-{
+unsetrewind() {
 	self notify("rewindUnset");
 	self setscriptablepartstate("rewind","neutral",0);
 	thread func_E163();
 }
 
-//Function Number: 3
-func_10DEB()
-{
+func_10DEB() {
 	self endon("disconnect");
 	self setscriptablepartstate("rewind","activeStart",0);
 	self.ability_invulnerable = 1;
@@ -38,10 +28,8 @@ func_10DEB()
 	self notify("cancel_ims");
 	self notify("cancel_gascan");
 	scripts\engine\utility::waitframe();
-	foreach(var_01 in level.players)
-	{
-		if(var_01 == self)
-		{
+	foreach(var_01 in level.players) {
+		if(var_01 == self) {
 			continue;
 		}
 
@@ -54,22 +42,17 @@ func_10DEB()
 	restrictfunctionality();
 }
 
-//Function Number: 4
-delayed_unset_damage_modifier()
-{
+delayed_unset_damage_modifier() {
 	self endon("disconnect");
 	wait(2);
 	self.ability_invulnerable = undefined;
 	scripts\cp\utility::removedamagemodifier("rewind",0);
 }
 
-//Function Number: 5
-func_637E()
-{
+func_637E() {
 	self setscriptablepartstate("rewind","activeEnd",0);
 	scripts\engine\utility::waitframe();
-	if(!self isonground())
-	{
+	if(!self isonground()) {
 		self.flung = 1;
 		self limitedmovement(1);
 		thread func_12CE7();
@@ -81,12 +64,9 @@ func_637E()
 	func_E163();
 }
 
-//Function Number: 6
-func_12CE7()
-{
+func_12CE7() {
 	self endon("disconnect");
-	while(!self isonground() && isalive(self))
-	{
+	while(!self isonground() && isalive(self)) {
 		wait(0.05);
 	}
 
@@ -94,22 +74,17 @@ func_12CE7()
 	self limitedmovement(0);
 }
 
-//Function Number: 7
-func_E163()
-{
+func_E163() {
 	self.isrewinding = undefined;
 	self.ability_invulnerable = undefined;
 	scripts\cp\utility::removedamagemodifier("rewind",0);
-	if(!scripts\engine\utility::isusabilityallowed())
-	{
+	if(!scripts\engine\utility::isusabilityallowed()) {
 		scripts\engine\utility::allow_usability(1);
 	}
 
 	self playanimscriptevent("power_exit","rewind");
-	foreach(var_01 in level.players)
-	{
-		if(var_01 == self)
-		{
+	foreach(var_01 in level.players) {
+		if(var_01 == self) {
 			continue;
 		}
 
@@ -120,15 +95,12 @@ func_E163()
 	restorefunctionality();
 }
 
-//Function Number: 8
-func_13A62()
-{
+func_13A62() {
 	self endon("disconnect");
 	self endon("rewindUnset");
 	self notify("watchForRewind");
 	self endon("watchForRewind");
-	for(;;)
-	{
+	for(;;) {
 		var_00 = spawnstruct();
 		childthread func_13A66(var_00);
 		childthread func_13A64(var_00);
@@ -136,20 +108,16 @@ func_13A62()
 		childthread func_13A65(var_00);
 		self waittill("rewindBeginRace");
 		waittillframeend;
-		if(isdefined(var_00.var_6ACF))
-		{
+		if(isdefined(var_00.var_6ACF)) {
 			scripts\cp\powers\coop_powers::power_adjustcharges(1,"secondary");
 		}
-		else if(isdefined(var_00.var_10DE6) && isdefined(var_00.var_4E59))
-		{
+		else if(isdefined(var_00.var_10DE6) && isdefined(var_00.var_4E59)) {
 			scripts\cp\powers\coop_powers::power_adjustcharges(1,"secondary");
 		}
-		else if(isdefined(var_00.var_637B))
-		{
+		else if(isdefined(var_00.var_637B)) {
 			func_637E();
 		}
-		else if(isdefined(var_00.var_10DE6))
-		{
+		else if(isdefined(var_00.var_10DE6)) {
 			func_10DEB();
 		}
 
@@ -157,18 +125,14 @@ func_13A62()
 	}
 }
 
-//Function Number: 9
-func_13A66(param_00)
-{
+func_13A66(param_00) {
 	self endon("rewindEndRace");
 	self waittill("rewindStart");
 	param_00.var_10DE6 = 1;
 	self notify("rewindBeginRace");
 }
 
-//Function Number: 10
-func_13A64(param_00)
-{
+func_13A64(param_00) {
 	self endon("rewindEndRace");
 	self waittill("rewindEnd");
 	param_00.var_637B = 1;
@@ -176,18 +140,14 @@ func_13A64(param_00)
 	self notify("powers_rewind_used",1);
 }
 
-//Function Number: 11
-func_13A63(param_00)
-{
+func_13A63(param_00) {
 	self endon("rewindEndRace");
 	self waittill("death");
 	param_00.var_4E59 = 1;
 	self notify("rewindBeginRace");
 }
 
-//Function Number: 12
-func_13A65(param_00)
-{
+func_13A65(param_00) {
 	self endon("rewindEndRace");
 	self waittill("rewindFailed");
 	param_00.var_6ACF = 1;
@@ -195,21 +155,15 @@ func_13A65(param_00)
 	self notify("powers_rewind_used",0);
 }
 
-//Function Number: 13
-func_E4D5()
-{
+func_E4D5() {
 	var_00 = self.maxhealth - self.health;
 	self.health = self.maxhealth;
 }
 
-//Function Number: 14
-func_E4C7()
-{
+func_E4C7() {
 	var_00 = self getweaponslistprimaries();
-	foreach(var_02 in var_00)
-	{
-		if(scripts\cp\utility::is_melee_weapon(var_02))
-		{
+	foreach(var_02 in var_00) {
+		if(scripts\cp\utility::is_melee_weapon(var_02)) {
 			continue;
 		}
 
@@ -223,11 +177,8 @@ func_E4C7()
 	}
 }
 
-//Function Number: 15
-restrictfunctionality()
-{
-	if(scripts\engine\utility::istrue(self.rewindrestrictedfunctionality))
-	{
+restrictfunctionality() {
+	if(scripts\engine\utility::istrue(self.rewindrestrictedfunctionality)) {
 		return;
 	}
 
@@ -238,34 +189,26 @@ restrictfunctionality()
 	thread restrictfunctionalitycleanup();
 }
 
-//Function Number: 16
-restorefunctionality()
-{
-	if(!scripts\engine\utility::istrue(self.rewindrestrictedfunctionality))
-	{
+restorefunctionality() {
+	if(!scripts\engine\utility::istrue(self.rewindrestrictedfunctionality)) {
 		return;
 	}
 
 	self.rewindrestrictedfunctionality = undefined;
-	if(!scripts\engine\utility::isweaponswitchallowed())
-	{
+	if(!scripts\engine\utility::isweaponswitchallowed()) {
 		scripts\engine\utility::allow_weapon_switch(1);
 	}
 
-	if(!scripts\engine\utility::isusabilityallowed())
-	{
+	if(!scripts\engine\utility::isusabilityallowed()) {
 		scripts\engine\utility::allow_usability(1);
 	}
 
-	if(!scripts\cp\utility::isteleportenabled())
-	{
+	if(!scripts\cp\utility::isteleportenabled()) {
 		scripts\cp\utility::allow_player_teleport(1);
 	}
 }
 
-//Function Number: 17
-restrictfunctionalitycleanup()
-{
+restrictfunctionalitycleanup() {
 	self endon("disconnect");
 	self endon("rewindUnset");
 	self notify("rewindRestrictFunctionalityCleanup");

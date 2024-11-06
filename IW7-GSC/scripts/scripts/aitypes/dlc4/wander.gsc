@@ -1,18 +1,11 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\aitypes\dlc4\wander.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 4
- * Decompile Time: 181 ms
- * Timestamp: 10\26\2023 11:58:40 PM
-*******************************************************************/
+/***************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\aitypes\dlc4\wander.gsc
+***************************************************/
 
-//Function Number: 1
-findrandomnavpoint(param_00,param_01)
-{
-	if(!isdefined(param_00) || !isdefined(param_01))
-	{
+findrandomnavpoint(param_00,param_01) {
+	if(!isdefined(param_00) || !isdefined(param_01)) {
 		param_00 = 300;
 		param_01 = 1200;
 	}
@@ -28,19 +21,16 @@ findrandomnavpoint(param_00,param_01)
 	var_06[3] = var_05;
 	var_06 = scripts\common\utility::array_randomize(var_06);
 	var_07 = param_00 * 2;
-	foreach(var_09 in var_06)
-	{
+	foreach(var_09 in var_06) {
 		var_0A = self.origin + var_09 * var_07;
 		var_0A = getclosestpointonnavmesh(var_0A);
 		var_0B = getrandomnavpoint(var_0A,param_00);
-		if(!isdefined(var_0B))
-		{
+		if(!isdefined(var_0B)) {
 			continue;
 		}
 
 		var_0C = distancesquared(var_0B,self.origin);
-		if(var_0C > param_00 * param_00)
-		{
+		if(var_0C > param_00 * param_00) {
 			return var_0B;
 		}
 	}
@@ -48,14 +38,11 @@ findrandomnavpoint(param_00,param_01)
 	return undefined;
 }
 
-//Function Number: 2
-wander_begin(param_00)
-{
+wander_begin(param_00) {
 	self.var_3135.instancedata[param_00] = spawnstruct();
 	self clearpath();
 	var_01 = scripts\asm\dlc4\dlc4_asm::gettunedata();
-	if(isdefined(var_01.wander_goal_radius))
-	{
+	if(isdefined(var_01.wander_goal_radius)) {
 		self.var_3135.instancedata[param_00].wandergoalradiussq = var_01.wander_goal_radius * var_01.wander_goal_radius;
 		return;
 	}
@@ -63,35 +50,28 @@ wander_begin(param_00)
 	self.var_3135.instancedata[param_00].wandergoalradiussq = 4096;
 }
 
-//Function Number: 3
-wander_tick(param_00)
-{
+wander_tick(param_00) {
 	var_01 = scripts\asm\dlc4\dlc4_asm::getenemy();
-	if(isdefined(var_01))
-	{
+	if(isdefined(var_01)) {
 		return level.success;
 	}
 
 	var_02 = scripts\aitypes\dlc4\bt_state_api::btstate_getinstancedata(param_00);
-	if(isdefined(self.vehicle_getspawnerarray) && distancesquared(self.vehicle_getspawnerarray,self.origin) > var_02.wandergoalradiussq)
-	{
+	if(isdefined(self.vehicle_getspawnerarray) && distancesquared(self.vehicle_getspawnerarray,self.origin) > var_02.wandergoalradiussq) {
 		return level.running;
 	}
 
-	if(!isdefined(var_02.var_13845))
-	{
+	if(!isdefined(var_02.var_13845)) {
 		var_03 = scripts\asm\dlc4\dlc4_asm::gettunedata();
 		var_02.var_13845 = gettime() + randomintrange(var_03.wander_min_wait_time_ms,var_03.wander_max_wait_time_ms);
 		return level.running;
 	}
-	else if(gettime() < var_03.var_13845)
-	{
+	else if(gettime() < var_03.var_13845) {
 		return level.running;
 	}
 
 	var_04 = findrandomnavpoint();
-	if(!isdefined(var_04))
-	{
+	if(!isdefined(var_04)) {
 		var_03.var_13845 = gettime() + 150;
 		return level.running;
 	}
@@ -101,8 +81,6 @@ wander_tick(param_00)
 	return level.running;
 }
 
-//Function Number: 4
-wander_end(param_00)
-{
+wander_end(param_00) {
 	self.var_3135.instancedata[param_00] = undefined;
 }

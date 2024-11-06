@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\mp\agents\elvira\elvira_agent.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 16
- * Decompile Time: 854 ms
- * Timestamp: 10/27/2023 12:11:15 AM
-*******************************************************************/
+/*************************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\mp\agents\elvira\elvira_agent.gsc
+*************************************************************/
 
-//Function Number: 1
-registerscriptedagent()
-{
+registerscriptedagent() {
 	scripts/aitypes/bt_util::init();
 	behaviortree\elvira::func_DEE8();
 	scripts\asm\elvira\mp\states::func_2371();
@@ -18,17 +12,13 @@ registerscriptedagent()
 	thread func_FAB0();
 }
 
-//Function Number: 2
-func_FAB0()
-{
+func_FAB0() {
 	level endon("game_ended");
-	if(!isdefined(level.agent_definition))
-	{
+	if(!isdefined(level.agent_definition)) {
 		level waittill("scripted_agents_initialized");
 	}
 
-	if(!isdefined(level.species_funcs))
-	{
+	if(!isdefined(level.species_funcs)) {
 		level.species_funcs = [];
 	}
 
@@ -37,15 +27,11 @@ func_FAB0()
 	level.agent_definition["elvira"]["setup_model_func"] = ::func_FACE;
 }
 
-//Function Number: 3
-func_FACE(param_00)
-{
+func_FACE(param_00) {
 	self setmodel("fullbody_zmb_hero_elvira");
 }
 
-//Function Number: 4
-setupagent()
-{
+setupagent() {
 	self.accuracy = 0.8;
 	self.noattackeraccuracymod = 0;
 	self.sharpturnnotifydist = 48;
@@ -79,38 +65,27 @@ setupagent()
 	thread elviracleanup();
 }
 
-//Function Number: 5
-elviracleanup()
-{
+elviracleanup() {
 	self waittill("death");
 	level.the_hoff_revive = undefined;
 }
 
-//Function Number: 6
-func_FAFE()
-{
+func_FAFE() {
 	self.targetcrawlerfunction = ::func_11562;
 	self.targetingfunctions = [::func_11562,::func_11559,::func_1156F,::func_1157B,::func_11570];
 	self.targetingfunctionchances = [0,47,21,21,11];
 }
 
-//Function Number: 7
-func_899D()
-{
+func_899D() {
 	self endon("death");
-	for(;;)
-	{
+	for(;;) {
 		self waittill("enemy");
-		for(;;)
-		{
-			if(isdefined(self.isnodeoccupied))
-			{
+		for(;;) {
+			if(isdefined(self.isnodeoccupied)) {
 				self.var_6571 = gettime() + 1000;
 			}
-			else if(isdefined(self.var_6571))
-			{
-				if(gettime() > self.var_6571)
-				{
+			else if(isdefined(self.var_6571)) {
+				if(gettime() > self.var_6571) {
 					self.var_6571 = undefined;
 					break;
 				}
@@ -121,13 +96,10 @@ func_899D()
 	}
 }
 
-//Function Number: 8
-func_11570()
-{
+func_11570() {
 	var_00 = 70;
 	var_01 = 15;
-	if(isdefined(self.isnodeoccupied.var_18F4))
-	{
+	if(isdefined(self.isnodeoccupied.var_18F4)) {
 		var_00 = self.isnodeoccupied.var_18F4;
 		var_01 = self.isnodeoccupied.var_18F9;
 	}
@@ -142,13 +114,10 @@ func_11570()
 	return var_08;
 }
 
-//Function Number: 9
-func_1157B()
-{
+func_1157B() {
 	var_00 = 70;
 	var_01 = 15;
-	if(isdefined(self.isnodeoccupied.var_18F4))
-	{
+	if(isdefined(self.isnodeoccupied.var_18F4)) {
 		var_00 = self.isnodeoccupied.var_18F4;
 		var_01 = self.isnodeoccupied.var_18F9;
 	}
@@ -161,13 +130,10 @@ func_1157B()
 	return var_06;
 }
 
-//Function Number: 10
-func_1156F()
-{
+func_1156F() {
 	var_00 = 70;
 	var_01 = 15;
-	if(isdefined(self.isnodeoccupied.var_18F4))
-	{
+	if(isdefined(self.isnodeoccupied.var_18F4)) {
 		var_00 = self.isnodeoccupied.var_18F4;
 		var_01 = self.isnodeoccupied.var_18F9;
 	}
@@ -180,13 +146,10 @@ func_1156F()
 	return var_06;
 }
 
-//Function Number: 11
-func_11559()
-{
+func_11559() {
 	var_00 = 70;
 	var_01 = 15;
-	if(isdefined(self.isnodeoccupied.var_18F4))
-	{
+	if(isdefined(self.isnodeoccupied.var_18F4)) {
 		var_00 = self.isnodeoccupied.var_18F4;
 		var_01 = self.isnodeoccupied.var_18F9;
 	}
@@ -201,31 +164,23 @@ func_11559()
 	return var_08;
 }
 
-//Function Number: 12
-func_11562()
-{
+func_11562() {
 	var_00 = self.isnodeoccupied gettagorigin("j_head");
 	return var_00;
 }
 
-//Function Number: 13
-picktargetingfunction()
-{
-	if(isdefined(self.isnodeoccupied) && isdefined(self.isnodeoccupied.dismember_crawl) && self.isnodeoccupied.dismember_crawl)
-	{
-		if(isdefined(self.targetcrawlerfunction))
-		{
+picktargetingfunction() {
+	if(isdefined(self.isnodeoccupied) && isdefined(self.isnodeoccupied.dismember_crawl) && self.isnodeoccupied.dismember_crawl) {
+		if(isdefined(self.targetcrawlerfunction)) {
 			return self.targetcrawlerfunction;
 		}
 	}
 
 	var_00 = 0;
 	var_01 = randomint(100);
-	for(var_02 = 0;var_02 < self.targetingfunctionchances.size;var_02++)
-	{
+	for(var_02 = 0;var_02 < self.targetingfunctionchances.size;var_02++) {
 		var_03 = self.targetingfunctionchances[var_02];
-		if(var_01 < var_03 + var_00)
-		{
+		if(var_01 < var_03 + var_00) {
 			return self.targetingfunctions[var_02];
 		}
 
@@ -235,25 +190,19 @@ picktargetingfunction()
 	return undefined;
 }
 
-//Function Number: 14
-func_7E8E()
-{
+func_7E8E() {
 	var_00 = self.isnodeoccupied gettagorigin("j_head");
 	return var_00;
 }
 
-//Function Number: 15
-getdefaultenemychestpos()
-{
-	if(scripts\engine\utility::istrue(self.dismember_crawl))
-	{
+getdefaultenemychestpos() {
+	if(scripts\engine\utility::istrue(self.dismember_crawl)) {
 		return func_7E8E();
 	}
 
 	var_00 = 70;
 	var_01 = 15;
-	if(isdefined(self.isnodeoccupied.var_18F4))
-	{
+	if(isdefined(self.isnodeoccupied.var_18F4)) {
 		var_00 = self.isnodeoccupied.var_18F4;
 		var_01 = self.isnodeoccupied.var_18F9;
 	}
@@ -264,8 +213,6 @@ getdefaultenemychestpos()
 	return var_04;
 }
 
-//Function Number: 16
-getenemy()
-{
+getenemy() {
 	return self.isnodeoccupied;
 }

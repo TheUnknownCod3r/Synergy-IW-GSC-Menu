@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\mp\maps\mp_flip\gen\mp_flip_fx.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 1
- * Decompile Time: 219 ms
- * Timestamp: 10/27/2023 12:13:29 AM
-*******************************************************************/
+/**************************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\mp\maps\mp_flip\gen\mp_flip_fx.gsc
+**************************************************************/
 
-//Function Number: 1
-main()
-{
+main() {
 	var_00 = scripts\common\utility::func_49FA("vfx_flip_spotlight");
 	var_00 scripts\common\createfx::func_F4AD((1085.65,-738.109,261.092),(299.1,229,0));
 	var_00.var_13125["fxid"] = "vfx_flip_spotlight";

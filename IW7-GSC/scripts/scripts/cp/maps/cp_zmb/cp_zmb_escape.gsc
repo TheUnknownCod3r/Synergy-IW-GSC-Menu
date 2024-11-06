@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\cp\maps\cp_zmb\cp_zmb_escape.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 11
- * Decompile Time: 703 ms
- * Timestamp: 10/27/2023 12:08:13 AM
-*******************************************************************/
+/************************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\cp\maps\cp_zmb\cp_zmb_escape.gsc
+************************************************************/
 
-//Function Number: 1
-cp_zmb_escape_init()
-{
+cp_zmb_escape_init() {
 	level.interactions_disabled = 1;
 	scripts\cp\utility::coop_mode_enable(["loot"]);
 	level.initial_active_volumes = ["underground_route"];
@@ -20,86 +14,65 @@ cp_zmb_escape_init()
 	level thread scripts\cp\zombies\zombies_spawning::escape_room_init();
 }
 
-//Function Number: 2
-init_escape_interactions()
-{
+init_escape_interactions() {
 	level thread delete_all_doors();
 	level thread spawn_escape_entities();
 	level thread delete_zombie_gamemode_entities();
 	level thread remove_team_door_meters();
 	var_00 = getentarray("escape_exit_path","targetname");
-	foreach(var_02 in var_00)
-	{
+	foreach(var_02 in var_00) {
 		var_02 hide();
 	}
 }
 
-//Function Number: 3
-get_escape_exit_interactions()
-{
+get_escape_exit_interactions() {
 	return scripts\engine\utility::getstructarray("escape_exit","script_noteworthy");
 }
 
-//Function Number: 4
-delete_zombie_gamemode_entities()
-{
+delete_zombie_gamemode_entities() {
 	var_00 = getentarray("first_gate_bollard","targetname");
-	foreach(var_02 in var_00)
-	{
+	foreach(var_02 in var_00) {
 		var_02 delete();
 	}
 
 	var_04 = getentarray("first_gate_bollard_clip","targetname");
-	foreach(var_06 in var_04)
-	{
+	foreach(var_06 in var_04) {
 		var_06 delete();
 	}
 
 	var_08 = getentarray("bollard_trigger","targetname");
-	foreach(var_0A in var_08)
-	{
+	foreach(var_0A in var_08) {
 		var_0A delete();
 	}
 }
 
-//Function Number: 5
-delete_all_doors()
-{
+delete_all_doors() {
 	var_00 = scripts\engine\utility::getstructarray("interaction","targetname");
-	foreach(var_02 in var_00)
-	{
-		if(!isdefined(var_02.target))
-		{
+	foreach(var_02 in var_00) {
+		if(!isdefined(var_02.target)) {
 			continue;
 		}
 
 		var_03 = scripts\engine\utility::getstructarray(var_02.script_noteworthy,"script_noteworthy");
-		foreach(var_05 in var_03)
-		{
-			if(!isdefined(var_05.target))
-			{
+		foreach(var_05 in var_03) {
+			if(!isdefined(var_05.target)) {
 				continue;
 			}
 
-			if(var_05.target == var_02.target && var_05 != var_02)
-			{
-				if(scripts\engine\utility::array_contains(var_00,var_05))
-				{
+			if(var_05.target == var_02.target && var_05 != var_02) {
+				if(scripts\engine\utility::array_contains(var_00,var_05)) {
 					var_00 = scripts\engine\utility::array_remove(var_00,var_05);
 				}
 			}
 		}
 
-		if(scripts\cp\cp_interaction::interaction_is_door_buy(var_02))
-		{
-			if(!isdefined(var_02.script_noteworthy))
-			{
+		if(scripts\cp\cp_interaction::interaction_is_door_buy(var_02)) {
+			if(!isdefined(var_02.script_noteworthy)) {
 				continue;
 			}
 
 			var_07 = strtok(var_02.script_noteworthy,"_");
-			switch(var_07[0])
-			{
+			switch(var_07[0]) {
 				case "debris":
 					delete_door(var_02);
 					break;
@@ -114,15 +87,11 @@ delete_all_doors()
 	}
 }
 
-//Function Number: 6
-delete_door(param_00)
-{
+delete_door(param_00) {
 	scripts\cp\cp_interaction::disable_linked_interactions(param_00);
 	var_01 = getentarray(param_00.target,"targetname");
-	foreach(var_03 in var_01)
-	{
-		if(var_03.classname == "script_brushmodel")
-		{
+	foreach(var_03 in var_01) {
+		if(var_03.classname == "script_brushmodel") {
 			var_03 connectpaths();
 		}
 
@@ -130,16 +99,12 @@ delete_door(param_00)
 	}
 }
 
-//Function Number: 7
-delete_team_door(param_00)
-{
+delete_team_door(param_00) {
 	scripts\cp\cp_interaction::disable_linked_interactions(param_00);
 	var_01 = scripts\cp\cp_interaction::get_linked_interactions(param_00);
 	var_02 = getentarray(var_01[0].target,"targetname");
-	foreach(var_04 in var_02)
-	{
-		if(var_04.spawnimpulsefield == 1)
-		{
+	foreach(var_04 in var_02) {
+		if(var_04.spawnimpulsefield == 1) {
 			var_04 connectpaths();
 		}
 
@@ -147,51 +112,42 @@ delete_team_door(param_00)
 	}
 }
 
-//Function Number: 8
-spawn_escape_entities()
-{
+spawn_escape_entities() {
 	var_00 = getent("escape_1_blocker_brush","targetname");
 	var_00 movez(-1024,0.1);
 	var_00 waittill("movedone");
 	var_00 disconnectpaths();
 	var_01 = scripts\engine\utility::getstructarray("escape_1_blocker","targetname");
 	level.escape_barriers = [];
-	foreach(var_05, var_03 in var_01)
-	{
+	foreach(var_05, var_03 in var_01) {
 		var_04 = spawn("script_model",var_03.origin);
-		if(isdefined(var_03.angles))
-		{
+		if(isdefined(var_03.angles)) {
 			var_04.angles = var_03.angles;
 		}
 
 		var_04 setmodel(var_03.script_noteworthy);
 		level.escape_barriers[level.escape_barriers.size] = var_04;
-		if(var_05 % 3 == 0)
-		{
+		if(var_05 % 3 == 0) {
 			wait(0.05);
 		}
 	}
 
 	var_06 = getentarray("escape_door","targetname");
-	foreach(var_08 in var_06)
-	{
+	foreach(var_08 in var_06) {
 		level thread setup_door(var_08);
 	}
 
 	level thread escape_armageddon();
 }
 
-//Function Number: 9
-escape_armageddon()
-{
+escape_armageddon() {
 	wait(5);
 	level.min_wait_between_metors = 2;
 	level.max_wait_between_metors = 5;
 	level.earthquake_time_extension = 1;
 	level.armageddon_duration = 2;
 	level.armageddon_earthquake_scale = 0.25;
-	for(;;)
-	{
+	for(;;) {
 		level.players[0] scripts\cp\powers\coop_armageddon::armageddon_use();
 		wait(randomintrange(3,10));
 		level.earthquake_time_extension = randomfloatrange(0.05,1);
@@ -200,9 +156,7 @@ escape_armageddon()
 	}
 }
 
-//Function Number: 10
-remove_team_door_meters()
-{
+remove_team_door_meters() {
 	setomnvarbit("zombie_doors_progress",4,1);
 	scripts\engine\utility::waitframe();
 	setomnvarbit("zombie_doors_progress",14,1);
@@ -210,24 +164,19 @@ remove_team_door_meters()
 	setomnvarbit("zombie_doors_progress",9,1);
 }
 
-//Function Number: 11
-setup_door(param_00)
-{
+setup_door(param_00) {
 	param_00 movez(-1024,0.05);
 	param_00 waittill("movedone");
 	param_00 disconnectpaths();
 	param_00.panels = [];
 	var_01 = scripts\engine\utility::getstructarray(param_00.target,"targetname");
-	foreach(var_03 in var_01)
-	{
-		if(var_03.script_noteworthy == "waypoint_spot")
-		{
+	foreach(var_03 in var_01) {
+		if(var_03.script_noteworthy == "waypoint_spot") {
 			continue;
 		}
 
 		var_04 = spawn("script_model",var_03.origin);
-		if(isdefined(var_03.angles))
-		{
+		if(isdefined(var_03.angles)) {
 			var_04.angles = var_03.angles;
 		}
 

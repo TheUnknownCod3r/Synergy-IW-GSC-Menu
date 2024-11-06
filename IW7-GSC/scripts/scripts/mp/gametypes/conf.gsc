@@ -1,27 +1,19 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\mp\gametypes\conf.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 10
- * Decompile Time: 542 ms
- * Timestamp: 10/27/2023 12:12:20 AM
-*******************************************************************/
+/*************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\mp\gametypes\conf.gsc
+*************************************************/
 
-//Function Number: 1
-main()
-{
-	if(getdvar("mapname") == "mp_background")
-	{
+main() {
+	if(getdvar("mapname") == "mp_background") {
 		return;
 	}
 
 	scripts\mp\_globallogic::init();
 	scripts\mp\_globallogic::setupcallbacks();
-	if(function_011C())
-	{
+	if(function_011C()) {
 		level.initializematchrules = ::initializematchrules;
-		[[ level.initializematchrules ]]();
+		[[level.initializematchrules]]();
 		level thread scripts\mp\_utility::reinitializematchrulesonmigration();
 	}
 	else
@@ -44,24 +36,20 @@ main()
 	level.getspawnpoint = ::getspawnpoint;
 	level.onnormaldeath = ::onnormaldeath;
 	level.onspawnplayer = ::onspawnplayer;
-	if(level.matchrules_damagemultiplier || level.matchrules_vampirism)
-	{
+	if(level.matchrules_damagemultiplier || level.matchrules_vampirism) {
 		level.modifyplayerdamage = ::scripts\mp\_damage::gamemodemodifyplayerdamage;
 	}
 
 	game["dialog"]["gametype"] = "kill_confirmed";
 	game["dialog"]["kill_confirmed"] = "kill_confirmed";
-	if(getdvarint("g_hardcore"))
-	{
+	if(getdvarint("g_hardcore")) {
 		game["dialog"]["gametype"] = "hc_" + game["dialog"]["gametype"];
 	}
 
 	level.conf_fx["vanish"] = loadfx("vfx/core/impacts/small_snowhit");
 }
 
-//Function Number: 2
-initializematchrules()
-{
+initializematchrules() {
 	scripts\mp\_utility::setcommonrulesfrommatchdata();
 	setdynamicdvar("scr_conf_pointsPerConfirm",getmatchrulesdata("confData","pointsPerConfirm"));
 	setdynamicdvar("scr_conf_pointsPerDeny",getmatchrulesdata("confData","pointsPerDeny"));
@@ -70,17 +58,13 @@ initializematchrules()
 	setdynamicdvar("scr_conf_promode",0);
 }
 
-//Function Number: 3
-onstartgametype()
-{
+onstartgametype() {
 	setclientnamemode("auto_change");
-	if(!isdefined(game["switchedsides"]))
-	{
+	if(!isdefined(game["switchedsides"])) {
 		game["switchedsides"] = 0;
 	}
 
-	if(game["switchedsides"])
-	{
+	if(game["switchedsides"]) {
 		var_00 = game["attackers"];
 		var_01 = game["defenders"];
 		game["attackers"] = var_01;
@@ -89,8 +73,7 @@ onstartgametype()
 
 	scripts\mp\_utility::setobjectivetext("allies",&"OBJECTIVES_CONF");
 	scripts\mp\_utility::setobjectivetext("axis",&"OBJECTIVES_CONF");
-	if(level.splitscreen)
-	{
+	if(level.splitscreen) {
 		scripts\mp\_utility::setobjectivescoretext("allies",&"OBJECTIVES_CONF");
 		scripts\mp\_utility::setobjectivescoretext("axis",&"OBJECTIVES_CONF");
 	}
@@ -109,9 +92,7 @@ onstartgametype()
 	scripts\mp\_gameobjects::main(var_02);
 }
 
-//Function Number: 4
-initspawns()
-{
+initspawns() {
 	scripts\mp\_spawnlogic::setactivespawnlogic("TDM");
 	level.spawnmins = (0,0,0);
 	level.spawnmaxs = (0,0,0);
@@ -125,25 +106,19 @@ initspawns()
 	function_01B4(level.mapcenter);
 }
 
-//Function Number: 5
-updategametypedvars()
-{
+updategametypedvars() {
 	scripts\mp\gametypes\common::updategametypedvars();
 	level.scoreconfirm = scripts\mp\_utility::dvarintvalue("pointsPerConfirm",1,0,25);
 	level.scoredeny = scripts\mp\_utility::dvarintvalue("pointsPerDeny",0,0,25);
 }
 
-//Function Number: 6
-getspawnpoint()
-{
+getspawnpoint() {
 	var_00 = self.pers["team"];
-	if(game["switchedsides"])
-	{
+	if(game["switchedsides"]) {
 		var_00 = scripts\mp\_utility::getotherteam(var_00);
 	}
 
-	if(scripts\mp\_spawnlogic::shoulduseteamstartspawn())
-	{
+	if(scripts\mp\_spawnlogic::shoulduseteamstartspawn()) {
 		var_01 = scripts\mp\_spawnlogic::getspawnpointarray("mp_tdm_spawn_" + var_00 + "_start");
 		var_02 = scripts\mp\_spawnlogic::getspawnpoint_startspawn(var_01);
 	}
@@ -157,33 +132,23 @@ getspawnpoint()
 	return var_02;
 }
 
-//Function Number: 7
-onnormaldeath(param_00,param_01,param_02,param_03,param_04)
-{
+onnormaldeath(param_00,param_01,param_02,param_03,param_04) {
 	scripts\mp\gametypes\common::onnormaldeath(param_00,param_01,param_02,param_03,param_04);
 }
 
-//Function Number: 8
-onspawnplayer()
-{
+onspawnplayer() {
 	scripts\mp\_utility::func_98D4();
 }
 
-//Function Number: 9
-dogtagallyonusecb(param_00)
-{
-	if(isplayer(param_00))
-	{
+dogtagallyonusecb(param_00) {
+	if(isplayer(param_00)) {
 		param_00 scripts\mp\_utility::setextrascore1(param_00.pers["denied"]);
 		param_00 scripts\mp\_gamescore::giveteamscoreforobjective(param_00.pers["team"],level.scoredeny,0);
 	}
 }
 
-//Function Number: 10
-dogtagenemyonusecb(param_00)
-{
-	if(isplayer(param_00))
-	{
+dogtagenemyonusecb(param_00) {
+	if(isplayer(param_00)) {
 		param_00 scripts\mp\_utility::leaderdialogonplayer("kill_confirmed",undefined,undefined,undefined,4);
 		param_00 scripts\mp\_utility::setextrascore0(param_00.pers["confirmed"]);
 	}

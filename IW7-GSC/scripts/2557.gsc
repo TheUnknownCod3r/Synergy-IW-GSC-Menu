@@ -1,21 +1,12 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: 2557.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 8
- * Decompile Time: 2 ms
- * Timestamp: 10/27/2023 12:23:20 AM
-*******************************************************************/
+/****************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\2557.gsc
+****************************/
 
-//Function Number: 1
-main()
-{
-}
+main() {}
 
-//Function Number: 2
-soldier()
-{
+soldier() {
 	level.var_7649["human_gib_fullbody"] = loadfx("vfx/iw7/core/impact/flesh/vfx_flesh_hit_body_meatbag_large.vfx");
 	level.var_7649["human_gib_head"] = loadfx("vfx/_requests/human/headgib.vfx");
 	level.var_7649["atomize_body"] = loadfx("vfx/iw7/_requests/mp/vfx_atomize_body.vfx");
@@ -28,9 +19,7 @@ soldier()
 	level.var_7649["helmet_break_suffocate"] = loadfx("vfx/iw7/core/human/helmet_break_suffocate.vfx");
 }
 
-//Function Number: 3
-func_3353()
-{
+func_3353() {
 	precachemodel("viewmodel_robot_c6");
 	precachemodel("robot_c6_cable");
 	precacherumble("light_1s");
@@ -44,9 +33,7 @@ func_3353()
 	level._effect["hack_pov_explode"] = loadfx("vfx/iw7/core/equipment/hack/vfx_hack_c6_pov_explode.vfx");
 }
 
-//Function Number: 4
-func_3508()
-{
+func_3508() {
 	precachemodel("tag_flash");
 	precachemodel("robot_c12_prop_rail_l");
 	precachemodel("robot_c12_prop_rail_r");
@@ -80,9 +67,7 @@ func_3508()
 	level.var_7649["muz_c12_rocket"] = loadfx("vfx/iw7/core/muzflash/c12/vfx_muz_c12_rocket_w.vfx");
 }
 
-//Function Number: 5
-func_F10A()
-{
+func_F10A() {
 	precachestring(&"SCRIPT_PLATFORM_HINT_MELEE_TAP");
 	precachestring(&"EQUIPMENT_SEEKER_RETRIEVE");
 	precachestring(&"EQUIPMENT_SEEKER_IDLE");
@@ -105,20 +90,13 @@ func_F10A()
 	setdvarifuninitialized("debug_seekerpip",0);
 }
 
-//Function Number: 6
-func_009B()
-{
-}
+func_009B() {}
 
-//Function Number: 7
-func_33FB()
-{
+func_33FB() {
 	soldier();
 }
 
-//Function Number: 8
-func_341D()
-{
+func_341D() {
 	precachemodel("vm_robot_c8_base");
 	precacheitem("iw7_mauler_c8hack");
 	precachestring(&"EQUIPMENT_PICKUP_SHIELD");

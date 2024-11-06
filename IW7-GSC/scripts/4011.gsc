@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: 4011.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 1
- * Decompile Time: 1 ms
- * Timestamp: 10/27/2023 12:31:55 AM
-*******************************************************************/
+/****************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\4011.gsc
+****************************/
 
-//Function Number: 1
-main()
-{
+main() {
 	precachempanim("IW7_cp_frontend_feeding_walk_off_civ");
 	precachempanim("IW7_cp_frontend_feeding_walk_off_zom");
 	precachempanim("IW7_cp_frontend_mugging_high_cam_z1_01");

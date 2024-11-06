@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\mp\agents\alien_phantom\alien_phantom_agent.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 6
- * Decompile Time: 347 ms
- * Timestamp: 10/27/2023 12:11:05 AM
-*******************************************************************/
+/***************************************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\mp\agents\alien_phantom\alien_phantom_agent.gsc
+***************************************************************************/
 
-//Function Number: 1
-registerscriptedagent()
-{
+registerscriptedagent() {
 	scripts\mp\agents\alien_phantom\alien_phantom_tunedata::setuptunedata();
 	scripts/aitypes/bt_util::init();
 	behaviortree\alien_goon::func_DEE8();
@@ -18,12 +12,9 @@ registerscriptedagent()
 	thread func_FAB0();
 }
 
-//Function Number: 2
-func_FAB0()
-{
+func_FAB0() {
 	level endon("game_ended");
-	if(!isdefined(level.agent_definition))
-	{
+	if(!isdefined(level.agent_definition)) {
 		level waittill("scripted_agents_initialized");
 	}
 
@@ -35,27 +26,21 @@ func_FAB0()
 	level.agent_funcs["alien_phantom"]["on_damaged_finished"] = ::scripts\mp\agents\zombie\zmb_zombie_agent::onzombiedamagefinished;
 	level.agent_funcs["alien_phantom"]["on_killed"] = ::onkilled;
 	level.brute_loot_check = [];
-	if(!isdefined(level.var_8CBD))
-	{
+	if(!isdefined(level.var_8CBD)) {
 		level.var_8CBD = [];
 	}
 
 	level.var_8CBD["alien_phantom"] = ::calculatealienphantomhealth;
-	if(!isdefined(level.damage_feedback_overrride))
-	{
+	if(!isdefined(level.damage_feedback_overrride)) {
 		level.damage_feedback_overrride = [];
 	}
 }
 
-//Function Number: 3
-func_FACE(param_00)
-{
+func_FACE(param_00) {
 	self setmodel("alien_brute");
 }
 
-//Function Number: 4
-setupagent()
-{
+setupagent() {
 	scripts\mp\agents\alien_goon\alien_goon_agent::setupagent();
 	self.var_B601 = 67;
 	self.preventplayerpushdist = 12;
@@ -63,49 +48,37 @@ setupagent()
 	self.immune_against_nuke = 1;
 }
 
-//Function Number: 5
-calculatealienphantomhealth()
-{
+calculatealienphantomhealth() {
 	var_00 = scripts\mp\agents\alien_goon\alien_goon_agent::calculatealiengoonhealth();
 	var_01 = scripts\asm\dlc4\dlc4_asm::gettunedata();
-	if(level.players.size < 2)
-	{
+	if(level.players.size < 2) {
 		var_00 = var_00 / 2;
 	}
 
 	return var_00 * var_01.goon_health_multiplier;
 }
 
-//Function Number: 6
-onkilled(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08)
-{
-	if(!isdefined(level.no_loot_drop) || !level.no_loot_drop)
-	{
+onkilled(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08) {
+	if(!isdefined(level.no_loot_drop) || !level.no_loot_drop) {
 		var_09 = scripts\engine\utility::random(["ammo_max","instakill_30","cash_2","instakill_30","cash_2","instakill_30","cash_2"]);
-		if(isdefined(var_09) && !isdefined(self.var_72AC))
-		{
-			if(!isdefined(level.brute_loot_check[self.spawn_round_num]))
-			{
+		if(isdefined(var_09) && !isdefined(self.var_72AC)) {
+			if(!isdefined(level.brute_loot_check[self.spawn_round_num])) {
 				level.brute_loot_check[self.spawn_round_num] = 1;
 				level thread scripts\cp\loot::drop_loot(self.origin,param_01,var_09,undefined,undefined,1);
 			}
 		}
 
 		var_0A = 400;
-		foreach(var_0C in level.players)
-		{
-			if(var_0C scripts\cp\utility::is_valid_player())
-			{
+		foreach(var_0C in level.players) {
+			if(var_0C scripts\cp\utility::is_valid_player()) {
 				var_0C scripts\cp\cp_persistence::give_player_currency(var_0A);
 			}
 		}
 	}
 
-	if(self isethereal())
-	{
+	if(self isethereal()) {
 		level.totalphantomsjumping--;
-		if(level.totalphantomsjumping <= 0)
-		{
+		if(level.totalphantomsjumping <= 0) {
 			level.totalphantomsjumping = 0;
 		}
 	}

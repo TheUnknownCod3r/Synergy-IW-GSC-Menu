@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\mp\maps\mp_afghan\mp_afghan.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 5
- * Decompile Time: 286 ms
- * Timestamp: 10/27/2023 12:13:14 AM
-*******************************************************************/
+/***********************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\mp\maps\mp_afghan\mp_afghan.gsc
+***********************************************************/
 
-//Function Number: 1
-main()
-{
+main() {
 	lib_0F7C::main();
 	scripts\mp\maps\mp_afghan\gen\mp_afghan_art::main();
 	lib_0F7B::main();
@@ -40,16 +34,12 @@ main()
 	thread fix_broshot();
 }
 
-//Function Number: 2
-func_CDA4(param_00)
-{
+func_CDA4(param_00) {
 	wait(30);
 	function_030E(param_00);
 }
 
-//Function Number: 3
-spawn_oob_trigger()
-{
+spawn_oob_trigger() {
 	wait(0.05);
 	var_00 = spawn("trigger_radius",(-674,2090,-102),0,150,140);
 	var_00.var_336 = "outofbounds";
@@ -61,9 +51,7 @@ spawn_oob_trigger()
 	level.var_C7B3[level.var_C7B3.size] = var_01;
 }
 
-//Function Number: 4
-fix_collision()
-{
+fix_collision() {
 	var_00 = getent("player32x32x8","targetname");
 	var_01 = spawn("script_model",(1772,188.5,415));
 	var_01.angles = (0,0,-70);
@@ -110,9 +98,7 @@ fix_collision()
 	var_15 clonebrushmodeltoscriptmodel(var_14);
 }
 
-//Function Number: 5
-fix_broshot()
-{
+fix_broshot() {
 	var_00 = getent("character_loc_broshot_e","targetname");
 	var_01 = var_00.origin;
 	var_00.origin = (var_01[0],var_01[1],242);

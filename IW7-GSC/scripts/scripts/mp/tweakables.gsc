@@ -1,18 +1,11 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\mp\tweakables.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 8
- * Decompile Time: 328 ms
- * Timestamp: 10/27/2023 12:21:51 AM
-*******************************************************************/
+/*********************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\mp\tweakables.gsc
+*********************************************/
 
-//Function Number: 1
-gettweakabledvarvalue(param_00,param_01)
-{
-	switch(param_00)
-	{
+gettweakabledvarvalue(param_00,param_01) {
+	switch(param_00) {
 		case "rule":
 			var_02 = level.rules[param_01].dvar;
 			break;
@@ -54,11 +47,8 @@ gettweakabledvarvalue(param_00,param_01)
 	return var_03;
 }
 
-//Function Number: 2
-_meth_81E4(param_00,param_01)
-{
-	switch(param_00)
-	{
+_meth_81E4(param_00,param_01) {
+	switch(param_00) {
 		case "rule":
 			var_02 = level.rules[param_01].dvar;
 			break;
@@ -99,11 +89,8 @@ _meth_81E4(param_00,param_01)
 	return var_02;
 }
 
-//Function Number: 3
-gettweakablevalue(param_00,param_01)
-{
-	switch(param_00)
-	{
+gettweakablevalue(param_00,param_01) {
+	switch(param_00) {
 		case "rule":
 			var_02 = level.rules[param_01].value;
 			break;
@@ -144,11 +131,8 @@ gettweakablevalue(param_00,param_01)
 	return var_02;
 }
 
-//Function Number: 4
-gettweakablelastvalue(param_00,param_01)
-{
-	switch(param_00)
-	{
+gettweakablelastvalue(param_00,param_01) {
+	switch(param_00) {
 		case "rule":
 			var_02 = level.rules[param_01].var_AA40;
 			break;
@@ -189,11 +173,8 @@ gettweakablelastvalue(param_00,param_01)
 	return var_02;
 }
 
-//Function Number: 5
-settweakabledvar(param_00,param_01,param_02)
-{
-	switch(param_00)
-	{
+settweakabledvar(param_00,param_01,param_02) {
+	switch(param_00) {
 		case "rule":
 			var_03 = level.rules[param_01].dvar;
 			break;
@@ -234,11 +215,8 @@ settweakabledvar(param_00,param_01,param_02)
 	setdvar(var_03,param_02);
 }
 
-//Function Number: 6
-settweakablevalue(param_00,param_01,param_02)
-{
-	switch(param_00)
-	{
+settweakablevalue(param_00,param_01,param_02) {
+	switch(param_00) {
 		case "rule":
 			level.rules[param_01].var_AA40 = param_02;
 			break;
@@ -276,11 +254,8 @@ settweakablevalue(param_00,param_01,param_02)
 	}
 }
 
-//Function Number: 7
-registertweakable(param_00,param_01,param_02,param_03)
-{
-	if(isstring(param_03))
-	{
+registertweakable(param_00,param_01,param_02,param_03) {
+	if(isstring(param_03)) {
 		param_03 = getdvar(param_02,param_03);
 	}
 	else
@@ -288,11 +263,9 @@ registertweakable(param_00,param_01,param_02,param_03)
 		param_03 = getdvarint(param_02,param_03);
 	}
 
-	switch(param_00)
-	{
+	switch(param_00) {
 		case "rule":
-			if(!isdefined(level.rules[param_01]))
-			{
+			if(!isdefined(level.rules[param_01])) {
 				level.rules[param_01] = spawnstruct();
 			}
 	
@@ -302,8 +275,7 @@ registertweakable(param_00,param_01,param_02,param_03)
 			break;
 
 		case "game":
-			if(!isdefined(level.gametweaks[param_01]))
-			{
+			if(!isdefined(level.gametweaks[param_01])) {
 				level.gametweaks[param_01] = spawnstruct();
 			}
 	
@@ -313,8 +285,7 @@ registertweakable(param_00,param_01,param_02,param_03)
 			break;
 
 		case "team":
-			if(!isdefined(level.teamtweaks[param_01]))
-			{
+			if(!isdefined(level.teamtweaks[param_01])) {
 				level.teamtweaks[param_01] = spawnstruct();
 			}
 	
@@ -324,8 +295,7 @@ registertweakable(param_00,param_01,param_02,param_03)
 			break;
 
 		case "player":
-			if(!isdefined(level.playertweaks[param_01]))
-			{
+			if(!isdefined(level.playertweaks[param_01])) {
 				level.playertweaks[param_01] = spawnstruct();
 			}
 	
@@ -335,8 +305,7 @@ registertweakable(param_00,param_01,param_02,param_03)
 			break;
 
 		case "class":
-			if(!isdefined(level.classtweaks[param_01]))
-			{
+			if(!isdefined(level.classtweaks[param_01])) {
 				level.classtweaks[param_01] = spawnstruct();
 			}
 	
@@ -346,8 +315,7 @@ registertweakable(param_00,param_01,param_02,param_03)
 			break;
 
 		case "weapon":
-			if(!isdefined(level.weapontweaks[param_01]))
-			{
+			if(!isdefined(level.weapontweaks[param_01])) {
 				level.weapontweaks[param_01] = spawnstruct();
 			}
 	
@@ -357,8 +325,7 @@ registertweakable(param_00,param_01,param_02,param_03)
 			break;
 
 		case "hardpoint":
-			if(!isdefined(level.hardpointtweaks[param_01]))
-			{
+			if(!isdefined(level.hardpointtweaks[param_01])) {
 				level.hardpointtweaks[param_01] = spawnstruct();
 			}
 	
@@ -368,8 +335,7 @@ registertweakable(param_00,param_01,param_02,param_03)
 			break;
 
 		case "hud":
-			if(!isdefined(level.hudtweaks[param_01]))
-			{
+			if(!isdefined(level.hudtweaks[param_01])) {
 				level.hudtweaks[param_01] = spawnstruct();
 			}
 	
@@ -380,9 +346,7 @@ registertweakable(param_00,param_01,param_02,param_03)
 	}
 }
 
-//Function Number: 8
-init()
-{
+init() {
 	level.var_41F9 = [];
 	level.var_12AC9 = 1;
 	level.rules = [];
@@ -393,10 +357,8 @@ init()
 	level.weapontweaks = [];
 	level.hardpointtweaks = [];
 	level.hudtweaks = [];
-	if(level.console)
-	{
-		if(level.var_13E0E || level.var_DADC)
-		{
+	if(level.console) {
+		if(level.var_13E0E || level.var_DADC) {
 			registertweakable("game","graceperiod","scr_game_graceperiod",20);
 		}
 		else

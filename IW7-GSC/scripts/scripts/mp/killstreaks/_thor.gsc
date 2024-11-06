@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\mp\killstreaks\_thor.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 69
- * Decompile Time: 3207 ms
- * Timestamp: 10/27/2023 12:29:51 AM
-*******************************************************************/
+/****************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\mp\killstreaks\_thor.gsc
+****************************************************/
 
-//Function Number: 1
-init()
-{
+init() {
 	scripts\mp\killstreaks\_killstreaks::registerkillstreak("thor",::func_12909,undefined,undefined,undefined,::func_13C8E,undefined,::func_13099,::weaponswitchendedairstrike);
 	level._effect["thor_clouds"] = loadfx("vfx/core/mp/killstreaks/odin/odin_parallax_clouds");
 	level._effect["thor_fisheye"] = loadfx("vfx/iw7/_requests/mp/vfx_scrnfx_thor_fisheye.vfx");
@@ -47,19 +41,15 @@ init()
 	scripts\mp\_killstreak_loot::func_DF07("thor",var_00);
 }
 
-//Function Number: 2
-func_13C8E(param_00)
-{
+func_13C8E(param_00) {
 	var_01 = 1;
-	if(scripts\mp\_utility::currentactivevehiclecount() >= scripts\mp\_utility::maxvehiclesallowed() || level.fauxvehiclecount + var_01 >= scripts\mp\_utility::maxvehiclesallowed())
-	{
+	if(scripts\mp\_utility::currentactivevehiclecount() >= scripts\mp\_utility::maxvehiclesallowed() || level.fauxvehiclecount + var_01 >= scripts\mp\_utility::maxvehiclesallowed()) {
 		scripts\mp\_hud_message::showerrormessage("KILLSTREAKS_TOO_MANY_VEHICLES");
 		return 0;
 	}
 
 	level.var_C20D++;
-	if(level.var_C20D > 1)
-	{
+	if(level.var_C20D > 1) {
 		scripts\mp\_hud_message::showerrormessage("KILLSTREAKS_TOO_MANY_THORS");
 		level.var_C20D--;
 		return 0;
@@ -70,31 +60,23 @@ func_13C8E(param_00)
 	return 1;
 }
 
-//Function Number: 3
-func_13B73()
-{
+func_13B73() {
 	self endon("thor_weapon_switch_ended");
 	level endon("game_ended");
 	scripts\engine\utility::waittill_any_3("death","disconnect");
-	if(isdefined(level.var_C20D) && level.var_C20D > 0)
-	{
+	if(isdefined(level.var_C20D) && level.var_C20D > 0) {
 		level.var_C20D--;
 	}
 
-	if(isdefined(self))
-	{
+	if(isdefined(self)) {
 		self setclientomnvar("ui_remote_control_sequence",0);
 	}
 }
 
-//Function Number: 4
-weaponswitchendedairstrike(param_00,param_01)
-{
+weaponswitchendedairstrike(param_00,param_01) {
 	self notify("thor_weapon_switch_ended");
-	if(!scripts\mp\_utility::istrue(param_01))
-	{
-		if(isdefined(level.var_C20D) && level.var_C20D > 0)
-		{
+	if(!scripts\mp\_utility::istrue(param_01)) {
+		if(isdefined(level.var_C20D) && level.var_C20D > 0) {
 			level.var_C20D--;
 		}
 
@@ -102,35 +84,27 @@ weaponswitchendedairstrike(param_00,param_01)
 	}
 }
 
-//Function Number: 5
-func_13099(param_00)
-{
+func_13099(param_00) {
 	level.var_C20D--;
 	self setclientomnvar("ui_remote_control_sequence",0);
 }
 
-//Function Number: 6
-func_12909(param_00)
-{
+func_12909(param_00) {
 	var_01 = scripts\mp\killstreaks\_killstreaks::func_D507(param_00);
-	if(!var_01)
-	{
+	if(!var_01) {
 		level.var_C20D--;
 		return 0;
 	}
 
 	var_01 = func_10DFC(param_00);
-	if(!isdefined(var_01))
-	{
+	if(!isdefined(var_01)) {
 		var_01 = 0;
 	}
 
 	return var_01;
 }
 
-//Function Number: 7
-func_10DFC(param_00)
-{
+func_10DFC(param_00) {
 	self.var_117AF = spawn("script_model",level.var_12AF6);
 	self.var_117AF setmodel("tag_origin");
 	self.var_117AF.angles = (0,115,0);
@@ -141,8 +115,7 @@ func_10DFC(param_00)
 	self.restoreangles = vectortoangles(anglestoforward(self.angles));
 	scripts\mp\_utility::incrementfauxvehiclecount();
 	var_01 = func_4A26(param_00.streakname,param_00);
-	if(!isdefined(var_01))
-	{
+	if(!isdefined(var_01)) {
 		level.var_C20D--;
 		scripts\mp\_utility::decrementfauxvehiclecount();
 		thread scripts\mp\killstreaks\_killstreaks::func_11086();
@@ -152,41 +125,32 @@ func_10DFC(param_00)
 	return 1;
 }
 
-//Function Number: 8
-func_E731(param_00,param_01,param_02,param_03)
-{
+func_E731(param_00,param_01,param_02,param_03) {
 	self endon("death");
 	self.triggerportableradarping endon("disconnect");
-	if(isdefined(param_02))
-	{
+	if(isdefined(param_02)) {
 		self.triggerportableradarping endon(param_02);
 	}
 
-	if(isdefined(param_03))
-	{
+	if(isdefined(param_03)) {
 		self.triggerportableradarping endon(param_03);
 	}
 
-	if(!isdefined(param_00))
-	{
+	if(!isdefined(param_00)) {
 		param_00 = -360;
 	}
 
-	if(!isdefined(param_01))
-	{
+	if(!isdefined(param_01)) {
 		param_01 = 60;
 	}
 
-	for(;;)
-	{
+	for(;;) {
 		self rotateyaw(param_00,param_01);
 		wait(param_01);
 	}
 }
 
-//Function Number: 9
-func_4A26(param_00,param_01)
-{
+func_4A26(param_00,param_01) {
 	var_02 = level.var_117B0[param_00];
 	var_03 = randomint(360);
 	var_04 = 7000;
@@ -199,14 +163,12 @@ func_4A26(param_00,param_01)
 	var_0A = self.var_117AF.origin + var_08;
 	var_0B = var_02.modelbase;
 	var_0C = scripts\mp\_killstreak_loot::getrarityforlootitem(param_01.variantid);
-	if(var_0C != "")
-	{
+	if(var_0C != "") {
 		var_0B = var_0B + "_" + var_0C;
 	}
 
 	var_0D = spawn("script_model",var_09);
-	if(!isdefined(var_0D))
-	{
+	if(!isdefined(var_0D)) {
 		return undefined;
 	}
 
@@ -235,9 +197,7 @@ func_4A26(param_00,param_01)
 	return var_0D;
 }
 
-//Function Number: 10
-func_117AE(param_00,param_01)
-{
+func_117AE(param_00,param_01) {
 	param_00 endon("death");
 	level endon("game_ended");
 	param_00.triggerportableradarping playlocalsound("thor_init_plr");
@@ -246,8 +206,7 @@ func_117AE(param_00,param_01)
 	param_00 setscriptablepartstate("thrusters","drop",0);
 	scripts\mp\_shellshock::_earthquake(0.15,2,param_00.origin,2000);
 	var_02 = level.var_117B0[param_00.streakname];
-	if(getdvarint("camera_thirdPerson"))
-	{
+	if(getdvarint("camera_thirdPerson")) {
 		scripts\mp\_utility::setthirdpersondof(0);
 	}
 
@@ -266,8 +225,7 @@ func_117AE(param_00,param_01)
 	param_00.triggerportableradarping setclientomnvar("ui_thor_missiles_loaded",var_02.var_394["missile"].var_B47C);
 	param_00.triggerportableradarping thermalvisionfofoverlayon();
 	param_00.triggerportableradarping thermalvisionon();
-	for(var_05 = 0;var_05 < 5;var_05++)
-	{
+	for(var_05 = 0;var_05 < 5;var_05++) {
 		param_00.triggerportableradarping setclientomnvar(param_00.var_B88C[var_05].omnvar,undefined);
 		param_00.triggerportableradarping setclientomnvar(param_00.var_B888[var_05].omnvar,-1);
 	}
@@ -275,8 +233,7 @@ func_117AE(param_00,param_01)
 	param_00.triggerportableradarping _meth_82C0("thor_killstreak",1);
 	var_06 = var_02.teamsplash;
 	var_07 = scripts\mp\_killstreak_loot::getrarityforlootitem(param_00.streakinfo.variantid);
-	if(var_07 != "")
-	{
+	if(var_07 != "") {
 		var_06 = var_06 + "_" + var_07;
 	}
 
@@ -297,8 +254,7 @@ func_117AE(param_00,param_01)
 	var_08 = "icon_minimap_thor_friendly";
 	param_00.minimapid = param_00 scripts\mp\killstreaks\_airdrop::createobjective(var_08,undefined,1,1,1);
 	var_09 = var_02.timeout;
-	if(scripts\mp\killstreaks\_utility::func_A69F(param_00.streakinfo,"passive_armor_duration"))
-	{
+	if(scripts\mp\killstreaks\_utility::func_A69F(param_00.streakinfo,"passive_armor_duration")) {
 		var_09 = var_09 - 5;
 	}
 
@@ -309,8 +265,7 @@ func_117AE(param_00,param_01)
 	param_00 thread func_117AD();
 	param_00 thread func_117AB();
 	param_00 thread func_117A2();
-	if(scripts\mp\killstreaks\_utility::func_A69F(param_00.streakinfo,"passive_switch_thruster"))
-	{
+	if(scripts\mp\killstreaks\_utility::func_A69F(param_00.streakinfo,"passive_switch_thruster")) {
 		param_00 thread thor_watchswitchthrust(param_00.triggerportableradarping);
 	}
 
@@ -327,9 +282,7 @@ func_117AE(param_00,param_01)
 	param_00.triggerportableradarping setclientomnvar("ui_killstreak_health",var_02.maxhealth / 2600);
 }
 
-//Function Number: 11
-func_8ED7(param_00)
-{
+func_8ED7(param_00) {
 	self hidepart("j_backend",param_00);
 	self hidepart("j_shield_1",param_00);
 	self hidepart("j_shield_2",param_00);
@@ -338,15 +291,11 @@ func_8ED7(param_00)
 	self hidepart("j_nose",param_00);
 }
 
-//Function Number: 12
-func_989D(param_00)
-{
+func_989D(param_00) {
 	var_01 = [];
-	switch(param_00)
-	{
+	switch(param_00) {
 		case "ID":
-			for(var_02 = 0;var_02 < 5;var_02++)
-			{
+			for(var_02 = 0;var_02 < 5;var_02++) {
 				var_03 = spawnstruct();
 				var_03.omnvar = "ui_thor_missile_" + var_02;
 				var_03.inuse = 0;
@@ -355,8 +304,7 @@ func_989D(param_00)
 			break;
 
 		case "Distance":
-			for(var_02 = 0;var_02 < 5;var_02++)
-			{
+			for(var_02 = 0;var_02 < 5;var_02++) {
 				var_03 = spawnstruct();
 				var_03.omnvar = "ui_thor_missile_" + var_02 + "_dist";
 				var_03.inuse = 0;
@@ -368,9 +316,7 @@ func_989D(param_00)
 	return var_01;
 }
 
-//Function Number: 13
-watchhostmigrationfinishedinit(param_00,param_01)
-{
+watchhostmigrationfinishedinit(param_00,param_01) {
 	param_00 endon("disconnect");
 	param_00 endon("joined_team");
 	param_00 endon("joined_spectators");
@@ -378,12 +324,10 @@ watchhostmigrationfinishedinit(param_00,param_01)
 	level endon("game_ended");
 	self endon("death");
 	self endon("leaving");
-	for(;;)
-	{
+	for(;;) {
 		level waittill("host_migration_end");
 		param_00 thermalvisionfofoverlayon();
-		if(scripts\mp\_utility::istrue(self.var_117B2))
-		{
+		if(scripts\mp\_utility::istrue(self.var_117B2)) {
 			param_00 thermalvisionon();
 			continue;
 		}
@@ -392,9 +336,7 @@ watchhostmigrationfinishedinit(param_00,param_01)
 	}
 }
 
-//Function Number: 14
-func_B011(param_00)
-{
+func_B011(param_00) {
 	self endon("disconnect");
 	level endon("game_ended");
 	param_00 endon("death");
@@ -403,9 +345,7 @@ func_B011(param_00)
 	self setplayerangles(var_01);
 }
 
-//Function Number: 15
-func_1369B(param_00)
-{
+func_1369B(param_00) {
 	self endon("disconnect");
 	param_00 endon("death");
 	scripts\mp\_hostmigration::waitlongdurationwithhostmigrationpause(1);
@@ -413,50 +353,36 @@ func_1369B(param_00)
 	param_00 thread removeoutline(var_01,self);
 }
 
-//Function Number: 16
-waitanddelete(param_00)
-{
+waitanddelete(param_00) {
 	self endon("death");
 	level endon("game_ended");
 	scripts\mp\_hostmigration::waitlongdurationwithhostmigrationpause(param_00);
 	self delete();
 }
 
-//Function Number: 17
-func_1179A(param_00)
-{
+func_1179A(param_00) {
 	scripts\mp\_utility::setusingremote(param_00.streakname);
 }
 
-//Function Number: 18
-func_1178F(param_00)
-{
-	if(isdefined(self))
-	{
+func_1178F(param_00) {
+	if(isdefined(self)) {
 		scripts\mp\_utility::clearusingremote();
 	}
 }
 
-//Function Number: 19
-func_1179C(param_00)
-{
-	while(isdefined(self.var_9BE2) && param_00 > 0)
-	{
+func_1179C(param_00) {
+	while(isdefined(self.var_9BE2) && param_00 > 0) {
 		wait(0.05);
 		param_00 = param_00 - 0.05;
 	}
 }
 
-//Function Number: 20
-func_1179D(param_00)
-{
+func_1179D(param_00) {
 	param_00 endon("disconnect");
 	level endon("game_ended");
-	for(;;)
-	{
+	for(;;) {
 		var_01 = scripts\engine\utility::waittill_any_return("start_fire","start_reload","death","leaving");
-		if(var_01 == "death" || var_01 == "leaving")
-		{
+		if(var_01 == "death" || var_01 == "leaving") {
 			break;
 		}
 
@@ -466,14 +392,11 @@ func_1179D(param_00)
 	}
 }
 
-//Function Number: 21
-func_117A0()
-{
+func_117A0() {
 	level endon("game_ended");
 	self endon("leaving");
 	self waittill("death");
-	if(isdefined(self.triggerportableradarping))
-	{
+	if(isdefined(self.triggerportableradarping)) {
 		self.triggerportableradarping func_11791(self);
 		self.triggerportableradarping setclientomnvar("ui_thor_show",0);
 		self.triggerportableradarping setclientomnvar("ui_killstreak_countdown",0);
@@ -481,13 +404,11 @@ func_117A0()
 		self.triggerportableradarping setclientomnvar("ui_killstreak_missile_warn",0);
 		self.triggerportableradarping clearclienttriggeraudiozone(1);
 		self.triggerportableradarping stoprumble("thor_thrust_rumble");
-		foreach(var_01 in self.var_B88C)
-		{
+		foreach(var_01 in self.var_B88C) {
 			self.triggerportableradarping setclientomnvar(var_01.omnvar,undefined);
 		}
 
-		foreach(var_04 in self.var_B888)
-		{
+		foreach(var_04 in self.var_B888) {
 			self.triggerportableradarping setclientomnvar(var_04.omnvar,-1);
 		}
 	}
@@ -498,9 +419,7 @@ func_117A0()
 	self delete();
 }
 
-//Function Number: 22
-func_117AC(param_00)
-{
+func_117AC(param_00) {
 	level endon("game_ended");
 	self endon("death");
 	self endon("leaving");
@@ -518,9 +437,7 @@ func_117AC(param_00)
 	thread func_11795();
 }
 
-//Function Number: 23
-func_117A7()
-{
+func_117A7() {
 	level endon("game_ended");
 	self endon("death");
 	self endon("leaving");
@@ -528,9 +445,7 @@ func_117A7()
 	self notify("death");
 }
 
-//Function Number: 24
-func_117A5()
-{
+func_117A5() {
 	level endon("game_ended");
 	self endon("death");
 	self endon("leaving");
@@ -541,9 +456,7 @@ func_117A5()
 	thread func_11795();
 }
 
-//Function Number: 25
-func_117A9()
-{
+func_117A9() {
 	self endon("death");
 	self endon("leaving");
 	self.triggerportableradarping endon("disconnect");
@@ -554,15 +467,12 @@ func_117A9()
 	thread func_11795(var_00);
 }
 
-//Function Number: 26
-func_11795(param_00)
-{
+func_11795(param_00) {
 	self endon("death");
 	self notify("leaving");
 	var_01 = level.var_117B0[self.streakname];
 	scripts\mp\_utility::leaderdialog(var_01.votimedout);
-	if(isdefined(self.triggerportableradarping))
-	{
+	if(isdefined(self.triggerportableradarping)) {
 		self.triggerportableradarping func_11791(self,param_00);
 		self.triggerportableradarping setclientomnvar("ui_thor_show",0);
 		self.triggerportableradarping setclientomnvar("ui_killstreak_countdown",0);
@@ -570,13 +480,11 @@ func_11795(param_00)
 		self.triggerportableradarping setclientomnvar("ui_killstreak_missile_warn",0);
 		self.triggerportableradarping clearclienttriggeraudiozone(1);
 		self.triggerportableradarping stoprumble("thor_thrust_rumble");
-		foreach(var_03 in self.var_B88C)
-		{
+		foreach(var_03 in self.var_B88C) {
 			self.triggerportableradarping setclientomnvar(var_03.omnvar,undefined);
 		}
 
-		foreach(var_06 in self.var_B888)
-		{
+		foreach(var_06 in self.var_B888) {
 			self.triggerportableradarping setclientomnvar(var_06.omnvar,-1);
 		}
 	}
@@ -593,18 +501,14 @@ func_11795(param_00)
 	self delete();
 }
 
-//Function Number: 27
-func_11791(param_00,param_01)
-{
+func_11791(param_00,param_01) {
 	var_02 = level.var_117B0[param_00.streakname];
 	scripts\mp\_utility::printgameaction("killstreak ended - thor",self);
-	if(isdefined(param_00))
-	{
+	if(isdefined(param_00)) {
 		param_00 notify("end_remote");
 		self notify("thor_ride_ended");
 		scripts\engine\utility::allow_usability(1);
-		if(getdvarint("camera_thirdPerson"))
-		{
+		if(getdvarint("camera_thirdPerson")) {
 			scripts\mp\_utility::setthirdpersondof(1);
 		}
 
@@ -613,8 +517,7 @@ func_11791(param_00,param_01)
 		self _meth_85A2("");
 		self unlink();
 		self setplayerangles(self.restoreangles);
-		if(scripts\mp\_utility::istrue(param_01))
-		{
+		if(scripts\mp\_utility::istrue(param_01)) {
 			scripts\mp\_utility::func_1136C(scripts\engine\utility::getlastweapon(),1);
 		}
 		else
@@ -624,22 +527,18 @@ func_11791(param_00,param_01)
 
 		self stoplocalsound("odin_negative_action");
 		self stoplocalsound("odin_positive_action");
-		foreach(var_04 in level.var_117B0[param_00.streakname].var_394)
-		{
-			if(isdefined(var_04.var_D5E4))
-			{
+		foreach(var_04 in level.var_117B0[param_00.streakname].var_394) {
+			if(isdefined(var_04.var_D5E4)) {
 				self stoplocalsound(var_04.var_D5E4);
 			}
 
-			if(isdefined(var_04.var_D5DD))
-			{
+			if(isdefined(var_04.var_D5DD)) {
 				self stoplocalsound(var_04.var_D5DD);
 			}
 		}
 
 		thread scripts\mp\killstreaks\_killstreaks::func_11086();
-		if(isdefined(self.var_117AF))
-		{
+		if(isdefined(self.var_117AF)) {
 			self.var_117AF delete();
 		}
 
@@ -649,9 +548,7 @@ func_11791(param_00,param_01)
 	}
 }
 
-//Function Number: 28
-func_11794()
-{
+func_11794() {
 	self endon("disconnect");
 	self endon("death");
 	level endon("game_ended");
@@ -660,9 +557,7 @@ func_11794()
 	scripts\mp\_utility::freezecontrolswrapper(0);
 }
 
-//Function Number: 29
-func_117AA()
-{
+func_117AA() {
 	self endon("death");
 	self endon("leaving");
 	level endon("game_ended");
@@ -675,8 +570,7 @@ func_117AA()
 	self.targeting_marker = var_01;
 	self _meth_8549();
 	self _meth_8594();
-	for(;;)
-	{
+	for(;;) {
 		var_02 = var_00 getvieworigin() - (0,0,50);
 		var_03 = var_02 + anglestoforward(var_00 getplayerangles()) * -15536;
 		var_04 = ["physicscontents_clipshot","physicscontents_corpseclipshot","physicscontents_missileclip","physicscontents_solid","physicscontents_vehicle"];
@@ -687,9 +581,7 @@ func_117AA()
 	}
 }
 
-//Function Number: 30
-func_1179F()
-{
+func_1179F() {
 	self endon("death");
 	self endon("leaving");
 	var_00 = self.triggerportableradarping;
@@ -700,47 +592,37 @@ func_1179F()
 	var_04 = 3;
 	var_05 = 4;
 	var_06 = 5;
-	if(scripts\mp\killstreaks\_utility::func_A69F(self.streakinfo,"passive_armor_duration"))
-	{
+	if(scripts\mp\killstreaks\_utility::func_A69F(self.streakinfo,"passive_armor_duration")) {
 		var_04++;
 		var_05++;
 		var_06++;
 	}
 
-	for(;;)
-	{
+	for(;;) {
 		self waittill("damage",var_07,var_08,var_09,var_0A,var_0B,var_0C,var_0D,var_0E,var_0F,var_10,var_11,var_12,var_13,var_14);
 		var_10 = scripts\mp\_utility::func_13CA1(var_10,var_14);
-		if(isdefined(var_08))
-		{
-			if(isdefined(var_08.triggerportableradarping))
-			{
+		if(isdefined(var_08)) {
+			if(isdefined(var_08.triggerportableradarping)) {
 				var_08 = var_08.triggerportableradarping;
 			}
 
-			if(isdefined(var_08.team) && var_08.team == self.team && var_08 != self.triggerportableradarping)
-			{
+			if(isdefined(var_08.team) && var_08.team == self.team && var_08 != self.triggerportableradarping) {
 				continue;
 			}
 		}
 
-		if(scripts/mp/equipment/phase_shift::isentityphaseshifted(var_08))
-		{
+		if(scripts/mp/equipment/phase_shift::isentityphaseshifted(var_08)) {
 			continue;
 		}
 
-		if(isdefined(var_0B))
-		{
+		if(isdefined(var_0B)) {
 			var_00 func_4CF1(self,var_0B);
 		}
 
-		if(isdefined(var_10))
-		{
+		if(isdefined(var_10)) {
 			var_07 = scripts\mp\killstreaks\_utility::getmodifiedantikillstreakdamage(var_08,var_10,var_0B,var_07,var_01.maxhealth,var_04,var_05,var_06);
-			if(scripts\mp\killstreaks\_utility::func_A69F(self.streakinfo,"passive_armor_duration"))
-			{
-				if(scripts\mp\killstreaks\_utility::isexplosiveantikillstreakweapon(var_10))
-				{
+			if(scripts\mp\killstreaks\_utility::func_A69F(self.streakinfo,"passive_armor_duration")) {
+				if(scripts\mp\killstreaks\_utility::isexplosiveantikillstreakweapon(var_10)) {
 					var_08 scripts\mp\_damagefeedback::updatedamagefeedback("hitblastshield");
 				}
 			}
@@ -748,18 +630,15 @@ func_1179F()
 
 		var_02 = var_02 - var_07;
 		var_00 setclientomnvar("ui_killstreak_health",var_02 / var_01.maxhealth);
-		if(isplayer(var_08))
-		{
+		if(isplayer(var_08)) {
 			var_08 scripts\mp\_damagefeedback::updatedamagefeedback("");
 			scripts\mp\killstreaks\_killstreaks::killstreakhit(var_08,var_10,self,var_0B);
 			scripts\mp\_damage::logattackerkillstreak(self,var_07,var_08,var_09,var_0A,var_0B,var_0C,var_0D,var_0E,var_0F,var_10);
-			if(var_02 <= 0)
-			{
+			if(var_02 <= 0) {
 				var_08 notify("destroyed_killstreak",var_10);
 				var_15 = "callout_destroyed_thor";
 				var_16 = scripts\mp\_killstreak_loot::getrarityforlootitem(self.streakinfo.variantid);
-				if(var_16 != "")
-				{
+				if(var_16 != "") {
 					var_15 = var_15 + "_" + var_16;
 				}
 
@@ -770,11 +649,8 @@ func_1179F()
 	}
 }
 
-//Function Number: 31
-func_4CF1(param_00,param_01)
-{
-	switch(param_01)
-	{
+func_4CF1(param_00,param_01) {
+	switch(param_01) {
 		case "MOD_GRENADE_SPLASH":
 		case "MOD_GRENADE":
 		case "MOD_PROJECTILE":
@@ -795,40 +671,31 @@ func_4CF1(param_00,param_01)
 	}
 }
 
-//Function Number: 32
-func_3239(param_00)
-{
+func_3239(param_00) {
 	self earthquakeforplayer(0.15,0.25,param_00 gettagorigin("tag_player"),50);
 	self playrumbleonentity("damage_light");
 	thread func_1349D(param_00,0.4);
 }
 
-//Function Number: 33
-func_69E6(param_00)
-{
+func_69E6(param_00) {
 	self earthquakeforplayer(0.4,0.45,param_00 gettagorigin("tag_player"),1000);
 	self playrumbleonentity("damage_heavy");
 	thread func_1349D(param_00,0.7);
 }
 
-//Function Number: 34
-func_1349D(param_00,param_01)
-{
+func_1349D(param_00,param_01) {
 	self endon("disconnect");
 	level endon("game_ended");
 	param_00 endon("death");
 	param_00.var_10E4C.alpha = param_01;
-	while(param_01 > 0)
-	{
+	while(param_01 > 0) {
 		scripts\engine\utility::waitframe();
 		param_01 = param_01 - 0.1;
 		param_00.var_10E4C.alpha = param_01;
 	}
 }
 
-//Function Number: 35
-func_495B()
-{
+func_495B() {
 	var_00 = newclienthudelem(self);
 	var_00.x = 0;
 	var_00.y = 0;
@@ -843,26 +710,21 @@ func_495B()
 	return var_00;
 }
 
-//Function Number: 36
-func_117AD()
-{
+func_117AD() {
 	self endon("death");
 	self endon("leaving");
 	level endon("game_ended");
 	var_00 = self.triggerportableradarping;
 	var_00 endon("disconnect");
 	var_01 = level.var_117B0[self.streakname];
-	if(!isai(var_00))
-	{
+	if(!isai(var_00)) {
 		var_00 notifyonplayercommand("thor_missile_zoom_on","+weapnext");
 	}
 
-	for(;;)
-	{
+	for(;;) {
 		var_00 waittill("thor_missile_zoom_on");
 		var_00 scripts\engine\utility::allow_weapon_switch(1);
-		if(!isdefined(self.var_117B3))
-		{
+		if(!isdefined(self.var_117B3)) {
 			var_00 scripts\mp\_utility::_switchtoweaponimmediate(self.secondaryweapon);
 			self.var_117B3 = 1;
 			var_00 setclientomnvar("ui_thor_show",2);
@@ -878,30 +740,24 @@ func_117AD()
 	}
 }
 
-//Function Number: 37
-func_117AB()
-{
+func_117AB() {
 	self endon("death");
 	self endon("leaving");
 	level endon("game_ended");
 	var_00 = self.triggerportableradarping;
 	var_00 endon("disconnect");
 	var_01 = level.var_117B0[self.streakname];
-	if(!isai(var_00))
-	{
-		if(var_00 scripts\engine\utility::is_player_gamepad_enabled())
-		{
+	if(!isai(var_00)) {
+		if(var_00 scripts\engine\utility::is_player_gamepad_enabled()) {
 			var_00 notifyonplayercommand("thor_thermal_toggle","+usereload");
 		}
 
 		var_00 notifyonplayercommand("thor_thermal_toggle","+activate");
 	}
 
-	for(;;)
-	{
+	for(;;) {
 		var_00 waittill("thor_thermal_toggle");
-		if(!isdefined(self.var_117B2))
-		{
+		if(!isdefined(self.var_117B2)) {
 			var_00 thermalvisionon();
 			self.var_117B2 = 1;
 			continue;
@@ -912,33 +768,26 @@ func_117AB()
 	}
 }
 
-//Function Number: 38
-func_117A2()
-{
+func_117A2() {
 	self endon("death");
 	self endon("leaving");
 	var_00 = self.triggerportableradarping;
 	var_00 endon("disconnect");
-	if(!isai(var_00))
-	{
+	if(!isai(var_00)) {
 		var_00 notifyonplayercommand("thor_fire_thrusters","+smoke");
 		var_00 notifyonplayercommand("thor_release_thrusters","-smoke");
 	}
 
-	for(;;)
-	{
+	for(;;) {
 		var_01 = var_00 scripts\engine\utility::waittill_any_return("thor_fire_thrusters","thor_release_thrusters");
-		if(!isdefined(var_01))
-		{
+		if(!isdefined(var_01)) {
 			continue;
 		}
 
-		if(var_01 == "thor_fire_thrusters")
-		{
+		if(var_01 == "thor_fire_thrusters") {
 			var_00.var_117AF thread func_E731(var_00.thorrigangle,30,"thor_release_thrusters","thor_switch_thrusters");
 			thread func_B06B(var_00);
-			if(var_00.thorrigangle == -360)
-			{
+			if(var_00.thorrigangle == -360) {
 				self scriptmodelplayanim("iw7_mp_killstreak_thor_extend_thrust",1);
 			}
 			else
@@ -952,8 +801,7 @@ func_117A2()
 
 		var_00.var_117AF thread func_E731(var_00.thorrigangle,60,"thor_fire_thrusters","thor_switch_thrusters");
 		var_00 stoprumble("thor_thrust_rumble");
-		if(var_00.thorrigangle == -360)
-		{
+		if(var_00.thorrigangle == -360) {
 			self scriptmodelplayanim("iw7_mp_killstreak_thor_extend_idle",1);
 		}
 		else
@@ -965,45 +813,35 @@ func_117A2()
 	}
 }
 
-//Function Number: 39
-func_B06B(param_00)
-{
+func_B06B(param_00) {
 	self endon("death");
 	param_00 endon("thor_release_thrusters");
 	param_00 _meth_8244("thor_thrust_rumble");
-	for(;;)
-	{
+	for(;;) {
 		scripts\mp\_shellshock::_earthquake(0.15,0.05,self.origin,1000);
 		scripts\engine\utility::waitframe();
 	}
 }
 
-//Function Number: 40
-func_B9F2(param_00)
-{
+func_B9F2(param_00) {
 	self endon("death");
 	level endon("game_ended");
 	param_00 endon("disconnect");
 	scripts\mp\_hostmigration::waitlongdurationwithhostmigrationpause(1.5);
 	var_01 = [];
-	for(;;)
-	{
+	for(;;) {
 		var_02 = param_00 scripts\mp\_utility::get_players_watching();
-		foreach(var_04 in var_01)
-		{
-			if(!scripts\engine\utility::array_contains(var_02,var_04))
-			{
+		foreach(var_04 in var_01) {
+			if(!scripts\engine\utility::array_contains(var_02,var_04)) {
 				var_01 = scripts\engine\utility::array_remove(var_01,var_04);
 				self hide();
 				self showtoplayer(param_00);
 			}
 		}
 
-		foreach(var_04 in var_02)
-		{
+		foreach(var_04 in var_02) {
 			self showtoplayer(var_04);
-			if(!scripts\engine\utility::array_contains(var_01,var_04))
-			{
+			if(!scripts\engine\utility::array_contains(var_01,var_04)) {
 				var_01 = scripts\engine\utility::array_add(var_01,var_04);
 				stopfxontag(level._effect["thor_targeting"],self,"tag_origin");
 				wait(0.05);
@@ -1015,26 +853,21 @@ func_B9F2(param_00)
 	}
 }
 
-//Function Number: 41
-thor_watchswitchthrust(param_00)
-{
+thor_watchswitchthrust(param_00) {
 	self endon("death");
 	self endon("leaving");
 	level endon("game_ended");
 	param_00 = self.triggerportableradarping;
 	param_00 endon("disconnect");
-	if(!isai(param_00))
-	{
+	if(!isai(param_00)) {
 		param_00 notifyonplayercommand("thor_switch_thrusters","+speed_throw");
 		param_00 notifyonplayercommand("thor_switch_thrusters","+toggleads_throw");
 		param_00 notifyonplayercommand("thor_switch_thrusters","+ads_akimbo_accessible");
 	}
 
-	for(;;)
-	{
+	for(;;) {
 		var_01 = param_00 scripts\engine\utility::waittill_any_return("thor_switch_thrusters");
-		if(param_00.thorrigangle == -360)
-		{
+		if(param_00.thorrigangle == -360) {
 			self scriptmodelplayanim("iw7_mp_killstreak_thor_extend_rev_idle",1);
 			param_00.thorrigangle = 360;
 		}
@@ -1048,26 +881,21 @@ thor_watchswitchthrust(param_00)
 	}
 }
 
-//Function Number: 42
-thor_watchdebugtogglemovement(param_00)
-{
+thor_watchdebugtogglemovement(param_00) {
 	self endon("death");
 	self endon("leaving");
 	level endon("game_ended");
 	param_00 endon("disconnect");
-	if(!isai(param_00))
-	{
+	if(!isai(param_00)) {
 		param_00 notifyonplayercommand("thor_toggle_movement","+speed_throw");
 		param_00 notifyonplayercommand("thor_toggle_movement","+toggleads_throw");
 		param_00 notifyonplayercommand("thor_toggle_movement","+ads_akimbo_accessible");
 	}
 
 	var_01 = 1;
-	for(;;)
-	{
+	for(;;) {
 		var_02 = param_00 scripts\engine\utility::waittill_any_return("thor_toggle_movement");
-		if(scripts\mp\_utility::istrue(var_01))
-		{
+		if(scripts\mp\_utility::istrue(var_01)) {
 			self unlink();
 			var_01 = 0;
 			continue;
@@ -1078,9 +906,7 @@ thor_watchdebugtogglemovement(param_00)
 	}
 }
 
-//Function Number: 43
-func_117A3()
-{
+func_117A3() {
 	self endon("death");
 	self endon("leaving");
 	level endon("game_ended");
@@ -1088,39 +914,32 @@ func_117A3()
 	var_00 endon("disconnect");
 	var_01 = "missile";
 	var_02 = level.var_117B0[self.streakname].var_394[var_01];
-	for(;;)
-	{
+	for(;;) {
 		var_00 waittill("missile_fire",var_03,var_04);
-		if(scripts\mp\_utility::istrue(self.var_9BE2))
-		{
+		if(scripts\mp\_utility::istrue(self.var_9BE2)) {
 			continue;
 		}
 
-		if(scripts\mp\_utility::istrue(self.var_9C9F))
-		{
+		if(scripts\mp\_utility::istrue(self.var_9C9F)) {
 			continue;
 		}
 
-		if(isdefined(level.hostmigrationtimer))
-		{
+		if(isdefined(level.hostmigrationtimer)) {
 			continue;
 		}
 
-		if(isdefined(self.var_C239) && self.var_C239 < 1)
-		{
+		if(isdefined(self.var_C239) && self.var_C239 < 1) {
 			continue;
 		}
 
-		if(isdefined(var_04) && var_04 != "thorproj_mp" && var_04 != "thorproj_zoomed_mp")
-		{
+		if(isdefined(var_04) && var_04 != "thorproj_mp" && var_04 != "thorproj_zoomed_mp") {
 			continue;
 		}
 
 		self setscriptablepartstate("muzzle","fire",0);
 		thread func_5104(0.1);
 		var_03.streakinfo = self.streakinfo;
-		if(isdefined(var_04) && var_04 == "thorproj_mp")
-		{
+		if(isdefined(var_04) && var_04 == "thorproj_mp") {
 			var_03 thread func_139D1(var_00,var_01,self);
 			continue;
 		}
@@ -1129,17 +948,13 @@ func_117A3()
 	}
 }
 
-//Function Number: 44
-func_5104(param_00)
-{
+func_5104(param_00) {
 	self endon("death");
 	wait(param_00);
 	self setscriptablepartstate("muzzle","neutral",0);
 }
 
-//Function Number: 45
-func_139D1(param_00,param_01,param_02)
-{
+func_139D1(param_00,param_01,param_02) {
 	param_00 endon("disconnect");
 	param_02 endon("death");
 	var_03 = param_02.targeting_marker;
@@ -1151,15 +966,12 @@ func_139D1(param_00,param_01,param_02)
 	var_07 = var_03.origin;
 	var_08 = scripts\mp\killstreaks\_utility::func_7E92(param_00);
 	var_09 = [];
-	foreach(var_0B in var_08)
-	{
-		if(!scripts\mp\killstreaks\_utility::manualmissilecantracktarget(var_0B))
-		{
+	foreach(var_0B in var_08) {
+		if(!scripts\mp\killstreaks\_utility::manualmissilecantracktarget(var_0B)) {
 			continue;
 		}
 
-		if(param_00 worldpointinreticle_circle(var_0B.origin,65,55))
-		{
+		if(param_00 worldpointinreticle_circle(var_0B.origin,65,55)) {
 			var_09[var_09.size] = var_0B;
 		}
 	}
@@ -1167,10 +979,8 @@ func_139D1(param_00,param_01,param_02)
 	self waittill("explode",var_0D);
 	var_0E = param_02.var_C239;
 	var_0F = "thorproj_tracking_mp";
-	for(var_10 = 0;var_10 < var_0E;var_10++)
-	{
-		if(!isdefined(param_02))
-		{
+	for(var_10 = 0;var_10 < var_0E;var_10++) {
+		if(!isdefined(param_02)) {
 			break;
 		}
 
@@ -1188,8 +998,7 @@ func_139D1(param_00,param_01,param_02)
 		var_16.streakinfo = param_02.streakinfo;
 		var_16.triggerportableradarping setclientomnvar(var_16.id.omnvar,var_16);
 		var_16.triggerportableradarping setclientomnvar(var_16.var_5716.omnvar,int(var_16.zoffset));
-		if(scripts\mp\killstreaks\_utility::func_A69F(param_02.streakinfo,"passive_seek_cluster"))
-		{
+		if(scripts\mp\killstreaks\_utility::func_A69F(param_02.streakinfo,"passive_seek_cluster")) {
 			var_16 thread delayseekopentargetinview(0.3,var_16.triggerportableradarping,var_07,var_09);
 		}
 		else
@@ -1211,20 +1020,15 @@ func_139D1(param_00,param_01,param_02)
 	param_02.var_9BE2 = undefined;
 }
 
-//Function Number: 46
-delayseekopentargetinview(param_00,param_01,param_02,param_03)
-{
+delayseekopentargetinview(param_00,param_01,param_02,param_03) {
 	var_04 = undefined;
 	wait(param_00);
-	foreach(var_06 in param_03)
-	{
-		if(!scripts\mp\killstreaks\_utility::manualmissilecantracktarget(var_06))
-		{
+	foreach(var_06 in param_03) {
+		if(!scripts\mp\killstreaks\_utility::manualmissilecantracktarget(var_06)) {
 			continue;
 		}
 
-		if(scripts\mp\_utility::istrue(var_06.thortargetted))
-		{
+		if(scripts\mp\_utility::istrue(var_06.thortargetted)) {
 			continue;
 		}
 
@@ -1232,8 +1036,7 @@ delayseekopentargetinview(param_00,param_01,param_02,param_03)
 		break;
 	}
 
-	if(isdefined(var_04))
-	{
+	if(isdefined(var_04)) {
 		self missile_settargetent(var_04);
 		self missile_setflightmodedirect();
 		var_04.thortargetted = 1;
@@ -1245,19 +1048,14 @@ delayseekopentargetinview(param_00,param_01,param_02,param_03)
 	self missile_setflightmodedirect();
 }
 
-//Function Number: 47
-watchtarget(param_00)
-{
+watchtarget(param_00) {
 	self endon("disconnect");
-	for(;;)
-	{
-		if(!scripts\mp\killstreaks\_utility::manualmissilecantracktarget(self))
-		{
+	for(;;) {
+		if(!scripts\mp\killstreaks\_utility::manualmissilecantracktarget(self)) {
 			break;
 		}
 
-		if(!isdefined(param_00))
-		{
+		if(!isdefined(param_00)) {
 			break;
 		}
 
@@ -1265,22 +1063,17 @@ watchtarget(param_00)
 	}
 
 	self.thortargetted = undefined;
-	if(isdefined(param_00))
-	{
+	if(isdefined(param_00)) {
 		param_00 missile_cleartarget();
 	}
 }
 
-//Function Number: 48
-canseetarget(param_00)
-{
+canseetarget(param_00) {
 	var_01 = 0;
 	var_02 = scripts\common\trace::create_contents(0,1,1,1,1,1,0);
 	var_03 = param_00 gettagorigin("j_head");
-	for(var_04 = 0;var_04 < var_03.size;var_04++)
-	{
-		if(!scripts\common\trace::ray_trace_passed(self.origin,var_03[var_04],self,var_02))
-		{
+	for(var_04 = 0;var_04 < var_03.size;var_04++) {
+		if(!scripts\common\trace::ray_trace_passed(self.origin,var_03[var_04],self,var_02)) {
 			continue;
 		}
 
@@ -1291,28 +1084,21 @@ canseetarget(param_00)
 	return var_01;
 }
 
-//Function Number: 49
-func_50E6(param_00,param_01)
-{
+func_50E6(param_00,param_01) {
 	self.triggerportableradarping endon("disconnect");
 	wait(param_00);
-	if(isdefined(param_01))
-	{
+	if(isdefined(param_01)) {
 		self missile_settargetent(param_01);
 	}
 
 	self missile_setflightmodedirect();
 }
 
-//Function Number: 50
-func_139F6(param_00,param_01)
-{
+func_139F6(param_00,param_01) {
 	self endon("explode");
 	self endon("death");
-	for(;;)
-	{
-		if(isdefined(param_01.var_9C9F))
-		{
+	for(;;) {
+		if(isdefined(param_01.var_9C9F)) {
 			break;
 		}
 
@@ -1326,27 +1112,20 @@ func_139F6(param_00,param_01)
 	}
 }
 
-//Function Number: 51
-func_13A22(param_00,param_01)
-{
+func_13A22(param_00,param_01) {
 	self waittill("explode",var_02);
-	if(isdefined(self.outlineid))
-	{
+	if(isdefined(self.outlineid)) {
 		scripts\mp\_utility::outlinedisable(self.outlineid,self);
 	}
 
-	if(isdefined(param_00))
-	{
-		if(isdefined(self.id.omnvar))
-		{
+	if(isdefined(param_00)) {
+		if(isdefined(self.id.omnvar)) {
 			param_00 setclientomnvar(self.id.omnvar,undefined);
 		}
 	}
 }
 
-//Function Number: 52
-func_13B42(param_00,param_01)
-{
+func_13B42(param_00,param_01) {
 	param_00 endon("disconnect");
 	param_01 endon("death");
 	param_01.var_9BE2 = 1;
@@ -1365,8 +1144,7 @@ func_13B42(param_00,param_01)
 	param_01.var_C239--;
 	param_00 setclientomnvar("ui_thor_missiles_loaded",param_01.var_C239);
 	scripts\mp\_hostmigration::waitlongdurationwithhostmigrationpause(0.1);
-	if(param_01.var_C239 > 0)
-	{
+	if(param_01.var_C239 > 0) {
 		param_01 notify("finished_single_fire");
 	}
 	else
@@ -1379,17 +1157,13 @@ func_13B42(param_00,param_01)
 	param_01.var_9BE2 = undefined;
 }
 
-//Function Number: 53
-func_1179E()
-{
+func_1179E() {
 	self endon("death");
 	self endon("leaving");
 	var_00 = 0;
-	for(;;)
-	{
+	for(;;) {
 		self waittill("start_reload");
-		if(var_00 == 20)
-		{
+		if(var_00 == 20) {
 			func_1179C(3);
 			self notify("death");
 		}
@@ -1399,22 +1173,18 @@ func_1179E()
 	}
 }
 
-//Function Number: 54
-func_1179B()
-{
+func_1179B() {
 	self endon("death");
 	var_00 = self.triggerportableradarping;
 	var_00 endon("disconnect");
 	var_00 endon("thor_missile_fire_success");
 	level endon("game_ended");
 	func_1179C(3);
-	if(self.var_C239 < self.var_B47C)
-	{
+	if(self.var_C239 < self.var_B47C) {
 		self.var_9C9F = 1;
 		var_00 playlocalsound("thor_missile_reload");
 		thread func_510A(1);
-		while(self.var_C239 < self.var_B47C)
-		{
+		while(self.var_C239 < self.var_B47C) {
 			self.var_C239++;
 			var_00 setclientomnvar("ui_thor_missiles_loaded",self.var_C239);
 			self.var_B88C[self.var_C239 - 1].inuse = 0;
@@ -1428,18 +1198,14 @@ func_1179B()
 	self notify("finished_reload");
 }
 
-//Function Number: 55
-func_510A(param_00)
-{
+func_510A(param_00) {
 	self endon("death");
 	scripts\mp\_hostmigration::waitlongdurationwithhostmigrationpause(param_00);
 	self.var_9C9F = undefined;
 	self notify("finished_reload");
 }
 
-//Function Number: 56
-func_12F01(param_00)
-{
+func_12F01(param_00) {
 	self endon("death");
 	param_00 endon("disconnect");
 	param_00 endon("thor_missile_fire_success");
@@ -1447,8 +1213,7 @@ func_12F01(param_00)
 	var_01 = gettime();
 	var_02 = var_01 + self.var_DF5C * 1000;
 	var_03 = var_01;
-	while(var_03 < var_02)
-	{
+	while(var_03 < var_02) {
 		var_03 = gettime();
 		var_04 = var_03 - var_01 / var_02 - var_01;
 		var_04 = clamp(var_04,0,1);
@@ -1456,34 +1221,25 @@ func_12F01(param_00)
 	}
 }
 
-//Function Number: 57
-func_13AD4()
-{
+func_13AD4() {
 	self endon("death");
 	scripts\mp\_hostmigration::waitlongdurationwithhostmigrationpause(1);
 	self delete();
 }
 
-//Function Number: 58
-func_117A6()
-{
+func_117A6() {
 	self endon("death");
 	level endon("game_ended");
-	foreach(var_01 in level.participants)
-	{
+	foreach(var_01 in level.participants) {
 		func_20D2(var_01);
 	}
 }
 
-//Function Number: 59
-func_20D2(param_00)
-{
-	if(level.teambased && param_00.team != self.team)
-	{
+func_20D2(param_00) {
+	if(level.teambased && param_00.team != self.team) {
 		return;
 	}
-	else if(!level.teambased)
-	{
+	else if(!level.teambased) {
 		return;
 	}
 
@@ -1491,24 +1247,18 @@ func_20D2(param_00)
 	thread removeoutline(var_01,param_00);
 }
 
-//Function Number: 60
-func_6567(param_00)
-{
+func_6567(param_00) {
 	return param_00 scripts\mp\_utility::_hasperk("specialty_noplayertarget");
 }
 
-//Function Number: 61
-removeoutline(param_00,param_01,param_02)
-{
-	if(isdefined(param_01))
-	{
+removeoutline(param_00,param_01,param_02) {
+	if(isdefined(param_01)) {
 		param_01 endon("disconnect");
 	}
 
 	level endon("game_ended");
 	var_03 = ["leave","death"];
-	if(isdefined(param_02))
-	{
+	if(isdefined(param_02)) {
 		scripts\engine\utility::waittill_any_in_array_or_timeout_no_endon_death(var_03,param_02);
 	}
 	else
@@ -1519,35 +1269,28 @@ removeoutline(param_00,param_01,param_02)
 	scripts\mp\_utility::outlinedisable(param_00,param_01);
 }
 
-//Function Number: 62
-func_117A8()
-{
+func_117A8() {
 	self endon("death");
 	self endon("leaving");
 	level endon("game_ended");
 	self.enemieskilledintimewindow = 0;
-	for(;;)
-	{
+	for(;;) {
 		level waittill("thor_killed_player",var_00);
 		self.var_63AB++;
 		self notify("thor_enemy_killed");
 	}
 }
 
-//Function Number: 63
-func_11790(param_00)
-{
+func_11790(param_00) {
 	self endon("death");
 	self endon("leaving");
 	level endon("game_ended");
 	var_01 = level.var_117B0[self.streakname];
 	var_02 = 1;
-	for(;;)
-	{
+	for(;;) {
 		self waittill("thor_enemy_killed");
 		scripts\mp\_hostmigration::waitlongdurationwithhostmigrationpause(var_02);
-		if(self.enemieskilledintimewindow > 1)
-		{
+		if(self.enemieskilledintimewindow > 1) {
 			self.triggerportableradarping scripts\mp\_utility::leaderdialogonplayer(var_01.var_1352C);
 		}
 		else
@@ -1559,55 +1302,42 @@ func_11790(param_00)
 	}
 }
 
-//Function Number: 64
-func_11796()
-{
+func_11796() {
 	self endon("death");
 	level endon("game_ended");
-	for(;;)
-	{
+	for(;;) {
 		level waittill("connected",var_00);
 		var_00 thread func_11797(self);
 	}
 }
 
-//Function Number: 65
-func_11797(param_00)
-{
+func_11797(param_00) {
 	self endon("disconnect");
 	self waittill("spawned_player");
 	param_00 func_20D2(self);
 }
 
-//Function Number: 66
-func_4074()
-{
-	if(isdefined(self.targeting_marker))
-	{
+func_4074() {
+	if(isdefined(self.targeting_marker)) {
 		self.targeting_marker delete();
 	}
 
-	if(isdefined(self.var_C7FF))
-	{
+	if(isdefined(self.var_C7FF)) {
 		self.var_C7FF delete();
 	}
 
-	if(isdefined(self.var_10E4C))
-	{
+	if(isdefined(self.var_10E4C)) {
 		self.var_10E4C destroy();
 	}
 
-	if(isdefined(self.minimapid))
-	{
+	if(isdefined(self.minimapid)) {
 		scripts\mp\objidpoolmanager::returnminimapid(self.minimapid);
 	}
 
 	level.var_C20D--;
 }
 
-//Function Number: 67
-func_117A1()
-{
+func_117A1() {
 	level endon("game_ended");
 	self endon("death");
 	self endon("leaving");
@@ -1618,14 +1348,10 @@ func_117A1()
 	thread func_11795();
 }
 
-//Function Number: 68
-func_7FBA(param_00)
-{
+func_7FBA(param_00) {
 	var_01 = undefined;
-	for(var_02 = 4;var_02 + 1 > 0;var_02--)
-	{
-		if(!param_00[var_02].inuse)
-		{
+	for(var_02 = 4;var_02 + 1 > 0;var_02--) {
+		if(!param_00[var_02].inuse) {
 			var_01 = param_00[var_02];
 			param_00[var_02].inuse = 1;
 			break;
@@ -1635,12 +1361,9 @@ func_7FBA(param_00)
 	return var_01;
 }
 
-//Function Number: 69
-getthormapvisionset(param_00)
-{
+getthormapvisionset(param_00) {
 	var_01 = "";
-	switch(param_00)
-	{
+	switch(param_00) {
 		case "mp_depot":
 		case "mp_hawkwar":
 		case "mp_paris":

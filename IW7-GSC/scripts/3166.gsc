@@ -1,39 +1,25 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: 3166.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 31
- * Decompile Time: 9 ms
- * Timestamp: 10/27/2023 12:26:22 AM
-*******************************************************************/
+/****************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\3166.gsc
+****************************/
 
-//Function Number: 1
-func_FFD9()
-{
+func_FFD9() {
 	return scripts/asm/asm_bb::bb_getrequestedcoverstate() == "exposed" && isdefined(self.isnodeoccupied) && isdefined(self.target_getindexoftarget);
 }
 
-//Function Number: 2
-func_FFDA(param_00,param_01,param_02,param_03)
-{
-	if(isdefined(self.bt.var_C2) && isdefined(self.var_280A))
-	{
+func_FFDA(param_00,param_01,param_02,param_03) {
+	if(isdefined(self.bt.var_C2) && isdefined(self.var_280A)) {
 		return scripts/asm/asm_bb::bb_reloadrequested();
 	}
 
 	return 0;
 }
 
-//Function Number: 3
-func_CF00(param_00,param_01,param_02,param_03)
-{
-	if(param_03 == "alignToNode")
-	{
-		if(isdefined(param_01))
-		{
-			if(scripts\engine\utility::actor_is3d())
-			{
+func_CF00(param_00,param_01,param_02,param_03) {
+	if(param_03 == "alignToNode") {
+		if(isdefined(param_01)) {
+			if(scripts\engine\utility::actor_is3d()) {
 				var_04 = getangledelta3d(param_02);
 				var_05 = scripts\asm\shared_utility::getnodeforwardangles(param_01,0);
 				var_06 = combineangles(var_05,-1 * var_04);
@@ -51,11 +37,9 @@ func_CF00(param_00,param_01,param_02,param_03)
 		return;
 	}
 
-	if(var_06 == "stickToNode")
-	{
+	if(var_06 == "stickToNode") {
 		var_07 = getmovedelta(var_05);
-		if(distancesquared(var_04.origin,self.origin) < 16)
-		{
+		if(distancesquared(var_04.origin,self.origin) < 16) {
 			self ghost_target_position(var_04.origin);
 			return;
 		}
@@ -65,14 +49,11 @@ func_CF00(param_00,param_01,param_02,param_03)
 	}
 }
 
-//Function Number: 4
-func_3F06(param_00,param_01,param_02)
-{
+func_3F06(param_00,param_01,param_02) {
 	var_03 = scripts/asm/asm::asm_lookupanimfromalias(param_01,"2");
 	var_04 = getangledelta(var_03,0,1);
 	var_05 = angleclamp180(180 - var_04);
-	if(isdefined(self.vehicle_getspawnerarray) && self.livestreamingenable)
-	{
+	if(isdefined(self.vehicle_getspawnerarray) && self.livestreamingenable) {
 		var_06 = vectortoangles(self.setocclusionpreset);
 		var_07 = var_06[1] - self.angles[1];
 		var_08 = angleclamp180(var_07 + var_05);
@@ -85,12 +66,10 @@ func_3F06(param_00,param_01,param_02)
 	}
 
 	var_0A = spawnstruct();
-	if(abs(var_08) > 135)
-	{
+	if(abs(var_08) > 135) {
 		var_0A.var_1299D = scripts/asm/asm::asm_lookupanimfromalias(param_01,"2");
 	}
-	else if(var_08 < 0)
-	{
+	else if(var_08 < 0) {
 		var_0A.var_1299D = scripts/asm/asm::asm_lookupanimfromalias(param_01,"6");
 	}
 	else
@@ -102,15 +81,12 @@ func_3F06(param_00,param_01,param_02)
 	return var_0A;
 }
 
-//Function Number: 5
-func_D559(param_00,param_01,param_02,param_03)
-{
+func_D559(param_00,param_01,param_02,param_03) {
 	self endon(param_01 + "_finished");
 	var_04 = lib_0A1E::asm_getallanimsforstate(param_00,param_01);
 	self aiclearanim(lib_0A1E::asm_getbodyknob(),param_02);
 	var_05 = 1;
-	if((scripts/asm/asm_bb::bb_meleechargerequested(param_00,param_01,param_02,param_03) || scripts/asm/asm_bb::bb_meleerequested(param_00,param_01,param_02,param_03)) && isdefined(self.melee.target) && isplayer(self.melee.target))
-	{
+	if((scripts/asm/asm_bb::bb_meleechargerequested(param_00,param_01,param_02,param_03) || scripts/asm/asm_bb::bb_meleerequested(param_00,param_01,param_02,param_03)) && isdefined(self.melee.target) && isplayer(self.melee.target)) {
 		var_05 = 2;
 	}
 
@@ -118,15 +94,12 @@ func_D559(param_00,param_01,param_02,param_03)
 	lib_0A1E::func_2369(param_00,param_01,var_04.var_1299D);
 	thread func_D55A(param_01,var_04.var_1299D,var_04.var_D81F,param_02);
 	var_06 = lib_0A1E::func_231F(param_00,param_01,scripts/asm/asm::func_2341(param_00,param_01));
-	if(var_06 == "end")
-	{
+	if(var_06 == "end") {
 		thread scripts/asm/asm::func_2310(param_00,param_01,0);
 	}
 }
 
-//Function Number: 6
-func_D55A(param_00,param_01,param_02,param_03)
-{
+func_D55A(param_00,param_01,param_02,param_03) {
 	self endon(param_00 + "_finished");
 	self endon("death");
 	self endon("entitydeleted");
@@ -138,36 +111,29 @@ func_D55A(param_00,param_01,param_02,param_03)
 	var_09 = int(var_08 - param_03 * 20);
 	var_0A = var_07 / var_09;
 	var_0B = 0;
-	while(var_0B < var_09)
-	{
+	while(var_0B < var_09) {
 		self _meth_80F1(self.origin,self.angles + (0,var_0A,0));
 		var_0B++;
 		wait(0.05);
 	}
 }
 
-//Function Number: 7
-func_D558(param_00,param_01,param_02,param_03)
-{
+func_D558(param_00,param_01,param_02,param_03) {
 	var_04 = level.asm[param_00].states[param_01].var_71A5;
-	var_05 = self [[ var_04 ]](param_00,param_01,param_03);
+	var_05 = self [[var_04]](param_00,param_01,param_03);
 	var_06 = scripts/asm/asm_bb::bb_getcovernode();
-	if(!isdefined(var_06))
-	{
-		if(isdefined(self.target_getindexoftarget) && distancesquared(self.origin,self.target_getindexoftarget.origin) < 4096)
-		{
+	if(!isdefined(var_06)) {
+		if(isdefined(self.target_getindexoftarget) && distancesquared(self.origin,self.target_getindexoftarget.origin) < 4096) {
 			var_06 = self.target_getindexoftarget;
 		}
 	}
 
 	var_07 = undefined;
-	if(isdefined(var_06))
-	{
+	if(isdefined(var_06)) {
 		var_07 = _meth_8178(param_00,param_01,var_05,var_06);
 	}
 
-	if(isdefined(var_07))
-	{
+	if(isdefined(var_07)) {
 		self endon(param_01 + "_finished");
 		self.var_4C7E = ::lib_0F3D::func_22EA;
 		self.a.var_22E5 = param_01;
@@ -177,8 +143,7 @@ func_D558(param_00,param_01,param_02,param_03)
 		self.sendmatchdata = 1;
 		self animmode("zonly_physics",0);
 		self orientmode("face current");
-		if(self.script == "init")
-		{
+		if(self.script == "init") {
 			wait(0.05);
 		}
 
@@ -201,28 +166,22 @@ func_D558(param_00,param_01,param_02,param_03)
 	lib_0A1E::func_231F(param_03,var_04,scripts/asm/asm::func_2341(param_03,var_04));
 }
 
-//Function Number: 8
-func_36D9(param_00,param_01,param_02,param_03)
-{
+func_36D9(param_00,param_01,param_02,param_03) {
 	var_04 = param_01 - param_03;
 	var_05 = (0,var_04,0);
 	var_06 = rotatevector(param_02,var_05);
 	return param_00 - var_06;
 }
 
-//Function Number: 9
-_meth_8178(param_00,param_01,param_02,param_03)
-{
+_meth_8178(param_00,param_01,param_02,param_03) {
 	var_04 = undefined;
 	var_04 = param_03.origin;
 	var_05 = lib_0F3D::func_C057(param_03);
 	var_06 = undefined;
 	var_07 = undefined;
-	if(var_05)
-	{
+	if(var_05) {
 		var_08 = undefined;
-		if((scripts\engine\utility::isnodecoverleft(param_03) && lib_0F3D::func_9D4C(param_00,param_01,undefined,"Cover Left Crouch")) || scripts\engine\utility::isnodecoverright(param_03) && lib_0F3D::func_9D4C(param_00,param_01,undefined,"Cover Right Crouch"))
-		{
+		if((scripts\engine\utility::isnodecoverleft(param_03) && lib_0F3D::func_9D4C(param_00,param_01,undefined,"Cover Left Crouch")) || scripts\engine\utility::isnodecoverright(param_03) && lib_0F3D::func_9D4C(param_00,param_01,undefined,"Cover Right Crouch")) {
 			var_08 = "crouch";
 		}
 
@@ -241,19 +200,14 @@ _meth_8178(param_00,param_01,param_02,param_03)
 	return var_09;
 }
 
-//Function Number: 10
-func_9E30(param_00)
-{
-	if(!isdefined(param_00))
-	{
+func_9E30(param_00) {
+	if(!isdefined(param_00)) {
 		return 0;
 	}
 
 	var_01 = param_00 _meth_8169();
-	foreach(var_03 in var_01)
-	{
-		if(var_03 == "over")
-		{
+	foreach(var_03 in var_01) {
+		if(var_03 == "over") {
 			return 0;
 		}
 	}
@@ -261,39 +215,30 @@ func_9E30(param_00)
 	return 1;
 }
 
-//Function Number: 11
-func_3EC7(param_00,param_01,param_02)
-{
+func_3EC7(param_00,param_01,param_02) {
 	var_03 = param_02;
-	if(func_9E30(self.target_getindexoftarget))
-	{
+	if(func_9E30(self.target_getindexoftarget)) {
 		var_03 = var_03 + "_high";
 	}
 
 	var_04 = lib_0A1E::func_2356(param_01,var_03);
-	if(isarray(var_04))
-	{
+	if(isarray(var_04)) {
 		return var_04[randomint(var_04.size)];
 	}
 
 	return var_04;
 }
 
-//Function Number: 12
-func_CEFC(param_00,param_01,param_02,param_03)
-{
+func_CEFC(param_00,param_01,param_02,param_03) {
 	self endon(param_01 + "_finished");
 	self.sendmatchdata = 1;
 	childthread scripts\asm\shared_utility::setuseanimgoalweight(param_01,param_02);
 	var_04 = lib_0A1E::asm_getallanimsforstate(param_00,param_01);
 	self orientmode("face current");
 	var_05 = scripts/asm/asm_bb::bb_getcovernode();
-	if(isdefined(param_03))
-	{
-		if(isarray(param_03))
-		{
-			foreach(var_07 in param_03)
-			{
+	if(isdefined(param_03)) {
+		if(isarray(param_03)) {
+			foreach(var_07 in param_03) {
 				func_CF00(param_01,var_05,var_04,var_07);
 			}
 		}
@@ -303,8 +248,7 @@ func_CEFC(param_00,param_01,param_02,param_03)
 		}
 	}
 
-	if(scripts/asm/asm::func_2384(param_00,param_01,"notetrackAim"))
-	{
+	if(scripts/asm/asm::func_2384(param_00,param_01,"notetrackAim")) {
 		var_09 = getangledelta(var_04,0,1);
 		self.var_10F8C = self.angles[1] + var_09;
 	}
@@ -316,24 +260,17 @@ func_CEFC(param_00,param_01,param_02,param_03)
 	self orientmode("face current");
 }
 
-//Function Number: 13
-func_D46B(param_00,param_01,param_02,param_03)
-{
+func_D46B(param_00,param_01,param_02,param_03) {
 	func_CF02(param_00,param_01,param_02,param_03);
 }
 
-//Function Number: 14
-func_12675(param_00)
-{
+func_12675(param_00) {
 	var_01 = self.var_164D[param_00];
-	if(isdefined(var_01.var_10E23))
-	{
-		if(var_01.var_10E23 == "stand_run_loop")
-		{
+	if(isdefined(var_01.var_10E23)) {
+		if(var_01.var_10E23 == "stand_run_loop") {
 			return 1;
 		}
-		else if(scripts\engine\utility::actor_is3d() && var_01.var_10E23 == "stand_run_strafe_loop")
-		{
+		else if(scripts\engine\utility::actor_is3d() && var_01.var_10E23 == "stand_run_strafe_loop") {
 			return 1;
 		}
 	}
@@ -341,16 +278,11 @@ func_12675(param_00)
 	return 0;
 }
 
-//Function Number: 15
-func_CF01(param_00,param_01,param_02,param_03)
-{
-	if(!isdefined(self.asm.var_A961))
-	{
+func_CF01(param_00,param_01,param_02,param_03) {
+	if(!isdefined(self.asm.var_A961)) {
 		var_04 = [scripts/asm/asm_bb::bb_getcovernode(),self.target_getindexoftarget];
-		for(var_05 = 0;!isdefined(self.asm.var_A961) && var_05 < var_04.size;var_05++)
-		{
-			if(isdefined(var_04[var_05]) && distancesquared(self.origin,var_04[var_05].origin) < 256)
-			{
+		for(var_05 = 0;!isdefined(self.asm.var_A961) && var_05 < var_04.size;var_05++) {
+			if(isdefined(var_04[var_05]) && distancesquared(self.origin,var_04[var_05].origin) < 256) {
 				self.asm.var_A961 = var_04[var_05];
 			}
 		}
@@ -359,19 +291,13 @@ func_CF01(param_00,param_01,param_02,param_03)
 	func_CF02(param_00,param_01,param_02,param_03);
 }
 
-//Function Number: 16
-func_CF02(param_00,param_01,param_02,param_03)
-{
+func_CF02(param_00,param_01,param_02,param_03) {
 	self.sendmatchdata = 1;
-	if(isdefined(param_03))
-	{
-		if(param_03 == "stickToNode")
-		{
+	if(isdefined(param_03)) {
+		if(param_03 == "stickToNode") {
 			var_04 = scripts/asm/asm_bb::bb_getcovernode();
-			if(isdefined(var_04))
-			{
-				if(distancesquared(var_04.origin,self.origin) < 16)
-				{
+			if(isdefined(var_04)) {
+				if(distancesquared(var_04.origin,self.origin) < 16) {
 					self ghost_target_position(var_04.origin);
 				}
 				else
@@ -381,8 +307,7 @@ func_CF02(param_00,param_01,param_02,param_03)
 			}
 
 			self.sendmatchdata = 0;
-			if(func_12675(param_00))
-			{
+			if(func_12675(param_00)) {
 				childthread scripts\asm\shared_utility::setuseanimgoalweight(param_01,param_02);
 			}
 		}
@@ -390,8 +315,7 @@ func_CF02(param_00,param_01,param_02,param_03)
 
 	var_05 = archetypegetalias(self.asm.archetype,param_01,"conceal_add",0);
 	var_04 = scripts/asm/asm_bb::bb_getcovernode();
-	if(isdefined(var_05) && isdefined(var_04) && var_04.type == "Conceal Crouch" || var_04.type == "Conceal Stand")
-	{
+	if(isdefined(var_05) && isdefined(var_04) && var_04.type == "Conceal Crouch" || var_04.type == "Conceal Stand") {
 		self give_attacker_kill_rewards(var_05.var_47,1,0.2,1,1);
 		thread func_4497(param_01);
 	}
@@ -399,9 +323,7 @@ func_CF02(param_00,param_01,param_02,param_03)
 	lib_0F3D::func_B050(param_00,param_01,param_02,param_03);
 }
 
-//Function Number: 17
-func_4497(param_00)
-{
+func_4497(param_00) {
 	self endon("death");
 	self endon("entitydeleted");
 	self waittill(param_00 + "_finished");
@@ -409,16 +331,12 @@ func_4497(param_00)
 	self aiclearanim(var_01.var_47,0.2);
 }
 
-//Function Number: 18
-func_ABB7(param_00,param_01,param_02)
-{
+func_ABB7(param_00,param_01,param_02) {
 	self endon(param_02);
-	for(;;)
-	{
+	for(;;) {
 		var_03 = param_00.origin - self.origin;
 		var_04 = length(var_03);
-		if(var_04 < param_01)
-		{
+		if(var_04 < param_01) {
 			self ghost_target_position(param_00.origin);
 			break;
 		}
@@ -430,9 +348,7 @@ func_ABB7(param_00,param_01,param_02)
 	}
 }
 
-//Function Number: 19
-func_CEC2(param_00,param_01,param_02,param_03)
-{
+func_CEC2(param_00,param_01,param_02,param_03) {
 	self endon(param_01 + "_finished");
 	var_04 = lib_0A1E::asm_getallanimsforstate(param_00,param_01);
 	var_05 = getanimlength(var_04);
@@ -441,25 +357,19 @@ func_CEC2(param_00,param_01,param_02,param_03)
 	lib_0A1E::func_2369(param_00,param_01,var_04);
 	childthread scripts\asm\shared_utility::setuseanimgoalweight(param_01,param_02);
 	var_06 = lib_0A1E::func_2323(param_00,param_01,var_05,scripts/asm/asm::func_2341(param_00,param_01));
-	if(isdefined(var_06) && var_06 == "end")
-	{
+	if(isdefined(var_06) && var_06 == "end") {
 		thread scripts/asm/asm::func_2310(param_00,param_01,0);
 	}
 
 	scripts/asm/asm::asm_fireevent(param_01,"end");
 }
 
-//Function Number: 20
-func_41A2(param_00,param_01,param_02)
-{
+func_41A2(param_00,param_01,param_02) {
 	self.sendmatchdata = 0;
 	self.var_10F8C = undefined;
-	if(isdefined(param_02))
-	{
-		if(isarray(param_02))
-		{
-			foreach(var_04 in param_02)
-			{
+	if(isdefined(param_02)) {
+		if(isarray(param_02)) {
+			foreach(var_04 in param_02) {
 				scripts/asm/asm::asm_fireephemeralevent(var_04,"end");
 			}
 
@@ -470,16 +380,12 @@ func_41A2(param_00,param_01,param_02)
 	}
 }
 
-//Function Number: 21
-func_116F2(param_00,param_01,param_02)
-{
+func_116F2(param_00,param_01,param_02) {
 	scripts/asm/asm::asm_fireephemeralevent("reload","end");
 	lib_0C68::func_DF4F(param_00,param_01,param_02);
 }
 
-//Function Number: 22
-func_CEFD(param_00,param_01,param_02,param_03)
-{
+func_CEFD(param_00,param_01,param_02,param_03) {
 	self.sendmatchdata = 1;
 	var_04 = lib_0A1E::asm_getallanimsforstate(param_00,param_01);
 	self orientmode("face current");
@@ -489,9 +395,7 @@ func_CEFD(param_00,param_01,param_02,param_03)
 	lib_0A1E::func_231F(param_00,param_01,scripts/asm/asm::func_2341(param_00,param_01));
 }
 
-//Function Number: 23
-func_D51A(param_00,param_01,param_02,param_03)
-{
+func_D51A(param_00,param_01,param_02,param_03) {
 	var_04 = [];
 	var_04["crouch_shuffle_right"] = -90;
 	var_04["crouch_shuffle_left"] = 90;
@@ -503,12 +407,10 @@ func_D51A(param_00,param_01,param_02,param_03)
 	self aiclearanim(var_06,param_02);
 	self _meth_82EA(param_01,var_05,1,param_02,1);
 	lib_0A1E::func_2369(param_00,param_01,var_05);
-	if(isdefined(self._blackboard.shufflenode))
-	{
+	if(isdefined(self._blackboard.shufflenode)) {
 		var_07 = self._blackboard.shufflenode.angles[1];
 	}
-	else if(isdefined(self.target_getindexoftarget))
-	{
+	else if(isdefined(self.target_getindexoftarget)) {
 		var_07 = self.target_getindexoftarget.angles[1];
 	}
 	else
@@ -516,8 +418,7 @@ func_D51A(param_00,param_01,param_02,param_03)
 		var_07 = self.angles[1];
 	}
 
-	if(self.unittype != "c6" && isdefined(var_04[param_01]))
-	{
+	if(self.unittype != "c6" && isdefined(var_04[param_01])) {
 		var_07 = var_07 + var_04[param_01];
 	}
 
@@ -525,9 +426,7 @@ func_D51A(param_00,param_01,param_02,param_03)
 	lib_0A1E::func_231F(param_00,param_01);
 }
 
-//Function Number: 24
-func_10054(param_00,param_01,param_02,param_03)
-{
+func_10054(param_00,param_01,param_02,param_03) {
 	var_04 = lib_0A1E::func_235D(param_02);
 	var_05 = scripts/asm/asm::asm_lookupanimfromalias(param_02,var_04);
 	var_06 = getmovedelta(var_05);
@@ -536,32 +435,24 @@ func_10054(param_00,param_01,param_02,param_03)
 	return var_07 <= var_08 + 1;
 }
 
-//Function Number: 25
-func_FFB5(param_00,param_01,param_02,param_03)
-{
-	if(!isdefined(self._blackboard.shufflenode))
-	{
+func_FFB5(param_00,param_01,param_02,param_03) {
+	if(!isdefined(self._blackboard.shufflenode)) {
 		return 1;
 	}
 
-	if(!isdefined(self.target_getindexoftarget))
-	{
+	if(!isdefined(self.target_getindexoftarget)) {
 		return 1;
 	}
 
-	if(self._blackboard.shufflenode != self.target_getindexoftarget)
-	{
+	if(self._blackboard.shufflenode != self.target_getindexoftarget) {
 		return 1;
 	}
 
 	return 0;
 }
 
-//Function Number: 26
-func_FFCA(param_00,param_01,param_02,param_03)
-{
-	if(isdefined(param_03) && self._blackboard.shufflenode.type != param_03)
-	{
+func_FFCA(param_00,param_01,param_02,param_03) {
+	if(isdefined(param_03) && self._blackboard.shufflenode.type != param_03) {
 		return 0;
 	}
 
@@ -575,17 +466,14 @@ func_FFCA(param_00,param_01,param_02,param_03)
 	var_06 = var_0A - self.origin;
 	var_0B = self._blackboard.shufflenode.origin - self._blackboard.var_1016B.origin;
 	var_0B = (var_0B[0],var_0B[1],0);
-	if(vectordot(var_0B,var_06) < 0)
-	{
+	if(vectordot(var_0B,var_06) < 0) {
 		return 1;
 	}
 
 	return 0;
 }
 
-//Function Number: 27
-func_D518(param_00,param_01,param_02,param_03)
-{
+func_D518(param_00,param_01,param_02,param_03) {
 	self.var_4C7E = ::lib_0F3D::func_22EA;
 	self.a.var_22E5 = param_01;
 	var_04 = lib_0A1E::asm_getallanimsforstate(param_00,param_01);
@@ -594,8 +482,7 @@ func_D518(param_00,param_01,param_02,param_03)
 	lib_0A1E::func_2369(param_00,param_01,var_04);
 	var_05 = getmovedelta(var_04);
 	var_06 = getangledelta3d(var_04);
-	if(isdefined(self._blackboard.shufflenode))
-	{
+	if(isdefined(self._blackboard.shufflenode)) {
 		var_07 = self._blackboard.shufflenode;
 	}
 	else
@@ -603,8 +490,7 @@ func_D518(param_00,param_01,param_02,param_03)
 		var_07 = self.target_getindexoftarget;
 	}
 
-	if(isdefined(var_07))
-	{
+	if(isdefined(var_07)) {
 		var_08 = (0,scripts\asm\shared_utility::getnodeforwardyaw(var_07),0);
 		var_09 = combineangles(var_08,invertangles(var_06));
 		var_0A = var_07.origin - rotatevector(var_05,var_09);
@@ -619,39 +505,30 @@ func_D518(param_00,param_01,param_02,param_03)
 	lib_0A1E::func_231F(param_00,param_01);
 }
 
-//Function Number: 28
-func_D519(param_00,param_01,param_02)
-{
+func_D519(param_00,param_01,param_02) {
 	self._blackboard.shufflenode = undefined;
 	self._blackboard.var_1016B = undefined;
 }
 
-//Function Number: 29
-func_4742(param_00,param_01,param_02,param_03)
-{
+func_4742(param_00,param_01,param_02,param_03) {
 	func_CEFC(param_00,param_01,param_02,param_03);
 }
 
-//Function Number: 30
-func_4700(param_00,param_01,param_02,param_03)
-{
+func_4700(param_00,param_01,param_02,param_03) {
 	self.bt.var_C2.var_46FF = undefined;
 	var_04 = self.isnodeoccupied.origin + scripts\anim\utility_common::getenemyeyepos() / 2;
 	var_05 = level.asm[param_00].states[param_02];
 	var_06 = scripts\engine\utility::array_randomize(var_05.transitions);
 	var_07 = undefined;
-	foreach(var_09 in var_06)
-	{
+	foreach(var_09 in var_06) {
 		var_07 = var_09.var_100B1;
-		if(var_07 == "up")
-		{
+		if(var_07 == "up") {
 			break;
 		}
 
 		var_0A = scripts\anim\utility_common::getcover3dnodeoffset(self.target_getindexoftarget,var_07);
 		var_0B = self.target_getindexoftarget.origin + var_0A;
-		if(sighttracepassed(var_0B,var_04,0,undefined))
-		{
+		if(sighttracepassed(var_0B,var_04,0,undefined)) {
 			break;
 		}
 	}
@@ -660,9 +537,7 @@ func_4700(param_00,param_01,param_02,param_03)
 	return 1;
 }
 
-//Function Number: 31
-func_46FE(param_00,param_01,param_02,param_03)
-{
+func_46FE(param_00,param_01,param_02,param_03) {
 	var_04 = param_00 + "_" + param_01 + "_" + param_03;
 	return var_04 == self.bt.var_C2.var_46FF;
 }

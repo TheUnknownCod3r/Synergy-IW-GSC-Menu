@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\mp\gametypes\obj_capture.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 12
- * Decompile Time: 631 ms
- * Timestamp: 10/27/2023 12:12:53 AM
-*******************************************************************/
+/********************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\mp\gametypes\obj_capture.gsc
+********************************************************/
 
-//Function Number: 1
-init()
-{
+init() {
 	var_00 = spawnstruct();
 	var_00.pickuptime = 0.5;
 	var_00.usetextfriendly = &"MP_RETURNING_FLAG";
@@ -24,11 +18,8 @@ init()
 	level.objectivesettings["ctf"] = var_00;
 }
 
-//Function Number: 2
-createcaptureobjective(param_00,param_01,param_02)
-{
-	if(!isdefined(param_02))
-	{
+createcaptureobjective(param_00,param_01,param_02) {
+	if(!isdefined(param_02)) {
 		param_02 = level.objectivesettings["ctf"];
 	}
 
@@ -37,12 +28,9 @@ createcaptureobjective(param_00,param_01,param_02)
 	var_03.objective_icon = var_04;
 }
 
-//Function Number: 3
-createcarryobject(param_00,param_01,param_02)
-{
+createcarryobject(param_00,param_01,param_02) {
 	var_03 = getent(param_00,"targetname");
-	if(!isdefined(var_03))
-	{
+	if(!isdefined(var_03)) {
 		scripts\engine\utility::error("No model named " + param_00 + " found!");
 		return;
 	}
@@ -64,8 +52,7 @@ createcarryobject(param_00,param_01,param_02)
 	var_05.ondrop = param_02.ondropfn;
 	var_05.onreset = param_02.onresetfn;
 	var_05.settings = param_02;
-	if(!isdefined(param_02.carrymodel))
-	{
+	if(!isdefined(param_02.carrymodel)) {
 		param_02.carrymodel = var_03.model;
 	}
 
@@ -74,12 +61,9 @@ createcarryobject(param_00,param_01,param_02)
 	return var_05;
 }
 
-//Function Number: 4
-creategoal(param_00,param_01,param_02,param_03)
-{
+creategoal(param_00,param_01,param_02,param_03) {
 	var_04 = getent(param_00,"targetname");
-	if(!isdefined(var_04))
-	{
+	if(!isdefined(var_04)) {
 		scripts\engine\utility::error("No goal trigger named " + var_04 + " found!");
 		return;
 	}
@@ -98,11 +82,8 @@ creategoal(param_00,param_01,param_02,param_03)
 	return var_05;
 }
 
-//Function Number: 5
-onobjectpickup(param_00)
-{
-	if(param_00.team == scripts\mp\_gameobjects::getownerteam())
-	{
+onobjectpickup(param_00) {
+	if(param_00.team == scripts\mp\_gameobjects::getownerteam()) {
 		scripts\mp\_gameobjects::returnobjectiveid();
 		return;
 	}
@@ -115,9 +96,7 @@ onobjectpickup(param_00)
 	scripts\mp\_gameobjects::set3dicon("enemy","waypoint_escort");
 }
 
-//Function Number: 6
-onobjectdrop(param_00)
-{
+onobjectdrop(param_00) {
 	scripts\mp\_gameobjects::allowcarry("any");
 	scripts\mp\_gameobjects::setvisibleteam("any");
 	scripts\mp\_gameobjects::set2dicon("friendly","waypoint_capture_recover");
@@ -126,11 +105,8 @@ onobjectdrop(param_00)
 	scripts\mp\_gameobjects::set3dicon("enemy","waypoint_capture_take");
 }
 
-//Function Number: 7
-returnaftertime()
-{
-	if(!isdefined(self.settings.returntime))
-	{
+returnaftertime() {
+	if(!isdefined(self.settings.returntime)) {
 		return;
 	}
 
@@ -139,39 +115,27 @@ returnaftertime()
 	scripts\mp\_gameobjects::returnobjectiveid();
 }
 
-//Function Number: 8
-onobjectreset()
-{
-}
+onobjectreset() {}
 
-//Function Number: 9
-onobjectdelivered(param_00)
-{
+onobjectdelivered(param_00) {
 	self.keyobject scripts\mp\_gameobjects::allowcarry("none");
 	self.keyobject scripts\mp\_gameobjects::setvisibleteam("none");
 	param_00 detachobjectifcarried();
 	scripts\mp\_gameobjects::deleteuseobject();
 }
 
-//Function Number: 10
-attachobjecttocarrier(param_00)
-{
+attachobjecttocarrier(param_00) {
 	self attach(param_00,"j_spine4",1);
 	self.carriedobject = param_00;
 }
 
-//Function Number: 11
-detachobjectifcarried()
-{
-	if(isdefined(self.carriedobject))
-	{
+detachobjectifcarried() {
+	if(isdefined(self.carriedobject)) {
 		self detach(self.carriedobject,"j_spine4");
 		self.carriedobject = undefined;
 	}
 }
 
-//Function Number: 12
-onplayerkilled(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08,param_09)
-{
+onplayerkilled(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08,param_09) {
 	detachobjectifcarried();
 }

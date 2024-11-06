@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\cp\cp_globallogic.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 80
- * Decompile Time: 4032 ms
- * Timestamp: 10/27/2023 12:09:20 AM
-*******************************************************************/
+/*************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\cp\cp_globallogic.gsc
+*************************************************/
 
-//Function Number: 1
-init()
-{
+init() {
 	scripts\engine\utility::struct_class_init();
 	func_F6BD();
 	func_F6BA();
@@ -35,8 +29,7 @@ init()
 	scripts\cp\cp_merits::buildmeritinfo();
 	scripts\cp\cp_endgame::init();
 	scripts\cp\cp_laststand::init_laststand();
-	if(func_100BC())
-	{
+	if(func_100BC()) {
 		level thread func_132A3();
 	}
 
@@ -46,18 +39,14 @@ init()
 	function_01B4(level.mapcenter);
 }
 
-//Function Number: 2
-findboxcenter(param_00,param_01)
-{
+findboxcenter(param_00,param_01) {
 	var_02 = (0,0,0);
 	var_02 = param_01 - param_00;
 	var_02 = (var_02[0] / 2,var_02[1] / 2,var_02[2] / 2) + param_00;
 	return var_02;
 }
 
-//Function Number: 3
-func_F6BD()
-{
+func_F6BD() {
 	level.var_1307 = 1;
 	level.splitscreen = function_0114();
 	level.onlinegame = getdvarint("onlinegame");
@@ -79,9 +68,7 @@ func_F6BD()
 	level.reclaimedreservedobjectives = [];
 }
 
-//Function Number: 4
-func_F6BA()
-{
+func_F6BA() {
 	setdvar("ui_inhostmigration",0);
 	setdvar("camera_thirdPerson",getdvarint("scr_thirdPerson"));
 	setdvar("sm_sunShadowScale",1);
@@ -102,9 +89,7 @@ func_F6BA()
 	setdvar("cg_drawFriendlyNamesAlways",0);
 }
 
-//Function Number: 5
-setupcallbacks()
-{
+setupcallbacks() {
 	level.callbackstartgametype = ::func_4631;
 	level.callbackplayerconnect = ::func_5043;
 	level.callbackplayerdisconnect = ::func_5045;
@@ -128,89 +113,60 @@ setupcallbacks()
 	level.var_72BF = ::scripts\cp\cp_endgame::func_72BF;
 }
 
-//Function Number: 6
-func_AE18()
-{
+func_AE18() {
 	level._effect["slide_dust"] = loadfx("vfx/core/screen/vfx_scrnfx_tocam_slidedust_m");
 }
 
-//Function Number: 7
-func_5044(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08,param_09,param_0A,param_0B)
-{
-}
+func_5044(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08,param_09,param_0A,param_0B) {}
 
-//Function Number: 8
-func_5046(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08)
-{
-}
+func_5046(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08) {}
 
-//Function Number: 9
-func_FAAB()
-{
+func_FAAB() {
 	var_00 = ["trigger_multiple","trigger_once","trigger_use","trigger_radius","trigger_lookat","trigger_damage"];
-	foreach(var_02 in var_00)
-	{
+	foreach(var_02 in var_00) {
 		var_03 = getentarray(var_02,"classname");
-		for(var_04 = 0;var_04 < var_03.size;var_04++)
-		{
-			if(isdefined(var_03[var_04].script_prefab_exploder))
-			{
+		for(var_04 = 0;var_04 < var_03.size;var_04++) {
+			if(isdefined(var_03[var_04].script_prefab_exploder)) {
 				var_03[var_04].script_exploder = var_03[var_04].script_prefab_exploder;
 			}
 
-			if(isdefined(var_03[var_04].script_exploder))
-			{
+			if(isdefined(var_03[var_04].script_exploder)) {
 				level thread exploder_load(var_03[var_04]);
 			}
 		}
 	}
 }
 
-//Function Number: 10
-func_10958()
-{
+func_10958() {
 	level thread trackgrenades();
 	level thread trackmissiles();
 	level thread trackcarepackages();
 }
 
-//Function Number: 11
-trackgrenades()
-{
-	for(;;)
-	{
+trackgrenades() {
+	for(;;) {
 		level.grenades = getentarray("grenade","classname");
 		scripts\engine\utility::waitframe();
 	}
 }
 
-//Function Number: 12
-trackmissiles()
-{
-	for(;;)
-	{
+trackmissiles() {
+	for(;;) {
 		level.missiles = getentarray("rocket","classname");
 		scripts\engine\utility::waitframe();
 	}
 }
 
-//Function Number: 13
-trackcarepackages()
-{
-	for(;;)
-	{
+trackcarepackages() {
+	for(;;) {
 		level.carepackages = getentarray("care_package","targetname");
 		scripts\engine\utility::waitframe();
 	}
 }
 
-//Function Number: 14
-func_5048()
-{
-	if(scripts\engine\utility::istrue(self.keep_perks))
-	{
-		if(scripts\cp\utility::has_zombie_perk("perk_machine_tough"))
-		{
+func_5048() {
+	if(scripts\engine\utility::istrue(self.keep_perks)) {
+		if(scripts\cp\utility::has_zombie_perk("perk_machine_tough")) {
 			return 200;
 		}
 
@@ -220,9 +176,7 @@ func_5048()
 	return 100;
 }
 
-//Function Number: 15
-func_F6BB()
-{
+func_F6BB() {
 	game["thermal_vision"] = "thermal_mp";
 	game["attackers"] = "allies";
 	game["defenders"] = "axis";
@@ -235,9 +189,7 @@ func_F6BB()
 	game["roundsWon"] = [];
 }
 
-//Function Number: 16
-func_F6BF()
-{
+func_F6BF() {
 	function_0237("",0);
 	function_0238("default_night_mp");
 	function_0236("missilecam");
@@ -245,34 +197,25 @@ func_F6BF()
 	function_0239("",0);
 }
 
-//Function Number: 17
-func_F6BC()
-{
+func_F6BC() {
 	function_01BC(0);
 	function_01BD(0);
 }
 
-//Function Number: 18
-defaultgetspawnpoint()
-{
+defaultgetspawnpoint() {
 	return getassignedspawnpoint(scripts\engine\utility::getstructarray("default_player_start","targetname"));
 }
 
-//Function Number: 19
-getassignedspawnpoint(param_00)
-{
+getassignedspawnpoint(param_00) {
 	var_01 = self getentitynumber();
-	if(var_01 == 4)
-	{
+	if(var_01 == 4) {
 		var_01 = 1;
 	}
 
 	return param_00[var_01];
 }
 
-//Function Number: 20
-func_5038()
-{
+func_5038() {
 	level.gameended = 1;
 	setomnvar("allow_server_pause",0);
 	level notify("game_ended","allies");
@@ -280,10 +223,8 @@ func_5038()
 	exitlevel(0);
 }
 
-//Function Number: 21
-func_4631()
-{
-	[[ level.onprecachegametype ]]();
+func_4631() {
+	[[level.onprecachegametype]]();
 	func_E256();
 	func_E255();
 	scripts/cp/perks/perkmachines::func_98B1();
@@ -299,9 +240,7 @@ func_4631()
 	game["gamestarted"] = 1;
 }
 
-//Function Number: 22
-func_E256()
-{
+func_E256() {
 	level.teamcount["allies"] = 0;
 	level.teamcount["axis"] = 0;
 	level.teamcount["spectator"] = 0;
@@ -318,9 +257,7 @@ func_E256()
 	level.starttime = gettime();
 }
 
-//Function Number: 23
-func_E255()
-{
+func_E255() {
 	level.players = [];
 	level.participants = [];
 	level.characters = [];
@@ -331,36 +268,29 @@ func_E255()
 	level.balldrones = [];
 }
 
-//Function Number: 24
-func_E896()
-{
+func_E896() {
 	level notify("coop_pre_match");
 	level endon("game_ended");
 	level endon("coop_pre_match");
 	scripts\cp\utility::gameflaginit("prematch_done",0);
 	setomnvar("ui_prematch_period",1);
-	if(isdefined(level.prematchfunc))
-	{
-		[[ level.prematchfunc ]]();
+	if(isdefined(level.prematchfunc)) {
+		[[level.prematchfunc]]();
 	}
 
 	scripts\cp\utility::gameflagset("prematch_done");
 	setomnvar("ui_prematch_period",0);
 }
 
-//Function Number: 25
-_meth_8489()
-{
+_meth_8489() {
 	level notify("coop_grace_period");
 	level endon("game_ended");
 	level endon("coop_grace_period");
-	while(function_0071() == 0)
-	{
+	while(function_0071() == 0) {
 		scripts\engine\utility::waitframe();
 	}
 
-	while(level.ingraceperiod > 0)
-	{
+	while(level.ingraceperiod > 0) {
 		wait(1);
 		level.ingraceperiod--;
 	}
@@ -368,35 +298,25 @@ _meth_8489()
 	level.ingraceperiod = 0;
 }
 
-//Function Number: 26
-func_10D9F()
-{
-	[[ level.onstartgametype ]]();
+func_10D9F() {
+	[[level.onstartgametype]]();
 }
 
-//Function Number: 27
-func_100BC()
-{
+func_100BC() {
 	return !level.console && getdvar("dedicated") == "dedicated LAN server" || getdvar("dedicated") == "dedicated internet server";
 }
 
-//Function Number: 28
-func_132A3()
-{
-	for(;;)
-	{
-		if(level.rankedmatch)
-		{
+func_132A3() {
+	for(;;) {
+		if(level.rankedmatch) {
 			exitlevel(0);
 		}
 
-		if(!getdvarint("xblive_privatematch"))
-		{
+		if(!getdvarint("xblive_privatematch")) {
 			exitlevel(0);
 		}
 
-		if(getdvar("dedicated") != "dedicated LAN server" && getdvar("dedicated") != "dedicated internet server")
-		{
+		if(getdvar("dedicated") != "dedicated LAN server" && getdvar("dedicated") != "dedicated internet server") {
 			exitlevel(0);
 		}
 
@@ -404,9 +324,7 @@ func_132A3()
 	}
 }
 
-//Function Number: 29
-func_5043()
-{
+func_5043() {
 	self endon("disconnect");
 	self.getgrenadefusetime = "hud_status_connecting";
 	self waittill("begin");
@@ -424,67 +342,55 @@ func_5043()
 	scripts/cp/perks/perk_utility::func_95C1();
 	self.no_team_outlines = 0;
 	self.no_outline = 0;
-	if(scripts\cp\utility::coop_mode_has("outline"))
-	{
+	if(scripts\cp\utility::coop_mode_has("outline")) {
 		thread scripts\cp\cp_outline::playeroutlinemonitor();
 	}
 
 	thread scripts\cp\cp_vo::func_97CC();
 	thread scripts\cp\cp_merits::updatemerits();
-	if(self ishost())
-	{
+	if(self ishost()) {
 		level.player = self;
 	}
 
-	if(!level.teambased)
-	{
+	if(!level.teambased) {
 		game["roundsWon"][self.guid] = 0;
 	}
 
 	waittillframeend;
 	func_1810(self);
-	if(game["state"] == "postgame")
-	{
+	if(game["state"] == "postgame") {
 		self.connectedpostgame = 1;
 		self setclientdvars("cg_drawSpectatorMessages",0);
 		spawnintermission();
 		return;
 	}
 
-	if(isai(self) && isdefined(level.bot_funcs) && isdefined(level.bot_funcs["think"]))
-	{
-		self thread [[ level.bot_funcs["think"] ]]();
+	if(isai(self) && isdefined(level.bot_funcs) && isdefined(level.bot_funcs["think"])) {
+		self thread [[level.bot_funcs["think"]]]();
 	}
 
 	level endon("game_ended");
-	if(isdefined(level.hostmigrationtimer))
-	{
+	if(isdefined(level.hostmigrationtimer)) {
 		thread scripts\cp\cp_hostmigration::hostmigrationtimerthink();
 	}
 
-	if(isdefined(level.onplayerconnectaudioinit))
-	{
-		[[ level.onplayerconnectaudioinit ]]();
+	if(isdefined(level.onplayerconnectaudioinit)) {
+		[[level.onplayerconnectaudioinit]]();
 	}
 
-	if(!isai(self))
-	{
+	if(!isai(self)) {
 		func_D3D9();
 	}
 
 	spawnplayer();
 }
 
-//Function Number: 30
-func_D3D9()
-{
+func_D3D9() {
 	thread func_102EC();
 	thread func_72C1();
 }
 
-//Function Number: 31
-func_F7F0()
-{
+func_F7F0() {
 	self.guid = scripts\cp\utility::getuniqueid();
 	self.clientid = game["clientid"];
 	self.usingonlinedataoffline = self isusingonlinedataoffline();
@@ -497,22 +403,16 @@ func_F7F0()
 	self.inlaststand = 0;
 }
 
-//Function Number: 32
-initclientdvars()
-{
+initclientdvars() {
 	initclientdvarssplitscreenspecific();
 	self setclientdvars("cg_drawSpectatorMessages",1,"cg_deadChatWithDead",0,"cg_deadChatWithTeam",1,"cg_deadHearTeamLiving",1,"cg_deadHearAllLiving",0,"ui_altscene",0);
-	if(level.teambased)
-	{
+	if(level.teambased) {
 		self setclientdvar("cg_everyonehearseveryone",0);
 	}
 }
 
-//Function Number: 33
-initclientdvarssplitscreenspecific()
-{
-	if(level.splitscreen || self issplitscreenplayer())
-	{
+initclientdvarssplitscreenspecific() {
+	if(level.splitscreen || self issplitscreenplayer()) {
 		self setclientdvars("cg_fovscale","0.75");
 		setdvar("r_materialBloomHQScriptMasterEnable",0);
 		return;
@@ -521,21 +421,16 @@ initclientdvarssplitscreenspecific()
 	self setclientdvars("cg_fovscale","1");
 }
 
-//Function Number: 34
-setupsavedactionslots()
-{
+setupsavedactionslots() {
 	self.saved_actionslotdata = [];
-	for(var_00 = 1;var_00 <= 4;var_00++)
-	{
+	for(var_00 = 1;var_00 <= 4;var_00++) {
 		self.saved_actionslotdata[var_00] = spawnstruct();
 		self.saved_actionslotdata[var_00].type = "";
 		self.saved_actionslotdata[var_00].randomintrange = undefined;
 	}
 
-	if(!level.console)
-	{
-		for(var_00 = 5;var_00 <= 8;var_00++)
-		{
+	if(!level.console) {
+		for(var_00 = 5;var_00 <= 8;var_00++) {
 			self.saved_actionslotdata[var_00] = spawnstruct();
 			self.saved_actionslotdata[var_00].type = "";
 			self.saved_actionslotdata[var_00].randomintrange = undefined;
@@ -543,96 +438,72 @@ setupsavedactionslots()
 	}
 }
 
-//Function Number: 35
-func_98B9()
-{
+func_98B9() {
 	self.perks = [];
 	self.perksperkname = [];
 }
 
-//Function Number: 36
-func_102EC()
-{
+func_102EC() {
 	self endon("disconnect");
-	for(;;)
-	{
+	for(;;) {
 		self waittill("sprint_slide_begin");
 		self playfx(level._effect["slide_dust"],self geteye());
 	}
 }
 
-//Function Number: 37
-func_72C1()
-{
+func_72C1() {
 	self endon("disconnect");
 	level endon("game_ended");
-	for(;;)
-	{
+	for(;;) {
 		self waittill("luinotifyserver",var_00,var_01);
-		if(var_00 == "arcade_off")
-		{
+		if(var_00 == "arcade_off") {
 			self notify("adjustedStance");
 		}
 
-		if(var_00 == "end_game")
-		{
-			level thread [[ level.var_72BF ]]();
+		if(var_00 == "end_game") {
+			level thread [[level.var_72BF]]();
 			self notify("disconnect");
 		}
 	}
 }
 
-//Function Number: 38
-spawnintermission(param_00)
-{
+spawnintermission(param_00) {
 	func_F726();
 	var_01 = self.forcespawnangles;
 	spawnplayer();
 	self setclientdvar("cg_everyoneHearsEveryone",1);
 	self setdepthoffield(0,128,512,4000,6,1.8);
-	if(level.console)
-	{
+	if(level.console) {
 		self setclientdvar("cg_fov","90");
 	}
 
 	scripts\cp\utility::updatesessionstate("intermission");
 }
 
-//Function Number: 39
-func_F726()
-{
+func_F726() {
 	var_00 = func_7ED8();
 	func_F717(var_00.origin,var_00.angles);
 }
 
-//Function Number: 40
-func_F717(param_00,param_01)
-{
+func_F717(param_00,param_01) {
 	self.forcespawnorigin = param_00;
 	self.forcespawnangles = param_01;
 }
 
-//Function Number: 41
-func_7ED8()
-{
+func_7ED8() {
 	var_00 = getentarray("mp_global_intermission","classname");
 	return var_00[0];
 }
 
-//Function Number: 42
-spawnplayer(param_00)
-{
+spawnplayer(param_00) {
 	thread func_108F4(param_00);
 }
 
-//Function Number: 43
-func_108F4(param_00)
-{
+func_108F4(param_00) {
 	self endon("disconnect");
 	self endon("joined_spectators");
 	level endon("game_ended");
-	if(self.waitingtospawn)
-	{
+	if(self.waitingtospawn) {
 		return;
 	}
 
@@ -640,25 +511,19 @@ func_108F4(param_00)
 	func_108F3(param_00);
 }
 
-//Function Number: 44
-func_136E9()
-{
+func_136E9() {
 	self.waitingtospawn = 1;
-	if(scripts\cp\utility::isusingremote())
-	{
+	if(scripts\cp\utility::isusingremote()) {
 		self waittill("stopped_using_remote");
 	}
 
 	self.waitingtospawn = 0;
 }
 
-//Function Number: 45
-func_108F3(param_00)
-{
+func_108F3(param_00) {
 	self notify("spawned");
 	self notify("started_spawnPlayer");
-	if(level.gameended)
-	{
+	if(level.gameended) {
 		self spawn(getspawnorigin(self,1),_meth_8132(self));
 	}
 	else
@@ -671,30 +536,25 @@ func_108F3(param_00)
 	func_E263();
 	resetplayerdamagemodifiers();
 	param_00 = scripts\engine\utility::ter_op(isdefined(param_00),param_00,0);
-	if(!param_00)
-	{
+	if(!param_00) {
 		func_C07F();
 	}
 
-	if(isai(self))
-	{
+	if(isai(self)) {
 		func_10828(param_00);
 	}
 
-	[[ level.onspawnplayer ]]();
-	if(!scripts\engine\utility::flag("introscreen_over"))
-	{
+	[[level.onspawnplayer]]();
+	if(!scripts\engine\utility::flag("introscreen_over")) {
 		scripts\cp\utility::freezecontrolswrapper(1);
 	}
 
-	self [[ level.custom_giveloadout ]](param_00);
-	if(getdvarint("camera_thirdPerson"))
-	{
+	self [[level.custom_giveloadout]](param_00);
+	if(getdvarint("camera_thirdPerson")) {
 		scripts\cp\utility::setthirdpersondof(1);
 	}
 
-	if(func_1001B())
-	{
+	if(func_1001B()) {
 		scripts\cp\utility::freezecontrolswrapper(1);
 	}
 
@@ -703,50 +563,37 @@ func_108F3(param_00)
 	level notify("player_spawned",self);
 }
 
-//Function Number: 46
-func_E262()
-{
+func_E262() {
 	self setclientomnvar("ui_options_menu",0);
 	self setclientomnvar("ui_hud_shake",0);
 }
 
-//Function Number: 47
-func_E261()
-{
+func_E261() {
 	self stopshellshock();
 	self stoprumble("damage_heavy");
 	self setdepthoffield(0,0,512,512,4,0);
-	if(level.console)
-	{
+	if(level.console) {
 		self setclientdvar("cg_fov","65");
 	}
 }
 
-//Function Number: 48
-resetplayerdamagemodifiers()
-{
-	if(isdefined(self.additivedamagemodifiers))
-	{
+resetplayerdamagemodifiers() {
+	if(isdefined(self.additivedamagemodifiers)) {
 		var_00 = getarraykeys(self.additivedamagemodifiers);
-		foreach(var_02 in var_00)
-		{
+		foreach(var_02 in var_00) {
 			scripts\cp\utility::removedamagemodifier(var_02,1);
 		}
 	}
 
-	if(isdefined(self.multiplicativedamagemodifiers))
-	{
+	if(isdefined(self.multiplicativedamagemodifiers)) {
 		var_00 = getarraykeys(self.multiplicativedamagemodifiers);
-		foreach(var_02 in var_00)
-		{
+		foreach(var_02 in var_00) {
 			scripts\cp\utility::removedamagemodifier(var_02,0);
 		}
 	}
 }
 
-//Function Number: 49
-func_E263()
-{
+func_E263() {
 	var_00 = getnearestnode();
 	self.team = var_00;
 	self.sessionteam = var_00;
@@ -759,28 +606,21 @@ func_E263()
 	self.hasriotshield = 0;
 }
 
-//Function Number: 50
-getnearestnode()
-{
-	if(isdefined(level.var_D425))
-	{
-		return [[ level.var_D425 ]](self);
+getnearestnode() {
+	if(isdefined(level.var_D425)) {
+		return [[level.var_D425]](self);
 	}
 
 	return "allies";
 }
 
-//Function Number: 51
-func_C07F()
-{
+func_C07F() {
 	func_E25B();
 	scripts\cp\utility::updatesessionstate("playing");
 }
 
-//Function Number: 52
-func_E25B()
-{
-	self.maxhealth = self [[ level.var_D3D5 ]]();
+func_E25B() {
+	self.maxhealth = self [[level.var_D3D5]]();
 	self.health = self.maxhealth;
 	self.avoidkillstreakonspawntimer = 5;
 	self.friendlydamage = undefined;
@@ -789,29 +629,21 @@ func_E25B()
 	self.objectivescaler = 1;
 }
 
-//Function Number: 53
-func_10828(param_00)
-{
+func_10828(param_00) {
 	scripts\cp\utility::freezecontrolswrapper(1);
-	if(!param_00)
-	{
-		if(isdefined(level.bot_funcs) && isdefined(level.bot_funcs["player_spawned"]))
-		{
-			self [[ level.bot_funcs["player_spawned"] ]]();
+	if(!param_00) {
+		if(isdefined(level.bot_funcs) && isdefined(level.bot_funcs["player_spawned"])) {
+			self [[level.bot_funcs["player_spawned"]]]();
 		}
 	}
 }
 
-//Function Number: 54
-getspawnorigin(param_00,param_01)
-{
+getspawnorigin(param_00,param_01) {
 	var_02 = undefined;
-	if(isdefined(param_00.forcespawnorigin))
-	{
+	if(isdefined(param_00.forcespawnorigin)) {
 		var_02 = param_00.forcespawnorigin;
 		var_02 = getclosestpointonnavmesh(var_02);
-		if(isdefined(param_01))
-		{
+		if(isdefined(param_01)) {
 			var_02 = param_00.forcespawnorigin;
 		}
 
@@ -819,15 +651,13 @@ getspawnorigin(param_00,param_01)
 	}
 	else
 	{
-		var_03 = param_00 [[ level.getspawnpoint ]]();
+		var_03 = param_00 [[level.getspawnpoint]]();
 		var_02 = scripts\engine\utility::ter_op(scripts\engine\utility::istrue(level.disable_start_spawn_on_navmesh),scripts\engine\utility::drop_to_ground(var_03.origin,0,-100),getclosestpointonnavmesh(var_03.origin));
-		if(isdefined(param_01))
-		{
+		if(isdefined(param_01)) {
 			var_02 = var_03;
 		}
 
-		if(level.script == "cp_disco")
-		{
+		if(level.script == "cp_disco") {
 			var_02 = var_03.origin;
 		}
 	}
@@ -835,38 +665,30 @@ getspawnorigin(param_00,param_01)
 	return var_02;
 }
 
-//Function Number: 55
-_meth_8132(param_00)
-{
+_meth_8132(param_00) {
 	var_01 = undefined;
-	if(isdefined(param_00.forcespawnangles))
-	{
+	if(isdefined(param_00.forcespawnangles)) {
 		var_01 = param_00.forcespawnangles;
 		param_00.forcespawnangles = undefined;
 	}
 	else
 	{
-		var_02 = param_00 [[ level.getspawnpoint ]]();
+		var_02 = param_00 [[level.getspawnpoint]]();
 		var_01 = scripts\engine\utility::ter_op(isdefined(var_02.angles),var_02.angles,(0,0,0));
 	}
 
 	return var_01;
 }
 
-//Function Number: 56
-func_1001B()
-{
-	if(game["state"] == "postgame")
-	{
+func_1001B() {
+	if(game["state"] == "postgame") {
 		return 1;
 	}
 
 	return 0;
 }
 
-//Function Number: 57
-enterspectator()
-{
+enterspectator() {
 	var_00 = func_7ED8();
 	self setspectatedefaults(var_00.origin,var_00.angles);
 	func_F717(var_00.origin,var_00.angles);
@@ -874,61 +696,46 @@ enterspectator()
 	scripts\cp\utility::updatesessionstate("spectator");
 }
 
-//Function Number: 58
-func_F858()
-{
-	if(isdefined(level.var_10979))
-	{
-		[[ level.var_10979 ]](self);
+func_F858() {
+	if(isdefined(level.var_10979)) {
+		[[level.var_10979]](self);
 		return;
 	}
 
 	func_504C(self);
 }
 
-//Function Number: 59
-func_504C(param_00)
-{
+func_504C(param_00) {
 	param_00 allowspectateteam("allies",1);
 	param_00 allowspectateteam("axis",1);
 	param_00 allowspectateteam("freelook",0);
 	param_00 allowspectateteam("none",1);
 }
 
-//Function Number: 60
-func_5045(param_00)
-{
-	if(!isdefined(self.connected))
-	{
+func_5045(param_00) {
+	if(!isdefined(self.connected)) {
 		return;
 	}
 
 	scripts\cp\cp_analytics::on_player_disconnect(param_00);
 	func_E15A(self);
-	if(func_563B())
-	{
-		level thread [[ level.var_72BF ]]();
+	if(func_563B()) {
+		level thread [[level.var_72BF]]();
 	}
 
-	if(isdefined(level.onplayerdisconnected))
-	{
-		level thread [[ level.onplayerdisconnected ]](self,param_00);
+	if(isdefined(level.onplayerdisconnected)) {
+		level thread [[level.onplayerdisconnected]](self,param_00);
 	}
 }
 
-//Function Number: 61
-func_563B()
-{
-	if(level.splitscreen)
-	{
+func_563B() {
+	if(level.splitscreen) {
 		return level.players.size <= 1;
 	}
 
 	var_00 = 0;
-	foreach(var_02 in level.players)
-	{
-		if(scripts\cp\cp_laststand::player_in_laststand(var_02))
-		{
+	foreach(var_02 in level.players) {
+		if(scripts\cp\cp_laststand::player_in_laststand(var_02)) {
 			var_00 = scripts\cp\cp_laststand::gameshouldend(var_02);
 		}
 	}
@@ -936,86 +743,65 @@ func_563B()
 	return var_00;
 }
 
-//Function Number: 62
-func_1810(param_00)
-{
+func_1810(param_00) {
 	level.players[level.players.size] = param_00;
 	level.participants[level.participants.size] = param_00;
 	level.characters[level.characters.size] = param_00;
 }
 
-//Function Number: 63
-func_E15A(param_00)
-{
+func_E15A(param_00) {
 	level.players = scripts\engine\utility::array_remove(level.players,param_00);
 	level.participants = scripts\engine\utility::array_remove(level.participants,param_00);
 	level.characters = scripts\engine\utility::array_remove(level.characters,param_00);
 }
 
-//Function Number: 64
-func_5049()
-{
-	if(self ishost())
-	{
+func_5049() {
+	if(self ishost()) {
 		initclientdvarssplitscreenspecific();
 	}
 
-	if(func_9E39(self))
-	{
+	if(func_9E39(self)) {
 		var_00 = 0;
-		foreach(var_02 in level.players)
-		{
-			if(func_9E39(var_02))
-			{
+		foreach(var_02 in level.players) {
+			if(func_9E39(var_02)) {
 				var_00++;
 			}
 		}
 
 		level.var_90A8++;
-		if(level.hostmigrationreturnedplayercount >= var_00 * 2 / 3)
-		{
+		if(level.hostmigrationreturnedplayercount >= var_00 * 2 / 3) {
 			level notify("hostmigration_enoughplayers");
 		}
 	}
 }
 
-//Function Number: 65
-func_9E39(param_00)
-{
+func_9E39(param_00) {
 	return !isdefined(param_00.pers["isBot"]) || param_00.pers["isBot"] == 0;
 }
 
-//Function Number: 66
-func_503E()
-{
-	if(level.gameended)
-	{
+func_503E() {
+	if(level.gameended) {
 		return;
 	}
 
-	if(isdefined(level.var_C53D))
-	{
-		level thread [[ level.var_C53D ]]();
+	if(isdefined(level.var_C53D)) {
+		level thread [[level.var_C53D]]();
 	}
 
 	level.hostmigrationreturnedplayercount = 0;
-	foreach(var_01 in level.characters)
-	{
+	foreach(var_01 in level.characters) {
 		var_01.hostmigrationcontrolsfrozen = 0;
 	}
 
 	level.hostmigrationtimer = 1;
 	setdvar("ui_inhostmigration",1);
 	level notify("host_migration_begin");
-	foreach(var_01 in level.characters)
-	{
-		if(isdefined(var_01))
-		{
+	foreach(var_01 in level.characters) {
+		if(isdefined(var_01)) {
 			var_01 thread scripts\cp\cp_hostmigration::hostmigrationtimerthink();
 		}
 
-		if(isplayer(var_01))
-		{
+		if(isplayer(var_01)) {
 			var_01 setclientomnvar("ui_session_state",var_01.sessionstate);
 		}
 	}
@@ -1025,64 +811,50 @@ func_503E()
 	scripts\cp\cp_hostmigration::hostmigrationwait();
 	level.hostmigrationtimer = undefined;
 	setdvar("ui_inhostmigration",0);
-	if(isdefined(level.hostmigrationend))
-	{
-		level thread [[ level.hostmigrationend ]]();
+	if(isdefined(level.hostmigrationend)) {
+		level thread [[level.hostmigrationend]]();
 	}
 
 	level notify("host_migration_end");
 }
 
-//Function Number: 67
-func_97F7()
-{
+func_97F7() {
 	var_00 = getentarray("destructable","targetname");
-	if(getdvar("scr_destructables") == "0")
-	{
-		for(var_01 = 0;var_01 < var_00.size;var_01++)
-		{
+	if(getdvar("scr_destructables") == "0") {
+		for(var_01 = 0;var_01 < var_00.size;var_01++) {
 			var_00[var_01] delete();
 		}
 
 		return;
 	}
 
-	for(var_01 = 0;var_01 < var_00.size;var_01++)
-	{
+	for(var_01 = 0;var_01 < var_00.size;var_01++) {
 		var_00[var_01] thread destructable_think();
 	}
 }
 
-//Function Number: 68
-destructable_think()
-{
+destructable_think() {
 	var_00 = 40;
 	var_01 = 0;
-	if(isdefined(self.script_accumulate))
-	{
+	if(isdefined(self.script_accumulate)) {
 		var_00 = self.script_accumulate;
 	}
 
-	if(isdefined(self.script_threshold))
-	{
+	if(isdefined(self.script_threshold)) {
 		var_01 = self.script_threshold;
 	}
 
-	if(isdefined(self.script_fxid))
-	{
+	if(isdefined(self.script_fxid)) {
 		self.fx = loadfx(self.script_fxid);
 	}
 
 	var_02 = 0;
 	self setcandamage(1);
-	for(;;)
-	{
+	for(;;) {
 		self waittill("damage",var_03,var_04);
-		if(var_03 >= var_01)
-		{
+		if(var_03 >= var_01) {
 			var_02 = var_02 + var_03;
-			if(var_02 >= var_00)
-			{
+			if(var_02 >= var_00) {
 				thread destructable_destruct();
 				return;
 			}
@@ -1090,52 +862,40 @@ destructable_think()
 	}
 }
 
-//Function Number: 69
-destructable_destruct()
-{
+destructable_destruct() {
 	var_00 = self;
-	if(isdefined(var_00.fx))
-	{
+	if(isdefined(var_00.fx)) {
 		playfx(var_00.fx,var_00.origin + (0,0,6));
 	}
 
 	var_00 delete();
 }
 
-//Function Number: 70
-setupexploders()
-{
+setupexploders() {
 	var_00 = getentarray("script_brushmodel","classname");
 	var_01 = getentarray("script_model","classname");
-	for(var_02 = 0;var_02 < var_01.size;var_02++)
-	{
+	for(var_02 = 0;var_02 < var_01.size;var_02++) {
 		var_00[var_00.size] = var_01[var_02];
 	}
 
-	for(var_02 = 0;var_02 < var_00.size;var_02++)
-	{
-		if(isdefined(var_00[var_02].script_prefab_exploder))
-		{
+	for(var_02 = 0;var_02 < var_00.size;var_02++) {
+		if(isdefined(var_00[var_02].script_prefab_exploder)) {
 			var_00[var_02].script_exploder = var_00[var_02].script_prefab_exploder;
 		}
 
-		if(isdefined(var_00[var_02].script_exploder))
-		{
-			if(var_00[var_02].model == "fx" && !isdefined(var_00[var_02].var_336) || var_00[var_02].var_336 != "exploderchunk")
-			{
+		if(isdefined(var_00[var_02].script_exploder)) {
+			if(var_00[var_02].model == "fx" && !isdefined(var_00[var_02].var_336) || var_00[var_02].var_336 != "exploderchunk") {
 				var_00[var_02] hide();
 				continue;
 			}
 
-			if(isdefined(var_00[var_02].var_336) && var_00[var_02].var_336 == "exploder")
-			{
+			if(isdefined(var_00[var_02].var_336) && var_00[var_02].var_336 == "exploder") {
 				var_00[var_02] hide();
 				var_00[var_02] notsolid();
 				continue;
 			}
 
-			if(isdefined(var_00[var_02].var_336) && var_00[var_02].var_336 == "exploderchunk")
-			{
+			if(isdefined(var_00[var_02].var_336) && var_00[var_02].var_336 == "exploderchunk") {
 				var_00[var_02] hide();
 				var_00[var_02] notsolid();
 			}
@@ -1144,49 +904,39 @@ setupexploders()
 
 	var_03 = [];
 	var_04 = getentarray("script_brushmodel","classname");
-	for(var_02 = 0;var_02 < var_04.size;var_02++)
-	{
-		if(isdefined(var_04[var_02].script_prefab_exploder))
-		{
+	for(var_02 = 0;var_02 < var_04.size;var_02++) {
+		if(isdefined(var_04[var_02].script_prefab_exploder)) {
 			var_04[var_02].script_exploder = var_04[var_02].script_prefab_exploder;
 		}
 
-		if(isdefined(var_04[var_02].script_exploder))
-		{
+		if(isdefined(var_04[var_02].script_exploder)) {
 			var_03[var_03.size] = var_04[var_02];
 		}
 	}
 
 	var_04 = getentarray("script_model","classname");
-	for(var_02 = 0;var_02 < var_04.size;var_02++)
-	{
-		if(isdefined(var_04[var_02].script_prefab_exploder))
-		{
+	for(var_02 = 0;var_02 < var_04.size;var_02++) {
+		if(isdefined(var_04[var_02].script_prefab_exploder)) {
 			var_04[var_02].script_exploder = var_04[var_02].script_prefab_exploder;
 		}
 
-		if(isdefined(var_04[var_02].script_exploder))
-		{
+		if(isdefined(var_04[var_02].script_exploder)) {
 			var_03[var_03.size] = var_04[var_02];
 		}
 	}
 
 	var_04 = getentarray("item_health","classname");
-	for(var_02 = 0;var_02 < var_04.size;var_02++)
-	{
-		if(isdefined(var_04[var_02].script_prefab_exploder))
-		{
+	for(var_02 = 0;var_02 < var_04.size;var_02++) {
+		if(isdefined(var_04[var_02].script_prefab_exploder)) {
 			var_04[var_02].script_exploder = var_04[var_02].script_prefab_exploder;
 		}
 
-		if(isdefined(var_04[var_02].script_exploder))
-		{
+		if(isdefined(var_04[var_02].script_exploder)) {
 			var_03[var_03.size] = var_04[var_02];
 		}
 	}
 
-	if(!isdefined(level.createfxent))
-	{
+	if(!isdefined(level.createfxent)) {
 		level.createfxent = [];
 	}
 
@@ -1194,8 +944,7 @@ setupexploders()
 	var_05["exploderchunk visible"] = 1;
 	var_05["exploderchunk"] = 1;
 	var_05["exploder"] = 1;
-	for(var_02 = 0;var_02 < var_03.size;var_02++)
-	{
+	for(var_02 = 0;var_02 < var_03.size;var_02++) {
 		var_06 = var_03[var_02];
 		var_07 = scripts\engine\utility::createexploder(var_06.script_fxid);
 		var_07.v = [];
@@ -1216,8 +965,7 @@ setupexploders()
 		var_07.v["target"] = var_06.target;
 		var_07.v["ender"] = var_06.script_ender;
 		var_07.v["type"] = "exploder";
-		if(!isdefined(var_06.script_fxid))
-		{
+		if(!isdefined(var_06.script_fxid)) {
 			var_07.v["fxid"] = "No FX";
 		}
 		else
@@ -1226,25 +974,21 @@ setupexploders()
 		}
 
 		var_07.v["exploder"] = var_06.script_exploder;
-		if(!isdefined(var_07.v["delay"]))
-		{
+		if(!isdefined(var_07.v["delay"])) {
 			var_07.v["delay"] = 0;
 		}
 
-		if(isdefined(var_06.target))
-		{
+		if(isdefined(var_06.target)) {
 			var_08 = getent(var_07.v["target"],"targetname").origin;
 			var_07.v["angles"] = vectortoangles(var_08 - var_07.v["origin"]);
 		}
 
-		if(var_06.classname == "script_brushmodel" || isdefined(var_06.model))
-		{
+		if(var_06.classname == "script_brushmodel" || isdefined(var_06.model)) {
 			var_07.model = var_06;
 			var_07.model.disconnect_paths = var_06.script_disconnectpaths;
 		}
 
-		if(isdefined(var_06.var_336) && isdefined(var_05[var_06.var_336]))
-		{
+		if(isdefined(var_06.var_336) && isdefined(var_05[var_06.var_336])) {
 			var_07.v["exploder_type"] = var_06.var_336;
 		}
 		else
@@ -1256,9 +1000,7 @@ setupexploders()
 	}
 }
 
-//Function Number: 71
-func_9817()
-{
+func_9817() {
 	level.uiparent = spawnstruct();
 	level.uiparent.horzalign = "left";
 	level.uiparent.vertalign = "top";
@@ -1289,15 +1031,11 @@ func_9817()
 	level.lowertextfontsize = 1.2;
 }
 
-//Function Number: 72
-exploder_load(param_00)
-{
+exploder_load(param_00) {
 	level endon("killexplodertridgers" + param_00.script_exploder);
 	param_00 waittill("trigger");
-	if(isdefined(param_00.script_chance) && randomfloat(1) > param_00.script_chance)
-	{
-		if(isdefined(param_00.script_delay))
-		{
+	if(isdefined(param_00.script_chance) && randomfloat(1) > param_00.script_chance) {
+		if(isdefined(param_00.script_delay)) {
 			wait(param_00.script_delay);
 		}
 		else
@@ -1313,32 +1051,21 @@ exploder_load(param_00)
 	level notify("killexplodertridgers" + param_00.script_exploder);
 }
 
-//Function Number: 73
-player_init_health_regen()
-{
+player_init_health_regen() {
 	self.regenspeed = 1;
 }
 
-//Function Number: 74
-player_init_invulnerability()
-{
+player_init_invulnerability() {
 	self.haveinvulnerabilityavailable = 1;
 }
 
-//Function Number: 75
-player_init_damageshield()
-{
+player_init_damageshield() {
 	self.damageshieldexpiretime = gettime();
 }
 
-//Function Number: 76
-blank(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08,param_09)
-{
-}
+blank(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08,param_09) {}
 
-//Function Number: 77
-func_98BC()
-{
+func_98BC() {
 	self setplayerdata("cp","alienSession","team_shots",0);
 	self setplayerdata("cp","alienSession","team_kills",0);
 	self setplayerdata("cp","alienSession","team_hives",0);
@@ -1366,26 +1093,19 @@ func_98BC()
 	self setplayerdata("cp","alienSession","waveNum",0);
 }
 
-//Function Number: 78
-func_988E()
-{
-	if(isdefined(level.var_D0FE))
-	{
-		[[ level.var_D0FE ]]();
+func_988E() {
+	if(isdefined(level.var_D0FE)) {
+		[[level.var_D0FE]]();
 		return;
 	}
 
 	scripts\cp\cp_laststand::default_player_init_laststand();
 }
 
-//Function Number: 79
-func_988B()
-{
+func_988B() {
 	level.var_A6CB = scripts\engine\utility::getstructarray("respawn_edge","targetname");
 }
 
-//Function Number: 80
-func_7F56()
-{
+func_7F56() {
 	return scripts\engine\utility::getclosest(self.origin,level.var_A6CB);
 }

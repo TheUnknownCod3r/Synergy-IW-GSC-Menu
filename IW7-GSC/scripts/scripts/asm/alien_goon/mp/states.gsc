@@ -1,18 +1,11 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\asm\alien_goon\mp\states.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 9
- * Decompile Time: 558 ms
- * Timestamp: 10\27\2023 12:01:16 AM
-*******************************************************************/
+/********************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\asm\alien_goon\mp\states.gsc
+********************************************************/
 
-//Function Number: 1
-func_2371()
-{
-	if(scripts\asm\asm::func_232E("alien_goon"))
-	{
+func_2371() {
+	if(scripts\asm\asm::func_232E("alien_goon")) {
 		return;
 	}
 
@@ -148,50 +141,34 @@ func_2371()
 	scripts\asm\asm::func_2327();
 }
 
-//Function Number: 2
-trans_idle_to_choose_movetype1(param_00,param_01,param_02,param_03)
-{
+trans_idle_to_choose_movetype1(param_00,param_01,param_02,param_03) {
 	return scripts\asm\asm_bb::bb_moverequested();
 }
 
-//Function Number: 3
-trans_check_move_to_idle_exit_sprint0(param_00,param_01,param_02,param_03)
-{
+trans_check_move_to_idle_exit_sprint0(param_00,param_01,param_02,param_03) {
 	return scripts\asm\asm_bb::bb_movetyperequested("sprint");
 }
 
-//Function Number: 4
-trans_pass_sprint_in_to_sprint_loop1(param_00,param_01,param_02,param_03)
-{
+trans_pass_sprint_in_to_sprint_loop1(param_00,param_01,param_02,param_03) {
 	return scripts\asm\asm_bb::bb_moverequested();
 }
 
-//Function Number: 5
-trans_pass_sprint_out_to_move_done2(param_00,param_01,param_02,param_03)
-{
+trans_pass_sprint_out_to_move_done2(param_00,param_01,param_02,param_03) {
 	return !scripts\asm\asm_bb::bb_moverequested();
 }
 
-//Function Number: 6
-trans_choose_movetype_to_check_move0(param_00,param_01,param_02,param_03)
-{
+trans_choose_movetype_to_check_move0(param_00,param_01,param_02,param_03) {
 	return scripts\asm\asm_bb::bb_moverequested();
 }
 
-//Function Number: 7
-trans_pass_run_in_to_idle_exit_run1(param_00,param_01,param_02,param_03)
-{
+trans_pass_run_in_to_idle_exit_run1(param_00,param_01,param_02,param_03) {
 	return scripts\asm\asm_bb::bb_moverequested();
 }
 
-//Function Number: 8
-trans_pass_run_out_to_move_done1(param_00,param_01,param_02,param_03)
-{
+trans_pass_run_out_to_move_done1(param_00,param_01,param_02,param_03) {
 	return !scripts\asm\asm_bb::bb_moverequested();
 }
 
-//Function Number: 9
-trans_pain_moving_done_to_choose_movetype0(param_00,param_01,param_02,param_03)
-{
+trans_pain_moving_done_to_choose_movetype0(param_00,param_01,param_02,param_03) {
 	return scripts\asm\asm_bb::bb_moverequested();
 }

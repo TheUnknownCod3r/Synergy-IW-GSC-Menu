@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\mp\screenshotcity.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 6
- * Decompile Time: 282 ms
- * Timestamp: 10/27/2023 12:21:28 AM
-*******************************************************************/
+/*************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\mp\screenshotcity.gsc
+*************************************************/
 
-//Function Number: 1
-func_BC86()
-{
+func_BC86() {
 	var_00 = getent("weapon_loc_screenshot_1","targetname");
 	var_01 = var_00.origin + (0,0,0);
 	var_02 = var_00.angles + (0,0,0);
@@ -24,9 +18,7 @@ func_BC86()
 	level.camera_anchor.angles = var_05;
 }
 
-//Function Number: 2
-move_to_blue_background_side_on()
-{
+move_to_blue_background_side_on() {
 	var_00 = getent("weapon_loc_screenshot_1","targetname");
 	var_01 = var_00.origin + (0,0,0);
 	var_02 = var_00.angles + (0,-25,0);
@@ -40,9 +32,7 @@ move_to_blue_background_side_on()
 	level.camera_anchor.angles = var_05;
 }
 
-//Function Number: 3
-func_BC8C()
-{
+func_BC8C() {
 	var_00 = getent("weapon_loc_screenshot_2","targetname");
 	var_01 = var_00.origin + (0,0,0);
 	var_02 = var_00.angles + (0,0,0);
@@ -56,9 +46,7 @@ func_BC8C()
 	level.camera_anchor.angles = var_05;
 }
 
-//Function Number: 4
-move_to_grey_background_side_on()
-{
+move_to_grey_background_side_on() {
 	var_00 = getent("weapon_loc_screenshot_2","targetname");
 	var_01 = var_00.origin + (0,0,0);
 	var_02 = var_00.angles + (0,-25,0);
@@ -72,9 +60,7 @@ move_to_grey_background_side_on()
 	level.camera_anchor.angles = var_05;
 }
 
-//Function Number: 5
-func_11452(param_00)
-{
+func_11452(param_00) {
 	var_01 = tablelookup("mp/weaponScreenshotList.csv",0,param_00,1);
 	func_BC86();
 	wait(2);
@@ -90,9 +76,7 @@ func_11452(param_00)
 	wait(2);
 }
 
-//Function Number: 6
-func_ECE1()
-{
+func_ECE1() {
 	self endon("disconnect");
 	var_00 = getent("weapon_loc_hq1","targetname");
 	var_01 = var_00.origin + (0,0,0);
@@ -103,13 +87,10 @@ func_ECE1()
 	level.camera_anchor.angles = level.var_37AA.var_13C7B.angles;
 	wait(1);
 	setomnvar("ui_screenshot_ready",1);
-	for(;;)
-	{
+	for(;;) {
 		self waittill("luinotifyserver",var_03,var_04);
-		if(var_03 == "take_screenshot")
-		{
-			if(var_04 == -1)
-			{
+		if(var_03 == "take_screenshot") {
+			if(var_04 == -1) {
 				setomnvar("ui_screenshot_ready",0);
 				wait(0.1);
 				setomnvar("ui_screenshot_ready",1);

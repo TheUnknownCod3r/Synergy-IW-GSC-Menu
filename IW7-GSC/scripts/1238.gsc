@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: 1238.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 2
- * Decompile Time: 1 ms
- * Timestamp: 10/27/2023 12:23:15 AM
-*******************************************************************/
+/****************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\1238.gsc
+****************************/
 
-//Function Number: 1
-main()
-{
+main() {
 	self setmodel("body_sdf_army_ftl_1");
 	scripts\code\character::attachhead("alias_heads_sdf_army_bloody",lib_09C2::main());
 	self.hatmodel = "head_sdf_army_ftl_1";
@@ -19,14 +13,12 @@ main()
 	self.var_1FA8 = "soldier";
 	self.voice = "setdef";
 	self give_explosive_touch_on_revived("vestlight");
-	if(issentient(self))
-	{
+	if(issentient(self)) {
 		self sethitlocdamagetable("locdmgtable/ai_lochit_dmgtable");
 	}
 
 	self.var_8E1A = level.var_7649["iw7/prop/vfx_sdf_army_ftl_helmet_split"];
-	if(issentient(self))
-	{
+	if(issentient(self)) {
 		self _meth_849A();
 		var_00 = [];
 		var_00["helmet"] = spawnstruct();
@@ -43,9 +35,7 @@ main()
 	self glinton(#animtree);
 }
 
-//Function Number: 2
-precache()
-{
+precache() {
 	precachemodel("body_sdf_army_ftl_1");
 	scripts\code\character::precachemodelarray(lib_09C2::main());
 	precachemodel("head_sdf_army_ftl_1");

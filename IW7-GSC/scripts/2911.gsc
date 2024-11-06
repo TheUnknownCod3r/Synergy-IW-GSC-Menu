@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: 2911.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 14
- * Decompile Time: 6 ms
- * Timestamp: 10/27/2023 12:24:53 AM
-*******************************************************************/
+/****************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\2911.gsc
+****************************/
 
-//Function Number: 1
-func_96D7()
-{
+func_96D7() {
 	func_965A();
 	precacheshellshock("default_nosound");
 	precachesuit("normal_sp");
@@ -24,8 +18,7 @@ func_96D7()
 	lib_0B60::func_96DC();
 	scripts/sp/slowmo_init::func_1032A();
 	function_01C5("cg_useplayerbreathsys",1);
-	foreach(var_01 in level.players)
-	{
+	foreach(var_01 in level.players) {
 		var_01.maxhealth = level.player.health;
 		var_01.var_9B34 = 0;
 		var_01 func_16BC(::func_FE41);
@@ -35,22 +28,17 @@ func_96D7()
 		lib_0E42::init();
 	}
 
-	if(!level.console)
-	{
+	if(!level.console) {
 		level.player scripts\sp\_utility::func_65E0("script_allow_showviewmodel");
-		if(!is_jackal_only_mission())
-		{
+		if(!is_jackal_only_mission()) {
 			thread handle_fov_viewmodel();
 		}
 	}
 }
 
-//Function Number: 2
-func_F5FF()
-{
+func_F5FF() {
 	level.player setsuit("normal_sp");
-	switch(level.script)
-	{
+	switch(level.script) {
 		case "shipcrib_moon":
 		case "phstreets":
 		case "phparade":
@@ -101,65 +89,49 @@ func_F5FF()
 	}
 }
 
-//Function Number: 3
-func_FE41()
-{
+func_FE41() {
 	self waittill("death");
-	if(isdefined(self.var_10956))
-	{
+	if(isdefined(self.var_10956)) {
 		return;
 	}
 
-	if(getdvar("r_texturebits") == "16")
-	{
+	if(getdvar("r_texturebits") == "16") {
 		return;
 	}
 
 	self shellshock("default_nosound",3);
 }
 
-//Function Number: 4
-func_D37B()
-{
-	for(;;)
-	{
+func_D37B() {
+	for(;;) {
 		self waittill("damage",var_00,var_01,var_02,var_03,var_04,var_03,var_03,var_03,var_03,var_05);
-		if(isdefined(self.var_10954))
-		{
+		if(isdefined(self.var_10954)) {
 			continue;
 		}
 
-		if(scripts\engine\utility::getdamagetype(var_04) != "bullet")
-		{
+		if(scripts\engine\utility::getdamagetype(var_04) != "bullet") {
 			var_06 = -32 * var_02 + self.origin;
 		}
 
-		if(isdefined(var_05) && getweaponbasename(var_05) == "iw7_sonic")
-		{
+		if(isdefined(var_05) && getweaponbasename(var_05) == "iw7_sonic") {
 			func_20B3();
 		}
 	}
 }
 
-//Function Number: 5
-func_20B3()
-{
+func_20B3() {
 	self shellshock("deafened",2.5);
 }
 
-//Function Number: 6
-func_965A()
-{
-	if(!scripts\engine\utility::add_init_script("level_players",::func_965A))
-	{
+func_965A() {
+	if(!scripts\engine\utility::add_init_script("level_players",::func_965A)) {
 		return;
 	}
 
 	level.var_B8D0 = 0;
 	scripts\engine\utility::flag_init("missionfailed");
 	level.players = getentarray("player","classname");
-	for(var_00 = 0;var_00 < level.players.size;var_00++)
-	{
+	for(var_00 = 0;var_00 < level.players.size;var_00++) {
 		level.players[var_00].unique_id = "player" + var_00;
 	}
 
@@ -169,14 +141,10 @@ func_965A()
 	thread func_CFF8();
 }
 
-//Function Number: 7
-func_D023()
-{
-	for(;;)
-	{
+func_D023() {
+	for(;;) {
 		var_00 = getdvarint("player_died_recently",0);
-		if(var_00 > 0)
-		{
+		if(var_00 > 0) {
 			var_00 = var_00 - 5;
 			setdvar("player_died_recently",var_00);
 		}
@@ -185,9 +153,7 @@ func_D023()
 	}
 }
 
-//Function Number: 8
-func_CFF8()
-{
+func_CFF8() {
 	setdvar("player_died_recently","0");
 	thread func_D023();
 	level scripts\sp\_utility::func_178D(::scripts\engine\utility::flag_wait,"missionfailed");
@@ -201,11 +167,8 @@ func_CFF8()
 	setdvar("player_died_recently",var_00[level.var_7683]);
 }
 
-//Function Number: 9
-func_16BC(param_00)
-{
-	if(!isdefined(self.var_4E0E))
-	{
+func_16BC(param_00) {
+	if(!isdefined(self.var_4E0E)) {
 		self.var_4E0E = [];
 		thread func_4E0E();
 	}
@@ -213,52 +176,38 @@ func_16BC(param_00)
 	self.var_4E0E = param_00;
 }
 
-//Function Number: 10
-func_4E0E()
-{
-	foreach(var_01 in self.var_4E0E)
-	{
-		thread [[ var_01 ]]();
+func_4E0E() {
+	foreach(var_01 in self.var_4E0E) {
+		thread [[var_01]]();
 	}
 }
 
-//Function Number: 11
-func_51E7()
-{
-}
+func_51E7() {}
 
-//Function Number: 12
-handle_fov_viewmodel()
-{
+handle_fov_viewmodel() {
 	level.player endon("death");
 	level.player scripts\sp\_utility::func_65E0("fov_vm_hide");
-	if(!levelrequiresfovhandling())
-	{
+	if(!levelrequiresfovhandling()) {
 		return;
 	}
 
 	var_00 = 1.4;
 	level.player scripts\sp\_utility::func_65E1("script_allow_showviewmodel");
-	for(;;)
-	{
-		if(!level.player scripts\sp\_utility::func_65DB("script_allow_showviewmodel"))
-		{
+	for(;;) {
+		if(!level.player scripts\sp\_utility::func_65DB("script_allow_showviewmodel")) {
 			level.player _meth_818A();
 			level.player scripts\sp\_utility::func_65E1("fov_vm_hide");
 			level.player scripts\sp\_utility::func_65E3("script_allow_showviewmodel");
 		}
 
 		var_01 = getdvarfloat("com_fovUserScale");
-		if(var_01 >= var_00 && level.player getcurrentweapon() == "iw7_gunless")
-		{
-			if(!level.player scripts\sp\_utility::func_65DB("fov_vm_hide"))
-			{
+		if(var_01 >= var_00 && level.player getcurrentweapon() == "iw7_gunless") {
+			if(!level.player scripts\sp\_utility::func_65DB("fov_vm_hide")) {
 				level.player _meth_818A();
 				level.player scripts\sp\_utility::func_65E1("fov_vm_hide");
 			}
 		}
-		else if(level.player scripts\sp\_utility::func_65DB("fov_vm_hide"))
-		{
+		else if(level.player scripts\sp\_utility::func_65DB("fov_vm_hide")) {
 			level.player giveperkoffhand();
 			level.player scripts\sp\_utility::func_65DD("fov_vm_hide");
 		}
@@ -267,14 +216,10 @@ handle_fov_viewmodel()
 	}
 }
 
-//Function Number: 13
-is_jackal_only_mission()
-{
+is_jackal_only_mission() {
 	return level.script == "phspace" || level.script == "moonjackal" || issubstr(level.script,"ja_");
 }
 
-//Function Number: 14
-levelrequiresfovhandling()
-{
+levelrequiresfovhandling() {
 	return level.script == "yard" || level.script == "prisoner" || level.script == "marsbase" || level.script == "marscrash" || level.script == "heist" || level.script == "phparade" || level.script == "moon_port" || issubstr(level.script,"shipcrib");
 }

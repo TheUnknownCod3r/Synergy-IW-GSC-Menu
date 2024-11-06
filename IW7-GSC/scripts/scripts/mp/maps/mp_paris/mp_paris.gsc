@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\mp\maps\mp_paris\mp_paris.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 4
- * Decompile Time: 265 ms
- * Timestamp: 10/27/2023 12:14:00 AM
-*******************************************************************/
+/*********************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\mp\maps\mp_paris\mp_paris.gsc
+*********************************************************/
 
-//Function Number: 1
-main()
-{
+main() {
 	scripts\mp\maps\mp_paris\mp_paris_precache::main();
 	scripts\mp\maps\mp_paris\gen\mp_paris_art::main();
 	scripts\mp\maps\mp_paris\mp_paris_fx::main();
@@ -32,25 +26,19 @@ main()
 	patchable_collision();
 }
 
-//Function Number: 2
-droptonavmeshtriggers()
-{
+droptonavmeshtriggers() {
 	wait(1);
 	var_00 = spawn("trigger_radius",(-469,-769,40),0,70,70);
 	var_00 hide();
 	level.droptonavmeshtriggers[level.droptonavmeshtriggers.size] = var_00;
 }
 
-//Function Number: 3
-fix_broshot()
-{
+fix_broshot() {
 	var_00 = getent("character_loc_broshot_d","targetname");
 	var_00.origin = (450,1820,var_00.origin[2]);
 }
 
-//Function Number: 4
-patchable_collision()
-{
+patchable_collision() {
 	var_00 = getent("player128x128x8","targetname");
 	var_01 = spawn("script_model",(-120,224,160));
 	var_01.angles = (270,0,0);

@@ -1,22 +1,14 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: 3575.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 5
- * Decompile Time: 0 ms
- * Timestamp: 10/27/2023 12:30:46 AM
-*******************************************************************/
+/****************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\3575.gsc
+****************************/
 
-//Function Number: 1
-func_CA2B()
-{
+func_CA2B() {
 	func_CA29(1);
 }
 
-//Function Number: 2
-func_CA2C()
-{
+func_CA2C() {
 	self endon("death");
 	self endon("disconnect");
 	self endon("periphVis_end");
@@ -29,14 +21,11 @@ func_CA2C()
 	thread func_CA29();
 }
 
-//Function Number: 3
-func_CA29(param_00)
-{
+func_CA29(param_00) {
 	self endon("disconnect");
 	self notify("periphVis_end");
 	self notify("periphVis_update",0);
-	if(scripts\mp\_utility::istrue(param_00))
-	{
+	if(scripts\mp\_utility::istrue(param_00)) {
 		self setclientomnvar("ui_ringradar_enabled",0);
 		self setscriptablepartstate("periphVis","neutral",0);
 	}
@@ -51,18 +40,13 @@ func_CA29(param_00)
 	scripts\mp\_utility::printgameaction("ring radar off",self);
 }
 
-//Function Number: 4
-func_CA2A()
-{
-	if(scripts\mp\_utility::istrue(self.personalradaractive))
-	{
+func_CA2A() {
+	if(scripts\mp\_utility::istrue(self.personalradaractive)) {
 		thread func_CA29(1);
 	}
 }
 
-//Function Number: 5
-func_CA2D()
-{
+func_CA2D() {
 	self endon("disconnect");
 	self endon("periphVis_end");
 	scripts\engine\utility::waittill_any_3("death","phase_shift_start");

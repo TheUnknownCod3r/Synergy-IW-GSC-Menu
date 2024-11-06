@@ -1,60 +1,39 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: 940.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 9
- * Decompile Time: 1 ms
- * Timestamp: 10/27/2023 12:32:10 AM
-*******************************************************************/
+/***************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\940.gsc
+***************************/
 
-//Function Number: 1
-func_3643(param_00)
-{
+func_3643(param_00) {
 	return lib_0C08::func_8C25(param_00,1);
 }
 
-//Function Number: 2
-func_3644(param_00)
-{
+func_3644(param_00) {
 	return lib_0A09::func_5AEA(param_00,50);
 }
 
-//Function Number: 3
-func_3645(param_00)
-{
+func_3645(param_00) {
 	return lib_0A09::func_5AEA(param_00,1000);
 }
 
-//Function Number: 4
-func_3646(param_00)
-{
+func_3646(param_00) {
 	return lib_0C08::func_FB1E(param_00,"left");
 }
 
-//Function Number: 5
-func_3647(param_00)
-{
+func_3647(param_00) {
 	return lib_0C08::func_A006(param_00,"minigun");
 }
 
-//Function Number: 6
-func_3648(param_00)
-{
+func_3648(param_00) {
 	return lib_0C08::func_A006(param_00,"rocket");
 }
 
-//Function Number: 7
-func_3649(param_00)
-{
+func_3649(param_00) {
 	return lib_0C08::func_FB1E(param_00,"right");
 }
 
-//Function Number: 8
-func_2AD0()
-{
-	if(isdefined(level.var_119E["c12"]))
-	{
+func_2AD0() {
+	if(isdefined(level.var_119E["c12"])) {
 		return;
 	}
 
@@ -101,9 +80,7 @@ func_2AD0()
 	level.var_119E["c12"] = var_00;
 }
 
-//Function Number: 9
-func_DEE8()
-{
+func_DEE8() {
 	func_2AD0();
 	function_02D8("c12");
 }

@@ -1,57 +1,43 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: 3419.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 48
- * Decompile Time: 27 ms
- * Timestamp: 10/27/2023 12:27:10 AM
-*******************************************************************/
+/****************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\3419.gsc
+****************************/
 
-//Function Number: 1
-init()
-{
+init() {
 	level.available_player_characters = [];
 	level.player_character_info = [];
 	level thread func_50C9();
 }
 
-//Function Number: 2
-func_50C9()
-{
+func_50C9() {
 	wait(4.5);
 	setomnvar("zm_player_photo",0);
 	setomnvar("zm_player_status",0);
 	setomnvar("zm_player_character",4095);
 }
 
-//Function Number: 3
-givedefaultloadout(param_00,param_01)
-{
-	if(!isdefined(level.perksetfuncs))
-	{
+givedefaultloadout(param_00,param_01) {
+	if(!isdefined(level.perksetfuncs)) {
 		func_958F();
 	}
 
 	var_02 = self;
 	var_02.changingweapon = undefined;
 	var_02 takeallweapons();
-	if(!scripts\engine\utility::istrue(var_02.keep_perks))
-	{
+	if(!scripts\engine\utility::istrue(var_02.keep_perks)) {
 		var_02 scripts\cp\utility::_clearperks();
 	}
 
 	var_02 thread delayreturningperks(var_02);
 	var_02 scripts\cp\utility::_detachall();
 	var_02.var_108EF = 0;
-	if(isdefined(var_02.headmodel))
-	{
+	if(isdefined(var_02.headmodel)) {
 		var_02.headmodel = undefined;
 	}
 
 	var_03 = get_player_character_num();
-	if(isdefined(param_01))
-	{
+	if(isdefined(param_01)) {
 		var_03 = param_01;
 	}
 
@@ -60,9 +46,8 @@ givedefaultloadout(param_00,param_01)
 	var_05 = var_02 clearclienttriggeraudiozone(var_04);
 	var_02 give_explosive_touch_on_revived(var_05);
 	scripts\engine\utility::flag_wait("introscreen_over");
-	if(isdefined(level.move_speed_scale))
-	{
-		self [[ level.move_speed_scale ]]();
+	if(isdefined(level.move_speed_scale)) {
+		self [[level.move_speed_scale]]();
 	}
 	else
 	{
@@ -76,14 +61,12 @@ givedefaultloadout(param_00,param_01)
 	var_02 scripts\cp\utility::giveperk("specialty_sprintreload");
 	var_02 scripts\cp\utility::giveperk("specialty_gung_ho");
 	var_02.movespeedscaler = var_02 scripts/cp/perks/prestige::prestige_getmoveslowscalar();
-	if(isdefined(param_00) && param_00)
-	{
+	if(isdefined(param_00) && param_00) {
 		return;
 	}
 
 	var_06 = var_02.melee_weapon;
-	if(isdefined(var_02.default_starting_melee_weapon))
-	{
+	if(isdefined(var_02.default_starting_melee_weapon)) {
 		var_02.melee_weapon = var_02.default_starting_melee_weapon;
 		var_06 = var_02.default_starting_melee_weapon;
 	}
@@ -91,12 +74,10 @@ givedefaultloadout(param_00,param_01)
 	var_02 giveweapon(var_06);
 	var_02.default_starting_melee_weapon = var_06;
 	var_02.currentmeleeweapon = var_06;
-	if(isdefined(var_02.starting_weapon))
-	{
+	if(isdefined(var_02.starting_weapon)) {
 		var_02.default_starting_pistol = var_02.starting_weapon;
 	}
-	else if(isdefined(level.default_weapon))
-	{
+	else if(isdefined(level.default_weapon)) {
 		var_02.default_starting_pistol = level.default_weapon;
 	}
 	else
@@ -106,8 +87,7 @@ givedefaultloadout(param_00,param_01)
 
 	var_07 = scripts\cp\utility::getrawbaseweaponname(var_02.default_starting_pistol);
 	var_02.default_starting_pistol = return_wbk_version_of_weapon(var_02,var_07,var_02.default_starting_pistol);
-	if(isdefined(level.last_stand_pistol))
-	{
+	if(isdefined(level.last_stand_pistol)) {
 		var_02.last_stand_pistol = level.last_stand_pistol;
 	}
 	else
@@ -117,15 +97,14 @@ givedefaultloadout(param_00,param_01)
 
 	var_08 = scripts\cp\utility::getrawbaseweaponname(var_02.default_starting_pistol);
 	var_02 scripts\cp\utility::_giveweapon(var_02.default_starting_pistol,undefined,undefined,1);
-	var_02 [[ level.move_speed_scale ]]();
+	var_02 [[level.move_speed_scale]]();
 	var_09 = spawnstruct();
 	var_09.lvl = func_785A(var_02,var_08);
 	var_02.pap[var_08] = var_09;
 	var_02 giveweapon("super_default_zm");
 	var_02 assignweaponoffhandspecial("super_default_zm");
 	var_02.specialoffhandgrenade = "super_default_zm";
-	if(function_0114())
-	{
+	if(function_0114()) {
 		var_02 thread func_1358A(var_02.default_starting_pistol);
 	}
 	else
@@ -133,19 +112,16 @@ givedefaultloadout(param_00,param_01)
 		var_02 setspawnweapon(var_02.default_starting_pistol,1);
 	}
 
-	if(isdefined(level.force_used_clip))
-	{
+	if(isdefined(level.force_used_clip)) {
 		var_02 setweaponammoclip(var_02.default_starting_pistol,int(level.force_used_clip / 100 * weaponclipsize(var_02.default_starting_pistol)));
 	}
 
-	if(isdefined(level.force_starting_ammo))
-	{
+	if(isdefined(level.force_starting_ammo)) {
 		var_02 setweaponammostock(var_02.default_starting_pistol,level.force_starting_ammo);
 	}
 
-	if(isdefined(level.additional_loadout_func))
-	{
-		[[ level.additional_loadout_func ]](var_02);
+	if(isdefined(level.additional_loadout_func)) {
+		[[level.additional_loadout_func]](var_02);
 	}
 
 	var_02 notify("weapon_level_changed");
@@ -153,41 +129,31 @@ givedefaultloadout(param_00,param_01)
 	var_02 notify("loadout_given");
 }
 
-//Function Number: 4
-return_wbk_version_of_weapon(param_00,param_01,param_02)
-{
+return_wbk_version_of_weapon(param_00,param_01,param_02) {
 	level endon("game_ended");
 	param_00 endon("disconnect");
-	if(!scripts\engine\utility::istrue(param_00.weaponkitinitialized))
-	{
+	if(!scripts\engine\utility::istrue(param_00.weaponkitinitialized)) {
 		param_00 waittill("player_weapon_build_kit_initialized");
 	}
 
-	if(isdefined(param_00.weapon_build_models[param_01]))
-	{
+	if(isdefined(param_00.weapon_build_models[param_01])) {
 		return param_00.weapon_build_models[param_01];
 	}
 
 	return param_02;
 }
 
-//Function Number: 5
-delayreturningperks(param_00)
-{
+delayreturningperks(param_00) {
 	level endon("game_ended");
 	param_00 endon("disconnect");
 	param_00 waittill("spawned_player");
 	wait(1);
-	if(scripts\engine\utility::istrue(param_00.keep_perks))
-	{
-		if(isdefined(param_00.zombies_perks))
-		{
+	if(scripts\engine\utility::istrue(param_00.keep_perks)) {
+		if(isdefined(param_00.zombies_perks)) {
 			var_01 = getarraykeys(param_00.zombies_perks);
-			foreach(var_03 in var_01)
-			{
-				if(isdefined(level.coop_perk_callbacks) && isdefined(level.coop_perk_callbacks[var_03]) && isdefined(level.coop_perk_callbacks[var_03].set))
-				{
-					param_00 [[ level.coop_perk_callbacks[var_03].set ]]();
+			foreach(var_03 in var_01) {
+				if(isdefined(level.coop_perk_callbacks) && isdefined(level.coop_perk_callbacks[var_03]) && isdefined(level.coop_perk_callbacks[var_03].set)) {
+					param_00 [[level.coop_perk_callbacks[var_03].set]]();
 				}
 			}
 		}
@@ -196,30 +162,22 @@ delayreturningperks(param_00)
 	}
 }
 
-//Function Number: 6
-release_character_number(param_00)
-{
+release_character_number(param_00) {
 	var_01 = param_00.var_CFC4;
-	if(!scripts\engine\utility::array_contains(level.available_player_characters,var_01) && var_01 != 5 && var_01 != 6)
-	{
+	if(!scripts\engine\utility::array_contains(level.available_player_characters,var_01) && var_01 != 5 && var_01 != 6) {
 		level.available_player_characters = scripts\engine\utility::array_add(level.available_player_characters,var_01);
 	}
 }
 
-//Function Number: 7
-func_785A(param_00,param_01)
-{
-	if(isdefined(param_00.pap[param_01]))
-	{
+func_785A(param_00,param_01) {
+	if(isdefined(param_00.pap[param_01])) {
 		return param_00.pap[param_01].lvl;
 	}
 
 	return 1;
 }
 
-//Function Number: 8
-setmodelfromcustomization(param_00)
-{
+setmodelfromcustomization(param_00) {
 	level endon("game_ended");
 	var_01 = level.player_character_info[param_00];
 	self.vo_prefix = var_01.vo_prefix;
@@ -235,32 +193,25 @@ setmodelfromcustomization(param_00)
 	wait(0.05);
 	setcharactermodels(var_01.body_model,var_01.head_model,var_01.view_model,var_01.hair_model);
 	thread setplayerinside(self,var_01.photo_index);
-	if(isdefined(var_01.post_setup_func))
-	{
-		[[ var_01.post_setup_func ]](self);
+	if(isdefined(var_01.post_setup_func)) {
+		[[var_01.post_setup_func]](self);
 	}
 }
 
-//Function Number: 9
-get_player_character_num()
-{
+get_player_character_num() {
 	var_01 = getdvar("ui_mapname");
-	if(isdefined(self.var_CFC4))
-	{
+	if(isdefined(self.var_CFC4)) {
 		return self.var_CFC4;
 	}
 
 	var_02 = scripts\engine\utility::random(level.available_player_characters);
-	switch(var_01)
-	{
+	switch(var_01) {
 		case "cp_zmb":
-			if(self getplayerdata("cp","zombiePlayerLoadout","characterSelect") == 1)
-			{
+			if(self getplayerdata("cp","zombiePlayerLoadout","characterSelect") == 1) {
 				var_02 = 5;
 				self setplayerdata("cp","zombiePlayerLoadout","characterSelect",0);
 			}
-			else if(self getplayerdata("cp","zombiePlayerLoadout","characterSelect") == 5)
-			{
+			else if(self getplayerdata("cp","zombiePlayerLoadout","characterSelect") == 5) {
 				var_02 = 6;
 				self setplayerdata("cp","zombiePlayerLoadout","characterSelect",0);
 			}
@@ -269,8 +220,7 @@ get_player_character_num()
 			break;
 
 		case "cp_rave":
-			if(self getplayerdata("cp","zombiePlayerLoadout","characterSelect") == 2)
-			{
+			if(self getplayerdata("cp","zombiePlayerLoadout","characterSelect") == 2) {
 				var_02 = 5;
 				self setplayerdata("cp","zombiePlayerLoadout","characterSelect",0);
 			}
@@ -281,8 +231,7 @@ get_player_character_num()
 			break;
 
 		case "cp_disco":
-			if(self getplayerdata("cp","zombiePlayerLoadout","characterSelect") == 3)
-			{
+			if(self getplayerdata("cp","zombiePlayerLoadout","characterSelect") == 3) {
 				var_02 = 5;
 				self setplayerdata("cp","zombiePlayerLoadout","characterSelect",0);
 			}
@@ -293,8 +242,7 @@ get_player_character_num()
 			break;
 
 		case "cp_town":
-			if(self getplayerdata("cp","zombiePlayerLoadout","characterSelect") == 4)
-			{
+			if(self getplayerdata("cp","zombiePlayerLoadout","characterSelect") == 4) {
 				var_02 = 5;
 				self setplayerdata("cp","zombiePlayerLoadout","characterSelect",0);
 			}
@@ -313,13 +261,10 @@ get_player_character_num()
 	return var_02;
 }
 
-//Function Number: 10
-setplayerinside(param_00,param_01)
-{
+setplayerinside(param_00,param_01) {
 	param_00 endon("disconnect");
 	var_02 = param_00 getentitynumber();
-	if(var_02 == 4)
-	{
+	if(var_02 == 4) {
 		var_02 = 0;
 	}
 
@@ -330,17 +275,12 @@ setplayerinside(param_00,param_01)
 	set_player_photo_status(param_00,"healthy");
 }
 
-//Function Number: 11
-set_player_photo_status(param_00,param_01)
-{
+set_player_photo_status(param_00,param_01) {
 	func_F53E(param_00,"zm_player_status",func_7CAB(param_01));
 }
 
-//Function Number: 12
-func_F53E(param_00,param_01,param_02)
-{
-	if(isdefined(param_00.var_2B17))
-	{
+func_F53E(param_00,param_01,param_02) {
+	if(isdefined(param_00.var_2B17)) {
 		setomnvarbit(param_01,param_00.var_2B17.var_2B16,param_02.var_2B16);
 		setomnvarbit(param_01,param_00.var_2B17.var_2B15,param_02.var_2B15);
 		setomnvarbit(param_01,param_00.var_2B17.var_2B14,param_02.var_2B14);
@@ -348,12 +288,9 @@ func_F53E(param_00,param_01,param_02)
 	}
 }
 
-//Function Number: 13
-func_786B(param_00)
-{
+func_786B(param_00) {
 	var_01 = spawnstruct();
-	switch(param_00)
-	{
+	switch(param_00) {
 		case 3:
 			var_01.var_2B16 = 11;
 			var_01.var_2B15 = 10;
@@ -382,12 +319,9 @@ func_786B(param_00)
 	return var_01;
 }
 
-//Function Number: 14
-func_789E(param_00)
-{
+func_789E(param_00) {
 	var_01 = spawnstruct();
-	switch(param_00)
-	{
+	switch(param_00) {
 		case 0:
 			var_01.var_2B16 = 0;
 			var_01.var_2B15 = 0;
@@ -428,12 +362,9 @@ func_789E(param_00)
 	return var_01;
 }
 
-//Function Number: 15
-func_7CAB(param_00)
-{
+func_7CAB(param_00) {
 	var_01 = spawnstruct();
-	switch(param_00)
-	{
+	switch(param_00) {
 		case "healthy":
 			var_01.var_2B16 = 0;
 			var_01.var_2B15 = 0;
@@ -462,91 +393,71 @@ func_7CAB(param_00)
 	return var_01;
 }
 
-//Function Number: 16
-setcharactermodels(param_00,param_01,param_02,param_03)
-{
-	if(isdefined(self.headmodel))
-	{
+setcharactermodels(param_00,param_01,param_02,param_03) {
+	if(isdefined(self.headmodel)) {
 		self detach(self.headmodel);
 	}
 
 	self.var_2C14 = param_00;
 	self setmodel(param_00);
 	self givegoproattachments(param_02);
-	if(isdefined(param_01))
-	{
+	if(isdefined(param_01)) {
 		self attach(param_01,"",1);
 		self.headmodel = param_01;
 	}
 
-	if(isdefined(param_03))
-	{
+	if(isdefined(param_03)) {
 		self attach(param_03,"",1);
 		self.var_8862 = param_03;
 	}
 }
 
-//Function Number: 17
-getplayermodelindex()
-{
+getplayermodelindex() {
 	return 0;
 }
 
-//Function Number: 18
-clearclienttriggeraudiozone(param_00)
-{
+clearclienttriggeraudiozone(param_00) {
 	return tablelookup("mp/cac/bodies.csv",0,param_00,5);
 }
 
-//Function Number: 19
-updatemovespeedscale()
-{
+updatemovespeedscale() {
 	var_00 = undefined;
-	if(isdefined(self.playerstreakspeedscale))
-	{
+	if(isdefined(self.playerstreakspeedscale)) {
 		var_00 = 1;
 		var_00 = var_00 + self.playerstreakspeedscale;
 	}
 	else
 	{
 		var_00 = getplayerspeedbyweapon(self);
-		if(isdefined(self.chargemode_speedscale))
-		{
+		if(isdefined(self.chargemode_speedscale)) {
 			var_00 = self.chargemode_speedscale;
 		}
-		else if(isdefined(self.siege_speedscale))
-		{
+		else if(isdefined(self.siege_speedscale)) {
 			var_00 = self.siege_speedscale;
 		}
 
 		var_01 = self.chill_data;
-		if(isdefined(var_01) && isdefined(var_01.speedmod))
-		{
+		if(isdefined(var_01) && isdefined(var_01.speedmod)) {
 			var_00 = var_00 + var_01.speedmod;
 		}
 
-		if(isdefined(self.speedstripmod))
-		{
+		if(isdefined(self.speedstripmod)) {
 			var_00 = var_00 + self.speedstripmod;
 		}
 
-		if(isdefined(self.phasespeedmod))
-		{
+		if(isdefined(self.phasespeedmod)) {
 			var_00 = var_00 + self.phasespeedmod;
 		}
 
-		if(isdefined(self.weaponaffinityspeedboost))
-		{
+		if(isdefined(self.weaponaffinityspeedboost)) {
 			var_00 = var_00 + self.weaponaffinityspeedboost;
 		}
 
-		if(isdefined(self.weaponpassivespeedmod))
-		{
+		if(isdefined(self.weaponpassivespeedmod)) {
 			var_00 = var_00 + self.weaponpassivespeedmod;
 		}
 
-		if(isdefined(self.weaponpassivespeedonkillmod))
-		{
+		if(isdefined(self.weaponpassivespeedonkillmod)) {
 			var_00 = var_00 + self.weaponpassivespeedonkillmod;
 		}
 
@@ -554,42 +465,34 @@ updatemovespeedscale()
 	}
 
 	self.weaponspeed = var_00;
-	if(!isdefined(self.combatspeedscalar))
-	{
+	if(!isdefined(self.combatspeedscalar)) {
 		self.combatspeedscalar = 1;
 	}
 
 	self setmovespeedscale(var_00 * self.movespeedscaler * self.combatspeedscalar);
 }
 
-//Function Number: 20
-getplayerspeedbyweapon(param_00)
-{
+getplayerspeedbyweapon(param_00) {
 	var_01 = 1;
 	self.weaponlist = self getweaponslistprimaries();
-	if(getdvar("normalize_movement_speed","on") == "on")
-	{
+	if(getdvar("normalize_movement_speed","on") == "on") {
 		return 1;
 	}
 
-	if(!self.weaponlist.size)
-	{
+	if(!self.weaponlist.size) {
 		var_01 = 0.9;
 	}
 	else
 	{
 		var_02 = self getcurrentweapon();
-		if(scripts\cp\utility::issuperweapon(var_02))
-		{
+		if(scripts\cp\utility::issuperweapon(var_02)) {
 			var_01 = level.superweapons[var_02].var_BCEF;
 		}
 		else
 		{
 			var_03 = function_0244(var_02);
-			if(var_03 != "primary" && var_03 != "altmode")
-			{
-				if(isdefined(self.saved_lastweapon))
-				{
+			if(var_03 != "primary" && var_03 != "altmode") {
+				if(isdefined(self.saved_lastweapon)) {
 					var_02 = self.saved_lastweapon;
 				}
 				else
@@ -598,8 +501,7 @@ getplayerspeedbyweapon(param_00)
 				}
 			}
 
-			if(!isdefined(var_02) || !self hasweapon(var_02))
-			{
+			if(!isdefined(var_02) || !self hasweapon(var_02)) {
 				var_01 = _meth_8237();
 			}
 			else
@@ -613,31 +515,23 @@ getplayerspeedbyweapon(param_00)
 	return var_01;
 }
 
-//Function Number: 21
-_meth_8236(param_00)
-{
+_meth_8236(param_00) {
 	var_01 = scripts\cp\utility::getbaseweaponname(param_00);
 	var_02 = level.weaponmap_tospeed[var_01];
 	return var_02;
 }
 
-//Function Number: 22
-_meth_8237()
-{
+_meth_8237() {
 	var_00 = 2;
 	self.weaponlist = self getweaponslistprimaries();
-	if(self.weaponlist.size)
-	{
-		foreach(var_02 in self.weaponlist)
-		{
+	if(self.weaponlist.size) {
+		foreach(var_02 in self.weaponlist) {
 			var_03 = _meth_8236(var_02);
-			if(var_03 == 0)
-			{
+			if(var_03 == 0) {
 				continue;
 			}
 
-			if(var_03 < var_00)
-			{
+			if(var_03 < var_00) {
 				var_00 = var_03;
 			}
 		}
@@ -651,29 +545,21 @@ _meth_8237()
 	return var_00;
 }
 
-//Function Number: 23
-clampweaponspeed(param_00)
-{
+clampweaponspeed(param_00) {
 	return clamp(param_00,0,1);
 }
 
-//Function Number: 24
-_meth_8226()
-{
+_meth_8226() {
 	var_00 = 1000;
 	self.weaponlist = self getweaponslistprimaries();
-	if(self.weaponlist.size)
-	{
-		foreach(var_02 in self.weaponlist)
-		{
+	if(self.weaponlist.size) {
+		foreach(var_02 in self.weaponlist) {
 			var_03 = getweaponvarianttablename(var_02);
-			if(var_03 == 0)
-			{
+			if(var_03 == 0) {
 				continue;
 			}
 
-			if(var_03 < var_00)
-			{
+			if(var_03 < var_00) {
 				var_00 = var_03;
 			}
 		}
@@ -687,66 +573,50 @@ _meth_8226()
 	return var_00;
 }
 
-//Function Number: 25
-getweaponvarianttablename(param_00)
-{
+getweaponvarianttablename(param_00) {
 	var_01 = undefined;
 	var_02 = scripts\cp\utility::getbaseweaponname(param_00);
 	var_01 = float(tablelookup(level.statstable,4,var_02,8));
-	if(!isdefined(var_01) || var_01 < 1)
-	{
+	if(!isdefined(var_01) || var_01 < 1) {
 		var_01 = float(tablelookup(level.game_mode_statstable,4,var_02,8));
 	}
 
-	if(!isdefined(var_01) || var_01 < 1)
-	{
+	if(!isdefined(var_01) || var_01 < 1) {
 		var_01 = 10;
 	}
 
 	return var_01;
 }
 
-//Function Number: 26
-func_4003(param_00)
-{
+func_4003(param_00) {
 	return clamp(param_00,0,11);
 }
 
-//Function Number: 27
-func_EBA1(param_00)
-{
+func_EBA1(param_00) {
 	var_01 = func_3D8F();
-	if(var_01 != 1)
-	{
+	if(var_01 != 1) {
 		var_02 = function_0249(param_00);
 		self setweaponammostock(param_00,int(var_02 * var_01));
 	}
 }
 
-//Function Number: 28
-func_3D8F()
-{
+func_3D8F() {
 	return scripts/cp/perks/prestige::prestige_getminammo();
 }
 
-//Function Number: 29
-func_1358A(param_00)
-{
+func_1358A(param_00) {
 	self endon("disconnect");
 	self endon("death");
 	level endon("game_ended");
 	wait(0.5);
-	if(!self hasweapon(param_00))
-	{
+	if(!self hasweapon(param_00)) {
 		param_00 = self getweaponslistprimaries()[0];
 	}
 
 	self setspawnweapon(param_00);
 }
 
-//Function Number: 30
-func_958F()
-{
+func_958F() {
 	level.perksetfuncs = [];
 	level.scriptperks = [];
 	level.perkunsetfuncs = [];
@@ -760,22 +630,16 @@ func_958F()
 	level.perkunsetfuncs["specialty_falldamage"] = ::unsetfreefall;
 }
 
-//Function Number: 31
-setmomentum()
-{
+setmomentum() {
 	thread func_E863();
 }
 
-//Function Number: 32
-func_E863()
-{
+func_E863() {
 	self endon("death");
 	self endon("disconnect");
 	self endon("momentum_unset");
-	for(;;)
-	{
-		if(self issprinting())
-		{
+	for(;;) {
+		if(self issprinting()) {
 			_meth_848B();
 			self.movespeedscaler = 1;
 			updatemovespeedscale();
@@ -785,9 +649,7 @@ func_E863()
 	}
 }
 
-//Function Number: 33
-_meth_848B()
-{
+_meth_848B() {
 	self endon("death");
 	self endon("disconnect");
 	self endon("momentum_reset");
@@ -795,8 +657,7 @@ _meth_848B()
 	thread func_B944();
 	thread func_B943();
 	var_00 = 0;
-	while(var_00 < 0.08)
-	{
+	while(var_00 < 0.08) {
 		self.movespeedscaler = self.movespeedscaler + 0.01;
 		updatemovespeedscale();
 		wait(0.4375);
@@ -809,27 +670,20 @@ _meth_848B()
 	self waittill("momentum_reset");
 }
 
-//Function Number: 34
-momentum_endaftermax()
-{
+momentum_endaftermax() {
 	self endon("momentum_unset");
 	self waittill("momentum_reset");
 	self playlocalsound("ftl_phase_out");
 }
 
-//Function Number: 35
-func_B944()
-{
+func_B944() {
 	self endon("death");
 	self endon("disconnect");
 	self endon("momentum_unset");
-	for(;;)
-	{
-		if(!self issprinting() || self issprintsliding() || !self isonground() || self gold_teeth_hint_func())
-		{
+	for(;;) {
+		if(!self issprinting() || self issprintsliding() || !self isonground() || self gold_teeth_hint_func()) {
 			wait(0.25);
-			if(!self issprinting() || self issprintsliding() || !self isonground() || self gold_teeth_hint_func())
-			{
+			if(!self issprinting() || self issprintsliding() || !self isonground() || self gold_teeth_hint_func()) {
 				self notify("momentum_reset");
 				break;
 			}
@@ -839,42 +693,29 @@ func_B944()
 	}
 }
 
-//Function Number: 36
-func_B943()
-{
+func_B943() {
 	self endon("death");
 	self endon("disconnect");
 	self waittill("damage");
 	self notify("momentum_reset");
 }
 
-//Function Number: 37
-unsetmomentum()
-{
+unsetmomentum() {
 	self notify("momentum_unset");
 }
 
-//Function Number: 38
-setfreefall()
-{
-}
+setfreefall() {}
 
-//Function Number: 39
-unsetfreefall()
-{
-}
+unsetfreefall() {}
 
-//Function Number: 40
-func_F53D()
-{
+func_F53D() {
 	level endon("game_ended");
 	self endon("disconnect");
 	self endon("force_bleed_out");
 	self endon("last_stand");
 	self endon("death");
 	self endon("revive_success");
-	if(game["state"] != "postgame")
-	{
+	if(game["state"] != "postgame") {
 		wait(0.1);
 		var_00 = 1;
 		var_01 = 2;
@@ -894,8 +735,7 @@ func_F53D()
 		var_0F = 1500;
 		var_10 = func_7AA8(self);
 		var_0B = var_02;
-		if(isdefined(level.player_suit))
-		{
+		if(isdefined(level.player_suit)) {
 			self setsuit(level.player_suit);
 		}
 		else
@@ -908,8 +748,7 @@ func_F53D()
 		self allowslide(var_0B & var_02);
 		self allowwallrun(0);
 		self allowdodge(0);
-		if(isdefined(var_08) && isdefined(var_09))
-		{
+		if(isdefined(var_08) && isdefined(var_09)) {
 			self _meth_8426(var_07);
 			self _meth_8425(var_07);
 			self _meth_8454(3);
@@ -922,8 +761,7 @@ func_F53D()
 		}
 
 		thread scripts\cp\powers\coop_powers::clearpowers();
-		if(isdefined(var_10))
-		{
+		if(isdefined(var_10)) {
 			thread scripts\cp\powers\coop_powers::givepower(var_10,"primary",undefined,undefined,undefined,0,1);
 		}
 
@@ -932,15 +770,13 @@ func_F53D()
 		self goal_radius(0,var_0D);
 		self goalflag(0,var_0E);
 		self goal_type(0,var_0F);
-		if(isdefined(var_0C))
-		{
-			self [[ var_0C ]]();
+		if(isdefined(var_0C)) {
+			self [[var_0C]]();
 		}
 	}
 
 	self allowmantle(0);
-	if(!scripts\cp\utility::is_consumable_active("grenade_cooldown"))
-	{
+	if(!scripts\cp\utility::is_consumable_active("grenade_cooldown")) {
 		scripts\cp\powers\coop_powers::power_modifycooldownrate(0);
 	}
 
@@ -948,23 +784,16 @@ func_F53D()
 	self notify("set_player_perks");
 }
 
-//Function Number: 41
-func_7AA8(param_00)
-{
+func_7AA8(param_00) {
 	return "power_frag";
 }
 
-//Function Number: 42
-func_23C6()
-{
+func_23C6() {
 	self.class = "none";
 }
 
-//Function Number: 43
-_allowbattleslide(param_00)
-{
-	if(param_00)
-	{
+_allowbattleslide(param_00) {
+	if(param_00) {
 		thread scripts/cp/perks/perkfunctions::setbattleslide();
 		return;
 	}
@@ -972,9 +801,7 @@ _allowbattleslide(param_00)
 	self notify("battleSlide_unset");
 }
 
-//Function Number: 44
-register_player_character(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08,param_09,param_0A,param_0B,param_0C,param_0D,param_0E,param_0F,param_10)
-{
+register_player_character(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08,param_09,param_0A,param_0B,param_0C,param_0D,param_0E,param_0F,param_10) {
 	var_11 = spawnstruct();
 	var_11.body_model = param_02;
 	var_11.view_model = param_03;
@@ -992,32 +819,23 @@ register_player_character(param_00,param_01,param_02,param_03,param_04,param_05,
 	var_11.starting_weapon = param_10;
 	var_11.post_setup_func = param_0F;
 	level.player_character_info[param_00] = var_11;
-	if(param_01 == "yes")
-	{
+	if(param_01 == "yes") {
 		level.available_player_characters[level.available_player_characters.size] = param_00;
 	}
 }
 
-//Function Number: 45
-prestige_getslowhealthregenscalar()
-{
+prestige_getslowhealthregenscalar() {
 	return get_nerf_scalar("nerf_fragile");
 }
 
-//Function Number: 46
-prestige_getmoveslowscalar()
-{
+prestige_getmoveslowscalar() {
 	return get_nerf_scalar("nerf_move_slower");
 }
 
-//Function Number: 47
-prestige_getminammo()
-{
+prestige_getminammo() {
 	return get_nerf_scalar("nerf_min_ammo");
 }
 
-//Function Number: 48
-get_nerf_scalar(param_00)
-{
+get_nerf_scalar(param_00) {
 	return self.nerf_scalars[param_00];
 }

@@ -1,38 +1,22 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: 3130.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 18
- * Decompile Time: 4 ms
- * Timestamp: 10/27/2023 12:26:13 AM
-*******************************************************************/
+/****************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\3130.gsc
+****************************/
 
-//Function Number: 1
-func_D55D(param_00,param_01,param_02,param_03)
-{
-}
+func_D55D(param_00,param_01,param_02,param_03) {}
 
-//Function Number: 2
-func_D566(param_00,param_01,param_02,param_03)
-{
+func_D566(param_00,param_01,param_02,param_03) {
 	func_D564(param_00,param_01,param_02);
 }
 
-//Function Number: 3
-func_D560(param_00,param_01,param_02,param_03)
-{
+func_D560(param_00,param_01,param_02,param_03) {
 	func_D563(param_00,param_01,param_02,param_03);
 }
 
-//Function Number: 4
-func_D55E(param_00,param_01,param_02,param_03)
-{
-}
+func_D55E(param_00,param_01,param_02,param_03) {}
 
-//Function Number: 5
-func_D563(param_00,param_01,param_02,param_03)
-{
+func_D563(param_00,param_01,param_02,param_03) {
 	self endon("death");
 	self endon("terminate_ai_threads");
 	var_04 = self getspectatepoint();
@@ -56,9 +40,7 @@ func_D563(param_00,param_01,param_02,param_03)
 	func_11701(param_00,param_01);
 }
 
-//Function Number: 6
-playtraverseanim_gravity(param_00,param_01,param_02,param_03)
-{
+playtraverseanim_gravity(param_00,param_01,param_02,param_03) {
 	self endon("death");
 	self endon("terminate_ai_threads");
 	var_04 = self getspectatepoint();
@@ -77,9 +59,7 @@ playtraverseanim_gravity(param_00,param_01,param_02,param_03)
 	func_11701(param_00,param_01);
 }
 
-//Function Number: 7
-func_D564(param_00,param_01,param_02,param_03)
-{
+func_D564(param_00,param_01,param_02,param_03) {
 	self endon("death");
 	self endon("terminate_ai_threads");
 	var_04 = self getspectatepoint();
@@ -95,19 +75,14 @@ func_D564(param_00,param_01,param_02,param_03)
 	func_11701(param_00,param_01);
 }
 
-//Function Number: 8
-func_D55C(param_00,param_01,param_02,param_03)
-{
+func_D55C(param_00,param_01,param_02,param_03) {
 	func_D564(param_00,param_01,param_02,param_03);
 }
 
-//Function Number: 9
-func_11701(param_00,param_01)
-{
+func_11701(param_00,param_01) {
 	var_02 = level.asm[param_00].states[param_01];
 	var_03 = undefined;
-	if(isarray(var_02.var_116FB))
-	{
+	if(isarray(var_02.var_116FB)) {
 		var_03 = var_02.var_116FB[0];
 	}
 	else
@@ -120,49 +95,23 @@ func_11701(param_00,param_01)
 	self notify("killanimscript");
 }
 
-//Function Number: 10
-func_11661(param_00)
-{
-}
+func_11661(param_00) {}
 
-//Function Number: 11
-func_11662(param_00,param_01,param_02,param_03)
-{
-}
+func_11662(param_00,param_01,param_02,param_03) {}
 
-//Function Number: 12
-func_89F8(param_00)
-{
-}
+func_89F8(param_00) {}
 
-//Function Number: 13
-func_89F6()
-{
-}
+func_89F6() {}
 
-//Function Number: 14
-func_89F5()
-{
-}
+func_89F5() {}
 
-//Function Number: 15
-func_89F7()
-{
-}
+func_89F7() {}
 
-//Function Number: 16
-func_6CE5(param_00)
-{
-}
+func_6CE5(param_00) {}
 
-//Function Number: 17
-func_126D2(param_00,param_01,param_02)
-{
+func_126D2(param_00,param_01,param_02) {
 	self unlink();
 	self.var_DC1A = undefined;
 }
 
-//Function Number: 18
-func_D565(param_00,param_01,param_02,param_03)
-{
-}
+func_D565(param_00,param_01,param_02,param_03) {}

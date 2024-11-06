@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\mp\maps\mp_junk\mp_junk_fx.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 1
- * Decompile Time: 101 ms
- * Timestamp: 10/27/2023 12:13:42 AM
-*******************************************************************/
+/**********************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\mp\maps\mp_junk\mp_junk_fx.gsc
+**********************************************************/
 
-//Function Number: 1
-main()
-{
+main() {
 	level._effect["vfx_junk_magnet_debris_top"] = loadfx("vfx/iw7/levels/mp_mansion/vfx_junk_magnet_debris_top.vfx");
 	level._effect["vfx_junk_magnet_dist"] = loadfx("vfx/iw7/levels/mp_junk/vfx_junk_magnet_dist.vfx");
 	level._effect["vfx_junk_floating_rocks"] = loadfx("vfx/iw7/levels/mp_junk/vfx_junk_floating_rocks.vfx");

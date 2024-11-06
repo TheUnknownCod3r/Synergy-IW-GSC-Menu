@@ -1,46 +1,32 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\mp\spawnscoring.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 19
- * Decompile Time: 763 ms
- * Timestamp: 10/27/2023 12:21:37 AM
-*******************************************************************/
+/***********************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\mp\spawnscoring.gsc
+***********************************************/
 
-//Function Number: 1
-checkdynamicspawns(param_00)
-{
-	if(isdefined(level.dynamicspawns))
-	{
-		param_00 = [[ level.dynamicspawns ]](param_00);
+checkdynamicspawns(param_00) {
+	if(isdefined(level.dynamicspawns)) {
+		param_00 = [[level.dynamicspawns]](param_00);
 	}
 
 	return param_00;
 }
 
-//Function Number: 2
-selectbestspawnpoint(param_00,param_01)
-{
+selectbestspawnpoint(param_00,param_01) {
 	var_02 = param_00;
 	return var_02;
 }
 
-//Function Number: 3
-func_6CB1()
-{
-	if(!level.teambased || isdefined(level.var_112BF) && !level.var_112BF)
-	{
+func_6CB1() {
+	if(!level.teambased || isdefined(level.var_112BF) && !level.var_112BF) {
 		return undefined;
 	}
 
 	var_00 = isonground(self.team);
 	var_01 = [];
-	foreach(var_03 in var_00)
-	{
+	foreach(var_03 in var_00) {
 		var_04 = findspawnlocationnearplayer(var_03);
-		if(!isdefined(var_04))
-		{
+		if(!isdefined(var_04)) {
 			continue;
 		}
 
@@ -51,8 +37,7 @@ func_6CB1()
 		var_05.budgetedents = 1;
 		var_05.isdynamicspawn = 1;
 		var_05 scripts\mp\spawnlogic::func_108FA();
-		if(isdefined(var_03.analyticslog) && isdefined(var_03.analyticslog.playerid))
-		{
+		if(isdefined(var_03.analyticslog) && isdefined(var_03.analyticslog.playerid)) {
 			var_05.buddyspawnid = var_03.analyticslog.playerid;
 		}
 
@@ -61,10 +46,8 @@ func_6CB1()
 
 	var_07 = [];
 	func_12F1E(var_01);
-	foreach(var_05 in var_01)
-	{
-		if(!func_11746(var_05))
-		{
+	foreach(var_05 in var_01) {
+		if(!func_11746(var_05)) {
 			continue;
 		}
 
@@ -73,10 +56,8 @@ func_6CB1()
 	}
 
 	var_0A = undefined;
-	foreach(var_05 in var_07)
-	{
-		if(!isdefined(var_0A) || var_05.totalscore > var_0A.totalscore)
-		{
+	foreach(var_05 in var_07) {
+		if(!isdefined(var_0A) || var_05.totalscore > var_0A.totalscore) {
 			var_0A = var_05;
 		}
 	}
@@ -84,44 +65,33 @@ func_6CB1()
 	return var_0A;
 }
 
-//Function Number: 4
-scorebuddyspawn(param_00)
-{
+scorebuddyspawn(param_00) {
 	scripts\mp\spawnfactor::calculatefactorscore(param_00,"avoidShortTimeToEnemySight",1);
 	scripts\mp\spawnfactor::calculatefactorscore(param_00,"avoidClosestEnemy",1);
 }
 
-//Function Number: 5
-func_7E0F(param_00,param_01)
-{
+func_7E0F(param_00,param_01) {
 	var_02 = (0,param_00.angles[1],0);
 	var_03 = findentrances(param_01);
-	if(isdefined(var_03) && var_03.size > 0)
-	{
+	if(isdefined(var_03) && var_03.size > 0) {
 		var_02 = vectortoangles(var_03[0].origin - param_01);
 	}
 
 	return var_02;
 }
 
-//Function Number: 6
-isonground(param_00)
-{
+isonground(param_00) {
 	var_01 = [];
-	foreach(var_03 in level.players)
-	{
-		if(var_03.team != param_00)
-		{
+	foreach(var_03 in level.players) {
+		if(var_03.team != param_00) {
 			continue;
 		}
 
-		if(var_03 == self)
-		{
+		if(var_03 == self) {
 			continue;
 		}
 
-		if(!canplayerbebuddyspawnedon(var_03))
-		{
+		if(!canplayerbebuddyspawnedon(var_03)) {
 			continue;
 		}
 
@@ -131,72 +101,55 @@ isonground(param_00)
 	return scripts\engine\utility::array_randomize(var_01);
 }
 
-//Function Number: 7
-canplayerbebuddyspawnedon(param_00)
-{
-	if(param_00.sessionstate != "playing")
-	{
+canplayerbebuddyspawnedon(param_00) {
+	if(param_00.sessionstate != "playing") {
 		return 0;
 	}
 
-	if(!scripts\mp\utility::isreallyalive(param_00))
-	{
+	if(!scripts\mp\utility::isreallyalive(param_00)) {
 		return 0;
 	}
 
-	if(!param_00 isonground())
-	{
+	if(!param_00 isonground()) {
 		return 0;
 	}
 
-	if(param_00 isonladder())
-	{
+	if(param_00 isonladder()) {
 		return 0;
 	}
 
-	if(param_00 scripts\engine\utility::isflashed())
-	{
+	if(param_00 scripts\engine\utility::isflashed()) {
 		return 0;
 	}
 
-	if(param_00.health < param_00.maxhealth && !isdefined(param_00.lastdamagedtime) || gettime() < param_00.lastdamagedtime + 3000)
-	{
+	if(param_00.health < param_00.maxhealth && !isdefined(param_00.lastdamagedtime) || gettime() < param_00.lastdamagedtime + 3000) {
 		return 0;
 	}
 
 	return 1;
 }
 
-//Function Number: 8
-findspawnlocationnearplayer(param_00)
-{
+findspawnlocationnearplayer(param_00) {
 	var_01 = scripts\mp\spawnlogic::getplayertraceheight(param_00,1);
 	var_02 = findbuddypathnode(param_00,var_01,0.5);
-	if(isdefined(var_02))
-	{
+	if(isdefined(var_02)) {
 		return var_02.origin;
 	}
 
 	return undefined;
 }
 
-//Function Number: 9
-findbuddypathnode(param_00,param_01,param_02)
-{
+findbuddypathnode(param_00,param_01,param_02) {
 	var_03 = getnodesinradiussorted(param_00.origin,192,64,param_01,"Path");
 	var_04 = undefined;
-	if(isdefined(var_03) && var_03.size > 0)
-	{
+	if(isdefined(var_03) && var_03.size > 0) {
 		var_05 = anglestoforward(param_00.angles);
-		foreach(var_07 in var_03)
-		{
+		foreach(var_07 in var_03) {
 			var_08 = vectornormalize(var_07.origin - param_00.origin);
 			var_09 = vectordot(var_05,var_08);
-			if(var_09 <= param_02 && !positionwouldtelefrag(var_07.origin))
-			{
+			if(var_09 <= param_02 && !positionwouldtelefrag(var_07.origin)) {
 				var_04 = var_07;
-				if(var_09 <= 0)
-				{
+				if(var_09 <= 0) {
 					break;
 				}
 			}
@@ -206,21 +159,15 @@ findbuddypathnode(param_00,param_01,param_02)
 	return var_04;
 }
 
-//Function Number: 10
-func_6CB5(param_00,param_01,param_02,param_03)
-{
+func_6CB5(param_00,param_01,param_02,param_03) {
 	var_04 = getnodesinradiussorted(param_00.origin,param_03,32,param_01,"Path");
 	var_05 = undefined;
-	if(isdefined(var_04) && var_04.size > 0)
-	{
+	if(isdefined(var_04) && var_04.size > 0) {
 		var_06 = anglestoforward(param_00.angles);
-		foreach(var_08 in var_04)
-		{
+		foreach(var_08 in var_04) {
 			var_09 = var_08.origin + (0,0,param_01);
-			if(capsuletracepassed(var_09,param_02,param_02 * 2 + 0.01,undefined,1,1))
-			{
-				if(bullettracepassed(param_00 geteye(),var_09,0,param_00))
-				{
+			if(capsuletracepassed(var_09,param_02,param_02 * 2 + 0.01,undefined,1,1)) {
+				if(bullettracepassed(param_00 geteye(),var_09,0,param_00)) {
 					var_05 = var_09;
 					break;
 				}
@@ -231,9 +178,7 @@ func_6CB5(param_00,param_01,param_02,param_03)
 	return var_05;
 }
 
-//Function Number: 11
-func_98C8(param_00)
-{
+func_98C8(param_00) {
 	param_00.totalscore = 0;
 	param_00.var_11A3A = 0;
 	param_00.var_9D60 = 0;
@@ -253,14 +198,11 @@ func_98C8(param_00)
 	param_00.analytics.spawntype = 0;
 }
 
-//Function Number: 12
-func_12F1E(param_00)
-{
+func_12F1E(param_00) {
 	var_01 = scripts\mp\spawnlogic::getspawnteam(self);
 	scripts\mp\spawnlogic::func_12F1F();
 	var_02 = scripts\mp\spawnlogic::getactiveplayerlist();
-	foreach(var_04 in param_00)
-	{
+	foreach(var_04 in param_00) {
 		func_98C8(var_04);
 		scripts\mp\spawnlogic::func_108F9(var_04,var_02);
 		scripts\mp\spawnlogic::func_67D3(var_04,var_01);
@@ -269,168 +211,133 @@ func_12F1E(param_00)
 	scripts\mp\spawnfactor::updatefrontline(var_01);
 }
 
-//Function Number: 13
-func_11748(param_00)
-{
-	if(!scripts\mp\spawnfactor::critical_factor(::scripts\mp\spawnfactor::func_26B7,param_00))
-	{
+func_11748(param_00) {
+	if(!scripts\mp\spawnfactor::critical_factor(::scripts\mp\spawnfactor::func_26B7,param_00)) {
 		param_00.badspawnreason = 0;
 		return "bad";
 	}
 
-	if(!scripts\mp\spawnfactor::critical_factor(::scripts\mp\spawnfactor::func_26B8,param_00))
-	{
+	if(!scripts\mp\spawnfactor::critical_factor(::scripts\mp\spawnfactor::func_26B8,param_00)) {
 		param_00.badspawnreason = 1;
 		return "bad";
 	}
 
-	if(!scripts\mp\spawnfactor::critical_factor(::scripts\mp\spawnfactor::func_26BC,param_00))
-	{
+	if(!scripts\mp\spawnfactor::critical_factor(::scripts\mp\spawnfactor::func_26BC,param_00)) {
 		param_00.badspawnreason = 2;
 		return "bad";
 	}
 
-	if(!scripts\mp\spawnfactor::critical_factor(::scripts\mp\spawnfactor::func_26AB,param_00))
-	{
+	if(!scripts\mp\spawnfactor::critical_factor(::scripts\mp\spawnfactor::func_26AB,param_00)) {
 		param_00.badspawnreason = 3;
 		return "bad";
 	}
 
-	if(!scripts\mp\spawnfactor::critical_factor(::scripts\mp\spawnfactor::avoidcarepackages,param_00))
-	{
+	if(!scripts\mp\spawnfactor::critical_factor(::scripts\mp\spawnfactor::avoidcarepackages,param_00)) {
 		param_00.badspawnreason = 4;
 		return "bad";
 	}
 
-	if(!scripts\mp\spawnfactor::critical_factor(::scripts\mp\spawnfactor::func_26C4,param_00))
-	{
+	if(!scripts\mp\spawnfactor::critical_factor(::scripts\mp\spawnfactor::func_26C4,param_00)) {
 		param_00.badspawnreason = 5;
 		return "bad";
 	}
 
-	if(!scripts\mp\spawnfactor::critical_factor(::scripts\mp\spawnfactor::func_26B6,param_00))
-	{
+	if(!scripts\mp\spawnfactor::critical_factor(::scripts\mp\spawnfactor::func_26B6,param_00)) {
 		param_00.badspawnreason = 6;
 		return "bad";
 	}
 
-	if(isdefined(param_00.var_7450) && level.var_744D.isactive[self.team] && param_00.var_7450 != self.team)
-	{
+	if(isdefined(param_00.var_7450) && level.var_744D.isactive[self.team] && param_00.var_7450 != self.team) {
 		param_00.badspawnreason = 7;
 		return "bad";
 	}
 
-	if(!scripts\mp\spawnfactor::critical_factor(::scripts\mp\spawnfactor::func_26B3,param_00))
-	{
+	if(!scripts\mp\spawnfactor::critical_factor(::scripts\mp\spawnfactor::func_26B3,param_00)) {
 		return "secondary";
 	}
 
-	if(!scripts\mp\spawnfactor::critical_factor(::scripts\mp\spawnfactor::func_26AE,param_00))
-	{
+	if(!scripts\mp\spawnfactor::critical_factor(::scripts\mp\spawnfactor::func_26AE,param_00)) {
 		return "secondary";
 	}
 
 	return "primary";
 }
 
-//Function Number: 14
-func_11746(param_00)
-{
-	if(!scripts\mp\spawnfactor::critical_factor(::scripts\mp\spawnfactor::func_26B7,param_00))
-	{
+func_11746(param_00) {
+	if(!scripts\mp\spawnfactor::critical_factor(::scripts\mp\spawnfactor::func_26B7,param_00)) {
 		return 0;
 	}
 
-	if(!scripts\mp\spawnfactor::critical_factor(::scripts\mp\spawnfactor::func_26B8,param_00))
-	{
+	if(!scripts\mp\spawnfactor::critical_factor(::scripts\mp\spawnfactor::func_26B8,param_00)) {
 		return 0;
 	}
 
-	if(!scripts\mp\spawnfactor::critical_factor(::scripts\mp\spawnfactor::func_26BC,param_00))
-	{
+	if(!scripts\mp\spawnfactor::critical_factor(::scripts\mp\spawnfactor::func_26BC,param_00)) {
 		return 0;
 	}
 
-	if(!scripts\mp\spawnfactor::critical_factor(::scripts\mp\spawnfactor::func_26AB,param_00))
-	{
+	if(!scripts\mp\spawnfactor::critical_factor(::scripts\mp\spawnfactor::func_26AB,param_00)) {
 		return 0;
 	}
 
-	if(!scripts\mp\spawnfactor::critical_factor(::scripts\mp\spawnfactor::avoidcarepackages,param_00))
-	{
+	if(!scripts\mp\spawnfactor::critical_factor(::scripts\mp\spawnfactor::avoidcarepackages,param_00)) {
 		return 0;
 	}
 
-	if(!scripts\mp\spawnfactor::critical_factor(::scripts\mp\spawnfactor::func_26C4,param_00))
-	{
+	if(!scripts\mp\spawnfactor::critical_factor(::scripts\mp\spawnfactor::func_26C4,param_00)) {
 		return 0;
 	}
 
-	if(!scripts\mp\spawnfactor::critical_factor(::scripts\mp\spawnfactor::func_26AE,param_00))
-	{
+	if(!scripts\mp\spawnfactor::critical_factor(::scripts\mp\spawnfactor::func_26AE,param_00)) {
 		return 0;
 	}
 
 	return 1;
 }
 
-//Function Number: 15
-getstartspawnpoint_freeforall(param_00)
-{
-	if(!isdefined(param_00))
-	{
+getstartspawnpoint_freeforall(param_00) {
+	if(!isdefined(param_00)) {
 		return undefined;
 	}
 
 	var_01 = undefined;
 	var_02 = scripts\mp\spawnlogic::getactiveplayerlist();
 	param_00 = checkdynamicspawns(param_00);
-	if(!isdefined(var_02) || var_02.size == 0)
-	{
+	if(!isdefined(var_02) || var_02.size == 0) {
 		return scripts\mp\spawnlogic::getspawnpoint_random(param_00);
 	}
 
 	var_03 = 0;
-	foreach(var_05 in param_00)
-	{
-		if(canspawn(var_05.origin) && !positionwouldtelefrag(var_05.origin))
-		{
+	foreach(var_05 in param_00) {
+		if(canspawn(var_05.origin) && !positionwouldtelefrag(var_05.origin)) {
 			var_06 = undefined;
-			foreach(var_08 in var_02)
-			{
+			foreach(var_08 in var_02) {
 				var_09 = distancesquared(var_05.origin,var_08.origin);
-				if(!isdefined(var_06) || var_09 < var_06)
-				{
+				if(!isdefined(var_06) || var_09 < var_06) {
 					var_06 = var_09;
 				}
 			}
 
-			if(!isdefined(var_01) || var_06 > var_03)
-			{
+			if(!isdefined(var_01) || var_06 > var_03) {
 				var_01 = var_05;
 				var_03 = var_06;
 			}
 		}
 	}
 
-	if(!isdefined(var_01))
-	{
+	if(!isdefined(var_01)) {
 		return scripts\mp\spawnlogic::getspawnpoint_random(param_00);
 	}
 
 	return var_01;
 }
 
-//Function Number: 16
-logbadspawn(param_00,param_01)
-{
-	if(isdefined(param_01) && isdefined(param_01.disablespawnwarnings) && param_01.disablespawnwarnings)
-	{
+logbadspawn(param_00,param_01) {
+	if(isdefined(param_01) && isdefined(param_01.disablespawnwarnings) && param_01.disablespawnwarnings) {
 		return;
 	}
 
-	if(!isdefined(param_00))
-	{
+	if(!isdefined(param_00)) {
 		param_00 = "";
 	}
 	else
@@ -438,21 +345,16 @@ logbadspawn(param_00,param_01)
 		param_00 = param_00;
 	}
 
-	if(isdefined(level.matchrecording_logeventmsg))
-	{
-		[[ level.matchrecording_logeventmsg ]]("LOG_BAD_SPAWN",gettime(),param_00);
+	if(isdefined(level.matchrecording_logeventmsg)) {
+		[[level.matchrecording_logeventmsg]]("LOG_BAD_SPAWN",gettime(),param_00);
 	}
 }
 
-//Function Number: 17
-getspawnpoint(param_00,param_01,param_02,param_03)
-{
+getspawnpoint(param_00,param_01,param_02,param_03) {
 	level.spawnglobals.spawnpointslist = param_00;
-	if(level.var_72A2)
-	{
+	if(level.var_72A2) {
 		var_04 = func_6CB1();
-		if(isdefined(var_04))
-		{
+		if(isdefined(var_04)) {
 			return var_04;
 		}
 	}
@@ -460,10 +362,8 @@ getspawnpoint(param_00,param_01,param_02,param_03)
 	var_05 = undefined;
 	level.spawnglobals.spawn_type = 0;
 	var_06 = getmuzzlepos(param_00,param_02,0);
-	if(isdefined(var_06))
-	{
-		if(!scripts\mp\utility::istrue(var_06.var_9D60))
-		{
+	if(isdefined(var_06)) {
+		if(!scripts\mp\utility::istrue(var_06.var_9D60)) {
 			return var_06;
 		}
 		else
@@ -472,15 +372,11 @@ getspawnpoint(param_00,param_01,param_02,param_03)
 		}
 	}
 
-	if(isdefined(param_01))
-	{
+	if(isdefined(param_01)) {
 		var_07 = getmuzzlepos(param_01,param_02,3);
-		if(isdefined(var_07))
-		{
-			if(scripts\mp\utility::istrue(var_07.var_9D60))
-			{
-				if(!isdefined(var_05) || var_07.totalscore > var_05.totalscore)
-				{
+		if(isdefined(var_07)) {
+			if(scripts\mp\utility::istrue(var_07.var_9D60)) {
+				if(!isdefined(var_05) || var_07.totalscore > var_05.totalscore) {
 					var_05 = var_07;
 				}
 			}
@@ -492,19 +388,16 @@ getspawnpoint(param_00,param_01,param_02,param_03)
 		}
 	}
 
-	if(scripts\mp\utility::istrue(param_03))
-	{
+	if(scripts\mp\utility::istrue(param_03)) {
 		return undefined;
 	}
 
 	logbadspawn("Using a LastResort spawn point.",self);
 	var_08 = func_6CB1();
-	if(isdefined(var_08))
-	{
+	if(isdefined(var_08)) {
 		var_08.spawntype = 7;
 		level.spawnglobals.budy_death_watcher = 0;
-		if(isdefined(var_08.buddyspawnid))
-		{
+		if(isdefined(var_08.buddyspawnid)) {
 			level.spawnglobals.buddyspawnid = var_08.buddyspawnid;
 		}
 
@@ -512,11 +405,9 @@ getspawnpoint(param_00,param_01,param_02,param_03)
 	}
 
 	logbadspawn("UNABLE TO BUDDY SPAWN. EXTREMELY BAD",self);
-	if(level.teambased && !scripts\mp\utility::isanymlgmatch())
-	{
+	if(level.teambased && !scripts\mp\utility::isanymlgmatch()) {
 		var_09 = level.spawnglobals.lastbadspawntime[self.team];
-		if(isdefined(var_09) && gettime() - var_09 < 5000)
-		{
+		if(isdefined(var_09) && gettime() - var_09 < 5000) {
 			var_05 = param_00[randomint(param_00.size)];
 		}
 		else
@@ -528,22 +419,17 @@ getspawnpoint(param_00,param_01,param_02,param_03)
 	return var_05;
 }
 
-//Function Number: 18
-getmuzzlepos(param_00,param_01,param_02)
-{
+getmuzzlepos(param_00,param_01,param_02) {
 	param_00 = checkdynamicspawns(param_00);
 	var_03["primary"] = [];
 	var_03["secondary"] = [];
 	var_03["bad"] = [];
-	if(scripts\mp\spawnlogic::shoulduseprecomputedlos() && !scripts\mp\spawnlogic::isttlosdataavailable())
-	{
-		if(isdefined(level.matchrecording_logeventmsg))
-		{
-			[[ level.matchrecording_logeventmsg ]]("LOG_GENERIC_MESSAGE",gettime(),"ERROR: TTLOS System disabled! Could not access visDistData");
+	if(scripts\mp\spawnlogic::shoulduseprecomputedlos() && !scripts\mp\spawnlogic::isttlosdataavailable()) {
+		if(isdefined(level.matchrecording_logeventmsg)) {
+			[[level.matchrecording_logeventmsg]]("LOG_GENERIC_MESSAGE",gettime(),"ERROR: TTLOS System disabled! Could not access visDistData");
 		}
 
-		if(!isdefined(level.var_8C28))
-		{
+		if(!isdefined(level.var_8C28)) {
 			level.var_8C28 = 1;
 		}
 
@@ -552,21 +438,17 @@ getmuzzlepos(param_00,param_01,param_02)
 	}
 
 	func_12F1E(param_00);
-	foreach(var_05 in param_00)
-	{
+	foreach(var_05 in param_00) {
 		var_06 = func_11748(var_05);
 		var_03[var_06][var_03[var_06].size] = var_05;
 		var_05.lastbucket[scripts\engine\utility::ter_op(isdefined(self.var_108DF),self.var_108DF,self.team)] = var_06;
-		if(isdefined(var_05.analytics) && isdefined(var_05.analytics.spawntype))
-		{
-			if(var_06 == "primary")
-			{
+		if(isdefined(var_05.analytics) && isdefined(var_05.analytics.spawntype)) {
+			if(var_06 == "primary") {
 				var_05.analytics.spawntype = param_02 + 1;
 				continue;
 			}
 
-			if(var_06 == "secondary")
-			{
+			if(var_06 == "secondary") {
 				var_05.analytics.spawntype = param_02 + 2;
 				continue;
 			}
@@ -575,26 +457,22 @@ getmuzzlepos(param_00,param_01,param_02)
 		}
 	}
 
-	if(var_03["primary"].size)
-	{
+	if(var_03["primary"].size) {
 		var_06 = func_7F01(var_03["primary"],param_01);
 		var_06.spawn_type = 1;
 		return var_06;
 	}
 
-	if(var_03["secondary"].size)
-	{
+	if(var_03["secondary"].size) {
 		var_06 = func_7F01(var_03["secondary"],param_01);
 		var_06.spawn_type = 2;
 		return var_06;
 	}
 
-	if(var_03["bad"].size)
-	{
+	if(var_03["bad"].size) {
 		logbadspawn("Using Bad Spawn",self);
 		var_06 = func_7F01(var_03["bad"],param_01);
-		if(isdefined(var_06))
-		{
+		if(isdefined(var_06)) {
 			var_06.var_9D60 = 1;
 		}
 
@@ -604,15 +482,11 @@ getmuzzlepos(param_00,param_01,param_02)
 	return undefined;
 }
 
-//Function Number: 19
-func_7F01(param_00,param_01)
-{
+func_7F01(param_00,param_01) {
 	var_02 = param_00[0];
-	foreach(var_04 in param_00)
-	{
+	foreach(var_04 in param_00) {
 		scripts\mp\spawnlogic::func_EC46(var_04,param_01);
-		if(var_04.totalscore > var_02.totalscore)
-		{
+		if(var_04.totalscore > var_02.totalscore) {
 			var_02 = var_04;
 		}
 	}

@@ -1,18 +1,11 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: 3156.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 4
- * Decompile Time: 6 ms
- * Timestamp: 10/27/2023 12:26:18 AM
-*******************************************************************/
+/****************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\3156.gsc
+****************************/
 
-//Function Number: 1
-func_2371()
-{
-	if(scripts/asm/asm::func_232E("seeker"))
-	{
+func_2371() {
+	if(scripts/asm/asm::func_232E("seeker")) {
 		return;
 	}
 
@@ -84,20 +77,14 @@ func_2371()
 	scripts/asm/asm::func_2327();
 }
 
-//Function Number: 2
-func_12245(param_00,param_01,param_02,param_03)
-{
+func_12245(param_00,param_01,param_02,param_03) {
 	return isdefined(self.vehicle_getspawnerarray);
 }
 
-//Function Number: 3
-func_12440(param_00,param_01,param_02,param_03)
-{
+func_12440(param_00,param_01,param_02,param_03) {
 	return !isdefined(self.vehicle_getspawnerarray);
 }
 
-//Function Number: 4
-func_12272(param_00,param_01,param_02,param_03)
-{
+func_12272(param_00,param_01,param_02,param_03) {
 	return !lib_0F3D::func_B5FC();
 }

@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: 3145.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 13
- * Decompile Time: 13 ms
- * Timestamp: 10/27/2023 12:26:16 AM
-*******************************************************************/
+/****************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\3145.gsc
+****************************/
 
-//Function Number: 1
-func_3FCE(param_00,param_01,param_02,param_03)
-{
+func_3FCE(param_00,param_01,param_02,param_03) {
 	self.asm.var_7360 = 0;
 	self.asm.var_4C86 = spawnstruct();
 	self.asm.footsteps = spawnstruct();
@@ -20,14 +14,10 @@ func_3FCE(param_00,param_01,param_02,param_03)
 	self.ispreloadzonescomplete = 0;
 }
 
-//Function Number: 2
-func_3EC5(param_00,param_01,param_02)
-{
-	if(isdefined(self.asm.var_1269B))
-	{
+func_3EC5(param_00,param_01,param_02) {
+	if(isdefined(self.asm.var_1269B)) {
 		var_03 = self.asm.var_1269B;
-		if(param_01 == "trans_out_stand_idle")
-		{
+		if(param_01 == "trans_out_stand_idle") {
 			self.asm.var_1269B = undefined;
 		}
 
@@ -39,14 +29,10 @@ func_3EC5(param_00,param_01,param_02)
 	return scripts/asm/asm::asm_lookupanimfromalias(param_01,var_03);
 }
 
-//Function Number: 3
-func_3EC4(param_00,param_01,param_02)
-{
-	if(isdefined(self.asm.var_3FDC))
-	{
+func_3EC4(param_00,param_01,param_02) {
+	if(isdefined(self.asm.var_3FDC)) {
 		var_03 = self.asm.var_3FDC;
-		if(param_01 == "trans_out_combat_react")
-		{
+		if(param_01 == "trans_out_combat_react") {
 			self.asm.var_3FDC = undefined;
 		}
 
@@ -54,8 +40,7 @@ func_3EC4(param_00,param_01,param_02)
 	}
 
 	var_04 = self.asm.var_1269B;
-	if(scripts\engine\utility::cointoss())
-	{
+	if(scripts\engine\utility::cointoss()) {
 		var_05 = var_04 + "_a";
 	}
 	else
@@ -67,71 +52,51 @@ func_3EC4(param_00,param_01,param_02)
 	return scripts/asm/asm::asm_lookupanimfromalias(param_02,var_05);
 }
 
-//Function Number: 4
-func_3FD4(param_00,param_01,param_02,param_03)
-{
+func_3FD4(param_00,param_01,param_02,param_03) {
 	scripts\anim\combat::func_F296();
 	var_04 = self.var_164D[param_00];
-	if(isdefined(var_04.var_10E23) && var_04.var_10E23 == "trans_out_stand_idle")
-	{
+	if(isdefined(var_04.var_10E23) && var_04.var_10E23 == "trans_out_stand_idle") {
 		childthread scripts\asm\shared_utility::setuseanimgoalweight(param_01,param_02);
 	}
 
-	if(isdefined(self.target_getindexoftarget))
-	{
+	if(isdefined(self.target_getindexoftarget)) {
 		self._blackboard.var_AA3D = self.target_getindexoftarget;
 	}
 
 	lib_0A1E::func_235F(param_00,param_01,param_02,1);
 }
 
-//Function Number: 5
-func_3FD3(param_00,param_01,param_02,param_03)
-{
+func_3FD3(param_00,param_01,param_02,param_03) {
 	self.ispreloadzonescomplete = 1;
 	lib_0C65::func_CEB5(param_00,param_01,param_02,param_03);
 }
 
-//Function Number: 6
-func_3FD5(param_00,param_01,param_02,param_03)
-{
+func_3FD5(param_00,param_01,param_02,param_03) {
 	self.ispreloadzonescomplete = 1;
 	lib_0F3D::func_D4DD(param_00,param_01,param_02,param_03);
 }
 
-//Function Number: 7
-func_3FD6(param_00,param_01,param_02,param_03)
-{
+func_3FD6(param_00,param_01,param_02,param_03) {
 	self.ispreloadzonescomplete = 1;
 	lib_0C65::func_D514(param_00,param_01,param_02,param_03);
 }
 
-//Function Number: 8
-func_3FD1(param_00,param_01,param_02)
-{
+func_3FD1(param_00,param_01,param_02) {
 	self.ispreloadzonescomplete = 0;
 }
 
-//Function Number: 9
-func_A00A(param_00,param_01,param_02,param_03)
-{
+func_A00A(param_00,param_01,param_02,param_03) {
 	return scripts/asm/asm_bb::bb_iswhizbyrequested();
 }
 
-//Function Number: 10
-func_3FE1(param_00,param_01,param_02,param_03)
-{
+func_3FE1(param_00,param_01,param_02,param_03) {
 	return scripts/asm/asm_bb::func_291D() == param_03;
 }
 
-//Function Number: 11
-func_FFE3(param_00,param_01,param_02,param_03)
-{
-	if(func_A00A() || scripts/asm/asm_bb::func_291D() == "combat")
-	{
+func_FFE3(param_00,param_01,param_02,param_03) {
+	if(func_A00A() || scripts/asm/asm_bb::func_291D() == "combat") {
 		var_04 = self.asm.var_1269B;
-		if(var_04 == "civ02" || var_04 == "civ04" || var_04 == "civ06" || var_04 == "civ07")
-		{
+		if(var_04 == "civ02" || var_04 == "civ04" || var_04 == "civ06" || var_04 == "civ07") {
 			return 1;
 		}
 	}
@@ -139,14 +104,10 @@ func_FFE3(param_00,param_01,param_02,param_03)
 	return 0;
 }
 
-//Function Number: 12
-func_FFDF(param_00,param_01,param_02,param_03)
-{
-	if(scripts/asm/asm_bb::func_291D() == "noncombat")
-	{
+func_FFDF(param_00,param_01,param_02,param_03) {
+	if(scripts/asm/asm_bb::func_291D() == "noncombat") {
 		var_04 = self.asm.var_1269B;
-		if(var_04 == "civ02" || var_04 == "civ04" || var_04 == "civ06" || var_04 == "civ07")
-		{
+		if(var_04 == "civ02" || var_04 == "civ04" || var_04 == "civ06" || var_04 == "civ07") {
 			return 1;
 		}
 	}
@@ -154,9 +115,7 @@ func_FFDF(param_00,param_01,param_02,param_03)
 	return 0;
 }
 
-//Function Number: 13
-func_FFD2(param_00,param_01,param_02,param_03)
-{
+func_FFD2(param_00,param_01,param_02,param_03) {
 	self.asm.var_3FDC = undefined;
 	return 1;
 }

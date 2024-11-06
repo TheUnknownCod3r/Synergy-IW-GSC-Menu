@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: 2650.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 1
- * Decompile Time: 0 ms
- * Timestamp: 10/27/2023 12:23:33 AM
-*******************************************************************/
+/****************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\2650.gsc
+****************************/
 
-//Function Number: 1
-main()
-{
+main() {
 	level._effect["debris_buy"] = loadfx("vfx/iw7/core/zombie/vfx_zmb_gatebuy_01.vfx");
 	level._effect["laser_window_trap"] = loadfx("vfx/iw7/_requests/coop/zmb_laser_window.vfx");
 	level._effect["zombie_freeze_shatter"] = loadfx("vfx/iw7/core/zombie/zombie_ice_chunks.vfx");

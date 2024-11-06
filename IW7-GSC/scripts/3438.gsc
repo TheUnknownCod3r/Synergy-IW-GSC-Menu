@@ -1,23 +1,15 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: 3438.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 17
- * Decompile Time: 10 ms
- * Timestamp: 10/27/2023 12:27:28 AM
-*******************************************************************/
+/****************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\3438.gsc
+****************************/
 
-//Function Number: 1
-func_97D0()
-{
+func_97D0() {
 	level._effect["swipe_trail"] = loadfx("vfx/iw7/_requests/mp/vfx_swipe_trail");
 	level.var_DDA0 = "prop_mp_reaper_shield";
 }
 
-//Function Number: 2
-applyarchetype()
-{
+applyarchetype() {
 	self setsuit("reaper_mp");
 	equipextras();
 	self disableweaponpickup();
@@ -33,30 +25,22 @@ applyarchetype()
 	self _meth_845E(1);
 }
 
-//Function Number: 3
-removearchetype()
-{
+removearchetype() {
 	self notify("removeReaper");
 	self enableweaponpickup();
 	self.var_FC9F delete();
 	self.var_B62A delete();
 }
 
-//Function Number: 4
-equipextras()
-{
-}
+equipextras() {}
 
-//Function Number: 5
-func_4FB9(param_00,param_01)
-{
+func_4FB9(param_00,param_01) {
 	self endon("disconnect");
 	self endon("death");
 	self endon("removeReaper");
 	self endon("shield_down");
 	level endon("game_ended");
-	while(self.var_4BFD > param_00)
-	{
+	while(self.var_4BFD > param_00) {
 		self.var_4BFD = self.var_4BFD - param_00;
 		wait(param_01);
 	}
@@ -65,19 +49,15 @@ func_4FB9(param_00,param_01)
 	self notify("drop_shield");
 }
 
-//Function Number: 6
-func_93EE(param_00,param_01,param_02)
-{
+func_93EE(param_00,param_01,param_02) {
 	self endon("disconnect");
 	self endon("death");
 	self endon("removeReaper");
 	self endon("shield_up");
 	level endon("game_ended");
-	while(self.var_4BFD < param_02)
-	{
+	while(self.var_4BFD < param_02) {
 		self.var_4BFD = self.var_4BFD + param_00;
-		if(self.var_4BFD > 33)
-		{
+		if(self.var_4BFD > 33) {
 			self.var_C4DA = 0;
 		}
 
@@ -85,9 +65,7 @@ func_93EE(param_00,param_01,param_02)
 	}
 }
 
-//Function Number: 7
-func_13994()
-{
+func_13994() {
 	self endon("disconnect");
 	self endon("death");
 	self endon("removeReaper");
@@ -101,20 +79,16 @@ func_13994()
 	self.var_FCA5 = 0;
 	thread func_5D58();
 	thread func_5D57(var_04,var_03,var_01);
-	for(;;)
-	{
-		if(self.isreaping)
-		{
+	for(;;) {
+		if(self.isreaping) {
 			wait(0.05);
 			continue;
 		}
 
-		if(self adsbuttonpressed() && !self.var_FCA5 && !self.var_C4DA)
-		{
+		if(self adsbuttonpressed() && !self.var_FCA5 && !self.var_C4DA) {
 			func_FCA5(var_04,var_03);
 		}
-		else if(!self adsbuttonpressed() && self.var_FCA5)
-		{
+		else if(!self adsbuttonpressed() && self.var_FCA5) {
 			func_FC98(var_04,var_03,var_01);
 		}
 
@@ -122,23 +96,18 @@ func_13994()
 	}
 }
 
-//Function Number: 8
-func_5D57(param_00,param_01,param_02)
-{
+func_5D57(param_00,param_01,param_02) {
 	self endon("disconnect");
 	self endon("death");
 	self endon("removeReaper");
 	level endon("game_ended");
-	for(;;)
-	{
+	for(;;) {
 		self waittill("drop_shield");
 		func_FC98(param_00,param_01,param_02);
 	}
 }
 
-//Function Number: 9
-func_FCA5(param_00,param_01)
-{
+func_FCA5(param_00,param_01) {
 	thread func_4FB9(param_00,param_01);
 	self.var_FCA5 = 1;
 	self notify("shield_up");
@@ -156,9 +125,7 @@ func_FCA5(param_00,param_01)
 	scripts\mp\_utility::_magicbullet("iw7_erad_mp",self.origin + (0,0,4500),self.origin + (0,0,5500),self);
 }
 
-//Function Number: 10
-func_FC98(param_00,param_01,param_02)
-{
+func_FC98(param_00,param_01,param_02) {
 	thread func_93EE(param_00,param_01,param_02);
 	self playlocalsound("reaper_shield_down");
 	self.var_FC9F playsound("reaper_shield_down_npc");
@@ -171,44 +138,35 @@ func_FC98(param_00,param_01,param_02)
 	self.var_FC9F setcandamage(0);
 }
 
-//Function Number: 11
-func_5D58()
-{
+func_5D58() {
 	level endon("game_ended");
 	var_00 = scripts\engine\utility::waittill_any_return_no_endon_death_3("death","disconnect");
-	if(var_00 == "death")
-	{
+	if(var_00 == "death") {
 		self enableweapons();
 		self allowjump(1);
 		self allowprone(1);
 		self notify("shield_down");
-		if(isdefined(self.var_FC9F))
-		{
+		if(isdefined(self.var_FC9F)) {
 			self.var_FC9F hide();
 			self.var_FC9F setcandamage(0);
 		}
 	}
 
-	if(var_00 == "disconnect" && isdefined(self.var_FC9F))
-	{
+	if(var_00 == "disconnect" && isdefined(self.var_FC9F)) {
 		self.var_FC9F hide();
 		self.var_FC9F setcandamage(0);
 	}
 }
 
-//Function Number: 12
-func_FC9C()
-{
+func_FC9C() {
 	self endon("death");
 	self endon("disconnect");
 	self endon("removeReaper");
 	self endon("shield_down");
 	level endon("game_ended");
-	for(;;)
-	{
+	for(;;) {
 		self waittill("damage",var_00,var_01,var_02,var_03,var_04,var_05,var_06,var_07,var_08,var_09);
-		if(isdefined(var_03))
-		{
+		if(isdefined(var_03)) {
 			playsoundatpos(var_03,"bs_shield_impact");
 		}
 		else
@@ -221,16 +179,13 @@ func_FC9C()
 	}
 }
 
-//Function Number: 13
-func_BCEE(param_00)
-{
+func_BCEE(param_00) {
 	self endon("death");
 	self endon("disconnect");
 	self endon("removeReaper");
 	self endon("shield_down");
 	level endon("game_ended");
-	if(isdefined(param_00))
-	{
+	if(isdefined(param_00)) {
 		var_01 = param_00;
 	}
 	else
@@ -238,17 +193,14 @@ func_BCEE(param_00)
 		var_01 = 32;
 	}
 
-	for(;;)
-	{
+	for(;;) {
 		self.var_FC9F.angles = self.angles + (0,90,0);
 		self.var_FC9F.origin = func_36DB(var_01);
 		wait(0.05);
 	}
 }
 
-//Function Number: 14
-func_36DB(param_00)
-{
+func_36DB(param_00) {
 	var_01 = (0,0,0);
 	var_02 = self.origin + var_01;
 	var_03 = anglestoforward(self.angles);
@@ -256,54 +208,44 @@ func_36DB(param_00)
 	var_05 = self getvelocity();
 	var_06 = vectordot(var_05,self.angles);
 	var_07 = length(var_05);
-	if(var_07 < 64)
-	{
+	if(var_07 < 64) {
 		var_07 = 64;
 	}
 
-	if(var_07 > 64 && var_07 < 128)
-	{
+	if(var_07 > 64 && var_07 < 128) {
 		var_07 = 92;
 	}
 
-	if(var_07 > 350)
-	{
+	if(var_07 > 350) {
 		var_07 = 500;
 	}
 
-	if(var_07 > 200)
-	{
+	if(var_07 > 200) {
 		var_07 = 256;
 	}
 
-	if(var_07 > 128)
-	{
+	if(var_07 > 128) {
 		var_07 = 164;
 	}
 
-	if(var_06 < 1)
-	{
+	if(var_06 < 1) {
 		var_07 = 64;
 	}
 
-	if(isdefined(param_00))
-	{
+	if(isdefined(param_00)) {
 		var_07 = param_00;
 	}
 
 	return var_02 + var_03 * var_07;
 }
 
-//Function Number: 15
-func_13ACC(param_00)
-{
+func_13ACC(param_00) {
 	self endon("death");
 	self endon("disconnect");
 	self endon("removeReaper");
 	level endon("game_ended");
 	var_01 = (0,0,32);
-	for(;;)
-	{
+	for(;;) {
 		self waittill("melee_fired");
 		var_02 = self.origin + var_01;
 		var_03 = anglestoforward(self.angles);
@@ -337,9 +279,7 @@ func_13ACC(param_00)
 	}
 }
 
-//Function Number: 16
-func_20D9(param_00)
-{
+func_20D9(param_00) {
 	self endon("death");
 	self endon("disconnect");
 	self endon("removeReaper");
@@ -348,9 +288,7 @@ func_20D9(param_00)
 	self radiusdamage(self.origin,var_01,135,135,self,"MOD_MELEE","iw7_reaperblade_mp");
 }
 
-//Function Number: 17
-func_11A83(param_00,param_01,param_02)
-{
+func_11A83(param_00,param_01,param_02) {
 	self endon("death");
 	self endon("disconnect");
 	self endon("removeReaper");
@@ -364,47 +302,38 @@ func_11A83(param_00,param_01,param_02)
 	var_09 = gettime();
 	var_0A = param_02;
 	var_04 = scripts\common\trace::ray_trace(var_03,param_00,var_0A);
-	if(isdefined(var_04["entity"]))
-	{
+	if(isdefined(var_04["entity"])) {
 		var_08 = 1;
 		var_06 = var_04["entity"];
 		var_0A[var_0A.size] = var_06;
 	}
 
-	if(isdefined(param_01))
-	{
+	if(isdefined(param_01)) {
 		var_05 = scripts\common\trace::ray_trace(param_00,param_01,var_0A);
-		if(isdefined(var_05) && isdefined(var_05["entity"]))
-		{
+		if(isdefined(var_05) && isdefined(var_05["entity"])) {
 			var_08 = 1;
 			var_07 = var_04["entity"];
 			var_0A[var_0A.size] = var_07;
 		}
 	}
 
-	if(isdefined(var_06))
-	{
-		if(isdefined(var_06.var_904B) && var_06.var_904B == var_09)
-		{
+	if(isdefined(var_06)) {
+		if(isdefined(var_06.var_904B) && var_06.var_904B == var_09) {
 			return var_0A;
 		}
 
-		if(!scripts\mp\_utility::attackerishittingteam(var_06,self) && var_06 != self)
-		{
-			var_06 thread [[ level.callbackplayerdamage ]](undefined,self,135,0,"MOD_MELEE","iw7_reaperblade_mp",self.origin,undefined,"none",0);
+		if(!scripts\mp\_utility::attackerishittingteam(var_06,self) && var_06 != self) {
+			var_06 thread [[level.callbackplayerdamage]](undefined,self,135,0,"MOD_MELEE","iw7_reaperblade_mp",self.origin,undefined,"none",0);
 		}
 	}
 
-	if(isdefined(var_07))
-	{
-		if(isdefined(var_07.var_904B) && var_07.var_904B == var_09)
-		{
+	if(isdefined(var_07)) {
+		if(isdefined(var_07.var_904B) && var_07.var_904B == var_09) {
 			return var_0A;
 		}
 
-		if(!scripts\mp\_utility::attackerishittingteam(var_07,self) && var_07 != self)
-		{
-			var_07 thread [[ level.callbackplayerdamage ]](undefined,self,135,0,"MOD_MELEE","iw7_reaperblade_mp",self.origin,undefined,"none",0);
+		if(!scripts\mp\_utility::attackerishittingteam(var_07,self) && var_07 != self) {
+			var_07 thread [[level.callbackplayerdamage]](undefined,self,135,0,"MOD_MELEE","iw7_reaperblade_mp",self.origin,undefined,"none",0);
 		}
 	}
 

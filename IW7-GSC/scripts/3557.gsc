@@ -1,23 +1,15 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: 3557.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 12
- * Decompile Time: 3 ms
- * Timestamp: 10/27/2023 12:30:41 AM
-*******************************************************************/
+/****************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\3557.gsc
+****************************/
 
-//Function Number: 1
-func_5223()
-{
+func_5223() {
 	level._effect["deployableCover_explode"] = loadfx("vfx/iw7/core/equipment/coverwall/vfx_coverwall_foam_expand_mp.vfx");
 	level._effect["deployableCover_explode_mist"] = loadfx("vfx/iw7/core/equipment/coverwall/vfx_coverwall_mist_hang_mp.vfx");
 }
 
-//Function Number: 2
-func_5224(param_00)
-{
+func_5224(param_00) {
 	param_00 endon("death");
 	param_00 waittill("missile_stuck",var_01);
 	self notify("powers_deployableCover_used",1);
@@ -26,12 +18,9 @@ func_5224(param_00)
 	param_00 delete();
 }
 
-//Function Number: 3
-func_10842(param_00)
-{
+func_10842(param_00) {
 	var_01 = self.var_4759;
-	if(isdefined(var_01))
-	{
+	if(isdefined(var_01)) {
 		var_01 func_5285();
 	}
 
@@ -63,9 +52,7 @@ func_10842(param_00)
 	self.var_4759 = var_01;
 }
 
-//Function Number: 4
-createcovernavobstacle()
-{
+createcovernavobstacle() {
 	self endon("death");
 	self endon("entitydeleted");
 	self endon("despawnCover");
@@ -73,22 +60,17 @@ createcovernavobstacle()
 	self.var_BE64 = function_0314(self);
 }
 
-//Function Number: 5
-func_5285(param_00)
-{
+func_5285(param_00) {
 	self notify("despawnCover");
-	if(!isdefined(param_00))
-	{
+	if(!isdefined(param_00)) {
 		param_00 = 0;
 	}
 
-	if(!param_00)
-	{
+	if(!param_00) {
 		playsoundatpos(self.origin,"deployable_cover_contract");
 	}
 
-	if(isdefined(self.var_BE64))
-	{
+	if(isdefined(self.var_BE64)) {
 		destroynavobstacle(self.var_BE64);
 		self.var_BE64 = undefined;
 	}
@@ -97,9 +79,7 @@ func_5285(param_00)
 	scripts\mp\_utility::printgameaction("deployable cover removed",self.triggerportableradarping);
 }
 
-//Function Number: 6
-func_139DF(param_00)
-{
+func_139DF(param_00) {
 	self endon("death");
 	param_00 endon("disconnect");
 	self waittill("coverwall_expand_finish");
@@ -109,58 +89,45 @@ func_139DF(param_00)
 	self notify("death");
 }
 
-//Function Number: 7
-func_139DE()
-{
+func_139DE() {
 	self endon("death");
 	self endon("despawnCover");
-	for(;;)
-	{
+	for(;;) {
 		self waittill("damage",var_00,var_01,var_02,var_03);
 		self.health = 9999;
 		var_01 scripts\mp\_damagefeedback::updatedamagefeedback("hitequip");
 	}
 }
 
-//Function Number: 8
-func_40EE()
-{
+func_40EE() {
 	self endon("death");
 	self endon("despawnCover");
 	wait(15);
 	thread func_5285();
 }
 
-//Function Number: 9
-func_40EB()
-{
+func_40EB() {
 	self endon("death");
 	self endon("despawnCover");
 	self.triggerportableradarping waittill("death");
 	thread func_5285();
 }
 
-//Function Number: 10
-func_40ED()
-{
+func_40ED() {
 	self endon("death");
 	self endon("despawnCover");
 	level scripts\engine\utility::waittill_any_3("game_ended","bro_shot_start");
 	thread func_5285();
 }
 
-//Function Number: 11
-func_40EC()
-{
+func_40EC() {
 	self endon("death");
 	self endon("despawnCover");
 	self.triggerportableradarping waittill("disconnect");
 	thread func_5285(1);
 }
 
-//Function Number: 12
-placementfailed(param_00)
-{
+placementfailed(param_00) {
 	self notify("powers_deployableCover_used",0);
 	scripts\mp\_utility::placeequipmentfailed(param_00.weapon_name,1,param_00.origin);
 	param_00 delete();

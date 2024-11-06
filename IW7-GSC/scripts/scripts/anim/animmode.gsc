@@ -1,29 +1,21 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\anim\animmode.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 2
- * Decompile Time: 172 ms
- * Timestamp: 10\26\2023 11:59:50 PM
-*******************************************************************/
+/*********************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\anim\animmode.gsc
+*********************************************/
 
-//Function Number: 1
-main()
-{
+main() {
 	self endon("death");
 	self endon("stop_animmode");
 	self notify("killanimscript");
 	self.var_141C endon(self.var_117E);
-	if(isdefined(self.var_11BC))
-	{
-		self thread [[ self.var_11BC ]]();
+	if(isdefined(self.var_11BC)) {
+		self thread [[self.var_11BC]]();
 		self.var_11BC = undefined;
 	}
 
 	var_00 = isdefined(self.var_11BB) && self.var_11BB;
-	if(var_00)
-	{
+	if(var_00) {
 		self endon("stop_loop");
 		self.var_11BB = undefined;
 	}
@@ -35,8 +27,7 @@ main()
 	var_01 = self.var_117E;
 	self.var_117E = undefined;
 	var_02 = 0;
-	if(var_00)
-	{
+	if(var_00) {
 		var_02 = level.var_EC85[self.var_1180][var_01].size;
 		var_03 = level.var_EC85[self.var_1180][var_01][randomint(var_02)];
 	}
@@ -48,31 +39,27 @@ main()
 	var_04 = function_00CE(self.var_141C.origin,self.var_141C.angles,var_03);
 	var_05 = function_00CD(self.var_141C.origin,self.var_141C.angles,var_03);
 	var_06 = self _meth_811F(var_04);
-	if(isdefined(var_06))
-	{
+	if(isdefined(var_06)) {
 		var_04 = var_06;
 	}
 	else
 	{
 	}
 
-	if(!isdefined(self.var_C0C1))
-	{
+	if(!isdefined(self.var_C0C1)) {
 		self _meth_83B9(var_04,var_05);
 	}
 
 	self.closefile = 0;
 	var_07 = 0.3;
 	var_08 = 0.2;
-	if(isdefined(self.var_1EA2))
-	{
+	if(isdefined(self.var_1EA2)) {
 		var_07 = self.var_1EA2;
 		var_08 = self.var_1EA2;
 	}
 
 	self animmode(self.var_117F);
-	if(getdvarint("ai_iw7") == 1)
-	{
+	if(getdvarint("ai_iw7") == 1) {
 		self aiclearanim(lib_0A1E::func_2342(),0.3);
 	}
 	else
@@ -90,27 +77,21 @@ main()
 	self.var_117F = undefined;
 	self endon("killanimscript");
 	var_0B = "end";
-	if(!var_00)
-	{
-		if(animhasnotetrack(var_03,"finish"))
-		{
+	if(!var_00) {
+		if(animhasnotetrack(var_03,"finish")) {
 			var_0B = "finish";
 		}
-		else if(animhasnotetrack(var_03,"stop anim"))
-		{
+		else if(animhasnotetrack(var_03,"stop anim")) {
 			var_0B = "stop anim";
 		}
 	}
 
-	for(;;)
-	{
+	for(;;) {
 		self waittillmatch(var_0B,var_09);
-		if(var_00)
-		{
+		if(var_00) {
 			var_03 = level.var_EC85[self.var_1180][var_01][randomint(var_02)];
 			self _meth_82E6(var_09,var_03,1,0.2,1);
-			if(isdefined(var_0A))
-			{
+			if(isdefined(var_0A)) {
 				var_0A thread scripts\sp\anim::func_10CBF(self,var_09,var_01,self.var_1180,var_03);
 				var_0A thread scripts\sp\anim::func_1FCA(self,var_09,var_01);
 			}
@@ -121,17 +102,14 @@ main()
 		break;
 	}
 
-	if(var_0B != "end")
-	{
+	if(var_0B != "end") {
 		self orientmode("face motion");
 	}
 
 	self notify("finished_custom_animmode" + var_01);
 }
 
-//Function Number: 2
-func_C141(param_00)
-{
+func_C141(param_00) {
 	self endon("death");
 	self endon("finished_custom_animmode" + param_00);
 	self waittill("killanimscript");

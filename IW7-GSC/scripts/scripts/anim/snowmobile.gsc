@@ -1,21 +1,14 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\anim\snowmobile.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 32
- * Decompile Time: 1529 ms
- * Timestamp: 10\27\2023 12:01:03 AM
-*******************************************************************/
+/***********************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\anim\snowmobile.gsc
+***********************************************/
 
-//Function Number: 1
-main()
-{
+main() {
 	self.var_4B71 = "none";
 	self.var_FE91 = undefined;
 	func_103C8();
-	if(isdefined(self.var_5BD6))
-	{
+	if(isdefined(self.var_5BD6)) {
 		func_B1C3();
 		return;
 	}
@@ -23,9 +16,7 @@ main()
 	func_B213();
 }
 
-//Function Number: 2
-func_103C8()
-{
+func_103C8() {
 	self.objective_state_nomessage = 0;
 	self.var_1491.pose = "crouch";
 	scripts\sp\_utility::func_558D();
@@ -36,9 +27,7 @@ func_103C8()
 	self.disablebulletwhizbyreaction = 1;
 }
 
-//Function Number: 3
-func_103C7()
-{
+func_103C7() {
 	self.allowpain = 1;
 	self.var_6EC4 = 0;
 	scripts\sp\_utility::func_86E2();
@@ -49,13 +38,10 @@ func_103C7()
 	self.disablebulletwhizbyreaction = undefined;
 }
 
-//Function Number: 4
-func_B1C3()
-{
+func_B1C3() {
 	var_00 = self.var_E500.var_5BCB || self.var_E500.var_E4FB.size == 1;
 	func_103D4(var_00);
-	if(var_00)
-	{
+	if(var_00) {
 		scripts\anim\shared::placeweaponon(self.primaryweapon,"left");
 		self.setdevdvar = -90;
 		self.setmatchdatadef = 90;
@@ -72,12 +58,9 @@ func_B1C3()
 	func_103C9("driver");
 }
 
-//Function Number: 5
-func_B213()
-{
+func_B213() {
 	func_103D5(self.var_E500.var_C93B);
-	if(self.var_E500.var_C93B)
-	{
+	if(self.var_E500.var_C93B) {
 		self.setdevdvar = -180;
 		self.setmatchdatadef = 180;
 		self.var_54DB = 1;
@@ -93,9 +76,7 @@ func_B213()
 	func_103C9("passenger");
 }
 
-//Function Number: 6
-func_103CA()
-{
+func_103CA() {
 	self endon("death");
 	self endon("killanimscript");
 	var_00 = "left2right";
@@ -106,20 +87,16 @@ func_103CA()
 	self give_attacker_kill_rewards(scripts\anim\utility::func_1F64("drive"),1,0);
 	self setanimknob(scripts\anim\utility::func_1F64(var_00),1,0);
 	self _meth_82B0(scripts\anim\utility::func_1F64(var_00),0.5);
-	for(;;)
-	{
-		if(self.var_E500.var_10F83)
-		{
+	for(;;) {
+		if(self.var_E500.var_10F83) {
 			var_02 = 0.5 * 1 + scripts\sp\_vehicle_code::func_12E33(self.var_E500);
 			var_03 = self getscoreinfocategory(scripts\anim\utility::func_1F64(var_00));
-			if(var_00 == "right2left")
-			{
+			if(var_00 == "right2left") {
 				var_03 = 1 - var_03;
 			}
 
 			var_04 = 20 * abs(var_03 - var_02);
-			if(var_03 < var_02)
-			{
+			if(var_03 < var_02) {
 				var_00 = "left2right";
 				var_04 = var_04 * var_01["left2right"];
 			}
@@ -143,19 +120,15 @@ func_103CA()
 	}
 }
 
-//Function Number: 7
-func_103CC()
-{
+func_103CC() {
 	self endon("death");
 	self endon("killanimscript");
 	self _meth_82A5(scripts\anim\utility::func_1F64("hide"),%body,1,0);
 	self setanimknob(scripts\anim\utility::func_1F64("drive"),1,0);
-	for(;;)
-	{
+	for(;;) {
 		var_00 = scripts\sp\_vehicle_code::func_12E33(self.var_E500);
 		self _meth_82AC(%sm_lean,abs(var_00),0.05);
-		if(var_00 >= 0)
-		{
+		if(var_00 >= 0) {
 			self _meth_82A9(scripts\anim\utility::func_1F64("lean_right"),1,0.05);
 		}
 		else
@@ -167,19 +140,15 @@ func_103CC()
 	}
 }
 
-//Function Number: 8
-func_103CB()
-{
+func_103CB() {
 	self endon("death");
 	self endon("killanimscript");
 	var_00 = 0.05;
 	var_01 = 0;
 	self _meth_82A5(%sm_aiming,%body,1,0);
 	self setanimknob(scripts\anim\utility::func_1F64("idle"),1,0);
-	for(;;)
-	{
-		if(self.var_4B71 != "none")
-		{
+	for(;;) {
+		if(self.var_4B71 != "none") {
 			self waittill("snowmobile_event_finished");
 			continue;
 		}
@@ -191,14 +160,12 @@ func_103CB()
 		self _meth_82AC(scripts\anim\utility::func_1F64("straight_level_center"),var_03,var_00);
 		self _meth_82AC(scripts\anim\utility::func_1F64("straight_level_left"),var_04,var_00);
 		self _meth_82AC(scripts\anim\utility::func_1F64("straight_level_right"),var_05,var_00);
-		if(self.bulletsinclip <= 0)
-		{
+		if(self.bulletsinclip <= 0) {
 			scripts\anim\weaponlist::refillclip();
 			var_01 = gettime() + 3000;
 		}
 
-		if(var_01 <= gettime())
-		{
+		if(var_01 <= gettime()) {
 			func_103D7();
 		}
 
@@ -213,24 +180,19 @@ func_103CB()
 	}
 }
 
-//Function Number: 9
-func_103CD()
-{
+func_103CD() {
 	self endon("death");
 	self endon("killanimscript");
 	var_00 = 0.05;
 	self _meth_82A5(%sm_aiming,%body,1,0);
 	self setanimknob(scripts\anim\utility::func_1F64("idle"),1,0);
-	for(;;)
-	{
-		if(self.var_4B71 != "none")
-		{
+	for(;;) {
+		if(self.var_4B71 != "none") {
 			self waittill("snowmobile_event_finished");
 			continue;
 		}
 
-		if(func_103D1())
-		{
+		if(func_103D1()) {
 			continue;
 		}
 
@@ -254,8 +216,7 @@ func_103CD()
 		self _meth_82AC(scripts\anim\utility::func_1F64("add_aim_backright_center"),var_02,var_00);
 		self _meth_82AC(scripts\anim\utility::func_1F64("add_aim_backright_left"),var_03,var_00);
 		self _meth_82AC(scripts\anim\utility::func_1F64("add_aim_backright_right"),var_04,var_00);
-		if(isplayer(self.isnodeoccupied))
-		{
+		if(isplayer(self.isnodeoccupied)) {
 			self _meth_83CE();
 		}
 
@@ -264,9 +225,7 @@ func_103CD()
 	}
 }
 
-//Function Number: 10
-func_103C5(param_00)
-{
+func_103C5(param_00) {
 	self endon("death");
 	self.var_E500.var_10F83 = 0;
 	self _meth_82E6("snowmobile_event",param_00,1,0.17);
@@ -277,16 +236,12 @@ func_103C5(param_00)
 	self notify("snowmobile_event_finished");
 }
 
-//Function Number: 11
-func_103C9(param_00)
-{
+func_103C9(param_00) {
 	self endon("death");
 	self endon("killanimscript");
 	var_01 = self.var_E500;
-	for(;;)
-	{
-		if(var_01.var_67E5["jump"][param_00])
-		{
+	for(;;) {
+		if(var_01.var_67E5["jump"][param_00]) {
 			var_01.var_67E5["jump"][param_00] = 0;
 			self notify("snowmobile_event_occurred");
 			self.var_4B71 = "jump";
@@ -294,40 +249,33 @@ func_103C9(param_00)
 			self _meth_82E6("jump",scripts\anim\utility::func_1F64("event_jump"),1,0.17);
 		}
 
-		if(var_01.var_67E5["bump"][param_00])
-		{
+		if(var_01.var_67E5["bump"][param_00]) {
 			var_01.var_67E5["bump"][param_00] = 0;
 			self notify("snowmobile_event_occurred");
-			if(self.var_4B71 != "bump_big")
-			{
+			if(self.var_4B71 != "bump_big") {
 				thread func_103C5(scripts\anim\utility::func_1F64("event_bump"));
 			}
 		}
 
-		if(var_01.var_67E5["bump_big"][param_00])
-		{
+		if(var_01.var_67E5["bump_big"][param_00]) {
 			var_01.var_67E5["bump_big"][param_00] = 0;
 			self notify("snowmobile_event_occurred");
 			self.var_4B71 = "bump_big";
 			thread func_103C5(scripts\anim\utility::func_1F64("event_bump_big"));
 		}
 
-		if(var_01.var_67E5["sway_left"][param_00])
-		{
+		if(var_01.var_67E5["sway_left"][param_00]) {
 			var_01.var_67E5["sway_left"][param_00] = 0;
 			self notify("snowmobile_event_occurred");
-			if(self.var_4B71 != "bump_big")
-			{
+			if(self.var_4B71 != "bump_big") {
 				thread func_103C5(scripts\anim\utility::func_1F64("event_sway")["left"]);
 			}
 		}
 
-		if(var_01.var_67E5["sway_right"][param_00])
-		{
+		if(var_01.var_67E5["sway_right"][param_00]) {
 			var_01.var_67E5["sway_right"][param_00] = 0;
 			self notify("snowmobile_event_occurred");
-			if(self.var_4B71 != "bump_big")
-			{
+			if(self.var_4B71 != "bump_big") {
 				thread func_103C5(scripts\anim\utility::func_1F64("event_sway")["right"]);
 			}
 		}
@@ -336,13 +284,10 @@ func_103C9(param_00)
 	}
 }
 
-//Function Number: 12
-func_103D7()
-{
+func_103D7() {
 	self notify("want_shoot_while_driving");
 	self give_attacker_kill_rewards(%sm_add_fire,1,0.2);
-	if(isdefined(self.var_FE91))
-	{
+	if(isdefined(self.var_FE91)) {
 		return;
 	}
 
@@ -351,9 +296,7 @@ func_103D7()
 	thread func_103D6();
 }
 
-//Function Number: 13
-func_103D8()
-{
+func_103D8() {
 	self endon("killanimscript");
 	self endon("want_shoot_while_driving");
 	wait(0.05);
@@ -362,9 +305,7 @@ func_103D8()
 	self aiclearanim(%sm_add_fire,0.2);
 }
 
-//Function Number: 14
-func_103C3()
-{
+func_103C3() {
 	self endon("killanimscript");
 	self endon("end_shoot_while_driving");
 	self.var_1491.var_1096D = ::func_103DE;
@@ -372,18 +313,13 @@ func_103C3()
 	self.var_FE91 = undefined;
 }
 
-//Function Number: 15
-func_103C4()
-{
+func_103C4() {
 	self endon("snowmobile_event_occurred");
 	scripts\anim\shoot_behavior::func_4F69("normal");
 }
 
-//Function Number: 16
-func_103DE()
-{
-	if(!isdefined(self.isnodeoccupied))
-	{
+func_103DE() {
+	if(!isdefined(self.isnodeoccupied)) {
 		self.var_FE9E = undefined;
 		self.var_FECF = undefined;
 		self.var_FED7 = "none";
@@ -393,12 +329,10 @@ func_103DE()
 	self.var_FE9E = self.isnodeoccupied;
 	self.var_FECF = self.isnodeoccupied getshootatpos();
 	var_00 = distancesquared(self.origin,self.var_10C.origin);
-	if(var_00 < 1000000)
-	{
+	if(var_00 < 1000000) {
 		self.var_FED7 = "full";
 	}
-	else if(var_00 < 4000000)
-	{
+	else if(var_00 < 4000000) {
 		self.var_FED7 = "burst";
 	}
 	else
@@ -406,8 +340,7 @@ func_103DE()
 		self.var_FED7 = "single";
 	}
 
-	if(isdefined(self.var_10C.vehicle))
-	{
+	if(isdefined(self.var_10C.vehicle)) {
 		var_01 = 0.5;
 		var_02 = self.var_FE9E.vehicle;
 		var_03 = self.var_E500;
@@ -415,25 +348,20 @@ func_103DE()
 		var_05 = anglestoforward(var_02.angles);
 		var_06 = anglestoright(var_02.angles);
 		var_07 = vectordot(var_04,var_05);
-		if(var_07 < 0)
-		{
+		if(var_07 < 0) {
 			var_08 = var_02 vehicle_getspeed() * var_01;
 			var_08 = var_08 * 17.6;
-			if(var_08 > 50)
-			{
+			if(var_08 > 50) {
 				var_09 = vectordot(var_04,var_06);
 				var_09 = var_09 \ 3;
-				if(var_09 > 128)
-				{
+				if(var_09 > 128) {
 					var_09 = 128;
 				}
-				else if(var_09 < -128)
-				{
+				else if(var_09 < -128) {
 					var_09 = -128;
 				}
 
-				if(var_09 > 0)
-				{
+				if(var_09 > 0) {
 					var_09 = 128 - var_09;
 				}
 				else
@@ -449,17 +377,13 @@ func_103DE()
 	}
 }
 
-//Function Number: 17
-func_103D6()
-{
+func_103D6() {
 	self endon("killanimscript");
 	self endon("end_shoot_while_driving");
 	self notify("doing_shootWhileDriving");
 	self endon("doing_shootWhileDriving");
-	for(;;)
-	{
-		if(!self.bulletsinclip)
-		{
+	for(;;) {
+		if(!self.bulletsinclip) {
 			wait(0.5);
 			continue;
 		}
@@ -468,21 +392,16 @@ func_103D6()
 	}
 }
 
-//Function Number: 18
-func_103D1()
-{
-	if(!self.var_E500.var_10F83)
-	{
+func_103D1() {
+	if(!self.var_E500.var_10F83) {
 		return 0;
 	}
 
-	if(!scripts\anim\utility_common::needtoreload(0))
-	{
+	if(!scripts\anim\utility_common::needtoreload(0)) {
 		return 0;
 	}
 
-	if(!scripts\anim\utility_common::usingriflelikeweapon())
-	{
+	if(!scripts\anim\utility_common::usingriflelikeweapon()) {
 		return 0;
 	}
 
@@ -491,9 +410,7 @@ func_103D1()
 	return 1;
 }
 
-//Function Number: 19
-func_103D2()
-{
+func_103D2() {
 	self endon("snowmobile_event_occurred");
 	self.var_10FB2 = 1;
 	self waittill("start_blending_reload");
@@ -510,44 +427,32 @@ func_103D2()
 	self.var_10FB2 = undefined;
 	self aiclearanim(%sm_reload,0.1);
 	self give_attacker_kill_rewards(%sm_aiming,1,0.1);
-	if(isdefined(self.var_86EC))
-	{
+	if(isdefined(self.var_86EC)) {
 		self.var_86EC = undefined;
 		scripts\anim\shared::donotetracks("gun_up",::func_103DB);
 		self aiclearanim(scripts\anim\utility::func_1F64("gun_up"),0);
 	}
 }
 
-//Function Number: 20
-func_103DC(param_00)
-{
-	if(param_00 == "start_aim")
-	{
+func_103DC(param_00) {
+	if(param_00 == "start_aim") {
 		return 1;
 	}
 }
 
-//Function Number: 21
-func_103DB(param_00)
-{
-	if(param_00 == "end")
-	{
+func_103DB(param_00) {
+	if(param_00 == "end") {
 		return 1;
 	}
 }
 
-//Function Number: 22
-func_103DD(param_00)
-{
-	if(param_00 == "start_lean")
-	{
+func_103DD(param_00) {
+	if(param_00 == "start_lean") {
 		return 1;
 	}
 }
 
-//Function Number: 23
-func_103D9()
-{
+func_103D9() {
 	self endon("killanimscript");
 	self endon("stop tracking");
 	var_00 = 0.05;
@@ -555,22 +460,18 @@ func_103D9()
 	var_02 = 0;
 	var_03 = 0;
 	var_04 = 1;
-	for(;;)
-	{
+	for(;;) {
 		scripts\anim\track::func_93E2();
 		var_05 = (self.origin[0],self.origin[1],self geteye()[2]);
 		var_06 = self.var_FECF;
-		if(isdefined(self.var_FE9E))
-		{
+		if(isdefined(self.var_FE9E)) {
 			var_06 = self.var_FE9E getshootatpos();
 		}
 
-		if(!isdefined(var_06))
-		{
+		if(!isdefined(var_06)) {
 			var_03 = 0;
 			var_07 = self getsafeanimmovedeltapercentage();
-			if(isdefined(var_07))
-			{
+			if(isdefined(var_07)) {
 				var_03 = angleclamp180(var_07[1] - self.angles[1]);
 			}
 		}
@@ -582,20 +483,17 @@ func_103D9()
 			var_03 = angleclamp180(var_03);
 		}
 
-		if(var_03 < self.setdevdvar || var_03 > self.setmatchdatadef)
-		{
+		if(var_03 < self.setdevdvar || var_03 > self.setmatchdatadef) {
 			var_03 = 0;
 		}
 
-		if(var_04)
-		{
+		if(var_04) {
 			var_04 = 0;
 		}
 		else
 		{
 			var_0A = var_03 - var_02;
-			if(abs(var_0A) > var_01)
-			{
+			if(abs(var_0A) > var_01) {
 				var_03 = var_02 + var_01 * scripts\common\utility::sign(var_0A);
 			}
 		}
@@ -609,9 +507,7 @@ func_103D9()
 	}
 }
 
-//Function Number: 24
-func_103DA()
-{
+func_103DA() {
 	self endon("killanimscript");
 	self endon("stop tracking");
 	var_00 = 0.05;
@@ -623,22 +519,18 @@ func_103DA()
 	var_06 = 0;
 	var_07 = 0;
 	var_08 = 1;
-	for(;;)
-	{
+	for(;;) {
 		scripts\anim\track::func_93E2();
 		var_09 = (self.origin[0],self.origin[1],self geteye()[2]);
 		var_0A = self.var_FECF;
-		if(isdefined(self.var_FE9E))
-		{
+		if(isdefined(self.var_FE9E)) {
 			var_0A = self.var_FE9E getshootatpos();
 		}
 
-		if(!isdefined(var_0A))
-		{
+		if(!isdefined(var_0A)) {
 			var_07 = 0;
 			var_0B = self getsafeanimmovedeltapercentage();
-			if(isdefined(var_0B))
-			{
+			if(isdefined(var_0B)) {
 				var_07 = angleclamp180(var_0B[1] - self.angles[1]);
 			}
 		}
@@ -650,40 +542,33 @@ func_103DA()
 			var_07 = angleclamp180(var_07);
 		}
 
-		if(isdefined(self.var_10FB2) || var_07 < 0 && var_07 - self.setdevdvar * self.var_54DB > 0 || var_07 > 0 && var_07 - self.setmatchdatadef * self.var_54DB < 0)
-		{
+		if(isdefined(self.var_10FB2) || var_07 < 0 && var_07 - self.setdevdvar * self.var_54DB > 0 || var_07 > 0 && var_07 - self.setmatchdatadef * self.var_54DB < 0) {
 			var_07 = 0;
 		}
 
-		if(var_08)
-		{
+		if(var_08) {
 			var_08 = 0;
 		}
 		else
 		{
-			if(var_06 < -180 + var_04 && var_07 > 180 - var_05)
-			{
+			if(var_06 < -180 + var_04 && var_07 > 180 - var_05) {
 				var_07 = -179;
 			}
 
-			if(var_06 > 180 - var_04 && var_07 < -180 + var_05)
-			{
+			if(var_06 > 180 - var_04 && var_07 < -180 + var_05) {
 				var_07 = 179;
 			}
 
 			var_0E = var_07 - var_06;
 			var_0F = var_02 - var_01 * abs(var_0E) \ 180 + var_01;
-			if(isdefined(self.var_10FB2))
-			{
+			if(isdefined(self.var_10FB2)) {
 				var_0F = var_03;
-				if(abs(var_06) < 45)
-				{
+				if(abs(var_06) < 45) {
 					self notify("start_blending_reload");
 				}
 			}
 
-			if(abs(var_0E) > var_0F)
-			{
+			if(abs(var_0E) > var_0F) {
 				var_07 = var_06 + var_0F * scripts\common\utility::sign(var_0E);
 			}
 		}
@@ -703,32 +588,26 @@ func_103DA()
 	}
 }
 
-//Function Number: 25
-func_103C6(param_00,param_01,param_02)
-{
+func_103C6(param_00,param_01,param_02) {
 	var_03 = undefined;
 	var_04 = undefined;
 	var_05 = 0;
-	for(var_06 = 0;var_06 < param_00.size;var_06++)
-	{
+	for(var_06 = 0;var_06 < param_00.size;var_06++) {
 		var_07 = scripts\common\utility::absangleclamp180(param_02 - param_01[var_06]);
-		if(!isdefined(var_03) || var_07 < var_05)
-		{
+		if(!isdefined(var_03) || var_07 < var_05) {
 			var_04 = var_03;
 			var_03 = param_00[var_06];
 			var_05 = var_07;
 			continue;
 		}
 
-		if(!isdefined(var_04))
-		{
+		if(!isdefined(var_04)) {
 			var_04 = param_00[var_06];
 		}
 	}
 
 	var_08 = var_03;
-	if(isdefined(level.var_D8BF) && var_08 == level.var_D8BF && gettime() - level.var_D8C0 < 500)
-	{
+	if(isdefined(level.var_D8BF) && var_08 == level.var_D8BF && gettime() - level.var_D8C0 < 500) {
 		var_08 = var_04;
 	}
 
@@ -737,14 +616,11 @@ func_103C6(param_00,param_01,param_02)
 	return var_08;
 }
 
-//Function Number: 26
-func_103C2()
-{
+func_103C2() {
 	var_00 = self.var_E500;
 	var_01 = var_00.var_D89A;
 	var_01 = (var_01[0],var_01[1],randomfloatrange(200,400)) * 0.75;
-	if(lengthsquared(var_01) > 1000000)
-	{
+	if(lengthsquared(var_01) > 1000000) {
 		var_01 = vectornormalize(var_01) * 1000;
 	}
 
@@ -754,9 +630,7 @@ func_103C2()
 	var_02 thread func_51D1();
 }
 
-//Function Number: 27
-func_103CF()
-{
+func_103CF() {
 	var_00 = [];
 	var_00[0] = level.var_EC85["snowmobile"]["small"]["death"]["back"];
 	var_00[1] = level.var_EC85["snowmobile"]["small"]["death"]["right"];
@@ -770,12 +644,9 @@ func_103CF()
 	return 1;
 }
 
-//Function Number: 28
-func_103C1()
-{
+func_103C1() {
 	var_00 = self.var_E500;
-	if(!isdefined(var_00))
-	{
+	if(!isdefined(var_00)) {
 		return func_103CF();
 	}
 
@@ -798,26 +669,20 @@ func_103C1()
 	return 1;
 }
 
-//Function Number: 29
-func_51D1()
-{
+func_51D1() {
 	var_00 = self.origin;
-	for(var_01 = 0;var_01 < 60;var_01++)
-	{
+	for(var_01 = 0;var_01 < 60;var_01++) {
 		wait(0.05);
 		var_00 = self.origin;
 	}
 
 	wait(3);
-	if(isdefined(self))
-	{
+	if(isdefined(self)) {
 		self delete();
 	}
 }
 
-//Function Number: 30
-func_103D3(param_00)
-{
+func_103D3(param_00) {
 	self.var_1491.var_2274["idle"] = level.var_EC85["snowmobile"][param_00]["idle"];
 	self.var_1491.var_2274["drive"] = level.var_EC85["snowmobile"][param_00]["drive"];
 	self.var_1491.var_2274["fire"] = level.var_EC85["snowmobile"][param_00]["fire"];
@@ -833,9 +698,7 @@ func_103D3(param_00)
 	self.var_1491.var_2274["semi5"] = level.var_EC85["snowmobile"][param_00]["fire"];
 }
 
-//Function Number: 31
-func_103D4(param_00)
-{
+func_103D4(param_00) {
 	self.var_1491.var_2274 = [];
 	func_103D3("driver");
 	self.var_1491.var_2274["left2right"] = level.var_EC85["snowmobile"]["driver"]["left2right"];
@@ -849,8 +712,7 @@ func_103D4(param_00)
 	self.var_1491.var_2274["add_aim_right_left"] = level.var_EC85["snowmobile"]["driver"]["add_aim_right"]["left"];
 	self.var_1491.var_2274["add_aim_right_center"] = level.var_EC85["snowmobile"]["driver"]["add_aim_right"]["center"];
 	self.var_1491.var_2274["add_aim_right_right"] = level.var_EC85["snowmobile"]["driver"]["add_aim_right"]["right"];
-	if(param_00)
-	{
+	if(param_00) {
 		self.var_1491.var_2274["event_jump"] = level.var_EC85["snowmobile"]["driver"]["shoot_jump"];
 		self.var_1491.var_2274["event_bump"] = level.var_EC85["snowmobile"]["driver"]["shoot_bump"];
 		self.var_1491.var_2274["event_bump_big"] = level.var_EC85["snowmobile"]["driver"]["shoot_bump_big"];
@@ -870,9 +732,7 @@ func_103D4(param_00)
 	self.var_1491.var_2274["event_restore"] = %sm_turn;
 }
 
-//Function Number: 32
-func_103D5(param_00)
-{
+func_103D5(param_00) {
 	self.var_1491.var_2274 = [];
 	func_103D3("passenger");
 	self.var_1491.var_2274["hide"] = level.var_EC85["snowmobile"]["passenger"]["hide"];
@@ -896,8 +756,7 @@ func_103D5(param_00)
 	self.var_1491.var_2274["straight_level_left"] = level.var_EC85["snowmobile"]["passenger"]["straight_level"]["left"];
 	self.var_1491.var_2274["straight_level_center"] = level.var_EC85["snowmobile"]["passenger"]["straight_level"]["center"];
 	self.var_1491.var_2274["straight_level_right"] = level.var_EC85["snowmobile"]["passenger"]["straight_level"]["right"];
-	if(param_00)
-	{
+	if(param_00) {
 		self.var_1491.var_2274["event_jump"] = level.var_EC85["snowmobile"]["passenger"]["drive_jump"];
 		self.var_1491.var_2274["event_bump"] = level.var_EC85["snowmobile"]["passenger"]["drive_bump"];
 		self.var_1491.var_2274["event_bump_big"] = level.var_EC85["snowmobile"]["passenger"]["drive_bump_big"];

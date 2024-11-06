@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\aitypes\dlc4_boss\behaviors.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 110
- * Decompile Time: 4395 ms
- * Timestamp: 10\26\2023 11:58:44 PM
-*******************************************************************/
+/***********************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\aitypes\dlc4_boss\behaviors.gsc
+***********************************************************/
 
-//Function Number: 1
-initbehaviors(param_00)
-{
+initbehaviors(param_00) {
 	setupbehaviorstates();
 	setupblackboard();
 	setupnodes();
@@ -43,15 +37,11 @@ initbehaviors(param_00)
 	return level.success;
 }
 
-//Function Number: 2
-shouldplaydlc4bosspainanim()
-{
+shouldplaydlc4bosspainanim() {
 	return 1;
 }
 
-//Function Number: 3
-setupbehaviorstates()
-{
+setupbehaviorstates() {
 	scripts\aitypes\dlc4\simple_action::setupsimplebtaction();
 	scripts\aitypes\dlc4\bt_action_api::setupbtaction("move_action",::moveaction_begin,::moveaction_tick,::moveaction_end);
 	scripts\aitypes\dlc4\bt_action_api::setupbtaction("ground_pound",::groundpound_begin,::groundpound_tick,::groundpound_end);
@@ -66,9 +56,7 @@ setupbehaviorstates()
 	scripts\aitypes\dlc4\bt_action_api::setupbtaction("eclipse",::eclipse_begin,::eclipse_tick,::eclipse_end);
 }
 
-//Function Number: 4
-setupblackboard()
-{
+setupblackboard() {
 	self.var_1198.var_4BF7 = undefined;
 	self.var_1198.desirednode = undefined;
 	self.var_1198.previousposition = undefined;
@@ -86,20 +74,16 @@ setupblackboard()
 	self.var_1198.painnotifytime = 0;
 }
 
-//Function Number: 5
-setupnodes()
-{
+setupnodes() {
 	self.arenacenter = scripts\common\utility::getstruct("arena_center","targetname").origin;
 	var_00 = [];
 	var_01 = scripts\common\utility::getstruct("boss_path","script_noteworthy");
 	var_02 = var_01.var_336;
-	for(;;)
-	{
+	for(;;) {
 		var_01.var_1E75 = vectornormalize(self.arenacenter - var_01.origin * (1,1,0));
 		var_00[var_00.size] = var_01;
 		var_01 = scripts\common\utility::getstruct(var_01.target,"targetname");
-		if(var_01.var_336 == var_02)
-		{
+		if(var_01.var_336 == var_02) {
 			break;
 		}
 	}
@@ -107,9 +91,7 @@ setupnodes()
 	self.var_1198.nodes = var_00;
 }
 
-//Function Number: 6
-setupactions()
-{
+setupactions() {
 	self.bossactions = [];
 	self.bossactionsstruct = [];
 	self.weightcopies = [];
@@ -269,9 +251,7 @@ setupactions()
 	self.bossactionsstruct[var_11.name] = var_11;
 }
 
-//Function Number: 7
-entrance_begin(param_00)
-{
+entrance_begin(param_00) {
 	self.introfinished = 0;
 	self ghostskulls_total_waves(100000);
 	self clearpath();
@@ -284,23 +264,18 @@ entrance_begin(param_00)
 	moveaction_internalsetup(param_00);
 }
 
-//Function Number: 8
-entrance_tick(param_00)
-{
+entrance_tick(param_00) {
 	var_01 = self._blackboard;
 	var_02 = distance(self.origin,var_01.previousposition);
 	var_03 = self.traversallength;
-	if(!var_01.movereadyforarrival)
-	{
-		if(var_02 + var_01.movearrivaldist >= var_03)
-		{
+	if(!var_01.movereadyforarrival) {
+		if(var_02 + var_01.movearrivaldist >= var_03) {
 			var_01.movereadyforarrival = 1;
 		}
 	}
 	else
 	{
-		if(scripts\aitypes\dlc4\bt_state_api::btstate_tickstates(param_00))
-		{
+		if(scripts\aitypes\dlc4\bt_state_api::btstate_tickstates(param_00)) {
 			self.var_1198.var_4BF7 = self.var_1198.desirednode;
 			return level.running;
 		}
@@ -311,73 +286,55 @@ entrance_tick(param_00)
 	return level.running;
 }
 
-//Function Number: 9
-entrance_end(param_00)
-{
+entrance_end(param_00) {
 	self.var_3135.instancedata[param_00] = undefined;
 	self.lookaheadorigin = self.origin;
 	self.introfinished = 1;
 	self.automaticspawn = 1;
 }
 
-//Function Number: 10
-updateeveryframe(param_00)
-{
+updateeveryframe(param_00) {
 	scripts\aitypes\dlc4\behavior_utils::updateenemy();
 	updatetimers();
 	self.var_1198.painnotifytime = max(self.var_1198.painnotifytime - 50,0);
 	return level.failure;
 }
 
-//Function Number: 11
-updatetimers(param_00)
-{
+updatetimers(param_00) {
 	var_01 = scripts\asm\dlc4\dlc4_asm::gettunedata();
-	if(isdefined(self.bossactions))
-	{
-		foreach(var_03 in self.bossactions)
-		{
+	if(isdefined(self.bossactions)) {
+		foreach(var_03 in self.bossactions) {
 			var_03.var_11910 = max(var_03.var_11910 - 50,0);
 		}
 	}
 
 	self.passivetimer = max(self.passivetimer - 50,0);
 	self.specialactiontimer = max(self.specialactiontimer - 50,0);
-	if(isdefined(level.meph_battle_over))
-	{
+	if(isdefined(level.meph_battle_over)) {
 		return;
 	}
 
 	self.automaticspawntimer = max(self.automaticspawntimer - 50,0);
-	if(self.automaticspawntimer == 0 && self.automaticspawn)
-	{
+	if(self.automaticspawntimer == 0 && self.automaticspawn) {
 		self.automaticspawntimer = var_01.automatic_spawn_time;
 		var_06 = scripts\mp\_mp_agent::getactiveagentsoftype("skeleton");
-		if(var_06.size < int(max(var_01.automatic_spawn_cap,level.players.size)))
-		{
+		if(var_06.size < int(max(var_01.automatic_spawn_cap,level.players.size))) {
 			computespawnpoints(1,var_06);
 			scripts\asm\dlc4_boss\dlc4_boss_asm::summonskeletons();
 		}
 	}
 }
 
-//Function Number: 12
-taunt(param_00)
-{
+taunt(param_00) {
 	scripts\aitypes\dlc4\simple_action::dosimpleaction_immediate(param_00,"taunt");
 }
 
-//Function Number: 13
-fireball(param_00)
-{
+fireball(param_00) {
 	scripts\aitypes\dlc4\simple_action::dosimpleaction_immediate(param_00,"fireball");
 }
 
-//Function Number: 14
-clap(param_00)
-{
-	if(self.forcingaction)
-	{
+clap(param_00) {
+	if(self.forcingaction) {
 		restoreweights();
 	}
 
@@ -386,11 +343,8 @@ clap(param_00)
 	scripts\aitypes\dlc4\simple_action::dosimpleaction_immediate(param_00,"clap");
 }
 
-//Function Number: 15
-throw(param_00)
-{
-	if(self.forcingaction)
-	{
+throw(param_00) {
+	if(self.forcingaction) {
 		restoreweights();
 	}
 
@@ -398,11 +352,8 @@ throw(param_00)
 	scripts\aitypes\dlc4\simple_action::dosimpleaction_immediate(param_00,"throw");
 }
 
-//Function Number: 16
-tornado(param_00)
-{
-	if(self.forcingaction)
-	{
+tornado(param_00) {
+	if(self.forcingaction) {
 		restoreweights();
 	}
 
@@ -410,23 +361,17 @@ tornado(param_00)
 	scripts\aitypes\dlc4\simple_action::dosimpleaction_immediate(param_00,"tornado");
 }
 
-//Function Number: 17
-teleporttonode(param_00)
-{
+teleporttonode(param_00) {
 	var_01 = self.var_1198.var_C053.size;
 	self.var_1198.desirednode = self.var_1198.var_4BF7 + randomint(var_01 - 1) + 1 % var_01;
 	scripts\aitypes\dlc4\simple_action::dosimpleaction_immediate(param_00,"teleport");
 }
 
-//Function Number: 18
-groundpound(param_00)
-{
+groundpound(param_00) {
 	scripts\aitypes\dlc4\bt_action_api::setdesiredbtaction(param_00,"ground_pound");
 }
 
-//Function Number: 19
-summon(param_00)
-{
+summon(param_00) {
 	var_01 = scripts\asm\dlc4\dlc4_asm::gettunedata();
 	var_02 = scripts\mp\_mp_agent::getactiveagentsoftype(var_01.summon_agent_type);
 	var_03 = var_01.summon_min_spawn_num["" + level.players.size];
@@ -437,9 +382,7 @@ summon(param_00)
 	scripts\aitypes\dlc4\simple_action::dosimpleaction_immediate(param_00,"summon");
 }
 
-//Function Number: 20
-moveleft(param_00)
-{
+moveleft(param_00) {
 	var_01 = scripts\asm\dlc4\dlc4_asm::gettunedata();
 	self.var_1198.nodestomove = randomintrange(var_01.min_move_nodes,var_01.max_move_nodes + 1);
 	self.passivetimer = var_01.passive_cooldown;
@@ -451,9 +394,7 @@ moveleft(param_00)
 	scripts\aitypes\dlc4\bt_action_api::setdesiredbtaction(param_00,"move_action");
 }
 
-//Function Number: 21
-moveright(param_00)
-{
+moveright(param_00) {
 	var_01 = scripts\asm\dlc4\dlc4_asm::gettunedata();
 	self.var_1198.nodestomove = randomintrange(var_01.min_move_nodes,var_01.max_move_nodes + 1);
 	self.passivetimer = var_01.passive_cooldown;
@@ -465,18 +406,14 @@ moveright(param_00)
 	scripts\aitypes\dlc4\bt_action_api::setdesiredbtaction(param_00,"move_action");
 }
 
-//Function Number: 22
-tempidle(param_00)
-{
+tempidle(param_00) {
 	var_01 = scripts\asm\dlc4\dlc4_asm::gettunedata();
 	self.passivetimer = var_01.passive_cooldown;
 	self.timers.idletimer = randomfloatrange(var_01.min_idle_time,var_01.max_idle_time);
 	scripts\aitypes\dlc4\bt_action_api::setdesiredbtaction(param_00,"temp_idle");
 }
 
-//Function Number: 23
-movefireballleft(param_00)
-{
+movefireballleft(param_00) {
 	var_01 = scripts\asm\dlc4\dlc4_asm::gettunedata();
 	self.var_1198.nodestomove = var_01.strafe_move_nodes;
 	self.var_1198.currentmovedirindex = 4;
@@ -487,9 +424,7 @@ movefireballleft(param_00)
 	scripts\aitypes\dlc4\bt_action_api::setdesiredbtaction(param_00,"move_action");
 }
 
-//Function Number: 24
-movefireballright(param_00)
-{
+movefireballright(param_00) {
 	var_01 = scripts\asm\dlc4\dlc4_asm::gettunedata();
 	self.var_1198.nodestomove = var_01.strafe_move_nodes;
 	self.var_1198.currentmovedirindex = 6;
@@ -500,9 +435,7 @@ movefireballright(param_00)
 	scripts\aitypes\dlc4\bt_action_api::setdesiredbtaction(param_00,"move_action");
 }
 
-//Function Number: 25
-moveclapleft(param_00)
-{
+moveclapleft(param_00) {
 	var_01 = scripts\asm\dlc4\dlc4_asm::gettunedata();
 	self.var_1198.nodestomove = var_01.strafe_move_nodes;
 	self.var_1198.currentmovedirindex = 4;
@@ -512,9 +445,7 @@ moveclapleft(param_00)
 	scripts\aitypes\dlc4\bt_action_api::setdesiredbtaction(param_00,"move_action");
 }
 
-//Function Number: 26
-moveclapright(param_00)
-{
+moveclapright(param_00) {
 	var_01 = scripts\asm\dlc4\dlc4_asm::gettunedata();
 	self.var_1198.nodestomove = var_01.strafe_move_nodes;
 	self.var_1198.currentmovedirindex = 6;
@@ -524,11 +455,8 @@ moveclapright(param_00)
 	scripts\aitypes\dlc4\bt_action_api::setdesiredbtaction(param_00,"move_action");
 }
 
-//Function Number: 27
-airpound(param_00)
-{
-	if(self.forcingaction)
-	{
+airpound(param_00) {
+	if(self.forcingaction) {
 		restoreweights();
 	}
 
@@ -536,27 +464,20 @@ airpound(param_00)
 	scripts\aitypes\dlc4\bt_action_api::setdesiredbtaction(param_00,"air_pound");
 }
 
-//Function Number: 28
-groundvul(param_00)
-{
+groundvul(param_00) {
 	restoreweights();
 	scripts\aitypes\dlc4\bt_action_api::setdesiredbtaction(param_00,"ground_vul");
 }
 
-//Function Number: 29
-dropmove(param_00)
-{
+dropmove(param_00) {
 	var_01 = self.var_1198.var_C053.size;
 	self.var_1198.desirednode = self.var_1198.var_4BF7 + randomint(var_01 - 5) + 3 % var_01;
 	self.passivetimer = scripts\asm\dlc4\dlc4_asm::gettunedata().passive_cooldown;
 	scripts\aitypes\dlc4\bt_action_api::setdesiredbtaction(param_00,"drop_move");
 }
 
-//Function Number: 30
-flyover(param_00)
-{
-	if(self.forcingaction)
-	{
+flyover(param_00) {
+	if(self.forcingaction) {
 		restoreweights();
 	}
 
@@ -567,40 +488,29 @@ flyover(param_00)
 	scripts\aitypes\dlc4\bt_action_api::setdesiredbtaction(param_00,"fly_over");
 }
 
-//Function Number: 31
-func_2B2F(param_00)
-{
+func_2B2F(param_00) {
 	scripts\asm\dlc4_boss\dlc4_boss_asm::facearenacenter();
 	self.simplesetupstartstate = "black_hole";
 	self.simplesetupendstate = "black_hole_end";
 	scripts\aitypes\dlc4\bt_action_api::setdesiredbtaction(param_00,"simple_setup");
 }
 
-//Function Number: 32
-death(param_00)
-{
+death(param_00) {
 	scripts\aitypes\dlc4\bt_action_api::setdesiredbtaction(param_00,"death");
 }
 
-//Function Number: 33
-eclipse(param_00)
-{
+eclipse(param_00) {
 	restoreweights();
 	scripts\aitypes\dlc4\bt_action_api::setdesiredbtaction(param_00,"eclipse");
 }
 
-//Function Number: 34
-cooldownfinished(param_00)
-{
-	if(!isdefined(self.bossactions))
-	{
+cooldownfinished(param_00) {
+	if(!isdefined(self.bossactions)) {
 		return 0;
 	}
 
-	foreach(var_02 in self.bossactions)
-	{
-		if(var_02.name == param_00)
-		{
+	foreach(var_02 in self.bossactions) {
+		if(var_02.name == param_00) {
 			return var_02.var_11910 <= 0;
 		}
 	}
@@ -608,21 +518,17 @@ cooldownfinished(param_00)
 	return 1;
 }
 
-//Function Number: 35
-canfireball()
-{
+canfireball() {
 	var_00 = undefined;
 	var_01 = scripts\asm\dlc4_boss\dlc4_boss_asm::getspecialenemy();
 	var_00 = self.arenacenter;
-	if(isdefined(var_01))
-	{
+	if(isdefined(var_01)) {
 		var_00 = var_01.origin;
 	}
 
 	var_02 = scripts\common\trace::create_default_contents(1);
 	var_03 = scripts\common\trace::sphere_trace_passed(self.origin + (0,0,250),var_00 + (0,0,12),10,undefined,var_02);
-	if(var_03)
-	{
+	if(var_03) {
 		self.fireballtargetpos = var_00;
 		return 1;
 	}
@@ -630,21 +536,16 @@ canfireball()
 	return 0;
 }
 
-//Function Number: 36
-canclap()
-{
-	if(self.specialactiontimer > 0)
-	{
+canclap() {
+	if(self.specialactiontimer > 0) {
 		return 0;
 	}
 
-	if(level.fbd.bossstate == "FRENZIED" && self.frenziedhealth < 10000)
-	{
+	if(level.fbd.bossstate == "FRENZIED" && self.frenziedhealth < 10000) {
 		return 0;
 	}
 
-	if(level.fbd.bossstate == "MAIN" && self.soulhealth <= 1)
-	{
+	if(level.fbd.bossstate == "MAIN" && self.soulhealth <= 1) {
 		return 0;
 	}
 
@@ -659,153 +560,110 @@ canclap()
 	return var_07;
 }
 
-//Function Number: 37
-canthrow()
-{
-	if(self.specialactiontimer > 0)
-	{
+canthrow() {
+	if(self.specialactiontimer > 0) {
 		return 0;
 	}
 
 	return 1;
 }
 
-//Function Number: 38
-cantornado()
-{
-	if(self.specialactiontimer > 0)
-	{
+cantornado() {
+	if(self.specialactiontimer > 0) {
 		return 0;
 	}
 
 	return 1;
 }
 
-//Function Number: 39
-canteleport()
-{
+canteleport() {
 	return 1;
 }
 
-//Function Number: 40
-cangroundpound()
-{
+cangroundpound() {
 	return 1;
 }
 
-//Function Number: 41
-cansummon()
-{
+cansummon() {
 	var_00 = scripts\asm\dlc4\dlc4_asm::gettunedata();
 	var_01 = scripts\mp\_mp_agent::getactiveagentsoftype(var_00.summon_agent_type);
 	return var_01.size <= var_00.summon_min_zombies_before_active;
 }
 
-//Function Number: 42
-canmoveleft()
-{
-	if(self.passivetimer > 0)
-	{
+canmoveleft() {
+	if(self.passivetimer > 0) {
 		return 0;
 	}
 
 	return 1;
 }
 
-//Function Number: 43
-canmoveright()
-{
-	if(self.passivetimer > 0)
-	{
+canmoveright() {
+	if(self.passivetimer > 0) {
 		return 0;
 	}
 
 	return 1;
 }
 
-//Function Number: 44
-canidle()
-{
+canidle() {
 	return 1;
 }
 
-//Function Number: 45
-canmovefireballleft()
-{
+canmovefireballleft() {
 	return 1;
 }
 
-//Function Number: 46
-canmovefireballright()
-{
+canmovefireballright() {
 	return 1;
 }
 
-//Function Number: 47
-canmoveclapleft()
-{
+canmoveclapleft() {
 	return 1;
 }
 
-//Function Number: 48
-canmoveclapright()
-{
+canmoveclapright() {
 	return 1;
 }
 
-//Function Number: 49
-canairpound()
-{
-	if(self.specialactiontimer > 0)
-	{
+canairpound() {
+	if(self.specialactiontimer > 0) {
 		return 0;
 	}
 
-	if(self.claponarena)
-	{
+	if(self.claponarena) {
 		return 0;
 	}
 
-	if(level.fbd.bossstate == "FRENZIED" && self.frenziedhealth < 100000)
-	{
+	if(level.fbd.bossstate == "FRENZIED" && self.frenziedhealth < 100000) {
 		return 0;
 	}
 
 	return 1;
 }
 
-//Function Number: 50
-cangroundvul()
-{
+cangroundvul() {
 	return 1;
 }
 
-//Function Number: 51
-candropmove()
-{
-	if(self.passivetimer > 0)
-	{
+candropmove() {
+	if(self.passivetimer > 0) {
 		return 0;
 	}
 
-	if(level.fbd.bossstate == "FRENZIED" && self.frenziedhealth < 100000)
-	{
+	if(level.fbd.bossstate == "FRENZIED" && self.frenziedhealth < 100000) {
 		return 0;
 	}
 
 	return 1;
 }
 
-//Function Number: 52
-canflyover()
-{
-	if(self.specialactiontimer > 0)
-	{
+canflyover() {
+	if(self.specialactiontimer > 0) {
 		return 0;
 	}
 
-	if(level.fbd.bossstate == "FRENZIED" && self.frenziedhealth < 100000)
-	{
+	if(level.fbd.bossstate == "FRENZIED" && self.frenziedhealth < 100000) {
 		return 0;
 	}
 
@@ -817,42 +675,31 @@ canflyover()
 	return var_04;
 }
 
-//Function Number: 53
-canblackhole()
-{
+canblackhole() {
 	return 1;
 }
 
-//Function Number: 54
-caneclipse()
-{
+caneclipse() {
 	return 1;
 }
 
-//Function Number: 55
-cantaunt()
-{
+cantaunt() {
 	return 1;
 }
 
-//Function Number: 56
-decideaction(param_00)
-{
+decideaction(param_00) {
 	self.terminateaction = 0;
-	if(isdefined(self.desiredaction))
-	{
+	if(isdefined(self.desiredaction)) {
 		return level.success;
 	}
 
-	if(isdefined(self.nextaction))
-	{
+	if(isdefined(self.nextaction)) {
 		scripts\aitypes\dlc4\bt_action_api::setdesiredbtaction(param_00,self.nextaction);
 		self.nextaction = undefined;
 		return level.success;
 	}
 
-	if(isdefined(level.meph_battle_over))
-	{
+	if(isdefined(level.meph_battle_over)) {
 		scripts\aitypes\dlc4\bt_action_api::setdesiredbtaction(param_00,"debug_handler");
 		return level.success;
 	}
@@ -861,33 +708,26 @@ decideaction(param_00)
 	return scripts\common\utility::ter_op(var_01,level.success,level.failure);
 }
 
-//Function Number: 57
-pickrandomvalidaction(param_00)
-{
+pickrandomvalidaction(param_00) {
 	var_01 = [];
 	var_02 = 0;
-	foreach(var_04 in self.bossactions)
-	{
-		if(cooldownfinished(var_04.name) && [[ var_04.canfunc ]]())
-		{
+	foreach(var_04 in self.bossactions) {
+		if(cooldownfinished(var_04.name) && [[var_04.canfunc]]()) {
 			var_01[var_01.size] = var_04;
 			var_02 = var_02 + var_04.weight;
 			continue;
 		}
 	}
 
-	if(var_02 == 0)
-	{
+	if(var_02 == 0) {
 		return 0;
 	}
 
 	var_06 = randomfloat(var_02);
-	foreach(var_04 in var_01)
-	{
+	foreach(var_04 in var_01) {
 		var_06 = var_06 - var_04.weight;
-		if(var_06 <= 0)
-		{
-			[[ var_04.dofunc ]](param_00);
+		if(var_06 <= 0) {
+			[[var_04.dofunc]](param_00);
 			resettimer(var_04.name,var_04.cooldowntime);
 			return 1;
 		}
@@ -896,9 +736,7 @@ pickrandomvalidaction(param_00)
 	return 0;
 }
 
-//Function Number: 58
-moveaction_begin(param_00)
-{
+moveaction_begin(param_00) {
 	self ghostskulls_total_waves(100000);
 	self clearpath();
 	scripts\asm\dlc4\dlc4_asm::clearasmaction();
@@ -911,34 +749,26 @@ moveaction_begin(param_00)
 	func_F8A3(param_00,"move");
 }
 
-//Function Number: 59
-moveaction_internalsetup(param_00)
-{
+moveaction_internalsetup(param_00) {
 	var_01 = self._blackboard;
 	var_01.previousposition = self.origin;
 	var_01.movereadyforarrival = 0;
 	self.traversallength = distance(var_01.previousposition,var_01.nodes[var_01.desirednode].origin);
 }
 
-//Function Number: 60
-moveaction_tick(param_00)
-{
+moveaction_tick(param_00) {
 	var_01 = self._blackboard;
 	var_02 = distance(self.origin,var_01.previousposition);
 	var_03 = self.traversallength;
-	if(scripts\asm\dlc4_boss\dlc4_boss_asm::shouldterminateaction())
-	{
+	if(scripts\asm\dlc4_boss\dlc4_boss_asm::shouldterminateaction()) {
 		return level.success;
 	}
 
-	if(var_01.nodestomove > 1)
-	{
-		if(var_02 >= var_03)
-		{
+	if(var_01.nodestomove > 1) {
+		if(var_02 >= var_03) {
 			var_01.var_4BF7 = var_01.desirednode;
 			var_01.nodestomove--;
-			if(var_01.currentmovedirindex == 4)
-			{
+			if(var_01.currentmovedirindex == 4) {
 				var_01.desirednode = var_01.var_4BF7 + 1 % var_01.var_C053.size;
 			}
 			else
@@ -950,16 +780,13 @@ moveaction_tick(param_00)
 			var_01.desireddir = vectornormalize(var_01.nodes[var_01.desirednode].origin - self.origin);
 		}
 	}
-	else if(var_01.nodestomove == 1)
-	{
-		if(var_02 + var_01.movearrivaldist >= var_03)
-		{
+	else if(var_01.nodestomove == 1) {
+		if(var_02 + var_01.movearrivaldist >= var_03) {
 			var_01.nodestomove--;
 			var_01.movereadyforarrival = 1;
 		}
 	}
-	else if(scripts\asm\asm::asm_ephemeraleventfired("move_arrival","end"))
-	{
+	else if(scripts\asm\asm::asm_ephemeraleventfired("move_arrival","end")) {
 		var_01.var_4BF7 = var_01.desirednode;
 		return level.success;
 	}
@@ -967,9 +794,7 @@ moveaction_tick(param_00)
 	return level.running;
 }
 
-//Function Number: 61
-moveaction_end(param_00)
-{
+moveaction_end(param_00) {
 	self setscriptablepartstate("flame_trail","off");
 	cleanup("move");
 	self.traversallength = undefined;
@@ -977,25 +802,19 @@ moveaction_end(param_00)
 	var_01.var_4BF7 = var_01.desirednode;
 }
 
-//Function Number: 62
-tempidle_begin(param_00)
-{
+tempidle_begin(param_00) {
 	self ghostskulls_total_waves(100000);
 	self clearpath();
 	scripts\asm\dlc4\dlc4_asm::clearasmaction();
 	func_F8A3(param_00,"temp_idle");
 }
 
-//Function Number: 63
-tempidle_tick(param_00)
-{
-	if(scripts\asm\dlc4\dlc4_asm::checkpainnotify())
-	{
+tempidle_tick(param_00) {
+	if(scripts\asm\dlc4\dlc4_asm::checkpainnotify()) {
 		return level.failure;
 	}
 
-	if(self.timers.idletimer <= 0)
-	{
+	if(self.timers.idletimer <= 0) {
 		return level.success;
 	}
 
@@ -1003,42 +822,31 @@ tempidle_tick(param_00)
 	return level.running;
 }
 
-//Function Number: 64
-tempidle_end(param_00)
-{
+tempidle_end(param_00) {
 	self.timers.idletimer = 0;
 	cleanup("temp_idle");
 }
 
-//Function Number: 65
-groundpound_begin(param_00)
-{
+groundpound_begin(param_00) {
 	func_F8A3(param_00,"ground_pound");
 	self.var_1198.desirednode = self.var_1198.var_4BF7;
 	scripts\aitypes\dlc4\bt_state_api::asm_wait_state_setup(param_00,"ground_pound","ground_pound_launch",undefined,undefined,undefined,2000000);
 	scripts\aitypes\dlc4\bt_state_api::btstate_transitionstate(param_00,"ground_pound");
 }
 
-//Function Number: 66
-groundpound_tick(param_00)
-{
-	if(scripts\aitypes\dlc4\bt_state_api::btstate_tickstates(param_00))
-	{
+groundpound_tick(param_00) {
+	if(scripts\aitypes\dlc4\bt_state_api::btstate_tickstates(param_00)) {
 		return level.running;
 	}
 
 	return level.success;
 }
 
-//Function Number: 67
-groundpound_end(param_00)
-{
+groundpound_end(param_00) {
 	cleanup("ground_pound");
 }
 
-//Function Number: 68
-airpound_begin(param_00)
-{
+airpound_begin(param_00) {
 	func_F8A3(param_00,"air_pound");
 	self.var_1198.desirednode = self.var_1198.var_4BF7;
 	scripts\aitypes\dlc4\bt_state_api::asm_wait_state_setup(param_00,"air_pound","air_pound_teleport_finish",undefined,undefined,undefined,2000000);
@@ -1046,27 +854,20 @@ airpound_begin(param_00)
 	self.interruptable = 0;
 }
 
-//Function Number: 69
-airpound_tick(param_00)
-{
-	if(scripts\aitypes\dlc4\bt_state_api::btstate_tickstates(param_00))
-	{
+airpound_tick(param_00) {
+	if(scripts\aitypes\dlc4\bt_state_api::btstate_tickstates(param_00)) {
 		return level.running;
 	}
 
 	return level.success;
 }
 
-//Function Number: 70
-airpound_end(param_00)
-{
+airpound_end(param_00) {
 	cleanup("air_pound");
 	self.interruptable = 1;
 }
 
-//Function Number: 71
-groundvul_begin(param_00)
-{
+groundvul_begin(param_00) {
 	func_F8A3(param_00,"ground_vul");
 	self.var_1198.desirednode = self.var_1198.var_4BF7;
 	scripts\aitypes\dlc4\bt_state_api::asm_wait_state_setup(param_00,"ground_vul","ground_vul_finish",undefined,undefined,undefined,2000000);
@@ -1075,38 +876,29 @@ groundvul_begin(param_00)
 	self.doinggroundvul = 1;
 	self.teleportedin = 0;
 	self.var_FCA5 = 0;
-	if(level.fbd.bossstate == "MAIN")
-	{
+	if(level.fbd.bossstate == "MAIN") {
 		thread scripts\cp\maps\cp_final\cp_final_final_boss::setupweakspot(level.fbd.activecircle);
 	}
 }
 
-//Function Number: 72
-groundvul_tick(param_00)
-{
-	if(scripts\aitypes\dlc4\bt_state_api::btstate_tickstates(param_00))
-	{
+groundvul_tick(param_00) {
+	if(scripts\aitypes\dlc4\bt_state_api::btstate_tickstates(param_00)) {
 		return level.running;
 	}
 
 	return level.success;
 }
 
-//Function Number: 73
-groundvul_end(param_00)
-{
+groundvul_end(param_00) {
 	cleanup("ground_vul");
 	self.doinggroundvul = 0;
 	resetsoulhealth();
 	self.var_FCA5 = 1;
-	if(isdefined(level.fbd.sectioncomplete) && level.fbd.sectioncomplete)
-	{
-		if(level.fbd.bossstate == "MAIN")
-		{
+	if(isdefined(level.fbd.sectioncomplete) && level.fbd.sectioncomplete) {
+		if(level.fbd.bossstate == "MAIN") {
 			setnextaction("eclipse");
 		}
-		else if(level.fbd.bossstate == "FRENZIED")
-		{
+		else if(level.fbd.bossstate == "FRENZIED") {
 			setupfrenziedmode();
 			self.var_FCA5 = 0;
 		}
@@ -1115,9 +907,7 @@ groundvul_end(param_00)
 	}
 }
 
-//Function Number: 74
-setupfrenziedmode()
-{
+setupfrenziedmode() {
 	var_00 = scripts\asm\dlc4\dlc4_asm::gettunedata();
 	self.frenziedhealth = var_00.frenzied_health;
 	self.cantakedamage = 1;
@@ -1135,8 +925,7 @@ setupfrenziedmode()
 	var_01["black_hole"].weight = var_00.frenzied_black_hole_weight;
 	var_01["fly_over"].weight = var_00.frenzied_fly_over_weight;
 	var_01["summon"].weight = var_00.frenzied_summon_weight;
-	foreach(var_03 in self.unlockedactions)
-	{
+	foreach(var_03 in self.unlockedactions) {
 		var_01[var_03].weight = var_00.frenzied_special_weight;
 	}
 
@@ -1144,9 +933,7 @@ setupfrenziedmode()
 	thread scripts\cp\maps\cp_final\cp_final_final_boss::frenzyprogressmonitor();
 }
 
-//Function Number: 75
-frenzyspawnmonitor()
-{
+frenzyspawnmonitor() {
 	self endon("last_stand");
 	self endon("death");
 	level endon("STOP_FRENZY_SPAWN");
@@ -1156,36 +943,29 @@ frenzyspawnmonitor()
 	var_03 = var_00.frenzied_summon_number;
 	var_04 = var_03;
 	var_05 = [];
-	foreach(var_07 in var_00.frenzied_summon_agents)
-	{
+	foreach(var_07 in var_00.frenzied_summon_agents) {
 		var_05[var_07] = 0;
 	}
 
-	for(;;)
-	{
+	for(;;) {
 		var_09 = scripts\mp\_mp_agent::getaliveagentsofteam("axis");
 		var_09 = scripts\common\utility::array_remove(var_09,level.dlc4_boss);
-		if(var_09.size < var_04 || var_09.size < level.players.size)
-		{
+		if(var_09.size < var_04 || var_09.size < level.players.size) {
 			var_0A = [];
 			var_0B = [];
-			for(var_0C = 0;var_0C < int(min(var_02,var_00.frenzied_summon_agents.size));var_0C++)
-			{
+			for(var_0C = 0;var_0C < int(min(var_02,var_00.frenzied_summon_agents.size));var_0C++) {
 				var_07 = var_00.frenzied_summon_agents[var_0C];
-				if(var_05[var_07] == 0)
-				{
+				if(var_05[var_07] == 0) {
 					var_0A[var_0A.size] = var_07;
 					var_0B[var_0B.size] = var_00.frenzied_summon_data[var_07][0];
-					if(var_0B.size > 1)
-					{
+					if(var_0B.size > 1) {
 						var_0B[var_0B.size - 1] = var_0B[var_0B.size - 1] + var_0B[var_0B.size - 2];
 					}
 				}
 			}
 
 			var_07 = scripts\common\utility::choose_from_weighted_array(var_0A,var_0B);
-			if(!computespawnpoints(1,var_09))
-			{
+			if(!computespawnpoints(1,var_09)) {
 				wait(0.05);
 				continue;
 			}
@@ -1193,8 +973,7 @@ frenzyspawnmonitor()
 			scripts\asm\dlc4_boss\dlc4_boss_asm::spawnzombie(var_07,var_00.spawnpoints[0]);
 			var_05[var_07] = var_05[var_07] + var_00.frenzied_summon_data[var_07][1];
 			var_04 = max(var_04 - 1,0);
-			foreach(var_07 in var_00.frenzied_summon_agents)
-			{
+			foreach(var_07 in var_00.frenzied_summon_agents) {
 				var_05[var_07] = max(var_05[var_07] - 1,0);
 			}
 		}
@@ -1202,8 +981,7 @@ frenzyspawnmonitor()
 		var_0F = randomfloatrange(var_00.frenzied_summon_min_interval,var_00.frenzied_summon_max_interval);
 		wait(var_0F);
 		var_01 = var_01 - var_0F * 1000;
-		if(var_01 <= 0)
-		{
+		if(var_01 <= 0) {
 			var_01 = var_00.frenzied_summon_wave_period;
 			var_02 = var_02 + 1;
 			var_03 = var_03 + var_00.frenzied_summon_increase_per_wave;
@@ -1213,17 +991,13 @@ frenzyspawnmonitor()
 	}
 }
 
-//Function Number: 76
-frenzyarmageddonmonitor()
-{
+frenzyarmageddonmonitor() {
 	self endon("last_stand");
 	self endon("death");
 	self endon("STOP_FRENZY_ARMAGEDDON");
 	var_00 = scripts\asm\dlc4\dlc4_asm::gettunedata();
-	for(;;)
-	{
-		if(level.fbd.bossstate == "LAST_STAND")
-		{
+	for(;;) {
+		if(level.fbd.bossstate == "LAST_STAND") {
 			break;
 		}
 
@@ -1238,22 +1012,17 @@ frenzyarmageddonmonitor()
 	}
 }
 
-//Function Number: 77
-frenzydamagecap()
-{
+frenzydamagecap() {
 	self endon("death");
 	var_00 = scripts\asm\dlc4\dlc4_asm::gettunedata();
 	var_01 = var_00.frenzied_damage_cap_time;
-	for(;;)
-	{
+	for(;;) {
 		self.damagecap = self.maxdamagecap;
 		wait(var_01);
 	}
 }
 
-//Function Number: 78
-dropmove_begin(param_00)
-{
+dropmove_begin(param_00) {
 	func_F8A3(param_00,"drop_move");
 	scripts\aitypes\dlc4\bt_state_api::asm_wait_state_setup(param_00,"drop_move","drop_move_arrival",undefined,undefined,undefined,2000000);
 	scripts\aitypes\dlc4\bt_state_api::btstate_transitionstate(param_00,"drop_move");
@@ -1261,53 +1030,40 @@ dropmove_begin(param_00)
 	self.interruptable = 0;
 }
 
-//Function Number: 79
-dropmove_tick(param_00)
-{
+dropmove_tick(param_00) {
 	self clearpath();
-	if(scripts\aitypes\dlc4\bt_state_api::btstate_tickstates(param_00))
-	{
+	if(scripts\aitypes\dlc4\bt_state_api::btstate_tickstates(param_00)) {
 		return level.running;
 	}
 
 	return level.success;
 }
 
-//Function Number: 80
-dropmove_end(param_00)
-{
+dropmove_end(param_00) {
 	cleanup("drop_move");
 	self.interruptable = 1;
 }
 
-//Function Number: 81
-computespawnpoints(param_00,param_01)
-{
+computespawnpoints(param_00,param_01) {
 	var_02 = scripts\asm\dlc4\dlc4_asm::gettunedata();
 	var_03 = getrandomnavpoints(self.arenacenter,var_02.summon_max_radius,32);
 	var_02.spawnpoints = [];
-	for(var_04 = 0;var_04 < 10;var_04++)
-	{
-		foreach(var_06 in var_03)
-		{
-			if(pointnearanyplayer(var_06,var_02.summon_min_dist_from_player))
-			{
+	for(var_04 = 0;var_04 < 10;var_04++) {
+		foreach(var_06 in var_03) {
+			if(pointnearanyplayer(var_06,var_02.summon_min_dist_from_player)) {
 				continue;
 			}
 
-			if(isnearanypointinarray(var_06,var_02.spawnpoints,var_02.summon_min_radius))
-			{
+			if(isnearanypointinarray(var_06,var_02.spawnpoints,var_02.summon_min_radius)) {
 				continue;
 			}
 
-			if(isnearagents(var_06,param_01,var_02.summon_min_radius))
-			{
+			if(isnearagents(var_06,param_01,var_02.summon_min_radius)) {
 				continue;
 			}
 
 			var_02.spawnpoints[var_02.var_108FB.size] = var_06;
-			if(var_02.var_108FB.size >= param_00)
-			{
+			if(var_02.var_108FB.size >= param_00) {
 				return 1;
 			}
 		}
@@ -1316,9 +1072,7 @@ computespawnpoints(param_00,param_01)
 	return var_02.var_108FB.size > 0;
 }
 
-//Function Number: 82
-flyover_begin(param_00)
-{
+flyover_begin(param_00) {
 	var_01 = self getsafecircleorigin("fly_over_arrival",0);
 	self.var_1198.flyoverarrivaldist = length2d(getmovedelta(var_01,0,1)) * scripts\asm\dlc4\dlc4_asm::gettunedata().fly_over_speed;
 	func_F8A3(param_00,"fly_over");
@@ -1328,75 +1082,54 @@ flyover_begin(param_00)
 	self.interruptable = 0;
 }
 
-//Function Number: 83
-stop_flame_trail(param_00)
-{
+stop_flame_trail(param_00) {
 	wait(1);
 	self setscriptablepartstate("flame_trail","on");
 	wait(param_00);
 	self setscriptablepartstate("flame_trail","off");
 }
 
-//Function Number: 84
-flyover_tick(param_00)
-{
+flyover_tick(param_00) {
 	return scripts\common\utility::ter_op(scripts\aitypes\dlc4\bt_state_api::btstate_tickstates(param_00),level.running,level.success);
 }
 
-//Function Number: 85
-flyover_end(param_00)
-{
+flyover_end(param_00) {
 	self.var_1198.var_4BF7 = self.var_1198.desirednode;
 	cleanup("fly_over");
 	self.interruptable = 1;
 }
 
-//Function Number: 86
-teleport_begin(param_00)
-{
+teleport_begin(param_00) {
 	func_F8A3(param_00,"teleport");
 	scripts\aitypes\dlc4\bt_state_api::asm_wait_state_setup(param_00,"teleport","teleport_out",undefined,undefined,undefined,10000000);
 	scripts\aitypes\dlc4\bt_state_api::btstate_transitionstate(param_00,"teleport");
 }
 
-//Function Number: 87
-teleport_tick(param_00)
-{
+teleport_tick(param_00) {
 	return scripts\common\utility::ter_op(scripts\aitypes\dlc4\bt_state_api::btstate_tickstates(param_00),level.running,level.success);
 }
 
-//Function Number: 88
-teleport_end(param_00)
-{
+teleport_end(param_00) {
 	cleanup("teleport");
 }
 
-//Function Number: 89
-death_begin(param_00)
-{
+death_begin(param_00) {
 	func_F8A3(param_00,"death");
 	scripts\aitypes\dlc4\bt_state_api::asm_wait_state_setup(param_00,"death","death_death",undefined,undefined,undefined,10000000);
 	scripts\aitypes\dlc4\bt_state_api::btstate_transitionstate(param_00,"death");
 }
 
-//Function Number: 90
-death_tick(param_00)
-{
+death_tick(param_00) {
 	return scripts\common\utility::ter_op(scripts\aitypes\dlc4\bt_state_api::btstate_tickstates(param_00),level.running,level.success);
 }
 
-//Function Number: 91
-death_end(param_00)
-{
+death_end(param_00) {
 	cleanup("death");
 }
 
-//Function Number: 92
-eclipse_begin(param_00)
-{
+eclipse_begin(param_00) {
 	level.specialroundcounter = 3;
-	if(level.players.size >= 3)
-	{
+	if(level.players.size >= 3) {
 		level.specialroundcounter = 5;
 	}
 
@@ -1406,20 +1139,15 @@ eclipse_begin(param_00)
 	self.eclipseanimfinished = 0;
 }
 
-//Function Number: 93
-eclipse_tick(param_00)
-{
-	if(!scripts\aitypes\dlc4\bt_state_api::btstate_tickstates(param_00))
-	{
+eclipse_tick(param_00) {
+	if(!scripts\aitypes\dlc4\bt_state_api::btstate_tickstates(param_00)) {
 		self.eclipseanimfinished = 1;
 	}
 
 	return scripts\common\utility::ter_op(self.eclipseanimfinished && !self.eclipseactive,level.success,level.running);
 }
 
-//Function Number: 94
-eclipse_end(param_00)
-{
+eclipse_end(param_00) {
 	cleanup("eclipse");
 	self.eclipseanimfinished = undefined;
 	scripts\cp\maps\cp_final\cp_final_final_boss::setupfornextwave();
@@ -1427,40 +1155,29 @@ eclipse_end(param_00)
 	self.automaticspawn = 1;
 }
 
-//Function Number: 95
-clearweights()
-{
-	if(!isdefined(self.bossactions))
-	{
+clearweights() {
+	if(!isdefined(self.bossactions)) {
 		return;
 	}
 
-	foreach(var_01 in self.bossactions)
-	{
+	foreach(var_01 in self.bossactions) {
 		var_01.weight = 0;
 	}
 }
 
-//Function Number: 96
-setweight(param_00,param_01)
-{
-	if(!isdefined(self.bossactions))
-	{
+setweight(param_00,param_01) {
+	if(!isdefined(self.bossactions)) {
 		return;
 	}
 
-	foreach(var_03 in self.bossactions)
-	{
-		if(var_03.name == param_00)
-		{
+	foreach(var_03 in self.bossactions) {
+		if(var_03.name == param_00) {
 			var_03.weight = param_01;
 		}
 	}
 }
 
-//Function Number: 97
-updateweights()
-{
+updateweights() {
 	clearweights();
 	var_00 = scripts\asm\dlc4\dlc4_asm::gettunedata();
 	var_01 = self.unlockedactions.size;
@@ -1478,21 +1195,16 @@ updateweights()
 	var_03 = var_03 + level.fbd.numplayerschargingcircle * var_00.black_hole_charge_multiplier;
 	var_02["black_hole"].weight = var_03;
 	var_02["fly_over"].weight = var_00.fly_over_base_weight + var_01 * var_00.fly_over_stage_multiplier;
-	foreach(var_05 in self.unlockedactions)
-	{
+	foreach(var_05 in self.unlockedactions) {
 		var_02[var_05].weight = var_00.special_base_weight + var_01 * var_00.special_stage_multiplier;
 	}
 }
 
-//Function Number: 98
-setnextaction(param_00)
-{
-	foreach(var_02 in self.bossactions)
-	{
+setnextaction(param_00) {
+	foreach(var_02 in self.bossactions) {
 		self.weightcopies[var_02.name] = var_02.weight;
 		var_02.weight = 0;
-		if(var_02.name == param_00)
-		{
+		if(var_02.name == param_00) {
 			var_02.weight = 1;
 		}
 	}
@@ -1500,61 +1212,44 @@ setnextaction(param_00)
 	self.forcingaction = 1;
 }
 
-//Function Number: 99
-restoreweights()
-{
-	foreach(var_01 in self.bossactions)
-	{
+restoreweights() {
+	foreach(var_01 in self.bossactions) {
 		var_01.weight = self.weightcopies[var_01.name];
 	}
 
 	self.forcingaction = 0;
 }
 
-//Function Number: 100
-func_593B()
-{
-}
+func_593B() {}
 
-//Function Number: 101
-func_F8A3(param_00,param_01)
-{
+func_F8A3(param_00,param_01) {
 	self ghostskulls_total_waves(100000000);
 	self clearpath();
 	scripts\asm\dlc4\dlc4_asm::setasmaction(param_01);
 }
 
-//Function Number: 102
-cleanup(param_00)
-{
+cleanup(param_00) {
 	self clearpath();
 	scripts\asm\dlc4\dlc4_asm::clearasmaction();
 	self notify(param_00 + "_done");
 }
 
-//Function Number: 103
-pointnearanyplayer(param_00,param_01)
-{
+pointnearanyplayer(param_00,param_01) {
 	var_02 = param_01 * param_01;
-	foreach(var_04 in level.players)
-	{
-		if(!isalive(var_04))
-		{
+	foreach(var_04 in level.players) {
+		if(!isalive(var_04)) {
 			continue;
 		}
 
-		if(var_04.ignoreme || isdefined(var_04.triggerportableradarping) && var_04.var_222.ignoreme)
-		{
+		if(var_04.ignoreme || isdefined(var_04.triggerportableradarping) && var_04.var_222.ignoreme) {
 			continue;
 		}
 
-		if(scripts\mp\agents\zombie\zombie_util::shouldignoreent(var_04))
-		{
+		if(scripts\mp\agents\zombie\zombie_util::shouldignoreent(var_04)) {
 			continue;
 		}
 
-		if(distancesquared(param_00,var_04.origin) < var_02)
-		{
+		if(distancesquared(param_00,var_04.origin) < var_02) {
 			return 1;
 		}
 	}
@@ -1562,14 +1257,10 @@ pointnearanyplayer(param_00,param_01)
 	return 0;
 }
 
-//Function Number: 104
-isnearanypointinarray(param_00,param_01,param_02)
-{
-	foreach(var_04 in param_01)
-	{
+isnearanypointinarray(param_00,param_01,param_02) {
+	foreach(var_04 in param_01) {
 		var_05 = distancesquared(var_04,param_00);
-		if(var_05 < param_02)
-		{
+		if(var_05 < param_02) {
 			return 1;
 		}
 	}
@@ -1577,14 +1268,10 @@ isnearanypointinarray(param_00,param_01,param_02)
 	return 0;
 }
 
-//Function Number: 105
-isnearagents(param_00,param_01,param_02)
-{
-	foreach(var_04 in param_01)
-	{
+isnearagents(param_00,param_01,param_02) {
+	foreach(var_04 in param_01) {
 		var_05 = distancesquared(var_04.origin,param_00);
-		if(var_05 < param_02)
-		{
+		if(var_05 < param_02) {
 			return 1;
 		}
 	}
@@ -1592,18 +1279,13 @@ isnearagents(param_00,param_01,param_02)
 	return 0;
 }
 
-//Function Number: 106
-resettimer(param_00,param_01)
-{
-	if(!isdefined(self.bossactions))
-	{
+resettimer(param_00,param_01) {
+	if(!isdefined(self.bossactions)) {
 		return 0;
 	}
 
-	foreach(var_03 in self.bossactions)
-	{
-		if(var_03.name == param_00)
-		{
+	foreach(var_03 in self.bossactions) {
+		if(var_03.name == param_00) {
 			var_03.var_11910 = param_01;
 			return 1;
 		}
@@ -1612,33 +1294,24 @@ resettimer(param_00,param_01)
 	return 0;
 }
 
-//Function Number: 107
-simplesetup_begin(param_00)
-{
+simplesetup_begin(param_00) {
 	func_F8A3(param_00,self.simplesetupstartstate);
 	scripts\aitypes\dlc4\bt_state_api::asm_wait_state_setup(param_00,self.simplesetupstartstate,self.simplesetupendstate,undefined,undefined,undefined,100000);
 	scripts\aitypes\dlc4\bt_state_api::btstate_transitionstate(param_00,self.simplesetupstartstate);
 }
 
-//Function Number: 108
-simplesetup_tick(param_00)
-{
-	if(scripts\asm\dlc4_boss\dlc4_boss_asm::shouldterminateaction())
-	{
+simplesetup_tick(param_00) {
+	if(scripts\asm\dlc4_boss\dlc4_boss_asm::shouldterminateaction()) {
 		return level.success;
 	}
 
 	return scripts\common\utility::ter_op(scripts\aitypes\dlc4\bt_state_api::btstate_tickstates(param_00),level.running,level.success);
 }
 
-//Function Number: 109
-simplesetup_end(param_00)
-{
+simplesetup_end(param_00) {
 	cleanup(self.simplesetupstartstate);
 }
 
-//Function Number: 110
-resetsoulhealth(param_00)
-{
+resetsoulhealth(param_00) {
 	self.soulhealth = ceil(scripts\asm\dlc4\dlc4_asm::gettunedata().max_soul_health * level.players.size * pow(0.9,level.players.size - 1));
 }

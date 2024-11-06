@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: 4064.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 1
- * Decompile Time: 1 ms
- * Timestamp: 10/27/2023 12:31:58 AM
-*******************************************************************/
+/****************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\4064.gsc
+****************************/
 
-//Function Number: 1
-main()
-{
+main() {
 	level._effect["vfx_quarry_sun"] = loadfx("vfx/iw7/levels/mp_quarry/vfx_quarry_sun.vfx");
 	level._effect["vfx_quarry_sunflare"] = loadfx("vfx/iw7/levels/mp_quarry/vfx_quarry_sunflare.vfx");
 	level._effect["vfx_quarry_hole_dust_drift"] = loadfx("vfx/iw7/levels/mp_desert/vfx_quarry_hole_dust_drift.vfx");

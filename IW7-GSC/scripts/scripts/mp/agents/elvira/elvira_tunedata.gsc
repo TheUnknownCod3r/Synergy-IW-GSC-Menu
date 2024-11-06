@@ -1,18 +1,11 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\mp\agents\elvira\elvira_tunedata.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 3
- * Decompile Time: 195 ms
- * Timestamp: 10/27/2023 12:11:15 AM
-*******************************************************************/
+/****************************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\mp\agents\elvira\elvira_tunedata.gsc
+****************************************************************/
 
-//Function Number: 1
-setuptunedata()
-{
-	if(!isdefined(level.agenttunedata))
-	{
+setuptunedata() {
+	if(!isdefined(level.agenttunedata)) {
 		level.agenttunedata = [];
 	}
 
@@ -20,9 +13,7 @@ setuptunedata()
 	setupmytunedata(level.agenttunedata["elvira"]);
 }
 
-//Function Number: 2
-setupmytunedata(param_00)
-{
+setupmytunedata(param_00) {
 	param_00.revive_right_offset = 32;
 	param_00.revive_forward_offset = 60;
 	param_00.max_revive_snapp_2d_dist_sq = 64;
@@ -54,8 +45,6 @@ setupmytunedata(param_00)
 	param_00.max_teleport_lookahead_dist = 600;
 }
 
-//Function Number: 3
-gettunedata()
-{
+gettunedata() {
 	return level.agenttunedata["elvira"];
 }

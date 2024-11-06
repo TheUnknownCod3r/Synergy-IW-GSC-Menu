@@ -1,27 +1,19 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: 3004.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 19
- * Decompile Time: 34 ms
- * Timestamp: 10/27/2023 12:26:01 AM
-*******************************************************************/
+/****************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\3004.gsc
+****************************/
 
-//Function Number: 1
-main(param_00,param_01,param_02)
-{
+main(param_00,param_01,param_02) {
 	scripts/sp/vehicle_build::func_31C5("dropship",param_00,param_01,param_02);
 	scripts/sp/vehicle_build::func_31A6(::init_location);
 	scripts/sp/vehicle_build::func_3186(param_00,param_00);
 	lib_0BBE::func_774E(param_02);
 	var_03 = "vfx/code/tread/heli_dust_default.vfx";
-	if(!isdefined(level.plant_anims) || level.plant_anims == "earth")
-	{
+	if(!isdefined(level.plant_anims) || level.plant_anims == "earth") {
 		var_03 = "vfx/code/tread/heli_dust_default.vfx";
 	}
-	else if(level.plant_anims == "titan")
-	{
+	else if(level.plant_anims == "titan") {
 		var_03 = "vfx/iw7/core/tread/tread_airship_small_titan.vfx";
 	}
 
@@ -39,8 +31,7 @@ main(param_00,param_01,param_02)
 	scripts/sp/vehicle_build::func_31A2(::func_F77B);
 	scripts/sp/vehicle_build::build_ace(::func_F8A1,::func_F5FC);
 	scripts/sp/vehicle_build::func_31CC(::func_12BBD);
-	if(issubstr(param_02,"plane"))
-	{
+	if(issubstr(param_02,"plane")) {
 		scripts/sp/vehicle_build::func_319F();
 	}
 	else
@@ -48,10 +39,8 @@ main(param_00,param_01,param_02)
 		scripts/sp/vehicle_build::func_31A0();
 	}
 
-	if(!issubstr(param_02,"cheap"))
-	{
-		if(issubstr(param_02,"player"))
-		{
+	if(!issubstr(param_02,"cheap")) {
+		if(issubstr(param_02,"player")) {
 			precachemodel("veh_mil_air_un_dropship_hero_interior");
 			precachemodel("veh_mil_air_un_dropship_hero_interior_rig");
 			precachemodel("veh_mil_air_un_dropship_hero_interior_light");
@@ -71,11 +60,8 @@ main(param_00,param_01,param_02)
 	}
 }
 
-//Function Number: 2
-init_location()
-{
-	if(issubstr(self.classname,"cheap"))
-	{
+init_location() {
+	if(issubstr(self.classname,"cheap")) {
 		return;
 	}
 
@@ -85,8 +71,7 @@ init_location()
 	self.var_5F80 = 1;
 	self.var_7724 = %vh_dropship_landing_gear_up;
 	self.var_7723 = %vh_dropship_landing_gear_down;
-	if(isdefined(level.plant_anims) && level.plant_anims == "titan")
-	{
+	if(isdefined(level.plant_anims) && level.plant_anims == "titan") {
 		self.var_126F4 = 1;
 	}
 
@@ -98,22 +83,19 @@ init_location()
 	lib_0BBE::func_FA5F("back",var_02,10);
 	thread lib_0BBE::func_774D();
 	var_03 = self.script_team;
-	if(var_03 == "axis")
-	{
+	if(var_03 == "axis") {
 		thread lib_0BBE::func_774C();
 	}
 
 	self.var_101B2 = 0;
 	thread lib_0BBE::func_5EC8(%vh_dropship_thrusters_up,%vh_dropship_thrusters_down,::func_12B58);
 	self.var_4D94 = spawnstruct();
-	if(issubstr(self.classname,"player"))
-	{
+	if(issubstr(self.classname,"player")) {
 		self attach("veh_mil_air_un_dropship_hero_interior_rig","tag_connect");
 		self.var_4D94.var_EF3C = [];
 		self.var_4D94.var_EF3C["cabin_lights"] = [];
 		var_04 = ["tag_light_le_01","tag_light_le_02","tag_light_le_03","tag_light_le_04","tag_light_le_05","tag_light_ri_01","tag_light_ri_02","tag_light_ri_03","tag_light_ri_04","tag_light_ri_05"];
-		foreach(var_06 in var_04)
-		{
+		foreach(var_06 in var_04) {
 			var_07 = scripts/sp/anim::func_1EE5("veh_mil_air_un_dropship_hero_interior_light",var_06);
 			var_07.var_336 = "dropship_cabin_lights_" + self.var_6A0B;
 			self.var_4D94.var_EF3C["cabin_lights"][self.var_4D94.var_EF3C["cabin_lights"].size] = var_07;
@@ -132,8 +114,7 @@ init_location()
 		self.var_4D94.var_9A62[self.var_4D94.var_9A62.size] = scripts/sp/anim::func_1EE5("veh_mil_air_un_dropship_hero_interior_seat_bays_ri","TAG_SEAT_BAYS_RI");
 		self.var_4D94.parts = [];
 		self.var_4D94.parts["straps"] = [];
-		foreach(var_06 in ["TAG_CARABINER_HANDLE_LE_1","TAG_CARABINER_HANDLE_LE_2","TAG_CARABINER_HANDLE_RI_1","TAG_CARABINER_HANDLE_RI_2"])
-		{
+		foreach(var_06 in ["TAG_CARABINER_HANDLE_LE_1","TAG_CARABINER_HANDLE_LE_2","TAG_CARABINER_HANDLE_RI_1","TAG_CARABINER_HANDLE_RI_2"]) {
 			var_0A = self gettagorigin(var_06);
 			var_0B = spawn("script_model",var_0A);
 			var_0B setmodel("veh_mil_air_un_dropship_hero_interior_carabiner_handle");
@@ -169,11 +150,8 @@ init_location()
 	self.var_4D94.doors["back"] = self.var_4D94.var_5A01;
 }
 
-//Function Number: 3
-func_12B58(param_00)
-{
-	if(self.var_101B2 && param_00 > 50)
-	{
+func_12B58(param_00) {
+	if(self.var_101B2 && param_00 > 50) {
 		scripts\sp\_utility::func_65DD("side_thrusters_out");
 		self give_attacker_kill_rewards(%vh_dropship_front_thrusters_in);
 		scripts\engine\utility::delaycall(0.05,::_meth_82B1,%vh_dropship_front_thrusters_in,0.25);
@@ -182,13 +160,11 @@ func_12B58(param_00)
 		return;
 	}
 
-	if(param_00 > 50)
-	{
+	if(param_00 > 50) {
 		return;
 	}
 
-	if(self.var_101B2)
-	{
+	if(self.var_101B2) {
 		return;
 	}
 
@@ -199,37 +175,30 @@ func_12B58(param_00)
 	self.var_101B2 = 1;
 }
 
-//Function Number: 4
-func_5ECA()
-{
+func_5ECA() {
 	self endon("death");
 	self endon("entitydeleted");
 	thread lib_0BBE::func_5DAE();
 	var_00 = 0.3;
 	var_01 = 0.3;
 	var_02 = 500;
-	for(;;)
-	{
+	for(;;) {
 		var_03 = (0,0,-100000);
 		var_04 = scripts\sp\_utility::func_864C(self.origin);
 		var_05 = distance(self.origin,var_04);
-		if(var_05 < var_02)
-		{
-			if(!isdefined(self.var_5ECA))
-			{
+		if(var_05 < var_02) {
+			if(!isdefined(self.var_5ECA)) {
 				self.var_5ECA = spawn("script_origin",var_04);
 				wait(0.05);
 				self.var_5ECA scripts\sp\_utility::func_10461("dropship_lz_debris_lp",var_00,1,1);
 				wait(1);
 			}
 
-			if(isdefined(self.var_5ECA))
-			{
+			if(isdefined(self.var_5ECA)) {
 				var_04 = scripts\sp\_utility::func_864C(self.origin);
 				var_05 = distance(self.origin,var_04);
 				var_01 = var_05 - var_02 / 0 - var_02;
-				if(var_01 < var_00)
-				{
+				if(var_01 < var_00) {
 					var_01 = var_00;
 				}
 
@@ -238,10 +207,8 @@ func_5ECA()
 				wait(0.2);
 			}
 		}
-		else if(var_05 > var_02)
-		{
-			if(isdefined(self.var_5ECA))
-			{
+		else if(var_05 > var_02) {
+			if(isdefined(self.var_5ECA)) {
 				self.var_5ECA ghostattack(0,2);
 				wait(2);
 				self.var_5ECA delete();
@@ -252,9 +219,7 @@ func_5ECA()
 	}
 }
 
-//Function Number: 5
-func_5DC2()
-{
+func_5DC2() {
 	scripts\sp\_utility::func_65DD("dynamicThrusters");
 	self aiclearanim(%vh_dropship_thrusters_up,0.05);
 	self aiclearanim(%vh_dropship_thrusters_down,0.05);
@@ -262,28 +227,21 @@ func_5DC2()
 	self aiclearanim(%vh_dropship_front_thrusters_in,0.05);
 }
 
-//Function Number: 6
-func_E752(param_00)
-{
-	if(param_00 < 0)
-	{
+func_E752(param_00) {
+	if(param_00 < 0) {
 		return 0;
 	}
 
-	if(param_00 > 1)
-	{
+	if(param_00 > 1) {
 		return 1;
 	}
 
 	return param_00;
 }
 
-//Function Number: 7
-func_F8A1()
-{
+func_F8A1() {
 	var_00 = [];
-	for(var_01 = 0;var_01 < 12;var_01++)
-	{
+	for(var_01 = 0;var_01 < 12;var_01++) {
 		var_00[var_01] = spawnstruct();
 		var_00[var_01].var_10220 = "tag_detach";
 		var_00[var_01].botgetscriptgoalyaw = "stand";
@@ -335,9 +293,7 @@ func_F8A1()
 	return var_00;
 }
 
-//Function Number: 8
-func_F5FC(param_00)
-{
+func_F5FC(param_00) {
 	param_00[2].var_131E6 = %vh_dropship_front_door_left_open;
 	param_00[2].var_131E7 = 0;
 	param_00[6].var_131E6 = %vh_dropship_front_door_right_open;
@@ -345,9 +301,7 @@ func_F5FC(param_00)
 	return param_00;
 }
 
-//Function Number: 9
-func_FB0C(param_00)
-{
+func_FB0C(param_00) {
 	param_00[10].var_9FEF = 1;
 	param_00[10].var_10220 = "tag_origin";
 	param_00[10].var_92CC = %jsp_dropship_jumpout_apc_idle;
@@ -359,9 +313,7 @@ func_FB0C(param_00)
 	return param_00;
 }
 
-//Function Number: 10
-func_12BBD()
-{
+func_12BBD() {
 	var_00 = [];
 	var_01 = "passengers";
 	var_00[var_01] = [];
@@ -413,12 +365,9 @@ func_12BBD()
 	return var_00;
 }
 
-//Function Number: 11
-func_F77B()
-{
+func_F77B() {
 	var_00 = [];
-	for(var_01 = 0;var_01 < 1;var_01++)
-	{
+	for(var_01 = 0;var_01 < 1;var_01++) {
 		var_00[var_01] = spawnstruct();
 	}
 
@@ -427,84 +376,66 @@ func_F77B()
 	return var_00;
 }
 
-//Function Number: 12
-func_C5F1(param_00,param_01,param_02,param_03)
-{
+func_C5F1(param_00,param_01,param_02,param_03) {
 	self endon("death");
-	if(isdefined(param_00))
-	{
+	if(isdefined(param_00)) {
 		param_00 = scripts\engine\utility::ter_op(!isarray(param_00),[param_00],param_00);
 	}
 
-	if(!isdefined(param_01))
-	{
+	if(!isdefined(param_01)) {
 		param_01 = 0;
 	}
 
-	if(!isdefined(param_02))
-	{
+	if(!isdefined(param_02)) {
 		param_02 = 0;
 	}
 
-	if(!isdefined(param_03))
-	{
+	if(!isdefined(param_03)) {
 		param_03 = 0;
 	}
 
-	if(!isdefined(param_00) || !isdefined(param_00[0]) || param_00[0] == "all")
-	{
+	if(!isdefined(param_00) || !isdefined(param_00[0]) || param_00[0] == "all") {
 		param_00 = ["left","right","back"];
 	}
 
 	var_04 = [];
-	foreach(var_06 in param_00)
-	{
+	foreach(var_06 in param_00) {
 		var_04 = scripts\engine\utility::array_add(var_04,self.var_4D94.doors[var_06]);
 		childthread func_1236(var_06,param_01,param_02,param_03);
 	}
 
-	if(!param_02)
-	{
+	if(!param_02) {
 		scripts\sp\_utility::func_22D8(var_04,"open");
 	}
 }
 
-//Function Number: 13
-func_1236(param_00,param_01,param_02,param_03)
-{
-	if(!isdefined(self.var_4D94.var_5A13.var_1EF5))
-	{
+func_1236(param_00,param_01,param_02,param_03) {
+	if(!isdefined(self.var_4D94.var_5A13.var_1EF5)) {
 		self.var_4D94.var_5A13.var_1EF5 = %vh_dropship_front_door_left_open;
 	}
 
-	if(!isdefined(self.var_4D94.var_5A27.var_1EF5))
-	{
+	if(!isdefined(self.var_4D94.var_5A27.var_1EF5)) {
 		self.var_4D94.var_5A27.var_1EF5 = %vh_dropship_front_door_right_open;
 	}
 
-	if(!isdefined(self.var_4D94.var_5A01.var_1EF5))
-	{
+	if(!isdefined(self.var_4D94.var_5A01.var_1EF5)) {
 		self.var_4D94.var_5A01.var_1EF5 = %vh_dropship_rear_doors_open;
 	}
 
 	scripts\sp\_utility::func_65E8(param_00 + "_door_animating");
-	switch(param_00)
-	{
+	switch(param_00) {
 		case "left":
-			if(!isdefined(self.var_4D94.var_5A13))
-			{
+			if(!isdefined(self.var_4D94.var_5A13)) {
 				return;
 			}
 	
-			if(scripts\sp\_utility::func_65DB("left_door_open") || scripts\sp\_utility::func_65DB("left_door_animating"))
-			{
+			if(scripts\sp\_utility::func_65DB("left_door_open") || scripts\sp\_utility::func_65DB("left_door_animating")) {
 				return;
 			}
 	
 			scripts\sp\_utility::func_65E1(param_00 + "_door_animating");
 			func_1242(self.var_4D94.var_5A13,self.var_4D94.var_5A13.var_1EF5,0,param_02,param_01);
-			if(param_03)
-			{
+			if(param_03) {
 				self.var_4D94.var_5A13.var_4348 playloopsound("dropship_door_wind_lp");
 			}
 	
@@ -512,20 +443,17 @@ func_1236(param_00,param_01,param_02,param_03)
 			break;
 
 		case "right":
-			if(!isdefined(self.var_4D94.var_5A27))
-			{
+			if(!isdefined(self.var_4D94.var_5A27)) {
 				return;
 			}
 	
-			if(scripts\sp\_utility::func_65DB("right_door_open") || scripts\sp\_utility::func_65DB("right_door_animating"))
-			{
+			if(scripts\sp\_utility::func_65DB("right_door_open") || scripts\sp\_utility::func_65DB("right_door_animating")) {
 				return;
 			}
 	
 			scripts\sp\_utility::func_65E1(param_00 + "_door_animating");
 			func_1242(self.var_4D94.var_5A27,self.var_4D94.var_5A27.var_1EF5,0,param_02,param_01);
-			if(param_03)
-			{
+			if(param_03) {
 				self.var_4D94.var_5A27.var_4348 playloopsound("dropship_door_wind_lp");
 			}
 	
@@ -533,20 +461,17 @@ func_1236(param_00,param_01,param_02,param_03)
 			break;
 
 		case "back":
-			if(!isdefined(self.var_4D94.var_5A01))
-			{
+			if(!isdefined(self.var_4D94.var_5A01)) {
 				return;
 			}
 	
-			if(scripts\sp\_utility::func_65DB("back_door_open") || scripts\sp\_utility::func_65DB("back_door_animating"))
-			{
+			if(scripts\sp\_utility::func_65DB("back_door_open") || scripts\sp\_utility::func_65DB("back_door_animating")) {
 				return;
 			}
 	
 			scripts\sp\_utility::func_65E1(param_00 + "_door_animating");
 			func_1242(self.var_4D94.var_5A01,self.var_4D94.var_5A01.var_1EF5,0,param_02);
-			if(param_03)
-			{
+			if(param_03) {
 				self.var_4D94.var_5A01.var_4348 playloopsound("dropship_door_wind_lp");
 			}
 	
@@ -558,32 +483,25 @@ func_1236(param_00,param_01,param_02,param_03)
 	scripts\sp\_utility::func_65E1(param_00 + "_door_open");
 }
 
-//Function Number: 14
-func_1242(param_00,param_01,param_02,param_03,param_04)
-{
-	if(!isdefined(param_04))
-	{
+func_1242(param_00,param_01,param_02,param_03,param_04) {
+	if(!isdefined(param_04)) {
 		param_04 = 0;
 	}
 
-	if(isdefined(param_00.var_4348))
-	{
+	if(isdefined(param_00.var_4348)) {
 		func_12E7(param_00.var_4348);
-		if(param_02)
-		{
+		if(param_02) {
 			param_00.var_4348 solid();
 		}
 	}
 
-	if(isdefined(param_00.var_D89D))
-	{
+	if(isdefined(param_00.var_D89D)) {
 		self aiclearanim(param_00.var_D89D,0);
 	}
 
 	self give_capture_credit(param_01,1);
 	var_05 = getanimlength(param_01);
-	if(isdefined(param_03) && param_03)
-	{
+	if(isdefined(param_03) && param_03) {
 		self _meth_82B0(param_01,1);
 	}
 	else
@@ -592,28 +510,22 @@ func_1242(param_00,param_01,param_02,param_03,param_04)
 	}
 
 	param_00.var_D89D = param_01;
-	if(isdefined(param_00.var_4348) && !param_02 && !param_04)
-	{
+	if(isdefined(param_00.var_4348) && !param_02 && !param_04) {
 		param_00.var_4348 notsolid();
 	}
 }
 
-//Function Number: 15
-func_12E7(param_00)
-{
+func_12E7(param_00) {
 	var_01 = 0;
 	var_02 = 0;
-	for(;;)
-	{
-		if(level.player istouching(param_00))
-		{
+	for(;;) {
+		if(level.player istouching(param_00)) {
 			var_01 = 0;
 			var_02++;
 		}
 		else
 		{
-			if(var_01 > 2)
-			{
+			if(var_01 > 2) {
 				break;
 			}
 
@@ -626,18 +538,13 @@ func_12E7(param_00)
 	return var_02;
 }
 
-//Function Number: 16
-func_F365(param_00,param_01)
-{
-	if(isdefined(param_00))
-	{
+func_F365(param_00,param_01) {
+	if(isdefined(param_00)) {
 		param_00 = scripts\engine\utility::ter_op(!isarray(param_00),[param_00],param_00);
 	}
 
-	foreach(var_03 in param_00)
-	{
-		switch(var_03)
-		{
+	foreach(var_03 in param_00) {
+		switch(var_03) {
 			case "left":
 				self.var_4D94.var_5A13.var_1EF5 = param_01;
 				break;
@@ -656,18 +563,13 @@ func_F365(param_00,param_01)
 	}
 }
 
-//Function Number: 17
-func_F362(param_00,param_01)
-{
-	if(isdefined(param_00))
-	{
+func_F362(param_00,param_01) {
+	if(isdefined(param_00)) {
 		param_00 = scripts\engine\utility::ter_op(!isarray(param_00),[param_00],param_00);
 	}
 
-	foreach(var_03 in param_00)
-	{
-		switch(var_03)
-		{
+	foreach(var_03 in param_00) {
+		switch(var_03) {
 			case "left":
 				self.var_4D94.var_5A13.var_1EA9 = param_01;
 				break;
@@ -686,75 +588,59 @@ func_F362(param_00,param_01)
 	}
 }
 
-//Function Number: 18
-func_4265(param_00,param_01)
-{
+func_4265(param_00,param_01) {
 	self endon("death");
-	if(isdefined(param_00))
-	{
+	if(isdefined(param_00)) {
 		param_00 = scripts\engine\utility::ter_op(!isarray(param_00),[param_00],param_00);
 	}
 
-	if(!isdefined(param_01))
-	{
+	if(!isdefined(param_01)) {
 		param_01 = 0;
 	}
 
-	if(!isdefined(param_00) || !isdefined(param_00[0]) || param_00[0] == "all")
-	{
+	if(!isdefined(param_00) || !isdefined(param_00[0]) || param_00[0] == "all") {
 		param_00 = ["left","right","back"];
 	}
 
 	var_02 = [];
-	foreach(var_04 in param_00)
-	{
+	foreach(var_04 in param_00) {
 		var_02 = scripts\engine\utility::array_add(var_02,self.var_4D94.doors[var_04]);
 		childthread func_1221(var_04,param_01);
 	}
 
-	if(!param_01)
-	{
+	if(!param_01) {
 		scripts\sp\_utility::func_22D8(var_02,"close");
 	}
 }
 
-//Function Number: 19
-func_1221(param_00,param_01)
-{
+func_1221(param_00,param_01) {
 	scripts\sp\_utility::func_65E8(param_00 + "_door_animating");
 	scripts\sp\_utility::func_65E1(param_00 + "_door_animating");
-	if(!isdefined(self.var_4D94.var_5A13.var_1EA9))
-	{
+	if(!isdefined(self.var_4D94.var_5A13.var_1EA9)) {
 		self.var_4D94.var_5A13.var_1EA9 = %vh_dropship_front_door_left_close;
 	}
 
-	if(!isdefined(self.var_4D94.var_5A27.var_1EA9))
-	{
+	if(!isdefined(self.var_4D94.var_5A27.var_1EA9)) {
 		self.var_4D94.var_5A27.var_1EA9 = %vh_dropship_front_door_right_close;
 	}
 
-	if(!isdefined(self.var_4D94.var_5A01.var_1EA9))
-	{
+	if(!isdefined(self.var_4D94.var_5A01.var_1EA9)) {
 		self.var_4D94.var_5A01.var_1EA9 = %vh_dropship_rear_doors_close;
 	}
 
-	switch(param_00)
-	{
+	switch(param_00) {
 		case "left":
-			if(!isdefined(self.var_4D94.var_5A13))
-			{
+			if(!isdefined(self.var_4D94.var_5A13)) {
 				break;
 			}
 	
-			if(!scripts\sp\_utility::func_65DB("left_door_open"))
-			{
+			if(!scripts\sp\_utility::func_65DB("left_door_open")) {
 				break;
 			}
 	
 			scripts\sp\_utility::func_65DD("left_door_open");
 			func_1242(self.var_4D94.var_5A13,self.var_4D94.var_5A13.var_1EA9,1,param_01);
-			if(isdefined(self.var_4D94.var_5A13.var_4348))
-			{
+			if(isdefined(self.var_4D94.var_5A13.var_4348)) {
 				self.var_4D94.var_5A13.var_4348 stoploopsound();
 			}
 	
@@ -762,20 +648,17 @@ func_1221(param_00,param_01)
 			break;
 
 		case "right":
-			if(!isdefined(self.var_4D94.var_5A27))
-			{
+			if(!isdefined(self.var_4D94.var_5A27)) {
 				break;
 			}
 	
-			if(!scripts\sp\_utility::func_65DB("right_door_open"))
-			{
+			if(!scripts\sp\_utility::func_65DB("right_door_open")) {
 				break;
 			}
 	
 			scripts\sp\_utility::func_65DD("right_door_open");
 			func_1242(self.var_4D94.var_5A27,self.var_4D94.var_5A27.var_1EA9,1,param_01);
-			if(isdefined(self.var_4D94.var_5A27.var_4348))
-			{
+			if(isdefined(self.var_4D94.var_5A27.var_4348)) {
 				self.var_4D94.var_5A27.var_4348 stoploopsound();
 			}
 	
@@ -783,20 +666,17 @@ func_1221(param_00,param_01)
 			break;
 
 		case "back":
-			if(!isdefined(self.var_4D94.var_5A01))
-			{
+			if(!isdefined(self.var_4D94.var_5A01)) {
 				break;
 			}
 	
-			if(!scripts\sp\_utility::func_65DB("back_door_open"))
-			{
+			if(!scripts\sp\_utility::func_65DB("back_door_open")) {
 				break;
 			}
 	
 			scripts\sp\_utility::func_65DD("back_door_open");
 			func_1242(self.var_4D94.var_5A01,self.var_4D94.var_5A01.var_1EA9,1,param_01);
-			if(isdefined(self.var_4D94.var_5A01.var_4348))
-			{
+			if(isdefined(self.var_4D94.var_5A01.var_4348)) {
 				self.var_4D94.var_5A01.var_4348 stoploopsound();
 			}
 	

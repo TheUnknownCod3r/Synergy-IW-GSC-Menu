@@ -1,21 +1,14 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\anim\init.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 35
- * Decompile Time: 1782 ms
- * Timestamp: 10\27\2023 12:00:39 AM
-*******************************************************************/
+/*****************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\anim\init.gsc
+*****************************************/
 
-//Function Number: 1
-func_98E1(param_00)
-{
+func_98E1(param_00) {
 	self.var_39B[param_00] = spawnstruct();
 	self.var_39B[param_00].weaponisauto = "none";
 	self.var_39B[param_00].var_8BDE = 1;
-	if(function_00E6(param_00) != "")
-	{
+	if(function_00E6(param_00) != "") {
 		self.var_39B[param_00].var_13053 = 1;
 		return;
 	}
@@ -23,15 +16,11 @@ func_98E1(param_00)
 	self.var_39B[param_00].var_13053 = 0;
 }
 
-//Function Number: 2
-func_A000(param_00)
-{
+func_A000(param_00) {
 	return isdefined(self.var_39B[param_00]);
 }
 
-//Function Number: 3
-func_F724()
-{
+func_F724() {
 	anim.covercrouchleanpitch = 55;
 	anim.var_1A52 = 10;
 	anim.var_1A50 = 4096;
@@ -45,60 +34,47 @@ func_F724()
 	anim.var_B47F = 65;
 }
 
-//Function Number: 4
-func_68BD()
-{
-	if(scripts\anim\utility_common::isshotgun(self.secondaryweapon))
-	{
+func_68BD() {
+	if(scripts\anim\utility_common::isshotgun(self.secondaryweapon)) {
 		return 1;
 	}
 
-	if(weaponclass(self.primaryweapon) == "rocketlauncher")
-	{
+	if(weaponclass(self.primaryweapon) == "rocketlauncher") {
 		return 1;
 	}
 
 	return 0;
 }
 
-//Function Number: 5
-func_FAFB()
-{
+func_FAFB() {
 	self endon("death");
 	scripts\common\utility::flag_wait("load_finished");
-	if(isdefined(level.var_13CC8) && isdefined(level.var_13CC8[self.unittype]))
-	{
-		self [[ level.var_13CC8[self.unittype] ]]();
+	if(isdefined(level.var_13CC8) && isdefined(level.var_13CC8[self.unittype])) {
+		self [[level.var_13CC8[self.unittype]]]();
 		return;
 	}
 
 	func_5031();
 }
 
-//Function Number: 6
-main()
-{
+main() {
 	self.a = spawnstruct();
 	self.var_1491.laseron = 0;
 	self.primaryweapon = self.var_394;
 	func_6DE9();
-	if(!scripts\common\utility::flag_exist("load_finished"))
-	{
+	if(!scripts\common\utility::flag_exist("load_finished")) {
 		scripts\common\utility::flag_init("load_finished");
 	}
 
-	if(self.primaryweapon == "")
-	{
+	if(self.primaryweapon == "") {
 		self.primaryweapon = "none";
 	}
 
-	if(self.secondaryweapon == "")
-	{
+	if(self.secondaryweapon == "") {
 		self.secondaryweapon = "none";
 	}
 
-	if(self.var_101B4 == "")
-	{
+	if(self.var_101B4 == "") {
 		self.var_101B4 = "none";
 	}
 
@@ -145,8 +121,7 @@ main()
 	self.var_504E = 55;
 	scripts\sp\_utility::func_F6FE("asm");
 	self.var_1491.var_BFAF = 0;
-	if(!isdefined(self.script_forcegrenade))
-	{
+	if(!isdefined(self.script_forcegrenade)) {
 		self.script_forcegrenade = 0;
 	}
 
@@ -155,8 +130,7 @@ main()
 	self.var_440E = 0;
 	self.var_112C8 = 0;
 	self.var_112CA = 0;
-	if(self.team == "allies")
-	{
+	if(self.team == "allies") {
 		self.suppressionthreshold = 0.5;
 	}
 	else
@@ -164,8 +138,7 @@ main()
 		self.suppressionthreshold = 0;
 	}
 
-	if(self.team == "allies")
-	{
+	if(self.team == "allies") {
 		self.var_DCAF = 0;
 	}
 	else
@@ -185,21 +158,18 @@ main()
 	self.exception["exposed"] = 1;
 	self.exception["corner_normal"] = 1;
 	var_00 = getarraykeys(self.exception);
-	for(var_01 = 0;var_01 < var_00.size;var_01++)
-	{
+	for(var_01 = 0;var_01 < var_00.size;var_01++) {
 		scripts\common\utility::clear_exception(var_00[var_01]);
 	}
 
 	self.var_DD23 = 0;
 	self.var_FFD3 = 0;
-	if(!isdefined(level.var_55FE))
-	{
+	if(!isdefined(level.var_55FE)) {
 		thread scripts\anim\combat_utility::func_B9D9();
 	}
 
 	thread ondeath_clearscriptedanim();
-	if(getdvarint("ai_iw7",0) == 1 && !getdvarint("r_reflectionProbeGenerate"))
-	{
+	if(getdvarint("ai_iw7",0) == 1 && !getdvarint("r_reflectionProbeGenerate")) {
 		self _meth_8250(0);
 		scripts\aitypes\bt_util::opcode::OP_ScriptThreadCallPointer();
 		lib_0A1E::func_234D(self.var_1FA9,self.var_1FA8);
@@ -211,17 +181,12 @@ main()
 	thread func_F7AC();
 }
 
-//Function Number: 7
-func_1929()
-{
+func_1929() {
 	return self.var_1198.var_444A;
 }
 
-//Function Number: 8
-func_100B4(param_00,param_01)
-{
-	if(!param_00 || self.unittype != "soldier" && self.unittype != "c6")
-	{
+func_100B4(param_00,param_01) {
+	if(!param_00 || self.unittype != "soldier" && self.unittype != "c6") {
 		return 1;
 	}
 
@@ -229,54 +194,43 @@ func_100B4(param_00,param_01)
 	return param_01 == var_02;
 }
 
-//Function Number: 9
-func_1001A()
-{
+func_1001A() {
 	return isdefined(self.var_3135.var_72EB) && self.var_3135.var_72EB;
 }
 
-//Function Number: 10
-func_19F7()
-{
+func_19F7() {
 	self endon("terminate_ai_threads");
 	self endon("entitydeleted");
 	thread lib_0A1E::func_51B8();
 	thread lib_0A1E::traversehandler();
 	var_00 = 1;
 	var_01 = self getentitynumber() % 2;
-	for(;;)
-	{
+	for(;;) {
 		var_02 = 0;
-		if(func_1001A())
-		{
+		if(func_1001A()) {
 			scripts\aitypes\bt_util::opcode::OP_ClearArray();
 			var_02 = 1;
 			self.var_3135.var_72EB = undefined;
 		}
-		else if(var_00)
-		{
-			if(!func_1929())
-			{
+		else if(var_00) {
+			if(!func_1929()) {
 				scripts\aitypes\bt_util::opcode::OP_ClearArray();
 				var_02 = 1;
 			}
 		}
 
-		if(var_02)
-		{
+		if(var_02) {
 			scripts\asm\asm::func_2314();
 		}
 
-		if(isdefined(self.var_2303.var_10E23))
-		{
+		if(isdefined(self.var_2303.var_10E23)) {
 			scripts\asm\asm::asm_clearevents(self.var_2303.var_10E23);
 			self.var_2303.var_10E23 = undefined;
 		}
 
 		scripts\asm\asm::func_2389();
 		wait(0.05);
-		if(!isdefined(self))
-		{
+		if(!isdefined(self)) {
 			break;
 		}
 
@@ -284,22 +238,17 @@ func_19F7()
 	}
 }
 
-//Function Number: 11
-func_13CC7(param_00)
-{
+func_13CC7(param_00) {
 	var_01[0] = "m4_grenadier";
 	var_01[1] = "m4_grunt";
 	var_01[2] = "m4_silencer";
 	var_01[3] = "m4m203";
-	if(!isdefined(param_00))
-	{
+	if(!isdefined(param_00)) {
 		return 0;
 	}
 
-	for(var_02 = 0;var_02 < var_01.size;var_02++)
-	{
-		if(issubstr(param_00,var_01[var_02]))
-		{
+	for(var_02 = 0;var_02 < var_01.size;var_02++) {
+		if(issubstr(param_00,var_01[var_02])) {
 			return 1;
 		}
 	}
@@ -307,12 +256,9 @@ func_13CC7(param_00)
 	return 0;
 }
 
-//Function Number: 12
-func_F7AC()
-{
+func_F7AC() {
 	self endon("death");
-	if(!isdefined(level.var_AE64))
-	{
+	if(!isdefined(level.var_AE64)) {
 		level waittill("loadout complete");
 	}
 
@@ -320,13 +266,9 @@ func_F7AC()
 	thread scripts\anim\squadmanager::func_185C();
 }
 
-//Function Number: 13
-pollallowedstancesthread()
-{
-	for(;;)
-	{
-		if(self getteleportlonertargetplayer("stand"))
-		{
+pollallowedstancesthread() {
+	for(;;) {
+		if(self getteleportlonertargetplayer("stand")) {
 			var_00[0] = "stand allowed";
 			var_01[0] = (0,1,0);
 		}
@@ -336,8 +278,7 @@ pollallowedstancesthread()
 			var_01[0] = (1,0,0);
 		}
 
-		if(self getteleportlonertargetplayer("crouch"))
-		{
+		if(self getteleportlonertargetplayer("crouch")) {
 			var_00[1] = "crouch allowed";
 			var_01[1] = (0,1,0);
 		}
@@ -347,8 +288,7 @@ pollallowedstancesthread()
 			var_01[1] = (1,0,0);
 		}
 
-		if(self getteleportlonertargetplayer("prone"))
-		{
+		if(self getteleportlonertargetplayer("prone")) {
 			var_00[2] = "prone allowed";
 			var_01[2] = (0,1,0);
 		}
@@ -360,8 +300,7 @@ pollallowedstancesthread()
 
 		var_02 = self getshootatpos() + (0,0,30);
 		var_03 = (0,0,-10);
-		for(var_04 = 0;var_04 < var_00.size;var_04++)
-		{
+		for(var_04 = 0;var_04 < var_00.size;var_04++) {
 			var_05 = (var_02[0] + var_03[0] * var_04,var_02[1] + var_03[1] * var_04,var_02[2] + var_03[2] * var_04);
 		}
 
@@ -369,56 +308,39 @@ pollallowedstancesthread()
 	}
 }
 
-//Function Number: 14
-func_FAF2()
-{
-	if(!isdefined(self.animplaybackrate) || !isdefined(self.moveplaybackrate))
-	{
+func_FAF2() {
+	if(!isdefined(self.animplaybackrate) || !isdefined(self.moveplaybackrate)) {
 		func_F2B0();
 	}
 }
 
-//Function Number: 15
-func_F2B0()
-{
+func_F2B0() {
 	self.animplaybackrate = 0.97 + randomfloat(0.13);
 	self.var_BD22 = 0.97 + randomfloat(0.13);
 	self.moveplaybackrate = self.var_BD22;
 	self.var_101BB = 1.35;
 }
 
-//Function Number: 16
-func_94AC(param_00,param_01,param_02,param_03)
-{
+func_94AC(param_00,param_01,param_02,param_03) {
 	anim waittill("new exceptions");
 }
 
-//Function Number: 17
-empty(param_00,param_01,param_02,param_03)
-{
-}
+empty(param_00,param_01,param_02,param_03) {}
 
-//Function Number: 18
-func_6568()
-{
+func_6568() {
 	self endon("death");
-	if(1)
-	{
+	if(1) {
 		return;
 	}
 
-	for(;;)
-	{
+	for(;;) {
 		self waittill("enemy");
-		if(!isalive(self.isnodeoccupied))
-		{
+		if(!isalive(self.isnodeoccupied)) {
 			continue;
 		}
 
-		while(isplayer(self.isnodeoccupied))
-		{
-			if(scripts\anim\utility::func_8BED())
-			{
+		while(isplayer(self.isnodeoccupied)) {
+			if(scripts\anim\utility::func_8BED()) {
 				level.var_A9D0 = gettime();
 			}
 
@@ -427,9 +349,7 @@ func_6568()
 	}
 }
 
-//Function Number: 19
-func_98E4()
-{
+func_98E4() {
 	level.var_13D57[0] = -36.8552;
 	level.var_13D57[1] = -27.0095;
 	level.var_13D57[2] = -15.5981;
@@ -444,17 +364,13 @@ func_98E4()
 	level.var_13D57[11] = 330.681;
 }
 
-//Function Number: 20
-func_6DE9()
-{
-	if(getdvarint("ai_iw7",0) == 1)
-	{
+func_6DE9() {
+	if(getdvarint("ai_iw7",0) == 1) {
 		func_6DEA();
 		return;
 	}
 
-	if(isdefined(level.var_C122))
-	{
+	if(isdefined(level.var_C122)) {
 		return;
 	}
 
@@ -474,29 +390,24 @@ func_6DE9()
 	anim.combatmemorytimeconst = 6000;
 	func_9811();
 	func_97C0();
-	if(!isdefined(level.optionalstepeffectfunction))
-	{
+	if(!isdefined(level.optionalstepeffectfunction)) {
 		anim.optionalstepeffectsmallfunction = ::scripts\anim\notetracks::func_D480;
 		anim.optionalstepeffectfunction = ::scripts\anim\notetracks::playfootstepeffect;
 	}
 
-	if(!isdefined(level.optionalstepeffects))
-	{
+	if(!isdefined(level.optionalstepeffects)) {
 		anim.optionalstepeffects = [];
 	}
 
-	if(!isdefined(level.optionalstepeffectssmall))
-	{
+	if(!isdefined(level.optionalstepeffectssmall)) {
 		anim.optionalstepeffectssmall = [];
 	}
 
-	if(!isdefined(level.shootenemywrapper_func))
-	{
+	if(!isdefined(level.shootenemywrapper_func)) {
 		anim.shootenemywrapper_func = ::scripts\anim\utility::func_FE9D;
 	}
 
-	if(!isdefined(level.var_FED3))
-	{
+	if(!isdefined(level.var_FED3)) {
 		anim.var_FED3 = ::scripts\anim\utility::func_FED2;
 	}
 
@@ -507,8 +418,7 @@ func_6DE9()
 	level.fire_notetrack_functions["cover_stand"] = ::scripts\anim\notetracks::shootnotetrack;
 	level.fire_notetrack_functions["move"] = ::scripts\anim\notetracks::shootnotetrack;
 	scripts\anim\notetracks::registernotetracks();
-	if(!isdefined(level.flag))
-	{
+	if(!isdefined(level.flag)) {
 		scripts\common\flags::init_flags();
 	}
 
@@ -534,16 +444,10 @@ func_6DE9()
 	thread func_1B08();
 }
 
-//Function Number: 21
-func_97F8()
-{
-}
+func_97F8() {}
 
-//Function Number: 22
-func_97DA()
-{
-	if(!isdefined(level.player.team))
-	{
+func_97DA() {
+	if(!isdefined(level.player.team)) {
 		level.player.team = "allies";
 	}
 
@@ -556,9 +460,7 @@ func_97DA()
 	anim thread scripts\anim\battlechatter::func_29C9();
 }
 
-//Function Number: 23
-func_97F5()
-{
+func_97F5() {
 	anim.var_C222 = randomintrange(0,15);
 	anim.var_C221 = randomintrange(0,10);
 	anim.var_BF77 = gettime() + randomintrange(0,20000);
@@ -566,11 +468,8 @@ func_97F5()
 	anim.var_BF76 = gettime() + randomintrange(0,15000);
 }
 
-//Function Number: 24
-func_9811()
-{
-	for(var_00 = 0;var_00 < level.players.size;var_00++)
-	{
+func_9811() {
+	for(var_00 = 0;var_00 < level.players.size;var_00++) {
 		var_01 = level.players[var_00];
 		var_01.grenadetimers["fraggrenade"] = randomintrange(1000,20000);
 		var_01.grenadetimers["frag"] = randomintrange(1000,20000);
@@ -601,9 +500,7 @@ func_9811()
 	scripts\anim\combat_utility::func_9812();
 }
 
-//Function Number: 25
-func_97C0()
-{
+func_97C0() {
 	level.var_A936 = [];
 	level.var_A936["axis"] = 0;
 	level.var_A936["allies"] = 0;
@@ -629,9 +526,7 @@ func_97C0()
 	level.var_18D6 = 3;
 }
 
-//Function Number: 26
-func_9897()
-{
+func_9897() {
 	level.var_B5F8["c6"] = 0;
 	level.var_B5F5["c6"] = 9000;
 	level.var_B5F7["c6"] = 0;
@@ -642,32 +537,25 @@ func_9897()
 	level.var_B5F6["seeker"] = 15000;
 }
 
-//Function Number: 27
-func_1B08()
-{
+func_1B08() {
 	var_00 = 0;
 	var_01 = 3;
-	for(;;)
-	{
+	for(;;) {
 		var_02 = function_0072();
-		if(var_02.size == 0)
-		{
+		if(var_02.size == 0) {
 			wait(0.05);
 			var_00 = 0;
 			continue;
 		}
 
-		for(var_03 = 0;var_03 < var_02.size;var_03++)
-		{
-			if(!isdefined(var_02[var_03]))
-			{
+		for(var_03 = 0;var_03 < var_02.size;var_03++) {
+			if(!isdefined(var_02[var_03])) {
 				continue;
 			}
 
 			var_02[var_03] notify("do_slow_things");
 			var_00++;
-			if(var_00 == var_01)
-			{
+			if(var_00 == var_01) {
 				wait(0.05);
 				var_00 = 0;
 			}
@@ -675,15 +563,11 @@ func_1B08()
 	}
 }
 
-//Function Number: 28
-func_F7B3()
-{
+func_F7B3() {
 	waittillframeend;
-	if(isdefined(self.var_86A9.var_D397))
-	{
+	if(isdefined(self.var_86A9.var_D397)) {
 		var_00 = int(self.var_86A9.var_D397 * 0.7);
-		if(var_00 < 1)
-		{
+		if(var_00 < 1) {
 			var_00 = 1;
 		}
 
@@ -692,12 +576,10 @@ func_F7B3()
 		self.grenadetimers["seeker"] = randomintrange(0,var_00);
 	}
 
-	if(isdefined(self.var_86A9.var_D382))
-	{
+	if(isdefined(self.var_86A9.var_D382)) {
 		var_00 = int(self.var_86A9.var_D382);
 		var_01 = int(var_00 \ 2);
-		if(var_00 <= var_01)
-		{
+		if(var_00 <= var_01) {
 			var_00 = var_01 + 1;
 		}
 
@@ -705,30 +587,23 @@ func_F7B3()
 	}
 }
 
-//Function Number: 29
-begingrenadetracking()
-{
-	if(isdefined(level.var_55F1))
-	{
+begingrenadetracking() {
+	if(isdefined(level.var_55F1)) {
 		return;
 	}
 
 	self endon("death");
-	for(;;)
-	{
+	for(;;) {
 		self waittill("grenade_fire",var_00,var_01);
-		if(isdefined(var_00) && scripts\common\utility::istrue(var_00._meth_8589))
-		{
+		if(isdefined(var_00) && scripts\common\utility::istrue(var_00._meth_8589)) {
 			continue;
 		}
 
-		if(isdefined(level.func["ai_grenade_thrown"]))
-		{
-			level thread [[ level.func["ai_grenade_thrown"] ]](var_00);
+		if(isdefined(level.func["ai_grenade_thrown"])) {
+			level thread [[level.func["ai_grenade_thrown"]]](var_00);
 		}
 
-		switch(var_01)
-		{
+		switch(var_01) {
 			case "frag":
 				thread scripts\sp\_detonategrenades::func_734F(var_00);
 				break;
@@ -752,18 +627,14 @@ begingrenadetracking()
 	}
 }
 
-//Function Number: 30
-func_FAE3()
-{
+func_FAE3() {
 	anim.var_DCB3 = 60;
 	anim.var_DCB2 = [];
-	for(var_00 = 0;var_00 < level.var_DCB3;var_00++)
-	{
+	for(var_00 = 0;var_00 < level.var_DCB3;var_00++) {
 		level.var_DCB2[var_00] = var_00;
 	}
 
-	for(var_00 = 0;var_00 < level.var_DCB3;var_00++)
-	{
+	for(var_00 = 0;var_00 < level.var_DCB3;var_00++) {
 		var_01 = randomint(level.var_DCB3);
 		var_02 = level.var_DCB2[var_00];
 		level.var_DCB2[var_00] = level.var_DCB2[var_01];
@@ -771,29 +642,21 @@ func_FAE3()
 	}
 }
 
-//Function Number: 31
-ondeath_clearscriptedanim()
-{
-	if(isdefined(level.var_5613))
-	{
+ondeath_clearscriptedanim() {
+	if(isdefined(level.var_5613)) {
 		return;
 	}
 
 	self waittill("death");
-	if(!isdefined(self))
-	{
-		if(isdefined(self.var_1491.usingworldspacehitmarkers))
-		{
+	if(!isdefined(self)) {
+		if(isdefined(self.var_1491.usingworldspacehitmarkers)) {
 			self.var_1491.usingworldspacehitmarkers delete();
 		}
 	}
 }
 
-//Function Number: 32
-func_6DEA()
-{
-	if(isdefined(level.var_C122))
-	{
+func_6DEA() {
+	if(isdefined(level.var_C122)) {
 		return;
 	}
 
@@ -803,8 +666,7 @@ func_6DEA()
 	level.var_BF83 = randomint(3);
 	level.var_A9D0 = 100;
 	anim.defaultexception = ::empty;
-	if(!isdefined(level.var_7649))
-	{
+	if(!isdefined(level.var_7649)) {
 		level.var_7649 = [];
 	}
 
@@ -820,36 +682,30 @@ func_6DEA()
 	func_9811();
 	func_97C0();
 	func_9897();
-	if(!isdefined(level.optionalstepeffectfunction))
-	{
+	if(!isdefined(level.optionalstepeffectfunction)) {
 		anim.optionalstepeffectsmallfunction = ::scripts\anim\notetracks::func_D480;
 		anim.optionalstepeffectfunction = ::scripts\anim\notetracks::playfootstepeffect;
 	}
 
-	if(!isdefined(level.optionalstepeffects))
-	{
+	if(!isdefined(level.optionalstepeffects)) {
 		anim.optionalstepeffects = [];
 	}
 
-	if(!isdefined(level.optionalstepeffectssmall))
-	{
+	if(!isdefined(level.optionalstepeffectssmall)) {
 		anim.optionalstepeffectssmall = [];
 	}
 
-	if(!isdefined(level.shootenemywrapper_func))
-	{
+	if(!isdefined(level.shootenemywrapper_func)) {
 		anim.shootenemywrapper_func = ::scripts\anim\utility::func_FE9D;
 	}
 
-	if(!isdefined(level.var_FED3))
-	{
+	if(!isdefined(level.var_FED3)) {
 		anim.var_FED3 = ::scripts\anim\utility::func_FED2;
 	}
 
 	anim.fire_notetrack_functions = [];
 	scripts\anim\notetracks::registernotetracks();
-	if(!isdefined(level.flag))
-	{
+	if(!isdefined(level.flag)) {
 		scripts\common\flags::init_flags();
 	}
 
@@ -862,10 +718,8 @@ func_6DEA()
 	anim.var_F217 = scripts\anim\utility::func_2274(1,2,2,3,3,4,4,4,4,5,5,5);
 	anim.var_2759 = [];
 	anim.var_2755 = 0;
-	if(!isdefined(level.var_3D4B))
-	{
-		if(scripts\common\utility::player_is_in_jackal())
-		{
+	if(!isdefined(level.var_3D4B)) {
+		if(scripts\common\utility::player_is_in_jackal()) {
 			anim.player = level.var_D127;
 		}
 		else
@@ -884,9 +738,7 @@ func_6DEA()
 	level.player thread scripts\anim\combat_utility::func_13B22();
 }
 
-//Function Number: 33
-func_5031()
-{
+func_5031() {
 	func_98E1(self.primaryweapon);
 	func_98E1(self.secondaryweapon);
 	func_98E1(self.var_101B4);
@@ -902,54 +754,43 @@ func_5031()
 	self.lastweapon = self.var_394;
 	var_00 = scripts\anim\utility_common::usingrocketlauncher();
 	self.var_1491.var_BEF9 = var_00;
-	if(var_00)
-	{
+	if(var_00) {
 		thread scripts\anim\shared::func_E775();
 	}
 
 	self.var_1491.rockets = 3;
 	self.var_1491.rocketvisible = 1;
 	scripts\anim\shared::placeweaponon(self.primaryweapon,"right");
-	if(scripts\anim\utility_common::isshotgun(self.secondaryweapon))
-	{
+	if(scripts\anim\utility_common::isshotgun(self.secondaryweapon)) {
 		scripts\anim\shared::placeweaponon(self.secondaryweapon,"back");
 	}
 
-	if(self.team != "allies")
-	{
+	if(self.team != "allies") {
 		self.var_8B95 = 1;
 	}
 
 	scripts\anim\weaponlist::refillclip();
 }
 
-//Function Number: 34
-func_3597()
-{
-	if(scripts\anim\utility_common::usingrocketlauncher())
-	{
+func_3597() {
+	if(scripts\anim\utility_common::usingrocketlauncher()) {
 		return "rocket";
 	}
-	else if(scripts\anim\utility_common::usingriflelikeweapon())
-	{
+	else if(scripts\anim\utility_common::usingriflelikeweapon()) {
 		return "minigun";
 	}
 
 	return undefined;
 }
 
-//Function Number: 35
-func_363B()
-{
+func_363B() {
 	self.var_13CC3 = [];
-	if(self.primaryweapon != "" && self.primaryweapon != "none")
-	{
+	if(self.primaryweapon != "" && self.primaryweapon != "none") {
 		self.var_394 = self.primaryweapon;
 		self.var_13CC3["right"] = func_3597();
 	}
 
-	if(self.secondaryweapon != "" && self.secondaryweapon != "none")
-	{
+	if(self.secondaryweapon != "" && self.secondaryweapon != "none") {
 		self.var_394 = self.secondaryweapon;
 		self.var_13CC3["left"] = func_3597();
 	}

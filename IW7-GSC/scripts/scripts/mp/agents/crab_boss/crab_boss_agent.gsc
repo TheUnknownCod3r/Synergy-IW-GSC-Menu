@@ -1,16 +1,10 @@
 /*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\mp\agents\crab_boss\crab_boss_agent.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 8
- * Decompile Time: 466 ms
- * Timestamp: 10/27/2023 12:11:09 AM
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\mp\agents\crab_boss\crab_boss_agent.gsc
 *******************************************************************/
 
-//Function Number: 1
-registerscriptedagent()
-{
+registerscriptedagent() {
 	scripts/aitypes/bt_util::init();
 	behaviortree\crab_boss::func_DEE8();
 	scripts\asm\crab_boss\mp\states::func_2371();
@@ -19,12 +13,9 @@ registerscriptedagent()
 	thread func_FAB0();
 }
 
-//Function Number: 2
-func_FAB0()
-{
+func_FAB0() {
 	level endon("game_ended");
-	if(!isdefined(level.agent_definition))
-	{
+	if(!isdefined(level.agent_definition)) {
 		level waittill("scripted_agents_initialized");
 	}
 
@@ -33,21 +24,15 @@ func_FAB0()
 	level.agent_funcs["crab_boss"]["on_damaged_finished"] = ::ondamagefinished;
 }
 
-//Function Number: 3
-func_FACE(param_00)
-{
+func_FACE(param_00) {
 	self setmodel("zmb_boss_crab");
 }
 
-//Function Number: 4
-func_AEB0()
-{
+func_AEB0() {
 	level._effect["boss_crab_beam_start_fx"] = loadfx("vfx/iw7/levels/cp_town/crog/vfx_lure_glow_charge.vfx");
 }
 
-//Function Number: 5
-setupzombiegametypevars()
-{
+setupzombiegametypevars() {
 	self.class = undefined;
 	self.movespeedscaler = undefined;
 	self.avoidkillstreakonspawntimer = undefined;
@@ -128,15 +113,12 @@ setupzombiegametypevars()
 	self.vignette_nocorpse = undefined;
 	self.death_anim_no_ragdoll = undefined;
 	self.dont_cleanup = 1;
-	if(getdvarint("scr_zombie_left_foot_sharp_turn_only",0) == 1)
-	{
+	if(getdvarint("scr_zombie_left_foot_sharp_turn_only",0) == 1) {
 		self.var_AB3F = 1;
 	}
 }
 
-//Function Number: 6
-setupagent()
-{
+setupagent() {
 	setupzombiegametypevars();
 	self.height = self.var_18F4;
 	self.fgetarg = self.var_18F9;
@@ -160,19 +142,14 @@ setupagent()
 	self.ignoreme = 1;
 }
 
-//Function Number: 7
-getenemy()
-{
-	if(isdefined(self.myenemy))
-	{
+getenemy() {
+	if(isdefined(self.myenemy)) {
 		return self.myenemy;
 	}
 
 	return undefined;
 }
 
-//Function Number: 8
-ondamagefinished(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08,param_09,param_0A,param_0B,param_0C)
-{
+ondamagefinished(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08,param_09,param_0A,param_0B,param_0C) {
 	param_02 = 0;
 }

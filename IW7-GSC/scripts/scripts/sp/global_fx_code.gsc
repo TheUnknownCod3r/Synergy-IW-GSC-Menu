@@ -1,48 +1,35 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\sp\global_fx_code.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 2
- * Decompile Time: 82 ms
- * Timestamp: 10/27/2023 12:24:29 AM
-*******************************************************************/
+/*************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\sp\global_fx_code.gsc
+*************************************************/
 
-//Function Number: 1
-global_fx(param_00,param_01,param_02,param_03,param_04)
-{
+global_fx(param_00,param_01,param_02,param_03,param_04) {
 	init();
 	level.global_fx[param_00] = param_03;
 	var_05 = scripts\sp\_utility::_meth_8181(param_00,"targetname");
-	if(!isdefined(var_05))
-	{
+	if(!isdefined(var_05)) {
 		return;
 	}
 
-	if(!var_05.size)
-	{
+	if(!var_05.size) {
 		return;
 	}
 
-	if(!isdefined(param_03))
-	{
+	if(!isdefined(param_03)) {
 		param_03 = param_01;
 	}
 
-	if(!isdefined(param_02))
-	{
+	if(!isdefined(param_02)) {
 		param_02 = randomfloatrange(-20,-15);
 	}
 
-	foreach(var_07 in var_05)
-	{
-		if(!isdefined(level._effect[param_03]))
-		{
+	foreach(var_07 in var_05) {
+		if(!isdefined(level._effect[param_03])) {
 			level._effect[param_03] = loadfx(param_01);
 		}
 
-		if(!isdefined(var_07.angles))
-		{
+		if(!isdefined(var_07.angles)) {
 			var_07.angles = (0,0,0);
 		}
 
@@ -51,19 +38,16 @@ global_fx(param_00,param_01,param_02,param_03,param_04)
 		var_08.v["angles"] = var_07.angles;
 		var_08.v["fxid"] = param_03;
 		var_08.v["delay"] = param_02;
-		if(isdefined(param_04))
-		{
+		if(isdefined(param_04)) {
 			var_08.v["soundalias"] = param_04;
 		}
 
-		if(!isdefined(var_07.script_noteworthy))
-		{
+		if(!isdefined(var_07.script_noteworthy)) {
 			continue;
 		}
 
 		var_09 = var_07.script_noteworthy;
-		if(!isdefined(level.var_12C7[var_09]))
-		{
+		if(!isdefined(level.var_12C7[var_09])) {
 			level.var_12C7[var_09] = [];
 		}
 
@@ -71,21 +55,16 @@ global_fx(param_00,param_01,param_02,param_03,param_04)
 	}
 }
 
-//Function Number: 2
-init()
-{
-	if(!scripts\engine\utility::add_init_script("global_FX",::init))
-	{
+init() {
+	if(!scripts\engine\utility::add_init_script("global_FX",::init)) {
 		return;
 	}
 
-	if(!isdefined(level._effect))
-	{
+	if(!isdefined(level._effect)) {
 		level._effect = [];
 	}
 
-	if(!isdefined(level.global_fx))
-	{
+	if(!isdefined(level.global_fx)) {
 		level.global_fx = [];
 	}
 

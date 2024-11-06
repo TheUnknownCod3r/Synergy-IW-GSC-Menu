@@ -1,20 +1,13 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\mp\killstreaks\_dronehive.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 30
- * Decompile Time: 1409 ms
- * Timestamp: 10/27/2023 12:28:27 AM
-*******************************************************************/
+/*********************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\mp\killstreaks\_dronehive.gsc
+*********************************************************/
 
-//Function Number: 1
-init()
-{
+init() {
 	scripts\mp\killstreaks\_killstreaks::registerkillstreak("drone_hive",::tryusedronehive,undefined,undefined,undefined,::func_13C8C);
 	level.dronemissilespawnarray = getentarray("remoteMissileSpawn","targetname");
-	foreach(var_01 in level.dronemissilespawnarray)
-	{
+	foreach(var_01 in level.dronemissilespawnarray) {
 		var_01.var_1155F = getent(var_01.target,"targetname");
 	}
 
@@ -22,29 +15,21 @@ init()
 	scripts\mp\_killstreak_loot::func_DF07("drone_hive",var_03);
 }
 
-//Function Number: 2
-func_13C8C(param_00)
-{
+func_13C8C(param_00) {
 	self setclientomnvar("ui_remote_control_sequence",1);
 }
 
-//Function Number: 3
-tryusedronehive(param_00)
-{
+tryusedronehive(param_00) {
 	return usedronehive(self,param_00.lifeid,param_00);
 }
 
-//Function Number: 4
-usedronehive(param_00,param_01,param_02)
-{
-	if(isdefined(self.underwater) && self.underwater)
-	{
+usedronehive(param_00,param_01,param_02) {
+	if(isdefined(self.underwater) && self.underwater) {
 		return 0;
 	}
 
 	var_03 = scripts\mp\killstreaks\_killstreaks::func_D507(param_02);
-	if(!var_03)
-	{
+	if(!var_03) {
 		return 0;
 	}
 
@@ -56,18 +41,14 @@ usedronehive(param_00,param_01,param_02)
 	return 1;
 }
 
-//Function Number: 5
-func_13AA4(param_00)
-{
+func_13AA4(param_00) {
 	param_00 endon("killstreak_disowned");
 	param_00 endon("disconnect");
 	level endon("game_ended");
 	self endon("death");
-	for(;;)
-	{
+	for(;;) {
 		level waittill("host_migration_begin");
-		if(isdefined(self))
-		{
+		if(isdefined(self)) {
 			param_00 thermalvisionon();
 			param_00 thermalvisionfofoverlayon();
 			continue;
@@ -77,18 +58,14 @@ func_13AA4(param_00)
 	}
 }
 
-//Function Number: 6
-watchhostmigrationfinishedinit(param_00)
-{
+watchhostmigrationfinishedinit(param_00) {
 	param_00 endon("killstreak_disowned");
 	param_00 endon("disconnect");
 	level endon("game_ended");
 	self endon("death");
-	for(;;)
-	{
+	for(;;) {
 		level waittill("host_migration_end");
-		if(isdefined(self))
-		{
+		if(isdefined(self)) {
 			param_00 setclientomnvar("ui_predator_missile",1);
 			param_00 setclientomnvar("ui_predator_missiles_left",self.missilesleft);
 			continue;
@@ -98,18 +75,14 @@ watchhostmigrationfinishedinit(param_00)
 	}
 }
 
-//Function Number: 7
-watchclosetogoal(param_00)
-{
+watchclosetogoal(param_00) {
 	param_00 endon("killstreak_disowned");
 	param_00 endon("disconnect");
 	level endon("game_ended");
 	var_01 = scripts\common\trace::create_contents(1,1,1,1,1,1,1);
-	while(isdefined(self))
-	{
+	while(isdefined(self)) {
 		var_02 = scripts\common\trace::ray_trace(self.origin,self.origin - (0,0,1000),level.characters,var_01);
-		if(isdefined(var_02["position"]) && distancesquared(self.origin,var_02["position"]) < 5000)
-		{
+		if(isdefined(var_02["position"]) && distancesquared(self.origin,var_02["position"]) < 5000) {
 			break;
 		}
 
@@ -119,22 +92,18 @@ watchclosetogoal(param_00)
 	param_00 thread scripts\mp\killstreaks\_killstreaks::func_11086();
 }
 
-//Function Number: 8
-func_E846(param_00,param_01,param_02,param_03)
-{
+func_E846(param_00,param_01,param_02,param_03) {
 	param_00 endon("killstreak_disowned");
 	level endon("game_ended");
 	var_04 = "used_drone_hive";
 	var_05 = "drone_hive_projectile_mp";
 	var_06 = "switch_blade_child_mp";
 	var_07 = scripts\mp\_killstreak_loot::getrarityforlootitem(param_03.variantid);
-	if(var_07 != "")
-	{
+	if(var_07 != "") {
 		var_04 = var_04 + "_" + var_07;
 	}
 
-	if(scripts\mp\killstreaks\_utility::func_A69F(param_03,"passive_implosion"))
-	{
+	if(scripts\mp\killstreaks\_utility::func_A69F(param_03,"passive_implosion")) {
 		var_05 = "drone_hive_impulse_mp";
 		var_06 = "switch_blade_impulse_mp";
 	}
@@ -161,8 +130,7 @@ func_E846(param_00,param_01,param_02,param_03)
 	level.remotemissileinprogress = 1;
 	level thread monitordeath(var_0B,1);
 	level thread monitorboost(var_0B);
-	if(isdefined(param_00.killsthislifeperweapon))
-	{
+	if(isdefined(param_00.killsthislifeperweapon)) {
 		param_00.killsthislifeperweapon["drone_hive_projectile_mp"] = 0;
 		param_00.killsthislifeperweapon["switch_blade_child_mp"] = 0;
 	}
@@ -175,40 +143,32 @@ func_E846(param_00,param_01,param_02,param_03)
 	param_00 scripts\mp\_matchdata::logkillstreakevent(param_02,var_0B.origin);
 	var_0C = 0;
 	var_0B.missilesleft = 2;
-	if(scripts\mp\killstreaks\_utility::func_A69F(param_03,"passive_predator"))
-	{
+	if(scripts\mp\killstreaks\_utility::func_A69F(param_03,"passive_predator")) {
 		var_0B.missilesleft = -1;
 		var_0B.singlefire = 1;
 		var_0B getrankxpmultiplier();
 	}
 
-	if(scripts\mp\killstreaks\_utility::func_A69F(param_03,"passive_rapid_missiles"))
-	{
+	if(scripts\mp\killstreaks\_utility::func_A69F(param_03,"passive_rapid_missiles")) {
 		var_0B.var_12BA7 = 1;
 	}
 
 	var_0D = 2;
 	param_00 setclientomnvar("ui_predator_missiles_left",var_0B.missilesleft);
-	for(;;)
-	{
+	for(;;) {
 		var_0E = var_0B scripts\engine\utility::waittill_any_return("death","missileTargetSet");
 		scripts\mp\_hostmigration::waittillhostmigrationdone();
-		if(var_0E == "death")
-		{
+		if(var_0E == "death") {
 			break;
 		}
 
-		if(!isdefined(var_0B))
-		{
+		if(!isdefined(var_0B)) {
 			break;
 		}
 
-		if(scripts\mp\_utility::istrue(var_0B.var_12BA7))
-		{
-			if(scripts\mp\_utility::istrue(var_0B.lasttimefired))
-			{
-				if(gettime() < var_0B.lasttimefired + var_0D * 1000 && var_0C == 0)
-				{
+		if(scripts\mp\_utility::istrue(var_0B.var_12BA7)) {
+			if(scripts\mp\_utility::istrue(var_0B.lasttimefired)) {
+				if(gettime() < var_0B.lasttimefired + var_0D * 1000 && var_0C == 0) {
 					continue;
 				}
 			}
@@ -218,14 +178,12 @@ func_E846(param_00,param_01,param_02,param_03)
 			var_0B.lasttimefired = gettime();
 			var_0B.missilesleft = 2 - var_0C;
 			var_0F = var_0B.missilesleft;
-			if(var_0B.missilesleft == 0)
-			{
+			if(var_0B.missilesleft == 0) {
 				var_0F = -1;
 			}
 
 			param_00 setclientomnvar("ui_predator_missiles_left",var_0F);
-			if(var_0C == 2)
-			{
+			if(var_0C == 2) {
 				var_0C = 0;
 				var_0B.missilesleft = 2;
 				param_00 thread resetmissiles(var_0B,var_0D);
@@ -234,16 +192,13 @@ func_E846(param_00,param_01,param_02,param_03)
 			continue;
 		}
 
-		if(var_0C < 2)
-		{
-			if(!scripts\mp\_utility::istrue(var_0B.singlefire))
-			{
+		if(var_0C < 2) {
+			if(!scripts\mp\_utility::istrue(var_0B.singlefire)) {
 				level thread spawnswitchblade(var_0B,var_0C,param_03,var_06);
 				var_0C++;
 				var_0B.missilesleft = 2 - var_0C;
 				param_00 setclientomnvar("ui_predator_missiles_left",var_0B.missilesleft);
-				if(var_0C == 2)
-				{
+				if(var_0C == 2) {
 					var_0B getrankxpmultiplier();
 				}
 			}
@@ -254,16 +209,12 @@ func_E846(param_00,param_01,param_02,param_03)
 	scripts\mp\_utility::printgameaction("killstreak ended - drone_hive",param_00);
 }
 
-//Function Number: 9
-firerapidmissiles(param_00,param_01,param_02,param_03)
-{
+firerapidmissiles(param_00,param_01,param_02,param_03) {
 	var_04 = param_01;
-	for(var_05 = 0;var_05 < 2;var_05++)
-	{
+	for(var_05 = 0;var_05 < 2;var_05++) {
 		level thread spawnswitchblade(param_00,var_04,param_02,param_03);
 		var_04++;
-		if(var_04 > 1)
-		{
+		if(var_04 > 1) {
 			var_04 = 0;
 		}
 
@@ -271,38 +222,30 @@ firerapidmissiles(param_00,param_01,param_02,param_03)
 	}
 }
 
-//Function Number: 10
-resetmissiles(param_00,param_01)
-{
+resetmissiles(param_00,param_01) {
 	param_00 endon("death");
 	self endon("disconnect");
 	wait(param_01);
 	self setclientomnvar("ui_predator_missiles_left",param_00.missilesleft);
 }
 
-//Function Number: 11
-func_B9EE()
-{
+func_B9EE() {
 	level endon("game_ended");
 	self endon("death");
 	var_00 = [];
 	var_01 = [];
-	for(;;)
-	{
+	for(;;) {
 		var_02 = [];
 		var_00 = scripts\mp\killstreaks\_utility::func_7E92();
-		foreach(var_04 in var_00)
-		{
+		foreach(var_04 in var_00) {
 			var_05 = self.triggerportableradarping worldpointinreticle_circle(var_04.origin,65,90);
-			if(var_05)
-			{
+			if(var_05) {
 				self.triggerportableradarping thread scripts\mp\_utility::drawline(self.origin,var_04.origin,10,(0,0,1));
 				var_02[var_02.size] = var_04;
 			}
 		}
 
-		if(var_02.size)
-		{
+		if(var_02.size) {
 			var_01 = sortbydistance(var_02,self.origin);
 			self.var_AA25 = var_01[0];
 			scripts\mp\_hostmigration::waitlongdurationwithhostmigrationpause(0.25);
@@ -313,17 +256,14 @@ func_B9EE()
 	}
 }
 
-//Function Number: 12
-spawnswitchblade(param_00,param_01,param_02,param_03)
-{
+spawnswitchblade(param_00,param_01,param_02,param_03) {
 	param_00.triggerportableradarping playlocalsound("ammo_crate_use");
 	var_04 = param_00 gettagangles("tag_origin");
 	var_05 = anglestoforward(var_04);
 	var_06 = anglestoright(var_04);
 	var_07 = (100,100,100);
 	var_08 = (15000,15000,15000);
-	if(param_01)
-	{
+	if(param_01) {
 		var_07 = var_07 * -1;
 	}
 
@@ -333,8 +273,7 @@ spawnswitchblade(param_00,param_01,param_02,param_03)
 	var_0B = param_00.origin + var_05 * var_08;
 	var_0C = scripts\mp\_utility::_magicbullet(param_03,var_0A,var_0B,param_00.triggerportableradarping);
 	var_0D = param_00 getclosesttargetinview(param_00.triggerportableradarping,var_0B);
-	if(isdefined(var_0D) && !scripts\mp\killstreaks\_utility::func_A69F(param_02,"passive_rapid_missiles"))
-	{
+	if(isdefined(var_0D) && !scripts\mp\killstreaks\_utility::func_A69F(param_02,"passive_rapid_missiles")) {
 		var_0C missile_settargetent(var_0D);
 	}
 
@@ -352,37 +291,29 @@ spawnswitchblade(param_00,param_01,param_02,param_03)
 	level thread monitordeath(var_0C,0);
 }
 
-//Function Number: 13
-getclosesttargetinview(param_00,param_01)
-{
+getclosesttargetinview(param_00,param_01) {
 	var_02 = scripts\mp\killstreaks\_utility::func_7E92(param_00);
 	var_03 = undefined;
 	var_04 = undefined;
-	foreach(var_06 in var_02)
-	{
-		if(!scripts\mp\killstreaks\_utility::manualmissilecantracktarget(var_06))
-		{
+	foreach(var_06 in var_02) {
+		if(!scripts\mp\killstreaks\_utility::manualmissilecantracktarget(var_06)) {
 			continue;
 		}
 
-		if(scripts\mp\_utility::istrue(var_06.trinityrocketlocked))
-		{
+		if(scripts\mp\_utility::istrue(var_06.trinityrocketlocked)) {
 			continue;
 		}
 
 		var_07 = distance2dsquared(var_06.origin,param_01);
-		if(var_07 < 262144 && scripts\mp\_utility::istrue(canseetarget(var_06)))
-		{
-			if(!isdefined(var_04) || var_07 < var_04)
-			{
+		if(var_07 < 262144 && scripts\mp\_utility::istrue(canseetarget(var_06))) {
+			if(!isdefined(var_04) || var_07 < var_04) {
 				var_03 = var_06;
 				var_04 = var_07;
 			}
 		}
 	}
 
-	if(isdefined(var_03))
-	{
+	if(isdefined(var_03)) {
 		var_03.trinityrocketlocked = 1;
 		var_03 thread watchtarget(self);
 	}
@@ -390,16 +321,12 @@ getclosesttargetinview(param_00,param_01)
 	return var_03;
 }
 
-//Function Number: 14
-canseetarget(param_00)
-{
+canseetarget(param_00) {
 	var_01 = 0;
 	var_02 = scripts\common\trace::create_contents(0,1,1,1,1,1,0);
 	var_03 = [param_00 gettagorigin("j_head"),param_00 gettagorigin("j_mainroot"),param_00 gettagorigin("tag_origin")];
-	for(var_04 = 0;var_04 < var_03.size;var_04++)
-	{
-		if(!scripts\common\trace::ray_trace_passed(self.origin,var_03[var_04],self,var_02))
-		{
+	for(var_04 = 0;var_04 < var_03.size;var_04++) {
+		if(!scripts\common\trace::ray_trace_passed(self.origin,var_03[var_04],self,var_02)) {
 			continue;
 		}
 
@@ -410,19 +337,14 @@ canseetarget(param_00)
 	return var_01;
 }
 
-//Function Number: 15
-watchtarget(param_00)
-{
+watchtarget(param_00) {
 	self endon("disconnect");
-	for(;;)
-	{
-		if(!scripts\mp\killstreaks\_utility::manualmissilecantracktarget(self))
-		{
+	for(;;) {
+		if(!scripts\mp\killstreaks\_utility::manualmissilecantracktarget(self)) {
 			break;
 		}
 
-		if(!isdefined(param_00))
-		{
+		if(!isdefined(param_00)) {
 			break;
 		}
 
@@ -430,95 +352,74 @@ watchtarget(param_00)
 	}
 
 	self.trinityrocketlocked = undefined;
-	if(isdefined(param_00))
-	{
+	if(isdefined(param_00)) {
 		param_00 missile_cleartarget();
 	}
 }
 
-//Function Number: 16
-looptriggeredeffect(param_00,param_01)
-{
+looptriggeredeffect(param_00,param_01) {
 	param_01 endon("death");
 	level endon("game_ended");
 	self endon("death");
-	for(;;)
-	{
+	for(;;) {
 		triggerfx(param_00);
 		wait(0.25);
 	}
 }
 
-//Function Number: 17
-getnextmissilespawnindex(param_00)
-{
+getnextmissilespawnindex(param_00) {
 	var_01 = param_00 + 1;
-	if(var_01 == level.dronemissilespawnarray.size)
-	{
+	if(var_01 == level.dronemissilespawnarray.size) {
 		var_01 = 0;
 	}
 
 	return var_01;
 }
 
-//Function Number: 18
-monitorboost(param_00)
-{
+monitorboost(param_00) {
 	param_00 endon("death");
-	for(;;)
-	{
+	for(;;) {
 		param_00.triggerportableradarping waittill("missileTargetSet");
 		param_00 notify("missileTargetSet");
 	}
 }
 
-//Function Number: 19
-func_7DFE(param_00,param_01)
-{
+func_7DFE(param_00,param_01) {
 	var_02 = [];
-	foreach(var_04 in level.players)
-	{
-		if(!scripts\mp\_utility::isreallyalive(var_04))
-		{
+	foreach(var_04 in level.players) {
+		if(!scripts\mp\_utility::isreallyalive(var_04)) {
 			continue;
 		}
 
-		if(var_04.team == param_00.team)
-		{
+		if(var_04.team == param_00.team) {
 			continue;
 		}
 
-		if(var_04.team == "spectator")
-		{
+		if(var_04.team == "spectator") {
 			continue;
 		}
 
 		var_02[var_02.size] = var_04;
 	}
 
-	if(!var_02.size)
-	{
+	if(!var_02.size) {
 		return param_01[randomint(param_01.size)];
 	}
 
 	var_06 = scripts\engine\utility::array_randomize(param_01);
 	var_07 = var_06[0];
-	foreach(var_09 in var_06)
-	{
+	foreach(var_09 in var_06) {
 		var_09.var_101E4 = 0;
-		for(var_0A = 0;var_0A < var_02.size;var_0A++)
-		{
+		for(var_0A = 0;var_0A < var_02.size;var_0A++) {
 			var_0B = var_02[var_0A];
-			if(!scripts\mp\_utility::isreallyalive(var_0B))
-			{
+			if(!scripts\mp\_utility::isreallyalive(var_0B)) {
 				var_02[var_0A] = var_02[var_02.size - 1];
 				var_02[var_02.size - 1] = undefined;
 				var_0A--;
 				continue;
 			}
 
-			if(bullettracepassed(var_0B.origin + (0,0,32),var_09.origin,0,var_0B))
-			{
+			if(bullettracepassed(var_0B.origin + (0,0,32),var_09.origin,0,var_0B)) {
 				var_09.var_101E4 = var_09.var_101E4 + 1;
 				return var_09;
 			}
@@ -527,13 +428,11 @@ func_7DFE(param_00,param_01)
 			scripts\mp\_hostmigration::waittillhostmigrationdone();
 		}
 
-		if(var_09.var_101E4 == var_02.size)
-		{
+		if(var_09.var_101E4 == var_02.size) {
 			return var_09;
 		}
 
-		if(var_09.var_101E4 > var_07.var_101E4)
-		{
+		if(var_09.var_101E4 > var_07.var_101E4) {
 			var_07 = var_09;
 		}
 	}
@@ -541,9 +440,7 @@ func_7DFE(param_00,param_01)
 	return var_07;
 }
 
-//Function Number: 20
-missileeyes(param_00,param_01)
-{
+missileeyes(param_00,param_01) {
 	var_02 = 0.5;
 	param_00 scripts\mp\_utility::freezecontrolswrapper(1);
 	param_00 cameralinkto(param_01,"tag_origin");
@@ -556,26 +453,20 @@ missileeyes(param_00,param_01)
 	level thread unfreezecontrols(param_00,var_02);
 }
 
-//Function Number: 21
-unfreezecontrols(param_00,param_01,param_02)
-{
+unfreezecontrols(param_00,param_01,param_02) {
 	param_00 endon("disconnect");
 	scripts\mp\_hostmigration::waitlongdurationwithhostmigrationpause(param_01 - 0.35);
 	param_00 scripts\mp\_utility::freezecontrolswrapper(0);
 }
 
-//Function Number: 22
-func_B9CB(param_00)
-{
+func_B9CB(param_00) {
 	param_00 endon("disconnect");
 	param_00 endon("end_kill_streak");
 	param_00 waittill("killstreak_disowned");
 	level thread func_E474(param_00);
 }
 
-//Function Number: 23
-monitorgameend(param_00)
-{
+monitorgameend(param_00) {
 	param_00 endon("disconnect");
 	param_00 endon("end_kill_streak");
 	level waittill("game_ended");
@@ -583,45 +474,35 @@ monitorgameend(param_00)
 	level thread func_E474(param_00,0,var_01);
 }
 
-//Function Number: 24
-monitorobjectivecamera(param_00)
-{
+monitorobjectivecamera(param_00) {
 	param_00 endon("end_kill_streak");
 	param_00 endon("disconnect");
 	level waittill("objective_cam");
 	level thread func_E474(param_00,1);
 }
 
-//Function Number: 25
-monitordeath(param_00,param_01)
-{
+monitordeath(param_00,param_01) {
 	var_02 = param_00.triggerportableradarping;
 	param_00 waittill("death");
 	scripts\mp\_hostmigration::waittillhostmigrationdone();
-	if(isdefined(param_00.var_114F1))
-	{
+	if(isdefined(param_00.var_114F1)) {
 		param_00.var_114F1 delete();
 	}
 
-	if(isdefined(param_00.entitynumber))
-	{
+	if(isdefined(param_00.entitynumber)) {
 		level.rockets[param_00.entitynumber] = undefined;
 	}
 
-	if(param_01)
-	{
+	if(param_01) {
 		level.remotemissileinprogress = undefined;
 	}
 
-	if(isdefined(var_02) && !scripts\mp\_utility::isreallyalive(var_02) && scripts\mp\_utility::istrue(param_01))
-	{
+	if(isdefined(var_02) && !scripts\mp\_utility::isreallyalive(var_02) && scripts\mp\_utility::istrue(param_01)) {
 		var_02 thread stopmissilesoundonspawn();
 	}
 }
 
-//Function Number: 26
-stopmissilesoundonspawn()
-{
+stopmissilesoundonspawn() {
 	self endon("disconnect");
 	self waittill("spawned_player");
 	self stoplocalsound("trinity_rocket_plr");
@@ -629,17 +510,13 @@ stopmissilesoundonspawn()
 	self stoplocalsound("trinity_rocket_plr_lfe");
 }
 
-//Function Number: 27
-func_E474(param_00,param_01,param_02)
-{
-	if(!isdefined(param_00))
-	{
+func_E474(param_00,param_01,param_02) {
+	if(!isdefined(param_00)) {
 		return;
 	}
 
 	param_00 playlocalsound("trinity_rocket_exp_plr");
-	if(!scripts\mp\_utility::istrue(param_02))
-	{
+	if(!scripts\mp\_utility::istrue(param_02)) {
 		param_00 thread scripts\mp\killstreaks\_killstreaks::func_11086();
 	}
 
@@ -656,19 +533,15 @@ func_E474(param_00,param_01,param_02)
 	param_00 scripts\engine\utility::allow_weapon_switch(1);
 }
 
-//Function Number: 28
-watchmissileextraeffect(param_00,param_01)
-{
+watchmissileextraeffect(param_00,param_01) {
 	level endon("game_ended");
 	var_02 = scripts\mp\killstreaks\_utility::func_A69F(param_00,"passive_predator");
 	var_03 = scripts\mp\killstreaks\_utility::func_A69F(param_00,"passive_implosion");
-	if(!var_02 && !var_03)
-	{
+	if(!var_02 && !var_03) {
 		return;
 	}
 
-	if(var_02 && !scripts\mp\_utility::istrue(param_01))
-	{
+	if(var_02 && !scripts\mp\_utility::istrue(param_01)) {
 		return;
 	}
 
@@ -686,21 +559,18 @@ watchmissileextraeffect(param_00,param_01)
 	self.explosiontarget.streakinfo = param_00;
 	var_07 = self.explosiontarget;
 	self waittill("death");
-	if(!isdefined(var_07))
-	{
+	if(!isdefined(var_07)) {
 		return;
 	}
 
-	if(var_02)
-	{
+	if(var_02) {
 		wait(0.27);
 		var_07 setscriptablepartstate("chain_explode_1","active",0);
 		wait(0.27);
 		var_07 setscriptablepartstate("chain_explode_2","active",0);
 		wait(1);
 	}
-	else if(var_03)
-	{
+	else if(var_03) {
 		var_07 setscriptablepartstate("impulse_explode","active",0);
 		wait(0.5);
 		var_08 = function_02AF(var_04,"drone_hive_implosion_mp",var_07.origin);
@@ -712,36 +582,28 @@ watchmissileextraeffect(param_00,param_01)
 		wait(1);
 	}
 
-	if(isdefined(var_07))
-	{
+	if(isdefined(var_07)) {
 		var_07 delete();
 	}
 
-	if(isdefined(var_06))
-	{
+	if(isdefined(var_06)) {
 		var_06 delete();
 	}
 }
 
-//Function Number: 29
-watchgastrigger(param_00,param_01)
-{
+watchgastrigger(param_00,param_01) {
 	self endon("death");
-	for(;;)
-	{
+	for(;;) {
 		self waittill("trigger",var_02);
-		if(!isplayer(var_02))
-		{
+		if(!isplayer(var_02)) {
 			continue;
 		}
 
-		if(level.teambased && var_02.team == param_00.team && var_02 != param_00)
-		{
+		if(level.teambased && var_02.team == param_00.team && var_02 != param_00) {
 			continue;
 		}
 
-		if(scripts\mp\_utility::istrue(var_02.gettinggassed))
-		{
+		if(scripts\mp\_utility::istrue(var_02.gettinggassed)) {
 			continue;
 		}
 
@@ -749,23 +611,18 @@ watchgastrigger(param_00,param_01)
 	}
 }
 
-//Function Number: 30
-applygasdamageovertime(param_00,param_01,param_02)
-{
+applygasdamageovertime(param_00,param_01,param_02) {
 	param_02 endon("disconnect");
 	param_02.gettinggassed = 1;
-	while(param_02 istouching(self))
-	{
+	while(param_02 istouching(self)) {
 		param_02 dodamage(20,self.origin,param_00,self,"MOD_EXPLOSIVE",param_01);
 		var_03 = scripts\engine\utility::waittill_any_timeout_1(0.5,"death");
-		if(var_03 == "death")
-		{
+		if(var_03 == "death") {
 			break;
 		}
 	}
 
-	if(scripts\mp\_utility::istrue(param_02.gettinggassed))
-	{
+	if(scripts\mp\_utility::istrue(param_02.gettinggassed)) {
 		param_02.gettinggassed = undefined;
 	}
 }

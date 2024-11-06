@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\common\bcs_location_trigs.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 18
- * Decompile Time: 913 ms
- * Timestamp: 10/27/2023 12:03:08 AM
-*******************************************************************/
+/*********************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\common\bcs_location_trigs.gsc
+*********************************************************/
 
-//Function Number: 1
-bcs_location_trigs_init()
-{
+bcs_location_trigs_init() {
 	level.bcs_location_mappings = [];
 	bcs_location_trigger_mapping();
 	bcs_trigs_assign_aliases();
@@ -18,30 +12,23 @@ bcs_location_trigs_init()
 	anim.locationlastcallouttimes = [];
 }
 
-//Function Number: 2
-bcs_trigs_assign_aliases()
-{
+bcs_trigs_assign_aliases() {
 	anim.bcs_locations = [];
 	var_00 = getentarray();
 	var_01 = [];
-	foreach(var_03 in var_00)
-	{
-		if(isdefined(var_03.classname) && issubstr(var_03.classname,"trigger_multiple_bcs"))
-		{
+	foreach(var_03 in var_00) {
+		if(isdefined(var_03.classname) && issubstr(var_03.classname,"trigger_multiple_bcs")) {
 			var_01[var_01.size] = var_03;
 		}
 	}
 
-	foreach(var_03 in var_01)
-	{
-		if(!isdefined(level.bcs_location_mappings[var_03.classname]))
-		{
+	foreach(var_03 in var_01) {
+		if(!isdefined(level.bcs_location_mappings[var_03.classname])) {
 			continue;
 		}
 
 		var_06 = parselocationaliases(level.bcs_location_mappings[var_03.classname]);
-		if(var_06.size > 1)
-		{
+		if(var_06.size > 1) {
 			var_06 = scripts\engine\utility::array_randomize(var_06);
 		}
 
@@ -51,27 +38,19 @@ bcs_trigs_assign_aliases()
 	anim.bcs_locations = var_01;
 }
 
-//Function Number: 3
-parselocationaliases(param_00)
-{
+parselocationaliases(param_00) {
 	var_01 = strtok(param_00," ");
 	return var_01;
 }
 
-//Function Number: 4
-add_bcs_location_mapping(param_00,param_01)
-{
-	if(isdefined(level.bcs_location_mappings[param_00]))
-	{
+add_bcs_location_mapping(param_00,param_01) {
+	if(isdefined(level.bcs_location_mappings[param_00])) {
 		var_02 = level.bcs_location_mappings[param_00];
 		var_03 = parselocationaliases(var_02);
 		var_04 = parselocationaliases(param_01);
-		foreach(var_06 in var_04)
-		{
-			foreach(var_08 in var_03)
-			{
-				if(var_06 == var_08)
-				{
+		foreach(var_06 in var_04) {
+			foreach(var_08 in var_03) {
+				if(var_06 == var_08) {
 					return;
 				}
 			}
@@ -85,11 +64,8 @@ add_bcs_location_mapping(param_00,param_01)
 	level.bcs_location_mappings[var_09] = var_0A;
 }
 
-//Function Number: 5
-bcs_location_trigger_mapping()
-{
-	if(scripts\engine\utility::issp())
-	{
+bcs_location_trigger_mapping() {
+	if(scripts\engine\utility::issp()) {
 		sp();
 		return;
 	}
@@ -108,9 +84,7 @@ bcs_location_trigger_mapping()
 	skyway();
 }
 
-//Function Number: 6
-sp()
-{
+sp() {
 	add_bcs_location_mapping("trigger_multiple_bcs_sp_doorway","doorway_generic");
 	add_bcs_location_mapping("trigger_multiple_bcs_sp_window_generic","window_generic");
 	add_bcs_location_mapping("trigger_multiple_bcs_sp_1stfloor","1stfloor_generic");
@@ -264,9 +238,7 @@ sp()
 	add_bcs_location_mapping("trigger_multiple_bcs_sp_drill_generic","drill_generic");
 }
 
-//Function Number: 7
-metropolis()
-{
+metropolis() {
 	add_bcs_location_mapping("trigger_multiple_bcs_mp_metropolis_room_bathroom","room_bathroom");
 	add_bcs_location_mapping("trigger_multiple_bcs_mp_metropolis_generator_generic","generator_generic");
 	add_bcs_location_mapping("trigger_multiple_bcs_mp_metropolis_tunnel_generic","tunnel_generic");
@@ -288,9 +260,7 @@ metropolis()
 	add_bcs_location_mapping("trigger_multiple_bcs_mp_metropolis_car_generic","car_generic");
 }
 
-//Function Number: 8
-quarry()
-{
+quarry() {
 	add_bcs_location_mapping("trigger_multiple_bcs_mp_quarry_crates_red","crates_red");
 	add_bcs_location_mapping("trigger_multiple_bcs_mp_quarry_crates_generic","crates_generic");
 	add_bcs_location_mapping("trigger_multiple_bcs_mp_quarry_quarters_crew","quarters_crew");
@@ -319,9 +289,7 @@ quarry()
 	add_bcs_location_mapping("trigger_multiple_bcs_mp_quarry_room_cleanroom","room_cleanroom");
 }
 
-//Function Number: 9
-breakneck()
-{
+breakneck() {
 	add_bcs_location_mapping("trigger_multiple_bcs_mp_breakneck_hallway_officersquarter","hallway_officersquarter");
 	add_bcs_location_mapping("trigger_multiple_bcs_mp_breakneck_hallway_bridge","hallway_bridge");
 	add_bcs_location_mapping("trigger_multiple_bcs_mp_breakneck_room_server","room_server");
@@ -354,9 +322,7 @@ breakneck()
 	add_bcs_location_mapping("trigger_multiple_bcs_mp_breakneck_room_weaponstorage","room_weaponstorage");
 }
 
-//Function Number: 10
-desert()
-{
+desert() {
 	add_bcs_location_mapping("trigger_multiple_bcs_mp_desert_pod_2","pod_2");
 	add_bcs_location_mapping("trigger_multiple_bcs_mp_desert_pod_yellow","pod_yellow");
 	add_bcs_location_mapping("trigger_multiple_bcs_mp_desert_bridge_generic","bridge_generic");
@@ -377,9 +343,7 @@ desert()
 	add_bcs_location_mapping("trigger_multiple_bcs_mp_desert_area_yard","area_yard");
 }
 
-//Function Number: 11
-divide()
-{
+divide() {
 	add_bcs_location_mapping("trigger_multiple_bcs_mp_divide_building_cargohangar","building_cargohangar");
 	add_bcs_location_mapping("trigger_multiple_bcs_mp_divide_controls_hangar","controls_hangar");
 	add_bcs_location_mapping("trigger_multiple_bcs_mp_divide_room_drillcontrol","room_drillcontrol");
@@ -394,9 +358,7 @@ divide()
 	add_bcs_location_mapping("trigger_multiple_bcs_mp_divide_building_shiphang","building_shiphang");
 }
 
-//Function Number: 12
-fallen()
-{
+fallen() {
 	add_bcs_location_mapping("trigger_multiple_bcs_mp_fallen_shop_icecream","shop_icecream");
 	add_bcs_location_mapping("trigger_multiple_bcs_mp_fallen_movietheater_generic","movietheater_generic");
 	add_bcs_location_mapping("trigger_multiple_bcs_mp_fallen_store_hardware","store_hardware");
@@ -419,9 +381,7 @@ fallen()
 	add_bcs_location_mapping("trigger_multiple_bcs_mp_fallen_barn_generic","barn_generic");
 }
 
-//Function Number: 13
-frontier()
-{
+frontier() {
 	add_bcs_location_mapping("trigger_multiple_bcs_mp_frontier_room_briefing","room_briefing");
 	add_bcs_location_mapping("trigger_multiple_bcs_mp_frontier_room_bunk","room_bunk");
 	add_bcs_location_mapping("trigger_multiple_bcs_mp_frontier_room_command","room_command");
@@ -440,9 +400,7 @@ frontier()
 	add_bcs_location_mapping("trigger_multiple_bcs_mp_frontier_room_control","room_control");
 }
 
-//Function Number: 14
-parkour()
-{
+parkour() {
 	add_bcs_location_mapping("trigger_multiple_bcs_mp_parkour_watertank_generic","helipad_generic");
 	add_bcs_location_mapping("trigger_multiple_bcs_mp_parkour_watertank_generic","watertank_generic");
 	add_bcs_location_mapping("trigger_multiple_bcs_mp_parkour_whirlpool","whirlpool");
@@ -467,9 +425,7 @@ parkour()
 	add_bcs_location_mapping("trigger_multiple_bcs_mp_parkour_window_medbay","window_medbay");
 }
 
-//Function Number: 15
-proto()
-{
+proto() {
 	add_bcs_location_mapping("trigger_multiple_bcs_mp_proto_dock_loading","dock_loading");
 	add_bcs_location_mapping("trigger_multiple_bcs_mp_proto_room_security","room_security");
 	add_bcs_location_mapping("trigger_multiple_bcs_mp_proto_entrance_generic","entrance_generic");
@@ -485,9 +441,7 @@ proto()
 	add_bcs_location_mapping("trigger_multiple_bcs_mp_proto_grinder_ice","grinder_ice");
 }
 
-//Function Number: 16
-riot()
-{
+riot() {
 	add_bcs_location_mapping("trigger_multiple_bcs_mp_riot_building_church","building_church");
 	add_bcs_location_mapping("trigger_multiple_bcs_mp_riot_wall_destroyed","wall_destroyed");
 	add_bcs_location_mapping("trigger_multiple_bcs_mp_riot_courtyard_generic","courtyard_generic");
@@ -511,9 +465,7 @@ riot()
 	add_bcs_location_mapping("trigger_multiple_bcs_mp_riot_waterfront_generic","waterfront_generic");
 }
 
-//Function Number: 17
-rivet()
-{
+rivet() {
 	add_bcs_location_mapping("trigger_multiple_bcs_mp_rivet_dock_yellow","dock_yellow");
 	add_bcs_location_mapping("trigger_multiple_bcs_mp_rivet_ship_bow","ship_bow");
 	add_bcs_location_mapping("trigger_multiple_bcs_mp_rivet_dock_blue","dock_blue");
@@ -537,9 +489,7 @@ rivet()
 	add_bcs_location_mapping("trigger_multiple_bcs_mp_rivet_door_garage","door_garage");
 }
 
-//Function Number: 18
-skyway()
-{
+skyway() {
 	add_bcs_location_mapping("trigger_multiple_bcs_mp_skyway_area_checkpoint","area_checkpoint");
 	add_bcs_location_mapping("trigger_multiple_bcs_mp_skyway_area_security","area_security");
 	add_bcs_location_mapping("trigger_multiple_bcs_mp_skyway_area_luggagecheck","area_luggagecheck");

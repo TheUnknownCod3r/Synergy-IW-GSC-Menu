@@ -1,18 +1,11 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\cp\maps\cp_final\cp_final_rhino_boss.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 112
- * Decompile Time: 5921 ms
- * Timestamp: 10/27/2023 12:05:29 AM
-*******************************************************************/
+/********************************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\cp\maps\cp_final\cp_final_rhino_boss.gsc
+********************************************************************/
 
-//Function Number: 1
-rhino_boss_init()
-{
-	if(getdvarint("mammoth_fight") == 1 || 0 || 0)
-	{
+rhino_boss_init() {
+	if(getdvarint("mammoth_fight") == 1 || 0 || 0) {
 		level.jump_to_mammoth = 1;
 	}
 
@@ -24,8 +17,7 @@ rhino_boss_init()
 	level.rhino_array = [];
 	scripts\cp\cp_weapon_autosentry::init();
 	level thread rh_boss_interactions();
-	if(0)
-	{
+	if(0) {
 		level thread demo_test_rhino_fight();
 	}
 
@@ -37,9 +29,7 @@ rhino_boss_init()
 	level.forceturretplacement = 1;
 }
 
-//Function Number: 2
-spawnempconsolestruct()
-{
+spawnempconsolestruct() {
 	level endon("game_ended");
 	scripts\engine\utility::flag_wait("interactions_initialized");
 	var_00 = spawnstruct();
@@ -54,26 +44,17 @@ spawnempconsolestruct()
 	level.struct_class_names["script_noteworthy"]["emp_console"][0] = var_00;
 }
 
-//Function Number: 3
-rh_boss_stepregistration()
-{
+rh_boss_stepregistration() {
 	scripts\cp\maps\cp_final\cp_final_mpq::finalqueststepregistration("Rhino Boss",0,::blank,::blank,::blank,::dbg_start_rhino,0,"MPQ Quest Step Description");
 }
 
-//Function Number: 4
-blankusefunc(param_00,param_01)
-{
-}
+blankusefunc(param_00,param_01) {}
 
-//Function Number: 5
-blankhintfunc(param_00,param_01)
-{
+blankhintfunc(param_00,param_01) {
 	return "";
 }
 
-//Function Number: 6
-init_rh_boss_flags()
-{
+init_rh_boss_flags() {
 	scripts\engine\utility::flag_init("rhino_stage_1");
 	scripts\engine\utility::flag_init("rhino_stage_2");
 	scripts\engine\utility::flag_init("rhino_stage_3");
@@ -87,11 +68,8 @@ init_rh_boss_flags()
 	scripts\engine\utility::flag_init("start_rhino_sequence");
 }
 
-//Function Number: 7
-rh_boss_interactions()
-{
-	while(!scripts\engine\utility::flag_exist("interactions_initialized"))
-	{
+rh_boss_interactions() {
+	while(!scripts\engine\utility::flag_exist("interactions_initialized")) {
 		wait(0.1);
 	}
 
@@ -114,64 +92,48 @@ rh_boss_interactions()
 	scripts\cp\cp_interaction::remove_from_current_interaction_list(var_03);
 }
 
-//Function Number: 8
-blank()
-{
-}
+blank() {}
 
-//Function Number: 9
-demo_test_rhino_fight()
-{
+demo_test_rhino_fight() {
 	wait(10);
 	dbg_start_rhino();
 }
 
-//Function Number: 10
-dbg_start_rhino()
-{
+dbg_start_rhino() {
 	scripts\engine\utility::flag_set("power_on");
 	level.dbg_rhino = 1;
 	start_rhino_fight();
 }
 
-//Function Number: 11
-start_rhino_fight()
-{
+start_rhino_fight() {
 	setuplnfinteractions();
 	move_players_to_rhino_fight();
 	level.oldspecialroundcounter = level.specialroundcounter;
 	level.specialroundcounter = 5;
-	if(0)
-	{
-		if(scripts\engine\utility::istrue(level.dbg_rhino))
-		{
+	if(0) {
+		if(scripts\engine\utility::istrue(level.dbg_rhino)) {
 			setupplayerloadouts();
 		}
 	}
 
 	update_spawning_for_rhino_fight();
 	level.pause_nag_vo = 1;
-	foreach(var_01 in level.players)
-	{
+	foreach(var_01 in level.players) {
 		var_01 scripts\cp\utility::allow_player_teleport(0);
 	}
 
 	level notify("start_rhino_fight");
 }
 
-//Function Number: 12
-move_players_to_rhino_fight()
-{
+move_players_to_rhino_fight() {
 	level.currentneilstate = "angry";
 	var_00 = (2896,2868,-68);
 	var_01 = (4,270,0);
 	var_02 = [50,-50,50,-50];
 	var_03 = [50,50,-50,-50];
-	for(var_04 = 0;var_04 < level.players.size;var_04++)
-	{
+	for(var_04 = 0;var_04 < level.players.size;var_04++) {
 		var_05 = (var_00[0] + var_02[var_04],var_00[1] + var_03[var_04],var_00[2]);
-		if(!scripts\cp\zombies\direct_boss_fight::should_directly_go_to_boss_fight())
-		{
+		if(!scripts\cp\zombies\direct_boss_fight::should_directly_go_to_boss_fight()) {
 			level.players[var_04] setorigin(var_05);
 			level.players[var_04] setplayerangles(var_01);
 		}
@@ -184,9 +146,7 @@ move_players_to_rhino_fight()
 	}
 }
 
-//Function Number: 13
-update_spawning_for_rhino_fight()
-{
+update_spawning_for_rhino_fight() {
 	level.current_enemy_deaths = 0;
 	scripts\engine\utility::flag_set("pause_wave_progression");
 	level.zombies_paused = 1;
@@ -205,42 +165,34 @@ update_spawning_for_rhino_fight()
 	level.getspawnpoint = ::respawn_in_rhino_fight;
 }
 
-//Function Number: 14
-rhino_boss_fight_vo()
-{
+rhino_boss_fight_vo() {
 	wait(7);
 	var_00 = scripts\engine\utility::random(level.players);
-	if(isdefined(var_00.vo_prefix))
-	{
-		switch(var_00.vo_prefix)
-		{
+	if(isdefined(var_00.vo_prefix)) {
+		switch(var_00.vo_prefix) {
 			case "p1_":
-				if(!isdefined(level.completed_dialogues["conv_first_rhino_1_1"]))
-				{
+				if(!isdefined(level.completed_dialogues["conv_first_rhino_1_1"])) {
 					level thread scripts\cp\cp_vo::try_to_play_vo("conv_first_rhino_1_1","rave_dialogue_vo","highest",666,0,0,0,100);
 					level.completed_dialogues["conv_first_rhino_1_1"] = 1;
 				}
 				break;
 
 			case "p2_":
-				if(!isdefined(level.completed_dialogues["conv_first_rhino_3_1"]))
-				{
+				if(!isdefined(level.completed_dialogues["conv_first_rhino_3_1"])) {
 					level thread scripts\cp\cp_vo::try_to_play_vo("conv_first_rhino_3_1","rave_dialogue_vo","highest",666,0,0,0,100);
 					level.completed_dialogues["conv_first_rhino_3_1"] = 1;
 				}
 				break;
 
 			case "p3_":
-				if(!isdefined(level.completed_dialogues["conv_first_rhino_2_1"]))
-				{
+				if(!isdefined(level.completed_dialogues["conv_first_rhino_2_1"])) {
 					level thread scripts\cp\cp_vo::try_to_play_vo("conv_first_rhino_2_1","rave_dialogue_vo","highest",666,0,0,0,100);
 					level.completed_dialogues["conv_first_rhino_2_1"] = 1;
 				}
 				break;
 
 			case "p4_":
-				if(!isdefined(level.completed_dialogues["conv_first_rhino_4_1"]))
-				{
+				if(!isdefined(level.completed_dialogues["conv_first_rhino_4_1"])) {
 					level thread scripts\cp\cp_vo::try_to_play_vo("conv_first_rhino_4_1","rave_dialogue_vo","highest",666,0,0,0,100);
 					level.completed_dialogues["conv_first_rhino_4_1"] = 1;
 				}
@@ -249,21 +201,17 @@ rhino_boss_fight_vo()
 	}
 }
 
-//Function Number: 15
-setupplayerloadouts()
-{
+setupplayerloadouts() {
 	var_00 = ["iw7_crdb_zm","iw7_g18_zmr","iw7_m4_zmr","iw7_arclassic_zmr"];
 	var_01 = ["iw7_minilmg_zm","iw7_lmg03_zm","iw7_mauler_zm","iw7_unsalmg_zm"];
 	var_02 = ["perk_machine_revive","perk_machine_zap","perk_machine_tough","perk_machine_flash","perk_machine_rat_a_tat"];
 	var_03 = ["perk_machine_revive","perk_machine_boom","perk_machine_tough","perk_machine_flash","perk_machine_rat_a_tat"];
-	foreach(var_05 in level.players)
-	{
+	foreach(var_05 in level.players) {
 		var_06 = randomint(var_01.size);
 		var_07 = randomint(var_00.size);
 		var_05 takeweapon(var_05 scripts\cp\utility::getvalidtakeweapon());
 		var_08 = scripts\cp\utility::getrawbaseweaponname(var_01[var_06]);
-		if(isdefined(var_05.weapon_build_models[var_08]))
-		{
+		if(isdefined(var_05.weapon_build_models[var_08])) {
 			scripts/cp/zombies/coop_wall_buys::givevalidweapon(var_05,var_05.weapon_build_models[var_08]);
 		}
 		else
@@ -272,8 +220,7 @@ setupplayerloadouts()
 		}
 
 		var_09 = scripts\cp\utility::getrawbaseweaponname(var_00[var_07]);
-		if(isdefined(var_05.weapon_build_models[var_09]))
-		{
+		if(isdefined(var_05.weapon_build_models[var_09])) {
 			scripts/cp/zombies/coop_wall_buys::givevalidweapon(var_05,var_05.weapon_build_models[var_09]);
 		}
 		else
@@ -283,17 +230,14 @@ setupplayerloadouts()
 
 		var_05.total_currency_earned = min(10000,var_05 scripts\cp\cp_persistence::get_player_max_currency());
 		var_05 scripts\cp\cp_persistence::set_player_currency(10000);
-		if(issubstr(var_08,"_g18_"))
-		{
-			foreach(var_0B in var_03)
-			{
+		if(issubstr(var_08,"_g18_")) {
+			foreach(var_0B in var_03) {
 				var_05 thread scripts/cp/zombies/zombies_perk_machines::give_zombies_perk_immediate(var_0B,1);
 			}
 		}
 		else
 		{
-			foreach(var_0B in var_02)
-			{
+			foreach(var_0B in var_02) {
 				var_05 thread scripts/cp/zombies/zombies_perk_machines::give_zombies_perk_immediate(var_0B,1);
 			}
 		}
@@ -302,28 +246,22 @@ setupplayerloadouts()
 		var_05 notify("consumable_charge",0);
 	}
 
-	if(isdefined(level.pap_max) && level.pap_max < 3)
-	{
+	if(isdefined(level.pap_max) && level.pap_max < 3) {
 		level.var_C8A4++;
 	}
 
-	level [[ level.upgrade_weapons_func ]]();
-	level thread [[ level.upgrade_weapons_func ]]();
+	level [[level.upgrade_weapons_func]]();
+	level thread [[level.upgrade_weapons_func]]();
 	scripts\engine\utility::flag_set("completepuzzles_step4");
 }
 
-//Function Number: 16
-respawn_in_rhino_fight(param_00)
-{
-	if(!scripts\engine\utility::flag("rhino_stage_3"))
-	{
+respawn_in_rhino_fight(param_00) {
+	if(!scripts\engine\utility::flag("rhino_stage_3")) {
 		var_01 = level.startingrespawnpoints;
 		var_01 = scripts\engine\utility::array_randomize(var_01);
 		var_02 = spawnstruct();
-		foreach(var_04 in var_01)
-		{
-			if(canspawn(var_04[0]) && !positionwouldtelefrag(var_04[0]))
-			{
+		foreach(var_04 in var_01) {
+			if(canspawn(var_04[0]) && !positionwouldtelefrag(var_04[0])) {
 				var_02.origin = var_04[0];
 				var_02.angles = var_04[1];
 				return var_02;
@@ -338,10 +276,8 @@ respawn_in_rhino_fight(param_00)
 	var_01 = scripts\engine\utility::getstructarray("rhino_boss_spawn_loc","targetname");
 	var_05 = scripts\engine\utility::array_randomize(var_05);
 	var_02 = spawnstruct();
-	foreach(var_06 in var_04)
-	{
-		if(canspawn(var_06.origin) && !positionwouldtelefrag(var_06.origin))
-		{
+	foreach(var_06 in var_04) {
+		if(canspawn(var_06.origin) && !positionwouldtelefrag(var_06.origin)) {
 			var_04.origin = var_06.origin;
 			var_04.angles = (0,90,0);
 			return var_04;
@@ -353,14 +289,11 @@ respawn_in_rhino_fight(param_00)
 	return var_04;
 }
 
-//Function Number: 17
-initial_door_layout()
-{
+initial_door_layout() {
 	level.rhino_doors = [];
 	level.rhino_doors_path_1 = [];
 	level.rhino_doors_path_2 = [];
-	if(getdvarint("scr_direct_to_meph_fight",0) != 0)
-	{
+	if(getdvarint("scr_direct_to_meph_fight",0) != 0) {
 		return;
 	}
 
@@ -368,14 +301,12 @@ initial_door_layout()
 	level thread listen_for_rhino_trigger();
 	level thread move_laser();
 	level thread init_cargo_doors();
-	if(0)
-	{
+	if(0) {
 		level thread openrhinofightarena();
 		return;
 	}
 
-	if(!isdefined(level.jump_to_mammoth))
-	{
+	if(!isdefined(level.jump_to_mammoth)) {
 		level thread rhino_fight_sequence();
 		return;
 	}
@@ -383,18 +314,14 @@ initial_door_layout()
 	level thread debug_to_mammoth();
 }
 
-//Function Number: 18
-openrhinofightarena()
-{
+openrhinofightarena() {
 	scripts\engine\utility::flag_wait("spawning_ready");
 	scripts\engine\utility::flag_wait("laser_in_place");
 	open_stage_1_area();
 	open_stage_2_area();
 }
 
-//Function Number: 19
-rhino_fight_sequence()
-{
+rhino_fight_sequence() {
 	func_10B42();
 	scripts\engine\utility::flag_set("rhino_stage_1");
 	func_10B43();
@@ -409,26 +336,20 @@ rhino_fight_sequence()
 	stage_6();
 }
 
-//Function Number: 20
-func_10B42()
-{
+func_10B42() {
 	level endon("game_ended");
-	while(level.rhino_array.size < 1)
-	{
+	while(level.rhino_array.size < 1) {
 		wait(0.1);
 	}
 
 	level thread rhino_boss_fight_vo();
 	scripts\engine\utility::flag_wait("init_rhinos_spawned");
-	while(level.rhino_array.size > 0)
-	{
+	while(level.rhino_array.size > 0) {
 		wait(0.1);
 	}
 }
 
-//Function Number: 21
-func_10B43()
-{
+func_10B43() {
 	wait(5);
 	level thread update_spawn_portals();
 	wait(5);
@@ -436,9 +357,7 @@ func_10B43()
 	func_1071B();
 }
 
-//Function Number: 22
-func_10B44()
-{
+func_10B44() {
 	wait(5);
 	level thread open_stage_2_area();
 	turn_off_spawners("spawner_1");
@@ -449,9 +368,7 @@ func_10B44()
 	wait(5);
 }
 
-//Function Number: 23
-stage_4()
-{
+stage_4() {
 	level notify("create_perk_boxes");
 	wait(2);
 	turn_off_monitors();
@@ -463,9 +380,7 @@ stage_4()
 	endless_wave();
 }
 
-//Function Number: 24
-stage_5()
-{
+stage_5() {
 	turn_off_lights();
 	turn_off_spawners("spawner_1","spawner_2");
 	level notify("stop_firing");
@@ -481,8 +396,7 @@ stage_5()
 	var_00 = scripts\engine\utility::array_combine(var_00,var_01);
 	var_00 = scripts\engine\utility::array_randomize(var_00);
 	var_02 = 0;
-	while(var_02 < 8)
-	{
+	while(var_02 < 8) {
 		var_03 = aim_at_target(var_00[var_02]);
 		func_6D02(var_03);
 		var_02++;
@@ -500,9 +414,7 @@ stage_5()
 	emp_defend();
 }
 
-//Function Number: 25
-stage_6()
-{
+stage_6() {
 	turn_off_lights();
 	turn_off_monitors();
 	turn_off_spawners("spawner_1","spawner_2");
@@ -514,33 +426,25 @@ stage_6()
 	release_mammoths();
 }
 
-//Function Number: 26
-init_door_clip()
-{
+init_door_clip() {
 	var_00 = ["rhino_door_stage_1","rhino_door_stage_2","rhino_spawn_door_1","rhino_spawn_door_2","rhino_spawn_door_3","rhino_spawn_door_4","mammoth_spawn_door_1"];
-	foreach(var_02 in var_00)
-	{
+	foreach(var_02 in var_00) {
 		var_03 = getentarray(var_02,"targetname");
-		foreach(var_05 in var_03)
-		{
+		foreach(var_05 in var_03) {
 			wait(0.1);
 		}
 	}
 
-	foreach(var_02 in var_00)
-	{
+	foreach(var_02 in var_00) {
 		var_03 = getentarray(var_02 + "_clip","targetname");
-		foreach(var_05 in var_03)
-		{
+		foreach(var_05 in var_03) {
 			var_05 func_95B5();
 			wait(0.2);
 		}
 	}
 }
 
-//Function Number: 27
-open_stage_1_area()
-{
+open_stage_1_area() {
 	break_door("rhino_spawn_door_1");
 	wait(0.1);
 	break_door("rhino_spawn_door_2");
@@ -550,14 +454,10 @@ open_stage_1_area()
 	break_door("rhino_spawn_door_4");
 }
 
-//Function Number: 28
-open_stage_2_area()
-{
+open_stage_2_area() {
 	var_00 = getentarray("rhino_door_stage_2_clip","targetname");
-	foreach(var_02 in var_00)
-	{
-		if(isdefined(var_02.nav_id))
-		{
+	foreach(var_02 in var_00) {
+		if(isdefined(var_02.nav_id)) {
 			destroynavobstacle(var_02.nav_id);
 		}
 
@@ -566,31 +466,25 @@ open_stage_2_area()
 
 	var_04 = "death_ray_cannon_rock_impact";
 	var_00 = getentarray("rhino_door_stage_2","targetname");
-	foreach(var_02 in var_00)
-	{
+	foreach(var_02 in var_00) {
 		playsoundatpos(var_02.origin,"zmb_rhino_door_explo");
 		playfx(level._effect[var_04],var_02.origin);
 		var_02 delete();
 	}
 
 	var_00 = getentarray("stage_3_bollard","targetname");
-	foreach(var_02 in var_00)
-	{
+	foreach(var_02 in var_00) {
 		var_02 movez(-34,2,0.1,0.1);
 	}
 }
 
-//Function Number: 29
-listen_for_rhino_trigger()
-{
+listen_for_rhino_trigger() {
 	scripts\engine\utility::flag_wait("interactions_initialized");
 	waitforplayersnearby();
 	wait(5);
 	level.zombies_paused = 1;
-	foreach(var_01 in level.spawned_enemies)
-	{
-		if(isalive(var_01))
-		{
+	foreach(var_01 in level.spawned_enemies) {
+		if(isalive(var_01)) {
 			var_01.died_poorly = 1;
 			var_01 suicide();
 		}
@@ -598,8 +492,7 @@ listen_for_rhino_trigger()
 
 	scripts\engine\utility::flag_set("pause_wave_progression");
 	wait(3);
-	if(!isdefined(level.jump_to_mammoth))
-	{
+	if(!isdefined(level.jump_to_mammoth)) {
 		spawn_initial_rhino();
 		return;
 	}
@@ -607,9 +500,7 @@ listen_for_rhino_trigger()
 	scripts\engine\utility::flag_set("spawning_ready");
 }
 
-//Function Number: 30
-waitforplayersnearby()
-{
+waitforplayersnearby() {
 	level endon("game_ended");
 	level endon("start_rhino_fight");
 	var_00 = scripts\engine\utility::getstructarray("initial_rhino_spawn","targetname");
@@ -617,12 +508,9 @@ waitforplayersnearby()
 	var_02 = 150;
 	var_03 = var_02 * var_02;
 	var_04 = 0;
-	while(!var_04)
-	{
-		foreach(var_06 in level.players)
-		{
-			if(distance2dsquared(var_01,var_06.origin) < var_03)
-			{
+	while(!var_04) {
+		foreach(var_06 in level.players) {
+			if(distance2dsquared(var_01,var_06.origin) < var_03) {
 				var_04 = 1;
 			}
 		}
@@ -631,9 +519,7 @@ waitforplayersnearby()
 	}
 }
 
-//Function Number: 31
-spawn_initial_rhino()
-{
+spawn_initial_rhino() {
 	scripts\engine\utility::flag_wait("laser_in_place");
 	var_00 = ["initial_rhino_spawn","initial_rhino_spawn_2"];
 	var_01 = ["rhino_spawn_door_1","rhino_spawn_door_2"];
@@ -663,9 +549,7 @@ spawn_initial_rhino()
 	aim_at_target(var_07);
 }
 
-//Function Number: 32
-spawn_starting_rhino(param_00,param_01)
-{
+spawn_starting_rhino(param_00,param_01) {
 	var_02 = scripts\engine\utility::getstruct(param_00,"targetname");
 	var_03 = var_02.origin;
 	var_04 = var_02.angles;
@@ -684,34 +568,25 @@ spawn_starting_rhino(param_00,param_01)
 	var_06.nodamage = undefined;
 }
 
-//Function Number: 33
-init_cargo_doors()
-{
+init_cargo_doors() {
 	var_00 = ["rhino_spawn_door_1","rhino_spawn_door_2","rhino_spawn_door_3","rhino_spawn_door_4"];
-	foreach(var_02 in var_00)
-	{
+	foreach(var_02 in var_00) {
 		var_03 = getentarray(var_02 + "_clip","targetname");
-		foreach(var_05 in var_03)
-		{
+		foreach(var_05 in var_03) {
 			var_05 func_95B5();
 			wait(0.1);
 		}
 	}
 }
 
-//Function Number: 34
-func_95B5()
-{
+func_95B5() {
 	self.nav_id = function_027B(self);
 }
 
-//Function Number: 35
-break_door(param_00)
-{
+break_door(param_00) {
 	var_01 = "death_ray_cannon_rock_impact";
 	var_02 = getentarray(param_00,"targetname");
-	foreach(var_04 in var_02)
-	{
+	foreach(var_04 in var_02) {
 		playsoundatpos(var_04.origin,"zmb_rhino_door_explo");
 		playfx(level._effect[var_01],var_04.origin);
 		var_04 delete();
@@ -719,18 +594,14 @@ break_door(param_00)
 
 	var_02 = getentarray(param_00 + "_clip","targetname");
 	var_06 = scripts\engine\utility::getclosest((2897,2313,-26),var_02,250);
-	foreach(var_04 in var_02)
-	{
-		if(param_00 == "rhino_sentry_door")
-		{
-			if(var_04 == var_06)
-			{
+	foreach(var_04 in var_02) {
+		if(param_00 == "rhino_sentry_door") {
+			if(var_04 == var_06) {
 				continue;
 			}
 		}
 
-		if(isdefined(var_04.nav_id))
-		{
+		if(isdefined(var_04.nav_id)) {
 			destroynavobstacle(var_04.nav_id);
 		}
 
@@ -739,18 +610,14 @@ break_door(param_00)
 	}
 }
 
-//Function Number: 36
-track_rhino_deaths(param_00)
-{
+track_rhino_deaths(param_00) {
 	level endon("rhino_fight_over");
 	level.rhino_array[level.rhino_array.size] = param_00;
 	param_00 waittill("death");
 	level.rhino_array = scripts\engine\utility::array_remove(level.rhino_array,param_00);
 }
 
-//Function Number: 37
-func_1071B()
-{
+func_1071B() {
 	level.current_num_spawned_enemies = 0;
 	var_00 = 0;
 	var_01 = [40,60,80,100];
@@ -758,17 +625,13 @@ func_1071B()
 	var_02 = [16,20,24,24];
 	var_03 = [1.25,0.75,0.5,0.35];
 	var_04 = var_02[level.players.size - 1];
-	while(var_00 < var_01)
-	{
-		if(level.current_num_spawned_enemies < var_04)
-		{
+	while(var_00 < var_01) {
+		if(level.current_num_spawned_enemies < var_04) {
 			var_05 = get_current_spawners();
-			if(var_05.size > 0)
-			{
+			if(var_05.size > 0) {
 				var_06 = scripts\engine\utility::random(var_05);
 				var_07 = func_10719(var_06);
-				if(isdefined(var_07))
-				{
+				if(isdefined(var_07)) {
 					var_00++;
 				}
 			}
@@ -777,23 +640,18 @@ func_1071B()
 		wait(var_03[level.players.size - 1]);
 	}
 
-	while(level.current_num_spawned_enemies > 0)
-	{
+	while(level.current_num_spawned_enemies > 0) {
 		wait(0.1);
 	}
 }
 
-//Function Number: 38
-get_current_spawners()
-{
+get_current_spawners() {
 	var_00 = scripts\engine\utility::getstructarray("spawner_1","script_noteworthy");
 	var_01 = scripts\engine\utility::getstructarray("spawner_2","script_noteworthy");
 	var_00 = scripts\engine\utility::array_combine(var_00,var_01);
 	var_02 = [];
-	foreach(var_04 in var_00)
-	{
-		if(scripts\engine\utility::istrue(var_04.var_19))
-		{
+	foreach(var_04 in var_00) {
+		if(scripts\engine\utility::istrue(var_04.var_19)) {
 			var_02[var_02.size] = var_04;
 		}
 	}
@@ -801,26 +659,20 @@ get_current_spawners()
 	return var_02;
 }
 
-//Function Number: 39
-update_spawn_portals()
-{
+update_spawn_portals() {
 	var_00 = scripts\engine\utility::getstructarray("spawner_1","script_noteworthy");
 	var_00 = scripts\engine\utility::array_randomize(var_00);
-	for(var_01 = 0;var_01 < var_00.size;var_01++)
-	{
-		if(!isdefined(var_00[var_01].target))
-		{
+	for(var_01 = 0;var_01 < var_00.size;var_01++) {
+		if(!isdefined(var_00[var_01].target)) {
 			continue;
 		}
 
 		var_02 = scripts\engine\utility::getstruct(var_00[var_01].target,"targetname");
-		if(!isdefined(var_02.angles))
-		{
+		if(!isdefined(var_02.angles)) {
 			var_02.angles = (0,0,0);
 		}
 
-		if(!isdefined(var_02.fx))
-		{
+		if(!isdefined(var_02.fx)) {
 			var_03 = var_02.origin;
 			var_02.fx = spawn("script_model",var_03 + (0,0,50));
 			var_02.fx.angles = var_02.angles + (0,90,0);
@@ -833,21 +685,17 @@ update_spawn_portals()
 
 	var_00 = scripts\engine\utility::getstructarray("spawner_2","script_noteworthy");
 	var_00 = scripts\engine\utility::array_randomize(var_00);
-	for(var_01 = 0;var_01 < var_00.size;var_01++)
-	{
-		if(!isdefined(var_00[var_01].target))
-		{
+	for(var_01 = 0;var_01 < var_00.size;var_01++) {
+		if(!isdefined(var_00[var_01].target)) {
 			continue;
 		}
 
 		var_02 = scripts\engine\utility::getstruct(var_00[var_01].target,"targetname");
-		if(!isdefined(var_02.angles))
-		{
+		if(!isdefined(var_02.angles)) {
 			var_02.angles = (0,0,0);
 		}
 
-		if(!isdefined(var_02.fx))
-		{
+		if(!isdefined(var_02.fx)) {
 			var_03 = var_02.origin;
 			var_02.fx = spawn("script_model",var_03 + (0,0,50));
 			var_02.fx.angles = var_02.angles + (0,90,0);
@@ -859,43 +707,32 @@ update_spawn_portals()
 	}
 }
 
-//Function Number: 40
-delete_portal_models()
-{
+delete_portal_models() {
 	var_00 = scripts\engine\utility::getstructarray("spawner_1","script_noteworthy");
-	foreach(var_02 in var_00)
-	{
-		if(isdefined(var_02.portal_struct) && isdefined(var_02.portal_struct.fx))
-		{
+	foreach(var_02 in var_00) {
+		if(isdefined(var_02.portal_struct) && isdefined(var_02.portal_struct.fx)) {
 			var_02.portal_struct.fx delete();
 		}
 	}
 
 	var_00 = scripts\engine\utility::getstructarray("spawner_2","script_noteworthy");
-	foreach(var_02 in var_00)
-	{
-		if(isdefined(var_02.portal_struct) && isdefined(var_02.portal_struct.fx))
-		{
+	foreach(var_02 in var_00) {
+		if(isdefined(var_02.portal_struct) && isdefined(var_02.portal_struct.fx)) {
 			var_02.portal_struct.fx delete();
 		}
 	}
 }
 
-//Function Number: 41
-portal_spawn_fx(param_00,param_01)
-{
+portal_spawn_fx(param_00,param_01) {
 	playfx(level._effect["vfx_zmb_portal_exit_burst"],param_00,param_01);
 }
 
-//Function Number: 42
-func_10719(param_00)
-{
+func_10719(param_00) {
 	var_01 = param_00.origin + (0,0,10);
 	var_02 = param_00.angles;
 	var_03 = "axis";
 	var_04 = scripts\cp\zombies\zombies_spawning::func_13F53("alien_goon",var_01,var_02,var_03);
-	if(isdefined(var_04))
-	{
+	if(isdefined(var_04)) {
 		portal_spawn_fx(param_00.origin,param_00.angles);
 		var_04 thread scripts\cp\zombies\zombies_spawning::func_64E7("alien_goon");
 	}
@@ -903,9 +740,7 @@ func_10719(param_00)
 	return var_04;
 }
 
-//Function Number: 43
-spawn_phantoms()
-{
+spawn_phantoms() {
 	level.current_num_spawned_enemies = 0;
 	var_00 = get_current_spawners();
 	var_01 = 0;
@@ -914,15 +749,11 @@ spawn_phantoms()
 	var_03 = [1,0.75,0.5,0.5];
 	var_04 = [12,15,18,18];
 	var_05 = var_04[level.players.size - 1];
-	while(var_01 < var_02)
-	{
-		if(level.current_num_spawned_enemies < var_05)
-		{
-			if(var_00.size > 0)
-			{
+	while(var_01 < var_02) {
+		if(level.current_num_spawned_enemies < var_05) {
+			if(var_00.size > 0) {
 				var_06 = scripts\engine\utility::random(var_00);
-				if(var_01 % 5 == 0)
-				{
+				if(var_01 % 5 == 0) {
 					var_07 = spawn_phantom(var_06);
 				}
 				else
@@ -930,8 +761,7 @@ spawn_phantoms()
 					var_07 = func_10719(var_07);
 				}
 
-				if(isdefined(var_07))
-				{
+				if(isdefined(var_07)) {
 					var_01++;
 				}
 			}
@@ -940,21 +770,17 @@ spawn_phantoms()
 		wait(var_03[level.players.size - 1]);
 	}
 
-	while(level.current_num_spawned_enemies > 0)
-	{
+	while(level.current_num_spawned_enemies > 0) {
 		wait(0.1);
 	}
 }
 
-//Function Number: 44
-spawn_phantom(param_00)
-{
+spawn_phantom(param_00) {
 	var_01 = param_00.origin + (0,0,10);
 	var_02 = param_00.angles;
 	var_03 = "axis";
 	var_04 = scripts\cp\zombies\zombies_spawning::func_13F53("alien_phantom",var_01,var_02,var_03);
-	if(isdefined(var_04))
-	{
+	if(isdefined(var_04)) {
 		portal_spawn_fx(param_00.origin,param_00.angles);
 		var_04 thread scripts\cp\zombies\zombies_spawning::func_64E7("alien_phantom");
 	}
@@ -962,15 +788,12 @@ spawn_phantom(param_00)
 	return var_04;
 }
 
-//Function Number: 45
-spawn_rhino(param_00)
-{
+spawn_rhino(param_00) {
 	var_01 = param_00.origin;
 	var_02 = param_00.angles;
 	var_03 = "axis";
 	var_04 = scripts\cp\zombies\zombies_spawning::func_13F53("alien_rhino",var_01,var_02,var_03);
-	if(isdefined(var_04))
-	{
+	if(isdefined(var_04)) {
 		portal_spawn_fx(param_00.origin,param_00.angles);
 		level thread track_rhino_deaths(var_04);
 		var_04 thread scripts\cp\zombies\zombies_spawning::func_64E7("alien_rhino");
@@ -982,19 +805,15 @@ spawn_rhino(param_00)
 	return var_04;
 }
 
-//Function Number: 46
-rhino_audio_monitor()
-{
+rhino_audio_monitor() {
 	level endon("game_ended");
 	self endon("death");
 	self.voprefix = "queen_";
 	thread scripts/cp/zombies/zombies_vo::play_zombie_death_vo(self.voprefix);
 	self.playing_stumble = 0;
-	for(;;)
-	{
+	for(;;) {
 		var_00 = scripts\engine\utility::waittill_any_timeout_1(3,"attack_hit_big","attack_hit_small","taunt","charge_start","charge_to_stop");
-		switch(var_00)
-		{
+		switch(var_00) {
 			case "attack_hit_big":
 				level thread scripts/cp/zombies/zombies_vo::play_zombie_vo(self,"attack_pounding_third",0);
 				break;
@@ -1022,12 +841,9 @@ rhino_audio_monitor()
 	}
 }
 
-//Function Number: 47
-move_laser()
-{
+move_laser() {
 	wait(10);
-	while(!isdefined(level.portal_gun))
-	{
+	while(!isdefined(level.portal_gun)) {
 		wait(0.1);
 	}
 
@@ -1044,9 +860,7 @@ move_laser()
 	level thread run_tracking_laser();
 }
 
-//Function Number: 48
-debug_laser_move()
-{
+debug_laser_move() {
 	level.portal_gun moveto(level.portal_gun.var_62EE,5,0.1,0.1);
 	level.portal_gun_crane moveto(level.portal_gun_crane.var_62EE,5,0.1,0.1);
 	level.portal_gun waittill("movedone");
@@ -1055,9 +869,7 @@ debug_laser_move()
 	wait(1);
 }
 
-//Function Number: 49
-setup_tracking_laser_ents()
-{
+setup_tracking_laser_ents() {
 	level.portal_gun.laser_node_start = spawn("script_model",level.portal_gun.origin);
 	scripts\engine\utility::waitframe();
 	level.portal_gun.laser_node_start setmodel("tag_origin");
@@ -1067,15 +879,12 @@ setup_tracking_laser_ents()
 	level.portal_gun.laser_node_end setmodel("tag_origin");
 }
 
-//Function Number: 50
-run_tracking_laser()
-{
+run_tracking_laser() {
 	var_00 = "death_ray_cannon_beam";
 	var_01 = level.portal_gun.barrel_ents;
 	var_02 = scripts\common\trace::create_contents(0,1,1,0,1,0,0);
 	level thread play_laser_fx();
-	for(;;)
-	{
+	for(;;) {
 		var_03 = undefined;
 		var_04 = var_01[0];
 		var_05 = level.portal_gun.angles;
@@ -1084,8 +893,7 @@ run_tracking_laser()
 		var_07 = var_04.origin + var_06 * 2000;
 		var_08 = scripts\engine\utility::array_add(level.players,level.portal_gun);
 		var_03 = function_0287(var_04.origin,var_07,var_02,var_08,0,"physicsquery_closest");
-		if(isdefined(var_03) && isarray(var_03) && var_03.size > 0)
-		{
+		if(isdefined(var_03) && isarray(var_03) && var_03.size > 0) {
 			var_09 = var_03[0]["position"];
 			level.portal_gun.laser_node_end.origin = var_09;
 		}
@@ -1094,43 +902,32 @@ run_tracking_laser()
 	}
 }
 
-//Function Number: 51
-play_laser_fx(param_00)
-{
+play_laser_fx(param_00) {
 	wait(1);
-	foreach(var_02 in level.players)
-	{
+	foreach(var_02 in level.players) {
 		level.target_laser_fx = function_02DF(level._effect["target_laser"],level.portal_gun.laser_node_start,"tag_origin",level.portal_gun.laser_node_end,"tag_origin",var_02);
 	}
 }
 
-//Function Number: 52
-make_laser_angry()
-{
-	if(isdefined(level.target_laser_fx))
-	{
+make_laser_angry() {
+	if(isdefined(level.target_laser_fx)) {
 		level.target_laser_fx delete();
 	}
 
-	foreach(var_01 in level.players)
-	{
+	foreach(var_01 in level.players) {
 		level.target_laser_fx = function_02DF(level._effect["target_laser_angry"],level.portal_gun.laser_node_start,"tag_origin",level.portal_gun.laser_node_end,"tag_origin",var_01);
 	}
 }
 
-//Function Number: 53
-aim_and_fire_laser()
-{
+aim_and_fire_laser() {
 	level endon("rhino_fight_over");
 	level endon("stop_firing");
 	make_laser_angry();
 	var_00 = scripts\engine\utility::random(level.players);
 	var_00 thread scripts\cp\cp_vo::try_to_play_vo("rhino_laser_target","final_comment_vo","highest",5,1,0,0,100);
-	for(;;)
-	{
+	for(;;) {
 		var_01 = get_target();
-		if(isdefined(var_01))
-		{
+		if(isdefined(var_01)) {
 			var_02 = aim_at_target(var_01);
 			wait(1);
 			func_6D02(var_02);
@@ -1140,21 +937,16 @@ aim_and_fire_laser()
 	}
 }
 
-//Function Number: 54
-get_target()
-{
+get_target() {
 	var_00 = level.players;
 	var_01 = undefined;
-	for(var_02 = 0;!var_02;var_02 = 1)
-	{
-		if(var_00.size < 1)
-		{
+	for(var_02 = 0;!var_02;var_02 = 1) {
+		if(var_00.size < 1) {
 			break;
 		}
 
 		var_01 = scripts\engine\utility::random(var_00);
-		if(!var_01 scripts\cp\utility::is_valid_player())
-		{
+		if(!var_01 scripts\cp\utility::is_valid_player()) {
 			var_00 = scripts\engine\utility::array_remove(var_00,var_01);
 			var_01 = undefined;
 			continue;
@@ -1164,13 +956,10 @@ get_target()
 	return var_01;
 }
 
-//Function Number: 55
-aim_at_target(param_00)
-{
+aim_at_target(param_00) {
 	var_01 = 3;
 	var_02 = param_00.origin;
-	if(isdefined(param_00.target))
-	{
+	if(isdefined(param_00.target)) {
 		param_00 = scripts\engine\utility::getstruct(param_00.target,"targetname");
 		var_02 = param_00.origin;
 	}
@@ -1187,15 +976,12 @@ aim_at_target(param_00)
 	return var_02;
 }
 
-//Function Number: 56
-func_6D02(param_00)
-{
+func_6D02(param_00) {
 	var_01 = "death_ray_cannon_beam";
 	var_02 = "tag_origin_laser_ray_fx";
 	var_03 = "death_ray_cannon_rock_impact";
 	var_04 = level.portal_gun.barrel_ents;
-	foreach(var_06 in var_04)
-	{
+	foreach(var_06 in var_04) {
 		var_07 = spawn("script_model",var_06.origin);
 		var_07.angles = var_06.angles;
 		var_07 setmodel(var_02);
@@ -1204,10 +990,8 @@ func_6D02(param_00)
 
 	wait(1);
 	var_09 = param_00;
-	foreach(var_06 in var_04)
-	{
-		if(!isdefined(var_06.angles))
-		{
+	foreach(var_06 in var_04) {
+		if(!isdefined(var_06.angles)) {
 			var_06.angles = (0,0,0);
 		}
 
@@ -1216,8 +1000,7 @@ func_6D02(param_00)
 
 	playsoundatpos(level.portal_gun.origin,"zmb_railgun_fire");
 	wait(0.1);
-	foreach(var_06 in var_04)
-	{
+	foreach(var_06 in var_04) {
 		var_06.fx_spot delete();
 	}
 
@@ -1225,9 +1008,7 @@ func_6D02(param_00)
 	level.portal_gun radiusdamage(var_09,100,180,180);
 }
 
-//Function Number: 57
-spawn_ammo_crate()
-{
+spawn_ammo_crate() {
 	wait(1);
 	var_00 = scripts\engine\utility::getstruct("ammo_crate_spawn","targetname");
 	var_00 = scripts\engine\utility::drop_to_ground(var_00.origin,12,-100) + (0,0,1);
@@ -1236,27 +1017,19 @@ spawn_ammo_crate()
 	var_01 setmodel("tag_origin_ammo_crate");
 }
 
-//Function Number: 58
-rhino_ammo_crate_hint(param_00,param_01)
-{
+rhino_ammo_crate_hint(param_00,param_01) {
 	return "";
 }
 
-//Function Number: 59
-rhino_ammo_crate_act(param_00,param_01)
-{
+rhino_ammo_crate_act(param_00,param_01) {
 	var_02 = param_01 scripts\cp\utility::getvalidtakeweapon();
-	if(!issubstr(var_02,"venom"))
-	{
+	if(!issubstr(var_02,"venom")) {
 		param_01 givemaxammo(var_02);
 	}
 }
 
-//Function Number: 60
-fake_console_timer(param_00)
-{
-	if(isdefined(param_00))
-	{
+fake_console_timer(param_00) {
+	if(isdefined(param_00)) {
 		wait(param_00);
 	}
 
@@ -1266,17 +1039,14 @@ fake_console_timer(param_00)
 	scripts\engine\utility::flag_set("consoles_ready");
 	var_01 = scripts\engine\utility::random(level.players);
 	var_01 thread scripts\cp\cp_vo::try_to_play_vo("rhino_area_console","final_comment_vo","highest",5,1,0,0,100);
-	while(level.rhino_consoles_activated < 3)
-	{
+	while(level.rhino_consoles_activated < 3) {
 		wait(0.1);
 	}
 
 	scripts\engine\utility::flag_set("all_buttons_pressed");
 }
 
-//Function Number: 61
-endless_wave()
-{
+endless_wave() {
 	level endon("all_buttons_pressed");
 	level.current_num_spawned_enemies = 0;
 	var_00 = 0;
@@ -1290,24 +1060,18 @@ endless_wave()
 	var_08 = [1,1,2,2];
 	var_09 = 0;
 	var_0A = 4;
-	while(var_00 < var_01)
-	{
-		if(level.current_num_spawned_enemies < var_05)
-		{
+	while(var_00 < var_01) {
+		if(level.current_num_spawned_enemies < var_05) {
 			var_0B = get_current_spawners();
-			if(var_0B.size > 0)
-			{
+			if(var_0B.size > 0) {
 				var_0C = scripts\engine\utility::random(var_0B);
-				if(var_09 < var_0A && var_00 > 15 && var_00 % 25 == 0 && level.rhino_array.size < var_08[level.players.size - 1])
-				{
+				if(var_09 < var_0A && var_00 > 15 && var_00 % 25 == 0 && level.rhino_array.size < var_08[level.players.size - 1]) {
 					var_0D = spawn_rhino(var_0C);
-					if(isdefined(var_0D))
-					{
+					if(isdefined(var_0D)) {
 						var_09++;
 					}
 				}
-				else if(var_01 % 10 == 0)
-				{
+				else if(var_01 % 10 == 0) {
 					var_0D = spawn_phantom(var_0D);
 				}
 				else
@@ -1315,15 +1079,13 @@ endless_wave()
 					var_0D = func_10719(var_0D);
 				}
 
-				if(isdefined(var_0D))
-				{
+				if(isdefined(var_0D)) {
 					var_00++;
 				}
 			}
 		}
 
-		if(var_00 < var_07[level.players.size - 1])
-		{
+		if(var_00 < var_07[level.players.size - 1]) {
 			wait(scripts\engine\utility::ter_op(scripts\engine\utility::cointoss(),var_02[level.players.size - 1],int(var_02[level.players.size - 1] * 2)));
 			continue;
 		}
@@ -1332,9 +1094,7 @@ endless_wave()
 	}
 }
 
-//Function Number: 62
-emp_wave()
-{
+emp_wave() {
 	level endon("emp_done");
 	level.current_num_spawned_enemies = 0;
 	var_00 = 0;
@@ -1347,25 +1107,19 @@ emp_wave()
 	var_07 = 0;
 	var_08 = 6;
 	var_09 = [1,1,2,2];
-	while(var_00 < var_01)
-	{
-		if(level.current_num_spawned_enemies < var_05)
-		{
+	while(var_00 < var_01) {
+		if(level.current_num_spawned_enemies < var_05) {
 			update_emp_spawners();
 			var_0A = get_current_spawners();
-			if(var_0A.size > 0)
-			{
+			if(var_0A.size > 0) {
 				var_0B = scripts\engine\utility::random(var_0A);
-				if(var_07 < var_08 && var_00 > 15 && var_00 % 25 == 0 && level.rhino_array.size < var_09[level.players.size - 1])
-				{
+				if(var_07 < var_08 && var_00 > 15 && var_00 % 25 == 0 && level.rhino_array.size < var_09[level.players.size - 1]) {
 					var_0C = spawn_rhino(var_0B);
-					if(isdefined(var_0C))
-					{
+					if(isdefined(var_0C)) {
 						var_07++;
 					}
 				}
-				else if(var_01 % 10 == 0)
-				{
+				else if(var_01 % 10 == 0) {
 					var_0C = spawn_phantom(var_0C);
 				}
 				else
@@ -1373,15 +1127,13 @@ emp_wave()
 					var_0C = func_10719(var_0C);
 				}
 
-				if(isdefined(var_0C))
-				{
+				if(isdefined(var_0C)) {
 					var_00++;
 				}
 			}
 		}
 
-		if(var_00 < var_06[level.players.size - 1])
-		{
+		if(var_00 < var_06[level.players.size - 1]) {
 			wait(var_02[level.players.size - 1]);
 			continue;
 		}
@@ -1390,37 +1142,30 @@ emp_wave()
 	}
 }
 
-//Function Number: 63
-update_emp_spawners()
-{
-	if(!isdefined(level.emp_charge))
-	{
+update_emp_spawners() {
+	if(!isdefined(level.emp_charge)) {
 		return;
 	}
 
-	if(level.emp_charge < 30)
-	{
+	if(level.emp_charge < 30) {
 		turn_on_spawners("spawner_1");
 		turn_off_spawners("spawner_2");
 		return;
 	}
 
-	if(level.emp_charge < 60)
-	{
+	if(level.emp_charge < 60) {
 		turn_on_spawners("spawner_2");
 		turn_off_spawners("spawner_1");
 		return;
 	}
 
-	if(level.emp_charge < 90)
-	{
+	if(level.emp_charge < 90) {
 		turn_on_spawners("spawner_1");
 		turn_off_spawners("spawner_2");
 		return;
 	}
 
-	if(level.emp_charge < 120)
-	{
+	if(level.emp_charge < 120) {
 		turn_on_spawners("spawner_2");
 		turn_off_spawners("spawner_1");
 		return;
@@ -1430,40 +1175,29 @@ update_emp_spawners()
 	turn_on_spawners("spawner_2");
 }
 
-//Function Number: 64
-turn_off_spawners(param_00,param_01)
-{
+turn_off_spawners(param_00,param_01) {
 	var_02 = getentarray("rhino_console_screen","targetname");
 	var_03 = scripts\engine\utility::getstructarray(param_00,"script_noteworthy");
-	foreach(var_05 in var_03)
-	{
+	foreach(var_05 in var_03) {
 		var_05.portal_struct.fx setscriptablepartstate("portal","off");
 		var_05.var_19 = 0;
-		if(isdefined(var_05.script_parameters))
-		{
-			foreach(var_07 in var_02)
-			{
-				if(var_07.script_parameters == var_05.script_parameters)
-				{
+		if(isdefined(var_05.script_parameters)) {
+			foreach(var_07 in var_02) {
+				if(var_07.script_parameters == var_05.script_parameters) {
 					var_07 show();
 				}
 			}
 		}
 	}
 
-	if(isdefined(param_01))
-	{
+	if(isdefined(param_01)) {
 		var_0A = scripts\engine\utility::getstructarray(param_01,"script_noteworthy");
-		foreach(var_05 in var_0A)
-		{
+		foreach(var_05 in var_0A) {
 			var_05.portal_struct.fx setscriptablepartstate("portal","off");
 			var_05.var_19 = 0;
-			if(isdefined(var_05.script_parameters))
-			{
-				foreach(var_07 in var_02)
-				{
-					if(var_07.script_parameters == var_05.script_parameters)
-					{
+			if(isdefined(var_05.script_parameters)) {
+				foreach(var_07 in var_02) {
+					if(var_07.script_parameters == var_05.script_parameters) {
 						var_07 show();
 					}
 				}
@@ -1472,40 +1206,29 @@ turn_off_spawners(param_00,param_01)
 	}
 }
 
-//Function Number: 65
-turn_on_spawners(param_00,param_01,param_02)
-{
+turn_on_spawners(param_00,param_01,param_02) {
 	var_03 = getentarray("rhino_console_screen","targetname");
 	var_04 = scripts\engine\utility::getstructarray(param_00,"script_noteworthy");
-	foreach(var_06 in var_04)
-	{
+	foreach(var_06 in var_04) {
 		var_06.portal_struct.fx setscriptablepartstate("portal","cooldown");
 		var_06.var_19 = 1;
-		if(scripts\engine\utility::istrue(param_02) && isdefined(var_06.script_parameters))
-		{
-			foreach(var_08 in var_03)
-			{
-				if(var_08.script_parameters == var_06.script_parameters)
-				{
+		if(scripts\engine\utility::istrue(param_02) && isdefined(var_06.script_parameters)) {
+			foreach(var_08 in var_03) {
+				if(var_08.script_parameters == var_06.script_parameters) {
 					var_08 hide();
 				}
 			}
 		}
 	}
 
-	if(isdefined(param_01))
-	{
+	if(isdefined(param_01)) {
 		var_0B = scripts\engine\utility::getstructarray(param_01,"script_noteworthy");
-		foreach(var_06 in var_0B)
-		{
+		foreach(var_06 in var_0B) {
 			var_06.portal_struct.fx setscriptablepartstate("portal","cooldown");
 			var_06.var_19 = 1;
-			if(scripts\engine\utility::istrue(param_02) && isdefined(var_06.script_parameters))
-			{
-				foreach(var_08 in var_03)
-				{
-					if(var_08.script_parameters == var_06.script_parameters)
-					{
+			if(scripts\engine\utility::istrue(param_02) && isdefined(var_06.script_parameters)) {
+				foreach(var_08 in var_03) {
+					if(var_08.script_parameters == var_06.script_parameters) {
 						var_08 hide();
 					}
 				}
@@ -1514,9 +1237,7 @@ turn_on_spawners(param_00,param_01,param_02)
 	}
 }
 
-//Function Number: 66
-open_sentry_doors()
-{
+open_sentry_doors() {
 	var_00 = scripts\engine\utility::getstructarray("rhino_sentry","script_noteworthy");
 	var_01 = "rhino_sentry_door";
 	var_02 = getentarray(var_01,"targetname");
@@ -1536,17 +1257,13 @@ open_sentry_doors()
 	break_door(var_01);
 }
 
-//Function Number: 67
-emp_defend()
-{
+emp_defend() {
 	level thread emp_wave();
 	emp_charge(150);
 	level waittill("emp_done");
 }
 
-//Function Number: 68
-emp_charge(param_00)
-{
+emp_charge(param_00) {
 	level.emp_console = getent("emp_console","targetname");
 	level.emp_console_clip = getent("emp_console_clip","targetname");
 	level.emp_console_clip solid();
@@ -1555,38 +1272,30 @@ emp_charge(param_00)
 	emp_charge_counter(param_00);
 }
 
-//Function Number: 69
-damage_monitor(param_00,param_01)
-{
+damage_monitor(param_00,param_01) {
 	level endon("emp_charge_completed");
 	param_00 endon("death");
 	param_01 setcandamage(1);
 	param_01.health = 9999999;
 	param_00.nextdamagetime = 0;
-	for(;;)
-	{
+	for(;;) {
 		param_01 waittill("damage",var_02,var_03);
-		if(isdefined(var_03) && isdefined(var_03.team) && var_03.team == "allies")
-		{
+		if(isdefined(var_03) && isdefined(var_03.team) && var_03.team == "allies") {
 			continue;
 		}
 
 		var_03 notify("speaker_attacked");
 		var_04 = gettime();
-		if(var_04 >= param_00.nextdamagetime)
-		{
+		if(var_04 >= param_00.nextdamagetime) {
 			param_00.nextdamagetime = var_04 + 1000;
-			if(level.emp_charge > 1)
-			{
+			if(level.emp_charge > 1) {
 				level.emp_charge--;
 			}
 		}
 	}
 }
 
-//Function Number: 70
-emp_charge_counter(param_00)
-{
+emp_charge_counter(param_00) {
 	var_01 = param_00;
 	var_02 = param_00 / 100;
 	var_03 = getentarray("emp_console_timer","targetname");
@@ -1597,12 +1306,9 @@ emp_charge_counter(param_00)
 	setomnvar("zombie_venomxTimer",99);
 	setomnvar("zm_ui_venomx_timer_ent_4",var_03[0]);
 	level.emp_charge = 99;
-	while(level.emp_charge > 0)
-	{
-		if(scripts\cp\utility::isplayingsolo() || scripts\engine\utility::istrue(level.only_one_player))
-		{
-			if(scripts\cp\zombies\zombie_afterlife_arcade::is_in_afterlife_arcade(level.players[0]))
-			{
+	while(level.emp_charge > 0) {
+		if(scripts\cp\utility::isplayingsolo() || scripts\engine\utility::istrue(level.only_one_player)) {
+			if(scripts\cp\zombies\zombie_afterlife_arcade::is_in_afterlife_arcade(level.players[0])) {
 				wait(0.05);
 				continue;
 			}
@@ -1622,50 +1328,36 @@ emp_charge_counter(param_00)
 	level.emp_console playloopsound("trap_electric_on_lp");
 }
 
-//Function Number: 71
-turn_on_lights(param_00)
-{
+turn_on_lights(param_00) {
 	wait(param_00);
 	var_01 = getentarray("rhinofight","script_noteworthy");
-	foreach(var_03 in var_01)
-	{
+	foreach(var_03 in var_01) {
 		var_03 setscriptablepartstate("lights","on");
 	}
 }
 
-//Function Number: 72
-turn_off_lights()
-{
+turn_off_lights() {
 	var_00 = getentarray("rhinofight","script_noteworthy");
-	foreach(var_02 in var_00)
-	{
+	foreach(var_02 in var_00) {
 		var_02 setscriptablepartstate("lights","off");
 	}
 }
 
-//Function Number: 73
-turn_on_monitors()
-{
+turn_on_monitors() {
 	level.currentneilstate = "angry";
-	for(var_00 = 0;var_00 < level.players.size;var_00++)
-	{
+	for(var_00 = 0;var_00 < level.players.size;var_00++) {
 		level.players[var_00] thread scripts\cp\maps\cp_final\cp_final::update_special_mode_for_player(level.players[var_00]);
 	}
 }
 
-//Function Number: 74
-turn_off_monitors()
-{
+turn_off_monitors() {
 	level.currentneilstate = "blank";
-	for(var_00 = 0;var_00 < level.players.size;var_00++)
-	{
+	for(var_00 = 0;var_00 < level.players.size;var_00++) {
 		level.players[var_00] thread scripts\cp\maps\cp_final\cp_final::update_special_mode_for_player(level.players[var_00]);
 	}
 }
 
-//Function Number: 75
-debug_to_mammoth()
-{
+debug_to_mammoth() {
 	scripts\engine\utility::flag_wait("spawning_ready");
 	scripts\engine\utility::flag_wait("laser_in_place");
 	open_stage_1_area();
@@ -1675,9 +1367,7 @@ debug_to_mammoth()
 	release_mammoths();
 }
 
-//Function Number: 76
-release_mammoths()
-{
+release_mammoths() {
 	level.dead_mammoths = 0;
 	level.mammoth_spawn = 1;
 	level.mammoth_fx = [];
@@ -1693,8 +1383,7 @@ release_mammoths()
 	func_6D02(var_02);
 	break_door(var_00);
 	thread mammothwave();
-	if(isdefined(level.target_laser_fx))
-	{
+	if(isdefined(level.target_laser_fx)) {
 		level.target_laser_fx delete();
 	}
 
@@ -1702,9 +1391,7 @@ release_mammoths()
 	var_03 thread scripts\cp\cp_vo::try_to_play_vo("rhino_behemoth_spawn","final_comment_vo","highest",5,1,0,0,100);
 }
 
-//Function Number: 77
-mammothwave()
-{
+mammothwave() {
 	level endon("disconnect");
 	level endon("rhino_fight_over");
 	wait(45);
@@ -1723,47 +1410,38 @@ mammothwave()
 	var_0B = [1,1,2,2];
 	var_0C = 0;
 	var_0D = 6;
-	while(var_00 < var_01)
-	{
-		if(level.dead_mammoths >= 1)
-		{
+	while(var_00 < var_01) {
+		if(level.dead_mammoths >= 1) {
 			var_0A = var_05 + var_09[level.players.size - 1];
 		}
 
-		if(var_00 % var_0A == 0)
-		{
+		if(var_00 % var_0A == 0) {
 			turn_off_spawners("spawner_1");
 			turn_off_spawners("spawner_2");
 			var_0E = 1;
 			var_0F = 0;
 			var_10 = 45;
-			while(var_0E && level.current_num_spawned_enemies - level.rhino_array.size >= var_08[level.players.size - 1])
-			{
+			while(var_0E && level.current_num_spawned_enemies - level.rhino_array.size >= var_08[level.players.size - 1]) {
 				wait(0.25);
 				var_0F = var_0F + 0.25;
-				if(var_0F >= var_10)
-				{
+				if(var_0F >= var_10) {
 					var_0E = 0;
 				}
 			}
 
-			if(var_0E)
-			{
+			if(var_0E) {
 				wait(var_07[level.players.size - 1]);
 			}
 		}
 
 		turn_on_spawners("spawner_1");
 		turn_on_spawners("spawner_2");
-		if(level.current_num_spawned_enemies < var_0A)
-		{
+		if(level.current_num_spawned_enemies < var_0A) {
 			update_emp_spawners();
 			var_11 = get_current_spawners();
-			if(var_11.size > 0)
-			{
+			if(var_11.size > 0) {
 				var_12 = scripts\engine\utility::random(var_11);
-				if(level.dead_mammoths >= 1 && var_00 % 10 == 0)
-				{
+				if(level.dead_mammoths >= 1 && var_00 % 10 == 0) {
 					var_13 = spawn_phantom(var_12);
 				}
 				else
@@ -1771,15 +1449,13 @@ mammothwave()
 					var_13 = func_10719(var_13);
 				}
 
-				if(isdefined(var_13))
-				{
+				if(isdefined(var_13)) {
 					var_00++;
 				}
 			}
 		}
 
-		if(level.dead_mammoths < 1)
-		{
+		if(level.dead_mammoths < 1) {
 			wait(var_02[level.players.size - 1]);
 			continue;
 		}
@@ -1788,13 +1464,10 @@ mammothwave()
 	}
 }
 
-//Function Number: 78
-spawn_mammoth(param_00,param_01)
-{
+spawn_mammoth(param_00,param_01) {
 	var_02 = scripts\engine\utility::getstruct(param_00,"targetname");
 	var_03 = spawn_rhino(var_02);
-	if(isdefined(param_01))
-	{
+	if(isdefined(param_01)) {
 		var_03.origin = var_03.origin + param_01;
 	}
 
@@ -1805,24 +1478,18 @@ spawn_mammoth(param_00,param_01)
 	scripts\cp\maps\cp_final\cp_final_mpq::playneilvo("final_n31l_evil_release_behemouth");
 }
 
-//Function Number: 79
-trigger_on_mammoth_death(param_00)
-{
+trigger_on_mammoth_death(param_00) {
 	level endon("game_ended");
 	param_00 waittill("death");
 	level.dead_mammoths++;
-	if(level.dead_mammoths > 1)
-	{
-		if(scripts\cp\zombies\direct_boss_fight::should_directly_go_to_boss_fight())
-		{
+	if(level.dead_mammoths > 1) {
+		if(scripts\cp\zombies\direct_boss_fight::should_directly_go_to_boss_fight()) {
 			level thread scripts\cp\zombies\direct_boss_fight::success_sequence(5,5);
 			return;
 		}
 
-		foreach(var_02 in level.spawned_enemies)
-		{
-			if(isdefined(var_02) && var_02.health >= 1)
-			{
+		foreach(var_02 in level.spawned_enemies) {
+			if(isdefined(var_02) && var_02.health >= 1) {
 				var_02 dodamage(var_02.maxhealth,var_02.origin);
 			}
 		}
@@ -1834,40 +1501,30 @@ trigger_on_mammoth_death(param_00)
 	}
 }
 
-//Function Number: 80
-check_players_for_damage()
-{
+check_players_for_damage() {
 	level endon("rhino_fight_over");
 	level endon("game_ended");
 	var_00 = 150;
 	var_01 = var_00 * var_00;
 	var_02 = 50;
 	var_03 = var_02 * var_02;
-	while(!isdefined(level.mammoth_spawned_fx) && !isdefined(level.mammoth_spawned_fx_small))
-	{
+	while(!isdefined(level.mammoth_spawned_fx) && !isdefined(level.mammoth_spawned_fx_small)) {
 		wait(0.1);
 	}
 
-	for(;;)
-	{
-		if(isdefined(level.meph_fight_started))
-		{
+	for(;;) {
+		if(isdefined(level.meph_fight_started)) {
 			return;
 		}
 
-		if(level.mammoth_spawned_fx.size > 0)
-		{
-			foreach(var_05 in level.players)
-			{
-				if(isdefined(var_05.padding_damage))
-				{
+		if(level.mammoth_spawned_fx.size > 0) {
+			foreach(var_05 in level.players) {
+				if(isdefined(var_05.padding_damage)) {
 					continue;
 				}
 
-				foreach(var_07 in level.mammoth_spawned_fx)
-				{
-					if(distancesquared(var_07,var_05.origin) < var_01)
-					{
+				foreach(var_07 in level.mammoth_spawned_fx) {
+					if(distancesquared(var_07,var_05.origin) < var_01) {
 						var_08 = int(var_05.maxhealth / 4 + 5);
 						var_05 dodamage(var_08,var_07);
 						var_05.padding_damage = 1;
@@ -1878,19 +1535,14 @@ check_players_for_damage()
 			}
 		}
 
-		if(level.mammoth_spawned_fx_small.size > 0)
-		{
-			foreach(var_05 in level.players)
-			{
-				if(isdefined(var_05.padding_damage))
-				{
+		if(level.mammoth_spawned_fx_small.size > 0) {
+			foreach(var_05 in level.players) {
+				if(isdefined(var_05.padding_damage)) {
 					continue;
 				}
 
-				foreach(var_07 in level.mammoth_spawned_fx_small)
-				{
-					if(distancesquared(var_07,var_05.origin) < var_03)
-					{
+				foreach(var_07 in level.mammoth_spawned_fx_small) {
+					if(distancesquared(var_07,var_05.origin) < var_03) {
 						var_08 = int(var_05.maxhealth / 4 + 5);
 						var_05 dodamage(var_08,var_07);
 						var_05.padding_damage = 1;
@@ -1905,20 +1557,15 @@ check_players_for_damage()
 	}
 }
 
-//Function Number: 81
-remove_padding_damage()
-{
+remove_padding_damage() {
 	self endon("disconnect");
 	wait(0.25);
-	if(isdefined(self))
-	{
+	if(isdefined(self)) {
 		self.padding_damage = undefined;
 	}
 }
 
-//Function Number: 82
-init_mammoth_fx_locs()
-{
+init_mammoth_fx_locs() {
 	level.mammoth_ground_fx_large = [(3288.58,3245.07,-176),(2788.94,3244.93,-176),(2287.52,3244.72,-176),(2882.71,2657.93,-176),(3381.2,2742.33,-176),(2387.39,2743.31,-176),(2369.8,2227.79,-176),(2873.93,2134.09,-176),(3346.65,2198.53,-176)];
 	var_00 = [];
 	var_00[var_00.size] = (3030.07,2769.07,-176.001);
@@ -2124,38 +1771,30 @@ init_mammoth_fx_locs()
 	level.mammoth_ground_fx_small_ang = var_00;
 }
 
-//Function Number: 83
-mammoth_hit_fx()
-{
+mammoth_hit_fx() {
 	self endon("death");
 	level endon("mammoth_final");
 	var_00 = -3036;
 	var_01 = 0;
 	var_02 = 1;
-	while(var_02)
-	{
+	while(var_02) {
 		var_03 = 0;
 		self waittill("mammoth_hit",var_04);
-		if(self != var_04)
-		{
+		if(self != var_04) {
 			continue;
 		}
 
 		var_05 = self.origin;
-		for(var_06 = 0;var_06 < level.mammoth_ground_fx_small.size;var_06++)
-		{
-			if(distancesquared(level.mammoth_ground_fx_small[var_06],var_05) < var_00)
-			{
-				if(!scripts\engine\utility::array_contains(level.mammoth_spawned_fx_small,level.mammoth_ground_fx_small[var_06]))
-				{
+		for(var_06 = 0;var_06 < level.mammoth_ground_fx_small.size;var_06++) {
+			if(distancesquared(level.mammoth_ground_fx_small[var_06],var_05) < var_00) {
+				if(!scripts\engine\utility::array_contains(level.mammoth_spawned_fx_small,level.mammoth_ground_fx_small[var_06])) {
 					play_hit_fx();
 					self.force_taunt = 1;
 					var_07 = level.mammoth_ground_fx_small_ang[var_06];
 					level thread trigger_mammoth_small_fx(level.mammoth_ground_fx_small[var_06],var_07);
 					var_03 = 1;
 					var_01++;
-					if(var_01 > 15)
-					{
+					if(var_01 > 15) {
 						var_02 = 0;
 					}
 
@@ -2164,8 +1803,7 @@ mammoth_hit_fx()
 			}
 		}
 
-		if(var_03)
-		{
+		if(var_03) {
 			self.health = self.maxhealth;
 			continue;
 		}
@@ -2176,12 +1814,9 @@ mammoth_hit_fx()
 	self suicide();
 }
 
-//Function Number: 84
-rhino_fight_over()
-{
+rhino_fight_over() {
 	level notify("rhino_fight_over");
-	foreach(var_01 in level.mammoth_fx)
-	{
+	foreach(var_01 in level.mammoth_fx) {
 		var_01 delete();
 	}
 
@@ -2194,20 +1829,16 @@ rhino_fight_over()
 	level thread delay_give_rewards();
 	level notify("add_hidden_song_to_playlist");
 	var_03 = scripts\cp\zombies\directors_cut::directors_cut_is_activated();
-	foreach(var_05 in level.players)
-	{
-		if(scripts\engine\utility::istrue(var_05.inlaststand) || scripts\engine\utility::istrue(var_05.in_afterlife_arcade))
-		{
+	foreach(var_05 in level.players) {
+		if(scripts\engine\utility::istrue(var_05.inlaststand) || scripts\engine\utility::istrue(var_05.in_afterlife_arcade)) {
 			scripts\cp\cp_laststand::clear_last_stand_timer(var_05);
 			var_05 notify("revive_success");
-			if(isdefined(var_05.reviveent))
-			{
+			if(isdefined(var_05.reviveent)) {
 				var_05.reviveent notify("revive_success");
 			}
 		}
 
-		if(scripts\cp\zombies\directors_cut::directors_cut_activated_for(var_05))
-		{
+		if(scripts\cp\zombies\directors_cut::directors_cut_activated_for(var_05)) {
 			var_05 thread scripts\cp\zombies\directors_cut::mark_talisman_possession(var_05);
 		}
 
@@ -2219,28 +1850,23 @@ rhino_fight_over()
 
 	scripts\cp\utility::play_bink_video("sysload_o1",106,1);
 	wait(106.5);
-	foreach(var_05 in level.players)
-	{
+	foreach(var_05 in level.players) {
 		var_05 clearclienttriggeraudiozone(0.3);
 	}
 
-	if(var_03)
-	{
+	if(var_03) {
 		var_09 = 0;
-		foreach(var_05 in level.players)
-		{
+		foreach(var_05 in level.players) {
 			var_0B = var_05 getplayerdata("cp","haveItems","item_1");
 			var_0C = var_05 getplayerdata("cp","haveItems","item_2");
 			var_0D = var_05 getplayerdata("cp","haveItems","item_3");
 			var_0E = var_05 getplayerdata("cp","haveItems","item_4");
-			if(var_0B && var_0C && var_0D && var_0E)
-			{
+			if(var_0B && var_0C && var_0D && var_0E) {
 				var_09 = 1;
 			}
 		}
 
-		if(var_09)
-		{
+		if(var_09) {
 			level.zombies_paused = 1;
 			level thread scripts\cp\maps\cp_final\cp_final_final_boss::start_boss_fight();
 		}
@@ -2255,16 +1881,14 @@ rhino_fight_over()
 	}
 
 	setdvar("bg_cinematicFullscreen",0);
-	if(isdefined(level.rhino_lnf_fx))
-	{
+	if(isdefined(level.rhino_lnf_fx)) {
 		level.rhino_lnf_fx delete();
 	}
 
 	level.movie_playing = "cp_zmb_screen_640";
 	preloadcinematicforall(level.movie_playing);
 	function_030E(level.movie_playing);
-	foreach(var_05 in level.players)
-	{
+	foreach(var_05 in level.players) {
 		scripts\cp\cp_vo::func_12BE3([var_05]);
 		var_05 scripts/cp/zombies/achievement::update_achievement("THE_END",1);
 	}
@@ -2272,17 +1896,12 @@ rhino_fight_over()
 	level.pause_nag_vo = 0;
 }
 
-//Function Number: 85
-kill_all_enemies(param_00)
-{
+kill_all_enemies(param_00) {
 	var_01 = 0;
 	var_02 = 0.25;
-	while(var_01 < param_00)
-	{
-		foreach(var_04 in level.spawned_enemies)
-		{
-			if(isdefined(var_04) && var_04.health >= 1)
-			{
+	while(var_01 < param_00) {
+		foreach(var_04 in level.spawned_enemies) {
+			if(isdefined(var_04) && var_04.health >= 1) {
 				var_04 dodamage(var_04.maxhealth,var_04.origin);
 			}
 		}
@@ -2292,9 +1911,7 @@ kill_all_enemies(param_00)
 	}
 }
 
-//Function Number: 86
-resume_cp_final()
-{
+resume_cp_final() {
 	level.getspawnpoint = ::scripts\cp\cp_globallogic::defaultgetspawnpoint;
 	level.force_respawn_location = undefined;
 	level.zombies_paused = undefined;
@@ -2306,8 +1923,7 @@ resume_cp_final()
 	var_01 = (358,41,0);
 	var_02 = [50,-50,50,-50];
 	var_03 = [50,50,-50,-50];
-	for(var_04 = 0;var_04 < level.players.size;var_04++)
-	{
+	for(var_04 = 0;var_04 < level.players.size;var_04++) {
 		var_05 = (var_00[0] + var_02[var_04],var_00[1] + var_03[var_04],var_00[2]);
 		level.players[var_04] setorigin(var_05);
 		level.players[var_04] setplayerangles(var_01);
@@ -2318,44 +1934,34 @@ resume_cp_final()
 	scripts\cp\maps\cp_final\cp_final::enablepa("pa_facility");
 }
 
-//Function Number: 87
-delay_give_rewards()
-{
+delay_give_rewards() {
 	level endon("game_ended");
 	wait(34.15);
 	scripts\cp\zombies\directors_cut::give_dc_player_extra_xp_for_carrying_newb();
-	foreach(var_01 in level.players)
-	{
+	foreach(var_01 in level.players) {
 		var_01 setplayerdata("cp","haveSoulKeys","any_soul_key",1);
 		var_01 setplayerdata("cp","haveSoulKeys","soul_key_5",1);
 	}
 
 	level thread eecompletevo();
-	foreach(var_01 in level.players)
-	{
+	foreach(var_01 in level.players) {
 		var_01 scripts\cp\utility::allow_player_teleport(1);
 	}
 }
 
-//Function Number: 88
-eecompletevo()
-{
+eecompletevo() {
 	wait(7);
 	level thread scripts\cp\cp_vo::try_to_play_vo("conv_soul_key_1_1","rave_dialogue_vo","highest",666,0,0,0,100);
 }
 
-//Function Number: 89
-play_hit_fx()
-{
+play_hit_fx() {
 	self endon("death");
 	self setscriptablepartstate("laser_hit","active");
 	wait(1);
 	self setscriptablepartstate("laser_hit","off");
 }
 
-//Function Number: 90
-trigger_mammoth_large_fx(param_00)
-{
+trigger_mammoth_large_fx(param_00) {
 	level endon("rhino_fight_over");
 	var_01 = spawn("script_model",param_00);
 	level.mammoth_fx[level.mammoth_fx.size] = var_01;
@@ -2365,13 +1971,10 @@ trigger_mammoth_large_fx(param_00)
 	level.mammoth_spawned_fx[level.mammoth_spawned_fx.size] = param_00;
 }
 
-//Function Number: 91
-trigger_mammoth_small_fx(param_00,param_01)
-{
+trigger_mammoth_small_fx(param_00,param_01) {
 	level endon("rhino_fight_over");
 	var_02 = spawn("script_model",param_00);
-	if(!isdefined(param_01))
-	{
+	if(!isdefined(param_01)) {
 		param_01 = (0,0,0);
 	}
 
@@ -2382,34 +1985,26 @@ trigger_mammoth_small_fx(param_00,param_01)
 	wait(0.5);
 	level.mammoth_spawned_fx_small[level.mammoth_spawned_fx_small.size] = param_00;
 	var_03 = scripts\engine\utility::getclosest(param_00,level.mammoth_fx,256);
-	if(!isdefined(var_03))
-	{
+	if(!isdefined(var_03)) {
 		var_02 setscriptablepartstate("pool","active");
 	}
 }
 
-//Function Number: 92
-rhino_console_hint(param_00,param_01)
-{
+rhino_console_hint(param_00,param_01) {
 	return "";
 }
 
-//Function Number: 93
-rhino_console_act(param_00,param_01)
-{
+rhino_console_act(param_00,param_01) {
 	level endon("all_buttons_pressed");
-	if(!scripts\engine\utility::flag("rhino_stage_3") || scripts\engine\utility::flag("rhino_stage_4"))
-	{
+	if(!scripts\engine\utility::flag("rhino_stage_3") || scripts\engine\utility::flag("rhino_stage_4")) {
 		return;
 	}
 
-	if(!scripts\engine\utility::flag("consoles_ready"))
-	{
+	if(!scripts\engine\utility::flag("consoles_ready")) {
 		return;
 	}
 
-	if(isdefined(param_00.activated))
-	{
+	if(isdefined(param_00.activated)) {
 		return;
 	}
 
@@ -2417,10 +2012,8 @@ rhino_console_act(param_00,param_01)
 	scripts\cp\maps\cp_final\cp_final_mpq::playneilvo("final_n31l_evil_entangler_panels");
 	var_02 = param_00.script_parameters;
 	var_03 = scripts\engine\utility::getstructarray("goon_spawner","targetname");
-	foreach(var_05 in var_03)
-	{
-		if(var_05.script_parameters == var_02)
-		{
+	foreach(var_05 in var_03) {
+		if(var_05.script_parameters == var_02) {
 			var_05.portal_struct.fx setscriptablepartstate("portal","off");
 			var_05.var_19 = 0;
 		}
@@ -2434,10 +2027,8 @@ rhino_console_act(param_00,param_01)
 	var_08 show();
 	wait(20 / level.players.size);
 	var_03 = scripts\engine\utility::getstructarray("goon_spawner","targetname");
-	foreach(var_05 in var_03)
-	{
-		if(var_05.script_parameters == var_02)
-		{
+	foreach(var_05 in var_03) {
+		if(var_05.script_parameters == var_02) {
 			var_05.portal_struct.fx setscriptablepartstate("portal","cooldown");
 			var_05.var_19 = 1;
 		}
@@ -2449,33 +2040,25 @@ rhino_console_act(param_00,param_01)
 	var_08 hide();
 }
 
-//Function Number: 94
-rhino_sentry_hint(param_00,param_01)
-{
+rhino_sentry_hint(param_00,param_01) {
 	return "";
 }
 
-//Function Number: 95
-rhino_sentry_act(param_00,param_01)
-{
-	if(scripts\engine\utility::istrue(param_01.iscarrying))
-	{
+rhino_sentry_act(param_00,param_01) {
+	if(scripts\engine\utility::istrue(param_01.iscarrying)) {
 		return;
 	}
 
-	if(scripts\engine\utility::istrue(param_01.linked_to_coaster))
-	{
+	if(scripts\engine\utility::istrue(param_01.linked_to_coaster)) {
 		return;
 	}
 
-	if(isdefined(param_01.allow_carry) && param_01.allow_carry == 0)
-	{
+	if(isdefined(param_01.allow_carry) && param_01.allow_carry == 0) {
 		return;
 	}
 
 	scripts\cp\cp_interaction::remove_from_current_interaction_list(param_00);
-	if(param_01 scripts\cp\utility::is_valid_player())
-	{
+	if(param_01 scripts\cp\utility::is_valid_player()) {
 		param_01 thread scripts\cp\cp_weapon_autosentry::givesentry("crafted_autosentry");
 	}
 
@@ -2484,38 +2067,29 @@ rhino_sentry_act(param_00,param_01)
 	var_02[0] delete();
 }
 
-//Function Number: 96
-init_rk_candy_interactions()
-{
+init_rk_candy_interactions() {
 	level.num_crates_broken = 0;
 	level.available_crate_perks = scripts\engine\utility::array_randomize_objects(["perk_machine_revive","perk_machine_flash","perk_machine_tough","perk_machine_run","perk_machine_rat_a_tat"]);
 	var_00 = scripts\engine\utility::getstructarray("perk_candy_box","script_noteworthy");
-	foreach(var_02 in var_00)
-	{
+	foreach(var_02 in var_00) {
 		scripts\cp\cp_interaction::remove_from_current_interaction_list(var_02);
 	}
 }
 
-//Function Number: 97
-turn_on_perk_boxes()
-{
+turn_on_perk_boxes() {
 	var_00 = scripts\engine\utility::getstructarray("perk_candy_box","script_noteworthy");
-	foreach(var_02 in var_00)
-	{
+	foreach(var_02 in var_00) {
 		createperkboxes(var_02);
 	}
 }
 
-//Function Number: 98
-createperkboxes(param_00)
-{
+createperkboxes(param_00) {
 	var_01 = param_00;
 	var_02 = scripts\engine\utility::array_randomize_objects(level.available_crate_perks);
 	var_03 = scripts\engine\utility::random(var_02);
 	level.available_crate_perks = scripts\engine\utility::array_remove(level.available_crate_perks,var_03);
 	var_04 = spawn("script_model",var_01.origin);
-	if(isdefined(var_01.angles))
-	{
+	if(isdefined(var_01.angles)) {
 		var_04.angles = var_01.angles;
 	}
 
@@ -2523,8 +2097,7 @@ createperkboxes(param_00)
 	var_01.model = var_04;
 	var_01.perk = var_03;
 	scripts\cp\cp_interaction::add_to_current_interaction_list(param_00);
-	switch(var_03)
-	{
+	switch(var_03) {
 		case "perk_machine_fwoosh":
 			var_04 setscriptablepartstate("effects","fwoosh");
 			break;
@@ -2571,15 +2144,12 @@ createperkboxes(param_00)
 	}
 }
 
-//Function Number: 99
-perkbox_usefunc(param_00,param_01)
-{
+perkbox_usefunc(param_00,param_01) {
 	param_01 scripts/cp/zombies/zombies_perk_machines::give_zombies_perk(param_00.perk,0);
 	scripts\cp\cp_interaction::remove_from_current_interaction_list_for_player(param_00,param_01);
 	param_00.model hidefromplayer(param_01);
 	param_01 playlocalsound("part_pickup");
-	if(!isdefined(param_00.respawn_flag))
-	{
+	if(!isdefined(param_00.respawn_flag)) {
 		param_00.respawn_flag = 1;
 		level.num_crates_broken++;
 		var_02 = level.num_crates_broken * 0.05;
@@ -2588,9 +2158,7 @@ perkbox_usefunc(param_00,param_01)
 	}
 }
 
-//Function Number: 100
-restockperkafternextrelic(param_00,param_01,param_02)
-{
+restockperkafternextrelic(param_00,param_01,param_02) {
 	level endon("game_ended");
 	level scripts\engine\utility::waittill_any_timeout_1(180,"create_perk_boxes");
 	param_00.respawn_flag = undefined;
@@ -2601,8 +2169,7 @@ restockperkafternextrelic(param_00,param_01,param_02)
 	var_05 = scripts\engine\utility::random(var_04);
 	param_00.perk = var_05;
 	level.available_crate_perks = scripts\engine\utility::array_remove(level.available_crate_perks,var_05);
-	switch(var_05)
-	{
+	switch(var_05) {
 		case "perk_machine_fwoosh":
 			var_03 setscriptablepartstate("effects","fwoosh");
 			break;
@@ -2648,28 +2215,22 @@ restockperkafternextrelic(param_00,param_01,param_02)
 			break;
 	}
 
-	foreach(var_07 in level.players)
-	{
+	foreach(var_07 in level.players) {
 		scripts\cp\cp_interaction::add_to_current_interaction_list_for_player(param_00,var_07);
 		param_00.model showtoplayer(var_07);
 	}
 }
 
-//Function Number: 101
-perkbox_hintfunc(param_00,param_01)
-{
-	if(!isdefined(param_00.perk))
-	{
+perkbox_hintfunc(param_00,param_01) {
+	if(!isdefined(param_00.perk)) {
 		return "";
 	}
 
-	if(isdefined(param_01.zombies_perks) && param_01.zombies_perks.size > 4)
-	{
+	if(isdefined(param_01.zombies_perks) && param_01.zombies_perks.size > 4) {
 		return "";
 	}
 
-	if(param_01 scripts\cp\utility::has_zombie_perk(param_00.perk))
-	{
+	if(param_01 scripts\cp\utility::has_zombie_perk(param_00.perk)) {
 		return "";
 	}
 
@@ -2677,35 +2238,25 @@ perkbox_hintfunc(param_00,param_01)
 	return "";
 }
 
-//Function Number: 102
-perkboxuse(param_00,param_01)
-{
-}
+perkboxuse(param_00,param_01) {}
 
-//Function Number: 103
-init_rh_neil_monitors()
-{
-	while(!isdefined(level.current_personal_interaction_structs))
-	{
+init_rh_neil_monitors() {
+	while(!isdefined(level.current_personal_interaction_structs)) {
 		wait(0.1);
 	}
 
 	var_00 = scripts\engine\utility::getstructarray("rhino_neil_monitors","script_noteworthy");
 	level.special_mode_activation_funcs["rhino_neil_monitors"] = ::setrhinoneilstatepent;
 	level.normal_mode_activation_funcs["rhino_neil_monitors"] = ::setrhinoneilstatepent;
-	foreach(var_02 in var_00)
-	{
+	foreach(var_02 in var_00) {
 		scripts\cp\maps\cp_final\cp_final::addtopersonalinteractionlist(var_02);
 	}
 }
 
-//Function Number: 104
-setrhinoneilstatepent(param_00,param_01,param_02,param_03)
-{
+setrhinoneilstatepent(param_00,param_01,param_02,param_03) {
 	var_04 = undefined;
 	var_05 = getmodelfromstruct(param_01);
-	switch(level.currentneilstate)
-	{
+	switch(level.currentneilstate) {
 		case "happy":
 			param_00 setmodel(var_05 + "_happy");
 			break;
@@ -2723,58 +2274,43 @@ setrhinoneilstatepent(param_00,param_01,param_02,param_03)
 			break;
 	}
 
-	if(!isdefined(param_03.neil_monitors))
-	{
+	if(!isdefined(param_03.neil_monitors)) {
 		param_03.neil_monitors = [];
 	}
 
-	if(!scripts\engine\utility::array_contains(param_03.neil_monitors,param_00))
-	{
+	if(!scripts\engine\utility::array_contains(param_03.neil_monitors,param_00)) {
 		param_03.neil_monitors[param_03.neil_monitors.size] = param_00;
 	}
 }
 
-//Function Number: 105
-show_console_to_activate()
-{
+show_console_to_activate() {
 	var_00 = getentarray("rhino_console_screen","targetname");
-	foreach(var_02 in var_00)
-	{
+	foreach(var_02 in var_00) {
 		update_neil_face_model("cp_final_monitor_large_screen_happy",var_02.origin);
 	}
 }
 
-//Function Number: 106
-update_neil_face_model(param_00,param_01)
-{
-	foreach(var_03 in level.players)
-	{
+update_neil_face_model(param_00,param_01) {
+	foreach(var_03 in level.players) {
 		var_04 = scripts\engine\utility::getclosest(param_01,var_03.neil_monitors);
 		var_04 setmodel(param_00);
 	}
 }
 
-//Function Number: 107
-getmodelfromstruct(param_00)
-{
-	if(isdefined(param_00.script_label))
-	{
+getmodelfromstruct(param_00) {
+	if(isdefined(param_00.script_label)) {
 		return param_00.script_label;
 	}
 
 	return "cp_final_monitor_large_screen_black";
 }
 
-//Function Number: 108
-setuplnfinteractions()
-{
+setuplnfinteractions() {
 	var_00 = scripts\engine\utility::getstructarray("lost_and_found","script_noteworthy");
 	var_01 = undefined;
-	foreach(var_03 in var_00)
-	{
+	foreach(var_03 in var_00) {
 		scripts\cp\cp_interaction::remove_from_current_interaction_list(var_03);
-		if(isdefined(var_03.name) && var_03.name == "rhino_fight")
-		{
+		if(isdefined(var_03.name) && var_03.name == "rhino_fight") {
 			scripts\cp\cp_interaction::add_to_current_interaction_list(var_03);
 			var_01 = var_03;
 		}
@@ -2782,10 +2318,8 @@ setuplnfinteractions()
 
 	var_01.origin = (3100.5,2760,-176);
 	level.rhino_lnf_fx = spawnfx(level._effect["rhino_lnf"],var_01.origin + (10,0,0),anglestoforward((0,180,0)),anglestoup((0,180,0)));
-	foreach(var_06 in level.players)
-	{
-		if(!isdefined(var_06.lost_and_found_ent))
-		{
+	foreach(var_06 in level.players) {
+		if(!isdefined(var_06.lost_and_found_ent)) {
 			continue;
 		}
 
@@ -2795,16 +2329,12 @@ setuplnfinteractions()
 	triggerfx(level.rhino_lnf_fx);
 }
 
-//Function Number: 109
-restorelnfinteractions()
-{
+restorelnfinteractions() {
 	var_00 = scripts\engine\utility::getstructarray("lost_and_found","script_noteworthy");
 	var_01 = undefined;
-	foreach(var_03 in var_00)
-	{
+	foreach(var_03 in var_00) {
 		scripts\cp\cp_interaction::add_to_current_interaction_list(var_03);
-		if(isdefined(var_03.name) && var_03.name == "rhino_fight")
-		{
+		if(isdefined(var_03.name) && var_03.name == "rhino_fight") {
 			scripts\cp\cp_interaction::remove_from_current_interaction_list(var_03);
 			continue;
 		}
@@ -2812,10 +2342,8 @@ restorelnfinteractions()
 		var_01 = var_03;
 	}
 
-	foreach(var_06 in level.players)
-	{
-		if(!isdefined(var_06.lost_and_found_ent))
-		{
+	foreach(var_06 in level.players) {
+		if(!isdefined(var_06.lost_and_found_ent)) {
 			continue;
 		}
 
@@ -2823,15 +2351,11 @@ restorelnfinteractions()
 	}
 }
 
-//Function Number: 110
-empconsolehint(param_00,param_01)
-{
+empconsolehint(param_00,param_01) {
 	return &"CP_FINAL_ACTIVATE_RITUAL_CIRCLE";
 }
 
-//Function Number: 111
-empconsoleuse(param_00,param_01)
-{
+empconsoleuse(param_00,param_01) {
 	stopfxontag(level._effect["vfx_elec_console"],level.emp_console,"tag_origin");
 	level.emp_console stoploopsound();
 	scripts\cp\cp_interaction::remove_from_current_interaction_list(param_00);
@@ -2839,31 +2363,25 @@ empconsoleuse(param_00,param_01)
 	var_02 = (3146,2538,-176);
 	playfx(level._effect["rhino_emp"],var_02);
 	playsoundatpos(var_02,"emp_grenade_explode_default");
-	foreach(var_04 in level.spawned_enemies)
-	{
+	foreach(var_04 in level.spawned_enemies) {
 		var_04 dodamage(var_04.health,var_02);
 	}
 
 	wait(0.1);
 	playsoundatpos(var_02,"zmb_emp_poweroff");
 	var_06 = getentarray("rhino_sentry_model","targetname");
-	foreach(var_08 in var_06)
-	{
+	foreach(var_08 in var_06) {
 		var_08 notify("death");
 	}
 
 	scripts\cp\maps\cp_final\cp_final_mpq::deactivateinteractionsbynoteworthy("rhino_sentry");
-	foreach(var_04 in level.players)
-	{
+	foreach(var_04 in level.players) {
 		var_04 notify("force_cancel_placement");
 	}
 }
 
-//Function Number: 112
-killingtimevalidation(param_00,param_01)
-{
-	if(scripts\engine\utility::istrue(param_00.is_mammoth))
-	{
+killingtimevalidation(param_00,param_01) {
+	if(scripts\engine\utility::istrue(param_00.is_mammoth)) {
 		return 0;
 	}
 

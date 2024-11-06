@@ -1,18 +1,11 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: 3177.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 83
- * Decompile Time: 1317 ms
- * Timestamp: 10/27/2023 12:26:27 AM
-*******************************************************************/
+/****************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\3177.gsc
+****************************/
 
-//Function Number: 1
-func_2371()
-{
-	if(scripts/asm/asm::func_232E("soldier"))
-	{
+func_2371() {
+	if(scripts/asm/asm::func_232E("soldier")) {
 		return;
 	}
 
@@ -2595,494 +2588,330 @@ func_2371()
 	scripts/asm/asm::func_2327();
 }
 
-//Function Number: 2
-func_122ED(param_00,param_01,param_02,param_03)
-{
+func_122ED(param_00,param_01,param_02,param_03) {
 	return scripts/asm/asm_bb::func_293C();
 }
 
-//Function Number: 3
-func_122E8(param_00,param_01,param_02,param_03)
-{
+func_122E8(param_00,param_01,param_02,param_03) {
 	return scripts/asm/asm_bb::bb_iswhizbyrequested();
 }
 
-//Function Number: 4
-func_122F2(param_00,param_01,param_02,param_03)
-{
+func_122F2(param_00,param_01,param_02,param_03) {
 	return scripts/asm/asm_bb::bb_movetyperequested("cqb");
 }
 
-//Function Number: 5
-func_124F0(param_00,param_01,param_02,param_03)
-{
+func_124F0(param_00,param_01,param_02,param_03) {
 	return 1;
 }
 
-//Function Number: 6
-func_1215C(param_00,param_01,param_02,param_03)
-{
+func_1215C(param_00,param_01,param_02,param_03) {
 	return scripts/asm/asm_bb::bb_moverequested();
 }
 
-//Function Number: 7
-func_121AE(param_00,param_01,param_02,param_03)
-{
+func_121AE(param_00,param_01,param_02,param_03) {
 	return !scripts/asm/asm_bb::func_293C();
 }
 
-//Function Number: 8
-func_121B1(param_00,param_01,param_02,param_03)
-{
+func_121B1(param_00,param_01,param_02,param_03) {
 	return !scripts/asm/asm_bb::func_293C();
 }
 
-//Function Number: 9
-func_121A9(param_00,param_01,param_02,param_03)
-{
+func_121A9(param_00,param_01,param_02,param_03) {
 	return !scripts/asm/asm_bb::func_293C();
 }
 
-//Function Number: 10
-func_12071(param_00,param_01,param_02,param_03)
-{
+func_12071(param_00,param_01,param_02,param_03) {
 	return scripts/asm/asm::func_232B(param_01,"end") && self._blackboard.movetype == "combat" || self._blackboard.movetype == "frantic";
 }
 
-//Function Number: 11
-func_12067(param_00,param_01,param_02,param_03)
-{
+func_12067(param_00,param_01,param_02,param_03) {
 	return scripts/asm/asm::func_232B(param_01,"end") && self._blackboard.movetype == "casual" || self._blackboard.movetype == "casual_gun";
 }
 
-//Function Number: 12
-func_12062(param_00,param_01,param_02,param_03)
-{
+func_12062(param_00,param_01,param_02,param_03) {
 	return scripts/asm/asm::func_232B(param_01,"end") && self._blackboard.movetype == "cqb";
 }
 
-//Function Number: 13
-func_1205C(param_00,param_01,param_02,param_03)
-{
+func_1205C(param_00,param_01,param_02,param_03) {
 	return scripts/asm/asm::func_232B(param_01,"abort") && self._blackboard.movetype == "combat" || self._blackboard.movetype == "frantic";
 }
 
-//Function Number: 14
-func_12054(param_00,param_01,param_02,param_03)
-{
+func_12054(param_00,param_01,param_02,param_03) {
 	return scripts/asm/asm::func_232B(param_01,"abort") && self._blackboard.movetype != "combat" && self._blackboard.movetype != "frantic";
 }
 
-//Function Number: 15
-func_11B5C(param_00,param_01,param_02,param_03)
-{
+func_11B5C(param_00,param_01,param_02,param_03) {
 	return !scripts/asm/asm_bb::bb_isanimscripted() && isdefined(self.asm.var_4C86.var_697F);
 }
 
-//Function Number: 16
-func_11B68(param_00,param_01,param_02,param_03)
-{
+func_11B68(param_00,param_01,param_02,param_03) {
 	return !scripts/asm/asm_bb::bb_isanimscripted() && isdefined(self.asm.var_4C86.var_92FA);
 }
 
-//Function Number: 17
-func_122AF(param_00,param_01,param_02,param_03)
-{
+func_122AF(param_00,param_01,param_02,param_03) {
 	return lib_0C65::func_100BD();
 }
 
-//Function Number: 18
-func_122B4(param_00,param_01,param_02,param_03)
-{
+func_122B4(param_00,param_01,param_02,param_03) {
 	return !scripts/asm/asm_bb::bb_moverequested();
 }
 
-//Function Number: 19
-func_122AE(param_00,param_01,param_02,param_03)
-{
+func_122AE(param_00,param_01,param_02,param_03) {
 	return !lib_0C65::func_100BD();
 }
 
-//Function Number: 20
-func_11F98(param_00,param_01,param_02,param_03)
-{
+func_11F98(param_00,param_01,param_02,param_03) {
 	return scripts/asm/asm_bb::bb_reloadrequested();
 }
 
-//Function Number: 21
-func_11F7D(param_00,param_01,param_02,param_03)
-{
+func_11F7D(param_00,param_01,param_02,param_03) {
 	return scripts/asm/asm_bb::func_291A();
 }
 
-//Function Number: 22
-func_11F4F(param_00,param_01,param_02,param_03)
-{
+func_11F4F(param_00,param_01,param_02,param_03) {
 	return scripts/asm/asm_bb::bb_getrequestedcoverstate() != "exposed";
 }
 
-//Function Number: 23
-func_11F6E(param_00,param_01,param_02,param_03)
-{
+func_11F6E(param_00,param_01,param_02,param_03) {
 	return scripts/asm/asm_bb::bb_getrequestedcoverstate() != "look";
 }
 
-//Function Number: 24
-func_12262(param_00,param_01,param_02,param_03)
-{
+func_12262(param_00,param_01,param_02,param_03) {
 	return !isdefined(self.melee);
 }
 
-//Function Number: 25
-func_1225F(param_00,param_01,param_02,param_03)
-{
+func_1225F(param_00,param_01,param_02,param_03) {
 	return !isdefined(scripts/asm/asm_bb::bb_getmeleetarget());
 }
 
-//Function Number: 26
-func_12363(param_00,param_01,param_02,param_03)
-{
+func_12363(param_00,param_01,param_02,param_03) {
 	return self.a.pose == "stand";
 }
 
-//Function Number: 27
-func_12362(param_00,param_01,param_02,param_03)
-{
+func_12362(param_00,param_01,param_02,param_03) {
 	return self.a.pose == "crouch";
 }
 
-//Function Number: 28
-func_12349(param_00,param_01,param_02,param_03)
-{
+func_12349(param_00,param_01,param_02,param_03) {
 	return self.a.pose == "stand";
 }
 
-//Function Number: 29
-func_12348(param_00,param_01,param_02,param_03)
-{
+func_12348(param_00,param_01,param_02,param_03) {
 	return self.a.pose == "crouch";
 }
 
-//Function Number: 30
-func_123F8(param_00,param_01,param_02,param_03)
-{
+func_123F8(param_00,param_01,param_02,param_03) {
 	return !scripts/asm/asm_bb::bb_moverequested();
 }
 
-//Function Number: 31
-func_12080(param_00,param_01,param_02,param_03)
-{
+func_12080(param_00,param_01,param_02,param_03) {
 	return lib_0C6B::movez() == "high";
 }
 
-//Function Number: 32
-func_12084(param_00,param_01,param_02,param_03)
-{
+func_12084(param_00,param_01,param_02,param_03) {
 	return lib_0C6B::movez() == "low";
 }
 
-//Function Number: 33
-func_1207C(param_00,param_01,param_02,param_03)
-{
+func_1207C(param_00,param_01,param_02,param_03) {
 	return lib_0C6B::moveslide() == "left";
 }
 
-//Function Number: 34
-func_12079(param_00,param_01,param_02,param_03)
-{
+func_12079(param_00,param_01,param_02,param_03) {
 	return lib_0C6B::moveslide() == "left";
 }
 
-//Function Number: 35
-func_125D3(param_00,param_01,param_02,param_03)
-{
+func_125D3(param_00,param_01,param_02,param_03) {
 	return self.var_126C5.var_48 == "wall_run";
 }
 
-//Function Number: 36
-func_11C87(param_00,param_01,param_02,param_03)
-{
+func_11C87(param_00,param_01,param_02,param_03) {
 	return scripts/asm/asm_bb::func_291A();
 }
 
-//Function Number: 37
-func_11CAD(param_00,param_01,param_02,param_03)
-{
+func_11CAD(param_00,param_01,param_02,param_03) {
 	return scripts/asm/asm_bb::bb_reloadrequested();
 }
 
-//Function Number: 38
-func_11C0C(param_00,param_01,param_02,param_03)
-{
+func_11C0C(param_00,param_01,param_02,param_03) {
 	return scripts/asm/asm_bb::bb_getrequestedcoverstate() != "exposed";
 }
 
-//Function Number: 39
-func_11F32(param_00,param_01,param_02,param_03)
-{
+func_11F32(param_00,param_01,param_02,param_03) {
 	return scripts/asm/asm_bb::bb_reloadrequested();
 }
 
-//Function Number: 40
-func_11EEA(param_00,param_01,param_02,param_03)
-{
+func_11EEA(param_00,param_01,param_02,param_03) {
 	return scripts/asm/asm_bb::func_291A();
 }
 
-//Function Number: 41
-func_11F15(param_00,param_01,param_02,param_03)
-{
+func_11F15(param_00,param_01,param_02,param_03) {
 	return lib_0C5E::func_FFD9() && scripts/asm/asm_bb::func_2929() == "B";
 }
 
-//Function Number: 42
-func_11F07(param_00,param_01,param_02,param_03)
-{
+func_11F07(param_00,param_01,param_02,param_03) {
 	return lib_0C5E::func_FFD9() && scripts/asm/asm_bb::func_2929() == "A";
 }
 
-//Function Number: 43
-func_11F23(param_00,param_01,param_02,param_03)
-{
+func_11F23(param_00,param_01,param_02,param_03) {
 	return lib_0C5E::func_FFD9() && scripts/asm/asm_bb::func_2929() == "lean";
 }
 
-//Function Number: 44
-func_11EDC(param_00,param_01,param_02,param_03)
-{
+func_11EDC(param_00,param_01,param_02,param_03) {
 	return scripts/asm/asm_bb::bb_getrequestedcoverstate() != "look";
 }
 
-//Function Number: 45
-func_11E89(param_00,param_01,param_02,param_03)
-{
+func_11E89(param_00,param_01,param_02,param_03) {
 	return scripts/asm/asm_bb::bb_reloadrequested();
 }
 
-//Function Number: 46
-func_11E57(param_00,param_01,param_02,param_03)
-{
+func_11E57(param_00,param_01,param_02,param_03) {
 	return lib_0C5E::func_FFD9() && scripts/asm/asm_bb::func_2929() == "A";
 }
 
-//Function Number: 47
-func_11E65(param_00,param_01,param_02,param_03)
-{
+func_11E65(param_00,param_01,param_02,param_03) {
 	return lib_0C5E::func_FFD9() && scripts/asm/asm_bb::func_2929() == "B";
 }
 
-//Function Number: 48
-func_11E73(param_00,param_01,param_02,param_03)
-{
+func_11E73(param_00,param_01,param_02,param_03) {
 	return lib_0C5E::func_FFD9() && scripts/asm/asm_bb::func_2929() == "lean";
 }
 
-//Function Number: 49
-func_11E31(param_00,param_01,param_02,param_03)
-{
+func_11E31(param_00,param_01,param_02,param_03) {
 	return scripts/asm/asm_bb::bb_getrequestedcoverstate() != "look";
 }
 
-//Function Number: 50
-func_11DE5(param_00,param_01,param_02,param_03)
-{
+func_11DE5(param_00,param_01,param_02,param_03) {
 	return scripts/asm/asm_bb::bb_reloadrequested();
 }
 
-//Function Number: 51
-func_11D9D(param_00,param_01,param_02,param_03)
-{
+func_11D9D(param_00,param_01,param_02,param_03) {
 	return scripts/asm/asm_bb::func_291A();
 }
 
-//Function Number: 52
-func_11DBB(param_00,param_01,param_02,param_03)
-{
+func_11DBB(param_00,param_01,param_02,param_03) {
 	return lib_0C5E::func_FFD9() && scripts/asm/asm_bb::func_2929() == "A";
 }
 
-//Function Number: 53
-func_11DC9(param_00,param_01,param_02,param_03)
-{
+func_11DC9(param_00,param_01,param_02,param_03) {
 	return lib_0C5E::func_FFD9() && scripts/asm/asm_bb::func_2929() == "B";
 }
 
-//Function Number: 54
-func_11DD7(param_00,param_01,param_02,param_03)
-{
+func_11DD7(param_00,param_01,param_02,param_03) {
 	return lib_0C5E::func_FFD9() && scripts/asm/asm_bb::func_2929() == "lean";
 }
 
-//Function Number: 55
-func_11D8E(param_00,param_01,param_02,param_03)
-{
+func_11D8E(param_00,param_01,param_02,param_03) {
 	return scripts/asm/asm_bb::bb_getrequestedcoverstate() != "look";
 }
 
-//Function Number: 56
-func_11D53(param_00,param_01,param_02,param_03)
-{
+func_11D53(param_00,param_01,param_02,param_03) {
 	return scripts/asm/asm_bb::bb_reloadrequested();
 }
 
-//Function Number: 57
-func_11D26(param_00,param_01,param_02,param_03)
-{
+func_11D26(param_00,param_01,param_02,param_03) {
 	return lib_0C5E::func_FFD9() && scripts/asm/asm_bb::func_2929() == "A";
 }
 
-//Function Number: 58
-func_11D35(param_00,param_01,param_02,param_03)
-{
+func_11D35(param_00,param_01,param_02,param_03) {
 	return lib_0C5E::func_FFD9() && scripts/asm/asm_bb::func_2929() == "B";
 }
 
-//Function Number: 59
-func_11D44(param_00,param_01,param_02,param_03)
-{
+func_11D44(param_00,param_01,param_02,param_03) {
 	return lib_0C5E::func_FFD9() && scripts/asm/asm_bb::func_2929() == "lean";
 }
 
-//Function Number: 60
-func_11D00(param_00,param_01,param_02,param_03)
-{
+func_11D00(param_00,param_01,param_02,param_03) {
 	return scripts/asm/asm_bb::bb_getrequestedcoverstate() != "look";
 }
 
-//Function Number: 61
-func_11FD2(param_00,param_01,param_02,param_03)
-{
+func_11FD2(param_00,param_01,param_02,param_03) {
 	return scripts/asm/asm_bb::func_293C();
 }
 
-//Function Number: 62
-func_11FCC(param_00,param_01,param_02,param_03)
-{
+func_11FCC(param_00,param_01,param_02,param_03) {
 	return !scripts/asm/asm_bb::bb_movetyperequested("cqb") && scripts/asm/asm_bb::bb_isincombat();
 }
 
-//Function Number: 63
-trans_cqb_idle_to_cqb_reload7(param_00,param_01,param_02,param_03)
-{
+trans_cqb_idle_to_cqb_reload7(param_00,param_01,param_02,param_03) {
 	return scripts/asm/asm_bb::bb_reloadrequested();
 }
 
-//Function Number: 64
-trans_cqb_idle_to_cqb_to_noncombat_cqb_idle8(param_00,param_01,param_02,param_03)
-{
+trans_cqb_idle_to_cqb_to_noncombat_cqb_idle8(param_00,param_01,param_02,param_03) {
 	return !scripts/asm/asm_bb::bb_isincombat();
 }
 
-//Function Number: 65
-func_122CB(param_00,param_01,param_02,param_03)
-{
+func_122CB(param_00,param_01,param_02,param_03) {
 	return !scripts/asm/asm_bb::bb_movetyperequested("cqb");
 }
 
-//Function Number: 66
-func_122CA(param_00,param_01,param_02,param_03)
-{
+func_122CA(param_00,param_01,param_02,param_03) {
 	return scripts/asm/asm_bb::bb_isincombat();
 }
 
-//Function Number: 67
-func_11FEC(param_00,param_01,param_02,param_03)
-{
+func_11FEC(param_00,param_01,param_02,param_03) {
 	return !scripts/asm/asm_bb::bb_moverequested();
 }
 
-//Function Number: 68
-func_11C66(param_00,param_01,param_02,param_03)
-{
+func_11C66(param_00,param_01,param_02,param_03) {
 	return scripts/asm/asm_bb::bb_reloadrequested();
 }
 
-//Function Number: 69
-func_11F69(param_00,param_01,param_02,param_03)
-{
+func_11F69(param_00,param_01,param_02,param_03) {
 	return scripts/asm/asm_bb::bb_reloadrequested();
 }
 
-//Function Number: 70
-func_11F65(param_00,param_01,param_02,param_03)
-{
+func_11F65(param_00,param_01,param_02,param_03) {
 	return !scripts\asm\shared_utility::isatcovernode();
 }
 
-//Function Number: 71
-func_11DFE(param_00,param_01,param_02,param_03)
-{
+func_11DFE(param_00,param_01,param_02,param_03) {
 	return scripts/asm/asm_bb::bb_reloadrequested();
 }
 
-//Function Number: 72
-func_11F64(param_00,param_01,param_02,param_03)
-{
+func_11F64(param_00,param_01,param_02,param_03) {
 	return scripts/asm/asm_bb::bb_reloadrequested();
 }
 
-//Function Number: 73
-func_11C64(param_00,param_01,param_02,param_03)
-{
+func_11C64(param_00,param_01,param_02,param_03) {
 	return scripts/asm/asm_bb::func_292C() == "prone";
 }
 
-//Function Number: 74
-func_12574(param_00,param_01,param_02,param_03)
-{
+func_12574(param_00,param_01,param_02,param_03) {
 	return lib_0C65::func_FFF5();
 }
 
-//Function Number: 75
-func_1256D(param_00,param_01,param_02,param_03)
-{
+func_1256D(param_00,param_01,param_02,param_03) {
 	return scripts/asm/asm_bb::func_293C();
 }
 
-//Function Number: 76
-trans_stand_run_strafe_loop_to_grenade_avoid2(param_00,param_01,param_02,param_03)
-{
+trans_stand_run_strafe_loop_to_grenade_avoid2(param_00,param_01,param_02,param_03) {
 	return scripts/asm/asm_bb::func_293C();
 }
 
-//Function Number: 77
-func_11C60(param_00,param_01,param_02,param_03)
-{
+func_11C60(param_00,param_01,param_02,param_03) {
 	return scripts/asm/asm_bb::func_292C() == "prone";
 }
 
-//Function Number: 78
-func_12138(param_00,param_01,param_02,param_03)
-{
+func_12138(param_00,param_01,param_02,param_03) {
 	return scripts/asm/asm_bb::func_293C();
 }
 
-//Function Number: 79
-func_120FC(param_00,param_01,param_02,param_03)
-{
+func_120FC(param_00,param_01,param_02,param_03) {
 	return scripts/asm/asm::asm_getdemeanor() == "cqb" && !scripts/asm/asm_bb::bb_isincombat();
 }
 
-//Function Number: 80
-func_12137(param_00,param_01,param_02,param_03)
-{
+func_12137(param_00,param_01,param_02,param_03) {
 	return scripts/asm/asm_bb::func_298B();
 }
 
-//Function Number: 81
-func_12116(param_00,param_01,param_02,param_03)
-{
+func_12116(param_00,param_01,param_02,param_03) {
 	return scripts/asm/asm_bb::bb_reloadrequested();
 }
 
-//Function Number: 82
-func_1214C(param_00,param_01,param_02,param_03)
-{
+func_1214C(param_00,param_01,param_02,param_03) {
 	return scripts/asm/asm_bb::bb_reloadrequested();
 }
 
-//Function Number: 83
-func_120E3(param_00,param_01,param_02,param_03)
-{
+func_120E3(param_00,param_01,param_02,param_03) {
 	return scripts/asm/asm_bb::bb_reloadrequested();
 }

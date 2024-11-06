@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: 3422.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 47
- * Decompile Time: 33 ms
- * Timestamp: 10/27/2023 12:27:11 AM
-*******************************************************************/
+/**********************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\cp\zombies\zombies_pillage.gsc
+**********************************************************/
 
-//Function Number: 1
-init_pillage_drops()
-{
+init_pillage_drops() {
 	scripts\engine\utility::flag_init("can_drop_coins");
 	scripts\engine\utility::flag_init("pillage_enabled");
 	level.var_B44A = 1;
@@ -24,9 +18,7 @@ init_pillage_drops()
 	level.var_163C = [];
 }
 
-//Function Number: 2
-register_zombie_pillageable(param_00,param_01,param_02,param_03,param_04)
-{
+register_zombie_pillageable(param_00,param_01,param_02,param_03,param_04) {
 	var_05 = spawnstruct();
 	var_05.part = param_01;
 	var_05.model = param_03;
@@ -35,84 +27,63 @@ register_zombie_pillageable(param_00,param_01,param_02,param_03,param_04)
 	level.var_13F49[param_00] = var_05;
 }
 
-//Function Number: 3
-func_6690(param_00)
-{
-	if(!scripts\engine\utility::flag("pillage_enabled"))
-	{
+func_6690(param_00) {
+	if(!scripts\engine\utility::flag("pillage_enabled")) {
 		return;
 	}
 
-	if(!func_381B(param_00))
-	{
+	if(!func_381B(param_00)) {
 		return;
 	}
 
 	var_01 = scripts\engine\utility::random(func_7B81(param_00));
-	if(isdefined(var_01))
-	{
+	if(isdefined(var_01)) {
 		level.var_C1FC++;
 		param_00 thread func_136B6(param_00);
 		func_668F(param_00,var_01);
 	}
 }
 
-//Function Number: 4
-func_136B6(param_00)
-{
+func_136B6(param_00) {
 	param_00 waittill("death");
 	level.var_C1FC--;
 }
 
-//Function Number: 5
-func_668F(param_00,param_01)
-{
+func_668F(param_00,param_01) {
 	var_02 = level.var_13F49[param_01].part;
 	param_00 setscriptablepartstate(var_02,param_01);
 	param_00.has_backpack = param_01;
 }
 
-//Function Number: 6
-func_381B(param_00)
-{
-	if(param_00 scripts/asm/zombie/zombie::func_9E0F())
-	{
+func_381B(param_00) {
+	if(param_00 scripts/asm/zombie/zombie::func_9E0F()) {
 		return 0;
 	}
 
-	if(scripts\engine\utility::istrue(param_00.karatemaster))
-	{
+	if(scripts\engine\utility::istrue(param_00.karatemaster)) {
 		return 0;
 	}
 
-	if(scripts\engine\utility::istrue(param_00.is_cop))
-	{
+	if(scripts\engine\utility::istrue(param_00.is_cop)) {
 		return 0;
 	}
 
 	return 1;
 }
 
-//Function Number: 7
-func_50AF(param_00)
-{
+func_50AF(param_00) {
 	wait(5);
 	param_00 delete();
 }
 
-//Function Number: 8
-func_7B81(param_00)
-{
-	if(level.var_C1FC >= level.var_B44A)
-	{
+func_7B81(param_00) {
+	if(level.var_C1FC >= level.var_B44A) {
 		return [];
 	}
-	else if(level.var_BF51 > gettime())
-	{
+	else if(level.var_BF51 > gettime()) {
 		return [];
 	}
-	else if(randomint(100) <= 100)
-	{
+	else if(randomint(100) <= 100) {
 		var_01 = func_7DB3(param_00.model);
 		return var_01;
 	}
@@ -120,16 +91,12 @@ func_7B81(param_00)
 	return [];
 }
 
-//Function Number: 9
-func_7DB3(param_00)
-{
-	if(!isdefined(level.var_13F49))
-	{
+func_7DB3(param_00) {
+	if(!isdefined(level.var_13F49)) {
 		return [];
 	}
 
-	switch(param_00)
-	{
+	switch(param_00) {
 		case "zombie_female_outfit_7_3":
 		case "zombie_female_outfit_7_2":
 		case "zombie_female_outfit_7":
@@ -219,95 +186,74 @@ func_7DB3(param_00)
 	}
 }
 
-//Function Number: 10
-pillageable_piece_lethal_monitor(param_00,param_01,param_02)
-{
+pillageable_piece_lethal_monitor(param_00,param_01,param_02) {
 	var_03 = level.var_13F49[param_01].var_AAB3;
 	var_04 = level.var_13F49[param_01].var_AAB6;
 	var_05 = param_00 gettagorigin(var_04);
 	var_06 = param_00 gettagangles(var_04);
-	if(param_00 [[ level.should_drop_pillage ]](param_02,var_05))
-	{
+	if(param_00 [[level.should_drop_pillage]](param_02,var_05)) {
 		level thread func_10798(var_05,var_06,var_03);
 	}
 }
 
-//Function Number: 11
-pillage_init()
-{
+pillage_init() {
 	level.var_CB58 = [];
 	level.pillageable_powers = ["power_speedBoost","power_teleport","power_transponder","power_cloak","power_barrier","power_mortarMount"];
 	level.pillageable_explosives = ["power_bioSpike","power_sensorGrenade","power_clusterGrenade","power_gasGrenade","power_splashGrenade","power_repulsor","power_semtex","power_c4","power_frag"];
 	level.var_C32B = ["power_bioSpike","power_sensorGrenade","power_clusterGrenade","power_gasGrenade","power_splashGrenade","power_repulsor","power_semtex","power_c4","power_frag"];
 	level.var_C32C = ["power_bioSpike","power_sensorGrenade","power_clusterGrenade","power_gasGrenade","power_splashGrenade","power_repulsor","power_semtex","power_c4","power_frag"];
 	level.pillageable_attachments = ["reflex","grip","barrelrange","xmags","overclock","fastaim","rof"];
-	if(isdefined(level.custom_pillageinitfunc))
-	{
-		[[ level.custom_pillageinitfunc ]]();
+	if(isdefined(level.custom_pillageinitfunc)) {
+		[[level.custom_pillageinitfunc]]();
 	}
 
 	func_31AF();
 }
 
-//Function Number: 12
-func_31AF(param_00)
-{
-	if(!isdefined(level.pillageinfo))
-	{
+func_31AF(param_00) {
+	if(!isdefined(level.pillageinfo)) {
 		return;
 	}
 
-	if(!isdefined(level.var_CB87))
-	{
+	if(!isdefined(level.var_CB87)) {
 		level.var_CB87 = [];
 	}
 
-	if(isdefined(level.pillageinfo.explosive))
-	{
+	if(isdefined(level.pillageinfo.explosive)) {
 		func_31AE("explosive",level.pillageinfo.explosive);
 	}
 
-	if(isdefined(level.pillageinfo.clip))
-	{
+	if(isdefined(level.pillageinfo.clip)) {
 		func_31AE("clip",level.pillageinfo.clip);
 	}
 
-	if(isdefined(level.pillageinfo.money))
-	{
+	if(isdefined(level.pillageinfo.money)) {
 		func_31AE("money",level.pillageinfo.money);
 	}
 
-	if(isdefined(level.pillageinfo.var_B47C))
-	{
+	if(isdefined(level.pillageinfo.var_B47C)) {
 		func_31AE("maxammo",level.pillageinfo.var_B47C);
 	}
 
-	if(isdefined(level.pillageinfo.tickets))
-	{
+	if(isdefined(level.pillageinfo.tickets)) {
 		func_31AE("tickets",level.pillageinfo.tickets);
 	}
 
-	if(isdefined(level.pillageinfo.powers))
-	{
+	if(isdefined(level.pillageinfo.powers)) {
 		func_31AE("powers",level.pillageinfo.powers);
 	}
 
-	if(isdefined(level.pillageinfo.var_28C2))
-	{
+	if(isdefined(level.pillageinfo.var_28C2)) {
 		func_31AE("battery",level.pillageinfo.var_28C2);
 	}
 
-	if(isdefined(level.var_4C3F))
-	{
-		[[ level.var_4C3F ]]();
+	if(isdefined(level.var_4C3F)) {
+		[[level.var_4C3F]]();
 	}
 }
 
-//Function Number: 13
-func_31AE(param_00,param_01)
-{
-	if(!isdefined(param_01))
-	{
+func_31AE(param_00,param_01) {
+	if(!isdefined(param_01)) {
 		return;
 	}
 
@@ -317,26 +263,20 @@ func_31AE(param_00,param_01)
 	level.var_CB87[level.var_CB87.size] = var_02;
 }
 
-//Function Number: 14
-player_used_pillage_spot(param_00,param_01)
-{
-	if(scripts\engine\utility::istrue(param_01.inlaststand))
-	{
+player_used_pillage_spot(param_00,param_01) {
+	if(scripts\engine\utility::istrue(param_01.inlaststand)) {
 		return;
 	}
 
-	if(scripts\engine\utility::istrue(param_01.kung_fu_mode))
-	{
+	if(scripts\engine\utility::istrue(param_01.kung_fu_mode)) {
 		return;
 	}
 
-	if(param_01 scripts\cp\utility::is_holding_deployable() || param_01 scripts\cp\utility::has_special_weapon())
-	{
+	if(param_01 scripts\cp\utility::is_holding_deployable() || param_01 scripts\cp\utility::has_special_weapon()) {
 		return;
 	}
 
-	switch(param_00.type)
-	{
+	switch(param_00.type) {
 		case "explosive":
 			param_00 notify("all_players_searched");
 			param_01 func_12880(param_00,"primary",1);
@@ -348,8 +288,7 @@ player_used_pillage_spot(param_00,param_01)
 			break;
 
 		case "maxammo":
-			if(param_01 func_38BA())
-			{
+			if(param_01 func_38BA()) {
 				param_01 _meth_82E8();
 				param_01 thread scripts\cp\cp_vo::try_to_play_vo("pillage_ammo","zmb_comment_vo","low",10,0,1,0,50);
 				scripts\engine\utility::waitframe();
@@ -362,10 +301,8 @@ player_used_pillage_spot(param_00,param_01)
 			break;
 
 		case "money":
-			if(param_01 scripts\cp\cp_persistence::get_player_currency() < param_01.maxcurrency)
-			{
-				if(soundexists(param_01.vo_prefix + "pillage_cash"))
-				{
+			if(param_01 scripts\cp\cp_persistence::get_player_currency() < param_01.maxcurrency) {
+				if(soundexists(param_01.vo_prefix + "pillage_cash")) {
 					param_01 thread scripts\cp\cp_vo::try_to_play_vo("pillage_cash","zmb_comment_vo","medium",10,0,0,1,50);
 				}
 				else
@@ -389,8 +326,7 @@ player_used_pillage_spot(param_00,param_01)
 			break;
 
 		case "clip":
-			if(param_01 func_38B7())
-			{
+			if(param_01 func_38B7()) {
 				param_01 setaimspreadmovementscale();
 				param_01 thread scripts\cp\cp_vo::try_to_play_vo("pillage_ammo","zmb_comment_vo","low",10,0,1,0,50);
 				scripts\engine\utility::waitframe();
@@ -399,8 +335,7 @@ player_used_pillage_spot(param_00,param_01)
 			else
 			{
 				var_02 = param_01 scripts\cp\utility::getvalidtakeweapon();
-				if(issubstr(var_02,"iw7_cutie_zm") || issubstr(var_02,"iw7_cutier_zm"))
-				{
+				if(issubstr(var_02,"iw7_cutie_zm") || issubstr(var_02,"iw7_cutier_zm")) {
 					param_01 scripts\cp\utility::setlowermessage("invalid_ammo",&"CP_TOWN_INVALID_AMMO",3);
 				}
 				else
@@ -413,23 +348,20 @@ player_used_pillage_spot(param_00,param_01)
 			break;
 
 		case "quest":
-			if(isdefined(level.quest_specific_pillage_show_func))
-			{
-				param_01 [[ level.quest_specific_pillage_show_func ]](var_02,"pickup",param_01);
+			if(isdefined(level.quest_specific_pillage_show_func)) {
+				param_01 [[level.quest_specific_pillage_show_func]](var_02,"pickup",param_01);
 			}
 	
 			break;
 
 		case "battery":
-			if(scripts\engine\utility::istrue(var_02.has_battery))
-			{
+			if(scripts\engine\utility::istrue(var_02.has_battery)) {
 				var_02 scripts\cp\utility::setlowermessage("have_battery",&"CP_TOWN_HAVE_BATTERY",4);
 				return;
 			}
 	
-			if(isdefined(level.quest_pillage_give_func))
-			{
-				var_02 thread [[ level.quest_pillage_give_func ]](var_02);
+			if(isdefined(level.quest_pillage_give_func)) {
+				var_02 thread [[level.quest_pillage_give_func]](var_02);
 			}
 	
 			param_01 notify("all_players_searched");
@@ -437,15 +369,13 @@ player_used_pillage_spot(param_00,param_01)
 			break;
 
 		default:
-			if(isdefined(level.var_ABE7))
-			{
-				param_01 [[ level.var_ABE7 ]](var_02,"pick_up");
+			if(isdefined(level.var_ABE7)) {
+				param_01 [[level.var_ABE7]](var_02,"pick_up");
 			}
 			break;
 	}
 
-	if(isdefined(param_01.var_A038))
-	{
+	if(isdefined(param_01.var_A038)) {
 		var_02 thread func_100F2(param_01.var_A038);
 	}
 
@@ -453,27 +383,22 @@ player_used_pillage_spot(param_00,param_01)
 	var_02 thread scripts\cp\utility::usegrenadegesture(var_02,"iw7_pickup_zm");
 }
 
-//Function Number: 15
-gesture_activate(param_00,param_01,param_02,param_03)
-{
+gesture_activate(param_00,param_01,param_02,param_03) {
 	self notify("forcingGesture");
 	self endon("forcingGesture");
 	self allowmelee(0);
 	scripts\engine\utility::allow_ads(0);
-	if(scripts\engine\utility::isoffhandweaponsallowed())
-	{
+	if(scripts\engine\utility::isoffhandweaponsallowed()) {
 		scripts\engine\utility::allow_offhand_weapons(0);
 	}
 
-	if(self isgestureplaying(param_00))
-	{
+	if(self isgestureplaying(param_00)) {
 		self stopgestureviewmodel(param_00,0);
 	}
 
 	var_04 = self getgestureanimlength(param_00) * 0.4;
 	var_05 = self playgestureviewmodel(param_00,param_01,1);
-	if(var_05)
-	{
+	if(var_05) {
 		var_06 = func_7DCA(param_00);
 		self playanimscriptevent("power_active_cp",var_06);
 		wait(var_04);
@@ -481,36 +406,28 @@ gesture_activate(param_00,param_01,param_02,param_03)
 
 	self allowmelee(1);
 	scripts\engine\utility::allow_ads(1);
-	if(!scripts\engine\utility::isoffhandweaponsallowed())
-	{
+	if(!scripts\engine\utility::isoffhandweaponsallowed()) {
 		scripts\engine\utility::allow_offhand_weapons(1);
 	}
 }
 
-//Function Number: 16
-func_7DCA(param_00)
-{
-	switch(param_00)
-	{
+func_7DCA(param_00) {
+	switch(param_00) {
 		default:
 			return "gesture008";
 	}
 }
 
-//Function Number: 17
-_meth_831A(param_00)
-{
+_meth_831A(param_00) {
 	self endon("all_players_searched");
-	if(scripts\cp\zombies\zombies_weapons::should_take_players_current_weapon(param_00))
-	{
+	if(scripts\cp\zombies\zombies_weapons::should_take_players_current_weapon(param_00)) {
 		var_01 = param_00 getcurrentweapon();
 		var_02 = scripts\cp\utility::getrawbaseweaponname(var_01);
 		param_00 takeweapon(var_01);
 		param_00.var_A037 = var_02;
 		level.transactionid = randomint(100);
 		scripts\cp\zombies\zombie_analytics::func_AF76(param_00.var_A037,level.transactionid);
-		if(isdefined(param_00.pap[var_02]))
-		{
+		if(isdefined(param_00.pap[var_02])) {
 			param_00.pap[var_02] = undefined;
 			param_00 notify("weapon_level_changed");
 		}
@@ -520,8 +437,7 @@ _meth_831A(param_00)
 	var_04 = scripts\cp\utility::getrawbaseweaponname(var_03);
 	param_00.itempicked = var_04;
 	param_00 giveweapon(var_03);
-	if(!isdefined(param_00.itemkills[var_04]))
-	{
+	if(!isdefined(param_00.itemkills[var_04])) {
 		param_00.itemkills[var_04] = 0;
 	}
 
@@ -533,9 +449,7 @@ _meth_831A(param_00)
 	self notify("weapon_taken");
 }
 
-//Function Number: 18
-func_5135(param_00)
-{
+func_5135(param_00) {
 	thread func_13971();
 	var_01 = scripts\engine\utility::waittill_any_timeout_1(60,"stop_pillage_spot_think","all_players_searched","redistributed_pillage_spots");
 	var_02 = var_01 != "redistributed_pillage_spots";
@@ -543,24 +457,18 @@ func_5135(param_00)
 	thread func_5189(param_00,var_02);
 }
 
-//Function Number: 19
-func_10D4C()
-{
+func_10D4C() {
 	wait(60);
 	self notify("all_players_searched");
 }
 
-//Function Number: 20
-func_13971()
-{
+func_13971() {
 	self endon("all_players_searched");
-	for(;;)
-	{
+	for(;;) {
 		scripts\engine\utility::waittill_any_3("picked_up","swapped");
 		self.var_F073++;
 		wait(0.25);
-		if(self.var_F073 >= level.players.size)
-		{
+		if(self.var_F073 >= level.players.size) {
 			self notify("all_players_searched");
 			break;
 		}
@@ -571,12 +479,9 @@ func_13971()
 	}
 }
 
-//Function Number: 21
-func_7A09(param_00)
-{
+func_7A09(param_00) {
 	param_00 = "" + param_00;
-	switch(param_00)
-	{
+	switch(param_00) {
 		case "power_bolaSpray":
 			return &"ZOMBIE_PILLAGE_FOUND_BOLA_BARRAGE";
 
@@ -623,18 +528,14 @@ func_7A09(param_00)
 			return undefined;
 	}
 
-	if(isdefined(level.var_7A0A))
-	{
-		return [[ level.var_7A0A ]](param_00);
+	if(isdefined(level.var_7A0A)) {
+		return [[level.var_7A0A]](param_00);
 	}
 }
 
-//Function Number: 22
-func_7A06(param_00)
-{
+func_7A06(param_00) {
 	param_00 = "" + param_00;
-	switch(param_00)
-	{
+	switch(param_00) {
 		case "power_frag":
 			return &"ZOMBIE_PILLAGE_PICKUP_FRAG_GRENADE";
 
@@ -690,23 +591,18 @@ func_7A06(param_00)
 			return undefined;
 	}
 
-	if(isdefined(level.var_7A07))
-	{
-		return [[ level.var_7A07 ]](param_00);
+	if(isdefined(level.var_7A07)) {
+		return [[level.var_7A07]](param_00);
 	}
 }
 
-//Function Number: 23
-func_5D00()
-{
-	if(self.model != "tag_origin")
-	{
+func_5D00() {
+	if(self.model != "tag_origin") {
 		var_00 = 20;
 		var_01 = (0,0,2);
 		var_02 = (0,0,0);
 		var_03 = getgroundposition(self.origin,5,var_00);
-		switch(self.model)
-		{
+		switch(self.model) {
 			case "attachment_zmb_arcane_muzzlebrake_wm":
 				var_02 = (0,0,6);
 				break;
@@ -716,38 +612,30 @@ func_5D00()
 	}
 }
 
-//Function Number: 24
-func_5189(param_00,param_01)
-{
+func_5189(param_00,param_01) {
 	wait(0.25);
-	while(scripts\engine\utility::istrue(self.inuse))
-	{
+	while(scripts\engine\utility::istrue(self.inuse)) {
 		wait(0.1);
 	}
 
-	if(isdefined(self.pillageinfo) && isdefined(self.type))
-	{
+	if(isdefined(self.pillageinfo) && isdefined(self.type)) {
 		self.pillageinfo.type = undefined;
 	}
 
-	if(isdefined(self.var_CB63))
-	{
+	if(isdefined(self.var_CB63)) {
 		self.var_CB63 delete();
 	}
 
-	if(isdefined(self.fx))
-	{
+	if(isdefined(self.fx)) {
 		self.fx delete();
 	}
 
-	if(isdefined(self.var_F07F))
-	{
+	if(isdefined(self.var_F07F)) {
 		self.var_F07F = undefined;
 	}
 
 	self.var_F073 = 4;
-	if(scripts\engine\utility::array_contains(level.var_163C,self))
-	{
+	if(scripts\engine\utility::array_contains(level.var_163C,self)) {
 		level.var_163C = scripts\engine\utility::array_remove(level.var_163C,self);
 	}
 
@@ -755,11 +643,8 @@ func_5189(param_00,param_01)
 	param_00 delete();
 }
 
-//Function Number: 25
-func_7B82(param_00,param_01)
-{
-	if(!scripts\engine\utility::flag("can_drop_coins"))
-	{
+func_7B82(param_00,param_01) {
+	if(!scripts\engine\utility::flag("can_drop_coins")) {
 		var_05 = ["quest"];
 	}
 	else
@@ -768,13 +653,11 @@ func_7B82(param_00,param_01)
 	}
 
 	var_02 = func_7BEF(level.var_CB87,var_05);
-	if(isdefined(param_00.var_4FFB))
-	{
+	if(isdefined(param_00.var_4FFB)) {
 		var_02 = param_00.var_4FFB;
 	}
 
-	switch(var_02)
-	{
+	switch(var_02) {
 		case "explosive":
 			param_00.randomintrange = func_3E8D();
 			param_00.type = "explosive";
@@ -814,9 +697,8 @@ func_7B82(param_00,param_01)
 			break;
 
 		case "quest":
-			if(isdefined(level.quest_create_pillage_interaction))
-			{
-				[[ level.quest_create_pillage_interaction ]](param_00,param_01);
+			if(isdefined(level.quest_create_pillage_interaction)) {
+				[[level.quest_create_pillage_interaction]](param_00,param_01);
 			}
 			break;
 
@@ -830,29 +712,22 @@ func_7B82(param_00,param_01)
 	return param_00;
 }
 
-//Function Number: 26
-func_7BEF(param_00,param_01)
-{
-	if(isdefined(level.quest_pillage_func))
-	{
-		var_02 = [[ level.quest_pillage_func ]]();
-		if(isdefined(var_02))
-		{
+func_7BEF(param_00,param_01) {
+	if(isdefined(level.quest_pillage_func)) {
+		var_02 = [[level.quest_pillage_func]]();
+		if(isdefined(var_02)) {
 			return var_02;
 		}
 	}
 
 	var_03 = [];
 	var_04 = 0;
-	foreach(var_06 in param_00)
-	{
-		if(scripts\engine\utility::array_contains(param_01,var_06.ref))
-		{
+	foreach(var_06 in param_00) {
+		if(scripts\engine\utility::array_contains(param_01,var_06.ref)) {
 			continue;
 		}
 
-		if(var_06.var_3C35 == 0)
-		{
+		if(var_06.var_3C35 == 0) {
 			continue;
 		}
 
@@ -862,29 +737,23 @@ func_7BEF(param_00,param_01)
 
 	var_08 = randomintrange(0,var_04 + 1);
 	var_09 = 0;
-	foreach(var_06 in var_03)
-	{
+	foreach(var_06 in var_03) {
 		var_09 = var_09 + var_06.var_3C35;
-		if(var_08 <= var_09)
-		{
+		if(var_08 <= var_09) {
 			return var_06.ref;
 		}
 	}
 }
 
-//Function Number: 27
-func_100F2(param_00)
-{
+func_100F2(param_00) {
 	self endon("disconnect");
-	if(isdefined(self.var_1304A))
-	{
+	if(isdefined(self.var_1304A)) {
 		return;
 	}
 
 	var_01 = level.primaryprogressbarfontsize;
 	var_02 = "objective";
-	if(level.splitscreen)
-	{
+	if(level.splitscreen) {
 		var_01 = 1.3;
 	}
 
@@ -896,52 +765,38 @@ func_100F2(param_00)
 	self.var_1304A = undefined;
 }
 
-//Function Number: 28
-func_3E90()
-{
+func_3E90() {
 	return scripts\engine\utility::random(level.var_138A1);
 }
 
-//Function Number: 29
-func_3E8C()
-{
+func_3E8C() {
 	return scripts\engine\utility::random(level.pillageable_attachments);
 }
 
-//Function Number: 30
-func_3E8D()
-{
+func_3E8D() {
 	return scripts\engine\utility::random(level.pillageable_explosives);
 }
 
-//Function Number: 31
-func_3E8E()
-{
+func_3E8E() {
 	return scripts\engine\utility::random(level.pillageable_powers);
 }
 
-//Function Number: 32
-func_3E8F()
-{
+func_3E8F() {
 	return scripts\engine\utility::random(["infinite_20","ammo_max","kill_50","cash_2","instakill_30"]);
 }
 
-//Function Number: 33
-func_12880(param_00,param_01,param_02)
-{
+func_12880(param_00,param_01,param_02) {
 	var_03 = param_00.randomintrange;
 	var_04 = param_00.var_1E2D;
 	self.itempicked = var_03;
 	level.transactionid = randomint(100);
-	if(!isdefined(param_01))
-	{
+	if(!isdefined(param_01)) {
 		param_01 = level.powers[var_03].defaultslot;
 	}
 
 	thread scripts\cp\powers\coop_powers::givepower(var_03,param_01,undefined,undefined,undefined,0,param_02);
 	self playlocalsound("grenade_pickup");
-	if(randomint(100) > 50)
-	{
+	if(randomint(100) > 50) {
 		thread scripts\cp\cp_vo::try_to_play_vo("pillage_grenade","zmb_comment_vo","medium",10,0,1,0,50);
 	}
 	else
@@ -954,26 +809,20 @@ func_12880(param_00,param_01,param_02)
 	param_00 notify("picked_up");
 }
 
-//Function Number: 34
-func_1287B(param_00)
-{
+func_1287B(param_00) {
 	var_01 = param_00.pillageinfo.randomintrange;
 	var_02 = param_00.pillageinfo.var_1E2D;
 	self.itempicked = var_01;
 	level.transactionid = randomint(100);
-	if(isdefined(level.var_1287A))
-	{
-		if(![[ level.var_1287A ]]())
-		{
+	if(isdefined(level.var_1287A)) {
+		if(![[level.var_1287A]]()) {
 			return;
 		}
 	}
 
-	if(self hasweapon(var_01) && self getrunningforwardpainanim(var_01) > 0)
-	{
+	if(self hasweapon(var_01) && self getrunningforwardpainanim(var_01) > 0) {
 		var_03 = self getfractionmaxammo(var_01);
-		if(var_03 < 1)
-		{
+		if(var_03 < 1) {
 			var_04 = self getweaponammoclip(var_01);
 			self setweaponammoclip(var_01,var_04 + var_02);
 			self playlocalsound("grenade_pickup");
@@ -991,8 +840,7 @@ func_1287B(param_00)
 
 	var_05 = func_FFA4(level.var_C32B);
 	self _meth_831C("other");
-	if(!isdefined(var_05))
-	{
+	if(!isdefined(var_05)) {
 		self giveweapon(var_01);
 		self setweaponammoclip(var_01,var_02);
 		self playlocalsound("grenade_pickup");
@@ -1025,51 +873,40 @@ func_1287B(param_00)
 	param_00.var_CB63 func_5D00();
 }
 
-//Function Number: 35
-func_FFA4(param_00)
-{
+func_FFA4(param_00) {
 	var_01 = 0;
 	var_02 = undefined;
 	var_03 = 0;
 	var_04 = self getweaponslistoffhands();
-	foreach(var_06 in var_04)
-	{
-		foreach(var_08 in param_00)
-		{
-			if(var_06 != var_08)
-			{
+	foreach(var_06 in var_04) {
+		foreach(var_08 in param_00) {
+			if(var_06 != var_08) {
 				continue;
 			}
 
-			if(isdefined(var_06) && var_06 != "none" && self getrunningforwardpainanim(var_06) > 0)
-			{
+			if(isdefined(var_06) && var_06 != "none" && self getrunningforwardpainanim(var_06) > 0) {
 				var_02 = var_06;
 				var_03 = self getweaponammoclip(var_06);
 				var_01 = 1;
 				break;
 			}
 
-			if(var_01)
-			{
+			if(var_01) {
 				break;
 			}
 		}
 	}
 
-	if(isdefined(var_02))
-	{
+	if(isdefined(var_02)) {
 		self.var_1131E = var_03;
 	}
 
 	return var_02;
 }
 
-//Function Number: 36
-func_38B7()
-{
+func_38B7() {
 	var_00 = scripts\cp\utility::getvalidtakeweapon();
-	if(issubstr(var_00,"iw7_cutie_zm") || issubstr(var_00,"iw7_cutier_zm"))
-	{
+	if(issubstr(var_00,"iw7_cutie_zm") || issubstr(var_00,"iw7_cutier_zm")) {
 		return 0;
 	}
 
@@ -1077,41 +914,33 @@ func_38B7()
 	var_02 = function_0249(var_01);
 	var_03 = weaponclipsize(var_01);
 	var_04 = scripts\cp\utility::getrawbaseweaponname(var_01);
-	if(var_01 == "iw7_axe_zm" || var_01 == "iw7_axe_zm_pap1" || var_01 == "iw7_axe_zm_pap2" || var_01 == "none" || scripts\cp\utility::weapon_is_dlc_melee(var_01) || var_01 == "iw7_katana_zm" || issubstr(var_01,"iw7_entangler"))
-	{
+	if(var_01 == "iw7_axe_zm" || var_01 == "iw7_axe_zm_pap1" || var_01 == "iw7_axe_zm_pap2" || var_01 == "none" || scripts\cp\utility::weapon_is_dlc_melee(var_01) || var_01 == "iw7_katana_zm" || issubstr(var_01,"iw7_entangler")) {
 		return 0;
 	}
 
-	if(issubstr(var_01,"iw7_fists"))
-	{
+	if(issubstr(var_01,"iw7_fists")) {
 		return 0;
 	}
 
-	if(scripts\engine\utility::istrue(self.isusingsupercard))
-	{
+	if(scripts\engine\utility::istrue(self.isusingsupercard)) {
 		return 0;
 	}
 
-	if(self getweaponammostock(var_01) < var_02)
-	{
+	if(self getweaponammostock(var_01) < var_02) {
 		return 1;
 	}
 
-	if(function_024C(var_01) == "riotshield" || scripts\cp\cp_weapon::is_incompatible_weapon(var_01))
-	{
+	if(function_024C(var_01) == "riotshield" || scripts\cp\cp_weapon::is_incompatible_weapon(var_01)) {
 		var_05 = self getweaponslistprimaries();
-		foreach(var_07 in var_05)
-		{
-			if(var_07 == var_01)
-			{
+		foreach(var_07 in var_05) {
+			if(var_07 == var_01) {
 				continue;
 			}
 
 			var_02 = function_0249(var_07);
 			var_03 = weaponclipsize(var_07);
 			var_04 = scripts\cp\utility::getrawbaseweaponname(var_07);
-			if(self getweaponammostock(var_07) < var_02)
-			{
+			if(self getweaponammostock(var_07) < var_02) {
 				return 1;
 			}
 		}
@@ -1120,31 +949,24 @@ func_38B7()
 	return 0;
 }
 
-//Function Number: 37
-setaimspreadmovementscale()
-{
+setaimspreadmovementscale() {
 	var_00 = self getcurrentweapon();
 	var_01 = scripts\cp\utility::getrawbaseweaponname(var_00);
 	var_02 = weaponclipsize(var_00);
-	if(function_024C(var_00) == "riotshield" || scripts\cp\cp_weapon::is_incompatible_weapon(var_00))
-	{
+	if(function_024C(var_00) == "riotshield" || scripts\cp\cp_weapon::is_incompatible_weapon(var_00)) {
 		var_03 = self getweaponslistprimaries();
-		foreach(var_05 in var_03)
-		{
-			if(var_05 == var_00)
-			{
+		foreach(var_05 in var_03) {
+			if(var_05 == var_00) {
 				continue;
 			}
 
-			if(!scripts\cp\cp_weapon::isbulletweapon(var_00))
-			{
+			if(!scripts\cp\cp_weapon::isbulletweapon(var_00)) {
 				continue;
 			}
 
 			var_02 = weaponclipsize(var_05);
 			var_01 = scripts\cp\utility::getrawbaseweaponname(var_05);
-			if(self getweaponammostock(var_05) < function_0249(var_05))
-			{
+			if(self getweaponammostock(var_05) < function_0249(var_05)) {
 				var_06 = self getweaponammostock(var_05);
 				self setweaponammostock(var_05,var_02 + var_06);
 				self.itempicked = var_05;
@@ -1163,19 +985,14 @@ setaimspreadmovementscale()
 	self playlocalsound("weap_ammo_pickup");
 }
 
-//Function Number: 38
-_meth_82E8()
-{
+_meth_82E8() {
 	var_00 = self getweaponslistprimaries();
-	foreach(var_02 in var_00)
-	{
-		if(function_024C(var_02) == "riotshield")
-		{
+	foreach(var_02 in var_00) {
+		if(function_024C(var_02) == "riotshield") {
 			continue;
 		}
 
-		if(scripts\cp\cp_weapon::is_incompatible_weapon(var_02))
-		{
+		if(scripts\cp\cp_weapon::is_incompatible_weapon(var_02)) {
 			continue;
 		}
 
@@ -1189,19 +1006,14 @@ _meth_82E8()
 	self playlocalsound("weap_ammo_pickup");
 }
 
-//Function Number: 39
-func_38BA()
-{
+func_38BA() {
 	var_00 = self getweaponslistprimaries();
-	foreach(var_02 in var_00)
-	{
-		if(function_024C(var_02) == "riotshield")
-		{
+	foreach(var_02 in var_00) {
+		if(function_024C(var_02) == "riotshield") {
 			continue;
 		}
 
-		if(scripts\cp\cp_weapon::is_incompatible_weapon(var_02))
-		{
+		if(scripts\cp\cp_weapon::is_incompatible_weapon(var_02)) {
 			continue;
 		}
 
@@ -1209,8 +1021,7 @@ func_38BA()
 		var_04 = function_0249(var_02);
 		var_05 = var_04;
 		var_06 = self getweaponammostock(var_02);
-		if(var_06 < var_05)
-		{
+		if(var_06 < var_05) {
 			return 1;
 		}
 	}
@@ -1218,11 +1029,8 @@ func_38BA()
 	return 0;
 }
 
-//Function Number: 40
-pillage_item_drop_func(param_00,param_01,param_02)
-{
-	if(![[ level.should_drop_pillage ]](param_02,param_01))
-	{
+pillage_item_drop_func(param_00,param_01,param_02) {
+	if(![[level.should_drop_pillage]](param_02,param_01)) {
 		return 0;
 	}
 
@@ -1230,51 +1038,38 @@ pillage_item_drop_func(param_00,param_01,param_02)
 	return 1;
 }
 
-//Function Number: 41
-func_FF3D(param_00,param_01)
-{
-	if(scripts\engine\utility::istrue(self.died_poorly))
-	{
+func_FF3D(param_00,param_01) {
+	if(scripts\engine\utility::istrue(self.died_poorly)) {
 		return 0;
 	}
 
-	if(isdefined(self.entered_playspace) && !self.entered_playspace)
-	{
+	if(isdefined(self.entered_playspace) && !self.entered_playspace) {
 		return 0;
 	}
 
-	if(!is_in_active_volume(param_01))
-	{
+	if(!is_in_active_volume(param_01)) {
 		return 0;
 	}
 
 	return 1;
 }
 
-//Function Number: 42
-is_in_active_volume(param_00)
-{
-	if(isdefined(level.invalid_spawn_volume_array))
-	{
-		if(!scripts\cp\cp_weapon::isinvalidzone(param_00,level.invalid_spawn_volume_array,undefined,undefined,1))
-		{
+is_in_active_volume(param_00) {
+	if(isdefined(level.invalid_spawn_volume_array)) {
+		if(!scripts\cp\cp_weapon::isinvalidzone(param_00,level.invalid_spawn_volume_array,undefined,undefined,1)) {
 			return 0;
 		}
 	}
-	else if(!scripts\cp\cp_weapon::isinvalidzone(param_00,undefined,undefined,undefined,1))
-	{
+	else if(!scripts\cp\cp_weapon::isinvalidzone(param_00,undefined,undefined,undefined,1)) {
 		return 0;
 	}
 
-	if(!isdefined(level.active_spawn_volumes))
-	{
+	if(!isdefined(level.active_spawn_volumes)) {
 		return 1;
 	}
 
-	foreach(var_02 in level.active_spawn_volumes)
-	{
-		if(function_010F(param_00,var_02))
-		{
+	foreach(var_02 in level.active_spawn_volumes) {
+		if(function_010F(param_00,var_02)) {
 			return 1;
 		}
 	}
@@ -1282,12 +1077,9 @@ is_in_active_volume(param_00)
 	return 0;
 }
 
-//Function Number: 43
-func_10798(param_00,param_01,param_02)
-{
+func_10798(param_00,param_01,param_02) {
 	var_03 = 0;
-	if(var_03)
-	{
+	if(var_03) {
 		var_04 = 2;
 		var_05 = -150;
 		var_06 = 50;
@@ -1307,8 +1099,7 @@ func_10798(param_00,param_01,param_02)
 		var_05 = 800;
 		var_06 = 50;
 		var_07 = spawn("script_model",param_01);
-		if(isdefined(param_01))
-		{
+		if(isdefined(param_01)) {
 			var_07.angles = param_01;
 		}
 		else
@@ -1321,18 +1112,15 @@ func_10798(param_00,param_01,param_02)
 		var_07 physicslaunchserver(var_07.origin + (12,0,0),(0,0,0));
 	}
 
-	for(;;)
-	{
+	for(;;) {
 		var_0A = var_07.origin;
 		wait(0.25);
-		if(distance(var_0A,var_07.origin) < 8)
-		{
+		if(distance(var_0A,var_07.origin) < 8) {
 			break;
 		}
 	}
 
-	if(ispointonnavmesh(var_07.origin))
-	{
+	if(ispointonnavmesh(var_07.origin)) {
 		level.var_A8F5 = gettime();
 		level.var_BF51 = level.var_A8F5 + randomintrange(level.var_CB5D,level.var_CB5C);
 		var_0B = func_4934(var_07);
@@ -1343,9 +1131,7 @@ func_10798(param_00,param_01,param_02)
 	var_07 delete();
 }
 
-//Function Number: 44
-func_4934(param_00)
-{
+func_4934(param_00) {
 	var_01 = spawn("script_model",param_00.origin);
 	var_01.origin = param_00.origin;
 	var_01.angles = param_00.angles;
@@ -1363,8 +1149,7 @@ func_4934(param_00)
 	var_01 thread func_5135(var_01);
 	level.var_163C[level.var_163C.size] = var_01;
 	scripts\cp\cp_interaction::add_to_current_interaction_list(var_01);
-	if(var_01.type == "battery")
-	{
+	if(var_01.type == "battery") {
 		var_02 = spawn("script_model",var_01.origin + (0,0,20));
 		var_03 = spawnfx(level._effect["pillage_box"],var_01.origin);
 		scripts\engine\utility::waitframe();
@@ -1372,24 +1157,20 @@ func_4934(param_00)
 		scripts\engine\utility::waitframe();
 		var_02 setmodel("crafting_battery_single_01");
 		var_01 scripts\engine\utility::waittill_any_timeout_1(60,"all_players_searched");
-		if(isdefined(var_02))
-		{
+		if(isdefined(var_02)) {
 			var_02 delete();
 		}
 
-		if(isdefined(var_03))
-		{
+		if(isdefined(var_03)) {
 			var_03 delete();
 		}
 	}
-	else if(var_01.type != "quest" && var_01.type != "battery")
-	{
+	else if(var_01.type != "quest" && var_01.type != "battery") {
 		var_03 = spawnfx(level._effect["pillage_box"],var_01.origin);
 		scripts\engine\utility::waitframe();
 		triggerfx(var_03);
 		var_01 scripts\engine\utility::waittill_any_timeout_1(60,"all_players_searched");
-		if(isdefined(var_03))
-		{
+		if(isdefined(var_03)) {
 			var_03 delete();
 		}
 	}
@@ -1401,43 +1182,32 @@ func_4934(param_00)
 	scripts\cp\cp_interaction::remove_from_current_interaction_list(var_01);
 }
 
-//Function Number: 45
-pillage_hint_func(param_00,param_01)
-{
-	if(scripts\engine\utility::istrue(param_01.inlaststand))
-	{
+pillage_hint_func(param_00,param_01) {
+	if(scripts\engine\utility::istrue(param_01.inlaststand)) {
 		return "";
 	}
 
-	if(scripts\engine\utility::istrue(param_01.kung_fu_mode))
-	{
+	if(scripts\engine\utility::istrue(param_01.kung_fu_mode)) {
 		return "";
 	}
 
-	if(isdefined(param_00.var_CB47))
-	{
+	if(isdefined(param_00.var_CB47)) {
 		return param_00.var_CB47;
 	}
 
 	return "";
 }
 
-//Function Number: 46
-func_7B80(param_00)
-{
-	switch(param_00)
-	{
+func_7B80(param_00) {
+	switch(param_00) {
 	}
 }
 
-//Function Number: 47
-func_4ED7(param_00)
-{
+func_4ED7(param_00) {
 	var_01 = strtok(param_00,"+");
 	var_02 = var_01[0];
 	var_03 = var_01[1];
-	foreach(var_05 in level.spawned_enemies)
-	{
+	foreach(var_05 in level.spawned_enemies) {
 		var_05 setscriptablepartstate(var_02,var_03);
 	}
 }

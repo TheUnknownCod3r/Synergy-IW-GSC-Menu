@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\mp\global_fx.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 1
- * Decompile Time: 69 ms
- * Timestamp: 10/27/2023 12:20:29 AM
-*******************************************************************/
+/********************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\mp\global_fx.gsc
+********************************************/
 
-//Function Number: 1
-main()
-{
+main() {
 	scripts\mp\global_fx_code::global_fx("ch_streetlight_02_FX_origin","vfx/misc/lighthaze");
 	scripts\mp\global_fx_code::global_fx("me_streetlight_01_FX_origin","vfx/misc/lighthaze_bog_a");
 	scripts\mp\global_fx_code::global_fx("ch_street_light_01_on","vfx/misc/light_glow_white");

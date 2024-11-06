@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\mp\killstreaks\_deployablebox_ammo.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 8
- * Decompile Time: 387 ms
- * Timestamp: 10/27/2023 12:28:21 AM
-*******************************************************************/
+/******************************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\mp\killstreaks\_deployablebox_ammo.gsc
+******************************************************************/
 
-//Function Number: 1
-init()
-{
+init() {
 	var_00 = spawnstruct();
 	var_00.var_39B = "deployable_vest_marker_mp";
 	var_00.modelbase = "mil_ammo_case_1_open";
@@ -45,12 +39,9 @@ init()
 	level.deployable_box["deployable_ammo"] = [];
 }
 
-//Function Number: 2
-func_128DE(param_00,param_01)
-{
+func_128DE(param_00,param_01) {
 	var_02 = scripts\mp\killstreaks\_deployablebox::begindeployableviamarker(param_00,"deployable_ammo");
-	if(!isdefined(var_02) || !var_02)
-	{
+	if(!isdefined(var_02) || !var_02) {
 		return 0;
 	}
 
@@ -58,52 +49,37 @@ func_128DE(param_00,param_01)
 	return 1;
 }
 
-//Function Number: 3
-onusedeployable(param_00)
-{
+onusedeployable(param_00) {
 	func_17A6();
 }
 
-//Function Number: 4
-func_17A6()
-{
+func_17A6() {
 	var_00 = self getweaponslistall();
-	if(isdefined(var_00))
-	{
-		foreach(var_02 in var_00)
-		{
-			if(scripts\mp\_weapons::isbulletweapon(var_02))
-			{
+	if(isdefined(var_00)) {
+		foreach(var_02 in var_00) {
+			if(scripts\mp\_weapons::isbulletweapon(var_02)) {
 				func_1805(var_02,2);
 				continue;
 			}
 
-			if(weaponclass(var_02) == "rocketlauncher")
-			{
+			if(weaponclass(var_02) == "rocketlauncher") {
 				func_1805(var_02,1);
 			}
 		}
 	}
 }
 
-//Function Number: 5
-func_1805(param_00,param_01)
-{
+func_1805(param_00,param_01) {
 	var_02 = weaponclipsize(param_00);
 	var_03 = self getweaponammostock(param_00);
 	self setweaponammostock(param_00,var_03 + param_01 * var_02);
 }
 
-//Function Number: 6
-func_1819(param_00)
-{
+func_1819(param_00) {
 	var_01 = self getweaponslistprimaries();
-	foreach(var_03 in var_01)
-	{
-		if(scripts\mp\_weapons::isbulletweapon(var_03))
-		{
-			if(var_03 != "iw6_alienminigun_mp")
-			{
+	foreach(var_03 in var_01) {
+		if(scripts\mp\_weapons::isbulletweapon(var_03)) {
+			if(var_03 != "iw6_alienminigun_mp") {
 				var_04 = self getweaponammostock(var_03);
 				var_05 = function_0249(var_03);
 				var_06 = var_04 + var_05 * param_00;
@@ -113,19 +89,14 @@ func_1819(param_00)
 	}
 }
 
-//Function Number: 7
-func_17C6()
-{
+func_17C6() {
 	var_00 = self getweaponslistprimaries();
-	foreach(var_02 in var_00)
-	{
+	foreach(var_02 in var_00) {
 		var_03 = weaponclipsize(var_02);
 		self setweaponammoclip(var_02,var_03);
 	}
 }
 
-//Function Number: 8
-func_3937(param_00)
-{
+func_3937(param_00) {
 	return !scripts\mp\_utility::isjuggernaut();
 }

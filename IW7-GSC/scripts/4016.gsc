@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: 4016.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 1
- * Decompile Time: 2 ms
- * Timestamp: 10/27/2023 12:31:56 AM
-*******************************************************************/
+/****************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\4016.gsc
+****************************/
 
-//Function Number: 1
-main()
-{
+main() {
 	level._effect["vfx_gn_sprinkler_spray_rainbow"] = loadfx("vfx/iw7/levels/mp_geneva/vfx_gn_sprinkler_spray_rainbow.vfx");
 	level._effect["vfx_gn_sprinkler_spray"] = loadfx("vfx/iw7/levels/mp_geneva/vfx_gn_sprinkler_spray.vfx");
 	level._effect["vfx_gn_float_leaves_fountain"] = loadfx("vfx/iw7/levels/mp_geneva/vfx_gn_float_leaves_fountain.vfx");

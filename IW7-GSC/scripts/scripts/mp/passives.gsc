@@ -1,34 +1,23 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\mp\passives.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 10
- * Decompile Time: 417 ms
- * Timestamp: 10/27/2023 12:21:09 AM
-*******************************************************************/
+/*******************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\mp\passives.gsc
+*******************************************/
 
-//Function Number: 1
-init()
-{
+init() {
 	level.passivemap = [];
 	passiveparsetable();
 }
 
-//Function Number: 2
-passiveparsetable()
-{
-	if(!isdefined(level.passivemap))
-	{
+passiveparsetable() {
+	if(!isdefined(level.passivemap)) {
 		level.passivemap = [];
 	}
 
 	var_00 = 0;
-	for(;;)
-	{
+	for(;;) {
 		var_01 = tablelookupbyrow("mp/passivetable.csv",var_00,0);
-		if(var_01 == "")
-		{
+		if(var_01 == "") {
 			break;
 		}
 
@@ -42,32 +31,26 @@ passiveparsetable()
 		var_06.killstreaktype = scripts\engine\utility::ter_op(tablelookupbyrow("mp/passivetable.csv",var_00,9) == "",0,1);
 		var_06.var_ABCA = scripts\engine\utility::ter_op(tablelookupbyrow("mp/passivetable.csv",var_00,10) == "",0,1);
 		var_06.var_113D1 = scripts\engine\utility::ter_op(tablelookupbyrow("mp/passivetable.csv",var_00,11) == "",0,1);
-		if(var_03 != "")
-		{
+		if(var_03 != "") {
 			var_06.attachmentroll = var_03;
 		}
 
-		if(getdvar("ui_gametype") == "zombie")
-		{
+		if(getdvar("ui_gametype") == "zombie") {
 			var_07 = tablelookupbyrow("mp/passivetable.csv",var_00,22);
-			if(var_07 != "")
-			{
+			if(var_07 != "") {
 				var_06.attachmentroll = var_07;
 			}
 		}
 
-		if(var_04 != "")
-		{
+		if(var_04 != "") {
 			var_06.var_CA59 = var_04;
 		}
 
-		if(var_05 != "")
-		{
+		if(var_05 != "") {
 			var_06.var_B689 = var_05;
 		}
 
-		if(!isdefined(level.passivemap[var_02]))
-		{
+		if(!isdefined(level.passivemap[var_02])) {
 			level.passivemap[var_02] = var_06;
 		}
 
@@ -75,11 +58,8 @@ passiveparsetable()
 	}
 }
 
-//Function Number: 3
-getpassivestruct(param_00)
-{
-	if(!isdefined(level.passivemap[param_00]))
-	{
+getpassivestruct(param_00) {
+	if(!isdefined(level.passivemap[param_00])) {
 		return undefined;
 	}
 
@@ -87,50 +67,37 @@ getpassivestruct(param_00)
 	return var_01;
 }
 
-//Function Number: 4
-getpassiveattachment(param_00)
-{
+getpassiveattachment(param_00) {
 	var_01 = getpassivestruct(param_00);
-	if(!isdefined(var_01) || !isdefined(var_01.attachmentroll))
-	{
+	if(!isdefined(var_01) || !isdefined(var_01.attachmentroll)) {
 		return undefined;
 	}
 
 	return var_01.attachmentroll;
 }
 
-//Function Number: 5
-getpassivemessage(param_00)
-{
+getpassivemessage(param_00) {
 	var_01 = getpassivestruct(param_00);
-	if(!isdefined(var_01) || !isdefined(var_01.var_CA59))
-	{
+	if(!isdefined(var_01) || !isdefined(var_01.var_CA59)) {
 		return undefined;
 	}
 
 	return var_01.var_CA59;
 }
 
-//Function Number: 6
-getpassivedeathwatching(param_00)
-{
+getpassivedeathwatching(param_00) {
 	var_01 = getpassivestruct(param_00);
-	if(!isdefined(var_01) || !isdefined(var_01.var_B689))
-	{
+	if(!isdefined(var_01) || !isdefined(var_01.var_B689)) {
 		return undefined;
 	}
 
 	return var_01.var_B689;
 }
 
-//Function Number: 7
-_meth_8239()
-{
+_meth_8239() {
 	var_00 = [];
-	foreach(var_02 in level.passivemap)
-	{
-		if(var_02.var_13CDE)
-		{
+	foreach(var_02 in level.passivemap) {
+		if(var_02.var_13CDE) {
 			var_00[var_00.size] = var_02.name;
 		}
 	}
@@ -138,14 +105,10 @@ _meth_8239()
 	return var_00;
 }
 
-//Function Number: 8
-func_7F52()
-{
+func_7F52() {
 	var_00 = [];
-	foreach(var_02 in level.passivemap)
-	{
-		if(var_02.killstreaktype)
-		{
+	foreach(var_02 in level.passivemap) {
+		if(var_02.killstreaktype) {
 			var_00[var_00.size] = var_02.name;
 		}
 	}
@@ -153,14 +116,10 @@ func_7F52()
 	return var_00;
 }
 
-//Function Number: 9
-func_7F67()
-{
+func_7F67() {
 	var_00 = [];
-	foreach(var_02 in level.passivemap)
-	{
-		if(var_02.var_ABCA)
-		{
+	foreach(var_02 in level.passivemap) {
+		if(var_02.var_ABCA) {
 			var_00[var_00.size] = var_02.name;
 		}
 	}
@@ -168,14 +127,10 @@ func_7F67()
 	return var_00;
 }
 
-//Function Number: 10
-hudoutlineenableforclients()
-{
+hudoutlineenableforclients() {
 	var_00 = [];
-	foreach(var_02 in level.passivemap)
-	{
-		if(var_02.var_113D1)
-		{
+	foreach(var_02 in level.passivemap) {
+		if(var_02.var_113D1) {
 			var_00[var_00.size] = var_02.name;
 		}
 	}

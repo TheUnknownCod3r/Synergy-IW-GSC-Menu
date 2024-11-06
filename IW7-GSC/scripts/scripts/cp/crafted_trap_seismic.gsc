@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\cp\crafted_trap_seismic.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 20
- * Decompile Time: 989 ms
- * Timestamp: 10/27/2023 12:10:29 AM
-*******************************************************************/
+/*******************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\cp\crafted_trap_seismic.gsc
+*******************************************************/
 
-//Function Number: 1
-init()
-{
+init() {
 	level.seismic_trap_settings = [];
 	var_00 = spawnstruct();
 	var_00.var_39B = "zmb_robotprojectile_mp";
@@ -29,43 +23,34 @@ init()
 	level.seismic_trap_settings["crafted_seismic"] = var_00;
 }
 
-//Function Number: 2
-give_crafted_seismic_trap(param_00,param_01)
-{
+give_crafted_seismic_trap(param_00,param_01) {
 	param_01 thread watch_dpad();
 	param_01 notify("new_power","crafted_seismic");
 	param_01 setclientomnvar("zom_crafted_weapon",17);
 	scripts\cp\utility::set_crafted_inventory_item("crafted_seismic",::give_crafted_seismic_trap,param_01);
 }
 
-//Function Number: 3
-watch_dpad()
-{
+watch_dpad() {
 	self endon("death");
 	self endon("disconnect");
 	self notify("craft_dpad_watcher");
 	self endon("craft_dpad_watcher");
 	self notifyonplayercommand("pullout_ims","+actionslot 3");
-	for(;;)
-	{
+	for(;;) {
 		self waittill("pullout_ims");
-		if(scripts\engine\utility::istrue(self.iscarrying))
-		{
+		if(scripts\engine\utility::istrue(self.iscarrying)) {
 			continue;
 		}
 
-		if(scripts\engine\utility::istrue(self.linked_to_coaster))
-		{
+		if(scripts\engine\utility::istrue(self.linked_to_coaster)) {
 			continue;
 		}
 
-		if(isdefined(self.allow_carry) && self.allow_carry == 0)
-		{
+		if(isdefined(self.allow_carry) && self.allow_carry == 0) {
 			continue;
 		}
 
-		if(scripts\cp\utility::is_valid_player())
-		{
+		if(scripts\cp\utility::is_valid_player()) {
 			break;
 		}
 	}
@@ -73,9 +58,7 @@ watch_dpad()
 	thread give_seismic_trap("crafted_seismic");
 }
 
-//Function Number: 4
-give_seismic_trap(param_00)
-{
+give_seismic_trap(param_00) {
 	self endon("disconnect");
 	scripts\cp\utility::clearlowermessage("msg_power_hint");
 	var_01 = create_seismic_trap_for_player(param_00,self);
@@ -89,57 +72,46 @@ give_seismic_trap(param_00)
 	return var_02;
 }
 
-//Function Number: 5
-set_carrying_seismic(param_00,param_01,param_02)
-{
+set_carrying_seismic(param_00,param_01,param_02) {
 	self endon("disconnect");
 	param_00 thread seismic_trap_setcarried(self);
 	scripts\engine\utility::allow_weapon(0);
 	self notifyonplayercommand("place_ims","+attack");
 	self notifyonplayercommand("place_ims","+attack_akimbo_accessible");
 	self notifyonplayercommand("cancel_ims","+actionslot 3");
-	if(!level.console)
-	{
+	if(!level.console) {
 		self notifyonplayercommand("cancel_ims","+actionslot 5");
 		self notifyonplayercommand("cancel_ims","+actionslot 6");
 		self notifyonplayercommand("cancel_ims","+actionslot 7");
 	}
 
-	for(;;)
-	{
+	for(;;) {
 		var_03 = scripts\engine\utility::waittill_any_return("place_ims","cancel_ims","force_cancel_placement","player_action_slot_restart");
-		if(!isdefined(var_03))
-		{
+		if(!isdefined(var_03)) {
 			var_03 = "force_cancel_placement";
 		}
 
-		if(var_03 == "cancel_ims" || var_03 == "force_cancel_placement" || var_03 == "player_action_slot_restart")
-		{
-			if(!param_01 && var_03 == "cancel_ims")
-			{
+		if(var_03 == "cancel_ims" || var_03 == "force_cancel_placement" || var_03 == "player_action_slot_restart") {
+			if(!param_01 && var_03 == "cancel_ims") {
 				continue;
 			}
 
 			param_00 seismic_trap_setcancelled(var_03 == "force_cancel_placement" && !isdefined(param_00.firstplacement));
-			if(var_03 != "force_cancel_placement")
-			{
+			if(var_03 != "force_cancel_placement") {
 				thread watch_dpad();
 			}
-			else if(param_01)
-			{
+			else if(param_01) {
 				scripts\cp\utility::remove_crafted_item_from_inventory(self);
 			}
 
 			return 0;
 		}
 
-		if(!param_00.canbeplaced)
-		{
+		if(!param_00.canbeplaced) {
 			continue;
 		}
 
-		if(param_01)
-		{
+		if(param_01) {
 			scripts\cp\utility::remove_crafted_item_from_inventory(self);
 		}
 
@@ -150,11 +122,8 @@ set_carrying_seismic(param_00,param_01,param_02)
 	}
 }
 
-//Function Number: 6
-create_seismic_trap_for_player(param_00,param_01)
-{
-	if(isdefined(param_01.iscarrying) && param_01.iscarrying)
-	{
+create_seismic_trap_for_player(param_00,param_01) {
+	if(isdefined(param_01.iscarrying) && param_01.iscarrying) {
 		return;
 	}
 
@@ -173,9 +142,7 @@ create_seismic_trap_for_player(param_00,param_01)
 	return var_02;
 }
 
-//Function Number: 7
-create_seismic_trap(param_00,param_01)
-{
+create_seismic_trap(param_00,param_01) {
 	var_02 = param_00.triggerportableradarping;
 	var_03 = param_00.seismic_trap_type;
 	var_04 = spawn("script_model",param_00.origin + (0,0,2));
@@ -191,8 +158,7 @@ create_seismic_trap(param_00,param_01)
 	var_04.hidden = 0;
 	var_04.config = level.seismic_trap_settings[var_03];
 	var_04 thread seismic_trap_handleuse();
-	if(isdefined(param_01))
-	{
+	if(isdefined(param_01)) {
 		var_04 thread scripts\cp\utility::item_timeout(param_01);
 	}
 	else
@@ -203,26 +169,20 @@ create_seismic_trap(param_00,param_01)
 	return var_04;
 }
 
-//Function Number: 8
-func_936D(param_00)
-{
+func_936D(param_00) {
 	self.var_933C = 1;
 	self notify("death");
 }
 
-//Function Number: 9
-func_9367(param_00)
-{
+func_9367(param_00) {
 	self endon("carried");
 	self waittill("death");
-	if(!isdefined(self))
-	{
+	if(!isdefined(self)) {
 		return;
 	}
 
 	seismic_trap_setinactive();
-	if(isdefined(self.inuseby))
-	{
+	if(isdefined(self.inuseby)) {
 		self.inuseby scripts\cp\utility::restore_player_perk();
 		self notify("deleting");
 		wait(1);
@@ -232,9 +192,7 @@ func_9367(param_00)
 	self delete();
 }
 
-//Function Number: 10
-func_66A7()
-{
+func_66A7() {
 	self playsound("trap_boom_box_explode");
 	playfx(level._effect["violet_light_explode"],self.origin);
 	wait(0.1);
@@ -244,38 +202,30 @@ func_66A7()
 	physicsexplosionsphere(self.origin,256,256,2);
 }
 
-//Function Number: 11
-seismic_trap_handleuse()
-{
+seismic_trap_handleuse() {
 	self endon("death");
 	level endon("game_ended");
-	for(;;)
-	{
+	for(;;) {
 		self waittill("trigger",var_00);
-		if(!var_00 scripts\cp\utility::is_valid_player())
-		{
+		if(!var_00 scripts\cp\utility::is_valid_player()) {
 			continue;
 		}
 
-		if(scripts\engine\utility::istrue(var_00.iscarrying))
-		{
+		if(scripts\engine\utility::istrue(var_00.iscarrying)) {
 			continue;
 		}
 
-		if(scripts\engine\utility::istrue(var_00.kung_fu_mode))
-		{
+		if(scripts\engine\utility::istrue(var_00.kung_fu_mode)) {
 			continue;
 		}
 
 		var_01 = create_seismic_trap_for_player(self.seismic_trap_type,var_00);
-		if(!isdefined(var_01))
-		{
+		if(!isdefined(var_01)) {
 			continue;
 		}
 
 		seismic_trap_setinactive();
-		if(isdefined(self getlinkedparent()))
-		{
+		if(isdefined(self getlinkedparent())) {
 			self unlink();
 		}
 
@@ -285,19 +235,15 @@ seismic_trap_handleuse()
 	}
 }
 
-//Function Number: 12
-seismic_trap_setplaced(param_00)
-{
+seismic_trap_setplaced(param_00) {
 	self endon("death");
 	level endon("game_ended");
-	if(isdefined(self.carriedby))
-	{
+	if(isdefined(self.carriedby)) {
 		self.carriedby getrigindexfromarchetyperef();
 	}
 
 	self.carriedby = undefined;
-	if(isdefined(self.triggerportableradarping))
-	{
+	if(isdefined(self.triggerportableradarping)) {
 		self.triggerportableradarping.iscarrying = 0;
 	}
 
@@ -309,8 +255,7 @@ seismic_trap_setplaced(param_00)
 	self notify("placed");
 	var_01 thread seismic_trap_setactive();
 	var_02 = spawnstruct();
-	if(isdefined(self.moving_platform))
-	{
+	if(isdefined(self.moving_platform)) {
 		var_02.linkparent = self.moving_platform;
 	}
 
@@ -321,11 +266,8 @@ seismic_trap_setplaced(param_00)
 	self delete();
 }
 
-//Function Number: 13
-seismic_trap_setcancelled(param_00)
-{
-	if(isdefined(self.carriedby))
-	{
+seismic_trap_setcancelled(param_00) {
+	if(isdefined(self.carriedby)) {
 		var_01 = self.carriedby;
 		var_01 getrigindexfromarchetyperef();
 		var_01.iscarrying = undefined;
@@ -333,8 +275,7 @@ seismic_trap_setcancelled(param_00)
 		var_01 scripts\engine\utility::allow_weapon(1);
 	}
 
-	if(isdefined(param_00) && param_00)
-	{
+	if(isdefined(param_00) && param_00) {
 		func_66A7();
 	}
 
@@ -342,9 +283,7 @@ seismic_trap_setcancelled(param_00)
 	self delete();
 }
 
-//Function Number: 14
-seismic_trap_setcarried(param_00)
-{
+seismic_trap_setcarried(param_00) {
 	self setsentrycarrier(param_00);
 	self setcontents(0);
 	self setcandamage(0);
@@ -354,17 +293,14 @@ seismic_trap_setcarried(param_00)
 	thread scripts\cp\utility::item_oncarrierdeath(param_00);
 	thread func_936F(param_00);
 	thread func_9371(param_00);
-	if(isdefined(level.var_5CF2))
-	{
-		self thread [[ level.var_5CF2 ]](param_00);
+	if(isdefined(level.var_5CF2)) {
+		self thread [[level.var_5CF2]](param_00);
 	}
 
 	self notify("carried");
 }
 
-//Function Number: 15
-func_936F(param_00)
-{
+func_936F(param_00) {
 	self endon("placed");
 	self endon("death");
 	param_00 endon("last_stand");
@@ -372,9 +308,7 @@ func_936F(param_00)
 	seismic_trap_setcancelled();
 }
 
-//Function Number: 16
-func_9371(param_00)
-{
+func_9371(param_00) {
 	self endon("placed");
 	self endon("death");
 	param_00 endon("last_stand");
@@ -382,9 +316,7 @@ func_9371(param_00)
 	seismic_trap_setcancelled();
 }
 
-//Function Number: 17
-seismic_trap_setactive()
-{
+seismic_trap_setactive() {
 	self endon("death");
 	self setcursorhint("HINT_NOICON");
 	self sethintstring(level.seismic_trap_settings[self.seismic_trap_type].pow);
@@ -394,37 +326,31 @@ seismic_trap_setactive()
 	scripts\cp\utility::setselfusable(var_00);
 	self setusefov(120);
 	self setuserange(96);
-	if(isdefined(level.mpq_arm_func))
-	{
-		self thread [[ level.mpq_arm_func ]]();
+	if(isdefined(level.mpq_arm_func)) {
+		self thread [[level.mpq_arm_func]]();
 	}
 
 	thread seismic_trap_kill_zombies();
 	thread scripts\cp\utility::item_handleownerdisconnect("seismic_disconnect");
-	if(!isdefined(var_00.next_trap_time))
-	{
+	if(!isdefined(var_00.next_trap_time)) {
 		var_00.next_trap_time = gettime();
 	}
 
 	wait(1);
-	if(isdefined(var_00))
-	{
-		if(gettime() >= var_00.next_trap_time)
-		{
+	if(isdefined(var_00)) {
+		if(gettime() >= var_00.next_trap_time) {
 			self setscriptablepartstate("seismic","on");
 		}
 		else
 		{
-			while(gettime() <= var_00.next_trap_time)
-			{
+			while(gettime() <= var_00.next_trap_time) {
 				wait(0.05);
 			}
 
 			self setscriptablepartstate("seismic","on");
 		}
 
-		if(isdefined(var_00))
-		{
+		if(isdefined(var_00)) {
 			var_00.next_trap_time = gettime() + 3000;
 			return;
 		}
@@ -435,57 +361,44 @@ seismic_trap_setactive()
 	self notify("death");
 }
 
-//Function Number: 18
-seismic_trap_setinactive()
-{
+seismic_trap_setinactive() {
 	self makeunusable();
 	self stoploopsound();
 	self setscriptablepartstate("seismic","off");
-	if(isdefined(self.dmg_trig))
-	{
+	if(isdefined(self.dmg_trig)) {
 		self.dmg_trig delete();
 	}
 
 	scripts\cp\utility::removefromtraplist();
 }
 
-//Function Number: 19
-seismic_trap_kill_zombies()
-{
+seismic_trap_kill_zombies() {
 	self endon("death");
 	self.dmg_trig = spawn("trigger_radius",self.origin,0,250,64);
-	for(;;)
-	{
+	for(;;) {
 		self waittill("scriptableNotification");
 		var_00 = scripts\cp\cp_agent_utils::getaliveagentsofteam("axis");
-		foreach(var_02 in var_00)
-		{
-			if(!var_02 istouching(self.dmg_trig))
-			{
+		foreach(var_02 in var_00) {
+			if(!var_02 istouching(self.dmg_trig)) {
 				continue;
 			}
 
-			if(!scripts\cp\utility::should_be_affected_by_trap(var_02))
-			{
+			if(!scripts\cp\utility::should_be_affected_by_trap(var_02)) {
 				continue;
 			}
 
-			if(var_02.agent_type == "crab_mini" || var_02.agent_type == "crab_brute")
-			{
+			if(var_02.agent_type == "crab_mini" || var_02.agent_type == "crab_brute") {
 				continue;
 			}
 
 			level thread fling_zombie(self,var_02);
-			if(isdefined(self.triggerportableradarping))
-			{
+			if(isdefined(self.triggerportableradarping)) {
 				self.triggerportableradarping scripts\cp\cp_merits::processmerit("mt_dlc3_crafted_kills");
 			}
 		}
 
-		foreach(var_05 in level.players)
-		{
-			if(var_05 istouching(self.dmg_trig))
-			{
+		foreach(var_05 in level.players) {
+			if(var_05 istouching(self.dmg_trig)) {
 				var_05 shellshock("seismic",0.5);
 			}
 		}
@@ -495,9 +408,7 @@ seismic_trap_kill_zombies()
 	}
 }
 
-//Function Number: 20
-fling_zombie(param_00,param_01)
-{
+fling_zombie(param_00,param_01) {
 	param_01 endon("death");
 	param_01.dontmutilate = 1;
 	param_01.do_immediate_ragdoll = 1;
@@ -507,8 +418,7 @@ fling_zombie(param_00,param_01)
 	var_02 = vectornormalize((var_02[0],var_02[1],0));
 	param_01.ragdollimpactvector = var_02 * 3500;
 	var_03 = undefined;
-	if(isdefined(param_00.triggerportableradarping) && param_00.triggerportableradarping scripts\cp\utility::is_valid_player())
-	{
+	if(isdefined(param_00.triggerportableradarping) && param_00.triggerportableradarping scripts\cp\utility::is_valid_player()) {
 		var_03 = param_00.triggerportableradarping;
 	}
 

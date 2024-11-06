@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: 4050.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 1
- * Decompile Time: 4 ms
- * Timestamp: 10/27/2023 12:31:57 AM
-*******************************************************************/
+/****************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\4050.gsc
+****************************/
 
-//Function Number: 1
-main()
-{
+main() {
 	level._effect["vfx_parkour_sun"] = loadfx("vfx/iw7/levels/mp_parkour/vfx_parkour_sun.vfx");
 	level._effect["vfx_parkour_sunflare"] = loadfx("vfx/iw7/levels/mp_parkour/vfx_parkour_sunflare.vfx");
 	level._effect["vfx_circling_hawk_parkour"] = loadfx("vfx/iw7/levels/mp_parkour/vfx_circling_hawk_parkour.vfx");

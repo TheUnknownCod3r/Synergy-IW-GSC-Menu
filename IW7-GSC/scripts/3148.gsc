@@ -1,41 +1,28 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: 3148.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 54
- * Decompile Time: 67 ms
- * Timestamp: 10/27/2023 12:26:17 AM
-*******************************************************************/
+/****************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\3148.gsc
+****************************/
 
-//Function Number: 1
-func_3DF2(param_00,param_01,param_02,param_03)
-{
-	if(isdefined(self.isnodeoccupied))
-	{
+func_3DF2(param_00,param_01,param_02,param_03) {
+	if(isdefined(self.isnodeoccupied)) {
 		var_04 = distancesquared(self.origin,self.isnodeoccupied.origin);
-		if(var_04 < 65536)
-		{
+		if(var_04 < 65536) {
 			return 0;
 		}
 
-		if(isai(self.isnodeoccupied))
-		{
-			if(!isdefined(self.isnodeoccupied scripts/asm/asm_bb::bb_getcovernode()) || self.isnodeoccupied scripts/asm/asm_bb::bb_getrequestedcoverstate() != "hide")
-			{
+		if(isai(self.isnodeoccupied)) {
+			if(!isdefined(self.isnodeoccupied scripts/asm/asm_bb::bb_getcovernode()) || self.isnodeoccupied scripts/asm/asm_bb::bb_getrequestedcoverstate() != "hide") {
 				return 0;
 			}
 		}
-		else if(var_04 < 262144)
-		{
+		else if(var_04 < 262144) {
 			return 0;
 		}
 	}
 
-	if(isdefined(self._blackboard.var_28D0))
-	{
-		if(self._blackboard.var_28D0 == param_03)
-		{
+	if(isdefined(self._blackboard.var_28D0)) {
+		if(self._blackboard.var_28D0 == param_03) {
 			return 1;
 		}
 
@@ -45,12 +32,9 @@ func_3DF2(param_00,param_01,param_02,param_03)
 	return 0;
 }
 
-//Function Number: 2
-func_3EBB(param_00,param_01,param_02)
-{
+func_3EBB(param_00,param_01,param_02) {
 	var_03 = undefined;
-	if(isdefined(self._blackboard.var_28DE))
-	{
+	if(isdefined(self._blackboard.var_28DE)) {
 		var_03 = self._blackboard.var_28DE.origin;
 	}
 	else
@@ -58,15 +42,13 @@ func_3EBB(param_00,param_01,param_02)
 		var_03 = level.player.origin + anglestoforward(level.player.angles) * 6000;
 	}
 
-	if(isdefined(param_02))
-	{
+	if(isdefined(param_02)) {
 		var_04 = param_02;
 	}
 	else
 	{
 		var_05 = scripts/asm/asm_bb::bb_getcovernode();
-		if(isdefined(var_05))
-		{
+		if(isdefined(var_05)) {
 			var_06 = var_05.angles;
 		}
 		else
@@ -78,17 +60,14 @@ func_3EBB(param_00,param_01,param_02)
 	}
 
 	var_07 = lib_0A1E::func_2356(param_01,var_04);
-	if(!isdefined(var_07))
-	{
+	if(!isdefined(var_07)) {
 		var_07 = lib_0A1E::func_2356(param_01,"8");
 	}
 
 	return var_07;
 }
 
-//Function Number: 3
-func_CEE9(param_00,param_01,param_02,param_03)
-{
+func_CEE9(param_00,param_01,param_02,param_03) {
 	self endon(param_01 + "_finished");
 	var_04 = lib_0A1E::asm_getallanimsforstate(param_00,param_01);
 	self._blackboard.var_28D1 = 1;
@@ -101,60 +80,40 @@ func_CEE9(param_00,param_01,param_02,param_03)
 	self._blackboard.var_28D1 = undefined;
 }
 
-//Function Number: 4
-func_980D(param_00,param_01,param_02,param_03)
-{
-}
+func_980D(param_00,param_01,param_02,param_03) {}
 
-//Function Number: 5
-func_D48B(param_00,param_01,param_02,param_03)
-{
-}
+func_D48B(param_00,param_01,param_02,param_03) {}
 
-//Function Number: 6
-func_3EDA(param_00,param_01,param_02,param_03)
-{
-}
+func_3EDA(param_00,param_01,param_02,param_03) {}
 
-//Function Number: 7
-func_195F()
-{
-	if(isdefined(self._blackboard.var_778B) && self._blackboard.var_778B)
-	{
+func_195F() {
+	if(isdefined(self._blackboard.var_778B) && self._blackboard.var_778B) {
 		return 1;
 	}
 
 	return 0;
 }
 
-//Function Number: 8
-func_19D2()
-{
-	if(isdefined(self._blackboard.var_D636) && self._blackboard.var_D636)
-	{
+func_19D2() {
+	if(isdefined(self._blackboard.var_D636) && self._blackboard.var_D636) {
 		return 1;
 	}
 
 	return 0;
 }
 
-//Function Number: 9
-func_12F2(param_00,param_01)
-{
+func_12F2(param_00,param_01) {
 	var_02 = anglestoforward(level.player.angles);
 	var_03 = vectornormalize(param_00.origin - level.player.origin);
 	var_04 = vectordot(var_02,var_03);
-	if(var_04 >= param_01)
-	{
+	if(var_04 >= param_01) {
 		return 1;
 	}
 
 	return 0;
 }
 
-//Function Number: 10
-func_7818(param_00,param_01,param_02)
-{
+func_7818(param_00,param_01,param_02) {
 	var_03 = vectortoangles(param_02 - param_01);
 	var_04 = angleclamp180(var_03[1] - param_00[1]);
 	var_05 = function_02F9(var_04,10);
@@ -162,27 +121,22 @@ func_7818(param_00,param_01,param_02)
 	return var_06[var_05];
 }
 
-//Function Number: 11
-func_1964(param_00)
-{
+func_1964(param_00) {
 	self notify("new_gesture_stop_begin");
 	self notify("gesture_stop");
 	self endon("death");
 	self endon("start_gesture_lookat");
 	self endon("new_gesture_stop_begin");
 	self endon("entitydeleted");
-	if(isdefined(self.var_1ED4) && isdefined(self.var_C3D4))
-	{
+	if(isdefined(self.var_1ED4) && isdefined(self.var_C3D4)) {
 		func_E224();
 	}
 
-	if(isdefined(self.var_1ED4) && !isdefined(self.var_C3D4))
-	{
+	if(isdefined(self.var_1ED4) && !isdefined(self.var_C3D4)) {
 		self.var_1ED4 = undefined;
 	}
 
-	if(isdefined(param_00))
-	{
+	if(isdefined(param_00)) {
 		var_01 = param_00;
 	}
 	else
@@ -190,8 +144,7 @@ func_1964(param_00)
 		var_01 = 0.25;
 	}
 
-	if(!isdefined(self.var_9BFC))
-	{
+	if(!isdefined(self.var_9BFC)) {
 		return;
 	}
 
@@ -206,8 +159,7 @@ func_1964(param_00)
 	var_0A = self _meth_8103(%lookat_head_base_partial);
 	var_0B = self _meth_8103(%head_gesture_look_partial);
 	var_0C = self _meth_8103(%lookat_head_adds);
-	while(gettime() / 1000 - var_02 < param_00)
-	{
+	while(gettime() / 1000 - var_02 < param_00) {
 		var_0D = gettime() / 1000 - var_02 / param_00;
 		var_0D = func_10384(0,1,var_0D);
 		var_0E = func_AB7A(var_03,1,var_0D);
@@ -248,14 +200,11 @@ func_1964(param_00)
 	self.var_9BFC = undefined;
 }
 
-//Function Number: 12
-func_194F(param_00)
-{
+func_194F(param_00) {
 	self endon("death");
 	self endon("entitydeleted");
 	self notify("eye_gesture_stop");
-	if(isdefined(param_00))
-	{
+	if(isdefined(param_00)) {
 		var_01 = param_00;
 	}
 	else
@@ -273,16 +222,13 @@ func_194F(param_00)
 	self.var_9BDC = undefined;
 }
 
-//Function Number: 13
-func_195A(param_00)
-{
+func_195A(param_00) {
 	self endon("death");
 	self endon("gesture_stop");
 	self endon("head_weight_up");
 	self notify("head_weight_down");
 	self endon("entitydeleted");
-	if(isdefined(self.var_2B6D))
-	{
+	if(isdefined(self.var_2B6D)) {
 		return;
 	}
 
@@ -295,8 +241,7 @@ func_195A(param_00)
 	var_05 = self _meth_8103(%lookat_head_base_partial);
 	var_06 = self _meth_8103(%head_gesture_look_partial);
 	var_07 = self _meth_8103(%lookat_head_adds);
-	while(gettime() / 1000 - var_02 < var_01)
-	{
+	while(gettime() / 1000 - var_02 < var_01) {
 		var_08 = gettime() / 1000 - var_02 / var_01;
 		var_08 = func_10384(0,1,var_08);
 		var_09 = func_AB7A(var_03,0,var_08);
@@ -320,16 +265,13 @@ func_195A(param_00)
 	self.var_2B6D = undefined;
 }
 
-//Function Number: 14
-func_195B(param_00)
-{
+func_195B(param_00) {
 	self endon("death");
 	self endon("gesture_stop");
 	self endon("head_weight_down");
 	self notify("head_weight_up");
 	self endon("entitydeleted");
-	if(isdefined(self.var_2B80))
-	{
+	if(isdefined(self.var_2B80)) {
 		return;
 	}
 
@@ -342,8 +284,7 @@ func_195B(param_00)
 	var_05 = self _meth_8103(%lookat_head_base_partial);
 	var_06 = self _meth_8103(%head_gesture_look_partial);
 	var_07 = self _meth_8103(%lookat_head_adds);
-	while(gettime() / 1000 - var_02 < var_01)
-	{
+	while(gettime() / 1000 - var_02 < var_01) {
 		var_08 = gettime() / 1000 - var_02 / var_01;
 		var_08 = func_10384(0,1,var_08);
 		var_09 = func_AB7A(var_03,1,var_08);
@@ -367,20 +308,16 @@ func_195B(param_00)
 	self.var_2B80 = undefined;
 }
 
-//Function Number: 15
-func_1967(param_00)
-{
+func_1967(param_00) {
 	self endon("death");
 	self endon("start_gesture_torso_lookat");
 	self endon("entitydeleted");
 	self notify("gesture_stop_torso");
-	if(!isdefined(self.var_9CE9))
-	{
+	if(!isdefined(self.var_9CE9)) {
 		return;
 	}
 
-	if(isdefined(param_00))
-	{
+	if(isdefined(param_00)) {
 		var_01 = param_00;
 	}
 	else
@@ -394,8 +331,7 @@ func_1967(param_00)
 	var_05 = self _meth_8103(self.var_11A0E);
 	var_06 = self _meth_8103(self.var_11A12);
 	var_07 = self _meth_8103(self.var_11A0F);
-	while(gettime() / 1000 - var_02 < param_00)
-	{
+	while(gettime() / 1000 - var_02 < param_00) {
 		var_08 = gettime() / 1000 - var_02 / param_00;
 		var_08 = func_10384(0,1,var_08);
 		var_09 = func_AB7A(var_03,1,var_08);
@@ -420,40 +356,29 @@ func_1967(param_00)
 	self.var_9CE9 = undefined;
 }
 
-//Function Number: 16
-func_19BD()
-{
+func_19BD() {
 	self.var_906F = 1;
 }
 
-//Function Number: 17
-func_19BE()
-{
+func_19BE() {
 	self.var_906F = undefined;
 }
 
-//Function Number: 18
-func_1921()
-{
-	if(isdefined(self.var_906F))
-	{
+func_1921() {
+	if(isdefined(self.var_906F)) {
 		return 0;
 	}
 
 	return 1;
 }
 
-//Function Number: 19
-func_1955(param_00,param_01,param_02)
-{
+func_1955(param_00,param_01,param_02) {
 	self endon("entitydeleted");
-	if(!isdefined(self))
-	{
+	if(!isdefined(self)) {
 		return;
 	}
 
-	if(isdefined(self.var_9BFC))
-	{
+	if(isdefined(self.var_9BFC)) {
 		func_1964(0.25);
 		wait(0.25);
 	}
@@ -461,8 +386,7 @@ func_1955(param_00,param_01,param_02)
 	self endon("death");
 	self endon("gesture_stop");
 	self notify("start_gesture_lookat");
-	if(isai(self))
-	{
+	if(isai(self)) {
 		var_03 = scripts/asm/asm::asm_getcurrentstate(self.asmname);
 	}
 	else
@@ -470,18 +394,15 @@ func_1955(param_00,param_01,param_02)
 		var_03 = undefined;
 	}
 
-	if(isdefined(self.var_1ED4))
-	{
+	if(isdefined(self.var_1ED4)) {
 		func_110A5();
 	}
 
-	if(!isdefined(self.var_1ED4))
-	{
+	if(!isdefined(self.var_1ED4)) {
 		self.var_1ED4 = ::func_F580;
 	}
 
-	if(isdefined(param_02))
-	{
+	if(isdefined(param_02)) {
 		self.var_2B71 = param_02;
 	}
 	else
@@ -492,8 +413,7 @@ func_1955(param_00,param_01,param_02)
 	self.var_AFF7 = undefined;
 	self.var_AFFA = undefined;
 	self.var_B005 = 0;
-	if(isdefined(param_01))
-	{
+	if(isdefined(param_01)) {
 		self.var_778E = clamp(param_01,0.25,4);
 	}
 	else
@@ -501,8 +421,7 @@ func_1955(param_00,param_01,param_02)
 		self.var_778E = 0.5;
 	}
 
-	if(self.unittype == "c6")
-	{
+	if(self.unittype == "c6") {
 		func_12FB2();
 	}
 	else
@@ -517,8 +436,7 @@ func_1955(param_00,param_01,param_02)
 	}
 
 	self.var_77A3 = param_00;
-	if(self.unittype == "c6")
-	{
+	if(self.unittype == "c6") {
 		thread func_1952();
 		thread func_1954();
 	}
@@ -531,29 +449,23 @@ func_1955(param_00,param_01,param_02)
 	self.var_9BFC = 1;
 }
 
-//Function Number: 20
-func_194E(param_00,param_01,param_02)
-{
+func_194E(param_00,param_01,param_02) {
 	self endon("death");
 	self endon("entitydeleted");
-	if(isdefined(self.var_9BDC))
-	{
+	if(isdefined(self.var_9BDC)) {
 		func_194F(0.25);
 		wait(0.25);
 	}
 
-	if(isdefined(self.var_1ED4))
-	{
+	if(isdefined(self.var_1ED4)) {
 		func_110A5();
 	}
 
-	if(!isdefined(self.var_1ED4))
-	{
+	if(!isdefined(self.var_1ED4)) {
 		self.var_1ED4 = ::func_F580;
 	}
 
-	if(isdefined(param_02))
-	{
+	if(isdefined(param_02)) {
 		self.var_6A55 = param_02;
 	}
 	else
@@ -564,8 +476,7 @@ func_194E(param_00,param_01,param_02)
 	self.var_6A5C = undefined;
 	self.var_6A5F = undefined;
 	self.var_B005 = 0;
-	if(isdefined(param_01))
-	{
+	if(isdefined(param_01)) {
 		self.var_6A56 = clamp(param_01,0.25,4);
 	}
 	else
@@ -581,14 +492,11 @@ func_194E(param_00,param_01,param_02)
 	self.var_9BDC = 1;
 }
 
-//Function Number: 21
-func_1959(param_00,param_01)
-{
+func_1959(param_00,param_01) {
 	self endon("death");
 	self endon("entitydeleted");
 	self notify("start_gesture_torso_lookat");
-	if(isai(self))
-	{
+	if(isai(self)) {
 		var_02 = scripts/asm/asm::asm_getcurrentstate(self.asmname);
 	}
 	else
@@ -596,19 +504,16 @@ func_1959(param_00,param_01)
 		var_02 = undefined;
 	}
 
-	if(!isdefined(var_02))
-	{
+	if(!isdefined(var_02)) {
 		return;
 	}
 
-	if(isdefined(self.var_9CE9))
-	{
+	if(isdefined(self.var_9CE9)) {
 		func_1967(0.25);
 		wait(0.25);
 	}
 
-	if(isdefined(param_01))
-	{
+	if(isdefined(param_01)) {
 		self.var_2B71 = param_01;
 	}
 	else
@@ -628,33 +533,24 @@ func_1959(param_00,param_01)
 	self.var_9CE9 = 1;
 }
 
-//Function Number: 22
-func_F580()
-{
+func_F580() {
 	return %body;
 }
 
-//Function Number: 23
-func_110A5()
-{
+func_110A5() {
 	self.var_C3D4 = self.var_1ED4;
 }
 
-//Function Number: 24
-func_E224()
-{
+func_E224() {
 	self.var_1ED4 = self.var_C3D4;
 }
 
-//Function Number: 25
-func_196A(param_00,param_01)
-{
+func_196A(param_00,param_01) {
 	self endon("death");
 	self endon("entitydeleted");
 	self.var_77A3 = param_00;
 	self.var_9BFC = 1;
-	if(isdefined(param_01))
-	{
+	if(isdefined(param_01)) {
 		var_02 = self.var_778E;
 		self.var_778E = param_01;
 		wait(param_01 * 2);
@@ -662,57 +558,46 @@ func_196A(param_00,param_01)
 	}
 }
 
-//Function Number: 26
-func_1956(param_00,param_01,param_02,param_03)
-{
+func_1956(param_00,param_01,param_02,param_03) {
 	self endon("gesture_natural_stop");
 	self endon("gesture_stop");
 	self endon("death");
 	self endon("entitydeleted");
-	while(!func_1921())
-	{
+	while(!func_1921()) {
 		wait(0.05);
 	}
 
-	while(distance2d(self.origin,param_00.origin) > param_03)
-	{
+	while(distance2d(self.origin,param_00.origin) > param_03) {
 		wait(0.05);
 	}
 
 	thread func_1955(param_00,param_01,param_02);
 	wait(param_02);
-	for(;;)
-	{
+	for(;;) {
 		wait(randomfloatrange(4,5));
-		if(distance2d(self.origin,param_00.origin) <= param_03)
-		{
+		if(distance2d(self.origin,param_00.origin) <= param_03) {
 			thread func_195A(1);
 			thread func_194F();
 		}
 
 		wait(randomfloatrange(4,6));
-		while(!func_1921())
-		{
+		while(!func_1921()) {
 			wait(0.05);
 		}
 
-		if(distance2d(self.origin,param_00.origin) <= param_03)
-		{
+		if(distance2d(self.origin,param_00.origin) <= param_03) {
 			thread func_195B(0.5);
 			thread func_194E(param_00,1,0.2);
 		}
 	}
 }
 
-//Function Number: 27
-func_1969(param_00,param_01)
-{
+func_1969(param_00,param_01) {
 	self endon("death");
 	self endon("entitydeleted");
 	self.var_6A5D = param_00;
 	self.var_9BDC = 1;
-	if(isdefined(param_01))
-	{
+	if(isdefined(param_01)) {
 		var_02 = self.var_6A56;
 		self.var_6A56 = param_01;
 		wait(param_01 * 2);
@@ -720,9 +605,7 @@ func_1969(param_00,param_01)
 	}
 }
 
-//Function Number: 28
-func_1951()
-{
+func_1951() {
 	self endon("gesture_stop");
 	self endon("death");
 	self endon("entitydeleted");
@@ -744,29 +627,23 @@ func_1951()
 	self _meth_82AC(var_08,0.005,self.var_2B71);
 	var_09 = 0;
 	var_0A = 0;
-	for(;;)
-	{
-		if(!isdefined(self))
-		{
+	for(;;) {
+		if(!isdefined(self)) {
 			return;
 		}
 
-		if(!isdefined(self.var_77A3))
-		{
+		if(!isdefined(self.var_77A3)) {
 			thread func_1964(0.7);
 			break;
 		}
 
-		if(isplayer(self.var_77A3))
-		{
+		if(isplayer(self.var_77A3)) {
 			var_0B = level.player geteye();
 		}
-		else if(isai(self.var_77A3))
-		{
+		else if(isai(self.var_77A3)) {
 			var_0B = self.var_77A3 geteye();
 		}
-		else if(function_02A5(self.var_77A3))
-		{
+		else if(function_02A5(self.var_77A3)) {
 			var_0B = self.var_77A3;
 		}
 		else
@@ -787,16 +664,14 @@ func_1951()
 		var_16 = clamp(vectordot(var_0E,var_11),0.005,1);
 		var_17 = clamp(vectordot(var_0E,var_12),0.005,1);
 		var_18 = 1;
-		if(scripts\engine\utility::anglebetweenvectorssigned(var_0F,var_0E,var_13) > 0)
-		{
+		if(scripts\engine\utility::anglebetweenvectorssigned(var_0F,var_0E,var_13) > 0) {
 			var_18 = 0;
 		}
 
 		self _meth_82AC(var_05,var_15,self.var_778E);
 		self _meth_82AC(var_06,var_16,self.var_778E);
 		self _meth_82AC(var_04,var_14 + 0.005,self.var_778E);
-		if(var_18)
-		{
+		if(var_18) {
 			var_09 = scripts/sp/math::func_AB6F(var_09,var_17,0.1);
 			var_0A = scripts/sp/math::func_AB6F(var_0A,0.005,0.1);
 		}
@@ -812,16 +687,13 @@ func_1951()
 	}
 }
 
-//Function Number: 29
-func_1163()
-{
+func_1163() {
 	self endon("gesture_stop");
 	self endon("death");
 	self endon("entitydeleted");
 	var_00 = gettime() / 1000;
 	self.var_2B80 = 1;
-	while(gettime() / 1000 - var_00 < self.var_2B71 * 2)
-	{
+	while(gettime() / 1000 - var_00 < self.var_2B71 * 2) {
 		var_01 = gettime() / 1000 - var_00 / self.var_2B71 * 2;
 		var_02 = func_10384(0,1,var_01);
 		var_03 = func_10384(0,10,var_01);
@@ -842,9 +714,7 @@ func_1163()
 	self.var_2B80 = undefined;
 }
 
-//Function Number: 30
-func_1953()
-{
+func_1953() {
 	self endon("gesture_stop");
 	self endon("death");
 	self endon("entitydeleted");
@@ -852,29 +722,23 @@ func_1953()
 	self _meth_82AC(self.var_AFFA,1,self.var_2B71);
 	self _meth_82B0(self.var_AFFA,0.5);
 	var_00 = 0.5;
-	for(;;)
-	{
-		if(!isdefined(self))
-		{
+	for(;;) {
+		if(!isdefined(self)) {
 			break;
 		}
 
-		if(isplayer(self.var_77A3))
-		{
+		if(isplayer(self.var_77A3)) {
 			var_01 = 0;
-			if(level.player _meth_846D() == "safe")
-			{
+			if(level.player _meth_846D() == "safe") {
 				var_01 = 4.62;
 			}
 
 			var_02 = level.player geteye() + anglestoup(self.angles) * var_01;
 		}
-		else if(isai(self.var_77A3))
-		{
+		else if(isai(self.var_77A3)) {
 			var_02 = self.var_77A3 geteye();
 		}
-		else if(function_02A5(self.var_77A3))
-		{
+		else if(function_02A5(self.var_77A3)) {
 			var_02 = self.var_77A3;
 		}
 		else
@@ -885,8 +749,7 @@ func_1953()
 		var_03 = self gettagangles("J_Spine4") + (0,0,0);
 		var_04 = self gettagorigin("J_Spine4");
 		var_05 = undefined;
-		if(isai(self))
-		{
+		if(isai(self)) {
 			var_05 = self geteye();
 		}
 		else
@@ -905,23 +768,18 @@ func_1953()
 	}
 }
 
-//Function Number: 31
-func_1161()
-{
+func_1161() {
 	self endon("death");
 	self endon("gesture_stop");
 	self endon("entitydeleted");
 	self _meth_82AC(%lookat_head_adds,1,0.5);
-	for(;;)
-	{
+	for(;;) {
 		self _meth_82AC(%shipcrib_gst_head_idle_01,0.25,0.5);
 		wait(getanimlength(%shipcrib_gst_head_idle_01) * randomfloatrange(1,3));
 	}
 }
 
-//Function Number: 32
-func_194D()
-{
+func_194D() {
 	self endon("gesture_stop");
 	self endon("death");
 	self endon("eye_gesture_stop");
@@ -933,29 +791,23 @@ func_194D()
 	self _meth_82B0(self.var_6A5C,0.5);
 	self _meth_82B1(self.var_6A5C,0);
 	var_00 = 0;
-	for(;;)
-	{
-		if(!isdefined(self))
-		{
+	for(;;) {
+		if(!isdefined(self)) {
 			return;
 		}
 
-		if(!isdefined(self.var_6A5D))
-		{
+		if(!isdefined(self.var_6A5D)) {
 			func_194F(0.25);
 			break;
 		}
 
-		if(isplayer(self.var_6A5D))
-		{
+		if(isplayer(self.var_6A5D)) {
 			var_01 = level.player geteye();
 		}
-		else if(isai(self.var_6A5D))
-		{
+		else if(isai(self.var_6A5D)) {
 			var_01 = self.var_6A5D geteye();
 		}
-		else if(function_02A5(self.var_6A5D))
-		{
+		else if(function_02A5(self.var_6A5D)) {
 			var_01 = self.var_6A5D;
 		}
 		else
@@ -978,9 +830,7 @@ func_194D()
 	}
 }
 
-//Function Number: 33
-func_1950()
-{
+func_1950() {
 	self endon("gesture_stop");
 	self endon("death");
 	self endon("eye_gesture_stop");
@@ -989,23 +839,18 @@ func_1950()
 	self _meth_82AC(self.var_6A5F,1,self.var_6A55);
 	self _meth_82B0(self.var_6A5F,0.5);
 	var_00 = 0.5;
-	for(;;)
-	{
-		if(!isdefined(self))
-		{
+	for(;;) {
+		if(!isdefined(self)) {
 			break;
 		}
 
-		if(isplayer(self.var_6A5D))
-		{
+		if(isplayer(self.var_6A5D)) {
 			var_01 = level.player geteye();
 		}
-		else if(isai(self.var_6A5D))
-		{
+		else if(isai(self.var_6A5D)) {
 			var_01 = self.var_6A5D geteye();
 		}
-		else if(function_02A5(self.var_6A5D))
-		{
+		else if(function_02A5(self.var_6A5D)) {
 			var_01 = self.var_6A5D;
 		}
 		else
@@ -1028,9 +873,7 @@ func_1950()
 	}
 }
 
-//Function Number: 34
-func_1966()
-{
+func_1966() {
 	self endon("gesture_stop_torso");
 	self endon("death");
 	self endon("entitydeleted");
@@ -1050,23 +893,18 @@ func_1966()
 	self _meth_82AC(var_06,0,0.05);
 	var_07 = 0;
 	var_08 = 0;
-	for(;;)
-	{
-		if(!isdefined(self))
-		{
+	for(;;) {
+		if(!isdefined(self)) {
 			break;
 		}
 
-		if(isplayer(self.var_77A3))
-		{
+		if(isplayer(self.var_77A3)) {
 			var_09 = level.player geteye();
 		}
-		else if(isai(self.var_77A3))
-		{
+		else if(isai(self.var_77A3)) {
 			var_09 = self.var_77A3 geteye();
 		}
-		else if(function_02A5(self.var_77A3))
-		{
+		else if(function_02A5(self.var_77A3)) {
 			var_09 = self.var_77A3;
 		}
 		else
@@ -1085,16 +923,14 @@ func_1966()
 		var_12 = clamp(vectordot(var_0A,var_0D),0,1);
 		var_13 = clamp(vectordot(var_0A,var_0E),0,1);
 		var_14 = 1;
-		if(scripts\engine\utility::anglebetweenvectorssigned(var_0B,var_0A,var_0F) > 0)
-		{
+		if(scripts\engine\utility::anglebetweenvectorssigned(var_0B,var_0A,var_0F) > 0) {
 			var_14 = 0;
 		}
 
 		self _meth_82AC(var_03,var_11,0.2);
 		self _meth_82AC(var_04,var_12,0.2);
 		self _meth_82AC(var_02,var_10 + 0.005,0.2);
-		if(var_14)
-		{
+		if(var_14) {
 			var_07 = scripts/sp/math::func_AB6F(var_07,var_13,0.1);
 			var_08 = scripts/sp/math::func_AB6F(var_08,0,0.1);
 		}
@@ -1110,12 +946,9 @@ func_1966()
 	}
 }
 
-//Function Number: 35
-func_1165()
-{
+func_1165() {
 	var_00 = gettime() / 1000;
-	while(gettime() / 1000 - var_00 < self.var_2B71)
-	{
+	while(gettime() / 1000 - var_00 < self.var_2B71) {
 		var_01 = gettime() / 1000 - var_00 / self.var_2B71;
 		var_01 = func_10384(0,1,var_01);
 		var_02 = func_AB7A(0,1,var_01);
@@ -1127,15 +960,12 @@ func_1165()
 	self _meth_82AC(%torso_tracking_anims,1,0.05);
 }
 
-//Function Number: 36
-func_1948(param_00)
-{
+func_1948(param_00) {
 	self endon("gesture_stop");
 	self endon("death");
 	self endon("entitydeleted");
 	func_1963();
-	for(;;)
-	{
+	for(;;) {
 		wait(randomfloatrange(param_00 * 0.5,param_00));
 		self aiclearanim(%facial_gesture_blink_1,0);
 		wait(0.05);
@@ -1144,14 +974,11 @@ func_1948(param_00)
 	}
 }
 
-//Function Number: 37
-func_1963()
-{
+func_1963() {
 	self endon("gesture_stop");
 	self endon("death");
 	self endon("entitydeleted");
-	if(!isdefined(self))
-	{
+	if(!isdefined(self)) {
 		return;
 	}
 
@@ -1161,9 +988,7 @@ func_1963()
 	self _meth_82AC(%facial_gesture_blink_1,1,0);
 }
 
-//Function Number: 38
-func_195D(param_00)
-{
+func_195D(param_00) {
 	self endon("gesture_stop");
 	self endon("death");
 	self endon("entitydeleted");
@@ -1177,8 +1002,7 @@ func_195D(param_00)
 	var_01 = scripts/asm/asm::asm_getdemeanor();
 	var_02 = scripts/asm/asm::asm_getcurrentstate(self.asmname);
 	lib_0A1E::func_2381(self.asmname,var_02);
-	if(var_01 != "casual" && var_01 != "casual_gun")
-	{
+	if(var_01 != "casual" && var_01 != "casual_gun") {
 		self.var_77AD = %gesture_partials;
 	}
 	else
@@ -1186,12 +1010,10 @@ func_195D(param_00)
 		self.var_77AD = %point_at_without_head;
 	}
 
-	if(!scripts/asm/asm::func_231B(self.asmname,"gesture"))
-	{
+	if(!scripts/asm/asm::func_231B(self.asmname,"gesture")) {
 		return;
 	}
-	else if(var_01 == "casual" || var_01 == "combat" || var_01 == "casual_gun" || var_01 == "frantic")
-	{
+	else if(var_01 == "casual" || var_01 == "combat" || var_01 == "casual_gun" || var_01 == "frantic") {
 		self.var_D633 = self.asm.var_77C1.var_77AA;
 		self.var_D639 = self.asm.var_77C1.var_77AC;
 		self.var_D63B = self.asm.var_77C1.var_77AE;
@@ -1204,21 +1026,17 @@ func_195D(param_00)
 		return;
 	}
 
-	if(isplayer(param_00))
-	{
+	if(isplayer(param_00)) {
 		var_03 = level.player geteye();
 	}
-	else if(!isdefined(var_01))
-	{
+	else if(!isdefined(var_01)) {
 		var_03 = self.origin;
 		self.var_C00A = 1;
 	}
-	else if(isai(var_01))
-	{
+	else if(isai(var_01)) {
 		var_03 = var_01 geteye();
 	}
-	else if(function_02A5(var_01))
-	{
+	else if(function_02A5(var_01)) {
 		var_03 = var_01;
 	}
 	else
@@ -1247,16 +1065,13 @@ func_195D(param_00)
 	var_16 = clamp(func_6F41(var_15,0.2,1,0,1),0,1);
 	var_17 = clamp(func_6F41(var_13,0.2,1,0,1),0,1);
 	var_18 = clamp(func_6F41(var_14,0.2,1,0,1),0,1);
-	if(!self.var_C00A)
-	{
-		if(var_15 < -0.9)
-		{
+	if(!self.var_C00A) {
+		if(var_15 < -0.9) {
 			func_1960("fallback_up");
 		}
 		else
 		{
-			if(var_01 != "casual" && var_01 != "casual_gun")
-			{
+			if(var_01 != "casual" && var_01 != "casual_gun") {
 				self _meth_82AC(self.var_77AD,10,0.25);
 			}
 			else
@@ -1264,8 +1079,7 @@ func_195D(param_00)
 				self _meth_82AC(self.var_77AD,1,0.25);
 			}
 
-			if(var_16 < 0.3)
-			{
+			if(var_16 < 0.3) {
 				self _meth_82AC(self.var_D633,0,0,0.85);
 			}
 			else
@@ -1273,13 +1087,11 @@ func_195D(param_00)
 				self _meth_82AC(self.var_D633,var_16,0.25,0.85);
 			}
 
-			if(isdefined(self.var_D63D))
-			{
+			if(isdefined(self.var_D63D)) {
 				self _meth_82AC(self.var_D63D,var_17,0.25,0.85);
 			}
 
-			if(isdefined(self.var_D635))
-			{
+			if(isdefined(self.var_D635)) {
 				self _meth_82AC(self.var_D635,var_18,0.2,0.85);
 			}
 
@@ -1289,8 +1101,7 @@ func_195D(param_00)
 	}
 	else
 	{
-		if(var_01 != "casual" && var_01 != "casual_gun")
-		{
+		if(var_01 != "casual" && var_01 != "casual_gun") {
 			self _meth_82AC(self.var_77AD,10,0.2);
 		}
 		else
@@ -1308,9 +1119,7 @@ func_195D(param_00)
 	self._blackboard.var_D636 = 0;
 }
 
-//Function Number: 39
-func_1960(param_00)
-{
+func_1960(param_00) {
 	self endon("death");
 	self endon("entitydeleted");
 	self.var_D633 = undefined;
@@ -1318,8 +1127,7 @@ func_1960(param_00)
 	self.var_9C5F = 0;
 	var_01 = "casual";
 	var_02 = undefined;
-	if(isai(self))
-	{
+	if(isai(self)) {
 		self._blackboard.var_778B = 1;
 		var_01 = scripts/asm/asm::asm_getdemeanor();
 		var_02 = scripts/asm/asm::asm_getcurrentstate(self.asmname);
@@ -1329,27 +1137,21 @@ func_1960(param_00)
 	var_04 = ["move_up","on_me","hold","fallback_up","fallback_down","arm_up"];
 	var_05 = ["move_up","on_me","hold","fallback_up","fallback_down","arm_up"];
 	var_06 = ["shrug","cross","nod","salute","wave","wait","move_up","on_me","hold","fallback_up","fallback_down","arm_up"];
-	if(!scripts\engine\utility::array_contains(var_03,param_00) && !scripts\engine\utility::array_contains(var_04,param_00))
-	{
+	if(!scripts\engine\utility::array_contains(var_03,param_00) && !scripts\engine\utility::array_contains(var_04,param_00)) {
 		return;
 	}
 
-	if(!isdefined(self))
-	{
+	if(!isdefined(self)) {
 		return;
 	}
 
-	if(isai(self) && !scripts/asm/asm::func_231B(self.asmname,"gesture"))
-	{
+	if(isai(self) && !scripts/asm/asm::func_231B(self.asmname,"gesture")) {
 		return;
 	}
-	else if(isai(self))
-	{
+	else if(isai(self)) {
 		self.var_778D = lib_0A1E::func_2357(self.asm.archetype,"Knobs","body");
-		if(var_01 == "casual")
-		{
-			if(scripts\engine\utility::array_contains(var_03,param_00))
-			{
+		if(var_01 == "casual") {
+			if(scripts\engine\utility::array_contains(var_03,param_00)) {
 				self.var_77B6 = self.asm.var_77C1.var_77B6;
 				self.var_778F = self.asm.var_77C1.var_778F;
 				self.var_77A7 = self.asm.var_77C1.var_77A7;
@@ -1363,10 +1165,8 @@ func_1960(param_00)
 				return;
 			}
 		}
-		else if(var_01 == "casual_gun")
-		{
-			if(scripts\engine\utility::array_contains(var_06,param_00))
-			{
+		else if(var_01 == "casual_gun") {
+			if(scripts\engine\utility::array_contains(var_06,param_00)) {
 				self.var_77B6 = self.asm.var_77C1.var_77B6;
 				self.var_778F = self.asm.var_77C1.var_778F;
 				self.var_77A7 = self.asm.var_77C1.var_77A7;
@@ -1385,10 +1185,8 @@ func_1960(param_00)
 				return;
 			}
 		}
-		else if(var_01 == "combat")
-		{
-			if(scripts\engine\utility::array_contains(var_04,param_00))
-			{
+		else if(var_01 == "combat") {
+			if(scripts\engine\utility::array_contains(var_04,param_00)) {
 				self.var_77A6 = self.asm.var_77C1.var_77A6;
 				self.var_77A8 = self.asm.var_77C1.var_77A8;
 				self.var_77A0 = self.asm.var_77C1.var_77A0;
@@ -1401,10 +1199,8 @@ func_1960(param_00)
 				return;
 			}
 		}
-		else if(var_01 == "cqb")
-		{
-			if(scripts\engine\utility::array_contains(var_05,param_00))
-			{
+		else if(var_01 == "cqb") {
+			if(scripts\engine\utility::array_contains(var_05,param_00)) {
 				self.var_77A6 = self.asm.var_77C1.var_77A6;
 				self.var_77A8 = self.asm.var_77C1.var_77A8;
 				self.var_77A0 = self.asm.var_77C1.var_77A0;
@@ -1417,10 +1213,8 @@ func_1960(param_00)
 				return;
 			}
 		}
-		else if(var_01 == "frantic")
-		{
-			if(scripts\engine\utility::array_contains(var_04,param_00))
-			{
+		else if(var_01 == "frantic") {
+			if(scripts\engine\utility::array_contains(var_04,param_00)) {
 				self.var_77A6 = self.asm.var_77C1.var_77A6;
 				self.var_77A8 = self.asm.var_77C1.var_77A8;
 				self.var_77A0 = self.asm.var_77C1.var_77A0;
@@ -1450,8 +1244,7 @@ func_1960(param_00)
 	}
 
 	var_07 = undefined;
-	switch(param_00)
-	{
+	switch(param_00) {
 		case "shrug":
 			var_07 = self.var_77B6;
 			break;
@@ -1507,8 +1300,7 @@ func_1960(param_00)
 			break;
 	}
 
-	if(self.var_9C5F)
-	{
+	if(self.var_9C5F) {
 		self.var_101F8 = %gesture_partials;
 	}
 	else
@@ -1516,8 +1308,7 @@ func_1960(param_00)
 		self.var_101F8 = %add_gesture;
 	}
 
-	if(self.var_9C5F)
-	{
+	if(self.var_9C5F) {
 		thread func_2B79(self.var_101F8,var_07,0.5);
 	}
 	else
@@ -1528,8 +1319,7 @@ func_1960(param_00)
 
 	var_08 = getanimlength(var_07) * 0.85;
 	wait(var_08);
-	if(self.var_9C5F)
-	{
+	if(self.var_9C5F) {
 		thread func_2B7A(self.var_101F8,var_07,0.5);
 	}
 	else
@@ -1539,15 +1329,12 @@ func_1960(param_00)
 	}
 
 	self.var_9C5F = 0;
-	if(isai(self))
-	{
+	if(isai(self)) {
 		self._blackboard.var_778B = undefined;
 	}
 }
 
-//Function Number: 40
-func_2B79(param_00,param_01,param_02,param_03)
-{
+func_2B79(param_00,param_01,param_02,param_03) {
 	var_04 = param_02 * 0.5;
 	self _meth_82AC(param_00,1,var_04);
 	self _meth_82AC(param_01,1,var_04,0.75);
@@ -1556,9 +1343,7 @@ func_2B79(param_00,param_01,param_02,param_03)
 	self _meth_82AC(param_00,10,var_04);
 }
 
-//Function Number: 41
-func_2B7A(param_00,param_01,param_02)
-{
+func_2B7A(param_00,param_01,param_02) {
 	var_03 = param_02 * 0.5;
 	self _meth_82AC(param_00,1,var_03);
 	self _meth_82AC(param_01,1,var_03);
@@ -1567,52 +1352,39 @@ func_2B7A(param_00,param_01,param_02)
 	self aiclearanim(param_01,var_03);
 }
 
-//Function Number: 42
-func_6F41(param_00,param_01,param_02,param_03,param_04)
-{
+func_6F41(param_00,param_01,param_02,param_03,param_04) {
 	return param_00 - param_01 / param_02 - param_01 * param_04 - param_03 + param_03;
 }
 
-//Function Number: 43
-func_AB7A(param_00,param_01,param_02)
-{
+func_AB7A(param_00,param_01,param_02) {
 	return param_00 + param_02 * param_01 - param_00;
 }
 
-//Function Number: 44
-func_10384(param_00,param_01,param_02)
-{
+func_10384(param_00,param_01,param_02) {
 	param_02 = clamp(param_02 - param_00 / param_01 - param_00,0,1);
 	return param_02 * param_02 * 3 - 2 * param_02;
 }
 
-//Function Number: 45
-func_F5CD(param_00,param_01,param_02,param_03)
-{
-	if(!isdefined(param_02))
-	{
+func_F5CD(param_00,param_01,param_02,param_03) {
+	if(!isdefined(param_02)) {
 		param_02 = 1;
 	}
 
-	if(!isdefined(param_03))
-	{
+	if(!isdefined(param_03)) {
 		param_03 = 0.25;
 	}
 
 	var_04 = self getscoreinfocategory(param_00);
 	var_05 = getanimlength(param_00);
 	var_06 = param_01 - var_04 * var_05 / 0.05;
-	if(self.unittype == "c6")
-	{
+	if(self.unittype == "c6") {
 		func_12FB2();
 	}
 
 	self _meth_82AC(param_00,param_02,param_03,var_06);
 }
 
-//Function Number: 46
-func_194C(param_00,param_01,param_02)
-{
+func_194C(param_00,param_01,param_02) {
 	self endon("gesture_stop");
 	self endon("death");
 	self endon("entitydeleted");
@@ -1626,8 +1398,7 @@ func_194C(param_00,param_01,param_02)
 	var_0A = undefined;
 	self.var_C00A = 0;
 	var_0B = undefined;
-	if(isdefined(param_02))
-	{
+	if(isdefined(param_02)) {
 		var_0A = lib_0A1E::func_2357(self.asm.archetype,"Knobs","body");
 		var_0B = %gesture_partials;
 	}
@@ -1636,26 +1407,21 @@ func_194C(param_00,param_01,param_02)
 		var_0B = %add_gesture;
 	}
 
-	if(!isdefined(self))
-	{
+	if(!isdefined(self)) {
 		return;
 	}
 
-	if(isplayer(param_00))
-	{
+	if(isplayer(param_00)) {
 		var_0C = level.player geteye();
 	}
-	else if(!isdefined(param_01))
-	{
+	else if(!isdefined(param_01)) {
 		var_0C = self.origin;
 		var_09 = 1;
 	}
-	else if(isai(param_01))
-	{
+	else if(isai(param_01)) {
 		var_0C = param_01 geteye();
 	}
-	else if(function_02A5(param_01))
-	{
+	else if(function_02A5(param_01)) {
 		var_0C = param_01;
 	}
 	else
@@ -1684,10 +1450,8 @@ func_194C(param_00,param_01,param_02)
 	var_1F = clamp(func_6F41(var_1E,0.2,1,0,1),0,1);
 	var_20 = clamp(func_6F41(var_1C,0.2,1,0,1),0,1);
 	var_21 = clamp(func_6F41(var_1D,0.2,1,0,1),0,1);
-	if(!self.var_C00A)
-	{
-		if(isdefined(param_02))
-		{
+	if(!self.var_C00A) {
+		if(isdefined(param_02)) {
 			self _meth_82AC(var_0B,10,0.25);
 		}
 		else
@@ -1695,8 +1459,7 @@ func_194C(param_00,param_01,param_02)
 			self _meth_82AC(var_0B,1,0.25);
 		}
 
-		if(var_1F < 0.3)
-		{
+		if(var_1F < 0.3) {
 			self _meth_82AC(var_04,0,0,1);
 		}
 		else
@@ -1704,13 +1467,11 @@ func_194C(param_00,param_01,param_02)
 			self _meth_82AC(var_04,var_1F,0.25,1);
 		}
 
-		if(isdefined(var_07))
-		{
+		if(isdefined(var_07)) {
 			self _meth_82AC(var_07,var_20,0.25,1);
 		}
 
-		if(isdefined(var_08))
-		{
+		if(isdefined(var_08)) {
 			self _meth_82AC(var_08,var_21,0.25,1);
 		}
 
@@ -1719,8 +1480,7 @@ func_194C(param_00,param_01,param_02)
 	}
 	else
 	{
-		if(isdefined(param_02))
-		{
+		if(isdefined(param_02)) {
 			self _meth_82AC(var_0A,0.001,0.1);
 		}
 
@@ -1734,9 +1494,7 @@ func_194C(param_00,param_01,param_02)
 	self _meth_82AC(var_0A,1,0.25);
 }
 
-//Function Number: 47
-func_192F(param_00,param_01)
-{
+func_192F(param_00,param_01) {
 	self endon("death");
 	self endon("gesture_stop");
 	self endon("entitydeleted");
@@ -1744,14 +1502,12 @@ func_192F(param_00,param_01)
 	var_03 = 0;
 	var_04 = "single anim";
 	thread scripts/sp/anim::func_10CBF(self,var_04,undefined,undefined,param_00);
-	if(isdefined(param_01) && param_01)
-	{
+	if(isdefined(param_01) && param_01) {
 		var_02 = %gesture_partials;
 		var_03 = 1;
 	}
 
-	if(var_03)
-	{
+	if(var_03) {
 		thread func_2B79(var_02,param_00,0.2);
 	}
 	else
@@ -1762,8 +1518,7 @@ func_192F(param_00,param_01)
 
 	var_05 = getanimlength(param_00) * 0.75 - 0.2;
 	wait(var_05);
-	if(var_03)
-	{
+	if(var_03) {
 		thread func_2B7A(var_02,param_00,0.2);
 		return;
 	}
@@ -1772,23 +1527,18 @@ func_192F(param_00,param_01)
 	self aiclearanim(param_00,0.2);
 }
 
-//Function Number: 48
-func_12FB2()
-{
+func_12FB2() {
 	self.var_AFF7 = %prototype_gesture_look_rightleft;
 	self.var_AFFA = %prototype_gesture_look_updwn;
 }
 
-//Function Number: 49
-func_1952()
-{
+func_1952() {
 	self endon("gesture_stop");
 	self endon("death");
 	self endon("entitydeleted");
 	var_00 = self.var_2B71;
 	var_01 = gettime() / 1000;
-	while(gettime() / 1000 - var_01 < var_00)
-	{
+	while(gettime() / 1000 - var_01 < var_00) {
 		var_02 = gettime() / 1000 - var_01 / var_00;
 		var_02 = func_10384(0,1,var_02);
 		var_03 = func_AB7A(0,1,var_02);
@@ -1809,23 +1559,18 @@ func_1952()
 	self _meth_82AC(%lookat_head_base_partial,5,0.05);
 	self _meth_82AC(%head_gesture_look_partial,5,0.05);
 	var_07 = 0.5;
-	for(;;)
-	{
-		if(!isdefined(self))
-		{
+	for(;;) {
+		if(!isdefined(self)) {
 			break;
 		}
 
-		if(isplayer(self.var_77A3))
-		{
+		if(isplayer(self.var_77A3)) {
 			var_08 = level.player geteye();
 		}
-		else if(isai(self.var_77A3))
-		{
+		else if(isai(self.var_77A3)) {
 			var_08 = self.var_77A3 geteye();
 		}
-		else if(function_02A5(self.var_77A3))
-		{
+		else if(function_02A5(self.var_77A3)) {
 			var_08 = self.var_77A3;
 		}
 		else
@@ -1851,9 +1596,7 @@ func_1952()
 	}
 }
 
-//Function Number: 50
-func_1954()
-{
+func_1954() {
 	self endon("gesture_stop");
 	self endon("death");
 	self endon("entitydeleted");
@@ -1861,23 +1604,18 @@ func_1954()
 	self _meth_82AC(self.var_AFFA,1,self.var_2B71);
 	self _meth_82B0(self.var_AFFA,0.5);
 	var_00 = 0.5;
-	for(;;)
-	{
-		if(!isdefined(self))
-		{
+	for(;;) {
+		if(!isdefined(self)) {
 			break;
 		}
 
-		if(isplayer(self.var_77A3))
-		{
+		if(isplayer(self.var_77A3)) {
 			var_01 = level.player geteye();
 		}
-		else if(isai(self.var_77A3))
-		{
+		else if(isai(self.var_77A3)) {
 			var_01 = self.var_77A3 geteye();
 		}
-		else if(function_02A5(self.var_77A3))
-		{
+		else if(function_02A5(self.var_77A3)) {
 			var_01 = self.var_77A3;
 		}
 		else
@@ -1888,8 +1626,7 @@ func_1954()
 		var_02 = self gettagangles("J_Spine4") + (0,0,0);
 		var_03 = self gettagorigin("J_Spine4");
 		var_04 = undefined;
-		if(isai(self))
-		{
+		if(isai(self)) {
 			var_04 = self geteye();
 		}
 		else
@@ -1908,14 +1645,11 @@ func_1954()
 	}
 }
 
-//Function Number: 51
-func_1965(param_00)
-{
+func_1965(param_00) {
 	self endon("death");
 	self endon("entitydeleted");
 	self notify("gesture_stop");
-	if(isdefined(param_00))
-	{
+	if(isdefined(param_00)) {
 		var_01 = param_00;
 	}
 	else
@@ -1935,9 +1669,7 @@ func_1965(param_00)
 	self.var_9BFC = undefined;
 }
 
-//Function Number: 52
-func_2B8A()
-{
+func_2B8A() {
 	var_00 = self;
 	self endon(self.var_6317);
 	var_00.var_7540 = undefined;
@@ -1945,52 +1677,41 @@ func_2B8A()
 	var_00.var_AB35 = undefined;
 	var_00.var_AB54 = undefined;
 	var_00.var_E52E = undefined;
-	foreach(var_02 in var_00.var_1E9D)
-	{
-		if(issubstr(var_02,"forward"))
-		{
-			if(isdefined(level.var_EC85[var_00.var_1FBB][var_02]))
-			{
+	foreach(var_02 in var_00.var_1E9D) {
+		if(issubstr(var_02,"forward")) {
+			if(isdefined(level.var_EC85[var_00.var_1FBB][var_02])) {
 				var_00.var_7540 = level.var_EC85[var_00.var_1FBB][var_02];
 			}
 
 			continue;
 		}
 
-		if(issubstr(var_02,"right") && !issubstr(var_02,"back"))
-		{
-			if(isdefined(level.var_EC85[var_00.var_1FBB][var_02]))
-			{
+		if(issubstr(var_02,"right") && !issubstr(var_02,"back")) {
+			if(isdefined(level.var_EC85[var_00.var_1FBB][var_02])) {
 				var_00.var_E512 = level.var_EC85[var_00.var_1FBB][var_02];
 			}
 
 			continue;
 		}
 
-		if(issubstr(var_02,"left") && !issubstr(var_02,"back"))
-		{
-			if(isdefined(level.var_EC85[var_00.var_1FBB][var_02]))
-			{
+		if(issubstr(var_02,"left") && !issubstr(var_02,"back")) {
+			if(isdefined(level.var_EC85[var_00.var_1FBB][var_02])) {
 				var_00.var_AB35 = level.var_EC85[var_00.var_1FBB][var_02];
 			}
 
 			continue;
 		}
 
-		if(issubstr(var_02,"leftback"))
-		{
-			if(isdefined(level.var_EC85[var_00.var_1FBB][var_02]))
-			{
+		if(issubstr(var_02,"leftback")) {
+			if(isdefined(level.var_EC85[var_00.var_1FBB][var_02])) {
 				var_00.var_AB54 = level.var_EC85[var_00.var_1FBB][var_02];
 			}
 
 			continue;
 		}
 
-		if(issubstr(var_02,"rightback"))
-		{
-			if(isdefined(level.var_EC85[var_00.var_1FBB][var_02]))
-			{
+		if(issubstr(var_02,"rightback")) {
+			if(isdefined(level.var_EC85[var_00.var_1FBB][var_02])) {
 				var_00.var_E52E = level.var_EC85[var_00.var_1FBB][var_02];
 			}
 		}
@@ -1998,8 +1719,7 @@ func_2B8A()
 
 	var_04 = function_00CE(self.var_1FBD.origin,self.var_1FBD.angles,var_00.var_7540);
 	var_05 = function_00CD(self.var_1FBD.origin,self.var_1FBD.angles,var_00.var_7540);
-	if(isai(var_00))
-	{
+	if(isai(var_00)) {
 		var_00 _meth_80F1(var_04,var_05,10000);
 	}
 	else
@@ -2010,46 +1730,37 @@ func_2B8A()
 
 	var_06 = vectortoangles(level.player.origin - var_00.origin);
 	var_00 _meth_82A5(var_00.var_7540,%root,1,0.2);
-	if(isdefined(var_00.var_E512))
-	{
+	if(isdefined(var_00.var_E512)) {
 		var_00 _meth_82AC(var_00.var_E512,0,0.2);
 	}
 
-	if(isdefined(var_00.var_AB35))
-	{
+	if(isdefined(var_00.var_AB35)) {
 		var_00 _meth_82AC(var_00.var_AB35,0,0.2);
 	}
 
-	if(isdefined(var_00.var_AB54))
-	{
+	if(isdefined(var_00.var_AB54)) {
 		var_00 _meth_82AC(var_00.var_AB54,0,0.2);
 	}
 
-	if(isdefined(var_00.var_E52E))
-	{
+	if(isdefined(var_00.var_E52E)) {
 		var_00 _meth_82AC(var_00.var_E52E,0,0.2);
 	}
 
 	var_07 = 0;
 	var_08 = 0;
 	var_00 _meth_8250(1);
-	for(;;)
-	{
-		if(!isdefined(var_00))
-		{
+	for(;;) {
+		if(!isdefined(var_00)) {
 			break;
 		}
 
-		if(isplayer(var_00.var_77A3))
-		{
+		if(isplayer(var_00.var_77A3)) {
 			var_09 = level.player geteye();
 		}
-		else if(isai(var_00.var_77A3))
-		{
+		else if(isai(var_00.var_77A3)) {
 			var_09 = var_00.var_77A3 geteye();
 		}
-		else if(function_02A5(var_00.var_77A3))
-		{
+		else if(function_02A5(var_00.var_77A3)) {
 			var_09 = var_00.var_77A3;
 		}
 		else
@@ -2070,24 +1781,20 @@ func_2B8A()
 		var_14 = clamp(vectordot(var_0C,var_0F),0,1);
 		var_15 = clamp(vectordot(var_0C,var_10),0,1);
 		var_16 = 1;
-		if(scripts\engine\utility::anglebetweenvectorssigned(var_0D,var_0C,var_11) > 0)
-		{
+		if(scripts\engine\utility::anglebetweenvectorssigned(var_0D,var_0C,var_11) > 0) {
 			var_16 = 0;
 		}
 
-		if(isdefined(var_00.var_E512))
-		{
+		if(isdefined(var_00.var_E512)) {
 			var_00 _meth_82AC(var_00.var_E512,var_13,0.2);
 		}
 
-		if(isdefined(var_00.var_AB35))
-		{
+		if(isdefined(var_00.var_AB35)) {
 			var_00 _meth_82AC(var_00.var_AB35,var_14,0.2);
 		}
 
 		var_00 _meth_82AC(var_00.var_7540,var_12 + 0.005,0.2);
-		if(var_16)
-		{
+		if(var_16) {
 			var_07 = scripts/sp/math::func_AB6F(var_07,var_15,0.1);
 			var_08 = scripts/sp/math::func_AB6F(var_08,0,0.1);
 		}
@@ -2097,13 +1804,11 @@ func_2B8A()
 			var_08 = scripts/sp/math::func_AB6F(var_08,var_15,0.1);
 		}
 
-		if(isdefined(var_00.var_E52E))
-		{
+		if(isdefined(var_00.var_E52E)) {
 			var_00 _meth_82AC(var_00.var_E52E,var_07 + 0.005,0.2);
 		}
 
-		if(isdefined(var_00.var_AB54))
-		{
+		if(isdefined(var_00.var_AB54)) {
 			var_00 _meth_82AC(var_00.var_AB54,var_08 + 0.005,0.2);
 		}
 
@@ -2112,33 +1817,26 @@ func_2B8A()
 	}
 }
 
-//Function Number: 53
-func_2B8B()
-{
+func_2B8B() {
 	var_00 = self;
-	if(isdefined(var_00.var_6317))
-	{
+	if(isdefined(var_00.var_6317)) {
 		var_00 notify(var_00.var_6317);
 	}
 
 	var_00 aiclearanim(var_00.var_7540,0.2);
-	if(isdefined(var_00.var_E512))
-	{
+	if(isdefined(var_00.var_E512)) {
 		var_00 aiclearanim(var_00.var_E512,0.2);
 	}
 
-	if(isdefined(var_00.var_AB35))
-	{
+	if(isdefined(var_00.var_AB35)) {
 		var_00 aiclearanim(var_00.var_AB35,0.2);
 	}
 
-	if(isdefined(var_00.var_AB54))
-	{
+	if(isdefined(var_00.var_AB54)) {
 		var_00 aiclearanim(var_00.var_AB54,0.2);
 	}
 
-	if(isdefined(var_00.var_E52E))
-	{
+	if(isdefined(var_00.var_E52E)) {
 		var_00 aiclearanim(var_00.var_E52E,0.2);
 	}
 
@@ -2153,61 +1851,48 @@ func_2B8B()
 	var_00.var_77A3 = undefined;
 }
 
-//Function Number: 54
-func_2B86()
-{
+func_2B86() {
 	var_00 = self;
 	var_00.var_7540 = undefined;
 	var_00.var_E512 = undefined;
 	var_00.var_AB35 = undefined;
 	var_00.var_AB54 = undefined;
 	var_00.var_E52E = undefined;
-	foreach(var_02 in var_00.var_1E9D)
-	{
-		if(issubstr(var_02,"forward"))
-		{
-			if(isdefined(level.var_EC85[var_00.var_1FBB][var_02]))
-			{
+	foreach(var_02 in var_00.var_1E9D) {
+		if(issubstr(var_02,"forward")) {
+			if(isdefined(level.var_EC85[var_00.var_1FBB][var_02])) {
 				var_00.var_7540 = level.var_EC85[var_00.var_1FBB][var_02];
 			}
 
 			continue;
 		}
 
-		if(issubstr(var_02,"right") && !issubstr(var_02,"back"))
-		{
-			if(isdefined(level.var_EC85[var_00.var_1FBB][var_02]))
-			{
+		if(issubstr(var_02,"right") && !issubstr(var_02,"back")) {
+			if(isdefined(level.var_EC85[var_00.var_1FBB][var_02])) {
 				var_00.var_E512 = level.var_EC85[var_00.var_1FBB][var_02];
 			}
 
 			continue;
 		}
 
-		if(issubstr(var_02,"left") && !issubstr(var_02,"back"))
-		{
-			if(isdefined(level.var_EC85[var_00.var_1FBB][var_02]))
-			{
+		if(issubstr(var_02,"left") && !issubstr(var_02,"back")) {
+			if(isdefined(level.var_EC85[var_00.var_1FBB][var_02])) {
 				var_00.var_AB35 = level.var_EC85[var_00.var_1FBB][var_02];
 			}
 
 			continue;
 		}
 
-		if(issubstr(var_02,"leftback"))
-		{
-			if(isdefined(level.var_EC85[var_00.var_1FBB][var_02]))
-			{
+		if(issubstr(var_02,"leftback")) {
+			if(isdefined(level.var_EC85[var_00.var_1FBB][var_02])) {
 				var_00.var_AB54 = level.var_EC85[var_00.var_1FBB][var_02];
 			}
 
 			continue;
 		}
 
-		if(issubstr(var_02,"rightback"))
-		{
-			if(isdefined(level.var_EC85[var_00.var_1FBB][var_02]))
-			{
+		if(issubstr(var_02,"rightback")) {
+			if(isdefined(level.var_EC85[var_00.var_1FBB][var_02])) {
 				var_00.var_E52E = level.var_EC85[var_00.var_1FBB][var_02];
 			}
 		}
@@ -2215,8 +1900,7 @@ func_2B86()
 
 	var_04 = function_00CE(self.var_1FBD.origin,self.var_1FBD.angles,var_00.var_7540);
 	var_05 = function_00CD(self.var_1FBD.origin,self.var_1FBD.angles,var_00.var_7540);
-	if(isai(var_00))
-	{
+	if(isai(var_00)) {
 		var_00 _meth_80F1(var_04,var_05,10000);
 	}
 	else
@@ -2227,23 +1911,19 @@ func_2B86()
 
 	var_06 = vectortoangles(level.player.origin - var_00.origin);
 	var_00 _meth_82A5(var_00.var_7540,%root,1,0.2);
-	if(isdefined(var_00.var_E512))
-	{
+	if(isdefined(var_00.var_E512)) {
 		var_00 _meth_82AC(var_00.var_E512,0,0.2);
 	}
 
-	if(isdefined(var_00.var_AB35))
-	{
+	if(isdefined(var_00.var_AB35)) {
 		var_00 _meth_82AC(var_00.var_AB35,0,0.2);
 	}
 
-	if(isdefined(var_00.var_AB54))
-	{
+	if(isdefined(var_00.var_AB54)) {
 		var_00 _meth_82AC(var_00.var_AB54,0,0.2);
 	}
 
-	if(isdefined(var_00.var_E52E))
-	{
+	if(isdefined(var_00.var_E52E)) {
 		var_00 _meth_82AC(var_00.var_E52E,0,0.2);
 	}
 
@@ -2251,23 +1931,18 @@ func_2B86()
 	var_08 = 0;
 	var_09 = gettime() / 1000;
 	var_0A = getanimlength(var_00.var_7540);
-	while(gettime() / 1000 - var_09 < var_0A)
-	{
-		if(!isdefined(var_00))
-		{
+	while(gettime() / 1000 - var_09 < var_0A) {
+		if(!isdefined(var_00)) {
 			break;
 		}
 
-		if(isplayer(var_00.var_77A3))
-		{
+		if(isplayer(var_00.var_77A3)) {
 			var_0B = level.player geteye();
 		}
-		else if(isai(var_00.var_77A3))
-		{
+		else if(isai(var_00.var_77A3)) {
 			var_0B = var_00.var_77A3 geteye();
 		}
-		else if(function_02A5(var_00.var_77A3))
-		{
+		else if(function_02A5(var_00.var_77A3)) {
 			var_0B = var_00.var_77A3;
 		}
 		else
@@ -2288,24 +1963,20 @@ func_2B86()
 		var_16 = clamp(vectordot(var_0E,var_11),0,1);
 		var_17 = clamp(vectordot(var_0E,var_12),0,1);
 		var_18 = 1;
-		if(scripts\engine\utility::anglebetweenvectorssigned(var_0F,var_0E,var_13) > 0)
-		{
+		if(scripts\engine\utility::anglebetweenvectorssigned(var_0F,var_0E,var_13) > 0) {
 			var_18 = 0;
 		}
 
-		if(isdefined(var_00.var_E512))
-		{
+		if(isdefined(var_00.var_E512)) {
 			var_00 _meth_82AC(var_00.var_E512,var_15,0.2);
 		}
 
-		if(isdefined(var_00.var_AB35))
-		{
+		if(isdefined(var_00.var_AB35)) {
 			var_00 _meth_82AC(var_00.var_AB35,var_16,0.2);
 		}
 
 		var_00 _meth_82AC(var_00.var_7540,var_14 + 0.005,0.2);
-		if(var_18)
-		{
+		if(var_18) {
 			var_07 = scripts/sp/math::func_AB6F(var_07,var_17,0.1);
 			var_08 = scripts/sp/math::func_AB6F(var_08,0,0.1);
 		}
@@ -2315,13 +1986,11 @@ func_2B86()
 			var_08 = scripts/sp/math::func_AB6F(var_08,var_17,0.1);
 		}
 
-		if(isdefined(var_00.var_E52E))
-		{
+		if(isdefined(var_00.var_E52E)) {
 			var_00 _meth_82AC(var_00.var_E52E,var_07 + 0.005,0.2);
 		}
 
-		if(isdefined(var_00.var_AB54))
-		{
+		if(isdefined(var_00.var_AB54)) {
 			var_00 _meth_82AC(var_00.var_AB54,var_08 + 0.005,0.2);
 		}
 

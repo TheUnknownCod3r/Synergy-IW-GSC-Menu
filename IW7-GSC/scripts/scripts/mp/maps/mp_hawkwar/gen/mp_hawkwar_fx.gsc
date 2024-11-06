@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\mp\maps\mp_hawkwar\gen\mp_hawkwar_fx.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 1
- * Decompile Time: 284 ms
- * Timestamp: 10/27/2023 12:13:38 AM
-*******************************************************************/
+/********************************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\mp\maps\mp_hawkwar\gen\mp_hawkwar_fx.gsc
+********************************************************************/
 
-//Function Number: 1
-main()
-{
+main() {
 	var_00 = scripts\common\utility::func_49FA("vfx_hw_sunflare");
 	var_00 scripts\common\createfx::func_F4AD((0,0,0),(0,0,0));
 	var_00.var_13125["fxid"] = "vfx_hw_sunflare";

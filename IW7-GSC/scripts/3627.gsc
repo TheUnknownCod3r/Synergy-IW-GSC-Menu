@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: 3627.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 24
- * Decompile Time: 8 ms
- * Timestamp: 10/27/2023 12:30:57 AM
-*******************************************************************/
+/****************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\3627.gsc
+****************************/
 
-//Function Number: 1
-func_C32F()
-{
+func_C32F() {
 	precacheitem("offhandshield");
 	precacheitem("offhandshield_up1");
 	precachestring(&"EQUIPMENT_SHIELD_MELEE_HINT");
@@ -32,47 +26,37 @@ func_C32F()
 	scripts\sp\_utility::func_16EB("shield_recharge_remind",&"WEAPON_HELP_SHIELD_RECHARGE");
 }
 
-//Function Number: 2
-func_C334()
-{
+func_C334() {
 	self endon("death");
 	self endon("secondary_equipment_change");
 	childthread func_C330();
 	childthread func_DDD3();
 	childthread func_DDD4();
 	thread offhand_shield_unequip_think();
-	for(;;)
-	{
+	for(;;) {
 		self waittill("offhandshield_deploy");
-		if(scripts\engine\utility::istrue(self.var_9DD2) || scripts\engine\utility::istrue(self.var_939E))
-		{
+		if(scripts\engine\utility::istrue(self.var_9DD2) || scripts\engine\utility::istrue(self.var_939E)) {
 			wait(0.05);
 			continue;
 		}
 
 		thread on_deploy();
 		self waittill("offhandshield_retract");
-		if(scripts\sp\_utility::func_65DB("player_retract_shield_active"))
-		{
+		if(scripts\sp\_utility::func_65DB("player_retract_shield_active")) {
 			thread on_retract();
 		}
 	}
 }
 
-//Function Number: 3
-offhand_shield_unequip_think()
-{
+offhand_shield_unequip_think() {
 	self endon("death");
 	self waittill("secondary_equipment_change");
-	if(scripts\sp\_utility::func_65DB("player_retract_shield_active"))
-	{
+	if(scripts\sp\_utility::func_65DB("player_retract_shield_active")) {
 		thread on_retract();
 	}
 }
 
-//Function Number: 4
-on_deploy()
-{
+on_deploy() {
 	self endon("offhandshield_on_retract");
 	self notify("offhandshield_on_deploy");
 	scripts\engine\utility::allow_usability(0);
@@ -82,8 +66,7 @@ on_deploy()
 	level.player.var_C337.var_19 = 1;
 	setomnvar("ui_offhandshield_in_use",1);
 	setomnvar("ui_wrist_pc",6);
-	if(!level.player.var_C337.var_9936)
-	{
+	if(!level.player.var_C337.var_9936) {
 		function_01C5("offhandShield_outlineMode",2);
 		thread func_CB92();
 	}
@@ -101,9 +84,7 @@ on_deploy()
 	thread func_B594();
 }
 
-//Function Number: 5
-on_retract()
-{
+on_retract() {
 	self endon("offhandshield_on_deploy");
 	self notify("offhandshield_on_retract");
 	level.player.var_C337.var_19 = 0;
@@ -118,27 +99,20 @@ on_retract()
 	scripts\sp\_utility::func_9199("shield",0);
 }
 
-//Function Number: 6
-func_DBE4()
-{
+func_DBE4() {
 	self endon("offhandshield_on_retract");
-	for(;;)
-	{
+	for(;;) {
 		self waittill("melee");
 		thread scripts\sp\_detonategrenades::func_DBDB(self geteye() + anglestoforward(self getplayerangles()) * 25,0.098);
 	}
 }
 
-//Function Number: 7
-func_DDD3()
-{
-	if(isdefined(level.player.var_C337.var_54C2))
-	{
+func_DDD3() {
+	if(isdefined(level.player.var_C337.var_54C2)) {
 		return;
 	}
 
-	while(level.player _meth_84D0() > getdvarfloat("offhandshield_minenergyfordeploy"))
-	{
+	while(level.player _meth_84D0() > getdvarfloat("offhandshield_minenergyfordeploy")) {
 		wait(0.15);
 	}
 
@@ -146,35 +120,26 @@ func_DDD3()
 	level.player.var_C337.var_54C2 = 1;
 }
 
-//Function Number: 8
-func_DDD4()
-{
-	for(;;)
-	{
+func_DDD4() {
+	for(;;) {
 		level.player waittill("secondary_equipment_pressed");
-		if(level.player _meth_84D0() < getdvarfloat("offhandshield_minenergyfordeploy"))
-		{
+		if(level.player _meth_84D0() < getdvarfloat("offhandshield_minenergyfordeploy")) {
 			scripts\sp\_utility::func_56BE("shield_recharge_remind",3);
 			wait(3);
 		}
 	}
 }
 
-//Function Number: 9
-func_B594()
-{
-	if(!level.player.var_C337.var_19)
-	{
+func_B594() {
+	if(!level.player.var_C337.var_19) {
 		return;
 	}
 
-	if(isdefined(level.player.var_C337.var_28B5))
-	{
+	if(isdefined(level.player.var_C337.var_28B5)) {
 		return;
 	}
 
-	if(level.player.var_C337.var_B620 > 5)
-	{
+	if(level.player.var_C337.var_B620 > 5) {
 		return;
 	}
 
@@ -193,26 +158,19 @@ func_B594()
 	level.player.var_C337.var_28B5 = undefined;
 }
 
-//Function Number: 10
-func_13746(param_00)
-{
+func_13746(param_00) {
 	self endon("offhandshield_retract");
 	wait(param_00);
 }
 
-//Function Number: 11
-func_C330()
-{
+func_C330() {
 	var_00 = level.player _meth_84CF() * 0.25;
-	for(;;)
-	{
+	for(;;) {
 		var_01 = level.player _meth_84D0();
-		if(var_01 <= var_00 && self.var_C337.var_19)
-		{
+		if(var_01 <= var_00 && self.var_C337.var_19) {
 			thread scripts\engine\utility::play_loop_sound_on_entity("retract_shield_energy_alarm");
 			childthread func_C339(var_00);
-			while(self _meth_84D0() < var_00 && self.var_C337.var_19)
-			{
+			while(self _meth_84D0() < var_00 && self.var_C337.var_19) {
 				wait(0.05);
 			}
 
@@ -223,17 +181,13 @@ func_C330()
 	}
 }
 
-//Function Number: 12
-func_C339(param_00)
-{
-	if(isdefined(self.var_C337.var_FC8E))
-	{
+func_C339(param_00) {
+	if(isdefined(self.var_C337.var_FC8E)) {
 		return;
 	}
 
 	self.var_C337.var_FC8E = 1;
-	while(self _meth_84D0() < param_00)
-	{
+	while(self _meth_84D0() < param_00) {
 		wait(0.05);
 	}
 
@@ -241,51 +195,40 @@ func_C339(param_00)
 	self.var_C337.var_FC8E = undefined;
 }
 
-//Function Number: 13
-func_C32D(param_00)
-{
-	if(param_00 && !level.player.var_C337.var_260E)
-	{
+func_C32D(param_00) {
+	if(param_00 && !level.player.var_C337.var_260E) {
 		level.player.var_C337.var_260E = 1;
 		level.player thread scripts\engine\utility::play_loop_sound_on_entity("retract_shield_energy_hum");
 		return;
 	}
 
-	if(!param_00 && level.player.var_C337.var_260E)
-	{
+	if(!param_00 && level.player.var_C337.var_260E) {
 		level.player.var_C337.var_260E = 0;
 		level.player notify("stop soundretract_shield_energy_hum");
 	}
 }
 
-//Function Number: 14
-func_CB92(param_00)
-{
+func_CB92(param_00) {
 	self endon("offhandshield_retract");
 	var_01 = 1;
 	var_02 = [];
 	wait(0.15);
-	for(;;)
-	{
+	for(;;) {
 		level.player.var_C337.var_CB8F.queuedialog = 5;
 		var_02 = scripts\engine\utility::array_remove_array(var_02,var_02);
 		var_03 = function_0072();
-		if(isdefined(level.player.var_C337.var_6A48))
-		{
+		if(isdefined(level.player.var_C337.var_6A48)) {
 			var_03 = scripts\engine\utility::array_combine(var_03,level.var_C337.var_6A48);
 		}
 
-		foreach(var_05 in var_03)
-		{
+		foreach(var_05 in var_03) {
 			var_06 = distance(var_05.origin,self.origin);
-			if(var_06 > level.player.var_C337.var_CB8F.var_56E8)
-			{
+			if(var_06 > level.player.var_C337.var_CB8F.var_56E8) {
 				var_03 = scripts\engine\utility::array_remove(var_03,var_05);
 				continue;
 			}
 
-			if(var_05.ignoreme)
-			{
+			if(var_05.ignoreme) {
 				var_03 = scripts\engine\utility::array_remove(var_03,var_05);
 				continue;
 			}
@@ -293,8 +236,7 @@ func_CB92(param_00)
 			var_05.var_D028 = var_06;
 		}
 
-		if(!var_03.size)
-		{
+		if(!var_03.size) {
 			wait(level.player.var_C337.var_CB8F.queuedialog);
 			continue;
 		}
@@ -302,31 +244,25 @@ func_CB92(param_00)
 		var_08 = scripts\sp\_utility::func_78BB(self.origin,var_03,level.player.var_C337.var_CB8F.var_56E8);
 		var_09 = scripts\sp\_utility::func_79B3(self.origin,var_03);
 		var_0A = distance2d(level.player.origin,var_08.origin) / level.player.var_C337.var_CB8F.getclosestpointonnavmesh3d;
-		if(!isdefined(var_08))
-		{
+		if(!isdefined(var_08)) {
 			wait(level.player.var_C337.var_CB8F.queuedialog);
 			continue;
 		}
 
-		if(var_08.var_D028 <= level.player.var_C337.var_CB8F.var_56E8)
-		{
-			if(var_08.var_D028 <= level.player.var_C337.var_CB8F.time * 0.5)
-			{
+		if(var_08.var_D028 <= level.player.var_C337.var_CB8F.var_56E8) {
+			if(var_08.var_D028 <= level.player.var_C337.var_CB8F.time * 0.5) {
 				level.player.var_C337.var_CB8F.queuedialog = level.player.var_C337.var_CB8F.queuedialog * 0.5;
 			}
-			else if(var_08.var_D028 <= level.player.var_C337.var_CB8F.time * 0.75)
-			{
+			else if(var_08.var_D028 <= level.player.var_C337.var_CB8F.time * 0.75) {
 				level.player.var_C337.var_CB8F.queuedialog = level.player.var_C337.var_CB8F.queuedialog * 0.75;
 			}
 		}
 
-		if(level.player.var_C337.var_CB8F.queuedialog < var_01)
-		{
+		if(level.player.var_C337.var_CB8F.queuedialog < var_01) {
 			level.player.var_C337.var_CB8F.queuedialog = var_01;
 		}
 
-		if(var_03.size && level.var_6DD1)
-		{
+		if(var_03.size && level.var_6DD1) {
 			level.var_6DD1 = 0;
 			level notify("first_pinged_ents");
 		}
@@ -335,8 +271,7 @@ func_CB92(param_00)
 		scripts\engine\utility::array_thread([var_08,var_09],::func_CB94,level.player.var_C337.var_CB8F.getclosestpointonnavmesh3d);
 		var_0B = 1;
 		var_0C = level.player.var_C337.var_CB8F.queuedialog - var_0B;
-		if(var_0C > var_0B)
-		{
+		if(var_0C > var_0B) {
 			wait(var_0C);
 			continue;
 		}
@@ -345,16 +280,12 @@ func_CB92(param_00)
 	}
 }
 
-//Function Number: 15
-doping()
-{
+doping() {
 	thread scripts\sp\_utility::play_sound_on_entity("retract_shield_tracker_pulse");
 	self _meth_854F();
 }
 
-//Function Number: 16
-func_CB94(param_00)
-{
+func_CB94(param_00) {
 	self endon("death");
 	var_01 = distance2d(level.player.origin,self.origin) / param_00;
 	var_01 = var_01 / 1000;
@@ -362,18 +293,14 @@ func_CB94(param_00)
 	thread func_CB95(var_01);
 }
 
-//Function Number: 17
-func_CB95(param_00)
-{
-	if(!isalive(self))
-	{
+func_CB95(param_00) {
+	if(!isalive(self)) {
 		return;
 	}
 
 	var_01 = scripts/sp/math::func_C097(0.1,1,param_00);
 	var_02 = scripts/sp/math::func_6A8E(1.1,0.8,var_01);
-	if(issentient(self))
-	{
+	if(issentient(self)) {
 		var_03 = self geteye();
 	}
 	else
@@ -388,22 +315,17 @@ func_CB95(param_00)
 	var_04 delete();
 }
 
-//Function Number: 18
-func_C76C(param_00,param_01)
-{
+func_C76C(param_00,param_01) {
 	self endon("death");
-	if(isdefined(param_01))
-	{
+	if(isdefined(param_01)) {
 		wait(param_01);
 	}
 
 	var_02 = function_0072();
 	var_03 = function_00C8();
-	if(param_00)
-	{
+	if(param_00) {
 		scripts\engine\utility::array_thread(var_02,::func_C76A);
-		if(var_03.size)
-		{
+		if(var_03.size) {
 			scripts\sp\_utility::func_22C7(var_03,::func_C76A);
 			return;
 		}
@@ -412,23 +334,18 @@ func_C76C(param_00,param_01)
 	}
 
 	scripts\engine\utility::array_thread(var_02,::func_C769);
-	if(var_03.size)
-	{
+	if(var_03.size) {
 		scripts\engine\utility::array_thread(var_03,::scripts\sp\_utility::func_E08B,::func_C76A);
 	}
 }
 
-//Function Number: 19
-func_C76A()
-{
-	if(isdefined(self.var_FC9D))
-	{
+func_C76A() {
+	if(isdefined(self.var_FC9D)) {
 		return;
 	}
 
 	self.var_FC9D = 1;
-	if(isdefined(self.team) && self.team == "allies")
-	{
+	if(isdefined(self.team) && self.team == "allies") {
 		scripts\sp\_utility::func_9196(3,0,1,"shield");
 		return;
 	}
@@ -436,17 +353,13 @@ func_C76A()
 	scripts\sp\_utility::func_9196(1,0,1,"shield");
 }
 
-//Function Number: 20
-func_C769()
-{
+func_C769() {
 	self.var_FC9D = undefined;
 	scripts\sp\_utility::func_9193("shield");
 	self notify("shield_hudoutline_off");
 }
 
-//Function Number: 21
-func_C77F()
-{
+func_C77F() {
 	function_01C5("r_hudoutlineWidth","1");
 	function_01C5("r_hudoutlineFillColor0","0.8 0.8 0.8 1");
 	function_01C5("r_hudoutlineOccludedOutlineColor","0.8 0.8 0.8 1");
@@ -456,9 +369,7 @@ func_C77F()
 	function_01C5("r_hudOutlineOccludedColorFromFill","1");
 }
 
-//Function Number: 22
-func_FC8B()
-{
+func_FC8B() {
 	var_00 = [];
 	var_00["r_hudoutlineWidth"] = 1;
 	var_00["r_hudoutlineFillColor1"] = "0 0 0 1";
@@ -471,42 +382,33 @@ func_FC8B()
 	return var_00;
 }
 
-//Function Number: 23
-func_C780(param_00)
-{
+func_C780(param_00) {
 	func_AB81(1);
-	if(isdefined(param_00))
-	{
+	if(isdefined(param_00)) {
 		wait(param_00);
 	}
 
 	func_AB81(0);
 }
 
-//Function Number: 24
-func_AB81(param_00)
-{
+func_AB81(param_00) {
 	var_01 = scripts\engine\utility::ter_op(param_00,0.1,1);
 	var_02 = 0.05;
 	var_03 = "0.8 0.8 0.8 ";
 	var_04 = "0.5 0.5 0.5 ";
-	for(var_05 = 1;var_05 < 11;var_05++)
-	{
+	for(var_05 = 1;var_05 < 11;var_05++) {
 		function_01C5("r_hudoutlineFillColor0",var_03 + var_01 + "");
 		function_01C5("r_hudoutlineOccludedOutlineColor",var_03 + var_01 + "");
 		function_01C5("r_hudoutlineOccludedInteriorColor",var_04 + var_01 + "");
-		if(param_00 && var_05 < 2)
-		{
+		if(param_00 && var_05 < 2) {
 			function_01C5("r_hudoutlineFillColor1",var_03 + var_01 + "");
 		}
-		else if(!param_00 && var_05 > 2)
-		{
+		else if(!param_00 && var_05 > 2) {
 			function_01C5("r_hudoutlineFillColor1",var_03 + var_01 + "");
 		}
 
 		function_01C5("r_hudoutlineOccludedInlineColor",var_04 + var_01 + "");
-		if(param_00)
-		{
+		if(param_00) {
 			var_01 = scripts\engine\utility::ter_op(var_05 == 9,1,var_01 + 0.1);
 		}
 		else

@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\cp\maps\cp_disco\gen\cp_disco_fx.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 1
- * Decompile Time: 757 ms
- * Timestamp: 10/27/2023 12:03:35 AM
-*******************************************************************/
+/****************************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\cp\maps\cp_disco\gen\cp_disco_fx.gsc
+****************************************************************/
 
-//Function Number: 1
-main()
-{
+main() {
 	var_00 = scripts\engine\utility::createoneshoteffect("vfx_zb_carfire_a");
 	var_00 scripts\common\createfx::set_origin_and_angles((824.259,629.319,765.085),(336.194,55.4887,26.7487));
 	var_00.v["fxid"] = "vfx_zb_carfire_a";

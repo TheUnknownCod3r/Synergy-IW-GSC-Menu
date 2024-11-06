@@ -1,108 +1,71 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: 936.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 17
- * Decompile Time: 4 ms
- * Timestamp: 10/27/2023 12:32:10 AM
-*******************************************************************/
+/***************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\936.gsc
+***************************/
 
-//Function Number: 1
-func_33C0(param_00)
-{
+func_33C0(param_00) {
 	return lib_0A09::func_5AEA(param_00,5);
 }
 
-//Function Number: 2
-func_33C1(param_00)
-{
+func_33C1(param_00) {
 	return lib_0A0A::shouldrefundsuper(param_00,0.3);
 }
 
-//Function Number: 3
-func_33C2(param_00)
-{
+func_33C2(param_00) {
 	return lib_0A0A::func_4746(param_00,"hide");
 }
 
-//Function Number: 4
-func_33C3(param_00)
-{
+func_33C3(param_00) {
 	return lib_0A0A::func_B4ED(param_00,1);
 }
 
-//Function Number: 5
-func_33C4(param_00)
-{
+func_33C4(param_00) {
 	return lib_0A0A::shouldrefundsuper(param_00,0);
 }
 
-//Function Number: 6
-func_33C5(param_00)
-{
+func_33C5(param_00) {
 	return lib_0A09::func_E478(param_00,isdefined(self.a.var_2411) && self.a.var_2411 && scripts\anim\utility_common::canseeenemy());
 }
 
-//Function Number: 7
-func_33C6(param_00)
-{
+func_33C6(param_00) {
 	return lib_0A09::func_E478(param_00,scripts\anim\utility_common::cansuppressenemyfromexposed());
 }
 
-//Function Number: 8
-func_33C7(param_00)
-{
+func_33C7(param_00) {
 	return lib_0A09::func_9FEE(param_00,level.var_11813);
 }
 
-//Function Number: 9
-func_33C8(param_00)
-{
+func_33C8(param_00) {
 	return lib_0A09::func_9309(param_00,level.player);
 }
 
-//Function Number: 10
-func_33C9(param_00)
-{
+func_33C9(param_00) {
 	return lib_0A0A::shouldrefundsuper(param_00,0.1);
 }
 
-//Function Number: 11
-func_33CA(param_00)
-{
+func_33CA(param_00) {
 	return lib_0A09::func_E478(param_00,isdefined(self.var_190C) || scripts\anim\utility_common::enemyishiding());
 }
 
-//Function Number: 12
-func_33CB(param_00)
-{
+func_33CB(param_00) {
 	return lib_0A12::func_9ED9(param_00,"continue");
 }
 
-//Function Number: 13
-func_33CC(param_00)
-{
+func_33CC(param_00) {
 	return lib_0A12::allowreload(param_00,self.objective_playermask_showto);
 }
 
-//Function Number: 14
-func_33CD(param_00)
-{
+func_33CD(param_00) {
 	return lib_0A12::func_9ED9(param_00,"stop");
 }
 
-//Function Number: 15
-func_33CE(param_00)
-{
+func_33CE(param_00) {
 	return lib_0A12::allowreload(param_00,0);
 }
 
-//Function Number: 16
-func_2AD0()
-{
-	if(isdefined(level.var_119E["c6"]))
-	{
+func_2AD0() {
+	if(isdefined(level.var_119E["c6"])) {
 		return;
 	}
 
@@ -268,9 +231,7 @@ func_2AD0()
 	level.var_119E["c6"] = var_00;
 }
 
-//Function Number: 17
-func_DEE8()
-{
+func_DEE8() {
 	func_2AD0();
 	function_02D8("c6");
 }

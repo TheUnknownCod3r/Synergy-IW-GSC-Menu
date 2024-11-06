@@ -1,18 +1,11 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: 3147.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 20
- * Decompile Time: 8 ms
- * Timestamp: 10/27/2023 12:26:17 AM
-*******************************************************************/
+/****************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\3147.gsc
+****************************/
 
-//Function Number: 1
-func_2371()
-{
-	if(scripts/asm/asm::func_232E("corner_cover_lean_shoot"))
-	{
+func_2371() {
+	if(scripts/asm/asm::func_232E("corner_cover_lean_shoot")) {
 		return;
 	}
 
@@ -85,116 +78,78 @@ func_2371()
 	scripts/asm/asm::func_2327();
 }
 
-//Function Number: 2
-func_11D85(param_00,param_01,param_02,param_03)
-{
+func_11D85(param_00,param_01,param_02,param_03) {
 	return scripts/asm/asm_bb::func_291C();
 }
 
-//Function Number: 3
-func_11ED3(param_00,param_01,param_02,param_03)
-{
+func_11ED3(param_00,param_01,param_02,param_03) {
 	return scripts/asm/asm_bb::func_291C();
 }
 
-//Function Number: 4
-func_124B8(param_00,param_01,param_02,param_03)
-{
+func_124B8(param_00,param_01,param_02,param_03) {
 	return isdefined(self.target_getindexoftarget) && self.target_getindexoftarget.type == "Cover Left";
 }
 
-//Function Number: 5
-func_11D87(param_00,param_01,param_02,param_03)
-{
+func_11D87(param_00,param_01,param_02,param_03) {
 	return self.a.pose == "crouch";
 }
 
-//Function Number: 6
-func_11CFC(param_00,param_01,param_02,param_03)
-{
+func_11CFC(param_00,param_01,param_02,param_03) {
 	return scripts/asm/asm_bb::func_291C();
 }
 
-//Function Number: 7
-func_11ED5(param_00,param_01,param_02,param_03)
-{
+func_11ED5(param_00,param_01,param_02,param_03) {
 	return self.a.pose == "crouch";
 }
 
-//Function Number: 8
-func_11E2D(param_00,param_01,param_02,param_03)
-{
+func_11E2D(param_00,param_01,param_02,param_03) {
 	return scripts/asm/asm_bb::func_291C();
 }
 
-//Function Number: 9
-func_11D8B(param_00,param_01,param_02,param_03)
-{
+func_11D8B(param_00,param_01,param_02,param_03) {
 	return self._blackboard.shootparams.var_FF0B == 1;
 }
 
-//Function Number: 10
-func_11D89(param_00,param_01,param_02,param_03)
-{
+func_11D89(param_00,param_01,param_02,param_03) {
 	return self._blackboard.shootparams.var_1119D == "full" || self._blackboard.shootparams.var_1119D == "burst";
 }
 
-//Function Number: 11
-func_11D8A(param_00,param_01,param_02,param_03)
-{
+func_11D8A(param_00,param_01,param_02,param_03) {
 	return 1;
 }
 
-//Function Number: 12
-func_11ED9(param_00,param_01,param_02,param_03)
-{
+func_11ED9(param_00,param_01,param_02,param_03) {
 	return self._blackboard.shootparams.var_FF0B == 1;
 }
 
-//Function Number: 13
-func_11ED7(param_00,param_01,param_02,param_03)
-{
+func_11ED7(param_00,param_01,param_02,param_03) {
 	return self._blackboard.shootparams.var_1119D == "fire" || self._blackboard.shootparams.var_1119D == "burst";
 }
 
-//Function Number: 14
-func_11ED8(param_00,param_01,param_02,param_03)
-{
+func_11ED8(param_00,param_01,param_02,param_03) {
 	return 1;
 }
 
-//Function Number: 15
-func_11E3E(param_00,param_01,param_02,param_03)
-{
+func_11E3E(param_00,param_01,param_02,param_03) {
 	return self._blackboard.shootparams.var_FF0B == 1;
 }
 
-//Function Number: 16
-func_11E3C(param_00,param_01,param_02,param_03)
-{
+func_11E3C(param_00,param_01,param_02,param_03) {
 	return self._blackboard.shootparams.var_1119D == "full" || self._blackboard.shootparams.var_1119D == "burst";
 }
 
-//Function Number: 17
-func_11E3D(param_00,param_01,param_02,param_03)
-{
+func_11E3D(param_00,param_01,param_02,param_03) {
 	return 1;
 }
 
-//Function Number: 18
-func_11D0C(param_00,param_01,param_02,param_03)
-{
+func_11D0C(param_00,param_01,param_02,param_03) {
 	return self._blackboard.shootparams.var_FF0B == 1;
 }
 
-//Function Number: 19
-func_11D0A(param_00,param_01,param_02,param_03)
-{
+func_11D0A(param_00,param_01,param_02,param_03) {
 	return self._blackboard.shootparams.var_1119D == "full" || self._blackboard.shootparams.var_1119D == "burst";
 }
 
-//Function Number: 20
-func_11D0B(param_00,param_01,param_02,param_03)
-{
+func_11D0B(param_00,param_01,param_02,param_03) {
 	return 1;
 }

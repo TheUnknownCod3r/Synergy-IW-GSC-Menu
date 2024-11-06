@@ -1,21 +1,14 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\cp\maps\cp_zmb\cp_zmb_coaster.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 45
- * Decompile Time: 2380 ms
- * Timestamp: 10/27/2023 12:08:02 AM
-*******************************************************************/
+/*************************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\cp\maps\cp_zmb\cp_zmb_coaster.gsc
+*************************************************************/
 
-//Function Number: 1
-init_coaster()
-{
+init_coaster() {
 	scripts\engine\utility::flag_init("coaster_active");
 	var_00 = scripts\engine\utility::getstructarray("coaster","script_noteworthy");
 	level.coasterplayers = [];
-	foreach(var_02 in var_00)
-	{
+	foreach(var_02 in var_00) {
 		var_02 thread coaster_wait_for_power();
 	}
 
@@ -25,9 +18,7 @@ init_coaster()
 	var_05 thread freeze_players();
 }
 
-//Function Number: 2
-coaster_wait_for_power()
-{
+coaster_wait_for_power() {
 	level.roller_coasters = [];
 	level.coaster_start_path = getvehiclenode("coaster_start_node","targetname");
 	level.coaster_ondeck_path = getvehiclenode("coaster_transition_node","targetname");
@@ -48,16 +39,13 @@ coaster_wait_for_power()
 	level thread coaster_flow_manager();
 	self.gates = getentarray(self.target,"targetname");
 	level thread coaster_usage_monitor(self);
-	for(;;)
-	{
+	for(;;) {
 		var_02 = "power_on";
-		if(var_01)
-		{
+		if(var_01) {
 			var_02 = level scripts\engine\utility::waittill_any_return_no_endon_death_3("power_on",self.power_area + " power_on","power_off");
 		}
 
-		if(var_02 != "power_off")
-		{
+		if(var_02 != "power_off") {
 			setomnvar("zm_coaster1_ent",level.roller_coasters[0]);
 			setomnvar("zm_coaster2_ent",level.roller_coasters[1]);
 			scripts\cp\cp_interaction::remove_from_current_interaction_list(self);
@@ -75,86 +63,65 @@ coaster_wait_for_power()
 			close_gates();
 		}
 
-		if(!var_01)
-		{
+		if(!var_01) {
 			break;
 		}
 	}
 }
 
-//Function Number: 3
-turn_on_coaster_anims()
-{
+turn_on_coaster_anims() {
 	var_00 = getentarray("coaster_ice_monster","targetname");
-	foreach(var_02 in var_00)
-	{
-		if(var_02.script_noteworthy == "idle")
-		{
+	foreach(var_02 in var_00) {
+		if(var_02.script_noteworthy == "idle") {
 			var_02 setscriptablepartstate("main",scripts\engine\utility::random(["idle1","idle2"]));
 			continue;
 		}
 
-		if(var_02.script_noteworthy == "stoke")
-		{
+		if(var_02.script_noteworthy == "stoke") {
 			var_02 setscriptablepartstate("main","stoke");
 			continue;
 		}
 
-		if(var_02.script_noteworthy == "scare")
-		{
+		if(var_02.script_noteworthy == "scare") {
 			var_02 setscriptablepartstate("main","scare1");
 			continue;
 		}
 
-		if(var_02.script_noteworthy == "sit")
-		{
+		if(var_02.script_noteworthy == "sit") {
 			var_02 setscriptablepartstate("main","sit");
 		}
 	}
 
-	foreach(var_06, var_05 in level.players)
-	{
+	foreach(var_06, var_05 in level.players) {
 		setomnvar("zm_coaster_hiscore_p" + var_06 + 1,0);
 		var_05.coaster_hi_score = 0;
 		setomnvar("zm_coaster_pic_p" + int(var_05 getentitynumber() + 1),var_05.var_CFC4);
 	}
 }
 
-//Function Number: 4
-open_gates()
-{
-	foreach(var_01 in self.gates)
-	{
+open_gates() {
+	foreach(var_01 in self.gates) {
 		var_01 rotateto(var_01.script_angles,1);
 	}
 }
 
-//Function Number: 5
-close_gates()
-{
-	foreach(var_01 in self.gates)
-	{
+close_gates() {
+	foreach(var_01 in self.gates) {
 		var_01 rotateto((0,270,0),1);
 	}
 }
 
-//Function Number: 6
-coaster_usage_monitor(param_00)
-{
+coaster_usage_monitor(param_00) {
 	level.times_coaster_ridden = 0;
-	while(!param_00.powered_on)
-	{
+	while(!param_00.powered_on) {
 		wait(0.05);
 	}
 
-	for(;;)
-	{
+	for(;;) {
 		var_01 = level scripts\engine\utility::waittill_any_return("coaster_started","regular_wave_starting","event_wave_starting");
-		if(var_01 == "coaster_started")
-		{
+		if(var_01 == "coaster_started") {
 			level.var_11922++;
-			if(level.times_coaster_ridden >= 2 || level.players.size == 1)
-			{
+			if(level.times_coaster_ridden >= 2 || level.players.size == 1) {
 				param_00.out_of_order = 1;
 				param_00 close_gates();
 				setomnvar("zombie_coasterInfo",-1);
@@ -164,40 +131,31 @@ coaster_usage_monitor(param_00)
 		}
 
 		level.times_coaster_ridden = 0;
-		if(scripts\engine\utility::istrue(param_00.out_of_order))
-		{
+		if(scripts\engine\utility::istrue(param_00.out_of_order)) {
 			param_00.out_of_order = 0;
 			param_00 open_gates();
-			foreach(var_03 in level.players)
-			{
-				if(isdefined(var_03.last_interaction_point) && var_03.last_interaction_point == param_00)
-				{
+			foreach(var_03 in level.players) {
+				if(isdefined(var_03.last_interaction_point) && var_03.last_interaction_point == param_00) {
 					var_03 thread scripts\cp\cp_interaction::refresh_interaction();
 				}
 			}
 		}
 
 		var_05 = getomnvar("zombie_coasterInfo");
-		if(var_05 <= 0)
-		{
+		if(var_05 <= 0) {
 			setomnvar("zombie_coasterInfo",0);
 		}
 	}
 }
 
-//Function Number: 7
-coaster_flow_manager()
-{
-	for(;;)
-	{
+coaster_flow_manager() {
+	for(;;) {
 		level waittill("coaster_started",var_00);
 		var_00.riding = 1;
 		wait(5);
 		var_01 = undefined;
-		foreach(var_03 in level.roller_coasters)
-		{
-			if(var_03 == var_00)
-			{
+		foreach(var_03 in level.roller_coasters) {
+			if(var_03 == var_00) {
 				continue;
 			}
 			else
@@ -206,8 +164,7 @@ coaster_flow_manager()
 			}
 		}
 
-		if(isdefined(var_01.riding))
-		{
+		if(isdefined(var_01.riding)) {
 			var_01 waittill("ride_finished");
 		}
 
@@ -217,12 +174,9 @@ coaster_flow_manager()
 	}
 }
 
-//Function Number: 8
-start_coaster(param_00,param_01)
-{
+start_coaster(param_00,param_01) {
 	var_02 = 8;
-	if(isdefined(param_01.linked_players))
-	{
+	if(isdefined(param_01.linked_players)) {
 		var_02 = 4 * param_01.linked_players;
 	}
 
@@ -230,51 +184,42 @@ start_coaster(param_00,param_01)
 	scripts\cp\zombies\zombies_spawning::increase_reserved_spawn_slots(var_02);
 	param_01 attachpath(level.coaster_start_path);
 	param_01 startpath();
-	if(isdefined(param_01.linked_players))
-	{
+	if(isdefined(param_01.linked_players)) {
 		param_01 thread coaster_rumble_and_shake();
 	}
 
 	param_01 waittill("reached_end_node");
-	if(isdefined(param_01.linked_players))
-	{
+	if(isdefined(param_01.linked_players)) {
 		param_01 unlink_players_from_coaster(param_01);
 	}
 
 	param_01 notify("ride_finished");
 	param_01.riding = undefined;
-	if(isdefined(param_01.linked_players))
-	{
+	if(isdefined(param_01.linked_players)) {
 		var_02 = 4 * param_01.linked_players;
 	}
 
 	scripts\cp\zombies\zombies_spawning::decrease_reserved_spawn_slots(var_02);
 }
 
-//Function Number: 9
-use_coaster(param_00,param_01)
-{
-	if(!param_01 scripts\cp\utility::isteleportenabled())
-	{
+use_coaster(param_00,param_01) {
+	if(!param_01 scripts\cp\utility::isteleportenabled()) {
 		param_01 scripts\cp\cp_interaction::refresh_interaction();
 		return;
 	}
 
-	if(scripts\engine\utility::istrue(param_01.coaster_ridden_this_round))
-	{
+	if(scripts\engine\utility::istrue(param_01.coaster_ridden_this_round)) {
 		param_01 scripts\cp\cp_interaction::interaction_show_fail_reason(param_00,&"CP_ZMB_INTERACTIONS_ALREADY_RIDDEN");
 		wait(0.1);
 		return;
 	}
 
-	if(param_01 secondaryoffhandbuttonpressed() || param_01 fragbuttonpressed())
-	{
+	if(param_01 secondaryoffhandbuttonpressed() || param_01 fragbuttonpressed()) {
 		param_01 scripts\cp\cp_interaction::refresh_interaction();
 		return;
 	}
 
-	if(scripts\engine\utility::istrue(param_01.isusingsupercard))
-	{
+	if(scripts\engine\utility::istrue(param_01.isusingsupercard)) {
 		param_01 notify("coaster_ride_beginning");
 		wait(0.5);
 	}
@@ -285,20 +230,17 @@ use_coaster(param_00,param_01)
 	param_01.coaster_ridden_this_round = 1;
 	level.wave_num_at_start_of_game = level.wave_num;
 	var_02 = scripts\engine\utility::getclosest(param_00.origin,level.roller_coasters);
-	if(!isdefined(var_02.linked_players))
-	{
+	if(!isdefined(var_02.linked_players)) {
 		var_02.linked_players = 0;
 	}
 
 	var_02.var_AD27++;
-	if(var_02.linked_players >= 2)
-	{
+	if(var_02.linked_players >= 2) {
 		scripts\cp\cp_interaction::remove_from_current_interaction_list(param_00);
 	}
 
 	scripts\cp\zombies\zombie_analytics::log_times_per_wave("coaster",param_01);
-	if(!isdefined(param_00.ride_starting))
-	{
+	if(!isdefined(param_00.ride_starting)) {
 		param_00.ride_starting = 1;
 		level thread ride_countdown(param_00,var_02);
 	}
@@ -308,21 +250,16 @@ use_coaster(param_00,param_01)
 	level thread link_player_to_coaster(param_01,var_02);
 }
 
-//Function Number: 10
-coaster_ride_sfx()
-{
+coaster_ride_sfx() {
 	self endon("ride_over");
 	self endon("disconnect");
 	self endon("last_stand");
 	scripts\engine\utility::delaycall(3.76,::playlocalsound,"scn_rollercoaster_plr_lr_01",self);
 	var_00 = getvehiclenode(level.coaster_start_path.target,"targetname");
-	for(;;)
-	{
+	for(;;) {
 		var_00 waittill("trigger");
-		if(isdefined(var_00.name))
-		{
-			switch(var_00.name)
-			{
+		if(isdefined(var_00.name)) {
+			switch(var_00.name) {
 				case "coaster_sound_2":
 					self playlocalsound("scn_rollercoaster_plr_lr_02",self);
 					break;
@@ -336,8 +273,7 @@ coaster_ride_sfx()
 			}
 		}
 
-		if(!isdefined(var_00.target))
-		{
+		if(!isdefined(var_00.target)) {
 			break;
 		}
 
@@ -345,9 +281,7 @@ coaster_ride_sfx()
 	}
 }
 
-//Function Number: 11
-ride_countdown(param_00,param_01)
-{
+ride_countdown(param_00,param_01) {
 	wait(5);
 	level thread track_ride_time(param_01);
 	scripts\cp\cp_interaction::remove_from_current_interaction_list(param_00);
@@ -355,28 +289,21 @@ ride_countdown(param_00,param_01)
 	param_01 thread coaster_path_logic();
 }
 
-//Function Number: 12
-track_ride_time(param_00)
-{
+track_ride_time(param_00) {
 	param_00.elapsed_time = 0;
 	param_00 endon("ride_finished");
-	for(;;)
-	{
+	for(;;) {
 		wait(1);
 		param_00.var_6009++;
 	}
 }
 
-//Function Number: 13
-coaster_begin_ride(param_00,param_01)
-{
+coaster_begin_ride(param_00,param_01) {
 	level thread start_coaster(param_00,param_01);
 	param_00 close_gates();
 	var_02 = undefined;
-	foreach(var_04 in level.roller_coasters)
-	{
-		if(var_04 == param_01)
-		{
+	foreach(var_04 in level.roller_coasters) {
+		if(var_04 == param_01) {
 			continue;
 		}
 		else
@@ -385,12 +312,9 @@ coaster_begin_ride(param_00,param_01)
 		}
 	}
 
-	if(isdefined(var_02.riding))
-	{
-		for(var_06 = 25 + 86 - var_02.elapsed_time;var_06 > 0;var_06--)
-		{
-			if(!scripts\engine\utility::istrue(param_00.out_of_order))
-			{
+	if(isdefined(var_02.riding)) {
+		for(var_06 = 25 + 86 - var_02.elapsed_time;var_06 > 0;var_06--) {
+			if(!scripts\engine\utility::istrue(param_00.out_of_order)) {
 				setomnvar("zombie_coasterInfo",var_06);
 			}
 			else
@@ -403,10 +327,8 @@ coaster_begin_ride(param_00,param_01)
 	}
 	else
 	{
-		for(var_07 = 25;var_07 >= 0;var_07--)
-		{
-			if(!scripts\engine\utility::istrue(param_00.out_of_order))
-			{
+		for(var_07 = 25;var_07 >= 0;var_07--) {
+			if(!scripts\engine\utility::istrue(param_00.out_of_order)) {
 				setomnvar("zombie_coasterInfo",var_07);
 			}
 			else
@@ -419,8 +341,7 @@ coaster_begin_ride(param_00,param_01)
 	}
 
 	param_00.ride_starting = undefined;
-	if(!scripts\engine\utility::istrue(param_00.out_of_order))
-	{
+	if(!scripts\engine\utility::istrue(param_00.out_of_order)) {
 		param_00 open_gates();
 		setomnvar("zombie_coasterInfo",0);
 	}
@@ -428,9 +349,7 @@ coaster_begin_ride(param_00,param_01)
 	scripts\cp\cp_interaction::add_to_current_interaction_list(param_00);
 }
 
-//Function Number: 14
-link_player_to_coaster(param_00,param_01)
-{
+link_player_to_coaster(param_00,param_01) {
 	var_02 = "tag_guy0" + param_01.linked_players;
 	param_00 setplayerangles((0,0,0));
 	param_00 playerlinktodelta(param_01,var_02,0,60,60,60,15,0);
@@ -451,8 +370,7 @@ link_player_to_coaster(param_00,param_01)
 	param_00 scripts\engine\utility::allow_usability(0);
 	param_00 thread coaster_last_stand_monitor(param_00);
 	param_00 thread coaster_infinite_ammo(param_00);
-	if(param_01 == level.roller_coasters[0])
-	{
+	if(param_01 == level.roller_coasters[0]) {
 		setomnvar("zm_coaster_score_p" + param_00.seat + "_c1",0);
 	}
 	else
@@ -469,17 +387,13 @@ link_player_to_coaster(param_00,param_01)
 	param_00 scripts\cp\utility::setlowermessage("coaster",&"CP_ZMB_INTERACTIONS_COASTER_HINT",4);
 }
 
-//Function Number: 15
-coaster_laststand_vos(param_00)
-{
+coaster_laststand_vos(param_00) {
 	param_00 endon("disconnect");
 	param_00 endon("game_ended");
 	param_00 thread scripts\cp\cp_vo::try_to_play_vo("laststand_coaster","zmb_comment_vo");
 }
 
-//Function Number: 16
-coaster_last_stand_monitor(param_00)
-{
+coaster_last_stand_monitor(param_00) {
 	param_00 endon("ride_over");
 	param_00 endon("disconnect");
 	param_00 waittill("last_stand");
@@ -501,34 +415,29 @@ coaster_last_stand_monitor(param_00)
 	param_00 getnumownedagentsonteambytype(1);
 	param_00.linked_to_coaster = undefined;
 	param_00.disable_consumables = undefined;
-	if(!param_00 scripts\cp\utility::areinteractionsenabled())
-	{
+	if(!param_00 scripts\cp\utility::areinteractionsenabled()) {
 		param_00 scripts\cp\utility::allow_player_interactions(1);
 	}
 
 	param_00.linked_coaster.var_AD27--;
-	if(param_00.linked_coaster.linked_players <= 0)
-	{
+	if(param_00.linked_coaster.linked_players <= 0) {
 		param_00.linked_coaster.linked_players = undefined;
 	}
 
 	param_00.linked_coaster = undefined;
 	param_00 scripts\cp\powers\coop_powers::power_enablepower();
 	param_00 scripts\engine\utility::allow_weapon_switch(1);
-	if(!param_00 scripts\engine\utility::isusabilityallowed())
-	{
+	if(!param_00 scripts\engine\utility::isusabilityallowed()) {
 		param_00 scripts\engine\utility::allow_usability(1);
 	}
 
 	param_00 setclientomnvar("zombie_coaster_ticket_earned",-1);
 	param_00 setclientomnvar("zombie_arcade_game_time",-1);
-	if(param_00 scripts\cp\utility::isignoremeenabled())
-	{
+	if(param_00 scripts\cp\utility::isignoremeenabled()) {
 		param_00 scripts\cp\utility::allow_player_ignore_me(0);
 	}
 
-	if(!param_00 scripts\cp\utility::isteleportenabled())
-	{
+	if(!param_00 scripts\cp\utility::isteleportenabled()) {
 		param_00 scripts\cp\utility::allow_player_teleport(1);
 	}
 
@@ -536,31 +445,23 @@ coaster_last_stand_monitor(param_00)
 	param_00 notify("ride_over");
 }
 
-//Function Number: 17
-coaster_infinite_ammo(param_00)
-{
+coaster_infinite_ammo(param_00) {
 	param_00 endon("last_stand");
 	param_00 endon("ride_over");
-	for(;;)
-	{
+	for(;;) {
 		param_00 waittill("weapon_fired");
 		param_00 givemaxammo("iw7_zm1coaster_zm");
 		param_00 setweaponammoclip("iw7_zm1coaster_zm",weaponclipsize("iw7_zm1coaster_zm"));
 	}
 }
 
-//Function Number: 18
-unlink_players_from_coaster(param_00)
-{
-	foreach(var_02 in level.players)
-	{
-		if(!isdefined(var_02.linked_to_coaster))
-		{
+unlink_players_from_coaster(param_00) {
+	foreach(var_02 in level.players) {
+		if(!isdefined(var_02.linked_to_coaster)) {
 			continue;
 		}
 
-		if(!isdefined(var_02.linked_coaster) || var_02.linked_coaster != param_00)
-		{
+		if(!isdefined(var_02.linked_coaster) || var_02.linked_coaster != param_00) {
 			continue;
 		}
 
@@ -574,8 +475,7 @@ unlink_players_from_coaster(param_00)
 		var_02 getnumownedagentsonteambytype(1);
 		var_02.linked_to_coaster = undefined;
 		var_02.disable_consumables = undefined;
-		if(!var_02 scripts\cp\utility::areinteractionsenabled())
-		{
+		if(!var_02 scripts\cp\utility::areinteractionsenabled()) {
 			var_02 scripts\cp\utility::allow_player_interactions(1);
 		}
 
@@ -583,8 +483,7 @@ unlink_players_from_coaster(param_00)
 		var_02 setstance("stand");
 		var_02 scripts\cp\powers\coop_powers::power_enablepower();
 		var_02 scripts\engine\utility::allow_weapon_switch(1);
-		if(!var_02 scripts\engine\utility::isusabilityallowed())
-		{
+		if(!var_02 scripts\engine\utility::isusabilityallowed()) {
 			var_02 scripts\engine\utility::allow_usability(1);
 		}
 
@@ -592,13 +491,11 @@ unlink_players_from_coaster(param_00)
 		var_02 scripts\cp\zombies\arcade_game_utility::give_player_back_weapon(var_02);
 		var_02 setclientomnvar("zombie_coaster_ticket_earned",-1);
 		var_02 setclientomnvar("zombie_arcade_game_time",-1);
-		if(var_02 scripts\cp\utility::isignoremeenabled())
-		{
+		if(var_02 scripts\cp\utility::isignoremeenabled()) {
 			var_02 scripts\cp\utility::allow_player_ignore_me(0);
 		}
 
-		if(!var_02 scripts\cp\utility::isteleportenabled())
-		{
+		if(!var_02 scripts\cp\utility::isteleportenabled()) {
 			var_02 scripts\cp\utility::allow_player_teleport(1);
 		}
 
@@ -608,33 +505,25 @@ unlink_players_from_coaster(param_00)
 	param_00.linked_players = undefined;
 }
 
-//Function Number: 19
-coaster_rumble_and_shake()
-{
+coaster_rumble_and_shake() {
 	self endon("ride_finished");
 	level endon("game_ended");
 	self.intro_drop_pod_quake_min = 0.1;
 	self.intro_drop_pod_quake_max = 0.12;
 	wait(15);
-	for(;;)
-	{
+	for(;;) {
 		var_00 = self.origin;
 		earthquake(randomfloatrange(self.intro_drop_pod_quake_min,self.intro_drop_pod_quake_max),2,var_00,200);
 		wait(randomfloatrange(0.25,0.75));
 	}
 }
 
-//Function Number: 20
-coaster_path_logic()
-{
+coaster_path_logic() {
 	var_00 = getvehiclenode(level.coaster_start_path.target,"targetname");
-	for(;;)
-	{
+	for(;;) {
 		var_00 waittill("trigger");
-		if(isdefined(var_00.script_noteworthy))
-		{
-			switch(var_00.script_noteworthy)
-			{
+		if(isdefined(var_00.script_noteworthy)) {
+			switch(var_00.script_noteworthy) {
 				case "open_door":
 					level thread open_coaster_door(var_00);
 					break;
@@ -667,8 +556,7 @@ coaster_path_logic()
 			}
 		}
 
-		if(!isdefined(var_00.target))
-		{
+		if(!isdefined(var_00.target)) {
 			break;
 		}
 
@@ -676,29 +564,22 @@ coaster_path_logic()
 	}
 }
 
-//Function Number: 21
-spawn_coaster_zombies(param_00,param_01,param_02)
-{
-	if(!isdefined(param_02.linked_players) || param_02.linked_players == 0)
-	{
+spawn_coaster_zombies(param_00,param_01,param_02) {
+	if(!isdefined(param_02.linked_players) || param_02.linked_players == 0) {
 		return;
 	}
 
 	var_03 = scripts\engine\utility::getstructarray(param_00,"targetname");
 	var_04 = 0;
-	if(param_02.linked_players == 1)
-	{
+	if(param_02.linked_players == 1) {
 		var_04 = 1;
 	}
 
-	foreach(var_0A, var_06 in var_03)
-	{
+	foreach(var_0A, var_06 in var_03) {
 		var_06.is_coaster_spawner = 1;
-		for(;;)
-		{
+		for(;;) {
 			var_07 = var_06 scripts\cp\zombies\zombies_spawning::spawn_wave_enemy("generic_zombie",1);
-			if(isdefined(var_07))
-			{
+			if(isdefined(var_07)) {
 				break;
 			}
 
@@ -717,72 +598,57 @@ spawn_coaster_zombies(param_00,param_01,param_02)
 		var_08 = ["park_clown_zombie","park_clown_zombie_blue","park_clown_zombie_green","park_clown_zombie_orange","park_clown_zombie_yellow"];
 		var_09 = scripts\engine\utility::random(var_08);
 		var_07 setmodel(var_09);
-		var_07 thread [[ param_01 ]](param_02);
+		var_07 thread [[param_01]](param_02);
 		var_07 thread delayed_death(15);
-		if(var_04 && var_03.size > 2 && var_0A >= scripts\cp\utility::roundup(var_03.size * 0.65))
-		{
+		if(var_04 && var_03.size > 2 && var_0A >= scripts\cp\utility::roundup(var_03.size * 0.65)) {
 			return;
 		}
 	}
 }
 
-//Function Number: 22
-delayed_death(param_00)
-{
+delayed_death(param_00) {
 	self endon("death");
 	wait(param_00);
 	self dodamage(150,self.origin);
 }
 
-//Function Number: 23
-coaster_zombies_group(param_00)
-{
+coaster_zombies_group(param_00) {
 	self endon("death");
 	thread explode_when_near_coaster(param_00);
 	self.synctransients = "walk";
 	self.moveratescale = 1;
 	self.traverseratescale = 1;
 	self.generalspeedratescale = 1;
-	for(;;)
-	{
+	for(;;) {
 		self setgoalentity(param_00);
 		wait(0.1);
 	}
 }
 
-//Function Number: 24
-explode_when_near_coaster(param_00)
-{
+explode_when_near_coaster(param_00) {
 	self endon("death");
 	var_01 = 0;
 	var_02 = 21904;
-	while(!var_01)
-	{
-		foreach(var_04 in level.players)
-		{
-			if(distancesquared(self.origin,var_04.origin) <= var_02)
-			{
+	while(!var_01) {
+		foreach(var_04 in level.players) {
+			if(distancesquared(self.origin,var_04.origin) <= var_02) {
 				var_01 = 1;
 			}
 		}
 
-		if(var_01)
-		{
+		if(var_01) {
 			break;
 		}
 
 		wait(0.05);
 	}
 
-	foreach(var_04 in level.players)
-	{
-		if(!isdefined(var_04.linked_coaster) || var_04.linked_coaster != param_00)
-		{
+	foreach(var_04 in level.players) {
+		if(!isdefined(var_04.linked_coaster) || var_04.linked_coaster != param_00) {
 			continue;
 		}
 
-		if(var_04 scripts\cp\utility::has_zombie_perk("perk_machine_tough"))
-		{
+		if(var_04 scripts\cp\utility::has_zombie_perk("perk_machine_tough")) {
 			var_04 dodamage(90,var_04.origin,self,self,"MOD_EXPLOSIVE");
 			continue;
 		}
@@ -793,11 +659,8 @@ explode_when_near_coaster(param_00)
 	self dodamage(150,self.origin);
 }
 
-//Function Number: 25
-open_coaster_door(param_00)
-{
-	switch(param_00.script_parameters)
-	{
+open_coaster_door(param_00) {
+	switch(param_00.script_parameters) {
 		case "coaster_door_1":
 			level thread open_coaster_doors(param_00);
 			break;
@@ -819,9 +682,7 @@ open_coaster_door(param_00)
 	}
 }
 
-//Function Number: 26
-ice_frost()
-{
+ice_frost() {
 	var_00 = scripts\engine\utility::getstruct("ice_frost","targetname");
 	var_01 = spawnfx(level._effect["coaster_ice_frost"],var_00.origin,anglestoforward(var_00.angles),anglestoup(var_00.angles));
 	wait(0.1);
@@ -830,18 +691,14 @@ ice_frost()
 	var_01 delete();
 }
 
-//Function Number: 27
-freeze_players()
-{
+freeze_players() {
 	var_00 = scripts\engine\utility::getstruct("ice_frost","targetname");
 	var_01 = spawnfx(level._effect["coaster_ice_frost"],var_00.origin,anglestoforward(var_00.angles),anglestoup(var_00.angles));
 	wait(1);
 	triggerfx(var_01);
-	for(;;)
-	{
+	for(;;) {
 		self waittill("trigger",var_02);
-		if(!scripts\cp\utility::should_be_affected_by_trap(var_02) && isdefined(var_02.scrnfx))
-		{
+		if(!scripts\cp\utility::should_be_affected_by_trap(var_02) && isdefined(var_02.scrnfx)) {
 			continue;
 		}
 		else
@@ -851,9 +708,7 @@ freeze_players()
 	}
 }
 
-//Function Number: 28
-chill_scrnfx()
-{
+chill_scrnfx() {
 	self endon("disconnect");
 	self.scrnfx = function_01E1(level._effect["coaster_full_screen"],self geteye(),self);
 	wait(0.1);
@@ -863,11 +718,8 @@ chill_scrnfx()
 	self.scrnfx = undefined;
 }
 
-//Function Number: 29
-close_coaster_door(param_00)
-{
-	switch(param_00.script_parameters)
-	{
+close_coaster_door(param_00) {
+	switch(param_00.script_parameters) {
 		case "coaster_door_1":
 			level thread close_coaster_doors(param_00);
 			break;
@@ -886,14 +738,10 @@ close_coaster_door(param_00)
 	}
 }
 
-//Function Number: 30
-open_coaster_doors(param_00)
-{
+open_coaster_doors(param_00) {
 	var_01 = getentarray(param_00.script_parameters,"targetname");
-	foreach(var_03 in var_01)
-	{
-		if(var_03.model == "zmb_triton_ice_door_r_01")
-		{
+	foreach(var_03 in var_01) {
+		if(var_03.model == "zmb_triton_ice_door_r_01") {
 			var_03 rotateyaw(-80,1);
 			continue;
 		}
@@ -902,14 +750,10 @@ open_coaster_doors(param_00)
 	}
 }
 
-//Function Number: 31
-close_coaster_doors(param_00)
-{
+close_coaster_doors(param_00) {
 	var_01 = getentarray(param_00.script_parameters,"targetname");
-	foreach(var_03 in var_01)
-	{
-		if(var_03.model == "zmb_triton_ice_door_r_01")
-		{
+	foreach(var_03 in var_01) {
+		if(var_03.model == "zmb_triton_ice_door_r_01") {
 			var_03 rotateyaw(80,1);
 			continue;
 		}
@@ -918,18 +762,14 @@ close_coaster_doors(param_00)
 	}
 }
 
-//Function Number: 32
-coaster_danger_zone(param_00)
-{
+coaster_danger_zone(param_00) {
 	var_01 = getentarray(param_00.script_parameters,"targetname");
 	earthquake(0.34,5,var_01[0].origin,500);
 	var_02 = scripts\engine\utility::getstruct("coaster_rocks","targetname");
 	playfx(level._effect["coaster_rocks"],var_02.origin);
-	for(;;)
-	{
+	for(;;) {
 		wait(1.65);
-		if(!isdefined(var_02.target))
-		{
+		if(!isdefined(var_02.target)) {
 			return;
 		}
 
@@ -939,9 +779,7 @@ coaster_danger_zone(param_00)
 	}
 }
 
-//Function Number: 33
-open_coaster_arm_gates(param_00)
-{
+open_coaster_arm_gates(param_00) {
 	wait(2.5);
 	var_01 = getent("coaster_door_4a","targetname");
 	var_02 = getent("coaster_door_4b","targetname");
@@ -954,13 +792,10 @@ open_coaster_arm_gates(param_00)
 	var_02 rotateyaw(110,0.5);
 }
 
-//Function Number: 34
-spawn_targets(param_00,param_01)
-{
+spawn_targets(param_00,param_01) {
 	var_02 = scripts\engine\utility::getstructarray(param_00,"targetname");
 	var_03 = [];
-	foreach(var_06, var_05 in var_02)
-	{
+	foreach(var_06, var_05 in var_02) {
 		var_03[var_06] = spawn("script_model",var_05.origin);
 		var_03[var_06].angles = var_05.angles;
 		var_03[var_06].struct = var_05;
@@ -969,27 +804,22 @@ spawn_targets(param_00,param_01)
 	}
 
 	level waittill("activate_" + param_00);
-	foreach(var_08 in var_03)
-	{
+	foreach(var_08 in var_03) {
 		var_08 thread target_wait_for_damage();
 		wait(0.15);
 	}
 
-	if(param_00 == "targets_group6")
-	{
+	if(param_00 == "targets_group6") {
 		level thread spawn_lasers(var_03,param_01);
 	}
 
 	level thread group_target_timeout(var_03);
 }
 
-//Function Number: 35
-spawn_lasers(param_00,param_01)
-{
+spawn_lasers(param_00,param_01) {
 	var_02 = scripts\engine\utility::getstructarray("coaster_laser_fx_spot","targetname");
 	var_03 = getentarray("coaster_laser_trigger","targetname");
-	foreach(var_05 in var_02)
-	{
+	foreach(var_05 in var_02) {
 		var_06 = spawnfx(level._effect["coaster_laser"],var_05.origin,anglestoforward(var_05.angles),anglestoup(var_05.angles));
 		scripts\engine\utility::waitframe();
 		triggerfx(var_06);
@@ -1002,49 +832,36 @@ spawn_lasers(param_00,param_01)
 	level thread laser_target_handler(var_02,param_00);
 }
 
-//Function Number: 36
-laser_timeout(param_00)
-{
+laser_timeout(param_00) {
 	param_00.trigger endon("target_shot");
 	wait(15);
 	param_00.fx delete();
 	param_00.trigger notify("target_shot");
 }
 
-//Function Number: 37
-laser_target_handler(param_00,param_01)
-{
-	foreach(var_03 in param_01)
-	{
-		if(isdefined(var_03.struct.script_noteworthy) && isdefined(var_03.struct.script_noteworthy == "laser_target"))
-		{
+laser_target_handler(param_00,param_01) {
+	foreach(var_03 in param_01) {
+		if(isdefined(var_03.struct.script_noteworthy) && isdefined(var_03.struct.script_noteworthy == "laser_target")) {
 			var_03 thread watch_laser_target_damage(param_00);
 		}
 	}
 }
 
-//Function Number: 38
-laser_damage_trigger_logic(param_00,param_01)
-{
+laser_damage_trigger_logic(param_00,param_01) {
 	param_00.trigger endon("target_shot");
-	for(;;)
-	{
+	for(;;) {
 		param_00.trigger waittill("trigger",var_02);
-		if(isplayer(var_02))
-		{
+		if(isplayer(var_02)) {
 			break;
 		}
 	}
 
-	foreach(var_04 in level.players)
-	{
-		if(!isdefined(var_04.linked_coaster) || var_04.linked_coaster != param_01)
-		{
+	foreach(var_04 in level.players) {
+		if(!isdefined(var_04.linked_coaster) || var_04.linked_coaster != param_01) {
 			continue;
 		}
 
-		if(var_04 scripts\cp\utility::has_zombie_perk("perk_machine_tough"))
-		{
+		if(var_04 scripts\cp\utility::has_zombie_perk("perk_machine_tough")) {
 			var_04 dodamage(90,var_04.origin,param_00.trigger,param_00.trigger,"MOD_EXPLOSIVE");
 		}
 		else
@@ -1060,16 +877,12 @@ laser_damage_trigger_logic(param_00,param_01)
 	param_00.trigger notify("target_shot");
 }
 
-//Function Number: 39
-watch_laser_target_damage(param_00)
-{
+watch_laser_target_damage(param_00) {
 	var_01 = scripts\engine\utility::getclosest(self.origin,param_00);
 	var_01.trigger endon("target_shot");
-	for(;;)
-	{
+	for(;;) {
 		self waittill("damage",var_02,var_03,var_04,var_05,var_06,var_07,var_08,var_09,var_0A,var_0B);
-		if(!isdefined(var_03) || !isdefined(var_0B) || !isdefined(var_03.linked_to_coaster))
-		{
+		if(!isdefined(var_03) || !isdefined(var_0B) || !isdefined(var_03.linked_to_coaster)) {
 			continue;
 		}
 
@@ -1079,12 +892,9 @@ watch_laser_target_damage(param_00)
 	}
 }
 
-//Function Number: 40
-target_wait_for_damage()
-{
+target_wait_for_damage() {
 	self endon("death");
-	if(isdefined(self.struct.script_delay))
-	{
+	if(isdefined(self.struct.script_delay)) {
 		wait(self.struct.script_delay);
 	}
 
@@ -1095,17 +905,14 @@ target_wait_for_damage()
 	self.health = 999999;
 	self setcandamage(1);
 	var_01 = 5;
-	for(;;)
-	{
+	for(;;) {
 		self waittill("damage",var_02,var_03,var_04,var_05,var_06,var_07,var_08,var_09,var_0A,var_0B);
-		if(!isdefined(var_03) || !isdefined(var_0B) || !isdefined(var_03.linked_to_coaster))
-		{
+		if(!isdefined(var_03) || !isdefined(var_0B) || !isdefined(var_03.linked_to_coaster)) {
 			continue;
 		}
 
 		self.health = 999999;
-		if(var_0B == "iw7_zm1coaster_zm")
-		{
+		if(var_0B == "iw7_zm1coaster_zm") {
 			var_03 setclientomnvar("damage_feedback_kill",1);
 			var_03 setclientomnvar("damage_feedback_notify",gettime());
 			var_03.var_11580++;
@@ -1113,8 +920,7 @@ target_wait_for_damage()
 			scripts\engine\utility::waitframe();
 			var_03 thread scripts\cp\cp_vo::try_to_play_vo("coaster_ride_shot","zmb_comment_vo","low",10,0,0,1,10);
 			var_0C = var_03.linked_coaster;
-			if(var_0C == level.roller_coasters[0])
-			{
+			if(var_0C == level.roller_coasters[0]) {
 				setomnvar("zm_coaster_score_p" + var_03.seat + "_c1",var_03.targets_hit);
 			}
 			else
@@ -1122,13 +928,11 @@ target_wait_for_damage()
 				setomnvar("zm_coaster_score_p" + var_03.seat + "_c2",var_03.targets_hit);
 			}
 
-			if(!isdefined(var_03.coaster_hi_score))
-			{
+			if(!isdefined(var_03.coaster_hi_score)) {
 				var_03.coaster_hi_score = 0;
 			}
 
-			if(var_03.targets_hit > var_03.coaster_hi_score)
-			{
+			if(var_03.targets_hit > var_03.coaster_hi_score) {
 				setomnvar("zm_coaster_hiscore_p" + int(var_03 getentitynumber() + 1),var_03.targets_hit);
 				var_03.coaster_hi_score = var_03.targets_hit;
 			}
@@ -1141,24 +945,17 @@ target_wait_for_damage()
 	}
 }
 
-//Function Number: 41
-group_target_timeout(param_00)
-{
+group_target_timeout(param_00) {
 	wait(20);
-	foreach(var_02 in param_00)
-	{
+	foreach(var_02 in param_00) {
 		var_02 delete();
 		scripts\engine\utility::waitframe();
 	}
 }
 
-//Function Number: 42
-show_player_score_tally(param_00)
-{
-	foreach(var_02 in level.players)
-	{
-		if(isdefined(var_02.linked_coaster) && var_02.linked_coaster == param_00)
-		{
+show_player_score_tally(param_00) {
+	foreach(var_02 in level.players) {
+		if(isdefined(var_02.linked_coaster) && var_02.linked_coaster == param_00) {
 			var_02 thread scripts\cp\cp_vo::try_to_play_vo("coaster_ride_sucess","zmb_comment_vo","low",10,0,0,0,50);
 			var_02 thread show_score_tally();
 			var_02 thread coaster_end_announcer_vo();
@@ -1166,12 +963,9 @@ show_player_score_tally(param_00)
 	}
 }
 
-//Function Number: 43
-show_score_tally()
-{
+show_score_tally() {
 	var_00 = 0;
-	for(var_01 = 0;var_01 < self.targets_hit;var_01++)
-	{
+	for(var_01 = 0;var_01 < self.targets_hit;var_01++) {
 		self playlocalsound("zmb_wheel_spin_tick");
 		self setclientomnvar("zombie_coaster_ticket_earned",var_01 + 1 * 10);
 		var_00++;
@@ -1180,8 +974,7 @@ show_score_tally()
 
 	self playlocalsound("zmb_ui_earn_tickets");
 	wait(0.25);
-	if(var_00 > 0 && !scripts\engine\utility::istrue(self.inlaststand))
-	{
+	if(var_00 > 0 && !scripts\engine\utility::istrue(self.inlaststand)) {
 		thread scripts\cp\cp_vo::try_to_play_vo("arcade_complete","zmb_comment_vo","low",10,0,0,0,45);
 		scripts\cp\zombies\zombie_analytics::log_finished_mini_game(1,self,level.wave_num_at_start_of_game,"coaster",0,var_00,self.pers["timesPerWave"].var_11930[level.wave_num_at_start_of_game]["coaster"]);
 	}
@@ -1190,22 +983,16 @@ show_score_tally()
 	self setclientomnvar("zombie_coaster_ticket_earned",-1);
 }
 
-//Function Number: 44
-coaster_end_announcer_vo()
-{
+coaster_end_announcer_vo() {
 	wait(2);
 	self playlocalsound("announcer_polarpeaks_finish");
 }
 
-//Function Number: 45
-coaster_dmg_trig_monitor(param_00)
-{
+coaster_dmg_trig_monitor(param_00) {
 	level endon("game_ended");
-	for(;;)
-	{
+	for(;;) {
 		param_00 waittill("trigger",var_01);
-		if(!scripts\cp\utility::should_be_affected_by_trap(var_01))
-		{
+		if(!scripts\cp\utility::should_be_affected_by_trap(var_01)) {
 			continue;
 		}
 

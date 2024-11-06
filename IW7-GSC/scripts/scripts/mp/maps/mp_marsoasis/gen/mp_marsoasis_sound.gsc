@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\mp\maps\mp_marsoasis\gen\mp_marsoasis_sound.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 1
- * Decompile Time: 116 ms
- * Timestamp: 10/27/2023 12:13:47 AM
-*******************************************************************/
+/***************************************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\mp\maps\mp_marsoasis\gen\mp_marsoasis_sound.gsc
+***************************************************************************/
 
-//Function Number: 1
-main()
-{
+main() {
 	var_00 = scripts\common\createfx::func_49E7();
 	var_00 scripts\common\createfx::func_F4AD((652.45,-802.85,719.189),(270,0,0));
 	var_00.var_13125["soundalias"] = "emt_waterfall_dist_lp";

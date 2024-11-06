@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\mp\maps\mp_rally\mp_rally_fx.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 1
- * Decompile Time: 107 ms
- * Timestamp: 10/27/2023 12:14:12 AM
-*******************************************************************/
+/************************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\mp\maps\mp_rally\mp_rally_fx.gsc
+************************************************************/
 
-//Function Number: 1
-main()
-{
+main() {
 	level._effect["vfx_bar_tailpipes"] = loadfx("vfx/iw7/levels/mp_rally/vfx_bar_tailpipes.vfx");
 	level._effect["vfx_shock_death"] = loadfx("vfx/iw7/levels/mp_rally/vfx_shock_death.vfx");
 	level._effect["vfx_elec_zaps2"] = loadfx("vfx/iw7/levels/mp_rally/vfx_elec_zaps2.vfx");

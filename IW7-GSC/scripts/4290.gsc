@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: 4290.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 1
- * Decompile Time: 67 ms
- * Timestamp: 10/27/2023 12:32:02 AM
-*******************************************************************/
+/****************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\4290.gsc
+****************************/
 
-//Function Number: 1
-main()
-{
+main() {
 	var_00 = scripts\engine\utility::createoneshoteffect("vfx_breakneck_debris_zerog");
 	var_00 scripts\common\createfx::set_origin_and_angles((-40440.9,472.976,537.079),(0,0,0));
 	var_00.v["fxid"] = "vfx_breakneck_debris_zerog";

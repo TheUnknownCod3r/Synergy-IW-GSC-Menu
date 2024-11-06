@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\cp\zombies\craftables\_fireworks_trap.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 20
- * Decompile Time: 750 ms
- * Timestamp: 10/27/2023 12:23:38 AM
-*******************************************************************/
+/*********************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\cp\crafted_trap_fireworks.gsc
+*********************************************************/
 
-//Function Number: 1
-init()
-{
+init() {
 	level.var_6DA3 = [];
 	var_00 = spawnstruct();
 	var_00.var_39B = "zmb_fireworksprojectile_mp";
@@ -33,9 +27,7 @@ init()
 	level.var_6DA3["crafted_ims"] = var_00;
 }
 
-//Function Number: 2
-give_crafted_fireworks_trap(param_00,param_01)
-{
+give_crafted_fireworks_trap(param_00,param_01) {
 	param_01 thread watch_dpad();
 	param_01 notify("new_power","crafted_ims");
 	param_01 setclientomnvar("zom_crafted_weapon",2);
@@ -43,34 +35,27 @@ give_crafted_fireworks_trap(param_00,param_01)
 	scripts\cp\utility::set_crafted_inventory_item("crafted_ims",::give_crafted_fireworks_trap,param_01);
 }
 
-//Function Number: 3
-watch_dpad()
-{
+watch_dpad() {
 	self endon("death");
 	self endon("disconnect");
 	self notify("craft_dpad_watcher");
 	self endon("craft_dpad_watcher");
 	self notifyonplayercommand("pullout_ims","+actionslot 3");
-	for(;;)
-	{
+	for(;;) {
 		self waittill("pullout_ims");
-		if(scripts\engine\utility::istrue(self.iscarrying))
-		{
+		if(scripts\engine\utility::istrue(self.iscarrying)) {
 			continue;
 		}
 
-		if(scripts\engine\utility::istrue(self.linked_to_coaster))
-		{
+		if(scripts\engine\utility::istrue(self.linked_to_coaster)) {
 			continue;
 		}
 
-		if(isdefined(self.allow_carry) && self.allow_carry == 0)
-		{
+		if(isdefined(self.allow_carry) && self.allow_carry == 0) {
 			continue;
 		}
 
-		if(scripts\cp\utility::is_valid_player())
-		{
+		if(scripts\cp\utility::is_valid_player()) {
 			break;
 		}
 	}
@@ -78,9 +63,7 @@ watch_dpad()
 	thread _meth_82CA("crafted_ims");
 }
 
-//Function Number: 4
-_meth_82CA(param_00)
-{
+_meth_82CA(param_00) {
 	self endon("disconnect");
 	scripts\cp\utility::clearlowermessage("msg_power_hint");
 	var_01 = func_48EB(param_00,self);
@@ -94,57 +77,46 @@ _meth_82CA(param_00)
 	return var_02;
 }
 
-//Function Number: 5
-func_F684(param_00,param_01,param_02)
-{
+func_F684(param_00,param_01,param_02) {
 	self endon("disconnect");
 	param_00 thread func_6DA0(self);
 	scripts\engine\utility::allow_weapon(0);
 	self notifyonplayercommand("place_ims","+attack");
 	self notifyonplayercommand("place_ims","+attack_akimbo_accessible");
 	self notifyonplayercommand("cancel_ims","+actionslot 3");
-	if(!level.console)
-	{
+	if(!level.console) {
 		self notifyonplayercommand("cancel_ims","+actionslot 5");
 		self notifyonplayercommand("cancel_ims","+actionslot 6");
 		self notifyonplayercommand("cancel_ims","+actionslot 7");
 	}
 
-	for(;;)
-	{
+	for(;;) {
 		var_03 = scripts\engine\utility::waittill_any_return("place_ims","cancel_ims","force_cancel_placement","player_action_slot_restart");
-		if(!isdefined(var_03))
-		{
+		if(!isdefined(var_03)) {
 			var_03 = "force_cancel_placement";
 		}
 
-		if(var_03 == "cancel_ims" || var_03 == "force_cancel_placement" || var_03 == "player_action_slot_restart")
-		{
-			if(!param_01 && var_03 == "cancel_ims")
-			{
+		if(var_03 == "cancel_ims" || var_03 == "force_cancel_placement" || var_03 == "player_action_slot_restart") {
+			if(!param_01 && var_03 == "cancel_ims") {
 				continue;
 			}
 
 			param_00 func_6D9F(var_03 == "force_cancel_placement" && !isdefined(param_00.firstplacement));
-			if(var_03 != "force_cancel_placement")
-			{
+			if(var_03 != "force_cancel_placement") {
 				thread watch_dpad();
 			}
-			else if(param_01)
-			{
+			else if(param_01) {
 				scripts\cp\utility::remove_crafted_item_from_inventory(self);
 			}
 
 			return 0;
 		}
 
-		if(!param_00.canbeplaced)
-		{
+		if(!param_00.canbeplaced) {
 			continue;
 		}
 
-		if(param_01)
-		{
+		if(param_01) {
 			scripts\cp\utility::remove_crafted_item_from_inventory(self);
 		}
 
@@ -155,11 +127,8 @@ func_F684(param_00,param_01,param_02)
 	}
 }
 
-//Function Number: 6
-func_48EB(param_00,param_01)
-{
-	if(isdefined(param_01.iscarrying) && param_01.iscarrying)
-	{
+func_48EB(param_00,param_01) {
+	if(isdefined(param_01.iscarrying) && param_01.iscarrying) {
 		return;
 	}
 
@@ -178,9 +147,7 @@ func_48EB(param_00,param_01)
 	return var_02;
 }
 
-//Function Number: 7
-func_48EA(param_00,param_01)
-{
+func_48EA(param_00,param_01) {
 	var_02 = param_00.triggerportableradarping;
 	var_03 = param_00.var_6DA4;
 	var_04 = spawn("script_model",param_00.origin + (0,0,1));
@@ -198,8 +165,7 @@ func_48EA(param_00,param_01)
 	var_04.var_8BF0 = [];
 	var_04.config = level.var_6DA3[var_03];
 	var_04 thread func_6D9D();
-	if(isdefined(param_01))
-	{
+	if(isdefined(param_01)) {
 		var_04 thread scripts\cp\utility::item_timeout(param_01);
 	}
 	else
@@ -210,26 +176,20 @@ func_48EA(param_00,param_01)
 	return var_04;
 }
 
-//Function Number: 8
-func_936D(param_00)
-{
+func_936D(param_00) {
 	self.var_933C = 1;
 	self notify("death");
 }
 
-//Function Number: 9
-func_9367(param_00)
-{
+func_9367(param_00) {
 	self endon("carried");
 	self waittill("death");
-	if(!isdefined(self))
-	{
+	if(!isdefined(self)) {
 		return;
 	}
 
 	func_6DA1();
-	if(isdefined(self.inuseby))
-	{
+	if(isdefined(self.inuseby)) {
 		self.inuseby scripts\cp\utility::restore_player_perk();
 		self notify("deleting");
 		wait(1);
@@ -239,42 +199,33 @@ func_9367(param_00)
 	self delete();
 }
 
-//Function Number: 10
-func_66A7()
-{
+func_66A7() {
 	self setscriptablepartstate("base","explode");
 	wait(0.5);
 	radiusdamage(self.origin + (0,0,40),200,500,250,self,"MOD_EXPLOSIVE","zmb_imsprojectile_mp");
 	wait(0.65);
 }
 
-//Function Number: 11
-func_6D9D()
-{
+func_6D9D() {
 	self endon("death");
 	level endon("game_ended");
-	for(;;)
-	{
+	for(;;) {
 		self waittill("trigger",var_00);
-		if(!var_00 scripts\cp\utility::is_valid_player())
-		{
+		if(!var_00 scripts\cp\utility::is_valid_player()) {
 			continue;
 		}
 
-		if(scripts\engine\utility::istrue(var_00.iscarrying))
-		{
+		if(scripts\engine\utility::istrue(var_00.iscarrying)) {
 			continue;
 		}
 
 		var_01 = func_48EB(self.var_6DA4,var_00);
-		if(!isdefined(var_01))
-		{
+		if(!isdefined(var_01)) {
 			continue;
 		}
 
 		func_6DA1();
-		if(isdefined(self getlinkedparent()))
-		{
+		if(isdefined(self getlinkedparent())) {
 			self unlink();
 		}
 
@@ -284,19 +235,15 @@ func_6D9D()
 	}
 }
 
-//Function Number: 12
-func_6DA2(param_00)
-{
+func_6DA2(param_00) {
 	self endon("death");
 	level endon("game_ended");
-	if(isdefined(self.carriedby))
-	{
+	if(isdefined(self.carriedby)) {
 		self.carriedby getrigindexfromarchetyperef();
 	}
 
 	self.carriedby = undefined;
-	if(isdefined(self.triggerportableradarping))
-	{
+	if(isdefined(self.triggerportableradarping)) {
 		self.triggerportableradarping.iscarrying = 0;
 	}
 
@@ -308,8 +255,7 @@ func_6DA2(param_00)
 	self notify("placed");
 	var_01 thread func_6D9E();
 	var_02 = spawnstruct();
-	if(isdefined(self.moving_platform))
-	{
+	if(isdefined(self.moving_platform)) {
 		var_02.linkparent = self.moving_platform;
 	}
 
@@ -320,11 +266,8 @@ func_6DA2(param_00)
 	self delete();
 }
 
-//Function Number: 13
-func_6D9F(param_00)
-{
-	if(isdefined(self.carriedby))
-	{
+func_6D9F(param_00) {
+	if(isdefined(self.carriedby)) {
 		var_01 = self.carriedby;
 		var_01 getrigindexfromarchetyperef();
 		var_01.iscarrying = undefined;
@@ -332,8 +275,7 @@ func_6D9F(param_00)
 		var_01 scripts\engine\utility::allow_weapon(1);
 	}
 
-	if(isdefined(param_00) && param_00)
-	{
+	if(isdefined(param_00) && param_00) {
 		func_66A7();
 	}
 
@@ -341,9 +283,7 @@ func_6D9F(param_00)
 	self delete();
 }
 
-//Function Number: 14
-func_6DA0(param_00)
-{
+func_6DA0(param_00) {
 	self setsentrycarrier(param_00);
 	self setcontents(0);
 	self setcandamage(0);
@@ -353,17 +293,14 @@ func_6DA0(param_00)
 	thread scripts\cp\utility::item_oncarrierdeath(param_00);
 	thread func_936F(param_00);
 	thread func_9371(param_00);
-	if(isdefined(level.var_5CF2))
-	{
-		self thread [[ level.var_5CF2 ]](param_00);
+	if(isdefined(level.var_5CF2)) {
+		self thread [[level.var_5CF2]](param_00);
 	}
 
 	self notify("carried");
 }
 
-//Function Number: 15
-func_936F(param_00)
-{
+func_936F(param_00) {
 	self endon("placed");
 	self endon("death");
 	param_00 endon("last_stand");
@@ -371,9 +308,7 @@ func_936F(param_00)
 	func_6D9F();
 }
 
-//Function Number: 16
-func_9371(param_00)
-{
+func_9371(param_00) {
 	self endon("placed");
 	self endon("death");
 	param_00 endon("last_stand");
@@ -381,9 +316,7 @@ func_9371(param_00)
 	func_6D9F();
 }
 
-//Function Number: 17
-func_6D9E()
-{
+func_6D9E() {
 	self endon("death");
 	self setcursorhint("HINT_NOICON");
 	self sethintstring(level.var_6DA3[self.var_6DA4].pow);
@@ -401,12 +334,10 @@ func_6D9E()
 	var_05 = bullettrace(var_04,var_04 + var_02,0,self);
 	var_06 = var_05;
 	self.var_2514 = var_06["position"] - (0,0,20) - self.origin;
-	if(self.var_2514[2] < 250)
-	{
+	if(self.var_2514[2] < 250) {
 		self.var_AA7B = "launch_low";
 	}
-	else if(self.var_2514[2] < 450)
-	{
+	else if(self.var_2514[2] < 450) {
 		self.var_AA7B = "launch_med";
 	}
 	else
@@ -425,17 +356,13 @@ func_6D9E()
 	thread scripts\cp\utility::item_handleownerdisconnect("fireworks_disconnect");
 }
 
-//Function Number: 18
-func_6DA1()
-{
+func_6DA1() {
 	self makeunusable();
-	if(isdefined(self.var_2536))
-	{
+	if(isdefined(self.var_2536)) {
 		self.var_2536 delete();
 	}
 
-	if(isdefined(self.var_69F6))
-	{
+	if(isdefined(self.var_69F6)) {
 		self.var_69F6 delete();
 		self.var_69F6 = undefined;
 	}
@@ -443,44 +370,35 @@ func_6DA1()
 	scripts\cp\utility::removefromtraplist();
 }
 
-//Function Number: 19
-func_6D9C()
-{
+func_6D9C() {
 	self endon("death");
 	level endon("game_ended");
-	for(;;)
-	{
-		if(!isdefined(self.var_2536))
-		{
+	for(;;) {
+		if(!isdefined(self.var_2536)) {
 			break;
 		}
 
 		self.var_2536 waittill("trigger",var_00);
-		if(isplayer(var_00) || isdefined(var_00.pet) || isdefined(var_00.agent_type) && var_00.agent_type == "the_hoff")
-		{
+		if(isplayer(var_00) || isdefined(var_00.pet) || isdefined(var_00.agent_type) && var_00.agent_type == "the_hoff") {
 			continue;
 		}
 
 		var_01 = var_00.origin + (0,0,50);
-		if(!sighttracepassed(self.var_2514 + self.origin,var_01,0,self))
-		{
+		if(!sighttracepassed(self.var_2514 + self.origin,var_01,0,self)) {
 			continue;
 		}
 
-		if(!isdefined(self.var_2536))
-		{
+		if(!isdefined(self.var_2536)) {
 			break;
 		}
 
-		if(!isdefined(self.var_8BF0[self.var_252E]))
-		{
+		if(!isdefined(self.var_8BF0[self.var_252E])) {
 			self.var_8BF0[self.var_252E] = 1;
 			thread func_AA75(var_00,self.var_252E);
 			self.var_252E++;
 		}
 
-		if(self.var_252E > self.config.var_C228)
-		{
+		if(self.var_252E > self.config.var_C228) {
 			self setscriptablepartstate("firework","off");
 			break;
 		}
@@ -488,23 +406,19 @@ func_6D9C()
 		self waittill("firework_exploded");
 		self setscriptablepartstate("firework","off");
 		wait(self.config.var_DDAC);
-		if(!isdefined(self.triggerportableradarping))
-		{
+		if(!isdefined(self.triggerportableradarping)) {
 			break;
 		}
 	}
 
-	if(isdefined(self.carriedby) && isdefined(self.triggerportableradarping) && self.carriedby == self.triggerportableradarping)
-	{
+	if(isdefined(self.carriedby) && isdefined(self.triggerportableradarping) && self.carriedby == self.triggerportableradarping) {
 		return;
 	}
 
 	self notify("death");
 }
 
-//Function Number: 20
-func_AA75(param_00,param_01)
-{
+func_AA75(param_00,param_01) {
 	self setscriptablepartstate("firework",self.var_AA7B);
 	var_02 = spawn("script_model",self.origin);
 	var_02 setmodel(self.config.var_6A03);
@@ -516,8 +430,7 @@ func_AA75(param_00,param_01)
 	var_02 waittill("movedone");
 	var_02 setscriptablepartstate("rocket","explode");
 	wait(0.1);
-	if(isdefined(var_04))
-	{
+	if(isdefined(var_04)) {
 		magicbullet(var_03,var_02.origin,param_00.origin,var_04);
 	}
 	else

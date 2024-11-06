@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: 3989.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 1
- * Decompile Time: 0 ms
- * Timestamp: 10/27/2023 12:31:54 AM
-*******************************************************************/
+/****************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\3989.gsc
+****************************/
 
-//Function Number: 1
-main()
-{
+main() {
 	level._effect["vfx_dome_robotarm_sparks"] = loadfx("vfx/iw7/levels/mp_dome_iw/vfx_dome_robotarm_sparks.vfx");
 	level._effect["vfx_dome_fountain_ripples_sml"] = loadfx("vfx/iw7/levels/mp_dome_iw/vfx_dome_fountain_ripples_sml.vfx");
 	level._effect["vfx_dome_leaves_drift"] = loadfx("vfx/iw7/levels/mp_dome_iw/vfx_dome_leaves_drift.vfx");

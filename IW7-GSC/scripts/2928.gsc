@@ -1,18 +1,11 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: 2928.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 2
- * Decompile Time: 0 ms
- * Timestamp: 10/27/2023 12:24:56 AM
-*******************************************************************/
+/****************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\2928.gsc
+****************************/
 
-//Function Number: 1
-func_1032A()
-{
-	if(!scripts\engine\utility::add_init_script("slowmo",::func_1032A))
-	{
+func_1032A() {
+	if(!scripts\engine\utility::add_init_script("slowmo",::func_1032A)) {
 		return;
 	}
 
@@ -23,9 +16,7 @@ func_1032A()
 	function_014C("_cheat_player_press_slowmo","+melee_zoom");
 }
 
-//Function Number: 2
-func_10329()
-{
+func_10329() {
 	level.var_1031B.var_ABA1 = 0;
 	level.var_1031B.var_ABA2 = 0.25;
 	level.var_1031B.var_1098F = 0.4;

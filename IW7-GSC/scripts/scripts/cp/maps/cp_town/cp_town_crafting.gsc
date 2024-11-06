@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\cp\maps\cp_town\cp_town_crafting.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 24
- * Decompile Time: 1270 ms
- * Timestamp: 10/27/2023 12:07:15 AM
-*******************************************************************/
+/****************************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\cp\maps\cp_town\cp_town_crafting.gsc
+****************************************************************/
 
-//Function Number: 1
-register_crafting()
-{
+register_crafting() {
 	level.interaction_hintstrings["crafting_station"] = &"CP_TOWN_INTERACTIONS_CRAFTING_MISSING_BLUEPRINT";
 	level.interaction_hintstrings["crafting_station_add_part"] = &"CP_TOWN_INTERACTIONS_ADD_PART";
 	level.interaction_hintstrings["crafting_station_add_blueprint"] = &"CP_TOWN_INTERACTIONS_ADD_BLUEPRINT";
@@ -37,9 +31,7 @@ register_crafting()
 	level.interactions["create_chemistry_set"].disable_guided_interactions = 1;
 }
 
-//Function Number: 2
-init_crafting()
-{
+init_crafting() {
 	level.placed_crafted_traps = [];
 	level.crafting_icon_create_func = ::create_player_crafting_item_icon;
 	init_crafting_pieces();
@@ -47,33 +39,25 @@ init_crafting()
 	level thread setup_crafting_stations();
 }
 
-//Function Number: 3
-setup_crafting_stations()
-{
+setup_crafting_stations() {
 	wait(15);
 	var_00 = scripts\engine\utility::getstructarray("crafting_station","script_noteworthy");
-	foreach(var_02 in var_00)
-	{
+	foreach(var_02 in var_00) {
 		var_03 = getent(var_02.target,"targetname");
 		var_03 setscriptablepartstate("crafting_bench","off");
 	}
 }
 
-//Function Number: 4
-init_crafting_pieces()
-{
+init_crafting_pieces() {
 	level.crafting_pieces = [];
 	var_00 = scripts\engine\utility::getstructarray("crafting_piece","script_noteworthy");
-	foreach(var_02 in var_00)
-	{
+	foreach(var_02 in var_00) {
 		var_03 = strtok(var_02.name,"_");
-		if(!isdefined(level.crafting_pieces[var_03[0]]))
-		{
+		if(!isdefined(level.crafting_pieces[var_03[0]])) {
 			level.crafting_pieces[var_03[0]] = [];
 		}
 
-		if(!isdefined(level.crafting_pieces[var_03[0]][var_03[1]]))
-		{
+		if(!isdefined(level.crafting_pieces[var_03[0]][var_03[1]])) {
 			level.crafting_pieces[var_03[0]][var_03[1]] = [];
 		}
 
@@ -89,9 +73,7 @@ init_crafting_pieces()
 	spawn_crafting_pieces("hypnosis","bulbs","cage","radio");
 }
 
-//Function Number: 5
-spawn_crafting_pieces(param_00,param_01,param_02,param_03)
-{
+spawn_crafting_pieces(param_00,param_01,param_02,param_03) {
 	var_04 = scripts\engine\utility::random(level.crafting_pieces[param_00][param_01]);
 	var_05 = scripts\engine\utility::random(level.crafting_pieces[param_00][param_02]);
 	var_06 = scripts\engine\utility::random(level.crafting_pieces[param_00][param_03]);
@@ -100,25 +82,19 @@ spawn_crafting_pieces(param_00,param_01,param_02,param_03)
 	spawn_crafting_piece(var_06);
 }
 
-//Function Number: 6
-spawn_crafting_piece(param_00)
-{
+spawn_crafting_piece(param_00) {
 	param_00.randomintrange = spawn("script_model",param_00.part_location_struct.origin);
 	param_00.randomintrange setmodel(param_00.part_model);
-	if(isdefined(param_00.part_location_struct.angles))
-	{
+	if(isdefined(param_00.part_location_struct.angles)) {
 		param_00.randomintrange.angles = param_00.part_location_struct.angles;
 	}
 
-	if(param_00.part_model == "cp_town_seismic_wave_device_leg")
-	{
+	if(param_00.part_model == "cp_town_seismic_wave_device_leg") {
 		param_00.randomintrange.origin = param_00.randomintrange.origin + (15,-1,6.2);
 	}
 }
 
-//Function Number: 7
-init_crafting_blueprints()
-{
+init_crafting_blueprints() {
 	var_00 = scripts\engine\utility::getstructarray("violetray_blueprint","script_noteworthy");
 	var_01 = scripts\engine\utility::getstructarray("seismic_blueprint","script_noteworthy");
 	var_02 = scripts\engine\utility::getstructarray("mindcontrol_blueprint","script_noteworthy");
@@ -129,9 +105,7 @@ init_crafting_blueprints()
 	spawn_crafting_blueprint(var_03,"cp_town_blueprint_hypnosis_roll");
 }
 
-//Function Number: 8
-spawn_crafting_blueprint(param_00,param_01)
-{
+spawn_crafting_blueprint(param_00,param_01) {
 	var_02 = scripts\engine\utility::random(param_00);
 	var_03 = spawn("script_model",scripts\engine\utility::getstruct(var_02.target,"targetname").origin);
 	var_03 setmodel(param_01);
@@ -139,16 +113,12 @@ spawn_crafting_blueprint(param_00,param_01)
 	var_02.blueprintmodel = var_03;
 }
 
-//Function Number: 9
-use_crafting_station(param_00,param_01)
-{
-	if(isdefined(param_00.parts_added) && param_00.parts_added == 3)
-	{
+use_crafting_station(param_00,param_01) {
+	if(isdefined(param_00.parts_added) && param_00.parts_added == 3) {
 		param_01 thread scripts\cp\utility::usegrenadegesture(param_01,"iw7_pickup_zm");
 		param_01 give_crafted_item(param_00.active_blueprint,param_00);
 		crafting_cooldown(param_00);
-		switch(param_00.active_blueprint)
-		{
+		switch(param_00.active_blueprint) {
 			case "violetray":
 				show_crafted_item(param_01,param_00,"crafted_violetray",0);
 				break;
@@ -173,15 +143,13 @@ use_crafting_station(param_00,param_01)
 		return;
 	}
 
-	if(!scripts\engine\utility::istrue(param_00.blueprint_added) && !isdefined(param_01.has_blueprint))
-	{
+	if(!scripts\engine\utility::istrue(param_00.blueprint_added) && !isdefined(param_01.has_blueprint)) {
 		param_01 thread scripts\cp\cp_vo::try_to_play_vo("missing_item_misc","town_comment_vo");
 		param_01 playlocalsound("perk_machine_deny");
 		return;
 	}
 
-	if(!scripts\engine\utility::istrue(param_00.blueprint_added) && isdefined(param_01.has_blueprint))
-	{
+	if(!scripts\engine\utility::istrue(param_00.blueprint_added) && isdefined(param_01.has_blueprint)) {
 		param_01 scripts\cp\utility::play_interaction_gesture("iw7_souvenircoin_zm");
 		param_00.blueprint_added = 1;
 		param_00.var_113AF = getent(param_00.target,"targetname");
@@ -192,8 +160,7 @@ use_crafting_station(param_00,param_01)
 		param_01 playlocalsound("zmb_item_pickup");
 		param_00.parts_added = 0;
 		var_02 = undefined;
-		switch(param_00.active_blueprint)
-		{
+		switch(param_00.active_blueprint) {
 			case "seismic":
 				var_02 = "cp_town_blueprint_seismic_wave";
 				break;
@@ -221,41 +188,32 @@ use_crafting_station(param_00,param_01)
 		param_01 setclientomnvar("zm_hud_inventory_1",0);
 		param_01 notify("reset_blueprint_on_disconnect");
 		var_03 = scripts\engine\utility::getstructarray("fan_sound","targetname");
-		if(var_03.size > 0)
-		{
+		if(var_03.size > 0) {
 			var_04 = scripts\engine\utility::getclosest(param_01.origin,var_03);
 			level thread scripts\engine\utility::play_loopsound_in_space("town_fan_lp",var_04.origin);
 		}
 	}
 
-	if(scripts\engine\utility::istrue(param_00.blueprint_added) && isdefined(param_01.crafting_piece))
-	{
-		if(is_valid_crafting_piece(param_01,param_00))
-		{
+	if(scripts\engine\utility::istrue(param_00.blueprint_added) && isdefined(param_01.crafting_piece)) {
+		if(is_valid_crafting_piece(param_01,param_00)) {
 			param_01 scripts\cp\utility::play_interaction_gesture("iw7_souvenircoin_zm");
 			var_05 = scripts\engine\utility::getstructarray(param_00.target,"targetname");
-			foreach(var_07 in var_05)
-			{
-				if(param_01.crafting_piece == var_07.name)
-				{
-					if(!isdefined(param_00.added_parts))
-					{
+			foreach(var_07 in var_05) {
+				if(param_01.crafting_piece == var_07.name) {
+					if(!isdefined(param_00.added_parts)) {
 						param_00.added_parts = [];
 					}
 
 					var_08 = spawn("script_model",var_07.origin);
 					var_08.angles = var_07.angles;
-					if(isdefined(var_07.script_noteworthy))
-					{
+					if(isdefined(var_07.script_noteworthy)) {
 						var_08 setmodel(var_07.script_noteworthy);
 					}
-					else if(isdefined(var_07.script_parameters))
-					{
+					else if(isdefined(var_07.script_parameters)) {
 						var_08 setmodel(var_07.script_parameters);
 					}
 
-					if(var_08.model == "cp_town_seismic_wave_device_leg")
-					{
+					if(var_08.model == "cp_town_seismic_wave_device_leg") {
 						var_08.angles = var_08.angles + (0,-100,0);
 					}
 
@@ -270,19 +228,15 @@ use_crafting_station(param_00,param_01)
 			param_01 notify("reset_crafting_on_disconnect");
 			param_01 setclientomnvar("zombie_souvenir_piece_index",0);
 			param_00.parts_added++;
-			if(param_00.parts_added == 3)
-			{
-				if(isdefined(param_00.added_parts))
-				{
-					foreach(var_0B in param_00.added_parts)
-					{
+			if(param_00.parts_added == 3) {
+				if(isdefined(param_00.added_parts)) {
+					foreach(var_0B in param_00.added_parts) {
 						var_0B delete();
 					}
 				}
 
 				param_01 scripts\cp\cp_merits::processmerit("mt_used_crafting");
-				switch(param_00.active_blueprint)
-				{
+				switch(param_00.active_blueprint) {
 					case "violetray":
 						show_crafted_item(param_01,param_00,"crafted_violetray",1);
 						break;
@@ -315,21 +269,15 @@ use_crafting_station(param_00,param_01)
 	}
 }
 
-//Function Number: 10
-use_crafting_station_chem_set(param_00,param_01)
-{
-	if(!isdefined(param_00.parts_added))
-	{
+use_crafting_station_chem_set(param_00,param_01) {
+	if(!isdefined(param_00.parts_added)) {
 		param_00.parts_added = 0;
 	}
 
-	if(isdefined(level.chem_pieces) && level.chem_pieces.size > param_00.parts_added)
-	{
-		foreach(var_03 in level.chem_pieces)
-		{
+	if(isdefined(level.chem_pieces) && level.chem_pieces.size > param_00.parts_added) {
+		foreach(var_03 in level.chem_pieces) {
 			var_04 = "";
-			switch(var_03)
-			{
+			switch(var_03) {
 				case "chem_beaker":
 					var_04 = "bong";
 					level scripts\cp\utility::set_completed_quest_mark(6);
@@ -351,21 +299,18 @@ use_crafting_station_chem_set(param_00,param_01)
 
 		param_00.parts_added = level.chem_pieces.size;
 		playsoundatpos(param_00.origin,"chemistry_placement");
-		if(param_00.parts_added == 3)
-		{
+		if(param_00.parts_added == 3) {
 			level.crafted_chem_set = 1;
 			level.computer_model setscriptablepartstate("screen","on");
 			level.computer_model setscriptablepartstate("yellowlight","on");
 			scripts\engine\utility::flag_set("chemistry_step1");
 			param_01 thread scripts\cp\cp_vo::try_to_play_vo("key_phase_2_success_chemistry","town_comment_vo");
-			foreach(var_07 in level.chemical_containers)
-			{
+			foreach(var_07 in level.chemical_containers) {
 				playfx(level._effect["generic_pickup"],var_07.origin);
 				var_07.model show();
 			}
 
-			foreach(var_0A in level.chemical_compounds_created)
-			{
+			foreach(var_0A in level.chemical_compounds_created) {
 				playfx(level._effect["generic_pickup"],var_0A.interaction.origin);
 				var_0A.interaction.model show();
 			}
@@ -382,39 +327,28 @@ use_crafting_station_chem_set(param_00,param_01)
 	var_0B playlocalsound("perk_machine_deny");
 }
 
-//Function Number: 11
-give_chem_item_debug(param_00,param_01)
-{
-	foreach(var_03 in level.players)
-	{
+give_chem_item_debug(param_00,param_01) {
+	foreach(var_03 in level.players) {
 		var_03.crafting_piece = param_00;
 	}
 
 	level scripts\cp\utility::set_quest_icon(param_01);
 }
 
-//Function Number: 12
-show_chem_parts_based_on_found_piece(param_00)
-{
-	foreach(var_02 in level.chemistry_set_parts)
-	{
-		if(!isdefined(var_02.var_336))
-		{
-			if(level.chem_pieces.size == 2)
-			{
+show_chem_parts_based_on_found_piece(param_00) {
+	foreach(var_02 in level.chemistry_set_parts) {
+		if(!isdefined(var_02.var_336)) {
+			if(level.chem_pieces.size == 2) {
 				var_02 show();
 			}
 
 			continue;
 		}
 
-		if(issubstr(var_02.var_336,param_00))
-		{
-			if(param_00 == "chem_computer")
-			{
+		if(issubstr(var_02.var_336,param_00)) {
+			if(param_00 == "chem_computer") {
 				level.computer_model = var_02;
-				foreach(var_04 in level.h_p_button_objects)
-				{
+				foreach(var_04 in level.h_p_button_objects) {
 					playfx(level._effect["generic_pickup"],var_04.origin);
 					var_04.model show();
 				}
@@ -426,12 +360,9 @@ show_chem_parts_based_on_found_piece(param_00)
 	}
 }
 
-//Function Number: 13
-show_crafted_item(param_00,param_01,param_02,param_03)
-{
+show_crafted_item(param_00,param_01,param_02,param_03) {
 	param_00 scripts\cp\cp_interaction::refresh_interaction();
-	if(scripts\engine\utility::istrue(param_03))
-	{
+	if(scripts\engine\utility::istrue(param_03)) {
 		param_00 playlocalsound("town_craft_magic");
 	}
 
@@ -442,27 +373,20 @@ show_crafted_item(param_00,param_01,param_02,param_03)
 	triggerfx(param_01.crafting_fx);
 }
 
-//Function Number: 14
-is_valid_crafting_piece(param_00,param_01)
-{
+is_valid_crafting_piece(param_00,param_01) {
 	var_02 = strtok(param_00.crafting_piece,"_");
-	if(var_02[0] == param_01.active_blueprint)
-	{
+	if(var_02[0] == param_01.active_blueprint) {
 		return 1;
 	}
 
 	return 0;
 }
 
-//Function Number: 15
-create_player_crafting_item_icon()
-{
+create_player_crafting_item_icon() {
 	self setclientomnvar("zombie_souvenir_piece_index",1);
 }
 
-//Function Number: 16
-pickup_crafting_piece(param_00,param_01)
-{
+pickup_crafting_piece(param_00,param_01) {
 	param_01 playlocalsound("part_pickup");
 	param_01 thread scripts\cp\utility::usegrenadegesture(param_01,"iw7_pickup_zm");
 	param_01 thread scripts\cp\cp_vo::try_to_play_vo("collect_craft_misc","town_comment_vo");
@@ -470,17 +394,14 @@ pickup_crafting_piece(param_00,param_01)
 	param_00.randomintrange hide();
 	param_00.randomintrange.hidden = 1;
 	scripts\cp\cp_interaction::remove_from_current_interaction_list(param_00);
-	if(is_chem_piece(param_00))
-	{
-		if(!isdefined(level.chem_pieces))
-		{
+	if(is_chem_piece(param_00)) {
+		if(!isdefined(level.chem_pieces)) {
 			level.chem_pieces = [];
 		}
 
 		level.chem_pieces = scripts\engine\utility::array_add_safe(level.chem_pieces,param_00.name);
 		var_02 = 0;
-		switch(param_00.name)
-		{
+		switch(param_00.name) {
 			case "chem_beaker":
 				var_02 = 12;
 				break;
@@ -498,8 +419,7 @@ pickup_crafting_piece(param_00,param_01)
 		return;
 	}
 
-	if(isdefined(var_02.crafting_piece))
-	{
+	if(isdefined(var_02.crafting_piece)) {
 		var_02 notify("bad_part");
 		wait(0.05);
 	}
@@ -507,8 +427,7 @@ pickup_crafting_piece(param_00,param_01)
 	var_02.crafting_piece = param_01.name;
 	var_02.crafting_interaction = param_01;
 	var_02 = 0;
-	switch(param_00.name)
-	{
+	switch(param_00.name) {
 		case "violetray_shifter":
 			var_02 = 12;
 			break;
@@ -562,20 +481,15 @@ pickup_crafting_piece(param_00,param_01)
 	param_01 thread reset_crafting_piece_on_disconnect_or_bad_part();
 }
 
-//Function Number: 17
-is_chem_piece(param_00)
-{
-	if(issubstr(param_00.name,"chem"))
-	{
+is_chem_piece(param_00) {
+	if(issubstr(param_00.name,"chem")) {
 		return 1;
 	}
 
 	return 0;
 }
 
-//Function Number: 18
-reset_crafting_piece_on_disconnect_or_bad_part()
-{
+reset_crafting_piece_on_disconnect_or_bad_part() {
 	self notify("reset_crafting_on_disconnect");
 	self endon("reset_crafting_on_disconnect");
 	var_00 = self.crafting_interaction;
@@ -583,17 +497,14 @@ reset_crafting_piece_on_disconnect_or_bad_part()
 	var_00.randomintrange show();
 	var_00.randomintrange.hidden = undefined;
 	scripts\cp\cp_interaction::add_to_current_interaction_list(var_00);
-	if(isdefined(var_01) && var_01 == "bad_part")
-	{
+	if(isdefined(var_01) && var_01 == "bad_part") {
 		self.crafting_interaction = undefined;
 		self.crafting_piece = undefined;
 		self setclientomnvar("zombie_souvenir_piece_index",0);
 	}
 }
 
-//Function Number: 19
-reset_blueprint_on_disconnect()
-{
+reset_blueprint_on_disconnect() {
 	self notify("reset_blueprint_on_disconnect");
 	self endon("reset_blueprint_on_disconnect");
 	var_00 = self.blueprint_interaction;
@@ -602,41 +513,30 @@ reset_blueprint_on_disconnect()
 	scripts\cp\cp_interaction::add_to_current_interaction_list(var_00);
 }
 
-//Function Number: 20
-crafting_station_chem_hint(param_00,param_01)
-{
-	if(!isdefined(param_00.parts_added))
-	{
+crafting_station_chem_hint(param_00,param_01) {
+	if(!isdefined(param_00.parts_added)) {
 		param_00.parts_added = 0;
 	}
 
-	if(isdefined(level.chem_pieces) && level.chem_pieces.size > param_00.parts_added)
-	{
+	if(isdefined(level.chem_pieces) && level.chem_pieces.size > param_00.parts_added) {
 		return level.interaction_hintstrings["crafting_station_add_part"];
 	}
 
 	return "";
 }
 
-//Function Number: 21
-crafting_station_hint(param_00,param_01)
-{
-	if(scripts\engine\utility::istrue(param_00.cooling_down))
-	{
+crafting_station_hint(param_00,param_01) {
+	if(scripts\engine\utility::istrue(param_00.cooling_down)) {
 		return &"COOP_INTERACTIONS_COOLDOWN";
 	}
 
-	if(scripts\engine\utility::istrue(param_00.blueprint_added))
-	{
-		if(isdefined(param_01.crafting_piece) && is_valid_crafting_piece(param_01,param_00))
-		{
+	if(scripts\engine\utility::istrue(param_00.blueprint_added)) {
+		if(isdefined(param_01.crafting_piece) && is_valid_crafting_piece(param_01,param_00)) {
 			return level.interaction_hintstrings["crafting_station_add_part"];
 		}
 
-		if(isdefined(param_00.parts_added) && param_00.parts_added == 3)
-		{
-			switch(param_00.active_blueprint)
-			{
+		if(isdefined(param_00.parts_added) && param_00.parts_added == 3) {
+			switch(param_00.active_blueprint) {
 				case "violetray":
 					return &"CP_TOWN_INTERACTIONS_TAKE_VIOLETRAY";
 
@@ -659,19 +559,15 @@ crafting_station_hint(param_00,param_01)
 		return "";
 	}
 
-	if(!isdefined(param_01.has_blueprint))
-	{
+	if(!isdefined(param_01.has_blueprint)) {
 		return &"CP_TOWN_INTERACTIONS_CRAFTING_MISSING_BLUEPRINT";
 	}
 
 	return level.interaction_hintstrings["crafting_station_add_blueprint"];
 }
 
-//Function Number: 22
-pickup_crafting_blueprint(param_00,param_01)
-{
-	if(isdefined(param_01.has_blueprint))
-	{
+pickup_crafting_blueprint(param_00,param_01) {
+	if(isdefined(param_01.has_blueprint)) {
 		param_01.has_blueprint = undefined;
 		param_01.blueprint_interaction.blueprintmodel show();
 		playfx(level._effect["generic_pickup"],param_01.blueprint_interaction.blueprintmodel.origin);
@@ -686,8 +582,7 @@ pickup_crafting_blueprint(param_00,param_01)
 	param_01.blueprint_interaction = param_00;
 	scripts\cp\cp_interaction::remove_from_current_interaction_list(param_00);
 	param_00.blueprintmodel hide();
-	switch(param_00.name)
-	{
+	switch(param_00.name) {
 		case "seismic":
 			param_01 setclientomnvar("zm_hud_inventory_1",3);
 			break;
@@ -709,19 +604,15 @@ pickup_crafting_blueprint(param_00,param_01)
 	param_01 thread reset_blueprint_on_disconnect();
 }
 
-//Function Number: 23
-crafting_cooldown(param_00)
-{
+crafting_cooldown(param_00) {
 	param_00.cooling_down = 1;
 	level scripts\engine\utility::waittill_any_return("regular_wave_starting","event_wave_starting");
 	wait(1);
 	level scripts\engine\utility::waittill_any_return("regular_wave_starting","event_wave_starting");
 	param_00.cooling_down = undefined;
 	var_01 = 5184;
-	foreach(var_03 in level.players)
-	{
-		if(distancesquared(var_03.origin,param_00.origin) >= var_01)
-		{
+	foreach(var_03 in level.players) {
+		if(distancesquared(var_03.origin,param_00.origin) >= var_01) {
 			continue;
 		}
 
@@ -729,11 +620,8 @@ crafting_cooldown(param_00)
 	}
 }
 
-//Function Number: 24
-give_crafted_item(param_00,param_01)
-{
-	switch(param_00)
-	{
+give_crafted_item(param_00,param_01) {
+	switch(param_00) {
 		case "violetray":
 			level thread scripts\cp\crafted_trap_violetray::give_crafted_violetray_trap(undefined,self);
 			break;

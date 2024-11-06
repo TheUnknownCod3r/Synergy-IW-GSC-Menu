@@ -1,23 +1,16 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\cp\maps\cp_town\cp_town_crab_boss_sonic_ring.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 20
- * Decompile Time: 1042 ms
- * Timestamp: 10/27/2023 12:07:13 AM
-*******************************************************************/
+/****************************************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\cp\maps\cp_town\cp_town_crab_boss_sonic_ring.gsc
+****************************************************************************/
 
-//Function Number: 1
-do_sonic_ring()
-{
+do_sonic_ring() {
 	enable_linkto_on_all_triggers();
 	level thread crab_boss_sonic_ring_logic();
 	var_00 = level scripts\engine\utility::waittill_any_return("sonic_ring_fail","sonic_ring_success");
 	terminate_sonic_ring();
 	scripts\cp\maps\cp_town\cp_town_crab_boss_fight::remove_icon_on_escort_vehicle();
-	if(var_00 == "sonic_ring_fail")
-	{
+	if(var_00 == "sonic_ring_fail") {
 		scripts\cp\maps\cp_town\cp_town_crab_boss_fight::replay_final_sequence();
 		return;
 	}
@@ -25,26 +18,20 @@ do_sonic_ring()
 	level thread scripts\cp\maps\cp_town\cp_town_crab_boss_bomb::start_detonate_bomb();
 }
 
-//Function Number: 2
-crab_boss_sonic_ring_logic()
-{
+crab_boss_sonic_ring_logic() {
 	level.crab_boss prepare_for_sonic_ring_attack(level.crab_boss);
 	level.crab_boss scripts\aitypes\crab_boss\behaviors::startroarattack(1);
 	level.crab_boss waittill("roar_done");
 	level.crab_boss scripts\cp\maps\cp_town\cp_town_crab_boss_death_wall::do_taunt();
 }
 
-//Function Number: 3
-enable_linkto_on_all_triggers()
-{
-	if(scripts\engine\utility::istrue(level.sonic_beam_trigger_enable_link_to))
-	{
+enable_linkto_on_all_triggers() {
+	if(scripts\engine\utility::istrue(level.sonic_beam_trigger_enable_link_to)) {
 		return;
 	}
 
 	var_00 = scripts\engine\utility::getstructarray("sonic_ring_controlling_struct","targetname");
-	foreach(var_02 in var_00)
-	{
+	foreach(var_02 in var_00) {
 		var_03 = getent(var_02.target,"targetname");
 		var_03 enablelinkto();
 	}
@@ -52,9 +39,7 @@ enable_linkto_on_all_triggers()
 	level.sonic_beam_trigger_enable_link_to = 1;
 }
 
-//Function Number: 4
-prepare_for_sonic_ring_attack(param_00)
-{
+prepare_for_sonic_ring_attack(param_00) {
 	var_01 = scripts\engine\utility::getstructarray("sonic_ring_controlling_struct","targetname");
 	var_02 = scripts\engine\utility::random(var_01);
 	var_03 = spawn("script_model",var_02.origin);
@@ -65,9 +50,7 @@ prepare_for_sonic_ring_attack(param_00)
 	param_00 thread activate_vfx_ent(var_02,var_03);
 }
 
-//Function Number: 5
-activate_sonic_ring(param_00)
-{
+activate_sonic_ring(param_00) {
 	scripts\cp\cp_vo::try_to_play_vo_on_all_players("boss_phase_5_attack_sonic_ring");
 	level thread start_sonic_ring_timer();
 	level thread sonic_ring_wail_all_player_trigger_teleporter("sonic_ring_fail","sonic_ring_success");
@@ -75,86 +58,68 @@ activate_sonic_ring(param_00)
 	activate_controlling_ent(param_00.sonic_ring_controlling_ent,param_00);
 }
 
-//Function Number: 6
-sonic_ring_wail_all_player_trigger_teleporter(param_00,param_01)
-{
-	if(isdefined(param_00))
-	{
+sonic_ring_wail_all_player_trigger_teleporter(param_00,param_01) {
+	if(isdefined(param_00)) {
 		level endon(param_00);
 	}
 
-	if(!scripts\engine\utility::istrue(level.escort_vehicle.teleporter_activated))
-	{
+	if(!scripts\engine\utility::istrue(level.escort_vehicle.teleporter_activated)) {
 		return;
 	}
 
 	var_02 = 160000;
-	for(;;)
-	{
+	for(;;) {
 		var_03 = 1;
-		foreach(var_05 in level.players)
-		{
-			if(scripts\engine\utility::istrue(var_05.inlaststand))
-			{
+		foreach(var_05 in level.players) {
+			if(scripts\engine\utility::istrue(var_05.inlaststand)) {
 				var_03 = 0;
 				break;
 			}
 
-			if(scripts\engine\utility::istrue(var_05.iscarrying))
-			{
+			if(scripts\engine\utility::istrue(var_05.iscarrying)) {
 				var_03 = 0;
 				break;
 			}
 
-			if(distancesquared(var_05.origin,level.escort_vehicle.origin) > var_02)
-			{
+			if(distancesquared(var_05.origin,level.escort_vehicle.origin) > var_02) {
 				var_03 = 0;
 				break;
 			}
 
-			if(!var_05 usebuttonpressed())
-			{
+			if(!var_05 usebuttonpressed()) {
 				var_03 = 0;
 				break;
 			}
 		}
 
 		wait(0.25);
-		if(var_03)
-		{
+		if(var_03) {
 			var_03 = 1;
-			foreach(var_05 in level.players)
-			{
-				if(scripts\engine\utility::istrue(var_05.inlaststand))
-				{
+			foreach(var_05 in level.players) {
+				if(scripts\engine\utility::istrue(var_05.inlaststand)) {
 					var_03 = 0;
 					break;
 				}
 
-				if(scripts\engine\utility::istrue(var_05.iscarrying))
-				{
+				if(scripts\engine\utility::istrue(var_05.iscarrying)) {
 					var_03 = 0;
 					break;
 				}
 
-				if(distancesquared(var_05.origin,level.escort_vehicle.origin) > var_02)
-				{
+				if(distancesquared(var_05.origin,level.escort_vehicle.origin) > var_02) {
 					var_03 = 0;
 					break;
 				}
 
-				if(!var_05 usebuttonpressed())
-				{
+				if(!var_05 usebuttonpressed()) {
 					var_03 = 0;
 					break;
 				}
 			}
 		}
 
-		if(var_03)
-		{
-			if(isdefined(param_01))
-			{
+		if(var_03) {
+			if(isdefined(param_01)) {
 				level notify(param_01);
 			}
 
@@ -165,16 +130,12 @@ sonic_ring_wail_all_player_trigger_teleporter(param_00,param_01)
 	}
 }
 
-//Function Number: 7
-start_sonic_ring_timer()
-{
+start_sonic_ring_timer() {
 	level endon("sonic_ring_success");
 	level notify("sonic_ring_start");
 	wait(7);
-	for(var_00 = 5;var_00 > 0;var_00--)
-	{
-		if(scripts\engine\utility::istrue(level.escort_vehicle.teleporter_activated))
-		{
+	for(var_00 = 5;var_00 > 0;var_00--) {
+		if(scripts\engine\utility::istrue(level.escort_vehicle.teleporter_activated)) {
 			iprintln(var_00);
 		}
 
@@ -184,15 +145,11 @@ start_sonic_ring_timer()
 	level notify("sonic_ring_fail");
 }
 
-//Function Number: 8
-terminate_sonic_ring()
-{
+terminate_sonic_ring() {
 	level notify("stop_sonic_ring");
 }
 
-//Function Number: 9
-func_15F1(param_00,param_01)
-{
+func_15F1(param_00,param_01) {
 	var_02 = getent(param_00.target,"targetname");
 	var_02.original_pos = var_02.origin;
 	param_01.sonic_ring_trigger = var_02;
@@ -200,13 +157,10 @@ func_15F1(param_00,param_01)
 	var_02 thread player_touch_monitor(var_02);
 }
 
-//Function Number: 10
-activate_vfx_ent(param_00,param_01)
-{
+activate_vfx_ent(param_00,param_01) {
 	var_02 = [];
 	var_03 = scripts\engine\utility::getstructarray(param_00.target,"targetname");
-	foreach(var_05 in var_03)
-	{
+	foreach(var_05 in var_03) {
 		var_06 = spawn("script_model",var_05.origin);
 		var_06 setmodel("crab_boss_origin");
 		var_06.activation_order = int(var_05.script_noteworthy);
@@ -218,23 +172,17 @@ activate_vfx_ent(param_00,param_01)
 	param_01.vfx_ent_list = var_02;
 }
 
-//Function Number: 11
-player_touch_monitor(param_00)
-{
+player_touch_monitor(param_00) {
 	param_00 endon("stop_sonic_ring_trigger_monitor");
-	for(;;)
-	{
+	for(;;) {
 		param_00 waittill("trigger",var_01);
-		if(isplayer(var_01))
-		{
+		if(isplayer(var_01)) {
 			var_01 dodamage(40,var_01.origin);
 		}
 	}
 }
 
-//Function Number: 12
-activate_controlling_ent(param_00,param_01)
-{
+activate_controlling_ent(param_00,param_01) {
 	var_02 = scripts\engine\utility::getstruct("sonic_ring_start","targetname");
 	var_03 = var_02.origin;
 	param_00 dontinterpolate();
@@ -244,15 +192,12 @@ activate_controlling_ent(param_00,param_01)
 	clean_up_controlling_ent(param_00);
 }
 
-//Function Number: 13
-clean_up_controlling_ent(param_00)
-{
+clean_up_controlling_ent(param_00) {
 	param_00.sonic_ring_trigger notify("stop_sonic_ring_trigger_monitor");
 	param_00.sonic_ring_trigger unlink();
 	param_00.sonic_ring_trigger dontinterpolate();
 	param_00.sonic_ring_trigger.origin = param_00.sonic_ring_trigger.original_pos;
-	foreach(var_02 in param_00.vfx_ent_list)
-	{
+	foreach(var_02 in param_00.vfx_ent_list) {
 		var_02 delete();
 	}
 
@@ -260,20 +205,13 @@ clean_up_controlling_ent(param_00)
 	param_00 delete();
 }
 
-//Function Number: 14
-load_sonic_ring_vfx()
-{
+load_sonic_ring_vfx() {
 	level._effect["sonic_beam_ricochet_laser"] = loadfx("vfx/iw7/levels/cp_town/crog/vfx_lure_laser_sonic_beam.vfx");
 }
 
-//Function Number: 15
-sonic_ring_cleanup()
-{
-}
+sonic_ring_cleanup() {}
 
-//Function Number: 16
-sonic_ring_activation_vfx_sequence(param_00,param_01)
-{
+sonic_ring_activation_vfx_sequence(param_00,param_01) {
 	level thread sonic_ring_beam_sfx();
 	var_02 = param_00 gettagorigin("tag_laser");
 	var_03 = [(3025,956,1),(2545,1132,-71),(3123,1468,-80),(2386,1652,-48),(3916,2068,-26),(2334,2128,-12),(3885,2188,-4),(2280,2244,6),(3926,2296,20),(2445,2360,-94),(3675,2628,-167),(2641,2676,-168),(3689,2724,-169)];
@@ -283,9 +221,7 @@ sonic_ring_activation_vfx_sequence(param_00,param_01)
 	level thread activate_vfx_on_beam(param_01);
 }
 
-//Function Number: 17
-sonic_ring_beam_sfx()
-{
+sonic_ring_beam_sfx() {
 	level endon("death");
 	level.sonic_beam_sfx_5 = thread scripts\engine\utility::play_loopsound_in_space("boss_crog_lasers_lp",(2764,2668,-171));
 	level.sonic_beam_sfx_6 = thread scripts\engine\utility::play_loopsound_in_space("boss_crog_lasers_lp",(3138,2686,-171));
@@ -312,12 +248,9 @@ sonic_ring_beam_sfx()
 	level.sonic_beam_sfx_6 delete();
 }
 
-//Function Number: 18
-activate_vfx_along_path(param_00,param_01)
-{
+activate_vfx_along_path(param_00,param_01) {
 	param_01 = scripts\engine\utility::array_combine([param_00],param_01);
-	for(var_02 = 0;var_02 <= param_01.size - 2;var_02++)
-	{
+	for(var_02 = 0;var_02 <= param_01.size - 2;var_02++) {
 		param_00 = param_01[var_02];
 		var_03 = param_01[var_02 + 1];
 		function_02E0(level._effect["sonic_beam_ricochet_laser"],param_00,vectortoangles(var_03 - param_00),var_03);
@@ -325,14 +258,10 @@ activate_vfx_along_path(param_00,param_01)
 	}
 }
 
-//Function Number: 19
-activate_vfx_on_beam(param_00)
-{
-	for(var_01 = 1;var_01 <= 13;var_01++)
-	{
+activate_vfx_on_beam(param_00) {
+	for(var_01 = 1;var_01 <= 13;var_01++) {
 		var_02 = get_vfx_ents_with_order_number(var_01,param_00);
-		foreach(var_04 in var_02)
-		{
+		foreach(var_04 in var_02) {
 			var_04 setscriptablepartstate("sonic_ring_laser","on");
 		}
 
@@ -340,14 +269,10 @@ activate_vfx_on_beam(param_00)
 	}
 }
 
-//Function Number: 20
-get_vfx_ents_with_order_number(param_00,param_01)
-{
+get_vfx_ents_with_order_number(param_00,param_01) {
 	var_02 = [];
-	foreach(var_04 in param_01.vfx_ent_list)
-	{
-		if(var_04.activation_order == param_00)
-		{
+	foreach(var_04 in param_01.vfx_ent_list) {
+		if(var_04.activation_order == param_00) {
 			var_02[var_02.size] = var_04;
 		}
 	}

@@ -1,22 +1,14 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\mp\gametypes\obj_grindzone.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 17
- * Decompile Time: 909 ms
- * Timestamp: 10/27/2023 12:12:57 AM
-*******************************************************************/
+/**********************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\mp\gametypes\obj_grindzone.gsc
+**********************************************************/
 
-//Function Number: 1
-init()
-{
+init() {
 	setuphudelements();
 }
 
-//Function Number: 2
-setuphudelements()
-{
+setuphudelements() {
 	level.iconneutral3d = "waypoint_bank";
 	level.iconneutral2d = "waypoint_bank";
 	level.iconcapture3d = "waypoint_scoring_foe";
@@ -29,12 +21,9 @@ setuphudelements()
 	level.iconfriendlycontested3d = "waypoint_contested";
 }
 
-//Function Number: 3
-setupobjective(param_00)
-{
+setupobjective(param_00) {
 	var_01 = level.objectives[param_00];
-	if(isdefined(var_01.target))
-	{
+	if(isdefined(var_01.target)) {
 		var_02[0] = getent(var_01.target,"targetname");
 	}
 	else
@@ -80,29 +69,21 @@ setupobjective(param_00)
 	return var_04;
 }
 
-//Function Number: 4
-setneutral()
-{
+setneutral() {
 	scripts\mp\_gameobjects::setownerteam("neutral");
 	setneutralicons();
 	updateflagstate("idle",0);
 }
 
-//Function Number: 5
-zone_onusebegin(param_00)
-{
+zone_onusebegin(param_00) {
 	self.didstatusnotify = 0;
 	thread scripts\mp\_gameobjects::useobjectdecay(param_00.team);
 }
 
-//Function Number: 6
-zone_onuseupdate(param_00,param_01,param_02,param_03)
-{
+zone_onuseupdate(param_00,param_01,param_02,param_03) {
 	var_04 = scripts\mp\_gameobjects::getownerteam();
-	if(param_01 > 0.05 && param_02 && !self.didstatusnotify)
-	{
-		if(!isagent(param_03))
-		{
+	if(param_01 > 0.05 && param_02 && !self.didstatusnotify) {
+		if(!isagent(param_03)) {
 			updateflagcapturestate(param_00);
 		}
 
@@ -110,12 +91,9 @@ zone_onuseupdate(param_00,param_01,param_02,param_03)
 	}
 }
 
-//Function Number: 7
-zone_onuseend(param_00,param_01,param_02)
-{
+zone_onuseend(param_00,param_01,param_02) {
 	var_03 = scripts\mp\_gameobjects::getownerteam();
-	if(var_03 == "neutral")
-	{
+	if(var_03 == "neutral") {
 		setneutralicons();
 		updateflagstate("idle",0);
 		return;
@@ -125,9 +103,7 @@ zone_onuseend(param_00,param_01,param_02)
 	updateflagstate(var_03,0);
 }
 
-//Function Number: 8
-zone_onuse(param_00)
-{
+zone_onuse(param_00) {
 	var_01 = param_00.team;
 	var_02 = scripts\mp\_gameobjects::getownerteam();
 	var_03 = scripts\mp\_utility::getotherteam(var_01);
@@ -137,26 +113,19 @@ zone_onuse(param_00)
 	scripts\mp\_gameobjects::setownerteam(var_01);
 }
 
-//Function Number: 9
-zone_onunoccupied()
-{
+zone_onunoccupied() {
 	setneutralicons();
 	setneutral();
 }
 
-//Function Number: 10
-zone_oncontested()
-{
+zone_oncontested() {
 	setcontestedicons();
 	updateflagstate("contested",0);
 }
 
-//Function Number: 11
-zone_onuncontested(param_00)
-{
+zone_onuncontested(param_00) {
 	var_01 = scripts\mp\_gameobjects::getownerteam();
-	if(param_00 == "none" || var_01 == "neutral")
-	{
+	if(param_00 == "none" || var_01 == "neutral") {
 		setneutralicons();
 	}
 	else
@@ -168,54 +137,40 @@ zone_onuncontested(param_00)
 	updateflagstate(var_02,0);
 }
 
-//Function Number: 12
-setcrankedtimerzonecap(param_00)
-{
-	if(isdefined(level.supportcranked) && level.supportcranked && isdefined(param_00.cranked) && param_00.cranked)
-	{
+setcrankedtimerzonecap(param_00) {
+	if(isdefined(level.supportcranked) && level.supportcranked && isdefined(param_00.cranked) && param_00.cranked) {
 		param_00 scripts\mp\_utility::setcrankedplayerbombtimer("assist");
 	}
 }
 
-//Function Number: 13
-setneutralicons()
-{
+setneutralicons() {
 	scripts\mp\_gameobjects::set2dicon("friendly",level.iconneutral2d + self.label);
 	scripts\mp\_gameobjects::set3dicon("friendly",level.iconneutral3d + self.label);
 	scripts\mp\_gameobjects::set2dicon("enemy",level.iconneutral2d + self.label);
 	scripts\mp\_gameobjects::set3dicon("enemy",level.iconneutral3d + self.label);
 }
 
-//Function Number: 14
-setteamicons()
-{
+setteamicons() {
 	scripts\mp\_gameobjects::set2dicon("friendly",level.icondefend2d + self.label);
 	scripts\mp\_gameobjects::set3dicon("friendly",level.icondefend3d + self.label);
 	scripts\mp\_gameobjects::set2dicon("enemy",level.iconcapture2d + self.label);
 	scripts\mp\_gameobjects::set3dicon("enemy",level.iconcapture3d + self.label);
 }
 
-//Function Number: 15
-setcontestedicons()
-{
+setcontestedicons() {
 	scripts\mp\_gameobjects::set2dicon("friendly",level.iconfriendlycontested2d + self.label);
 	scripts\mp\_gameobjects::set3dicon("friendly",level.iconfriendlycontested3d + self.label);
 	scripts\mp\_gameobjects::set2dicon("enemy",level.iconenemycontested2d + self.label);
 	scripts\mp\_gameobjects::set3dicon("enemy",level.iconenemycontested3d + self.label);
 }
 
-//Function Number: 16
-updateflagstate(param_00,param_01)
-{
+updateflagstate(param_00,param_01) {
 	self.physics_capsulecast setscriptablepartstate("flag",param_00);
-	if(!scripts\mp\_utility::istrue(param_01))
-	{
+	if(!scripts\mp\_utility::istrue(param_01)) {
 		self.physics_capsulecast setscriptablepartstate("pulse","off");
 	}
 }
 
-//Function Number: 17
-updateflagcapturestate(param_00)
-{
+updateflagcapturestate(param_00) {
 	self.physics_capsulecast setscriptablepartstate("pulse",param_00);
 }

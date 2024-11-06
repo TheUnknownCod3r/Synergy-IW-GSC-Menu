@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\sp\load.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 1
- * Decompile Time: 45 ms
- * Timestamp: 10/27/2023 12:24:41 AM
-*******************************************************************/
+/***************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\sp\load.gsc
+***************************************/
 
-//Function Number: 1
-main()
-{
+main() {
 	lib_0A2F::func_9789();
 	scripts\sp\_utility::func_965C();
 	lib_0B33::func_95F3();
@@ -19,8 +13,7 @@ main()
 	lib_0F18::func_956A();
 	scripts\sp\_introscreen::func_9631();
 	scripts/sp/starts::func_9766();
-	if(scripts\sp\_utility::func_93A6())
-	{
+	if(scripts\sp\_utility::func_93A6()) {
 		scripts/sp/specialist_MAYBE::init();
 	}
 
@@ -71,8 +64,7 @@ main()
 	scripts\sp\_introscreen::main();
 	scripts\sp\_damagefeedback::init();
 	scripts\sp\_friendlyfire::main();
-	if(getdvarint("ai_iw7",0) == 1)
-	{
+	if(getdvarint("ai_iw7",0) == 1) {
 		scripts/asm/asm::asm_globalinit();
 		scripts/aitypes/bt_util::init();
 	}
@@ -90,9 +82,8 @@ main()
 	lib_0E1E::func_5374();
 	scripts\sp\_armoury::func_952F();
 	scripts\sp\_utility::func_9674();
-	if(isdefined(level._meth_83DF))
-	{
-		[[ level._meth_83DF ]]();
+	if(isdefined(level._meth_83DF)) {
+		[[level._meth_83DF]]();
 	}
 
 	scripts/sp/load_code::func_B3CD();
@@ -101,10 +92,8 @@ main()
 	lib_0B34::func_95F7();
 	scripts/sp/interaction_manager::func_9A2F();
 	thread scripts/sp/geo_mover::func_409C();
-	if(scripts\sp\_utility::func_93A6())
-	{
-		if(scripts/sp/specialist_MAYBE::func_2C8F())
-		{
+	if(scripts\sp\_utility::func_93A6()) {
+		if(scripts/sp/specialist_MAYBE::func_2C8F()) {
 			scripts/sp/specialist_MAYBE::func_F2D2(1);
 		}
 		else
@@ -118,8 +107,7 @@ main()
 	var_00 = scripts\sp\_utility::func_7E2C(level.script);
 	setomnvar("ui_client_settle_time",var_00);
 	var_01 = scripts\sp\_utility::func_7F70(level.script);
-	if(isdefined(var_01) && var_01 != "")
-	{
+	if(isdefined(var_01) && var_01 != "") {
 		setomnvar("ui_transition_movie",var_01);
 	}
 	else

@@ -1,18 +1,11 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: 3159.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 4
- * Decompile Time: 41 ms
- * Timestamp: 10/27/2023 12:26:21 AM
-*******************************************************************/
+/****************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\3159.gsc
+****************************/
 
-//Function Number: 1
-func_2371()
-{
-	if(scripts/asm/asm::func_232E("shoot"))
-	{
+func_2371() {
+	if(scripts/asm/asm::func_232E("shoot")) {
 		return;
 	}
 
@@ -153,20 +146,14 @@ func_2371()
 	scripts/asm/asm::func_2327();
 }
 
-//Function Number: 2
-func_1204C(param_00,param_01,param_02,param_03)
-{
+func_1204C(param_00,param_01,param_02,param_03) {
 	return self.a.pose != "crouch";
 }
 
-//Function Number: 3
-func_12413(param_00,param_01,param_02,param_03)
-{
+func_12413(param_00,param_01,param_02,param_03) {
 	return self.a.pose != "prone";
 }
 
-//Function Number: 4
-func_12053(param_00,param_01,param_02,param_03)
-{
+func_12053(param_00,param_01,param_02,param_03) {
 	return self.a.pose != "crouch";
 }

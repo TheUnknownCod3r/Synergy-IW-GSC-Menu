@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: aitype\civilian_facility_worker_dead.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 3
- * Decompile Time: 150 ms
- * Timestamp: 10\26\2023 11:58:15 PM
-*******************************************************************/
+/************************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\aitype\civilian_facility_worker_dead.gsc
+************************************************************/
 
-//Function Number: 1
-main()
-{
+main() {
 	self.var_17DB = "";
 	self.team = "allies";
 	self.type = "human";
@@ -24,8 +18,7 @@ main()
 	self.var_101B4 = "";
 	self.behaviortreeasset = "civilian";
 	self.var_1FA9 = "civilian";
-	if(isai(self))
-	{
+	if(isai(self)) {
 		self _meth_82DC(256,0);
 		self _meth_82DB(768,1024);
 	}
@@ -33,8 +26,7 @@ main()
 	self.var_394 = "none";
 	var_00 = [0.047,0.093,0.14,0.186,0.233,0.256,0.279,0.326,0.349,0.395,0.442,0.465,0.488,0.512,0.558,0.605,0.651,0.698,0.721,0.744,0.791,0.814,0.86,0.907,0.953,1];
 	var_01 = ["character_civ_facility_worker_dead_head_bg_male_07_head_sc_lee","character_civ_facility_worker_dead_head_bg_engineering_mate_head_hero_gator","character_civ_facility_worker_dead_head_bg_engineering_mate_head_male_bc_01","character_civ_facility_worker_dead_head_bg_engineering_mate_head_male_bc_02","character_civ_facility_worker_dead_head_bg_engineering_mate_head_male_bc_03","character_civ_facility_worker_dead_head_bg_engineering_mate_head_male_bc_04","character_civ_facility_worker_dead_head_bg_engineering_mate_head_male_bc_04_beard","character_civ_facility_worker_dead_head_bg_engineering_mate_head_male_bc_05","character_civ_facility_worker_dead_head_bg_engineering_mate_head_male_bc_06","character_civ_facility_worker_dead_head_bg_engineering_mate_head_male_bc_07","character_civ_facility_worker_dead_head_bg_engineering_mate_head_sc_lee","character_civ_facility_worker_dead_head_bg_male_06","character_civ_facility_worker_dead_head_bg_male_06_head_male_bc_04","character_civ_facility_worker_dead_head_bg_male_06_head_male_bc_04_beard","character_civ_facility_worker_dead_head_bg_male_06_head_male_bc_05","character_civ_facility_worker_dead_head_bg_male_06_head_sc_lee","character_civ_facility_worker_dead_head_bg_male_07","character_civ_facility_worker_dead_head_bg_male_07_head_male_bc_03","character_civ_facility_worker_dead_head_bg_male_07_head_male_bc_04","character_civ_facility_worker_dead_head_bg_male_07_head_male_bc_04_beard","character_civ_facility_worker_dead_head_bg_male_07_head_male_bc_05","character_civ_facility_worker_dead_head_bg_male_07_head_male_bc_06","character_civ_facility_worker_dead_head_bg_male_07_head_sc_engineering_mate","character_civ_facility_worker_dead_head_sc_male_19","character_civ_facility_worker_dead_head_male_bc_02","character_civ_facility_worker_dead_head_sc_male_11"];
-	switch(scripts\code\character::get_random_character(26,var_00,var_01))
-	{
+	switch(scripts\code\character::get_random_character(26,var_00,var_01)) {
 		case 0:
 			lib_03D4::main();
 			break;
@@ -141,15 +133,11 @@ main()
 	}
 }
 
-//Function Number: 2
-spawner()
-{
+spawner() {
 	self _meth_833A("allies");
 }
 
-//Function Number: 3
-precache()
-{
+precache() {
 	lib_03D4::precache();
 	lib_03BE::precache();
 	lib_03BF::precache();

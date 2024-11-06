@@ -1,18 +1,11 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\sp\createfx.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 5
- * Decompile Time: 243 ms
- * Timestamp: 10/27/2023 12:23:59 AM
-*******************************************************************/
+/*******************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\sp\createfx.gsc
+*******************************************/
 
-//Function Number: 1
-createfx()
-{
-	if(!level.createfx_enabled)
-	{
+createfx() {
+	if(!level.createfx_enabled) {
 		return;
 	}
 
@@ -36,23 +29,17 @@ createfx()
 	level waittill("eternity");
 }
 
-//Function Number: 2
-func_49C3()
-{
+func_49C3() {
 	var_00 = [];
 	var_00["trigger_multiple_createart_transient"] = ::scripts\sp\_trigger::func_1272E;
-	foreach(var_04, var_02 in var_00)
-	{
+	foreach(var_04, var_02 in var_00) {
 		var_03 = getentarray(var_04,"classname");
 		scripts\engine\utility::array_levelthread(var_03,var_02);
 	}
 }
 
-//Function Number: 3
-func_position_player_get(param_00)
-{
-	if(distancesquared(param_00,level.player.origin) > 4096)
-	{
+func_position_player_get(param_00) {
+	if(distancesquared(param_00,level.player.origin) > 4096) {
 		setdvar("createfx_playerpos_x",level.player.origin[0]);
 		setdvar("createfx_playerpos_y",level.player.origin[1]);
 		setdvar("createfx_playerpos_z",level.player.origin[2]);
@@ -61,9 +48,7 @@ func_position_player_get(param_00)
 	return level.player.origin;
 }
 
-//Function Number: 4
-func_position_player()
-{
+func_position_player() {
 	var_00 = [];
 	var_00[0] = getdvarint("createfx_playerpos_x");
 	var_00[1] = getdvarint("createfx_playerpos_y");
@@ -72,8 +57,6 @@ func_position_player()
 	level.player setplayerangles((0,level.player.angles[1],0));
 }
 
-//Function Number: 5
-func_player_speed()
-{
+func_player_speed() {
 	function_01C5("g_speed",level._createfx.player_speed);
 }

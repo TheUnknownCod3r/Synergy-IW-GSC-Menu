@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\mp\maps\mp_prime\mp_prime.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 6
- * Decompile Time: 337 ms
- * Timestamp: 10/27/2023 12:14:06 AM
-*******************************************************************/
+/*********************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\mp\maps\mp_prime\mp_prime.gsc
+*********************************************************/
 
-//Function Number: 1
-main()
-{
+main() {
 	lib_0FD9::main();
 	scripts\mp\maps\mp_prime\gen\mp_prime_art::main();
 	lib_0FD8::main();
@@ -29,9 +23,7 @@ main()
 	thread fix_collision();
 }
 
-//Function Number: 2
-fix_collision()
-{
+fix_collision() {
 	var_00 = getent("player512x512x8","targetname");
 	var_01 = spawn("script_model",(-708,-1759,476));
 	var_01.angles = (0,0,90);
@@ -143,9 +135,7 @@ fix_collision()
 	var_2F clonebrushmodeltoscriptmodel(var_2E);
 }
 
-//Function Number: 3
-wr_mover_setup()
-{
+wr_mover_setup() {
 	thread func_5CC7("wr_mover","wr_mover_start",200,undefined,undefined);
 	wait(60);
 	thread func_5CC7("wr_mover_1","wr_mover_start",200,undefined,undefined);
@@ -153,12 +143,9 @@ wr_mover_setup()
 	thread func_5CC7("wr_mover_2","wr_mover_start",200,undefined,undefined);
 }
 
-//Function Number: 4
-func_5CC7(param_00,param_01,param_02,param_03,param_04)
-{
+func_5CC7(param_00,param_01,param_02,param_03,param_04) {
 	var_05 = getent(param_00,"targetname");
-	if(isdefined(param_03))
-	{
+	if(isdefined(param_03)) {
 		var_05.var_4380 = getent(param_03,"targetname");
 		var_05.var_4380 linkto(var_05);
 	}
@@ -169,8 +156,7 @@ func_5CC7(param_00,param_01,param_02,param_03,param_04)
 	var_05 rotateto(var_05.var_C72D.angles,0.1,0,0);
 	var_05.var_2B3 = 0;
 	wait(0.5);
-	if(isdefined(param_04))
-	{
+	if(isdefined(param_04)) {
 		var_05 playloopsound(param_04);
 	}
 
@@ -178,13 +164,10 @@ func_5CC7(param_00,param_01,param_02,param_03,param_04)
 	var_05.var_5293 = func_5CBC(var_05,var_05.var_5293,var_06);
 }
 
-//Function Number: 5
-func_5CBC(param_00,param_01,param_02)
-{
+func_5CBC(param_00,param_01,param_02) {
 	param_00 endon("death");
 	var_03 = scripts\common\utility::getstruct(param_01.target,"targetname");
-	if(isdefined(var_03.target))
-	{
+	if(isdefined(var_03.target)) {
 		var_04 = abs(distance(param_00.origin,var_03.origin) * param_02);
 		param_00 moveto(var_03.origin,var_04,0,0);
 		param_00 rotateto(var_03.angles,var_04,0,0);
@@ -193,8 +176,7 @@ func_5CBC(param_00,param_01,param_02)
 	}
 
 	param_01 hide();
-	if(isdefined(param_01.var_4380))
-	{
+	if(isdefined(param_01.var_4380)) {
 		param_01.var_4380 notsolid();
 	}
 
@@ -203,17 +185,14 @@ func_5CBC(param_00,param_01,param_02)
 	param_01.angles = param_01.var_C72D.angles;
 	wait(1);
 	param_01 show();
-	if(isdefined(param_01.var_4380))
-	{
+	if(isdefined(param_01.var_4380)) {
 		param_01.var_4380 solid();
 	}
 
 	return param_01.var_C72D;
 }
 
-//Function Number: 6
-sfx_club_music()
-{
+sfx_club_music() {
 	var_00 = spawn("script_origin",(1200,703,238));
 	scripts\common\utility::func_136F7();
 	var_00 playloopsound("emt_mus_prime_club");

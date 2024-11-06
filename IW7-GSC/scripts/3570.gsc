@@ -1,23 +1,15 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: 3570.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 16
- * Decompile Time: 3 ms
- * Timestamp: 10/27/2023 12:30:44 AM
-*******************************************************************/
+/****************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\3570.gsc
+****************************/
 
-//Function Number: 1
-init()
-{
+init() {
 	level.var_C7E4 = loadfx("vfx/core/mp/ability/vfx_aslt_overcharge_scrn");
 	level.var_C7E5 = loadfx("vfx/core/mp/ability/vfx_aslt_overcharge_world_view");
 }
 
-//Function Number: 2
-func_F7AB()
-{
+func_F7AB() {
 	self.powers["power_multiVisor"].var_1348E = 0;
 	self.powers["power_multiVisor"].var_1348F[0] = "default";
 	self.powers["power_multiVisor"].var_1348F[1] = "thermal";
@@ -26,16 +18,12 @@ func_F7AB()
 	self.var_8BD7 = 0;
 }
 
-//Function Number: 3
-func_E13F()
-{
+func_E13F() {
 	self notify("removeMultiVisor");
 	func_E12D();
 }
 
-//Function Number: 4
-func_130A7()
-{
+func_130A7() {
 	self endon("death");
 	self endon("disconnect");
 	self endon("removeMultiVisor");
@@ -54,30 +42,24 @@ func_130A7()
 	return 1;
 }
 
-//Function Number: 5
-func_BDCD()
-{
+func_BDCD() {
 	self endon("death");
 	self endon("disconnect");
 	self endon("removemultivisor");
 	var_00 = gettime() + 10000;
-	while(var_00 > gettime())
-	{
+	while(var_00 > gettime()) {
 		wait(0.05);
 	}
 
 	func_E27F(0,4);
 }
 
-//Function Number: 6
-func_C5A5(param_00)
-{
+func_C5A5(param_00) {
 	self endon("death");
 	self endon("disconnect");
 	self endon("removeMultiVisor");
 	level endon("game_ended");
-	switch(param_00)
-	{
+	switch(param_00) {
 		case 0:
 			self iprintlnbold("DEFAULT");
 			break;
@@ -103,9 +85,7 @@ func_C5A5(param_00)
 	}
 }
 
-//Function Number: 7
-func_20C1(param_00)
-{
+func_20C1(param_00) {
 	self endon("multivisor_reset");
 	self endon("death");
 	self endon("disconnect");
@@ -114,17 +94,14 @@ func_20C1(param_00)
 	self.var_8BD7 = 0;
 }
 
-//Function Number: 8
-func_20D0()
-{
+func_20D0() {
 	self endon("multivisor_reset");
 	self endon("death");
 	self endon("disconnect");
 	self endon("removeMultiVisor");
 	self thermalvisionon();
 	thread func_20CE();
-	if(!self.var_8BD7)
-	{
+	if(!self.var_8BD7) {
 		scripts\mp\_utility::giveperk("specialty_detectexplosive");
 	}
 
@@ -132,9 +109,7 @@ func_20D0()
 	thread func_E88F();
 }
 
-//Function Number: 9
-func_20E1(param_00)
-{
+func_20E1(param_00) {
 	self endon("multivisor_reset");
 	self endon("death");
 	self endon("disconnect");
@@ -144,24 +119,19 @@ func_20E1(param_00)
 	self.var_8BD7 = 0;
 }
 
-//Function Number: 10
-func_20DB(param_00)
-{
+func_20DB(param_00) {
 	self endon("multivisor_reset");
 	self endon("death");
 	self endon("disconnect");
 	self endon("removeMultiVisor");
-	if(!self.var_8BD7)
-	{
+	if(!self.var_8BD7) {
 		scripts\mp\_utility::giveperk("specialty_detectexplosive");
 	}
 
 	self.var_8BD7 = 1;
 }
 
-//Function Number: 11
-func_20D7(param_00)
-{
+func_20D7(param_00) {
 	self endon("multivisor_reset");
 	self endon("death");
 	self endon("disconnect");
@@ -171,22 +141,16 @@ func_20D7(param_00)
 	self.var_8BD7 = 0;
 }
 
-//Function Number: 12
-func_E88F()
-{
+func_E88F() {
 	self endon("death");
 	self endon("disconnect");
-	if(!isdefined(self.powers["power_multiVisor"]))
-	{
+	if(!isdefined(self.powers["power_multiVisor"])) {
 		return;
 	}
 
-	while(self.powers["power_multiVisor"].var_1348E == 4)
-	{
-		foreach(var_01 in level.players)
-		{
-			if(scripts/mp/equipment/phase_shift::isentityphaseshifted(var_01))
-			{
+	while(self.powers["power_multiVisor"].var_1348E == 4) {
+		foreach(var_01 in level.players) {
+			if(scripts/mp/equipment/phase_shift::isentityphaseshifted(var_01)) {
 				var_01 showtoplayer(self);
 			}
 		}
@@ -194,24 +158,18 @@ func_E88F()
 		wait(0.05);
 	}
 
-	foreach(var_01 in level.players)
-	{
-		if(scripts/mp/equipment/phase_shift::isentityphaseshifted(var_01))
-		{
+	foreach(var_01 in level.players) {
+		if(scripts/mp/equipment/phase_shift::isentityphaseshifted(var_01)) {
 			var_01 hidefromplayer(self);
 		}
 	}
 }
 
-//Function Number: 13
-func_E27F(param_00,param_01)
-{
-	if(param_00 != param_01)
-	{
+func_E27F(param_00,param_01) {
+	if(param_00 != param_01) {
 		self thermalvisionoff();
 		self visionsetnakedforplayer("",0);
-		if(self.var_8BD7)
-		{
+		if(self.var_8BD7) {
 			scripts\mp\_utility::removeperk("specialty_detectexplosive");
 			self.var_8BD7 = 0;
 		}
@@ -220,22 +178,16 @@ func_E27F(param_00,param_01)
 	}
 }
 
-//Function Number: 14
-func_E27E()
-{
+func_E27E() {
 	self endon("power_multi_visor_update");
 	self waittill("death");
 	self notify("multivisor_reset");
 }
 
-//Function Number: 15
-func_20CE()
-{
+func_20CE() {
 	self setclientomnvar("ui_multiVisorOverlay",1);
 }
 
-//Function Number: 16
-func_E12D()
-{
+func_E12D() {
 	self setclientomnvar("ui_multiVisorOverlay",0);
 }

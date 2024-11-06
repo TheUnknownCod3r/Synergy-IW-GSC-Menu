@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\mp\hud.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 3
- * Decompile Time: 149 ms
- * Timestamp: 10/27/2023 12:20:33 AM
-*******************************************************************/
+/**************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\mp\hud.gsc
+**************************************/
 
-//Function Number: 1
-init()
-{
+init() {
 	level.uiparent = spawnstruct();
 	level.uiparent.horzalign = "left";
 	level.uiparent.vertalign = "top";
@@ -41,12 +35,9 @@ init()
 	level.lowertextfontsize = 1.6;
 }
 
-//Function Number: 2
-fontpulseinit(param_00)
-{
+fontpulseinit(param_00) {
 	self.basefontscale = self.fontscale;
-	if(isdefined(param_00))
-	{
+	if(isdefined(param_00)) {
 		self.maxfontscale = min(param_00,6.3);
 	}
 	else
@@ -58,9 +49,7 @@ fontpulseinit(param_00)
 	self.outframes = 4;
 }
 
-//Function Number: 3
-fontpulse(param_00)
-{
+fontpulse(param_00) {
 	self notify("fontPulse");
 	self endon("fontPulse");
 	self endon("death");

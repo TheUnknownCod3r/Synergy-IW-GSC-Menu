@@ -1,23 +1,15 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: 3886.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 3
- * Decompile Time: 1 ms
- * Timestamp: 10/27/2023 12:31:08 AM
-*******************************************************************/
+/****************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\3886.gsc
+****************************/
 
-//Function Number: 1
-main()
-{
+main() {
 	func_EE1D();
 	func_91D0();
 }
 
-//Function Number: 2
-func_EE1D()
-{
+func_EE1D() {
 	level.var_EC87["killcounter"] = #animtree;
 	level.var_EC85["killcounter"]["update"] = %vr_killcounter_numbers_update;
 	level.var_EC87["vr_unfold_left_rig"] = #animtree;
@@ -46,7 +38,4 @@ func_EE1D()
 	scripts/sp/anim::func_17FC("ring5","show_geo","vr_ring5_intro_show_geo","vr_intro_part1");
 }
 
-//Function Number: 3
-func_91D0()
-{
-}
+func_91D0() {}

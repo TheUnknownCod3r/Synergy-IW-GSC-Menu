@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\mp\maps\mp_marsoasis\mp_marsoasis.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 3
- * Decompile Time: 193 ms
- * Timestamp: 10/27/2023 12:13:47 AM
-*******************************************************************/
+/*****************************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\mp\maps\mp_marsoasis\mp_marsoasis.gsc
+*****************************************************************/
 
-//Function Number: 1
-main()
-{
+main() {
 	scripts\mp\maps\mp_marsoasis\mp_marsoasis_precache::main();
 	scripts\mp\maps\mp_marsoasis\gen\mp_marsoasis_art::main();
 	scripts\mp\maps\mp_marsoasis\mp_marsoasis_fx::main();
@@ -31,9 +25,7 @@ main()
 	level.modifiedspawnpoints["-896 -2936 476"]["mp_front_spawn_allies"]["no_alternates"] = 1;
 }
 
-//Function Number: 2
-fix_collision()
-{
+fix_collision() {
 	var_00 = getent("player128x128x128","targetname");
 	var_01 = spawn("script_model",(1320,2152,736));
 	var_01.angles = (330,55,2.5);
@@ -92,9 +84,7 @@ fix_collision()
 	var_19 clonebrushmodeltoscriptmodel(var_18);
 }
 
-//Function Number: 3
-func_CDA4(param_00)
-{
+func_CDA4(param_00) {
 	wait(30);
 	function_030E(param_00);
 }

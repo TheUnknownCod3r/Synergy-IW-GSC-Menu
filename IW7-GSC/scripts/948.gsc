@@ -1,18 +1,11 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: 948.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 2
- * Decompile Time: 0 ms
- * Timestamp: 10/27/2023 12:32:12 AM
-*******************************************************************/
+/***************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\948.gsc
+***************************/
 
-//Function Number: 1
-func_2AD0()
-{
-	if(isdefined(level.var_119E["zombie_ghost"]))
-	{
+func_2AD0() {
+	if(isdefined(level.var_119E["zombie_ghost"])) {
 		return;
 	}
 
@@ -31,9 +24,7 @@ func_2AD0()
 	level.var_119E["zombie_ghost"] = var_00;
 }
 
-//Function Number: 2
-func_DEE8()
-{
+func_DEE8() {
 	func_2AD0();
 	function_02D8("zombie_ghost");
 }

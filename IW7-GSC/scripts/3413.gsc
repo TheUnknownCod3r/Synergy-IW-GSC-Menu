@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: 3413.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 15
- * Decompile Time: 13 ms
- * Timestamp: 10/27/2023 12:27:08 AM
-*******************************************************************/
+/****************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\3413.gsc
+****************************/
 
-//Function Number: 1
-fast_travel_init()
-{
+fast_travel_init() {
 	func_95D9();
 	level.fast_travel_spots = [];
 	level.zipline_negotiation = function_00B3("zombie_zipline","script_noteworthy");
@@ -18,64 +12,51 @@ fast_travel_init()
 	level.zipline_traversals = [];
 	level.ziplines_achievement_trigger_list = [];
 	level.ziplines_achievement_trigger_list = var_00;
-	foreach(var_02 in var_00)
-	{
+	foreach(var_02 in var_00) {
 		var_02 thread func_97AD();
 	}
 
 	level thread watch_for_zipline_achievement();
 }
 
-//Function Number: 2
-watch_for_zipline_achievement()
-{
+watch_for_zipline_achievement() {
 	level endon("game_ended");
 	level endon("zipline_achievement_done");
-	while(level.ziplines_achievement_trigger_list.size > 0)
-	{
+	while(level.ziplines_achievement_trigger_list.size > 0) {
 		scripts\engine\utility::waitframe();
 	}
 
-	foreach(var_01 in level.players)
-	{
+	foreach(var_01 in level.players) {
 		var_01 scripts/cp/zombies/achievement::update_achievement("RIDE_FOR_YOUR_LIFE",4);
 	}
 
 	level notify("zipline_achievement_done");
 }
 
-//Function Number: 3
-func_95D9()
-{
+func_95D9() {
 	level.var_28C9 = loadfx("vfx/core/mp/core/vfx_battle_slide_camera");
 }
 
-//Function Number: 4
-func_97AD()
-{
+func_97AD() {
 	level endon("game_ended");
 	self.var_19 = 0;
 	self.var_13EFC = scripts\engine\utility::getstruct(self.target,"targetname");
 	var_00 = scripts\engine\utility::getstruct(self.var_13EFC.target,"targetname");
-	while(isdefined(var_00.target))
-	{
+	while(isdefined(var_00.target)) {
 		var_00 = scripts\engine\utility::getstruct(var_00.target,"targetname");
 	}
 
 	self.var_13EFB = var_00;
 	scripts\engine\utility::flag_wait("init_spawn_volumes_done");
 	self.var_164A = undefined;
-	foreach(var_02 in level.spawn_volume_array)
-	{
-		if(function_010F(self.var_13EFB.origin,var_02))
-		{
+	foreach(var_02 in level.spawn_volume_array) {
+		if(function_010F(self.var_13EFB.origin,var_02)) {
 			self.var_164A = var_02;
 			break;
 		}
 	}
 
-	if(!isdefined(self.var_164A))
-	{
+	if(!isdefined(self.var_164A)) {
 		return;
 	}
 	else
@@ -86,24 +67,19 @@ func_97AD()
 	self.var_13EFC.trigger = self;
 	self.var_13EFB.var_10CBA = self.var_13EFC;
 	self.var_13EFB.trigger = self;
-	for(;;)
-	{
+	for(;;) {
 		level waittill("volume_activated",var_04);
-		if(var_04 == self.var_164A.basename)
-		{
+		if(var_04 == self.var_164A.basename) {
 			activate_zipline();
 			break;
 		}
 	}
 }
 
-//Function Number: 5
-activate_zipline()
-{
+activate_zipline() {
 	self.var_19 = 1;
 	thread func_AD5D();
-	if(isdefined(level.zipline_negotiation))
-	{
+	if(isdefined(level.zipline_negotiation)) {
 		var_00 = scripts\engine\utility::drop_to_ground(self.var_13EFC.origin,0,-512);
 		var_01 = scripts\engine\utility::drop_to_ground(self.var_13EFB.origin,0,-512);
 		level.zipline_traversals[level.zipline_traversals.size] = self;
@@ -113,29 +89,22 @@ activate_zipline()
 	}
 }
 
-//Function Number: 6
-func_AD5D()
-{
+func_AD5D() {
 	var_00 = 0.1;
 	var_01 = gettime();
 	var_02 = [];
-	for(;;)
-	{
+	for(;;) {
 		self waittill("trigger",var_03);
-		if(isplayer(var_03))
-		{
+		if(isplayer(var_03)) {
 			var_03 forceusehinton(&"CP_RAVE_USE_ZIPLINE");
 			var_03 thread handle_zipline_hint(self);
-			if(var_03 isjumping())
-			{
-				if(!scripts\engine\utility::istrue(var_03.is_fast_traveling))
-				{
+			if(var_03 isjumping()) {
+				if(!scripts\engine\utility::istrue(var_03.is_fast_traveling)) {
 					scripts\engine\utility::trigger_off();
 					var_03.is_fast_traveling = 1;
 					thread player_zipline_travel(var_03,var_01);
 					var_03 scripts\cp\cp_merits::processmerit("mt_dlc1_all_ziplines");
-					if(scripts\engine\utility::array_contains(level.ziplines_achievement_trigger_list,self))
-					{
+					if(scripts\engine\utility::array_contains(level.ziplines_achievement_trigger_list,self)) {
 						level.ziplines_achievement_trigger_list = scripts\engine\utility::array_remove(level.ziplines_achievement_trigger_list,self);
 					}
 
@@ -150,18 +119,14 @@ func_AD5D()
 	}
 }
 
-//Function Number: 7
-handle_zipline_hint(param_00)
-{
+handle_zipline_hint(param_00) {
 	self endon("disconnect");
-	if(isdefined(self.zipline_hint))
-	{
+	if(isdefined(self.zipline_hint)) {
 		return;
 	}
 
 	self.zipline_hint = 1;
-	while(!scripts\cp\cp_laststand::player_in_laststand(self) && !scripts\engine\utility::istrue(self.is_fast_traveling) && self istouching(param_00))
-	{
+	while(!scripts\cp\cp_laststand::player_in_laststand(self) && !scripts\engine\utility::istrue(self.is_fast_traveling) && self istouching(param_00)) {
 		wait(0.05);
 	}
 
@@ -169,9 +134,7 @@ handle_zipline_hint(param_00)
 	self getrigindexfromarchetyperef();
 }
 
-//Function Number: 8
-disable_teleportation(param_00,param_01,param_02)
-{
+disable_teleportation(param_00,param_01,param_02) {
 	param_00 endon("death");
 	param_00.can_teleport = 0;
 	param_00 waittill(param_02);
@@ -180,9 +143,7 @@ disable_teleportation(param_00,param_01,param_02)
 	param_00 notify("can_teleport");
 }
 
-//Function Number: 9
-player_zipline_travel(param_00,param_01)
-{
+player_zipline_travel(param_00,param_01) {
 	param_00 endon("disconnect");
 	param_00 thread scripts\cp\cp_vo::try_to_play_vo("zipline_use","rave_comment_vo");
 	param_00 setseatedanimconditional("zipline",1);
@@ -213,22 +174,16 @@ player_zipline_travel(param_00,param_01)
 	param_00 thread scripts\cp\cp_vo::try_to_play_vo("zipline_exit","rave_comment_vo");
 }
 
-//Function Number: 10
-delay_nearby_zombie_cleanup()
-{
+delay_nearby_zombie_cleanup() {
 	var_00 = scripts\cp\cp_agent_utils::getaliveagentsofteam("axis");
-	foreach(var_02 in var_00)
-	{
-		if(isdefined(var_02.isnodeoccupied) && var_02.isnodeoccupied == self && distancesquared(var_02.origin,self.origin) < 272144)
-		{
+	foreach(var_02 in var_00) {
+		if(isdefined(var_02.isnodeoccupied) && var_02.isnodeoccupied == self && distancesquared(var_02.origin,self.origin) < 272144) {
 			var_02.delay_cleanup_until = gettime() + 12000;
 		}
 	}
 }
 
-//Function Number: 11
-player_zipline(param_00,param_01)
-{
+player_zipline(param_00,param_01) {
 	param_00 endon("disconnect");
 	param_00 earthquakeforplayer(0.3,0.2,param_00.origin,200);
 	param_00 playsound("rave_zipline_start");
@@ -245,14 +200,12 @@ player_zipline(param_00,param_01)
 	var_06.angles = var_02.angles;
 	var_06 setmodel("tag_origin");
 	var_07 = getent("zipline_cord","targetname");
-	if(isdefined(var_07))
-	{
+	if(isdefined(var_07)) {
 		var_07 linkto(var_06);
 	}
 
 	var_08 = getent("zipline_handle","targetname");
-	if(isdefined(var_08))
-	{
+	if(isdefined(var_08)) {
 		var_08 linkto(var_06);
 	}
 
@@ -261,8 +214,7 @@ player_zipline(param_00,param_01)
 	param_00 playlocalsound("rave_zipline_wind_lr");
 	param_00 playerlinkedoffsetenable();
 	param_00 playgestureviewmodel("ges_zipline");
-	while(param_01 > gettime())
-	{
+	while(param_01 > gettime()) {
 		wait(0.05);
 	}
 
@@ -278,8 +230,7 @@ player_zipline(param_00,param_01)
 	var_06 moveto(var_05,param_01);
 	param_00 thread func_ECC7(param_01);
 	wait(param_01);
-	for(var_0A = var_0C;isdefined(var_0A.target);var_0A = var_0C)
-	{
+	for(var_0A = var_0C;isdefined(var_0A.target);var_0A = var_0C) {
 		var_0B = scripts\engine\utility::getstructarray(var_0A.target,"targetname");
 		var_0C = scripts\engine\utility::random(var_0B);
 		var_05 = var_0C.origin;
@@ -312,21 +263,15 @@ player_zipline(param_00,param_01)
 	param_00 thread clear_zipline_landing_area();
 }
 
-//Function Number: 12
-clear_zipline_landing_area()
-{
+clear_zipline_landing_area() {
 	self endon("disconnect");
-	while(!self isonground())
-	{
-		foreach(var_01 in level.players)
-		{
-			if(var_01 == self)
-			{
+	while(!self isonground()) {
+		foreach(var_01 in level.players) {
+			if(var_01 == self) {
 				continue;
 			}
 
-			if(distance2d(var_01.origin,self.origin) < 24)
-			{
+			if(distance2d(var_01.origin,self.origin) < 24) {
 				var_01 setvelocity((-50,-100,0));
 			}
 		}
@@ -335,19 +280,15 @@ clear_zipline_landing_area()
 	}
 }
 
-//Function Number: 13
-func_11325(param_00,param_01,param_02)
-{
+func_11325(param_00,param_01,param_02) {
 	self endon("stop_sway");
 	var_03 = 10;
 	var_04 = 0.5;
 	var_05 = self.angles;
 	var_06 = int(param_00);
 	var_07 = 1;
-	for(var_08 = 0;var_08 < var_06;var_08++)
-	{
-		if(var_07)
-		{
+	for(var_08 = 0;var_08 < var_06;var_08++) {
+		if(var_07) {
 			var_07 = 0;
 			self rotateyaw(var_03,var_04,0.2,0.2);
 			wait(var_04);
@@ -368,14 +309,11 @@ func_11325(param_00,param_01,param_02)
 	self rotateto(var_05,1);
 }
 
-//Function Number: 14
-func_ECC7(param_00)
-{
+func_ECC7(param_00) {
 	var_01 = gettime();
 	var_02 = gettime() + param_00 * 1000;
 	var_03 = function_01E1(level.var_28C9,self geteye(),self);
-	while(var_01 < var_02)
-	{
+	while(var_01 < var_02) {
 		var_03.origin = self geteye();
 		triggerfx(var_03);
 		earthquake(0.2,0.25,self.origin,96);
@@ -384,22 +322,16 @@ func_ECC7(param_00)
 		var_01 = gettime();
 	}
 
-	if(isdefined(var_03))
-	{
+	if(isdefined(var_03)) {
 		var_03 delete();
 	}
 }
 
-//Function Number: 15
-teleport_to_safe_spot(param_00)
-{
+teleport_to_safe_spot(param_00) {
 	var_01 = undefined;
-	while(!isdefined(var_01))
-	{
-		foreach(var_03 in self.end_positions)
-		{
-			if(!positionwouldtelefrag(var_03.origin))
-			{
+	while(!isdefined(var_01)) {
+		foreach(var_03 in self.end_positions) {
+			if(!positionwouldtelefrag(var_03.origin)) {
 				var_01 = var_03;
 			}
 		}

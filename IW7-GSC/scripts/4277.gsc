@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: 4277.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 1
- * Decompile Time: 542 ms
- * Timestamp: 10/27/2023 12:32:02 AM
-*******************************************************************/
+/****************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\4277.gsc
+****************************/
 
-//Function Number: 1
-main()
-{
+main() {
 	var_00 = scripts\engine\utility::createoneshoteffect("vfx_zmb_trash_drift_01");
 	var_00 scripts\common\createfx::set_origin_and_angles((839.166,3828.22,0),(0,280,0));
 	var_00.v["fxid"] = "vfx_zmb_trash_drift_01";

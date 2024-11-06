@@ -1,16 +1,10 @@
 /*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\cp\maps\cp_disco\gen\cp_disco_sound.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 1
- * Decompile Time: 137 ms
- * Timestamp: 10/27/2023 12:03:35 AM
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\cp\maps\cp_disco\gen\cp_disco_sound.gsc
 *******************************************************************/
 
-//Function Number: 1
-main()
-{
+main() {
 	var_00 = scripts\common\createfx::createloopsound();
 	var_00 scripts\common\createfx::set_origin_and_angles((-10108,181,-1722),(270,0,0));
 	var_00.v["soundalias"] = "zmb_afterlife_music";

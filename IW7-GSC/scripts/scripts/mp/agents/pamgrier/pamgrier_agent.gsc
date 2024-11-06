@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\mp\agents\pamgrier\pamgrier_agent.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 11
- * Decompile Time: 569 ms
- * Timestamp: 10/27/2023 12:11:19 AM
-*******************************************************************/
+/*****************************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\mp\agents\pamgrier\pamgrier_agent.gsc
+*****************************************************************/
 
-//Function Number: 1
-registerscriptedagent()
-{
+registerscriptedagent() {
 	scripts/aitypes/bt_util::init();
 	behaviortree\pamgrier::func_DEE8();
 	scripts\asm\pamgrier\mp\states::func_2371();
@@ -18,12 +12,9 @@ registerscriptedagent()
 	thread func_FAB0();
 }
 
-//Function Number: 2
-func_FAB0()
-{
+func_FAB0() {
 	level endon("game_ended");
-	if(!isdefined(level.agent_definition))
-	{
+	if(!isdefined(level.agent_definition)) {
 		level waittill("scripted_agents_initialized");
 	}
 
@@ -32,16 +23,12 @@ func_FAB0()
 	level.agent_funcs["pamgrier"]["on_damaged_finished"] = ::ondamagefinished;
 }
 
-//Function Number: 3
-func_FACE(param_00)
-{
+func_FACE(param_00) {
 	self setmodel("cp_disco_female_boss_pam_grier");
 	self attach("weapon_zmb_katana_wm_camo","tag_weapon_right");
 }
 
-//Function Number: 4
-setupzombiegametypevars()
-{
+setupzombiegametypevars() {
 	self.class = undefined;
 	self.movespeedscaler = undefined;
 	self.avoidkillstreakonspawntimer = undefined;
@@ -121,15 +108,12 @@ setupzombiegametypevars()
 	self.vignette_nocorpse = undefined;
 	self.death_anim_no_ragdoll = undefined;
 	self.dont_cleanup = 1;
-	if(getdvarint("scr_zombie_left_foot_sharp_turn_only",0) == 1)
-	{
+	if(getdvarint("scr_zombie_left_foot_sharp_turn_only",0) == 1) {
 		self.var_AB3F = 1;
 	}
 }
 
-//Function Number: 5
-setupagent()
-{
+setupagent() {
 	setupzombiegametypevars();
 	self.height = self.var_18F4;
 	self.fgetarg = self.var_18F9;
@@ -159,25 +143,18 @@ setupagent()
 	thread pamcleanup();
 }
 
-//Function Number: 6
-pamcleanup()
-{
+pamcleanup() {
 	self waittill("death");
 	level.the_hoff_revive = undefined;
 }
 
-//Function Number: 7
-getenemy()
-{
+getenemy() {
 	return self.pamenemy;
 }
 
-//Function Number: 8
-lookatenemy()
-{
+lookatenemy() {
 	var_00 = getenemy();
-	if(isdefined(var_00))
-	{
+	if(isdefined(var_00)) {
 		var_01 = var_00.origin - self.origin;
 		var_02 = vectortoangles(var_01);
 		self orientmode("face angle abs",(0,var_02[1],0));
@@ -187,11 +164,8 @@ lookatenemy()
 	self orientmode("face angle abs",self.angles);
 }
 
-//Function Number: 9
-setpassive()
-{
-	if(scripts\engine\utility::istrue(self.bpassive))
-	{
+setpassive() {
+	if(scripts\engine\utility::istrue(self.bpassive)) {
 		return;
 	}
 
@@ -199,14 +173,9 @@ setpassive()
 	self.bpassive = 1;
 }
 
-//Function Number: 10
-clearpassive()
-{
+clearpassive() {
 	self.bneedschilltransition = undefined;
 	self.bpassive = undefined;
 }
 
-//Function Number: 11
-ondamagefinished(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08,param_09,param_0A,param_0B,param_0C)
-{
-}
+ondamagefinished(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08,param_09,param_0A,param_0B,param_0C) {}

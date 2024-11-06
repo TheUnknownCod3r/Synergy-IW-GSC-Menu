@@ -1,23 +1,15 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: 3447.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 6
- * Decompile Time: 1 ms
- * Timestamp: 10/27/2023 12:27:41 AM
-*******************************************************************/
+/****************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\3447.gsc
+****************************/
 
-//Function Number: 1
-func_8995(param_00,param_01)
-{
+func_8995(param_00,param_01) {
 	thread scripts\mp\bots\_bots_powers::useprompt(param_00,param_01,450,::func_1307D);
 	thread scripts\mp\bots\_bots_powers::usequickrope(param_00,param_01,450,80,::func_1307D);
 }
 
-//Function Number: 2
-func_C166(param_00,param_01)
-{
+func_C166(param_00,param_01) {
 	level endon("game_ended");
 	self endon("death");
 	self endon("disconnect");
@@ -26,9 +18,7 @@ func_C166(param_00,param_01)
 	self notify(param_01);
 }
 
-//Function Number: 3
-func_10E69()
-{
+func_10E69() {
 	thread func_C166(self.var_5906,"StayInShieldElapsed");
 	thread func_B9D2(250,"StayInShieldElapsed");
 	var_00 = getclosestpointonnavmesh(self.var_5906.origin,self);
@@ -37,21 +27,16 @@ func_10E69()
 	thread cleanupdomeshield();
 }
 
-//Function Number: 4
-func_B9D2(param_00,param_01)
-{
+func_B9D2(param_00,param_01) {
 	level endon("game_ended");
 	self endon("death");
 	self endon("disconnect");
 	self endon(param_01);
 	var_02 = param_00 * param_00;
-	for(;;)
-	{
-		if(isdefined(self.isnodeoccupied))
-		{
+	for(;;) {
+		if(isdefined(self.isnodeoccupied)) {
 			var_03 = distancesquared(self.origin,self.isnodeoccupied.origin);
-			if(var_03 < var_02)
-			{
+			if(var_03 < var_02) {
 				self notify(param_01);
 				break;
 			}
@@ -61,25 +46,20 @@ func_B9D2(param_00,param_01)
 	}
 }
 
-//Function Number: 5
-func_1307D(param_00,param_01)
-{
+func_1307D(param_00,param_01) {
 	level endon("game_ended");
 	self endon("death");
 	self endon("disconnect");
 	self notify("domeshield_used");
 	scripts\mp\bots\_bots_powers::usepowerweapon(param_00,param_01);
-	while(!isdefined(self.var_5906))
-	{
+	while(!isdefined(self.var_5906)) {
 		wait(0.05);
 	}
 
 	func_10E69();
 }
 
-//Function Number: 6
-cleanupdomeshield()
-{
+cleanupdomeshield() {
 	level endon("game_ended");
 	self endon("death");
 	self endon("disconnect");

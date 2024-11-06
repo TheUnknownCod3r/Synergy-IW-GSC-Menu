@@ -1,16 +1,10 @@
 /*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\mp\agents\dlc4_boss\dlc4_boss_agent.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 8
- * Decompile Time: 457 ms
- * Timestamp: 10/27/2023 12:11:13 AM
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\mp\agents\dlc4_boss\dlc4_boss_agent.gsc
 *******************************************************************/
 
-//Function Number: 1
-registerscriptedagent()
-{
+registerscriptedagent() {
 	scripts/aitypes/bt_util::init();
 	behaviortree\dlc4_boss::func_DEE8();
 	scripts\asm\dlc4_boss\mp\states::func_2371();
@@ -19,12 +13,9 @@ registerscriptedagent()
 	thread func_FAB0();
 }
 
-//Function Number: 2
-func_FAB0()
-{
+func_FAB0() {
 	level endon("game_ended");
-	if(!isdefined(level.agent_definition))
-	{
+	if(!isdefined(level.agent_definition)) {
 		level waittill("scripted_agents_initialized");
 	}
 
@@ -34,20 +25,13 @@ func_FAB0()
 	level.agent_funcs["dlc4_boss"]["on_damaged_finished"] = ::ondamagefinished;
 }
 
-//Function Number: 3
-func_FACE(param_00)
-{
+func_FACE(param_00) {
 	self setmodel("zmb_mephistopheles");
 }
 
-//Function Number: 4
-func_AEB0()
-{
-}
+func_AEB0() {}
 
-//Function Number: 5
-setupzombiegametypevars()
-{
+setupzombiegametypevars() {
 	self.class = undefined;
 	self.movespeedscaler = undefined;
 	self.avoidkillstreakonspawntimer = undefined;
@@ -128,15 +112,12 @@ setupzombiegametypevars()
 	self.vignette_nocorpse = undefined;
 	self.death_anim_no_ragdoll = undefined;
 	self.dont_cleanup = 1;
-	if(getdvarint("scr_zombie_left_foot_sharp_turn_only",0) == 1)
-	{
+	if(getdvarint("scr_zombie_left_foot_sharp_turn_only",0) == 1) {
 		self.var_AB3F = 1;
 	}
 }
 
-//Function Number: 6
-setupagent()
-{
+setupagent() {
 	setupzombiegametypevars();
 	self.height = self.var_18F4;
 	self.fgetarg = self.var_18F9;
@@ -156,65 +137,50 @@ setupagent()
 	self gib_fx_override("noclip");
 }
 
-//Function Number: 7
-func_C4E0(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08,param_09,param_0A,param_0B)
-{
+func_C4E0(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08,param_09,param_0A,param_0B) {
 	var_0C = scripts\asm\dlc4\dlc4_asm::gettunedata();
-	if(param_05 == var_0C.entangler_weapon_name)
-	{
+	if(param_05 == var_0C.entangler_weapon_name) {
 		param_02 = 0;
 	}
 
-	if(!isdefined(param_01) || !isplayer(param_01))
-	{
+	if(!isdefined(param_01) || !isplayer(param_01)) {
 		param_02 = 0;
 	}
 
-	[[ level.agent_funcs["dlc4_boss"]["on_damaged_finished"] ]](param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08,param_09,0,param_0A,param_0B);
+	[[level.agent_funcs["dlc4_boss"]["on_damaged_finished"]]](param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08,param_09,0,param_0A,param_0B);
 }
 
-//Function Number: 8
-ondamagefinished(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08,param_09,param_0A,param_0B,param_0C)
-{
-	if(param_02 == 0)
-	{
+ondamagefinished(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08,param_09,param_0A,param_0B,param_0C) {
+	if(param_02 == 0) {
 		return;
 	}
 
 	self.health = 999999;
 	var_0D = 0;
-	if(self.showblood || var_0D)
-	{
+	if(self.showblood || var_0D) {
 		self getrespawndelay(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08,param_09,param_0A,param_0B,param_0C);
 	}
 
-	if(self.var_FCA5 && !var_0D)
-	{
-		if(isdefined(param_06) && isdefined(param_07))
-		{
+	if(self.var_FCA5 && !var_0D) {
+		if(isdefined(param_06) && isdefined(param_07)) {
 			playfx(level._effect["boss_shield_hit"],param_06,param_07 * -150);
 		}
 	}
 
-	if(!self.cantakedamage)
-	{
+	if(!self.cantakedamage) {
 		return;
 	}
 
-	if(isplayer(param_01))
-	{
+	if(isplayer(param_01)) {
 		param_01 thread scripts\cp\cp_damage::updatehitmarker("high_damage_cp");
 	}
 
 	var_0E = scripts\asm\dlc4\dlc4_asm::gettunedata();
-	if(level.fbd.bossstate == "FRENZIED")
-	{
+	if(level.fbd.bossstate == "FRENZIED") {
 		self.frenziedhealth = self.frenziedhealth - min(param_02,self.damagecap);
 		self.damagecap = max(self.damagecap - param_02,0);
-		if(self.frenziedhealth <= 0)
-		{
-			if(!self.interruptable)
-			{
+		if(self.frenziedhealth <= 0) {
+			if(!self.interruptable) {
 				self.frenziedhealth = 1;
 				return;
 			}
@@ -225,8 +191,7 @@ ondamagefinished(param_00,param_01,param_02,param_03,param_04,param_05,param_06,
 		return;
 	}
 
-	if(level.fbd.bossstate == "LAST_STAND")
-	{
+	if(level.fbd.bossstate == "LAST_STAND") {
 		self.laststandhealth = self.laststandhealth - min(param_02,self.damagecap);
 		self.damagecap = max(self.damagecap - param_02,0);
 	}

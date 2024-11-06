@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\mp\maps\mp_codphish\mp_codphish.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 2
- * Decompile Time: 152 ms
- * Timestamp: 10/27/2023 12:13:18 AM
-*******************************************************************/
+/***************************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\mp\maps\mp_codphish\mp_codphish.gsc
+***************************************************************/
 
-//Function Number: 1
-main()
-{
+main() {
 	scripts\mp\maps\mp_codphish\mp_codphish_precache::main();
 	scripts\mp\maps\mp_codphish\gen\mp_codphish_art::main();
 	scripts\mp\maps\mp_codphish\mp_codphish_fx::main();
@@ -28,17 +22,13 @@ main()
 	thread apex_not_outofbounds();
 }
 
-//Function Number: 2
-apex_not_outofbounds()
-{
+apex_not_outofbounds() {
 	level.outofboundstriggerpatches = [];
 	var_00 = getent("apex_unoutofbounds","targetname");
 	level.outofboundstriggerpatches[level.outofboundstriggerpatches.size] = var_00;
 	level waittill("game_ended");
-	foreach(var_00 in level.outofboundstriggerpatches)
-	{
-		if(isdefined(var_00))
-		{
+	foreach(var_00 in level.outofboundstriggerpatches) {
+		if(isdefined(var_00)) {
 			var_00 delete();
 		}
 	}

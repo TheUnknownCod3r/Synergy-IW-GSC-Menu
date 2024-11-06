@@ -1,30 +1,21 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\mp\hud_util.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 42
- * Decompile Time: 1643 ms
- * Timestamp: 10/27/2023 12:20:36 AM
-*******************************************************************/
+/*******************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\mp\hud_util.gsc
+*******************************************/
 
-//Function Number: 1
-setparent(param_00)
-{
-	if(isdefined(self.parent) && self.parent == param_00)
-	{
+setparent(param_00) {
+	if(isdefined(self.parent) && self.parent == param_00) {
 		return;
 	}
 
-	if(isdefined(self.parent))
-	{
+	if(isdefined(self.parent)) {
 		self.parent removechild(self);
 	}
 
 	self.parent = param_00;
 	self.parent addchild(self);
-	if(isdefined(self.point))
-	{
+	if(isdefined(self.point)) {
 		setpoint(self.point,self.relativepoint,self.xoffset,self.yoffset);
 		return;
 	}
@@ -32,26 +23,19 @@ setparent(param_00)
 	setpoint("TOPLEFT");
 }
 
-//Function Number: 2
-getparent()
-{
+getparent() {
 	return self.parent;
 }
 
-//Function Number: 3
-removedestroyedchildren()
-{
-	if(isdefined(self.childchecktime) && self.childchecktime == gettime())
-	{
+removedestroyedchildren() {
+	if(isdefined(self.childchecktime) && self.childchecktime == gettime()) {
 		return;
 	}
 
 	self.childchecktime = gettime();
 	var_00 = [];
-	foreach(var_02 in self.children)
-	{
-		if(!isdefined(var_02))
-		{
+	foreach(var_02 in self.children) {
+		if(!isdefined(var_02)) {
 			continue;
 		}
 
@@ -62,20 +46,15 @@ removedestroyedchildren()
 	self.children = var_00;
 }
 
-//Function Number: 4
-addchild(param_00)
-{
+addchild(param_00) {
 	param_00.index = self.children.size;
 	self.children[self.children.size] = param_00;
 	removedestroyedchildren();
 }
 
-//Function Number: 5
-removechild(param_00)
-{
+removechild(param_00) {
 	param_00.parent = undefined;
-	if(self.children[self.children.size - 1] != param_00)
-	{
+	if(self.children[self.children.size - 1] != param_00) {
 		self.children[param_00.index] = self.children[self.children.size - 1];
 		self.children[param_00.index].index = param_00.index;
 	}
@@ -84,28 +63,22 @@ removechild(param_00)
 	param_00.index = undefined;
 }
 
-//Function Number: 6
-setpoint(param_00,param_01,param_02,param_03,param_04)
-{
-	if(!isdefined(param_04))
-	{
+setpoint(param_00,param_01,param_02,param_03,param_04) {
+	if(!isdefined(param_04)) {
 		param_04 = 0;
 	}
 
 	var_05 = getparent();
-	if(param_04)
-	{
+	if(param_04) {
 		self moveovertime(param_04);
 	}
 
-	if(!isdefined(param_02))
-	{
+	if(!isdefined(param_02)) {
 		param_02 = 0;
 	}
 
 	self.xoffset = param_02;
-	if(!isdefined(param_03))
-	{
+	if(!isdefined(param_03)) {
 		param_03 = 0;
 	}
 
@@ -113,56 +86,46 @@ setpoint(param_00,param_01,param_02,param_03,param_04)
 	self.point = param_00;
 	self.alignx = "center";
 	self.aligny = "middle";
-	if(issubstr(param_00,"TOP"))
-	{
+	if(issubstr(param_00,"TOP")) {
 		self.aligny = "top";
 	}
 
-	if(issubstr(param_00,"BOTTOM"))
-	{
+	if(issubstr(param_00,"BOTTOM")) {
 		self.aligny = "bottom";
 	}
 
-	if(issubstr(param_00,"LEFT"))
-	{
+	if(issubstr(param_00,"LEFT")) {
 		self.alignx = "left";
 	}
 
-	if(issubstr(param_00,"RIGHT"))
-	{
+	if(issubstr(param_00,"RIGHT")) {
 		self.alignx = "right";
 	}
 
-	if(!isdefined(param_01))
-	{
+	if(!isdefined(param_01)) {
 		param_01 = param_00;
 	}
 
 	self.relativepoint = param_01;
 	var_06 = "center_adjustable";
 	var_07 = "middle";
-	if(issubstr(param_01,"TOP"))
-	{
+	if(issubstr(param_01,"TOP")) {
 		var_07 = "top_adjustable";
 	}
 
-	if(issubstr(param_01,"BOTTOM"))
-	{
+	if(issubstr(param_01,"BOTTOM")) {
 		var_07 = "bottom_adjustable";
 	}
 
-	if(issubstr(param_01,"LEFT"))
-	{
+	if(issubstr(param_01,"LEFT")) {
 		var_06 = "left_adjustable";
 	}
 
-	if(issubstr(param_01,"RIGHT"))
-	{
+	if(issubstr(param_01,"RIGHT")) {
 		var_06 = "right_adjustable";
 	}
 
-	if(var_05 == level.uiparent)
-	{
+	if(var_05 == level.uiparent) {
 		self.horzalign = var_06;
 		self.vertalign = var_07;
 	}
@@ -172,16 +135,13 @@ setpoint(param_00,param_01,param_02,param_03,param_04)
 		self.vertalign = var_05.vertalign;
 	}
 
-	if(scripts\mp\utility::strip_suffix(var_06,"_adjustable") == var_05.alignx)
-	{
+	if(scripts\mp\utility::strip_suffix(var_06,"_adjustable") == var_05.alignx) {
 		var_08 = 0;
 		var_09 = 0;
 	}
-	else if(var_08 == "center" || var_07.alignx == "center")
-	{
+	else if(var_08 == "center" || var_07.alignx == "center") {
 		var_08 = int(var_07.width / 2);
-		if(var_07 == "left_adjustable" || var_06.alignx == "right")
-		{
+		if(var_07 == "left_adjustable" || var_06.alignx == "right") {
 			var_09 = -1;
 		}
 		else
@@ -192,8 +152,7 @@ setpoint(param_00,param_01,param_02,param_03,param_04)
 	else
 	{
 		var_08 = var_07.width;
-		if(var_07 == "left_adjustable")
-		{
+		if(var_07 == "left_adjustable") {
 			var_09 = -1;
 		}
 		else
@@ -203,16 +162,13 @@ setpoint(param_00,param_01,param_02,param_03,param_04)
 	}
 
 	self.x = var_05.x + var_08 * var_09;
-	if(scripts\mp\utility::strip_suffix(var_07,"_adjustable") == var_05.aligny)
-	{
+	if(scripts\mp\utility::strip_suffix(var_07,"_adjustable") == var_05.aligny) {
 		var_0A = 0;
 		var_0B = 0;
 	}
-	else if(var_09 == "middle" || var_07.aligny == "middle")
-	{
+	else if(var_09 == "middle" || var_07.aligny == "middle") {
 		var_0A = int(var_07.height / 2);
-		if(var_08 == "top_adjustable" || var_06.aligny == "bottom")
-		{
+		if(var_08 == "top_adjustable" || var_06.aligny == "bottom") {
 			var_0B = -1;
 		}
 		else
@@ -223,8 +179,7 @@ setpoint(param_00,param_01,param_02,param_03,param_04)
 	else
 	{
 		var_0A = var_07.height;
-		if(var_08 == "top_adjustable")
-		{
+		if(var_08 == "top_adjustable") {
 			var_0B = -1;
 		}
 		else
@@ -236,8 +191,7 @@ setpoint(param_00,param_01,param_02,param_03,param_04)
 	self.y = var_05.y + var_0A * var_0B;
 	self.x = self.x + self.xoffset;
 	self.y = self.y + self.yoffset;
-	switch(self.elemtype)
-	{
+	switch(self.elemtype) {
 		case "bar":
 			setpointbar(param_00,param_01,param_02,param_03);
 			break;
@@ -246,20 +200,16 @@ setpoint(param_00,param_01,param_02,param_03,param_04)
 	updatechildren();
 }
 
-//Function Number: 7
-setpointbar(param_00,param_01,param_02,param_03)
-{
+setpointbar(param_00,param_01,param_02,param_03) {
 	self.bar.horzalign = self.horzalign;
 	self.bar.vertalign = self.vertalign;
 	self.bar.alignx = "left";
 	self.bar.aligny = self.aligny;
 	self.bar.y = self.y;
-	if(self.alignx == "left")
-	{
+	if(self.alignx == "left") {
 		self.bar.x = self.x;
 	}
-	else if(self.alignx == "right")
-	{
+	else if(self.alignx == "right") {
 		self.bar.x = self.x - self.width;
 	}
 	else
@@ -267,46 +217,35 @@ setpointbar(param_00,param_01,param_02,param_03)
 		self.bar.x = self.x - int(self.width / 2);
 	}
 
-	if(self.aligny == "top")
-	{
+	if(self.aligny == "top") {
 		self.bar.y = self.y;
 	}
-	else if(self.aligny == "bottom")
-	{
+	else if(self.aligny == "bottom") {
 		self.bar.y = self.y;
 	}
 
 	updatebar(self.bar.frac);
 }
 
-//Function Number: 8
-updatebar(param_00,param_01)
-{
-	if(self.elemtype == "bar")
-	{
+updatebar(param_00,param_01) {
+	if(self.elemtype == "bar") {
 		updatebarscale(param_00,param_01);
 	}
 }
 
-//Function Number: 9
-updatebarscale(param_00,param_01)
-{
+updatebarscale(param_00,param_01) {
 	var_02 = int(self.width * param_00 + 0.5);
-	if(!var_02)
-	{
+	if(!var_02) {
 		var_02 = 1;
 	}
 
 	self.bar.frac = param_00;
 	self.bar setshader(self.bar.shader,var_02,self.height);
-	if(isdefined(param_01) && var_02 < self.width)
-	{
-		if(param_01 > 0)
-		{
+	if(isdefined(param_01) && var_02 < self.width) {
+		if(param_01 > 0) {
 			self.bar scaleovertime(1 - param_00 / param_01,self.width,self.height);
 		}
-		else if(param_01 < 0)
-		{
+		else if(param_01 < 0) {
 			self.bar scaleovertime(param_00 / -1 * param_01,1,self.height);
 		}
 	}
@@ -315,9 +254,7 @@ updatebarscale(param_00,param_01)
 	self.bar.lastupdatetime = gettime();
 }
 
-//Function Number: 10
-createfontstring(param_00,param_01)
-{
+createfontstring(param_00,param_01) {
 	var_02 = newclienthudelem(self);
 	var_02.elemtype = "font";
 	var_02.font = param_00;
@@ -335,11 +272,8 @@ createfontstring(param_00,param_01)
 	return var_02;
 }
 
-//Function Number: 11
-createserverfontstring(param_00,param_01,param_02)
-{
-	if(isdefined(param_02))
-	{
+createserverfontstring(param_00,param_01,param_02) {
+	if(isdefined(param_02)) {
 		var_03 = newteamhudelem(param_02);
 	}
 	else
@@ -363,11 +297,8 @@ createserverfontstring(param_00,param_01,param_02)
 	return var_03;
 }
 
-//Function Number: 12
-createservertimer(param_00,param_01,param_02)
-{
-	if(isdefined(param_02))
-	{
+createservertimer(param_00,param_01,param_02) {
+	if(isdefined(param_02)) {
 		var_03 = newteamhudelem(param_02);
 	}
 	else
@@ -391,9 +322,7 @@ createservertimer(param_00,param_01,param_02)
 	return var_03;
 }
 
-//Function Number: 13
-createtimer(param_00,param_01)
-{
+createtimer(param_00,param_01) {
 	var_02 = newclienthudelem(self);
 	var_02.elemtype = "timer";
 	var_02.font = param_00;
@@ -411,9 +340,7 @@ createtimer(param_00,param_01)
 	return var_02;
 }
 
-//Function Number: 14
-createicon(param_00,param_01,param_02)
-{
+createicon(param_00,param_01,param_02) {
 	var_03 = newclienthudelem(self);
 	var_03.elemtype = "icon";
 	var_03.x = 0;
@@ -427,8 +354,7 @@ createicon(param_00,param_01,param_02)
 	var_03.children = [];
 	var_03 setparent(level.uiparent);
 	var_03.hidden = 0;
-	if(isdefined(param_00))
-	{
+	if(isdefined(param_00)) {
 		var_03 setshader(param_00,param_01,param_02);
 		var_03.shader = param_00;
 	}
@@ -436,11 +362,8 @@ createicon(param_00,param_01,param_02)
 	return var_03;
 }
 
-//Function Number: 15
-createservericon(param_00,param_01,param_02,param_03)
-{
-	if(isdefined(param_03))
-	{
+createservericon(param_00,param_01,param_02,param_03) {
+	if(isdefined(param_03)) {
 		var_04 = newteamhudelem(param_03);
 	}
 	else
@@ -460,8 +383,7 @@ createservericon(param_00,param_01,param_02,param_03)
 	var_04.children = [];
 	var_04 setparent(level.uiparent);
 	var_04.hidden = 0;
-	if(isdefined(param_00))
-	{
+	if(isdefined(param_00)) {
 		var_04 setshader(param_00,param_01,param_02);
 		var_04.shader = param_00;
 	}
@@ -469,11 +391,8 @@ createservericon(param_00,param_01,param_02,param_03)
 	return var_04;
 }
 
-//Function Number: 16
-createserverbar(param_00,param_01,param_02,param_03,param_04,param_05)
-{
-	if(isdefined(param_04))
-	{
+createserverbar(param_00,param_01,param_02,param_03,param_04,param_05) {
+	if(isdefined(param_04)) {
 		var_06 = newteamhudelem(param_04);
 	}
 	else
@@ -489,13 +408,11 @@ createserverbar(param_00,param_01,param_02,param_03,param_04,param_05)
 	var_06.shader = "progress_bar_fill";
 	var_06 setshader("progress_bar_fill",param_01,param_02);
 	var_06.hidden = 0;
-	if(isdefined(param_03))
-	{
+	if(isdefined(param_03)) {
 		var_06.flashfrac = param_03;
 	}
 
-	if(isdefined(param_04))
-	{
+	if(isdefined(param_04)) {
 		var_07 = newteamhudelem(param_04);
 	}
 	else
@@ -521,9 +438,7 @@ createserverbar(param_00,param_01,param_02,param_03,param_04,param_05)
 	return var_07;
 }
 
-//Function Number: 17
-createbar(param_00,param_01,param_02,param_03)
-{
+createbar(param_00,param_01,param_02,param_03) {
 	var_04 = newclienthudelem(self);
 	var_04.x = 0;
 	var_04.y = 0;
@@ -533,8 +448,7 @@ createbar(param_00,param_01,param_02,param_03)
 	var_04.shader = "progress_bar_fill";
 	var_04 setshader("progress_bar_fill",param_01,param_02);
 	var_04.hidden = 0;
-	if(isdefined(param_03))
-	{
+	if(isdefined(param_03)) {
 		var_04.flashfrac = param_03;
 	}
 
@@ -555,20 +469,15 @@ createbar(param_00,param_01,param_02,param_03)
 	return var_05;
 }
 
-//Function Number: 18
-getcurrentfraction()
-{
+getcurrentfraction() {
 	var_00 = self.bar.frac;
-	if(isdefined(self.bar.rateofchange))
-	{
+	if(isdefined(self.bar.rateofchange)) {
 		var_00 = var_00 + gettime() - self.bar.lastupdatetime * self.bar.rateofchange;
-		if(var_00 > 1)
-		{
+		if(var_00 > 1) {
 			var_00 = 1;
 		}
 
-		if(var_00 < 0)
-		{
+		if(var_00 < 0) {
 			var_00 = 0;
 		}
 	}
@@ -576,26 +485,20 @@ getcurrentfraction()
 	return var_00;
 }
 
-//Function Number: 19
-createprimaryprogressbar(param_00,param_01)
-{
-	if(isagent(self))
-	{
+createprimaryprogressbar(param_00,param_01) {
+	if(isagent(self)) {
 		return undefined;
 	}
 
-	if(!isdefined(param_00))
-	{
+	if(!isdefined(param_00)) {
 		param_00 = 0;
 	}
 
-	if(!isdefined(param_01))
-	{
+	if(!isdefined(param_01)) {
 		param_01 = -25;
 	}
 
-	if(self issplitscreenplayer())
-	{
+	if(self issplitscreenplayer()) {
 		param_01 = param_01 + 20;
 	}
 
@@ -604,38 +507,30 @@ createprimaryprogressbar(param_00,param_01)
 	return var_02;
 }
 
-//Function Number: 20
-createprimaryprogressbartext(param_00,param_01,param_02,param_03)
-{
-	if(isagent(self))
-	{
+createprimaryprogressbartext(param_00,param_01,param_02,param_03) {
+	if(isagent(self)) {
 		return undefined;
 	}
 
-	if(!isdefined(param_00))
-	{
+	if(!isdefined(param_00)) {
 		param_00 = 0;
 	}
 
-	if(!isdefined(param_01))
-	{
+	if(!isdefined(param_01)) {
 		param_01 = -25;
 	}
 
-	if(self issplitscreenplayer())
-	{
+	if(self issplitscreenplayer()) {
 		param_01 = param_01 + 20;
 	}
 
 	var_04 = level.primaryprogressbarfontsize;
 	var_05 = "default";
-	if(isdefined(param_02))
-	{
+	if(isdefined(param_02)) {
 		var_04 = param_02;
 	}
 
-	if(isdefined(param_03))
-	{
+	if(isdefined(param_03)) {
 		var_05 = param_03;
 	}
 
@@ -645,71 +540,53 @@ createprimaryprogressbartext(param_00,param_01,param_02,param_03)
 	return var_06;
 }
 
-//Function Number: 21
-createteamprogressbar(param_00)
-{
+createteamprogressbar(param_00) {
 	var_01 = createserverbar((1,0,0),level.teamprogressbarwidth,level.teamprogressbarheight,undefined,param_00);
 	var_01 setpoint("TOP",undefined,0,level.teamprogressbary);
 	return var_01;
 }
 
-//Function Number: 22
-createteamprogressbartext(param_00)
-{
+createteamprogressbartext(param_00) {
 	var_01 = createserverfontstring("default",level.teamprogressbarfontsize,param_00);
 	var_01 setpoint("TOP",undefined,0,level.teamprogressbartexty);
 	return var_01;
 }
 
-//Function Number: 23
-setflashfrac(param_00)
-{
+setflashfrac(param_00) {
 	self.bar.flashfrac = param_00;
 }
 
-//Function Number: 24
-hideelem()
-{
-	if(self.hidden)
-	{
+hideelem() {
+	if(self.hidden) {
 		return;
 	}
 
 	self.hidden = 1;
-	if(self.alpha != 0)
-	{
+	if(self.alpha != 0) {
 		self.alpha = 0;
 	}
 
-	if(self.elemtype == "bar" || self.elemtype == "bar_shader")
-	{
+	if(self.elemtype == "bar" || self.elemtype == "bar_shader") {
 		self.bar.hidden = 1;
-		if(self.bar.alpha != 0)
-		{
+		if(self.bar.alpha != 0) {
 			self.bar.alpha = 0;
 		}
 	}
 }
 
-//Function Number: 25
-showelem()
-{
-	if(!self.hidden)
-	{
+showelem() {
+	if(!self.hidden) {
 		return;
 	}
 
 	self.hidden = 0;
-	if(self.elemtype == "bar" || self.elemtype == "bar_shader")
-	{
-		if(self.alpha != 0.5)
-		{
+	if(self.elemtype == "bar" || self.elemtype == "bar_shader") {
+		if(self.alpha != 0.5) {
 			self.alpha = 0.5;
 		}
 
 		self.bar.hidden = 0;
-		if(self.bar.alpha != 1)
-		{
+		if(self.bar.alpha != 1) {
 			self.bar.alpha = 1;
 			return;
 		}
@@ -717,27 +594,20 @@ showelem()
 		return;
 	}
 
-	if(self.alpha != 1)
-	{
+	if(self.alpha != 1) {
 		self.alpha = 1;
 	}
 }
 
-//Function Number: 26
-flashthread()
-{
+flashthread() {
 	self endon("death");
-	if(!self.hidden)
-	{
+	if(!self.hidden) {
 		self.alpha = 1;
 	}
 
-	for(;;)
-	{
-		if(self.frac >= self.flashfrac)
-		{
-			if(!self.hidden)
-			{
+	for(;;) {
+		if(self.frac >= self.flashfrac) {
+			if(!self.hidden) {
 				self fadeovertime(0.3);
 				self.alpha = 0.2;
 				wait(0.35);
@@ -749,8 +619,7 @@ flashthread()
 			continue;
 		}
 
-		if(!self.hidden && self.alpha != 1)
-		{
+		if(!self.hidden && self.alpha != 1) {
 			self.alpha = 1;
 		}
 
@@ -758,102 +627,74 @@ flashthread()
 	}
 }
 
-//Function Number: 27
-destroyelem()
-{
+destroyelem() {
 	var_00 = [];
-	for(var_01 = 0;var_01 < self.children.size;var_01++)
-	{
-		if(isdefined(self.children[var_01]))
-		{
+	for(var_01 = 0;var_01 < self.children.size;var_01++) {
+		if(isdefined(self.children[var_01])) {
 			var_00[var_00.size] = self.children[var_01];
 		}
 	}
 
-	for(var_01 = 0;var_01 < var_00.size;var_01++)
-	{
+	for(var_01 = 0;var_01 < var_00.size;var_01++) {
 		var_00[var_01] setparent(getparent());
 	}
 
-	if(self.elemtype == "bar" || self.elemtype == "bar_shader")
-	{
+	if(self.elemtype == "bar" || self.elemtype == "bar_shader") {
 		self.bar destroy();
 	}
 
 	self destroy();
 }
 
-//Function Number: 28
-seticonshader(param_00)
-{
+seticonshader(param_00) {
 	self setshader(param_00,self.width,self.height);
 	self.shader = param_00;
 }
 
-//Function Number: 29
-geticonshader(param_00)
-{
+geticonshader(param_00) {
 	return self.shader;
 }
 
-//Function Number: 30
-seticonsize(param_00,param_01)
-{
+seticonsize(param_00,param_01) {
 	self setshader(self.shader,param_00,param_01);
 }
 
-//Function Number: 31
-setwidth(param_00)
-{
+setwidth(param_00) {
 	self.width = param_00;
 }
 
-//Function Number: 32
-setheight(param_00)
-{
+setheight(param_00) {
 	self.height = param_00;
 }
 
-//Function Number: 33
-setsize(param_00,param_01)
-{
+setsize(param_00,param_01) {
 	self.width = param_00;
 	self.height = param_01;
 }
 
-//Function Number: 34
-updatechildren()
-{
-	for(var_00 = 0;var_00 < self.children.size;var_00++)
-	{
+updatechildren() {
+	for(var_00 = 0;var_00 < self.children.size;var_00++) {
 		var_01 = self.children[var_00];
 		var_01 setpoint(var_01.point,var_01.relativepoint,var_01.xoffset,var_01.yoffset);
 	}
 }
 
-//Function Number: 35
-transitionreset()
-{
+transitionreset() {
 	self.x = self.xoffset;
 	self.y = self.yoffset;
-	if(self.elemtype == "font")
-	{
+	if(self.elemtype == "font") {
 		self.fontscale = self.basefontscale;
 		self.label = &"";
 	}
-	else if(self.elemtype == "icon")
-	{
+	else if(self.elemtype == "icon") {
 		self setshader(self.shader,self.width,self.height);
 	}
 
 	self.alpha = 0;
 }
 
-//Function Number: 36
-transitionzoomin(param_00)
-{
-	switch(self.elemtype)
-	{
+transitionzoomin(param_00) {
+	switch(self.elemtype) {
 		case "timer":
 		case "font":
 			self.fontscale = 6.3;
@@ -868,13 +709,10 @@ transitionzoomin(param_00)
 	}
 }
 
-//Function Number: 37
-transitionpulsefxin(param_00,param_01)
-{
+transitionpulsefxin(param_00,param_01) {
 	var_02 = int(param_00) * 1000;
 	var_03 = int(param_01) * 1000;
-	switch(self.elemtype)
-	{
+	switch(self.elemtype) {
 		case "timer":
 		case "font":
 			self setpulsefx(var_02 + 250,var_03 + var_02,var_02 + 250);
@@ -885,16 +723,12 @@ transitionpulsefxin(param_00,param_01)
 	}
 }
 
-//Function Number: 38
-transitionslidein(param_00,param_01)
-{
-	if(!isdefined(param_01))
-	{
+transitionslidein(param_00,param_01) {
+	if(!isdefined(param_01)) {
 		param_01 = "left";
 	}
 
-	switch(param_01)
-	{
+	switch(param_01) {
 		case "left":
 			self.x = self.x + 1000;
 			break;
@@ -917,18 +751,14 @@ transitionslidein(param_00,param_01)
 	self.y = self.yoffset;
 }
 
-//Function Number: 39
-transitionslideout(param_00,param_01)
-{
-	if(!isdefined(param_01))
-	{
+transitionslideout(param_00,param_01) {
+	if(!isdefined(param_01)) {
 		param_01 = "left";
 	}
 
 	var_02 = self.xoffset;
 	var_03 = self.yoffset;
-	switch(param_01)
-	{
+	switch(param_01) {
 		case "left":
 			var_02 = var_02 + 1000;
 			break;
@@ -952,11 +782,8 @@ transitionslideout(param_00,param_01)
 	self.y = var_03;
 }
 
-//Function Number: 40
-transitionzoomout(param_00)
-{
-	switch(self.elemtype)
-	{
+transitionzoomout(param_00) {
+	switch(self.elemtype) {
 		case "timer":
 		case "font":
 			self changefontscaleovertime(param_00);
@@ -969,12 +796,9 @@ transitionzoomout(param_00)
 	}
 }
 
-//Function Number: 41
-transitionfadein(param_00)
-{
+transitionfadein(param_00) {
 	self fadeovertime(param_00);
-	if(isdefined(self.maxalpha))
-	{
+	if(isdefined(self.maxalpha)) {
 		self.alpha = self.maxalpha;
 		return;
 	}
@@ -982,9 +806,7 @@ transitionfadein(param_00)
 	self.alpha = 1;
 }
 
-//Function Number: 42
-transitionfadeout(param_00)
-{
+transitionfadeout(param_00) {
 	self fadeovertime(0.15);
 	self.alpha = 0;
 }

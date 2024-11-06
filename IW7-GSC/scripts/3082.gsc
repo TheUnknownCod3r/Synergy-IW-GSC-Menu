@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: 3082.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 4
- * Decompile Time: 1 ms
- * Timestamp: 10/27/2023 12:26:07 AM
-*******************************************************************/
+/****************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\3082.gsc
+****************************/
 
-//Function Number: 1
-func_35A6(param_00)
-{
+func_35A6(param_00) {
 	self.var_10264 = 1;
 	self.bt.var_E5FA = 1;
 	lib_0A16::func_98D2();
@@ -33,23 +27,18 @@ func_35A6(param_00)
 	return level.success;
 }
 
-//Function Number: 2
-func_170A()
-{
+func_170A() {
 	self.bt.var_ACB4 = [];
 	self.bt.var_ACB4[self.bt.var_ACB4.size] = func_4911("j_clavicle_inner_ri");
 	self.bt.var_ACB4[self.bt.var_ACB4.size] = func_4911("j_clavicle_inner_le");
 	self.bt.var_71C9 = ::func_E138;
 }
 
-//Function Number: 3
-func_4911(param_00)
-{
+func_4911(param_00) {
 	var_01 = spawn("script_model",self.origin);
 	var_01 setmodel("tag_origin");
 	var_01 linkto(self,param_00,(10,0,0),(0,0,0));
-	if(self.team == "axis")
-	{
+	if(self.team == "axis") {
 		playfxontag(level.var_7649["c12_enemy_light"],var_01,"tag_origin");
 	}
 	else
@@ -60,15 +49,10 @@ func_4911(param_00)
 	return var_01;
 }
 
-//Function Number: 4
-func_E138()
-{
-	if(isdefined(self.bt.var_ACB4))
-	{
-		foreach(var_01 in self.bt.var_ACB4)
-		{
-			if(isdefined(var_01))
-			{
+func_E138() {
+	if(isdefined(self.bt.var_ACB4)) {
+		foreach(var_01 in self.bt.var_ACB4) {
+			if(isdefined(var_01)) {
 				var_01 delete();
 			}
 		}

@@ -1,24 +1,16 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\anim\animset.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 44
- * Decompile Time: 2344 ms
- * Timestamp: 10\26\2023 11:59:52 PM
-*******************************************************************/
+/********************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\anim\animset.gsc
+********************************************/
 
-//Function Number: 1
-func_94FD()
-{
-	if(isdefined(level.var_1FD2))
-	{
+func_94FD() {
+	if(isdefined(level.var_1FD2)) {
 		return;
 	}
 
 	anim.var_1FD2 = 1;
-	if(!isdefined(level.archetypes))
-	{
+	if(!isdefined(level.archetypes)) {
 		anim.archetypes = [];
 	}
 
@@ -58,217 +50,114 @@ func_94FD()
 	func_9503();
 }
 
-//Function Number: 2
-func_DEE7(param_00,param_01,param_02)
-{
+func_DEE7(param_00,param_01,param_02) {
 	func_94FD();
 	level.archetypes[param_00] = param_01;
-	if(isdefined(param_01["flashed"]))
-	{
+	if(isdefined(param_01["flashed"])) {
 		level.var_6EC0[param_00] = 0;
 	}
 
-	if(isdefined(param_02) && param_02)
-	{
+	if(isdefined(param_02) && param_02) {
 		scripts\anim\init_move_transitions::_meth_814D(param_00);
 	}
 }
 
-//Function Number: 3
-func_2126(param_00)
-{
+func_2126(param_00) {
 	return archetypeassetloaded(param_00) || isdefined(level.archetypes[param_00]);
 }
 
-//Function Number: 4
-func_9520()
-{
-}
+func_9520() {}
 
-//Function Number: 5
-func_9516()
-{
-}
+func_9516() {}
 
-//Function Number: 6
-func_9524()
-{
-}
+func_9524() {}
 
-//Function Number: 7
-func_950C()
-{
-}
+func_950C() {}
 
-//Function Number: 8
-func_951C()
-{
-}
+func_951C() {}
 
-//Function Number: 9
-func_951F()
-{
-}
+func_951F() {}
 
-//Function Number: 10
-func_9523()
-{
-}
+func_9523() {}
 
-//Function Number: 11
-func_950D()
-{
-}
+func_950D() {}
 
-//Function Number: 12
-func_9517()
-{
-}
+func_9517() {}
 
-//Function Number: 13
-func_9515()
-{
-}
+func_9515() {}
 
-//Function Number: 14
-func_9513()
-{
-}
+func_9513() {}
 
-//Function Number: 15
-func_9511()
-{
-}
+func_9511() {}
 
-//Function Number: 16
-func_951E()
-{
-}
+func_951E() {}
 
-//Function Number: 17
-func_9522()
-{
-}
+func_9522() {}
 
-//Function Number: 18
-func_9512()
-{
-}
+func_9512() {}
 
-//Function Number: 19
-func_9506(param_00)
-{
-}
+func_9506(param_00) {}
 
-//Function Number: 20
-func_950F(param_00,param_01,param_02,param_03)
-{
-}
+func_950F(param_00,param_01,param_02,param_03) {}
 
-//Function Number: 21
-func_9505(param_00)
-{
-}
+func_9505(param_00) {}
 
-//Function Number: 22
-func_950E(param_00,param_01,param_02)
-{
-}
+func_950E(param_00,param_01,param_02) {}
 
-//Function Number: 23
-func_413F()
-{
+func_413F() {
 	self.custommoveanimset = undefined;
 	self.var_4C8C = undefined;
 	self.var_440C = undefined;
 	self.var_4400 = undefined;
 }
 
-//Function Number: 24
-func_F2C2(param_00)
-{
-}
+func_F2C2(param_00) {}
 
-//Function Number: 25
-func_F2C1()
-{
-}
+func_F2C1() {}
 
-//Function Number: 26
-func_F2B9()
-{
-}
+func_F2B9() {}
 
-//Function Number: 27
-func_F2BD()
-{
-}
+func_F2BD() {}
 
-//Function Number: 28
-func_F2B5()
-{
-}
+func_F2B5() {}
 
-//Function Number: 29
-func_F2BB(param_00)
-{
-}
+func_F2BB(param_00) {}
 
-//Function Number: 30
-func_F2B4()
-{
-}
+func_F2B4() {}
 
-//Function Number: 31
-func_F2BA(param_00)
-{
-}
+func_F2BA(param_00) {}
 
-//Function Number: 32
-func_F2B3()
-{
-}
+func_F2B3() {}
 
-//Function Number: 33
-func_F2B2()
-{
-}
+func_F2B2() {}
 
-//Function Number: 34
-func_F2BE()
-{
-	if(scripts\anim\utility_common::isusingsidearm())
-	{
+func_F2BE() {
+	if(scripts\anim\utility_common::isusingsidearm()) {
 		self.var_1491.var_2274 = scripts\anim\utility::func_B028("pistol_stand");
 		return;
 	}
 
-	if(isdefined(self.var_440C))
-	{
+	if(isdefined(self.var_440C)) {
 		self.var_1491.var_2274 = self.var_440C;
 		return;
 	}
 
-	if(isdefined(self.heat))
-	{
+	if(isdefined(self.heat)) {
 		self.var_1491.var_2274 = scripts\anim\utility::func_B028("heat_stand");
 		return;
 	}
 
-	if(scripts\anim\utility_common::usingrocketlauncher())
-	{
+	if(scripts\anim\utility_common::usingrocketlauncher()) {
 		self.var_1491.var_2274 = scripts\anim\utility::func_B028("rpg_stand");
 		return;
 	}
 
-	if(isdefined(self.var_394) && scripts\anim\utility_common::weapon_pump_action_shotgun())
-	{
+	if(isdefined(self.var_394) && scripts\anim\utility_common::weapon_pump_action_shotgun()) {
 		self.var_1491.var_2274 = scripts\anim\utility::func_B028("shotgun_stand");
 		return;
 	}
 
-	if(scripts\anim\utility::func_9D9B())
-	{
+	if(scripts\anim\utility::func_9D9B()) {
 		self.var_1491.var_2274 = scripts\anim\utility::func_B028("cqb_stand");
 		return;
 	}
@@ -276,28 +165,22 @@ func_F2BE()
 	self.var_1491.var_2274 = scripts\anim\utility::func_B028("default_stand");
 }
 
-//Function Number: 35
-func_F2B6()
-{
-	if(scripts\anim\utility_common::isusingsidearm())
-	{
+func_F2B6() {
+	if(scripts\anim\utility_common::isusingsidearm()) {
 		scripts\anim\shared::placeweaponon(self.primaryweapon,"right");
 	}
 
-	if(isdefined(self.var_4400))
-	{
+	if(isdefined(self.var_4400)) {
 		self.var_1491.var_2274 = self.var_4400;
 		return;
 	}
 
-	if(scripts\anim\utility_common::usingrocketlauncher())
-	{
+	if(scripts\anim\utility_common::usingrocketlauncher()) {
 		self.var_1491.var_2274 = scripts\anim\utility::func_B028("rpg_crouch");
 		return;
 	}
 
-	if(isdefined(self.var_394) && scripts\anim\utility_common::weapon_pump_action_shotgun())
-	{
+	if(isdefined(self.var_394) && scripts\anim\utility_common::weapon_pump_action_shotgun()) {
 		self.var_1491.var_2274 = scripts\anim\utility::func_B028("shotgun_crouch");
 		return;
 	}
@@ -305,82 +188,52 @@ func_F2B6()
 	self.var_1491.var_2274 = scripts\anim\utility::func_B028("default_crouch");
 }
 
-//Function Number: 36
-func_F2BC()
-{
-	if(scripts\anim\utility_common::isusingsidearm())
-	{
+func_F2BC() {
+	if(scripts\anim\utility_common::isusingsidearm()) {
 		scripts\anim\shared::placeweaponon(self.primaryweapon,"right");
 	}
 
 	self.var_1491.var_2274 = scripts\anim\utility::func_B028("default_prone");
 }
 
-//Function Number: 37
-func_9692()
-{
-}
+func_9692() {}
 
-//Function Number: 38
-func_95D5()
-{
-}
+func_95D5() {}
 
-//Function Number: 39
-func_960E()
-{
-}
+func_960E() {}
 
-//Function Number: 40
-func_9521()
-{
-}
+func_9521() {}
 
-//Function Number: 41
-func_FA33()
-{
+func_FA33() {
 	self.var_B4C3 = 130;
 	self.var_E878 = 0.4615385;
 	self.var_E876 = 0.3;
 }
 
-//Function Number: 42
-func_9503()
-{
-}
+func_9503() {}
 
-//Function Number: 43
-func_F2AC()
-{
+func_F2AC() {
 	self.var_1491.var_BCA5["move_l"] = scripts\anim\utility::func_B027("ambush","move_l");
 	self.var_1491.var_BCA5["move_r"] = scripts\anim\utility::func_B027("ambush","move_r");
 	self.var_1491.var_BCA5["move_b"] = scripts\anim\utility::func_B027("ambush","move_b");
 }
 
-//Function Number: 44
-func_8CD8()
-{
-	if(self.var_394 != self.primaryweapon)
-	{
+func_8CD8() {
+	if(self.var_394 != self.primaryweapon) {
 		return scripts\anim\utility::func_1F67("reload");
 	}
 
-	if(isdefined(self.target_getindexoftarget))
-	{
-		if(self getwatcheddvar())
-		{
+	if(isdefined(self.target_getindexoftarget)) {
+		if(self getwatcheddvar()) {
 			var_00 = undefined;
-			if(self.var_205.type == "Cover Left")
-			{
+			if(self.var_205.type == "Cover Left") {
 				var_00 = scripts\anim\utility::func_B027("heat_reload","reload_cover_left");
 			}
-			else if(self.var_205.type == "Cover Right")
-			{
+			else if(self.var_205.type == "Cover Right") {
 				var_00 = scripts\anim\utility::func_B027("heat_reload","reload_cover_right");
 			}
 
-			if(isdefined(var_00))
-			{
+			if(isdefined(var_00)) {
 				return var_00;
 			}
 		}

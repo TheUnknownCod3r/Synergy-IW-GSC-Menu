@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\cp\maps\cp_town\gen\cp_town_fx.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 1
- * Decompile Time: 706 ms
- * Timestamp: 10/27/2023 12:06:45 AM
-*******************************************************************/
+/**************************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\cp\maps\cp_town\gen\cp_town_fx.gsc
+**************************************************************/
 
-//Function Number: 1
-main()
-{
+main() {
 	var_00 = scripts\engine\utility::createoneshoteffect("vfx_zb_pack_glow");
 	var_00 scripts\common\createfx::set_origin_and_angles((-10203.7,760.745,-1640.9),(0,0,0));
 	var_00.v["fxid"] = "vfx_zb_pack_glow";

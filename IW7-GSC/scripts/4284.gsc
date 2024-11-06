@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: 4284.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 1
- * Decompile Time: 265 ms
- * Timestamp: 10/27/2023 12:32:02 AM
-*******************************************************************/
+/****************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\4284.gsc
+****************************/
 
-//Function Number: 1
-main()
-{
+main() {
 	var_00 = scripts\engine\utility::createoneshoteffect("vfx_cliff_sand_drift");
 	var_00 scripts\common\createfx::set_origin_and_angles((3878.24,1970.28,336.409),(0,266,0));
 	var_00.v["fxid"] = "vfx_cliff_sand_drift";

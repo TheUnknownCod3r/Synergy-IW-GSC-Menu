@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\mp\bots\bots_powers.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 12
- * Decompile Time: 580 ms
- * Timestamp: 10/27/2023 12:27:42 AM
-*******************************************************************/
+/***************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\mp\bots\bots_powers.gsc
+***************************************************/
 
-//Function Number: 1
-func_2E53()
-{
+func_2E53() {
 	level.var_2D1C = [];
 	level.var_2D1C["power_domeshield"] = ::scripts/mp/bots/bots_power_reaper::func_8995;
 	level.var_2D1C["power_overCharge"] = ::func_5234;
@@ -22,9 +16,7 @@ func_2E53()
 	level.var_2D1C["power_blinkKnife"] = ::func_897E;
 }
 
-//Function Number: 2
-func_2D5A()
-{
+func_2D5A() {
 	self notify("bot_detect_friendly_domeshields");
 	self endon("bot_detect_friendly_domeshields");
 	level endon("game_ended");
@@ -32,10 +24,8 @@ func_2D5A()
 	self endon("disconnect");
 	var_00 = 0;
 	self botsetflag("disable_attack",0);
-	for(;;)
-	{
-		if(var_00)
-		{
+	for(;;) {
+		if(var_00) {
 			wait(0.05);
 		}
 		else
@@ -43,30 +33,25 @@ func_2D5A()
 			wait(0.5);
 		}
 
-		if(var_00)
-		{
+		if(var_00) {
 			self botsetflag("disable_attack",0);
 			var_00 = 0;
 		}
 
-		if(isdefined(self.isnodeoccupied))
-		{
+		if(isdefined(self.isnodeoccupied)) {
 			var_01 = self geteye();
 			var_02 = self.isnodeoccupied geteye();
 			var_03 = bullettrace(var_01,var_02,0,self);
 			var_04 = var_03["entity"];
-			if(!isdefined(var_04) || !isdefined(var_04.var_2B0E))
-			{
+			if(!isdefined(var_04) || !isdefined(var_04.var_2B0E)) {
 				continue;
 			}
 
-			if(!isdefined(var_04.triggerportableradarping))
-			{
+			if(!isdefined(var_04.triggerportableradarping)) {
 				continue;
 			}
 
-			if(var_04.triggerportableradarping.team == self.team)
-			{
+			if(var_04.triggerportableradarping.team == self.team) {
 				self botsetflag("disable_attack",1);
 				var_00 = 1;
 				continue;
@@ -75,77 +60,59 @@ func_2D5A()
 	}
 }
 
-//Function Number: 3
-bot_think_powers()
-{
+bot_think_powers() {
 	self notify("bot_think_powers");
 	self endon("bot_think_powers");
 	level endon("game_ended");
 	self endon("death");
 	self endon("disconnect");
 	thread func_2D5A();
-	if(isdefined(self.powers) && self.powers.size > 0)
-	{
-		if(isdefined(self.var_AE7B) && isdefined(self.powers[self.var_AE7B]))
-		{
-			if(isdefined(level.var_2D1C[self.var_AE7B]))
-			{
-				self thread [[ level.var_2D1C[self.var_AE7B] ]](self.var_AE7B,"primary");
+	if(isdefined(self.powers) && self.powers.size > 0) {
+		if(isdefined(self.var_AE7B) && isdefined(self.powers[self.var_AE7B])) {
+			if(isdefined(level.var_2D1C[self.var_AE7B])) {
+				self thread [[level.var_2D1C[self.var_AE7B]]](self.var_AE7B,"primary");
 			}
 		}
 
-		if(isdefined(self.var_AE7D) && isdefined(self.powers[self.var_AE7D]))
-		{
-			if(isdefined(level.var_2D1C[self.var_AE7D]))
-			{
-				self thread [[ level.var_2D1C[self.var_AE7D] ]](self.var_AE7D,"secondary");
+		if(isdefined(self.var_AE7D) && isdefined(self.powers[self.var_AE7D])) {
+			if(isdefined(level.var_2D1C[self.var_AE7D])) {
+				self thread [[level.var_2D1C[self.var_AE7D]]](self.var_AE7D,"secondary");
 			}
 		}
 	}
 
-	for(;;)
-	{
+	for(;;) {
 		self waittill("power_available",var_00,var_01);
-		if(isdefined(level.var_2D1C[var_00]))
-		{
-			self thread [[ level.var_2D1C[var_00] ]](var_00,var_01);
+		if(isdefined(level.var_2D1C[var_00])) {
+			self thread [[level.var_2D1C[var_00]]](var_00,var_01);
 		}
 	}
 }
 
-//Function Number: 4
-func_1384F(param_00,param_01)
-{
+func_1384F(param_00,param_01) {
 	level endon("game_ended");
 	self endon("death");
 	self endon("disconnect");
 	self endon("powers_cleanUp");
-	for(;;)
-	{
+	for(;;) {
 		self waittill("power_activated",var_02,var_03);
-		if(var_02 == param_00 && var_03 == param_01)
-		{
+		if(var_02 == param_00 && var_03 == param_01) {
 			break;
 		}
 	}
 }
 
-//Function Number: 5
-func_5234(param_00,param_01)
-{
+func_5234(param_00,param_01) {
 	level endon("game_ended");
 	self endon("death");
 	self endon("disconnect");
 	self endon("powers_cleanUp");
-	for(;;)
-	{
-		while(!isdefined(self.isnodeoccupied) || !isalive(self.isnodeoccupied))
-		{
+	for(;;) {
+		while(!isdefined(self.isnodeoccupied) || !isalive(self.isnodeoccupied)) {
 			wait(0.1);
 		}
 
-		if(!self botcanseeentity(self.isnodeoccupied))
-		{
+		if(!self botcanseeentity(self.isnodeoccupied)) {
 			wait(0.1);
 			continue;
 		}
@@ -153,22 +120,18 @@ func_5234(param_00,param_01)
 		var_02 = 0;
 		var_03 = 1400;
 		var_04 = distance(self.origin,self.isnodeoccupied.origin);
-		if(self _meth_8520())
-		{
+		if(self _meth_8520()) {
 			var_02 = 700;
 		}
 
-		if(var_02 != 0)
-		{
-			if(var_04 < var_02)
-			{
+		if(var_02 != 0) {
+			if(var_04 < var_02) {
 				wait(0.5);
 				continue;
 			}
 		}
 
-		if(var_04 > var_03)
-		{
+		if(var_04 > var_03) {
 			wait(0.5);
 			continue;
 		}
@@ -182,32 +145,24 @@ func_5234(param_00,param_01)
 	self botsetflag(var_05,0);
 }
 
-//Function Number: 6
-func_897E(param_00,param_01)
-{
+func_897E(param_00,param_01) {
 	var_02 = self botgetdifficultysetting("throwKnifeChance");
 	self getpassivestruct("throwKnifeChance",0.25);
 }
 
-//Function Number: 7
-func_8BEE()
-{
-	if(!isalive(self) || !isdefined(self.isnodeoccupied))
-	{
+func_8BEE() {
+	if(!isalive(self) || !isdefined(self.isnodeoccupied)) {
 		return 0;
 	}
 
-	if(self botcanseeentity(self.isnodeoccupied) && self _meth_8520())
-	{
+	if(self botcanseeentity(self.isnodeoccupied) && self _meth_8520()) {
 		return 1;
 	}
 
 	return 0;
 }
 
-//Function Number: 8
-usepowerweapon(param_00,param_01)
-{
+usepowerweapon(param_00,param_01) {
 	level endon("game_ended");
 	self endon("death");
 	self endon("disconnect");
@@ -218,22 +173,15 @@ usepowerweapon(param_00,param_01)
 	self botsetflag(var_02,0);
 }
 
-//Function Number: 9
-func_9D7E()
-{
-	if(isdefined(self.touchtriggers))
-	{
-		foreach(var_01 in self.touchtriggers)
-		{
-			if(!isdefined(var_01.useobj) || !isdefined(var_01.useobj.id))
-			{
+func_9D7E() {
+	if(isdefined(self.touchtriggers)) {
+		foreach(var_01 in self.touchtriggers) {
+			if(!isdefined(var_01.useobj) || !isdefined(var_01.useobj.id)) {
 				continue;
 			}
 
-			if(var_01.useobj.id == "domFlag")
-			{
-				if(scripts\mp\bots\gametype_dom::bot_is_capturing_flag(var_01))
-				{
+			if(var_01.useobj.id == "domFlag") {
+				if(scripts\mp\bots\gametype_dom::bot_is_capturing_flag(var_01)) {
 					return 1;
 				}
 			}
@@ -243,93 +191,73 @@ func_9D7E()
 	return 0;
 }
 
-//Function Number: 10
-useprompt(param_00,param_01,param_02,param_03)
-{
+useprompt(param_00,param_01,param_02,param_03) {
 	level endon("game_ended");
 	self endon("death");
 	self endon("disconnect");
 	self endon("domeshield_used");
 	self endon("powers_cleanUp");
-	if(!isdefined(param_03))
-	{
+	if(!isdefined(param_03)) {
 		param_03 = ::usepowerweapon;
 	}
 
-	for(;;)
-	{
+	for(;;) {
 		wait(0.05);
-		while(!func_8BEE() && !func_9D7E())
-		{
+		while(!func_8BEE() && !func_9D7E()) {
 			wait(0.25);
 		}
 
-		if(!func_9D7E())
-		{
-			for(var_04 = self getcurrentweaponclipammo();var_04 > 0;var_04 = self getcurrentweaponclipammo())
-			{
+		if(!func_9D7E()) {
+			for(var_04 = self getcurrentweaponclipammo();var_04 > 0;var_04 = self getcurrentweaponclipammo()) {
 				wait(0.05);
-				if(!func_8BEE())
-				{
+				if(!func_8BEE()) {
 					break;
 				}
 			}
 		}
 
-		if(func_8BEE() || func_9D7E())
-		{
-			if(isdefined(self.isnodeoccupied))
-			{
+		if(func_8BEE() || func_9D7E()) {
+			if(isdefined(self.isnodeoccupied)) {
 				var_05 = distance(self.origin,self.isnodeoccupied.origin);
-				if(var_05 < param_02)
-				{
+				if(var_05 < param_02) {
 					wait(0.25);
 					continue;
 				}
 			}
 
-			self thread [[ param_03 ]](param_00,param_01);
+			self thread [[param_03]](param_00,param_01);
 			break;
 		}
 	}
 }
 
-//Function Number: 11
-usequickrope(param_00,param_01,param_02,param_03,param_04)
-{
+usequickrope(param_00,param_01,param_02,param_03,param_04) {
 	level endon("game_ended");
 	self endon("death");
 	self endon("disconnect");
 	self endon("domeshield_used");
 	self endon("powers_cleanUp");
-	if(!isdefined(param_04))
-	{
+	if(!isdefined(param_04)) {
 		param_04 = ::usepowerweapon;
 	}
 
-	for(;;)
-	{
+	for(;;) {
 		self waittill("damage");
-		if(isdefined(self.isnodeoccupied))
-		{
+		if(isdefined(self.isnodeoccupied)) {
 			var_05 = distancesquared(self.origin,self.isnodeoccupied.origin);
-			if(var_05 < param_02 * param_02)
-			{
+			if(var_05 < param_02 * param_02) {
 				continue;
 			}
 		}
 
-		if(self.health < param_03)
-		{
-			self thread [[ param_04 ]](param_00,param_01);
+		if(self.health < param_03) {
+			self thread [[param_04]](param_00,param_01);
 			break;
 		}
 	}
 }
 
-//Function Number: 12
-func_8991(param_00,param_01)
-{
+func_8991(param_00,param_01) {
 	thread useprompt(param_00,param_01,400,::usepowerweapon);
 	thread usequickrope(param_00,param_01,450,80,::usepowerweapon);
 }

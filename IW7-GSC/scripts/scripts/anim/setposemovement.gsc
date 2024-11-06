@@ -1,20 +1,12 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\anim\setposemovement.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 55
- * Decompile Time: 2909 ms
- * Timestamp: 10\27\2023 12:00:57 AM
-*******************************************************************/
+/****************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\anim\setposemovement.gsc
+****************************************************/
 
-//Function Number: 1
-setposemovement(param_00,param_01)
-{
-	if(param_00 == "")
-	{
-		if(self.var_1491.pose == "prone" && param_01 == "walk" || param_01 == "run")
-		{
+setposemovement(param_00,param_01) {
+	if(param_00 == "") {
+		if(self.var_1491.pose == "prone" && param_01 == "walk" || param_01 == "run") {
 			param_00 = "crouch";
 		}
 		else
@@ -23,17 +15,14 @@ setposemovement(param_00,param_01)
 		}
 	}
 
-	if(!isdefined(param_01) || param_01 == "")
-	{
+	if(!isdefined(param_01) || param_01 == "") {
 		param_01 = self.var_1491.movement;
 	}
 
-	[[ level.setposemovementfnarray[param_00][param_01] ]]();
+	[[level.setposemovementfnarray[param_00][param_01]]]();
 }
 
-//Function Number: 2
-func_98BF()
-{
+func_98BF() {
 	level.setposemovementfnarray["stand"]["stop"] = ::func_10B7E;
 	level.setposemovementfnarray["stand"]["walk"] = ::func_10B84;
 	level.setposemovementfnarray["stand"]["run"] = ::func_10B76;
@@ -45,14 +34,10 @@ func_98BF()
 	level.setposemovementfnarray["prone"]["run"] = ::func_DA84;
 }
 
-//Function Number: 3
-func_10B7E()
-{
-	switch(self.var_1491.pose)
-	{
+func_10B7E() {
+	switch(self.var_1491.pose) {
 		case "stand":
-			switch(self.var_1491.movement)
-			{
+			switch(self.var_1491.movement) {
 				case "stop":
 					return 0;
 	
@@ -67,8 +52,7 @@ func_10B7E()
 			break;
 
 		case "crouch":
-			switch(self.var_1491.movement)
-			{
+			switch(self.var_1491.movement) {
 				case "stop":
 					func_4AAD();
 					break;
@@ -84,8 +68,7 @@ func_10B7E()
 			break;
 
 		default:
-			switch(self.var_1491.movement)
-			{
+			switch(self.var_1491.movement) {
 				case "stop":
 					func_DA8D();
 					break;
@@ -100,14 +83,10 @@ func_10B7E()
 	return 1;
 }
 
-//Function Number: 4
-func_10B84()
-{
-	switch(self.var_1491.pose)
-	{
+func_10B84() {
+	switch(self.var_1491.pose) {
 		case "stand":
-			switch(self.var_1491.movement)
-			{
+			switch(self.var_1491.movement) {
 				case "stop":
 					func_2B92();
 					break;
@@ -122,8 +101,7 @@ func_10B84()
 			break;
 
 		case "crouch":
-			switch(self.var_1491.movement)
-			{
+			switch(self.var_1491.movement) {
 				case "stop":
 					func_4AAF();
 					break;
@@ -146,14 +124,10 @@ func_10B84()
 	return 1;
 }
 
-//Function Number: 5
-func_10B76()
-{
-	switch(self.var_1491.pose)
-	{
+func_10B76() {
+	switch(self.var_1491.pose) {
 		case "stand":
-			switch(self.var_1491.movement)
-			{
+			switch(self.var_1491.movement) {
 				case "walk":
 				case "stop":
 					return func_2B91();
@@ -164,8 +138,7 @@ func_10B76()
 			break;
 
 		case "crouch":
-			switch(self.var_1491.movement)
-			{
+			switch(self.var_1491.movement) {
 				case "stop":
 					return func_4AAE();
 	
@@ -182,14 +155,10 @@ func_10B76()
 	return 1;
 }
 
-//Function Number: 6
-func_4AA7()
-{
-	switch(self.var_1491.pose)
-	{
+func_4AA7() {
+	switch(self.var_1491.pose) {
 		case "stand":
-			switch(self.var_1491.movement)
-			{
+			switch(self.var_1491.movement) {
 				case "stop":
 					func_10B7F();
 					break;
@@ -208,8 +177,7 @@ func_4AA7()
 			break;
 
 		case "crouch":
-			switch(self.var_1491.movement)
-			{
+			switch(self.var_1491.movement) {
 				case "stop":
 					break;
 	
@@ -235,14 +203,10 @@ func_4AA7()
 	}
 }
 
-//Function Number: 7
-func_4AB1()
-{
-	switch(self.var_1491.pose)
-	{
+func_4AB1() {
+	switch(self.var_1491.pose) {
 		case "stand":
-			switch(self.var_1491.movement)
-			{
+			switch(self.var_1491.movement) {
 				case "stop":
 					func_2B90();
 					break;
@@ -258,8 +222,7 @@ func_4AB1()
 			break;
 
 		case "crouch":
-			switch(self.var_1491.movement)
-			{
+			switch(self.var_1491.movement) {
 				case "stop":
 					func_4AA9();
 					break;
@@ -281,14 +244,10 @@ func_4AB1()
 	return 1;
 }
 
-//Function Number: 8
-func_4A9E()
-{
-	switch(self.var_1491.pose)
-	{
+func_4A9E() {
+	switch(self.var_1491.pose) {
 		case "stand":
-			switch(self.var_1491.movement)
-			{
+			switch(self.var_1491.movement) {
 				case "stop":
 					func_2B8F();
 					break;
@@ -300,8 +259,7 @@ func_4A9E()
 			break;
 
 		case "crouch":
-			switch(self.var_1491.movement)
-			{
+			switch(self.var_1491.movement) {
 				case "stop":
 					func_4AA8();
 					break;
@@ -323,14 +281,10 @@ func_4A9E()
 	return 1;
 }
 
-//Function Number: 9
-func_DA86()
-{
-	switch(self.var_1491.pose)
-	{
+func_DA86() {
+	switch(self.var_1491.pose) {
 		case "stand":
-			switch(self.var_1491.movement)
-			{
+			switch(self.var_1491.movement) {
 				case "stop":
 					func_10B80();
 					break;
@@ -349,8 +303,7 @@ func_DA86()
 			break;
 
 		case "crouch":
-			switch(self.var_1491.movement)
-			{
+			switch(self.var_1491.movement) {
 				case "stop":
 					func_4AAA();
 					break;
@@ -369,8 +322,7 @@ func_DA86()
 			break;
 
 		case "prone":
-			switch(self.var_1491.movement)
-			{
+			switch(self.var_1491.movement) {
 				case "stop":
 					break;
 	
@@ -389,14 +341,10 @@ func_DA86()
 	}
 }
 
-//Function Number: 10
-func_DA91()
-{
-	switch(self.var_1491.pose)
-	{
+func_DA91() {
+	switch(self.var_1491.pose) {
 		case "stand":
-			switch(self.var_1491.movement)
-			{
+			switch(self.var_1491.movement) {
 				case "stop":
 					func_10B82();
 					break;
@@ -408,8 +356,7 @@ func_DA91()
 			break;
 
 		case "crouch":
-			switch(self.var_1491.movement)
-			{
+			switch(self.var_1491.movement) {
 				case "stop":
 					func_4AAC();
 					break;
@@ -421,8 +368,7 @@ func_DA91()
 			break;
 
 		default:
-			switch(self.var_1491.movement)
-			{
+			switch(self.var_1491.movement) {
 				case "stop":
 					func_DA8C();
 					break;
@@ -437,14 +383,10 @@ func_DA91()
 	return 1;
 }
 
-//Function Number: 11
-func_DA84()
-{
-	switch(self.var_1491.pose)
-	{
+func_DA84() {
+	switch(self.var_1491.pose) {
 		case "stand":
-			switch(self.var_1491.movement)
-			{
+			switch(self.var_1491.movement) {
 				case "stop":
 					func_10B81();
 					break;
@@ -456,8 +398,7 @@ func_DA84()
 			break;
 
 		case "crouch":
-			switch(self.var_1491.movement)
-			{
+			switch(self.var_1491.movement) {
 				case "stop":
 					func_4AAB();
 					break;
@@ -469,8 +410,7 @@ func_DA84()
 			break;
 
 		default:
-			switch(self.var_1491.movement)
-			{
+			switch(self.var_1491.movement) {
 				case "stop":
 					func_DA8C();
 					break;
@@ -485,12 +425,9 @@ func_DA84()
 	return 1;
 }
 
-//Function Number: 12
-func_CEED(param_00,param_01,param_02,param_03)
-{
+func_CEED(param_00,param_01,param_02,param_03) {
 	var_04 = gettime() + param_01 * 1000;
-	if(isarray(param_00))
-	{
+	if(isarray(param_00)) {
 		param_00 = param_00[randomint(param_00.size)];
 	}
 
@@ -499,52 +436,38 @@ func_CEED(param_00,param_01,param_02,param_03)
 	self.var_1491.pose = param_02;
 	self.var_1491.movement = param_03;
 	var_05 = var_04 - gettime() \ 1000;
-	if(var_05 < 0.05)
-	{
+	if(var_05 < 0.05) {
 		var_05 = 0.05;
 	}
 
 	scripts\anim\notetracks::donotetracksfortime(var_05,"blendTransition");
 }
 
-//Function Number: 13
-func_D557(param_00,param_01)
-{
+func_D557(param_00,param_01) {
 	func_D554(param_00,"stand","walk",param_01);
 }
 
-//Function Number: 14
-func_10B86()
-{
+func_10B86() {
 	self.var_1491.movement = "stop";
 }
 
-//Function Number: 15
-func_10B85()
-{
+func_10B85() {
 	func_10B86();
 	func_10B7F();
 }
 
-//Function Number: 16
-func_10B7D()
-{
+func_10B7D() {
 	self.var_1491.movement = "stop";
 }
 
-//Function Number: 17
-func_10B7C()
-{
+func_10B7C() {
 	self.var_1491.movement = "stop";
 	self.var_1491.pose = "crouch";
 }
 
-//Function Number: 18
-func_CEEE(param_00)
-{
+func_CEEE(param_00) {
 	var_01 = 0.3;
-	if(self.var_1491.movement != "stop")
-	{
+	if(self.var_1491.movement != "stop") {
 		self endon("movemode");
 		var_01 = 1;
 	}
@@ -552,30 +475,24 @@ func_CEEE(param_00)
 	func_CEED(param_00,var_01,"stand","run");
 }
 
-//Function Number: 19
-func_2B91()
-{
-	if(!self.livestreamingenable)
-	{
+func_2B91() {
+	if(!self.livestreamingenable) {
 		self.var_1491.movement = "run";
 		self.var_1491.pose = "stand";
 		return 0;
 	}
 
-	if(isdefined(self.var_E80C))
-	{
+	if(isdefined(self.var_E80C)) {
 		func_CEEE(self.var_E80C);
 		return 1;
 	}
 
 	var_00 = 0.1;
-	if(self.var_1491.movement != "stop" && self.getcsplinepointtargetname == "none")
-	{
+	if(self.var_1491.movement != "stop" && self.getcsplinepointtargetname == "none") {
 		var_00 = 0.5;
 	}
 
-	if(isdefined(self.var_10AB7))
-	{
+	if(isdefined(self.var_10AB7)) {
 		self _meth_82A9(scripts\anim\utility::func_7FCC("sprint"),1,var_00,1);
 	}
 	else
@@ -590,16 +507,12 @@ func_2B91()
 	return 1;
 }
 
-//Function Number: 20
-func_2B92()
-{
-	if(self.var_1491.movement != "stop")
-	{
+func_2B92() {
+	if(self.var_1491.movement != "stop") {
 		self endon("movemode");
 	}
 
-	if(!isdefined(self.alwaysrunforward) && self.var_1491.pose != "prone")
-	{
+	if(!isdefined(self.alwaysrunforward) && self.var_1491.pose != "prone") {
 		scripts\anim\run::func_F7A9(scripts\anim\utility::func_7FCC("move_b"),scripts\anim\utility::func_7FCC("move_l"),scripts\anim\utility::func_7FCC("move_r"));
 	}
 
@@ -607,80 +520,57 @@ func_2B92()
 	self.var_1491.movement = "walk";
 }
 
-//Function Number: 21
-func_4AAD()
-{
+func_4AAD() {
 	var_00 = 1;
-	if(isdefined(self.var_6B9F))
-	{
+	if(isdefined(self.var_6B9F)) {
 		var_00 = 1.8;
 		self.var_6B9F = undefined;
 	}
 
-	if(scripts\anim\utility_common::isusingsidearm())
-	{
+	if(scripts\anim\utility_common::isusingsidearm()) {
 		return;
 	}
 
 	scripts\anim\utility::func_DCB7();
 }
 
-//Function Number: 22
-func_4AA9()
-{
+func_4AA9() {
 	func_2B90();
 }
 
-//Function Number: 23
-func_4AAF()
-{
+func_4AAF() {
 	func_4AA9();
 	func_2B92();
 }
 
-//Function Number: 24
-func_4AB2()
-{
+func_4AB2() {
 	self.var_1491.movement = "stop";
 }
 
-//Function Number: 25
-func_4AB3()
-{
+func_4AB3() {
 	func_4AB2();
 	func_4AAD();
 }
 
-//Function Number: 26
-func_4AA2()
-{
+func_4AA2() {
 	self.var_1491.movement = "stop";
 }
 
-//Function Number: 27
-func_4AA6()
-{
+func_4AA6() {
 	func_4AA2();
 	func_4AAD();
 }
 
-//Function Number: 28
-func_4AA8()
-{
+func_4AA8() {
 	func_2B8F();
 }
 
-//Function Number: 29
-func_4AAE()
-{
+func_4AAE() {
 	return func_2B91();
 }
 
-//Function Number: 30
-func_2B8F()
-{
-	if(isdefined(self.var_4A9F))
-	{
+func_2B8F() {
+	if(isdefined(self.var_4A9F)) {
 		func_CEED(self.var_4A9F,0.6,"crouch","run");
 		return;
 	}
@@ -690,34 +580,25 @@ func_2B8F()
 	wait(0.05);
 }
 
-//Function Number: 31
-func_DA89()
-{
+func_DA89() {
 	self orientmode("face current");
 	scripts\anim\utility::exitpronewrapper(1);
 	func_DA81(0.2);
 	scripts\anim\cover_prone::func_12EF6(0.1);
 }
 
-//Function Number: 32
-func_DA8E()
-{
+func_DA8E() {
 	func_DA89();
 	func_2B91();
 }
 
-//Function Number: 33
-func_DA8A()
-{
+func_DA8A() {
 	func_DA89();
 	func_2B90();
 }
 
-//Function Number: 34
-func_2B90()
-{
-	if(isdefined(self.var_4A9F))
-	{
+func_2B90() {
+	if(isdefined(self.var_4A9F)) {
 		self _meth_82A5(self.var_4A9F,%body,1,0.4);
 		func_CEED(self.var_4A9F,0.6,"crouch","walk");
 		self notify("BlendIntoCrouchWalk");
@@ -729,21 +610,16 @@ func_2B90()
 	wait(0.05);
 }
 
-//Function Number: 35
-func_10B7F()
-{
+func_10B7F() {
 	scripts\anim\utility::func_DCB7();
 	var_00 = 1;
-	if(isdefined(self.var_6B99))
-	{
+	if(isdefined(self.var_6B99)) {
 		var_00 = 1.8;
 		self.var_6B99 = undefined;
 	}
 }
 
-//Function Number: 36
-func_DA88()
-{
+func_DA88() {
 	scripts\anim\utility::func_DCB7();
 	self orientmode("face current");
 	scripts\anim\utility::exitpronewrapper(1);
@@ -751,135 +627,94 @@ func_DA88()
 	scripts\anim\cover_prone::func_12EF6(0.1);
 }
 
-//Function Number: 37
-func_DA8D()
-{
+func_DA8D() {
 	self orientmode("face current");
 	scripts\anim\utility::exitpronewrapper(1);
 	func_DA81(0.1);
 	scripts\anim\cover_prone::func_12EF6(0.1);
 }
 
-//Function Number: 38
-func_DA8F()
-{
+func_DA8F() {
 	func_DA88();
 	func_4AA9();
 	func_2B92();
 }
 
-//Function Number: 39
-func_DA8B(param_00)
-{
+func_DA8B(param_00) {
 	func_DA81(0.1);
 	scripts\anim\cover_prone::func_12EF6(0.1);
 }
 
-//Function Number: 40
-func_DA8C()
-{
+func_DA8C() {
 	func_DA8B("run");
 }
 
-//Function Number: 41
-func_DA80()
-{
+func_DA80() {
 	func_DA81(0.1);
 	scripts\anim\cover_prone::func_12EF6(0.1);
 }
 
-//Function Number: 42
-func_4AAA()
-{
-}
+func_4AAA() {}
 
-//Function Number: 43
-func_4AAC()
-{
+func_4AAC() {
 	func_4AAA();
 	func_DA8C();
 }
 
-//Function Number: 44
-func_4AAB()
-{
+func_4AAB() {
 	func_4AAA();
 	func_DA8C();
 }
 
-//Function Number: 45
-func_10B80()
-{
-}
+func_10B80() {}
 
-//Function Number: 46
-func_10B82()
-{
+func_10B82() {
 	func_10B80();
 	func_DA8C();
 }
 
-//Function Number: 47
-func_10B81()
-{
+func_10B81() {
 	func_10B80();
 	func_DA8C();
 }
 
-//Function Number: 48
-func_4AA3()
-{
-}
+func_4AA3() {}
 
-//Function Number: 49
-func_4AA5()
-{
+func_4AA5() {
 	func_4AA3();
 	func_DA8C();
 }
 
-//Function Number: 50
-func_4AA4()
-{
+func_4AA4() {
 	func_4AA3();
 	func_DA8C();
 }
 
-//Function Number: 51
-func_D556(param_00,param_01,param_02,param_03,param_04)
-{
+func_D556(param_00,param_01,param_02,param_03,param_04) {
 	self endon("killanimscript");
 	self endon("entered_pose" + param_01);
 	func_D555(param_00,param_01,param_02,param_03,param_04,0);
 }
 
-//Function Number: 52
-func_D554(param_00,param_01,param_02,param_03,param_04)
-{
+func_D554(param_00,param_01,param_02,param_03,param_04) {
 	func_D555(param_00,param_01,param_02,param_03,param_04,1);
 }
 
-//Function Number: 53
-func_D555(param_00,param_01,param_02,param_03,param_04,param_05)
-{
-	if(!isdefined(param_04))
-	{
+func_D555(param_00,param_01,param_02,param_03,param_04,param_05) {
+	if(!isdefined(param_04)) {
 		param_04 = 1;
 	}
 
-	if(param_05)
-	{
+	if(param_05) {
 		thread func_13712(getanimlength(param_00) \ 2,"killtimerscript",param_01);
 	}
 
 	self _meth_82E4("transAnimDone2",param_00,%body,1,0.2,param_04);
-	if(!isdefined(self.var_1491.pose))
-	{
+	if(!isdefined(self.var_1491.pose)) {
 		self.pose = "undefined";
 	}
 
-	if(!isdefined(self.var_1491.movement))
-	{
+	if(!isdefined(self.var_1491.movement)) {
 		self.movement = "undefined";
 	}
 
@@ -889,35 +724,27 @@ func_D555(param_00,param_01,param_02,param_03,param_04,param_05)
 	self.var_1491.pose = param_01;
 	self notify("entered_pose" + param_01);
 	self.var_1491.movement = param_02;
-	if(isdefined(param_03))
-	{
+	if(isdefined(param_03)) {
 		self _meth_82A5(param_03,%body,1,0.3,param_04);
 	}
 }
 
-//Function Number: 54
-func_13712(param_00,param_01,param_02)
-{
+func_13712(param_00,param_01,param_02) {
 	self endon("killanimscript");
 	self endon("death");
 	self endon(param_01);
 	var_03 = self.var_1491.pose;
 	wait(param_00);
-	if(var_03 != "prone" && param_02 == "prone")
-	{
+	if(var_03 != "prone" && param_02 == "prone") {
 		scripts\anim\cover_prone::func_12EF6(0.1);
 		scripts\anim\utility::enterpronewrapper(1);
 		return;
 	}
 
-	if(var_03 == "prone" && param_02 != "prone")
-	{
+	if(var_03 == "prone" && param_02 != "prone") {
 		scripts\anim\utility::exitpronewrapper(1);
 		self orientmode("face default");
 	}
 }
 
-//Function Number: 55
-func_DA81(param_00)
-{
-}
+func_DA81(param_00) {}

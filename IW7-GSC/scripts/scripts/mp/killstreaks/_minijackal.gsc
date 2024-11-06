@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\mp\killstreaks\_minijackal.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 38
- * Decompile Time: 1948 ms
- * Timestamp: 10/27/2023 12:29:05 AM
-*******************************************************************/
+/**********************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\mp\killstreaks\_minijackal.gsc
+**********************************************************/
 
-//Function Number: 1
-init()
-{
+init() {
 	scripts\mp\killstreaks\_killstreaks::registerkillstreak("minijackal",::func_12889,undefined,undefined,undefined,::func_13C16,undefined,::invalid_use_minijackal);
 	level._effect["miniJackal_eyeglow"] = loadfx("vfx/iw7/_requests/mp/vfx_venom_glint");
 	level._effect["miniJackal_explosion"] = loadfx("vfx/iw7/core/mp/killstreaks/vfx_apex_dest_exp.vfx");
@@ -26,17 +20,12 @@ init()
 	level.minijackalsincoming = [];
 }
 
-//Function Number: 2
-func_13C16(param_00)
-{
+func_13C16(param_00) {
 	var_01 = 0;
 	var_02 = 0;
-	foreach(var_04 in level.minijackalsincoming)
-	{
-		if(level.teambased)
-		{
-			if(self.team == var_04.team)
-			{
+	foreach(var_04 in level.minijackalsincoming) {
+		if(level.teambased) {
+			if(self.team == var_04.team) {
 				var_01++;
 			}
 
@@ -46,28 +35,22 @@ func_13C16(param_00)
 		var_02++;
 	}
 
-	if(var_01 >= 1)
-	{
+	if(var_01 >= 1) {
 		scripts\mp\_hud_message::showerrormessage("KILLSTREAKS_MINIJACKAL_MAX");
 		return 0;
 	}
 
-	if(var_02 >= 2)
-	{
+	if(var_02 >= 2) {
 		scripts\mp\_hud_message::showerrormessage("KILLSTREAKS_MINIJACKAL_MAX");
 		return 0;
 	}
 
-	if(isdefined(level.var_B7AD))
-	{
+	if(isdefined(level.var_B7AD)) {
 		var_06 = 0;
 		var_07 = 0;
-		foreach(var_09 in level.var_B7AD)
-		{
-			if(level.teambased)
-			{
-				if(self.team == var_09.triggerportableradarping.team)
-				{
+		foreach(var_09 in level.var_B7AD) {
+			if(level.teambased) {
+				if(self.team == var_09.triggerportableradarping.team) {
 					var_06++;
 				}
 
@@ -77,14 +60,12 @@ func_13C16(param_00)
 			var_07++;
 		}
 
-		if(var_06 + var_01 >= 1)
-		{
+		if(var_06 + var_01 >= 1) {
 			scripts\mp\_hud_message::showerrormessage("KILLSTREAKS_MINIJACKAL_MAX");
 			return 0;
 		}
 
-		if(var_07 + var_02 >= 2)
-		{
+		if(var_07 + var_02 >= 2) {
 			scripts\mp\_hud_message::showerrormessage("KILLSTREAKS_MINIJACKAL_MAX");
 			return 0;
 		}
@@ -94,35 +75,26 @@ func_13C16(param_00)
 	incrementminijackalsincoming(self);
 }
 
-//Function Number: 3
-invalid_use_minijackal(param_00)
-{
+invalid_use_minijackal(param_00) {
 	decrementminijackalsincoming(self);
 }
 
-//Function Number: 4
-incrementminijackalsincoming(param_00)
-{
+incrementminijackalsincoming(param_00) {
 	var_01 = "ent_" + param_00 getentitynumber();
 	level.minijackalsincoming[var_01] = param_00;
 	param_00 thread watchforinterrupt(var_01);
 }
 
-//Function Number: 5
-watchforinterrupt(param_00)
-{
+watchforinterrupt(param_00) {
 	self endon("received_playremote_result");
 	level endon("game_ended");
 	scripts\engine\utility::waittill_any_3("death","disconnect");
 	decrementminijackalsincoming(param_00);
 }
 
-//Function Number: 6
-decrementminijackalsincoming(param_00)
-{
+decrementminijackalsincoming(param_00) {
 	var_01 = undefined;
-	if(isplayer(param_00))
-	{
+	if(isplayer(param_00)) {
 		var_01 = "ent_" + param_00 getentitynumber();
 	}
 	else
@@ -133,20 +105,16 @@ decrementminijackalsincoming(param_00)
 	level.minijackalsincoming[var_01] = undefined;
 }
 
-//Function Number: 7
-func_12889(param_00)
-{
+func_12889(param_00) {
 	var_01 = scripts\mp\killstreaks\_killstreaks::func_D507(param_00);
 	self notify("received_playremote_result");
-	if(!var_01)
-	{
+	if(!var_01) {
 		decrementminijackalsincoming(self);
 		return 0;
 	}
 
 	var_02 = func_6C9B(80,35,20);
-	if(!isdefined(var_02))
-	{
+	if(!isdefined(var_02)) {
 		decrementminijackalsincoming(self);
 		scripts\mp\_hud_message::showerrormessage("KILLSTREAKS_NOT_ENOUGH_SPACE");
 		thread scripts\mp\killstreaks\_killstreaks::func_11086();
@@ -162,19 +130,16 @@ func_12889(param_00)
 	var_07 = "minijackal_strike_mp";
 	var_08 = 1;
 	var_09 = scripts\mp\_killstreak_loot::getrarityforlootitem(param_00.variantid);
-	if(var_09 != "")
-	{
+	if(var_09 != "") {
 		var_03 = var_03 + "_" + var_09;
 		var_05 = var_05 + "_" + var_09;
 	}
 
-	if(scripts\mp\killstreaks\_utility::func_A69F(param_00,"passive_armor_duration"))
-	{
+	if(scripts\mp\killstreaks\_utility::func_A69F(param_00,"passive_armor_duration")) {
 		var_06 = var_06 - 5;
 	}
 
-	if(scripts\mp\killstreaks\_utility::func_A69F(param_00,"passive_twin_dragons"))
-	{
+	if(scripts\mp\killstreaks\_utility::func_A69F(param_00,"passive_twin_dragons")) {
 		var_07 = "minijackal_assault_mp";
 		var_04 = "veh_minijackal_beam_mp";
 		var_08 = 2;
@@ -236,47 +201,37 @@ func_12889(param_00)
 	return 1;
 }
 
-//Function Number: 8
-func_B9A4(param_00)
-{
+func_B9A4(param_00) {
 	param_00 endon("disconnect");
 	level endon("game_ended");
 	self endon("minijackal_end");
-	for(;;)
-	{
+	for(;;) {
 		param_00 waittill("engage boost");
 		self setscriptablepartstate("thrusters","boost",0);
 	}
 }
 
-//Function Number: 9
-func_B9A5(param_00)
-{
+func_B9A5(param_00) {
 	param_00 endon("disconnect");
 	level endon("game_ended");
 	self endon("minijackal_end");
-	for(;;)
-	{
+	for(;;) {
 		param_00 waittill("disengage boost");
 		self _meth_8491("hover");
 		self setscriptablepartstate("thrusters","hover",0);
 	}
 }
 
-//Function Number: 10
-func_B9AF(param_00)
-{
+func_B9AF(param_00) {
 	param_00 endon("disconnect");
 	level endon("game_ended");
 	self endon("minijackal_end");
 	param_00 notifyonplayercommand("ks_switch_weapons","+weapnext");
 	var_01 = self.var_13CC3["hover"];
-	for(;;)
-	{
+	for(;;) {
 		param_00 waittill("ks_switch_weapons");
 		self _meth_849E(var_01);
-		if(var_01 == self.var_13CC3["fly"])
-		{
+		if(var_01 == self.var_13CC3["fly"]) {
 			var_01 = self.var_13CC3["hover"];
 			continue;
 		}
@@ -285,14 +240,11 @@ func_B9AF(param_00)
 	}
 }
 
-//Function Number: 11
-monitor_health(param_00)
-{
+monitor_health(param_00) {
 	param_00 endon("disconnect");
 	level endon("game_ended");
 	self endon("minijackal_end");
-	for(;;)
-	{
+	for(;;) {
 		var_01 = float(float(self.var_11A34) / float(self.max_health));
 		var_01 = clamp(var_01,0,1);
 		self.var_10E4C.alpha = var_01;
@@ -300,16 +252,13 @@ monitor_health(param_00)
 	}
 }
 
-//Function Number: 12
-func_B97A(param_00)
-{
+func_B97A(param_00) {
 	param_00 endon("disconnect");
 	level endon("game_ended");
 	self endon("minijackal_end");
 	param_00 notifyonplayercommand("ks_lockon","+speed_throw");
 	param_00 notifyonplayercommand("ks_lockoff","-speed_throw");
-	for(;;)
-	{
+	for(;;) {
 		param_00 waittill("ks_lockon");
 		self _meth_849E(self.var_13CC3["hover"]);
 		param_00 waittill("ks_lockoff");
@@ -317,39 +266,32 @@ func_B97A(param_00)
 	}
 }
 
-//Function Number: 13
-func_B97F(param_00)
-{
+func_B97F(param_00) {
 	param_00 endon("disconnect");
 	level endon("game_ended");
 	self endon("minijackal_end");
 	param_00 notifyonplayercommand("minijackal_missile_fire","+frag");
 	var_01 = ["tag_missile1","tag_missile2","tag_missile3","tag_missile4"];
 	var_02 = "ui_minijackal_reload";
-	if(scripts\mp\killstreaks\_utility::func_A69F(self.streakinfo,"passive_auto_missiles"))
-	{
+	if(scripts\mp\killstreaks\_utility::func_A69F(self.streakinfo,"passive_auto_missiles")) {
 		var_02 = "ui_minijackal_reload_long";
 	}
 
-	for(;;)
-	{
+	for(;;) {
 		param_00 waittill("minijackal_missile_fire");
-		if(scripts\mp\_utility::istrue(self.var_DF58))
-		{
+		if(scripts\mp\_utility::istrue(self.var_DF58)) {
 			continue;
 		}
 
 		var_03 = self.var_B8B0;
 		param_00 setclientomnvar(var_02,1);
-		for(var_04 = 0;var_04 < var_03;var_04++)
-		{
+		for(var_04 = 0;var_04 < var_03;var_04++) {
 			var_05 = self gettagorigin(var_01[var_04]);
 			var_06 = self gettagorigin("tag_camera") + anglestoforward(self.angles) * 1000;
 			var_07 = scripts\mp\_utility::_magicbullet("shockproj_mp",var_05,var_06,param_00);
 			var_07.streakinfo = self.streakinfo;
 			var_07 setentityowner(self);
-			if(scripts\mp\killstreaks\_utility::func_A69F(self.streakinfo,"passive_auto_missiles"))
-			{
+			if(scripts\mp\killstreaks\_utility::func_A69F(self.streakinfo,"passive_auto_missiles")) {
 				var_07 trackmissiletargetinview(var_05,self);
 			}
 
@@ -364,9 +306,7 @@ func_B97F(param_00)
 	}
 }
 
-//Function Number: 14
-trackmissiletargetinview(param_00,param_01)
-{
+trackmissiletargetinview(param_00,param_01) {
 	var_02 = scripts\mp\killstreaks\_utility::func_7E92(param_01.triggerportableradarping);
 	var_03 = undefined;
 	var_04 = 999999999;
@@ -374,15 +314,12 @@ trackmissiletargetinview(param_00,param_01)
 	var_06 = anglestoforward(param_01.angles);
 	var_07 = [self,param_01,param_01.triggerportableradarping];
 	var_08 = physics_createcontents(["physicscontents_solid","physicscontents_glass","physicscontents_water","physicscontents_vehicle","physicscontents_item"]);
-	foreach(var_0A in var_02)
-	{
-		if(!scripts\mp\killstreaks\_utility::manualmissilecantracktarget(var_0A))
-		{
+	foreach(var_0A in var_02) {
+		if(!scripts\mp\killstreaks\_utility::manualmissilecantracktarget(var_0A)) {
 			continue;
 		}
 
-		if(scripts\mp\_utility::istrue(var_0A.apextargetted))
-		{
+		if(scripts\mp\_utility::istrue(var_0A.apextargetted)) {
 			continue;
 		}
 
@@ -390,15 +327,13 @@ trackmissiletargetinview(param_00,param_01)
 		var_0C = vectornormalize(var_0B - var_05);
 		var_07[var_07.size] = var_0A;
 		var_0D = distance2d(var_05,var_0B);
-		if(scripts\common\trace::ray_trace_passed(var_05,var_0B,var_07,var_08) && vectordot(var_06,var_0C) > 0.75 && var_0D <= var_04)
-		{
+		if(scripts\common\trace::ray_trace_passed(var_05,var_0B,var_07,var_08) && vectordot(var_06,var_0C) > 0.75 && var_0D <= var_04) {
 			var_04 = var_0D;
 			var_03 = var_0A;
 		}
 	}
 
-	if(isdefined(var_03))
-	{
+	if(isdefined(var_03)) {
 		self missile_settargetent(var_03,(0,0,40));
 		self missile_setflightmodedirect();
 		var_03.apextargetted = 1;
@@ -406,19 +341,14 @@ trackmissiletargetinview(param_00,param_01)
 	}
 }
 
-//Function Number: 15
-watchtarget(param_00)
-{
+watchtarget(param_00) {
 	self endon("disconnect");
-	for(;;)
-	{
-		if(!scripts\mp\killstreaks\_utility::manualmissilecantracktarget(self))
-		{
+	for(;;) {
+		if(!scripts\mp\killstreaks\_utility::manualmissilecantracktarget(self)) {
 			break;
 		}
 
-		if(!isdefined(param_00))
-		{
+		if(!isdefined(param_00)) {
 			break;
 		}
 
@@ -426,36 +356,29 @@ watchtarget(param_00)
 	}
 
 	self.apextargetted = undefined;
-	if(isdefined(param_00))
-	{
+	if(isdefined(param_00)) {
 		param_00 missile_cleartarget();
 	}
 }
 
-//Function Number: 16
-func_13A22()
-{
+func_13A22() {
 	self waittill("explode",var_00);
 	playsoundatpos(var_00,"wrist_rocket_explode");
 }
 
-//Function Number: 17
-func_B894(param_00)
-{
+func_B894(param_00) {
 	param_00 endon("disconnect");
 	level endon("game_ended");
 	self endon("minijackal_end");
 	self.var_DF58 = 1;
 	var_01 = 0.8;
 	var_02 = "ui_minijackal_reload";
-	if(scripts\mp\killstreaks\_utility::func_A69F(self.streakinfo,"passive_auto_missiles"))
-	{
+	if(scripts\mp\killstreaks\_utility::func_A69F(self.streakinfo,"passive_auto_missiles")) {
 		var_01 = 1.05;
 		var_02 = "ui_minijackal_reload_long";
 	}
 
-	while(self.var_B8B0 < 4)
-	{
+	while(self.var_B8B0 < 4) {
 		scripts\mp\_hostmigration::waitlongdurationwithhostmigrationpause(var_01);
 		self.var_B8B0++;
 		self setscriptablepartstate("missile_pod_" + self.var_B8B0,"neutral",0);
@@ -465,51 +388,40 @@ func_B894(param_00)
 	self.var_DF58 = undefined;
 }
 
-//Function Number: 18
-func_B95F(param_00)
-{
+func_B95F(param_00) {
 	param_00 endon("disconnect");
 	level endon("game_ended");
 	self endon("minijackal_end");
 	var_01 = 3;
 	var_02 = 4;
 	var_03 = 5;
-	if(scripts\mp\killstreaks\_utility::func_A69F(self.streakinfo,"passive_armor_duration"))
-	{
+	if(scripts\mp\killstreaks\_utility::func_A69F(self.streakinfo,"passive_armor_duration")) {
 		var_01++;
 		var_02++;
 		var_03++;
 	}
 
-	for(;;)
-	{
+	for(;;) {
 		self waittill("damage",var_04,var_05,var_06,var_07,var_08,var_09,var_0A,var_0B,var_0C,var_0D,var_0E,var_0F,var_10,var_11);
 		var_0D = scripts\mp\_utility::func_13CA1(var_0D,var_11);
-		if(isdefined(var_05) && var_05.classname != "trigger_hurt")
-		{
-			if(isdefined(var_05.triggerportableradarping))
-			{
+		if(isdefined(var_05) && var_05.classname != "trigger_hurt") {
+			if(isdefined(var_05.triggerportableradarping)) {
 				var_05 = var_05.triggerportableradarping;
 			}
 
-			if(isdefined(var_05.team) && var_05.team == self.team && var_05 != self.triggerportableradarping)
-			{
+			if(isdefined(var_05.team) && var_05.team == self.team && var_05 != self.triggerportableradarping) {
 				continue;
 			}
 		}
 
-		if(scripts/mp/equipment/phase_shift::isentityphaseshifted(var_05))
-		{
+		if(scripts/mp/equipment/phase_shift::isentityphaseshifted(var_05)) {
 			continue;
 		}
 
-		if(isdefined(var_0D))
-		{
+		if(isdefined(var_0D)) {
 			var_04 = scripts\mp\killstreaks\_utility::getmodifiedantikillstreakdamage(var_05,var_0D,var_08,var_04,self.max_health,var_01,var_02,var_03,1);
-			if(scripts\mp\killstreaks\_utility::func_A69F(self.streakinfo,"passive_armor_duration"))
-			{
-				if(scripts\mp\killstreaks\_utility::isexplosiveantikillstreakweapon(var_0D))
-				{
+			if(scripts\mp\killstreaks\_utility::func_A69F(self.streakinfo,"passive_armor_duration")) {
+				if(scripts\mp\killstreaks\_utility::isexplosiveantikillstreakweapon(var_0D)) {
 					var_05 scripts\mp\_damagefeedback::updatedamagefeedback("hitblastshield");
 				}
 			}
@@ -517,29 +429,24 @@ func_B95F(param_00)
 
 		self.var_EDD7 = self.var_EDD7 - var_04;
 		self.var_11A34 = self.var_11A34 + var_04;
-		if(self.var_EDD7 < 0)
-		{
+		if(self.var_EDD7 < 0) {
 			self.var_EDD7 = 0;
 		}
 
 		param_00 setclientomnvar("ui_killstreak_health",self.var_EDD7 / self.max_health);
-		if(isdefined(var_08))
-		{
+		if(isdefined(var_08)) {
 			param_00 func_4CF1(self,var_08);
 		}
 
-		if(isplayer(var_05))
-		{
+		if(isplayer(var_05)) {
 			var_05 scripts\mp\_damagefeedback::updatedamagefeedback("");
 			scripts\mp\killstreaks\_killstreaks::killstreakhit(var_05,var_0D,self,var_08);
 			scripts\mp\_damage::logattackerkillstreak(self,var_04,var_05,var_06,var_07,var_08,var_09,var_0A,var_0B,var_0C,var_0D);
-			if(self.var_EDD7 <= 0)
-			{
+			if(self.var_EDD7 <= 0) {
 				var_05 notify("destroyed_killstreak",var_0D);
 				var_12 = "callout_destroyed_" + self.streakname;
 				var_13 = scripts\mp\_killstreak_loot::getrarityforlootitem(self.streakinfo.variantid);
-				if(var_13 != "")
-				{
+				if(var_13 != "") {
 					var_12 = var_12 + "_" + var_13;
 				}
 
@@ -547,18 +454,14 @@ func_B95F(param_00)
 			}
 		}
 
-		if(self.var_EDD7 <= 0)
-		{
+		if(self.var_EDD7 <= 0) {
 			self notify("minijackal_end");
 		}
 	}
 }
 
-//Function Number: 19
-func_4CF1(param_00,param_01)
-{
-	switch(param_01)
-	{
+func_4CF1(param_00,param_01) {
+	switch(param_01) {
 		case "MOD_GRENADE_SPLASH":
 		case "MOD_GRENADE":
 		case "MOD_PROJECTILE":
@@ -579,40 +482,31 @@ func_4CF1(param_00,param_01)
 	}
 }
 
-//Function Number: 20
-func_3239(param_00)
-{
+func_3239(param_00) {
 	self earthquakeforplayer(0.2,0.25,param_00.origin,50);
 	self playrumbleonentity("damage_light");
 	thread func_1349D(param_00,0.4);
 }
 
-//Function Number: 21
-func_69E6(param_00)
-{
+func_69E6(param_00) {
 	self earthquakeforplayer(0.5,0.45,param_00.origin,1000);
 	self playrumbleonentity("damage_heavy");
 	thread func_1349D(param_00,0.7);
 }
 
-//Function Number: 22
-func_1349D(param_00,param_01)
-{
+func_1349D(param_00,param_01) {
 	self endon("disconnect");
 	level endon("game_ended");
 	param_00 endon("minijackal_end");
 	param_00.var_10E4C.alpha = param_01;
-	while(param_01 > 0)
-	{
+	while(param_01 > 0) {
 		scripts\engine\utility::waitframe();
 		param_01 = param_01 - 0.1;
 		param_00.var_10E4C.alpha = param_01;
 	}
 }
 
-//Function Number: 23
-func_495B()
-{
+func_495B() {
 	var_00 = newclienthudelem(self);
 	var_00.x = 0;
 	var_00.y = 0;
@@ -627,19 +521,15 @@ func_495B()
 	return var_00;
 }
 
-//Function Number: 24
-func_B961(param_00)
-{
+func_B961(param_00) {
 	level endon("game_ended");
 	self waittill("minijackal_end");
 	self stoploopsound();
 	var_01 = self.origin + anglestoforward(self.angles) * 100;
 	playsoundatpos(self.origin,"frag_grenade_explode");
 	playfx(scripts\engine\utility::getfx("miniJackal_explosion"),self.origin);
-	if(isdefined(param_00))
-	{
-		if(scripts\mp\_utility::isreallyalive(param_00))
-		{
+	if(isdefined(param_00)) {
+		if(scripts\mp\_utility::isreallyalive(param_00)) {
 			param_00 earthquakeforplayer(0.6,1,self.origin,500);
 		}
 
@@ -660,18 +550,15 @@ func_B961(param_00)
 		param_00 scripts\mp\_missions::func_D991("ch_apex_pilot",int(var_02));
 	}
 
-	if(isdefined(self.var_115D6))
-	{
+	if(isdefined(self.var_115D6)) {
 		self.var_115D6 delete();
 	}
 
-	if(isdefined(self.var_C7FF))
-	{
+	if(isdefined(self.var_C7FF)) {
 		self.var_C7FF delete();
 	}
 
-	if(isdefined(self.var_10E4C))
-	{
+	if(isdefined(self.var_10E4C)) {
 		self.var_10E4C destroy();
 	}
 
@@ -680,44 +567,35 @@ func_B961(param_00)
 	level.var_B7AD = scripts\engine\utility::array_removeundefined(level.var_B7AD);
 }
 
-//Function Number: 25
-func_B95E(param_00)
-{
+func_B95E(param_00) {
 	param_00 endon("disconnect");
 	level endon("game_ended");
 	self endon("minijackal_end");
-	for(;;)
-	{
+	for(;;) {
 		self waittill("spaceship_collision",var_01,var_02,var_03,var_04);
 		var_05 = param_00 getnormalizedmovement();
 		var_06 = var_05[0] + 1 / 2;
 		var_07 = 16 + 19 * var_06;
 		var_08 = var_02 - 4 / var_07 - 4;
-		if(var_08 > 1)
-		{
+		if(var_08 > 1) {
 			var_08 = 1;
 		}
-		else if(var_08 < 0)
-		{
+		else if(var_08 < 0) {
 			var_08 = 0;
 		}
 
 		var_09 = var_08 * var_01;
-		if(var_09 > 0)
-		{
+		if(var_09 > 0) {
 			param_00 earthquakeforplayer(var_09,0.5,self.origin,100);
 			var_0A = 10 + 240 * var_09;
-			if(self.var_EDD7 - var_0A < 150)
-			{
+			if(self.var_EDD7 - var_0A < 150) {
 				var_0A = self.var_EDD7 - 150;
 			}
 		}
 	}
 }
 
-//Function Number: 26
-func_B9A9(param_00)
-{
+func_B9A9(param_00) {
 	self.triggerportableradarping endon("disconnect");
 	level endon("game_ended");
 	self endon("host_migration_lifetime_update");
@@ -728,9 +606,7 @@ func_B9A9(param_00)
 	self notify("minijackal_end");
 }
 
-//Function Number: 27
-func_B968(param_00)
-{
+func_B968(param_00) {
 	param_00 endon("disconnect");
 	level endon("game_ended");
 	self endon("minijackal_end");
@@ -739,34 +615,26 @@ func_B968(param_00)
 	self notify("minijackal_end");
 }
 
-//Function Number: 28
-func_B963(param_00)
-{
+func_B963(param_00) {
 	level endon("game_ended");
 	self endon("minijackal_end");
 	param_00 scripts\engine\utility::waittill_any_3("joined_team","disconnect","joined_spectators");
 	self notify("minijackal_end");
 }
 
-//Function Number: 29
-func_B969(param_00)
-{
+func_B969(param_00) {
 	level endon("game_ended");
 	self endon("minijackal_end");
-	for(;;)
-	{
+	for(;;) {
 		self waittill("emp_damage",var_01,var_02,var_03,var_04,var_05);
 		scripts\mp\killstreaks\_utility::dodamagetokillstreak(100,var_01,var_01,self.team,var_03,var_05,var_04);
-		if(!scripts\mp\_utility::istrue(self.disabled))
-		{
+		if(!scripts\mp\_utility::istrue(self.disabled)) {
 			thread disable_minijackal(var_02);
 		}
 	}
 }
 
-//Function Number: 30
-disable_minijackal(param_00)
-{
+disable_minijackal(param_00) {
 	level endon("game_ended");
 	self endon("minijackal_end");
 	self.disabled = 1;
@@ -778,9 +646,7 @@ disable_minijackal(param_00)
 	self.disabled = undefined;
 }
 
-//Function Number: 31
-func_C77B(param_00)
-{
+func_C77B(param_00) {
 	param_00 endon("disconnect");
 	level endon("game_ended");
 	self endon("minijackal_end");
@@ -789,18 +655,14 @@ func_C77B(param_00)
 	thread func_E066(var_01,param_00);
 }
 
-//Function Number: 32
-func_E066(param_00,param_01,param_02)
-{
-	if(isdefined(param_01))
-	{
+func_E066(param_00,param_01,param_02) {
+	if(isdefined(param_01)) {
 		param_01 endon("disconnect");
 	}
 
 	level endon("game_ended");
 	var_03 = ["leave","death"];
-	if(isdefined(param_02))
-	{
+	if(isdefined(param_02)) {
 		scripts\engine\utility::waittill_any_in_array_or_timeout_no_endon_death(var_03,param_02);
 	}
 	else
@@ -808,103 +670,82 @@ func_E066(param_00,param_01,param_02)
 		scripts\engine\utility::waittill_any_in_array_return_no_endon_death(var_03);
 	}
 
-	if(isdefined(param_01))
-	{
+	if(isdefined(param_01)) {
 		scripts\mp\_utility::outlinedisable(param_00,param_01);
 	}
 }
 
-//Function Number: 33
-func_B7AC(param_00)
-{
+func_B7AC(param_00) {
 	scripts\mp\_utility::setusingremote(param_00);
 }
 
-//Function Number: 34
-func_B7AB()
-{
-	if(isdefined(self))
-	{
+func_B7AB() {
+	if(isdefined(self)) {
 		scripts\mp\_utility::clearusingremote();
 	}
 }
 
-//Function Number: 35
-func_6C9B(param_00,param_01,param_02)
-{
+func_6C9B(param_00,param_01,param_02) {
 	var_03 = anglestoforward(self.angles);
 	var_04 = anglestoright(self.angles);
 	var_05 = self geteye();
 	var_06 = var_05 + (0,0,param_01);
 	var_07 = var_06 + param_00 * var_03;
-	if(func_3DCF(var_05,var_07,param_02))
-	{
+	if(func_3DCF(var_05,var_07,param_02)) {
 		return var_07;
 	}
 
 	var_07 = var_06 - param_00 * var_03;
-	if(func_3DCF(var_05,var_07,param_02))
-	{
+	if(func_3DCF(var_05,var_07,param_02)) {
 		return var_07;
 	}
 
 	var_07 = var_07 + param_00 * var_04;
-	if(func_3DCF(var_05,var_07,param_02))
-	{
+	if(func_3DCF(var_05,var_07,param_02)) {
 		return var_07;
 	}
 
 	var_07 = var_06 - param_00 * var_04;
-	if(func_3DCF(var_05,var_07,param_02))
-	{
+	if(func_3DCF(var_05,var_07,param_02)) {
 		return var_07;
 	}
 
 	var_07 = var_06;
-	if(func_3DCF(var_05,var_07,param_02))
-	{
+	if(func_3DCF(var_05,var_07,param_02)) {
 		return var_07;
 	}
 
 	scripts\engine\utility::waitframe();
 	var_07 = var_06 + 0.707 * param_00 * var_03 + var_04;
-	if(func_3DCF(var_05,var_07,param_02))
-	{
+	if(func_3DCF(var_05,var_07,param_02)) {
 		return var_07;
 	}
 
 	var_07 = var_06 + 0.707 * param_00 * var_03 - var_04;
-	if(func_3DCF(var_05,var_07,param_02))
-	{
+	if(func_3DCF(var_05,var_07,param_02)) {
 		return var_07;
 	}
 
 	var_07 = var_06 + 0.707 * param_00 * var_04 - var_03;
-	if(func_3DCF(var_05,var_07,param_02))
-	{
+	if(func_3DCF(var_05,var_07,param_02)) {
 		return var_07;
 	}
 
 	var_07 = var_06 + 0.707 * param_00 * -1 * var_03 - var_04;
-	if(func_3DCF(var_05,var_07,param_02))
-	{
+	if(func_3DCF(var_05,var_07,param_02)) {
 		return var_07;
 	}
 
 	return undefined;
 }
 
-//Function Number: 36
-func_3DCF(param_00,param_01,param_02)
-{
+func_3DCF(param_00,param_01,param_02) {
 	var_03 = 0;
-	if(capsuletracepassed(param_01,param_02,param_02 * 2 + 0.01,undefined,1,1))
-	{
+	if(capsuletracepassed(param_01,param_02,param_02 * 2 + 0.01,undefined,1,1)) {
 		var_04 = [self];
 		var_05 = physics_createcontents(["physicscontents_solid","physicscontents_glass","physicscontents_vehicleclip","physicscontents_missileclip","physicscontents_clipshot"]);
 		var_06 = function_0287(param_00,param_01,var_05,var_04,0,"physicsquery_closest");
-		if(var_06.size == 0)
-		{
+		if(var_06.size == 0) {
 			var_03 = 1;
 		}
 	}
@@ -912,9 +753,7 @@ func_3DCF(param_00,param_01,param_02)
 	return var_03;
 }
 
-//Function Number: 37
-func_5119(param_00)
-{
+func_5119(param_00) {
 	param_00 endon("disconnect");
 	level endon("game_ended");
 	self endon("minijackal_end");
@@ -924,13 +763,10 @@ func_5119(param_00)
 	thread killfxongameend(self.var_C7FF);
 }
 
-//Function Number: 38
-killfxongameend(param_00)
-{
+killfxongameend(param_00) {
 	self endon("minijackal_end");
 	level waittill("game_ended");
-	if(isdefined(param_00))
-	{
+	if(isdefined(param_00)) {
 		param_00 delete();
 	}
 }

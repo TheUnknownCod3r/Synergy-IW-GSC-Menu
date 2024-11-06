@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\mp\maps\mp_nova\mp_nova.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 2
- * Decompile Time: 145 ms
- * Timestamp: 10/27/2023 12:13:55 AM
-*******************************************************************/
+/*******************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\mp\maps\mp_nova\mp_nova.gsc
+*******************************************************/
 
-//Function Number: 1
-main()
-{
+main() {
 	scripts\mp\maps\mp_nova\mp_nova_precache::main();
 	scripts\mp\maps\mp_nova\gen\mp_nova_art::main();
 	scripts\mp\maps\mp_nova\mp_nova_fx::main();
@@ -30,9 +24,7 @@ main()
 	thread fix_collision();
 }
 
-//Function Number: 2
-fix_collision()
-{
+fix_collision() {
 	var_00 = getent("player32x32x128","targetname");
 	var_01 = spawn("script_model",(996,-1276,430.5));
 	var_01.angles = (0,0,0);

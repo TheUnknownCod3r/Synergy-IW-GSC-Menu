@@ -1,20 +1,13 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\mp\zipline.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 6
- * Decompile Time: 329 ms
- * Timestamp: 10/27/2023 12:22:30 AM
-*******************************************************************/
+/******************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\mp\zipline.gsc
+******************************************/
 
-//Function Number: 1
-init()
-{
+init() {
 	var_00 = [];
 	var_01 = getentarray("zipline","targetname");
-	for(var_02 = 0;var_02 < var_01.size;var_02++)
-	{
+	for(var_02 = 0;var_02 < var_01.size;var_02++) {
 		var_03 = scripts\mp\gameobjects::createuseobject("neutral",var_01[var_02],var_00,(0,0,0));
 		var_03 scripts\mp\gameobjects::allowuse("any");
 		var_03 scripts\mp\gameobjects::setusetime(0.25);
@@ -25,15 +18,12 @@ init()
 		var_03.onuse = ::onuse;
 		var_04 = [];
 		var_05 = getent(var_01[var_02].target,"targetname");
-		if(!isdefined(var_05))
-		{
+		if(!isdefined(var_05)) {
 		}
 
-		while(isdefined(var_05))
-		{
+		while(isdefined(var_05)) {
 			var_04[var_04.size] = var_05;
-			if(isdefined(var_05.target))
-			{
+			if(isdefined(var_05.target)) {
 				var_05 = getent(var_05.target,"targetname");
 				continue;
 			}
@@ -47,21 +37,15 @@ init()
 	precachemodel("tag_player");
 }
 
-//Function Number: 2
-onbeginuse(param_00)
-{
+onbeginuse(param_00) {
 	param_00 playsound("scrambler_pullout_lift_plr");
 }
 
-//Function Number: 3
-onuse(param_00)
-{
+onuse(param_00) {
 	param_00 thread func_13EFA(self);
 }
 
-//Function Number: 4
-func_13EFA(param_00)
-{
+func_13EFA(param_00) {
 	self endon("death");
 	self endon("disconnect");
 	self endon("zipline_drop");
@@ -74,18 +58,15 @@ func_13EFA(param_00)
 	thread func_139E8(var_01);
 	thread func_13A06(var_01);
 	var_02 = param_00.targets;
-	for(var_03 = 0;var_03 < var_02.size;var_03++)
-	{
+	for(var_03 = 0;var_03 < var_02.size;var_03++) {
 		var_04 = distance(var_01.origin,var_02[var_03].origin) / 600;
 		var_05 = 0;
-		if(var_03 == 0)
-		{
+		if(var_03 == 0) {
 			var_05 = var_04 * 0.2;
 		}
 
 		var_01 moveto(var_02[var_03].origin,var_04,var_05);
-		if(var_01.angles != var_02[var_03].angles)
-		{
+		if(var_01.angles != var_02[var_03].angles) {
 			var_01 rotateto(var_02[var_03].angles,var_04 * 0.8);
 		}
 
@@ -97,9 +78,7 @@ func_13EFA(param_00)
 	var_01 delete();
 }
 
-//Function Number: 5
-func_13A06(param_00)
-{
+func_13A06(param_00) {
 	self endon("death");
 	self endon("disconnect");
 	self endon("destination");
@@ -110,9 +89,7 @@ func_13A06(param_00)
 	param_00 delete();
 }
 
-//Function Number: 6
-func_139E8(param_00)
-{
+func_139E8(param_00) {
 	self endon("disconnect");
 	self endon("destination");
 	self endon("zipline_drop");

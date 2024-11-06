@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\cp\maps\cp_rave\cp_rave_crafting.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 26
- * Decompile Time: 1395 ms
- * Timestamp: 10/27/2023 12:06:15 AM
-*******************************************************************/
+/****************************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\cp\maps\cp_rave\cp_rave_crafting.gsc
+****************************************************************/
 
-//Function Number: 1
-init_crafting()
-{
+init_crafting() {
 	level.crafting_table = "scripts/cp/maps/cp_rave/cp_rave_crafting.csv";
 	level.max_crafting_drops = 1;
 	level.num_crafting_drops = 0;
@@ -30,16 +24,12 @@ init_crafting()
 	level.crafting_icon_create_func = ::create_player_crafting_item_icon;
 }
 
-//Function Number: 2
-set_crafting_starting_location(param_00)
-{
+set_crafting_starting_location(param_00) {
 	level.crafting_totem_starting_location = param_00;
 	level.last_crafting_totem_area = param_00;
 }
 
-//Function Number: 3
-activate_crafting_totem(param_00)
-{
+activate_crafting_totem(param_00) {
 	self.powered_on = 1;
 	self.enabled = 1;
 	level.crafting_totem_uses = 0;
@@ -49,9 +39,7 @@ activate_crafting_totem(param_00)
 	self.totem setscriptablepartstate("hideshow","show");
 }
 
-//Function Number: 4
-deactivate_crafting_totem(param_00)
-{
+deactivate_crafting_totem(param_00) {
 	self.powered_on = 1;
 	self.enabled = 0;
 	self.available_ingredient_slots = 3;
@@ -59,14 +47,10 @@ deactivate_crafting_totem(param_00)
 	self.totem setscriptablepartstate("eyes","eyes_off");
 }
 
-//Function Number: 5
-move_crafting_totem_to_new_location()
-{
-	for(;;)
-	{
+move_crafting_totem_to_new_location() {
+	for(;;) {
 		var_00 = scripts\engine\utility::random(level.crafting_totem_areas);
-		if(var_00 != level.last_crafting_totem_area)
-		{
+		if(var_00 != level.last_crafting_totem_area) {
 			level.current_crafting_totem.totem setscriptablepartstate("hideshow","off");
 			move_crafting_totem(var_00);
 			return;
@@ -74,22 +58,16 @@ move_crafting_totem_to_new_location()
 	}
 }
 
-//Function Number: 6
-move_crafting_totem(param_00)
-{
+move_crafting_totem(param_00) {
 	level.last_crafting_totem_area = param_00;
-	foreach(var_02 in level.crafting_totems)
-	{
+	foreach(var_02 in level.crafting_totems) {
 		var_02 activate_crafting_totem(param_00);
 	}
 }
 
-//Function Number: 7
-init_crafting_station()
-{
+init_crafting_station() {
 	level.crafting_totems = scripts\engine\utility::getstructarray("crafting_station","script_noteworthy");
-	foreach(var_01 in level.crafting_totems)
-	{
+	foreach(var_01 in level.crafting_totems) {
 		var_01 thread init_crafting_totem();
 	}
 
@@ -97,16 +75,11 @@ init_crafting_station()
 	move_crafting_totem(level.crafting_totem_starting_location);
 }
 
-//Function Number: 8
-get_area(param_00)
-{
+get_area(param_00) {
 	var_01 = getentarray("spawn_volume","targetname");
-	foreach(var_03 in var_01)
-	{
-		if(function_010F(param_00.origin + (0,0,50),var_03))
-		{
-			if(isdefined(var_03.basename))
-			{
+	foreach(var_03 in var_01) {
+		if(function_010F(param_00.origin + (0,0,50),var_03)) {
+			if(isdefined(var_03.basename)) {
 				return var_03.basename;
 			}
 		}
@@ -115,25 +88,19 @@ get_area(param_00)
 	return undefined;
 }
 
-//Function Number: 9
-init_crafting_totem()
-{
+init_crafting_totem() {
 	wait(5);
 	var_00 = getentarray(self.target,"targetname");
 	self.totem = undefined;
-	foreach(var_02 in var_00)
-	{
-		if(var_02.classname == "scriptable")
-		{
+	foreach(var_02 in var_00) {
+		if(var_02.classname == "scriptable") {
 			self.totem = var_02;
 		}
 	}
 
 	var_00 = scripts\engine\utility::getstructarray(self.target,"targetname");
-	foreach(var_02 in var_00)
-	{
-		if(var_02.script_noteworthy == "crafting_item_spot")
-		{
+	foreach(var_02 in var_00) {
+		if(var_02.script_noteworthy == "crafting_item_spot") {
 			self.craft_item_spot = var_02;
 		}
 	}
@@ -146,30 +113,23 @@ init_crafting_totem()
 	self.totem setscriptablepartstate("eyes","eyes_off");
 }
 
-//Function Number: 10
-use_crafting_station(param_00,param_01)
-{
-	if(!scripts\engine\utility::array_contains(level.current_interaction_structs,param_00))
-	{
+use_crafting_station(param_00,param_01) {
+	if(!scripts\engine\utility::array_contains(level.current_interaction_structs,param_00)) {
 		return;
 	}
 
-	if(param_00.available_ingredient_slots > 0)
-	{
-		if(!isdefined(param_01.current_crafting_struct))
-		{
+	if(param_00.available_ingredient_slots > 0) {
+		if(!isdefined(param_01.current_crafting_struct)) {
 			return;
 		}
 
-		if(getweaponbasename(param_01 getcurrentweapon()) != "iw7_penetrationrail_mp")
-		{
+		if(getweaponbasename(param_01 getcurrentweapon()) != "iw7_penetrationrail_mp") {
 			param_01 setweaponammostock("iw7_souvenircoin_zm",1);
 			param_01 giveandfireoffhand("iw7_souvenircoin_zm");
 		}
 
 		var_02 = "orange";
-		switch(param_01.current_crafting_struct.crafting_model)
-		{
+		switch(param_01.current_crafting_struct.crafting_model) {
 			case "cp_rave_crafting_totem_gem_topaz":
 				var_02 = "blue";
 				break;
@@ -179,8 +139,7 @@ use_crafting_station(param_00,param_01)
 				break;
 		}
 
-		switch(param_00.available_ingredient_slots)
-		{
+		switch(param_00.available_ingredient_slots) {
 			case 3:
 				param_00.totem setscriptablepartstate("socket_0",var_02);
 				break;
@@ -194,8 +153,7 @@ use_crafting_station(param_00,param_01)
 				break;
 		}
 
-		if(!isdefined(param_00.ingredient_list))
-		{
+		if(!isdefined(param_00.ingredient_list)) {
 			param_00.ingredient_list = [];
 		}
 
@@ -206,8 +164,7 @@ use_crafting_station(param_00,param_01)
 		param_01.current_crafting_struct = undefined;
 		param_00.var_269F--;
 		param_01 scripts\cp\cp_merits::processmerit("mt_used_crafting");
-		if(param_00.available_ingredient_slots > 0)
-		{
+		if(param_00.available_ingredient_slots > 0) {
 			return;
 		}
 
@@ -218,31 +175,27 @@ use_crafting_station(param_00,param_01)
 		wait(1);
 		param_00.totem setscriptablepartstate("eyes","active");
 		craft_souvenir(param_00,param_01);
-		if(isdefined(param_01))
-		{
+		if(isdefined(param_01)) {
 			param_01 thread scripts\cp\cp_vo::try_to_play_vo("souvenir_craft_success","zmb_comment_vo","low",10,0,0,0,50);
 		}
 
 		triggerfx(param_00.craft_item_fx);
 		scripts\cp\cp_interaction::add_to_current_interaction_list(param_00);
-		while(isdefined(param_00.souvenir))
-		{
+		while(isdefined(param_00.souvenir)) {
 			wait(0.1);
 		}
 
 		param_00.totem setscriptablepartstate("eyes","eyes_on");
 		scripts\cp\cp_interaction::remove_from_current_interaction_list(param_00);
 		playsoundatpos(param_00.origin,"zmb_rave_crafting_totem_item_pickup");
-		if(isdefined(param_01))
-		{
+		if(isdefined(param_01)) {
 			param_01 playlocalsound("zmb_item_pickup");
 		}
 
 		playfx(level._effect["souvenir_pickup"],param_00.craft_item_spot.origin);
 		param_00.available_ingredient_slots = 3;
 		param_00.ingredient_list = [];
-		if(isdefined(param_01))
-		{
+		if(isdefined(param_01)) {
 			param_01.last_interaction_point = undefined;
 		}
 
@@ -252,11 +205,8 @@ use_crafting_station(param_00,param_01)
 	}
 }
 
-//Function Number: 11
-zmb_crafting_item_drop_func(param_00,param_01,param_02)
-{
-	if(!should_drop_crafting_item(param_01))
-	{
+zmb_crafting_item_drop_func(param_00,param_01,param_02) {
+	if(!should_drop_crafting_item(param_01)) {
 		return 0;
 	}
 
@@ -264,11 +214,8 @@ zmb_crafting_item_drop_func(param_00,param_01,param_02)
 	return 1;
 }
 
-//Function Number: 12
-zmb_crafting_item_debug_drop(param_00,param_01)
-{
-	switch(param_01)
-	{
+zmb_crafting_item_debug_drop(param_00,param_01) {
+	switch(param_01) {
 		case "zmb_coin_alien":
 			param_01 = "cp_rave_crafting_totem_gem_amber";
 			break;
@@ -285,9 +232,7 @@ zmb_crafting_item_debug_drop(param_00,param_01)
 	level thread spawn_crafting_item(param_00,param_01);
 }
 
-//Function Number: 13
-spawn_crafting_item(param_00,param_01)
-{
+spawn_crafting_item(param_00,param_01) {
 	level.var_C1E2++;
 	level.last_crafting_item_drop_time = gettime();
 	level.next_crafting_item_drop_time = level.last_crafting_item_drop_time + 30000 + randomintrange(level.crafting_item_min_drop_time,level.crafting_item_max_drop_time);
@@ -295,20 +240,17 @@ spawn_crafting_item(param_00,param_01)
 	var_02.angles = (90,0,0);
 	var_02.og_angles = (90,0,0);
 	var_03 = scripts\engine\utility::random(level.crafting_item_ordered_list);
-	if(isdefined(param_01))
-	{
+	if(isdefined(param_01)) {
 		var_03 = param_01;
 	}
 
 	var_02 setmodel(var_03);
 	var_02.script_noteworthy = "crafting_item";
 	var_04 = "purple";
-	if(var_02.model == "cp_rave_crafting_totem_gem_amber")
-	{
+	if(var_02.model == "cp_rave_crafting_totem_gem_amber") {
 		var_04 = "orange";
 	}
-	else if(var_02.model == "cp_rave_crafting_totem_gem_topaz")
-	{
+	else if(var_02.model == "cp_rave_crafting_totem_gem_topaz") {
 		var_04 = "blue";
 	}
 
@@ -318,9 +260,7 @@ spawn_crafting_item(param_00,param_01)
 	var_02 thread crafting_item_timeout(var_05);
 }
 
-//Function Number: 14
-create_crafting_pickup_interaction(param_00,param_01)
-{
+create_crafting_pickup_interaction(param_00,param_01) {
 	var_02 = spawnstruct();
 	var_02.script_noteworthy = "crafting_pickup";
 	var_02.origin = param_00.origin - (0,0,45);
@@ -337,25 +277,19 @@ create_crafting_pickup_interaction(param_00,param_01)
 	return var_02;
 }
 
-//Function Number: 15
-crafting_item_pickup(param_00,param_01)
-{
-	if(!isdefined(param_00.randomintrange))
-	{
+crafting_item_pickup(param_00,param_01) {
+	if(!isdefined(param_00.randomintrange)) {
 		return;
 	}
 
-	if(isdefined(param_00.randomintrange.beingpickedup))
-	{
+	if(isdefined(param_00.randomintrange.beingpickedup)) {
 		return;
 	}
 
 	scripts\cp\cp_interaction::remove_from_current_interaction_list(param_00);
-	if(!isdefined(level.collect_tokens_vo))
-	{
+	if(!isdefined(level.collect_tokens_vo)) {
 		level.collect_tokens_vo = 1;
-		if(scripts\cp\utility::map_check(0))
-		{
+		if(scripts\cp\utility::map_check(0)) {
 			level thread scripts\cp\cp_vo::add_to_nag_vo("dj_souvenircoin_collect_nag","zmb_dj_vo",60,60,2);
 		}
 	}
@@ -363,8 +297,7 @@ crafting_item_pickup(param_00,param_01)
 	var_02 = param_00.origin + (0,0,45);
 	param_00.randomintrange setscriptablepartstate("fx","pickup_" + param_00.randomintrange.glow_type);
 	scripts\engine\utility::waitframe();
-	if(isdefined(param_01.current_crafting_struct))
-	{
+	if(isdefined(param_01.current_crafting_struct)) {
 		param_01 playlocalsound("zmb_crystal_swap");
 		var_03 = spawnstruct();
 		var_03.script_noteworthy = "crafting_pickup";
@@ -386,12 +319,10 @@ crafting_item_pickup(param_00,param_01)
 		scripts\cp\cp_interaction::add_to_current_interaction_list(var_03);
 		wait(0.3);
 		var_04 = "purple";
-		if(var_03.randomintrange.model == "cp_rave_crafting_totem_gem_amber")
-		{
+		if(var_03.randomintrange.model == "cp_rave_crafting_totem_gem_amber") {
 			var_04 = "orange";
 		}
-		else if(var_03.randomintrange.model == "cp_rave_crafting_totem_gem_topaz")
-		{
+		else if(var_03.randomintrange.model == "cp_rave_crafting_totem_gem_topaz") {
 			var_04 = "blue";
 		}
 
@@ -408,62 +339,49 @@ crafting_item_pickup(param_00,param_01)
 	}
 
 	wait(1);
-	if(isdefined(param_00.randomintrange))
-	{
+	if(isdefined(param_00.randomintrange)) {
 		param_00.randomintrange delete();
 	}
 
-	if(isdefined(param_00))
-	{
+	if(isdefined(param_00)) {
 		param_00 = undefined;
 	}
 }
 
-//Function Number: 16
-create_player_crafting_item_icon(param_00)
-{
+create_player_crafting_item_icon(param_00) {
 	var_01 = get_icon_index_based_on_model(param_00.crafting_model);
 	self setclientomnvar("zombie_souvenir_piece_index",int(var_01));
 }
 
-//Function Number: 17
-get_icon_index_based_on_model(param_00)
-{
+get_icon_index_based_on_model(param_00) {
 	return tablelookup("scripts/cp/maps/cp_rave/cp_rave_crafting.csv",1,param_00,0);
 }
 
-//Function Number: 18
-crafting_item_timeout(param_00)
-{
+crafting_item_timeout(param_00) {
 	self endon("death");
 	self endon("vacuum");
 	self notify("timeout");
 	self endon("timeout");
 	var_01 = 25;
-	if(isdefined(param_00.time_remaining))
-	{
+	if(isdefined(param_00.time_remaining)) {
 		var_01 = int(param_00.time_remaining);
 	}
 
 	var_02 = gettime() + var_01 * 1000;
 	var_03 = 0;
 	var_04 = 0;
-	while(gettime() < var_02)
-	{
-		if(var_04 == 0)
-		{
+	while(gettime() < var_02) {
+		if(var_04 == 0) {
 			self rotateyaw(360,2);
 			self movez(5,2);
 		}
 
-		if(var_04 == 2)
-		{
+		if(var_04 == 2) {
 			self rotateyaw(360,2);
 			self movez(-5,2);
 		}
 
-		if(var_04 == 4)
-		{
+		if(var_04 == 4) {
 			var_04 = 0;
 			continue;
 		}
@@ -476,8 +394,7 @@ crafting_item_timeout(param_00)
 	playsoundatpos(self.origin,"zmb_crystal_disappear");
 	param_00.randomintrange setscriptablepartstate("fx","pickup_" + param_00.randomintrange.glow_type);
 	level.var_C1E2--;
-	if(level.num_crafting_drops < 0)
-	{
+	if(level.num_crafting_drops < 0) {
 		level.num_crafting_drops = 0;
 	}
 
@@ -486,76 +403,58 @@ crafting_item_timeout(param_00)
 	self delete();
 }
 
-//Function Number: 19
-should_drop_crafting_item(param_00)
-{
-	if(level.num_crafting_drops >= level.max_crafting_drops)
-	{
+should_drop_crafting_item(param_00) {
+	if(level.num_crafting_drops >= level.max_crafting_drops) {
 		return 0;
 	}
 
-	if(!self.entered_playspace)
-	{
+	if(!self.entered_playspace) {
 		return 0;
 	}
 
-	foreach(var_02 in level.spawn_volume_array)
-	{
-		if(var_02.basename != "island")
-		{
+	foreach(var_02 in level.spawn_volume_array) {
+		if(var_02.basename != "island") {
 			continue;
 		}
 
-		if(function_010F(param_00,var_02))
-		{
+		if(function_010F(param_00,var_02)) {
 			return 0;
 		}
 	}
 
-	if(isdefined(level.active_volume_check))
-	{
-		if(![[ level.active_volume_check ]](param_00))
-		{
+	if(isdefined(level.active_volume_check)) {
+		if(![[level.active_volume_check]](param_00)) {
 			return 0;
 		}
 	}
 
-	if(isdefined(level.invalid_spawn_volume_array))
-	{
-		if(!scripts\cp\cp_weapon::isinvalidzone(param_00,level.invalid_spawn_volume_array,undefined,undefined,1))
-		{
+	if(isdefined(level.invalid_spawn_volume_array)) {
+		if(!scripts\cp\cp_weapon::isinvalidzone(param_00,level.invalid_spawn_volume_array,undefined,undefined,1)) {
 			return 0;
 		}
 	}
-	else if(!scripts\cp\cp_weapon::isinvalidzone(param_00,undefined,undefined,undefined,1))
-	{
+	else if(!scripts\cp\cp_weapon::isinvalidzone(param_00,undefined,undefined,undefined,1)) {
 		return 0;
 	}
 
-	if(randomint(100) < 30)
-	{
+	if(randomint(100) < 30) {
 		return 0;
 	}
 
-	if(level.next_crafting_item_drop_time > gettime())
-	{
+	if(level.next_crafting_item_drop_time > gettime()) {
 		return 0;
 	}
 
 	return 1;
 }
 
-//Function Number: 20
-craft_souvenir(param_00,param_01)
-{
+craft_souvenir(param_00,param_01) {
 	var_02 = get_crafted_souvenir(param_00);
-	if(!isdefined(var_02))
-	{
+	if(!isdefined(var_02)) {
 		var_02 = "money";
 	}
 
-	switch(var_02)
-	{
+	switch(var_02) {
 		case "crafted_trap_balloon":
 		case "crafted_trap_mower":
 		case "crafted_gascan":
@@ -578,8 +477,7 @@ craft_souvenir(param_00,param_01)
 			break;
 
 		default:
-			foreach(param_01 in level.players)
-			{
+			foreach(param_01 in level.players) {
 				param_01 scripts\cp\cp_persistence::give_player_currency(500);
 				break;
 			}
@@ -588,30 +486,23 @@ craft_souvenir(param_00,param_01)
 	}
 
 	scripts\cp\zombies\zombie_analytics::log_itemcrafted(level.wave_num,var_02);
-	if(isdefined(param_01))
-	{
+	if(isdefined(param_01)) {
 		param_01.itemtype = var_02;
 	}
 }
 
-//Function Number: 21
-get_crafted_souvenir(param_00)
-{
-	foreach(var_02 in level.craftable_items_list)
-	{
+get_crafted_souvenir(param_00) {
+	foreach(var_02 in level.craftable_items_list) {
 		var_03 = 0;
 		var_04 = var_02;
-		foreach(var_06 in param_00.ingredient_list)
-		{
-			if(scripts\engine\utility::array_contains(var_04,var_06))
-			{
+		foreach(var_06 in param_00.ingredient_list) {
+			if(scripts\engine\utility::array_contains(var_04,var_06)) {
 				var_03++;
 				var_04 = remove_ingredient(var_04,var_06);
 			}
 		}
 
-		if(var_03 == 3)
-		{
+		if(var_03 == 3) {
 			return var_02[0];
 		}
 	}
@@ -619,15 +510,11 @@ get_crafted_souvenir(param_00)
 	return undefined;
 }
 
-//Function Number: 22
-remove_ingredient(param_00,param_01)
-{
+remove_ingredient(param_00,param_01) {
 	var_02 = 0;
 	var_03 = [];
-	for(var_04 = 0;var_04 < param_00.size;var_04++)
-	{
-		if(!var_02 && param_00[var_04] == param_01)
-		{
+	for(var_04 = 0;var_04 < param_00.size;var_04++) {
+		if(!var_02 && param_00[var_04] == param_01) {
 			var_02 = 1;
 			continue;
 		}
@@ -638,15 +525,11 @@ remove_ingredient(param_00,param_01)
 	return var_03;
 }
 
-//Function Number: 23
-get_crafting_models_from_table(param_00)
-{
+get_crafting_models_from_table(param_00) {
 	var_01 = [];
-	for(var_02 = 1;var_02 < 99;var_02++)
-	{
+	for(var_02 = 1;var_02 < 99;var_02++) {
 		var_03 = table_look_up(param_00,var_02,1);
-		if(var_03 == "")
-		{
+		if(var_03 == "") {
 			break;
 		}
 
@@ -656,18 +539,14 @@ get_crafting_models_from_table(param_00)
 	return var_01;
 }
 
-//Function Number: 24
-get_craftable_items_from_table(param_00)
-{
+get_craftable_items_from_table(param_00) {
 	var_01 = 1;
 	var_02 = 2;
 	var_03 = [];
-	for(var_04 = 100;var_04 <= 199;var_04++)
-	{
+	for(var_04 = 100;var_04 <= 199;var_04++) {
 		var_05 = undefined;
 		var_05 = table_look_up(param_00,var_04,var_01);
-		if(var_05 == "")
-		{
+		if(var_05 == "") {
 			break;
 		}
 
@@ -679,24 +558,18 @@ get_craftable_items_from_table(param_00)
 	return var_03;
 }
 
-//Function Number: 25
-table_look_up(param_00,param_01,param_02)
-{
+table_look_up(param_00,param_01,param_02) {
 	return tablelookup(param_00,0,param_01,param_02);
 }
 
-//Function Number: 26
-rave_post_activate_update_func(param_00,param_01)
-{
-	if(isdefined(param_00.souvenir))
-	{
+rave_post_activate_update_func(param_00,param_01) {
+	if(isdefined(param_00.souvenir)) {
 		param_00.script_noteworthy = "crafting_station";
 		param_00.requires_power = 1;
 		param_00.powered_on = 1;
 		param_00.script_parameters = "requires_power";
 		param_00.name = "crafting_station";
-		if(isdefined(param_00.souvenir_fx))
-		{
+		if(isdefined(param_00.souvenir_fx)) {
 			param_00.souvenir_fx delete();
 		}
 
@@ -705,8 +578,7 @@ rave_post_activate_update_func(param_00,param_01)
 		param_00.power_name = undefined;
 		param_00.crafted_souvenir = undefined;
 		param_00.craft_item_fx delete();
-		if(param_01 scripts\cp\utility::is_valid_player())
-		{
+		if(param_01 scripts\cp\utility::is_valid_player()) {
 			param_01 playlocalsound("zmb_item_pickup");
 		}
 

@@ -1,24 +1,16 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\sp\_dynamic_move.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 3
- * Decompile Time: 130 ms
- * Timestamp: 10/27/2023 12:24:15 AM
-*******************************************************************/
+/************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\sp\_dynamic_move.gsc
+************************************************/
 
-//Function Number: 1
-func_5F84(param_00)
-{
+func_5F84(param_00) {
 	self notify("disable_dynamic_move");
 	self endon("disable_dynamic_move");
-	if(isdefined(self.var_5F76))
-	{
+	if(isdefined(self.var_5F76)) {
 		var_01 = squared(self.var_5F76);
 	}
-	else if(isdefined(var_01))
-	{
+	else if(isdefined(var_01)) {
 		var_01 = squared(var_01);
 	}
 	else
@@ -29,33 +21,26 @@ func_5F84(param_00)
 	self.var_51E4 = undefined;
 	scripts\sp\_utility::func_4145();
 	func_F491("sprint_loop","sprint_super");
-	for(;;)
-	{
+	for(;;) {
 		var_02 = vectornormalize(level.player.origin - self.origin);
 		var_03 = anglestoforward(self.angles);
 		var_04 = vectordot(var_03,var_02);
 		var_05 = distance2dsquared(level.player.origin,self.origin);
-		if(var_04 < 0)
-		{
-			if(var_05 > var_01)
-			{
-				if(!isdefined(self.demeanoroverride) || isdefined(self.demeanoroverride) && self.demeanoroverride == "sprint")
-				{
+		if(var_04 < 0) {
+			if(var_05 > var_01) {
+				if(!isdefined(self.demeanoroverride) || isdefined(self.demeanoroverride) && self.demeanoroverride == "sprint") {
 					scripts\sp\_utility::func_4145();
-					if(isdefined(self.var_51E4))
-					{
+					if(isdefined(self.var_51E4)) {
 						scripts\sp\_utility::func_51E1(self.var_51E4);
 					}
 				}
 			}
-			else if(!isdefined(self.demeanoroverride) || isdefined(self.demeanoroverride) && self.demeanoroverride != "sprint")
-			{
+			else if(!isdefined(self.demeanoroverride) || isdefined(self.demeanoroverride) && self.demeanoroverride != "sprint") {
 				self.var_51E4 = self.demeanoroverride;
 				scripts\sp\_utility::func_51E1("sprint");
 			}
 		}
-		else if(!isdefined(self.demeanoroverride) || isdefined(self.demeanoroverride) && self.demeanoroverride != "sprint")
-		{
+		else if(!isdefined(self.demeanoroverride) || isdefined(self.demeanoroverride) && self.demeanoroverride != "sprint") {
 			self.var_51E4 = self.demeanoroverride;
 			scripts\sp\_utility::func_51E1("sprint");
 		}
@@ -64,12 +49,9 @@ func_5F84(param_00)
 	}
 }
 
-//Function Number: 2
-func_5557()
-{
+func_5557() {
 	self notify("disable_dynamic_move");
-	if(isdefined(self.var_51E4))
-	{
+	if(isdefined(self.var_51E4)) {
 		scripts\sp\_utility::func_51E1(self.var_51E4);
 	}
 	else
@@ -81,11 +63,8 @@ func_5557()
 	scripts\sp\_utility::func_4169("sprint");
 }
 
-//Function Number: 3
-func_F491(param_00,param_01)
-{
-	if(!scripts/asm/asm::asm_hasalias(param_00,param_01))
-	{
+func_F491(param_00,param_01) {
+	if(!scripts/asm/asm::asm_hasalias(param_00,param_01)) {
 		return;
 	}
 

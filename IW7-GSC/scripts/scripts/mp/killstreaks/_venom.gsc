@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\mp\killstreaks\_venom.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 26
- * Decompile Time: 1158 ms
- * Timestamp: 10/27/2023 12:30:02 AM
-*******************************************************************/
+/*****************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\mp\killstreaks\_venom.gsc
+*****************************************************/
 
-//Function Number: 1
-init()
-{
+init() {
 	scripts\mp\killstreaks\_killstreaks::registerkillstreak("venom",::func_1288B,undefined,undefined,undefined,::func_13C17);
 	var_00 = ["passive_increased_debuff","passive_decreased_damage","passive_increased_speed","passive_decreased_duration","passive_quiet_vehicle","passive_decreased_speed","passive_heavy","passive_increased_frost","passive_speed_heavy","passive_stealth_speed"];
 	scripts\mp\_killstreak_loot::func_DF07("venom",var_00);
@@ -22,20 +16,15 @@ init()
 	level.venoms = 0;
 }
 
-//Function Number: 2
-func_13C17(param_00)
-{
+func_13C17(param_00) {
 	var_01 = 0;
-	if(isdefined(level.venoms) && level.venoms > 0)
-	{
-		if(level.venoms >= 6)
-		{
+	if(isdefined(level.venoms) && level.venoms > 0) {
+		if(level.venoms >= 6) {
 			var_01 = 1;
 		}
 	}
 
-	if(scripts\mp\_utility::istrue(var_01))
-	{
+	if(scripts\mp\_utility::istrue(var_01)) {
 		scripts\mp\_hud_message::showerrormessage("KILLSTREAKS_VENOM_MAX");
 		return 0;
 	}
@@ -43,18 +32,14 @@ func_13C17(param_00)
 	self setclientomnvar("ui_remote_control_sequence",1);
 }
 
-//Function Number: 3
-func_1288B(param_00)
-{
+func_1288B(param_00) {
 	var_01 = scripts\mp\killstreaks\_killstreaks::func_D507(param_00);
-	if(!var_01)
-	{
+	if(!var_01) {
 		return 0;
 	}
 
 	var_02 = func_6C9B(80,20,10);
-	if(!isdefined(var_02))
-	{
+	if(!isdefined(var_02)) {
 		scripts\mp\_hud_message::showerrormessage("KILLSTREAKS_NOT_ENOUGH_SPACE");
 		thread scripts\mp\killstreaks\_killstreaks::func_11086();
 		return 0;
@@ -68,24 +53,20 @@ func_1288B(param_00)
 	var_06 = "veh_venom_mp";
 	var_07 = "used_venom";
 	var_08 = scripts\mp\_killstreak_loot::getrarityforlootitem(param_00.variantid);
-	if(var_08 != "")
-	{
+	if(var_08 != "") {
 		var_03 = var_03 + "_" + var_08;
 		var_07 = var_07 + "_" + var_08;
 	}
 
-	if(scripts\mp\killstreaks\_utility::func_A69F(param_00,"passive_increased_frost"))
-	{
+	if(scripts\mp\killstreaks\_utility::func_A69F(param_00,"passive_increased_frost")) {
 		var_04 = var_04 - 10;
 	}
 
-	if(scripts\mp\killstreaks\_utility::func_A69F(param_00,"passive_speed_heavy"))
-	{
+	if(scripts\mp\killstreaks\_utility::func_A69F(param_00,"passive_speed_heavy")) {
 		var_06 = "veh_venom_mp_fast";
 	}
 
-	if(scripts\mp\killstreaks\_utility::func_A69F(param_00,"passive_stealth_speed"))
-	{
+	if(scripts\mp\killstreaks\_utility::func_A69F(param_00,"passive_stealth_speed")) {
 		var_06 = "veh_venom_mp_slow";
 	}
 
@@ -111,8 +92,7 @@ func_1288B(param_00)
 	var_09 setscriptablepartstate("body","show",0);
 	var_09 setscriptablepartstate("dust","active",0);
 	var_09 setscriptablepartstate("eye","idle",0);
-	if(scripts\mp\killstreaks\_utility::func_A69F(param_00,"passive_stealth_speed"))
-	{
+	if(scripts\mp\killstreaks\_utility::func_A69F(param_00,"passive_stealth_speed")) {
 		var_09 setscriptablepartstate("stealth","active",0);
 		var_09 setscriptablepartstate("center_disc","hide_fx",0);
 		var_09 setscriptablepartstate("side_discs","hide_fx",0);
@@ -141,8 +121,7 @@ func_1288B(param_00)
 	var_09 thread func_13279();
 	var_09 thread func_1327A();
 	var_0A = var_09.var_AC75;
-	if(scripts\mp\_utility::isanymlgmatch())
-	{
+	if(scripts\mp\_utility::isanymlgmatch()) {
 		var_0A = int(var_0A / 2);
 	}
 
@@ -151,8 +130,7 @@ func_1288B(param_00)
 	var_09 thread func_1327C();
 	var_09 thread venom_watchempdamage();
 	scripts\mp\_matchdata::logkillstreakevent(param_00.streakname,var_09.origin);
-	if(getdvarint("camera_thirdPerson"))
-	{
+	if(getdvarint("camera_thirdPerson")) {
 		scripts\mp\_utility::setthirdpersondof(0);
 	}
 
@@ -162,9 +140,7 @@ func_1288B(param_00)
 	return 1;
 }
 
-//Function Number: 4
-func_5130(param_00,param_01)
-{
+func_5130(param_00,param_01) {
 	self endon("disconnect");
 	param_00 endon("venom_end");
 	level endon("game_ended");
@@ -175,9 +151,7 @@ func_5130(param_00,param_01)
 	self thermalvisionfofoverlayon();
 }
 
-//Function Number: 5
-func_F673()
-{
+func_F673() {
 	self endon("disconnect");
 	level endon("game_ended");
 	var_00 = 0;
@@ -190,9 +164,7 @@ func_F673()
 	thread func_E2DE(var_01,var_02,var_03);
 }
 
-//Function Number: 6
-func_E2DE(param_00,param_01,param_02)
-{
+func_E2DE(param_00,param_01,param_02) {
 	self endon("disconnect");
 	level endon("game_ended");
 	self waittill("restore_old_values");
@@ -205,24 +177,19 @@ func_E2DE(param_00,param_01,param_02)
 	self goal_type(var_03,param_02);
 }
 
-//Function Number: 7
-func_13285()
-{
+func_13285() {
 	var_00 = self.triggerportableradarping;
 	var_00 endon("disconnect");
 	self endon("venom_end");
 	level endon("game_ended");
-	for(;;)
-	{
+	for(;;) {
 		self waittill("spaceship_thrusting",var_01);
-		if(scripts\mp\_utility::istrue(var_01))
-		{
+		if(scripts\mp\_utility::istrue(var_01)) {
 			self setscriptablepartstate("center_disc","thrust",0);
 			continue;
 		}
 
-		if(scripts\mp\killstreaks\_utility::func_A69F(self.streakinfo,"passive_stealth_speed"))
-		{
+		if(scripts\mp\killstreaks\_utility::func_A69F(self.streakinfo,"passive_stealth_speed")) {
 			self setscriptablepartstate("center_disc","hide_fx",0);
 			continue;
 		}
@@ -231,24 +198,19 @@ func_13285()
 	}
 }
 
-//Function Number: 8
-func_1327E()
-{
+func_1327E() {
 	var_00 = self.triggerportableradarping;
 	var_00 endon("disconnect");
 	self endon("venom_end");
 	level endon("game_ended");
-	for(;;)
-	{
+	for(;;) {
 		self waittill("spaceship_juking",var_01,var_02);
-		if(scripts\mp\_utility::istrue(var_02))
-		{
+		if(scripts\mp\_utility::istrue(var_02)) {
 			self setscriptablepartstate("side_discs","thrust",0);
 			continue;
 		}
 
-		if(scripts\mp\killstreaks\_utility::func_A69F(self.streakinfo,"passive_stealth_speed"))
-		{
+		if(scripts\mp\killstreaks\_utility::func_A69F(self.streakinfo,"passive_stealth_speed")) {
 			self setscriptablepartstate("side_discs","hide_fx",0);
 			continue;
 		}
@@ -257,20 +219,15 @@ func_1327E()
 	}
 }
 
-//Function Number: 9
-func_1327D()
-{
+func_1327D() {
 	var_00 = self.triggerportableradarping;
 	var_00 endon("disconnect");
 	self endon("venom_end");
 	level endon("game_ended");
-	for(;;)
-	{
+	for(;;) {
 		var_00 waittill("energy_depleted",var_01);
-		if(var_01 == 0)
-		{
-			if(scripts\mp\killstreaks\_utility::func_A69F(self.streakinfo,"passive_stealth_speed"))
-			{
+		if(var_01 == 0) {
+			if(scripts\mp\killstreaks\_utility::func_A69F(self.streakinfo,"passive_stealth_speed")) {
 				self setscriptablepartstate("center_disc","hide_fx",0);
 				continue;
 			}
@@ -280,21 +237,16 @@ func_1327D()
 	}
 }
 
-//Function Number: 10
-func_1327B()
-{
+func_1327B() {
 	var_00 = self.triggerportableradarping;
 	var_00 endon("disconnect");
 	self endon("venom_end");
 	level endon("game_ended");
 	scripts\mp\_hostmigration::waitlongdurationwithhostmigrationpause(0.5);
-	for(;;)
-	{
-		if(var_00 attackbuttonpressed())
-		{
+	for(;;) {
+		if(var_00 attackbuttonpressed()) {
 			var_01 = distancesquared(self.spawnpos,self.origin);
-			if(var_01 >= 5760000)
-			{
+			if(var_01 >= 5760000) {
 				var_00 scripts\mp\_missions::func_D991("ch_venom_distance");
 			}
 
@@ -305,76 +257,59 @@ func_1327B()
 	}
 }
 
-//Function Number: 11
-func_0118(param_00,param_01)
-{
-	if(isdefined(param_00))
-	{
+func_0118(param_00,param_01) {
+	if(isdefined(param_00)) {
 		self _meth_8593();
 		self setscriptablepartstate("Explosion","explode",0);
 	}
 }
 
-//Function Number: 12
-func_13279()
-{
+func_13279() {
 	var_00 = self.triggerportableradarping;
 	var_00 endon("disconnect");
 	self endon("venom_end");
 	level endon("game_ended");
-	for(;;)
-	{
+	for(;;) {
 		self waittill("damage",var_01,var_02,var_03,var_04,var_05,var_06,var_07,var_08,var_09,var_0A,var_0B,var_0C,var_0D,var_0E);
 		var_0A = scripts\mp\_utility::func_13CA1(var_0A,var_0E);
-		if(isdefined(var_02) && var_02.classname != "trigger_hurt")
-		{
-			if(isdefined(var_02.triggerportableradarping))
-			{
+		if(isdefined(var_02) && var_02.classname != "trigger_hurt") {
+			if(isdefined(var_02.triggerportableradarping)) {
 				var_02 = var_02.triggerportableradarping;
 			}
 
-			if(isdefined(var_02.team) && var_02.team == self.team && var_02 != self.triggerportableradarping)
-			{
+			if(isdefined(var_02.team) && var_02.team == self.team && var_02 != self.triggerportableradarping) {
 				continue;
 			}
 		}
 
-		if(scripts/mp/equipment/phase_shift::isentityphaseshifted(var_02))
-		{
+		if(scripts/mp/equipment/phase_shift::isentityphaseshifted(var_02)) {
 			continue;
 		}
 
-		if(isdefined(var_0A))
-		{
+		if(isdefined(var_0A)) {
 			var_01 = scripts\mp\killstreaks\_utility::getmodifiedantikillstreakdamage(var_02,var_0A,var_05,var_01,self.maxhealth,1,1,1);
 		}
 
 		self.var_EDD7 = self.var_EDD7 - var_01;
-		if(self.var_EDD7 < 0)
-		{
+		if(self.var_EDD7 < 0) {
 			self.var_EDD7 = 0;
 		}
 
 		var_00 setclientomnvar("ui_killstreak_health",self.var_EDD7 / 10);
-		if(isplayer(var_02))
-		{
+		if(isplayer(var_02)) {
 			scripts\mp\killstreaks\_killstreaks::killstreakhit(var_02,var_0A,self,var_05);
-			if(isdefined(var_0A) && var_0A == "concussion_grenade_mp")
-			{
-				if(scripts\mp\_utility::istrue(scripts\mp\_utility::playersareenemies(self.triggerportableradarping,var_02)))
-				{
+			if(isdefined(var_0A) && var_0A == "concussion_grenade_mp") {
+				if(scripts\mp\_utility::istrue(scripts\mp\_utility::playersareenemies(self.triggerportableradarping,var_02))) {
 					var_02 scripts\mp\_missions::func_D991("ch_tactical_emp_eqp");
 				}
 			}
 
 			var_02 scripts\mp\_damagefeedback::updatedamagefeedback("");
-			if(self.var_EDD7 <= 0)
-			{
+			if(self.var_EDD7 <= 0) {
 				var_02 notify("destroyed_killstreak",var_0A);
 				var_0F = scripts\mp\_killstreak_loot::getrarityforlootitem(self.streakinfo.variantid);
 				var_10 = "callout_destroyed_" + self.streakname;
-				if(var_0F != "")
-				{
+				if(var_0F != "") {
 					var_10 = var_10 + "_" + var_0F;
 				}
 
@@ -385,22 +320,18 @@ func_13279()
 			continue;
 		}
 
-		if(self.var_EDD7 <= 0)
-		{
+		if(self.var_EDD7 <= 0) {
 			self notify("venom_end",self.origin,1);
 		}
 	}
 }
 
-//Function Number: 13
-func_1327A()
-{
+func_1327A() {
 	var_00 = self.triggerportableradarping;
 	level endon("game_ended");
 	self waittill("venom_end",var_01,var_02);
 	scripts\mp\_utility::printgameaction("killstreak ended - venom",var_00);
-	if(getdvarint("camera_thirdPerson"))
-	{
+	if(getdvarint("camera_thirdPerson")) {
 		scripts\mp\_utility::setthirdpersondof(1);
 	}
 
@@ -412,15 +343,12 @@ func_1327A()
 	self setscriptablepartstate("stealth","neutral",0);
 	thread func_0118(var_00,var_01);
 	level.venoms--;
-	if(level.venoms < 0)
-	{
+	if(level.venoms < 0) {
 		level.venoms = 0;
 	}
 
-	if(isdefined(var_00))
-	{
-		if(!scripts\mp\_utility::istrue(var_02))
-		{
+	if(isdefined(var_00)) {
+		if(!scripts\mp\_utility::istrue(var_02)) {
 			var_00 scripts\mp\_utility::freezecontrolswrapper(1);
 			scripts\mp\_hostmigration::waitlongdurationwithhostmigrationpause(1);
 			var_00 scripts\mp\_utility::freezecontrolswrapper(0);
@@ -444,9 +372,7 @@ func_1327A()
 	self delete();
 }
 
-//Function Number: 14
-func_13281(param_00)
-{
+func_13281(param_00) {
 	var_01 = self.triggerportableradarping;
 	var_01 endon("disconnect");
 	self endon("venom_end");
@@ -458,9 +384,7 @@ func_13281(param_00)
 	self notify("venom_end",self.origin);
 }
 
-//Function Number: 15
-func_13283()
-{
+func_13283() {
 	var_00 = self.triggerportableradarping;
 	self endon("venom_end");
 	level endon("game_ended");
@@ -468,9 +392,7 @@ func_13283()
 	self notify("venom_end",self.origin);
 }
 
-//Function Number: 16
-func_1327C()
-{
+func_1327C() {
 	var_00 = self.triggerportableradarping;
 	var_00 endon("disconnect");
 	self endon("venom_end");
@@ -480,40 +402,30 @@ func_1327C()
 	self notify("venom_end",self.origin);
 }
 
-//Function Number: 17
-venom_watchempdamage()
-{
+venom_watchempdamage() {
 	level endon("game_ended");
 	self endon("venom_end");
-	for(;;)
-	{
+	for(;;) {
 		self waittill("emp_damage",var_00,var_01,var_02,var_03,var_04);
 		scripts\mp\killstreaks\_utility::dodamagetokillstreak(100,var_00,var_00,self.team,var_02,var_04,var_03);
 	}
 }
 
-//Function Number: 18
-func_13284()
-{
+func_13284() {
 	var_00 = self.triggerportableradarping;
 	var_00 endon("disconnect");
 	self endon("venom_end");
 	level endon("game_ended");
-	for(;;)
-	{
+	for(;;) {
 		level waittill("connected",var_01);
 		thread func_13276(var_01);
 	}
 }
 
-//Function Number: 19
-func_13275()
-{
+func_13275() {
 	var_00 = self.triggerportableradarping;
-	foreach(var_02 in level.players)
-	{
-		if(var_02.team == var_00.team && var_02 != var_00)
-		{
+	foreach(var_02 in level.players) {
+		if(var_02.team == var_00.team && var_02 != var_00) {
 			continue;
 		}
 
@@ -521,19 +433,15 @@ func_13275()
 	}
 }
 
-//Function Number: 20
-func_13276(param_00)
-{
+func_13276(param_00) {
 	var_01 = self.triggerportableradarping;
 	var_01 endon("disconnect");
 	self endon("venom_end");
 	param_00 endon("disconnect");
 	level endon("game_ended");
-	for(;;)
-	{
+	for(;;) {
 		param_00 waittill("removed_spawn_perks");
-		if(param_00.team == var_01.team)
-		{
+		if(param_00.team == var_01.team) {
 			break;
 		}
 
@@ -541,82 +449,67 @@ func_13276(param_00)
 	}
 }
 
-//Function Number: 21
-func_6C9B(param_00,param_01,param_02)
-{
+func_6C9B(param_00,param_01,param_02) {
 	var_03 = anglestoforward(self.angles);
 	var_04 = anglestoright(self.angles);
 	var_05 = self geteye();
 	var_06 = var_05 + (0,0,param_01);
 	var_07 = var_06 + param_00 * var_03;
-	if(func_3DCF(var_05,var_07,param_02))
-	{
+	if(func_3DCF(var_05,var_07,param_02)) {
 		return var_07;
 	}
 
 	var_07 = var_06 - param_00 * var_03;
-	if(func_3DCF(var_05,var_07,param_02))
-	{
+	if(func_3DCF(var_05,var_07,param_02)) {
 		return var_07;
 	}
 
 	var_07 = var_07 + param_00 * var_04;
-	if(func_3DCF(var_05,var_07,param_02))
-	{
+	if(func_3DCF(var_05,var_07,param_02)) {
 		return var_07;
 	}
 
 	var_07 = var_06 - param_00 * var_04;
-	if(func_3DCF(var_05,var_07,param_02))
-	{
+	if(func_3DCF(var_05,var_07,param_02)) {
 		return var_07;
 	}
 
 	var_07 = var_06;
-	if(func_3DCF(var_05,var_07,param_02))
-	{
+	if(func_3DCF(var_05,var_07,param_02)) {
 		return var_07;
 	}
 
 	scripts\engine\utility::waitframe();
 	var_07 = var_06 + 0.707 * param_00 * var_03 + var_04;
-	if(func_3DCF(var_05,var_07,param_02))
-	{
+	if(func_3DCF(var_05,var_07,param_02)) {
 		return var_07;
 	}
 
 	var_07 = var_06 + 0.707 * param_00 * var_03 - var_04;
-	if(func_3DCF(var_05,var_07,param_02))
-	{
+	if(func_3DCF(var_05,var_07,param_02)) {
 		return var_07;
 	}
 
 	var_07 = var_06 + 0.707 * param_00 * var_04 - var_03;
-	if(func_3DCF(var_05,var_07,param_02))
-	{
+	if(func_3DCF(var_05,var_07,param_02)) {
 		return var_07;
 	}
 
 	var_07 = var_06 + 0.707 * param_00 * -1 * var_03 - var_04;
-	if(func_3DCF(var_05,var_07,param_02))
-	{
+	if(func_3DCF(var_05,var_07,param_02)) {
 		return var_07;
 	}
 
 	return undefined;
 }
 
-//Function Number: 22
-func_3DCF(param_00,param_01,param_02)
-{
+func_3DCF(param_00,param_01,param_02) {
 	var_03 = 0;
-	if(capsuletracepassed(param_01,param_02,param_02 * 2 + 0.01,undefined,1,1))
-	{
+	if(capsuletracepassed(param_01,param_02,param_02 * 2 + 0.01,undefined,1,1)) {
 		var_04 = [self];
 		var_05 = physics_createcontents(["physicscontents_solid","physicscontents_glass","physicscontents_vehicleclip","physicscontents_missileclip","physicscontents_clipshot"]);
 		var_06 = function_0287(param_00,param_01,var_05,var_04,0,"physicsquery_closest");
-		if(var_06.size == 0)
-		{
+		if(var_06.size == 0) {
 			var_03 = 1;
 		}
 	}
@@ -624,55 +517,40 @@ func_3DCF(param_00,param_01,param_02)
 	return var_03;
 }
 
-//Function Number: 23
-isvenom()
-{
+isvenom() {
 	return isdefined(self.streakname) && self.streakname == "venom";
 }
 
-//Function Number: 24
-makedamageimmune(param_00)
-{
-	if(!isdefined(self.entsimmune))
-	{
+makedamageimmune(param_00) {
+	if(!isdefined(self.entsimmune)) {
 		self.entsimmune = [];
 	}
 
 	self.entsimmune[param_00 getentitynumber()] = param_00;
 }
 
-//Function Number: 25
-isdamageimmune(param_00)
-{
-	if(!isvenom())
-	{
+isdamageimmune(param_00) {
+	if(!isvenom()) {
 		return 0;
 	}
 
-	if(!isdefined(self.entsimmune))
-	{
+	if(!isdefined(self.entsimmune)) {
 		return 0;
 	}
 
 	return isdefined(self.entsimmune[param_00 getentitynumber()]);
 }
 
-//Function Number: 26
-venommodifieddamage(param_00,param_01,param_02,param_03,param_04)
-{
-	if(isdefined(param_00) && isdefined(param_03) && isdefined(param_01))
-	{
-		if(param_03 isvenom() && scripts\mp\killstreaks\_utility::func_A69F(param_03.streakinfo,"passive_decreased_damage"))
-		{
+venommodifieddamage(param_00,param_01,param_02,param_03,param_04) {
+	if(isdefined(param_00) && isdefined(param_03) && isdefined(param_01)) {
+		if(param_03 isvenom() && scripts\mp\killstreaks\_utility::func_A69F(param_03.streakinfo,"passive_decreased_damage")) {
 			var_05 = distance2dsquared(param_01.origin,param_03.origin);
-			if(var_05 >= 22500 && param_04 > 10)
-			{
+			if(var_05 >= 22500 && param_04 > 10) {
 				param_04 = 0;
 			}
 		}
 
-		if(param_03 isdamageimmune(param_01))
-		{
+		if(param_03 isdamageimmune(param_01)) {
 			param_04 = 0;
 		}
 	}

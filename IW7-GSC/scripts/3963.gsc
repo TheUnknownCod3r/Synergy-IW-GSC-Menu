@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: 3963.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 1
- * Decompile Time: 1 ms
- * Timestamp: 10/27/2023 12:31:52 AM
-*******************************************************************/
+/****************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\3963.gsc
+****************************/
 
-//Function Number: 1
-main()
-{
+main() {
 	level._effect["vfx_afg_ceiling_vent_steam_int"] = loadfx("vfx/iw7/levels/mp_afghan/vfx_afg_ceiling_vent_steam_int.vfx");
 	level._effect["vfx_sprinkler_spray_int"] = loadfx("vfx/iw7/levels/mp_afghan/vfx_sprinkler_spray_int.vfx");
 	level._effect["vfx_afg_fire_med_ssmk"] = loadfx("vfx/iw7/levels/mp_afghan/vfx_afg_fire_med_ssmk.vfx");

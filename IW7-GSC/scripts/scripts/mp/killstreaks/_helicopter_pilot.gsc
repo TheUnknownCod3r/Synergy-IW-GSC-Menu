@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\mp\killstreaks\_helicopter_pilot.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 28
- * Decompile Time: 1370 ms
- * Timestamp: 10/27/2023 12:28:45 AM
-*******************************************************************/
+/****************************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\mp\killstreaks\_helicopter_pilot.gsc
+****************************************************************/
 
-//Function Number: 1
-init()
-{
+init() {
 	scripts\mp\killstreaks\_killstreaks::registerkillstreak("heli_pilot",::func_128E7);
 	level.heli_pilot = [];
 	level.helipilotsettings = [];
@@ -23,8 +17,7 @@ init()
 	level.helipilotsettings["heli_pilot"].teamsplash = "used_heli_pilot";
 	helipilot_setairstartnodes();
 	level.heli_pilot_mesh = getent("heli_pilot_mesh","targetname");
-	if(!isdefined(level.heli_pilot_mesh))
-	{
+	if(!isdefined(level.heli_pilot_mesh)) {
 	}
 	else
 	{
@@ -40,82 +33,65 @@ init()
 	level.heliconfigs["heli_pilot"] = var_00;
 }
 
-//Function Number: 2
-func_128E7(param_00,param_01)
-{
+func_128E7(param_00,param_01) {
 	var_02 = "heli_pilot";
 	var_03 = 1;
-	if(isdefined(self.underwater) && self.underwater)
-	{
+	if(isdefined(self.underwater) && self.underwater) {
 		return 0;
 	}
-	else if(func_68C1(self.team))
-	{
+	else if(func_68C1(self.team)) {
 		self iprintlnbold(&"KILLSTREAKS_AIR_SPACE_TOO_CROWDED");
 		return 0;
 	}
-	else if(scripts\mp\_utility::currentactivevehiclecount() >= scripts\mp\_utility::maxvehiclesallowed() || level.fauxvehiclecount + var_03 >= scripts\mp\_utility::maxvehiclesallowed())
-	{
+	else if(scripts\mp\_utility::currentactivevehiclecount() >= scripts\mp\_utility::maxvehiclesallowed() || level.fauxvehiclecount + var_03 >= scripts\mp\_utility::maxvehiclesallowed()) {
 		self iprintlnbold(&"KILLSTREAKS_TOO_MANY_VEHICLES");
 		return 0;
 	}
 
 	scripts\mp\_utility::incrementfauxvehiclecount();
 	var_04 = func_49D2(var_02);
-	if(!isdefined(var_04))
-	{
+	if(!isdefined(var_04)) {
 		scripts\mp\_utility::decrementfauxvehiclecount();
 		return 0;
 	}
 
 	level.heli_pilot[self.team] = var_04;
 	var_05 = func_10DA3(var_04);
-	if(!isdefined(var_05))
-	{
+	if(!isdefined(var_05)) {
 		var_05 = 0;
 	}
 
 	return var_05;
 }
 
-//Function Number: 3
-func_68C1(param_00)
-{
-	if(level.gametype == "dm")
-	{
-		if(isdefined(level.heli_pilot[param_00]) || isdefined(level.heli_pilot[level.otherteam[param_00]]))
-		{
+func_68C1(param_00) {
+	if(level.gametype == "dm") {
+		if(isdefined(level.heli_pilot[param_00]) || isdefined(level.heli_pilot[level.otherteam[param_00]])) {
 			return 1;
 		}
 
 		return 0;
 	}
 
-	if(isdefined(level.heli_pilot[param_00]))
-	{
+	if(isdefined(level.heli_pilot[param_00])) {
 		return 1;
 	}
 
 	return 0;
 }
 
-//Function Number: 4
-watchhostmigrationfinishedinit(param_00)
-{
+watchhostmigrationfinishedinit(param_00) {
 	param_00 endon("killstreak_disowned");
 	param_00 endon("disconnect");
 	level endon("game_ended");
 	self endon("death");
-	for(;;)
-	{
+	for(;;) {
 		level waittill("host_migration_end");
 		param_00 setclientomnvar("ui_heli_pilot",1);
 	}
 }
 
-//Function Number: 5
-func_49D2(param_00)
-{
+func_49D2(param_00) {
 	var_01 = helipilot_getcloseststartnode(self.origin);
 	var_02 = helipilot_getlinkedstruct(var_01);
 	var_03 = vectortoangles(var_02.origin - var_01.origin);
@@ -123,8 +99,7 @@ func_49D2(param_00)
 	var_05 = var_02.origin + var_04 * -100;
 	var_06 = var_01.origin;
 	var_07 = spawnhelicopter(self,var_06,var_03,level.helipilotsettings[param_00].vehicleinfo,level.helipilotsettings[param_00].modelbase);
-	if(!isdefined(var_07))
-	{
+	if(!isdefined(var_07)) {
 		return;
 	}
 
@@ -161,9 +136,7 @@ func_49D2(param_00)
 	return var_07;
 }
 
-//Function Number: 6
-helipilot_lightfx()
-{
+helipilot_lightfx() {
 	playfxontag(level.chopper_fx["light"]["left"],self,"tag_light_nose");
 	wait(0.05);
 	playfxontag(level.chopper_fx["light"]["belly"],self,"tag_light_belly");
@@ -173,14 +146,11 @@ helipilot_lightfx()
 	playfxontag(level.chopper_fx["light"]["tail"],self,"tag_light_tail2");
 }
 
-//Function Number: 7
-func_10DA3(param_00)
-{
+func_10DA3(param_00) {
 	level endon("game_ended");
 	param_00 endon("death");
 	scripts\mp\_utility::setusingremote(param_00.helipilottype);
-	if(getdvarint("camera_thirdPerson"))
-	{
+	if(getdvarint("camera_thirdPerson")) {
 		scripts\mp\_utility::setthirdpersondof(0);
 	}
 
@@ -189,10 +159,8 @@ func_10DA3(param_00)
 	thread watchintrocleared(param_00);
 	scripts\mp\_utility::freezecontrolswrapper(1);
 	var_01 = scripts\mp\killstreaks\_killstreaks::initridekillstreak(param_00.helipilottype);
-	if(var_01 != "success")
-	{
-		if(isdefined(self.disabledweapon) && self.disabledweapon)
-		{
+	if(var_01 != "success") {
+		if(isdefined(self.disabledweapon) && self.disabledweapon) {
 			scripts\engine\utility::allow_weapon(1);
 		}
 
@@ -205,8 +173,7 @@ func_10DA3(param_00)
 	var_03 = param_00.var_4BF7.origin + scripts\mp\_utility::gethelipilotmeshoffset() + var_02;
 	var_04 = param_00.var_4BF7.origin + scripts\mp\_utility::gethelipilotmeshoffset() - var_02;
 	var_05 = bullettrace(var_03,var_04,0,undefined,0,0,1);
-	if(!isdefined(var_05["entity"]))
-	{
+	if(!isdefined(var_05["entity"])) {
 	}
 
 	var_06 = var_05["position"] - scripts\mp\_utility::gethelipilotmeshoffset() + (0,0,250);
@@ -219,9 +186,7 @@ func_10DA3(param_00)
 	return 1;
 }
 
-//Function Number: 8
-heligotostartposition(param_00)
-{
+heligotostartposition(param_00) {
 	self endon("death");
 	level endon("game_ended");
 	self remotecontrolvehicletarget(param_00);
@@ -230,9 +195,7 @@ heligotostartposition(param_00)
 	param_00 delete();
 }
 
-//Function Number: 9
-watchintrocleared(param_00)
-{
+watchintrocleared(param_00) {
 	self endon("disconnect");
 	self endon("joined_team");
 	self endon("joined_spectators");
@@ -242,17 +205,13 @@ watchintrocleared(param_00)
 	self setclientomnvar("ui_heli_pilot",1);
 	var_01 = scripts\mp\_utility::outlineenableforplayer(self,"cyan",self,0,0,"killstreak");
 	removeoutline(var_01,param_00);
-	foreach(var_03 in level.participants)
-	{
-		if(!scripts\mp\_utility::isreallyalive(var_03) || var_03.sessionstate != "playing")
-		{
+	foreach(var_03 in level.participants) {
+		if(!scripts\mp\_utility::isreallyalive(var_03) || var_03.sessionstate != "playing") {
 			continue;
 		}
 
-		if(scripts\mp\_utility::isenemy(var_03))
-		{
-			if(!var_03 scripts\mp\_utility::_hasperk("specialty_noplayertarget"))
-			{
+		if(scripts\mp\_utility::isenemy(var_03)) {
+			if(!var_03 scripts\mp\_utility::_hasperk("specialty_noplayertarget")) {
 				var_01 = scripts\mp\_utility::outlineenableforplayer(var_03,"orange",self,0,0,"killstreak");
 				var_03 removeoutline(var_01,param_00);
 				continue;
@@ -266,9 +225,7 @@ watchintrocleared(param_00)
 	thread watchearlyexit(param_00);
 }
 
-//Function Number: 10
-watchforperkremoval(param_00)
-{
+watchforperkremoval(param_00) {
 	self notify("watchForPerkRemoval");
 	self endon("watchForPerkRemoval");
 	self endon("death");
@@ -277,31 +234,23 @@ watchforperkremoval(param_00)
 	removeoutline(var_01,param_00);
 }
 
-//Function Number: 11
-watchplayersspawning()
-{
+watchplayersspawning() {
 	self endon("leaving");
 	self endon("death");
-	for(;;)
-	{
+	for(;;) {
 		level waittill("player_spawned",var_00);
-		if(var_00.sessionstate == "playing" && self.triggerportableradarping scripts\mp\_utility::isenemy(var_00))
-		{
+		if(var_00.sessionstate == "playing" && self.triggerportableradarping scripts\mp\_utility::isenemy(var_00)) {
 			var_00 thread watchforperkremoval(self);
 		}
 	}
 }
 
-//Function Number: 12
-removeoutline(param_00,param_01)
-{
+removeoutline(param_00,param_01) {
 	thread heliremoveoutline(param_00,param_01);
 	thread playerremoveoutline(param_00,param_01);
 }
 
-//Function Number: 13
-heliremoveoutline(param_00,param_01)
-{
+heliremoveoutline(param_00,param_01) {
 	self notify("heliRemoveOutline");
 	self endon("heliRemoveOutline");
 	self endon("outline_removed");
@@ -309,16 +258,13 @@ heliremoveoutline(param_00,param_01)
 	level endon("game_ended");
 	var_02 = ["leaving","death"];
 	param_01 scripts\engine\utility::waittill_any_in_array_return_no_endon_death(var_02);
-	if(isdefined(self))
-	{
+	if(isdefined(self)) {
 		scripts\mp\_utility::outlinedisable(param_00,self);
 		self notify("outline_removed");
 	}
 }
 
-//Function Number: 14
-playerremoveoutline(param_00,param_01)
-{
+playerremoveoutline(param_00,param_01) {
 	self notify("playerRemoveOutline");
 	self endon("playerRemoveOutline");
 	self endon("outline_removed");
@@ -330,28 +276,22 @@ playerremoveoutline(param_00,param_01)
 	self notify("outline_removed");
 }
 
-//Function Number: 15
-helipilot_watchdeath()
-{
+helipilot_watchdeath() {
 	level endon("game_ended");
 	self endon("gone");
 	self waittill("death");
-	if(isdefined(self.triggerportableradarping))
-	{
+	if(isdefined(self.triggerportableradarping)) {
 		self.triggerportableradarping helipilot_endride(self);
 	}
 
-	if(isdefined(self.killcament))
-	{
+	if(isdefined(self.killcament)) {
 		self.killcament delete();
 	}
 
 	thread scripts\mp\killstreaks\_helicopter::lbonkilled();
 }
 
-//Function Number: 16
-helipilot_watchobjectivecam()
-{
+helipilot_watchobjectivecam() {
 	level endon("game_ended");
 	self endon("gone");
 	self.triggerportableradarping endon("disconnect");
@@ -359,15 +299,12 @@ helipilot_watchobjectivecam()
 	self.triggerportableradarping endon("joined_spectators");
 	level waittill("objective_cam");
 	thread scripts\mp\killstreaks\_helicopter::lbonkilled();
-	if(isdefined(self.triggerportableradarping))
-	{
+	if(isdefined(self.triggerportableradarping)) {
 		self.triggerportableradarping helipilot_endride(self);
 	}
 }
 
-//Function Number: 17
-helipilot_watchtimeout()
-{
+helipilot_watchtimeout() {
 	level endon("game_ended");
 	self endon("death");
 	self.triggerportableradarping endon("disconnect");
@@ -378,9 +315,7 @@ helipilot_watchtimeout()
 	thread helipilot_leave();
 }
 
-//Function Number: 18
-helipilot_watchownerloss()
-{
+helipilot_watchownerloss() {
 	level endon("game_ended");
 	self endon("death");
 	self endon("leaving");
@@ -388,9 +323,7 @@ helipilot_watchownerloss()
 	thread helipilot_leave();
 }
 
-//Function Number: 19
-helipilot_watchroundend()
-{
+helipilot_watchroundend() {
 	self endon("death");
 	self endon("leaving");
 	self.triggerportableradarping endon("disconnect");
@@ -400,13 +333,10 @@ helipilot_watchroundend()
 	thread helipilot_leave();
 }
 
-//Function Number: 20
-helipilot_leave()
-{
+helipilot_leave() {
 	self endon("death");
 	self notify("leaving");
-	if(isdefined(self.triggerportableradarping))
-	{
+	if(isdefined(self.triggerportableradarping)) {
 		self.triggerportableradarping helipilot_endride(self);
 	}
 
@@ -418,8 +348,7 @@ helipilot_leave()
 	self waittill("goal");
 	var_01 = var_01 + anglestoforward(self.angles) * 15000;
 	var_02 = spawn("script_origin",var_01);
-	if(isdefined(var_02))
-	{
+	if(isdefined(var_02)) {
 		self setlookatent(var_02);
 		var_02 thread wait_and_delete(3);
 	}
@@ -430,29 +359,22 @@ helipilot_leave()
 	scripts\mp\killstreaks\_helicopter::removelittlebird();
 }
 
-//Function Number: 21
-wait_and_delete(param_00)
-{
+wait_and_delete(param_00) {
 	self endon("death");
 	level endon("game_ended");
 	wait(param_00);
 	self delete();
 }
 
-//Function Number: 22
-helipilot_endride(param_00)
-{
-	if(isdefined(param_00))
-	{
+helipilot_endride(param_00) {
+	if(isdefined(param_00)) {
 		self setclientomnvar("ui_heli_pilot",0);
 		param_00 notify("end_remote");
-		if(scripts\mp\_utility::isusingremote())
-		{
+		if(scripts\mp\_utility::isusingremote()) {
 			scripts\mp\_utility::clearusingremote();
 		}
 
-		if(getdvarint("camera_thirdPerson"))
-		{
+		if(getdvarint("camera_thirdPerson")) {
 			scripts\mp\_utility::setthirdpersondof(1);
 		}
 
@@ -462,9 +384,7 @@ helipilot_endride(param_00)
 	}
 }
 
-//Function Number: 23
-helipilot_freezebuffer()
-{
+helipilot_freezebuffer() {
 	self endon("disconnect");
 	self endon("death");
 	level endon("game_ended");
@@ -473,27 +393,20 @@ helipilot_freezebuffer()
 	scripts\mp\_utility::freezecontrolswrapper(0);
 }
 
-//Function Number: 24
-helipilot_watchads()
-{
+helipilot_watchads() {
 	self endon("leaving");
 	self endon("death");
 	level endon("game_ended");
 	var_00 = 0;
-	for(;;)
-	{
-		if(isdefined(self.triggerportableradarping))
-		{
-			if(self.triggerportableradarping adsbuttonpressed())
-			{
-				if(!var_00)
-				{
+	for(;;) {
+		if(isdefined(self.triggerportableradarping)) {
+			if(self.triggerportableradarping adsbuttonpressed()) {
+				if(!var_00) {
 					self.triggerportableradarping setclientomnvar("ui_heli_pilot",2);
 					var_00 = 1;
 				}
 			}
-			else if(var_00)
-			{
+			else if(var_00) {
 				self.triggerportableradarping setclientomnvar("ui_heli_pilot",1);
 				var_00 = 0;
 			}
@@ -503,23 +416,16 @@ helipilot_watchads()
 	}
 }
 
-//Function Number: 25
-helipilot_setairstartnodes()
-{
+helipilot_setairstartnodes() {
 	level.air_start_nodes = scripts\engine\utility::getstructarray("chopper_boss_path_start","targetname");
 }
 
-//Function Number: 26
-helipilot_getlinkedstruct(param_00)
-{
-	if(isdefined(param_00.script_linkto))
-	{
+helipilot_getlinkedstruct(param_00) {
+	if(isdefined(param_00.script_linkto)) {
 		var_01 = param_00 scripts\engine\utility::get_links();
-		for(var_02 = 0;var_02 < var_01.size;var_02++)
-		{
+		for(var_02 = 0;var_02 < var_01.size;var_02++) {
 			var_03 = scripts\engine\utility::getstruct(var_01[var_02],"script_linkname");
-			if(isdefined(var_03))
-			{
+			if(isdefined(var_03)) {
 				return var_03;
 			}
 		}
@@ -528,16 +434,12 @@ helipilot_getlinkedstruct(param_00)
 	return undefined;
 }
 
-//Function Number: 27
-helipilot_getcloseststartnode(param_00)
-{
+helipilot_getcloseststartnode(param_00) {
 	var_01 = undefined;
 	var_02 = 999999;
-	foreach(var_04 in level.air_start_nodes)
-	{
+	foreach(var_04 in level.air_start_nodes) {
 		var_05 = distance(var_04.origin,param_00);
-		if(var_05 < var_02)
-		{
+		if(var_05 < var_02) {
 			var_01 = var_04;
 			var_02 = var_05;
 		}
@@ -546,9 +448,7 @@ helipilot_getcloseststartnode(param_00)
 	return var_01;
 }
 
-//Function Number: 28
-watchearlyexit(param_00)
-{
+watchearlyexit(param_00) {
 	level endon("game_ended");
 	param_00 endon("death");
 	self endon("leaving");

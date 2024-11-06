@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: 4056.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 1
- * Decompile Time: 1 ms
- * Timestamp: 10/27/2023 12:31:57 AM
-*******************************************************************/
+/****************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\4056.gsc
+****************************/
 
-//Function Number: 1
-main()
-{
+main() {
 	level._effect["vfx_prime_rain_groundhit_m_02"] = loadfx("vfx/iw7/levels/mp_prime/vfx_prime_rain_groundhit_m_02.vfx");
 	level._effect["vfx_prime_sign_clubwall"] = loadfx("vfx/iw7/levels/mp_prime/vfx_prime_sign_clubwall.vfx");
 	level._effect["vfx_prime_rain_lightcluster"] = loadfx("vfx/iw7/levels/mp_prime/vfx_prime_rain_lightcluster.vfx");

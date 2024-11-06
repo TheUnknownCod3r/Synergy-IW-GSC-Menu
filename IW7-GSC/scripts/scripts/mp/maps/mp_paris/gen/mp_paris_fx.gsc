@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\mp\maps\mp_paris\gen\mp_paris_fx.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 1
- * Decompile Time: 182 ms
- * Timestamp: 10/27/2023 12:13:59 AM
-*******************************************************************/
+/****************************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\mp\maps\mp_paris\gen\mp_paris_fx.gsc
+****************************************************************/
 
-//Function Number: 1
-main()
-{
+main() {
 	var_00 = scripts\common\utility::func_49FA("vfx_paris_ground_smk_leak_sm");
 	var_00 scripts\common\createfx::func_F4AD((589.295,2442.92,-1.41393),(0,0,0));
 	var_00.var_13125["fxid"] = "vfx_paris_ground_smk_leak_sm";

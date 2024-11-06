@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\mp\killstreaks\_nuke.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 31
- * Decompile Time: 1557 ms
- * Timestamp: 10/27/2023 12:29:09 AM
-*******************************************************************/
+/****************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\mp\killstreaks\_nuke.gsc
+****************************************************/
 
-//Function Number: 1
-init()
-{
+init() {
 	level.var_C1D0 = "aftermath_post";
 	level._effect["mons_warp_flash"] = loadfx("vfx/iw7/_requests/mp/vfx_vehicle_nuke_warp_flash.vfx");
 	level._effect["mons_warp_in"] = loadfx("vfx/iw7/_requests/mp/vfx_vehicle_nuke_warp_in.vfx");
@@ -29,23 +23,18 @@ init()
 	level.nukedetonated = undefined;
 	level.nukegameover = undefined;
 	level.var_C1B2 = undefined;
-	if(!scripts\mp\_utility::istrue(level.var_C1B2))
-	{
+	if(!scripts\mp\_utility::istrue(level.var_C1B2)) {
 		level thread onplayerconnect();
 	}
 }
 
-//Function Number: 2
-func_128F0(param_00)
-{
-	if(isdefined(level.nukeincoming))
-	{
+func_128F0(param_00) {
+	if(isdefined(level.nukeincoming)) {
 		scripts\mp\_hud_message::showerrormessage("KILLSTREAKS_NUKE_ALREADY_INBOUND");
 		return 0;
 	}
 
-	if(scripts\mp\_utility::isusingremote() && !isdefined(level.gtnw) || !level.gtnw)
-	{
+	if(scripts\mp\_utility::isusingremote() && !isdefined(level.gtnw) || !level.gtnw) {
 		return 0;
 	}
 
@@ -55,17 +44,13 @@ func_128F0(param_00)
 	return 1;
 }
 
-//Function Number: 3
-func_512C(param_00,param_01,param_02)
-{
+func_512C(param_00,param_01,param_02) {
 	level endon("nuke_cancelled");
 	scripts\mp\_hostmigration::waitlongdurationwithhostmigrationpause(param_00);
-	level thread [[ param_01 ]](param_02);
+	level thread [[param_01]](param_02);
 }
 
-//Function Number: 4
-func_5973(param_00)
-{
+func_5973(param_00) {
 	level endon("nuke_cancelled");
 	level.var_C1C5.player = self;
 	level.var_C1C5.team = self.pers["team"];
@@ -75,8 +60,7 @@ func_5973(param_00)
 	setomnvar("ui_bomb_timer",4);
 	thread scripts\mp\_utility::teamplayercardsplash("used_nuke",self);
 	var_01 = func_108E6();
-	if(!isdefined(var_01))
-	{
+	if(!isdefined(var_01)) {
 		return;
 	}
 
@@ -85,9 +69,7 @@ func_5973(param_00)
 	var_01 thread func_13959(param_00);
 }
 
-//Function Number: 5
-func_108E6()
-{
+func_108E6() {
 	var_00 = level.mapcenter;
 	var_01 = 0;
 	var_02 = (0,var_01,0);
@@ -111,19 +93,15 @@ func_108E6()
 	return var_0C;
 }
 
-//Function Number: 6
-getmonsflightpath(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07)
-{
+getmonsflightpath(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07) {
 	var_08 = param_00 + anglestoforward(param_01) * -1 * param_02;
-	if(isdefined(param_03))
-	{
+	if(isdefined(param_03)) {
 		var_08 = var_08 * (1,1,0);
 	}
 
 	var_08 = var_08 + (0,0,param_04);
 	var_09 = param_00 + anglestoforward(param_01) * param_02;
-	if(isdefined(param_03))
-	{
+	if(isdefined(param_03)) {
 		var_09 = var_09 * (1,1,0);
 	}
 
@@ -139,9 +117,7 @@ getmonsflightpath(param_00,param_01,param_02,param_03,param_04,param_05,param_06
 	return var_0D;
 }
 
-//Function Number: 7
-func_1395B(param_00)
-{
+func_1395B(param_00) {
 	soundsettimescalefactor("music_lr",0);
 	soundsettimescalefactor("music_lsrs",0);
 	soundsettimescalefactor("weap_plr_fire_1_2d",0.25);
@@ -192,8 +168,7 @@ func_1395B(param_00)
 	param_00 waittill("disconnect");
 	level.var_C1B2 = 1;
 	func_C1B5();
-	if(level.mapname != "mp_dome_dusk")
-	{
+	if(level.mapname != "mp_dome_dusk") {
 		function_0234(-3,5);
 	}
 
@@ -202,9 +177,7 @@ func_1395B(param_00)
 	self notify("nuke_ship_exit");
 }
 
-//Function Number: 8
-func_13959(param_00)
-{
+func_13959(param_00) {
 	self endon("nuke_ship_exit");
 	level endon("game_ended");
 	thread func_1395C();
@@ -223,40 +196,32 @@ func_13959(param_00)
 	level thread func_512C(level.var_C1CD + 1.5,::func_C1B8,self);
 	self waittill("at_goal");
 	self scriptmodelplayanimdeltamotion("veh_mil_air_ca_mons_mp_doors_open",1);
-	if(!isdefined(level.var_C1AE))
-	{
+	if(!isdefined(level.var_C1AE)) {
 		level.var_C1AE = spawn("script_origin",(0,0,1));
 		level.var_C1AE hide();
 	}
 
 	scripts\mp\_rank::addteamrankxpmultiplier(2,level.var_C1C5.team,"nuke");
-	if(level.var_3883 && param_00)
-	{
+	if(level.var_3883 && param_00) {
 		level thread func_3884(level.var_C1C5.player);
 	}
 }
 
-//Function Number: 9
-func_10DD1()
-{
+func_10DD1() {
 	level endon("nuke_cancelled");
 	setomnvar("ui_nuke_countdown_active",1);
-	if(level.mapname != "mp_dome_dusk")
-	{
+	if(level.mapname != "mp_dome_dusk") {
 		function_0234(-1,10);
 	}
 
 	level thread func_12E43();
-	if(!isdefined(level.var_C1A7))
-	{
+	if(!isdefined(level.var_C1A7)) {
 		level.var_C1A7 = spawn("script_origin",(0,0,0));
 		level.var_C1A7 hide();
 	}
 
-	for(var_00 = level.var_C1CD;var_00 > 0;var_00--)
-	{
-		if(var_00 == 1)
-		{
+	for(var_00 = level.var_C1CD;var_00 > 0;var_00--) {
+		if(var_00 == 1) {
 			level.var_C1A7 playsound("mp_killstreak_nuclearstrike_alarm_last");
 		}
 		else
@@ -271,9 +236,7 @@ func_10DD1()
 	self notify("nuke_ship_exit");
 }
 
-//Function Number: 10
-func_665A()
-{
+func_665A() {
 	self endon("nuke_ship_exit");
 	playfx(scripts\engine\utility::getfx("mons_warp_in"),self.var_C96C);
 	playsoundatpos(self.var_C96C,"ks_nuke_mons_arrive");
@@ -290,21 +253,16 @@ func_665A()
 	self setscriptablepartstate("thrusters_burst","neutral",0);
 }
 
-//Function Number: 11
-func_1395C()
-{
+func_1395C() {
 	self endon("nuke_ship_exit");
-	for(;;)
-	{
+	for(;;) {
 		var_00 = distance(self.origin,self.var_C96C);
-		if(var_00 <= 5000 && !isdefined(self.var_BE83))
-		{
+		if(var_00 <= 5000 && !isdefined(self.var_BE83)) {
 			self notify("near_goal");
 			self.var_BE83 = 1;
 		}
 
-		if(var_00 == 0)
-		{
+		if(var_00 == 0) {
 			self notify("at_goal");
 			break;
 		}
@@ -313,9 +271,7 @@ func_1395C()
 	}
 }
 
-//Function Number: 12
-func_1395A()
-{
+func_1395A() {
 	self waittill("nuke_ship_exit");
 	playfx(scripts\engine\utility::getfx("mons_warp_out"),self.origin);
 	playsoundatpos(self.origin,"ks_nuke_mons_ftl_buildup");
@@ -327,9 +283,7 @@ func_1395A()
 	level.nukeincoming = undefined;
 }
 
-//Function Number: 13
-getpathend()
-{
+getpathend() {
 	var_00 = 150;
 	var_01 = 100000;
 	var_02 = self.angles[1];
@@ -338,9 +292,7 @@ getpathend()
 	return var_04;
 }
 
-//Function Number: 14
-func_3884(param_00)
-{
+func_3884(param_00) {
 	level waittill("game_ended");
 	param_00 scripts\engine\utility::waittill_any_3("death","disconnect");
 	func_C1B5();
@@ -348,9 +300,7 @@ func_3884(param_00)
 	level notify("nuke_cancelled");
 }
 
-//Function Number: 15
-func_C1B1(param_00)
-{
+func_C1B1(param_00) {
 	param_00 endon("nuke_ship_exit");
 	level endon("nuke_cancelled");
 	playfx(scripts\engine\utility::getfx("mons_laser_charge"),param_00.origin);
@@ -359,29 +309,21 @@ func_C1B1(param_00)
 	scripts\mp\_shellshock::_earthquake(0.1,var_01,level.mapcenter,100000);
 }
 
-//Function Number: 16
-func_C1CC(param_00)
-{
+func_C1CC(param_00) {
 	param_00 endon("nuke_ship_exit");
 	level endon("nuke_cancelled");
 }
 
-//Function Number: 17
-func_C1CB(param_00)
-{
+func_C1CB(param_00) {
 	param_00 endon("nuke_ship_exit");
 	level endon("nuke_cancelled");
-	if(isdefined(level.var_C1AE))
-	{
+	if(isdefined(level.var_C1AE)) {
 	}
 }
 
-//Function Number: 18
-func_C1B5(param_00)
-{
+func_C1B5(param_00) {
 	var_01 = 0;
-	if(isdefined(level.var_D8C5))
-	{
+	if(isdefined(level.var_D8C5)) {
 		var_01 = level.var_D8C5;
 	}
 
@@ -389,9 +331,7 @@ func_C1B5(param_00)
 	setomnvar("ui_nuke_countdown_active",0);
 }
 
-//Function Number: 19
-func_C1BE(param_00)
-{
+func_C1BE(param_00) {
 	param_00 endon("nuke_ship_exit");
 	level endon("nuke_cancelled");
 	func_C1B5();
@@ -401,9 +341,7 @@ func_C1BE(param_00)
 	playfx(scripts\engine\utility::getfx("mons_laser_smoke"),level.mapcenter);
 }
 
-//Function Number: 20
-func_C1CA(param_00)
-{
+func_C1CA(param_00) {
 	param_00 endon("nuke_ship_exit");
 	level endon("nuke_cancelled");
 	setslowmotion(1,0.25,0.5);
@@ -411,14 +349,11 @@ func_C1CA(param_00)
 	setslowmotion(0.25,1,3);
 }
 
-//Function Number: 21
-func_C1CE(param_00)
-{
+func_C1CE(param_00) {
 	param_00 endon("nuke_ship_exit");
 	level endon("nuke_cancelled");
 	level.var_C1CF = 1;
-	if(level.mapname != "mp_dome_dusk")
-	{
+	if(level.mapname != "mp_dome_dusk") {
 		function_0234(-2,1.5);
 	}
 
@@ -428,46 +363,35 @@ func_C1CE(param_00)
 	level waittill("nuke_death");
 	param_00 scriptmodelplayanimdeltamotion("veh_mil_air_ca_mons_mp_doors_close",1);
 	level thread func_12EDA();
-	foreach(var_02 in level.players)
-	{
-		if(scripts\mp\_utility::isreallyalive(var_02))
-		{
+	foreach(var_02 in level.players) {
+		if(scripts\mp\_utility::isreallyalive(var_02)) {
 			playfxontagforclients(scripts\engine\utility::getfx("mons_screen_ash"),var_02,"tag_eye",var_02);
 		}
 	}
 
 	scripts\mp\_hostmigration::waitlongdurationwithhostmigrationpause(3.1);
-	if(level.mapname != "mp_dome_dusk")
-	{
+	if(level.mapname != "mp_dome_dusk") {
 		function_0234(-3,1);
 	}
 }
 
-//Function Number: 22
-func_C1B8(param_00)
-{
+func_C1B8(param_00) {
 	param_00 endon("nuke_ship_exit");
 	level endon("nuke_cancelled");
 	level endon("game_ended");
 	level notify("nuke_death");
 	scripts\mp\_hostmigration::waittillhostmigrationdone();
 	var_01 = 0;
-	if(level.gametype == "war" || level.gametype == "dm")
-	{
+	if(level.gametype == "war" || level.gametype == "dm") {
 		var_01 = 1;
 	}
 
-	if(isdefined(level.var_C1C5.player))
-	{
-		foreach(var_03 in level.characters)
-		{
-			if(func_C1B3(var_03,var_01))
-			{
-				if(isplayer(var_03))
-				{
+	if(isdefined(level.var_C1C5.player)) {
+		foreach(var_03 in level.characters) {
+			if(func_C1B3(var_03,var_01)) {
+				if(isplayer(var_03)) {
 					var_03.nuked = 1;
-					if(scripts\mp\_utility::isreallyalive(var_03))
-					{
+					if(scripts\mp\_utility::isreallyalive(var_03)) {
 						scripts\mp\_damage::addattacker(var_03,level.var_C1C5.player,undefined,"nuke_mp",0,undefined,undefined,undefined,undefined,undefined);
 						var_03 thread scripts\mp\_damage::finishplayerdamagewrapper(level.var_C1C5.player,level.var_C1C5.player,999999,0,"MOD_EXPLOSIVE","nuke_mp",var_03.origin,(0,0,1),"none",0,0,undefined,undefined);
 					}
@@ -475,8 +399,7 @@ func_C1B8(param_00)
 			}
 		}
 
-		if(scripts\mp\_utility::istrue(var_01))
-		{
+		if(scripts\mp\_utility::istrue(var_01)) {
 			func_52C5();
 		}
 		else
@@ -485,12 +408,10 @@ func_C1B8(param_00)
 		}
 
 		scripts\mp\_utility::printgameaction("killstreak ended - nuke",level.var_C1C5.player);
-		if(scripts\mp\_utility::istrue(var_01))
-		{
+		if(scripts\mp\_utility::istrue(var_01)) {
 			level.nukegameover = 1;
 			var_05 = level.var_C1C5.player;
-			if(level.teambased)
-			{
+			if(level.teambased) {
 				var_05 = level.var_C1C5.player.team;
 			}
 
@@ -501,23 +422,17 @@ func_C1B8(param_00)
 	level.nukeincoming = undefined;
 }
 
-//Function Number: 23
-func_C1B3(param_00,param_01)
-{
-	if(!isdefined(level.var_C1C5))
-	{
+func_C1B3(param_00,param_01) {
+	if(!isdefined(level.var_C1C5)) {
 		return 0;
 	}
 
-	if(scripts\mp\_utility::istrue(param_01))
-	{
+	if(scripts\mp\_utility::istrue(param_01)) {
 		return 1;
 	}
 
-	if(level.teambased)
-	{
-		if(isdefined(level.var_C1C5.team) && param_00.team == level.var_C1C5.team)
-		{
+	if(level.teambased) {
+		if(isdefined(level.var_C1C5.team) && param_00.team == level.var_C1C5.team) {
 			return 0;
 		}
 	}
@@ -525,8 +440,7 @@ func_C1B3(param_00,param_01)
 	{
 		var_02 = isdefined(level.var_C1C5.player) && param_00 == level.var_C1C5.player;
 		var_03 = isdefined(level.var_C1C5.player) && isdefined(param_00.triggerportableradarping) && param_00.triggerportableradarping == level.var_C1C5.player;
-		if(var_02 || var_03)
-		{
+		if(var_02 || var_03) {
 			return 0;
 		}
 	}
@@ -534,59 +448,44 @@ func_C1B3(param_00,param_01)
 	return 1;
 }
 
-//Function Number: 24
-func_C1BC(param_00)
-{
+func_C1BC(param_00) {
 	level endon("nuke_cancelled");
 	scripts\mp\_shellshock::_earthquake(0.2,1.5,level.mapcenter,100000);
 	level waittill("nuke_death");
 	scripts\mp\_shellshock::_earthquake(0.4,0.1,level.mapcenter,100000);
-	foreach(var_02 in level.players)
-	{
+	foreach(var_02 in level.players) {
 		var_02 playrumbleonentity("damage_heavy");
 	}
 }
 
-//Function Number: 25
-onplayerconnect()
-{
-	for(;;)
-	{
+onplayerconnect() {
+	for(;;) {
 		level waittill("connected",var_00);
 		var_00 thread onplayerspawned();
 	}
 }
 
-//Function Number: 26
-onplayerspawned()
-{
+onplayerspawned() {
 	self endon("disconnect");
 	level endon("nuke_cancelled");
-	for(;;)
-	{
+	for(;;) {
 		self waittill("spawned_player");
-		if(isdefined(level.nukedetonated))
-		{
+		if(isdefined(level.nukedetonated)) {
 			thread func_FB0F(0.1);
 		}
 	}
 }
 
-//Function Number: 27
-func_FB0F(param_00)
-{
+func_FB0F(param_00) {
 	wait(param_00);
-	if(level.mapname != "mp_dome_dusk")
-	{
+	if(level.mapname != "mp_dome_dusk") {
 		self _meth_83FD(-3,0);
 	}
 
 	playfxontagforclients(scripts\engine\utility::getfx("mons_screen_ash"),self,"tag_eye",self);
 }
 
-//Function Number: 28
-func_12E43()
-{
+func_12E43() {
 	level endon("game_ended");
 	level endon("disconnect");
 	level endon("nuke_cancelled");
@@ -595,64 +494,48 @@ func_12E43()
 	setomnvar("ui_nuke_end_milliseconds",var_00);
 	level waittill("host_migration_begin");
 	var_01 = scripts\mp\_hostmigration::waittillhostmigrationdone();
-	if(var_01 > 0)
-	{
+	if(var_01 > 0) {
 		setomnvar("ui_nuke_end_milliseconds",var_00 + var_01);
 	}
 }
 
-//Function Number: 29
-func_12EDA()
-{
+func_12EDA() {
 	level endon("game_ended");
-	for(;;)
-	{
+	for(;;) {
 		level waittill("host_migration_end");
 		level func_F7BC(0);
 	}
 }
 
-//Function Number: 30
-func_F7BC(param_00)
-{
-	if(isdefined(level.var_C1BA))
-	{
-		level thread [[ level.var_C1BA ]]();
+func_F7BC(param_00) {
+	if(isdefined(level.var_C1BA)) {
+		level thread [[level.var_C1BA]]();
 		return;
 	}
 
-	if(level.mapname != "mp_dome_dusk")
-	{
+	if(level.mapname != "mp_dome_dusk") {
 		function_0234(-3,param_00);
 	}
 }
 
-//Function Number: 31
-func_52C5(param_00)
-{
+func_52C5(param_00) {
 	var_01 = "nuke_mp";
 	var_02 = level.var_1655;
 	var_03 = scripts\mp\perks\_perkfunctions::func_7D96();
 	var_04 = undefined;
-	if(isdefined(var_02) && isdefined(var_03))
-	{
+	if(isdefined(var_02) && isdefined(var_03)) {
 		var_04 = scripts\engine\utility::array_combine_unique(var_02,var_03);
 	}
-	else if(isdefined(var_02))
-	{
+	else if(isdefined(var_02)) {
 		var_04 = var_02;
 	}
-	else if(isdefined(var_03))
-	{
+	else if(isdefined(var_03)) {
 		var_04 = var_03;
 	}
 
-	if(isdefined(var_04))
-	{
-		foreach(var_06 in var_04)
-		{
-			if(isdefined(var_06))
-			{
+	if(isdefined(var_04)) {
+		foreach(var_06 in var_04) {
+			if(isdefined(var_06)) {
 				var_06 scripts\mp\killstreaks\_utility::dodamagetokillstreak(10000,level.var_C1C5.player,level.var_C1C5.player,param_00,var_06.origin,"MOD_EXPLOSIVE",var_01);
 			}
 		}

@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\mp\maps\mp_neon\gen\mp_neon_fx.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 1
- * Decompile Time: 122 ms
- * Timestamp: 10/27/2023 12:13:51 AM
-*******************************************************************/
+/**************************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\mp\maps\mp_neon\gen\mp_neon_fx.gsc
+**************************************************************/
 
-//Function Number: 1
-main()
-{
+main() {
 	var_00 = scripts\common\utility::func_49FA("vfx_bb_morph_in");
 	var_00 scripts\common\createfx::func_F4AD((203.822,2787.92,-25),(0,270,0));
 	var_00.var_13125["fxid"] = "vfx_bb_morph_in";

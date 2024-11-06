@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: aitype\enemy_villain_kotch_helmet.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 3
- * Decompile Time: 158 ms
- * Timestamp: 10\26\2023 11:58:19 PM
-*******************************************************************/
+/*********************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\aitype\enemy_villain_kotch_helmet.gsc
+*********************************************************/
 
-//Function Number: 1
-main()
-{
+main() {
 	self.var_17DB = "";
 	self.team = "axis";
 	self.type = "human";
@@ -24,8 +18,7 @@ main()
 	self.var_101B4 = lib_0A2F::func_7BEC("pistol");
 	self.behaviortreeasset = "enemy_combatant";
 	self.var_1FA9 = "soldier";
-	if(isai(self))
-	{
+	if(isai(self)) {
 		self _meth_82DC(256,0);
 		self _meth_82DB(768,1024);
 	}
@@ -34,15 +27,11 @@ main()
 	lib_08D6::main();
 }
 
-//Function Number: 2
-spawner()
-{
+spawner() {
 	self _meth_833A("axis");
 }
 
-//Function Number: 3
-precache()
-{
+precache() {
 	lib_08D6::precache();
 	scripts\aitypes\bt_util::init();
 	lib_09FD::soldier();

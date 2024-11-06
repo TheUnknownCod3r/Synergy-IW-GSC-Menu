@@ -1,28 +1,20 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: 1202.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 2
- * Decompile Time: 27 ms
- * Timestamp: 10/27/2023 12:23:14 AM
-*******************************************************************/
+/****************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\1202.gsc
+****************************/
 
-//Function Number: 1
-main()
-{
+main() {
 	self setmodel("robot_c12_normal_torso");
 	self.var_1FEC = "c12";
 	self.var_1FA8 = "c12";
 	self.voice = "unitednations";
 	self give_explosive_touch_on_revived("c12servo");
-	if(issentient(self))
-	{
+	if(issentient(self)) {
 		self sethitlocdamagetable("locdmgtable/ai_lochit_dmgtable");
 	}
 
-	if(issentient(self))
-	{
+	if(issentient(self)) {
 		self _meth_849A();
 		var_00 = [];
 		var_00["head"] = spawnstruct();
@@ -115,8 +107,6 @@ main()
 	self glinton(#animtree);
 }
 
-//Function Number: 2
-precache()
-{
+precache() {
 	precachemodel("robot_c12_normal_torso");
 }

@@ -1,32 +1,19 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: 3551.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 10
- * Decompile Time: 1 ms
- * Timestamp: 10/27/2023 12:30:40 AM
-*******************************************************************/
+/****************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\3551.gsc
+****************************/
 
-//Function Number: 1
-set()
-{
-}
+set() {}
 
-//Function Number: 2
-unset(param_00)
-{
-	if(func_9FC1())
-	{
+unset(param_00) {
+	if(func_9FC1()) {
 		end(param_00);
 	}
 }
 
-//Function Number: 3
-func_12F9B()
-{
-	if(func_9FC1())
-	{
+func_12F9B() {
+	if(func_9FC1()) {
 		return 0;
 	}
 
@@ -40,8 +27,7 @@ func_12F9B()
 	self setscriptablepartstate("cloak","on",0);
 	self setscriptablepartstate("jet_pack","off",0);
 	self setscriptablepartstate("teamColorPins","off",0);
-	if(!scripts\mp\_utility::isanymlgmatch())
-	{
+	if(!scripts\mp\_utility::isanymlgmatch()) {
 		thread scripts\mp\_supers::watchobjuse(75,1);
 	}
 
@@ -49,9 +35,7 @@ func_12F9B()
 	return 1;
 }
 
-//Function Number: 4
-func_13A14()
-{
+func_13A14() {
 	self endon("death");
 	self endon("disconnect");
 	self endon("cloak_end");
@@ -59,11 +43,8 @@ func_13A14()
 	scripts\mp\_supers::func_DE3B(9999);
 }
 
-//Function Number: 5
-end(param_00,param_01)
-{
-	if(!isdefined(self))
-	{
+end(param_00,param_01) {
+	if(!isdefined(self)) {
 		return;
 	}
 
@@ -71,8 +52,7 @@ end(param_00,param_01)
 	self notify("obj_drain_end");
 	param_00 = scripts\engine\utility::istrue(param_00);
 	param_01 = scripts\engine\utility::istrue(param_01);
-	if(param_00)
-	{
+	if(param_00) {
 		self setscriptablepartstate("cloak","offImmediate",0);
 		self.var_9D8B = undefined;
 		self.var_5583 = 0;
@@ -80,8 +60,7 @@ end(param_00,param_01)
 		return;
 	}
 
-	if(param_01)
-	{
+	if(param_01) {
 		thread endimmediate();
 		return;
 	}
@@ -89,22 +68,18 @@ end(param_00,param_01)
 	thread enddelayed();
 }
 
-//Function Number: 6
-enddelayed()
-{
+enddelayed() {
 	self endon("disconnect");
 	self endon("cloak_end");
 	enddelayedinternal();
-	if(scripts\mp\_utility::istrue(self.var_423A))
-	{
+	if(scripts\mp\_utility::istrue(self.var_423A)) {
 		scripts\mp\_utility::removeperk("specialty_noscopeoutline");
 		scripts\mp\_utility::removeperk("specialty_spygame");
 		scripts\mp\_utility::removeperk("specialty_blindeye");
 		scripts\mp\_utility::removeperk("specialty_no_target");
 	}
 
-	if(!scripts\mp\_utility::istrue(level.broshotrunning))
-	{
+	if(!scripts\mp\_utility::istrue(level.broshotrunning)) {
 		self setscriptablepartstate("jet_pack","neutral",0);
 		self setscriptablepartstate("teamColorPins","teamColorPins",0);
 	}
@@ -114,32 +89,25 @@ enddelayed()
 	self.var_423A = undefined;
 }
 
-//Function Number: 7
-enddelayedinternal()
-{
+enddelayedinternal() {
 	self endon("death");
 	wait(0.05000001);
-	if(!scripts\mp\_utility::istrue(level.broshotrunning))
-	{
+	if(!scripts\mp\_utility::istrue(level.broshotrunning)) {
 		self setscriptablepartstate("cloak","off",0);
 	}
 
 	wait(0.45);
 }
 
-//Function Number: 8
-endimmediate()
-{
-	if(scripts\mp\_utility::istrue(self.var_423A))
-	{
+endimmediate() {
+	if(scripts\mp\_utility::istrue(self.var_423A)) {
 		scripts\mp\_utility::removeperk("specialty_noscopeoutline");
 		scripts\mp\_utility::removeperk("specialty_spygame");
 		scripts\mp\_utility::removeperk("specialty_blindeye");
 		scripts\mp\_utility::removeperk("specialty_no_target");
 	}
 
-	if(!scripts\mp\_utility::istrue(level.broshotrunning))
-	{
+	if(!scripts\mp\_utility::istrue(level.broshotrunning)) {
 		self setscriptablepartstate("jet_pack","neutral",0);
 		self setscriptablepartstate("teamColorPins","teamColorPins",0);
 	}
@@ -149,14 +117,10 @@ endimmediate()
 	self.var_423A = undefined;
 }
 
-//Function Number: 9
-func_E26A()
-{
+func_E26A() {
 	self setscriptablepartstate("cloak","offImmediate",0);
 }
 
-//Function Number: 10
-func_9FC1()
-{
+func_9FC1() {
 	return scripts\mp\_utility::istrue(self.var_9D8B);
 }

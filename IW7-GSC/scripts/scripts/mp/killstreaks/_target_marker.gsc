@@ -1,32 +1,21 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\mp\killstreaks\_target_marker.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 8
- * Decompile Time: 376 ms
- * Timestamp: 10/27/2023 12:29:46 AM
-*******************************************************************/
+/*************************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\mp\killstreaks\_target_marker.gsc
+*************************************************************/
 
-//Function Number: 1
-init()
-{
-}
+init() {}
 
-//Function Number: 2
-_meth_819B(param_00,param_01)
-{
+_meth_819B(param_00,param_01) {
 	scripts\engine\utility::allow_usability(0);
 	self setscriptablepartstate("killstreak","visor_active",0);
 	scripts\mp\_utility::func_1254();
 	scripts\mp\_utility::func_1C47(0);
 	var_02 = undefined;
-	if(param_00.streakname == "dronedrop")
-	{
+	if(param_00.streakname == "dronedrop") {
 		var_02 = "deploy_dronepackage_mp";
 	}
-	else if(param_00.streakname == "remote_c8")
-	{
+	else if(param_00.streakname == "remote_c8") {
 		var_02 = "deploy_rc8_mp";
 	}
 	else
@@ -39,32 +28,25 @@ _meth_819B(param_00,param_01)
 	thread func_13A2F(var_02);
 	thread watchforphaseshiftuse(var_02);
 	thread watchforempapply(var_02);
-	if(!isai(self))
-	{
+	if(!isai(self)) {
 		self notifyonplayercommand("equip_deploy_end","+actionslot 4");
-		if(!level.console)
-		{
+		if(!level.console) {
 			self notifyonplayercommand("equip_deploy_end","+actionslot 5");
 			self notifyonplayercommand("equip_deploy_end","+actionslot 6");
 			self notifyonplayercommand("equip_deploy_end","+actionslot 7");
 		}
 	}
 
-	for(;;)
-	{
+	for(;;) {
 		var_03 = func_13808("equip_deploy_succeeded","equip_deploy_failed","equip_deploy_end");
-		if(var_03.string == "equip_deploy_failed")
-		{
+		if(var_03.string == "equip_deploy_failed") {
 			continue;
 		}
 		else
 		{
-			if(var_03.string == "equip_deploy_succeeded")
-			{
-				if(isdefined(param_01))
-				{
-					if(!self [[ param_01 ]]())
-					{
+			if(var_03.string == "equip_deploy_succeeded") {
+				if(isdefined(param_01)) {
+					if(!self [[param_01]]()) {
 						continue;
 					}
 					else
@@ -84,8 +66,7 @@ _meth_819B(param_00,param_01)
 		}
 	}
 
-	if(isdefined(var_03.location) && isdefined(var_03.angles))
-	{
+	if(isdefined(var_03.location) && isdefined(var_03.angles)) {
 		var_03.var_1349C = spawn("script_model",var_03.location);
 		var_03.var_1349C setmodel("ks_marker_mp");
 		var_03.var_1349C setotherent(self);
@@ -93,8 +74,7 @@ _meth_819B(param_00,param_01)
 		var_03.var_1349C _meth_85C8(1);
 	}
 
-	if(scripts\mp\_utility::isreallyalive(self))
-	{
+	if(scripts\mp\_utility::isreallyalive(self)) {
 		self notify("killstreak_finished_with_weapon_" + var_02);
 	}
 
@@ -105,15 +85,11 @@ _meth_819B(param_00,param_01)
 	return var_03;
 }
 
-//Function Number: 3
-func_13A47(param_00)
-{
+func_13A47(param_00) {
 	self endon("disconnect");
 	self endon("killstreak_finished_with_weapon_" + param_00);
-	for(;;)
-	{
-		if(self getcurrentweapon() != param_00)
-		{
+	for(;;) {
+		if(self getcurrentweapon() != param_00) {
 			self notify("equip_deploy_end");
 			break;
 		}
@@ -122,31 +98,23 @@ func_13A47(param_00)
 	}
 }
 
-//Function Number: 4
-func_13A2F(param_00)
-{
+func_13A2F(param_00) {
 	self endon("disconnect");
 	self endon("killstreak_finished_with_weapon_" + param_00);
 	var_01 = self getweaponammoclip(param_00);
-	for(;;)
-	{
+	for(;;) {
 		self waittill("weapon_fired",var_02);
-		if(var_02 == param_00)
-		{
+		if(var_02 == param_00) {
 			self setweaponammoclip(var_02,var_01);
 		}
 	}
 }
 
-//Function Number: 5
-watchforphaseshiftuse(param_00)
-{
+watchforphaseshiftuse(param_00) {
 	self endon("disconnect");
 	self endon("killstreak_finished_with_weapon_" + param_00);
-	for(;;)
-	{
-		if(self isinphase())
-		{
+	for(;;) {
+		if(self isinphase()) {
 			self notify("equip_deploy_end");
 			break;
 		}
@@ -155,31 +123,24 @@ watchforphaseshiftuse(param_00)
 	}
 }
 
-//Function Number: 6
-watchforempapply(param_00)
-{
+watchforempapply(param_00) {
 	self endon("disconnect");
 	self endon("killstreak_finished_with_weapon_" + param_00);
 	self waittill("apply_player_emp");
 	self notify("equip_deploy_end");
 }
 
-//Function Number: 7
-func_13808(param_00,param_01,param_02)
-{
+func_13808(param_00,param_01,param_02) {
 	var_03 = spawnstruct();
-	if(isdefined(param_00))
-	{
+	if(isdefined(param_00)) {
 		childthread func_137F9(param_00,var_03);
 	}
 
-	if(isdefined(param_01))
-	{
+	if(isdefined(param_01)) {
 		childthread func_137F9(param_01,var_03);
 	}
 
-	if(isdefined(param_02))
-	{
+	if(isdefined(param_02)) {
 		childthread func_137F9(param_02,var_03);
 	}
 
@@ -194,11 +155,8 @@ func_13808(param_00,param_01,param_02)
 	return var_08;
 }
 
-//Function Number: 8
-func_137F9(param_00,param_01)
-{
-	if(param_00 != "death")
-	{
+func_137F9(param_00,param_01) {
+	if(param_00 != "death") {
 		self endon("death");
 	}
 

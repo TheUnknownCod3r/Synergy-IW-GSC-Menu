@@ -1,102 +1,67 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: 942.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 16
- * Decompile Time: 6 ms
- * Timestamp: 10/27/2023 12:32:11 AM
-*******************************************************************/
+/***************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\942.gsc
+***************************/
 
-//Function Number: 1
-func_63EC(param_00)
-{
+func_63EC(param_00) {
 	return lib_0A0A::shouldrefundsuper(param_00,0.3);
 }
 
-//Function Number: 2
-func_63ED(param_00)
-{
+func_63ED(param_00) {
 	return lib_0A0A::func_4746(param_00,"hide");
 }
 
-//Function Number: 3
-func_63EE(param_00)
-{
+func_63EE(param_00) {
 	return lib_0A0A::func_B4ED(param_00,1);
 }
 
-//Function Number: 4
-func_63EF(param_00)
-{
+func_63EF(param_00) {
 	return lib_0A0A::shouldrefundsuper(param_00,0);
 }
 
-//Function Number: 5
-func_63F0(param_00)
-{
+func_63F0(param_00) {
 	return lib_0A09::func_E478(param_00,isdefined(self.a.var_2411) && self.a.var_2411 && scripts\anim\utility_common::canseeenemy());
 }
 
-//Function Number: 6
-func_63F1(param_00)
-{
+func_63F1(param_00) {
 	return lib_0A09::func_E478(param_00,scripts\anim\utility_common::cansuppressenemyfromexposed());
 }
 
-//Function Number: 7
-func_63F2(param_00)
-{
+func_63F2(param_00) {
 	return lib_0A09::func_9FEE(param_00,level.var_11813);
 }
 
-//Function Number: 8
-func_63F3(param_00)
-{
+func_63F3(param_00) {
 	return lib_0A09::func_9309(param_00,level.player);
 }
 
-//Function Number: 9
-func_63F4(param_00)
-{
+func_63F4(param_00) {
 	return lib_0A0A::shouldrefundsuper(param_00,0.1);
 }
 
-//Function Number: 10
-func_63F5(param_00)
-{
+func_63F5(param_00) {
 	return lib_0A09::func_E478(param_00,isdefined(self.var_190C) || scripts\anim\utility_common::enemyishiding());
 }
 
-//Function Number: 11
-func_63F6(param_00)
-{
+func_63F6(param_00) {
 	return lib_0A12::func_9ED9(param_00,"continue");
 }
 
-//Function Number: 12
-func_63F7(param_00)
-{
+func_63F7(param_00) {
 	return lib_0A12::allowreload(param_00,self.objective_playermask_showto);
 }
 
-//Function Number: 13
-func_63F8(param_00)
-{
+func_63F8(param_00) {
 	return lib_0A12::func_9ED9(param_00,"stop");
 }
 
-//Function Number: 14
-func_63F9(param_00)
-{
+func_63F9(param_00) {
 	return lib_0A12::allowreload(param_00,0);
 }
 
-//Function Number: 15
-func_2AD0()
-{
-	if(isdefined(level.var_119E["enemy_combatant"]))
-	{
+func_2AD0() {
+	if(isdefined(level.var_119E["enemy_combatant"])) {
 		return;
 	}
 
@@ -229,9 +194,7 @@ func_2AD0()
 	level.var_119E["enemy_combatant"] = var_00;
 }
 
-//Function Number: 16
-func_DEE8()
-{
+func_DEE8() {
 	func_2AD0();
 	function_02D8("enemy_combatant");
 }

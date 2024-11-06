@@ -1,26 +1,18 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\mp\maps\mp_frontend\mp_frontend.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 20
- * Decompile Time: 1042 ms
- * Timestamp: 10/27/2023 12:13:33 AM
-*******************************************************************/
+/***************************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\mp\maps\mp_frontend\mp_frontend.gsc
+***************************************************************/
 
-//Function Number: 1
-func_C573()
-{
+func_C573() {
 	level endon("game_ended");
 	self endon("disconnect");
-	if(!isdefined(level.console))
-	{
+	if(!isdefined(level.console)) {
 		level.console = getdvar("consoleGame") == "true";
 	}
 
 	level.var_D460 = self;
-	if(isdefined(level.var_D372))
-	{
+	if(isdefined(level.var_D372)) {
 		return;
 	}
 
@@ -28,32 +20,24 @@ func_C573()
 	wait(0.5);
 }
 
-//Function Number: 2
-func_3740()
-{
+func_3740() {
 	thread func_C573();
 	thread lib_0A78::func_744C(::func_37BA);
 	thread epictauntlistener();
 	level thread camolistener();
 }
 
-//Function Number: 3
-coming_from_rig_select()
-{
-	if(!isdefined(level.var_4C01))
-	{
+coming_from_rig_select() {
+	if(!isdefined(level.var_4C01)) {
 		return 0;
 	}
 
 	return level.var_4C01 == "rig_select" || level.var_4C01 == "rig_pick" || level.var_4C01 == "rig_trait_select" || level.var_4C01 == "rig_head_select" || level.var_4C01 == "rig_taunt_select";
 }
 
-//Function Number: 4
-func_81A3(param_00)
-{
+func_81A3(param_00) {
 	var_01 = undefined;
-	switch(param_00)
-	{
+	switch(param_00) {
 		case 0:
 			var_01 = level.var_37AA;
 			break;
@@ -82,12 +66,9 @@ func_81A3(param_00)
 	return var_01;
 }
 
-//Function Number: 5
-get_camera_data_by_rig_scene(param_00)
-{
+get_camera_data_by_rig_scene(param_00) {
 	var_01 = undefined;
-	switch(param_00)
-	{
+	switch(param_00) {
 		case "rig_select":
 			var_01 = level.var_37B7;
 			break;
@@ -116,11 +97,8 @@ get_camera_data_by_rig_scene(param_00)
 	return var_01;
 }
 
-//Function Number: 6
-func_788A(param_00,param_01)
-{
-	switch(param_01)
-	{
+func_788A(param_00,param_01) {
+	switch(param_01) {
 		case "create_a_class":
 			return param_00.var_369A;
 
@@ -141,51 +119,37 @@ func_788A(param_00,param_01)
 	}
 }
 
-//Function Number: 7
-func_BD64(param_00,param_01,param_02)
-{
+func_BD64(param_00,param_01,param_02) {
 	lib_0A78::func_7449(param_00,param_01,0,1,param_02);
 }
 
-//Function Number: 8
-func_12DA1()
-{
-	if(level.var_1641.shows_my_character)
-	{
+func_12DA1() {
+	if(level.var_1641.shows_my_character) {
 		level.var_3CAD.origin = level.var_1641.var_3CAA.origin;
 		level.var_3CAD.angles = level.var_1641.var_3CAA.angles;
 	}
 }
 
-//Function Number: 9
-func_12DEB(param_00)
-{
+func_12DEB(param_00) {
 	func_12DA1();
 	func_12E4A();
 	func_12D9B();
 }
 
-//Function Number: 10
-func_12D9B()
-{
+func_12D9B() {
 	var_00 = level.var_1623.var_525D;
 	self setdepthoffield(var_00[0],var_00[1],var_00[2],var_00[3],var_00[4],var_00[5]);
 }
 
-//Function Number: 11
-func_12DBB()
-{
+func_12DBB() {
 	func_12DA1();
 	func_12E4A();
 	func_12D9B();
 }
 
-//Function Number: 12
-func_12E4A()
-{
+func_12E4A() {
 	var_00 = undefined;
-	if(isdefined(level.var_1641.var_13C27))
-	{
+	if(isdefined(level.var_1641.var_13C27)) {
 		var_00 = level.var_1641.var_13C27;
 	}
 	else
@@ -202,36 +166,29 @@ func_12E4A()
 	level.var_13BFA.angles = var_00.angles;
 }
 
-//Function Number: 13
-func_37BB(param_00)
-{
+func_37BB(param_00) {
 	var_01 = undefined;
 	var_02 = undefined;
-	if(param_00.name == "mlg.tv")
-	{
+	if(param_00.name == "mlg.tv") {
 		return;
 	}
 
-	if(param_00.name == "mp_main")
-	{
+	if(param_00.name == "mp_main") {
 		frontendscenecameracharacters(3);
 		var_01 = level.var_37B0;
 		var_02 = level.var_37B0.var_289A;
 	}
-	else if(param_00.name == "rig_select" || param_00.name == "rig_pick" || param_00.name == "rig_trait_select" || param_00.name == "rig_taunt_select" || param_00.name == "rig_head_select")
-	{
+	else if(param_00.name == "rig_select" || param_00.name == "rig_pick" || param_00.name == "rig_trait_select" || param_00.name == "rig_taunt_select" || param_00.name == "rig_head_select") {
 		frontendscenecameracharacters(0);
 		var_01 = get_camera_data_by_rig_scene(param_00.name);
 		var_02 = var_01.var_289A;
 	}
-	else if(param_00.name == "armory")
-	{
+	else if(param_00.name == "armory") {
 		frontendscenecameracharacters(0);
 		var_01 = level.var_37A7;
 		var_02 = level.var_37A7.var_289A;
 	}
-	else if(param_00.name == "lobby_members")
-	{
+	else if(param_00.name == "lobby_members") {
 		frontendscenecameracharacters(2);
 		var_01 = level.camera_lobby_members;
 		var_02 = level.camera_lobby_members.var_289A;
@@ -249,26 +206,20 @@ func_37BB(param_00)
 	thread lib_0A78::func_744B(level.var_1623,var_01.var_BE17,var_01.var_3F70,0,0.2,::func_12DBB);
 }
 
-//Function Number: 14
-func_37BA(param_00)
-{
-	if(param_00.name == "")
-	{
+func_37BA(param_00) {
+	if(param_00.name == "") {
 		return;
 	}
 
-	if(!isdefined(level.var_1641) || level.transition_interrupted)
-	{
+	if(!isdefined(level.var_1641) || level.transition_interrupted) {
 		func_37BB(param_00);
 		return;
 	}
 
-	switch(param_00.name)
-	{
+	switch(param_00.name) {
 		case "mp_main":
 			frontendscenecameracharacters(3);
-			if(level.var_4C01 != "mlg.tv")
-			{
+			if(level.var_4C01 != "mlg.tv") {
 				func_F289(level.var_37B0,level.var_37B0.var_289A);
 				lib_0A78::func_744B(level.var_1623,20,level.var_37B0.var_3F70,0.2,0.2,::func_12D9B);
 			}
@@ -279,8 +230,7 @@ func_37BA(param_00)
 		case "private_lobby":
 			frontendscenecameracharacters(0);
 			func_F289(level.var_37B5,level.var_37B5.var_289A);
-			if(level.var_4C01 == "private_lobby_menu" || level.var_4C01 == "create_a_class")
-			{
+			if(level.var_4C01 == "private_lobby_menu" || level.var_4C01 == "create_a_class") {
 				thread func_BD64(level.var_1623,5000,::func_12D9B);
 			}
 			else
@@ -294,8 +244,7 @@ func_37BA(param_00)
 		case "private_lobby_menu":
 			frontendscenecameracharacters(0);
 			func_F289(level.var_37B5,level.var_37B5.var_AEB5);
-			if(level.var_4C01 == "create_a_class" || level.var_4C01 == "private_lobby")
-			{
+			if(level.var_4C01 == "create_a_class" || level.var_4C01 == "private_lobby") {
 				thread func_BD64(level.var_1623,5000,::func_12D9B);
 			}
 			else
@@ -307,8 +256,7 @@ func_37BA(param_00)
 			break;
 
 		case "create_a_class":
-			if(coming_from_rig_select() || level.var_4C01 == "armory")
-			{
+			if(coming_from_rig_select() || level.var_4C01 == "armory") {
 				var_01 = func_81A3(param_00.index);
 				func_F289(var_01,var_01.var_369A);
 				level.var_4BF6 = param_00.index;
@@ -317,8 +265,7 @@ func_37BA(param_00)
 			else
 			{
 				var_02 = 5000;
-				if(level.var_4C01 == "mission_team_lobby")
-				{
+				if(level.var_4C01 == "mission_team_lobby") {
 					var_02 = 600;
 				}
 	
@@ -328,8 +275,7 @@ func_37BA(param_00)
 			break;
 
 		case "weapon_select":
-			if(level.var_4C01 == "armory")
-			{
+			if(level.var_4C01 == "armory") {
 				var_01 = func_81A3(param_00.index);
 				func_F289(var_01,var_01.var_13C7B);
 				level.var_4BF6 = param_00.index;
@@ -343,8 +289,7 @@ func_37BA(param_00)
 			break;
 
 		case "loadout_select":
-			if(level.var_4C01 == "armory")
-			{
+			if(level.var_4C01 == "armory") {
 				var_01 = func_81A3(param_00.index);
 				func_F289(var_01,var_01.var_AE63);
 				level.var_4BF6 = param_00.index;
@@ -365,8 +310,7 @@ func_37BA(param_00)
 
 		case "rig_select":
 			func_F289(level.var_37B7,level.var_37B7.var_289A);
-			if(level.var_4C01 == "rig_pick" || level.var_4C01 == "rig_trait_select" || level.var_4C01 == "rig_head_select" || level.var_4C01 == "rig_taunt_select")
-			{
+			if(level.var_4C01 == "rig_pick" || level.var_4C01 == "rig_trait_select" || level.var_4C01 == "rig_head_select" || level.var_4C01 == "rig_taunt_select") {
 				thread func_BD64(level.var_1623,5000,::func_12D9B);
 				frontendscenecamerafov(level.var_37B7.var_BE17,0.1);
 			}
@@ -380,8 +324,7 @@ func_37BA(param_00)
 
 		case "rig_pick":
 			func_F289(level.var_37B8,level.var_37B8.var_289A);
-			if(level.var_4C01 == "rig_select" || level.var_4C01 == "rig_head_select")
-			{
+			if(level.var_4C01 == "rig_select" || level.var_4C01 == "rig_head_select") {
 				thread func_BD64(level.var_37B8.var_289A,5000,::func_12D9B);
 				frontendscenecamerafov(level.var_37B8.var_BE17,0.1);
 			}
@@ -398,8 +341,7 @@ func_37BA(param_00)
 
 		case "rig_head_select":
 			func_F289(level.camera_rig_head,level.camera_rig_head.var_289A);
-			if(level.var_4C01 == "rig_select" || level.var_4C01 == "rig_pick")
-			{
+			if(level.var_4C01 == "rig_select" || level.var_4C01 == "rig_pick") {
 				thread func_BD64(level.camera_rig_head.var_289A,5000,::func_12D9B);
 				frontendscenecamerafov(level.camera_rig_head.var_BE17,0.1);
 			}
@@ -411,8 +353,7 @@ func_37BA(param_00)
 
 		case "rig_taunt_select":
 			func_F289(level.camera_rig_taunt,level.camera_rig_taunt.var_289A);
-			if(level.var_4C01 == "rig_select" || level.var_4C01 == "rig_pick")
-			{
+			if(level.var_4C01 == "rig_select" || level.var_4C01 == "rig_pick") {
 				thread func_BD64(level.camera_rig_taunt.var_289A,5000,::func_12D9B);
 				frontendscenecamerafov(level.camera_rig_taunt.var_BE17,0.15);
 			}
@@ -426,14 +367,12 @@ func_37BA(param_00)
 			var_01 = func_81A3(param_00.index);
 			func_F289(var_01,var_01.var_282B);
 			level.var_4BF6 = param_00.index;
-			if(level.var_4C01 == "armory")
-			{
+			if(level.var_4C01 == "armory") {
 				lib_0A78::func_744B(level.var_1623,level.var_1641.var_BE17,level.var_1641.var_3F70,0.2,0.2,::func_12D9B);
 			}
 			else
 			{
-				if(level.var_4C01 == "loadout_select" || level.var_4C01 == "weapon_select")
-				{
+				if(level.var_4C01 == "loadout_select" || level.var_4C01 == "weapon_select") {
 					var_02 = 5000;
 				}
 				else
@@ -447,11 +386,9 @@ func_37BA(param_00)
 
 		case "mission_team_lobby":
 			frontendscenecameracharacters(0);
-			if(isdefined(level.var_4BF6) && level.var_4BF6 == param_00.index)
-			{
+			if(isdefined(level.var_4BF6) && level.var_4BF6 == param_00.index) {
 				func_F289(level.var_1641,level.var_1641.var_289A);
-				if(level.var_4C01 == "barracks")
-				{
+				if(level.var_4C01 == "barracks") {
 					thread func_BD64(level.var_1641.var_289A,100,::func_12D9B);
 				}
 				else
@@ -492,8 +429,7 @@ func_37BA(param_00)
 		case "gamebattles_lobby":
 			frontendscenecameracharacters(0);
 			func_F289(level.camera_gamebattles_lobby,level.camera_gamebattles_lobby.var_289A);
-			if(level.var_4C01 == "create_a_class")
-			{
+			if(level.var_4C01 == "create_a_class") {
 				thread func_BD64(level.var_1623,5000,::func_12D9B);
 			}
 			else
@@ -512,9 +448,7 @@ func_37BA(param_00)
 	level.var_4C01 = param_00.name;
 }
 
-//Function Number: 15
-func_48AE()
-{
+func_48AE() {
 	level.var_37B0 = spawnstruct();
 	level.var_37B0.var_289A = getent("camera_mp_main","targetname");
 	level.var_37B0.var_289A.var_525D = [55,79,90,300,4,1.8];
@@ -737,16 +671,12 @@ func_48AE()
 	level.camera_weapon_painter.shows_my_character = 0;
 }
 
-//Function Number: 16
-func_F289(param_00,param_01)
-{
+func_F289(param_00,param_01) {
 	level.var_1641 = param_00;
 	level.var_1623 = param_01;
 }
 
-//Function Number: 17
-func_F9A9()
-{
+func_F9A9() {
 	var_00 = getent("character_loc_hq2","targetname");
 	level.var_3CAD = spawn("script_character",var_00.origin,0,0,0);
 	level.var_3CAD.angles = var_00.angles;
@@ -775,36 +705,26 @@ func_F9A9()
 	lib_0A78::func_744A(level.var_37B0.var_289A.origin,level.var_37B0.var_289A.angles);
 }
 
-//Function Number: 18
-epictauntlistener()
-{
+epictauntlistener() {
 	self endon("disconnect");
-	for(;;)
-	{
+	for(;;) {
 		self waittill("luinotifyserver",var_00,var_01);
-		if(var_00 == "taunt_started")
-		{
+		if(var_00 == "taunt_started") {
 			scripts\mp\broshot_utilities::respawnclientcharacter();
 			var_02 = tablelookup("mp/cac/taunts.csv",0,var_01,9);
 			scripts\mp\broshot_utilities::processepictaunt(var_02,-1,0);
 			continue;
 		}
 
-		if(var_00 == "taunt_reset")
-		{
+		if(var_00 == "taunt_reset") {
 			scripts\mp\broshot_utilities::respawnclientcharacter();
 		}
 	}
 }
 
-//Function Number: 19
-camolistener()
-{
-}
+camolistener() {}
 
-//Function Number: 20
-main()
-{
+main() {
 	setdvar("match_running",0);
 	lib_0FAA::main();
 	scripts\mp\maps\mp_frontend\gen\mp_frontend_art::main();

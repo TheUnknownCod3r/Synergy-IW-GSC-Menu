@@ -1,45 +1,33 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\asm\alien_goon\alien_jump.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 30
- * Decompile Time: 1494 ms
- * Timestamp: 10\27\2023 12:01:19 AM
-*******************************************************************/
+/*********************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\asm\alien_goon\alien_jump.gsc
+*********************************************************/
 
-//Function Number: 1
-setjumpattackanimstates(param_00,param_01)
-{
+setjumpattackanimstates(param_00,param_01) {
 	param_01.var_A7C6 = "attack_leap_swipe";
 	param_01.var_A7C4 = scripts\mp\agents\_scriptedagents::getrandomanimentry("attack_leap_swipe");
 }
 
-//Function Number: 2
-choosejumpattackarrival(param_00,param_01)
-{
+choosejumpattackarrival(param_00,param_01) {
 	var_02 = 0.707;
-	if(isdefined(self.curmeleetarget) && isalive(self.curmeleetarget))
-	{
+	if(isdefined(self.curmeleetarget) && isalive(self.curmeleetarget)) {
 		var_03 = vectornormalize(self.var_4B26.origin - param_00.var_A843);
 		var_04 = anglestoforward(param_00.var_630B);
 		var_05 = vectordot(var_03,var_04);
-		if(var_05 > var_02)
-		{
+		if(var_05 > var_02) {
 			return;
 		}
 
 		var_06 = anglestoright(param_00.var_630B);
 		var_07 = vectordot(var_03,var_06);
-		if(var_07 > var_02)
-		{
+		if(var_07 > var_02) {
 			param_01.var_A7C6 = "attack_leap_swipe_right";
 			param_01.var_A7C4 = scripts\mp\agents\_scriptedagents::getrandomanimentry("attack_leap_swipe_right");
 			return;
 		}
 
-		if(var_07 < var_02 * -1)
-		{
+		if(var_07 < var_02 * -1) {
 			param_01.var_A7C6 = "attack_leap_swipe_left";
 			param_01.var_A7C4 = scripts\mp\agents\_scriptedagents::getrandomanimentry("attack_leap_swipe_left");
 			return;
@@ -47,9 +35,7 @@ choosejumpattackarrival(param_00,param_01)
 	}
 }
 
-//Function Number: 3
-jumpattack(param_00,param_01,param_02)
-{
+jumpattack(param_00,param_01,param_02) {
 	var_03 = spawnstruct();
 	var_03.var_71CD = ::setjumpattackanimstates;
 	var_03.var_71BB = ::choosejumpattackarrival;
@@ -58,19 +44,14 @@ jumpattack(param_00,param_01,param_02)
 	self.var_B59D = 0;
 }
 
-//Function Number: 4
-func_A4C3(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08)
-{
+func_A4C3(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08) {
 	var_09 = self ghosthover();
 	func_A4E3(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08);
 	func_A4DA(var_09,param_05);
 }
 
-//Function Number: 5
-func_A4DA(param_00,param_01)
-{
-	if(scripts\common\utility::istrue(self.activated_venomx_sphere))
-	{
+func_A4DA(param_00,param_01) {
+	if(scripts\common\utility::istrue(self.activated_venomx_sphere)) {
 		self scragentsetanimscale(0.2,0.2);
 	}
 	else
@@ -84,9 +65,7 @@ func_A4DA(param_00,param_01)
 	self.ignoreme = 0;
 }
 
-//Function Number: 6
-func_A4E3(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08)
-{
+func_A4E3(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08) {
 	self endon("death");
 	self endon("killanimscript");
 	self endon(param_01 + "_finished");
@@ -94,9 +73,8 @@ func_A4E3(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_0
 	var_09 = spawnstruct();
 	var_0A = func_7F2B(param_02,param_03,param_04,param_05,param_06);
 	func_7F28(var_0A,var_09);
-	if(isdefined(param_07) && isdefined(param_07.var_71CD))
-	{
-		self [[ param_07.var_71CD ]](var_0A,var_09);
+	if(isdefined(param_07) && isdefined(param_07.var_71CD)) {
+		self [[param_07.var_71CD]](var_0A,var_09);
 	}
 
 	var_0B = func_7F2F(param_02,param_03,param_04);
@@ -106,8 +84,7 @@ func_A4E3(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_0
 	var_0D = self getsafecircleorigin(var_09.var_AAA5,var_09.var_AAA4);
 	var_0E = self getsafecircleorigin(var_09.var_A7C6,var_09.var_A7C4);
 	var_0F = getnotetracktimes(var_0E,"finish");
-	if(var_0F.size > 0)
-	{
+	if(var_0F.size > 0) {
 		var_10 = var_0F[0] * getanimlength(var_0E);
 	}
 	else
@@ -119,8 +96,7 @@ func_A4E3(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_0
 	var_12 = floor(var_11 * 20);
 	var_13 = var_12 \ 20 \ var_11;
 	var_14 = getnotetracktimes(var_0E,"stop_teleport");
-	if(var_14.size > 0)
-	{
+	if(var_14.size > 0) {
 		var_15 = var_14[0] * var_11;
 		var_16 = ceil(var_15 * 20);
 		opcode::OP_SetNewLocalVariableFieldCached0 = var_16 \ 20 \ var_11;
@@ -139,8 +115,7 @@ func_A4E3(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_0
 	opcode::OP_CallBuiltin0 = param_04 - opcode::OP_Return;
 	self ghostlaunched("anim deltas");
 	self playsoundonmovingent(func_7A62());
-	if(animhasnotetrack(var_0D,"start_teleport"))
-	{
+	if(animhasnotetrack(var_0D,"start_teleport")) {
 		scripts\mp\agents\_scriptedagents::func_CED2(var_09.var_AAA5,var_09.var_AAA4,var_09.var_CEE4,"jump_launch","start_teleport");
 	}
 	else
@@ -156,10 +131,8 @@ func_A4E3(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_0
 	thread func_A4E9(var_0A,param_05,opcode::OP_CallBuiltin2,var_0C);
 	scripts\mp\agents\_scriptedagents::func_1384C("jump_launch","end");
 	opcode::OP_CallBuiltin3 = gettime() - opcode::OP_CallBuiltin1 \ 1000;
-	if(scripts\common\utility::istrue(self.bteleporting))
-	{
-		if(level.totalphantomsjumping < level.totalphantomsallowedtojump)
-		{
+	if(scripts\common\utility::istrue(self.bteleporting)) {
+		if(level.totalphantomsjumping < level.totalphantomsallowedtojump) {
 			level.totalphantomsjumping++;
 			thread play_teleport_start();
 			self.bteleporting = 0;
@@ -171,18 +144,15 @@ func_A4E3(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_0
 	}
 
 	opcode::OP_CallBuiltin4 = var_0C - opcode::OP_CallBuiltin3 - var_15;
-	if(opcode::OP_CallBuiltin4 > 0)
-	{
+	if(opcode::OP_CallBuiltin4 > 0) {
 		scripts\mp\agents\_scriptedagents::func_CED1(var_09.var_93B3,var_09.var_93B2,var_09.var_CEE4,opcode::OP_CallBuiltin4);
 	}
 
-	if(isdefined(param_07) && isdefined(param_07.var_71BB))
-	{
-		self [[ param_07.var_71BB ]](var_0A,var_09);
+	if(isdefined(param_07) && isdefined(param_07.var_71BB)) {
+		self [[param_07.var_71BB]](var_0A,var_09);
 	}
 
-	if(scripts\common\utility::istrue(self.activated_venomx_sphere))
-	{
+	if(scripts\common\utility::istrue(self.activated_venomx_sphere)) {
 		self setanimstate(var_09.var_A7C6,var_09.var_A7C4,0.2);
 	}
 	else
@@ -194,8 +164,7 @@ func_A4E3(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_0
 	thread handlejumpnotetracks("jump_land","end",var_09.var_A7C6,var_09.var_A7C4,opcode::OP_CallBuiltin5);
 	self waittill("traverse_complete");
 	self.var_11B2F = 0;
-	if(scripts\common\utility::istrue(self.activated_venomx_sphere))
-	{
+	if(scripts\common\utility::istrue(self.activated_venomx_sphere)) {
 		self scragentsetanimscale(0.2,0.2);
 	}
 	else
@@ -207,8 +176,7 @@ func_A4E3(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_0
 	self ghostlaunched("anim deltas");
 	self orientmode("face angle abs",param_05);
 	scripts\mp\agents\_scriptedagents::func_1384C("jump_land","end");
-	if(scripts\common\utility::istrue(self.activated_venomx_sphere))
-	{
+	if(scripts\common\utility::istrue(self.activated_venomx_sphere)) {
 		self scragentsetanimscale(0.2,0.2);
 	}
 	else
@@ -219,36 +187,28 @@ func_A4E3(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_0
 	self setorigin(param_04,0);
 }
 
-//Function Number: 7
-play_teleport_start()
-{
+play_teleport_start() {
 	self setscriptablepartstate("teleport_fx","teleport_start");
 	scripts\common\utility::waitframe();
 	self setethereal(1);
 }
 
-//Function Number: 8
-handlejumpnotetracks(param_00,param_01,param_02,param_03,param_04)
-{
+handlejumpnotetracks(param_00,param_01,param_02,param_03,param_04) {
 	self endon(param_02 + "_finished");
 	scripts\mp\agents\_scriptedagents::func_1384C(param_00,param_01,param_02,param_03,param_04);
 }
 
-//Function Number: 9
-func_A4E9(param_00,param_01,param_02,param_03)
-{
+func_A4E9(param_00,param_01,param_02,param_03) {
 	self endon("death");
 	var_04 = (0,0,1);
 	var_05 = 0.85;
 	var_06 = scripts\cp\_utility::is_normal_upright(param_00.var_10E05);
 	var_07 = scripts\cp\_utility::is_normal_upright(param_00.var_6397);
-	if(var_06 && !var_07)
-	{
+	if(var_06 && !var_07) {
 		var_08 = 0.5;
 		var_09 = 1;
 	}
-	else if(!var_08 && var_09)
-	{
+	else if(!var_08 && var_09) {
 		var_08 = 0;
 		var_09 = 0.5;
 	}
@@ -259,14 +219,12 @@ func_A4E9(param_00,param_01,param_02,param_03)
 	}
 
 	var_0A = var_09 - var_08;
-	if(var_08 > 0)
-	{
+	if(var_08 > 0) {
 		wait(param_03 * var_08);
 	}
 
 	var_0B = 1;
-	if(distancesquared(self.angles,param_01) > var_0B)
-	{
+	if(distancesquared(self.angles,param_01) > var_0B) {
 		var_0C = anglesdelta(self.angles,param_01);
 		var_0D = var_0C \ param_03 * var_0A;
 		var_0D = var_0D * 3.141593 \ 180;
@@ -277,9 +235,7 @@ func_A4E9(param_00,param_01,param_02,param_03)
 	self orientmode("face angle abs",param_01);
 }
 
-//Function Number: 10
-func_7F2B(param_00,param_01,param_02,param_03,param_04)
-{
+func_7F2B(param_00,param_01,param_02,param_03,param_04) {
 	var_05 = spawnstruct();
 	var_06 = param_02 - param_00;
 	var_07 = var_06 * (1,1,0);
@@ -290,12 +246,10 @@ func_7F2B(param_00,param_01,param_02,param_03,param_04)
 	var_05.var_A4F7 = var_05.var_A4F8 * (1,1,0);
 	var_05.var_A4DC = length(var_05.var_A4F7);
 	var_05.var_A4DB = var_05.var_A4F7 \ var_05.var_A4DC;
-	if(isdefined(param_04))
-	{
+	if(isdefined(param_04)) {
 		var_05.var_A844 = param_04 - param_02;
 	}
-	else if(isdefined(self.curmeleetarget))
-	{
+	else if(isdefined(self.curmeleetarget)) {
 		var_05.var_A844 = self.var_4B26.origin - param_02;
 	}
 	else
@@ -311,26 +265,20 @@ func_7F2B(param_00,param_01,param_02,param_03,param_04)
 	return var_05;
 }
 
-//Function Number: 11
-func_DA68(param_00,param_01)
-{
+func_DA68(param_00,param_01) {
 	var_02 = vectordot(param_00,param_01);
 	var_03 = param_00 - param_01 * var_02;
 	return var_03;
 }
 
-//Function Number: 12
-func_7F27(param_00,param_01)
-{
+func_7F27(param_00,param_01) {
 	var_02 = func_DA68(param_00,param_01);
 	var_03 = vectorcross(var_02,param_01);
 	var_04 = axistoangles(var_02,var_03,param_01);
 	return var_04;
 }
 
-//Function Number: 13
-func_7F30(param_00)
-{
+func_7F30(param_00) {
 	var_01 = param_00.var_A4DC;
 	var_02 = param_00.var_A4F8[2];
 	var_03 = !scripts\cp\_utility::is_normal_upright(param_00.var_6397);
@@ -348,57 +296,45 @@ func_7F30(param_00)
 	param_00.var_A4EB = length(param_00.launchvelocity);
 }
 
-//Function Number: 14
-func_7F2E(param_00)
-{
-	if(isdefined(self.var_B59D) && self.var_B59D)
-	{
+func_7F2E(param_00) {
+	if(isdefined(self.var_B59D) && self.var_B59D) {
 		return level.var_1B74;
 	}
 
-	if(param_00)
-	{
+	if(param_00) {
 		return getdvarfloat("agent_jumpWallSpeed");
 	}
 
 	return getdvarfloat("agent_jumpSpeed");
 }
 
-//Function Number: 15
-func_7F2A(param_00)
-{
-	if(isdefined(self.var_B59D) && self.var_B59D)
-	{
+func_7F2A(param_00) {
+	if(isdefined(self.var_B59D) && self.var_B59D) {
 		return level.var_1B73;
 	}
 
-	if(param_00)
-	{
+	if(param_00) {
 		return getdvarfloat("agent_jumpWallGravity");
 	}
 
 	return getdvarfloat("agent_jumpGravity");
 }
 
-//Function Number: 16
-func_7F2D(param_00,param_01)
-{
+func_7F2D(param_00,param_01) {
 	var_02 = self getsafecircleorigin(param_01.var_AAA5,param_01.var_AAA4);
 	var_03 = self getsafecircleorigin(param_01.var_93B3,param_01.var_93B2);
 	var_04 = self getsafecircleorigin(param_01.var_A7C6,param_01.var_A7C4);
 	var_05 = getanimlength(var_02);
 	var_06 = var_05 * 0.5;
 	var_07 = getnotetracktimes(var_02,"start_teleport");
-	if(isdefined(var_07) && var_07.size > 0)
-	{
+	if(isdefined(var_07) && var_07.size > 0) {
 		var_06 = var_05 - var_07[0] * var_05;
 	}
 
 	var_08 = getanimlength(var_04);
 	var_09 = var_08 * 0.5;
 	var_0A = getnotetracktimes(var_04,"stop_teleport");
-	if(isdefined(var_0A) && var_0A.size > 0)
-	{
+	if(isdefined(var_0A) && var_0A.size > 0) {
 		var_09 = var_0A[0] * var_08;
 	}
 
@@ -412,9 +348,7 @@ func_7F2D(param_00,param_01)
 	return var_11;
 }
 
-//Function Number: 17
-func_7F28(param_00,param_01)
-{
+func_7F28(param_00,param_01) {
 	param_01.var_AAA5 = func_7F64(param_00);
 	param_01.var_AAA4 = func_7F63(param_00,param_01.var_AAA5);
 	param_01.var_A7C6 = getlaserstartpoint(param_00);
@@ -424,13 +358,10 @@ func_7F28(param_00,param_01)
 	param_01.var_CEE4 = func_7F2D(param_00,param_01);
 }
 
-//Function Number: 18
-func_7F2F(param_00,param_01,param_02)
-{
+func_7F2F(param_00,param_01,param_02) {
 	var_03 = anglestoup(param_01);
 	var_04 = vectornormalize(param_02 - param_00);
-	if(vectordot(var_03,var_04) > 0.98)
-	{
+	if(vectordot(var_03,var_04) > 0.98) {
 		var_04 = (0,0,1);
 	}
 
@@ -439,42 +370,33 @@ func_7F2F(param_00,param_01,param_02)
 	return axistoangles(var_04,-1 * var_05,var_03);
 }
 
-//Function Number: 19
-func_7F64(param_00)
-{
+func_7F64(param_00) {
 	var_01 = 20;
 	var_02 = cos(90 - var_01);
 	var_03 = vectornormalize(param_00.var_A4F8);
 	var_04 = vectordot(var_03,param_00.var_10E05);
-	if(abs(var_04) <= var_02)
-	{
+	if(abs(var_04) <= var_02) {
 		return "jump_launch_level";
 	}
 
-	if(var_04 > 0)
-	{
+	if(var_04 > 0) {
 		return "jump_launch_up";
 	}
 
-	if(var_04 < 0)
-	{
+	if(var_04 < 0) {
 		return "jump_launch_down";
 	}
 }
 
-//Function Number: 20
-func_7F63(param_00,param_01)
-{
+func_7F63(param_00,param_01) {
 	var_02 = vectornormalize(param_00.launchvelocity2d);
 	var_02 = rotatevector(var_02,param_00.var_10D6D);
 	var_03 = self getanimentrycount(param_01);
 	var_04 = 0;
 	var_05 = vectordot(level.var_1BBA.var_A4E5[param_01][var_04],var_02);
-	for(var_06 = 1;var_06 < var_03;var_06++)
-	{
+	for(var_06 = 1;var_06 < var_03;var_06++) {
 		var_07 = vectordot(level.var_1BBA.var_A4E5[param_01][var_06],var_02);
-		if(var_07 > var_05)
-		{
+		if(var_07 > var_05) {
 			var_04 = var_06;
 			var_05 = var_07;
 		}
@@ -483,25 +405,18 @@ func_7F63(param_00,param_01)
 	return var_04;
 }
 
-//Function Number: 21
-func_7F17(param_00,param_01,param_02)
-{
+func_7F17(param_00,param_01,param_02) {
 	return "jump_in_air";
 }
 
-//Function Number: 22
-func_7F16(param_00,param_01,param_02)
-{
+func_7F16(param_00,param_01,param_02) {
 	return level.var_1BBA.var_93B2[param_01][param_02];
 }
 
-//Function Number: 23
-func_7F29(param_00,param_01,param_02)
-{
+func_7F29(param_00,param_01,param_02) {
 	var_03 = anglestoup(param_02);
 	var_04 = vectornormalize(param_01 - param_00);
-	if(vectordot(var_03,var_04) > 0.98)
-	{
+	if(vectordot(var_03,var_04) > 0.98) {
 		var_04 = (0,0,1);
 	}
 
@@ -510,17 +425,13 @@ func_7F29(param_00,param_01,param_02)
 	return axistoangles(var_04,-1 * var_05,var_03);
 }
 
-//Function Number: 24
-getlaserstartpoint(param_00)
-{
+getlaserstartpoint(param_00) {
 	var_01 = length(param_00.var_A4F8);
 	var_02 = 0.342;
-	if(!scripts\cp\_utility::is_normal_upright(param_00.var_6397))
-	{
+	if(!scripts\cp\_utility::is_normal_upright(param_00.var_6397)) {
 		var_03 = (0,0,1);
 		var_04 = vectordot(param_00.var_A4F8,var_03) \ var_01;
-		if(var_04 > var_02)
-		{
+		if(var_04 > var_02) {
 			return "jump_land_sidewall_low";
 		}
 		else
@@ -530,22 +441,18 @@ getlaserstartpoint(param_00)
 	}
 
 	var_04 = vectordot(param_00.var_A4F8,param_00.var_6397) \ var_01;
-	if(var_04 > var_02)
-	{
+	if(var_04 > var_02) {
 		return "jump_land_down";
 	}
 
-	if(var_04 < var_02 * -1)
-	{
+	if(var_04 < var_02 * -1) {
 		return "jump_land_up";
 	}
 
 	return "jump_land_level";
 }
 
-//Function Number: 25
-getlaserdirection(param_00,param_01)
-{
+getlaserdirection(param_00,param_01) {
 	var_02 = func_DA68(param_00.var_A4F8,param_00.var_6397);
 	var_03 = func_DA68(param_00.var_A844,param_00.var_6397);
 	var_04 = var_02 - var_03;
@@ -556,84 +463,66 @@ getlaserdirection(param_00,param_01)
 	var_09 = length(var_03);
 	var_0A = length(var_04);
 	var_0B = 0.001;
-	if(var_08 < var_0B || var_09 < var_0B)
-	{
+	if(var_08 < var_0B || var_09 < var_0B) {
 		return 1;
 	}
 
 	var_0C = var_08 * var_08 + var_09 * var_09 - var_0A * var_0A \ 2 * var_08 * var_09;
-	if(var_0C <= -1)
-	{
+	if(var_0C <= -1) {
 		return 6;
 	}
 
-	if(var_0C >= 1)
-	{
+	if(var_0C >= 1) {
 		return 1;
 	}
 
 	var_0D = acos(var_0C);
-	if(var_07 > 0)
-	{
-		if(0 <= var_0D && var_0D < 22.5)
-		{
+	if(var_07 > 0) {
+		if(0 <= var_0D && var_0D < 22.5) {
 			return 1;
 		}
 
-		if(22.5 <= var_0D && var_0D < 67.5)
-		{
+		if(22.5 <= var_0D && var_0D < 67.5) {
 			return 2;
 		}
 
-		if(67.5 <= var_0D && var_0D < 112.5)
-		{
+		if(67.5 <= var_0D && var_0D < 112.5) {
 			return 4;
 		}
 
-		if(112.5 <= var_0D && var_0D < 157.5)
-		{
+		if(112.5 <= var_0D && var_0D < 157.5) {
 			return 7;
 		}
 
 		return 6;
 	}
 
-	if(0 <= var_0D && var_0D < 22.5)
-	{
+	if(0 <= var_0D && var_0D < 22.5) {
 		return 1;
 	}
 
-	if(22.5 <= var_0D && var_0D < 67.5)
-	{
+	if(22.5 <= var_0D && var_0D < 67.5) {
 		return 0;
 	}
 
-	if(67.5 <= var_0D && var_0D < 112.5)
-	{
+	if(67.5 <= var_0D && var_0D < 112.5) {
 		return 3;
 	}
 
-	if(112.5 <= var_0D && var_0D < 157.5)
-	{
+	if(112.5 <= var_0D && var_0D < 157.5) {
 		return 5;
 	}
 
 	return 6;
 }
 
-//Function Number: 26
-func_A4EA(param_00,param_01)
-{
-}
+func_A4EA(param_00,param_01) {}
 
-//Function Number: 27
-func_D4A2(param_00,param_01,param_02,param_03)
-{
+func_D4A2(param_00,param_01,param_02,param_03) {
 	self endon("death");
 	self endon("killanimscript");
 	self endon("jump_finished");
-	if(scripts\common\utility::istrue(self.activated_venomx_sphere))
-	{
+	if(scripts\common\utility::istrue(self.activated_venomx_sphere)) {
 		self setanimstate(param_00,param_01,0.2);
 	}
 	else
@@ -642,21 +531,18 @@ func_D4A2(param_00,param_01,param_02,param_03)
 	}
 
 	var_04 = scripts\common\utility::waittill_any_return("jump_pain","traverse_complete");
-	if(var_04 == "traverse_complete")
-	{
+	if(var_04 == "traverse_complete") {
 		return;
 	}
 
 	var_05 = param_02 - gettime() * 0.001;
-	if(var_05 > 0)
-	{
+	if(var_05 > 0) {
 		var_06 = 2;
 		var_07 = func_7F2C(param_03);
 		var_08 = self getsafecircleorigin(var_07,param_01);
 		var_09 = getanimlength(var_08);
 		var_0A = min(var_06,var_09 \ var_05);
-		if(scripts\common\utility::istrue(self.activated_venomx_sphere))
-		{
+		if(scripts\common\utility::istrue(self.activated_venomx_sphere)) {
 			self setanimstate(var_07,param_01,0.2);
 		}
 		else
@@ -668,20 +554,14 @@ func_D4A2(param_00,param_01,param_02,param_03)
 	self waittill("traverse_complete");
 }
 
-//Function Number: 28
-func_7F2C(param_00)
-{
+func_7F2C(param_00) {
 	return "jump_pain_idle_" + param_00;
 }
 
-//Function Number: 29
-func_7F11(param_00)
-{
+func_7F11(param_00) {
 	return "jump_impact_pain_" + param_00;
 }
 
-//Function Number: 30
-func_7A62()
-{
+func_7A62() {
 	return "alien_jump";
 }

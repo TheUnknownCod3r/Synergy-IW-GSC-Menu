@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\mp\maps\mp_skyway\mp_skyway.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 6
- * Decompile Time: 342 ms
- * Timestamp: 10/27/2023 12:14:18 AM
-*******************************************************************/
+/***********************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\mp\maps\mp_skyway\mp_skyway.gsc
+***********************************************************/
 
-//Function Number: 1
-main()
-{
+main() {
 	lib_0FFB::main();
 	scripts\mp\maps\mp_skyway\gen\mp_skyway_art::main();
 	lib_0FFA::main();
@@ -47,9 +41,7 @@ main()
 	scripts\mp\_spawnlogic::addttlosoverride(177,219,1,1);
 }
 
-//Function Number: 2
-fix_collision()
-{
+fix_collision() {
 	var_00 = spawn("script_model",(1856,-736,-112));
 	var_00.angles = (0,0,180);
 	var_00 setmodel("mp_desert_uplink_col_01");
@@ -98,54 +90,41 @@ fix_collision()
 	var_15 clonebrushmodeltoscriptmodel(var_14);
 }
 
-//Function Number: 3
-func_CDA4(param_00)
-{
+func_CDA4(param_00) {
 	wait(30);
 	function_030E(param_00);
 }
 
-//Function Number: 4
-func_5364()
-{
+func_5364() {
 	wait(5);
 	var_00 = getentarray("destructible_screens","targetname");
 	scripts\common\utility::array_thread(var_00,::func_5365);
 }
 
-//Function Number: 5
-func_5365()
-{
+func_5365() {
 	self endon("death");
 	var_00 = getglass(self.target);
-	if(!isdefined(var_00))
-	{
+	if(!isdefined(var_00)) {
 		iprintlnbold("GLASS ID AT " + self.origin + "IS UNDEFINED");
 		return;
 	}
 
-	while(!isglassdestroyed(var_00))
-	{
+	while(!isglassdestroyed(var_00)) {
 		wait(0.05);
 	}
 
-	if(!isdefined(self.var_ED83))
-	{
+	if(!isdefined(self.var_ED83)) {
 		playfx(scripts\common\utility::getfx("vfx_moon_adscreen_sparks_runner"),self.origin);
 	}
 
 	self delete();
 }
 
-//Function Number: 6
-securitymetaldetectors()
-{
+securitymetaldetectors() {
 	level endon("game_ended");
 	var_00 = getent("audio_metal_detector","targetname");
-	if(isdefined(var_00))
-	{
-		for(;;)
-		{
+	if(isdefined(var_00)) {
+		for(;;) {
 			var_00 waittill("trigger",var_01);
 			playsoundatpos(var_01.origin + (0,0,80),"skyway_metal_detector_beep");
 		}

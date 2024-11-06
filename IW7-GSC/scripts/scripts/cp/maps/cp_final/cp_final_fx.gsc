@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\cp\maps\cp_final\cp_final_fx.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 1
- * Decompile Time: 122 ms
- * Timestamp: 10/27/2023 12:05:01 AM
-*******************************************************************/
+/************************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\cp\maps\cp_final\cp_final_fx.gsc
+************************************************************/
 
-//Function Number: 1
-main()
-{
+main() {
 	level._effect["rhino_lnf"] = loadfx("vfx/iw7/levels/cp_final/rhino_lnf.vfx");
 	level._effect["vfx_eggsac_pup"] = loadfx("vfx/iw7/levels/cp_final/vfx_eggsac_pup.vfx");
 	level._effect["vfx_eggsac_glow"] = loadfx("vfx/iw7/levels/cp_final/vfx_eggsac_glow.vfx");

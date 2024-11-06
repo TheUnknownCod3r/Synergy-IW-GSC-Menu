@@ -1,24 +1,15 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\cp\cp_endgame.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 28
- * Decompile Time: 1031 ms
- * Timestamp: 10/27/2023 12:23:32 AM
-*******************************************************************/
+/*******************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\cp\_endgame.gsc
+*******************************************/
 
-//Function Number: 1
-init()
-{
+init() {
 	func_DEB3();
 }
 
-//Function Number: 2
-endgame(param_00,param_01)
-{
-	if(gamealreadyended())
-	{
+endgame(param_00,param_01) {
+	if(gamealreadyended()) {
 		return;
 	}
 
@@ -27,21 +18,16 @@ endgame(param_00,param_01)
 	func_B37C();
 	level notify("game_ended",param_00);
 	func_7384(1,"cg_fovScale",1);
-	if(param_01 == 4)
-	{
+	if(param_01 == 4) {
 		wait(4.9);
 	}
 
 	var_02 = 0;
-	foreach(var_04 in level.players)
-	{
+	foreach(var_04 in level.players) {
 		var_04 stoplocalsound("zmb_laststand_music");
-		if(var_04 issplitscreenplayer())
-		{
-			if(var_04 issplitscreenplayerprimary())
-			{
-				if(soundexists("mus_zombies_gameover"))
-				{
+		if(var_04 issplitscreenplayer()) {
+			if(var_04 issplitscreenplayerprimary()) {
+				if(soundexists("mus_zombies_gameover")) {
 					var_04 playlocalsound("mus_zombies_gameover");
 				}
 			}
@@ -49,8 +35,7 @@ endgame(param_00,param_01)
 			continue;
 		}
 
-		if(soundexists("mus_zombies_gameover"))
-		{
+		if(soundexists("mus_zombies_gameover")) {
 			var_04 playlocalsound("mus_zombies_gameover");
 		}
 	}
@@ -68,16 +53,13 @@ endgame(param_00,param_01)
 	function_01AF(0);
 	setomnvar("zm_ui_timer",0);
 	scripts\cp\cp_challenge::deactivate_current_challenge();
-	foreach(var_04 in level.players)
-	{
+	foreach(var_04 in level.players) {
 		func_40A5(var_04);
 	}
 
 	level.var_2AAD = 1;
-	foreach(var_09 in level.agentarray)
-	{
-		if(isdefined(var_09.isactive) && var_09.isactive)
-		{
+	foreach(var_09 in level.agentarray) {
+		if(isdefined(var_09.isactive) && var_09.isactive) {
 			var_09.precacheleaderboards = 1;
 			var_09 scripts\cp\utility::enable_alien_scripted();
 		}
@@ -85,11 +67,9 @@ endgame(param_00,param_01)
 
 	setomnvarforallclients("post_game_state",0);
 	var_0B = func_FF5E(param_01);
-	if(isdefined(var_0B))
-	{
-		if(isdefined(level.var_ADDF))
-		{
-			[[ level.var_ADDF ]](param_01);
+	if(isdefined(var_0B)) {
+		if(isdefined(level.var_ADDF)) {
+			[[level.var_ADDF]](param_01);
 		}
 
 		func_ADDE(var_0B);
@@ -100,15 +80,12 @@ endgame(param_00,param_01)
 	}
 
 	scripts/cp/cp_gamescore::calculate_players_total_end_game_score(1);
-	if(isdefined(level.var_D7BB))
-	{
-		[[ level.var_D7BB ]]();
+	if(isdefined(level.var_D7BB)) {
+		[[level.var_D7BB]]();
 	}
 
-	if(!scripts\cp\utility::is_codxp())
-	{
-		foreach(var_04 in level.players)
-		{
+	if(!scripts\cp\utility::is_codxp()) {
+		foreach(var_04 in level.players) {
 			var_04 setclientdvar("ui_opensummary",1);
 		}
 	}
@@ -117,16 +94,13 @@ endgame(param_00,param_01)
 	func_56DA(param_00,param_01);
 	setomnvarforallclients("post_game_state",1);
 	var_0E = ::scripts\cp\cp_globallogic::spawnintermission;
-	if(isdefined(level.var_4C58))
-	{
+	if(isdefined(level.var_4C58)) {
 		var_0E = level.var_4C58;
 	}
 
-	if(!scripts\cp\utility::is_codxp())
-	{
-		foreach(var_04 in level.players)
-		{
-			var_04 thread [[ var_0E ]](param_01);
+	if(!scripts\cp\utility::is_codxp()) {
+		foreach(var_04 in level.players) {
+			var_04 thread [[var_0E]](param_01);
 		}
 	}
 
@@ -134,10 +108,8 @@ endgame(param_00,param_01)
 	var_12 = func_7B85();
 	scripts\cp\zombies\direct_boss_fight::adjust_wave_num(var_11);
 	scripts\cp\cp_analytics::endgame(var_11,var_12);
-	if(scripts\cp\zombies\direct_boss_fight::should_directly_go_to_boss_fight())
-	{
-		if(param_01 == 1)
-		{
+	if(scripts\cp\zombies\direct_boss_fight::should_directly_go_to_boss_fight()) {
+		if(param_01 == 1) {
 			setomnvar("zm_boss_splash",5);
 		}
 		else
@@ -153,44 +125,34 @@ endgame(param_00,param_01)
 	exitlevel(0);
 }
 
-//Function Number: 3
-get_time_survived()
-{
-	if(isdefined(level.calculate_time_survived_func))
-	{
-		return [[ level.calculate_time_survived_func ]]();
+get_time_survived() {
+	if(isdefined(level.calculate_time_survived_func)) {
+		return [[level.calculate_time_survived_func]]();
 	}
 
 	return int(gettime() - level.starttime / 1000);
 }
 
-//Function Number: 4
-kill_all_zombies()
-{
+kill_all_zombies() {
 	wait(1);
 	var_00 = scripts\cp\cp_agent_utils::getaliveagentsofteam("axis");
-	foreach(var_02 in var_00)
-	{
+	foreach(var_02 in var_00) {
 		var_02.precacheleaderboards = 1;
 		var_02.scripted_mode = 1;
 		var_02 ghostskulls_complete_status(getclosestpointonnavmesh(var_02.origin));
-		if(!isdefined(var_02.agent_type))
-		{
+		if(!isdefined(var_02.agent_type)) {
 			continue;
 		}
 
-		if(var_02.agent_type == "zombie_grey")
-		{
+		if(var_02.agent_type == "zombie_grey") {
 			continue;
 		}
 
-		if(scripts\engine\utility::istrue(var_02.entered_playspace))
-		{
+		if(scripts\engine\utility::istrue(var_02.entered_playspace)) {
 			continue;
 		}
 
-		switch(var_02.agent_type)
-		{
+		switch(var_02.agent_type) {
 			case "zombie_cop":
 			case "zombie_ghost":
 			case "zombie_brute":
@@ -209,58 +171,43 @@ kill_all_zombies()
 	}
 }
 
-//Function Number: 5
-func_72BF()
-{
+func_72BF() {
 	level thread endgame("axis",func_7979("host_end"));
 }
 
-//Function Number: 6
-func_B37C()
-{
+func_B37C() {
 	game["state"] = "postgame";
 	level.gameended = 1;
 }
 
-//Function Number: 7
-gamealreadyended()
-{
+gamealreadyended() {
 	return game["state"] == "postgame" || level.gameended;
 }
 
-//Function Number: 8
-func_7384(param_00,param_01,param_02)
-{
-	if(!isdefined(param_00))
-	{
+func_7384(param_00,param_01,param_02) {
+	if(!isdefined(param_00)) {
 		param_00 = 0;
 	}
 
-	foreach(var_04 in level.players)
-	{
+	foreach(var_04 in level.players) {
 		var_04 thread freezeplayerforroundend(param_00);
 		var_04 thread func_E760(4);
 		var_04 freegameplayhudelems();
 		var_04 setclientdvars("cg_everyoneHearsEveryone",1,"cg_drawSpectatorMessages",0);
-		if(isdefined(param_01) && isdefined(param_02))
-		{
+		if(isdefined(param_01) && isdefined(param_02)) {
 			var_04 setclientdvars(param_01,param_02);
 		}
 	}
 
-	foreach(var_07 in level.agentarray)
-	{
+	foreach(var_07 in level.agentarray) {
 		var_07 scripts\cp\utility::freezecontrolswrapper(1);
 	}
 }
 
-//Function Number: 9
-freezeplayerforroundend(param_00)
-{
+freezeplayerforroundend(param_00) {
 	self endon("disconnect");
 	scripts\cp\utility::clearlowermessages();
-	if(!isdefined(param_00))
-	{
+	if(!isdefined(param_00)) {
 		param_00 = 0.05;
 	}
 
@@ -268,43 +215,32 @@ freezeplayerforroundend(param_00)
 	scripts\cp\utility::freezecontrolswrapper(1);
 }
 
-//Function Number: 10
-func_E760(param_00)
-{
+func_E760(param_00) {
 	self setdepthoffield(0,128,512,4000,6,1.8);
 }
 
-//Function Number: 11
-func_7B85()
-{
+func_7B85() {
 	var_00 = 0;
-	if(isdefined(level.starttime))
-	{
+	if(isdefined(level.starttime)) {
 		var_00 = gettime() - level.starttime;
 	}
 
 	return var_00;
 }
 
-//Function Number: 12
-freegameplayhudelems()
-{
-	if(isdefined(self.perkicon))
-	{
-		if(isdefined(self.perkicon[0]))
-		{
+freegameplayhudelems() {
+	if(isdefined(self.perkicon)) {
+		if(isdefined(self.perkicon[0])) {
 			self.perkicon[0] scripts\cp\utility::destroyelem();
 			self.perkname[0] scripts\cp\utility::destroyelem();
 		}
 
-		if(isdefined(self.perkicon[1]))
-		{
+		if(isdefined(self.perkicon[1])) {
 			self.perkicon[1] scripts\cp\utility::destroyelem();
 			self.perkname[1] scripts\cp\utility::destroyelem();
 		}
 
-		if(isdefined(self.perkicon[2]))
-		{
+		if(isdefined(self.perkicon[2])) {
 			self.perkicon[2] scripts\cp\utility::destroyelem();
 			self.perkname[2] scripts\cp\utility::destroyelem();
 		}
@@ -313,20 +249,16 @@ freegameplayhudelems()
 	self notify("perks_hidden");
 	self.lowermessage scripts\cp\utility::destroyelem();
 	self.lowertimer scripts\cp\utility::destroyelem();
-	if(isdefined(self.proxbar))
-	{
+	if(isdefined(self.proxbar)) {
 		self.proxbar scripts\cp\utility::destroyelem();
 	}
 
-	if(isdefined(self.proxbartext))
-	{
+	if(isdefined(self.proxbartext)) {
 		self.proxbartext scripts\cp\utility::destroyelem();
 	}
 }
 
-//Function Number: 13
-func_40A5(param_00)
-{
+func_40A5(param_00) {
 	param_00 notify("select_mode");
 	param_00 notify("reset_outcome");
 	param_00.pers["stats"] = param_00.var_10E53;
@@ -341,43 +273,34 @@ func_40A5(param_00)
 	param_00 setclientomnvar("zombie_number_of_ticket",0);
 	param_00 setplayerdata("cp","zombiePlayerLoadout","tutorialOff",1);
 	param_00 scripts\cp\utility::clearlowermessages();
-	if(isdefined(param_00.pap))
-	{
+	if(isdefined(param_00.pap)) {
 		param_00.pap = [];
 	}
 
-	if(isdefined(param_00.powerupicons))
-	{
+	if(isdefined(param_00.powerupicons)) {
 		param_00.powerupicons = [];
 	}
 
-	if(isdefined(param_00.var_456D))
-	{
+	if(isdefined(param_00.var_456D)) {
 		param_00.var_456D = [];
 	}
 
-	if(isdefined(param_00.powers))
-	{
+	if(isdefined(param_00.powers)) {
 		param_00.powers = [];
 	}
 
 	param_00 func_4172();
 }
 
-//Function Number: 14
-func_FF5E(param_00)
-{
-	if((param_00 == 1 || param_00 == 2) && getdvar("ui_mapname") == "cp_jackal_ass")
-	{
+func_FF5E(param_00) {
+	if((param_00 == 1 || param_00 == 2) && getdvar("ui_mapname") == "cp_jackal_ass") {
 		return "cp_titan";
 	}
 
 	return undefined;
 }
 
-//Function Number: 15
-func_ADDE(param_00)
-{
+func_ADDE(param_00) {
 	func_A5D7();
 	level scripts\engine\utility::waittill_any_timeout_1(15,"intermission_over");
 	setdvar("ui_mapname",param_00);
@@ -385,15 +308,12 @@ func_ADDE(param_00)
 	var_01 = "map " + param_00;
 }
 
-//Function Number: 16
 // Restart Map
-func_E2AE()
-{
+func_E2AE() {
 	func_A5D7();
 	setomnvar("allow_server_pause",1);
 	setomnvarforallclients("post_game_state",0);
-	for(var_00 = 3;var_00 > 0;var_00--)
-	{
+	for(var_00 = 3;var_00 > 0;var_00--) {
 		iprintlnbold("RESTARTING IN..." + var_00);
 		wait(1);
 	}
@@ -401,49 +321,38 @@ func_E2AE()
 	map_restart(1);
 }
 
-//Function Number: 17
 // Kill Aliens
-func_A5D7()
-{
-	foreach(var_01 in level.characters)
-	{
+func_A5D7() {
+	foreach(var_01 in level.characters) {
 		var_01 dodamage(100000,var_01.origin);
 	}
 
 	var_03 = scripts\cp\cp_agent_utils::getactiveagentsofspecies("alien");
-	foreach(var_05 in var_03)
-	{
+	foreach(var_05 in var_03) {
 		var_05 suicide();
 	}
 }
 
-//Function Number: 18
-func_D40D(param_00)
-{
-	if(param_00 == 4)
-	{
+func_D40D(param_00) {
+	if(param_00 == 4) {
 		level.var_E40B = 0;
 		level.var_E40C = 0;
-		foreach(var_02 in level.players)
-		{
+		foreach(var_02 in level.players) {
 			var_02 thread func_56C4();
 		}
 
 		var_04 = level.players.size - level.var_E40B;
-		while(level.var_E40B < level.players.size)
-		{
+		while(level.var_E40B < level.players.size) {
 			var_05 = var_04;
 			var_04 = level.players.size - level.var_E40B;
-			if(var_04 != var_05)
-			{
+			if(var_04 != var_05) {
 				iprintlnbold("Waiting for " + var_04 + " player\'s to vote");
 			}
 
 			wait(0.5);
 		}
 
-		if(level.var_E40C == level.players.size)
-		{
+		if(level.var_E40C == level.players.size) {
 			return 1;
 		}
 	}
@@ -451,27 +360,20 @@ func_D40D(param_00)
 	return 0;
 }
 
-//Function Number: 19
-func_56C4()
-{
+func_56C4() {
 	wait(3);
 	scripts\cp\cp_laststand::clear_last_stand_timer(self);
 	self setclientomnvar("retry_popup",1);
 	self waittill("luinotifyserver",var_00);
 	level.var_E40B = level.var_E40B + 1;
-	if(var_00 == "retry_level")
-	{
+	if(var_00 == "retry_level") {
 		level.var_E40C = level.var_E40C + 1;
 	}
 }
 
-//Function Number: 20
-func_4172()
-{
-	if(isdefined(self.powers))
-	{
-		foreach(var_01 in getarraykeys(self.powers))
-		{
+func_4172() {
+	if(isdefined(self.powers)) {
+		foreach(var_01 in getarraykeys(self.powers)) {
 			var_02 = self.powers[var_01].charges * -1;
 			scripts\cp\powers\coop_powers::power_adjustcharges(var_02);
 		}
@@ -481,11 +383,8 @@ func_4172()
 	scripts\cp\powers\coop_powers::func_13F00("primary");
 }
 
-//Function Number: 21
-func_7978(param_00)
-{
-	switch(param_00)
-	{
+func_7978(param_00) {
+	switch(param_00) {
 		case 1:
 			return "all_escape";
 
@@ -511,23 +410,18 @@ func_7978(param_00)
 	}
 }
 
-//Function Number: 22
-func_56C5()
-{
+func_56C5() {
 	level endon("game_ended");
 	self endon("disconnect");
-	for(;;)
-	{
+	for(;;) {
 		self waittill("luinotifyserver",var_00);
-		if(var_00 == "close_menu")
-		{
+		if(var_00 == "close_menu") {
 			level.var_AE3F = level.var_AE3F + 1;
 			continue;
 		}
 		else
 		{
-			switch(var_00)
-			{
+			switch(var_00) {
 				case "dpad_team_ammo_ap":
 				case "dpad_team_ammo_in":
 				case "dpad_team_ammo_stun":
@@ -651,13 +545,9 @@ func_56C5()
 	}
 }
 
-//Function Number: 23
-func_56DA(param_00,param_01)
-{
-	foreach(var_03 in level.players)
-	{
-		if(isdefined(var_03.connectedpostgame) || var_03.pers["team"] == "spectator")
-		{
+func_56DA(param_00,param_01) {
+	foreach(var_03 in level.players) {
+		if(isdefined(var_03.connectedpostgame) || var_03.pers["team"] == "spectator") {
 			continue;
 		}
 
@@ -668,26 +558,21 @@ func_56DA(param_00,param_01)
 	level notify("game_win",param_00);
 }
 
-//Function Number: 24
-func_C752(param_00,param_01)
-{
+func_C752(param_00,param_01) {
 	self endon("disconnect");
 	self notify("reset_outcome");
 	wait(0.5);
 	var_02 = self.pers["team"];
-	if(!isdefined(var_02) || var_02 != "allies" && var_02 != "axis")
-	{
+	if(!isdefined(var_02) || var_02 != "allies" && var_02 != "axis") {
 		var_02 = "allies";
 	}
 
-	while(scripts\cp\cp_hud_message::isdoingsplash())
-	{
+	while(scripts\cp\cp_hud_message::isdoingsplash()) {
 		wait(0.05);
 	}
 
 	self endon("reset_outcome");
-	if(isdefined(self.pers["team"]) && param_00 == var_02)
-	{
+	if(isdefined(self.pers["team"]) && param_00 == var_02) {
 		var_03 = func_7979("win");
 	}
 	else
@@ -696,29 +581,23 @@ func_C752(param_00,param_01)
 	}
 
 	self setclientomnvar("ui_round_end_title",var_03);
-	if(isdefined(param_01))
-	{
+	if(isdefined(param_01)) {
 		self setclientomnvar("ui_round_end_reason",param_01);
 	}
 
 	self setclientomnvar("zm_ui_show_eog_score",1);
 }
 
-//Function Number: 25
-func_DEB3()
-{
-	if(isdefined(level.var_62D2))
-	{
-		[[ level.var_62D2 ]]();
+func_DEB3() {
+	if(isdefined(level.var_62D2)) {
+		[[level.var_62D2]]();
 		return;
 	}
 
 	func_DEAC();
 }
 
-//Function Number: 26
-func_DEAC()
-{
+func_DEAC() {
 	level.end_game_string_index = [];
 	level.end_game_string_index["win"] = 1;
 	level.end_game_string_index["fail"] = 2;
@@ -729,29 +608,21 @@ func_DEAC()
 	level.end_game_string_index["host_end"] = 5;
 }
 
-//Function Number: 27
-func_7979(param_00)
-{
+func_7979(param_00) {
 	return level.end_game_string_index[param_00];
 }
 
-//Function Number: 28
-func_E761(param_00,param_01)
-{
+func_E761(param_00,param_01) {
 	var_02 = 0;
-	while(!var_02)
-	{
+	while(!var_02) {
 		var_03 = level.players;
 		var_02 = 1;
-		foreach(var_05 in var_03)
-		{
-			if(!isdefined(var_05.var_58DD))
-			{
+		foreach(var_05 in var_03) {
+			if(!isdefined(var_05.var_58DD)) {
 				continue;
 			}
 
-			if(!var_05 scripts\cp\cp_hud_message::isdoingsplash())
-			{
+			if(!var_05 scripts\cp\cp_hud_message::isdoingsplash()) {
 				continue;
 			}
 
@@ -761,8 +632,7 @@ func_E761(param_00,param_01)
 		wait(0.5);
 	}
 
-	if(!param_01)
-	{
+	if(!param_01) {
 		wait(param_00);
 		level notify("round_end_finished");
 		return;
@@ -772,19 +642,15 @@ func_E761(param_00,param_01)
 	level notify("give_match_bonus");
 	wait(param_00 / 2);
 	var_02 = 0;
-	while(!var_02)
-	{
+	while(!var_02) {
 		var_03 = level.players;
 		var_02 = 1;
-		foreach(var_05 in var_03)
-		{
-			if(!isdefined(var_05.var_58DD))
-			{
+		foreach(var_05 in var_03) {
+			if(!isdefined(var_05.var_58DD)) {
 				continue;
 			}
 
-			if(!var_05 scripts\cp\cp_hud_message::isdoingsplash())
-			{
+			if(!var_05 scripts\cp\cp_hud_message::isdoingsplash()) {
 				continue;
 			}
 

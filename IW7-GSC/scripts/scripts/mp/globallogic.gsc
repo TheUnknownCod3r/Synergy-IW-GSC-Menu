@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\mp\globallogic.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 9
- * Decompile Time: 363 ms
- * Timestamp: 10/27/2023 12:20:30 AM
-*******************************************************************/
+/**********************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\mp\globallogic.gsc
+**********************************************/
 
-//Function Number: 1
-init()
-{
+init() {
 	setdvar("match_running",1);
 	level.splitscreen = function_0114();
 	scripts\mp\utility::func_F305();
@@ -28,8 +22,7 @@ init()
 	level.var_6329 = 1;
 	level.showingfinalkillcam = 0;
 	level.tispawndelay = getdvarint("scr_tispawndelay");
-	if(!isdefined(level.var_12AC9))
-	{
+	if(!isdefined(level.var_12AC9)) {
 		scripts\mp\tweakables::init();
 	}
 
@@ -43,15 +36,13 @@ init()
 	level.var_D706 = 3.5;
 	level.var_D420 = [];
 	func_DEEC();
-	if(scripts\mp\utility::matchmakinggame())
-	{
+	if(scripts\mp\utility::matchmakinggame()) {
 		var_00 = " LB_MAP_" + getdvar("ui_mapname");
 		var_01 = "";
 		var_02 = "";
 		var_02 = "LB_GB_TOTALXP_AT LB_GB_TOTALXP_LT LB_GB_WINS_AT LB_GB_WINS_LT LB_GB_KILLS_AT LB_GB_KILLS_LT LB_GB_ACCURACY_AT LB_ACCOLADES";
 		var_01 = " LB_GM_" + level.gametype;
-		if(getdvarint("g_hardcore"))
-		{
+		if(getdvarint("g_hardcore")) {
 			var_01 = var_01 + "_HC";
 		}
 
@@ -73,15 +64,11 @@ init()
 	func_9694(var_03);
 }
 
-//Function Number: 2
-endmatchonhostdisconnect()
-{
+endmatchonhostdisconnect() {
 	level endon("game_ended");
-	for(;;)
-	{
+	for(;;) {
 		level waittill("connected",var_00);
-		if(var_00 ishost())
-		{
+		if(var_00 ishost()) {
 			var_01 = var_00;
 			break;
 		}
@@ -91,11 +78,8 @@ endmatchonhostdisconnect()
 	thread scripts\mp\gamelogic::endgame("draw",game["end_reason"]["host_ended_game"]);
 }
 
-//Function Number: 3
-func_9694(param_00)
-{
-	for(var_01 = 0;var_01 < param_00;var_01++)
-	{
+func_9694(param_00) {
+	for(var_01 = 0;var_01 < param_00;var_01++) {
 		var_02 = "team_" + var_01;
 		level.placement[var_02] = [];
 		level.teamcount[var_02] = 0;
@@ -105,12 +89,9 @@ func_9694(param_00)
 	}
 }
 
-//Function Number: 4
-func_DEEC()
-{
+func_DEEC() {
 	setomnvar("ui_bomb_timer",0);
-	if(getdvar("r_reflectionProbeGenerate") != "1")
-	{
+	if(getdvar("r_reflectionProbeGenerate") != "1") {
 		setomnvar("ui_nuke_end_milliseconds",0);
 	}
 
@@ -120,9 +101,7 @@ func_DEEC()
 	setdvar("camera_thirdPerson",getdvarint("scr_thirdPerson"));
 }
 
-//Function Number: 5
-setupcallbacks()
-{
+setupcallbacks() {
 	setdefaultcallbacks();
 	scripts\mp\callbacksetup::setupdamageflags();
 	scripts\mp\gametypes\common::setupcommoncallbacks();
@@ -149,9 +128,7 @@ setupcallbacks()
 	level.addtocharactersarray = ::scripts\mp\spawnlogic::addtocharactersarray;
 }
 
-//Function Number: 6
-setdefaultcallbacks()
-{
+setdefaultcallbacks() {
 	level.callbackstartgametype = ::scripts\mp\gamelogic::callback_startgametype;
 	level.callbackplayerconnect = ::scripts\mp\playerlogic::callback_playerconnect;
 	level.callbackplayerdisconnect = ::scripts\mp\playerlogic::callback_playerdisconnect;
@@ -164,22 +141,15 @@ setdefaultcallbacks()
 	level.callbackfinishweaponchange = ::scripts\mp\weapons::callback_finishweaponchange;
 }
 
-//Function Number: 7
-blank(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08,param_09)
-{
-}
+blank(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08,param_09) {}
 
-//Function Number: 8
-func_11757()
-{
+func_11757() {
 	self endon("death");
 	self endon("disconnect");
-	for(;;)
-	{
+	for(;;) {
 		wait(3);
 		var_00 = randomint(6);
-		for(var_01 = 0;var_01 < var_00;var_01++)
-		{
+		for(var_01 = 0;var_01 < var_00;var_01++) {
 			iprintlnbold(var_00);
 			self shellshock("frag_grenade_mp",0.2);
 			wait(0.1);
@@ -187,11 +157,8 @@ func_11757()
 	}
 }
 
-//Function Number: 9
-debugline(param_00,param_01)
-{
-	for(var_02 = 0;var_02 < 50;var_02++)
-	{
+debugline(param_00,param_01) {
+	for(var_02 = 0;var_02 < 50;var_02++) {
 		wait(0.05);
 	}
 }

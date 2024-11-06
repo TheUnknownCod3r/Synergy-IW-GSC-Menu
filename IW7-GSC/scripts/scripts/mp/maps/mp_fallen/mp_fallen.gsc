@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\mp\maps\mp_fallen\mp_fallen.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 20
- * Decompile Time: 1038 ms
- * Timestamp: 10/27/2023 12:13:28 AM
-*******************************************************************/
+/***********************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\mp\maps\mp_fallen\mp_fallen.gsc
+***********************************************************/
 
-//Function Number: 1
-main()
-{
+main() {
 	lib_0F9E::main();
 	scripts\mp\maps\mp_fallen\gen\mp_fallen_art::main();
 	lib_0F9D::main();
@@ -35,42 +29,32 @@ main()
 	thread patchoutofboundstrigger();
 }
 
-//Function Number: 2
-func_C853()
-{
+func_C853() {
 	level endon("game_ended");
 	wait(0.2);
 	var_00 = spawn("script_origin",(1583,253,988));
 	var_00 playloopsound("amb_mp_fallen_pa_amb");
 }
 
-//Function Number: 3
-func_CBF3()
-{
+func_CBF3() {
 	var_00 = scripts\common\utility::getstruct("pitching_machine","script_noteworthy");
-	if(isdefined(var_00))
-	{
+	if(isdefined(var_00)) {
 		var_00 thread func_CBF1();
 	}
 }
 
-//Function Number: 4
-func_CBF1()
-{
+func_CBF1() {
 	level endon("game_ended");
 	precachemodel("baseball_single_fn_01_dyn");
 	level waittill("connected",var_00);
 	var_01 = func_CBF0();
 	var_02 = getentarray("pitching_wheel","script_noteworthy");
-	foreach(var_04 in var_02)
-	{
+	foreach(var_04 in var_02) {
 		var_04.var_CB0B = 0;
 	}
 
-	for(;;)
-	{
-		for(var_06 = 0;var_06 < 5;var_06++)
-		{
+	for(;;) {
+		for(var_06 = 0;var_06 < 5;var_06++) {
 			wait(5);
 			var_01[var_06] notify("pitching_machine_ball_reset");
 			thread func_CBF2(var_01[var_06]);
@@ -78,21 +62,16 @@ func_CBF1()
 	}
 }
 
-//Function Number: 5
-func_CBF0()
-{
+func_CBF0() {
 	var_00 = [];
-	for(var_01 = 0;var_01 < 5;var_01++)
-	{
+	for(var_01 = 0;var_01 < 5;var_01++) {
 		var_00[var_01] = func_CBF4();
 	}
 
 	return var_00;
 }
 
-//Function Number: 6
-func_CBF4()
-{
+func_CBF4() {
 	var_00 = spawn("script_model",self.origin);
 	var_00 setmodel("baseball_single_fn_01_dyn");
 	var_00.var_9037 = spawn("trigger_radius",self.origin,0,40,40);
@@ -102,9 +81,7 @@ func_CBF4()
 	return var_00;
 }
 
-//Function Number: 7
-func_CBF2(param_00)
-{
+func_CBF2(param_00) {
 	param_00.var_CB0B = 0;
 	param_00 hide();
 	param_00.origin = self.origin;
@@ -118,24 +95,18 @@ func_CBF2(param_00)
 	param_00.var_CB0B = 1;
 }
 
-//Function Number: 8
-func_139A9()
-{
+func_139A9() {
 	self endon("death");
 	wait(1);
 	self notify("ball_initial_pitch_over");
 }
 
-//Function Number: 9
-func_139A8()
-{
+func_139A8() {
 	self endon("death");
 	self endon("ball_initial_pitch_over");
-	for(;;)
-	{
+	for(;;) {
 		self.var_9037 waittill("trigger",var_00);
-		if(isplayer(var_00) && scripts\mp\_utility::func_9F19(var_00))
-		{
+		if(isplayer(var_00) && scripts\mp\_utility::func_9F19(var_00)) {
 			var_00 dodamage(35,self.origin,self,self,"MOD_IMPACT");
 			thread func_10830(self.origin);
 			break;
@@ -143,9 +114,7 @@ func_139A8()
 	}
 }
 
-//Function Number: 10
-func_10830(param_00)
-{
+func_10830(param_00) {
 	self hide();
 	var_01 = spawn("script_model",param_00);
 	var_01 setmodel("baseball_single_fn_01_dyn");
@@ -156,50 +125,38 @@ func_10830(param_00)
 	var_01 delete();
 }
 
-//Function Number: 11
-func_10A0E(param_00,param_01)
-{
+func_10A0E(param_00,param_01) {
 	var_02 = getent(param_00,"targetname");
-	for(;;)
-	{
+	for(;;) {
 		var_02 rotatepitch(-360,param_01,0,0);
 		wait(1);
 	}
 }
 
-//Function Number: 12
-func_F9BA()
-{
+func_F9BA() {
 	level.var_A582 = 600;
 	level.var_A583 = 1200;
 	level.var_BF47 = -1;
 	var_00 = getentarray("beer_keg","targetname");
-	foreach(var_02 in var_00)
-	{
+	foreach(var_02 in var_00) {
 		var_02 thread func_13957();
 	}
 }
 
-//Function Number: 13
-func_13957()
-{
+func_13957() {
 	self setcandamage(1);
-	for(;;)
-	{
+	for(;;) {
 		self waittill("damage",var_00,var_01,var_02,var_03,var_04);
-		if(!issubstr(var_04,"BULLET"))
-		{
+		if(!issubstr(var_04,"BULLET")) {
 			continue;
 		}
 
-		if(!func_3827())
-		{
+		if(!func_3827()) {
 			continue;
 		}
 
 		var_05 = func_7A63(var_01,var_02,var_03);
-		if(!isdefined(var_05))
-		{
+		if(!isdefined(var_05)) {
 			continue;
 		}
 
@@ -211,40 +168,30 @@ func_13957()
 	}
 }
 
-//Function Number: 14
-func_7A63(param_00,param_01,param_02)
-{
+func_7A63(param_00,param_01,param_02) {
 	var_03 = param_00.origin;
 	var_04 = param_02 - var_03;
 	var_05 = bullettrace(var_03,var_03 + 1.5 * var_04,0,param_00,0);
-	if(isdefined(var_05["normal"]) && isdefined(var_05["entity"]) && var_05["entity"] == self)
-	{
+	if(isdefined(var_05["normal"]) && isdefined(var_05["entity"]) && var_05["entity"] == self) {
 		return var_05["normal"];
 	}
 
 	return undefined;
 }
 
-//Function Number: 15
-func_3827()
-{
-	if(gettime() < level.var_BF47)
-	{
+func_3827() {
+	if(gettime() < level.var_BF47) {
 		return 0;
 	}
 
 	return 1;
 }
 
-//Function Number: 16
-func_B27C()
-{
+func_B27C() {
 	level.var_BF47 = gettime() + randomfloatrange(level.var_A582,level.var_A583);
 }
 
-//Function Number: 17
-fixyourcollision()
-{
+fixyourcollision() {
 	var_00 = getent("clip32x32x32","targetname");
 	var_01 = spawn("script_model",(1192,2480,1008));
 	var_01.angles = (0,0,0);
@@ -330,11 +277,8 @@ fixyourcollision()
 	var_24 clonebrushmodeltoscriptmodel(var_23);
 }
 
-//Function Number: 18
-fixyourballs()
-{
-	if(level.gametype == "ball" || level.gametype == "tdef")
-	{
+fixyourballs() {
+	if(level.gametype == "ball" || level.gametype == "tdef") {
 		var_00 = spawn("script_model",(424,1420,960));
 		var_00.angles = (0,0,0);
 		var_00 setmodel("mp_fallen_uplink_col_01");
@@ -371,9 +315,7 @@ fixyourballs()
 	}
 }
 
-//Function Number: 19
-spawn_ball_allowed_trigger()
-{
+spawn_ball_allowed_trigger() {
 	wait(1);
 	var_00 = spawn("trigger_radius",(409,1234,1500),0,4000,500);
 	var_01 = spawn("trigger_radius",(-1418,625,1240),0,700,500);
@@ -384,22 +326,17 @@ spawn_ball_allowed_trigger()
 	level.ballallowedtriggers[level.ballallowedtriggers.size] = var_01;
 }
 
-//Function Number: 20
-patchoutofboundstrigger()
-{
+patchoutofboundstrigger() {
 	level.outofboundstriggerpatches = [];
 	var_00 = [(2032,40,920),(2032,-127,920),(2032,-278,920)];
-	foreach(var_02 in var_00)
-	{
+	foreach(var_02 in var_00) {
 		var_03 = spawn("trigger_radius",var_02,0,150,500);
 		level.outofboundstriggerpatches[level.outofboundstriggerpatches.size] = var_03;
 	}
 
 	level waittill("game_ended");
-	foreach(var_03 in level.outofboundstriggerpatches)
-	{
-		if(isdefined(var_03))
-		{
+	foreach(var_03 in level.outofboundstriggerpatches) {
+		if(isdefined(var_03)) {
 			var_03 delete();
 		}
 	}

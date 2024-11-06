@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\cp\maps\cp_disco\rat_king_fight.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 155
- * Decompile Time: 8126 ms
- * Timestamp: 10/27/2023 12:04:43 AM
-*******************************************************************/
+/***************************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\cp\maps\cp_disco\rat_king_fight.gsc
+***************************************************************/
 
-//Function Number: 1
-rkfightinit()
-{
+rkfightinit() {
 	scripts\engine\utility::flag_init("rk_fight_ended");
 	scripts\engine\utility::flag_init("rk_fight_started");
 	scripts\engine\utility::flag_init("eye_active");
@@ -42,15 +36,11 @@ rkfightinit()
 	level.rkfight_karate_zombie_model_list = ["karatemaster_male_3_white_rat_head","karatemaster_male_3_black_rat_head","karatemaster_male_3_brown_rat_head"];
 }
 
-//Function Number: 2
-setuprkcrates()
-{
+setuprkcrates() {
 	var_00 = scripts\engine\utility::getstructarray("rk_perk_crate","script_noteworthy");
-	foreach(var_02 in var_00)
-	{
+	foreach(var_02 in var_00) {
 		var_03 = spawn("script_model",var_02.origin);
-		if(isdefined(var_02.angles))
-		{
+		if(isdefined(var_02.angles)) {
 			var_03.angles = var_02.angles;
 		}
 
@@ -61,26 +51,21 @@ setuprkcrates()
 	}
 }
 
-//Function Number: 3
-cratewaitfordamage(param_00)
-{
+cratewaitfordamage(param_00) {
 	level endon("game_ended");
 	level endon("rk_fight_completed");
 	scripts\engine\utility::flag_wait("interactions_initialized");
 	scripts\engine\utility::flag_wait("rk_fight_started");
-	if(!isdefined(level.rat_king_bounce_structs))
-	{
+	if(!isdefined(level.rat_king_bounce_structs)) {
 		level.rat_king_bounce_structs = [];
 	}
 
 	level.rat_king_bounce_structs[level.rat_king_bounce_structs.size] = param_00;
 	param_00.model.health = 99999999;
 	param_00.model setcandamage(1);
-	for(;;)
-	{
+	for(;;) {
 		param_00.model waittill("damage",var_01,var_02,var_01,var_01,var_01,var_01,var_01,var_01,var_01,var_03);
-		if(isdefined(var_02) && (isdefined(level.rat_king) && var_02 == level.rat_king) || isdefined(var_03) && isplayer(var_02) && scripts\cp\maps\cp_disco\kung_fu_mode::iskungfuweapon(var_03))
-		{
+		if(isdefined(var_02) && (isdefined(level.rat_king) && var_02 == level.rat_king) || isdefined(var_03) && isplayer(var_02) && scripts\cp\maps\cp_disco\kung_fu_mode::iskungfuweapon(var_03)) {
 			param_00 thread breakcrateandwait(param_00);
 			break;
 		}
@@ -91,9 +76,7 @@ cratewaitfordamage(param_00)
 	}
 }
 
-//Function Number: 4
-breakcrateandwait(param_00)
-{
+breakcrateandwait(param_00) {
 	level endon("game_ended");
 	param_00.model setscriptablepartstate("crate","broken");
 	param_00.model setcandamage(0);
@@ -101,10 +84,8 @@ breakcrateandwait(param_00)
 	level waittill("rk_fight_completed");
 	param_00.model setscriptablepartstate("crate","active");
 	var_01 = scripts\engine\utility::getstructarray("perk_candy_box","script_noteworthy");
-	foreach(var_03 in var_01)
-	{
-		if(isdefined(var_03.model))
-		{
+	foreach(var_03 in var_01) {
+		if(isdefined(var_03.model)) {
 			var_03.model delete();
 		}
 
@@ -112,12 +93,9 @@ breakcrateandwait(param_00)
 	}
 }
 
-//Function Number: 5
-init_rk_candy_interactions()
-{
+init_rk_candy_interactions() {
 	var_00 = scripts\engine\utility::getstructarray("perk_candy_box","script_noteworthy");
-	foreach(var_02 in var_00)
-	{
+	foreach(var_02 in var_00) {
 		var_03 = scripts\engine\utility::getstruct(var_02.target,"targetname");
 		var_03.parent_struct = var_02;
 		var_02.fx_struct = var_03;
@@ -125,23 +103,18 @@ init_rk_candy_interactions()
 	}
 }
 
-//Function Number: 6
-activateparentinteraction(param_00)
-{
+activateparentinteraction(param_00) {
 	var_01 = param_00.parent_struct;
 	scripts\cp\cp_interaction::add_to_current_interaction_list(var_01);
 }
 
-//Function Number: 7
-throwperkboxes(param_00)
-{
+throwperkboxes(param_00) {
 	var_01 = param_00.fx_struct;
 	var_02 = scripts\engine\utility::array_randomize_objects(level.available_crate_perks);
 	var_03 = scripts\engine\utility::random(var_02);
 	level.available_crate_perks = scripts\engine\utility::array_remove(level.available_crate_perks,var_03);
 	var_04 = spawn("script_model",var_01.origin);
-	if(isdefined(var_01.angles))
-	{
+	if(isdefined(var_01.angles)) {
 		var_04.angles = var_01.angles;
 	}
 
@@ -149,8 +122,7 @@ throwperkboxes(param_00)
 	var_01.model = var_04;
 	var_01.parent_struct.perk = var_03;
 	activateparentinteraction(var_01);
-	switch(var_03)
-	{
+	switch(var_03) {
 		case "perk_machine_fwoosh":
 			var_04 setscriptablepartstate("effects","fwoosh");
 			break;
@@ -197,9 +169,7 @@ throwperkboxes(param_00)
 	}
 }
 
-//Function Number: 8
-addperkinteraction(param_00,param_01,param_02)
-{
+addperkinteraction(param_00,param_01,param_02) {
 	param_00.script_noteworthy = "perk_candy_box";
 	param_00.perk = param_02;
 	param_00.script_parameters = "default";
@@ -210,21 +180,16 @@ addperkinteraction(param_00,param_01,param_02)
 	scripts\cp\cp_interaction::add_to_current_interaction_list(param_00);
 }
 
-//Function Number: 9
-perkbox_usefunc(param_00,param_01)
-{
-	if(!isdefined(param_00.perk))
-	{
+perkbox_usefunc(param_00,param_01) {
+	if(!isdefined(param_00.perk)) {
 		return;
 	}
 
-	if(isdefined(param_01.zombies_perks) && param_01.zombies_perks.size > 4)
-	{
+	if(isdefined(param_01.zombies_perks) && param_01.zombies_perks.size > 4) {
 		return;
 	}
 
-	if(param_01 scripts\cp\utility::has_zombie_perk(param_00.perk))
-	{
+	if(param_01 scripts\cp\utility::has_zombie_perk(param_00.perk)) {
 		return;
 	}
 
@@ -232,8 +197,7 @@ perkbox_usefunc(param_00,param_01)
 	scripts\cp\cp_interaction::remove_from_current_interaction_list_for_player(param_00,param_01);
 	param_00.fx_struct.model hidefromplayer(param_01);
 	param_01 playlocalsound("part_pickup");
-	if(!isdefined(param_00.respawn_flag))
-	{
+	if(!isdefined(param_00.respawn_flag)) {
 		param_00.respawn_flag = 1;
 		level.num_crates_broken++;
 		var_02 = level.num_crates_broken * 0.05;
@@ -242,9 +206,7 @@ perkbox_usefunc(param_00,param_01)
 	}
 }
 
-//Function Number: 10
-restockperkafternextrelic(param_00,param_01,param_02)
-{
+restockperkafternextrelic(param_00,param_01,param_02) {
 	level endon("game_ended");
 	level endon("rk_fight_completed");
 	level scripts\engine\utility::waittill_any_timeout_1(180,"relic_quest_completed");
@@ -256,8 +218,7 @@ restockperkafternextrelic(param_00,param_01,param_02)
 	var_05 = scripts\engine\utility::random(var_04);
 	param_00.perk = var_05;
 	level.available_crate_perks = scripts\engine\utility::array_remove(level.available_crate_perks,var_05);
-	switch(var_05)
-	{
+	switch(var_05) {
 		case "perk_machine_fwoosh":
 			var_03 setscriptablepartstate("effects","fwoosh");
 			break;
@@ -303,22 +264,17 @@ restockperkafternextrelic(param_00,param_01,param_02)
 			break;
 	}
 
-	foreach(var_07 in level.players)
-	{
+	foreach(var_07 in level.players) {
 		scripts\cp\cp_interaction::add_to_current_interaction_list_for_player(param_00,var_07);
 		param_00.fx_struct.model showtoplayer(var_07);
 	}
 }
 
-//Function Number: 11
-perkbox_hintfunc(param_00,param_01)
-{
+perkbox_hintfunc(param_00,param_01) {
 	return "";
 }
 
-//Function Number: 12
-setdefaultpgtoggles()
-{
+setdefaultpgtoggles() {
 	level.pam_grier_toggles = [];
 	level.pam_grier_toggles["chillin"] = 1;
 	level.pam_grier_toggles["revive_player"] = 1;
@@ -328,29 +284,22 @@ setdefaultpgtoggles()
 	level.pam_grier_toggles["wait"] = 1;
 }
 
-//Function Number: 13
-restorerkstagetoggles()
-{
-	if(level.players.size == 1)
-	{
-		if(isdefined(level.solorkstagetoggles))
-		{
-			[[ level.solorkstagetoggles ]]();
+restorerkstagetoggles() {
+	if(level.players.size == 1) {
+		if(isdefined(level.solorkstagetoggles)) {
+			[[level.solorkstagetoggles]]();
 			return;
 		}
 
 		return;
 	}
 
-	if(isdefined(level.rkstagetoggles))
-	{
-		[[ level.rkstagetoggles ]]();
+	if(isdefined(level.rkstagetoggles)) {
+		[[level.rkstagetoggles]]();
 	}
 }
 
-//Function Number: 14
-setdefaultrktoggles()
-{
+setdefaultrktoggles() {
 	level.rat_king_toggles = [];
 	level.rat_king_toggles["staff_stomp"] = 0;
 	level.rat_king_toggles["melee_attack"] = 0;
@@ -363,9 +312,7 @@ setdefaultrktoggles()
 	level.rat_king_toggles["attack_zombies"] = 0;
 }
 
-//Function Number: 15
-setdefaultattackpriorities()
-{
+setdefaultattackpriorities() {
 	level.rat_king_attack_priorities = [];
 	level.rat_king_attack_priorities[level.rat_king_attack_priorities.size] = "block";
 	level.rat_king_attack_priorities[level.rat_king_attack_priorities.size] = "melee_attack";
@@ -378,9 +325,7 @@ setdefaultattackpriorities()
 	level.rat_king_attack_priorities[level.rat_king_attack_priorities.size] = "attack_zombies";
 }
 
-//Function Number: 16
-start_rk_fight()
-{
+start_rk_fight() {
 	level.loot_time_out = 99999;
 	level notify("force_spawn_wave_done");
 	scripts\engine\utility::flag_set("rk_fight_started");
@@ -397,28 +342,23 @@ start_rk_fight()
 	var_00 = scripts\engine\utility::getstructarray("rk_player_spawns","script_noteworthy");
 	var_00 = scripts\engine\utility::array_randomize_objects(var_00);
 	level thread setuprkfightpas();
-	foreach(var_04, var_02 in level.players)
-	{
-		if(scripts\engine\utility::istrue(var_02.start_breaking_clock))
-		{
+	foreach(var_04, var_02 in level.players) {
+		if(scripts\engine\utility::istrue(var_02.start_breaking_clock)) {
 			var_02.start_breaking_clock = 0;
 			var_02 notify("rat_king_fight_started");
 		}
 
-		if(scripts\engine\utility::istrue(var_02.inlaststand) || scripts\engine\utility::istrue(var_02.in_afterlife_arcade))
-		{
+		if(scripts\engine\utility::istrue(var_02.inlaststand) || scripts\engine\utility::istrue(var_02.in_afterlife_arcade)) {
 			scripts\cp\cp_laststand::clear_last_stand_timer(var_02);
 			var_02 notify("revive_success");
-			if(isdefined(var_02.reviveent))
-			{
+			if(isdefined(var_02.reviveent)) {
 				var_02.reviveent notify("revive_success");
 			}
 		}
 
 		var_03 = var_00[var_04];
 		var_02 thread setupplayerrkstart(var_02,var_03);
-		if(var_02.vo_prefix == "p5_")
-		{
+		if(var_02.vo_prefix == "p5_") {
 			var_02 thread scripts\cp\cp_vo::try_to_play_vo("ratking_finalbattle","disco_comment_vo");
 		}
 	}
@@ -431,8 +371,7 @@ start_rk_fight()
 	level scripts\cp\zombies\cp_disco_spawning::disablespawnvolumes(level.rk_center_arena_struct.origin);
 	disable_water_spawners();
 	enablerkspawners();
-	if(isdefined(level.pam_grier))
-	{
+	if(isdefined(level.pam_grier)) {
 		level.pam_grier suicide();
 	}
 
@@ -449,39 +388,27 @@ start_rk_fight()
 	runrkfight();
 }
 
-//Function Number: 17
-disable_water_spawners()
-{
-	if(isdefined(level.rat_king_lair_spawners))
-	{
-		foreach(var_01 in level.rat_king_lair_spawners)
-		{
+disable_water_spawners() {
+	if(isdefined(level.rat_king_lair_spawners)) {
+		foreach(var_01 in level.rat_king_lair_spawners) {
 			var_01 scripts\cp\zombies\zombies_spawning::make_spawner_inactive();
 		}
 	}
 }
 
-//Function Number: 18
-enable_water_spawners()
-{
-	if(isdefined(level.rat_king_lair_spawners))
-	{
-		foreach(var_01 in level.rat_king_lair_spawners)
-		{
+enable_water_spawners() {
+	if(isdefined(level.rat_king_lair_spawners)) {
+		foreach(var_01 in level.rat_king_lair_spawners) {
 			var_01 scripts\cp\zombies\zombies_spawning::make_spawner_active();
 		}
 	}
 }
 
-//Function Number: 19
-spawnpamgrier()
-{
+spawnpamgrier() {
 	level endon("game_ended");
-	for(;;)
-	{
+	for(;;) {
 		level.pam_grier = scripts\mp\mp_agent::spawnnewagent("pamgrier","allies",(-458,2144,400),(0,207,0));
-		if(isdefined(level.pam_grier))
-		{
+		if(isdefined(level.pam_grier)) {
 			break;
 		}
 
@@ -489,27 +416,21 @@ spawnpamgrier()
 	}
 }
 
-//Function Number: 20
-setuprkfightpas()
-{
+setuprkfightpas() {
 	level endon("game_ended");
 	scripts\engine\utility::flag_wait("enableRKArenaPas");
 	level scripts\cp\maps\cp_disco\cp_disco::enableratkingpas();
 }
 
-//Function Number: 21
-setupplayerrkstart(param_00,param_01)
-{
+setupplayerrkstart(param_00,param_01) {
 	param_00 endon("disconnect");
-	if(param_00 scripts\cp\utility::isteleportenabled())
-	{
+	if(param_00 scripts\cp\utility::isteleportenabled()) {
 		param_00 scripts\cp\utility::allow_player_teleport(0);
 	}
 
 	param_00 thread rkintroblackscreen();
 	wait(1.25);
-	if(!scripts\cp\zombies\direct_boss_fight::should_directly_go_to_boss_fight())
-	{
+	if(!scripts\cp\zombies\direct_boss_fight::should_directly_go_to_boss_fight()) {
 		param_00 setorigin(param_01.origin);
 		param_00 setplayerangles(param_01.angles);
 	}
@@ -520,22 +441,17 @@ setupplayerrkstart(param_00,param_01)
 	param_00 playerlinkto(param_00.anchor,"tag_origin",0,30,30,10,10,0);
 }
 
-//Function Number: 22
-rkintroresumeprogression(param_00)
-{
+rkintroresumeprogression(param_00) {
 	level.pause_nag_vo = 0;
 	resume_spawn_wave();
 }
 
-//Function Number: 23
-rkintroblackscreen()
-{
+rkintroblackscreen() {
 	level endon("game_ended");
 	self endon("disconnect");
 	scripts\cp\utility::freezecontrolswrapper(1);
 	self getradiuspathsighttestnodes();
-	if(scripts\cp\zombies\direct_boss_fight::should_directly_go_to_boss_fight())
-	{
+	if(scripts\cp\zombies\direct_boss_fight::should_directly_go_to_boss_fight()) {
 		wait(4);
 		level notify("rk_intro_done");
 		wait(5);
@@ -566,8 +482,7 @@ rkintroblackscreen()
 		self setclientomnvar("ui_hide_hud",0);
 	}
 
-	if(isdefined(self.anchor))
-	{
+	if(isdefined(self.anchor)) {
 		self.anchor delete();
 	}
 
@@ -577,13 +492,10 @@ rkintroblackscreen()
 	scripts\cp\utility::freezecontrolswrapper(0);
 }
 
-//Function Number: 24
-outroblackscreen()
-{
+outroblackscreen() {
 	level endon("game_ended");
 	self endon("disconnect");
-	if(scripts\cp\zombies\direct_boss_fight::should_directly_go_to_boss_fight())
-	{
+	if(scripts\cp\zombies\direct_boss_fight::should_directly_go_to_boss_fight()) {
 		return;
 	}
 
@@ -620,40 +532,30 @@ outroblackscreen()
 	scripts\cp\utility::freezecontrolswrapper(0);
 }
 
-//Function Number: 25
-rkusegourdfunc(param_00)
-{
+rkusegourdfunc(param_00) {
 	thread scripts\cp\maps\cp_disco\kung_fu_mode::cooldown_struct(undefined,param_00);
 }
 
-//Function Number: 26
-respawninrkarena(param_00)
-{
+respawninrkarena(param_00) {
 	var_01 = scripts\engine\utility::getstructarray("rkRespawnLoc","script_noteworthy");
 	var_02 = scripts\cp\gametypes\zombie::get_respawn_loc_rated(level.players,var_01);
 	return var_02;
 }
 
-//Function Number: 27
-setuplnfinteractions()
-{
+setuplnfinteractions() {
 	var_00 = scripts\engine\utility::getstructarray("lost_and_found","script_noteworthy");
 	var_01 = undefined;
-	foreach(var_03 in var_00)
-	{
+	foreach(var_03 in var_00) {
 		scripts\cp\cp_interaction::remove_from_current_interaction_list(var_03);
-		if(isdefined(var_03.name) && var_03.name == "rk_fight")
-		{
+		if(isdefined(var_03.name) && var_03.name == "rk_fight") {
 			scripts\cp\cp_interaction::add_to_current_interaction_list(var_03);
 			level.rk_lostnfound show();
 			var_01 = var_03;
 		}
 	}
 
-	foreach(var_06 in level.players)
-	{
-		if(!isdefined(var_06.lost_and_found_ent))
-		{
+	foreach(var_06 in level.players) {
+		if(!isdefined(var_06.lost_and_found_ent)) {
 			continue;
 		}
 
@@ -661,16 +563,12 @@ setuplnfinteractions()
 	}
 }
 
-//Function Number: 28
-restorelnfinteractions()
-{
+restorelnfinteractions() {
 	var_00 = scripts\engine\utility::getstructarray("lost_and_found","script_noteworthy");
 	var_01 = undefined;
-	foreach(var_03 in var_00)
-	{
+	foreach(var_03 in var_00) {
 		scripts\cp\cp_interaction::add_to_current_interaction_list(var_03);
-		if(isdefined(var_03.name) && var_03.name == "rk_fight")
-		{
+		if(isdefined(var_03.name) && var_03.name == "rk_fight") {
 			scripts\cp\cp_interaction::remove_from_current_interaction_list(var_03);
 			continue;
 		}
@@ -678,10 +576,8 @@ restorelnfinteractions()
 		var_01 = var_03;
 	}
 
-	foreach(var_06 in level.players)
-	{
-		if(!isdefined(var_06.lost_and_found_ent))
-		{
+	foreach(var_06 in level.players) {
+		if(!isdefined(var_06.lost_and_found_ent)) {
 			continue;
 		}
 
@@ -691,27 +587,20 @@ restorelnfinteractions()
 	level.rk_lostnfound hide();
 }
 
-//Function Number: 29
-respawngourds()
-{
+respawngourds() {
 	level endon("game_ended");
 	level.rat_king endon("death");
-	for(;;)
-	{
-		foreach(var_01 in level.players)
-		{
-			if(!isdefined(var_01.kung_fu_progression.active_discipline))
-			{
+	for(;;) {
+		foreach(var_01 in level.players) {
+			if(!isdefined(var_01.kung_fu_progression.active_discipline)) {
 				continue;
 			}
 
-			if(scripts\engine\utility::istrue(var_01.has_gourd))
-			{
+			if(scripts\engine\utility::istrue(var_01.has_gourd)) {
 				continue;
 			}
 
-			if(scripts\engine\utility::istrue(var_01.kung_fu_mode))
-			{
+			if(scripts\engine\utility::istrue(var_01.kung_fu_mode)) {
 				continue;
 			}
 
@@ -725,45 +614,33 @@ respawngourds()
 	}
 }
 
-//Function Number: 30
-try_drop_max_ammo()
-{
-	if(!scripts\engine\utility::flag("max_ammo_active"))
-	{
+try_drop_max_ammo() {
+	if(!scripts\engine\utility::flag("max_ammo_active")) {
 		scripts\engine\utility::flag_set("max_ammo_active");
-		level thread [[ level.drop_max_ammo_func ]]((-892,1814,238),undefined,"ammo_max");
+		level thread [[level.drop_max_ammo_func]]((-892,1814,238),undefined,"ammo_max");
 	}
 }
 
-//Function Number: 31
-max_ammo_manager()
-{
+max_ammo_manager() {
 	level thread max_ammo_pick_up_listener();
 }
 
-//Function Number: 32
-max_ammo_pick_up_listener()
-{
+max_ammo_pick_up_listener() {
 	level endon("game_ended");
 	level endon("rk_fight_completed");
-	for(;;)
-	{
+	for(;;) {
 		level waittill("pick_up_max_ammo");
 		scripts\engine\utility::flag_clear("max_ammo_active");
 	}
 }
 
-//Function Number: 33
-setuprkarenabarriers()
-{
+setuprkarenabarriers() {
 	level.rk_barriers = [];
-	foreach(var_01 in scripts\engine\utility::getstructarray("rk_fx_loc","targetname"))
-	{
+	foreach(var_01 in scripts\engine\utility::getstructarray("rk_fx_loc","targetname")) {
 		var_02 = spawn("script_model",var_01.origin);
 		var_02.angles = var_01.angles;
 		var_02 setmodel("temp_dbl_door_barrier");
-		if(level.rk_barriers.size == 0)
-		{
+		if(level.rk_barriers.size == 0) {
 			var_02 playloopsound("rk_tunnel_blocker_left_lp");
 		}
 		else
@@ -775,38 +652,27 @@ setuprkarenabarriers()
 	}
 }
 
-//Function Number: 34
-runrkfight()
-{
+runrkfight() {
 	level endon("game_ended");
 	level endon("rk_fight_completed");
-	for(;;)
-	{
-		if(isdefined(level.rk_fight_stage_func[level.rat_king_stage]))
-		{
+	for(;;) {
+		if(isdefined(level.rk_fight_stage_func[level.rat_king_stage])) {
 			runcurrentrkfightstage();
 		}
 	}
 }
 
-//Function Number: 35
-increaserkstage()
-{
-	if(level.rat_king_stage < level.max_rat_king_stage)
-	{
+increaserkstage() {
+	if(level.rat_king_stage < level.max_rat_king_stage) {
 		level.rat_king_stage++;
 	}
 }
 
-//Function Number: 36
-runcurrentrkfightstage()
-{
-	[[ level.rk_fight_stage_func[level.rat_king_stage] ]]();
+runcurrentrkfightstage() {
+	[[level.rk_fight_stage_func[level.rat_king_stage]]]();
 }
 
-//Function Number: 37
-runrkstage1()
-{
+runrkstage1() {
 	setrkhealth();
 	setdefaultrktoggles();
 	setdefaultpgtoggles();
@@ -816,8 +682,7 @@ runrkstage1()
 	scripts\cp\zombies\cp_disco_spawning::setwavenumoverride(30);
 	scripts\cp\zombies\cp_disco_spawning::pausenormalwavespawning(0);
 	scripts\cp\zombies\cp_disco_spawning::setmaxstaticspawns(8,16,24);
-	if(var_00)
-	{
+	if(var_00) {
 		scripts\cp\zombies\cp_disco_spawning::setspawndelayoverride(0.75);
 	}
 	else
@@ -830,9 +695,7 @@ runrkstage1()
 	increaserkstage();
 }
 
-//Function Number: 38
-stage1attacksettings()
-{
+stage1attacksettings() {
 	togglerkability("melee_attack",1);
 	togglerkability("staff_stomp",1);
 	togglerkability("summon",0);
@@ -849,9 +712,7 @@ stage1attacksettings()
 	togglepgability("wait",1);
 }
 
-//Function Number: 39
-runrkstage2()
-{
+runrkstage2() {
 	setrkhealth(0.75);
 	level thread waitforrkoutofplayspace();
 	level thread scripts\cp\zombies\cp_disco_spawning::setzombiemovespeed(["sprint"]);
@@ -863,9 +724,7 @@ runrkstage2()
 	increaserkstage();
 }
 
-//Function Number: 40
-stage2attacksettings()
-{
+stage2attacksettings() {
 	forcerkteleport();
 	togglepgability("chillin",1);
 	togglepgability("revive_player",0);
@@ -875,53 +734,42 @@ stage2attacksettings()
 	togglepgability("wait",1);
 }
 
-//Function Number: 41
-activaterelics()
-{
+activaterelics() {
 	scripts\engine\utility::flag_set("rk_fight_relic_stage");
 	var_00 = scripts\engine\utility::getstructarray("rk_relic_pos","script_noteworthy");
-	foreach(var_02 in var_00)
-	{
+	foreach(var_02 in var_00) {
 		var_03 = spawnfx(level._effect["relic_active"],var_02.origin);
-		if(isdefined(var_02.model))
-		{
+		if(isdefined(var_02.model)) {
 			var_02.model thread startactiveloop(var_02,var_03);
 		}
 	}
 }
 
-//Function Number: 42
-startactiveloop(param_00,param_01)
-{
+startactiveloop(param_00,param_01) {
 	level endon("game_ended");
 	level endon("relic_quest_completed");
 	param_00 endon("relic_deactivated");
 	self endon("death");
 	self setscriptablepartstate("rk_models","active_" + param_00.relic);
-	if(isdefined(param_00.fx))
-	{
+	if(isdefined(param_00.fx)) {
 		param_00.fx delete();
 	}
 
 	param_00.fx = param_01;
 	triggerfx(param_01);
-	if(param_00.relic == "heart")
-	{
+	if(param_00.relic == "heart") {
 		self playloopsound("rk_relic_heart_lp");
 	}
 
-	if(param_00.relic == "eye")
-	{
+	if(param_00.relic == "eye") {
 		self playloopsound("rk_relic_eye_lp");
 	}
 
-	if(param_00.relic == "brain")
-	{
+	if(param_00.relic == "brain") {
 		self playloopsound("rk_relic_brain_lp");
 	}
 
-	for(;;)
-	{
+	for(;;) {
 		var_02 = randomfloatrange(2,4);
 		self moveto(self.origin + (0,0,32),var_02);
 		wait(var_02);
@@ -930,14 +778,10 @@ startactiveloop(param_00,param_01)
 	}
 }
 
-//Function Number: 43
-deactivaterelics()
-{
+deactivaterelics() {
 	var_00 = scripts\engine\utility::getstructarray("rk_relic_pos","script_noteworthy");
-	foreach(var_02 in var_00)
-	{
-		if(isdefined(var_02.model))
-		{
+	foreach(var_02 in var_00) {
+		if(isdefined(var_02.model)) {
 			var_02 notify("relic_deactivated");
 			var_02.model stoploopsound();
 			var_02 thread moverelictoog(var_02);
@@ -945,20 +789,15 @@ deactivaterelics()
 	}
 }
 
-//Function Number: 44
-moverelictoog(param_00)
-{
-	if(isdefined(param_00.model))
-	{
+moverelictoog(param_00) {
+	if(isdefined(param_00.model)) {
 		var_01 = spawnfx(level._effect["relic_idle"],param_00.origin);
-		if(isdefined(param_00.ogpos))
-		{
+		if(isdefined(param_00.ogpos)) {
 			param_00.model moveto(param_00.ogpos,0.5);
 		}
 
 		wait(0.5);
-		if(isdefined(param_00.fx))
-		{
+		if(isdefined(param_00.fx)) {
 			param_00.fx delete();
 		}
 
@@ -967,9 +806,7 @@ moverelictoog(param_00)
 	}
 }
 
-//Function Number: 45
-runrkstage3()
-{
+runrkstage3() {
 	setrkhealth(0.75);
 	level thread scripts\cp\zombies\cp_disco_spawning::setzombiemovespeed(["run"]);
 	scripts\cp\zombies\cp_disco_spawning::setwavenumoverride(30);
@@ -978,8 +815,7 @@ runrkstage3()
 	level.rk_solo_tuning_override = ::stage3solotunedata;
 	var_00 = scripts\cp\utility::isplayingsolo() || scripts\engine\utility::istrue(level.only_one_player);
 	stage3attacksettings();
-	if(var_00)
-	{
+	if(var_00) {
 		stage3solotunedata(level.agenttunedata["ratking"]);
 	}
 	else
@@ -991,9 +827,7 @@ runrkstage3()
 	increaserkstage();
 }
 
-//Function Number: 46
-stage3tunedata(param_00)
-{
+stage3tunedata(param_00) {
 	param_00.min_summon_interval = 10000;
 	param_00.max_summon_interval = 20000;
 	param_00.summon_chance = 100;
@@ -1028,9 +862,7 @@ stage3tunedata(param_00)
 	param_00.teleport_min_dist_to_enemy_to_teleport_sq = -25536;
 }
 
-//Function Number: 47
-stage3solotunedata(param_00)
-{
+stage3solotunedata(param_00) {
 	param_00.min_summon_interval = 8000;
 	param_00.max_summon_interval = 15000;
 	param_00.summon_chance = 100;
@@ -1067,9 +899,7 @@ stage3solotunedata(param_00)
 	param_00.teleport_min_dist_to_enemy_to_teleport_sq = -25536;
 }
 
-//Function Number: 48
-stage3attacksettings()
-{
+stage3attacksettings() {
 	togglerkability("melee_attack",1);
 	togglerkability("staff_stomp",1);
 	togglerkability("summon",1);
@@ -1090,9 +920,7 @@ stage3attacksettings()
 	level.rat_king_attack_priorities[level.rat_king_attack_priorities.size] = "attack_zombies";
 }
 
-//Function Number: 49
-runrkstage4(param_00)
-{
+runrkstage4(param_00) {
 	setrkhealth(0.5);
 	level thread waitforrkoutofplayspace();
 	level thread scripts\cp\zombies\cp_disco_spawning::setzombiemovespeed(["sprint"]);
@@ -1111,9 +939,7 @@ runrkstage4(param_00)
 	increaserkstage();
 }
 
-//Function Number: 50
-setstage4attackpriorities()
-{
+setstage4attackpriorities() {
 	level.rat_king_attack_priorities = [];
 	level.rat_king_attack_priorities[level.rat_king_attack_priorities.size] = "block";
 	level.rat_king_attack_priorities[level.rat_king_attack_priorities.size] = "melee_attack";
@@ -1126,9 +952,7 @@ setstage4attackpriorities()
 	level.rat_king_attack_priorities[level.rat_king_attack_priorities.size] = "attack_zombies";
 }
 
-//Function Number: 51
-runrkstage5(param_00)
-{
+runrkstage5(param_00) {
 	setrkhealth(0.5);
 	level thread scripts\cp\zombies\cp_disco_spawning::setzombiemovespeed(["sprint"]);
 	scripts\cp\zombies\cp_disco_spawning::setwavenumoverride(30);
@@ -1146,9 +970,7 @@ runrkstage5(param_00)
 	increaserkstage();
 }
 
-//Function Number: 52
-setstage5attackpriorities()
-{
+setstage5attackpriorities() {
 	level.rat_king_attack_priorities = [];
 	level.rat_king_attack_priorities[level.rat_king_attack_priorities.size] = "block";
 	level.rat_king_attack_priorities[level.rat_king_attack_priorities.size] = "melee_attack";
@@ -1161,9 +983,7 @@ setstage5attackpriorities()
 	level.rat_king_attack_priorities[level.rat_king_attack_priorities.size] = "attack_zombies";
 }
 
-//Function Number: 53
-runrkstage6(param_00)
-{
+runrkstage6(param_00) {
 	setrkhealth(0.25);
 	level thread waitforrkoutofplayspace();
 	level thread scripts\cp\zombies\cp_disco_spawning::setzombiemovespeed(["sprint"]);
@@ -1176,8 +996,7 @@ runrkstage6(param_00)
 	togglepgability("return_home",1);
 	togglepgability("wait",1);
 	scripts\engine\utility::flag_set("rk_fight_relic_stage");
-	if(scripts\cp\utility::isplayingsolo() || scripts\engine\utility::istrue(level.only_one_player))
-	{
+	if(scripts\cp\utility::isplayingsolo() || scripts\engine\utility::istrue(level.only_one_player)) {
 		scripts\cp\zombies\cp_disco_spawning::setspawndelayoverride(0.75);
 	}
 	else
@@ -1191,16 +1010,13 @@ runrkstage6(param_00)
 	increaserkstage();
 }
 
-//Function Number: 54
-runrkstage7(param_00)
-{
+runrkstage7(param_00) {
 	setrkhealth(0.25);
 	level thread scripts\cp\zombies\cp_disco_spawning::setzombiemovespeed(["slow_walk","walk","sprint","sprint","sprint"]);
 	scripts\cp\zombies\cp_disco_spawning::pausenormalwavespawning(0);
 	scripts\cp\zombies\cp_disco_spawning::setwavenumoverride(30);
 	var_01 = scripts\cp\utility::isplayingsolo() || scripts\engine\utility::istrue(level.only_one_player);
-	if(var_01)
-	{
+	if(var_01) {
 		level.solorkstagetoggles = ::stage7attacktoggles;
 	}
 	else
@@ -1213,9 +1029,7 @@ runrkstage7(param_00)
 	watchforstage7complete();
 }
 
-//Function Number: 55
-stage7attacktoggles()
-{
+stage7attacktoggles() {
 	togglerkability("melee_attack",1);
 	togglerkability("staff_stomp",1);
 	togglerkability("summon",1);
@@ -1226,9 +1040,7 @@ stage7attacktoggles()
 	togglerkability("teleport",1);
 }
 
-//Function Number: 56
-setstage7attackpriorities()
-{
+setstage7attackpriorities() {
 	level.rat_king_attack_priorities = [];
 	level.rat_king_attack_priorities[level.rat_king_attack_priorities.size] = "block";
 	level.rat_king_attack_priorities[level.rat_king_attack_priorities.size] = "melee_attack";
@@ -1241,29 +1053,23 @@ setstage7attackpriorities()
 	level.rat_king_attack_priorities[level.rat_king_attack_priorities.size] = "attack_zombies";
 }
 
-//Function Number: 57
-watchforstage7complete()
-{
+watchforstage7complete() {
 	level endon("game_ended");
 	level waittill("rat_king_killed",var_00);
-	if(scripts\cp\zombies\direct_boss_fight::should_directly_go_to_boss_fight())
-	{
+	if(scripts\cp\zombies\direct_boss_fight::should_directly_go_to_boss_fight()) {
 		level thread scripts\cp\zombies\direct_boss_fight::success_sequence(6,3);
 		level notify("rk_fight_completed");
 		return;
 	}
 
 	level.ratking_fight = undefined;
-	foreach(var_02 in level.players)
-	{
+	foreach(var_02 in level.players) {
 		var_02 thread scripts\cp\cp_merits::processmerit("mt_dlc2_rat_king");
-		if(var_02.vo_prefix == "p5_")
-		{
+		if(var_02.vo_prefix == "p5_") {
 			var_02 scripts/cp/zombies/achievement::update_achievement("EXTERMINATOR",1);
 		}
 
-		if(!var_02 scripts\cp\utility::isteleportenabled())
-		{
+		if(!var_02 scripts\cp\utility::isteleportenabled()) {
 			var_02 scripts\cp\utility::allow_player_teleport(1);
 		}
 
@@ -1279,8 +1085,7 @@ watchforstage7complete()
 	stop_spawn_wave();
 	level thread delay_resume_wave_progression();
 	clearexistingenemies();
-	if(isdefined(level.pam_grier))
-	{
+	if(isdefined(level.pam_grier)) {
 		level.pam_grier.nocorpse = 1;
 		level.pam_grier hide();
 		level.pam_grier suicide();
@@ -1296,49 +1101,36 @@ watchforstage7complete()
 	level notify("rk_fight_completed");
 }
 
-//Function Number: 58
-sound_duck_end_bink()
-{
-	foreach(var_01 in level.players)
-	{
+sound_duck_end_bink() {
+	foreach(var_01 in level.players) {
 		var_01 setsoundsubmix("bink_from_frontend",1);
 	}
 
 	wait(55);
-	foreach(var_01 in level.players)
-	{
+	foreach(var_01 in level.players) {
 		var_01 clearsoundsubmix();
 	}
 }
 
-//Function Number: 59
-spawnrkdeathmodel()
-{
+spawnrkdeathmodel() {
 	var_00 = spawn("script_model",level.rk_center_arena_struct.origin);
 	var_00.angles = level.rk_center_arena_struct.angles;
 }
 
-//Function Number: 60
-cleanuprelics()
-{
+cleanuprelics() {
 	var_00 = scripts\engine\utility::getstructarray("rk_relic_pos","script_noteworthy");
-	foreach(var_02 in var_00)
-	{
-		if(isdefined(var_02.model))
-		{
+	foreach(var_02 in var_00) {
+		if(isdefined(var_02.model)) {
 			var_02.model delete();
 		}
 
-		if(isdefined(var_02.fx))
-		{
+		if(isdefined(var_02.fx)) {
 			var_02.fx delete();
 		}
 	}
 }
 
-//Function Number: 61
-cleanuprkfightoverrides()
-{
+cleanuprkfightoverrides() {
 	scripts\cp\zombies\cp_disco_spawning::unsetwavenumoverride();
 	scripts\cp\zombies\cp_disco_spawning::unsetspawndelayoverride();
 	scripts\cp\zombies\cp_disco_spawning::unsetzombiemovespeed();
@@ -1350,9 +1142,7 @@ cleanuprkfightoverrides()
 	level.getspawnpoint = ::scripts\cp\cp_globallogic::defaultgetspawnpoint;
 }
 
-//Function Number: 62
-unsetpgsettings()
-{
+unsetpgsettings() {
 	togglepgability("chillin",1);
 	togglepgability("revive_player",0);
 	togglepgability("teleport_attack",0);
@@ -1361,24 +1151,18 @@ unsetpgsettings()
 	togglepgability("wait",1);
 }
 
-//Function Number: 63
-clearexistingenemies()
-{
+clearexistingenemies() {
 	var_00 = scripts\cp\cp_agent_utils::getaliveagentsofteam("axis");
-	foreach(var_02 in var_00)
-	{
+	foreach(var_02 in var_00) {
 		var_02.died_poorly = 1;
 		var_02.nocorpse = 1;
 		var_02 suicide();
 	}
 }
 
-//Function Number: 64
-drop_soul_key(param_00)
-{
+drop_soul_key(param_00) {
 	var_01 = param_00;
-	if(isdefined(level.soul_key_drop_pos))
-	{
+	if(isdefined(level.soul_key_drop_pos)) {
 		var_01 = level.soul_key_drop_pos;
 	}
 
@@ -1389,42 +1173,32 @@ drop_soul_key(param_00)
 	var_02 thread soul_key_pick_up_monitor(var_02);
 }
 
-//Function Number: 65
-check_drop_on_rafters(param_00)
-{
+check_drop_on_rafters(param_00) {
 	var_01 = (-873,1821,231);
-	if(param_00[2] > 283)
-	{
+	if(param_00[2] > 283) {
 		return var_01;
 	}
 
 	return param_00;
 }
 
-//Function Number: 66
-item_keep_rotating(param_00)
-{
+item_keep_rotating(param_00) {
 	param_00 endon("death");
 	var_01 = param_00.angles;
-	for(;;)
-	{
+	for(;;) {
 		param_00 rotateto(var_01 + (randomintrange(-40,40),randomintrange(-40,90),randomintrange(-40,90)),3);
 		wait(3);
 	}
 }
 
-//Function Number: 67
-soul_key_pick_up_monitor(param_00)
-{
+soul_key_pick_up_monitor(param_00) {
 	param_00 endon("death");
 	param_00 makeusable();
 	param_00 sethintstring(&"CP_DISCO_INTERACTIONS_PICKUP_SOUL_KEY");
-	for(;;)
-	{
+	for(;;) {
 		param_00 waittill("trigger",var_01);
 		scripts\cp\zombies\directors_cut::give_dc_player_extra_xp_for_carrying_newb();
-		if(isplayer(var_01))
-		{
+		if(isplayer(var_01)) {
 			var_01 playlocalsound("part_pickup");
 			param_00 setscriptablepartstate("actions","pickup");
 			setplayerdataforplayers();
@@ -1436,29 +1210,22 @@ soul_key_pick_up_monitor(param_00)
 	param_00 delete();
 }
 
-//Function Number: 68
-setplayerdataforplayers()
-{
-	foreach(var_01 in level.players)
-	{
+setplayerdataforplayers() {
+	foreach(var_01 in level.players) {
 		var_01 setplayerdata("cp","haveSoulKeys","any_soul_key",1);
 		var_01 setplayerdata("cp","haveSoulKeys","soul_key_3",1);
 		var_01 scripts/cp/zombies/achievement::update_achievement("PEST_CONTROL",1);
 	}
 }
 
-//Function Number: 69
-stop_spawn_wave()
-{
+stop_spawn_wave() {
 	level.current_enemy_deaths = 0;
 	scripts\engine\utility::flag_set("pause_wave_progression");
 	level.zombies_paused = 1;
 	level.dont_resume_wave_after_solo_afterlife = 1;
 }
 
-//Function Number: 70
-delay_resume_wave_progression()
-{
+delay_resume_wave_progression() {
 	level endon("game_ended");
 	wait(60);
 	level.pause_nag_vo = 0;
@@ -1468,26 +1235,20 @@ delay_resume_wave_progression()
 	level thread playratkingfightcompletevos();
 }
 
-//Function Number: 71
-resume_spawn_wave()
-{
+resume_spawn_wave() {
 	level.dont_resume_wave_after_solo_afterlife = undefined;
 	level.zombies_paused = 0;
 	scripts\engine\utility::flag_clear("pause_wave_progression");
 }
 
-//Function Number: 72
-init_rkrelic()
-{
+init_rkrelic() {
 	level.rk_center_arena_struct = scripts\engine\utility::getstruct("rk_arena_center","script_noteworthy");
 	level.rk_center_arena_struct scripts\cp\cp_interaction::remove_from_current_interaction_list(level.rk_center_arena_struct);
 	level.rk_center_arena_struct.custom_search_dist = 128;
-	if(!isdefined(level.rk_center_arena_struct.model))
-	{
+	if(!isdefined(level.rk_center_arena_struct.model)) {
 		var_00 = spawn("script_model",level.rk_center_arena_struct.origin + (0,0,4));
 		var_00 setmodel("tag_origin_rk_relics");
-		if(isdefined(level.rk_center_arena_struct.angles))
-		{
+		if(isdefined(level.rk_center_arena_struct.angles)) {
 			var_00.angles = level.rk_center_arena_struct.angles;
 		}
 
@@ -1496,33 +1257,27 @@ init_rkrelic()
 
 	var_01 = scripts\engine\utility::getstructarray("rk_relic_pos","script_noteworthy");
 	var_02 = scripts\engine\utility::array_randomize_objects(["heart","brain","eye"]);
-	foreach(var_05, var_04 in var_01)
-	{
+	foreach(var_05, var_04 in var_01) {
 		var_04.ogpos = var_04.origin + (0,0,4);
 		var_04.relic = var_02[var_05];
 		var_04 thread waitforrkfightstart(var_04);
 	}
 }
 
-//Function Number: 73
-waitforrkfightstart(param_00)
-{
+waitforrkfightstart(param_00) {
 	level endon("game_ended");
 	param_00 scripts\cp\cp_interaction::remove_from_current_interaction_list(param_00);
 	scripts\engine\utility::flag_wait("rk_fight_started");
-	if(!isdefined(param_00.model))
-	{
+	if(!isdefined(param_00.model)) {
 		var_01 = spawnfx(level._effect["relic_idle"],param_00.origin);
 		triggerfx(var_01);
-		if(isdefined(param_00.fx))
-		{
+		if(isdefined(param_00.fx)) {
 			param_00.fx delete();
 		}
 
 		param_00.fx = var_01;
 		var_02 = spawn("script_model",param_00.ogpos);
-		if(isdefined(param_00.angles))
-		{
+		if(isdefined(param_00.angles)) {
 			var_02.angles = param_00.angles;
 		}
 		else
@@ -1542,18 +1297,14 @@ waitforrkfightstart(param_00)
 	param_00 thread waitforrkrelicstage(param_00);
 }
 
-//Function Number: 74
-waitforrkrelicstage(param_00)
-{
+waitforrkrelicstage(param_00) {
 	level endon("game_ended");
-	for(;;)
-	{
+	for(;;) {
 		scripts\engine\utility::flag_wait("rk_fight_relic_stage");
 		disabledamageonratking();
 		level.rat_king.shouldbeonplatform = 1;
 		param_00 scripts\cp\cp_interaction::add_to_current_interaction_list(param_00);
-		if(param_00 waitforrelicselection(param_00))
-		{
+		if(param_00 waitforrelicselection(param_00)) {
 			break;
 		}
 	}
@@ -1561,13 +1312,10 @@ waitforrkrelicstage(param_00)
 	thread runrelicquest(param_00);
 }
 
-//Function Number: 75
-waitforrelicselection(param_00)
-{
+waitforrelicselection(param_00) {
 	level endon("game_ended");
 	level waittill("relic_selected",var_01);
-	if(param_00 != var_01)
-	{
+	if(param_00 != var_01) {
 		param_00 scripts\cp\cp_interaction::remove_from_current_interaction_list(param_00);
 		return 0;
 	}
@@ -1577,12 +1325,9 @@ waitforrelicselection(param_00)
 	return 1;
 }
 
-//Function Number: 76
-runrelicquest(param_00)
-{
+runrelicquest(param_00) {
 	level endon("game_ended");
-	switch(param_00.relic)
-	{
+	switch(param_00.relic) {
 		case "heart":
 			thread runheartrelicquest(param_00);
 			break;
@@ -1597,9 +1342,7 @@ runrelicquest(param_00)
 	}
 }
 
-//Function Number: 77
-runheartrelicquest(param_00)
-{
+runheartrelicquest(param_00) {
 	level endon("game_ended");
 	level waittill(param_00.relic + "_relic_placed_in_center");
 	scripts\cp\zombies\cp_disco_spawning::setwavenumoverride(30);
@@ -1614,8 +1357,7 @@ runheartrelicquest(param_00)
 	togglerkability("teleport",0);
 	setstage4attackpriorities();
 	scripts\cp\zombies\cp_disco_spawning::setmaxstaticspawns(10,16,24);
-	if(scripts\cp\utility::isplayingsolo() || scripts\engine\utility::istrue(level.only_one_player))
-	{
+	if(scripts\cp\utility::isplayingsolo() || scripts\engine\utility::istrue(level.only_one_player)) {
 		scripts\cp\zombies\cp_disco_spawning::setspawndelayoverride(0.3);
 	}
 	else
@@ -1626,8 +1368,7 @@ runheartrelicquest(param_00)
 	level.rk_tuning_override = ::hearttunedata;
 	level.rk_solo_tuning_override = ::heartsolotunedata;
 	var_01 = scripts\cp\utility::isplayingsolo() || scripts\engine\utility::istrue(level.only_one_player);
-	if(var_01)
-	{
+	if(var_01) {
 		heartsolotunedata(level.agenttunedata["ratking"]);
 	}
 	else
@@ -1648,9 +1389,7 @@ runheartrelicquest(param_00)
 	togglepgability("wait",1);
 }
 
-//Function Number: 78
-hearttunedata(param_00)
-{
+hearttunedata(param_00) {
 	param_00.min_path_dist_for_teleport = 400;
 	param_00.no_los_wait_time_before_teleport = 1000;
 	param_00.min_time_between_teleports = 2000;
@@ -1666,9 +1405,7 @@ hearttunedata(param_00)
 	param_00.min_clear_los_time_before_shield_attack = 1;
 }
 
-//Function Number: 79
-heartsolotunedata(param_00)
-{
+heartsolotunedata(param_00) {
 	param_00.min_path_dist_for_teleport = 400;
 	param_00.no_los_wait_time_before_teleport = 1000;
 	param_00.min_time_between_teleports = 2000;
@@ -1684,9 +1421,7 @@ heartsolotunedata(param_00)
 	param_00.min_clear_los_time_before_shield_attack = 1;
 }
 
-//Function Number: 80
-startheartquestfunctionality()
-{
+startheartquestfunctionality() {
 	var_00 = scripts\engine\utility::getstructarray("sewage_pool_start_loc","targetname");
 	var_01 = scripts\engine\utility::getstructarray("sewage_pool_loc","script_noteworthy");
 	var_02 = getent("slime_pool","targetname");
@@ -1701,11 +1436,9 @@ startheartquestfunctionality()
 	playsoundatpos((-324.67,1597.21,204),"rk_sludge_pour_in_02");
 	playsoundatpos((-876.252,2414.08,204),"rk_sludge_pour_in_03");
 	scripts\engine\utility::exploder(110);
-	foreach(var_07, var_05 in var_01)
-	{
+	foreach(var_07, var_05 in var_01) {
 		var_06 = spawn("script_model",var_05.origin);
-		if(isdefined(var_05.angles))
-		{
+		if(isdefined(var_05.angles)) {
 			var_06.angles = var_05.angles;
 		}
 
@@ -1716,10 +1449,8 @@ startheartquestfunctionality()
 
 	level thread watchforplayerinvolume(var_02,var_01);
 	startsewageloop(var_00,var_01,var_02);
-	foreach(var_05 in var_01)
-	{
-		if(isdefined(var_05.pool))
-		{
+	foreach(var_05 in var_01) {
+		if(isdefined(var_05.pool)) {
 			var_05.pool delete();
 		}
 	}
@@ -1727,18 +1458,13 @@ startheartquestfunctionality()
 	level notify("relic_quest_completed");
 }
 
-//Function Number: 81
-watchforplayerstouchingwater(param_00)
-{
+watchforplayerstouchingwater(param_00) {
 	level endon("game_ended");
 	level endon("relic_quest_completed");
-	for(;;)
-	{
+	for(;;) {
 		var_01 = gettime();
-		foreach(var_03 in level.players)
-		{
-			if(var_03 istouching(param_00))
-			{
+		foreach(var_03 in level.players) {
+			if(var_03 istouching(param_00)) {
 				var_03 thread giveplayersludgeimmunity(var_03,var_01);
 			}
 		}
@@ -1747,16 +1473,12 @@ watchforplayerstouchingwater(param_00)
 	}
 }
 
-//Function Number: 82
-giveplayersludgeimmunity(param_00,param_01)
-{
+giveplayersludgeimmunity(param_00,param_01) {
 	param_00 setscriptablepartstate("sludge_immunity","inactive");
 	param_00.sludge_immunity = param_01 + 5000;
 }
 
-//Function Number: 83
-unsetimmunutyaftertime(param_00)
-{
+unsetimmunutyaftertime(param_00) {
 	param_00 notify("unsetImmunutyAfterTime");
 	param_00 endon("unsetImmunutyAfterTime");
 	level endon("game_ended");
@@ -1766,72 +1488,56 @@ unsetimmunutyaftertime(param_00)
 	param_00 setscriptablepartstate("sludge_immunity","inactive");
 }
 
-//Function Number: 84
-clearsewageonzombiedeath(param_00,param_01)
-{
+clearsewageonzombiedeath(param_00,param_01) {
 	level endon("game_ended");
 	level endon("relic_quest_completed");
-	for(;;)
-	{
+	for(;;) {
 		level waittill("zombie_killed",var_02,var_03,var_04,var_05,var_06);
-		if(!isplayer(var_05))
-		{
+		if(!isplayer(var_05)) {
 			continue;
 		}
 
-		if(isdefined(var_03) && var_03 == "iw7_fantrap_zm")
-		{
+		if(isdefined(var_03) && var_03 == "iw7_fantrap_zm") {
 			continue;
 		}
 
 		var_07 = scripts\engine\utility::getclosest(var_02,param_01,128);
-		if(!isdefined(var_07))
-		{
+		if(!isdefined(var_07)) {
 			continue;
 		}
 
-		if(!isdefined(var_07.pool))
-		{
+		if(!isdefined(var_07.pool)) {
 			continue;
 		}
 
-		if(!scripts\engine\utility::istrue(var_07.var_19))
-		{
+		if(!scripts\engine\utility::istrue(var_07.var_19)) {
 			continue;
 		}
 
 		var_08 = var_07.pool;
-		if(distance(var_02,var_07.origin) <= 128)
-		{
+		if(distance(var_02,var_07.origin) <= 128) {
 			playfx(level._effect["rat_swarm_cheap"],var_02,anglestoforward(var_06.angles));
 			thread cleanupsewage(var_08,param_00,var_07);
 		}
 	}
 }
 
-//Function Number: 85
-watchforplayerinvolume(param_00,param_01)
-{
+watchforplayerinvolume(param_00,param_01) {
 	level endon("game_ended");
 	level endon("relic_quest_completed");
-	for(;;)
-	{
+	for(;;) {
 		param_00 waittill("trigger",var_02);
-		if(!isplayer(var_02))
-		{
+		if(!isplayer(var_02)) {
 			continue;
 		}
 
-		if(!isalive(var_02) || scripts\engine\utility::istrue(var_02.inlaststand))
-		{
+		if(!isalive(var_02) || scripts\engine\utility::istrue(var_02.inlaststand)) {
 			continue;
 		}
 
 		var_03 = gettime();
-		if(isdefined(var_02.sludge_immunity) && var_03 < var_02.sludge_immunity)
-		{
-			if(var_02.sludge_immunity - var_03 <= 2000)
-			{
+		if(isdefined(var_02.sludge_immunity) && var_03 < var_02.sludge_immunity) {
+			if(var_02.sludge_immunity - var_03 <= 2000) {
 				var_02 setscriptablepartstate("sludge_immunity","active_grn");
 			}
 
@@ -1839,15 +1545,12 @@ watchforplayerinvolume(param_00,param_01)
 		}
 
 		var_04 = scripts\engine\utility::getclosest(var_02.origin,param_01,96);
-		if(!isdefined(var_04) || !scripts\engine\utility::istrue(var_04.var_19))
-		{
+		if(!isdefined(var_04) || !scripts\engine\utility::istrue(var_04.var_19)) {
 			continue;
 		}
 
-		if(isdefined(var_02.nextsewageburntime))
-		{
-			if(var_03 < var_02.nextsewageburntime)
-			{
+		if(isdefined(var_02.nextsewageburntime)) {
+			if(var_03 < var_02.nextsewageburntime) {
 				continue;
 			}
 		}
@@ -1859,15 +1562,11 @@ watchforplayerinvolume(param_00,param_01)
 	}
 }
 
-//Function Number: 86
-setsewagescriptable(param_00,param_01,param_02)
-{
+setsewagescriptable(param_00,param_01,param_02) {
 	level endon("game_ended");
 	level endon("relic_quest_completed");
-	if(isdefined(param_01))
-	{
-		if(param_01 > 0)
-		{
+	if(isdefined(param_01)) {
+		if(param_01 > 0) {
 			wait(0.05 * param_01);
 		}
 	}
@@ -1876,11 +1575,8 @@ setsewagescriptable(param_00,param_01,param_02)
 	param_00 setscriptablepartstate("blood_pool","active");
 }
 
-//Function Number: 87
-cleanupsewage(param_00,param_01,param_02)
-{
-	if(scripts\engine\utility::array_contains(param_01.activestructs,param_00))
-	{
+cleanupsewage(param_00,param_01,param_02) {
+	if(scripts\engine\utility::array_contains(param_01.activestructs,param_00)) {
 		param_01.activestructs = scripts\engine\utility::array_remove(param_01.activestructs,param_00);
 	}
 
@@ -1889,23 +1585,18 @@ cleanupsewage(param_00,param_01,param_02)
 	wait(0.25);
 	param_01.var_C1++;
 	level notify("1_pool_clean");
-	if(param_01.var_C1 >= param_01.objective_icon)
-	{
+	if(param_01.var_C1 >= param_01.objective_icon) {
 		param_01 notify("allPoolsClean");
 	}
 }
 
-//Function Number: 88
-startsewageloop(param_00,param_01,param_02)
-{
+startsewageloop(param_00,param_01,param_02) {
 	level endon("game_ended");
 	level endon("relic_quest_completed");
 	param_02 endon("allPoolsClean");
-	for(;;)
-	{
+	for(;;) {
 		level waittill("1_pool_clean");
-		if(scripts\cp\utility::isplayingsolo() || scripts\engine\utility::istrue(level.only_one_player))
-		{
+		if(scripts\cp\utility::isplayingsolo() || scripts\engine\utility::istrue(level.only_one_player)) {
 			wait(50);
 		}
 		else
@@ -1921,13 +1612,10 @@ startsewageloop(param_00,param_01,param_02)
 		playsoundatpos((-876.252,2414.08,204),"rk_sludge_pour_in_03");
 		scripts\engine\utility::exploder(110);
 		param_02 thread clearsewageonzombiedeath(param_02,param_01);
-		foreach(var_06, var_04 in param_01)
-		{
-			if(!isdefined(var_04.pool))
-			{
+		foreach(var_06, var_04 in param_01) {
+			if(!isdefined(var_04.pool)) {
 				var_05 = spawn("script_model",var_04.origin);
-				if(isdefined(var_04.angles))
-				{
+				if(isdefined(var_04.angles)) {
 					var_05.angles = var_04.angles;
 				}
 
@@ -1944,17 +1632,14 @@ startsewageloop(param_00,param_01,param_02)
 	}
 }
 
-//Function Number: 89
-runbrainrelicquest(param_00)
-{
+runbrainrelicquest(param_00) {
 	level endon("game_ended");
 	level waittill(param_00.relic + "_relic_placed_in_center");
 	level.rat_king.shouldbeonplatform = undefined;
 	scripts\cp\zombies\cp_disco_spawning::setwavenumoverride(30);
 	scripts\cp\zombies\cp_disco_spawning::pausenormalwavespawning();
 	scripts\cp\zombies\cp_disco_spawning::setmaxstaticspawns(16,24,24);
-	if(scripts\cp\utility::isplayingsolo() || scripts\engine\utility::istrue(level.only_one_player))
-	{
+	if(scripts\cp\utility::isplayingsolo() || scripts\engine\utility::istrue(level.only_one_player)) {
 		scripts\cp\zombies\cp_disco_spawning::setspawndelayoverride(0.15);
 	}
 	else
@@ -1968,8 +1653,7 @@ runbrainrelicquest(param_00)
 	level.rkstagetoggles = ::brainattacksettings;
 	brainattacksettings();
 	var_01 = scripts\cp\utility::isplayingsolo() || scripts\engine\utility::istrue(level.only_one_player);
-	if(var_01)
-	{
+	if(var_01) {
 		brainrelictunedata(level.agenttunedata["ratking"]);
 	}
 	else
@@ -1992,9 +1676,7 @@ runbrainrelicquest(param_00)
 	togglepgability("wait",1);
 }
 
-//Function Number: 90
-brainattacksettings()
-{
+brainattacksettings() {
 	togglerkability("melee_attack",1);
 	togglerkability("staff_stomp",1);
 	togglerkability("summon",0);
@@ -2016,9 +1698,7 @@ brainattacksettings()
 	level.rat_king_attack_priorities[level.rat_king_attack_priorities.size] = "block";
 }
 
-//Function Number: 91
-runbrainrelicquestinternal(param_00)
-{
+runbrainrelicquestinternal(param_00) {
 	level.brainattractorstruct = param_00;
 	param_00.targeting = [];
 	level thread runbrainattractor(param_00);
@@ -2026,31 +1706,23 @@ runbrainrelicquestinternal(param_00)
 	level notify("relic_quest_completed");
 }
 
-//Function Number: 92
-getbrainattractorzombies()
-{
-	if(isdefined(level.brainattractorstruct) && isdefined(level.brainattractorstruct.targeting))
-	{
+getbrainattractorzombies() {
+	if(isdefined(level.brainattractorstruct) && isdefined(level.brainattractorstruct.targeting)) {
 		return level.brainattractorstruct.targeting;
 	}
 
 	return [];
 }
 
-//Function Number: 93
-waitforbraindestroyed(param_00)
-{
+waitforbraindestroyed(param_00) {
 	level endon("game_ended");
 	var_01 = level.rk_center_arena_struct.origin;
 	var_02 = 0;
 	var_03 = 100;
-	while(var_02 < var_03)
-	{
+	while(var_02 < var_03) {
 		var_04 = 0;
-		foreach(var_06 in param_00.targeting)
-		{
-			if(distance(var_06.origin,var_01) <= 100)
-			{
+		foreach(var_06 in param_00.targeting) {
+			if(distance(var_06.origin,var_01) <= 100) {
 				var_04 = 1;
 				var_02++;
 				break;
@@ -2060,22 +1732,17 @@ waitforbraindestroyed(param_00)
 		wait(1);
 	}
 
-	foreach(var_06 in param_00.targeting)
-	{
+	foreach(var_06 in param_00.targeting) {
 		thread unsetbrainattibures(var_06);
 	}
 }
 
-//Function Number: 94
-unsetbrainattibures(param_00)
-{
-	if(isalive(param_00) && param_00.health >= 1)
-	{
+unsetbrainattibures(param_00) {
+	if(isalive(param_00) && param_00.health >= 1) {
 		param_00 setscriptablepartstate("eyes","yellow_eyes");
 	}
 
-	if(isdefined(param_00.brainpos))
-	{
+	if(isdefined(param_00.brainpos)) {
 		var_01 = param_00.brainpos;
 		var_01.claimed = undefined;
 	}
@@ -2087,17 +1754,13 @@ unsetbrainattibures(param_00)
 	param_00.attackent = undefined;
 }
 
-//Function Number: 95
-runbrainattractor(param_00)
-{
+runbrainattractor(param_00) {
 	level endon("game_ended");
 	level endon("relic_quest_completed");
 	var_01 = level.rk_center_arena_struct.origin;
-	for(;;)
-	{
+	for(;;) {
 		getvalidalivezombies(param_00,4,var_01);
-		foreach(var_03 in param_00.targeting)
-		{
+		foreach(var_03 in param_00.targeting) {
 			param_00 thread sendtargetstobrain(param_00,var_03,var_01);
 		}
 
@@ -2105,14 +1768,10 @@ runbrainattractor(param_00)
 	}
 }
 
-//Function Number: 96
-cleanupattractedzombies(param_00)
-{
+cleanupattractedzombies(param_00) {
 	var_01 = [];
-	foreach(var_03 in param_00.targeting)
-	{
-		if(isalive(var_03) && var_03.health >= 1)
-		{
+	foreach(var_03 in param_00.targeting) {
+		if(isalive(var_03) && var_03.health >= 1) {
 			var_01[var_01.size] = var_03;
 		}
 	}
@@ -2120,61 +1779,48 @@ cleanupattractedzombies(param_00)
 	param_00.targeting = var_01;
 }
 
-//Function Number: 97
-getvalidalivezombies(param_00,param_01,param_02)
-{
+getvalidalivezombies(param_00,param_01,param_02) {
 	level endon("game_ended");
 	level endon("relic_quest_completed");
 	cleanupattractedzombies(param_00);
-	if(param_00.targeting.size >= param_01)
-	{
+	if(param_00.targeting.size >= param_01) {
 		return;
 	}
 
 	var_03 = scripts\mp\mp_agent::getactiveagentsoftype("generic_zombie");
 	var_04 = scripts\engine\utility::get_array_of_closest(param_02,var_03,undefined,24,1000);
-	foreach(var_06 in var_04)
-	{
-		if(param_00.targeting.size >= param_01)
-		{
+	foreach(var_06 in var_04) {
+		if(param_00.targeting.size >= param_01) {
 			break;
 		}
 
-		if(scripts\engine\utility::array_contains(param_00.targeting,var_06))
-		{
+		if(scripts\engine\utility::array_contains(param_00.targeting,var_06)) {
 			continue;
 		}
 
-		if(var_06.health < 1)
-		{
+		if(var_06.health < 1) {
 			continue;
 		}
 
-		if(!isalive(var_06))
-		{
+		if(!isalive(var_06)) {
 			continue;
 		}
 
-		if(abs(var_06.origin[2] - param_02[2]) > 32)
-		{
+		if(abs(var_06.origin[2] - param_02[2]) > 32) {
 			continue;
 		}
 
-		if(scripts\engine\utility::istrue(var_06.entered_playspace))
-		{
+		if(scripts\engine\utility::istrue(var_06.entered_playspace)) {
 			param_00.targeting[param_00.targeting.size] = var_06;
 		}
 	}
 }
 
-//Function Number: 98
-sendtargetstobrain(param_00,param_01,param_02)
-{
+sendtargetstobrain(param_00,param_01,param_02) {
 	level endon("game_ended");
 	level endon("relic_quest_completed");
 	param_01 endon("death");
-	if(param_01.health >= 1)
-	{
+	if(param_01.health >= 1) {
 		param_01 setscriptablepartstate("eyes","turned_eyes",1);
 	}
 
@@ -2188,15 +1834,11 @@ sendtargetstobrain(param_00,param_01,param_02)
 	param_01.ignoreme = 1;
 }
 
-//Function Number: 99
-getvalidbrainpos(param_00)
-{
+getvalidbrainpos(param_00) {
 	var_01 = scripts\engine\utility::getstructarray("brain_targets","targetname");
 	var_02 = sortbydistance(var_01,param_00.origin);
-	foreach(var_04 in var_02)
-	{
-		if(scripts\engine\utility::istrue(var_04.claimed))
-		{
+	foreach(var_04 in var_02) {
+		if(scripts\engine\utility::istrue(var_04.claimed)) {
 			continue;
 		}
 
@@ -2207,25 +1849,20 @@ getvalidbrainpos(param_00)
 	return var_02[0];
 }
 
-//Function Number: 100
-cleanupbrainvarsondeath(param_00)
-{
+cleanupbrainvarsondeath(param_00) {
 	level endon("game_ended");
 	level endon("relic_quest_completed");
 	param_00 waittill("death");
 	unsetbrainattibures(param_00);
 }
 
-//Function Number: 101
-runeyerelicquest(param_00)
-{
+runeyerelicquest(param_00) {
 	level endon("game_ended");
 	scripts\cp\zombies\cp_disco_spawning::setwavenumoverride(30);
 	scripts\cp\zombies\cp_disco_spawning::pausenormalwavespawning(0);
 	level thread scripts\cp\zombies\cp_disco_spawning::setzombiemovespeed(["sprint","walk"]);
 	scripts\cp\zombies\cp_disco_spawning::setmaxstaticspawns(16,24,24);
-	if(scripts\cp\utility::isplayingsolo() || scripts\engine\utility::istrue(level.only_one_player))
-	{
+	if(scripts\cp\utility::isplayingsolo() || scripts\engine\utility::istrue(level.only_one_player)) {
 		scripts\cp\zombies\cp_disco_spawning::setspawndelayoverride(0.3);
 	}
 	else
@@ -2239,8 +1876,7 @@ runeyerelicquest(param_00)
 	level.rk_tuning_override = ::setupeyerelictunedata;
 	level.rk_solo_tuning_override = ::setupsoloeyerelictunedata;
 	var_01 = scripts\cp\utility::isplayingsolo() || scripts\engine\utility::istrue(level.only_one_player);
-	if(var_01)
-	{
+	if(var_01) {
 		setupsoloeyerelictunedata(level.agenttunedata["ratking"]);
 	}
 	else
@@ -2257,11 +1893,9 @@ runeyerelicquest(param_00)
 	level.active_eye_targets = [];
 	level.inactive_eye_targets = [];
 	var_03 = getmaxactivetargets();
-	for(var_04 = 0;var_04 < var_02.size;var_04++)
-	{
+	for(var_04 = 0;var_04 < var_02.size;var_04++) {
 		var_05 = var_02[var_04];
-		if(var_04 < var_03)
-		{
+		if(var_04 < var_03) {
 			var_05 thread watchforraceresults(var_05,param_00,1);
 			continue;
 		}
@@ -2273,53 +1907,41 @@ runeyerelicquest(param_00)
 	level thread watchplayerforeyerelicuse();
 }
 
-//Function Number: 102
-watchplayerforeyerelicuse()
-{
+watchplayerforeyerelicuse() {
 	level endon("game_ended");
 	level endon("relic_quest_completed");
 	var_00 = level.rk_center_arena_struct.origin;
-	for(;;)
-	{
+	for(;;) {
 		level waittill("rat_king_eye_activated");
 		level thread watchforeyestructactive();
 	}
 }
 
-//Function Number: 103
-watchforeyestructactive()
-{
+watchforeyestructactive() {
 	level notify("watchForEyeStructActive");
 	level endon("watchForEyeStructActive");
 	level endon("game_ended");
 	level endon("relic_quest_completed");
-	foreach(var_01 in level.active_eye_targets)
-	{
-		if(isdefined(var_01.model))
-		{
+	foreach(var_01 in level.active_eye_targets) {
+		if(isdefined(var_01.model)) {
 			var_01.model setscriptablepartstate("targets","neutral");
 		}
 	}
 
 	var_03 = level.rk_center_arena_struct.origin;
-	for(;;)
-	{
+	for(;;) {
 		playeyeeffects(var_03);
 		scripts\engine\utility::flag_set("eye_active");
-		foreach(var_01 in level.active_eye_targets)
-		{
-			if(isdefined(var_01.model))
-			{
+		foreach(var_01 in level.active_eye_targets) {
+			if(isdefined(var_01.model)) {
 				var_01.model setscriptablepartstate("targets","active");
 			}
 		}
 
 		wait(5);
 		scripts\engine\utility::flag_clear("eye_active");
-		foreach(var_01 in level.active_eye_targets)
-		{
-			if(isdefined(var_01.model))
-			{
+		foreach(var_01 in level.active_eye_targets) {
+			if(isdefined(var_01.model)) {
 				var_01.model setscriptablepartstate("targets","neutral");
 			}
 		}
@@ -2328,29 +1950,22 @@ watchforeyestructactive()
 	}
 }
 
-//Function Number: 104
-playeyeeffects(param_00)
-{
+playeyeeffects(param_00) {
 	playsoundatpos(param_00,"rk_eye_pulse_lr");
 	playfx(level._effect["rat_eye_rats"],param_00);
 	wait(0.1);
 }
 
-//Function Number: 105
-getmaxactivetargets()
-{
+getmaxactivetargets() {
 	var_00 = scripts\cp\utility::isplayingsolo() || scripts\engine\utility::istrue(level.only_one_player);
-	if(var_00)
-	{
+	if(var_00) {
 		return 12;
 	}
 
 	return 20;
 }
 
-//Function Number: 106
-solobrainrelictunedata(param_00)
-{
+solobrainrelictunedata(param_00) {
 	param_00.min_path_dist_for_teleport = 100;
 	param_00.no_los_wait_time_before_teleport = 1;
 	param_00.min_time_between_teleports = 1000;
@@ -2367,9 +1982,7 @@ solobrainrelictunedata(param_00)
 	param_00.staff_stomp_min_damage = 30;
 }
 
-//Function Number: 107
-brainrelictunedata(param_00)
-{
+brainrelictunedata(param_00) {
 	param_00.min_path_dist_for_teleport = 100;
 	param_00.no_los_wait_time_before_teleport = 1;
 	param_00.min_time_between_teleports = 1000;
@@ -2386,9 +1999,7 @@ brainrelictunedata(param_00)
 	param_00.staff_stomp_min_damage = 30;
 }
 
-//Function Number: 108
-setupstartingeyerelictunedata(param_00)
-{
+setupstartingeyerelictunedata(param_00) {
 	param_00.min_path_dist_for_teleport = 100;
 	param_00.no_los_wait_time_before_teleport = 1;
 	param_00.min_time_between_teleports = 2000;
@@ -2399,9 +2010,7 @@ setupstartingeyerelictunedata(param_00)
 	param_00.min_moving_pain_dist = 128;
 }
 
-//Function Number: 109
-setupsoloeyerelictunedata(param_00)
-{
+setupsoloeyerelictunedata(param_00) {
 	param_00.need_to_block_damage_threshold = 20;
 	param_00.max_time_after_last_damage_to_block = 1000;
 	param_00.block_chance = 100;
@@ -2424,9 +2033,7 @@ setupsoloeyerelictunedata(param_00)
 	param_00.teleport_min_dist_to_enemy_to_teleport_sq = 250000;
 }
 
-//Function Number: 110
-setupeyerelictunedata(param_00)
-{
+setupeyerelictunedata(param_00) {
 	param_00.need_to_block_damage_threshold = 20;
 	param_00.max_time_after_last_damage_to_block = 1000;
 	param_00.block_chance = 100;
@@ -2449,21 +2056,16 @@ setupeyerelictunedata(param_00)
 	param_00.teleport_min_dist_to_enemy_to_teleport_sq = 90000;
 }
 
-//Function Number: 111
-restorerktuning()
-{
-	if(level.players.size == 1)
-	{
-		[[ level.soloratkingtuning ]](level.agenttunedata["ratking"]);
+restorerktuning() {
+	if(level.players.size == 1) {
+		[[level.soloratkingtuning]](level.agenttunedata["ratking"]);
 		return;
 	}
 
-	[[ level.ratkingtuning ]](level.agenttunedata["ratking"]);
+	[[level.ratkingtuning]](level.agenttunedata["ratking"]);
 }
 
-//Function Number: 112
-setstage2attackpriorities()
-{
+setstage2attackpriorities() {
 	togglerkability("melee_attack",0);
 	togglerkability("staff_stomp",0);
 	togglerkability("summon",0);
@@ -2484,14 +2086,10 @@ setstage2attackpriorities()
 	level.rat_king_attack_priorities[level.rat_king_attack_priorities.size] = "attack_zombies";
 }
 
-//Function Number: 113
-watchforraceresults(param_00,param_01,param_02)
-{
-	if(!isdefined(param_00.model))
-	{
+watchforraceresults(param_00,param_01,param_02) {
+	if(!isdefined(param_00.model)) {
 		var_03 = spawn("script_model",param_00.origin);
-		if(isdefined(param_00.angles))
-		{
+		if(isdefined(param_00.angles)) {
 			var_03.angles = param_00.angles;
 		}
 		else
@@ -2507,12 +2105,10 @@ watchforraceresults(param_00,param_01,param_02)
 		var_03 = param_01.model;
 	}
 
-	if(scripts\engine\utility::istrue(param_02))
-	{
+	if(scripts\engine\utility::istrue(param_02)) {
 		activateeyestruct(param_00);
 		var_03 thread checkraceresults(param_00,param_01,param_02);
-		if(scripts\engine\utility::flag("eye_active"))
-		{
+		if(scripts\engine\utility::flag("eye_active")) {
 			var_03 setscriptablepartstate("targets","active");
 			return;
 		}
@@ -2525,12 +2121,9 @@ watchforraceresults(param_00,param_01,param_02)
 	var_03 setscriptablepartstate("targets","neutral");
 }
 
-//Function Number: 114
-deactivateeyestruct(param_00)
-{
+deactivateeyestruct(param_00) {
 	level.inactive_eye_targets[level.inactive_eye_targets.size] = param_00;
-	if(scripts\engine\utility::array_contains(level.active_eye_targets,param_00))
-	{
+	if(scripts\engine\utility::array_contains(level.active_eye_targets,param_00)) {
 		level.active_eye_targets = scripts\engine\utility::array_remove(level.active_eye_targets,param_00);
 	}
 
@@ -2540,12 +2133,9 @@ deactivateeyestruct(param_00)
 	level.inactive_eye_targets = scripts\engine\utility::array_remove_duplicates(level.inactive_eye_targets);
 }
 
-//Function Number: 115
-activateeyestruct(param_00)
-{
+activateeyestruct(param_00) {
 	level.active_eye_targets[level.active_eye_targets.size] = param_00;
-	if(scripts\engine\utility::array_contains(level.inactive_eye_targets,param_00))
-	{
+	if(scripts\engine\utility::array_contains(level.inactive_eye_targets,param_00)) {
 		level.inactive_eye_targets = scripts\engine\utility::array_remove(level.inactive_eye_targets,param_00);
 	}
 
@@ -2555,9 +2145,7 @@ activateeyestruct(param_00)
 	level.inactive_eye_targets = scripts\engine\utility::array_remove_duplicates(level.inactive_eye_targets);
 }
 
-//Function Number: 116
-checkraceresults(param_00,param_01,param_02)
-{
+checkraceresults(param_00,param_01,param_02) {
 	param_00 notify("checkRaceResults");
 	param_00 endon("checkRaceResults");
 	level endon("game_ended");
@@ -2565,25 +2153,20 @@ checkraceresults(param_00,param_01,param_02)
 	self.health = 1000000;
 	self.maxhealth = 1000000;
 	self setcandamage(1);
-	for(;;)
-	{
+	for(;;) {
 		self waittill("damage",var_03,var_04,var_05,var_06);
-		if(isplayer(var_04) && scripts\engine\utility::flag("eye_active"))
-		{
-			if(!scripts\engine\utility::array_contains(level.active_eye_targets,param_00))
-			{
+		if(isplayer(var_04) && scripts\engine\utility::flag("eye_active")) {
+			if(!scripts\engine\utility::array_contains(level.active_eye_targets,param_00)) {
 				continue;
 			}
 
-			if(!isalive(var_04) || scripts\engine\utility::istrue(var_04.inlaststand))
-			{
+			if(!isalive(var_04) || scripts\engine\utility::istrue(var_04.inlaststand)) {
 				continue;
 			}
 
 			deactivateeyestruct(param_00);
 			thread settargetscriptablestates(param_00);
-			if(level.active_eye_targets.size <= 0)
-			{
+			if(level.active_eye_targets.size <= 0) {
 				togglepgability("chillin",1);
 				togglepgability("revive_player",1);
 				togglepgability("teleport_attack",1);
@@ -2601,39 +2184,29 @@ checkraceresults(param_00,param_01,param_02)
 			continue;
 		}
 
-		if(level.active_eye_targets.size < param_01.objective_icon)
-		{
+		if(level.active_eye_targets.size < param_01.objective_icon) {
 			self setscriptablepartstate("impact","active");
 			thread setupneweyetarget(param_01,param_00);
 		}
 	}
 }
 
-//Function Number: 117
-canspawneyetarget()
-{
-	if(!isdefined(level.active_eye_targets))
-	{
+canspawneyetarget() {
+	if(!isdefined(level.active_eye_targets)) {
 		return 0;
 	}
 
-	if(level.active_eye_targets.size < getmaxactivetargets())
-	{
+	if(level.active_eye_targets.size < getmaxactivetargets()) {
 		return 1;
 	}
 
 	return 0;
 }
 
-//Function Number: 118
-cleanupeyestructs()
-{
-	if(isdefined(level.all_eye_targets))
-	{
-		foreach(var_01 in level.all_eye_targets)
-		{
-			if(isdefined(var_01.model))
-			{
+cleanupeyestructs() {
+	if(isdefined(level.all_eye_targets)) {
+		foreach(var_01 in level.all_eye_targets) {
+			if(isdefined(var_01.model)) {
 				var_01.model delete();
 				var_01.model = undefined;
 			}
@@ -2645,35 +2218,27 @@ cleanupeyestructs()
 	level.inactive_eye_targets = undefined;
 }
 
-//Function Number: 119
-settargetscriptablestates(param_00)
-{
+settargetscriptablestates(param_00) {
 	level endon("game_ended");
 	self endon("death");
 	self setscriptablepartstate("targets","dead");
 }
 
-//Function Number: 120
-setupneweyetarget(param_00,param_01)
-{
+setupneweyetarget(param_00,param_01) {
 	level endon("game_ended");
 	level endon("relic_quest_completed");
 	param_01 thread watchforraceresults(param_01,param_00,1);
 }
 
-//Function Number: 121
-pickuprkrelic(param_00,param_01)
-{
+pickuprkrelic(param_00,param_01) {
 	scripts\engine\utility::flag_clear("rk_fight_relic_stage");
 	level notify("relic_selected",param_00);
 	activatecenterstruct();
 	param_00 thread setrelicscriptablestates(param_00);
-	if(param_00.relic == "heart")
-	{
+	if(param_00.relic == "heart") {
 		param_01 playlocalsound("rk_relic_heart_pickup_plr");
 	}
-	else if(param_00.relic == "brain")
-	{
+	else if(param_00.relic == "brain") {
 		param_01 playlocalsound("rk_relic_brain_pickup_plr");
 	}
 	else
@@ -2684,15 +2249,12 @@ pickuprkrelic(param_00,param_01)
 	param_01 thread play_relic_vo(param_00.relic);
 }
 
-//Function Number: 122
-play_relic_vo(param_00)
-{
+play_relic_vo(param_00) {
 	self endon("disconnect");
 	self endon("last_stand");
 	level endon("game_ended");
 	wait(1);
-	switch(param_00)
-	{
+	switch(param_00) {
 		case "heart":
 			thread scripts\cp\cp_vo::try_to_play_vo("pam_quest_ratking_heart_return","pam_dialogue_vo","highest",100,1);
 			break;
@@ -2707,13 +2269,10 @@ play_relic_vo(param_00)
 	}
 }
 
-//Function Number: 123
-activatecenterstruct()
-{
+activatecenterstruct() {
 	var_00 = level.rk_center_arena_struct.origin;
 	var_01 = spawnfx(level._effect["relic_center"],var_00);
-	if(isdefined(level.rk_center_arena_struct.fx))
-	{
+	if(isdefined(level.rk_center_arena_struct.fx)) {
 		level.rk_center_arena_struct.fx delete();
 	}
 
@@ -2721,62 +2280,44 @@ activatecenterstruct()
 	triggerfx(var_01);
 }
 
-//Function Number: 124
-deactivatecenterstruct()
-{
+deactivatecenterstruct() {
 	var_00 = level.rk_center_arena_struct.origin;
-	if(isdefined(level.rk_center_arena_struct.fx))
-	{
+	if(isdefined(level.rk_center_arena_struct.fx)) {
 		level.rk_center_arena_struct.fx delete();
 	}
 }
 
-//Function Number: 125
-setrelicscriptablestates(param_00)
-{
+setrelicscriptablestates(param_00) {
 	scripts\cp\cp_interaction::remove_from_current_interaction_list(param_00);
 	param_00.model setscriptablepartstate("interactions","pickup");
 	param_00.model setscriptablepartstate("rk_models",param_00.relic + "_picked");
 	wait(0.5);
-	if(isdefined(param_00.fx))
-	{
+	if(isdefined(param_00.fx)) {
 		param_00.fx delete();
 	}
 
-	if(isdefined(param_00.model))
-	{
+	if(isdefined(param_00.model)) {
 		param_00.model delete();
 	}
 
 	deactivaterelics();
 }
 
-//Function Number: 126
-rkrelic_hint_func(param_00,param_01)
-{
+rkrelic_hint_func(param_00,param_01) {
 	return "";
 }
 
-//Function Number: 127
-rkdebug_hint_func(param_00,param_01)
-{
+rkdebug_hint_func(param_00,param_01) {
 	return &"CP_DISCO_INTERACTIONS_ENTER_THIS_AREA";
 }
 
-//Function Number: 128
-userkdebug(param_00,param_01)
-{
-}
+userkdebug(param_00,param_01) {}
 
-//Function Number: 129
-open_sesame(param_00)
-{
-	if(scripts\engine\utility::istrue(param_00))
-	{
+open_sesame(param_00) {
+	if(scripts\engine\utility::istrue(param_00)) {
 		level.open_sesame = undefined;
 	}
-	else if(scripts\engine\utility::istrue(level.open_sesame))
-	{
+	else if(scripts\engine\utility::istrue(level.open_sesame)) {
 		level.open_sesame = undefined;
 		return;
 	}
@@ -2785,30 +2326,25 @@ open_sesame(param_00)
 		level.open_sesame = 1;
 	}
 
-	foreach(var_02 in level.generators)
-	{
+	foreach(var_02 in level.generators) {
 		thread scripts/cp/zombies/zombie_power::generic_generator(var_02);
 		wait(0.1);
 	}
 
-	if(isdefined(level.fast_travel_spots))
-	{
-		foreach(var_05 in level.fast_travel_spots)
-		{
+	if(isdefined(level.fast_travel_spots)) {
+		foreach(var_05 in level.fast_travel_spots) {
 			var_05.used_once = 1;
 		}
 	}
 
 	var_07 = getentarray("door_buy","targetname");
-	foreach(var_09 in var_07)
-	{
+	foreach(var_09 in var_07) {
 		var_09 notify("trigger","open_sesame");
 		wait(0.1);
 	}
 
 	var_0B = getentarray("chi_door","targetname");
-	foreach(var_09 in var_0B)
-	{
+	foreach(var_09 in var_0B) {
 		var_09.physics_capsulecast notify("damage",undefined,"open_sesame");
 		wait(0.1);
 	}
@@ -2816,63 +2352,49 @@ open_sesame(param_00)
 	level.moon_donations = 3;
 	level.kepler_donations = 3;
 	level.triton_donations = 3;
-	if(isdefined(level.team_killdoors))
-	{
-		foreach(var_0F in level.team_killdoors)
-		{
+	if(isdefined(level.team_killdoors)) {
+		foreach(var_0F in level.team_killdoors) {
 			var_0F scripts/cp/zombies/zombie_doors::open_team_killdoor(level.players[0]);
 		}
 	}
 
 	var_11 = scripts\engine\utility::getstructarray("interaction","targetname");
-	foreach(var_13 in var_11)
-	{
+	foreach(var_13 in var_11) {
 		var_14 = scripts\engine\utility::getstructarray(var_13.script_noteworthy,"script_noteworthy");
-		foreach(var_16 in var_14)
-		{
-			if(isdefined(var_16.target) && isdefined(var_13.target))
-			{
-				if(var_16.target == var_13.target && var_16 != var_13)
-				{
-					if(scripts\engine\utility::array_contains(var_11,var_16))
-					{
+		foreach(var_16 in var_14) {
+			if(isdefined(var_16.target) && isdefined(var_13.target)) {
+				if(var_16.target == var_13.target && var_16 != var_13) {
+					if(scripts\engine\utility::array_contains(var_11,var_16)) {
 						var_11 = scripts\engine\utility::array_remove(var_11,var_16);
 					}
 				}
 			}
 		}
 
-		if(scripts\cp\cp_interaction::interaction_is_door_buy(var_13))
-		{
-			if(!isdefined(var_13.script_noteworthy))
-			{
+		if(scripts\cp\cp_interaction::interaction_is_door_buy(var_13)) {
+			if(!isdefined(var_13.script_noteworthy)) {
 				continue;
 			}
 
-			if(var_13.script_noteworthy == "team_door_switch")
-			{
+			if(var_13.script_noteworthy == "team_door_switch") {
 				scripts\cp\zombies\interaction_openareas::use_team_door_switch(var_13,level.players[0]);
 			}
 		}
 	}
 }
 
-//Function Number: 130
-setupplayerloadouts()
-{
+setupplayerloadouts() {
 	var_00 = ["iw7_ar57_zm","iw7_m4_zm","iw7_erad_zm"];
 	var_01 = ["iw7_crb_zml","iw7_lmg03_zm","iw7_mauler_zm"];
 	var_02 = ["snake","crane","dragon","tiger"];
 	var_03 = ["perk_machine_revive","perk_machine_flash","perk_machine_tough","perk_machine_run","perk_machine_rat_a_tat"];
-	foreach(var_05 in level.players)
-	{
+	foreach(var_05 in level.players) {
 		var_06 = randomint(var_01.size);
 		var_07 = randomint(var_00.size);
 		var_08 = randomint(var_02.size);
 		var_05 takeweapon(var_05 scripts\cp\utility::getvalidtakeweapon());
 		var_09 = scripts\cp\utility::getrawbaseweaponname(var_01[var_06]);
-		if(isdefined(var_05.weapon_build_models[var_09]))
-		{
+		if(isdefined(var_05.weapon_build_models[var_09])) {
 			scripts/cp/zombies/coop_wall_buys::givevalidweapon(var_05,var_05.weapon_build_models[var_09]);
 		}
 		else
@@ -2881,8 +2403,7 @@ setupplayerloadouts()
 		}
 
 		var_0A = scripts\cp\utility::getrawbaseweaponname(var_00[var_07]);
-		if(isdefined(var_05.weapon_build_models[var_0A]))
-		{
+		if(isdefined(var_05.weapon_build_models[var_0A])) {
 			scripts/cp/zombies/coop_wall_buys::givevalidweapon(var_05,var_05.weapon_build_models[var_0A]);
 		}
 		else
@@ -2896,8 +2417,7 @@ setupplayerloadouts()
 		var_05 scripts\cp\cp_persistence::set_player_currency(10000);
 		var_05.kung_fu_progression.active_discipline = var_02[var_08];
 		var_05.kung_fu_progression.disciplines_levels[var_02[var_08]] = 3;
-		switch(var_02[var_08])
-		{
+		switch(var_02[var_08]) {
 			case "tiger":
 				var_0B = 3;
 				var_05 setclientomnvar("ui_intel_active_index",var_0B);
@@ -2924,43 +2444,35 @@ setupplayerloadouts()
 		var_05 thread scripts\cp\maps\cp_disco\cp_disco::update_special_mode_for_player(var_05);
 		var_05 thread scripts\cp\maps\cp_disco\kung_fu_mode::set_gourd(var_05);
 		var_05 scripts\cp\maps\cp_disco\kung_fu_mode::checkgourdstates(undefined,var_05);
-		if(!scripts\engine\utility::istrue(var_05.style_chosen))
-		{
+		if(!scripts\engine\utility::istrue(var_05.style_chosen)) {
 			var_05.style_chosen = 1;
 			var_05 setclientomnvar("zm_ui_show_general",0);
 		}
 
-		foreach(var_0D in var_03)
-		{
+		foreach(var_0D in var_03) {
 			var_05 thread scripts/cp/zombies/zombies_perk_machines::give_zombies_perk_immediate(var_0D,1);
 		}
 	}
 
-	if(isdefined(level.pap_max) && level.pap_max < 3)
-	{
+	if(isdefined(level.pap_max) && level.pap_max < 3) {
 		level.var_C8A4++;
 	}
 
-	level [[ level.upgrade_weapons_func ]]();
-	level thread [[ level.upgrade_weapons_func ]]();
+	level [[level.upgrade_weapons_func]]();
+	level thread [[level.upgrade_weapons_func]]();
 }
 
-//Function Number: 131
-userkarenacenter(param_00,param_01)
-{
-	if(!isdefined(level.current_relic))
-	{
+userkarenacenter(param_00,param_01) {
+	if(!isdefined(level.current_relic)) {
 		return;
 	}
 
 	param_00 scripts\cp\cp_interaction::remove_from_current_interaction_list(param_00);
 	deactivatecenterstruct();
-	if(level.current_relic == "heart")
-	{
+	if(level.current_relic == "heart") {
 		param_01 playlocalsound("rk_relic_heart_placement_plr");
 	}
-	else if(level.current_relic == "brain")
-	{
+	else if(level.current_relic == "brain") {
 		param_01 playlocalsound("rk_relic_brain_placement_plr");
 	}
 	else
@@ -2977,9 +2489,7 @@ userkarenacenter(param_00,param_01)
 	param_00 thread watchforstagecomplete(param_00);
 }
 
-//Function Number: 132
-watchforstagecomplete(param_00)
-{
+watchforstagecomplete(param_00) {
 	level endon("game_ended");
 	level waittill("relic_quest_completed");
 	param_00.model setscriptablepartstate("rk_models","neutral");
@@ -2987,24 +2497,19 @@ watchforstagecomplete(param_00)
 	param_00.model.origin = param_00.origin + (0,0,4);
 }
 
-//Function Number: 133
-setcenterscriptablestates(param_00)
-{
+setcenterscriptablestates(param_00) {
 	param_00.model setscriptablepartstate("interactions","place");
 	param_00.model setscriptablepartstate("rk_models","active_" + level.current_relic);
 	param_00.model thread startcenteractiveloop(param_00);
 	level.current_relic = undefined;
 }
 
-//Function Number: 134
-startcenteractiveloop(param_00)
-{
+startcenteractiveloop(param_00) {
 	level endon("game_ended");
 	level endon("relic_quest_completed");
 	param_00 endon("relic_deactivated");
 	self endon("death");
-	for(;;)
-	{
+	for(;;) {
 		var_01 = randomfloatrange(2,4);
 		self moveto(self.origin + (0,0,32),var_01);
 		wait(var_01);
@@ -3013,15 +2518,11 @@ startcenteractiveloop(param_00)
 	}
 }
 
-//Function Number: 135
-rkarenacenter_hint_func(param_00,param_01)
-{
+rkarenacenter_hint_func(param_00,param_01) {
 	return "";
 }
 
-//Function Number: 136
-waitforrkoutofplayspace()
-{
+waitforrkoutofplayspace() {
 	level endon("game_ended");
 	level endon("center_arena_struct_used");
 	level.rat_king endon("death");
@@ -3030,77 +2531,52 @@ waitforrkoutofplayspace()
 	level.rat_king.outofplayspace = 1;
 }
 
-//Function Number: 137
-forcerkteleport()
-{
+forcerkteleport() {
 	level.rat_king.force_teleport = 1;
 }
 
-//Function Number: 138
-clean_up_rk_barriers()
-{
-	if(isdefined(level.rk_barriers) && level.rk_barriers.size > 0)
-	{
-		foreach(var_01 in level.rk_barriers)
-		{
+clean_up_rk_barriers() {
+	if(isdefined(level.rk_barriers) && level.rk_barriers.size > 0) {
+		foreach(var_01 in level.rk_barriers) {
 			var_01 delete();
 		}
 	}
 }
 
-//Function Number: 139
-togglerkability(param_00,param_01)
-{
+togglerkability(param_00,param_01) {
 	level.rat_king_toggles[param_00] = param_01;
 }
 
-//Function Number: 140
-togglepgability(param_00,param_01)
-{
+togglepgability(param_00,param_01) {
 	level.pam_grier_toggles[param_00] = param_01;
 }
 
-//Function Number: 141
-addstaffstompcooldown(param_00)
-{
+addstaffstompcooldown(param_00) {
 	self.nextstaffstomptime = gettime() + param_00;
 }
 
-//Function Number: 142
-addinnerstaffstompcooldown(param_00)
-{
+addinnerstaffstompcooldown(param_00) {
 	self.nextstaffstompinnertime = gettime() + param_00;
 }
 
-//Function Number: 143
-addstaffprojcooldown(param_00)
-{
+addstaffprojcooldown(param_00) {
 	self.nextstaffprojectiletime = gettime() + param_00;
 }
 
-//Function Number: 144
-addblockcooldown(param_00)
-{
+addblockcooldown(param_00) {
 	self.nextblocktime = gettime() + param_00;
 }
 
-//Function Number: 145
-disabledamageonratking()
-{
+disabledamageonratking() {
 	level.rat_king.disabledamage = 1;
 }
 
-//Function Number: 146
-enabledamageonratking()
-{
+enabledamageonratking() {
 	level.rat_king.disabledamage = undefined;
 }
 
-//Function Number: 147
-setrkhealth(param_00)
-{
-	if(isdefined(param_00))
-	{
+setrkhealth(param_00) {
+	if(isdefined(param_00)) {
 		level.rat_king.health = int(level.rat_king.maxhealth * param_00);
 		return;
 	}
@@ -3108,23 +2584,18 @@ setrkhealth(param_00)
 	level.rat_king.health = int(level.rat_king.maxhealth);
 }
 
-//Function Number: 148
-watchfordamagestagecomplete(param_00,param_01)
-{
+watchfordamagestagecomplete(param_00,param_01) {
 	level endon("game_ended");
 	level.rat_king endon("death");
 	var_02 = 0;
-	for(;;)
-	{
+	for(;;) {
 		level waittill("rat_king_damaged");
-		if(!var_02 && level.rat_king.health <= int(level.rat_king.maxhealth * param_01))
-		{
+		if(!var_02 && level.rat_king.health <= int(level.rat_king.maxhealth * param_01)) {
 			var_02 = 1;
 			scripts\cp\zombies\cp_disco_spawning::pausenormalwavespawning(1);
 		}
 
-		if(level.rat_king.health <= int(level.rat_king.maxhealth * param_00))
-		{
+		if(level.rat_king.health <= int(level.rat_king.maxhealth * param_00)) {
 			level.rk_tuning_override = undefined;
 			level.rk_solo_tuning_override = undefined;
 			thread stagecomplete();
@@ -3134,9 +2605,7 @@ watchfordamagestagecomplete(param_00,param_01)
 	}
 }
 
-//Function Number: 149
-watchforrelicstagecomplete()
-{
+watchforrelicstagecomplete() {
 	level endon("game_ended");
 	level.rat_king endon("death");
 	level waittill("relic_quest_completed");
@@ -3147,8 +2616,7 @@ watchforrelicstagecomplete()
 	level.rk_solo_tuning_override = undefined;
 	level.solorkstagetoggles = ::setdefaultrktoggles;
 	level.rkstagetoggles = ::setdefaultrktoggles;
-	if(scripts\cp\utility::isplayingsolo() || scripts\engine\utility::istrue(level.only_one_player))
-	{
+	if(scripts\cp\utility::isplayingsolo() || scripts\engine\utility::istrue(level.only_one_player)) {
 		scripts\cp\zombies\cp_disco_spawning::setspawndelayoverride(0.75);
 	}
 	else
@@ -3156,14 +2624,11 @@ watchforrelicstagecomplete()
 		scripts\cp\zombies\cp_disco_spawning::setspawndelayoverride(0.3);
 	}
 
-	foreach(var_01 in level.players)
-	{
-		if(scripts\engine\utility::istrue(var_01.inlaststand))
-		{
+	foreach(var_01 in level.players) {
+		if(scripts\engine\utility::istrue(var_01.inlaststand)) {
 			var_01 notify("revive_success");
 			scripts\cp\cp_laststand::clear_last_stand_timer(var_01);
-			if(isdefined(var_01.reviveent))
-			{
+			if(isdefined(var_01.reviveent)) {
 				var_01.reviveent notify("revive_success");
 			}
 		}
@@ -3174,35 +2639,24 @@ watchforrelicstagecomplete()
 	thread stagecomplete();
 }
 
-//Function Number: 150
-stagecomplete()
-{
-	foreach(var_01 in level.players)
-	{
+stagecomplete() {
+	foreach(var_01 in level.players) {
 		var_01 playsoundtoplayer("quest_stage_completed_gong_lr",var_01);
 	}
 }
 
-//Function Number: 151
-enablerkspawners()
-{
+enablerkspawners() {
 	var_00 = scripts\engine\utility::getstructarray("static","script_noteworthy");
-	foreach(var_02 in var_00)
-	{
-		if(isdefined(var_02.groupname) && var_02.groupname == "rk_spawners")
-		{
+	foreach(var_02 in var_00) {
+		if(isdefined(var_02.groupname) && var_02.groupname == "rk_spawners") {
 			var_02 scripts\cp\zombies\zombies_spawning::make_spawner_active();
 		}
 	}
 }
 
-//Function Number: 152
-katanahintfunc(param_00,param_01)
-{
-	if(scripts\engine\utility::istrue(param_01.has_disco_soul_key))
-	{
-		if(!scripts\engine\utility::flag("rk_fight_ended"))
-		{
+katanahintfunc(param_00,param_01) {
+	if(scripts\engine\utility::istrue(param_01.has_disco_soul_key)) {
+		if(!scripts\engine\utility::flag("rk_fight_ended")) {
 			return level.interaction_hintstrings["iw7_katana_zm"];
 		}
 
@@ -3212,13 +2666,9 @@ katanahintfunc(param_00,param_01)
 	return "";
 }
 
-//Function Number: 153
-katanausefunc(param_00,param_01)
-{
-	if(scripts\engine\utility::flag("rk_fight_ended"))
-	{
-		if(!param_01 hasanykatana(param_01))
-		{
+katanausefunc(param_00,param_01) {
+	if(scripts\engine\utility::flag("rk_fight_ended")) {
+		if(!param_01 hasanykatana(param_01)) {
 			scripts/cp/zombies/coop_wall_buys::givevalidweapon(param_01,"iw7_katana_zm");
 			param_01 thread scripts\cp\cp_vo::try_to_play_vo("magicwheel_katana","zmb_comment_vo","low",10,0,1,0,40);
 			return;
@@ -3227,10 +2677,8 @@ katanausefunc(param_00,param_01)
 		return;
 	}
 
-	if(scripts\engine\utility::istrue(param_01.has_disco_soul_key))
-	{
-		if(!param_01 hasanykatana(param_01))
-		{
+	if(scripts\engine\utility::istrue(param_01.has_disco_soul_key)) {
+		if(!param_01 hasanykatana(param_01)) {
 			scripts/cp/zombies/coop_wall_buys::givevalidweapon(param_01,"iw7_katana_zm");
 			param_01 thread scripts\cp\cp_vo::try_to_play_vo("magicwheel_katana","zmb_comment_vo","low",10,0,1,0,40);
 			return;
@@ -3240,14 +2688,10 @@ katanausefunc(param_00,param_01)
 	}
 }
 
-//Function Number: 154
-hasanykatana(param_00)
-{
+hasanykatana(param_00) {
 	var_01 = param_00 getweaponslistall();
-	foreach(var_03 in var_01)
-	{
-		if(issubstr(var_03,"iw7_katana"))
-		{
+	foreach(var_03 in var_01) {
+		if(issubstr(var_03,"iw7_katana")) {
 			return 1;
 		}
 	}
@@ -3255,9 +2699,7 @@ hasanykatana(param_00)
 	return 0;
 }
 
-//Function Number: 155
-playratkingfightcompletevos()
-{
+playratkingfightcompletevos() {
 	level endon("game_ended");
 	level thread scripts\cp\cp_vo::try_to_play_vo("ww_ratking_finaldeath","rave_announcer_vo","highest",70,0,0,1);
 	wait(scripts\cp\cp_vo::get_sound_length("ww_ratking_finaldeath") + 5);

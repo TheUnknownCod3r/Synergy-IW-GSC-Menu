@@ -1,36 +1,27 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: 3656.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 2
- * Decompile Time: 3 ms
- * Timestamp: 10/27/2023 12:31:00 AM
-*******************************************************************/
+/****************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\3656.gsc
+****************************/
 
-//Function Number: 1
-func_5AD1(param_00)
-{
+func_5AD1(param_00) {
 	scripts\engine\utility::flag_init("allow_double_jump");
 	scripts\engine\utility::flag_set("allow_double_jump");
 	function_014C("jump","+gostand");
 	function_014C("jump","+moveup");
-	if(!isdefined(param_00))
-	{
+	if(!isdefined(param_00)) {
 		param_00 = 60;
 	}
 
 	function_01C5("jump_height",param_00);
 	self.var_AD32 = undefined;
 	self.var_5AD4 = undefined;
-	for(;;)
-	{
+	for(;;) {
 		self waittill("jump");
 		var_01 = scripts\common\trace::ray_trace(self.origin + (0,0,1),self.origin - (0,0,getdvarint("jump_height")),self,scripts\common\trace::create_default_contents(0));
 		var_01 = bullettrace(self.origin + (0,0,1),self.origin - (0,0,getdvarint("jump_height")),0,self);
 		var_02 = var_01["fraction"] < 0.3;
-		if(var_02 || isdefined(self.var_4D93) || !scripts\engine\utility::flag("allow_double_jump"))
-		{
+		if(var_02 || isdefined(self.var_4D93) || !scripts\engine\utility::flag("allow_double_jump")) {
 			wait(0.25);
 			continue;
 		}
@@ -59,8 +50,7 @@ func_5AD1(param_00)
 		earthquake(0.3,0.75,self.origin,256);
 		self.var_AD32 = var_04;
 		wait(var_07);
-		if(isdefined(self.var_AD32) && self.var_AD32 == var_04)
-		{
+		if(isdefined(self.var_AD32) && self.var_AD32 == var_04) {
 			self setvelocity(var_0A + (0,0,50));
 			self unlink();
 			self.var_AD32 = undefined;
@@ -75,17 +65,13 @@ func_5AD1(param_00)
 	}
 }
 
-//Function Number: 2
-func_C144()
-{
+func_C144() {
 	self notify("notify_on_landing");
 	self endon("notify_on_landing");
-	for(;;)
-	{
+	for(;;) {
 		var_00 = bullettrace(self.origin + (0,0,1),self.origin - (0,0,getdvarint("jump_height")),0,self);
 		var_01 = var_00["fraction"] < 0.2;
-		if(var_01)
-		{
+		if(var_01) {
 			self notify("landed_on_ground");
 		}
 

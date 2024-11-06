@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\mp\killstreaks\_gas_airstrike.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 10
- * Decompile Time: 569 ms
- * Timestamp: 10/27/2023 12:28:34 AM
-*******************************************************************/
+/*************************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\mp\killstreaks\_gas_airstrike.gsc
+*************************************************************/
 
-//Function Number: 1
-init()
-{
+init() {
 	var_00 = spawnstruct();
 	var_00.var_B923 = [];
 	var_00.var_B923["allies"] = "vehicle_mig29_desert";
@@ -44,12 +38,9 @@ init()
 	scripts\mp\killstreaks\_killstreaks::registerkillstreak("gas_airstrike",::onuse);
 }
 
-//Function Number: 2
-onuse(param_00,param_01)
-{
+onuse(param_00,param_01) {
 	var_02 = scripts\mp\_utility::getotherteam(self.team);
-	if(isdefined(level.var_C22F))
-	{
+	if(isdefined(level.var_C22F)) {
 		self iprintlnbold(&"KILLSTREAKS_AIR_SPACE_TOO_CROWDED");
 		return 0;
 	}
@@ -58,9 +49,7 @@ onuse(param_00,param_01)
 	return isdefined(var_03) && var_03;
 }
 
-//Function Number: 3
-dostrike(param_00,param_01,param_02,param_03)
-{
+dostrike(param_00,param_01,param_02,param_03) {
 	level.var_C22F = 0;
 	wait(1);
 	var_04 = scripts\mp\killstreaks\_plane::_meth_806A();
@@ -69,39 +58,30 @@ dostrike(param_00,param_01,param_02,param_03)
 	self waittill("gas_airstrike_flyby_complete");
 }
 
-//Function Number: 4
-dooneflyby(param_00,param_01,param_02,param_03,param_04)
-{
+dooneflyby(param_00,param_01,param_02,param_03,param_04) {
 	var_05 = level.planeconfigs[param_00];
 	var_06 = scripts\mp\killstreaks\_plane::getflightpath(param_02,param_03,var_05.halfdistance,1,param_04,var_05.getclosestpointonnavmesh3d,0,param_00);
 	level thread scripts\mp\killstreaks\_plane::doflyby(param_01,self,param_01,var_06["startPoint"] + (0,0,randomint(var_05.heightrange)),var_06["endPoint"] + (0,0,randomint(var_05.heightrange)),var_06["attackTime"],var_06["flyTime"],param_03,param_00);
 }
 
-//Function Number: 5
-cleanupgamemodes(param_00,param_01,param_02)
-{
+cleanupgamemodes(param_00,param_01,param_02) {
 	param_00 notify("gas_airstrike_flyby_complete");
 }
 
-//Function Number: 6
-dropbombs(param_00,param_01,param_02,param_03,param_04)
-{
+dropbombs(param_00,param_01,param_02,param_03,param_04) {
 	self endon("death");
 	wait(param_02);
 	var_05 = level.planeconfigs[param_04];
 	var_06 = var_05.var_C21A;
 	var_07 = var_05.var_5703 / var_05.getclosestpointonnavmesh3d;
-	while(var_06 > 0)
-	{
+	while(var_06 > 0) {
 		thread func_5D35(param_03,param_04);
 		var_06--;
 		wait(var_07);
 	}
 }
 
-//Function Number: 7
-func_5D35(param_00,param_01)
-{
+func_5D35(param_00,param_01) {
 	level.var_C22F++;
 	var_02 = self;
 	var_03 = level.planeconfigs[param_01];
@@ -116,8 +96,7 @@ func_5D35(param_00,param_01)
 	wait(0.1);
 	var_07 = var_06.origin;
 	var_08 = var_06.angles;
-	if(level.splitscreen)
-	{
+	if(level.splitscreen) {
 		playfxontag(level.airstrikessfx,var_06,"tag_origin");
 	}
 	else
@@ -132,24 +111,19 @@ func_5D35(param_00,param_01)
 	var_06 delete();
 	var_05 delete();
 	level.var_C22F--;
-	if(level.var_C22F == 0)
-	{
+	if(level.var_C22F == 0) {
 		level.var_C22F = undefined;
 	}
 }
 
-//Function Number: 8
-spawnbomb(param_00,param_01,param_02)
-{
+spawnbomb(param_00,param_01,param_02) {
 	var_03 = spawn("script_model",param_01);
 	var_03.angles = param_02;
 	var_03 setmodel(param_00);
 	return var_03;
 }
 
-//Function Number: 9
-func_C4CD(param_00,param_01,param_02)
-{
+func_C4CD(param_00,param_01,param_02) {
 	var_03 = level.planeconfigs[param_02];
 	var_04 = spawn("trigger_radius",param_01,0,var_03.var_5FEF,var_03.var_5FEA);
 	var_04.triggerportableradarping = param_00;
@@ -161,10 +135,8 @@ func_C4CD(param_00,param_01,param_02)
 	var_08 = spawn("script_model",param_01 + var_03.killcamoffset);
 	var_08 linkto(var_04);
 	self.killcament = var_08;
-	while(var_07 > 0)
-	{
-		foreach(var_0A in level.characters)
-		{
+	while(var_07 > 0) {
+		foreach(var_0A in level.characters) {
 			var_0A applygaseffect(param_00,param_01,var_04,self,var_03.var_5FE8);
 		}
 
@@ -177,14 +149,10 @@ func_C4CD(param_00,param_01,param_02)
 	var_06 delete();
 }
 
-//Function Number: 10
-applygaseffect(param_00,param_01,param_02,param_03,param_04)
-{
-	if(param_00 scripts\mp\_utility::isenemy(self) && isalive(self) && self istouching(param_02))
-	{
+applygaseffect(param_00,param_01,param_02,param_03,param_04) {
+	if(param_00 scripts\mp\_utility::isenemy(self) && isalive(self) && self istouching(param_02)) {
 		param_03 radiusdamage(self.origin,1,param_04,param_04,param_00,"MOD_RIFLE_BULLET","gas_strike_mp");
-		if(!scripts\mp\_utility::isusingremote())
-		{
+		if(!scripts\mp\_utility::isusingremote()) {
 			var_05 = scripts\mp\perks\_perkfunctions::applystunresistence(param_00,self,2);
 			self shellshock("default",var_05);
 		}

@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: 3997.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 1
- * Decompile Time: 4 ms
- * Timestamp: 10/27/2023 12:31:54 AM
-*******************************************************************/
+/****************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\3997.gsc
+****************************/
 
-//Function Number: 1
-main()
-{
+main() {
 	level._effect["vfx_fallen_sun"] = loadfx("vfx/iw7/levels/mp_fallen/vfx_fallen_sun.vfx");
 	level._effect["vfx_fallen_sun"] = loadfx("vfx/iw7/levels/mp_fallen/vfx_fallen_sun.vfx");
 	level._effect["vfx_fallen_sun"] = loadfx("vfx/iw7/levels/mp_fallen/vfx_fallen_sun.vfx");

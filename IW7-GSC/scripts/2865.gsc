@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: 2865.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 3
- * Decompile Time: 13 ms
- * Timestamp: 10/27/2023 12:24:20 AM
-*******************************************************************/
+/****************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\2865.gsc
+****************************/
 
-//Function Number: 1
-func_4FF0()
-{
+func_4FF0() {
 	var_00 = "soldier";
 	scripts\anim\utility::func_F715(var_00,"default",loadfx("vfx/core/blank.vfx"));
 	scripts\anim\utility::func_F715(var_00,"asphalt_dry",loadfx("vfx/core/blank.vfx"));
@@ -81,8 +75,7 @@ func_4FF0()
 	scripts\anim\utility::func_F7B9(var_01,var_02,"asphalt_dry",loadfx("vfx/core/impacts/bodyfall_default_large_runner.vfx"),var_03,var_04);
 	scripts\anim\utility::func_F7B9(var_01,var_02,"rock",loadfx("vfx/core/impacts/bodyfall_default_large_runner.vfx"),var_03,var_04);
 	var_05 = ["brick","carpet","foliage","grass","gravel","ice","metal","painted metal","mud","plaster","sand","snow","slush","water","wood","ceramic"];
-	foreach(var_07 in var_05)
-	{
+	foreach(var_07 in var_05) {
 		scripts\anim\utility::func_F7BA(var_01,var_07,var_03,var_04);
 	}
 
@@ -94,18 +87,15 @@ func_4FF0()
 	scripts\anim\utility::func_F7B9(var_01,var_02,"concrete_dry",loadfx("vfx/core/impacts/bodyfall_default_large_runner.vfx"),var_03,var_04);
 	scripts\anim\utility::func_F7B9(var_01,var_02,"asphalt_dry",loadfx("vfx/core/impacts/bodyfall_default_large_runner.vfx"),var_03,var_04);
 	scripts\anim\utility::func_F7B9(var_01,var_02,"rock",loadfx("vfx/core/impacts/bodyfall_default_large_runner.vfx"),var_03,var_04);
-	foreach(var_07 in var_05)
-	{
+	foreach(var_07 in var_05) {
 		scripts\anim\utility::func_F7BA(var_01,var_07,var_03,var_04);
 	}
 
-	if(!isdefined(level.plant_anims))
-	{
+	if(!isdefined(level.plant_anims)) {
 		return;
 	}
 
-	switch(level.plant_anims)
-	{
+	switch(level.plant_anims) {
 		case "titan":
 			func_11948();
 			break;
@@ -116,9 +106,7 @@ func_4FF0()
 	}
 }
 
-//Function Number: 2
-func_11948()
-{
+func_11948() {
 	var_00 = "soldier";
 	scripts\anim\utility::func_F715(var_00,"default",loadfx("vfx/iw7/levels/titan/footsteps/footstep_blank.vfx"));
 	scripts\anim\utility::func_F715(var_00,"dirt",loadfx("vfx/iw7/levels/titan/footsteps/footstep_mud.vfx"));
@@ -166,9 +154,7 @@ func_11948()
 	scripts\anim\utility::func_F716(var_00,"dirt",loadfx("vfx/iw7/levels/titan/footsteps/footstep_mud_c12_titan.vfx"));
 }
 
-//Function Number: 3
-mars()
-{
+mars() {
 	var_00 = "soldier";
 	scripts\anim\utility::func_F715(var_00,"dirt",loadfx("vfx/core/impacts/footstep_dust_mars.vfx"));
 	scripts\anim\utility::func_F715(var_00,"sand",loadfx("vfx/core/impacts/footstep_dust_mars.vfx"));

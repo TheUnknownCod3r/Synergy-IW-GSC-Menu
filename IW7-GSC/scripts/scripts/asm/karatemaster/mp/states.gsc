@@ -1,18 +1,11 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\asm\karatemaster\mp\states.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 18
- * Decompile Time: 1083 ms
- * Timestamp: 10\27\2023 12:01:46 AM
-*******************************************************************/
+/**********************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\asm\karatemaster\mp\states.gsc
+**********************************************************/
 
-//Function Number: 1
-func_2371()
-{
-	if(scripts\asm\asm::func_232E("karatemaster"))
-	{
+func_2371() {
+	if(scripts\asm\asm::func_232E("karatemaster")) {
 		return;
 	}
 
@@ -160,104 +153,70 @@ func_2371()
 	scripts\asm\asm::func_2327();
 }
 
-//Function Number: 2
-trans_idle_to_choose_movetype0(param_00,param_01,param_02,param_03)
-{
+trans_idle_to_choose_movetype0(param_00,param_01,param_02,param_03) {
 	return scripts\asm\asm_bb::bb_moverequested();
 }
 
-//Function Number: 3
-trans_choose_movetype_to_idle_exit_sprint0(param_00,param_01,param_02,param_03)
-{
+trans_choose_movetype_to_idle_exit_sprint0(param_00,param_01,param_02,param_03) {
 	return scripts\asm\zombie\zombie::func_BE9A();
 }
 
-//Function Number: 4
-trans_choose_movetype_to_idle_exit_walk1(param_00,param_01,param_02,param_03)
-{
+trans_choose_movetype_to_idle_exit_walk1(param_00,param_01,param_02,param_03) {
 	return scripts\asm\asm_bb::bb_movetyperequested("walk");
 }
 
-//Function Number: 5
-trans_choose_movetype_to_idle_exit_run2(param_00,param_01,param_02,param_03)
-{
+trans_choose_movetype_to_idle_exit_run2(param_00,param_01,param_02,param_03) {
 	return scripts\asm\asm_bb::bb_movetyperequested("run");
 }
 
-//Function Number: 6
-trans_choose_movetype_to_idle_exit_slow_walk3(param_00,param_01,param_02,param_03)
-{
+trans_choose_movetype_to_idle_exit_slow_walk3(param_00,param_01,param_02,param_03) {
 	return scripts\asm\asm_bb::bb_movetyperequested("slow_walk");
 }
 
-//Function Number: 7
-trans_pass_walk_in_to_walk_loop1(param_00,param_01,param_02,param_03)
-{
+trans_pass_walk_in_to_walk_loop1(param_00,param_01,param_02,param_03) {
 	return scripts\asm\asm_bb::bb_moverequested();
 }
 
-//Function Number: 8
-trans_pass_walk_out_to_move_done4(param_00,param_01,param_02,param_03)
-{
+trans_pass_walk_out_to_move_done4(param_00,param_01,param_02,param_03) {
 	return !scripts\asm\asm_bb::bb_moverequested();
 }
 
-//Function Number: 9
-trans_pass_run_in_to_run_loop1(param_00,param_01,param_02,param_03)
-{
+trans_pass_run_in_to_run_loop1(param_00,param_01,param_02,param_03) {
 	return scripts\asm\asm_bb::bb_moverequested();
 }
 
-//Function Number: 10
-trans_pass_run_out_to_move_done2(param_00,param_01,param_02,param_03)
-{
+trans_pass_run_out_to_move_done2(param_00,param_01,param_02,param_03) {
 	return !scripts\asm\asm_bb::bb_moverequested();
 }
 
-//Function Number: 11
-trans_pass_sprint_in_to_sprint_loop1(param_00,param_01,param_02,param_03)
-{
+trans_pass_sprint_in_to_sprint_loop1(param_00,param_01,param_02,param_03) {
 	return scripts\asm\asm_bb::bb_moverequested();
 }
 
-//Function Number: 12
-trans_pass_sprint_out_to_move_done0(param_00,param_01,param_02,param_03)
-{
+trans_pass_sprint_out_to_move_done0(param_00,param_01,param_02,param_03) {
 	return !scripts\asm\asm_bb::bb_moverequested();
 }
 
-//Function Number: 13
-trans_pass_slow_walk_in_to_slow_walk_loop1(param_00,param_01,param_02,param_03)
-{
+trans_pass_slow_walk_in_to_slow_walk_loop1(param_00,param_01,param_02,param_03) {
 	return scripts\asm\asm_bb::bb_moverequested();
 }
 
-//Function Number: 14
-trans_pass_slow_walk_out_to_move_done3(param_00,param_01,param_02,param_03)
-{
+trans_pass_slow_walk_out_to_move_done3(param_00,param_01,param_02,param_03) {
 	return !scripts\asm\asm_bb::bb_moverequested();
 }
 
-//Function Number: 15
-trans_death_generic_to_death_normal0(param_00,param_01,param_02,param_03)
-{
+trans_death_generic_to_death_normal0(param_00,param_01,param_02,param_03) {
 	return self.agent_type == "skater";
 }
 
-//Function Number: 16
-trans_death_generic_to_death_kungfu1(param_00,param_01,param_02,param_03)
-{
+trans_death_generic_to_death_kungfu1(param_00,param_01,param_02,param_03) {
 	return scripts\common\utility::istrue(self.kung_fu_punched);
 }
 
-//Function Number: 17
-trans_death_moving_to_death_moving_normal0(param_00,param_01,param_02,param_03)
-{
+trans_death_moving_to_death_moving_normal0(param_00,param_01,param_02,param_03) {
 	return self.agent_type == "skater";
 }
 
-//Function Number: 18
-trans_death_moving_to_death_kungfu1(param_00,param_01,param_02,param_03)
-{
+trans_death_moving_to_death_kungfu1(param_00,param_01,param_02,param_03) {
 	return scripts\common\utility::istrue(self.kung_fu_punched);
 }

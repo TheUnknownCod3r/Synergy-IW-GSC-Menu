@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\mp\agents\zombie_skeleton\zombie_skeleton.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 8
- * Decompile Time: 431 ms
- * Timestamp: 10/27/2023 12:11:30 AM
-*******************************************************************/
+/*************************************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\mp\agents\zombie_skeleton\zombie_skeleton.gsc
+*************************************************************************/
 
-//Function Number: 1
-zombie_skeleton_init()
-{
+zombie_skeleton_init() {
 	registerscriptedagent();
 	level.agent_funcs["skeleton"]["on_damaged"] = ::scripts/cp/agents/gametype_zombie::onzombiedamaged;
 	level.agent_funcs["skeleton"]["gametype_on_damage_finished"] = ::scripts/cp/agents/gametype_zombie::onzombiedamagefinished;
@@ -18,20 +12,15 @@ zombie_skeleton_init()
 	level.movemodefunc["skeleton"] = ::scripts/cp/agents/gametype_zombie::run_if_last_zombie;
 }
 
-//Function Number: 2
-registerscriptedagent()
-{
+registerscriptedagent() {
 	scripts/aitypes/bt_util::init();
 	func_AEB0();
 	thread func_FAB0();
 }
 
-//Function Number: 3
-func_FAB0()
-{
+func_FAB0() {
 	level endon("game_ended");
-	if(!isdefined(level.agent_definition))
-	{
+	if(!isdefined(level.agent_definition)) {
 		level waittill("scripted_agents_initialized");
 	}
 
@@ -41,21 +30,16 @@ func_FAB0()
 	level.agent_funcs["skeleton"]["on_killed"] = ::scripts\mp\agents\zombie\zmb_zombie_agent::onzombiekilled;
 }
 
-//Function Number: 4
-setupagent()
-{
+setupagent() {
 	scripts\mp\agents\zombie\zmb_zombie_agent::setupagent();
 	self.is_skeleton = 1;
 }
 
-//Function Number: 5
-func_899C()
-{
+func_899C() {
 	self endon("death");
 	level waittill("game_ended");
 	self clearpath();
-	foreach(var_04, var_01 in self.var_164D)
-	{
+	foreach(var_04, var_01 in self.var_164D) {
 		var_02 = var_01.var_4BC0;
 		var_03 = level.asm[var_04].states[var_02];
 		scripts/asm/asm::func_2388(var_04,var_02,var_03,var_03.var_116FB);
@@ -63,11 +47,8 @@ func_899C()
 	}
 }
 
-//Function Number: 6
-func_FACE(param_00)
-{
-	if(isdefined(level.skeleton_model_override))
-	{
+func_FACE(param_00) {
+	if(isdefined(level.skeleton_model_override)) {
 		self setmodel(level.skeleton_model_override);
 	}
 	else
@@ -78,13 +59,8 @@ func_FACE(param_00)
 	thread scripts\mp\agents\zombie\zmb_zombie_agent::func_50EF();
 }
 
-//Function Number: 7
-func_AEB0()
-{
-}
+func_AEB0() {}
 
-//Function Number: 8
-should_spawn_skeleton()
-{
+should_spawn_skeleton() {
 	return undefined;
 }

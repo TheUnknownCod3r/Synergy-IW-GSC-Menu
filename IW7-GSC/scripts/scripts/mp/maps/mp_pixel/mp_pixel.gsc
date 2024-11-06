@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\mp\maps\mp_pixel\mp_pixel.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 2
- * Decompile Time: 145 ms
- * Timestamp: 10/27/2023 12:14:04 AM
-*******************************************************************/
+/*********************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\mp\maps\mp_pixel\mp_pixel.gsc
+*********************************************************/
 
-//Function Number: 1
-main()
-{
+main() {
 	scripts\mp\maps\mp_pixel\mp_pixel_precache::main();
 	scripts\mp\maps\mp_pixel\gen\mp_pixel_art::main();
 	scripts\mp\maps\mp_pixel\mp_pixel_fx::main();
@@ -27,9 +21,7 @@ main()
 	thread fix_collision();
 }
 
-//Function Number: 2
-fix_collision()
-{
+fix_collision() {
 	var_00 = getent("clip256x256x256","targetname");
 	var_01 = spawn("script_model",(1336,1272,56));
 	var_01.angles = (0,323,0);

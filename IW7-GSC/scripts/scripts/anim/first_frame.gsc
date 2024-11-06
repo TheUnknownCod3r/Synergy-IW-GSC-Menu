@@ -1,22 +1,15 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\anim\first_frame.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 1
- * Decompile Time: 122 ms
- * Timestamp: 10\27\2023 12:00:35 AM
-*******************************************************************/
+/************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\anim\first_frame.gsc
+************************************************/
 
-//Function Number: 1
-main()
-{
+main() {
 	self endon("death");
 	self endon("stop_first_frame");
 	self notify("killanimscript");
 	self.closefile = 0;
-	if(getdvarint("ai_iw7") == 1)
-	{
+	if(getdvarint("ai_iw7") == 1) {
 		self aiclearanim(lib_0A1E::asm_getbodyknob(),0.3);
 	}
 	else
@@ -24,8 +17,7 @@ main()
 		self aiclearanim(self.var_E6E6,0.3);
 	}
 
-	if(scripts\common\utility::actor_is3d())
-	{
+	if(scripts\common\utility::actor_is3d()) {
 		self orientmode("face angle 3d",self.angles);
 	}
 	else

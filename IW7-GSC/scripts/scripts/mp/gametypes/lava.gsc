@@ -1,27 +1,19 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\mp\gametypes\lava.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 10
- * Decompile Time: 580 ms
- * Timestamp: 10/27/2023 12:12:42 AM
-*******************************************************************/
+/*************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\mp\gametypes\lava.gsc
+*************************************************/
 
-//Function Number: 1
-main()
-{
-	if(getdvar("mapname") == "mp_background")
-	{
+main() {
+	if(getdvar("mapname") == "mp_background") {
 		return;
 	}
 
 	scripts\mp\_globallogic::init();
 	scripts\mp\_globallogic::setupcallbacks();
-	if(function_011C())
-	{
+	if(function_011C()) {
 		level.initializematchrules = ::initializematchrules;
-		[[ level.initializematchrules ]]();
+		[[level.initializematchrules]]();
 		level thread scripts\mp\_utility::reinitializematchrulesonmigration();
 	}
 	else
@@ -42,26 +34,21 @@ main()
 	level.getspawnpoint = ::getspawnpoint;
 	level.onnormaldeath = ::onnormaldeath;
 	level.onsuicidedeath = ::onsuicidedeath;
-	if(level.matchrules_damagemultiplier || level.matchrules_vampirism)
-	{
+	if(level.matchrules_damagemultiplier || level.matchrules_vampirism) {
 		level.modifyplayerdamage = ::scripts\mp\_damage::gamemodemodifyplayerdamage;
 	}
 
 	game["dialog"]["gametype"] = "tm_death";
-	if(getdvarint("g_hardcore"))
-	{
+	if(getdvarint("g_hardcore")) {
 		game["dialog"]["gametype"] = "hc_" + game["dialog"]["gametype"];
 	}
-	else if(getdvarint("camera_thirdPerson"))
-	{
+	else if(getdvarint("camera_thirdPerson")) {
 		game["dialog"]["gametype"] = "thirdp_" + game["dialog"]["gametype"];
 	}
-	else if(getdvarint("scr_diehard"))
-	{
+	else if(getdvarint("scr_diehard")) {
 		game["dialog"]["gametype"] = "dh_" + game["dialog"]["gametype"];
 	}
-	else if(getdvarint("scr_" + level.gametype + "_promode"))
-	{
+	else if(getdvarint("scr_" + level.gametype + "_promode")) {
 		game["dialog"]["gametype"] = game["dialog"]["gametype"] + "_pro";
 	}
 
@@ -69,9 +56,7 @@ main()
 	level thread watchplayerconnect();
 }
 
-//Function Number: 2
-initializematchrules()
-{
+initializematchrules() {
 	scripts\mp\_utility::setcommonrulesfrommatchdata();
 	setdynamicdvar("scr_lava_roundswitch",0);
 	scripts\mp\_utility::registerroundswitchdvar("lava",0,0,9);
@@ -84,17 +69,13 @@ initializematchrules()
 	setdynamicdvar("scr_lava_promode",0);
 }
 
-//Function Number: 3
-onstartgametype()
-{
+onstartgametype() {
 	setclientnamemode("auto_change");
-	if(!isdefined(game["switchedsides"]))
-	{
+	if(!isdefined(game["switchedsides"])) {
 		game["switchedsides"] = 0;
 	}
 
-	if(game["switchedsides"])
-	{
+	if(game["switchedsides"]) {
 		var_00 = game["attackers"];
 		var_01 = game["defenders"];
 		game["attackers"] = var_01;
@@ -103,8 +84,7 @@ onstartgametype()
 
 	scripts\mp\_utility::setobjectivetext("allies",&"OBJECTIVES_LAVA");
 	scripts\mp\_utility::setobjectivetext("axis",&"OBJECTIVES_LAVA");
-	if(level.splitscreen)
-	{
+	if(level.splitscreen) {
 		scripts\mp\_utility::setobjectivescoretext("allies",&"OBJECTIVES_LAVA");
 		scripts\mp\_utility::setobjectivescoretext("axis",&"OBJECTIVES_LAVA");
 	}
@@ -121,9 +101,7 @@ onstartgametype()
 	scripts\mp\_gameobjects::main(var_02);
 }
 
-//Function Number: 4
-initspawns()
-{
+initspawns() {
 	scripts\mp\_spawnlogic::setactivespawnlogic("TDM");
 	level.spawnmins = (0,0,0);
 	level.spawnmaxs = (0,0,0);
@@ -135,17 +113,13 @@ initspawns()
 	function_01B4(level.mapcenter);
 }
 
-//Function Number: 5
-getspawnpoint()
-{
+getspawnpoint() {
 	var_00 = self.pers["team"];
-	if(game["switchedsides"])
-	{
+	if(game["switchedsides"]) {
 		var_00 = scripts\mp\_utility::getotherteam(var_00);
 	}
 
-	if(scripts\mp\_spawnlogic::shoulduseteamstartspawn())
-	{
+	if(scripts\mp\_spawnlogic::shoulduseteamstartspawn()) {
 		var_01 = scripts\mp\_spawnlogic::getspawnpointarray("mp_tdm_spawn_" + var_00 + "_start");
 		var_02 = scripts\mp\_spawnlogic::getspawnpoint_startspawn(var_01);
 	}
@@ -158,32 +132,23 @@ getspawnpoint()
 	return var_02;
 }
 
-//Function Number: 6
-onsuicidedeath(param_00)
-{
+onsuicidedeath(param_00) {
 	var_01 = scripts\mp\_rank::getscoreinfovalue("score_increment");
 	level scripts\mp\_gamescore::giveteamscoreforobjective(scripts\mp\_utility::getotherteam(param_00.pers["team"]),var_01,0);
 }
 
-//Function Number: 7
-onnormaldeath(param_00,param_01,param_02,param_03,param_04)
-{
+onnormaldeath(param_00,param_01,param_02,param_03,param_04) {
 	scripts\mp\gametypes\common::onnormaldeath(param_00,param_01,param_02,param_03,param_04);
 }
 
-//Function Number: 8
-ontimelimit()
-{
-	if(game["status"] == "overtime")
-	{
+ontimelimit() {
+	if(game["status"] == "overtime") {
 		var_00 = "forfeit";
 	}
-	else if(game["teamScores"]["allies"] == game["teamScores"]["axis"])
-	{
+	else if(game["teamScores"]["allies"] == game["teamScores"]["axis"]) {
 		var_00 = "overtime";
 	}
-	else if(game["teamScores"]["axis"] > game["teamScores"]["allies"])
-	{
+	else if(game["teamScores"]["axis"] > game["teamScores"]["allies"]) {
 		var_00 = "axis";
 	}
 	else
@@ -194,26 +159,18 @@ ontimelimit()
 	thread scripts\mp\_gamelogic::endgame(var_00,game["end_reason"]["time_limit_reached"]);
 }
 
-//Function Number: 9
-watchplayerconnect()
-{
-	for(;;)
-	{
+watchplayerconnect() {
+	for(;;) {
 		level waittill("connected",var_00);
 		var_00 watchplayeronground();
 	}
 }
 
-//Function Number: 10
-watchplayeronground()
-{
+watchplayeronground() {
 	self endon("disconnect");
-	for(;;)
-	{
-		if(scripts\mp\_utility::isreallyalive(self))
-		{
-			if(self isonground() & !self gold_teeth_hint_func())
-			{
+	for(;;) {
+		if(scripts\mp\_utility::isreallyalive(self)) {
+			if(self isonground() & !self gold_teeth_hint_func()) {
 				self dodamage(8,self.origin,self,undefined,"MOD_SUICIDE");
 				wait(1);
 			}

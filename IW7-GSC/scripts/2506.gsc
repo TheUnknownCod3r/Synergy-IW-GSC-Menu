@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: 2506.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 1
- * Decompile Time: 1 ms
- * Timestamp: 10/27/2023 12:23:19 AM
-*******************************************************************/
+/****************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\2506.gsc
+****************************/
 
-//Function Number: 1
-main()
-{
+main() {
 	var_00[0] = "head_bg_var_head_male_bc_01_head_male_bc_03";
 	var_00[1] = "head_bg_var_head_male_bc_01_head_male_bc_04";
 	var_00[2] = "head_bg_var_head_male_bc_01_head_male_bc_04_beard";

@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: 4074.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 4
- * Decompile Time: 1 ms
- * Timestamp: 10/27/2023 12:31:59 AM
-*******************************************************************/
+/****************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\4074.gsc
+****************************/
 
-//Function Number: 1
-main()
-{
+main() {
 	level._effect["vfx_periph_structure_light"] = loadfx("vfx/iw7/levels/mp_rivet/vfx_periph_structure_light.vfx");
 	level._effect["vfx_elec_short_runner"] = loadfx("vfx/iw7/levels/mp_riot/vfx_elec_short_runner.vfx");
 	level._effect["vfx_drone_floor_check"] = loadfx("vfx/iw7/levels/mp_rivet/vfx_drone_floor_check.vfx");
@@ -50,22 +44,17 @@ main()
 	level._effect["vfx_battle_mist_large"] = loadfx("vfx/iw7/levels/mp_rivet/vfx_battle_mist_large.vfx");
 }
 
-//Function Number: 2
-func_F03D()
-{
+func_F03D() {
 	level endon("game_ended");
 	self endon("death");
 	waittillframeend;
 	self.var_75A4 = getscriptablearray(scripts\engine\utility::getstruct("thruster_fx_lights","script_noteworthy").target,"targetname");
-	foreach(var_01 in self.var_75A4)
-	{
+	foreach(var_01 in self.var_75A4) {
 		var_01 setscriptablepartstate("onoff","off");
 	}
 }
 
-//Function Number: 3
-func_CCEB()
-{
+func_CCEB() {
 	level endon("game_ended");
 	self endon("death");
 	wait(2);
@@ -73,9 +62,7 @@ func_CCEB()
 	playfxontag(level._effect["vfx_rivet_drone_front_light"],self,"tag_light");
 }
 
-//Function Number: 4
-func_10FDF()
-{
+func_10FDF() {
 	stopfxontag(level._effect["vfx_rivet_light_siren"],self,"tag_light_top");
 	stopfxontag(level._effect["vfx_rivet_drone_front_light"],self,"tag_light");
 }

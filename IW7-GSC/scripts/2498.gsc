@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: 2498.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 1
- * Decompile Time: 0 ms
- * Timestamp: 10/27/2023 12:23:18 AM
-*******************************************************************/
+/****************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\2498.gsc
+****************************/
 
-//Function Number: 1
-main()
-{
+main() {
 	var_00[0] = "head_bg_var_head_sc_kloos_blast_damage";
 	var_00[1] = "head_bg_var_head_sc_kloos_head_sc_male_23_bloody";
 	var_00[2] = "head_bg_var_head_sc_kloos_head_sc_male_24_bloody";

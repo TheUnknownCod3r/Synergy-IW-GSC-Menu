@@ -1,33 +1,23 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\mp\agents\the_hoff\the_hoff_agent.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 17
- * Decompile Time: 812 ms
- * Timestamp: 10/27/2023 12:31:19 AM
-*******************************************************************/
+/*****************************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\mp\agents\the_hoff\the_hoff_agent.gsc
+*****************************************************************/
 
-//Function Number: 1
-registerscriptedagent()
-{
+registerscriptedagent() {
 	scripts/aitypes/bt_util::init();
 	lib_03A9::func_DEE8();
 	lib_0F37::func_2371();
 	thread func_FAB0();
 }
 
-//Function Number: 2
-func_FAB0()
-{
+func_FAB0() {
 	level endon("game_ended");
-	if(!isdefined(level.agent_definition))
-	{
+	if(!isdefined(level.agent_definition)) {
 		level waittill("scripted_agents_initialized");
 	}
 
-	if(!isdefined(level.species_funcs))
-	{
+	if(!isdefined(level.species_funcs)) {
 		level.species_funcs = [];
 	}
 
@@ -36,9 +26,7 @@ func_FAB0()
 	level.agent_definition["the_hoff"]["setup_model_func"] = ::func_FACE;
 }
 
-//Function Number: 3
-setupagent()
-{
+setupagent() {
 	self.accuracy = 0.5;
 	self.noattackeraccuracymod = 0;
 	self.sharpturnnotifydist = 48;
@@ -66,31 +54,22 @@ setupagent()
 	thread func_899D();
 }
 
-//Function Number: 4
-func_FAFE()
-{
+func_FAFE() {
 	self.var_3402 = ::func_11562;
 	self.var_3404 = [::func_11562,::func_11559,::func_1156F,::func_1157B,::func_11570];
 	self.var_3403 = [0,47,21,21,11];
 }
 
-//Function Number: 5
-func_899D()
-{
+func_899D() {
 	self endon("death");
-	for(;;)
-	{
+	for(;;) {
 		self waittill("enemy");
-		for(;;)
-		{
-			if(isdefined(self.isnodeoccupied))
-			{
+		for(;;) {
+			if(isdefined(self.isnodeoccupied)) {
 				self.var_6571 = gettime() + 1000;
 			}
-			else if(isdefined(self.var_6571))
-			{
-				if(gettime() > self.var_6571)
-				{
+			else if(isdefined(self.var_6571)) {
+				if(gettime() > self.var_6571) {
 					self.var_6571 = undefined;
 					break;
 				}
@@ -101,13 +80,10 @@ func_899D()
 	}
 }
 
-//Function Number: 6
-func_11570()
-{
+func_11570() {
 	var_00 = 70;
 	var_01 = 15;
-	if(isdefined(self.isnodeoccupied.var_18F4))
-	{
+	if(isdefined(self.isnodeoccupied.var_18F4)) {
 		var_00 = self.isnodeoccupied.var_18F4;
 		var_01 = self.isnodeoccupied.var_18F9;
 	}
@@ -122,13 +98,10 @@ func_11570()
 	return var_08;
 }
 
-//Function Number: 7
-func_1157B()
-{
+func_1157B() {
 	var_00 = 70;
 	var_01 = 15;
-	if(isdefined(self.isnodeoccupied.var_18F4))
-	{
+	if(isdefined(self.isnodeoccupied.var_18F4)) {
 		var_00 = self.isnodeoccupied.var_18F4;
 		var_01 = self.isnodeoccupied.var_18F9;
 	}
@@ -141,13 +114,10 @@ func_1157B()
 	return var_06;
 }
 
-//Function Number: 8
-func_1156F()
-{
+func_1156F() {
 	var_00 = 70;
 	var_01 = 15;
-	if(isdefined(self.isnodeoccupied.var_18F4))
-	{
+	if(isdefined(self.isnodeoccupied.var_18F4)) {
 		var_00 = self.isnodeoccupied.var_18F4;
 		var_01 = self.isnodeoccupied.var_18F9;
 	}
@@ -160,13 +130,10 @@ func_1156F()
 	return var_06;
 }
 
-//Function Number: 9
-func_11559()
-{
+func_11559() {
 	var_00 = 70;
 	var_01 = 15;
-	if(isdefined(self.isnodeoccupied.var_18F4))
-	{
+	if(isdefined(self.isnodeoccupied.var_18F4)) {
 		var_00 = self.isnodeoccupied.var_18F4;
 		var_01 = self.isnodeoccupied.var_18F9;
 	}
@@ -181,30 +148,22 @@ func_11559()
 	return var_08;
 }
 
-//Function Number: 10
-func_11562()
-{
+func_11562() {
 	var_00 = self.isnodeoccupied gettagorigin("j_head");
 	return var_00;
 }
 
-//Function Number: 11
-scriptedgoalwaitforarrival()
-{
+scriptedgoalwaitforarrival() {
 	self endon("death");
-	for(;;)
-	{
+	for(;;) {
 		self waittill("goal_reached");
-		if(isdefined(self.var_EF7D))
-		{
+		if(isdefined(self.var_EF7D)) {
 			var_00 = self.var_EF7D;
 		}
-		else if(isdefined(self.var_EF7A))
-		{
+		else if(isdefined(self.var_EF7A)) {
 			var_00 = self.var_EF7A.origin;
 		}
-		else if(isdefined(self.var_EF7C))
-		{
+		else if(isdefined(self.var_EF7C)) {
 			var_00 = self.var_EF7C.origin;
 		}
 		else
@@ -213,17 +172,14 @@ scriptedgoalwaitforarrival()
 		}
 
 		var_01 = 16;
-		if(isdefined(self.var_EF7E))
-		{
+		if(isdefined(self.var_EF7E)) {
 			var_01 = self.var_EF7E * self.var_EF7E;
 		}
 
-		if(distance2dsquared(self.origin,var_00) <= var_01)
-		{
+		if(distance2dsquared(self.origin,var_00) <= var_01) {
 			self.var_EF7D = undefined;
 			self.var_EF7C = undefined;
-			if(!isdefined(self.var_EF7B))
-			{
+			if(!isdefined(self.var_EF7B)) {
 				self.var_EF7A = undefined;
 			}
 
@@ -232,11 +188,8 @@ scriptedgoalwaitforarrival()
 	}
 }
 
-//Function Number: 12
-func_F834(param_00,param_01)
-{
-	if(!isdefined(param_01))
-	{
+func_F834(param_00,param_01) {
+	if(!isdefined(param_01)) {
 		param_01 = 0;
 	}
 
@@ -244,9 +197,7 @@ func_F834(param_00,param_01)
 	self.var_EF73 = param_00;
 }
 
-//Function Number: 13
-func_F835(param_00,param_01)
-{
+func_F835(param_00,param_01) {
 	self.var_EF7A = undefined;
 	self.var_EF7B = undefined;
 	self.var_EF7C = undefined;
@@ -254,9 +205,7 @@ func_F835(param_00,param_01)
 	self.var_EF7E = param_01;
 }
 
-//Function Number: 14
-func_F833(param_00,param_01)
-{
+func_F833(param_00,param_01) {
 	self.var_EF7D = undefined;
 	self.var_EF7A = undefined;
 	self.var_EF7B = undefined;
@@ -264,15 +213,12 @@ func_F833(param_00,param_01)
 	self.var_EF7E = param_01;
 }
 
-//Function Number: 15
-func_F832(param_00,param_01,param_02)
-{
+func_F832(param_00,param_01,param_02) {
 	self.var_EF7D = undefined;
 	self.var_EF7C = undefined;
 	self.var_EF7A = param_00;
 	self.var_EF7E = param_01;
-	if(isdefined(param_02) && param_02)
-	{
+	if(isdefined(param_02) && param_02) {
 		self.var_EF7B = param_02;
 		return;
 	}
@@ -280,11 +226,8 @@ func_F832(param_00,param_01,param_02)
 	self.var_EF7B = undefined;
 }
 
-//Function Number: 16
-func_41D9()
-{
-	if(isdefined(self.var_EF7D) || isdefined(self.var_EF7A) || isdefined(self.var_EF7C))
-	{
+func_41D9() {
+	if(isdefined(self.var_EF7D) || isdefined(self.var_EF7A) || isdefined(self.var_EF7C)) {
 		self.var_EF7D = undefined;
 		self.var_EF7A = undefined;
 		self.var_EF7B = undefined;
@@ -293,8 +236,6 @@ func_41D9()
 	}
 }
 
-//Function Number: 17
-func_FACE(param_00)
-{
+func_FACE(param_00) {
 	self setmodel("body_zmb_hero_dj_agent");
 }

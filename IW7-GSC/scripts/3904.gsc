@@ -1,18 +1,11 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: 3904.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 15
- * Decompile Time: 6 ms
- * Timestamp: 10/27/2023 12:31:11 AM
-*******************************************************************/
+/****************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\3904.gsc
+****************************/
 
-//Function Number: 1
-func_2371()
-{
-	if(scripts/asm/asm::func_232E("shoot_mp"))
-	{
+func_2371() {
+	if(scripts/asm/asm::func_232E("shoot_mp")) {
 		return;
 	}
 
@@ -65,86 +58,58 @@ func_2371()
 	scripts/asm/asm::func_2327();
 }
 
-//Function Number: 2
-func_124BC(param_00,param_01,param_02,param_03)
-{
+func_124BC(param_00,param_01,param_02,param_03) {
 	return lib_0F3C::func_138E2();
 }
 
-//Function Number: 3
-func_123FD(param_00,param_01,param_02,param_03)
-{
+func_123FD(param_00,param_01,param_02,param_03) {
 	return scripts/asm/asm_bb::func_291C();
 }
 
-//Function Number: 4
-func_12421(param_00,param_01,param_02,param_03)
-{
+func_12421(param_00,param_01,param_02,param_03) {
 	return scripts/asm/asm_bb::func_291C();
 }
 
-//Function Number: 5
-func_1241D(param_00,param_01,param_02,param_03)
-{
+func_1241D(param_00,param_01,param_02,param_03) {
 	return scripts/asm/asm_bb::func_291C();
 }
 
-//Function Number: 6
-func_124A9(param_00,param_01,param_02,param_03)
-{
+func_124A9(param_00,param_01,param_02,param_03) {
 	return self._blackboard.shootparams.var_FF0B == 1;
 }
 
-//Function Number: 7
-func_124A1(param_00,param_01,param_02,param_03)
-{
+func_124A1(param_00,param_01,param_02,param_03) {
 	return self._blackboard.shootparams.var_1119D == "full";
 }
 
-//Function Number: 8
-func_124A5(param_00,param_01,param_02,param_03)
-{
+func_124A5(param_00,param_01,param_02,param_03) {
 	return 1;
 }
 
-//Function Number: 9
-func_12425(param_00,param_01,param_02,param_03)
-{
+func_12425(param_00,param_01,param_02,param_03) {
 	return self.a.pose == "crouch";
 }
 
-//Function Number: 10
-func_12428(param_00,param_01,param_02,param_03)
-{
+func_12428(param_00,param_01,param_02,param_03) {
 	return 1;
 }
 
-//Function Number: 11
-func_12047(param_00,param_01,param_02,param_03)
-{
+func_12047(param_00,param_01,param_02,param_03) {
 	return scripts/asm/asm_bb::func_291C();
 }
 
-//Function Number: 12
-func_1204C(param_00,param_01,param_02,param_03)
-{
+func_1204C(param_00,param_01,param_02,param_03) {
 	return !lib_0F3C::func_138E2();
 }
 
-//Function Number: 13
-func_1203F(param_00,param_01,param_02,param_03)
-{
+func_1203F(param_00,param_01,param_02,param_03) {
 	return self._blackboard.shootparams.var_FF0B == 1;
 }
 
-//Function Number: 14
-func_12037(param_00,param_01,param_02,param_03)
-{
+func_12037(param_00,param_01,param_02,param_03) {
 	return self._blackboard.shootparams.var_1119D == "full";
 }
 
-//Function Number: 15
-func_1203B(param_00,param_01,param_02,param_03)
-{
+func_1203B(param_00,param_01,param_02,param_03) {
 	return 1;
 }

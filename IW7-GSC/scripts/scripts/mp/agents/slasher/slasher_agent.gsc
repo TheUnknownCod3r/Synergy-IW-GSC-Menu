@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\mp\agents\slasher\slasher_agent.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 17
- * Decompile Time: 915 ms
- * Timestamp: 10/27/2023 12:11:23 AM
-*******************************************************************/
+/***************************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\mp\agents\slasher\slasher_agent.gsc
+***************************************************************/
 
-//Function Number: 1
-registerscriptedagent()
-{
+registerscriptedagent() {
 	scripts/aitypes/bt_util::init();
 	behaviortree\slasher::func_DEE8();
 	scripts\asm\slasher\mp\states::func_2371();
@@ -18,12 +12,9 @@ registerscriptedagent()
 	thread func_FAB0();
 }
 
-//Function Number: 2
-func_FAB0()
-{
+func_FAB0() {
 	level endon("game_ended");
-	if(!isdefined(level.agent_definition))
-	{
+	if(!isdefined(level.agent_definition)) {
 		level waittill("scripted_agents_initialized");
 	}
 
@@ -33,12 +24,9 @@ func_FAB0()
 	level.agent_funcs["slasher"]["on_killed"] = ::onslasherkilled;
 }
 
-//Function Number: 3
-func_FACE(param_00)
-{
+func_FACE(param_00) {
 	var_01 = getdvar("ui_mapname");
-	if(var_01 == "cp_final")
-	{
+	if(var_01 == "cp_final") {
 		self setmodel("body_final_slasher");
 	}
 	else
@@ -50,9 +38,7 @@ func_FACE(param_00)
 	self attach("weapon_zmb_slasher_vm","tag_weapon_right");
 }
 
-//Function Number: 4
-setupzombiegametypevars()
-{
+setupzombiegametypevars() {
 	self.class = undefined;
 	self.movespeedscaler = undefined;
 	self.avoidkillstreakonspawntimer = undefined;
@@ -133,15 +119,12 @@ setupzombiegametypevars()
 	self.vignette_nocorpse = undefined;
 	self.death_anim_no_ragdoll = undefined;
 	self.dont_cleanup = 1;
-	if(getdvarint("scr_zombie_left_foot_sharp_turn_only",0) == 1)
-	{
+	if(getdvarint("scr_zombie_left_foot_sharp_turn_only",0) == 1) {
 		self.var_AB3F = 1;
 	}
 }
 
-//Function Number: 5
-setupagent()
-{
+setupagent() {
 	setupzombiegametypevars();
 	self.height = self.var_18F4;
 	self.fgetarg = self.var_18F9;
@@ -169,19 +152,15 @@ setupagent()
 	self.var_71D0 = ::shouldslasherplaypainanim;
 	self.precacheleaderboards = 1;
 	var_00 = getdvar("ui_mapname");
-	if(var_00 != "cp_final")
-	{
+	if(var_00 != "cp_final") {
 		self setethereal(1);
 	}
 
-	if(isdefined(level.slasher_level))
-	{
-		if(level.wave_num < 30 && level.wave_num > 19 && level.slasher_level < 3)
-		{
+	if(isdefined(level.slasher_level)) {
+		if(level.wave_num < 30 && level.wave_num > 19 && level.slasher_level < 3) {
 			level.slasher_level = 2;
 		}
-		else if(level.wave_num > 29)
-		{
+		else if(level.wave_num > 29) {
 			level.slasher_level = 3;
 		}
 	}
@@ -190,22 +169,17 @@ setupagent()
 	thread listen_for_fake_death();
 }
 
-//Function Number: 6
-turn_on_saw_blade_after_time(param_00)
-{
+turn_on_saw_blade_after_time(param_00) {
 	self endon("death");
 	wait(param_00);
 	self setscriptablepartstate("slasher_saw","active");
 	var_01 = getdvar("ui_mapname");
-	if(var_01 == "cp_final")
-	{
+	if(var_01 == "cp_final") {
 		return;
 	}
 
-	if(isdefined(level.slasher_level))
-	{
-		switch(level.slasher_level)
-		{
+	if(isdefined(level.slasher_level)) {
+		switch(level.slasher_level) {
 			case 1:
 				self setscriptablepartstate("mask","blue_mask");
 				break;
@@ -224,23 +198,18 @@ turn_on_saw_blade_after_time(param_00)
 	}
 }
 
-//Function Number: 7
-accumulatedamage(param_00,param_01)
-{
-	if(!isdefined(self.damageaccumulator))
-	{
+accumulatedamage(param_00,param_01) {
+	if(!isdefined(self.damageaccumulator)) {
 		self.damageaccumulator = spawnstruct();
 		self.damageaccumulator.accumulateddamage = 0;
 	}
-	else if(!isdefined(self.damageaccumulator.lastdamagetime) || gettime() > self.damageaccumulator.lastdamagetime + 1000)
-	{
+	else if(!isdefined(self.damageaccumulator.lastdamagetime) || gettime() > self.damageaccumulator.lastdamagetime + 1000) {
 		self.damageaccumulator.accumulateddamage = 0;
 		self.damageaccumulator.lastdamagetime = 0;
 	}
 
 	self.damageaccumulator.lastdamagetime = gettime();
-	if(!isdefined(param_01))
-	{
+	if(!isdefined(param_01)) {
 		param_01 = (1,1,1);
 	}
 
@@ -248,94 +217,74 @@ accumulatedamage(param_00,param_01)
 	self.damageaccumulator.accumulateddamage = self.damageaccumulator.accumulateddamage + param_00;
 }
 
-//Function Number: 8
-isinravemode()
-{
-	if(self isethereal())
-	{
+isinravemode() {
+	if(self isethereal()) {
 		return 1;
 	}
 
 	return 0;
 }
 
-//Function Number: 9
-onslasherdamagefinished(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08,param_09,param_0A,param_0B,param_0C)
-{
+onslasherdamagefinished(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08,param_09,param_0A,param_0B,param_0C) {
 	var_0D = param_02;
-	if(param_05 == "iw7_harpoon_zm")
-	{
+	if(param_05 == "iw7_harpoon_zm") {
 		param_02 = min(0.1 * self.maxhealth,2000);
 		param_02 = int(param_02);
 	}
-	else if(issubstr(param_05,"harpoon1"))
-	{
+	else if(issubstr(param_05,"harpoon1")) {
 		param_02 = min(0.01 * self.maxhealth,100);
 		param_02 = int(param_02);
 	}
-	else if(issubstr(param_05,"harpoon2"))
-	{
+	else if(issubstr(param_05,"harpoon2")) {
 		param_02 = min(0.1 * self.maxhealth,1500);
 		param_02 = int(param_02);
 	}
-	else if(issubstr(param_05,"harpoon3"))
-	{
+	else if(issubstr(param_05,"harpoon3")) {
 		param_02 = min(0.1 * self.maxhealth,1500);
 		param_02 = int(param_02);
 	}
-	else if(issubstr(param_05,"harpoon4"))
-	{
+	else if(issubstr(param_05,"harpoon4")) {
 		param_02 = min(0.01 * self.maxhealth,1000);
 		param_02 = int(param_02);
 	}
 
-	if(isdefined(param_05) && param_05 == "iw7_slasher_zm")
-	{
+	if(isdefined(param_05) && param_05 == "iw7_slasher_zm") {
 		param_02 = param_02 * 0.1;
 		param_02 = int(param_02);
 	}
 	else
 	{
-		if(isinravemode() || scripts\engine\utility::istrue(param_01.rave_mode))
-		{
+		if(isinravemode() || scripts\engine\utility::istrue(param_01.rave_mode)) {
 			param_02 = 0;
 		}
 
-		if(scripts/asm/asm::asm_isinstate("block"))
-		{
+		if(scripts/asm/asm::asm_isinstate("block")) {
 			param_02 = param_02 * 0.1;
 			param_02 = int(param_02);
 		}
 	}
 
-	if(isdefined(level.players) && level.players.size > 1)
-	{
-		if(param_02 != 0)
-		{
+	if(isdefined(level.players) && level.players.size > 1) {
+		if(param_02 != 0) {
 			var_0E = int(param_02 / level.players.size + 1);
 			param_02 = int(max(var_0E,1));
 		}
 	}
 
-	if(param_02 > 0)
-	{
+	if(param_02 > 0) {
 		accumulatedamage(param_02,param_07);
 	}
 
-	if(isdefined(self.nodamagescale))
-	{
+	if(isdefined(self.nodamagescale)) {
 		param_02 = var_0D;
 	}
 
 	slasher_on_damage_finished(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08,param_09,0,param_0B,param_0C);
 }
 
-//Function Number: 10
-slasher_on_damage_finished(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08,param_09,param_0A,param_0B,param_0C)
-{
+slasher_on_damage_finished(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08,param_09,param_0A,param_0B,param_0C) {
 	var_0D = self.health;
-	if(isdefined(param_07))
-	{
+	if(isdefined(param_07)) {
 		var_0E = vectortoyaw(param_07);
 		var_0F = self.angles[1];
 		self.var_E3 = angleclamp180(var_0E - var_0F);
@@ -352,11 +301,9 @@ slasher_on_damage_finished(param_00,param_01,param_02,param_03,param_04,param_05
 	self.var_E1 = param_02;
 	self.var_E2 = param_05;
 	self.var_4D62 = param_06;
-	if(param_02 >= self.health)
-	{
+	if(param_02 >= self.health) {
 		param_02 = 0;
-		if(isdefined(param_05) && param_05 == "iw7_slasher_zm")
-		{
+		if(isdefined(param_05) && param_05 == "iw7_slasher_zm") {
 			param_01 notify("slasher_killed_by_own_weapon",param_01,param_05);
 		}
 
@@ -364,64 +311,47 @@ slasher_on_damage_finished(param_00,param_01,param_02,param_03,param_04,param_05
 	}
 
 	self getrespawndelay(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08,param_09,0,param_0B,param_0C,0,1);
-	if(self.health > 0 && self.health < var_0D)
-	{
+	if(self.health > 0 && self.health < var_0D) {
 		self notify("pain");
 	}
 
-	if(isalive(self) && isdefined(self.agent_type))
-	{
+	if(isalive(self) && isdefined(self.agent_type)) {
 		var_10 = level.agent_funcs[self.agent_type]["gametype_on_damage_finished"];
-		if(isdefined(var_10))
-		{
-			[[ var_10 ]](param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08,param_09,param_0A,param_0B,param_0C);
+		if(isdefined(var_10)) {
+			[[var_10]](param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08,param_09,param_0A,param_0B,param_0C);
 		}
 	}
 }
 
-//Function Number: 11
-onslasherkilled(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08)
-{
+onslasherkilled(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08) {
 	self detach("weapon_zmb_slasher_vm","tag_weapon_right");
 	self.nocorpse = 1;
 	scripts\mp\mp_agent::default_on_killed(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08);
 }
 
-//Function Number: 12
-getslashergrenadehandoffset()
-{
+getslashergrenadehandoffset() {
 	return (12,12,100);
 }
 
-//Function Number: 13
-getslasherhandposition()
-{
+getslasherhandposition() {
 	return self gettweakablevalue(self.origin + (12,12,100));
 }
 
-//Function Number: 14
-shouldslasherplaypainanim()
-{
+shouldslasherplaypainanim() {
 	return 0;
 }
 
-//Function Number: 15
-getenemy()
-{
-	if(isdefined(self.slasherenemy))
-	{
+getenemy() {
+	if(isdefined(self.slasherenemy)) {
 		return self.slasherenemy;
 	}
 
 	return undefined;
 }
 
-//Function Number: 16
-lookatslasherenemy()
-{
+lookatslasherenemy() {
 	var_00 = getenemy();
-	if(isdefined(var_00))
-	{
+	if(isdefined(var_00)) {
 		var_01 = var_00.origin - self.origin;
 		var_02 = vectortoangles(var_01);
 		self orientmode("face angle abs",var_02);
@@ -431,15 +361,11 @@ lookatslasherenemy()
 	self orientmode("face angle abs",self.angles);
 }
 
-//Function Number: 17
-listen_for_fake_death()
-{
+listen_for_fake_death() {
 	self endon("death");
-	for(;;)
-	{
+	for(;;) {
 		self waittill("fake_death");
-		if(!scripts\engine\utility::istrue(level.slasher_fight))
-		{
+		if(!scripts\engine\utility::istrue(level.slasher_fight)) {
 			self.precacheleaderboards = 1;
 			self setscriptablepartstate("teleport","hide");
 			wait(0.1);

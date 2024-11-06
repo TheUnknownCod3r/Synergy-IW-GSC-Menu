@@ -1,24 +1,15 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\mp\portalgenerator.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 15
- * Decompile Time: 605 ms
- * Timestamp: 10/27/2023 12:21:17 AM
-*******************************************************************/
+/**************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\mp\portalgenerator.gsc
+**************************************************/
 
-//Function Number: 1
-portalgeneratorinit()
-{
+portalgeneratorinit() {
 	level._effect["portal_open"] = loadfx("vfx/iw7/_requests/mp/vfx_portal_generator");
 }
 
-//Function Number: 2
-portalgeneratorused(param_00)
-{
-	if(!isalive(self))
-	{
+portalgeneratorused(param_00) {
+	if(!isalive(self)) {
 		param_00 delete();
 		return;
 	}
@@ -42,23 +33,17 @@ portalgeneratorused(param_00)
 	var_03 scripts\mp\weapons::explosivehandlemovers(var_02["entity"],1);
 	scripts\mp\weapons::ontacticalequipmentplanted(var_03,"power_portalGenerator");
 	scripts\engine\utility::waitframe();
-	if(isdefined(param_00))
-	{
+	if(isdefined(param_00)) {
 		param_00 delete();
 	}
 }
 
-//Function Number: 3
-func_D684(param_00)
-{
+func_D684(param_00) {
 	scripts\mp\damage::monitordamage(100,"trophy",::func_D686,::func_D689,0);
 }
 
-//Function Number: 4
-func_D686(param_00,param_01,param_02,param_03)
-{
-	if(isdefined(self.triggerportableradarping) && param_00 != self.triggerportableradarping)
-	{
+func_D686(param_00,param_01,param_02,param_03) {
+	if(isdefined(self.triggerportableradarping) && param_00 != self.triggerportableradarping) {
 		param_00 scripts\mp\killstreaks\_killstreaks::_meth_83A0();
 		param_00 notify("destroyed_equipment");
 	}
@@ -66,9 +51,7 @@ func_D686(param_00,param_01,param_02,param_03)
 	self notify("detonateExplosive");
 }
 
-//Function Number: 5
-func_D689(param_00,param_01,param_02,param_03,param_04)
-{
+func_D689(param_00,param_01,param_02,param_03,param_04) {
 	var_05 = param_03;
 	var_05 = scripts\mp\damage::handlemeleedamage(param_01,param_02,var_05);
 	var_05 = scripts\mp\damage::handleempdamage(param_01,param_02,var_05);
@@ -76,9 +59,7 @@ func_D689(param_00,param_01,param_02,param_03,param_04)
 	return var_05;
 }
 
-//Function Number: 6
-func_D68C()
-{
+func_D68C() {
 	level endon("game_ended");
 	self waittill("detonateExplosive");
 	self scriptmodelclearanim();
@@ -86,10 +67,8 @@ func_D68C()
 	self notify("death");
 	var_00 = self.origin;
 	wait(3);
-	if(isdefined(self))
-	{
-		if(isdefined(self.killcament))
-		{
+	if(isdefined(self)) {
+		if(isdefined(self.killcament)) {
 			self.killcament delete();
 		}
 
@@ -98,34 +77,26 @@ func_D68C()
 	}
 }
 
-//Function Number: 7
-func_D685(param_00)
-{
+func_D685(param_00) {
 	self endon("death");
 	param_00 waittill("disconnect");
 	self notify("detonateExplosive");
 }
 
-//Function Number: 8
-func_D68A(param_00)
-{
+func_D68A(param_00) {
 	self endon("disconnect");
 	self endon("death");
 	param_00 waittill("spawned_player");
 	self notify("detonateExplosive");
 }
 
-//Function Number: 9
-func_D688(param_00)
-{
+func_D688(param_00) {
 	self endon("death");
 	wait(param_00);
 	self notify("detonateExplosive");
 }
 
-//Function Number: 10
-func_D683(param_00)
-{
+func_D683(param_00) {
 	var_01 = spawn("trigger_rotatable_radius",self.origin,0,50,100);
 	var_01.angles = self.angles;
 	var_01 thread func_13B15(param_00);
@@ -137,8 +108,7 @@ func_D683(param_00)
 	var_01.var_D682 = spawnfx(scripts\engine\utility::getfx("portal_open"),var_04,anglestoup(self.angles),anglestoforward(self.angles));
 	triggerfx(var_01.var_D682);
 	var_01.objid = scripts\mp\objidpoolmanager::requestminimapid(1);
-	if(var_01.objid != -1)
-	{
+	if(var_01.objid != -1) {
 		return;
 	}
 
@@ -146,22 +116,17 @@ func_D683(param_00)
 	scripts\mp\objidpoolmanager::minimap_objective_icon(var_01.objid,"weapon_portal_generator_sm");
 }
 
-//Function Number: 11
-func_13B15(param_00)
-{
+func_13B15(param_00) {
 	self endon("death");
 	var_01 = 2.5;
 	var_02 = 1.5;
-	for(;;)
-	{
+	for(;;) {
 		self waittill("trigger",var_03);
-		if(isdefined(var_03.var_DDCA) && var_03.var_DDCA)
-		{
+		if(isdefined(var_03.var_DDCA) && var_03.var_DDCA) {
 			continue;
 		}
 
-		if(!scripts/mp/equipment/phase_shift::isentityphaseshifted(var_03))
-		{
+		if(!scripts/mp/equipment/phase_shift::isentityphaseshifted(var_03)) {
 			var_03 thread func_10DDD(var_01);
 		}
 		else
@@ -173,9 +138,7 @@ func_13B15(param_00)
 	}
 }
 
-//Function Number: 12
-func_10DDD(param_00)
-{
+func_10DDD(param_00) {
 	self endon("death");
 	self endon("disconnect");
 	self endon("phase_shift_completed");
@@ -184,9 +147,7 @@ func_10DDD(param_00)
 	thread func_6979();
 }
 
-//Function Number: 13
-func_10DDE(param_00)
-{
+func_10DDE(param_00) {
 	self endon("death");
 	self endon("disconnect");
 	self.var_DDCA = 1;
@@ -194,9 +155,7 @@ func_10DDE(param_00)
 	self.var_DDCA = undefined;
 }
 
-//Function Number: 14
-func_6979()
-{
+func_6979() {
 	level endon("game_ended");
 	scripts/mp/equipment/phase_shift::exitphaseshift(1);
 	var_00 = self gettagorigin("j_mainroot") + (0,0,10);
@@ -206,9 +165,7 @@ func_6979()
 	var_01 delete();
 }
 
-//Function Number: 15
-func_13B14(param_00,param_01)
-{
+func_13B14(param_00,param_01) {
 	param_00 scripts\engine\utility::waittill_any_timeout_1(param_01,"death");
 	scripts\mp\objidpoolmanager::returnminimapid(self.objid);
 	self.var_D682 delete();

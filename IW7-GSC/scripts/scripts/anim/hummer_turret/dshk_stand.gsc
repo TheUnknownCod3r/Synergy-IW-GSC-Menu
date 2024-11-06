@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\anim\hummer_turret\dshk_stand.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 3
- * Decompile Time: 181 ms
- * Timestamp: 10\26\2023 11:59:15 PM
-*******************************************************************/
+/*************************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\anim\hummer_turret\dshk_stand.gsc
+*************************************************************/
 
-//Function Number: 1
-main()
-{
+main() {
 	var_00 = self _meth_8164();
 	var_01 = func_7927();
 	self.var_5270 = "stand";
@@ -38,24 +32,18 @@ main()
 	thread scripts\anim\hummer_turret\minigun_code::main(var_00);
 }
 
-//Function Number: 2
-func_7927()
-{
+func_7927() {
 	var_00 = %gaz_turret_death;
-	if(isdefined(self.var_E500))
-	{
-		if(isdefined(level.var_5F07))
-		{
-			var_00 = self [[ level.var_5F07 ]]();
+	if(isdefined(self.var_E500)) {
+		if(isdefined(level.var_5F07)) {
+			var_00 = self [[level.var_5F07]]();
 		}
 	}
 
 	return var_00;
 }
 
-//Function Number: 3
-func_FA6A()
-{
+func_FA6A() {
 	self glinton(#animtree);
 	self.var_C937 = %humvee_passenger_2_turret_minigun;
 	self.var_129B8 = %humvee_turret_2_passenger_minigun;

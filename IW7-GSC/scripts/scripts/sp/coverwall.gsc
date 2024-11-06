@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\sp\coverwall.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 26
- * Decompile Time: 1238 ms
- * Timestamp: 10/27/2023 12:23:59 AM
-*******************************************************************/
+/********************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\sp\coverwall.gsc
+********************************************/
 
-//Function Number: 1
-func_4761()
-{
+func_4761() {
 	precachemodel("barrier_cover_foam_128");
 	precachemodel("barrier_cover_foam_128_d1");
 	precachemodel("barrier_cover_foam_128_d2");
@@ -32,15 +26,12 @@ func_4761()
 	scripts\engine\utility::flag_init("coverwall_force_delete");
 }
 
-//Function Number: 2
-func_475F(param_00)
-{
+func_475F(param_00) {
 	var_01 = spawnstruct();
 	var_01.objective_position = param_00;
 	level.player.var_4759.var_11168[level.player.var_4759.var_11168.size] = var_01;
 	var_01 _meth_85AE(param_00);
-	if(!isdefined(var_01.objective_position))
-	{
+	if(!isdefined(var_01.objective_position)) {
 		var_01 func_DFDF(1);
 		return;
 	}
@@ -48,17 +39,14 @@ func_475F(param_00)
 	var_01 notify("coverwall_initiated");
 	var_02 = param_00.origin;
 	var_01 func_DFDF();
-	if(isdefined(var_01.var_152B))
-	{
+	if(isdefined(var_01.var_152B)) {
 		level.player.var_4759.var_11168 = scripts\engine\utility::array_remove(level.player.var_4759.var_11168,var_01);
 		return;
 	}
 
-	if(isdefined(level.var_93A9) && level.player.var_4759.var_19.size > 3)
-	{
+	if(isdefined(level.var_93A9) && level.player.var_4759.var_19.size > 3) {
 		var_03 = level.player.var_4759.var_19.size - 3;
-		for(var_04 = 0;var_04 < var_03;var_04++)
-		{
+		for(var_04 = 0;var_04 < var_03;var_04++) {
 			level.player.var_4759.var_19[var_04] notify("expired");
 		}
 	}
@@ -67,87 +55,67 @@ func_475F(param_00)
 	func_4763(var_02,var_05,undefined,var_01);
 }
 
-//Function Number: 3
-_meth_85AE(param_00)
-{
+_meth_85AE(param_00) {
 	thread func_85E8(param_00);
 	_meth_85AD(param_00);
 }
 
-//Function Number: 4
-func_85E8(param_00)
-{
+func_85E8(param_00) {
 	self endon("coverwall_initiated");
 	param_00 waittill("entitydeleted");
 	self.var_6643 = 1;
 }
 
-//Function Number: 5
-_meth_85AD(param_00)
-{
+_meth_85AD(param_00) {
 	param_00 waittill("missile_stuck",var_01);
 	self.origin = param_00.origin;
 	self.angles = param_00.angles;
 	self.soundsettimescalefactor = var_01;
-	if(isdefined(self.var_6643))
-	{
+	if(isdefined(self.var_6643)) {
 		return;
 	}
 
-	if(isdefined(var_01) && isdefined(var_01.classname) && var_01.classname == "script_coverwall")
-	{
+	if(isdefined(var_01) && isdefined(var_01.classname) && var_01.classname == "script_coverwall") {
 		self.var_152B = 1;
 		playfx(level.var_7649["coverwall_dud"],param_00.origin);
 	}
 }
 
-//Function Number: 6
-func_DFDF(param_00)
-{
-	if(!scripts\engine\utility::array_contains(level.player.var_4759.var_11168,self))
-	{
+func_DFDF(param_00) {
+	if(!scripts\engine\utility::array_contains(level.player.var_4759.var_11168,self)) {
 		return;
 	}
 
-	if(!isdefined(param_00))
-	{
+	if(!isdefined(param_00)) {
 		param_00 = 0;
 	}
 
-	if(isdefined(self.objective_position))
-	{
+	if(isdefined(self.objective_position)) {
 		self.origin = self.objective_position.origin;
 		self.angles = self.objective_position.angles;
 		level.player.var_4759.var_A8C6 = self.objective_position.origin;
 		self.objective_position delete();
 	}
 
-	if(param_00)
-	{
+	if(param_00) {
 		level.player.var_4759.var_11168 = scripts\engine\utility::array_remove(level.player.var_4759.var_11168,self);
 	}
 }
 
-//Function Number: 7
-func_DFBD()
-{
+func_DFBD() {
 	level notify("removing_all_coverwalls_instantly");
 	level endon("removing_all_coverwalls_instantly");
 	scripts\engine\utility::flag_set("coverwall_force_delete");
 	var_00 = level.player.var_4759.var_11168;
-	foreach(var_02 in var_00)
-	{
+	foreach(var_02 in var_00) {
 		var_02 func_DFDF(1);
-		if(isdefined(var_02.var_BE07))
-		{
+		if(isdefined(var_02.var_BE07)) {
 			var_02.var_BE07 notify("death");
 		}
 	}
 
-	for(;;)
-	{
-		if(level.player.var_4759.var_11168.size > 0)
-		{
+	for(;;) {
+		if(level.player.var_4759.var_11168.size > 0) {
 			scripts\engine\utility::waitframe();
 			continue;
 		}
@@ -159,16 +127,12 @@ func_DFBD()
 	level.player notify("stop_coverwall_doubletap");
 }
 
-//Function Number: 8
-func_4763(param_00,param_01,param_02,param_03)
-{
+func_4763(param_00,param_01,param_02,param_03) {
 	param_03 notify("spawning_coverwall");
 	param_02 = scripts\engine\utility::ter_op(isdefined(param_02),param_02,200);
 	var_04 = spawncoverwall(param_00,param_01,param_02);
-	if(!isdefined(var_04))
-	{
-		if(isdefined(param_03.origin))
-		{
+	if(!isdefined(var_04)) {
+		if(isdefined(param_03.origin)) {
 			playfx(level.var_7649["coverwall_dud"],param_03.origin);
 		}
 
@@ -180,8 +144,7 @@ func_4763(param_00,param_01,param_02,param_03)
 	var_04.var_132AA = [];
 	param_03.var_BE07 = var_04;
 	function_0178("deployable_cover_expand",param_00);
-	if(isdefined(level.var_93A9))
-	{
+	if(isdefined(level.var_93A9)) {
 		var_05 = spawnfx(level.var_7649["coverwall_expand_vr"],param_00,anglestoforward(param_01),anglestoup(param_01));
 		triggerfx(var_05);
 		var_04.var_132AA[var_04.var_132AA.size] = var_05;
@@ -194,18 +157,15 @@ func_4763(param_00,param_01,param_02,param_03)
 	var_04.triggerportableradarping = self;
 	param_03 thread func_475E(35);
 	var_04 thread func_475A();
-	if(1)
-	{
+	if(1) {
 		var_04 thread func_475D();
 	}
 
-	if(isdefined(level.player.var_4759) && level.player.var_4759.var_389C)
-	{
+	if(isdefined(level.player.var_4759) && level.player.var_4759.var_389C) {
 		thread func_B9C4();
 	}
 
-	if(getdvarint("debug_coverwall"))
-	{
+	if(getdvarint("debug_coverwall")) {
 		var_04 thread draw_cool_circle_til_notify();
 	}
 
@@ -215,50 +175,37 @@ func_4763(param_00,param_01,param_02,param_03)
 	level.player.var_4759.var_19[level.player.var_4759.var_19.size] = var_04;
 }
 
-//Function Number: 9
-func_4765()
-{
+func_4765() {
 	self endon("coverwall_expand_finish");
 	scripts\engine\utility::flag_wait("coverwall_force_delete");
 }
 
-//Function Number: 10
-func_475A()
-{
+func_475A() {
 	self endon("death");
 	self endon("coverwall_expand_finish");
-	for(;;)
-	{
+	for(;;) {
 		self waittill("coverwall_expand_hit_actor",var_00);
-		if(var_00.team == "axis")
-		{
-			if(var_00 func_3870())
-			{
+		if(var_00.team == "axis") {
+			if(var_00 func_3870()) {
 				var_00 _meth_81D0();
 			}
 		}
 	}
 }
 
-//Function Number: 11
-func_3870()
-{
+func_3870() {
 	var_00["c8"] = 1;
 	var_00["c12"] = 1;
-	if(isdefined(self.unittype) && isdefined(var_00[self.unittype]))
-	{
+	if(isdefined(self.unittype) && isdefined(var_00[self.unittype])) {
 		return 0;
 	}
 
 	return 1;
 }
 
-//Function Number: 12
-draw_cool_circle_til_notify()
-{
+draw_cool_circle_til_notify() {
 	self endon("death");
-	for(;;)
-	{
+	for(;;) {
 		var_00 = self.origin;
 		var_01 = var_00 + anglestoforward(self.angles) * 100;
 		scripts\sp\_debug::func_5B5D(var_00,var_01,(0,1,0),1,0);
@@ -266,9 +213,7 @@ draw_cool_circle_til_notify()
 	}
 }
 
-//Function Number: 13
-func_10696(param_00)
-{
+func_10696(param_00) {
 	param_00 endon("death");
 	param_00 waittill("coverwall_expand_finish");
 	var_01 = param_00.origin;
@@ -280,8 +225,7 @@ func_10696(param_00)
 	var_07 = "right";
 	var_08 = "a";
 	param_00.var_473D = [];
-	for(var_09 = 1;var_09 < 5;var_09++)
-	{
+	for(var_09 = 1;var_09 < 5;var_09++) {
 		var_0A = scripts\engine\utility::ter_op(var_08 == "a",var_05,var_05 * -1);
 		var_0B = scripts\engine\utility::ter_op(var_07 == "right",var_04,var_04 * -1);
 		var_0C = scripts\engine\utility::ter_op(var_07 == "right",param_00.angles + (0,90,0),param_00.angles - (0,90,0));
@@ -290,8 +234,7 @@ func_10696(param_00)
 		var_0A = anglestoforward(param_00.angles) * var_0A;
 		var_0F = anglestoright(param_00.angles) * var_0B;
 		var_10 = var_01 + var_0A + var_0F;
-		if(param_00 func_3913(var_10,var_0C))
-		{
+		if(param_00 func_3913(var_10,var_0C)) {
 			param_00.var_473D[var_07 + "_" + var_08] = function_02CB(var_10,var_0C,"cover stand",512,var_0E);
 		}
 		else
@@ -301,8 +244,7 @@ func_10696(param_00)
 
 		var_08 = scripts\engine\utility::ter_op(var_08 == "a","b","a");
 		var_07 = scripts\engine\utility::ter_op(var_09 >= 2,"left","right");
-		if(var_09 == 2)
-		{
+		if(var_09 == 2) {
 			wait(0.05);
 		}
 	}
@@ -310,29 +252,22 @@ func_10696(param_00)
 	param_00 thread func_B9FB();
 }
 
-//Function Number: 14
-func_3913(param_00,param_01)
-{
+func_3913(param_00,param_01) {
 	var_02 = getclosestpointonnavmesh(param_00);
 	var_03 = distance(param_00,var_02);
-	if(var_03 > 17)
-	{
-		if(getdvarint("debug_coverwall"))
-		{
+	if(var_03 > 17) {
+		if(getdvarint("debug_coverwall")) {
 		}
 
 		return 0;
 	}
 
-	if(getdvarint("debug_coverwall"))
-	{
+	if(getdvarint("debug_coverwall")) {
 	}
 
 	var_04 = scripts\common\trace::capsule_trace(param_00 + (0,0,20),param_00,18,72,param_01,self,scripts\common\trace::create_solid_ai_contents(1));
-	if(isdefined(var_04["fraction"]) && var_04["fraction"] < 0.5)
-	{
-		if(getdvarint("debug_coverwall"))
-		{
+	if(isdefined(var_04["fraction"]) && var_04["fraction"] < 0.5) {
+		if(getdvarint("debug_coverwall")) {
 			scripts\common\trace::draw_trace(var_04,(1,0,0),0,200);
 		}
 
@@ -342,31 +277,25 @@ func_3913(param_00,param_01)
 	var_05 = getgroundposition(param_00,16) + (0,0,50);
 	var_06 = var_05 + anglestoforward(param_01) * 100;
 	var_04 = scripts\common\trace::ray_trace(var_05,var_06);
-	if(isdefined(var_04["fraction"]) && var_04["fraction"] < 1)
-	{
-		if(getdvarint("debug_coverwall"))
-		{
+	if(isdefined(var_04["fraction"]) && var_04["fraction"] < 1) {
+		if(getdvarint("debug_coverwall")) {
 			scripts\common\trace::draw_trace(var_04,(1,0,0),1,200);
 		}
 
 		return 0;
 	}
 
-	if(getdvarint("debug_coverwall"))
-	{
+	if(getdvarint("debug_coverwall")) {
 		scripts\common\trace::draw_trace(var_04,(0,1,0),1,200);
 	}
 
 	return 1;
 }
 
-//Function Number: 15
-func_B9FB()
-{
+func_B9FB() {
 	self endon("death");
 	wait(1.5);
-	if(isdefined(self.var_473D) && !self.var_473D.size)
-	{
+	if(isdefined(self.var_473D) && !self.var_473D.size) {
 		return;
 	}
 
@@ -374,46 +303,36 @@ func_B9FB()
 	var_00 = undefined;
 	var_01 = undefined;
 	var_02 = [];
-	if(isdefined(self.var_473D["right_a"]))
-	{
+	if(isdefined(self.var_473D["right_a"])) {
 		var_00 = self.var_473D["right_a"];
 	}
-	else if(isdefined(self.var_473D["left_a"]))
-	{
+	else if(isdefined(self.var_473D["left_a"])) {
 		var_00 = self.var_473D["left_a"];
 	}
 
-	if(isdefined(self.var_473D["right_b"]))
-	{
+	if(isdefined(self.var_473D["right_b"])) {
 		var_01 = self.var_473D["right_b"];
 	}
-	else if(isdefined(self.var_473D["left_b"]))
-	{
+	else if(isdefined(self.var_473D["left_b"])) {
 		var_01 = self.var_473D["left_b"];
 	}
 
-	if(isdefined(var_00))
-	{
+	if(isdefined(var_00)) {
 		var_02[var_02.size] = var_00;
 	}
 
-	if(isdefined(var_01))
-	{
+	if(isdefined(var_01)) {
 		var_02[var_02.size] = var_01;
 	}
 
-	for(;;)
-	{
+	for(;;) {
 		var_02 = scripts\engine\utility::array_removeundefined(var_02);
-		if(!var_02.size)
-		{
+		if(!var_02.size) {
 			return;
 		}
 
-		foreach(var_04 in var_02)
-		{
-			if(!var_04 func_C049())
-			{
+		foreach(var_04 in var_02) {
+			if(!var_04 func_C049()) {
 				func_E16A(var_04);
 				func_E0E1(var_04);
 				break;
@@ -424,14 +343,11 @@ func_B9FB()
 	}
 }
 
-//Function Number: 16
-func_E16A(param_00)
-{
+func_E16A(param_00) {
 	var_01 = undefined;
 	var_02 = strtok(param_00.var_336,"_");
 	var_03 = var_02[2] + "_" + var_02[3];
-	switch(var_03)
-	{
+	switch(var_03) {
 		case "right_a":
 			var_01 = self.var_473D["left_a"];
 			break;
@@ -449,22 +365,16 @@ func_E16A(param_00)
 			break;
 	}
 
-	if(isdefined(var_01))
-	{
+	if(isdefined(var_01)) {
 		var_01.var_9CA1 = 1;
 		func_E0E1(var_01);
 	}
 }
 
-//Function Number: 17
-func_E0E1(param_00)
-{
-	foreach(var_04, var_02 in self.var_473D)
-	{
-		if(param_00 == self.var_473D[var_04])
-		{
-			if(getdvarint("debug_coverwall"))
-			{
+func_E0E1(param_00) {
+	foreach(var_04, var_02 in self.var_473D) {
+		if(param_00 == self.var_473D[var_04]) {
+			if(getdvarint("debug_coverwall")) {
 				var_03 = param_00.origin;
 			}
 
@@ -475,9 +385,7 @@ func_E0E1(param_00)
 	}
 }
 
-//Function Number: 18
-func_C049()
-{
+func_C049() {
 	var_00 = spawnstruct();
 	var_00.start = self.origin + (0,0,15);
 	var_00.end = var_00.start + anglestoforward(self.angles) * 40;
@@ -487,23 +395,18 @@ func_C049()
 	var_02 = 0;
 	var_03 = scripts\common\trace::create_contents(0,1,1,1,1,1,0);
 	var_04 = [var_00,var_01];
-	foreach(var_06 in var_04)
-	{
+	foreach(var_06 in var_04) {
 		var_07 = scripts\common\trace::ray_trace(var_06.start,var_06.end,self.triggerportableradarping,var_03);
-		if(isdefined(var_07["fraction"]))
-		{
-			if(var_07["fraction"] == 1)
-			{
-				if(getdvarint("debug_coverwall"))
-				{
+		if(isdefined(var_07["fraction"])) {
+			if(var_07["fraction"] == 1) {
+				if(getdvarint("debug_coverwall")) {
 				}
 
 				var_02++;
 				continue;
 			}
 
-			if(getdvarint("debug_coverwall"))
-			{
+			if(getdvarint("debug_coverwall")) {
 				scripts\common\trace::draw_trace(var_07,(0,1,0),0,20);
 			}
 		}
@@ -512,61 +415,47 @@ func_C049()
 	return var_02 != 2;
 }
 
-//Function Number: 19
-func_5B54(param_00,param_01,param_02)
-{
+func_5B54(param_00,param_01,param_02) {
 	self endon("death");
-	for(;;)
-	{
+	for(;;) {
 		scripts\sp\_debug::func_5B54(param_00,param_01,param_02,32,1);
 		wait(0.05);
 	}
 }
 
-//Function Number: 20
-func_475E(param_00)
-{
+func_475E(param_00) {
 	self.var_BE07 thread scripts\sp\_utility::func_C12D("expired",param_00);
 	var_01 = self.var_BE07 scripts\engine\utility::waittill_any_return("expired","death");
 	var_02 = var_01 == "death";
 	var_03 = self.var_BE07.origin;
 	var_04 = self.var_BE07.triggerportableradarping;
-	if(scripts\engine\utility::flag("coverwall_force_delete"))
-	{
+	if(scripts\engine\utility::flag("coverwall_force_delete")) {
 		scripts\engine\utility::waitframe();
 	}
 
-	if(isdefined(self.var_BE07) && isdefined(self.var_BE07.var_473D))
-	{
-		foreach(var_06 in self.var_BE07.var_473D)
-		{
-			if(isdefined(var_06))
-			{
+	if(isdefined(self.var_BE07) && isdefined(self.var_BE07.var_473D)) {
+		foreach(var_06 in self.var_BE07.var_473D) {
+			if(isdefined(var_06)) {
 				function_02CC(var_06);
 			}
 		}
 	}
 
-	if(isdefined(self.var_BE07.var_BE64))
-	{
+	if(isdefined(self.var_BE07.var_BE64)) {
 		destroynavobstacle(self.var_BE07.var_BE64);
 	}
 
-	if(isdefined(self.var_BE07))
-	{
+	if(isdefined(self.var_BE07)) {
 		self.var_BE07 _meth_8514(var_02);
 	}
 
-	if(isdefined(self.var_BE07.var_132AA))
-	{
-		foreach(var_09 in self.var_BE07.var_132AA)
-		{
+	if(isdefined(self.var_BE07.var_132AA)) {
+		foreach(var_09 in self.var_BE07.var_132AA) {
 			var_09 delete();
 		}
 	}
 
-	if(!var_02)
-	{
+	if(!var_02) {
 		var_0B = self.var_BE07.angles;
 		playfx(level.var_7649["coverwall_collapse"],var_03,anglestoforward(var_0B),anglestoup(var_0B));
 		function_0178("deployable_cover_contract",var_03);
@@ -574,10 +463,8 @@ func_475E(param_00)
 
 	var_04.var_4759.var_19 = scripts\engine\utility::array_remove(var_04.var_4759.var_19,self.var_BE07);
 	scripts\engine\utility::flag_wait_or_timeout("coverwall_force_delete",1.5);
-	if(!var_04.var_4759.var_19.size)
-	{
-		if(isdefined(var_04.var_4759.var_5AE6))
-		{
+	if(!var_04.var_4759.var_19.size) {
+		if(isdefined(var_04.var_4759.var_5AE6)) {
 			var_04 notify("stop_coverwall_doubletap");
 			var_04.var_4759.var_5AE6 = undefined;
 		}
@@ -586,20 +473,15 @@ func_475E(param_00)
 	level.player.var_4759.var_11168 = scripts\engine\utility::array_remove(level.player.var_4759.var_11168,self);
 }
 
-//Function Number: 21
-func_475D()
-{
+func_475D() {
 	self endon("death");
 	self endon("entitydeleted");
 	self waittill("coverwall_expand_finish");
 	self.var_BE64 = function_0316(self);
 }
 
-//Function Number: 22
-func_B9C4()
-{
-	if(isdefined(self.var_4759.var_5AE6))
-	{
+func_B9C4() {
+	if(isdefined(self.var_4759.var_5AE6)) {
 		return;
 	}
 
@@ -607,31 +489,25 @@ func_B9C4()
 	self endon("stop_coverwall_doubletap");
 	var_00 = 0;
 	var_01 = 0.3;
-	for(;;)
-	{
-		if(level.player usebuttonpressed())
-		{
+	for(;;) {
+		if(level.player usebuttonpressed()) {
 			var_00 = 0;
-			while(level.player usebuttonpressed())
-			{
+			while(level.player usebuttonpressed()) {
 				var_00 = var_00 + 0.05;
 				wait(0.05);
 			}
 
-			if(var_00 >= var_01)
-			{
+			if(var_00 >= var_01) {
 				continue;
 			}
 
 			var_00 = 0;
-			while(!level.player usebuttonpressed() && var_00 < var_01)
-			{
+			while(!level.player usebuttonpressed() && var_00 < var_01) {
 				var_00 = var_00 + 0.05;
 				wait(0.05);
 			}
 
-			if(var_00 >= var_01)
-			{
+			if(var_00 >= var_01) {
 				continue;
 			}
 
@@ -647,23 +523,17 @@ func_B9C4()
 	}
 }
 
-//Function Number: 23
-func_2BCE()
-{
-	foreach(var_01 in self.var_4759.var_19)
-	{
+func_2BCE() {
+	foreach(var_01 in self.var_4759.var_19) {
 		func_475C(var_01);
 		scripts\engine\utility::flag_wait_or_timeout("coverwall_force_delete",0.2);
 	}
 }
 
-//Function Number: 24
-func_475C(param_00,param_01)
-{
+func_475C(param_00,param_01) {
 	var_02 = param_00.origin;
 	var_03 = var_02 + (0,0,32);
-	if(scripts\engine\utility::flag_exist("in_vr_mode") && scripts\engine\utility::flag("in_vr_mode"))
-	{
+	if(scripts\engine\utility::flag_exist("in_vr_mode") && scripts\engine\utility::flag("in_vr_mode")) {
 		playfx(level.var_7649["coverwall_explosion_vr"],var_02);
 	}
 	else
@@ -676,36 +546,28 @@ func_475C(param_00,param_01)
 	level.player playrumbleonentity("damage_heavy");
 	param_00 notify("death");
 	scripts\engine\utility::flag_wait_or_timeout("coverwall_force_delete",0.1);
-	if(!isdefined(param_01))
-	{
+	if(!isdefined(param_01)) {
 		radiusdamage(var_03,150,250,120,param_00.triggerportableradarping,"MOD_EXPLOSIVE","coverwall");
 	}
 }
 
-//Function Number: 25
-func_596D()
-{
-	if(isdefined(self.var_596D))
-	{
+func_596D() {
+	if(isdefined(self.var_596D)) {
 		return;
 	}
 
 	self.var_596D = 1;
 	self endon("death");
 	self endon("stop_for_coverwalls");
-	for(;;)
-	{
+	for(;;) {
 		var_00 = getentarray("script_coverwall","classname");
-		foreach(var_02 in var_00)
-		{
-			if(isdefined(var_02.var_BE64))
-			{
+		foreach(var_02 in var_00) {
+			if(isdefined(var_02.var_BE64)) {
 				destroynavobstacle(var_02.var_BE64);
 			}
 
 			var_03 = distancesquared(self.origin,var_02.origin);
-			if(var_03 < squared(200))
-			{
+			if(var_03 < squared(200)) {
 				var_02 notify("expired");
 			}
 		}
@@ -714,9 +576,7 @@ func_596D()
 	}
 }
 
-//Function Number: 26
-func_551C()
-{
+func_551C() {
 	self notify("stop_for_coverwalls");
 	self.var_596D = undefined;
 }

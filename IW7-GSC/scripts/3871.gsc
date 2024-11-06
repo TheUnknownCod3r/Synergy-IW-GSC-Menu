@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: 3871.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 3
- * Decompile Time: 2 ms
- * Timestamp: 10/27/2023 12:31:05 AM
-*******************************************************************/
+/****************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\3871.gsc
+****************************/
 
-//Function Number: 1
-main()
-{
+main() {
 	level.var_92DE["desk_lean"] = ::func_5281;
 	level.var_92DE["wall_lean"] = ::func_138A7;
 	level.var_EC85["generic"]["lean_intro"] = %titan_stealth_street_enemy01_lean_intro;
@@ -34,9 +28,7 @@ main()
 	level.var_EC85["generic"]["wall_lean_exit_back"] = %titan_stealth_street_enemy01_walllean_exit_back;
 }
 
-//Function Number: 2
-func_5281(param_00)
-{
+func_5281(param_00) {
 	var_01 = [];
 	var_01["left"] = "lean_react_left";
 	var_01["right"] = "lean_react_right";
@@ -52,9 +44,7 @@ func_5281(param_00)
 	lib_0F27::func_F320(var_02);
 }
 
-//Function Number: 3
-func_138A7(param_00)
-{
+func_138A7(param_00) {
 	var_01 = [];
 	var_01["left"] = "wall_lean_react_left";
 	var_01["right"] = "wall_lean_react_right";

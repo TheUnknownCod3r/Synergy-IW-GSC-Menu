@@ -1,21 +1,13 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\anim\traverse\wall_run.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 2
- * Decompile Time: 139 ms
- * Timestamp: 10\26\2023 11:59:45 PM
-*******************************************************************/
+/******************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\anim\traverse\wall_run.gsc
+******************************************************/
 
-//Function Number: 1
-main()
-{
+main() {
 	func_138D0();
 }
 
-//Function Number: 2
-func_138D0()
-{
+func_138D0() {
 	self waittill("killanimscript");
 }

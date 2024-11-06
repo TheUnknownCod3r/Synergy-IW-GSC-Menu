@@ -1,35 +1,24 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\mp\killstreaks\_mapselect.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 10
- * Decompile Time: 460 ms
- * Timestamp: 10/27/2023 12:29:03 AM
-*******************************************************************/
+/*********************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\mp\killstreaks\_mapselect.gsc
+*********************************************************/
 
-//Function Number: 1
-func_B337()
-{
+func_B337() {
 	level._effect["map_target_mark"] = loadfx("vfx/iw7/_requests/mp/vfx_marker_map_target");
 }
 
-//Function Number: 2
-_meth_8112(param_00,param_01,param_02)
-{
-	if(!isdefined(param_00))
-	{
+_meth_8112(param_00,param_01,param_02) {
+	if(!isdefined(param_00)) {
 		return;
 	}
 
 	var_03 = 0;
-	if(scripts\mp\_utility::func_9EAF(param_00))
-	{
+	if(scripts\mp\_utility::func_9EAF(param_00)) {
 		var_03 = 1;
 	}
 
-	if(!isdefined(param_01))
-	{
+	if(!isdefined(param_01)) {
 		param_01 = 1;
 	}
 
@@ -42,12 +31,9 @@ _meth_8112(param_00,param_01,param_02)
 	return var_04;
 }
 
-//Function Number: 3
-func_76F7(param_00,param_01)
-{
+func_76F7(param_00,param_01) {
 	var_02 = 1;
-	if(param_00 <= 1)
-	{
+	if(param_00 <= 1) {
 		self setclientomnvar("ui_map_select_uses",-1);
 		var_02 = 0;
 	}
@@ -56,25 +42,21 @@ func_76F7(param_00,param_01)
 	self.var_D8AD = undefined;
 	var_03 = [];
 	thread func_13AC5();
-	if(scripts\mp\_utility::istrue(var_02))
-	{
+	if(scripts\mp\_utility::istrue(var_02)) {
 		self setclientomnvar("ui_map_select_uses",param_00);
 		self setclientomnvar("ui_map_select_count",param_00);
 	}
 
-	while(self.var_B338 < param_00)
-	{
+	while(self.var_B338 < param_00) {
 		var_04 = func_1374C("confirm_location","cancel_location");
-		if(!isdefined(var_04) || var_04.string == "cancel_location")
-		{
+		if(!isdefined(var_04) || var_04.string == "cancel_location") {
 			var_03 = undefined;
 			break;
 		}
 
 		var_03[var_03.size] = var_04;
 		self.var_B338++;
-		if(scripts\mp\_utility::istrue(var_02))
-		{
+		if(scripts\mp\_utility::istrue(var_02)) {
 			self setclientomnvar("ui_map_select_uses",param_00 - self.var_B338);
 		}
 
@@ -84,28 +66,22 @@ func_76F7(param_00,param_01)
 	self setclientomnvar("ui_map_select_count",-1);
 	self notify("map_select_exit");
 	self visionsetnakedforplayer("",0);
-	if(scripts\mp\_utility::istrue(level.nukedetonated) && !scripts\mp\_utility::istrue(level.var_C1B2))
-	{
+	if(scripts\mp\_utility::istrue(level.nukedetonated) && !scripts\mp\_utility::istrue(level.var_C1B2)) {
 		thread scripts\mp\killstreaks\_nuke::func_FB0F(0.05);
 	}
 
 	self setscriptablepartstate("killstreak","neutral",0);
-	if(isdefined(var_03))
-	{
+	if(isdefined(var_03)) {
 		self.pers["startedMapSelect"] = 0;
 	}
 
 	return var_03;
 }
 
-//Function Number: 4
-func_13AC5()
-{
+func_13AC5() {
 	self endon("map_select_exit");
-	for(;;)
-	{
-		if(self getcurrentweapon() != "ks_remote_map_mp")
-		{
+	for(;;) {
+		if(self getcurrentweapon() != "ks_remote_map_mp") {
 			self notify("cancel_location");
 			break;
 		}
@@ -114,18 +90,14 @@ func_13AC5()
 	}
 }
 
-//Function Number: 5
-func_13AC4()
-{
+func_13AC4() {
 	self endon("disconnect");
 	level endon("game_ended");
 	self waittill("map_select_exit");
 	func_1107B();
 }
 
-//Function Number: 6
-func_13AE7()
-{
+func_13AE7() {
 	self endon("disconnect");
 	self endon("map_select_exit");
 	level endon("game_ended");
@@ -134,37 +106,29 @@ func_13AE7()
 	self notify("cancel_location");
 }
 
-//Function Number: 7
-func_10DC2(param_00,param_01,param_02)
-{
-	if(!self.pers["startedMapSelect"])
-	{
+func_10DC2(param_00,param_01,param_02) {
+	if(!self.pers["startedMapSelect"]) {
 		function_0223(self);
 		self.pers["startedMapSelect"] = 1;
 	}
 
-	if(!isdefined(param_01))
-	{
+	if(!isdefined(param_01)) {
 		param_01 = 0;
 	}
 
-	if(!isdefined(param_02))
-	{
+	if(!isdefined(param_02)) {
 		param_02 = 0;
 	}
 
 	self beginlocationselection(param_00,param_01,param_02,1);
 }
 
-//Function Number: 8
-func_1107B()
-{
+func_1107B() {
 	self _meth_80DE();
 	self.var_B338 = undefined;
 	self.var_B336 = undefined;
 	self.var_D8AD = undefined;
-	if(scripts\mp\_utility::isreallyalive(self))
-	{
+	if(scripts\mp\_utility::isreallyalive(self)) {
 		self notify("killstreak_finished_with_weapon_ks_remote_map_mp");
 		return;
 	}
@@ -172,27 +136,21 @@ func_1107B()
 	self.pers["startedMapSelect"] = 0;
 }
 
-//Function Number: 9
-func_1374C(param_00,param_01,param_02)
-{
-	if((!isdefined(param_00) || param_00 != "death") && !isdefined(param_01) || param_01 != "death")
-	{
+func_1374C(param_00,param_01,param_02) {
+	if((!isdefined(param_00) || param_00 != "death") && !isdefined(param_01) || param_01 != "death") {
 		self endon("death");
 	}
 
 	var_03 = spawnstruct();
-	if(isdefined(param_00))
-	{
+	if(isdefined(param_00)) {
 		childthread func_137F9(param_00,var_03);
 	}
 
-	if(isdefined(param_01))
-	{
+	if(isdefined(param_01)) {
 		childthread func_137F9(param_01,var_03);
 	}
 
-	if(isdefined(param_02))
-	{
+	if(isdefined(param_02)) {
 		childthread func_137F9(param_02,var_03);
 	}
 
@@ -205,11 +163,8 @@ func_1374C(param_00,param_01,param_02)
 	return var_07;
 }
 
-//Function Number: 10
-func_137F9(param_00,param_01)
-{
-	if(param_00 != "death")
-	{
+func_137F9(param_00,param_01) {
+	if(param_00 != "death") {
 		self endon("death");
 	}
 

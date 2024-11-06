@@ -1,18 +1,11 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\mp\agents\crab_boss\crab_boss_tunedata.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 3
- * Decompile Time: 193 ms
- * Timestamp: 10/27/2023 12:11:09 AM
-*******************************************************************/
+/**********************************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\mp\agents\crab_boss\crab_boss_tunedata.gsc
+**********************************************************************/
 
-//Function Number: 1
-setuptunedata()
-{
-	if(!isdefined(level.agenttunedata))
-	{
+setuptunedata() {
+	if(!isdefined(level.agenttunedata)) {
 		level.agenttunedata = [];
 	}
 
@@ -20,9 +13,7 @@ setuptunedata()
 	setupmytunedata(level.agenttunedata["crab_boss"]);
 }
 
-//Function Number: 2
-setupmytunedata(param_00)
-{
+setupmytunedata(param_00) {
 	param_00.beam_move_rate = 300;
 	param_00.beam_tracking_rate = 250;
 	param_00.beam_target_z_offset = 40;
@@ -48,8 +39,6 @@ setupmytunedata(param_00)
 	param_00.egg_sack_launching_tags = ["tag_egg_1","tag_egg_2","tag_egg_3","tag_egg_4","tag_egg_5","tag_egg_6","tag_egg_7","tag_egg_8","tag_egg_9","tag_egg_10","tag_egg_11","tag_egg_12","tag_egg_13","tag_egg_14","tag_egg_15","tag_egg_16","tag_egg_17","tag_egg_18","tag_egg_19","tag_egg_20","tag_egg_21","tag_egg_22","tag_egg_23","tag_egg_24","tag_egg_25","tag_egg_26","tag_egg_27","tag_egg_28","tag_egg_29","tag_egg_30"];
 }
 
-//Function Number: 3
-gettunedata()
-{
+gettunedata() {
 	return level.agenttunedata["crab_boss"];
 }

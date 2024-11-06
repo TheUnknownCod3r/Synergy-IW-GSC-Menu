@@ -1,50 +1,33 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: 3562.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 12
- * Decompile Time: 3 ms
- * Timestamp: 10/27/2023 12:30:43 AM
-*******************************************************************/
+/****************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\3562.gsc
+****************************/
 
-//Function Number: 1
-func_8841()
-{
+func_8841() {
 	self.var_907C = undefined;
 }
 
-//Function Number: 2
-func_1181C(param_00,param_01)
-{
+func_1181C(param_00,param_01) {
 	param_01.var_1E8E = param_00.angles;
 }
 
-//Function Number: 3
-func_1181B(param_00,param_01,param_02)
-{
-	if(isdefined(param_02) && isdefined(param_01))
-	{
-		if(isplayer(param_01) && param_01 != param_02)
-		{
-			if(!level.teambased || param_02.team != param_01.team)
-			{
+func_1181B(param_00,param_01,param_02) {
+	if(isdefined(param_02) && isdefined(param_01)) {
+		if(isplayer(param_01) && param_01 != param_02) {
+			if(!level.teambased || param_02.team != param_01.team) {
 				param_02 func_E7FC(param_00,param_01,param_02);
 			}
 		}
 	}
 
-	if(isdefined(param_00))
-	{
+	if(isdefined(param_00)) {
 		param_00 delete();
 	}
 }
 
-//Function Number: 4
-func_8840(param_00,param_01)
-{
-	if(isdefined(param_00))
-	{
+func_8840(param_00,param_01) {
+	if(isdefined(param_00)) {
 		param_00 playlocalsound("bs_shield_explo");
 	}
 
@@ -53,20 +36,15 @@ func_8840(param_00,param_01)
 	playfx(scripts\engine\utility::getfx("hackKnife_impactWorld"),param_01.origin,anglestoforward(param_01.angles),anglestoup(param_01.angles));
 }
 
-//Function Number: 5
-func_E7FC(param_00,param_01,param_02)
-{
-	if(isdefined(param_02.var_907C))
-	{
+func_E7FC(param_00,param_01,param_02) {
+	if(isdefined(param_02.var_907C)) {
 		func_8842(param_02.var_907C);
 	}
 
 	var_03 = func_53C9(param_01);
 	self.var_907C = [];
-	if(isdefined(var_03))
-	{
-		for(var_04 = 0;var_04 < 1;var_04++)
-		{
+	if(isdefined(var_03)) {
+		for(var_04 = 0;var_04 < 1;var_04++) {
 			param_02.var_907C[var_04] = func_8843(var_03[var_04],param_00.var_1E8E);
 			param_02.var_907C[var_04] func_883F(param_01);
 		}
@@ -77,22 +55,16 @@ func_E7FC(param_00,param_01,param_02)
 	thread func_8842(param_02.var_907C);
 }
 
-//Function Number: 6
-func_53C9(param_00)
-{
+func_53C9(param_00) {
 	var_01 = getclosestpointonnavmesh(param_00.origin + anglestoforward(param_00.angles) * 64);
 	var_02 = [];
 	var_02 = getnodesinradius(var_01,128,64,64);
 	return var_02;
 }
 
-//Function Number: 7
-func_8842(param_00)
-{
-	if(isdefined(param_00))
-	{
-		foreach(var_02 in param_00)
-		{
+func_8842(param_00) {
+	if(isdefined(param_00)) {
+		foreach(var_02 in param_00) {
 			playsoundatpos(var_02.origin,"ghost_prism_deactivate");
 			var_02 notify("death");
 			var_02 suicide();
@@ -100,28 +72,22 @@ func_8842(param_00)
 	}
 }
 
-//Function Number: 8
-func_8843(param_00,param_01)
-{
-	if(scripts/mp/agents/agent_utility::getnumactiveagents("squadmate") >= 5)
-	{
+func_8843(param_00,param_01) {
+	if(scripts/mp/agents/agent_utility::getnumactiveagents("squadmate") >= 5) {
 		scripts\mp\_hud_message::showerrormessage("KILLSTREAKS_AGENT_MAX");
 		return 0;
 	}
 
-	if(scripts/mp/agents/agent_utility::getnumownedactiveagents(self) >= 2)
-	{
+	if(scripts/mp/agents/agent_utility::getnumownedactiveagents(self) >= 2) {
 		return 0;
 	}
 
-	if(!isdefined(param_00))
-	{
+	if(!isdefined(param_00)) {
 		param_00 = scripts/mp/agents/agent_utility::getvalidspawnpathnodenearplayer(1,1);
 	}
 
 	var_02 = scripts\mp\agents\_agents::add_humanoid_agent("squadmate",self.team,"reconAgent",param_00.origin,param_01,self,0,0,"hardened");
-	if(!isdefined(var_02))
-	{
+	if(!isdefined(var_02)) {
 		return 0;
 	}
 
@@ -129,11 +95,8 @@ func_8843(param_00,param_01)
 	return var_02;
 }
 
-//Function Number: 9
-func_883F(param_00)
-{
-	if(isdefined(self.headmodel))
-	{
+func_883F(param_00) {
+	if(isdefined(self.headmodel)) {
 		self detach(self.headmodel,"");
 		self.headmodel = undefined;
 	}
@@ -141,8 +104,7 @@ func_883F(param_00)
 	self setmodel(param_00.model);
 	self takeallweapons();
 	self giveweapon(param_00.primaryweapon);
-	if(param_00.secondaryweapon != "none")
-	{
+	if(param_00.secondaryweapon != "none") {
 		self giveweapon(param_00.secondaryweapon);
 	}
 
@@ -152,8 +114,7 @@ func_883F(param_00)
 	thread func_1903();
 	var_01 = param_00.origin + anglestoforward(param_00.angles) * 64 * 5;
 	var_02 = scripts\common\trace::ray_trace(param_00.origin,var_01,level.players);
-	if(!isdefined(var_02))
-	{
+	if(!isdefined(var_02)) {
 		var_02["position"] = var_01;
 	}
 	else
@@ -166,34 +127,25 @@ func_883F(param_00)
 	self botsetscriptgoalnode(var_03,"objective");
 }
 
-//Function Number: 10
-func_1903()
-{
+func_1903() {
 	self waittill("death");
 	var_00 = self.origin;
 	var_01 = self _meth_8113();
 	var_01 hide();
 }
 
-//Function Number: 11
-func_68D5()
-{
+func_68D5() {
 	self endon("death");
-	for(;;)
-	{
+	for(;;) {
 		wait(0.75);
 		playfxontag(level.var_CAA3["shimmer"],self,"j_spineupper");
 	}
 }
 
-//Function Number: 12
-func_13BAD(param_00)
-{
+func_13BAD(param_00) {
 	self endon("death");
-	for(;;)
-	{
-		if(param_00 isonladder())
-		{
+	for(;;) {
+		if(param_00 isonladder()) {
 			wait(0.1);
 			continue;
 		}

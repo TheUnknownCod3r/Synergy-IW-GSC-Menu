@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\mp\archetypes\archassassin_utility.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 1
- * Decompile Time: 92 ms
- * Timestamp: 10/27/2023 12:11:40 AM
-*******************************************************************/
+/**********************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\mp\archetypes\archassassin.gsc
+**********************************************************/
 
-//Function Number: 1
-playbodyfx(param_00,param_01)
-{
+playbodyfx(param_00,param_01) {
 	var_02[0][0]["org"] = self gettagorigin("j_spineupper");
 	var_02[0][0]["angles"] = self gettagangles("j_spineupper");
 	var_02[0][1]["org"] = self gettagorigin("j_spinelower");
@@ -35,21 +29,17 @@ playbodyfx(param_00,param_01)
 	var_02[2][3]["angles"] = self gettagangles("j_wrist_ri");
 	var_03 = "bullet_atomizer_impact_npc";
 	var_04 = (0,0,0);
-	if(isdefined(param_01))
-	{
+	if(isdefined(param_01)) {
 		var_04 = param_01;
 	}
 
-	if(isdefined(param_00))
-	{
+	if(isdefined(param_00)) {
 		var_03 = param_00;
 	}
 
 	self playsound(var_03);
-	foreach(var_06 in var_02)
-	{
-		foreach(var_08 in var_06)
-		{
+	foreach(var_06 in var_02) {
+		foreach(var_08 in var_06) {
 			playfx(level._effect["atomize_body"],var_08["org"] + var_04,anglestoforward(var_08["angles"]));
 		}
 

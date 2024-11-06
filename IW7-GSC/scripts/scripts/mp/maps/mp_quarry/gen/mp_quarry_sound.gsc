@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\mp\maps\mp_quarry\gen\mp_quarry_sound.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 1
- * Decompile Time: 139 ms
- * Timestamp: 10/27/2023 12:14:08 AM
-*******************************************************************/
+/*********************************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\mp\maps\mp_quarry\gen\mp_quarry_sound.gsc
+*********************************************************************/
 
-//Function Number: 1
-main()
-{
+main() {
 	var_00 = scripts\common\createfx::func_49E7();
 	var_00 scripts\common\createfx::func_F4AD((292.039,327.731,356.283),(270,0,0));
 	var_00.var_13125["soundalias"] = "emt_light_hum_lp_01";

@@ -1,18 +1,11 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\mp\agents\crab_mini\crab_mini_tunedata.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 3
- * Decompile Time: 194 ms
- * Timestamp: 10/27/2023 12:11:12 AM
-*******************************************************************/
+/**********************************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\mp\agents\crab_mini\crab_mini_tunedata.gsc
+**********************************************************************/
 
-//Function Number: 1
-setuptunedata()
-{
-	if(!isdefined(level.agenttunedata))
-	{
+setuptunedata() {
+	if(!isdefined(level.agenttunedata)) {
 		level.agenttunedata = [];
 	}
 
@@ -20,9 +13,7 @@ setuptunedata()
 	setupmytunedata(level.agenttunedata["crab_mini"]);
 }
 
-//Function Number: 2
-setupmytunedata(param_00)
-{
+setupmytunedata(param_00) {
 	param_00.melee_max_flex_xy_scale = 2.5;
 	param_00.melee_xy_scale_boost = 0.5;
 	param_00.non_predicted_move_melee_dist_sq = 6724;
@@ -47,8 +38,6 @@ setupmytunedata(param_00)
 	param_00.reduce_damage_pct = 0.15;
 }
 
-//Function Number: 3
-gettunedata()
-{
+gettunedata() {
 	return level.agenttunedata["crab_mini"];
 }

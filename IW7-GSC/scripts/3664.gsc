@@ -1,18 +1,11 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: 3664.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 19
- * Decompile Time: 9 ms
- * Timestamp: 10/27/2023 12:31:02 AM
-*******************************************************************/
+/****************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\3664.gsc
+****************************/
 
-//Function Number: 1
-func_6247()
-{
-	if(isdefined(self.var_1183D))
-	{
+func_6247() {
+	if(isdefined(self.var_1183D)) {
 		return;
 	}
 
@@ -26,26 +19,20 @@ func_6247()
 	thread func_11851();
 }
 
-//Function Number: 2
-func_5593()
-{
+func_5593() {
 	self notify("disable_thruster_audio");
-	if(isdefined(self.var_1183D))
-	{
+	if(isdefined(self.var_1183D)) {
 		self.var_1183D.var_1045D delete();
 	}
 
 	self.var_1183D = undefined;
 }
 
-//Function Number: 3
-func_11851()
-{
+func_11851() {
 	self endon("disable_thruster_audio");
 	var_00 = 0;
 	var_01 = (0,0,0);
-	for(;;)
-	{
+	for(;;) {
 		wait(0.05);
 		var_02 = self getvelocity();
 		var_03 = var_02 - var_01;
@@ -59,12 +46,9 @@ func_11851()
 		var_0A = abs(vectordot(var_03,var_07));
 		var_0B = abs(vectordot(var_03,var_09));
 		var_0C = abs(vectordot(var_03,var_08));
-		if(var_05 != 0)
-		{
-			if(var_04 > 20)
-			{
-				if(level.player issprinting())
-				{
+		if(var_05 != 0) {
+			if(var_04 > 20) {
+				if(level.player issprinting()) {
 					func_12877();
 				}
 				else
@@ -72,13 +56,11 @@ func_11851()
 					func_12876();
 				}
 			}
-			else if(var_05 >= var_00)
-			{
+			else if(var_05 >= var_00) {
 				func_12875();
 			}
 
-			if(var_0B > 20 || var_0A > 20 || var_0C > 20)
-			{
+			if(var_0B > 20 || var_0A > 20 || var_0C > 20) {
 				func_12876();
 			}
 		}
@@ -88,49 +70,36 @@ func_11851()
 	}
 }
 
-//Function Number: 4
-func_12875()
-{
+func_12875() {
 	var_00 = gettime();
-	if(var_00 > self.var_1183D.var_1045D.var_C518)
-	{
+	if(var_00 > self.var_1183D.var_1045D.var_C518) {
 		self.var_1183D.var_1045D.var_C518 = var_00 + randomintrange(200,3000);
 		self.var_1183D.var_1045D playsound("space_jetpack_boost_start_large");
 	}
 }
 
-//Function Number: 5
-func_12876()
-{
+func_12876() {
 	var_00 = gettime();
-	if(var_00 > self.var_1183D.var_1045D.var_32BB)
-	{
+	if(var_00 > self.var_1183D.var_1045D.var_32BB) {
 		self.var_1183D.var_1045D.var_32BB = var_00 + randomintrange(400,800);
 		self.var_1183D.var_1045D playsound("space_jetpack_boost_oneshot");
 	}
 }
 
-//Function Number: 6
-func_12877()
-{
+func_12877() {
 	var_00 = gettime();
-	if(var_00 > self.var_1183D.var_1045D.var_10ABD)
-	{
+	if(var_00 > self.var_1183D.var_1045D.var_10ABD) {
 		self.var_1183D.var_1045D.var_10ABD = var_00 + randomintrange(400,800);
 		self.var_1183D.var_1045D playsound("space_jetpack_boost_oneshot_big");
 	}
 }
 
-//Function Number: 7
-func_F335(param_00,param_01)
-{
-	if(!isdefined(level.var_11CC))
-	{
+func_F335(param_00,param_01) {
+	if(!isdefined(level.var_11CC)) {
 		level.var_11CC = [];
 	}
 
-	if(!isdefined(level.var_11CC[param_00]))
-	{
+	if(!isdefined(level.var_11CC[param_00])) {
 		var_02 = newhudelem();
 		var_02.x = 10;
 		var_02.y = 240 + 20 * level.var_11CC.size;
@@ -145,13 +114,10 @@ func_F335(param_00,param_01)
 	var_02 settext(param_01);
 }
 
-//Function Number: 8
-func_CF84()
-{
+func_CF84() {
 	self endon("death");
 	self endon("disable_space");
-	if(!isdefined(self.isent.var_1045D))
-	{
+	if(!isdefined(self.isent.var_1045D)) {
 		self.isent.var_1045D = scripts\engine\utility::spawn_tag_origin();
 		self.isent.var_1045D linkto(self,"",(0,0,30),(0,0,0));
 		self.isent.var_1045D.var_3800 = 1;
@@ -165,20 +131,17 @@ func_CF84()
 	childthread func_11AA6();
 	var_00 = 0;
 	var_01 = 0;
-	for(;;)
-	{
+	for(;;) {
 		scripts\engine\utility::waitframe();
 		var_02 = 0;
-		if(level.player getweaponrankinfominxp() > 0.5 && gettime() > var_00)
-		{
+		if(level.player getweaponrankinfominxp() > 0.5 && gettime() > var_00) {
 			var_02 = 1;
 			var_00 = gettime() + 6000;
 			thread func_CD54("player_short_breath_in");
 		}
 
 		var_03 = func_7A41();
-		if(!var_02)
-		{
+		if(!var_02) {
 			thread func_1286C(var_03);
 		}
 
@@ -187,11 +150,8 @@ func_CF84()
 	}
 }
 
-//Function Number: 9
-func_7A41()
-{
-	if(self issprinting() && !self.isent.var_6F43)
-	{
+func_7A41() {
+	if(self issprinting() && !self.isent.var_6F43) {
 		self.isent.var_1045D.var_10AB9 = self.isent.var_1045D.var_10AB9 + 1;
 	}
 	else
@@ -202,37 +162,29 @@ func_7A41()
 	var_00 = 0;
 	self.isent.var_1045D.var_10AB9 = clamp(self.isent.var_1045D.var_10AB9,0,200);
 	var_01 = int(self.isent.var_1045D.var_10AB9);
-	if(var_01 > 60)
-	{
+	if(var_01 > 60) {
 		var_00 = 3;
 	}
-	else if(var_01 > 40)
-	{
+	else if(var_01 > 40) {
 		var_00 = 2;
 	}
-	else if(var_01 > 20)
-	{
+	else if(var_01 > 20) {
 		var_00 = 1;
 	}
 
 	return var_00;
 }
 
-//Function Number: 10
-func_11AA6()
-{
+func_11AA6() {
 	var_00 = 0;
-	for(;;)
-	{
+	for(;;) {
 		var_01 = scripts\engine\utility::waittill_any_return("grapple","viper_stop_thrust","viper_ads_out","long_fire_time");
 		var_02 = gettime();
-		if(var_02 < var_00)
-		{
+		if(var_02 < var_00) {
 			continue;
 		}
 
-		switch(var_01)
-		{
+		switch(var_01) {
 			case "viper_stop_thrust":
 				var_03 = "player_short_breath_out";
 				wait(0.4);
@@ -258,33 +210,25 @@ func_11AA6()
 	}
 }
 
-//Function Number: 11
-func_11AC5()
-{
+func_11AC5() {
 	self endon("death");
-	for(;;)
-	{
+	for(;;) {
 		var_00 = 0;
 		self waittill("begin_firing");
 		var_01 = scripts\engine\utility::waittill_notify_or_timeout_return("end_firing",1.5);
-		if(!isdefined(var_01))
-		{
+		if(!isdefined(var_01)) {
 			thread func_CD54("player_short_breath_out");
 		}
 	}
 }
 
-//Function Number: 12
-func_CD54(param_00)
-{
+func_CD54(param_00) {
 	self notify("interrupt_breath");
 	self endon("interrupt_breath");
 	self.isent.var_1045D.var_3800 = 0;
-	if(self.isent.var_1045D gettimepassed())
-	{
+	if(self.isent.var_1045D gettimepassed()) {
 		self.isent.var_1045D stopsounds();
-		while(self.isent.var_1045D gettimepassed())
-		{
+		while(self.isent.var_1045D gettimepassed()) {
 			scripts\engine\utility::waitframe();
 		}
 	}
@@ -294,11 +238,8 @@ func_CD54(param_00)
 	self.isent.var_1045D.var_3800 = 1;
 }
 
-//Function Number: 13
-func_1286C(param_00)
-{
-	if(!self.isent.var_1045D.var_3800)
-	{
+func_1286C(param_00) {
+	if(!self.isent.var_1045D.var_3800) {
 		return;
 	}
 
@@ -306,16 +247,13 @@ func_1286C(param_00)
 	self endon("interrupt_breath");
 	var_01 = func_787D(0);
 	self.isent.var_1045D.var_3800 = 0;
-	if(!scripts\sp\_utility::func_65DB("pressurized"))
-	{
+	if(!scripts\sp\_utility::func_65DB("pressurized")) {
 		func_CE38(var_01["inhale"]);
 	}
 
-	if(!scripts\sp\_utility::func_65DB("pressurized"))
-	{
+	if(!scripts\sp\_utility::func_65DB("pressurized")) {
 		func_CE38(var_01["exhale"]);
-		if(isdefined(var_01["time"]))
-		{
+		if(isdefined(var_01["time"])) {
 			wait(var_01["time"]);
 		}
 	}
@@ -323,23 +261,18 @@ func_1286C(param_00)
 	self.isent.var_1045D.var_3800 = 1;
 }
 
-//Function Number: 14
-func_1286D(param_00)
-{
-	if(gettime() < self.isent.var_10463.var_BF43)
-	{
+func_1286D(param_00) {
+	if(gettime() < self.isent.var_10463.var_BF43) {
 		return;
 	}
 
-	if(scripts\sp\_utility::func_65DB("pressurized"))
-	{
+	if(scripts\sp\_utility::func_65DB("pressurized")) {
 		return;
 	}
 
 	self endon("death");
 	self.isent.var_10463 playsound("player_space_heartbeat");
-	switch(param_00)
-	{
+	switch(param_00) {
 		case 3:
 			self.isent.var_10463.var_BF43 = gettime() + 400;
 			break;
@@ -358,17 +291,13 @@ func_1286D(param_00)
 	}
 }
 
-//Function Number: 15
-func_CE38(param_00,param_01)
-{
+func_CE38(param_00,param_01) {
 	self endon("death");
-	while(self.isent.var_1045D gettimepassed() && !isdefined(param_01))
-	{
+	while(self.isent.var_1045D gettimepassed() && !isdefined(param_01)) {
 		wait(0.05);
 	}
 
-	if(isdefined(param_01))
-	{
+	if(isdefined(param_01)) {
 		self.isent.var_1045D playsound(param_00,"space_sound_interrupt_done",1);
 		self.isent.var_1045D waittill("space_sound_interrupt_done");
 		return;
@@ -378,12 +307,9 @@ func_CE38(param_00,param_01)
 	self.isent.var_1045D waittill("space_sound_done");
 }
 
-//Function Number: 16
-func_787D(param_00)
-{
+func_787D(param_00) {
 	var_01 = [];
-	switch(param_00)
-	{
+	switch(param_00) {
 		case 1:
 			var_01["inhale"] = "space_breathe_player_inhale";
 			var_01["exhale"] = "space_breathe_player_exhale";
@@ -412,11 +338,8 @@ func_787D(param_00)
 	return var_01;
 }
 
-//Function Number: 17
-pain(param_00)
-{
-	switch(param_00)
-	{
+pain(param_00) {
+	switch(param_00) {
 		case "breathing_better":
 			wait(randomfloatrange(0.2,0.4));
 			break;
@@ -430,9 +353,7 @@ pain(param_00)
 	}
 }
 
-//Function Number: 18
-func_5B6A(param_00,param_01)
-{
+func_5B6A(param_00,param_01) {
 	param_01 = param_01 * 0.05;
 	var_02 = param_00 + param_01;
 	var_03 = vectortoangles(var_02 - param_00);
@@ -449,9 +370,7 @@ func_5B6A(param_00,param_01)
 	var_0E = 4;
 }
 
-//Function Number: 19
-draw_axis(param_00)
-{
+draw_axis(param_00) {
 	var_01 = 4;
 	var_02 = (1,1,1);
 	var_03 = 0;

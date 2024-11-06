@@ -1,43 +1,28 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: 3440.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 50
- * Decompile Time: 18 ms
- * Timestamp: 10/27/2023 12:27:28 AM
-*******************************************************************/
+/****************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\3440.gsc
+****************************/
 
-//Function Number: 1
-func_97D0()
-{
+func_97D0() {
 	level.var_37D3 = [];
 	level._effect["marked_target"] = loadfx("vfx/iw7/_requests/mp/vfx_marked_target");
 	level._effect["wall_lock_engaged"] = loadfx("vfx/iw7/_requests/mp/vfx_sonic_sensor_pulse");
 }
 
-//Function Number: 2
-applyarchetype()
-{
-}
+applyarchetype() {}
 
-//Function Number: 3
-removearchetype()
-{
+removearchetype() {
 	self notify("removeArchetype");
 }
 
-//Function Number: 4
-func_E89D()
-{
+func_E89D() {
 	self endon("death");
 	self endon("disconnect");
 	self endon("removeArchetype");
-	for(;;)
-	{
+	for(;;) {
 		self waittill("victim_damaged",var_00,var_01);
-		if(var_00 scripts\mp\_utility::_hasperk("specialty_coldblooded") || var_00 scripts\mp\_utility::_hasperk("specialty_empimmune"))
-		{
+		if(var_00 scripts\mp\_utility::_hasperk("specialty_coldblooded") || var_00 scripts\mp\_utility::_hasperk("specialty_empimmune")) {
 			continue;
 		}
 
@@ -46,9 +31,7 @@ func_E89D()
 	}
 }
 
-//Function Number: 5
-func_10222(param_00)
-{
+func_10222(param_00) {
 	param_00 endon("disconnect");
 	var_01 = scripts\mp\_utility::outlineenableforplayer(param_00,"red",self,0,0,"level_script");
 	param_00 scripts\mp\_hud_message::showmiscmessage("spotted");
@@ -56,15 +39,12 @@ func_10222(param_00)
 	wait(2);
 }
 
-//Function Number: 6
-func_E83E()
-{
+func_E83E() {
 	self endon("death");
 	self endon("disconnect");
 	self endon("removeArchetype");
 	setdvarifuninitialized("camo_method",0);
-	if(level.ingraceperiod == 0)
-	{
+	if(level.ingraceperiod == 0) {
 		self waittill("spawned_player");
 	}
 	else
@@ -77,8 +57,7 @@ func_E83E()
 	self.var_C3E6 = self.model;
 	self.var_C408 = self _meth_816D();
 	thread func_37DD();
-	if(getdvarint("camo_method",1))
-	{
+	if(getdvarint("camo_method",1)) {
 		thread func_37D4();
 		return;
 	}
@@ -86,9 +65,7 @@ func_E83E()
 	thread func_37D5();
 }
 
-//Function Number: 7
-func_37D4()
-{
+func_37D4() {
 	self endon("death");
 	self endon("disconnect");
 	self endon("removeArchetype");
@@ -97,8 +74,7 @@ func_37D4()
 	thread func_37DF();
 	thread func_37E3();
 	thread func_37DE();
-	if(scripts\mp\_utility::_hasperk("specialty_camo_elite"))
-	{
+	if(scripts\mp\_utility::_hasperk("specialty_camo_elite")) {
 		self.var_37D2 = "mp_fullbody_synaptic_1";
 	}
 	else
@@ -106,10 +82,8 @@ func_37D4()
 		self.var_37D2 = "mp_fullbody_synaptic_1";
 	}
 
-	for(;;)
-	{
-		if((self issprinting() || self gold_teeth_hint_func()) && !self ismeleeing() && !scripts\mp\killstreaks\_emp_common::isemped() && !self ismantling() && !self usebuttonpressed() && !self adsbuttonpressed() && !isdefined(self.var_9FF6) && !isdefined(self.var_6F43))
-		{
+	for(;;) {
+		if((self issprinting() || self gold_teeth_hint_func()) && !self ismeleeing() && !scripts\mp\killstreaks\_emp_common::isemped() && !self ismantling() && !self usebuttonpressed() && !self adsbuttonpressed() && !isdefined(self.var_9FF6) && !isdefined(self.var_6F43)) {
 			func_37DA();
 		}
 		else
@@ -127,16 +101,13 @@ func_37D4()
 	}
 }
 
-//Function Number: 8
-func_37D5()
-{
+func_37D5() {
 	self endon("death");
 	self endon("disconnect");
 	self endon("removeArchetype");
 	thread func_37DF();
 	thread func_37E3();
-	if(scripts\mp\_utility::_hasperk("specialty_camo_elite"))
-	{
+	if(scripts\mp\_utility::_hasperk("specialty_camo_elite")) {
 		self.var_37D2 = "mp_fullbody_synaptic_1";
 	}
 	else
@@ -144,10 +115,8 @@ func_37D5()
 		self.var_37D2 = "mp_fullbody_synaptic_1";
 	}
 
-	for(;;)
-	{
-		if(!self ismeleeing() && !scripts\mp\killstreaks\_emp_common::isemped())
-		{
+	for(;;) {
+		if(!self ismeleeing() && !scripts\mp\killstreaks\_emp_common::isemped()) {
 			func_37DA();
 		}
 		else
@@ -165,52 +134,40 @@ func_37D5()
 	}
 }
 
-//Function Number: 9
-func_37E3()
-{
+func_37E3() {
 	self endon("death");
 	self endon("disconnect");
 	self endon("removeArchetype");
 	level endon("game_ended");
-	for(;;)
-	{
+	for(;;) {
 		self waittill("weapon_fired",var_00);
-		if(self.var_9E3F)
-		{
+		if(self.var_9E3F) {
 			self.var_37E5 = 3.5;
 			self notify("camo_off");
 		}
 	}
 }
 
-//Function Number: 10
-func_37E4()
-{
+func_37E4() {
 	self endon("death");
 	self endon("disconnect");
 	self endon("removeArchetype");
 	level endon("game_ended");
-	for(;;)
-	{
+	for(;;) {
 		self waittill("weapon_change");
-		if(self.var_9E3F && scripts\mp\_utility::getweapongroup(self getcurrentweapon()) == "weapon_sniper")
-		{
+		if(self.var_9E3F && scripts\mp\_utility::getweapongroup(self getcurrentweapon()) == "weapon_sniper") {
 			self notify("camo_off");
 		}
 	}
 }
 
-//Function Number: 11
-func_37E0()
-{
+func_37E0() {
 	self endon("death");
 	self endon("disconnect");
 	self endon("removeArchetype");
 	level endon("game_ended");
-	for(;;)
-	{
-		if((!self issprinting() && !self gold_teeth_hint_func() && !self isjumping() && !self ismantling()) || isdefined(self.var_9FF6) || isdefined(self.var_6F43))
-		{
+	for(;;) {
+		if((!self issprinting() && !self gold_teeth_hint_func() && !self isjumping() && !self ismantling()) || isdefined(self.var_9FF6) || isdefined(self.var_6F43)) {
 			self notify("camo_off");
 			self waittill("camo_on");
 		}
@@ -219,17 +176,13 @@ func_37E0()
 	}
 }
 
-//Function Number: 12
-func_37DB()
-{
+func_37DB() {
 	self endon("death");
 	self endon("disconnect");
 	level endon("game_ended");
 	self endon("removeArchetype");
-	for(;;)
-	{
-		if(self adsbuttonpressed())
-		{
+	for(;;) {
+		if(self adsbuttonpressed()) {
 			self notify("camo_off");
 			self waittill("camo_on");
 		}
@@ -238,17 +191,13 @@ func_37DB()
 	}
 }
 
-//Function Number: 13
-func_37DF()
-{
+func_37DF() {
 	self endon("death");
 	self endon("disconnect");
 	level endon("game_ended");
 	self endon("removeArchetype");
-	for(;;)
-	{
-		if(self ismeleeing())
-		{
+	for(;;) {
+		if(self ismeleeing()) {
 			self notify("camo_off");
 			self waittill("camo_on");
 		}
@@ -257,17 +206,13 @@ func_37DF()
 	}
 }
 
-//Function Number: 14
-func_37E2()
-{
+func_37E2() {
 	self endon("death");
 	self endon("disconnect");
 	level endon("game_ended");
 	self endon("removeArchetype");
-	for(;;)
-	{
-		if(self gold_teeth_hint_func())
-		{
+	for(;;) {
+		if(self gold_teeth_hint_func()) {
 			self notify("camo_off");
 			self waittill("camo_on");
 		}
@@ -276,11 +221,8 @@ func_37E2()
 	}
 }
 
-//Function Number: 15
-func_37DA()
-{
-	if(!self.var_9E3F)
-	{
+func_37DA() {
+	if(!self.var_9E3F) {
 		self.var_9E3F = 1;
 		self setmodel(self.var_37D2);
 		func_20CE();
@@ -291,11 +233,8 @@ func_37DA()
 	}
 }
 
-//Function Number: 16
-func_37D9()
-{
-	if(self.var_9E3F)
-	{
+func_37D9() {
+	if(self.var_9E3F) {
 		self.var_9E3F = 0;
 		self setmodel(self.var_C3E6);
 		func_E12D();
@@ -305,9 +244,7 @@ func_37D9()
 	}
 }
 
-//Function Number: 17
-func_561B()
-{
+func_561B() {
 	self endon("death");
 	self endon("disconnect");
 	self getradiuspathsighttestnodes();
@@ -315,16 +252,12 @@ func_561B()
 	self enableweapons();
 }
 
-//Function Number: 18
-func_37DE()
-{
+func_37DE() {
 	self endon("death");
 	self endon("disconnect");
 	self endon("camo_off");
-	for(;;)
-	{
-		if(self usebuttonpressed() || self adsbuttonpressed() && !isdefined(self.var_9FF6))
-		{
+	for(;;) {
+		if(self usebuttonpressed() || self adsbuttonpressed() && !isdefined(self.var_9FF6)) {
 			self notify("camo_off");
 		}
 
@@ -332,33 +265,26 @@ func_37DE()
 	}
 }
 
-//Function Number: 19
-func_37DD()
-{
+func_37DD() {
 	self endon("disconnect");
 	self endon("removeArchetype");
 	level endon("game_ended");
 	self waittill("death");
-	if(self.var_9E3F)
-	{
+	if(self.var_9E3F) {
 		func_37D9();
 		self.var_9FF6 = undefined;
 		self notify("camo_off");
 	}
 }
 
-//Function Number: 20
-func_E8AC()
-{
+func_E8AC() {
 	self endon("death");
 	self endon("disconnect");
 	self endon("removeArchetype");
 	level endon("game_ended");
 	self.var_138CE = undefined;
-	for(;;)
-	{
-		if(self gold_teeth_hint_func() && self getweaponrankinfominxp() > 0.3)
-		{
+	for(;;) {
+		if(self gold_teeth_hint_func() && self getweaponrankinfominxp() > 0.3) {
 			var_00 = self goal_position(0);
 			var_01 = self energy_getmax(0);
 			self goal_radius(0,var_01);
@@ -373,17 +299,14 @@ func_E8AC()
 	}
 }
 
-//Function Number: 21
-func_13BA3()
-{
+func_13BA3() {
 	self endon("death");
 	self endon("disconnect");
 	self endon("removeArchetype");
 	level endon("game_ended");
 	self endon("walllock_ended");
 	wait(0.05);
-	while(self getweaponrankinfominxp() > 0.3 && self goal_position(0) > 0)
-	{
+	while(self getweaponrankinfominxp() > 0.3 && self goal_position(0) > 0) {
 		self goal_radius(0,self goal_position(0) - 3);
 		wait(0.05);
 	}
@@ -391,9 +314,7 @@ func_13BA3()
 	self notify("walllock_ended");
 }
 
-//Function Number: 22
-func_68D7()
-{
+func_68D7() {
 	self endon("death");
 	self endon("disconnect");
 	self endon("removeArchetype");
@@ -410,9 +331,7 @@ func_68D7()
 	thread managetimeout(var_00);
 }
 
-//Function Number: 23
-managetimeout(param_00)
-{
+managetimeout(param_00) {
 	self endon("death");
 	self endon("disconnect");
 	self endon("removeArchetype");
@@ -421,8 +340,7 @@ managetimeout(param_00)
 	wait(10);
 	var_01 = param_00.origin - (0,0,100);
 	var_02 = scripts\common\trace::ray_trace(param_00.origin,var_01);
-	if(length(param_00.origin - var_02["position"]) < length(param_00.origin - var_01))
-	{
+	if(length(param_00.origin - var_02["position"]) < length(param_00.origin - var_01)) {
 		var_01 = var_02["position"];
 	}
 
@@ -431,9 +349,7 @@ managetimeout(param_00)
 	self notify("walllock_ended");
 }
 
-//Function Number: 24
-func_639B()
-{
+func_639B() {
 	self endon("death");
 	self endon("disconnect");
 	self endon("removeArchetype");
@@ -444,8 +360,7 @@ func_639B()
 	self allowjump(1);
 	self setstance("stand");
 	self playlocalsound("ghost_wall_detach");
-	if(isdefined(self.var_138CE))
-	{
+	if(isdefined(self.var_138CE)) {
 		self goal_radius(0,self.var_138CE);
 	}
 
@@ -456,29 +371,21 @@ func_639B()
 	self setscriptablepartstate("perch","neutral",0);
 }
 
-//Function Number: 25
-func_20CE()
-{
+func_20CE() {
 	self setclientomnvar("ui_camouflageOverlay",1);
 }
 
-//Function Number: 26
-func_E12D()
-{
+func_E12D() {
 	self setclientomnvar("ui_camouflageOverlay",0);
 }
 
-//Function Number: 27
-func_49EE(param_00,param_01)
-{
-	if(!isdefined(self) || !scripts\mp\_utility::isreallyalive(self))
-	{
+func_49EE(param_00,param_01) {
+	if(!isdefined(self) || !scripts\mp\_utility::isreallyalive(self)) {
 		return;
 	}
 
 	var_02 = scripts\mp\objidpoolmanager::requestminimapid(10);
-	if(var_02 == -1)
-	{
+	if(var_02 == -1) {
 		return;
 	}
 
@@ -488,16 +395,13 @@ func_49EE(param_00,param_01)
 	scripts\mp\objidpoolmanager::returnminimapid(var_02);
 }
 
-//Function Number: 28
-func_13A2A()
-{
+func_13A2A() {
 	self endon("death");
 	self endon("disconnect");
 	self endon("removeArchetype");
 	level endon("game_ended");
 	wait(0.05);
-	if(!isdefined(self.var_AD33))
-	{
+	if(!isdefined(self.var_AD33)) {
 		self.var_AD33 = scripts\engine\utility::spawn_tag_origin();
 		self.var_5FF1 = spawn("script_model",self.origin);
 		self.var_5FF1 setmodel("tag_origin");
@@ -511,16 +415,13 @@ func_13A2A()
 	}
 
 	self notifyonplayercommand("floatPressed","+stance");
-	for(;;)
-	{
+	for(;;) {
 		self waittill("doubleJumpBegin");
-		if(self isonground())
-		{
+		if(self isonground()) {
 			continue;
 		}
 
-		if(self ismantling())
-		{
+		if(self ismantling()) {
 			continue;
 		}
 
@@ -528,28 +429,22 @@ func_13A2A()
 	}
 }
 
-//Function Number: 29
-func_10B46()
-{
+func_10B46() {
 	self endon("death");
 	self endon("disconnect");
 	self endon("removeArchetype");
 	level endon("game_ended");
-	for(;;)
-	{
+	for(;;) {
 		var_00 = scripts\engine\utility::waittill_any_return("adjustedStance","doubleJumpEnd","unlinked");
-		if(var_00 == "doubleJumpEnd" || var_00 == "unlinked")
-		{
+		if(var_00 == "doubleJumpEnd" || var_00 == "unlinked") {
 			break;
 		}
 
-		if(isdefined(self.var_1D42) && self.var_1D42)
-		{
+		if(isdefined(self.var_1D42) && self.var_1D42) {
 			break;
 		}
 
-		if(self goal_position(0) > 10)
-		{
+		if(self goal_position(0) > 10) {
 			continue;
 		}
 
@@ -557,9 +452,7 @@ func_10B46()
 	}
 }
 
-//Function Number: 30
-func_1608()
-{
+func_1608() {
 	self endon("death");
 	self endon("disconnect");
 	self endon("unlinked");
@@ -581,17 +474,13 @@ func_1608()
 	func_10358();
 }
 
-//Function Number: 31
-func_13A43()
-{
+func_13A43() {
 	self endon("death");
 	self endon("disconnect");
 	self endon("removeArchetype");
 	level endon("game_ended");
-	for(;;)
-	{
-		if(self isonground())
-		{
+	for(;;) {
+		if(self isonground()) {
 			self.var_1D42 = 0;
 			return;
 		}
@@ -602,14 +491,11 @@ func_13A43()
 	}
 }
 
-//Function Number: 32
-playflyoveraudioline(param_00)
-{
+playflyoveraudioline(param_00) {
 	self endon("death");
 	self endon("disconnect");
 	self endon("unlinked");
-	if(!param_00 islinked(self))
-	{
+	if(!param_00 islinked(self)) {
 		param_00.origin = self gettagorigin("tag_shield_back");
 		param_00.angles = self gettagangles("tag_shield_back");
 		param_00 linkto(self,"tag_shield_back");
@@ -621,9 +507,7 @@ playflyoveraudioline(param_00)
 	scripts\mp\_utility::func_D486(self,param_00,"tag_origin",self.team,scripts\engine\utility::getfx("heavyThrustFr"),scripts\engine\utility::getfx("heavyThrustEn"),undefined,undefined,[self]);
 }
 
-//Function Number: 33
-func_10358()
-{
+func_10358() {
 	self.var_6F43 = undefined;
 	self.var_5FF1 hide();
 	stopfxontag(level._effect["heavyThrustFr"],self.var_5FF1,"tag_origin");
@@ -632,9 +516,7 @@ func_10358()
 	self notify("unlinked");
 }
 
-//Function Number: 34
-func_13A7C()
-{
+func_13A7C() {
 	self endon("death");
 	self endon("disconnect");
 	self endon("unlinked");
@@ -644,9 +526,7 @@ func_13A7C()
 	func_10358();
 }
 
-//Function Number: 35
-func_13A49()
-{
+func_13A49() {
 	self endon("death");
 	self endon("disconnect");
 	self endon("unlinked");
@@ -656,19 +536,15 @@ func_13A49()
 	func_10358();
 }
 
-//Function Number: 36
-func_BCB9(param_00)
-{
+func_BCB9(param_00) {
 	self endon("death");
 	self endon("disconnect");
 	self endon("unlinked");
 	self endon("removeArchetype");
 	level endon("game_ended");
-	for(;;)
-	{
+	for(;;) {
 		var_01 = self getnormalizedmovement();
-		if(var_01[0] >= 0.15 || var_01[1] >= 0.15 || var_01[0] <= -0.15 || var_01[1] <= -0.15)
-		{
+		if(var_01[0] >= 0.15 || var_01[1] >= 0.15 || var_01[0] <= -0.15 || var_01[1] <= -0.15) {
 			thread func_B31F(param_00,var_01);
 		}
 		else
@@ -681,9 +557,7 @@ func_BCB9(param_00)
 	}
 }
 
-//Function Number: 37
-func_B31F(param_00,param_01)
-{
+func_B31F(param_00,param_01) {
 	self endon("death");
 	self endon("disconnect");
 	self endon("unlinked");
@@ -701,9 +575,7 @@ func_B31F(param_00,param_01)
 	param_00 moveto(var_05,0.5);
 }
 
-//Function Number: 38
-func_DCBD(param_00,param_01)
-{
+func_DCBD(param_00,param_01) {
 	self endon("death");
 	self endon("disconnect");
 	self endon("unlinked");
@@ -717,9 +589,7 @@ func_DCBD(param_00,param_01)
 	param_00 moveto(var_03,0.5);
 }
 
-//Function Number: 39
-func_EA27(param_00)
-{
+func_EA27(param_00) {
 	var_01 = scripts\common\trace::create_contents(1,1,1,1,0,1,1);
 	var_02 = scripts\common\trace::capsule_trace(self.origin,param_00,16,32,(0,0,0),self,var_01,0);
 	var_03 = var_02["fraction"];
@@ -727,24 +597,19 @@ func_EA27(param_00)
 	var_05 = undefined;
 	var_06 = var_02["normal"];
 	var_07 = 0;
-	if(var_03 != 1)
-	{
-		if(var_06[0] > 0.8 || var_06[0] < -0.8)
-		{
+	if(var_03 != 1) {
+		if(var_06[0] > 0.8 || var_06[0] < -0.8) {
 			var_07 = 1;
 		}
 
-		if(var_06[1] > 0.8 || var_06[1] < -0.8)
-		{
+		if(var_06[1] > 0.8 || var_06[1] < -0.8) {
 			var_07 = 1;
 		}
 
-		if(var_03 < 0.25 && !var_07)
-		{
+		if(var_03 < 0.25 && !var_07) {
 			return self.origin;
 		}
-		else if(var_03 < 0.25 && var_07)
-		{
+		else if(var_03 < 0.25 && var_07) {
 			return (self.origin[0],self.origin[1],param_00[2]);
 		}
 
@@ -760,17 +625,14 @@ func_EA27(param_00)
 		var_0B = var_01;
 	}
 
-	if(isdefined(var_05) && var_05 < 16)
-	{
+	if(isdefined(var_05) && var_05 < 16) {
 		return self.origin;
 	}
 
 	return var_0B;
 }
 
-//Function Number: 40
-func_8D14(param_00)
-{
+func_8D14(param_00) {
 	self endon("death");
 	self endon("disconnect");
 	self endon("unlinked");
@@ -781,58 +643,46 @@ func_8D14(param_00)
 	var_03 = var_02["position"];
 	var_04 = var_02["normal"];
 	var_05 = 0;
-	if(var_04[0] == 1 || var_04[0] == -1)
-	{
+	if(var_04[0] == 1 || var_04[0] == -1) {
 		var_05 = 1;
 	}
 
-	if(var_04[1] == 1 || var_04[1] == -1)
-	{
+	if(var_04[1] == 1 || var_04[1] == -1) {
 		var_05 = 1;
 	}
 
-	if(!var_02["fraction"] && var_05)
-	{
+	if(!var_02["fraction"] && var_05) {
 		var_06 = scripts\common\trace::ray_trace(param_00.origin,param_00.origin - (0,0,100),self,var_01);
 		var_05 = 0;
 		var_04 = var_06["normal"];
-		if(var_04[0] > 0.8 || var_04[0] < -0.8)
-		{
+		if(var_04[0] > 0.8 || var_04[0] < -0.8) {
 			var_05 = 1;
 		}
 
-		if(var_04[1] > 0.8 || var_04[1] < -0.8)
-		{
+		if(var_04[1] > 0.8 || var_04[1] < -0.8) {
 			var_05 = 1;
 		}
 
-		if(var_05)
-		{
+		if(var_05) {
 			return;
 		}
 	}
 
-	if(distancesquared(param_00.origin,var_03) < 256)
-	{
+	if(distancesquared(param_00.origin,var_03) < 256) {
 		func_10358();
 	}
 }
 
-//Function Number: 41
-marktarget_run(param_00,param_01)
-{
+marktarget_run(param_00,param_01) {
 	self endon("death");
 	self endon("disconnect");
 	level endon("game_ended");
-	if(scripts\engine\utility::isbulletdamage(param_01) && isplayer(param_00) && param_00.team != self.team && !param_00 scripts\mp\_utility::_hasperk("specialty_coldblooded") || param_00 scripts\mp\_utility::_hasperk("specialty_empimmune") && !isdefined(param_00.ismarkedtarget))
-	{
+	if(scripts\engine\utility::isbulletdamage(param_01) && isplayer(param_00) && param_00.team != self.team && !param_00 scripts\mp\_utility::_hasperk("specialty_coldblooded") || param_00 scripts\mp\_utility::_hasperk("specialty_empimmune") && !isdefined(param_00.ismarkedtarget)) {
 		thread marktarget_execute(param_00);
 	}
 }
 
-//Function Number: 42
-marktarget_execute(param_00)
-{
+marktarget_execute(param_00) {
 	var_01 = param_00 scripts\engine\utility::spawn_tag_origin();
 	var_02 = spawn("script_model",var_01.origin);
 	var_02 setmodel("tag_origin");
@@ -841,8 +691,7 @@ marktarget_execute(param_00)
 	param_00.ismarkedtarget = 1;
 	param_00.healthregendisabled = 1;
 	wait(0.1);
-	if(level.gametype != "dm")
-	{
+	if(level.gametype != "dm") {
 		var_03 = function_029A(scripts\engine\utility::getfx("marked_target"),var_02,"tag_origin",self.team);
 	}
 	else
@@ -858,54 +707,41 @@ marktarget_execute(param_00)
 	param_00.healthregendisabled = undefined;
 }
 
-//Function Number: 43
-func_13AA0(param_00,param_01,param_02)
-{
+func_13AA0(param_00,param_01,param_02) {
 	self endon("disconnect");
 	level endon("game_ended");
 	scripts\engine\utility::waittill_any_timeout_no_endon_death_2(param_02,"leave");
-	if(isdefined(param_01))
-	{
+	if(isdefined(param_01)) {
 		scripts\mp\_utility::outlinedisable(param_00,param_01);
 	}
 }
 
-//Function Number: 44
-runequipmentping(param_00)
-{
+runequipmentping(param_00) {
 	self endon("death");
 	self endon("disconnect");
 	var_01 = self.triggerportableradarping;
 	var_02 = level.uavsettings["uav_3dping"];
-	if(var_01 scripts\mp\_utility::_hasperk("specialty_equipment_ping"))
-	{
-		for(;;)
-		{
-			foreach(var_04 in level.players)
-			{
-				if(!var_01 scripts\mp\_utility::isenemy(var_04))
-				{
+	if(var_01 scripts\mp\_utility::_hasperk("specialty_equipment_ping")) {
+		for(;;) {
+			foreach(var_04 in level.players) {
+				if(!var_01 scripts\mp\_utility::isenemy(var_04)) {
 					continue;
 				}
 
-				if(var_04 scripts\mp\_utility::_hasperk("specialty_engineer") || var_04 scripts\mp\_utility::_hasperk("specialty_noscopeoutline"))
-				{
+				if(var_04 scripts\mp\_utility::_hasperk("specialty_engineer") || var_04 scripts\mp\_utility::_hasperk("specialty_noscopeoutline")) {
 					continue;
 				}
 
-				if(isdefined(var_04.var_C78B))
-				{
+				if(isdefined(var_04.var_C78B)) {
 					continue;
 				}
 
 				var_05 = scripts\engine\utility::array_add(level.players,self);
-				if(isdefined(param_00))
-				{
+				if(isdefined(param_00)) {
 					var_05 = scripts\engine\utility::array_add(var_05,param_00);
 				}
 
-				if(distance2d(var_04.origin,self.origin) < 300 && scripts\common\trace::ray_trace_passed(self.origin,var_04 gettagorigin("j_head"),var_05))
-				{
+				if(distance2d(var_04.origin,self.origin) < 300 && scripts\common\trace::ray_trace_passed(self.origin,var_04 gettagorigin("j_head"),var_05)) {
 					playfxontagforclients(var_02.var_7636,self,"tag_origin",var_01);
 					playsoundatpos(self.origin + (0,0,5),var_02.var_10469);
 					var_04 scripts\mp\_hud_message::showmiscmessage("spotted");
@@ -920,25 +756,19 @@ runequipmentping(param_00)
 	}
 }
 
-//Function Number: 45
-func_1B45()
-{
+func_1B45() {
 	self playsoundtoplayer("mp_cranked_countdown",self);
 }
 
-//Function Number: 46
-markdangerzoneonminimap(param_00,param_01)
-{
+markdangerzoneonminimap(param_00,param_01) {
 	param_00 endon("death");
 	param_00 endon("disconnect");
-	if(!isdefined(self) || !scripts\mp\_utility::isreallyalive(self))
-	{
+	if(!isdefined(self) || !scripts\mp\_utility::isreallyalive(self)) {
 		return;
 	}
 
 	var_02 = scripts\mp\objidpoolmanager::requestminimapid(10);
-	if(var_02 == -1)
-	{
+	if(var_02 == -1) {
 		return;
 	}
 
@@ -949,16 +779,12 @@ markdangerzoneonminimap(param_00,param_01)
 	scripts\mp\objidpoolmanager::returnminimapid(var_02);
 }
 
-//Function Number: 47
-watchfordeath(param_00)
-{
+watchfordeath(param_00) {
 	scripts\engine\utility::waittill_any_3("death","disconnect");
 	scripts\mp\objidpoolmanager::returnminimapid(param_00);
 }
 
-//Function Number: 48
-func_C7A6(param_00)
-{
+func_C7A6(param_00) {
 	param_00 endon("disconnect");
 	var_01 = scripts\mp\_utility::outlineenableforplayer(param_00,"orange",self,0,0,"level_script");
 	param_00 scripts\mp\_hud_message::showmiscmessage("spotted");
@@ -968,15 +794,11 @@ func_C7A6(param_00)
 	param_00.var_C78B = undefined;
 }
 
-//Function Number: 49
-func_E7FE()
-{
+func_E7FE() {
 	self endon("death");
 	self endon("disconnect");
-	for(;;)
-	{
-		if(self getstance() == "prone" && scripts\mp\_utility::_hasperk("specialty_improved_prone"))
-		{
+	for(;;) {
+		if(self getstance() == "prone" && scripts\mp\_utility::_hasperk("specialty_improved_prone")) {
 			wait(0.2);
 			var_00 = self.movespeedscaler;
 			self.movespeedscaler = 3;
@@ -990,15 +812,12 @@ func_E7FE()
 	}
 }
 
-//Function Number: 50
-func_BA22()
-{
+func_BA22() {
 	self endon("death");
 	self endon("disconnect");
 	self endon("removeArchetype");
 	self endon("changed_kit");
-	while(self getstance() == "prone")
-	{
+	while(self getstance() == "prone") {
 		scripts\engine\utility::waitframe();
 	}
 }

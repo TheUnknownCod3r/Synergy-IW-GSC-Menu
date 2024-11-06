@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\mp\maps\mp_fallen\gen\mp_fallen_sound.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 1
- * Decompile Time: 124 ms
- * Timestamp: 10/27/2023 12:13:27 AM
-*******************************************************************/
+/*********************************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\mp\maps\mp_fallen\gen\mp_fallen_sound.gsc
+*********************************************************************/
 
-//Function Number: 1
-main()
-{
+main() {
 	var_00 = scripts\common\createfx::func_49E7();
 	var_00 scripts\common\createfx::func_F4AD((2025.57,1991.82,1181.69),(270,0,0));
 	var_00.var_13125["soundalias"] = "emt_baseball_game_amb_lp";

@@ -1,18 +1,11 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\sp\mg_penetration.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 14
- * Decompile Time: 628 ms
- * Timestamp: 10/27/2023 12:24:43 AM
-*******************************************************************/
+/*************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\sp\mg_penetration.gsc
+*************************************************/
 
-//Function Number: 1
-func_8715(param_00)
-{
-	if(!isdefined(level.var_FC5D))
-	{
+func_8715(param_00) {
+	if(!isdefined(level.var_FC5D)) {
 		level.var_FC5D = [];
 	}
 
@@ -21,8 +14,7 @@ func_8715(param_00)
 	self endon("end_mg_behavior");
 	self.var_381C = 1;
 	self.var_138DC = 0;
-	if(!scripts\sp\_mgturret::func_13030(param_00))
-	{
+	if(!scripts\sp\_mgturret::func_13030(param_00)) {
 		self notify("continue_cover_script");
 		return;
 	}
@@ -33,30 +25,25 @@ func_8715(param_00)
 	var_02 = spawn("script_origin",(0,0,0));
 	thread func_11513(var_02);
 	var_02.origin = param_00.origin + var_01 * 500;
-	if(isdefined(self.var_A8BB))
-	{
+	if(isdefined(self.var_A8BB)) {
 		var_02.origin = self.var_A8BB;
 	}
 
 	param_00 settargetentity(var_02);
 	var_03 = undefined;
-	for(;;)
-	{
-		if(!isalive(self.var_4B6D))
-		{
+	for(;;) {
+		if(!isalive(self.var_4B6D)) {
 			stop_firing_turret();
 			self waittill("new_enemy");
 		}
 
 		func_10C4E();
 		func_FE5E(var_02);
-		if(!isalive(self.var_4B6D))
-		{
+		if(!isalive(self.var_4B6D)) {
 			continue;
 		}
 
-		if(self getpersstat(self.var_4B6D))
-		{
+		if(self getpersstat(self.var_4B6D)) {
 			continue;
 		}
 
@@ -64,46 +51,38 @@ func_8715(param_00)
 	}
 }
 
-//Function Number: 2
-func_11513(param_00)
-{
+func_11513(param_00) {
 	scripts\engine\utility::waittill_either("death","end_mg_behavior");
 	param_00 delete();
 }
 
-//Function Number: 3
-func_FE5E(param_00)
-{
+func_FE5E(param_00) {
 	self endon("death");
 	self endon("new_enemy");
 	self.var_4B6D endon("death");
 	var_01 = self.var_4B6D;
-	while(self getpersstat(var_01))
-	{
+	while(self getpersstat(var_01)) {
 		var_02 = vectortoangles(var_01 geteye() - param_00.origin);
 		var_02 = anglestoforward(var_02);
 		param_00 moveto(param_00.origin + var_02 * 12,0.1);
 		wait(0.1);
 	}
 
-	if(isplayer(var_01))
-	{
+	if(isplayer(var_01)) {
 		self endon("saw_enemy");
 		var_03 = var_01 geteye();
 		var_02 = vectortoangles(var_03 - param_00.origin);
 		var_02 = anglestoforward(var_02);
 		var_04 = 150;
 		var_05 = distance(param_00.origin,self.var_A8BB) / var_04;
-		if(var_05 > 0)
-		{
+		if(var_05 > 0) {
 			param_00 moveto(self.var_A8BB,var_05);
 			wait(var_05);
 		}
 
 		var_06 = param_00.origin + var_02 * 180;
 		var_07 = func_7CC5(self geteye(),param_00.origin,var_06);
-		if(!isdefined(var_07))
-		{
+		if(!isdefined(var_07)) {
 			var_07 = param_00.origin;
 		}
 
@@ -116,14 +95,10 @@ func_FE5E(param_00)
 	stop_firing_turret();
 }
 
-//Function Number: 4
-func_F39D(param_00)
-{
-	if(param_00)
-	{
+func_F39D(param_00) {
+	if(param_00) {
 		self.var_381C = 1;
-		if(self.var_138DC)
-		{
+		if(self.var_138DC) {
 			self.turret notify("startfiring");
 			return;
 		}
@@ -135,28 +110,20 @@ func_F39D(param_00)
 	self.turret notify("stopfiring");
 }
 
-//Function Number: 5
-stop_firing_turret()
-{
+stop_firing_turret() {
 	self.var_138DC = 0;
 	self.turret notify("stopfiring");
 }
 
-//Function Number: 6
-func_10C4E()
-{
+func_10C4E() {
 	self.var_138DC = 1;
-	if(self.var_381C)
-	{
+	if(self.var_381C) {
 		self.turret notify("startfiring");
 	}
 }
 
-//Function Number: 7
-func_491C()
-{
-	if(isdefined(level.var_B6B2))
-	{
+func_491C() {
+	if(isdefined(level.var_B6B2)) {
 		level.var_B6B2[level.var_B6B2.size] = self;
 		return;
 	}
@@ -169,10 +136,8 @@ func_491C()
 	var_01 = level.var_B6B2;
 	level.var_B6B2 = undefined;
 	var_00 waittill("gunner_died");
-	for(var_02 = 0;var_02 < var_01.size;var_02++)
-	{
-		if(!isalive(var_01[var_02]))
-		{
+	for(var_02 = 0;var_02 < var_01.size;var_02++) {
+		if(!isalive(var_01[var_02])) {
 			continue;
 		}
 
@@ -181,21 +146,15 @@ func_491C()
 	}
 }
 
-//Function Number: 8
-func_B6B1(param_00)
-{
+func_B6B1(param_00) {
 	self waittill("death");
 	param_00 notify("gunner_died");
 }
 
-//Function Number: 9
-func_103FE(param_00)
-{
+func_103FE(param_00) {
 	var_01 = undefined;
-	for(var_02 = 0;var_02 < param_00.size;var_02++)
-	{
-		if(!isalive(param_00[var_02]))
-		{
+	for(var_02 = 0;var_02 < param_00.size;var_02++) {
+		if(!isalive(param_00[var_02])) {
 			continue;
 		}
 
@@ -203,17 +162,13 @@ func_103FE(param_00)
 		break;
 	}
 
-	if(!isdefined(var_01))
-	{
+	if(!isdefined(var_01)) {
 	}
 }
 
-//Function Number: 10
-func_103FD()
-{
+func_103FD() {
 	self endon("death");
-	for(;;)
-	{
+	for(;;) {
 		self.turret _meth_8398();
 		wait(randomfloatrange(0.3,0.7));
 		self.turret givesentry();
@@ -221,25 +176,19 @@ func_103FD()
 	}
 }
 
-//Function Number: 11
-func_5F0C(param_00)
-{
-	for(var_01 = 0;var_01 < param_00.size;var_01++)
-	{
+func_5F0C(param_00) {
+	for(var_01 = 0;var_01 < param_00.size;var_01++) {
 		param_00[var_01] endon("death");
 	}
 
 	var_02 = 0;
 	var_03 = 1;
-	for(;;)
-	{
-		if(isalive(param_00[var_02]))
-		{
+	for(;;) {
+		if(isalive(param_00[var_02])) {
 			param_00[var_02] func_F39D(1);
 		}
 
-		if(isalive(param_00[var_03]))
-		{
+		if(isalive(param_00[var_03])) {
 			param_00[var_03] func_F39D(0);
 		}
 
@@ -250,17 +199,13 @@ func_5F0C(param_00)
 	}
 }
 
-//Function Number: 12
-func_7CC5(param_00,param_01,param_02)
-{
+func_7CC5(param_00,param_01,param_02) {
 	var_03 = distance(param_01,param_02) * 0.05;
-	if(var_03 < 5)
-	{
+	if(var_03 < 5) {
 		var_03 = 5;
 	}
 
-	if(var_03 > 20)
-	{
+	if(var_03 > 20) {
 		var_03 = 20;
 	}
 
@@ -268,11 +213,9 @@ func_7CC5(param_00,param_01,param_02)
 	var_04 = (var_04[0] / var_03,var_04[1] / var_03,var_04[2] / var_03);
 	var_05 = (0,0,0);
 	var_06 = undefined;
-	for(var_07 = 0;var_07 < var_03 + 2;var_07++)
-	{
+	for(var_07 = 0;var_07 < var_03 + 2;var_07++) {
 		var_08 = bullettrace(param_00,param_01 + var_05,0,undefined);
-		if(var_08["fraction"] < 1)
-		{
+		if(var_08["fraction"] < 1) {
 			var_06 = var_08["position"];
 			break;
 		}
@@ -283,36 +226,28 @@ func_7CC5(param_00,param_01,param_02)
 	return var_06;
 }
 
-//Function Number: 13
-func_DDE5()
-{
+func_DDE5() {
 	self endon("death");
 	self endon("end_mg_behavior");
 	self.var_4B6D = undefined;
-	for(;;)
-	{
+	for(;;) {
 		func_DDEB();
 		wait(0.05);
 	}
 }
 
-//Function Number: 14
-func_DDEB()
-{
-	if(!isalive(self.isnodeoccupied))
-	{
+func_DDEB() {
+	if(!isalive(self.isnodeoccupied)) {
 		return;
 	}
 
-	if(!self getpersstat(self.isnodeoccupied))
-	{
+	if(!self getpersstat(self.isnodeoccupied)) {
 		return;
 	}
 
 	self.var_A8BB = self.isnodeoccupied geteye();
 	self notify("saw_enemy");
-	if(!isalive(self.var_4B6D) || self.var_4B6D != self.isnodeoccupied)
-	{
+	if(!isalive(self.var_4B6D) || self.var_4B6D != self.isnodeoccupied) {
 		self.var_4B6D = self.isnodeoccupied;
 		self notify("new_enemy");
 	}

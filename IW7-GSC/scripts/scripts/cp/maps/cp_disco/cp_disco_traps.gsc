@@ -1,29 +1,19 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\cp\maps\cp_disco\cp_disco_traps.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 25
- * Decompile Time: 1399 ms
- * Timestamp: 10/27/2023 12:04:10 AM
-*******************************************************************/
+/***************************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\cp\maps\cp_disco\cp_disco_traps.gsc
+***************************************************************/
 
-//Function Number: 1
-init_buffer_trap()
-{
+init_buffer_trap() {
 	scripts\engine\utility::array_thread(scripts\engine\utility::getstructarray("trap_buffer","script_noteworthy"),::power_on_buffer);
 }
 
-//Function Number: 2
-power_on_buffer()
-{
+power_on_buffer() {
 	var_00 = getent(self.target,"targetname");
 	var_00 setnonstick(1);
-	if(scripts\engine\utility::istrue(self.requires_power))
-	{
+	if(scripts\engine\utility::istrue(self.requires_power)) {
 		var_01 = undefined;
-		if(isdefined(self.script_area))
-		{
+		if(isdefined(self.script_area)) {
 			var_01 = self.script_area;
 		}
 		else
@@ -31,8 +21,7 @@ power_on_buffer()
 			var_01 = scripts\cp\cp_interaction::get_area_for_power(self);
 		}
 
-		if(isdefined(var_01))
-		{
+		if(isdefined(var_01)) {
 			level scripts\engine\utility::waittill_any_3("power_on",var_01 + " power_on");
 		}
 	}
@@ -40,22 +29,17 @@ power_on_buffer()
 	self.powered_on = 1;
 }
 
-//Function Number: 3
-use_buffer_trap(param_00,param_01)
-{
+use_buffer_trap(param_00,param_01) {
 	scripts\cp\cp_interaction::remove_from_current_interaction_list(param_00);
 	param_01 thread scripts\cp\cp_vo::try_to_play_vo("activate_trap_generic","zmb_comment_vo","low",10,0,1,0,40);
 	var_02 = getent(param_00.target,"targetname");
-	if(!isdefined(var_02.var_127C9))
-	{
+	if(!isdefined(var_02.var_127C9)) {
 		var_03 = [];
-		foreach(var_05 in scripts\engine\utility::getstructarray(param_00.target,"targetname"))
-		{
+		foreach(var_05 in scripts\engine\utility::getstructarray(param_00.target,"targetname")) {
 			var_03[var_03.size] = spawn("trigger_radius",var_05.origin,0,var_05.fgetarg,var_05.height);
 		}
 
-		foreach(var_08 in var_03)
-		{
+		foreach(var_08 in var_03) {
 			var_08 enablelinkto();
 			var_08 linkto(var_02);
 		}
@@ -67,22 +51,18 @@ use_buffer_trap(param_00,param_01)
 	param_01 playlocalsound("purchase_generic");
 	var_02 buffer_trap_sfx();
 	param_00.trap_kills = 0;
-	if(!isdefined(param_00.offset_vector))
-	{
+	if(!isdefined(param_00.offset_vector)) {
 		param_00.offset_forward = distance2d(var_02.origin,param_00.origin) * -1;
 	}
 
 	param_00.offset_up = distance2d(var_02.origin,param_00.origin);
 	var_0A = var_02.origin;
 	var_0B = 0;
-	while(var_0B < 2)
-	{
+	while(var_0B < 2) {
 		var_02 moveto(var_02.origin + (0,0,5),0.1);
-		foreach(param_01 in level.players)
-		{
+		foreach(param_01 in level.players) {
 			var_0D = param_01.origin[2] - var_02.origin[2];
-			if(distance(var_02.origin,param_01.origin) < 72 && param_01.origin[2] > var_02.origin[2] && var_0D < 72)
-			{
+			if(distance(var_02.origin,param_01.origin) < 72 && param_01.origin[2] > var_02.origin[2] && var_0D < 72) {
 				param_01 setvelocity((randomintrange(220,250),randomintrange(220,250),0));
 			}
 		}
@@ -93,8 +73,7 @@ use_buffer_trap(param_00,param_01)
 		var_0B = var_0B + 0.3;
 	}
 
-	foreach(var_08 in var_02.var_127C9)
-	{
+	foreach(var_08 in var_02.var_127C9) {
 		var_02 thread kill_zombies(var_08,param_01,param_00);
 	}
 
@@ -118,24 +97,18 @@ use_buffer_trap(param_00,param_01)
 	scripts\cp\cp_interaction::interaction_cooldown(param_00,90);
 }
 
-//Function Number: 4
-buffer_move()
-{
+buffer_move() {
 	self endon("stop_buffer");
 	var_00 = 1;
 	var_01 = scripts\engine\utility::getstructarray(self.target,"targetname");
 	var_02 = squared(192);
-	for(;;)
-	{
+	for(;;) {
 		var_03 = [];
 		var_04 = [];
-		foreach(var_06 in var_01)
-		{
+		foreach(var_06 in var_01) {
 			var_07 = distance2dsquared(var_06.origin,self.origin);
-			if(var_07 > var_02)
-			{
-				if(isdefined(self.last_spot) && var_06.angles == self.last_spot.angles)
-				{
+			if(var_07 > var_02) {
+				if(isdefined(self.last_spot) && var_06.angles == self.last_spot.angles) {
 					continue;
 				}
 
@@ -145,14 +118,12 @@ buffer_move()
 		}
 
 		var_09 = randomintrange(0,var_03.size - 1);
-		if(!isdefined(var_09))
-		{
+		if(!isdefined(var_09)) {
 			break;
 		}
 
 		var_0A = undefined;
-		if(!isdefined(self.last_spot))
-		{
+		if(!isdefined(self.last_spot)) {
 			var_0B = var_03[var_09];
 			var_0A = sqrt(var_04[var_09]) / 180;
 			self moveto(var_0B.origin,var_0A,1,0);
@@ -172,26 +143,19 @@ buffer_move()
 	}
 }
 
-//Function Number: 5
-buffer_trap_sfx()
-{
+buffer_trap_sfx() {
 	self endon("stop_buffer");
 	self playsoundonmovingent("trap_buffer_startup");
 	wait(3.1);
 	self playloopsound("trap_buffer_spin_lp");
 }
 
-//Function Number: 6
-kill_zombies(param_00,param_01,param_02)
-{
+kill_zombies(param_00,param_01,param_02) {
 	self endon("stop_buffer");
-	for(;;)
-	{
+	for(;;) {
 		param_00 waittill("trigger",var_03);
-		if(isplayer(var_03) && !scripts\cp\cp_laststand::player_in_laststand(var_03))
-		{
-			if(scripts\engine\utility::istrue(var_03.flung))
-			{
+		if(isplayer(var_03) && !scripts\cp\cp_laststand::player_in_laststand(var_03)) {
+			if(scripts\engine\utility::istrue(var_03.flung)) {
 				continue;
 			}
 
@@ -200,13 +164,11 @@ kill_zombies(param_00,param_01,param_02)
 			continue;
 		}
 
-		if(isdefined(var_03.flung))
-		{
+		if(isdefined(var_03.flung)) {
 			continue;
 		}
 
-		if(isdefined(var_03.agent_type) && var_03.agent_type == "slasher")
-		{
+		if(isdefined(var_03.agent_type) && var_03.agent_type == "slasher") {
 			continue;
 		}
 
@@ -216,9 +178,7 @@ kill_zombies(param_00,param_01,param_02)
 	}
 }
 
-//Function Number: 7
-throwandkillplayer()
-{
+throwandkillplayer() {
 	self endon("disconnect");
 	self endon("last_stand");
 	self dodamage(35,self.origin);
@@ -227,9 +187,7 @@ throwandkillplayer()
 	self.flung = undefined;
 }
 
-//Function Number: 8
-fling_zombie(param_00,param_01,param_02)
-{
+fling_zombie(param_00,param_01,param_02) {
 	param_00 endon("death");
 	param_00.do_immediate_ragdoll = 1;
 	param_00.customdeath = 1;
@@ -237,8 +195,7 @@ fling_zombie(param_00,param_01,param_02)
 	param_00.nocorpse = 1;
 	param_00.full_gib = 1;
 	var_03 = ["kill_trap_generic","trap_kill_buffer"];
-	if(param_02 scripts\cp\utility::is_valid_player())
-	{
+	if(param_02 scripts\cp\utility::is_valid_player()) {
 		var_04 = param_02;
 		var_04 thread scripts\cp\cp_vo::try_to_play_vo(scripts\engine\utility::random(var_03),"zmb_comment_vo","highest",10,0,0,1,25);
 	}
@@ -250,32 +207,24 @@ fling_zombie(param_00,param_01,param_02)
 	param_00 dodamage(param_00.health + 1000,param_00.origin,var_04,var_04,"MOD_UNKNOWN","iw7_buffertrap_zm");
 }
 
-//Function Number: 9
-init_hydrant_trap()
-{
+init_hydrant_trap() {
 	level._effect["trap_hydrant_spray"] = loadfx("vfx/iw7/levels/cp_disco/vfx_trap_hydrant_spray.vfx");
 	level._effect["trap_hydrant_spray2"] = loadfx("vfx/iw7/levels/cp_disco/vfx_trap_hydrant_spray_2.vfx");
 	level._effect["trap_hydrant_pool"] = loadfx("vfx/iw7/levels/cp_disco/vfx_trap_hydrant_pool.vfx");
 }
 
-//Function Number: 10
-use_hydrant_trap(param_00,param_01)
-{
+use_hydrant_trap(param_00,param_01) {
 	var_02 = getent(param_00.target,"targetname");
 	var_03 = [];
-	foreach(var_05 in scripts\engine\utility::getstructarray(param_00.target,"targetname"))
-	{
+	foreach(var_05 in scripts\engine\utility::getstructarray(param_00.target,"targetname")) {
 		var_05.pool_spot = scripts\engine\utility::getstruct(var_05.target,"targetname");
-		foreach(var_07 in getentarray(var_05.target,"targetname"))
-		{
-			if(issubstr(var_07.classname,"phys"))
-			{
+		foreach(var_07 in getentarray(var_05.target,"targetname")) {
+			if(issubstr(var_07.classname,"phys")) {
 				var_05.physvolume = var_07;
 				continue;
 			}
 
-			if(issubstr(var_07.classname,"trigger"))
-			{
+			if(issubstr(var_07.classname,"trigger")) {
 				var_05.trigger = var_07;
 			}
 		}
@@ -306,11 +255,8 @@ use_hydrant_trap(param_00,param_01)
 	scripts\cp\cp_interaction::interaction_cooldown(param_00,90);
 }
 
-//Function Number: 11
-shoot_water()
-{
-	if(isdefined(self.script_noteworthy) && self.script_noteworthy == "2")
-	{
+shoot_water() {
+	if(isdefined(self.script_noteworthy) && self.script_noteworthy == "2") {
 		playfx(scripts\engine\utility::getfx("trap_hydrant_spray2"),self.origin,anglestoforward(self.angles),anglestoup(self.angles));
 	}
 	else
@@ -329,22 +275,17 @@ shoot_water()
 	self.physvolume physics_volumesetactivator(0);
 }
 
-//Function Number: 12
-kill_zombies_hydrant(param_00)
-{
+kill_zombies_hydrant(param_00) {
 	self.valve endon("stop_hydrant_trap");
-	for(;;)
-	{
+	for(;;) {
 		self.trigger waittill("trigger",var_01);
-		if(isplayer(var_01))
-		{
+		if(isplayer(var_01)) {
 			var_02 = var_01 getvelocity();
 			var_01 setvelocity(var_02 + param_00 * 35);
 			continue;
 		}
 
-		if(!scripts\cp\utility::should_be_affected_by_trap(var_01,undefined,1))
-		{
+		if(!scripts\cp\utility::should_be_affected_by_trap(var_01,undefined,1)) {
 			continue;
 		}
 
@@ -353,9 +294,7 @@ kill_zombies_hydrant(param_00)
 	}
 }
 
-//Function Number: 13
-fling_zombie_hydrant(param_00,param_01)
-{
+fling_zombie_hydrant(param_00,param_01) {
 	self endon("death");
 	self.flung = 1;
 	self.marked_for_death = 1;
@@ -363,8 +302,7 @@ fling_zombie_hydrant(param_00,param_01)
 	self.customdeath = 1;
 	self.disable_armor = 1;
 	wait(randomfloatrange(0.5,1.5));
-	if(param_01 scripts\cp\utility::is_valid_player())
-	{
+	if(param_01 scripts\cp\utility::is_valid_player()) {
 		var_02 = param_01;
 		var_03 = ["kill_trap_generic","trap_kill_firehydrant"];
 		var_02 thread scripts\cp\cp_vo::try_to_play_vo(scripts\engine\utility::random(var_03),"zmb_comment_vo","high",10,0,0,1,25);
@@ -377,35 +315,27 @@ fling_zombie_hydrant(param_00,param_01)
 	self dodamage(self.health + 100,self.origin,var_02,var_02,"MOD_UNKNOWN","iw7_hydranttrap_zm");
 }
 
-//Function Number: 14
-init_mosh_trap()
-{
+init_mosh_trap() {
 	scripts\engine\utility::flag_init("flag_moshing_allowed");
 	scripts\engine\utility::array_thread(scripts\engine\utility::getstructarray("trap_mosh","script_noteworthy"),::power_on_mosh);
 }
 
-//Function Number: 15
-power_on_mosh()
-{
+power_on_mosh() {
 	level.punk_rockspots = [];
 	level.punk_speakers = [];
 	self.aoe = undefined;
-	foreach(var_01 in scripts\engine\utility::getstructarray(self.target,"targetname"))
-	{
-		if(var_01.script_area == "rockout")
-		{
+	foreach(var_01 in scripts\engine\utility::getstructarray(self.target,"targetname")) {
+		if(var_01.script_area == "rockout") {
 			level.punk_rockspots[level.punk_rockspots.size] = var_01;
 			continue;
 		}
 
-		if(var_01.script_area == "radius")
-		{
+		if(var_01.script_area == "radius") {
 			self.aoe = var_01;
 			continue;
 		}
 
-		if(var_01.script_area == "speaker")
-		{
+		if(var_01.script_area == "speaker") {
 			level.punk_speakers[level.punk_speakers.size] = var_01;
 		}
 	}
@@ -414,9 +344,7 @@ power_on_mosh()
 	self.powered_on = 1;
 }
 
-//Function Number: 16
-use_mosh_trap(param_00,param_01)
-{
+use_mosh_trap(param_00,param_01) {
 	scripts\engine\utility::flag_clear("flag_moshing_allowed");
 	param_00.trap_kills = 0;
 	param_01 playlocalsound("purchase_generic");
@@ -437,35 +365,27 @@ use_mosh_trap(param_00,param_01)
 	scripts\cp\cp_interaction::interaction_cooldown(param_00,90);
 }
 
-//Function Number: 17
-mosh_trap_trigger(param_00,param_01)
-{
+mosh_trap_trigger(param_00,param_01) {
 	level endon("stop_mosh_trap");
-	for(;;)
-	{
+	for(;;) {
 		param_00.aoe_trigger waittill("trigger",var_02);
-		if(var_02 scripts\cp\utility::is_valid_player())
-		{
+		if(var_02 scripts\cp\utility::is_valid_player()) {
 			continue;
 		}
 
-		if(scripts\engine\utility::istrue(var_02.is_turned) || scripts\engine\utility::istrue(var_02.mosh_trap) || scripts\engine\utility::istrue(var_02.is_traversing))
-		{
+		if(scripts\engine\utility::istrue(var_02.is_turned) || scripts\engine\utility::istrue(var_02.mosh_trap) || scripts\engine\utility::istrue(var_02.is_traversing)) {
 			continue;
 		}
 
-		if(scripts\engine\utility::istrue(var_02.is_skeleton))
-		{
+		if(scripts\engine\utility::istrue(var_02.is_skeleton)) {
 			continue;
 		}
 
-		if(!scripts\cp\utility::should_be_affected_by_trap(var_02) || var_02.about_to_dance || var_02.scripted_mode)
-		{
+		if(!scripts\cp\utility::should_be_affected_by_trap(var_02) || var_02.about_to_dance || var_02.scripted_mode) {
 			continue;
 		}
 
-		if(var_02.agent_type == "ratking" || var_02.agent_type == "karatemaster" || var_02.agent_type == "cop_dlc2" || var_02.agent_type == "skater")
-		{
+		if(var_02.agent_type == "ratking" || var_02.agent_type == "karatemaster" || var_02.agent_type == "cop_dlc2" || var_02.agent_type == "skater") {
 			continue;
 		}
 
@@ -474,14 +394,10 @@ mosh_trap_trigger(param_00,param_01)
 	}
 }
 
-//Function Number: 18
-clean_array(param_00)
-{
+clean_array(param_00) {
 	var_01 = [];
-	foreach(var_03 in param_00)
-	{
-		if(isdefined(var_03) && isalive(var_03))
-		{
+	foreach(var_03 in param_00) {
+		if(isdefined(var_03) && isalive(var_03)) {
 			var_01[var_01.size] = var_03;
 		}
 	}
@@ -489,9 +405,7 @@ clean_array(param_00)
 	return var_01;
 }
 
-//Function Number: 19
-rockmode(param_00,param_01)
-{
+rockmode(param_00,param_01) {
 	level endon("stop_mosh_trap");
 	self endon("death");
 	self.mosh_trap = 1;
@@ -514,19 +428,15 @@ rockmode(param_00,param_01)
 	level.punk_rockers[level.punk_rockers.size] = self;
 }
 
-//Function Number: 20
-moshdeath(param_00,param_01)
-{
-	if(scripts\engine\utility::istrue(param_01))
-	{
+moshdeath(param_00,param_01) {
+	if(scripts\engine\utility::istrue(param_01)) {
 		self.electrocuted = 1;
 		self.dontmutilate = 1;
 		self playsound("trap_electric_shock");
 	}
 
 	var_02 = ["kill_trap_generic","trap_kill_moshpit"];
-	if(param_00 scripts\cp\utility::is_valid_player())
-	{
+	if(param_00 scripts\cp\utility::is_valid_player()) {
 		var_03 = param_00;
 		var_03 thread scripts\cp\cp_vo::try_to_play_vo(scripts\engine\utility::random(var_02),"zmb_comment_vo","high",10,0,0,1,25);
 	}
@@ -535,8 +445,7 @@ moshdeath(param_00,param_01)
 		var_03 = undefined;
 	}
 
-	if(scripts\engine\utility::istrue(self.is_moshing))
-	{
+	if(scripts\engine\utility::istrue(self.is_moshing)) {
 		self.team = "axis";
 	}
 
@@ -544,20 +453,15 @@ moshdeath(param_00,param_01)
 	self dodamage(self.health + 1000,self.origin,var_03,var_03,"MOD_UNKNOWN","iw7_moshtrap_zm");
 }
 
-//Function Number: 21
-get_rock_spot(param_00)
-{
-	if(isdefined(self.rockspot))
-	{
+get_rock_spot(param_00) {
+	if(isdefined(self.rockspot)) {
 		self.rockspot.triggerportableradarping = undefined;
 		self.rockspot = undefined;
 	}
 
 	var_01 = sortbydistance(level.punk_rockspots,param_00.origin);
-	foreach(var_03 in var_01)
-	{
-		if(!isdefined(var_03.triggerportableradarping))
-		{
+	foreach(var_03 in var_01) {
+		if(!isdefined(var_03.triggerportableradarping)) {
 			var_03.triggerportableradarping = self;
 			self.rockspot = var_03;
 			return var_03;
@@ -567,20 +471,14 @@ get_rock_spot(param_00)
 	return scripts\engine\utility::random(var_01);
 }
 
-//Function Number: 22
-get_mosh_spot(param_00)
-{
+get_mosh_spot(param_00) {
 	var_01 = sortbydistance(level.punk_rockspots,param_00.origin);
 	return var_01[0];
 }
 
-//Function Number: 23
-kill_mosh_stragglers(param_00)
-{
-	foreach(var_02 in level.punk_rockers)
-	{
-		if(!isdefined(var_02) || !isalive(var_02))
-		{
+kill_mosh_stragglers(param_00) {
+	foreach(var_02 in level.punk_rockers) {
+		if(!isdefined(var_02) || !isalive(var_02)) {
 			continue;
 		}
 
@@ -592,23 +490,19 @@ kill_mosh_stragglers(param_00)
 	}
 }
 
-//Function Number: 24
-release_zombie_on_trap_done(param_00)
-{
+release_zombie_on_trap_done(param_00) {
 	self endon("death");
 	self endon("moshmode");
 	self endon("rockmode");
 	level waittill("stop_mosh_trap");
-	if(isdefined(self.og_goalradius))
-	{
+	if(isdefined(self.og_goalradius)) {
 		self.objective_playermask_showto = self.og_goalradius;
 	}
 
 	self ghostskulls_total_waves(self.objective_playermask_showto);
 	self.og_goalradius = undefined;
 	self.scripted_mode = 0;
-	if(isdefined(self.og_movemode))
-	{
+	if(isdefined(self.og_movemode)) {
 		self.synctransients = self.og_movemode;
 	}
 
@@ -618,20 +512,16 @@ release_zombie_on_trap_done(param_00)
 	self.mosh_trap = undefined;
 	self.is_rocking = undefined;
 	self.do_immediate_ragdoll = 0;
-	if(isdefined(self.rockspot))
-	{
+	if(isdefined(self.rockspot)) {
 		self.rockspot.triggerportableradarping = undefined;
 	}
 
 	self.rockspot = undefined;
 }
 
-//Function Number: 25
-release_rockspot_on_death()
-{
+release_rockspot_on_death() {
 	self waittill("death");
-	if(isdefined(self.rockspot))
-	{
+	if(isdefined(self.rockspot)) {
 		self.rockspot.triggerportableradarping = undefined;
 	}
 }

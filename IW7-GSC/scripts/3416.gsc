@@ -1,41 +1,29 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: 3416.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 10
- * Decompile Time: 3 ms
- * Timestamp: 10/27/2023 12:27:09 AM
-*******************************************************************/
+/****************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\3416.gsc
+****************************/
 
-//Function Number: 1
-init_jaroslav()
-{
+init_jaroslav() {
 	var_00 = scripts\engine\utility::getstructarray("jaroslav_machine","script_noteworthy");
 	level.jaroslav_original_cost = level.interactions["jaroslav_machine"].cost;
 	level.fortune_visit_cost_1 = 3000;
 	level.fortune_visit_cost_2 = 6000;
-	foreach(var_02 in var_00)
-	{
+	foreach(var_02 in var_00) {
 		var_03 = getentarray(var_02.target,"targetname");
-		foreach(var_05 in var_03)
-		{
-			if(var_05.script_noteworthy == "fnf_machine")
-			{
+		foreach(var_05 in var_03) {
+			if(var_05.script_noteworthy == "fnf_machine") {
 				var_02.machine = var_05;
 				continue;
 			}
 
-			if(var_05.script_noteworthy == "fnf_jaw")
-			{
+			if(var_05.script_noteworthy == "fnf_jaw") {
 				var_02.jaw = var_05;
 				continue;
 			}
 
-			if(var_05.script_noteworthy == "fnf_light")
-			{
-				if(!isdefined(var_02.lights))
-				{
+			if(var_05.script_noteworthy == "fnf_light") {
+				if(!isdefined(var_02.lights)) {
 					var_02.lights = [];
 				}
 
@@ -49,38 +37,27 @@ init_jaroslav()
 	}
 }
 
-//Function Number: 2
-should_use_alt_machine()
-{
-	if(getdvarint("loc_language") != 15 && getdvarint("loc_language") != 1)
-	{
+should_use_alt_machine() {
+	if(getdvarint("loc_language") != 15 && getdvarint("loc_language") != 1) {
 		return 0;
 	}
 
 	return 0;
 }
 
-//Function Number: 3
-power_on_func()
-{
-	foreach(var_01 in self.lights)
-	{
+power_on_func() {
+	foreach(var_01 in self.lights) {
 		var_01 setlightintensity(0);
-		if(scripts\engine\utility::istrue(self.requires_power))
-		{
+		if(scripts\engine\utility::istrue(self.requires_power)) {
 			var_01 thread turn_on_light(self);
 		}
 	}
 }
 
-//Function Number: 4
-turn_on_light(param_00)
-{
-	for(;;)
-	{
+turn_on_light(param_00) {
+	for(;;) {
 		var_01 = level scripts\engine\utility::waittill_any_return("power_on",param_00.power_area + " power_on","power_off");
-		if(var_01 == "power_off")
-		{
+		if(var_01 == "power_off") {
 			self setlightintensity(0);
 			param_00.powered_on = 0;
 			continue;
@@ -89,8 +66,7 @@ turn_on_light(param_00)
 		self setlightintensity(0.65);
 		param_00.machine setscriptablepartstate("machine","default_on");
 		param_00.machine setscriptablepartstate("teller","safe_on");
-		if(!param_00.powered_on)
-		{
+		if(!param_00.powered_on) {
 			level thread scripts\cp\cp_music_and_dialog::add_to_ambient_sound_queue("jaroslav_anc_attract",param_00.jaw.origin,120,120,250000,100);
 		}
 
@@ -98,18 +74,14 @@ turn_on_light(param_00)
 	}
 }
 
-//Function Number: 5
-interaction_jaroslav(param_00,param_01)
-{
+interaction_jaroslav(param_00,param_01) {
 	level thread move_jaw(param_00,3);
 	param_01 notify("stop_interaction_logic");
 	param_01.last_interaction_point = undefined;
 	var_02 = getarraykeys(param_01.consumables);
 	param_01 notify("cards_replenished");
-	if(param_01 scripts\cp\utility::are_any_consumables_active())
-	{
-		foreach(var_04 in var_02)
-		{
+	if(param_01 scripts\cp\utility::are_any_consumables_active()) {
+		foreach(var_04 in var_02) {
 			param_01 notify(var_04 + "_exited_early");
 		}
 	}
@@ -127,30 +99,23 @@ interaction_jaroslav(param_00,param_01)
 	param_01 scripts\cp\cp_interaction::refresh_interaction();
 }
 
-//Function Number: 6
-jaroslav_interaction_vo(param_00)
-{
+jaroslav_interaction_vo(param_00) {
 	param_00 endon("disconnect");
 	param_00 endon("last_stand");
 	wait(2);
 	param_00 thread scripts\cp\cp_vo::try_to_play_vo("wonder_restock","zmb_comment_vo","low",10,0,0,0,50);
 }
 
-//Function Number: 7
-move_jaw(param_00,param_01)
-{
-	if(isdefined(param_00.jaw.moving))
-	{
+move_jaw(param_00,param_01) {
+	if(isdefined(param_00.jaw.moving)) {
 		return;
 	}
 
-	if(!scripts\engine\utility::istrue(param_00.machine.hidden))
-	{
+	if(!scripts\engine\utility::istrue(param_00.machine.hidden)) {
 		param_00.machine setscriptablepartstate("mouth","smoke");
 	}
 
-	for(var_02 = 0;var_02 < param_01;var_02++)
-	{
+	for(var_02 = 0;var_02 < param_01;var_02++) {
 		param_00.jaw.moving = 1;
 		param_00.jaw movez(-1,0.2);
 		param_00.jaw waittill("movedone");
@@ -162,18 +127,13 @@ move_jaw(param_00,param_01)
 	param_00.jaw.moving = undefined;
 }
 
-//Function Number: 8
-jaroslav_hint_logic(param_00,param_01)
-{
-	if(scripts\engine\utility::istrue(param_00.machine.hidden))
-	{
+jaroslav_hint_logic(param_00,param_01) {
+	if(scripts\engine\utility::istrue(param_00.machine.hidden)) {
 		return "";
 	}
 
-	if(param_00.requires_power && !param_00.powered_on)
-	{
-		if(isdefined(level.needspowerstring))
-		{
+	if(param_00.requires_power && !param_00.powered_on) {
+		if(isdefined(level.needspowerstring)) {
 			return level.needspowerstring;
 		}
 		else
@@ -183,8 +143,7 @@ jaroslav_hint_logic(param_00,param_01)
 	}
 
 	level thread move_jaw(param_00,1);
-	if(param_01 scripts\cp\utility::are_any_consumables_active())
-	{
+	if(param_01 scripts\cp\utility::are_any_consumables_active()) {
 		var_02 = &"COOP_INTERACTIONS_FNF_WHILE_ACTIVE";
 	}
 	else
@@ -192,18 +151,15 @@ jaroslav_hint_logic(param_00,param_01)
 		var_02 = level.interaction_hintstrings[param_01.script_noteworthy];
 	}
 
-	if(scripts\engine\utility::istrue(level.meph_fight_started))
-	{
+	if(scripts\engine\utility::istrue(level.meph_fight_started)) {
 		return level.interaction_hintstrings[param_00.script_noteworthy];
 	}
 
-	if(scripts\engine\utility::istrue(level.unlimited_fnf))
-	{
+	if(scripts\engine\utility::istrue(level.unlimited_fnf)) {
 		return var_02;
 	}
 
-	switch(param_01.card_refills)
-	{
+	switch(param_01.card_refills) {
 		case 1:
 		case 0:
 			return var_02;
@@ -213,16 +169,12 @@ jaroslav_hint_logic(param_00,param_01)
 	}
 }
 
-//Function Number: 9
-player_init(param_00)
-{
+player_init(param_00) {
 	param_00.fortune_visit_this_round = 0;
 	param_00.card_refills = 0;
 }
 
-//Function Number: 10
-register_interactions()
-{
+register_interactions() {
 	level.interaction_hintstrings["jaroslav_machine"] = &"COOP_INTERACTIONS_FNF";
 	scripts\cp\cp_interaction::register_interaction("jaroslav_machine","wondercard_machine",1,::jaroslav_hint_logic,::interaction_jaroslav,3000,1,::init_jaroslav);
 }

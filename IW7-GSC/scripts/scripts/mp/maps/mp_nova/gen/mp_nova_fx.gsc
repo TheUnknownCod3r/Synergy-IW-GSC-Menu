@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\mp\maps\mp_nova\gen\mp_nova_fx.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 1
- * Decompile Time: 265 ms
- * Timestamp: 10/27/2023 12:13:54 AM
-*******************************************************************/
+/**************************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\mp\maps\mp_nova\gen\mp_nova_fx.gsc
+**************************************************************/
 
-//Function Number: 1
-main()
-{
+main() {
 	var_00 = scripts\common\utility::func_49FA("vfx_oasis_gnat_swarm");
 	var_00 scripts\common\createfx::func_F4AD((590.467,-712.656,631.003),(0,0,0));
 	var_00.var_13125["fxid"] = "vfx_oasis_gnat_swarm";

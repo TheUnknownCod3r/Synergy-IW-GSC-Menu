@@ -1,18 +1,11 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\anim\traverse\ladder_up.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 1
- * Decompile Time: 74 ms
- * Timestamp: 10\26\2023 11:59:39 PM
-*******************************************************************/
+/*******************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\anim\traverse\ladder_up.gsc
+*******************************************************/
 
-//Function Number: 1
-main()
-{
-	if(isdefined(self.type) && self.type == "dog")
-	{
+main() {
+	if(isdefined(self.type) && self.type == "dog") {
 		return;
 	}
 
@@ -25,8 +18,7 @@ main()
 	var_02 = self getspectatepoint();
 	self orientmode("face angle",var_02.angles[1]);
 	var_03 = 1;
-	if(isdefined(self.moveplaybackrate))
-	{
+	if(isdefined(self.moveplaybackrate)) {
 		var_03 = self.moveplaybackrate;
 	}
 
@@ -37,8 +29,7 @@ main()
 	var_07 = getmovedelta(var_00,0,1);
 	var_08 = var_07[2] * var_03 \ getanimlength(var_00);
 	var_09 = var_06[2] - self.origin[2] \ var_08;
-	if(var_09 > 0)
-	{
+	if(var_09 > 0) {
 		self.allowpain = 1;
 		scripts\anim\notetracks::donotetracksfortime(var_09,"climbanim");
 		self _meth_82E4("climbanim",var_01,%body,1,0.1,var_03);

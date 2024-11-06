@@ -1,29 +1,20 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\sp\maps\europa\europa.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 10
- * Decompile Time: 472 ms
- * Timestamp: 10/27/2023 12:22:38 AM
-*******************************************************************/
+/*****************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\sp\maps\europa\europa.gsc
+*****************************************************/
 
-//Function Number: 1
-main()
-{
-	if(getdvarint("r_reflectionprobegenerate"))
-	{
+main() {
+	if(getdvarint("r_reflectionprobegenerate")) {
 		var_00 = getentarray("armory_doors","targetname");
-		foreach(var_02 in var_00)
-		{
+		foreach(var_02 in var_00) {
 			var_03 = spawn("script_model",var_02.origin);
 			var_03.angles = var_02.angles;
 			var_03 setmodel(var_02.model);
 		}
 
 		var_05 = getent("base_door","targetname");
-		if(isdefined(var_05))
-		{
+		if(isdefined(var_05)) {
 			var_05 hide();
 		}
 
@@ -70,8 +61,7 @@ main()
 	scripts\sp\_utility::func_28D7("axis");
 	thread footsteps();
 	level.player setweaponammostock("seeker",0);
-	if(scripts\sp\_utility::func_93A6())
-	{
+	if(scripts\sp\_utility::func_93A6()) {
 		level.player lib_0E42::giveperk("specialty_extraequipment");
 	}
 	else
@@ -130,25 +120,19 @@ main()
 	soundsettimescalefactor("amb_elm_ext_special_unres_3d",0.25);
 }
 
-//Function Number: 2
-func_49C4()
-{
+func_49C4() {
 	wait(0.2);
 	thread scripts\sp\_utility::func_12641("europa_fatty_tr");
 	level.player dontinterpolate();
 	level.player setorigin((29050,-4630,4020),1);
 }
 
-//Function Number: 3
-func_5000()
-{
+func_5000() {
 	function_01C5("r_mbradialoverridestrength",0.002);
 	function_01C5("r_mbRadialoverridechromaticAberration",0.85);
 }
 
-//Function Number: 4
-footsteps()
-{
+footsteps() {
 	var_00 = "soldier";
 	scripts\anim\utility::func_F715(var_00,"snow",loadfx("vfx/iw7/core/footstep/vfx_footstep_snow_medium.vfx"));
 	scripts\anim\utility::func_F715(var_00,"ice",loadfx("vfx/iw7/core/footstep/vfx_footstep_snow_medium.vfx"));
@@ -156,9 +140,7 @@ footsteps()
 	scripts\anim\utility::func_F716(var_00,"ice",loadfx("vfx/iw7/core/footstep/vfx_footstep_snow_medium.vfx"));
 }
 
-//Function Number: 5
-func_FA53()
-{
+func_FA53() {
 	scripts\sp\_utility::func_F343("dropship");
 	var_00 = ["europa_fatty_tr"];
 	scripts\sp\_utility::func_1749("dropship",::scripts\sp\maps\europa\europa_intro::func_5DF1,"Dropship Flyin",::scripts\sp\maps\europa\europa_intro::func_5DEF,var_00,::scripts\sp\maps\europa\europa_intro::func_5DF0);
@@ -180,9 +162,7 @@ func_FA53()
 	scripts\sp\_utility::func_1749("outro",::scripts\sp\maps\europa\europa_outro::func_C7D3,"Outro",::scripts\sp\maps\europa\europa_outro::func_C7B4,undefined);
 }
 
-//Function Number: 6
-func_EDEB()
-{
+func_EDEB() {
 	scripts\sp\maps\europa\europa_intro::func_9ABC();
 	scripts\sp\maps\europa\europa_labs::func_A79C();
 	scripts\sp\maps\europa\europa_armory::func_220C();
@@ -191,9 +171,7 @@ func_EDEB()
 	scripts\engine\utility::array_thread(getentarray("ai_gesture_trig","targetname"),::scripts\sp\maps\europa\europa_util::func_1968);
 }
 
-//Function Number: 7
-func_D7FB()
-{
+func_D7FB() {
 	precachemodel("weapon_steeldragon_vm");
 	precachemodel("robot_c12");
 	precachemodel("veh_mil_air_un_pocketdrone");
@@ -225,9 +203,7 @@ func_D7FB()
 	precachestring(&"EUROPA_OBJECTIVE_ESCAPE");
 }
 
-//Function Number: 8
-func_6E3A()
-{
+func_6E3A() {
 	scripts\engine\utility::flag_init("entering_labs");
 	scripts\engine\utility::flag_init("breach_det_complete");
 	scripts\engine\utility::flag_init("lab_walk_c12_scene_salter");
@@ -278,20 +254,15 @@ func_6E3A()
 	scripts\engine\utility::flag_init("sd_reached_defend");
 }
 
-//Function Number: 9
-func_1122F()
-{
-	if(!isdefined(level.var_4BC5))
-	{
+func_1122F() {
+	if(!isdefined(level.var_4BC5)) {
 		level.var_4BC5 = 3;
 	}
 
-	for(;;)
-	{
+	for(;;) {
 		self waittill("trigger");
 		var_00 = getdvarint("sm_sunsamplesizenear");
-		if(self.var_EED6 == level.var_4BC5)
-		{
+		if(self.var_EED6 == level.var_4BC5) {
 			continue;
 		}
 
@@ -300,11 +271,8 @@ func_1122F()
 	}
 }
 
-//Function Number: 10
-func_A6F3()
-{
-	if(isdefined(self.var_EDA0))
-	{
+func_A6F3() {
+	if(isdefined(self.var_EDA0)) {
 		scripts\engine\utility::flag_wait(self.var_EDA0);
 	}
 

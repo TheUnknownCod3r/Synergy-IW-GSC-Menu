@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\mp\maps\mp_desert\mp_desert.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 5
- * Decompile Time: 287 ms
- * Timestamp: 10/27/2023 12:13:23 AM
-*******************************************************************/
+/***********************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\mp\maps\mp_desert\mp_desert.gsc
+***********************************************************/
 
-//Function Number: 1
-main()
-{
+main() {
 	lib_0F92::main();
 	scripts\mp\maps\mp_desert\gen\mp_desert_art::main();
 	lib_0F91::main();
@@ -31,9 +25,7 @@ main()
 	runmodespecifictriggers();
 }
 
-//Function Number: 2
-fix_collision()
-{
+fix_collision() {
 	var_00 = getent("clip64x64x128","targetname");
 	var_01 = spawn("script_model",(2342,-92,354));
 	var_01.angles = (2,50,2);
@@ -147,18 +139,14 @@ fix_collision()
 	var_32 clonebrushmodeltoscriptmodel(var_31);
 }
 
-//Function Number: 3
-func_FAE6(param_00,param_01,param_02)
-{
+func_FAE6(param_00,param_01,param_02) {
 	var_03 = getent(param_00,"targetname");
 	var_03.var_5293 = scripts\common\utility::getstruct(var_03.target,"targetname");
 	var_03.var_BCEF = 1 / param_01;
 	var_03.var_5293 = func_E6E1(var_03,param_02);
 }
 
-//Function Number: 4
-func_E6E1(param_00,param_01)
-{
+func_E6E1(param_00,param_01) {
 	param_00 endon("death");
 	var_02 = scripts\common\utility::getstruct(param_00.var_5293.target,"targetname");
 	var_03 = abs(distance(param_00.origin,var_02.origin) * param_00.var_BCEF);
@@ -173,11 +161,8 @@ func_E6E1(param_00,param_01)
 	return var_02;
 }
 
-//Function Number: 5
-runmodespecifictriggers()
-{
-	if(level.gametype == "ball" || level.gametype == "tdef")
-	{
+runmodespecifictriggers() {
+	if(level.gametype == "ball" || level.gametype == "tdef") {
 		var_00 = spawn("trigger_radius",(-596,-972,336),0,64,128);
 		var_00.var_336 = "uplink_nozone";
 		var_00.angles = (0,0,0);

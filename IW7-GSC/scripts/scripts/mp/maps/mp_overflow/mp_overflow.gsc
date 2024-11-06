@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\mp\maps\mp_overflow\mp_overflow.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 3
- * Decompile Time: 197 ms
- * Timestamp: 10/27/2023 12:13:57 AM
-*******************************************************************/
+/***************************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\mp\maps\mp_overflow\mp_overflow.gsc
+***************************************************************/
 
-//Function Number: 1
-main()
-{
+main() {
 	scripts\mp\maps\mp_overflow\mp_overflow_precache::main();
 	scripts\mp\maps\mp_overflow\gen\mp_overflow_art::main();
 	scripts\mp\maps\mp_overflow\mp_overflow_fx::main();
@@ -33,11 +27,8 @@ main()
 	thread func_CDA4("mp_overflow_screen");
 }
 
-//Function Number: 2
-runmodespecifictriggers()
-{
-	if(level.gametype == "ball" || level.gametype == "tdef")
-	{
+runmodespecifictriggers() {
+	if(level.gametype == "ball" || level.gametype == "tdef") {
 		wait(1);
 		var_00 = spawn("trigger_radius",(-1386,-154,692),0,46,128);
 		var_00.var_336 = "uplink_nozone";
@@ -50,9 +41,7 @@ runmodespecifictriggers()
 	}
 }
 
-//Function Number: 3
-func_CDA4(param_00)
-{
+func_CDA4(param_00) {
 	wait(30);
 	function_030E(param_00);
 }

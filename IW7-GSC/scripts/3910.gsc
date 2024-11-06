@@ -1,18 +1,11 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: 3910.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 15
- * Decompile Time: 4 ms
- * Timestamp: 10/27/2023 12:31:14 AM
-*******************************************************************/
+/****************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\3910.gsc
+****************************/
 
-//Function Number: 1
-func_2371()
-{
-	if(scripts/asm/asm::func_232E("zombie_ghost"))
-	{
+func_2371() {
+	if(scripts/asm/asm::func_232E("zombie_ghost")) {
 		return;
 	}
 
@@ -46,86 +39,58 @@ func_2371()
 	scripts/asm/asm::func_2327();
 }
 
-//Function Number: 2
-func_11BF0(param_00,param_01,param_02,param_03)
-{
+func_11BF0(param_00,param_01,param_02,param_03) {
 	return scripts/asm/zombie_ghost/zombie_ghost_asm::func_13F67();
 }
 
-//Function Number: 3
-func_11BF2(param_00,param_01,param_02,param_03)
-{
+func_11BF2(param_00,param_01,param_02,param_03) {
 	return scripts/asm/zombie_ghost/zombie_ghost_asm::func_13F66();
 }
 
-//Function Number: 4
-func_11BF1(param_00,param_01,param_02,param_03)
-{
+func_11BF1(param_00,param_01,param_02,param_03) {
 	return scripts/asm/zombie_ghost/zombie_ghost_asm::func_13F64();
 }
 
-//Function Number: 5
-func_12242(param_00,param_01,param_02,param_03)
-{
+func_12242(param_00,param_01,param_02,param_03) {
 	return scripts/asm/zombie_ghost/zombie_ghost_asm::func_13F67();
 }
 
-//Function Number: 6
-func_12251(param_00,param_01,param_02,param_03)
-{
+func_12251(param_00,param_01,param_02,param_03) {
 	return scripts/asm/zombie_ghost/zombie_ghost_asm::func_13F66();
 }
 
-//Function Number: 7
-func_12247(param_00,param_01,param_02,param_03)
-{
+func_12247(param_00,param_01,param_02,param_03) {
 	return scripts/asm/zombie_ghost/zombie_ghost_asm::func_13F64();
 }
 
-//Function Number: 8
-func_12173(param_00,param_01,param_02,param_03)
-{
+func_12173(param_00,param_01,param_02,param_03) {
 	return scripts/asm/zombie_ghost/zombie_ghost_asm::func_13F67();
 }
 
-//Function Number: 9
-func_12179(param_00,param_01,param_02,param_03)
-{
+func_12179(param_00,param_01,param_02,param_03) {
 	return scripts/asm/zombie_ghost/zombie_ghost_asm::func_13F66();
 }
 
-//Function Number: 10
-func_12175(param_00,param_01,param_02,param_03)
-{
+func_12175(param_00,param_01,param_02,param_03) {
 	return scripts/asm/zombie_ghost/zombie_ghost_asm::func_13F65();
 }
 
-//Function Number: 11
-func_12177(param_00,param_01,param_02,param_03)
-{
+func_12177(param_00,param_01,param_02,param_03) {
 	return !scripts/asm/zombie_ghost/zombie_ghost_asm::func_13F64();
 }
 
-//Function Number: 12
-func_122A0(param_00,param_01,param_02,param_03)
-{
+func_122A0(param_00,param_01,param_02,param_03) {
 	return scripts/asm/zombie_ghost/zombie_ghost_asm::func_13F67();
 }
 
-//Function Number: 13
-func_1217B(param_00,param_01,param_02,param_03)
-{
+func_1217B(param_00,param_01,param_02,param_03) {
 	return scripts/asm/zombie_ghost/zombie_ghost_asm::func_13F67();
 }
 
-//Function Number: 14
-func_120C5(param_00,param_01,param_02,param_03)
-{
+func_120C5(param_00,param_01,param_02,param_03) {
 	return scripts/asm/zombie_ghost/zombie_ghost_asm::func_13F68();
 }
 
-//Function Number: 15
-func_120C3(param_00,param_01,param_02,param_03)
-{
+func_120C3(param_00,param_01,param_02,param_03) {
 	return !scripts/asm/zombie_ghost/zombie_ghost_asm::func_13F67();
 }

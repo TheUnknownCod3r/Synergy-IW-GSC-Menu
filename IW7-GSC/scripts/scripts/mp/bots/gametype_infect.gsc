@@ -1,162 +1,120 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\mp\bots\gametype_infect.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 10
- * Decompile Time: 536 ms
- * Timestamp: 10/27/2023 12:12:00 AM
-*******************************************************************/
+/*******************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\mp\bots\gametype_infect.gsc
+*******************************************************/
 
-//Function Number: 1
-main()
-{
+main() {
 	setup_callbacks();
 	setup_bot_infect();
 }
 
-//Function Number: 2
-setup_callbacks()
-{
+setup_callbacks() {
 	level.bot_funcs["gametype_think"] = ::bot_infect_think;
 	level.bot_funcs["should_pickup_weapons"] = ::bot_should_pickup_weapons_infect;
 }
 
-//Function Number: 3
-setup_bot_infect()
-{
+setup_bot_infect() {
 	level.bots_gametype_handles_class_choice = 1;
 	level.bots_ignore_team_balance = 1;
 	level.bots_gametype_handles_team_choice = 1;
 	thread bot_infect_ai_director_update();
 }
 
-//Function Number: 4
-bot_should_pickup_weapons_infect()
-{
-	if(level.infect_chosefirstinfected && self.team == "axis")
-	{
+bot_should_pickup_weapons_infect() {
+	if(level.infect_chosefirstinfected && self.team == "axis") {
 		return 0;
 	}
 
 	return scripts\mp\bots\_bots::bot_should_pickup_weapons();
 }
 
-//Function Number: 5
-bot_infect_think()
-{
+bot_infect_think() {
 	self notify("bot_infect_think");
 	self endon("bot_infect_think");
 	self endon("death");
 	self endon("disconnect");
 	level endon("game_ended");
 	childthread bot_infect_retrieve_knife();
-	for(;;)
-	{
-		if(level.infect_chosefirstinfected)
-		{
-			if(self.team == "axis" && self botgetpersonality() != "run_and_gun")
-			{
+	for(;;) {
+		if(level.infect_chosefirstinfected) {
+			if(self.team == "axis" && self botgetpersonality() != "run_and_gun") {
 				scripts\mp\bots\_bots_util::bot_set_personality("run_and_gun");
 			}
 		}
 
-		if(self.bot_team != self.team)
-		{
+		if(self.bot_team != self.team) {
 			self.bot_team = self.team;
 		}
 
-		if(self.team == "axis")
-		{
+		if(self.team == "axis") {
 			var_00 = scripts\mp\bots\_bots_strategy::bot_melee_tactical_insertion_check();
-			if(!isdefined(var_00) || var_00)
-			{
+			if(!isdefined(var_00) || var_00) {
 				self botclearscriptgoal();
 			}
 		}
 
-		self [[ self.personality_update_function ]]();
+		self [[self.personality_update_function]]();
 		wait(0.05);
 	}
 }
 
-//Function Number: 6
-bot_infect_ai_director_update()
-{
+bot_infect_ai_director_update() {
 	level notify("bot_infect_ai_director_update");
 	level endon("bot_infect_ai_director_update");
 	level endon("game_ended");
-	for(;;)
-	{
+	for(;;) {
 		var_00 = [];
 		var_01 = [];
-		foreach(var_03 in level.players)
-		{
-			if(!isdefined(var_03.initial_spawn_time) && var_03.health > 0 && isdefined(var_03.team) && var_03.team == "allies" || var_03.team == "axis")
-			{
+		foreach(var_03 in level.players) {
+			if(!isdefined(var_03.initial_spawn_time) && var_03.health > 0 && isdefined(var_03.team) && var_03.team == "allies" || var_03.team == "axis") {
 				var_03.initial_spawn_time = gettime();
 			}
 
-			if(isdefined(var_03.initial_spawn_time) && gettime() - var_03.initial_spawn_time > 5000)
-			{
-				if(!isdefined(var_03.team))
-				{
+			if(isdefined(var_03.initial_spawn_time) && gettime() - var_03.initial_spawn_time > 5000) {
+				if(!isdefined(var_03.team)) {
 					continue;
 				}
 
-				if(var_03.team == "axis")
-				{
+				if(var_03.team == "axis") {
 					var_00[var_00.size] = var_03;
 					continue;
 				}
 
-				if(var_03.team == "allies")
-				{
+				if(var_03.team == "allies") {
 					var_01[var_01.size] = var_03;
 				}
 			}
 		}
 
-		if(var_00.size > 0 && var_01.size > 0)
-		{
+		if(var_00.size > 0 && var_01.size > 0) {
 			var_05 = 1;
-			foreach(var_07 in var_01)
-			{
-				if(isbot(var_07))
-				{
+			foreach(var_07 in var_01) {
+				if(isbot(var_07)) {
 					var_05 = 0;
 				}
 			}
 
-			if(var_05)
-			{
-				foreach(var_03 in var_01)
-				{
-					if(!isdefined(var_03.last_infected_hiding_time))
-					{
+			if(var_05) {
+				foreach(var_03 in var_01) {
+					if(!isdefined(var_03.last_infected_hiding_time)) {
 						var_03.last_infected_hiding_time = gettime();
 						var_03.last_infected_hiding_loc = var_03.origin;
 						var_03.var_118DA = 0;
 					}
 
-					if(gettime() >= var_03.last_infected_hiding_time + 5000)
-					{
+					if(gettime() >= var_03.last_infected_hiding_time + 5000) {
 						var_03.last_infected_hiding_time = gettime();
 						var_0A = distancesquared(var_03.origin,var_03.last_infected_hiding_loc);
 						var_03.last_infected_hiding_loc = var_03.origin;
-						if(var_0A < 90000)
-						{
+						if(var_0A < 90000) {
 							var_03.var_118DA = var_03.var_118DA + 5000;
-							if(var_03.var_118DA >= 20000)
-							{
+							if(var_03.var_118DA >= 20000) {
 								var_0B = scripts\engine\utility::get_array_of_closest(var_03.origin,var_00);
-								foreach(var_0D in var_0B)
-								{
-									if(isbot(var_0D))
-									{
+								foreach(var_0D in var_0B) {
+									if(isbot(var_0D)) {
 										var_0E = var_0D botgetscriptgoaltype();
-										if(var_0E != "tactical" && var_0E != "critical")
-										{
+										if(var_0E != "tactical" && var_0E != "critical") {
 											var_0D thread hunt_human(var_03);
 											break;
 										}
@@ -178,9 +136,7 @@ bot_infect_ai_director_update()
 	}
 }
 
-//Function Number: 7
-hunt_human(param_00)
-{
+hunt_human(param_00) {
 	self endon("disconnect");
 	self endon("death");
 	self botsetscriptgoal(param_00.origin,0,"critical");
@@ -188,11 +144,8 @@ hunt_human(param_00)
 	self botclearscriptgoal();
 }
 
-//Function Number: 8
-bot_infect_retrieve_knife()
-{
-	if(self.team == "axis")
-	{
+bot_infect_retrieve_knife() {
+	if(self.team == "axis") {
 		self.can_melee_enemy_time = 0;
 		self.melee_enemy = undefined;
 		self.melee_enemy_node = undefined;
@@ -200,22 +153,17 @@ bot_infect_retrieve_knife()
 		self.melee_self_node = undefined;
 		self.melee_self_new_node_time = 0;
 		var_00 = self botgetdifficultysetting("throwKnifeChance");
-		if(var_00 < 0.25)
-		{
+		if(var_00 < 0.25) {
 			self getpassivestruct("throwKnifeChance",0.25);
 		}
 
 		self getpassivestruct("allowGrenades",1);
 		self botsetflag("path_traverse_wait",1);
-		for(;;)
-		{
-			if(self hasweapon("throwingknife_mp"))
-			{
-				if(scripts\mp\_utility::isgameparticipant(self.isnodeoccupied))
-				{
+		for(;;) {
+			if(self hasweapon("throwingknife_mp")) {
+				if(scripts\mp\_utility::isgameparticipant(self.isnodeoccupied)) {
 					var_01 = gettime();
-					if(!isdefined(self.melee_enemy) || self.melee_enemy != self.isnodeoccupied)
-					{
+					if(!isdefined(self.melee_enemy) || self.melee_enemy != self.isnodeoccupied) {
 						self.melee_enemy = self.isnodeoccupied;
 						self.melee_enemy_node = self.isnodeoccupied getnearestnode();
 						self.melee_enemy_new_node_time = var_01;
@@ -223,42 +171,33 @@ bot_infect_retrieve_knife()
 					else
 					{
 						var_02 = squared(self botgetdifficultysetting("meleeDist"));
-						if(distancesquared(self.isnodeoccupied.origin,self.origin) <= var_02)
-						{
+						if(distancesquared(self.isnodeoccupied.origin,self.origin) <= var_02) {
 							self.can_melee_enemy_time = var_01;
 						}
 
 						var_03 = self.isnodeoccupied getnearestnode();
 						var_04 = self getnearestnode();
-						if(!isdefined(self.melee_enemy_node) || self.melee_enemy_node != var_03)
-						{
+						if(!isdefined(self.melee_enemy_node) || self.melee_enemy_node != var_03) {
 							self.melee_enemy_new_node_time = var_01;
 							self.melee_enemy_node = var_03;
 						}
 
-						if(!isdefined(self.melee_self_node) || self.melee_self_node != var_04)
-						{
+						if(!isdefined(self.melee_self_node) || self.melee_self_node != var_04) {
 							self.melee_self_new_node_time = var_01;
 							self.melee_self_node = var_04;
 						}
-						else if(distancesquared(self.origin,self.melee_self_node.origin) > 9216)
-						{
+						else if(distancesquared(self.origin,self.melee_self_node.origin) > 9216) {
 							self.var_B5B0 = var_01;
 						}
 
-						if(self.can_melee_enemy_time + 3000 < var_01)
-						{
-							if(self.melee_self_new_node_time + 3000 < var_01)
-							{
-								if(self.melee_enemy_new_node_time + 3000 < var_01)
-								{
-									if(bot_infect_angle_too_steep_for_knife_throw(self.origin,self.isnodeoccupied.origin))
-									{
+						if(self.can_melee_enemy_time + 3000 < var_01) {
+							if(self.melee_self_new_node_time + 3000 < var_01) {
+								if(self.melee_enemy_new_node_time + 3000 < var_01) {
+									if(bot_infect_angle_too_steep_for_knife_throw(self.origin,self.isnodeoccupied.origin)) {
 										scripts\mp\bots\_bots_util::bot_queued_process("find_node_can_see_ent",::bot_infect_find_node_can_see_ent,self.isnodeoccupied,self.melee_self_node);
 									}
 
-									if(!self getrunningforwardpainanim("throwingknife_mp"))
-									{
+									if(!self getrunningforwardpainanim("throwingknife_mp")) {
 										self setweaponammoclip("throwingknife_mp",1);
 									}
 
@@ -276,57 +215,44 @@ bot_infect_retrieve_knife()
 	}
 }
 
-//Function Number: 9
-bot_infect_angle_too_steep_for_knife_throw(param_00,param_01)
-{
-	if(abs(param_00[2] - param_01[2]) > 56 && distance2dsquared(param_00,param_01) < 2304)
-	{
+bot_infect_angle_too_steep_for_knife_throw(param_00,param_01) {
+	if(abs(param_00[2] - param_01[2]) > 56 && distance2dsquared(param_00,param_01) < 2304) {
 		return 1;
 	}
 
 	return 0;
 }
 
-//Function Number: 10
-bot_infect_find_node_can_see_ent(param_00,param_01)
-{
-	if(!isdefined(param_00) || !isdefined(param_01))
-	{
+bot_infect_find_node_can_see_ent(param_00,param_01) {
+	if(!isdefined(param_00) || !isdefined(param_01)) {
 		return;
 	}
 
 	var_02 = 0;
-	if(issubstr(param_01.type,"Begin"))
-	{
+	if(issubstr(param_01.type,"Begin")) {
 		var_02 = 1;
 	}
 
 	var_03 = getlinkednodes(param_01);
-	if(isdefined(var_03) && var_03.size)
-	{
+	if(isdefined(var_03) && var_03.size) {
 		var_04 = scripts\engine\utility::array_randomize(var_03);
-		foreach(var_06 in var_04)
-		{
-			if(var_02 && issubstr(var_06.type,"End"))
-			{
+		foreach(var_06 in var_04) {
+			if(var_02 && issubstr(var_06.type,"End")) {
 				continue;
 			}
 
-			if(bot_infect_angle_too_steep_for_knife_throw(var_06.origin,param_00.origin))
-			{
+			if(bot_infect_angle_too_steep_for_knife_throw(var_06.origin,param_00.origin)) {
 				continue;
 			}
 
 			var_07 = self geteye() - self.origin;
 			var_08 = var_06.origin + var_07;
 			var_09 = param_00.origin;
-			if(isplayer(param_00))
-			{
+			if(isplayer(param_00)) {
 				var_09 = param_00 scripts\mp\_utility::getstancecenter();
 			}
 
-			if(sighttracepassed(var_08,var_09,0,self,param_00))
-			{
+			if(sighttracepassed(var_08,var_09,0,self,param_00)) {
 				var_0A = vectortoyaw(var_09 - var_08);
 				self botsetscriptgoalnode(var_06,"critical",var_0A);
 				scripts\mp\bots\_bots_util::bot_waittill_goal_or_fail(3);

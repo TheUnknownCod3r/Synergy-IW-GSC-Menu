@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: 4009.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 1
- * Decompile Time: 0 ms
- * Timestamp: 10/27/2023 12:31:55 AM
-*******************************************************************/
+/****************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\4009.gsc
+****************************/
 
-//Function Number: 1
-main()
-{
+main() {
 	level._effect["vfx_front_end_amb_motes"] = loadfx("vfx/iw7/levels/mp_frontend/vfx_front_end_amb_motes.vfx");
 	level._effect["vfx_front_end_steam_flyby"] = loadfx("vfx/iw7/_requests/mp/vfx_front_end_steam_flyby.vfx");
 	level._effect["vfx_taunt_steel_dragon"] = loadfx("vfx/iw7/_requests/mp/frontend/vfx_mp_steel_dragon_01.vfx");

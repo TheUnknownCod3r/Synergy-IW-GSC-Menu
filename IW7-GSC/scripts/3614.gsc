@@ -1,43 +1,29 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: 3614.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 4
- * Decompile Time: 0 ms
- * Timestamp: 10/27/2023 12:30:55 AM
-*******************************************************************/
+/****************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\3614.gsc
+****************************/
 
-//Function Number: 1
-func_5374()
-{
+func_5374() {
 	precacheitem("car_grenade");
 	thread func_5375();
 }
 
-//Function Number: 2
-func_5375()
-{
+func_5375() {
 	scripts\engine\utility::waitframe();
 	var_00 = getentarray("scriptable","code_classname");
-	foreach(var_02 in var_00)
-	{
-		if(issubstr(var_02.model,"veh_"))
-		{
+	foreach(var_02 in var_00) {
+		if(issubstr(var_02.model,"veh_")) {
 			var_02 thread func_5376();
 		}
 	}
 }
 
-//Function Number: 3
-func_5376()
-{
+func_5376() {
 	self.var_ED = "vehicle";
-	for(;;)
-	{
+	for(;;) {
 		self waittill("scriptableNotification",var_00,var_01);
-		switch(var_00)
-		{
+		switch(var_00) {
 			case "onfire":
 			case "flareup":
 				thread func_329E();
@@ -45,8 +31,7 @@ func_5376()
 	
 			case "vehicle_death":
 				self notify("destroyed");
-				if(isdefined(self.var_329F))
-				{
+				if(isdefined(self.var_329F)) {
 					self.var_329F delete();
 				}
 				self.var_C528 = undefined;
@@ -55,11 +40,8 @@ func_5376()
 	}
 }
 
-//Function Number: 4
-func_329E()
-{
-	if(isdefined(self.var_329F))
-	{
+func_329E() {
+	if(isdefined(self.var_329F)) {
 		return;
 	}
 

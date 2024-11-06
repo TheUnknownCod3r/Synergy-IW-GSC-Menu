@@ -1,44 +1,28 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\mp\deathicons.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 5
- * Decompile Time: 302 ms
- * Timestamp: 10/27/2023 12:15:06 AM
-*******************************************************************/
+/*********************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\mp\deathicons.gsc
+*********************************************/
 
-//Function Number: 1
-init()
-{
-	if(!level.teambased)
-	{
+init() {
+	if(!level.teambased) {
 		return;
 	}
 
 	level thread onplayerconnect();
 }
 
-//Function Number: 2
-onplayerconnect()
-{
-	for(;;)
-	{
+onplayerconnect() {
+	for(;;) {
 		level waittill("connected",var_00);
 		var_00.var_F1E9 = [];
 	}
 }
 
-//Function Number: 3
-func_12E86()
-{
-}
+func_12E86() {}
 
-//Function Number: 4
-func_17C1(param_00,param_01,param_02,param_03)
-{
-	if(!level.teambased)
-	{
+func_17C1(param_00,param_01,param_02,param_03) {
+	if(!level.teambased) {
 		return;
 	}
 
@@ -47,18 +31,15 @@ func_17C1(param_00,param_01,param_02,param_03)
 	param_01 endon("disconnect");
 	wait(0.05);
 	scripts\mp\utility::func_13842();
-	if(getdvar("ui_hud_showdeathicons") == "0")
-	{
+	if(getdvar("ui_hud_showdeathicons") == "0") {
 		return;
 	}
 
-	if(level.hardcoremode)
-	{
+	if(level.hardcoremode) {
 		return;
 	}
 
-	if(isdefined(self.lastdeathicon))
-	{
+	if(isdefined(self.lastdeathicon)) {
 		self.lastdeathicon destroy();
 	}
 
@@ -69,8 +50,7 @@ func_17C1(param_00,param_01,param_02,param_03)
 	var_05.alpha = 0.61;
 	var_05.archived = 0;
 	var_05.showinkillcam = 0;
-	if(level.splitscreen)
-	{
+	if(level.splitscreen) {
 		var_05 setshader("hud_icon_death",14,14);
 	}
 	else
@@ -83,9 +63,7 @@ func_17C1(param_00,param_01,param_02,param_03)
 	var_05 thread func_5323(param_03);
 }
 
-//Function Number: 5
-func_5323(param_00)
-{
+func_5323(param_00) {
 	self endon("death");
 	wait(param_00);
 	self fadeovertime(1);

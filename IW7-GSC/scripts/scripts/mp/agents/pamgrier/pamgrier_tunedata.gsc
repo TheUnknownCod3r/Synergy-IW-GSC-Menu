@@ -1,18 +1,11 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\mp\agents\pamgrier\pamgrier_tunedata.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 3
- * Decompile Time: 191 ms
- * Timestamp: 10/27/2023 12:11:19 AM
-*******************************************************************/
+/********************************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\mp\agents\pamgrier\pamgrier_tunedata.gsc
+********************************************************************/
 
-//Function Number: 1
-setuptunedata()
-{
-	if(!isdefined(level.agenttunedata))
-	{
+setuptunedata() {
+	if(!isdefined(level.agenttunedata)) {
 		level.agenttunedata = [];
 	}
 
@@ -20,9 +13,7 @@ setuptunedata()
 	setuppamgriertunedata(level.agenttunedata["pamgrier"]);
 }
 
-//Function Number: 2
-setuppamgriertunedata(param_00)
-{
+setuppamgriertunedata(param_00) {
 	param_00.min_time_between_attacks = 1000;
 	param_00.max_time_between_attacks = 2000;
 	param_00.min_chillin_time = 15000;
@@ -57,8 +48,6 @@ setuppamgriertunedata(param_00)
 	param_00.max_wait_for_twitch_time = 4.5;
 }
 
-//Function Number: 3
-gettunedata()
-{
+gettunedata() {
 	return level.agenttunedata["pamgrier"];
 }

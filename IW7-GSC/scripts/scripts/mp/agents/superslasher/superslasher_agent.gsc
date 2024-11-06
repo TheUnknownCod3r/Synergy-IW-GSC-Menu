@@ -1,22 +1,14 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\mp\agents\superslasher\superslasher_agent.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 13
- * Decompile Time: 697 ms
- * Timestamp: 10/27/2023 12:11:25 AM
-*******************************************************************/
+/*************************************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\mp\agents\superslasher\superslasher_agent.gsc
+*************************************************************************/
 
-//Function Number: 1
-superslasheragentinit()
-{
+superslasheragentinit() {
 	registerscriptedagent();
 }
 
-//Function Number: 2
-registerscriptedagent()
-{
+registerscriptedagent() {
 	scripts/aitypes/bt_util::init();
 	behaviortree\superslasher::func_DEE8();
 	scripts\asm\superslasher\mp\states::func_2371();
@@ -31,15 +23,11 @@ registerscriptedagent()
 	loadsuperslashervfx();
 }
 
-//Function Number: 3
-loadsuperslasherscriptmodelanim()
-{
+loadsuperslasherscriptmodelanim() {
 	precachempanim("IW7_cp_super_death_01");
 }
 
-//Function Number: 4
-loadsuperslashervfx()
-{
+loadsuperslashervfx() {
 	level._effect["super_slasher_death_base"] = loadfx("vfx/iw7/levels/cp_rave/superslasher/vfx_ss_death_base_start.vfx");
 	level._effect["super_slasher_death_hand"] = loadfx("vfx/iw7/levels/cp_rave/superslasher/vfx_ss_death_hands_glow.vfx");
 	level._effect["super_slasher_death_limb"] = loadfx("vfx/iw7/levels/cp_rave/superslasher/vfx_ss_death_limbs_glow.vfx");
@@ -48,17 +36,13 @@ loadsuperslashervfx()
 	level._effect["super_slasher_saw_shark_spark"] = loadfx("vfx/iw7/levels/cp_rave/superslasher/vfx_rave_superslasher_saw_spark.vfx");
 }
 
-//Function Number: 5
-func_FAB0()
-{
+func_FAB0() {
 	level endon("game_ended");
-	if(!isdefined(level.agent_definition))
-	{
+	if(!isdefined(level.agent_definition)) {
 		level waittill("scripted_agents_initialized");
 	}
 
-	if(!isdefined(level.species_funcs))
-	{
+	if(!isdefined(level.species_funcs)) {
 		level.species_funcs = [];
 	}
 
@@ -71,9 +55,7 @@ func_FAB0()
 	level.agent_funcs["superslasher"]["on_damaged_finished"] = ::onsuperslasherdamagefinished;
 }
 
-//Function Number: 6
-setupagent()
-{
+setupagent() {
 	self.class = undefined;
 	self.movespeedscaler = undefined;
 	self.avoidkillstreakonspawntimer = undefined;
@@ -142,45 +124,34 @@ setupagent()
 	self.last_damage_time_on_player = [];
 	self.lastdamagedir = [];
 	self.lastdamagetime = 0;
-	if(getdvarint("scr_zombie_left_foot_sharp_turn_only",0) == 1)
-	{
+	if(getdvarint("scr_zombie_left_foot_sharp_turn_only",0) == 1) {
 		self.var_AB3F = 1;
 	}
 
 	thread func_899C();
 }
 
-//Function Number: 7
-func_FACE(param_00)
-{
+func_FACE(param_00) {
 	self setmodel("fullbody_zmb_superslasher");
 }
 
-//Function Number: 8
-func_899C()
-{
+func_899C() {
 	self endon("death");
 	level waittill("game_ended");
 	self._blackboard.bgameended = 1;
 }
 
-//Function Number: 9
-onsuperslasherkilled(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08)
-{
+onsuperslasherkilled(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08) {
 	self.death_anim_no_ragdoll = 1;
 	self.nocorpse = 1;
-	if(isdefined(self.attackents))
-	{
-		foreach(var_0A in self.attackents)
-		{
+	if(isdefined(self.attackents)) {
+		foreach(var_0A in self.attackents) {
 			var_0A delete();
 		}
 	}
 
-	if(isdefined(self.shields))
-	{
-		foreach(var_0D in self.shields)
-		{
+	if(isdefined(self.shields)) {
+		foreach(var_0D in self.shields) {
 			var_0D delete();
 		}
 	}
@@ -194,9 +165,7 @@ onsuperslasherkilled(param_00,param_01,param_02,param_03,param_04,param_05,param
 	scripts\mp\mp_agent::default_on_killed(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08);
 }
 
-//Function Number: 10
-superslasherdeathscriptmodelsequence(param_00)
-{
+superslasherdeathscriptmodelsequence(param_00) {
 	level.soul_key_drop_pos = scripts\engine\utility::drop_to_ground(param_00.origin,200,-5000) + (0,0,50);
 	var_01 = param_00.origin;
 	var_02 = spawn("script_model",var_01);
@@ -211,9 +180,7 @@ superslasherdeathscriptmodelsequence(param_00)
 	level notify("super_slasher_death");
 }
 
-//Function Number: 11
-super_slasher_death_vfx_sequence(param_00)
-{
+super_slasher_death_vfx_sequence(param_00) {
 	var_01 = spawnfx(level._effect["super_slasher_death_base"],param_00.origin);
 	triggerfx(var_01);
 	wait(0.6);
@@ -233,23 +200,17 @@ super_slasher_death_vfx_sequence(param_00)
 	var_01 delete();
 }
 
-//Function Number: 12
-onsuperslasherdamaged(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08,param_09,param_0A,param_0B)
-{
-	if(isdefined(param_01) && param_01 == self)
-	{
+onsuperslasherdamaged(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08,param_09,param_0A,param_0B) {
+	if(isdefined(param_01) && param_01 == self) {
 		return;
 	}
 
-	if(scripts\engine\utility::istrue(self.var_E0) && isdefined(param_06) && isdefined(param_07))
-	{
+	if(scripts\engine\utility::istrue(self.var_E0) && isdefined(param_06) && isdefined(param_07)) {
 		playfx(level._effect["super_slasher_shield_hit"],param_06,param_07 * -150);
 	}
 
-	if(isdefined(self.btrophysystem))
-	{
-		if(isdefined(param_01) && isplayer(param_01))
-		{
+	if(isdefined(self.btrophysystem)) {
+		if(isdefined(param_01) && isplayer(param_01)) {
 			self.lastdamagedir[self.lastdamagedir.size] = vectornormalize(param_01.origin - self.origin);
 			self.lastdamagetime = gettime();
 		}
@@ -257,57 +218,46 @@ onsuperslasherdamaged(param_00,param_01,param_02,param_03,param_04,param_05,para
 		return;
 	}
 
-	if(scripts\engine\utility::istrue(self.var_E0))
-	{
+	if(scripts\engine\utility::istrue(self.var_E0)) {
 		return;
 	}
 
-	if(isdefined(self._blackboard.binair))
-	{
+	if(isdefined(self._blackboard.binair)) {
 		param_02 = int(min(param_02,self.health - 1));
-		if(param_02 == 0)
-		{
+		if(param_02 == 0) {
 			return;
 		}
 	}
 
-	if(param_05 == "iw7_harpoon_zm")
-	{
+	if(param_05 == "iw7_harpoon_zm") {
 		param_02 = min(0.1 * self.maxhealth,2000);
 		param_02 = int(param_02);
 	}
-	else if(issubstr(param_05,"harpoon1"))
-	{
+	else if(issubstr(param_05,"harpoon1")) {
 		param_02 = min(0.01 * self.maxhealth,75);
 		param_02 = int(param_02);
 	}
-	else if(issubstr(param_05,"harpoon2"))
-	{
+	else if(issubstr(param_05,"harpoon2")) {
 		param_02 = min(0.1 * self.maxhealth,1500);
 		param_02 = int(param_02);
 	}
-	else if(issubstr(param_05,"harpoon3"))
-	{
+	else if(issubstr(param_05,"harpoon3")) {
 		param_02 = min(0.1 * self.maxhealth,2000);
 		param_02 = int(param_02);
 	}
-	else if(issubstr(param_05,"harpoon4"))
-	{
+	else if(issubstr(param_05,"harpoon4")) {
 		param_02 = min(0.01 * self.maxhealth,1000);
 		param_02 = int(param_02);
 	}
 
 	param_03 = param_03 | level.idflags_no_knockback;
-	if(isdefined(level.players) && level.players.size >= 1)
-	{
+	if(isdefined(level.players) && level.players.size >= 1) {
 		param_02 = param_02 / level.players.size;
 	}
 
 	scripts\cp\maps\cp_rave\cp_rave_damage::cp_rave_onzombiedamaged(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08,param_09,param_0A,param_0B);
 }
 
-//Function Number: 13
-onsuperslasherdamagefinished(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08,param_09,param_0A,param_0B,param_0C)
-{
+onsuperslasherdamagefinished(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08,param_09,param_0A,param_0B,param_0C) {
 	scripts\mp\mp_agent::default_on_damage_finished(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08,param_09,param_0A,param_0B,param_0C);
 }

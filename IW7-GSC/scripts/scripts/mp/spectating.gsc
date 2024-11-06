@@ -1,28 +1,19 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\mp\spectating.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 20
- * Decompile Time: 799 ms
- * Timestamp: 10/27/2023 12:21:38 AM
-*******************************************************************/
+/*********************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\mp\spectating.gsc
+*********************************************/
 
-//Function Number: 1
-init()
-{
+init() {
 	level.spectateoverride["allies"] = spawnstruct();
 	level.spectateoverride["axis"] = spawnstruct();
 	level thread onplayerconnect();
-	if(getdvarint("cg_mlg_static_cameras",0) != 0)
-	{
+	if(getdvarint("cg_mlg_static_cameras",0) != 0) {
 		level thread func_7F6C();
 	}
 }
 
-//Function Number: 2
-createmlgcamobject(param_00,param_01)
-{
+createmlgcamobject(param_00,param_01) {
 	precacheshader(param_00);
 	var_02 = spawn("script_model",(0,0,0));
 	var_02 setmodel("tag_origin");
@@ -30,22 +21,17 @@ createmlgcamobject(param_00,param_01)
 	return var_02;
 }
 
-//Function Number: 3
-setlevelmlgcam(param_00,param_01)
-{
+setlevelmlgcam(param_00,param_01) {
 	var_02 = param_00;
-	if(var_02 >= 4)
-	{
+	if(var_02 >= 4) {
 		var_02 = var_02 - 4;
 	}
 
 	var_03 = tolower(getdvar("mapname"));
 	var_04 = tablelookup(param_01,0,var_03,var_02 * 2 + 1);
-	if(var_04 != "")
-	{
+	if(var_04 != "") {
 		var_05 = param_00 + 1;
-		if(param_00 >= 5)
-		{
+		if(param_00 >= 5) {
 			var_05 = var_05 - 4;
 		}
 
@@ -58,11 +44,8 @@ setlevelmlgcam(param_00,param_01)
 	}
 }
 
-//Function Number: 4
-func_7F6C()
-{
-	while(!isdefined(level.objidpool))
-	{
+func_7F6C() {
+	while(!isdefined(level.objidpool)) {
 		wait(0.05);
 	}
 
@@ -71,35 +54,27 @@ func_7F6C()
 	var_00 = var_00 + ".csv";
 	level.cameramapobjs = [];
 	level.numbermapobjs = [];
-	for(var_02 = 0;var_02 < 4;var_02++)
-	{
+	for(var_02 = 0;var_02 < 4;var_02++) {
 		setlevelmlgcam(var_02,var_00);
 	}
 
-	for(var_02 = 4;var_02 < 8;var_02++)
-	{
+	for(var_02 = 4;var_02 < 8;var_02++) {
 		setlevelmlgcam(var_02,var_01);
 	}
 }
 
-//Function Number: 5
-getcameravecorang(param_00)
-{
+getcameravecorang(param_00) {
 	var_01 = strtok(param_00," ");
 	var_02 = (0,0,0);
-	if(isdefined(var_01[0]) && isdefined(var_01[1]) && isdefined(var_01[2]))
-	{
+	if(isdefined(var_01[0]) && isdefined(var_01[1]) && isdefined(var_01[2])) {
 		var_02 = (int(var_01[0]),int(var_01[1]),int(var_01[2]));
 	}
 
 	return var_02;
 }
 
-//Function Number: 6
-onplayerconnect()
-{
-	for(;;)
-	{
+onplayerconnect() {
+	for(;;) {
 		level waittill("connected",var_00);
 		var_00 thread func_C541();
 		var_00 thread func_C540();
@@ -109,28 +84,21 @@ onplayerconnect()
 	}
 }
 
-//Function Number: 7
-func_C541()
-{
+func_C541() {
 	self endon("disconnect");
-	for(;;)
-	{
+	for(;;) {
 		self waittill("joined_team");
 		setspectatepermissions();
 	}
 }
 
-//Function Number: 8
-func_C540()
-{
+func_C540() {
 	self endon("disconnect");
-	for(;;)
-	{
+	for(;;) {
 		self waittill("joined_spectators");
 		setspectatepermissions();
 		self setclientomnvar("ui_callout_area_id",-1);
-		if(self ismlgspectator() || isdefined(self.pers["mlgSpectator"]) && self.pers["mlgSpectator"])
-		{
+		if(self ismlgspectator() || isdefined(self.pers["mlgSpectator"]) && self.pers["mlgSpectator"]) {
 			self setmlgspectator(1);
 			self setclientomnvar("ui_use_mlg_hud",1);
 			self _meth_85B1(0);
@@ -140,38 +108,28 @@ func_C540()
 	}
 }
 
-//Function Number: 9
-func_C5A1()
-{
+func_C5A1() {
 	self endon("disconnect");
-	for(;;)
-	{
+	for(;;) {
 		self waittill("spectating_cycle");
 		var_00 = self getspectatingplayer();
-		if(self ismlgspectator() || isdefined(var_00))
-		{
+		if(self ismlgspectator() || isdefined(var_00)) {
 			var_01 = level.calloutglobals.areaidmap[var_00.calloutarea];
 			self setclientomnvar("ui_callout_area_id",var_01);
-			if(level.gametype == "ball")
-			{
+			if(level.gametype == "ball") {
 				scripts\mp\gametypes\ball::ball_goal_fx_for_player(self);
 			}
 		}
 	}
 }
 
-//Function Number: 10
-func_C5A2()
-{
+func_C5A2() {
 	self endon("disconnect");
-	for(;;)
-	{
+	for(;;) {
 		self waittill("spectating_mlg_camera");
 		var_00 = self _meth_858E();
-		if(self ismlgspectator() || isdefined(self.pers["mlgSpectator"]) && self.pers["mlgSpectator"])
-		{
-			if(isdefined(var_00))
-			{
+		if(self ismlgspectator() || isdefined(self.pers["mlgSpectator"]) && self.pers["mlgSpectator"]) {
+			if(isdefined(var_00)) {
 				self setclientomnvar("ui_callout_area_id",-1);
 				continue;
 			}
@@ -179,45 +137,33 @@ func_C5A2()
 	}
 }
 
-//Function Number: 11
-func_C531()
-{
+func_C531() {
 	self endon("disconnect");
-	for(;;)
-	{
+	for(;;) {
 		self waittill("luinotifyserver",var_00,var_01);
-		if(var_00 == "mlg_view_change")
-		{
+		if(var_00 == "mlg_view_change") {
 			scripts\mp\playerlogic::resetuidvarsonconnect();
 		}
 	}
 }
 
-//Function Number: 12
-updatespectatesettings()
-{
+updatespectatesettings() {
 	level endon("game_ended");
-	for(var_00 = 0;var_00 < level.players.size;var_00++)
-	{
+	for(var_00 = 0;var_00 < level.players.size;var_00++) {
 		level.players[var_00] setspectatepermissions();
 	}
 }
 
-//Function Number: 13
-linkcameratoball(param_00)
-{
+linkcameratoball(param_00) {
 	self endon("disconnect");
 	self endon("joined_team");
 	self endon("joined_spectators");
-	for(;;)
-	{
-		if(!isdefined(self.codcasterballcamfollow))
-		{
+	for(;;) {
+		if(!isdefined(self.codcasterballcamfollow)) {
 			break;
 		}
 
-		if(self isspectatingplayer())
-		{
+		if(self isspectatingplayer()) {
 			wait(0.05);
 			continue;
 		}
@@ -233,42 +179,33 @@ linkcameratoball(param_00)
 	}
 }
 
-//Function Number: 14
-autoattachtoplayer()
-{
+autoattachtoplayer() {
 	self endon("disconnect");
 	self endon("game_ended");
 	self endon("joined_team");
 	self endon("joined_spectator");
 	self endon("spectating_mlg_camera");
-	for(;;)
-	{
+	for(;;) {
 		wait(1);
 		var_00 = undefined;
-		if(!self ismlgspectator() || self isspectatingplayer())
-		{
+		if(!self ismlgspectator() || self isspectatingplayer()) {
 			break;
 		}
 
-		if(level.players.size > 1)
-		{
+		if(level.players.size > 1) {
 			var_01 = scripts\mp\utility::getteamarray("allies",0);
-			if(var_01.size > 0)
-			{
+			if(var_01.size > 0) {
 				var_00 = scripts\mp\utility::getlowestclientnum(var_01,1);
 			}
 
-			if(!isdefined(var_00))
-			{
+			if(!isdefined(var_00)) {
 				var_01 = scripts\mp\utility::getteamarray("axis",0);
-				if(var_01.size > 0)
-				{
+				if(var_01.size > 0) {
 					var_00 = scripts\mp\utility::getlowestclientnum(var_01,1);
 				}
 			}
 
-			if(isdefined(var_00))
-			{
+			if(isdefined(var_00)) {
 				self spectateclientnum(var_00);
 				break;
 			}
@@ -276,27 +213,21 @@ autoattachtoplayer()
 	}
 }
 
-//Function Number: 15
-updatemlgspectator()
-{
+updatemlgspectator() {
 	self endon("joined_team");
 	self endon("disconnect");
 	self.iswatchingcodcasterball = 0;
 	self.codcasterballcamfollow = undefined;
 	self.spectatingplayerbeforeballcam = undefined;
-	for(;;)
-	{
+	for(;;) {
 		var_00 = isdefined(level.codcasterball);
-		if(!var_00 || !self ismlgfollowdroneactive())
-		{
-			if(self.iswatchingcodcasterball)
-			{
+		if(!var_00 || !self ismlgfollowdroneactive()) {
+			if(self.iswatchingcodcasterball) {
 				self.iswatchingcodcasterball = 0;
 				self.codcasterballcamfollow unlink();
 				self.codcasterballcamfollow delete();
 				self.codcasterballcamfollow = undefined;
-				if(!self isspectatingplayer() && isdefined(self.spectatingplayerbeforeballcam))
-				{
+				if(!self isspectatingplayer() && isdefined(self.spectatingplayerbeforeballcam)) {
 					self spectateclientnum(self.spectatingplayerbeforeballcam getentitynumber());
 				}
 				else
@@ -307,13 +238,10 @@ updatemlgspectator()
 				self.spectatingplayerbeforeballcam = undefined;
 			}
 		}
-		else if(!self.iswatchingcodcasterball)
-		{
-			if(self ismlgfollowdroneactive())
-			{
+		else if(!self.iswatchingcodcasterball) {
+			if(self ismlgfollowdroneactive()) {
 				var_01 = self getspectatingplayer();
-				if(isdefined(var_01) && isdefined(level.codcasterballowner) && var_01 == level.codcasterballowner)
-				{
+				if(isdefined(var_01) && isdefined(level.codcasterballowner) && var_01 == level.codcasterballowner) {
 					self.iswatchingcodcasterball = 1;
 					self.spectatingplayerbeforeballcam = var_01;
 					var_02 = vectornormalize(level.codcasterballinitialforcevector);
@@ -327,8 +255,7 @@ updatemlgspectator()
 				}
 			}
 		}
-		else if(isdefined(self.codcasterballcamfollow))
-		{
+		else if(isdefined(self.codcasterballcamfollow)) {
 			var_04 = level.codcasterball.origin;
 			var_05 = self.codcasterballcamfollow.origin;
 			var_06 = distance2d(var_04,var_05);
@@ -339,8 +266,7 @@ updatemlgspectator()
 			var_0A = (0,0,30);
 			var_0A = var_0A + -80 * var_08;
 			var_0B = var_09 + var_0A;
-			if(var_06 > 600)
-			{
+			if(var_06 > 600) {
 				self.codcasterballcamfollow.origin = var_0B;
 			}
 			else
@@ -355,15 +281,10 @@ updatemlgspectator()
 	}
 }
 
-//Function Number: 16
-setspectatepermissions()
-{
-	if(level.gameended && gettime() - level.gameendtime >= 2000)
-	{
-		if(level.multiteambased)
-		{
-			for(var_00 = 0;var_00 < level.teamnamelist.size;var_00++)
-			{
+setspectatepermissions() {
+	if(level.gameended && gettime() - level.gameendtime >= 2000) {
+		if(level.multiteambased) {
+			for(var_00 = 0;var_00 < level.teamnamelist.size;var_00++) {
 				self allowspectateteam(level.teamnamelist[var_00],0);
 			}
 		}
@@ -379,38 +300,31 @@ setspectatepermissions()
 	}
 
 	var_01 = scripts\mp\tweakables::gettweakablevalue("game","spectatetype");
-	if(self ismlgspectator())
-	{
+	if(self ismlgspectator()) {
 		var_01 = 2;
 	}
 
-	if(scripts\mp\utility::bot_is_fireteam_mode())
-	{
+	if(scripts\mp\utility::bot_is_fireteam_mode()) {
 		var_01 = 1;
 	}
 
 	var_02 = self.sessionteam;
-	switch(var_01)
-	{
+	switch(var_01) {
 		case 0:
 			func_F6C5();
 			break;
 
 		case 1:
 			self notify("waitForGameStartSpectate");
-			if(var_02 != "spectator")
-			{
+			if(var_02 != "spectator") {
 				func_F87A(var_02);
 			}
-			else if(isdefined(self.pers["last_team"]))
-			{
+			else if(isdefined(self.pers["last_team"])) {
 				var_02 = self.pers["last_team"];
 				func_F87A(var_02);
 			}
-			else if(scripts\mp\utility::gameflag("prematch_done"))
-			{
-				if(randomint(2))
-				{
+			else if(scripts\mp\utility::gameflag("prematch_done")) {
+				if(randomint(2)) {
 					var_02 = "allies";
 				}
 				else
@@ -432,8 +346,7 @@ setspectatepermissions()
 			break;
 
 		case 3:
-			if(var_02 == "spectator")
-			{
+			if(var_02 == "spectator") {
 				func_F71A();
 			}
 			else
@@ -443,35 +356,26 @@ setspectatepermissions()
 			break;
 	}
 
-	if(isdefined(var_02) && var_02 == "axis" || var_02 == "allies")
-	{
-		if(isdefined(level.spectateoverride[var_02].allowfreespectate))
-		{
+	if(isdefined(var_02) && var_02 == "axis" || var_02 == "allies") {
+		if(isdefined(level.spectateoverride[var_02].allowfreespectate)) {
 			self allowspectateteam("freelook",1);
 		}
 
-		if(isdefined(level.spectateoverride[var_02].allowenemyspectate))
-		{
+		if(isdefined(level.spectateoverride[var_02].allowenemyspectate)) {
 			self allowspectateteam(scripts\mp\utility::getotherteam(var_02),1);
 		}
 	}
 }
 
-//Function Number: 17
-waitforgamestartspectate()
-{
+waitforgamestartspectate() {
 	self endon("waitForGameStartSpectate");
 	level waittill("prematch_over");
 	thread setspectatepermissions();
 }
 
-//Function Number: 18
-func_F6C5()
-{
-	if(level.multiteambased)
-	{
-		for(var_00 = 0;var_00 < level.teamnamelist.size;var_00++)
-		{
+func_F6C5() {
+	if(level.multiteambased) {
+		for(var_00 = 0;var_00 < level.teamnamelist.size;var_00++) {
 			self allowspectateteam(level.teamnamelist[var_00],0);
 		}
 	}
@@ -485,11 +389,8 @@ func_F6C5()
 	self allowspectateteam("none",0);
 }
 
-//Function Number: 19
-func_F87A(param_00)
-{
-	if(!level.teambased)
-	{
+func_F87A(param_00) {
+	if(!level.teambased) {
 		self allowspectateteam("allies",1);
 		self allowspectateteam("axis",1);
 		self allowspectateteam("none",1);
@@ -497,8 +398,7 @@ func_F87A(param_00)
 		return;
 	}
 
-	if(isdefined(param_00) && param_00 == "allies" || param_00 == "axis" && !level.multiteambased)
-	{
+	if(isdefined(param_00) && param_00 == "allies" || param_00 == "axis" && !level.multiteambased) {
 		self allowspectateteam(param_00,1);
 		self allowspectateteam(scripts\mp\utility::getotherteam(param_00),0);
 		self allowspectateteam("freelook",0);
@@ -506,12 +406,9 @@ func_F87A(param_00)
 		return;
 	}
 
-	if(isdefined(param_00) && issubstr(param_00,"team_") && level.multiteambased)
-	{
-		for(var_01 = 0;var_01 < level.teamnamelist.size;var_01++)
-		{
-			if(param_00 == level.teamnamelist[var_01])
-			{
+	if(isdefined(param_00) && issubstr(param_00,"team_") && level.multiteambased) {
+		for(var_01 = 0;var_01 < level.teamnamelist.size;var_01++) {
+			if(param_00 == level.teamnamelist[var_01]) {
 				self allowspectateteam(level.teamnamelist[var_01],1);
 				continue;
 			}
@@ -524,10 +421,8 @@ func_F87A(param_00)
 		return;
 	}
 
-	if(level.multiteambased)
-	{
-		for(var_01 = 0;var_01 < level.teamnamelist.size;var_01++)
-		{
+	if(level.multiteambased) {
+		for(var_01 = 0;var_01 < level.teamnamelist.size;var_01++) {
 			self allowspectateteam(level.teamnamelist[var_01],0);
 		}
 	}
@@ -541,13 +436,9 @@ func_F87A(param_00)
 	self allowspectateteam("none",0);
 }
 
-//Function Number: 20
-func_F71A()
-{
-	if(level.multiteambased)
-	{
-		for(var_00 = 0;var_00 < level.teamnamelist.size;var_00++)
-		{
+func_F71A() {
+	if(level.multiteambased) {
+		for(var_00 = 0;var_00 < level.teamnamelist.size;var_00++) {
 			self allowspectateteam(level.teamnamelist[var_00],1);
 		}
 	}

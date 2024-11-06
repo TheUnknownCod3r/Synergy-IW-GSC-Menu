@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\mp\maps\mp_dome_iw\gen\mp_dome_iw_sound.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 1
- * Decompile Time: 117 ms
- * Timestamp: 10/27/2023 12:13:26 AM
-*******************************************************************/
+/***********************************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\mp\maps\mp_dome_iw\gen\mp_dome_iw_sound.gsc
+***********************************************************************/
 
-//Function Number: 1
-main()
-{
+main() {
 	var_00 = scripts\common\createfx::func_49E7();
 	var_00 scripts\common\createfx::func_F4AD((1860.29,-602.774,-106.996),(270,0,0));
 	var_00.var_13125["soundalias"] = "emt_waterfall_dist_lp";

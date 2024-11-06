@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\cp\zombies\craftables\_gascan.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 26
- * Decompile Time: 939 ms
- * Timestamp: 10/27/2023 12:23:40 AM
-*******************************************************************/
+/******************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\cp\crafted_trap_gascan.gsc
+******************************************************/
 
-//Function Number: 1
-init()
-{
+init() {
 	level._effect["candypile_fire"] = loadfx("vfx/iw7/_requests/coop/zmb_candypile_fire.vfx");
 	level._effect["candypile_idle"] = loadfx("vfx/iw7/_requests/coop/zmb_candypile_idle.vfx");
 	level.var_47AF = [];
@@ -22,9 +16,7 @@ init()
 	level.var_47AF["crafted_gascan"].placedmodel = "zmb_candybox_crafted_lod0";
 }
 
-//Function Number: 2
-give_crafted_gascan(param_00,param_01)
-{
+give_crafted_gascan(param_00,param_01) {
 	param_01 thread watch_dpad();
 	param_01 notify("new_power","crafted_gascan");
 	param_01 setclientomnvar("zom_crafted_weapon",7);
@@ -32,34 +24,27 @@ give_crafted_gascan(param_00,param_01)
 	scripts\cp\utility::set_crafted_inventory_item("crafted_gascan",::give_crafted_gascan,param_01);
 }
 
-//Function Number: 3
-watch_dpad()
-{
+watch_dpad() {
 	self endon("disconnect");
 	self notify("craft_dpad_watcher");
 	self endon("craft_dpad_watcher");
 	self endon("death");
 	self notifyonplayercommand("pullout_gascan","+actionslot 3");
-	for(;;)
-	{
+	for(;;) {
 		self waittill("pullout_gascan");
-		if(scripts\engine\utility::istrue(self.iscarrying))
-		{
+		if(scripts\engine\utility::istrue(self.iscarrying)) {
 			continue;
 		}
 
-		if(scripts\engine\utility::istrue(self.linked_to_coaster))
-		{
+		if(scripts\engine\utility::istrue(self.linked_to_coaster)) {
 			continue;
 		}
 
-		if(isdefined(self.allow_carry) && self.allow_carry == 0)
-		{
+		if(isdefined(self.allow_carry) && self.allow_carry == 0) {
 			continue;
 		}
 
-		if(scripts\cp\utility::is_valid_player())
-		{
+		if(scripts\cp\utility::is_valid_player()) {
 			break;
 		}
 	}
@@ -67,9 +52,7 @@ watch_dpad()
 	thread setdefaultdroppitch(1);
 }
 
-//Function Number: 4
-setdefaultdroppitch(param_00,param_01)
-{
+setdefaultdroppitch(param_00,param_01) {
 	self endon("disconnect");
 	scripts\cp\utility::clearlowermessage("msg_power_hint");
 	var_02 = func_49CD(self);
@@ -80,72 +63,59 @@ setdefaultdroppitch(param_00,param_01)
 	self.carriedsentry = undefined;
 	thread waitrestoreperks();
 	self.iscarrying = 0;
-	if(isdefined(var_02))
-	{
+	if(isdefined(var_02)) {
 		return 1;
 	}
 
 	return 0;
 }
 
-//Function Number: 5
-func_F683(param_00,param_01,param_02)
-{
+func_F683(param_00,param_01,param_02) {
 	self endon("disconnect");
 	param_00 func_76CA(self,param_01);
 	scripts\engine\utility::allow_weapon(0);
 	self notifyonplayercommand("place_gascan","+attack");
 	self notifyonplayercommand("place_gascan","+attack_akimbo_accessible");
 	self notifyonplayercommand("cancel_gascan","+actionslot 3");
-	if(!level.console)
-	{
+	if(!level.console) {
 		self notifyonplayercommand("cancel_gascan","+actionslot 5");
 		self notifyonplayercommand("cancel_gascan","+actionslot 6");
 		self notifyonplayercommand("cancel_gascan","+actionslot 7");
 	}
 
-	for(;;)
-	{
+	for(;;) {
 		var_03 = scripts\engine\utility::waittill_any_return("place_gascan","cancel_gascan","force_cancel_placement");
-		if(!isdefined(param_00))
-		{
+		if(!isdefined(param_00)) {
 			scripts\engine\utility::allow_weapon(1);
 			return 1;
 		}
 
-		if(!isdefined(var_03))
-		{
+		if(!isdefined(var_03)) {
 			var_03 = "force_cancel_placement";
 		}
 
-		if(var_03 == "cancel_gascan" || var_03 == "force_cancel_placement")
-		{
-			if(!param_01 && var_03 == "cancel_gascan")
-			{
+		if(var_03 == "cancel_gascan" || var_03 == "force_cancel_placement") {
+			if(!param_01 && var_03 == "cancel_gascan") {
 				continue;
 			}
 
 			scripts\engine\utility::allow_weapon(1);
 			param_00 func_76C9();
-			if(var_03 != "force_cancel_placement")
-			{
+			if(var_03 != "force_cancel_placement") {
 				thread watch_dpad();
 			}
-			else if(param_01)
-			{
+			else if(param_01) {
 				scripts\cp\utility::remove_crafted_item_from_inventory(self);
 			}
 
 			return 0;
 		}
 
-		if(!param_00.canbeplaced)
-		{
+		if(!param_00.canbeplaced) {
 			continue;
 		}
 
-		if(param_01)
-		{
+		if(param_01) {
 			scripts\cp\utility::remove_crafted_item_from_inventory(self);
 		}
 
@@ -156,11 +126,8 @@ func_F683(param_00,param_01,param_02)
 	}
 }
 
-//Function Number: 6
-removeweapons()
-{
-	if(self.hasriotshield)
-	{
+removeweapons() {
+	if(self.hasriotshield) {
 		var_00 = scripts\cp\utility::riotshieldname();
 		self.restoreweapon = var_00;
 		self.riotshieldammo = self getrunningforwardpainanim(var_00);
@@ -168,24 +135,17 @@ removeweapons()
 	}
 }
 
-//Function Number: 7
-removeperks()
-{
-	if(scripts\cp\utility::_hasperk("specialty_explosivebullets"))
-	{
+removeperks() {
+	if(scripts\cp\utility::_hasperk("specialty_explosivebullets")) {
 		self.restoreperk = "specialty_explosivebullets";
 		scripts\cp\utility::_unsetperk("specialty_explosivebullets");
 	}
 }
 
-//Function Number: 8
-restoreweapons()
-{
-	if(isdefined(self.restoreweapon))
-	{
+restoreweapons() {
+	if(isdefined(self.restoreweapon)) {
 		scripts\cp\utility::_giveweapon(self.restoreweapon);
-		if(self.hasriotshield)
-		{
+		if(self.hasriotshield) {
 			var_00 = scripts\cp\utility::riotshieldname();
 			self setweaponammoclip(var_00,self.riotshieldammo);
 		}
@@ -194,19 +154,14 @@ restoreweapons()
 	self.restoreweapon = undefined;
 }
 
-//Function Number: 9
-restoreperks()
-{
-	if(isdefined(self.restoreperk))
-	{
+restoreperks() {
+	if(isdefined(self.restoreperk)) {
 		scripts\cp\utility::giveperk(self.restoreperk);
 		self.restoreperk = undefined;
 	}
 }
 
-//Function Number: 10
-waitrestoreperks()
-{
+waitrestoreperks() {
 	self endon("death");
 	self endon("disconnect");
 	level endon("game_ended");
@@ -214,9 +169,7 @@ waitrestoreperks()
 	restoreperks();
 }
 
-//Function Number: 11
-func_49CD(param_00)
-{
+func_49CD(param_00) {
 	var_01 = spawnturret("misc_turret",param_00.origin + (0,0,25),"sentry_minigun_mp");
 	var_01.angles = param_00.angles;
 	var_01.triggerportableradarping = param_00;
@@ -234,34 +187,25 @@ func_49CD(param_00)
 	return var_01;
 }
 
-//Function Number: 12
-func_76C7(param_00)
-{
+func_76C7(param_00) {
 	self.canbeplaced = 1;
 }
 
-//Function Number: 13
-func_76C8(param_00,param_01)
-{
+func_76C8(param_00,param_01) {
 	param_01 endon("disconnect");
 	self.var_9F05 = 1;
-	if(!isdefined(level.var_38B3))
-	{
+	if(!isdefined(level.var_38B3)) {
 		level.var_38B3 = [];
 	}
 
-	for(;;)
-	{
-		for(var_02 = 0;param_01 attackbuttonpressed() && var_02 <= 4;var_02++)
-		{
-			if(!self.canbeplaced)
-			{
+	for(;;) {
+		for(var_02 = 0;param_01 attackbuttonpressed() && var_02 <= 4;var_02++) {
+			if(!self.canbeplaced) {
 				wait(0.05);
 				continue;
 			}
 
-			if(!isdefined(self.var_8C16))
-			{
+			if(!isdefined(self.var_8C16)) {
 				self.var_8C16 = 0;
 			}
 
@@ -273,8 +217,7 @@ func_76C8(param_00,param_01)
 			wait(0.35);
 		}
 
-		if(var_02 > 4)
-		{
+		if(var_02 > 4) {
 			break;
 		}
 
@@ -301,9 +244,7 @@ func_76C8(param_00,param_01)
 	var_03 delete();
 }
 
-//Function Number: 14
-func_135B5(param_00)
-{
+func_135B5(param_00) {
 	thread func_92DF();
 	thread func_76C2();
 	thread func_76C3(level.var_47AF["crafted_gascan"].timeout);
@@ -314,18 +255,14 @@ func_135B5(param_00)
 	thread func_76C0(var_01,param_00);
 }
 
-//Function Number: 15
-func_92DF()
-{
+func_92DF() {
 	self endon("gas_spot_damaged");
 	self.fx = spawnfx(level._effect["candypile_idle"],self.origin);
 	scripts\engine\utility::waitframe();
 	triggerfx(self.fx);
 }
 
-//Function Number: 16
-func_76C3(param_00)
-{
+func_76C3(param_00) {
 	self endon("gas_spot_damaged");
 	wait(param_00);
 	self notify("damage_monitor");
@@ -335,26 +272,19 @@ func_76C3(param_00)
 	self delete();
 }
 
-//Function Number: 17
-func_76C2()
-{
+func_76C2() {
 	self endon("damage_monitor");
 	var_00 = 9216;
-	for(;;)
-	{
+	for(;;) {
 		self waittill("damage",var_01,var_02,var_03,var_04,var_05,var_06,var_07,var_08,var_09,var_0A);
-		if(isplayer(var_02) && isdefined(var_0A) && var_05 != "MOD_MELEE")
-		{
+		if(isplayer(var_02) && isdefined(var_0A) && var_05 != "MOD_MELEE") {
 			self notify("gas_spot_damaged");
-			foreach(var_0C in level.var_38B3)
-			{
-				if(var_0C == self)
-				{
+			foreach(var_0C in level.var_38B3) {
+				if(var_0C == self) {
 					continue;
 				}
 
-				if(distancesquared(var_0C.origin,self.origin) > var_00)
-				{
+				if(distancesquared(var_0C.origin,self.origin) > var_00) {
 					continue;
 				}
 				else
@@ -368,9 +298,7 @@ func_76C2()
 	}
 }
 
-//Function Number: 18
-func_76C0(param_00,param_01)
-{
+func_76C0(param_00,param_01) {
 	self.fx delete();
 	scripts\engine\utility::waitframe();
 	self playloopsound("trap_kindle_pops_fire_lp");
@@ -381,8 +309,7 @@ func_76C0(param_00,param_01)
 	self.var_4D27.var_336 = "kindlepops_trig";
 	self.var_4D27.triggerportableradarping = param_01;
 	thread func_76C1();
-	while(gettime() < param_00)
-	{
+	while(gettime() < param_00) {
 		wait(0.1);
 	}
 
@@ -394,22 +321,17 @@ func_76C0(param_00,param_01)
 	self delete();
 }
 
-//Function Number: 19
-func_76C1()
-{
+func_76C1() {
 	self.var_4D27 endon("death");
-	for(;;)
-	{
+	for(;;) {
 		self.var_4D27 waittill("trigger",var_00);
-		if(isplayer(var_00) && isalive(var_00) && !scripts\cp\cp_laststand::player_in_laststand(var_00) && !isdefined(var_00.padding_damage))
-		{
+		if(isplayer(var_00) && isalive(var_00) && !scripts\cp\cp_laststand::player_in_laststand(var_00) && !isdefined(var_00.padding_damage)) {
 			var_00.padding_damage = 1;
 			var_00 dodamage(15,var_00.origin);
 			var_00 thread remove_padding_damage();
 		}
 
-		if(!scripts\cp\utility::should_be_affected_by_trap(var_00))
-		{
+		if(!scripts\cp\utility::should_be_affected_by_trap(var_00)) {
 			continue;
 		}
 
@@ -417,26 +339,19 @@ func_76C1()
 	}
 }
 
-//Function Number: 20
-remove_padding_damage()
-{
+remove_padding_damage() {
 	self endon("disconnect");
 	wait(0.5);
 	self.padding_damage = undefined;
 }
 
-//Function Number: 21
-func_3B25(param_00,param_01,param_02)
-{
-	if(isalive(self) && !scripts\engine\utility::istrue(self.marked_for_death) && !scripts\engine\utility::istrue(self.is_chem_burning))
-	{
+func_3B25(param_00,param_01,param_02) {
+	if(isalive(self) && !scripts\engine\utility::istrue(self.marked_for_death) && !scripts\engine\utility::istrue(self.is_chem_burning)) {
 		thread scripts\cp\utility::damage_over_time(self,param_02,param_00,param_01,undefined,"iw7_kindlepops_zm",undefined,"chemBurn");
 	}
 }
 
-//Function Number: 22
-func_1070D(param_00,param_01)
-{
+func_1070D(param_00,param_01) {
 	var_02 = ["zmb_candy_pile_01","zmb_candy_pile_02"];
 	var_03 = spawn("script_model",param_01.origin + (0,0,5));
 	var_03.angles = self.angles;
@@ -444,17 +359,14 @@ func_1070D(param_00,param_01)
 	var_04 = 100;
 	var_05 = getgroundposition(param_01.origin,4);
 	var_03 moveto(var_05 + (0,0,1),0.25);
-	foreach(var_07 in level.var_38B3)
-	{
-		if(distancesquared(var_07.origin,var_03.origin) < 100)
-		{
+	foreach(var_07 in level.var_38B3) {
+		if(distancesquared(var_07.origin,var_03.origin) < 100) {
 			var_03 delete();
 			break;
 		}
 	}
 
-	if(!isdefined(var_03))
-	{
+	if(!isdefined(var_03)) {
 		return;
 	}
 
@@ -468,12 +380,9 @@ func_1070D(param_00,param_01)
 	var_03 thread func_135B5(param_00);
 }
 
-//Function Number: 23
-func_76C9()
-{
+func_76C9() {
 	self.carriedby getrigindexfromarchetyperef();
-	if(isdefined(self.triggerportableradarping))
-	{
+	if(isdefined(self.triggerportableradarping)) {
 		self.triggerportableradarping.iscarrying = 0;
 	}
 
@@ -481,11 +390,8 @@ func_76C9()
 	self delete();
 }
 
-//Function Number: 24
-func_76CA(param_00,param_01)
-{
-	if(isdefined(self.originalowner))
-	{
+func_76CA(param_00,param_01) {
+	if(isdefined(self.originalowner)) {
 	}
 	else
 	{
@@ -504,9 +410,7 @@ func_76CA(param_00,param_01)
 	self notify("carried");
 }
 
-//Function Number: 25
-func_12EA0(param_00,param_01)
-{
+func_12EA0(param_00,param_01) {
 	self endon("death");
 	self endon("disconnect");
 	level endon("game_ended");
@@ -515,33 +419,25 @@ func_12EA0(param_00,param_01)
 	param_00.canbeplaced = 1;
 	var_02 = -1;
 	param_00.var_BE9C = 0;
-	for(;;)
-	{
+	for(;;) {
 		param_00.canbeplaced = func_3831(param_00);
-		if(param_00.canbeplaced != var_02 || param_00.var_BE9C)
-		{
+		if(param_00.canbeplaced != var_02 || param_00.var_BE9C) {
 			param_00.var_BE9C = 0;
-			if(param_00.canbeplaced)
-			{
+			if(param_00.canbeplaced) {
 				param_00.carriedgascan setmodel(level.var_47AF["crafted_gascan"].modelplacement);
-				if(!isdefined(param_00.var_8C16))
-				{
+				if(!isdefined(param_00.var_8C16)) {
 					self forceusehinton(&"ZOMBIE_CRAFTING_SOUVENIRS_POUR_CANCELABLE");
 				}
-				else if(param_00.var_8C16 == 1)
-				{
+				else if(param_00.var_8C16 == 1) {
 					self forceusehinton(&"ZOMBIE_CRAFTING_SOUVENIRS_POUR_80");
 				}
-				else if(param_00.var_8C16 == 2)
-				{
+				else if(param_00.var_8C16 == 2) {
 					self forceusehinton(&"ZOMBIE_CRAFTING_SOUVENIRS_POUR_60");
 				}
-				else if(param_00.var_8C16 == 3)
-				{
+				else if(param_00.var_8C16 == 3) {
 					self forceusehinton(&"ZOMBIE_CRAFTING_SOUVENIRS_POUR_40");
 				}
-				else if(param_00.var_8C16 == 4)
-				{
+				else if(param_00.var_8C16 == 4) {
 					self forceusehinton(&"ZOMBIE_CRAFTING_SOUVENIRS_POUR_20");
 				}
 			}
@@ -557,17 +453,14 @@ func_12EA0(param_00,param_01)
 	}
 }
 
-//Function Number: 26
-func_3831(param_00)
-{
+func_3831(param_00) {
 	var_01 = self canplayerplacesentry();
 	param_00.origin = var_01["origin"];
 	param_00.angles = var_01["angles"];
 	param_00.carriedgascan.origin = var_01["origin"] + (0,0,35);
 	param_00.name = "crafted_gascan";
 	param_00.carriedgascan.name = "crafted_gascan";
-	if(isdefined(param_00.var_9F05))
-	{
+	if(isdefined(param_00.var_9F05)) {
 		param_00.carriedgascan.angles = var_01["angles"] + (35,0,0);
 	}
 	else

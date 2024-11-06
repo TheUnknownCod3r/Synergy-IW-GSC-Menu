@@ -1,22 +1,14 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: 3370.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 15
- * Decompile Time: 6 ms
- * Timestamp: 10/27/2023 12:26:45 AM
-*******************************************************************/
+/******************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\cp\zombies\achievement.gsc
+******************************************************/
 
-//Function Number: 1
-init_player_achievement(param_00)
-{
+init_player_achievement(param_00) {
 	level.include_default_achievements = 1;
 	level.cp_zmb_number_of_quest_pieces = 24;
-	if(isdefined(level.script))
-	{
-		switch(level.script)
-		{
+	if(isdefined(level.script)) {
+		switch(level.script) {
 			case "cp_zmb":
 				param_00.achievement_list = ["STICKER_COLLECTOR","SOUL_KEY","THE_BIGGER_THEY_ARE","HOFF_THE_CHARTS","ROCK_ON","GET_PACKED","BATTERIES_NOT_INCLUDED","I_LOVE_THE_80_S","INSERT_COIN","BRAIN_DEAD"];
 				break;
@@ -43,15 +35,12 @@ init_player_achievement(param_00)
 		}
 	}
 
-	if(isdefined(param_00.achievement_registration_func))
-	{
-		[[ param_00.achievement_registration_func ]]();
+	if(isdefined(param_00.achievement_registration_func)) {
+		[[param_00.achievement_registration_func]]();
 	}
 }
 
-//Function Number: 2
-register_default_achievements()
-{
+register_default_achievements() {
 	register_achievement("STICKER_COLLECTOR",24,::default_init,::default_should_update,::equal_to_goal);
 	register_achievement("SOUL_KEY",1,::default_init,::default_should_update,::equal_to_goal);
 	register_achievement("THE_BIGGER_THEY_ARE",5,::default_init,::default_should_update,::equal_to_goal);
@@ -102,17 +91,13 @@ register_default_achievements()
 	register_achievement("THE_END",1,::default_init,::default_should_update,::equal_to_goal);
 }
 
-//Function Number: 3
-register_achievement(param_00,param_01,param_02,param_03,param_04)
-{
+register_achievement(param_00,param_01,param_02,param_03,param_04) {
 	var_05 = spawnstruct();
-	var_05 [[ param_02 ]](param_01,param_03,param_04);
+	var_05 [[param_02]](param_01,param_03,param_04);
 	self.achievement_list[param_00] = var_05;
 }
 
-//Function Number: 4
-default_init(param_00,param_01,param_02)
-{
+default_init(param_00,param_01,param_02) {
 	self.progress = 0;
 	self.objective_icon = param_00;
 	self.should_update_func = param_01;
@@ -120,29 +105,22 @@ default_init(param_00,param_01,param_02)
 	self.achievement_completed = 0;
 }
 
-//Function Number: 5
-update_achievement_arcade(param_00,param_01,param_02)
-{
-	if(level.arcade_games_progress.size <= 0 || !scripts\engine\utility::array_contains(level.arcade_games_progress,param_01))
-	{
+update_achievement_arcade(param_00,param_01,param_02) {
+	if(level.arcade_games_progress.size <= 0 || !scripts\engine\utility::array_contains(level.arcade_games_progress,param_01)) {
 		param_00 update_achievement_braindead(param_00,1,param_02);
 		return;
 	}
 
 	level.arcade_games_progress = scripts\engine\utility::array_remove(level.arcade_games_progress,param_01);
-	foreach(param_00 in level.players)
-	{
+	foreach(param_00 in level.players) {
 		param_00 update_achievement("INSERT_COIN",1);
 	}
 
 	param_00 update_achievement_braindead(param_00,1,param_02);
 }
 
-//Function Number: 6
-update_achievement_braindead(param_00,param_01,param_02)
-{
-	if(!isdefined(param_00.number_of_games_played))
-	{
+update_achievement_braindead(param_00,param_01,param_02) {
+	if(!isdefined(param_00.number_of_games_played)) {
 		param_00.number_of_games_played = 1;
 	}
 	else
@@ -150,99 +128,72 @@ update_achievement_braindead(param_00,param_01,param_02)
 		param_00.var_C213++;
 	}
 
-	if(param_00.number_of_games_played >= 30 && param_02 >= 10)
-	{
+	if(param_00.number_of_games_played >= 30 && param_02 >= 10) {
 		param_00 update_achievement("BRAIN_DEAD",30);
 	}
 }
 
-//Function Number: 7
-default_should_update(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08,param_09)
-{
+default_should_update(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08,param_09) {
 	return 1;
 }
 
-//Function Number: 8
-update_progress(param_00)
-{
+update_progress(param_00) {
 	self.progress = self.progress + param_00;
 }
 
-//Function Number: 9
-at_least_goal()
-{
+at_least_goal() {
 	return self.progress >= self.objective_icon;
 }
 
-//Function Number: 10
-equal_to_goal()
-{
+equal_to_goal() {
 	return self.progress == self.objective_icon;
 }
 
-//Function Number: 11
-is_completed()
-{
+is_completed() {
 	return self.achievement_completed;
 }
 
-//Function Number: 12
-mark_completed()
-{
+mark_completed() {
 	self.achievement_completed = 1;
 }
 
-//Function Number: 13
-is_valid_achievement(param_00)
-{
+is_valid_achievement(param_00) {
 	return isdefined(param_00);
 }
 
-//Function Number: 14
-update_achievement(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08,param_09,param_0A,param_0B)
-{
-	if(scripts\cp\utility::is_codxp())
-	{
+update_achievement(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08,param_09,param_0A,param_0B) {
+	if(scripts\cp\utility::is_codxp()) {
 		return;
 	}
 
-	if(scripts\cp\zombies\direct_boss_fight::should_directly_go_to_boss_fight())
-	{
+	if(scripts\cp\zombies\direct_boss_fight::should_directly_go_to_boss_fight()) {
 		return;
 	}
 
 	var_0C = self.achievement_list[param_00];
-	if(!is_valid_achievement(var_0C))
-	{
+	if(!is_valid_achievement(var_0C)) {
 		return;
 	}
 
-	if(var_0C is_completed())
-	{
+	if(var_0C is_completed()) {
 		return;
 	}
 
-	if(scripts\engine\utility::istrue(level.entered_thru_card))
-	{
+	if(scripts\engine\utility::istrue(level.entered_thru_card)) {
 		return;
 	}
 
-	if(var_0C [[ var_0C.should_update_func ]](param_02,param_03,param_04,param_05,param_06,param_07,param_08,param_09,param_0A,param_0B))
-	{
+	if(var_0C [[var_0C.should_update_func]](param_02,param_03,param_04,param_05,param_06,param_07,param_08,param_09,param_0A,param_0B)) {
 		var_0C update_progress(param_01);
-		if(var_0C [[ var_0C.is_goal_reached_func ]]())
-		{
+		if(var_0C [[var_0C.is_goal_reached_func]]()) {
 			self giveachievement(param_00);
 			var_0C mark_completed();
 		}
 	}
 }
 
-//Function Number: 15
-update_achievement_all_players(param_00,param_01)
-{
-	foreach(var_03 in level.players)
-	{
+update_achievement_all_players(param_00,param_01) {
+	foreach(var_03 in level.players) {
 		var_03 update_achievement(param_00,param_01);
 	}
 }

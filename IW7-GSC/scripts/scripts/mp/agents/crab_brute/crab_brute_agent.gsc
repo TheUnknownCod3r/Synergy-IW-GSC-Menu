@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\mp\agents\crab_brute\crab_brute_agent.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 15
- * Decompile Time: 916 ms
- * Timestamp: 10/27/2023 12:11:10 AM
-*******************************************************************/
+/*********************************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\mp\agents\crab_brute\crab_brute_agent.gsc
+*********************************************************************/
 
-//Function Number: 1
-registerscriptedagent()
-{
+registerscriptedagent() {
 	scripts/aitypes/bt_util::init();
 	behaviortree\crab_brute::func_DEE8();
 	scripts\asm\crab_brute\mp\states::func_2371();
@@ -18,49 +12,39 @@ registerscriptedagent()
 	thread func_FAB0();
 }
 
-//Function Number: 2
-func_FAB0()
-{
+func_FAB0() {
 	level endon("game_ended");
-	if(!isdefined(level.agent_definition))
-	{
+	if(!isdefined(level.agent_definition)) {
 		level waittill("scripted_agents_initialized");
 	}
 
 	level.agent_definition["crab_brute"]["setup_func"] = ::setupagent;
 	level.agent_definition["crab_brute"]["setup_model_func"] = ::func_FACE;
 	level.agent_funcs["crab_brute"]["on_damaged"] = ::scripts\cp\maps\cp_town\cp_town_damage::cp_town_onzombiedamaged;
-	if(!isdefined(level.var_8CBD))
-	{
+	if(!isdefined(level.var_8CBD)) {
 		level.var_8CBD = [];
 	}
 
 	level.var_8CBD["crab_brute"] = ::calculatecrabbruteihealth;
 	level.agent_funcs["crab_brute"]["gametype_on_killed"] = ::func_C4D1;
 	level.brute_loot_check = [];
-	if(!isdefined(level.damage_feedback_overrride))
-	{
+	if(!isdefined(level.damage_feedback_overrride)) {
 		level.damage_feedback_overrride = [];
 	}
 
 	level.damage_feedback_overrride["crab_brute"] = ::scripts\cp\maps\cp_town\cp_town_damage::crog_processdamagefeedback;
-	if(!isdefined(level.special_zombie_damage_func))
-	{
+	if(!isdefined(level.special_zombie_damage_func)) {
 		level.special_zombie_damage_func = [];
 	}
 
 	level.special_zombie_damage_func["crab_brute"] = ::crab_brute_special_damage_func;
 }
 
-//Function Number: 3
-func_FACE(param_00)
-{
+func_FACE(param_00) {
 	self setmodel("zmb_brutecrab");
 }
 
-//Function Number: 4
-setupzombiegametypevars()
-{
+setupzombiegametypevars() {
 	self.class = undefined;
 	self.movespeedscaler = undefined;
 	self.avoidkillstreakonspawntimer = undefined;
@@ -143,15 +127,12 @@ setupzombiegametypevars()
 	self.dont_cleanup = 1;
 	self.dont_scriptkill = 1;
 	self.spawn_round_num = level.wave_num;
-	if(getdvarint("scr_zombie_left_foot_sharp_turn_only",0) == 1)
-	{
+	if(getdvarint("scr_zombie_left_foot_sharp_turn_only",0) == 1) {
 		self.var_AB3F = 1;
 	}
 }
 
-//Function Number: 5
-setupagent()
-{
+setupagent() {
 	setupzombiegametypevars();
 	self.height = self.var_18F4;
 	self.fgetarg = self.var_18F9;
@@ -178,39 +159,29 @@ setupagent()
 	thread listen_for_death_sfx();
 }
 
-//Function Number: 6
-dopostspawnupdates()
-{
+dopostspawnupdates() {
 	wait(0.5);
 	self.dont_cleanup = 1;
 }
 
-//Function Number: 7
-listen_for_death_sfx()
-{
+listen_for_death_sfx() {
 	self waittill("death");
 	self playsound("brute_crog_death");
 	wait(1);
 	self playsound("brute_crog_explo");
 }
 
-//Function Number: 8
-getenemy()
-{
-	if(isdefined(self.myenemy))
-	{
+getenemy() {
+	if(isdefined(self.myenemy)) {
 		return self.myenemy;
 	}
 
 	return undefined;
 }
 
-//Function Number: 9
-lookatenemy()
-{
+lookatenemy() {
 	var_00 = getenemy();
-	if(isdefined(var_00))
-	{
+	if(isdefined(var_00)) {
 		var_01 = var_00.origin - self.origin;
 		var_02 = vectortoangles(var_01);
 		self orientmode("face angle abs",var_02);
@@ -220,27 +191,21 @@ lookatenemy()
 	self orientmode("face angle abs",self.angles);
 }
 
-//Function Number: 10
-crab_brute_special_damage_func(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08,param_09,param_0A,param_0B)
-{
-	if(scripts/asm/asm::asm_isinstate("burrow_loop"))
-	{
+crab_brute_special_damage_func(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08,param_09,param_0A,param_0B) {
+	if(scripts/asm/asm::asm_isinstate("burrow_loop")) {
 		return 0;
 	}
 
-	if(param_05 == "gas_grenade_mp")
-	{
+	if(param_05 == "gas_grenade_mp") {
 		return 0;
 	}
 
 	self.lastdamagetime = gettime();
-	if(isdefined(param_07))
-	{
+	if(isdefined(param_07)) {
 		var_0C = scripts\mp\agents\crab_brute\crab_brute_tunedata::gettunedata();
 		var_0D = anglestoforward(self.angles) * -1;
 		var_0E = vectordot(var_0D,param_07);
-		if(var_0E > var_0C.reduce_damage_dot)
-		{
+		if(var_0E > var_0C.reduce_damage_dot) {
 			param_02 = param_02 * var_0C.reduce_damage_pct;
 			self.armor_hit = 1;
 		}
@@ -249,19 +214,14 @@ crab_brute_special_damage_func(param_00,param_01,param_02,param_03,param_04,para
 	return param_02;
 }
 
-//Function Number: 11
-func_C4D1(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08,param_09,param_0A,param_0B)
-{
-	if(isdefined(self.agent_type) && self.agent_type == "crab_brute")
-	{
+func_C4D1(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08,param_09,param_0A,param_0B) {
+	if(isdefined(self.agent_type) && self.agent_type == "crab_brute") {
 		param_01 scripts\cp\cp_merits::processmerit("mt_dlc3_crab_brute");
 	}
 
 	var_0C = scripts\engine\utility::random(["ammo_max","instakill_30","cash_2","instakill_30","cash_2","instakill_30","cash_2"]);
-	if(isdefined(var_0C) && !isdefined(self.var_72AC))
-	{
-		if(!isdefined(level.brute_loot_check[self.spawn_round_num]))
-		{
+	if(isdefined(var_0C) && !isdefined(self.var_72AC)) {
+		if(!isdefined(level.brute_loot_check[self.spawn_round_num])) {
 			level.brute_loot_check[self.spawn_round_num] = 1;
 			level thread scripts\cp\loot::drop_loot(self.origin,param_01,var_0C);
 		}
@@ -269,18 +229,14 @@ func_C4D1(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_0
 
 	var_0D = 400;
 	level thread boss_death_vo();
-	foreach(var_0F in level.players)
-	{
+	foreach(var_0F in level.players) {
 		var_0F scripts\cp\cp_persistence::give_player_currency(var_0D);
 	}
 }
 
-//Function Number: 12
-boss_death_vo()
-{
+boss_death_vo() {
 	wait(10);
-	if(isdefined(level.elvira_ai))
-	{
+	if(isdefined(level.elvira_ai)) {
 		level thread scripts\cp\cp_vo::try_to_play_vo("ww_crog_defeat_elvira","rave_announcer_vo","highest",70,0,0,1);
 		return;
 	}
@@ -288,35 +244,26 @@ boss_death_vo()
 	level thread scripts\cp\cp_vo::try_to_play_vo("ww_crog_defeat_generic","rave_announcer_vo","highest",70,0,0,1);
 }
 
-//Function Number: 13
-calculatecrabbruteihealth()
-{
+calculatecrabbruteihealth() {
 	return 5000 * level.players.size;
 }
 
-//Function Number: 14
-shouldignoreenemy(param_00)
-{
-	if(!isalive(param_00))
-	{
+shouldignoreenemy(param_00) {
+	if(!isalive(param_00)) {
 		return 1;
 	}
 
-	if(param_00.ignoreme || isdefined(param_00.triggerportableradarping) && param_00.triggerportableradarping.ignoreme)
-	{
+	if(param_00.ignoreme || isdefined(param_00.triggerportableradarping) && param_00.triggerportableradarping.ignoreme) {
 		return 1;
 	}
 
-	if(scripts/mp/agents/zombie/zombie_util::shouldignoreent(param_00))
-	{
+	if(scripts/mp/agents/zombie/zombie_util::shouldignoreent(param_00)) {
 		return 1;
 	}
 
 	return 0;
 }
 
-//Function Number: 15
-create_brute_death_fx(param_00)
-{
+create_brute_death_fx(param_00) {
 	self.var_CE65 = 1;
 }

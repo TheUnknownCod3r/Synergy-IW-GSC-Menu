@@ -1,45 +1,31 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: 3125.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 11
- * Decompile Time: 3 ms
- * Timestamp: 10/27/2023 12:26:12 AM
-*******************************************************************/
+/****************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\3125.gsc
+****************************/
 
-//Function Number: 1
-func_D4D9(param_00,param_01,param_02,param_03)
-{
+func_D4D9(param_00,param_01,param_02,param_03) {
 	var_04 = scripts/asm/asm_bb::func_2923();
 	scripts/asm/asm_mp::func_2364(param_00,param_01,param_02);
 }
 
-//Function Number: 2
-func_B644(param_00,param_01,param_02)
-{
+func_B644(param_00,param_01,param_02) {
 	var_03 = scripts/asm/asm_bb::func_2924();
 	return distancesquared(self.origin,var_03) <= param_02 * param_02;
 }
 
-//Function Number: 3
-func_B643(param_00,param_01,param_02)
-{
+func_B643(param_00,param_01,param_02) {
 	var_03 = 50;
 	var_04 = scripts/asm/asm_bb::func_2924();
 	return distancesquared(self.origin,var_04) <= var_03;
 }
 
-//Function Number: 4
-func_D4D7(param_00,param_01,param_02,param_03)
-{
+func_D4D7(param_00,param_01,param_02,param_03) {
 	var_04 = scripts/asm/asm_bb::bb_getmeleetarget();
-	if(!isdefined(var_04))
-	{
+	if(!isdefined(var_04)) {
 		self orientmode("face angle abs",self.angles);
 	}
-	else if(isplayer(var_04) && var_04 == self.isnodeoccupied)
-	{
+	else if(isplayer(var_04) && var_04 == self.isnodeoccupied) {
 		self orientmode("face enemy");
 	}
 	else
@@ -56,39 +42,30 @@ func_D4D7(param_00,param_01,param_02,param_03)
 	scripts/asm/asm::asm_fireevent(param_01,"end");
 }
 
-//Function Number: 5
-donotetracks_vsplayer(param_00,param_01)
-{
-	for(;;)
-	{
+donotetracks_vsplayer(param_00,param_01) {
+	for(;;) {
 		self waittill(param_01,var_02);
-		if(!isarray(var_02))
-		{
+		if(!isarray(var_02)) {
 			var_02 = [var_02];
 		}
 
-		foreach(var_04 in var_02)
-		{
-			switch(var_04)
-			{
+		foreach(var_04 in var_02) {
+			switch(var_04) {
 				case "end":
 					break;
 	
 				case "stop":
 					var_05 = scripts/asm/asm_bb::bb_getmeleetarget();
-					if(!isdefined(var_05))
-					{
+					if(!isdefined(var_05)) {
 						return;
 					}
 		
-					if(!isalive(var_05))
-					{
+					if(!isalive(var_05)) {
 						return;
 					}
 		
 					var_06 = distancesquared(var_05.origin,self.origin);
-					if(var_06 > 4096)
-					{
+					if(var_06 > 4096) {
 						return;
 					}
 					break;
@@ -96,13 +73,11 @@ donotetracks_vsplayer(param_00,param_01)
 				case "start_melee":
 				case "fire":
 					var_05 = scripts/asm/asm_bb::bb_getmeleetarget();
-					if(!isdefined(var_05))
-					{
+					if(!isdefined(var_05)) {
 						return;
 					}
 		
-					if(isalive(var_05))
-					{
+					if(isalive(var_05)) {
 						func_CA1F(var_05);
 					}
 					break;
@@ -115,18 +90,13 @@ donotetracks_vsplayer(param_00,param_01)
 	}
 }
 
-//Function Number: 6
-func_7FAC()
-{
+func_7FAC() {
 	var_00 = randomfloatrange(self.meleemindamage,self.meleemaxdamage);
 	return var_00;
 }
 
-//Function Number: 7
-func_CA1F(param_00)
-{
-	if(!isalive(param_00))
-	{
+func_CA1F(param_00) {
+	if(!isalive(param_00)) {
 		return;
 	}
 
@@ -134,23 +104,19 @@ func_CA1F(param_00)
 	var_01 = func_7FAC();
 	var_02 = 1;
 	var_03 = distancesquared(self.origin,param_00.origin);
-	if(var_03 > self.meleerangesq)
-	{
+	if(var_03 > self.meleerangesq) {
 		return;
 	}
 
-	if(isplayer(param_00))
-	{
+	if(isplayer(param_00)) {
 		var_04 = func_3D76(param_00);
 		var_05 = func_3D95(param_00);
-		if(var_04 || var_05)
-		{
+		if(var_04 || var_05) {
 			return;
 		}
 		else
 		{
-			if(isdefined(param_00.isjuggernaut) && param_00.isjuggernaut)
-			{
+			if(isdefined(param_00.isjuggernaut) && param_00.isjuggernaut) {
 				var_01 = var_01 * 0.65;
 				earthquake(0.25,0.25,param_00.origin,100);
 			}
@@ -160,45 +126,35 @@ func_CA1F(param_00)
 		}
 	}
 
-	if(isdefined(self.var_B62B))
-	{
-		[[ self.var_B62B ]](self,param_00);
+	if(isdefined(self.var_B62B)) {
+		[[self.var_B62B]](self,param_00);
 	}
 
 	param_00 dodamage(var_01,self.origin,self,self);
 	param_00 thread func_F5FE(var_02);
 }
 
-//Function Number: 8
-func_F5FE(param_00)
-{
+func_F5FE(param_00) {
 	scripts\engine\utility::waitframe();
 	self setviewkickscale(param_00);
 }
 
-//Function Number: 9
-func_3D95(param_00)
-{
+func_3D95(param_00) {
 	var_01 = anglestoforward(param_00.angles);
 	var_02 = vectornormalize(self.origin - param_00.origin);
 	var_03 = vectordot(var_02,var_01);
-	if(param_00 meleebuttonpressed() && isdefined(param_00.meleestrength) && param_00.meleestrength == 1 && var_03 > 0.5)
-	{
+	if(param_00 meleebuttonpressed() && isdefined(param_00.meleestrength) && param_00.meleestrength == 1 && var_03 > 0.5) {
 		return 1;
 	}
 
 	return 0;
 }
 
-//Function Number: 10
-func_3D76(param_00)
-{
+func_3D76(param_00) {
 	return 0;
 }
 
-//Function Number: 11
-func_F329(param_00)
-{
+func_F329(param_00) {
 	var_01 = 10;
 	var_02 = 2;
 	var_03 = 50;

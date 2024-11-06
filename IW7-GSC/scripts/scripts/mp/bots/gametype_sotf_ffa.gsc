@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\mp\bots\gametype_sotf_ffa.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 1
- * Decompile Time: 94 ms
- * Timestamp: 10/27/2023 12:12:08 AM
-*******************************************************************/
+/*********************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\mp\bots\gametype_sotf_ffa.gsc
+*********************************************************/
 
-//Function Number: 1
-main()
-{
+main() {
 	scripts\mp\bots\gametype_sotf::setup_callbacks();
 	scripts\mp\bots\gametype_sotf::setup_bot_sotf();
 }

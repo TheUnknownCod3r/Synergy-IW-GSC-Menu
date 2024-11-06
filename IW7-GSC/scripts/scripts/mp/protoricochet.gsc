@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\mp\ricochet.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 9
- * Decompile Time: 478 ms
- * Timestamp: 10/27/2023 12:21:27 AM
-*******************************************************************/
+/************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\mp\protoricochet.gsc
+************************************************/
 
-//Function Number: 1
-func_E4E3()
-{
+func_E4E3() {
 	level.var_E4DF = [];
 	level._effect["proto_ricochet_temp"] = loadfx("vfx/old/misc/proto_ricochet_temp");
 	level._effect["proto_ricochet_shot_temp"] = loadfx("vfx/old/misc/proto_ricochet_shot_temp");
@@ -21,13 +15,10 @@ func_E4E3()
 	level.var_E4DF["proto_ricochet_device_mp"].fx = "proto_ricochet_temp";
 }
 
-//Function Number: 2
-func_E4E9(param_00)
-{
+func_E4E9(param_00) {
 	self endon("spawned_player");
 	self endon("disconnect");
-	if(!isalive(self))
-	{
+	if(!isalive(self)) {
 		param_00 delete();
 		return;
 	}
@@ -51,20 +42,16 @@ func_E4E9(param_00)
 	var_03.trigger linkto(var_03);
 	var_03 setcandamage(1);
 	var_03 thread func_E4E0(self);
-	var_03 thread [[ level.var_E4DF[param_00.weapon_name].var_B9DC ]](self);
+	var_03 thread [[level.var_E4DF[param_00.weapon_name].var_B9DC]](self);
 	var_03 setotherent(self);
 }
 
-//Function Number: 3
-func_E4E8()
-{
-	if(isdefined(self.objective_position))
-	{
+func_E4E8() {
+	if(isdefined(self.objective_position)) {
 		self.objective_position delete();
 	}
 
-	if(isdefined(self.fx))
-	{
+	if(isdefined(self.fx)) {
 		self.fx delete();
 	}
 
@@ -72,12 +59,9 @@ func_E4E8()
 	self notify("death");
 }
 
-//Function Number: 4
-func_E4E7()
-{
+func_E4E7() {
 	self endon("death");
-	while(getdvarint("scr_ric_debug",0) == 1)
-	{
+	while(getdvarint("scr_ric_debug",0) == 1) {
 		wait(1);
 	}
 
@@ -85,48 +69,35 @@ func_E4E7()
 	func_E4E8();
 }
 
-//Function Number: 5
-func_E4E0(param_00)
-{
+func_E4E0(param_00) {
 	scripts\mp\damage::monitordamage(100,"trophy",::func_E4E2,::func_E4E4,0);
 }
 
-//Function Number: 6
-func_E4E4(param_00,param_01,param_02,param_03,param_04)
-{
+func_E4E4(param_00,param_01,param_02,param_03,param_04) {
 	return 0;
 }
 
-//Function Number: 7
-func_E4E2(param_00,param_01,param_02,param_03)
-{
-	if(isdefined(self.triggerportableradarping) && param_00 != self.triggerportableradarping)
-	{
+func_E4E2(param_00,param_01,param_02,param_03) {
+	if(isdefined(self.triggerportableradarping) && param_00 != self.triggerportableradarping) {
 		param_00 notify("destroyed_equipment");
 	}
 
 	self notify("detonateExplosive");
 }
 
-//Function Number: 8
-func_E4E5(param_00)
-{
+func_E4E5(param_00) {
 	param_00 endon("disconnect");
 	self endon("death");
 	thread func_E4E7();
-	for(;;)
-	{
+	for(;;) {
 		self waittill("damage",var_01,var_02,var_03,var_04,var_05,var_06,var_07,var_08,var_09,var_0A);
 		var_0B = func_E4E1(var_04,var_03);
-		if(isdefined(var_0B))
-		{
+		if(isdefined(var_0B)) {
 			var_0C = var_04 + var_0B * 5000;
-			if(getdvarint("scr_ric_debug",0) == 1)
-			{
+			if(getdvarint("scr_ric_debug",0) == 1) {
 			}
 
-			if(getdvarint("scr_ric_debug",0) != 1)
-			{
+			if(getdvarint("scr_ric_debug",0) != 1) {
 				scripts\mp\utility::_magicbullet(var_0A,var_04,var_0C,param_00);
 			}
 
@@ -136,22 +107,17 @@ func_E4E5(param_00)
 	}
 }
 
-//Function Number: 9
-func_E4E1(param_00,param_01)
-{
+func_E4E1(param_00,param_01) {
 	var_02 = (param_01[0],param_01[1],0);
 	var_03 = getdvarfloat("scr_ric_spread",7);
 	var_04 = undefined;
 	var_05 = -15536;
-	foreach(var_07 in level.players)
-	{
-		if(!scripts\mp\utility::isreallyalive(var_07))
-		{
+	foreach(var_07 in level.players) {
+		if(!scripts\mp\utility::isreallyalive(var_07)) {
 			continue;
 		}
 
-		if(var_07.team == self.team)
-		{
+		if(var_07.team == self.team) {
 			continue;
 		}
 
@@ -160,12 +126,9 @@ func_E4E1(param_00,param_01)
 		var_0A = distance(var_07.origin,param_00);
 		var_09 = var_09 * 1 / var_0A;
 		var_0B = vectordot(var_09,param_01);
-		if(abs(var_0B) < 0.707)
-		{
-			if(var_0A < 500)
-			{
-				if(var_0A < var_05)
-				{
+		if(abs(var_0B) < 0.707) {
+			if(var_0A < 500) {
+				if(var_0A < var_05) {
 					var_04 = var_08;
 					var_05 = var_0A;
 				}
@@ -173,8 +136,7 @@ func_E4E1(param_00,param_01)
 		}
 	}
 
-	if(isdefined(var_04))
-	{
+	if(isdefined(var_04)) {
 		var_09 = var_04 - param_00;
 		var_09 = var_09 * 1 / var_05;
 		var_0D = randomfloatrange(-180,180);

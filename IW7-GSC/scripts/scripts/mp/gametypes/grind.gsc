@@ -1,22 +1,15 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\mp\gametypes\grind.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 28
- * Decompile Time: 1446 ms
- * Timestamp: 10/27/2023 12:12:34 AM
-*******************************************************************/
+/**************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\mp\gametypes\grind.gsc
+**************************************************/
 
-//Function Number: 1
-main()
-{
+main() {
 	scripts\mp\_globallogic::init();
 	scripts\mp\_globallogic::setupcallbacks();
-	if(function_011C())
-	{
+	if(function_011C()) {
 		level.initializematchrules = ::initializematchrules;
-		[[ level.initializematchrules ]]();
+		[[level.initializematchrules]]();
 		level thread scripts\mp\_utility::reinitializematchrulesonmigration();
 	}
 	else
@@ -43,9 +36,7 @@ main()
 	level.conf_fx["vanish"] = loadfx("vfx/core/impacts/small_snowhit");
 }
 
-//Function Number: 2
-initializematchrules()
-{
+initializematchrules() {
 	scripts\mp\_utility::setcommonrulesfrommatchdata();
 	setdynamicdvar("scr_grind_bankTime",getmatchrulesdata("grindData","bankTime"));
 	setdynamicdvar("scr_grind_bankRate",getmatchrulesdata("grindData","bankRate"));
@@ -57,19 +48,15 @@ initializematchrules()
 	setdynamicdvar("scr_grind_promode",0);
 }
 
-//Function Number: 3
-onstartgametype()
-{
+onstartgametype() {
 	setclientnamemode("auto_change");
-	if(!isdefined(game["switchedsides"]))
-	{
+	if(!isdefined(game["switchedsides"])) {
 		game["switchedsides"] = 0;
 	}
 
 	scripts\mp\_utility::setobjectivetext("allies",&"OBJECTIVES_WAR");
 	scripts\mp\_utility::setobjectivetext("axis",&"OBJECTIVES_WAR");
-	if(level.splitscreen)
-	{
+	if(level.splitscreen) {
 		scripts\mp\_utility::setobjectivescoretext("allies",&"OBJECTIVES_WAR");
 		scripts\mp\_utility::setobjectivescoretext("axis",&"OBJECTIVES_WAR");
 	}
@@ -92,9 +79,7 @@ onstartgametype()
 	level thread removetagsongameended();
 }
 
-//Function Number: 4
-updategametypedvars()
-{
+updategametypedvars() {
 	scripts\mp\gametypes\common::updategametypedvars();
 	level.banktime = scripts\mp\_utility::dvarfloatvalue("bankTime",2,0,10);
 	level.bankrate = scripts\mp\_utility::dvarintvalue("bankRate",1,1,10);
@@ -103,21 +88,15 @@ updategametypedvars()
 	level.megabankbonus = scripts\mp\_utility::dvarintvalue("megaBankBonus",150,0,750);
 }
 
-//Function Number: 5
-onspawnplayer()
-{
-	if(isdefined(self.tagscarried))
-	{
+onspawnplayer() {
+	if(isdefined(self.tagscarried)) {
 		self setclientomnvar("ui_grind_tags",self.tagscarried);
 	}
 }
 
-//Function Number: 6
-createtags()
-{
+createtags() {
 	level.dogtags = [];
-	for(var_00 = 0;var_00 < 30;var_00++)
-	{
+	for(var_00 = 0;var_00 < 30;var_00++) {
 		var_01[0] = spawn("script_model",(0,0,0));
 		var_01[0] setmodel("dogtags_iw7_foe");
 		var_01[1] = spawn("script_model",(0,0,0));
@@ -145,26 +124,20 @@ createtags()
 	}
 }
 
-//Function Number: 7
-gettag()
-{
+gettag() {
 	var_00 = level.dogtags[0];
 	var_01 = gettime();
-	foreach(var_03 in level.dogtags)
-	{
-		if(!isdefined(var_03.lastusedtime))
-		{
+	foreach(var_03 in level.dogtags) {
+		if(!isdefined(var_03.lastusedtime)) {
 			continue;
 		}
 
-		if(var_03.interactteam == "none")
-		{
+		if(var_03.interactteam == "none") {
 			var_00 = var_03;
 			break;
 		}
 
-		if(var_03.lastusedtime < var_01)
-		{
+		if(var_03.lastusedtime < var_01) {
 			var_01 = var_03.lastusedtime;
 			var_00 = var_03;
 		}
@@ -176,9 +149,7 @@ gettag()
 	return var_00;
 }
 
-//Function Number: 8
-spawntag(param_00,param_01)
-{
+spawntag(param_00,param_01) {
 	var_02 = param_00 + (0,0,14);
 	var_03 = (0,randomfloat(360),0);
 	var_04 = anglestoforward(var_03);
@@ -200,97 +171,74 @@ spawntag(param_00,param_01)
 	return var_07;
 }
 
-//Function Number: 9
-showtoteam(param_00,param_01)
-{
+showtoteam(param_00,param_01) {
 	param_00 endon("death");
 	param_00 endon("reset");
 	self hide();
-	foreach(var_03 in level.players)
-	{
-		if(playercanusetags(var_03))
-		{
-			if(var_03.team == param_01)
-			{
+	foreach(var_03 in level.players) {
+		if(playercanusetags(var_03)) {
+			if(var_03.team == param_01) {
 				self showtoplayer(var_03);
 			}
 
-			if(var_03.team == "spectator" && param_01 == "allies")
-			{
+			if(var_03.team == "spectator" && param_01 == "allies") {
 				self showtoplayer(var_03);
 			}
 		}
 	}
 
-	for(;;)
-	{
+	for(;;) {
 		level scripts\engine\utility::waittill_any_3("joined_team","update_phase_visibility");
 		self hide();
-		foreach(var_03 in level.players)
-		{
-			if(playercanusetags(var_03))
-			{
-				if(var_03.team == param_01)
-				{
+		foreach(var_03 in level.players) {
+			if(playercanusetags(var_03)) {
+				if(var_03.team == param_01) {
 					self showtoplayer(var_03);
 				}
 			}
 
-			if(var_03.team == "spectator" && param_01 == "allies")
-			{
+			if(var_03.team == "spectator" && param_01 == "allies") {
 				self showtoplayer(var_03);
 			}
 
-			if(param_00.victimteam == var_03.team && var_03 == param_00.var_4F)
-			{
+			if(param_00.victimteam == var_03.team && var_03 == param_00.var_4F) {
 				scripts\mp\objidpoolmanager::minimap_objective_state(param_00.objid,"invisible");
 			}
 		}
 	}
 }
 
-//Function Number: 10
-playercanusetags(param_00)
-{
-	if(scripts/mp/equipment/phase_shift::isentityphaseshifted(param_00))
-	{
+playercanusetags(param_00) {
+	if(scripts/mp/equipment/phase_shift::isentityphaseshifted(param_00)) {
 		return 0;
 	}
 
 	return 1;
 }
 
-//Function Number: 11
-func_BA31(param_00)
-{
+func_BA31(param_00) {
 	level endon("game_ended");
 	param_00 endon("deleted");
 	param_00 endon("reset");
-	for(;;)
-	{
+	for(;;) {
 		param_00.trigger waittill("trigger",var_01);
-		if(!scripts\mp\_utility::isreallyalive(var_01))
-		{
+		if(!scripts\mp\_utility::isreallyalive(var_01)) {
 			continue;
 		}
 
-		if(var_01 scripts\mp\_utility::isusingremote() || isdefined(var_01.spawningafterremotedeath))
-		{
+		if(var_01 scripts\mp\_utility::isusingremote() || isdefined(var_01.spawningafterremotedeath)) {
 			continue;
 		}
 
-		if(isdefined(var_01.classname) && var_01.classname == "script_vehicle")
-		{
+		if(isdefined(var_01.classname) && var_01.classname == "script_vehicle") {
 			continue;
 		}
 
-		if(isagent(var_01) && isdefined(var_01.triggerportableradarping))
-		{
+		if(isagent(var_01) && isdefined(var_01.triggerportableradarping)) {
 			var_01 = var_01.triggerportableradarping;
 		}
 
-		if(!scripts/mp/equipment/phase_shift::areentitiesinphase(param_00,var_01))
-		{
+		if(!scripts/mp/equipment/phase_shift::areentitiesinphase(param_00,var_01)) {
 			continue;
 		}
 
@@ -302,17 +250,14 @@ func_BA31(param_00)
 		param_00.visuals[0].origin = (0,0,1000);
 		param_00.visuals[1].origin = (0,0,1000);
 		param_00 scripts\mp\_gameobjects::allowuse("none");
-		if(param_00.team != var_01.team)
-		{
+		if(param_00.team != var_01.team) {
 			var_01 playersettagcount(var_01.tagscarried + 1);
 			var_01 thread scripts\mp\_utility::giveunifiedpoints("tag_collected");
 		}
 
 		var_01 playsound("mp_killconfirm_tags_pickup");
-		if(isdefined(level.supportcranked) && level.supportcranked)
-		{
-			if(isdefined(var_01.cranked) && var_01.cranked)
-			{
+		if(isdefined(level.supportcranked) && level.supportcranked) {
+			if(isdefined(var_01.cranked) && var_01.cranked) {
 				var_01 scripts\mp\_utility::setcrankedplayerbombtimer("kill");
 			}
 			else
@@ -326,74 +271,56 @@ func_BA31(param_00)
 	}
 }
 
-//Function Number: 12
-onplayerconnect()
-{
-	for(;;)
-	{
+onplayerconnect() {
+	for(;;) {
 		level waittill("connected",var_00);
 		var_00.isscoring = 0;
 		var_00 thread monitorjointeam();
 	}
 }
 
-//Function Number: 13
-playersettagcount(param_00)
-{
+playersettagcount(param_00) {
 	self.tagscarried = param_00;
 	self.objective_additionalentity = param_00;
-	if(param_00 > 999)
-	{
+	if(param_00 > 999) {
 		param_00 = 999;
 	}
 
 	self setclientomnvar("ui_grind_tags",param_00);
 }
 
-//Function Number: 14
-monitorjointeam()
-{
+monitorjointeam() {
 	self endon("disconnect");
-	for(;;)
-	{
+	for(;;) {
 		scripts\engine\utility::waittill_any_3("joined_team","joined_spectators");
 		playersettagcount(0);
-		if(self.team == "allies")
-		{
+		if(self.team == "allies") {
 			level.var_1C26 = scripts\engine\utility::array_add(level.var_1C26,self);
 			continue;
 		}
 
-		if(self.team == "axis")
-		{
+		if(self.team == "axis") {
 			level.var_26F2 = scripts\engine\utility::array_add(level.var_26F2,self);
 		}
 	}
 }
 
-//Function Number: 15
-hidehudelementongameend(param_00)
-{
+hidehudelementongameend(param_00) {
 	level waittill("game_ended");
-	if(isdefined(param_00))
-	{
+	if(isdefined(param_00)) {
 		param_00.alpha = 0;
 	}
 }
 
-//Function Number: 16
-createzones()
-{
+createzones() {
 	level.var_13FC1 = [];
 	var_00 = getentarray("grind_location","targetname");
-	foreach(var_02 in var_00)
-	{
+	foreach(var_02 in var_00) {
 		level.var_13FC1[level.var_13FC1.size] = var_02;
 	}
 
 	level.objectives = level.var_13FC1;
-	for(var_04 = 0;var_04 < level.var_13FC1.size;var_04++)
-	{
+	for(var_04 = 0;var_04 < level.var_13FC1.size;var_04++) {
 		var_05 = scripts\mp\gametypes\obj_grindzone::setupobjective(var_04);
 		var_05 thread runzonethink();
 		level.var_13FC1[var_04].useobj = var_05;
@@ -401,42 +328,32 @@ createzones()
 	}
 }
 
-//Function Number: 17
-isinzone(param_00,param_01)
-{
-	if(scripts\mp\_utility::isreallyalive(param_00) && param_00 istouching(param_01.trigger) && param_01.ownerteam == param_00.team)
-	{
+isinzone(param_00,param_01) {
+	if(scripts\mp\_utility::isreallyalive(param_00) && param_00 istouching(param_01.trigger) && param_01.ownerteam == param_00.team) {
 		return 1;
 	}
 
 	return 0;
 }
 
-//Function Number: 18
-runzonethink()
-{
+runzonethink() {
 	level endon("game_ended");
 	self endon("stop_trigger" + self.label);
-	for(;;)
-	{
+	for(;;) {
 		self.trigger waittill("trigger",var_00);
-		if(self.stalemate)
-		{
+		if(self.stalemate) {
 			continue;
 		}
 
-		if(isagent(var_00))
-		{
+		if(isagent(var_00)) {
 			continue;
 		}
 
-		if(!isplayer(var_00))
-		{
+		if(!isplayer(var_00)) {
 			continue;
 		}
 
-		if(var_00.isscoring)
-		{
+		if(var_00.isscoring) {
 			continue;
 		}
 
@@ -445,19 +362,14 @@ runzonethink()
 	}
 }
 
-//Function Number: 19
-removetagsongameended()
-{
+removetagsongameended() {
 	level waittill("game_ended");
-	foreach(var_01 in level.players)
-	{
-		if(!isdefined(var_01))
-		{
+	foreach(var_01 in level.players) {
+		if(!isdefined(var_01)) {
 			continue;
 		}
 
-		if(!isdefined(var_01.tagscarried))
-		{
+		if(!isdefined(var_01.tagscarried)) {
 			continue;
 		}
 
@@ -465,14 +377,10 @@ removetagsongameended()
 	}
 }
 
-//Function Number: 20
-processscoring(param_00,param_01)
-{
-	while(param_00.tagscarried && isinzone(param_00,param_01) && !param_01.stalemate)
-	{
+processscoring(param_00,param_01) {
+	while(param_00.tagscarried && isinzone(param_00,param_01) && !param_01.stalemate) {
 		param_00 playsoundtoplayer("mp_grind_token_banked",param_00);
-		if(param_00.tagscarried >= level.megabanklimit)
-		{
+		if(param_00.tagscarried >= level.megabanklimit) {
 			scoreamount(param_00,level.megabanklimit);
 			var_02 = scripts\mp\_rank::getscoreinfovalue("tag_score");
 			var_02 = var_02 * level.megabanklimit;
@@ -482,20 +390,17 @@ processscoring(param_00,param_01)
 		else
 		{
 			var_03 = level.bankrate;
-			if(var_03 > param_00.tagscarried)
-			{
+			if(var_03 > param_00.tagscarried) {
 				var_03 = param_00.tagscarried;
 			}
 
 			scoreamount(param_00,var_03);
-			for(var_04 = 0;var_04 < var_03;var_04++)
-			{
+			for(var_04 = 0;var_04 < var_03;var_04++) {
 				param_00 thread scripts\mp\_utility::giveunifiedpoints("tag_score");
 			}
 		}
 
-		if(isdefined(level.supportcranked) && level.supportcranked && isdefined(param_00.cranked) && param_00.cranked)
-		{
+		if(isdefined(level.supportcranked) && level.supportcranked && isdefined(param_00.cranked) && param_00.cranked) {
 			param_00 scripts\mp\_utility::setcrankedplayerbombtimer("kill");
 		}
 
@@ -507,9 +412,7 @@ processscoring(param_00,param_01)
 	param_00.isscoring = 0;
 }
 
-//Function Number: 21
-scoreamount(param_00,param_01)
-{
+scoreamount(param_00,param_01) {
 	param_00 playersettagcount(param_00.tagscarried - param_01);
 	scripts\mp\_gamescore::giveteamscoreforobjective(param_00.team,param_01,0);
 	param_00 scripts\mp\_utility::incperstat("confirmed",param_01);
@@ -517,9 +420,7 @@ scoreamount(param_00,param_01)
 	param_00 scripts\mp\_utility::setextrascore0(param_00.pers["confirmed"]);
 }
 
-//Function Number: 22
-initspawns()
-{
+initspawns() {
 	scripts\mp\_spawnlogic::setactivespawnlogic("TDM");
 	level.spawnmins = (0,0,0);
 	level.spawnmaxs = (0,0,0);
@@ -531,17 +432,13 @@ initspawns()
 	function_01B4(level.mapcenter);
 }
 
-//Function Number: 23
-getspawnpoint()
-{
+getspawnpoint() {
 	var_00 = self.pers["team"];
-	if(game["switchedsides"])
-	{
+	if(game["switchedsides"]) {
 		var_00 = scripts\mp\_utility::getotherteam(var_00);
 	}
 
-	if(scripts\mp\_spawnlogic::shoulduseteamstartspawn())
-	{
+	if(scripts\mp\_spawnlogic::shoulduseteamstartspawn()) {
 		var_01 = scripts\mp\_spawnlogic::getspawnpointarray("mp_tdm_spawn_" + var_00 + "_start");
 		var_02 = scripts\mp\_spawnlogic::getspawnpoint_startspawn(var_01);
 	}
@@ -554,27 +451,20 @@ getspawnpoint()
 	return var_02;
 }
 
-//Function Number: 24
-onnormaldeath(param_00,param_01,param_02,param_03,param_04)
-{
+onnormaldeath(param_00,param_01,param_02,param_03,param_04) {
 	scripts\mp\gametypes\common::onnormaldeath(param_00,param_01,param_02,param_03,param_04);
 	level thread droptags(param_00,param_01);
 }
 
-//Function Number: 25
-droptags(param_00,param_01)
-{
-	if(isagent(param_00))
-	{
+droptags(param_00,param_01) {
+	if(isagent(param_00)) {
 		return;
 	}
 
-	if(param_00.tagscarried > 9)
-	{
+	if(param_00.tagscarried > 9) {
 		var_02 = 10;
 	}
-	else if(param_01.tagscarried > 0)
-	{
+	else if(param_01.tagscarried > 0) {
 		var_02 = param_01.tagscarried;
 	}
 	else
@@ -582,8 +472,7 @@ droptags(param_00,param_01)
 		var_02 = 0;
 	}
 
-	for(var_03 = 0;var_03 < var_02;var_03++)
-	{
+	for(var_03 = 0;var_03 < var_02;var_03++) {
 		var_04 = spawntag(param_00.origin,param_00.team);
 		var_04.team = param_00.team;
 		var_04.victim = param_00;
@@ -597,28 +486,19 @@ droptags(param_00,param_01)
 	param_00 playersettagcount(var_05);
 }
 
-//Function Number: 26
-dogtagallyonusecb(param_00)
-{
-	if(isplayer(param_00))
-	{
+dogtagallyonusecb(param_00) {
+	if(isplayer(param_00)) {
 		param_00 scripts\mp\_utility::setextrascore1(param_00.pers["denied"]);
 	}
 }
 
-//Function Number: 27
-removepoint()
-{
+removepoint() {
 	self endon("game_ended");
-	for(;;)
-	{
-		if(getdvar("scr_devRemoveDomFlag","") != "")
-		{
+	for(;;) {
+		if(getdvar("scr_devRemoveDomFlag","") != "") {
 			var_00 = getdvar("scr_devRemoveDomFlag","");
-			foreach(var_02 in level.var_13FC1)
-			{
-				if(isdefined(var_02.useobj.label) && var_02.useobj.label == var_00)
-				{
+			foreach(var_02 in level.var_13FC1) {
+				if(isdefined(var_02.useobj.label) && var_02.useobj.label == var_00) {
 					var_02.useobj notify("stop_trigger" + var_02.useobj.label);
 					var_02.useobj scripts\mp\_gameobjects::allowuse("none");
 					var_02.useobj.trigger = undefined;
@@ -629,20 +509,16 @@ removepoint()
 					var_02.useobj scripts\mp\_gameobjects::set2dicon("enemy",undefined);
 					var_02.useobj scripts\mp\_gameobjects::set3dicon("enemy",undefined);
 					var_03 = [];
-					for(var_04 = 0;var_04 < level.objectives.size;var_04++)
-					{
-						if(level.objectives[var_04].script_label != var_00)
-						{
+					for(var_04 = 0;var_04 < level.objectives.size;var_04++) {
+						if(level.objectives[var_04].script_label != var_00) {
 							var_03[var_03.size] = level.objectives[var_04];
 						}
 					}
 
 					level.objectives = var_03;
 					var_03 = [];
-					for(var_04 = 0;var_04 < level.var_13FC1.size;var_04++)
-					{
-						if(level.var_13FC1[var_04].useobj.label != var_00)
-						{
+					for(var_04 = 0;var_04 < level.var_13FC1.size;var_04++) {
+						if(level.var_13FC1[var_04].useobj.label != var_00) {
 							var_03[var_03.size] = level.var_13FC1[var_04];
 						}
 					}
@@ -659,21 +535,15 @@ removepoint()
 	}
 }
 
-//Function Number: 28
-placepoint()
-{
+placepoint() {
 	self endon("game_ended");
-	for(;;)
-	{
-		if(getdvar("scr_devPlaceDomFlag","") != "")
-		{
+	for(;;) {
+		if(getdvar("scr_devPlaceDomFlag","") != "") {
 			var_00 = getdvar("scr_devPlaceDomFlag","");
 			var_01 = undefined;
 			var_02 = getentarray("grind_location","targetname");
-			foreach(var_04 in var_02)
-			{
-				if("_" + var_04.script_label == var_00)
-				{
+			foreach(var_04 in var_02) {
+				if("_" + var_04.script_label == var_00) {
 					var_01 = var_04;
 				}
 			}
@@ -723,8 +593,7 @@ placepoint()
 			var_0F = -1 * var_0F;
 			var_0B.baseeffectforward = anglestoforward(var_0F);
 			var_0B scripts\mp\gametypes\obj_grindzone::setneutral();
-			for(var_10 = 0;var_10 < level.objectives.size;var_10++)
-			{
+			for(var_10 = 0;var_10 < level.objectives.size;var_10++) {
 				level.objectives[var_10].useobj = var_0B;
 				var_0B.levelflag = level.objectives[var_10];
 			}

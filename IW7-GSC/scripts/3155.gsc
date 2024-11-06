@@ -1,44 +1,29 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: 3155.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 18
- * Decompile Time: 10 ms
- * Timestamp: 10/27/2023 12:26:18 AM
-*******************************************************************/
+/****************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\3155.gsc
+****************************/
 
-//Function Number: 1
-func_B063(param_00,param_01,param_02,param_03)
-{
+func_B063(param_00,param_01,param_02,param_03) {
 	lib_0A1E::func_235F(param_00,param_01,param_02,self.moveplaybackrate);
 }
 
-//Function Number: 2
-func_B064(param_00,param_01,param_02,param_03)
-{
-}
+func_B064(param_00,param_01,param_02,param_03) {}
 
-//Function Number: 3
-func_F171(param_00,param_01,param_02,param_03)
-{
+func_F171(param_00,param_01,param_02,param_03) {
 	var_04 = getclosestpointonnavmesh(self.origin);
 	var_05 = distancesquared(var_04,self.origin);
-	if(var_05 > squared(15))
-	{
+	if(var_05 > squared(15)) {
 		return 1;
 	}
 
 	return 0;
 }
 
-//Function Number: 4
-func_11701(param_00,param_01)
-{
+func_11701(param_00,param_01) {
 	var_02 = level.asm[param_00].states[param_01];
 	var_03 = undefined;
-	if(isarray(var_02.var_116FB))
-	{
+	if(isarray(var_02.var_116FB)) {
 		var_03 = var_02.var_116FB[0];
 	}
 	else
@@ -51,11 +36,9 @@ func_11701(param_00,param_01)
 	self notify("killanimscript");
 }
 
-//Function Number: 5
-func_F16E(param_00,param_01,param_02,param_03)
-{
+func_F16E(param_00,param_01,param_02,param_03) {
 	var_04 = level.asm[param_00].states[param_01].var_71A5;
-	var_05 = self [[ var_04 ]](param_00,param_01,param_03);
+	var_05 = self [[var_04]](param_00,param_01,param_03);
 	var_06 = getanimlength(var_05);
 	self _meth_82E4("deathanim",var_05,lib_0A1E::asm_getbodyknob(),1,0.1);
 	wait(var_06);
@@ -63,11 +46,8 @@ func_F16E(param_00,param_01,param_02,param_03)
 	self notify("killanimscript");
 }
 
-//Function Number: 6
-func_F16C(param_00,param_01,param_02,param_03)
-{
-	if(isdefined(self.var_2029))
-	{
+func_F16C(param_00,param_01,param_02,param_03) {
+	if(isdefined(self.var_2029)) {
 		self.var_2029 delete();
 	}
 
@@ -75,8 +55,7 @@ func_F16C(param_00,param_01,param_02,param_03)
 	stopfxontag(level.var_7649["seeker_" + self.team],self,"tag_fx");
 	self _meth_8484();
 	self _meth_8481(self.origin);
-	if(isdefined(self.var_B14F))
-	{
+	if(isdefined(self.var_B14F)) {
 		self notify("stop_magic_bullet_shield");
 		self.var_B14F = undefined;
 		self.var_E0 = 0;
@@ -91,11 +70,8 @@ func_F16C(param_00,param_01,param_02,param_03)
 	self delete();
 }
 
-//Function Number: 7
-isfactorinuse(param_00,param_01,param_02,param_03)
-{
-	if(!isdefined(self.vehicle_getspawnerarray))
-	{
+isfactorinuse(param_00,param_01,param_02,param_03) {
+	if(!isdefined(self.vehicle_getspawnerarray)) {
 		return 0;
 	}
 
@@ -106,9 +82,7 @@ isfactorinuse(param_00,param_01,param_02,param_03)
 	return var_05 > var_06;
 }
 
-//Function Number: 8
-func_D55F(param_00,param_01,param_02,param_03)
-{
+func_D55F(param_00,param_01,param_02,param_03) {
 	self endon("death");
 	var_04 = self getspectatepoint();
 	var_05 = scripts\engine\utility::drop_to_ground(var_04.origin,5);
@@ -121,10 +95,8 @@ func_D55F(param_00,param_01,param_02,param_03)
 	var_0A = 1 / var_09 * var_08;
 	var_0B = 0;
 	var_0C = 0;
-	while(!var_0C)
-	{
-		if(var_0B > 1)
-		{
+	while(!var_0C) {
+		if(var_0B > 1) {
 			var_0B = 1;
 			var_0C = 1;
 		}
@@ -139,9 +111,7 @@ func_D55F(param_00,param_01,param_02,param_03)
 	func_11701(param_00,param_01);
 }
 
-//Function Number: 9
-func_CF22(param_00,param_01,param_02,param_03)
-{
+func_CF22(param_00,param_01,param_02,param_03) {
 	self endon(param_01 + "_finished");
 	var_04 = self getspectatepoint();
 	var_05 = var_04.var_5AE2;
@@ -149,21 +119,15 @@ func_CF22(param_00,param_01,param_02,param_03)
 	thread func_D561(param_00,param_01,param_02,[var_06[2]]);
 }
 
-//Function Number: 10
-func_CF20(param_00,param_01,param_02,param_03)
-{
+func_CF20(param_00,param_01,param_02,param_03) {
 	func_CF22(param_00,param_01,param_02,-8);
 }
 
-//Function Number: 11
-func_CF27(param_00,param_01,param_02,param_03)
-{
+func_CF27(param_00,param_01,param_02,param_03) {
 	func_CF22(param_00,param_01,param_02,-42);
 }
 
-//Function Number: 12
-func_CF23(param_00,param_01,param_02,param_03)
-{
+func_CF23(param_00,param_01,param_02,param_03) {
 	self endon("death");
 	var_04 = self.origin;
 	var_05 = getclosestpointonnavmesh(var_04,self);
@@ -173,9 +137,7 @@ func_CF23(param_00,param_01,param_02,param_03)
 	scripts/asm/asm::asm_fireevent(param_01,"end");
 }
 
-//Function Number: 13
-func_CF25(param_00,param_01,param_02,param_03)
-{
+func_CF25(param_00,param_01,param_02,param_03) {
 	self endon(param_01 + "_finished");
 	var_04 = self getspectatepoint();
 	var_05 = self _meth_8146();
@@ -184,25 +146,19 @@ func_CF25(param_00,param_01,param_02,param_03)
 	func_D561(param_00,param_01,param_02,[var_06[2]]);
 }
 
-//Function Number: 14
-func_3EA3(param_00,param_01,param_02)
-{
+func_3EA3(param_00,param_01,param_02) {
 	return scripts/asm/asm::asm_lookupanimfromalias("traverse_external",param_02);
 }
 
-//Function Number: 15
-func_D561(param_00,param_01,param_02,param_03)
-{
+func_D561(param_00,param_01,param_02,param_03) {
 	self endon("death");
 	var_04 = self getspectatepoint();
 	var_05 = scripts\engine\utility::drop_to_ground(var_04.origin,5);
 	var_06 = self _meth_8146();
 	var_06 = scripts\engine\utility::drop_to_ground(var_06,5);
 	var_07 = 0;
-	if(isdefined(param_03))
-	{
-		if(isarray(param_03))
-		{
+	if(isdefined(param_03)) {
+		if(isarray(param_03)) {
 			var_07 = param_03[0];
 		}
 		else
@@ -210,8 +166,7 @@ func_D561(param_00,param_01,param_02,param_03)
 			var_07 = param_03;
 		}
 	}
-	else if(isdefined(var_04.var_126D4))
-	{
+	else if(isdefined(var_04.var_126D4)) {
 		var_07 = var_04.var_126D5;
 	}
 
@@ -219,9 +174,7 @@ func_D561(param_00,param_01,param_02,param_03)
 	func_11701(param_00,param_01);
 }
 
-//Function Number: 16
-func_A4E8(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07)
-{
+func_A4E8(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07) {
 	self animmode("noclip");
 	self.var_36A = 1;
 	var_08 = 16;
@@ -233,13 +186,11 @@ func_A4E8(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_0
 	var_0E = var_0D[2];
 	var_0F = var_0C + var_0A[2] - var_0E;
 	var_10 = var_0D + (0,0,1) * var_0F;
-	if(param_07)
-	{
+	if(param_07) {
 		var_11 = scripts\common\trace::create_solid_ai_contents(1);
 		var_12 = scripts\common\trace::ray_trace(var_10,var_0A,self,var_11);
 		var_13 = scripts\common\trace::ray_trace(var_10,var_0B,self,var_11);
-		if(var_12["fraction"] < 0.95 || var_13["fraction"] < 0.95)
-		{
+		if(var_12["fraction"] < 0.95 || var_13["fraction"] < 0.95) {
 			return;
 		}
 	}
@@ -264,10 +215,8 @@ func_A4E8(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_0
 	var_1A = 0;
 	var_1B = 0;
 	var_1C = 0;
-	while(!var_1B)
-	{
-		if(var_1A > 1)
-		{
+	while(!var_1B) {
+		if(var_1A > 1) {
 			var_1A = 1;
 			var_1B = 1;
 		}
@@ -275,8 +224,7 @@ func_A4E8(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_0
 		var_1D = scripts/sp/math::func_7BC5(var_0A,var_0B,var_0F,var_1A);
 		var_1A = var_1A + var_18;
 		self _meth_80F1(var_1D,self.angles,10000);
-		if(var_1A > 0.7 && !var_1C)
-		{
+		if(var_1A > 0.7 && !var_1C) {
 			var_19 = func_3EA3(param_00,param_01,"fallloop");
 			self aiclearanim(lib_0A1E::asm_getbodyknob(),param_02);
 			self _meth_82EA(param_01,var_19,1,param_02,1);
@@ -298,20 +246,14 @@ func_A4E8(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_0
 	self.var_36A = 0;
 }
 
-//Function Number: 17
-func_F154(param_00)
-{
-	if(!isdefined(param_00))
-	{
+func_F154(param_00) {
+	if(!isdefined(param_00)) {
 		return;
 	}
 
-	if(isdefined(level.optionalstepeffects) && isdefined(level.optionalstepeffects[param_00]))
-	{
-		if(!isdefined(level._effect["step_" + param_00][self.unittype]))
-		{
-			if(!isdefined(level._effect["step_" + param_00]["soldier"]))
-			{
+	if(isdefined(level.optionalstepeffects) && isdefined(level.optionalstepeffects[param_00])) {
+		if(!isdefined(level._effect["step_" + param_00][self.unittype])) {
+			if(!isdefined(level._effect["step_" + param_00]["soldier"])) {
 				return;
 			}
 
@@ -322,16 +264,12 @@ func_F154(param_00)
 	}
 }
 
-//Function Number: 18
-func_9FBC(param_00,param_01,param_02,param_03)
-{
-	if(!isdefined(self.melee.target))
-	{
+func_9FBC(param_00,param_01,param_02,param_03) {
+	if(!isdefined(self.melee.target)) {
 		return 0;
 	}
 
-	if(param_03 == "player")
-	{
+	if(param_03 == "player") {
 		return isplayer(self.melee.target);
 	}
 

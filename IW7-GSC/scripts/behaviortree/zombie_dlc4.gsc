@@ -1,24 +1,15 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: behaviortree\zombie_dlc4.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 3
- * Decompile Time: 145 ms
- * Timestamp: 10\26\2023 11:58:25 PM
-*******************************************************************/
+/************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\behaviortree\zombie_dlc4.gsc
+************************************************/
 
-//Function Number: 1
-zombie_dlc4fn0(param_00)
-{
+zombie_dlc4fn0(param_00) {
 	return lib_0A09::func_5AEA(param_00,200);
 }
 
-//Function Number: 2
-func_2AD0()
-{
-	if(isdefined(level.var_119E["zombie_dlc4"]))
-	{
+func_2AD0() {
+	if(isdefined(level.var_119E["zombie_dlc4"])) {
 		return;
 	}
 
@@ -41,9 +32,7 @@ func_2AD0()
 	level.var_119E["zombie_dlc4"] = var_00;
 }
 
-//Function Number: 3
-func_DEE8()
-{
+func_DEE8() {
 	func_2AD0();
 	function_02D8("zombie_dlc4");
 }

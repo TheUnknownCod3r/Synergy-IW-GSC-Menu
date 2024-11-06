@@ -1,15 +1,9 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\cp\agents\none.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 1
- * Decompile Time: 100 ms
- * Timestamp: 10/27/2023 12:03:29 AM
-*******************************************************************/
+/*******************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\cp\agents\gametype_none.gsc
+*******************************************************/
 
-//Function Number: 1
-main()
-{
+main() {
 	scripts\cp\cp_globallogic::init();
 }

@@ -1,18 +1,11 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\engine\_flags.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 2
- * Decompile Time: 143 ms
- * Timestamp: 10/27/2023 12:10:48 AM
-*******************************************************************/
+/********************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\common\flags.gsc
+********************************************/
 
-//Function Number: 1
-init_flags()
-{
-	if(!scripts\engine\utility::add_init_script("init_flags",::init_flags))
-	{
+init_flags() {
+	if(!scripts\engine\utility::add_init_script("init_flags",::init_flags)) {
 		return;
 	}
 
@@ -24,9 +17,7 @@ init_flags()
 	level.flag_struct assign_unique_id();
 }
 
-//Function Number: 2
-assign_unique_id()
-{
+assign_unique_id() {
 	self.unique_id = "generic" + level.generic_index;
 	level.var_7763++;
 }

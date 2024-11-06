@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\mp\killstreaks\aastrike.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 10
- * Decompile Time: 507 ms
- * Timestamp: 10/27/2023 12:27:55 AM
-*******************************************************************/
+/*******************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\mp\killstreaks\aastrike.gsc
+*******************************************************/
 
-//Function Number: 1
-init()
-{
+init() {
 	precacheitem("aamissile_projectile_mp");
 	precachemodel("vehicle_av8b_harrier_jet_mp");
 	level.teamairdenied["axis"] = 0;
@@ -19,76 +13,59 @@ init()
 	scripts\mp\killstreaks\_killstreaks::registerkillstreak("aastrike",::tryuseaastrike);
 }
 
-//Function Number: 2
-tryuseaastrike(param_00,param_01)
-{
+tryuseaastrike(param_00,param_01) {
 	scripts\mp\_matchdata::logkillstreakevent("aastrike",self.origin);
 	thread finishaastrike(param_00);
 	thread scripts\mp\_utility::teamplayercardsplash("used_aastrike",self,self.team);
 	return 1;
 }
 
-//Function Number: 3
-cycletargets()
-{
+cycletargets() {
 	self endon("stopFindingTargets");
 	self endon("disconnect");
 	self endon("owner_gone");
 	self endon("game_ended");
-	for(;;)
-	{
+	for(;;) {
 		wait(0.05);
 		findtargets();
 		wait(randomintrange(4,5));
 	}
 }
 
-//Function Number: 4
-findtargets()
-{
+findtargets() {
 	self endon("disconnect");
 	self endon("owner_gone");
 	self endon("game_ended");
 	var_00 = [];
 	var_01 = [];
 	var_02 = [];
-	if(isdefined(level.littlebirds) && level.littlebirds.size)
-	{
-		foreach(var_04 in level.littlebirds)
-		{
-			if(isdefined(var_04.team) && var_04.team != self.team)
-			{
+	if(isdefined(level.littlebirds) && level.littlebirds.size) {
+		foreach(var_04 in level.littlebirds) {
+			if(isdefined(var_04.team) && var_04.team != self.team) {
 				var_00[var_00.size] = var_04;
 			}
 		}
 	}
 
-	if(isdefined(level.helis) && level.helis.size)
-	{
-		foreach(var_07 in level.helis)
-		{
-			if(var_07.team != self.team)
-			{
+	if(isdefined(level.helis) && level.helis.size) {
+		foreach(var_07 in level.helis) {
+			if(var_07.team != self.team) {
 				var_01[var_01.size] = var_07;
 			}
 		}
 	}
 
 	var_09 = scripts\mp\_utility::getotherteam(self.team);
-	if(isdefined(level.activeuavs[var_09]))
-	{
-		foreach(var_0B in level.uavmodels[var_09])
-		{
+	if(isdefined(level.activeuavs[var_09])) {
+		foreach(var_0B in level.uavmodels[var_09]) {
 			var_02[var_02.size] = var_0B;
 		}
 	}
 
 	var_0D = 0;
-	foreach(var_04 in var_00)
-	{
+	foreach(var_04 in var_00) {
 		wait(3);
-		if(var_0D % 2)
-		{
+		if(var_0D % 2) {
 			thread fireattarget(var_04,self.team,1);
 		}
 		else
@@ -99,26 +76,21 @@ findtargets()
 		var_0D++;
 	}
 
-	foreach(var_07 in var_01)
-	{
+	foreach(var_07 in var_01) {
 		wait(3);
 		thread fireattarget(var_07,self.team,1);
 	}
 
-	foreach(var_0B in var_02)
-	{
+	foreach(var_0B in var_02) {
 		wait(0.5);
 		thread fireattarget(var_0B,self.team,0);
 	}
 }
 
-//Function Number: 5
-earlyabortwatcher()
-{
+earlyabortwatcher() {
 	self endon("stopFindingTargets");
 	var_00 = self.team;
-	if(scripts\mp\_utility::bot_is_fireteam_mode())
-	{
+	if(scripts\mp\_utility::bot_is_fireteam_mode()) {
 		self waittill("killstreak_disowned");
 	}
 	else
@@ -131,9 +103,7 @@ earlyabortwatcher()
 	level.airdeniedplayer = undefined;
 }
 
-//Function Number: 6
-finishaastrike(param_00)
-{
+finishaastrike(param_00) {
 	self endon("disconnect");
 	self endon("owner_gone");
 	self endon("game_ended");
@@ -141,11 +111,9 @@ finishaastrike(param_00)
 	level.airdeniedplayer = self;
 	thread earlyabortwatcher();
 	thread cycletargets();
-	for(var_01 = 0;var_01 < 4;var_01++)
-	{
+	for(var_01 = 0;var_01 < 4;var_01++) {
 		wait(6);
-		if(var_01 == 1 || var_01 == 3)
-		{
+		if(var_01 == 1 || var_01 == 3) {
 			thread doflyby(1);
 			continue;
 		}
@@ -159,11 +127,8 @@ finishaastrike(param_00)
 	level.airdeniedplayer = undefined;
 }
 
-//Function Number: 7
-fireattarget(param_00,param_01,param_02)
-{
-	if(!isdefined(param_00))
-	{
+fireattarget(param_00,param_01,param_02) {
+	if(!isdefined(param_00)) {
 		return;
 	}
 
@@ -183,8 +148,7 @@ fireattarget(param_00,param_01,param_02)
 	var_0D = scripts\mp\_utility::_magicbullet("aamissile_projectile_mp",var_0A + (randomint(500),randomint(500),-75),param_00.origin,self);
 	var_0D missile_settargetent(param_00);
 	var_0D missile_setflightmodedirect();
-	if(param_02)
-	{
+	if(param_02) {
 		var_0E = spawnplane(self,"script_model",var_0A,"compass_objpoint_airstrike_friendly","compass_objpoint_airstrike_friendly");
 	}
 	else
@@ -192,8 +156,7 @@ fireattarget(param_00,param_01,param_02)
 		var_0E = spawnplane(self,"script_model",var_0B);
 	}
 
-	if(self.team == "allies")
-	{
+	if(self.team == "allies") {
 		var_0E setmodel("vehicle_av8b_harrier_jet_mp");
 	}
 	else
@@ -211,18 +174,14 @@ fireattarget(param_00,param_01,param_02)
 	var_0E delete();
 }
 
-//Function Number: 8
-aasoundmanager(param_00)
-{
+aasoundmanager(param_00) {
 	self playloopsound("veh_aastrike_flyover_loop");
 	wait(param_00 / 2 / 2000);
 	self stoploopsound();
 	self playloopsound("veh_aastrike_flyover_outgoing_loop");
 }
 
-//Function Number: 9
-doflyby(param_00)
-{
+doflyby(param_00) {
 	self endon("disconnect");
 	var_01 = randomint(level.spawnpoints.size - 1);
 	var_02 = level.spawnpoints[var_01].origin * (1,1,0);
@@ -235,8 +194,7 @@ doflyby(param_00)
 	var_09 = var_02 + var_06 + var_07 * var_04;
 	var_0A = var_08 + (randomintrange(400,500),randomintrange(400,500),randomintrange(200,300));
 	var_0B = var_09 + (randomintrange(400,500),randomintrange(400,500),randomintrange(200,300));
-	if(param_00)
-	{
+	if(param_00) {
 		var_0C = spawnplane(self,"script_model",var_08,"hud_minimap_harrier_green","hud_minimap_harrier_red");
 	}
 	else
@@ -245,8 +203,7 @@ doflyby(param_00)
 	}
 
 	var_0D = spawnplane(self,"script_model",var_0A);
-	if(self.team == "allies")
-	{
+	if(self.team == "allies") {
 		var_0C setmodel("vehicle_av8b_harrier_jet_mp");
 		var_0D setmodel("vehicle_av8b_harrier_jet_mp");
 	}
@@ -270,9 +227,7 @@ doflyby(param_00)
 	var_0D delete();
 }
 
-//Function Number: 10
-playplanefx()
-{
+playplanefx() {
 	self endon("death");
 	wait(0.5);
 	playfxontag(level.fx_airstrike_afterburner,self,"tag_engine_right");

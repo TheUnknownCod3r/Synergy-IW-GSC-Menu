@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: 3918.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 1
- * Decompile Time: 11 ms
- * Timestamp: 10/27/2023 12:31:15 AM
-*******************************************************************/
+/****************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\3918.gsc
+****************************/
 
-//Function Number: 1
-main()
-{
+main() {
 	level._effect["vfx_rave_cp_stm"] = loadfx("vfx/iw7/levels/cp_rave/trap/woodchipper/vfx_rave_cp_stm.vfx");
 	level._effect["vfx_ss_blast_safe_b"] = loadfx("vfx/iw7/levels/cp_rave/superslasher/vfx_ss_blast_safe_b.vfx");
 	level._effect["vfx_ss_blast_safe"] = loadfx("vfx/iw7/levels/cp_rave/superslasher/vfx_ss_blast_safe.vfx");

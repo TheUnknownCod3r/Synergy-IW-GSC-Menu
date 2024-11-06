@@ -1,18 +1,11 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: 3161.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 1
- * Decompile Time: 2 ms
- * Timestamp: 10/27/2023 12:26:21 AM
-*******************************************************************/
+/****************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\3161.gsc
+****************************/
 
-//Function Number: 1
-func_2371()
-{
-	if(scripts/asm/asm::func_232E("shoot_c12_left"))
-	{
+func_2371() {
+	if(scripts/asm/asm::func_232E("shoot_c12_left")) {
 		return;
 	}
 

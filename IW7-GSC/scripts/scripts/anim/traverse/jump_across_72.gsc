@@ -1,18 +1,11 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\anim\traverse\jump_across_72.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 1
- * Decompile Time: 73 ms
- * Timestamp: 10\26\2023 11:59:28 PM
-*******************************************************************/
+/************************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\anim\traverse\jump_across_72.gsc
+************************************************************/
 
-//Function Number: 1
-main()
-{
-	if(self.type == "dog")
-	{
+main() {
+	if(self.type == "dog") {
 		scripts\anim\traverse\shared::func_5869("wallhop",20);
 		return;
 	}

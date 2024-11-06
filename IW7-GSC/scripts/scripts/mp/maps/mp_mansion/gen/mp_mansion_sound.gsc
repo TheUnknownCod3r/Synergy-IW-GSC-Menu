@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\mp\maps\mp_mansion\gen\mp_mansion_sound.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 1
- * Decompile Time: 118 ms
- * Timestamp: 10/27/2023 12:13:44 AM
-*******************************************************************/
+/***********************************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\mp\maps\mp_mansion\gen\mp_mansion_sound.gsc
+***********************************************************************/
 
-//Function Number: 1
-main()
-{
+main() {
 	var_00 = scripts\common\createfx::func_49E7();
 	var_00 scripts\common\createfx::func_F4AD((1242.92,-1842.47,-14.2511),(270,0,0));
 	var_00.var_13125["soundalias"] = "emt_cicadas_lp_01";

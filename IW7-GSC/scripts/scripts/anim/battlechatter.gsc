@@ -1,24 +1,16 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\anim\battlechatter.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 173
- * Decompile Time: 8542 ms
- * Timestamp: 10\27\2023 12:00:03 AM
-*******************************************************************/
+/**************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\anim\battlechatter.gsc
+**************************************************/
 
-//Function Number: 1
-func_9542()
-{
-	if(isdefined(level.var_3D4B) && level.var_3D4B)
-	{
+func_9542() {
+	if(isdefined(level.var_3D4B) && level.var_3D4B) {
 		return;
 	}
 
 	setdvarifuninitialized("bcs_enable",1);
-	if(getdvarint("bcs_enable") == 0)
-	{
+	if(getdvarint("bcs_enable") == 0) {
 		anim.var_3D4B = 0;
 		level.player.var_3D4B = 0;
 		return;
@@ -27,8 +19,7 @@ func_9542()
 	anim.var_29B7 = 0;
 	anim.var_3D4B = 1;
 	level.player.var_3D4B = 0;
-	if(!isdefined(level.var_7410))
-	{
+	if(!isdefined(level.var_7410)) {
 		level.var_7410 = 1;
 	}
 
@@ -61,13 +52,11 @@ func_9542()
 	level.var_68BB["inform"] = [];
 	level.var_68BB["custom"] = [];
 	level.var_68BB["direction"] = [];
-	if(isdefined(level._stealth))
-	{
+	if(isdefined(level._stealth)) {
 		level.var_68AD["threat"]["self"] = 20000;
 		level.var_68AD["threat"]["squad"] = 30000;
 	}
-	else if(scripts\sp\_utility::func_D123())
-	{
+	else if(scripts\sp\_utility::func_D123()) {
 		level.var_68AD["threat"]["self"] = 11000;
 		level.var_68AD["threat"]["squad"] = 7000;
 	}
@@ -172,8 +161,7 @@ func_9542()
 	level.var_68AE["response"]["order"] = 40;
 	level.var_68AE["moveEvent"]["coverme"] = 70;
 	level.var_68AE["moveEvent"]["ordertoplayer"] = 10;
-	if(scripts\sp\_utility::func_D123())
-	{
+	if(scripts\sp\_utility::func_D123()) {
 		anim.var_6BB2 = 9999999;
 		anim.var_6BB8 = 2;
 		anim.var_6BB7 = 5;
@@ -190,10 +178,8 @@ func_9542()
 	}
 
 	anim.var_BCD1 = spawn("script_origin",(0,0,0));
-	if(!isdefined(level.var_29BD))
-	{
-		if(scripts\sp\_utility::func_D123())
-		{
+	if(!isdefined(level.var_29BD)) {
+		if(scripts\sp\_utility::func_D123()) {
 			level.var_29BD = squared(9999999);
 		}
 		else
@@ -202,10 +188,8 @@ func_9542()
 		}
 	}
 
-	if(!isdefined(level.var_29BE))
-	{
-		if(scripts\sp\_utility::func_D123())
-		{
+	if(!isdefined(level.var_29BE)) {
+		if(scripts\sp\_utility::func_D123()) {
 			level.var_29BE = squared(9999999);
 		}
 		else
@@ -223,8 +207,7 @@ func_9542()
 	anim.var_29C6 = 3000;
 	level.var_10AE0[level.var_10AE0.size] = ::func_9762;
 	level.var_10AE1[level.var_10AE1.size] = "::init_squadBattleChatter";
-	foreach(var_01 in level.var_115E7)
-	{
+	foreach(var_01 in level.var_115E7) {
 		level.isteamspeaking[var_01] = 0;
 		level.isteamsaying[var_01]["threat"] = 0;
 		level.isteamsaying[var_01]["order"] = 0;
@@ -239,18 +222,15 @@ func_9542()
 	anim.var_AA27 = [];
 	anim.var_A9C3 = [];
 	anim.var_A9C4 = [];
-	foreach(var_01 in level.var_115E7)
-	{
+	foreach(var_01 in level.var_115E7) {
 		level.var_AA27[var_01] = --15536;
 		level.var_A9C3[var_01] = "none";
 		level.var_A9C4[var_01] = -100000;
 	}
 
 	anim.var_A9C5 = 120000;
-	for(var_05 = 0;var_05 < level.var_10AE5.size;var_05++)
-	{
-		if(isdefined(level.var_10AE5[var_05].var_3D4B) && level.var_10AE5[var_05].var_3D4B)
-		{
+	for(var_05 = 0;var_05 < level.var_10AE5.size;var_05++) {
+		if(isdefined(level.var_10AE5[var_05].var_3D4B) && level.var_10AE5[var_05].var_3D4B) {
 			continue;
 		}
 
@@ -280,14 +260,12 @@ func_9542()
 	level.var_117E0["generic_location"] = 95;
 	anim.var_AA28 = [];
 	anim.var_AA29 = [];
-	foreach(var_01 in level.var_115E7)
-	{
+	foreach(var_01 in level.var_115E7) {
 		level.var_AA28[var_01] = undefined;
 		level.var_AA29[var_01] = undefined;
 	}
 
-	if(scripts\sp\_utility::func_D123())
-	{
+	if(scripts\sp\_utility::func_D123()) {
 		anim.var_115EE = 300000;
 	}
 	else
@@ -299,11 +277,8 @@ func_9542()
 	anim notify("battlechatter initialized");
 }
 
-//Function Number: 2
-func_29C4()
-{
-	if(!isdefined(level.var_115E7))
-	{
+func_29C4() {
+	if(!isdefined(level.var_115E7)) {
 		anim.var_115E7 = [];
 		level.var_115E7[level.var_115E7.size] = "axis";
 		level.var_115E7[level.var_115E7.size] = "allies";
@@ -312,11 +287,8 @@ func_29C4()
 	}
 }
 
-//Function Number: 3
-func_29C2()
-{
-	if(!isdefined(level.var_13075))
-	{
+func_29C2() {
+	if(!isdefined(level.var_13075)) {
 		anim.var_13075 = [];
 		anim.var_6EED = [];
 		anim.var_46BD = [];
@@ -329,17 +301,13 @@ func_29C2()
 	}
 }
 
-//Function Number: 4
-func_29C5(param_00,param_01,param_02,param_03)
-{
-	if(!isdefined(param_03))
-	{
+func_29C5(param_00,param_01,param_02,param_03) {
+	if(!isdefined(param_03)) {
 		param_03 = 0;
 	}
 
 	level.var_13075[param_00] = [];
-	for(var_04 = 0;var_04 < param_02;var_04++)
-	{
+	for(var_04 = 0;var_04 < param_02;var_04++) {
 		level.var_13075[param_00][var_04] = spawnstruct();
 		level.var_13075[param_00][var_04].var_C1 = 0;
 		level.var_13075[param_00][var_04].npcid = "" + var_04;
@@ -349,71 +317,55 @@ func_29C5(param_00,param_01,param_02,param_03)
 	level.var_6EED[param_00] = param_03;
 }
 
-//Function Number: 5
-func_29C1()
-{
+func_29C1() {
 	func_29C4();
-	if(!isdefined(level.var_28CF))
-	{
+	if(!isdefined(level.var_28CF)) {
 		level.var_28CF = [];
-		foreach(var_01 in level.var_115E7)
-		{
+		foreach(var_01 in level.var_115E7) {
 			scripts\sp\_utility::func_F2DC(var_01,0);
 		}
 	}
 }
 
-//Function Number: 6
-func_29C3()
-{
+func_29C3() {
 	func_29C4();
-	if(!isdefined(level.var_6EE9))
-	{
+	if(!isdefined(level.var_6EE9)) {
 		level.var_6EE9 = [];
-		foreach(var_01 in level.var_115E7)
-		{
+		foreach(var_01 in level.var_115E7) {
 			level.var_6EE9[var_01] = 0;
 		}
 	}
 }
 
-//Function Number: 7
-func_95E5()
-{
+func_95E5() {
 	level.var_6EE9["unitednations"] = [];
 	var_00 = 41;
-	for(var_01 = 0;var_01 < var_00;var_01++)
-	{
+	for(var_01 = 0;var_01 < var_00;var_01++) {
 		level.var_6EE9["unitednations"][var_01] = scripts\sp\_utility::string(var_01 + 1);
 	}
 
 	level.var_6EE9["unitednationshelmet"] = [];
 	var_00 = 41;
-	for(var_01 = 0;var_01 < var_00;var_01++)
-	{
+	for(var_01 = 0;var_01 < var_00;var_01++) {
 		level.var_6EE9["unitednationshelmet"][var_01] = scripts\sp\_utility::string(var_01 + 1);
 	}
 
 	level.var_6EE9["unitednationsfemale"] = [];
 	var_00 = 41;
-	for(var_01 = 0;var_01 < var_00;var_01++)
-	{
+	for(var_01 = 0;var_01 < var_00;var_01++) {
 		level.var_6EE9["unitednationsfemale"][var_01] = scripts\sp\_utility::string(var_01 + 1);
 	}
 
 	level.var_6EE9["unitednationsjackal"] = [];
 	var_00 = 13;
-	for(var_01 = 0;var_01 < var_00;var_01++)
-	{
+	for(var_01 = 0;var_01 < var_00;var_01++) {
 		level.var_6EE9["unitednationsjackal"][var_01] = scripts\sp\_utility::string(var_01 + 1);
 	}
 
 	anim.var_6EEC = [];
 }
 
-//Function Number: 8
-func_10179()
-{
+func_10179() {
 	anim.var_46BD = undefined;
 	anim.var_68BB = undefined;
 	anim.var_68AD = undefined;
@@ -435,15 +387,12 @@ func_10179()
 	level.player.var_3D4B = 0;
 	level.var_28CF = undefined;
 	anim.bcs_locations = undefined;
-	for(var_00 = 0;var_00 < level.var_10AE0.size;var_00++)
-	{
-		if(level.var_10AE1[var_00] != "::init_squadBattleChatter")
-		{
+	for(var_00 = 0;var_00 < level.var_10AE0.size;var_00++) {
+		if(level.var_10AE1[var_00] != "::init_squadBattleChatter") {
 			continue;
 		}
 
-		if(var_00 != level.var_10AE0.size - 1)
-		{
+		if(var_00 != level.var_10AE0.size - 1) {
 			level.var_10AE0[var_00] = level.var_10AE0[level.var_10AE0.size - 1];
 			level.var_10AE1[var_00] = level.var_10AE1[level.var_10AE1.size - 1];
 		}
@@ -456,9 +405,7 @@ func_10179()
 	anim notify("battlechatter disabled");
 }
 
-//Function Number: 9
-func_9762()
-{
+func_9762() {
 	var_00 = self;
 	var_00.var_C242 = 0;
 	var_00.var_B4C8 = 1;
@@ -487,8 +434,7 @@ func_9762()
 	var_00.var_10AFD[var_00.var_10AFD.size] = ::func_97EE;
 	var_00.var_6BB3 = 1;
 	var_00.var_6BB4 = undefined;
-	for(var_01 = 0;var_01 < level.var_10AE5.size;var_01++)
-	{
+	for(var_01 = 0;var_01 < level.var_10AE5.size;var_01++) {
 		var_00 thread func_97EE(level.var_10AE5[var_01].var_10AEE);
 	}
 
@@ -499,9 +445,7 @@ func_9762()
 	var_00 notify("squad chat initialized");
 }
 
-//Function Number: 10
-func_10182()
-{
+func_10182() {
 	var_00 = self;
 	var_00.var_C242 = undefined;
 	var_00.var_B4C8 = undefined;
@@ -511,61 +455,47 @@ func_10182()
 	var_00.var_9E9B = undefined;
 	var_00.var_6BB3 = undefined;
 	var_00.var_6BB4 = undefined;
-	for(var_01 = 0;var_01 < var_00.var_B659.size;var_01++)
-	{
+	for(var_01 = 0;var_01 < var_00.var_B659.size;var_01++) {
 		var_00.var_B659[var_01] = undefined;
 	}
 
-	for(var_01 = 0;var_01 < var_00.var_B65F.size;var_01++)
-	{
+	for(var_01 = 0;var_01 < var_00.var_B65F.size;var_01++) {
 		var_00.var_B660[var_01] = undefined;
 	}
 
-	for(var_01 = 0;var_01 < var_00.var_10AFD.size;var_01++)
-	{
+	for(var_01 = 0;var_01 < var_00.var_10AFD.size;var_01++) {
 		var_00.var_10AFD[var_01] = undefined;
 	}
 
-	for(var_01 = 0;var_01 < level.var_10AE5.size;var_01++)
-	{
+	for(var_01 = 0;var_01 < level.var_10AE5.size;var_01++) {
 		var_00 func_10183(level.var_10AE5[var_01].var_10AEE);
 	}
 
 	var_00.var_3D4B = 0;
 }
 
-//Function Number: 11
-func_29CA()
-{
-	if(isdefined(level.var_3D4B))
-	{
+func_29CA() {
+	if(isdefined(level.var_3D4B)) {
 		return level.var_3D4B;
 	}
 
 	return 0;
 }
 
-//Function Number: 12
-func_29C9()
-{
+func_29C9() {
 	var_00 = getdvarint("bcs_enable");
-	for(;;)
-	{
+	for(;;) {
 		var_01 = getdvarint("bcs_enable");
-		if(var_01 != var_00)
-		{
-			switch(var_01)
-			{
+		if(var_01 != var_00) {
+			switch(var_01) {
 				case 1:
-					if(!level.var_3D4B)
-					{
+					if(!level.var_3D4B) {
 						enablebattlechatter();
 					}
 					break;
 	
 				case 0:
-					if(level.var_3D4B)
-					{
+					if(level.var_3D4B) {
 						disablebattlechatter();
 					}
 					break;
@@ -578,32 +508,24 @@ func_29C9()
 	}
 }
 
-//Function Number: 13
-enablebattlechatter()
-{
+enablebattlechatter() {
 	func_9542();
 	level.player thread scripts\anim\battlechatter_ai::func_185D();
 	var_00 = function_0072();
-	for(var_01 = 0;var_01 < var_00.size;var_01++)
-	{
+	for(var_01 = 0;var_01 < var_00.size;var_01++) {
 		var_00[var_01] scripts\anim\battlechatter_ai::func_185D();
 	}
 }
 
-//Function Number: 14
-disablebattlechatter()
-{
-	if(!isdefined(level.var_3D4B))
-	{
+disablebattlechatter() {
+	if(!isdefined(level.var_3D4B)) {
 		return;
 	}
 
 	func_10179();
 	var_00 = function_0072();
-	for(var_01 = 0;var_01 < var_00.size;var_01++)
-	{
-		if(isdefined(var_00[var_01].var_10AC8) && var_00[var_01].var_10AC8.var_3D4B)
-		{
+	for(var_01 = 0;var_01 < var_00.size;var_01++) {
+		if(isdefined(var_00[var_01].var_10AC8) && var_00[var_01].var_10AC8.var_3D4B) {
 			var_00[var_01].var_10AC8 func_10182();
 		}
 
@@ -611,136 +533,106 @@ disablebattlechatter()
 	}
 }
 
-//Function Number: 15
-func_F7ED(param_00,param_01)
-{
-	if(isdefined(param_00) && isdefined(param_01))
-	{
+func_F7ED(param_00,param_01) {
+	if(isdefined(param_00) && isdefined(param_01)) {
 		level.player.var_29AE = param_00;
 		level.player.var_29A3 = param_01;
 		return;
 	}
 
-	while(!isdefined(level.var_37E7))
-	{
+	while(!isdefined(level.var_37E7)) {
 		wait(0.1);
 	}
 
 	var_02 = level.var_37E7;
 	var_03 = level.var_D3DD[var_02];
 	var_04 = level.var_46BD[var_02];
-	if(isdefined(var_03))
-	{
+	if(isdefined(var_03)) {
 		level.player.var_29AE = var_03;
 	}
 
-	if(isdefined(var_04))
-	{
+	if(isdefined(var_04)) {
 		level.player.var_29A3 = var_04;
 	}
 }
 
-//Function Number: 16
-func_CEE8(param_00)
-{
-	if(!isalive(self))
-	{
+func_CEE8(param_00) {
+	if(!isalive(self)) {
 		return;
 	}
 
-	if(!isdefined(self.team))
-	{
+	if(!isdefined(self.team)) {
 		return;
 	}
 
-	if(!func_29CA())
-	{
+	if(!func_29CA()) {
 		return;
 	}
 
-	if(isdefined(self.var_117C) && self.var_117C > 0)
-	{
+	if(isdefined(self.var_117C) && self.var_117C > 0) {
 		return;
 	}
 
-	if(isdefined(self.var_9F6B) && self.var_9F6B)
-	{
+	if(isdefined(self.var_9F6B) && self.var_9F6B) {
 		return;
 	}
 
-	if(!isdefined(self.team) || isdefined(self.team) && self.team == "allies" && isdefined(level.var_EF75))
-	{
-		if(level.var_EF75 + level.var_EF74 > gettime())
-		{
+	if(!isdefined(self.team) || isdefined(self.team) && self.team == "allies" && isdefined(level.var_EF75)) {
+		if(level.var_EF75 + level.var_EF74 > gettime()) {
 			return;
 		}
 	}
 
-	if(func_740F())
-	{
+	if(func_740F()) {
 		return;
 	}
 
-	if(!isdefined(self.var_28CF) || !self.var_28CF)
-	{
+	if(!isdefined(self.var_28CF) || !self.var_28CF) {
 		return;
 	}
 
-	if(!isdefined(self.team) || isdefined(self.team) && self.team == "allies" && getdvarint("bcs_forceEnglish",0))
-	{
+	if(!isdefined(self.team) || isdefined(self.team) && self.team == "allies" && getdvarint("bcs_forceEnglish",0)) {
 		return;
 	}
 
-	if(level.isteamspeaking[self.team])
-	{
+	if(level.isteamspeaking[self.team]) {
 		return;
 	}
 
 	self endon("death");
-	if(!isdefined(param_00))
-	{
+	if(!isdefined(param_00)) {
 		param_00 = func_7EFE();
 	}
 
-	if(isdefined(self.var_299A))
-	{
+	if(isdefined(self.var_299A)) {
 		param_00 = self.var_299A;
 	}
 
-	if(!isdefined(param_00))
-	{
+	if(!isdefined(param_00)) {
 		return;
 	}
 
-	if(isdefined(self.melee))
-	{
-		if(isdefined(self.var_B55B.var_9904))
-		{
-			if(self.var_B55B.var_9904)
-			{
+	if(isdefined(self.melee)) {
+		if(isdefined(self.var_B55B.var_9904)) {
+			if(self.var_B55B.var_9904) {
 				return;
 			}
 		}
 	}
 
-	if(self == level.player)
-	{
-		if(!isdefined(level.player.var_28CF) || isdefined(level.player.var_28CF) && !level.player.var_28CF)
-		{
+	if(self == level.player) {
+		if(!isdefined(level.player.var_28CF) || isdefined(level.player.var_28CF) && !level.player.var_28CF) {
 			return;
 		}
 
-		if(scripts\common\utility::player_is_in_jackal())
-		{
+		if(scripts\common\utility::player_is_in_jackal()) {
 			var_01 = level.player scripts\sp\_utility::func_7B9D();
-			if(var_01 < 0.3)
-			{
+			if(var_01 < 0.3) {
 				return;
 			}
 		}
 
-		if(!isdefined(level.player.var_29C8) || level.player.var_29C8 != 0)
-		{
+		if(!isdefined(level.player.var_29C8) || level.player.var_29C8 != 0) {
 			return;
 		}
 		else
@@ -749,8 +641,7 @@ func_CEE8(param_00)
 		}
 	}
 
-	switch(param_00)
-	{
+	switch(param_00) {
 		case "custom":
 			thread func_CF0A();
 			break;
@@ -777,34 +668,27 @@ func_CEE8(param_00)
 	}
 }
 
-//Function Number: 17
-func_D54B()
-{
+func_D54B() {
 	self endon("death");
 	self endon("removed from battleChatter");
 	self endon("cancel speaking");
 	self.var_4B1F = self.var_3D4C["threat"];
 	var_00 = self.var_3D4C["threat"].var_117B9;
-	if(!isalive(var_00))
-	{
+	if(!isalive(var_00)) {
 		return;
 	}
 
-	if(func_117ED(var_00) && !isplayer(var_00))
-	{
+	if(func_117ED(var_00) && !isplayer(var_00)) {
 		return;
 	}
 
 	anim thread func_AEEB(self,"threat");
 	var_01 = 0;
 	var_02 = self.var_3D4C["threat"].var_68BA;
-	switch(var_02)
-	{
+	switch(var_02) {
 		case "infantry":
-			if((scripts\common\utility::player_is_in_jackal() && var_00 == level.player) || !var_00 scripts\anim\battlechatter_ai::func_1A1B() && isplayer(var_00) || (!var_00 scripts\anim\battlechatter_ai::func_1A1B() && !isdefined(var_00 _meth_8164())) || var_00 scripts\anim\battlechatter_ai::func_1A1B())
-			{
-				if(isdefined(self._blackboard))
-				{
+			if((scripts\common\utility::player_is_in_jackal() && var_00 == level.player) || !var_00 scripts\anim\battlechatter_ai::func_1A1B() && isplayer(var_00) || (!var_00 scripts\anim\battlechatter_ai::func_1A1B() && !isdefined(var_00 _meth_8164())) || var_00 scripts\anim\battlechatter_ai::func_1A1B()) {
+				if(isdefined(self._blackboard)) {
 					self.var_1198.var_28DE = var_00;
 				}
 	
@@ -829,13 +713,11 @@ func_D54B()
 
 	var_03 = self;
 	var_03 notify("done speaking");
-	if(!var_01)
-	{
+	if(!var_01) {
 		return;
 	}
 
-	if(!isalive(var_00))
-	{
+	if(!isalive(var_00)) {
 		return;
 	}
 
@@ -843,19 +725,14 @@ func_D54B()
 	var_00.var_376A[var_03.var_10AC8.var_10AEE].var_10A9F = var_03;
 	var_00.var_376A[var_03.var_10AC8.var_10AEE].var_117EC = var_03.var_3D4C["threat"].var_68BA;
 	var_00.var_376A[var_03.var_10AC8.var_10AEE].var_698B = gettime() + level.var_29C6;
-	if(isdefined(var_00.var_10AC8))
-	{
+	if(isdefined(var_00.var_10AC8)) {
 		var_03.var_10AC8.var_10AE9[var_00.var_10AC8.var_10AEE].var_376A = 1;
 	}
 }
 
-//Function Number: 18
-func_117ED(param_00)
-{
-	if(isdefined(param_00.var_376A) && isdefined(param_00.var_376A[self.var_10AC8.var_10AEE]))
-	{
-		if(param_00.var_376A[self.var_10AC8.var_10AEE].var_698B > gettime())
-		{
+func_117ED(param_00) {
+	if(isdefined(param_00.var_376A) && isdefined(param_00.var_376A[self.var_10AC8.var_10AEE])) {
+		if(param_00.var_376A[self.var_10AC8.var_10AEE].var_698B > gettime()) {
 			return 1;
 		}
 	}
@@ -863,22 +740,18 @@ func_117ED(param_00)
 	return 0;
 }
 
-//Function Number: 19
-func_117E4(param_00,param_01)
-{
+func_117E4(param_00,param_01) {
 	self endon("cancel speaking");
 	var_02 = func_4996();
 	var_02.var_B3D1 = 1;
 	var_02.var_117E3 = param_00;
 	var_03 = isdroppingweapon(param_00);
-	if(!isdefined(var_03) || isdefined(var_03) && !isdefined(var_03.type))
-	{
+	if(!isdefined(var_03) || isdefined(var_03) && !isdefined(var_03.type)) {
 		return 0;
 	}
 
 	var_04 = undefined;
-	if(isdefined(self.var_3778))
-	{
+	if(isdefined(self.var_3778)) {
 		var_04 = self.var_3778;
 	}
 	else
@@ -886,27 +759,22 @@ func_117E4(param_00,param_01)
 		var_04 = var_03.type;
 	}
 
-	switch(var_04)
-	{
+	switch(var_04) {
 		case "exposed":
-			if(isdefined(self._blackboard))
-			{
+			if(isdefined(self._blackboard)) {
 				self.var_1198.var_28DE = var_03.var_E29B;
 			}
 	
 			var_05 = func_582F(var_03.var_E29B);
 			var_06 = self;
-			if(var_05 && var_06 cansayname(var_03.var_E29B))
-			{
+			if(var_05 && var_06 cansayname(var_03.var_E29B)) {
 				var_02 func_17F2(var_03.var_E29B.var_29AD);
 				var_02.var_299D = var_03.var_E29B;
 			}
 	
 			var_02 func_117E6(param_00);
-			if(var_05)
-			{
-				if(randomint(100) < level.var_68AE["response"]["callout_negative"])
-				{
+			if(var_05) {
+				if(randomint(100) < level.var_68AE["response"]["callout_negative"]) {
 					var_03.var_E29B scripts\anim\battlechatter_ai::func_1820("callout","neg",self,0.9);
 				}
 				else
@@ -927,8 +795,7 @@ func_117E4(param_00,param_01)
 			break;
 
 		case "player_obvious":
-			if(isdefined(self._blackboard))
-			{
+			if(isdefined(self._blackboard)) {
 				self.var_1198.var_28DE = level.player;
 			}
 	
@@ -937,13 +804,11 @@ func_117E4(param_00,param_01)
 			break;
 
 		case "player_distance":
-			if(isdefined(self._blackboard))
-			{
+			if(isdefined(self._blackboard)) {
 				self.var_1198.var_28DE = level.player;
 			}
 	
-			if(scripts\common\utility::player_is_in_jackal() && level.player == level.var_D127 && param_00 scripts\anim\battlechatter_ai::func_1A1B())
-			{
+			if(scripts\common\utility::player_is_in_jackal() && level.player == level.var_D127 && param_00 scripts\anim\battlechatter_ai::func_1A1B()) {
 				var_07 = func_7E7D(level.var_D127.origin,param_00.origin);
 			}
 			else
@@ -956,8 +821,7 @@ func_117E4(param_00,param_01)
 			break;
 
 		case "player_contact_clock":
-			if(isdefined(self._blackboard))
-			{
+			if(isdefined(self._blackboard)) {
 				self.var_1198.var_28DE = param_00;
 			}
 	
@@ -966,8 +830,7 @@ func_117E4(param_00,param_01)
 			break;
 
 		case "player_target_clock":
-			if(isdefined(self._blackboard))
-			{
+			if(isdefined(self._blackboard)) {
 				self.var_1198.var_28DE = param_00;
 			}
 	
@@ -976,15 +839,13 @@ func_117E4(param_00,param_01)
 			break;
 
 		case "player_target_clock_high":
-			if(isdefined(self._blackboard))
-			{
+			if(isdefined(self._blackboard)) {
 				self.var_1198.var_28DE = param_00;
 			}
 	
 			var_02 func_180F();
 			var_08 = func_7E69(level.player.origin,param_00.origin);
-			if(var_08 >= 20 && var_08 <= 50)
-			{
+			if(var_08 >= 20 && var_08 <= 50) {
 				var_02 func_1837("targetclock",var_03.var_D371);
 				var_02 func_183E(var_08);
 			}
@@ -995,16 +856,14 @@ func_117E4(param_00,param_01)
 			break;
 
 		case "player_cardinal":
-			if(isdefined(self._blackboard))
-			{
+			if(isdefined(self._blackboard)) {
 				self.var_1198.var_28DE = param_00;
 			}
 	
 			var_02 func_180F();
 			var_09 = func_7E74(level.player.origin,param_00.origin);
 			var_0A = func_C098(var_09);
-			if(var_0A == "impossible")
-			{
+			if(var_0A == "impossible") {
 				return 0;
 			}
 	
@@ -1012,14 +871,12 @@ func_117E4(param_00,param_01)
 			break;
 
 		case "ai_obvious":
-			if(isdefined(var_03.var_E29B) && cansayname(var_03.var_E29B))
-			{
+			if(isdefined(var_03.var_E29B) && cansayname(var_03.var_E29B)) {
 				var_02 func_17F2(var_03.var_E29B.var_29AD);
 				var_02.var_299D = var_03.var_E29B;
 			}
 	
-			if(isdefined(self._blackboard))
-			{
+			if(isdefined(self._blackboard)) {
 				self.var_1198.var_28DE = param_00;
 			}
 	
@@ -1029,21 +886,17 @@ func_117E4(param_00,param_01)
 
 		case "ai_distance":
 			var_0B = self;
-			if(self.team == "allies")
-			{
+			if(self.team == "allies") {
 				var_0B = level.player;
 			}
-			else if(isdefined(var_03.var_E29B) && randomint(100) < level.var_68AE["response"]["callout"])
-			{
+			else if(isdefined(var_03.var_E29B) && randomint(100) < level.var_68AE["response"]["callout"]) {
 				var_0B = var_03.var_E29B;
 			}
 	
-			if(var_0B scripts\anim\battlechatter_ai::func_1A1B() && param_00 scripts\anim\battlechatter_ai::func_1A1B())
-			{
+			if(var_0B scripts\anim\battlechatter_ai::func_1A1B() && param_00 scripts\anim\battlechatter_ai::func_1A1B()) {
 				var_07 = func_7E7D(var_0B.origin,param_00.origin);
 			}
-			else if(scripts\common\utility::player_is_in_jackal() && var_07 == level.var_D127 && param_01 scripts\anim\battlechatter_ai::func_1A1B())
-			{
+			else if(scripts\common\utility::player_is_in_jackal() && var_07 == level.var_D127 && param_01 scripts\anim\battlechatter_ai::func_1A1B()) {
 				var_07 = func_7E7D(var_07.origin,param_01.origin);
 			}
 			else
@@ -1051,8 +904,7 @@ func_117E4(param_00,param_01)
 				var_07 = func_7E7B(var_07.origin,param_01.origin);
 			}
 	
-			if(isdefined(self._blackboard))
-			{
+			if(isdefined(self._blackboard)) {
 				self.var_1198.var_28DE = param_00;
 			}
 	
@@ -1062,12 +914,10 @@ func_117E4(param_00,param_01)
 
 		case "ai_contact_clock":
 			var_0B = self;
-			if(self.team == "allies")
-			{
+			if(self.team == "allies") {
 				var_0B = level.player;
 			}
-			else if(isdefined(var_03.var_E29B) && randomint(100) < level.var_68AE["response"]["callout"])
-			{
+			else if(isdefined(var_03.var_E29B) && randomint(100) < level.var_68AE["response"]["callout"]) {
 				var_0B = var_03.var_E29B;
 			}
 	
@@ -1075,20 +925,17 @@ func_117E4(param_00,param_01)
 			var_0D = func_7E75(var_0C,var_0B.origin,param_00.origin);
 			var_02 func_1837("contactclock",var_0D);
 			var_02 func_17B2(self,var_03,param_00);
-			if(isdefined(self._blackboard))
-			{
+			if(isdefined(self._blackboard)) {
 				self.var_1198.var_28DE = param_00;
 			}
 			break;
 
 		case "ai_casual_clock":
 			var_0B = self;
-			if(self.team == "allies")
-			{
+			if(self.team == "allies") {
 				var_0B = level.player;
 			}
-			else if(isdefined(var_03.var_E29B) && randomint(100) < level.var_68AE["response"]["callout"])
-			{
+			else if(isdefined(var_03.var_E29B) && randomint(100) < level.var_68AE["response"]["callout"]) {
 				var_0B = var_03.var_E29B;
 			}
 	
@@ -1096,20 +943,17 @@ func_117E4(param_00,param_01)
 			var_0D = func_7E75(var_0C,var_0B.origin,param_00.origin);
 			var_02 func_1837("casualclock",var_0D);
 			var_02 func_17B2(self,var_03,param_00);
-			if(isdefined(self._blackboard))
-			{
+			if(isdefined(self._blackboard)) {
 				self.var_1198.var_28DE = param_00;
 			}
 			break;
 
 		case "ai_target_clock":
 			var_0B = self;
-			if(self.team == "allies")
-			{
+			if(self.team == "allies") {
 				var_0B = level.player;
 			}
-			else if(isdefined(var_03.var_E29B) && randomint(100) < level.var_68AE["response"]["callout"])
-			{
+			else if(isdefined(var_03.var_E29B) && randomint(100) < level.var_68AE["response"]["callout"]) {
 				var_0B = var_03.var_E29B;
 			}
 	
@@ -1117,28 +961,24 @@ func_117E4(param_00,param_01)
 			var_0D = func_7E75(var_0C,var_0B.origin,param_00.origin);
 			var_02 func_1837("targetclock",var_0D);
 			var_02 func_17B2(self,var_03,param_00);
-			if(isdefined(self._blackboard))
-			{
+			if(isdefined(self._blackboard)) {
 				self.var_1198.var_28DE = param_00;
 			}
 			break;
 
 		case "ai_target_clock_high":
 			var_0B = self;
-			if(self.team == "allies")
-			{
+			if(self.team == "allies") {
 				var_0B = level.player;
 			}
-			else if(isdefined(var_03.var_E29B) && randomint(100) < level.var_68AE["response"]["callout"])
-			{
+			else if(isdefined(var_03.var_E29B) && randomint(100) < level.var_68AE["response"]["callout"]) {
 				var_0B = var_03.var_E29B;
 			}
 	
 			var_0C = getrelativeangles(var_0B);
 			var_0D = func_7E75(var_0C,var_0B.origin,param_00.origin);
 			var_08 = func_7E69(var_0B.origin,param_00.origin);
-			if(var_08 >= 20 && var_08 <= 50)
-			{
+			if(var_08 >= 20 && var_08 <= 50) {
 				var_02 func_1837("targetclock",var_0D);
 				var_02 func_183E(var_08);
 			}
@@ -1148,43 +988,37 @@ func_117E4(param_00,param_01)
 			}
 	
 			var_02 func_17B2(self,var_03,param_00);
-			if(isdefined(self._blackboard))
-			{
+			if(isdefined(self._blackboard)) {
 				self.var_1198.var_28DE = param_00;
 			}
 			break;
 
 		case "ai_cardinal":
 			var_0B = self;
-			if(self.team == "allies")
-			{
+			if(self.team == "allies") {
 				var_0B = level.player;
 			}
 	
 			var_09 = func_7E74(var_0B.origin,param_00.origin);
 			var_0A = func_C098(var_09);
-			if(var_0A == "impossible")
-			{
+			if(var_0A == "impossible") {
 				return 0;
 			}
 	
 			var_02 func_1837("cardinal",var_0A);
-			if(isdefined(self._blackboard))
-			{
+			if(isdefined(self._blackboard)) {
 				self.var_1198.var_28DE = param_00;
 			}
 			break;
 
 		case "generic_location":
 			var_06 = self;
-			if(isdefined(self._blackboard))
-			{
+			if(isdefined(self._blackboard)) {
 				self.var_1198.var_28DE = param_00;
 			}
 	
 			var_0E = var_02 func_117E5(var_03,undefined,var_06);
-			if(!var_0E)
-			{
+			if(!var_0E) {
 				return 0;
 			}
 			break;
@@ -1192,14 +1026,12 @@ func_117E4(param_00,param_01)
 		case "player_location":
 			var_06 = self;
 			var_02 func_180F();
-			if(isdefined(self._blackboard))
-			{
+			if(isdefined(self._blackboard)) {
 				self.var_1198.var_28DE = level.player;
 			}
 	
 			var_0E = var_02 func_117E5(var_03,undefined,var_06);
-			if(!var_0E)
-			{
+			if(!var_0E) {
 				return 0;
 			}
 			break;
@@ -1208,51 +1040,43 @@ func_117E4(param_00,param_01)
 			var_02 addconcattargetalias(param_00);
 			var_06 = self;
 			var_0B = self;
-			if(self.team == "allies")
-			{
+			if(self.team == "allies") {
 				var_0B = level.player;
 			}
 	
 			var_0E = var_02 func_117E5(var_03,1,var_06);
-			if(!var_0E)
-			{
+			if(!var_0E) {
 				return 0;
 			}
 	
 			var_02 addconcatdirectionalias(var_0B,param_00);
 			var_02 func_17B2(self,var_03,param_00);
-			if(isdefined(self._blackboard))
-			{
+			if(isdefined(self._blackboard)) {
 				self.var_1198.var_28DE = param_00;
 			}
 			break;
 
 		case "ai_location":
 			var_06 = self;
-			if(var_06 cansayname(var_03.var_E29B))
-			{
+			if(var_06 cansayname(var_03.var_E29B)) {
 				var_02 func_17F2(var_03.var_E29B.var_29AD);
 				var_02.var_299D = var_03.var_E29B;
 			}
 	
 			var_0E = var_02 func_117E5(var_03,undefined,var_06);
-			if(!var_0E)
-			{
+			if(!var_0E) {
 				return 0;
 			}
 	
 			var_0F = var_02.var_10476.size - 1;
 			var_10 = var_02.var_10476[var_0F];
-			if(iscallouttypereport(var_10))
-			{
+			if(iscallouttypereport(var_10)) {
 				var_03.var_E29B scripts\anim\battlechatter_ai::func_1820("callout","echo",self,0.9,var_10);
 			}
-			else if(iscallouttypeqa(var_10,self))
-			{
+			else if(iscallouttypeqa(var_10,self)) {
 				var_03.var_E29B scripts\anim\battlechatter_ai::func_1820("callout","QA",self,0.9,var_10,var_03.location);
 			}
-			else if(randomint(100) < level.var_68AE["response"]["callout_negative"])
-			{
+			else if(randomint(100) < level.var_68AE["response"]["callout_negative"]) {
 				var_03.var_E29B scripts\anim\battlechatter_ai::func_1820("callout","neg",self,0.9);
 			}
 			else
@@ -1260,8 +1084,7 @@ func_117E4(param_00,param_01)
 				var_03.var_E29B scripts\anim\battlechatter_ai::func_1820("exposed","acquired",self,0.9);
 			}
 	
-			if(isdefined(self._blackboard))
-			{
+			if(isdefined(self._blackboard)) {
 				self.var_1198.var_28DE = param_00;
 			}
 			break;
@@ -1269,14 +1092,12 @@ func_117E4(param_00,param_01)
 
 	func_F77C(var_03.type);
 	var_06 = self;
-	if(isdefined(self._blackboard))
-	{
+	if(isdefined(self._blackboard)) {
 		self.var_1198.var_28D6 = 0;
 	}
 
 	var_06 func_D4F8(var_02,self);
-	if(isdefined(self._blackboard))
-	{
+	if(isdefined(self._blackboard)) {
 		self.var_1198.var_28D0 = undefined;
 		self.var_1198.var_28DE = undefined;
 	}
@@ -1284,81 +1105,63 @@ func_117E4(param_00,param_01)
 	return 1;
 }
 
-//Function Number: 20
-func_582F(param_00)
-{
-	if(!isdefined(param_00))
-	{
+func_582F(param_00) {
+	if(!isdefined(param_00)) {
 		return 0;
 	}
 
-	if(param_00.var_46BC != "UN")
-	{
+	if(param_00.var_46BC != "UN") {
 		return 0;
 	}
 
-	if(randomint(100) > level.var_68AE["response"]["exposed"])
-	{
+	if(randomint(100) > level.var_68AE["response"]["exposed"]) {
 		return 0;
 	}
 
 	return 1;
 }
 
-//Function Number: 21
-func_117E5(param_00,param_01,param_02)
-{
+func_117E5(param_00,param_01,param_02) {
 	var_03 = func_183A(param_00.location,param_01,param_02);
 	return var_03;
 }
 
-//Function Number: 22
-func_17B2(param_00,param_01,param_02)
-{
-	if(!isdefined(param_01.var_E29B))
-	{
+func_17B2(param_00,param_01,param_02) {
+	if(!isdefined(param_01.var_E29B)) {
 		return;
 	}
 
-	if(param_01.var_E29B.team != param_00.team)
-	{
+	if(param_01.var_E29B.team != param_00.team) {
 		return;
 	}
 
-	if(randomint(100) > level.var_68AE["response"]["callout"])
-	{
+	if(randomint(100) > level.var_68AE["response"]["callout"]) {
 		return;
 	}
 
 	var_03 = "affirm";
-	if(!param_01.var_E29B scripts\anim\battlechatter_ai::func_29A2(param_02) && randomint(100) < level.var_68AE["response"]["callout_negative"])
-	{
+	if(!param_01.var_E29B scripts\anim\battlechatter_ai::func_29A2(param_02) && randomint(100) < level.var_68AE["response"]["callout_negative"]) {
 		var_03 = "neg";
 	}
 
 	param_01.var_E29B scripts\anim\battlechatter_ai::func_1820("callout",var_03,param_00,0.9);
 }
 
-//Function Number: 23
-isdroppingweapon(param_00)
-{
+isdroppingweapon(param_00) {
 	var_01 = param_00 getvalidlocation(self);
 	var_02 = func_7E75(self.angles,self.origin,param_00.origin);
 	var_03 = finishplayerdamage(64,1024,"response");
 	var_04 = undefined;
-	if(isdefined(var_03))
-	{
+	if(isdefined(var_03)) {
 		var_04 = func_7E75(var_03.angles,var_03.origin,param_00.origin);
 	}
 
 	var_05 = func_7E75(level.player.angles,level.player.origin,param_00.origin);
-	if(self.team == "allies")
-	{
+	if(self.team == "allies") {
 		var_06 = var_05;
 		var_07 = level.player;
 	}
-	else if(isdefined(var_05))
-	{
+	else if(isdefined(var_05)) {
 		var_06 = var_06;
 		var_07 = var_04;
 	}
@@ -1370,35 +1173,27 @@ isdroppingweapon(param_00)
 
 	var_08 = func_7E7A(var_07.origin,param_00.origin);
 	self.var_D6B2 = [];
-	if(!isdefined(var_01) && param_00 isexposed(0))
-	{
+	if(!isdefined(var_01) && param_00 isexposed(0)) {
 		func_1812("exposed");
 	}
 
-	if(self.team == "allies")
-	{
+	if(self.team == "allies") {
 		var_09 = 0;
-		if(param_00.origin[2] - var_07.origin[2] >= level.var_8D0F)
-		{
-			if(func_1812("player_target_clock_high"))
-			{
+		if(param_00.origin[2] - var_07.origin[2] >= level.var_8D0F) {
+			if(func_1812("player_target_clock_high")) {
 				var_09 = 1;
 			}
 		}
 
-		if(!var_09)
-		{
-			if(var_06 == "12")
-			{
+		if(!var_09) {
+			if(var_06 == "12") {
 				func_1812("player_obvious");
-				if(var_08 > level.var_B75D && var_08 < level.maxdistancecallout)
-				{
+				if(var_08 > level.var_B75D && var_08 < level.maxdistancecallout) {
 					func_1812("player_distance");
 				}
 			}
 
-			if(cansayplayername() && var_06 != "12")
-			{
+			if(cansayplayername() && var_06 != "12") {
 				func_1812("player_contact_clock");
 				func_1812("player_target_clock");
 				func_1812("player_cardinal");
@@ -1407,22 +1202,17 @@ isdroppingweapon(param_00)
 	}
 
 	var_09 = 0;
-	if(param_00.origin[2] - var_07.origin[2] >= level.var_8D0F)
-	{
-		if(func_1812("ai_target_clock_high"))
-		{
+	if(param_00.origin[2] - var_07.origin[2] >= level.var_8D0F) {
+		if(func_1812("ai_target_clock_high")) {
 			var_09 = 1;
 		}
 	}
 
 	func_1812("ai_casual_clock");
-	if(!var_09)
-	{
-		if(var_06 == "12")
-		{
+	if(!var_09) {
+		if(var_06 == "12") {
 			func_1812("ai_distance");
-			if(var_08 > level.var_B75D && var_08 < level.maxdistancecallout)
-			{
+			if(var_08 > level.var_B75D && var_08 < level.maxdistancecallout) {
 				func_1812("ai_obvious");
 			}
 		}
@@ -1432,22 +1222,17 @@ isdroppingweapon(param_00)
 		func_1812("ai_cardinal");
 	}
 
-	if(isdefined(var_01))
-	{
-		if(canconcat(var_01))
-		{
+	if(isdefined(var_01)) {
+		if(canconcat(var_01)) {
 			func_1812("concat_location");
 		}
-		else if(isdefined(var_01 getcannedresponse(self)))
-		{
-			if(isdefined(var_03))
-			{
+		else if(isdefined(var_01 getcannedresponse(self))) {
+			if(isdefined(var_03)) {
 				func_1812("ai_location");
 			}
 			else
 			{
-				if(cansayplayername())
-				{
+				if(cansayplayername()) {
 					func_1812("player_location");
 				}
 
@@ -1456,13 +1241,11 @@ isdroppingweapon(param_00)
 		}
 		else
 		{
-			if(isdefined(var_03))
-			{
+			if(isdefined(var_03)) {
 				func_1812("ai_location");
 			}
 
-			if(cansayplayername() || isdefined(self.var_C80C))
-			{
+			if(cansayplayername() || isdefined(self.var_C80C)) {
 				func_1812("player_location");
 			}
 
@@ -1470,8 +1253,7 @@ isdroppingweapon(param_00)
 		}
 	}
 
-	if(!self.var_D6B2.size)
-	{
+	if(!self.var_D6B2.size) {
 		return undefined;
 	}
 
@@ -1481,25 +1263,20 @@ isdroppingweapon(param_00)
 	var_0C.var_E29B = var_03;
 	var_0C.var_E29C = var_04;
 	var_0C.var_D371 = var_05;
-	if(isdefined(var_01))
-	{
+	if(isdefined(var_01)) {
 		var_0C.location = var_01;
 	}
 
 	return var_0C;
 }
 
-//Function Number: 24
-cancalloutlocation(param_00)
-{
-	foreach(var_02 in param_00.locationaliases)
-	{
+cancalloutlocation(param_00) {
+	foreach(var_02 in param_00.locationaliases) {
 		var_03 = getloccalloutalias("callout_loc_" + var_02);
 		var_04 = getqacalloutalias(var_02,0);
 		var_05 = getloccalloutalias("concat_loc_" + var_02);
 		var_06 = soundexists(var_03) || soundexists(var_04) || soundexists(var_05);
-		if(var_06)
-		{
+		if(var_06) {
 			return var_06;
 		}
 	}
@@ -1507,14 +1284,10 @@ cancalloutlocation(param_00)
 	return 0;
 }
 
-//Function Number: 25
-canconcat(param_00)
-{
+canconcat(param_00) {
 	var_01 = param_00.locationaliases;
-	foreach(var_03 in var_01)
-	{
-		if(iscallouttypeconcat(var_03,self))
-		{
+	foreach(var_03 in var_01) {
+		if(iscallouttypeconcat(var_03,self)) {
 			return 1;
 		}
 	}
@@ -1522,21 +1295,16 @@ canconcat(param_00)
 	return 0;
 }
 
-//Function Number: 26
-getcannedresponse(param_00)
-{
+getcannedresponse(param_00) {
 	var_01 = undefined;
 	var_02 = self.locationaliases;
-	foreach(var_04 in var_02)
-	{
-		if(iscallouttypeqa(var_04,param_00) && !isdefined(self.qafinished))
-		{
+	foreach(var_04 in var_02) {
+		if(iscallouttypeqa(var_04,param_00) && !isdefined(self.qafinished)) {
 			var_01 = var_04;
 			break;
 		}
 
-		if(iscallouttypereport(var_04))
-		{
+		if(iscallouttypereport(var_04)) {
 			var_01 = var_04;
 		}
 	}
@@ -1544,47 +1312,35 @@ getcannedresponse(param_00)
 	return var_01;
 }
 
-//Function Number: 27
-iscallouttypereport(param_00)
-{
+iscallouttypereport(param_00) {
 	return issubstr(param_00,"_report");
 }
 
-//Function Number: 28
-iscallouttypeconcat(param_00,param_01)
-{
+iscallouttypeconcat(param_00,param_01) {
 	var_02 = param_01 getloccalloutalias("concat_loc_" + param_00);
-	if(soundexists(var_02))
-	{
+	if(soundexists(var_02)) {
 		return 1;
 	}
 
 	return 0;
 }
 
-//Function Number: 29
-iscallouttypeqa(param_00,param_01)
-{
-	if(issubstr(param_00,"_qa") && soundexists(param_00))
-	{
+iscallouttypeqa(param_00,param_01) {
+	if(issubstr(param_00,"_qa") && soundexists(param_00)) {
 		return 1;
 	}
 
 	var_02 = param_01 getqacalloutalias(param_00,0);
-	if(soundexists(var_02))
-	{
+	if(soundexists(var_02)) {
 		return 1;
 	}
 
 	return 0;
 }
 
-//Function Number: 30
-getloccalloutalias(param_00)
-{
+getloccalloutalias(param_00) {
 	var_01 = undefined;
-	if(self == level.player)
-	{
+	if(self == level.player) {
 		var_01 = "UN_plr_";
 		var_01 = var_01 + param_00;
 	}
@@ -1597,32 +1353,22 @@ getloccalloutalias(param_00)
 	return var_01;
 }
 
-//Function Number: 31
-getqacalloutalias(param_00,param_01)
-{
+getqacalloutalias(param_00,param_01) {
 	var_02 = getloccalloutalias("callout_loc_" + param_00);
 	var_02 = var_02 + "_qa" + param_01;
 	return var_02;
 }
 
-//Function Number: 32
-func_17A2(param_00)
-{
+func_17A2(param_00) {
 	self.var_1C8B[self.var_1C8B.size] = param_00;
 }
 
-//Function Number: 33
-func_1812(param_00)
-{
+func_1812(param_00) {
 	var_01 = 0;
-	if(isdefined(self.var_1C8B))
-	{
-		foreach(var_03 in self.var_1C8B)
-		{
-			if(var_03 == param_00)
-			{
-				if(!func_3783(param_00))
-				{
+	if(isdefined(self.var_1C8B)) {
+		foreach(var_03 in self.var_1C8B) {
+			if(var_03 == param_00) {
+				if(!func_3783(param_00)) {
 					var_01 = 1;
 				}
 
@@ -1631,8 +1377,7 @@ func_1812(param_00)
 		}
 	}
 
-	if(!var_01)
-	{
+	if(!var_01) {
 		return var_01;
 	}
 
@@ -1640,26 +1385,20 @@ func_1812(param_00)
 	return var_01;
 }
 
-//Function Number: 34
-func_3783(param_00)
-{
-	if(!isdefined(level.var_AA28[self.team]))
-	{
+func_3783(param_00) {
+	if(!isdefined(level.var_AA28[self.team])) {
 		return 0;
 	}
 
-	if(!isdefined(level.var_AA29[self.team]))
-	{
+	if(!isdefined(level.var_AA29[self.team])) {
 		return 0;
 	}
 
 	var_01 = level.var_AA28[self.team];
 	var_02 = level.var_AA29[self.team];
 	var_03 = level.var_115EE;
-	if(isdefined(self.unittype) && self.unittype != "c6")
-	{
-		if(param_00 == var_01 && gettime() - var_02 < var_03)
-		{
+	if(isdefined(self.unittype) && self.unittype != "c6") {
+		if(param_00 == var_01 && gettime() - var_02 < var_03) {
 			return 1;
 		}
 	}
@@ -1671,45 +1410,35 @@ func_3783(param_00)
 	return 0;
 }
 
-//Function Number: 35
-func_F77C(param_00)
-{
+func_F77C(param_00) {
 	level.var_AA28[self.team] = param_00;
 	level.var_AA29[self.team] = gettime();
 }
 
-//Function Number: 36
-getwholescenedurationmax(param_00,param_01)
-{
+getwholescenedurationmax(param_00,param_01) {
 	var_02 = undefined;
 	var_03 = -1;
-	foreach(var_05 in param_00)
-	{
-		if(param_01[var_05] <= 0)
-		{
+	foreach(var_05 in param_00) {
+		if(param_01[var_05] <= 0) {
 			continue;
 		}
 
 		var_06 = randomint(param_01[var_05]);
-		if(isdefined(var_02) && param_01[var_02] >= 100)
-		{
-			if(param_01[var_05] < 100)
-			{
+		if(isdefined(var_02) && param_01[var_02] >= 100) {
+			if(param_01[var_05] < 100) {
 				continue;
 			}
 
 			continue;
 		}
 
-		if(param_01[var_05] >= 100)
-		{
+		if(param_01[var_05] >= 100) {
 			var_02 = var_05;
 			var_03 = var_06;
 			continue;
 		}
 
-		if(var_06 > var_03)
-		{
+		if(var_06 > var_03) {
 			var_02 = var_05;
 			var_03 = var_06;
 		}
@@ -1718,19 +1447,15 @@ getwholescenedurationmax(param_00,param_01)
 	return var_02;
 }
 
-//Function Number: 37
-func_117E6(param_00)
-{
+func_117E6(param_00) {
 	var_01 = [];
 	var_01 = scripts\common\utility::array_add(var_01,"open");
 	var_01 = scripts\common\utility::array_add(var_01,"breaking");
 	var_01 = scripts\common\utility::array_add(var_01,"generic");
-	if(self.var_222.team == "allies")
-	{
+	if(self.var_222.team == "allies") {
 		var_01 = scripts\common\utility::array_add(var_01,"movement");
 		var_02 = function_0073("axis");
-		if(var_02 > 2)
-		{
+		if(var_02 > 2) {
 			var_01 = scripts\common\utility::array_add(var_01,"group");
 		}
 	}
@@ -1739,23 +1464,19 @@ func_117E6(param_00)
 	func_1840(var_03);
 }
 
-//Function Number: 38
-func_D503()
-{
+func_D503() {
 	self endon("death");
 	self endon("removed from battleChatter");
 	self.var_4B1F = self.var_3D4C["reaction"];
 	var_00 = self.var_3D4C["reaction"].var_DD60;
 	var_01 = self.var_3D4C["reaction"].modifiedspawnpoints;
 	anim thread func_AEEB(self,"reaction");
-	if(isdefined(self._blackboard))
-	{
+	if(isdefined(self._blackboard)) {
 		self.var_1198.var_28D0 = undefined;
 	}
 
 	var_02 = self.var_3D4C["reaction"].var_68BA;
-	switch(var_02)
-	{
+	switch(var_02) {
 		case "danger":
 		case "underfire":
 		case "movement":
@@ -1777,15 +1498,11 @@ func_D503()
 
 		case "takingfire":
 			func_DD52(var_00,var_01,var_02);
-			if(scripts\common\utility::cointoss())
-			{
+			if(scripts\common\utility::cointoss()) {
 				var_03 = finishplayerdamage(64,1024,"response");
-				if(isdefined(var_03))
-				{
-					if(scripts\common\utility::cointoss())
-					{
-						if(var_03 cansay("reaction","ask_ok",1,undefined))
-						{
+				if(isdefined(var_03)) {
+					if(scripts\common\utility::cointoss()) {
+						if(var_03 cansay("reaction","ask_ok",1,undefined)) {
 							var_03 scripts\anim\battlechatter_ai::func_181C("ask_ok",undefined,self,1);
 						}
 					}
@@ -1800,29 +1517,24 @@ func_D503()
 		case "ask_ok":
 			func_E2A4(var_00,"ask","ok");
 			var_03 = finishplayerdamage(64,1024,"response");
-			if(isdefined(var_03))
-			{
+			if(isdefined(var_03)) {
 				var_03 scripts\anim\battlechatter_ai::func_1820("im","ok",self,1);
 			}
 			break;
 	}
 
-	if(isdefined(self._blackboard))
-	{
+	if(isdefined(self._blackboard)) {
 		self.var_1198.var_28D0 = undefined;
 	}
 
 	self notify("done speaking");
 }
 
-//Function Number: 39
-func_DD50(param_00,param_01,param_02)
-{
+func_DD50(param_00,param_01,param_02) {
 	var_03 = self;
 	var_03 endon("death");
 	var_03 endon("removed from battleChatter");
-	if(!isdefined(param_01) && !scripts\sp\_utility::func_D123())
-	{
+	if(!isdefined(param_01) && !scripts\sp\_utility::func_D123()) {
 		param_01 = "generic";
 	}
 
@@ -1830,13 +1542,10 @@ func_DD50(param_00,param_01,param_02)
 	var_04 func_181B(param_02,param_01);
 	var_03 func_D4F8(var_04,self);
 	wait(randomfloatrange(0.25,0.5));
-	if(scripts\common\utility::cointoss())
-	{
+	if(scripts\common\utility::cointoss()) {
 		var_05 = var_03 finishplayerdamage(64,100000,"order");
-		if(isdefined(var_05))
-		{
-			if(var_05 cansay("order","action",0.9))
-			{
+		if(isdefined(var_05)) {
+			if(var_05 cansay("order","action",0.9)) {
 				var_06 = scripts\common\utility::random(["dive","pullup","break_generic","break_right","break_left"]);
 				var_05 scripts\anim\battlechatter_ai::func_1809("action",var_06,var_03,0.9);
 				return;
@@ -1845,9 +1554,7 @@ func_DD50(param_00,param_01,param_02)
 	}
 }
 
-//Function Number: 40
-func_DD4E(param_00,param_01,param_02)
-{
+func_DD4E(param_00,param_01,param_02) {
 	var_03 = self;
 	var_03 endon("death");
 	var_03 endon("removed from battleChatter");
@@ -1856,15 +1563,12 @@ func_DD4E(param_00,param_01,param_02)
 	var_03 func_D4F8(var_04,self);
 }
 
-//Function Number: 41
-func_DD53(param_00,param_01,param_02)
-{
+func_DD53(param_00,param_01,param_02) {
 	var_03 = self;
 	self endon("death");
 	self endon("removed from battleChatter");
 	var_04 = var_03 func_4996();
-	if(isdefined(param_01) && param_01 == "hostileburst")
-	{
+	if(isdefined(param_01) && param_01 == "hostileburst") {
 		var_04 func_17CF();
 	}
 	else
@@ -1875,9 +1579,7 @@ func_DD53(param_00,param_01,param_02)
 	var_03 func_D4F8(var_04,self);
 }
 
-//Function Number: 42
-func_DD4F(param_00,param_01,param_02)
-{
+func_DD4F(param_00,param_01,param_02) {
 	var_03 = self;
 	var_03 endon("death");
 	var_03 endon("removed from battleChatter");
@@ -1886,9 +1588,7 @@ func_DD4F(param_00,param_01,param_02)
 	var_03 func_D4F8(var_04,self);
 }
 
-//Function Number: 43
-func_DD52(param_00,param_01,param_02)
-{
+func_DD52(param_00,param_01,param_02) {
 	var_03 = self;
 	var_03 endon("death");
 	var_03 endon("removed from battleChatter");
@@ -1897,9 +1597,7 @@ func_DD52(param_00,param_01,param_02)
 	var_03 func_D4F8(var_04,self);
 }
 
-//Function Number: 44
-func_E2A4(param_00,param_01,param_02)
-{
+func_E2A4(param_00,param_01,param_02) {
 	var_03 = self;
 	var_03 endon("death");
 	var_03 endon("removed from battleChatter");
@@ -1908,27 +1606,22 @@ func_E2A4(param_00,param_01,param_02)
 	var_03 func_D4F8(var_04,self);
 }
 
-//Function Number: 45
-func_D50A()
-{
+func_D50A() {
 	self endon("death");
 	self endon("removed from battleChatter");
 	self.var_4B1F = self.var_3D4C["response"];
 	var_00 = self.var_3D4C["response"].modifiedspawnpoints;
 	var_01 = self.var_3D4C["response"].var_E29D;
-	if(!isalive(var_01) || func_9B42(var_01))
-	{
+	if(!isalive(var_01) || func_9B42(var_01)) {
 		return;
 	}
 
-	if(self.var_3D4C["response"].modifiedspawnpoints == "follow" && self.var_1491.state != "move")
-	{
+	if(self.var_3D4C["response"].modifiedspawnpoints == "follow" && self.var_1491.state != "move") {
 		return;
 	}
 
 	anim thread func_AEEB(self,"response");
-	switch(self.var_3D4C["response"].var_68BA)
-	{
+	switch(self.var_3D4C["response"].var_68BA) {
 		case "exposed":
 			func_E2A6(var_01,var_00);
 			break;
@@ -1949,14 +1642,11 @@ func_D50A()
 	self notify("done speaking");
 }
 
-//Function Number: 46
-func_E2A6(param_00,param_01)
-{
+func_E2A6(param_00,param_01) {
 	var_02 = self;
 	var_02 endon("death");
 	var_02 endon("removed from battleChatter");
-	if(!isalive(param_00))
-	{
+	if(!isalive(param_00)) {
 		return;
 	}
 
@@ -1967,27 +1657,22 @@ func_E2A6(param_00,param_01)
 	var_02 func_D4F8(var_03,self);
 }
 
-//Function Number: 47
-func_E2A5(param_00,param_01,param_02)
-{
+func_E2A5(param_00,param_01,param_02) {
 	var_03 = self.var_4B1F.var_E1A1;
 	var_04 = self.var_4B1F.location;
 	var_05 = self;
 	self endon("death");
 	self endon("removed from battleChatter");
-	if(!isalive(param_00))
-	{
+	if(!isalive(param_00)) {
 		return;
 	}
 
 	var_06 = var_05 func_4996();
 	var_07 = 0;
-	if(param_01 == "echo")
-	{
+	if(param_01 == "echo") {
 		var_07 = var_06 func_1838(var_03,param_00);
 	}
-	else if(param_01 == "QA")
-	{
+	else if(param_01 == "QA") {
 		var_07 = var_06 func_183B(param_00,var_03,var_04);
 	}
 	else
@@ -1995,8 +1680,7 @@ func_E2A5(param_00,param_01,param_02)
 		var_07 = var_06 func_183C(param_01,param_02);
 	}
 
-	if(!var_07)
-	{
+	if(!var_07) {
 		return;
 	}
 
@@ -2005,13 +1689,10 @@ func_E2A5(param_00,param_01,param_02)
 	var_05 func_D4F8(var_06,self);
 }
 
-//Function Number: 48
-func_E2A2(param_00,param_01)
-{
+func_E2A2(param_00,param_01) {
 	self endon("death");
 	self endon("removed from battleChatter");
-	if(!isalive(param_00))
-	{
+	if(!isalive(param_00)) {
 		return;
 	}
 
@@ -2024,20 +1705,16 @@ func_E2A2(param_00,param_01)
 	var_03 func_D4F8(var_04,self);
 }
 
-//Function Number: 49
-func_D4EB()
-{
+func_D4EB() {
 	self endon("death");
 	self endon("removed from battleChatter");
 	self.var_4B1F = self.var_3D4C["order"];
 	var_00 = self.var_3D4C["order"].modifiedspawnpoints;
 	var_01 = self.var_3D4C["order"].var_C6E5;
 	anim thread func_AEEB(self,"order");
-	switch(self.var_3D4C["order"].var_68BA)
-	{
+	switch(self.var_3D4C["order"].var_68BA) {
 		case "action":
-			if(isdefined(self._blackboard))
-			{
+			if(isdefined(self._blackboard)) {
 				self.var_1198.var_28DE = level.player;
 			}
 	
@@ -2053,8 +1730,7 @@ func_D4EB()
 			break;
 	}
 
-	if(isdefined(self._blackboard))
-	{
+	if(isdefined(self._blackboard)) {
 		self.var_1198.var_28D0 = undefined;
 		self.var_1198.var_28DE = undefined;
 	}
@@ -2062,15 +1738,12 @@ func_D4EB()
 	self notify("done speaking");
 }
 
-//Function Number: 50
-func_C6E1(param_00,param_01)
-{
+func_C6E1(param_00,param_01) {
 	var_02 = self;
 	var_02 endon("death");
 	var_02 endon("removed from battleChatter");
 	var_03 = var_02 func_4996();
-	if(!scripts\sp\_utility::func_D123())
-	{
+	if(!scripts\sp\_utility::func_D123()) {
 		var_02 func_128A8(var_03,param_01);
 	}
 
@@ -2078,9 +1751,7 @@ func_C6E1(param_00,param_01)
 	var_02 func_D4F8(var_03,self);
 }
 
-//Function Number: 51
-func_C6E3(param_00,param_01)
-{
+func_C6E3(param_00,param_01) {
 	var_02 = self;
 	var_02 endon("death");
 	var_02 endon("removed from battleChatter");
@@ -2090,9 +1761,7 @@ func_C6E3(param_00,param_01)
 	var_02 func_D4F8(var_03,self);
 }
 
-//Function Number: 52
-func_C6E2(param_00)
-{
+func_C6E2(param_00) {
 	self endon("death");
 	self endon("removed from battleChatter");
 	var_01 = self;
@@ -2101,26 +1770,20 @@ func_C6E2(param_00)
 	var_01 func_D4F8(var_02,self,1);
 }
 
-//Function Number: 53
-func_128A8(param_00,param_01)
-{
-	if(randomint(100) > level.var_68AE["response"]["order"])
-	{
-		if(!isdefined(param_01) || isdefined(param_01) && !isplayer(param_01))
-		{
+func_128A8(param_00,param_01) {
+	if(randomint(100) > level.var_68AE["response"]["order"]) {
+		if(!isdefined(param_01) || isdefined(param_01) && !isplayer(param_01)) {
 			return;
 		}
 	}
 
-	if(isdefined(param_01) && isplayer(param_01) && isdefined(level.player.var_29AE))
-	{
+	if(isdefined(param_01) && isplayer(param_01) && isdefined(level.player.var_29AE)) {
 		param_00 func_180F();
 		param_00.var_299D = level.player;
 		return;
 	}
 
-	if(isdefined(param_01) && cansayname(param_01))
-	{
+	if(isdefined(param_01) && cansayname(param_01)) {
 		param_00 func_17F2(param_01.var_29AD);
 		param_00.var_299D = param_01;
 		param_01 scripts\anim\battlechatter_ai::func_1820("ack","yes",self,0.9);
@@ -2130,21 +1793,17 @@ func_128A8(param_00,param_01)
 	level notify("follow order",self);
 }
 
-//Function Number: 54
-func_D4A3()
-{
+func_D4A3() {
 	self endon("death");
 	self endon("removed from battleChatter");
 	self.var_4B1F = self.var_3D4C["inform"];
 	var_00 = self.var_3D4C["inform"].modifiedspawnpoints;
 	anim thread func_AEEB(self,"inform");
-	if(self != level.player)
-	{
+	if(self != level.player) {
 		self.var_1198.var_28DE = level.player;
 	}
 
-	switch(self.var_3D4C["inform"].var_68BA)
-	{
+	switch(self.var_3D4C["inform"].var_68BA) {
 		case "incoming":
 			func_94BE(var_00);
 			break;
@@ -2169,9 +1828,7 @@ func_D4A3()
 	self notify("done speaking");
 }
 
-//Function Number: 55
-func_94C0(param_00)
-{
+func_94C0(param_00) {
 	var_01 = self;
 	var_01 endon("death");
 	var_01 endon("removed from battleChatter");
@@ -2180,9 +1837,7 @@ func_94C0(param_00)
 	var_01 func_D4F8(var_02,self);
 }
 
-//Function Number: 56
-func_94C1(param_00)
-{
+func_94C1(param_00) {
 	var_01 = self;
 	var_01 endon("death");
 	var_01 endon("removed from battleChatter");
@@ -2191,15 +1846,12 @@ func_94C1(param_00)
 	var_01 func_D4F8(var_02,self);
 }
 
-//Function Number: 57
-func_94BE(param_00)
-{
+func_94BE(param_00) {
 	var_01 = self;
 	var_01 endon("death");
 	var_01 endon("removed from battleChatter");
 	var_02 = var_01 func_4996();
-	if(param_00 == "frag" || param_00 == "shock" || param_00 == "ant" || param_00 == "seek")
-	{
+	if(param_00 == "frag" || param_00 == "shock" || param_00 == "ant" || param_00 == "seek") {
 		var_02.var_B3D1 = 1;
 	}
 
@@ -2207,9 +1859,7 @@ func_94BE(param_00)
 	var_01 func_D4F8(var_02,self);
 }
 
-//Function Number: 58
-func_94BD(param_00)
-{
+func_94BD(param_00) {
 	var_01 = self;
 	var_01 endon("death");
 	var_01 endon("removed from battleChatter");
@@ -2218,9 +1868,7 @@ func_94BD(param_00)
 	var_01 func_D4F8(var_02,self);
 }
 
-//Function Number: 59
-func_94BF(param_00)
-{
+func_94BF(param_00) {
 	var_01 = self;
 	var_01 endon("death");
 	var_01 endon("removed from battleChatter");
@@ -2229,9 +1877,7 @@ func_94BF(param_00)
 	var_01 func_D4F8(var_02,self);
 }
 
-//Function Number: 60
-func_CF0A()
-{
+func_CF0A() {
 	var_00 = self.var_3D4C["custom"];
 	self.var_4B1F = self.var_3D4C["custom"];
 	var_01 = self;
@@ -2244,42 +1890,33 @@ func_CF0A()
 	var_01.var_4C84 = undefined;
 }
 
-//Function Number: 61
-func_D4F8(param_00,param_01,param_02)
-{
+func_D4F8(param_00,param_01,param_02) {
 	anim endon("battlechatter disabled");
 	self endon("dog_attacks_ai");
 	self endon("death");
-	if(isdefined(param_02))
-	{
+	if(isdefined(param_02)) {
 		return;
 	}
 
-	if(scripts\anim\battlechatter_ai::func_1A1B() && !scripts\common\utility::player_is_in_jackal())
-	{
+	if(scripts\anim\battlechatter_ai::func_1A1B() && !scripts\common\utility::player_is_in_jackal()) {
 		self notify("playPhrase_done");
 		param_01 func_5ACA(param_01.var_4B1F.var_68AC,param_01.var_4B1F.var_68BA);
 		return;
 	}
 
-	if(battlechatter_canprint() || battlechatter_canprintdump())
-	{
+	if(battlechatter_canprint() || battlechatter_canprintdump()) {
 		var_03 = [];
-		foreach(var_05 in param_00.var_10476)
-		{
+		foreach(var_05 in param_00.var_10476) {
 			var_03[var_03.size] = var_05;
 		}
 
-		if(battlechatter_canprint())
-		{
+		if(battlechatter_canprint()) {
 			battlechatter_print(var_03);
 		}
 
-		if(battlechatter_canprintdump())
-		{
+		if(battlechatter_canprintdump()) {
 			var_07 = self.var_4B1F.var_68AC + "_" + self.var_4B1F.var_68BA;
-			if(isdefined(self.var_4B1F.modifiedspawnpoints))
-			{
+			if(isdefined(self.var_4B1F.modifiedspawnpoints)) {
 				var_07 = var_07 + "_" + self.var_4B1F.modifiedspawnpoints;
 			}
 
@@ -2287,39 +1924,30 @@ func_D4F8(param_00,param_01,param_02)
 		}
 	}
 
-	for(var_08 = 0;var_08 < param_00.var_10476.size;var_08++)
-	{
-		if(!self.var_28CF)
-		{
-			if(!func_9BEB(self.var_4B1F))
-			{
+	for(var_08 = 0;var_08 < param_00.var_10476.size;var_08++) {
+		if(!self.var_28CF) {
+			if(!func_9BEB(self.var_4B1F)) {
 			}
 			else
 			{
 			}
-			else if(!func_3844(0))
-			{
+			else if(!func_3844(0)) {
 			}
-			else if((!isdefined(self.var_117C) && self != level.player && !scripts\anim\battlechatter_ai::func_1A1B()) || isdefined(self.var_117C) && self.var_117C > 0)
-			{
+			else if((!isdefined(self.var_117C) && self != level.player && !scripts\anim\battlechatter_ai::func_1A1B()) || isdefined(self.var_117C) && self.var_117C > 0) {
 			}
-			else if(func_9DF3(param_01.var_4B1F.var_68AC))
-			{
+			else if(func_9DF3(param_01.var_4B1F.var_68AC)) {
 				wait(0.85);
 			}
-			else if(!soundexists(param_00.var_10476[var_08]))
-			{
+			else if(!soundexists(param_00.var_10476[var_08])) {
 			}
 			else
 			{
 				var_09 = gettime();
-				if(self == level.player)
-				{
+				if(self == level.player) {
 					var_0A = spawn("script_origin",level.player geteye());
 					var_0A linkto(self);
 				}
-				else if(scripts\common\utility::player_is_in_jackal())
-				{
+				else if(scripts\common\utility::player_is_in_jackal()) {
 					var_0B = level.player gettagorigin("tag_cockpit_light_monitor2");
 					var_0A = spawn("script_origin",var_0B);
 					var_0A linkto(level.player);
@@ -2332,14 +1960,11 @@ func_D4F8(param_00,param_01,param_02)
 
 				thread func_11047(param_00.var_10476[var_08],var_0A);
 				func_F2DB(param_00.var_10476[var_08]);
-				if(param_00.var_B3D1 && self.team == "allies")
-				{
+				if(param_00.var_B3D1 && self.team == "allies") {
 					thread scripts\sp\anim::func_1EBF(param_00.var_10476[var_08],param_00.var_299D);
-					if(isdefined(self.classname) && self.classname == "player")
-					{
+					if(isdefined(self.classname) && self.classname == "player") {
 						var_0C = self.health \ self.maxhealth;
-						if(var_0C > self.var_86A9.healthoverlaycutoff)
-						{
+						if(var_0C > self.var_86A9.healthoverlaycutoff) {
 							var_0A playsound(param_00.var_10476[var_08],param_00.var_10476[var_08],1);
 						}
 					}
@@ -2354,13 +1979,10 @@ func_D4F8(param_00,param_01,param_02)
 				else
 				{
 					thread scripts\sp\anim::func_1EBF(param_00.var_10476[var_08],param_00.var_299D);
-					if(getdvarint("bcs_forceEnglish",0))
-					{
-						if(isdefined(self.classname) && self.classname == "player")
-						{
+					if(getdvarint("bcs_forceEnglish",0)) {
+						if(isdefined(self.classname) && self.classname == "player") {
 							var_0C = self.health \ self.maxhealth;
-							if(var_0C > self.var_86A9.healthoverlaycutoff)
-							{
+							if(var_0C > self.var_86A9.healthoverlaycutoff) {
 								var_0A playsound(param_00.var_10476[var_08],param_00.var_10476[var_08],1);
 							}
 						}
@@ -2369,11 +1991,9 @@ func_D4F8(param_00,param_01,param_02)
 							var_0A playsound(param_00.var_10476[var_08],param_00.var_10476[var_08],1);
 						}
 					}
-					else if(isdefined(self.classname) && self.classname == "player")
-					{
+					else if(isdefined(self.classname) && self.classname == "player") {
 						var_0C = self.health \ self.maxhealth;
-						if(var_0C > self.var_86A9.healthoverlaycutoff)
-						{
+						if(var_0C > self.var_86A9.healthoverlaycutoff) {
 							var_0A playsound(param_00.var_10476[var_08],param_00.var_10476[var_08],1);
 						}
 					}
@@ -2387,16 +2007,14 @@ func_D4F8(param_00,param_01,param_02)
 				}
 
 				var_0A delete();
-				if(gettime() < var_09 + 250)
-				{
+				if(gettime() < var_09 + 250) {
 				}
 			}
 		}
 	}
 
 	self notify("playPhrase_done");
-	if(self != level.player)
-	{
+	if(self != level.player) {
 		self.var_1198.var_28DE = undefined;
 		self.var_1198.var_28D0 = undefined;
 	}
@@ -2404,114 +2022,90 @@ func_D4F8(param_00,param_01,param_02)
 	param_01 func_5ACA(param_01.var_4B1F.var_68AC,param_01.var_4B1F.var_68BA);
 }
 
-//Function Number: 62
-func_F2DB(param_00)
-{
+func_F2DB(param_00) {
 	var_01 = strtok(param_00,"_");
-	if(!isdefined(self._blackboard))
-	{
+	if(!isdefined(self._blackboard)) {
 		return;
 	}
 
-	if(scripts\common\utility::array_contains(var_01,"killfirm"))
-	{
+	if(scripts\common\utility::array_contains(var_01,"killfirm")) {
 		self.var_1198.var_28D0 = "action";
 		return;
 	}
 
-	if(scripts\common\utility::array_contains(var_01,"action"))
-	{
+	if(scripts\common\utility::array_contains(var_01,"action")) {
 		self.var_1198.var_28D0 = "action";
 		return;
 	}
 
-	if(scripts\common\utility::array_contains(var_01,"attack") && !scripts\common\utility::array_contains(var_01,"grenade"))
-	{
+	if(scripts\common\utility::array_contains(var_01,"attack") && !scripts\common\utility::array_contains(var_01,"grenade")) {
 		self.var_1198.var_28D0 = "attacking_action";
 		return;
 	}
 
-	if(scripts\common\utility::array_contains(var_01,"grenade") || scripts\common\utility::array_contains(var_01,"incoming") || scripts\common\utility::array_contains(var_01,"inform") && !scripts\common\utility::array_contains(var_01,"taking"))
-	{
+	if(scripts\common\utility::array_contains(var_01,"grenade") || scripts\common\utility::array_contains(var_01,"incoming") || scripts\common\utility::array_contains(var_01,"inform") && !scripts\common\utility::array_contains(var_01,"taking")) {
 		self.var_1198.var_28D0 = "defending_action";
 		return;
 	}
 
-	if(scripts\common\utility::array_contains(var_01,"order"))
-	{
+	if(scripts\common\utility::array_contains(var_01,"order")) {
 		self.var_1198.var_28D0 = "order_action";
 		return;
 	}
 
-	if(scripts\common\utility::array_contains(var_01,"callout") || scripts\common\utility::array_contains(var_01,"dist") || scripts\common\utility::array_contains(var_01,"exposed") && !scripts\common\utility::array_contains(var_01,"acquired"))
-	{
+	if(scripts\common\utility::array_contains(var_01,"callout") || scripts\common\utility::array_contains(var_01,"dist") || scripts\common\utility::array_contains(var_01,"exposed") && !scripts\common\utility::array_contains(var_01,"acquired")) {
 		self.var_1198.var_28D0 = "threat_infantry";
 		return;
 	}
 
-	if(scripts\common\utility::array_contains(var_01,"taking"))
-	{
+	if(scripts\common\utility::array_contains(var_01,"taking")) {
 		self.var_1198.var_28D0 = "takingfire";
 		return;
 	}
 
-	if(scripts\common\utility::array_contains(var_01,"resp") || scripts\common\utility::array_contains(var_01,"affirm") || scripts\common\utility::array_contains(var_01,"acquired"))
-	{
+	if(scripts\common\utility::array_contains(var_01,"resp") || scripts\common\utility::array_contains(var_01,"affirm") || scripts\common\utility::array_contains(var_01,"acquired")) {
 		self.var_1198.var_28D0 = "response";
 		return;
 	}
 }
 
-//Function Number: 63
-func_11047(param_00,param_01)
-{
+func_11047(param_00,param_01) {
 	param_01 endon("death");
 	self waittill("death");
-	if(isdefined(param_01))
-	{
+	if(isdefined(param_01)) {
 		param_01 stopsounds();
 		scripts\common\utility::waitframe();
-		if(isdefined(param_01))
-		{
+		if(isdefined(param_01)) {
 			param_01 notify(param_00);
 			param_01 delete();
 		}
 	}
 }
 
-//Function Number: 64
-func_9BEB(param_00)
-{
-	if(!isdefined(param_00.var_68AC) || !isdefined(param_00.var_68BA))
-	{
+func_9BEB(param_00) {
+	if(!isdefined(param_00.var_68AC) || !isdefined(param_00.var_68BA)) {
 		return 0;
 	}
 
-	if(param_00.var_68AC == "reaction" && param_00.var_68BA == "friendlyfire")
-	{
+	if(param_00.var_68AC == "reaction" && param_00.var_68BA == "friendlyfire") {
 		return 1;
 	}
 
 	return 0;
 }
 
-//Function Number: 65
-func_9F6C(param_00)
-{
+func_9F6C(param_00) {
 	self endon("death");
 	self endon("removed from battleChatter");
 	wait(25);
 	func_41BC(param_00);
 }
 
-//Function Number: 66
-func_41BC(param_00)
-{
+func_41BC(param_00) {
 	self.var_9F6B = 0;
 	self.var_3D4C[param_00].var_698B = 0;
 	self.var_3D4C[param_00].priority = 0;
-	if(isdefined(self.unittype) && self.unittype != "c6")
-	{
+	if(isdefined(self.unittype) && self.unittype != "c6") {
 		self.var_BFA9[param_00] = gettime() + level.var_68AD[param_00]["self"];
 		return;
 	}
@@ -2519,9 +2113,7 @@ func_41BC(param_00)
 	self.var_BFA9[param_00] = gettime() + 1;
 }
 
-//Function Number: 67
-func_AEEB(param_00,param_01,param_02)
-{
+func_AEEB(param_00,param_01,param_02) {
 	anim endon("battlechatter disabled");
 	var_03 = param_00.var_10AC8;
 	var_04 = param_00.team;
@@ -2536,36 +2128,28 @@ func_AEEB(param_00,param_01,param_02)
 	var_03.var_C242--;
 	level.isteamspeaking[var_04] = 0;
 	level.isteamsaying[var_04][param_01] = 0;
-	if(var_05 == "cancel speaking")
-	{
+	if(var_05 == "cancel speaking") {
 		return;
 	}
 
 	level.var_AA27[var_04] = gettime();
-	if(isalive(param_00))
-	{
+	if(isalive(param_00)) {
 		param_00 func_41BC(param_01);
 	}
 
 	var_03.var_BFA9[param_01] = gettime() + level.var_68AD[param_01]["squad"];
 }
 
-//Function Number: 68
-func_12E7C(param_00,param_01)
-{
-	if(gettime() - self.var_10AE9[param_00].var_A95F > 10000)
-	{
+func_12E7C(param_00,param_01) {
+	if(gettime() - self.var_10AE9[param_00].var_A95F > 10000) {
 		var_02 = 0;
-		for(var_03 = 0;var_03 < self.var_B661.size;var_03++)
-		{
-			if(self.var_B661[var_03] != param_01 && isalive(self.var_B661[var_03].isnodeoccupied) && isdefined(self.var_B661[var_03].var_10C.var_10AC8) && self.var_B661[var_03].var_10C.var_10AC8.var_10AEE == param_00)
-			{
+		for(var_03 = 0;var_03 < self.var_B661.size;var_03++) {
+			if(self.var_B661[var_03] != param_01 && isalive(self.var_B661[var_03].isnodeoccupied) && isdefined(self.var_B661[var_03].var_10C.var_10AC8) && self.var_B661[var_03].var_10C.var_10AC8.var_10AEE == param_00) {
 				var_02 = 1;
 			}
 		}
 
-		if(!var_02)
-		{
+		if(!var_02) {
 			self.var_10AE9[param_00].firstcontact = gettime();
 			self.var_10AE9[param_00].var_376A = 0;
 		}
@@ -2574,75 +2158,58 @@ func_12E7C(param_00,param_01)
 	self.var_10AE9[param_00].var_A95F = gettime();
 }
 
-//Function Number: 69
-cansay(param_00,param_01,param_02,param_03)
-{
+cansay(param_00,param_01,param_02,param_03) {
 	self endon("death");
 	self endon("removed from battleChatter");
-	if(isdefined(self.unittype) && self.unittype == "c8")
-	{
+	if(isdefined(self.unittype) && self.unittype == "c8") {
 		return 0;
 	}
 
-	if(isdefined(self.unittype) && self.unittype == "c12")
-	{
+	if(isdefined(self.unittype) && self.unittype == "c12") {
 		return 0;
 	}
 
-	if(!isdefined(level.player.var_28CF) || isdefined(level.player.var_28CF) && !level.player.var_28CF && isplayer(self))
-	{
+	if(!isdefined(level.player.var_28CF) || isdefined(level.player.var_28CF) && !level.player.var_28CF && isplayer(self)) {
 		return 0;
 	}
 
-	if(distance(level.player.origin,self.origin) > level.var_29BD)
-	{
+	if(distance(level.player.origin,self.origin) > level.var_29BD) {
 		return 0;
 	}
 
-	if(!isdefined(self.var_28CF) || !self.var_28CF || !isdefined(self.var_BFA9))
-	{
+	if(!isdefined(self.var_28CF) || !self.var_28CF || !isdefined(self.var_BFA9)) {
 		return 0;
 	}
 
-	if(isdefined(param_02) && param_02 >= 1)
-	{
+	if(isdefined(param_02) && param_02 >= 1) {
 		return 1;
 	}
 
-	if(gettime() + level.var_68AD[param_00]["self"] < self.var_BFA9[param_00])
-	{
+	if(gettime() + level.var_68AD[param_00]["self"] < self.var_BFA9[param_00]) {
 		return 0;
 	}
 
-	if(gettime() + level.var_68AD[param_00]["squad"] < self.var_10AC8.var_BFA9[param_00])
-	{
+	if(gettime() + level.var_68AD[param_00]["squad"] < self.var_10AC8.var_BFA9[param_00]) {
 		return 0;
 	}
 
-	if(isdefined(param_01) && func_12AE7(param_00,param_01))
-	{
+	if(isdefined(param_01) && func_12AE7(param_00,param_01)) {
 		return 0;
 	}
 
-	if(isdefined(param_01) && level.var_68B5[param_00][param_01] < self.var_29BF)
-	{
+	if(isdefined(param_01) && level.var_68B5[param_00][param_01] < self.var_29BF) {
 		return 0;
 	}
 
 	return 1;
 }
 
-//Function Number: 70
-func_7EFE()
-{
+func_7EFE() {
 	var_00 = undefined;
 	var_01 = -999999999;
-	foreach(var_04, var_03 in self.var_3D4C)
-	{
-		if(func_9FD7(var_04))
-		{
-			if(var_03.priority > var_01)
-			{
+	foreach(var_04, var_03 in self.var_3D4C) {
+		if(func_9FD7(var_04)) {
+			if(var_03.priority > var_01) {
 				var_00 = var_04;
 				var_01 = var_03.priority;
 			}
@@ -2652,40 +2219,30 @@ func_7EFE()
 	return var_00;
 }
 
-//Function Number: 71
-_meth_83DE(param_00)
-{
-	if(!level.isteamsaying[level.var_115E7[0]][param_00] && !level.isteamsaying[level.var_115E7[1]][param_00] && !level.isteamsaying[level.var_115E7[2]][param_00] && !level.isteamsaying[level.var_115E7[3]][param_00])
-	{
+_meth_83DE(param_00) {
+	if(!level.isteamsaying[level.var_115E7[0]][param_00] && !level.isteamsaying[level.var_115E7[1]][param_00] && !level.isteamsaying[level.var_115E7[2]][param_00] && !level.isteamsaying[level.var_115E7[3]][param_00]) {
 		return 1;
 	}
 
 	return 0;
 }
 
-//Function Number: 72
-_meth_819F(param_00)
-{
+_meth_819F(param_00) {
 	var_01 = self.var_10AC8;
 	var_02 = [];
-	for(var_03 = 0;var_03 < var_01.var_B661.size;var_03++)
-	{
-		if(isdefined(var_01.var_B661[var_03].isnodeoccupied) && var_01.var_B661[var_03].isnodeoccupied == param_00)
-		{
+	for(var_03 = 0;var_03 < var_01.var_B661.size;var_03++) {
+		if(isdefined(var_01.var_B661[var_03].isnodeoccupied) && var_01.var_B661[var_03].isnodeoccupied == param_00) {
 			var_02[var_02.size] = var_01.var_B661[var_03];
 		}
 	}
 
-	if(!isdefined(var_02[0]))
-	{
+	if(!isdefined(var_02[0])) {
 		return undefined;
 	}
 
 	var_04 = undefined;
-	for(var_03 = 0;var_03 < var_02.size;var_03++)
-	{
-		if(var_02[var_03] cansay("response"))
-		{
+	for(var_03 = 0;var_03 < var_02.size;var_03++) {
+		if(var_02[var_03] cansay("response")) {
 			return var_04;
 		}
 	}
@@ -2693,9 +2250,7 @@ _meth_819F(param_00)
 	return scripts\common\utility::getclosest(self.origin,var_02);
 }
 
-//Function Number: 73
-disableplayeruse()
-{
+disableplayeruse() {
 	var_00 = [];
 	var_01 = [];
 	var_00[0] = "custom";
@@ -2703,12 +2258,9 @@ disableplayeruse()
 	var_00[2] = "order";
 	var_00[3] = "threat";
 	var_00[4] = "inform";
-	for(var_02 = var_00.size - 1;var_02 >= 0;var_02--)
-	{
-		for(var_03 = 1;var_03 <= var_02;var_03++)
-		{
-			if(self.var_3D4C[var_00[var_03 - 1]].priority < self.var_3D4C[var_00[var_03]].priority)
-			{
+	for(var_02 = var_00.size - 1;var_02 >= 0;var_02--) {
+		for(var_03 = 1;var_03 <= var_02;var_03++) {
+			if(self.var_3D4C[var_00[var_03 - 1]].priority < self.var_3D4C[var_00[var_03]].priority) {
 				var_04 = var_00[var_03 - 1];
 				var_00[var_03 - 1] = var_00[var_03];
 				var_00[var_03] = var_04;
@@ -2717,24 +2269,20 @@ disableplayeruse()
 	}
 
 	var_05 = 0;
-	for(var_02 = 0;var_02 < var_00.size;var_02++)
-	{
+	for(var_02 = 0;var_02 < var_00.size;var_02++) {
 		var_06 = func_7EA1(var_00[var_02]);
-		if(var_06 == " valid" && !var_05)
-		{
+		if(var_06 == " valid" && !var_05) {
 			var_05 = 1;
 			var_01[var_02] = "g " + var_00[var_02] + var_06 + " " + self.var_3D4C[var_00[var_02]].priority;
 			continue;
 		}
 
-		if(var_06 == " valid")
-		{
+		if(var_06 == " valid") {
 			var_01[var_02] = "y " + var_00[var_02] + var_06 + " " + self.var_3D4C[var_00[var_02]].priority;
 			continue;
 		}
 
-		if(self.var_3D4C[var_00[var_02]].var_698B == 0)
-		{
+		if(self.var_3D4C[var_00[var_02]].var_698B == 0) {
 			var_01[var_02] = "b " + var_00[var_02] + var_06 + " " + self.var_3D4C[var_00[var_02]].priority;
 			continue;
 		}
@@ -2745,52 +2293,39 @@ disableplayeruse()
 	return var_01;
 }
 
-//Function Number: 74
-func_7EA1(param_00)
-{
+func_7EA1(param_00) {
 	var_01 = "";
-	if(self.var_10AC8.var_9E9B[param_00])
-	{
+	if(self.var_10AC8.var_9E9B[param_00]) {
 		var_01 = var_01 + " playing";
 	}
 
-	if(gettime() > self.var_3D4C[param_00].var_698B)
-	{
+	if(gettime() > self.var_3D4C[param_00].var_698B) {
 		var_01 = var_01 + " expired";
 	}
 
-	if(gettime() < self.var_10AC8.var_BFA9[param_00])
-	{
+	if(gettime() < self.var_10AC8.var_BFA9[param_00]) {
 		var_01 = var_01 + " cantspeak";
 	}
 
-	if(var_01 == "")
-	{
+	if(var_01 == "") {
 		var_01 = " valid";
 	}
 
 	return var_01;
 }
 
-//Function Number: 75
-func_9DF3(param_00)
-{
-	if(getdvar("bcs_filter" + param_00,"off") == "on" || getdvar("bcs_filter" + param_00,"off") == "1")
-	{
+func_9DF3(param_00) {
+	if(getdvar("bcs_filter" + param_00,"off") == "on" || getdvar("bcs_filter" + param_00,"off") == "1") {
 		return 1;
 	}
 
 	return 0;
 }
 
-//Function Number: 76
-func_9FD7(param_00)
-{
+func_9FD7(param_00) {
 	var_01 = gettime();
-	if(!self.var_10AC8.var_9E9B[param_00] && !level.isteamsaying[level.var_115E7[0]][param_00] && !level.isteamsaying[level.var_115E7[1]][param_00] && !level.isteamsaying[level.var_115E7[2]][param_00] && !level.isteamsaying[level.var_115E7[3]][param_00] && gettime() < self.var_3D4C[param_00].var_698B && gettime() > self.var_10AC8.var_BFA9[param_00])
-	{
-		if(!func_12AE7(param_00,self.var_3D4C[param_00].var_68BA))
-		{
+	if(!self.var_10AC8.var_9E9B[param_00] && !level.isteamsaying[level.var_115E7[0]][param_00] && !level.isteamsaying[level.var_115E7[1]][param_00] && !level.isteamsaying[level.var_115E7[2]][param_00] && !level.isteamsaying[level.var_115E7[3]][param_00] && gettime() < self.var_3D4C[param_00].var_698B && gettime() > self.var_10AC8.var_BFA9[param_00]) {
+		if(!func_12AE7(param_00,self.var_3D4C[param_00].var_68BA)) {
 			return 1;
 		}
 	}
@@ -2798,167 +2333,126 @@ func_9FD7(param_00)
 	return 0;
 }
 
-//Function Number: 77
-func_12AE7(param_00,param_01)
-{
-	if(!isdefined(level.var_68BB[param_00][param_01]))
-	{
+func_12AE7(param_00,param_01) {
+	if(!isdefined(level.var_68BB[param_00][param_01])) {
 		return 0;
 	}
 
-	if(!isdefined(self.var_10AC8.var_BFB4[param_00][param_01]))
-	{
+	if(!isdefined(self.var_10AC8.var_BFB4[param_00][param_01])) {
 		return 0;
 	}
 
-	if(gettime() > self.var_10AC8.var_BFB4[param_00][param_01])
-	{
+	if(gettime() > self.var_10AC8.var_BFB4[param_00][param_01]) {
 		return 0;
 	}
 
 	return 1;
 }
 
-//Function Number: 78
-func_5ACA(param_00,param_01)
-{
-	if(!isdefined(level.var_68BB[param_00][param_01]))
-	{
+func_5ACA(param_00,param_01) {
+	if(!isdefined(level.var_68BB[param_00][param_01])) {
 		return;
 	}
 
 	self.var_10AC8.var_BFB4[param_00][param_01] = gettime() + level.var_68BB[param_00][param_01];
 }
 
-//Function Number: 79
-func_29AB()
-{
-	if(!isdefined(self))
-	{
+func_29AB() {
+	if(!isdefined(self)) {
 		return 0;
 	}
 
-	if(!isalive(self))
-	{
+	if(!isalive(self)) {
 		return 0;
 	}
 
-	if(isplayer(self))
-	{
+	if(isplayer(self)) {
 		return 0;
 	}
 
-	if(!isdefined(self.var_394))
-	{
+	if(!isdefined(self.var_394)) {
 		return 0;
 	}
 
 	return scripts\anim\utility_common::issniperrifle(self.var_394);
 }
 
-//Function Number: 80
-isexposed(param_00)
-{
-	if(distancesquared(self.origin,level.player.origin) > 2250000)
-	{
+isexposed(param_00) {
+	if(distancesquared(self.origin,level.player.origin) > 2250000) {
 		return 0;
 	}
 
-	if(isdefined(param_00) && param_00 && isdefined(getlocation()))
-	{
+	if(isdefined(param_00) && param_00 && isdefined(getlocation())) {
 		return 0;
 	}
 
 	var_01 = func_29A6();
-	if(!isdefined(var_01))
-	{
+	if(!isdefined(var_01)) {
 		return 1;
 	}
 
-	if(!isnodecoverorconceal())
-	{
+	if(!isnodecoverorconceal()) {
 		return 0;
 	}
 
 	return 1;
 }
 
-//Function Number: 81
-isnodecoverorconceal()
-{
+isnodecoverorconceal() {
 	var_00 = self.target_getindexoftarget;
-	if(!isdefined(var_00))
-	{
+	if(!isdefined(var_00)) {
 		return 0;
 	}
 
-	if(issubstr(var_00.type,"Cover") || issubstr(var_00.type,"Conceal"))
-	{
+	if(issubstr(var_00.type,"Cover") || issubstr(var_00.type,"Conceal")) {
 		return 1;
 	}
 
 	return 0;
 }
 
-//Function Number: 82
-func_10AE3(param_00)
-{
-	if(param_00.var_C35A > 0)
-	{
+func_10AE3(param_00) {
+	if(param_00.var_C35A > 0) {
 		return 1;
 	}
 
 	return 0;
 }
 
-//Function Number: 83
-func_9EC2()
-{
+func_9EC2() {
 	var_00 = getrank();
-	if(!isdefined(var_00))
-	{
+	if(!isdefined(var_00)) {
 		return 0;
 	}
 
-	if(var_00 == "sergeant" || var_00 == "lieutenant" || var_00 == "captain" || var_00 == "sergeant")
-	{
+	if(var_00 == "sergeant" || var_00 == "lieutenant" || var_00 == "captain" || var_00 == "sergeant") {
 		return 1;
 	}
 
 	return 0;
 }
 
-//Function Number: 84
-func_29A6()
-{
-	if(isplayer(self))
-	{
+func_29A6() {
+	if(isplayer(self)) {
 		return self.target_getindexoftarget;
 	}
 
 	return scripts\anim\utility_common::func_7E28();
 }
 
-//Function Number: 85
-func_652B()
-{
-	if(issentient(self) && self gettargetchargepos())
-	{
+func_652B() {
+	if(issentient(self) && self gettargetchargepos()) {
 		return 1;
 	}
 
 	return 0;
 }
 
-//Function Number: 86
-func_7FD8()
-{
-	if(func_652B())
-	{
+func_7FD8() {
+	if(func_652B()) {
 		var_00 = self.var_1A53;
 	}
-	else if(self.team == "allies")
-	{
+	else if(self.team == "allies") {
 		var_00 = self.name;
 	}
 	else
@@ -2966,48 +2460,37 @@ func_7FD8()
 		var_00 = undefined;
 	}
 
-	if(!isdefined(var_00))
-	{
+	if(!isdefined(var_00)) {
 		return undefined;
 	}
 
 	var_01 = strtok(var_00," ");
-	if(var_01.size < 2)
-	{
+	if(var_01.size < 2) {
 		return var_00;
 	}
 
 	return var_01[1];
 }
 
-//Function Number: 87
-getrank()
-{
+getrank() {
 	return self.var_1A70;
 }
 
-//Function Number: 88
-func_7E32(param_00)
-{
+func_7E32(param_00) {
 	var_01 = _meth_8145(param_00,self.team);
 	var_02 = scripts\common\utility::getclosest(self.origin,var_01);
 	return var_02;
 }
 
-//Function Number: 89
-_meth_8145(param_00,param_01)
-{
+_meth_8145(param_00,param_01) {
 	var_02 = [];
 	var_03 = function_0072(param_01);
-	for(var_04 = 0;var_04 < var_03.size;var_04++)
-	{
-		if(var_03[var_04] == self)
-		{
+	for(var_04 = 0;var_04 < var_03.size;var_04++) {
+		if(var_03[var_04] == self) {
 			continue;
 		}
 
-		if(!var_03[var_04] cansay(param_00))
-		{
+		if(!var_03[var_04] cansay(param_00)) {
 			continue;
 		}
 
@@ -3017,56 +2500,44 @@ _meth_8145(param_00,param_01)
 	return var_02;
 }
 
-//Function Number: 90
-finishplayerdamage(param_00,param_01,param_02)
-{
+finishplayerdamage(param_00,param_01,param_02) {
 	var_03 = undefined;
-	if(!isdefined(param_02))
-	{
+	if(!isdefined(param_02)) {
 		param_02 = "response";
 	}
 
 	var_04 = scripts\common\utility::array_randomize(self.var_10AC8.var_B661);
 	param_00 = param_00 * param_00;
 	param_01 = param_01 * param_01;
-	for(var_05 = 0;var_05 < var_04.size;var_05++)
-	{
-		if(var_04[var_05] == self)
-		{
+	for(var_05 = 0;var_05 < var_04.size;var_05++) {
+		if(var_04[var_05] == self) {
 			continue;
 		}
 
-		if(!isalive(var_04[var_05]))
-		{
+		if(!isalive(var_04[var_05])) {
 			continue;
 		}
 
 		var_06 = distancesquared(self.origin,var_04[var_05].origin);
-		if(var_06 < param_00)
-		{
+		if(var_06 < param_00) {
 			continue;
 		}
 
-		if(var_06 > param_01)
-		{
+		if(var_06 > param_01) {
 			continue;
 		}
 
-		if(func_9FC7(var_04[var_05]))
-		{
+		if(func_9FC7(var_04[var_05])) {
 			continue;
 		}
 
-		if(!var_04[var_05] cansay(param_02))
-		{
+		if(!var_04[var_05] cansay(param_02)) {
 			continue;
 		}
 
 		var_03 = var_04[var_05];
-		if(!scripts\sp\_utility::func_D123())
-		{
-			if(cansayname(var_03))
-			{
+		if(!scripts\sp\_utility::func_D123()) {
+			if(cansayname(var_03)) {
 				break;
 			}
 		}
@@ -3075,25 +2546,18 @@ finishplayerdamage(param_00,param_01,param_02)
 	return var_03;
 }
 
-//Function Number: 91
-getlocation()
-{
+getlocation() {
 	var_00 = get_all_my_locations();
 	var_00 = scripts\common\utility::array_randomize(var_00);
-	if(var_00.size)
-	{
-		foreach(var_02 in var_00)
-		{
-			if(!location_called_out_ever(var_02))
-			{
+	if(var_00.size) {
+		foreach(var_02 in var_00) {
+			if(!location_called_out_ever(var_02)) {
 				return var_02;
 			}
 		}
 
-		foreach(var_02 in var_00)
-		{
-			if(!location_called_out_recently(var_02))
-			{
+		foreach(var_02 in var_00) {
+			if(!location_called_out_recently(var_02)) {
 				return var_02;
 			}
 		}
@@ -3102,25 +2566,18 @@ getlocation()
 	return undefined;
 }
 
-//Function Number: 92
-getvalidlocation(param_00)
-{
+getvalidlocation(param_00) {
 	var_01 = get_all_my_locations();
 	var_01 = scripts\common\utility::array_randomize(var_01);
-	if(var_01.size)
-	{
-		foreach(var_03 in var_01)
-		{
-			if(!location_called_out_ever(var_03) && param_00 cancalloutlocation(var_03))
-			{
+	if(var_01.size) {
+		foreach(var_03 in var_01) {
+			if(!location_called_out_ever(var_03) && param_00 cancalloutlocation(var_03)) {
 				return var_03;
 			}
 		}
 
-		foreach(var_03 in var_01)
-		{
-			if(!location_called_out_recently(var_03) && param_00 cancalloutlocation(var_03))
-			{
+		foreach(var_03 in var_01) {
+			if(!location_called_out_recently(var_03) && param_00 cancalloutlocation(var_03)) {
 				return var_03;
 			}
 		}
@@ -3129,16 +2586,12 @@ getvalidlocation(param_00)
 	return undefined;
 }
 
-//Function Number: 93
-get_all_my_locations()
-{
+get_all_my_locations() {
 	var_00 = level.bcs_locations;
 	var_01 = self getistouchingentities(var_00);
 	var_02 = [];
-	foreach(var_04 in var_01)
-	{
-		if(isdefined(var_04.locationaliases))
-		{
+	foreach(var_04 in var_01) {
+		if(isdefined(var_04.locationaliases)) {
 			var_02[var_02.size] = var_04;
 		}
 	}
@@ -3146,23 +2599,16 @@ get_all_my_locations()
 	return var_02;
 }
 
-//Function Number: 94
-update_bcs_locations()
-{
-	if(isdefined(level.bcs_locations))
-	{
+update_bcs_locations() {
+	if(isdefined(level.bcs_locations)) {
 		anim.bcs_locations = scripts\common\utility::array_removeundefined(level.bcs_locations);
 	}
 }
 
-//Function Number: 95
-is_in_callable_location()
-{
+is_in_callable_location() {
 	var_00 = get_all_my_locations();
-	foreach(var_02 in var_00)
-	{
-		if(!location_called_out_recently(var_02))
-		{
+	foreach(var_02 in var_00) {
+		if(!location_called_out_recently(var_02)) {
 			return 1;
 		}
 	}
@@ -3170,62 +2616,46 @@ is_in_callable_location()
 	return 0;
 }
 
-//Function Number: 96
-location_called_out_ever(param_00)
-{
+location_called_out_ever(param_00) {
 	var_01 = location_get_last_callout_time(param_00);
-	if(!isdefined(var_01))
-	{
+	if(!isdefined(var_01)) {
 		return 0;
 	}
 
 	return 1;
 }
 
-//Function Number: 97
-location_called_out_recently(param_00)
-{
+location_called_out_recently(param_00) {
 	var_01 = location_get_last_callout_time(param_00);
-	if(!isdefined(var_01))
-	{
+	if(!isdefined(var_01)) {
 		return 0;
 	}
 
 	var_02 = var_01 + level.var_68AD["threat"]["location_repeat"];
-	if(gettime() < var_02)
-	{
+	if(gettime() < var_02) {
 		return 1;
 	}
 
 	return 0;
 }
 
-//Function Number: 98
-location_add_last_callout_time(param_00)
-{
+location_add_last_callout_time(param_00) {
 	level.locationlastcallouttimes[param_00.classname] = gettime();
 }
 
-//Function Number: 99
-location_get_last_callout_time(param_00)
-{
-	if(isdefined(level.locationlastcallouttimes[param_00.classname]))
-	{
+location_get_last_callout_time(param_00) {
+	if(isdefined(level.locationlastcallouttimes[param_00.classname])) {
 		return level.locationlastcallouttimes[param_00.classname];
 	}
 
 	return undefined;
 }
 
-//Function Number: 100
-getrelativeangles(param_00)
-{
+getrelativeangles(param_00) {
 	var_01 = param_00.angles;
-	if(!isplayer(param_00))
-	{
+	if(!isplayer(param_00)) {
 		var_02 = param_00 func_29A6();
-		if(isdefined(var_02))
-		{
+		if(isdefined(var_02)) {
 			var_01 = var_02.angles;
 		}
 	}
@@ -3233,35 +2663,27 @@ getrelativeangles(param_00)
 	return var_01;
 }
 
-//Function Number: 101
-func_101B8(param_00)
-{
-	if(param_00 == "left" || param_00 == "right")
-	{
+func_101B8(param_00) {
+	if(param_00 == "left" || param_00 == "right") {
 		return 1;
 	}
 
 	return 0;
 }
 
-//Function Number: 102
-func_7E76(param_00,param_01,param_02)
-{
+func_7E76(param_00,param_01,param_02) {
 	var_03 = vectortoangles(param_02);
 	var_04 = vectortoangles(param_01 - param_00);
 	var_05 = var_03[1] - var_04[1];
 	var_05 = var_05 + 360;
 	var_05 = int(var_05) % 360;
-	if(var_05 > 315 || var_05 < 45)
-	{
+	if(var_05 > 315 || var_05 < 45) {
 		var_06 = "front";
 	}
-	else if(var_06 < 135)
-	{
+	else if(var_06 < 135) {
 		var_06 = "right";
 	}
-	else if(var_06 < 225)
-	{
+	else if(var_06 < 225) {
 		var_06 = "rear";
 	}
 	else
@@ -3272,12 +2694,9 @@ func_7E76(param_00,param_01,param_02)
 	return var_06;
 }
 
-//Function Number: 103
-func_C098(param_00)
-{
+func_C098(param_00) {
 	var_01 = undefined;
-	switch(param_00)
-	{
+	switch(param_00) {
 		case "north":
 			var_01 = "n";
 			break;
@@ -3321,52 +2740,40 @@ func_C098(param_00)
 	return var_01;
 }
 
-//Function Number: 104
-func_7E74(param_00,param_01)
-{
+func_7E74(param_00,param_01) {
 	var_02 = vectortoangles(param_01 - param_00);
 	var_03 = var_02[1];
 	var_04 = getnorthyaw();
 	var_03 = var_03 - var_04;
-	if(var_03 < 0)
-	{
+	if(var_03 < 0) {
 		var_03 = var_03 + 360;
 	}
-	else if(var_03 > 360)
-	{
+	else if(var_03 > 360) {
 		var_03 = var_03 - 360;
 	}
 
-	if(var_03 < 22.5 || var_03 > 337.5)
-	{
+	if(var_03 < 22.5 || var_03 > 337.5) {
 		var_05 = "north";
 	}
-	else if(var_04 < 67.5)
-	{
+	else if(var_04 < 67.5) {
 		var_05 = "northwest";
 	}
-	else if(var_04 < 112.5)
-	{
+	else if(var_04 < 112.5) {
 		var_05 = "west";
 	}
-	else if(var_04 < 157.5)
-	{
+	else if(var_04 < 157.5) {
 		var_05 = "southwest";
 	}
-	else if(var_04 < 202.5)
-	{
+	else if(var_04 < 202.5) {
 		var_05 = "south";
 	}
-	else if(var_04 < 247.5)
-	{
+	else if(var_04 < 247.5) {
 		var_05 = "southeast";
 	}
-	else if(var_04 < 292.5)
-	{
+	else if(var_04 < 292.5) {
 		var_05 = "east";
 	}
-	else if(var_04 < 337.5)
-	{
+	else if(var_04 < 337.5) {
 		var_05 = "northeast";
 	}
 	else
@@ -3377,94 +2784,72 @@ func_7E74(param_00,param_01)
 	return var_05;
 }
 
-//Function Number: 105
-func_7E7A(param_00,param_01)
-{
+func_7E7A(param_00,param_01) {
 	var_02 = distance2d(param_00,param_01);
 	var_03 = 0.0254 * var_02;
 	return var_03;
 }
 
-//Function Number: 106
-func_7E7B(param_00,param_01)
-{
+func_7E7B(param_00,param_01) {
 	var_02 = func_7E7A(param_00,param_01);
-	if(var_02 < 19)
-	{
+	if(var_02 < 19) {
 		return "10";
 	}
 
-	if(var_02 < 29)
-	{
+	if(var_02 < 29) {
 		return "20";
 	}
 
-	if(var_02 < 39)
-	{
+	if(var_02 < 39) {
 		return "30";
 	}
 
 	return "40";
 }
 
-//Function Number: 107
-func_7E7C(param_00,param_01)
-{
+func_7E7C(param_00,param_01) {
 	var_02 = distance2d(param_00,param_01);
 	var_03 = 1.57828E-05 * var_02;
 	return var_03;
 }
 
-//Function Number: 108
-func_7E7D(param_00,param_01)
-{
+func_7E7D(param_00,param_01) {
 	var_02 = func_7E7C(param_00,param_01);
-	if(var_02 < 5)
-	{
+	if(var_02 < 5) {
 		return "4";
 	}
 
-	if(var_02 < 6)
-	{
+	if(var_02 < 6) {
 		return "5";
 	}
 
-	if(var_02 < 7)
-	{
+	if(var_02 < 7) {
 		return "6";
 	}
 
-	if(var_02 < 15)
-	{
+	if(var_02 < 15) {
 		return "10";
 	}
 
 	return "15";
 }
 
-//Function Number: 109
-func_7EC9(param_00)
-{
+func_7EC9(param_00) {
 	var_01 = "undefined";
-	if(param_00 == "10" || param_00 == "11")
-	{
+	if(param_00 == "10" || param_00 == "11") {
 		var_01 = "10";
 	}
-	else if(param_00 == "12")
-	{
+	else if(param_00 == "12") {
 		var_01 = param_00;
 	}
-	else if(param_00 == "1" || param_00 == "2")
-	{
+	else if(param_00 == "1" || param_00 == "2") {
 		var_01 = "2";
 	}
 
 	return var_01;
 }
 
-//Function Number: 110
-func_7E75(param_00,param_01,param_02)
-{
+func_7E75(param_00,param_01,param_02) {
 	var_03 = anglestoforward(param_00);
 	var_04 = vectornormalize(var_03);
 	var_05 = vectortoangles(var_04);
@@ -3472,48 +2857,37 @@ func_7E75(param_00,param_01,param_02)
 	var_07 = var_05[1] - var_06[1];
 	var_07 = var_07 + 360;
 	var_07 = int(var_07) % 360;
-	if(var_07 > 345 || var_07 < 15)
-	{
+	if(var_07 > 345 || var_07 < 15) {
 		var_08 = "12";
 	}
-	else if(var_08 < 45)
-	{
+	else if(var_08 < 45) {
 		var_08 = "1";
 	}
-	else if(var_08 < 75)
-	{
+	else if(var_08 < 75) {
 		var_08 = "2";
 	}
-	else if(var_08 < 105)
-	{
+	else if(var_08 < 105) {
 		var_08 = "3";
 	}
-	else if(var_08 < 135)
-	{
+	else if(var_08 < 135) {
 		var_08 = "4";
 	}
-	else if(var_08 < 165)
-	{
+	else if(var_08 < 165) {
 		var_08 = "5";
 	}
-	else if(var_08 < 195)
-	{
+	else if(var_08 < 195) {
 		var_08 = "6";
 	}
-	else if(var_08 < 225)
-	{
+	else if(var_08 < 225) {
 		var_08 = "7";
 	}
-	else if(var_08 < 255)
-	{
+	else if(var_08 < 255) {
 		var_08 = "8";
 	}
-	else if(var_08 < 285)
-	{
+	else if(var_08 < 285) {
 		var_08 = "9";
 	}
-	else if(var_08 < 315)
-	{
+	else if(var_08 < 315) {
 		var_08 = "10";
 	}
 	else
@@ -3524,87 +2898,66 @@ func_7E75(param_00,param_01,param_02)
 	return var_08;
 }
 
-//Function Number: 111
-func_7E69(param_00,param_01)
-{
+func_7E69(param_00,param_01) {
 	var_02 = param_01[2] - param_00[2];
 	var_03 = distance2d(param_00,param_01);
 	var_04 = atan(var_02 \ var_03);
-	if(var_04 < 15 || var_04 > 55)
-	{
+	if(var_04 < 15 || var_04 > 55) {
 		return var_04;
 	}
 
-	if(var_04 < 25)
-	{
+	if(var_04 < 25) {
 		return 20;
 	}
 
-	if(var_04 < 35)
-	{
+	if(var_04 < 35) {
 		return 30;
 	}
 
-	if(var_04 < 45)
-	{
+	if(var_04 < 45) {
 		return 40;
 	}
 
-	if(var_04 < 55)
-	{
+	if(var_04 < 55) {
 		return 50;
 	}
 }
 
-//Function Number: 112
-markforeyeson(param_00)
-{
+markforeyeson(param_00) {
 	return (param_00[1],0 - param_00[0],param_00[2]);
 }
 
-//Function Number: 113
-makevehiclesolidsphere(param_00)
-{
+makevehiclesolidsphere(param_00) {
 	var_01 = (0,0,0);
-	for(var_02 = 0;var_02 < param_00.size;var_02++)
-	{
+	for(var_02 = 0;var_02 < param_00.size;var_02++) {
 		var_01 = var_01 + param_00[var_02];
 	}
 
 	return (var_01[0] \ param_00.size,var_01[1] \ param_00.size,var_01[2] \ param_00.size);
 }
 
-//Function Number: 114
-addconcattargetalias(param_00)
-{
+addconcattargetalias(param_00) {
 	var_01 = "_generic";
 	var_02 = undefined;
-	if(param_00 func_29AB())
-	{
+	if(param_00 func_29AB()) {
 		var_01 = "_sniper";
 	}
-	else if(func_9B42(param_00))
-	{
-		if(randomint(100) > 60)
-		{
+	else if(func_9B42(param_00)) {
+		if(randomint(100) > 60) {
 			var_01 = "_bot";
 		}
-		else if(isdefined(param_00.unittype) && param_00.unittype == "c6")
-		{
+		else if(isdefined(param_00.unittype) && param_00.unittype == "c6") {
 			var_01 = "_c6";
 		}
-		else if(isdefined(param_00.unittype) && param_00.unittype == "c8")
-		{
+		else if(isdefined(param_00.unittype) && param_00.unittype == "c8") {
 			var_01 = "_c8";
 		}
-		else if(isdefined(param_00.unittype) && param_00.unittype == "c12")
-		{
+		else if(isdefined(param_00.unittype) && param_00.unittype == "c12") {
 			var_01 = "_target_mega";
 		}
 	}
 
-	if(self.triggerportableradarping == level.player)
-	{
+	if(self.triggerportableradarping == level.player) {
 		var_02 = "UN_plr_concat_target" + var_01;
 	}
 	else
@@ -3615,19 +2968,14 @@ addconcattargetalias(param_00)
 	self.var_10476[self.var_10476.size] = var_02;
 }
 
-//Function Number: 115
-addconcatdirectionalias(param_00,param_01)
-{
+addconcatdirectionalias(param_00,param_01) {
 	var_02 = scripts\common\utility::random(["relative","absolute"]);
-	switch(var_02)
-	{
+	switch(var_02) {
 		case "absolute":
 			var_03 = func_7E74(level.player.origin,param_01.origin);
 			var_04 = func_C098(var_03);
-			if(var_04 != "impossible" && var_04.size != 2)
-			{
-				if(self.triggerportableradarping == level.player)
-				{
+			if(var_04 != "impossible" && var_04.size != 2) {
+				if(self.triggerportableradarping == level.player) {
 					var_05 = "UN_plr_concat_dir_cmpss_" + var_04;
 				}
 				else
@@ -3645,10 +2993,8 @@ addconcatdirectionalias(param_00,param_01)
 			var_06 = getrelativeangles(param_00);
 			var_07 = func_7E75(var_06,param_00.origin,param_01.origin);
 			var_08 = int(var_07);
-			if(1 < var_08 && var_08 < 5 && scripts\common\utility::cointoss())
-			{
-				if(self.triggerportableradarping == level.player)
-				{
+			if(1 < var_08 && var_08 < 5 && scripts\common\utility::cointoss()) {
+				if(self.triggerportableradarping == level.player) {
 					var_05 = "UN_plr_concat_dir_right";
 				}
 				else
@@ -3659,10 +3005,8 @@ addconcatdirectionalias(param_00,param_01)
 				self.var_10476[self.var_10476.size] = var_05;
 				break;
 			}
-			else if(7 < var_08 && var_08 < 11 && scripts\common\utility::cointoss())
-			{
-				if(self.triggerportableradarping == level.player)
-				{
+			else if(7 < var_08 && var_08 < 11 && scripts\common\utility::cointoss()) {
+				if(self.triggerportableradarping == level.player) {
 					var_05 = "UN_plr_concat_dir_left";
 				}
 				else
@@ -3675,8 +3019,7 @@ addconcatdirectionalias(param_00,param_01)
 			}
 			else
 			{
-				if(self.triggerportableradarping == level.player)
-				{
+				if(self.triggerportableradarping == level.player) {
 					var_05 = "UN_plr_concat_dir_clock_" + var_07;
 				}
 				else
@@ -3690,11 +3033,8 @@ addconcatdirectionalias(param_00,param_01)
 	}
 }
 
-//Function Number: 116
-func_17F2(param_00)
-{
-	if(self.triggerportableradarping == level.player)
-	{
+func_17F2(param_00) {
+	if(self.triggerportableradarping == level.player) {
 	}
 	else
 	{
@@ -3705,11 +3045,8 @@ func_17F2(param_00)
 	level.var_A9C4[self.var_222.team] = gettime();
 }
 
-//Function Number: 117
-func_180F()
-{
-	if(!self.triggerportableradarping cansayplayername())
-	{
+func_180F() {
+	if(!self.triggerportableradarping cansayplayername()) {
 		return;
 	}
 
@@ -3719,48 +3056,37 @@ func_180F()
 	self.var_299D = level.player;
 }
 
-//Function Number: 118
-func_1816(param_00)
-{
+func_1816(param_00) {
 	self.var_10476[self.var_10476.size] = self.var_222.var_46BC + "_" + self.var_222.npcid + "_rank_" + param_00;
 }
 
-//Function Number: 119
-cansayname(param_00)
-{
-	if(func_652B())
-	{
+cansayname(param_00) {
+	if(func_652B()) {
 		return 0;
 	}
 
-	if(!isdefined(param_00.var_29AD))
-	{
+	if(!isdefined(param_00.var_29AD)) {
 		return 0;
 	}
 
-	if(param_00.var_28CF == 0)
-	{
+	if(param_00.var_28CF == 0) {
 		return 0;
 	}
 
-	if(!isdefined(param_00.var_46BC))
-	{
+	if(!isdefined(param_00.var_46BC)) {
 		return 0;
 	}
 
-	if(self.var_46BC != param_00.var_46BC)
-	{
+	if(self.var_46BC != param_00.var_46BC) {
 		return 0;
 	}
 
-	if(func_BE4E(param_00))
-	{
+	if(func_BE4E(param_00)) {
 		return 0;
 	}
 
 	var_01 = undefined;
-	if(isplayer(self))
-	{
+	if(isplayer(self)) {
 		var_01 = "UN_plr_name_" + param_00.var_29AD;
 	}
 	else
@@ -3768,96 +3094,74 @@ cansayname(param_00)
 		var_01 = self.var_46BC + "_" + self.npcid + "_name_" + param_00.var_29AD;
 	}
 
-	if(soundexists(var_01))
-	{
+	if(soundexists(var_01)) {
 		return 1;
 	}
 
 	return 0;
 }
 
-//Function Number: 120
-func_BE4E(param_00)
-{
-	if(level.var_A9C3[self.team] == param_00.var_29AD || gettime() - level.var_A9C4[self.team] < level.var_A9C5)
-	{
+func_BE4E(param_00) {
+	if(level.var_A9C3[self.team] == param_00.var_29AD || gettime() - level.var_A9C4[self.team] < level.var_A9C5) {
 		return 1;
 	}
 
 	return 0;
 }
 
-//Function Number: 121
-cansayplayername()
-{
-	if(func_652B())
-	{
+cansayplayername() {
+	if(func_652B()) {
 		return 0;
 	}
 
-	if(self == level.player)
-	{
+	if(self == level.player) {
 		return 0;
 	}
 
-	if(!isdefined(level.player.var_29AE) || !isdefined(level.player.var_29A3))
-	{
+	if(!isdefined(level.player.var_29AE) || !isdefined(level.player.var_29A3)) {
 		return 0;
 	}
 
-	if(func_D203())
-	{
+	if(func_D203()) {
 		return 0;
 	}
 
 	var_00 = self.var_46BC + "_" + self.npcid + "_name_player_" + level.player.var_29A3 + "_" + level.player.var_29AE;
-	if(soundexists(var_00))
-	{
+	if(soundexists(var_00)) {
 		return 1;
 	}
 
 	return 0;
 }
 
-//Function Number: 122
-func_D203()
-{
-	if(!isdefined(level.var_A9CF))
-	{
+func_D203() {
+	if(!isdefined(level.var_A9CF)) {
 		return 0;
 	}
 
-	if(gettime() - level.var_A9CF >= level.var_68BB["playername"])
-	{
+	if(gettime() - level.var_A9CF >= level.var_68BB["playername"]) {
 		return 0;
 	}
 
 	return 1;
 }
 
-//Function Number: 123
-func_9FC7(param_00)
-{
-	if(isstring(self.npcid) && isstring(param_00.npcid) && self.npcid == param_00.npcid)
-	{
+func_9FC7(param_00) {
+	if(isstring(self.npcid) && isstring(param_00.npcid) && self.npcid == param_00.npcid) {
 		return 1;
 	}
 
-	if(!isstring(self.npcid) && !isstring(param_00.npcid) && self.npcid == param_00.npcid)
-	{
+	if(!isstring(self.npcid) && !isstring(param_00.npcid) && self.npcid == param_00.npcid) {
 		return 1;
 	}
 
 	return 0;
 }
 
-//Function Number: 124
-func_1836(param_00,param_01)
-{
+func_1836(param_00,param_01) {
 	var_02 = undefined;
 	var_02 = self.var_222.var_46BC + "_" + self.var_222.npcid + "_threat_" + param_00;
-	if(isdefined(param_01))
-	{
+	if(isdefined(param_01)) {
 		var_02 = var_02 + "_" + param_01;
 	}
 
@@ -3865,46 +3169,35 @@ func_1836(param_00,param_01)
 	return 1;
 }
 
-//Function Number: 125
-func_1840(param_00)
-{
+func_1840(param_00) {
 	var_01 = undefined;
 	var_02 = "exposed";
-	if(param_00 == "group")
-	{
+	if(param_00 == "group") {
 		var_02 = "contact_movement";
 	}
-	else if(param_00 == "movement" && func_9B42(self.var_117E3))
-	{
+	else if(param_00 == "movement" && func_9B42(self.var_117E3)) {
 		var_02 = "contact_movement";
 		param_00 = "bot";
 	}
 
-	if(param_00 == "generic")
-	{
+	if(param_00 == "generic") {
 		var_02 = "target";
 	}
 
-	if(isdefined(self.var_117E3) && self.var_117E3 != level.player)
-	{
-		if(var_02 == "target" && isdefined(self.var_117E3.unittype) && self.var_117E3.unittype == "c12")
-		{
+	if(isdefined(self.var_117E3) && self.var_117E3 != level.player) {
+		if(var_02 == "target" && isdefined(self.var_117E3.unittype) && self.var_117E3.unittype == "c12") {
 			param_00 = "c12";
 		}
-		else if(var_02 == "target" && func_9B42(self.var_117E3))
-		{
+		else if(var_02 == "target" && func_9B42(self.var_117E3)) {
 			param_00 = "bots";
 		}
 	}
 
-	if(self.triggerportableradarping == level.player)
-	{
+	if(self.triggerportableradarping == level.player) {
 		var_01 = "UN_plr_" + var_02 + "_" + param_00;
 	}
-	else if(isdefined(self.var_222.unittype) && self.var_222.unittype == "c6")
-	{
-		if(randomint(100) < 30 && func_9B42(self.var_117E3))
-		{
+	else if(isdefined(self.var_222.unittype) && self.var_222.unittype == "c6") {
+		if(randomint(100) < 30 && func_9B42(self.var_117E3)) {
 			var_01 = "c6_0_inform_incoming_c6";
 		}
 		else
@@ -3921,11 +3214,8 @@ func_1840(param_00)
 	return 1;
 }
 
-//Function Number: 126
-func_1841()
-{
-	if(self.triggerportableradarping == level.player)
-	{
+func_1841() {
+	if(self.triggerportableradarping == level.player) {
 		var_00 = "UN_plr_order_action_suppress";
 	}
 	else
@@ -3937,15 +3227,11 @@ func_1841()
 	return 1;
 }
 
-//Function Number: 127
-func_183D(param_00)
-{
-	if(!scripts\sp\_utility::func_D123() && self.triggerportableradarping == level.player)
-	{
+func_183D(param_00) {
+	if(!scripts\sp\_utility::func_D123() && self.triggerportableradarping == level.player) {
 		var_01 = "UN_plr_co_dist_" + param_00;
 	}
-	else if(scripts\sp\_utility::func_D123() && self.triggerportableradarping == level.var_D127)
-	{
+	else if(scripts\sp\_utility::func_D123() && self.triggerportableradarping == level.var_D127) {
 		var_01 = "JK_plr_co_dist_" + var_01;
 	}
 	else
@@ -3957,11 +3243,8 @@ func_183D(param_00)
 	return 1;
 }
 
-//Function Number: 128
-func_183E(param_00)
-{
-	if(self.triggerportableradarping == level.player)
-	{
+func_183E(param_00) {
+	if(self.triggerportableradarping == level.player) {
 		var_01 = "UN_plr_co_elev_" + param_00;
 	}
 	else
@@ -3973,12 +3256,9 @@ func_183E(param_00)
 	return 1;
 }
 
-//Function Number: 129
-func_1838(param_00,param_01)
-{
+func_1838(param_00,param_01) {
 	var_02 = createechoalias(param_00,param_01);
-	if(!soundexists(var_02))
-	{
+	if(!soundexists(var_02)) {
 		return 0;
 	}
 
@@ -3986,24 +3266,18 @@ func_1838(param_00,param_01)
 	return 1;
 }
 
-//Function Number: 130
-func_183C(param_00,param_01)
-{
+func_183C(param_00,param_01) {
 	var_02 = undefined;
 	var_03 = undefined;
-	if(isalive(param_01) && func_9B42(param_01) && self.var_222.team == "allies")
-	{
+	if(isalive(param_01) && func_9B42(param_01) && self.var_222.team == "allies") {
 		var_03 = "_resp_target_bot_hit";
 	}
 
-	if(scripts\common\utility::player_is_in_jackal())
-	{
+	if(scripts\common\utility::player_is_in_jackal()) {
 		return 0;
 	}
-	else if(self.triggerportableradarping == level.player)
-	{
-		if(isdefined(var_03))
-		{
+	else if(self.triggerportableradarping == level.player) {
+		if(isdefined(var_03)) {
 			var_02 = "UN_plr_resp_target_bot_hit";
 		}
 		else
@@ -4011,8 +3285,7 @@ func_183C(param_00,param_01)
 			var_02 = "UN_plr_resp_ack_co_gnrc_" + param_00;
 		}
 	}
-	else if(isdefined(var_03))
-	{
+	else if(isdefined(var_03)) {
 		var_02 = self.var_222.var_46BC + "_" + self.var_222.npcid + "_resp_target_bot_hit";
 	}
 	else
@@ -4020,8 +3293,7 @@ func_183C(param_00,param_01)
 		var_02 = self.var_222.var_46BC + "_" + self.var_222.npcid + "_resp_ack_co_gnrc_" + param_00;
 	}
 
-	if(!soundexists(var_02))
-	{
+	if(!soundexists(var_02)) {
 		return 0;
 	}
 
@@ -4029,14 +3301,10 @@ func_183C(param_00,param_01)
 	return 1;
 }
 
-//Function Number: 131
-func_183B(param_00,param_01,param_02)
-{
+func_183B(param_00,param_01,param_02) {
 	var_03 = undefined;
-	foreach(var_05 in param_02.locationaliases)
-	{
-		if(issubstr(param_01,var_05))
-		{
+	foreach(var_05 in param_02.locationaliases) {
+		if(issubstr(param_01,var_05)) {
 			var_03 = var_05;
 			break;
 		}
@@ -4046,10 +3314,8 @@ func_183B(param_00,param_01,param_02)
 	var_08 = getsubstr(param_01,param_01.size - 1,param_01.size);
 	var_09 = int(var_08) + 1;
 	var_0A = var_07 + "callout_loc_" + var_03 + "_qa" + var_09;
-	if(!soundexists(var_0A))
-	{
-		if(randomint(100) < level.var_68AE["response"]["callout_negative"])
-		{
+	if(!soundexists(var_0A)) {
+		if(randomint(100) < level.var_68AE["response"]["callout_negative"]) {
 			param_00 scripts\anim\battlechatter_ai::func_1820("callout","neg",self.triggerportableradarping,0.9);
 		}
 		else
@@ -4066,14 +3332,11 @@ func_183B(param_00,param_01,param_02)
 	return 1;
 }
 
-//Function Number: 132
-createechoalias(param_00,param_01)
-{
+createechoalias(param_00,param_01) {
 	var_02 = "_report";
 	var_03 = "_echo";
 	var_04 = undefined;
-	if(param_01 == level.player)
-	{
+	if(param_01 == level.player) {
 		var_05 = "plr";
 	}
 	else
@@ -4081,8 +3344,7 @@ createechoalias(param_00,param_01)
 		var_05 = var_02.npcid;
 	}
 
-	if(self.triggerportableradarping == level.player)
-	{
+	if(self.triggerportableradarping == level.player) {
 		var_04 = self.var_222.var_46BC + "_plr_";
 	}
 	else
@@ -4091,8 +3353,7 @@ createechoalias(param_00,param_01)
 	}
 
 	var_06 = param_00.size - var_02.size;
-	if(self.triggerportableradarping == level.player)
-	{
+	if(self.triggerportableradarping == level.player) {
 		var_07 = self.var_222.var_46BC + "_plr_";
 		var_08 = var_07.size;
 	}
@@ -4107,22 +3368,16 @@ createechoalias(param_00,param_01)
 	return var_0A;
 }
 
-//Function Number: 133
-func_1837(param_00,param_01)
-{
+func_1837(param_00,param_01) {
 	var_02 = undefined;
-	if(self.triggerportableradarping == level.player)
-	{
-		if(scripts\common\utility::player_is_in_jackal() && param_00 == "acquired")
-		{
-			if(!isdefined(level.var_D127.var_649F))
-			{
+	if(self.triggerportableradarping == level.player) {
+		if(scripts\common\utility::player_is_in_jackal() && param_00 == "acquired") {
+			if(!isdefined(level.var_D127.var_649F)) {
 				return 0;
 			}
 		}
 
-		if(param_00 == "acquired" || param_00 == "sighted")
-		{
+		if(param_00 == "acquired" || param_00 == "sighted") {
 			var_02 = self.var_222.var_46BC + "_plr_target_" + param_00;
 		}
 		else
@@ -4130,23 +3385,18 @@ func_1837(param_00,param_01)
 			var_02 = self.var_222.var_46BC + "_plr_callout_" + param_00 + "_" + param_01;
 		}
 	}
-	else if(self.var_222.var_46BC == "UN")
-	{
+	else if(self.var_222.var_46BC == "UN") {
 		var_02 = self.var_222.var_46BC + "_" + self.var_222.npcid + "_callout_" + param_00 + "_" + param_01;
 	}
-	else if(self.var_222.var_46BC == "JK")
-	{
+	else if(self.var_222.var_46BC == "JK") {
 		var_03 = self.var_222.origin[2];
 		var_04 = self.var_117E3.origin[2];
 		var_05 = var_03 - var_04;
-		if(param_00 == "targetclock")
-		{
-			if(var_05 > 3000)
-			{
+		if(param_00 == "targetclock") {
+			if(var_05 > 3000) {
 				var_02 = self.var_222.var_46BC + "_" + self.var_222.npcid + "_callout_" + param_00 + "_" + param_01 + "_high";
 			}
-			else if(var_05 < -3000)
-			{
+			else if(var_05 < -3000) {
 				var_02 = self.var_222.var_46BC + "_" + self.var_222.npcid + "_callout_" + param_00 + "_" + param_01 + "_low";
 			}
 			else
@@ -4159,18 +3409,14 @@ func_1837(param_00,param_01)
 			var_02 = self.var_222.var_46BC + "_" + self.var_222.npcid + "_callout_" + param_00 + "_" + param_01;
 		}
 
-		if(randomint(100) < 35)
-		{
+		if(randomint(100) < 35) {
 			var_06 = self.var_222.var_46BC + "_" + self.var_222.npcid + "_target_sighted";
 			self.var_10476[self.var_10476.size] = var_06;
 		}
 	}
-	else if(isdefined(self.var_222.unittype) && self.var_222.unittype == "c6")
-	{
-		if(param_00 == "cardinal")
-		{
-			switch(param_01)
-			{
+	else if(isdefined(self.var_222.unittype) && self.var_222.unittype == "c6") {
+		if(param_00 == "cardinal") {
+			switch(param_01) {
 				case "ne":
 				case "se":
 							param_01 = "e";
@@ -4198,24 +3444,19 @@ func_1837(param_00,param_01)
 	return 1;
 }
 
-//Function Number: 134
-func_1839(param_00,param_01,param_02)
-{
+func_1839(param_00,param_01,param_02) {
 	var_03 = param_00.var_EDFB;
-	if(!isdefined(param_02))
-	{
+	if(!isdefined(param_02)) {
 		param_02 = 0;
 	}
 
 	var_04 = self.var_222.var_46BC + "_" + self.var_222.npcid + "_callout_obj_" + var_03;
-	if(param_02)
-	{
+	if(param_02) {
 		var_04 = var_04 + "_y";
 	}
 
 	var_04 = var_04 + "_" + param_01;
-	if(!soundexists(var_04))
-	{
+	if(!soundexists(var_04)) {
 		return 0;
 	}
 
@@ -4223,18 +3464,14 @@ func_1839(param_00,param_01,param_02)
 	return 1;
 }
 
-//Function Number: 135
-func_183A(param_00,param_01,param_02)
-{
+func_183A(param_00,param_01,param_02) {
 	var_03 = undefined;
 	var_04 = param_00.locationaliases;
 	var_05 = var_04[0];
-	if(var_04.size > 1)
-	{
+	if(var_04.size > 1) {
 		var_06 = undefined;
 		var_06 = param_00 getcannedresponse(param_02);
-		if(isdefined(var_06))
-		{
+		if(isdefined(var_06)) {
 			var_05 = var_06;
 		}
 		else
@@ -4244,12 +3481,10 @@ func_183A(param_00,param_01,param_02)
 	}
 
 	var_07 = undefined;
-	if(isdefined(param_01) && param_01)
-	{
+	if(isdefined(param_01) && param_01) {
 		var_07 = self.triggerportableradarping getloccalloutalias("concat_loc_" + var_05);
 	}
-	else if(!isdefined(param_00.qafinished) && iscallouttypeqa(var_05,self.triggerportableradarping))
-	{
+	else if(!isdefined(param_00.qafinished) && iscallouttypeqa(var_05,self.triggerportableradarping)) {
 		var_07 = self.triggerportableradarping getqacalloutalias(var_05,0);
 	}
 	else
@@ -4257,13 +3492,11 @@ func_183A(param_00,param_01,param_02)
 		var_07 = self.triggerportableradarping getloccalloutalias("callout_loc_" + var_05);
 	}
 
-	if(soundexists(var_07))
-	{
+	if(soundexists(var_07)) {
 		var_03 = var_07;
 	}
 
-	if(!isdefined(var_03))
-	{
+	if(!isdefined(var_03)) {
 		return 0;
 	}
 
@@ -4272,14 +3505,10 @@ func_183A(param_00,param_01,param_02)
 	return 1;
 }
 
-//Function Number: 136
-func_17D1(param_00,param_01,param_02)
-{
+func_17D1(param_00,param_01,param_02) {
 	var_03 = undefined;
-	if(param_01 == "hack")
-	{
-		if(isdefined(level.player.var_883D) && level.player.var_883D == "scanning")
-		{
+	if(param_01 == "hack") {
+		if(isdefined(level.player.var_883D) && level.player.var_883D == "scanning") {
 			var_03 = "UN_plr_inform_hack_generic";
 		}
 		else
@@ -4287,10 +3516,8 @@ func_17D1(param_00,param_01,param_02)
 			return;
 		}
 	}
-	else if(isdefined(param_02) && param_02 == "ally_c12_kill")
-	{
-		if(self.triggerportableradarping == level.player)
-		{
+	else if(isdefined(param_02) && param_02 == "ally_c12_kill") {
+		if(self.triggerportableradarping == level.player) {
 			var_03 = "UN_plr_reaction_bot_c12";
 		}
 		else
@@ -4300,21 +3527,17 @@ func_17D1(param_00,param_01,param_02)
 	}
 	else
 	{
-		if(param_00 == "killfirm")
-		{
-			if(param_02 == "c6" || param_02 == "c8" || param_02 == "c12")
-			{
+		if(param_00 == "killfirm") {
+			if(param_02 == "c6" || param_02 == "c8" || param_02 == "c12") {
 				param_01 = "bot";
 			}
 		}
 
-		if(param_01 == "frag")
-		{
+		if(param_01 == "frag") {
 			param_01 = "grenade";
 		}
 
-		if(!issubstr(param_01,"weapon"))
-		{
+		if(!issubstr(param_01,"weapon")) {
 			param_00 = "_inform_" + param_00 + "_";
 		}
 		else
@@ -4322,10 +3545,8 @@ func_17D1(param_00,param_01,param_02)
 			param_00 = "_";
 		}
 
-		if(self.triggerportableradarping == level.player)
-		{
-			if(scripts\common\utility::player_is_in_jackal())
-			{
+		if(self.triggerportableradarping == level.player) {
+			if(scripts\common\utility::player_is_in_jackal()) {
 				var_03 = "JK_plr" + param_00 + param_01;
 			}
 			else
@@ -4342,16 +3563,12 @@ func_17D1(param_00,param_01,param_02)
 	self.var_10476[self.var_10476.size] = var_03;
 }
 
-//Function Number: 137
-func_181F(param_00,param_01)
-{
+func_181F(param_00,param_01) {
 	var_02 = undefined;
-	if(scripts\common\utility::player_is_in_jackal() && self.triggerportableradarping == level.var_D127)
-	{
+	if(scripts\common\utility::player_is_in_jackal() && self.triggerportableradarping == level.var_D127) {
 		var_02 = "JK_plr_response_" + param_00 + "_yes";
 	}
-	else if(self.triggerportableradarping == level.player)
-	{
+	else if(self.triggerportableradarping == level.player) {
 		var_02 = "UN_plr_response_" + param_00 + "_" + param_01;
 	}
 	else
@@ -4363,20 +3580,14 @@ func_181F(param_00,param_01)
 	return 1;
 }
 
-//Function Number: 138
-func_181B(param_00,param_01)
-{
-	if(!scripts\sp\_utility::func_D123())
-	{
+func_181B(param_00,param_01) {
+	if(!scripts\sp\_utility::func_D123()) {
 	}
 
 	var_02 = undefined;
-	if(scripts\sp\_utility::func_D123() && self.triggerportableradarping == level.var_D127)
-	{
-		if(param_00 == "movement")
-		{
-			if(!isdefined(param_01))
-			{
+	if(scripts\sp\_utility::func_D123() && self.triggerportableradarping == level.var_D127) {
+		if(param_00 == "movement") {
+			if(!isdefined(param_01)) {
 				param_01 = "generic";
 			}
 
@@ -4387,16 +3598,13 @@ func_181B(param_00,param_01)
 			var_02 = "JK_plr_reaction_" + param_00;
 		}
 	}
-	else if(scripts\sp\_utility::func_D123() && param_00 == "movement")
-	{
+	else if(scripts\sp\_utility::func_D123() && param_00 == "movement") {
 		var_02 = self.var_222.var_46BC + "_" + self.var_222.npcid + "_enemy_movement_generic";
 	}
-	else if(!scripts\sp\_utility::func_D123() && self.triggerportableradarping == level.player)
-	{
+	else if(!scripts\sp\_utility::func_D123() && self.triggerportableradarping == level.player) {
 		var_02 = "UN_plr_reaction_" + param_00 + "_" + param_01;
 	}
-	else if(isdefined(param_01))
-	{
+	else if(isdefined(param_01)) {
 		var_02 = self.var_222.var_46BC + "_" + self.var_222.npcid + "_reaction_" + param_00 + "_" + param_01;
 	}
 	else
@@ -4408,12 +3616,9 @@ func_181B(param_00,param_01)
 	return 1;
 }
 
-//Function Number: 139
-func_17BB()
-{
+func_17BB() {
 	var_00 = undefined;
-	if(self.triggerportableradarping == level.player)
-	{
+	if(self.triggerportableradarping == level.player) {
 		var_00 = "UN_plr_check_fire";
 	}
 	else
@@ -4425,16 +3630,12 @@ func_17BB()
 	return 1;
 }
 
-//Function Number: 140
-func_1832()
-{
+func_1832() {
 	var_00 = undefined;
-	if(scripts\common\utility::player_is_in_jackal() && level.player == level.var_D127)
-	{
+	if(scripts\common\utility::player_is_in_jackal() && level.player == level.var_D127) {
 		return 0;
 	}
-	else if(self.triggerportableradarping == level.player)
-	{
+	else if(self.triggerportableradarping == level.player) {
 		var_00 = "UN_plr_inform_taking_fire";
 	}
 	else
@@ -4446,12 +3647,9 @@ func_1832()
 	return 1;
 }
 
-//Function Number: 141
-func_1834(param_00,param_01)
-{
+func_1834(param_00,param_01) {
 	var_02 = undefined;
-	if(self.triggerportableradarping == level.player)
-	{
+	if(self.triggerportableradarping == level.player) {
 		var_02 = "UN_plr_taunt";
 	}
 	else
@@ -4463,16 +3661,12 @@ func_1834(param_00,param_01)
 	return 1;
 }
 
-//Function Number: 142
-func_17CF()
-{
+func_17CF() {
 	var_00 = undefined;
-	if(self.triggerportableradarping == level.player)
-	{
+	if(self.triggerportableradarping == level.player) {
 		var_00 = "UN_plr_hostile_burst";
 	}
-	else if(isdefined(self.var_222.unittype) && self.var_222.unittype == "c6")
-	{
+	else if(isdefined(self.var_222.unittype) && self.var_222.unittype == "c6") {
 		var_00 = "c6_hostile_burst";
 	}
 	else
@@ -4480,27 +3674,21 @@ func_17CF()
 		var_00 = self.var_222.var_46BC + "_" + self.var_222.npcid + "_hostile_burst";
 	}
 
-	if(soundexists(var_00))
-	{
+	if(soundexists(var_00)) {
 		self.var_10476[self.var_10476.size] = var_00;
 	}
 
 	return 1;
 }
 
-//Function Number: 143
-func_1808(param_00,param_01)
-{
+func_1808(param_00,param_01) {
 	var_02 = undefined;
-	if(self.triggerportableradarping == level.player)
-	{
-		if(!scripts\sp\_utility::func_D123())
-		{
+	if(self.triggerportableradarping == level.player) {
+		if(!scripts\sp\_utility::func_D123()) {
 			var_02 = "UN_plr_order_" + param_00 + "_" + param_01;
 		}
 	}
-	else if(!scripts\sp\_utility::func_D123())
-	{
+	else if(!scripts\sp\_utility::func_D123()) {
 		var_02 = self.var_222.var_46BC + "_" + self.var_222.npcid + "_order_" + param_00 + "_" + param_01;
 	}
 	else
@@ -4508,8 +3696,7 @@ func_1808(param_00,param_01)
 		var_02 = self.var_222.var_46BC + "_" + self.var_222.npcid + "_order_" + param_01;
 	}
 
-	if(!isdefined(var_02))
-	{
+	if(!isdefined(var_02)) {
 		return 0;
 	}
 
@@ -4517,42 +3704,32 @@ func_1808(param_00,param_01)
 	return 1;
 }
 
-//Function Number: 144
-func_97EE(param_00)
-{
-	if(!isdefined(self.var_10AE9[param_00].var_376A))
-	{
+func_97EE(param_00) {
+	if(!isdefined(self.var_10AE9[param_00].var_376A)) {
 		self.var_10AE9[param_00].var_376A = 0;
 	}
 
-	if(!isdefined(self.var_10AE9[param_00].firstcontact))
-	{
+	if(!isdefined(self.var_10AE9[param_00].firstcontact)) {
 		self.var_10AE9[param_00].firstcontact = 2000000000;
 	}
 
-	if(!isdefined(self.var_10AE9[param_00].var_A95F))
-	{
+	if(!isdefined(self.var_10AE9[param_00].var_A95F)) {
 		self.var_10AE9[param_00].var_A95F = 0;
 	}
 }
 
-//Function Number: 145
-func_10183(param_00)
-{
+func_10183(param_00) {
 	self.var_10AE9[param_00].var_376A = undefined;
 	self.var_10AE9[param_00].firstcontact = undefined;
 	self.var_10AE9[param_00].var_A95F = undefined;
 }
 
-//Function Number: 146
-func_4995(param_00,param_01,param_02)
-{
+func_4995(param_00,param_01,param_02) {
 	var_03 = spawnstruct();
 	var_03.triggerportableradarping = self;
 	var_03.var_68BA = param_01;
 	var_03.var_68AC = param_00;
-	if(isdefined(param_02))
-	{
+	if(isdefined(param_02)) {
 		var_03.priority = param_02;
 	}
 	else
@@ -4564,9 +3741,7 @@ func_4995(param_00,param_01,param_02)
 	return var_03;
 }
 
-//Function Number: 147
-func_4996()
-{
+func_4996() {
 	var_00 = spawnstruct();
 	var_00.triggerportableradarping = self;
 	var_00.var_10476 = [];
@@ -4574,52 +3749,39 @@ func_4996()
 	return var_00;
 }
 
-//Function Number: 148
-func_D643(param_00)
-{
+func_D643(param_00) {
 	return scripts\common\utility::within_fov(self.origin,self.angles,param_00,0.766);
 }
 
-//Function Number: 149
-func_6632(param_00)
-{
+func_6632(param_00) {
 	return scripts\common\utility::within_fov(self.origin,self.angles,param_00.origin,0);
 }
 
-//Function Number: 150
-func_10AE2()
-{
+func_10AE2() {
 	anim endon("battlechatter disabled");
 	self endon("squad_deleting");
-	if(self.var_10AEE != "jackal_allies")
-	{
+	if(self.var_10AEE != "jackal_allies") {
 		return;
 	}
 
-	while(self.var_B65C <= 0)
-	{
+	while(self.var_B65C <= 0) {
 		wait(0.5);
 	}
 
 	wait(0.5);
 	var_00 = 0;
-	while(isdefined(self))
-	{
-		if(!func_10ADE(self))
-		{
+	while(isdefined(self)) {
+		if(!func_10ADE(self)) {
 			var_00 = 1;
 			wait(1);
 			continue;
 		}
-		else if(self.var_6BB3)
-		{
-			if(!var_00)
-			{
+		else if(self.var_6BB3) {
+			if(!var_00) {
 				wait(randomfloat(level.var_6BB8));
 			}
 
-			if(var_00)
-			{
+			if(var_00) {
 				var_00 = 0;
 			}
 
@@ -4627,86 +3789,68 @@ func_10AE2()
 		}
 		else
 		{
-			if(!var_00)
-			{
+			if(!var_00) {
 				wait(randomfloatrange(level.var_6BB8,level.var_6BB7));
 			}
 
-			if(var_00)
-			{
+			if(var_00) {
 				var_00 = 0;
 			}
 		}
 
 		var_01 = func_7E14(self);
-		if(!isdefined(var_01))
-		{
+		if(!isdefined(var_01)) {
 			continue;
 		}
 
 		var_02 = var_01.voice;
 		var_03 = getflavorburstid(self,var_02);
 		var_04 = getflavorburstaliases(var_02,var_03);
-		foreach(var_08, var_06 in var_04)
-		{
-			if(!var_01 func_38A3() || distance(level.player.origin,var_01.origin) > level.var_6BB2 && !isdefined(var_01.var_29B8))
-			{
-				for(var_07 = 0;var_07 < self.var_B661.size;var_07++)
-				{
+		foreach(var_08, var_06 in var_04) {
+			if(!var_01 func_38A3() || distance(level.player.origin,var_01.origin) > level.var_6BB2 && !isdefined(var_01.var_29B8)) {
+				for(var_07 = 0;var_07 < self.var_B661.size;var_07++) {
 					var_01 = func_7E14(self);
-					if(!isdefined(var_01))
-					{
+					if(!isdefined(var_01)) {
 						continue;
 					}
 
-					if(var_01.voice == var_02)
-					{
+					if(var_01.voice == var_02) {
 						break;
 					}
 				}
 
-				if(!isdefined(var_01) || var_01.voice != var_02)
-				{
+				if(!isdefined(var_01) || var_01.voice != var_02) {
 					break;
 				}
 			}
 
 			thread playflavorburstline(var_01,var_06);
 			self waittill("burst_line_done");
-			if(var_08 != var_04.size - 1)
-			{
+			if(var_08 != var_04.size - 1) {
 				wait(randomfloatrange(level.var_6BB6,level.var_6BB5));
 			}
 		}
 	}
 }
 
-//Function Number: 151
-func_10ADE(param_00)
-{
+func_10ADE(param_00) {
 	var_01 = 0;
-	foreach(var_03 in param_00.var_B661)
-	{
-		if(isalive(var_03) && var_03.var_10AC8.var_10AEE == "jackal_allies")
-		{
-			if(isdefined(self.var_9F6B) && self.var_9F6B)
-			{
+	foreach(var_03 in param_00.var_B661) {
+		if(isalive(var_03) && var_03.var_10AC8.var_10AEE == "jackal_allies") {
+			if(isdefined(self.var_9F6B) && self.var_9F6B) {
 				return 0;
 			}
 		}
 
-		if(var_03 == level.player)
-		{
+		if(var_03 == level.player) {
 			continue;
 		}
 
-		if(!isdefined(var_03.team))
-		{
+		if(!isdefined(var_03.team)) {
 			return var_01;
 		}
 
-		if(var_03 func_38A3())
-		{
+		if(var_03 func_38A3()) {
 			var_01 = 1;
 			break;
 		}
@@ -4715,85 +3859,64 @@ func_10ADE(param_00)
 	return var_01;
 }
 
-//Function Number: 152
-func_38A3()
-{
+func_38A3() {
 	var_00 = 0;
-	if(isalive(self) && self.var_10AC8.var_10AEE == "jackal_allies")
-	{
-		if(!isdefined(level.var_C52F) || isdefined(level.var_C52F) && !level.var_C52F)
-		{
-			if(!scripts\common\utility::player_is_in_jackal())
-			{
+	if(isalive(self) && self.var_10AC8.var_10AEE == "jackal_allies") {
+		if(!isdefined(level.var_C52F) || isdefined(level.var_C52F) && !level.var_C52F) {
+			if(!scripts\common\utility::player_is_in_jackal()) {
 				return 0;
 			}
 		}
 	}
 
-	if(self != level.player && isalive(self) && level.var_6EE9[self.team] && func_13528() && isdefined(self.var_6EE9) && self.var_6EE9)
-	{
+	if(self != level.player && isalive(self) && level.var_6EE9[self.team] && func_13528() && isdefined(self.var_6EE9) && self.var_6EE9) {
 		var_00 = 1;
 	}
 
 	return var_00;
 }
 
-//Function Number: 153
-func_13528()
-{
-	if(isdefined(level.var_6EED) && isdefined(level.var_6EED[self.voice]) && level.var_6EED[self.voice])
-	{
+func_13528() {
+	if(isdefined(level.var_6EED) && isdefined(level.var_6EED[self.voice]) && level.var_6EED[self.voice]) {
 		return 1;
 	}
 
 	return 0;
 }
 
-//Function Number: 154
-func_7E14(param_00)
-{
+func_7E14(param_00) {
 	var_01 = undefined;
 	var_02 = scripts\common\utility::get_array_of_farthest(level.player.origin,param_00.var_B661);
-	foreach(var_04 in var_02)
-	{
-		if(var_04 func_38A3())
-		{
+	foreach(var_04 in var_02) {
+		if(var_04 func_38A3()) {
 			var_01 = var_04;
-			if(!isdefined(param_00.var_6BB4))
-			{
+			if(!isdefined(param_00.var_6BB4)) {
 				break;
 			}
 
-			if(isdefined(param_00.var_6BB4) && param_00.var_6BB4 == var_01.unique_id)
-			{
+			if(isdefined(param_00.var_6BB4) && param_00.var_6BB4 == var_01.unique_id) {
 				continue;
 			}
 		}
 	}
 
-	if(isdefined(var_01))
-	{
+	if(isdefined(var_01)) {
 		param_00.var_6BB4 = var_01.unique_id;
 	}
 
 	return var_01;
 }
 
-//Function Number: 155
-getflavorburstid(param_00,param_01)
-{
+getflavorburstid(param_00,param_01) {
 	var_02 = scripts\common\utility::array_randomize(level.var_6EE9[param_01]);
-	if(level.var_6EEC.size >= var_02.size)
-	{
+	if(level.var_6EEC.size >= var_02.size) {
 		anim.var_6EEC = [];
 	}
 
 	var_03 = undefined;
-	foreach(var_05 in var_02)
-	{
+	foreach(var_05 in var_02) {
 		var_03 = var_05;
-		if(!func_6EEE(var_03))
-		{
+		if(!func_6EEE(var_03)) {
 			break;
 		}
 	}
@@ -4802,19 +3925,14 @@ getflavorburstid(param_00,param_01)
 	return var_03;
 }
 
-//Function Number: 156
-func_6EEE(param_00)
-{
-	if(!level.var_6EEC.size)
-	{
+func_6EEE(param_00) {
+	if(!level.var_6EEC.size) {
 		return 0;
 	}
 
 	var_01 = 0;
-	foreach(var_03 in level.var_6EEC)
-	{
-		if(var_03 == param_00)
-		{
+	foreach(var_03 in level.var_6EEC) {
+		if(var_03 == param_00) {
 			var_01 = 1;
 			break;
 		}
@@ -4823,20 +3941,15 @@ func_6EEE(param_00)
 	return var_01;
 }
 
-//Function Number: 157
-getflavorburstaliases(param_00,param_01,param_02)
-{
-	if(!isdefined(param_02))
-	{
+getflavorburstaliases(param_00,param_01,param_02) {
+	if(!isdefined(param_02)) {
 		param_02 = 1;
 	}
 
 	var_03 = param_02;
 	var_04 = [];
-	for(;;)
-	{
-		if(issubstr(param_00,"jackal"))
-		{
+	for(;;) {
+		if(issubstr(param_00,"jackal")) {
 			var_05 = var_03 * 10;
 		}
 		else
@@ -4846,8 +3959,7 @@ getflavorburstaliases(param_00,param_01,param_02)
 
 		var_06 = "FB_" + level.var_46BD[param_00] + "_" + param_01 + "_" + var_05;
 		var_03++;
-		if(soundexists(var_06))
-		{
+		if(soundexists(var_06)) {
 			var_04[var_04.size] = var_06;
 			continue;
 		}
@@ -4858,22 +3970,16 @@ getflavorburstaliases(param_00,param_01,param_02)
 	return var_04;
 }
 
-//Function Number: 158
-playflavorburstline(param_00,param_01)
-{
+playflavorburstline(param_00,param_01) {
 	anim endon("battlechatter disabled");
 	var_02 = undefined;
-	if(isdefined(param_00.var_29B8) && param_00.var_29B8)
-	{
-		if(!scripts\common\utility::player_is_in_jackal())
-		{
-			if(isdefined(level.var_C52F) && level.var_C52F)
-			{
+	if(isdefined(param_00.var_29B8) && param_00.var_29B8) {
+		if(!scripts\common\utility::player_is_in_jackal()) {
+			if(isdefined(level.var_C52F) && level.var_C52F) {
 				var_02 = spawn("script_origin",level.player geteye());
 				var_02 linkto(level.player);
 			}
-			else if(isdefined(self))
-			{
+			else if(isdefined(self)) {
 				self notify("burst_line_done");
 				return;
 			}
@@ -4898,73 +4004,52 @@ playflavorburstline(param_00,param_01)
 	var_02 playsound(param_01,param_01,1);
 	var_02 waittill(param_01);
 	var_02 delete();
-	if(isdefined(self))
-	{
+	if(isdefined(self)) {
 		self notify("burst_line_done");
 	}
 }
 
-//Function Number: 159
-func_6EE8(param_00,param_01)
-{
+func_6EE8(param_00,param_01) {
 	self endon("burst_line_done");
 	wait(0.05);
 }
 
-//Function Number: 160
-battlechatter_canprint()
-{
+battlechatter_canprint() {
 	return 0;
 }
 
-//Function Number: 161
-battlechatter_canprintdump()
-{
+battlechatter_canprintdump() {
 	return 0;
 }
 
-//Function Number: 162
-battlechatter_print(param_00)
-{
-	if(param_00.size <= 0)
-	{
+battlechatter_print(param_00) {
+	if(param_00.size <= 0) {
 		return;
 	}
 
-	if(!battlechatter_canprint())
-	{
+	if(!battlechatter_canprint()) {
 		return;
 	}
 
 	var_01 = "^5 ";
-	if(func_652B())
-	{
+	if(func_652B()) {
 		var_01 = "^6 ";
 	}
 
-	foreach(var_03 in param_00)
-	{
+	foreach(var_03 in param_00) {
 	}
 }
 
-//Function Number: 163
-battlechatter_printdump(param_00,param_01)
-{
-}
+battlechatter_printdump(param_00,param_01) {}
 
-//Function Number: 164
-getaliastypefromsoundalias(param_00)
-{
+getaliastypefromsoundalias(param_00) {
 	var_01 = self.var_46BC + "_" + self.npcid + "_";
 	var_02 = getsubstr(param_00,var_01.size,param_00.size);
 	return var_02;
 }
 
-//Function Number: 165
-battlechatter_printdumpline(param_00,param_01,param_02)
-{
-	if(scripts\common\utility::flag(param_02))
-	{
+battlechatter_printdumpline(param_00,param_01,param_02) {
+	if(scripts\common\utility::flag(param_02)) {
 		scripts\common\utility::flag_wait(param_02);
 	}
 
@@ -4972,20 +4057,15 @@ battlechatter_printdumpline(param_00,param_01,param_02)
 	scripts\common\utility::flag_clear(param_02);
 }
 
-//Function Number: 166
-func_29A5()
-{
-	for(var_00 = 0;var_00 < level.var_29BC.size;var_00++)
-	{
+func_29A5() {
+	for(var_00 = 0;var_00 < level.var_29BC.size;var_00++) {
 		var_01 = level.bcs_locations[var_00].locationaliases;
-		if(!isdefined(var_01))
-		{
+		if(!isdefined(var_01)) {
 			continue;
 		}
 
 		var_02 = "";
-		foreach(var_04 in var_01)
-		{
+		foreach(var_04 in var_01) {
 			var_02 = var_02 + var_04;
 		}
 
@@ -4993,13 +4073,9 @@ func_29A5()
 	}
 }
 
-//Function Number: 167
-func_5B71(param_00,param_01,param_02,param_03)
-{
-	for(;;)
-	{
-		if(distancesquared(level.player.origin,param_01) > 4194304)
-		{
+func_5B71(param_00,param_01,param_02,param_03) {
+	for(;;) {
+		if(distancesquared(level.player.origin,param_01) > 4194304) {
 			wait(0.1);
 			continue;
 		}
@@ -5008,14 +4084,10 @@ func_5B71(param_00,param_01,param_02,param_03)
 	}
 }
 
-//Function Number: 168
-func_5B70(param_00,param_01,param_02)
-{
+func_5B70(param_00,param_01,param_02) {
 	var_03 = param_00 getorigin();
-	for(;;)
-	{
-		if(distancesquared(level.player.origin,var_03) > 4194304)
-		{
+	for(;;) {
+		if(distancesquared(level.player.origin,var_03) > 4194304) {
 			wait(0.1);
 			continue;
 		}
@@ -5028,20 +4100,15 @@ func_5B70(param_00,param_01,param_02)
 	}
 }
 
-//Function Number: 169
-func_E25A(param_00,param_01)
-{
+func_E25A(param_00,param_01) {
 	var_02 = function_0072(param_00);
-	for(var_03 = 0;var_03 < var_02.size;var_03++)
-	{
+	for(var_03 = 0;var_03 < var_02.size;var_03++) {
 		var_04 = var_02[var_03];
-		if(!isalive(var_04))
-		{
+		if(!isalive(var_04)) {
 			continue;
 		}
 
-		if(!isdefined(var_04.var_28CF))
-		{
+		if(!isdefined(var_04.var_28CF)) {
 			continue;
 		}
 
@@ -5050,23 +4117,17 @@ func_E25A(param_00,param_01)
 	}
 }
 
-//Function Number: 170
-func_13527()
-{
+func_13527() {
 	self endon("death");
-	if(self.voice == "british")
-	{
+	if(self.voice == "british") {
 		return 1;
 	}
 
 	return 0;
 }
 
-//Function Number: 171
-func_740F()
-{
-	if(!func_3844())
-	{
+func_740F() {
+	if(!func_3844()) {
 		return 0;
 	}
 
@@ -5075,56 +4136,42 @@ func_740F()
 	return 1;
 }
 
-//Function Number: 172
-func_3844(param_00)
-{
-	if(isdefined(self.var_7411))
-	{
+func_3844(param_00) {
+	if(isdefined(self.var_7411)) {
 		return 0;
 	}
 
-	if(isdefined(self.melee))
-	{
-		if(isdefined(self.var_B55B.var_9904))
-		{
-			if(self.var_B55B.var_9904)
-			{
+	if(isdefined(self.melee)) {
+		if(isdefined(self.var_B55B.var_9904)) {
+			if(self.var_B55B.var_9904) {
 				return 0;
 			}
 		}
 	}
 
-	if(!isdefined(self.var_3D4C))
-	{
+	if(!isdefined(self.var_3D4C)) {
 		return 0;
 	}
 
-	if(!isdefined(self.var_3D4C["reaction"]) || !isdefined(self.var_3D4C["reaction"].var_68BA))
-	{
+	if(!isdefined(self.var_3D4C["reaction"]) || !isdefined(self.var_3D4C["reaction"].var_68BA)) {
 		return 0;
 	}
 
-	if(self.var_3D4C["reaction"].var_68BA != "friendlyfire")
-	{
+	if(self.var_3D4C["reaction"].var_68BA != "friendlyfire") {
 		return 0;
 	}
 
-	if(gettime() > self.var_3D4C["reaction"].var_698B)
-	{
+	if(gettime() > self.var_3D4C["reaction"].var_698B) {
 		return 0;
 	}
 
-	if(!isdefined(param_00))
-	{
+	if(!isdefined(param_00)) {
 		param_00 = 1;
 	}
 
-	if(param_00)
-	{
-		if(isdefined(self.var_10AC8.var_BFB4["reaction"]["friendlyfire"]))
-		{
-			if(gettime() < self.var_10AC8.var_BFB4["reaction"]["friendlyfire"])
-			{
+	if(param_00) {
+		if(isdefined(self.var_10AC8.var_BFB4["reaction"]["friendlyfire"])) {
+			if(gettime() < self.var_10AC8.var_BFB4["reaction"]["friendlyfire"]) {
 				return 0;
 			}
 		}
@@ -5133,14 +4180,10 @@ func_3844(param_00)
 	return 1;
 }
 
-//Function Number: 173
-func_9B42(param_00)
-{
+func_9B42(param_00) {
 	var_01 = 0;
-	if(isdefined(param_00) && isalive(param_00) && param_00 != level.player && isdefined(param_00.unittype))
-	{
-		if(param_00.unittype == "c6" || param_00.unittype == "c8" || param_00.unittype == "c12")
-		{
+	if(isdefined(param_00) && isalive(param_00) && param_00 != level.player && isdefined(param_00.unittype)) {
+		if(param_00.unittype == "c6" || param_00.unittype == "c8" || param_00.unittype == "c12") {
 			var_01 = 1;
 		}
 	}

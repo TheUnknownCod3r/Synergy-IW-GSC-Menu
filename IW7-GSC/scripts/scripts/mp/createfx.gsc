@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\mp\createfx.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 6
- * Decompile Time: 331 ms
- * Timestamp: 10/27/2023 12:14:55 AM
-*******************************************************************/
+/*******************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\mp\createfx.gsc
+*******************************************/
 
-//Function Number: 1
-createfx()
-{
+createfx() {
 	level.func_position_player = ::scripts\engine\utility::void;
 	level.func_position_player_get = ::func_position_player_get;
 	level.func_loopfxthread = ::scripts\common\fx::loopfxthread;
@@ -35,18 +29,13 @@ createfx()
 	level waittill("eternity");
 }
 
-//Function Number: 2
-func_position_player_get(param_00)
-{
+func_position_player_get(param_00) {
 	return level.player.origin;
 }
 
-//Function Number: 3
-callback_playerconnect()
-{
+callback_playerconnect() {
 	self waittill("begin");
-	if(!isdefined(level.player))
-	{
+	if(!isdefined(level.player)) {
 		var_00 = getentarray("mp_global_intermission","classname");
 		self spawn(var_00[0].origin,var_00[0].angles);
 		scripts\mp\utility::updatesessionstate("playing","");
@@ -60,19 +49,11 @@ callback_playerconnect()
 	kick(self getentitynumber());
 }
 
-//Function Number: 4
-func_player_speed()
-{
+func_player_speed() {
 	var_00 = level._createfx.player_speed / 190;
 	level.player setmovespeedscale(var_00);
 }
 
-//Function Number: 5
-reflectionprobe_hide_hp()
-{
-}
+reflectionprobe_hide_hp() {}
 
-//Function Number: 6
-reflectionprobe_hide_front()
-{
-}
+reflectionprobe_hide_front() {}

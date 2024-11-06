@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\cp\maps\cp_disco\cp_disco_crafting.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 14
- * Decompile Time: 777 ms
- * Timestamp: 10/27/2023 12:03:48 AM
-*******************************************************************/
+/******************************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\cp\maps\cp_disco\cp_disco_crafting.gsc
+******************************************************************/
 
-//Function Number: 1
-init_crafting()
-{
+init_crafting() {
 	level.placed_crafted_traps = [];
 	level.crafting_icon_create_func = ::create_player_crafting_item_icon;
 	init_crafting_station("craft_lavalamp",(1,1,1));
@@ -19,21 +13,16 @@ init_crafting()
 	init_crafting_station("craft_robot",(0,0,1));
 	init_crafting_station("craft_zombgone",(1,1,0));
 	var_00 = scripts\engine\utility::getstructarray("puzzle","script_noteworthy");
-	foreach(var_02 in var_00)
-	{
+	foreach(var_02 in var_00) {
 		var_02.custom_search_dist = 96;
 		var_02.disable_guided_interactions = 1;
 	}
 }
 
-//Function Number: 2
-is_valid_tile_spot()
-{
+is_valid_tile_spot() {
 	var_00 = [(-1803,2629,937),(-1138,3784,782),(-2407.5,3456,494.5),(-1928.5,3815.5,750.5),(-1911,4188.5,742)];
-	foreach(var_02 in var_00)
-	{
-		if(self.origin == var_02)
-		{
+	foreach(var_02 in var_00) {
+		if(self.origin == var_02) {
 			return 0;
 		}
 	}
@@ -41,22 +30,17 @@ is_valid_tile_spot()
 	return 1;
 }
 
-//Function Number: 3
-init_crafting_station(param_00,param_01)
-{
+init_crafting_station(param_00,param_01) {
 	var_02 = scripts\engine\utility::getstruct(param_00,"script_noteworthy");
 	var_02.targets = getentarray(var_02.target,"targetname");
-	foreach(var_04 in var_02.targets)
-	{
-		if(issubstr(var_04.model,"tile"))
-		{
+	foreach(var_04 in var_02.targets) {
+		if(issubstr(var_04.model,"tile")) {
 			var_04.ispuzzlepiece = 1;
 			var_04.table_pos = var_04.origin;
 			var_05 = get_puzzle_piece_location(param_00);
 			var_04.origin = var_05.origin;
 			var_05.randomintrange = var_04;
-			if(isdefined(var_05.angles))
-			{
+			if(isdefined(var_05.angles)) {
 				var_04.angles = var_05.angles;
 			}
 
@@ -67,10 +51,8 @@ init_crafting_station(param_00,param_01)
 	}
 
 	var_07 = scripts\engine\utility::getstructarray("puzzle","script_noteworthy");
-	foreach(var_09 in var_07)
-	{
-		if(var_09.name == param_00 && !scripts\engine\utility::istrue(var_09.used))
-		{
+	foreach(var_09 in var_07) {
+		if(var_09.name == param_00 && !scripts\engine\utility::istrue(var_09.used)) {
 			scripts\cp\cp_interaction::remove_from_current_interaction_list(var_09);
 		}
 	}
@@ -80,30 +62,23 @@ init_crafting_station(param_00,param_01)
 	level.interactions[param_00].disable_guided_interactions = 1;
 }
 
-//Function Number: 4
-use_crafting_station(param_00,param_01)
-{
-	if(scripts\engine\utility::istrue(param_01.kung_fu_mode))
-	{
+use_crafting_station(param_00,param_01) {
+	if(scripts\engine\utility::istrue(param_01.kung_fu_mode)) {
 		param_01 playlocalsound("perk_machine_deny");
 		return;
 	}
 
-	if(!scripts\engine\utility::array_contains(level.current_interaction_structs,param_00))
-	{
+	if(!scripts\engine\utility::array_contains(level.current_interaction_structs,param_00)) {
 		return;
 	}
 
-	if(param_00.remaining_pieces > 0)
-	{
-		if(!isdefined(param_01.puzzle_piece))
-		{
+	if(param_00.remaining_pieces > 0) {
+		if(!isdefined(param_01.puzzle_piece)) {
 			param_01 thread scripts\cp\cp_vo::try_to_play_vo("missing_item_misc","disco_comment_vo");
 			return;
 		}
 
-		if(param_01.puzzle_piece != param_00.script_noteworthy)
-		{
+		if(param_01.puzzle_piece != param_00.script_noteworthy) {
 			param_01 playlocalsound("perk_machine_deny");
 			return;
 		}
@@ -116,8 +91,7 @@ use_crafting_station(param_00,param_01)
 		param_01.last_interaction_point = undefined;
 		param_00.remaining_pieces--;
 		param_01 scripts\cp\cp_merits::processmerit("mt_used_crafting");
-		if(param_00.remaining_pieces > 0)
-		{
+		if(param_00.remaining_pieces > 0) {
 			param_01 scripts\cp\utility::play_interaction_gesture("iw7_souvenircoin_zm");
 			return;
 		}
@@ -130,14 +104,12 @@ use_crafting_station(param_00,param_01)
 		param_00.crafted_item setscriptablepartstate("active",param_00.scriptable_part_name);
 		param_00.puzzle_complete = 1;
 		param_00.crafted_item playsound("zmb_coin_appear");
-		if(param_01 scripts\cp\utility::is_valid_player())
-		{
+		if(param_01 scripts\cp\utility::is_valid_player()) {
 			param_01 thread scripts\cp\cp_vo::try_to_play_vo("puzzle_craft_success","zmb_comment_vo","low",10,0,0,0,50);
 		}
 
 		scripts\cp\cp_vo::remove_from_nag_vo("nag_puzzle");
-		switch(param_00.script_noteworthy)
-		{
+		switch(param_00.script_noteworthy) {
 			case "craft_zombgone":
 				param_00.script_noteworthy = "purchase_zombgone";
 				break;
@@ -167,8 +139,7 @@ use_crafting_station(param_00,param_01)
 	param_01 scripts\cp\utility::play_interaction_gesture();
 	param_01.craftables = scripts\engine\utility::array_remove(param_01.craftables,param_00.script_noteworthy);
 	param_01 playlocalsound("part_pickup");
-	switch(param_00.script_noteworthy)
-	{
+	switch(param_00.script_noteworthy) {
 		case "purchase_zombgone":
 			var_02 = ["collect_craft_misc","collect_craft_zombgone"];
 			param_01 thread scripts\cp\cp_vo::try_to_play_vo(scripts\engine\utility::random(var_02),"disco_comment_vo");
@@ -212,19 +183,15 @@ use_crafting_station(param_00,param_01)
 	param_00.crafted_item setscriptablepartstate("active",param_00.scriptable_part_name);
 }
 
-//Function Number: 5
-crafting_cooldown(param_00,param_01)
-{
+crafting_cooldown(param_00,param_01) {
 	param_00.cooling_down = 1;
 	level scripts\engine\utility::waittill_any_return("regular_wave_starting","event_wave_starting");
 	wait(1);
 	level scripts\engine\utility::waittill_any_return("regular_wave_starting","event_wave_starting");
 	param_00.cooling_down = undefined;
 	var_02 = 5184;
-	foreach(var_04 in level.players)
-	{
-		if(distancesquared(var_04.origin,param_00.origin) >= var_02)
-		{
+	foreach(var_04 in level.players) {
+		if(distancesquared(var_04.origin,param_00.origin) >= var_02) {
 			continue;
 		}
 
@@ -232,18 +199,13 @@ crafting_cooldown(param_00,param_01)
 	}
 }
 
-//Function Number: 6
-show_next_piece(param_00)
-{
-	foreach(var_02 in param_00.targets)
-	{
-		if(scripts\engine\utility::istrue(var_02.ispuzzlepiece) && scripts\engine\utility::istrue(var_02.hidden))
-		{
+show_next_piece(param_00) {
+	foreach(var_02 in param_00.targets) {
+		if(scripts\engine\utility::istrue(var_02.ispuzzlepiece) && scripts\engine\utility::istrue(var_02.hidden)) {
 			var_02.origin = var_02.table_pos;
 			var_02 show();
 			var_02.hidden = undefined;
-			switch(param_00.script_noteworthy)
-			{
+			switch(param_00.script_noteworthy) {
 				case "craft_zombgone":
 					playfx(level._effect["zbc_tile_pup"],var_02.origin + (0,0,5));
 					break;
@@ -270,43 +232,29 @@ show_next_piece(param_00)
 	}
 }
 
-//Function Number: 7
-create_player_crafting_item_icon()
-{
+create_player_crafting_item_icon() {
 	self setclientomnvar("zombie_souvenir_piece_index",1);
 }
 
-//Function Number: 8
-craft_souvenir(param_00,param_01)
-{
-}
+craft_souvenir(param_00,param_01) {}
 
-//Function Number: 9
-table_look_up(param_00,param_01,param_02)
-{
+table_look_up(param_00,param_01,param_02) {
 	return tablelookup(param_00,0,param_01,param_02);
 }
 
-//Function Number: 10
-get_icon_index_based_on_model(param_00)
-{
+get_icon_index_based_on_model(param_00) {
 	return tablelookup("scripts/cp/maps/cp_zmb/cp_zmb_crafting.csv",1,param_00,0);
 }
 
-//Function Number: 11
-get_puzzle_piece_location(param_00)
-{
+get_puzzle_piece_location(param_00) {
 	var_01 = scripts\engine\utility::getstructarray("puzzle","script_noteworthy");
 	var_02 = [];
-	foreach(var_04 in var_01)
-	{
-		if(!var_04 is_valid_tile_spot())
-		{
+	foreach(var_04 in var_01) {
+		if(!var_04 is_valid_tile_spot()) {
 			continue;
 		}
 
-		if(var_04.name == param_00 && !scripts\engine\utility::istrue(var_04.used))
-		{
+		if(var_04.name == param_00 && !scripts\engine\utility::istrue(var_04.used)) {
 			var_02[var_02.size] = var_04;
 		}
 	}
@@ -316,9 +264,7 @@ get_puzzle_piece_location(param_00)
 	return var_02[0];
 }
 
-//Function Number: 12
-repopulate_puzzle_piece()
-{
+repopulate_puzzle_piece() {
 	self.puzzle_interaction.randomintrange show();
 	self.puzzle_interaction.randomintrange.hidden = undefined;
 	scripts\cp\cp_interaction::add_to_current_interaction_list(self.puzzle_interaction);
@@ -326,11 +272,8 @@ repopulate_puzzle_piece()
 	self.puzzle_interaction = undefined;
 }
 
-//Function Number: 13
-pickup_puzzle(param_00,param_01)
-{
-	if(isdefined(param_01.puzzle_piece) || scripts\engine\utility::istrue(param_01.kung_fu_mode))
-	{
+pickup_puzzle(param_00,param_01) {
+	if(isdefined(param_01.puzzle_piece) || scripts\engine\utility::istrue(param_01.kung_fu_mode)) {
 		param_01 playlocalsound("perk_machine_deny");
 		return;
 	}
@@ -343,8 +286,7 @@ pickup_puzzle(param_00,param_01)
 	param_00.randomintrange hide();
 	param_00.randomintrange.hidden = 1;
 	var_02 = 1;
-	switch(param_00.name)
-	{
+	switch(param_00.name) {
 		case "craft_boombox":
 			var_02 = 1;
 			playfx(level._effect["boombox_tile_pup"],param_00.randomintrange.origin + (0,0,5));
@@ -376,9 +318,7 @@ pickup_puzzle(param_00,param_01)
 	param_01 thread reset_puzzle_piece_on_disconnect();
 }
 
-//Function Number: 14
-reset_puzzle_piece_on_disconnect()
-{
+reset_puzzle_piece_on_disconnect() {
 	self notify("reset_puzzle_piece_on_disconnect");
 	self endon("reset_puzzle_piece_on_disconnect");
 	self endon("death");

@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\cp\crafted_trap_portal.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 20
- * Decompile Time: 997 ms
- * Timestamp: 10/27/2023 12:10:26 AM
-*******************************************************************/
+/******************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\cp\crafted_trap_portal.gsc
+******************************************************/
 
-//Function Number: 1
-init()
-{
+init() {
 	var_00 = spawnstruct();
 	var_00.timeout = 300;
 	var_00.modelbase = "cp_town_teleporter_device";
@@ -29,50 +23,39 @@ init()
 	level.crafted_portal_settings["crafted_portal"] = var_00;
 }
 
-//Function Number: 2
-give_crafted_portal(param_00,param_01)
-{
+give_crafted_portal(param_00,param_01) {
 	param_01 thread watch_dpad();
 	param_01 notify("new_power","crafted_portal");
 	param_01 setclientomnvar("zom_crafted_weapon",6);
 	scripts\cp\utility::set_crafted_inventory_item("crafted_portal",::give_crafted_portal,param_01);
-	if(isdefined(param_01.placed_portals) && param_01.placed_portals.size == 2)
-	{
-		foreach(var_03 in param_01.placed_portals)
-		{
+	if(isdefined(param_01.placed_portals) && param_01.placed_portals.size == 2) {
+		foreach(var_03 in param_01.placed_portals) {
 			var_03 notify("death");
 		}
 	}
 }
 
-//Function Number: 3
-watch_dpad()
-{
+watch_dpad() {
 	self endon("disconnect");
 	self endon("death");
 	self notify("craft_dpad_watcher");
 	self endon("craft_dpad_watcher");
 	self notifyonplayercommand("pullout_portal","+actionslot 3");
-	for(;;)
-	{
+	for(;;) {
 		self waittill("pullout_portal");
-		if(scripts\engine\utility::istrue(self.iscarrying))
-		{
+		if(scripts\engine\utility::istrue(self.iscarrying)) {
 			continue;
 		}
 
-		if(scripts\engine\utility::istrue(self.linked_to_coaster))
-		{
+		if(scripts\engine\utility::istrue(self.linked_to_coaster)) {
 			continue;
 		}
 
-		if(isdefined(self.allow_carry) && self.allow_carry == 0)
-		{
+		if(isdefined(self.allow_carry) && self.allow_carry == 0) {
 			continue;
 		}
 
-		if(scripts\cp\utility::is_valid_player())
-		{
+		if(scripts\cp\utility::is_valid_player()) {
 			break;
 		}
 	}
@@ -80,17 +63,14 @@ watch_dpad()
 	thread give_portal(1);
 }
 
-//Function Number: 4
-give_portal(param_00,param_01,param_02)
-{
+give_portal(param_00,param_01,param_02) {
 	self endon("disconnect");
 	scripts\cp\utility::clearlowermessage("msg_power_hint");
 	var_03 = createportalforplayer(self,param_02);
 	self.itemtype = var_03.name;
 	removeperks();
 	self.carriedsentry = var_03;
-	if(param_00)
-	{
+	if(param_00) {
 		var_03.firstplacement = 1;
 	}
 
@@ -98,72 +78,59 @@ give_portal(param_00,param_01,param_02)
 	self.carriedsentry = undefined;
 	thread waitrestoreperks();
 	self.iscarrying = 0;
-	if(isdefined(var_03))
-	{
+	if(isdefined(var_03)) {
 		return 1;
 	}
 
 	return 0;
 }
 
-//Function Number: 5
-setcarryingportal(param_00,param_01,param_02)
-{
+setcarryingportal(param_00,param_01,param_02) {
 	self endon("disconnect");
 	param_00 portal_setcarried(self,param_01);
 	scripts\engine\utility::allow_weapon(0);
 	self notifyonplayercommand("place_portal","+attack");
 	self notifyonplayercommand("place_portal","+attack_akimbo_accessible");
 	self notifyonplayercommand("cancel_portal","+actionslot 3");
-	if(!level.console)
-	{
+	if(!level.console) {
 		self notifyonplayercommand("cancel_portal","+actionslot 5");
 		self notifyonplayercommand("cancel_portal","+actionslot 6");
 		self notifyonplayercommand("cancel_portal","+actionslot 7");
 	}
 
-	for(;;)
-	{
+	for(;;) {
 		var_03 = scripts\engine\utility::waittill_any_return("place_portal","cancel_portal","force_cancel_placement");
-		if(!isdefined(param_00))
-		{
+		if(!isdefined(param_00)) {
 			scripts\engine\utility::allow_weapon(1);
 			return 1;
 		}
 
-		if(!isdefined(var_03))
-		{
+		if(!isdefined(var_03)) {
 			var_03 = "force_cancel_placement";
 		}
 
-		if(var_03 == "cancel_portal" || var_03 == "force_cancel_placement")
-		{
-			if(!param_01 && var_03 == "cancel_portal")
-			{
+		if(var_03 == "cancel_portal" || var_03 == "force_cancel_placement") {
+			if(!param_01 && var_03 == "cancel_portal") {
 				continue;
 			}
 
 			scripts\engine\utility::allow_weapon(1);
 			param_00 portal_setcancelled();
-			if(var_03 != "force_cancel_placement")
-			{
+			if(var_03 != "force_cancel_placement") {
 				thread watch_dpad();
 			}
-			else if(param_01)
-			{
+			else if(param_01) {
 				scripts\cp\utility::remove_crafted_item_from_inventory(self);
 			}
 
 			return 0;
 		}
 
-		if(!param_00.canbeplaced)
-		{
+		if(!param_00.canbeplaced) {
 			continue;
 		}
 
-		if(param_01)
-		{
+		if(param_01) {
 			scripts\cp\utility::remove_crafted_item_from_inventory(self);
 		}
 
@@ -173,29 +140,21 @@ setcarryingportal(param_00,param_01,param_02)
 	}
 }
 
-//Function Number: 6
-removeperks()
-{
-	if(scripts\cp\utility::_hasperk("specialty_explosivebullets"))
-	{
+removeperks() {
+	if(scripts\cp\utility::_hasperk("specialty_explosivebullets")) {
 		self.restoreperk = "specialty_explosivebullets";
 		scripts\cp\utility::_unsetperk("specialty_explosivebullets");
 	}
 }
 
-//Function Number: 7
-restoreperks()
-{
-	if(isdefined(self.restoreperk))
-	{
+restoreperks() {
+	if(isdefined(self.restoreperk)) {
 		scripts\cp\utility::giveperk(self.restoreperk);
 		self.restoreperk = undefined;
 	}
 }
 
-//Function Number: 8
-waitrestoreperks()
-{
+waitrestoreperks() {
 	self endon("death");
 	self endon("disconnect");
 	level endon("game_ended");
@@ -203,9 +162,7 @@ waitrestoreperks()
 	restoreperks();
 }
 
-//Function Number: 9
-createportalforplayer(param_00,param_01)
-{
+createportalforplayer(param_00,param_01) {
 	var_02 = spawnturret("misc_turret",param_00.origin + (0,0,25),"sentry_minigun_mp");
 	var_02.angles = param_00.angles;
 	var_02.triggerportableradarping = param_00;
@@ -217,8 +174,7 @@ createportalforplayer(param_00,param_01)
 	var_02 give_player_session_tokens("sentry_offline");
 	var_02 makeunusable();
 	var_02 setsentryowner(param_00);
-	if(!isdefined(param_01))
-	{
+	if(!isdefined(param_01)) {
 		var_02.var_130D2 = 1;
 	}
 	else
@@ -230,41 +186,31 @@ createportalforplayer(param_00,param_01)
 	return var_02;
 }
 
-//Function Number: 10
-portal_initportal(param_00)
-{
+portal_initportal(param_00) {
 	self.canbeplaced = 1;
 	portal_setinactive();
 }
 
-//Function Number: 11
-portal_handledeath(param_00)
-{
+portal_handledeath(param_00) {
 	self waittill("death");
-	if(!isdefined(self))
-	{
+	if(!isdefined(self)) {
 		return;
 	}
 
 	portal_setinactive();
 	param_00.placed_portals = scripts\engine\utility::array_remove(param_00.placed_portals,self);
 	scripts\cp\utility::removefromtraplist();
-	if(isdefined(self))
-	{
+	if(isdefined(self)) {
 		self delete();
 	}
 }
 
-//Function Number: 12
-portal_setplaced(param_00,param_01)
-{
+portal_setplaced(param_00,param_01) {
 	var_02 = spawn("script_model",self.origin + (0,0,1));
 	var_02.angles = self.angles;
-	if(isdefined(level.secretpapstructs) && level.secretpapstructs.size > 0 && !isdefined(level.portal_opened))
-	{
+	if(isdefined(level.secretpapstructs) && level.secretpapstructs.size > 0 && !isdefined(level.portal_opened)) {
 		var_03 = scripts\engine\utility::getclosest(self.origin,level.secretpapstructs);
-		if(distance(var_03.origin,self.origin) <= 128)
-		{
+		if(distance(var_03.origin,self.origin) <= 128) {
 			var_02.papredirect = 1;
 		}
 	}
@@ -283,31 +229,25 @@ portal_setplaced(param_00,param_01)
 	self.carriedportal delete();
 	self delete();
 	var_02 hudoutlineenableforclient(param_01,2,0,1,0);
-	if(!isdefined(param_01.placed_portals))
-	{
+	if(!isdefined(param_01.placed_portals)) {
 		param_01.placed_portals = [];
 	}
 
 	param_01.placed_portals[param_01.placed_portals.size] = var_02;
-	if(param_01.placed_portals.size == 1)
-	{
+	if(param_01.placed_portals.size == 1) {
 		param_01 thread watch_dpad();
 		param_01 setclientomnvar("zom_crafted_weapon",6);
 		scripts\cp\utility::set_crafted_inventory_item("crafted_portal",::give_crafted_portal,param_01);
 	}
 
-	if(param_01.placed_portals.size == 3)
-	{
+	if(param_01.placed_portals.size == 3) {
 		param_01.placed_portals[param_01.placed_portals.size - 1] notify("death");
 	}
 }
 
-//Function Number: 13
-portal_setcancelled()
-{
+portal_setcancelled() {
 	self.carriedby getrigindexfromarchetyperef();
-	if(isdefined(self.triggerportableradarping))
-	{
+	if(isdefined(self.triggerportableradarping)) {
 		self.triggerportableradarping.iscarrying = 0;
 	}
 
@@ -315,9 +255,7 @@ portal_setcancelled()
 	self delete();
 }
 
-//Function Number: 14
-portal_setcarried(param_00,param_01)
-{
+portal_setcarried(param_00,param_01) {
 	self setmodel(level.crafted_portal_settings["crafted_portal"].modelplacement);
 	self hide();
 	self setsentrycarrier(param_00);
@@ -332,9 +270,7 @@ portal_setcarried(param_00,param_01)
 	self notify("carried");
 }
 
-//Function Number: 15
-portal_setactive(param_00)
-{
+portal_setactive(param_00) {
 	self endon("death");
 	self setcursorhint("HINT_NOICON");
 	self sethintstring(level.crafted_portal_settings["crafted_portal"].pow);
@@ -348,8 +284,7 @@ portal_setactive(param_00)
 	thread portal_handleuse();
 	scripts\cp\utility::addtotraplist();
 	wait(1);
-	if(!scripts\engine\utility::istrue(self.papredirect))
-	{
+	if(!scripts\engine\utility::istrue(self.papredirect)) {
 		self setscriptablepartstate("portal","on");
 		return;
 	}
@@ -360,15 +295,12 @@ portal_setactive(param_00)
 	self.triggerportableradarping.current_crafted_inventory = undefined;
 	level.portal_opened = 1;
 	activate_pap_portals(self.origin);
-	foreach(var_02 in self.triggerportableradarping.placed_portals)
-	{
+	foreach(var_02 in self.triggerportableradarping.placed_portals) {
 		var_02 notify("death");
 	}
 }
 
-//Function Number: 16
-activate_pap_portals(param_00)
-{
+activate_pap_portals(param_00) {
 	var_01 = scripts\engine\utility::getclosest(param_00,level.secretpapstructs);
 	var_01.model setscriptablepartstate("portal","on");
 	var_01.var_19 = 1;
@@ -376,21 +308,16 @@ activate_pap_portals(param_00)
 	level.active_pap_portal = var_01;
 }
 
-//Function Number: 17
-portal_handleuse()
-{
+portal_handleuse() {
 	self endon("death");
 	level endon("game_ended");
-	for(;;)
-	{
+	for(;;) {
 		self waittill("trigger",var_00);
-		if(!var_00 scripts\cp\utility::is_valid_player())
-		{
+		if(!var_00 scripts\cp\utility::is_valid_player()) {
 			continue;
 		}
 
-		if(scripts\engine\utility::istrue(var_00.iscarrying))
-		{
+		if(scripts\engine\utility::istrue(var_00.iscarrying)) {
 			continue;
 		}
 
@@ -402,33 +329,25 @@ portal_handleuse()
 	}
 }
 
-//Function Number: 18
-portal_setinactive()
-{
+portal_setinactive() {
 	self makeunusable();
 	scripts\cp\utility::removefromtraplist();
 }
 
-//Function Number: 19
-portal_wait_for_player()
-{
+portal_wait_for_player() {
 	self.triggerportableradarping endon("death");
 	self.triggerportableradarping endon("disconnect");
 	self endon("death");
-	for(;;)
-	{
-		if(scripts\engine\utility::istrue(self.triggerportableradarping.teleporting))
-		{
-			while(distancesquared(self.triggerportableradarping.origin,self.origin) < 576)
-			{
+	for(;;) {
+		if(scripts\engine\utility::istrue(self.triggerportableradarping.teleporting)) {
+			while(distancesquared(self.triggerportableradarping.origin,self.origin) < 576) {
 				wait(0.1);
 			}
 
 			self.triggerportableradarping.teleporting = undefined;
 		}
 
-		if(distancesquared(self.triggerportableradarping.origin,self.origin) < 576)
-		{
+		if(distancesquared(self.triggerportableradarping.origin,self.origin) < 576) {
 			self.triggerportableradarping.teleporting = 1;
 			self.triggerportableradarping thread teleport_owner(self);
 			wait(5);
@@ -438,14 +357,10 @@ portal_wait_for_player()
 	}
 }
 
-//Function Number: 20
-teleport_owner(param_00)
-{
+teleport_owner(param_00) {
 	var_01 = self.placed_portals;
-	foreach(var_03 in self.placed_portals)
-	{
-		if(var_03 == param_00)
-		{
+	foreach(var_03 in self.placed_portals) {
+		if(var_03 == param_00) {
 			continue;
 		}
 		else

@@ -1,18 +1,11 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\asm\crab_boss\mp\states.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 1
- * Decompile Time: 130 ms
- * Timestamp: 10\27\2023 12:01:21 AM
-*******************************************************************/
+/*******************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\asm\crab_boss\mp\states.gsc
+*******************************************************/
 
-//Function Number: 1
-func_2371()
-{
-	if(scripts\asm\asm::func_232E("crab_boss"))
-	{
+func_2371() {
+	if(scripts\asm\asm::func_232E("crab_boss")) {
 		return;
 	}
 

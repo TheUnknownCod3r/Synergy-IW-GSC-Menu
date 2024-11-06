@@ -1,18 +1,11 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\mp\agents\karatemaster\karatemaster_tunedata.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 3
- * Decompile Time: 188 ms
- * Timestamp: 10/27/2023 12:11:17 AM
-*******************************************************************/
+/****************************************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\mp\agents\karatemaster\karatemaster_tunedata.gsc
+****************************************************************************/
 
-//Function Number: 1
-setuptunedata()
-{
-	if(!isdefined(level.agenttunedata))
-	{
+setuptunedata() {
+	if(!isdefined(level.agenttunedata)) {
 		level.agenttunedata = [];
 	}
 
@@ -20,9 +13,7 @@ setuptunedata()
 	setupkaratemastertunedata(level.agenttunedata["karatemaster"]);
 }
 
-//Function Number: 2
-setupkaratemastertunedata(param_00)
-{
+setupkaratemastertunedata(param_00) {
 	param_00.cteleportthisclosetoplayer = 60;
 	param_00.cmeleemaxstanddistsq = 4096;
 	param_00.cmeleemaxzdiff = 60;
@@ -75,8 +66,6 @@ setupkaratemastertunedata(param_00)
 	param_00.cmaxteleportsnappeddistsq = 64;
 }
 
-//Function Number: 3
-gettunedata()
-{
+gettunedata() {
 	return level.agenttunedata["karatemaster"];
 }

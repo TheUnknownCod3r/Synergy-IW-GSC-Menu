@@ -1,38 +1,24 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: 3556.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 13
- * Decompile Time: 2 ms
- * Timestamp: 10/27/2023 12:30:41 AM
-*******************************************************************/
+/****************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\3556.gsc
+****************************/
 
-//Function Number: 1
-init()
-{
+init() {
 	level._effect["slam_sml"] = loadfx("vfx/old/_requests/archetypes/vfx_heavy_slam_s");
 	level._effect["slam_lrg"] = loadfx("vfx/old/_requests/archetypes/vfx_heavy_slam_l");
 	level._effect["dash_dust"] = loadfx("vfx/core/screen/vfx_scrnfx_tocam_slidedust_m");
 	level._effect["dash_trail"] = loadfx("vfx/iw7/_requests/mp/vfx_dash_trail");
 }
 
-//Function Number: 2
-_meth_835F()
-{
-}
+_meth_835F() {}
 
-//Function Number: 3
-func_E0E9()
-{
+func_E0E9() {
 	self notify("removeDash");
 }
 
-//Function Number: 4
-func_4D90()
-{
-	if(isbot(self))
-	{
+func_4D90() {
+	if(isbot(self)) {
 		return;
 	}
 
@@ -46,15 +32,11 @@ func_4D90()
 	return var_01;
 }
 
-//Function Number: 5
-func_4D91(param_00)
-{
+func_4D91(param_00) {
 	return param_00 isonground() == 0 && param_00 getstance() != "prone";
 }
 
-//Function Number: 6
-func_4D88(param_00)
-{
+func_4D88(param_00) {
 	var_01 = param_00 getnormalizedmovement();
 	var_02 = anglestoright(param_00.angles);
 	var_03 = anglestoforward(param_00.angles);
@@ -63,12 +45,9 @@ func_4D88(param_00)
 	return param_00 aiphysicstrace(param_00.origin + (0,0,20),var_05,16,80,0,0);
 }
 
-//Function Number: 7
-func_4D8C(param_00,param_01)
-{
+func_4D8C(param_00,param_01) {
 	var_02 = lengthsquared(param_00.origin - param_01);
-	if(var_02 < 576)
-	{
+	if(var_02 < 576) {
 		return 0;
 	}
 
@@ -79,20 +58,16 @@ func_4D8C(param_00,param_01)
 	return 1;
 }
 
-//Function Number: 8
-func_4D8D(param_00,param_01,param_02)
-{
+func_4D8D(param_00,param_01,param_02) {
 	var_03 = param_00.origin - param_01;
 	var_04 = lengthsquared(var_03);
 	var_05 = self getentityvelocity();
 	var_06 = 0;
-	if(var_04 >= 28224)
-	{
+	if(var_04 >= 28224) {
 		var_06 = 1;
 	}
 
-	if(param_00 isonground())
-	{
+	if(param_00 isonground()) {
 		param_00 setstance("crouch");
 	}
 
@@ -102,8 +77,7 @@ func_4D8D(param_00,param_01,param_02)
 	self playsound("synaptic_dash_npc");
 	param_02 moveto(param_01,0.35,0.01,0);
 	wait(0.35);
-	if(0)
-	{
+	if(0) {
 		param_00 func_4D87();
 	}
 
@@ -113,34 +87,26 @@ func_4D8D(param_00,param_01,param_02)
 	param_00 setstance("stand");
 }
 
-//Function Number: 9
-func_4D8E()
-{
+func_4D8E() {
 	self endon("disconnect");
 	playfxontag(scripts\engine\utility::getfx("dash_trail"),self,"TAG_EYE");
 	wait(0.35);
 	stopfxontag(scripts\engine\utility::getfx("dash_trail"),self,"TAG_EYE");
 }
 
-//Function Number: 10
-func_4D87()
-{
+func_4D87() {
 	var_00 = [];
-	foreach(var_02 in level.characters)
-	{
-		if(!isdefined(var_02) || !isalive(var_02) || !scripts\mp\_utility::isenemy(var_02))
-		{
+	foreach(var_02 in level.characters) {
+		if(!isdefined(var_02) || !isalive(var_02) || !scripts\mp\_utility::isenemy(var_02)) {
 			continue;
 		}
 
-		if(distancesquared(var_02.origin,self.origin) < 254016)
-		{
+		if(distancesquared(var_02.origin,self.origin) < 254016) {
 			var_00[var_00.size] = var_02;
 		}
 	}
 
-	if(isdefined(var_00[0]))
-	{
+	if(isdefined(var_00[0])) {
 		var_00 = sortbydistance(var_00,self.origin);
 		var_04 = var_00[0];
 		var_05 = self gettagorigin("TAG_EYE");
@@ -150,29 +116,22 @@ func_4D87()
 	}
 }
 
-//Function Number: 11
-func_4D89(param_00,param_01)
-{
+func_4D89(param_00,param_01) {
 	param_00 scripts\engine\utility::waittill_any_3("death","disconnect","dash_finished");
 	scripts\engine\utility::waitframe();
-	if(isdefined(param_01))
-	{
+	if(isdefined(param_01)) {
 		param_01 delete();
 	}
 }
 
-//Function Number: 12
-func_4D92(param_00,param_01)
-{
+func_4D92(param_00,param_01) {
 	param_00 endon("disconnect");
 	param_00 endon("death");
 	wait(param_01);
 	return 1;
 }
 
-//Function Number: 13
-func_4D8F(param_00)
-{
+func_4D8F(param_00) {
 	thread func_4D8E();
 	var_01 = (235.004,521.706,1.95469);
 	var_02 = (270,0,0);

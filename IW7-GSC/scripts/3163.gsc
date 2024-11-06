@@ -1,18 +1,11 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: 3163.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 13
- * Decompile Time: 14 ms
- * Timestamp: 10/27/2023 12:26:22 AM
-*******************************************************************/
+/****************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\3163.gsc
+****************************/
 
-//Function Number: 1
-func_2371()
-{
-	if(scripts/asm/asm::func_232E("shoot_cover_A"))
-	{
+func_2371() {
+	if(scripts/asm/asm::func_232E("shoot_cover_A")) {
 		return;
 	}
 
@@ -116,74 +109,50 @@ func_2371()
 	scripts/asm/asm::func_2327();
 }
 
-//Function Number: 2
-func_124AF(param_00,param_01,param_02,param_03)
-{
+func_124AF(param_00,param_01,param_02,param_03) {
 	return scripts/asm/asm_bb::func_291C();
 }
 
-//Function Number: 3
-func_124B7(param_00,param_01,param_02,param_03)
-{
+func_124B7(param_00,param_01,param_02,param_03) {
 	return isdefined(self.target_getindexoftarget) && self.target_getindexoftarget.type == "Cover Right";
 }
 
-//Function Number: 4
-func_12045(param_00,param_01,param_02,param_03)
-{
+func_12045(param_00,param_01,param_02,param_03) {
 	return scripts/asm/asm_bb::func_291C();
 }
 
-//Function Number: 5
-func_12046(param_00,param_01,param_02,param_03)
-{
+func_12046(param_00,param_01,param_02,param_03) {
 	return self.a.pose != "crouch";
 }
 
-//Function Number: 6
-func_124AE(param_00,param_01,param_02,param_03)
-{
+func_124AE(param_00,param_01,param_02,param_03) {
 	return scripts/asm/asm_bb::func_291C();
 }
 
-//Function Number: 7
-func_12044(param_00,param_01,param_02,param_03)
-{
+func_12044(param_00,param_01,param_02,param_03) {
 	return scripts/asm/asm_bb::func_291C();
 }
 
-//Function Number: 8
-func_124A0(param_00,param_01,param_02,param_03)
-{
+func_124A0(param_00,param_01,param_02,param_03) {
 	return self.a.pose == "crouch";
 }
 
-//Function Number: 9
-func_1249F(param_00,param_01,param_02,param_03)
-{
+func_1249F(param_00,param_01,param_02,param_03) {
 	return self.a.pose == "crouch";
 }
 
-//Function Number: 10
-func_12052(param_00,param_01,param_02,param_03)
-{
+func_12052(param_00,param_01,param_02,param_03) {
 	return self._blackboard.shootparams.var_FF0B == 1;
 }
 
-//Function Number: 11
-func_12051(param_00,param_01,param_02,param_03)
-{
+func_12051(param_00,param_01,param_02,param_03) {
 	return self._blackboard.shootparams.var_FF0B == 1;
 }
 
-//Function Number: 12
-func_124B5(param_00,param_01,param_02,param_03)
-{
+func_124B5(param_00,param_01,param_02,param_03) {
 	return self._blackboard.shootparams.var_FF0B == 1;
 }
 
-//Function Number: 13
-func_124B6(param_00,param_01,param_02,param_03)
-{
+func_124B6(param_00,param_01,param_02,param_03) {
 	return self._blackboard.shootparams.var_FF0B == 1;
 }

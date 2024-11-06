@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\mp\maps\mp_hawkwar\mp_hawkwar_fx.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 1
- * Decompile Time: 95 ms
- * Timestamp: 10/27/2023 12:13:40 AM
-*******************************************************************/
+/****************************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\mp\maps\mp_hawkwar\mp_hawkwar_fx.gsc
+****************************************************************/
 
-//Function Number: 1
-main()
-{
+main() {
 	level._effect["vfx_car_headlight2"] = loadfx("vfx/iw7/levels/mp_hawkwar/vfx_car_headlight2.vfx");
 	level._effect["vfx_car_headlight"] = loadfx("vfx/iw7/levels/mp_hawkwar/vfx_car_headlight.vfx");
 	level._effect["vfx_police_lights"] = loadfx("vfx/iw7/levels/mp_hawkwar/vfx_police_lights.vfx");

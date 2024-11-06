@@ -1,52 +1,25 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\common\debug_reflection.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 8
- * Decompile Time: 412 ms
- * Timestamp: 10/27/2023 12:03:18 AM
-*******************************************************************/
+/*******************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\common\debug_reflection.gsc
+*******************************************************/
 
-//Function Number: 1
-func_9707(param_00)
-{
+func_9707(param_00) {
 	precachemodel("test_sphere_silver");
 	precachemodel("test_sphere_redchrome");
 	level.var_4F12 = 0;
 }
 
-//Function Number: 2
-func_10AA0()
-{
-}
+func_10AA0() {}
 
-//Function Number: 3
-onplayerconnect()
-{
-}
+onplayerconnect() {}
 
-//Function Number: 4
-func_4F14()
-{
-}
+func_4F14() {}
 
-//Function Number: 5
-func_E07C()
-{
-}
+func_E07C() {}
 
-//Function Number: 6
-func_4946()
-{
-}
+func_4946() {}
 
-//Function Number: 7
-func_4945()
-{
-}
+func_4945() {}
 
-//Function Number: 8
-func_4F13()
-{
-}
+func_4F13() {}

@@ -1,15 +1,9 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\anim\traverse\c6worker_climbup_96_double.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 1
- * Decompile Time: 70 ms
- * Timestamp: 10\26\2023 11:59:17 PM
-*******************************************************************/
+/************************************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\anim\traverse\c6worker_climbup_96_double.gsc
+************************************************************************/
 
-//Function Number: 1
-main()
-{
+main() {
 	self waittill("killanimscript");
 }

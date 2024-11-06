@@ -1,26 +1,18 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\mp\gametypes\obj_bombzone.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 36
- * Decompile Time: 1920 ms
- * Timestamp: 10/27/2023 12:12:52 AM
-*******************************************************************/
+/*********************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\mp\gametypes\obj_bombzone.gsc
+*********************************************************/
 
-//Function Number: 1
-bombzone_setupobjective(param_00)
-{
+bombzone_setupobjective(param_00) {
 	var_01 = undefined;
 	var_02 = undefined;
-	if(isdefined(level.curobj))
-	{
+	if(isdefined(level.curobj)) {
 		level.curobj scripts\mp\_gameobjects::deleteuseobject();
 	}
 
 	var_03 = level.objectives[param_00];
-	if(isdefined(var_03.originalpos))
-	{
+	if(isdefined(var_03.originalpos)) {
 		var_03.origin = var_03.originalpos;
 	}
 	else
@@ -29,14 +21,11 @@ bombzone_setupobjective(param_00)
 	}
 
 	var_04 = getentarray(var_03.target,"targetname");
-	if(level.gametype == "dd")
-	{
+	if(level.gametype == "dd") {
 		var_02 = var_03.script_label;
 		var_05 = getent("dd_bombzone_clip" + var_02,"targetname");
-		if(scripts\mp\_utility::inovertime())
-		{
-			if(var_02 == "_a" || var_02 == "_b")
-			{
+		if(scripts\mp\_utility::inovertime()) {
+			if(var_02 == "_a" || var_02 == "_b") {
 				var_03 delete();
 				var_04[0] delete();
 				var_05 delete();
@@ -49,16 +38,14 @@ bombzone_setupobjective(param_00)
 		}
 		else
 		{
-			if(var_02 == "_c")
-			{
+			if(var_02 == "_c") {
 				var_03 delete();
 				var_04[0] delete();
 				var_05 delete();
 				return;
 			}
 
-			if(level.mapname == "mp_desert" && var_02 == "_b")
-			{
+			if(level.mapname == "mp_desert" && var_02 == "_b") {
 				var_03.origin = var_03.origin + (0,0,8);
 				var_04[0].origin = var_04[0].origin + (0,0,8);
 				var_05.origin = var_05.origin + (0,0,8);
@@ -70,8 +57,7 @@ bombzone_setupobjective(param_00)
 		var_03 = postshipmodifiedbombzones(var_04,var_03);
 	}
 
-	if(!isdefined(var_01))
-	{
+	if(!isdefined(var_01)) {
 		var_01 = scripts\mp\_gameobjects::createuseobject(game["defenders"],var_03,var_04,(0,0,64));
 		var_01 scripts\mp\_gameobjects::allowuse("enemy");
 	}
@@ -82,14 +68,12 @@ bombzone_setupobjective(param_00)
 	var_01 scripts\mp\_gameobjects::setwaitweaponchangeonuse(0);
 	var_01 scripts\mp\_gameobjects::setusetext(&"MP_PLANTING_EXPLOSIVE");
 	var_01 scripts\mp\_gameobjects::setusehinttext(&"PLATFORM_HOLD_TO_PLANT_EXPLOSIVES");
-	if(!level.multibomb)
-	{
+	if(!level.multibomb) {
 		var_01 scripts\mp\_gameobjects::setkeyobject(level.sdbomb);
 	}
 
 	var_02 = var_01 scripts\mp\_gameobjects::getlabel();
-	if(level.gametype == "dd" && scripts\mp\_utility::inovertime())
-	{
+	if(level.gametype == "dd" && scripts\mp\_utility::inovertime()) {
 		var_02 = "_a";
 		var_01 scripts\mp\_gameobjects::set2dicon("friendly","waypoint_target" + var_02);
 		var_01 scripts\mp\_gameobjects::set3dicon("friendly","waypoint_target" + var_02);
@@ -113,10 +97,8 @@ bombzone_setupobjective(param_00)
 	var_01.useweapon = "briefcase_bomb_mp";
 	var_01.bombplanted = 0;
 	var_01.bombexploded = undefined;
-	for(var_06 = 0;var_06 < var_04.size;var_06++)
-	{
-		if(isdefined(var_04[var_06].script_exploder))
-		{
+	for(var_06 = 0;var_06 < var_04.size;var_06++) {
+		if(isdefined(var_04[var_06].script_exploder)) {
 			var_01.exploderindex = var_04[var_06].script_exploder;
 			var_04[var_06] thread setupkillcament(var_01);
 			break;
@@ -130,9 +112,7 @@ bombzone_setupobjective(param_00)
 	return var_01;
 }
 
-//Function Number: 2
-setupkillcament(param_00)
-{
+setupkillcament(param_00) {
 	var_01 = spawn("script_origin",self.origin);
 	var_01.angles = self.angles;
 	var_01 rotateyaw(-45,0.05);
@@ -144,8 +124,7 @@ setupkillcament(param_00)
 	var_06 = physics_createcontents(var_05);
 	var_07 = scripts\common\trace::ray_trace(var_03,var_04,self,var_06);
 	var_02 = var_07["position"];
-	if(scripts\mp\_utility::getmapname() == "mp_skyway" && param_00.label == "_b")
-	{
+	if(scripts\mp\_utility::getmapname() == "mp_skyway" && param_00.label == "_b") {
 		var_02 = (326,595,85);
 	}
 
@@ -155,28 +134,21 @@ setupkillcament(param_00)
 	var_01 delete();
 }
 
-//Function Number: 3
-allowedwhileplanting(param_00)
-{
+allowedwhileplanting(param_00) {
 	scripts\engine\utility::allow_melee(param_00);
 	scripts\engine\utility::allow_jump(param_00);
 	scripts\mp\_utility::func_1C47(param_00);
-	if(param_00)
-	{
+	if(param_00) {
 		scripts\engine\utility::waittill_any_timeout_1(0.8,"bomb_allow_offhands");
 	}
 
 	scripts\engine\utility::allow_offhand_weapons(param_00);
 }
 
-//Function Number: 4
-bombzone_onbeginuse(param_00)
-{
+bombzone_onbeginuse(param_00) {
 	param_00 thread allowedwhileplanting(0);
-	if(scripts\mp\_gameobjects::isfriendlyteam(param_00.pers["team"]))
-	{
-		if(getdvarint("com_codcasterEnabled",0) == 1)
-		{
+	if(scripts\mp\_gameobjects::isfriendlyteam(param_00.pers["team"])) {
+		if(getdvarint("com_codcasterEnabled",0) == 1) {
 			param_00 setgametypevip(1);
 		}
 
@@ -185,12 +157,10 @@ bombzone_onbeginuse(param_00)
 		param_00.isdefusing = 1;
 		setomnvar("ui_bomb_defuser",param_00 getentitynumber());
 		scripts\mp\_utility::setmlgannouncement(4,param_00.team,param_00 getentitynumber());
-		if(isdefined(level.sdbombmodel))
-		{
+		if(isdefined(level.sdbombmodel)) {
 			level.sdbombmodel hide();
 		}
-		else if(isdefined(level.ddbombmodel[self.label]))
-		{
+		else if(isdefined(level.ddbombmodel[self.label])) {
 			level.ddbombmodel[self.label] hide();
 		}
 
@@ -199,8 +169,7 @@ bombzone_onbeginuse(param_00)
 	}
 
 	var_01 = 2;
-	if(self.label == "_a")
-	{
+	if(self.label == "_a") {
 		var_01 = 1;
 	}
 
@@ -212,46 +181,36 @@ bombzone_onbeginuse(param_00)
 	param_00 thread startnpcbombusesound("briefcase_bomb_mp","weap_suitcase_raise_button");
 }
 
-//Function Number: 5
-bombzone_onenduse(param_00,param_01,param_02)
-{
+bombzone_onenduse(param_00,param_01,param_02) {
 	setomnvar("ui_bomb_defuser",-1);
-	if(!isdefined(param_01))
-	{
+	if(!isdefined(param_01)) {
 		return;
 	}
 
 	param_01 thread allowedwhileplanting(1);
 	param_01.bombplantweapon = undefined;
-	if(isalive(param_01))
-	{
+	if(isalive(param_01)) {
 		param_01.isdefusing = 0;
 		param_01.isplanting = 0;
 	}
 
-	if(isplayer(param_01))
-	{
+	if(isplayer(param_01)) {
 		param_01 setclientomnvar("ui_objective_state",0);
 		param_01.ui_bomb_planting_defusing = undefined;
 	}
 
-	if(scripts\mp\_gameobjects::isfriendlyteam(param_01.pers["team"]))
-	{
-		if(getdvarint("com_codcasterEnabled",0) == 1)
-		{
+	if(scripts\mp\_gameobjects::isfriendlyteam(param_01.pers["team"])) {
+		if(getdvarint("com_codcasterEnabled",0) == 1) {
 			param_01 setgametypevip(0);
 		}
 
-		if(isdefined(level.sdbombmodel) && !param_02)
-		{
+		if(isdefined(level.sdbombmodel) && !param_02) {
 			level.sdbombmodel show();
 			return;
 		}
 
-		if(isdefined(level.ddbombmodel))
-		{
-			if(isdefined(level.ddbombmodel[self.label]) && !param_02)
-			{
+		if(isdefined(level.ddbombmodel)) {
+			if(isdefined(level.ddbombmodel[self.label]) && !param_02) {
 				level.ddbombmodel[self.label] show();
 				return;
 			}
@@ -261,19 +220,15 @@ bombzone_onenduse(param_00,param_01,param_02)
 	}
 }
 
-//Function Number: 6
-startnpcbombusesound(param_00,param_01)
-{
+startnpcbombusesound(param_00,param_01) {
 	self endon("death");
 	self endon("stopNpcBombSound");
-	if(scripts\mp\_utility::isanymlgmatch() || scripts\mp\_utility::istrue(level.silentplant) || scripts\mp\_utility::_hasperk("specialty_engineer"))
-	{
+	if(scripts\mp\_utility::isanymlgmatch() || scripts\mp\_utility::istrue(level.silentplant) || scripts\mp\_utility::_hasperk("specialty_engineer")) {
 		return;
 	}
 
 	var_02 = "";
-	while(var_02 != param_00)
-	{
+	while(var_02 != param_00) {
 		self waittill("weapon_change",var_02);
 	}
 
@@ -284,23 +239,16 @@ startnpcbombusesound(param_00,param_01)
 	self notify("stopNpcBombSound");
 }
 
-//Function Number: 7
-bombzone_oncantuse(param_00)
-{
-}
+bombzone_oncantuse(param_00) {}
 
-//Function Number: 8
-bombzone_onuseplantobject(param_00)
-{
-	if((scripts\mp\_utility::inovertime() && self.bombplanted == 0) || !scripts\mp\_gameobjects::isfriendlyteam(param_00.pers["team"]))
-	{
+bombzone_onuseplantobject(param_00) {
+	if((scripts\mp\_utility::inovertime() && self.bombplanted == 0) || !scripts\mp\_gameobjects::isfriendlyteam(param_00.pers["team"])) {
 		level thread bombzone_onbombplanted(self,param_00);
 		param_00 playsound("mp_bomb_plant");
 		param_00 notify("bomb_planted");
 		param_00 setclientomnvar("ui_objective_progress",0.01);
 		var_01 = 2;
-		if(self.label == "_a")
-		{
+		if(self.label == "_a") {
 			var_01 = 1;
 		}
 
@@ -308,13 +256,11 @@ bombzone_onuseplantobject(param_00)
 		param_00 scripts\mp\_utility::incperstat("plants",1);
 		param_00 scripts\mp\_persistence::statsetchild("round","plants",param_00.pers["plants"]);
 		param_00 scripts\mp\_utility::setextrascore0(param_00.pers["plants"]);
-		if(isdefined(level.sd_loadout) && isdefined(level.sd_loadout[param_00.team]))
-		{
+		if(isdefined(level.sd_loadout) && isdefined(level.sd_loadout[param_00.team])) {
 			param_00 thread removebombcarrierclass();
 		}
 
-		if(scripts\mp\_utility::inovertime())
-		{
+		if(scripts\mp\_utility::inovertime()) {
 			scripts\mp\_utility::statusdialog("enemy_bomb_planted",level.otherteam[param_00.team],1);
 		}
 		else
@@ -327,22 +273,17 @@ bombzone_onuseplantobject(param_00)
 		level.bombowner = param_00;
 		param_00 thread scripts\mp\_utility::giveunifiedpoints("plant");
 		param_00.bombplantedtime = gettime();
-		if(isplayer(param_00))
-		{
+		if(isplayer(param_00)) {
 			param_00 thread scripts\mp\_matchdata::loggameevent("plant",param_00.origin);
 		}
 	}
 }
 
-//Function Number: 9
-bombzone_onusedefuseobject(param_00)
-{
+bombzone_onusedefuseobject(param_00) {
 	var_01 = 0;
 	param_00 setclientomnvar("ui_objective_progress",0.01);
-	foreach(var_03 in level.bombzones)
-	{
-		if(var_03.label == self.label)
-		{
+	foreach(var_03 in level.bombzones) {
+		if(var_03.label == self.label) {
 			param_00 notify("bomb_defused" + var_03.label);
 			level thread bombdefused(var_03);
 			break;
@@ -350,8 +291,7 @@ bombzone_onusedefuseobject(param_00)
 	}
 
 	scripts\mp\_gameobjects::disableobject();
-	if(!level.hardcoremode)
-	{
+	if(!level.hardcoremode) {
 		iprintln(&"MP_EXPLOSIVES_DEFUSED_BY",param_00);
 	}
 
@@ -359,43 +299,35 @@ bombzone_onusedefuseobject(param_00)
 	scripts\mp\_utility::statusdialog("bomb_defused",param_00.team,1);
 	level thread scripts\mp\_utility::teamplayercardsplash("callout_bombdefused",param_00);
 	var_05 = "ninja_defuse";
-	if(scripts\mp\_utility::getgametypenumlives() >= 1)
-	{
+	if(scripts\mp\_utility::getgametypenumlives() >= 1) {
 		var_06 = scripts\mp\_utility::getpotentiallivingplayers();
-		if(var_06.size == 1 && var_06[0] == param_00)
-		{
+		if(var_06.size == 1 && var_06[0] == param_00) {
 			param_00 thread scripts\mp\_awards::givemidmatchaward("mode_sd_last_defuse");
 			var_01 = 1;
 		}
 	}
 
-	if(!var_01)
-	{
+	if(!var_01) {
 		param_00 thread scripts\mp\_awards::givemidmatchaward("mode_sd_defuse");
 	}
 
 	param_00 scripts\mp\_utility::incperstat("defuses",1);
 	param_00 scripts\mp\_persistence::statsetchild("round","defuses",param_00.pers["defuses"]);
-	if(level.gametype != "sr")
-	{
+	if(level.gametype != "sr") {
 		param_00 scripts\mp\_utility::setextrascore1(param_00.pers["defuses"]);
 	}
 
-	if(isplayer(param_00))
-	{
+	if(isplayer(param_00)) {
 		param_00 thread scripts\mp\_matchdata::loggameevent("defuse",param_00.origin);
 	}
 }
 
-//Function Number: 10
-bombzone_onbombplanted(param_00,param_01)
-{
+bombzone_onbombplanted(param_00,param_01) {
 	level notify("bomb_planted",param_00);
 	var_02 = param_01.team;
 	level.bombdefused = 0;
 	param_00.bombdefused = 0;
-	if(level.gametype == "dd")
-	{
+	if(level.gametype == "dd") {
 		scripts\mp\_gamelogic::pausetimer();
 		level.timepausestart = gettime();
 	}
@@ -404,8 +336,7 @@ bombzone_onbombplanted(param_00,param_01)
 	level.bombsplanted = level.bombsplanted + 1;
 	level.timelimitoverride = 1;
 	level.defuseendtime = int(gettime() + level.bombtimer * 1000);
-	if(param_00.label == "_a")
-	{
+	if(param_00.label == "_a") {
 		level.aplanted = 1;
 	}
 	else
@@ -416,8 +347,7 @@ bombzone_onbombplanted(param_00,param_01)
 	setbombtimeromnvars(param_01.team);
 	level.destroyedobject = param_00;
 	level.destroyedobject.bombplanted = 1;
-	if(level.gametype != "dd")
-	{
+	if(level.gametype != "dd") {
 		param_01 setclientomnvar("ui_carrying_bomb",0);
 		setomnvar("ui_bomb_carrier",-1);
 		function_01AF(level.defuseendtime);
@@ -425,16 +355,14 @@ bombzone_onbombplanted(param_00,param_01)
 
 	param_00.visuals[0] thread scripts\mp\_gamelogic::playtickingsound();
 	level.tickingobject = param_00.visuals[0];
-	if(!level.multibomb)
-	{
+	if(!level.multibomb) {
 		level.sdbomb scripts\mp\_gameobjects::allowcarry("none");
 		level.sdbomb scripts\mp\_gameobjects::setvisibleteam("none");
 		level.sdbomb scripts\mp\_gameobjects::setdropped();
 		level.sdbombmodel = level.sdbomb.visuals[0];
 		level.sdbombmodel setasgametypeobjective();
 	}
-	else if(level.gametype == "dd")
-	{
+	else if(level.gametype == "dd") {
 		level.ddbombmodel[param_00.label] = spawn("script_model",param_01.origin);
 		level.ddbombmodel[param_00.label].angles = param_01.angles;
 		level.ddbombmodel[param_00.label] setmodel("suitcase_bomb_iw7_wm");
@@ -448,16 +376,14 @@ bombzone_onbombplanted(param_00,param_01)
 		level.sdbombmodel setasgametypeobjective();
 	}
 
-	if(level.gametype != "dd")
-	{
+	if(level.gametype != "dd") {
 		param_00 scripts\mp\_gameobjects::allowuse("none");
 		param_00 scripts\mp\_gameobjects::setvisibleteam("none");
 	}
 
 	var_03 = param_00 scripts\mp\_gameobjects::getlabel();
 	var_04 = [];
-	if(level.gametype == "dd")
-	{
+	if(level.gametype == "dd") {
 		var_05 = param_00.trigger;
 		var_05.origin = param_00.visuals[0].origin;
 		var_06 = level.otherteam[param_01.team];
@@ -474,8 +400,7 @@ bombzone_onbombplanted(param_00,param_01)
 	var_07.id = "defuse_object";
 	var_07.trigger _meth_8360();
 	var_07 scripts\mp\_gameobjects::allowuse("friendly");
-	if(scripts\mp\_utility::inovertime())
-	{
+	if(scripts\mp\_utility::inovertime()) {
 		param_00 scripts\mp\_gameobjects::setownerteam(level.otherteam[param_01.team]);
 	}
 
@@ -495,20 +420,16 @@ bombzone_onbombplanted(param_00,param_01)
 	var_07.useweapon = "briefcase_bomb_mp";
 	bombtimerwait(param_00);
 	param_00.visuals[0] scripts\mp\_gamelogic::stoptickingsound();
-	if(level.gameended)
-	{
+	if(level.gameended) {
 		return;
 	}
-	else if((level.gametype == "sd" && level.bombdefused) || level.gametype == "sr" && level.bombdefused)
-	{
+	else if((level.gametype == "sd" && level.bombdefused) || level.gametype == "sr" && level.bombdefused) {
 		var_07 scripts\mp\_gameobjects::deleteuseobject();
 		return;
 	}
 
-	if(level.gametype == "dd")
-	{
-		if(param_00.bombdefused)
-		{
+	if(level.gametype == "dd") {
+		if(param_00.bombdefused) {
 			param_00.bombplanted = 0;
 			param_00 thread scripts\mp\gametypes\dd::func_2C59(param_01,"defused");
 			param_00.onuse = ::bombzone_onuseplantobject;
@@ -528,13 +449,11 @@ bombzone_onbombplanted(param_00,param_01)
 
 	level notify("bomb_exploded" + param_00.label);
 	param_01 thread scripts\mp\_awards::givemidmatchaward("mode_sd_detonate");
-	if(isdefined(level.sd_onbombtimerend))
-	{
-		level thread [[ level.sd_onbombtimerend ]]();
+	if(isdefined(level.sd_onbombtimerend)) {
+		level thread [[level.sd_onbombtimerend]]();
 	}
 
-	if(level.gametype == "dd")
-	{
+	if(level.gametype == "dd") {
 		var_08 = level.ddbombmodel[param_00.label].origin;
 		level.ddbombmodel[param_00.label] delete();
 	}
@@ -544,8 +463,7 @@ bombzone_onbombplanted(param_00,param_01)
 		level.sdbombmodel delete();
 	}
 
-	if(isdefined(param_01))
-	{
+	if(isdefined(param_01)) {
 		param_00.visuals[0] radiusdamage(var_08,512,200,20,param_01,"MOD_EXPLOSIVE","bomb_site_mp");
 		param_01 scripts\mp\_utility::incperstat("destructions",1);
 		param_01 scripts\mp\_persistence::statsetchild("round","destructions",param_01.pers["destructions"]);
@@ -556,8 +474,7 @@ bombzone_onbombplanted(param_00,param_01)
 	}
 
 	var_09 = randomfloat(360);
-	if(isdefined(param_00.trigger.effect))
-	{
+	if(isdefined(param_00.trigger.effect)) {
 		var_0A = param_00.trigger.effect;
 	}
 	else
@@ -572,41 +489,32 @@ bombzone_onbombplanted(param_00,param_01)
 	scripts\mp\_shellshock::func_13B9("grenade_rumble",var_08);
 	scripts\mp\_shellshock::_earthquake(0.75,2,var_08,2000);
 	thread scripts\mp\_utility::playsoundinspace("exp_suitcase_bomb_main",var_08);
-	if(isdefined(param_00.exploderindex))
-	{
+	if(isdefined(param_00.exploderindex)) {
 		scripts\engine\utility::exploder(param_00.exploderindex);
 	}
 
 	var_07 scripts\mp\_gameobjects::disableobject();
-	if(isdefined(level.onobjectivecomplete))
-	{
-		[[ level.onobjectivecomplete ]]("bombzone",self.label,param_01,game["attackers"],undefined);
+	if(isdefined(level.onobjectivecomplete)) {
+		[[level.onobjectivecomplete]]("bombzone",self.label,param_01,game["attackers"],undefined);
 	}
 }
 
-//Function Number: 11
-initobjectivecam(param_00)
-{
+initobjectivecam(param_00) {
 	var_01 = undefined;
 	var_02 = getentarray("sd_bombcam_start","targetname");
-	foreach(var_04 in var_02)
-	{
-		if(var_04.script_label == param_00.label)
-		{
+	foreach(var_04 in var_02) {
+		if(var_04.script_label == param_00.label) {
 			var_01 = var_04;
 			break;
 		}
 	}
 
 	var_06 = [];
-	if(isdefined(var_01) && isdefined(var_01.target))
-	{
+	if(isdefined(var_01) && isdefined(var_01.target)) {
 		var_07 = getent(var_01.target,"targetname");
-		while(isdefined(var_07))
-		{
+		while(isdefined(var_07)) {
 			var_06[var_06.size] = var_07;
-			if(isdefined(var_07.target))
-			{
+			if(isdefined(var_07.target)) {
 				var_07 = getent(var_07.target,"targetname");
 				continue;
 			}
@@ -615,8 +523,7 @@ initobjectivecam(param_00)
 		}
 	}
 
-	if(isdefined(var_01) && var_06.size)
-	{
+	if(isdefined(var_01) && var_06.size) {
 		var_08 = spawn("script_model",var_01.origin);
 		var_08.origin = var_01.origin;
 		var_08.angles = var_01.angles;
@@ -629,26 +536,19 @@ initobjectivecam(param_00)
 	return undefined;
 }
 
-//Function Number: 12
-runobjectivecam()
-{
+runobjectivecam() {
 	level notify("objective_cam");
-	foreach(var_01 in level.players)
-	{
-		if(!isai(var_01))
-		{
+	foreach(var_01 in level.players) {
+		if(!isai(var_01)) {
 			var_01 scripts\mp\_utility::freezecontrolswrapper(1);
 			var_01 visionsetnakedforplayer("black_bw",0.5);
 		}
 	}
 
 	wait(0.5);
-	foreach(var_01 in level.players)
-	{
-		if(!isai(var_01))
-		{
-			if(isdefined(var_01.disabledoffhandweapons))
-			{
+	foreach(var_01 in level.players) {
+		if(!isai(var_01)) {
+			if(isdefined(var_01.disabledoffhandweapons)) {
 				var_01 scripts\mp\_utility::setusingremote("objective_cam");
 				var_01 scripts\engine\utility::allow_weapon(0);
 			}
@@ -660,17 +560,14 @@ runobjectivecam()
 		}
 	}
 
-	for(var_05 = 0;var_05 < self.path.size;var_05++)
-	{
+	for(var_05 = 0;var_05 < self.path.size;var_05++) {
 		var_06 = 0;
-		if(var_05 == 0)
-		{
+		if(var_05 == 0) {
 			var_06 = 5 / self.path.size / 2;
 		}
 
 		var_07 = 0;
-		if(var_05 == self.path.size - 1)
-		{
+		if(var_05 == self.path.size - 1) {
 			var_07 = 5 / self.path.size / 2;
 		}
 
@@ -680,9 +577,7 @@ runobjectivecam()
 	}
 }
 
-//Function Number: 13
-bombtimerwait(param_00)
-{
+bombtimerwait(param_00) {
 	level endon("game_ended");
 	level endon("bomb_defused" + param_00.label);
 	var_01 = int(level.bombtimer * 1000 + gettime());
@@ -691,9 +586,7 @@ bombtimerwait(param_00)
 	scripts\mp\_hostmigration::waitlongdurationwithgameendtimeupdate(level.bombtimer);
 }
 
-//Function Number: 14
-handlehostmigration(param_00,param_01)
-{
+handlehostmigration(param_00,param_01) {
 	level endon("game_ended");
 	level endon("bomb_defused" + param_01.label);
 	level endon("game_ended");
@@ -701,36 +594,27 @@ handlehostmigration(param_00,param_01)
 	level waittill("host_migration_begin");
 	setomnvar("ui_bomb_timer_endtime" + param_01.label,0);
 	var_02 = scripts\mp\_hostmigration::waittillhostmigrationdone();
-	if(var_02 > 0)
-	{
+	if(var_02 > 0) {
 		setomnvar("ui_bomb_timer_endtime" + param_01.label,param_00 + var_02);
 	}
 }
 
-//Function Number: 15
-bombdefused(param_00)
-{
-	if(level.gametype != "dd")
-	{
+bombdefused(param_00) {
+	if(level.gametype != "dd") {
 		level.bombdefused = 1;
 	}
 
 	param_00.bombdefused = 1;
 	setbombtimeromnvars();
 	level notify("bomb_defused" + param_00.label);
-	if(isdefined(level.onobjectivecomplete))
-	{
-		[[ level.onobjectivecomplete ]]("bombzone",self.label,undefined,game["defenders"],undefined);
+	if(isdefined(level.onobjectivecomplete)) {
+		[[level.onobjectivecomplete]]("bombzone",self.label,undefined,game["defenders"],undefined);
 	}
 }
 
-//Function Number: 16
-updatebombplantedomnvar(param_00)
-{
-	if(isdefined(param_00))
-	{
-		if(param_00 == "allies")
-		{
+updatebombplantedomnvar(param_00) {
+	if(isdefined(param_00)) {
+		if(param_00 == "allies") {
 			setomnvar("ui_bomb_owner_team",2);
 		}
 		else
@@ -739,8 +623,7 @@ updatebombplantedomnvar(param_00)
 		}
 	}
 
-	if(level.aplanted)
-	{
+	if(level.aplanted) {
 		setomnvar("ui_bomb_planted_a",1);
 	}
 	else
@@ -748,8 +631,7 @@ updatebombplantedomnvar(param_00)
 		setomnvar("ui_bomb_planted_a",0);
 	}
 
-	if(level.bplanted)
-	{
+	if(level.bplanted) {
 		setomnvar("ui_bomb_planted_b",1);
 		return;
 	}
@@ -757,37 +639,30 @@ updatebombplantedomnvar(param_00)
 	setomnvar("ui_bomb_planted_b",0);
 }
 
-//Function Number: 17
-setbombtimeromnvars(param_00)
-{
+setbombtimeromnvars(param_00) {
 	updatebombplantedomnvar(param_00);
 }
 
-//Function Number: 18
-bombzone_setupbombcase(param_00)
-{
+bombzone_setupbombcase(param_00) {
 	level.bombplanted = 0;
 	level.bombdefused = 0;
 	level.bombexploded = 0;
 	var_01 = getent(param_00 + "_pickup_trig","targetname");
-	if(!isdefined(var_01))
-	{
+	if(!isdefined(var_01)) {
 		scripts\engine\utility::error("No " + param_00 + "_pickup_trig trigger found in map.");
 		return;
 	}
 
 	var_01 = postshipadjustbombtriggerspawn(var_01);
 	var_02[0] = getent(param_00,"targetname");
-	if(!isdefined(var_02[0]))
-	{
+	if(!isdefined(var_02[0])) {
 		scripts\engine\utility::error("No " + param_00 + " script_model found in map.");
 		return;
 	}
 
 	var_02[0] = postshipadjustbombcasespawn(var_02[0]);
 	var_02[0] setmodel("suitcase_bomb_iw7_wm");
-	if(!level.multibomb)
-	{
+	if(!level.multibomb) {
 		level.sdbomb = scripts\mp\_gameobjects::createcarryobject(game["attackers"],var_01,var_02,(0,0,32));
 		level.sdbomb scripts\mp\_gameobjects::allowcarry("friendly");
 		level.sdbomb scripts\mp\_gameobjects::set2dicon("friendly","waypoint_bomb");
@@ -807,11 +682,8 @@ bombzone_setupbombcase(param_00)
 	var_02[0] delete();
 }
 
-//Function Number: 19
-movebombcase(param_00,param_01)
-{
-	if(isdefined(level.sdbomb))
-	{
+movebombcase(param_00,param_01) {
+	if(isdefined(level.sdbomb)) {
 		level.sdbomb.trigger.origin = param_00;
 		level.sdbomb.visuals[0].origin = param_00;
 		level.sdbomb.visuals[0].angles = param_01;
@@ -826,15 +698,11 @@ movebombcase(param_00,param_01)
 	}
 }
 
-//Function Number: 20
-bombsitewatcher()
-{
+bombsitewatcher() {
 	level endon("game_ended");
-	for(;;)
-	{
+	for(;;) {
 		level waittill("bomb_pickup");
-		foreach(var_01 in level.bombzones)
-		{
+		foreach(var_01 in level.bombzones) {
 			var_01.trigger enableplayeruse(level.sdbomb.carrier);
 		}
 
@@ -842,12 +710,9 @@ bombsitewatcher()
 	}
 }
 
-//Function Number: 21
-onpickup(param_00)
-{
+onpickup(param_00) {
 	param_00.isbombcarrier = 1;
-	if(isplayer(param_00))
-	{
+	if(isplayer(param_00)) {
 		param_00 thread scripts\mp\_matchdata::loggameevent("pickup",param_00.origin);
 		scripts\mp\_utility::setmlgannouncement(15,param_00.team,param_00 getentitynumber());
 	}
@@ -856,35 +721,28 @@ onpickup(param_00)
 	setomnvar("ui_bomb_carrier",param_00 getentitynumber());
 	scripts\mp\_gameobjects::set2dicon("friendly","waypoint_escort");
 	scripts\mp\_gameobjects::set3dicon("friendly","waypoint_escort");
-	if(isdefined(level.sd_loadout) && isdefined(level.sd_loadout[param_00.team]))
-	{
+	if(isdefined(level.sd_loadout) && isdefined(level.sd_loadout[param_00.team])) {
 		param_00 thread applybombcarrierclass();
 	}
 
-	if(!level.bombdefused)
-	{
+	if(!level.bombdefused) {
 		scripts\mp\_utility::teamplayercardsplash("callout_bombtaken",param_00,param_00.team);
 		scripts\mp\_utility::leaderdialog("bomb_taken",param_00.pers["team"]);
 	}
 
 	scripts\mp\_utility::playsoundonplayers(game["bomb_recovered_sound"],game["attackers"]);
-	if(getdvarint("com_codcasterEnabled",0) == 1)
-	{
+	if(getdvarint("com_codcasterEnabled",0) == 1) {
 		param_00 setgametypevip(1);
 	}
 
 	level notify("bomb_pickup");
 }
 
-//Function Number: 22
-ondrop(param_00)
-{
+ondrop(param_00) {
 	level notify("bomb_dropped");
 	setomnvar("ui_bomb_carrier",-1);
-	if(getdvarint("com_codcasterEnabled",0) == 1)
-	{
-		if(isdefined(param_00))
-		{
+	if(getdvarint("com_codcasterEnabled",0) == 1) {
+		if(isdefined(param_00)) {
 			param_00 setgametypevip(0);
 		}
 	}
@@ -892,15 +750,12 @@ ondrop(param_00)
 	scripts\mp\_gameobjects::set2dicon("friendly","waypoint_bomb");
 	scripts\mp\_gameobjects::set3dicon("friendly","waypoint_bomb");
 	scripts\mp\_utility::playsoundonplayers(game["bomb_dropped_sound"],game["attackers"]);
-	if(!level.bombplanted && isdefined(level.bombresettimer) && level.bombresettimer > 0)
-	{
+	if(!level.bombplanted && isdefined(level.bombresettimer) && level.bombresettimer > 0) {
 		thread waitforbombreset(level.bombresettimer);
 	}
 }
 
-//Function Number: 23
-waitforbombreset(param_00)
-{
+waitforbombreset(param_00) {
 	level endon("game_ended");
 	level endon("bomb_pickup");
 	wait(param_00);
@@ -908,25 +763,18 @@ waitforbombreset(param_00)
 	movebombcase(level.bombrespawnpoint,level.bombrespawnangles);
 }
 
-//Function Number: 24
-enablemultibombui()
-{
-	foreach(var_01 in level.players)
-	{
-		if(!isai(var_01))
-		{
+enablemultibombui() {
+	foreach(var_01 in level.players) {
+		if(!isai(var_01)) {
 			var_01 setclientomnvar("ui_carrying_bomb",var_01.pers["team"] == game["attackers"]);
 		}
 	}
 }
 
-//Function Number: 25
-respawnbombcase()
-{
+respawnbombcase() {
 	level endon("game_ended");
 	wait(5);
-	if(level.multibomb)
-	{
+	if(level.multibomb) {
 		enablemultibombui();
 		return;
 	}
@@ -934,15 +782,12 @@ respawnbombcase()
 	movebombcase(level.bombrespawnpoint,level.bombrespawnangles);
 }
 
-//Function Number: 26
-advancebombcase()
-{
+advancebombcase() {
 	level.bombplanted = 0;
 	level.bombdefused = 0;
 	level.bombrespawnpoint = level.curobj.visuals[0].origin + (0,0,48);
 	level.bombrespawnangles = level.curobj.visuals[0].angles;
-	if(level.multibomb)
-	{
+	if(level.multibomb) {
 		enablemultibombui();
 		return;
 	}
@@ -950,37 +795,30 @@ advancebombcase()
 	movebombcase(level.bombrespawnpoint,level.bombrespawnangles);
 }
 
-//Function Number: 27
-applybombcarrierclass()
-{
+applybombcarrierclass() {
 	self endon("death");
 	self endon("disconnect");
 	level endon("game_ended");
-	if(isdefined(self.iscarrying) && self.iscarrying == 1)
-	{
+	if(isdefined(self.iscarrying) && self.iscarrying == 1) {
 		self notify("force_cancel_placement");
 		wait(0.05);
 	}
 
-	while(self ismantling())
-	{
+	while(self ismantling()) {
 		wait(0.05);
 	}
 
-	while(!self isonground())
-	{
+	while(!self isonground()) {
 		wait(0.05);
 	}
 
-	if(scripts\mp\_utility::isjuggernaut())
-	{
+	if(scripts\mp\_utility::isjuggernaut()) {
 		self notify("lost_juggernaut");
 		wait(0.05);
 	}
 
 	self.pers["gamemodeLoadout"] = level.sd_loadout[self.team];
-	if(isdefined(self.setspawnpoint))
-	{
+	if(isdefined(self.setspawnpoint)) {
 		scripts\mp\perks\_perkfunctions::deleteti(self.setspawnpoint);
 	}
 
@@ -1000,37 +838,30 @@ applybombcarrierclass()
 	thread scripts\mp\_playerlogic::spawnplayer(1);
 }
 
-//Function Number: 28
-removebombcarrierclass()
-{
+removebombcarrierclass() {
 	self endon("death");
 	self endon("disconnect");
 	level endon("game_ended");
-	if(isdefined(self.iscarrying) && self.iscarrying == 1)
-	{
+	if(isdefined(self.iscarrying) && self.iscarrying == 1) {
 		self notify("force_cancel_placement");
 		wait(0.05);
 	}
 
-	while(self ismantling())
-	{
+	while(self ismantling()) {
 		wait(0.05);
 	}
 
-	while(!self isonground())
-	{
+	while(!self isonground()) {
 		wait(0.05);
 	}
 
-	if(scripts\mp\_utility::isjuggernaut())
-	{
+	if(scripts\mp\_utility::isjuggernaut()) {
 		self notify("lost_juggernaut");
 		wait(0.05);
 	}
 
 	self.pers["gamemodeLoadout"] = undefined;
-	if(isdefined(self.setspawnpoint))
-	{
+	if(isdefined(self.setspawnpoint)) {
 		scripts\mp\perks\_perkfunctions::deleteti(self.setspawnpoint);
 	}
 
@@ -1044,22 +875,16 @@ removebombcarrierclass()
 	thread scripts\mp\_playerlogic::spawnplayer(1);
 }
 
-//Function Number: 29
-bombzone_awardgenericbombzonemedals(param_00,param_01)
-{
-	foreach(var_03 in level.bombzones)
-	{
-		if(!isdefined(var_03.bombdefusetrig.origin))
-		{
+bombzone_awardgenericbombzonemedals(param_00,param_01) {
+	foreach(var_03 in level.bombzones) {
+		if(!isdefined(var_03.bombdefusetrig.origin)) {
 			continue;
 		}
 
 		var_04 = scripts\mp\_utility::istrue(var_03.bombplanted);
 		var_05 = distsquaredcheck(param_00.origin,param_01.origin,scripts\engine\utility::ter_op(var_04,var_03.bombdefusetrig.origin,var_03.trigger.origin));
-		if(var_05)
-		{
-			if(param_01.team == game["defenders"])
-			{
+		if(var_05) {
+			if(param_01.team == game["defenders"]) {
 				param_00 thread scripts\mp\_awards::givemidmatchaward(scripts\engine\utility::ter_op(var_04,"mode_x_defend","mode_x_assault"));
 				continue;
 			}
@@ -1069,32 +894,24 @@ bombzone_awardgenericbombzonemedals(param_00,param_01)
 	}
 }
 
-//Function Number: 30
-distsquaredcheck(param_00,param_01,param_02)
-{
+distsquaredcheck(param_00,param_01,param_02) {
 	var_03 = distancesquared(param_02,param_00);
 	var_04 = distancesquared(param_02,param_01);
-	if(var_03 < 90000 || var_04 < 90000)
-	{
+	if(var_03 < 90000 || var_04 < 90000) {
 		return 1;
 	}
 
 	return 0;
 }
 
-//Function Number: 31
-postshipmodifiedbombzones(param_00,param_01)
-{
+postshipmodifiedbombzones(param_00,param_01) {
 	var_02 = param_01.origin;
 	var_03 = modifiedbombzones(param_01,var_02,param_00);
 	return var_03;
 }
 
-//Function Number: 32
-modifiedbombzones(param_00,param_01,param_02)
-{
-	if(level.mapname == "mp_desert" && param_00.script_label == "_b")
-	{
+modifiedbombzones(param_00,param_01,param_02) {
+	if(level.mapname == "mp_desert" && param_00.script_label == "_b") {
 		param_02[0].origin = (-928,552,352);
 		param_02[0].angles = (0,0,0);
 		param_00.originalpos = (-928,552,361);
@@ -1105,8 +922,7 @@ modifiedbombzones(param_00,param_01,param_02)
 		return param_00;
 	}
 
-	if(level.mapname == "mp_metropolis" && param_00.script_label == "_b")
-	{
+	if(level.mapname == "mp_metropolis" && param_00.script_label == "_b") {
 		param_02[0].origin = (-1570,-785,-64);
 		param_02[0].angles = (0,90,0);
 		param_00.originalpos = (-1570,-785,-64);
@@ -1117,8 +933,7 @@ modifiedbombzones(param_00,param_01,param_02)
 		return param_00;
 	}
 
-	if(level.mapname == "mp_fallen" && param_00.script_label == "_a")
-	{
+	if(level.mapname == "mp_fallen" && param_00.script_label == "_a") {
 		param_02[0].origin = (408,-70,760);
 		param_02[0].angles = (0,0,0);
 		param_00.originalpos = (408,-70,760);
@@ -1129,8 +944,7 @@ modifiedbombzones(param_00,param_01,param_02)
 		return param_00;
 	}
 
-	if(level.mapname == "mp_fallen" && param_00.script_label == "_b")
-	{
+	if(level.mapname == "mp_fallen" && param_00.script_label == "_b") {
 		param_02[0].origin = (-270,2387,927);
 		param_02[0].angles = (0,0,0);
 		param_00.originalpos = (-270,2387,927);
@@ -1141,8 +955,7 @@ modifiedbombzones(param_00,param_01,param_02)
 		return param_00;
 	}
 
-	if(level.mapname == "mp_riot" && param_00.script_label == "_a")
-	{
+	if(level.mapname == "mp_riot" && param_00.script_label == "_a") {
 		param_02[0].origin = (514,669,250);
 		param_02[0].angles = (13,90,1);
 		param_00.originalpos = (514,669,250);
@@ -1153,8 +966,7 @@ modifiedbombzones(param_00,param_01,param_02)
 		return param_00;
 	}
 
-	if(level.mapname == "mp_proto" && param_00.script_label == "_a")
-	{
+	if(level.mapname == "mp_proto" && param_00.script_label == "_a") {
 		param_02[0].origin = (-90,1825,480);
 		param_02[0].angles = (0,0,0);
 		param_00.originalpos = (-90,1825,480);
@@ -1165,8 +977,7 @@ modifiedbombzones(param_00,param_01,param_02)
 		return param_00;
 	}
 
-	if(level.mapname == "mp_divide" && param_00.script_label == "_b")
-	{
+	if(level.mapname == "mp_divide" && param_00.script_label == "_b") {
 		param_02[0].origin = (-510,-560,585);
 		param_02[0].angles = (0,180,0);
 		param_00.originalpos = (-527,-560,585);
@@ -1177,8 +988,7 @@ modifiedbombzones(param_00,param_01,param_02)
 		return param_00;
 	}
 
-	if(level.mapname == "mp_parkour" && param_00.script_label == "_a")
-	{
+	if(level.mapname == "mp_parkour" && param_00.script_label == "_a") {
 		param_02[0].origin = (-1602,3,184);
 		param_02[0].angles = (0,90,0);
 		param_00.originalpos = (-1602,3,186);
@@ -1189,8 +999,7 @@ modifiedbombzones(param_00,param_01,param_02)
 		return param_00;
 	}
 
-	if(level.mapname == "mp_parkour" && param_00.script_label == "_b")
-	{
+	if(level.mapname == "mp_parkour" && param_00.script_label == "_b") {
 		param_02[0].origin = (489,-1408,249);
 		param_02[0].angles = (0,90,0);
 		param_00.originalpos = (489,-1408,249);
@@ -1204,16 +1013,11 @@ modifiedbombzones(param_00,param_01,param_02)
 	return param_00;
 }
 
-//Function Number: 33
-setmodifiedbombzonescollision(param_00,param_01,param_02,param_03)
-{
+setmodifiedbombzonescollision(param_00,param_01,param_02,param_03) {
 	var_04 = getentarray("script_brushmodel","classname");
-	foreach(var_06 in var_04)
-	{
-		if(isdefined(var_06.script_gameobjectname) && var_06.script_gameobjectname == "bombzone")
-		{
-			if(distance(var_06.origin,param_02) < 100)
-			{
+	foreach(var_06 in var_04) {
+		if(isdefined(var_06.script_gameobjectname) && var_06.script_gameobjectname == "bombzone") {
+			if(distance(var_06.origin,param_02) < 100) {
 				var_07 = spawn("script_model",param_03[0].origin + param_00);
 				var_07.angles = param_01;
 				var_07 clonebrushmodeltoscriptmodel(var_06);
@@ -1225,16 +1029,11 @@ setmodifiedbombzonescollision(param_00,param_01,param_02,param_03)
 	}
 }
 
-//Function Number: 34
-setexplodermodel(param_00,param_01)
-{
+setexplodermodel(param_00,param_01) {
 	var_02 = getentarray("script_model","classname");
-	for(var_03 = 0;var_03 < var_02.size;var_03++)
-	{
-		if(isdefined(var_02[var_03].script_exploder))
-		{
-			if(isdefined(var_02[var_03].var_336) && var_02[var_03].var_336 == "exploder" && distance(var_02[var_03].origin,param_00) < 100)
-			{
+	for(var_03 = 0;var_03 < var_02.size;var_03++) {
+		if(isdefined(var_02[var_03].script_exploder)) {
+			if(isdefined(var_02[var_03].var_336) && var_02[var_03].var_336 == "exploder" && distance(var_02[var_03].origin,param_00) < 100) {
 				var_02[var_03].origin = param_01[0].origin;
 				var_02[var_03].angles = param_01[0].angles;
 			}
@@ -1242,77 +1041,63 @@ setexplodermodel(param_00,param_01)
 	}
 }
 
-//Function Number: 35
-postshipadjustbombcasespawn(param_00)
-{
-	if(level.mapname == "mp_fallen")
-	{
+postshipadjustbombcasespawn(param_00) {
+	if(level.mapname == "mp_fallen") {
 		param_00.origin = (2655,1260,930);
 		return param_00;
 	}
 
-	if(level.mapname == "mp_divide")
-	{
+	if(level.mapname == "mp_divide") {
 		param_00.origin = param_00.origin - (0,0,2);
 		return param_00;
 	}
 
-	if(level.mapname == "mp_parkour")
-	{
+	if(level.mapname == "mp_parkour") {
 		param_00.origin = (-56,3139,170);
 		return param_00;
 	}
 
-	if(level.mapname == "mp_quarry")
-	{
+	if(level.mapname == "mp_quarry") {
 		param_00.origin = (-2067,1214,242);
 		return param_00;
 	}
 
-	if(level.mapname == "mp_frontier")
-	{
+	if(level.mapname == "mp_frontier") {
 		param_00.origin = param_00.origin + (0,0,1);
 		return param_00;
 	}
 
-	if(level.mapname == "mp_desert")
-	{
+	if(level.mapname == "mp_desert") {
 		param_00.origin = param_00.origin + (0,0,1);
 		return param_00;
 	}
 
-	if(level.mapname == "mp_metropolis")
-	{
+	if(level.mapname == "mp_metropolis") {
 		param_00.origin = param_00.origin + (0,0,2);
 		return param_00;
 	}
 
-	if(level.mapname == "mp_proto")
-	{
+	if(level.mapname == "mp_proto") {
 		param_00.origin = (2349,228,530);
 		return param_00;
 	}
 
-	if(level.mapname == "mp_rivet")
-	{
+	if(level.mapname == "mp_rivet") {
 		param_00.origin = param_00.origin + (0,0,1);
 		return param_00;
 	}
 
-	if(level.mapname == "mp_breakneck")
-	{
+	if(level.mapname == "mp_breakneck") {
 		param_00.origin = param_00.origin + (0,0,2);
 		return param_00;
 	}
 
-	if(level.mapname == "mp_dome_iw")
-	{
+	if(level.mapname == "mp_dome_iw") {
 		param_00.origin = param_00.origin + (0,0,2);
 		return param_00;
 	}
 
-	if(level.mapname == "mp_skyway")
-	{
+	if(level.mapname == "mp_skyway") {
 		param_00.origin = param_00.origin + (0,0,2);
 		return param_00;
 	}
@@ -1320,29 +1105,23 @@ postshipadjustbombcasespawn(param_00)
 	return param_00;
 }
 
-//Function Number: 36
-postshipadjustbombtriggerspawn(param_00)
-{
-	if(level.mapname == "mp_proto")
-	{
+postshipadjustbombtriggerspawn(param_00) {
+	if(level.mapname == "mp_proto") {
 		param_00.origin = (2349,228,530);
 		return param_00;
 	}
 
-	if(level.mapname == "mp_fallen")
-	{
+	if(level.mapname == "mp_fallen") {
 		param_00.origin = (2655,1260,930);
 		return param_00;
 	}
 
-	if(level.mapname == "mp_quarry")
-	{
+	if(level.mapname == "mp_quarry") {
 		param_00.origin = (-2067,1214,242);
 		return param_00;
 	}
 
-	if(level.mapname == "mp_parkour")
-	{
+	if(level.mapname == "mp_parkour") {
 		param_00.origin = (-56,3139,170);
 		return param_00;
 	}

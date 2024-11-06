@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: 4138.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 1
- * Decompile Time: 18 ms
- * Timestamp: 10/27/2023 12:32:00 AM
-*******************************************************************/
+/****************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\4138.gsc
+****************************/
 
-//Function Number: 1
-main()
-{
+main() {
 	level._effect["vfx_eu_basereveal_snowstorm_flakes"] = loadfx("vfx/iw7/levels/europa/vfx_eu_basereveal_snowstorm_flakes.vfx");
 	level._effect["vfx_eu_basereveal_snowstorm_flakes"] = loadfx("vfx/iw7/levels/europa/vfx_eu_basereveal_snowstorm_flakes.vfx");
 	level._effect["vfx_eu_basereveal_rooftwirl_01"] = loadfx("vfx/iw7/levels/europa/vfx_eu_basereveal_rooftwirl_01.vfx");
@@ -208,8 +202,7 @@ main()
 	level._effect["vfx_eu_doorblast_decomp_aircond_m"] = loadfx("vfx/iw7/levels/europa/vfx_eu_doorblast_decomp_aircond_m.vfx");
 	level._effect["vfx_eu_door_decomp_gas"] = loadfx("vfx/iw7/levels/europa/vfx_eu_door_decomp_gas.vfx");
 	level._effect["vfx_light_emergency_flicker"] = loadfx("vfx/iw7/core/light/models/vfx_light_emergency_flicker.vfx");
-	if(!getdvarint("r_reflectionProbeGenerate"))
-	{
+	if(!getdvarint("r_reflectionProbeGenerate")) {
 		scripts/sp/maps/europa/gen/europa_fx::main();
 		scripts\sp\maps\europa\gen\europa_sound::main();
 	}

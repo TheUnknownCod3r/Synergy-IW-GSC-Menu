@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\mp\maps\mp_pixel\mp_pixel_fx.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 1
- * Decompile Time: 101 ms
- * Timestamp: 10/27/2023 12:14:04 AM
-*******************************************************************/
+/************************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\mp\maps\mp_pixel\mp_pixel_fx.gsc
+************************************************************/
 
-//Function Number: 1
-main()
-{
+main() {
 	level._effect["vfx_pixel_dragon_fire"] = loadfx("vfx/iw7/levels/mp_pixel/vfx_pixel_dragon_fire.vfx");
 	level._effect["vfx_pixel_bees"] = loadfx("vfx/iw7/levels/mp_pixel/vfx_pixel_bees.vfx");
 	level._effect["vfx_pixel_foun_ripples"] = loadfx("vfx/iw7/levels/mp_pixel/vfx_pixel_foun_ripples.vfx");

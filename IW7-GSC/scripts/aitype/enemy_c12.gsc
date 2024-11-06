@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: aitype\enemy_c12.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 3
- * Decompile Time: 133 ms
- * Timestamp: 10\26\2023 11:58:15 PM
-*******************************************************************/
+/****************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\aitype\enemy_c12.gsc
+****************************************/
 
-//Function Number: 1
-main()
-{
+main() {
 	self.var_17DB = "ai//c12_assets.csv";
 	self.team = "axis";
 	self.type = "human";
@@ -24,8 +18,7 @@ main()
 	self.var_101B4 = "";
 	self.behaviortreeasset = "c12";
 	self.var_1FA9 = "C12";
-	if(isai(self))
-	{
+	if(isai(self)) {
 		self _meth_82DC(256,0);
 		self _meth_82DB(768,1024);
 	}
@@ -34,15 +27,11 @@ main()
 	lib_04B2::main();
 }
 
-//Function Number: 2
-spawner()
-{
+spawner() {
 	self _meth_833A("axis");
 }
 
-//Function Number: 3
-precache()
-{
+precache() {
 	lib_04B2::precache();
 	scripts\aitypes\bt_util::init();
 	lib_09FD::func_3508();

@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\mp\maps\mp_depot\mp_depot.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 10
- * Decompile Time: 623 ms
- * Timestamp: 10/27/2023 12:13:21 AM
-*******************************************************************/
+/*********************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\mp\maps\mp_depot\mp_depot.gsc
+*********************************************************/
 
-//Function Number: 1
-main()
-{
+main() {
 	scripts\mp\maps\mp_depot\mp_depot_precache::main();
 	scripts\mp\maps\mp_depot\gen\mp_depot_art::main();
 	scripts\mp\maps\mp_depot\mp_depot_fx::main();
@@ -38,9 +32,7 @@ main()
 	level.modifiedspawnpoints["-1240 -2944 0"]["mp_front_spawn_axis"]["origin"] = (-1240,-2944,12);
 }
 
-//Function Number: 2
-fix_collision()
-{
+fix_collision() {
 	var_00 = getent("player32x32x256","targetname");
 	var_01 = spawn("script_model",(-185,1153,213));
 	var_01.angles = (7.59943,360,90);
@@ -75,9 +67,7 @@ fix_collision()
 	var_0D clonebrushmodeltoscriptmodel(var_0C);
 }
 
-//Function Number: 3
-fix_broshot()
-{
+fix_broshot() {
 	var_00 = getent("character_loc_broshot_a","targetname");
 	var_01 = getent("character_loc_broshot_b","targetname");
 	var_02 = getent("character_loc_broshot_c","targetname");
@@ -98,19 +88,15 @@ fix_broshot()
 	var_05.origin = (var_06[0],var_06[1],-1);
 }
 
-//Function Number: 4
-setuptrain()
-{
+setuptrain() {
 	level endon("game_ended");
 	var_00 = 500;
 	var_01 = getent("trainCar_01","targetname");
 	var_01.var_BE1C = var_00;
 	var_01.var_BE19 = getentarray(var_01.target,"targetname");
-	foreach(var_03 in var_01.var_BE19)
-	{
+	foreach(var_03 in var_01.var_BE19) {
 		var_03 linkto(var_01);
-		if(isdefined(var_03.script_label) && var_03.script_label == "trainFX")
-		{
+		if(isdefined(var_03.script_label) && var_03.script_label == "trainFX") {
 			var_01.fx_loc = var_03;
 		}
 	}
@@ -125,11 +111,9 @@ setuptrain()
 	var_01.car02 = getent("trainCar_02","targetname");
 	var_01.car02.var_BE1C = var_00;
 	var_01.car02.var_BE19 = getentarray(var_01.car02.target,"targetname");
-	foreach(var_03 in var_01.car02.var_BE19)
-	{
+	foreach(var_03 in var_01.car02.var_BE19) {
 		var_03 linkto(var_01.car02);
-		if(isdefined(var_03.script_label) && var_03.script_label == "trainFX")
-		{
+		if(isdefined(var_03.script_label) && var_03.script_label == "trainFX") {
 			var_01.car02.fx_loc = var_03;
 		}
 	}
@@ -141,11 +125,9 @@ setuptrain()
 	var_01.car03 = getent("trainCar_03","targetname");
 	var_01.car03.var_BE1C = var_00;
 	var_01.car03.var_BE19 = getentarray(var_01.car03.target,"targetname");
-	foreach(var_03 in var_01.car03.var_BE19)
-	{
+	foreach(var_03 in var_01.car03.var_BE19) {
 		var_03 linkto(var_01.car03);
-		if(isdefined(var_03.script_label) && var_03.script_label == "trainFX")
-		{
+		if(isdefined(var_03.script_label) && var_03.script_label == "trainFX") {
 			var_01.car03.fx_loc = var_03;
 		}
 	}
@@ -156,11 +138,9 @@ setuptrain()
 	var_09 = getent("trainCar_04","targetname");
 	var_09.var_BE1C = var_00;
 	var_09.var_BE19 = getentarray(var_09.target,"targetname");
-	foreach(var_03 in var_09.var_BE19)
-	{
+	foreach(var_03 in var_09.var_BE19) {
 		var_03 linkto(var_09);
-		if(isdefined(var_03.script_label) && var_03.script_label == "trainFX")
-		{
+		if(isdefined(var_03.script_label) && var_03.script_label == "trainFX") {
 			var_09.fx_loc = var_03;
 		}
 	}
@@ -175,11 +155,9 @@ setuptrain()
 	var_09.car02 = getent("trainCar_05","targetname");
 	var_09.car02.var_BE1C = var_00;
 	var_09.car02.var_BE19 = getentarray(var_09.car02.target,"targetname");
-	foreach(var_03 in var_09.car02.var_BE19)
-	{
+	foreach(var_03 in var_09.car02.var_BE19) {
 		var_03 linkto(var_09.car02);
-		if(isdefined(var_03.script_label) && var_03.script_label == "trainFX")
-		{
+		if(isdefined(var_03.script_label) && var_03.script_label == "trainFX") {
 			var_09.car02.fx_loc = var_03;
 		}
 	}
@@ -191,11 +169,9 @@ setuptrain()
 	var_09.car03 = getent("trainCar_06","targetname");
 	var_09.car03.var_BE1C = var_00;
 	var_09.car03.var_BE19 = getentarray(var_09.car03.target,"targetname");
-	foreach(var_03 in var_09.car03.var_BE19)
-	{
+	foreach(var_03 in var_09.car03.var_BE19) {
 		var_03 linkto(var_09.car03);
-		if(isdefined(var_03.script_label) && var_03.script_label == "trainFX")
-		{
+		if(isdefined(var_03.script_label) && var_03.script_label == "trainFX") {
 			var_09.car03.fx_loc = var_03;
 		}
 	}
@@ -206,39 +182,27 @@ setuptrain()
 	thread trackmanger(var_01,var_09);
 }
 
-//Function Number: 5
-traincollision(param_00)
-{
-}
+traincollision(param_00) {}
 
-//Function Number: 6
-trainkilltrigger(param_00)
-{
+trainkilltrigger(param_00) {
 	level endon("game_ended");
 	param_00.var_9EAC = 1;
-	while(param_00.var_9EAC)
-	{
+	while(param_00.var_9EAC) {
 		param_00.killtrigger waittill("trigger",var_01);
-		if(isdefined(var_01) && param_00.var_9EAC)
-		{
-			if(isplayer(var_01))
-			{
+		if(isdefined(var_01) && param_00.var_9EAC) {
+			if(isplayer(var_01)) {
 				var_01 suicide();
 				continue;
 			}
 
-			if(isdefined(var_01.classname) && var_01.classname == "script_vehicle")
-			{
-				if(isdefined(var_01.var_110EA))
-				{
-					if(var_01.var_110EA == "minijackal")
-					{
+			if(isdefined(var_01.classname) && var_01.classname == "script_vehicle") {
+				if(isdefined(var_01.var_110EA)) {
+					if(var_01.var_110EA == "minijackal") {
 						var_01 notify("minijackal_end");
 						continue;
 					}
 
-					if(var_01.var_110EA == "venom")
-					{
+					if(var_01.var_110EA == "venom") {
 						var_01 notify("venom_end",var_01.origin);
 					}
 				}
@@ -247,39 +211,33 @@ trainkilltrigger(param_00)
 	}
 }
 
-//Function Number: 7
-trackmanger(param_00,param_01)
-{
+trackmanger(param_00,param_01) {
 	level endon("game_ended");
 	thread trainmovelogic(param_01);
 	thread trainmovelogic(param_01.car02);
 	thread trainmovelogic(param_01.car03);
 	param_01 hide();
 	param_01 notsolid();
-	foreach(var_03 in param_01.var_BE19)
-	{
+	foreach(var_03 in param_01.var_BE19) {
 		var_03 hide();
 		var_03 notsolid();
 	}
 
 	param_01.car02 hide();
 	param_01.car02 notsolid();
-	foreach(var_03 in param_01.car02.var_BE19)
-	{
+	foreach(var_03 in param_01.car02.var_BE19) {
 		var_03 hide();
 		var_03 notsolid();
 	}
 
 	param_01.car03 hide();
 	param_01.car03 notsolid();
-	foreach(var_03 in param_01.car03.var_BE19)
-	{
+	foreach(var_03 in param_01.car03.var_BE19) {
 		var_03 hide();
 		var_03 notsolid();
 	}
 
-	for(;;)
-	{
+	for(;;) {
 		param_01 waittill("approaching_station");
 		thread trainkilltrigger(param_01);
 		scripts\common\utility::exploder(15);
@@ -307,12 +265,9 @@ trackmanger(param_00,param_01)
 	}
 }
 
-//Function Number: 8
-trainmovelogic(param_00)
-{
+trainmovelogic(param_00) {
 	level endon("game_ended");
-	if(isdefined(param_00.fx_loc))
-	{
+	if(isdefined(param_00.fx_loc)) {
 		playfxontag(level._effect["train_move_FX"],param_00.fx_loc,"tag_origin");
 	}
 
@@ -320,12 +275,10 @@ trainmovelogic(param_00)
 	param_00.nextstruct = scripts\common\utility::getstruct(param_00.initialstruct.target,"targetname");
 	var_01 = 2;
 	var_02 = 1.5;
-	if(param_00.var_336 == "trainCar_01" || param_00.var_336 == "trainCar_04")
-	{
+	if(param_00.var_336 == "trainCar_01" || param_00.var_336 == "trainCar_04") {
 		param_00 playsoundonmovingent("depot_train_car1_depart");
 	}
-	else if(param_00.var_336 == "trainCar_03" || param_00.var_336 == "trainCar_06")
-	{
+	else if(param_00.var_336 == "trainCar_03" || param_00.var_336 == "trainCar_06") {
 		param_00 playsoundonmovingent("depot_train_car3_depart");
 	}
 
@@ -334,19 +287,15 @@ trainmovelogic(param_00)
 	wait(var_01);
 	param_00.var_4C09 = param_00.nextstruct;
 	param_00.nextstruct = scripts\common\utility::getstruct(param_00.var_4C09.target,"targetname");
-	while(param_00.nextstruct.var_336 != param_00.initialstruct.var_336)
-	{
-		if(param_00.var_4C09.var_336 == "trainTeleport")
-		{
-			if(isdefined(param_00.fx_loc))
-			{
+	while(param_00.nextstruct.var_336 != param_00.initialstruct.var_336) {
+		if(param_00.var_4C09.var_336 == "trainTeleport") {
+			if(isdefined(param_00.fx_loc)) {
 				stopfxontag(level._effect["train_move_FX"],param_00.fx_loc,"tag_origin");
 			}
 
 			param_00 hide();
 			param_00 notsolid();
-			foreach(var_04 in param_00.var_BE19)
-			{
+			foreach(var_04 in param_00.var_BE19) {
 				var_04 hide();
 				var_04 notsolid();
 			}
@@ -357,14 +306,12 @@ trainmovelogic(param_00)
 			wait(1);
 			param_00 show();
 			param_00 solid();
-			foreach(var_04 in param_00.var_BE19)
-			{
+			foreach(var_04 in param_00.var_BE19) {
 				var_04 show();
 				var_04 solid();
 			}
 
-			if(isdefined(param_00.fx_loc))
-			{
+			if(isdefined(param_00.fx_loc)) {
 				playfxontag(level._effect["train_move_FX"],param_00.fx_loc,"tag_origin");
 			}
 
@@ -374,8 +321,7 @@ trainmovelogic(param_00)
 			continue;
 		}
 
-		if(param_00.var_4C09.var_336 == "nearStationStruct")
-		{
+		if(param_00.var_4C09.var_336 == "nearStationStruct") {
 			param_00 notify("approaching_station");
 		}
 
@@ -390,13 +336,11 @@ trainmovelogic(param_00)
 	param_00 moveto(param_00.nextstruct.origin,var_01,0,var_02);
 	param_00 rotateto(param_00.nextstruct.angles,var_01,0,var_02);
 	wait(var_01);
-	if(isdefined(param_00.var_9EAC))
-	{
+	if(isdefined(param_00.var_9EAC)) {
 		param_00.var_9EAC = 0;
 	}
 
-	if(isdefined(param_00.fx_loc))
-	{
+	if(isdefined(param_00.fx_loc)) {
 		stopfxontag(level._effect["train_move_FX"],param_00.fx_loc,"tag_origin");
 	}
 
@@ -404,28 +348,22 @@ trainmovelogic(param_00)
 	param_00.nextstruct = scripts\common\utility::getstruct(param_00.var_4C09.target,"targetname");
 }
 
-//Function Number: 9
-play_train_arrive_sfx(param_00)
-{
-	if(param_00.var_336 == "trainCar_01" || param_00.var_336 == "trainCar_04")
-	{
+play_train_arrive_sfx(param_00) {
+	if(param_00.var_336 == "trainCar_01" || param_00.var_336 == "trainCar_04") {
 		param_00 playloopsound("depot_train_car1_arrive");
 		wait(22);
 		param_00 stoploopsound("depot_train_car1_arrive");
 		return;
 	}
 
-	if(param_00.var_336 == "trainCar_03" || param_00.var_336 == "trainCar_06")
-	{
+	if(param_00.var_336 == "trainCar_03" || param_00.var_336 == "trainCar_06") {
 		param_00 playloopsound("depot_train_car3_arrive");
 		wait(22);
 		param_00 stoploopsound("depot_train_car3_arrive");
 	}
 }
 
-//Function Number: 10
-distspeedtotime(param_00,param_01,param_02)
-{
+distspeedtotime(param_00,param_01,param_02) {
 	param_02 = 1 / param_02;
 	return abs(distance(param_00.origin,param_01.origin) * param_02);
 }

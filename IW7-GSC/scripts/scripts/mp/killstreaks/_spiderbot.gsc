@@ -1,26 +1,17 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\mp\killstreaks\_spiderbot.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 16
- * Decompile Time: 742 ms
- * Timestamp: 10/27/2023 12:29:41 AM
-*******************************************************************/
+/*********************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\mp\killstreaks\_spiderbot.gsc
+*********************************************************/
 
-//Function Number: 1
-init()
-{
+init() {
 	level._effect["spider_explode"] = loadfx("vfx/core/expl/grenadeexp_default");
 	scripts\mp\killstreaks\_killstreaks::registerkillstreak("spiderbot",::func_1288A);
 }
 
-//Function Number: 2
-func_1288A(param_00)
-{
+func_1288A(param_00) {
 	var_01 = 0;
-	if(!var_01)
-	{
+	if(!var_01) {
 		return 0;
 	}
 
@@ -31,9 +22,7 @@ func_1288A(param_00)
 	return 1;
 }
 
-//Function Number: 3
-func_13B56()
-{
+func_13B56() {
 	self endon("disconnect");
 	self endon("detonate_spiderbot");
 	self notifyonplayercommand("manual_explode","+attack");
@@ -42,18 +31,14 @@ func_13B56()
 	self notify("detonate_spiderbot");
 }
 
-//Function Number: 4
-func_13B58()
-{
+func_13B58() {
 	self endon("disconnect");
 	self endon("detonate_spiderbot");
 	self notifyonplayercommand("toggle_thermal","+smoke");
 	var_00 = 0;
-	for(;;)
-	{
+	for(;;) {
 		self waittill("toggle_thermal");
-		if(!var_00)
-		{
+		if(!var_00) {
 			self thermalvisionon();
 			var_00 = 1;
 			continue;
@@ -64,17 +49,13 @@ func_13B58()
 	}
 }
 
-//Function Number: 5
-func_13B57()
-{
+func_13B57() {
 	self endon("disconnect");
 	self endon("detonate_spiderbot");
 	self notifyonplayercommand("shoot_web","+speed_throw");
-	for(;;)
-	{
+	for(;;) {
 		self waittill("shoot_web");
-		if(!isdefined(self.wearing_rat_king_eye))
-		{
+		if(!isdefined(self.wearing_rat_king_eye)) {
 			self.wearing_rat_king_eye = 1;
 			var_00 = anglestoforward(self getplayerangles());
 			var_01 = self geteye() + var_00 * 20 + (0,0,20);
@@ -86,22 +67,17 @@ func_13B57()
 	}
 }
 
-//Function Number: 6
-func_13BAF()
-{
+func_13BAF() {
 	self notifyonplayercommand("web_cut","+gostand");
 	self waittill("web_cut");
-	if(isdefined(self.wearing_rat_king_eye))
-	{
+	if(isdefined(self.wearing_rat_king_eye)) {
 		self.var_AD32 = undefined;
 		self.wearing_rat_king_eye = undefined;
 		self unlink();
 	}
 }
 
-//Function Number: 7
-func_13BB0(param_00,param_01)
-{
+func_13BB0(param_00,param_01) {
 	self endon("disconnect");
 	self endon("detonate_spiderbot");
 	self endon("web_cut");
@@ -114,13 +90,11 @@ func_13BB0(param_00,param_01)
 	var_04.angles = vectortoangles(var_02 - var_04.origin);
 	self.var_AD32 = var_04;
 	self playerlinktoblend(var_04,"tag_origin",0.5);
-	if(isdefined(var_03.var_1155F) && isplayer(var_03.var_1155F))
-	{
+	if(isdefined(var_03.var_1155F) && isplayer(var_03.var_1155F)) {
 		var_03 linkto(var_03.var_1155F);
 		thread func_13B79(var_03);
 		var_05 = 0.5;
-		while(distance2dsquared(var_04.origin,var_03.origin) > 400 || !isdefined(var_03.var_1155F))
-		{
+		while(distance2dsquared(var_04.origin,var_03.origin) > 400 || !isdefined(var_03.var_1155F)) {
 			var_04 rotateto(vectortoangles(var_03.origin - var_04.origin),0.3);
 			var_04 moveto(var_03.origin,var_05);
 			wait(var_05);
@@ -136,32 +110,25 @@ func_13BB0(param_00,param_01)
 	var_04 thread func_13AD8(var_03.origin,self);
 }
 
-//Function Number: 8
-func_13B79(param_00)
-{
+func_13B79(param_00) {
 	param_00 endon("death");
 	self endon("detonate_spiderbot");
 	param_00.var_1155F scripts\engine\utility::waittill_any_3("phase_shift_power_activated","rewind_activated","powers_teleport_used","powers_transponder_used","orbital_deployment_action","death","disconnect");
 	param_00.var_1155F = undefined;
 }
 
-//Function Number: 9
-func_13AD8(param_00,param_01)
-{
+func_13AD8(param_00,param_01) {
 	param_01 endon("disconnect");
 	param_01 endon("detonate_spiderbot");
 	param_01 endon("web_cut");
-	while(self.origin != param_00)
-	{
+	while(self.origin != param_00) {
 		scripts\engine\utility::waitframe();
 	}
 
 	param_01 notify("detonate_spiderbot");
 }
 
-//Function Number: 10
-func_13BB1(param_00,param_01)
-{
+func_13BB1(param_00,param_01) {
 	self endon("disconnect");
 	self endon("detonate_spiderbot");
 	param_01 endon("explode");
@@ -169,17 +136,14 @@ func_13BB1(param_00,param_01)
 	self.wearing_rat_king_eye = undefined;
 }
 
-//Function Number: 11
-func_13B55()
-{
+func_13B55() {
 	self endon("disconnect");
 	level endon("game_ended");
 	self waittill("detonate_spiderbot",var_00);
 	var_01 = self.origin;
 	var_02 = 500;
 	var_03 = 200;
-	if(!isdefined(var_00))
-	{
+	if(!isdefined(var_00)) {
 		radiusdamage(var_01,256,var_02,var_03,self,"MOD_EXPLOSIVE","killstreak_spiderbot_mp");
 	}
 
@@ -187,15 +151,12 @@ func_13B55()
 	playsoundatpos(var_01,"frag_grenade_explode");
 	playrumbleonposition("grenade_rumble",var_01);
 	earthquake(0.5,0.75,var_01,800);
-	foreach(var_05 in level.players)
-	{
-		if(var_05 scripts\mp\_utility::isusingremote())
-		{
+	foreach(var_05 in level.players) {
+		if(var_05 scripts\mp\_utility::isusingremote()) {
 			continue;
 		}
 
-		if(distancesquared(var_01,var_05.origin) > 360000)
-		{
+		if(distancesquared(var_01,var_05.origin) > 360000) {
 			continue;
 		}
 
@@ -205,9 +166,7 @@ func_13B55()
 	func_1108D();
 }
 
-//Function Number: 12
-func_10DF3(param_00)
-{
+func_10DF3(param_00) {
 	self setclientomnvar("ui_spiderbot_controls",1);
 	self thermalvisionon();
 	self thermalvisionfofoverlayon();
@@ -227,17 +186,14 @@ func_10DF3(param_00)
 	return 1;
 }
 
-//Function Number: 13
-func_1108D()
-{
+func_1108D() {
 	self setclientomnvar("ui_spiderbot_controls",0);
 	self thermalvisionoff();
 	self thermalvisionfofoverlayoff();
 	self stopsounds();
 	scripts\engine\utility::allow_weapon(1);
 	scripts\engine\utility::allow_usability(1);
-	if(isdefined(self.wearing_rat_king_eye))
-	{
+	if(isdefined(self.wearing_rat_king_eye)) {
 		self.var_AD32 = undefined;
 		self.wearing_rat_king_eye = undefined;
 		self unlink();
@@ -246,26 +202,20 @@ func_1108D()
 	self setscriptablepartstate("CompassIcon","defaulticon");
 }
 
-//Function Number: 14
-func_7F05(param_00,param_01,param_02,param_03)
-{
+func_7F05(param_00,param_01,param_02,param_03) {
 	var_04 = [];
 	var_05 = undefined;
-	if(!isdefined(param_02))
-	{
+	if(!isdefined(param_02)) {
 		param_02 = 0;
 	}
 
-	if(!isdefined(param_03))
-	{
+	if(!isdefined(param_03)) {
 		param_03 = 0;
 	}
 
 	var_06 = param_01 * param_01;
-	foreach(var_08 in level.players)
-	{
-		if(func_38C1(var_08,param_00,var_06,param_02,param_03))
-		{
+	foreach(var_08 in level.players) {
+		if(func_38C1(var_08,param_00,var_06,param_02,param_03)) {
 			var_05 = var_08;
 			break;
 		}
@@ -274,17 +224,13 @@ func_7F05(param_00,param_01,param_02,param_03)
 	return var_05;
 }
 
-//Function Number: 15
-func_38C1(param_00,param_01,param_02,param_03,param_04)
-{
+func_38C1(param_00,param_01,param_02,param_03,param_04) {
 	var_05 = param_00.origin;
 	var_06 = distance2dsquared(param_01,var_05);
 	return var_06 < param_02 && !param_03 || scripts\mp\_weapons::func_13C7E(param_01,var_05,param_04,param_00);
 }
 
-//Function Number: 16
-func_511C(param_00,param_01)
-{
+func_511C(param_00,param_01) {
 	self endon("death");
 	wait(param_00);
 	self playloopsound(param_01);

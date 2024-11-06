@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\cp\zombies\craftables\_zm_soul_collector.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 21
- * Decompile Time: 792 ms
- * Timestamp: 10/27/2023 12:23:35 AM
-*******************************************************************/
+/************************************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\cp\zombies\craftables\_zm_soul_collector.gsc
+************************************************************************/
 
-//Function Number: 1
-init()
-{
+init() {
 	level._effect["medusa_death"] = loadfx("vfx/core/base/vfx_alien_soul_fly.vfx");
 	level._effect["medusa_crawler_death"] = loadfx("vfx/iw7/core/zombie/vfx_alien_soul_fly_crawler.vfx");
 	level._effect["medusa_blast_lg"] = loadfx("vfx/core/base/vfx_alien_cortex_blast_01.vfx");
@@ -36,31 +30,24 @@ init()
 	level.var_B549["crafted_medusa"] = var_00;
 }
 
-//Function Number: 2
-func_65F5(param_00)
-{
+func_65F5(param_00) {
 	var_01 = 262144;
-	if(level.var_B548.size < 1)
-	{
+	if(level.var_B548.size < 1) {
 		return undefined;
 	}
 
 	var_02 = [];
-	foreach(var_04 in level.var_B548)
-	{
-		if(!isdefined(var_04) || var_04.fully_charged)
-		{
+	foreach(var_04 in level.var_B548) {
+		if(!isdefined(var_04) || var_04.fully_charged) {
 			continue;
 		}
 
-		if(distancesquared(var_04.origin,param_00.origin) < var_01)
-		{
+		if(distancesquared(var_04.origin,param_00.origin) < var_01) {
 			var_02[var_02.size] = var_04;
 		}
 	}
 
-	if(var_02.size == 0)
-	{
+	if(var_02.size == 0) {
 		return undefined;
 	}
 
@@ -68,11 +55,8 @@ func_65F5(param_00)
 	return var_06[0];
 }
 
-//Function Number: 3
-func_A630(param_00,param_01,param_02)
-{
-	if(param_02)
-	{
+func_A630(param_00,param_01,param_02) {
+	if(param_02) {
 		var_03 = level._effect["medusa_crawler_death"];
 		playfx(var_03,param_00);
 	}
@@ -85,8 +69,7 @@ func_A630(param_00,param_01,param_02)
 	scripts\engine\utility::waitframe();
 	var_04 = spawn("script_model",param_00 + (0,0,40));
 	var_04 setmodel("tag_origin_soultrail");
-	if(!isdefined(param_01))
-	{
+	if(!isdefined(param_01)) {
 		var_04 delete();
 		return;
 	}
@@ -95,8 +78,7 @@ func_A630(param_00,param_01,param_02)
 	var_06 = distance(param_00 + (0,0,40),var_05 + (0,0,75));
 	var_07 = 350;
 	var_08 = var_06 / var_07;
-	if(var_08 < 0.05)
-	{
+	if(var_08 < 0.05) {
 		var_08 = 0.05;
 	}
 
@@ -105,15 +87,12 @@ func_A630(param_00,param_01,param_02)
 	var_04 setscriptablepartstate("tag","collect");
 	wait(0.5);
 	var_04 delete();
-	if(isdefined(param_01))
-	{
+	if(isdefined(param_01)) {
 		param_01 notify("soul_collected");
 	}
 }
 
-//Function Number: 4
-give_crafted_medusa(param_00,param_01)
-{
+give_crafted_medusa(param_00,param_01) {
 	param_01.itemtype = "crafted_medusa";
 	param_01 thread watch_dpad();
 	param_01 notify("new_power","crafted_medusa");
@@ -122,29 +101,23 @@ give_crafted_medusa(param_00,param_01)
 	scripts\cp\utility::set_crafted_inventory_item("crafted_medusa",::give_crafted_medusa,param_01);
 }
 
-//Function Number: 5
-watch_dpad()
-{
+watch_dpad() {
 	self endon("disconnect");
 	self endon("death");
 	self notify("craft_dpad_watcher");
 	self endon("craft_dpad_watcher");
 	self notifyonplayercommand("pullout_medusa","+actionslot 3");
-	for(;;)
-	{
+	for(;;) {
 		self waittill("pullout_medusa");
-		if(scripts\engine\utility::istrue(self.iscarrying))
-		{
+		if(scripts\engine\utility::istrue(self.iscarrying)) {
 			continue;
 		}
 
-		if(scripts\engine\utility::istrue(self.linked_to_coaster))
-		{
+		if(scripts\engine\utility::istrue(self.linked_to_coaster)) {
 			continue;
 		}
 
-		if(scripts\cp\utility::is_valid_player())
-		{
+		if(scripts\cp\utility::is_valid_player()) {
 			break;
 		}
 	}
@@ -152,9 +125,7 @@ watch_dpad()
 	thread shootturret(1);
 }
 
-//Function Number: 6
-shootturret(param_00,param_01,param_02)
-{
+shootturret(param_00,param_01,param_02) {
 	self endon("disconnect");
 	scripts\cp\utility::clearlowermessage("msg_power_hint");
 	var_03 = func_49E8(self);
@@ -164,72 +135,59 @@ shootturret(param_00,param_01,param_02)
 	self.carriedsentry = undefined;
 	thread scripts\cp\utility::wait_restore_player_perk();
 	self.iscarrying = 0;
-	if(isdefined(var_03))
-	{
+	if(isdefined(var_03)) {
 		return 1;
 	}
 
 	return 0;
 }
 
-//Function Number: 7
-setcarryingims(param_00,param_01,param_02,param_03)
-{
+setcarryingims(param_00,param_01,param_02,param_03) {
 	self endon("disconnect");
 	param_00 func_B543(self,param_01);
 	scripts\engine\utility::allow_weapon(0);
 	self notifyonplayercommand("place_medusa","+attack");
 	self notifyonplayercommand("place_medusa","+attack_akimbo_accessible");
 	self notifyonplayercommand("cancel_medusa","+actionslot 3");
-	if(!level.console)
-	{
+	if(!level.console) {
 		self notifyonplayercommand("cancel_medusa","+actionslot 5");
 		self notifyonplayercommand("cancel_medusa","+actionslot 6");
 		self notifyonplayercommand("cancel_medusa","+actionslot 7");
 	}
 
-	for(;;)
-	{
+	for(;;) {
 		var_04 = scripts\engine\utility::waittill_any_return("place_medusa","cancel_medusa","force_cancel_placement");
-		if(!isdefined(param_00))
-		{
+		if(!isdefined(param_00)) {
 			scripts\engine\utility::allow_weapon(1);
 			return 1;
 		}
 
-		if(!isdefined(var_04))
-		{
+		if(!isdefined(var_04)) {
 			var_04 = "force_cancel_placement";
 		}
 
-		if(var_04 == "cancel_medusa" || var_04 == "force_cancel_placement")
-		{
-			if(!param_01 && var_04 == "cancel_medusa")
-			{
+		if(var_04 == "cancel_medusa" || var_04 == "force_cancel_placement") {
+			if(!param_01 && var_04 == "cancel_medusa") {
 				continue;
 			}
 
 			scripts\engine\utility::allow_weapon(1);
 			param_00 func_B542();
-			if(var_04 != "force_cancel_placement")
-			{
+			if(var_04 != "force_cancel_placement") {
 				thread watch_dpad();
 			}
-			else if(param_01)
-			{
+			else if(param_01) {
 				scripts\cp\utility::remove_crafted_item_from_inventory(self);
 			}
 
 			return 0;
 		}
 
-		if(!param_00.canbeplaced)
-		{
+		if(!param_00.canbeplaced) {
 			continue;
 		}
 
-		if(param_01)
-		{
+		if(param_01) {
 			scripts\cp\utility::remove_crafted_item_from_inventory(self);
 		}
 
@@ -239,9 +197,7 @@ setcarryingims(param_00,param_01,param_02,param_03)
 	}
 }
 
-//Function Number: 8
-func_49E8(param_00)
-{
+func_49E8(param_00) {
 	var_01 = spawnturret("misc_turret",param_00.origin + (0,0,25),"sentry_minigun_mp");
 	var_01.angles = param_00.angles;
 	var_01.triggerportableradarping = param_00;
@@ -258,62 +214,48 @@ func_49E8(param_00)
 	return var_01;
 }
 
-//Function Number: 9
-func_B53F(param_00)
-{
+func_B53F(param_00) {
 	self.canbeplaced = 1;
 	func_B544();
 }
 
-//Function Number: 10
-func_B53C(param_00)
-{
+func_B53C(param_00) {
 	self waittill("death");
-	if(!isdefined(self))
-	{
+	if(!isdefined(self)) {
 		return;
 	}
 
 	func_B544();
 	self playsound("sentry_explode");
-	if(isdefined(self.charge_fx))
-	{
+	if(isdefined(self.charge_fx)) {
 		self.charge_fx delete();
 	}
 
 	func_E11F();
-	if(isdefined(self))
-	{
+	if(isdefined(self)) {
 		playfxontag(scripts\engine\utility::getfx("sentry_explode_mp"),self,"tag_origin");
 		self playsound("sentry_explode_smoke");
 		wait(0.1);
-		if(isdefined(self))
-		{
+		if(isdefined(self)) {
 			self delete();
 		}
 	}
 }
 
-//Function Number: 11
-func_B53D()
-{
+func_B53D() {
 	self endon("death");
 	level endon("game_ended");
-	for(;;)
-	{
+	for(;;) {
 		self waittill("trigger",var_00);
-		if(!var_00 scripts\cp\utility::is_valid_player())
-		{
+		if(!var_00 scripts\cp\utility::is_valid_player()) {
 			continue;
 		}
 
-		if(scripts\engine\utility::istrue(var_00.iscarrying))
-		{
+		if(scripts\engine\utility::istrue(var_00.iscarrying)) {
 			continue;
 		}
 
-		if(self.fully_charged)
-		{
+		if(self.fully_charged) {
 			level thread func_B53B(self.origin,var_00);
 			wait(0.6);
 		}
@@ -323,8 +265,7 @@ func_B53D()
 			self playsound("trap_medusa_pickup");
 		}
 
-		if(isdefined(self.charge_fx))
-		{
+		if(isdefined(self.charge_fx)) {
 			self.charge_fx delete();
 		}
 
@@ -333,24 +274,19 @@ func_B53D()
 	}
 }
 
-//Function Number: 12
-func_B53B(param_00,param_01)
-{
+func_B53B(param_00,param_01) {
 	playsoundatpos(param_00,"trap_medusa_explo");
 	playfx(level._effect["medusa_blast_lg"],param_00);
 	param_01.itemtype = "crafted_medusa";
 	wait(0.5);
 	var_02 = scripts\cp\cp_agent_utils::getaliveagentsofteam("axis");
 	var_02 = sortbydistance(var_02,param_00);
-	foreach(var_04 in var_02)
-	{
-		if(!isdefined(var_04) || !isdefined(var_04.agent_type))
-		{
+	foreach(var_04 in var_02) {
+		if(!isdefined(var_04) || !isdefined(var_04.agent_type)) {
 			continue;
 		}
 
-		if(var_04.agent_type == "zombie_grey" || var_04.agent_type == "zombie_ghost" || var_04.agent_type == "zombie_brute")
-		{
+		if(var_04.agent_type == "zombie_grey" || var_04.agent_type == "zombie_ghost" || var_04.agent_type == "zombie_brute") {
 			continue;
 		}
 
@@ -359,44 +295,36 @@ func_B53B(param_00,param_01)
 	}
 }
 
-//Function Number: 13
-func_B545(param_00,param_01,param_02)
-{
+func_B545(param_00,param_01,param_02) {
 	var_03 = spawn("script_model",self.origin + (0,0,0));
 	var_03.angles = self.angles;
 	var_03.name = "crafted_medusa";
 	self.carriedmedusa delete();
 	var_03 solid();
-	if(!isdefined(param_02.var_B546))
-	{
+	if(!isdefined(param_02.var_B546)) {
 		param_02 iprintlnbold(&"ZOMBIE_CRAFTING_SOUVENIRS_KILL_NEAR_MEDUSA");
 		param_02.var_B546 = 1;
 	}
 
 	var_04 = "zmb_medusa_energy_collector_01_empty";
-	if(!isdefined(param_01))
-	{
+	if(!isdefined(param_01)) {
 		var_04 = "zmb_medusa_energy_collector_01_empty";
 	}
 	else
 	{
-		if(param_01 > 3)
-		{
+		if(param_01 > 3) {
 			var_04 = "zmb_medusa_energy_collector_01_1";
 		}
 
-		if(param_01 > 5)
-		{
+		if(param_01 > 5) {
 			var_04 = "zmb_medusa_energy_collector_01_2";
 		}
 
-		if(param_01 > 7)
-		{
+		if(param_01 > 7) {
 			var_04 = "zmb_medusa_energy_collector_01_3";
 		}
 
-		if(param_01 > 9)
-		{
+		if(param_01 > 9) {
 			var_04 = "zmb_medusa_energy_collector_01";
 		}
 	}
@@ -411,12 +339,9 @@ func_B545(param_00,param_01,param_02)
 	self delete();
 }
 
-//Function Number: 14
-func_B542()
-{
+func_B542() {
 	self.carriedby getrigindexfromarchetyperef();
-	if(isdefined(self.triggerportableradarping))
-	{
+	if(isdefined(self.triggerportableradarping)) {
 		self.triggerportableradarping.iscarrying = 0;
 	}
 
@@ -424,16 +349,13 @@ func_B542()
 	self delete();
 }
 
-//Function Number: 15
-func_B543(param_00,param_01)
-{
+func_B543(param_00,param_01) {
 	self setmodel(level.var_B549["crafted_medusa"].modelplacement);
 	self setsentrycarrier(param_00);
 	self setcandamage(0);
 	self.carriedby = param_00;
 	param_00.iscarrying = 1;
-	if(param_01)
-	{
+	if(param_01) {
 		self.firstplacement = 1;
 	}
 
@@ -445,9 +367,7 @@ func_B543(param_00,param_01)
 	self notify("carried");
 }
 
-//Function Number: 16
-func_B541(param_00,param_01)
-{
+func_B541(param_00,param_01) {
 	self setcursorhint("HINT_NOICON");
 	self sethintstring(level.var_B549["crafted_medusa"].pow);
 	self makeusable();
@@ -461,20 +381,17 @@ func_B541(param_00,param_01)
 	thread func_B547();
 	self.var_3CC3 = 0;
 	self.fully_charged = 0;
-	if(isdefined(param_01))
-	{
+	if(isdefined(param_01)) {
 		self.var_3CC3 = param_01;
 	}
 
-	if(self.var_3CC3 >= 10)
-	{
+	if(self.var_3CC3 >= 10) {
 		self.fully_charged = 1;
 		self sethintstring(level.var_B549["crafted_medusa"].var_74BF);
 	}
 
 	func_1862();
-	if(!self.fully_charged)
-	{
+	if(!self.fully_charged) {
 		self setscriptablepartstate("base","charge_level_1");
 		return;
 	}
@@ -482,40 +399,31 @@ func_B541(param_00,param_01)
 	self setscriptablepartstate("base","charge_level_2");
 }
 
-//Function Number: 17
-func_B547()
-{
+func_B547() {
 	self endon("death");
-	for(;;)
-	{
+	for(;;) {
 		self waittill("soul_collected");
 		self.var_3CC3++;
 		var_00 = "zmb_medusa_energy_collector_01_empty";
-		if(self.var_3CC3 >= 3)
-		{
+		if(self.var_3CC3 >= 3) {
 			var_00 = "zmb_medusa_energy_collector_01_1";
 		}
 
-		if(self.var_3CC3 > 5)
-		{
+		if(self.var_3CC3 > 5) {
 			var_00 = "zmb_medusa_energy_collector_01_2";
 		}
 
-		if(self.var_3CC3 > 7)
-		{
+		if(self.var_3CC3 > 7) {
 			var_00 = "zmb_medusa_energy_collector_01_3";
 		}
 
-		if(self.var_3CC3 > 9)
-		{
+		if(self.var_3CC3 > 9) {
 			var_00 = "zmb_medusa_energy_collector_01";
 		}
 
-		if(self.model != var_00)
-		{
+		if(self.model != var_00) {
 			self setmodel(var_00);
-			if(self.var_3CC3 != 10)
-			{
+			if(self.var_3CC3 != 10) {
 				self setscriptablepartstate("base","charge_level_1");
 			}
 			else
@@ -533,37 +441,27 @@ func_B547()
 	}
 }
 
-//Function Number: 18
-func_B544()
-{
+func_B544() {
 	self makeunusable();
 	func_E11F();
 }
 
-//Function Number: 19
-func_1862(param_00)
-{
+func_1862(param_00) {
 	level.var_B548 = scripts\engine\utility::array_add_safe(level.var_B548,self);
 	scripts\cp\utility::addtotraplist();
 }
 
-//Function Number: 20
-func_E11F(param_00)
-{
+func_E11F(param_00) {
 	level.var_B548 = scripts\engine\utility::array_remove(level.var_B548,self);
 	scripts\cp\utility::removefromtraplist();
 }
 
-//Function Number: 21
-func_B539()
-{
+func_B539() {
 	self endon("death");
 	level endon("game_ended");
-	for(;;)
-	{
+	for(;;) {
 		wait(3);
-		if(!isdefined(self.carriedby))
-		{
+		if(!isdefined(self.carriedby)) {
 			self playsound("sentry_gun_beep");
 		}
 	}

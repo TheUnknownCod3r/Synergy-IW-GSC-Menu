@@ -1,18 +1,11 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\mp\agents\dlc4_boss\dlc4_boss_tunedata.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 6
- * Decompile Time: 364 ms
- * Timestamp: 10/27/2023 12:11:14 AM
-*******************************************************************/
+/**********************************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\mp\agents\dlc4_boss\dlc4_boss_tunedata.gsc
+**********************************************************************/
 
-//Function Number: 1
-setuptunedata()
-{
-	if(!isdefined(level.agenttunedata))
-	{
+setuptunedata() {
+	if(!isdefined(level.agenttunedata)) {
 		level.agenttunedata = [];
 	}
 
@@ -24,9 +17,7 @@ setuptunedata()
 	setupfrenziedtunedata(level.agenttunedata["dlc4_boss"]);
 }
 
-//Function Number: 2
-setupmytunedata(param_00)
-{
+setupmytunedata(param_00) {
 	param_00.fireball_weight = 3;
 	param_00.clap_weight = 0;
 	param_00.throw_weight = 0;
@@ -151,9 +142,7 @@ setupmytunedata(param_00)
 	param_00.eclipse_duration = 180000;
 }
 
-//Function Number: 3
-setupfighttunedata(param_00)
-{
+setupfighttunedata(param_00) {
 	param_00.max_soul_health = 4;
 	param_00.section_complete_notify = "SECTION_COMPLETE_NOTIFY";
 	param_00.weak_spot_model = "zmb_superslasher_weak_spot";
@@ -186,9 +175,7 @@ setupfighttunedata(param_00)
 	param_00.entangler_track_time = 0.5;
 }
 
-//Function Number: 4
-setupfightweighttunedata(param_00)
-{
+setupfightweighttunedata(param_00) {
 	param_00.move_base_weight = 3;
 	param_00.move_stage_multiplier = -0.15;
 	param_00.idle_base_weight = 1;
@@ -210,9 +197,7 @@ setupfightweighttunedata(param_00)
 	param_00.special_stage_multiplier = 0.1;
 }
 
-//Function Number: 5
-setupspecialwavetunedata(param_00)
-{
+setupspecialwavetunedata(param_00) {
 	param_00.base_spawn_interval = 2;
 	param_00.spawn_interval_decay = 0.9;
 	param_00.specialwavesdata = [];
@@ -230,9 +215,7 @@ setupspecialwavetunedata(param_00)
 	param_00.specialwavesdata["SPECIAL_4"] = ["alien_rhino","alien_rhino"];
 }
 
-//Function Number: 6
-setupfrenziedtunedata(param_00)
-{
+setupfrenziedtunedata(param_00) {
 	param_00.frenzied_health = 250000;
 	param_00.last_stand_health = 20000;
 	param_00.frenzied_damage_cap = 1500;

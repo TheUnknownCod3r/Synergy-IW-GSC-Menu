@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\anim\hummer_turret\common.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 37
- * Decompile Time: 1428 ms
- * Timestamp: 10\26\2023 11:59:14 PM
-*******************************************************************/
+/*********************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\anim\hummer_turret\common.gsc
+*********************************************************/
 
-//Function Number: 1
-func_91E0(param_00,param_01)
-{
+func_91E0(param_00,param_01) {
 	self endon("killanimscript");
 	scripts\anim\utility::func_9832(param_01);
 	self.var_BFDC = 1;
@@ -19,16 +13,14 @@ func_91E0(param_00,param_01)
 	self.var_1491.var_10930 = param_01;
 	self.var_1491.usingworldspacehitmarkers = param_00;
 	self.ignoreme = 1;
-	if(isdefined(self.var_B79F))
-	{
+	if(isdefined(self.var_B79F)) {
 		self.ignoreme = self.var_B79F;
 	}
 
 	self.var_9DA6 = 0;
 	self _meth_8355(self.primaryturretanim);
 	self _meth_82AB(self.primaryturretanim,1,0.2,1);
-	if(isdefined(self.var_394))
-	{
+	if(isdefined(self.var_394)) {
 		scripts\anim\shared::placeweaponon(self.var_394,"none");
 	}
 
@@ -50,43 +42,34 @@ func_91E0(param_00,param_01)
 	param_00.var_5855 = 0;
 	thread func_6D6A(param_00);
 	wait(0.05);
-	if(isalive(self))
-	{
+	if(isalive(self)) {
 		thread func_8716(param_00);
 	}
 }
 
-//Function Number: 2
-func_8713()
-{
+func_8713() {
 	self.allowpain = 0;
 	scripts\sp\_utility::setflashbangimmunity(1);
 	self.var_C384 = self.health;
 	self.health = 200;
 }
 
-//Function Number: 3
-func_8714()
-{
+func_8714() {
 	self.allowpain = 1;
 	scripts\sp\_utility::setflashbangimmunity(0);
 	self.health = self.var_C384;
 }
 
-//Function Number: 4
-func_8903(param_00,param_01)
-{
+func_8903(param_00,param_01) {
 	param_00 endon("death");
 	param_01 endon("death");
 	param_00 endon("dismount");
 	param_00 endon("jumping_out");
-	for(;;)
-	{
+	for(;;) {
 		var_02 = "flashbang";
 		var_03 = param_00 scripts\common\utility::waittill_any_return("damage",var_02);
 		var_04 = scripts\common\utility::random(param_00.var_12A7F);
-		if(var_03 == var_02)
-		{
+		if(var_03 == var_02) {
 			var_04 = param_00.var_12A66;
 			param_00 scripts\anim\face::saygenericdialogue("flashbang");
 		}
@@ -96,17 +79,13 @@ func_8903(param_00,param_01)
 	}
 }
 
-//Function Number: 5
-func_12A27()
-{
+func_12A27() {
 	func_129BD();
 	self waittill("pain_done");
 	func_129BC();
 }
 
-//Function Number: 6
-func_8902(param_00,param_01)
-{
+func_8902(param_00,param_01) {
 	param_00 endon("dismount");
 	param_01 endon("turret_cleanup");
 	param_00.var_4E2A = param_00.var_12A5E;
@@ -115,12 +94,9 @@ func_8902(param_00,param_01)
 	level thread func_129D2(param_00,param_01);
 }
 
-//Function Number: 7
-func_129D3()
-{
+func_129D3() {
 	var_00 = self.var_E500.mgturret[0];
-	if(isalive(self))
-	{
+	if(isalive(self)) {
 		self.var_BFDC = undefined;
 		self.var_C05C = undefined;
 		self.ignoreme = 0;
@@ -134,8 +110,7 @@ func_129D3()
 		self.var_C584 = undefined;
 		self._meth_8020 = undefined;
 		self _meth_83AF();
-		if(isdefined(self.var_394))
-		{
+		if(isdefined(self.var_394)) {
 			scripts\anim\shared::placeweaponon(self.var_394,"right");
 		}
 	}
@@ -143,11 +118,8 @@ func_129D3()
 	level thread func_129D2(self,var_00);
 }
 
-//Function Number: 8
-func_129D2(param_00,param_01)
-{
-	if(!isdefined(param_01))
-	{
+func_129D2(param_00,param_01) {
+	if(!isdefined(param_01)) {
 		return;
 	}
 
@@ -156,8 +128,7 @@ func_129D2(param_00,param_01)
 	param_01 give_player_session_tokens("manual");
 	param_01 cleartargetentity();
 	param_01 setdefaultdroppitch(param_01.var_4FEA);
-	if(isdefined(param_00))
-	{
+	if(isdefined(param_00)) {
 		param_00 aiclearanim(param_00.var_17E6,0);
 		param_00 aiclearanim(param_00.var_17E0,0);
 		param_00 aiclearanim(param_00.var_12A93,0);
@@ -169,15 +140,12 @@ func_129D2(param_00,param_01)
 	param_01.var_12A94 = "free";
 	param_01.var_1A56 = undefined;
 	param_01.var_6D96 = undefined;
-	if(isdefined(param_01.var_10953))
-	{
-		level [[ param_01.var_10953 ]](param_00,param_01);
+	if(isdefined(param_01.var_10953)) {
+		level [[param_01.var_10953]](param_00,param_01);
 	}
 }
 
-//Function Number: 9
-func_12A45(param_00)
-{
+func_12A45(param_00) {
 	self endon("turret_cleanup");
 	self endon("death");
 	param_00 endon("death");
@@ -185,18 +153,15 @@ func_12A45(param_00)
 	var_01 = "tag_aim";
 	var_02 = self gettagangles(var_01);
 	func_12A4C("none");
-	for(;;)
-	{
+	for(;;) {
 		var_03 = self gettagangles(var_01);
 		var_04 = anglestoright(var_02);
 		var_05 = anglestoforward(var_03);
 		var_06 = vectordot(var_04,var_05);
-		if(var_06 == 0)
-		{
+		if(var_06 == 0) {
 			func_12A4C("none");
 		}
-		else if(var_06 > 0)
-		{
+		else if(var_06 > 0) {
 			func_12A4C("right");
 		}
 		else
@@ -209,53 +174,40 @@ func_12A45(param_00)
 	}
 }
 
-//Function Number: 10
-func_12A4C(param_00)
-{
-	if(!isdefined(self.var_E729) || self.var_E729 != param_00)
-	{
+func_12A4C(param_00) {
+	if(!isdefined(self.var_E729) || self.var_E729 != param_00) {
 		self.var_E729 = param_00;
 	}
 }
 
-//Function Number: 11
-func_8716(param_00)
-{
+func_8716(param_00) {
 	self endon("death");
 	param_00 endon("death");
 	self endon("dismount");
 	param_00 endon("turret_cleanup");
 	var_01 = 0.3;
 	var_02 = 0.3;
-	for(;;)
-	{
+	for(;;) {
 		param_00 waittill("new_fireTarget");
 		wait(0.05);
-		if(!isdefined(param_00.var_6D87) || self.var_9DA6)
-		{
+		if(!isdefined(param_00.var_6D87) || self.var_9DA6) {
 			continue;
 		}
 
 		var_03 = undefined;
-		if(!param_00 func_129BF(param_00.var_6D87,param_00.var_4292))
-		{
-			if(param_00.var_E729 == "right")
-			{
+		if(!param_00 func_129BF(param_00.var_6D87,param_00.var_4292)) {
+			if(param_00.var_E729 == "right") {
 				var_03 = self.var_17E5;
 			}
-			else if(param_00.var_E729 == "left")
-			{
+			else if(param_00.var_E729 == "left") {
 				var_03 = self.var_17E4;
 			}
 
-			if(isdefined(var_03))
-			{
+			if(isdefined(var_03)) {
 				self _meth_82AC(self.var_17E0,1,var_01,1);
 				self _meth_82A9(var_03,1,0,1);
-				while(isdefined(param_00.var_6D87) && !param_00 func_129BF(param_00.var_6D87,param_00.var_4292))
-				{
-					if(self.var_9DA6)
-					{
+				while(isdefined(param_00.var_6D87) && !param_00 func_129BF(param_00.var_6D87,param_00.var_4292)) {
+					if(self.var_9DA6) {
 						break;
 					}
 
@@ -268,23 +220,17 @@ func_8716(param_00)
 	}
 }
 
-//Function Number: 12
-func_13218(param_00,param_01,param_02,param_03)
-{
+func_13218(param_00,param_01,param_02,param_03) {
 	param_00.var_1307E[self.var_1321D] = 0;
 	scripts\sp\_vehicle_aianim::func_872E();
 	func_873F(param_00,param_01,param_02,param_03);
 }
 
-//Function Number: 13
-func_8741(param_00,param_01,param_02,param_03)
-{
+func_8741(param_00,param_01,param_02,param_03) {
 	func_873F(param_00,param_01,param_02,param_03);
 }
 
-//Function Number: 14
-func_873F(param_00,param_01,param_02,param_03)
-{
+func_873F(param_00,param_01,param_02,param_03) {
 	self endon("death");
 	param_02 endon("death");
 	self givescorefortrophyblocks();
@@ -292,8 +238,7 @@ func_873F(param_00,param_01,param_02,param_03)
 	self.var_5BD6 = undefined;
 	self.var_BFDC = 1;
 	param_03 = %humvee_passenger_2_turret;
-	if(!isdefined(param_03))
-	{
+	if(!isdefined(param_03)) {
 		param_03 = self.var_C938;
 	}
 
@@ -309,11 +254,8 @@ func_873F(param_00,param_01,param_02,param_03)
 	self _meth_83D7(param_02);
 }
 
-//Function Number: 15
-func_129C2(param_00)
-{
-	if(isdefined(self.var_92F3))
-	{
+func_129C2(param_00) {
+	if(isdefined(self.var_92F3)) {
 		self aiclearanim(self.var_92F3,0);
 		self.var_92F3 = undefined;
 	}
@@ -323,49 +265,39 @@ func_129C2(param_00)
 	self aiclearanim(param_00,0);
 }
 
-//Function Number: 16
-func_129C3(param_00)
-{
+func_129C3(param_00) {
 	self _meth_82AB(param_00,1,0,0);
 	self.var_92F3 = param_00;
 }
 
-//Function Number: 17
-func_6D6A(param_00)
-{
+func_6D6A(param_00) {
 	self endon("death");
 	param_00 endon("death");
 	self endon("dismount");
 	param_00 endon("kill_fireController");
 	param_00 thread func_12A3C(self);
 	wait(0.05);
-	self thread [[ param_00.var_6D65 ]](param_00);
+	self thread [[param_00.var_6D65]](param_00);
 	var_01 = undefined;
-	for(;;)
-	{
+	for(;;) {
 		var_01 = param_00.var_6D87;
-		while(param_00 func_114FA(var_01))
-		{
-			if(param_00 func_129BF(var_01,param_00.var_4292))
-			{
+		while(param_00 func_114FA(var_01)) {
+			if(param_00 func_129BF(var_01,param_00.var_4292)) {
 				break;
 			}
 
 			wait(0.05);
 		}
 
-		if(param_00 func_114FA(var_01) && !self.precacheleaderboards)
-		{
+		if(param_00 func_114FA(var_01) && !self.precacheleaderboards) {
 			param_00.var_5855 = 1;
 		}
 
-		while(param_00 func_114FA(var_01) && !self.precacheleaderboards && !self.var_9DA6)
-		{
+		while(param_00 func_114FA(var_01) && !self.precacheleaderboards && !self.var_9DA6) {
 			wait(0.05);
 		}
 
-		if(param_00.var_5855 || self.precacheleaderboards)
-		{
+		if(param_00.var_5855 || self.precacheleaderboards) {
 			param_00.var_5855 = 0;
 		}
 
@@ -373,35 +305,27 @@ func_6D6A(param_00)
 	}
 }
 
-//Function Number: 18
-func_114FA(param_00)
-{
-	if(isdefined(self.var_596A))
-	{
+func_114FA(param_00) {
+	if(isdefined(self.var_596A)) {
 		return 0;
 	}
 
-	if(!isdefined(self.var_6D87))
-	{
+	if(!isdefined(self.var_6D87)) {
 		return 0;
 	}
 
-	if(!func_12A3D(param_00))
-	{
+	if(!func_12A3D(param_00)) {
 		return 0;
 	}
 
-	if(param_00 != self.var_6D87)
-	{
+	if(param_00 != self.var_6D87) {
 		return 0;
 	}
 
 	return 1;
 }
 
-//Function Number: 19
-func_12A3C(param_00)
-{
+func_12A3C(param_00) {
 	param_00 endon("death");
 	self endon("death");
 	param_00 endon("dismount");
@@ -409,27 +333,21 @@ func_12A3C(param_00)
 	self.var_6D87 = undefined;
 	var_01 = undefined;
 	var_02 = undefined;
-	for(;;)
-	{
+	for(;;) {
 		var_01 = self getturrettarget(0);
 		var_03 = 0;
-		if(func_12A3D(var_01) || !isdefined(var_01))
-		{
-			if(!isdefined(var_01) && isdefined(var_02))
-			{
+		if(func_12A3D(var_01) || !isdefined(var_01)) {
+			if(!isdefined(var_01) && isdefined(var_02)) {
 				var_03 = 1;
 			}
-			else if(isdefined(var_01) && !isdefined(var_02))
-			{
+			else if(isdefined(var_01) && !isdefined(var_02)) {
 				var_03 = 1;
 			}
-			else if(isdefined(var_01) && var_01 != var_02)
-			{
+			else if(isdefined(var_01) && var_01 != var_02) {
 				var_03 = 1;
 			}
 
-			if(var_03)
-			{
+			if(var_03) {
 				self.var_6D87 = var_01;
 				var_02 = var_01;
 				self notify("new_fireTarget");
@@ -440,39 +358,30 @@ func_12A3C(param_00)
 	}
 }
 
-//Function Number: 20
-func_12A3D(param_00)
-{
-	if(!isdefined(param_00))
-	{
+func_12A3D(param_00) {
+	if(!isdefined(param_00)) {
 		return 0;
 	}
 
-	if(isdefined(param_00.ignoreme) && param_00.ignoreme)
-	{
+	if(isdefined(param_00.ignoreme) && param_00.ignoreme) {
 		return 0;
 	}
 
-	if(issubstr(param_00.opcode::OP_GetByte,"actor") && !isalive(param_00))
-	{
+	if(issubstr(param_00.opcode::OP_GetByte,"actor") && !isalive(param_00)) {
 		return 0;
 	}
 
 	return 1;
 }
 
-//Function Number: 21
-func_F479(param_00,param_01,param_02,param_03)
-{
+func_F479(param_00,param_01,param_02,param_03) {
 	self endon("turret_cleanup");
 	var_04 = self getspawnpoint_safeguard();
-	if(var_04 != "manual")
-	{
+	if(var_04 != "manual") {
 		self give_player_session_tokens("manual");
 	}
 
-	if(!isdefined(param_01) && !isdefined(param_02))
-	{
+	if(!isdefined(param_01) && !isdefined(param_02)) {
 		param_01 = 1.5;
 		param_02 = 3;
 	}
@@ -480,12 +389,10 @@ func_F479(param_00,param_01,param_02,param_03)
 	func_4C35();
 	self settargetentity(param_00);
 	self waittill("turret_on_target");
-	if(isdefined(param_03))
-	{
+	if(isdefined(param_03)) {
 		self waittill(param_03);
 	}
-	else if(isdefined(param_02))
-	{
+	else if(isdefined(param_02)) {
 		wait(randomfloatrange(param_01,param_02));
 	}
 	else
@@ -495,15 +402,12 @@ func_F479(param_00,param_01,param_02,param_03)
 
 	func_4C35();
 	self cleartargetentity(param_00);
-	if(isdefined(var_04))
-	{
+	if(isdefined(var_04)) {
 		self give_player_session_tokens(var_04);
 	}
 }
 
-//Function Number: 22
-func_5AAA(param_00)
-{
+func_5AAA(param_00) {
 	self notify("doshoot_starting");
 	self _meth_82AC(self.var_17E6,1,0.1);
 	self _meth_82A9(self.var_17E2,1,0.1);
@@ -511,33 +415,26 @@ func_5AAA(param_00)
 	param_00 thread func_6CE6(self);
 }
 
-//Function Number: 23
-func_6CE6(param_00)
-{
+func_6CE6(param_00) {
 	param_00 endon("death");
 	self endon("death");
 	param_00 endon("dismount");
 	self endon("kill_fireController");
 	self endon("stopfiring");
 	self endon("custom_anim");
-	for(;;)
-	{
+	for(;;) {
 		self shootturret();
 		wait(self.var_6D6F);
 	}
 }
 
-//Function Number: 24
-func_57DB(param_00)
-{
+func_57DB(param_00) {
 	param_00.var_12A94 = "aim";
 	param_00 notify("stopfiring");
 	thread func_57DC(param_00);
 }
 
-//Function Number: 25
-func_57DC(param_00)
-{
+func_57DC(param_00) {
 	self notify("doaim_idle_think");
 	self endon("doaim_idle_think");
 	self endon("custom_anim");
@@ -546,16 +443,13 @@ func_57DC(param_00)
 	param_00 endon("death");
 	var_01 = param_00.var_C841;
 	var_02 = -1;
-	for(;;)
-	{
-		if(var_01 vehicle_getspeed() < 1 && var_02)
-		{
+	for(;;) {
+		if(var_01 vehicle_getspeed() < 1 && var_02) {
 			self _meth_82AC(self.var_17E6,1,0.1);
 			self _meth_82A9(self.var_17E3,1,0.1);
 			var_02 = 0;
 		}
-		else if(var_01 vehicle_getspeed() >= 1 && !var_02)
-		{
+		else if(var_01 vehicle_getspeed() >= 1 && !var_02) {
 			self _meth_82AC(self.var_17E6,1,0.1);
 			self _meth_82A9(self.var_17E1,1,0.1);
 			var_02 = 1;
@@ -565,9 +459,7 @@ func_57DC(param_00)
 	}
 }
 
-//Function Number: 26
-func_129F7(param_00,param_01,param_02)
-{
+func_129F7(param_00,param_01,param_02) {
 	self endon("death");
 	param_00 endon("death");
 	self endon("dismount");
@@ -576,18 +468,14 @@ func_129F7(param_00,param_01,param_02)
 	func_4C35();
 	var_04 = param_00 func_DF51();
 	func_57FB(param_00,var_03,param_02);
-	if(var_04)
-	{
+	if(var_04) {
 		param_00 func_DF52();
 	}
 }
 
-//Function Number: 27
-func_DF51()
-{
+func_DF51() {
 	var_00 = 0;
-	if(!isdefined(self.var_560F) || !self.var_560F)
-	{
+	if(!isdefined(self.var_560F) || !self.var_560F) {
 		var_00 = 1;
 		self.var_560F = 1;
 	}
@@ -595,17 +483,12 @@ func_DF51()
 	return var_00;
 }
 
-//Function Number: 28
-func_DF52()
-{
+func_DF52() {
 	self.var_560F = 0;
 }
 
-//Function Number: 29
-func_5A65(param_00)
-{
-	if(isdefined(param_00.var_560F))
-	{
+func_5A65(param_00) {
+	if(isdefined(param_00.var_560F)) {
 		return;
 	}
 
@@ -613,42 +496,35 @@ func_5A65(param_00)
 	param_00 endon("death");
 	self endon("dismount");
 	self endon("jumping_out");
-	if(level.var_3D4B)
-	{
+	if(level.var_3D4B) {
 		thread scripts\sp\_utility::func_4C39("inform_reloading");
 	}
 
 	func_57FB(param_00,self.var_12A81,1);
 }
 
-//Function Number: 30
-func_57FB(param_00,param_01,param_02)
-{
+func_57FB(param_00,param_01,param_02) {
 	self notify("do_custom_anim");
 	self endon("do_custom_anim");
 	self.var_9DA6 = 1;
 	self.var_4C7D = param_01;
 	param_00.var_12A94 = "customanim";
 	param_00 turretfiredisable();
-	if(param_00 _meth_810A() > 0)
-	{
+	if(param_00 _meth_810A() > 0) {
 		param_00 _meth_83A2();
 	}
 
 	param_00 notify("kill_fireController");
 	self notify("custom_anim");
-	if(isdefined(param_02) && param_02)
-	{
+	if(isdefined(param_02) && param_02) {
 		param_00 func_129BD();
 	}
 
 	self _meth_82AA(self.var_12A93,1,0.2);
 	self _meth_82E7("special_anim",param_01,1,0,1);
-	for(;;)
-	{
+	for(;;) {
 		self waittill("special_anim",var_03);
-		if(var_03 == "end")
-		{
+		if(var_03 == "end") {
 			break;
 		}
 	}
@@ -656,8 +532,7 @@ func_57FB(param_00,param_01,param_02)
 	self aiclearanim(self.var_12A93,0.2);
 	self _meth_82AC(self.primaryturretanim,1);
 	self _meth_82AC(self.var_17E6,1);
-	if(isdefined(param_02) && param_02)
-	{
+	if(isdefined(param_02) && param_02) {
 		param_00 func_129BC();
 	}
 
@@ -667,31 +542,23 @@ func_57FB(param_00,param_01,param_02)
 	thread func_6D6A(param_00);
 }
 
-//Function Number: 31
-func_4C35()
-{
+func_4C35() {
 	self endon("death");
-	if(!isdefined(self.var_9DA6))
-	{
+	if(!isdefined(self.var_9DA6)) {
 		return;
 	}
 
-	while(self.var_9DA6)
-	{
+	while(self.var_9DA6) {
 		wait(0.05);
 	}
 }
 
-//Function Number: 32
-func_129BD(param_00)
-{
-	if(self getspawnpoint_safeguard() == "sentry")
-	{
+func_129BD(param_00) {
+	if(self getspawnpoint_safeguard() == "sentry") {
 		return;
 	}
 
-	if(!isdefined(param_00))
-	{
+	if(!isdefined(param_00)) {
 		var_01 = self gettagangles("tag_flash");
 		param_00 = (0,var_01[1],var_01[2]);
 	}
@@ -709,54 +576,41 @@ func_129BD(param_00)
 	self waittill("turret_on_target");
 }
 
-//Function Number: 33
-func_129BC()
-{
+func_129BC() {
 	self cleartargetentity();
-	if(isdefined(self.var_116D2))
-	{
+	if(isdefined(self.var_116D2)) {
 		self.var_116D2 unlink();
 		self.var_116D2 delete();
 	}
 
-	if(isdefined(self.var_C3F8))
-	{
+	if(isdefined(self.var_C3F8)) {
 		self give_player_session_tokens(self.var_C3F8);
 		self.var_C3F8 = undefined;
 	}
 }
 
-//Function Number: 34
-func_129BF(param_00,param_01)
-{
+func_129BF(param_00,param_01) {
 	var_02 = func_129F3(param_00);
-	if(var_02 <= param_01)
-	{
+	if(var_02 <= param_01) {
 		return 1;
 	}
 
 	return 0;
 }
 
-//Function Number: 35
-func_129F3(param_00)
-{
+func_129F3(param_00) {
 	var_01 = vectortoyaw(param_00.origin - self.origin);
 	var_02 = self gettagangles("tag_flash")[1];
 	var_03 = scripts\common\utility::absangleclamp180(var_02 - var_01);
 	return var_03;
 }
 
-//Function Number: 36
-func_AB8C(param_00)
-{
+func_AB8C(param_00) {
 	var_01 = scripts\sp\_utility::func_48AA(::func_2B6E,20,0);
 	var_01.time = param_00;
 }
 
-//Function Number: 37
-func_2B6E(param_00,param_01,param_02)
-{
+func_2B6E(param_00,param_01,param_02) {
 	var_03 = param_01 * 1 - param_00 + param_02 * param_00;
 	self setdefaultdroppitch(var_03);
 }

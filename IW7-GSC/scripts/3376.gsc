@@ -1,30 +1,21 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: 3376.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 7
- * Decompile Time: 9 ms
- * Timestamp: 10/27/2023 12:26:48 AM
-*******************************************************************/
+/****************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\3376.gsc
+****************************/
 
-//Function Number: 1
-init_blackhole_trap()
-{
+init_blackhole_trap() {
 	level.blackholetrapuses = 0;
 	var_00 = undefined;
 	var_01 = undefined;
 	var_02 = undefined;
 	var_03 = scripts\engine\utility::getstructarray("blackhole_trap","script_noteworthy");
-	foreach(var_05 in var_03)
-	{
+	foreach(var_05 in var_03) {
 		var_05 thread func_2B36();
 		var_05.body = getent(var_05.target,"targetname");
 		var_06 = scripts\engine\utility::getstructarray(var_05.target,"targetname");
-		foreach(var_08 in var_06)
-		{
-			if(isdefined(var_08.fgetarg))
-			{
+		foreach(var_08 in var_06) {
+			if(isdefined(var_08.fgetarg)) {
 				var_05.var_2B32 = var_08;
 				continue;
 			}
@@ -36,18 +27,13 @@ init_blackhole_trap()
 	}
 }
 
-//Function Number: 2
-func_2B36()
-{
+func_2B36() {
 	var_00 = scripts\engine\utility::istrue(self.requires_power) && isdefined(self.power_area);
-	for(;;)
-	{
+	for(;;) {
 		var_01 = "power_on";
-		if(var_00)
-		{
+		if(var_00) {
 			var_01 = level scripts\engine\utility::waittill_any_return_no_endon_death_3("power_on",self.power_area + " power_on","power_off");
-			if(var_01 != "power_off")
-			{
+			if(var_01 != "power_off") {
 				self.powered_on = 1;
 				self.body setmodel("ride_zombies_chromosphere_on");
 				level thread scripts\cp\cp_vo::add_to_nag_vo("dj_traps_use_nag","zmb_dj_vo",60,15,2,1);
@@ -58,8 +44,7 @@ func_2B36()
 			}
 		}
 
-		if(!var_00)
-		{
+		if(!var_00) {
 			break;
 		}
 
@@ -67,9 +52,7 @@ func_2B36()
 	}
 }
 
-//Function Number: 3
-use_blackhole_trap(param_00,param_01)
-{
+use_blackhole_trap(param_00,param_01) {
 	playfx(level._effect["console_spark"],param_00.origin + (0,0,40));
 	level.blackholetrapuses++;
 	param_01 thread scripts\cp\cp_vo::try_to_play_vo("activate_trap_generic","zmb_comment_vo","low",10,0,1,0,40);
@@ -82,15 +65,13 @@ use_blackhole_trap(param_00,param_01)
 	earthquake(0.28,int(21),param_00.body.origin,500);
 	param_00 thread func_2B35(int(21),param_00.body.origin);
 	level thread func_2B34(var_02);
-	while(gettime() < var_02)
-	{
+	while(gettime() < var_02) {
 		wait(1);
 	}
 
 	param_00 notify("stop_dmg");
 	param_00.var_2B30.fx delete();
-	if(param_01 scripts\cp\utility::is_valid_player())
-	{
+	if(param_01 scripts\cp\utility::is_valid_player()) {
 		param_01.tickets_earned = param_00.trap_kills;
 		scripts\cp\zombies\arcade_game_utility::update_player_tickets_earned(param_01);
 	}
@@ -100,13 +81,10 @@ use_blackhole_trap(param_00,param_01)
 	scripts\cp\cp_interaction::interaction_cooldown(param_00,max(level.blackholetrapuses * 45,45));
 }
 
-//Function Number: 4
-func_2B34(param_00)
-{
+func_2B34(param_00) {
 	var_01 = getent("chromosphere_sign","targetname");
 	var_01 setscriptablepartstate("quake","on");
-	while(gettime() < param_00)
-	{
+	while(gettime() < param_00) {
 		var_01 setscriptablepartstate("rumble","rumble1");
 		wait(1);
 		var_01 setscriptablepartstate("rumble","rumble2");
@@ -117,9 +95,7 @@ func_2B34(param_00)
 	var_01 setscriptablepartstate("quake","off");
 }
 
-//Function Number: 5
-func_2B35(param_00,param_01)
-{
+func_2B35(param_00,param_01) {
 	playsoundatpos(param_01,"trap_blackhole_ride_start");
 	wait(2);
 	var_02 = scripts\engine\utility::play_loopsound_in_space("trap_blackhole_ride_loop",param_01);
@@ -142,19 +118,15 @@ func_2B35(param_00,param_01)
 	var_04 delete();
 }
 
-//Function Number: 6
-kill_zombies(param_00)
-{
+kill_zombies(param_00) {
 	self endon("stop_dmg");
 	wait(2);
 	self.var_2B30.fx = spawnfx(level._effect["blackhole_trap"],self.var_2B30.origin,anglestoforward(self.var_2B30.angles),anglestoup(self.var_2B30.angles));
 	wait(1);
 	triggerfx(self.var_2B30.fx);
-	for(;;)
-	{
+	for(;;) {
 		self.var_2B37 waittill("trigger",var_01);
-		if(!scripts\cp\utility::should_be_affected_by_trap(var_01) || isdefined(var_01.flung))
-		{
+		if(!scripts\cp\utility::should_be_affected_by_trap(var_01) || isdefined(var_01.flung)) {
 			continue;
 		}
 
@@ -164,23 +136,19 @@ kill_zombies(param_00)
 	}
 }
 
-//Function Number: 7
-suck_zombie(param_00,param_01)
-{
+suck_zombie(param_00,param_01) {
 	self endon("death");
 	var_02 = param_01.var_2B30;
 	var_03 = param_01.var_2B32;
 	self.scripted_mode = 1;
 	wait(randomfloatrange(0,1));
 	var_04 = 16384;
-	while(distancesquared(self.origin,var_03.origin) > var_04)
-	{
+	while(distancesquared(self.origin,var_03.origin) > var_04) {
 		self setvelocity(vectornormalize(var_03.origin - self.origin) * 150 + (0,0,30));
 		wait(0.05);
 	}
 
-	if(!isdefined(var_02.fx))
-	{
+	if(!isdefined(var_02.fx)) {
 		self.scripted_mode = 0;
 		self.flung = undefined;
 		return;
@@ -194,8 +162,7 @@ suck_zombie(param_00,param_01)
 	self linkto(self.anchor);
 	self.anchor rotateto((-90,0,0),0.2);
 	var_06 = 360;
-	if(randomint(100) > 50)
-	{
+	if(randomint(100) > 50) {
 		var_06 = -360;
 	}
 
@@ -207,15 +174,12 @@ suck_zombie(param_00,param_01)
 	self.anchor delete();
 	self.disable_armor = 1;
 	param_01.trap_kills = param_01.trap_kills + 2;
-	if(scripts\engine\utility::flag("mini_ufo_red_ready"))
-	{
+	if(scripts\engine\utility::flag("mini_ufo_red_ready")) {
 		level.var_1E90++;
 	}
 
-	if(isdefined(param_00))
-	{
-		if(!isdefined(param_00.trapkills["trap_gravitron"]))
-		{
+	if(isdefined(param_00)) {
+		if(!isdefined(param_00.trapkills["trap_gravitron"])) {
 			param_00.trapkills["trap_gravitron"] = 1;
 		}
 		else

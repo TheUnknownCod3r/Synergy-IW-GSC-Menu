@@ -1,37 +1,26 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: 2890.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 20
- * Decompile Time: 28 ms
- * Timestamp: 10/27/2023 12:24:41 AM
-*******************************************************************/
+/****************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\2890.gsc
+****************************/
 
-//Function Number: 1
-func_12867()
-{
+func_12867() {
 	level.player scripts\sp\_loadout_code::func_F6B5();
-	if(!isdefined(level.var_37E7))
-	{
+	if(!isdefined(level.var_37E7)) {
 		level.var_37E7 = "american";
 	}
 
-	if(!lib_0A2F::func_9CBB(level.template_script) && !lib_0A2F::is_jackal_arena_level(level.template_script))
-	{
+	if(!lib_0A2F::func_9CBB(level.template_script) && !lib_0A2F::is_jackal_arena_level(level.template_script)) {
 		func_F3BA(level.template_script);
-		if(!_meth_82FA())
-		{
+		if(!_meth_82FA()) {
 			var_00 = 0;
 			var_01 = lib_0A2F::func_7AF1();
-			if(level.template_script == "europa" || !scripts\engine\utility::array_contains(var_01,level.template_script))
-			{
+			if(level.template_script == "europa" || !scripts\engine\utility::array_contains(var_01,level.template_script)) {
 				var_00 = 1;
 			}
 
 			func_F56D(level.template_script,1,0,var_00);
-			if(!var_00)
-			{
+			if(!var_00) {
 				level.player _meth_84C7("selectedLoadout",0);
 				setleftarc();
 			}
@@ -41,11 +30,8 @@ func_12867()
 	scripts\sp\_loadout_code::func_AE27();
 }
 
-//Function Number: 2
-func_7AA7(param_00)
-{
-	switch(param_00)
-	{
+func_7AA7(param_00) {
+	switch(param_00) {
 		case "loadout3":
 		case "loadout2":
 		case "loadout1":
@@ -106,9 +92,7 @@ func_7AA7(param_00)
 	return "default";
 }
 
-//Function Number: 3
-func_F56D(param_00,param_01,param_02,param_03)
-{
+func_F56D(param_00,param_01,param_02,param_03) {
 	param_00 = func_7AA7(param_00);
 	var_04 = tablelookup("sp/recommended_loadouts.csv",0,param_00,1);
 	var_05 = tablelookup("sp/recommended_loadouts.csv",0,param_00,2);
@@ -117,8 +101,7 @@ func_F56D(param_00,param_01,param_02,param_03)
 	var_08 = tablelookup("sp/recommended_loadouts.csv",0,param_00,6);
 	var_09 = tablelookup("sp/recommended_loadouts.csv",0,param_00,7);
 	var_0A = tablelookup("sp/recommended_loadouts.csv",0,param_00,8);
-	if(scripts\sp\_utility::func_93A6() && !scripts/sp/specialist_MAYBE::func_2C91())
-	{
+	if(scripts\sp\_utility::func_93A6() && !scripts/sp/specialist_MAYBE::func_2C91()) {
 		var_06[1] = var_06[0];
 		var_07[1] = var_07[0];
 		var_06[0] = "helmet";
@@ -126,38 +109,32 @@ func_F56D(param_00,param_01,param_02,param_03)
 	}
 
 	fix_specialist_loadouts();
-	if(isdefined(param_03) && param_03)
-	{
+	if(isdefined(param_03) && param_03) {
 		setlookatent(var_04,var_05,var_06[0],var_07[0],var_06[1],var_07[1]);
 		return;
 	}
 
-	if(param_00 == "default")
-	{
+	if(param_00 == "default") {
 		setlookatent(var_04);
 		return;
 	}
 
-	if(!isdefined(param_02))
-	{
+	if(!isdefined(param_02)) {
 		param_02 = 0;
 	}
 
-	if(!isdefined(param_01))
-	{
+	if(!isdefined(param_01)) {
 		param_01 = 1;
 	}
 
-	if(param_01)
-	{
+	if(param_01) {
 		var_04 = func_79B0(var_04);
 		var_05 = func_79B0(var_05);
 	}
 
 	func_F467(param_02,var_04,var_05,var_07[0],var_06[0],var_07[1],var_06[1],var_08,var_09,var_0A);
 	var_0B = int(tablelookup("sp/recommended_loadouts.csv",0,param_00,9));
-	if(var_0B == 1)
-	{
+	if(var_0B == 1) {
 		setomnvar("ui_loadouts_disabled",1);
 		return;
 	}
@@ -165,23 +142,17 @@ func_F56D(param_00,param_01,param_02,param_03)
 	setomnvar("ui_loadouts_disabled",0);
 }
 
-//Function Number: 4
-func_F3BA(param_00)
-{
+func_F3BA(param_00) {
 	param_00 = func_7AA7(param_00);
 	var_01 = tablelookup("sp/recommended_loadouts.csv",0,param_00,3);
-	if(var_01 != "")
-	{
+	if(var_01 != "") {
 		level.var_72A6 = var_01;
 	}
 }
 
-//Function Number: 5
-func_31CE(param_00,param_01)
-{
+func_31CE(param_00,param_01) {
 	var_02 = level.player _meth_84C6("loadouts",param_01,"weaponSetups",param_00,"weapon");
-	if(!isdefined(var_02) || var_02 == "none" || var_02 == "")
-	{
+	if(!isdefined(var_02) || var_02 == "none" || var_02 == "") {
 		return undefined;
 	}
 
@@ -191,50 +162,39 @@ func_31CE(param_00,param_01)
 	return func_31CD(var_02,var_03);
 }
 
-//Function Number: 6
-func_31CD(param_00,param_01,param_02)
-{
-	if(!isdefined(param_00) || param_00 == "none" || param_00 == "")
-	{
+func_31CD(param_00,param_01,param_02) {
+	if(!isdefined(param_00) || param_00 == "none" || param_00 == "") {
 		return "none";
 	}
 
-	if(isdefined(level.var_72A6))
-	{
-		if(!scripts\engine\utility::array_contains(param_01,level.var_72A6))
-		{
+	if(isdefined(level.var_72A6)) {
+		if(!scripts\engine\utility::array_contains(param_01,level.var_72A6)) {
 			param_01 = scripts\engine\utility::array_add(param_01,level.var_72A6);
 		}
 	}
 
 	var_03 = func_7874(param_00,param_01);
-	if(isdefined(var_03))
-	{
+	if(isdefined(var_03)) {
 		param_01 = scripts\engine\utility::array_add(param_01,level.var_2C81);
 		level.var_7655 = param_01;
 	}
 
 	var_04 = lib_0A2F::build_attach_models(param_00,"array",undefined,0,0,3,0,param_01);
-	if(isdefined(var_04))
-	{
+	if(isdefined(var_04)) {
 		param_00 = param_00 + "+" + var_04;
 	}
 
 	return param_00;
 }
 
-//Function Number: 7
-func_AE39()
-{
+func_AE39() {
 	scripts\engine\utility::waitframe();
 	setomnvar("ui_open_loadout_menu",1);
 	function_01C5("selectingLoadout","1");
 	level.player _meth_84C7("selectedLoadout",0);
-	for(;;)
-	{
+	for(;;) {
 		level.player waittill("luinotifyserver",var_00,var_01);
-		if(var_00 == "give_player_loadout" || issubstr(var_00,"give_player_loadout_vr_"))
-		{
+		if(var_00 == "give_player_loadout" || issubstr(var_00,"give_player_loadout_vr_")) {
 			break;
 		}
 	}
@@ -249,11 +209,8 @@ func_AE39()
 	wait(3);
 }
 
-//Function Number: 8
-func_7874(param_00,param_01)
-{
-	if(param_00 != "iw7_gambit")
-	{
+func_7874(param_00,param_01) {
+	if(param_00 != "iw7_gambit") {
 		return undefined;
 	}
 
@@ -264,32 +221,26 @@ func_7874(param_00,param_01)
 	var_02 = scripts\engine\utility::array_remove(var_02,"nodualfov");
 	var_02 = scripts\engine\utility::array_remove(var_02,"snproverlay");
 	var_02 = scripts\engine\utility::array_remove(var_02,"cpu");
-	if(isdefined(param_01[0]) && param_01[0] != "none")
-	{
+	if(isdefined(param_01[0]) && param_01[0] != "none") {
 		var_03 = lib_0A2F::func_DA0F();
 		var_02 = scripts\engine\utility::array_remove_array(var_02,var_03);
 	}
 
 	var_02 = scripts\engine\utility::array_remove_array(var_02,param_01);
-	if(var_02.size == 0)
-	{
+	if(var_02.size == 0) {
 		return undefined;
 	}
 
 	return var_02[randomint(var_02.size)];
 }
 
-//Function Number: 9
-_meth_82FA()
-{
+_meth_82FA() {
 	var_00 = level.player _meth_84C6("currentLoadout","levelCreated");
-	if(!isdefined(var_00))
-	{
+	if(!isdefined(var_00)) {
 		return 0;
 	}
 
-	if(isdefined(level.script))
-	{
+	if(isdefined(level.script)) {
 		var_01 = scripts\sp\_endmission::func_7F6B(level.script);
 	}
 	else
@@ -297,14 +248,12 @@ _meth_82FA()
 		var_01 = undefined;
 	}
 
-	if(!isdefined(var_01) || var_01 != var_00)
-	{
+	if(!isdefined(var_01) || var_01 != var_00) {
 		return 0;
 	}
 
 	var_02 = level.player _meth_84C6("currentLoadout","weaponSetups",0,"weapon");
-	if(getdvarint("skip_loadout") > 0 || !isdefined(var_02) || var_02 == "none")
-	{
+	if(getdvarint("skip_loadout") > 0 || !isdefined(var_02) || var_02 == "none") {
 		return 0;
 	}
 
@@ -341,24 +290,18 @@ _meth_82FA()
 	return 1;
 }
 
-//Function Number: 10
-func_7C27(param_00,param_01)
-{
-	if(!isdefined(param_00))
-	{
+func_7C27(param_00,param_01) {
+	if(!isdefined(param_00)) {
 		return undefined;
 	}
 
-	if(!isdefined(param_01))
-	{
+	if(!isdefined(param_01)) {
 		param_01 = 0;
 	}
 
-	switch(param_00)
-	{
+	switch(param_00) {
 		case "grapplingdevice":
-			if(param_01)
-			{
+			if(param_01) {
 				return "grapplingdevice";
 			}
 			else
@@ -369,8 +312,7 @@ func_7C27(param_00,param_01)
 			break;
 
 		case "trackingfragzerog":
-			if(param_01)
-			{
+			if(param_01) {
 				return "trackingfragzerog";
 			}
 			else
@@ -397,17 +339,13 @@ func_7C27(param_00,param_01)
 	}
 }
 
-//Function Number: 11
-func_EB5B()
-{
+func_EB5B() {
 	var_00 = scripts\sp\_endmission::func_7F6B(level.script);
-	if(!isdefined(var_00))
-	{
+	if(!isdefined(var_00)) {
 		return;
 	}
 
-	if(level.script == "europa" || level.script == "marscrash" || level.script == "shipcrib_epilogue")
-	{
+	if(level.script == "europa" || level.script == "marscrash" || level.script == "shipcrib_epilogue") {
 		level.player _meth_84C7("currentLoadout","weaponSetups",0,"weapon","none");
 		level.player _meth_84C7("currentLoadout","weaponSetups",1,"weapon","none");
 		return;
@@ -415,16 +353,13 @@ func_EB5B()
 
 	var_01 = level.player getweaponslistall();
 	var_02 = getweaponbasename(level.player getcurrentprimaryweapon());
-	if(!isdefined(var_02) || !scripts\engine\utility::array_contains(lib_0A2F::func_DA17(),var_02))
-	{
+	if(!isdefined(var_02) || !scripts\engine\utility::array_contains(lib_0A2F::func_DA17(),var_02)) {
 		var_02 = "none";
 	}
 
-	foreach(var_04 in var_01)
-	{
+	foreach(var_04 in var_01) {
 		var_05 = function_0244(var_04);
-		if(var_05 != "primary")
-		{
+		if(var_05 != "primary") {
 			continue;
 		}
 
@@ -435,13 +370,11 @@ func_EB5B()
 		var_0A[0] = var_08[1];
 		var_0A[1] = var_08[2];
 		var_0A[2] = var_08[3];
-		if(!scripts\engine\utility::array_contains(lib_0A2F::func_DA17(),var_09))
-		{
+		if(!scripts\engine\utility::array_contains(lib_0A2F::func_DA17(),var_09)) {
 			continue;
 		}
 
-		if(var_02 == var_09 || var_02 == "none")
-		{
+		if(var_02 == var_09 || var_02 == "none") {
 			var_0B = 0;
 			var_02 = var_09;
 			level.player _meth_84C7("currentLoadout","heldWeapon",var_02);
@@ -454,16 +387,14 @@ func_EB5B()
 		level.player _meth_84C7("currentLoadout","weaponSetups",var_0B,"weapon",var_09);
 		level.player _meth_84C7("currentLoadout","weaponClipAmmo",var_0B,var_07);
 		level.player _meth_84C7("currentLoadout","weaponStockAmmo",var_0B,var_06);
-		foreach(var_0E, var_0D in var_0A)
-		{
+		foreach(var_0E, var_0D in var_0A) {
 			level.player _meth_84C7("currentLoadout","weaponSetups",var_0B,"attachment",var_0E,var_0A[var_0E]);
 		}
 	}
 
 	var_10 = scripts\sp\_utility::func_7BD6();
 	var_10 = func_7C27(var_10);
-	if(isdefined(var_10))
-	{
+	if(isdefined(var_10)) {
 		level.player _meth_84C7("currentLoadout","offhandEquipment",0,var_10);
 		level.player _meth_84C7("currentLoadout","offhandEquipmentAmmo",0,scripts\sp\_utility::func_7BD7());
 	}
@@ -475,8 +406,7 @@ func_EB5B()
 
 	var_10 = scripts\sp\_utility::func_7CAF();
 	var_10 = func_7C27(var_10);
-	if(isdefined(var_10))
-	{
+	if(isdefined(var_10)) {
 		level.player _meth_84C7("currentLoadout","offhandEquipment",1,var_10);
 		level.player _meth_84C7("currentLoadout","offhandEquipmentAmmo",1,scripts\sp\_utility::func_7CB0());
 	}
@@ -488,8 +418,7 @@ func_EB5B()
 
 	var_10 = scripts\sp\_utility::func_7C3D();
 	var_10 = func_7C27(var_10);
-	if(isdefined(var_10))
-	{
+	if(isdefined(var_10)) {
 		level.player _meth_84C7("currentLoadout","equipment",0,var_10);
 		level.player _meth_84C7("currentLoadout","equipmentAmmo",0,scripts\sp\_utility::func_7C3E());
 	}
@@ -501,8 +430,7 @@ func_EB5B()
 
 	var_10 = scripts\sp\_utility::func_7CB1();
 	var_10 = func_7C27(var_10);
-	if(isdefined(var_10))
-	{
+	if(isdefined(var_10)) {
 		level.player _meth_84C7("currentLoadout","equipment",1,var_10);
 		level.player _meth_84C7("currentLoadout","equipmentAmmo",1,scripts\sp\_utility::func_7CB2());
 		return;
@@ -512,24 +440,19 @@ func_EB5B()
 	level.player _meth_84C7("currentLoadout","equipmentAmmo",1,0);
 }
 
-//Function Number: 12
-func_79B0(param_00)
-{
+func_79B0(param_00) {
 	var_01 = [];
 	var_02 = getweaponbasename(param_00);
-	if(!isdefined(var_02))
-	{
+	if(!isdefined(var_02)) {
 		return param_00;
 	}
 
-	if(lib_0A2F::func_DA57(var_02))
-	{
+	if(lib_0A2F::func_DA57(var_02)) {
 		return param_00;
 	}
 
 	var_03 = getsubstr(param_00,var_02.size);
-	switch(var_02)
-	{
+	switch(var_02) {
 		case "iw7_ar57":
 			var_01 = ["iw7_m4"];
 			break;
@@ -619,10 +542,8 @@ func_79B0(param_00)
 			return param_00;
 	}
 
-	foreach(var_05 in var_01)
-	{
-		if(lib_0A2F::func_DA57(var_05))
-		{
+	foreach(var_05 in var_01) {
+		if(lib_0A2F::func_DA57(var_05)) {
 			return var_05 + var_03;
 		}
 	}
@@ -630,19 +551,13 @@ func_79B0(param_00)
 	return param_00;
 }
 
-//Function Number: 13
-fix_specialist_loadouts()
-{
-	if(!scripts\sp\_utility::func_93A6())
-	{
-		for(var_00 = 1;var_00 < 4;var_00++)
-		{
+fix_specialist_loadouts() {
+	if(!scripts\sp\_utility::func_93A6()) {
+		for(var_00 = 1;var_00 < 4;var_00++) {
 			var_01 = level.player _meth_84C6("loadouts",var_00,"equipment",0);
 			var_02 = level.player _meth_84C6("loadouts",var_00,"equipment",1);
-			if(isdefined(var_01) && var_01 == "helmet")
-			{
-				if(isdefined(var_02) && var_02 == "hackingdevice")
-				{
+			if(isdefined(var_01) && var_01 == "helmet") {
+				if(isdefined(var_02) && var_02 == "hackingdevice") {
 					level.player _meth_84C7("loadouts",var_00,"equipment",0,"offhandshield");
 					var_01 = "offhandshield";
 				}
@@ -653,10 +568,8 @@ fix_specialist_loadouts()
 				}
 			}
 
-			if(isdefined(var_02) && var_02 == "helmet")
-			{
-				if(isdefined(var_01) && var_01 == "hackingdevice")
-				{
+			if(isdefined(var_02) && var_02 == "helmet") {
+				if(isdefined(var_01) && var_01 == "hackingdevice") {
 					level.player _meth_84C7("loadouts",var_00,"equipment",1,"offhandshield");
 				}
 				else
@@ -667,10 +580,8 @@ fix_specialist_loadouts()
 
 			var_03 = level.player _meth_84C6("loadouts",var_00,"offhandEquipment",0);
 			var_04 = level.player _meth_84C6("loadouts",var_00,"offhandEquipment",1);
-			if(isdefined(var_03) && var_03 == "nanoshot")
-			{
-				if(isdefined(var_04) && var_04 == "frag")
-				{
+			if(isdefined(var_03) && var_03 == "nanoshot") {
+				if(isdefined(var_04) && var_04 == "frag") {
 					level.player _meth_84C7("loadouts",var_00,"offhandEquipment",0,"seeker");
 					var_03 = "seeker";
 				}
@@ -681,10 +592,8 @@ fix_specialist_loadouts()
 				}
 			}
 
-			if(isdefined(var_04) && var_04 == "nanoshot")
-			{
-				if(isdefined(var_03) && var_03 == "frag")
-				{
+			if(isdefined(var_04) && var_04 == "nanoshot") {
+				if(isdefined(var_03) && var_03 == "frag") {
 					level.player _meth_84C7("loadouts",var_00,"offhandEquipment",1,"seeker");
 					continue;
 				}
@@ -695,12 +604,9 @@ fix_specialist_loadouts()
 	}
 }
 
-//Function Number: 14
-setleftarc()
-{
+setleftarc() {
 	var_00 = level.player _meth_84C6("selectedLoadout");
-	if(getdvarint("skip_loadout") > 0 || !isdefined(level.player _meth_84C6("selectedLoadout")))
-	{
+	if(getdvarint("skip_loadout") > 0 || !isdefined(level.player _meth_84C6("selectedLoadout"))) {
 		var_00 = 0;
 	}
 	else
@@ -719,60 +625,49 @@ setleftarc()
 	setlookatent(var_03,var_04,var_05,var_06,var_07,var_08);
 }
 
-//Function Number: 15
-setlookatent(param_00,param_01,param_02,param_03,param_04,param_05)
-{
+setlookatent(param_00,param_01,param_02,param_03,param_04,param_05) {
 	level.player takeallweapons();
 	var_06 = undefined;
-	if(isdefined(param_00) && param_00 != "none" && param_00 != "")
-	{
+	if(isdefined(param_00) && param_00 != "none" && param_00 != "") {
 		var_06 = param_00;
 		level.player giveweapon(param_00);
 		level.player givemaxammo(param_00);
-		if(lib_0A2F::func_DA40(param_00))
-		{
+		if(lib_0A2F::func_DA40(param_00)) {
 			level.player setweaponammoclip(param_00,weaponclipsize(param_00));
 		}
 	}
 
-	if(isdefined(param_01) && param_01 != "none" && param_01 != "")
-	{
+	if(isdefined(param_01) && param_01 != "none" && param_01 != "") {
 		level.player giveweapon(param_01);
 		level.player givemaxammo(param_01);
-		if(lib_0A2F::func_DA40(param_01))
-		{
+		if(lib_0A2F::func_DA40(param_01)) {
 			level.player setweaponammoclip(param_01,weaponclipsize(param_01));
 		}
 	}
 
-	if(isdefined(param_02) && param_02 != "none")
-	{
+	if(isdefined(param_02) && param_02 != "none") {
 		level.player give_player_xp("flash");
 		level.player giveweapon(param_02);
 		level.player gold_tooth_3_pickup(param_02);
 	}
 
-	if(isdefined(param_03) && param_03 != "none")
-	{
+	if(isdefined(param_03) && param_03 != "none") {
 		level.player giveweapon(param_03);
 		level.player assignweaponoffhandprimary(param_03);
 	}
 
-	if(isdefined(param_04) && param_04 != "none")
-	{
+	if(isdefined(param_04) && param_04 != "none") {
 		level.player give_player_xp("flash");
 		level.player giveweapon(param_04);
 		level.player gold_tooth_3_pickup(param_04);
 	}
 
-	if(isdefined(param_05) && param_05 != "none")
-	{
+	if(isdefined(param_05) && param_05 != "none") {
 		level.player giveweapon(param_05);
 		level.player assignweaponoffhandprimary(param_05);
 	}
 
-	if(!isdefined(var_06))
-	{
+	if(!isdefined(var_06)) {
 		level.player giveweapon("iw7_ake");
 		return;
 	}
@@ -781,34 +676,27 @@ setlookatent(param_00,param_01,param_02,param_03,param_04,param_05)
 	level.player switchtoweapon(var_06);
 }
 
-//Function Number: 16
-func_10A4F(param_00)
-{
+func_10A4F(param_00) {
 	var_01 = "none";
 	var_02 = "none";
 	var_03 = "none";
 	var_04 = strtok(param_00,"+");
 	var_05 = var_04[0];
-	if(isdefined(var_05) && var_04.size > 1)
-	{
+	if(isdefined(var_05) && var_04.size > 1) {
 		var_06 = scripts\engine\utility::array_remove(var_04,var_05);
 		var_07 = lib_0A2F::func_DA0F();
-		foreach(var_09 in var_06)
-		{
-			if(scripts\engine\utility::array_contains(var_07,var_09))
-			{
+		foreach(var_09 in var_06) {
+			if(scripts\engine\utility::array_contains(var_07,var_09)) {
 				var_01 = var_09;
 				continue;
 			}
 
-			if(var_02 == "none")
-			{
+			if(var_02 == "none") {
 				var_02 = var_09;
 				continue;
 			}
 
-			if(var_03 == "none")
-			{
+			if(var_03 == "none") {
 				var_03 = var_09;
 			}
 		}
@@ -817,11 +705,8 @@ func_10A4F(param_00)
 	return [var_05,var_01,var_02,var_03];
 }
 
-//Function Number: 17
-func_783F(param_00)
-{
-	if(!isdefined(level.var_D9E5) || isdefined(level.var_D9E5) && !isdefined(level.var_D9E5["attachments"]))
-	{
+func_783F(param_00) {
+	if(!isdefined(level.var_D9E5) || isdefined(level.var_D9E5) && !isdefined(level.var_D9E5["attachments"])) {
 		var_01 = lib_0A2F::func_DA52();
 	}
 	else
@@ -829,16 +714,11 @@ func_783F(param_00)
 		var_01 = level.var_D9E5["attachments"];
 	}
 
-	foreach(var_03 in var_01)
-	{
-		foreach(var_05 in var_03)
-		{
-			foreach(var_07 in var_05)
-			{
-				foreach(var_09 in var_07)
-				{
-					if(var_09.var_24A2 == param_00)
-					{
+	foreach(var_03 in var_01) {
+		foreach(var_05 in var_03) {
+			foreach(var_07 in var_05) {
+				foreach(var_09 in var_07) {
+					if(var_09.var_24A2 == param_00) {
 						return var_09;
 					}
 				}
@@ -849,76 +729,59 @@ func_783F(param_00)
 	return undefined;
 }
 
-//Function Number: 18
-func_7D6A(param_00)
-{
+func_7D6A(param_00) {
 	var_01 = "none";
 	var_02 = "none";
 	var_03 = "none";
 	var_04 = getweaponbasename(param_00);
 	var_05 = strtok(param_00,"+");
 	var_06 = [];
-	if(isdefined(var_04) && isdefined(var_05))
-	{
+	if(isdefined(var_04) && isdefined(var_05)) {
 		var_05 = scripts\engine\utility::array_remove(var_05,var_04);
-		foreach(var_08 in var_05)
-		{
-			if(var_08 == "smartar")
-			{
+		foreach(var_08 in var_05) {
+			if(var_08 == "smartar") {
 				var_08 = "smart";
 			}
-			else if(var_08 == "eloshtgnepicdev")
-			{
+			else if(var_08 == "eloshtgnepicdev") {
 				var_08 = "eloshtgn";
 			}
-			else if(var_08 == "phaseshotgunepicdev_sp")
-			{
+			else if(var_08 == "phaseshotgunepicdev_sp") {
 				var_08 = "phaseshotgun_sp";
 			}
-			else if(var_08 == "reflexshotgunepicdev")
-			{
+			else if(var_08 == "reflexshotgunepicdev") {
 				var_08 = "reflexshotgun";
 			}
-			else if(var_08 == "epicdevastatorads")
-			{
+			else if(var_08 == "epicdevastatorads") {
 				continue;
 			}
-			else if(var_08 == "elopstlepicemc")
-			{
+			else if(var_08 == "elopstlepicemc") {
 				var_08 = "elopstl";
 			}
-			else if(var_08 == "phasepstlepicemc_sp")
-			{
+			else if(var_08 == "phasepstlepicemc_sp") {
 				var_08 = "phasepstl_sp";
 			}
-			else if(var_08 == "reflexpstlepicemc")
-			{
+			else if(var_08 == "reflexpstlepicemc") {
 				var_08 = "reflexpstl";
 			}
-			else if(var_08 == "epicemcads")
-			{
+			else if(var_08 == "epicemcads") {
 				continue;
 			}
 
 			var_09 = func_783F(var_08);
-			if(!isdefined(var_09))
-			{
+			if(!isdefined(var_09)) {
 				continue;
 			}
 
-			if(var_04 == "iw7_gambit" && isdefined(level.var_7655) && level.var_7655 == var_08)
-			{
+			if(var_04 == "iw7_gambit" && isdefined(level.var_7655) && level.var_7655 == var_08) {
 				continue;
 			}
 
-			if(var_09.var_13CDE == "default" || var_09.baseangles == "zerog")
-			{
+			if(var_09.var_13CDE == "default" || var_09.baseangles == "zerog") {
 				continue;
 			}
 			else
 			{
-				if(var_09.location == "rail")
-				{
+				if(var_09.location == "rail") {
 					var_01 = var_09.baseangles;
 					continue;
 				}
@@ -928,24 +791,19 @@ func_7D6A(param_00)
 		}
 	}
 
-	if(var_06.size > 2)
-	{
-		if(isdefined(level.var_72A6))
-		{
+	if(var_06.size > 2) {
+		if(isdefined(level.var_72A6)) {
 			var_06 = scripts\engine\utility::array_remove(var_06,level.var_72A6);
 		}
 	}
 
-	foreach(var_0C in var_06)
-	{
-		if(var_02 == "none")
-		{
+	foreach(var_0C in var_06) {
+		if(var_02 == "none") {
 			var_02 = var_0C;
 			continue;
 		}
 
-		if(var_03 == "none")
-		{
+		if(var_03 == "none") {
 			var_03 = var_0C;
 		}
 	}
@@ -953,15 +811,11 @@ func_7D6A(param_00)
 	return [var_04,var_01,var_02,var_03];
 }
 
-//Function Number: 19
-func_F33B(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08)
-{
+func_F33B(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08) {
 	func_F467(0,param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08);
 }
 
-//Function Number: 20
-func_F467(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08,param_09)
-{
+func_F467(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08,param_09) {
 	var_0A = func_10A4F(param_01);
 	param_01 = var_0A[0];
 	var_0B = var_0A[1];
@@ -972,8 +826,7 @@ func_F467(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_0
 	var_0E = var_0A[1];
 	var_0F = var_0A[2];
 	var_10 = var_0A[3];
-	if(isdefined(param_01) && param_01 != "")
-	{
+	if(isdefined(param_01) && param_01 != "") {
 		level.player _meth_84C7("loadouts",param_00,"weaponSetups",0,"weapon",param_01);
 	}
 	else
@@ -981,8 +834,7 @@ func_F467(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_0
 		level.player _meth_84C7("loadouts",param_00,"weaponSetups",0,"weapon","none");
 	}
 
-	if(isdefined(param_01) && param_01 != "" && isdefined(var_0B))
-	{
+	if(isdefined(param_01) && param_01 != "" && isdefined(var_0B)) {
 		level.player _meth_84C7("loadouts",param_00,"weaponSetups",0,"attachment",0,var_0B);
 	}
 	else
@@ -990,8 +842,7 @@ func_F467(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_0
 		level.player _meth_84C7("loadouts",param_00,"weaponSetups",0,"attachment",0,"none");
 	}
 
-	if(isdefined(param_01) && param_01 != "" && isdefined(var_0C))
-	{
+	if(isdefined(param_01) && param_01 != "" && isdefined(var_0C)) {
 		level.player _meth_84C7("loadouts",param_00,"weaponSetups",0,"attachment",1,var_0C);
 	}
 	else
@@ -999,8 +850,7 @@ func_F467(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_0
 		level.player _meth_84C7("loadouts",param_00,"weaponSetups",0,"attachment",1,"none");
 	}
 
-	if(isdefined(param_01) && param_01 != "" && isdefined(var_0D))
-	{
+	if(isdefined(param_01) && param_01 != "" && isdefined(var_0D)) {
 		level.player _meth_84C7("loadouts",param_00,"weaponSetups",0,"attachment",2,var_0D);
 	}
 	else
@@ -1008,8 +858,7 @@ func_F467(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_0
 		level.player _meth_84C7("loadouts",param_00,"weaponSetups",0,"attachment",2,"none");
 	}
 
-	if(isdefined(param_02) && param_02 != "")
-	{
+	if(isdefined(param_02) && param_02 != "") {
 		level.player _meth_84C7("loadouts",param_00,"weaponSetups",1,"weapon",param_02);
 	}
 	else
@@ -1017,8 +866,7 @@ func_F467(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_0
 		level.player _meth_84C7("loadouts",param_00,"weaponSetups",1,"weapon","none");
 	}
 
-	if(isdefined(param_02) && param_02 != "" && isdefined(var_0E))
-	{
+	if(isdefined(param_02) && param_02 != "" && isdefined(var_0E)) {
 		level.player _meth_84C7("loadouts",param_00,"weaponSetups",1,"attachment",0,var_0E);
 	}
 	else
@@ -1026,8 +874,7 @@ func_F467(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_0
 		level.player _meth_84C7("loadouts",param_00,"weaponSetups",1,"attachment",0,"none");
 	}
 
-	if(isdefined(param_02) && param_02 != "" && isdefined(var_0F))
-	{
+	if(isdefined(param_02) && param_02 != "" && isdefined(var_0F)) {
 		level.player _meth_84C7("loadouts",param_00,"weaponSetups",1,"attachment",1,var_0F);
 	}
 	else
@@ -1035,8 +882,7 @@ func_F467(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_0
 		level.player _meth_84C7("loadouts",param_00,"weaponSetups",1,"attachment",1,"none");
 	}
 
-	if(isdefined(param_02) && param_02 != "" && isdefined(var_10))
-	{
+	if(isdefined(param_02) && param_02 != "" && isdefined(var_10)) {
 		level.player _meth_84C7("loadouts",param_00,"weaponSetups",1,"attachment",2,var_10);
 	}
 	else
@@ -1044,8 +890,7 @@ func_F467(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_0
 		level.player _meth_84C7("loadouts",param_00,"weaponSetups",1,"attachment",2,"none");
 	}
 
-	if(isdefined(param_04) && param_04 != "")
-	{
+	if(isdefined(param_04) && param_04 != "") {
 		level.player _meth_84C7("loadouts",param_00,"equipment",0,param_04);
 	}
 	else
@@ -1053,8 +898,7 @@ func_F467(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_0
 		level.player _meth_84C7("loadouts",param_00,"equipment",0,"none");
 	}
 
-	if(isdefined(param_03) && param_03 != "")
-	{
+	if(isdefined(param_03) && param_03 != "") {
 		level.player _meth_84C7("loadouts",param_00,"offhandEquipment",0,param_03);
 	}
 	else
@@ -1062,8 +906,7 @@ func_F467(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_0
 		level.player _meth_84C7("loadouts",param_00,"offhandEquipment",0,"none");
 	}
 
-	if(isdefined(param_06) && param_06 != "")
-	{
+	if(isdefined(param_06) && param_06 != "") {
 		level.player _meth_84C7("loadouts",param_00,"equipment",1,param_06);
 	}
 	else
@@ -1071,8 +914,7 @@ func_F467(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_0
 		level.player _meth_84C7("loadouts",param_00,"equipment",1,"none");
 	}
 
-	if(isdefined(param_05) && param_05 != "")
-	{
+	if(isdefined(param_05) && param_05 != "") {
 		level.player _meth_84C7("loadouts",param_00,"offhandEquipment",1,param_05);
 	}
 	else
@@ -1081,11 +923,9 @@ func_F467(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_0
 	}
 
 	var_11 = level.player _meth_84C6("loadouts",param_00,"jackalSetup","jackalDecal");
-	if(!isdefined(var_11) || var_11 == "" || var_11 == "none")
-	{
+	if(!isdefined(var_11) || var_11 == "" || var_11 == "none") {
 		level.player _meth_84C7("loadouts",param_00,"jackalSetup","jackalDecal","veh_mil_air_un_jackal_livery_shell_01");
-		if(isdefined(param_07) && param_07 != "")
-		{
+		if(isdefined(param_07) && param_07 != "") {
 			level.player _meth_84C7("loadouts",param_00,"jackalSetup","jackalPrimary",param_07);
 		}
 		else
@@ -1093,8 +933,7 @@ func_F467(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_0
 			level.player _meth_84C7("loadouts",param_00,"jackalSetup","jackalPrimary","primary_default");
 		}
 
-		if(isdefined(param_08) && param_08 != "")
-		{
+		if(isdefined(param_08) && param_08 != "") {
 			level.player _meth_84C7("loadouts",param_00,"jackalSetup","jackalSecondary",param_08);
 		}
 		else
@@ -1102,8 +941,7 @@ func_F467(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_0
 			level.player _meth_84C7("loadouts",param_00,"jackalSetup","jackalSecondary","secondary_default");
 		}
 
-		if(isdefined(param_09) && param_09 != "")
-		{
+		if(isdefined(param_09) && param_09 != "") {
 			level.player _meth_84C7("loadouts",param_00,"jackalSetup","jackalUpgrade",param_09);
 			return;
 		}

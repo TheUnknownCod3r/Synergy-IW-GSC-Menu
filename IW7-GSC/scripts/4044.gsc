@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: 4044.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 1
- * Decompile Time: 2 ms
- * Timestamp: 10/27/2023 12:31:56 AM
-*******************************************************************/
+/****************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\4044.gsc
+****************************/
 
-//Function Number: 1
-main()
-{
+main() {
 	level._effect["vfx_metr_utility_light_flare"] = loadfx("vfx/iw7/levels/mp_metropolis/vfx_metr_utility_light_flare.vfx");
 	level._effect["vfx_metr_nature_fishjump"] = loadfx("vfx/iw7/levels/mp_metropolis/vfx_metr_nature_fishjump.vfx");
 	level._effect["vfx_metr_camcentric"] = loadfx("vfx/iw7/levels/mp_metropolis/vfx_metr_camcentric.vfx");

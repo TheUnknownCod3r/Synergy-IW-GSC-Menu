@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\sp\maps\europa\gen\europa_sound.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 1
- * Decompile Time: 122 ms
- * Timestamp: 10/27/2023 12:22:37 AM
-*******************************************************************/
+/***************************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\sp\maps\europa\gen\europa_sound.gsc
+***************************************************************/
 
-//Function Number: 1
-main()
-{
+main() {
 	var_00 = scripts\common\createfx::createloopsound();
 	var_00 scripts\common\createfx::set_origin_and_angles((30665.9,-11526.5,-350.642),(270,0,0));
 	var_00.v["soundalias"] = "emt_video_screen_lp_02";

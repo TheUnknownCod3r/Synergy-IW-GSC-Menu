@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\cp\maps\cp_disco\cp_disco_fx.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 1
- * Decompile Time: 116 ms
- * Timestamp: 10/27/2023 12:03:50 AM
-*******************************************************************/
+/************************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\cp\maps\cp_disco\cp_disco_fx.gsc
+************************************************************/
 
-//Function Number: 1
-main()
-{
+main() {
 	level._effect["vfx_elec_speakers"] = loadfx("vfx/iw7/levels/cp_disco/traps/vfx_elec_speakers.vfx");
 	level._effect["vfx_park_lensflares"] = loadfx("vfx/iw7/levels/cp_disco/amb/vfx_park_lensflares.vfx");
 	level._effect["vfx_traffic_light_flash"] = loadfx("vfx/iw7/levels/cp_disco/amb/vfx_traffic_light_flash.vfx");

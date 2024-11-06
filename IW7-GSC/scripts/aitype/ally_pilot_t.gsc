@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: aitype\ally_pilot_t.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 3
- * Decompile Time: 158 ms
- * Timestamp: 10\26\2023 11:58:15 PM
-*******************************************************************/
+/*******************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\aitype\ally_pilot_t.gsc
+*******************************************/
 
-//Function Number: 1
-main()
-{
+main() {
 	self.var_17DB = "";
 	self.team = "allies";
 	self.type = "human";
@@ -24,8 +18,7 @@ main()
 	self.var_101B4 = "";
 	self.behaviortreeasset = "enemy_combatant";
 	self.var_1FA9 = "soldier";
-	if(isai(self))
-	{
+	if(isai(self)) {
 		self _meth_82DC(256,0);
 		self _meth_82DB(768,1024);
 	}
@@ -34,15 +27,11 @@ main()
 	lib_082F::main();
 }
 
-//Function Number: 2
-spawner()
-{
+spawner() {
 	self _meth_833A("allies");
 }
 
-//Function Number: 3
-precache()
-{
+precache() {
 	lib_082F::precache();
 	scripts\aitypes\bt_util::init();
 	lib_09FD::soldier();

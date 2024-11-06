@@ -1,23 +1,15 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: 2959.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 4
- * Decompile Time: 4 ms
- * Timestamp: 10/27/2023 12:24:59 AM
-*******************************************************************/
+/****************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\2959.gsc
+****************************/
 
-//Function Number: 1
-main(param_00)
-{
-	if(!isdefined(param_00))
-	{
+main(param_00) {
+	if(!isdefined(param_00)) {
 		return;
 	}
 
-	switch(param_00)
-	{
+	switch(param_00) {
 		case "script_vehicle_m1a1_abrams_player_tm":
 		case "script_vehicle_m1a1_abrams_minigun":
 			func_F63D(param_00,"vfx/core/tread/tread_dust_hamburg_cheap.vfx");
@@ -119,26 +111,19 @@ main(param_00)
 	}
 }
 
-//Function Number: 2
-func_FB0B(param_00,param_01,param_02)
-{
+func_FB0B(param_00,param_01,param_02) {
 	scripts/sp/vehicle_build::func_F5FB(param_00,param_01,param_02);
 }
 
-//Function Number: 3
-func_F63D(param_00,param_01)
-{
+func_F63D(param_00,param_01) {
 	var_02 = func_7D14();
 	func_FB0B(param_00,"none");
-	foreach(var_04 in var_02)
-	{
+	foreach(var_04 in var_02) {
 		func_FB0B(param_00,var_04,param_01);
 	}
 }
 
-//Function Number: 4
-func_7D14()
-{
+func_7D14() {
 	var_00 = [];
 	var_00[var_00.size] = "brick";
 	var_00[var_00.size] = "bark";

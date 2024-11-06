@@ -1,57 +1,41 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: 3663.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 20
- * Decompile Time: 6 ms
- * Timestamp: 10/27/2023 12:31:02 AM
-*******************************************************************/
+/****************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\3663.gsc
+****************************/
 
-//Function Number: 1
-func_9755(param_00)
-{
-	if(!level.player scripts\sp\_utility::func_65DF("pressurized"))
-	{
+func_9755(param_00) {
+	if(!level.player scripts\sp\_utility::func_65DF("pressurized")) {
 		level.player scripts\sp\_utility::func_65E0("pressurized");
 	}
 
-	if(!level.player scripts\sp\_utility::func_65DF("player_gravity_off"))
-	{
+	if(!level.player scripts\sp\_utility::func_65DF("player_gravity_off")) {
 		level.player scripts\sp\_utility::func_65E0("player_gravity_off");
 	}
 
-	if(!level.player scripts\sp\_utility::func_65DF("player_space_override_off"))
-	{
+	if(!level.player scripts\sp\_utility::func_65DF("player_space_override_off")) {
 		level.player scripts\sp\_utility::func_65E0("player_space_override_off");
 	}
 
-	if(!isdefined(param_00) || !param_00)
-	{
+	if(!isdefined(param_00) || !param_00) {
 		function_01C5("player_spaceViewHeight",60);
 		function_01C5("player_spaceCapsuleHeight",70);
 	}
 
-	if(!isdefined(level.player.isent))
-	{
+	if(!isdefined(level.player.isent)) {
 		level.player.isent = spawnstruct();
 	}
 
 	level.player.isent.var_6F43 = 0;
 }
 
-//Function Number: 2
-func_9756()
-{
+func_9756() {
 	lib_0E4A::_meth_84BB();
 }
 
-//Function Number: 3
-func_5570(param_00)
-{
+func_5570(param_00) {
 	func_9755(1);
-	if(param_00 == 1)
-	{
+	if(param_00 == 1) {
 		level.player scripts\sp\_utility::func_65E1("player_space_override_off");
 		return;
 	}
@@ -59,42 +43,33 @@ func_5570(param_00)
 	level.player scripts\sp\_utility::func_65DD("player_space_override_off");
 }
 
-//Function Number: 4
-func_9C7B()
-{
+func_9C7B() {
 	func_9755(1);
-	if(level.player scripts\sp\_utility::func_65DB("player_space_override_off"))
-	{
+	if(level.player scripts\sp\_utility::func_65DB("player_space_override_off")) {
 		return 0;
 	}
 
-	if(!level.player scripts\sp\_utility::func_65DB("player_gravity_off"))
-	{
+	if(!level.player scripts\sp\_utility::func_65DB("player_gravity_off")) {
 		return 0;
 	}
 
 	return 1;
 }
 
-//Function Number: 5
-func_622C(param_00,param_01)
-{
+func_622C(param_00,param_01) {
 	func_9755();
-	if(level.player scripts\sp\_utility::func_65DB("player_space_override_off"))
-	{
+	if(level.player scripts\sp\_utility::func_65DB("player_space_override_off")) {
 		return;
 	}
 
 	level.player.isent.var_6F43 = 1;
 	level.player scripts\sp\_utility::func_65E1("player_gravity_off");
 	level.var_7684 = ::lib_0E50::unloadalltransients;
-	if(!isdefined(param_00) || param_00)
-	{
+	if(!isdefined(param_00) || param_00) {
 		level.player thread lib_0E47::func_4D8A();
 	}
 
-	if(!isdefined(param_01) || param_01)
-	{
+	if(!isdefined(param_01) || param_01) {
 		level.player thread lib_0E4A::_meth_84BA();
 	}
 
@@ -102,24 +77,18 @@ func_622C(param_00,param_01)
 	level.player thread _meth_853A();
 }
 
-//Function Number: 6
-func_556F()
-{
+func_556F() {
 	level.player scripts\sp\_utility::func_65DD("player_gravity_off");
 }
 
-//Function Number: 7
-func_40A6()
-{
+func_40A6() {
 	level notify("disable_space");
 	level.player notify("disable_space");
 	level.player func_552C();
 	level.var_7684 = undefined;
 }
 
-//Function Number: 8
-func_6251()
-{
+func_6251() {
 	function_01C5("bg_viewBobAmplitudeDucked",0);
 	function_01C5("bg_viewBobAmplitudeDuckedAds",0);
 	function_01C5("bg_viewBobAmplitudeSprinting",0);
@@ -134,9 +103,7 @@ func_6251()
 	self give_crafted_fireworks_trap(5);
 }
 
-//Function Number: 9
-func_559D()
-{
+func_559D() {
 	function_01C5("bg_viewBobAmplitudeDucked",0.0075);
 	function_01C5("bg_viewBobAmplitudeDuckedAds",0.0075);
 	function_01C5("bg_viewBobAmplitudeSprinting",0.014);
@@ -151,9 +118,7 @@ func_559D()
 	self give_crafted_fireworks_trap(1);
 }
 
-//Function Number: 10
-func_621C(param_00)
-{
+func_621C(param_00) {
 	function_01C5("cg_footsteps",0);
 	function_01C5("cg_equipmentSounds",0);
 	function_01C5("cg_landingSounds",0);
@@ -185,9 +150,7 @@ func_621C(param_00)
 	thread func_13E97();
 }
 
-//Function Number: 11
-func_5558()
-{
+func_5558() {
 	level notify("disable_space");
 	self notify("disable_space");
 	function_01C5("cg_footsteps",1);
@@ -206,95 +169,73 @@ func_5558()
 	self _meth_800E(1);
 	self _meth_8014(0);
 	scripts\engine\utility::allow_doublejump(1);
-	if(isdefined(self.var_286F))
-	{
+	if(isdefined(self.var_286F)) {
 		self.var_50 = self.var_286F;
 	}
 
-	if(isdefined(self.var_13E97))
-	{
+	if(isdefined(self.var_13E97)) {
 		self.var_13E97 delete();
 	}
 }
 
-//Function Number: 12
-_meth_853A()
-{
+_meth_853A() {
 	self.isent.var_6F43 = 0;
 	self.isent.var_6F43 = 1;
 	func_61FA();
-	while(func_9C7B())
-	{
+	while(func_9C7B()) {
 		wait(0.05);
 	}
 
 	func_40A6();
-	if(isdefined(level.player.var_9BF5))
-	{
-		while(level.player.var_9BF5 == 1)
-		{
+	if(isdefined(level.player.var_9BF5)) {
+		while(level.player.var_9BF5 == 1) {
 			scripts\engine\utility::waitframe();
 		}
 	}
 
-	if(isdefined(self._meth_849A))
-	{
+	if(isdefined(self._meth_849A)) {
 		level.player thread lib_0E4A::_meth_84B9();
 	}
 }
 
-//Function Number: 13
-func_61FA()
-{
+func_61FA() {
 	self getrawbaseweaponname(0.8,0.8);
 	func_6251();
 	func_621C();
 	lib_0E50::func_6247();
 }
 
-//Function Number: 14
-func_552C()
-{
+func_552C() {
 	self _meth_80A6();
 	func_559D();
 	func_5558();
 	lib_0E50::func_5593();
 }
 
-//Function Number: 15
-func_37FE()
-{
-	if(self isonground())
-	{
+func_37FE() {
+	if(self isonground()) {
 		return 1;
 	}
 
 	return 0;
 }
 
-//Function Number: 16
-func_9399()
-{
+func_9399() {
 	return level.player scripts\sp\_utility::func_65DB("in_gravity");
 }
 
-//Function Number: 17
-func_8B3A()
-{
+func_8B3A() {
 	self endon("death");
 	self endon("disable_space");
 	self.var_286F = self.var_50;
-	for(;;)
-	{
+	for(;;) {
 		var_00 = getdvarfloat("player_sprintSpeedScale",1.4);
 		var_01 = getdvarfloat("player_swimSpeed",level.var_1050D);
 		var_02 = length(self getvelocity());
 		self.var_50 = self.var_286F;
-		if(var_02 >= var_01 * 0.99)
-		{
+		if(var_02 >= var_01 * 0.99) {
 			self.var_50 = 0.4 * self.var_286F;
-			if(var_02 >= var_01 * var_00)
-			{
+			if(var_02 >= var_01 * var_00) {
 				self.var_50 = 0.15 * self.var_286F;
 			}
 		}
@@ -303,17 +244,13 @@ func_8B3A()
 	}
 }
 
-//Function Number: 18
-func_93E9()
-{
+func_93E9() {
 	self endon("death");
 	self endon("disable_space");
-	for(;;)
-	{
+	for(;;) {
 		var_00 = level.player.origin + (0,0,25);
 		var_01 = !scripts\common\trace::sphere_trace_passed(level.player.origin,level.player.origin,60,level.player);
-		if(var_01)
-		{
+		if(var_01) {
 			thread scripts\sp\_utility::func_AB9A("player_swimFriction",level.var_104D9,0.1);
 			thread scripts\sp\_utility::func_AB9A("player_swimSpeed",level.var_1050D,1);
 			thread scripts\sp\_utility::func_AB9A("player_swimAcceleration",level.var_104AE,0.1);
@@ -331,24 +268,19 @@ func_93E9()
 	}
 }
 
-//Function Number: 19
-func_13E97()
-{
+func_13E97() {
 	self endon("disable_space");
-	if(!isdefined(level.var_EC8C["player_body"]))
-	{
+	if(!isdefined(level.var_EC8C["player_body"])) {
 		return;
 	}
 
 	self.var_13E97 = scripts/sp/player_rig::func_7B88();
 	self.var_13E97 _meth_81E4(self,"tag_origin",(-12,0,-58),(-4,0,0),1,0,0,0);
-	for(;;)
-	{
+	for(;;) {
 		var_00 = self getnormalizedmovement();
 		var_01 = 0.75;
 		var_02 = 0.5;
-		if(var_00[0] >= 0)
-		{
+		if(var_00[0] >= 0) {
 			var_03 = var_00[0];
 			var_03 = var_03 * var_03;
 			self.var_13E97 aiclearanim(%space_playerbody_idle_b,var_01);
@@ -367,8 +299,7 @@ func_13E97()
 			self.var_13E97 give_attacker_kill_rewards(%space_playerbody_idle,1 - var_03,var_01 * var_05);
 		}
 
-		if(var_00[1] >= 0)
-		{
+		if(var_00[1] >= 0) {
 			var_03 = var_00[1];
 			var_03 = var_03 * var_03;
 			var_04 = func_EBAB();
@@ -392,15 +323,11 @@ func_13E97()
 	}
 }
 
-//Function Number: 20
-func_EBAB(param_00)
-{
+func_EBAB(param_00) {
 	var_01 = self getplayerangles();
 	var_02 = var_01[0];
-	if(var_02 > 0)
-	{
-		if(!isdefined(param_00))
-		{
+	if(var_02 > 0) {
+		if(!isdefined(param_00)) {
 			param_00 = 75;
 		}
 

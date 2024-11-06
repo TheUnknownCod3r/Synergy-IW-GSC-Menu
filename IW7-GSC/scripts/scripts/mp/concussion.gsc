@@ -1,22 +1,14 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\mp\concussiongrenade.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 8
- * Decompile Time: 561 ms
- * Timestamp: 10/27/2023 12:14:55 AM
-*******************************************************************/
+/*********************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\mp\concussion.gsc
+*********************************************/
 
-//Function Number: 1
-func_44EE(param_00)
-{
+func_44EE(param_00) {
 	param_00 thread func_13A20();
 }
 
-//Function Number: 2
-func_13A20()
-{
+func_13A20() {
 	var_00 = scripts\engine\utility::spawn_tag_origin();
 	var_00 linkto(self);
 	self.killcament = var_00;
@@ -28,20 +20,15 @@ func_13A20()
 	thread func_0118(var_02,512,var_01,var_00);
 }
 
-//Function Number: 3
-func_0118(param_00,param_01,param_02,param_03)
-{
+func_0118(param_00,param_01,param_02,param_03) {
 	var_04 = scripts\mp\weapons::getempdamageents(param_00,param_01,0);
-	foreach(var_06 in var_04)
-	{
-		if(!isdefined(var_06))
-		{
+	foreach(var_06 in var_04) {
+		if(!isdefined(var_06)) {
 			continue;
 		}
 
 		var_07 = scripts\engine\utility::ter_op(isdefined(var_06.triggerportableradarping),var_06.triggerportableradarping,var_06);
-		if(!scripts\mp\weapons::friendlyfirecheck(param_02,var_07) && var_07 != param_02)
-		{
+		if(!scripts\mp\weapons::friendlyfirecheck(param_02,var_07) && var_07 != param_02) {
 			continue;
 		}
 
@@ -50,15 +37,11 @@ func_0118(param_00,param_01,param_02,param_03)
 	}
 }
 
-//Function Number: 4
-onweapondamage(param_00,param_01,param_02,param_03,param_04)
-{
-	if(!isdefined(param_00))
-	{
+onweapondamage(param_00,param_01,param_02,param_03,param_04) {
+	if(!isdefined(param_00)) {
 		return;
 	}
-	else if(param_02 == "MOD_IMPACT")
-	{
+	else if(param_02 == "MOD_IMPACT") {
 		return;
 	}
 
@@ -67,20 +50,16 @@ onweapondamage(param_00,param_01,param_02,param_03,param_04)
 	param_04 scripts\mp\damage::combatrecordtacticalstat("power_concussionGrenade");
 }
 
-//Function Number: 5
-func_20BF(param_00,param_01)
-{
+func_20BF(param_00,param_01) {
 	var_02 = 2;
 	var_03 = 4;
-	if(self == param_01)
-	{
+	if(self == param_01) {
 		var_02 = 0.75;
 		var_03 = 1.5;
 	}
 
 	var_04 = 1 - distance(self.origin,param_00.origin) / 512;
-	if(var_04 < 0)
-	{
+	if(var_04 < 0) {
 		var_04 = 0;
 	}
 
@@ -95,13 +74,9 @@ func_20BF(param_00,param_01)
 	self.concussionendtime = gettime() + var_05 * 1000;
 }
 
-//Function Number: 6
-func_20C3(param_00,param_01)
-{
-	if(!scripts\mp\killstreaks\_emp_common::func_FFC5())
-	{
-		if(param_01 != self)
-		{
+func_20C3(param_00,param_01) {
+	if(!scripts\mp\killstreaks\_emp_common::func_FFC5()) {
+		if(param_01 != self) {
 			param_01 scripts\mp\damagefeedback::updatedamagefeedback("hiticonempimmune",undefined,undefined,undefined,1);
 		}
 
@@ -109,8 +84,7 @@ func_20C3(param_00,param_01)
 	}
 
 	var_02 = 3;
-	if(self == param_01)
-	{
+	if(self == param_01) {
 		var_02 = 1;
 	}
 
@@ -118,35 +92,27 @@ func_20C3(param_00,param_01)
 	thread scripts\mp\gamescore::func_11ACF(param_01,self,"emp_grenade_mp",var_02);
 }
 
-//Function Number: 7
-func_A639(param_00)
-{
+func_A639(param_00) {
 	param_00 endon("death");
 	self waittill("death");
 	wait(5);
 	param_00 delete();
 }
 
-//Function Number: 8
-func_B92C(param_00,param_01,param_02,param_03,param_04)
-{
-	if(!isdefined(param_03) || !isdefined(param_04) || !isdefined(param_01) || !isdefined(param_02))
-	{
+func_B92C(param_00,param_01,param_02,param_03,param_04) {
+	if(!isdefined(param_03) || !isdefined(param_04) || !isdefined(param_01) || !isdefined(param_02)) {
 		return param_00;
 	}
 
-	if(param_04 != "concussion_grenade_mp" && param_04 != "emp_grenade_mp")
-	{
+	if(param_04 != "concussion_grenade_mp" && param_04 != "emp_grenade_mp") {
 		return param_00;
 	}
 
-	if(param_01 != param_02)
-	{
+	if(param_01 != param_02) {
 		return param_00;
 	}
 
-	if(distancesquared(param_02.origin,param_03.origin) <= 65536)
-	{
+	if(distancesquared(param_02.origin,param_03.origin) <= 65536) {
 		return param_00;
 	}
 

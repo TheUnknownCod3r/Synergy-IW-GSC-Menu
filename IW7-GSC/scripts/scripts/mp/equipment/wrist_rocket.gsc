@@ -1,37 +1,24 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: 3595.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 21
- * Decompile Time: 5 ms
- * Timestamp: 10/27/2023 12:30:51 AM
-*******************************************************************/
+/*********************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\mp\equipment\wrist_rocket.gsc
+*********************************************************/
 
-//Function Number: 1
-wristrocketinit()
-{
+wristrocketinit() {
 	level._effect["wristrocket_explode"] = loadfx("vfx/iw7/_requests/mp/power/vfx_wrist_rocket_exp.vfx");
 	level._effect["wristrocket_thruster"] = loadfx("vfx/iw7/_requests/mp/power/vfx_wrist_rocket_thruster");
 }
 
-//Function Number: 2
-wristrocket_set()
-{
+wristrocket_set() {
 	thread wristrocket_watcheffects();
 }
 
-//Function Number: 3
-wristrocket_unset()
-{
+wristrocket_unset() {
 	self notify("wristRocket_unset");
 }
 
-//Function Number: 4
-wristrocketused(param_00)
-{
-	if(param_00.tickpercent == 1)
-	{
+wristrocketused(param_00) {
+	if(param_00.tickpercent == 1) {
 		return;
 	}
 
@@ -46,9 +33,7 @@ wristrocketused(param_00)
 	var_01 thread wristrocket_watchstuck();
 }
 
-//Function Number: 5
-wristrocket_watchfuse(param_00)
-{
+wristrocket_watchfuse(param_00) {
 	self endon("death");
 	self.triggerportableradarping endon("disconnect");
 	self notify("wristRocket_watchFuse");
@@ -57,15 +42,12 @@ wristrocket_watchfuse(param_00)
 	thread wristrocket_explode();
 }
 
-//Function Number: 6
-wristrocket_watchstuck()
-{
+wristrocket_watchstuck() {
 	self endon("death");
 	self.triggerportableradarping endon("disconnect");
 	self playloopsound("wrist_rocket_fire_tail");
 	self waittill("missile_stuck",var_00);
-	if(isplayer(var_00))
-	{
+	if(isplayer(var_00)) {
 		self.triggerportableradarping scripts\mp\_weapons::grenadestuckto(self,var_00);
 	}
 
@@ -75,26 +57,20 @@ wristrocket_watchstuck()
 	thread wristrocket_watchfuse(1);
 }
 
-//Function Number: 7
-wristrocket_explode()
-{
+wristrocket_explode() {
 	self setscriptablepartstate("beacon","neutral",0);
 	self setscriptablepartstate("explode","active",0);
 	thread wristrocket_delete();
 }
 
-//Function Number: 8
-wristrocket_delete()
-{
+wristrocket_delete() {
 	self notify("death");
 	self.exploding = 1;
 	wait(0.1);
 	self delete();
 }
 
-//Function Number: 9
-wristrocket_createrocket(param_00)
-{
+wristrocket_createrocket(param_00) {
 	var_01 = scripts\mp\_utility::_magicbullet("wristrocket_proj_mp",param_00.origin,param_00.origin + anglestoforward(self getgunangles()),self);
 	var_01.triggerportableradarping = self;
 	var_01.team = self.team;
@@ -106,18 +82,14 @@ wristrocket_createrocket(param_00)
 	return var_01;
 }
 
-//Function Number: 10
-wristrocket_watcheffects()
-{
+wristrocket_watcheffects() {
 	self endon("disconnect");
 	self notify("wristRocket_watchEffects");
 	self endon("wristRocket_watchEffects");
 	var_00 = 0;
-	for(;;)
-	{
+	for(;;) {
 		var_01 = spawnstruct();
-		if(var_00)
-		{
+		if(var_00) {
 			childthread wristrocket_watcheffectsraceheldoffhandbreak(var_01);
 		}
 		else
@@ -138,32 +110,26 @@ wristrocket_watcheffects()
 		var_05 = scripts\mp\_utility::istrue(var_01.var_E6);
 		var_06 = scripts\mp\_utility::istrue(var_01.unset);
 		var_07 = scripts\mp\_utility::istrue(var_01.heldoffhandbreak);
-		if(var_05)
-		{
+		if(var_05) {
 			self notify("wristRocket_watchEffectsRaceEnd");
 			thread wristrocket_endeffects();
 			return;
 		}
-		else if(var_06)
-		{
+		else if(var_06) {
 			self notify("wristRocket_watchEffectsRaceEnd");
 			thread wristrocket_endeffects();
 			return;
 		}
-		else if(var_04)
-		{
+		else if(var_04) {
 			thread wristrocket_endeffects();
 		}
-		else if(var_07)
-		{
+		else if(var_07) {
 			thread wristrocket_endeffects();
 		}
-		else if(var_03)
-		{
+		else if(var_03) {
 			thread wristrocket_endeffects();
 		}
-		else if(var_02)
-		{
+		else if(var_02) {
 			thread wristrocket_begineffects();
 			var_00 = 1;
 		}
@@ -172,15 +138,11 @@ wristrocket_watcheffects()
 	}
 }
 
-//Function Number: 11
-wristrocket_watcheffectsracegrenadepullback(param_00)
-{
+wristrocket_watcheffectsracegrenadepullback(param_00) {
 	self endon("wristRocket_watchEffectsRaceEnd");
-	for(;;)
-	{
+	for(;;) {
 		self waittill("grenade_pullback",var_01);
-		if(var_01 == "wristrocket_mp")
-		{
+		if(var_01 == "wristrocket_mp") {
 			break;
 		}
 	}
@@ -189,15 +151,11 @@ wristrocket_watcheffectsracegrenadepullback(param_00)
 	self notify("wristRocket_watchEffectsRaceStart");
 }
 
-//Function Number: 12
-wristrocket_watcheffectsracegrenadefired(param_00)
-{
+wristrocket_watcheffectsracegrenadefired(param_00) {
 	self endon("wristRocket_watchEffectsRaceEnd");
-	for(;;)
-	{
+	for(;;) {
 		self waittill("grenade_fire",var_01,var_02);
-		if(var_02 == "wristrocket_mp")
-		{
+		if(var_02 == "wristrocket_mp") {
 			break;
 		}
 	}
@@ -206,40 +164,31 @@ wristrocket_watcheffectsracegrenadefired(param_00)
 	self notify("wristRocket_watchEffectsRaceStart");
 }
 
-//Function Number: 13
-wristrocket_watcheffectsracesuperstarted(param_00)
-{
+wristrocket_watcheffectsracesuperstarted(param_00) {
 	self endon("wristRocket_watchEffectsRaceEnd");
 	self waittill("super_started");
 	param_00.superstarted = 1;
 	self notify("wristRocket_watchEffectsRaceStart");
 }
 
-//Function Number: 14
-wristrocket_watcheffectsracedeath(param_00)
-{
+wristrocket_watcheffectsracedeath(param_00) {
 	self endon("wristRocket_watchEffectsRaceEnd");
 	self waittill("death");
 	param_00.var_E6 = 1;
 	self notify("wristRocket_watchEffectsRaceStart");
 }
 
-//Function Number: 15
-wristrocket_watcheffectsraceunset(param_00)
-{
+wristrocket_watcheffectsraceunset(param_00) {
 	self endon("wristRocket_watchEffectsRaceEnd");
 	self waittill("wristRocket_unset");
 	param_00.unset = 1;
 	self notify("wristRocket_watchEffectsRaceStart");
 }
 
-//Function Number: 16
-wristrocket_watcheffectsraceheldoffhandbreak(param_00)
-{
+wristrocket_watcheffectsraceheldoffhandbreak(param_00) {
 	self endon("wristRocket_watchEffectsRaceEnd");
 	scripts\engine\utility::waitframe();
-	while(self _meth_854D() == "wristrocket_mp")
-	{
+	while(self _meth_854D() == "wristrocket_mp") {
 		scripts\engine\utility::waitframe();
 	}
 
@@ -247,9 +196,7 @@ wristrocket_watcheffectsraceheldoffhandbreak(param_00)
 	self notify("wristRocket_watchEffectsRaceStart");
 }
 
-//Function Number: 17
-wristrocket_begineffects()
-{
+wristrocket_begineffects() {
 	self notify("wristRocket_beginEffects");
 	self endon("wristRocket_beginEffects");
 	self endon("wristRocket_endEffects");
@@ -258,33 +205,25 @@ wristrocket_begineffects()
 	self setscriptablepartstate("wristRocketWorld","active",0);
 }
 
-//Function Number: 18
-wristrocket_endeffects()
-{
+wristrocket_endeffects() {
 	self notify("wristRocket_endEffects");
 	self setscriptablepartstate("wristRocketWorld","neutral",0);
 }
 
-//Function Number: 19
-wristrocketcooksuicideexplodecheck(param_00,param_01,param_02,param_03,param_04)
-{
-	if(param_01 != param_02)
-	{
+wristrocketcooksuicideexplodecheck(param_00,param_01,param_02,param_03,param_04) {
+	if(param_01 != param_02) {
 		return;
 	}
 
-	if(param_03 != "MOD_SUICIDE")
-	{
+	if(param_03 != "MOD_SUICIDE") {
 		return;
 	}
 
-	if(!isdefined(param_00) || param_00 != param_01)
-	{
+	if(!isdefined(param_00) || param_00 != param_01) {
 		return;
 	}
 
-	if(!isdefined(param_04) || param_04 != "wristrocket_mp")
-	{
+	if(!isdefined(param_04) || param_04 != "wristrocket_mp") {
 		return;
 	}
 
@@ -295,32 +234,25 @@ wristrocketcooksuicideexplodecheck(param_00,param_01,param_02,param_03,param_04)
 	playfx(scripts\engine\utility::getfx("wristrocket_explode"),var_05);
 }
 
-//Function Number: 20
-wristrocket_cleanuponparentdeath(param_00,param_01)
-{
+wristrocket_cleanuponparentdeath(param_00,param_01) {
 	self endon("death");
 	self notify("cleanupOnParentDeath");
 	self endon("cleanupOnParentDeath");
-	if(isdefined(param_00))
-	{
+	if(isdefined(param_00)) {
 		param_00 waittill("death");
 	}
 
-	if(isdefined(param_01))
-	{
+	if(isdefined(param_01)) {
 		wait(param_01);
 	}
 
 	self delete();
 }
 
-//Function Number: 21
-wristrocket_cleanuponownerdisconnect(param_00)
-{
+wristrocket_cleanuponownerdisconnect(param_00) {
 	self endon("death");
 	param_00 waittill("disconnect");
-	if(isdefined(self))
-	{
+	if(isdefined(self)) {
 		self delete();
 	}
 }

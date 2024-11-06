@@ -1,18 +1,11 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: 3146.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 5
- * Decompile Time: 10 ms
- * Timestamp: 10/27/2023 12:26:16 AM
-*******************************************************************/
+/****************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\3146.gsc
+****************************/
 
-//Function Number: 1
-func_2371()
-{
-	if(scripts/asm/asm::func_232E("civilian"))
-	{
+func_2371() {
+	if(scripts/asm/asm::func_232E("civilian")) {
 		return;
 	}
 
@@ -90,26 +83,18 @@ func_2371()
 	scripts/asm/asm::func_2327();
 }
 
-//Function Number: 2
-func_125C4(param_00,param_01,param_02,param_03)
-{
+func_125C4(param_00,param_01,param_02,param_03) {
 	return isdefined(self.vehicle_getspawnerarray);
 }
 
-//Function Number: 3
-func_11B75(param_00,param_01,param_02,param_03)
-{
+func_11B75(param_00,param_01,param_02,param_03) {
 	return !scripts/asm/asm_bb::bb_isanimscripted();
 }
 
-//Function Number: 4
-func_122AA(param_00,param_01,param_02,param_03)
-{
+func_122AA(param_00,param_01,param_02,param_03) {
 	return isdefined(self.var_55ED) && self.var_55ED;
 }
 
-//Function Number: 5
-func_11BF6(param_00,param_01,param_02,param_03)
-{
+func_11BF6(param_00,param_01,param_02,param_03) {
 	return !scripts/asm/asm_bb::bb_iswhizbyrequested();
 }

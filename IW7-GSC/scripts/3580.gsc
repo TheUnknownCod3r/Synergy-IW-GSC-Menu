@@ -1,31 +1,21 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: 3580.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 11
- * Decompile Time: 3 ms
- * Timestamp: 10/27/2023 12:30:47 AM
-*******************************************************************/
+/****************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\3580.gsc
+****************************/
 
-//Function Number: 1
-func_DAF5(param_00)
-{
+func_DAF5(param_00) {
 	thread func_13A55(param_00);
 	thread func_13A6E(param_00);
 }
 
-//Function Number: 2
-func_13A55(param_00)
-{
+func_13A55(param_00) {
 	param_00 endon("death");
 	self waittill("disconnect");
 	param_00 delete();
 }
 
-//Function Number: 3
-func_13A6E(param_00)
-{
+func_13A6E(param_00) {
 	self endon("disconnect");
 	param_00 endon("death");
 	param_00 waittill("missile_stuck");
@@ -36,9 +26,7 @@ func_13A6E(param_00)
 	thread func_13B19(var_02);
 }
 
-//Function Number: 4
-func_13B19(param_00)
-{
+func_13B19(param_00) {
 	self endon("disconnect");
 	param_00 endon("death");
 	var_01 = param_00.objective_position;
@@ -49,11 +37,9 @@ func_13B19(param_00)
 	var_01 thread scripts\mp\_shellshock::func_DAF3();
 	param_00 radiusdamage(var_01.origin,256,100,50,var_01.triggerportableradarping,"MOD_EXPLOSIVE",var_01.weapon_name);
 	var_02 = var_01.ticks;
-	for(var_03 = 0;var_03 < var_02;var_03++)
-	{
+	for(var_03 = 0;var_03 < var_02;var_03++) {
 		wait(0.5);
-		switch(var_03)
-		{
+		switch(var_03) {
 			case 0:
 				param_00 setscriptablepartstate("effects","explode_02",0);
 				break;
@@ -79,9 +65,7 @@ func_13B19(param_00)
 	var_01 delete();
 }
 
-//Function Number: 5
-func_10856(param_00)
-{
+func_10856(param_00) {
 	var_01 = spawn("script_model",param_00.origin);
 	var_01 setmodel("prop_mp_pulse_grenade_temp");
 	var_01.angles = param_00.angles;
@@ -94,17 +78,12 @@ func_10856(param_00)
 	return var_01;
 }
 
-//Function Number: 6
-func_13A3B()
-{
+func_13A3B() {
 	scripts\mp\_damage::monitordamage(50,"pulseGrenade",::func_612B,::func_612C,0);
 }
 
-//Function Number: 7
-func_612B(param_00,param_01,param_02,param_03)
-{
-	if(isdefined(self.triggerportableradarping) && param_00 != self.triggerportableradarping)
-	{
+func_612B(param_00,param_01,param_02,param_03) {
+	if(isdefined(self.triggerportableradarping) && param_00 != self.triggerportableradarping) {
 		param_00 scripts\mp\killstreaks\_killstreaks::_meth_83A0();
 		param_00 notify("destroyed_equipment");
 	}
@@ -114,9 +93,7 @@ func_612B(param_00,param_01,param_02,param_03)
 	self notify("detonateExplosive");
 }
 
-//Function Number: 8
-func_612C(param_00,param_01,param_02,param_03,param_04)
-{
+func_612C(param_00,param_01,param_02,param_03,param_04) {
 	var_05 = param_03;
 	var_05 = scripts\mp\_damage::handlemeleedamage(param_01,param_02,var_05);
 	var_05 = scripts\mp\_damage::handleempdamage(param_01,param_02,var_05);
@@ -124,24 +101,17 @@ func_612C(param_00,param_01,param_02,param_03,param_04)
 	return var_05;
 }
 
-//Function Number: 9
-func_40F3(param_00)
-{
+func_40F3(param_00) {
 	param_00 waittill("death");
 	self delete();
 }
 
-//Function Number: 10
-killcament()
-{
-	if(isdefined(self))
-	{
+killcament() {
+	if(isdefined(self)) {
 		return self.objective_position;
 	}
 }
 
-//Function Number: 11
-func_DAF4()
-{
+func_DAF4() {
 	self shellshock("pulse_grenade_mp",0.3);
 }

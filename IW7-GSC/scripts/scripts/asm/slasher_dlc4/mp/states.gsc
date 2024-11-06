@@ -1,18 +1,11 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\asm\slasher_dlc4\mp\states.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 4
- * Decompile Time: 377 ms
- * Timestamp: 10\27\2023 12:02:13 AM
-*******************************************************************/
+/**********************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\asm\slasher_dlc4\mp\states.gsc
+**********************************************************/
 
-//Function Number: 1
-func_2371()
-{
-	if(scripts\asm\asm::func_232E("slasher_dlc4"))
-	{
+func_2371() {
+	if(scripts\asm\asm::func_232E("slasher_dlc4")) {
 		return;
 	}
 
@@ -150,20 +143,14 @@ func_2371()
 	scripts\asm\asm::func_2327();
 }
 
-//Function Number: 2
-trans_check_move_to_idle_exit_walk0(param_00,param_01,param_02,param_03)
-{
+trans_check_move_to_idle_exit_walk0(param_00,param_01,param_02,param_03) {
 	return scripts\asm\asm_bb::bb_moverequested();
 }
 
-//Function Number: 3
-trans_pass_walk_in_to_walk_loop1(param_00,param_01,param_02,param_03)
-{
+trans_pass_walk_in_to_walk_loop1(param_00,param_01,param_02,param_03) {
 	return scripts\asm\asm_bb::bb_moverequested();
 }
 
-//Function Number: 4
-trans_pass_walk_out_to_move_done3(param_00,param_01,param_02,param_03)
-{
+trans_pass_walk_out_to_move_done3(param_00,param_01,param_02,param_03) {
 	return !scripts\asm\asm_bb::bb_moverequested();
 }

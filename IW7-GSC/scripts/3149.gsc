@@ -1,18 +1,11 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: 3149.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 5
- * Decompile Time: 0 ms
- * Timestamp: 10/27/2023 12:26:17 AM
-*******************************************************************/
+/****************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\3149.gsc
+****************************/
 
-//Function Number: 1
-func_2371()
-{
-	if(scripts/asm/asm::func_232E("gesture"))
-	{
+func_2371() {
+	if(scripts/asm/asm::func_232E("gesture")) {
 		return;
 	}
 
@@ -27,26 +20,18 @@ func_2371()
 	scripts/asm/asm::func_2327();
 }
 
-//Function Number: 2
-func_121A5(param_00,param_01,param_02,param_03)
-{
+func_121A5(param_00,param_01,param_02,param_03) {
 	return !lib_0C4C::func_195F();
 }
 
-//Function Number: 3
-func_121A1(param_00,param_01,param_02,param_03)
-{
+func_121A1(param_00,param_01,param_02,param_03) {
 	return lib_0C4C::func_195F();
 }
 
-//Function Number: 4
-func_121A3(param_00,param_01,param_02,param_03)
-{
+func_121A3(param_00,param_01,param_02,param_03) {
 	return lib_0C4C::func_19D2();
 }
 
-//Function Number: 5
-func_1219F(param_00,param_01,param_02,param_03)
-{
+func_1219F(param_00,param_01,param_02,param_03) {
 	return !lib_0C4C::func_19D2();
 }

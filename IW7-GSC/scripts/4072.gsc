@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: 4072.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 1
- * Decompile Time: 1 ms
- * Timestamp: 10/27/2023 12:31:58 AM
-*******************************************************************/
+/****************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\4072.gsc
+****************************/
 
-//Function Number: 1
-main()
-{
+main() {
 	level._effect["vfx_fire_sml_nosmk"] = loadfx("vfx/iw7/levels/mp_riot/vfx_fire_sml_nosmk.vfx");
 	level._effect["vfx_fire_xsml"] = loadfx("vfx/iw7/levels/mp_riot/vfx_fire_xsml.vfx");
 	level._effect["vfx_fish_tk_sm_skywy"] = loadfx("vfx/iw7/levels/mp_skyway/vfx_fish_tk_sm_skywy.vfx");

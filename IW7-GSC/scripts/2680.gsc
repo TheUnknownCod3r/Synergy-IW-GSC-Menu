@@ -1,35 +1,25 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: 2680.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 5
- * Decompile Time: 1 ms
- * Timestamp: 10/27/2023 12:23:44 AM
-*******************************************************************/
+/****************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\2680.gsc
+****************************/
 
-//Function Number: 1
-frontend_camera_setup(param_00,param_01)
-{
+frontend_camera_setup(param_00,param_01) {
 	level.camera_anchor = spawn("script_model",param_00);
 	level.camera_anchor setmodel("tag_origin");
 	level.camera_anchor.angles = param_01;
 }
 
-//Function Number: 2
-camera_move_helper(param_00,param_01,param_02)
-{
+camera_move_helper(param_00,param_01,param_02) {
 	level.playerviewowner predictstreampos(param_00.origin);
 	var_03 = distance(level.camera_anchor.origin,param_00.origin);
 	var_04 = var_03 / param_01;
-	if(var_04 < 0.05)
-	{
+	if(var_04 < 0.05) {
 		var_04 = 0.05;
 	}
 
 	var_05 = 0;
-	if(param_02)
-	{
+	if(param_02) {
 		var_05 = var_04 * 0.1;
 	}
 
@@ -39,27 +29,22 @@ camera_move_helper(param_00,param_01,param_02)
 	wait(var_04);
 }
 
-//Function Number: 3
-frontend_camera_move(param_00,param_01,param_02,param_03,param_04)
-{
+frontend_camera_move(param_00,param_01,param_02,param_03,param_04) {
 	level endon("game_ended");
 	self endon("disconnect");
-	if(isdefined(level.camera_anchor.move_target))
-	{
+	if(isdefined(level.camera_anchor.move_target)) {
 		level.camera_anchor.origin = level.camera_anchor.move_target.origin;
 		level.camera_anchor.angles = level.camera_anchor.move_target.angles;
 	}
 
 	level notify("camera_move");
 	level endon("camera_move");
-	if(!isdefined(param_01))
-	{
+	if(!isdefined(param_01)) {
 		param_01 = 900;
 	}
 
 	var_05 = param_00;
-	if(param_02)
-	{
+	if(param_02) {
 		level.camera_anchor.origin = var_05.origin;
 		level.camera_anchor.angles = var_05.angles;
 	}
@@ -68,10 +53,8 @@ frontend_camera_move(param_00,param_01,param_02,param_03,param_04)
 		camera_move_helper(var_05,param_01,param_03);
 	}
 
-	while(isdefined(var_05.target))
-	{
-		if(!isdefined(var_05.target))
-		{
+	while(isdefined(var_05.target)) {
+		if(!isdefined(var_05.target)) {
 			return;
 		}
 
@@ -80,15 +63,12 @@ frontend_camera_move(param_00,param_01,param_02,param_03,param_04)
 	}
 
 	level.camera_anchor.move_target = undefined;
-	if(isdefined(param_04))
-	{
-		self thread [[ param_04 ]]();
+	if(isdefined(param_04)) {
+		self thread [[param_04]]();
 	}
 }
 
-//Function Number: 4
-frontend_camera_teleport(param_00,param_01,param_02,param_03,param_04,param_05)
-{
+frontend_camera_teleport(param_00,param_01,param_02,param_03,param_04,param_05) {
 	level endon("game_ended");
 	self endon("disconnect");
 	level notify("camera_teleport");
@@ -102,40 +82,34 @@ frontend_camera_teleport(param_00,param_01,param_02,param_03,param_04,param_05)
 	level.camera_anchor.origin = param_00.origin;
 	level.camera_anchor.angles = param_00.angles;
 	level.camera_anchor.move_target = undefined;
-	if(isdefined(param_02))
-	{
+	if(isdefined(param_02)) {
 		frontendscenecameracinematic(param_02);
 	}
 
 	wait(0.1);
-	if(isdefined(param_05))
-	{
-		[[ param_05 ]]();
+	if(isdefined(param_05)) {
+		[[param_05]]();
 	}
 
 	frontendscenecamerafade(1,param_04);
 	level.transition_interrupted = 0;
 }
 
-//Function Number: 5
-frontend_camera_watcher(param_00)
-{
+frontend_camera_watcher(param_00) {
 	level endon("game_ended");
 	self endon("disconnect");
 	self cameralinkto(level.camera_anchor,"tag_origin");
 	level.active_section = frontendscenegetactivesection();
-	[[ param_00 ]](level.active_section);
+	[[param_00]](level.active_section);
 	scripts\engine\utility::waitframe();
-	for(;;)
-	{
+	for(;;) {
 		var_01 = frontendscenegetactivesection();
-		if(var_01.name == level.active_section.name && var_01.index == level.active_section.index)
-		{
+		if(var_01.name == level.active_section.name && var_01.index == level.active_section.index) {
 			scripts\engine\utility::waitframe();
 			continue;
 		}
 
 		level.active_section = var_01;
-		[[ param_00 ]](var_01);
+		[[param_00]](var_01);
 	}
 }

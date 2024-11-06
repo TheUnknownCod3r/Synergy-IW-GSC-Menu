@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: 4297.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 1
- * Decompile Time: 22 ms
- * Timestamp: 10/27/2023 12:32:03 AM
-*******************************************************************/
+/****************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\4297.gsc
+****************************/
 
-//Function Number: 1
-main()
-{
+main() {
 	var_00 = scripts\engine\utility::createoneshoteffect("vfx_dome_seagulls_01");
 	var_00 scripts\common\createfx::set_origin_and_angles((677.212,-4446.39,-545.908),(0,159,0));
 	var_00.v["fxid"] = "vfx_dome_seagulls_01";

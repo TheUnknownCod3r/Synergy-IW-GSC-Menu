@@ -1,26 +1,17 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\cp\maps\cp_zmb\cp_zmb_bumpercars.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 5
- * Decompile Time: 292 ms
- * Timestamp: 10/27/2023 12:07:56 AM
-*******************************************************************/
+/****************************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\cp\maps\cp_zmb\cp_zmb_bumpercars.gsc
+****************************************************************/
 
-//Function Number: 1
-init_bumper_cars()
-{
+init_bumper_cars() {
 	var_00 = getentarray("bumper_car","targetname");
-	if(!var_00.size)
-	{
+	if(!var_00.size) {
 		return;
 	}
 
-	foreach(var_02 in var_00)
-	{
-		if(var_02.origin == (4113.9,184.9,112))
-		{
+	foreach(var_02 in var_00) {
+		if(var_02.origin == (4113.9,184.9,112)) {
 			var_02.fast_mover = 1;
 		}
 		else
@@ -43,68 +34,54 @@ init_bumper_cars()
 	var_04 = getent("bumpercar_clip","targetname");
 	var_04 connectpaths();
 	var_04 notsolid();
-	foreach(var_06, var_02 in var_00)
-	{
+	foreach(var_06, var_02 in var_00) {
 		var_02.name = "car_" + var_06;
 		var_02 thread kill_zombies();
 		scripts\engine\utility::waitframe();
 	}
 
 	level.bumper_car_impact_spots = scripts\engine\utility::getstructarray("bumpercar_impact","targetname");
-	for(;;)
-	{
+	for(;;) {
 		var_00 = scripts\engine\utility::array_randomize(var_00);
-		foreach(var_06, var_02 in var_00)
-		{
+		foreach(var_06, var_02 in var_00) {
 			var_02 activate_bumper_car(var_06);
 		}
 	}
 }
 
-//Function Number: 2
-activate_bumper_car(param_00)
-{
+activate_bumper_car(param_00) {
 	var_01 = scripts\common\trace::create_character_contents();
 	var_02 = [self];
-	if(!isdefined(self.state))
-	{
+	if(!isdefined(self.state)) {
 		self.state = "rear";
 		self.can_damage = 0;
 	}
 
 	var_03 = 1.75;
-	if(self.fast_mover)
-	{
+	if(self.fast_mover) {
 		var_03 = 1.2;
 	}
 
 	wait(randomfloatrange(1,3));
-	if(self.state == "fwd")
-	{
-		for(;;)
-		{
+	if(self.state == "fwd") {
+		for(;;) {
 			var_04 = function_0288(self.origin + (0,0,60),self.fwd_spot.origin + (0,0,60),32,var_01,var_02,"physicsquery_all");
-			if(var_04.size == 0)
-			{
+			if(var_04.size == 0) {
 				break;
 			}
 
 			var_05 = 0;
-			for(var_06 = 0;var_06 < var_04.size;var_06++)
-			{
-				if(!isdefined(var_04[var_06]["entity"]))
-				{
+			for(var_06 = 0;var_06 < var_04.size;var_06++) {
+				if(!isdefined(var_04[var_06]["entity"])) {
 					continue;
 				}
 
-				if(isplayer(var_04[var_06]["entity"]) && scripts\cp\cp_laststand::player_in_laststand(var_04[var_06]["entity"]) || scripts\engine\utility::istrue(var_04[var_06]["entity"].isreviving))
-				{
+				if(isplayer(var_04[var_06]["entity"]) && scripts\cp\cp_laststand::player_in_laststand(var_04[var_06]["entity"]) || scripts\engine\utility::istrue(var_04[var_06]["entity"].isreviving)) {
 					var_05 = 1;
 				}
 			}
 
-			if(var_05)
-			{
+			if(var_05) {
 				return;
 			}
 			else
@@ -115,8 +92,7 @@ activate_bumper_car(param_00)
 			wait(0.1);
 		}
 
-		if(self.fast_mover)
-		{
+		if(self.fast_mover) {
 			self playsoundonmovingent("trap_bumper_car_mvmt_short");
 		}
 		else
@@ -148,30 +124,24 @@ activate_bumper_car(param_00)
 	}
 	else
 	{
-		for(;;)
-		{
+		for(;;) {
 			var_04 = function_0288(self.origin + (0,0,60),self.rear_spot.origin + (0,0,60),32,var_01,var_02,"physicsquery_all");
-			if(var_04.size == 0)
-			{
+			if(var_04.size == 0) {
 				break;
 			}
 
 			var_05 = 0;
-			for(var_06 = 0;var_06 < var_04.size;var_06++)
-			{
-				if(!isdefined(var_04[var_06]["entity"]))
-				{
+			for(var_06 = 0;var_06 < var_04.size;var_06++) {
+				if(!isdefined(var_04[var_06]["entity"])) {
 					continue;
 				}
 
-				if(isplayer(var_04[var_06]["entity"]) && scripts\cp\cp_laststand::player_in_laststand(var_04[var_06]["entity"]) || scripts\engine\utility::istrue(var_04[var_06]["entity"].isreviving))
-				{
+				if(isplayer(var_04[var_06]["entity"]) && scripts\cp\cp_laststand::player_in_laststand(var_04[var_06]["entity"]) || scripts\engine\utility::istrue(var_04[var_06]["entity"].isreviving)) {
 					var_05 = 1;
 				}
 			}
 
-			if(var_05)
-			{
+			if(var_05) {
 				return;
 			}
 			else
@@ -182,8 +152,7 @@ activate_bumper_car(param_00)
 			wait(0.1);
 		}
 
-		if(self.fast_mover)
-		{
+		if(self.fast_mover) {
 			self playsoundonmovingent("trap_bumper_car_mvmt_short");
 		}
 		else
@@ -214,8 +183,7 @@ activate_bumper_car(param_00)
 		self.state = "fwd";
 	}
 
-	if(isdefined(self.nav_obs))
-	{
+	if(isdefined(self.nav_obs)) {
 		destroynavobstacle(self.nav_obs);
 	}
 
@@ -224,8 +192,7 @@ activate_bumper_car(param_00)
 	self.can_damage = 0;
 	self.nav_obs = function_027A(self.origin,(56,32,32),self.angles);
 	var_07 = scripts\engine\utility::getclosest(self.origin,level.bumper_car_impact_spots,128);
-	if(isdefined(var_07))
-	{
+	if(isdefined(var_07)) {
 		playfx(level._effect["bumpercar_impact"],var_07.origin,anglestoforward((0,270,0)),anglestoup((0,270,0)));
 	}
 
@@ -235,19 +202,13 @@ activate_bumper_car(param_00)
 	self setscriptablepartstate("lights","lights_off");
 }
 
-//Function Number: 3
-kill_zombies()
-{
-	for(;;)
-	{
+kill_zombies() {
+	for(;;) {
 		self.dmgtrigger waittill("trigger",var_00);
 		var_01 = getentarray("placed_transponder","script_noteworthy");
-		foreach(var_03 in var_01)
-		{
-			if(var_00 == var_03)
-			{
-				if(isdefined(var_03.triggerportableradarping) && var_03.triggerportableradarping scripts\cp\utility::is_valid_player(1))
-				{
+		foreach(var_03 in var_01) {
+			if(var_00 == var_03) {
+				if(isdefined(var_03.triggerportableradarping) && var_03.triggerportableradarping scripts\cp\utility::is_valid_player(1)) {
 					var_03.triggerportableradarping scripts\cp\cp_weapon::placeequipmentfailed(var_00.weapon_name,1,var_00.origin);
 				}
 
@@ -255,18 +216,15 @@ kill_zombies()
 			}
 		}
 
-		if(!self.can_damage || isdefined(var_00.flung))
-		{
+		if(!self.can_damage || isdefined(var_00.flung)) {
 			continue;
 		}
 
-		if(!isplayer(var_00) && !scripts\cp\utility::should_be_affected_by_trap(var_00))
-		{
+		if(!isplayer(var_00) && !scripts\cp\utility::should_be_affected_by_trap(var_00)) {
 			continue;
 		}
 
-		if((isplayer(var_00) && !scripts\cp\cp_laststand::player_in_laststand(var_00)) || var_00.team == "allies")
-		{
+		if((isplayer(var_00) && !scripts\cp\cp_laststand::player_in_laststand(var_00)) || var_00.team == "allies") {
 			var_00 thread push_and_damage_player(self);
 			continue;
 		}
@@ -275,9 +233,7 @@ kill_zombies()
 	}
 }
 
-//Function Number: 4
-fling_zombie(param_00)
-{
+fling_zombie(param_00) {
 	self endon("death");
 	var_01 = 250;
 	self playsound("bumpercars_fling_zombie");
@@ -290,17 +246,14 @@ fling_zombie(param_00)
 	self.disable_armor = 1;
 	self.nocorpse = 1;
 	var_02 = scripts\engine\utility::get_array_of_closest(self.origin,level.players,undefined,4,var_01);
-	foreach(var_04 in var_02)
-	{
+	foreach(var_04 in var_02) {
 		var_04 thread scripts\cp\cp_vo::try_to_play_vo("trap_kill_rover","zmb_comment_vo","medium",5,0,0,1,25);
 	}
 
 	self dodamage(self.health + 1000,param_00.origin);
 }
 
-//Function Number: 5
-push_and_damage_player(param_00)
-{
+push_and_damage_player(param_00) {
 	self endon("death");
 	self playsound("bumpercars_push_damage_plr");
 	self.flung = 1;
@@ -308,8 +261,7 @@ push_and_damage_player(param_00)
 	self setorigin(var_01[0].origin,0);
 	self setvelocity(vectornormalize(self.origin - param_00.origin) * 300 + (0,0,100));
 	wait(0.1);
-	if(isplayer(self) && !scripts\engine\utility::istrue(self.isrewinding))
-	{
+	if(isplayer(self) && !scripts\engine\utility::istrue(self.isrewinding)) {
 		self dodamage(self.health + 100,param_00.origin);
 	}
 

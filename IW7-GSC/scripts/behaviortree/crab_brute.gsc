@@ -1,18 +1,11 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: behaviortree\crab_brute.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 2
- * Decompile Time: 110 ms
- * Timestamp: 10\26\2023 11:58:20 PM
-*******************************************************************/
+/***********************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\behaviortree\crab_brute.gsc
+***********************************************/
 
-//Function Number: 1
-func_2AD0()
-{
-	if(isdefined(level.var_119E["crab_brute"]))
-	{
+func_2AD0() {
+	if(isdefined(level.var_119E["crab_brute"])) {
 		return;
 	}
 
@@ -34,9 +27,7 @@ func_2AD0()
 	level.var_119E["crab_brute"] = var_00;
 }
 
-//Function Number: 2
-func_DEE8()
-{
+func_DEE8() {
 	func_2AD0();
 	function_02D8("crab_brute");
 }

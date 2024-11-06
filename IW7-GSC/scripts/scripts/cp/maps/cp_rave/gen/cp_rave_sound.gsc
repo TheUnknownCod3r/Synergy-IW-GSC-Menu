@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\cp\maps\cp_rave\gen\cp_rave_sound.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 1
- * Decompile Time: 228 ms
- * Timestamp: 10/27/2023 12:05:50 AM
-*******************************************************************/
+/*****************************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\cp\maps\cp_rave\gen\cp_rave_sound.gsc
+*****************************************************************/
 
-//Function Number: 1
-main()
-{
+main() {
 	var_00 = scripts\common\createfx::createloopsound();
 	var_00 scripts\common\createfx::set_origin_and_angles((2349,-2476.84,81.8875),(270,0,0));
 	var_00.v["soundalias"] = "amb_sa_big_light_1";

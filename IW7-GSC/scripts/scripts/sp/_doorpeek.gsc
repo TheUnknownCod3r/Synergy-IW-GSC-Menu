@@ -1,38 +1,27 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\sp\_doorpeek.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 83
- * Decompile Time: 3773 ms
- * Timestamp: 10/27/2023 12:24:10 AM
-*******************************************************************/
+/********************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\sp\_doorpeek.gsc
+********************************************/
 
-//Function Number: 1
-func_11620(param_00,param_01,param_02,param_03)
-{
-	if(!isdefined(param_03))
-	{
+func_11620(param_00,param_01,param_02,param_03) {
+	if(!isdefined(param_03)) {
 		param_03 = 0;
 	}
 
 	var_04 = [level.var_5A23[param_00].var_5A25,level.var_5A23[param_00].var_5A2A];
-	foreach(var_06 in var_04)
-	{
+	foreach(var_06 in var_04) {
 		var_06 giveweaponpassives(param_01,param_02);
 	}
 
-	if(param_03)
-	{
+	if(param_03) {
 		function_0217();
 	}
 
 	level.var_5A23[param_00].var_5A24 = level.var_5A23[param_00].var_5A25.angles;
 }
 
-//Function Number: 2
-func_59CB()
-{
+func_59CB() {
 	func_1206();
 	func_11FB();
 	func_120C();
@@ -49,47 +38,35 @@ func_59CB()
 	scripts\sp\_utility::func_16EB("peek_only_hint_pc",&"SCRIPT_DOORPEEK_HINT_PEEK_ONLY_PC",::func_C9F7);
 }
 
-//Function Number: 3
-func_C9F7()
-{
+func_C9F7() {
 	return !scripts\engine\utility::flag("show_peek_hint");
 }
 
-//Function Number: 4
-func_59CC()
-{
+func_59CC() {
 	func_118F();
 	func_118E();
 	level.player notifyonplayercommand("kick_pressed","+stance");
 	level.player notifyonplayercommand("kick_pressed_pc","+activate");
 }
 
-//Function Number: 5
-func_794D(param_00)
-{
+func_794D(param_00) {
 	var_01 = getentarray(param_00,"targetname");
 	var_02 = func_12A6(var_01,"door_peek_door");
 	return var_02;
 }
 
-//Function Number: 6
-func_118F()
-{
+func_118F() {
 	var_00 = scripts\engine\utility::getstructarray("door_peek_struct","script_noteworthy");
-	foreach(var_02 in var_00)
-	{
-		if(isdefined(var_02.spawnimpulsefield) && var_02.spawnimpulsefield & 1)
-		{
+	foreach(var_02 in var_00) {
+		if(isdefined(var_02.spawnimpulsefield) && var_02.spawnimpulsefield & 1) {
 			var_03 = getentarray(var_02.var_336,"targetname");
 			var_04 = scripts\engine\utility::getstructarray(var_02.var_336,"targetname");
 			var_03 = scripts\engine\utility::array_combine(var_03,var_04);
-			if(var_02.spawnimpulsefield & 2)
-			{
+			if(var_02.spawnimpulsefield & 2) {
 				thread func_59BE(var_02.var_336);
 			}
 
-			if(var_02.spawnimpulsefield & 4)
-			{
+			if(var_02.spawnimpulsefield & 4) {
 				thread func_59BE(var_02.var_336,1);
 			}
 
@@ -101,40 +78,30 @@ func_118F()
 		var_05 = scripts\engine\utility::array_combine(var_05,scripts\engine\utility::getstructarray(var_02.var_336,"targetname"));
 		var_06 = func_12A6(var_05,"door_peek_door");
 		var_07 = var_06.var_EE52;
-		if(var_07 == "airlock" || var_07 == "airlockcombat")
-		{
+		if(var_07 == "airlock" || var_07 == "airlockcombat") {
 			var_06 scripts\sp\_dooruse::func_1AB5(0);
 		}
 	}
 }
 
-//Function Number: 7
-func_118E()
-{
+func_118E() {
 	var_00 = scripts\engine\utility::getstructarray("door_peek_struct","script_noteworthy");
-	foreach(var_02 in var_00)
-	{
-		if(isdefined(var_02.var_336) && var_02.var_336 == "door_peek_armory")
-		{
+	foreach(var_02 in var_00) {
+		if(isdefined(var_02.var_336) && var_02.var_336 == "door_peek_armory") {
 			thread func_59BE(var_02.var_336);
 		}
 	}
 }
 
-//Function Number: 8
-func_11FA()
-{
+func_11FA() {
 	self give_mp_super_weapon(self.origin);
 	scripts\sp\_utility::func_F3E0(1);
 	scripts\sp\_utility::func_F415(1);
 }
 
-//Function Number: 9
-func_13B2(param_00,param_01)
-{
+func_13B2(param_00,param_01) {
 	level.player endon("death");
-	if(!param_01)
-	{
+	if(!param_01) {
 		level endon(param_00 + "door_peek_main_side_used");
 		level waittill(param_00 + "door_peek_reverse_side_used");
 	}
@@ -148,13 +115,10 @@ func_13B2(param_00,param_01)
 	self.origin = self.ogorigin;
 }
 
-//Function Number: 10
-func_1207(param_00,param_01,param_02,param_03)
-{
+func_1207(param_00,param_01,param_02,param_03) {
 	level endon(param_00 + "door_peek_deleted");
 	level endon(param_00 + "door_peek_disabled");
-	if(!isdefined(param_03) || param_03 == 0)
-	{
+	if(!isdefined(param_03) || param_03 == 0) {
 		level endon(param_00 + "door_peek_kick");
 	}
 
@@ -168,13 +132,10 @@ func_1207(param_00,param_01,param_02,param_03)
 	func_11D6(param_00,param_01);
 }
 
-//Function Number: 11
-func_1208(param_00,param_01,param_02,param_03)
-{
+func_1208(param_00,param_01,param_02,param_03) {
 	level.player endon("death");
 	var_04 = [param_00 + "door_peek_deleted",param_00 + "door_peek_disabled",param_00 + "door_peek_back_off",param_00 + "door_peek_sprint",param_00 + "door_peek_pop_open",param_00 + "door_kick_newdoor_think"];
-	if(!isdefined(param_03) || param_03 == 0)
-	{
+	if(!isdefined(param_03) || param_03 == 0) {
 		var_04[var_04.size] = param_00 + "door_peek_kick";
 	}
 
@@ -182,22 +143,18 @@ func_1208(param_00,param_01,param_02,param_03)
 	level.player.var_5818 = undefined;
 }
 
-//Function Number: 12
-func_1211(param_00,param_01,param_02,param_03)
-{
+func_1211(param_00,param_01,param_02,param_03) {
 	level.player endon("death");
 	level endon(param_00 + "door_peek_deleted");
 	level endon(param_00 + "door_peek_disabled");
-	if(!isdefined(param_03) || param_03 == 0)
-	{
+	if(!isdefined(param_03) || param_03 == 0) {
 		level endon(param_00 + "door_peek_kick");
 	}
 
 	level endon(param_00 + "door_peek_back_off");
 	level endon(param_00 + "door_peek_sprint");
 	level endon(param_00 + "door_peek_pop_open");
-	if(!param_01)
-	{
+	if(!param_01) {
 		level endon(param_00 + "door_peek_reverse_side_used");
 	}
 	else
@@ -205,8 +162,7 @@ func_1211(param_00,param_01,param_02,param_03)
 		level endon(param_00 + "door_peek_main_side_used");
 	}
 
-	if(!isdefined(level.var_5A23[param_00]))
-	{
+	if(!isdefined(level.var_5A23[param_00])) {
 		level.var_5A23[param_00] = spawnstruct();
 	}
 
@@ -216,8 +172,7 @@ func_1211(param_00,param_01,param_02,param_03)
 	level.var_5A23[param_00].var_5A57 = level.var_5A23[param_00].var_5978.var_EE52;
 	level.var_5A23[param_00].var_5978 scripts\sp\_utility::func_23B7("doorpeek_door");
 	var_05 = func_12A6(var_04,"door_peek_struct");
-	if(!param_01)
-	{
+	if(!param_01) {
 		var_06 = 1;
 		var_07 = func_12A6(var_04,"door_peek_animstruct");
 		level.var_5A23[param_00].var_5A25 = var_05 scripts\engine\utility::spawn_tag_origin();
@@ -229,8 +184,7 @@ func_1211(param_00,param_01,param_02,param_03)
 		level.var_5A23[param_00].var_A5A9 = var_08 scripts\engine\utility::spawn_tag_origin();
 		level.var_5A23[param_00].var_A5A9 linkto(level.var_5A23[param_00].var_5A25);
 		var_09 = -140;
-		if(isdefined(var_05.var_EE0E))
-		{
+		if(isdefined(var_05.var_EE0E)) {
 			var_09 = var_05.var_EE0E * -1;
 		}
 
@@ -249,8 +203,7 @@ func_1211(param_00,param_01,param_02,param_03)
 		level.var_5A23[param_00].var_A5AA = var_0A scripts\engine\utility::spawn_tag_origin();
 		level.var_5A23[param_00].var_A5AA linkto(level.var_5A23[param_00].var_5A26);
 		var_09 = 140;
-		if(isdefined(var_05.var_EE0D))
-		{
+		if(isdefined(var_05.var_EE0D)) {
 			var_09 = var_05.var_EE0D;
 		}
 
@@ -263,8 +216,7 @@ func_1211(param_00,param_01,param_02,param_03)
 	level.var_5A23[param_00].var_5A03 = func_12A6(var_04,"door_peek_clip");
 	level.var_5A23[param_00].var_5A03 linkto(level.var_5A23[param_00].var_5978);
 	level.var_5A23[param_00].var_5A56 = func_12A6(var_04,"door_peek_static_clip");
-	if(!param_01)
-	{
+	if(!param_01) {
 		var_0B = func_12A6(var_04,"door_kick_interact");
 		level.var_5A23[param_00].var_4C26 = spawn("script_origin",var_0B.origin);
 		level.var_5A23[param_00].var_4C26.origin = var_0B.origin;
@@ -282,8 +234,7 @@ func_1211(param_00,param_01,param_02,param_03)
 
 	level.var_5A23[param_00].var_C9D4 = 0;
 	level.var_5A23[param_00].var_5A21 = 0;
-	if(!param_01)
-	{
+	if(!param_01) {
 		level.var_5A23[param_00].var_C9FE = func_1298(level.var_5A23[param_00].var_5A57,param_01);
 	}
 	else
@@ -292,11 +243,9 @@ func_1211(param_00,param_01,param_02,param_03)
 	}
 
 	level.var_5A23[param_00].var_1B12 = 0;
-	if(isdefined(level.var_5A23[param_00].var_5978.script_threshold))
-	{
+	if(isdefined(level.var_5A23[param_00].var_5978.script_threshold)) {
 		level.var_5A23[param_00].var_1B12 = level.var_5A23[param_00].var_5978.script_threshold;
-		if(!param_01)
-		{
+		if(!param_01) {
 			level.var_5A23[param_00].var_5A2A.angles = level.var_5A23[param_00].var_5A2A.angles - (0,level.var_5A23[param_00].var_1B12,0);
 		}
 		else
@@ -306,20 +255,17 @@ func_1211(param_00,param_01,param_02,param_03)
 	}
 
 	wait(0.05);
-	if(isdefined(level.var_5A23[param_00].var_4C1C))
-	{
+	if(isdefined(level.var_5A23[param_00].var_4C1C)) {
 		scripts\engine\utility::flag_wait(level.var_5A23[param_00].var_4C1C);
 	}
 
-	if(!isdefined(level.var_5A23[param_00].var_5978))
-	{
+	if(!isdefined(level.var_5A23[param_00].var_5978)) {
 		level notify(param_00 + "door_peek_deleted");
 	}
 
 	func_11F8(param_00,param_01);
 	thread func_1207(param_00,param_01,param_02,param_03);
-	if(param_01)
-	{
+	if(param_01) {
 		level.var_5A23[param_00].var_5978 unlink();
 		var_0C = level.var_5A23[param_00].var_C9FF.var_11782;
 		level.var_5A23[param_00].var_5A2A.origin = level.var_5A23[param_00].var_5A2A.origin + var_0C * anglestoforward(level.var_5A23[param_00].var_5A26.angles);
@@ -328,13 +274,10 @@ func_1211(param_00,param_01,param_02,param_03)
 
 	thread func_120D(param_00,level.var_5A23[param_00].var_5978,level.var_5A23[param_00].var_5A03);
 	childthread func_120E(param_00);
-	if(!isdefined(param_02))
-	{
-		if(level.var_5A23[param_00].var_5A57 != "airlock")
-		{
+	if(!isdefined(param_02)) {
+		if(level.var_5A23[param_00].var_5A57 != "airlock") {
 			thread func_1209(param_00,level.var_5A23[param_00].var_5978,param_01,level.var_5A23[param_00].var_5A03);
-			if(!param_01)
-			{
+			if(!param_01) {
 				thread func_11EA(param_00,level.var_5A23[param_00].var_5978,param_01,level.var_5A23[param_00].var_5A03,level.var_5A23[param_00].var_5A25);
 			}
 			else
@@ -348,8 +291,7 @@ func_1211(param_00,param_01,param_02,param_03)
 	level notify(param_00 + "door_peek_start");
 	level notify("door_peek_start");
 	thread scripts\engine\utility::flag_set_delayed(param_00 + "door_peek_can_kick",level.var_5A23[param_00].var_C9FE.var_119D5);
-	if(param_01)
-	{
+	if(param_01) {
 		level notify(param_00 + "door_peek_reverse_side_used");
 		level notify("door_peek_reverse_side_used");
 	}
@@ -372,13 +314,10 @@ func_1211(param_00,param_01,param_02,param_03)
 	level notify(param_00 + "door_kick_newdoor_think");
 }
 
-//Function Number: 13
-func_11F8(param_00,param_01)
-{
+func_11F8(param_00,param_01) {
 	level.player endon("death");
 	level endon(param_00 + "door_peek_disabled");
-	if(!param_01)
-	{
+	if(!param_01) {
 		var_02 = level.var_5A23[param_00].var_4C26;
 	}
 	else
@@ -391,8 +330,7 @@ func_11F8(param_00,param_01)
 	var_02 thread func_13B2(param_00,param_01);
 	var_02 thread func_11F6(param_00);
 	var_03 = 0;
-	if(level.var_5A23[param_00].var_5A57 == "armory" || level.var_5A23[param_00].var_5A57 == "armoryajar")
-	{
+	if(level.var_5A23[param_00].var_5A57 == "armory" || level.var_5A23[param_00].var_5A57 == "armoryajar") {
 		var_03 = 1;
 	}
 
@@ -402,9 +340,7 @@ func_11F8(param_00,param_01)
 	level.var_5A23[param_00].var_5A56 hide();
 }
 
-//Function Number: 14
-func_11F6(param_00)
-{
+func_11F6(param_00) {
 	level.player endon("death");
 	self endon("trigger");
 	level waittill(param_00 + "door_peek_disabled");
@@ -412,11 +348,8 @@ func_11F6(param_00)
 	self.origin = self.ogorigin;
 }
 
-//Function Number: 15
-func_1202(param_00,param_01)
-{
-	if(!param_01)
-	{
+func_1202(param_00,param_01) {
+	if(!param_01) {
 		var_02 = level.var_5A23[param_00].var_C9FE;
 		var_03 = "ges_doorpeek_" + func_1297(level.var_5A23[param_00].var_5A57);
 		var_04 = level.var_5A23[param_00].var_59FF;
@@ -431,18 +364,15 @@ func_1202(param_00,param_01)
 	}
 
 	var_06 = func_12AC(param_00,param_01);
-	if(isdefined(var_06))
-	{
+	if(isdefined(var_06)) {
 		var_03 = var_06;
 	}
 
-	if(!scripts\engine\utility::flag(param_00 + "door_peek_handle_down"))
-	{
+	if(!scripts\engine\utility::flag(param_00 + "door_peek_handle_down")) {
 		var_07 = 0.4;
 		level.var_5A23[param_00].var_C9FD = scripts\sp\_utility::func_10639("player_rig");
 		var_08 = level.player _meth_84C6("currentViewModel");
-		if(isdefined(var_08))
-		{
+		if(isdefined(var_08)) {
 			level.var_5A23[param_00].var_C9FD setmodel(var_08);
 		}
 
@@ -468,8 +398,7 @@ func_1202(param_00,param_01)
 		var_14 = 20;
 		var_15 = 40;
 		var_16 = 0;
-		if(var_13 > var_14)
-		{
+		if(var_13 > var_14) {
 			var_16 = min(var_13 - var_14 / var_15 - var_14,1) * var_12;
 		}
 
@@ -477,21 +406,18 @@ func_1202(param_00,param_01)
 		var_18 = 30;
 		var_19 = 75;
 		var_1A = 0;
-		if(var_17 > var_18)
-		{
+		if(var_17 > var_18) {
 			var_1A = min(var_17 - var_18 / var_19 - var_18,1) * var_12;
 		}
 
 		var_1B = max(var_16,var_1A);
 		var_1C = var_07 + var_1B;
 		scripts\engine\utility::flag_set("doorpeek_hand_on_door");
-		if(var_1B > 0)
-		{
+		if(var_1B > 0) {
 			level.player scripts\engine\utility::delaycall(var_1B,::forceplaygestureviewmodel,var_03);
 			var_04 thread scripts/sp/anim::func_1EC3(level.var_5A23[param_00].var_C9FD,var_05);
 			var_04 scripts\engine\utility::delaythread(var_1B,::scripts/sp/anim::func_1F35,level.var_5A23[param_00].var_C9FD,var_05);
-			if(level.var_5A23[param_00].var_5A57 != "civlever" && level.var_5A23[param_00].var_5A57 != "armoryajar")
-			{
+			if(level.var_5A23[param_00].var_5A57 != "civlever" && level.var_5A23[param_00].var_5A57 != "armoryajar") {
 				level.var_5A23[param_00].var_5978 scripts\engine\utility::delaythread(var_1B,::scripts/sp/anim::func_1F35,level.var_5A23[param_00].var_5978,"doorpeek_" + func_1297(level.var_5A23[param_00].var_5A57) + "_in");
 			}
 		}
@@ -499,8 +425,7 @@ func_1202(param_00,param_01)
 		{
 			level.player forceplaygestureviewmodel(var_03);
 			var_04 thread scripts/sp/anim::func_1F35(level.var_5A23[param_00].var_C9FD,var_05);
-			if(level.var_5A23[param_00].var_5A57 != "civlever" && level.var_5A23[param_00].var_5A57 != "armoryajar")
-			{
+			if(level.var_5A23[param_00].var_5A57 != "civlever" && level.var_5A23[param_00].var_5A57 != "armoryajar") {
 				level.var_5A23[param_00].var_5978 thread scripts/sp/anim::func_1F35(level.var_5A23[param_00].var_5978,"doorpeek_" + func_1297(level.var_5A23[param_00].var_5A57) + "_in");
 			}
 		}
@@ -513,8 +438,7 @@ func_1202(param_00,param_01)
 		level thread scripts\sp\_utility::func_C12D(param_00 + "door_peek_blend_complete",var_1C + 0.1);
 		level thread scripts\sp\_utility::func_C12D("door_peek_blend_complete",var_1C + 0.1);
 		var_04 scripts\engine\utility::delaycall(var_1C + 0.05,::linkto,level.var_5A23[param_00].var_5978);
-		if(var_1B > 0)
-		{
+		if(var_1B > 0) {
 			wait(var_1B);
 		}
 
@@ -524,8 +448,7 @@ func_1202(param_00,param_01)
 		level notify("door_handle_down");
 	}
 
-	if(!param_01)
-	{
+	if(!param_01) {
 		level.player playerlinktodelta(level.var_5A23[param_00].var_C9FD,"tag_player",1,var_02.setdevdvarifuninitialized,var_02.var_B7C1,80,20,0);
 	}
 	else
@@ -533,8 +456,7 @@ func_1202(param_00,param_01)
 		level.player playerlinktodelta(level.var_5A23[param_00].var_C9FD,"tag_player",1,var_02.var_B7C9,var_02.setmatchdataid,80,20,0);
 	}
 
-	if((!isdefined(level.var_5A23[param_00].var_A5AB) || level.var_5A23[param_00].var_A5AB == 0) && level.var_5A23[param_00].var_1B12 == 0)
-	{
+	if((!isdefined(level.var_5A23[param_00].var_A5AB) || level.var_5A23[param_00].var_A5AB == 0) && level.var_5A23[param_00].var_1B12 == 0) {
 		thread func_1203(param_00,param_01);
 	}
 
@@ -543,19 +465,14 @@ func_1202(param_00,param_01)
 	level notify("door_intro_done");
 }
 
-//Function Number: 16
-func_11CE(param_00,param_01)
-{
+func_11CE(param_00,param_01) {
 	level.player endon("death");
 	wait(param_00);
 	param_01 show();
 }
 
-//Function Number: 17
-func_1203(param_00,param_01)
-{
-	if(!param_01)
-	{
+func_1203(param_00,param_01) {
+	if(!param_01) {
 		var_02 = level.var_5A23[param_00].var_C9FE;
 	}
 	else
@@ -567,12 +484,9 @@ func_1203(param_00,param_01)
 	level.var_5A23[param_00].var_5978 playsound("doorpeek_" + func_1299(level.var_5A23[param_00].var_5A57) + "_crack_open");
 }
 
-//Function Number: 18
-func_11F5(param_00,param_01,param_02)
-{
+func_11F5(param_00,param_01,param_02) {
 	level endon(param_00 + "door_script_disabled");
-	if(!param_01)
-	{
+	if(!param_01) {
 		var_03 = 1;
 		var_04 = level.var_5A23[param_00].var_C9FE;
 		var_05 = level.var_5A23[param_00].var_5A25;
@@ -595,32 +509,26 @@ func_11F5(param_00,param_01,param_02)
 	var_0C = 0;
 	var_0D = 0;
 	var_0E = 80;
-	if(level.var_5A23[param_00].var_5A57 == "airlock")
-	{
+	if(level.var_5A23[param_00].var_5A57 == "airlock") {
 		var_0E = 90;
 	}
 
-	for(;;)
-	{
-		if(!param_01 && level.var_5A23[param_00].var_5A21 >= var_0E && !level.var_5A23[param_00].var_C9D4)
-		{
+	for(;;) {
+		if(!param_01 && level.var_5A23[param_00].var_5A21 >= var_0E && !level.var_5A23[param_00].var_C9D4) {
 			break;
 		}
-		else if(param_01 && level.var_5A23[param_00].var_5A21 <= 0 - var_0E && !level.var_5A23[param_00].var_C9D4)
-		{
+		else if(param_01 && level.var_5A23[param_00].var_5A21 <= 0 - var_0E && !level.var_5A23[param_00].var_C9D4) {
 			break;
 		}
 
 		var_0C = 0;
 		var_0F = func_1296(param_00,param_01);
-		if(isdefined(level.var_5A23[param_00].var_72C6) && level.var_5A23[param_00].var_72C6 == 1)
-		{
+		if(isdefined(level.var_5A23[param_00].var_72C6) && level.var_5A23[param_00].var_72C6 == 1) {
 			var_0F = 1;
 		}
 
 		var_10 = var_0F * 1.2 * var_03;
-		if(var_08 == 1 && var_0F == 1)
-		{
+		if(var_08 == 1 && var_0F == 1) {
 			var_10 = var_10 * 1.01 * scripts\sp\_utility::func_E753(var_09,0,1);
 			var_09 = var_09 + 0.5;
 		}
@@ -630,16 +538,13 @@ func_11F5(param_00,param_01,param_02)
 		}
 
 		var_10 = clamp(var_10,0 - var_04.var_B4B9,var_04.var_B4B9);
-		if(!level.var_5A23[param_00].var_C9D4)
-		{
+		if(!level.var_5A23[param_00].var_C9D4) {
 			var_11 = 0;
-			if(isdefined(level.var_5A23[param_00].var_B7C6))
-			{
+			if(isdefined(level.var_5A23[param_00].var_B7C6)) {
 				var_11 = level.var_5A23[param_00].var_B7C6 - var_06;
 			}
 
-			if(!param_01)
-			{
+			if(!param_01) {
 				level.var_5A23[param_00].var_5A21 = max(level.var_5A23[param_00].var_5A21 + var_10,var_11);
 			}
 			else
@@ -648,24 +553,20 @@ func_11F5(param_00,param_01,param_02)
 			}
 
 			level.var_5A23[param_00].var_5A21 = scripts\sp\_utility::func_E753(level.var_5A23[param_00].var_5A21,1);
-			if(isdefined(param_02))
-			{
+			if(isdefined(param_02)) {
 				level.var_5A23[param_00].var_5A21 = min(level.var_5A23[param_00].var_5A21 + var_10,param_02);
 			}
 		}
 
-		if(level.var_5A23[param_00].var_5A21 != var_07)
-		{
+		if(level.var_5A23[param_00].var_5A21 != var_07) {
 			var_0C = 1;
-			if(var_0B == 0)
-			{
+			if(var_0B == 0) {
 				level.var_5A23[param_00].var_5978 playsound("doorpeek_" + func_1299(level.var_5A23[param_00].var_5A57) + "_move_start");
 				level.var_5A23[param_00].var_5978 playloopsound("doorpeek_" + func_1299(level.var_5A23[param_00].var_5A57) + "_move_loop");
 			}
 
 			level.var_5A23[param_00].var_5A2A rotateto(var_0A + (0,0 - level.var_5A23[param_00].var_5A21,0),0.1,0,0);
-			if(!param_01)
-			{
+			if(!param_01) {
 				var_12 = clamp(level.var_5A23[param_00].var_5A21 / var_04.var_B481,0,1) * var_04.var_B4AA - var_04.var_B7C1 + var_04.var_B7C1;
 				level.player playerlinktodelta(level.var_5A23[param_00].var_C9FD,"tag_player",1,var_04.setdevdvarifuninitialized,var_12,80,20,0);
 			}
@@ -675,23 +576,20 @@ func_11F5(param_00,param_01,param_02)
 				level.player playerlinktodelta(level.var_5A23[param_00].var_C9FD,"tag_player",1,var_13,var_04.setmatchdataid,80,20,0);
 			}
 
-			if(isdefined(param_02) && level.var_5A23[param_00].var_5A21 == param_02)
-			{
+			if(isdefined(param_02) && level.var_5A23[param_00].var_5A21 == param_02) {
 				wait(0.1);
 				level.var_5A23[param_00].var_5978 playsound("doorpeek_" + func_1299(level.var_5A23[param_00].var_5A57) + "_blocked");
 				level notify(param_00 + "door_peek_blocked");
 				level notify("door_peek_blocked");
 			}
 
-			if(level.var_5A23[param_00].var_5A57 == "airlock" && var_0D == 0 && level.var_5A23[param_00].var_5A21 >= 64)
-			{
+			if(level.var_5A23[param_00].var_5A57 == "airlock" && var_0D == 0 && level.var_5A23[param_00].var_5A21 >= 64) {
 				var_0D = 1;
 				level notify(param_00 + "door_peek_airlock_ally_move");
 				level notify("door_peek_airlock_ally_move");
 			}
 		}
-		else if(var_0B)
-		{
+		else if(var_0B) {
 			level.var_5A23[param_00].var_5978 stoploopsound("doorpeek_" + func_1299(level.var_5A23[param_00].var_5A57) + "_move_loop");
 			level.var_5A23[param_00].var_5978 playsound("doorpeek_" + func_1299(level.var_5A23[param_00].var_5A57) + "_move_stop");
 		}
@@ -703,12 +601,9 @@ func_11F5(param_00,param_01,param_02)
 	}
 }
 
-//Function Number: 19
-func_1210(param_00,param_01)
-{
+func_1210(param_00,param_01) {
 	func_13C9("open");
-	if(!param_01)
-	{
+	if(!param_01) {
 		var_02 = level.var_5A23[param_00].var_74C0;
 	}
 	else
@@ -726,8 +621,7 @@ func_1210(param_00,param_01)
 	level thread scripts\sp\_utility::func_C12D(param_00 + "door_peek_finished",var_03 + 0.05);
 	level thread scripts\sp\_utility::func_C12D("door_peek_finished",var_03 + 0.05);
 	level notify(param_00 + "door_peek_opened_fully");
-	if(isdefined(level.var_5A1C))
-	{
+	if(isdefined(level.var_5A1C)) {
 		level.var_5A23[param_00].var_C9FD delete();
 		level.var_5A23[param_00].var_59FF delete();
 		level.var_5A23[param_00].var_5A2A delete();
@@ -737,18 +631,14 @@ func_1210(param_00,param_01)
 	thread func_11F9(param_00,level.var_5A23[param_00].var_5978,param_01,0,1);
 }
 
-//Function Number: 20
-func_11F7(param_00,param_01,param_02,param_03)
-{
+func_11F7(param_00,param_01,param_02,param_03) {
 	level.player endon("death");
 	level endon(param_00.var_336 + "door_peek_start");
-	if(!isdefined(param_03))
-	{
+	if(!isdefined(param_03)) {
 		param_03 = 0;
 	}
 
-	if(!param_01)
-	{
+	if(!param_01) {
 		var_04 = level.var_5A23[param_00.var_336].var_5A25;
 	}
 	else
@@ -757,8 +647,7 @@ func_11F7(param_00,param_01,param_02,param_03)
 	}
 
 	var_05 = var_04.angles;
-	if(!param_01)
-	{
+	if(!param_01) {
 		var_05 = var_05 - (0,param_02,0);
 	}
 	else
@@ -771,42 +660,35 @@ func_11F7(param_00,param_01,param_02,param_03)
 	var_08 = anglestoup(var_05);
 	var_09 = self.ogorigin + var_07 * level.var_5A23[param_00.var_336].var_5A58 * 0.5;
 	self unlink();
-	for(;;)
-	{
+	for(;;) {
 		wait(0.05);
 		var_0A = distance2d(level.player.origin,var_09);
 		var_0B = abs(clamp(var_0A / 100,0,1) - 1);
-		if(var_0B > 0)
-		{
+		if(var_0B > 0) {
 			var_0C = level.player geteye();
 			var_0D = level.player getplayerangles();
 			var_0E = anglestoforward(var_0D);
-			if(vectordot(var_0E,var_06) < 0)
-			{
+			if(vectordot(var_0E,var_06) < 0) {
 				continue;
 			}
 
 			var_0F = scripts/sp/math::func_ACE9(var_0C,var_0C + var_0E * 64,self.ogorigin,var_06);
 			var_10 = vectornormalize(var_0F - self.ogorigin);
 			var_0F = self.ogorigin + var_10 * distance(var_0F,self.ogorigin) * 0.75 * var_0B;
-			if(distance(var_0F,self.ogorigin) > 32)
-			{
+			if(distance(var_0F,self.ogorigin) > 32) {
 				var_0F = self.ogorigin + var_10 * 32;
 			}
 
 			var_11 = vectorcross(var_06,var_10);
 			var_12 = 0;
-			if(!param_01 && vectordot(var_11,var_08) > 0 && !param_03)
-			{
+			if(!param_01 && vectordot(var_11,var_08) > 0 && !param_03) {
 				var_12 = 1;
 			}
-			else if(param_01 && vectordot(var_11,var_08) < 0 && !param_03)
-			{
+			else if(param_01 && vectordot(var_11,var_08) < 0 && !param_03) {
 				var_12 = 1;
 			}
 
-			if(var_12)
-			{
+			if(var_12) {
 				var_13 = vectordot(var_10,var_08);
 				var_14 = distance(var_0F,self.ogorigin) * var_13;
 				var_0F = self.ogorigin + var_08 * var_14;
@@ -816,21 +698,17 @@ func_11F7(param_00,param_01,param_02,param_03)
 			continue;
 		}
 
-		if(self.origin != self.ogorigin)
-		{
+		if(self.origin != self.ogorigin) {
 			self.origin = self.ogorigin;
 		}
 	}
 }
 
-//Function Number: 21
-func_11FE(param_00,param_01)
-{
+func_11FE(param_00,param_01) {
 	level.player endon("death");
 	level endon(param_00 + "door_peek_kick");
 	level endon(param_00 + "door_peek_detach");
-	for(;;)
-	{
+	for(;;) {
 		level.player waittill("grenade_pullback");
 		func_13C9("grenade");
 		func_116C(param_00,param_01,0);
@@ -841,22 +719,17 @@ func_11FE(param_00,param_01)
 	}
 }
 
-//Function Number: 22
-func_120A(param_00,param_01)
-{
+func_120A(param_00,param_01) {
 	level.player endon("death");
 	level endon(param_00 + "door_peek_kick");
 	level endon(param_00 + "door_peek_detach");
 	var_02 = 0;
-	for(;;)
-	{
-		if(level.player getteamsize() && !var_02 && !level.player isdualwielding())
-		{
+	for(;;) {
+		if(level.player getteamsize() && !var_02 && !level.player isdualwielding()) {
 			func_116C(param_00,param_01,0);
 			var_02 = 1;
 		}
-		else if(!level.player getteamsize() && var_02)
-		{
+		else if(!level.player getteamsize() && var_02) {
 			func_116C(param_00,param_01,1);
 			var_02 = 0;
 		}
@@ -865,24 +738,18 @@ func_120A(param_00,param_01)
 	}
 }
 
-//Function Number: 23
-func_116C(param_00,param_01,param_02)
-{
-	if(!isdefined(level.var_5A23[param_00].var_C9FD))
-	{
+func_116C(param_00,param_01,param_02) {
+	if(!isdefined(level.var_5A23[param_00].var_C9FD)) {
 		return;
 	}
 
-	if(param_02)
-	{
-		if(!isdefined(level.var_5A23[param_00].var_5A22))
-		{
+	if(param_02) {
+		if(!isdefined(level.var_5A23[param_00].var_5A22)) {
 			level.var_5A23[param_00].var_5A22 = 0;
 		}
 
 		level.var_5A23[param_00].var_5A22--;
-		if(!level.var_5A23[param_00].var_5A22)
-		{
+		if(!level.var_5A23[param_00].var_5A22) {
 			thread func_C9E8(param_00,param_01,param_02);
 			return;
 		}
@@ -890,29 +757,24 @@ func_116C(param_00,param_01,param_02)
 		return;
 	}
 
-	if(!isdefined(level.var_5A23[param_00].var_5A22))
-	{
+	if(!isdefined(level.var_5A23[param_00].var_5A22)) {
 		level.var_5A23[param_00].var_5A22 = 0;
 	}
 
 	level.var_5A23[param_00].var_5A22++;
-	if(level.var_5A23[param_00].var_5A22 == 1)
-	{
+	if(level.var_5A23[param_00].var_5A22 == 1) {
 		thread func_C9E7(param_00,param_01,param_02);
 	}
 }
 
-//Function Number: 24
-func_C9E8(param_00,param_01,param_02)
-{
+func_C9E8(param_00,param_01,param_02) {
 	level endon(param_00 + "door_peek_kick");
 	level endon(param_00 + "door_peek_detach");
 	level notify("peek_arm_on");
 	level endon("peek_arm_on");
 	scripts\engine\utility::flag_waitopen("stopping_doorpeek_gesture");
 	level.player forceplaygestureviewmodel("ges_drophand");
-	if(!param_01)
-	{
+	if(!param_01) {
 		var_03 = level.var_5A23[param_00].var_59FF;
 		var_04 = "doorpeek_" + func_1297(level.var_5A23[param_00].var_5A57) + "_backon";
 	}
@@ -925,9 +787,7 @@ func_C9E8(param_00,param_01,param_02)
 	childthread func_136C(var_03,param_00,var_04);
 }
 
-//Function Number: 25
-func_C9E7(param_00,param_01,param_02)
-{
+func_C9E7(param_00,param_01,param_02) {
 	level endon(param_00 + "door_peek_kick");
 	level endon(param_00 + "door_peek_detach");
 	level notify("peek_arm_off");
@@ -938,9 +798,7 @@ func_C9E7(param_00,param_01,param_02)
 	childthread func_1415();
 }
 
-//Function Number: 26
-func_136C(param_00,param_01,param_02)
-{
+func_136C(param_00,param_01,param_02) {
 	level.player endon("door_peek_hand_off");
 	wait(0.3);
 	scripts\engine\utility::flag_set("doorpeek_hand_on_door");
@@ -948,9 +806,7 @@ func_136C(param_00,param_01,param_02)
 	param_00 scripts/sp/anim::func_1F35(level.var_5A23[param_01].var_C9FD,param_02);
 }
 
-//Function Number: 27
-func_1415()
-{
+func_1415() {
 	scripts\engine\utility::flag_set("stopping_doorpeek_gesture");
 	var_00 = 0.1;
 	level.player stopgestureviewmodel("ges_doorpeek_bulkhead",var_00);
@@ -962,40 +818,31 @@ func_1415()
 	scripts\engine\utility::flag_clear("stopping_doorpeek_gesture");
 }
 
-//Function Number: 28
-func_120B(param_00,param_01,param_02)
-{
+func_120B(param_00,param_01,param_02) {
 	var_03 = param_00.var_EE52;
 	var_04 = undefined;
 	var_05 = undefined;
-	for(;;)
-	{
+	for(;;) {
 		var_04 = var_05;
 		var_06 = func_11FC(param_00);
 		var_05 = func_11FD(param_00);
 		var_07 = 0;
 		var_08 = 0;
-		if(!isdefined(var_05) && isdefined(var_04))
-		{
-			if(!param_01 && var_04)
-			{
+		if(!isdefined(var_05) && isdefined(var_04)) {
+			if(!param_01 && var_04) {
 				var_07 = 1;
 			}
 		}
 
-		if(isdefined(var_05) && isdefined(var_04) && var_05 != var_04)
-		{
-			if((!param_01 && var_05) || param_01 && !var_05)
-			{
+		if(isdefined(var_05) && isdefined(var_04) && var_05 != var_04) {
+			if((!param_01 && var_05) || param_01 && !var_05) {
 				var_07 = 1;
 			}
 		}
 
-		if(!var_07 && isdefined(var_06))
-		{
+		if(!var_07 && isdefined(var_06)) {
 			var_08 = 1;
-			if(!param_01 && var_06 && !isdefined(level.var_5A23[param_00.var_336].var_C9FF))
-			{
+			if(!param_01 && var_06 && !isdefined(level.var_5A23[param_00.var_336].var_C9FF)) {
 				wait(0.05);
 				continue;
 			}
@@ -1007,34 +854,28 @@ func_120B(param_00,param_01,param_02)
 			var_0D = level.player getplayerangles(1);
 			var_0E = combineangles(var_0D,var_0C);
 			var_0F = anglestoforward(var_0E);
-			if(!var_06)
-			{
+			if(!var_06) {
 				var_10 = anglestoforward(level.var_5A23[param_00.var_336].var_5A25.angles);
-				if(acos(clamp(vectordot(var_10,var_0F),-1,1)) > var_09)
-				{
+				if(acos(clamp(vectordot(var_10,var_0F),-1,1)) > var_09) {
 					var_08 = 0;
 				}
 			}
 			else
 			{
 				var_10 = anglestoforward(level.var_5A23[param_01.var_336].var_5A25.angles + (0,180,0));
-				if(acos(clamp(vectordot(var_10,var_0F),-1,1)) > var_09)
-				{
+				if(acos(clamp(vectordot(var_10,var_0F),-1,1)) > var_09) {
 					var_08 = 0;
 				}
 			}
 		}
 
-		if(var_07 || var_08)
-		{
-			if(var_07)
-			{
+		if(var_07 || var_08) {
+			if(var_07) {
 				var_06 = 0;
 			}
 
 			var_11 = 360;
-			if(!var_06)
-			{
+			if(!var_06) {
 				var_12 = level.var_5A23[param_00.var_336].var_74C0;
 			}
 			else
@@ -1047,8 +888,7 @@ func_120B(param_00,param_01,param_02)
 			param_02 connectpaths();
 			var_15 = "ges_doorpeek_bash";
 			var_16 = func_12AB(param_00.var_336,var_06);
-			if(isdefined(var_16))
-			{
+			if(isdefined(var_16)) {
 				var_15 = var_16;
 			}
 
@@ -1056,8 +896,7 @@ func_120B(param_00,param_01,param_02)
 			param_00 playsound("doorpeek_" + func_1299(var_03) + "_bash");
 			level notify(param_00.var_336 + "door_peek_bash_open");
 			level notify("door_peek_bash_open");
-			if(param_01 != var_06)
-			{
+			if(param_01 != var_06) {
 				var_17 = anglestoforward(level.var_5A23[param_00.var_336].var_5A24);
 				var_18 = acos(clamp(vectordot(var_13,var_17),-1,1));
 				var_19 = acos(clamp(vectordot(var_14,var_17),-1,1));
@@ -1088,9 +927,7 @@ func_120B(param_00,param_01,param_02)
 	}
 }
 
-//Function Number: 29
-func_11FC(param_00)
-{
+func_11FC(param_00) {
 	var_01 = level.var_5A23[param_00.var_336].var_5A25;
 	var_02 = anglestoforward(level.var_5A23[param_00.var_336].var_5A2A.angles);
 	var_03 = -1 * anglestoright(level.var_5A23[param_00.var_336].var_5A2A.angles);
@@ -1098,13 +935,11 @@ func_11FC(param_00)
 	var_05 = vectornormalize(var_04);
 	var_06 = level.var_5A23[param_00.var_336].var_5A58 + 8;
 	var_07 = 48;
-	if(distance(level.player.origin,var_01.origin) > var_06 + var_07)
-	{
+	if(distance(level.player.origin,var_01.origin) > var_06 + var_07) {
 		return undefined;
 	}
 
-	if(vectordot(var_04,var_02) < 0)
-	{
+	if(vectordot(var_04,var_02) < 0) {
 		var_08 = 0;
 	}
 	else
@@ -1112,46 +947,39 @@ func_11FC(param_00)
 		var_08 = 1;
 	}
 
-	if(!var_08)
-	{
+	if(!var_08) {
 		var_09 = vectordot(var_05,var_03);
-		if(var_09 <= 0)
-		{
+		if(var_09 <= 0) {
 			return undefined;
 		}
 
 		var_0A = abs(length(var_04) * var_09);
-		if(var_0A > var_06)
-		{
+		if(var_0A > var_06) {
 			return undefined;
 		}
 
 		var_0B = -1 * var_02;
 		var_09 = vectordot(var_05,var_0B);
 		var_0A = abs(length(var_04) * var_09);
-		if(var_0A > var_07)
-		{
+		if(var_0A > var_07) {
 			return undefined;
 		}
 	}
 	else
 	{
 		var_09 = vectordot(var_07,var_05);
-		if(var_0A <= 0)
-		{
+		if(var_0A <= 0) {
 			return undefined;
 		}
 
 		var_0A = abs(length(var_05) * var_0A);
-		if(var_0A > var_06)
-		{
+		if(var_0A > var_06) {
 			return undefined;
 		}
 
 		var_09 = vectordot(var_05,var_02);
 		var_0A = abs(length(var_04) * var_09);
-		if(var_0A > var_07)
-		{
+		if(var_0A > var_07) {
 			return undefined;
 		}
 	}
@@ -1159,49 +987,38 @@ func_11FC(param_00)
 	return var_08;
 }
 
-//Function Number: 30
-func_12F4(param_00)
-{
+func_12F4(param_00) {
 	var_01 = scripts\engine\utility::getstructarray("door_peek_struct","script_noteworthy");
 	var_02 = [];
-	foreach(var_04 in var_01)
-	{
+	foreach(var_04 in var_01) {
 		var_02[var_02.size] = var_04.var_336;
 	}
 
 	var_06 = undefined;
 	var_07 = undefined;
-	foreach(var_09 in var_02)
-	{
-		if(!isdefined(level.var_5A23[var_09]) || !isdefined(level.var_5A23[var_09].var_5A25))
-		{
+	foreach(var_09 in var_02) {
+		if(!isdefined(level.var_5A23[var_09]) || !isdefined(level.var_5A23[var_09].var_5A25)) {
 			continue;
 		}
 
 		var_0A = distance(level.player.origin,level.var_5A23[var_09].var_5A25.origin);
-		if(!isdefined(var_06) || var_0A < var_06)
-		{
+		if(!isdefined(var_06) || var_0A < var_06) {
 			var_06 = var_0A;
 			var_07 = var_09;
 		}
 	}
 
-	if(var_07 == param_00)
-	{
+	if(var_07 == param_00) {
 		return 1;
 	}
 
 	return 0;
 }
 
-//Function Number: 31
-func_11FD(param_00)
-{
+func_11FD(param_00) {
 	var_01 = undefined;
-	foreach(var_03 in scripts\engine\utility::getstructarray("door_peek_struct","script_noteworthy"))
-	{
-		if(var_03.var_336 == param_00.var_336)
-		{
+	foreach(var_03 in scripts\engine\utility::getstructarray("door_peek_struct","script_noteworthy")) {
+		if(var_03.var_336 == param_00.var_336) {
 			var_01 = var_03;
 			break;
 		}
@@ -1216,13 +1033,11 @@ func_11FD(param_00)
 	var_0B = vectornormalize(var_0A);
 	var_0C = level.var_5A23[var_05].var_5A58 + 8;
 	var_0D = 48;
-	if(distance(level.player.origin,var_09) > var_0C + var_0D)
-	{
+	if(distance(level.player.origin,var_09) > var_0C + var_0D) {
 		return undefined;
 	}
 
-	if(vectordot(var_0A,var_07) < 0)
-	{
+	if(vectordot(var_0A,var_07) < 0) {
 		var_0E = 0;
 	}
 	else
@@ -1230,46 +1045,39 @@ func_11FD(param_00)
 		var_0E = 1;
 	}
 
-	if(!var_0E)
-	{
+	if(!var_0E) {
 		var_0F = vectordot(var_0B,var_08);
-		if(var_0F <= 0)
-		{
+		if(var_0F <= 0) {
 			return undefined;
 		}
 
 		var_10 = abs(length(var_0A) * var_0F);
-		if(var_10 > var_0C)
-		{
+		if(var_10 > var_0C) {
 			return undefined;
 		}
 
 		var_11 = -1 * var_07;
 		var_0F = vectordot(var_0B,var_11);
 		var_10 = abs(length(var_0A) * var_0F);
-		if(var_10 > var_0D)
-		{
+		if(var_10 > var_0D) {
 			return undefined;
 		}
 	}
 	else
 	{
 		var_0F = vectordot(var_0D,var_0A);
-		if(var_10 <= 0)
-		{
+		if(var_10 <= 0) {
 			return undefined;
 		}
 
 		var_10 = abs(length(var_0B) * var_10);
-		if(var_10 > var_0C)
-		{
+		if(var_10 > var_0C) {
 			return undefined;
 		}
 
 		var_0F = vectordot(var_0B,var_07);
 		var_10 = abs(length(var_0A) * var_0F);
-		if(var_10 > var_0D)
-		{
+		if(var_10 > var_0D) {
 			return undefined;
 		}
 	}
@@ -1277,19 +1085,15 @@ func_11FD(param_00)
 	return var_0E;
 }
 
-//Function Number: 32
-func_11F9(param_00,param_01,param_02,param_03,param_04,param_05)
-{
+func_11F9(param_00,param_01,param_02,param_03,param_04,param_05) {
 	level.player endon("death");
 	var_06 = param_01.var_EE52;
-	if(!isdefined(param_03))
-	{
+	if(!isdefined(param_03)) {
 		param_03 = 0;
 	}
 
 	var_07 = 0.2;
-	if(!param_02)
-	{
+	if(!param_02) {
 		level.player scripts\engine\utility::delaycall(var_07,::stopgestureviewmodel,"ges_doorpeek_" + func_1297(var_06));
 	}
 	else
@@ -1303,8 +1107,7 @@ func_11F9(param_00,param_01,param_02,param_03,param_04,param_05)
 	level notify(param_00 + "door_peek_start_detach");
 	level notify("door_peek_start_detach");
 	var_08 = undefined;
-	if(!param_03)
-	{
+	if(!param_03) {
 		var_08 = level.player scripts\engine\utility::spawn_tag_origin();
 		level.player playerlinktodelta(var_08,"tag_origin",1,90,90,90,90,0);
 	}
@@ -1314,23 +1117,19 @@ func_11F9(param_00,param_01,param_02,param_03,param_04,param_05)
 	var_0A = level.player getplayerangles();
 	level.var_5A23[param_00].var_C9FD delete();
 	level notify(param_00 + "door_peek_detach");
-	if(!param_03)
-	{
-		if(scripts\engine\utility::flag("doorpeek_hand_on_door"))
-		{
+	if(!param_03) {
+		if(scripts\engine\utility::flag("doorpeek_hand_on_door")) {
 			var_0B = level.player getplayerangles(1);
 			var_0C = scripts\sp\_utility::func_10639("player_rig",level.player.origin,var_0B);
 			var_0D = level.player _meth_84C6("currentViewModel");
-			if(isdefined(var_0D))
-			{
+			if(isdefined(var_0D)) {
 				var_0C setmodel(var_0D);
 			}
 
 			var_0E = (0,0,0);
 			var_0F = (var_09[0] - var_0A[0],var_09[1] - var_0A[1],0);
 			var_0C _meth_81E2(level.player,"tag_origin",(0,0,0) + var_0E,var_0F,0);
-			if(!param_02)
-			{
+			if(!param_02) {
 				var_0C thread scripts/sp/anim::func_1F35(var_0C,"doorpeek_" + func_1297(var_06) + "_out");
 			}
 			else
@@ -1344,8 +1143,7 @@ func_11F9(param_00,param_01,param_02,param_03,param_04,param_05)
 		var_10 = func_12A1(param_00,param_02);
 		var_11 = 0.2;
 		var_08 moveto(var_10,var_11,var_11 / 2,0);
-		if(param_01.var_EE52 == "airlock")
-		{
+		if(param_01.var_EE52 == "airlock") {
 			level.player scripts\sp\_utility::func_2B76(0);
 		}
 
@@ -1353,8 +1151,7 @@ func_11F9(param_00,param_01,param_02,param_03,param_04,param_05)
 		wait(var_11);
 		wait(0.05);
 		level.player unlink();
-		if(param_01.var_EE52 == "airlock")
-		{
+		if(param_01.var_EE52 == "airlock") {
 			level.player scripts\sp\_utility::func_2B76(0.25,0.5);
 			level.player scripts\engine\utility::delaythread(0.5,::scripts\sp\_utility::func_2B76,1,0.7);
 		}
@@ -1363,21 +1160,17 @@ func_11F9(param_00,param_01,param_02,param_03,param_04,param_05)
 		level.player scripts\engine\utility::delaycall(0.5,::_meth_80A6);
 	}
 
-	if(!isdefined(param_04) || param_04 == 0)
-	{
+	if(!isdefined(param_04) || param_04 == 0) {
 		level.var_5A23[param_00].var_5A2A delete();
 	}
 
-	if(!isdefined(param_05) || param_05 == 0)
-	{
+	if(!isdefined(param_05) || param_05 == 0) {
 		level.var_5A23[param_00].var_59FF delete();
-		if(isdefined(level.var_5A23[param_00].var_A5A9))
-		{
+		if(isdefined(level.var_5A23[param_00].var_A5A9)) {
 			level.var_5A23[param_00].var_A5A9 delete();
 		}
 
-		if(isdefined(level.var_5A23[param_00].var_A5AA))
-		{
+		if(isdefined(level.var_5A23[param_00].var_A5AA)) {
 			level.var_5A23[param_00].var_A5AA delete();
 		}
 	}
@@ -1385,21 +1178,16 @@ func_11F9(param_00,param_01,param_02,param_03,param_04,param_05)
 	level.player.dontmelee = undefined;
 }
 
-//Function Number: 33
-func_11D6(param_00,param_01,param_02)
-{
+func_11D6(param_00,param_01,param_02) {
 	var_03 = level.player scripts\engine\utility::spawn_tag_origin();
 	level.player playerlinktodelta(var_03,"tag_origin",1,90,90,90,90,0);
 	var_04 = level.player getplayerangles();
-	if(!isdefined(param_02) || !param_02)
-	{
-		if(isdefined(level.var_5A23[param_00].var_C9FD))
-		{
+	if(!isdefined(param_02) || !param_02) {
+		if(isdefined(level.var_5A23[param_00].var_C9FD)) {
 			level.var_5A23[param_00].var_C9FD delete();
 		}
 	}
-	else if(isdefined(level.var_5A23[param_00].var_A5AE))
-	{
+	else if(isdefined(level.var_5A23[param_00].var_A5AE)) {
 		level.var_5A23[param_00].var_A5AE delete();
 	}
 
@@ -1410,14 +1198,11 @@ func_11D6(param_00,param_01,param_02)
 	var_03 delete();
 }
 
-//Function Number: 34
-func_12A1(param_00,param_01)
-{
+func_12A1(param_00,param_01) {
 	var_02 = level.var_5A23[param_00].var_5978;
 	var_03 = 12;
 	var_04 = 17;
-	if(!param_01)
-	{
+	if(!param_01) {
 		var_05 = anglestoforward(level.var_5A23[param_00].var_5A25.angles);
 		var_06 = anglestoforward(level.var_5A23[param_00].var_59FF.angles) * -1;
 		var_07 = func_794C(param_00);
@@ -1445,8 +1230,7 @@ func_12A1(param_00,param_01)
 	var_10 = var_0F - var_0A;
 	var_10 = scripts\engine\utility::flatten_vector(var_10) * length2d(var_10);
 	var_11 = vectordot(var_0B,var_10);
-	if(var_11 < var_04)
-	{
+	if(var_11 < var_04) {
 		var_12 = var_04 - var_11;
 		var_13 = vectordot(var_0B,var_0C);
 		var_14 = var_12 / var_13;
@@ -1459,16 +1243,12 @@ func_12A1(param_00,param_01)
 	return var_0F;
 }
 
-//Function Number: 35
-func_120D(param_00,param_01,param_02)
-{
+func_120D(param_00,param_01,param_02) {
 	level.player endon("death");
 	level endon(param_00 + "door_peek_kick");
 	level endon(param_00 + "door_peek_detach");
-	for(;;)
-	{
-		if(level.player _meth_819F())
-		{
+	for(;;) {
+		if(level.player _meth_819F()) {
 			break;
 		}
 
@@ -1480,27 +1260,22 @@ func_120D(param_00,param_01,param_02)
 	level notify(param_00 + "door_peek_shoot");
 }
 
-//Function Number: 36
-func_11EA(param_00,param_01,param_02,param_03,param_04)
-{
+func_11EA(param_00,param_01,param_02,param_03,param_04) {
 	level.player endon("death");
 	level endon(param_00 + "door_peek_kick");
 	level endon(param_00 + "door_peek_opened_fully");
 	level endon(param_00 + "door_peek_sprint");
 	level endon(param_00 + "door_peek_pop_open");
-	if(isdefined(level.var_5A23[param_00].var_55B2) && level.var_5A23[param_00].var_55B2)
-	{
+	if(isdefined(level.var_5A23[param_00].var_55B2) && level.var_5A23[param_00].var_55B2) {
 		return;
 	}
 
 	level waittill(param_00 + "door_peek_start_peek_control");
 	var_05 = 0;
 	var_06 = 0;
-	for(;;)
-	{
+	for(;;) {
 		var_07 = func_1296(param_00,param_02);
-		if(var_05 < -0.5 && var_07 < -0.5)
-		{
+		if(var_05 < -0.5 && var_07 < -0.5) {
 			var_06++;
 		}
 		else
@@ -1508,8 +1283,7 @@ func_11EA(param_00,param_01,param_02,param_03,param_04)
 			var_06 = 0;
 		}
 
-		if(var_06 >= 2)
-		{
+		if(var_06 >= 2) {
 			break;
 		}
 
@@ -1521,13 +1295,11 @@ func_11EA(param_00,param_01,param_02,param_03,param_04)
 	level notify("door_peek_back_off");
 	var_08 = 70;
 	var_09 = level.var_5A23[param_00].var_5A57;
-	if(var_09 == "airlock" || var_09 == "airlocksdf" || var_09 == "airlockcombat" || var_09 == "airlockcombatsdf")
-	{
+	if(var_09 == "airlock" || var_09 == "airlocksdf" || var_09 == "airlockcombat" || var_09 == "airlockcombatsdf") {
 		var_08 = 60;
 	}
 
-	if(func_794C(param_00) < var_08)
-	{
+	if(func_794C(param_00) < var_08) {
 		thread func_11F9(param_00,param_01,param_02,0,1);
 		thread func_120B(param_01,param_02,param_03);
 		return;
@@ -1536,27 +1308,21 @@ func_11EA(param_00,param_01,param_02,param_03,param_04)
 	thread func_1210(param_00,param_02);
 }
 
-//Function Number: 37
-func_1209(param_00,param_01,param_02,param_03)
-{
+func_1209(param_00,param_01,param_02,param_03) {
 	level.player endon("death");
 	level endon(param_00 + "door_peek_kick");
 	level endon(param_00 + "door_peek_opened_fully");
 	level endon(param_00 + "door_peek_back_off");
-	if(isdefined(level.var_5A23[param_00].var_560A) && level.var_5A23[param_00].var_560A)
-	{
+	if(isdefined(level.var_5A23[param_00].var_560A) && level.var_5A23[param_00].var_560A) {
 		return;
 	}
 
 	level waittill(param_00 + "door_peek_start_peek_control");
-	for(;;)
-	{
-		if(!param_02 && level.var_5A23[param_00].var_5A21 >= 28)
-		{
+	for(;;) {
+		if(!param_02 && level.var_5A23[param_00].var_5A21 >= 28) {
 			break;
 		}
-		else if(param_02 && level.var_5A23[param_00].var_5A21 <= -28)
-		{
+		else if(param_02 && level.var_5A23[param_00].var_5A21 <= -28) {
 			break;
 		}
 
@@ -1566,12 +1332,10 @@ func_1209(param_00,param_01,param_02,param_03)
 	var_04 = 112;
 	var_05 = 100;
 	var_06 = 0;
-	for(;;)
-	{
+	for(;;) {
 		var_07 = 0;
 		var_08 = level.player getnormalizedmovement();
-		if(var_08[0] <= 0.5 && var_08[1] <= 0.5)
-		{
+		if(var_08[0] <= 0.5 && var_08[1] <= 0.5) {
 			wait(0.05);
 			continue;
 		}
@@ -1583,8 +1347,7 @@ func_1209(param_00,param_01,param_02,param_03)
 		var_0D = anglestoforward(var_0C);
 		var_0E = level.player getplayerangles(1);
 		var_0F = anglestoforward(var_0E);
-		if(!param_02)
-		{
+		if(!param_02) {
 			var_10 = anglestoforward(level.var_5A23[param_00].var_59FF.angles + (0,180,0));
 		}
 		else
@@ -1593,11 +1356,9 @@ func_1209(param_00,param_01,param_02,param_03)
 		}
 
 		var_11 = acos(clamp(vectordot(var_10,var_0F),-1,1));
-		if(var_11 >= var_04)
-		{
+		if(var_11 >= var_04) {
 			var_12 = acos(clamp(vectordot(var_10,var_0D),-1,1));
-			if(var_11 >= var_05)
-			{
+			if(var_11 >= var_05) {
 				var_06++;
 			}
 		}
@@ -1606,16 +1367,14 @@ func_1209(param_00,param_01,param_02,param_03)
 			var_06 = 0;
 		}
 
-		if(var_06 >= 1)
-		{
+		if(var_06 >= 1) {
 			break;
 		}
 
 		wait(0.05);
 	}
 
-	if(isdefined(level.var_5A23[param_00].var_560A) && level.var_5A23[param_00].var_560A)
-	{
+	if(isdefined(level.var_5A23[param_00].var_560A) && level.var_5A23[param_00].var_560A) {
 		return;
 	}
 
@@ -1623,17 +1382,13 @@ func_1209(param_00,param_01,param_02,param_03)
 	thread func_1210(param_00,param_02);
 }
 
-//Function Number: 38
-func_120F(param_00,param_01,param_02,param_03)
-{
+func_120F(param_00,param_01,param_02,param_03) {
 	level endon(param_00 + "door_peek_kick");
 	level endon(param_00 + "door_peek_opened_fully");
 	level endon(param_00 + "door_peek_back_off");
 	level waittill(param_00 + "door_peek_start_peek_control");
-	for(;;)
-	{
-		if(level.player issprinting())
-		{
+	for(;;) {
+		if(level.player issprinting()) {
 			break;
 		}
 
@@ -1644,13 +1399,10 @@ func_120F(param_00,param_01,param_02,param_03)
 	thread func_1210(param_00,param_02);
 }
 
-//Function Number: 39
-func_1296(param_00,param_01)
-{
+func_1296(param_00,param_01) {
 	var_02 = level.player getnormalizedmovement();
 	var_03 = level.var_5A23[param_00].var_5978;
-	if(!param_01)
-	{
+	if(!param_01) {
 		var_04 = anglestoforward(level.var_5A23[param_00].var_5A25.angles);
 		var_05 = anglestoforward(level.var_5A23[param_00].var_59FF.angles) * -1;
 	}
@@ -1670,13 +1422,11 @@ func_1296(param_00,param_01)
 	var_0D = anglestoforward(var_0C);
 	var_0E = level.player geteye() + (0,0,-6) + 16 * anglestoforward(level.player.angles);
 	var_0F = min(1,sqrt(squared(var_02[0]) + squared(var_02[1])));
-	if(var_0F <= 0.1)
-	{
+	if(var_0F <= 0.1) {
 		return 0;
 	}
 
-	if(var_0F >= 0.95)
-	{
+	if(var_0F >= 0.95) {
 		var_0F = 1;
 	}
 
@@ -1687,20 +1437,16 @@ func_1296(param_00,param_01)
 	var_14 = 0.25;
 	var_15 = 20;
 	var_16 = 90;
-	if(var_10 < 90 || var_13 || var_12 < 90)
-	{
+	if(var_10 < 90 || var_13 || var_12 < 90) {
 		var_17 = 1;
-		if(var_13)
-		{
+		if(var_13) {
 		}
 		else
 		{
 			var_18 = min(var_10,var_11);
 			var_18 = min(var_18,var_12);
-			if(var_18 > var_15)
-			{
-				if(var_18 <= var_16)
-				{
+			if(var_18 > var_15) {
+				if(var_18 <= var_16) {
 					var_19 = var_18 - var_15;
 					var_17 = 1 - 1 - var_14 * var_19 / var_16 - var_15;
 				}
@@ -1720,32 +1466,25 @@ func_1296(param_00,param_01)
 	return var_1A;
 }
 
-//Function Number: 40
-func_54E3(param_00,param_01,param_02)
-{
+func_54E3(param_00,param_01,param_02) {
 	var_03 = acos(clamp(vectordot(param_01,param_02),-1,1));
 	var_04 = acos(clamp(vectordot(param_00,param_01),-1,1));
 	var_05 = acos(clamp(vectordot(param_00,param_02),-1,1));
 	var_06 = 1;
-	if(abs(var_04 + var_05 - var_03) <= var_06)
-	{
+	if(abs(var_04 + var_05 - var_03) <= var_06) {
 		return 1;
 	}
 
 	return 0;
 }
 
-//Function Number: 41
-func_59BE(param_00,param_01,param_02,param_03)
-{
+func_59BE(param_00,param_01,param_02,param_03) {
 	level.player endon("death");
-	if(!isdefined(param_01))
-	{
+	if(!isdefined(param_01)) {
 		param_01 = 0;
 	}
 
-	if(param_01)
-	{
+	if(param_01) {
 		level endon(param_00 + "door_peek_main_side_used");
 	}
 	else
@@ -1756,18 +1495,15 @@ func_59BE(param_00,param_01,param_02,param_03)
 	level endon(param_00 + "door_peek_deleted");
 	level endon(param_00 + "door_peek_start_detach");
 	level endon(param_00 + "door_peek_restarted");
-	if(!scripts\engine\utility::flag_exist(param_00 + "door_peek_can_kick"))
-	{
+	if(!scripts\engine\utility::flag_exist(param_00 + "door_peek_can_kick")) {
 		scripts\engine\utility::flag_init(param_00 + "door_peek_can_kick");
 	}
 
-	if(!scripts\engine\utility::flag_exist(param_00 + "door_peek_handle_down"))
-	{
+	if(!scripts\engine\utility::flag_exist(param_00 + "door_peek_handle_down")) {
 		scripts\engine\utility::flag_init(param_00 + "door_peek_handle_down");
 	}
 
-	if(!scripts\engine\utility::flag_exist(param_00 + "did_kick_interrupt_input"))
-	{
+	if(!scripts\engine\utility::flag_exist(param_00 + "did_kick_interrupt_input")) {
 		scripts\engine\utility::flag_init(param_00 + "did_kick_interrupt_input");
 	}
 
@@ -1776,32 +1512,27 @@ func_59BE(param_00,param_01,param_02,param_03)
 	var_05 = func_12A6(var_04,"door_peek_door");
 	var_06 = var_05.var_EE52;
 	var_07 = 0;
-	if(var_06 == "airlock")
-	{
+	if(var_06 == "airlock") {
 		var_07 = 1;
 	}
 
 	func_59D5(param_00,1);
-	if(var_06 == "airlock" || var_06 == "airlockcombat")
-	{
+	if(var_06 == "airlock" || var_06 == "airlockcombat") {
 		var_05 scripts\sp\_dooruse::func_1AB6("unlocked");
 	}
 
 	thread func_1211(param_00,param_01,param_02,var_07);
 	var_08 = 1;
-	if(isdefined(param_03) && param_03 == 1)
-	{
+	if(isdefined(param_03) && param_03 == 1) {
 		var_08 = 0;
 	}
 
 	level waittill(param_00 + "door_peek_start");
-	while(level.player usebuttonpressed())
-	{
+	while(level.player usebuttonpressed()) {
 		wait(0.05);
 	}
 
-	if(var_06 == "airlock")
-	{
+	if(var_06 == "airlock") {
 		func_1159(1,param_00);
 	}
 	else
@@ -1810,15 +1541,12 @@ func_59BE(param_00,param_01,param_02,param_03)
 	}
 
 	thread func_1414(param_00);
-	if(var_08)
-	{
-		for(;;)
-		{
+	if(var_08) {
+		for(;;) {
 			scripts\engine\utility::flag_clear(param_00 + "did_kick_interrupt_input");
 			thread func_11F1(param_00);
 			scripts\engine\utility::flag_wait(param_00 + "did_kick_interrupt_input");
-			if(isdefined(level.var_5A23[param_00].var_55F5) && level.var_5A23[param_00].var_55F5)
-			{
+			if(isdefined(level.var_5A23[param_00].var_55F5) && level.var_5A23[param_00].var_55F5) {
 				return;
 			}
 
@@ -1829,8 +1557,7 @@ func_59BE(param_00,param_01,param_02,param_03)
 			level notify("door_peek_kick");
 			thread func_59A4();
 			scripts\engine\utility::waitframe();
-			if(var_06 != "airlock")
-			{
+			if(var_06 != "airlock") {
 				thread func_11F0(param_00,param_01);
 			}
 			else
@@ -1838,8 +1565,7 @@ func_59BE(param_00,param_01,param_02,param_03)
 				thread func_11ED(param_00);
 			}
 
-			if(var_07)
-			{
+			if(var_07) {
 				level waittill(param_00 + "door_kick_multi_kick_ready");
 				func_1159(1,param_00);
 				thread func_1414(param_00);
@@ -1851,35 +1577,27 @@ func_59BE(param_00,param_01,param_02,param_03)
 	}
 }
 
-//Function Number: 42
-func_59D5(param_00,param_01)
-{
+func_59D5(param_00,param_01) {
 	var_02 = func_794D(param_00);
 	var_03 = var_02.model;
-	if(param_01)
-	{
-		if(scripts\sp\_utility::hastag(var_03,"tag_locked"))
-		{
+	if(param_01) {
+		if(scripts\sp\_utility::hastag(var_03,"tag_locked")) {
 			var_02 hidepart("tag_locked",var_03);
 		}
 
-		if(scripts\sp\_utility::hastag(var_03,"tag_unlocked"))
-		{
+		if(scripts\sp\_utility::hastag(var_03,"tag_unlocked")) {
 			var_02 giveperk("tag_unlocked",var_03);
 		}
 
-		if(scripts\sp\_utility::hastag(var_03,"door_locked"))
-		{
+		if(scripts\sp\_utility::hastag(var_03,"door_locked")) {
 			var_02 hidepart("door_locked",var_03);
 		}
 
-		if(scripts\sp\_utility::hastag(var_03,"door_unlocked"))
-		{
+		if(scripts\sp\_utility::hastag(var_03,"door_unlocked")) {
 			var_02 giveperk("door_unlocked",var_03);
 		}
 
-		if(scripts\sp\_utility::hastag(var_03,"door_inactive"))
-		{
+		if(scripts\sp\_utility::hastag(var_03,"door_inactive")) {
 			var_02 hidepart("door_inactive",var_03);
 			return;
 		}
@@ -1887,54 +1605,42 @@ func_59D5(param_00,param_01)
 		return;
 	}
 
-	if(scripts\sp\_utility::hastag(var_03,"tag_locked"))
-	{
+	if(scripts\sp\_utility::hastag(var_03,"tag_locked")) {
 		var_02 giveperk("tag_locked",var_03);
 	}
 
-	if(scripts\sp\_utility::hastag(var_03,"tag_unlocked"))
-	{
+	if(scripts\sp\_utility::hastag(var_03,"tag_unlocked")) {
 		var_02 hidepart("tag_unlocked",var_03);
 	}
 
-	if(scripts\sp\_utility::hastag(var_03,"door_locked"))
-	{
+	if(scripts\sp\_utility::hastag(var_03,"door_locked")) {
 		var_02 giveperk("door_locked",var_03);
 	}
 
-	if(scripts\sp\_utility::hastag(var_03,"door_unlocked"))
-	{
+	if(scripts\sp\_utility::hastag(var_03,"door_unlocked")) {
 		var_02 hidepart("door_unlocked",var_03);
 	}
 
-	if(scripts\sp\_utility::hastag(var_03,"door_inactive"))
-	{
+	if(scripts\sp\_utility::hastag(var_03,"door_inactive")) {
 		var_02 hidepart("door_inactive",var_03);
 	}
 }
 
-//Function Number: 43
-func_59A4()
-{
+func_59A4() {
 	wait(0.75);
 	level.player playrumbleonentity("grenade_rumble");
 	earthquake(0.35,0.75,level.player.origin,200);
 	lib_0F18::func_10E8A("broadcast","attack",level.player geteye(),800);
 }
 
-//Function Number: 44
-func_1159(param_00,param_01)
-{
-	if(isdefined(level.var_5A23[param_01].var_C067))
-	{
+func_1159(param_00,param_01) {
+	if(isdefined(level.var_5A23[param_01].var_C067)) {
 		return;
 	}
 
 	scripts\engine\utility::flag_set("show_peek_hint");
-	if(isdefined(level.var_5A23[param_01].var_C9F9))
-	{
-		if(level.console || level.player usinggamepad())
-		{
+	if(isdefined(level.var_5A23[param_01].var_C9F9)) {
+		if(level.console || level.player usinggamepad()) {
 			scripts\sp\_utility::func_56BA("peek_only_hint");
 			return;
 		}
@@ -1943,10 +1649,8 @@ func_1159(param_00,param_01)
 		return;
 	}
 
-	if(!isdefined(param_00) || param_00 == 0)
-	{
-		if(level.console || level.player usinggamepad())
-		{
+	if(!isdefined(param_00) || param_00 == 0) {
+		if(level.console || level.player usinggamepad()) {
 			scripts\sp\_utility::func_56BA("peek_hint");
 			return;
 		}
@@ -1955,8 +1659,7 @@ func_1159(param_00,param_01)
 		return;
 	}
 
-	if(level.console || level.player usinggamepad())
-	{
+	if(level.console || level.player usinggamepad()) {
 		scripts\sp\_utility::func_56BA("peek_hint_shove");
 		return;
 	}
@@ -1964,22 +1667,16 @@ func_1159(param_00,param_01)
 	scripts\sp\_utility::func_56BA("peek_hint_shove_pc");
 }
 
-//Function Number: 45
-func_1414(param_00)
-{
+func_1414(param_00) {
 	level scripts\engine\utility::waittill_any_3(param_00 + "door_peek_start_detach",param_00 + "remove_hint_text");
 	scripts\engine\utility::flag_clear("show_peek_hint");
 }
 
-//Function Number: 46
-func_794C(param_00)
-{
-	if(!isdefined(level.var_5A23[param_00]))
-	{
+func_794C(param_00) {
+	if(!isdefined(level.var_5A23[param_00])) {
 		return 0;
 	}
-	else if(!isdefined(level.var_5A23[param_00].var_5A2A))
-	{
+	else if(!isdefined(level.var_5A23[param_00].var_5A2A)) {
 		return 180;
 	}
 
@@ -1987,43 +1684,31 @@ func_794C(param_00)
 	return var_01;
 }
 
-//Function Number: 47
-func_59C9(param_00)
-{
+func_59C9(param_00) {
 	level.var_5A23[param_00].var_72C6 = 1;
 }
 
-//Function Number: 48
-func_F366(param_00,param_01)
-{
+func_F366(param_00,param_01) {
 	level.var_5A23[param_00].var_B7C6 = param_01;
 }
 
-//Function Number: 49
-func_551D(param_00)
-{
+func_551D(param_00) {
 	level notify(param_00 + "door_peek_disabled");
 }
 
-//Function Number: 50
-func_12AE(param_00)
-{
+func_12AE(param_00) {
 	var_01 = abs(level.var_5A23[param_00].var_5A2A.angles[1] - level.var_5A23[param_00].var_5A24[1]);
-	if(var_01 > 180)
-	{
+	if(var_01 > 180) {
 		var_01 = 360 - var_01;
 	}
 
 	return var_01;
 }
 
-//Function Number: 51
-func_11F1(param_00)
-{
+func_11F1(param_00) {
 	level endon(param_00 + "door_peek_start_detach");
 	level endon(param_00 + "door_peek_restarted");
-	if(level.console || level.player usinggamepad())
-	{
+	if(level.console || level.player usinggamepad()) {
 		level.player waittill("kick_pressed");
 	}
 	else
@@ -2034,9 +1719,7 @@ func_11F1(param_00)
 	scripts\engine\utility::flag_set(param_00 + "did_kick_interrupt_input");
 }
 
-//Function Number: 52
-func_1201()
-{
+func_1201() {
 	level.player scripts\sp\_utility::func_1C49(0);
 	level.player scripts\engine\utility::allow_crouch(0);
 	level.player scripts\engine\utility::allow_prone(0);
@@ -2048,9 +1731,7 @@ func_1201()
 	level.player scripts\engine\utility::allow_offhand_secondary_weapons(0);
 }
 
-//Function Number: 53
-func_1200()
-{
+func_1200() {
 	level.player scripts\sp\_utility::func_1C49(1);
 	level.player scripts\engine\utility::allow_crouch(1);
 	level.player scripts\engine\utility::allow_prone(1);
@@ -2062,9 +1743,7 @@ func_1200()
 	level.player scripts\engine\utility::allow_offhand_secondary_weapons(1);
 }
 
-//Function Number: 54
-func_1205()
-{
+func_1205() {
 	level.player scripts\engine\utility::allow_fire(0);
 	level.player scripts\engine\utility::allow_reload(0);
 	level.player scripts\engine\utility::allow_ads(0);
@@ -2072,9 +1751,7 @@ func_1205()
 	level.player scripts\engine\utility::allow_weapon_switch(0);
 }
 
-//Function Number: 55
-func_1204()
-{
+func_1204() {
 	level.player scripts\engine\utility::allow_fire(1);
 	level.player scripts\engine\utility::allow_reload(1);
 	level.player scripts\engine\utility::allow_ads(1);
@@ -2082,27 +1759,21 @@ func_1204()
 	level.player scripts\engine\utility::allow_weapon_switch(1);
 }
 
-//Function Number: 56
-func_11EF()
-{
+func_11EF() {
 	level.player scripts\engine\utility::allow_fire(0);
 	level.player scripts\engine\utility::allow_reload(0);
 	level.player scripts\engine\utility::allow_ads(0);
 	level.player scripts\engine\utility::allow_offhand_weapons(0);
 }
 
-//Function Number: 57
-func_11EE()
-{
+func_11EE() {
 	level.player scripts\engine\utility::allow_fire(1);
 	level.player scripts\engine\utility::allow_reload(1);
 	level.player scripts\engine\utility::allow_ads(1);
 	level.player scripts\engine\utility::allow_offhand_weapons(1);
 }
 
-//Function Number: 58
-func_11EC(param_00)
-{
+func_11EC(param_00) {
 	level endon(param_00 + "door_kick_newdoor_think");
 	level endon(param_00 + "door_peek_opened_fully");
 	var_01 = getentarray(param_00,"targetname");
@@ -2161,9 +1832,7 @@ func_11EC(param_00)
 	func_1200();
 }
 
-//Function Number: 59
-func_11ED(param_00)
-{
+func_11ED(param_00) {
 	level endon(param_00 + "door_kick_newdoor_think");
 	level endon(param_00 + "door_peek_opened_fully");
 	var_01 = getentarray(param_00,"targetname");
@@ -2215,21 +1884,17 @@ func_11ED(param_00)
 	level thread scripts\sp\_utility::func_C12D(param_00 + "door_kick_multi_kick_ready",0.5);
 }
 
-//Function Number: 60
-func_1351(param_00)
-{
+func_1351(param_00) {
 	level.player endon("death");
 	level endon(param_00 + "door_kick_finished");
 	var_01 = level.var_5A23[param_00].var_C9FE;
 	var_02 = level.var_5A23[param_00].var_5A24 + (0,0 - var_01.var_47A3,0);
 	var_03 = 40;
-	for(;;)
-	{
+	for(;;) {
 		var_04 = func_12AE(param_00) - var_01.var_47A3;
 		var_05 = clamp(var_04 / var_01.var_B481,0,1) * var_01.var_B4AA - var_01.var_B7C1 + var_01.var_B7C1;
 		level.player lerpviewangleclamp(0,0,0,var_01.setdevdvarifuninitialized,var_05,20,20);
-		if(var_04 >= var_03)
-		{
+		if(var_04 >= var_03) {
 			var_06 = 1;
 			level notify(param_00 + "door_peek_airlock_ally_move");
 			level notify("door_peek_airlock_ally_move");
@@ -2239,38 +1904,30 @@ func_1351(param_00)
 	}
 }
 
-//Function Number: 61
-func_11F2(param_00,param_01,param_02)
-{
+func_11F2(param_00,param_01,param_02) {
 	level endon(param_00 + "door_kick_newdoor_think");
 	level.player.var_5818 = 1;
 	thread func_11F3(param_00,param_01);
 	level.player waittill("death");
-	if(!isdefined(level.player.var_5A12) || !level.player.var_5A12)
-	{
+	if(!isdefined(level.player.var_5A12) || !level.player.var_5A12) {
 		func_11D6(param_00,param_01,1);
 		return;
 	}
 
 	level.player unlink();
-	if(isdefined(level.var_5A23[param_00].var_A5AE))
-	{
+	if(isdefined(level.var_5A23[param_00].var_A5AE)) {
 		level.var_5A23[param_00].var_A5AE delete();
 	}
 }
 
-//Function Number: 62
-func_11F3(param_00,param_01)
-{
+func_11F3(param_00,param_01) {
 	level.player endon("death");
 	var_02 = [param_00 + "door_kick_newdoor_think"];
 	level scripts\engine\utility::waittill_any_in_array_return(var_02);
 	level.player.var_5818 = undefined;
 }
 
-//Function Number: 63
-func_11F0(param_00,param_01,param_02)
-{
+func_11F0(param_00,param_01,param_02) {
 	level.player endon("death");
 	level endon(param_00 + "door_kick_newdoor_think");
 	thread func_11F2(param_00,param_01,param_02);
@@ -2280,8 +1937,7 @@ func_11F0(param_00,param_01,param_02)
 	var_05 = func_12A6(var_03,"door_peek_clip");
 	var_06 = var_04.var_EE52;
 	var_05 linkto(var_04);
-	if(!param_01)
-	{
+	if(!param_01) {
 		var_07 = level.var_5A23[param_00].var_A5A9;
 	}
 	else
@@ -2295,8 +1951,7 @@ func_11F0(param_00,param_01,param_02)
 	func_11F9(param_00,var_04,param_01,1,1,1);
 	func_1201();
 	level.player.dontmelee = 1;
-	if(!param_01)
-	{
+	if(!param_01) {
 		var_08 = level.var_5A23[var_04.var_336].var_74C0;
 	}
 	else
@@ -2310,8 +1965,7 @@ func_11F0(param_00,param_01,param_02)
 	var_0C = 0.05;
 	var_0D = 0.2;
 	var_0E = 1;
-	if(func_1297(level.var_5A23[param_00].var_5A57) == "airlock")
-	{
+	if(func_1297(level.var_5A23[param_00].var_5A57) == "airlock") {
 		var_09 = 0.65;
 		var_0A = 0.7;
 		var_0B = 0.05;
@@ -2336,8 +1990,7 @@ func_11F0(param_00,param_01,param_02)
 	var_15 = "doorpeek_kick";
 	var_16 = "ges_doorpeek_kick";
 	var_17 = func_12AD(param_00,param_01);
-	if(isdefined(var_17))
-	{
+	if(isdefined(var_17)) {
 		var_16 = var_17;
 	}
 
@@ -2346,8 +1999,7 @@ func_11F0(param_00,param_01,param_02)
 	var_18 = level.player getplayerangles(1);
 	level.var_5A23[var_04.var_336].var_A5AE = scripts\sp\_utility::func_10639("player_rig",level.player.origin,var_18);
 	var_19 = level.player _meth_84C6("currentViewModel");
-	if(isdefined(var_19))
-	{
+	if(isdefined(var_19)) {
 		level.var_5A23[var_04.var_336].var_A5AE setmodel(var_19);
 	}
 
@@ -2374,8 +2026,7 @@ func_11F0(param_00,param_01,param_02)
 	var_26 = 0.35;
 	var_27 = 0.3;
 	var_28 = 0.3;
-	if(func_1297(level.var_5A23[param_00].var_5A57) == "airlock")
-	{
+	if(func_1297(level.var_5A23[param_00].var_5A57) == "airlock") {
 	}
 
 	level.player playerlinktoblend(level.var_5A23[var_04.var_336].var_A5AE,"tag_player",var_25,0,0);
@@ -2387,18 +2038,15 @@ func_11F0(param_00,param_01,param_02)
 	var_07 rotateto(var_1F,var_23);
 	wait(var_23);
 	level.player scripts\sp\_utility::func_2B76(0.2,0.05);
-	if(isdefined(param_02))
-	{
+	if(isdefined(param_02)) {
 		var_29 = 0.7;
 		wait(var_24 - var_23 - var_29);
 		var_2A = var_07 func_12A0(-60,0,0);
 		var_07 moveto(var_2A,var_29,0.2,0.1);
 		wait(var_29);
 	}
-	else if(isdefined(level.var_5A1C))
-	{
-		if(level.var_5A1C > 0)
-		{
+	else if(isdefined(level.var_5A1C)) {
+		if(level.var_5A1C > 0) {
 			wait(var_24 * level.var_5A1C);
 		}
 
@@ -2425,26 +2073,18 @@ func_11F0(param_00,param_01,param_02)
 	level.player.var_5A12 = undefined;
 }
 
-//Function Number: 64
-func_59A5(param_00)
-{
+func_59A5(param_00) {
 	level.player endon("death");
 	wait(param_00);
 	level.player.var_5A12 = 1;
 }
 
-//Function Number: 65
-func_59A2(param_00,param_01,param_02)
-{
-}
+func_59A2(param_00,param_01,param_02) {}
 
-//Function Number: 66
-func_120E(param_00)
-{
+func_120E(param_00) {
 	level endon(param_00 + "door_kick_newdoor_think");
 	level waittill("doorpeek_handle");
-	if(soundexists("doorpeek_" + func_1299(level.var_5A23[param_00].var_5A57) + "_handle"))
-	{
+	if(soundexists("doorpeek_" + func_1299(level.var_5A23[param_00].var_5A57) + "_handle")) {
 		level.var_5A23[param_00].var_5978 playsound("doorpeek_" + func_1299(level.var_5A23[param_00].var_5A57) + "_handle");
 		return;
 	}
@@ -2452,35 +2092,25 @@ func_120E(param_00)
 	var_01 = "doorpeek_" + func_1299(level.var_5A23[param_00].var_5A57) + "_handle";
 }
 
-//Function Number: 67
-func_12A6(param_00,param_01)
-{
-	foreach(var_03 in param_00)
-	{
-		if(isdefined(var_03.script_noteworthy))
-		{
-			if(var_03.script_noteworthy == param_01)
-			{
+func_12A6(param_00,param_01) {
+	foreach(var_03 in param_00) {
+		if(isdefined(var_03.script_noteworthy)) {
+			if(var_03.script_noteworthy == param_01) {
 				return var_03;
 			}
 		}
 	}
 }
 
-//Function Number: 68
-func_12A0(param_00,param_01,param_02)
-{
+func_12A0(param_00,param_01,param_02) {
 	var_03 = self.origin + anglestoforward(self.angles) * param_00 + anglestoright(self.angles) * param_01 + anglestoup(self.angles) * param_02;
 	return var_03;
 }
 
-//Function Number: 69
-func_59CF(param_00,param_01)
-{
+func_59CF(param_00,param_01) {
 	level.player endon("death");
 	level endon(param_00 + "door_intro_done");
-	if(!isdefined(param_01) || param_01 == 0)
-	{
+	if(!isdefined(param_01) || param_01 == 0) {
 		level scripts\engine\utility::waittill_any_3(param_00 + "door_peek_kick",param_00 + "door_peek_back_off",param_00 + "door_peek_sprint");
 	}
 	else
@@ -2491,78 +2121,61 @@ func_59CF(param_00,param_01)
 	func_1204();
 }
 
-//Function Number: 70
-func_13C9(param_00)
-{
-	if(!isdefined(level.var_D9E5))
-	{
+func_13C9(param_00) {
+	if(!isdefined(level.var_D9E5)) {
 		return;
 	}
 
-	if(!isdefined(level.var_D9E5["achievementDoorPeek"]))
-	{
+	if(!isdefined(level.var_D9E5["achievementDoorPeek"])) {
 		return;
 	}
 
-	if(param_00 == "open")
-	{
+	if(param_00 == "open") {
 		level.var_D9E5["achievementDoorPeek"]["achievementDoorPeekOpen"] = 1;
 	}
-	else if(param_00 == "kick")
-	{
+	else if(param_00 == "kick") {
 		level.var_D9E5["achievementDoorPeek"]["achievementDoorPeekKick"] = 1;
 	}
-	else if(param_00 == "grenade")
-	{
+	else if(param_00 == "grenade") {
 		level.var_D9E5["achievementDoorPeek"]["achievementDoorPeekGrenade"] = 1;
 	}
 
 	lib_0A2F::func_3D6A(1);
 }
 
-//Function Number: 71
-func_12AC(param_00,param_01)
-{
+func_12AC(param_00,param_01) {
 	var_02 = level.player getcurrentweapon();
-	if(!isdefined(var_02))
-	{
+	if(!isdefined(var_02)) {
 		return undefined;
 	}
 
 	var_03 = strtok(var_02,"+");
 	var_02 = var_03[0];
-	if(!isdefined(var_02))
-	{
+	if(!isdefined(var_02)) {
 		return undefined;
 	}
 
-	if(var_02 == "alt_iw7_erad")
-	{
+	if(var_02 == "alt_iw7_erad") {
 		var_04 = func_1297(level.var_5A23[param_00].var_5A57);
-		if(var_04 == "bulkhead" || var_04 == "airlock" || var_04 == "civlever" && !param_01)
-		{
+		if(var_04 == "bulkhead" || var_04 == "airlock" || var_04 == "civlever" && !param_01) {
 			return "ges_doorpeek_civlever_r";
 		}
 
 		return;
 	}
 
-	if(var_02 == "iw7_mauler")
-	{
+	if(var_02 == "iw7_mauler") {
 		var_04 = func_1297(level.var_5A23[param_00].var_5A57);
-		if(var_04 == "bulkhead" || var_04 == "airlock")
-		{
+		if(var_04 == "bulkhead" || var_04 == "airlock") {
 			return "ges_doorpeek_civlever_r";
 		}
 
 		return;
 	}
 
-	if(var_02 == "iw7_steeldragon")
-	{
+	if(var_02 == "iw7_steeldragon") {
 		var_04 = func_1297(level.var_5A23[param_00].var_5A57);
-		if(var_04 == "bulkhead" || var_04 == "airlock")
-		{
+		if(var_04 == "bulkhead" || var_04 == "airlock") {
 			return "ges_doorpeek_civlever_r";
 		}
 
@@ -2570,53 +2183,41 @@ func_12AC(param_00,param_01)
 	}
 }
 
-//Function Number: 72
-func_12AD(param_00,param_01)
-{
+func_12AD(param_00,param_01) {
 	var_02 = level.player getcurrentweapon();
-	if(!isdefined(var_02))
-	{
+	if(!isdefined(var_02)) {
 		return undefined;
 	}
 
 	var_03 = strtok(var_02,"+");
 	var_02 = var_03[0];
-	if(!isdefined(var_02))
-	{
+	if(!isdefined(var_02)) {
 		return undefined;
 	}
 
-	if(var_02 == "alt_iw7_erad")
-	{
+	if(var_02 == "alt_iw7_erad") {
 		return "ges_doorpeek_kick_eradshotty";
 	}
 }
 
-//Function Number: 73
-func_12AB(param_00,param_01)
-{
+func_12AB(param_00,param_01) {
 	var_02 = level.player getcurrentweapon();
-	if(!isdefined(var_02))
-	{
+	if(!isdefined(var_02)) {
 		return undefined;
 	}
 
 	var_03 = strtok(var_02,"+");
 	var_02 = var_03[0];
-	if(!isdefined(var_02))
-	{
+	if(!isdefined(var_02)) {
 		return undefined;
 	}
 
-	if(var_02 == "alt_iw7_erad")
-	{
+	if(var_02 == "alt_iw7_erad") {
 		return "ges_doorpeek_bash_eradshotty";
 	}
 }
 
-//Function Number: 74
-func_1466(param_00)
-{
+func_1466(param_00) {
 	level.player endon("death");
 	level endon(param_00 + "door_peek_kick");
 	level endon(param_00 + "door_peek_detach");
@@ -2624,74 +2225,58 @@ func_1466(param_00)
 	level.var_5A23[param_00].var_13C81 = 0;
 	var_01 = ["iw7_fmg","alt_iw7_fmg"];
 	var_02 = level.player getcurrentweapon();
-	if(isdefined(var_02))
-	{
+	if(isdefined(var_02)) {
 		var_03 = strtok(var_02,"+");
 		var_02 = var_03[0];
-		foreach(var_05 in var_01)
-		{
-			if(var_02 == var_05)
-			{
+		foreach(var_05 in var_01) {
+			if(var_02 == var_05) {
 				level.var_5A23[param_00].var_13C81 = 1;
 				break;
 			}
 		}
 	}
 
-	if(level.var_5A23[param_00].var_13C81)
-	{
+	if(level.var_5A23[param_00].var_13C81) {
 		level.player scripts\engine\utility::allow_weapon_switch(0);
 	}
 
-	for(;;)
-	{
+	for(;;) {
 		level.player waittill("weapon_change");
 		var_07 = level.var_5A23[param_00].var_13C81;
 		var_02 = level.player getcurrentweapon();
-		if(isdefined(var_02))
-		{
+		if(isdefined(var_02)) {
 			var_03 = strtok(var_02,"+");
 			var_02 = var_03[0];
-			foreach(var_05 in var_01)
-			{
-				if(var_02 == var_05)
-				{
+			foreach(var_05 in var_01) {
+				if(var_02 == var_05) {
 					level.var_5A23[param_00].var_13C81 = 1;
 					break;
 				}
 			}
 		}
 
-		if(!var_07 && level.var_5A23[param_00].var_13C81)
-		{
+		if(!var_07 && level.var_5A23[param_00].var_13C81) {
 			level.player scripts\engine\utility::allow_weapon_switch(0);
 			continue;
 		}
 
-		if(var_07 && !level.var_5A23[param_00].var_13C81)
-		{
+		if(var_07 && !level.var_5A23[param_00].var_13C81) {
 			level.player scripts\engine\utility::allow_weapon_switch(1);
 		}
 	}
 }
 
-//Function Number: 75
-func_1465(param_00)
-{
+func_1465(param_00) {
 	level.player endon("death");
 	level scripts\engine\utility::waittill_any_3(param_00 + "door_peek_kick",param_00 + "door_peek_detach");
-	if(level.var_5A23[param_00].var_13C81)
-	{
+	if(level.var_5A23[param_00].var_13C81) {
 		level.player scripts\engine\utility::allow_weapon_switch(1);
 	}
 }
 
-//Function Number: 76
-func_1298(param_00,param_01)
-{
+func_1298(param_00,param_01) {
 	var_02 = spawnstruct();
-	if(param_00 == "bulkhead" && !param_01)
-	{
+	if(param_00 == "bulkhead" && !param_01) {
 		var_02.var_119AB = 0.9;
 		var_02.var_47A4 = 0.7;
 		var_02.var_47A3 = 12;
@@ -2703,8 +2288,7 @@ func_1298(param_00,param_01)
 		var_02.var_B4B9 = 4;
 		var_02.var_11782 = 16;
 	}
-	else if((param_00 == "airlock" || param_00 == "airlocksdf") && !param_01)
-	{
+	else if((param_00 == "airlock" || param_00 == "airlocksdf") && !param_01) {
 		var_02.var_119AB = 1;
 		var_02.var_47A4 = 0.7;
 		var_02.var_47A3 = 14;
@@ -2717,8 +2301,7 @@ func_1298(param_00,param_01)
 		var_02.var_11782 = 18;
 	}
 
-	if((param_00 == "airlockcombat" || param_00 == "airlockcombatsdf") && !param_01)
-	{
+	if((param_00 == "airlockcombat" || param_00 == "airlockcombatsdf") && !param_01) {
 		var_02.var_119AB = 1.2;
 		var_02.var_47A4 = 0.7;
 		var_02.var_47A3 = 22;
@@ -2730,8 +2313,7 @@ func_1298(param_00,param_01)
 		var_02.var_B4B9 = 2;
 		var_02.var_11782 = 18;
 	}
-	else if(param_00 == "armory" && !param_01)
-	{
+	else if(param_00 == "armory" && !param_01) {
 		var_02.var_119AB = 0.9;
 		var_02.var_47A4 = 0.7;
 		var_02.var_47A3 = 12;
@@ -2743,8 +2325,7 @@ func_1298(param_00,param_01)
 		var_02.var_B4B9 = 4;
 		var_02.var_11782 = 10;
 	}
-	else if(param_00 == "armoryajar" && !param_01)
-	{
+	else if(param_00 == "armoryajar" && !param_01) {
 		var_02.var_119AB = 0.9;
 		var_02.var_47A4 = 0.2;
 		var_02.var_47A3 = 0;
@@ -2756,8 +2337,7 @@ func_1298(param_00,param_01)
 		var_02.var_B4B9 = 4;
 		var_02.var_11782 = 10;
 	}
-	else if(param_00 == "civlever" && !param_01)
-	{
+	else if(param_00 == "civlever" && !param_01) {
 		var_02.var_119AB = 0.6;
 		var_02.var_47A4 = 0.5;
 		var_02.var_47A3 = 12;
@@ -2769,8 +2349,7 @@ func_1298(param_00,param_01)
 		var_02.var_B4B9 = 4;
 		var_02.var_11782 = 3;
 	}
-	else if(param_00 == "civlever" && param_01)
-	{
+	else if(param_00 == "civlever" && param_01) {
 		var_02.var_119AB = 0.6;
 		var_02.var_47A4 = 0.5;
 		var_02.var_47A3 = -12;
@@ -2782,8 +2361,7 @@ func_1298(param_00,param_01)
 		var_02.var_B4B9 = 4;
 		var_02.var_11782 = 3;
 	}
-	else if(param_00 == "civchurch1" && !param_01)
-	{
+	else if(param_00 == "civchurch1" && !param_01) {
 		var_02.var_119AB = 0.6;
 		var_02.var_47A4 = 0.5;
 		var_02.var_47A3 = 12;
@@ -2795,8 +2373,7 @@ func_1298(param_00,param_01)
 		var_02.var_B4B9 = 4;
 		var_02.var_11782 = 3;
 	}
-	else if(param_00 == "civchurch1" && param_01)
-	{
+	else if(param_00 == "civchurch1" && param_01) {
 		var_02.var_119AB = 0.6;
 		var_02.var_47A4 = 0.5;
 		var_02.var_47A3 = -12;
@@ -2812,67 +2389,51 @@ func_1298(param_00,param_01)
 	return var_02;
 }
 
-//Function Number: 77
-func_1299(param_00)
-{
-	if(param_00 == "bulkhead")
-	{
+func_1299(param_00) {
+	if(param_00 == "bulkhead") {
 		return "bulkhead";
 	}
 
-	if(param_00 == "airlock" || param_00 == "airlocksdf" || param_00 == "airlockcombat" || param_00 == "airlockcombatsdf")
-	{
+	if(param_00 == "airlock" || param_00 == "airlocksdf" || param_00 == "airlockcombat" || param_00 == "airlockcombatsdf") {
 		return "airlock";
 	}
 
-	if(param_00 == "armory" || param_00 == "armoryajar")
-	{
+	if(param_00 == "armory" || param_00 == "armoryajar") {
 		return "armory";
 	}
 
-	if(param_00 == "civlever")
-	{
+	if(param_00 == "civlever") {
 		return "civleverwood";
 	}
 
-	if(param_00 == "civchurch1")
-	{
+	if(param_00 == "civchurch1") {
 		return "civhandlewood";
 	}
 }
 
-//Function Number: 78
-func_1297(param_00)
-{
-	if(param_00 == "bulkhead")
-	{
+func_1297(param_00) {
+	if(param_00 == "bulkhead") {
 		return "bulkhead";
 	}
 
-	if(param_00 == "airlock" || param_00 == "airlocksdf" || param_00 == "airlockcombat" || param_00 == "airlockcombatsdf")
-	{
+	if(param_00 == "airlock" || param_00 == "airlocksdf" || param_00 == "airlockcombat" || param_00 == "airlockcombatsdf") {
 		return "airlock";
 	}
 
-	if(param_00 == "armory")
-	{
+	if(param_00 == "armory") {
 		return "armory";
 	}
 
-	if(param_00 == "armoryajar")
-	{
+	if(param_00 == "armoryajar") {
 		return "armoryajar";
 	}
 
-	if(param_00 == "civlever" || param_00 == "civchurch1")
-	{
+	if(param_00 == "civlever" || param_00 == "civchurch1") {
 		return "civlever";
 	}
 }
 
-//Function Number: 79
-func_1206()
-{
+func_1206() {
 	level.var_EC87["player_rig"] = #animtree;
 	level.var_EC8C["player_rig"] = "viewmodel_base_viewhands_iw7";
 	level.var_EC85["player_rig"]["doorpeek_kick"] = %vm_doorpeek_kick;
@@ -2915,16 +2476,12 @@ func_1206()
 	level.var_EC89["player_rig"]["doorpeek_armoryajar_backon"] = 0;
 }
 
-//Function Number: 80
-func_11FB()
-{
+func_11FB() {
 	level.var_EC85["generic"]["walk_cqb_f"][0] = %walk_cqb_f;
 	level.var_EC85["generic"]["cqb_stand_idle"][0] = %cqb_stand_idle;
 }
 
-//Function Number: 81
-func_120C()
-{
+func_120C() {
 	level.var_EC87["doorpeek_door"] = #animtree;
 	level.var_EC85["doorpeek_door"]["doorpeek_civlever_in"] = %wm_doorpeek_bulkhead_in_door;
 	level.var_EC85["doorpeek_door"]["doorpeek_bulkhead_in"] = %wm_doorpeek_bulkhead_in_door;
@@ -2933,15 +2490,11 @@ func_120C()
 	level.var_EC85["doorpeek_door"]["doorpeek_armoryajar_in"] = %wm_doorpeek_armory_ajar_in_door;
 }
 
-//Function Number: 82
-func_5A1B(param_00)
-{
+func_5A1B(param_00) {
 	level notify("doorpeek_handle");
 }
 
-//Function Number: 83
-func_59D9(param_00,param_01)
-{
+func_59D9(param_00,param_01) {
 	level.var_5A23[param_00].var_5A2A rotateto(level.var_5A23[param_00].var_5A24 + (0,-140,0),param_01,0,0);
 	level.var_5A23[param_00].var_5A2A scripts\engine\utility::delaycall(param_01 + 0.05,::delete);
 	level.var_5A23[param_00].var_5A03 connectpaths();

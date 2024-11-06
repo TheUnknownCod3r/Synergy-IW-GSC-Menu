@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: 4276.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 1
- * Decompile Time: 355 ms
- * Timestamp: 10/27/2023 12:32:01 AM
-*******************************************************************/
+/****************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\4276.gsc
+****************************/
 
-//Function Number: 1
-main()
-{
+main() {
 	var_00 = scripts\engine\utility::createoneshoteffect("vfx_zmb_candle_flame");
 	var_00 scripts\common\createfx::set_origin_and_angles((-10245.7,821.784,-1623.86),(0,0,0));
 	var_00.v["fxid"] = "vfx_zmb_candle_flame";

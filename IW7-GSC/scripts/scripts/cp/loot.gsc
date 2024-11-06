@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\cp\loot.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 78
- * Decompile Time: 2987 ms
- * Timestamp: 10/27/2023 12:23:44 AM
-*******************************************************************/
+/***************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\cp\loot.gsc
+***************************************/
 
-//Function Number: 1
-init_loot()
-{
+init_loot() {
 	read_loot_table();
 	init_powerup_effects();
 	init_powerup_flags();
@@ -20,39 +14,28 @@ init_loot()
 	level thread poweruponplayerconnect();
 }
 
-//Function Number: 2
-poweruponplayerconnect()
-{
+poweruponplayerconnect() {
 	var_00 = getarraykeys(level.active_power_ups);
-	for(;;)
-	{
+	for(;;) {
 		level waittill("connected",var_01);
-		foreach(var_03 in var_00)
-		{
-			if(scripts\engine\utility::istrue(level.active_power_ups[var_03]))
-			{
-				if(isdefined(level.power_up_func[var_03]))
-				{
-					thread [[ level.power_up_func[var_03] ]](var_01);
+		foreach(var_03 in var_00) {
+			if(scripts\engine\utility::istrue(level.active_power_ups[var_03])) {
+				if(isdefined(level.power_up_func[var_03])) {
+					thread [[level.power_up_func[var_03]]](var_01);
 				}
 			}
 		}
 	}
 }
 
-//Function Number: 3
-init_powerup_effects()
-{
+init_powerup_effects() {
 	level._effect["pickup"] = loadfx("vfx/iw7/core/zombie/powerups/vfx_zom_powerup_pickup.vfx");
 	level._effect["pickup_fnfmod"] = loadfx("vfx/iw7/core/zombie/powerups/vfx_zd_powerup_pickup.vfx");
 	level._effect["big_explo"] = loadfx("vfx/iw7/_requests/coop/vfx_nuke_explosion_01.vfx");
 }
 
-//Function Number: 4
-init_powerup_data()
-{
-	if(!isdefined(level.active_power_ups))
-	{
+init_powerup_data() {
+	if(!isdefined(level.active_power_ups)) {
 		level.active_power_ups = [];
 	}
 
@@ -66,46 +49,35 @@ init_powerup_data()
 	level.power_up_func["infinite_ammo"] = ::apply_infinite_ammo_effects;
 	level.power_up_func["infinite_grenades"] = ::apply_infinite_grenade_effects;
 	level.power_up_func["fire_sale"] = ::apply_fire_sale_effects;
-	if(!isdefined(level.power_up_drop_score))
-	{
+	if(!isdefined(level.power_up_drop_score)) {
 		level.power_up_drop_score = 500;
 	}
 
-	if(!isdefined(level.powerup_drop_increment))
-	{
+	if(!isdefined(level.powerup_drop_increment)) {
 		level.powerup_drop_increment = randomintrange(2000,3000);
 	}
 
-	if(!isdefined(level.powerup_drop_max_per_round))
-	{
+	if(!isdefined(level.powerup_drop_max_per_round)) {
 		level.powerup_drop_max_per_round = 5;
 	}
 
-	if(!isdefined(level.powerup_drop_count))
-	{
+	if(!isdefined(level.powerup_drop_count)) {
 		level.powerup_drop_count = 0;
 	}
 
-	if(!isdefined(level.score_to_drop))
-	{
+	if(!isdefined(level.score_to_drop)) {
 		level.score_to_drop = level.powerup_drop_increment;
 	}
 }
 
-//Function Number: 5
-check_to_increase_powerup_drop_rates()
-{
+check_to_increase_powerup_drop_rates() {
 	level waittill("regular_wave_starting");
-	for(;;)
-	{
-		foreach(var_01 in level.players)
-		{
-			if(!scripts\engine\utility::istrue(var_01.checked))
-			{
+	for(;;) {
+		foreach(var_01 in level.players) {
+			if(!scripts\engine\utility::istrue(var_01.checked)) {
 				var_01.checked = 1;
 				level.score_to_drop = level.score_to_drop + level.power_up_drop_score;
-				if(var_01 scripts\cp\utility::is_consumable_active("more_power_up_drops"))
-				{
+				if(var_01 scripts\cp\utility::is_consumable_active("more_power_up_drops")) {
 					level.powerup_drop_increment = level.powerup_drop_increment - 5;
 				}
 			}
@@ -115,9 +87,7 @@ check_to_increase_powerup_drop_rates()
 	}
 }
 
-//Function Number: 6
-init_powerup_flags()
-{
+init_powerup_flags() {
 	scripts\engine\utility::flag_init("zombie_drop_powerups");
 	scripts\engine\utility::flag_init("fire_sale");
 	scripts\engine\utility::flag_init("canFiresale");
@@ -125,26 +95,20 @@ init_powerup_flags()
 	scripts\engine\utility::flag_init("force_drop_max_ammo");
 }
 
-//Function Number: 7
-reset_drop_count_between_waves()
-{
+reset_drop_count_between_waves() {
 	level endon("game_ended");
-	for(;;)
-	{
+	for(;;) {
 		level waittill("spawn_wave_done");
 		level.powerup_drop_count = 0;
 	}
 }
 
-//Function Number: 8
-read_loot_table()
-{
+read_loot_table() {
 	level.loot_info = [];
 	level.loot_fx = [];
 	level.loot_icon = [];
 	level.loot_id = [];
-	if(isdefined(level.power_up_table))
-	{
+	if(isdefined(level.power_up_table)) {
 		var_00 = level.power_up_table;
 	}
 	else
@@ -152,11 +116,9 @@ read_loot_table()
 		var_00 = "cp/zombies/zombie_loot.csv";
 	}
 
-	for(var_01 = 1;var_01 <= 100;var_01++)
-	{
+	for(var_01 = 1;var_01 <= 100;var_01++) {
 		var_02 = table_look_up(var_00,var_01,2);
-		if(scripts\cp\utility::is_empty_string(var_02))
-		{
+		if(scripts\cp\utility::is_empty_string(var_02)) {
 			break;
 		}
 
@@ -165,8 +127,7 @@ read_loot_table()
 		var_03["weight_sum"] = get_weight_sum(var_03["weights"]);
 		var_04 = strtok(table_look_up(var_00,var_01,4)," ");
 		var_03["contents"] = [];
-		foreach(var_08, var_06 in var_04)
-		{
+		foreach(var_08, var_06 in var_04) {
 			var_07 = [];
 			var_07["value"] = var_06;
 			var_07["last_time"] = 0;
@@ -176,17 +137,14 @@ read_loot_table()
 		level.loot_info[var_02] = var_03;
 	}
 
-	for(var_01 = 101;var_01 <= 150;var_01++)
-	{
+	for(var_01 = 101;var_01 <= 150;var_01++) {
 		var_09 = table_look_up(var_00,var_01,2);
-		if(scripts\cp\utility::is_empty_string(var_09))
-		{
+		if(scripts\cp\utility::is_empty_string(var_09)) {
 			break;
 		}
 
 		var_0A = table_look_up(var_00,var_01,3);
-		if(!isdefined(level._effect[var_0A]))
-		{
+		if(!isdefined(level._effect[var_0A])) {
 			level._effect[var_0A] = loadfx(var_0A);
 		}
 
@@ -195,17 +153,14 @@ read_loot_table()
 		level.loot_id[var_09] = var_0B;
 	}
 
-	for(var_01 = 101;var_01 <= 150;var_01++)
-	{
+	for(var_01 = 101;var_01 <= 150;var_01++) {
 		var_09 = table_look_up(var_00,var_01,2);
-		if(scripts\cp\utility::is_empty_string(var_09))
-		{
+		if(scripts\cp\utility::is_empty_string(var_09)) {
 			break;
 		}
 
 		var_0C = table_look_up(var_00,var_01,4);
-		if(scripts\cp\utility::is_empty_string(var_0C))
-		{
+		if(scripts\cp\utility::is_empty_string(var_0C)) {
 			continue;
 		}
 
@@ -213,52 +168,40 @@ read_loot_table()
 	}
 }
 
-//Function Number: 9
-convert_to_float_array(param_00)
-{
+convert_to_float_array(param_00) {
 	param_00 = strtok(param_00," ");
 	var_01 = [];
-	for(var_02 = 0;var_02 < param_00.size;var_02++)
-	{
+	for(var_02 = 0;var_02 < param_00.size;var_02++) {
 		var_01[var_02] = float(param_00[var_02]);
 	}
 
 	return var_01;
 }
 
-//Function Number: 10
-get_weight_sum(param_00)
-{
+get_weight_sum(param_00) {
 	var_01 = 0;
-	foreach(var_03 in param_00)
-	{
+	foreach(var_03 in param_00) {
 		var_01 = var_01 + var_03;
 	}
 
 	return var_01;
 }
 
-//Function Number: 11
-drop_loot(location, from_consumable, powerup_id, should_fly_to_player, param_04, can_despawn)
-{
-	if(powerup_id == "none")
-	{
+drop_loot(location, from_consumable, powerup_id, should_fly_to_player, param_04, can_despawn) {
+	if(powerup_id == "none") {
 		return 0;
 	}
 
 	location = getclosestpointonnavmesh(location);
 	fly_to_player = scripts\engine\utility::istrue(should_fly_to_player);
 	var_07 = create_loot_model(location);
-	if(!isdefined(var_07))
-	{
+	if(!isdefined(var_07)) {
 		return 0;
 	}
 
 	var_07.fnf_consumable_active = 0;
-	foreach(var_09 in level.players)
-	{
-		if(var_09 scripts\cp\utility::is_consumable_active("temporal_increase"))
-		{
+	foreach(var_09 in level.players) {
+		if(var_09 scripts\cp\utility::is_consumable_active("temporal_increase")) {
 			var_07.fnf_consumable_active = 1;
 			break;
 		}
@@ -268,21 +211,18 @@ drop_loot(location, from_consumable, powerup_id, should_fly_to_player, param_04,
 	var_0B = get_loot_fx(var_07);
 	var_07.fxname = var_0B;
 	var_0C = (0,0,0);
-	if(isdefined(from_consumable) && from_consumable scripts\cp\utility::is_consumable_active("more_power_up_drops"))
-	{
+	if(isdefined(from_consumable) && from_consumable scripts\cp\utility::is_consumable_active("more_power_up_drops")) {
 		from_consumable scripts\cp\utility::notify_used_consumable("more_power_up_drops");
 	}
 
-	if(isdefined(param_04))
-	{
+	if(isdefined(param_04)) {
 		level.powerup_drop_increment = level.powerup_drop_increment * 1.14;
 		level.score_to_drop = param_04 + level.powerup_drop_increment;
 		level.var_D79D++;
 		level.last_drop_time = gettime();
 	}
 
-	if(!is_in_active_volume(location) && loot_fly_to_player_enabled())
-	{
+	if(!is_in_active_volume(location) && loot_fly_to_player_enabled()) {
 		location = moveeffecttoclosestplayer(var_07);
 		var_07 thread loot_fx_handler();
 		fly_to_player = 1;
@@ -290,20 +230,17 @@ drop_loot(location, from_consumable, powerup_id, should_fly_to_player, param_04,
 	else
 	{
 		location = location + (0,0,50);
-		if(scripts\engine\utility::istrue(var_07.fnf_consumable_active))
-		{
+		if(scripts\engine\utility::istrue(var_07.fnf_consumable_active)) {
 			var_07.fnffx = spawnfx(level._effect["powerup_additive_fx"],location + (0,0,-10));
 		}
 
 		var_07.fx = spawnfx(scripts\engine\utility::getfx(var_0B),location);
-		if(isdefined(var_0C))
-		{
+		if(isdefined(var_0C)) {
 			var_07.fx.angles = var_0C;
 		}
 	}
 
-	if(isdefined(from_consumable))
-	{
+	if(isdefined(from_consumable)) {
 		var_07.triggerportableradarping = from_consumable;
 	}
 	else
@@ -312,10 +249,8 @@ drop_loot(location, from_consumable, powerup_id, should_fly_to_player, param_04,
 	}
 
 	var_07 notify("activate");
-	if(!fly_to_player)
-	{
-		if(scripts\engine\utility::istrue(var_07.fnf_consumable_active))
-		{
+	if(!fly_to_player) {
+		if(scripts\engine\utility::istrue(var_07.fnf_consumable_active)) {
 			triggerfx(var_07.fnffx);
 			var_07.fnffx setfxkilldefondelete();
 		}
@@ -328,8 +263,7 @@ drop_loot(location, from_consumable, powerup_id, should_fly_to_player, param_04,
 	var_07 thread loot_pick_up_monitor(var_07);
 	var_07 thread loot_think(var_07);
 	var_0D = get_index_for_powerup(powerup_id);
-	if(isdefined(var_0D) && scripts\engine\utility::istrue(can_despawn))
-	{
+	if(isdefined(var_0D) && scripts\engine\utility::istrue(can_despawn)) {
 		update_power_up_drop_time(var_0D);
 	}
 
@@ -337,26 +271,20 @@ drop_loot(location, from_consumable, powerup_id, should_fly_to_player, param_04,
 	return 1;
 }
 
-//Function Number: 12
-loot_fly_to_player_enabled()
-{
-	if(scripts\engine\utility::istrue(level.disable_loot_fly_to_player))
-	{
+loot_fly_to_player_enabled() {
+	if(scripts\engine\utility::istrue(level.disable_loot_fly_to_player)) {
 		return 0;
 	}
 
 	return 1;
 }
 
-//Function Number: 13
-moveeffecttoclosestplayer(param_00)
-{
+moveeffecttoclosestplayer(param_00) {
 	level endon("game_ended");
 	param_00.fx = spawn("script_model",param_00.origin + (0,0,50));
 	param_00.fx setmodel("tag_origin");
 	wait(0.1);
-	if(scripts\engine\utility::istrue(param_00.fnf_consumable_active))
-	{
+	if(scripts\engine\utility::istrue(param_00.fnf_consumable_active)) {
 		playfxontag(level._effect["powerup_additive_fx"],param_00.fx,"tag_origin");
 	}
 
@@ -365,8 +293,7 @@ moveeffecttoclosestplayer(param_00)
 	var_02 = distance(param_00.origin,var_01.origin);
 	var_03 = 300;
 	var_04 = var_02 / var_03;
-	if(var_04 < 0.05)
-	{
+	if(var_04 < 0.05) {
 		var_04 = 0.05;
 	}
 
@@ -378,12 +305,9 @@ moveeffecttoclosestplayer(param_00)
 	return param_00.origin;
 }
 
-//Function Number: 14
-cleanuppowerup(param_00)
-{
+cleanuppowerup(param_00) {
 	param_00 scripts\engine\utility::waittill_any_timeout_1(get_loot_time_out(),"picked_up");
-	if(scripts\engine\utility::istrue(param_00.fnf_consumable_active))
-	{
+	if(scripts\engine\utility::istrue(param_00.fnf_consumable_active)) {
 		playfx(level._effect["pickup_fnfmod"],param_00.origin + (0,0,50));
 	}
 	else
@@ -391,43 +315,36 @@ cleanuppowerup(param_00)
 		playfx(level._effect["pickup"],param_00.origin + (0,0,50));
 	}
 
-	if(isdefined(param_00.fx))
-	{
+	if(isdefined(param_00.fx)) {
 		param_00.fx delete();
 	}
 
-	if(isdefined(param_00.fnffx))
-	{
+	if(isdefined(param_00.fnffx)) {
 		param_00.fnffx delete();
 	}
 
 	wait(0.5);
 	param_00.fnf_consumable_active = 0;
-	if(isdefined(param_00))
-	{
+	if(isdefined(param_00)) {
 		param_00 delete();
 	}
 
 	param_00 notify("loot_deleted");
 }
 
-//Function Number: 15
-loot_fx_handler()
-{
+loot_fx_handler() {
 	self endon("death");
 	self endon("picked_up");
 	self endon("loot_deleted");
 	var_00 = get_loot_time_out() - 5;
 	wait(var_00);
-	for(var_01 = 0;var_01 < 5;var_01++)
-	{
+	for(var_01 = 0;var_01 < 5;var_01++) {
 		wait(0.5);
 		self.fx delete();
 		wait(0.5);
 		var_02 = get_loot_fx(self);
 		var_03 = scripts\engine\utility::getfx(var_02);
-		if(!isdefined(var_03))
-		{
+		if(!isdefined(var_03)) {
 			continue;
 		}
 
@@ -438,42 +355,32 @@ loot_fx_handler()
 		self.fx setfxkilldefondelete();
 	}
 
-	if(isdefined(self) && isdefined(self.fx))
-	{
+	if(isdefined(self) && isdefined(self.fx)) {
 		self.fx delete();
 	}
 
-	if(isdefined(self) && isdefined(self.fnffx))
-	{
+	if(isdefined(self) && isdefined(self.fnffx)) {
 		self.fnffx delete();
 	}
 }
 
-//Function Number: 16
-get_loot_time_out()
-{
-	if(isdefined(level.loot_time_out))
-	{
+get_loot_time_out() {
+	if(isdefined(level.loot_time_out)) {
 		return level.loot_time_out;
 	}
 
 	return 30;
 }
 
-//Function Number: 17
-get_index_for_powerup(param_00,param_01)
-{
-	if(!isdefined(param_01))
-	{
+get_index_for_powerup(param_00,param_01) {
+	if(!isdefined(param_01)) {
 		param_01 = "kill_generic_zombie";
 	}
 
 	var_02 = 0;
 	var_03 = level.loot_info[param_01]["contents"].size;
-	for(var_02 = 0;var_02 < var_03;var_02++)
-	{
-		if(level.loot_info[param_01]["contents"][var_02]["value"] == param_00)
-		{
+	for(var_02 = 0;var_02 < var_03;var_02++) {
+		if(level.loot_info[param_01]["contents"][var_02]["value"] == param_00) {
 			return var_02;
 		}
 	}
@@ -481,16 +388,12 @@ get_index_for_powerup(param_00,param_01)
 	return 0;
 }
 
-//Function Number: 18
-monitor_health(param_00)
-{
+monitor_health(param_00) {
 	self endon("loot_deleted");
 	level endon("game_ended");
-	while(isdefined(param_00) && isdefined(param_00.health) && param_00.health >= 1)
-	{
+	while(isdefined(param_00) && isdefined(param_00.health) && param_00.health >= 1) {
 		level waittill("attack_hit",var_01,var_02);
-		if(param_00 != var_02)
-		{
+		if(param_00 != var_02) {
 			continue;
 		}
 
@@ -500,46 +403,34 @@ monitor_health(param_00)
 	self notify("picked_up");
 }
 
-//Function Number: 19
-create_loot_model(param_00)
-{
+create_loot_model(param_00) {
 	var_01 = scripts\engine\utility::drop_to_ground(param_00,32,-64);
 	var_02 = spawn("trigger_radius",var_01,0,32,76);
 	return var_02;
 }
 
-//Function Number: 20
-get_loot_fx(param_00)
-{
-	if(!isdefined(level.loot_fx[param_00.content]))
-	{
+get_loot_fx(param_00) {
+	if(!isdefined(level.loot_fx[param_00.content])) {
 		return "vfx_loot_ace_hearts";
 	}
 
 	return level.loot_fx[param_00.content];
 }
 
-//Function Number: 21
-loot_think(param_00)
-{
+loot_think(param_00) {
 	param_00 endon("loot_deleted");
 	var_01 = param_00 scripts\engine\utility::waittill_any_timeout_1(get_loot_time_out(),"picked_up");
-	if(var_01 == "picked_up")
-	{
+	if(var_01 == "picked_up") {
 		thread process_loot_content(param_00.triggerportableradarping,param_00.content,param_00,1);
 	}
 }
 
-//Function Number: 22
-loot_pick_up_monitor(param_00)
-{
+loot_pick_up_monitor(param_00) {
 	param_00 endon("loot_deleted");
 	wait(0.2);
-	for(;;)
-	{
+	for(;;) {
 		param_00 waittill("trigger",var_01);
-		if(!isplayer(var_01))
-		{
+		if(!isplayer(var_01)) {
 			wait(0.25);
 			continue;
 		}
@@ -550,9 +441,7 @@ loot_pick_up_monitor(param_00)
 	}
 }
 
-//Function Number: 23
-process_loot_content(powerupName,param_01,param_02,param_03)
-{
+process_loot_content(powerupName,param_01,param_02,param_03) {
 	var_04 = param_01;
 	param_01 = strtok(param_01,"_");
 	var_05 = param_01[0];
@@ -561,29 +450,25 @@ process_loot_content(powerupName,param_01,param_02,param_03)
 	var_08 = int(level.loot_id[var_04]);
 	var_09 = 1;
 	display_powerup_popup(0);
-	switch(var_05)
-	{
+	switch(var_05) {
 		case "power":
-			level thread [[ level.power_off_func ]](var_04,var_07);
+			level thread [[level.power_off_func]](var_04,var_07);
 			break;
 
 		case "fire":
-			if(isdefined(level.fire_sale_func))
-			{
-				if(isdefined(level.temporal_increase))
-				{
+			if(isdefined(level.fire_sale_func)) {
+				if(isdefined(level.temporal_increase)) {
 					var_06 = int(var_06) * level.temporal_increase;
 				}
 	
 				level thread scripts\cp\cp_vo::try_to_play_vo("powerup_firesale","zmb_powerup_vo");
 				param_02 playsound("zmb_powerup_fire_sale");
-				level thread [[ level.fire_sale_func ]](var_04,int(var_06),var_07);
+				level thread [[level.fire_sale_func]](var_04,int(var_06),var_07);
 			}
 			break;
 
 		case "grenade":
-			if(isdefined(level.temporal_increase))
-			{
+			if(isdefined(level.temporal_increase)) {
 				var_06 = int(var_06) * level.temporal_increase;
 			}
 	
@@ -593,8 +478,7 @@ process_loot_content(powerupName,param_01,param_02,param_03)
 			break;
 
 		case "infinite":
-			if(isdefined(level.temporal_increase))
-			{
+			if(isdefined(level.temporal_increase)) {
 				var_06 = int(var_06) * level.temporal_increase;
 			}
 	
@@ -604,16 +488,14 @@ process_loot_content(powerupName,param_01,param_02,param_03)
 			break;
 
 		case "upgrade":
-			if(isdefined(level.upgrade_weapons_func))
-			{
+			if(isdefined(level.upgrade_weapons_func)) {
 				param_02 playsound("zmb_powerup_wpn_upgrade");
-				level thread [[ level.upgrade_weapons_func ]]();
+				level thread [[level.upgrade_weapons_func]]();
 			}
 			break;
 
 		case "kill":
-			if(scripts\engine\utility::istrue(level.forced_nuke))
-			{
+			if(scripts\engine\utility::istrue(level.forced_nuke)) {
 				var_09 = 0;
 				level thread kill_closest_enemies(param_02,int(var_06));
 			}
@@ -632,8 +514,7 @@ process_loot_content(powerupName,param_01,param_02,param_03)
 			break;
 
 		case "instakill":
-			if(isdefined(level.temporal_increase))
-			{
+			if(isdefined(level.temporal_increase)) {
 				var_06 = int(var_06) * level.temporal_increase;
 			}
 	
@@ -650,11 +531,10 @@ process_loot_content(powerupName,param_01,param_02,param_03)
 			break;
 
 		case "board":
-			if(isdefined(level.rebuild_all_windows_func))
-			{
+			if(isdefined(level.rebuild_all_windows_func)) {
 				level thread scripts\cp\cp_vo::try_to_play_vo("powerup_carpenter","zmb_powerup_vo");
 				param_02 playsound("zmb_powerup_reboard_windows");
-				level thread [[ level.rebuild_all_windows_func ]](powerupName);
+				level thread [[level.rebuild_all_windows_func]](powerupName);
 			}
 			break;
 
@@ -662,24 +542,19 @@ process_loot_content(powerupName,param_01,param_02,param_03)
 			break;
 	}
 
-	if(scripts\engine\utility::istrue(param_03))
-	{
+	if(scripts\engine\utility::istrue(param_03)) {
 		powerupName scripts\cp\cp_merits::processmerit("mt_powerup_grabs");
 	}
 
 	powerupName thread scripts\cp\cp_hud_message::tutorial_lookup_func("powerups");
 	scripts\engine\utility::waitframe();
-	if(var_09)
-	{
+	if(var_09) {
 		display_powerup_popup(var_08);
 	}
 }
 
-//Function Number: 24
-get_loot_content(param_00,param_01,param_02)
-{
-	if(!isdefined(level.loot_info[param_00]))
-	{
+get_loot_content(param_00,param_01,param_02) {
+	if(!isdefined(level.loot_info[param_00])) {
 		return undefined;
 	}
 
@@ -688,23 +563,18 @@ get_loot_content(param_00,param_01,param_02)
 	return var_04;
 }
 
-//Function Number: 25
-choose_powerup(param_00,param_01,param_02)
-{
+choose_powerup(param_00,param_01,param_02) {
 	var_03 = level.wave_num;
 	var_04 = level.loot_info[param_00]["contents"].size;
 	level.allowed_powerups = [];
-	for(var_05 = 0;var_05 < var_04;var_05++)
-	{
+	for(var_05 = 0;var_05 < var_04;var_05++) {
 		var_06 = level.loot_info[param_00]["contents"][var_05]["value"];
 		var_07 = level.loot_info[param_00]["contents"][var_05]["last_time"];
 		var_06 = strtok(var_06,"_");
 		var_08 = var_06[0];
-		switch(var_08)
-		{
+		switch(var_08) {
 			case "fire":
-				if((scripts\engine\utility::istrue(level.power_up_drop_override) || scripts\engine\utility::flag("canFiresale") && param_01 - var_07 >= 180000) && var_03 >= 5)
-				{
+				if((scripts\engine\utility::istrue(level.power_up_drop_override) || scripts\engine\utility::flag("canFiresale") && param_01 - var_07 >= 180000) && var_03 >= 5) {
 					level.allowed_powerups[level.allowed_powerups.size] = var_05;
 					break;
 				}
@@ -716,8 +586,7 @@ choose_powerup(param_00,param_01,param_02)
 				break;
 
 			case "explosive":
-				if((scripts\engine\utility::istrue(level.power_up_drop_override) || param_01 - var_07 >= 300000) && var_03 >= 8)
-				{
+				if((scripts\engine\utility::istrue(level.power_up_drop_override) || param_01 - var_07 >= 300000) && var_03 >= 8) {
 					level.allowed_powerups[level.allowed_powerups.size] = var_05;
 					break;
 				}
@@ -729,8 +598,7 @@ choose_powerup(param_00,param_01,param_02)
 				break;
 
 			case "infinite":
-				if((scripts\engine\utility::istrue(level.power_up_drop_override) || param_01 - var_07 >= 180000) && var_03 >= 5)
-				{
+				if((scripts\engine\utility::istrue(level.power_up_drop_override) || param_01 - var_07 >= 180000) && var_03 >= 5) {
 					level.allowed_powerups[level.allowed_powerups.size] = var_05;
 					break;
 				}
@@ -742,8 +610,7 @@ choose_powerup(param_00,param_01,param_02)
 				break;
 
 			case "ammo":
-				if((scripts\engine\utility::istrue(level.power_up_drop_override) || param_01 - var_07 >= 180000) && var_03 >= 2)
-				{
+				if((scripts\engine\utility::istrue(level.power_up_drop_override) || param_01 - var_07 >= 180000) && var_03 >= 2) {
 					level.allowed_powerups[level.allowed_powerups.size] = var_05;
 					break;
 				}
@@ -755,8 +622,7 @@ choose_powerup(param_00,param_01,param_02)
 				break;
 
 			case "grenade":
-				if((scripts\engine\utility::istrue(level.power_up_drop_override) || param_01 - var_07 >= -5536) && var_03 >= 1)
-				{
+				if((scripts\engine\utility::istrue(level.power_up_drop_override) || param_01 - var_07 >= -5536) && var_03 >= 1) {
 					level.allowed_powerups[level.allowed_powerups.size] = var_05;
 					break;
 				}
@@ -768,10 +634,8 @@ choose_powerup(param_00,param_01,param_02)
 				break;
 
 			case "upgrade":
-				if((scripts\engine\utility::istrue(level.power_up_drop_override) || param_01 - var_07 >= 600000) && var_03 >= 15)
-				{
-					if(!scripts\cp\utility::is_codxp())
-					{
+				if((scripts\engine\utility::istrue(level.power_up_drop_override) || param_01 - var_07 >= 600000) && var_03 >= 15) {
+					if(!scripts\cp\utility::is_codxp()) {
 						level.allowed_powerups[level.allowed_powerups.size] = var_05;
 					}
 	
@@ -785,8 +649,7 @@ choose_powerup(param_00,param_01,param_02)
 				break;
 
 			case "kill":
-				if((scripts\engine\utility::istrue(level.power_up_drop_override) || param_01 - var_07 >= 180000) && var_03 >= 1)
-				{
+				if((scripts\engine\utility::istrue(level.power_up_drop_override) || param_01 - var_07 >= 180000) && var_03 >= 1) {
 					level.allowed_powerups[level.allowed_powerups.size] = var_05;
 					break;
 				}
@@ -798,8 +661,7 @@ choose_powerup(param_00,param_01,param_02)
 				break;
 
 			case "cash":
-				if((scripts\engine\utility::istrue(level.power_up_drop_override) || param_01 - var_07 >= 90000) && var_03 >= 1)
-				{
+				if((scripts\engine\utility::istrue(level.power_up_drop_override) || param_01 - var_07 >= 90000) && var_03 >= 1) {
 					level.allowed_powerups[level.allowed_powerups.size] = var_05;
 					break;
 				}
@@ -811,8 +673,7 @@ choose_powerup(param_00,param_01,param_02)
 				break;
 
 			case "instakill":
-				if((scripts\engine\utility::istrue(level.power_up_drop_override) || param_01 - var_07 >= 90000) && var_03 >= 1)
-				{
+				if((scripts\engine\utility::istrue(level.power_up_drop_override) || param_01 - var_07 >= 90000) && var_03 >= 1) {
 					level.allowed_powerups[level.allowed_powerups.size] = var_05;
 					break;
 				}
@@ -824,8 +685,7 @@ choose_powerup(param_00,param_01,param_02)
 				break;
 
 			case "board":
-				if((scripts\engine\utility::istrue(level.power_up_drop_override) || param_01 - var_07 >= -20536) && var_03 >= 1)
-				{
+				if((scripts\engine\utility::istrue(level.power_up_drop_override) || param_01 - var_07 >= -20536) && var_03 >= 1) {
 					level.allowed_powerups[level.allowed_powerups.size] = var_05;
 					break;
 				}
@@ -841,8 +701,7 @@ choose_powerup(param_00,param_01,param_02)
 		}
 	}
 
-	if(level.allowed_powerups.size < 1)
-	{
+	if(level.allowed_powerups.size < 1) {
 		return undefined;
 	}
 
@@ -853,91 +712,71 @@ choose_powerup(param_00,param_01,param_02)
 	return var_0A;
 }
 
-//Function Number: 26
-get_loot_index_based_on_weights(param_00)
-{
+get_loot_index_based_on_weights(param_00) {
 	var_01 = 0;
-	for(var_02 = 0;var_02 < level.allowed_powerups.size;var_02++)
-	{
+	for(var_02 = 0;var_02 < level.allowed_powerups.size;var_02++) {
 		var_03 = int(level.allowed_powerups[var_02]);
 		var_01 = var_01 + level.loot_info[param_00]["weights"][var_03];
 	}
 
 	var_04 = randomfloat(var_01);
 	var_05 = 0;
-	for(var_02 = 0;var_02 < level.allowed_powerups.size;var_02++)
-	{
+	for(var_02 = 0;var_02 < level.allowed_powerups.size;var_02++) {
 		var_03 = int(level.allowed_powerups[var_02]);
 		var_05 = var_05 + level.loot_info[param_00]["weights"][var_03];
-		if(var_05 >= var_04)
-		{
+		if(var_05 >= var_04) {
 			return var_02;
 		}
 	}
 }
 
-//Function Number: 27
-table_look_up(param_00,param_01,param_02)
-{
+table_look_up(param_00,param_01,param_02) {
 	return tablelookup(param_00,0,param_01,param_02);
 }
 
-//Function Number: 28
-update_enemy_killed_event(param_00,param_01,param_02)
-{
-	if(!scripts\cp\utility::coop_mode_has("loot"))
-	{
+update_enemy_killed_event(param_00,param_01,param_02) {
+	if(!scripts\cp\utility::coop_mode_has("loot")) {
 		return;
 	}
 
-	if(!isdefined(level.loot_func))
-	{
+	if(!isdefined(level.loot_func)) {
 		return;
 	}
 
-	if(!scripts\engine\utility::flag("zombie_drop_powerups"))
-	{
+	if(!scripts\engine\utility::flag("zombie_drop_powerups")) {
 		return;
 	}
 
-	if(!isplayer(param_02))
-	{
+	if(!isplayer(param_02)) {
 		return;
 	}
 
 	var_04 = scripts\engine\utility::istrue(level.power_up_drop_override);
-	if(level.powerup_drop_count >= level.powerup_drop_max_per_round && !var_04)
-	{
+	if(level.powerup_drop_count >= level.powerup_drop_max_per_round && !var_04) {
 		return;
 	}
 
-	if(!is_in_active_volume(param_01))
-	{
+	if(!is_in_active_volume(param_01)) {
 		return;
 	}
 
-	if(scripts\engine\utility::istrue(self.is_suicide_bomber))
-	{
+	if(scripts\engine\utility::istrue(self.is_suicide_bomber)) {
 		return;
 	}
 
-	if(isdefined(level.invalid_spawn_volume_array))
-	{
-		if(!scripts\cp\cp_weapon::isinvalidzone(param_01,level.invalid_spawn_volume_array,undefined,undefined,1))
-		{
+	if(isdefined(level.invalid_spawn_volume_array)) {
+		if(!scripts\cp\cp_weapon::isinvalidzone(param_01,level.invalid_spawn_volume_array,undefined,undefined,1)) {
 			return;
 		}
 	}
-	else if(!scripts\cp\cp_weapon::isinvalidzone(param_01,undefined,undefined,undefined,1))
-	{
+	else if(!scripts\cp\cp_weapon::isinvalidzone(param_01,undefined,undefined,undefined,1)) {
 		return;
 	}
 
 	var_05 = level.players;
 	var_03 = undefined;
 	var_06 = 0;
-	if(param_02 scripts\cp\utility::is_consumable_active("more_power_up_drops"))
-	{
+	if(param_02 scripts\cp\utility::is_consumable_active("more_power_up_drops")) {
 		var_07 = level.score_to_drop * 0.7;
 	}
 	else
@@ -945,36 +784,28 @@ update_enemy_killed_event(param_00,param_01,param_02)
 		var_07 = level.score_to_drop;
 	}
 
-	for(var_08 = 0;var_08 < var_05.size;var_08++)
-	{
-		if(isdefined(var_05[var_08].total_currency_earned))
-		{
+	for(var_08 = 0;var_08 < var_05.size;var_08++) {
+		if(isdefined(var_05[var_08].total_currency_earned)) {
 			var_06 = var_06 + var_05[var_08].total_currency_earned;
 		}
 	}
 
 	var_09 = 0;
-	if(var_06 > var_07 && !var_09)
-	{
+	if(var_06 > var_07 && !var_09) {
 		var_03 = get_loot_content("kill_" + param_00,param_01);
 	}
 
-	if(isdefined(var_03))
-	{
+	if(isdefined(var_03)) {
 		level thread drop_loot(param_01,param_02,var_03,undefined,var_06,1);
 	}
 }
 
-//Function Number: 29
-update_power_up_drop_time(param_00)
-{
+update_power_up_drop_time(param_00) {
 	var_01 = gettime();
 	level.loot_info["kill_generic_zombie"]["contents"][param_00]["last_time"] = var_01;
 }
 
-//Function Number: 30
-give_explosive_armor(param_00,param_01,param_02)
-{
+give_explosive_armor(param_00,param_01,param_02) {
 	level endon("game_ended");
 	level endon("deactivated" + param_00);
 	scripts\engine\utility::flag_set("explosive_armor");
@@ -983,23 +814,18 @@ give_explosive_armor(param_00,param_01,param_02)
 	level thread player_spawn_monitor(param_00,::give_player_explosive_armor);
 	level thread give_explosive_touch_on_revived(param_00,::give_player_explosive_armor);
 	level.explosive_touch = 1;
-	foreach(var_04 in level.players)
-	{
-		if(!isalive(var_04) || scripts\engine\utility::istrue(var_04.inlaststand))
-		{
+	foreach(var_04 in level.players) {
+		if(!isalive(var_04) || scripts\engine\utility::istrue(var_04.inlaststand)) {
 			continue;
 		}
 
-		if(!scripts\engine\utility::istrue(var_04.has_explosive_armor))
-		{
+		if(!scripts\engine\utility::istrue(var_04.has_explosive_armor)) {
 			thread give_player_explosive_armor(var_04,param_00);
 		}
 	}
 }
 
-//Function Number: 31
-give_player_explosive_armor(param_00,param_01)
-{
+give_player_explosive_armor(param_00,param_01) {
 	param_00.has_explosive_armor = 1;
 	param_00 thread power_icon_active(undefined,param_01);
 	param_00 thread create_explosive_shield();
@@ -1008,45 +834,34 @@ give_player_explosive_armor(param_00,param_01)
 	param_00 thread remove_explosive_touch_on_death(param_00);
 }
 
-//Function Number: 32
-player_connect_monitor(param_00,param_01)
-{
+player_connect_monitor(param_00,param_01) {
 	level endon("deactivated" + param_00);
 	level endon("game_ended");
-	while(scripts\engine\utility::flag("explosive_armor"))
-	{
+	while(scripts\engine\utility::flag("explosive_armor")) {
 		level waittill("connected",var_02);
-		thread [[ param_01 ]](var_02,param_00);
+		thread [[param_01]](var_02,param_00);
 	}
 }
 
-//Function Number: 33
-player_spawn_monitor(param_00,param_01)
-{
+player_spawn_monitor(param_00,param_01) {
 	level endon("deactivated" + param_00);
 	level endon("game_ended");
-	while(scripts\engine\utility::flag("explosive_armor"))
-	{
+	while(scripts\engine\utility::flag("explosive_armor")) {
 		level waittill("player_spawned",var_02);
-		thread [[ param_01 ]](var_02,param_00);
+		thread [[param_01]](var_02,param_00);
 	}
 }
 
-//Function Number: 34
-give_explosive_touch_on_revived(param_00,param_01)
-{
+give_explosive_touch_on_revived(param_00,param_01) {
 	level endon("deactivated" + param_00);
 	level endon("game_ended");
-	while(scripts\engine\utility::flag("explosive_armor"))
-	{
+	while(scripts\engine\utility::flag("explosive_armor")) {
 		level waittill("revive_success",var_02);
-		thread [[ param_01 ]](var_02,param_00);
+		thread [[param_01]](var_02,param_00);
 	}
 }
 
-//Function Number: 35
-remove_explosive_touch(param_00)
-{
+remove_explosive_touch(param_00) {
 	level endon("game_ended");
 	self endon("death");
 	self endon("disconnect");
@@ -1058,9 +873,7 @@ remove_explosive_touch(param_00)
 	self notify("remove_power_icon" + param_00);
 }
 
-//Function Number: 36
-remove_explosive_touch_on_death(param_00)
-{
+remove_explosive_touch_on_death(param_00) {
 	level endon("game_ended");
 	param_00 endon("disconnect");
 	param_00 endon("explosive_armor_removed");
@@ -1070,9 +883,7 @@ remove_explosive_touch_on_death(param_00)
 	param_00 notify("explosive_armor_removed");
 }
 
-//Function Number: 37
-deactivate_explosive_armor(param_00,param_01)
-{
+deactivate_explosive_armor(param_00,param_01) {
 	level endon("disconnect");
 	level endon("game_ended");
 	param_01 = param_01 - 5.5;
@@ -1081,29 +892,22 @@ deactivate_explosive_armor(param_00,param_01)
 	wait(5.5);
 	scripts\engine\utility::flag_clear("explosive_armor");
 	level.explosive_touch = undefined;
-	foreach(var_03 in level.players)
-	{
+	foreach(var_03 in level.players) {
 		var_03.has_explosive_armor = undefined;
 	}
 }
 
-//Function Number: 38
-damage_enemies_in_radius()
-{
+damage_enemies_in_radius() {
 	level endon("game_ended");
 	self endon("death");
 	self endon("disconnect");
 	self endon("last_stand");
 	self endon("explosive_armor_removed");
-	for(var_00 = gettime();scripts\engine\utility::flag("explosive_armor");var_00 = gettime())
-	{
+	for(var_00 = gettime();scripts\engine\utility::flag("explosive_armor");var_00 = gettime()) {
 		var_01 = scripts\engine\utility::get_array_of_closest(self.origin,level.spawned_enemies,undefined,undefined,128,1);
-		foreach(var_03 in var_01)
-		{
-			if(isalive(var_03))
-			{
-				if(!isdefined(var_03.explosive_touch_time) || gettime() > var_03.explosive_touch_time)
-				{
+		foreach(var_03 in var_01) {
+			if(isalive(var_03)) {
+				if(!isdefined(var_03.explosive_touch_time) || gettime() > var_03.explosive_touch_time) {
 					var_03.explosive_touch_time = var_00 + 1000;
 					var_03 dodamage(100,self.origin,self,self,"MOD_UNKNOWN","power_script_generic_primary_mp");
 				}
@@ -1114,26 +918,19 @@ damage_enemies_in_radius()
 	}
 }
 
-//Function Number: 39
-create_explosive_shield()
-{
+create_explosive_shield() {
 	self endon("disconnect");
 	level endon("game_ended");
 	self setscriptablepartstate("exp_touch","on",0);
 }
 
-//Function Number: 40
-outline_enemies(param_00,param_01,param_02)
-{
+outline_enemies(param_00,param_01,param_02) {
 	level endon("deactivated" + param_00);
 	level thread deactivate_outline_enemies(param_00,param_01);
 	level thread outline_all_enemies(param_00);
-	for(;;)
-	{
-		foreach(var_04 in level.players)
-		{
-			if(!scripts\engine\utility::istrue(var_04.has_outline_on))
-			{
+	for(;;) {
+		foreach(var_04 in level.players) {
+			if(!scripts\engine\utility::istrue(var_04.has_outline_on)) {
 				var_04.has_outline_on = 1;
 				var_05 = param_01 - gettime() - param_02 / 1000;
 				var_04 thread power_icon_active(var_05,param_00);
@@ -1144,50 +941,40 @@ outline_enemies(param_00,param_01,param_02)
 	}
 }
 
-//Function Number: 41
-outline_all_enemies(param_00)
-{
+outline_all_enemies(param_00) {
 	level endon("game_ended");
 	level endon("host_migration_begin");
 	level endon("deactivated" + param_00);
-	for(;;)
-	{
+	for(;;) {
 		var_01 = scripts\cp\cp_agent_utils::getaliveagentsofteam("axis");
-		foreach(var_04, var_03 in var_01)
-		{
-			if(!isalive(var_03))
-			{
+		foreach(var_04, var_03 in var_01) {
+			if(!isalive(var_03)) {
 				wait(0.2);
 				continue;
 			}
 
-			if(isdefined(var_03.damaged_by_players))
-			{
+			if(isdefined(var_03.damaged_by_players)) {
 				wait(0.2);
 				continue;
 			}
 
-			if(isdefined(var_03.marked_for_challenge))
-			{
+			if(isdefined(var_03.marked_for_challenge)) {
 				wait(0.2);
 				continue;
 			}
 
-			if(isdefined(var_03.marked_by_hybrid))
-			{
+			if(isdefined(var_03.marked_by_hybrid)) {
 				wait(0.2);
 				continue;
 			}
 
-			if(isdefined(var_03.feral_occludes))
-			{
+			if(isdefined(var_03.feral_occludes)) {
 				wait(0.2);
 				continue;
 			}
 
 			scripts\cp\cp_outline::enable_outline_for_players(var_03,level.players,4,0,0,"high");
-			if(var_04 % 2 == 0)
-			{
+			if(var_04 % 2 == 0) {
 				wait(0.05);
 			}
 		}
@@ -1196,23 +983,18 @@ outline_all_enemies(param_00)
 	}
 }
 
-//Function Number: 42
-deactivate_outline_enemies(param_00,param_01)
-{
+deactivate_outline_enemies(param_00,param_01) {
 	level endon("disconnect");
 	level endon("game_ended");
 	scripts\engine\utility::waittill_any_timeout_1(param_01,"deactivated" + param_00);
 	level notify("deactivated" + param_00);
-	foreach(var_03 in level.players)
-	{
+	foreach(var_03 in level.players) {
 		var_03.has_outline_on = undefined;
 		var_03 scripts\cp\cp_outline::unset_outline();
 	}
 }
 
-//Function Number: 43
-give_infinite_grenade(param_00,param_01,param_02)
-{
+give_infinite_grenade(param_00,param_01,param_02) {
 	level notify("activated" + param_00);
 	level endon("activated" + param_00);
 	level endon("deactivated" + param_00);
@@ -1220,17 +1002,13 @@ give_infinite_grenade(param_00,param_01,param_02)
 	level.infinite_grenades = 1;
 	level thread deactivate_infinite_grenade(param_00,param_01);
 	level.active_power_ups["infinite_grenades"] = 1;
-	foreach(player in level.players)
-	{
+	foreach(player in level.players) {
 		thread apply_infinite_grenade_effects(player);
 	}
 }
 
-//Function Number: 44
-apply_fire_sale_effects(param_00)
-{
-	if(isdefined(level.temporal_increase))
-	{
+apply_fire_sale_effects(param_00) {
+	if(isdefined(level.temporal_increase)) {
 		param_00 thread power_icon_active(30 * level.temporal_increase,"fire_30");
 		return;
 	}
@@ -1238,14 +1016,11 @@ apply_fire_sale_effects(param_00)
 	param_00 thread power_icon_active(30,"fire_30");
 }
 
-//Function Number: 45
-apply_infinite_grenade_effects(param_00)
-{
+apply_infinite_grenade_effects(param_00) {
 	param_00.power_cooldowns = 1;
 	param_00.has_infinite_grenade = 1;
 	param_00 scripts\cp\powers\coop_powers::power_adjustcharges(1,"primary",1);
-	if(isdefined(level.temporal_increase))
-	{
+	if(isdefined(level.temporal_increase)) {
 		param_00 thread power_icon_active(30 * level.temporal_increase,"grenade_30");
 		return;
 	}
@@ -1253,18 +1028,14 @@ apply_infinite_grenade_effects(param_00)
 	param_00 thread power_icon_active(30,"grenade_30");
 }
 
-//Function Number: 46
-deactivate_infinite_grenade(param_00,param_01)
-{
+deactivate_infinite_grenade(param_00,param_01) {
 	level endon("disconnect");
 	level endon("game_ended");
 	var_02 = scripts\engine\utility::waittill_any_timeout_1(param_01,"deactivated" + param_00,"activated" + param_00);
-	if(var_02 != "activated" + param_00)
-	{
+	if(var_02 != "activated" + param_00) {
 		level.active_power_ups["infinite_grenades"] = 0;
 		level notify("deactivated" + param_00);
-		foreach(var_04 in level.players)
-		{
+		foreach(var_04 in level.players) {
 			var_04 scripts\cp\powers\coop_powers::power_adjustcharges(undefined,"primary",1);
 			var_04.has_infinite_grenade = undefined;
 			var_04.power_cooldowns = 0;
@@ -1274,9 +1045,7 @@ deactivate_infinite_grenade(param_00,param_01)
 	}
 }
 
-//Function Number: 47
-give_infinite_ammo(param_00,param_01,param_02)
-{
+give_infinite_ammo(param_00,param_01,param_02) {
 	level notify("activated" + param_00);
 	level endon("activated" + param_00);
 	level endon("deactivated" + param_00);
@@ -1284,21 +1053,17 @@ give_infinite_ammo(param_00,param_01,param_02)
 	level.infinite_ammo = 1;
 	level.active_power_ups["infinite_ammo"] = 1;
 	level thread deactivate_infinite_ammo(param_00,param_01);
-	foreach(var_04 in level.players)
-	{
+	foreach(var_04 in level.players) {
 		thread apply_infinite_ammo_effects(var_04);
 	}
 }
 
-//Function Number: 48
-apply_infinite_ammo_effects(param_00)
-{
+apply_infinite_ammo_effects(param_00) {
 	param_00 thread scripts\cp\cp_vo::try_to_play_vo("powerup_ammo","zmb_comment_vo");
 	param_00.has_infinite_ammo = 1;
 	var_01 = param_00 ammo_round_up();
 	param_00 thread unlimited_ammo(var_01,"infinite_20");
-	if(isdefined(level.temporal_increase))
-	{
+	if(isdefined(level.temporal_increase)) {
 		param_00 thread power_icon_active(20 * level.temporal_increase,"infinite_20");
 		return;
 	}
@@ -1306,47 +1071,36 @@ apply_infinite_ammo_effects(param_00)
 	param_00 thread power_icon_active(20,"infinite_20");
 }
 
-//Function Number: 49
-deactivate_infinite_ammo(param_00,param_01)
-{
+deactivate_infinite_ammo(param_00,param_01) {
 	level endon("disconnect");
 	level endon("game_ended");
 	var_02 = scripts\engine\utility::waittill_any_timeout_1(param_01,"deactivated" + param_00,"activated" + param_00);
-	if(var_02 != "activated" + param_00)
-	{
+	if(var_02 != "activated" + param_00) {
 		level.active_power_ups["infinite_ammo"] = 0;
 		level.infinite_ammo = undefined;
 		level notify("deactivated" + param_00);
-		foreach(var_04 in level.players)
-		{
+		foreach(var_04 in level.players) {
 			var_04.has_infinite_ammo = undefined;
 		}
 	}
 
-	foreach(var_04 in level.players)
-	{
-		if(var_04 scripts\cp\utility::isinfiniteammoenabled())
-		{
+	foreach(var_04 in level.players) {
+		if(var_04 scripts\cp\utility::isinfiniteammoenabled()) {
 			var_04 scripts\cp\utility::enable_infinite_ammo(0);
 		}
 	}
 }
 
-//Function Number: 50
-give_left_powers(param_00,param_01,param_02)
-{
+give_left_powers(param_00,param_01,param_02) {
 	level endon("deactivated" + param_00);
 	level endon("disconnect");
 	level endon("game_ended");
 	var_03 = undefined;
 	level.secondary_power = 1;
 	var_04 = scripts\engine\utility::random(["power_speedBoost","power_siegeMode","power_barrier","power_mortarMount","power_transponder"]);
-	for(;;)
-	{
-		foreach(var_06 in level.players)
-		{
-			if(!scripts\engine\utility::istrue(var_06.has_left_power))
-			{
+	for(;;) {
+		foreach(var_06 in level.players) {
+			if(!scripts\engine\utility::istrue(var_06.has_left_power)) {
 				var_06.has_left_power = 1;
 				var_07 = param_01 - gettime() - param_02 / 1000;
 				var_03 = var_06 scripts\cp\powers\coop_powers::what_power_is_in_slot("secondary");
@@ -1362,9 +1116,7 @@ give_left_powers(param_00,param_01,param_02)
 	}
 }
 
-//Function Number: 51
-additional_ability_hint(param_00,param_01)
-{
+additional_ability_hint(param_00,param_01) {
 	level endon("deactivated" + param_00);
 	level endon("disconnect");
 	level endon("game_ended");
@@ -1373,10 +1125,8 @@ additional_ability_hint(param_00,param_01)
 	self.additional_ability_hint_display = 0;
 	var_02 = param_01 / 3;
 	self notifyonplayercommand("lb_power_used","+speed_throw");
-	while(self.additional_ability_hint_display > 3)
-	{
-		if(!isalive(self))
-		{
+	while(self.additional_ability_hint_display > 3) {
+		if(!isalive(self)) {
 			wait(0.5);
 			continue;
 		}
@@ -1387,9 +1137,7 @@ additional_ability_hint(param_00,param_01)
 	}
 }
 
-//Function Number: 52
-deactivate_left_power(param_00,param_01,param_02,param_03)
-{
+deactivate_left_power(param_00,param_01,param_02,param_03) {
 	level endon("disconnect");
 	level endon("game_ended");
 	scripts\engine\utility::waittill_any_timeout_1(param_00,"deactivated" + param_03);
@@ -1398,20 +1146,15 @@ deactivate_left_power(param_00,param_01,param_02,param_03)
 	level.secondary_power = undefined;
 	level notify("deactivated" + param_03);
 	scripts\cp\powers\coop_powers::removepower(param_02);
-	if(isdefined(param_01))
-	{
+	if(isdefined(param_01)) {
 		thread scripts\cp\powers\coop_powers::givepower(param_01,"secondary",undefined,undefined,undefined,undefined,0);
 	}
 }
 
-//Function Number: 53
-give_ammo()
-{
+give_ammo() {
 	level endon("game_ended");
-	foreach(var_01 in level.players)
-	{
-		if(scripts\cp\cp_laststand::player_in_laststand(var_01))
-		{
+	foreach(var_01 in level.players) {
+		if(scripts\cp\cp_laststand::player_in_laststand(var_01)) {
 			continue;
 		}
 
@@ -1419,29 +1162,22 @@ give_ammo()
 	}
 }
 
-//Function Number: 54
-give_max_ammo_to_player(param_00)
-{
+give_max_ammo_to_player(param_00) {
 	var_01 = param_00 getweaponslistprimaries();
-	foreach(var_03 in var_01)
-	{
+	foreach(var_03 in var_01) {
 		var_04 = strtok(var_03,"_");
-		if(var_04[0] != "alt")
-		{
+		if(var_04[0] != "alt") {
 			param_00 givemaxammo(var_03);
 		}
 
-		if(function_0249(var_03) == weaponclipsize(var_03))
-		{
+		if(function_0249(var_03) == weaponclipsize(var_03)) {
 			param_00 setweaponammoclip(var_03,weaponclipsize(var_03));
 		}
 	}
 
 	var_06 = getarraykeys(param_00.powers);
-	foreach(var_08 in var_06)
-	{
-		if(param_00.powers[var_08].slot == "secondary")
-		{
+	foreach(var_08 in var_06) {
+		if(param_00.powers[var_08].slot == "secondary") {
 			continue;
 		}
 
@@ -1449,9 +1185,7 @@ give_max_ammo_to_player(param_00)
 	}
 }
 
-//Function Number: 55
-recharge_power(param_00)
-{
+recharge_power(param_00) {
 	var_01 = 0;
 	var_02 = self.powers[param_00].slot;
 	var_03 = level.powers[param_00].maxcharges - self.powers[param_00].charges;
@@ -1459,27 +1193,21 @@ recharge_power(param_00)
 	self setweaponammostock(level.powers[param_00].weaponuse,level.powers[param_00].maxcharges);
 }
 
-//Function Number: 56
-activate_instakill(param_00,param_01,param_02,param_03)
-{
+activate_instakill(param_00,param_01,param_02,param_03) {
 	level endon("game_ended");
 	level notify("activated" + param_01);
 	level endon("deactivated" + param_01);
 	level.insta_kill = 1;
 	level thread deactivate_instakill(param_01,param_02);
 	level.active_power_ups["instakill"] = 1;
-	foreach(var_05 in level.players)
-	{
+	foreach(var_05 in level.players) {
 		thread apply_instakill_effects(var_05);
 	}
 }
 
-//Function Number: 57
-apply_instakill_effects(param_00)
-{
+apply_instakill_effects(param_00) {
 	param_00.instakill = 1;
-	if(isdefined(level.temporal_increase))
-	{
+	if(isdefined(level.temporal_increase)) {
 		param_00 thread power_icon_active(30 * level.temporal_increase,"instakill_30");
 		return;
 	}
@@ -1487,15 +1215,12 @@ apply_instakill_effects(param_00)
 	param_00 thread power_icon_active(30,"instakill_30");
 }
 
-//Function Number: 58
-deactivate_instakill(param_00,param_01)
-{
+deactivate_instakill(param_00,param_01) {
 	level endon("game_ended");
 	level endon("activated" + param_00);
 	scripts\engine\utility::waittill_any_timeout_1(param_01,"deactivated" + param_00);
 	level notify("deactivated" + param_00);
-	foreach(var_03 in level.players)
-	{
+	foreach(var_03 in level.players) {
 		var_03.instakill = undefined;
 	}
 
@@ -1503,17 +1228,14 @@ deactivate_instakill(param_00,param_01)
 	level.active_power_ups["instakill"] = 0;
 }
 
-//Function Number: 59
-scale_earned_cash(param_00,param_01,param_02,param_03)
-{
+scale_earned_cash(param_00,param_01,param_02,param_03) {
 	level endon("game_ended");
 	level endon("deactivated" + param_01);
 	level notify("scale_earned_cash");
 	level endon("scale_earned_cash");
 	level.active_power_ups["double_money"] = 1;
 	level.cash_scalar = 2;
-	if(isdefined(level.temporal_increase))
-	{
+	if(isdefined(level.temporal_increase)) {
 		level thread deactivate_scaled_cash(param_01,30 * level.temporal_increase,param_02);
 	}
 	else
@@ -1521,18 +1243,14 @@ scale_earned_cash(param_00,param_01,param_02,param_03)
 		level thread deactivate_scaled_cash(param_01,30,param_02);
 	}
 
-	foreach(var_05 in level.players)
-	{
+	foreach(var_05 in level.players) {
 		thread apply_double_money_effects(var_05);
 	}
 }
 
-//Function Number: 60
-apply_double_money_effects(param_00)
-{
+apply_double_money_effects(param_00) {
 	param_00.double_money = 1;
-	if(isdefined(level.temporal_increase))
-	{
+	if(isdefined(level.temporal_increase)) {
 		param_00 thread power_icon_active(30 * level.temporal_increase,"cash_2");
 		return;
 	}
@@ -1540,27 +1258,21 @@ apply_double_money_effects(param_00)
 	param_00 thread power_icon_active(30,"cash_2");
 }
 
-//Function Number: 61
-deactivate_scaled_cash(param_00,param_01,param_02)
-{
+deactivate_scaled_cash(param_00,param_01,param_02) {
 	level endon("disconnect");
 	level endon("game_ended");
 	var_03 = scripts\engine\utility::waittill_any_timeout_1(param_01,"deactivated" + param_00,"activated" + param_00);
-	if(var_03 != "activated" + param_00)
-	{
+	if(var_03 != "activated" + param_00) {
 		level notify("deactivated" + param_00);
 		level.cash_scalar = 1;
 		level.active_power_ups["double_money"] = 0;
-		foreach(var_05 in level.players)
-		{
+		foreach(var_05 in level.players) {
 			var_05.double_money = undefined;
 		}
 	}
 }
 
-//Function Number: 62
-power_icon_active(param_00,param_01)
-{
+power_icon_active(param_00,param_01) {
 	level notify("power_icon_active_" + param_01);
 	level endon("power_icon_active_" + param_01);
 	var_02 = level.loot_icon[param_01];
@@ -1569,38 +1281,28 @@ power_icon_active(param_00,param_01)
 	thread hide_power_icon(param_00,param_01,var_03);
 }
 
-//Function Number: 63
-set_ui_omnvar_for_powerups(param_00)
-{
+set_ui_omnvar_for_powerups(param_00) {
 	var_01 = int(tablelookup(level.power_up_table,2,param_00,1));
 	var_02 = int(var_01);
 	self setclientomnvarbit("zm_active_powerups",var_02 - 1,1);
 	return var_02;
 }
 
-//Function Number: 64
-display_powerup_popup(param_00)
-{
-	foreach(var_02 in level.players)
-	{
+display_powerup_popup(param_00) {
+	foreach(var_02 in level.players) {
 		var_02 setclientomnvar("zm_powerup_activated",param_00);
 		wait(0.05);
 	}
 }
 
-//Function Number: 65
-get_fx_points(param_00,param_01,param_02,param_03,param_04)
-{
+get_fx_points(param_00,param_01,param_02,param_03,param_04) {
 	var_05 = [];
 	var_06 = scripts\engine\utility::getstructarray(param_01,param_02);
 	var_06[var_06.size] = param_00;
-	foreach(var_08 in var_06)
-	{
+	foreach(var_08 in var_06) {
 		var_09 = scripts\engine\utility::get_array_of_closest(var_08.origin,level.players,undefined,1,param_04,1);
-		if(var_09.size >= 1)
-		{
-			if(!isdefined(var_08.angles))
-			{
+		if(var_09.size >= 1) {
+			if(!isdefined(var_08.angles)) {
 				var_08.angles = (0,0,0);
 			}
 
@@ -1609,10 +1311,8 @@ get_fx_points(param_00,param_01,param_02,param_03,param_04)
 			var_0A.origin = var_08.origin;
 			var_0A.angles = var_08.angles;
 			var_05[var_05.size] = var_0A;
-			if(isdefined(param_03))
-			{
-				if(var_05.size >= param_03)
-				{
+			if(isdefined(param_03)) {
+				if(var_05.size >= param_03) {
 					break;
 				}
 			}
@@ -1623,9 +1323,7 @@ get_fx_points(param_00,param_01,param_02,param_03,param_04)
 	return var_05;
 }
 
-//Function Number: 66
-kill_closest_enemies(param_00,param_01)
-{
+kill_closest_enemies(param_00,param_01) {
 	level endon("game_ended");
 	var_02 = param_00.origin;
 	var_03 = get_fx_points(param_00,"effect_loc","targetname",undefined,1500);
@@ -1637,33 +1335,27 @@ kill_closest_enemies(param_00,param_01)
 	earthquake(0.25,4,var_02,2500);
 	scripts\engine\utility::waitframe();
 	var_04 = scripts\cp\cp_agent_utils::getaliveagentsofteam("axis");
-	foreach(var_06 in level.players)
-	{
+	foreach(var_06 in level.players) {
 		var_06 scripts\cp\utility::adddamagemodifier("nuke",0,0);
 	}
 
 	var_08 = sortbydistance(var_04,var_02);
 	var_09 = 400;
-	if(isdefined(level.cash_scalar))
-	{
+	if(isdefined(level.cash_scalar)) {
 		var_09 = 400 * level.cash_scalar;
 	}
 
-	foreach(var_0B in var_08)
-	{
-		if(is_immune_against_nuke(var_0B))
-		{
+	foreach(var_0B in var_08) {
+		if(is_immune_against_nuke(var_0B)) {
 			continue;
 		}
 
-		if(scripts\engine\utility::istrue(level.forced_nuke))
-		{
+		if(scripts\engine\utility::istrue(level.forced_nuke)) {
 			var_0B.died_poorly = 1;
 			var_0B.died_poorly_health = var_0B.health;
 		}
 
-		if(scripts\engine\utility::istrue(var_0B.isfrozen))
-		{
+		if(scripts\engine\utility::istrue(var_0B.isfrozen)) {
 			var_0B dodamage(var_0B.health + 100,var_0B.origin);
 		}
 		else
@@ -1681,13 +1373,10 @@ kill_closest_enemies(param_00,param_01)
 	wait(5);
 	level.nuke_zombies_paused = 0;
 	level.dont_resume_wave_after_solo_afterlife = undefined;
-	foreach(var_06 in level.players)
-	{
+	foreach(var_06 in level.players) {
 		var_06 scripts\cp\utility::removedamagemodifier("nuke",0);
-		if(!scripts\engine\utility::istrue(level.forced_nuke))
-		{
-			if(!scripts\cp\cp_laststand::player_in_laststand(var_06))
-			{
+		if(!scripts\engine\utility::istrue(level.forced_nuke)) {
+			if(!scripts\cp\cp_laststand::player_in_laststand(var_06)) {
 				var_06 scripts\cp\cp_persistence::give_player_currency(var_09,undefined,undefined,1,"nuke");
 			}
 		}
@@ -1696,32 +1385,23 @@ kill_closest_enemies(param_00,param_01)
 	level.forced_nuke = undefined;
 }
 
-//Function Number: 67
-is_immune_against_nuke(param_00)
-{
+is_immune_against_nuke(param_00) {
 	return scripts\engine\utility::istrue(param_00.immune_against_nuke);
 }
 
-//Function Number: 68
-nuke_fx(param_00,param_01)
-{
+nuke_fx(param_00,param_01) {
 	var_02 = 0;
-	foreach(var_04 in param_01)
-	{
-		foreach(var_06 in level.players)
-		{
-			if(!var_06 scripts\cp\utility::is_valid_player())
-			{
+	foreach(var_04 in param_01) {
+		foreach(var_06 in level.players) {
+			if(!var_06 scripts\cp\utility::is_valid_player()) {
 				continue;
 			}
 
-			if(scripts\engine\utility::istrue(var_06.in_afterlife_arcade))
-			{
+			if(scripts\engine\utility::istrue(var_06.in_afterlife_arcade)) {
 				continue;
 			}
 
-			if(scripts\engine\utility::istrue(var_06.is_off_grid))
-			{
+			if(scripts\engine\utility::istrue(var_06.is_off_grid)) {
 				continue;
 			}
 
@@ -1732,10 +1412,8 @@ nuke_fx(param_00,param_01)
 	}
 
 	wait(5);
-	foreach(var_04 in param_01)
-	{
-		foreach(var_06 in level.players)
-		{
+	foreach(var_04 in param_01) {
+		foreach(var_06 in level.players) {
 			function_0297(level._effect["big_explo"],var_04,"tag_origin",var_06);
 		}
 
@@ -1744,17 +1422,13 @@ nuke_fx(param_00,param_01)
 	}
 }
 
-//Function Number: 69
-kill_selected_enemy(param_00)
-{
+kill_selected_enemy(param_00) {
 	self endon("death");
 	thread scripts\cp\zombies\zombie_scriptable_states::applyzombiescriptablestate(self);
 	self.marked_for_death = 1;
 	var_01 = scripts\engine\utility::istrue(self.is_suicide_bomber);
-	if(isdefined(param_00))
-	{
-		if(isalive(self) && !var_01)
-		{
+	if(isdefined(param_00)) {
+		if(isalive(self) && !var_01) {
 			playfx(level._effect["head_loss"],self gettagorigin("j_neck"));
 			self setscriptablepartstate("head","detached",1);
 			self setscriptablepartstate("eyes","eye_glow_off",1);
@@ -1768,16 +1442,12 @@ kill_selected_enemy(param_00)
 	self dodamage(self.health,self.origin);
 }
 
-//Function Number: 70
-give_money(param_00,param_01)
-{
+give_money(param_00,param_01) {
 	param_00 iprintlnbold("Got Loot: $" + param_01);
 	param_00 scripts\cp\cp_persistence::give_player_currency(param_01);
 }
 
-//Function Number: 71
-flash_power_icon(param_00,param_01,param_02)
-{
+flash_power_icon(param_00,param_01,param_02) {
 	param_02 endon("remove " + param_01 + " icon");
 	param_02 endon("death");
 	param_02 endon("disconnect");
@@ -1786,14 +1456,12 @@ flash_power_icon(param_00,param_01,param_02)
 	var_04 = 0.2;
 	wait(param_00 - 5);
 	param_00 = 5;
-	for(;;)
-	{
+	for(;;) {
 		wait(param_00 / var_03);
 		self.alpha = 0.1;
 		wait(var_04);
 		self.alpha = 0.75;
-		if(float(var_03 * 1.5) > var_04)
-		{
+		if(float(var_03 * 1.5) > var_04) {
 			var_03 = float(var_03 * 1.5);
 			continue;
 		}
@@ -1802,31 +1470,26 @@ flash_power_icon(param_00,param_01,param_02)
 	}
 }
 
-//Function Number: 72
-hide_power_icon(param_00,param_01,param_02,param_03)
-{
+hide_power_icon(param_00,param_01,param_02,param_03) {
 	level endon("activated" + param_01);
 	self endon("remove_carryIcon" + param_01);
 	self endon("disconnect");
 	level endon("game_ended");
-	if(!isdefined(param_00))
-	{
+	if(!isdefined(param_00)) {
 		param_00 = 60;
 	}
 
 	var_04 = 5.5;
 	param_00 = param_00 - var_04;
 	self setclientomnvarbit("zm_active_powerup_animation",param_02 - 1,0);
-	if(param_00 > 0)
-	{
+	if(param_00 > 0) {
 		level scripts\engine\utility::waittill_any_timeout_1(param_00,"deactivated" + param_01);
 		self setclientomnvarbit("zm_active_powerup_animation",param_02 - 1,1);
 	}
 
 	level scripts\engine\utility::waittill_any_timeout_1(var_04,"deactivated" + param_01);
 	level notify("power_up_deactivated");
-	if(isdefined(self.powerupicons[param_01]))
-	{
+	if(isdefined(self.powerupicons[param_01])) {
 		self.powerupicons[param_01] = undefined;
 	}
 
@@ -1835,30 +1498,22 @@ hide_power_icon(param_00,param_01,param_02,param_03)
 	self setclientomnvarbit("zm_active_powerup_animation",param_02 - 1,0);
 }
 
-//Function Number: 73
-hidecarryiconongameend()
-{
+hidecarryiconongameend() {
 	self endon("remove_carryIcon");
 	level waittill("game_ended");
-	if(isdefined(self.carryicon))
-	{
+	if(isdefined(self.carryicon)) {
 		self.carryicon.alpha = 0;
 	}
 }
 
-//Function Number: 74
-is_in_active_volume(param_00)
-{
-	if(!isdefined(level.active_spawn_volumes))
-	{
+is_in_active_volume(param_00) {
+	if(!isdefined(level.active_spawn_volumes)) {
 		return 1;
 	}
 
 	var_01 = sortbydistance(level.active_spawn_volumes,param_00);
-	foreach(var_03 in var_01)
-	{
-		if(function_010F(param_00,var_03))
-		{
+	foreach(var_03 in var_01) {
+		if(function_010F(param_00,var_03)) {
 			return 1;
 		}
 	}
@@ -1866,53 +1521,42 @@ is_in_active_volume(param_00)
 	return 0;
 }
 
-//Function Number: 75
-ammo_round_up()
-{
+ammo_round_up() {
 	self endon("death");
 	self endon("disconnect");
 	var_00 = [];
-	foreach(var_02 in self.weaponlist)
-	{
+	foreach(var_02 in self.weaponlist) {
 		var_00[var_02] = self getrunningforwardpainanim(var_02);
 	}
 
 	return var_00;
 }
 
-//Function Number: 76
-unlimited_ammo(param_00,param_01)
-{
+unlimited_ammo(param_00,param_01) {
 	self endon("death");
 	self endon("disconnect");
 	level endon("deactivated" + param_01);
-	if(!isdefined(self.weaponlist))
-	{
+	if(!isdefined(self.weaponlist)) {
 		self.weaponlist = self getweaponslistprimaries();
 	}
 
 	scripts\cp\utility::enable_infinite_ammo(1);
-	for(;;)
-	{
+	for(;;) {
 		var_02 = 0;
-		foreach(var_04 in self.weaponlist)
-		{
-			if(var_04 == self getcurrentweapon() && weapon_no_unlimited_check(var_04))
-			{
+		foreach(var_04 in self.weaponlist) {
+			if(var_04 == self getcurrentweapon() && weapon_no_unlimited_check(var_04)) {
 				var_02 = 1;
 				self setweaponammoclip(var_04,weaponclipsize(var_04),"left");
 				self setclientomnvar("zm_ui_unlimited_ammo",1);
 			}
 
-			if(var_04 == self getcurrentweapon() && weapon_no_unlimited_check(var_04))
-			{
+			if(var_04 == self getcurrentweapon() && weapon_no_unlimited_check(var_04)) {
 				var_02 = 1;
 				self setweaponammoclip(var_04,weaponclipsize(var_04),"right");
 				self setclientomnvar("zm_ui_unlimited_ammo",1);
 			}
 
-			if(var_02 == 0)
-			{
+			if(var_02 == 0) {
 				self setclientomnvar("zm_ui_unlimited_ammo",0);
 				ammo_round_up();
 			}
@@ -1922,14 +1566,10 @@ unlimited_ammo(param_00,param_01)
 	}
 }
 
-//Function Number: 77
-weapon_no_unlimited_check(param_00)
-{
+weapon_no_unlimited_check(param_00) {
 	var_01 = 1;
-	foreach(var_03 in level.opweaponsarray)
-	{
-		if(param_00 == var_03)
-		{
+	foreach(var_03 in level.opweaponsarray) {
+		if(param_00 == var_03) {
 			var_01 = 0;
 		}
 	}
@@ -1937,12 +1577,9 @@ weapon_no_unlimited_check(param_00)
 	return var_01;
 }
 
-//Function Number: 78
-do_screen_flash()
-{
+do_screen_flash() {
 	scripts\engine\utility::waitframe();
-	if(isdefined(self) && scripts\cp\utility::has_tag(self.model,"tag_eye"))
-	{
+	if(isdefined(self) && scripts\cp\utility::has_tag(self.model,"tag_eye")) {
 		playfxontagforclients(level._effect["vfx_screen_flash"],self,"tag_eye",self);
 	}
 }

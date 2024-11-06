@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\mp\agents\alien_rhino\alien_rhino_agent.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 10
- * Decompile Time: 523 ms
- * Timestamp: 10/27/2023 12:11:07 AM
-*******************************************************************/
+/***********************************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\mp\agents\alien_rhino\alien_rhino_agent.gsc
+***********************************************************************/
 
-//Function Number: 1
-registerscriptedagent()
-{
+registerscriptedagent() {
 	scripts\mp\agents\alien_rhino\alien_rhino_tunedata::setuptunedata();
 	scripts/aitypes/bt_util::init();
 	behaviortree\alien_rhino::func_DEE8();
@@ -18,12 +12,9 @@ registerscriptedagent()
 	thread func_FAB0();
 }
 
-//Function Number: 2
-func_FAB0()
-{
+func_FAB0() {
 	level endon("game_ended");
-	if(!isdefined(level.agent_definition))
-	{
+	if(!isdefined(level.agent_definition)) {
 		level waittill("scripted_agents_initialized");
 	}
 
@@ -34,23 +25,18 @@ func_FAB0()
 	level.agent_funcs["alien_rhino"]["gametype_on_killed"] = ::scripts\cp\maps\cp_final\cp_final_damage::cp_final_onzombiekilled;
 	level.agent_funcs["alien_rhino"]["on_damaged_finished"] = ::scripts\mp\agents\zombie\zmb_zombie_agent::onzombiedamagefinished;
 	level.agent_funcs["alien_rhino"]["on_killed"] = ::onrhinokilled;
-	if(!isdefined(level.var_8CBD))
-	{
+	if(!isdefined(level.var_8CBD)) {
 		level.var_8CBD = [];
 	}
 
 	level.var_8CBD["alien_rhino"] = ::calculatealienrhinohealth;
-	if(!isdefined(level.damage_feedback_overrride))
-	{
+	if(!isdefined(level.damage_feedback_overrride)) {
 		level.damage_feedback_overrride = [];
 	}
 }
 
-//Function Number: 3
-func_FACE(param_00)
-{
-	if(should_spawn_mammoth())
-	{
+func_FACE(param_00) {
+	if(should_spawn_mammoth()) {
 		self setmodel("alien_queen_blue");
 		return;
 	}
@@ -58,9 +44,7 @@ func_FACE(param_00)
 	self setmodel("alien_queen");
 }
 
-//Function Number: 4
-setupzombiegametypevars()
-{
+setupzombiegametypevars() {
 	self.class = undefined;
 	self.movespeedscaler = undefined;
 	self.avoidkillstreakonspawntimer = undefined;
@@ -143,15 +127,12 @@ setupzombiegametypevars()
 	self.dont_cleanup = 1;
 	self.allowpain = 0;
 	self setavoidanceradius(65);
-	if(getdvarint("scr_zombie_left_foot_sharp_turn_only",0) == 1)
-	{
+	if(getdvarint("scr_zombie_left_foot_sharp_turn_only",0) == 1) {
 		self.var_AB3F = 1;
 	}
 }
 
-//Function Number: 5
-setupagent()
-{
+setupagent() {
 	setupzombiegametypevars();
 	thread scripts\mp\agents\zombie\zmb_zombie_agent::func_12EE6();
 	self.height = self.var_18F4;
@@ -174,48 +155,38 @@ setupagent()
 	self.footstepdetectdistsprint = 2500;
 	self.precacheleaderboards = 1;
 	self.dontmutilate = 1;
-	if(scripts\engine\utility::istrue(self.activated_venomx_sphere))
-	{
+	if(scripts\engine\utility::istrue(self.activated_venomx_sphere)) {
 		self.activated_venomx_sphere = undefined;
 	}
 
-	if(scripts\engine\utility::istrue(self.dot_triggered))
-	{
+	if(scripts\engine\utility::istrue(self.dot_triggered)) {
 		self.dot_triggered = undefined;
 	}
 
 	self.preventplayerpushdist = 12;
 }
 
-//Function Number: 6
-calculatealienrhinohealth()
-{
+calculatealienrhinohealth() {
 	return -15536 * level.players.size;
 }
 
-//Function Number: 7
-accumulatedamage(param_00,param_01)
-{
-	if(!isdefined(self.damageaccumulator))
-	{
+accumulatedamage(param_00,param_01) {
+	if(!isdefined(self.damageaccumulator)) {
 		self.damageaccumulator = spawnstruct();
 		self.damageaccumulator.accumulateddamage = 0;
 	}
-	else if(!isdefined(self.damageaccumulator.lastdamagetime) || gettime() > self.damageaccumulator.lastdamagetime + 1000)
-	{
+	else if(!isdefined(self.damageaccumulator.lastdamagetime) || gettime() > self.damageaccumulator.lastdamagetime + 1000) {
 		self.damageaccumulator.accumulateddamage = 0;
 		self.damageaccumulator.lastdamagetime = 0;
 	}
 
 	self.damageaccumulator.lastdamagetime = gettime();
-	if(!isdefined(param_01))
-	{
+	if(!isdefined(param_01)) {
 		param_01 = (1,1,1);
 	}
 
 	self.damageaccumulator.lastdir = param_01;
-	if(isdefined(self.fake_damage))
-	{
+	if(isdefined(self.fake_damage)) {
 		self.damageaccumulator.accumulateddamage = self.damageaccumulator.accumulateddamage + self.fake_damage;
 		self.fake_damage = undefined;
 		return;
@@ -224,17 +195,13 @@ accumulatedamage(param_00,param_01)
 	self.damageaccumulator.accumulateddamage = self.damageaccumulator.accumulateddamage + param_00;
 }
 
-//Function Number: 8
-func_C4E0(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08,param_09,param_0A,param_0B)
-{
-	if(isdefined(self.is_mammoth) && self.is_mammoth)
-	{
+func_C4E0(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08,param_09,param_0A,param_0B) {
+	if(isdefined(self.is_mammoth) && self.is_mammoth) {
 		param_02 = param_02 / 4;
 	}
 
 	var_0C = weaponclass(param_05);
-	if(var_0C == "smg" || var_0C == "spread")
-	{
+	if(var_0C == "smg" || var_0C == "spread") {
 		param_02 = param_02 / 2;
 	}
 
@@ -242,22 +209,16 @@ func_C4E0(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_0
 	scripts\cp\maps\cp_final\cp_final_damage::cp_final_onzombiedamaged(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08,param_09,param_0A,param_0B);
 }
 
-//Function Number: 9
-should_spawn_mammoth()
-{
-	if(isdefined(level.mammoth_spawn) && level.mammoth_spawn)
-	{
+should_spawn_mammoth() {
+	if(isdefined(level.mammoth_spawn) && level.mammoth_spawn) {
 		return 1;
 	}
 
 	return 0;
 }
 
-//Function Number: 10
-onrhinokilled(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08)
-{
-	if(scripts\engine\utility::istrue(self.is_mammoth))
-	{
+onrhinokilled(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08) {
+	if(scripts\engine\utility::istrue(self.is_mammoth)) {
 		var_09 = 4000;
 	}
 	else
@@ -265,10 +226,8 @@ onrhinokilled(param_00,param_01,param_02,param_03,param_04,param_05,param_06,par
 		var_09 = 1000;
 	}
 
-	foreach(var_0B in level.players)
-	{
-		if(var_0B scripts\cp\utility::is_valid_player())
-		{
+	foreach(var_0B in level.players) {
+		if(var_0B scripts\cp\utility::is_valid_player()) {
 			var_0B scripts\cp\cp_persistence::give_player_currency(var_09);
 		}
 	}

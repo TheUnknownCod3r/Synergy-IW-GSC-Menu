@@ -1,49 +1,32 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: 3432.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 6
- * Decompile Time: 1 ms
- * Timestamp: 10/27/2023 12:27:26 AM
-*******************************************************************/
+/****************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\3432.gsc
+****************************/
 
-//Function Number: 1
-applyarchetype()
-{
+applyarchetype() {
 	equipextras();
 }
 
-//Function Number: 2
-equipextras()
-{
-}
+equipextras() {}
 
-//Function Number: 3
-removearchetype()
-{
+removearchetype() {
 	self notify("removeArchetype");
 }
 
-//Function Number: 4
-auraquickswap_run()
-{
+auraquickswap_run() {
 	self endon("death");
 	self endon("disconnect");
 	self endon("removeArchetype");
 	self setclientomnvar("ui_aura_quickswap",0);
-	for(;;)
-	{
+	for(;;) {
 		self waittill("got_a_kill");
-		foreach(var_01 in level.players)
-		{
-			if(var_01.team != self.team)
-			{
+		foreach(var_01 in level.players) {
+			if(var_01.team != self.team) {
 				continue;
 			}
 
-			if(distance2dsquared(var_01.origin,self.origin) > 147456)
-			{
+			if(distance2dsquared(var_01.origin,self.origin) > 147456) {
 				continue;
 			}
 
@@ -52,15 +35,12 @@ auraquickswap_run()
 	}
 }
 
-//Function Number: 5
-auraquickswap_bestowaura(param_00)
-{
+auraquickswap_bestowaura(param_00) {
 	self endon("death");
 	self endon("disconnect");
 	self endon("giveLoadout_start");
 	level endon("game_ended");
-	if(self != param_00)
-	{
+	if(self != param_00) {
 		param_00 thread scripts\mp\_utility::giveunifiedpoints("buff_teammate");
 	}
 
@@ -75,9 +55,7 @@ auraquickswap_bestowaura(param_00)
 	self setclientomnvar("ui_aura_quickswap",0);
 }
 
-//Function Number: 6
-cleanupafterplayerdeath()
-{
+cleanupafterplayerdeath() {
 	self endon("disconnect");
 	level endon("game_ended");
 	self waittill("death");

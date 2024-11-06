@@ -1,21 +1,12 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: 3552.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 11
- * Decompile Time: 15 ms
- * Timestamp: 10/27/2023 12:30:40 AM
-*******************************************************************/
+/****************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\3552.gsc
+****************************/
 
-//Function Number: 1
-init()
-{
-}
+init() {}
 
-//Function Number: 2
-setturrettargetent()
-{
+setturrettargetent() {
 	self endon("death");
 	self endon("disconnect");
 	thread func_C799();
@@ -24,91 +15,69 @@ setturrettargetent()
 	thread func_13B7F();
 }
 
-//Function Number: 3
-func_E0E0()
-{
+func_E0E0() {
 	self notify("endComLink");
 }
 
-//Function Number: 4
-func_C799()
-{
-	if(!level.teambased)
-	{
+func_C799() {
+	if(!level.teambased) {
 		return;
 	}
 
-	foreach(var_01 in level.participants)
-	{
-		if(!isdefined(var_01.team))
-		{
+	foreach(var_01 in level.participants) {
+		if(!isdefined(var_01.team)) {
 			continue;
 		}
 
-		if(var_01.team == self.team)
-		{
+		if(var_01.team == self.team) {
 			var_02 = scripts\mp\_utility::outlineenableforplayer(var_01,"cyan",self,0,0,"killstreak");
 			thread func_5604(var_02,var_01);
 		}
 	}
 }
 
-//Function Number: 5
-func_5604(param_00,param_01)
-{
+func_5604(param_00,param_01) {
 	self endon("disconnect");
 	level endon("game_ended");
 	scripts\engine\utility::waittill_any_timeout_no_endon_death_2(10,"death","joined_team");
 	scripts\mp\_utility::outlinedisable(param_00,param_01);
 }
 
-//Function Number: 6
-func_2652()
-{
+func_2652() {
 	self endon("endComLink");
 	var_00 = 3;
 	var_01 = 3;
 	var_02 = 0.5;
 	var_03 = 0;
-	for(;;)
-	{
+	for(;;) {
 		var_04 = sortbydistance(level.participants,self.origin);
-		foreach(var_06 in var_04)
-		{
-			if(!isdefined(var_06))
-			{
+		foreach(var_06 in var_04) {
+			if(!isdefined(var_06)) {
 				continue;
 			}
 
-			if(var_06 == self)
-			{
+			if(var_06 == self) {
 				continue;
 			}
 
-			if(level.teambased && var_06.team == self.team)
-			{
+			if(level.teambased && var_06.team == self.team) {
 				continue;
 			}
 
-			if(var_06 scripts\mp\_utility::_hasperk("specialty_gpsjammer"))
-			{
+			if(var_06 scripts\mp\_utility::_hasperk("specialty_gpsjammer")) {
 				continue;
 			}
 
-			if(!scripts\mp\_utility::isreallyalive(var_06))
-			{
-				if(isdefined(var_06.var_2A3B))
-				{
+			if(!scripts\mp\_utility::isreallyalive(var_06)) {
+				if(isdefined(var_06.var_2A3B)) {
 					var_06.var_2A3B delete();
 				}
 
 				continue;
 			}
 
-			if(isdefined(var_06.var_12AF1))
-			{
-				if(isdefined(var_06.var_2A3B))
-				{
+			if(isdefined(var_06.var_12AF1)) {
+				if(isdefined(var_06.var_2A3B)) {
 					var_06.var_2A3B delete();
 				}
 
@@ -136,9 +105,7 @@ func_2652()
 	}
 }
 
-//Function Number: 7
-func_B37E()
-{
+func_B37E() {
 	self endon("death");
 	self endon("disconnect");
 	self endon("endComLink");
@@ -146,15 +113,12 @@ func_B37E()
 	var_00 = 3;
 	var_01 = 3;
 	var_02 = 0.5;
-	if(!isdefined(self))
-	{
+	if(!isdefined(self)) {
 		return;
 	}
 
-	if(isdefined(self.var_12AF1))
-	{
-		if(isdefined(self.var_2A3B))
-		{
+	if(isdefined(self.var_12AF1)) {
+		if(isdefined(self.var_2A3B)) {
 			self.var_2A3B delete();
 		}
 
@@ -176,21 +140,17 @@ func_B37E()
 	}
 
 	wait(var_01);
-	if(isdefined(self.var_2A3B))
-	{
+	if(isdefined(self.var_2A3B)) {
 		self.var_2A3B delete();
 	}
 }
 
-//Function Number: 8
-func_6AB8(param_00,param_01)
-{
+func_6AB8(param_00,param_01) {
 	self notify("fadeOut");
 	self endon("fadeOut");
 	var_02 = param_00 - param_01;
 	wait(0.05);
-	if(!isdefined(self))
-	{
+	if(!isdefined(self)) {
 		return;
 	}
 
@@ -198,9 +158,7 @@ func_6AB8(param_00,param_01)
 	self.alpha = 0;
 }
 
-//Function Number: 9
-func_13B7F(param_00)
-{
+func_13B7F(param_00) {
 	self endon("death");
 	self endon("disconnect");
 	level endon("game_ended");
@@ -208,31 +166,24 @@ func_13B7F(param_00)
 	self notify("endComLink");
 }
 
-//Function Number: 10
-watchempdamage()
-{
+watchempdamage() {
 	self endon("death");
 	self endon("disconnect");
 	level endon("game_ended");
-	for(;;)
-	{
+	for(;;) {
 		self waittill("emp_damage",var_00,var_01);
 		scripts\engine\utility::waitframe();
 		self notify("endComLink");
 	}
 }
 
-//Function Number: 11
-func_13A11()
-{
+func_13A11() {
 	self endon("death");
 	self endon("disconnect");
 	level endon("game_ended");
-	for(;;)
-	{
+	for(;;) {
 		level waittill("emp_update");
-		if(scripts\mp\killstreaks\_emp_common::isemped())
-		{
+		if(scripts\mp\killstreaks\_emp_common::isemped()) {
 			self notify("endComLink");
 		}
 	}

@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: 3985.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 1
- * Decompile Time: 3 ms
- * Timestamp: 10/27/2023 12:31:53 AM
-*******************************************************************/
+/****************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\3985.gsc
+****************************/
 
-//Function Number: 1
-main()
-{
+main() {
 	level._effect["vfx_desert_periph_jackal_01"] = loadfx("vfx/iw7/levels/mp_desert/vfx_desert_periph_jackal_01.vfx");
 	level._effect["vfx_desert_ships_02"] = loadfx("vfx/iw7/levels/mp_desert/vfx_desert_ships_02.vfx");
 	level._effect["vfx_desert_ships_01"] = loadfx("vfx/iw7/levels/mp_desert/vfx_desert_ships_01.vfx");

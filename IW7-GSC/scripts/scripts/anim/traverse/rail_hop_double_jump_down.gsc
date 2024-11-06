@@ -1,21 +1,13 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\anim\traverse\rail_hop_double_jump_down.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 2
- * Decompile Time: 107 ms
- * Timestamp: 10\26\2023 11:59:39 PM
-*******************************************************************/
+/***********************************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\anim\traverse\rail_hop_double_jump_down.gsc
+***********************************************************************/
 
-//Function Number: 1
-main()
-{
+main() {
 	func_5AC0();
 }
 
-//Function Number: 2
-func_5AC0()
-{
+func_5AC0() {
 	self waittill("killanimscript");
 }

@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\mp\maps\mp_quarry\mp_quarry.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 5
- * Decompile Time: 289 ms
- * Timestamp: 10/27/2023 12:14:09 AM
-*******************************************************************/
+/***********************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\mp\maps\mp_quarry\mp_quarry.gsc
+***********************************************************/
 
-//Function Number: 1
-main()
-{
+main() {
 	lib_0FE1::main();
 	scripts\mp\maps\mp_quarry\gen\mp_quarry_art::main();
 	lib_0FE0::main();
@@ -32,16 +26,12 @@ main()
 	level thread func_CDA4("mp_quarry_kotch");
 }
 
-//Function Number: 2
-func_CDA4(param_00)
-{
+func_CDA4(param_00) {
 	wait(30);
 	function_030E(param_00);
 }
 
-//Function Number: 3
-fix_collision()
-{
+fix_collision() {
 	var_00 = spawn("script_model",(0,-512,224));
 	var_00.angles = (0,0,0);
 	var_00 setmodel("mp_quarry_uplink_01");
@@ -123,30 +113,23 @@ fix_collision()
 	var_24 clonebrushmodeltoscriptmodel(var_23);
 }
 
-//Function Number: 4
-patchoutofboundstrigger()
-{
+patchoutofboundstrigger() {
 	level.outofboundstriggerpatches = [];
 	var_00 = [(-632,-1813,320),(630,-1912,320)];
-	foreach(var_02 in var_00)
-	{
+	foreach(var_02 in var_00) {
 		var_03 = spawn("trigger_radius",var_02,0,400,200);
 		level.outofboundstriggerpatches[level.outofboundstriggerpatches.size] = var_03;
 	}
 
 	level waittill("game_ended");
-	foreach(var_03 in level.outofboundstriggerpatches)
-	{
-		if(isdefined(var_03))
-		{
+	foreach(var_03 in level.outofboundstriggerpatches) {
+		if(isdefined(var_03)) {
 			var_03 delete();
 		}
 	}
 }
 
-//Function Number: 5
-spawn_oob_trigger()
-{
+spawn_oob_trigger() {
 	wait(1);
 	var_00 = spawn("trigger_radius",(36,-844,0),0,500,200);
 	var_00 hide();

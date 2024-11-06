@@ -1,71 +1,51 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\mp\radiation.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 9
- * Decompile Time: 371 ms
- * Timestamp: 10/27/2023 12:21:24 AM
-*******************************************************************/
+/********************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\mp\radiation.gsc
+********************************************/
 
-//Function Number: 1
-onplayerconnect()
-{
-	for(;;)
-	{
+onplayerconnect() {
+	for(;;) {
 		level waittill("connected",var_00);
 		var_00.numareas = 0;
 	}
 }
 
-//Function Number: 2
-playerenterarea(param_00)
-{
+playerenterarea(param_00) {
 	self.var_C210++;
-	if(self.numareas == 1)
-	{
+	if(self.numareas == 1) {
 		radiationeffect();
 	}
 }
 
-//Function Number: 3
-playerleavearea(param_00)
-{
+playerleavearea(param_00) {
 	self.var_C210--;
-	if(self.numareas != 0)
-	{
+	if(self.numareas != 0) {
 		return;
 	}
 
 	self.poison = 0;
 	self notify("leftTrigger");
-	if(isdefined(self.radiationoverlay))
-	{
+	if(isdefined(self.radiationoverlay)) {
 		self.radiationoverlay fadeoutblackout(0.1,0);
 	}
 }
 
-//Function Number: 4
-soundwatcher(param_00)
-{
+soundwatcher(param_00) {
 	scripts\engine\utility::waittill_any_3("death","leftTrigger");
 	self stoploopsound();
 }
 
-//Function Number: 5
-radiationeffect()
-{
+radiationeffect() {
 	self endon("disconnect");
 	self endon("game_ended");
 	self endon("death");
 	self endon("leftTrigger");
 	self.poison = 0;
 	thread soundwatcher(self);
-	for(;;)
-	{
+	for(;;) {
 		self.var_D64C++;
-		switch(self.poison)
-		{
+		switch(self.poison) {
 			case 1:
 				self.var_DBEA = "item_geigercouner_level2";
 				self playloopsound(self.var_DBEA);
@@ -116,15 +96,12 @@ radiationeffect()
 	wait(5);
 }
 
-//Function Number: 6
-func_2B48()
-{
+func_2B48() {
 	self endon("disconnect");
 	self endon("game_ended");
 	self endon("death");
 	self endon("leftTrigger");
-	if(!isdefined(self.radiationoverlay))
-	{
+	if(!isdefined(self.radiationoverlay)) {
 		self.radiationoverlay = newclienthudelem(self);
 		self.radiationoverlay.x = 0;
 		self.radiationoverlay.y = 0;
@@ -143,18 +120,14 @@ func_2B48()
 	var_04 = 5;
 	var_05 = 100;
 	var_06 = 0;
-	for(;;)
-	{
-		while(self.poison > 1)
-		{
+	for(;;) {
+		while(self.poison > 1) {
 			var_07 = var_05 - var_04;
 			var_06 = self.poison - var_04 / var_07;
-			if(var_06 < 0)
-			{
+			if(var_06 < 0) {
 				var_06 = 0;
 			}
-			else if(var_06 > 1)
-			{
+			else if(var_06 > 1) {
 				var_06 = 1;
 			}
 
@@ -163,8 +136,7 @@ func_2B48()
 			var_0A = var_03 - var_02;
 			var_0B = var_02 + var_0A * var_06;
 			var_0C = var_06 * 0.5;
-			if(var_06 == 1)
-			{
+			if(var_06 == 1) {
 				break;
 			}
 
@@ -174,13 +146,11 @@ func_2B48()
 			wait(var_06 * 0.5);
 		}
 
-		if(var_06 == 1)
-		{
+		if(var_06 == 1) {
 			break;
 		}
 
-		if(self.radiationoverlay.alpha != 0)
-		{
+		if(self.radiationoverlay.alpha != 0) {
 			self.radiationoverlay fadeoutblackout(1,0);
 		}
 
@@ -190,23 +160,17 @@ func_2B48()
 	self.radiationoverlay func_6AB7(2,0);
 }
 
-//Function Number: 7
-doradiationdamage(param_00)
-{
-	self thread [[ level.callbackplayerdamage ]](self,self,param_00,0,"MOD_SUICIDE","claymore_mp",self.origin,(0,0,0) - self.origin,"none",0);
+doradiationdamage(param_00) {
+	self thread [[level.callbackplayerdamage]](self,self,param_00,0,"MOD_SUICIDE","claymore_mp",self.origin,(0,0,0) - self.origin,"none",0);
 }
 
-//Function Number: 8
-func_6AB7(param_00,param_01)
-{
+func_6AB7(param_00,param_01) {
 	self fadeovertime(param_00);
 	self.alpha = param_01;
 	wait(param_00);
 }
 
-//Function Number: 9
-fadeoutblackout(param_00,param_01)
-{
+fadeoutblackout(param_00,param_01) {
 	self fadeovertime(param_00);
 	self.alpha = param_01;
 	wait(param_00);

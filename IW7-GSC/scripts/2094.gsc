@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: 2094.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 2
- * Decompile Time: 0 ms
- * Timestamp: 10/27/2023 12:23:17 AM
-*******************************************************************/
+/****************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\2094.gsc
+****************************/
 
-//Function Number: 1
-main()
-{
+main() {
 	self setmodel("body_hero_sipes");
 	self attach("head_hero_sipes","",1);
 	self.headmodel = "head_hero_sipes";
@@ -22,17 +16,14 @@ main()
 	self.var_1FA8 = "hero_sipes";
 	self.voice = "unitednationshelmet";
 	self give_explosive_touch_on_revived("vestlight");
-	if(issentient(self))
-	{
+	if(issentient(self)) {
 		self sethitlocdamagetable("locdmgtable/ai_lochit_dmgtable");
 	}
 
 	self glinton(#animtree);
 }
 
-//Function Number: 2
-precache()
-{
+precache() {
 	precachemodel("body_hero_sipes");
 	precachemodel("head_hero_sipes");
 	precachemodel("helmet_head_hero_sipes");

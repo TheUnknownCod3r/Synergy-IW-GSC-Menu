@@ -1,18 +1,11 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\mp\agents\crab_brute\crab_brute_tunedata.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 3
- * Decompile Time: 195 ms
- * Timestamp: 10/27/2023 12:11:11 AM
-*******************************************************************/
+/************************************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\mp\agents\crab_brute\crab_brute_tunedata.gsc
+************************************************************************/
 
-//Function Number: 1
-setuptunedata()
-{
-	if(!isdefined(level.agenttunedata))
-	{
+setuptunedata() {
+	if(!isdefined(level.agenttunedata)) {
 		level.agenttunedata = [];
 	}
 
@@ -20,9 +13,7 @@ setuptunedata()
 	setupmytunedata(level.agenttunedata["crab_brute"]);
 }
 
-//Function Number: 2
-setupmytunedata(param_00)
-{
+setupmytunedata(param_00) {
 	param_00.min_dist_to_enemy_to_do_arrival_sq = 250000;
 	param_00.max_dist_to_taunt_sq = 490000;
 	param_00.initial_burrow_wait_time_ms = 2000;
@@ -97,8 +88,6 @@ setupmytunedata(param_00)
 	param_00.melee_max_z_diff = 60;
 }
 
-//Function Number: 3
-gettunedata()
-{
+gettunedata() {
 	return level.agenttunedata["crab_brute"];
 }

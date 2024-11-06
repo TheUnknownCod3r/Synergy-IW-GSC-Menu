@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\sp\maps\europa\europa_anim.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 40
- * Decompile Time: 1551 ms
- * Timestamp: 10/27/2023 12:22:40 AM
-*******************************************************************/
+/**********************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\sp\maps\europa\europa_anim.gsc
+**********************************************************/
 
-//Function Number: 1
-main()
-{
+main() {
 	func_91DC();
 	func_3353();
 	func_3508();
@@ -19,9 +13,7 @@ main()
 	func_EE25();
 }
 
-//Function Number: 2
-func_91DC()
-{
+func_91DC() {
 	level.var_EC87["sdf1"] = #animtree;
 	level.var_EC87["sdf2"] = #animtree;
 	level.var_EC87["sdf3"] = #animtree;
@@ -156,32 +148,23 @@ func_91DC()
 	level.var_EC85["generic"]["hm_grnd_yel_patrol_react_to_combat_4_ar"] = %hm_grnd_yel_patrol_react_to_combat_4_ar;
 }
 
-//Function Number: 3
-func_12921(param_00)
-{
+func_12921(param_00) {
 	playfx(scripts\engine\utility::getfx("vfx_eu_icecave_landing_kickup_sml"),scripts\sp\_utility::func_864C(param_00.origin));
 }
 
-//Function Number: 4
-func_12924(param_00)
-{
+func_12924(param_00) {
 	param_00.var_38DF = 1;
 	param_00 notify("cannot_interupt");
 }
 
-//Function Number: 5
-func_C7C7(param_00)
-{
+func_C7C7(param_00) {
 	playfx(scripts\engine\utility::getfx("deathfx_bloodpool_generic"),param_00 gettagorigin("j_head"),(0,0,1));
 	param_00.a.nodeath = 1;
 	param_00 _meth_81D0();
 }
 
-//Function Number: 6
-func_C7BE(param_00)
-{
-	if(!isdefined(param_00.var_6D66))
-	{
+func_C7BE(param_00) {
+	if(!isdefined(param_00.var_6D66)) {
 		param_00.var_6D66 = 1;
 		return;
 	}
@@ -202,29 +185,21 @@ func_C7BE(param_00)
 	stopfxontag(scripts\engine\utility::getfx("outro_gun_impact_leak"),var_06,"tag_origin");
 }
 
-//Function Number: 7
-func_C7BB(param_00)
-{
+func_C7BB(param_00) {
 	param_00.var_1FB6 hide();
 }
 
-//Function Number: 8
-func_C7CB(param_00)
-{
+func_C7CB(param_00) {
 	level.var_8E0F = "good";
 	level.player notify("o2_in");
 }
 
-//Function Number: 9
-func_C7CC(param_00)
-{
+func_C7CC(param_00) {
 	level.var_8E0F = "depleted";
 	level.player notify("o2_out");
 }
 
-//Function Number: 10
-func_C7BA(param_00)
-{
+func_C7BA(param_00) {
 	var_01 = "tag_accessory_right";
 	var_02 = param_00 gettagorigin(var_01);
 	var_03 = param_00 gettagangles(var_01);
@@ -235,9 +210,7 @@ func_C7BA(param_00)
 	param_00 detach("oxygen_bottle_air_boss",var_01);
 }
 
-//Function Number: 11
-func_8E1D(param_00)
-{
+func_8E1D(param_00) {
 	playfx(level.var_7649["human_gib_head"],param_00 gettagorigin("j_head"),(0,0,1));
 	playfx(scripts\engine\utility::getfx("deathfx_bloodpool_generic"),param_00 gettagorigin("j_head"),(0,0,1));
 	param_00.var_C065 = 1;
@@ -245,14 +218,11 @@ func_8E1D(param_00)
 	param_00 givescorefortrophyblocks();
 }
 
-//Function Number: 12
-func_8CA1(param_00)
-{
+func_8CA1(param_00) {
 	playfx(scripts\engine\utility::getfx("deathfx_bloodpool_generic"),param_00 gettagorigin("j_head"),(0,0,1));
 	param_00 lib_0C60::func_8C99();
 	param_00 detach(param_00.hatmodel);
-	if(param_00 == level.var_EBBB)
-	{
+	if(param_00 == level.var_EBBB) {
 		param_00 attach("helmet_hero_sipes_crushed");
 		return;
 	}
@@ -260,44 +230,34 @@ func_8CA1(param_00)
 	param_00 attach("helmet_hero_t_crushed");
 }
 
-//Function Number: 13
-func_C7BF(param_00)
-{
+func_C7BF(param_00) {
 	level.player viewkick(100,param_00.origin,0);
 	level.player thread func_54D7(0.5,2,0.5);
 	level.player thread scripts\sp\_gameskill::func_2BDB(2,0.5);
 	var_01 = getentarray("europa_lights_outro_2","targetname");
-	foreach(var_03 in var_01)
-	{
+	foreach(var_03 in var_01) {
 		var_03 setlightintensity(0);
 	}
 }
 
-//Function Number: 14
-func_54D7(param_00,param_01,param_02)
-{
+func_54D7(param_00,param_01,param_02) {
 	level.player _meth_809A(param_00,param_01);
 	wait(param_02);
 	level.player _meth_809A(0,1);
 }
 
-//Function Number: 15
-func_C7C5(param_00)
-{
-	if(!isdefined(param_00.var_902B))
-	{
+func_C7C5(param_00) {
+	if(!isdefined(param_00.var_902B)) {
 		param_00.var_902B = 0;
 	}
 
-	if(scripts\sp\_utility::func_93A6() && !isdefined(level.player.helmet))
-	{
+	if(scripts\sp\_utility::func_93A6() && !isdefined(level.player.helmet)) {
 		level.player.helmet = level.var_10964.helmet;
 	}
 
 	param_00.var_902B++;
 	var_01 = 1;
-	if(param_00.var_902B == 1)
-	{
+	if(param_00.var_902B == 1) {
 		level.player thread scripts\sp\_gameskill::func_2BDB(2.5,0.5);
 		level.player _meth_809A(0.25,2);
 		level.player.helmet setmodel("vm_hero_protagonist_helmet_glass_crack_02_clear");
@@ -305,16 +265,14 @@ func_C7C5(param_00)
 		level.player scripts\engine\utility::delaythread(0.2,::scripts\sp\_utility::play_sound_on_entity,"europa_plr_end_efforts_2");
 		level.player notify("sfx_beep_fade");
 	}
-	else if(param_00.var_902B == 2)
-	{
+	else if(param_00.var_902B == 2) {
 		level.player thread scripts\sp\_gameskill::func_2BDB(2.7,0.5);
 		level.player _meth_809A(0.5,2);
 		level.player.helmet setmodel("vm_hero_protagonist_helmet_glass_crack_03_clear");
 		level.player playsound("scn_europa_outro_plr_helmet_glass_break_03");
 		level.player scripts\engine\utility::delaythread(0.2,::scripts\sp\_utility::play_sound_on_entity,"europa_plr_end_efforts_3");
 	}
-	else if(param_00.var_902B == 3)
-	{
+	else if(param_00.var_902B == 3) {
 		thread scripts\sp\_hud::func_8DF7(0.05);
 		level.player _meth_809A(0,1);
 		level.player scripts\engine\utility::delaythread(0.2,::scripts\sp\_utility::play_sound_on_entity,"europa_plr_end_efforts_4");
@@ -330,19 +288,15 @@ func_C7C5(param_00)
 		scripts\engine\utility::flag_set("outro_freeze");
 	}
 
-	if(var_01)
-	{
+	if(var_01) {
 		level.player viewkick(100,param_00.origin,0);
 	}
 }
 
-//Function Number: 16
-func_C7CD()
-{
+func_C7CD() {
 	var_00 = anglestoforward(level.player getplayerangles());
 	playfx(scripts\engine\utility::getfx("outro_player_glass_punch"),level.player geteye(),var_00);
-	if(scripts\sp\_utility::func_93A6())
-	{
+	if(scripts\sp\_utility::func_93A6()) {
 		level.var_10964.helmet delete();
 		return;
 	}
@@ -350,43 +304,34 @@ func_C7CD()
 	level.player.helmet delete();
 }
 
-//Function Number: 17
-func_C7C4(param_00)
-{
+func_C7C4(param_00) {
 	level.player notify("connor");
 	level notify("stop_dof_target_thread");
 	level.var_584B = param_00;
 	level.var_5844 = 1;
 }
 
-//Function Number: 18
-func_C7CE(param_00)
-{
+func_C7CE(param_00) {
 	var_01 = 0.4;
 	var_02 = 0.05;
 	var_03 = 1;
 	var_04 = [level.player.var_E505,param_00];
-	foreach(var_06 in var_04)
-	{
+	foreach(var_06 in var_04) {
 		var_06 thread func_AB76(var_06 scripts\sp\_utility::func_7DC1("outro"),var_01,var_03,var_02);
 	}
 
 	wait(0.5);
-	foreach(var_06 in var_04)
-	{
+	foreach(var_06 in var_04) {
 		var_06 thread func_AB76(var_06 scripts\sp\_utility::func_7DC1("outro"),var_01,var_02,var_03);
 	}
 }
 
-//Function Number: 19
-func_AB76(param_00,param_01,param_02,param_03)
-{
+func_AB76(param_00,param_01,param_02,param_03) {
 	self notify("stop_lerp_animrate");
 	self endon("stop_lerp_animrate");
 	var_04 = param_01 * 20;
 	var_05 = param_03 - param_02 / var_04;
-	for(var_06 = 0;var_06 < var_04;var_06++)
-	{
+	for(var_06 = 0;var_06 < var_04;var_06++) {
 		param_02 = param_02 + var_05;
 		self _meth_82B1(param_00,param_02);
 		wait(0.05);
@@ -395,9 +340,7 @@ func_AB76(param_00,param_01,param_02,param_03)
 	self _meth_82B1(param_00,param_03);
 }
 
-//Function Number: 20
-func_3353()
-{
+func_3353() {
 	level.var_EC87["c6"] = #animtree;
 	level.var_EC8C["c6"] = "robot_c6";
 	level.var_EC85["c6"]["locker_deploy"] = %c6_grnd_red_exposed_rack_arm_spawn_ar;
@@ -406,16 +349,12 @@ func_3353()
 	level.var_EC85["c62"]["outro"] = %europa_end_c6_02_scene;
 }
 
-//Function Number: 21
-func_3508()
-{
+func_3508() {
 	level.var_EC87["c12"] = #animtree;
 	level.var_EC8C["c12"] = "robot_c12";
 }
 
-//Function Number: 22
-player()
-{
+player() {
 	level.var_EC87["player_rig"] = #animtree;
 	level.var_EC8C["player_rig"] = "viewmodel_base_viewhands_iw7";
 	level.var_EC85["player_rig"]["europa_dropship_idle"][0] = %europa_dropship_intro_plr_idle;
@@ -467,16 +406,12 @@ player()
 	level.var_EC85["player_rig"]["fire_fspar"] = %europa_plr_fires_large_steel_dragon;
 }
 
-//Function Number: 23
-func_8C5B(param_00)
-{
+func_8C5B(param_00) {
 	var_01 = (29221,-5369,-76);
 	playfx(level._effect["small_cracks"],var_01);
 }
 
-//Function Number: 24
-func_12922(param_00)
-{
+func_12922(param_00) {
 	var_01 = spawn("script_model",param_00 gettagorigin("tag_accessory_right"));
 	var_01.angles = param_00 gettagangles("tag_accessory_right");
 	var_01 linkto(param_00,"tag_accessory_right");
@@ -487,30 +422,23 @@ func_12922(param_00)
 	var_01 delete();
 }
 
-//Function Number: 25
-func_12923(param_00)
-{
+func_12923(param_00) {
 	param_00 func_8E18();
 	level.player playsound("scn_cave_jump_boostkill");
 }
 
-//Function Number: 26
-func_8E18(param_00)
-{
-	if(!isdefined(self.hatmodel))
-	{
+func_8E18(param_00) {
+	if(!isdefined(self.hatmodel)) {
 		return;
 	}
 
 	var_01 = self gettagorigin("j_head");
 	var_02 = anglestoforward(self gettagangles("j_head"));
 	playfx(scripts\engine\utility::getfx("helmet_sdf_army_broken_europa"),var_01,var_02);
-	if(isdefined(self.var_8E1E))
-	{
+	if(isdefined(self.var_8E1E)) {
 		self.var_8E1E = undefined;
 		var_03 = self _meth_850C("helmet","helmet");
-		if(var_03 > 0)
-		{
+		if(var_03 > 0) {
 			self _meth_850B(var_03,"helmet","helmet");
 		}
 	}
@@ -519,9 +447,7 @@ func_8E18(param_00)
 	self.hatmodel = undefined;
 }
 
-//Function Number: 27
-func_D1B0(param_00)
-{
+func_D1B0(param_00) {
 	level endon("scar_saved_player");
 	level.var_4214 = spawn("script_model",level.player.origin);
 	level.var_4214 setmodel("tactical_knife_iw7_vm");
@@ -534,34 +460,24 @@ func_D1B0(param_00)
 	playfx(scripts\engine\utility::getfx("vfx_eu_icecave_takedown_bloodpool"),level.var_4214 gettagorigin("tag_knife_fx"));
 }
 
-//Function Number: 28
-func_67AF(param_00)
-{
+func_67AF(param_00) {
 	function_02A9("atmosphere","helmet",1);
 }
 
-//Function Number: 29
-func_D015(param_00)
-{
+func_D015(param_00) {
 	thread scripts\sp\_utility::func_1034F("europa_plr_effortsholdingontod");
 }
 
-//Function Number: 30
-func_C7CA(param_00)
-{
+func_C7CA(param_00) {
 	level.var_8E0F = "depleted";
 }
 
-//Function Number: 31
-func_13267()
-{
+func_13267() {
 	level.var_EC87["dropship"] = #animtree;
 	level.var_EC85["dropship"]["europa_dropship_intro"] = %europa_dropship_intro_dropship_start;
 }
 
-//Function Number: 32
-func_EE25()
-{
+func_EE25() {
 	level.var_EC87["script_model"] = #animtree;
 	level.var_EC87["desk"] = #animtree;
 	level.var_EC85["cutter"]["cutter_crawl"][0] = %europa_seeker_forward_in_place;
@@ -606,11 +522,8 @@ func_EE25()
 	level.var_EC85["kotch_gun"]["outro"] = %europa_end_emcpistol_scene;
 }
 
-//Function Number: 33
-func_12920(param_00)
-{
-	if(isdefined(param_00.var_B14F))
-	{
+func_12920(param_00) {
+	if(isdefined(param_00.var_B14F)) {
 		param_00 scripts\sp\_utility::func_1101B();
 	}
 
@@ -621,11 +534,8 @@ func_12920(param_00)
 	param_00 _meth_81D0();
 }
 
-//Function Number: 34
-func_C0C7(param_00)
-{
-	if(isdefined(param_00.var_B14F))
-	{
+func_C0C7(param_00) {
+	if(isdefined(param_00.var_B14F)) {
 		param_00 scripts\sp\_utility::func_1101B();
 	}
 
@@ -633,34 +543,27 @@ func_C0C7(param_00)
 	param_00 scripts\sp\_utility::func_54C6();
 }
 
-//Function Number: 35
-func_7348(param_00)
-{
+func_7348(param_00) {
 	level endon("fpar_fire_stop");
-	for(;;)
-	{
+	for(;;) {
 		param_00 _meth_8494("iw7_steeldragon",level.var_21F7 gettagorigin("tag_flash"),level.var_21F7 gettagangles("tag_flash"));
 		wait(0.05);
 	}
 }
 
-//Function Number: 36
-func_F1EC(param_00)
-{
+func_F1EC(param_00) {
 	setomnvar("ui_europa_selfdestruct",1);
 	function_01C5("bg_cinematicFullScreen","0");
 	function_01C5("bg_cinematicCanPause","1");
 	level.player playsound("europa_armory_self_destruct_ui");
 	function_003D("europa_selfdestruct");
-	while(!function_0102())
-	{
+	while(!function_0102()) {
 		wait(0.05);
 	}
 
 	thread scripts\sp\_art::func_583F(0,4,10,5,15,150,0.5);
 	scripts\engine\utility::delaythread(3.5,::scripts\sp\_art::func_583D,1);
-	while(function_0102())
-	{
+	while(function_0102()) {
 		wait(0.05);
 	}
 
@@ -670,9 +573,7 @@ func_F1EC(param_00)
 	setomnvar("ui_europa_selfdestruct",0);
 }
 
-//Function Number: 37
-func_C0D7(param_00)
-{
+func_C0D7(param_00) {
 	scripts\engine\utility::flag_set("scar1_moveto_fspar");
 	scripts\sp\maps\europa\europa_util::func_117FF(75);
 	var_01 = "iw7_steeldragon+europaspeedmod";
@@ -680,11 +581,8 @@ func_C0D7(param_00)
 	level.player switchtoweaponimmediate(var_01);
 }
 
-//Function Number: 38
-func_F2DF(param_00)
-{
-	if(!isdefined(self.var_1310C))
-	{
+func_F2DF(param_00) {
+	if(!isdefined(self.var_1310C)) {
 		level.var_11B30.var_2AA2 glinton(#animtree);
 		level.var_11B30.var_2AA2.var_1310C = 1;
 	}
@@ -696,40 +594,33 @@ func_F2DF(param_00)
 	var_01["powerdown"] = %steel_dragon_powerdown;
 	var_02 = "bfganim";
 	level.var_11B30.var_2AA2 aiclearanim(%root,0.2);
-	if(param_00 == "idle")
-	{
+	if(param_00 == "idle") {
 		level.var_11B30.var_2AA2 thread func_2AA4(var_01[param_00]);
 	}
 
 	level.var_11B30.var_2AA2 _meth_82E1(var_02,var_01[param_00],1,0.2,1);
-	if(param_00 == "fire")
-	{
+	if(param_00 == "fire") {
 		thread func_2AA3();
 	}
 
-	if(param_00 != "idle")
-	{
+	if(param_00 != "idle") {
 		level.var_11B30.var_2AA2 waittillmatch("end",var_02);
 	}
 }
 
-//Function Number: 39
-func_2AA4(param_00)
-{
+func_2AA4(param_00) {
 	self endon("death");
 	self endon("stop_idle_thread");
 	wait(0.05);
 	var_01 = 1;
-	for(;;)
-	{
+	for(;;) {
 		wait(randomfloatrange(2,5));
 		var_02 = randomfloatrange(3,5);
 		var_03 = randomfloatrange(0.2,1);
 		var_04 = var_03 - var_01;
 		var_05 = int(var_02 / 0.05);
 		var_06 = var_04 / var_05;
-		for(var_07 = 0;var_07 < var_05;var_07++)
-		{
+		for(var_07 = 0;var_07 < var_05;var_07++) {
 			var_01 = var_01 + var_06;
 			self _meth_82B1(param_00,var_01);
 			wait(0.05);
@@ -740,9 +631,7 @@ func_2AA4(param_00)
 	}
 }
 
-//Function Number: 40
-func_2AA3()
-{
+func_2AA3() {
 	wait(0.8);
 	level.var_11B30.var_113F2 playsound("scn_europa_fspar_fire");
 	thread scripts\sp\maps\europa\europa_armory::func_3532();

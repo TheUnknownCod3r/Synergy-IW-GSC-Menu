@@ -1,25 +1,17 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\anim\atv.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 27
- * Decompile Time: 1352 ms
- * Timestamp: 10\26\2023 11:59:54 PM
-*******************************************************************/
+/****************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\anim\atv.gsc
+****************************************/
 
-//Function Number: 1
-main()
-{
+main() {
 	self.var_4B71 = "none";
 	self.var_FE91 = undefined;
 	func_255B();
 	func_B1C3();
 }
 
-//Function Number: 2
-func_255B()
-{
+func_255B() {
 	self.objective_state_nomessage = 0;
 	self.var_1491.pose = "crouch";
 	scripts\sp\_utility::func_558D();
@@ -30,9 +22,7 @@ func_255B()
 	self.disablebulletwhizbyreaction = 1;
 }
 
-//Function Number: 3
-func_255A()
-{
+func_255A() {
 	self.allowpain = 1;
 	self.var_6EC4 = 0;
 	scripts\sp\_utility::func_86E2();
@@ -45,13 +35,10 @@ func_255A()
 	self.disablebulletwhizbyreaction = undefined;
 }
 
-//Function Number: 4
-func_B1C3()
-{
+func_B1C3() {
 	var_00 = self.var_E500.var_5BCB || self.var_E500.var_E4FB.size == 1;
 	func_2565(var_00);
-	if(var_00)
-	{
+	if(var_00) {
 		scripts\anim\shared::placeweaponon(self.primaryweapon,"left");
 		self.setdevdvar = -90;
 		self.setmatchdatadef = 90;
@@ -68,9 +55,7 @@ func_B1C3()
 	func_255C("driver");
 }
 
-//Function Number: 5
-func_255D()
-{
+func_255D() {
 	self endon("death");
 	self endon("killanimscript");
 	var_00 = "left2right";
@@ -81,20 +66,16 @@ func_255D()
 	self give_attacker_kill_rewards(scripts\anim\utility::func_1F64("drive"),1,0);
 	self setanimknob(scripts\anim\utility::func_1F64(var_00),1,0);
 	self _meth_82B0(scripts\anim\utility::func_1F64(var_00),0.5);
-	for(;;)
-	{
-		if(self.var_E500.var_10F83)
-		{
+	for(;;) {
+		if(self.var_E500.var_10F83) {
 			var_02 = 0.5 * 1 + scripts\sp\_vehicle_code::func_12E33(self.var_E500);
 			var_03 = self getscoreinfocategory(scripts\anim\utility::func_1F64(var_00));
-			if(var_00 == "right2left")
-			{
+			if(var_00 == "right2left") {
 				var_03 = 1 - var_03;
 			}
 
 			var_04 = 20 * abs(var_03 - var_02);
-			if(var_03 < var_02)
-			{
+			if(var_03 < var_02) {
 				var_00 = "left2right";
 				var_04 = var_04 * var_01["left2right"];
 			}
@@ -118,19 +99,15 @@ func_255D()
 	}
 }
 
-//Function Number: 6
-func_255E()
-{
+func_255E() {
 	self endon("death");
 	self endon("killanimscript");
 	var_00 = 0.05;
 	var_01 = 0;
 	self _meth_82A5(%atv_aiming,%body,1,0);
 	self setanimknob(scripts\anim\utility::func_1F64("idle"),1,0);
-	for(;;)
-	{
-		if(self.var_4B71 != "none")
-		{
+	for(;;) {
+		if(self.var_4B71 != "none") {
 			self waittill("atv_event_finished");
 			continue;
 		}
@@ -142,14 +119,12 @@ func_255E()
 		self _meth_82AC(scripts\anim\utility::func_1F64("straight_level_center"),var_03,var_00);
 		self _meth_82AC(scripts\anim\utility::func_1F64("straight_level_left"),var_04,var_00);
 		self _meth_82AC(scripts\anim\utility::func_1F64("straight_level_right"),var_05,var_00);
-		if(self.bulletsinclip <= 0)
-		{
+		if(self.bulletsinclip <= 0) {
 			scripts\anim\weaponlist::refillclip();
 			var_01 = gettime() + 3000;
 		}
 
-		if(var_01 <= gettime())
-		{
+		if(var_01 <= gettime()) {
 			func_2568();
 		}
 
@@ -164,9 +139,7 @@ func_255E()
 	}
 }
 
-//Function Number: 7
-func_2558(param_00)
-{
+func_2558(param_00) {
 	self endon("death");
 	self.var_E500.var_10F83 = 0;
 	self _meth_82E6("atv_event",param_00,1,0.17);
@@ -177,16 +150,12 @@ func_2558(param_00)
 	self notify("atv_event_finished");
 }
 
-//Function Number: 8
-func_255C(param_00)
-{
+func_255C(param_00) {
 	self endon("death");
 	self endon("killanimscript");
 	var_01 = self.var_E500;
-	for(;;)
-	{
-		if(var_01.var_67E5["jump"][param_00])
-		{
+	for(;;) {
+		if(var_01.var_67E5["jump"][param_00]) {
 			var_01.var_67E5["jump"][param_00] = 0;
 			self notify("atv_event_occurred");
 			self.var_4B71 = "jump";
@@ -194,40 +163,33 @@ func_255C(param_00)
 			self _meth_82E6("jump",scripts\anim\utility::func_1F64("event_jump"),1,0.17);
 		}
 
-		if(var_01.var_67E5["bump"][param_00])
-		{
+		if(var_01.var_67E5["bump"][param_00]) {
 			var_01.var_67E5["bump"][param_00] = 0;
 			self notify("atv_event_occurred");
-			if(self.var_4B71 != "bump_big")
-			{
+			if(self.var_4B71 != "bump_big") {
 				thread func_2558(scripts\anim\utility::func_1F64("event_bump"));
 			}
 		}
 
-		if(var_01.var_67E5["bump_big"][param_00])
-		{
+		if(var_01.var_67E5["bump_big"][param_00]) {
 			var_01.var_67E5["bump_big"][param_00] = 0;
 			self notify("atv_event_occurred");
 			self.var_4B71 = "bump_big";
 			thread func_2558(scripts\anim\utility::func_1F64("event_bump_big"));
 		}
 
-		if(var_01.var_67E5["sway_left"][param_00])
-		{
+		if(var_01.var_67E5["sway_left"][param_00]) {
 			var_01.var_67E5["sway_left"][param_00] = 0;
 			self notify("atv_event_occurred");
-			if(self.var_4B71 != "bump_big")
-			{
+			if(self.var_4B71 != "bump_big") {
 				thread func_2558(scripts\anim\utility::func_1F64("event_sway")["left"]);
 			}
 		}
 
-		if(var_01.var_67E5["sway_right"][param_00])
-		{
+		if(var_01.var_67E5["sway_right"][param_00]) {
 			var_01.var_67E5["sway_right"][param_00] = 0;
 			self notify("atv_event_occurred");
-			if(self.var_4B71 != "bump_big")
-			{
+			if(self.var_4B71 != "bump_big") {
 				thread func_2558(scripts\anim\utility::func_1F64("event_sway")["right"]);
 			}
 		}
@@ -236,13 +198,10 @@ func_255C(param_00)
 	}
 }
 
-//Function Number: 9
-func_2568()
-{
+func_2568() {
 	self notify("want_shoot_while_driving");
 	self give_attacker_kill_rewards(%atv_add_fire,1,0.2);
-	if(isdefined(self.var_FE91))
-	{
+	if(isdefined(self.var_FE91)) {
 		return;
 	}
 
@@ -251,9 +210,7 @@ func_2568()
 	thread func_2566();
 }
 
-//Function Number: 10
-func_2569()
-{
+func_2569() {
 	self endon("killanimscript");
 	self endon("want_shoot_while_driving");
 	wait(0.05);
@@ -262,9 +219,7 @@ func_2569()
 	self aiclearanim(%atv_add_fire,0.2);
 }
 
-//Function Number: 11
-func_2556()
-{
+func_2556() {
 	self endon("killanimscript");
 	self endon("end_shoot_while_driving");
 	self.var_1491.var_1096D = ::func_2570;
@@ -272,18 +227,13 @@ func_2556()
 	self.var_FE91 = undefined;
 }
 
-//Function Number: 12
-func_2557()
-{
+func_2557() {
 	self endon("atv_event_occurred");
 	scripts\anim\shoot_behavior::func_4F69("normal");
 }
 
-//Function Number: 13
-func_2570()
-{
-	if(!isdefined(self.isnodeoccupied))
-	{
+func_2570() {
+	if(!isdefined(self.isnodeoccupied)) {
 		self.var_FE9E = undefined;
 		self.var_FECF = undefined;
 		self.var_FED7 = "none";
@@ -293,12 +243,10 @@ func_2570()
 	self.var_FE9E = self.isnodeoccupied;
 	self.var_FECF = self.isnodeoccupied getshootatpos();
 	var_00 = distancesquared(self.origin,self.var_10C.origin);
-	if(var_00 < 1000000)
-	{
+	if(var_00 < 1000000) {
 		self.var_FED7 = "full";
 	}
-	else if(var_00 < 4000000)
-	{
+	else if(var_00 < 4000000) {
 		self.var_FED7 = "burst";
 	}
 	else
@@ -306,8 +254,7 @@ func_2570()
 		self.var_FED7 = "single";
 	}
 
-	if(isdefined(self.var_10C.vehicle))
-	{
+	if(isdefined(self.var_10C.vehicle)) {
 		var_01 = 0.5;
 		var_02 = self.var_FE9E.vehicle;
 		var_03 = self.var_E500;
@@ -315,25 +262,20 @@ func_2570()
 		var_05 = anglestoforward(var_02.angles);
 		var_06 = anglestoright(var_02.angles);
 		var_07 = vectordot(var_04,var_05);
-		if(var_07 < 0)
-		{
+		if(var_07 < 0) {
 			var_08 = var_02 vehicle_getspeed() * var_01;
 			var_08 = var_08 * 17.6;
-			if(var_08 > 50)
-			{
+			if(var_08 > 50) {
 				var_09 = vectordot(var_04,var_06);
 				var_09 = var_09 \ 3;
-				if(var_09 > 128)
-				{
+				if(var_09 > 128) {
 					var_09 = 128;
 				}
-				else if(var_09 < -128)
-				{
+				else if(var_09 < -128) {
 					var_09 = -128;
 				}
 
-				if(var_09 > 0)
-				{
+				if(var_09 > 0) {
 					var_09 = 128 - var_09;
 				}
 				else
@@ -349,17 +291,13 @@ func_2570()
 	}
 }
 
-//Function Number: 14
-func_2566()
-{
+func_2566() {
 	self endon("killanimscript");
 	self endon("end_shoot_while_driving");
 	self notify("doing_shootWhileDriving");
 	self endon("doing_shootWhileDriving");
-	for(;;)
-	{
-		if(!self.bulletsinclip)
-		{
+	for(;;) {
+		if(!self.bulletsinclip) {
 			wait(0.5);
 			continue;
 		}
@@ -368,21 +306,16 @@ func_2566()
 	}
 }
 
-//Function Number: 15
-func_2560()
-{
-	if(!self.var_E500.var_10F83)
-	{
+func_2560() {
+	if(!self.var_E500.var_10F83) {
 		return 0;
 	}
 
-	if(!scripts\anim\utility_common::needtoreload(0))
-	{
+	if(!scripts\anim\utility_common::needtoreload(0)) {
 		return 0;
 	}
 
-	if(!scripts\anim\utility_common::usingriflelikeweapon())
-	{
+	if(!scripts\anim\utility_common::usingriflelikeweapon()) {
 		return 0;
 	}
 
@@ -391,9 +324,7 @@ func_2560()
 	return 1;
 }
 
-//Function Number: 16
-func_2561()
-{
+func_2561() {
 	self endon("atv_event_occurred");
 	self.var_10FB2 = 1;
 	self waittill("start_blending_reload");
@@ -410,44 +341,32 @@ func_2561()
 	self.var_10FB2 = undefined;
 	self aiclearanim(%atv_reload,0.1);
 	self give_attacker_kill_rewards(%atv_aiming,1,0.1);
-	if(isdefined(self.var_86EC))
-	{
+	if(isdefined(self.var_86EC)) {
 		self.var_86EC = undefined;
 		scripts\anim\shared::donotetracks("gun_up",::func_256D);
 		self aiclearanim(scripts\anim\utility::func_1F64("gun_up"),0);
 	}
 }
 
-//Function Number: 17
-func_256E(param_00)
-{
-	if(param_00 == "start_aim")
-	{
+func_256E(param_00) {
+	if(param_00 == "start_aim") {
 		return 1;
 	}
 }
 
-//Function Number: 18
-func_256D(param_00)
-{
-	if(param_00 == "end")
-	{
+func_256D(param_00) {
+	if(param_00 == "end") {
 		return 1;
 	}
 }
 
-//Function Number: 19
-func_256F(param_00)
-{
-	if(param_00 == "start_lean")
-	{
+func_256F(param_00) {
+	if(param_00 == "start_lean") {
 		return 1;
 	}
 }
 
-//Function Number: 20
-func_256A()
-{
+func_256A() {
 	self endon("killanimscript");
 	self endon("stop tracking");
 	var_00 = 0.05;
@@ -455,22 +374,18 @@ func_256A()
 	var_02 = 0;
 	var_03 = 0;
 	var_04 = 1;
-	for(;;)
-	{
+	for(;;) {
 		scripts\anim\track::func_93E2();
 		var_05 = (self.origin[0],self.origin[1],self geteye()[2]);
 		var_06 = self.var_FECF;
-		if(isdefined(self.var_FE9E))
-		{
+		if(isdefined(self.var_FE9E)) {
 			var_06 = self.var_FE9E getshootatpos();
 		}
 
-		if(!isdefined(var_06))
-		{
+		if(!isdefined(var_06)) {
 			var_03 = 0;
 			var_07 = self getsafeanimmovedeltapercentage();
-			if(isdefined(var_07))
-			{
+			if(isdefined(var_07)) {
 				var_03 = angleclamp180(self.angles[1] - var_07[1]);
 			}
 		}
@@ -482,20 +397,17 @@ func_256A()
 			var_03 = angleclamp180(var_03);
 		}
 
-		if(var_03 < self.setdevdvar || var_03 > self.setmatchdatadef)
-		{
+		if(var_03 < self.setdevdvar || var_03 > self.setmatchdatadef) {
 			var_03 = 0;
 		}
 
-		if(var_04)
-		{
+		if(var_04) {
 			var_04 = 0;
 		}
 		else
 		{
 			var_0A = var_03 - var_02;
-			if(abs(var_0A) > var_01)
-			{
+			if(abs(var_0A) > var_01) {
 				var_03 = var_02 + var_01 * scripts\common\utility::sign(var_0A);
 			}
 		}
@@ -509,32 +421,26 @@ func_256A()
 	}
 }
 
-//Function Number: 21
-func_2559(param_00,param_01,param_02)
-{
+func_2559(param_00,param_01,param_02) {
 	var_03 = undefined;
 	var_04 = undefined;
 	var_05 = 0;
-	for(var_06 = 0;var_06 < param_00.size;var_06++)
-	{
+	for(var_06 = 0;var_06 < param_00.size;var_06++) {
 		var_07 = scripts\common\utility::absangleclamp180(param_02 - param_01[var_06]);
-		if(!isdefined(var_03) || var_07 < var_05)
-		{
+		if(!isdefined(var_03) || var_07 < var_05) {
 			var_04 = var_03;
 			var_03 = param_00[var_06];
 			var_05 = var_07;
 			continue;
 		}
 
-		if(!isdefined(var_04))
-		{
+		if(!isdefined(var_04)) {
 			var_04 = param_00[var_06];
 		}
 	}
 
 	var_08 = var_03;
-	if(isdefined(level.var_D893) && var_08 == level.var_D893 && gettime() - level.var_D894 < 500)
-	{
+	if(isdefined(level.var_D893) && var_08 == level.var_D893 && gettime() - level.var_D894 < 500) {
 		var_08 = var_04;
 	}
 
@@ -543,14 +449,11 @@ func_2559(param_00,param_01,param_02)
 	return var_08;
 }
 
-//Function Number: 22
-func_2555()
-{
+func_2555() {
 	var_00 = self.var_E500;
 	var_01 = var_00.var_D89A;
 	var_01 = (var_01[0],var_01[1],randomfloatrange(200,400)) * 0.75;
-	if(lengthsquared(var_01) > 1000000)
-	{
+	if(lengthsquared(var_01) > 1000000) {
 		var_01 = vectornormalize(var_01) * 1000;
 	}
 
@@ -560,9 +463,7 @@ func_2555()
 	var_02 thread func_51D1();
 }
 
-//Function Number: 23
-func_255F()
-{
+func_255F() {
 	var_00 = [];
 	var_00[0] = level.var_EC85["atv"]["small"]["death"]["back"];
 	var_00[1] = level.var_EC85["atv"]["small"]["death"]["right"];
@@ -576,12 +477,9 @@ func_255F()
 	return 1;
 }
 
-//Function Number: 24
-func_2554()
-{
+func_2554() {
 	var_00 = self.var_E500;
-	if(!isdefined(var_00))
-	{
+	if(!isdefined(var_00)) {
 		return func_255F();
 	}
 
@@ -604,26 +502,20 @@ func_2554()
 	return 1;
 }
 
-//Function Number: 25
-func_51D1()
-{
+func_51D1() {
 	var_00 = self.origin;
-	for(var_01 = 0;var_01 < 60;var_01++)
-	{
+	for(var_01 = 0;var_01 < 60;var_01++) {
 		wait(0.05);
 		var_00 = self.origin;
 	}
 
 	wait(3);
-	if(isdefined(self))
-	{
+	if(isdefined(self)) {
 		self delete();
 	}
 }
 
-//Function Number: 26
-func_2564(param_00)
-{
+func_2564(param_00) {
 	self.var_1491.var_2274["idle"] = level.var_EC85["atv"][param_00]["idle"];
 	self.var_1491.var_2274["drive"] = level.var_EC85["atv"][param_00]["drive"];
 	self.var_1491.var_2274["fire"] = level.var_EC85["atv"][param_00]["fire"];
@@ -639,9 +531,7 @@ func_2564(param_00)
 	self.var_1491.var_2274["semi5"] = level.var_EC85["atv"][param_00]["fire"];
 }
 
-//Function Number: 27
-func_2565(param_00)
-{
+func_2565(param_00) {
 	self.var_1491.var_2274 = [];
 	func_2564("driver");
 	self.var_1491.var_2274["left2right"] = level.var_EC85["atv"]["driver"]["left2right"];
@@ -655,8 +545,7 @@ func_2565(param_00)
 	self.var_1491.var_2274["add_aim_right_left"] = level.var_EC85["atv"]["driver"]["add_aim_right"]["left"];
 	self.var_1491.var_2274["add_aim_right_center"] = level.var_EC85["atv"]["driver"]["add_aim_right"]["center"];
 	self.var_1491.var_2274["add_aim_right_right"] = level.var_EC85["atv"]["driver"]["add_aim_right"]["right"];
-	if(param_00)
-	{
+	if(param_00) {
 		self.var_1491.var_2274["event_jump"] = level.var_EC85["atv"]["driver"]["shoot_jump"];
 		self.var_1491.var_2274["event_bump"] = level.var_EC85["atv"]["driver"]["shoot_bump"];
 		self.var_1491.var_2274["event_bump_big"] = level.var_EC85["atv"]["driver"]["shoot_bump_big"];

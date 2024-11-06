@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: 3975.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 1
- * Decompile Time: 2 ms
- * Timestamp: 10/27/2023 12:31:52 AM
-*******************************************************************/
+/****************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\3975.gsc
+****************************/
 
-//Function Number: 1
-main()
-{
+main() {
 	level._effect["vfx_breakneck_hsmk_wire_stream"] = loadfx("vfx/iw7/levels/mp_breakneck/vfx_breakneck_hsmk_wire_stream.vfx");
 	level._effect["vfx_glare_break_sm"] = loadfx("vfx/iw7/levels/mp_breakneck/vfx_glare_break_sm.vfx");
 	level._effect["vfx_glare_break"] = loadfx("vfx/iw7/levels/mp_breakneck/vfx_glare_break.vfx");

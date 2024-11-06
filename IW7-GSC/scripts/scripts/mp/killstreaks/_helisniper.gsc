@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\mp\killstreaks\_helisniper.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 32
- * Decompile Time: 1664 ms
- * Timestamp: 10/27/2023 12:28:47 AM
-*******************************************************************/
+/**********************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\mp\killstreaks\_helisniper.gsc
+**********************************************************/
 
-//Function Number: 1
-init()
-{
+init() {
 	scripts\mp\killstreaks\_helicopter_guard::func_AADA();
 	scripts\mp\killstreaks\_helicopter_guard::func_AAD8();
 	scripts\mp\killstreaks\_killstreaks::registerkillstreak("heli_sniper",::func_128E8);
@@ -22,81 +16,64 @@ init()
 	level.heliconfigs["heli_sniper"] = var_00;
 }
 
-//Function Number: 2
-func_128E8(param_00,param_01)
-{
+func_128E8(param_00,param_01) {
 	var_02 = func_7E37(self.origin);
 	var_03 = func_7E34(self.origin);
 	var_04 = vectortoangles(var_03.origin - var_02.origin);
-	if(isdefined(self.underwater) && self.underwater)
-	{
+	if(isdefined(self.underwater) && self.underwater) {
 		return 0;
 	}
 
-	if(isdefined(self.isjuggernautlevelcustom) && self.isjuggernautlevelcustom == 1)
-	{
+	if(isdefined(self.isjuggernautlevelcustom) && self.isjuggernautlevelcustom == 1) {
 		return 0;
 	}
-	else if(!isdefined(level.var_1A66) || !isdefined(var_02) || !isdefined(var_03))
-	{
+	else if(!isdefined(level.var_1A66) || !isdefined(var_02) || !isdefined(var_03)) {
 		self iprintlnbold(&"KILLSTREAKS_UNAVAILABLE_IN_LEVEL");
 		return 0;
 	}
 
 	var_05 = 1;
-	if(func_68C2())
-	{
+	if(func_68C2()) {
 		self iprintlnbold(&"KILLSTREAKS_AIR_SPACE_TOO_CROWDED");
 		return 0;
 	}
 
-	if(scripts\mp\_utility::currentactivevehiclecount() >= scripts\mp\_utility::maxvehiclesallowed() || level.fauxvehiclecount + var_05 >= scripts\mp\_utility::maxvehiclesallowed())
-	{
+	if(scripts\mp\_utility::currentactivevehiclecount() >= scripts\mp\_utility::maxvehiclesallowed() || level.fauxvehiclecount + var_05 >= scripts\mp\_utility::maxvehiclesallowed()) {
 		self iprintlnbold(&"KILLSTREAKS_TOO_MANY_VEHICLES");
 		return 0;
 	}
 
-	if(isdefined(self.iscapturingcrate) && self.iscapturingcrate)
-	{
+	if(isdefined(self.iscapturingcrate) && self.iscapturingcrate) {
 		return 0;
 	}
 
-	if(isdefined(self.isreviving) && self.isreviving)
-	{
+	if(isdefined(self.isreviving) && self.isreviving) {
 		return 0;
 	}
 
 	var_06 = func_49D1(self,var_02,var_03,var_04,param_01,param_00);
-	if(!isdefined(var_06))
-	{
+	if(!isdefined(var_06)) {
 		return 0;
 	}
 
 	var_07 = helipathmemory(var_06,param_01);
-	if(isdefined(var_07) && var_07 == "fail")
-	{
+	if(isdefined(var_07) && var_07 == "fail") {
 		return 0;
 	}
 
 	return 1;
 }
 
-//Function Number: 3
-func_68C2()
-{
+func_68C2() {
 	return isdefined(level.lbsniper);
 }
 
-//Function Number: 4
-func_7E37(param_00)
-{
+func_7E37(param_00) {
 	var_01 = undefined;
 	var_02 = 999999;
-	foreach(var_04 in level.air_start_nodes)
-	{
+	foreach(var_04 in level.air_start_nodes) {
 		var_05 = distance(var_04.origin,param_00);
-		if(var_05 < var_02)
-		{
+		if(var_05 < var_02) {
 			var_01 = var_04;
 			var_02 = var_05;
 		}
@@ -105,16 +82,13 @@ func_7E37(param_00)
 	return var_01;
 }
 
-//Function Number: 5
-func_49D1(param_00,param_01,param_02,param_03,param_04,param_05)
-{
+func_49D1(param_00,param_01,param_02,param_03,param_04,param_05) {
 	var_06 = getent("airstrikeheight","targetname");
 	var_07 = param_02.origin;
 	var_08 = anglestoforward(param_03);
 	var_09 = param_01.origin;
 	var_0A = spawnhelicopter(param_00,var_09,var_08,"attack_littlebird_mp","vehicle_aas_72x_killstreak");
-	if(!isdefined(var_0A))
-	{
+	if(!isdefined(var_0A)) {
 		return;
 	}
 
@@ -122,8 +96,7 @@ func_49D1(param_00,param_01,param_02,param_03,param_04,param_05)
 	var_0C = var_07 + scripts\mp\_utility::gethelipilotmeshoffset() + var_0B;
 	var_0D = var_07 + scripts\mp\_utility::gethelipilotmeshoffset() - var_0B;
 	var_0E = bullettrace(var_0C,var_0D,0,0,0,0,1);
-	if(isdefined(var_0E["entity"]) && var_0E["normal"][2] > 0.1)
-	{
+	if(isdefined(var_0E["entity"]) && var_0E["normal"][2] > 0.1) {
 		var_07 = var_0E["position"] - scripts\mp\_utility::gethelipilotmeshoffset() + (0,0,384);
 	}
 
@@ -142,8 +115,7 @@ func_49D1(param_00,param_01,param_02,param_03,param_04,param_05)
 	var_0A.var_90F1 = var_0A.var_C537 + (0,0,600);
 	var_0A.var_7338 = var_08[1];
 	var_0A.var_273E = var_08[1] + 180;
-	if(var_0A.var_273E > 360)
-	{
+	if(var_0A.var_273E > 360) {
 		var_0A.var_273E = var_0A.var_273E - 360;
 	}
 
@@ -177,20 +149,16 @@ func_49D1(param_00,param_01,param_02,param_03,param_04,param_05)
 	return var_0A;
 }
 
-//Function Number: 6
-func_7DFC(param_00)
-{
+func_7DFC(param_00) {
 	self endon("death");
 	self endon("crashing");
 	self endon("helicopter_removed");
 	self endon("heightReturned");
 	var_01 = getent("airstrikeheight","targetname");
-	if(isdefined(var_01))
-	{
+	if(isdefined(var_01)) {
 		var_02 = var_01.origin[2];
 	}
-	else if(isdefined(level.airstrikeheightscale))
-	{
+	else if(isdefined(level.airstrikeheightscale)) {
 		var_02 = 850 * level.airstrikeheightscale;
 	}
 	else
@@ -202,13 +170,11 @@ func_7DFC(param_00)
 	var_04 = var_03["position"][2];
 	var_05 = 0;
 	var_06 = 0;
-	for(var_07 = 0;var_07 < 30;var_07++)
-	{
+	for(var_07 = 0;var_07 < 30;var_07++) {
 		wait(0.05);
 		var_08 = var_07 % 8;
 		var_09 = var_07 * 7;
-		switch(var_08)
-		{
+		switch(var_08) {
 			case 0:
 				var_05 = var_09;
 				var_06 = var_09;
@@ -254,13 +220,11 @@ func_7DFC(param_00)
 		}
 
 		var_0A = bullettrace(param_00 + (var_05,var_06,1000),param_00 - (var_05,var_06,10000),0,self,0,0,0,0,0);
-		if(isdefined(var_0A["entity"]))
-		{
+		if(isdefined(var_0A["entity"])) {
 			continue;
 		}
 
-		if(var_0A["position"][2] + 145 > var_04)
-		{
+		if(var_0A["position"][2] + 145 > var_04) {
 			var_04 = var_0A["position"][2] + 145;
 		}
 	}
@@ -268,9 +232,7 @@ func_7DFC(param_00)
 	return var_04;
 }
 
-//Function Number: 7
-helipathmemory(param_00,param_01)
-{
+helipathmemory(param_00,param_01) {
 	level endon("game_ended");
 	param_00 endon("death");
 	param_00 endon("crashing");
@@ -278,8 +240,7 @@ helipathmemory(param_00,param_01)
 	param_00 endon("killstreakExit");
 	var_02 = func_7E37(self.origin);
 	level thread scripts\mp\_utility::teamplayercardsplash("used_heli_sniper",self,self.team);
-	if(isdefined(var_02.angles))
-	{
+	if(isdefined(var_02.angles)) {
 		var_03 = var_02.angles;
 	}
 	else
@@ -289,8 +250,7 @@ helipathmemory(param_00,param_01)
 
 	scripts\engine\utility::allow_usability(0);
 	var_04 = param_00.var_7003;
-	if(isdefined(var_02.neighbors[0]))
-	{
+	if(isdefined(var_02.neighbors[0])) {
 		var_05 = var_02.neighbors[0];
 	}
 	else
@@ -303,8 +263,7 @@ helipathmemory(param_00,param_01)
 	param_00.targetpos = var_07;
 	param_00.var_4BF7 = var_05;
 	var_08 = func_BCD7(param_00);
-	if(isdefined(var_08) && var_08 == "fail")
-	{
+	if(isdefined(var_08) && var_08 == "fail") {
 		param_00 thread heliisfacing();
 		return var_08;
 	}
@@ -313,16 +272,13 @@ helipathmemory(param_00,param_01)
 	return var_08;
 }
 
-//Function Number: 8
-func_C53A(param_00)
-{
+func_C53A(param_00) {
 	level endon("game_ended");
 	param_00 endon("death");
 	param_00 endon("crashing");
 	param_00 endon("owner_disconnected");
 	param_00 endon("killstreakExit");
-	if(isdefined(self.var_9382))
-	{
+	if(isdefined(self.var_9382)) {
 		func_52CD();
 	}
 
@@ -346,17 +302,14 @@ func_C53A(param_00)
 	func_5820(param_00);
 }
 
-//Function Number: 9
-func_5820(param_00)
-{
+func_5820(param_00) {
 	param_00 notify("dropping");
 	param_00 thread func_8DD1();
 	param_00 waittill("at_dropoff");
 	param_00 vehicle_setspeed(60);
 	param_00 givelastonteamwarning(180,180,180,0.3);
 	wait(1);
-	if(!scripts\mp\_utility::isreallyalive(self))
-	{
+	if(!scripts\mp\_utility::isreallyalive(self)) {
 		return;
 	}
 
@@ -371,55 +324,45 @@ func_5820(param_00)
 	self enableweaponswitch();
 	scripts\mp\_utility::setrecoilscale();
 	var_01 = scripts\engine\utility::getlastweapon();
-	if(!self hasweapon(var_01))
-	{
+	if(!self hasweapon(var_01)) {
 		var_01 = scripts\mp\killstreaks\_utility::getfirstprimaryweapon();
 	}
 
 	scripts\mp\_utility::func_1136C(var_01);
 	wait(1);
-	if(isdefined(param_00))
-	{
+	if(isdefined(param_00)) {
 		param_00 thread heliisfacing();
 	}
 }
 
-//Function Number: 10
-watchearlyexit(param_00)
-{
+watchearlyexit(param_00) {
 	self endon("heli_sniper_timeout");
 	param_00 thread scripts\mp\killstreaks\_killstreaks::allowridekillstreakplayerexit("dropping");
 	param_00 waittill("killstreakExit");
 	func_5820(param_00);
 }
 
-//Function Number: 11
-func_BCD7(param_00)
-{
+func_BCD7(param_00) {
 	self endon("disconnect");
 	self visionsetnakedforplayer("black_bw",0.5);
 	scripts\mp\_utility::set_visionset_for_watching_players("black_bw",0.5,1);
 	var_01 = scripts\engine\utility::waittill_any_timeout_1(0.5,"death");
 	scripts\mp\_hostmigration::waittillhostmigrationdone();
-	if(var_01 == "death")
-	{
+	if(var_01 == "death") {
 		thread scripts\mp\killstreaks\_killstreaks::clearrideintro(1);
 		return "fail";
 	}
 
 	self cancelmantle();
-	if(var_01 != "disconnect")
-	{
+	if(var_01 != "disconnect") {
 		thread scripts\mp\killstreaks\_killstreaks::clearrideintro(1,0.75);
-		if(self.team == "spectator")
-		{
+		if(self.team == "spectator") {
 			return "fail";
 		}
 	}
 
 	param_00 func_24A6();
-	if(!isalive(self))
-	{
+	if(!isalive(self)) {
 		return "fail";
 	}
 
@@ -427,18 +370,13 @@ func_BCD7(param_00)
 	level notify("update_uplink");
 }
 
-//Function Number: 12
-func_52CD()
-{
-	foreach(var_01 in self.var_9382)
-	{
-		if(isdefined(var_01.carriedby) && var_01.carriedby == self)
-		{
+func_52CD() {
+	foreach(var_01 in self.var_9382) {
+		if(isdefined(var_01.carriedby) && var_01.carriedby == self) {
 			self getrigindexfromarchetyperef();
 			self.iscarrying = undefined;
 			self.carrieditem = undefined;
-			if(isdefined(var_01.bombsquadmodel))
-			{
+			if(isdefined(var_01.bombsquadmodel)) {
 				var_01.bombsquadmodel delete();
 			}
 
@@ -448,9 +386,7 @@ func_52CD()
 	}
 }
 
-//Function Number: 13
-func_8DB3()
-{
+func_8DB3() {
 	level endon("game_ended");
 	self endon("death");
 	self endon("crashing");
@@ -460,17 +396,14 @@ func_8DB3()
 	self.var_B00E = spawn("script_origin",var_00);
 	self setlookatent(self.var_B00E);
 	self givelastonteamwarning(360,120);
-	for(;;)
-	{
+	for(;;) {
 		wait(0.25);
 		var_00 = self.origin + anglestoright(self.triggerportableradarping.angles) * 1000;
 		self.var_B00E.origin = var_00;
 	}
 }
 
-//Function Number: 14
-func_24A6()
-{
+func_24A6() {
 	self.triggerportableradarping notify("force_cancel_sentry");
 	self.triggerportableradarping notify("force_cancel_ims");
 	self.triggerportableradarping notify("force_cancel_placement");
@@ -485,9 +418,7 @@ func_24A6()
 	self.triggerportableradarping.chopper = self;
 }
 
-//Function Number: 15
-func_8DD1()
-{
+func_8DD1() {
 	level endon("game_ended");
 	self endon("death");
 	self endon("crashing");
@@ -497,20 +428,16 @@ func_8DD1()
 	var_01 = undefined;
 	var_02 = undefined;
 	var_03 = 0;
-	foreach(var_05 in level.var_1A66)
-	{
-		if(!isdefined(var_05.script_parameters) || !issubstr(var_05.script_parameters,"pickupNode"))
-		{
+	foreach(var_05 in level.var_1A66) {
+		if(!isdefined(var_05.script_parameters) || !issubstr(var_05.script_parameters,"pickupNode")) {
 			continue;
 		}
 
 		var_06 = distancesquared(var_05.origin,self.origin);
-		if(!isdefined(var_02) || var_06 < var_02)
-		{
+		if(!isdefined(var_02) || var_06 < var_02) {
 			var_01 = var_05;
 			var_02 = var_06;
-			if(var_05.script_parameters == "pickupNodehigh")
-			{
+			if(var_05.script_parameters == "pickupNodehigh") {
 				var_03 = 1;
 				continue;
 			}
@@ -519,23 +446,19 @@ func_8DD1()
 		}
 	}
 
-	if(scripts\mp\_utility::getmapname() == "mp_chasm")
-	{
-		if(var_01.origin == (-224,-1056,2376))
-		{
+	if(scripts\mp\_utility::getmapname() == "mp_chasm") {
+		if(var_01.origin == (-224,-1056,2376)) {
 			var_01.origin = (-304,-896,2376);
 		}
 	}
 
-	if(var_03 && !bullettracepassed(self.origin,var_01.origin,0,self))
-	{
+	if(var_03 && !bullettracepassed(self.origin,var_01.origin,0,self)) {
 		self setvehgoalpos(self.origin + (0,0,2300),1);
 		func_137AB("near_goal","goal",5);
 		var_08 = var_01.origin;
 		var_08 = var_08 + (0,0,1500);
 	}
-	else if(var_02.origin[2] > self.origin[2])
-	{
+	else if(var_02.origin[2] > self.origin[2]) {
 		var_08 = var_02.origin;
 	}
 	else
@@ -557,18 +480,14 @@ func_8DD1()
 	self notify("at_dropoff");
 }
 
-//Function Number: 16
-func_137AB(param_00,param_01,param_02)
-{
+func_137AB(param_00,param_01,param_02) {
 	level endon("game_ended");
 	self endon(param_00);
 	self endon(param_01);
 	wait(param_02);
 }
 
-//Function Number: 17
-helimakedepotwait()
-{
+helimakedepotwait() {
 	level endon("game_ended");
 	self endon("death");
 	self endon("crashing");
@@ -577,11 +496,9 @@ helimakedepotwait()
 	self endon("dropping");
 	self vehicle_setspeed(60,45,20);
 	self setneargoalnotifydist(8);
-	for(;;)
-	{
+	for(;;) {
 		var_00 = self.triggerportableradarping getnormalizedmovement();
-		if(var_00[0] >= 0.15 || var_00[1] >= 0.15 || var_00[0] <= -0.15 || var_00[1] <= -0.15)
-		{
+		if(var_00[0] >= 0.15 || var_00[1] >= 0.15 || var_00[0] <= -0.15 || var_00[1] <= -0.15) {
 			thread func_B31F(var_00);
 		}
 
@@ -589,16 +506,12 @@ helimakedepotwait()
 	}
 }
 
-//Function Number: 18
-func_8DB8()
-{
+func_8DB8() {
 	self vehicle_setspeed(80,60,20);
 	self setneargoalnotifydist(8);
-	for(;;)
-	{
+	for(;;) {
 		var_00 = self.triggerportableradarping getnormalizedmovement();
-		if(var_00[0] >= 0.15 || var_00[1] >= 0.15 || var_00[0] <= -0.15 || var_00[1] <= -0.15)
-		{
+		if(var_00[0] >= 0.15 || var_00[1] >= 0.15 || var_00[0] <= -0.15 || var_00[1] <= -0.15) {
 			thread func_B320(var_00);
 		}
 
@@ -606,9 +519,7 @@ func_8DB8()
 	}
 }
 
-//Function Number: 19
-func_B320(param_00)
-{
+func_B320(param_00) {
 	level endon("game_ended");
 	self endon("death");
 	self endon("crashing");
@@ -623,8 +534,7 @@ func_B320(param_00)
 	var_04 = self.origin + var_03;
 	var_04 = var_04 * (1,1,0);
 	var_04 = var_04 + (0,0,self.maxheight[2]);
-	if(distance2dsquared((0,0,0),var_04) > 8000000)
-	{
+	if(distance2dsquared((0,0,0),var_04) > 8000000) {
 		return;
 	}
 
@@ -632,9 +542,7 @@ func_B320(param_00)
 	self waittill("goal");
 }
 
-//Function Number: 20
-func_B31F(param_00)
-{
+func_B31F(param_00) {
 	level endon("game_ended");
 	self endon("death");
 	self endon("crashing");
@@ -652,12 +560,10 @@ func_B31F(param_00)
 	var_07 = var_05 + scripts\mp\_utility::gethelipilotmeshoffset() + var_06;
 	var_08 = var_05 + scripts\mp\_utility::gethelipilotmeshoffset() - var_06;
 	var_09 = bullettrace(var_07,var_08,0,0,0,0,1);
-	if(isdefined(var_09["entity"]) && var_09["normal"][2] > 0.1)
-	{
+	if(isdefined(var_09["entity"]) && var_09["normal"][2] > 0.1) {
 		var_05 = var_09["position"] - scripts\mp\_utility::gethelipilotmeshoffset() + (0,0,var_04);
 		var_0A = var_05[2] - self.origin[2];
-		if(var_0A > 1000)
-		{
+		if(var_0A > 1000) {
 			return;
 		}
 
@@ -666,42 +572,34 @@ func_B31F(param_00)
 	}
 }
 
-//Function Number: 21
-heliisfacing()
-{
+heliisfacing() {
 	level endon("game_ended");
 	self endon("death");
 	self endon("crashing");
 	self notify("end_disconnect_check");
 	self notify("end_death_check");
 	self notify("leaving");
-	if(isdefined(self.var_A79F))
-	{
+	if(isdefined(self.var_A79F)) {
 		self.var_A79F delete();
 	}
 
-	if(isdefined(self.trigger))
-	{
+	if(isdefined(self.trigger)) {
 		self.trigger delete();
 	}
 
-	if(isdefined(self.turret))
-	{
+	if(isdefined(self.turret)) {
 		self.turret delete();
 	}
 
-	if(isdefined(self.var_BD6D))
-	{
+	if(isdefined(self.var_BD6D)) {
 		self.var_BD6D scripts\mp\_hud_util::destroyelem();
 	}
 
-	if(isdefined(self.var_1137A))
-	{
+	if(isdefined(self.var_1137A)) {
 		self.var_1137A scripts\mp\_hud_util::destroyelem();
 	}
 
-	if(isdefined(self.var_BCCF))
-	{
+	if(isdefined(self.var_BCCF)) {
 		self.var_BCCF scripts\mp\_hud_util::destroyelem();
 	}
 
@@ -717,8 +615,7 @@ heliisfacing()
 	self vehicle_setspeed(300,75);
 	self.var_AB32 = 1;
 	scripts\engine\utility::waittill_any_timeout_1(5,"goal");
-	if(isdefined(level.lbsniper) && level.lbsniper == self)
-	{
+	if(isdefined(level.lbsniper) && level.lbsniper == self) {
 		level.lbsniper = undefined;
 	}
 
@@ -726,84 +623,66 @@ heliisfacing()
 	self delete();
 }
 
-//Function Number: 22
-func_8DB4(param_00)
-{
+func_8DB4(param_00) {
 	level endon("game_ended");
 	self endon("leaving");
 	self waittill("death");
 	scripts\mp\_hostmigration::waittillhostmigrationdone();
 	thread scripts\mp\killstreaks\_helicopter::lbonkilled();
-	if(isdefined(self.var_A79F))
-	{
+	if(isdefined(self.var_A79F)) {
 		self.var_A79F delete();
 	}
 
-	if(isdefined(self.trigger))
-	{
+	if(isdefined(self.trigger)) {
 		self.trigger delete();
 	}
 
-	if(isdefined(self.turret))
-	{
+	if(isdefined(self.turret)) {
 		self.turret delete();
 	}
 
-	if(isdefined(self.var_BD6D))
-	{
+	if(isdefined(self.var_BD6D)) {
 		self.var_BD6D scripts\mp\_hud_util::destroyelem();
 	}
 
-	if(isdefined(self.var_1137A))
-	{
+	if(isdefined(self.var_1137A)) {
 		self.var_1137A scripts\mp\_hud_util::destroyelem();
 	}
 
-	if(isdefined(self.var_BCCF))
-	{
+	if(isdefined(self.var_BCCF)) {
 		self.var_BCCF scripts\mp\_hud_util::destroyelem();
 	}
 
-	if(isdefined(self.triggerportableradarping) && isalive(self.triggerportableradarping) && self.var_C834 == 1)
-	{
+	if(isdefined(self.triggerportableradarping) && isalive(self.triggerportableradarping) && self.var_C834 == 1) {
 		self.triggerportableradarping stopridingvehicle();
 		var_01 = undefined;
 		var_02 = undefined;
-		if(isdefined(self.attackers))
-		{
+		if(isdefined(self.attackers)) {
 			var_03 = 0;
-			foreach(var_06, var_05 in self.attackers)
-			{
-				if(var_05 >= var_03)
-				{
+			foreach(var_06, var_05 in self.attackers) {
+				if(var_05 >= var_03) {
 					var_03 = var_05;
 					var_01 = var_06;
 				}
 			}
 		}
 
-		if(isdefined(var_01))
-		{
-			foreach(var_08 in level.participants)
-			{
-				if(var_08 scripts\mp\_utility::getuniqueid() == var_01)
-				{
+		if(isdefined(var_01)) {
+			foreach(var_08 in level.participants) {
+				if(var_08 scripts\mp\_utility::getuniqueid() == var_01) {
 					var_02 = var_08;
 				}
 			}
 		}
 
 		var_0A = getdvarint("scr_team_fftype");
-		if(isdefined(self.var_A667) && isdefined(self.var_A667.var_9E20))
-		{
+		if(isdefined(self.var_A667) && isdefined(self.var_A667.var_9E20)) {
 			self.var_A667 radiusdamage(self.triggerportableradarping.origin,200,2600,2600,self.var_A667);
 		}
-		else if(isdefined(var_02) && var_0A != 2)
-		{
+		else if(isdefined(var_02) && var_0A != 2) {
 			radiusdamage(self.triggerportableradarping.origin,200,2600,2600,var_02);
 		}
-		else if(var_0A == 2 && isdefined(var_02) && scripts\mp\_utility::attackerishittingteam(var_02,self.triggerportableradarping))
-		{
+		else if(var_0A == 2 && isdefined(var_02) && scripts\mp\_utility::attackerishittingteam(var_02,self.triggerportableradarping)) {
 			radiusdamage(self.triggerportableradarping.origin,200,2600,2600,var_02);
 			radiusdamage(self.triggerportableradarping.origin,200,2600,2600);
 		}
@@ -817,11 +696,8 @@ func_8DB4(param_00)
 	}
 }
 
-//Function Number: 23
-func_F881()
-{
-	if(!scripts\mp\_utility::_hasperk("specialty_falldamage"))
-	{
+func_F881() {
+	if(!scripts\mp\_utility::_hasperk("specialty_falldamage")) {
 		level endon("game_ended");
 		self endon("death");
 		self endon("disconnect");
@@ -831,9 +707,7 @@ func_F881()
 	}
 }
 
-//Function Number: 24
-func_DE3E()
-{
+func_DE3E() {
 	level endon("game_ended");
 	self endon("death");
 	self endon("crashing");
@@ -841,34 +715,27 @@ func_DE3E()
 	self.triggerportableradarping endon("disconnect");
 	self endon("dropping");
 	var_00 = 0;
-	for(;;)
-	{
+	for(;;) {
 		wait(0.05);
-		if(!isdefined(self.triggerportableradarping.lightarmorhp) && !self.triggerportableradarping scripts\mp\_utility::isjuggernaut())
-		{
+		if(!isdefined(self.triggerportableradarping.lightarmorhp) && !self.triggerportableradarping scripts\mp\_utility::isjuggernaut()) {
 			self.triggerportableradarping scripts\mp\perks\_perkfunctions::setlightarmor();
 			var_00++;
-			if(var_00 >= 2)
-			{
+			if(var_00 >= 2) {
 				break;
 			}
 		}
 	}
 }
 
-//Function Number: 25
-func_A576()
-{
+func_A576() {
 	level endon("game_ended");
 	self endon("death");
 	self endon("crashing");
 	self.triggerportableradarping endon("death");
 	self.triggerportableradarping endon("disconnect");
 	self endon("dropping");
-	for(;;)
-	{
-		if(self.triggerportableradarping getstance() != "crouch")
-		{
+	for(;;) {
+		if(self.triggerportableradarping getstance() != "crouch") {
 			self.triggerportableradarping setstance("crouch");
 		}
 
@@ -876,23 +743,18 @@ func_A576()
 	}
 }
 
-//Function Number: 26
-_meth_835D()
-{
+_meth_835D() {
 	level endon("game_ended");
 	self endon("death");
 	self endon("crashing");
 	self endon("dropping");
 	self.triggerportableradarping endon("disconnect");
-	for(;;)
-	{
-		if(!isalive(self.triggerportableradarping))
-		{
+	for(;;) {
+		if(!isalive(self.triggerportableradarping)) {
 			return "fail";
 		}
 
-		if(self.triggerportableradarping getcurrentprimaryweapon() != "iw6_gm6helisnipe_mp_gm6scope")
-		{
+		if(self.triggerportableradarping getcurrentprimaryweapon() != "iw6_gm6helisnipe_mp_gm6scope") {
 			self.triggerportableradarping giveweapon("iw6_gm6helisnipe_mp_gm6scope");
 			self.triggerportableradarping scripts\mp\_utility::_switchtoweaponimmediate("iw6_gm6helisnipe_mp_gm6scope");
 			self.triggerportableradarping getraidspawnpoint();
@@ -908,25 +770,20 @@ _meth_835D()
 	}
 }
 
-//Function Number: 27
-func_E2B9()
-{
+func_E2B9() {
 	level endon("game_ended");
 	self endon("death");
 	self endon("crashing");
 	self.triggerportableradarping endon("death");
 	self.triggerportableradarping endon("disconnect");
 	self.triggerportableradarping endon("dropping");
-	for(;;)
-	{
+	for(;;) {
 		self.triggerportableradarping waittill("weapon_fired");
 		self.triggerportableradarping givemaxammo("iw6_gm6helisnipe_mp_gm6scope");
 	}
 }
 
-//Function Number: 28
-func_DB16()
-{
+func_DB16() {
 	level endon("game_ended");
 	self.triggerportableradarping endon("disconnect");
 	self endon("death");
@@ -935,15 +792,12 @@ func_DB16()
 	self.triggerportableradarping.onhelisniper = 0;
 	self.triggerportableradarping.var_8DD6 = undefined;
 	self.var_C834 = 0;
-	if(isdefined(self.origin))
-	{
+	if(isdefined(self.origin)) {
 		physicsexplosionsphere(self.origin,200,200,1);
 	}
 }
 
-//Function Number: 29
-func_AB2F()
-{
+func_AB2F() {
 	level endon("game_ended");
 	self endon("death");
 	self endon("crashing");
@@ -953,9 +807,7 @@ func_AB2F()
 	thread heliisfacing();
 }
 
-//Function Number: 30
-func_AB2E()
-{
+func_AB2E() {
 	level endon("game_ended");
 	self endon("death");
 	self endon("crashing");
@@ -965,16 +817,12 @@ func_AB2E()
 	thread heliisfacing();
 }
 
-//Function Number: 31
-func_7E34(param_00)
-{
+func_7E34(param_00) {
 	var_01 = undefined;
 	var_02 = 999999;
-	foreach(var_04 in level.var_1A66)
-	{
+	foreach(var_04 in level.var_1A66) {
 		var_05 = distance(var_04.origin,param_00);
-		if(var_05 < var_02)
-		{
+		if(var_05 < var_02) {
 			var_01 = var_04;
 			var_02 = var_05;
 		}
@@ -983,14 +831,11 @@ func_7E34(param_00)
 	return var_01;
 }
 
-//Function Number: 32
-func_136B6()
-{
+func_136B6() {
 	var_00 = self getentitynumber();
 	self waittill("death");
 	level.lbsniper = undefined;
-	if(isdefined(level.var_8DD7))
-	{
+	if(isdefined(level.var_8DD7)) {
 		level.var_8DD7 = undefined;
 		level notify("update_uplink");
 	}

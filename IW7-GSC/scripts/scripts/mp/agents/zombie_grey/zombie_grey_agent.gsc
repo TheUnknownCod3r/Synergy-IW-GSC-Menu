@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\mp\agents\zombie_grey\zombie_grey_agent.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 34
- * Decompile Time: 1204 ms
- * Timestamp: 10/27/2023 12:31:52 AM
-*******************************************************************/
+/***********************************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\mp\agents\zombie_grey\zombie_grey_agent.gsc
+***********************************************************************/
 
-//Function Number: 1
-registerscriptedagent()
-{
+registerscriptedagent() {
 	scripts/aitypes/bt_util::init();
 	lib_03B5::func_DEE8();
 	lib_0F47::func_2371();
@@ -22,12 +16,9 @@ registerscriptedagent()
 	thread func_FAB0();
 }
 
-//Function Number: 2
-func_FAB0()
-{
+func_FAB0() {
 	level endon("game_ended");
-	if(!isdefined(level.agent_definition))
-	{
+	if(!isdefined(level.agent_definition)) {
 		level waittill("scripted_agents_initialized");
 	}
 
@@ -38,41 +29,30 @@ func_FAB0()
 	level.agent_funcs["zombie_grey"]["gametype_on_damage_finished"] = ::func_C5D0;
 }
 
-//Function Number: 3
-func_98E8()
-{
+func_98E8() {
 	scripts\engine\utility::flag_init("clone_complete");
 }
 
-//Function Number: 4
-func_9885()
-{
+func_9885() {
 	level.var_85EE = 0;
 }
 
-//Function Number: 5
-func_98D8()
-{
+func_98D8() {
 	level.var_85F2 = [];
 	var_00 = [(324,1657,195),(319,1164,195),(980,1639,196),(966,1148,196),(210,3338,259),(425,3778,259),(985,3777,259),(1164,3204,259),(453,187,226),(452,-86,195),(859,189,195),(839,-62,227),(184,2260,284),(1066,2275,285),(974,1752,220),(334,1049,220),(967,1516,219),(968,1281,219),(967,1043,222),(934,313,248),(373,314,243),(236,990,243),(1048,991,242),(1272,999,283),(1224,319,297),(-56,990,297),(77,318,297),(141,-197,302),(-344,-941,182),(133,-1281,606),(695,-1616,611),(449,-1472,595),(-277,-396,239),(-395,-339,388),(1151,-840,115)];
-	foreach(var_02 in var_00)
-	{
+	foreach(var_02 in var_00) {
 		var_03 = func_B28D(var_02);
 		level.var_85F2[level.var_85F2.size] = var_03;
 	}
 }
 
-//Function Number: 6
-func_B28D(param_00)
-{
+func_B28D(param_00) {
 	var_01 = spawnstruct();
 	var_01.origin = param_00;
 	return var_01;
 }
 
-//Function Number: 7
-setupagent()
-{
+setupagent() {
 	self.var_71D0 = ::func_1004E;
 	self.accuracy = 0.5;
 	self.noattackeraccuracymod = 0;
@@ -114,20 +94,16 @@ setupagent()
 	func_2475();
 	setupdestructibleparts();
 	self setscriptablepartstate("backpack_dome_shield","on");
-	if(isdefined(level.greysetupfunc))
-	{
-		[[ level.greysetupfunc ]](self);
+	if(isdefined(level.greysetupfunc)) {
+		[[level.greysetupfunc]](self);
 	}
 
 	thread scriptedgoalwaitforarrival();
 	thread func_8CAC(self);
 }
 
-//Function Number: 8
-func_85F6(param_00,param_01)
-{
-	if(scripts\engine\utility::istrue(self.i_am_clone))
-	{
+func_85F6(param_00,param_01) {
+	if(scripts\engine\utility::istrue(self.i_am_clone)) {
 		scripts/asm/asm_bb::bb_requestcombatmovetype_facemotion();
 		return;
 	}
@@ -135,33 +111,25 @@ func_85F6(param_00,param_01)
 	scripts/asm/asm_bb::bb_requestcombatmovetype_strafe();
 }
 
-//Function Number: 9
-func_85F8(param_00,param_01)
-{
+func_85F8(param_00,param_01) {
 	var_02 = vectornormalize(param_01.origin - param_00.origin) * (1,1,0);
 	param_01 setvelocity(var_02 * 800);
 	param_00 playsound("grey_force_push");
-	if(isplayer(param_01))
-	{
+	if(isplayer(param_01)) {
 		param_01 earthquakeforplayer(0.5,1,param_01.origin,800);
-		if(!scripts\engine\utility::istrue(param_00.i_am_clone))
-		{
+		if(!scripts\engine\utility::istrue(param_00.i_am_clone)) {
 			param_01 shellshock("frag_grenade_mp",1);
 		}
 	}
 }
 
-//Function Number: 10
-func_1004E()
-{
-	if(isdefined(self.allowpain) && self.allowpain == 0)
-	{
+func_1004E() {
+	if(isdefined(self.allowpain) && self.allowpain == 0) {
 		return 0;
 	}
 
 	var_00 = gettime();
-	if(var_00 < self.var_BF9F)
-	{
+	if(var_00 < self.var_BF9F) {
 		return 0;
 	}
 
@@ -169,11 +137,8 @@ func_1004E()
 	return 1;
 }
 
-//Function Number: 11
-func_2475()
-{
-	if(isdefined(self.var_2AB4) && self.var_2AB4 == 0)
-	{
+func_2475() {
+	if(isdefined(self.var_2AB4) && self.var_2AB4 == 0) {
 		return;
 	}
 
@@ -205,17 +170,12 @@ func_2475()
 	self.var_2AB4 = 1;
 }
 
-//Function Number: 12
-setupdestructibleparts()
-{
+setupdestructibleparts() {
 	self.var_2AB5 = 1;
 }
 
-//Function Number: 13
-func_17CC(param_00,param_01)
-{
-	if(!isdefined(level.var_85DF))
-	{
+func_17CC(param_00,param_01) {
+	if(!isdefined(level.var_85DF)) {
 		anim.var_85DF = [];
 		anim.var_85E1 = [];
 	}
@@ -225,30 +185,22 @@ func_17CC(param_00,param_01)
 	level.var_85E1[var_02] = param_01;
 }
 
-//Function Number: 14
-func_9812()
-{
+func_9812() {
 	func_17CC(0,(41.5391,7.28883,72.2128));
 	func_17CC(1,(34.8849,-4.77048,74.0488));
 }
 
-//Function Number: 15
-scriptedgoalwaitforarrival()
-{
+scriptedgoalwaitforarrival() {
 	self endon("death");
-	for(;;)
-	{
+	for(;;) {
 		self waittill("goal_reached");
-		if(isdefined(self.var_EF7D))
-		{
+		if(isdefined(self.var_EF7D)) {
 			var_00 = self.var_EF7D;
 		}
-		else if(isdefined(self.var_EF7A))
-		{
+		else if(isdefined(self.var_EF7A)) {
 			var_00 = self.var_EF7A.origin;
 		}
-		else if(isdefined(self.var_EF7C))
-		{
+		else if(isdefined(self.var_EF7C)) {
 			var_00 = self.var_EF7C.origin;
 		}
 		else
@@ -257,17 +209,14 @@ scriptedgoalwaitforarrival()
 		}
 
 		var_01 = 16;
-		if(isdefined(self.var_EF7E))
-		{
+		if(isdefined(self.var_EF7E)) {
 			var_01 = self.var_EF7E * self.var_EF7E;
 		}
 
-		if(distance2dsquared(self.origin,var_00) <= var_01)
-		{
+		if(distance2dsquared(self.origin,var_00) <= var_01) {
 			self.var_EF7D = undefined;
 			self.var_EF7C = undefined;
-			if(!isdefined(self.var_EF7B))
-			{
+			if(!isdefined(self.var_EF7B)) {
 				self.var_EF7A = undefined;
 			}
 
@@ -276,11 +225,8 @@ scriptedgoalwaitforarrival()
 	}
 }
 
-//Function Number: 16
-func_F834(param_00,param_01)
-{
-	if(!isdefined(param_01))
-	{
+func_F834(param_00,param_01) {
+	if(!isdefined(param_01)) {
 		param_01 = 0;
 	}
 
@@ -288,9 +234,7 @@ func_F834(param_00,param_01)
 	self.var_EF73 = param_00;
 }
 
-//Function Number: 17
-func_F835(param_00,param_01)
-{
+func_F835(param_00,param_01) {
 	self.var_EF7A = undefined;
 	self.var_EF7B = undefined;
 	self.var_EF7C = undefined;
@@ -298,9 +242,7 @@ func_F835(param_00,param_01)
 	self.var_EF7E = param_01;
 }
 
-//Function Number: 18
-func_F833(param_00,param_01)
-{
+func_F833(param_00,param_01) {
 	self.var_EF7D = undefined;
 	self.var_EF7A = undefined;
 	self.var_EF7B = undefined;
@@ -308,15 +250,12 @@ func_F833(param_00,param_01)
 	self.var_EF7E = param_01;
 }
 
-//Function Number: 19
-func_F832(param_00,param_01,param_02)
-{
+func_F832(param_00,param_01,param_02) {
 	self.var_EF7D = undefined;
 	self.var_EF7C = undefined;
 	self.var_EF7A = param_00;
 	self.var_EF7E = param_01;
-	if(isdefined(param_02) && param_02)
-	{
+	if(isdefined(param_02) && param_02) {
 		self.var_EF7B = param_02;
 		return;
 	}
@@ -324,11 +263,8 @@ func_F832(param_00,param_01,param_02)
 	self.var_EF7B = undefined;
 }
 
-//Function Number: 20
-func_41D9()
-{
-	if(isdefined(self.var_EF7D) || isdefined(self.var_EF7A) || isdefined(self.var_EF7C))
-	{
+func_41D9() {
+	if(isdefined(self.var_EF7D) || isdefined(self.var_EF7A) || isdefined(self.var_EF7C)) {
 		self.var_EF7D = undefined;
 		self.var_EF7A = undefined;
 		self.var_EF7B = undefined;
@@ -337,36 +273,26 @@ func_41D9()
 	}
 }
 
-//Function Number: 21
-func_C5D1(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08)
-{
+func_C5D1(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08) {
 	scripts\mp\mp_agent::default_on_killed(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08);
-	foreach(var_0A in level.players)
-	{
+	foreach(var_0A in level.players) {
 		var_0A scripts\cp\cp_persistence::give_player_xp(1000,1);
 	}
 
-	if(isdefined(level.grey_on_killed_func))
-	{
-		[[ level.grey_on_killed_func ]](self,param_01,param_04,param_06,param_03);
+	if(isdefined(level.grey_on_killed_func)) {
+		[[level.grey_on_killed_func]](self,param_01,param_04,param_06,param_03);
 	}
 }
 
-//Function Number: 22
-try_merge_clones(param_00)
-{
-	if(isdefined(level.spawned_grey) && level.spawned_grey.size > 1)
-	{
-		if(!isdefined(param_00))
-		{
+try_merge_clones(param_00) {
+	if(isdefined(level.spawned_grey) && level.spawned_grey.size > 1) {
+		if(!isdefined(param_00)) {
 			param_00 = func_79F0();
 		}
 
 		var_01 = func_79F1(param_00);
-		foreach(var_03 in level.spawned_grey)
-		{
-			if(var_03 == var_01)
-			{
+		foreach(var_03 in level.spawned_grey) {
+			if(var_03 == var_01) {
 				continue;
 			}
 
@@ -381,17 +307,13 @@ try_merge_clones(param_00)
 	level notify("grey_duplicating_attack_end");
 }
 
-//Function Number: 23
-func_50D4(param_00)
-{
+func_50D4(param_00) {
 	param_00 endon("death");
 	wait(1.5);
 	param_00 suicide();
 }
 
-//Function Number: 24
-func_12BFD(param_00)
-{
+func_12BFD(param_00) {
 	func_B2C4(param_00);
 	param_00.i_am_clone = 0;
 	param_00.var_10AB7 = undefined;
@@ -410,14 +332,10 @@ func_12BFD(param_00)
 	param_00 scripts\mp\mp_agent::func_FAFA("iw7_zapper_grey");
 }
 
-//Function Number: 25
-func_B2C4(param_00)
-{
+func_B2C4(param_00) {
 	var_01 = param_00.available_fuse;
-	foreach(var_03 in var_01)
-	{
-		if(scripts\engine\utility::array_contains(param_00.var_269D,var_03.tag_name))
-		{
+	foreach(var_03 in var_01) {
+		if(scripts\engine\utility::array_contains(param_00.var_269D,var_03.tag_name)) {
 			var_03 show();
 			continue;
 		}
@@ -426,25 +344,19 @@ func_B2C4(param_00)
 	}
 }
 
-//Function Number: 26
-func_79F1(param_00)
-{
+func_79F1(param_00) {
 	var_01 = undefined;
 	var_02 = -1;
-	foreach(var_04 in level.spawned_grey)
-	{
-		if(!isdefined(var_04))
-		{
+	foreach(var_04 in level.spawned_grey) {
+		if(!isdefined(var_04)) {
 			continue;
 		}
 
-		if(var_04 == param_00)
-		{
+		if(var_04 == param_00) {
 			continue;
 		}
 
-		if(var_04.health > var_02)
-		{
+		if(var_04.health > var_02) {
 			var_01 = var_04;
 			var_02 = var_04.health;
 		}
@@ -453,20 +365,15 @@ func_79F1(param_00)
 	return var_01;
 }
 
-//Function Number: 27
-func_79F0()
-{
+func_79F0() {
 	var_00 = undefined;
 	var_01 = 9999999;
-	foreach(var_03 in level.spawned_grey)
-	{
-		if(!isdefined(var_03))
-		{
+	foreach(var_03 in level.spawned_grey) {
+		if(!isdefined(var_03)) {
 			continue;
 		}
 
-		if(var_03.health < var_01)
-		{
+		if(var_03.health < var_01) {
 			var_00 = var_03;
 			var_01 = var_03.health;
 		}
@@ -475,21 +382,16 @@ func_79F0()
 	return var_00;
 }
 
-//Function Number: 28
-func_B67C(param_00,param_01)
-{
+func_B67C(param_00,param_01) {
 	level thread func_CD95(param_00,param_01);
 	param_01.health = param_01.health + param_00.health;
 	param_00.nocorpse = 1;
-	if(isalive(param_00))
-	{
+	if(isalive(param_00)) {
 		param_00 suicide();
 	}
 }
 
-//Function Number: 29
-func_CD95(param_00,param_01)
-{
+func_CD95(param_00,param_01) {
 	var_02 = spawn("script_model",param_00.origin + (0,0,50));
 	var_02 setmodel("tag_origin");
 	wait(0.2);
@@ -499,19 +401,14 @@ func_CD95(param_00,param_01)
 	var_02 delete();
 }
 
-//Function Number: 30
-func_C5CF(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08,param_09,param_0A,param_0B)
-{
+func_C5CF(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08,param_09,param_0A,param_0B) {
 	var_0C = 3.5;
-	if(isdefined(param_01) && param_01 == self)
-	{
+	if(isdefined(param_01) && param_01 == self) {
 		return;
 	}
 
-	if(scripts\engine\utility::istrue(self.is_regening_health))
-	{
-		if(isdefined(param_04) && param_04 == "MOD_MELEE" && isdefined(self.alien_fuse_exposed) && isdefined(param_06) && distancesquared(param_06,self.alien_fuse_exposed.origin) < 225)
-		{
+	if(scripts\engine\utility::istrue(self.is_regening_health)) {
+		if(isdefined(param_04) && param_04 == "MOD_MELEE" && isdefined(self.alien_fuse_exposed) && isdefined(param_06) && distancesquared(param_06,self.alien_fuse_exposed.origin) < 225) {
 			self playsound("grey_fuse_smash");
 			self.current_max_health_regen_level = max(self.min_health_regen_level,self.current_max_health_regen_level - self.max_health_regen_level_penalty);
 			self.melee_attacker = param_01;
@@ -521,18 +418,14 @@ func_C5CF(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_0
 		else
 		{
 			var_0D = gettime();
-			if(isplayer(param_01))
-			{
-				if(!scripts\engine\utility::istrue(self.actually_doing_regen))
-				{
+			if(isplayer(param_01)) {
+				if(!scripts\engine\utility::istrue(self.actually_doing_regen)) {
 					scripts\cp\cp_agent_utils::process_damage_feedback(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08,param_09,self);
 				}
 
-				if(func_FF8A(self,param_01,var_0D))
-				{
+				if(func_FF8A(self,param_01,var_0D)) {
 					param_01.var_D8A2 = var_0D;
-					if(randomint(100) > 80)
-					{
+					if(randomint(100) > 80) {
 						param_01 thread scripts\cp\cp_vo::try_to_play_vo("nag_ufo_fusefail","zmb_comment_vo","low",3,0,0,1);
 					}
 				}
@@ -542,36 +435,29 @@ func_C5CF(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_0
 		}
 	}
 
-	if(isdefined(var_0C) && var_0C == "j_chest_light")
-	{
+	if(isdefined(var_0C) && var_0C == "j_chest_light") {
 		param_09 = "head";
 		param_03 = int(param_03 * var_0D);
 	}
-	else if(isdefined(param_09) && param_09 == "head" || param_09 == "helmet" || param_09 == "neck")
-	{
+	else if(isdefined(param_09) && param_09 == "head" || param_09 == "helmet" || param_09 == "neck") {
 		param_09 = "soft";
 		param_03 = int(param_03 / var_0D);
 	}
 
-	if(isdefined(param_06) && param_06 == "zmb_imsprojectile_mp" || param_06 == "zmb_fireworksprojectile_mp")
-	{
+	if(isdefined(param_06) && param_06 == "zmb_imsprojectile_mp" || param_06 == "zmb_fireworksprojectile_mp") {
 		param_03 = min(int(self.maxhealth / 20),1000);
 	}
 
 	param_04 = param_04 | level.idflags_no_knockback;
 	scripts/cp/agents/gametype_zombie::onzombiedamaged(param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08,param_09,param_0A,param_0B,var_0C);
-	if(isdefined(param_03))
-	{
-		if(isplayer(param_02))
-		{
-			if(!isdefined(self.sum_of_recent_damage))
-			{
+	if(isdefined(param_03)) {
+		if(isplayer(param_02)) {
+			if(!isdefined(self.sum_of_recent_damage)) {
 				scripts/aitypes/zombie_grey/behaviors::reset_recent_damage_data(self);
 			}
 
 			self.sum_of_recent_damage = self.sum_of_recent_damage + param_03;
-			if(!scripts\engine\utility::array_contains(self.recent_player_attackers,param_02))
-			{
+			if(!scripts\engine\utility::array_contains(self.recent_player_attackers,param_02)) {
 				self.recent_player_attackers = scripts\engine\utility::array_add(self.recent_player_attackers,param_02);
 				return;
 			}
@@ -579,17 +465,13 @@ func_C5CF(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_0
 	}
 }
 
-//Function Number: 31
-func_C5D0(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08,param_09,param_0A,param_0B,param_0C)
-{
+func_C5D0(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08,param_09,param_0A,param_0B,param_0C) {
 	scripts/cp/agents/gametype_zombie::onzombiedamagefinished(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08,param_09,param_0A,param_0B,param_0C);
 	scripts/aitypes/zombie_grey/behaviors::try_update_mobile_shield(self,param_01);
 	scripts/aitypes/zombie_grey/behaviors::try_regen_health(self);
 }
 
-//Function Number: 32
-func_98E9()
-{
+func_98E9() {
 	level._effect["zombie_grey_shockwave_begin"] = loadfx("vfx/iw7/core/zombie/vfx_zmb_swave_begin.vfx");
 	level._effect["zombie_grey_shockwave_deploy"] = loadfx("vfx/iw7/core/zombie/vfx_zmb_swave_deploy.vfx");
 	level._effect["zombie_grey_teleport"] = loadfx("vfx/old/_requests/archetypes/vfx_phase_shift_start_volume");
@@ -599,57 +481,45 @@ func_98E9()
 	level._effect["zombie_mini_grey_shock_arc"] = loadfx("vfx/iw7/_requests/coop/vfx_mini_grey_shock_arc.vfx");
 }
 
-//Function Number: 33
-func_FF8A(param_00,param_01,param_02)
-{
+func_FF8A(param_00,param_01,param_02) {
 	var_03 = 3000;
 	var_04 = 22500;
-	if(distancesquared(param_00.origin,param_01.origin) > var_04)
-	{
+	if(distancesquared(param_00.origin,param_01.origin) > var_04) {
 		return 0;
 	}
 
-	if(!isdefined(param_01.var_D8A2))
-	{
+	if(!isdefined(param_01.var_D8A2)) {
 		return 1;
 	}
 
-	if(param_02 - param_01.var_D8A2 > var_03)
-	{
+	if(param_02 - param_01.var_D8A2 > var_03) {
 		return 1;
 	}
 
 	return 0;
 }
 
-//Function Number: 34
-func_8CAC(param_00)
-{
+func_8CAC(param_00) {
 	param_00 notify("stop_health_light_monitor");
 	level endon("game_ended");
 	param_00 endon("death");
 	param_00 endon("stop_health_light_monitor");
 	scripts\engine\utility::waitframe();
-	if(scripts\engine\utility::istrue(param_00.i_am_clone))
-	{
+	if(scripts\engine\utility::istrue(param_00.i_am_clone)) {
 		return;
 	}
 
-	while(!isdefined(param_00.maxhealth))
-	{
+	while(!isdefined(param_00.maxhealth)) {
 		scripts\engine\utility::waitframe();
 	}
 
 	var_01 = param_00.maxhealth * 0.33;
 	var_02 = param_00.maxhealth * 0.66;
-	for(;;)
-	{
-		if(param_00.health <= var_01)
-		{
+	for(;;) {
+		if(param_00.health <= var_01) {
 			param_00 setscriptablepartstate("health_light","red");
 		}
-		else if(param_00.health <= var_02)
-		{
+		else if(param_00.health <= var_02) {
 			param_00 setscriptablepartstate("health_light","yellow");
 		}
 		else

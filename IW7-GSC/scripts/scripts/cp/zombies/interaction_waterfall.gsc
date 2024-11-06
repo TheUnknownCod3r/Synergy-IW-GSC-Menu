@@ -1,40 +1,28 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\cp\zombies\interaction_waterfall.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 5
- * Decompile Time: 285 ms
- * Timestamp: 10/27/2023 12:09:04 AM
-*******************************************************************/
+/****************************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\cp\zombies\interaction_waterfall.gsc
+****************************************************************/
 
-//Function Number: 1
-init_waterfall_trap()
-{
+init_waterfall_trap() {
 	var_00 = scripts\engine\utility::getstruct("trap_waterfall","script_noteworthy");
 	var_01 = getentarray(var_00.target,"targetname");
-	foreach(var_03 in var_01)
-	{
-		if(var_03.classname == "script_model")
-		{
+	foreach(var_03 in var_01) {
+		if(var_03.classname == "script_model") {
 			var_00.valve = var_03;
 		}
 
-		if(var_03.classname == "physicsvolume")
-		{
+		if(var_03.classname == "physicsvolume") {
 			var_00.physvolume = var_03;
 		}
 
-		if(var_03.classname == "trigger_multiple")
-		{
+		if(var_03.classname == "trigger_multiple") {
 			var_00.trigger = var_03;
 		}
 	}
 }
 
-//Function Number: 2
-use_waterfall_trap(param_00,param_01)
-{
+use_waterfall_trap(param_00,param_01) {
 	scripts\cp\cp_interaction::disable_linked_interactions(param_00);
 	param_00.trap_kills = 0;
 	param_00.valve rotateroll(-180,1);
@@ -42,8 +30,7 @@ use_waterfall_trap(param_00,param_01)
 	thread waterfall_trap_sfx();
 	var_02 = gettime() + 2000;
 	playrumbleonposition("light_3s",param_00.valve.origin + (0,0,50));
-	while(gettime() < var_02)
-	{
+	while(gettime() < var_02) {
 		earthquake(0.2,2,param_00.origin + (0,0,100),500);
 		wait(1);
 	}
@@ -54,8 +41,7 @@ use_waterfall_trap(param_00,param_01)
 	param_00.physvolume physics_volumeenable(1);
 	level thread kill_zombies(param_00,param_01);
 	var_02 = gettime() + 25000;
-	while(gettime() < var_02)
-	{
+	while(gettime() < var_02) {
 		playrumbleonposition("heavy_3s",param_00.valve.origin + (0,0,50));
 		earthquake(0.2,3,param_00.origin + (0,0,100),500);
 		wait(1);
@@ -71,9 +57,7 @@ use_waterfall_trap(param_00,param_01)
 	param_00.cooling_down = undefined;
 }
 
-//Function Number: 3
-waterfall_trap_sfx()
-{
+waterfall_trap_sfx() {
 	wait(0.65);
 	playsoundatpos((-1714,-2031,248),"trap_waterfall_start");
 	var_00 = scripts\engine\utility::play_loopsound_in_space("trap_waterfall_rushing_lp",(-1717,-2013,189));
@@ -88,22 +72,17 @@ waterfall_trap_sfx()
 	var_01 delete();
 }
 
-//Function Number: 4
-kill_zombies(param_00,param_01)
-{
+kill_zombies(param_00,param_01) {
 	level endon("stop_waterfall_trap");
-	for(;;)
-	{
+	for(;;) {
 		param_00.trigger waittill("trigger",var_02);
-		if(isplayer(var_02))
-		{
+		if(isplayer(var_02)) {
 			var_03 = var_02 getvelocity();
 			var_02 setvelocity(var_03 + (0,35,0));
 			continue;
 		}
 
-		if(!scripts\cp\utility::should_be_affected_by_trap(var_02,undefined,1))
-		{
+		if(!scripts\cp\utility::should_be_affected_by_trap(var_02,undefined,1)) {
 			continue;
 		}
 
@@ -112,9 +91,7 @@ kill_zombies(param_00,param_01)
 	}
 }
 
-//Function Number: 5
-fling_zombie(param_00,param_01)
-{
+fling_zombie(param_00,param_01) {
 	self endon("death");
 	self.flung = 1;
 	self.marked_for_death = 1;
@@ -122,8 +99,7 @@ fling_zombie(param_00,param_01)
 	self.customdeath = 1;
 	self.disable_armor = 1;
 	wait(randomfloatrange(0.5,1.5));
-	if(param_01 scripts\cp\utility::is_valid_player())
-	{
+	if(param_01 scripts\cp\utility::is_valid_player()) {
 		var_02 = param_01;
 	}
 	else

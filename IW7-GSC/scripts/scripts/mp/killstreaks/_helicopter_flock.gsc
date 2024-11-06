@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\mp\killstreaks\_helicopter_flock.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 18
- * Decompile Time: 851 ms
- * Timestamp: 10/27/2023 12:28:41 AM
-*******************************************************************/
+/****************************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\mp\killstreaks\_helicopter_flock.gsc
+****************************************************************/
 
-//Function Number: 1
-init()
-{
+init() {
 	precachevehicle("attack_littlebird_mp");
 	precachemodel("vehicle_apache_mp");
 	precachemodel("vehicle_apache_mg");
@@ -20,12 +14,9 @@ init()
 	level.var_8D4F = [];
 }
 
-//Function Number: 2
-func_128ED(param_00,param_01)
-{
+func_128ED(param_00,param_01) {
 	var_02 = 5;
-	if(func_8DB7() || scripts\mp\_utility::currentactivevehiclecount() >= scripts\mp\_utility::maxvehiclesallowed() || level.fauxvehiclecount + var_02 >= scripts\mp\_utility::maxvehiclesallowed())
-	{
+	if(func_8DB7() || scripts\mp\_utility::currentactivevehiclecount() >= scripts\mp\_utility::maxvehiclesallowed() || level.fauxvehiclecount + var_02 >= scripts\mp\_utility::maxvehiclesallowed()) {
 		self iprintlnbold(&"KILLSTREAKS_TOO_MANY_VEHICLES");
 		return 0;
 	}
@@ -36,8 +27,7 @@ func_128ED(param_00,param_01)
 	scripts\mp\_utility::incrementfauxvehiclecount();
 	scripts\mp\_utility::incrementfauxvehiclecount();
 	var_03 = func_F1C9(param_00,"littlebird_flock");
-	if(!isdefined(var_03) || !var_03)
-	{
+	if(!isdefined(var_03) || !var_03) {
 		scripts\mp\_utility::decrementfauxvehiclecount();
 		scripts\mp\_utility::decrementfauxvehiclecount();
 		scripts\mp\_utility::decrementfauxvehiclecount();
@@ -50,14 +40,10 @@ func_128ED(param_00,param_01)
 	return 1;
 }
 
-//Function Number: 3
-func_8DB7()
-{
+func_8DB7() {
 	var_00 = 0;
-	for(var_01 = 0;var_01 < level.var_8D4F.size;var_01++)
-	{
-		if(isdefined(level.var_8D4F[var_01]))
-		{
+	for(var_01 = 0;var_01 < level.var_8D4F.size;var_01++) {
+		if(isdefined(level.var_8D4F[var_01])) {
 			var_00 = 1;
 			break;
 		}
@@ -66,15 +52,12 @@ func_8DB7()
 	return var_00;
 }
 
-//Function Number: 4
-func_F1C9(param_00,param_01)
-{
+func_F1C9(param_00,param_01) {
 	self playlocalsound(game["voice"][self.team] + "KS_lbd_inposition");
 	scripts\mp\_utility::_beginlocationselection(param_01,"map_artillery_selector",1,500);
 	self endon("stop_location_selection");
 	self waittill("confirm_location",var_02,var_03);
-	if(func_8DB7() || scripts\mp\_utility::currentactivevehiclecount() >= scripts\mp\_utility::maxvehiclesallowed() || level.fauxvehiclecount >= scripts\mp\_utility::maxvehiclesallowed())
-	{
+	if(func_8DB7() || scripts\mp\_utility::currentactivevehiclecount() >= scripts\mp\_utility::maxvehiclesallowed() || level.fauxvehiclecount >= scripts\mp\_utility::maxvehiclesallowed()) {
 		self iprintlnbold(&"KILLSTREAKS_TOO_MANY_VEHICLES");
 		self notify("cancel_location");
 		return 0;
@@ -88,9 +71,7 @@ func_F1C9(param_00,param_01)
 	return 1;
 }
 
-//Function Number: 5
-func_AD8A()
-{
+func_AD8A() {
 	self endon("death");
 	self endon("disconnect");
 	self playlocalsound(game["voice"][self.team] + "KS_hqr_littlebird");
@@ -98,21 +79,16 @@ func_AD8A()
 	self playlocalsound(game["voice"][self.team] + "KS_lbd_inbound");
 }
 
-//Function Number: 6
-func_6CDC(param_00,param_01,param_02,param_03)
-{
+func_6CDC(param_00,param_01,param_02,param_03) {
 	self notify("used");
 	wait(0.05);
 	thread scripts\mp\_utility::stoplocationselection(0);
-	if(isdefined(self))
-	{
-		self thread [[ param_02 ]](param_00,param_01,param_03);
+	if(isdefined(self)) {
+		self thread [[param_02]](param_00,param_01,param_03);
 	}
 }
 
-//Function Number: 7
-callstrike(param_00,param_01,param_02)
-{
+callstrike(param_00,param_01,param_02) {
 	level endon("game_ended");
 	self endon("disconnect");
 	thread func_89D0();
@@ -131,15 +107,12 @@ callstrike(param_00,param_01,param_02)
 	scripts\mp\_matchdata::logkillstreakevent("littlebird_flock",param_01);
 }
 
-//Function Number: 8
-getflightpath(param_00,param_01,param_02)
-{
+getflightpath(param_00,param_01,param_02) {
 	param_00 = param_00 * (1,1,0);
 	var_03 = (0,param_01,0);
 	var_04 = 12000;
 	var_05 = [];
-	if(isdefined(param_02) && param_02 != 0)
-	{
+	if(isdefined(param_02) && param_02 != 0) {
 		param_00 = param_00 + anglestoright(var_03) * param_02 + (0,0,randomint(300));
 	}
 
@@ -151,12 +124,9 @@ getflightpath(param_00,param_01,param_02)
 	return var_05;
 }
 
-//Function Number: 9
-func_58E8(param_00,param_01,param_02,param_03)
-{
+func_58E8(param_00,param_01,param_02,param_03) {
 	level endon("game_ended");
-	if(!isdefined(param_01))
-	{
+	if(!isdefined(param_01)) {
 		return;
 	}
 
@@ -185,12 +155,9 @@ func_58E8(param_00,param_01,param_02,param_03)
 	var_05 scripts\mp\killstreaks\_helicopter::removelittlebird();
 }
 
-//Function Number: 10
-func_1082F(param_00,param_01,param_02,param_03)
-{
+func_1082F(param_00,param_01,param_02,param_03) {
 	var_04 = spawnhelicopter(param_00,param_01,param_02,"apache_strafe_mp","vehicle_apache_mp");
-	if(!isdefined(var_04))
-	{
+	if(!isdefined(var_04)) {
 		return;
 	}
 
@@ -222,8 +189,7 @@ func_1082F(param_00,param_01,param_02,param_03)
 	var_04.var_B6BC setdefaultdroppitch(0);
 	var_04.var_B6BC give_player_session_tokens("auto_nonai");
 	var_04.var_B6BC setsentryowner(var_04.triggerportableradarping);
-	if(level.teambased)
-	{
+	if(level.teambased) {
 		var_04.var_B6BC setturretteam(var_04.triggerportableradarping.team);
 	}
 
@@ -231,9 +197,7 @@ func_1082F(param_00,param_01,param_02,param_03)
 	return var_04;
 }
 
-//Function Number: 11
-watchtimeout()
-{
+watchtimeout() {
 	level endon("game_ended");
 	self endon("gone");
 	self endon("death");
@@ -241,159 +205,123 @@ watchtimeout()
 	self notify("death");
 }
 
-//Function Number: 12
-func_B9E7()
-{
+func_B9E7() {
 	level endon("game_ended");
 	self endon("gone");
 	self endon("death");
 	self endon("stopFiring");
-	for(;;)
-	{
+	for(;;) {
 		self waittill("killedPlayer",var_00);
 		self.var_A644++;
 		level.var_8D50[level.var_8D50.size] = var_00;
 	}
 }
 
-//Function Number: 13
-func_10DBD()
-{
+func_10DBD() {
 	self endon("gone");
 	self endon("death");
 	self endon("stopFiring");
-	for(;;)
-	{
+	for(;;) {
 		self.var_B6BC waittill("turret_on_target");
 		var_00 = 1;
 		var_01 = self.var_B6BC getturrettarget(0);
-		foreach(var_03 in level.var_8D50)
-		{
-			if(var_01 == var_03)
-			{
+		foreach(var_03 in level.var_8D50) {
+			if(var_01 == var_03) {
 				self.var_B6BC cleartargetentity();
 				var_00 = 0;
 				break;
 			}
 		}
 
-		if(var_00)
-		{
+		if(var_00) {
 			self.var_B6BC shootturret();
 		}
 	}
 }
 
-//Function Number: 14
-func_89D0()
-{
+func_89D0() {
 	level endon("game_ended");
 	self endon("flock_done");
 	thread func_C169();
 	self waittill("killstreak_disowned");
-	for(var_00 = 0;var_00 < level.var_8D4F.size;var_00++)
-	{
-		if(isdefined(level.var_8D4F[var_00]))
-		{
+	for(var_00 = 0;var_00 < level.var_8D4F.size;var_00++) {
+		if(isdefined(level.var_8D4F[var_00])) {
 			level.var_8D4F[var_00] notify("stopFiring");
 		}
 	}
 
-	for(var_00 = 0;var_00 < level.var_8D4F.size;var_00++)
-	{
-		if(isdefined(level.var_8D4F[var_00]))
-		{
+	for(var_00 = 0;var_00 < level.var_8D4F.size;var_00++) {
+		if(isdefined(level.var_8D4F[var_00])) {
 			level.var_8D4F[var_00] notify("death");
 			wait(0.1);
 		}
 	}
 }
 
-//Function Number: 15
-func_C169()
-{
+func_C169() {
 	level endon("game_ended");
 	self endon("disconnect");
-	if(!scripts\mp\_utility::bot_is_fireteam_mode())
-	{
+	if(!scripts\mp\_utility::bot_is_fireteam_mode()) {
 		self endon("joined_team");
 		self endon("joined_spectators");
 	}
 
-	while(func_8DB7())
-	{
+	while(func_8DB7()) {
 		wait(0.5);
 	}
 
 	self notify("flock_done");
 }
 
-//Function Number: 16
-func_6F4A()
-{
+func_6F4A() {
 	self endon("death");
 	level endon("game_ended");
-	for(;;)
-	{
+	for(;;) {
 		self waittill("damage",var_00,var_01,var_02,var_03,var_04,var_05,var_06,var_07,var_08,var_09);
-		if(isdefined(self.var_10955))
-		{
-			self [[ self.var_10955 ]](undefined,var_01,var_00,var_08,var_04,var_09,var_03,var_02,undefined,undefined,var_05,var_07);
+		if(isdefined(self.var_10955)) {
+			self [[self.var_10955]](undefined,var_01,var_00,var_08,var_04,var_09,var_03,var_02,undefined,undefined,var_05,var_07);
 		}
 	}
 }
 
-//Function Number: 17
-func_3758(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08,param_09,param_0A,param_0B)
-{
-	if(isdefined(self.var_1D41) && self.var_1D41)
-	{
+func_3758(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08,param_09,param_0A,param_0B) {
+	if(isdefined(self.var_1D41) && self.var_1D41) {
 		return;
 	}
 
-	if(!isdefined(param_01) || param_01 == self)
-	{
+	if(!isdefined(param_01) || param_01 == self) {
 		return;
 	}
 
-	if(!scripts\mp\_weapons::friendlyfirecheck(self.triggerportableradarping,param_01))
-	{
+	if(!scripts\mp\_weapons::friendlyfirecheck(self.triggerportableradarping,param_01)) {
 		return;
 	}
 
-	if(isdefined(param_03) && param_03 & level.idflags_penetration)
-	{
+	if(isdefined(param_03) && param_03 & level.idflags_penetration) {
 		self.wasdamagedfrombulletpenetration = 1;
 	}
 
-	if(isdefined(param_03) && param_03 & level.idflags_ricochet)
-	{
+	if(isdefined(param_03) && param_03 & level.idflags_ricochet) {
 		self.wasdamagedfrombulletricochet = 1;
 	}
 
 	self.wasdamaged = 1;
 	var_0C = param_02;
-	if(isplayer(param_01))
-	{
+	if(isplayer(param_01)) {
 		param_01 scripts\mp\_damagefeedback::updatedamagefeedback("helicopter");
-		if(param_04 == "MOD_RIFLE_BULLET" || param_04 == "MOD_PISTOL_BULLET")
-		{
-			if(param_01 scripts\mp\_utility::_hasperk("specialty_armorpiercing"))
-			{
+		if(param_04 == "MOD_RIFLE_BULLET" || param_04 == "MOD_PISTOL_BULLET") {
+			if(param_01 scripts\mp\_utility::_hasperk("specialty_armorpiercing")) {
 				var_0C = var_0C + param_02 * level.armorpiercingmod;
 			}
 		}
 	}
 
-	if(isdefined(param_01.triggerportableradarping) && isplayer(param_01.triggerportableradarping))
-	{
+	if(isdefined(param_01.triggerportableradarping) && isplayer(param_01.triggerportableradarping)) {
 		param_01.triggerportableradarping scripts\mp\_damagefeedback::updatedamagefeedback("helicopter");
 	}
 
-	if(isdefined(param_05))
-	{
-		switch(param_05)
-		{
+	if(isdefined(param_05)) {
+		switch(param_05) {
 			case "remotemissile_projectile_mp":
 			case "javelin_mp":
 			case "remote_mortar_missile_mp":
@@ -419,10 +347,8 @@ func_3758(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_0
 	}
 
 	self.var_E1 = self.var_E1 + var_0C;
-	if(self.var_E1 >= self.maxhealth)
-	{
-		if(isplayer(param_01) && !isdefined(self.triggerportableradarping) || param_01 != self.triggerportableradarping)
-		{
+	if(self.var_E1 >= self.maxhealth) {
+		if(isplayer(param_01) && !isdefined(self.triggerportableradarping) || param_01 != self.triggerportableradarping) {
 			self.var_1D41 = 1;
 			param_01 notify("destroyed_helicopter");
 			param_01 notify("destroyed_killstreak",param_05);
@@ -434,9 +360,7 @@ func_3758(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_0
 	}
 }
 
-//Function Number: 18
-func_139E8()
-{
+func_139E8() {
 	self endon("gone");
 	self waittill("death");
 	thread scripts\mp\killstreaks\_helicopter::lbonkilled();

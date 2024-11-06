@@ -1,20 +1,13 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\sp\_drone_base.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 6
- * Decompile Time: 254 ms
- * Timestamp: 10/27/2023 12:24:15 AM
-*******************************************************************/
+/**********************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\sp\_drone_base.gsc
+**********************************************/
 
-//Function Number: 1
-func_5C21()
-{
+func_5C21() {
 	func_23C7();
 	self _meth_839E();
-	if(isdefined(self.var_EE2C))
-	{
+	if(isdefined(self.var_EE2C)) {
 		self.moveplaybackrate = self.var_EE2C;
 	}
 	else
@@ -22,39 +15,31 @@ func_5C21()
 		self.moveplaybackrate = 1;
 	}
 
-	if(self.team == "allies")
-	{
+	if(self.team == "allies") {
 		scripts\sp\_names::func_7B05();
 		self _meth_8307(self.name,&"");
 	}
 
-	if(isdefined(level.var_5CA7))
-	{
-		self thread [[ level.var_5CA7 ]]();
+	if(isdefined(level.var_5CA7)) {
+		self thread [[level.var_5CA7]]();
 	}
 
-	if(!isdefined(self.var_EDB7))
-	{
+	if(!isdefined(self.var_EDB7)) {
 		level thread scripts\sp\_friendlyfire::func_73B1(self);
 	}
 
-	if(!isdefined(level.var_193D))
-	{
+	if(!isdefined(level.var_193D)) {
 		func_1177B();
 	}
 }
 
-//Function Number: 2
-func_1177B()
-{
-	if(!isdefined(level.var_5CCB))
-	{
+func_1177B() {
+	if(!isdefined(level.var_5CCB)) {
 		level.var_5CCB = "all";
 	}
 
 	var_00 = 0;
-	switch(level.var_5CCB)
-	{
+	switch(level.var_5CCB) {
 		case "all":
 			var_00 = 1;
 			break;
@@ -67,58 +52,46 @@ func_1177B()
 			break;
 	}
 
-	if(var_00)
-	{
+	if(var_00) {
 		self thermaldrawenable();
 	}
 }
 
-//Function Number: 3
-func_5C3A()
-{
-	if(!isdefined(self.target))
-	{
+func_5C3A() {
+	if(!isdefined(self.target)) {
 		return;
 	}
 
-	if(isdefined(level.var_5C63[self.target]))
-	{
+	if(isdefined(level.var_5C63[self.target])) {
 		return;
 	}
 
 	level.var_5C63[self.target] = 1;
 	var_00 = self.target;
 	var_01 = scripts\engine\utility::getstruct(var_00,"targetname");
-	if(!isdefined(var_01))
-	{
+	if(!isdefined(var_01)) {
 		return;
 	}
 
 	var_02 = [];
 	var_03 = [];
 	var_04 = var_01;
-	for(;;)
-	{
+	for(;;) {
 		var_01 = var_04;
 		var_05 = 0;
-		for(;;)
-		{
-			if(!isdefined(var_01.target))
-			{
+		for(;;) {
+			if(!isdefined(var_01.target)) {
 				break;
 			}
 
 			var_06 = scripts\engine\utility::getstructarray(var_01.target,"targetname");
-			if(var_06.size)
-			{
+			if(var_06.size) {
 				break;
 			}
 
 			var_07 = undefined;
-			foreach(var_09 in var_06)
-			{
-				if(isdefined(var_03[var_09.origin + ""]))
-				{
+			foreach(var_09 in var_06) {
+				if(isdefined(var_03[var_09.origin + ""])) {
 					continue;
 				}
 
@@ -126,8 +99,7 @@ func_5C3A()
 				break;
 			}
 
-			if(!isdefined(var_07))
-			{
+			if(!isdefined(var_07)) {
 				break;
 			}
 
@@ -138,8 +110,7 @@ func_5C3A()
 			var_05 = 1;
 		}
 
-		if(!var_05)
-		{
+		if(!var_05) {
 			break;
 		}
 	}
@@ -148,33 +119,26 @@ func_5C3A()
 	var_01 = scripts\engine\utility::getstruct(var_00,"targetname");
 	var_0B = var_01;
 	var_03 = [];
-	for(;;)
-	{
+	for(;;) {
 		var_01 = var_04;
 		var_05 = 0;
-		for(;;)
-		{
-			if(!isdefined(var_01.target))
-			{
+		for(;;) {
+			if(!isdefined(var_01.target)) {
 				return;
 			}
 
-			if(!isdefined(var_02[var_01.var_336]))
-			{
+			if(!isdefined(var_02[var_01.var_336])) {
 				return;
 			}
 
 			var_06 = scripts\engine\utility::getstructarray(var_01.target,"targetname");
-			if(var_06.size)
-			{
+			if(var_06.size) {
 				break;
 			}
 
 			var_07 = undefined;
-			foreach(var_09 in var_06)
-			{
-				if(isdefined(var_03[var_09.origin + ""]))
-				{
+			foreach(var_09 in var_06) {
+				if(isdefined(var_03[var_09.origin + ""])) {
 					continue;
 				}
 
@@ -182,13 +146,11 @@ func_5C3A()
 				break;
 			}
 
-			if(!isdefined(var_07))
-			{
+			if(!isdefined(var_07)) {
 				break;
 			}
 
-			if(isdefined(var_01.fgetarg))
-			{
+			if(isdefined(var_01.fgetarg)) {
 				var_0E = var_02[var_0B.var_336];
 				var_0F = var_02[var_01.var_336];
 				var_10 = var_0E + var_0F * 0.5;
@@ -200,20 +162,15 @@ func_5C3A()
 			var_01 = var_07;
 		}
 
-		if(!var_05)
-		{
+		if(!var_05) {
 			break;
 		}
 	}
 }
 
-//Function Number: 4
-func_23C7()
-{
-	if(isdefined(self.type))
-	{
-		if(self.type == "dog")
-		{
+func_23C7() {
+	if(isdefined(self.type)) {
+		if(self.type == "dog") {
 			func_23B5();
 			return;
 		}
@@ -222,14 +179,10 @@ func_23C7()
 	}
 }
 
-//Function Number: 5
-func_23C9()
-{
+func_23C9() {
 	self glinton(#animtree);
 }
 
-//Function Number: 6
-func_23B5()
-{
+func_23B5() {
 	self glinton(#animtree);
 }

@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: 4012.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 1
- * Decompile Time: 3 ms
- * Timestamp: 10/27/2023 12:31:55 AM
-*******************************************************************/
+/****************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\4012.gsc
+****************************/
 
-//Function Number: 1
-main()
-{
+main() {
 	level._effect["vfx_glare_01_frontier"] = loadfx("vfx/iw7/levels/mp_frontier/vfx_glare_01_frontier.vfx");
 	level._effect["vfx_table_holo_dg"] = loadfx("vfx/iw7/levels/mp_frontier/vfx_table_holo_dg.vfx");
 	level._effect["vfx_frontier_bubble_jets_a"] = loadfx("vfx/iw7/levels/mp_frontier/vfx_frontier_bubble_jets_a.vfx");

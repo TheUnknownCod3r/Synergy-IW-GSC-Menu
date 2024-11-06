@@ -1,18 +1,11 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: behaviortree\elvira.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 2
- * Decompile Time: 99 ms
- * Timestamp: 10\26\2023 11:58:21 PM
-*******************************************************************/
+/*******************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\behaviortree\elvira.gsc
+*******************************************/
 
-//Function Number: 1
-func_2AD0()
-{
-	if(isdefined(level.var_119E["elvira"]))
-	{
+func_2AD0() {
+	if(isdefined(level.var_119E["elvira"])) {
 		return;
 	}
 
@@ -29,9 +22,7 @@ func_2AD0()
 	level.var_119E["elvira"] = var_00;
 }
 
-//Function Number: 2
-func_DEE8()
-{
+func_DEE8() {
 	func_2AD0();
 	function_02D8("elvira");
 }

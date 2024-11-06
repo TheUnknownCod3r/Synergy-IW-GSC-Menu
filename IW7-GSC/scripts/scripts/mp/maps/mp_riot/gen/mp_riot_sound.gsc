@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\mp\maps\mp_riot\gen\mp_riot_sound.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 1
- * Decompile Time: 170 ms
- * Timestamp: 10/27/2023 12:14:13 AM
-*******************************************************************/
+/*****************************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\mp\maps\mp_riot\gen\mp_riot_sound.gsc
+*****************************************************************/
 
-//Function Number: 1
-main()
-{
+main() {
 	var_00 = scripts\common\createfx::func_49E7();
 	var_00 scripts\common\createfx::func_F4AD((-2087.95,935.658,338.45),(270,0,0));
 	var_00.var_13125["soundalias"] = "emt_med_flag_flapping_lp_01";

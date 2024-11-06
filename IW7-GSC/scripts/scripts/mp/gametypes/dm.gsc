@@ -1,22 +1,15 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\mp\gametypes\dm.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 34
- * Decompile Time: 1828 ms
- * Timestamp: 10/27/2023 12:12:27 AM
-*******************************************************************/
+/***********************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\mp\gametypes\dm.gsc
+***********************************************/
 
-//Function Number: 1
-main()
-{
+main() {
 	scripts\mp\_globallogic::init();
 	scripts\mp\_globallogic::setupcallbacks();
-	if(function_011C())
-	{
+	if(function_011C()) {
 		level.initializematchrules = ::initializematchrules;
-		[[ level.initializematchrules ]]();
+		[[level.initializematchrules]]();
 		level thread scripts\mp\_utility::reinitializematchrulesonmigration();
 	}
 	else
@@ -37,15 +30,13 @@ main()
 	level.onspawnplayer = ::onspawnplayer;
 	level.onnormaldeath = ::onnormaldeath;
 	level.onplayerscore = ::onplayerscore;
-	if(level.matchrules_damagemultiplier || level.matchrules_vampirism)
-	{
+	if(level.matchrules_damagemultiplier || level.matchrules_vampirism) {
 		level.modifyplayerdamage = ::scripts\mp\_damage::gamemodemodifyplayerdamage;
 	}
 
 	level.didhalfscorevoboost = 0;
 	function_01CC("ffa");
-	if(scripts\mp\_utility::istrue(level.aonrules))
-	{
+	if(scripts\mp\_utility::istrue(level.aonrules)) {
 		level.ignorekdrstats = 1;
 		level.bypassclasschoicefunc = ::alwaysgamemodeclass;
 		setomnvar("ui_skip_loadout",1);
@@ -57,20 +48,16 @@ main()
 		game["dialog"]["gametype"] = "freeforall";
 	}
 
-	if(getdvarint("g_hardcore"))
-	{
+	if(getdvarint("g_hardcore")) {
 		game["dialog"]["gametype"] = "hc_" + game["dialog"]["gametype"];
 	}
-	else if(getdvarint("camera_thirdPerson"))
-	{
+	else if(getdvarint("camera_thirdPerson")) {
 		game["dialog"]["gametype"] = "thirdp_" + game["dialog"]["gametype"];
 	}
-	else if(getdvarint("scr_diehard"))
-	{
+	else if(getdvarint("scr_diehard")) {
 		game["dialog"]["gametype"] = "dh_" + game["dialog"]["gametype"];
 	}
-	else if(getdvarint("scr_" + level.gametype + "_promode"))
-	{
+	else if(getdvarint("scr_" + level.gametype + "_promode")) {
 		game["dialog"]["gametype"] = game["dialog"]["gametype"] + "_pro";
 	}
 
@@ -82,15 +69,11 @@ main()
 	thread onplayerconnect();
 }
 
-//Function Number: 2
-alwaysgamemodeclass()
-{
+alwaysgamemodeclass() {
 	return "gamemode";
 }
 
-//Function Number: 3
-initializematchrules()
-{
+initializematchrules() {
 	scripts\mp\_utility::setcommonrulesfrommatchdata(1);
 	setdynamicdvar("scr_dm_aonrules",getmatchrulesdata("dmData","aonRules"));
 	setdynamicdvar("scr_dm_winlimit",1);
@@ -101,14 +84,11 @@ initializematchrules()
 	scripts\mp\_utility::registerhalftimedvar("dm",0);
 }
 
-//Function Number: 4
-onstartgametype()
-{
+onstartgametype() {
 	setclientnamemode("auto_change");
 	scripts\mp\_utility::setobjectivetext("allies",&"OBJECTIVES_DM");
 	scripts\mp\_utility::setobjectivetext("axis",&"OBJECTIVES_DM");
-	if(level.splitscreen)
-	{
+	if(level.splitscreen) {
 		scripts\mp\_utility::setobjectivescoretext("allies",&"OBJECTIVES_DM");
 		scripts\mp\_utility::setobjectivescoretext("axis",&"OBJECTIVES_DM");
 	}
@@ -135,13 +115,10 @@ onstartgametype()
 	level.quickmessagetoall = 1;
 }
 
-//Function Number: 5
-updategametypedvars()
-{
+updategametypedvars() {
 	scripts\mp\gametypes\common::updategametypedvars();
 	level.aonrules = scripts\mp\_utility::dvarintvalue("aonRules",0,0,20);
-	if(level.aonrules > 0)
-	{
+	if(level.aonrules > 0) {
 		level.blockweapondrops = 1;
 		level.allowsupers = setdvar("scr_dm_allowSupers",0);
 		level.gesture_explode = loadfx("vfx/iw7/_requests/mp/power/vfx_exploding_drone_explode");
@@ -151,20 +128,15 @@ updategametypedvars()
 	level notify("cancel_loadweapons");
 }
 
-//Function Number: 6
-getspawnpoint()
-{
+getspawnpoint() {
 	var_00 = undefined;
-	if(level.ingraceperiod)
-	{
+	if(level.ingraceperiod) {
 		var_01 = scripts\mp\_spawnlogic::getspawnpointarray("mp_dm_spawn_start");
-		if(var_01.size > 0)
-		{
+		if(var_01.size > 0) {
 			var_00 = scripts\mp\_spawnlogic::getspawnpoint_startspawn(var_01,1);
 		}
 
-		if(!isdefined(var_00))
-		{
+		if(!isdefined(var_00)) {
 			var_01 = scripts\mp\_spawnlogic::getteamspawnpoints(self.team);
 			var_00 = scripts\mp\_spawnscoring::getstartspawnpoint_freeforall(var_01);
 		}
@@ -179,48 +151,36 @@ getspawnpoint()
 	return var_00;
 }
 
-//Function Number: 7
-onspawnplayer()
-{
-	if(level.aonrules > 0)
-	{
+onspawnplayer() {
+	if(level.aonrules > 0) {
 		thread onspawnfinished();
 	}
 
 	level notify("spawned_player");
 }
 
-//Function Number: 8
-onnormaldeath(param_00,param_01,param_02,param_03,param_04)
-{
+onnormaldeath(param_00,param_01,param_02,param_03,param_04) {
 	scripts\mp\gametypes\common::onnormaldeath(param_00,param_01,param_02,param_03,param_04);
-	if(level.aonrules > 0)
-	{
-		if(param_01 scripts\mp\_utility::_hasperk("passive_aon_perks"))
-		{
+	if(level.aonrules > 0) {
+		if(param_01 scripts\mp\_utility::_hasperk("passive_aon_perks")) {
 			param_01 thread scripts\mp\perks\_weaponpassives::func_8974(param_01,param_00);
 		}
 	}
 
 	var_05 = 0;
-	foreach(var_07 in level.players)
-	{
-		if(isdefined(var_07.destroynavrepulsor) && var_07.destroynavrepulsor > var_05)
-		{
+	foreach(var_07 in level.players) {
+		if(isdefined(var_07.destroynavrepulsor) && var_07.destroynavrepulsor > var_05) {
 			var_05 = var_07.destroynavrepulsor;
 		}
 	}
 
-	if(!level.didhalfscorevoboost)
-	{
-		if(param_01.destroynavrepulsor >= int(level.scorelimit * level.currentround - level.scorelimit / 2))
-		{
+	if(!level.didhalfscorevoboost) {
+		if(param_01.destroynavrepulsor >= int(level.scorelimit * level.currentround - level.scorelimit / 2)) {
 			thread dohalftimevo(param_01);
 		}
 	}
 
-	if(param_01.destroynavrepulsor == level.scorelimit - 2)
-	{
+	if(param_01.destroynavrepulsor == level.scorelimit - 2) {
 		level.kick_afk_check = 1;
 	}
 
@@ -228,96 +188,75 @@ onnormaldeath(param_00,param_01,param_02,param_03,param_04)
 	param_01 scripts\mp\_utility::setextrascore1(var_09);
 }
 
-//Function Number: 9
-onplayerscore(param_00,param_01,param_02)
-{
+onplayerscore(param_00,param_01,param_02) {
 	param_01 scripts\mp\_utility::incperstat("gamemodeScore",param_02,1);
 	var_03 = param_01 scripts\mp\_utility::getpersstat("gamemodeScore");
 	param_01 scripts\mp\_persistence::statsetchild("round","gamemodeScore",var_03);
-	if(param_01.pers["cur_kill_streak"] > param_01 scripts\mp\_utility::getpersstat("killChains"))
-	{
+	if(param_01.pers["cur_kill_streak"] > param_01 scripts\mp\_utility::getpersstat("killChains")) {
 		param_01 scripts\mp\_utility::setpersstat("killChains",param_01.pers["cur_kill_streak"]);
 		param_01 scripts\mp\_utility::setextrascore1(param_01.pers["cur_kill_streak"]);
 	}
 
-	if(issubstr(param_00,"super_"))
-	{
+	if(issubstr(param_00,"super_")) {
 		return 0;
 	}
 
-	if(issubstr(param_00,"kill_ss"))
-	{
+	if(issubstr(param_00,"kill_ss")) {
 		return 0;
 	}
 
-	if(issubstr(param_00,"kill"))
-	{
+	if(issubstr(param_00,"kill")) {
 		var_04 = scripts\mp\_rank::getscoreinfovalue("score_increment");
-		if(scripts\mp\_utility::istrue(level.aonrules))
-		{
+		if(scripts\mp\_utility::istrue(level.aonrules)) {
 			param_01 thread scripts\mp\_rank::giverankxp("kill",50,undefined);
 			param_01 scripts\mp\_utility::displayscoreeventpoints(50,"kill");
 		}
 
 		return var_04;
 	}
-	else if(param_01 == "assist_ffa")
-	{
+	else if(param_01 == "assist_ffa") {
 		param_02 scripts\mp\_utility::bufferednotify("earned_score_buffered",var_03);
 	}
 
 	return 0;
 }
 
-//Function Number: 10
-dohalftimevo(param_00)
-{
+dohalftimevo(param_00) {
 	param_00 scripts\mp\_utility::leaderdialogonplayer("halfway_friendly_boost");
 	var_01 = scripts\engine\utility::array_sort_with_func(level.players,::compare_player_score);
-	if(isdefined(var_01[1]))
-	{
+	if(isdefined(var_01[1])) {
 		var_01[1] scripts\mp\_utility::leaderdialogonplayer("ffa_lead_second");
 	}
 
-	if(isdefined(var_01[2]) && var_01.size > 2)
-	{
+	if(isdefined(var_01[2]) && var_01.size > 2) {
 		var_01[2] scripts\mp\_utility::leaderdialogonplayer("ffa_lead_third");
 	}
 
-	if(isdefined(var_01[var_01.size - 1]) && var_01.size > 3)
-	{
+	if(isdefined(var_01[var_01.size - 1]) && var_01.size > 3) {
 		var_01[var_01.size - 1] scripts\mp\_utility::leaderdialogonplayer("ffa_lead_last");
 	}
 
 	level.didhalfscorevoboost = 1;
 }
 
-//Function Number: 11
-compare_player_score(param_00,param_01)
-{
+compare_player_score(param_00,param_01) {
 	return param_00.destroynavrepulsor >= param_01.destroynavrepulsor;
 }
 
-//Function Number: 12
-onspawnfinished()
-{
+onspawnfinished() {
 	self endon("death");
 	self endon("disconnect");
 	self waittill("giveLoadout");
 	runaonrules();
 }
 
-//Function Number: 13
-runaonrules()
-{
+runaonrules() {
 	giveextraaonperks();
-	if(level.aonrules == 2)
-	{
+	if(level.aonrules == 2) {
 		self.loadoutarchetype = "archetype_assassin";
 	}
 
-	if(!scripts\mp\_utility::istrue(level.tactical))
-	{
+	if(!scripts\mp\_utility::istrue(level.tactical)) {
 		_meth_8114(self.loadoutarchetype);
 	}
 
@@ -326,8 +265,7 @@ runaonrules()
 	var_00 = self.loadoutgesture;
 	self takeallweapons();
 	waittillframeend;
-	if(level.aonrules >= 3)
-	{
+	if(level.aonrules >= 3) {
 		self notify("gesture_rockPaperScissorsThink()");
 		self notify("gesture_coinFlipThink()");
 		self setclientomnvar("ui_gesture_reticle",-1);
@@ -337,15 +275,12 @@ runaonrules()
 		scripts\mp\_utility::giveperk("specialty_sprintfire");
 		var_01 = "secondary";
 		var_02 = scripts\mp\_powers::getcurrentequipment(var_01);
-		if(isdefined(var_02))
-		{
+		if(isdefined(var_02)) {
 			scripts\mp\_powers::removepower(var_02);
 		}
 
-		if(level.aonrules == 3)
-		{
-			if(!isbot(self))
-			{
+		if(level.aonrules == 3) {
+			if(!isbot(self)) {
 				randomizegesture();
 			}
 		}
@@ -357,8 +292,7 @@ runaonrules()
 		self assignweaponmeleeslot("iw7_knife_mp_aon");
 		self giveweapon("iw7_knife_mp_aon2");
 		self givestartammo("iw7_g18_mpr_aon_fixed");
-		if(isdefined(var_00))
-		{
+		if(isdefined(var_00)) {
 			scripts\mp\_utility::_giveweapon(var_00);
 			self _meth_8541(var_00);
 			self.gestureweapon = var_00;
@@ -367,13 +301,11 @@ runaonrules()
 
 	var_01 = "primary";
 	var_02 = scripts\mp\_powers::getcurrentequipment(var_01);
-	if(isdefined(var_02))
-	{
+	if(isdefined(var_02)) {
 		scripts\mp\_powers::removepower(var_02);
 	}
 
-	if(level.aonrules == 2)
-	{
+	if(level.aonrules == 2) {
 		scripts\mp\_powers::givepower("power_blinkKnife",var_01,0);
 	}
 	else
@@ -382,67 +314,53 @@ runaonrules()
 	}
 
 	scripts\mp\_utility::func_11383("iw7_g18_mpr_aon_fixed",1);
-	if(level.aonrules > 2)
-	{
+	if(level.aonrules > 2) {
 		thread gesturewatcher(self.gestureweapon);
 	}
 }
 
-//Function Number: 14
-devforcegestures(param_00,param_01)
-{
-	if(level.aonrules == 4)
-	{
+devforcegestures(param_00,param_01) {
+	if(level.aonrules == 4) {
 		param_00 = "ges_plyr_gesture010";
 		scripts\mp\_powers::givepower("power_transponder",param_01,0);
 	}
-	else if(level.aonrules == 5)
-	{
+	else if(level.aonrules == 5) {
 		param_00 = "ges_plyr_gesture042";
 		scripts\mp\_powers::givepower("power_bouncingBetty",param_01,0);
 	}
-	else if(level.aonrules == 6)
-	{
+	else if(level.aonrules == 6) {
 		param_00 = "ges_plyr_gesture002";
 		scripts\mp\_powers::givepower("power_gasGrenade",param_01,0);
 	}
-	else if(level.aonrules == 7)
-	{
+	else if(level.aonrules == 7) {
 		param_00 = "ges_plyr_gesture006";
 		scripts\mp\_powers::givepower("power_siegeMode",param_01,0);
 	}
-	else if(level.aonrules == 8)
-	{
+	else if(level.aonrules == 8) {
 		param_00 = "ges_plyr_gesture038";
 		scripts\mp\_powers::givepower("power_sensorGrenade",param_01,0);
 	}
-	else if(level.aonrules == 9)
-	{
+	else if(level.aonrules == 9) {
 		param_00 = "ges_plyr_gesture053";
 		scripts\mp\_powers::givepower("power_proxyBomb",param_01,0);
 	}
-	else if(level.aonrules == 10)
-	{
+	else if(level.aonrules == 10) {
 		param_00 = "ges_plyr_gesture051";
 		scripts\mp\_powers::givepower("power_phaseSplit",param_01,0);
 	}
-	else if(level.aonrules == 11)
-	{
+	else if(level.aonrules == 11) {
 		param_00 = "ges_plyr_gesture040";
 		scripts\mp\_powers::givepower("power_discMarker",param_01,0);
 	}
-	else if(level.aonrules == 12)
-	{
+	else if(level.aonrules == 12) {
 		param_00 = "ges_plyr_gesture049";
 		scripts\mp\_powers::givepower("power_caseBomb",param_01,0);
 	}
-	else if(level.aonrules == 13)
-	{
+	else if(level.aonrules == 13) {
 		param_00 = "ges_plyr_gesture001";
 		scripts\mp\_powers::givepower("power_adrenalineMist",param_01,0);
 	}
-	else if(level.aonrules == 14)
-	{
+	else if(level.aonrules == 14) {
 		param_00 = "ges_plyr_gesture041";
 		scripts\mp\_powers::givepower("power_thermobaric",param_01,0);
 	}
@@ -452,14 +370,11 @@ devforcegestures(param_00,param_01)
 	self.gestureweapon = param_00;
 }
 
-//Function Number: 15
-randomizegesture()
-{
+randomizegesture() {
 	var_00 = "ges_plyr_gesture010";
 	var_01 = "power_transponder";
 	var_02 = "secondary";
-	if(self.gestureindex >= self.gesturelist.size)
-	{
+	if(self.gestureindex >= self.gesturelist.size) {
 		self.gesturelist = scripts\engine\utility::array_randomize(self.gesturelist);
 		self.gestureindex = 0;
 	}
@@ -467,8 +382,7 @@ randomizegesture()
 	var_00 = self.gesturelist[self.gestureindex];
 	var_01 = getpowerfromgesture(var_00);
 	scripts\mp\_powers::givepower(var_01,var_02,0);
-	if(isdefined(self.gestureweapon) && self.gestureweapon != "none")
-	{
+	if(isdefined(self.gestureweapon) && self.gestureweapon != "none") {
 		scripts\mp\_utility::_takeweapon(self.gestureweapon);
 	}
 
@@ -478,11 +392,8 @@ randomizegesture()
 	return var_01;
 }
 
-//Function Number: 16
-getpowerfromgesture(param_00)
-{
-	switch(param_00)
-	{
+getpowerfromgesture(param_00) {
+	switch(param_00) {
 		case "ges_plyr_gesture010":
 			var_01 = "power_transponder";
 			break;
@@ -535,15 +446,11 @@ getpowerfromgesture(param_00)
 	return var_01;
 }
 
-//Function Number: 17
-gesturewatcher(param_00)
-{
+gesturewatcher(param_00) {
 	self endon("death");
-	for(;;)
-	{
+	for(;;) {
 		self waittill("offhand_pullback",param_00);
-		if(param_00 == "throwingknife_mp")
-		{
+		if(param_00 == "throwingknife_mp") {
 			continue;
 		}
 
@@ -554,8 +461,7 @@ gesturewatcher(param_00)
 		var_05 = 1;
 		var_06 = undefined;
 		var_07 = 1200;
-		switch(param_00)
-		{
+		switch(param_00) {
 			case "power_bang_mp":
 			case "ges_plyr_gesture010":
 				param_00 = "ges_plyr_gesture010";
@@ -653,65 +559,53 @@ gesturewatcher(param_00)
 				break;
 		}
 
-		if(scripts\mp\_utility::gameflag("prematch_done"))
-		{
+		if(scripts\mp\_utility::gameflag("prematch_done")) {
 			thread use_gesture_weapon(param_00,var_01,var_02,var_03,var_04,var_05,var_06,var_07);
 		}
 	}
 }
 
-//Function Number: 18
-gesturedumbfirekillwatcher(param_00)
-{
+gesturedumbfirekillwatcher(param_00) {
 	self notify("finger_gun_used");
 	self endon("finger_gun_used");
 	level endon("game_ended");
 	self endon("disconnect");
 	self endon("death");
 	self waittill("got_a_kill",var_01,var_02,var_03);
-	if(var_02 == "cluster_grenade_mp" || var_02 == "iw7_chargeshot_mp" || var_02 == "iw7_glprox_mp")
-	{
+	if(var_02 == "cluster_grenade_mp" || var_02 == "iw7_chargeshot_mp" || var_02 == "iw7_glprox_mp") {
 		self.gesturekill = 1;
 		incrementgestureindex(param_00);
 	}
 }
 
-//Function Number: 19
-use_gesture_weapon(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07)
-{
+use_gesture_weapon(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07) {
 	self endon("disconnect");
 	self endon("death");
 	scripts\mp\_utility::func_1C47(0);
 	scripts\engine\utility::allow_offhand_weapons(0);
 	self.gesturekill = 0;
 	var_08 = self.gestureindex;
-	if(isdefined(param_01))
-	{
+	if(isdefined(param_01)) {
 		scripts\mp\_utility::giveperk("specialty_radarblip");
 		self setclientomnvar("ui_gesture_reticle",0);
 		wait(param_01);
 		var_09 = get_enemies_within_fov(param_06,param_07,param_05);
-		if(var_09.size == 0)
-		{
+		if(var_09.size == 0) {
 			thread gesturedumbfirekillwatcher(var_08);
 			self setclientomnvar("ui_gesture_reticle",1);
 			var_0A = getdumbfirepos(self);
-			if(param_00 == "ges_plyr_gesture049")
-			{
+			if(param_00 == "ges_plyr_gesture049") {
 				firejackalmissiles(undefined,1,var_0A);
 			}
-			else if(param_00 == "ges_plyr_gesture040")
-			{
+			else if(param_00 == "ges_plyr_gesture040") {
 				self.projectile = scripts\mp\_utility::_magicbullet("iw7_blackholegun_mp",self gettagorigin("j_wrist_le"),var_0A,self);
 				self.gesturekill = 1;
 				incrementgestureindex(var_08);
 			}
-			else if(param_00 == "ges_plyr_gesture010")
-			{
+			else if(param_00 == "ges_plyr_gesture010") {
 				scripts\mp\_utility::_magicbullet("iw7_atomizer_mp",self gettagorigin("j_wrist_le"),var_0A,self);
 			}
-			else if(param_00 == "ges_plyr_gesture038" || param_00 == "ges_plyr_gesture053")
-			{
+			else if(param_00 == "ges_plyr_gesture038" || param_00 == "ges_plyr_gesture053") {
 				self radiusdamage(var_0A + (0,0,40),256,150,100,self,"MOD_IMPACT","cluster_grenade_mp");
 				playfx(level.gesture_explode,var_0A + (0,0,40));
 				playsoundatpos(var_0A,"frag_grenade_explode");
@@ -720,19 +614,15 @@ use_gesture_weapon(param_00,param_01,param_02,param_03,param_04,param_05,param_0
 		else
 		{
 			self setclientomnvar("ui_gesture_reticle",2);
-			foreach(var_0C in var_09)
-			{
-				if(param_00 == "ges_plyr_gesture049")
-				{
+			foreach(var_0C in var_09) {
+				if(param_00 == "ges_plyr_gesture049") {
 					firejackalmissiles(var_0C,1);
 				}
-				else if(param_00 == "ges_plyr_gesture040")
-				{
+				else if(param_00 == "ges_plyr_gesture040") {
 					self.projectile = scripts\mp\_utility::_magicbullet("iw7_blackholegun_mp",self gettagorigin("j_wrist_le"),var_0C gettagorigin("j_spine4"),self);
 					self.projectile missile_settargetent(var_0C,var_0C gettargetoffset());
 				}
-				else if(param_00 == "ges_plyr_gesture010")
-				{
+				else if(param_00 == "ges_plyr_gesture010") {
 					scripts\mp\_utility::_magicbullet("iw7_atomizer_mp",self gettagorigin("j_wrist_le"),var_0C gettagorigin("j_spine4"),self);
 					thread dogesturedamage(var_0C,"iw7_atomizer_mp",param_00,1);
 				}
@@ -747,39 +637,32 @@ use_gesture_weapon(param_00,param_01,param_02,param_03,param_04,param_05,param_0
 		}
 	}
 
-	if(isdefined(param_02))
-	{
+	if(isdefined(param_02)) {
 		scripts\mp\_utility::removeperk("specialty_radarblip");
 		wait(0.1);
 		self setclientomnvar("ui_gesture_reticle",0);
 		wait(param_02);
 		scripts\mp\_utility::giveperk("specialty_radarblip");
 		var_09 = get_enemies_within_fov(param_06,param_07,1);
-		if(var_09.size == 0)
-		{
+		if(var_09.size == 0) {
 			thread gesturedumbfirekillwatcher(var_08);
 			self setclientomnvar("ui_gesture_reticle",1);
 			var_0A = getdumbfirepos(self);
-			if(param_00 == "ges_plyr_gesture049")
-			{
+			if(param_00 == "ges_plyr_gesture049") {
 				firejackalmissiles(undefined,2,var_0A);
 			}
-			else if(param_00 == "ges_plyr_gesture010")
-			{
+			else if(param_00 == "ges_plyr_gesture010") {
 				scripts\mp\_utility::_magicbullet("iw7_atomizer_mp",self gettagorigin("j_wrist_le"),var_0A,self);
 			}
 		}
 		else
 		{
 			self setclientomnvar("ui_gesture_reticle",2);
-			foreach(var_0C in var_09)
-			{
-				if(param_00 == "ges_plyr_gesture049")
-				{
+			foreach(var_0C in var_09) {
+				if(param_00 == "ges_plyr_gesture049") {
 					firejackalmissiles(var_0C,2);
 				}
-				else if(param_00 == "ges_plyr_gesture010")
-				{
+				else if(param_00 == "ges_plyr_gesture010") {
 					scripts\mp\_utility::_magicbullet("iw7_atomizer_mp",self gettagorigin("j_wrist_le"),var_0C gettagorigin("j_spine4"),self);
 					thread dogesturedamage(var_0C,"iw7_atomizer_mp",param_00,2);
 				}
@@ -794,31 +677,26 @@ use_gesture_weapon(param_00,param_01,param_02,param_03,param_04,param_05,param_0
 		}
 	}
 
-	if(isdefined(param_03))
-	{
+	if(isdefined(param_03)) {
 		scripts\mp\_utility::removeperk("specialty_radarblip");
 		wait(0.1);
 		self setclientomnvar("ui_gesture_reticle",0);
 		wait(param_03);
 		scripts\mp\_utility::giveperk("specialty_radarblip");
 		var_09 = get_enemies_within_fov(param_06,param_07,1);
-		if(var_09.size == 0)
-		{
+		if(var_09.size == 0) {
 			thread gesturedumbfirekillwatcher(var_08);
 			self setclientomnvar("ui_gesture_reticle",1);
 			var_0A = getdumbfirepos(self);
-			if(param_00 == "ges_plyr_gesture049")
-			{
+			if(param_00 == "ges_plyr_gesture049") {
 				firejackalmissiles(undefined,3,var_0A);
 			}
 		}
 		else
 		{
 			self setclientomnvar("ui_gesture_reticle",2);
-			foreach(var_0C in var_09)
-			{
-				if(param_00 == "ges_plyr_gesture049")
-				{
+			foreach(var_0C in var_09) {
+				if(param_00 == "ges_plyr_gesture049") {
 					firejackalmissiles(var_0C,3);
 				}
 				else
@@ -832,23 +710,20 @@ use_gesture_weapon(param_00,param_01,param_02,param_03,param_04,param_05,param_0
 		}
 	}
 
-	if(isdefined(param_04))
-	{
+	if(isdefined(param_04)) {
 		scripts\mp\_utility::removeperk("specialty_radarblip");
 		wait(0.1);
 		self setclientomnvar("ui_gesture_reticle",0);
 		wait(param_04);
 		scripts\mp\_utility::giveperk("specialty_radarblip");
 		var_09 = get_enemies_within_fov(param_06,param_07,1);
-		if(var_09.size == 0)
-		{
+		if(var_09.size == 0) {
 			self setclientomnvar("ui_gesture_reticle",1);
 		}
 		else
 		{
 			self setclientomnvar("ui_gesture_reticle",2);
-			foreach(var_0C in var_09)
-			{
+			foreach(var_0C in var_09) {
 				thread dogesturedamage(var_0C,"iw7_g18_mpr_aon_fixed",param_00,4);
 				self.gesturekill = 1;
 				incrementgestureindex(var_08);
@@ -863,40 +738,30 @@ use_gesture_weapon(param_00,param_01,param_02,param_03,param_04,param_05,param_0
 	powerrecharge();
 }
 
-//Function Number: 20
-incrementgestureindex(param_00)
-{
-	if(param_00 == self.gestureindex)
-	{
+incrementgestureindex(param_00) {
+	if(param_00 == self.gestureindex) {
 		self.gestureindex++;
 	}
 }
 
-//Function Number: 21
-wait_for_gesture_length(param_00)
-{
+wait_for_gesture_length(param_00) {
 	self endon("disconnect");
 	self endon("death");
-	while(self isgestureplaying(param_00))
-	{
+	while(self isgestureplaying(param_00)) {
 		scripts\engine\utility::waitframe();
 	}
 }
 
-//Function Number: 22
-firejackalmissiles(param_00,param_01,param_02)
-{
+firejackalmissiles(param_00,param_01,param_02) {
 	var_03 = 0;
-	if(!isdefined(param_00))
-	{
+	if(!isdefined(param_00)) {
 		var_03 = 1;
 	}
 
 	var_04 = self gettagorigin("j_wrist_le");
 	var_05 = self gettagorigin("j_wrist_le");
 	var_06 = self gettagorigin("j_wrist_le");
-	if(var_03)
-	{
+	if(var_03) {
 		var_07 = param_02;
 		var_08 = var_07;
 		var_09 = var_08;
@@ -912,8 +777,7 @@ firejackalmissiles(param_00,param_01,param_02)
 		var_0B missile_settargetent(param_00,param_00 gettargetoffset());
 	}
 
-	if(param_01 == 3)
-	{
+	if(param_01 == 3) {
 		scripts\mp\_utility::_magicbullet("iw7_chargeshot_mp",var_06,var_09,self);
 		return;
 	}
@@ -921,9 +785,7 @@ firejackalmissiles(param_00,param_01,param_02)
 	scripts\mp\_utility::_magicbullet("iw7_glprox_mp",var_06,var_09,self);
 }
 
-//Function Number: 23
-getdumbfirepos(param_00)
-{
+getdumbfirepos(param_00) {
 	var_01 = param_00 getplayerangles();
 	var_01 = (clamp(var_01[0],-85,85),var_01[1],var_01[2]);
 	var_02 = anglestoforward(var_01);
@@ -932,8 +794,7 @@ getdumbfirepos(param_00)
 	var_05 = ["physicscontents_clipshot","physicscontents_corpseclipshot","physicscontents_missileclip","physicscontents_solid","physicscontents_vehicle","physicscontents_player","physicscontents_actor","physicscontents_glass","physicscontents_itemclip"];
 	var_06 = physics_createcontents(var_05);
 	var_07 = scripts\common\trace::ray_trace(var_03,var_03 + var_04,param_00,var_06);
-	if(var_07["fraction"] < 1)
-	{
+	if(var_07["fraction"] < 1) {
 		var_04 = vectornormalize(var_02) * 500 * var_07["fraction"];
 	}
 	else
@@ -944,19 +805,14 @@ getdumbfirepos(param_00)
 	return var_03 + var_04;
 }
 
-//Function Number: 24
-gettargetoffset()
-{
+gettargetoffset() {
 	var_00 = gettargetorigin();
 	return (0,0,var_00[2] - self.origin[2]);
 }
 
-//Function Number: 25
-gettargetorigin()
-{
+gettargetorigin() {
 	var_00 = 10;
-	switch(self getstance())
-	{
+	switch(self getstance()) {
 		case "crouch":
 			var_00 = 15;
 			break;
@@ -973,15 +829,11 @@ gettargetorigin()
 	return var_04;
 }
 
-//Function Number: 26
-powerrecharge()
-{
-	if(level.aonrules == 3 && self.gesturekill)
-	{
+powerrecharge() {
+	if(level.aonrules == 3 && self.gesturekill) {
 		var_00 = "secondary";
 		var_01 = scripts\mp\_powers::getcurrentequipment(var_00);
-		if(isdefined(var_01))
-		{
+		if(isdefined(var_01)) {
 			scripts\mp\_powers::removepower(var_01);
 		}
 
@@ -993,8 +845,7 @@ powerrecharge()
 		scripts\mp\_powers::func_D74C(var_02);
 	}
 
-	if(scripts\mp\_utility::_hasperk("passive_gore"))
-	{
+	if(scripts\mp\_utility::_hasperk("passive_gore")) {
 		scripts\mp\_utility::removeperk("passive_gore");
 	}
 
@@ -1002,22 +853,17 @@ powerrecharge()
 	scripts\engine\utility::allow_offhand_weapons(1);
 }
 
-//Function Number: 27
-dogesturedamage(param_00,param_01,param_02,param_03)
-{
-	if(param_02 == "ges_plyr_gesture038" || param_02 == "ges_plyr_gesture053")
-	{
+dogesturedamage(param_00,param_01,param_02,param_03) {
+	if(param_02 == "ges_plyr_gesture038" || param_02 == "ges_plyr_gesture053") {
 		self radiusdamage(param_00.origin + (0,0,40),256,150,100,self,"MOD_IMPACT","cluster_grenade_mp");
 		playfx(level.mine_explode,param_00.origin + (0,0,40));
 		playsoundatpos(param_00.origin + (0,0,40),"frag_grenade_explode");
 		return;
 	}
 
-	if(param_02 == "ges_plyr_gesture010" || param_02 == "ges_plyr_gesture006")
-	{
+	if(param_02 == "ges_plyr_gesture010" || param_02 == "ges_plyr_gesture006") {
 		wait(0.05);
-		if(isdefined(self) && isdefined(param_00))
-		{
+		if(isdefined(self) && isdefined(param_00)) {
 			param_00 dodamage(param_00.health + 1000,self.origin,self,self,"MOD_UNKNOWN",param_01);
 			return;
 		}
@@ -1025,13 +871,11 @@ dogesturedamage(param_00,param_01,param_02,param_03)
 		return;
 	}
 
-	if(param_02 == "ges_plyr_gesture051" || param_02 == "ges_plyr_gesture041" || param_02 == "ges_plyr_gesture001")
-	{
+	if(param_02 == "ges_plyr_gesture051" || param_02 == "ges_plyr_gesture041" || param_02 == "ges_plyr_gesture001") {
 		var_04 = vectortoangles(param_00.origin - self.origin);
 		var_05 = anglestoright(var_04);
 		var_06 = vectornormalize(var_05) * 500;
-		if(param_02 == "ges_plyr_gesture041" || param_02 == "ges_plyr_gesture001" && param_03 == 2 || param_02 == "ges_plyr_gesture001" && param_03 == 4)
-		{
+		if(param_02 == "ges_plyr_gesture041" || param_02 == "ges_plyr_gesture001" && param_03 == 2 || param_02 == "ges_plyr_gesture001" && param_03 == 4) {
 			var_06 = var_06 * -1;
 		}
 
@@ -1043,18 +887,14 @@ dogesturedamage(param_00,param_01,param_02,param_03)
 	}
 
 	wait(0.05);
-	if(isdefined(self) && isdefined(param_00))
-	{
+	if(isdefined(self) && isdefined(param_00)) {
 		param_00 dodamage(param_00.health + 1000,self.origin,self,self,"MOD_CRUSH",param_01);
 		return;
 	}
 }
 
-//Function Number: 28
-get_enemies_within_fov(param_00,param_01,param_02)
-{
-	if(!isdefined(param_02))
-	{
+get_enemies_within_fov(param_00,param_01,param_02) {
+	if(!isdefined(param_02)) {
 		param_02 = 3;
 	}
 
@@ -1065,22 +905,18 @@ get_enemies_within_fov(param_00,param_01,param_02)
 	var_07 = vectornormalize(var_06) * -35;
 	var_08 = 0;
 	var_09 = 50;
-	if(isdefined(param_00))
-	{
+	if(isdefined(param_00)) {
 		var_09 = param_00;
 	}
 
-	foreach(var_0B in var_05)
-	{
-		if(!scripts\mp\_utility::isreallyalive(var_0B))
-		{
+	foreach(var_0B in var_05) {
+		if(!scripts\mp\_utility::isreallyalive(var_0B)) {
 			continue;
 		}
 
 		var_0C = var_0B.origin;
 		var_0D = distance2d(self.origin,var_0C);
-		if(var_0D < 100)
-		{
+		if(var_0D < 100) {
 			var_09 = 120;
 		}
 
@@ -1096,74 +932,57 @@ get_enemies_within_fov(param_00,param_01,param_02)
 		var_15 = ["physicscontents_clipshot","physicscontents_corpseclipshot","physicscontents_missileclip","physicscontents_solid","physicscontents_vehicle","physicscontents_player","physicscontents_actor","physicscontents_itemclip"];
 		var_16 = physics_createcontents(var_15);
 		var_17 = self worldpointinreticle_circle(var_0B geteye(),65,var_09);
-		if(var_17)
-		{
+		if(var_17) {
 			var_17 = 0;
-			if(scripts\common\trace::ray_trace_passed(self geteye(),var_0B geteye(),var_14,var_16))
-			{
+			if(scripts\common\trace::ray_trace_passed(self geteye(),var_0B geteye(),var_14,var_16)) {
 				var_17 = 1;
 			}
 		}
 
-		if(!var_17)
-		{
+		if(!var_17) {
 			var_17 = self worldpointinreticle_circle(var_0B.origin,65,var_09);
-			if(var_17)
-			{
+			if(var_17) {
 				var_17 = 0;
-				if(scripts\common\trace::ray_trace_passed(self geteye(),var_0B.origin,var_14,var_16))
-				{
+				if(scripts\common\trace::ray_trace_passed(self geteye(),var_0B.origin,var_14,var_16)) {
 					var_17 = 1;
 				}
 			}
 		}
 
-		if(!var_17)
-		{
+		if(!var_17) {
 			var_17 = self worldpointinreticle_circle(var_0B gettagorigin("j_spinelower"),65,var_09);
-			if(var_17)
-			{
+			if(var_17) {
 				var_17 = 0;
-				if(scripts\common\trace::ray_trace_passed(self geteye(),var_0B gettagorigin("j_spinelower"),var_14,var_16))
-				{
+				if(scripts\common\trace::ray_trace_passed(self geteye(),var_0B gettagorigin("j_spinelower"),var_14,var_16)) {
 					var_17 = 1;
 				}
 			}
 		}
 
-		if(!var_17)
-		{
+		if(!var_17) {
 			var_17 = self worldpointinreticle_circle(var_0B gettagorigin("j_elbow_le"),65,var_09);
-			if(var_17)
-			{
+			if(var_17) {
 				var_17 = 0;
-				if(scripts\common\trace::ray_trace_passed(self geteye(),var_0B gettagorigin("j_elbow_le"),var_14,var_16))
-				{
+				if(scripts\common\trace::ray_trace_passed(self geteye(),var_0B gettagorigin("j_elbow_le"),var_14,var_16)) {
 					var_17 = 1;
 				}
 			}
 		}
 
-		if(!var_17)
-		{
+		if(!var_17) {
 			var_17 = self worldpointinreticle_circle(var_0B gettagorigin("j_elbow_ri"),65,var_09);
-			if(var_17)
-			{
+			if(var_17) {
 				var_17 = 0;
-				if(scripts\common\trace::ray_trace_passed(self geteye(),var_0B gettagorigin("j_elbow_ri"),var_14,var_16))
-				{
+				if(scripts\common\trace::ray_trace_passed(self geteye(),var_0B gettagorigin("j_elbow_ri"),var_14,var_16)) {
 					var_17 = 1;
 				}
 			}
 		}
 
-		if(var_17)
-		{
-			if(isdefined(param_01))
-			{
+		if(var_17) {
+			if(isdefined(param_01)) {
 				var_0D = distance2d(self.origin,var_0C);
-				if(var_0D < param_01)
-				{
+				if(var_0D < param_01) {
 					var_0E = 1;
 				}
 			}
@@ -1173,14 +992,12 @@ get_enemies_within_fov(param_00,param_01,param_02)
 			}
 		}
 
-		if(var_0E && var_03.size < param_02)
-		{
+		if(var_0E && var_03.size < param_02) {
 			var_03[var_03.size] = var_0B;
 			var_05 = scripts\engine\utility::array_remove(var_05,var_0B);
 		}
 
-		if(var_03.size >= param_02)
-		{
+		if(var_03.size >= param_02) {
 			var_08 = 1;
 			break;
 		}
@@ -1189,21 +1006,15 @@ get_enemies_within_fov(param_00,param_01,param_02)
 	return var_03;
 }
 
-//Function Number: 29
-giveextraaonperks()
-{
+giveextraaonperks() {
 	var_00 = ["specialty_blindeye","specialty_gpsjammer","specialty_falldamage","specialty_sharp_focus","specialty_stalker","passive_aon_perks"];
-	foreach(var_02 in var_00)
-	{
+	foreach(var_02 in var_00) {
 		scripts\mp\_utility::giveperk(var_02);
 	}
 }
 
-//Function Number: 30
-_meth_8114(param_00)
-{
-	switch(param_00)
-	{
+_meth_8114(param_00) {
+	switch(param_00) {
 		case "archetype_assault":
 			param_00 = "assault_mp";
 			break;
@@ -1229,8 +1040,7 @@ _meth_8114(param_00)
 			break;
 
 		default:
-			if(!isdefined(level.aonrules) || level.aonrules == 0)
-			{
+			if(!isdefined(level.aonrules) || level.aonrules == 0) {
 			}
 	
 			param_00 = "assault_mp";
@@ -1238,25 +1048,19 @@ _meth_8114(param_00)
 	}
 
 	self setsuit(param_00 + "_classic");
-	if(scripts\mp\_utility::istrue(level.supportdoublejump_MAYBE))
-	{
+	if(scripts\mp\_utility::istrue(level.supportdoublejump_MAYBE)) {
 		self goalflag(0,200);
 		self goal_type(0,1800);
 	}
 }
 
-//Function Number: 31
-onplayerconnect()
-{
+onplayerconnect() {
 	level endon("cancel_loadweapons");
 	var_00 = 1;
-	for(;;)
-	{
+	for(;;) {
 		level waittill("connected",var_01);
-		if(level.aonrules > 0)
-		{
-			if(var_00)
-			{
+		if(level.aonrules > 0) {
+			if(var_00) {
 				level notify("lethal_delay_end");
 				level.var_ABBF = 0;
 				level.allowkillstreaks = 0;
@@ -1271,8 +1075,7 @@ onplayerconnect()
 			var_01 loadweaponsforplayer(["iw7_g18_mpr_aon_fixed","iw7_knife_mp_aon","iw7_knife_mp_aon2"]);
 		}
 
-		if(level.aonrules == 3)
-		{
+		if(level.aonrules == 3) {
 			var_01 thread hintnotify();
 			var_01.gesturelist = [];
 			var_01.gesturelist[var_01.gesturelist.size] = "ges_plyr_gesture042";
@@ -1292,17 +1095,13 @@ onplayerconnect()
 	}
 }
 
-//Function Number: 32
-hintnotify()
-{
+hintnotify() {
 	level endon("game_ended");
 	self endon("disconnect");
 	var_00 = 1;
 	var_01 = 0;
-	for(;;)
-	{
-		if(var_00)
-		{
+	for(;;) {
+		if(var_00) {
 			self waittill("giveLoadout");
 		}
 		else
@@ -1312,8 +1111,7 @@ hintnotify()
 
 		wait(4);
 		var_01++;
-		if(var_01 < 3)
-		{
+		if(var_01 < 3) {
 			thread givehintmessage();
 			continue;
 		}
@@ -1322,16 +1120,13 @@ hintnotify()
 	}
 }
 
-//Function Number: 33
-givehintmessage()
-{
+givehintmessage() {
 	self notify("practiceMessage");
 	self endon("practiceMessage");
 	self endon("disconnect");
 	self endon("death");
 	level endon("game_ended");
-	if(scripts\engine\utility::is_player_gamepad_enabled())
-	{
+	if(scripts\engine\utility::is_player_gamepad_enabled()) {
 		self iprintlnbold(&"PLATFORM_GESTURE_MODE_HINT_SLOT3");
 		return;
 	}
@@ -1339,9 +1134,7 @@ givehintmessage()
 	self iprintlnbold(&"PLATFORM_GESTURE_MODE_HINT_SLOT7");
 }
 
-//Function Number: 34
-setspecialloadout()
-{
+setspecialloadout() {
 	level.aon_loadouts["allies"]["loadoutPrimary"] = "iw7_g18";
 	level.aon_loadouts["allies"]["loadoutPrimaryAttachment"] = "none";
 	level.aon_loadouts["allies"]["loadoutPrimaryAttachment2"] = "none";

@@ -1,60 +1,44 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\sp\introscreen.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 55
- * Decompile Time: 2463 ms
- * Timestamp: 10/27/2023 12:24:38 AM
-*******************************************************************/
+/**********************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\sp\introscreen.gsc
+**********************************************/
 
-//Function Number: 1
-func_9631()
-{
+func_9631() {
 	scripts\engine\utility::flag_init("introscreen_complete");
 }
 
-//Function Number: 2
-main()
-{
+main() {
 	precacheshader("black");
 	precacheshader("chyron_border_left");
 	precacheshader("chyron_border_right");
 	thread func_B23E();
 }
 
-//Function Number: 3
-func_B23E()
-{
+func_B23E() {
 	scripts\engine\utility::flag_wait("start_is_set");
 	var_00 = 0;
-	if(!isdefined(level.var_9AF3) || !scripts\sp\_utility::func_9BB5() || var_00)
-	{
+	if(!isdefined(level.var_9AF3) || !scripts\sp\_utility::func_9BB5() || var_00) {
 		scripts\engine\utility::delaythread(0.05,::scripts\engine\utility::flag_set,"introscreen_complete");
 		return;
 	}
 
-	if(isdefined(level.var_9AF3.var_4C88))
-	{
-		[[ level.var_9AF3.var_4C88 ]]();
+	if(isdefined(level.var_9AF3.var_4C88)) {
+		[[level.var_9AF3.var_4C88]]();
 		return;
 	}
 
 	func_9AF3();
 }
 
-//Function Number: 4
-func_9AF7()
-{
-	if(!isdefined(level.var_9AF3))
-	{
+func_9AF7() {
+	if(!isdefined(level.var_9AF3)) {
 		return 0;
 	}
 
 	var_00 = level.var_9AF3.var_ACF2;
 	var_01 = getarraykeys(var_00);
-	for(var_02 = 0;var_02 < var_01.size;var_02++)
-	{
+	for(var_02 = 0;var_02 < var_01.size;var_02++) {
 		var_03 = var_01[var_02];
 		var_04 = 1;
 		var_05 = var_02 * var_04 + 1;
@@ -64,22 +48,16 @@ func_9AF7()
 	return 1;
 }
 
-//Function Number: 5
-func_9AF8(param_00,param_01,param_02)
-{
+func_9AF8(param_00,param_01,param_02) {
 	func_9AF9("black",param_00,param_01,param_02);
 }
 
-//Function Number: 6
-func_9AF9(param_00,param_01,param_02,param_03)
-{
-	if(!isdefined(param_02))
-	{
+func_9AF9(param_00,param_01,param_02,param_03) {
+	if(!isdefined(param_02)) {
 		param_02 = 1.5;
 	}
 
-	if(!isdefined(param_03))
-	{
+	if(!isdefined(param_03)) {
 		scripts\sp\_hud_util::func_10CCC();
 	}
 	else
@@ -93,12 +71,9 @@ func_9AF9(param_00,param_01,param_02,param_03)
 	function_01C5("com_cinematicEndInWhite",0);
 }
 
-//Function Number: 7
-introscreen_corner_line(param_00,param_01,param_02,param_03)
-{
+introscreen_corner_line(param_00,param_01,param_02,param_03) {
 	level notify("new_introscreen_element");
-	if(!isdefined(level.intro_offset))
-	{
+	if(!isdefined(level.intro_offset)) {
 		level.intro_offset = 0;
 	}
 	else
@@ -131,15 +106,11 @@ introscreen_corner_line(param_00,param_01,param_02,param_03)
 	thread hudelem_destroy(var_05);
 }
 
-//Function Number: 8
-cornerline_height()
-{
+cornerline_height() {
 	return level.intro_offset * 20 - 82;
 }
 
-//Function Number: 9
-hudelem_destroy(param_00)
-{
+hudelem_destroy(param_00) {
 	wait(16);
 	param_00 notify("destroying");
 	level.var_9AC9 = undefined;
@@ -151,13 +122,10 @@ hudelem_destroy(param_00)
 	param_00 destroy();
 }
 
-//Function Number: 10
-func_C3C4()
-{
+func_C3C4() {
 	level.player freezecontrols(1);
 	thread func_9AF8(level.var_9AF3.var_4480,level.var_9AF3.var_6AAA,level.var_9AF3.var_6A9F);
-	if(!func_9AF7())
-	{
+	if(!func_9AF7()) {
 		wait(0.05);
 	}
 
@@ -166,17 +134,13 @@ func_C3C4()
 	level.player freezecontrols(0);
 }
 
-//Function Number: 11
-func_9AF3(param_00,param_01)
-{
-	if(!isdefined(param_00))
-	{
+func_9AF3(param_00,param_01) {
+	if(!isdefined(param_00)) {
 		param_00 = 0;
 		var_02 = 1;
 	}
 
-	if(isdefined(param_01))
-	{
+	if(isdefined(param_01)) {
 		param_00 = 1;
 		scripts\sp\_hud_util::func_10CCC();
 		level.player freezecontrols(1);
@@ -196,8 +160,7 @@ func_9AF3(param_00,param_01)
 	level.var_3F69.var_10466 = spawn("script_origin",level.player.origin);
 	level.var_3F69.var_10466 linkto(level.player);
 	level.var_3F69.var_BFE0 = param_00;
-	if(!param_00)
-	{
+	if(!param_00) {
 		level.player freezecontrols(1);
 		scripts\sp\_hud_util::func_10CCC();
 		thread func_22FD(0);
@@ -215,8 +178,7 @@ func_9AF3(param_00,param_01)
 	var_04 = func_111A1(level.var_9AF3.var_ACF2[2],1,"default",1,1);
 	var_04.color = (0.68,0.744,0.736);
 	var_05 = undefined;
-	if(isdefined(level.var_9AF3.var_ACF2[3]))
-	{
+	if(isdefined(level.var_9AF3.var_ACF2[3])) {
 		var_05 = func_111A1(level.var_9AF3.var_ACF2[3],2,"default",1,1);
 		var_05.color = (0.68,0.744,0.736);
 		level.var_3F69.var_91AF = scripts\engine\utility::array_remove(level.var_3F69.var_91AF,var_05);
@@ -226,15 +188,13 @@ func_9AF3(param_00,param_01)
 	level.var_3F69.var_11152 = 1;
 	wait(2);
 	level.var_3F69.var_11152 = 0;
-	if(isdefined(var_05))
-	{
+	if(isdefined(var_05)) {
 		var_05 thread func_BE48();
 	}
 
 	wait(1);
 	func_6BAF(0,param_00);
-	if(!param_00)
-	{
+	if(!param_00) {
 		func_3F6A(0,"ui_chyron_off");
 		thread scripts\sp\_hud_util::func_6A99(2);
 		level.player freezecontrols(0);
@@ -246,9 +206,7 @@ func_9AF3(param_00,param_01)
 	level.var_3F69 = undefined;
 }
 
-//Function Number: 12
-func_BE48()
-{
+func_BE48() {
 	var_00 = self.color;
 	var_01 = self.alpha;
 	self notify("stop_quick_pulse");
@@ -274,15 +232,12 @@ func_BE48()
 	self destroy();
 }
 
-//Function Number: 13
-func_6A98(param_00,param_01,param_02)
-{
+func_6A98(param_00,param_01,param_02) {
 	self endon("death");
 	var_03 = param_02 * 20;
 	var_04 = param_00 - self.objective_delete / var_03;
 	var_05 = param_01 - self.objective_current_nomessage / var_03;
-	for(var_06 = 0;var_06 < var_03;var_06++)
-	{
+	for(var_06 = 0;var_06 < var_03;var_06++) {
 		self.objective_delete = self.objective_delete + var_04;
 		self.objective_current_nomessage = self.objective_current_nomessage + var_05;
 		wait(0.05);
@@ -292,11 +247,8 @@ func_6A98(param_00,param_01,param_02)
 	self.objective_current_nomessage = param_01;
 }
 
-//Function Number: 14
-func_3F6A(param_00,param_01)
-{
-	if(param_00 == 0)
-	{
+func_3F6A(param_00,param_01) {
+	if(param_00 == 0) {
 		level.var_3F69.var_10466 playsound(param_01);
 		return;
 	}
@@ -304,9 +256,7 @@ func_3F6A(param_00,param_01)
 	level.var_7661.var_10466 playsound(param_01);
 }
 
-//Function Number: 15
-func_913E(param_00)
-{
+func_913E(param_00) {
 	self endon("death");
 	self fadeovertime(param_00);
 	self.alpha = 0;
@@ -314,13 +264,10 @@ func_913E(param_00)
 	self destroy();
 }
 
-//Function Number: 16
-func_DB9A(param_00,param_01)
-{
+func_DB9A(param_00,param_01) {
 	wait(0.5);
 	var_02 = newhudelem();
-	if(param_00 == 0)
-	{
+	if(param_00 == 0) {
 		var_02.x = level.var_3F69.var_11761 - 5;
 		var_02.y = level.var_3F69.var_11762;
 		var_02.vertalign = "bottom";
@@ -348,11 +295,8 @@ func_DB9A(param_00,param_01)
 	var_02 destroy();
 }
 
-//Function Number: 17
-func_22FD(param_00)
-{
-	if(param_00 == 0)
-	{
+func_22FD(param_00) {
+	if(param_00 == 0) {
 		level endon("chyron_faze_out_text_intro");
 	}
 	else
@@ -362,8 +306,7 @@ func_22FD(param_00)
 
 	var_01 = [".","-","_","|","+"];
 	var_02 = 0.7;
-	for(var_03 = 0;var_03 < var_01.size;var_03++)
-	{
+	for(var_03 = 0;var_03 < var_01.size;var_03++) {
 		var_04 = func_48B3("");
 		var_04.fontscale = var_02;
 		var_04.alpha = 0;
@@ -377,16 +320,13 @@ func_22FD(param_00)
 	thread func_22FC(param_00);
 	var_05 = 0;
 	var_06 = level.var_3F69.var_11762 - 10;
-	for(;;)
-	{
+	for(;;) {
 		var_07 = 0;
 		var_01 = scripts\engine\utility::array_randomize(var_01);
-		foreach(var_04 in level.var_3F69.var_22FD)
-		{
+		foreach(var_04 in level.var_3F69.var_22FD) {
 			func_3F6A(param_00,"ui_chyron_plusminus");
 			var_04.fontscale = var_02;
-			if(var_01[var_07] == "+")
-			{
+			if(var_01[var_07] == "+") {
 				var_04.fontscale = 0.55;
 			}
 
@@ -404,11 +344,8 @@ func_22FD(param_00)
 	}
 }
 
-//Function Number: 18
-func_22FC(param_00)
-{
-	if(param_00 == 0)
-	{
+func_22FC(param_00) {
+	if(param_00 == 0) {
 		level endon("chyron_faze_out_text_intro");
 	}
 	else
@@ -418,16 +355,13 @@ func_22FC(param_00)
 
 	var_01 = 0.6;
 	var_02 = 1;
-	for(;;)
-	{
-		if(level.var_3F69.var_22FE)
-		{
+	for(;;) {
+		if(level.var_3F69.var_22FE) {
 			var_01 = var_01 - 0.07;
 		}
 		else
 		{
-			if(var_01 < 0.15 || var_01 > 0.6)
-			{
+			if(var_01 < 0.15 || var_01 > 0.6) {
 				var_02 = var_02 * -1;
 			}
 
@@ -435,12 +369,9 @@ func_22FC(param_00)
 		}
 
 		var_01 = max(var_01,0);
-		foreach(var_04 in level.var_3F69.var_22FD)
-		{
-			if(var_04.var_DAE6)
-			{
-				if(var_01 == 0)
-				{
+		foreach(var_04 in level.var_3F69.var_22FD) {
+			if(var_04.var_DAE6) {
+				if(var_01 == 0) {
 					var_04.alpha = 0;
 					continue;
 				}
@@ -449,13 +380,11 @@ func_22FC(param_00)
 			}
 		}
 
-		if(var_01 == 0)
-		{
+		if(var_01 == 0) {
 			level notify("chyron_artifact_faded");
 			var_01 = 0.8;
 			level.var_3F69.var_22FE = 0;
-			foreach(var_04 in level.var_3F69.var_22FD)
-			{
+			foreach(var_04 in level.var_3F69.var_22FD) {
 				var_04.var_DAE6 = 0;
 			}
 		}
@@ -464,11 +393,8 @@ func_22FC(param_00)
 	}
 }
 
-//Function Number: 19
-func_11151(param_00)
-{
-	if(param_00 == 0)
-	{
+func_11151(param_00) {
+	if(param_00 == 0) {
 		level endon("chyron_faze_out_text_intro");
 	}
 	else
@@ -479,24 +405,20 @@ func_11151(param_00)
 	var_01 = 5;
 	var_02 = 0;
 	var_03 = 1;
-	for(;;)
-	{
-		if((param_00 == 0 && level.var_3F69.var_11152) || param_00 == 1 && level.var_7661.var_11152)
-		{
+	for(;;) {
+		if((param_00 == 0 && level.var_3F69.var_11152) || param_00 == 1 && level.var_7661.var_11152) {
 			wait(0.05);
 			continue;
 		}
 
 		var_02++;
 		var_04 = int(min(var_02,var_01));
-		for(var_05 = 0;var_05 < var_04;var_05++)
-		{
+		for(var_05 = 0;var_05 < var_04;var_05++) {
 			thread func_495C(param_00);
 			wait(randomfloatrange(0,0.1));
 		}
 
-		if((param_00 == 0 && level.var_3F69.var_1175D) || param_00 == 1 && level.var_7661.var_1175D)
-		{
+		if((param_00 == 0 && level.var_3F69.var_1175D) || param_00 == 1 && level.var_7661.var_1175D) {
 			wait(0.05);
 			continue;
 		}
@@ -507,9 +429,7 @@ func_11151(param_00)
 	}
 }
 
-//Function Number: 20
-func_119A5(param_00,param_01)
-{
+func_119A5(param_00,param_01) {
 	var_02 = func_48B3(param_00);
 	level.var_3F69.var_1175E = var_02.x;
 	level.var_3F69.var_1175F = var_02.y;
@@ -531,18 +451,14 @@ func_119A5(param_00,param_01)
 	wait(var_05);
 	var_02 thread func_DB9D(0);
 	wait(var_06);
-	if(randomint(100) > 10)
-	{
+	if(randomint(100) > 10) {
 		var_02 thread func_C369(-30,30,20,-8,8,4);
 	}
 }
 
-//Function Number: 21
-func_C369(param_00,param_01,param_02,param_03,param_04,param_05)
-{
+func_C369(param_00,param_01,param_02,param_03,param_04,param_05) {
 	var_06 = randomintrange(1,2);
-	for(var_07 = 0;var_07 < var_06;var_07++)
-	{
+	for(var_07 = 0;var_07 < var_06;var_07++) {
 		var_08 = func_DCB1(param_00,param_01,param_02);
 		var_09 = func_DCB1(param_03,param_04,param_05);
 		var_0A[0] = [var_08,var_09];
@@ -552,15 +468,11 @@ func_C369(param_00,param_01,param_02,param_03,param_04,param_05)
 	}
 }
 
-//Function Number: 22
-func_6BAF(param_00,param_01)
-{
+func_6BAF(param_00,param_01) {
 	var_02 = undefined;
-	if(!param_01)
-	{
+	if(!param_01) {
 		var_02 = newhudelem();
-		if(param_00 == 0)
-		{
+		if(param_00 == 0) {
 			var_02.x = level.var_3F69.var_11761 + 60;
 			var_02.y = level.var_3F69.var_11762 + 30;
 			var_02.vertalign = "bottom";
@@ -589,8 +501,7 @@ func_6BAF(param_00,param_01)
 
 	var_03 = 0.15;
 	func_6AA9(param_00,var_03 * 0.4);
-	if(!param_01)
-	{
+	if(!param_01) {
 		var_02 fadeovertime(0.25);
 		var_02.alpha = 0.2;
 		var_02.color = (1,1,1);
@@ -602,33 +513,25 @@ func_6BAF(param_00,param_01)
 	}
 }
 
-//Function Number: 23
-func_6BB0(param_00)
-{
+func_6BB0(param_00) {
 	self fadeovertime(param_00);
 	self.alpha = 0;
 	wait(param_00);
 	self destroy();
 }
 
-//Function Number: 24
-func_6AA9(param_00,param_01)
-{
-	if(param_00 == 0)
-	{
+func_6AA9(param_00,param_01) {
+	if(param_00 == 0) {
 		level notify("chyron_faze_out_text_intro");
-		foreach(var_03 in level.var_3F69.var_91AF)
-		{
-			if(!isdefined(var_03))
-			{
+		foreach(var_03 in level.var_3F69.var_91AF) {
+			if(!isdefined(var_03)) {
 				continue;
 			}
 
 			var_03 thread func_913E(param_01);
 		}
 
-		foreach(var_03 in level.var_3F69.var_11151)
-		{
+		foreach(var_03 in level.var_3F69.var_11151) {
 			var_03 thread func_913E(param_01);
 		}
 
@@ -636,35 +539,28 @@ func_6AA9(param_00,param_01)
 	}
 
 	level notify("chyron_faze_out_text_gamenotify");
-	foreach(var_03 in level.var_7661.var_91AF)
-	{
-		if(!isdefined(var_03))
-		{
+	foreach(var_03 in level.var_7661.var_91AF) {
+		if(!isdefined(var_03)) {
 			continue;
 		}
 
 		var_03 thread func_913E(param_01);
 	}
 
-	foreach(var_03 in level.var_7661.var_11151)
-	{
+	foreach(var_03 in level.var_7661.var_11151) {
 		var_03 thread func_913E(param_01);
 	}
 }
 
-//Function Number: 25
-func_111A1(param_00,param_01,param_02,param_03,param_04)
-{
+func_111A1(param_00,param_01,param_02,param_03,param_04) {
 	var_05 = func_48B3(param_00);
 	var_05.y = var_05.y + 20 + param_01 * 15;
-	if(isdefined(param_02))
-	{
+	if(isdefined(param_02)) {
 		var_05.font = param_02;
 	}
 
 	var_05.fontscale = 1;
-	if(isdefined(param_03))
-	{
+	if(isdefined(param_03)) {
 		var_05.fontscale = param_03;
 	}
 
@@ -676,14 +572,12 @@ func_111A1(param_00,param_01,param_02,param_03,param_04)
 	var_05.objective_delete = (0.425,0.465,0.46) * vehicle_setspeed();
 	var_05 thread func_DB9D(0,param_04);
 	var_05.alpha = 1;
-	if(isdefined(param_04))
-	{
+	if(isdefined(param_04)) {
 		var_05.alpha = param_04;
 	}
 
 	var_05 setpulsefx(30,-15536,700);
-	if(randomint(100) > 70)
-	{
+	if(randomint(100) > 70) {
 		var_05 scripts\engine\utility::delaythread(2,::func_C369,-7,7,3,-5,5,3);
 	}
 
@@ -691,25 +585,19 @@ func_111A1(param_00,param_01,param_02,param_03,param_04)
 	return var_05;
 }
 
-//Function Number: 26
-vehicle_setspeed()
-{
+vehicle_setspeed() {
 	var_00 = 1;
-	if(isdefined(level.var_3F69) && level.var_3F69.var_BFE0)
-	{
+	if(isdefined(level.var_3F69) && level.var_3F69.var_BFE0) {
 		var_00 = 0.3;
 	}
 
 	return var_00;
 }
 
-//Function Number: 27
-func_915B(param_00)
-{
+func_915B(param_00) {
 	var_01 = self.x;
 	var_02 = self.y;
-	foreach(var_04 in param_00)
-	{
+	foreach(var_04 in param_00) {
 		self.x = var_01 + var_04[0];
 		self.y = var_02 + var_04[1];
 		wait(randomfloatrange(0.05,0.2));
@@ -719,13 +607,10 @@ func_915B(param_00)
 	self.y = var_02;
 }
 
-//Function Number: 28
-func_DB9D(param_00,param_01)
-{
+func_DB9D(param_00,param_01) {
 	self endon("death");
 	self endon("stop_quick_pulse");
-	if(param_00 == 0)
-	{
+	if(param_00 == 0) {
 		level endon("chyron_faze_out_text_intro");
 	}
 	else
@@ -733,23 +618,18 @@ func_DB9D(param_00,param_01)
 		level endon("chyron_faze_out_text_gamenotify");
 	}
 
-	if(!isdefined(param_01))
-	{
+	if(!isdefined(param_01)) {
 		param_01 = 1;
 	}
 
-	for(;;)
-	{
+	for(;;) {
 		wait(0.05);
 		self.alpha = randomfloatrange(param_01 * 0.7,param_01);
 	}
 }
 
-//Function Number: 29
-location_dupes_thread(param_00,param_01)
-{
-	if(!isdefined(param_01))
-	{
+location_dupes_thread(param_00,param_01) {
+	if(!isdefined(param_01)) {
 		param_01 = 0;
 	}
 
@@ -757,8 +637,7 @@ location_dupes_thread(param_00,param_01)
 	var_02 = self.x;
 	var_03 = self.y;
 	var_04 = 0.15;
-	if(!param_01)
-	{
+	if(!param_01) {
 		self.x = self.x + randomintrange(-30,-10);
 		self.y = self.y + randomintrange(10,20);
 		self moveovertime(var_04);
@@ -782,13 +661,10 @@ location_dupes_thread(param_00,param_01)
 	self.alpha = 0;
 }
 
-//Function Number: 30
-func_DCB1(param_00,param_01,param_02)
-{
+func_DCB1(param_00,param_01,param_02) {
 	var_03 = randomintrange(param_00,param_01);
 	var_04 = 1;
-	if(var_03 < 0)
-	{
+	if(var_03 < 0) {
 		var_04 = -1;
 	}
 
@@ -796,16 +672,12 @@ func_DCB1(param_00,param_01,param_02)
 	return var_03 * var_04;
 }
 
-//Function Number: 31
-func_48B3(param_00,param_01,param_02)
-{
-	if(!isdefined(param_01))
-	{
+func_48B3(param_00,param_01,param_02) {
+	if(!isdefined(param_01)) {
 		param_01 = level.var_3F69.var_11761;
 	}
 
-	if(!isdefined(param_02))
-	{
+	if(!isdefined(param_02)) {
 		param_02 = level.var_3F69.var_11762;
 	}
 
@@ -822,30 +694,25 @@ func_48B3(param_00,param_01,param_02)
 	var_03.alpha = 0;
 	var_03.hidewheninmenu = 1;
 	var_03.fontscale = 1.4;
-	if(level.console)
-	{
+	if(level.console) {
 		var_03.fontscale = 1.2;
 	}
 
 	var_03.color = (0.85,0.93,0.92);
 	var_03.font = "default";
-	if(isdefined(level.var_3F69))
-	{
+	if(isdefined(level.var_3F69)) {
 		level.var_3F69.var_91AF[level.var_3F69.var_91AF.size] = var_03;
 	}
 
 	return var_03;
 }
 
-//Function Number: 32
-func_7CBA(param_00)
-{
+func_7CBA(param_00) {
 	var_01 = spawnstruct();
 	var_02 = 0;
 	var_03 = 0;
 	var_04 = 0;
-	if(param_00 == 0)
-	{
+	if(param_00 == 0) {
 		var_05 = -85;
 		var_02 = level.var_3F69.var_1175D;
 		var_03 = level.var_3F69.var_1175E;
@@ -869,8 +736,7 @@ func_7CBA(param_00)
 	var_01.alpha = randomfloatrange(0.3,0.7);
 	var_01.color = func_7CB9();
 	var_01.time = randomfloatrange(0.05,0.1);
-	if(var_02)
-	{
+	if(var_02) {
 		var_01.x = int(var_03 + randomintrange(-1,1));
 		var_01.y = int(var_04 + randomintrange(0,7));
 		var_01.width = randomintrange(100,var_06);
@@ -881,9 +747,7 @@ func_7CBA(param_00)
 	return var_01;
 }
 
-//Function Number: 33
-func_7CB9()
-{
+func_7CB9() {
 	var_00 = [];
 	var_00[var_00.size] = (0.15,0.14,0.22);
 	var_00[var_00.size] = (0.09,0.11,0.13);
@@ -892,45 +756,35 @@ func_7CB9()
 	return var_00[randomint(var_00.size)];
 }
 
-//Function Number: 34
-func_495C(param_00)
-{
-	if(param_00 == 0)
-	{
+func_495C(param_00) {
+	if(param_00 == 0) {
 		level endon("chyron_faze_out_text_intro");
-		if(level.var_3F69.var_11151.size < 8)
-		{
+		if(level.var_3F69.var_11151.size < 8) {
 			var_01 = newhudelem();
 			var_01.var_13438 = 0;
 			level.var_3F69.var_11151[level.var_3F69.var_11151.size] = var_01;
 		}
 
 		var_02 = undefined;
-		foreach(var_04 in level.var_3F69.var_11151)
-		{
-			if(var_04.var_13438)
-			{
+		foreach(var_04 in level.var_3F69.var_11151) {
+			if(var_04.var_13438) {
 				continue;
 			}
 
 			var_02 = var_04;
 		}
 
-		if(!isdefined(var_02))
-		{
+		if(!isdefined(var_02)) {
 			return;
 		}
 
 		var_06 = func_7CBA(param_00);
-		if(!level.var_3F69.var_1175D)
-		{
-			if(level.var_3F69.var_A917.size > 0 && level.var_3F69.var_A917.size < 3 && randomint(100) > 10)
-			{
+		if(!level.var_3F69.var_1175D) {
+			if(level.var_3F69.var_A917.size > 0 && level.var_3F69.var_A917.size < 3 && randomint(100) > 10) {
 				var_07 = level.var_3F69.var_A917[level.var_3F69.var_A917.size - 1];
 				var_06.x = var_07.x;
 				var_06.y = var_07.y + var_07.height;
-				if(scripts\engine\utility::cointoss())
-				{
+				if(scripts\engine\utility::cointoss()) {
 					var_06.y = var_07.y - var_06.height;
 				}
 			}
@@ -945,39 +799,32 @@ func_495C(param_00)
 	else
 	{
 		level endon("chyron_faze_out_text_gamenotify");
-		if(level.var_7661.var_11151.size < 8)
-		{
+		if(level.var_7661.var_11151.size < 8) {
 			var_01 = newhudelem();
 			var_01.var_13438 = 0;
 			level.var_7661.var_11151[level.var_7661.var_11151.size] = var_01;
 		}
 
 		var_02 = undefined;
-		foreach(var_04 in level.var_7661.var_11151)
-		{
-			if(var_04.var_13438)
-			{
+		foreach(var_04 in level.var_7661.var_11151) {
+			if(var_04.var_13438) {
 				continue;
 			}
 
 			var_02 = var_04;
 		}
 
-		if(!isdefined(var_02))
-		{
+		if(!isdefined(var_02)) {
 			return;
 		}
 
 		var_06 = func_7CBA(param_00);
-		if(!level.var_7661.var_1175D)
-		{
-			if(level.var_7661.var_A917.size > 0 && level.var_7661.var_A917.size < 3 && randomint(100) > 10)
-			{
+		if(!level.var_7661.var_1175D) {
+			if(level.var_7661.var_A917.size > 0 && level.var_7661.var_A917.size < 3 && randomint(100) > 10) {
 				var_07 = level.var_7661.var_A917[level.var_7661.var_A917.size - 1];
 				var_06.x = var_07.x;
 				var_06.y = var_07.y + var_07.height;
-				if(scripts\engine\utility::cointoss())
-				{
+				if(scripts\engine\utility::cointoss()) {
 					var_06.y = var_07.y - var_06.height;
 				}
 			}
@@ -997,15 +844,13 @@ func_495C(param_00)
 	var_02 setshader("white",var_06.width,var_06.height);
 	var_02.alpha = var_06.alpha;
 	var_02.color = var_06.color;
-	if(var_02.alpha > 0.6)
-	{
+	if(var_02.alpha > 0.6) {
 		func_3F6A(param_00,"ui_chyron_line_static");
 	}
 
 	var_02.horzalign = "left";
 	var_02.vertalign = "bottom";
-	if(param_00 == 1)
-	{
+	if(param_00 == 1) {
 		var_02.vertalign = "top";
 	}
 
@@ -1018,21 +863,16 @@ func_495C(param_00)
 	var_02.var_13438 = 0;
 }
 
-//Function Number: 35
-func_5F31(param_00,param_01)
-{
+func_5F31(param_00,param_01) {
 	var_02 = [];
-	for(var_03 = 0;var_03 < param_01;var_03++)
-	{
+	for(var_03 = 0;var_03 < param_01;var_03++) {
 		var_02[var_02.size] = func_48B3(param_00.text);
 	}
 
 	return var_02;
 }
 
-//Function Number: 36
-func_7661()
-{
+func_7661() {
 	level.var_7661 = spawnstruct();
 	level.var_7661.var_19 = 0;
 	level.var_7661.var_11760 = [];
@@ -1041,11 +881,8 @@ func_7661()
 	level thread func_7660("chyron_message3");
 }
 
-//Function Number: 37
-func_7660(param_00)
-{
-	for(;;)
-	{
+func_7660(param_00) {
+	for(;;) {
 		function_0284(9010);
 		function_0284(param_00);
 		level waittill(param_00,var_01,var_02);
@@ -1054,19 +891,14 @@ func_7660(param_00)
 	}
 }
 
-//Function Number: 38
-func_765E(param_00)
-{
+func_765E(param_00) {
 	level.var_7661.var_11760[level.var_7661.var_11760.size] = param_00;
-	if(!level.var_7661.var_19)
-	{
+	if(!level.var_7661.var_19) {
 		level thread func_7662();
 	}
 }
 
-//Function Number: 39
-func_7664()
-{
+func_7664() {
 	level.var_7661.var_19 = 1;
 	level.var_7661.var_1175D = 0;
 	level.var_7661.var_11152 = 0;
@@ -1080,18 +912,14 @@ func_7664()
 	level.var_7661.var_10466 linkto(level.player);
 }
 
-//Function Number: 40
-func_7663()
-{
+func_7663() {
 	level.var_7661.var_10466 delete();
 	level.var_7661 = spawnstruct();
 	level.var_7661.var_19 = 0;
 	level.var_7661.var_11760 = [];
 }
 
-//Function Number: 41
-func_7662()
-{
+func_7662() {
 	func_7664();
 	func_3F6A(1,"ui_chyron_on");
 	thread func_11151(1);
@@ -1099,8 +927,7 @@ func_7662()
 	thread func_DB9A(1,var_00);
 	wait(var_00);
 	var_01 = 0;
-	while(level.var_7661.var_11760.size)
-	{
+	while(level.var_7661.var_11760.size) {
 		level thread func_765F(level.var_7661.var_11760[0],var_01);
 		var_01++;
 		wait(0.5);
@@ -1115,8 +942,7 @@ func_7662()
 	wait(1);
 	func_3F6A(1,"ui_chyron_off");
 	func_6BAF(1,0);
-	if(level.var_7661.var_11760.size)
-	{
+	if(level.var_7661.var_11760.size) {
 		level.var_7661.var_10466 delete();
 		thread func_7662();
 		return;
@@ -1125,9 +951,7 @@ func_7662()
 	func_7663();
 }
 
-//Function Number: 42
-func_765F(param_00,param_01)
-{
+func_765F(param_00,param_01) {
 	var_02 = func_48F3(param_00,param_01);
 	level.var_7661.var_1175E = var_02.x;
 	level.var_7661.var_1175F = var_02.y;
@@ -1135,15 +959,12 @@ func_765F(param_00,param_01)
 	var_02 thread func_DB9D(1);
 	var_02.alpha = 1;
 	var_02 setpulsefx(30,-15536,700);
-	if(randomint(100) < 10)
-	{
+	if(randomint(100) < 10) {
 		var_02 scripts\engine\utility::delaythread(2,::func_C369,-7,7,3,-5,5,3);
 	}
 }
 
-//Function Number: 43
-func_48F3(param_00,param_01)
-{
+func_48F3(param_00,param_01) {
 	var_02 = newhudelem();
 	var_02.x = level.var_7661.var_11761;
 	var_02.y = level.var_7661.var_11762 + param_01 * 20;
@@ -1157,8 +978,7 @@ func_48F3(param_00,param_01)
 	var_02.hidewheninmenu = 1;
 	var_02.font = "default";
 	var_02.fontscale = 1.25;
-	if(level.console)
-	{
+	if(level.console) {
 		var_02.fontscale = 1;
 	}
 
@@ -1168,9 +988,7 @@ func_48F3(param_00,param_01)
 	return var_02;
 }
 
-//Function Number: 44
-func_111A0(param_00,param_01,param_02,param_03,param_04,param_05,param_06)
-{
+func_111A0(param_00,param_01,param_02,param_03,param_04,param_05,param_06) {
 	var_07 = func_48B3(param_00,param_02,param_03);
 	var_07.fontscale = 2;
 	var_07.horzalign = "subleft";
@@ -1179,21 +997,18 @@ func_111A0(param_00,param_01,param_02,param_03,param_04,param_05,param_06)
 	var_07.alignx = "center";
 	var_07.alpha = 1;
 	var_07.sort = 3;
-	if(isdefined(param_05))
-	{
+	if(isdefined(param_05)) {
 		var_07.objective_delete = param_05;
 	}
 
-	if(!isdefined(param_06))
-	{
+	if(!isdefined(param_06)) {
 		param_06 = 20;
 	}
 
 	var_07 setpulsefx(param_06,-15536,700);
 	var_08 = [var_07];
 	var_09 = func_5F33(var_07,2);
-	foreach(var_0B in var_09)
-	{
+	foreach(var_0B in var_09) {
 		var_0B.alpha = 0;
 		var_0B thread func_9130(randomfloatrange(0.5,1.5),randomfloatrange(0.05,0.2),param_01 - 0.5);
 	}
@@ -1203,20 +1018,15 @@ func_111A0(param_00,param_01,param_02,param_03,param_04,param_05,param_06)
 	return var_08;
 }
 
-//Function Number: 45
-func_9130(param_00,param_01,param_02)
-{
+func_9130(param_00,param_01,param_02) {
 	wait(param_00);
 	self.alpha = param_01;
 	thread location_dupes_thread(param_02 - 0.5,1);
 }
 
-//Function Number: 46
-func_5F33(param_00,param_01)
-{
+func_5F33(param_00,param_01) {
 	var_02 = [];
-	for(var_03 = 0;var_03 < param_01;var_03++)
-	{
+	for(var_03 = 0;var_03 < param_01;var_03++) {
 		var_04 = newhudelem();
 		var_04.x = param_00.x;
 		var_04.y = param_00.y;
@@ -1237,9 +1047,7 @@ func_5F33(param_00,param_01)
 	return var_02;
 }
 
-//Function Number: 47
-func_1119F(param_00,param_01,param_02,param_03)
-{
+func_1119F(param_00,param_01,param_02,param_03) {
 	var_04 = newhudelem();
 	var_04.x = param_01;
 	var_04.y = param_02 + param_03 - 1 * 10;
@@ -1272,9 +1080,7 @@ func_1119F(param_00,param_01,param_02,param_03)
 	var_04 destroy();
 }
 
-//Function Number: 48
-func_A03D(param_00)
-{
+func_A03D(param_00) {
 	level.player freezecontrols(1);
 	scripts\sp\_hud_util::func_10CCC();
 	var_01 = newhudelem();
@@ -1292,8 +1098,7 @@ func_A03D(param_00)
 	var_03.x = var_05 - 4;
 	var_06 = spawnstruct();
 	var_06.var_C1 = var_04.size;
-	foreach(var_08 in var_04)
-	{
+	foreach(var_08 in var_04) {
 		var_06 thread func_6AB6(var_08);
 	}
 
@@ -1309,8 +1114,7 @@ func_A03D(param_00)
 	var_03 moveovertime(var_0A);
 	var_03.x = var_03.var_C39F;
 	var_0A = var_0A / var_04.size;
-	for(var_0B = var_04.size - 1;var_0B >= 0;var_0B--)
-	{
+	for(var_0B = var_04.size - 1;var_0B >= 0;var_0B--) {
 		var_08 = var_04[var_0B];
 		var_08 fadeovertime(var_04.size - var_0B * var_0A);
 		var_08.alpha = 0;
@@ -1325,35 +1129,27 @@ func_A03D(param_00)
 	var_02 destroy();
 }
 
-//Function Number: 49
-func_6AB6(param_00)
-{
+func_6AB6(param_00) {
 	var_01 = randomfloatrange(0.1,0.3);
 	var_02 = randomfloatrange(0.45,0.8);
 	param_00 func_2B9E(2,0.2,0.5,0.8);
-	if(randomint(100) < 30)
-	{
+	if(randomint(100) < 30) {
 		param_00 func_2B9E(2,0.05,0.1,0.8);
 	}
 
 	self.var_C1--;
-	if(self.var_C1 == 0)
-	{
+	if(self.var_C1 == 0) {
 		self notify("fadein_letter_done");
 	}
 }
 
-//Function Number: 50
-func_2BA0(param_00,param_01,param_02,param_03)
-{
+func_2BA0(param_00,param_01,param_02,param_03) {
 	func_2B9E(param_00,param_01,param_02,param_03);
-	if(!isdefined(param_01))
-	{
+	if(!isdefined(param_01)) {
 		param_01 = 0.05;
 	}
 
-	if(!isdefined(param_02))
-	{
+	if(!isdefined(param_02)) {
 		param_02 = 0.1;
 	}
 
@@ -1362,22 +1158,17 @@ func_2BA0(param_00,param_01,param_02,param_03)
 	self.alpha = 0;
 }
 
-//Function Number: 51
-func_2BA1(param_00,param_01,param_02,param_03)
-{
+func_2BA1(param_00,param_01,param_02,param_03) {
 	func_2B9E(param_00,param_01,param_02,param_03);
-	if(!isdefined(param_01))
-	{
+	if(!isdefined(param_01)) {
 		param_01 = 0.05;
 	}
 
-	if(!isdefined(param_02))
-	{
+	if(!isdefined(param_02)) {
 		param_02 = 0.1;
 	}
 
-	if(!isdefined(param_03))
-	{
+	if(!isdefined(param_03)) {
 		param_03 = 0.8;
 	}
 
@@ -1386,30 +1177,23 @@ func_2BA1(param_00,param_01,param_02,param_03)
 	self.alpha = param_03;
 }
 
-//Function Number: 52
-func_2B9E(param_00,param_01,param_02,param_03)
-{
-	if(!isdefined(param_01))
-	{
+func_2B9E(param_00,param_01,param_02,param_03) {
+	if(!isdefined(param_01)) {
 		param_01 = 0.05;
 	}
 
-	if(!isdefined(param_02))
-	{
+	if(!isdefined(param_02)) {
 		param_02 = 0.1;
 	}
 
-	if(!isdefined(param_03))
-	{
+	if(!isdefined(param_03)) {
 		param_03 = 0.8;
 	}
 
-	for(var_04 = 0;var_04 < param_00;var_04++)
-	{
+	for(var_04 = 0;var_04 < param_00;var_04++) {
 		var_05 = randomfloatrange(param_01,param_02);
 		self fadeovertime(var_05);
-		if(var_04 % 2)
-		{
+		if(var_04 % 2) {
 			var_06 = param_03;
 		}
 		else
@@ -1426,43 +1210,33 @@ func_2B9E(param_00,param_01,param_02,param_03)
 	self.alpha = param_03;
 }
 
-//Function Number: 53
-func_490F(param_00)
-{
+func_490F(param_00) {
 	var_01 = [];
 	var_02 = undefined;
-	for(var_03 = 0;var_03 < param_00.size;var_03++)
-	{
+	for(var_03 = 0;var_03 < param_00.size;var_03++) {
 		var_04 = param_00[var_03];
 		var_05 = func_490E(var_04);
 		var_05.alpha = 0;
 		var_06 = 20;
-		if(isdefined(var_02))
-		{
-			if(var_02.text == "\'")
-			{
+		if(isdefined(var_02)) {
+			if(var_02.text == "\'") {
 				var_06 = 10;
 			}
-			else if(var_02.text == "M")
-			{
+			else if(var_02.text == "M") {
 				var_06 = 24;
 			}
-			else if(var_02.text == "E")
-			{
+			else if(var_02.text == "E") {
 				var_06 = 18;
 			}
-			else if(var_02.text == "T")
-			{
+			else if(var_02.text == "T") {
 				var_06 = 18;
 			}
-			else if(var_02.text == " ")
-			{
+			else if(var_02.text == " ") {
 				var_06 = 14;
 			}
 		}
 
-		if(isdefined(var_02))
-		{
+		if(isdefined(var_02)) {
 			var_05.x = var_02.x + var_06;
 		}
 
@@ -1473,9 +1247,7 @@ func_490F(param_00)
 	return var_01;
 }
 
-//Function Number: 54
-func_490E(param_00)
-{
+func_490E(param_00) {
 	var_01 = newhudelem();
 	var_01.x = 400;
 	var_01.y = 400;
@@ -1493,9 +1265,7 @@ func_490E(param_00)
 	return var_01;
 }
 
-//Function Number: 55
-func_48C0(param_00)
-{
+func_48C0(param_00) {
 	var_01 = newhudelem();
 	var_01.x = 397;
 	var_01.y = 400;

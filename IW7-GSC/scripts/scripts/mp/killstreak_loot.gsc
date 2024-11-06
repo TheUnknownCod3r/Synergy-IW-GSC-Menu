@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\mp\killstreak_loot.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 13
- * Decompile Time: 511 ms
- * Timestamp: 10/27/2023 12:20:44 AM
-*******************************************************************/
+/**************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\mp\killstreak_loot.gsc
+**************************************************/
 
-//Function Number: 1
-init()
-{
+init() {
 	level.var_110EC = spawnstruct();
 	level.var_110EC.passivestringref = [];
 	level.var_110EC.streaktable = [];
@@ -25,14 +19,11 @@ init()
 	func_DF05("passive_extra_points");
 }
 
-//Function Number: 2
-registerkillstreakvariantinfo()
-{
+registerkillstreakvariantinfo() {
 	level endon("game_ended");
 	var_00 = 0;
 	var_01 = tablelookupbyrow("mp/loot/iw7_killstreak_loot_master.csv",var_00,0);
-	while(var_01 != "")
-	{
+	while(var_01 != "") {
 		level.var_110EC.costoverride[int(var_01)] = int(tablelookup("mp/loot/iw7_killstreak_loot_master.csv",0,var_01,17));
 		level.var_110EC.costoverridepersist[int(var_01)] = int(tablelookup("mp/loot/iw7_killstreak_loot_master.csv",0,var_01,18));
 		level.var_110EC.rarity[int(var_01)] = int(tablelookup("mp/loot/iw7_killstreak_loot_master.csv",0,var_01,2));
@@ -44,34 +35,25 @@ registerkillstreakvariantinfo()
 	}
 }
 
-//Function Number: 3
-getrandomvariantfrombaseref(param_00)
-{
+getrandomvariantfrombaseref(param_00) {
 	var_01 = [];
-	foreach(var_04, var_03 in level.var_110EC.baseref)
-	{
-		if(var_03 == param_00)
-		{
+	foreach(var_04, var_03 in level.var_110EC.baseref) {
+		if(var_03 == param_00) {
 			var_01[var_01.size] = var_04;
 		}
 	}
 
-	if(var_01.size == 0)
-	{
+	if(var_01.size == 0) {
 		return undefined;
 	}
 
 	return var_01[randomint(var_01.size)];
 }
 
-//Function Number: 4
-modifycostforlootitem(param_00,param_01)
-{
-	if(isdefined(param_00) && param_00 >= 0)
-	{
+modifycostforlootitem(param_00,param_01) {
+	if(isdefined(param_00) && param_00 >= 0) {
 		var_02 = scripts\engine\utility::ter_op(scripts\mp\utility::_hasperk("specialty_support_killstreaks"),level.var_110EC.costoverridepersist[param_00],level.var_110EC.costoverride[param_00]);
-		if(isdefined(var_02))
-		{
+		if(isdefined(var_02)) {
 			return var_02;
 		}
 	}
@@ -79,31 +61,24 @@ modifycostforlootitem(param_00,param_01)
 	return param_01;
 }
 
-//Function Number: 5
-getrarityforlootitem(param_00)
-{
+getrarityforlootitem(param_00) {
 	var_01 = "";
 	var_02 = undefined;
-	if(isdefined(param_00))
-	{
+	if(isdefined(param_00)) {
 		var_02 = level.var_110EC.rarity[param_00];
 	}
 
-	if(!isdefined(var_02))
-	{
+	if(!isdefined(var_02)) {
 		return var_01;
 	}
 
-	if(var_02 == 1)
-	{
+	if(var_02 == 1) {
 		var_01 = "";
 	}
-	else if(var_02 == 2)
-	{
+	else if(var_02 == 2) {
 		var_01 = "rare";
 	}
-	else if(var_02 == 3)
-	{
+	else if(var_02 == 3) {
 		var_01 = "legend";
 	}
 	else
@@ -114,25 +89,19 @@ getrarityforlootitem(param_00)
 	return var_01;
 }
 
-//Function Number: 6
-getpassiveperk(param_00)
-{
-	if(param_00 <= 0)
-	{
+getpassiveperk(param_00) {
+	if(param_00 <= 0) {
 		return [];
 	}
 
 	var_01 = level.var_110EC.passivestringref[param_00];
-	if(!isdefined(var_01))
-	{
+	if(!isdefined(var_01)) {
 		var_02 = tablelookuprownum("mp/loot/iw7_killstreak_loot_master.csv",0,param_00);
 		var_03 = [7,8,9];
 		var_01 = [];
-		foreach(var_05 in var_03)
-		{
+		foreach(var_05 in var_03) {
 			var_06 = func_B030(var_02,var_05);
-			if(!isdefined(var_06))
-			{
+			if(!isdefined(var_06)) {
 				break;
 			}
 
@@ -145,27 +114,19 @@ getpassiveperk(param_00)
 	return var_01;
 }
 
-//Function Number: 7
-func_B030(param_00,param_01)
-{
+func_B030(param_00,param_01) {
 	var_02 = tablelookupbyrow("mp/loot/iw7_killstreak_loot_master.csv",param_00,param_01);
 	return scripts\engine\utility::ter_op(isdefined(var_02) && var_02 != "",var_02,undefined);
 }
 
-//Function Number: 8
-func_988A(param_00,param_01)
-{
+func_988A(param_00,param_01) {
 	param_00.passives = param_01;
 }
 
-//Function Number: 9
-func_DF07(param_00,param_01)
-{
+func_DF07(param_00,param_01) {
 	var_02 = level.var_110EC;
-	foreach(var_04 in param_01)
-	{
-		if(!isdefined(var_02.streaktable[var_04]))
-		{
+	foreach(var_04 in param_01) {
+		if(!isdefined(var_02.streaktable[var_04])) {
 			var_02.streaktable[var_04] = [];
 		}
 
@@ -173,47 +134,35 @@ func_DF07(param_00,param_01)
 	}
 }
 
-//Function Number: 10
-func_DF05(param_00)
-{
+func_DF05(param_00) {
 	var_01 = level.var_110EC;
-	if(!isdefined(var_01.streaktable[param_00]))
-	{
+	if(!isdefined(var_01.streaktable[param_00])) {
 		var_01.streaktable[param_00] = [];
 	}
 
 	var_01.streaktable[param_00]["all"] = 1;
 }
 
-//Function Number: 11
-func_9ED5(param_00,param_01)
-{
+func_9ED5(param_00,param_01) {
 	var_02 = level.var_110EC;
-	if(!isdefined(var_02.streaktable[param_01]))
-	{
+	if(!isdefined(var_02.streaktable[param_01])) {
 		return 0;
 	}
 
-	if(scripts\mp\utility::istrue(var_02.streaktable[param_01]["all"]))
-	{
+	if(scripts\mp\utility::istrue(var_02.streaktable[param_01]["all"])) {
 		return 1;
 	}
 
 	return scripts\mp\utility::istrue(var_02.streaktable[param_01][param_00]);
 }
 
-//Function Number: 12
-func_89BC(param_00)
-{
-	if(scripts\mp\killstreaks\_utility::func_A69F(param_00,"passive_extra_points"))
-	{
+func_89BC(param_00) {
+	if(scripts\mp\killstreaks\_utility::func_A69F(param_00,"passive_extra_points")) {
 		thread func_2A66(self,param_00);
 	}
 }
 
-//Function Number: 13
-func_2A66(param_00,param_01)
-{
+func_2A66(param_00,param_01) {
 	param_00 endon("death");
 	param_00 waittill("killed_enemy");
 	param_00 thread scripts\mp\utility::giveunifiedpoints("extra_points_loot");

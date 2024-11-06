@@ -1,18 +1,11 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: behaviortree\dlc4_boss.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 2
- * Decompile Time: 100 ms
- * Timestamp: 10\26\2023 11:58:21 PM
-*******************************************************************/
+/**********************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\behaviortree\dlc4_boss.gsc
+**********************************************/
 
-//Function Number: 1
-func_2AD0()
-{
-	if(isdefined(level.var_119E["dlc4_boss"]))
-	{
+func_2AD0() {
+	if(isdefined(level.var_119E["dlc4_boss"])) {
 		return;
 	}
 
@@ -31,9 +24,7 @@ func_2AD0()
 	level.var_119E["dlc4_boss"] = var_00;
 }
 
-//Function Number: 2
-func_DEE8()
-{
+func_DEE8() {
 	func_2AD0();
 	function_02D8("dlc4_boss");
 }

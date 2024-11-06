@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\cp\cp_weapon.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 221
- * Decompile Time: 10410 ms
- * Timestamp: 10/27/2023 12:10:13 AM
-*******************************************************************/
+/********************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\cp\cp_weapon.gsc
+********************************************/
 
-//Function Number: 1
-weaponsinit()
-{
+weaponsinit() {
 	level.maxperplayerexplosives = max(scripts\cp\utility::getintproperty("scr_maxPerPlayerExplosives",2),4);
 	level.riotshieldxpbullets = scripts\cp\utility::getintproperty("scr_riotShieldXPBullets",15);
 	level.build_weapon_name_func = ::return_weapon_name_with_like_attachments;
@@ -29,40 +23,27 @@ weaponsinit()
 	scripts\engine\utility::array_thread(getentarray("misc_turret","classname"),::turret_monitoruse);
 }
 
-//Function Number: 2
-heart_power_init()
-{
+heart_power_init() {
 	scripts\engine\utility::flag_wait("interactions_initialized");
 	scripts\cp\powers\coop_powers::powersetupfunctions("power_heart",::powerheartset,::takeheart,undefined,undefined,"heart_used",undefined);
 }
 
-//Function Number: 3
-eye_power_init()
-{
+eye_power_init() {
 	scripts\engine\utility::flag_wait("interactions_initialized");
 	scripts\cp\powers\coop_powers::powersetupfunctions("power_rat_king_eye",::powereyeset,::takerateye,::eye_activated,undefined,undefined,undefined);
 }
 
-//Function Number: 4
-powerheartset(param_00)
-{
+powerheartset(param_00) {
 	self.has_heart = 1;
 }
 
-//Function Number: 5
-powereyeset(param_00)
-{
+powereyeset(param_00) {
 	self.has_eye = 1;
 }
 
-//Function Number: 6
-blank(param_00)
-{
-}
+blank(param_00) {}
 
-//Function Number: 7
-initeffects()
-{
+initeffects() {
 	level._effect["weap_blink_friend"] = loadfx("vfx/core/mp/killstreaks/vfx_detonator_blink_cyan.vfx");
 	level._effect["weap_blink_enemy"] = loadfx("vfx/core/mp/killstreaks/vfx_detonator_blink_cyan.vfx");
 	level._effect["emp_stun"] = loadfx("vfx/core/mp/equipment/vfx_emp_grenade");
@@ -76,9 +57,7 @@ initeffects()
 	level._effect["penetration_railgun_explosion"] = loadfx("vfx/iw7/core/expl/weap/chargeshot/vfx_expl_chargeshot.vfx");
 }
 
-//Function Number: 8
-setupminesettings()
-{
+setupminesettings() {
 	var_00 = 70;
 	level.claymoredetectiondot = cos(var_00);
 	level.claymoredetectionmindist = 20;
@@ -99,9 +78,7 @@ setupminesettings()
 	level.mines = [];
 }
 
-//Function Number: 9
-setupconfigs()
-{
+setupconfigs() {
 	var_00 = spawnstruct();
 	var_00.mine_beacon["enemy"] = loadfx("vfx/core/equipment/light_c4_blink.vfx");
 	var_00.mine_beacon["friendly"] = loadfx("vfx/misc/light_mine_blink_friendly");
@@ -143,65 +120,48 @@ setupconfigs()
 	level.weaponconfigs["flash_grenade_mp"] = var_00;
 }
 
-//Function Number: 10
-iteminits()
-{
+iteminits() {
 	scripts/cp/powers/coop_portal_generator::portalgeneratorinit();
 	scripts\cp\cp_blackholegun::init();
 	clustergrenadeinit();
 	throwingknifec4init();
 }
 
-//Function Number: 11
-throwingknifec4init()
-{
+throwingknifec4init() {
 	level._effect["throwingknifec4_explode"] = loadfx("vfx/iw7/_requests/mp/power/vfx_bio_spike_exp.vfx");
 }
 
-//Function Number: 12
-clustergrenadeinit()
-{
+clustergrenadeinit() {
 	level._effect["clusterGrenade_explode"] = loadfx("vfx/iw7/_requests/mp/vfx_cluster_gren_single_runner.vfx");
 }
 
-//Function Number: 13
-mpbuildweaponmap()
-{
+mpbuildweaponmap() {
 	var_00 = ["mp/statstable.csv","cp/zombies/mode_string_tables/zombies_statstable.csv"];
 	level.weaponmapdata = [];
-	foreach(var_02 in var_00)
-	{
-		for(var_03 = 1;tablelookup(var_02,0,var_03,0) != "";var_03++)
-		{
+	foreach(var_02 in var_00) {
+		for(var_03 = 1;tablelookup(var_02,0,var_03,0) != "";var_03++) {
 			var_04 = tablelookup(var_02,0,var_03,4);
-			if(var_04 != "")
-			{
+			if(var_04 != "") {
 				level.weaponmapdata[var_04] = spawnstruct();
 				var_05 = tablelookup(var_02,0,var_03,0);
-				if(var_05 != "")
-				{
+				if(var_05 != "") {
 					level.weaponmapdata[var_04].number = var_05;
 				}
 
 				var_06 = tablelookup(var_02,0,var_03,1);
-				if(var_06 != "")
-				{
+				if(var_06 != "") {
 					level.weaponmapdata[var_04].group = var_06;
 				}
 
 				var_07 = tablelookup(var_02,0,var_03,5);
-				if(var_07 != "")
-				{
+				if(var_07 != "") {
 					level.weaponmapdata[var_04].perk = var_07;
 				}
 
 				var_08 = tablelookup(var_02,0,var_03,9);
-				if(var_08 != "")
-				{
-					if(isdefined(level.weaponmapdata[var_04].attachdefaults))
-					{
-						if(level.weaponmapdata[var_04].attachdefaults == "none")
-						{
+				if(var_08 != "") {
+					if(isdefined(level.weaponmapdata[var_04].attachdefaults)) {
+						if(level.weaponmapdata[var_04].attachdefaults == "none") {
 							level.weaponmapdata[var_04].attachdefaults = undefined;
 						}
 						else
@@ -217,11 +177,9 @@ mpbuildweaponmap()
 
 				level.weaponmapdata[var_04].selectableattachmentlist = [];
 				level.weaponmapdata[var_04].selectableattachmentmap = [];
-				for(var_09 = 0;var_09 < 20;var_09++)
-				{
+				for(var_09 = 0;var_09 < 20;var_09++) {
 					var_0A = tablelookup(var_02,0,var_03,10 + var_09);
-					if(isdefined(var_0A) && var_0A != "")
-					{
+					if(isdefined(var_0A) && var_0A != "") {
 						var_0B = level.weaponmapdata[var_04].selectableattachmentlist.size;
 						level.weaponmapdata[var_04].selectableattachmentlist[var_0B] = var_0A;
 						level.weaponmapdata[var_04].selectableattachmentmap[var_0A] = 1;
@@ -229,8 +187,7 @@ mpbuildweaponmap()
 				}
 
 				var_0C = tablelookup(var_02,0,var_03,8);
-				if(var_0C != "")
-				{
+				if(var_0C != "") {
 					var_0C = float(var_0C);
 					level.weaponmapdata[var_04].getclosestpointonnavmesh3d = var_0C;
 				}
@@ -239,9 +196,7 @@ mpbuildweaponmap()
 	}
 }
 
-//Function Number: 14
-buildweaponmaps()
-{
+buildweaponmaps() {
 	var_00 = "mp/statstable.csv";
 	var_01 = level.game_mode_statstable;
 	level.weaponmap_toperk = [];
@@ -250,73 +205,57 @@ buildweaponmaps()
 	var_02 = 0;
 	var_03 = 1;
 	var_04 = 1;
-	while(var_03 || var_04)
-	{
-		if(tablelookup(var_00,0,var_02,0) == "")
-		{
+	while(var_03 || var_04) {
+		if(tablelookup(var_00,0,var_02,0) == "") {
 			var_03 = 0;
 		}
 
 		var_05 = tablelookup(var_00,0,var_02,4);
 		var_06 = tablelookup(var_00,0,var_02,5);
-		if(var_06 != "")
-		{
-			if(var_05 != "")
-			{
+		if(var_06 != "") {
+			if(var_05 != "") {
 				level.weaponmap_toperk[var_05] = var_06;
 			}
 		}
 
 		var_07 = tablelookup(var_00,0,var_02,9);
-		if(var_07 != "")
-		{
-			if(var_05 != "")
-			{
+		if(var_07 != "") {
+			if(var_05 != "") {
 				level.weaponmap_toattachdefaults[var_05] = strtok(var_07," ");
 			}
 		}
 
 		var_08 = tablelookup(var_00,0,var_02,8);
-		if(var_08 != "")
-		{
-			if(var_05 != "")
-			{
+		if(var_08 != "") {
+			if(var_05 != "") {
 				var_08 = float(var_08);
 				level.weaponmap_tospeed[var_05] = float(var_08);
 			}
 		}
 
-		if(var_04)
-		{
-			if(tablelookup(var_01,0,var_02,0) == "")
-			{
+		if(var_04) {
+			if(tablelookup(var_01,0,var_02,0) == "") {
 				var_04 = 0;
 			}
 
 			var_05 = tablelookup(var_01,0,var_02,4);
 			var_06 = tablelookup(var_01,0,var_02,5);
-			if(var_06 != "")
-			{
-				if(var_05 != "")
-				{
+			if(var_06 != "") {
+				if(var_05 != "") {
 					level.weaponmap_toperk[var_05] = var_06;
 				}
 			}
 
 			var_07 = tablelookup(var_01,0,var_02,9);
-			if(var_07 != "")
-			{
-				if(var_05 != "")
-				{
+			if(var_07 != "") {
+				if(var_05 != "") {
 					level.weaponmap_toattachdefaults[var_05] = strtok(var_07," ");
 				}
 			}
 
 			var_08 = tablelookup(var_01,0,var_02,8);
-			if(var_08 != "")
-			{
-				if(var_05 != "")
-				{
+			if(var_08 != "") {
+				if(var_05 != "") {
 					var_08 = float(var_08);
 					level.weaponmap_tospeed[var_05] = float(var_08);
 				}
@@ -327,13 +266,10 @@ buildweaponmaps()
 	}
 }
 
-//Function Number: 15
-minesensorbounce()
-{
+minesensorbounce() {
 	self playsound(self.config.onlaunchsfx);
 	playfx(self.config.launchvfx,self.origin);
-	if(isdefined(self.trigger))
-	{
+	if(isdefined(self.trigger)) {
 		self.trigger delete();
 	}
 
@@ -355,15 +291,11 @@ minesensorbounce()
 	self notify("detonateExplosive");
 }
 
-//Function Number: 16
-playspinnerfx()
-{
-	if(isdefined(self.config.mine_spin))
-	{
+playspinnerfx() {
+	if(isdefined(self.config.mine_spin)) {
 		self endon("death");
 		var_00 = gettime() + 1000;
-		while(gettime() < var_00)
-		{
+		while(gettime() < var_00) {
 			wait(0.05);
 			playfxontag(self.config.mine_spin,self,"tag_fx_spin1");
 			playfxontag(self.config.mine_spin,self,"tag_fx_spin3");
@@ -374,13 +306,10 @@ playspinnerfx()
 	}
 }
 
-//Function Number: 17
-minebounce()
-{
+minebounce() {
 	self playsound(self.config.onlaunchsfx);
 	playfx(level.mine_launch,self.origin);
-	if(isdefined(self.trigger))
-	{
+	if(isdefined(self.trigger)) {
 		self.trigger delete();
 	}
 
@@ -393,19 +322,14 @@ minebounce()
 	self notify("detonateExplosive");
 }
 
-//Function Number: 18
-turret_monitoruse()
-{
-	for(;;)
-	{
+turret_monitoruse() {
+	for(;;) {
 		self waittill("trigger",var_00);
 		thread turret_playerthread(var_00);
 	}
 }
 
-//Function Number: 19
-turret_playerthread(param_00)
-{
+turret_playerthread(param_00) {
 	param_00 endon("death");
 	param_00 endon("disconnect");
 	param_00 notify("weapon_change","none");
@@ -413,11 +337,8 @@ turret_playerthread(param_00)
 	param_00 notify("weapon_change",param_00 getcurrentweapon());
 }
 
-//Function Number: 20
-onplayerconnect()
-{
-	for(;;)
-	{
+onplayerconnect() {
+	for(;;) {
 		level waittill("connected",var_00);
 		var_00.hits = 0;
 		var_00 thread onplayerspawned();
@@ -426,27 +347,20 @@ onplayerconnect()
 	}
 }
 
-//Function Number: 21
-giverateye(param_00)
-{
+giverateye(param_00) {
 	self.has_eye = 1;
 	thread eye_activated(self);
 }
 
-//Function Number: 22
-takerateye(param_00)
-{
+takerateye(param_00) {
 	self.has_eye = undefined;
 	self notify("remove_eye");
 }
 
-//Function Number: 23
-eye_activated(param_00)
-{
+eye_activated(param_00) {
 	self.wearing_rat_king_eye = 1;
 	level notify("rat_king_eye_activated",self);
-	if(scripts\engine\utility::flag_exist("rk_fight_started") && !scripts\engine\utility::flag("rk_fight_started"))
-	{
+	if(scripts\engine\utility::flag_exist("rk_fight_started") && !scripts\engine\utility::flag("rk_fight_started")) {
 		thread handleratvisionburst(self);
 		self setscriptablepartstate("rat_king_eye_light","active");
 		thread reapply_visionset_after_host_migration();
@@ -454,40 +368,31 @@ eye_activated(param_00)
 	}
 }
 
-//Function Number: 24
-reapply_visionset_after_host_migration()
-{
+reapply_visionset_after_host_migration() {
 	self endon("death");
 	self endon("disconnect");
 	self endon("removing_eye_from_player");
 	level waittill("host_migration_begin");
 	level waittill("host_migration_end");
-	if(scripts\engine\utility::istrue(self.wearing_rat_king_eye))
-	{
+	if(scripts\engine\utility::istrue(self.wearing_rat_king_eye)) {
 		self setscriptablepartstate("rat_king_eye_light","active");
 	}
 }
 
-//Function Number: 25
-watch_for_eye_remove()
-{
+watch_for_eye_remove() {
 	self notify("watch_for_eye_remove");
 	self endon("watch_for_eye_remove");
 	wait(5);
-	if(scripts\engine\utility::istrue(self.wearing_rat_king_eye))
-	{
+	if(scripts\engine\utility::istrue(self.wearing_rat_king_eye)) {
 		remove_eye_effects();
 	}
 }
 
-//Function Number: 26
-remove_eye_effects()
-{
+remove_eye_effects() {
 	self.wearing_rat_king_eye = 0;
 	level notify("rat_king_eye_deactivated");
 	self notify("remove_eye");
-	if(isdefined(level.vision_set_override))
-	{
+	if(isdefined(level.vision_set_override)) {
 		self visionsetnakedforplayer(level.vision_set_override,0.1);
 	}
 	else
@@ -498,57 +403,44 @@ remove_eye_effects()
 	self setscriptablepartstate("rat_king_eye_light","neutral");
 }
 
-//Function Number: 27
-sniperdustwatcher()
-{
+sniperdustwatcher() {
 	self endon("death");
 	self endon("disconnect");
 	level endon("game_ended");
 	var_00 = undefined;
-	for(;;)
-	{
+	for(;;) {
 		self waittill("weapon_fired");
-		if(self getstance() != "prone")
-		{
+		if(self getstance() != "prone") {
 			continue;
 		}
 
-		if(scripts\cp\utility::coop_getweaponclass(self getcurrentweapon()) != "weapon_sniper")
-		{
+		if(scripts\cp\utility::coop_getweaponclass(self getcurrentweapon()) != "weapon_sniper") {
 			continue;
 		}
 
 		var_01 = anglestoforward(self.angles);
-		if(!isdefined(var_00) || gettime() - var_00 > 2000)
-		{
+		if(!isdefined(var_00) || gettime() - var_00 > 2000) {
 			var_00 = gettime();
 			continue;
 		}
 	}
 }
 
-//Function Number: 28
-unset_scriptable_part_state_after_time(param_00,param_01)
-{
+unset_scriptable_part_state_after_time(param_00,param_01) {
 	self endon("death");
 	wait(param_00);
 	self setscriptablepartstate("projectile","inactive");
 	param_01 notify("ranged_katana_missile_done");
-	if(isdefined(self))
-	{
+	if(isdefined(self)) {
 		self delete();
 	}
 }
 
-//Function Number: 29
-watchmissileusage()
-{
+watchmissileusage() {
 	self endon("disconnect");
-	for(;;)
-	{
+	for(;;) {
 		var_00 = waittill_missile_fire();
-		switch(var_00.weapon_name)
-		{
+		switch(var_00.weapon_name) {
 			case "remotemissile_projectile_mp":
 				var_00 thread grenade_earthquake();
 				break;
@@ -584,9 +476,7 @@ watchmissileusage()
 	}
 }
 
-//Function Number: 30
-ben_franklin_harpoon_activate(param_00,param_01,param_02)
-{
+ben_franklin_harpoon_activate(param_00,param_01,param_02) {
 	self endon("death");
 	self endon("disconnect");
 	level endon("game_ended");
@@ -597,9 +487,7 @@ ben_franklin_harpoon_activate(param_00,param_01,param_02)
 	thread run_stun_logic(param_00,param_01,param_02,var_03);
 }
 
-//Function Number: 31
-run_stun_logic(param_00,param_01,param_02,param_03)
-{
+run_stun_logic(param_00,param_01,param_02,param_03) {
 	self endon("death");
 	self endon("disconnected");
 	level endon("game_ended");
@@ -611,8 +499,7 @@ run_stun_logic(param_00,param_01,param_02,param_03)
 	var_06 = vectornormalize(var_06);
 	var_06 = var_06 * 100;
 	var_07 = -1 * var_06;
-	if(isdefined(param_01))
-	{
+	if(isdefined(param_01)) {
 		param_01.nocorpse = 1;
 		param_01.full_gib = 1;
 	}
@@ -621,8 +508,7 @@ run_stun_logic(param_00,param_01,param_02,param_03)
 	var_09 = max(1000,0.5 * param_02);
 	self radiusdamage(param_00,128,var_09,var_09,self,"MOD_GRENADE_SPLASH","iw7_harpoon2_zm_stun");
 	scripts\engine\utility::waitframe();
-	if(distance2dsquared(self.origin,param_00) <= 16384)
-	{
+	if(distance2dsquared(self.origin,param_00) <= 16384) {
 		playfxontagforclients(level._effect[var_08],self,"tag_eye",self);
 	}
 
@@ -630,30 +516,24 @@ run_stun_logic(param_00,param_01,param_02,param_03)
 	var_0A = scripts\cp\cp_agent_utils::getaliveagentsofteam("axis");
 	var_0B = 65536;
 	var_08 = "reload_zap_m";
-	foreach(var_0D in var_0A)
-	{
-		if(var_0D.agent_type == "slasher" || var_0D.agent_type == "superslasher")
-		{
+	foreach(var_0D in var_0A) {
+		if(var_0D.agent_type == "slasher" || var_0D.agent_type == "superslasher") {
 			continue;
 		}
 
-		if(distancesquared(var_0D.origin,param_00) < var_0B)
-		{
+		if(distancesquared(var_0D.origin,param_00) < var_0B) {
 			var_0E = var_0D gettagorigin("j_spineupper");
 			var_0D thread zap_over_time(1,self);
 			playfx(param_03,var_0D.origin);
 		}
 	}
 
-	if(isdefined(level.played_ben_franklin_effect))
-	{
+	if(isdefined(level.played_ben_franklin_effect)) {
 		level.played_ben_franklin_effect = undefined;
 	}
 }
 
-//Function Number: 32
-play_stun_fx(param_00,param_01,param_02,param_03,param_04)
-{
+play_stun_fx(param_00,param_01,param_02,param_03,param_04) {
 	var_05 = "reload_zap_m";
 	playsoundatpos(param_04,"perk_blue_bolts_sparks");
 	playfx(level._effect[var_05],param_04 + param_00);
@@ -666,14 +546,11 @@ play_stun_fx(param_00,param_01,param_02,param_03,param_04)
 	scripts\engine\utility::waitframe();
 }
 
-//Function Number: 33
-zap_over_time(param_00,param_01)
-{
+zap_over_time(param_00,param_01) {
 	self endon("death");
 	self.stunned = 1;
 	thread scripts\cp\zombies\zombie_scriptable_states::applyzombiescriptablestate(self);
-	while(param_00 > 0)
-	{
+	while(param_00 > 0) {
 		self.stun_hit_time = gettime() + 1500;
 		wait(0.1);
 		self dodamage(1,self.origin,param_01,param_01,"MOD_GRENADE_SPLASH","iw7_harpoon2_zm_stun");
@@ -684,23 +561,18 @@ zap_over_time(param_00,param_01)
 	self.stunned = undefined;
 }
 
-//Function Number: 34
-ben_franklin_harpoon_dud_explode(param_00)
-{
+ben_franklin_harpoon_dud_explode(param_00) {
 	self endon("disconnect");
 	self endon("death");
 	param_00 waittill("death");
-	if(isdefined(param_00.origin))
-	{
+	if(isdefined(param_00.origin)) {
 		thread ben_franklin_harpoon_activate(param_00.origin,undefined,500000000);
 	}
 
 	self notify("remove_this_function_since_you_missed_zomb");
 }
 
-//Function Number: 35
-ben_franklin_harpoon(param_00)
-{
+ben_franklin_harpoon(param_00) {
 	self endon("disconnect");
 	self endon("death");
 	level endon("game_ended");
@@ -709,47 +581,38 @@ ben_franklin_harpoon(param_00)
 	thread ben_franklin_harpoon_activate(var_01,var_02,var_03);
 }
 
-//Function Number: 36
-thundergun_harpoon_dud_explode(param_00)
-{
+thundergun_harpoon_dud_explode(param_00) {
 	self endon("disconnect");
 	self endon("death");
 	param_00 waittill("death");
 	var_01 = param_00.origin;
-	if(isdefined(param_00.origin))
-	{
+	if(isdefined(param_00.origin)) {
 		var_02 = scripts\cp\cp_agent_utils::getaliveagentsofteam("axis");
 		var_03 = 160000;
-		foreach(var_05 in var_02)
-		{
-			if(!isdefined(var_05))
-			{
+		foreach(var_05 in var_02) {
+			if(!isdefined(var_05)) {
 				continue;
 			}
 
-			if(!isdefined(var_05.agent_type))
-			{
+			if(!isdefined(var_05.agent_type)) {
 				continue;
 			}
 
-			if(distancesquared(var_05.origin,var_01) < var_03)
-			{
+			if(distancesquared(var_05.origin,var_01) < var_03) {
 				var_05.do_immediate_ragdoll = 1;
 				var_05.disable_armor = 1;
 				var_05.customdeath = 1;
 				playsoundatpos(var_05.origin,"perk_blue_bolts_sparks");
 				var_06 = anglestoforward(self.angles);
 				var_07 = vectornormalize(var_06) * -100;
-				if(isdefined(var_05.agent_type) && var_05.agent_type != "slasher" && var_05.agent_type != "superslasher")
-				{
+				if(isdefined(var_05.agent_type) && var_05.agent_type != "slasher" && var_05.agent_type != "superslasher") {
 					var_05 setvelocity(vectornormalize(var_05.origin - self.origin + var_07) * 800 + (200,0,200));
 				}
 
 				wait(0.2);
 				var_05.nocorpse = 1;
 				var_05.full_gib = 1;
-				if(isdefined(var_05.agent_type) && var_05.agent_type == "slasher" || var_05.agent_type == "superslasher")
-				{
+				if(isdefined(var_05.agent_type) && var_05.agent_type == "slasher" || var_05.agent_type == "superslasher") {
 					var_05 dodamage(var_05.health,var_05.origin,self,self,"MOD_UNKNOWN","iw7_harpoon4_zm");
 				}
 				else
@@ -763,13 +626,10 @@ thundergun_harpoon_dud_explode(param_00)
 	self notify("remove_this_function_since_you_missed_zomb");
 }
 
-//Function Number: 37
-fling_zombie_thundergun_harpoon(param_00,param_01,param_02,param_03)
-{
+fling_zombie_thundergun_harpoon(param_00,param_01,param_02,param_03) {
 	self endon("death");
 	param_03 endon("death");
-	if(!isdefined(param_03))
-	{
+	if(!isdefined(param_03)) {
 		return;
 	}
 
@@ -779,8 +639,7 @@ fling_zombie_thundergun_harpoon(param_00,param_01,param_02,param_03)
 	var_06 = vectornormalize(var_05) * -100;
 	self setvelocity(vectornormalize(self.origin - param_02.origin + var_06) * 800 + (200,0,200));
 	wait(0.16);
-	if(isdefined(param_02))
-	{
+	if(isdefined(param_02)) {
 		param_01.do_immediate_ragdoll = 1;
 		param_01.disable_armor = 1;
 		param_01.customdeath = 1;
@@ -796,9 +655,7 @@ fling_zombie_thundergun_harpoon(param_00,param_01,param_02,param_03)
 	self dodamage(self.health + 1000,param_01.origin,param_01,param_01,"MOD_UNKNOWN","iw7_harpoon4_zm");
 }
 
-//Function Number: 38
-thundergun_harpoon(param_00,param_01)
-{
+thundergun_harpoon(param_00,param_01) {
 	self endon("disconnect");
 	self endon("death");
 	level endon("game_ended");
@@ -807,24 +664,18 @@ thundergun_harpoon(param_00,param_01)
 	var_03 = scripts\cp\cp_agent_utils::getaliveagentsofteam("axis");
 	var_04 = self.angles;
 	var_05 = self geteye();
-	while(isdefined(param_01))
-	{
+	while(isdefined(param_01)) {
 		var_06 = scripts\engine\utility::get_array_of_closest(param_01.origin,var_03,undefined,24,var_02);
 		self.closestenemies = var_06;
 		var_07 = 0;
-		foreach(var_09 in self.closestenemies)
-		{
-			if(!isdefined(var_09.agent_type))
-			{
+		foreach(var_09 in self.closestenemies) {
+			if(!isdefined(var_09.agent_type)) {
 				continue;
 			}
 
-			if(isdefined(param_01))
-			{
-				if(distance2dsquared(param_01.origin,var_09.origin) < 16384)
-				{
-					if(isdefined(var_09.agent_type) && var_09.agent_type == "slasher" || var_09.agent_type == "superslasher")
-					{
+			if(isdefined(param_01)) {
+				if(distance2dsquared(param_01.origin,var_09.origin) < 16384) {
+					if(isdefined(var_09.agent_type) && var_09.agent_type == "slasher" || var_09.agent_type == "superslasher") {
 						var_09 dodamage(var_09.health,var_09.origin,self,self,"MOD_UNKNOWN","iw7_harpoon4_zm");
 					}
 					else
@@ -841,17 +692,14 @@ thundergun_harpoon(param_00,param_01)
 	}
 }
 
-//Function Number: 39
-alt_acid_rain_dud_explode(param_00)
-{
+alt_acid_rain_dud_explode(param_00) {
 	self endon("disconnect");
 	self endon("death");
 	var_01 = scripts\common\trace::create_contents(0,1,1,1,1,0,1);
 	var_02 = param_00.angles;
 	var_03 = param_00.origin;
 	param_00 waittill("death");
-	if(!isdefined(param_00.origin))
-	{
+	if(!isdefined(param_00.origin)) {
 		return;
 	}
 
@@ -865,46 +713,35 @@ alt_acid_rain_dud_explode(param_00)
 	var_06 thread delete_after_time(self,var_04);
 }
 
-//Function Number: 40
-delete_after_time(param_00,param_01)
-{
+delete_after_time(param_00,param_01) {
 	param_00 endon("death");
 	self endon("death");
-	while(gettime() <= param_01 + 3400)
-	{
+	while(gettime() <= param_01 + 3400) {
 		scripts\engine\utility::waitframe();
 	}
 
-	if(isdefined(level.played_acid_rain_effect))
-	{
+	if(isdefined(level.played_acid_rain_effect)) {
 		level.played_acid_rain_effect = undefined;
 	}
 
 	self delete();
 }
 
-//Function Number: 41
-deal_damage_to_enemies(param_00,param_01)
-{
+deal_damage_to_enemies(param_00,param_01) {
 	param_00 endon("death");
 	self endon("death");
-	while(gettime() <= param_01 + 3400)
-	{
+	while(gettime() <= param_01 + 3400) {
 		self waittill("trigger",var_02);
-		if(!isdefined(var_02))
-		{
+		if(!isdefined(var_02)) {
 			continue;
 		}
 
-		if(!var_02 scripts\cp\utility::is_zombie_agent())
-		{
+		if(!var_02 scripts\cp\utility::is_zombie_agent()) {
 			continue;
 		}
 
-		if(isdefined(param_00))
-		{
-			if(var_02.agent_type == "slasher" || var_02.agent_type == "superslasher")
-			{
+		if(isdefined(param_00)) {
+			if(var_02.agent_type == "slasher" || var_02.agent_type == "superslasher") {
 				var_02 dodamage(0.1 * var_02.maxhealth,var_02.origin,param_00,param_00,"MOD_RIFLE_BULLET","iw7_harpoon1_zm");
 			}
 			else
@@ -920,17 +757,12 @@ deal_damage_to_enemies(param_00,param_01)
 	}
 }
 
-//Function Number: 42
-waittill_missile_fire()
-{
+waittill_missile_fire() {
 	self waittill("missile_fire",var_00,var_01);
-	if(isdefined(var_00))
-	{
-		if(!isdefined(var_00.weapon_name))
-		{
+	if(isdefined(var_00)) {
+		if(!isdefined(var_00.weapon_name)) {
 			var_02 = getweaponbasename(var_01);
-			if(isdefined(var_02))
-			{
+			if(isdefined(var_02)) {
 				var_00.weapon_name = var_02;
 			}
 			else
@@ -939,13 +771,11 @@ waittill_missile_fire()
 			}
 		}
 
-		if(!isdefined(var_00.triggerportableradarping))
-		{
+		if(!isdefined(var_00.triggerportableradarping)) {
 			var_00.triggerportableradarping = self;
 		}
 
-		if(!isdefined(var_00.team))
-		{
+		if(!isdefined(var_00.team)) {
 			var_00.team = self.team;
 		}
 	}
@@ -953,9 +783,7 @@ waittill_missile_fire()
 	return var_00;
 }
 
-//Function Number: 43
-runharpoontraplogic(param_00,param_01)
-{
+runharpoontraplogic(param_00,param_01) {
 	param_00 endon("death");
 	param_00 waittill("missile_stuck",var_02);
 	var_03 = param_00.origin;
@@ -970,8 +798,7 @@ runharpoontraplogic(param_00,param_01)
 	wait(0.5);
 	param_00 setscriptablepartstate("arrow_effects","active");
 	level.harpoon_projectiles[level.harpoon_projectiles.size] = param_00;
-	if(level.harpoon_projectiles.size >= 6)
-	{
+	if(level.harpoon_projectiles.size >= 6) {
 		thread destroy_oldest_trap();
 	}
 
@@ -982,17 +809,13 @@ runharpoontraplogic(param_00,param_01)
 	param_00 thread timeout_trap(param_00,param_01);
 }
 
-//Function Number: 44
-destroy_oldest_trap()
-{
+destroy_oldest_trap() {
 	var_00 = level.harpoon_projectiles[0];
 	var_00 notify("early_death");
 	var_00 clean_up_trap_ent(var_00,var_00.origin);
 }
 
-//Function Number: 45
-timeout_trap(param_00,param_01)
-{
+timeout_trap(param_00,param_01) {
 	param_00 endon("death");
 	param_00 endon("early_death");
 	wait(9.95);
@@ -1001,11 +824,8 @@ timeout_trap(param_00,param_01)
 	param_00 clean_up_trap_ent(param_00,var_02);
 }
 
-//Function Number: 46
-clean_up_trap_ent(param_00,param_01)
-{
-	if(scripts\engine\utility::array_contains(level.harpoon_projectiles,param_00))
-	{
+clean_up_trap_ent(param_00,param_01) {
+	if(scripts\engine\utility::array_contains(level.harpoon_projectiles,param_00)) {
 		level.harpoon_projectiles = scripts\engine\utility::array_remove(level.harpoon_projectiles,param_00);
 	}
 
@@ -1017,31 +837,24 @@ clean_up_trap_ent(param_00,param_01)
 	param_00 delete();
 }
 
-//Function Number: 47
-connect_to_nearby_harpoon_projectiles(param_00,param_01)
-{
+connect_to_nearby_harpoon_projectiles(param_00,param_01) {
 	param_00 endon("death");
 	var_02 = scripts\common\trace::create_world_contents();
-	for(;;)
-	{
+	for(;;) {
 		var_03 = [];
 		var_04 = scripts\engine\utility::get_array_of_closest(param_00.origin,level.harpoon_projectiles,[param_00],2,128);
 		clean_up_links(param_00,var_04);
-		foreach(var_06 in var_04)
-		{
-			if(scripts\engine\utility::array_contains(param_00.linked_to_targets,var_06))
-			{
+		foreach(var_06 in var_04) {
+			if(scripts\engine\utility::array_contains(param_00.linked_to_targets,var_06)) {
 				continue;
 			}
 
-			if(scripts\engine\utility::array_contains(var_06.linked_to_targets,param_00))
-			{
+			if(scripts\engine\utility::array_contains(var_06.linked_to_targets,param_00)) {
 				continue;
 			}
 
 			var_07 = scripts\common\trace::ray_trace(param_00 gettagorigin("TAG_FX"),var_06 gettagorigin("TAG_FX"),param_00,var_02);
-			if(var_07["fraction"] < 0.95)
-			{
+			if(var_07["fraction"] < 0.95) {
 				continue;
 			}
 			else
@@ -1051,8 +864,7 @@ connect_to_nearby_harpoon_projectiles(param_00,param_01)
 			}
 		}
 
-		foreach(var_0A in var_03)
-		{
+		foreach(var_0A in var_03) {
 			param_00.linked_fx[var_0A.var_64] = var_0A;
 			var_0B = distance(param_00.origin,var_0A.origin);
 			var_0C = spawn("trigger_rotatable_radius",param_00 gettagorigin("TAG_FX"),0,3,var_0B);
@@ -1067,16 +879,12 @@ connect_to_nearby_harpoon_projectiles(param_00,param_01)
 	}
 }
 
-//Function Number: 48
-play_vfx_between_points_trap_gun(param_00,param_01,param_02)
-{
+play_vfx_between_points_trap_gun(param_00,param_01,param_02) {
 	var_03 = function_02DF(level._effect["trap_ww_beam"],param_00,"tag_fx",param_01,"tag_fx");
 	thread kill_fx_on_death(param_00,param_01,param_02,var_03);
 }
 
-//Function Number: 49
-kill_fx_on_death(param_00,param_01,param_02,param_03)
-{
+kill_fx_on_death(param_00,param_01,param_02,param_03) {
 	level endon("game_ended");
 	var_04 = param_00.origin;
 	var_05 = param_00 gettagorigin("TAG_FX");
@@ -1084,26 +892,21 @@ kill_fx_on_death(param_00,param_01,param_02,param_03)
 	var_07 = max(param_01.death_time - gettime() / 1000,0);
 	var_08 = max(param_00.death_time - gettime() / 1000 - var_07 - 0.2,0);
 	thread play_sfx_on_harpoon_trap(param_00,param_01,param_02);
-	if(var_07 > 0 && isdefined(param_00) && isdefined(param_01))
-	{
+	if(var_07 > 0 && isdefined(param_00) && isdefined(param_01)) {
 		scripts\cp\utility::waittill_any_ents_or_timeout_return(var_07,param_00,"death",param_01,"death",param_02,"death");
 	}
-	else if(isdefined(param_00) && isdefined(param_01))
-	{
+	else if(isdefined(param_00) && isdefined(param_01)) {
 		scripts\engine\utility::waittill_any_ents(param_00,"death",param_01,"death",param_02,"death");
 	}
 
-	if(isdefined(param_03))
-	{
+	if(isdefined(param_03)) {
 		param_03 delete();
 	}
 
 	function_02E0(level._effect["trap_ww_beam_death"],var_05,vectortoangles(var_06 - var_05),var_06);
 }
 
-//Function Number: 50
-play_sfx_on_harpoon_trap(param_00,param_01,param_02)
-{
+play_sfx_on_harpoon_trap(param_00,param_01,param_02) {
 	var_03 = param_00.origin;
 	var_04 = param_01 gettagorigin("TAG_FX");
 	var_05 = [];
@@ -1115,12 +918,10 @@ play_sfx_on_harpoon_trap(param_00,param_01,param_02)
 	var_08 = spawn("script_origin",var_07);
 	wait(0.05);
 	var_08 playloopsound("weap_harpoon3_trap_lp");
-	if(var_06 > 0 && isdefined(param_00) && isdefined(param_01))
-	{
+	if(var_06 > 0 && isdefined(param_00) && isdefined(param_01)) {
 		scripts\cp\utility::waittill_any_ents_or_timeout_return(var_06,param_00,"death",param_01,"death",param_02,"death");
 	}
-	else if(isdefined(param_00) && isdefined(param_01))
-	{
+	else if(isdefined(param_00) && isdefined(param_01)) {
 		scripts\engine\utility::waittill_any_ents(param_00,"death",param_01,"death",param_02,"death");
 	}
 
@@ -1130,25 +931,19 @@ play_sfx_on_harpoon_trap(param_00,param_01,param_02)
 	var_08 delete();
 }
 
-//Function Number: 51
-damage_enemies_in_trigger(param_00,param_01,param_02,param_03)
-{
+damage_enemies_in_trigger(param_00,param_01,param_02,param_03) {
 	self endon("death");
 	param_02 endon("death");
 	param_00 endon("death");
 	param_01 endon("death");
-	for(;;)
-	{
+	for(;;) {
 		param_02 waittill("trigger",var_04);
-		if(!var_04 scripts\cp\utility::is_zombie_agent())
-		{
+		if(!var_04 scripts\cp\utility::is_zombie_agent()) {
 			continue;
 		}
 
-		if(var_04.agent_type == "slasher" || var_04.agent_type == "superslasher")
-		{
-			if(scripts\engine\utility::istrue(var_04.got_hit_once))
-			{
+		if(var_04.agent_type == "slasher" || var_04.agent_type == "superslasher") {
+			if(scripts\engine\utility::istrue(var_04.got_hit_once)) {
 				continue;
 			}
 			else
@@ -1161,14 +956,11 @@ damage_enemies_in_trigger(param_00,param_01,param_02,param_03)
 	}
 }
 
-//Function Number: 52
-do_damage_on_slasher_once(param_00,param_01)
-{
+do_damage_on_slasher_once(param_00,param_01) {
 	param_00 endon("death");
 	level endon("game_ended");
 	param_00.got_hit_once = 1;
-	if(param_00.agent_type == "superslasher")
-	{
+	if(param_00.agent_type == "superslasher") {
 		wait(5);
 	}
 	else
@@ -1179,13 +971,10 @@ do_damage_on_slasher_once(param_00,param_01)
 	param_00.got_hit_once = undefined;
 }
 
-//Function Number: 53
-run_harpoon_laser_death(param_00,param_01)
-{
+run_harpoon_laser_death(param_00,param_01) {
 	param_00.atomize_me = 1;
 	param_00.not_killed_by_headshot = 1;
-	if(isdefined(param_01))
-	{
+	if(isdefined(param_01)) {
 		param_00 dodamage(param_00.health,param_00.origin,param_01,param_01,"MOD_UNKNOWN","iw7_harpoon3_zm");
 		return;
 	}
@@ -1193,48 +982,36 @@ run_harpoon_laser_death(param_00,param_01)
 	param_00 dodamage(param_00.health,param_00.origin,undefined,undefined,"MOD_UNKNOWN","iw7_harpoon3_zm");
 }
 
-//Function Number: 54
-clean_up_trigger_on_death(param_00,param_01,param_02)
-{
+clean_up_trigger_on_death(param_00,param_01,param_02) {
 	level endon("game_ended");
 	scripts\engine\utility::waittill_any_ents(param_00,"death",param_01,"death");
-	if(isdefined(param_02))
-	{
+	if(isdefined(param_02)) {
 		param_02 delete();
 	}
 }
 
-//Function Number: 55
-clean_up_links(param_00,param_01)
-{
+clean_up_links(param_00,param_01) {
 	param_00.linked_to_targets = scripts\engine\utility::array_removeundefined(param_00.linked_to_targets);
-	foreach(var_03 in param_00.linked_to_targets)
-	{
-		if(isdefined(param_00.linked_fx[var_03.var_64]))
-		{
+	foreach(var_03 in param_00.linked_to_targets) {
+		if(isdefined(param_00.linked_fx[var_03.var_64])) {
 			param_00.linked_fx[var_03.var_64] = undefined;
 		}
 
-		if(!scripts\engine\utility::array_contains(param_01,var_03) && scripts\engine\utility::array_contains(param_00.linked_to_targets,var_03))
-		{
+		if(!scripts\engine\utility::array_contains(param_01,var_03) && scripts\engine\utility::array_contains(param_00.linked_to_targets,var_03)) {
 			param_00.linked_to_targets = scripts\engine\utility::array_remove(param_00.linked_to_targets,var_03);
 		}
 	}
 }
 
-//Function Number: 56
-onplayerspawned()
-{
+onplayerspawned() {
 	self endon("disconnect");
-	for(;;)
-	{
+	for(;;) {
 		self waittill("spawned_player");
 		self.currentweaponatspawn = self getcurrentweapon();
 		self.empendtime = 0;
 		self.concussionendtime = 0;
 		self.hits = 0;
-		if(!isdefined(self.trackingweapon))
-		{
+		if(!isdefined(self.trackingweapon)) {
 			self.trackingweapon = "";
 			self.trackingweapon = "none";
 			self.trackingweaponshots = 0;
@@ -1258,40 +1035,29 @@ onplayerspawned()
 	}
 }
 
-//Function Number: 57
-monitorlauncherspawnedgrenades()
-{
+monitorlauncherspawnedgrenades() {
 	self endon("disconnect");
 	self endon("death");
 	self endon("faux_spawn");
-	for(;;)
-	{
+	for(;;) {
 		var_00 = waittill_grenade_fire();
-		if(isdefined(var_00.weapon_name))
-		{
-			if(glprox_trygetweaponname(var_00.weapon_name) == "stickglprox")
-			{
+		if(isdefined(var_00.weapon_name)) {
+			if(glprox_trygetweaponname(var_00.weapon_name) == "stickglprox") {
 				semtexused(var_00);
 			}
 
-			if(issubstr(var_00.weapon_name,"iw7_venomx_zm"))
-			{
-				if(isdefined(level.venom_x_weapon_logic_thread))
-				{
-					level thread [[ level.venom_x_weapon_logic_thread ]](var_00);
+			if(issubstr(var_00.weapon_name,"iw7_venomx_zm")) {
+				if(isdefined(level.venom_x_weapon_logic_thread)) {
+					level thread [[level.venom_x_weapon_logic_thread]](var_00);
 				}
 			}
 		}
 	}
 }
 
-//Function Number: 58
-glprox_trygetweaponname(param_00)
-{
-	if(param_00 != "none" && getweaponbasename(param_00) == "iw7_glprox_mp")
-	{
-		if(scripts\cp\utility::isaltmodeweapon(param_00))
-		{
+glprox_trygetweaponname(param_00) {
+	if(param_00 != "none" && getweaponbasename(param_00) == "iw7_glprox_mp") {
+		if(scripts\cp\utility::isaltmodeweapon(param_00)) {
 			var_01 = function_00E3(param_00);
 			param_00 = var_01[0];
 		}
@@ -1304,21 +1070,17 @@ glprox_trygetweaponname(param_00)
 	return param_00;
 }
 
-//Function Number: 59
-stancerecoiladjuster()
-{
+stancerecoiladjuster() {
 	self endon("death");
 	self endon("disconnect");
 	self endon("faux_spawn");
-	if(!isplayer(self))
-	{
+	if(!isplayer(self)) {
 		return;
 	}
 
 	self notifyonplayercommand("adjustedStance","+stance");
 	self notifyonplayercommand("adjustedStance","+goStand");
-	if(!level.console && !isai(self))
-	{
+	if(!level.console && !isai(self)) {
 		self notifyonplayercommand("adjustedStance","+togglecrouch");
 		self notifyonplayercommand("adjustedStance","toggleprone");
 		self notifyonplayercommand("adjustedStance","+movedown");
@@ -1327,12 +1089,10 @@ stancerecoiladjuster()
 		self notifyonplayercommand("adjustedStance","-prone");
 	}
 
-	for(;;)
-	{
+	for(;;) {
 		scripts\engine\utility::waittill_any_3("adjustedStance","sprint_begin","weapon_change");
 		wait(0.5);
-		if(isdefined(self.onhelisniper) && self.onhelisniper)
-		{
+		if(isdefined(self.onhelisniper) && self.onhelisniper) {
 			continue;
 		}
 
@@ -1341,31 +1101,23 @@ stancerecoiladjuster()
 	}
 }
 
-//Function Number: 60
-stancerecoilupdate(param_00)
-{
+stancerecoilupdate(param_00) {
 	var_01 = self getcurrentprimaryweapon();
 	var_02 = 0;
-	if(isrecoilreducingweapon(var_01))
-	{
+	if(isrecoilreducingweapon(var_01)) {
 		var_02 = getrecoilreductionvalue();
 	}
 
-	if(param_00 == "prone")
-	{
+	if(param_00 == "prone") {
 		var_03 = scripts\cp\utility::coop_getweaponclass(var_01);
-		if(isdefined(var_03))
-		{
-			if(var_03 == "weapon_lmg")
-			{
+		if(isdefined(var_03)) {
+			if(var_03 == "weapon_lmg") {
 				setrecoilscale(0,40);
 				return;
 			}
 
-			if(var_03 == "weapon_sniper")
-			{
-				if(issubstr(var_01,"barrelbored"))
-				{
+			if(var_03 == "weapon_sniper") {
+				if(issubstr(var_01,"barrelbored")) {
 					setrecoilscale(0,20 + var_02);
 					return;
 				}
@@ -1381,21 +1133,16 @@ stancerecoilupdate(param_00)
 		return;
 	}
 
-	if(param_00 == "crouch")
-	{
+	if(param_00 == "crouch") {
 		var_03 = scripts\cp\utility::coop_getweaponclass(var_01);
-		if(isdefined(var_03))
-		{
-			if(var_03 == "weapon_lmg")
-			{
+		if(isdefined(var_03)) {
+			if(var_03 == "weapon_lmg") {
 				setrecoilscale(0,10);
 				return;
 			}
 
-			if(var_03 == "weapon_sniper")
-			{
-				if(issubstr(var_01,"barrelbored"))
-				{
+			if(var_03 == "weapon_sniper") {
+				if(issubstr(var_01,"barrelbored")) {
 					setrecoilscale(0,10 + var_02);
 					return;
 				}
@@ -1411,8 +1158,7 @@ stancerecoilupdate(param_00)
 		return;
 	}
 
-	if(var_02 > 0)
-	{
+	if(var_02 > 0) {
 		setrecoilscale(0,var_02);
 		return;
 	}
@@ -1420,16 +1166,12 @@ stancerecoilupdate(param_00)
 	setrecoilscale();
 }
 
-//Function Number: 61
-setrecoilscale(param_00,param_01)
-{
-	if(!isdefined(param_00))
-	{
+setrecoilscale(param_00,param_01) {
+	if(!isdefined(param_00)) {
 		param_00 = 0;
 	}
 
-	if(!isdefined(self.recoilscale))
-	{
+	if(!isdefined(self.recoilscale)) {
 		self.recoilscale = param_00;
 	}
 	else
@@ -1437,10 +1179,8 @@ setrecoilscale(param_00,param_01)
 		self.recoilscale = self.recoilscale + param_00;
 	}
 
-	if(isdefined(param_01))
-	{
-		if(isdefined(self.recoilscale) && param_01 < self.recoilscale)
-		{
+	if(isdefined(param_01)) {
+		if(isdefined(self.recoilscale) && param_01 < self.recoilscale) {
 			param_01 = self.recoilscale;
 		}
 
@@ -1451,18 +1191,15 @@ setrecoilscale(param_00,param_01)
 		var_02 = 100 - self.recoilscale;
 	}
 
-	if(var_02 < 0)
-	{
+	if(var_02 < 0) {
 		var_02 = 0;
 	}
 
-	if(var_02 > 100)
-	{
+	if(var_02 > 100) {
 		var_02 = 100;
 	}
 
-	if(var_02 == 100)
-	{
+	if(var_02 == 100) {
 		self player_recoilscaleoff();
 		return;
 	}
@@ -1470,43 +1207,33 @@ setrecoilscale(param_00,param_01)
 	self player_recoilscaleon(var_02);
 }
 
-//Function Number: 62
-isrecoilreducingweapon(param_00)
-{
-	if(!isdefined(param_00) || param_00 == "none")
-	{
+isrecoilreducingweapon(param_00) {
+	if(!isdefined(param_00) || param_00 == "none") {
 		return 0;
 	}
 
 	var_01 = 0;
-	if(issubstr(param_00,"kbsscope") || issubstr(param_00,"m8scope_zm") || issubstr(param_00,"cheytacscope"))
-	{
+	if(issubstr(param_00,"kbsscope") || issubstr(param_00,"m8scope_zm") || issubstr(param_00,"cheytacscope")) {
 		var_01 = 1;
 	}
 
 	return var_01;
 }
 
-//Function Number: 63
-getrecoilreductionvalue()
-{
-	if(!isdefined(self.pers["recoilReduceKills"]))
-	{
+getrecoilreductionvalue() {
+	if(!isdefined(self.pers["recoilReduceKills"])) {
 		self.pers["recoilReduceKills"] = 0;
 	}
 
 	return self.pers["recoilReduceKills"] * 40;
 }
 
-//Function Number: 64
-watch_slasher_killed()
-{
+watch_slasher_killed() {
 	self endon("death");
 	self endon("disconnect");
 	self endon("faux_spawn");
 	self endon("achievement_done");
-	for(;;)
-	{
+	for(;;) {
 		self waittill("slasher_killed_by_own_weapon",var_00,var_01);
 		level thread slasher_killed_vo(var_00);
 		scripts/cp/zombies/achievement::update_achievement("TABLES_TURNED",1);
@@ -1514,14 +1241,11 @@ watch_slasher_killed()
 	}
 }
 
-//Function Number: 65
-slasher_killed_vo(param_00)
-{
+slasher_killed_vo(param_00) {
 	level endon("game_ended");
 	param_00 endon("death");
 	param_00 endon("disconnect");
-	if(param_00.vo_prefix == "p5_")
-	{
+	if(param_00.vo_prefix == "p5_") {
 		level thread scripts\cp\cp_vo::try_to_play_vo("ww_slasher_death_p5","rave_announcer_vo","highest",5,0,0,1);
 	}
 
@@ -1529,33 +1253,26 @@ slasher_killed_vo(param_00)
 	param_00 thread scripts\cp\cp_vo::try_to_play_vo("killfirm_slasher","zmb_comment_vo","highest",20,0,0,1);
 }
 
-//Function Number: 66
-watchforweaponchange()
-{
+watchforweaponchange() {
 	self endon("death");
 	self endon("disconnect");
 	self endon("faux_spawn");
-	for(;;)
-	{
+	for(;;) {
 		self waittill("weapon_change",var_00);
-		if(var_00 == "none")
-		{
+		if(var_00 == "none") {
 			continue;
 		}
 
 		var_01 = getweaponbasename(var_00);
-		if(isvalidweapon(var_00))
-		{
+		if(isvalidweapon(var_00)) {
 			self.last_valid_weapon = var_00;
 		}
 
-		switch(var_01)
-		{
+		switch(var_01) {
 			case "iw7_axe_zm_pap2":
 			case "iw7_axe_zm_pap1":
 			case "iw7_axe_zm":
-				if(get_weapon_level(var_00) > 1)
-				{
+				if(get_weapon_level(var_00) > 1) {
 				}
 				else
 				{
@@ -1568,71 +1285,57 @@ watchforweaponchange()
 	}
 }
 
-//Function Number: 67
-isvalidweapon(param_00)
-{
+isvalidweapon(param_00) {
 	var_01 = level.additional_laststand_weapon_exclusion;
-	if(param_00 == "none")
-	{
+	if(param_00 == "none") {
 		return 0;
 	}
 
-	if(scripts\engine\utility::array_contains(var_01,param_00))
-	{
+	if(scripts\engine\utility::array_contains(var_01,param_00)) {
 		return 0;
 	}
 
-	if(scripts\engine\utility::array_contains(var_01,getweaponbasename(param_00)))
-	{
+	if(scripts\engine\utility::array_contains(var_01,getweaponbasename(param_00))) {
 		return 0;
 	}
 
-	if(scripts\cp\utility::is_melee_weapon(param_00,1))
-	{
+	if(scripts\cp\utility::is_melee_weapon(param_00,1)) {
 		return 0;
 	}
 
 	return 1;
 }
 
-//Function Number: 68
-updatesavedlastweapon()
-{
+updatesavedlastweapon() {
 	self endon("death");
 	self endon("disconnect");
 	self endon("faux_spawn");
 	var_00 = self.currentweaponatspawn;
-	if(isdefined(self.saved_lastweaponhack))
-	{
+	if(isdefined(self.saved_lastweaponhack)) {
 		var_00 = self.saved_lastweaponhack;
 	}
 
 	self.saved_lastweapon = var_00;
-	for(;;)
-	{
+	for(;;) {
 		self waittill("weapon_change",var_01);
-		if(var_01 == "none")
-		{
+		if(var_01 == "none") {
 			self.saved_lastweapon = var_00;
 			continue;
 		}
 
 		var_02 = function_0244(var_01);
-		if(var_02 != "primary" && var_02 != "altmode")
-		{
+		if(var_02 != "primary" && var_02 != "altmode") {
 			self.saved_lastweapon = var_00;
 			continue;
 		}
 
-		self [[ level.move_speed_scale ]]();
+		self [[level.move_speed_scale]]();
 		self.saved_lastweapon = var_00;
 		var_00 = var_01;
 	}
 }
 
-//Function Number: 69
-watchgrenadeusage()
-{
+watchgrenadeusage() {
 	self notify("watchGrenadeUsage");
 	self endon("watchGrenadeUsage");
 	self endon("spawned_player");
@@ -1640,30 +1343,25 @@ watchgrenadeusage()
 	self endon("faux_spawn");
 	self.throwinggrenade = undefined;
 	self.gotpullbacknotify = 0;
-	if(!isdefined(self.plantedlethalequip))
-	{
+	if(!isdefined(self.plantedlethalequip)) {
 		self.plantedlethalequip = [];
 		self.plantedtacticalequip = [];
 	}
 
-	for(;;)
-	{
+	for(;;) {
 		self waittill("grenade_pullback",var_00);
 		var_01 = self _meth_8556();
-		if(var_01 != "none")
-		{
+		if(var_01 != "none") {
 			continue;
 		}
 
-		if(isdefined(level.custom_grenade_pullback_func))
-		{
-			thread [[ level.custom_grenade_pullback_func ]](self,var_00);
+		if(isdefined(level.custom_grenade_pullback_func)) {
+			thread [[level.custom_grenade_pullback_func]](self,var_00);
 		}
 
 		thread watchoffhandcancel();
 		self.throwinggrenade = var_00;
-		if(var_00 == "c4_zm")
-		{
+		if(var_00 == "c4_zm") {
 			thread beginc4tracking();
 		}
 
@@ -1672,23 +1370,18 @@ watchgrenadeusage()
 	}
 }
 
-//Function Number: 70
-watchoffhandcancel()
-{
+watchoffhandcancel() {
 	self endon("death");
 	self endon("disconnect");
 	self endon("faux_spawn");
 	self endon("grenade_fire");
 	self waittill("offhand_end");
-	if(isdefined(self.changingweapon) && self.changingweapon != self getcurrentweapon())
-	{
+	if(isdefined(self.changingweapon) && self.changingweapon != self getcurrentweapon()) {
 		self.changingweapon = undefined;
 	}
 }
 
-//Function Number: 71
-beginc4tracking()
-{
+beginc4tracking() {
 	self notify("beginC4Tracking");
 	self endon("beginC4Tracking");
 	self endon("death");
@@ -1697,30 +1390,24 @@ beginc4tracking()
 	self.changingweapon = undefined;
 }
 
-//Function Number: 72
-begingrenadetracking()
-{
+begingrenadetracking() {
 	self endon("offhand_end");
 	var_00 = gettime();
 	var_01 = waittill_grenade_fire();
-	if(!isdefined(var_01))
-	{
+	if(!isdefined(var_01)) {
 		return;
 	}
 
-	if(!isdefined(var_01.weapon_name))
-	{
+	if(!isdefined(var_01.weapon_name)) {
 		return;
 	}
 
 	self.changingweapon = undefined;
-	switch(var_01.weapon_name)
-	{
+	switch(var_01.weapon_name) {
 		case "thermobaric_grenade_mp":
 		case "frag_grenade_mp":
 		case "frag_grenade_zm":
-			if(gettime() - var_00 > 1000)
-			{
+			if(gettime() - var_00 > 1000) {
 				var_01.iscooked = 1;
 			}
 	
@@ -1730,8 +1417,7 @@ begingrenadetracking()
 
 		case "cluster_grenade_zm":
 			var_01.clusterticks = var_01.ticks;
-			if(var_01.ticks >= 1)
-			{
+			if(var_01.ticks >= 1) {
 				var_01.iscooked = 1;
 			}
 	
@@ -1820,9 +1506,7 @@ begingrenadetracking()
 	}
 }
 
-//Function Number: 73
-rat_executevisuals(param_00)
-{
+rat_executevisuals(param_00) {
 	level endon("game_ended");
 	self endon("disconnect");
 	self playlocalsound("eye_pulse_plr_lr");
@@ -1831,9 +1515,7 @@ rat_executevisuals(param_00)
 	self setscriptablepartstate("rat_eye_pulse","inactive");
 }
 
-//Function Number: 74
-handleratvisionburst(param_00)
-{
+handleratvisionburst(param_00) {
 	level endon("game_ended");
 	param_00 endon("disconnect");
 	param_00 endon("last_stand");
@@ -1841,56 +1523,42 @@ handleratvisionburst(param_00)
 	param_00 thread rat_executevisuals(2.4);
 }
 
-//Function Number: 75
-isinvalidzone(param_00,param_01,param_02,param_03,param_04,param_05)
-{
+isinvalidzone(param_00,param_01,param_02,param_03,param_04,param_05) {
 	var_06 = getentarray("power_exclusion_volume","targetname");
-	if(isdefined(param_05))
-	{
-		if(isdefined(level.neil) && isdefined(level.neil.upper_body))
-		{
-			if(param_05 == level.neil || param_05 == level.neil.upper_body)
-			{
+	if(isdefined(param_05)) {
+		if(isdefined(level.neil) && isdefined(level.neil.upper_body)) {
+			if(param_05 == level.neil || param_05 == level.neil.upper_body) {
 				return 0;
 			}
 		}
 
-		if(isdefined(level.boat_vehicle))
-		{
-			if(param_05 == level.boat_vehicle)
-			{
+		if(isdefined(level.boat_vehicle)) {
+			if(param_05 == level.boat_vehicle) {
 				return 0;
 			}
 		}
 
-		if(isdefined(param_05.var_336) && param_05.var_336 == "beginning_area_balloons")
-		{
+		if(isdefined(param_05.var_336) && param_05.var_336 == "beginning_area_balloons") {
 			return 0;
 		}
 	}
 
-	if(isdefined(param_01))
-	{
+	if(isdefined(param_01)) {
 		var_06 = scripts\engine\utility::array_combine(var_06,param_01);
 	}
 
-	foreach(var_08 in var_06)
-	{
-		if(function_010F(param_00,var_08))
-		{
+	foreach(var_08 in var_06) {
+		if(function_010F(param_00,var_08)) {
 			return 0;
 		}
 	}
 
-	if(scripts\engine\utility::istrue(param_04) && !ispointonnavmesh(param_00))
-	{
+	if(scripts\engine\utility::istrue(param_04) && !ispointonnavmesh(param_00)) {
 		return 0;
 	}
 
-	if(scripts\engine\utility::istrue(param_03))
-	{
-		if(navtrace(param_02.origin,param_00))
-		{
+	if(scripts\engine\utility::istrue(param_03)) {
+		if(navtrace(param_02.origin,param_00)) {
 			return 0;
 		}
 	}
@@ -1898,22 +1566,16 @@ isinvalidzone(param_00,param_01,param_02,param_03,param_04,param_05)
 	return 1;
 }
 
-//Function Number: 76
-placeequipmentfailed(param_00,param_01,param_02,param_03)
-{
-	if(isplayer(self))
-	{
+placeequipmentfailed(param_00,param_01,param_02,param_03) {
+	if(isplayer(self)) {
 		self playlocalsound("scavenger_pack_pickup");
 	}
 
-	if(scripts\engine\utility::istrue(param_01))
-	{
+	if(scripts\engine\utility::istrue(param_01)) {
 		var_04 = undefined;
-		if(isplayer(self))
-		{
+		if(isplayer(self)) {
 			self playlocalsound("ww_magicbox_laughter");
-			if(isdefined(param_03))
-			{
+			if(isdefined(param_03)) {
 				var_04 = function_01E1(scripts\engine\utility::getfx("placeEquipmentFailed"),param_02,self,anglestoforward(param_03),anglestoup(param_03));
 			}
 			else
@@ -1931,18 +1593,13 @@ placeequipmentfailed(param_00,param_01,param_02,param_03)
 	}
 }
 
-//Function Number: 77
-placeequipmentfailedcleanup(param_00)
-{
+placeequipmentfailedcleanup(param_00) {
 	wait(2);
 	param_00 delete();
 }
 
-//Function Number: 78
-spawnmine(param_00,param_01,param_02,param_03)
-{
-	if(!isdefined(param_03))
-	{
+spawnmine(param_00,param_01,param_02,param_03) {
+	if(!isdefined(param_03)) {
 		param_03 = (0,randomfloat(360),0);
 	}
 
@@ -1958,14 +1615,12 @@ spawnmine(param_00,param_01,param_02,param_03)
 	var_05.killcament = spawn("script_model",var_05.origin + var_05.killcamoffset);
 	var_05.killcament setscriptmoverkillcam("explosive");
 	param_01 onlethalequipmentplanted(var_05);
-	if(isdefined(var_04.mine_beacon))
-	{
+	if(isdefined(var_04.mine_beacon)) {
 		var_05 thread doblinkinglight("tag_fx",var_04.mine_beacon["friendly"],var_04.mine_beacon["enemy"]);
 	}
 
 	var_06 = undefined;
-	if(self != level)
-	{
+	if(self != level) {
 		var_06 = self getlinkedparent();
 	}
 
@@ -1978,9 +1633,7 @@ spawnmine(param_00,param_01,param_02,param_03)
 	return var_05;
 }
 
-//Function Number: 79
-mineselfdestruct()
-{
+mineselfdestruct() {
 	self endon("mine_triggered");
 	self endon("mine_destroyed");
 	self endon("death");
@@ -1989,50 +1642,41 @@ mineselfdestruct()
 	self notify("detonateExplosive");
 }
 
-//Function Number: 80
-mineexplodeonnotify()
-{
+mineexplodeonnotify() {
 	self endon("death");
 	level endon("game_ended");
 	self waittill("detonateExplosive",var_00);
-	if(!isdefined(self) || !isdefined(self.triggerportableradarping))
-	{
+	if(!isdefined(self) || !isdefined(self.triggerportableradarping)) {
 		return;
 	}
 
-	if(!isdefined(var_00))
-	{
+	if(!isdefined(var_00)) {
 		var_00 = self.triggerportableradarping;
 	}
 
 	var_01 = self.config;
 	var_02 = var_01.vfxtag;
-	if(!isdefined(var_02))
-	{
+	if(!isdefined(var_02)) {
 		var_02 = "tag_fx";
 	}
 
 	var_03 = self gettagorigin(var_02);
-	if(!isdefined(var_03))
-	{
+	if(!isdefined(var_03)) {
 		var_03 = self gettagorigin("tag_origin");
 	}
 
 	self notify("explode",var_03);
 	wait(0.05);
-	if(!isdefined(self) || !isdefined(self.triggerportableradarping))
-	{
+	if(!isdefined(self) || !isdefined(self.triggerportableradarping)) {
 		return;
 	}
 
 	self hide();
-	if(isdefined(var_01.onexplodefunc))
-	{
-		self thread [[ var_01.onexplodefunc ]]();
+	if(isdefined(var_01.onexplodefunc)) {
+		self thread [[var_01.onexplodefunc]]();
 	}
 
-	if(isdefined(var_01.onexplodesfx))
-	{
+	if(isdefined(var_01.onexplodesfx)) {
 		self playsound(var_01.onexplodesfx);
 	}
 
@@ -2045,17 +1689,14 @@ mineexplodeonnotify()
 	deleteexplosive();
 }
 
-//Function Number: 81
-mineproximitytrigger(param_00)
-{
+mineproximitytrigger(param_00) {
 	self endon("mine_destroyed");
 	self endon("mine_selfdestruct");
 	self endon("death");
 	self endon("disabled");
 	var_01 = self.config;
 	wait(var_01.armtime);
-	if(isdefined(var_01.mine_beacon))
-	{
+	if(isdefined(var_01.mine_beacon)) {
 		thread doblinkinglight("tag_fx",var_01.mine_beacon["friendly"],var_01.mine_beacon["enemy"]);
 	}
 
@@ -2063,24 +1704,20 @@ mineproximitytrigger(param_00)
 	var_02.triggerportableradarping = self;
 	var_02.team = var_02.triggerportableradarping.team;
 	thread minedeletetrigger(var_02);
-	if(isdefined(param_00))
-	{
+	if(isdefined(param_00)) {
 		var_02 enablelinkto();
 		var_02 linkto(param_00);
 	}
 
 	self.damagearea = var_02;
-	for(;;)
-	{
+	for(;;) {
 		var_02 waittill("trigger",var_03);
-		if(isplayer(var_03))
-		{
+		if(isplayer(var_03)) {
 			wait(0.05);
 			continue;
 		}
 
-		if(var_03 damageconetrace(self.origin,self) > 0)
-		{
+		if(var_03 damageconetrace(self.origin,self) > 0) {
 			break;
 		}
 	}
@@ -2088,29 +1725,22 @@ mineproximitytrigger(param_00)
 	self notify("mine_triggered");
 	self playsound(self.config.ontriggeredsfx);
 	explosivetrigger(var_03,level.minedetectiongraceperiod,"mine");
-	self thread [[ self.config.ontriggeredfunc ]]();
+	self thread [[self.config.ontriggeredfunc]]();
 }
 
-//Function Number: 82
-minedeletetrigger(param_00)
-{
+minedeletetrigger(param_00) {
 	scripts\engine\utility::waittill_any_3("mine_triggered","mine_destroyed","mine_selfdestruct","death");
-	if(isdefined(param_00))
-	{
+	if(isdefined(param_00)) {
 		param_00 delete();
 	}
 }
 
-//Function Number: 83
-doblinkinglight(param_00,param_01,param_02)
-{
-	if(!isdefined(param_01))
-	{
+doblinkinglight(param_00,param_01,param_02) {
+	if(!isdefined(param_01)) {
 		param_01 = scripts\engine\utility::getfx("weap_blink_friend");
 	}
 
-	if(!isdefined(param_02))
-	{
+	if(!isdefined(param_02)) {
 		param_02 = scripts\engine\utility::getfx("weap_blink_enemy");
 	}
 
@@ -2122,27 +1752,21 @@ doblinkinglight(param_00,param_01,param_02)
 	stopblinkinglight();
 }
 
-//Function Number: 84
-updateblinkinglight(param_00,param_01,param_02)
-{
+updateblinkinglight(param_00,param_01,param_02) {
 	self endon("death");
 	self endon("carried");
 	self endon("emp_damage");
 	var_03 = ::checkteam;
-	if(!level.teambased)
-	{
+	if(!level.teambased) {
 		var_03 = ::checkplayer;
 	}
 
 	var_04 = randomfloatrange(0.05,0.25);
 	wait(var_04);
 	childthread onjointeamblinkinglight(param_00,param_01,param_02,var_03);
-	foreach(var_06 in level.players)
-	{
-		if(isdefined(var_06))
-		{
-			if(self.triggerportableradarping [[ var_03 ]](var_06))
-			{
+	foreach(var_06 in level.players) {
+		if(isdefined(var_06)) {
+			if(self.triggerportableradarping [[var_03]](var_06)) {
 				playfxontagforclients(param_00,self,param_02,var_06);
 			}
 			else
@@ -2155,29 +1779,21 @@ updateblinkinglight(param_00,param_01,param_02)
 	}
 }
 
-//Function Number: 85
-checkplayer(param_00)
-{
+checkplayer(param_00) {
 	return self == param_00;
 }
 
-//Function Number: 86
-checkteam(param_00)
-{
+checkteam(param_00) {
 	return self.team == param_00.team;
 }
 
-//Function Number: 87
-onjointeamblinkinglight(param_00,param_01,param_02,param_03)
-{
+onjointeamblinkinglight(param_00,param_01,param_02,param_03) {
 	self endon("death");
 	level endon("game_ended");
 	self endon("emp_damage");
-	for(;;)
-	{
+	for(;;) {
 		level waittill("joined_team",var_04);
-		if(self.triggerportableradarping [[ param_03 ]](var_04))
-		{
+		if(self.triggerportableradarping [[param_03]](var_04)) {
 			playfxontagforclients(param_00,self,param_02,var_04);
 			continue;
 		}
@@ -2186,11 +1802,8 @@ onjointeamblinkinglight(param_00,param_01,param_02,param_03)
 	}
 }
 
-//Function Number: 88
-stopblinkinglight()
-{
-	if(isalive(self) && isdefined(self.blinkinglightfx))
-	{
+stopblinkinglight() {
+	if(isalive(self) && isdefined(self.blinkinglightfx)) {
 		stopfxontag(self.blinkinglightfx["friendly"],self,self.blinkinglighttag);
 		stopfxontag(self.blinkinglightfx["enemy"],self,self.blinkinglighttag);
 		self.blinkinglightfx = undefined;
@@ -2198,16 +1811,12 @@ stopblinkinglight()
 	}
 }
 
-//Function Number: 89
-takeheart(param_00)
-{
+takeheart(param_00) {
 	self notify("remove_heart");
 	self.has_heart = undefined;
 }
 
-//Function Number: 90
-heart_used()
-{
+heart_used() {
 	self endon("disconnect");
 	self endon("remove_heart");
 	self notify("beginHeartTracking");
@@ -2218,17 +1827,13 @@ heart_used()
 	self.changingweapon = undefined;
 	var_02 = self.origin;
 	var_03 = scripts\cp\cp_agent_utils::get_alive_enemies();
-	foreach(var_05 in var_03)
-	{
-		if(isdefined(var_05.flung) || isdefined(var_05.agent_type) && var_05.agent_type == "zombie_brute" || var_05.agent_type == "zombie_ghost" || var_05.agent_type == "zombie_grey" || var_05.agent_type == "slasher" || var_05.agent_type == "superslasher")
-		{
+	foreach(var_05 in var_03) {
+		if(isdefined(var_05.flung) || isdefined(var_05.agent_type) && var_05.agent_type == "zombie_brute" || var_05.agent_type == "zombie_ghost" || var_05.agent_type == "zombie_grey" || var_05.agent_type == "slasher" || var_05.agent_type == "superslasher") {
 			continue;
 		}
 
-		if(distancesquared(var_05.origin,var_02) <= 65536)
-		{
-			if(var_05 scripts/mp/agents/zombie/zombie_util::iscrawling())
-			{
+		if(distancesquared(var_05.origin,var_02) <= 65536) {
+			if(var_05 scripts/mp/agents/zombie/zombie_util::iscrawling()) {
 				var_05.scripted_mode = 1;
 				var_05.precacheleaderboards = 1;
 				var_05 give_mp_super_weapon(var_05.origin);
@@ -2252,15 +1857,11 @@ heart_used()
 	self notify("heart_used",1);
 }
 
-//Function Number: 91
-use_heart_notify()
-{
+use_heart_notify() {
 	self notify("heart_used",1);
 }
 
-//Function Number: 92
-deal_damage(param_00,param_01)
-{
+deal_damage(param_00,param_01) {
 	param_00 endon("death");
 	wait(0.7);
 	param_00.scripted_mode = undefined;
@@ -2269,24 +1870,19 @@ deal_damage(param_00,param_01)
 	playsoundatpos(var_02,"gib_fullbody");
 	param_01 earthquakeforplayer(0.5,1.5,var_02,120);
 	scripts\engine\utility::waitframe();
-	if(isdefined(param_00))
-	{
+	if(isdefined(param_00)) {
 		param_00 dodamage(param_00.health + 100000,param_00.origin,param_01,param_01,"MOD_EXPLOSIVE","heart_cp");
 	}
 }
 
-//Function Number: 93
-watchgasgrenadeexplode()
-{
+watchgasgrenadeexplode() {
 	var_00 = self.triggerportableradarping;
 	var_00 endon("disconnect");
 	self waittill("explode",var_01);
 	thread ongasgrenadeimpact(var_00,var_01);
 }
 
-//Function Number: 94
-ongasgrenadeimpact(param_00,param_01)
-{
+ongasgrenadeimpact(param_00,param_01) {
 	var_02 = spawn("trigger_radius",param_01,0,128,160);
 	var_02.triggerportableradarping = param_00;
 	var_03 = 128;
@@ -2294,18 +1890,14 @@ ongasgrenadeimpact(param_00,param_01)
 	triggerfx(var_04);
 	wait(1);
 	var_05 = 8;
-	while(var_05 > 0)
-	{
-		foreach(var_07 in scripts\cp\cp_agent_utils::getaliveagentsofteam("axis"))
-		{
-			if(isdefined(var_07.agent_type) && var_07.agent_type == "zombie_brute" || var_07.agent_type == "superslasher" || var_07.agent_type == "slasher" || var_07.agent_type == "zombie_grey")
-			{
+	while(var_05 > 0) {
+		foreach(var_07 in scripts\cp\cp_agent_utils::getaliveagentsofteam("axis")) {
+			if(isdefined(var_07.agent_type) && var_07.agent_type == "zombie_brute" || var_07.agent_type == "superslasher" || var_07.agent_type == "slasher" || var_07.agent_type == "zombie_grey") {
 				continue;
 			}
 
 			var_08 = getdamagefromzombietype(var_07);
-			if(isalive(var_07))
-			{
+			if(isalive(var_07)) {
 				var_07 applygaseffect(param_00,param_01,var_02,var_02,int(var_08));
 			}
 		}
@@ -2317,22 +1909,16 @@ ongasgrenadeimpact(param_00,param_01)
 	var_04 delete();
 	wait(2);
 	var_02 delete();
-	foreach(var_07 in scripts\cp\cp_agent_utils::getaliveagentsofteam("axis"))
-	{
-		if(isalive(var_07))
-		{
+	foreach(var_07 in scripts\cp\cp_agent_utils::getaliveagentsofteam("axis")) {
+		if(isalive(var_07)) {
 			var_07.flame_damage_time = undefined;
 		}
 	}
 }
 
-//Function Number: 95
-getdamagefromzombietype(param_00)
-{
-	if(isalive(param_00))
-	{
-		if(scripts\engine\utility::istrue(param_00.is_suicide_bomber))
-		{
+getdamagefromzombietype(param_00) {
+	if(isalive(param_00)) {
+		if(scripts\engine\utility::istrue(param_00.is_suicide_bomber)) {
 			return int(min(1000,param_00.maxhealth * 0.25));
 		}
 
@@ -2342,24 +1928,17 @@ getdamagefromzombietype(param_00)
 	return 150;
 }
 
-//Function Number: 96
-applygaseffect(param_00,param_01,param_02,param_03,param_04)
-{
-	if(isalive(self) && self istouching(param_02))
-	{
-		if(param_00 scripts\cp\utility::isenemy(self))
-		{
+applygaseffect(param_00,param_01,param_02,param_03,param_04) {
+	if(isalive(self) && self istouching(param_02)) {
+		if(param_00 scripts\cp\utility::isenemy(self)) {
 			param_03 radiusdamage(self.origin,1,param_04,param_04,param_00,"MOD_GRENADE_SPLASH","gas_grenade_mp");
 			self.flame_damage_time = gettime() + 200;
 		}
 	}
 }
 
-//Function Number: 97
-throwingknifeused(param_00,param_01,param_02)
-{
-	if(param_02 == "throwingknifec4_mp")
-	{
+throwingknifeused(param_00,param_01,param_02) {
+	if(param_02 == "throwingknifec4_mp") {
 		param_01 makeunusable();
 		param_01 thread recordthrowingknifetraveldist();
 	}
@@ -2370,44 +1949,34 @@ throwingknifeused(param_00,param_01,param_02)
 	param_01 waittill("missile_stuck",var_03,var_04);
 	var_05 = isdefined(var_04) && var_04 == "tag_flicker";
 	var_06 = isdefined(var_04) && var_04 == "tag_weapon";
-	if(isdefined(var_03) && isplayer(var_03) || isagent(var_03) && var_05)
-	{
+	if(isdefined(var_03) && isplayer(var_03) || isagent(var_03) && var_05) {
 		var_03 notify("shield_hit",param_01);
 	}
 
-	if(isdefined(var_03) && isplayer(var_03) || isagent(var_03) && !var_06 && !var_05)
-	{
-		if(!scripts/cp/powers/coop_phaseshift::areentitiesinphase(var_03,param_01))
-		{
+	if(isdefined(var_03) && isplayer(var_03) || isagent(var_03) && !var_06 && !var_05) {
+		if(!scripts/cp/powers/coop_phaseshift::areentitiesinphase(var_03,param_01)) {
 			param_01 delete();
 			return;
 		}
-		else if(param_02 == "throwingknifec4_mp")
-		{
+		else if(param_02 == "throwingknifec4_mp") {
 			throwingknifec4detonate(param_01,var_03,param_00);
 		}
 	}
 
-	if(isdefined(param_01.giveknifeback))
-	{
+	if(isdefined(param_01.giveknifeback)) {
 		throwingknifeused_trygiveknife(param_00,param_01.power);
 		param_01 delete();
 	}
 }
 
-//Function Number: 98
-throwingknifedamagedvictim(param_00,param_01)
-{
+throwingknifedamagedvictim(param_00,param_01) {
 	param_01 endon("death");
 	param_00 endon("death");
 	param_00 endon("disconnect");
-	for(;;)
-	{
+	for(;;) {
 		param_00 waittill("victim_damaged",var_02,var_03,var_04,var_05,var_06,var_07);
-		if(isdefined(var_03) && var_03 == param_01)
-		{
-			if(var_07 == "throwingknifeteleport_mp" && !isdefined(param_01.knifeteleownerinvalid))
-			{
+		if(isdefined(var_03) && var_03 == param_01) {
+			if(var_07 == "throwingknifeteleport_mp" && !isdefined(param_01.knifeteleownerinvalid)) {
 				throwingknifeteleport(param_01,var_02,param_00,1);
 				param_01.giveknifeback = 1;
 			}
@@ -2417,24 +1986,18 @@ throwingknifedamagedvictim(param_00,param_01)
 	}
 }
 
-//Function Number: 99
-watchgrenadedeath()
-{
+watchgrenadedeath() {
 	self waittill("death");
-	if(isdefined(self.knife_trigger))
-	{
+	if(isdefined(self.knife_trigger)) {
 		self.knife_trigger delete();
 	}
 }
 
-//Function Number: 100
-throwingknifeused_trygiveknife(param_00,param_01,param_02)
-{
+throwingknifeused_trygiveknife(param_00,param_01,param_02) {
 	var_03 = param_00 getweaponammoclip(param_02);
 	var_04 = 2;
 	var_05 = undefined;
-	if(var_03 >= var_04)
-	{
+	if(var_03 >= var_04) {
 		var_05 = 0;
 	}
 	else
@@ -2447,79 +2010,63 @@ throwingknifeused_trygiveknife(param_00,param_01,param_02)
 	return var_05;
 }
 
-//Function Number: 101
-hudicontype(param_00)
-{
+hudicontype(param_00) {
 	var_01 = 0;
-	if(isdefined(level.damagefeedbacknosound) && level.damagefeedbacknosound)
-	{
+	if(isdefined(level.damagefeedbacknosound) && level.damagefeedbacknosound) {
 		var_01 = 1;
 	}
 
-	if(!isplayer(self))
-	{
+	if(!isplayer(self)) {
 		return;
 	}
 
-	switch(param_00)
-	{
+	switch(param_00) {
 		case "scavenger":
 		case "throwingknife":
-			if(!var_01)
-			{
+			if(!var_01) {
 				self playlocalsound("scavenger_pack_pickup");
 			}
 	
-			if(!level.hardcoremode)
-			{
+			if(!level.hardcoremode) {
 				self setclientomnvar("damage_feedback_other",param_00);
 			}
 			break;
 
 		case "boxofguns":
-			if(!var_01)
-			{
+			if(!var_01) {
 				self playlocalsound("mp_box_guns_ammo");
 			}
 	
-			if(!level.hardcoremode)
-			{
+			if(!level.hardcoremode) {
 				self setclientomnvar("damage_feedback_other",param_00);
 			}
 			break;
 
 		case "oracle":
-			if(!var_01)
-			{
+			if(!var_01) {
 				self playlocalsound("oracle_radar_pulse_plr");
 			}
 	
-			if(!level.hardcoremode)
-			{
+			if(!level.hardcoremode) {
 				self setclientomnvar("damage_feedback_other",param_00);
 			}
 			break;
 	}
 }
 
-//Function Number: 102
-throwingknifeteleport(param_00,param_01,param_02,param_03)
-{
+throwingknifeteleport(param_00,param_01,param_02,param_03) {
 	param_02 playlocalsound("blinkknife_teleport");
 	param_02 playsoundonmovingent("blinkknife_teleport_npc");
 	playsoundatpos(param_00.origin,"blinkknife_impact");
 	thread throwingknifeteleport_fxstartburst(param_02,param_01);
 	var_04 = param_01 _meth_8113();
-	if(isdefined(var_04))
-	{
+	if(isdefined(var_04)) {
 		var_04 setcontents(0);
 	}
 
 	var_05 = [];
-	foreach(var_07 in level.characters)
-	{
-		if(!isdefined(var_07) || !isalive(var_07) || var_07 == param_01 || var_07 == param_02 || !param_02 scripts\cp\utility::isenemy(var_07))
-		{
+	foreach(var_07 in level.characters) {
+		if(!isdefined(var_07) || !isalive(var_07) || var_07 == param_01 || var_07 == param_02 || !param_02 scripts\cp\utility::isenemy(var_07)) {
 			continue;
 		}
 
@@ -2531,11 +2078,9 @@ throwingknifeteleport(param_00,param_01,param_02,param_03)
 	var_0A = param_01.origin;
 	var_0B = param_01.origin + (0,0,var_09[2] - param_02.origin[2]);
 	var_0C = param_02.angles;
-	foreach(var_0E in var_05)
-	{
+	foreach(var_0E in var_05) {
 		var_0F = (var_0E.origin[0],var_0E.origin[1],var_0E gettagorigin("TAG_EYE")[2]);
-		if(distancesquared(var_0E.origin,param_01.origin) < 230400 && sighttracepassed(var_0B,var_0F,0,undefined))
-		{
+		if(distancesquared(var_0E.origin,param_01.origin) < 230400 && sighttracepassed(var_0B,var_0F,0,undefined)) {
 			var_0C = vectortoangles(var_0F - var_0B);
 			break;
 		}
@@ -2546,9 +2091,7 @@ throwingknifeteleport(param_00,param_01,param_02,param_03)
 	throwingknifeteleport_fxendburst(param_02,param_01);
 }
 
-//Function Number: 103
-throwingknifeteleport_fxstartburst(param_00,param_01)
-{
+throwingknifeteleport_fxstartburst(param_00,param_01) {
 	var_02 = param_01.origin - param_00.origin;
 	var_03 = param_00.origin + (0,0,32);
 	var_04 = vectornormalize(var_02);
@@ -2556,8 +2099,7 @@ throwingknifeteleport_fxstartburst(param_00,param_01)
 	var_06 = vectorcross(var_05,var_04);
 	var_07 = axistoangles(var_04,var_05,var_06);
 	var_08 = 0;
-	if(var_08)
-	{
+	if(var_08) {
 		var_09 = spawn("script_model",var_03);
 		var_09.angles = var_07;
 		var_09 setmodel("tag_origin");
@@ -2574,8 +2116,7 @@ throwingknifeteleport_fxstartburst(param_00,param_01)
 	var_0A setmodel("tag_origin");
 	var_0A hidefromplayer(param_00);
 	scripts\engine\utility::waitframe();
-	foreach(var_0C in level.players)
-	{
+	foreach(var_0C in level.players) {
 		var_0A hidefromplayer(var_0C);
 	}
 
@@ -2584,39 +2125,29 @@ throwingknifeteleport_fxstartburst(param_00,param_01)
 	var_0A delete();
 }
 
-//Function Number: 104
-recordthrowingknifetraveldist()
-{
+recordthrowingknifetraveldist() {
 	level endon("game_ended");
 	self.triggerportableradarping endon("disconnect");
 	self.disttravelled = 0;
 	var_00 = self.origin;
-	for(;;)
-	{
+	for(;;) {
 		var_01 = scripts\engine\utility::waittill_any_timeout_1(0.15,"death","missile_stuck");
-		if(!isdefined(self))
-		{
+		if(!isdefined(self)) {
 			break;
 		}
 
 		var_02 = distance(var_00,self.origin);
 		self.disttravelled = self.disttravelled + var_02;
 		var_00 = self.origin;
-		if(var_01 != "timeout")
-		{
+		if(var_01 != "timeout") {
 			break;
 		}
 	}
 }
 
-//Function Number: 105
-throwingknifeteleport_fxendburst(param_00,param_01)
-{
-}
+throwingknifeteleport_fxendburst(param_00,param_01) {}
 
-//Function Number: 106
-throwingknifec4detonate(param_00,param_01,param_02)
-{
+throwingknifec4detonate(param_00,param_01,param_02) {
 	param_01 playsound("biospike_explode");
 	playfx(scripts\engine\utility::getfx("throwingknifec4_explode"),param_00.origin);
 	param_00 radiusdamage(param_00.origin,180,1200,600,param_02,"MOD_EXPLOSIVE",param_00.weapon_name);
@@ -2625,48 +2156,35 @@ throwingknifec4detonate(param_00,param_01,param_02)
 	param_00 delete();
 }
 
-//Function Number: 107
-throwingknifeused_recordownerinvalid(param_00,param_01)
-{
+throwingknifeused_recordownerinvalid(param_00,param_01) {
 	param_01 endon("missile_stuck");
 	param_01 endon("death");
 	param_00 scripts\engine\utility::waittill_any_3("death","disconnect");
 	param_01.knifeteleownerinvalid = 1;
 }
 
-//Function Number: 108
-watchconcussiongrenadeexplode()
-{
+watchconcussiongrenadeexplode() {
 	thread endondeath();
 	self endon("end_explode");
 	self waittill("explode",var_00);
 	stunenemiesinrange(var_00,self.triggerportableradarping);
 }
 
-//Function Number: 109
-stunenemiesinrange(param_00,param_01)
-{
+stunenemiesinrange(param_00,param_01) {
 	var_02 = scripts\cp\cp_agent_utils::getaliveagentsofteam("axis");
 	var_03 = scripts\engine\utility::get_array_of_closest(param_00,var_02,undefined,24,256);
-	foreach(var_05 in var_03)
-	{
-		if(!var_05 scripts\cp\utility::agentisfnfimmune())
-		{
+	foreach(var_05 in var_03) {
+		if(!var_05 scripts\cp\utility::agentisfnfimmune()) {
 			var_05 thread fx_stun_damage(var_05,param_01);
 		}
 	}
 }
 
-//Function Number: 110
-fx_stun_damage(param_00,param_01)
-{
+fx_stun_damage(param_00,param_01) {
 	param_00 endon("death");
-	if(isdefined(param_00.stun_hit_time))
-	{
-		if(gettime() > param_00.stun_hit_time)
-		{
-			if(param_00 scripts/mp/agents/zombie/zombie_util::iscrawling())
-			{
+	if(isdefined(param_00.stun_hit_time)) {
+		if(gettime() > param_00.stun_hit_time) {
+			if(param_00 scripts/mp/agents/zombie/zombie_util::iscrawling()) {
 				param_00.scripted_mode = 1;
 				param_00.precacheleaderboards = 1;
 				param_00 give_mp_super_weapon(param_00.origin);
@@ -2683,8 +2201,7 @@ fx_stun_damage(param_00,param_01)
 	}
 	else
 	{
-		if(param_00 scripts/mp/agents/zombie/zombie_util::iscrawling())
-		{
+		if(param_00 scripts/mp/agents/zombie/zombie_util::iscrawling()) {
 			param_00.scripted_mode = 1;
 			param_00.precacheleaderboards = 1;
 			param_00 give_mp_super_weapon(param_00.origin);
@@ -2697,8 +2214,7 @@ fx_stun_damage(param_00,param_01)
 
 	param_00 dodamage(1,param_00.origin,param_01,param_01,"MOD_GRENADE_SPLASH","concussion_grenade_mp");
 	wait(1);
-	if(param_00 scripts/mp/agents/zombie/zombie_util::iscrawling())
-	{
+	if(param_00 scripts/mp/agents/zombie/zombie_util::iscrawling()) {
 		param_00.scripted_mode = 0;
 		param_00.precacheleaderboards = 0;
 	}
@@ -2707,11 +2223,8 @@ fx_stun_damage(param_00,param_01)
 	param_00.stunned = undefined;
 }
 
-//Function Number: 111
-mineused(param_00,param_01)
-{
-	if(!isalive(self))
-	{
+mineused(param_00,param_01) {
+	if(!isalive(self)) {
 		param_00 delete();
 		return;
 	}
@@ -2719,23 +2232,17 @@ mineused(param_00,param_01)
 	param_00 thread minethrown(self,param_00.weapon_name,param_01);
 }
 
-//Function Number: 112
-minethrown(param_00,param_01,param_02,param_03)
-{
+minethrown(param_00,param_01,param_02,param_03) {
 	self.triggerportableradarping = param_00;
 	self waittill("missile_stuck",var_04);
-	if(!isdefined(param_00))
-	{
+	if(!isdefined(param_00)) {
 		return;
 	}
 
-	if(param_01 != "trip_mine_mp")
-	{
-		if(isdefined(var_04) && isdefined(var_04.triggerportableradarping))
-		{
-			if(isdefined(param_03))
-			{
-				self.triggerportableradarping [[ param_03 ]](self);
+	if(param_01 != "trip_mine_mp") {
+		if(isdefined(var_04) && isdefined(var_04.triggerportableradarping)) {
+			if(isdefined(param_03)) {
+				self.triggerportableradarping [[param_03]](self);
 			}
 
 			self delete();
@@ -2745,8 +2252,7 @@ minethrown(param_00,param_01,param_02,param_03)
 
 	var_05 = bullettrace(self.origin + (0,0,4),self.origin - (0,0,4),0,self);
 	var_06 = var_05["position"];
-	if(var_05["fraction"] == 1)
-	{
+	if(var_05["fraction"] == 1) {
 		var_06 = getgroundposition(self.origin,12,0,32);
 		var_05["normal"] = var_05["normal"] * -1;
 	}
@@ -2754,14 +2260,12 @@ minethrown(param_00,param_01,param_02,param_03)
 	var_07 = vectornormalize(var_05["normal"]);
 	var_08 = vectortoangles(var_07);
 	var_08 = var_08 + (90,0,0);
-	var_09 = [[ param_02 ]](var_06,param_00,param_01,var_08);
+	var_09 = [[param_02]](var_06,param_00,param_01,var_08);
 	var_09 thread minedamagemonitor();
 	self delete();
 }
 
-//Function Number: 113
-minedamagemonitor()
-{
+minedamagemonitor() {
 	self endon("mine_triggered");
 	self endon("mine_selfdestruct");
 	self endon("death");
@@ -2769,33 +2273,26 @@ minedamagemonitor()
 	self.maxhealth = 100000;
 	self.health = self.maxhealth;
 	var_00 = undefined;
-	for(;;)
-	{
+	for(;;) {
 		self waittill("damage",var_01,var_00,var_02,var_03,var_04,var_05,var_06,var_07,var_08,var_09);
-		if(is_hive_explosion(var_00,var_04))
-		{
+		if(is_hive_explosion(var_00,var_04)) {
 			break;
 		}
 
-		if(!isplayer(var_00) && !isagent(var_00))
-		{
+		if(!isplayer(var_00) && !isagent(var_00)) {
 			continue;
 		}
 
-		if(isdefined(var_09) && isendstr(var_09,"betty_mp"))
-		{
+		if(isdefined(var_09) && isendstr(var_09,"betty_mp")) {
 			continue;
 		}
 
-		if(!scripts\cp\cp_damage::friendlyfirecheck(self.triggerportableradarping,var_00))
-		{
+		if(!scripts\cp\cp_damage::friendlyfirecheck(self.triggerportableradarping,var_00)) {
 			continue;
 		}
 
-		if(isdefined(var_09))
-		{
-			switch(var_09)
-			{
+		if(isdefined(var_09)) {
+			switch(var_09) {
 				case "concussion_grenade_mp":
 				case "smoke_grenadejugg_mp":
 				case "smoke_grenade_mp":
@@ -2808,54 +2305,43 @@ minedamagemonitor()
 	}
 
 	self notify("mine_destroyed");
-	if(isdefined(var_04) && issubstr(var_04,"MOD_GRENADE") || issubstr(var_04,"MOD_EXPLOSIVE"))
-	{
+	if(isdefined(var_04) && issubstr(var_04,"MOD_GRENADE") || issubstr(var_04,"MOD_EXPLOSIVE")) {
 		self.waschained = 1;
 	}
 
-	if(isdefined(var_08) && var_08 & level.idflags_penetration)
-	{
+	if(isdefined(var_08) && var_08 & level.idflags_penetration) {
 		self.wasdamagedfrombulletpenetration = 1;
 	}
 
 	self.wasdamaged = 1;
-	if(isdefined(var_00))
-	{
+	if(isdefined(var_00)) {
 		self.damagedby = var_00;
 	}
 
-	if(isplayer(var_00))
-	{
+	if(isplayer(var_00)) {
 		var_00 scripts\cp\cp_damage::updatedamagefeedback("bouncing_betty");
 	}
 
 	self notify("detonateExplosive",var_00);
 }
 
-//Function Number: 114
-is_hive_explosion(param_00,param_01)
-{
-	if(!isdefined(param_00) || !isdefined(param_00.classname))
-	{
+is_hive_explosion(param_00,param_01) {
+	if(!isdefined(param_00) || !isdefined(param_00.classname)) {
 		return 0;
 	}
 
 	return param_00.classname == "scriptable" && param_01 == "MOD_EXPLOSIVE";
 }
 
-//Function Number: 115
-claymoreused(param_00)
-{
-	if(!isalive(self))
-	{
+claymoreused(param_00) {
+	if(!isalive(self)) {
 		param_00 delete();
 		return;
 	}
 
 	param_00 hide();
 	param_00 scripts\engine\utility::waittill_any_timeout_1(0.05,"missile_stuck");
-	if(!isdefined(self) || !isalive(self))
-	{
+	if(!isdefined(self) || !isalive(self)) {
 		param_00 delete();
 		return;
 	}
@@ -2866,18 +2352,14 @@ claymoreused(param_00)
 	var_04 = distancesquared(self geteye(),param_00.origin);
 	var_03 = var_03 + 600;
 	var_05 = param_00 getlinkedparent();
-	if(isdefined(var_05))
-	{
+	if(isdefined(var_05)) {
 		param_00 unlink();
 	}
 
-	if(var_03 < var_04)
-	{
-		if(var_01 * var_01 < distancesquared(param_00.origin,self.origin))
-		{
+	if(var_03 < var_04) {
+		if(var_01 * var_01 < distancesquared(param_00.origin,self.origin)) {
 			var_06 = bullettrace(self.origin,self.origin - (0,0,var_01),0,self);
-			if(var_06["fraction"] == 1)
-			{
+			if(var_06["fraction"] == 1) {
 				param_00 delete();
 				self setweaponammostock(param_00.weapon_name,self getweaponammostock(param_00.weapon_name) + 1);
 				return;
@@ -2892,11 +2374,9 @@ claymoreused(param_00)
 		{
 		}
 	}
-	else if(var_01 * var_01 < distancesquared(param_00.origin,self geteye()))
-	{
+	else if(var_01 * var_01 < distancesquared(param_00.origin,self geteye())) {
 		var_06 = bullettrace(self.origin,self.origin - (0,0,var_01),0,self);
-		if(var_06["fraction"] == 1)
-		{
+		if(var_06["fraction"] == 1) {
 			param_00 delete();
 			self setweaponammostock(param_00.weapon_name,self getweaponammostock(param_00.weapon_name) + 1);
 			return;
@@ -2925,60 +2405,47 @@ claymoreused(param_00)
 	level thread monitordisownedequipment(self,param_00);
 }
 
-//Function Number: 116
-claymoredetonation(param_00)
-{
+claymoredetonation(param_00) {
 	self endon("death");
 	var_01 = spawn("trigger_radius",self.origin + (0,0,0 - level.claymoredetonateradius),0,level.claymoredetonateradius,level.claymoredetonateradius * 2);
-	if(isdefined(param_00))
-	{
+	if(isdefined(param_00)) {
 		var_01 enablelinkto();
 		var_01 linkto(param_00);
 	}
 
 	thread deleteondeath(var_01);
-	for(;;)
-	{
+	for(;;) {
 		var_01 waittill("trigger",var_02);
-		if(getdvarint("scr_claymoredebug") != 1)
-		{
-			if(isdefined(self.triggerportableradarping))
-			{
-				if(var_02 == self.triggerportableradarping)
-				{
+		if(getdvarint("scr_claymoredebug") != 1) {
+			if(isdefined(self.triggerportableradarping)) {
+				if(var_02 == self.triggerportableradarping) {
 					continue;
 				}
 
-				if(isdefined(var_02.triggerportableradarping) && var_02.triggerportableradarping == self.triggerportableradarping)
-				{
+				if(isdefined(var_02.triggerportableradarping) && var_02.triggerportableradarping == self.triggerportableradarping) {
 					continue;
 				}
 			}
 
-			if(!scripts\cp\cp_damage::friendlyfirecheck(self.triggerportableradarping,var_02,0))
-			{
+			if(!scripts\cp\cp_damage::friendlyfirecheck(self.triggerportableradarping,var_02,0)) {
 				continue;
 			}
 		}
 
-		if(lengthsquared(var_02 getentityvelocity()) < 10)
-		{
+		if(lengthsquared(var_02 getentityvelocity()) < 10) {
 			continue;
 		}
 
 		var_03 = abs(var_02.origin[2] - self.origin[2]);
-		if(var_03 > 128)
-		{
+		if(var_03 > 128) {
 			continue;
 		}
 
-		if(!var_02 shouldaffectclaymore(self))
-		{
+		if(!var_02 shouldaffectclaymore(self)) {
 			continue;
 		}
 
-		if(var_02 damageconetrace(self.origin,self) > 0)
-		{
+		if(var_02 damageconetrace(self.origin,self) > 0) {
 			break;
 		}
 	}
@@ -2988,11 +2455,8 @@ claymoredetonation(param_00)
 	self notify("detonateExplosive");
 }
 
-//Function Number: 117
-explosivetrigger(param_00,param_01,param_02)
-{
-	if(isplayer(param_00) && param_00 scripts\cp\utility::_hasperk("specialty_delaymine"))
-	{
+explosivetrigger(param_00,param_01,param_02) {
+	if(isplayer(param_00) && param_00 scripts\cp\utility::_hasperk("specialty_delaymine")) {
 		param_00 notify("triggeredExpl",param_02);
 		param_01 = level.delayminetime;
 	}
@@ -3000,11 +2464,8 @@ explosivetrigger(param_00,param_01,param_02)
 	wait(param_01);
 }
 
-//Function Number: 118
-shouldaffectclaymore(param_00)
-{
-	if(isdefined(param_00.disabled))
-	{
+shouldaffectclaymore(param_00) {
+	if(isdefined(param_00.disabled)) {
 		return 0;
 	}
 
@@ -3012,8 +2473,7 @@ shouldaffectclaymore(param_00)
 	var_02 = var_01 - param_00.origin;
 	var_03 = anglestoforward(param_00.angles);
 	var_04 = vectordot(var_02,var_03);
-	if(var_04 < level.claymoredetectionmindist)
-	{
+	if(var_04 < level.claymoredetectionmindist) {
 		return 0;
 	}
 
@@ -3022,15 +2482,11 @@ shouldaffectclaymore(param_00)
 	return var_05 > level.claymoredetectiondot;
 }
 
-//Function Number: 119
-deleteondeath(param_00)
-{
+deleteondeath(param_00) {
 	self waittill("death");
 	wait(0.05);
-	if(isdefined(param_00))
-	{
-		if(isdefined(param_00.trigger))
-		{
+	if(isdefined(param_00)) {
+		if(isdefined(param_00.trigger)) {
 			param_00.trigger delete();
 		}
 
@@ -3038,12 +2494,9 @@ deleteondeath(param_00)
 	}
 }
 
-//Function Number: 120
-c4empdamage()
-{
+c4empdamage() {
 	self endon("death");
-	for(;;)
-	{
+	for(;;) {
 		self waittill("emp_damage",var_00,var_01);
 		equipmentempstunvfx();
 		self.disabled = 1;
@@ -3054,32 +2507,23 @@ c4empdamage()
 	}
 }
 
-//Function Number: 121
-equipmentempstunvfx()
-{
+equipmentempstunvfx() {
 	playfxontag(scripts\engine\utility::getfx("emp_stun"),self,"tag_origin");
 }
 
-//Function Number: 122
-makeexplosiveunusable()
-{
+makeexplosiveunusable() {
 	self notify("equipmentWatchUse");
 	self.trigger delete();
 }
 
-//Function Number: 123
-makeexplosivetargetablebyai(param_00)
-{
+makeexplosivetargetablebyai(param_00) {
 	scripts\cp\utility::make_entity_sentient_cp(self.triggerportableradarping.team);
-	if(!isdefined(param_00) || !param_00)
-	{
+	if(!isdefined(param_00) || !param_00) {
 		self makeentitynomeleetarget();
 	}
 }
 
-//Function Number: 124
-watchsmokeexplode()
-{
+watchsmokeexplode() {
 	level endon("smokeTimesUp");
 	var_00 = self.triggerportableradarping;
 	var_00 endon("disconnect");
@@ -3094,43 +2538,34 @@ watchsmokeexplode()
 	var_04.var_33F = 10000;
 	var_04 give_zombies_perk("players");
 	level thread waitsmoketime(12,22500,var_01,var_04);
-	for(;;)
-	{
-		if(!isdefined(var_00))
-		{
+	for(;;) {
+		if(!isdefined(var_00)) {
 			break;
 		}
 
 		var_05 = scripts\cp\cp_agent_utils::getaliveagentsofteam("axis");
-		foreach(var_07 in var_05)
-		{
-			if(var_07.species == "alien")
-			{
+		foreach(var_07 in var_05) {
+			if(var_07.species == "alien") {
 				continue;
 			}
 
-			if(isdefined(var_07.smoked))
-			{
+			if(isdefined(var_07.smoked)) {
 				continue;
 			}
 
 			var_08 = distance2dsquared(var_01,var_07.origin);
-			if(var_08 < 90000)
-			{
+			if(var_08 < 90000) {
 				var_07 thread target_smoke(var_04,22500);
 			}
 		}
 
-		foreach(var_0B in level.players)
-		{
-			if(!isdefined(var_0B))
-			{
+		foreach(var_0B in level.players) {
+			if(!isdefined(var_0B)) {
 				continue;
 			}
 
 			var_0C = distance2dsquared(var_01,var_0B.origin);
-			if(var_0C < 22500)
-			{
+			if(var_0C < 22500) {
 				var_0B.inplayersmokescreen = var_00;
 				var_0B give_zombies_perk("phased_players");
 				continue;
@@ -3144,12 +2579,9 @@ watchsmokeexplode()
 	}
 }
 
-//Function Number: 125
-target_smoke(param_00,param_01)
-{
+target_smoke(param_00,param_01) {
 	scripts\cp\cp_agent_utils::agent_go_to_pos(param_00.origin,sqrt(param_01),"critical");
-	if(!scripts\cp\cp_agent_utils::is_agent_scripted(self))
-	{
+	if(!scripts\cp\cp_agent_utils::is_agent_scripted(self)) {
 		self getenemyinfo(param_00);
 		self getpathend(param_00);
 		scripts\cp\cp_agent_utils::agent_go_to_pos(param_00.origin,8,"hunt");
@@ -3157,8 +2589,7 @@ target_smoke(param_00,param_01)
 
 	self.smoked = 1;
 	level waittill("smokeTimesUp");
-	if(!scripts\cp\cp_agent_utils::is_agent_scripted(self))
-	{
+	if(!scripts\cp\cp_agent_utils::is_agent_scripted(self)) {
 		self getotherteam();
 	}
 
@@ -3166,16 +2597,12 @@ target_smoke(param_00,param_01)
 	self.smoked = undefined;
 }
 
-//Function Number: 126
-waitsmoketime(param_00,param_01,param_02,param_03)
-{
+waitsmoketime(param_00,param_01,param_02,param_03) {
 	scripts\cp\cp_hostmigration::waitlongdurationwithhostmigrationpause(param_00);
 	level notify("smokeTimesUp");
 	waittillframeend;
-	foreach(var_05 in level.players)
-	{
-		if(isdefined(var_05))
-		{
+	foreach(var_05 in level.players) {
+		if(isdefined(var_05)) {
 			var_05.inplayersmokescreen = undefined;
 			var_05 give_zombies_perk("players");
 		}
@@ -3184,11 +2611,8 @@ waitsmoketime(param_00,param_01,param_02,param_03)
 	param_03 delete();
 }
 
-//Function Number: 127
-c4used(param_00)
-{
-	if(!scripts\cp\utility::isreallyalive(self))
-	{
+c4used(param_00) {
+	if(!scripts\cp\utility::isreallyalive(self)) {
 		param_00 delete();
 		return;
 	}
@@ -3209,9 +2633,7 @@ c4used(param_00)
 	level thread monitordisownedequipment(self,param_00);
 }
 
-//Function Number: 128
-watchc4implode()
-{
+watchc4implode() {
 	self.triggerportableradarping endon("disconnect");
 	var_00 = self.triggerportableradarping;
 	var_01 = scripts\engine\utility::spawn_tag_origin(self.origin,self.angles);
@@ -3222,25 +2644,19 @@ watchc4implode()
 	thread c4implode(var_02,var_00,var_01);
 }
 
-//Function Number: 129
-c4implode(param_00,param_01,param_02)
-{
+c4implode(param_00,param_01,param_02) {
 	param_01 endon("disconnect");
 	wait(0.5);
 	param_02 radiusdamage(param_00,256,1200,600,param_01,"MOD_EXPLOSIVE","c4_zm");
 	thread c4_earthquake();
 }
 
-//Function Number: 130
-resetc4explodethisframe()
-{
+resetc4explodethisframe() {
 	wait(0.05);
 	level.c4explodethisframe = 0;
 }
 
-//Function Number: 131
-c4activate()
-{
+c4activate() {
 	self endon("death");
 	self waittill("missile_stuck",var_00);
 	wait(0.05);
@@ -3248,9 +2664,7 @@ c4activate()
 	self.activated = 1;
 }
 
-//Function Number: 132
-watchc4stuck()
-{
+watchc4stuck() {
 	self endon("death");
 	self waittill("missile_stuck",var_00);
 	self give_player_tickets(1);
@@ -3258,16 +2672,11 @@ watchc4stuck()
 	explosivehandlemovers(var_00);
 }
 
-//Function Number: 133
-onlethalequipmentplanted(param_00,param_01,param_02)
-{
-	if(self.plantedlethalequip.size)
-	{
+onlethalequipmentplanted(param_00,param_01,param_02) {
+	if(self.plantedlethalequip.size) {
 		self.plantedlethalequip = scripts\engine\utility::array_removeundefined(self.plantedlethalequip);
-		if(self.plantedlethalequip.size >= level.maxperplayerexplosives)
-		{
-			if(scripts\engine\utility::istrue(param_02))
-			{
+		if(self.plantedlethalequip.size >= level.maxperplayerexplosives) {
+			if(scripts\engine\utility::istrue(param_02)) {
 				self.plantedlethalequip[0] notify("detonateExplosive");
 			}
 			else
@@ -3283,9 +2692,7 @@ onlethalequipmentplanted(param_00,param_01,param_02)
 	level notify("mine_planted");
 }
 
-//Function Number: 134
-watchc4altdetonate(param_00)
-{
+watchc4altdetonate(param_00) {
 	self notify("watchC4AltDetonate");
 	self endon("watchC4AltDetonate");
 	self endon("death");
@@ -3293,41 +2700,33 @@ watchc4altdetonate(param_00)
 	self endon("detonated");
 	level endon("game_ended");
 	var_01 = 0;
-	for(;;)
-	{
-		if(self usebuttonpressed())
-		{
+	for(;;) {
+		if(self usebuttonpressed()) {
 			var_01 = 0;
-			while(self usebuttonpressed())
-			{
+			while(self usebuttonpressed()) {
 				var_01 = var_01 + 0.05;
 				wait(0.05);
 			}
 
-			if(var_01 >= 0.5)
-			{
+			if(var_01 >= 0.5) {
 				continue;
 			}
 
 			var_01 = 0;
-			while(!self usebuttonpressed() && var_01 < 0.5)
-			{
+			while(!self usebuttonpressed() && var_01 < 0.5) {
 				var_01 = var_01 + 0.05;
 				wait(0.05);
 			}
 
-			if(var_01 >= 0.5)
-			{
+			if(var_01 >= 0.5) {
 				continue;
 			}
 
-			if(!self.plantedlethalequip.size)
-			{
+			if(!self.plantedlethalequip.size) {
 				return;
 			}
 
-			if(!scripts/cp/powers/coop_phaseshift::isentityphaseshifted(self))
-			{
+			if(!scripts/cp/powers/coop_phaseshift::isentityphaseshifted(self)) {
 				self notify("alt_detonate");
 			}
 		}
@@ -3336,45 +2735,34 @@ watchc4altdetonate(param_00)
 	}
 }
 
-//Function Number: 135
-watchc4altdetonation()
-{
+watchc4altdetonation() {
 	self notify("watchC4AltDetonation");
 	self endon("watchC4AltDetonation");
 	self endon("death");
 	self endon("disconnect");
-	for(;;)
-	{
+	for(;;) {
 		self waittill("alt_detonate");
 		var_00 = self getcurrentweapon();
-		if(var_00 != "c4_zm")
-		{
+		if(var_00 != "c4_zm") {
 			c4detonateallcharges();
 		}
 	}
 }
 
-//Function Number: 136
-watchc4detonation()
-{
+watchc4detonation() {
 	self notify("watchC4Detonation");
 	self endon("watchC4Detonation");
 	self endon("death");
 	self endon("disconnect");
-	for(;;)
-	{
+	for(;;) {
 		self waittillmatch("c4_zm","detonate");
 		c4detonateallcharges();
 	}
 }
 
-//Function Number: 137
-c4detonateallcharges()
-{
-	foreach(var_01 in self.plantedlethalequip)
-	{
-		if(isdefined(var_01) && var_01.weapon_name == "c4_zm")
-		{
+c4detonateallcharges() {
+	foreach(var_01 in self.plantedlethalequip) {
+		if(isdefined(var_01) && var_01.weapon_name == "c4_zm") {
 			var_01 thread waitanddetonate(0.1);
 			scripts\engine\utility::array_remove(self.plantedlethalequip,var_01);
 		}
@@ -3385,41 +2773,32 @@ c4detonateallcharges()
 	self notify("detonated");
 }
 
-//Function Number: 138
-waitanddetonate(param_00)
-{
+waitanddetonate(param_00) {
 	self endon("death");
 	wait(param_00);
 	waittillenabled();
 	self notify("detonateExplosive");
 }
 
-//Function Number: 139
-waittillenabled()
-{
-	if(!isdefined(self.disabled))
-	{
+waittillenabled() {
+	if(!isdefined(self.disabled)) {
 		return;
 	}
 
 	self waittill("enabled");
 }
 
-//Function Number: 140
-clustergrenadeused()
-{
+clustergrenadeused() {
 	var_00 = self.originalowner;
 	var_00 endon("disconnect");
 	thread ownerdisconnectcleanup(var_00);
 	var_01 = [];
-	for(var_02 = 0;var_02 < 4;var_02++)
-	{
+	for(var_02 = 0;var_02 < 4;var_02++) {
 		var_01[var_02] = 0.2;
 	}
 
 	var_03 = 0;
-	foreach(var_05 in var_01)
-	{
+	foreach(var_05 in var_01) {
 		var_03 = var_03 + var_05;
 	}
 
@@ -3440,17 +2819,14 @@ clustergrenadeused()
 	thread clustergrenadeexplode(var_09,var_01,var_00,var_07);
 }
 
-//Function Number: 141
-clustergrenadeexplode(param_00,param_01,param_02,param_03)
-{
+clustergrenadeexplode(param_00,param_01,param_02,param_03) {
 	param_02 endon("disconnect");
 	var_04 = scripts\common\trace::create_contents(0,1,1,0,1,0,0);
 	var_05 = 0;
 	var_06 = param_00 + (0,0,3);
 	var_07 = var_06 + (0,0,-5);
 	var_08 = function_0287(var_06,var_07,var_04,undefined,0,"physicsquery_closest");
-	if(isdefined(var_08) && var_08.size > 0)
-	{
+	if(isdefined(var_08) && var_08.size > 0) {
 		var_05 = 1;
 	}
 
@@ -3458,8 +2834,7 @@ clustergrenadeexplode(param_00,param_01,param_02,param_03)
 	var_0A = param_00 + var_09;
 	var_0B = randomint(90) - 45;
 	var_04 = scripts\common\trace::create_contents(0,1,1,0,1,0,0);
-	for(var_0C = 0;var_0C < 4;var_0C++)
-	{
+	for(var_0C = 0;var_0C < 4;var_0C++) {
 		param_03.shellshockondamage = scripts\engine\utility::ter_op(var_0C == 0,1,undefined);
 		param_03 radiusdamage(param_00,256,800,400,param_02,"MOD_EXPLOSIVE","cluster_grenade_zm");
 		var_0D = scripts\engine\utility::ter_op(var_0C < 4,90 * var_0C + var_0B,randomint(360));
@@ -3474,14 +2849,12 @@ clustergrenadeexplode(param_00,param_01,param_02,param_03)
 		var_06 = var_0A;
 		var_07 = var_0A + var_15;
 		var_08 = function_0287(var_06,var_07,var_04,undefined,0,"physicsquery_closest");
-		if(isdefined(var_08) && var_08.size > 0)
-		{
+		if(isdefined(var_08) && var_08.size > 0) {
 			var_07 = var_08[0]["position"];
 		}
 
 		playfx(scripts\engine\utility::getfx("clusterGrenade_explode"),var_07);
-		switch(var_0C)
-		{
+		switch(var_0C) {
 			case 0:
 				playsoundatpos(var_07,"frag_grenade_explode");
 				break;
@@ -3499,38 +2872,29 @@ clustergrenadeexplode(param_00,param_01,param_02,param_03)
 	}
 }
 
-//Function Number: 142
-deathdelaycleanup(param_00,param_01)
-{
+deathdelaycleanup(param_00,param_01) {
 	self endon("death");
 	param_00 waittill("death");
 	wait(param_01);
 	self delete();
 }
 
-//Function Number: 143
-ownerdisconnectcleanup(param_00)
-{
+ownerdisconnectcleanup(param_00) {
 	self endon("death");
 	param_00 waittill("disconnect");
 	self delete();
 }
 
-//Function Number: 144
-semtexused(param_00)
-{
-	if(!isdefined(param_00))
-	{
+semtexused(param_00) {
+	if(!isdefined(param_00)) {
 		return;
 	}
 
-	if(!isdefined(param_00.weapon_name))
-	{
+	if(!isdefined(param_00.weapon_name)) {
 		return;
 	}
 
-	if(!issubstr(param_00.weapon_name,"semtex") && param_00.weapon_name != "iw6_mk32_mp")
-	{
+	if(!issubstr(param_00.weapon_name,"semtex") && param_00.weapon_name != "iw6_mk32_mp") {
 		return;
 	}
 
@@ -3540,19 +2904,15 @@ semtexused(param_00)
 	param_00 explosivehandlemovers(undefined);
 }
 
-//Function Number: 145
-remove_attachment(param_00,param_01,param_02)
-{
-	if(!isdefined(param_00) && !isdefined(param_01))
-	{
+remove_attachment(param_00,param_01,param_02) {
+	if(!isdefined(param_00) && !isdefined(param_01)) {
 		return;
 	}
 
 	var_03 = [];
 	var_04 = undefined;
 	var_05 = undefined;
-	if(isdefined(param_02))
-	{
+	if(isdefined(param_02)) {
 		var_03[var_03.size] = param_02;
 	}
 	else
@@ -3560,40 +2920,30 @@ remove_attachment(param_00,param_01,param_02)
 		var_03 = param_01 getweaponslistall();
 	}
 
-	foreach(var_07 in var_03)
-	{
-		if(param_01 has_attachment(var_07,param_00))
-		{
+	foreach(var_07 in var_03) {
+		if(param_01 has_attachment(var_07,param_00)) {
 			var_08 = scripts\cp\utility::getrawbaseweaponname(var_07);
 			var_09 = getweaponbasename(var_07);
 			param_01 takeweapon(var_07);
 			var_0A = function_00E3(var_07);
-			foreach(var_0C in var_0A)
-			{
-				if(issubstr(var_0C,param_00))
-				{
+			foreach(var_0C in var_0A) {
+				if(issubstr(var_0C,param_00)) {
 					var_0A = scripts\engine\utility::array_remove(var_0A,var_0C);
 					break;
 				}
 			}
 
-			if(isdefined(level.build_weapon_name_func))
-			{
-				var_05 = param_01 [[ level.build_weapon_name_func ]](var_09,undefined,var_0A);
+			if(isdefined(level.build_weapon_name_func)) {
+				var_05 = param_01 [[level.build_weapon_name_func]](var_09,undefined,var_0A);
 			}
 
-			if(isdefined(var_05))
-			{
+			if(isdefined(var_05)) {
 				var_03 = self getweaponslistprimaries();
-				foreach(param_02 in var_03)
-				{
-					if(issubstr(param_02,var_05))
-					{
-						if(scripts\cp\utility::isaltmodeweapon(param_02))
-						{
+				foreach(param_02 in var_03) {
+					if(issubstr(param_02,var_05)) {
+						if(scripts\cp\utility::isaltmodeweapon(param_02)) {
 							var_09 = getweaponbasename(param_02);
-							if(isdefined(level.mode_weapons_allowed) && scripts\engine\utility::array_contains(level.mode_weapons_allowed,var_09))
-							{
+							if(isdefined(level.mode_weapons_allowed) && scripts\engine\utility::array_contains(level.mode_weapons_allowed,var_09)) {
 								var_05 = "alt_" + var_05;
 								break;
 							}
@@ -3608,19 +2958,14 @@ remove_attachment(param_00,param_01,param_02)
 	}
 }
 
-//Function Number: 146
-has_attachment(param_00,param_01)
-{
+has_attachment(param_00,param_01) {
 	var_02 = strtok(param_00,"+");
-	for(var_03 = 0;var_03 < var_02.size;var_03++)
-	{
-		if(var_02[var_03] == param_01)
-		{
+	for(var_03 = 0;var_03 < var_02.size;var_03++) {
+		if(var_02[var_03] == param_01) {
 			return 1;
 		}
 
-		if(issubstr(var_02[var_03],param_01))
-		{
+		if(issubstr(var_02[var_03],param_01)) {
 			return 1;
 		}
 	}
@@ -3628,18 +2973,13 @@ has_attachment(param_00,param_01)
 	return 0;
 }
 
-//Function Number: 147
-getattachmentlist()
-{
+getattachmentlist() {
 	var_00 = [];
 	var_01 = ["mp/attachmentTable.csv","cp/zombies/zombie_attachmenttable.csv"];
-	foreach(var_03 in var_01)
-	{
+	foreach(var_03 in var_01) {
 		var_04 = 0;
-		for(var_05 = tablelookup(var_03,0,var_04,5);var_05 != "";var_05 = tablelookup(var_03,0,var_04,5))
-		{
-			if(!scripts\engine\utility::array_contains(var_00,var_05))
-			{
+		for(var_05 = tablelookup(var_03,0,var_04,5);var_05 != "";var_05 = tablelookup(var_03,0,var_04,5)) {
+			if(!scripts\engine\utility::array_contains(var_00,var_05)) {
 				var_00[var_00.size] = var_05;
 			}
 
@@ -3650,16 +2990,12 @@ getattachmentlist()
 	return var_00;
 }
 
-//Function Number: 148
-getarkattachmentlist()
-{
+getarkattachmentlist() {
 	var_00 = [];
 	var_01 = 0;
 	var_02 = tablelookup("cp/zombies/zombie_attachmenttable.csv",0,var_01,5);
-	while(var_02 != "")
-	{
-		if(!scripts\engine\utility::array_contains(var_00,var_02))
-		{
+	while(var_02 != "") {
+		if(!scripts\engine\utility::array_contains(var_00,var_02)) {
 			var_00[var_00.size] = var_02;
 		}
 
@@ -3670,16 +3006,12 @@ getarkattachmentlist()
 	return var_00;
 }
 
-//Function Number: 149
-has_weapon_variation(param_00)
-{
+has_weapon_variation(param_00) {
 	var_01 = self getweaponslistall();
-	foreach(var_03 in var_01)
-	{
+	foreach(var_03 in var_01) {
 		var_04 = scripts\cp\utility::getrawbaseweaponname(param_00);
 		var_05 = scripts\cp\utility::getrawbaseweaponname(var_03);
-		if(var_04 == var_05)
-		{
+		if(var_04 == var_05) {
 			return 1;
 		}
 	}
@@ -3687,40 +3019,31 @@ has_weapon_variation(param_00)
 	return 0;
 }
 
-//Function Number: 150
-create_attachment_variant_list(param_00,param_01,param_02)
-{
+create_attachment_variant_list(param_00,param_01,param_02) {
 	level.attachmentmap_uniquetobase = [];
 	level.attachmentmap_uniquetoextra = [];
-	foreach(var_04 in param_00)
-	{
+	foreach(var_04 in param_00) {
 		var_05 = tablelookup(param_01,4,var_04,5);
-		if(param_02 == "zombie")
-		{
-			if(!isdefined(var_05) || var_05 == "")
-			{
+		if(param_02 == "zombie") {
+			if(!isdefined(var_05) || var_05 == "") {
 				var_05 = tablelookup("cp/zombies/zombie_attachmenttable.csv",4,var_04,5);
 			}
 		}
 
-		if(var_04 == var_05)
-		{
+		if(var_04 == var_05) {
 			continue;
 		}
 
 		level.attachmentmap_uniquetobase[var_04] = var_05;
 		var_06 = tablelookup("mp/attachmenttable.csv",4,var_04,13);
-		if(var_06 != "")
-		{
+		if(var_06 != "") {
 			level.attachmentmap_uniquetoextra[var_04] = var_06;
 			level.attachmentextralist[var_06] = 1;
 		}
 	}
 }
 
-//Function Number: 151
-buildattachmentmaps()
-{
+buildattachmentmaps() {
 	var_00 = ["mp/attachmentTable.csv","cp/zombies/zombie_attachmenttable.csv"];
 	var_01 = ["mp/attachmentmap.csv","cp/zombies/zombie_attachmentmap.csv"];
 	level.attachmentmap_uniquetobase = [];
@@ -3729,55 +3052,44 @@ buildattachmentmaps()
 	level.attachmentmap_attachtoperk = [];
 	level.attachmentmap_conflicts = [];
 	level.attachmentmap_basetounique = [];
-	foreach(var_24, var_03 in var_00)
-	{
+	foreach(var_24, var_03 in var_00) {
 		var_04 = getattachmentlistuniquenames(var_03);
-		foreach(var_06 in var_04)
-		{
+		foreach(var_06 in var_04) {
 			var_07 = tablelookup(var_03,4,var_06,5);
-			if(var_06 != var_07)
-			{
+			if(var_06 != var_07) {
 				level.attachmentmap_uniquetobase[var_06] = var_07;
 			}
 
 			var_08 = tablelookup(var_03,4,var_06,13);
-			if(var_08 != "")
-			{
+			if(var_08 != "") {
 				level.attachmentmap_uniquetoextra[var_06] = var_08;
 				level.attachmentextralist[var_08] = 1;
 			}
 		}
 
-		foreach(var_0B in var_01)
-		{
+		foreach(var_0B in var_01) {
 			var_0C = [];
 			var_0D = 1;
-			for(var_0E = tablelookupbyrow(var_0B,var_0D,0);var_0E != "";var_0E = tablelookupbyrow(var_0B,var_0D,0))
-			{
+			for(var_0E = tablelookupbyrow(var_0B,var_0D,0);var_0E != "";var_0E = tablelookupbyrow(var_0B,var_0D,0)) {
 				var_0C[var_0C.size] = var_0E;
 				var_0D++;
 			}
 
 			var_0F = [];
 			var_10 = 1;
-			for(var_11 = tablelookupbyrow(var_0B,0,var_10);var_11 != "";var_11 = tablelookupbyrow(var_0B,0,var_10))
-			{
+			for(var_11 = tablelookupbyrow(var_0B,0,var_10);var_11 != "";var_11 = tablelookupbyrow(var_0B,0,var_10)) {
 				var_0F[var_11] = var_10;
 				var_10++;
 			}
 
-			foreach(var_0E in var_0C)
-			{
-				foreach(var_16, var_14 in var_0F)
-				{
+			foreach(var_0E in var_0C) {
+				foreach(var_16, var_14 in var_0F) {
 					var_15 = tablelookup(var_0B,0,var_0E,var_14);
-					if(var_15 == "")
-					{
+					if(var_15 == "") {
 						continue;
 					}
 
-					if(!isdefined(level.attachmentmap_basetounique[var_0E]))
-					{
+					if(!isdefined(level.attachmentmap_basetounique[var_0E])) {
 						level.attachmentmap_basetounique[var_0E] = [];
 					}
 
@@ -3785,11 +3097,9 @@ buildattachmentmaps()
 				}
 			}
 
-			foreach(var_19 in var_04)
-			{
+			foreach(var_19 in var_04) {
 				var_1A = tablelookup(var_03,4,var_19,12);
-				if(var_1A == "")
-				{
+				if(var_1A == "") {
 					continue;
 				}
 
@@ -3798,19 +3108,15 @@ buildattachmentmaps()
 
 			var_1C = 1;
 			var_1D = tablelookupbyrow("mp/attachmentcombos.csv",var_1C,0);
-			while(var_1D != "")
-			{
+			while(var_1D != "") {
 				var_1E = 1;
 				var_1F = tablelookupbyrow("mp/attachmentcombos.csv",0,var_1E);
-				while(var_1F != "")
-				{
-					if(var_1D != var_1F)
-					{
+				while(var_1F != "") {
+					if(var_1D != var_1F) {
 						var_20 = tablelookupbyrow("mp/attachmentcombos.csv",var_1C,var_1E);
 						var_21 = scripts\engine\utility::alphabetize([var_1D,var_1F]);
 						var_22 = var_21[0] + "_" + var_21[1];
-						if(var_20 == "no" && !isdefined(level.attachmentmap_conflicts[var_22]))
-						{
+						if(var_20 == "no" && !isdefined(level.attachmentmap_conflicts[var_22])) {
 							level.attachmentmap_conflicts[var_22] = 1;
 						}
 					}
@@ -3826,28 +3132,20 @@ buildattachmentmaps()
 	}
 }
 
-//Function Number: 152
-create_zombie_base_to_unique_map(param_00,param_01,param_02,param_03)
-{
-	if(param_00 == "zombie")
-	{
-		foreach(var_05 in param_01)
-		{
-			foreach(var_09, var_07 in param_02)
-			{
+create_zombie_base_to_unique_map(param_00,param_01,param_02,param_03) {
+	if(param_00 == "zombie") {
+		foreach(var_05 in param_01) {
+			foreach(var_09, var_07 in param_02) {
 				var_08 = tablelookup(param_03,0,var_05,var_07);
-				if(var_08 == "")
-				{
+				if(var_08 == "") {
 					continue;
 				}
 
-				if(!isdefined(level.attachmentmap_basetounique[var_05]))
-				{
+				if(!isdefined(level.attachmentmap_basetounique[var_05])) {
 					level.attachmentmap_basetounique[var_05] = [];
 				}
 
-				if(var_08 == "none")
-				{
+				if(var_08 == "none") {
 					level.attachmentmap_basetounique[var_05][var_09] = undefined;
 					continue;
 				}
@@ -3858,14 +3156,11 @@ create_zombie_base_to_unique_map(param_00,param_01,param_02,param_03)
 	}
 }
 
-//Function Number: 153
-getattachmentlistuniquenames(param_00)
-{
+getattachmentlistuniquenames(param_00) {
 	var_01 = getdvar("g_gametype");
 	var_02 = [];
 	var_03 = 0;
-	for(var_04 = tablelookup(param_00,0,var_03,4);var_04 != "";var_04 = tablelookup(param_00,0,var_03,4))
-	{
+	for(var_04 = tablelookup(param_00,0,var_03,4);var_04 != "";var_04 = tablelookup(param_00,0,var_03,4)) {
 		var_02[var_02.size] = var_04;
 		var_03++;
 	}
@@ -3873,16 +3168,13 @@ getattachmentlistuniquenames(param_00)
 	return var_02;
 }
 
-//Function Number: 154
-grenade_earthquake(param_00)
-{
+grenade_earthquake(param_00) {
 	self notify("grenade_earthQuake");
 	self endon("grenade_earthQuake");
 	thread endondeath();
 	self endon("end_explode");
 	var_01 = undefined;
-	if(!isdefined(param_00) || param_00)
-	{
+	if(!isdefined(param_00) || param_00) {
 		self waittill("explode",var_01);
 	}
 	else
@@ -3892,20 +3184,16 @@ grenade_earthquake(param_00)
 
 	playrumbleonposition("grenade_rumble",var_01);
 	earthquake(0.5,0.75,var_01,800);
-	foreach(var_03 in level.players)
-	{
-		if(var_03 scripts\cp\utility::isusingremote())
-		{
+	foreach(var_03 in level.players) {
+		if(var_03 scripts\cp\utility::isusingremote()) {
 			continue;
 		}
 
-		if(distancesquared(var_01,var_03.origin) > 360000)
-		{
+		if(distancesquared(var_01,var_03.origin) > 360000) {
 			continue;
 		}
 
-		if(var_03 damageconetrace(var_01))
-		{
+		if(var_03 damageconetrace(var_01)) {
 			var_03 thread dirteffect(var_01);
 		}
 
@@ -3913,28 +3201,22 @@ grenade_earthquake(param_00)
 	}
 }
 
-//Function Number: 155
-c4_earthquake()
-{
+c4_earthquake() {
 	thread endondeath();
 	self endon("end_explode");
 	self waittill("explode",var_00);
 	playrumbleonposition("grenade_rumble",var_00);
 	earthquake(0.4,0.75,var_00,512);
-	foreach(var_02 in level.players)
-	{
-		if(var_02 scripts\cp\utility::isusingremote())
-		{
+	foreach(var_02 in level.players) {
+		if(var_02 scripts\cp\utility::isusingremote()) {
 			continue;
 		}
 
-		if(distance(var_00,var_02.origin) > 512)
-		{
+		if(distance(var_00,var_02.origin) > 512) {
 			continue;
 		}
 
-		if(var_02 damageconetrace(var_00))
-		{
+		if(var_02 damageconetrace(var_00)) {
 			var_02 thread dirteffect(var_00);
 		}
 
@@ -3942,22 +3224,17 @@ c4_earthquake()
 	}
 }
 
-//Function Number: 156
-endondeath()
-{
+endondeath() {
 	self waittill("death");
 	waittillframeend;
 	self notify("end_explode");
 }
 
-//Function Number: 157
-dirteffect(param_00)
-{
+dirteffect(param_00) {
 	self notify("dirtEffect");
 	self endon("dirtEffect");
 	self endon("disconnect");
-	if(!scripts\cp\utility::isreallyalive(self))
-	{
+	if(!scripts\cp\utility::isreallyalive(self)) {
 		return;
 	}
 
@@ -3967,16 +3244,13 @@ dirteffect(param_00)
 	var_04 = vectordot(var_03,var_01);
 	var_05 = vectordot(var_03,var_02);
 	var_06 = ["death","damage"];
-	if(var_04 > 0 && var_04 > 0.5 && self getcurrentweapon() != "iw6_riotshield_mp")
-	{
+	if(var_04 > 0 && var_04 > 0.5 && self getcurrentweapon() != "iw6_riotshield_mp") {
 		scripts\engine\utility::waittill_any_in_array_or_timeout(var_06,2);
 		return;
 	}
 
-	if(abs(var_04) < 0.866)
-	{
-		if(var_05 > 0)
-		{
+	if(abs(var_04) < 0.866) {
+		if(var_05 > 0) {
 			scripts\engine\utility::waittill_any_in_array_or_timeout(var_06,2);
 			return;
 		}
@@ -3986,20 +3260,14 @@ dirteffect(param_00)
 	}
 }
 
-//Function Number: 158
-shellshockondamage(param_00,param_01)
-{
-	if(isflashbanged())
-	{
+shellshockondamage(param_00,param_01) {
+	if(isflashbanged()) {
 		return;
 	}
 
-	if(param_00 == "MOD_EXPLOSIVE" || param_00 == "MOD_GRENADE" || param_00 == "MOD_GRENADE_SPLASH" || param_00 == "MOD_PROJECTILE" || param_00 == "MOD_PROJECTILE_SPLASH")
-	{
-		if(param_01 > 10)
-		{
-			if(isdefined(self.shellshockreduction) && self.shellshockreduction)
-			{
+	if(param_00 == "MOD_EXPLOSIVE" || param_00 == "MOD_GRENADE" || param_00 == "MOD_GRENADE_SPLASH" || param_00 == "MOD_PROJECTILE" || param_00 == "MOD_PROJECTILE_SPLASH") {
+		if(param_01 > 10) {
+			if(isdefined(self.shellshockreduction) && self.shellshockreduction) {
 				self shellshock("frag_grenade_mp",self.shellshockreduction);
 				return;
 			}
@@ -4010,48 +3278,36 @@ shellshockondamage(param_00,param_01)
 	}
 }
 
-//Function Number: 159
-isflashbanged()
-{
+isflashbanged() {
 	return isdefined(self.flashendtime) && gettime() < self.flashendtime;
 }
 
-//Function Number: 160
-waittill_grenade_fire()
-{
-	for(;;)
-	{
+waittill_grenade_fire() {
+	for(;;) {
 		self waittill("grenade_fire",var_00,var_01,var_02);
-		if(isdefined(self.throwinggrenade) && var_01 != self.throwinggrenade)
-		{
+		if(isdefined(self.throwinggrenade) && var_01 != self.throwinggrenade) {
 			continue;
 		}
 
-		if(isdefined(var_00))
-		{
-			if(!isdefined(var_00.weapon_name))
-			{
+		if(isdefined(var_00)) {
+			if(!isdefined(var_00.weapon_name)) {
 				var_00.weapon_name = var_01;
 			}
 
-			if(!isdefined(var_00.triggerportableradarping))
-			{
+			if(!isdefined(var_00.triggerportableradarping)) {
 				var_00.triggerportableradarping = self;
 			}
 
-			if(!isdefined(var_00.team))
-			{
+			if(!isdefined(var_00.team)) {
 				var_00.team = self.team;
 			}
 
-			if(!isdefined(var_00.ticks) && isdefined(self.throwinggrenade))
-			{
+			if(!isdefined(var_00.ticks) && isdefined(self.throwinggrenade)) {
 				var_00.ticks = scripts\cp\utility::roundup(4 * var_02);
 			}
 		}
 
-		if(!scripts\cp\utility::isreallyalive(self) && !isdefined(self.throwndyinggrenade))
-		{
+		if(!scripts\cp\utility::isreallyalive(self) && !isdefined(self.throwndyinggrenade)) {
 			self notify("grenade_fire_dead",var_00,var_01);
 			self.throwndyinggrenade = 1;
 		}
@@ -4060,11 +3316,8 @@ waittill_grenade_fire()
 	}
 }
 
-//Function Number: 161
-can_use_attachment(param_00,param_01)
-{
-	if(isdefined(param_01))
-	{
+can_use_attachment(param_00,param_01) {
+	if(isdefined(param_01)) {
 		var_02 = param_01;
 	}
 	else
@@ -4075,19 +3328,15 @@ can_use_attachment(param_00,param_01)
 	var_03 = getweaponbasename(var_02);
 	var_04 = scripts\cp\utility::coop_getweaponclass(var_03);
 	var_05 = get_possible_attachments_by_weaponclass(var_04,var_03,param_00);
-	if(!var_05)
-	{
+	if(!var_05) {
 		return 0;
 	}
 
 	return 1;
 }
 
-//Function Number: 162
-add_attachment_to_weapon(param_00,param_01,param_02,param_03)
-{
-	if(isdefined(param_01))
-	{
+add_attachment_to_weapon(param_00,param_01,param_02,param_03) {
+	if(isdefined(param_01)) {
 		var_04 = param_01;
 	}
 	else
@@ -4100,25 +3349,20 @@ add_attachment_to_weapon(param_00,param_01,param_02,param_03)
 	var_07 = function_00E3(var_04);
 	var_08 = scripts\cp\utility::getcurrentcamoname(var_04);
 	var_09 = return_weapon_name_with_like_attachments(var_04,param_00,var_07,undefined,var_08);
-	if(!isdefined(var_09) || isdefined(var_09) && var_09 == "none")
-	{
+	if(!isdefined(var_09) || isdefined(var_09) && var_09 == "none") {
 		return 0;
 	}
 
 	var_0A = scripts\cp\utility::isaltmodeweapon(param_01);
-	if(scripts\cp\utility::weaponhasattachment(var_09,"xmags"))
-	{
+	if(scripts\cp\utility::weaponhasattachment(var_09,"xmags")) {
 		var_06 = 1;
 	}
 
-	if(isdefined(param_00))
-	{
-		if(!issubstr(param_00,"pap"))
-		{
+	if(isdefined(param_00)) {
+		if(!issubstr(param_00,"pap")) {
 			var_0B = self getweaponammoclip(var_04);
 			var_0C = self getweaponammostock(var_04);
-			if(issubstr(var_09,"akimbo"))
-			{
+			if(issubstr(var_09,"akimbo")) {
 				var_0D = self getweaponammoclip(var_04,"left");
 			}
 			else
@@ -4128,22 +3372,19 @@ add_attachment_to_weapon(param_00,param_01,param_02,param_03)
 
 			self takeweapon(var_04);
 			scripts\cp\utility::_giveweapon(var_09,undefined,undefined,1);
-			if(scripts\cp\utility::weaponhasattachment(var_09,"xmags") && !var_06)
-			{
+			if(scripts\cp\utility::weaponhasattachment(var_09,"xmags") && !var_06) {
 				var_0B = weaponclipsize(var_09);
 			}
 
 			self setweaponammoclip(var_09,var_0B);
 			self setweaponammostock(var_09,var_0C);
-			if(isdefined(var_0D))
-			{
+			if(isdefined(var_0D)) {
 				self setweaponammoclip(var_09,var_0D,"left");
 			}
 		}
 		else
 		{
-			if(issubstr(var_09,"katana") || issubstr(var_09,"nunchucks"))
-			{
+			if(issubstr(var_09,"katana") || issubstr(var_09,"nunchucks")) {
 			}
 
 			self takeweapon(var_04);
@@ -4154,15 +3395,11 @@ add_attachment_to_weapon(param_00,param_01,param_02,param_03)
 
 	self playlocalsound("weap_raise_large_plr");
 	var_0E = self getweaponslistprimaries();
-	foreach(param_01 in var_0E)
-	{
-		if(issubstr(param_01,var_09))
-		{
-			if(scripts\cp\utility::isaltmodeweapon(param_01))
-			{
+	foreach(param_01 in var_0E) {
+		if(issubstr(param_01,var_09)) {
+			if(scripts\cp\utility::isaltmodeweapon(param_01)) {
 				var_10 = getweaponbasename(param_01);
-				if((isdefined(level.mode_weapons_allowed) && scripts\engine\utility::array_contains(level.mode_weapons_allowed,var_10)) || var_0A)
-				{
+				if((isdefined(level.mode_weapons_allowed) && scripts\engine\utility::array_contains(level.mode_weapons_allowed,var_10)) || var_0A) {
 					var_09 = "alt_" + var_09;
 					break;
 				}
@@ -4170,13 +3407,11 @@ add_attachment_to_weapon(param_00,param_01,param_02,param_03)
 		}
 	}
 
-	if(scripts\engine\utility::istrue(param_03))
-	{
+	if(scripts\engine\utility::istrue(param_03)) {
 		return 1;
 	}
 
-	if(scripts\engine\utility::istrue(param_02))
-	{
+	if(scripts\engine\utility::istrue(param_02)) {
 		self switchtoweaponimmediate(var_09);
 	}
 	else
@@ -4187,21 +3422,15 @@ add_attachment_to_weapon(param_00,param_01,param_02,param_03)
 	return 1;
 }
 
-//Function Number: 163
-isforgefreezeweapon(param_00)
-{
-	if(!isdefined(param_00))
-	{
+isforgefreezeweapon(param_00) {
+	if(!isdefined(param_00)) {
 		return 0;
 	}
 
 	var_01 = getweaponbasename(param_00);
-	if(isdefined(var_01))
-	{
-		if(var_01 == "iw7_forgefreeze_zm" || var_01 == "iw7_forgefreeze_zm_pap1" || var_01 == "iw7_forgefreeze_zm_pap2" || var_01 == "zfreeze_semtex_mp")
-		{
-			if(scripts\cp\utility::isaltmodeweapon(param_00))
-			{
+	if(isdefined(var_01)) {
+		if(var_01 == "iw7_forgefreeze_zm" || var_01 == "iw7_forgefreeze_zm_pap1" || var_01 == "iw7_forgefreeze_zm_pap2" || var_01 == "zfreeze_semtex_mp") {
+			if(scripts\cp\utility::isaltmodeweapon(param_00)) {
 				return 0;
 			}
 			else
@@ -4214,21 +3443,15 @@ isforgefreezeweapon(param_00)
 	return 0;
 }
 
-//Function Number: 164
-isaltforgefreezeweapon(param_00)
-{
-	if(!isdefined(param_00))
-	{
+isaltforgefreezeweapon(param_00) {
+	if(!isdefined(param_00)) {
 		return 0;
 	}
 
 	var_01 = getweaponbasename(param_00);
-	if(isdefined(var_01))
-	{
-		if(var_01 == "iw7_forgefreeze_zm" || var_01 == "iw7_forgefreeze_zm_pap1" || var_01 == "iw7_forgefreeze_zm_pap2" || var_01 == "zfreeze_semtex_mp")
-		{
-			if(scripts\cp\utility::isaltmodeweapon(param_00))
-			{
+	if(isdefined(var_01)) {
+		if(var_01 == "iw7_forgefreeze_zm" || var_01 == "iw7_forgefreeze_zm_pap1" || var_01 == "iw7_forgefreeze_zm_pap2" || var_01 == "zfreeze_semtex_mp") {
+			if(scripts\cp\utility::isaltmodeweapon(param_00)) {
 				return 1;
 			}
 			else
@@ -4241,84 +3464,63 @@ isaltforgefreezeweapon(param_00)
 	return 0;
 }
 
-//Function Number: 165
-issteeldragon(param_00)
-{
+issteeldragon(param_00) {
 	var_01 = getweaponbasename(param_00);
-	if(!isdefined(var_01))
-	{
+	if(!isdefined(var_01)) {
 		return 0;
 	}
 
 	return var_01 == "iw7_steeldragon_zm";
 }
 
-//Function Number: 166
-is_perk_attachment(param_00)
-{
-	if(!isdefined(param_00))
-	{
+is_perk_attachment(param_00) {
+	if(!isdefined(param_00)) {
 		return 0;
 	}
 
-	if(param_00 == "doubletap")
-	{
+	if(param_00 == "doubletap") {
 		return 1;
 	}
 
 	return 0;
 }
 
-//Function Number: 167
-is_arcane_attachment(param_00)
-{
-	if(!isdefined(param_00))
-	{
+is_arcane_attachment(param_00) {
+	if(!isdefined(param_00)) {
 		return 0;
 	}
 
-	if(issubstr(param_00,"ark"))
-	{
+	if(issubstr(param_00,"ark")) {
 		return 1;
 	}
 
-	if(issubstr(param_00,"arcane"))
-	{
+	if(issubstr(param_00,"arcane")) {
 		return 1;
 	}
 
 	return 0;
 }
 
-//Function Number: 168
-is_mod_attachment(param_00)
-{
-	if(!isdefined(param_00))
-	{
+is_mod_attachment(param_00) {
+	if(!isdefined(param_00)) {
 		return 0;
 	}
 
-	if(issubstr(param_00,"mod"))
-	{
+	if(issubstr(param_00,"mod")) {
 		return 1;
 	}
 
 	return 0;
 }
 
-//Function Number: 169
-is_default_attachment(param_00,param_01)
-{
+is_default_attachment(param_00,param_01) {
 	var_02 = scripts\cp\utility::weaponattachdefaultmap(param_01);
-	if(!isdefined(var_02) || var_02.size < 1)
-	{
+	if(!isdefined(var_02) || var_02.size < 1) {
 		return 0;
 	}
 
-	foreach(var_04 in var_02)
-	{
-		if(param_00 == var_04)
-		{
+	foreach(var_04 in var_02) {
+		if(param_00 == var_04) {
 			return 1;
 		}
 	}
@@ -4326,48 +3528,36 @@ is_default_attachment(param_00,param_01)
 	return 0;
 }
 
-//Function Number: 170
-is_pap_attachment(param_00)
-{
-	if(!isdefined(param_00))
-	{
+is_pap_attachment(param_00) {
+	if(!isdefined(param_00)) {
 		return 0;
 	}
 
-	if(issubstr(param_00,"pap"))
-	{
+	if(issubstr(param_00,"pap")) {
 		return 1;
 	}
 
 	return 0;
 }
 
-//Function Number: 171
-get_possible_attachments_by_weaponclass(param_00,param_01,param_02)
-{
-	if(!isdefined(param_00))
-	{
+get_possible_attachments_by_weaponclass(param_00,param_01,param_02) {
+	if(!isdefined(param_00)) {
 		return 0;
 	}
 
-	if(!isdefined(param_01))
-	{
+	if(!isdefined(param_01)) {
 		return 0;
 	}
 
-	if(!isdefined(param_02))
-	{
+	if(!isdefined(param_02)) {
 		return 0;
 	}
 
 	var_03 = [];
 	var_04 = scripts\cp\utility::getbaseweaponname(param_01);
-	if(isdefined(level.attachmentmap_basetounique[var_04]))
-	{
-		if(isdefined(level.attachmentmap_basetounique[var_04][param_02]))
-		{
-			if(level.attachmentmap_basetounique[var_04][param_02] != "none")
-			{
+	if(isdefined(level.attachmentmap_basetounique[var_04])) {
+		if(isdefined(level.attachmentmap_basetounique[var_04][param_02])) {
+			if(level.attachmentmap_basetounique[var_04][param_02] != "none") {
 				return 1;
 			}
 			else
@@ -4377,12 +3567,9 @@ get_possible_attachments_by_weaponclass(param_00,param_01,param_02)
 		}
 	}
 
-	if(isdefined(level.attachmentmap_basetounique[param_00]))
-	{
-		if(isdefined(level.attachmentmap_basetounique[param_00][param_02]))
-		{
-			if(level.attachmentmap_basetounique[param_00][param_02] != "none")
-			{
+	if(isdefined(level.attachmentmap_basetounique[param_00])) {
+		if(isdefined(level.attachmentmap_basetounique[param_00][param_02])) {
+			if(level.attachmentmap_basetounique[param_00][param_02] != "none") {
 				return 1;
 			}
 			else
@@ -4392,15 +3579,11 @@ get_possible_attachments_by_weaponclass(param_00,param_01,param_02)
 		}
 	}
 
-	if(isdefined(level.attachmentmap_basetounique[var_04]))
-	{
+	if(isdefined(level.attachmentmap_basetounique[var_04])) {
 		var_05 = getarraykeys(level.attachmentmap_basetounique[var_04]);
-		foreach(var_07 in var_05)
-		{
-			if(level.attachmentmap_basetounique[var_04][var_07] == param_02)
-			{
-				if(level.attachmentmap_basetounique[var_04][var_07] != "none")
-				{
+		foreach(var_07 in var_05) {
+			if(level.attachmentmap_basetounique[var_04][var_07] == param_02) {
+				if(level.attachmentmap_basetounique[var_04][var_07] != "none") {
 					return 1;
 				}
 				else
@@ -4411,15 +3594,11 @@ get_possible_attachments_by_weaponclass(param_00,param_01,param_02)
 		}
 	}
 
-	if(isdefined(level.attachmentmap_basetounique[param_00]))
-	{
+	if(isdefined(level.attachmentmap_basetounique[param_00])) {
 		var_05 = getarraykeys(level.attachmentmap_basetounique[param_00]);
-		foreach(var_07 in var_05)
-		{
-			if(level.attachmentmap_basetounique[param_00][var_07] == param_02)
-			{
-				if(level.attachmentmap_basetounique[param_00][var_07] != "none")
-				{
+		foreach(var_07 in var_05) {
+			if(level.attachmentmap_basetounique[param_00][var_07] == param_02) {
+				if(level.attachmentmap_basetounique[param_00][var_07] != "none") {
 					return 1;
 				}
 				else
@@ -4433,11 +3612,8 @@ get_possible_attachments_by_weaponclass(param_00,param_01,param_02)
 	return 0;
 }
 
-//Function Number: 172
-return_weapon_name_with_like_attachments(param_00,param_01,param_02,param_03,param_04)
-{
-	if(isdefined(param_00))
-	{
+return_weapon_name_with_like_attachments(param_00,param_01,param_02,param_03,param_04) {
+	if(isdefined(param_00)) {
 		var_05 = param_00;
 	}
 	else
@@ -4467,45 +3643,34 @@ return_weapon_name_with_like_attachments(param_00,param_01,param_02,param_03,par
 	var_19 = [];
 	var_1A = 15;
 	var_1B = scripts\cp\utility::coop_getweaponclass(var_06);
-	if(scripts\cp\utility::weaponhasattachment(var_05,"xmags"))
-	{
+	if(scripts\cp\utility::weaponhasattachment(var_05,"xmags")) {
 		var_09 = 1;
 	}
 
 	var_1C = get_possible_attachments_by_weaponclass(var_1B,var_06,param_01);
-	if(!var_1C && isdefined(param_01))
-	{
-		if(!scripts\engine\utility::istrue(param_03))
-		{
+	if(!var_1C && isdefined(param_01)) {
+		if(!scripts\engine\utility::istrue(param_03)) {
 			scripts\cp\utility::setlowermessage("cant_attach",&"COOP_PILLAGE_CANT_USE",3);
 		}
 
 		return undefined;
 	}
 
-	if(!isdefined(param_02))
-	{
+	if(!isdefined(param_02)) {
 		param_02 = function_00E3(var_05);
 	}
 
-	if(scripts\cp\utility::has_zombie_perk("perk_machine_rat_a_tat"))
-	{
-		if(get_possible_attachments_by_weaponclass(var_1B,var_06,"doubletap"))
-		{
+	if(scripts\cp\utility::has_zombie_perk("perk_machine_rat_a_tat")) {
+		if(get_possible_attachments_by_weaponclass(var_1B,var_06,"doubletap")) {
 			param_02[param_02.size] = "doubletap";
 		}
 	}
 
-	if(isdefined(param_01))
-	{
-		if(weaponclass(param_00) == "spread")
-		{
-			if(issubstr(param_01,"arkyellow"))
-			{
-				foreach(var_1E in param_02)
-				{
-					if(issubstr(var_1E,"smart"))
-					{
+	if(isdefined(param_01)) {
+		if(weaponclass(param_00) == "spread") {
+			if(issubstr(param_01,"arkyellow")) {
+				foreach(var_1E in param_02) {
+					if(issubstr(var_1E,"smart")) {
 						param_02 = scripts\engine\utility::array_remove(param_02,var_1E);
 					}
 				}
@@ -4515,14 +3680,10 @@ return_weapon_name_with_like_attachments(param_00,param_01,param_02,param_03,par
 
 	param_02 = scripts\engine\utility::array_remove_duplicates(param_02);
 	param_02 = scripts\engine\utility::array_removeundefined(param_02);
-	if(param_02.size > 0 && param_02.size <= var_1A)
-	{
-		foreach(var_21 in param_02)
-		{
-			if(is_pap_attachment(var_21))
-			{
-				if(var_11.size < var_12)
-				{
+	if(param_02.size > 0 && param_02.size <= var_1A) {
+		foreach(var_21 in param_02) {
+			if(is_pap_attachment(var_21)) {
+				if(var_11.size < var_12) {
 					var_11[var_11.size] = var_21;
 					var_19[var_19.size] = var_21;
 				}
@@ -4534,10 +3695,8 @@ return_weapon_name_with_like_attachments(param_00,param_01,param_02,param_03,par
 				continue;
 			}
 
-			if(is_arcane_attachment(var_21))
-			{
-				if(var_17.size < var_18)
-				{
+			if(is_arcane_attachment(var_21)) {
+				if(var_17.size < var_18) {
 					var_17[var_17.size] = var_21;
 					var_19[var_19.size] = var_21;
 				}
@@ -4549,10 +3708,8 @@ return_weapon_name_with_like_attachments(param_00,param_01,param_02,param_03,par
 				continue;
 			}
 
-			if(is_mod_attachment(var_21))
-			{
-				if(var_13.size < var_14)
-				{
+			if(is_mod_attachment(var_21)) {
+				if(var_13.size < var_14) {
 					var_13[var_13.size] = var_21;
 					var_19[var_19.size] = var_21;
 				}
@@ -4564,10 +3721,8 @@ return_weapon_name_with_like_attachments(param_00,param_01,param_02,param_03,par
 				continue;
 			}
 
-			if(is_default_attachment(var_21,scripts\cp\utility::getweaponrootname(var_06)))
-			{
-				if(var_15.size < var_16)
-				{
+			if(is_default_attachment(var_21,scripts\cp\utility::getweaponrootname(var_06))) {
+				if(var_15.size < var_16) {
 					var_15[var_15.size] = var_21;
 					var_19[var_19.size] = var_21;
 				}
@@ -4579,10 +3734,8 @@ return_weapon_name_with_like_attachments(param_00,param_01,param_02,param_03,par
 				continue;
 			}
 
-			if(is_perk_attachment(var_21))
-			{
-				if(var_0F.size < var_10)
-				{
+			if(is_perk_attachment(var_21)) {
+				if(var_0F.size < var_10) {
 					var_0F[var_0F.size] = var_21;
 					var_19[var_19.size] = var_21;
 				}
@@ -4594,8 +3747,7 @@ return_weapon_name_with_like_attachments(param_00,param_01,param_02,param_03,par
 				continue;
 			}
 
-			if(var_0D.size < var_0E)
-			{
+			if(var_0D.size < var_0E) {
 				var_0D[var_0D.size] = var_21;
 				var_19[var_19.size] = var_21;
 				continue;
@@ -4605,16 +3757,12 @@ return_weapon_name_with_like_attachments(param_00,param_01,param_02,param_03,par
 		}
 	}
 
-	if(isdefined(param_01))
-	{
+	if(isdefined(param_01)) {
 		var_23 = scripts\cp\utility::attachmentmap_tobase(param_01);
-		if(isdefined(var_23) && var_23 != "none")
-		{
-			for(var_24 = 0;var_24 < var_19.size;var_24++)
-			{
+		if(isdefined(var_23) && var_23 != "none") {
+			for(var_24 = 0;var_24 < var_19.size;var_24++) {
 				var_25 = scripts\cp\utility::attachmentmap_tobase(var_19[var_24]);
-				if(var_25 == var_23)
-				{
+				if(var_25 == var_23) {
 					var_19[var_24] = param_01;
 					var_08 = 1;
 					break;
@@ -4623,24 +3771,18 @@ return_weapon_name_with_like_attachments(param_00,param_01,param_02,param_03,par
 		}
 
 		var_26 = scripts\cp\utility::getattachmenttype(param_01);
-		if(isdefined(var_26) && var_26 != "none")
-		{
-			if(!var_08)
-			{
-				if(is_pap_attachment(param_01))
-				{
-					if(var_11.size < var_12)
-					{
+		if(isdefined(var_26) && var_26 != "none") {
+			if(!var_08) {
+				if(is_pap_attachment(param_01)) {
+					if(var_11.size < var_12) {
 						var_11[var_11.size] = param_01;
 						var_19[var_19.size] = param_01;
 					}
 					else
 					{
-						for(var_24 = 0;var_24 < var_19.size;var_24++)
-						{
+						for(var_24 = 0;var_24 < var_19.size;var_24++) {
 							var_27 = scripts\cp\utility::getattachmenttype(var_19[var_24]);
-							if(var_27 == var_26)
-							{
+							if(var_27 == var_26) {
 								var_11[var_11.size] = param_01;
 								var_19[var_24] = param_01;
 								var_08 = 1;
@@ -4649,20 +3791,16 @@ return_weapon_name_with_like_attachments(param_00,param_01,param_02,param_03,par
 						}
 					}
 				}
-				else if(is_arcane_attachment(param_01))
-				{
-					if(var_17.size < var_18)
-					{
+				else if(is_arcane_attachment(param_01)) {
+					if(var_17.size < var_18) {
 						var_17[var_17.size] = param_01;
 						var_19[var_19.size] = param_01;
 					}
 					else
 					{
-						for(var_24 = 0;var_24 < var_19.size;var_24++)
-						{
+						for(var_24 = 0;var_24 < var_19.size;var_24++) {
 							var_27 = scripts\cp\utility::getattachmenttype(var_19[var_24]);
-							if(var_27 == var_26)
-							{
+							if(var_27 == var_26) {
 								var_17[var_0F.size] = param_01;
 								var_19[var_24] = param_01;
 								var_08 = 1;
@@ -4671,20 +3809,16 @@ return_weapon_name_with_like_attachments(param_00,param_01,param_02,param_03,par
 						}
 					}
 				}
-				else if(is_perk_attachment(param_01))
-				{
-					if(var_0F.size < var_10)
-					{
+				else if(is_perk_attachment(param_01)) {
+					if(var_0F.size < var_10) {
 						var_0F[var_0F.size] = param_01;
 						var_19[var_19.size] = param_01;
 					}
 					else
 					{
-						for(var_24 = 0;var_24 < var_19.size;var_24++)
-						{
+						for(var_24 = 0;var_24 < var_19.size;var_24++) {
 							var_27 = scripts\cp\utility::getattachmenttype(var_19[var_24]);
-							if(var_27 == var_26)
-							{
+							if(var_27 == var_26) {
 								var_0F[var_0F.size] = param_01;
 								var_19[var_24] = param_01;
 								var_08 = 1;
@@ -4693,18 +3827,15 @@ return_weapon_name_with_like_attachments(param_00,param_01,param_02,param_03,par
 						}
 					}
 				}
-				else if(var_0D.size < var_0E)
-				{
+				else if(var_0D.size < var_0E) {
 					var_0D[var_0D.size] = param_01;
 					var_19[var_19.size] = param_01;
 				}
 				else
 				{
-					for(var_24 = 0;var_24 < var_19.size;var_24++)
-					{
+					for(var_24 = 0;var_24 < var_19.size;var_24++) {
 						var_27 = scripts\cp\utility::getattachmenttype(var_19[var_24]);
-						if(var_27 == var_26)
-						{
+						if(var_27 == var_26) {
 							var_0D[var_0D.size] = param_01;
 							var_19[var_24] = param_01;
 							var_08 = 1;
@@ -4712,24 +3843,20 @@ return_weapon_name_with_like_attachments(param_00,param_01,param_02,param_03,par
 						}
 					}
 
-					if(!var_08)
-					{
+					if(!var_08) {
 						return undefined;
 					}
 				}
 			}
-			else if(is_perk_attachment(param_01))
-			{
+			else if(is_perk_attachment(param_01)) {
 				var_11[var_11.size] = param_01;
 				var_19[var_19.size] = param_01;
 			}
-			else if(is_pap_attachment(param_01))
-			{
+			else if(is_pap_attachment(param_01)) {
 				var_0F[var_0F.size] = param_01;
 				var_19[var_19.size] = param_01;
 			}
-			else if(is_arcane_attachment(param_01))
-			{
+			else if(is_arcane_attachment(param_01)) {
 				var_17[var_17.size] = param_01;
 				var_19[var_19.size] = param_01;
 			}
@@ -4739,20 +3866,16 @@ return_weapon_name_with_like_attachments(param_00,param_01,param_02,param_03,par
 				var_19[var_19.size] = param_01;
 			}
 		}
-		else if(isdefined(param_01))
-		{
-			if(is_perk_attachment(param_01))
-			{
+		else if(isdefined(param_01)) {
+			if(is_perk_attachment(param_01)) {
 				var_0F[var_0F.size] = param_01;
 				var_19[var_19.size] = param_01;
 			}
-			else if(is_pap_attachment(param_01))
-			{
+			else if(is_pap_attachment(param_01)) {
 				var_11[var_11.size] = param_01;
 				var_19[var_19.size] = param_01;
 			}
-			else if(is_arcane_attachment(param_01))
-			{
+			else if(is_arcane_attachment(param_01)) {
 				var_17[var_17.size] = param_01;
 				var_19[var_19.size] = param_01;
 			}
@@ -4766,8 +3889,7 @@ return_weapon_name_with_like_attachments(param_00,param_01,param_02,param_03,par
 
 	var_28 = scripts\cp\utility::getweaponrootname(var_06);
 	var_29 = isdefined(self.weapon_build_models[scripts\cp\utility::getrawbaseweaponname(var_05)]);
-	if(!isdefined(param_04) && var_29)
-	{
+	if(!isdefined(param_04) && var_29) {
 		var_0A = scripts\cp\utility::getweaponcamo(var_28);
 	}
 	else
@@ -4775,21 +3897,17 @@ return_weapon_name_with_like_attachments(param_00,param_01,param_02,param_03,par
 		var_0A = param_04;
 	}
 
-	if(var_29)
-	{
+	if(var_29) {
 		var_2A = 0;
-		foreach(var_1E in var_19)
-		{
-			if(issubstr(var_1E,"cos_"))
-			{
+		foreach(var_1E in var_19) {
+			if(issubstr(var_1E,"cos_")) {
 				var_2A = 1;
 				var_0C = undefined;
 				break;
 			}
 		}
 
-		if(!var_2A)
-		{
+		if(!var_2A) {
 			var_0C = scripts\cp\utility::getweaponcosmeticattachment(var_28);
 		}
 
@@ -4803,19 +3921,14 @@ return_weapon_name_with_like_attachments(param_00,param_01,param_02,param_03,par
 		var_2D = undefined;
 	}
 
-	foreach(var_1E in var_19)
-	{
-		if(issubstr(var_1E,"arcane") || issubstr(var_1E,"ark"))
-		{
-			foreach(var_30 in var_19)
-			{
-				if(var_1E == var_30)
-				{
+	foreach(var_1E in var_19) {
+		if(issubstr(var_1E,"arcane") || issubstr(var_1E,"ark")) {
+			foreach(var_30 in var_19) {
+				if(var_1E == var_30) {
 					continue;
 				}
 
-				if(issubstr(var_30,"cos_"))
-				{
+				if(issubstr(var_30,"cos_")) {
 					var_19 = scripts\engine\utility::array_remove(var_19,var_30);
 				}
 			}
@@ -4825,29 +3938,23 @@ return_weapon_name_with_like_attachments(param_00,param_01,param_02,param_03,par
 	}
 
 	var_33 = scripts\cp\utility::mpbuildweaponname(var_28,var_19,var_0A,var_0B,var_07,self getentitynumber(),self.clientid,var_2D,var_0C);
-	if(isdefined(var_33))
-	{
+	if(isdefined(var_33)) {
 		return var_33;
 	}
 
 	return var_05;
 }
 
-//Function Number: 173
-getattachmenttypeslist(param_00,param_01)
-{
+getattachmenttypeslist(param_00,param_01) {
 	var_02 = scripts\cp\utility::getweaponattachmentarrayfromstats(param_00);
 	var_03 = [];
-	foreach(var_05 in var_02)
-	{
+	foreach(var_05 in var_02) {
 		var_06 = scripts\cp\utility::getattachmenttype(var_05);
-		if(isdefined(param_01) && scripts\cp\utility::listhasattachment(param_01,var_05))
-		{
+		if(isdefined(param_01) && scripts\cp\utility::listhasattachment(param_01,var_05)) {
 			continue;
 		}
 
-		if(!isdefined(var_03[var_06]))
-		{
+		if(!isdefined(var_03[var_06])) {
 			var_03[var_06] = [];
 		}
 
@@ -4859,19 +3966,14 @@ getattachmenttypeslist(param_00,param_01)
 	return var_03;
 }
 
-//Function Number: 174
-getattachmentlistbasenames()
-{
+getattachmentlistbasenames() {
 	var_00 = [];
 	var_01 = ["mp/attachmentTable.csv","cp/zombies/zombie_attachmenttable.csv"];
-	foreach(var_03 in var_01)
-	{
+	foreach(var_03 in var_01) {
 		var_04 = 0;
-		for(var_05 = tablelookup(var_03,0,var_04,5);var_05 != "";var_05 = tablelookup(var_03,0,var_04,5))
-		{
+		for(var_05 = tablelookup(var_03,0,var_04,5);var_05 != "";var_05 = tablelookup(var_03,0,var_04,5)) {
 			var_06 = tablelookup(var_03,0,var_04,2);
-			if(var_06 != "none" && !scripts\engine\utility::array_contains(var_00,var_05))
-			{
+			if(var_06 != "none" && !scripts\engine\utility::array_contains(var_00,var_05)) {
 				var_00[var_00.size] = var_05;
 			}
 
@@ -4882,58 +3984,45 @@ getattachmentlistbasenames()
 	return var_00;
 }
 
-//Function Number: 175
-getweaponattachmentarray(param_00)
-{
+getweaponattachmentarray(param_00) {
 	var_01 = [];
 	var_02 = scripts\cp\utility::getbaseweaponname(param_00);
 	var_03 = scripts\cp\utility::coop_getweaponclass(param_00);
-	if(isdefined(level.attachmentmap_basetounique[var_02]))
-	{
+	if(isdefined(level.attachmentmap_basetounique[var_02])) {
 		var_01 = scripts\engine\utility::array_combine(var_01,level.attachmentmap_basetounique[var_02]);
 	}
 
-	if(isdefined(level.attachmentmap_basetounique[var_03]))
-	{
+	if(isdefined(level.attachmentmap_basetounique[var_03])) {
 		var_01 = scripts\engine\utility::array_combine(var_01,level.attachmentmap_basetounique[var_03]);
 	}
 
 	return var_01;
 }
 
-//Function Number: 176
-isvalidzombieweapon(param_00)
-{
-	if(!isdefined(level.weaponrefs))
-	{
+isvalidzombieweapon(param_00) {
+	if(!isdefined(level.weaponrefs)) {
 		level.weaponrefs = [];
-		foreach(var_02 in level.weaponlist)
-		{
+		foreach(var_02 in level.weaponlist) {
 			level.weaponrefs[var_02] = 1;
 		}
 	}
 
-	if(isdefined(level.weaponrefs[param_00]))
-	{
+	if(isdefined(level.weaponrefs[param_00])) {
 		return 1;
 	}
 
 	return 0;
 }
 
-//Function Number: 177
-setweaponlaser_internal()
-{
+setweaponlaser_internal() {
 	self endon("death");
 	self endon("disconnect");
 	self endon("unsetWeaponLaser");
 	self.perkweaponlaseron = 0;
 	var_00 = self getcurrentweapon();
-	for(;;)
-	{
+	for(;;) {
 		setweaponlaser_waitforlaserweapon(var_00);
-		if(self.perkweaponlaseron == 0)
-		{
+		if(self.perkweaponlaseron == 0) {
 			self.perkweaponlaseron = 1;
 			enableweaponlaser();
 		}
@@ -4942,22 +4031,17 @@ setweaponlaser_internal()
 		childthread setweaponlaser_monitorweaponswitchstart(1);
 		self.perkweaponlaseroffforswitchstart = undefined;
 		self waittill("weapon_change",var_00);
-		if(self.perkweaponlaseron == 1)
-		{
+		if(self.perkweaponlaseron == 1) {
 			self.perkweaponlaseron = 0;
 			disableweaponlaser();
 		}
 	}
 }
 
-//Function Number: 178
-setweaponlaser_waitforlaserweapon(param_00)
-{
-	for(;;)
-	{
+setweaponlaser_waitforlaserweapon(param_00) {
+	for(;;) {
 		param_00 = getweaponbasename(param_00);
-		if(isdefined(param_00) && param_00 == "iw6_kac_mp" || param_00 == "iw6_arx160_mp")
-		{
+		if(isdefined(param_00) && param_00 == "iw6_kac_mp" || param_00 == "iw6_arx160_mp") {
 			break;
 		}
 
@@ -4965,24 +4049,17 @@ setweaponlaser_waitforlaserweapon(param_00)
 	}
 }
 
-//Function Number: 179
-setweaponlaser_monitorads()
-{
+setweaponlaser_monitorads() {
 	self endon("weapon_change");
-	for(;;)
-	{
-		if(!isdefined(self.perkweaponlaseroffforswitchstart) || self.perkweaponlaseroffforswitchstart == 0)
-		{
-			if(self getweaponrankinfominxp() > 0.6)
-			{
-				if(self.perkweaponlaseron == 1)
-				{
+	for(;;) {
+		if(!isdefined(self.perkweaponlaseroffforswitchstart) || self.perkweaponlaseroffforswitchstart == 0) {
+			if(self getweaponrankinfominxp() > 0.6) {
+				if(self.perkweaponlaseron == 1) {
 					self.perkweaponlaseron = 0;
 					disableweaponlaser();
 				}
 			}
-			else if(self.perkweaponlaseron == 0)
-			{
+			else if(self.perkweaponlaseron == 0) {
 				self.perkweaponlaseron = 1;
 				enableweaponlaser();
 			}
@@ -4992,24 +4069,18 @@ setweaponlaser_monitorads()
 	}
 }
 
-//Function Number: 180
-setweaponlaser_monitorweaponswitchstart(param_00)
-{
+setweaponlaser_monitorweaponswitchstart(param_00) {
 	self endon("weapon_change");
-	for(;;)
-	{
+	for(;;) {
 		self waittill("weapon_switch_started");
 		childthread setweaponlaser_onweaponswitchstart(param_00);
 	}
 }
 
-//Function Number: 181
-setweaponlaser_onweaponswitchstart(param_00)
-{
+setweaponlaser_onweaponswitchstart(param_00) {
 	self notify("setWeaponLaser_onWeaponSwitchStart");
 	self endon("setWeaponLaser_onWeaponSwitchStart");
-	if(self.perkweaponlaseron == 1)
-	{
+	if(self.perkweaponlaseron == 1) {
 		self.perkweaponlaseroffforswitchstart = 1;
 		self.perkweaponlaseron = 0;
 		disableweaponlaser();
@@ -5017,18 +4088,14 @@ setweaponlaser_onweaponswitchstart(param_00)
 
 	wait(param_00);
 	self.perkweaponlaseroffforswitchstart = undefined;
-	if(self.perkweaponlaseron == 0 && self getweaponrankinfominxp() <= 0.6)
-	{
+	if(self.perkweaponlaseron == 0 && self getweaponrankinfominxp() <= 0.6) {
 		self.perkweaponlaseron = 1;
 		enableweaponlaser();
 	}
 }
 
-//Function Number: 182
-enableweaponlaser()
-{
-	if(!isdefined(self.weaponlasercalls))
-	{
+enableweaponlaser() {
+	if(!isdefined(self.weaponlasercalls)) {
 		self.weaponlasercalls = 0;
 	}
 
@@ -5036,26 +4103,20 @@ enableweaponlaser()
 	self laseron();
 }
 
-//Function Number: 183
-disableweaponlaser()
-{
+disableweaponlaser() {
 	self.var_13C9E--;
-	if(self.weaponlasercalls == 0)
-	{
+	if(self.weaponlasercalls == 0) {
 		self laseroff();
 		self.weaponlasercalls = undefined;
 	}
 }
 
-//Function Number: 184
-ondetonateexplosive(param_00)
-{
+ondetonateexplosive(param_00) {
 	self endon("death");
 	level endon("game_ended");
 	thread cleanupexplosivesondeath();
 	self waittill("detonateExplosive");
-	if(isdefined(param_00))
-	{
+	if(isdefined(param_00)) {
 		self.triggerportableradarping notify(param_00,1);
 	}
 	else
@@ -5066,9 +4127,7 @@ ondetonateexplosive(param_00)
 	self detonate(self.triggerportableradarping);
 }
 
-//Function Number: 185
-cleanupexplosivesondeath()
-{
+cleanupexplosivesondeath() {
 	self endon("deleted_equipment");
 	level endon("game_ended");
 	var_00 = self getentitynumber();
@@ -5079,61 +4138,46 @@ cleanupexplosivesondeath()
 	cleanupequipment(var_00,var_01,var_02,var_03);
 }
 
-//Function Number: 186
-cleanupequipment(param_00,param_01,param_02,param_03)
-{
-	if(isdefined(self.weapon_name))
-	{
-		if(self.weapon_name == "c4_zm")
-		{
+cleanupequipment(param_00,param_01,param_02,param_03) {
+	if(isdefined(self.weapon_name)) {
+		if(self.weapon_name == "c4_zm") {
 			self.triggerportableradarping notify("c4_update",0);
 		}
-		else if(self.weapon_name == "bouncingbetty_mp")
-		{
+		else if(self.weapon_name == "bouncingbetty_mp") {
 			self.triggerportableradarping notify("bouncing_betty_update",0);
 		}
-		else if(self.weapon_name == "sticky_mine_mp")
-		{
+		else if(self.weapon_name == "sticky_mine_mp") {
 			self.triggerportableradarping notify("sticky_mine_update",0);
 		}
-		else if(self.weapon_name == "trip_mine_mp")
-		{
+		else if(self.weapon_name == "trip_mine_mp") {
 			self.triggerportableradarping notify("trip_mine_update",0);
 		}
-		else if(self.weapon_name == "cryo_grenade_mp")
-		{
+		else if(self.weapon_name == "cryo_grenade_mp") {
 			self.triggerportableradarping notify("restart_cryo_grenade_cooldown",0);
 		}
 	}
 
-	if(isdefined(param_00))
-	{
+	if(isdefined(param_00)) {
 		level.mines[param_00] = undefined;
 	}
 
-	if(isdefined(param_01))
-	{
+	if(isdefined(param_01)) {
 		param_01 delete();
 	}
 
-	if(isdefined(param_02))
-	{
+	if(isdefined(param_02)) {
 		param_02 delete();
 	}
 
-	if(isdefined(param_03))
-	{
+	if(isdefined(param_03)) {
 		param_03 delete();
 	}
 }
 
-//Function Number: 187
-monitordamage(param_00,param_01,param_02,param_03,param_04,param_05)
-{
+monitordamage(param_00,param_01,param_02,param_03,param_04,param_05) {
 	self endon("death");
 	level endon("game_ended");
-	if(!isdefined(param_05))
-	{
+	if(!isdefined(param_05)) {
 		param_05 = 0;
 	}
 
@@ -5141,34 +4185,27 @@ monitordamage(param_00,param_01,param_02,param_03,param_04,param_05)
 	self.health = 999999;
 	self.maxhealth = param_00;
 	self.var_E1 = 0;
-	if(!isdefined(param_04))
-	{
+	if(!isdefined(param_04)) {
 		param_04 = 0;
 	}
 
-	for(var_06 = 1;var_06;var_06 = monitordamageoneshot(var_07,var_08,var_09,var_0A,var_0B,var_0C,var_0D,var_0E,var_0F,var_10,param_01,param_02,param_03,param_04))
-	{
+	for(var_06 = 1;var_06;var_06 = monitordamageoneshot(var_07,var_08,var_09,var_0A,var_0B,var_0C,var_0D,var_0E,var_0F,var_10,param_01,param_02,param_03,param_04)) {
 		self waittill("damage",var_07,var_08,var_09,var_0A,var_0B,var_0C,var_0D,var_0E,var_0F,var_10);
-		if(param_05)
-		{
+		if(param_05) {
 			self playrumbleonentity("damage_light");
 		}
 
-		if(isdefined(self.helitype) && self.helitype == "littlebird")
-		{
-			if(!isdefined(self.attackers))
-			{
+		if(isdefined(self.helitype) && self.helitype == "littlebird") {
+			if(!isdefined(self.attackers)) {
 				self.attackers = [];
 			}
 
 			var_11 = "";
-			if(isdefined(var_08) && isplayer(var_08))
-			{
+			if(isdefined(var_08) && isplayer(var_08)) {
 				var_11 = var_08 scripts\cp\utility::getuniqueid();
 			}
 
-			if(isdefined(self.attackers[var_11]))
-			{
+			if(isdefined(self.attackers[var_11])) {
 				self.attackers[var_11] = self.attackers[var_11] + var_07;
 			}
 			else
@@ -5179,51 +4216,38 @@ monitordamage(param_00,param_01,param_02,param_03,param_04,param_05)
 	}
 }
 
-//Function Number: 188
-monitordamageoneshot(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08,param_09,param_0A,param_0B,param_0C,param_0D)
-{
-	if(!isdefined(self))
-	{
+monitordamageoneshot(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08,param_09,param_0A,param_0B,param_0C,param_0D) {
+	if(!isdefined(self)) {
 		return 0;
 	}
 
-	if(isdefined(param_01) && !scripts\cp\utility::isgameparticipant(param_01) && !isdefined(param_01.allowmonitoreddamage))
-	{
+	if(isdefined(param_01) && !scripts\cp\utility::isgameparticipant(param_01) && !isdefined(param_01.allowmonitoreddamage)) {
 		return 1;
 	}
 
 	return 1;
 }
 
-//Function Number: 189
-explosivehandlemovers(param_00,param_01)
-{
+explosivehandlemovers(param_00,param_01) {
 	var_02 = spawnstruct();
 	var_02.linkparent = param_00;
 	var_02.deathoverridecallback = ::movingplatformdetonate;
 	var_02.endonstring = "death";
-	if(!isdefined(param_01) || !param_01)
-	{
+	if(!isdefined(param_01) || !param_01) {
 		var_02.invalidparentoverridecallback = ::scripts\cp\cp_movers::moving_platform_empty_func;
 	}
 
 	thread scripts\cp\cp_movers::handle_moving_platforms(var_02);
 }
 
-//Function Number: 190
-movingplatformdetonate(param_00)
-{
-	if(!isdefined(param_00.lasttouchedplatform) || !isdefined(param_00.lasttouchedplatform.destroyexplosiveoncollision) || param_00.lasttouchedplatform.destroyexplosiveoncollision)
-	{
+movingplatformdetonate(param_00) {
+	if(!isdefined(param_00.lasttouchedplatform) || !isdefined(param_00.lasttouchedplatform.destroyexplosiveoncollision) || param_00.lasttouchedplatform.destroyexplosiveoncollision) {
 		self notify("detonateExplosive");
 	}
 }
 
-//Function Number: 191
-makeexplosiveusable()
-{
-	if(scripts\cp\utility::isreallyalive(self.triggerportableradarping))
-	{
+makeexplosiveusable() {
+	if(scripts\cp\utility::isreallyalive(self.triggerportableradarping)) {
 		self setotherent(self.triggerportableradarping);
 		self.trigger = spawn("script_origin",self.origin + getexplosiveusableoffset());
 		self.trigger.triggerportableradarping = self;
@@ -5231,16 +4255,13 @@ makeexplosiveusable()
 	}
 }
 
-//Function Number: 192
-equipmentwatchuse(param_00,param_01)
-{
+equipmentwatchuse(param_00,param_01) {
 	self notify("equipmentWatchUse");
 	self endon("spawned_player");
 	self endon("disconnect");
 	self endon("equipmentWatchUse");
 	self.trigger setcursorhint("HINT_NOICON");
-	switch(self.weapon_name)
-	{
+	switch(self.weapon_name) {
 		case "c4_zm":
 			self.trigger sethintstring(&"MP_PICKUP_C4");
 			break;
@@ -5298,13 +4319,11 @@ equipmentwatchuse(param_00,param_01)
 
 	self.trigger scripts\cp\utility::setselfusable(param_00);
 	self.trigger thread scripts\cp\utility::notusableforjoiningplayers(param_00);
-	if(isdefined(param_01) && param_01)
-	{
+	if(isdefined(param_01) && param_01) {
 		thread updatetriggerposition();
 	}
 
-	for(;;)
-	{
+	for(;;) {
 		self.trigger waittill("trigger",param_00);
 		param_00 playlocalsound("scavenger_pack_pickup");
 		param_00 notify("scavenged_ammo",self.weapon_name);
@@ -5314,17 +4333,12 @@ equipmentwatchuse(param_00,param_01)
 	}
 }
 
-//Function Number: 193
-updatetriggerposition()
-{
+updatetriggerposition() {
 	self endon("death");
-	for(;;)
-	{
-		if(isdefined(self) && isdefined(self.trigger))
-		{
+	for(;;) {
+		if(isdefined(self) && isdefined(self.trigger)) {
 			self.trigger.origin = self.origin + getexplosiveusableoffset();
-			if(isdefined(self.bombsquadmodel))
-			{
+			if(isdefined(self.bombsquadmodel)) {
 				self.bombsquadmodel.origin = self.origin;
 			}
 		}
@@ -5337,11 +4351,8 @@ updatetriggerposition()
 	}
 }
 
-//Function Number: 194
-deleteexplosive(param_00)
-{
-	if(isdefined(self))
-	{
+deleteexplosive(param_00) {
+	if(isdefined(self)) {
 		var_01 = self getentitynumber();
 		var_02 = self.killcament;
 		var_03 = self.trigger;
@@ -5352,14 +4363,10 @@ deleteexplosive(param_00)
 	}
 }
 
-//Function Number: 195
-ontacticalequipmentplanted(param_00)
-{
-	if(self.plantedtacticalequip.size)
-	{
+ontacticalequipmentplanted(param_00) {
+	if(self.plantedtacticalequip.size) {
 		self.plantedtacticalequip = scripts\engine\utility::array_removeundefined(self.plantedtacticalequip);
-		if(self.plantedtacticalequip.size >= level.maxperplayerexplosives)
-		{
+		if(self.plantedtacticalequip.size >= level.maxperplayerexplosives) {
 			self.plantedtacticalequip[0] notify("detonateExplosive");
 		}
 	}
@@ -5370,52 +4377,40 @@ ontacticalequipmentplanted(param_00)
 	level notify("mine_planted");
 }
 
-//Function Number: 196
-equipmentdeathvfx(param_00)
-{
+equipmentdeathvfx(param_00) {
 	var_01 = spawnfx(scripts\engine\utility::getfx("equipment_sparks"),self.origin);
 	triggerfx(var_01);
-	if(!isdefined(param_00) || param_00 == 0)
-	{
+	if(!isdefined(param_00) || param_00 == 0) {
 		self playsound("sentry_explode");
 	}
 
 	var_01 thread scripts\cp\utility::delayentdelete(1);
 }
 
-//Function Number: 197
-equipmentdeletevfx()
-{
+equipmentdeletevfx() {
 	var_00 = spawnfx(scripts\engine\utility::getfx("placeEquipmentFailed"),self.origin);
 	triggerfx(var_00);
 	self playsound("mp_killstreak_disappear");
 	var_00 thread scripts\cp\utility::delayentdelete(1);
 }
 
-//Function Number: 198
-monitordisownedequipment(param_00,param_01)
-{
+monitordisownedequipment(param_00,param_01) {
 	level endon("game_ended");
 	param_01 endon("death");
 	param_00 scripts\engine\utility::waittill_any_3("joined_team","joined_spectators","disconnect");
 	param_01 deleteexplosive();
 }
 
-//Function Number: 199
-isprimaryweapon(param_00)
-{
-	if(param_00 == "none")
-	{
+isprimaryweapon(param_00) {
+	if(param_00 == "none") {
 		return 0;
 	}
 
-	if(function_0244(param_00) != "primary")
-	{
+	if(function_0244(param_00) != "primary") {
 		return 0;
 	}
 
-	switch(weaponclass(param_00))
-	{
+	switch(weaponclass(param_00)) {
 		case "smg":
 		case "sniper":
 		case "rocketlauncher":
@@ -5430,26 +4425,18 @@ isprimaryweapon(param_00)
 	}
 }
 
-//Function Number: 200
-getexplosiveusableoffset()
-{
+getexplosiveusableoffset() {
 	var_00 = anglestoup(self.angles);
 	return 10 * var_00;
 }
 
-//Function Number: 201
-isknifeonly(param_00)
-{
+isknifeonly(param_00) {
 	return issubstr(param_00,"knife");
 }
 
-//Function Number: 202
-is_incompatible_weapon(param_00)
-{
-	if(isdefined(level.ammoincompatibleweaponslist))
-	{
-		if(scripts\engine\utility::array_contains(level.ammoincompatibleweaponslist,param_00))
-		{
+is_incompatible_weapon(param_00) {
+	if(isdefined(level.ammoincompatibleweaponslist)) {
+		if(scripts\engine\utility::array_contains(level.ammoincompatibleweaponslist,param_00)) {
 			return 1;
 		}
 	}
@@ -5457,16 +4444,12 @@ is_incompatible_weapon(param_00)
 	return 0;
 }
 
-//Function Number: 203
-isbulletweapon(param_00)
-{
-	if(param_00 == "none" || scripts\cp\utility::isriotshield(param_00) || isknifeonly(param_00))
-	{
+isbulletweapon(param_00) {
+	if(param_00 == "none" || scripts\cp\utility::isriotshield(param_00) || isknifeonly(param_00)) {
 		return 0;
 	}
 
-	switch(weaponclass(param_00))
-	{
+	switch(weaponclass(param_00)) {
 		case "smg":
 		case "sniper":
 		case "mg":
@@ -5480,11 +4463,8 @@ isbulletweapon(param_00)
 	}
 }
 
-//Function Number: 204
-is_explosive_kill(param_00)
-{
-	switch(param_00)
-	{
+is_explosive_kill(param_00) {
+	switch(param_00) {
 		case "zombie_armageddon_mp":
 		case "zfreeze_semtex_mp":
 		case "splash_grenade_zm":
@@ -5502,61 +4482,46 @@ is_explosive_kill(param_00)
 	}
 }
 
-//Function Number: 205
-is_arc_death(param_00,param_01,param_02,param_03,param_04,param_05)
-{
+is_arc_death(param_00,param_01,param_02,param_03,param_04,param_05) {
 	return param_02 && param_03 && param_04 && !param_05 && isdefined(param_01.stun_struct) && isdefined(param_01.stun_struct.attack_bolt) && param_00 == param_01.stun_struct.attack_bolt;
 }
 
-//Function Number: 206
-is_holding_pistol(param_00)
-{
+is_holding_pistol(param_00) {
 	var_01 = param_00 getcurrentprimaryweapon();
-	if(scripts\cp\utility::coop_getweaponclass(var_01) == "weapon_pistol")
-	{
+	if(scripts\cp\utility::coop_getweaponclass(var_01) == "weapon_pistol") {
 		return 1;
 	}
 
 	return 0;
 }
 
-//Function Number: 207
-get_weapon_level(param_00)
-{
-	if(!isplayer(self))
-	{
+get_weapon_level(param_00) {
+	if(!isplayer(self)) {
 		return int(1);
 	}
 
-	if(isdefined(self.pap[param_00]))
-	{
+	if(isdefined(self.pap[param_00])) {
 		return self.pap[param_00].lvl;
 	}
 
 	var_01 = scripts\cp\utility::getrawbaseweaponname(param_00);
-	if(isdefined(self.pap[var_01]))
-	{
+	if(isdefined(self.pap[var_01])) {
 		return self.pap[var_01].lvl;
 	}
 
 	return int(1);
 }
 
-//Function Number: 208
-can_upgrade(param_00,param_01)
-{
-	if(!isdefined(level.pap))
-	{
+can_upgrade(param_00,param_01) {
+	if(!isdefined(level.pap)) {
 		return 0;
 	}
 
-	if(isdefined(level.max_pap_func))
-	{
-		return [[ level.max_pap_func ]](param_00,param_01);
+	if(isdefined(level.max_pap_func)) {
+		return [[level.max_pap_func]](param_00,param_01);
 	}
 
-	if(isdefined(param_00))
-	{
+	if(isdefined(param_00)) {
 		var_02 = scripts\cp\utility::getrawbaseweaponname(param_00);
 	}
 	else
@@ -5564,41 +4529,32 @@ can_upgrade(param_00,param_01)
 		return 0;
 	}
 
-	if(!isdefined(var_02))
-	{
+	if(!isdefined(var_02)) {
 		return 0;
 	}
 
-	if(var_02 == "wylerdagger")
-	{
+	if(var_02 == "wylerdagger") {
 		return 0;
 	}
 
-	if(!isdefined(level.pap[var_02]))
-	{
+	if(!isdefined(level.pap[var_02])) {
 		var_03 = getsubstr(var_02,0,var_02.size - 1);
-		if(!isdefined(level.pap[var_03]))
-		{
+		if(!isdefined(level.pap[var_03])) {
 			return 0;
 		}
 	}
 
-	if(isdefined(self.ephemeralweapon) && getweaponbasename(self.ephemeralweapon) == getweaponbasename(param_00))
-	{
+	if(isdefined(self.ephemeralweapon) && getweaponbasename(self.ephemeralweapon) == getweaponbasename(param_00)) {
 		return 0;
 	}
 
-	if(isdefined(level.weapon_upgrade_path) && isdefined(level.weapon_upgrade_path[getweaponbasename(param_00)]))
-	{
+	if(isdefined(level.weapon_upgrade_path) && isdefined(level.weapon_upgrade_path[getweaponbasename(param_00)])) {
 		return 1;
 	}
 
-	if(var_02 == "dischord" || var_02 == "facemelter" || var_02 == "headcutter" || var_02 == "shredder")
-	{
-		if(scripts\cp\zombies\directors_cut::directors_cut_is_activated())
-		{
-			if(isdefined(self.pap[var_02]) && self.pap[var_02].lvl == 2)
-			{
+	if(var_02 == "dischord" || var_02 == "facemelter" || var_02 == "headcutter" || var_02 == "shredder") {
+		if(scripts\cp\zombies\directors_cut::directors_cut_is_activated()) {
+			if(isdefined(self.pap[var_02]) && self.pap[var_02].lvl == 2) {
 				return 0;
 			}
 			else
@@ -5607,10 +4563,8 @@ can_upgrade(param_00,param_01)
 			}
 		}
 
-		if(!scripts\engine\utility::flag("fuses_inserted"))
-		{
-			if(scripts\engine\utility::istrue(param_01))
-			{
+		if(!scripts\engine\utility::flag("fuses_inserted")) {
+			if(scripts\engine\utility::istrue(param_01)) {
 				return 1;
 			}
 			else
@@ -5618,21 +4572,17 @@ can_upgrade(param_00,param_01)
 				return 0;
 			}
 		}
-		else if(isdefined(self.pap[var_02]) && self.pap[var_02].lvl == 2)
-		{
+		else if(isdefined(self.pap[var_02]) && self.pap[var_02].lvl == 2) {
 			return 0;
 		}
 	}
 
-	if(scripts\engine\utility::istrue(level.has_picked_up_fuses) && !isdefined(level.placed_alien_fuses))
-	{
+	if(scripts\engine\utility::istrue(level.has_picked_up_fuses) && !isdefined(level.placed_alien_fuses)) {
 		return 1;
 	}
 
-	if((scripts\engine\utility::istrue(self.has_zis_soul_key) && !scripts\engine\utility::istrue(level.no_auto_pap_upgrade)) || scripts\engine\utility::istrue(level.placed_alien_fuses))
-	{
-		if(isdefined(self.pap[var_02]) && self.pap[var_02].lvl >= 3)
-		{
+	if((scripts\engine\utility::istrue(self.has_zis_soul_key) && !scripts\engine\utility::istrue(level.no_auto_pap_upgrade)) || scripts\engine\utility::istrue(level.placed_alien_fuses)) {
+		if(isdefined(self.pap[var_02]) && self.pap[var_02].lvl >= 3) {
 			return 0;
 		}
 		else
@@ -5641,40 +4591,31 @@ can_upgrade(param_00,param_01)
 		}
 	}
 
-	if(scripts\engine\utility::istrue(param_01) && isdefined(self.pap[var_02]) && self.pap[var_02].lvl <= min(level.pap_max + 1,2))
-	{
+	if(scripts\engine\utility::istrue(param_01) && isdefined(self.pap[var_02]) && self.pap[var_02].lvl <= min(level.pap_max + 1,2)) {
 		return 1;
 	}
 
-	if(isdefined(self.pap[var_02]) && self.pap[var_02].lvl >= level.pap_max)
-	{
+	if(isdefined(self.pap[var_02]) && self.pap[var_02].lvl >= level.pap_max) {
 		return 0;
 	}
 
 	return 1;
 }
 
-//Function Number: 209
-get_pap_camo(param_00,param_01,param_02)
-{
+get_pap_camo(param_00,param_01,param_02) {
 	var_03 = undefined;
-	if(isdefined(param_01))
-	{
-		if(isdefined(level.no_pap_camos) && scripts\engine\utility::array_contains(level.no_pap_camos,param_01))
-		{
+	if(isdefined(param_01)) {
+		if(isdefined(level.no_pap_camos) && scripts\engine\utility::array_contains(level.no_pap_camos,param_01)) {
 			var_03 = undefined;
 		}
-		else if(isdefined(level.pap_1_camo) && isdefined(param_00) && param_00 == 2)
-		{
+		else if(isdefined(level.pap_1_camo) && isdefined(param_00) && param_00 == 2) {
 			var_03 = level.pap_1_camo;
 		}
-		else if(isdefined(level.pap_2_camo) && isdefined(param_00) && param_00 == 3)
-		{
+		else if(isdefined(level.pap_2_camo) && isdefined(param_00) && param_00 == 3) {
 			var_03 = level.pap_2_camo;
 		}
 
-		switch(param_01)
-		{
+		switch(param_01) {
 			case "dischord":
 				param_02 = "iw7_dischord_zm_pap1";
 				var_03 = "camo20";
@@ -5691,12 +4632,10 @@ get_pap_camo(param_00,param_01,param_02)
 				break;
 
 			case "forgefreeze":
-				if(param_00 == 2)
-				{
+				if(param_00 == 2) {
 					param_02 = "iw7_forgefreeze_zm_pap1";
 				}
-				else if(param_00 == 3)
-				{
+				else if(param_00 == 3) {
 					param_02 = "iw7_forgefreeze_zm_pap2";
 				}
 	
@@ -5704,12 +4643,10 @@ get_pap_camo(param_00,param_01,param_02)
 				break;
 
 			case "axe":
-				if(param_00 == 2)
-				{
+				if(param_00 == 2) {
 					param_02 = "iw7_axe_zm_pap1";
 				}
-				else if(param_00 == 3)
-				{
+				else if(param_00 == 3) {
 					param_02 = "iw7_axe_zm_pap2";
 				}
 	
@@ -5726,101 +4663,80 @@ get_pap_camo(param_00,param_01,param_02)
 	return var_03;
 }
 
-//Function Number: 210
-validate_current_weapon(param_00,param_01,param_02)
-{
-	if(isdefined(level.weapon_upgrade_path) && isdefined(level.weapon_upgrade_path[getweaponbasename(param_02)]))
-	{
+validate_current_weapon(param_00,param_01,param_02) {
+	if(isdefined(level.weapon_upgrade_path) && isdefined(level.weapon_upgrade_path[getweaponbasename(param_02)])) {
 		param_02 = level.weapon_upgrade_path[getweaponbasename(param_02)];
 	}
-	else if(isdefined(param_01))
-	{
-		switch(param_01)
-		{
+	else if(isdefined(param_01)) {
+		switch(param_01) {
 			case "two":
-				if(param_00 == 2)
-				{
+				if(param_00 == 2) {
 					param_02 = "iw7_two_headed_axe_mp";
 				}
-				else if(param_00 == 3)
-				{
+				else if(param_00 == 3) {
 					param_02 = "iw7_two_headed_axe_mp";
 				}
 				break;
 
 			case "golf":
-				if(param_00 == 2)
-				{
+				if(param_00 == 2) {
 					param_02 = "iw7_golf_club_mp";
 				}
-				else if(param_00 == 3)
-				{
+				else if(param_00 == 3) {
 					param_02 = "iw7_golf_club_mp";
 				}
 				break;
 
 			case "machete":
-				if(param_00 == 2)
-				{
+				if(param_00 == 2) {
 					param_02 = "iw7_machete_mp";
 				}
-				else if(param_00 == 3)
-				{
+				else if(param_00 == 3) {
 					param_02 = "iw7_machete_mp";
 				}
 				break;
 
 			case "spiked":
-				if(param_00 == 2)
-				{
+				if(param_00 == 2) {
 					param_02 = "iw7_spiked_bat_mp";
 				}
-				else if(param_00 == 3)
-				{
+				else if(param_00 == 3) {
 					param_02 = "iw7_spiked_bat_mp";
 				}
 				break;
 
 			case "axe":
-				if(param_00 == 2)
-				{
+				if(param_00 == 2) {
 					param_02 = "iw7_axe_zm_pap1";
 				}
-				else if(param_00 == 3)
-				{
+				else if(param_00 == 3) {
 					param_02 = "iw7_axe_zm_pap2";
 				}
 				break;
 
 			case "katana":
-				if(param_00 == 2)
-				{
+				if(param_00 == 2) {
 					param_02 = "iw7_katana_zm_pap1";
 				}
-				else if(param_00 == 3)
-				{
+				else if(param_00 == 3) {
 					param_02 = "iw7_katana_zm_pap2";
 				}
 				break;
 
 			case "nunchucks":
-				if(param_00 == 2)
-				{
+				if(param_00 == 2) {
 					param_02 = "iw7_nunchucks_zm_pap1";
 				}
-				else if(param_00 == 3)
-				{
+				else if(param_00 == 3) {
 					param_02 = "iw7_nunchucks_zm_pap2";
 				}
 				break;
 
 			case "venomx":
-				if(param_00 == 2)
-				{
+				if(param_00 == 2) {
 					param_02 = "iw7_venomx_zm_pap1";
 				}
-				else if(param_00 == 3)
-				{
+				else if(param_00 == 3) {
 					param_02 = "iw7_venomx_zm_pap2";
 				}
 				break;
@@ -5833,22 +4749,16 @@ validate_current_weapon(param_00,param_01,param_02)
 	return param_02;
 }
 
-//Function Number: 211
-watchplayermelee()
-{
+watchplayermelee() {
 	self endon("death");
 	self endon("disconnect");
 	self endon("faux_spawn");
 	level endon("game_ended");
-	for(;;)
-	{
+	for(;;) {
 		self waittill("melee_fired",var_00);
-		if(self.meleekill == 0)
-		{
-			if(var_00 == "iw7_fists_zm_crane" || var_00 == "iw7_fists_zm_dragon" || var_00 == "iw7_fists_zm_snake" || var_00 == "iw7_fists_zm_tiger")
-			{
-				if(self.kung_fu_vo == 0)
-				{
+		if(self.meleekill == 0) {
+			if(var_00 == "iw7_fists_zm_crane" || var_00 == "iw7_fists_zm_dragon" || var_00 == "iw7_fists_zm_snake" || var_00 == "iw7_fists_zm_tiger") {
+				if(self.kung_fu_vo == 0) {
 					self.kung_fu_vo = 1;
 					thread scripts\cp\cp_vo::try_to_play_vo("melee_punch","zmb_comment_vo","high",1,0,0,1);
 					thread kung_fu_vo_wait();
@@ -5869,75 +4779,61 @@ watchplayermelee()
 			continue;
 		}
 
-		if(issubstr(var_00,"katana") && self.vo_prefix == "p5_")
-		{
+		if(issubstr(var_00,"katana") && self.vo_prefix == "p5_") {
 			thread scripts\cp\cp_vo::try_to_play_vo("melee_special_katana","rave_comment_vo","high",1,0,0,1);
 			continue;
 		}
 
-		if((issubstr(var_00,"golf") || issubstr(var_00,"machete") || issubstr(var_00,"spiked_bat") || issubstr(var_00,"two_headed_axe")) && self.meleekill == 1)
-		{
+		if((issubstr(var_00,"golf") || issubstr(var_00,"machete") || issubstr(var_00,"spiked_bat") || issubstr(var_00,"two_headed_axe")) && self.meleekill == 1) {
 			thread scripts\cp\cp_vo::try_to_play_vo("melee_special","rave_comment_vo","high",1,0,0,1);
 			continue;
 		}
 
-		if(issubstr(var_00,"iw7_knife") && scripts\cp\utility::is_melee_weapon(var_00) && self.meleekill == 1)
-		{
+		if(issubstr(var_00,"iw7_knife") && scripts\cp\utility::is_melee_weapon(var_00) && self.meleekill == 1) {
 			thread scripts\cp\cp_vo::try_to_play_vo("melee_fatal","zmb_comment_vo","high",1,0,0,1);
 			self.meleekill = 0;
 			continue;
 		}
 
-		if((var_00 == "iw7_axe_zm" || var_00 == "iw7_axe_zm_pap1" || var_00 == "iw7_axe_zm_pap2") && scripts\cp\utility::is_melee_weapon(var_00) && self.meleekill == 1)
-		{
+		if((var_00 == "iw7_axe_zm" || var_00 == "iw7_axe_zm_pap1" || var_00 == "iw7_axe_zm_pap2") && scripts\cp\utility::is_melee_weapon(var_00) && self.meleekill == 1) {
 			thread scripts\cp\cp_vo::try_to_play_vo("melee_splice","zmb_comment_vo","high",1,0,0,1);
 			self.meleekill = 0;
 		}
 	}
 }
 
-//Function Number: 212
-kung_fu_vo_wait()
-{
+kung_fu_vo_wait() {
 	self endon("kung_fu_vo_reset");
 	wait(4);
 	self.kung_fu_vo = 0;
 }
 
-//Function Number: 213
-watchweaponfired()
-{
+watchweaponfired() {
 	self endon("death");
 	self endon("disconnect");
 	self endon("faux_spawn");
 	level endon("game_ended");
-	for(;;)
-	{
+	for(;;) {
 		wait(1);
 		var_00 = self getcurrentweapon();
-		if(!isdefined(var_00) || var_00 == "none")
-		{
+		if(!isdefined(var_00) || var_00 == "none") {
 			continue;
 		}
 
 		self waittill("fired",var_00);
 		var_00 = self getcurrentweapon();
 		var_01 = self getrunningforwardpainanim(var_00);
-		if(scripts\cp\utility::is_melee_weapon(var_00) || issubstr(var_00,"fists") || issubstr(var_00,"heart") || issubstr(var_00,"dagger"))
-		{
+		if(scripts\cp\utility::is_melee_weapon(var_00) || issubstr(var_00,"fists") || issubstr(var_00,"heart") || issubstr(var_00,"dagger")) {
 			continue;
 		}
 
-		if((var_01 <= 5 && var_01 > 0 && self getweaponammostock(var_00) == 0) || self getweaponammostock(var_00) > 0 && var_01 / self getweaponammostock(var_00) < 0.1)
-		{
+		if((var_01 <= 5 && var_01 > 0 && self getweaponammostock(var_00) == 0) || self getweaponammostock(var_00) > 0 && var_01 / self getweaponammostock(var_00) < 0.1) {
 			scripts\cp\cp_vo::try_to_play_vo("nag_low_ammo","zmb_comment_vo","low",3,0,0,0,20);
 			continue;
 		}
 
-		if(var_01 == 0 && var_00 != "iw7_cpbasketball_mp" && var_00 != "none")
-		{
-			if(issubstr(var_00,"venomx"))
-			{
+		if(var_01 == 0 && var_00 != "iw7_cpbasketball_mp" && var_00 != "none") {
+			if(issubstr(var_00,"venomx")) {
 				scripts\cp\cp_vo::try_to_play_vo("venx_nag_eggs","zmb_comment_vo","low",3,0,0,0,20);
 				continue;
 			}
@@ -5947,48 +4843,39 @@ watchweaponfired()
 	}
 }
 
-//Function Number: 214
-watchweaponusage(param_00)
-{
+watchweaponusage(param_00) {
 	self endon("death");
 	self endon("disconnect");
 	self endon("faux_spawn");
 	level endon("game_ended");
-	for(;;)
-	{
+	for(;;) {
 		self waittill("weapon_fired",var_01);
 		var_01 = self getcurrentweapon();
-		if(!isdefined(var_01) || var_01 == "none")
-		{
+		if(!isdefined(var_01) || var_01 == "none") {
 			continue;
 		}
 
-		if(!scripts\cp\utility::isinventoryprimaryweapon(var_01))
-		{
+		if(!scripts\cp\utility::isinventoryprimaryweapon(var_01)) {
 			continue;
 		}
 
-		if(isdefined(level.updateonusepassivesfunc))
-		{
-			thread [[ level.updateonusepassivesfunc ]](self,var_01);
+		if(isdefined(level.updateonusepassivesfunc)) {
+			thread [[level.updateonusepassivesfunc]](self,var_01);
 		}
 
 		var_02 = gettime();
-		if(!isdefined(self.lastshotfiredtime))
-		{
+		if(!isdefined(self.lastshotfiredtime)) {
 			self.lastshotfiredtime = 0;
 		}
 
 		var_03 = gettime() - self.lastshotfiredtime;
 		self.lastshotfiredtime = var_02;
-		if(isai(self))
-		{
+		if(isai(self)) {
 			continue;
 		}
 
 		var_04 = getweaponbasename(var_01);
-		if(!isdefined(self.shotsfiredwithweapon[var_04]))
-		{
+		if(!isdefined(self.shotsfiredwithweapon[var_04])) {
 			self.shotsfiredwithweapon[var_04] = 1;
 		}
 		else
@@ -5996,8 +4883,7 @@ watchweaponusage(param_00)
 			self.shotsfiredwithweapon[var_04]++;
 		}
 
-		if(!isdefined(self.accuracy_shots_fired))
-		{
+		if(!isdefined(self.accuracy_shots_fired)) {
 			self.accuracy_shots_fired = 1;
 		}
 		else
@@ -6006,19 +4892,15 @@ watchweaponusage(param_00)
 		}
 
 		scripts\cp\cp_persistence::increment_player_career_shots_fired(self);
-		if(isdefined(var_04))
-		{
-			if(isdefined(self.hitsthismag[var_04]))
-			{
+		if(isdefined(var_04)) {
+			if(isdefined(self.hitsthismag[var_04])) {
 				thread hitsthismag_update(var_04,var_01);
 			}
 		}
 	}
 }
 
-//Function Number: 215
-hitsthismag_update(param_00,param_01)
-{
+hitsthismag_update(param_00,param_01) {
 	self endon("death");
 	self endon("disconnect");
 	self endon("updateMagShots_" + param_00);
@@ -6029,17 +4911,14 @@ hitsthismag_update(param_00,param_01)
 	self.hitsthismag[param_00] = weaponclipsize(param_01);
 }
 
-//Function Number: 216
-watchweaponchange()
-{
+watchweaponchange() {
 	self endon("death");
 	self endon("disconnect");
 	self endon("faux_spawn");
 	self.hitsthismag = [];
 	var_00 = getweaponbasename(self getcurrentweapon());
 	hitsthismag_init(var_00);
-	for(;;)
-	{
+	for(;;) {
 		self waittill("weapon_change",var_00);
 		var_00 = getweaponbasename(var_00);
 		weapontracking_init(var_00);
@@ -6047,11 +4926,8 @@ watchweaponchange()
 	}
 }
 
-//Function Number: 217
-harpoon_impale_additional_func(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07)
-{
-	if(!issubstr(param_00,"harpoon"))
-	{
+harpoon_impale_additional_func(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07) {
+	if(!issubstr(param_00,"harpoon")) {
 		return;
 	}
 
@@ -6077,71 +4953,54 @@ harpoon_impale_additional_func(param_00,param_01,param_02,param_03,param_04,para
 	thread impale_cleanup(param_02,var_10,var_0C + 0.05,var_11);
 }
 
-//Function Number: 218
-impale_cleanup(param_00,param_01,param_02,param_03)
-{
+impale_cleanup(param_00,param_01,param_02,param_03) {
 	param_00 scripts\engine\utility::waittill_any_timeout_1(param_02,"death","disconnect");
 	param_03 delete();
 	param_01 delete();
 }
 
-//Function Number: 219
-play_explosion_post_impale(param_00,param_01)
-{
+play_explosion_post_impale(param_00,param_01) {
 	wait(2);
 	param_01 radiusdamage(param_00,500,1000,500,param_01,"MOD_EXPLOSIVE");
 	playfx(level._effect["penetration_railgun_explosion"],param_00);
 }
 
-//Function Number: 220
-weapontracking_init(param_00)
-{
-	if(!isdefined(param_00) || param_00 == "none")
-	{
+weapontracking_init(param_00) {
+	if(!isdefined(param_00) || param_00 == "none") {
 		return;
 	}
 
-	if(!isdefined(self.shotsfiredwithweapon[param_00]))
-	{
+	if(!isdefined(self.shotsfiredwithweapon[param_00])) {
 		self.shotsfiredwithweapon[param_00] = 0;
 	}
 
-	if(!isdefined(self.shotsontargetwithweapon[param_00]))
-	{
+	if(!isdefined(self.shotsontargetwithweapon[param_00])) {
 		self.shotsontargetwithweapon[param_00] = 0;
 	}
 
-	if(!isdefined(self.headshots[param_00]))
-	{
+	if(!isdefined(self.headshots[param_00])) {
 		self.headshots[param_00] = 0;
 	}
 
-	if(!isdefined(self.wavesheldwithweapon[param_00]))
-	{
+	if(!isdefined(self.wavesheldwithweapon[param_00])) {
 		self.wavesheldwithweapon[param_00] = 1;
 	}
 
-	if(!isdefined(self.downsperweaponlog[param_00]))
-	{
+	if(!isdefined(self.downsperweaponlog[param_00])) {
 		self.downsperweaponlog[param_00] = 0;
 	}
 
-	if(!isdefined(self.killsperweaponlog[param_00]))
-	{
+	if(!isdefined(self.killsperweaponlog[param_00])) {
 		self.killsperweaponlog[param_00] = 0;
 	}
 }
 
-//Function Number: 221
-hitsthismag_init(param_00)
-{
-	if(!isdefined(param_00) || param_00 == "none")
-	{
+hitsthismag_init(param_00) {
+	if(!isdefined(param_00) || param_00 == "none") {
 		return;
 	}
 
-	if(scripts\cp\utility::isinventoryprimaryweapon(param_00) && !isdefined(self.hitsthismag[param_00]))
-	{
+	if(scripts\cp\utility::isinventoryprimaryweapon(param_00) && !isdefined(self.hitsthismag[param_00])) {
 		self.hitsthismag[param_00] = weaponclipsize(param_00);
 	}
 }

@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\mp\killstreaks\_deployablebox_vest.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 5
- * Decompile Time: 244 ms
- * Timestamp: 10/27/2023 12:28:24 AM
-*******************************************************************/
+/******************************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\mp\killstreaks\_deployablebox_vest.gsc
+******************************************************************/
 
-//Function Number: 1
-init()
-{
+init() {
 	var_00 = spawnstruct();
 	var_00.id = "deployable_vest";
 	var_00.var_39B = "deployable_vest_marker_mp";
@@ -44,12 +38,9 @@ init()
 	level.deployable_box["deployable_vest"] = [];
 }
 
-//Function Number: 2
-func_128E1(param_00,param_01)
-{
+func_128E1(param_00,param_01) {
 	var_02 = scripts\mp\killstreaks\_deployablebox::begindeployableviamarker(param_00,"deployable_vest");
-	if(!isdefined(var_02) || !var_02)
-	{
+	if(!isdefined(var_02) || !var_02) {
 		return 0;
 	}
 
@@ -57,29 +48,21 @@ func_128E1(param_00,param_01)
 	return 1;
 }
 
-//Function Number: 3
-func_3937(param_00)
-{
+func_3937(param_00) {
 	return !scripts\mp\_lightarmor::haslightarmor(self) && !scripts\mp\_utility::isjuggernaut();
-	if(isdefined(param_00) && param_00.triggerportableradarping == self && !isdefined(param_00.var_1A64))
-	{
+	if(isdefined(param_00) && param_00.triggerportableradarping == self && !isdefined(param_00.var_1A64)) {
 		return 0;
 	}
 
 	return !scripts\mp\_utility::isjuggernaut();
 }
 
-//Function Number: 4
-onusedeployable(param_00)
-{
+onusedeployable(param_00) {
 	scripts\mp\perks\_perkfunctions::setlightarmor();
 }
 
-//Function Number: 5
-get_adjusted_armor(param_00,param_01)
-{
-	if(param_00 + level.deployablebox_vest_rank[param_01] > level.deployablebox_vest_max)
-	{
+get_adjusted_armor(param_00,param_01) {
+	if(param_00 + level.deployablebox_vest_rank[param_01] > level.deployablebox_vest_max) {
 		return level.deployablebox_vest_max;
 	}
 

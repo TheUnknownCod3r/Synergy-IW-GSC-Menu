@@ -1,16 +1,10 @@
 /*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\cp\zombies\zombie_scriptable_states.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 9
- * Decompile Time: 397 ms
- * Timestamp: 10/27/2023 12:27:08 AM
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\cp\zombies\zombie_scriptable_states.gsc
 *******************************************************************/
 
-//Function Number: 1
-applyzombiescriptablestate(param_00,param_01)
-{
+applyzombiescriptablestate(param_00,param_01) {
 	param_00 notify("applyZombieScriptableState");
 	param_00 endon("applyZombieScriptableState");
 	param_00 endon("death");
@@ -22,8 +16,7 @@ applyzombiescriptablestate(param_00,param_01)
 	var_07 = 0;
 	var_08 = 0;
 	var_09 = 0;
-	while(var_02)
-	{
+	while(var_02) {
 		var_0A = scripts\engine\utility::istrue(param_00.is_afflicted);
 		var_0B = scripts\engine\utility::istrue(param_00.is_burning);
 		var_0C = scripts\engine\utility::istrue(param_00.stunned);
@@ -31,10 +24,8 @@ applyzombiescriptablestate(param_00,param_01)
 		var_0E = scripts\engine\utility::istrue(param_00.is_chem_burning);
 		var_0F = scripts\engine\utility::istrue(param_00.is_electrified);
 		var_10 = isdefined(param_00.frozentick);
-		if(var_0D)
-		{
-			if(!var_05)
-			{
+		if(var_0D) {
+			if(!var_05) {
 				var_05 = 1;
 				var_03 = 0;
 				var_04 = 0;
@@ -49,10 +40,8 @@ applyzombiescriptablestate(param_00,param_01)
 			continue;
 		}
 
-		if(var_10)
-		{
-			if(!var_09)
-			{
+		if(var_10) {
+			if(!var_09) {
 				var_09 = 1;
 				var_05 = 0;
 				var_03 = 0;
@@ -61,8 +50,7 @@ applyzombiescriptablestate(param_00,param_01)
 				var_07 = 0;
 				var_08 = 0;
 				param_00.var_EF42 = 1;
-				if(isalive(param_00))
-				{
+				if(isalive(param_00)) {
 					param_00 setscriptablepartstate("cold","active",1);
 					func_5554(param_00,"cold");
 					param_00 thread adjustmovespeed(param_00,param_01);
@@ -72,10 +60,8 @@ applyzombiescriptablestate(param_00,param_01)
 			continue;
 		}
 
-		if(var_0A)
-		{
-			if(!var_08)
-			{
+		if(var_0A) {
+			if(!var_08) {
 				var_08 = 1;
 				var_03 = 0;
 				var_04 = 0;
@@ -84,8 +70,7 @@ applyzombiescriptablestate(param_00,param_01)
 				var_07 = 0;
 				var_09 = 0;
 				param_00.var_EF42 = 1;
-				if(isalive(param_00))
-				{
+				if(isalive(param_00)) {
 					param_00 setscriptablepartstate("arcane_white","active",1);
 					func_5554(param_00,"arcane_white");
 				}
@@ -94,10 +79,8 @@ applyzombiescriptablestate(param_00,param_01)
 			continue;
 		}
 
-		if(var_0E)
-		{
-			if(!var_06)
-			{
+		if(var_0E) {
+			if(!var_06) {
 				var_06 = 1;
 				var_03 = 0;
 				var_04 = 0;
@@ -106,8 +89,7 @@ applyzombiescriptablestate(param_00,param_01)
 				var_08 = 0;
 				var_09 = 0;
 				param_00.var_EF42 = 1;
-				if(isalive(param_00))
-				{
+				if(isalive(param_00)) {
 					param_00 setscriptablepartstate("chemburn","active",1);
 					func_5554(param_00,"chemburn");
 				}
@@ -116,10 +98,8 @@ applyzombiescriptablestate(param_00,param_01)
 			continue;
 		}
 
-		if(var_0B)
-		{
-			if(!var_03)
-			{
+		if(var_0B) {
+			if(!var_03) {
 				var_03 = 1;
 				var_04 = 0;
 				var_05 = 0;
@@ -128,8 +108,7 @@ applyzombiescriptablestate(param_00,param_01)
 				var_08 = 0;
 				var_09 = 0;
 				param_00.var_EF42 = 1;
-				if(isalive(param_00))
-				{
+				if(isalive(param_00)) {
 					param_00 setscriptablepartstate("burning","active",1);
 					func_5554(param_00,"burning");
 				}
@@ -138,10 +117,8 @@ applyzombiescriptablestate(param_00,param_01)
 			continue;
 		}
 
-		if(var_0F)
-		{
-			if(!var_07)
-			{
+		if(var_0F) {
+			if(!var_07) {
 				var_07 = 1;
 				var_03 = 0;
 				var_04 = 0;
@@ -150,8 +127,7 @@ applyzombiescriptablestate(param_00,param_01)
 				var_08 = 0;
 				var_09 = 0;
 				param_00.var_EF42 = 1;
-				if(isalive(param_00))
-				{
+				if(isalive(param_00)) {
 					param_00 setscriptablepartstate("shocked","active",1);
 					func_5554(param_00,"electrified");
 				}
@@ -160,10 +136,8 @@ applyzombiescriptablestate(param_00,param_01)
 			continue;
 		}
 
-		if(var_0C)
-		{
-			if(!var_04)
-			{
+		if(var_0C) {
+			if(!var_04) {
 				var_04 = 1;
 				var_03 = 0;
 				var_05 = 0;
@@ -172,8 +146,7 @@ applyzombiescriptablestate(param_00,param_01)
 				var_08 = 0;
 				var_09 = 0;
 				param_00.var_EF42 = 1;
-				if(isalive(param_00))
-				{
+				if(isalive(param_00)) {
 					param_00 setscriptablepartstate("shocked","active",1);
 					func_5554(param_00,"shocked");
 				}
@@ -189,18 +162,14 @@ applyzombiescriptablestate(param_00,param_01)
 	}
 }
 
-//Function Number: 2
-adjustmovespeed(param_00,param_01)
-{
+adjustmovespeed(param_00,param_01) {
 	param_00 endon("death");
-	if(scripts\engine\utility::istrue(param_00.allowpain))
-	{
+	if(scripts\engine\utility::istrue(param_00.allowpain)) {
 		param_00 dodamage(1,param_00.origin);
 		param_00.allowpain = 0;
 	}
 
-	if(scripts\engine\utility::istrue(param_00.slowed))
-	{
+	if(scripts\engine\utility::istrue(param_00.slowed)) {
 		param_00.slowed = undefined;
 	}
 	else
@@ -208,8 +177,7 @@ adjustmovespeed(param_00,param_01)
 		return;
 	}
 
-	if(!isdefined(param_00.asm.cur_move_mode))
-	{
+	if(!isdefined(param_00.asm.cur_move_mode)) {
 		var_02 = self.synctransients;
 	}
 	else
@@ -218,8 +186,7 @@ adjustmovespeed(param_00,param_01)
 	}
 
 	var_02 = param_00.asm.cur_move_mode;
-	switch(var_02)
-	{
+	switch(var_02) {
 		case "slow_walk":
 			break;
 
@@ -240,15 +207,12 @@ adjustmovespeed(param_00,param_01)
 	param_00 scripts/asm/asm_bb::bb_requestmovetype(var_02);
 }
 
-//Function Number: 3
-removefrozentickontimeout(param_00)
-{
+removefrozentickontimeout(param_00) {
 	param_00 notify("frozen_tick_updated");
 	param_00 endon("frozen_tick_updated");
 	param_00 endon("death");
 	wait(1);
-	if(isdefined(param_00.frozentick))
-	{
+	if(isdefined(param_00.frozentick)) {
 		param_00.frozentick = undefined;
 	}
 
@@ -256,21 +220,17 @@ removefrozentickontimeout(param_00)
 	param_00 thread applyzombiescriptablestate(param_00);
 }
 
-//Function Number: 4
-freeze_zombie(param_00)
-{
+freeze_zombie(param_00) {
 	param_00 endon("death");
 	param_00.isfrozen = 1;
 	param_00.precacheleaderboards = 1;
 	param_00.nocorpse = 1;
 	param_00.full_gib = 1;
 	param_00.noturnanims = 1;
-	if(isdefined(param_00.var_7387) && issubstr(param_00.var_7387,"window"))
-	{
+	if(isdefined(param_00.var_7387) && issubstr(param_00.var_7387,"window")) {
 		param_00 setscriptablepartstate("frozen","frozen_traverse");
 	}
-	else if(scripts\engine\utility::istrue(param_00.dismember_crawl))
-	{
+	else if(scripts\engine\utility::istrue(param_00.dismember_crawl)) {
 		param_00 setscriptablepartstate("frozen","frozen_crawl");
 	}
 	else
@@ -282,13 +242,10 @@ freeze_zombie(param_00)
 	param_00.isfrozen = undefined;
 }
 
-//Function Number: 5
-unfreeze_zombie(param_00)
-{
+unfreeze_zombie(param_00) {
 	param_00 endon("death");
 	param_00 setscriptablepartstate("frozen","unfrozen",1);
-	if(!isalive(param_00))
-	{
+	if(!isalive(param_00)) {
 		return;
 	}
 
@@ -299,11 +256,8 @@ unfreeze_zombie(param_00)
 	param_00.noturnanims = undefined;
 }
 
-//Function Number: 6
-func_5554(param_00,param_01)
-{
-	switch(param_01)
-	{
+func_5554(param_00,param_01) {
+	switch(param_01) {
 		case "frozen":
 			param_00 setscriptablepartstate("cold","inactive",1);
 			param_00 setscriptablepartstate("burning","inactive",1);
@@ -359,21 +313,16 @@ func_5554(param_00,param_01)
 	}
 }
 
-//Function Number: 7
-func_12973(param_00,param_01)
-{
-	if(isdefined(param_00.agent_type) && param_00.agent_type == "c6")
-	{
+func_12973(param_00,param_01) {
+	if(isdefined(param_00.agent_type) && param_00.agent_type == "c6") {
 		return;
 	}
 
-	if(!func_FFAA(param_00))
-	{
+	if(!func_FFAA(param_00)) {
 		return;
 	}
 
-	if(isalive(param_00))
-	{
+	if(isalive(param_00)) {
 		param_00 setscriptablepartstate("burning","inactive",1);
 		param_00 setscriptablepartstate("shocked","inactive",1);
 		param_00 setscriptablepartstate("chemburn","inactive",1);
@@ -381,22 +330,17 @@ func_12973(param_00,param_01)
 		param_00 setscriptablepartstate("cold","inactive",1);
 	}
 
-	if(scripts\engine\utility::istrue(param_01))
-	{
+	if(scripts\engine\utility::istrue(param_01)) {
 		param_00.isfrozen = undefined;
 	}
 }
 
-//Function Number: 8
-turn_off_states_on_death(param_00)
-{
-	if(isdefined(param_00.agent_type) && param_00.agent_type == "c6" || param_00.agent_type == "zombie_brute" || param_00.agent_type == "zombie_grey" || param_00.agent_type == "zombie_ghost")
-	{
+turn_off_states_on_death(param_00) {
+	if(isdefined(param_00.agent_type) && param_00.agent_type == "c6" || param_00.agent_type == "zombie_brute" || param_00.agent_type == "zombie_grey" || param_00.agent_type == "zombie_ghost") {
 		return;
 	}
 
-	if(!func_FFAA(param_00))
-	{
+	if(!func_FFAA(param_00)) {
 		return;
 	}
 
@@ -407,34 +351,27 @@ turn_off_states_on_death(param_00)
 	param_00 setscriptablepartstate("chemburn","inactive",1);
 	param_00 setscriptablepartstate("arcane_white","inactive",1);
 	param_00 setscriptablepartstate("cold","inactive",1);
-	if(isdefined(param_00.has_backpack))
-	{
+	if(isdefined(param_00.has_backpack)) {
 		param_00 setscriptablepartstate("backpack","hide",1);
 	}
 
 	param_00 getrandomhovernodesaroundtargetpos(2,0);
 }
 
-//Function Number: 9
-func_FFAA(param_00)
-{
-	if(!isdefined(param_00.species))
-	{
+func_FFAA(param_00) {
+	if(!isdefined(param_00.species)) {
 		return 0;
 	}
 
-	if(isdefined(level.the_hoff) && param_00 == level.the_hoff)
-	{
+	if(isdefined(level.the_hoff) && param_00 == level.the_hoff) {
 		return 0;
 	}
 
-	if(isdefined(param_00.electrocuted))
-	{
+	if(isdefined(param_00.electrocuted)) {
 		return 0;
 	}
 
-	switch(param_00.species)
-	{
+	switch(param_00.species) {
 		case "zombie_grey":
 		case "zombie_brute":
 			return 0;

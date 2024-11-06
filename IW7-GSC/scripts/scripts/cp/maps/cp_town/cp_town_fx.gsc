@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\cp\maps\cp_town\cp_town_fx.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 1
- * Decompile Time: 113 ms
- * Timestamp: 10/27/2023 12:07:19 AM
-*******************************************************************/
+/**********************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\cp\maps\cp_town\cp_town_fx.gsc
+**********************************************************/
 
-//Function Number: 1
-main()
-{
+main() {
 	level._effect["vfx_egg_vapor"] = loadfx("vfx/iw7/levels/cp_town/vfx_egg_vapor.vfx");
 	level._effect["vfx_bomb_portal_charged_beach"] = loadfx("vfx/iw7/levels/cp_town/vfx_bomb_portal_charged_beach.vfx");
 	level._effect["vfx_bomb_portal_chargeup_beach"] = loadfx("vfx/iw7/levels/cp_town/vfx_bomb_portal_chargeup_beach.vfx");

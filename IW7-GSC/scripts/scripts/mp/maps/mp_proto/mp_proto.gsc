@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\mp\maps\mp_proto\mp_proto.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 7
- * Decompile Time: 393 ms
- * Timestamp: 10/27/2023 12:14:08 AM
-*******************************************************************/
+/*********************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\mp\maps\mp_proto\mp_proto.gsc
+*********************************************************/
 
-//Function Number: 1
-main()
-{
+main() {
 	lib_0FDB::main();
 	scripts\mp\maps\mp_proto\gen\mp_proto_art::main();
 	lib_0FDA::main();
@@ -33,9 +27,7 @@ main()
 	thread runmodespecifictriggers();
 }
 
-//Function Number: 2
-fix_collision()
-{
+fix_collision() {
 	var_00 = getent("clip128x128x128","targetname");
 	var_01 = spawn("script_model",(-820,-112,508));
 	var_01.angles = (0,0,0);
@@ -90,24 +82,17 @@ fix_collision()
 	var_16 clonebrushmodeltoscriptmodel(var_15);
 }
 
-//Function Number: 3
-kill_trigger_loop(param_00)
-{
-	for(;;)
-	{
+kill_trigger_loop(param_00) {
+	for(;;) {
 		self waittill("trigger",var_01);
-		if(isdefined(var_01) && isdefined(var_01.classname) && var_01.classname == param_00)
-		{
-			if(isdefined(var_01.var_110EA))
-			{
-				if(var_01.var_110EA == "minijackal")
-				{
+		if(isdefined(var_01) && isdefined(var_01.classname) && var_01.classname == param_00) {
+			if(isdefined(var_01.var_110EA)) {
+				if(var_01.var_110EA == "minijackal") {
 					var_01 notify("minijackal_end");
 					continue;
 				}
 
-				if(var_01.var_110EA == "venom")
-				{
+				if(var_01.var_110EA == "venom") {
 					var_01 notify("venom_end",var_01.origin);
 				}
 			}
@@ -115,42 +100,31 @@ kill_trigger_loop(param_00)
 	}
 }
 
-//Function Number: 4
-func_9284()
-{
+func_9284() {
 	var_00 = 17;
 	level.var_9285 = getentarray("ice_drill","targetname");
-	foreach(var_03, var_02 in level.var_9285)
-	{
+	foreach(var_03, var_02 in level.var_9285) {
 		var_02 thread func_E6FD(var_00 * level.var_9285.size - var_03);
 	}
 }
 
-//Function Number: 5
-func_E6FD(param_00)
-{
+func_E6FD(param_00) {
 	level endon("stop drill");
-	for(;;)
-	{
+	for(;;) {
 		self rotatepitch(360,param_00,0,0);
 		wait(param_00);
 	}
 }
 
-//Function Number: 6
-spawn_oob_trigger()
-{
+spawn_oob_trigger() {
 	wait(1);
 	var_00 = spawn("trigger_radius",(0,-760,-1000),0,700,400);
 	var_00 hide();
 	level.var_C7B3[level.var_C7B3.size] = var_00;
 }
 
-//Function Number: 7
-runmodespecifictriggers()
-{
-	if(level.gametype == "ball" || level.gametype == "tdef")
-	{
+runmodespecifictriggers() {
+	if(level.gametype == "ball" || level.gametype == "tdef") {
 		wait(1);
 		var_00 = spawn("trigger_radius",(2497,734,465),0,80,20);
 		var_00.var_336 = "uplink_nozone";

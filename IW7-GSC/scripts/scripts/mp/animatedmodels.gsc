@@ -1,27 +1,18 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\mp\animatedmodels.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 2
- * Decompile Time: 170 ms
- * Timestamp: 10/27/2023 12:14:25 AM
-*******************************************************************/
+/*************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\mp\animatedmodels.gsc
+*************************************************/
 
-//Function Number: 1
-main()
-{
-	if(!isdefined(level.anim_prop_models))
-	{
+main() {
+	if(!isdefined(level.anim_prop_models)) {
 		level.anim_prop_models = [];
 	}
 
 	var_00 = getarraykeys(level.anim_prop_models);
-	foreach(var_02 in var_00)
-	{
+	foreach(var_02 in var_00) {
 		var_03 = getarraykeys(level.anim_prop_models[var_02]);
-		foreach(var_05 in var_03)
-		{
+		foreach(var_05 in var_03) {
 			precachempanim(level.anim_prop_models[var_02][var_05]);
 		}
 	}
@@ -33,11 +24,8 @@ main()
 	level.init_animatedmodels = undefined;
 }
 
-//Function Number: 2
-animatemodel()
-{
-	if(isdefined(self.animation))
-	{
+animatemodel() {
+	if(isdefined(self.animation)) {
 		var_00 = self.animation;
 	}
 	else

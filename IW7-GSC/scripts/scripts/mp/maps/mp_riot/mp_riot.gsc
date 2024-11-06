@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\mp\maps\mp_riot\mp_riot.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 11
- * Decompile Time: 673 ms
- * Timestamp: 10/27/2023 12:14:14 AM
-*******************************************************************/
+/*******************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\mp\maps\mp_riot\mp_riot.gsc
+*******************************************************/
 
-//Function Number: 1
-main()
-{
+main() {
 	lib_0FE9::main();
 	scripts\mp\maps\mp_riot\gen\mp_riot_art::main();
 	lib_0FE8::main();
@@ -44,9 +38,7 @@ main()
 	level.kothextraprimaryspawnpoints["-207 1210 184"] = ["4"];
 }
 
-//Function Number: 2
-fix_collision()
-{
+fix_collision() {
 	var_00 = getent("player32x32x8","targetname");
 	var_01 = spawn("script_model",(-1756,1772,372));
 	var_01.angles = (300,0,0);
@@ -105,39 +97,30 @@ fix_collision()
 	var_1B clonebrushmodeltoscriptmodel(var_1A);
 }
 
-//Function Number: 3
-func_FA7D()
-{
+func_FA7D() {
 	level.var_114C3 = 600;
 	level.var_114C4 = 1200;
 	level.var_BF61 = -1;
 	var_00 = getentarray("watertank_invulnerable","targetname");
-	foreach(var_02 in var_00)
-	{
+	foreach(var_02 in var_00) {
 		var_02 thread func_12E48();
 	}
 }
 
-//Function Number: 4
-func_12E48()
-{
+func_12E48() {
 	self setcandamage(1);
-	for(;;)
-	{
+	for(;;) {
 		self waittill("damage",var_00,var_01,var_02,var_03,var_04);
-		if(!issubstr(var_04,"BULLET"))
-		{
+		if(!issubstr(var_04,"BULLET")) {
 			continue;
 		}
 
-		if(!func_37F6())
-		{
+		if(!func_37F6()) {
 			continue;
 		}
 
 		var_05 = func_7D54(var_01,var_02,var_03);
-		if(!isdefined(var_05))
-		{
+		if(!isdefined(var_05)) {
 			continue;
 		}
 
@@ -149,61 +132,45 @@ func_12E48()
 	}
 }
 
-//Function Number: 5
-func_7D54(param_00,param_01,param_02)
-{
+func_7D54(param_00,param_01,param_02) {
 	var_03 = param_00.origin;
 	var_04 = param_02 - var_03;
 	var_05 = bullettrace(var_03,var_03 + 1.5 * var_04,0,param_00,0);
-	if(isdefined(var_05["normal"]) && isdefined(var_05["entity"]) && var_05["entity"] == self)
-	{
+	if(isdefined(var_05["normal"]) && isdefined(var_05["entity"]) && var_05["entity"] == self) {
 		return var_05["normal"];
 	}
 
 	return undefined;
 }
 
-//Function Number: 6
-func_37F6()
-{
-	if(gettime() < level.var_BF61)
-	{
+func_37F6() {
+	if(gettime() < level.var_BF61) {
 		return 0;
 	}
 
 	return 1;
 }
 
-//Function Number: 7
-func_1C33()
-{
+func_1C33() {
 	level.var_BF61 = gettime() + randomfloatrange(level.var_114C3,level.var_114C4);
 }
 
-//Function Number: 8
-func_CDA4(param_00)
-{
+func_CDA4(param_00) {
 	wait(30);
 	function_030E(param_00);
 }
 
-//Function Number: 9
-managephysicsprops()
-{
+managephysicsprops() {
 	level endon("game_ended");
-	for(;;)
-	{
+	for(;;) {
 		level waittill("connected",var_00);
-		if(!var_00 ishost())
-		{
+		if(!var_00 ishost()) {
 			thread triggerphysicsbump();
 		}
 	}
 }
 
-//Function Number: 10
-triggerphysicsbump()
-{
+triggerphysicsbump() {
 	var_00 = (-786.5,-2572,40);
 	var_01 = 200;
 	wait(5);
@@ -218,26 +185,20 @@ triggerphysicsbump()
 	var_02 delete();
 }
 
-//Function Number: 11
-move_sd_startspawns()
-{
-	if(level.gametype == "sd")
-	{
+move_sd_startspawns() {
+	if(level.gametype == "sd") {
 		wait(0.1);
 		var_00 = scripts\mp\_spawnlogic::func_8140("mp_sd_spawn_defender");
-		foreach(var_02 in var_00)
-		{
+		foreach(var_02 in var_00) {
 			var_03 = anglestoright(var_02.angles);
-			if(distance(var_02.origin,(-500,3060,176.124)) < 10)
-			{
+			if(distance(var_02.origin,(-500,3060,176.124)) < 10) {
 				var_02.origin = (-600,2564,176);
 				var_02.var_1D53 = [];
 				scripts\mp\_spawnlogic::func_17A7(var_02,var_02.origin + var_03 * 45);
 				continue;
 			}
 
-			if(distance(var_02.origin,(-596,3064,172.002)) < 10)
-			{
+			if(distance(var_02.origin,(-596,3064,172.002)) < 10) {
 				var_02.origin = (-686,2564,176);
 				var_02.var_1D53 = [];
 				scripts\mp\_spawnlogic::func_17A7(var_02,var_02.origin + var_03 * 45);
@@ -245,8 +206,7 @@ move_sd_startspawns()
 				continue;
 			}
 
-			if(distance(var_02.origin,(-700,3064,176.124)) < 10)
-			{
+			if(distance(var_02.origin,(-700,3064,176.124)) < 10) {
 				var_02.origin = (-790,2564,180);
 				var_02.var_1D53 = [];
 				scripts\mp\_spawnlogic::func_17A7(var_02,var_02.origin + var_03 * 45);
@@ -254,8 +214,7 @@ move_sd_startspawns()
 				continue;
 			}
 
-			if(distance(var_02.origin,(-500,3140,176.124)) < 10)
-			{
+			if(distance(var_02.origin,(-500,3140,176.124)) < 10) {
 				var_02.origin = (-600,2644,176);
 				var_02.var_1D53 = [];
 				scripts\mp\_spawnlogic::func_17A7(var_02,var_02.origin + var_03 * 45);
@@ -263,8 +222,7 @@ move_sd_startspawns()
 				continue;
 			}
 
-			if(distance(var_02.origin,(-596,3144,172.002)) < 10)
-			{
+			if(distance(var_02.origin,(-596,3144,172.002)) < 10) {
 				var_02.origin = (-686,2644,176);
 				var_02.var_1D53 = [];
 				scripts\mp\_spawnlogic::func_17A7(var_02,var_02.origin + var_03 * 45);
@@ -272,8 +230,7 @@ move_sd_startspawns()
 				continue;
 			}
 
-			if(distance(var_02.origin,(-700,3144,176.124)) < 10)
-			{
+			if(distance(var_02.origin,(-700,3144,176.124)) < 10) {
 				var_02.origin = (-790,2644,180);
 				var_02.var_1D53 = [];
 				scripts\mp\_spawnlogic::func_17A7(var_02,var_02.origin + var_03 * 45);
@@ -281,8 +238,7 @@ move_sd_startspawns()
 				continue;
 			}
 
-			if(distance(var_02.origin,(-500,3220,176.124)) < 10)
-			{
+			if(distance(var_02.origin,(-500,3220,176.124)) < 10) {
 				var_02.origin = (-600,2724,176);
 				var_02.var_1D53 = [];
 				scripts\mp\_spawnlogic::func_17A7(var_02,var_02.origin + var_03 * 45);
@@ -290,8 +246,7 @@ move_sd_startspawns()
 				continue;
 			}
 
-			if(distance(var_02.origin,(-596,3224,172.002)) < 10)
-			{
+			if(distance(var_02.origin,(-596,3224,172.002)) < 10) {
 				var_02.origin = (-686,2724,176);
 				var_02.var_1D53 = [];
 				scripts\mp\_spawnlogic::func_17A7(var_02,var_02.origin + var_03 * 45);
@@ -299,8 +254,7 @@ move_sd_startspawns()
 				continue;
 			}
 
-			if(distance(var_02.origin,(-700,3224,176.124)) < 10)
-			{
+			if(distance(var_02.origin,(-700,3224,176.124)) < 10) {
 				var_02.origin = (-790,2724,180);
 				var_02.var_1D53 = [];
 				scripts\mp\_spawnlogic::func_17A7(var_02,var_02.origin + var_03 * 45);

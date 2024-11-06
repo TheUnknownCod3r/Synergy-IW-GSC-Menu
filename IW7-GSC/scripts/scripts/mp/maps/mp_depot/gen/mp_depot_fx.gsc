@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\mp\maps\mp_depot\gen\mp_depot_fx.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 1
- * Decompile Time: 179 ms
- * Timestamp: 10/27/2023 12:13:19 AM
-*******************************************************************/
+/****************************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\mp\maps\mp_depot\gen\mp_depot_fx.gsc
+****************************************************************/
 
-//Function Number: 1
-main()
-{
+main() {
 	var_00 = scripts\common\utility::func_49FA("vfx_engine_smk");
 	var_00 scripts\common\createfx::func_F4AD((-1637.78,-771.942,318.444),(40,270,0));
 	var_00.var_13125["fxid"] = "vfx_engine_smk";

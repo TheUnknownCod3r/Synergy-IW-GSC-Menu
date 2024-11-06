@@ -1,16 +1,10 @@
 /*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\mp\maps\mp_pixel\gen\mp_pixel_sound.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 1
- * Decompile Time: 149 ms
- * Timestamp: 10/27/2023 12:14:04 AM
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\mp\maps\mp_pixel\gen\mp_pixel_sound.gsc
 *******************************************************************/
 
-//Function Number: 1
-main()
-{
+main() {
 	var_00 = scripts\common\createfx::func_49E7();
 	var_00 scripts\common\createfx::func_F4AD((176.98,-2977.35,225.626),(270,0,0));
 	var_00.var_13125["soundalias"] = "emt_water_splash_lp_01";

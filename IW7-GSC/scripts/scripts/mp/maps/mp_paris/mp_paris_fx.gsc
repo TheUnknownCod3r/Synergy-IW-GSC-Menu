@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\mp\maps\mp_paris\mp_paris_fx.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 1
- * Decompile Time: 138 ms
- * Timestamp: 10/27/2023 12:14:00 AM
-*******************************************************************/
+/************************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\mp\maps\mp_paris\mp_paris_fx.gsc
+************************************************************/
 
-//Function Number: 1
-main()
-{
+main() {
 	level._effect["vfx_paris_chim_smk_02"] = loadfx("vfx/iw7/levels/mp_paris/vfx_paris_chim_smk_02.vfx");
 	level._effect["vfx_paris_chim_smk_02"] = loadfx("vfx/iw7/levels/mp_paris/vfx_paris_chim_smk_02.vfx");
 	level._effect["vfx_pcloud_ember_parent"] = loadfx("vfx/iw7/levels/mp_paris/vfx_pcloud_ember_parent.vfx");

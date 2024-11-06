@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: 1258.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 2
- * Decompile Time: 0 ms
- * Timestamp: 10/27/2023 12:23:15 AM
-*******************************************************************/
+/****************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\1258.gsc
+****************************/
 
-//Function Number: 1
-main()
-{
+main() {
 	self setmodel("body_sdf_army_heavy_3");
 	self attach("head_bg_var_head_sc_kloos_blast_damage","",1);
 	self.headmodel = "head_bg_var_head_sc_kloos_blast_damage";
@@ -22,14 +16,12 @@ main()
 	self.var_1FA8 = "soldier";
 	self.voice = "setdef";
 	self give_explosive_touch_on_revived("vestheavy");
-	if(issentient(self))
-	{
+	if(issentient(self)) {
 		self sethitlocdamagetable("locdmgtable/ai_lochit_dmgtable");
 	}
 
 	self.var_8E1A = level.var_7649["iw7/core/human/helmet_sdf_army_broken"];
-	if(issentient(self))
-	{
+	if(issentient(self)) {
 		self _meth_849A();
 		var_00 = [];
 		var_00["helmet"] = spawnstruct();
@@ -46,9 +38,7 @@ main()
 	self glinton(#animtree);
 }
 
-//Function Number: 2
-precache()
-{
+precache() {
 	precachemodel("body_sdf_army_heavy_3");
 	precachemodel("head_bg_var_head_sc_kloos_blast_damage");
 	precachemodel("helmet_sdf_army_heavy_3");

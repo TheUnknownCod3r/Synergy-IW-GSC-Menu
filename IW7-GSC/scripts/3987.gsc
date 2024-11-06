@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: 3987.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 1
- * Decompile Time: 1 ms
- * Timestamp: 10/27/2023 12:31:53 AM
-*******************************************************************/
+/****************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\3987.gsc
+****************************/
 
-//Function Number: 1
-main()
-{
+main() {
 	level._effect["vfx_vista_astroid_cluster_01"] = loadfx("vfx/iw7/levels/mp_divide/vfx_vista_astroid_cluster_01.vfx");
 	level._effect["vfx_electric_02_divide"] = loadfx("vfx/iw7/levels/mp_divide/vfx_electric_02_divide.vfx");
 	level._effect["vfx_electric_divide"] = loadfx("vfx/iw7/levels/mp_divide/vfx_electric_divide.vfx");

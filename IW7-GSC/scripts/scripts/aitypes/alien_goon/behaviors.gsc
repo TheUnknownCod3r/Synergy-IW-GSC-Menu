@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\aitypes\alien_goon\behaviors.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 24
- * Decompile Time: 976 ms
- * Timestamp: 10\26\2023 11:58:26 PM
-*******************************************************************/
+/************************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\aitypes\alien_goon\behaviors.gsc
+************************************************************/
 
-//Function Number: 1
-initbehaviors(param_00)
-{
+initbehaviors(param_00) {
 	setupbehaviorstates();
 	self.desiredaction = undefined;
 	self.lastenemyengagetime = 0;
@@ -19,9 +13,7 @@ initbehaviors(param_00)
 	return level.success;
 }
 
-//Function Number: 2
-setupbehaviorstates()
-{
+setupbehaviorstates() {
 	scripts\aitypes\dlc4\simple_action::setupsimplebtaction();
 	scripts\aitypes\dlc4\melee::setupstandmeleebtaction(undefined,::melee_goontick);
 	scripts\aitypes\dlc4\melee::setupmovingmeleebtaction(undefined,::movingmelee_goontick);
@@ -30,16 +22,12 @@ setupbehaviorstates()
 	scripts\aitypes\dlc4\bt_action_api::setupbtaction("post_attack",::postattack_begin,::postattack_tick,::postattack_end);
 }
 
-//Function Number: 3
-updateeveryframe(param_00)
-{
+updateeveryframe(param_00) {
 	scripts\aitypes\dlc4\behavior_utils::updateenemy();
 	return level.failure;
 }
 
-//Function Number: 4
-teleport_begin(param_00)
-{
+teleport_begin(param_00) {
 	scripts\aitypes\dlc4\behavior_utils::facepoint(self.var_AAFD);
 	self.var_1198.jumpdestinationpos = self.var_AAFD;
 	self.var_1198.jumpdestinationangles = vectortoangles(self.var_AAFD - self.origin * (1,1,0));
@@ -50,11 +38,8 @@ teleport_begin(param_00)
 	self.bteleporting = 1;
 }
 
-//Function Number: 5
-teleport_tick(param_00)
-{
-	if(scripts\aitypes\dlc4\bt_state_api::btstate_tickstates(param_00))
-	{
+teleport_tick(param_00) {
+	if(scripts\aitypes\dlc4\bt_state_api::btstate_tickstates(param_00)) {
 		return level.running;
 	}
 
@@ -62,9 +47,7 @@ teleport_tick(param_00)
 	return level.success;
 }
 
-//Function Number: 6
-teleport_end(param_00)
-{
+teleport_end(param_00) {
 	var_01 = scripts\asm\dlc4\dlc4_asm::gettunedata();
 	self.nextjumpattack = gettime() + var_01.jump_attack_min_interval;
 	self.var_1198.jumpdestinationpos = undefined;
@@ -72,39 +55,30 @@ teleport_end(param_00)
 	self.bteleporting = undefined;
 }
 
-//Function Number: 7
-melee_goontick(param_00)
-{
+melee_goontick(param_00) {
 	var_01 = scripts\aitypes\dlc4\melee::melee_tick(param_00);
-	if(var_01 == level.failure)
-	{
+	if(var_01 == level.failure) {
 		scripts\aitypes\dlc4\bt_action_api::setdesiredbtaction(param_00,"post_attack");
 	}
 
 	return var_01;
 }
 
-//Function Number: 8
-movingmelee_goontick(param_00)
-{
+movingmelee_goontick(param_00) {
 	var_01 = scripts\aitypes\dlc4\melee::movingmelee_tick(param_00);
-	if(var_01 == level.failure)
-	{
+	if(var_01 == level.failure) {
 		scripts\aitypes\dlc4\bt_action_api::setdesiredbtaction(param_00,"post_attack");
 	}
 
 	return var_01;
 }
 
-//Function Number: 9
-postattack_begin(param_00)
-{
+postattack_begin(param_00) {
 	var_01 = scripts\asm\dlc4\dlc4_asm::gettunedata();
 	var_02 = scripts\aitypes\dlc4\bt_state_api::btstate_getinstancedata(param_00);
 	var_02.postattackendtime = gettime() + var_01.min_time_between_melee_attacks_ms;
 	var_03 = scripts\asm\dlc4\dlc4_asm::getenemy();
-	if(!isdefined(var_03))
-	{
+	if(!isdefined(var_03)) {
 		scripts\asm\dlc4\dlc4_asm::setasmaction("taunt");
 		scripts\aitypes\dlc4\bt_state_api::asm_wait_state_setup(param_00,"taunt","taunt");
 		scripts\aitypes\dlc4\bt_state_api::btstate_transitionstate(param_00,"taunt");
@@ -115,26 +89,22 @@ postattack_begin(param_00)
 	var_05 = anglestoforward(self.angles);
 	var_06 = vectordot(var_04,var_05);
 	var_07 = distancesquared(var_03.origin,self.origin);
-	if(var_06 > 0 || var_07 < var_01.post_attack_max_enemy_dist_sq)
-	{
-		if(candomanuever("jump_back"))
-		{
+	if(var_06 > 0 || var_07 < var_01.post_attack_max_enemy_dist_sq) {
+		if(candomanuever("jump_back")) {
 			scripts\asm\dlc4\dlc4_asm::setasmaction("jump_back");
 			scripts\aitypes\dlc4\bt_state_api::asm_wait_state_setup(param_00,"jump_back","jump_back");
 			scripts\aitypes\dlc4\bt_state_api::btstate_transitionstate(param_00,"jump_back");
 			return;
 		}
 
-		if(candomanuever("slide_left"))
-		{
+		if(candomanuever("slide_left")) {
 			scripts\asm\dlc4\dlc4_asm::setasmaction("slide_left");
 			scripts\aitypes\dlc4\bt_state_api::asm_wait_state_setup(param_00,"slide_left","slide_left");
 			scripts\aitypes\dlc4\bt_state_api::btstate_transitionstate(param_00,"slide_left");
 			return;
 		}
 
-		if(candomanuever("slide_right"))
-		{
+		if(candomanuever("slide_right")) {
 			scripts\asm\dlc4\dlc4_asm::setasmaction("slide_right");
 			scripts\aitypes\dlc4\bt_state_api::asm_wait_state_setup(param_00,"slide_right","slide_right");
 			scripts\aitypes\dlc4\bt_state_api::btstate_transitionstate(param_00,"slide_right");
@@ -142,91 +112,72 @@ postattack_begin(param_00)
 		}
 	}
 
-	if(randomint(100) < var_01.post_attack_taunt_chance)
-	{
+	if(randomint(100) < var_01.post_attack_taunt_chance) {
 		scripts\asm\dlc4\dlc4_asm::setasmaction("taunt");
 		scripts\aitypes\dlc4\bt_state_api::asm_wait_state_setup(param_00,"taunt","taunt");
 		scripts\aitypes\dlc4\bt_state_api::btstate_transitionstate(param_00,"taunt");
 	}
 }
 
-//Function Number: 10
-postattack_tick(param_00)
-{
-	if(scripts\aitypes\dlc4\bt_state_api::btstate_tickstates(param_00))
-	{
+postattack_tick(param_00) {
+	if(scripts\aitypes\dlc4\bt_state_api::btstate_tickstates(param_00)) {
 		return level.runing;
 	}
 
 	var_01 = scripts\asm\dlc4\dlc4_asm::getenemy();
-	if(!isdefined(var_01))
-	{
+	if(!isdefined(var_01)) {
 		return level.failure;
 	}
 
 	scripts\aitypes\dlc4\behavior_utils::facepoint(var_01.origin);
 	var_02 = scripts\aitypes\dlc4\bt_state_api::btstate_getinstancedata(param_00);
-	if(gettime() < var_02.postattackendtime)
-	{
+	if(gettime() < var_02.postattackendtime) {
 		return level.running;
 	}
 
 	return level.success;
 }
 
-//Function Number: 11
-postattack_end(param_00)
-{
+postattack_end(param_00) {
 	var_01 = scripts\aitypes\dlc4\bt_state_api::btstate_getinstancedata(param_00);
 	var_01.postattackendtime = undefined;
 }
 
-//Function Number: 12
-candomanuever(param_00)
-{
+candomanuever(param_00) {
 	var_01 = self getsafecircleorigin(param_00,0);
 	var_02 = getmovedelta(var_01,0,1);
 	var_03 = self gettweakablevalue(var_02);
-	if(!scripts\mp\agents\zombie\zombie_util::func_38D1(self.origin,var_03))
-	{
+	if(!scripts\mp\agents\zombie\zombie_util::func_38D1(self.origin,var_03)) {
 		return 0;
 	}
 
 	return 1;
 }
 
-//Function Number: 13
-decideaction(param_00)
-{
-	if(isdefined(self.desiredaction))
-	{
+decideaction(param_00) {
+	if(isdefined(self.desiredaction)) {
 		return level.success;
 	}
 
-	if(isdefined(self.nextaction))
-	{
+	if(isdefined(self.nextaction)) {
 		scripts\aitypes\dlc4\bt_action_api::setdesiredbtaction(param_00,self.nextaction);
 		self.nextaction = undefined;
 		return level.success;
 	}
 
 	var_01 = scripts\asm\dlc4\dlc4_asm::getenemy();
-	if(!isdefined(var_01))
-	{
+	if(!isdefined(var_01)) {
 		return level.failure;
 	}
 
 	var_02 = gettime();
-	if(self getpersstat(var_01))
-	{
-		if(scripts\aitypes\dlc4\melee::trymeleeattacks(param_00))
-		{
+	if(self getpersstat(var_01)) {
+		if(scripts\aitypes\dlc4\melee::trymeleeattacks(param_00)) {
 			self.lastenemyengagetime = var_02;
 			return level.success;
 		}
 
-		if(scripts\aitypes\dlc4\alien_jump::tryjumpattack(param_00,var_01))
-		{
+		if(scripts\aitypes\dlc4\alien_jump::tryjumpattack(param_00,var_01)) {
 			return level.success;
 		}
 	}
@@ -234,10 +185,8 @@ decideaction(param_00)
 	{
 		var_03 = scripts\asm\dlc4\dlc4_asm::gettunedata();
 		var_04 = distancesquared(var_01.origin,self.origin);
-		if(var_04 <= var_03.stand_melee_dist_sq)
-		{
-			if(scripts\aitypes\dlc4\melee::trymeleeattacks(param_00))
-			{
+		if(var_04 <= var_03.stand_melee_dist_sq) {
+			if(scripts\aitypes\dlc4\melee::trymeleeattacks(param_00)) {
 				self.lastenemyengagetime = var_02;
 				return level.success;
 			}
@@ -247,58 +196,46 @@ decideaction(param_00)
 	return level.failure;
 }
 
-//Function Number: 14
-getdodgemovescale(param_00,param_01)
-{
+getdodgemovescale(param_00,param_01) {
 	var_02 = scripts\asm\dlc4\dlc4_asm::gettunedata();
 	var_03 = scripts\asm\asm::asm_lookupanimfromalias(param_00,param_01);
 	var_04 = self getsafecircleorigin(param_00,var_03);
 	var_05 = scripts\mp\agents\_scriptedagents::getsafecircleradius(var_04);
-	if(var_05 < var_02.min_dodge_scale)
-	{
+	if(var_05 < var_02.min_dodge_scale) {
 		return undefined;
 	}
 
-	if(var_05 > var_02.max_dodge_scale)
-	{
+	if(var_05 > var_02.max_dodge_scale) {
 		return var_02.max_dodge_scale;
 	}
 
 	return var_05;
 }
 
-//Function Number: 15
-updatestumble(param_00)
-{
-	if(!isdefined(self.damageaccumulator))
-	{
+updatestumble(param_00) {
+	if(!isdefined(self.damageaccumulator)) {
 		return 0;
 	}
 
-	if(isdefined(self.var_1198.requested_dodge_dir))
-	{
+	if(isdefined(self.var_1198.requested_dodge_dir)) {
 		return 0;
 	}
 
-	if(!isdefined(self.damageaccumulator.lastdamagetime) || gettime() > self.damageaccumulator.lastdamagetime + 1000)
-	{
+	if(!isdefined(self.damageaccumulator.lastdamagetime) || gettime() > self.damageaccumulator.lastdamagetime + 1000) {
 		self.damageaccumulator.accumulateddamage = 0;
 		self.damageaccumulator.lastdamagetime = 0;
 	}
 
 	var_01 = scripts\asm\dlc4\dlc4_asm::gettunedata();
-	if(isdefined(self.nextstumbletime) && gettime() < self.nextstumbletime)
-	{
+	if(isdefined(self.nextstumbletime) && gettime() < self.nextstumbletime) {
 		return 0;
 	}
 
-	if(self.damageaccumulator.accumulateddamage < self.maxhealth * var_01.stumble_damage_pct)
-	{
+	if(self.damageaccumulator.accumulateddamage < self.maxhealth * var_01.stumble_damage_pct) {
 		return 0;
 	}
 
-	if(randomint(100) < var_01.stumble_chance)
-	{
+	if(randomint(100) < var_01.stumble_chance) {
 		func_5AB8(param_00);
 		return 1;
 	}
@@ -308,14 +245,10 @@ updatestumble(param_00)
 	return 0;
 }
 
-//Function Number: 16
-updatedodge(param_00)
-{
+updatedodge(param_00) {
 	var_01 = gettime();
-	if(isdefined(self.var_1198.requested_dodge_dir))
-	{
-		if(self.lastdodgetime - var_01 > 150)
-		{
+	if(isdefined(self.var_1198.requested_dodge_dir)) {
+		if(self.lastdodgetime - var_01 > 150) {
 			self.var_1198.requested_dodge_dir = undefined;
 		}
 		else
@@ -324,56 +257,46 @@ updatedodge(param_00)
 		}
 	}
 
-	if(!isdefined(self.vehicle_getspawnerarray))
-	{
+	if(!isdefined(self.vehicle_getspawnerarray)) {
 		return 0;
 	}
 
-	if(!isdefined(self.lastwhizbytime))
-	{
+	if(!isdefined(self.lastwhizbytime)) {
 		return 0;
 	}
 
-	if(self.lastwhizbytime == var_01)
-	{
+	if(self.lastwhizbytime == var_01) {
 		return 0;
 	}
 
 	var_02 = scripts\asm\dlc4\dlc4_asm::gettunedata();
-	if(var_01 - self.lastwhizbytime > 100)
-	{
+	if(var_01 - self.lastwhizbytime > 100) {
 		self.lastwhizbytime = undefined;
 		return 0;
 	}
 
-	if(isdefined(self.lastdodgechecktime) && var_01 - self.lastdodgechecktime < var_02.min_dodge_test_interval_ms)
-	{
+	if(isdefined(self.lastdodgechecktime) && var_01 - self.lastdodgechecktime < var_02.min_dodge_test_interval_ms) {
 		return 0;
 	}
 
-	if(isdefined(self.lastdodgetime) && var_01 < self.lastdodgetime + var_02.min_dodge_interval_ms)
-	{
+	if(isdefined(self.lastdodgetime) && var_01 < self.lastdodgetime + var_02.min_dodge_interval_ms) {
 		return 0;
 	}
 
 	self.lastdodgechecktime = var_01;
 	var_03 = randomint(100);
-	if(var_03 < var_02.dodge_chance)
-	{
+	if(var_03 < var_02.dodge_chance) {
 		var_04 = distancesquared(self.vehicle_getspawnerarray,self.origin);
-		if(var_04 < var_02.min_enemy_dist_to_dodge_sq)
-		{
+		if(var_04 < var_02.min_enemy_dist_to_dodge_sq) {
 			return 0;
 		}
 
 		self.lastdodgetime = gettime();
 		var_05 = undefined;
-		if(scripts\common\utility::cointoss())
-		{
+		if(scripts\common\utility::cointoss()) {
 			var_06 = "left";
 			var_05 = getdodgemovescale("run_dodge",var_06);
-			if(!isdefined(var_05))
-			{
+			if(!isdefined(var_05)) {
 				var_06 = "right";
 				var_05 = getdodgemovescale("run_dodge",var_06);
 			}
@@ -382,15 +305,13 @@ updatedodge(param_00)
 		{
 			var_06 = "right";
 			var_05 = getdodgemovescale("run_dodge",var_06);
-			if(!isdefined(var_05))
-			{
+			if(!isdefined(var_05)) {
 				var_06 = "left";
 				var_05 = getdodgemovescale("run_dodge",var_06);
 			}
 		}
 
-		if(isdefined(var_05))
-		{
+		if(isdefined(var_05)) {
 			self.var_1198.requested_dodge_dir = var_06;
 			self.var_1198.requested_dodge_scale = var_05;
 			return 1;
@@ -401,36 +322,27 @@ updatedodge(param_00)
 	return 0;
 }
 
-//Function Number: 17
-followenemy_begin(param_00)
-{
+followenemy_begin(param_00) {
 	self.var_3135.instancedata[param_00] = spawnstruct();
 }
 
-//Function Number: 18
-followenemy_tick(param_00)
-{
+followenemy_tick(param_00) {
 	var_01 = scripts\asm\dlc4\dlc4_asm::getenemy();
-	if(!isdefined(var_01))
-	{
+	if(!isdefined(var_01)) {
 		return level.failure;
 	}
 
-	if(!updatestumble(param_00))
-	{
+	if(!updatestumble(param_00)) {
 		updatedodge(param_00);
 	}
 
 	var_02 = scripts\asm\dlc4\dlc4_asm::gettunedata();
 	var_03 = getclosestpointonnavmesh(var_01.origin,self);
 	var_04 = distancesquared(var_03,self.origin);
-	if(var_04 > var_02.stand_melee_dist_sq)
-	{
+	if(var_04 > var_02.stand_melee_dist_sq) {
 		self ghostskulls_complete_status(var_03);
-		if(!self getpersstat(var_01))
-		{
-			if(!isdefined(self.vehicle_getspawnerarray))
-			{
+		if(!self getpersstat(var_01)) {
+			if(!isdefined(self.vehicle_getspawnerarray)) {
 				scripts\aitypes\dlc4\behavior_utils::facepoint(var_01.origin);
 			}
 
@@ -445,39 +357,27 @@ followenemy_tick(param_00)
 	return level.success;
 }
 
-//Function Number: 19
-followenemy_end(param_00)
-{
+followenemy_end(param_00) {
 	self.var_3135.instancedata[param_00] = undefined;
 }
 
-//Function Number: 20
-jumpback(param_00)
-{
+jumpback(param_00) {
 	scripts\aitypes\dlc4\simple_action::dosimpleaction_immediate(param_00,"jump_back");
 }
 
-//Function Number: 21
-slideleft(param_00)
-{
+slideleft(param_00) {
 	scripts\aitypes\dlc4\simple_action::dosimpleaction_immediate(param_00,"slide_left");
 }
 
-//Function Number: 22
-slideright(param_00)
-{
+slideright(param_00) {
 	scripts\aitypes\dlc4\simple_action::dosimpleaction_immediate(param_00,"slide_right");
 }
 
-//Function Number: 23
-taunt(param_00)
-{
+taunt(param_00) {
 	scripts\aitypes\dlc4\simple_action::dosimpleaction_immediate(param_00,"taunt");
 }
 
-//Function Number: 24
-func_5AB8(param_00)
-{
+func_5AB8(param_00) {
 	var_01 = scripts\asm\dlc4\dlc4_asm::gettunedata();
 	self.nextstumbletime = gettime() + var_01.stumble_interval_ms;
 	scripts\aitypes\dlc4\simple_action::dosimpleaction_immediate(param_00,"stumble");

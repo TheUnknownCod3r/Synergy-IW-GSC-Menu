@@ -1,16 +1,10 @@
 /*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\mp\maps\mp_metropolis\mp_metropolis.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 13
- * Decompile Time: 731 ms
- * Timestamp: 10/27/2023 12:13:50 AM
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\mp\maps\mp_metropolis\mp_metropolis.gsc
 *******************************************************************/
 
-//Function Number: 1
-main()
-{
+main() {
 	lib_0FCD::main();
 	scripts\mp\maps\mp_metropolis\gen\mp_metropolis_art::main();
 	lib_0FCC::main();
@@ -37,9 +31,7 @@ main()
 	thread runmodespecifictriggers();
 }
 
-//Function Number: 2
-fix_collision()
-{
+fix_collision() {
 	var_00 = getent("clip128x128x8","targetname");
 	var_01 = spawn("script_model",(535.5,-727,72));
 	var_01.angles = (90,37.2594,-7.74062);
@@ -135,40 +127,31 @@ fix_collision()
 	var_2A clonebrushmodeltoscriptmodel(var_29);
 }
 
-//Function Number: 3
-func_CDA4(param_00)
-{
+func_CDA4(param_00) {
 	wait(30);
 	function_030E(param_00);
 }
 
-//Function Number: 4
-trainanims()
-{
+trainanims() {
 	precachemodel("veh_civ_train_fn_01");
 	wait(3);
 	var_00 = getentarray("train","script_noteworthy");
-	foreach(var_02 in var_00)
-	{
+	foreach(var_02 in var_00) {
 		var_03 = spawn("script_model",var_02.origin);
 		var_03 setmodel("veh_civ_train_fn_01");
 		var_03 show();
 		var_03 linkto(var_02);
 		var_02 thread animatetraincar();
-		if(var_02.var_336 == "train01" || var_02.var_336 == "train03" || var_02.var_336 == "train05")
-		{
+		if(var_02.var_336 == "train01" || var_02.var_336 == "train03" || var_02.var_336 == "train05") {
 			var_02 thread animatetraincaraudio();
 		}
 	}
 }
 
-//Function Number: 5
-animatetraincar()
-{
+animatetraincar() {
 	level endon("game_ended");
 	var_00 = self.origin;
-	for(;;)
-	{
+	for(;;) {
 		wait(5);
 		self movey(11000,20,10,0);
 		wait(20);
@@ -186,13 +169,10 @@ animatetraincar()
 	}
 }
 
-//Function Number: 6
-animatetraincaraudio()
-{
+animatetraincaraudio() {
 	level endon("game_ended");
 	var_00 = self.origin;
-	for(;;)
-	{
+	for(;;) {
 		wait(5);
 		self movey(11000,20,10,0);
 		self playsound("mp_met_train_start");
@@ -224,171 +204,139 @@ animatetraincaraudio()
 	}
 }
 
-//Function Number: 7
-traininit()
-{
+traininit() {
 	var_00 = getentarray("train","script_noteworthy");
-	foreach(var_02 in var_00)
-	{
+	foreach(var_02 in var_00) {
 		var_02 setmodel("veh_civ_train_fn_01");
 	}
 
 	return var_00;
 }
 
-//Function Number: 8
-move_hardpoint_startspawns()
-{
-	if(level.gametype == "koth" || level.gametype == "grnd")
-	{
+move_hardpoint_startspawns() {
+	if(level.gametype == "koth" || level.gametype == "grnd") {
 		wait(1);
 		var_00 = scripts\mp\_spawnlogic::func_8140("mp_koth_spawn_allies_start");
 		var_01 = scripts\mp\_spawnlogic::func_8140("mp_koth_spawn_axis_start");
-		foreach(var_03 in var_00)
-		{
-			if(distance(var_03.origin,(-584,-2112,0.121567)) < 10)
-			{
+		foreach(var_03 in var_00) {
+			if(distance(var_03.origin,(-584,-2112,0.121567)) < 10) {
 				var_03.origin = (-1728,-1552,-72);
 				var_03.angles = (0,30,0);
 			}
 
-			if(distance(var_03.origin,(-448,-2112,0.121567)) < 10)
-			{
+			if(distance(var_03.origin,(-448,-2112,0.121567)) < 10) {
 				var_03.origin = (-1664,-1584,-72);
 				var_03.angles = (0,45,0);
 			}
 
-			if(distance(var_03.origin,(-376,-2120,0.121567)) < 10)
-			{
+			if(distance(var_03.origin,(-376,-2120,0.121567)) < 10) {
 				var_03.origin = (-1696,-1648,-72);
 				var_03.angles = (0,45,0);
 			}
 
-			if(distance(var_03.origin,(-584,-2040,0.121567)) < 10)
-			{
+			if(distance(var_03.origin,(-584,-2040,0.121567)) < 10) {
 				var_03.origin = (-1632,-1680,-72);
 				var_03.angles = (0,90,0);
 			}
 
-			if(distance(var_03.origin,(-520,-2040,0.121567)) < 10)
-			{
+			if(distance(var_03.origin,(-520,-2040,0.121567)) < 10) {
 				var_03.origin = (-1600,-1616,-64);
 				var_03.angles = (0,90,0);
 			}
 
-			if(distance(var_03.origin,(-480,-1912,0.121567)) < 10)
-			{
+			if(distance(var_03.origin,(-480,-1912,0.121567)) < 10) {
 				var_03.origin = (-1536,-1648,-64);
 				var_03.angles = (0,90,0);
 			}
 
-			if(distance(var_03.origin,(-448,-2040,0.121567)) < 10)
-			{
+			if(distance(var_03.origin,(-448,-2040,0.121567)) < 10) {
 				var_03.origin = (-1568,-1712,-64);
 				var_03.angles = (0,90,0);
 			}
 
-			if(distance(var_03.origin,(-552,-1976,0.121567)) < 10)
-			{
+			if(distance(var_03.origin,(-552,-1976,0.121567)) < 10) {
 				var_03.origin = (-1504,-1744,-64);
 				var_03.angles = (0,120,0);
 			}
 
-			if(distance(var_03.origin,(-416,-1976,0.121567)) < 10)
-			{
+			if(distance(var_03.origin,(-416,-1976,0.121567)) < 10) {
 				var_03.origin = (-1472,-1680,-64);
 				var_03.angles = (0,120,0);
 			}
 
-			if(distance(var_03.origin,(-488,-1976,0.121567)) < 10)
-			{
+			if(distance(var_03.origin,(-488,-1976,0.121567)) < 10) {
 				var_03.origin = (-1435,-1620,-64);
 				var_03.angles = (0,120,0);
 			}
 
-			if(distance(var_03.origin,(-520,-2112,0.121567)) < 10)
-			{
+			if(distance(var_03.origin,(-520,-2112,0.121567)) < 10) {
 				var_03.origin = (-1500,-1590,-64);
 				var_03.angles = (0,120,0);
 			}
 
-			if(distance(var_03.origin,(-376,-2048,0.121567)) < 10)
-			{
+			if(distance(var_03.origin,(-376,-2048,0.121567)) < 10) {
 				var_03.origin = (-1570,-1556,-64);
 				var_03.angles = (0,120,0);
 			}
 		}
 
-		foreach(var_03 in var_01)
-		{
-			if(distance(var_03.origin,(-1692,2116,-15.8765)) < 10)
-			{
+		foreach(var_03 in var_01) {
+			if(distance(var_03.origin,(-1692,2116,-15.8765)) < 10) {
 				var_03.origin = (928,1056,48);
 				var_03.angles = (0,180,0);
 			}
 
-			if(distance(var_03.origin,(-1658,2180,-15.8765)) < 10)
-			{
+			if(distance(var_03.origin,(-1658,2180,-15.8765)) < 10) {
 				var_03.origin = (928,1120,48);
 				var_03.angles = (0,180,0);
 			}
 
-			if(distance(var_03.origin,(-1704,2052,-15.8765)) < 10)
-			{
+			if(distance(var_03.origin,(-1704,2052,-15.8765)) < 10) {
 				var_03.origin = (928,1184,48);
 				var_03.angles = (0,180,0);
 			}
 
-			if(distance(var_03.origin,(-1742,2188,-15.8765)) < 10)
-			{
+			if(distance(var_03.origin,(-1742,2188,-15.8765)) < 10) {
 				var_03.origin = (992,1056,48);
 				var_03.angles = (0,180,0);
 			}
 
-			if(distance(var_03.origin,(-1890,2188,-15.8765)) < 10)
-			{
+			if(distance(var_03.origin,(-1890,2188,-15.8765)) < 10) {
 				var_03.origin = (992,1120,48);
 				var_03.angles = (0,180,0);
 			}
 
-			if(distance(var_03.origin,(-1810,2188,-15.8765)) < 10)
-			{
+			if(distance(var_03.origin,(-1810,2188,-15.8765)) < 10) {
 				var_03.origin = (992,1184,48);
 				var_03.angles = (0,180,0);
 			}
 
-			if(distance(var_03.origin,(-1788,2120,-15.8765)) < 10)
-			{
+			if(distance(var_03.origin,(-1788,2120,-15.8765)) < 10) {
 				var_03.origin = (1056,1056,48);
 				var_03.angles = (0,180,0);
 			}
 
-			if(distance(var_03.origin,(-1888,2124,-15.8765)) < 10)
-			{
+			if(distance(var_03.origin,(-1888,2124,-15.8765)) < 10) {
 				var_03.origin = (1056,1120,48);
 				var_03.angles = (0,180,0);
 			}
 
-			if(distance(var_03.origin,(-1784,2052,-15.8765)) < 10)
-			{
+			if(distance(var_03.origin,(-1784,2052,-15.8765)) < 10) {
 				var_03.origin = (1056,1184,48);
 				var_03.angles = (0,180,0);
 			}
 
-			if(distance(var_03.origin,(-1884,2052,-15.8765)) < 10)
-			{
+			if(distance(var_03.origin,(-1884,2052,-15.8765)) < 10) {
 				var_03.origin = (870,1184,48);
 				var_03.angles = (0,180,0);
 			}
 
-			if(distance(var_03.origin,(-1872,1980,-15.8765)) < 10)
-			{
+			if(distance(var_03.origin,(-1872,1980,-15.8765)) < 10) {
 				var_03.origin = (870,1120,48);
 				var_03.angles = (0,180,0);
 			}
 
-			if(distance(var_03.origin,(-1760,1964,-15.8765)) < 10)
-			{
+			if(distance(var_03.origin,(-1760,1964,-15.8765)) < 10) {
 				var_03.origin = (870,1056,48);
 				var_03.angles = (0,180,0);
 			}
@@ -398,71 +346,57 @@ move_hardpoint_startspawns()
 	}
 }
 
-//Function Number: 9
-move_ball_startspawns()
-{
-	if(level.gametype == "ball")
-	{
+move_ball_startspawns() {
+	if(level.gametype == "ball") {
 		wait(1);
 		var_00 = scripts\mp\_spawnlogic::func_8140("mp_ball_spawn_axis_start");
-		foreach(var_02 in var_00)
-		{
-			if(distance(var_02.origin,(-2418.9,-457.3,-73.8721)) < 10)
-			{
+		foreach(var_02 in var_00) {
+			if(distance(var_02.origin,(-2418.9,-457.3,-73.8721)) < 10) {
 				var_02.origin = (-2528,-1072,68);
 				var_02.angles = (0,60,0);
 			}
 
-			if(distance(var_02.origin,(-2470.6,-542.3,-73.8721)) < 10)
-			{
+			if(distance(var_02.origin,(-2470.6,-542.3,-73.8721)) < 10) {
 				var_02.origin = (-2528,-992,64);
 				var_02.angles = (0,60,0);
 			}
 
-			if(distance(var_02.origin,(-2405,-553.4,-73.8721)) < 10)
-			{
+			if(distance(var_02.origin,(-2405,-553.4,-73.8721)) < 10) {
 				var_02.origin = (-2528,-912,64);
 				var_02.angles = (0,60,0);
 			}
 
-			if(distance(var_02.origin,(-2542.8,-601.9,-73.8721)) < 10)
-			{
+			if(distance(var_02.origin,(-2542.8,-601.9,-73.8721)) < 10) {
 				var_02.origin = (-2448,-1024,64);
 				var_02.angles = (0,60,0);
 			}
 
-			if(distance(var_02.origin,(-2470.6,-462.3,-73.8721)) < 10)
-			{
+			if(distance(var_02.origin,(-2470.6,-462.3,-73.8721)) < 10) {
 				var_02.origin = (-2448,-944,64);
 				var_02.angles = (0,60,0);
 			}
 
-			if(distance(var_02.origin,(-2547.8,-519.9,-73.8721)) < 10)
-			{
+			if(distance(var_02.origin,(-2547.8,-519.9,-73.8721)) < 10) {
 				var_02.origin = (-2128,-1520,64);
 				var_02.angles = (0,0,0);
 			}
 
-			if(distance(var_02.origin,(-2549.1,-439.9,-73.8721)) < 10)
-			{
+			if(distance(var_02.origin,(-2549.1,-439.9,-73.8721)) < 10) {
 				var_02.origin = (-2128,-1456,64);
 				var_02.angles = (0,0,0);
 			}
 
-			if(distance(var_02.origin,(-2474.9,-388.4,-71.8755)) < 10)
-			{
+			if(distance(var_02.origin,(-2474.9,-388.4,-71.8755)) < 10) {
 				var_02.origin = (-2128,-1392,64);
 				var_02.angles = (0,0,0);
 			}
 
-			if(distance(var_02.origin,(-2477,-607.4,-73.8721)) < 10)
-			{
+			if(distance(var_02.origin,(-2477,-607.4,-73.8721)) < 10) {
 				var_02.origin = (-2048,-1424,64);
 				var_02.angles = (0,0,0);
 			}
 
-			if(distance(var_02.origin,(-2545,-358.4,-71.8755)) < 10)
-			{
+			if(distance(var_02.origin,(-2545,-358.4,-71.8755)) < 10) {
 				var_02.origin = (-2048,-1488,64);
 				var_02.angles = (0,0,0);
 			}
@@ -472,36 +406,28 @@ move_ball_startspawns()
 	}
 }
 
-//Function Number: 10
-filterstartspawns()
-{
+filterstartspawns() {
 	var_00 = level.var_10DF1;
 	level.var_10DF1 = [];
-	for(var_01 = 0;var_01 < var_00.size;var_01++)
-	{
+	for(var_01 = 0;var_01 < var_00.size;var_01++) {
 		var_00[var_01] scripts\mp\_spawnlogic::func_108FA();
 		var_00[var_01].var_F1AE = 0;
 		var_00[var_01].var_94C6 = 0;
 		level.var_10DF1[level.var_10DF1.size] = var_00[var_01];
 	}
 
-	if(level.teambased)
-	{
-		foreach(var_03 in var_00)
-		{
+	if(level.teambased) {
+		foreach(var_03 in var_00) {
 			var_03.var_94C6 = 1;
 			var_04 = anglestoforward(var_03.angles);
-			foreach(var_06 in var_00)
-			{
-				if(var_03 == var_06)
-				{
+			foreach(var_06 in var_00) {
+				if(var_03 == var_06) {
 					continue;
 				}
 
 				var_07 = vectornormalize(var_06.origin - var_03.origin);
 				var_08 = vectordot(var_04,var_07);
-				if(var_08 > 0.86)
-				{
+				if(var_08 > 0.86) {
 					var_03.var_94C6 = 0;
 					break;
 				}
@@ -510,9 +436,7 @@ filterstartspawns()
 	}
 }
 
-//Function Number: 11
-spawn_ball_allowed_trigger()
-{
+spawn_ball_allowed_trigger() {
 	wait(1);
 	var_00 = spawn("trigger_radius",(-990,427,550),0,4000,400);
 	var_01 = spawn("trigger_radius",(-2201,-746,370),0,200,500);
@@ -539,9 +463,7 @@ spawn_ball_allowed_trigger()
 	level.ballallowedtriggers[level.ballallowedtriggers.size] = var_0A;
 }
 
-//Function Number: 12
-spawn_oob_trigger()
-{
+spawn_oob_trigger() {
 	wait(1);
 	var_00 = spawn("trigger_radius",(400,1235,160),0,35,20);
 	var_01 = spawn("trigger_radius",(400,1210,55),0,40,20);
@@ -557,11 +479,8 @@ spawn_oob_trigger()
 	level.var_C7B3[level.var_C7B3.size] = var_03;
 }
 
-//Function Number: 13
-runmodespecifictriggers()
-{
-	if(level.gametype == "ball" || level.gametype == "tdef")
-	{
+runmodespecifictriggers() {
+	if(level.gametype == "ball" || level.gametype == "tdef") {
 		wait(1);
 		var_00 = spawn("trigger_radius",(-2600,-70,-70),0,70,50);
 		var_00.var_336 = "uplink_nozone";

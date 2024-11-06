@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: 2922.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 15
- * Decompile Time: 10 ms
- * Timestamp: 10/27/2023 12:24:55 AM
-*******************************************************************/
+/****************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\2922.gsc
+****************************/
 
-//Function Number: 1
-func_EBE9()
-{
+func_EBE9() {
 	scripts\engine\utility::flag_init("setup_sceneblock_anims");
 	level.var_EBFF = spawnstruct();
 	level.var_EBFF.var_47 = [];
@@ -52,9 +46,7 @@ func_EBE9()
 	scripts\engine\utility::flag_set("setup_sceneblock_anims");
 }
 
-//Function Number: 2
-func_EC01(param_00,param_01,param_02)
-{
+func_EC01(param_00,param_01,param_02) {
 	self endon("death");
 	self notify("starting_new_sceneblock");
 	self endon("starting_new_sceneblock");
@@ -62,13 +54,11 @@ func_EC01(param_00,param_01,param_02)
 	scripts/sp/interaction::func_9A0F();
 	self givescorefortrophyblocks();
 	lib_0A1E::func_2385();
-	if(!isdefined(param_02))
-	{
+	if(!isdefined(param_02)) {
 		param_02 = 0;
 	}
 
-	if(param_02)
-	{
+	if(param_02) {
 		func_EC08("point",param_00);
 	}
 
@@ -76,9 +66,7 @@ func_EC01(param_00,param_01,param_02)
 	self give_mp_super_weapon(self.origin);
 }
 
-//Function Number: 3
-func_EC0D(param_00,param_01)
-{
+func_EC0D(param_00,param_01) {
 	self endon("death");
 	self notify("stop_loop");
 	scripts/sp/interaction::func_9A0F();
@@ -88,16 +76,11 @@ func_EC0D(param_00,param_01)
 	var_02 = lib_0EFB::func_7D7A(param_00);
 	self _meth_80F1(var_02.origin,var_02.angles);
 	self give_mp_super_weapon(self.origin);
-	if(isdefined(param_01) && param_01)
-	{
-		if(param_01 && scripts/sp/interaction::func_9C26(var_02))
-		{
-			if(isdefined(var_02.var_EE92))
-			{
-				if(issubstr(var_02.var_EE92,"opsmap"))
-				{
-					if(self.var_1FBB == "salter" || self.var_1FBB == "gator" || self.var_1FBB == "drop_officer")
-					{
+	if(isdefined(param_01) && param_01) {
+		if(param_01 && scripts/sp/interaction::func_9C26(var_02)) {
+			if(isdefined(var_02.var_EE92)) {
+				if(issubstr(var_02.var_EE92,"opsmap")) {
+					if(self.var_1FBB == "salter" || self.var_1FBB == "gator" || self.var_1FBB == "drop_officer") {
 						thread lib_0EFB::func_CD3F(var_02.var_EE92);
 					}
 					else
@@ -120,13 +103,10 @@ func_EC0D(param_00,param_01)
 	scripts\engine\utility::waitframe();
 }
 
-//Function Number: 4
-func_EC02(param_00,param_01)
-{
+func_EC02(param_00,param_01) {
 	level.player endon("death");
 	var_02 = lib_0EFB::func_7D7A(param_00);
-	if(!isstring(param_00))
-	{
+	if(!isstring(param_00)) {
 		param_00 = "empty";
 	}
 
@@ -134,21 +114,17 @@ func_EC02(param_00,param_01)
 	var_02 endon("death");
 	var_02 lib_0E46::func_48C4(undefined,undefined,undefined,90,3000,1);
 	var_03 = squared(500);
-	for(;;)
-	{
-		while(distance2dsquared(var_02.origin,level.player.origin) > var_03)
-		{
+	for(;;) {
+		while(distance2dsquared(var_02.origin,level.player.origin) > var_03) {
 			scripts\engine\utility::waitframe();
 		}
 
 		var_02 lib_0E46::func_DFE3();
-		if(isdefined(param_01) && param_01)
-		{
+		if(isdefined(param_01) && param_01) {
 			break;
 		}
 
-		while(distance2dsquared(var_02.origin,level.player.origin) < var_03)
-		{
+		while(distance2dsquared(var_02.origin,level.player.origin) < var_03) {
 			scripts\engine\utility::waitframe();
 		}
 
@@ -156,18 +132,13 @@ func_EC02(param_00,param_01)
 	}
 }
 
-//Function Number: 5
-func_EC03(param_00)
-{
-	if(isdefined(level.var_EC02) && isdefined(level.var_EC02[param_00]) && isdefined(level.var_EC02[param_00].var_4C1F))
-	{
+func_EC03(param_00) {
+	if(isdefined(level.var_EC02) && isdefined(level.var_EC02[param_00]) && isdefined(level.var_EC02[param_00].var_4C1F)) {
 		level.var_EC02[param_00] lib_0E46::func_DFE3();
 	}
 }
 
-//Function Number: 6
-func_EC08(param_00,param_01,param_02)
-{
+func_EC08(param_00,param_01,param_02) {
 	self endon("death");
 	self endon("stop_sceneblock_orient");
 	self notify("starting_new_sceneblock_orient");
@@ -177,21 +148,17 @@ func_EC08(param_00,param_01,param_02)
 	self givescorefortrophyblocks();
 	lib_0A1E::func_2385();
 	var_03 = lib_0EFB::func_7D7A(param_01);
-	if(!isdefined(param_00))
-	{
+	if(!isdefined(param_00)) {
 		param_00 = "angle";
 	}
 
-	if(!isdefined(param_02))
-	{
+	if(!isdefined(param_02)) {
 		param_02 = 0;
 	}
 
-	switch(param_00)
-	{
+	switch(param_00) {
 		case "angle":
-			while(abs(self.angles[1] - var_03.angles[1]) > 1)
-			{
+			while(abs(self.angles[1] - var_03.angles[1]) > 1) {
 				self orientmode("face angle",var_03.angles[1]);
 				scripts\engine\utility::waitframe();
 			}
@@ -205,8 +172,7 @@ func_EC08(param_00,param_01,param_02)
 			var_05 = anglestoforward(var_04);
 			var_06 = anglestoforward(self.angles);
 			var_07 = vectordot(var_05,var_06);
-			while(var_07 < 0.99)
-			{
+			while(var_07 < 0.99) {
 				self orientmode("face point",var_03.origin);
 				var_06 = anglestoforward(self.angles);
 				var_07 = vectordot(var_05,var_06);
@@ -218,34 +184,26 @@ func_EC08(param_00,param_01,param_02)
 			break;
 	}
 
-	if(isdefined(var_03.var_8779) && !param_02)
-	{
+	if(isdefined(var_03.var_8779) && !param_02) {
 		var_03 delete();
 	}
 }
 
-//Function Number: 7
-func_EC0A(param_00,param_01,param_02,param_03,param_04,param_05)
-{
+func_EC0A(param_00,param_01,param_02,param_03,param_04,param_05) {
 	self endon("death");
 	self notify("starting_new_sceneblock");
 	self endon("starting_new_sceneblock");
-	if(!isdefined(param_05))
-	{
+	if(!isdefined(param_05)) {
 		param_05 = 0;
 	}
 
-	if(isdefined(self.var_EC09))
-	{
-		if(!isdefined(level.var_EC85[self.var_1FBB]))
-		{
+	if(isdefined(self.var_EC09)) {
+		if(!isdefined(level.var_EC85[self.var_1FBB])) {
 			level.var_EC85[self.var_1FBB] = [];
 		}
 
-		if(!isdefined(level.var_EC85[self.var_1FBB][self.var_EC09]))
-		{
-			if(self.var_1FBB == "salter")
-			{
+		if(!isdefined(level.var_EC85[self.var_1FBB][self.var_EC09])) {
+			if(self.var_1FBB == "salter") {
 				level.var_EC85[self.var_1FBB][self.var_EC09] = level.var_EBFF.var_EA31[self.var_EC09 + "_XO"];
 			}
 			else
@@ -265,30 +223,24 @@ func_EC0A(param_00,param_01,param_02,param_03,param_04,param_05)
 	lib_0A1E::func_2385();
 	scripts/sp/anim::func_1F12(self);
 	var_06 = lib_0EFB::func_7D7A(param_00);
-	if(!isdefined(param_01))
-	{
+	if(!isdefined(param_01)) {
 		param_01 = 1;
 	}
 
-	if(!isdefined(param_02))
-	{
+	if(!isdefined(param_02)) {
 		param_02 = 1;
 	}
 
-	if(!isdefined(param_03))
-	{
+	if(!isdefined(param_03)) {
 		param_03 = "stand_idle";
 	}
 
-	if(!isdefined(param_04))
-	{
+	if(!isdefined(param_04)) {
 		param_04 = "Exposed";
 	}
 
-	if(param_01)
-	{
-		if(param_05)
-		{
+	if(param_01) {
+		if(param_05) {
 			scripts\engine\utility::delaycall(0.05,::_meth_8250,1);
 		}
 		else
@@ -300,8 +252,7 @@ func_EC0A(param_00,param_01,param_02,param_03,param_04,param_05)
 	}
 	else
 	{
-		if(param_05)
-		{
+		if(param_05) {
 			scripts\engine\utility::delaycall(0.05,::_meth_8250,1);
 		}
 		else
@@ -314,20 +265,15 @@ func_EC0A(param_00,param_01,param_02,param_03,param_04,param_05)
 
 	self.objective_playermask_showto = 0;
 	self give_mp_super_weapon(self.origin);
-	if(param_05)
-	{
+	if(param_05) {
 		self _meth_8250(0);
 	}
 
 	self notify("sceneblock_reach_finished");
-	if(param_02 && scripts/sp/interaction::func_9C26(var_06))
-	{
-		if(isdefined(var_06.var_EE92))
-		{
-			if(issubstr(var_06.var_EE92,"opsmap"))
-			{
-				if(self.var_1FBB == "salter" || self.var_1FBB == "gator" || self.var_1FBB == "drop_officer")
-				{
+	if(param_02 && scripts/sp/interaction::func_9C26(var_06)) {
+		if(isdefined(var_06.var_EE92)) {
+			if(issubstr(var_06.var_EE92,"opsmap")) {
+				if(self.var_1FBB == "salter" || self.var_1FBB == "gator" || self.var_1FBB == "drop_officer") {
 					thread lib_0EFB::func_CD3F(var_06.var_EE92);
 				}
 				else
@@ -346,19 +292,15 @@ func_EC0A(param_00,param_01,param_02,param_03,param_04,param_05)
 		}
 	}
 
-	if(param_02 && scripts/sp/interaction::func_9CD7(var_06))
-	{
+	if(param_02 && scripts/sp/interaction::func_9CD7(var_06)) {
 		thread scripts/sp/interaction_manager::func_CE40(var_06.var_EE92,var_06);
 	}
 }
 
-//Function Number: 8
-func_EC0C(param_00,param_01,param_02)
-{
+func_EC0C(param_00,param_01,param_02) {
 	self endon("death");
 	self endon("sceneblock_reachloop_stop");
-	if(!isdefined(param_02))
-	{
+	if(!isdefined(param_02)) {
 		param_02 = "stop_loop";
 	}
 
@@ -367,35 +309,27 @@ func_EC0C(param_00,param_01,param_02)
 	scripts/sp/anim::func_1ECC(self,param_01,param_02);
 }
 
-//Function Number: 9
-func_EC0B(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07)
-{
+func_EC0B(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07) {
 	self endon("death");
 	self endon("stop_sceneblock");
 	self notify("starting_new_sceneblock_idle");
 	self endon("starting_new_sceneblock_idle");
 	scripts\sp\_utility::func_415D("casual");
-	if(!scripts\engine\utility::flag_exist("setup_sceneblock_anims") || !scripts\engine\utility::flag("setup_sceneblock_anims"))
-	{
+	if(!scripts\engine\utility::flag_exist("setup_sceneblock_anims") || !scripts\engine\utility::flag("setup_sceneblock_anims")) {
 		func_EBE9();
 	}
 
-	if(!isdefined(param_07))
-	{
+	if(!isdefined(param_07)) {
 		param_07 = 0;
 	}
 
-	if(!isdefined(level.var_EC85[self.var_1FBB]))
-	{
+	if(!isdefined(level.var_EC85[self.var_1FBB])) {
 		level.var_EC85[self.var_1FBB] = [];
 	}
 
-	if(isdefined(self.var_EC09) && isdefined(self.var_EC07))
-	{
-		if(!isdefined(level.var_EC85[self.var_1FBB][self.var_EC09]))
-		{
-			if(self.var_1FBB == "salter")
-			{
+	if(isdefined(self.var_EC09) && isdefined(self.var_EC07)) {
+		if(!isdefined(level.var_EC85[self.var_1FBB][self.var_EC09])) {
+			if(self.var_1FBB == "salter") {
 				level.var_EC85[self.var_1FBB][self.var_EC09] = level.var_EBFF.var_EA31[self.var_EC09 + "_XO"];
 			}
 			else
@@ -408,10 +342,8 @@ func_EC0B(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_0
 		self.a.movement = "stop";
 	}
 
-	if(param_01 != "shipcrib_stand_console" && !isdefined(level.var_EC85[self.var_1FBB][param_01]))
-	{
-		if(self.var_1FBB == "salter")
-		{
+	if(param_01 != "shipcrib_stand_console" && !isdefined(level.var_EC85[self.var_1FBB][param_01])) {
+		if(self.var_1FBB == "salter") {
 			level.var_EC85[self.var_1FBB][param_01][0] = level.var_EBFF.var_EA31[param_01 + "_XO"];
 		}
 		else
@@ -423,17 +355,14 @@ func_EC0B(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_0
 	self.var_EC07 = undefined;
 	self.var_EC09 = undefined;
 	func_EC0A(param_00,param_03,param_04,param_05,param_06,param_07);
-	if(param_01 != "shipcrib_stand_console")
-	{
+	if(param_01 != "shipcrib_stand_console") {
 		thread scripts\sp\_utility::func_F40E("casual",param_01);
 	}
 
-	switch(param_01)
-	{
+	switch(param_01) {
 		case "shipcrib_stand_stationary_talk_idle_01":
 			self.var_EC07 = "shipcrib_stand_idle01_arrival";
-			if(isdefined(param_02))
-			{
+			if(isdefined(param_02)) {
 				self.var_EC09 = "shipcrib_stand_" + param_02 + "_exit";
 			}
 			else
@@ -444,8 +373,7 @@ func_EC0B(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_0
 
 		case "shipcrib_stand_stationary_talk_idle_02":
 			self.var_EC07 = "shipcrib_stand_idle02_arrival";
-			if(isdefined(param_02))
-			{
+			if(isdefined(param_02)) {
 				self.var_EC09 = "shipcrib_stand_" + param_02 + "_exit";
 			}
 			else
@@ -456,8 +384,7 @@ func_EC0B(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_0
 
 		case "shipcrib_stand_stationary_talk_idle_03":
 			self.var_EC07 = "shipcrib_stand_idle03_arrival";
-			if(isdefined(param_02))
-			{
+			if(isdefined(param_02)) {
 				self.var_EC09 = "shipcrib_stand_" + param_02 + "_exit";
 			}
 			else
@@ -468,8 +395,7 @@ func_EC0B(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_0
 
 		case "shipcrib_stand_stationary_talk_idle_04":
 			self.var_EC07 = "shipcrib_stand_idle04_arrival";
-			if(isdefined(param_02))
-			{
+			if(isdefined(param_02)) {
 				self.var_EC09 = "shipcrib_stand_" + param_02 + "_exit";
 			}
 			else
@@ -480,8 +406,7 @@ func_EC0B(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_0
 
 		case "shipcrib_stand_stationary_talk_idle_05":
 			self.var_EC07 = "shipcrib_stand_idle05_arrival";
-			if(isdefined(param_02))
-			{
+			if(isdefined(param_02)) {
 				self.var_EC09 = "shipcrib_stand_" + param_02 + "_exit";
 			}
 			else
@@ -497,12 +422,9 @@ func_EC0B(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_0
 			break;
 	}
 
-	if(isdefined(self.var_EC07))
-	{
-		if(!isdefined(level.var_EC85[self.var_1FBB][self.var_EC07]))
-		{
-			if(self.var_1FBB == "salter")
-			{
+	if(isdefined(self.var_EC07)) {
+		if(!isdefined(level.var_EC85[self.var_1FBB][self.var_EC07])) {
+			if(self.var_1FBB == "salter") {
 				level.var_EC85[self.var_1FBB][self.var_EC07] = level.var_EBFF.var_EA31[self.var_EC07 + "_XO"];
 			}
 			else
@@ -520,27 +442,20 @@ func_EC0B(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_0
 	thread func_13B0();
 }
 
-//Function Number: 10
-func_13B0()
-{
+func_13B0() {
 	self endon("death");
 	self waittill("starting_new_sceneblock");
 	scripts\sp\_utility::func_415D("casual");
 }
 
-//Function Number: 11
-func_EC06(param_00)
-{
+func_EC06(param_00) {
 	scripts\sp\_utility::func_415D("casual");
-	if(!scripts\engine\utility::flag_exist("setup_sceneblock_anims") || !scripts\engine\utility::flag("setup_sceneblock_anims"))
-	{
+	if(!scripts\engine\utility::flag_exist("setup_sceneblock_anims") || !scripts\engine\utility::flag("setup_sceneblock_anims")) {
 		func_EBE9();
 	}
 
-	if(!isdefined(level.var_EC85[self.var_1FBB][param_00]))
-	{
-		if(self.var_1FBB == "salter")
-		{
+	if(!isdefined(level.var_EC85[self.var_1FBB][param_00])) {
+		if(self.var_1FBB == "salter") {
 			level.var_EC85[self.var_1FBB][param_00][0] = level.var_EBFF.var_EA31[param_00 + "_XO"];
 		}
 		else
@@ -549,8 +464,7 @@ func_EC06(param_00)
 		}
 	}
 
-	switch(param_00)
-	{
+	switch(param_00) {
 		case "shipcrib_stand_stationary_talk_idle_01":
 			self.var_EC07 = "shipcrib_stand_idle01_arrival";
 			self.var_EC09 = "shipcrib_stand_idle01_exit";
@@ -580,18 +494,14 @@ func_EC06(param_00)
 	thread scripts\sp\_utility::func_F40E("casual",param_00);
 }
 
-//Function Number: 12
-func_EC04()
-{
+func_EC04() {
 	scripts\sp\_utility::func_415D("casual");
 	self.var_EC07 = undefined;
 	self.var_EC09 = undefined;
 	self notify("stop_sceneblock");
 }
 
-//Function Number: 13
-func_EC0F(param_00,param_01,param_02)
-{
+func_EC0F(param_00,param_01,param_02) {
 	self endon("death");
 	self notify("starting_new_sceneblock");
 	self endon("starting_new_sceneblock");
@@ -600,34 +510,28 @@ func_EC0F(param_00,param_01,param_02)
 	self givescorefortrophyblocks();
 	lib_0A1E::func_2385();
 	var_03 = lib_0EFB::func_7D7A(param_00);
-	if(!isdefined(param_01))
-	{
+	if(!isdefined(param_01)) {
 		param_01 = 0;
 	}
 
-	if(!isdefined(param_02))
-	{
+	if(!isdefined(param_02)) {
 		param_02 = "sceneblock_walk_loop";
 	}
 
 	func_EC08("point",var_03,1);
 	var_04 = scripts\common\trace::ray_trace(self.origin + (0,0,1),self.origin + (0,0,-6),self);
-	if(isdefined(var_04["entity"]))
-	{
+	if(isdefined(var_04["entity"])) {
 		self linkto(var_04["entity"]);
 	}
 
 	thread scripts/sp/anim::func_1ECC(self,param_02,"stop_loop");
 	var_05 = 0;
-	for(;;)
-	{
-		if(distance2d(self.origin,var_03.origin) < 12 && !var_05)
-		{
+	for(;;) {
+		if(distance2d(self.origin,var_03.origin) < 12 && !var_05) {
 			self _meth_80F1(self.origin,vectortoangles(var_03.origin - self.origin));
 			var_05 = 1;
 		}
-		else if(distance2d(self.origin,var_03.origin) < 4)
-		{
+		else if(distance2d(self.origin,var_03.origin) < 4) {
 			self _meth_80F1(var_03.origin,self.angles);
 			break;
 		}
@@ -639,47 +543,34 @@ func_EC0F(param_00,param_01,param_02)
 	self givescorefortrophyblocks();
 	self unlink();
 	self give_mp_super_weapon(getgroundposition(self.origin,1));
-	if(param_01)
-	{
+	if(param_01) {
 		func_EC08("angle",var_03);
 	}
 }
 
-//Function Number: 14
-func_EC0E(param_00,param_01,param_02)
-{
-}
+func_EC0E(param_00,param_01,param_02) {}
 
-//Function Number: 15
-func_1450(param_00,param_01,param_02,param_03)
-{
+func_1450(param_00,param_01,param_02,param_03) {
 	self endon("death");
-	if(getdvarint("loc_warnings",0))
-	{
+	if(getdvarint("loc_warnings",0)) {
 		return;
 	}
 
-	if(!isdefined(level.var_545A))
-	{
+	if(!isdefined(level.var_545A)) {
 		level.var_545A = [];
 	}
 
 	var_04 = 4;
-	for(var_05 = 0;var_05 <= var_04;var_05++)
-	{
+	for(var_05 = 0;var_05 <= var_04;var_05++) {
 		var_06 = 0;
-		if(isdefined(level.var_545A["last cleartime"]))
-		{
-			if(gettime() - level.var_545A["last cleartime"] > 1000)
-			{
+		if(isdefined(level.var_545A["last cleartime"])) {
+			if(gettime() - level.var_545A["last cleartime"] > 1000) {
 				var_06 = 1;
 			}
 		}
 
-		if(var_05 == var_04 || var_06)
-		{
-			for(var_05 = 0;var_05 < var_04;var_05++)
-			{
+		if(var_05 == var_04 || var_06) {
+			for(var_05 = 0;var_05 < var_04;var_05++) {
 				level.var_545A[var_05] = undefined;
 				level.var_545A["last cleartime"] = undefined;
 			}
@@ -689,18 +580,15 @@ func_1450(param_00,param_01,param_02,param_03)
 			break;
 		}
 
-		if(!isdefined(level.var_545A[var_05]))
-		{
+		if(!isdefined(level.var_545A[var_05])) {
 			level.var_545A[var_05] = 1;
 			break;
 		}
 	}
 
 	var_07 = "^3";
-	if(isdefined(param_02))
-	{
-		switch(param_02)
-		{
+	if(isdefined(param_02)) {
+		switch(param_02) {
 			case "red":
 			case "r":
 				var_07 = "^1";

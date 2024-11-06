@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\sp\maps\europa\europa_intro.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 145
- * Decompile Time: 5986 ms
- * Timestamp: 10/27/2023 12:22:56 AM
-*******************************************************************/
+/***********************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\sp\maps\europa\europa_intro.gsc
+***********************************************************/
 
-//Function Number: 1
-func_9AB6()
-{
+func_9AB6() {
 	scripts\engine\utility::flag_init("halo_jump_start");
 	scripts\engine\utility::flag_init("halo_level_out");
 	scripts\engine\utility::flag_init("halo_tip_down");
@@ -38,9 +32,7 @@ func_9AB6()
 	precachestring(&"EUROPA_JUMPIN");
 }
 
-//Function Number: 2
-func_9ABC()
-{
+func_9ABC() {
 	level.player notifyonplayercommand("melee_pressed","+melee");
 	level.player notifyonplayercommand("melee_pressed","+melee_zoom");
 	level.player notifyonplayercommand("melee_pressed","+melee_breath");
@@ -70,11 +62,8 @@ func_9ABC()
 	level.var_1C2A = 0;
 }
 
-//Function Number: 3
-func_5858()
-{
-	if(level.player scripts\engine\utility::is_player_gamepad_enabled())
-	{
+func_5858() {
+	if(level.player scripts\engine\utility::is_player_gamepad_enabled()) {
 		scripts\sp\_utility::func_56BA("fly_controller");
 		return;
 	}
@@ -84,20 +73,15 @@ func_5858()
 	thread func_9EEC();
 }
 
-//Function Number: 4
-func_9EAC()
-{
-	if(level.player scripts\engine\utility::is_player_gamepad_enabled())
-	{
+func_9EAC() {
+	if(level.player scripts\engine\utility::is_player_gamepad_enabled()) {
 		return level.player getnormalizedmovement() != (0,0,0) || level.player getsplashtablename() != (0,0,0);
 	}
 
 	return level.player scripts\sp\_utility::func_65DB("isFlying");
 }
 
-//Function Number: 5
-func_9EEC()
-{
+func_9EEC() {
 	level.player endon("global_hint_in_use");
 	level.player notifyonplayercommand("moving","+forward");
 	level.player notifyonplayercommand("moving","+back");
@@ -107,54 +91,37 @@ func_9EEC()
 	level.player scripts\sp\_utility::func_65E1("isFlying");
 }
 
-//Function Number: 6
-func_9CF7()
-{
-	if(level.player scripts\sp\_utility::func_65DB("switched_weapon_during_tutorial"))
-	{
+func_9CF7() {
+	if(level.player scripts\sp\_utility::func_65DB("switched_weapon_during_tutorial")) {
 		return 1;
 	}
 
-	if(issubstr(level.player getcurrentweapon(),"hybrid_snow"))
-	{
+	if(issubstr(level.player getcurrentweapon(),"hybrid_snow")) {
 		return !level.player _meth_8519(level.player getcurrentprimaryweapon());
 	}
 
 	return level.player _meth_8519(level.player getcurrentprimaryweapon());
 }
 
-//Function Number: 7
-func_9B50()
-{
+func_9B50() {
 	return level.player adsbuttonpressed();
 }
 
-//Function Number: 8
-func_D42B()
-{
+func_D42B() {
 	return scripts\engine\utility::flag("player_stabbed") || scripts\engine\utility::flag("scar_saved_player");
 }
 
-//Function Number: 9
-func_1873()
-{
-	foreach(var_01 in level.createfxent)
-	{
-		if(isdefined(var_01.v["exploder"]) && var_01.v["exploder"] == "clouds")
-		{
+func_1873() {
+	foreach(var_01 in level.createfxent) {
+		if(isdefined(var_01.v["exploder"]) && var_01.v["exploder"] == "clouds") {
 			var_01.v["origin"] = var_01.v["origin"] + (-193,1501,0);
 		}
 	}
 }
 
-//Function Number: 10
-func_5DF1()
-{
-}
+func_5DF1() {}
 
-//Function Number: 11
-func_5E01()
-{
+func_5E01() {
 	scripts\sp\maps\europa\europa_util::func_107C5();
 	scripts\engine\utility::array_thread(level.var_EBCA,::scripts\sp\_utility::func_BE49);
 	scripts\engine\utility::array_thread(level.var_EBCA,::scripts\sp\_utility::func_DC45,"raise");
@@ -168,8 +135,7 @@ func_5E01()
 	level.player.var_8632 = spawn("script_origin",level.player.origin);
 	level.player.var_8632 linkto(level.var_D267,"tag_player",(0,0,0),(0,0,0));
 	level.player getwholescenedurationmin(level.player.var_8632);
-	if(scripts\sp\_utility::func_9BB5())
-	{
+	if(scripts\sp\_utility::func_9BB5()) {
 		level.var_EBBC scripts\anim\shared::placeweaponon(level.var_EBBC.var_394,"none");
 		level.var_EBBC.var_8719 = scripts\sp\_utility::func_10639("fhr40",level.var_5D6C.origin,level.var_5D6C.angles);
 		level.var_EBBC.var_8719 attach("attachment_suppressor_energy_1_wm");
@@ -188,20 +154,15 @@ func_5E01()
 	setumbraportalstate("halo_portal",0);
 }
 
-//Function Number: 12
-func_EBBD()
-{
+func_EBBD() {
 	level waittill("scar2_stow_weapon");
 	scripts\anim\shared::placeweaponon(self.var_394,"right");
 	self.var_8719 hide();
 }
 
-//Function Number: 13
-func_5DEF()
-{
+func_5DEF() {
 	level.player _meth_82C0("europa_dropship_intro_fullscreen_hit",0);
-	if(!isdefined(level.var_2B4C))
-	{
+	if(!isdefined(level.var_2B4C)) {
 		level.var_2B4C = scripts\sp\_hud_util::func_48B7("black",1);
 		level.var_2B4C.foreground = 0;
 	}
@@ -225,29 +186,22 @@ func_5DEF()
 	level.var_5D6C scripts/sp/anim::func_1F2C(level.var_5D6C.group,"europa_dropship_intro","tag_origin");
 }
 
-//Function Number: 14
-firstline()
-{
+firstline() {
 	scripts\sp\_utility::func_13705();
 	level.player thread scripts\sp\_utility::play_sound_on_entity("europa_plr_understoodwarlordwell");
 }
 
-//Function Number: 15
-func_9A9F()
-{
+func_9A9F() {
 	scripts\engine\utility::flag_set("begin_dropship_bink");
 	level.player _meth_82C0("europa_dropship_intro_fullscreen_hit",0);
 	level.var_5D6C scripts\engine\utility::delaythread(1.5,::scripts\sp\_utility::play_sound_on_entity,"europa_rpr_warlordactual");
-	if(!isdefined(level.var_2B4C))
-	{
+	if(!isdefined(level.var_2B4C)) {
 		level.var_2B4C = scripts\sp\_hud_util::func_48B7("black",1);
 		level.var_2B4C.foreground = 0;
 	}
 }
 
-//Function Number: 16
-func_5E25()
-{
+func_5E25() {
 	func_5E01();
 	scripts\engine\utility::flag_set("dropship_door_open");
 	level.var_5D6C lib_0BBC::func_C5F1("right",0,1,0);
@@ -268,36 +222,27 @@ func_5E25()
 	level.var_E7C2 scripts\engine\utility::delaythread(0.1,::scripts\sp\_utility::func_E7C9,0.2,1);
 }
 
-//Function Number: 17
-func_D324()
-{
+func_D324() {
 	level.player lerpviewangleclamp(1,0.5,0.5,15,15,5,12);
 	level.player givefriendlyperks(15,15,5,12);
 }
 
-//Function Number: 18
-func_134E2()
-{
+func_134E2() {
 	scripts\sp\maps\europa\europa_util::func_134B7("europa_tee_eyeofthestorm");
 	scripts\sp\maps\europa\europa_util::func_134B7("europa_sip_stickwiththegroup");
 	scripts\sp\maps\europa\europa_util::func_134B7("europa_tee_learntokeepup");
 }
 
-//Function Number: 19
-func_5E21()
-{
+func_5E21() {
 	level endon("player_boost_failed");
-	if(scripts\sp\_utility::func_93A6())
-	{
+	if(scripts\sp\_utility::func_93A6()) {
 		thread scripts/sp/specialist_MAYBE::specialist_helmet_on_immediate();
 		thread scripts/sp/specialist_MAYBE::func_F53C(0);
 	}
 
 	thread func_A4E1();
-	if(!scripts\sp\_utility::func_9BB5())
-	{
-		while(!isdefined(level.var_5D6C))
-		{
+	if(!scripts\sp\_utility::func_9BB5()) {
+		while(!isdefined(level.var_5D6C)) {
 			wait(0.05);
 		}
 	}
@@ -310,8 +255,7 @@ func_5E21()
 	level.var_EBBC attach(level.var_EBBC.var_C383);
 	level.var_EBBB detach("head_hero_sipes_cine_hqss");
 	level.var_EBBB attach(level.var_EBBB.var_C383);
-	if(isdefined(level.var_EBBC.var_8719))
-	{
+	if(isdefined(level.var_EBBC.var_8719)) {
 		level.var_EBBC.var_8719 delete();
 	}
 
@@ -332,8 +276,7 @@ func_5E21()
 	level.var_EBBB linkto(level.var_EBCB,"tag_origin");
 	level.var_EBBC linkto(level.var_EBCB,"tag_origin");
 	level.var_EBCB thread scripts/sp/anim::func_1F2C([level.var_EBBB,level.var_EBBC],"europa_dropship_halo_jump","tag_origin");
-	if(level.console || level.player usinggamepad())
-	{
+	if(level.console || level.player usinggamepad()) {
 		level.player lerpviewangleclamp(1,0.5,0.5,10,10,10,10);
 	}
 
@@ -348,9 +291,7 @@ func_5E21()
 	func_D1B3();
 }
 
-//Function Number: 20
-func_257A()
-{
+func_257A() {
 	level.player scripts\engine\utility::delaycall(0.5,::playsound,"europa_dropship_halo_plr_01");
 	level.player scripts\engine\utility::delaythread(0.62,::scripts\sp\_utility::func_1034D,"europa_plr_gogo");
 	level.player scripts\engine\utility::delaycall(0.62,::playrumbleonentity,"light_2s");
@@ -359,16 +300,11 @@ func_257A()
 	level.player scripts\engine\utility::delaycall(1.7,::playrumbleonentity,"light_2s");
 }
 
-//Function Number: 21
-func_EBC8(param_00)
-{
+func_EBC8(param_00) {
 	var_01 = ["J_Ankle_LE","J_Ankle_RI","J_Wrist_LE","J_Wrist_RI"];
-	foreach(var_03 in level.var_EBCA)
-	{
-		foreach(var_05 in var_01)
-		{
-			if(param_00)
-			{
+	foreach(var_03 in level.var_EBCA) {
+		foreach(var_05 in var_01) {
+			if(param_00) {
 				playfxontag(scripts\engine\utility::getfx("wisp_loop"),var_03,var_05);
 				continue;
 			}
@@ -378,13 +314,10 @@ func_EBC8(param_00)
 	}
 }
 
-//Function Number: 22
-func_F39B()
-{
+func_F39B() {
 	level endon("player_boosted");
 	var_00 = scripts\sp\_utility::func_864C(level.player.origin);
-	while(level.player.origin[2] - var_00[2] > 100)
-	{
+	while(level.player.origin[2] - var_00[2] > 100) {
 		var_00 = scripts\sp\_utility::func_864C(level.player.origin);
 		wait(0.05);
 	}
@@ -393,9 +326,7 @@ func_F39B()
 	func_D067();
 }
 
-//Function Number: 23
-func_D067()
-{
+func_D067() {
 	var_00 = level.var_D267 scripts\engine\utility::spawn_tag_origin();
 	level.var_D267 linkto(var_00);
 	var_00 thread scripts/sp/anim::func_1F35(level.var_D267,"europa_dropship_halo_death_rel","tag_origin");
@@ -428,17 +359,13 @@ func_D067()
 	level.player scripts\sp\_utility::func_B8D1();
 }
 
-//Function Number: 24
-func_1C0C()
-{
+func_1C0C() {
 	func_13760(0.58);
 	level.var_1C2A = 1;
 	thread func_EBC8(1);
-	foreach(var_01 in level.var_EBCA)
-	{
+	foreach(var_01 in level.var_EBCA) {
 		playfxontag(scripts\engine\utility::getfx("thrust_loop"),var_01,"tag_fx_bottom");
-		if(var_01.var_1FBB == "scar1")
-		{
+		if(var_01.var_1FBB == "scar1") {
 			var_01 playsound("scn_europa_scar1_boost");
 		}
 		else
@@ -454,9 +381,7 @@ func_1C0C()
 	level.var_1C2A = 0;
 }
 
-//Function Number: 25
-func_F8D3()
-{
+func_F8D3() {
 	func_13760(0.79);
 	scripts\sp\_utility::func_10FEC("clouds");
 	scripts\sp\_utility::func_10FEC("cloudsreveal");
@@ -468,9 +393,7 @@ func_F8D3()
 	scripts\engine\utility::flag_set("clouds_idle_end");
 }
 
-//Function Number: 26
-func_AB79(param_00,param_01)
-{
+func_AB79(param_00,param_01) {
 	level notify("lerping_dive_anim_rate");
 	level endon("lerping_dive_anim_rate");
 	var_02 = func_7944();
@@ -478,8 +401,7 @@ func_AB79(param_00,param_01)
 	var_04 = param_01 / 0.05;
 	var_05 = var_03 / var_04;
 	var_06 = gettime() + param_01 * 1000;
-	while(gettime() < var_06)
-	{
+	while(gettime() < var_06) {
 		var_02 = var_02 + var_05;
 		func_F359(var_02);
 		wait(0.05);
@@ -488,38 +410,27 @@ func_AB79(param_00,param_01)
 	func_F359(param_00);
 }
 
-//Function Number: 27
-func_13760(param_00)
-{
-	while(func_7945() < param_00)
-	{
+func_13760(param_00) {
+	while(func_7945() < param_00) {
 		wait(0.05);
 	}
 }
 
-//Function Number: 28
-func_7945()
-{
+func_7945() {
 	return level.var_D267 getscoreinfocategory(level.var_D267 scripts\sp\_utility::func_7DC1("europa_dropship_halo_jump"));
 }
 
-//Function Number: 29
-func_7944()
-{
+func_7944() {
 	return level.var_D267 getscoreinfovalue(level.var_D267 scripts\sp\_utility::func_7DC1("europa_dropship_halo_jump"));
 }
 
-//Function Number: 30
-func_F359(param_00)
-{
+func_F359(param_00) {
 	level.var_D267 _meth_82B1(level.var_D267 scripts\sp\_utility::func_7DC1("europa_dropship_halo_jump"),param_00);
 	level.var_EBBB _meth_82B1(level.var_EBBB scripts\sp\_utility::func_7DC1("europa_dropship_halo_jump"),param_00);
 	level.var_EBBC _meth_82B1(level.var_EBBC scripts\sp\_utility::func_7DC1("europa_dropship_halo_jump"),param_00);
 }
 
-//Function Number: 31
-func_CFE1()
-{
+func_CFE1() {
 	level.var_CFE4 func_CFDB(1,1);
 	func_13760(0.75);
 	level.var_CFE4 func_CFDB(0,2);
@@ -527,14 +438,11 @@ func_CFE1()
 	level notify("stop_player_controlled_updates");
 }
 
-//Function Number: 32
-func_AB9D()
-{
+func_AB9D() {
 	level endon("player_boosted");
 	var_00 = 0;
 	var_01 = 0.01;
-	for(;;)
-	{
+	for(;;) {
 		var_02 = level.player.var_8892.origin - level.var_EBCB.origin;
 		level.var_EBCB.origin = level.var_EBCB.origin + var_02 * var_00;
 		var_00 = var_00 + var_01;
@@ -542,9 +450,7 @@ func_AB9D()
 	}
 }
 
-//Function Number: 33
-func_13E6B()
-{
+func_13E6B() {
 	level.var_CFE4.var_BC49 = (0,0,0);
 	level.var_CFE4.var_C3CA = (0,0,0);
 	level.var_CFE4.var_11532 = (0,0,0);
@@ -559,22 +465,16 @@ func_13E6B()
 	level.var_CFE4.var_7440 = 0;
 }
 
-//Function Number: 34
-func_CF62()
-{
+func_CF62() {
 	func_9500();
 }
 
-//Function Number: 35
-func_9500()
-{
+func_9500() {
 	level.var_D267 give_attacker_kill_rewards(%europa_dropship_intro_plr_halo_jump_lr,1,0,0);
 	level.var_D267 _meth_82B0(%europa_dropship_intro_plr_halo_jump_lr,0.5);
 }
 
-//Function Number: 36
-func_CFDC()
-{
+func_CFDC() {
 	level endon("stop_player_controlled_updates");
 	level.player playrumbleonentity("heavy_2s");
 	scripts\engine\utility::delaythread(1.25,::func_5858);
@@ -596,16 +496,14 @@ func_CFDC()
 	level.var_CFE4 thread func_B2EC(var_04,var_00);
 	level.var_CFE4 thread func_5727();
 	thread func_5E23();
-	for(;;)
-	{
+	for(;;) {
 		level.var_CFE4 func_CFDD(var_01,var_02,var_03);
 		level.var_CFE4.var_13D34 = level.var_CFE4.var_13D34 + level.var_CFE4.var_13D31 * level.var_CFE4.var_13D78 * level.var_CFE4.var_13D33;
 		level.var_CFE4.var_B7D8 = level.var_CFE4.var_B7D8 + level.var_CFE4.var_B7D6 * level.var_CFE4.var_B7D9;
 		var_05 = level.var_CFE4.var_BC49 + level.var_CFE4.var_13D34 + level.var_CFE4.var_B7D8;
 		var_00.origin = var_04 + var_05 * level.var_CFE4.var_B3D1;
 		func_CFE3(level.var_CFE4.var_BBF8[0],level.var_CFE4.var_BBF8[1],level.var_CFE4.var_B3D1);
-		if(level.var_CFE4.var_2B8D)
-		{
+		if(level.var_CFE4.var_2B8D) {
 			level.var_CFE4 waittill("quickturn_master_blend_complete");
 			continue;
 		}
@@ -614,9 +512,7 @@ func_CFDC()
 	}
 }
 
-//Function Number: 37
-func_B2EC(param_00,param_01)
-{
+func_B2EC(param_00,param_01) {
 	level endon("stop_player_controlled_updates");
 	var_02 = 0.09;
 	var_03 = 0.45;
@@ -626,11 +522,9 @@ func_B2EC(param_00,param_01)
 	var_07 = 4;
 	self.var_13D31 = scripts\engine\utility::random([anglestoforward(level.player.var_8892.angles),anglestoforward(level.player.var_8892.angles) * -1]);
 	var_08 = 1;
-	for(;;)
-	{
+	for(;;) {
 		wait(0.05);
-		if(var_04 + var_05 < var_03)
-		{
+		if(var_04 + var_05 < var_03) {
 			var_04 = clamp(var_04 + var_05,var_02,var_03);
 		}
 		else
@@ -638,8 +532,7 @@ func_B2EC(param_00,param_01)
 			var_04 = var_03;
 		}
 
-		if(!var_08)
-		{
+		if(!var_08) {
 			self.var_13D31 = func_7D7D();
 		}
 		else
@@ -647,54 +540,43 @@ func_B2EC(param_00,param_01)
 			var_08 = 0;
 		}
 
-		while(!func_9C77())
-		{
+		while(!func_9C77()) {
 			self.var_13D78 = clamp(self.var_13D78 + var_04,0,var_06);
 			wait(0.05);
 		}
 
-		while(func_9C77())
-		{
+		while(func_9C77()) {
 			self.var_13D78 = clamp(self.var_13D78 - var_04,var_07,var_06);
 			wait(0.05);
 		}
 	}
 }
 
-//Function Number: 38
-func_9C77()
-{
-	if(level.console || level.player usinggamepad())
-	{
+func_9C77() {
+	if(level.console || level.player usinggamepad()) {
 		return length(level.player getnormalizedmovement()) >= 0.1 || length(level.player getsplashtablename()) >= 0.1;
 	}
 
 	return length(level.player getnormalizedmovement()) >= 0.1;
 }
 
-//Function Number: 39
-func_7D7D()
-{
+func_7D7D() {
 	var_00 = scripts/sp/math::func_7ADE(level.var_EBCA[0].origin,level.var_EBCA[1].origin);
 	var_00 = scripts/sp/math::func_7ADE(var_00,level.var_EBCA[0].origin);
-	if(level.player geteye()[0] > var_00[0])
-	{
+	if(level.player geteye()[0] > var_00[0]) {
 		return anglestoforward(level.player.var_8892.angles);
 	}
 
 	return anglestoforward(level.player.var_8892.angles) * -1;
 }
 
-//Function Number: 40
-func_CFDD(param_00,param_01,param_02)
-{
+func_CFDD(param_00,param_01,param_02) {
 	level endon("stop_player_controlled_updates");
 	var_03 = 0.0625;
 	var_04 = 1;
 	var_05 = 40;
 	var_06 = 18;
-	if(level.console || level.player usinggamepad())
-	{
+	if(level.console || level.player usinggamepad()) {
 		var_07 = [];
 		var_07[0] = level.player getnormalizedmovement();
 		var_07[1] = level.player getsplashtablename();
@@ -712,12 +594,10 @@ func_CFDD(param_00,param_01,param_02)
 
 	self.var_11535 = self.var_11535 + var_09[0] * var_06;
 	self.var_11533 = self.var_11533 + var_09[1] * var_06;
-	if(self.var_11535 > var_05)
-	{
+	if(self.var_11535 > var_05) {
 		self.var_11535 = var_05;
 	}
-	else if(self.var_11535 < var_05 * -1)
-	{
+	else if(self.var_11535 < var_05 * -1) {
 		self.var_11535 = var_05 * -1;
 	}
 
@@ -729,13 +609,10 @@ func_CFDD(param_00,param_01,param_02)
 	self.var_C3CA = self.var_BC49;
 }
 
-//Function Number: 41
-func_CFDB(param_00,param_01)
-{
+func_CFDB(param_00,param_01) {
 	self notify("new_master_blend");
 	self endon("new_master_blend");
-	if(param_01 == 0)
-	{
+	if(param_01 == 0) {
 		self.var_B3D1 = param_00;
 		return;
 	}
@@ -744,8 +621,7 @@ func_CFDB(param_00,param_01)
 	var_02 = param_00 - self.var_B3D1 / param_01 * 0.05;
 	var_03 = self.var_B3D1;
 	var_04 = param_01;
-	while(var_04 > 0)
-	{
+	while(var_04 > 0) {
 		var_03 = var_03 + var_02;
 		self.var_B3D1 = clamp(var_03,0,1);
 		var_04 = var_04 - 0.05;
@@ -758,9 +634,7 @@ func_CFDB(param_00,param_01)
 	self notify("quickturn_master_blend_complete");
 }
 
-//Function Number: 42
-func_CFE3(param_00,param_01,param_02)
-{
+func_CFE3(param_00,param_01,param_02) {
 	level endon("stop_player_controlled_updates");
 	param_01 = param_01 * 0.12 * param_02;
 	param_00 = param_00 * 0.041 * param_02;
@@ -776,49 +650,39 @@ func_CFE3(param_00,param_01,param_02)
 	level.var_D267 childthread func_CFE2(%europa_dropship_intro_plr_halo_jump_lr,param_00,var_03,var_04,var_05,1);
 }
 
-//Function Number: 43
-func_CFE2(param_00,param_01,param_02,param_03,param_04,param_05)
-{
+func_CFE2(param_00,param_01,param_02,param_03,param_04,param_05) {
 	self notify("stop_current_anim_time_lerp" + param_05);
 	self endon("stop_current_anim_time_lerp" + param_05);
-	if(!isdefined(param_05))
-	{
+	if(!isdefined(param_05)) {
 		param_05 = 1;
 	}
 
-	if(param_01 == 1)
-	{
+	if(param_01 == 1) {
 		param_01 = 0.999;
 	}
-	else if(param_01 == 0)
-	{
+	else if(param_01 == 0) {
 		param_01 = 0.001;
 	}
 
 	var_06 = getanimlength(param_00);
 	param_02 = param_02 * var_06;
 	param_03 = param_03 * var_06;
-	if(!isdefined(self.var_1EE3))
-	{
+	if(!isdefined(self.var_1EE3)) {
 		self.var_1EE3 = [];
 	}
 
-	if(!isdefined(self.var_1EE3[param_05]))
-	{
+	if(!isdefined(self.var_1EE3[param_05])) {
 		self.var_1EE3[param_05] = 0;
 	}
 
-	for(var_07 = self getscoreinfocategory(param_00);abs(var_07 - param_01) > 0;var_07 = self getscoreinfocategory(param_00))
-	{
+	for(var_07 = self getscoreinfocategory(param_00);abs(var_07 - param_01) > 0;var_07 = self getscoreinfocategory(param_00)) {
 		var_08 = param_01 - var_07 * var_06 / 0.05;
 		var_09 = abs(self.var_1EE3[param_05] - var_08);
-		if(var_09 < param_02)
-		{
+		if(var_09 < param_02) {
 			self.var_1EE3[param_05] = var_08;
 		}
 
-		if(self.var_1EE3[param_05] < var_08)
-		{
+		if(self.var_1EE3[param_05] < var_08) {
 			self.var_1EE3[param_05] = self.var_1EE3[param_05] + param_02;
 		}
 		else
@@ -826,19 +690,16 @@ func_CFE2(param_00,param_01,param_02,param_03,param_04,param_05)
 			self.var_1EE3[param_05] = self.var_1EE3[param_05] - param_02;
 		}
 
-		if(abs(self.var_1EE3[param_05]) > param_03)
-		{
+		if(abs(self.var_1EE3[param_05]) > param_03) {
 			self.var_1EE3[param_05] = self.var_1EE3[param_05] * param_03 / abs(self.var_1EE3[param_05]);
 		}
 
 		var_0A = 1;
 		var_0B = abs(param_01 - var_07);
-		if(self.var_1EE3[param_05] > 0 && param_01 > var_07)
-		{
+		if(self.var_1EE3[param_05] > 0 && param_01 > var_07) {
 			var_0A = scripts/sp/math::func_C097(0,param_04,var_0B);
 		}
-		else if(self.var_1EE3[param_05] < 0 && param_01 < var_07)
-		{
+		else if(self.var_1EE3[param_05] < 0 && param_01 < var_07) {
 			var_0A = scripts/sp/math::func_C097(0,param_04,var_0B);
 		}
 
@@ -851,9 +712,7 @@ func_CFE2(param_00,param_01,param_02,param_03,param_04,param_05)
 	self _meth_82B1(param_00,0);
 }
 
-//Function Number: 44
-func_5727()
-{
+func_5727() {
 	level endon("lightning_death");
 	level endon("boost_required_start");
 	self.var_2A4C = spawn("script_origin",level.player.origin);
@@ -868,13 +727,11 @@ func_5727()
 	var_06 = 0;
 	var_07 = undefined;
 	var_08 = undefined;
-	for(;;)
-	{
+	for(;;) {
 		var_09 = func_7942();
 		var_0A = scripts/sp/math::func_7ADE(level.var_EBCA[0].origin,level.var_EBCA[1].origin);
 		self.var_7440 = scripts/sp/math::func_C097(0,var_00,var_09);
-		if(level.player geteye()[0] > var_0A[0])
-		{
+		if(level.player geteye()[0] > var_0A[0]) {
 			var_0B = "right";
 		}
 		else
@@ -882,8 +739,7 @@ func_5727()
 			var_0B = "left";
 		}
 
-		if(self.var_7440 <= 0.175)
-		{
+		if(self.var_7440 <= 0.175) {
 			var_07 = undefined;
 			var_04 = 0;
 			var_03 = 0;
@@ -893,14 +749,11 @@ func_5727()
 			var_03++;
 		}
 
-		if(self.var_7440 >= var_02 || var_04 > var_05 * 0.5)
-		{
-			if(var_06)
-			{
+		if(self.var_7440 >= var_02 || var_04 > var_05 * 0.5) {
+			if(var_06) {
 				var_07 = "scn_europa_halo_altitude_beep_lp_02";
 				var_0C = func_E758(scripts\engine\utility::mod(var_03,5));
-				if(!var_0C)
-				{
+				if(!var_0C) {
 					var_06 = 0;
 					thread func_B293("red",var_0B,11);
 					var_04 = var_04 + 4;
@@ -910,33 +763,27 @@ func_5727()
 			{
 				var_08 = "scn_europa_halo_altitude_beep_lp_03";
 				var_0C = func_E758(scripts\engine\utility::mod(var_04,4));
-				if(!var_0C)
-				{
+				if(!var_0C) {
 					thread func_B293("red",var_0B,11);
 					var_04 = var_04 + 4;
 				}
 			}
 		}
-		else if(self.var_7440 >= var_01)
-		{
+		else if(self.var_7440 >= var_01) {
 			var_06 = 1;
 			var_04 = var_04 + 1;
 			var_0C = func_E758(scripts\engine\utility::mod(var_03,5));
-			if(!var_0C)
-			{
+			if(!var_0C) {
 				thread func_B293("white",var_0B,9);
 			}
 		}
 
-		if(var_04 > var_05)
-		{
+		if(var_04 > var_05) {
 			thread func_D1D3();
 		}
 
-		if(isdefined(var_07))
-		{
-			if(!isdefined(var_08) || var_07 != var_08)
-			{
+		if(isdefined(var_07)) {
+			if(!isdefined(var_08) || var_07 != var_08) {
 				self.var_2A4C playloopsound(var_07);
 				level.player.var_58DF = 1;
 			}
@@ -951,9 +798,7 @@ func_5727()
 	}
 }
 
-//Function Number: 45
-func_D1D3()
-{
+func_D1D3() {
 	setomnvar("ui_hide_weapon_info",1);
 	var_00 = level.player geteye();
 	var_01 = var_00 + anglestoforward(level.player getplayerangles()) * 20;
@@ -973,16 +818,12 @@ func_D1D3()
 	level waittill("forever");
 }
 
-//Function Number: 46
-func_B293(param_00,param_01,param_02)
-{
+func_B293(param_00,param_01,param_02) {
 	level endon("lightning_death");
-	if(param_00 == "white")
-	{
+	if(param_00 == "white") {
 		param_00 = (1,1,1);
 	}
-	else if(param_00 == "orange")
-	{
+	else if(param_00 == "orange") {
 		param_00 = (1,0.5,0);
 	}
 	else
@@ -990,8 +831,7 @@ func_B293(param_00,param_01,param_02)
 		param_00 = (1,0,0);
 	}
 
-	if(param_01 == "left")
-	{
+	if(param_01 == "left") {
 		param_02 = param_02 * -1;
 		var_03 = "arrow_left_white";
 		var_04 = 640;
@@ -1016,8 +856,7 @@ func_B293(param_00,param_01,param_02)
 	var_0A = var_06 - var_07;
 	var_0B = var_07;
 	var_0C = var_0A / var_08 / 0.05;
-	while(gettime() < var_09)
-	{
+	while(gettime() < var_09) {
 		var_0D = var_0B;
 		var_0E = var_05.y;
 		var_0B = int(var_0B + var_0C);
@@ -1032,19 +871,14 @@ func_B293(param_00,param_01,param_02)
 	var_05 destroy();
 }
 
-//Function Number: 47
-func_7942()
-{
+func_7942() {
 	var_00 = abs(level.var_EBCA[0].origin[0] - level.player geteye()[0]);
 	var_01 = abs(level.var_EBCA[1].origin[0] - level.player geteye()[0]);
 	return min(var_00,var_01);
 }
 
-//Function Number: 48
-func_F561(param_00)
-{
-	if(scripts\engine\utility::within_fov(level.player geteye(),level.player getplayerangles(),param_00,cos(113)))
-	{
+func_F561(param_00) {
+	if(scripts\engine\utility::within_fov(level.player geteye(),level.player getplayerangles(),param_00,cos(113))) {
 		function_01A7(0,0.15);
 		func_F562(clamp(level.var_CFE4.var_7440,0.1,1),param_00);
 		return;
@@ -1053,29 +887,21 @@ func_F561(param_00)
 	function_01A7(5,0.15);
 }
 
-//Function Number: 49
-func_E757(param_00)
-{
+func_E757(param_00) {
 	return float(int(param_00 * 100 + 0.5)) / 100;
 }
 
-//Function Number: 50
-func_E758(param_00)
-{
+func_E758(param_00) {
 	return float(int(param_00 * 10 + 0.5)) / 10;
 }
 
-//Function Number: 51
-func_5E22()
-{
-	if(getdvarint("debug_europa"))
-	{
+func_5E22() {
+	if(getdvarint("debug_europa")) {
 		iprintln("opening umbra portal \'halo_portal\' ");
 	}
 
 	setumbraportalstate("halo_portal",1);
-	if(scripts\sp\_utility::func_93A6())
-	{
+	if(scripts\sp\_utility::func_93A6()) {
 		thread scripts/sp/specialist_MAYBE::specialist_helmet_on_immediate();
 		thread scripts/sp/specialist_MAYBE::func_F53C(0);
 		return;
@@ -1084,15 +910,11 @@ func_5E22()
 	lib_0E4B::func_8E06();
 }
 
-//Function Number: 52
-func_25DE()
-{
+func_25DE() {
 	function_0178("scn_jump_from_plane_booster_death_lr",level.player.origin);
 }
 
-//Function Number: 53
-func_25DF()
-{
+func_25DF() {
 	level.var_1178C = spawn("script_origin",level.player.origin);
 	level.var_1178C linkto(level.player);
 	level.var_1178D = spawn("script_origin",level.player.origin);
@@ -1108,9 +930,7 @@ func_25DF()
 	level.player playsound("scn_jump_from_plane_booster_save_lr");
 }
 
-//Function Number: 54
-func_8891()
-{
+func_8891() {
 	level endon("player_landed");
 	level.var_6E87 = spawn("script_origin",level.player.origin);
 	level.var_6E87 linkto(level.player);
@@ -1118,19 +938,15 @@ func_8891()
 	level.var_6E87 ghostattack(0);
 	var_00 = 0;
 	var_01 = 0;
-	for(;;)
-	{
+	for(;;) {
 		var_02 = level.player getnormalizedmovement();
 		var_03 = var_02[1];
-		if(var_03 < 0)
-		{
+		if(var_03 < 0) {
 			var_03 = var_03 * -1;
 		}
 
-		if(var_03 > 0.15)
-		{
-			if(var_00 == 0)
-			{
+		if(var_03 > 0.15) {
+			if(var_00 == 0) {
 				level.var_6E87 playloopsound("scn_europa_halo_flapping_lp");
 				var_00 = 1;
 				wait(0.05);
@@ -1152,9 +968,7 @@ func_8891()
 	}
 }
 
-//Function Number: 55
-func_25F8()
-{
+func_25F8() {
 	function_0178("scn_jump_from_plane_booster_save_lr",level.player.origin);
 	level.player clearclienttriggeraudiozone(2);
 	thread func_2CC9();
@@ -1163,16 +977,12 @@ func_25F8()
 	level.var_1178C stopsounds();
 }
 
-//Function Number: 56
-func_2CC9()
-{
+func_2CC9() {
 	wait(5);
 	function_01BA("mx_168_surveylandscape");
 }
 
-//Function Number: 57
-func_D1B3()
-{
+func_D1B3() {
 	thread func_8E4A();
 	level.player thread scripts\sp\maps\europa\europa_util::func_8E34(1);
 	level.player thread scripts\sp\maps\europa\europa_util::func_13013(1);
@@ -1187,12 +997,10 @@ func_D1B3()
 	level notify("kill_boost_button");
 	level.var_5D6C delete();
 	scripts\sp\_utility::func_10FEC("ex_jump_out");
-	if(isdefined(level.var_6E87))
-	{
+	if(isdefined(level.var_6E87)) {
 		level.var_6E87 stopsounds();
 		wait(0.05);
-		if(isdefined(level.var_6E87))
-		{
+		if(isdefined(level.var_6E87)) {
 			level.var_6E87 delete();
 		}
 	}
@@ -1202,28 +1010,22 @@ func_D1B3()
 	level.player getwholescenedurationmin(undefined);
 	level.player.var_8632 delete();
 	thread scripts\sp\maps\europa\europa_util::func_DF3E();
-	if(isdefined(level.var_D267))
-	{
+	if(isdefined(level.var_D267)) {
 		level.var_D267 delete();
 	}
 
 	level.player.var_8892 delete();
-	if(isdefined(level.var_1178C))
-	{
+	if(isdefined(level.var_1178C)) {
 		level.var_1178C delete();
 	}
 
-	if(isdefined(level.var_1178D))
-	{
+	if(isdefined(level.var_1178D)) {
 		level.var_1178D delete();
 	}
 }
 
-//Function Number: 58
-func_F562(param_00,param_01)
-{
-	if(isdefined(param_00))
-	{
+func_F562(param_00,param_01) {
+	if(isdefined(param_00)) {
 		var_02 = param_00;
 	}
 	else
@@ -1238,14 +1040,11 @@ func_F562(param_00,param_01)
 	function_01C5("r_mbradialoverridestrength",var_04);
 }
 
-//Function Number: 59
-func_DC5D(param_00)
-{
+func_DC5D(param_00) {
 	level endon("removing_blur_effects");
 	var_01 = getdvarfloat("r_mbRadialoverridechromaticAberration");
 	var_02 = getdvarfloat("r_mbradialoverridestrength");
-	if(isdefined(param_00))
-	{
+	if(isdefined(param_00)) {
 		var_03 = param_00;
 	}
 	else
@@ -1259,8 +1058,7 @@ func_DC5D(param_00)
 	var_05 = 0.01;
 	var_06 = 0.85;
 	var_07 = 0.95;
-	while(getdvarfloat("r_mbRadialoverridechromaticAberration") < var_06 && getdvarfloat("r_mbradialoverridestrength") < var_07)
-	{
+	while(getdvarfloat("r_mbRadialoverridechromaticAberration") < var_06 && getdvarfloat("r_mbradialoverridestrength") < var_07) {
 		var_01 = clamp(var_01 + var_04,0,var_06);
 		var_02 = clamp(var_02 + var_05,0,var_07);
 		function_01C5("r_mbRadialoverridechromaticAberration",var_01);
@@ -1269,14 +1067,11 @@ func_DC5D(param_00)
 	}
 }
 
-//Function Number: 60
-func_DFCD()
-{
+func_DFCD() {
 	level notify("removing_blur_effects");
 	var_00 = getdvarfloat("r_mbRadialoverridechromaticAberration");
 	var_01 = getdvarfloat("r_mbradialoverridestrength");
-	while(getdvarfloat("r_mbRadialoverridechromaticAberration") > 0 && getdvarfloat("r_mbradialoverridestrength") > 0)
-	{
+	while(getdvarfloat("r_mbRadialoverridechromaticAberration") > 0 && getdvarfloat("r_mbradialoverridestrength") > 0) {
 		var_00 = max(var_00 - 0.002,0);
 		var_01 = max(var_01 - 0.001,0);
 		function_01C5("r_mbRadialoverridechromaticAberration",var_00);
@@ -1285,41 +1080,33 @@ func_DFCD()
 	}
 }
 
-//Function Number: 61
-func_5DFD()
-{
-	if(getdvarint("debug_europa"))
-	{
+func_5DFD() {
+	if(getdvarint("debug_europa")) {
 		iprintln("hiding intro_surface_vista_01");
 	}
 
 	var_00 = getent("intro_surface_vista_01","targetname");
 	var_00 hide();
-	if(getdvarint("debug_europa"))
-	{
+	if(getdvarint("debug_europa")) {
 		iprintln("hiding base_reveal_vista");
 	}
 
 	scripts\sp\maps\europa\europa_util::toggle_cockpit_lights(0);
 	scripts\engine\utility::flag_wait("clouds_idle_start");
-	if(getdvarint("debug_europa"))
-	{
+	if(getdvarint("debug_europa")) {
 		iprintln("opening umbra portal named \'halo_portal\' ");
 	}
 
 	setumbraportalstate("halo_portal",1);
 	wait(6);
-	if(getdvarint("debug_europa"))
-	{
+	if(getdvarint("debug_europa")) {
 		iprintln("show intro_surface_vista_01");
 	}
 
 	var_00 show();
 }
 
-//Function Number: 62
-func_5ED8()
-{
+func_5ED8() {
 	scripts\engine\utility::exploder("cloudreveal");
 	scripts\engine\utility::exploder("clouds_static");
 	scripts\engine\utility::flag_wait("dropship_door_open");
@@ -1327,16 +1114,12 @@ func_5ED8()
 	thread func_75F7();
 }
 
-//Function Number: 63
-func_75F7()
-{
+func_75F7() {
 	wait(0.8);
 	scripts\sp\_utility::func_10FEC("clouds_static");
 }
 
-//Function Number: 64
-func_8890()
-{
+func_8890() {
 	level endon("player_boost_failed");
 	level endon("player_landed");
 	thread scripts\sp\_utility::func_56BA("freefall_boost");
@@ -1345,20 +1128,15 @@ func_8890()
 	var_01 = 0.01;
 	var_02 = 1;
 	childthread func_2CAC();
-	for(;;)
-	{
-		if(level.player gettimeremainingpercentage())
-		{
-			if(isdefined(level.var_CFE4.var_2A4C))
-			{
+	for(;;) {
+		if(level.player gettimeremainingpercentage()) {
+			if(isdefined(level.var_CFE4.var_2A4C)) {
 				level.var_CFE4.var_2A4C scripts\sp\_utility::func_10460(0.05,1);
 			}
 
-			if(var_00 - var_01 > 0)
-			{
+			if(var_00 - var_01 > 0) {
 				var_00 = var_00 - var_01;
-				if(var_02)
-				{
+				if(var_02) {
 					setomnvar("ui_hud_heist_boost",1);
 					thread func_D1B4();
 					thread func_25F8();
@@ -1366,8 +1144,7 @@ func_8890()
 				}
 			}
 
-			if(var_00 <= 0.75)
-			{
+			if(var_00 <= 0.75) {
 				scripts\engine\utility::flag_set("player_boosted");
 				scripts\engine\utility::flag_set("boost_required_end");
 			}
@@ -1378,13 +1155,9 @@ func_8890()
 	}
 }
 
-//Function Number: 65
-func_2CAC()
-{
-	for(;;)
-	{
-		if(level.player gettimeremainingpercentage())
-		{
+func_2CAC() {
+	for(;;) {
+		if(level.player gettimeremainingpercentage()) {
 			earthquake(0.43,0.3,level.player.origin,200);
 			level.player playrumbleonentity("heavy_3s");
 			level.player playrumbleonentity("damage_heavy");
@@ -1396,9 +1169,7 @@ func_2CAC()
 	}
 }
 
-//Function Number: 66
-func_D1B4()
-{
+func_D1B4() {
 	level endon("player_boost_failed");
 	scripts\engine\utility::array_thread([level.var_EBBB,level.var_EBBC],::func_A837);
 	thread func_D1B9();
@@ -1431,18 +1202,14 @@ func_D1B4()
 	level notify("land_animation_over");
 }
 
-//Function Number: 67
-func_D1B9()
-{
+func_D1B9() {
 	var_00 = scripts\sp\_utility::func_864C(level.player.origin);
-	while(level.player.origin[2] - var_00[2] > 500)
-	{
+	while(level.player.origin[2] - var_00[2] > 500) {
 		wait(0.05);
 	}
 
 	playfx(scripts\engine\utility::getfx("landing_kickup_dist"),var_00);
-	while(level.player.origin[2] - var_00[2] > 325)
-	{
+	while(level.player.origin[2] - var_00[2] > 325) {
 		wait(0.05);
 	}
 
@@ -1451,21 +1218,15 @@ func_D1B9()
 	playfx(level._effect["player_landing"],var_00,anglestoright(level.player.var_8892.angles));
 }
 
-//Function Number: 68
-func_7BA1()
-{
+func_7BA1() {
 	return level.var_D267 getscoreinfocategory(level.var_D267 scripts\sp\_utility::func_7DC1("europa_dropship_halo_land"));
 }
 
-//Function Number: 69
-func_F537(param_00)
-{
+func_F537(param_00) {
 	level.var_D267 _meth_82B1(level.var_D267 scripts\sp\_utility::func_7DC1("europa_dropship_halo_land_rel"),param_00);
 }
 
-//Function Number: 70
-func_A635()
-{
+func_A635() {
 	level.var_2B4C fadeovertime(0.25);
 	level.var_2B4C.alpha = 0;
 	level.player _meth_82C0("europa_dropship_intro_fullscreen_hit",0.05);
@@ -1475,13 +1236,10 @@ func_A635()
 	level.var_2B4C destroy();
 }
 
-//Function Number: 71
-func_59E8()
-{
+func_59E8() {
 	scripts\engine\utility::flag_wait("dropship_door_open");
 	scripts\engine\utility::delaythread(3,::func_5E1B);
-	if(getdvarint("debug_europa"))
-	{
+	if(getdvarint("debug_europa")) {
 		iprintln("dropship_door_open FX");
 	}
 
@@ -1498,8 +1256,7 @@ func_59E8()
 	var_02 = scripts\engine\utility::getstruct("dropship_door_100units","targetname");
 	var_03 = scripts\engine\utility::spawn_tag_origin(var_02.origin,var_02.angles);
 	var_03 playloopsound("scn_europa_dropship_door_wind_lp");
-	if(getdvarint("debug_europa"))
-	{
+	if(getdvarint("debug_europa")) {
 		iprintln("ex_door_open exploder");
 	}
 
@@ -1511,42 +1268,28 @@ func_59E8()
 	var_03 delete();
 }
 
-//Function Number: 72
-func_5E1B()
-{
+func_5E1B() {
 	level.var_5D6C attach("veh_mil_air_un_dropship_hero_interior_snow","tag_connect");
 }
 
-//Function Number: 73
-func_5E45()
-{
-}
+func_5E45() {}
 
-//Function Number: 74
-func_8893()
-{
-	if(scripts\engine\utility::flag("halo_jump_start"))
-	{
+func_8893() {
+	if(scripts\engine\utility::flag("halo_jump_start")) {
 		return 1;
 	}
 
 	return 0;
 }
 
-//Function Number: 75
-func_6A22()
-{
-}
+func_6A22() {}
 
-//Function Number: 76
-func_59B9()
-{
+func_59B9() {
 	level notify("change_camera_shake");
 	level endon("change_camera_shake");
 	level endon("halo_jump_start");
 	scripts\engine\utility::exploder("door_open_visor_frost");
-	for(;;)
-	{
+	for(;;) {
 		var_00 = randomfloatrange(1.6,2.2);
 		var_01 = randomfloatrange(0.5,1);
 		var_02 = randomfloatrange(0.25,1);
@@ -1563,9 +1306,7 @@ func_59B9()
 	}
 }
 
-//Function Number: 77
-func_5E23()
-{
+func_5E23() {
 	level notify("change_camera_shake");
 	level endon("change_camera_shake");
 	level endon("boost_required_end");
@@ -1573,10 +1314,8 @@ func_5E23()
 	var_00 = spawn("script_origin",level.player.origin + (0,0,0));
 	var_00 linkto(level.player);
 	stopallrumbles();
-	for(;;)
-	{
-		if(level.var_D36A)
-		{
+	for(;;) {
+		if(level.var_D36A) {
 			wait(0.05);
 			continue;
 		}
@@ -1589,12 +1328,10 @@ func_5E23()
 		var_06 = 15 + var_01 * 30;
 		var_06 = clamp(var_06,15,40);
 		var_07 = var_01;
-		if(var_01 > 0.4)
-		{
+		if(var_01 > 0.4) {
 			level.player _meth_8291(var_07 + 0.35 * var_07 + 0.35 * 1.5,var_07,var_07 + 0.35 * var_07 + 0.35 * 2,var_04,0,-1,0,var_06,var_06,var_06);
 		}
-		else if(var_01 > 0.12)
-		{
+		else if(var_01 > 0.12) {
 			level.player _meth_8291(var_07 * 1.5,var_07 * 1.2,var_07 * 2,var_04,0,-1,0,var_06,var_06,var_06);
 		}
 		else
@@ -1613,17 +1350,14 @@ func_5E23()
 	}
 }
 
-//Function Number: 78
-func_FC50(param_00,param_01)
-{
+func_FC50(param_00,param_01) {
 	level notify("new_shake_loop");
 	level endon("new_shake_loop");
 	var_02 = undefined;
 	var_03 = undefined;
 	var_04 = undefined;
 	var_05 = 0.7;
-	switch(param_00)
-	{
+	switch(param_00) {
 		case "light":
 			var_02 = 0.09;
 			var_03 = 0.18;
@@ -1638,18 +1372,14 @@ func_FC50(param_00,param_01)
 	}
 }
 
-//Function Number: 79
-func_A837()
-{
+func_A837() {
 	wait(1);
 	var_00 = scripts\sp\_utility::func_864C(self.origin);
-	if(self == level.var_EBBB)
-	{
+	if(self == level.var_EBBB) {
 		self playsound("scn_europa_scar1_land");
 	}
 
-	if(self == level.var_EBBC)
-	{
+	if(self == level.var_EBBC) {
 		self playsound("scn_europa_scar2_land");
 	}
 
@@ -1659,13 +1389,10 @@ func_A837()
 	scripts\engine\utility::flag_set("safe_to_swap_models");
 }
 
-//Function Number: 80
-func_9280()
-{
+func_9280() {
 	var_00 = scripts\sp\_utility::func_864C(self.origin);
 	playfx(scripts\engine\utility::getfx("icecave_landing_kickup"),var_00);
-	if(self == level.player)
-	{
+	if(self == level.player) {
 		return;
 	}
 
@@ -1674,9 +1401,7 @@ func_9280()
 	scripts\engine\utility::flag_set("safe_to_swap_models");
 }
 
-//Function Number: 81
-func_5E0F()
-{
+func_5E0F() {
 	scripts\engine\utility::flag_wait("nt_flag_visor_lower");
 	wait(0.5);
 	level.var_EBBC thread scripts\sp\_utility::play_sound_on_tag("scn_europa_dropship_jetpack_test_01","tag_fx_bottom");
@@ -1695,9 +1420,7 @@ func_5E0F()
 	scripts\engine\utility::delaythread(7,::func_888F,-298,15);
 }
 
-//Function Number: 82
-func_5E24()
-{
+func_5E24() {
 	level.player.var_8894 = spawn("script_origin",level.player.origin);
 	level.player.var_8894 linkto(level.player);
 	setomnvar("ui_europa_halo_drop_state",3);
@@ -1732,8 +1455,7 @@ func_5E24()
 	scripts\engine\utility::delaythread(2,::func_888C,0,var_05 - var_01);
 	thread func_FB48(var_05);
 	wait(var_05);
-	if(scripts\engine\utility::flag("player_boost_failed"))
-	{
+	if(scripts\engine\utility::flag("player_boost_failed")) {
 		return;
 	}
 
@@ -1743,16 +1465,12 @@ func_5E24()
 	level notify("halo_drop_hud_close");
 }
 
-//Function Number: 83
-func_FB48(param_00)
-{
+func_FB48(param_00) {
 	wait(param_00 - 1.3);
 	level.player.var_8894 scripts\sp\_utility::func_10460(1,1);
 }
 
-//Function Number: 84
-func_888C(param_00,param_01,param_02)
-{
+func_888C(param_00,param_01,param_02) {
 	level notify("halo_drop_altitude_lerp");
 	level endon("halo_drop_altitude_lerp");
 	var_03 = getomnvar("ui_europa_halo_drop_altitude");
@@ -1762,11 +1480,9 @@ func_888C(param_00,param_01,param_02)
 	var_07 = 200;
 	var_08 = undefined;
 	var_08 = floor(var_05 / var_07) * var_07;
-	while(var_05 > var_04)
-	{
+	while(var_05 > var_04) {
 		var_05 = var_05 - var_06;
-		if(abs(var_05 - var_04) < 1)
-		{
+		if(abs(var_05 - var_04) < 1) {
 			var_05 = var_04;
 			setomnvar("ui_europa_halo_drop_altitude",int(var_04));
 		}
@@ -1775,12 +1491,9 @@ func_888C(param_00,param_01,param_02)
 			setomnvar("ui_europa_halo_drop_altitude",int(var_05));
 		}
 
-		if(isdefined(param_02))
-		{
-			if(var_05 < var_08)
-			{
-				if(!isdefined(level.player.var_58DF) || level.player.var_58DF == 0)
-				{
+		if(isdefined(param_02)) {
+			if(var_05 < var_08) {
+				if(!isdefined(level.player.var_58DF) || level.player.var_58DF == 0) {
 					level.player.var_8894 playsound("scn_europa_halo_altitude_beep");
 				}
 
@@ -1792,22 +1505,17 @@ func_888C(param_00,param_01,param_02)
 	}
 }
 
-//Function Number: 85
-func_888F(param_00,param_01)
-{
+func_888F(param_00,param_01) {
 	level notify("halo_drop_temperature_lerp");
 	level endon("halo_drop_temperature_lerp");
 	var_02 = getomnvar("ui_helmet_meter_temperature");
 	var_03 = param_00;
 	var_04 = var_02;
 	var_05 = var_02 - var_03 / param_01 * 20;
-	if(var_03 < var_02)
-	{
-		while(var_04 > var_03)
-		{
+	if(var_03 < var_02) {
+		while(var_04 > var_03) {
 			var_04 = var_04 - var_05;
-			if(abs(var_04 - var_03) < 1)
-			{
+			if(abs(var_04 - var_03) < 1) {
 				setomnvar("ui_helmet_meter_temperature",int(var_03));
 				continue;
 			}
@@ -1818,11 +1526,9 @@ func_888F(param_00,param_01)
 	}
 	else
 	{
-		while(var_04 < var_03)
-		{
+		while(var_04 < var_03) {
 			var_04 = var_04 - var_05;
-			if(abs(var_04 - var_03) < 1)
-			{
+			if(abs(var_04 - var_03) < 1) {
 				setomnvar("ui_helmet_meter_temperature",int(var_03));
 				continue;
 			}
@@ -1835,25 +1541,20 @@ func_888F(param_00,param_01)
 	thread func_888E(var_03);
 }
 
-//Function Number: 86
-func_888E(param_00)
-{
+func_888E(param_00) {
 	level endon("halo_drop_temperature_lerp");
 	level endon("halo_drop_hud_close");
 	var_01 = -2;
 	var_02 = 1;
 	var_03 = param_00;
-	for(;;)
-	{
+	for(;;) {
 		wait(randomfloatrange(0.5,3));
 		var_03 = param_00 + randomfloatrange(var_01,var_02);
 		setomnvar("ui_helmet_meter_temperature",int(var_03));
 	}
 }
 
-//Function Number: 87
-func_3F69()
-{
+func_3F69() {
 	wait(9);
 	setomnvar("ui_chyron",1);
 	thread func_3F6A();
@@ -1862,9 +1563,7 @@ func_3F69()
 	setomnvar("ui_chyron",0);
 }
 
-//Function Number: 88
-func_3F6A()
-{
+func_3F6A() {
 	level.player thread scripts\sp\_utility::play_sound_on_entity("ui_chyron_box_start");
 	level.player thread scripts\engine\utility::play_loop_sound_on_entity("ui_chyron_box_lp");
 	level.player thread scripts\sp\_utility::func_C12D("stop soundui_chyron_box_lp",0.75);
@@ -1874,18 +1573,14 @@ func_3F6A()
 	level.player thread scripts\sp\_utility::play_sound_on_entity("ui_chyron_off");
 }
 
-//Function Number: 89
-func_3F6B()
-{
+func_3F6B() {
 	wait(1);
 	level.player thread scripts\engine\utility::play_loop_sound_on_entity("ui_chyron_text_type_lp");
 	wait(1.25);
 	level.player notify("stop soundui_chyron_text_type_lp");
 }
 
-//Function Number: 90
-func_4212()
-{
+func_4212() {
 	scripts\sp\maps\europa\europa_util::func_107C5();
 	scripts\sp\_utility::func_F5AF("cliff_drop_start",[level.var_EBBB,level.var_EBBC,level.player]);
 	function_02A9("storm","storm_ext",1);
@@ -1897,12 +1592,9 @@ func_4212()
 	func_10ACC();
 }
 
-//Function Number: 91
-func_4209()
-{
+func_4209() {
 	thread lib_0B11::func_CCBE();
-	if(scripts\engine\utility::flag("player_boost_failed"))
-	{
+	if(scripts\engine\utility::flag("player_boost_failed")) {
 		level waittill("forever");
 	}
 
@@ -1914,13 +1606,9 @@ func_4209()
 	scripts\engine\utility::flag_wait("cliffjump_complete");
 }
 
-//Function Number: 92
-func_11A84()
-{
-	for(;;)
-	{
-		for(var_00 = 0;var_00 < 30;var_00++)
-		{
+func_11A84() {
+	for(;;) {
+		for(var_00 = 0;var_00 < 30;var_00++) {
 			var_01 = level.player geteye();
 			var_01 = var_01 + (randomintrange(-400,400),randomintrange(-400,400),200);
 			playfx(scripts\engine\utility::getfx("vfx_ice_fall_caves"),var_01);
@@ -1930,22 +1618,17 @@ func_11A84()
 	}
 }
 
-//Function Number: 93
-func_8E4A()
-{
+func_8E4A() {
 	scripts\engine\utility::flag_wait("safe_to_swap_models");
 	scripts\engine\utility::delaythread(0.25,::scripts\sp\maps\europa\europa_util::func_8E46,1);
 }
 
-//Function Number: 94
-func_4211()
-{
+func_4211() {
 	scripts\engine\utility::flag_wait("player_at_opening");
 	wait(3);
 	var_00 = scripts\engine\utility::getstruct("jump_obj","targetname");
 	function_015F(1,var_00.origin - (0,0,56));
-	if(level.var_7683 < 2)
-	{
+	if(level.var_7683 < 2) {
 		function_0161(1,&"EUROPA_JUMPIN");
 	}
 
@@ -1953,27 +1636,21 @@ func_4211()
 	function_015F(1,(0,0,0));
 }
 
-//Function Number: 95
-func_420E()
-{
+func_420E() {
 	scripts\engine\utility::flag_wait("cliffjump_start");
 	wait(3);
-	if(getdvarint("debug_europa"))
-	{
+	if(getdvarint("debug_europa")) {
 		iprintln("hiding intro_surface_vista_01");
 	}
 
 	var_00 = getent("intro_surface_vista_01","targetname");
 	var_00 hide();
-	if(getdvarint("debug_europa"))
-	{
+	if(getdvarint("debug_europa")) {
 		iprintln("hiding intro_surface_vista_01");
 	}
 }
 
-//Function Number: 96
-func_7451()
-{
+func_7451() {
 	level.var_7452 = newclienthudelem(level.player);
 	level.var_7452.foreground = 1;
 	level.var_7452.alignx = "left";
@@ -1988,17 +1665,13 @@ func_7451()
 	level.var_7452 destroy();
 }
 
-//Function Number: 97
-func_6745()
-{
+func_6745() {
 	level.player thread scripts\sp\maps\europa\europa_util::func_12992();
 	thread scripts\sp\maps\europa\europa_util::func_982F(5);
 	level.player scripts\engine\utility::delaythread(5,::scripts\sp\maps\europa\europa_util::func_12970);
 }
 
-//Function Number: 98
-func_AB7E()
-{
+func_AB7E() {
 	level endon("cliffjump_start");
 	var_00 = 15000;
 	level.player.var_738C = level.player scripts\engine\utility::spawn_script_origin();
@@ -2019,13 +1692,10 @@ func_AB7E()
 	var_09[3] = "europa_cmp_warningairsuppl";
 	scripts\engine\utility::delaythread(3.5,::func_6745);
 	var_0A = 1;
-	for(;;)
-	{
-		if(scripts/sp/math::func_D638(level.player.origin,var_06,var_05,var_04))
-		{
+	for(;;) {
+		if(scripts/sp/math::func_D638(level.player.origin,var_06,var_05,var_04)) {
 			var_01 = 0;
-			if(gettime() > var_08)
-			{
+			if(gettime() > var_08) {
 				var_0B = 0.002;
 			}
 			else
@@ -2036,12 +1706,10 @@ func_AB7E()
 		else
 		{
 			var_0C = distance2dsquared(level.player.origin,var_06) < distance2dsquared(var_07,var_06);
-			if(!var_01)
-			{
+			if(!var_01) {
 			}
 
-			if(var_0C)
-			{
+			if(var_0C) {
 				var_0B = 0.005;
 			}
 			else
@@ -2052,22 +1720,19 @@ func_AB7E()
 
 		level.var_7452.alpha = level.var_7452.alpha + var_0B;
 		thread scripts\sp\maps\europa\europa_util::func_D988(level.var_7452.alpha);
-		if(level.var_7452.alpha >= 1)
-		{
+		if(level.var_7452.alpha >= 1) {
 			func_738B();
 			break;
 		}
 
 		var_07 = level.player.origin;
 		var_0D = func_E758(level.var_7452.alpha);
-		if(var_0D == func_E758(var_0A / var_09.size))
-		{
+		if(var_0D == func_E758(var_0A / var_09.size)) {
 			level.player thread scripts\sp\_utility::play_sound_on_entity(var_09[var_0A]);
 			var_0A++;
 			level.player thread scripts\sp\maps\europa\europa_util::func_12992();
 			level.player scripts\engine\utility::delaythread(5,::scripts\sp\maps\europa\europa_util::func_12970);
-			if(var_0A == 2)
-			{
+			if(var_0A == 2) {
 				thread start_player_freezing_sfx();
 			}
 		}
@@ -2076,47 +1741,36 @@ func_AB7E()
 	}
 }
 
-//Function Number: 99
-start_player_freezing_sfx()
-{
+start_player_freezing_sfx() {
 	level endon("froze_to_death");
 	level.freeze_sfx_org = spawn("script_origin",level.player.origin);
 	level.freeze_sfx_org scripts\engine\utility::delaycall(19,::playsound,"scn_euro_player_freeze");
 }
 
-//Function Number: 100
-func_6C2C(param_00)
-{
+func_6C2C(param_00) {
 	level thread scripts\sp\_utility::func_C12D("stop_final_wanring",param_00);
 	level.player thread scripts\sp\_utility::func_D2CD(50,param_00);
 }
 
-//Function Number: 101
-func_448E(param_00)
-{
+func_448E(param_00) {
 	level endon("cliffjump_start");
 	var_01 = [];
 	var_01[var_01.size] = "europa_cmp_warningtemperat";
 	var_01[var_01.size] = "europa_cmp_warningtemperatu";
 	var_01[var_01.size] = "europa_cmp_warningairsuppl";
-	foreach(var_03 in var_01)
-	{
+	foreach(var_03 in var_01) {
 		wait(param_00 / var_01.size);
 		level.player scripts\sp\_utility::play_sound_on_entity(var_03);
 	}
 }
 
-//Function Number: 102
-func_738B()
-{
-	if(scripts\engine\utility::flag("cliffjump_start"))
-	{
+func_738B() {
+	if(scripts\engine\utility::flag("cliffjump_start")) {
 		return;
 	}
 
 	level notify("froze_to_death");
-	if(isdefined(level.freeze_sfx_org))
-	{
+	if(isdefined(level.freeze_sfx_org)) {
 		level.freeze_sfx_org scripts\engine\utility::delaycall(1,::stopsounds);
 	}
 
@@ -2125,9 +1779,7 @@ func_738B()
 	level.player scripts\sp\_utility::func_54C6();
 }
 
-//Function Number: 103
-func_C800(param_00,param_01)
-{
+func_C800(param_00,param_01) {
 	self notify("new_fade");
 	self endon("new_fade");
 	self fadeovertime(param_01);
@@ -2135,9 +1787,7 @@ func_C800(param_00,param_01)
 	wait(param_01);
 }
 
-//Function Number: 104
-func_DAEF(param_00,param_01)
-{
+func_DAEF(param_00,param_01) {
 	var_02 = self.alpha;
 	self fadeovertime(param_01 / 2);
 	self.alpha = param_00;
@@ -2146,9 +1796,7 @@ func_DAEF(param_00,param_01)
 	self.alpha = var_02;
 }
 
-//Function Number: 105
-func_10AD0()
-{
+func_10AD0() {
 	scripts\engine\utility::array_thread(level.var_EBCA,::scripts\sp\_utility::func_54F7);
 	level.var_EBBB.target = "sipes_lookaround";
 	level.var_EBBC.target = "t_lookaround";
@@ -2157,46 +1805,35 @@ func_10AD0()
 	func_1381C();
 }
 
-//Function Number: 106
-func_1381C()
-{
+func_1381C() {
 	level endon("landing_vo_finished");
 	scripts\engine\utility::flag_waitopen("player_at_landing_zone");
 }
 
-//Function Number: 107
-func_B01E()
-{
+func_B01E() {
 	self endon("stop_going_to_node");
 	var_00 = scripts\engine\utility::spawn_script_origin();
 	var_00 scripts\engine\utility::delaycall(11,::delete);
 	scripts\engine\utility::delaythread(1,::lib_0C4C::func_1955,var_00);
-	for(;;)
-	{
+	for(;;) {
 		var_01 = anglestoforward(self.angles);
 		var_00.origin = self.origin + (0,0,200) + var_01 * 100;
 		wait(0.05);
 	}
 }
 
-//Function Number: 108
-func_10ACC()
-{
+func_10ACC() {
 	scripts\sp\maps\europa\europa_util::func_EBC7();
 	scripts\engine\utility::array_thread(level.var_EBCA,::func_EBC2);
 }
 
-//Function Number: 109
-func_EBC2()
-{
-	while(self _meth_81A6())
-	{
+func_EBC2() {
+	while(self _meth_81A6()) {
 		wait(0.05);
 	}
 
 	scripts\sp\_utility::func_61E7();
-	if(self == level.var_EBBC)
-	{
+	if(self == level.var_EBBC) {
 		wait(0.6);
 		level.var_EBBC scripts\sp\_utility::func_F3B5("b");
 	}
@@ -2205,24 +1842,18 @@ func_EBC2()
 	thread func_B013();
 }
 
-//Function Number: 110
-func_420C()
-{
+func_420C() {
 	var_00 = getent("intro_surface_vista_01","targetname");
 	var_00 hide();
-	if(getdvarint("debug_europa"))
-	{
+	if(getdvarint("debug_europa")) {
 		iprintln("Hiding \'intro_surface_vista_01\' ");
 	}
 
 	thread lib_0B11::func_CCBE();
 }
 
-//Function Number: 111
-func_134C2()
-{
-	if(level.var_10CDA == "cliffjumper")
-	{
+func_134C2() {
+	if(level.var_10CDA == "cliffjumper") {
 		wait(1.5);
 	}
 
@@ -2237,11 +1868,8 @@ func_134C2()
 	func_4A5D();
 }
 
-//Function Number: 112
-func_4A5D()
-{
-	if(scripts\engine\utility::flag("cliffjump_start"))
-	{
+func_4A5D() {
+	if(scripts\engine\utility::flag("cliffjump_start")) {
 		return;
 	}
 
@@ -2252,13 +1880,10 @@ func_4A5D()
 	wait(0.15);
 	scripts\sp\maps\europa\europa_util::func_134B7("europa_tee_boostdowntakeem");
 	var_00 = ["europa_tee_gearsicingupletspl","europa_sip_wolfjumpdownwe","europa_tee_onyouboss"];
-	for(;;)
-	{
-		foreach(var_02 in var_00)
-		{
+	for(;;) {
+		foreach(var_02 in var_00) {
 			wait(randomintrange(9,15));
-			if(scripts\engine\utility::flag("cliffjump_start"))
-			{
+			if(scripts\engine\utility::flag("cliffjump_start")) {
 				return;
 			}
 
@@ -2269,9 +1894,7 @@ func_4A5D()
 	}
 }
 
-//Function Number: 113
-func_B013()
-{
+func_B013() {
 	level endon("cliffjump_start");
 	self.var_B015 = scripts\engine\utility::getstruct("lookdown_" + self.var_1FBB,"targetname");
 	scripts\sp\_utility::func_54F7();
@@ -2282,9 +1905,7 @@ func_B013()
 	scripts/sp/anim::func_1EEA(self,"lookdown_idle");
 }
 
-//Function Number: 114
-func_41FF()
-{
+func_41FF() {
 	scripts\engine\utility::flag_clear("boost_required_start");
 	scripts\engine\utility::flag_clear("boost_required_end");
 	scripts\engine\utility::flag_clear("player_boosted");
@@ -2310,20 +1931,17 @@ func_41FF()
 	level.var_4205 playsound("scn_cave_jump_plr");
 	level.var_421D.var_1CE2 scripts\sp\_utility::func_1101B();
 	function_02A9("storm","",1);
-	if(isdefined(level.player.var_738C))
-	{
+	if(isdefined(level.player.var_738C)) {
 		level.player.var_738C ghostattack(0,1);
 		level.player.var_738C scripts\engine\utility::delaycall(1.25,::delete);
 	}
 
 	scripts\engine\utility::delaythread(1,::func_4201);
-	if(isdefined(level.player.var_737C))
-	{
+	if(isdefined(level.player.var_737C)) {
 		level.player.var_737C thread func_C800(0,0.5);
 	}
 
-	foreach(var_01 in level.var_EBCA)
-	{
+	foreach(var_01 in level.var_EBCA) {
 		var_01.var_B015 notify("stop_loop");
 		var_01 scripts\sp\maps\europa\europa_util::func_10FC2();
 	}
@@ -2339,15 +1957,12 @@ func_41FF()
 	level.var_EBBC show();
 }
 
-//Function Number: 115
-func_F915()
-{
+func_F915() {
 	level endon("scar_saved_player");
 	var_00 = [level.player.var_D267,level.var_421D.var_D04B];
 	scripts\engine\utility::flag_wait("cliffjump_kick_done");
 	scripts\engine\utility::delaythread(0.25,::scripts\sp\_hud::func_8DFF,-250,0.05);
-	if(!scripts\engine\utility::flag("player_stabbed"))
-	{
+	if(!scripts\engine\utility::flag("player_stabbed")) {
 		level.var_421D thread scripts/sp/anim::func_1F2C(var_00,"cliffjumper_loop");
 		setslowmotion(1,0.25,0.5);
 		var_01 = getanimlength(level.player.var_D267 scripts\sp\_utility::func_7DC1("cliffjumper_loop"));
@@ -2366,9 +1981,7 @@ func_F915()
 	scripts\engine\utility::flag_set("cliffjump_complete");
 }
 
-//Function Number: 116
-func_1081C()
-{
+func_1081C() {
 	self waittill("death");
 	var_00 = self gettagorigin("tag_weapon_right") + (0,0,15);
 	var_00 = scripts\sp\_utility::func_864C(var_00) + (0,0,1);
@@ -2377,9 +1990,7 @@ func_1081C()
 	var_02.angles = var_01;
 }
 
-//Function Number: 117
-func_5FB3()
-{
+func_5FB3() {
 	level endon("player_stabbed");
 	level endon("scar_saved_player");
 	scripts\engine\utility::delaythread(1.95,::scripts\sp\_utility::func_56BA,"melee_hint");
@@ -2387,9 +1998,7 @@ func_5FB3()
 	scripts\engine\utility::flag_set("player_stabbed");
 }
 
-//Function Number: 118
-func_3DB5(param_00)
-{
+func_3DB5(param_00) {
 	level endon("player_stabbed");
 	wait(param_00);
 	scripts\engine\utility::flag_set("scar_saved_player");
@@ -2409,15 +2018,12 @@ func_3DB5(param_00)
 	scripts\engine\utility::flag_set("cliffjump_complete");
 }
 
-//Function Number: 119
-func_6ADE()
-{
+func_6ADE() {
 	var_00 = scripts\engine\utility::getstruct("cliff_bullet_start","targetname").origin;
 	var_01 = scripts\engine\utility::getstruct("blood_pool_struct","targetname").origin;
 	var_02 = 6;
 	var_03 = [];
-	for(var_04 = 0;var_04 < var_02;var_04++)
-	{
+	for(var_04 = 0;var_04 < var_02;var_04++) {
 		function_0178("weap_kbs_sup_plr",level.player geteye());
 		var_05 = var_00 + scripts\engine\utility::randomvector(3);
 		var_06 = var_01 + (randomfloatrange(-10,10),-5,0);
@@ -2425,8 +2031,7 @@ func_6ADE()
 		var_08 = vectortoangles(var_07);
 		playfx(level._effect["bullet_tracer"],var_05,anglestoforward(var_08),anglestoup(var_08));
 		wait(0.05);
-		if(isdefined(level.var_421D.var_D04B))
-		{
+		if(isdefined(level.var_421D.var_D04B)) {
 			playfx(level.var_7649["human_gib_head"],scripts\engine\utility::getstruct("blood_pool_struct","targetname").origin);
 		}
 
@@ -2436,9 +2041,7 @@ func_6ADE()
 	}
 }
 
-//Function Number: 120
-func_AB70(param_00,param_01)
-{
+func_AB70(param_00,param_01) {
 	level notify("lerping_cliff_anim_rates");
 	level endon("lerping_cliff_anim_rates");
 	var_02 = func_78A5();
@@ -2446,8 +2049,7 @@ func_AB70(param_00,param_01)
 	var_04 = param_01 / 0.05;
 	var_05 = var_03 / var_04;
 	var_06 = gettime() + param_01 * 1000;
-	while(gettime() < var_06)
-	{
+	while(gettime() < var_06) {
 		var_02 = var_02 + var_05;
 		func_F300(var_02);
 		wait(0.05);
@@ -2456,72 +2058,51 @@ func_AB70(param_00,param_01)
 	func_F300(param_00);
 }
 
-//Function Number: 121
-func_78A6()
-{
+func_78A6() {
 	return level.player.var_D267 getscoreinfocategory(level.player.var_D267 scripts\sp\_utility::func_7DC1("cliffjumper"));
 }
 
-//Function Number: 122
-func_78A5()
-{
+func_78A5() {
 	return level.player.var_D267 getscoreinfovalue(level.player.var_D267 scripts\sp\_utility::func_7DC1("cliffjumper"));
 }
 
-//Function Number: 123
-func_F300(param_00)
-{
-	foreach(var_02 in level.var_421D.var_1684)
-	{
-		if(isdefined(var_02))
-		{
+func_F300(param_00) {
+	foreach(var_02 in level.var_421D.var_1684) {
+		if(isdefined(var_02)) {
 			var_02 _meth_82B1(var_02 scripts\sp\_utility::func_7DC1("cliffjumper"),param_00);
 		}
 	}
 }
 
-//Function Number: 124
-func_13745(param_00)
-{
-	while(func_78A6() < param_00)
-	{
+func_13745(param_00) {
+	while(func_78A6() < param_00) {
 		wait(0.05);
 	}
 }
 
-//Function Number: 125
-func_4201()
-{
-}
+func_4201() {}
 
-//Function Number: 126
-func_4213(param_00)
-{
+func_4213(param_00) {
 	scripts\sp\_utility::func_10FEC("landing");
 	scripts\engine\utility::exploder("le_clouds");
 	var_01 = level.var_421D.var_D04B.origin;
-	while(level.player.origin[2] - var_01[2] > 500)
-	{
+	while(level.player.origin[2] - var_01[2] > 500) {
 		wait(0.05);
 	}
 
-	while(!level.var_CF99)
-	{
+	while(!level.var_CF99) {
 		wait(0.05);
 	}
 
 	playfx(scripts\engine\utility::getfx("landing_kickup_dist"),var_01);
-	while(level.player.origin[2] - var_01[2] > 325)
-	{
+	while(level.player.origin[2] - var_01[2] > 325) {
 		wait(0.05);
 	}
 
 	playfx(scripts\engine\utility::getfx("landing_kickup"),var_01);
 }
 
-//Function Number: 127
-func_AD0C(param_00)
-{
+func_AD0C(param_00) {
 	var_01 = function_00CD(param_00.origin,param_00.angles,param_00.var_D267 scripts\sp\_utility::func_7DC1("cliffjumper"))[1];
 	var_02 = level.player.angles[1];
 	var_02 = scripts\engine\utility::ter_op(var_02 < 0,var_02 + 360,var_02);
@@ -2532,8 +2113,7 @@ func_AD0C(param_00)
 	var_07 = var_01 - var_02;
 	var_08 = scripts/sp/math::func_C097(var_06,var_05,var_07);
 	var_09 = scripts/sp/math::func_6A8E(var_03,var_04,var_08);
-	if(level.player istouching(getent("freaking_lerp_quicker","targetname")))
-	{
+	if(level.player istouching(getent("freaking_lerp_quicker","targetname"))) {
 		var_09 = 0.5;
 	}
 
@@ -2544,8 +2124,7 @@ func_AD0C(param_00)
 	param_00.var_D267 scripts\engine\utility::delaycall(0.05,::show);
 	thread func_10135();
 	scripts\engine\utility::flag_wait("cliffjump_complete");
-	if(isdefined(level.var_4214))
-	{
+	if(isdefined(level.var_4214)) {
 		level.var_4214 delete();
 	}
 
@@ -2553,54 +2132,41 @@ func_AD0C(param_00)
 	param_00.var_D267 delete();
 }
 
-//Function Number: 128
-func_10135()
-{
+func_10135() {
 	level endon("cliffjump_complete");
-	while(!isdefined(level.var_4214))
-	{
+	while(!isdefined(level.var_4214)) {
 		wait(0.05);
 	}
 
 	level.var_4214 show();
 }
 
-//Function Number: 129
-func_420A(param_00)
-{
+func_420A(param_00) {
 	scripts\engine\utility::flag_wait("boost_required_start");
 	thread func_D86A();
 	thread func_420B();
 	thread func_4202(param_00);
 	thread func_4206(param_00);
-	while(!level.var_CF99)
-	{
+	while(!level.var_CF99) {
 		wait(0.05);
 	}
 
 	thread func_5FB3();
-	if(scripts\engine\utility::flag("boost_required_end"))
-	{
+	if(scripts\engine\utility::flag("boost_required_end")) {
 	}
 }
 
-//Function Number: 130
-func_420B()
-{
+func_420B() {
 	level.player waittill("playerboost");
 	level.player playsound("scn_cave_jump_boost");
 }
 
-//Function Number: 131
-func_4206(param_00)
-{
-	while(distancesquared(level.player.origin,param_00.var_D04B.origin) > squared(1400))
-	{
+func_4206(param_00) {
+	while(distancesquared(level.player.origin,param_00.var_D04B.origin) > squared(1400)) {
 		wait(0.05);
 	}
 
-	if(level.var_CF99)
-	{
+	if(level.var_CF99) {
 		return;
 	}
 
@@ -2625,14 +2191,11 @@ func_4206(param_00)
 	level.player thread scripts\sp\_utility::play_sound_on_entity("europa_slowmo_out");
 }
 
-//Function Number: 132
-func_6AE2()
-{
+func_6AE2() {
 	setomnvar("ui_hud_heist_boost",1);
 	var_00 = 1;
 	var_01 = 0.03;
-	while(var_00 > 0.73)
-	{
+	while(var_00 > 0.73) {
 		setomnvar("ui_hud_heist_boost_amount",var_00);
 		var_00 = var_00 - var_01;
 		wait(0.05);
@@ -2642,28 +2205,22 @@ func_6AE2()
 	setomnvar("ui_hud_heist_boost",0);
 }
 
-//Function Number: 133
-func_ABB3(param_00,param_01)
-{
+func_ABB3(param_00,param_01) {
 	var_02 = getdvarint("cg_fov");
 	var_03 = gettime() + param_01 * 1000;
 	var_04 = param_01 / 0.05;
 	var_05 = param_00 - var_02 / var_04;
-	while(gettime() < var_03)
-	{
+	while(gettime() < var_03) {
 		var_02 = var_02 + var_05;
 		level.player _meth_81DE(var_02,0.05);
 		wait(0.05);
 	}
 }
 
-//Function Number: 134
-func_4202(param_00)
-{
+func_4202(param_00) {
 	scripts\engine\utility::flag_wait("boost_required_end");
 	level notify("kill_boost_button");
-	if(!level.var_CF99)
-	{
+	if(!level.var_CF99) {
 		thread scripts\sp\_utility::func_10322();
 		var_01 = 0.15;
 		param_00.var_D361 = level.player scripts\engine\utility::spawn_script_origin();
@@ -2683,16 +2240,12 @@ func_4202(param_00)
 	}
 }
 
-//Function Number: 135
-func_4207()
-{
+func_4207() {
 	scripts\engine\utility::flag_wait("teleport_scar1");
 	wait(1.7);
 	var_00 = scripts\engine\utility::getstructarray("drop_landing_start","targetname");
-	foreach(var_02 in var_00)
-	{
-		if(var_02.script_noteworthy != "scar2")
-		{
+	foreach(var_02 in var_00) {
+		if(var_02.script_noteworthy != "scar2") {
 			level.var_EBBB _meth_80F1(var_02.origin,var_02.angles,-15536);
 		}
 	}
@@ -2704,9 +2257,7 @@ func_4207()
 	level.var_EBBB scripts\sp\_utility::func_61C7();
 }
 
-//Function Number: 136
-func_4200()
-{
+func_4200() {
 	scripts\sp\_utility::func_5550();
 	self.precacheleaderboards = 1;
 	self.dontevershoot = 1;
@@ -2720,35 +2271,27 @@ func_4200()
 	self.dontevershoot = undefined;
 }
 
-//Function Number: 137
-func_A4E1()
-{
-	if(level.var_7683 == 0)
-	{
+func_A4E1() {
+	if(level.var_7683 == 0) {
 		return;
 	}
 
 	level endon("halo_jump_start");
 	wait(20);
-	if(!scripts\engine\utility::flag("halo_jump_start"))
-	{
+	if(!scripts\engine\utility::flag("halo_jump_start")) {
 		level.player clearhudtutorialmessage(1);
 		setomnvar("ui_death_hint",41);
 		scripts\sp\_utility::func_B8D1();
 	}
 }
 
-//Function Number: 138
-func_D86B()
-{
+func_D86B() {
 	var_00 = 0;
 	scripts\sp\_utility::func_56BE("halojump_hint",20);
 	function_014C("playerjump","+gostand");
 	function_014C("playerjump","+moveup");
-	while(var_00 == 0)
-	{
-		if(!level.var_7683)
-		{
+	while(var_00 == 0) {
+		if(!level.var_7683) {
 			level.player scripts\engine\utility::waittill_notify_or_timeout("playerjump",20);
 		}
 		else
@@ -2761,14 +2304,11 @@ func_D86B()
 	}
 }
 
-//Function Number: 139
-func_D86A()
-{
+func_D86A() {
 	level endon("kill_boost_button");
 	level.var_CF99 = 0;
 	scripts\engine\utility::flag_wait("boost_required_start");
-	for(;;)
-	{
+	for(;;) {
 		level.player waittill("playerboost");
 		level.var_CF99 = 1;
 		level.player thread scripts\sp\_utility::play_sound_on_entity("double_jump_boost_plr");
@@ -2776,51 +2316,38 @@ func_D86A()
 	}
 }
 
-//Function Number: 140
-func_2CB4()
-{
-	if(level.var_CF99 == 1 || scripts\engine\utility::flag("player_boosted"))
-	{
+func_2CB4() {
+	if(level.var_CF99 == 1 || scripts\engine\utility::flag("player_boosted")) {
 		return 1;
 	}
 
 	return 0;
 }
 
-//Function Number: 141
-func_5DF0()
-{
-}
+func_5DF0() {}
 
-//Function Number: 142
-func_5E75()
-{
+func_5E75() {
 	var_00 = getentarray("europa_dropshiplight_green","targetname");
 	scripts\engine\utility::array_thread(var_00,::scripts\sp\maps\europa\europa_util::func_AC86);
 	var_00 = getentarray("europa_dropshiplight_red","targetname");
 	scripts\engine\utility::array_thread(var_00,::scripts\sp\maps\europa\europa_util::func_AC87,100);
 }
 
-//Function Number: 143
-func_5E06()
-{
+func_5E06() {
 	var_00 = getentarray("europa_dropshiplight_red","targetname");
 	scripts\engine\utility::array_thread(var_00,::scripts\sp\maps\europa\europa_util::func_AC86);
 	var_00 = getentarray("europa_dropshiplight_green","targetname");
 	scripts\engine\utility::array_thread(var_00,::scripts\sp\maps\europa\europa_util::func_AC87,1000);
 }
 
-//Function Number: 144
-func_5EA4()
-{
+func_5EA4() {
 	level.var_5D6C = lib_0BBF::func_106B8("scar_dropship",undefined,"jump_seat_1");
 	level.var_5D6C lib_0BBF::func_106BA(1,undefined,1);
 	level.var_5D6C lib_0BBF::func_F456();
 	level.var_5D6C lib_0BBF::func_F4B4("straps","heavy");
 	level.var_5D6C.var_1FBB = "dropship";
 	level.var_5D6C scripts/sp/anim::func_F64A();
-	if(scripts\sp\_utility::hastag(level.var_5D6C.model,"tag_origin"))
-	{
+	if(scripts\sp\_utility::hastag(level.var_5D6C.model,"tag_origin")) {
 		level.var_5D6C.var_E6E8 = "tag_origin";
 	}
 	else
@@ -2831,38 +2358,29 @@ func_5EA4()
 	level.var_5D6C thread func_5D91();
 }
 
-//Function Number: 145
-func_5D91()
-{
-	foreach(var_01 in self.var_4D94.var_9A62)
-	{
-		if(issubstr(var_01.model,"bays_ri"))
-		{
+func_5D91() {
+	foreach(var_01 in self.var_4D94.var_9A62) {
+		if(issubstr(var_01.model,"bays_ri")) {
 			continue;
 		}
 
-		if(!issubstr(var_01.model,"interior_"))
-		{
+		if(!issubstr(var_01.model,"interior_")) {
 			continue;
 		}
 
 		var_01 delete();
 	}
 
-	foreach(var_04, var_01 in self.var_4D94.var_F08B)
-	{
-		if(issubstr(var_04,"right"))
-		{
+	foreach(var_04, var_01 in self.var_4D94.var_F08B) {
+		if(issubstr(var_04,"right")) {
 			continue;
 		}
 
 		var_01 delete();
 	}
 
-	if(isdefined(self.var_E4FB))
-	{
-		foreach(var_06 in self.var_E4FB)
-		{
+	if(isdefined(self.var_E4FB)) {
+		foreach(var_06 in self.var_E4FB) {
 			var_06 delete();
 		}
 	}

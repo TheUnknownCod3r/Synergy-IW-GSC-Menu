@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\mp\killstreaks\_remotemortar.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 26
- * Decompile Time: 1245 ms
- * Timestamp: 10/27/2023 12:29:27 AM
-*******************************************************************/
+/************************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\mp\killstreaks\_remotemortar.gsc
+************************************************************/
 
-//Function Number: 1
-init()
-{
+init() {
 	level.reminder_vo_init["laserTarget"] = loadfx("vfx/misc/laser_glow");
 	level.reminder_vo_init["missileExplode"] = loadfx("vfx/core/expl/bouncing_betty_explosion");
 	level.reminder_vo_init["deathExplode"] = loadfx("vfx/core/expl/uav_advanced_death");
@@ -18,28 +12,22 @@ init()
 	level.reminder_reaction_pointat = undefined;
 }
 
-//Function Number: 2
-func_128FD(param_00,param_01)
-{
-	if(isdefined(level.reminder_reaction_pointat))
-	{
+func_128FD(param_00,param_01) {
+	if(isdefined(level.reminder_reaction_pointat)) {
 		self iprintlnbold(&"KILLSTREAKS_AIR_SPACE_TOO_CROWDED");
 		return 0;
 	}
 
 	scripts\mp\_utility::setusingremote("remote_mortar");
 	var_02 = scripts\mp\killstreaks\_killstreaks::initridekillstreak("remote_mortar");
-	if(var_02 != "success")
-	{
-		if(var_02 != "disconnect")
-		{
+	if(var_02 != "success") {
+		if(var_02 != "disconnect") {
 			scripts\mp\_utility::clearusingremote();
 		}
 
 		return 0;
 	}
-	else if(isdefined(level.reminder_reaction_pointat))
-	{
+	else if(isdefined(level.reminder_reaction_pointat)) {
 		self iprintlnbold(&"KILLSTREAKS_AIR_SPACE_TOO_CROWDED");
 		scripts\mp\_utility::clearusingremote();
 		return 0;
@@ -49,12 +37,9 @@ func_128FD(param_00,param_01)
 	return func_10DE9(param_00);
 }
 
-//Function Number: 3
-func_10DE9(param_00)
-{
+func_10DE9(param_00) {
 	var_01 = func_10906(param_00,self);
-	if(!isdefined(var_01))
-	{
+	if(!isdefined(var_01)) {
 		return 0;
 	}
 
@@ -64,12 +49,9 @@ func_10DE9(param_00)
 	return 1;
 }
 
-//Function Number: 4
-func_10906(param_00,param_01)
-{
+func_10906(param_00,param_01) {
 	var_02 = spawnplane(param_01,"script_model",level.var_12AF5 gettagorigin("tag_origin"),"compass_objpoint_reaper_friendly","compass_objpoint_reaper_enemy");
-	if(!isdefined(var_02))
-	{
+	if(!isdefined(var_02)) {
 		return undefined;
 	}
 
@@ -102,9 +84,7 @@ func_10906(param_00,param_01)
 	return var_02;
 }
 
-//Function Number: 5
-func_B011(param_00)
-{
+func_B011(param_00) {
 	self endon("disconnect");
 	level endon("game_ended");
 	param_00 endon("death");
@@ -113,15 +93,12 @@ func_B011(param_00)
 	self setplayerangles(var_01);
 }
 
-//Function Number: 6
-func_DF87(param_00)
-{
+func_DF87(param_00) {
 	scripts\mp\_utility::_giveweapon("mortar_remote_mp");
 	scripts\mp\_utility::_switchtoweapon("mortar_remote_mp");
 	thread waitsetthermal(1,param_00);
 	thread scripts\mp\_utility::reinitializethermal(param_00);
-	if(getdvarint("camera_thirdPerson"))
-	{
+	if(getdvarint("camera_thirdPerson")) {
 		scripts\mp\_utility::setthirdpersondof(0);
 	}
 
@@ -133,9 +110,7 @@ func_DF87(param_00)
 	thread func_DFB3(param_00);
 }
 
-//Function Number: 7
-waitsetthermal(param_00,param_01)
-{
+waitsetthermal(param_00,param_01) {
 	self endon("disconnect");
 	param_01 endon("death");
 	wait(param_00);
@@ -144,22 +119,18 @@ waitsetthermal(param_00,param_01)
 	self thermalvisionfofoverlayon();
 }
 
-//Function Number: 8
-func_DF88(param_00)
-{
+func_DF88(param_00) {
 	level endon("game_ended");
 	self endon("disconnect");
 	param_00 endon("remote_done");
 	param_00 endon("death");
 	param_00.var_1155F = spawnfx(level.reminder_vo_init["laserTarget"],(0,0,0));
-	for(;;)
-	{
+	for(;;) {
 		var_01 = self geteye();
 		var_02 = anglestoforward(self getplayerangles());
 		var_03 = var_01 + var_02 * 15000;
 		var_04 = bullettrace(var_01,var_03,0,param_00.var_1155F);
-		if(isdefined(var_04["position"]))
-		{
+		if(isdefined(var_04["position"])) {
 			param_00.var_1155F.origin = var_04["position"];
 			triggerfx(param_00.var_1155F);
 		}
@@ -168,9 +139,7 @@ func_DF88(param_00)
 	}
 }
 
-//Function Number: 9
-remotedetonateonset(param_00)
-{
+remotedetonateonset(param_00) {
 	level endon("game_ended");
 	self endon("disconnect");
 	param_00 endon("remote_done");
@@ -179,11 +148,9 @@ remotedetonateonset(param_00)
 	var_02 = var_01 - 2200;
 	var_03 = 14;
 	self.var_6DB6 = 0;
-	for(;;)
-	{
+	for(;;) {
 		var_01 = gettime();
-		if(self attackbuttonpressed() && var_01 - var_02 > 3000)
-		{
+		if(self attackbuttonpressed() && var_01 - var_02 > 3000) {
 			var_03--;
 			self setclientdvar("ui_reaper_ammoCount",var_03);
 			var_02 = var_01;
@@ -204,8 +171,7 @@ remotedetonateonset(param_00)
 			var_08 waittill("death");
 			self setclientdvar("ui_reaper_targetDistance",-1);
 			self.var_6DB6 = 0;
-			if(var_03 == 0)
-			{
+			if(var_03 == 0) {
 				break;
 			}
 
@@ -220,24 +186,19 @@ remotedetonateonset(param_00)
 	param_00 thread remoteinfo();
 }
 
-//Function Number: 10
-func_89F4(param_00)
-{
+func_89F4(param_00) {
 	level endon("game_ended");
 	self endon("disconnect");
 	param_00 endon("remote_done");
 	param_00 endon("death");
 	self notifyonplayercommand("remote_mortar_toggleZoom1","+ads_akimbo_accessible");
-	if(!level.console)
-	{
+	if(!level.console) {
 		self notifyonplayercommand("remote_mortar_toggleZoom1","+toggleads_throw");
 	}
 
-	for(;;)
-	{
+	for(;;) {
 		var_01 = scripts\engine\utility::waittill_any_return("remote_mortar_toggleZoom1");
-		if(!isdefined(self.remote_detonation_monitor))
-		{
+		if(!isdefined(self.remote_detonation_monitor)) {
 			self.remote_detonation_monitor = 0;
 		}
 
@@ -245,9 +206,7 @@ func_89F4(param_00)
 	}
 }
 
-//Function Number: 11
-func_DFB3(param_00)
-{
+func_DFB3(param_00) {
 	level endon("game_ended");
 	self endon("disconnect");
 	param_00 endon("remote_done");
@@ -256,13 +215,10 @@ func_DFB3(param_00)
 	thread func_89F4(param_00);
 	param_00.var_13FCA = 0;
 	var_01 = 0;
-	for(;;)
-	{
-		if(self adsbuttonpressed())
-		{
+	for(;;) {
+		if(self adsbuttonpressed()) {
 			wait(0.05);
-			if(isdefined(self.remote_detonation_monitor))
-			{
+			if(isdefined(self.remote_detonation_monitor)) {
 				var_01 = 1;
 			}
 
@@ -272,21 +228,16 @@ func_DFB3(param_00)
 		wait(0.05);
 	}
 
-	for(;;)
-	{
-		if((!var_01 && self adsbuttonpressed()) || var_01 && self.remote_detonation_monitor)
-		{
-			if(param_00.var_13FCA == 0)
-			{
+	for(;;) {
+		if((!var_01 && self adsbuttonpressed()) || var_01 && self.remote_detonation_monitor) {
+			if(param_00.var_13FCA == 0) {
 				scripts\mp\_utility::_giveweapon("mortar_remote_zoom_mp");
 				scripts\mp\_utility::_switchtoweapon("mortar_remote_zoom_mp");
 				param_00.var_13FCA = 1;
 			}
 		}
-		else if((!var_01 && !self adsbuttonpressed()) || var_01 && !self.remote_detonation_monitor)
-		{
-			if(param_00.var_13FCA == 1)
-			{
+		else if((!var_01 && !self adsbuttonpressed()) || var_01 && !self.remote_detonation_monitor) {
+			if(param_00.var_13FCA == 1) {
 				scripts\mp\_utility::_giveweapon("mortar_remote_mp");
 				scripts\mp\_utility::_switchtoweapon("mortar_remote_mp");
 				param_00.var_13FCA = 0;
@@ -297,40 +248,31 @@ func_DFB3(param_00)
 	}
 }
 
-//Function Number: 12
-remotemissile_fx(param_00)
-{
+remotemissile_fx(param_00) {
 	level endon("game_ended");
 	param_00 endon("death");
 	param_00 endon("remote_done");
 	self endon("death");
-	for(;;)
-	{
+	for(;;) {
 		var_01 = distance(self.origin,param_00.var_1155F.origin);
 		param_00.triggerportableradarping setclientdvar("ui_reaper_targetDistance",int(var_01 / 12));
 		wait(0.05);
 	}
 }
 
-//Function Number: 13
-func_DF81(param_00)
-{
+func_DF81(param_00) {
 	self endon("death");
 	scripts\mp\_hostmigration::waitlongdurationwithhostmigrationpause(6);
 	playfx(level.reminder_vo_init["missileExplode"],self.origin);
 	self delete();
 }
 
-//Function Number: 14
-remotedefusesetup(param_00)
-{
-	if(!scripts\mp\_utility::isusingremote())
-	{
+remotedefusesetup(param_00) {
+	if(!scripts\mp\_utility::isusingremote()) {
 		return;
 	}
 
-	if(isdefined(param_00))
-	{
+	if(isdefined(param_00)) {
 		param_00 notify("helicopter_done");
 	}
 
@@ -340,8 +282,7 @@ remotedefusesetup(param_00)
 	scripts\mp\_utility::restorebasevisionset(0);
 	self unlink();
 	scripts\mp\_utility::clearusingremote();
-	if(getdvarint("camera_thirdPerson"))
-	{
+	if(getdvarint("camera_thirdPerson")) {
 		scripts\mp\_utility::setthirdpersondof(1);
 	}
 
@@ -353,64 +294,52 @@ remotedefusesetup(param_00)
 	scripts\engine\utility::allow_weapon_switch(1);
 }
 
-//Function Number: 15
-func_89F3(param_00)
-{
+func_89F3(param_00) {
 	level endon("game_ended");
 	param_00 endon("disconnect");
 	param_00 endon("removed_reaper_ammo");
 	self endon("death");
 	var_01 = 40;
 	scripts\mp\_hostmigration::waitlongdurationwithhostmigrationpause(var_01);
-	while(param_00.var_6DB6)
-	{
+	while(param_00.var_6DB6) {
 		wait(0.05);
 	}
 
-	if(isdefined(param_00))
-	{
+	if(isdefined(param_00)) {
 		param_00 remotedefusesetup(self);
 	}
 
 	thread remoteinfo();
 }
 
-//Function Number: 16
-handledeath(param_00)
-{
+handledeath(param_00) {
 	level endon("game_ended");
 	param_00 endon("disconnect");
 	self endon("remote_removed");
 	self endon("remote_done");
 	self waittill("death");
-	if(isdefined(param_00))
-	{
+	if(isdefined(param_00)) {
 		param_00 remotedefusesetup(self);
 	}
 
 	level thread func_E161(self,1);
 }
 
-//Function Number: 17
-func_89CE(param_00)
-{
+func_89CE(param_00) {
 	level endon("game_ended");
 	self endon("remote_done");
 	self endon("death");
 	param_00 endon("disconnect");
 	param_00 endon("removed_reaper_ammo");
 	param_00 scripts\engine\utility::waittill_any_3("joined_team","joined_spectators");
-	if(isdefined(param_00))
-	{
+	if(isdefined(param_00)) {
 		param_00 remotedefusesetup(self);
 	}
 
 	thread remoteinfo();
 }
 
-//Function Number: 18
-func_89CF(param_00)
-{
+func_89CF(param_00) {
 	level endon("game_ended");
 	self endon("remote_done");
 	self endon("death");
@@ -419,30 +348,23 @@ func_89CF(param_00)
 	thread remoteinfo();
 }
 
-//Function Number: 19
-func_E161(param_00,param_01)
-{
+func_E161(param_00,param_01) {
 	self notify("remote_removed");
-	if(isdefined(param_00.var_1155F))
-	{
+	if(isdefined(param_00.var_1155F)) {
 		param_00.var_1155F delete();
 	}
 
-	if(isdefined(param_00))
-	{
+	if(isdefined(param_00)) {
 		param_00 delete();
 		param_00 scripts\mp\killstreaks\_uav::func_E182();
 	}
 
-	if(!isdefined(param_01) || param_01 == 1)
-	{
+	if(!isdefined(param_01) || param_01 == 1) {
 		level.reminder_reaction_pointat = undefined;
 	}
 }
 
-//Function Number: 20
-remoteinfo()
-{
+remoteinfo() {
 	level.reminder_reaction_pointat = undefined;
 	level endon("game_ended");
 	self endon("death");
@@ -457,64 +379,50 @@ remoteinfo()
 	level thread func_E161(self,0);
 }
 
-//Function Number: 21
-remotedetonatebeginuse()
-{
+remotedetonatebeginuse() {
 	self notify("death");
 	self hide();
 	var_00 = anglestoright(self.angles) * 200;
 	playfx(level.reminder_vo_init["deathExplode"],self.origin,var_00);
 }
 
-//Function Number: 22
-damagetracker()
-{
+damagetracker() {
 	level endon("game_ended");
 	self.triggerportableradarping endon("disconnect");
 	self.health = 999999;
 	self.maxhealth = 1500;
 	self.var_E1 = 0;
-	for(;;)
-	{
+	for(;;) {
 		self waittill("damage",var_00,var_01,var_02,var_03,var_04,var_05,var_06,var_07,var_08,var_09);
-		if(!scripts\mp\_weapons::friendlyfirecheck(self.triggerportableradarping,var_01))
-		{
+		if(!scripts\mp\_weapons::friendlyfirecheck(self.triggerportableradarping,var_01)) {
 			continue;
 		}
 
-		if(!isdefined(self))
-		{
+		if(!isdefined(self)) {
 			return;
 		}
 
-		if(isdefined(var_08) && var_08 & level.idflags_penetration)
-		{
+		if(isdefined(var_08) && var_08 & level.idflags_penetration) {
 			self.wasdamagedfrombulletpenetration = 1;
 		}
 
-		if(isdefined(var_08) && var_08 & level.idflags_ricochet)
-		{
+		if(isdefined(var_08) && var_08 & level.idflags_ricochet) {
 			self.wasdamagedfrombulletricochet = 1;
 		}
 
 		self.wasdamaged = 1;
 		var_0A = var_00;
-		if(isplayer(var_01))
-		{
+		if(isplayer(var_01)) {
 			var_01 scripts\mp\_damagefeedback::updatedamagefeedback("");
-			if(var_04 == "MOD_RIFLE_BULLET" || var_04 == "MOD_PISTOL_BULLET")
-			{
-				if(var_01 scripts\mp\_utility::_hasperk("specialty_armorpiercing"))
-				{
+			if(var_04 == "MOD_RIFLE_BULLET" || var_04 == "MOD_PISTOL_BULLET") {
+				if(var_01 scripts\mp\_utility::_hasperk("specialty_armorpiercing")) {
 					var_0A = var_0A + var_00 * level.armorpiercingmod;
 				}
 			}
 		}
 
-		if(isdefined(var_09))
-		{
-			switch(var_09)
-			{
+		if(isdefined(var_09)) {
+			switch(var_09) {
 				case "javelin_mp":
 				case "stinger_mp":
 					self.largeprojectiledamage = 1;
@@ -530,22 +438,18 @@ damagetracker()
 		}
 
 		self.var_E1 = self.var_E1 + var_0A;
-		if(isdefined(self.triggerportableradarping))
-		{
+		if(isdefined(self.triggerportableradarping)) {
 			self.triggerportableradarping playlocalsound("reaper_damaged");
 		}
 
-		if(self.var_E1 >= self.maxhealth)
-		{
-			if(isplayer(var_01) && !isdefined(self.triggerportableradarping) || var_01 != self.triggerportableradarping)
-			{
+		if(self.var_E1 >= self.maxhealth) {
+			if(isplayer(var_01) && !isdefined(self.triggerportableradarping) || var_01 != self.triggerportableradarping) {
 				var_01 notify("destroyed_killstreak",var_09);
 				thread scripts\mp\_utility::teamplayercardsplash("callout_destroyed_remote_mortar",var_01);
 				var_01 thread scripts\mp\_utility::giveunifiedpoints("kill",var_09,50);
 			}
 
-			if(isdefined(self.triggerportableradarping))
-			{
+			if(isdefined(self.triggerportableradarping)) {
 				self.triggerportableradarping stoplocalsound("missile_incoming");
 			}
 
@@ -556,17 +460,13 @@ damagetracker()
 	}
 }
 
-//Function Number: 23
-func_89B7()
-{
+func_89B7() {
 	level endon("game_ended");
 	self endon("death");
 	self endon("remote_done");
-	for(;;)
-	{
+	for(;;) {
 		level waittill("stinger_fired",var_00,var_01,var_02);
-		if(!isdefined(var_02) || var_02 != self)
-		{
+		if(!isdefined(var_02) || var_02 != self) {
 			continue;
 		}
 
@@ -574,23 +474,18 @@ func_89B7()
 	}
 }
 
-//Function Number: 24
-func_10FA8(param_00,param_01)
-{
+func_10FA8(param_00,param_01) {
 	self endon("death");
 	param_00 endon("death");
-	if(isdefined(param_00.triggerportableradarping))
-	{
+	if(isdefined(param_00.triggerportableradarping)) {
 		param_00.triggerportableradarping playlocalsound("missile_incoming");
 	}
 
 	self missile_settargetent(param_00);
 	var_02 = distance(self.origin,param_00 getpointinbounds(0,0,0));
 	var_03 = param_00 getpointinbounds(0,0,0);
-	for(;;)
-	{
-		if(!isdefined(param_00))
-		{
+	for(;;) {
+		if(!isdefined(param_00)) {
 			var_04 = var_03;
 		}
 		else
@@ -600,40 +495,32 @@ func_10FA8(param_00,param_01)
 
 		var_03 = var_04;
 		var_05 = distance(self.origin,var_04);
-		if(var_05 < 3000 && param_00.numflares > 0)
-		{
+		if(var_05 < 3000 && param_00.numflares > 0) {
 			param_00.var_C22B--;
 			param_00 thread scripts\mp\killstreaks\_flares::func_6EAE();
 			var_06 = param_00 scripts\mp\killstreaks\_flares::func_6EA0();
 			self missile_settargetent(var_06);
 			param_00 = var_06;
-			if(isdefined(param_00.triggerportableradarping))
-			{
+			if(isdefined(param_00.triggerportableradarping)) {
 				param_00.triggerportableradarping stoplocalsound("missile_incoming");
 			}
 
 			return;
 		}
 
-		if(var_06 < var_03)
-		{
+		if(var_06 < var_03) {
 			var_03 = var_06;
 		}
 
-		if(var_06 > var_03)
-		{
-			if(var_06 > 1536)
-			{
+		if(var_06 > var_03) {
+			if(var_06 > 1536) {
 				return;
 			}
 
-			if(isdefined(param_01.triggerportableradarping))
-			{
+			if(isdefined(param_01.triggerportableradarping)) {
 				param_01.triggerportableradarping stoplocalsound("missile_incoming");
-				if(level.teambased)
-				{
-					if(param_01.team != var_02.team)
-					{
+				if(level.teambased) {
+					if(param_01.team != var_02.team) {
 						radiusdamage(self.origin,1000,1000,1000,var_02,"MOD_EXPLOSIVE","stinger_mp");
 					}
 				}
@@ -652,17 +539,13 @@ func_10FA8(param_00,param_01)
 	}
 }
 
-//Function Number: 25
-func_89B6()
-{
+func_89B6() {
 	level endon("game_ended");
 	self endon("death");
 	self endon("remote_done");
-	for(;;)
-	{
+	for(;;) {
 		level waittill("sam_fired",var_00,var_01,var_02);
-		if(!isdefined(var_02) || var_02 != self)
-		{
+		if(!isdefined(var_02) || var_02 != self) {
 			continue;
 		}
 
@@ -670,22 +553,17 @@ func_89B6()
 	}
 }
 
-//Function Number: 26
-func_EB18(param_00,param_01,param_02)
-{
+func_EB18(param_00,param_01,param_02) {
 	param_00 endon("death");
-	if(isdefined(param_00.triggerportableradarping))
-	{
+	if(isdefined(param_00.triggerportableradarping)) {
 		param_00.triggerportableradarping playlocalsound("missile_incoming");
 	}
 
 	var_03 = 150;
 	var_04 = 1000;
 	var_05 = [];
-	for(var_06 = 0;var_06 < param_02.size;var_06++)
-	{
-		if(isdefined(param_02[var_06]))
-		{
+	for(var_06 = 0;var_06 < param_02.size;var_06++) {
+		if(isdefined(param_02[var_06])) {
 			var_05[var_06] = distance(param_02[var_06].origin,param_00 getpointinbounds(0,0,0));
 			continue;
 		}
@@ -693,63 +571,48 @@ func_EB18(param_00,param_01,param_02)
 		var_05[var_06] = undefined;
 	}
 
-	for(;;)
-	{
+	for(;;) {
 		var_07 = param_00 getpointinbounds(0,0,0);
 		var_08 = [];
-		for(var_06 = 0;var_06 < param_02.size;var_06++)
-		{
-			if(isdefined(param_02[var_06]))
-			{
+		for(var_06 = 0;var_06 < param_02.size;var_06++) {
+			if(isdefined(param_02[var_06])) {
 				var_08[var_06] = distance(param_02[var_06].origin,var_07);
 			}
 		}
 
 		var_06 = 0;
-		while(var_06 < var_08.size)
-		{
-			if(isdefined(var_08[var_06]))
-			{
-				if(var_08[var_06] < 3000 && param_00.numflares > 0)
-				{
+		while(var_06 < var_08.size) {
+			if(isdefined(var_08[var_06])) {
+				if(var_08[var_06] < 3000 && param_00.numflares > 0) {
 					param_00.var_C22B--;
 					param_00 thread scripts\mp\killstreaks\_flares::func_6EAE();
 					var_09 = param_00 scripts\mp\killstreaks\_flares::func_6EA0();
-					for(var_0A = 0;var_0A < param_02.size;var_0A++)
-					{
-						if(isdefined(param_02[var_0A]))
-						{
+					for(var_0A = 0;var_0A < param_02.size;var_0A++) {
+						if(isdefined(param_02[var_0A])) {
 							param_02[var_0A] missile_settargetent(var_09);
 						}
 					}
 
-					if(isdefined(param_00.triggerportableradarping))
-					{
+					if(isdefined(param_00.triggerportableradarping)) {
 						param_00.triggerportableradarping stoplocalsound("missile_incoming");
 					}
 
 					return;
 				}
 
-				if(var_0A[var_08] < var_07[var_08])
-				{
+				if(var_0A[var_08] < var_07[var_08]) {
 					var_07[var_08] = var_0A[var_08];
 				}
 
-				if(var_0A[var_08] > var_07[var_08])
-				{
-					if(var_0A[var_08] > 1536)
-					{
+				if(var_0A[var_08] > var_07[var_08]) {
+					if(var_0A[var_08] > 1536) {
 						continue;
 					}
 
-					if(isdefined(param_02.triggerportableradarping))
-					{
+					if(isdefined(param_02.triggerportableradarping)) {
 						param_02.triggerportableradarping stoplocalsound("missile_incoming");
-						if(level.teambased)
-						{
-							if(param_02.team != var_03.team)
-							{
+						if(level.teambased) {
+							if(param_02.team != var_03.team) {
 								radiusdamage(var_04[var_08].origin,var_06,var_05,var_05,var_03,"MOD_EXPLOSIVE","sam_projectile_mp");
 							}
 						}

@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\mp\maps\mp_codphish\mp_codphish_fx.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 1
- * Decompile Time: 106 ms
- * Timestamp: 10/27/2023 12:13:18 AM
-*******************************************************************/
+/******************************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\mp\maps\mp_codphish\mp_codphish_fx.gsc
+******************************************************************/
 
-//Function Number: 1
-main()
-{
+main() {
 	level._effect["vfx_portal"] = loadfx("vfx/iw7/levels/mp_codph/vfx_portal.vfx");
 	level._effect["vfx_wf_main_flow"] = loadfx("vfx/iw7/levels/mp_codph/vfx_wf_main_flow.vfx");
 	level._effect["vfx_wf_main_mist"] = loadfx("vfx/iw7/levels/mp_codph/vfx_wf_main_mist.vfx");

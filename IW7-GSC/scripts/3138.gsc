@@ -1,18 +1,11 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: 3138.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 16
- * Decompile Time: 6 ms
- * Timestamp: 10/27/2023 12:26:14 AM
-*******************************************************************/
+/****************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\3138.gsc
+****************************/
 
-//Function Number: 1
-func_35A6(param_00,param_01,param_02,param_03)
-{
-	if(!isdefined(level.var_362A))
-	{
+func_35A6(param_00,param_01,param_02,param_03) {
+	if(!isdefined(level.var_362A)) {
 		lib_0C41::func_3629();
 	}
 
@@ -34,11 +27,9 @@ func_35A6(param_00,param_01,param_02,param_03)
 	self.var_358 = 0.1;
 	self.iscinematicplaying = 0;
 	self.var_27F7 = 1;
-	if(isdefined(self.var_13CC3))
-	{
+	if(isdefined(self.var_13CC3)) {
 		self.var_13C83 = [];
-		foreach(var_06, var_05 in self.var_13CC3)
-		{
+		foreach(var_06, var_05 in self.var_13CC3) {
 			self.var_13C83[var_06] = 1;
 			self.bt.var_13C83[var_06] = 1;
 		}
@@ -49,24 +40,17 @@ func_35A6(param_00,param_01,param_02,param_03)
 	thread func_352E();
 }
 
-//Function Number: 2
-func_352E()
-{
+func_352E() {
 	self endon("death");
-	for(;;)
-	{
-		if(!isdefined(level.player.var_4759))
-		{
+	for(;;) {
+		if(!isdefined(level.player.var_4759)) {
 			wait(1);
 			continue;
 		}
 
-		if(isdefined(level.player.var_4759.var_19) && level.player.var_4759.var_19.size)
-		{
-			foreach(var_01 in level.player.var_4759.var_19)
-			{
-				if(distance2dsquared(self.origin,var_01.origin) <= squared(180))
-				{
+		if(isdefined(level.player.var_4759.var_19) && level.player.var_4759.var_19.size) {
+			foreach(var_01 in level.player.var_4759.var_19) {
+				if(distance2dsquared(self.origin,var_01.origin) <= squared(180)) {
 					scripts\sp\_coverwall::func_475C(var_01,1);
 					wait(0.05);
 				}
@@ -79,14 +63,9 @@ func_352E()
 	}
 }
 
-//Function Number: 3
-func_6C00()
-{
-}
+func_6C00() {}
 
-//Function Number: 4
-draw_axis(param_00,param_01)
-{
+draw_axis(param_00,param_01) {
 	var_02 = 25;
 	var_03 = anglestoforward(param_01) * var_02;
 	var_04 = anglestoright(param_01) * var_02;
@@ -96,9 +75,7 @@ draw_axis(param_00,param_01)
 	func_1215(param_00,param_00 + var_04,(0,0,1));
 }
 
-//Function Number: 5
-func_1215(param_00,param_01,param_02)
-{
+func_1215(param_00,param_01,param_02) {
 	var_03 = vectortoangles(param_01 - param_00);
 	var_04 = length(param_01 - param_00);
 	var_05 = anglestoforward(var_03);
@@ -110,64 +87,47 @@ func_1215(param_00,param_01,param_02)
 	var_0B = var_09 * var_07;
 }
 
-//Function Number: 6
-func_E75A(param_00,param_01)
-{
+func_E75A(param_00,param_01) {
 	return (func_E756(param_00[0],param_01),func_E756(param_00[1],param_01),func_E756(param_00[2],param_01));
 }
 
-//Function Number: 7
-func_E756(param_00,param_01)
-{
+func_E756(param_00,param_01) {
 	return int(param_00 * param_01) / param_01;
 }
 
-//Function Number: 8
-func_35E3(param_00,param_01,param_02,param_03)
-{
-	if(issubstr(param_00,"_left"))
-	{
+func_35E3(param_00,param_01,param_02,param_03) {
+	if(issubstr(param_00,"_left")) {
 		self.var_164D[param_00].slot = "left";
 		return;
 	}
 
-	if(issubstr(param_00,"_right"))
-	{
+	if(issubstr(param_00,"_right")) {
 		self.var_164D[param_00].slot = "right";
 		return;
 	}
 }
 
-//Function Number: 9
-func_3514(param_00,param_01,param_02,param_03)
-{
+func_3514(param_00,param_01,param_02,param_03) {
 	var_04 = self.var_164D[param_00].slot;
-	if(!isdefined(var_04))
-	{
+	if(!isdefined(var_04)) {
 		return 0;
 	}
 
-	if(!isdefined(self.var_13CC3[var_04]))
-	{
+	if(!isdefined(self.var_13CC3[var_04])) {
 		return 0;
 	}
 
 	return self.var_13CC3[var_04] == param_03;
 }
 
-//Function Number: 10
-func_3518(param_00)
-{
+func_3518(param_00) {
 	var_01 = self._blackboard.shootparams;
-	if(!isdefined(var_01))
-	{
+	if(!isdefined(var_01)) {
 		return 0;
 	}
 
-	foreach(var_04, var_03 in self.var_13CC3)
-	{
-		if(var_04 == param_00)
-		{
+	foreach(var_04, var_03 in self.var_13CC3) {
+		if(var_04 == param_00) {
 			return isdefined(var_01.var_13CC3[var_04]);
 		}
 	}
@@ -175,24 +135,18 @@ func_3518(param_00)
 	return 0;
 }
 
-//Function Number: 11
-func_3519(param_00,param_01,param_02,param_03)
-{
+func_3519(param_00,param_01,param_02,param_03) {
 	return !func_351A(param_00,param_01,param_02,param_03);
 }
 
-//Function Number: 12
-func_351A(param_00,param_01,param_02,param_03)
-{
+func_351A(param_00,param_01,param_02,param_03) {
 	var_04 = self._blackboard.shootparams;
-	if(!isdefined(var_04))
-	{
+	if(!isdefined(var_04)) {
 		return 0;
 	}
 
 	var_05 = self.var_164D[param_00].slot;
-	if(var_05 == "left")
-	{
+	if(var_05 == "left") {
 		var_06 = "left_arm";
 	}
 	else
@@ -200,37 +154,29 @@ func_351A(param_00,param_01,param_02,param_03)
 		var_06 = "right_arm";
 	}
 
-	if(scripts/asm/asm_bb::ispartdismembered(var_06))
-	{
+	if(scripts/asm/asm_bb::ispartdismembered(var_06)) {
 		return 0;
 	}
 
-	if(!isdefined(self.var_13CC3[var_05]) || self.var_13CC3[var_05] != param_03)
-	{
+	if(!isdefined(self.var_13CC3[var_05]) || self.var_13CC3[var_05] != param_03) {
 		return 0;
 	}
 
 	return lib_0C08::func_10079(var_05);
 }
 
-//Function Number: 13
-func_3515(param_00,param_01,param_02,param_03)
-{
+func_3515(param_00,param_01,param_02,param_03) {
 	return !func_3516(param_00,param_01,param_02,param_03);
 }
 
-//Function Number: 14
-func_3516(param_00,param_01,param_02,param_03)
-{
+func_3516(param_00,param_01,param_02,param_03) {
 	var_04 = self._blackboard.shootparams;
-	if(!isdefined(var_04))
-	{
+	if(!isdefined(var_04)) {
 		return 0;
 	}
 
 	var_05 = self.var_164D[param_00].slot;
-	if(var_05 == "left")
-	{
+	if(var_05 == "left") {
 		var_06 = "left_arm";
 	}
 	else
@@ -238,28 +184,22 @@ func_3516(param_00,param_01,param_02,param_03)
 		var_06 = "right_arm";
 	}
 
-	if(scripts/asm/asm_bb::ispartdismembered(var_06))
-	{
+	if(scripts/asm/asm_bb::ispartdismembered(var_06)) {
 		return 0;
 	}
 
-	if(!isdefined(self.var_13CC3[var_05]) || self.var_13CC3[var_05] != param_03)
-	{
+	if(!isdefined(self.var_13CC3[var_05]) || self.var_13CC3[var_05] != param_03) {
 		return 0;
 	}
 
 	return lib_0C08::func_A004(var_05);
 }
 
-//Function Number: 15
-func_3517(param_00,param_01,param_02,param_03)
-{
+func_3517(param_00,param_01,param_02,param_03) {
 	var_04 = self.var_164D[param_00].var_4C1A;
 	return !isdefined(var_04) || isdefined(var_04.var_2720);
 }
 
-//Function Number: 16
-func_35AE(param_00,param_01,param_02,param_03)
-{
+func_35AE(param_00,param_01,param_02,param_03) {
 	return scripts/asm/asm_bb::ispartdismembered(param_03);
 }

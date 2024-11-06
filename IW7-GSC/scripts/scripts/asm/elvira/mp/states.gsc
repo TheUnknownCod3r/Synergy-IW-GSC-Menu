@@ -1,18 +1,11 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\asm\elvira\mp\states.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 16
- * Decompile Time: 891 ms
- * Timestamp: 10\27\2023 12:01:43 AM
-*******************************************************************/
+/****************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\asm\elvira\mp\states.gsc
+****************************************************/
 
-//Function Number: 1
-func_2371()
-{
-	if(scripts\asm\asm::func_232E("elvira"))
-	{
+func_2371() {
+	if(scripts\asm\asm::func_232E("elvira")) {
 		return;
 	}
 
@@ -216,92 +209,62 @@ func_2371()
 	scripts\asm\asm::func_2327();
 }
 
-//Function Number: 2
-func_122DB(param_00,param_01,param_02,param_03)
-{
+func_122DB(param_00,param_01,param_02,param_03) {
 	return scripts\asm\asm_bb::bb_moverequested();
 }
 
-//Function Number: 3
-func_122E1(param_00,param_01,param_02,param_03)
-{
+func_122E1(param_00,param_01,param_02,param_03) {
 	return scripts\asm\asm_bb::bb_isincombat();
 }
 
-//Function Number: 4
-func_122D7(param_00,param_01,param_02,param_03)
-{
+func_122D7(param_00,param_01,param_02,param_03) {
 	return scripts\asm\asm_bb::bb_isincombat();
 }
 
-//Function Number: 5
-func_12125(param_00,param_01,param_02,param_03)
-{
+func_12125(param_00,param_01,param_02,param_03) {
 	return scripts\asm\asm_bb::bb_throwgrenaderequested();
 }
 
-//Function Number: 6
-trans_exposed_idle_to_exposed_crouch_exit3(param_00,param_01,param_02,param_03)
-{
+trans_exposed_idle_to_exposed_crouch_exit3(param_00,param_01,param_02,param_03) {
 	return scripts\asm\asm_bb::bb_moverequested() && self.var_1198.movetype == "combat" && lib_0F3C::func_138E2();
 }
 
-//Function Number: 7
-func_120FD(param_00,param_01,param_02,param_03)
-{
+func_120FD(param_00,param_01,param_02,param_03) {
 	return isdefined(self.var_1198.var_2BDF) && self.var_1198.var_2BDF && lib_0F3C::func_138E2();
 }
 
-//Function Number: 8
-func_12113(param_00,param_01,param_02,param_03)
-{
+func_12113(param_00,param_01,param_02,param_03) {
 	return scripts\asm\asm_bb::bb_reloadrequested();
 }
 
-//Function Number: 9
-func_120ED(param_00,param_01,param_02,param_03)
-{
+func_120ED(param_00,param_01,param_02,param_03) {
 	return scripts\asm\asm_bb::bb_reloadrequested();
 }
 
-//Function Number: 10
-func_1257C(param_00,param_01,param_02,param_03)
-{
+func_1257C(param_00,param_01,param_02,param_03) {
 	return scripts\asm\asm_bb::bb_movetyperequested("sprint");
 }
 
-//Function Number: 11
-func_1255B(param_00,param_01,param_02,param_03)
-{
+func_1255B(param_00,param_01,param_02,param_03) {
 	return !scripts\asm\asm_bb::bb_moverequested();
 }
 
-//Function Number: 12
-func_12594(param_00,param_01,param_02,param_03)
-{
+func_12594(param_00,param_01,param_02,param_03) {
 	return !scripts\asm\asm_bb::bb_moverequested();
 }
 
-//Function Number: 13
-func_12595(param_00,param_01,param_02,param_03)
-{
+func_12595(param_00,param_01,param_02,param_03) {
 	return scripts\asm\asm_bb::bb_reloadrequested();
 }
 
-//Function Number: 14
-func_12591(param_00,param_01,param_02,param_03)
-{
+func_12591(param_00,param_01,param_02,param_03) {
 	return scripts\asm\asm_bb::bb_reloadrequested();
 }
 
-//Function Number: 15
-func_12511(param_00,param_01,param_02,param_03)
-{
+func_12511(param_00,param_01,param_02,param_03) {
 	return !scripts\asm\asm_bb::bb_movetyperequested("sprint");
 }
 
-//Function Number: 16
-func_122B0(param_00,param_01,param_02,param_03)
-{
+func_122B0(param_00,param_01,param_02,param_03) {
 	return !scripts\asm\asm_bb::bb_moverequested();
 }

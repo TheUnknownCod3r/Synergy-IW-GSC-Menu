@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\cp\maps\cp_final\cp_final_final_boss.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 70
- * Decompile Time: 3677 ms
- * Timestamp: 10/27/2023 12:05:01 AM
-*******************************************************************/
+/********************************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\cp\maps\cp_final\cp_final_final_boss.gsc
+********************************************************************/
 
-//Function Number: 1
-init()
-{
+init() {
 	scripts\engine\utility::flag_init("meph_fight");
 	level.fbd = spawnstruct();
 	var_00 = level.fbd;
@@ -19,8 +13,7 @@ init()
 	initfx();
 	var_00.circles = scripts\engine\utility::getstructarray("capture_points","targetname");
 	var_00.activatedcircles = [];
-	foreach(var_03, var_02 in var_00.circles)
-	{
+	foreach(var_03, var_02 in var_00.circles) {
 		var_02.var_3CB7 = 0;
 		var_02.buffer = 0;
 		var_02.state = "DORMANT";
@@ -52,22 +45,17 @@ init()
 	var_05 linkto(var_04);
 }
 
-//Function Number: 2
-bossfight_loadout()
-{
-	foreach(var_01 in level.players)
-	{
+bossfight_loadout() {
+	foreach(var_01 in level.players) {
 		var_01 scripts\cp\utility::allow_player_teleport(0);
 	}
 
-	foreach(var_01 in level.players)
-	{
+	foreach(var_01 in level.players) {
 		var_01 thread scripts\cp\maps\cp_final\cp_final::delay_set_audio_zone(var_01);
 	}
 
 	level.magic_weapons["venomx"] = "iw7_venomx_zm_pap2";
-	foreach(var_06 in level.var_B163)
-	{
+	foreach(var_06 in level.var_B163) {
 		var_06.var_13C25 = scripts\cp\zombies\interaction_magicwheel::func_7ABF();
 	}
 
@@ -82,8 +70,7 @@ bossfight_loadout()
 	var_08 = 300;
 	level thread auto_start_boss_fight(var_08);
 	var_09 = scripts\engine\utility::getstructarray("afterlife_selfrevive_door","script_noteworthy");
-	foreach(var_0B in var_09)
-	{
+	foreach(var_0B in var_09) {
 		scripts\cp\cp_interaction::remove_from_current_interaction_list(var_0B);
 	}
 
@@ -92,8 +79,7 @@ bossfight_loadout()
 	var_0D solid();
 	var_0E = scripts\engine\utility::getstructarray("afterlife_arcade","targetname");
 	var_0E = scripts\engine\utility::array_randomize(var_0E);
-	foreach(var_10, var_01 in level.players)
-	{
+	foreach(var_10, var_01 in level.players) {
 		var_01.ability_invulnerable = 1;
 		var_01 setorigin(var_0E[var_10].origin);
 		var_01 setplayerangles(var_0E[var_10].angles);
@@ -103,9 +89,7 @@ bossfight_loadout()
 	scripts\cp\cp_interaction::add_to_current_interaction_list(scripts\engine\utility::getstruct("start_meph_battle","script_noteworthy"));
 }
 
-//Function Number: 3
-auto_start_boss_fight(param_00)
-{
+auto_start_boss_fight(param_00) {
 	level endon("fight_started");
 	setomnvar("zm_ui_timer",gettime() + param_00 * 1000);
 	wait(param_00 - 5);
@@ -117,16 +101,14 @@ auto_start_boss_fight(param_00)
 	arcade_game_cleanup();
 	wait(2);
 	scripts\cp\cp_vo::set_vo_system_busy(1);
-	foreach(var_03 in level.players)
-	{
+	foreach(var_03 in level.players) {
 		scripts\cp\maps\cp_final\cp_final_vo::clear_up_all_vo(var_03);
 		var_03 _meth_82C0("bink_fadeout_amb",0.66);
 	}
 
 	scripts\cp\utility::play_bink_video("sysload_o2",86,0);
 	wait(86.5);
-	foreach(var_03 in level.players)
-	{
+	foreach(var_03 in level.players) {
 		var_03 clearclienttriggeraudiozone(0.3);
 	}
 
@@ -135,35 +117,27 @@ auto_start_boss_fight(param_00)
 	level.dlc4_boss playsound("cp_final_meph_intro_ground");
 }
 
-//Function Number: 4
-arcade_game_cleanup()
-{
-	foreach(var_01 in level.players)
-	{
+arcade_game_cleanup() {
+	foreach(var_01 in level.players) {
 		var_01 notify("arcade_special_interrupt");
 		var_01 disableusability();
 	}
 
 	wait(0.1);
 	level notify("force_exit_arcade");
-	foreach(var_01 in level.players)
-	{
+	foreach(var_01 in level.players) {
 		var_01 unlink();
-		if(isdefined(var_01.anchor))
-		{
+		if(isdefined(var_01.anchor)) {
 			var_01.anchor delete();
 		}
 
-		if(!var_01 scripts\cp\utility::areinteractionsenabled())
-		{
+		if(!var_01 scripts\cp\utility::areinteractionsenabled()) {
 			var_01 scripts\cp\utility::allow_player_interactions(1);
 		}
 	}
 }
 
-//Function Number: 5
-spawn_perk_pickup()
-{
+spawn_perk_pickup() {
 	var_00 = scripts\engine\utility::getstruct("meph_perks","script_noteworthy");
 	var_01 = scripts\engine\utility::getstruct(var_00.target,"targetname");
 	level.perk_pickup = spawnfx(level._effect["vfx_mep_perk_buy"],var_01.origin);
@@ -171,11 +145,8 @@ spawn_perk_pickup()
 	triggerfx(level.perk_pickup);
 }
 
-//Function Number: 6
-try_to_leave_bossfight(param_00,param_01)
-{
-	if(!all_players_near_exit(param_00))
-	{
+try_to_leave_bossfight(param_00,param_01) {
+	if(!all_players_near_exit(param_00)) {
 		iprintlnbold("All players must be near the exit");
 		return;
 	}
@@ -183,16 +154,14 @@ try_to_leave_bossfight(param_00,param_01)
 	scripts\cp\cp_interaction::remove_from_current_interaction_list(param_00);
 	level notify("fight_started");
 	scripts\cp\cp_vo::set_vo_system_busy(1);
-	foreach(param_01 in level.players)
-	{
+	foreach(param_01 in level.players) {
 		scripts\cp\maps\cp_final\cp_final_vo::clear_up_all_vo(param_01);
 		param_01 _meth_82C0("bink_fadeout_amb",0.66);
 	}
 
 	scripts\cp\utility::play_bink_video("sysload_o2",86,0);
 	wait(86.5);
-	foreach(param_01 in level.players)
-	{
+	foreach(param_01 in level.players) {
 		param_01 clearclienttriggeraudiozone(0.3);
 	}
 
@@ -201,19 +170,14 @@ try_to_leave_bossfight(param_00,param_01)
 	level.dlc4_boss playsound("cp_final_meph_intro_ground");
 }
 
-//Function Number: 7
-all_players_near_exit(param_00)
-{
+all_players_near_exit(param_00) {
 	var_01 = 128;
-	foreach(var_03 in level.players)
-	{
-		if(!var_03 scripts\cp\utility::is_valid_player())
-		{
+	foreach(var_03 in level.players) {
+		if(!var_03 scripts\cp\utility::is_valid_player()) {
 			return 0;
 		}
 
-		if(distance2d(var_03.origin,param_00.origin) > var_01)
-		{
+		if(distance2d(var_03.origin,param_00.origin) > var_01) {
 			return 0;
 		}
 	}
@@ -221,9 +185,7 @@ all_players_near_exit(param_00)
 	return 1;
 }
 
-//Function Number: 8
-pre_bossfight_init()
-{
+pre_bossfight_init() {
 	init_bossfight_fnf();
 	init_bossfight_magicwheel();
 	disable_bossfight_fnf();
@@ -234,32 +196,26 @@ pre_bossfight_init()
 	scripts\cp\cp_interaction::remove_from_current_interaction_list(scripts\engine\utility::getstruct("start_meph_battle","script_noteworthy"));
 }
 
-//Function Number: 9
-disable_bossfight_fnf()
-{
+disable_bossfight_fnf() {
 	level.boss_fnf_interaction.jaw hide();
 	level.boss_fnf_interaction.machine setscriptablepartstate("machine","default");
 	level.boss_fnf_interaction.machine setscriptablepartstate("mouth","off");
 	level.boss_fnf_interaction.machine setscriptablepartstate("teller","off_nomodel");
 	level.boss_fnf_interaction.machine_top setscriptablepartstate("machine","off_nomodel");
 	level.boss_fnf_interaction.machine.hidden = 1;
-	foreach(var_01 in level.boss_fnf_interaction.lights)
-	{
+	foreach(var_01 in level.boss_fnf_interaction.lights) {
 		var_01 setlightintensity(0);
 	}
 }
 
-//Function Number: 10
-enable_bossfight_fnf()
-{
+enable_bossfight_fnf() {
 	level.boss_fnf_interaction.jaw show();
 	level.boss_fnf_interaction.machine setscriptablepartstate("teller","safe_on");
 	level.boss_fnf_interaction.machine setscriptablepartstate("machine","default_on");
 	wait(0.1);
 	level.boss_fnf_interaction.machine_top setscriptablepartstate("machine","on");
 	level.boss_fnf_interaction.machine.hidden = undefined;
-	foreach(var_01 in level.boss_fnf_interaction.lights)
-	{
+	foreach(var_01 in level.boss_fnf_interaction.lights) {
 		var_01 setlightintensity(0.65);
 	}
 
@@ -267,35 +223,27 @@ enable_bossfight_fnf()
 	level thread scripts\cp\cp_music_and_dialog::add_to_ambient_sound_queue("jaroslav_anc_attract",level.boss_fnf_interaction.jaw.origin,120,120,250000,100);
 }
 
-//Function Number: 11
-init_bossfight_fnf()
-{
+init_bossfight_fnf() {
 	var_00 = scripts\engine\utility::getstruct("jaroslav_machine_meph","script_noteworthy");
 	var_01 = getentarray(var_00.target,"targetname");
-	foreach(var_03 in var_01)
-	{
-		if(var_03.script_noteworthy == "fnf_machine")
-		{
+	foreach(var_03 in var_01) {
+		if(var_03.script_noteworthy == "fnf_machine") {
 			var_00.machine = var_03;
 			continue;
 		}
 
-		if(var_03.script_noteworthy == "fnf_machine_top")
-		{
+		if(var_03.script_noteworthy == "fnf_machine_top") {
 			var_00.machine_top = var_03;
 			continue;
 		}
 
-		if(var_03.script_noteworthy == "fnf_jaw")
-		{
+		if(var_03.script_noteworthy == "fnf_jaw") {
 			var_00.jaw = var_03;
 			continue;
 		}
 
-		if(var_03.script_noteworthy == "fnf_light")
-		{
-			if(!isdefined(var_00.lights))
-			{
+		if(var_03.script_noteworthy == "fnf_light") {
+			if(!isdefined(var_00.lights)) {
 				var_00.lights = [];
 			}
 
@@ -307,11 +255,8 @@ init_bossfight_fnf()
 	scripts\cp\cp_interaction::remove_from_current_interaction_list(level.boss_fnf_interaction);
 }
 
-//Function Number: 12
-init_bossfight_magicwheel()
-{
-	while(!isdefined(level.var_B163))
-	{
+init_bossfight_magicwheel() {
+	while(!isdefined(level.var_B163)) {
 		wait(0.05);
 	}
 
@@ -319,9 +264,7 @@ init_bossfight_magicwheel()
 	level.bossfight_magicwheel = scripts\engine\utility::getclosest((1679.3,-4209,331),level.var_B163);
 }
 
-//Function Number: 13
-disable_bossfight_magicwheel()
-{
+disable_bossfight_magicwheel() {
 	level.bossfight_magicwheel setscriptablepartstate("base","off_nomodel");
 	level.bossfight_magicwheel setscriptablepartstate("fx","off");
 	level.bossfight_magicwheel setscriptablepartstate("spin_light","off");
@@ -332,9 +275,7 @@ disable_bossfight_magicwheel()
 	level.bossfight_magicwheel makeunusable();
 }
 
-//Function Number: 14
-enable_bossfight_magicwheel()
-{
+enable_bossfight_magicwheel() {
 	level.bossfight_magicwheel setscriptablepartstate("base","on");
 	level.bossfight_magicwheel setscriptablepartstate("fx",scripts\cp\zombies\interaction_magicwheel::get_default_fx_state());
 	level.bossfight_magicwheel setscriptablepartstate("spin_light","on");
@@ -348,18 +289,14 @@ enable_bossfight_magicwheel()
 	level.bossfight_magicwheel sethintstring(&"CP_FINAL_SPIN_WHEEL_FREE");
 }
 
-//Function Number: 15
-start_boss_fight()
-{
+start_boss_fight() {
 	scripts\cp\maps\cp_final\cp_final::disablepas();
 	level.meph_fight_started = 1;
-	if(isdefined(level.pap_room_portal))
-	{
+	if(isdefined(level.pap_room_portal)) {
 		level.pap_room_portal delete();
 	}
 
-	if(getdvarint("skip_bossfight_loadout") == 1 || scripts\engine\utility::istrue(level.debug_boss_fight_skip_loadout))
-	{
+	if(getdvarint("skip_bossfight_loadout") == 1 || scripts\engine\utility::istrue(level.debug_boss_fight_skip_loadout)) {
 		spawn_meph();
 		start(level.dlc4_boss);
 		return;
@@ -368,18 +305,13 @@ start_boss_fight()
 	bossfight_loadout();
 }
 
-//Function Number: 16
-boss_fight_intro_clear_audio_zone()
-{
+boss_fight_intro_clear_audio_zone() {
 	wait(10);
 	self clearclienttriggeraudiozone(10);
 }
 
-//Function Number: 17
-play_meph_song(param_00,param_01)
-{
-	if(soundexists(param_01))
-	{
+play_meph_song(param_00,param_01) {
+	if(soundexists(param_01)) {
 		wait(2.5);
 		var_02 = spawn("script_origin",param_00);
 		var_02 playloopsound(param_01);
@@ -390,17 +322,12 @@ play_meph_song(param_00,param_01)
 	}
 }
 
-//Function Number: 18
-disable_laststand_weapon(param_00)
-{
+disable_laststand_weapon(param_00) {
 	return 0;
 }
 
-//Function Number: 19
-spawn_meph()
-{
-	if(isdefined(level.dlc4_boss))
-	{
+spawn_meph() {
+	if(isdefined(level.dlc4_boss)) {
 		return;
 	}
 
@@ -410,8 +337,7 @@ spawn_meph()
 	level notify("add_hidden_song_to_playlist");
 	scripts\cp\cp_vo::set_vo_system_busy(1);
 	level.can_use_pistol_during_laststand_func = ::disable_laststand_weapon;
-	foreach(var_01 in level.players)
-	{
+	foreach(var_01 in level.players) {
 		var_01 _meth_82C0("final_boss_battle_space_intro",0.02);
 		var_01 thread boss_fight_intro_clear_audio_zone();
 	}
@@ -425,8 +351,7 @@ spawn_meph()
 	scripts\cp\zombies\zombies_spawning::activate_volume_by_name("meph_arena");
 	scripts\engine\utility::flag_set("meph_fight");
 	level.zombies_paused = 1;
-	if(isdefined(level.dlc4_boss) && isalive(level.dlc4_boss))
-	{
+	if(isdefined(level.dlc4_boss) && isalive(level.dlc4_boss)) {
 		level.dlc4_boss suicide();
 		level.dlc4_boss = undefined;
 		var_03 = undefined;
@@ -438,11 +363,9 @@ spawn_meph()
 		var_03 = scripts\cp\zombies\zombies_spawning::func_13F53("dlc4_boss",(-13314,-337,-109),var_05,var_04);
 		level.dlc4_boss = var_03;
 		level.dlc4_boss thread clearvaluesondeath();
-		foreach(var_08, var_01 in level.players)
-		{
+		foreach(var_08, var_01 in level.players) {
 			var_07 = (0,0,0);
-			switch(var_08)
-			{
+			switch(var_08) {
 				case 0:
 					var_07 = (-12819,-327,-106);
 					break;
@@ -474,16 +397,11 @@ spawn_meph()
 	return var_03;
 }
 
-//Function Number: 20
-respawn_in_meph_fight(param_00)
-{
+respawn_in_meph_fight(param_00) {
 	var_01 = scripts\engine\utility::getstructarray("boss_player_starts","targetname");
-	if(isdefined(param_00) && isplayer(param_00))
-	{
-		foreach(var_03 in var_01)
-		{
-			if(positionwouldtelefrag(var_03.origin,param_00))
-			{
+	if(isdefined(param_00) && isplayer(param_00)) {
+		foreach(var_03 in var_01) {
+			if(positionwouldtelefrag(var_03.origin,param_00)) {
 				continue;
 			}
 
@@ -494,33 +412,26 @@ respawn_in_meph_fight(param_00)
 	return var_01[0];
 }
 
-//Function Number: 21
-clearvaluesondeath()
-{
+clearvaluesondeath() {
 	self waittill("death");
 	level.loot_time_out = undefined;
 	level.disable_loot_fly_to_player = undefined;
 	level.movemodefunc["generic_zombie"] = level.originalmovemodefunc;
 }
 
-//Function Number: 22
-persistent_flame_damage()
-{
+persistent_flame_damage() {
 	level endon("game_ended");
 	var_00 = getbosstunedata();
 	var_01 = spawn("trigger_radius",self.origin,0,128,128);
 	var_01 enablelinkto();
 	var_01 linkto(self,"tag_origin");
-	for(;;)
-	{
+	for(;;) {
 		var_01 waittill("trigger",var_02);
-		if(!var_02 scripts\cp\utility::is_valid_player())
-		{
+		if(!var_02 scripts\cp\utility::is_valid_player()) {
 			continue;
 		}
 
-		if(!isdefined(var_02.padding_damage))
-		{
+		if(!isdefined(var_02.padding_damage)) {
 			playfxontagforclients(level._effect["vfx_dlc4_player_burn_flames"],var_02,"tag_eye",var_02);
 			var_02.padding_damage = 1;
 			var_02 dodamage(getbosstunedata().persistent_fire_damage,var_01.origin,var_01,var_01,"MOD_UNKNOWN","iw7_electrictrap_zm");
@@ -530,17 +441,13 @@ persistent_flame_damage()
 	}
 }
 
-//Function Number: 23
-remove_padding_damage()
-{
+remove_padding_damage() {
 	self endon("disconnect");
 	wait(getbosstunedata().persistent_fire_rate);
 	self.padding_damage = undefined;
 }
 
-//Function Number: 24
-initfx()
-{
+initfx() {
 	level._effect["weak_spot_hit"] = loadfx("vfx/iw7/levels/cp_final/boss_demon/vfx_weakspot_hit.vfx");
 	level._effect["sb_quest_item_pickup"] = loadfx("vfx/iw7/core/zombie/vfx_zom_souvenir_pickup.vfx");
 	level._effect["flying_soul_death"] = loadfx("vfx/iw7/levels/cp_final/boss_demon/vfx_flying_soul_death.vfx");
@@ -554,9 +461,7 @@ initfx()
 	level._effect["talisman_flash"] = loadfx("vfx/iw7/levels/cp_final/boss/vfx_talisman_flash.vfx");
 }
 
-//Function Number: 25
-initinteraction(param_00)
-{
+initinteraction(param_00) {
 	var_01 = spawnstruct();
 	var_01.name = "capture_points";
 	var_01.script_noteworthy = "capture_points";
@@ -576,14 +481,10 @@ initinteraction(param_00)
 	param_00.interaction = var_01;
 }
 
-//Function Number: 26
-ritualcirclehintfunc(param_00,param_01)
-{
+ritualcirclehintfunc(param_00,param_01) {
 	var_02 = param_00.circle;
-	if(var_02.state == "ACTIVE")
-	{
-		if(level.fbd.bossstate == "FRENZIED")
-		{
+	if(var_02.state == "ACTIVE") {
+		if(level.fbd.bossstate == "FRENZIED") {
 			return &"CP_FINAL_ACTIVATE_TALISMAN";
 		}
 
@@ -593,9 +494,7 @@ ritualcirclehintfunc(param_00,param_01)
 	return &"CP_FINAL_PLACE_TALISMAN";
 }
 
-//Function Number: 27
-registeractionstocircles()
-{
+registeractionstocircles() {
 	var_00 = level.fbd;
 	var_00.circles[0].actionname = "clap";
 	var_00.circles[1].actionname = "throw";
@@ -604,9 +503,7 @@ registeractionstocircles()
 	var_00.circles[4].actionname = "fly_over";
 }
 
-//Function Number: 28
-start(param_00)
-{
+start(param_00) {
 	var_01 = level.fbd;
 	var_01.boss = param_00;
 	var_02 = getbosstunedata();
@@ -615,8 +512,7 @@ start(param_00)
 	scripts\cp\cp_vo::func_C9CB(level.players);
 	level.vo_system_busy = 1;
 	registerweakspots();
-	foreach(var_05, var_04 in var_01.circles)
-	{
+	foreach(var_05, var_04 in var_01.circles) {
 		initinteraction(var_04);
 		scripts\cp\cp_interaction::add_to_current_interaction_list(var_04.interaction);
 		var_04.weakspot = var_01.weakspots[var_05];
@@ -625,8 +521,7 @@ start(param_00)
 	level.zombie_ghost_model = var_02.stolen_ghost_model;
 	var_01.soultobossmindistsqr = pow(var_02.boss_mid_height + var_02.soul_mid_height,2);
 	level.get_fake_ghost_model_func = ::returnfakesoulmodel;
-	foreach(var_07 in level.players)
-	{
+	foreach(var_07 in level.players) {
 		var_07 freezecontrols(1);
 	}
 
@@ -642,19 +537,14 @@ start(param_00)
 	var_01.boss.health = 9999999;
 }
 
-//Function Number: 29
-pre_fight_cleanup()
-{
+pre_fight_cleanup() {
 	var_00 = scripts\engine\utility::getstructarray("fast_travel_portal","targetname");
-	foreach(var_02 in var_00)
-	{
-		if(isdefined(var_02.trigger))
-		{
+	foreach(var_02 in var_00) {
+		if(isdefined(var_02.trigger)) {
 			var_02.trigger delete();
 		}
 
-		if(isdefined(var_02.portal_scriptable))
-		{
+		if(isdefined(var_02.portal_scriptable)) {
 			var_02.portal_scriptable delete();
 		}
 
@@ -662,35 +552,27 @@ pre_fight_cleanup()
 	}
 }
 
-//Function Number: 30
-makezombiessprint(param_00)
-{
+makezombiessprint(param_00) {
 	return "sprint";
 }
 
-//Function Number: 31
-max_ammo_manager()
-{
+max_ammo_manager() {
 	wait(3);
 	level.drop_max_ammo_func = ::scripts\cp\loot::drop_loot;
 	level thread unlimited_max_ammo();
 	level thread max_ammo_pick_up_listener();
 }
 
-//Function Number: 32
-unlimited_max_ammo()
-{
+unlimited_max_ammo() {
 	level endon("game_ended");
 	level endon("restart_ammo_timer");
 	scripts\engine\utility::flag_init("max_ammo_active");
 	var_00 = 180;
 	var_01 = 60;
-	for(;;)
-	{
+	for(;;) {
 		try_drop_max_ammo();
 		var_02 = isdefined(level.fbd.bossstate) && level.fbd.bossstate == "FRENZIED";
-		if(!var_02)
-		{
+		if(!var_02) {
 			wait(var_00);
 			continue;
 		}
@@ -699,89 +581,67 @@ unlimited_max_ammo()
 	}
 }
 
-//Function Number: 33
-try_drop_max_ammo()
-{
+try_drop_max_ammo() {
 	var_00 = level.dlc4_boss.arenacenter;
-	if(!scripts\engine\utility::flag("max_ammo_active"))
-	{
+	if(!scripts\engine\utility::flag("max_ammo_active")) {
 		scripts\engine\utility::flag_set("max_ammo_active");
-		level thread [[ level.drop_max_ammo_func ]](var_00,undefined,"ammo_max",undefined,undefined,1);
+		level thread [[level.drop_max_ammo_func]](var_00,undefined,"ammo_max",undefined,undefined,1);
 	}
 }
 
-//Function Number: 34
-max_ammo_pick_up_listener()
-{
+max_ammo_pick_up_listener() {
 	level endon("game_ended");
-	for(;;)
-	{
+	for(;;) {
 		level waittill("pick_up_max_ammo");
 		scripts\engine\utility::flag_clear("max_ammo_active");
 	}
 }
 
-//Function Number: 35
-returnfakesoulmodel(param_00)
-{
+returnfakesoulmodel(param_00) {
 	return getbosstunedata().fake_ghost_model;
 }
 
-//Function Number: 36
-waittillintrofinished()
-{
+waittillintrofinished() {
 	level endon("game_ended");
 	wait(12);
-	foreach(var_01 in level.players)
-	{
+	foreach(var_01 in level.players) {
 		var_01 playlocalsound(var_01.vo_prefix + "meph_encounter");
 	}
 
-	while(!isdefined(level.fbd.boss.introfinished) || !level.fbd.boss.introfinished)
-	{
+	while(!isdefined(level.fbd.boss.introfinished) || !level.fbd.boss.introfinished) {
 		wait(0.2);
 	}
 
-	foreach(var_01 in level.players)
-	{
+	foreach(var_01 in level.players) {
 		var_01 freezecontrols(0);
 	}
 
-	if(getdvarint("skip_bossfight_loadout") == 1 || scripts\engine\utility::istrue(level.debug_boss_fight_loadouts))
-	{
+	if(getdvarint("skip_bossfight_loadout") == 1 || scripts\engine\utility::istrue(level.debug_boss_fight_loadouts)) {
 		setupdebugplayerloadouts();
 	}
 
-	foreach(var_01 in level.players)
-	{
+	foreach(var_01 in level.players) {
 		giveentangler(var_01);
 	}
 
-	if(scripts\cp\utility::isplayingsolo() || level.only_one_player)
-	{
-		foreach(var_01 in level.players)
-		{
-			if(var_01 scripts\cp\utility::has_zombie_perk("perk_machine_revive"))
-			{
+	if(scripts\cp\utility::isplayingsolo() || level.only_one_player) {
+		foreach(var_01 in level.players) {
+			if(var_01 scripts\cp\utility::has_zombie_perk("perk_machine_revive")) {
 				scripts\cp\cp_laststand::enable_self_revive(var_01);
 			}
 		}
 	}
 }
 
-//Function Number: 37
-setupdebugplayerloadouts()
-{
+setupdebugplayerloadouts() {
 	var_00 = ["iw7_mauler_zm"];
 	var_01 = ["iw7_fhr_zm"];
-	foreach(var_03 in level.players)
-	{
+	foreach(var_03 in level.players) {
 		var_04 = randomint(var_01.size);
 		var_05 = randomint(var_00.size);
 		var_03 takeweapon(var_03 scripts\cp\utility::getvalidtakeweapon());
 		var_06 = scripts\cp\utility::getrawbaseweaponname(var_01[var_04]);
-		if(isdefined(var_03.weapon_build_models[var_06]))
-		{
+		if(isdefined(var_03.weapon_build_models[var_06])) {
 			scripts/cp/zombies/coop_wall_buys::givevalidweapon(var_03,var_03.weapon_build_models[var_06]);
 		}
 		else
@@ -790,8 +650,7 @@ setupdebugplayerloadouts()
 		}
 
 		var_07 = scripts\cp\utility::getrawbaseweaponname(var_00[var_05]);
-		if(isdefined(var_03.weapon_build_models[var_07]))
-		{
+		if(isdefined(var_03.weapon_build_models[var_07])) {
 			scripts/cp/zombies/coop_wall_buys::givevalidweapon(var_03,var_03.weapon_build_models[var_07]);
 		}
 		else
@@ -806,42 +665,33 @@ setupdebugplayerloadouts()
 		scripts\cp\cp_laststand::enable_self_revive(var_03);
 	}
 
-	if(isdefined(level.pap_max) && level.pap_max < 3)
-	{
+	if(isdefined(level.pap_max) && level.pap_max < 3) {
 		level.var_C8A4++;
 	}
 
-	level [[ level.upgrade_weapons_func ]]();
-	level thread [[ level.upgrade_weapons_func ]]();
+	level [[level.upgrade_weapons_func]]();
+	level thread [[level.upgrade_weapons_func]]();
 }
 
-//Function Number: 38
-perframeupdate()
-{
+perframeupdate() {
 	var_00 = level.fbd;
 	var_01 = getbosstunedata();
 	var_00.boss endon("death");
-	for(;;)
-	{
+	for(;;) {
 		var_00.numplayerschargingcircle = 0;
 		var_00.playerschargingcircle = [];
-		if(isdefined(var_00.activecircle))
-		{
+		if(isdefined(var_00.activecircle)) {
 			var_02 = var_00.activecircle;
-			if(var_02.state == "CHARGING")
-			{
-				foreach(var_04 in level.players)
-				{
-					if(canchargecircle(var_04,var_02))
-					{
+			if(var_02.state == "CHARGING") {
+				foreach(var_04 in level.players) {
+					if(canchargecircle(var_04,var_02)) {
 						var_00.numplayerschargingcircle = var_00.numplayerschargingcircle + 1;
 						var_00.playerschargingcircle[var_00.playerschargingcircle.size] = var_04;
 						var_05 = var_01.var_3CCC * level.players.size * pow(0.9,level.players.size);
 						var_06 = 1 / var_05;
 						var_07 = var_06 * 50;
 						var_02.var_3CB7 = min(var_02.var_3CB7 + var_07,1);
-						if(level.players.size > 2)
-						{
+						if(level.players.size > 2) {
 							var_02.buffer = var_01.buffer_time_coop;
 						}
 						else
@@ -854,50 +704,40 @@ perframeupdate()
 				}
 
 				var_02.buffer = max(var_02.buffer - 50,0);
-				if(var_02.buffer == 0)
-				{
+				if(var_02.buffer == 0) {
 					var_09 = var_01.decharge_rate * 50;
 					var_02.var_3CB7 = max(var_02.var_3CB7 - var_09,0);
-					if(var_02.var_3CB7 == 0)
-					{
-						if(isdefined(var_02.talisman))
-						{
+					if(var_02.var_3CB7 == 0) {
+						if(isdefined(var_02.talisman)) {
 							var_02.talisman delete();
 							var_02.talisman = undefined;
 						}
 
-						foreach(var_0B in var_00.circles)
-						{
-							if(var_0B.state != "ACTIVE")
-							{
+						foreach(var_0B in var_00.circles) {
+							if(var_0B.state != "ACTIVE") {
 								var_0B.state = "DORMANT";
 								scripts\cp\cp_interaction::add_to_current_interaction_list(var_0B.interaction);
 							}
 						}
 
-						foreach(var_04 in level.players)
-						{
+						foreach(var_04 in level.players) {
 							var_04 scripts\cp\cp_interaction::refresh_interaction();
 						}
 					}
 				}
 			}
 
-			if(var_02.state == "CHARGING" && var_02.var_D8B2 != "CHARGING")
-			{
+			if(var_02.state == "CHARGING" && var_02.var_D8B2 != "CHARGING") {
 				var_02.model setscriptablepartstate("symbol","on");
 			}
-			else if(var_02.state == "DORMANT" && var_02.var_D8B2 != "DORMANT")
-			{
+			else if(var_02.state == "DORMANT" && var_02.var_D8B2 != "DORMANT") {
 				var_02.model setscriptablepartstate("symbol","off");
 			}
-			else if(var_02.state == "ACTIVE" && var_02.var_D8B2 != "ACTIVE")
-			{
+			else if(var_02.state == "ACTIVE" && var_02.var_D8B2 != "ACTIVE") {
 				var_02.model setscriptablepartstate("symbol","active");
 			}
 
-			if(var_02.state == "CHARGING")
-			{
+			if(var_02.state == "CHARGING") {
 				var_0F = int(floor(var_02.var_3CB7 * 10));
 			}
 			else
@@ -905,8 +745,7 @@ perframeupdate()
 				var_0F = int(ceil(var_0F.var_3CB7 * 10));
 			}
 
-			if(var_02.state == "CHARGING")
-			{
+			if(var_02.state == "CHARGING") {
 				var_10 = int(floor(var_02.previouscharge * 10));
 			}
 			else
@@ -914,11 +753,9 @@ perframeupdate()
 				var_10 = int(ceil(var_0F.previouscharge * 10));
 			}
 
-			if(var_0F != var_10)
-			{
+			if(var_0F != var_10) {
 				var_02.model setscriptablepartstate("meter","" + var_0F);
-				if(var_0F > var_10)
-				{
+				if(var_0F > var_10) {
 					playsoundatpos(var_02.model.origin + (0,0,20),"cp_final_talisman_count_up");
 				}
 				else
@@ -927,10 +764,8 @@ perframeupdate()
 				}
 			}
 
-			if(var_02.state == "CHARGING")
-			{
-				if(var_02.var_3CB7 == 1)
-				{
+			if(var_02.state == "CHARGING") {
+				if(var_02.var_3CB7 == 1) {
 					var_02.var_3CB7 = 1;
 					var_02.state = "ACTIVE";
 					releasesouls(var_02);
@@ -947,9 +782,7 @@ perframeupdate()
 	}
 }
 
-//Function Number: 39
-manageactivecircle()
-{
+manageactivecircle() {
 	var_00 = level.fbd;
 	var_01 = getbosstunedata();
 	var_00.boss endon(var_01.section_complete_notify);
@@ -957,29 +790,24 @@ manageactivecircle()
 	var_03 = gettime();
 	var_04 = var_00.activecircle.origin;
 	var_05 = (0,0,0);
-	for(;;)
-	{
+	for(;;) {
 		var_06 = gettime();
 		var_00.activecircle.var_3CB7 = 1 - var_06 - var_02 / var_01.active_time;
-		if(var_06 > var_02 + var_01.active_time)
-		{
+		if(var_06 > var_02 + var_01.active_time) {
 			var_00.summonsouls = 0;
 			thread attempttofailstage();
 			break;
 		}
 
-		if(var_00.summonsouls && var_06 > var_03 + var_01.soul_respawn_time)
-		{
-			if(var_00.numsoulsalive < var_01.num_souls_released)
-			{
+		if(var_00.summonsouls && var_06 > var_03 + var_01.soul_respawn_time) {
+			if(var_00.numsoulsalive < var_01.num_souls_released) {
 				thread spawnsoul(var_00.activecircle);
 			}
 
 			var_03 = var_06;
 		}
 
-		if(!var_00.summonsouls && var_00.numsoulsalive == 0)
-		{
+		if(!var_00.summonsouls && var_00.numsoulsalive == 0) {
 			break;
 		}
 
@@ -987,15 +815,12 @@ manageactivecircle()
 	}
 }
 
-//Function Number: 40
-attempttofailstage()
-{
+attempttofailstage() {
 	var_00 = level.fbd;
 	var_00.boss endon(getbosstunedata().section_complete_notify);
 	clearsouls();
 	wait(2);
-	if(!var_00.boss.vulnerable)
-	{
+	if(!var_00.boss.vulnerable) {
 		deactivatecircle();
 		var_00.boss.soulhealth = 999;
 		wait(2);
@@ -1010,22 +835,15 @@ attempttofailstage()
 	var_00.boss scripts\aitypes\dlc4_boss\behaviors::resetsoulhealth();
 }
 
-//Function Number: 41
-invulresetsoulhealth()
-{
-}
+invulresetsoulhealth() {}
 
-//Function Number: 42
-activatecircle(param_00,param_01)
-{
+activatecircle(param_00,param_01) {
 	var_02 = level.fbd;
-	if(!isdefined(level.fbd.circlesactivated))
-	{
+	if(!isdefined(level.fbd.circlesactivated)) {
 		level.fbd.circlesactivated = 0;
 	}
 
-	if(var_02.bossstate == "FRENZIED" && param_00.circle.state == "ACTIVE")
-	{
+	if(var_02.bossstate == "FRENZIED" && param_00.circle.state == "ACTIVE") {
 		level.fbd.circlesactivated = level.fbd.circlesactivated + 1;
 		scripts\cp\cp_interaction::remove_from_current_interaction_list(param_00);
 		var_03 = param_00.circle;
@@ -1034,12 +852,9 @@ activatecircle(param_00,param_01)
 		var_03.talisman setscriptablepartstate("effects","circle_complete");
 		playsoundatpos(var_03.talisman.origin + (0,0,30),"cp_final_frenzy_activate_talisman");
 	}
-	else if(var_02.bossstate == "MAIN" && param_00.circle.state == "DORMANT")
-	{
-		foreach(var_03 in var_02.circles)
-		{
-			if(var_03.state != "ACTIVE")
-			{
+	else if(var_02.bossstate == "MAIN" && param_00.circle.state == "DORMANT") {
+		foreach(var_03 in var_02.circles) {
+			if(var_03.state != "ACTIVE") {
 				var_03.var_3CB7 = 0;
 				var_03.state = "LOCKED";
 				playsoundatpos(var_03.interaction.origin + (0,0,20),"cp_final_talisman_place_on_sign");
@@ -1054,72 +869,57 @@ activatecircle(param_00,param_01)
 		var_02.activecircle = param_00.circle;
 	}
 
-	foreach(param_01 in level.players)
-	{
+	foreach(param_01 in level.players) {
 		param_01 scripts\cp\cp_interaction::refresh_interaction();
 	}
 }
 
-//Function Number: 43
-deactivatecircle()
-{
+deactivatecircle() {
 	var_00 = level.fbd;
 	var_00.activecircle.var_3CB7 = 0;
 	var_00.activecircle.state = "DORMANT";
 	var_00.activecircle.model setscriptablepartstate("symbol","off");
 	var_00.activecircle.model setscriptablepartstate("meter","0");
-	if(isdefined(var_00.activecircle.talisman))
-	{
+	if(isdefined(var_00.activecircle.talisman)) {
 		var_00.activecircle.talisman delete();
 		var_00.activecircle.talisman = undefined;
 	}
 
-	if(!isdefined(var_00.boss.doinggroundvul) || !var_00.boss.doinggroundvul)
-	{
+	if(!isdefined(var_00.boss.doinggroundvul) || !var_00.boss.doinggroundvul) {
 		var_00.boss setscriptablepartstate("circle_" + var_00.activecircle.index,"off");
 	}
 
-	foreach(var_02 in var_00.circles)
-	{
-		if(var_02.state != "ACTIVE")
-		{
+	foreach(var_02 in var_00.circles) {
+		if(var_02.state != "ACTIVE") {
 			scripts\cp\cp_interaction::add_to_current_interaction_list(var_02.interaction);
 			var_02.state = "DORMANT";
 		}
 	}
 
 	var_00.activecircle.weakspot.health = var_00.activecircle.weakspot.maxhealth;
-	foreach(var_05 in level.players)
-	{
+	foreach(var_05 in level.players) {
 		var_05 scripts\cp\cp_interaction::refresh_interaction();
 	}
 }
 
-//Function Number: 44
-canchargecircle(param_00,param_01)
-{
-	if(param_01.state != "CHARGING")
-	{
+canchargecircle(param_00,param_01) {
+	if(param_01.state != "CHARGING") {
 		return 0;
 	}
 
-	if(!param_00 scripts\cp\utility::is_valid_player())
-	{
+	if(!param_00 scripts\cp\utility::is_valid_player()) {
 		return 0;
 	}
 
 	var_02 = distance2dsquared(param_00.origin,param_01.origin);
-	if(var_02 > param_01.fgetarg * param_01.fgetarg)
-	{
+	if(var_02 > param_01.fgetarg * param_01.fgetarg) {
 		return 0;
 	}
 
 	return 1;
 }
 
-//Function Number: 45
-spawnsoul(param_00)
-{
+spawnsoul(param_00) {
 	var_01 = param_00.origin;
 	var_02 = (0,0,0);
 	var_03 = level.fbd;
@@ -1133,9 +933,7 @@ spawnsoul(param_00)
 	thread souldeathmonitor(var_05);
 }
 
-//Function Number: 46
-releasesouls(param_00)
-{
+releasesouls(param_00) {
 	var_01 = level.fbd;
 	var_02 = getbosstunedata();
 	var_01.summonsouls = 0;
@@ -1143,8 +941,7 @@ releasesouls(param_00)
 	var_03 = param_00.origin;
 	var_04 = (0,0,0);
 	wait(0.75);
-	for(var_05 = 0;var_05 < var_02.num_souls_released;var_05++)
-	{
+	for(var_05 = 0;var_05 < var_02.num_souls_released;var_05++) {
 		spawnsoul(var_01.activecircle);
 		wait(0.25);
 	}
@@ -1152,19 +949,15 @@ releasesouls(param_00)
 	var_01.summonsouls = 1;
 }
 
-//Function Number: 47
-soulprojectilemonitor(param_00,param_01)
-{
+soulprojectilemonitor(param_00,param_01) {
 	var_02 = level.fbd;
 	var_03 = getbosstunedata();
 	var_02.boss endon("death");
 	param_00 endon("death");
 	var_04 = gettime();
-	for(;;)
-	{
+	for(;;) {
 		var_05 = param_00 gettagorigin("j_spine4");
-		if(gettime() - var_04 > var_03.soul_lifetime)
-		{
+		if(gettime() - var_04 > var_03.soul_lifetime) {
 			var_06 = param_00 gettagorigin("j_spine4");
 			playfx(level._effect["flying_soul_hit_fail"],var_06,anglestoforward(param_00.angles),anglestoup(param_00.angles));
 			scripts/aitypes/zombie_ghost/behaviors::fake_ghost_explode(param_00,param_01,var_03.soul_explosion_radius);
@@ -1172,10 +965,8 @@ soulprojectilemonitor(param_00,param_01)
 
 		var_07 = var_02.boss gettagorigin("j_mainroot");
 		var_08 = distancesquared(var_05,var_07);
-		if(var_08 < var_02.soultobossmindistsqr)
-		{
-			if(!isdefined(level.soul_vo_played))
-			{
+		if(var_08 < var_02.soultobossmindistsqr) {
+			if(!isdefined(level.soul_vo_played)) {
 				level.soul_vo_played = 1;
 				level thread play_meph_vo(param_01,"meph_damage_souls",1);
 			}
@@ -1193,14 +984,10 @@ soulprojectilemonitor(param_00,param_01)
 	}
 }
 
-//Function Number: 48
-play_meph_vo(param_00,param_01,param_02)
-{
+play_meph_vo(param_00,param_01,param_02) {
 	wait(param_02);
-	foreach(var_04 in level.players)
-	{
-		if(var_04 == param_00)
-		{
+	foreach(var_04 in level.players) {
+		if(var_04 == param_00) {
 			param_00 playlocalsound(param_00.vo_prefix + "plr_" + param_01);
 			continue;
 		}
@@ -1209,33 +996,24 @@ play_meph_vo(param_00,param_01,param_02)
 	}
 }
 
-//Function Number: 49
-souldeathmonitor(param_00)
-{
+souldeathmonitor(param_00) {
 	level.fbd.boss endon("death");
 	param_00 waittill("death");
 	level.fbd.numsoulsalive = level.fbd.numsoulsalive - 1;
 }
 
-//Function Number: 50
-soulprojectiledeathmonitor(param_00)
-{
+soulprojectiledeathmonitor(param_00) {
 	var_01 = level.fbd;
 	var_01.boss endon("death");
 	param_00 waittill("death");
 	var_01.numsoulsactive = var_01.numsoulsactive - 1;
 }
 
-//Function Number: 51
-clearsouls()
-{
+clearsouls() {
 	var_00 = level.fbd;
-	foreach(var_02 in var_00.souls)
-	{
-		if(isalive(var_02))
-		{
-			if(scripts\engine\utility::istrue(var_02.is_entangled) && isdefined(var_02.player_entangled_by))
-			{
+	foreach(var_02 in var_00.souls) {
+		if(isalive(var_02)) {
+			if(scripts\engine\utility::istrue(var_02.is_entangled) && isdefined(var_02.player_entangled_by)) {
 				var_02.player_entangled_by.ghost_in_entanglement = undefined;
 			}
 
@@ -1248,32 +1026,25 @@ clearsouls()
 	level notify("CLEAR_SOULS");
 }
 
-//Function Number: 52
-setupfornextwave()
-{
+setupfornextwave() {
 	var_00 = level.fbd;
 	var_01 = getbosstunedata();
-	foreach(var_03 in var_00.circles)
-	{
-		if(var_03.state != "ACTIVE")
-		{
+	foreach(var_03 in var_00.circles) {
+		if(var_03.state != "ACTIVE") {
 			var_03.state = "DORMANT";
 			var_03.var_3CB7 = 0;
 			scripts\cp\cp_interaction::add_to_current_interaction_list(var_03.interaction);
 		}
 	}
 
-	foreach(var_06 in level.players)
-	{
+	foreach(var_06 in level.players) {
 		var_06 scripts\cp\cp_interaction::refresh_interaction();
 	}
 
 	scripts\aitypes\dlc4_boss\behaviors::updateweights();
 }
 
-//Function Number: 53
-giveentangler(param_00)
-{
+giveentangler(param_00) {
 	var_01 = getbosstunedata();
 	param_00 thread entanglerhitmonitor(param_00);
 	param_00 thread entanglerrechargemonitor(param_00);
@@ -1282,25 +1053,19 @@ giveentangler(param_00)
 	scripts\cp\utility::set_crafted_inventory_item("crafted_entangler",::scripts\cp\crafted_entangler::give_crafted_entangler,param_00);
 }
 
-//Function Number: 54
-entanglerhitmonitor(param_00)
-{
+entanglerhitmonitor(param_00) {
 	var_01 = getbosstunedata();
 	level endon("game_ended");
 	param_00 endon("disconnect");
 	param_00 endon(var_01.entangler_stop_notify);
-	for(;;)
-	{
+	for(;;) {
 		var_02 = 0;
-		for(;;)
-		{
+		for(;;) {
 			var_03 = param_00 scripts\engine\utility::waittill_any_timeout_no_endon_death_2(var_01.entangler_track_update_frequency,var_01.entangler_hit_same_target_notify);
-			if(var_03 == var_01.entangler_hit_same_target_notify)
-			{
+			if(var_03 == var_01.entangler_hit_same_target_notify) {
 				var_02 = var_02 + var_01.entangler_track_update_frequency;
 				var_04 = min(var_02 / var_01.entangler_track_time,1);
-				if(var_04 == 1 && isalive(param_00.current_entangler_target) && !scripts/aitypes/zombie_ghost/behaviors::isentangled(param_00.current_entangler_target) && !isdefined(param_00.ghost_in_entanglement))
-				{
+				if(var_04 == 1 && isalive(param_00.current_entangler_target) && !scripts/aitypes/zombie_ghost/behaviors::isentangled(param_00.current_entangler_target) && !isdefined(param_00.ghost_in_entanglement)) {
 					param_00.current_entangler_target scripts/aitypes/zombie_ghost/behaviors::entangleghost(param_00.current_entangler_target,param_00);
 				}
 
@@ -1312,23 +1077,18 @@ entanglerhitmonitor(param_00)
 	}
 }
 
-//Function Number: 55
-entanglerrechargemonitor(param_00)
-{
+entanglerrechargemonitor(param_00) {
 	var_01 = getbosstunedata();
 	level endon("game_ended");
 	param_00 endon("disconnect");
 	param_00 endon(var_01.entangler_stop_notify);
-	for(;;)
-	{
+	for(;;) {
 		wait(var_01.entangler_recharge_rate);
 		param_00 setweaponammoclip(var_01.entangler_weapon_name,weaponclipsize(var_01.entangler_weapon_name));
 	}
 }
 
-//Function Number: 56
-registerweakspots()
-{
+registerweakspots() {
 	var_00 = level.fbd;
 	var_00.weakspots = [];
 	registerweakspot("j_shoulder_ri",(0,0,-12),(0,0,-10),(-10,180,180),var_00.circles[0]);
@@ -1338,9 +1098,7 @@ registerweakspots()
 	registerweakspot("j_chest",(34,-17,19),(34,-17,19),(80,0,53),var_00.circles[4]);
 }
 
-//Function Number: 57
-registerweakspot(param_00,param_01,param_02,param_03,param_04)
-{
+registerweakspot(param_00,param_01,param_02,param_03,param_04) {
 	var_05 = level.fbd;
 	var_06 = spawnstruct();
 	var_06.var_332 = param_00;
@@ -1353,11 +1111,8 @@ registerweakspot(param_00,param_01,param_02,param_03,param_04)
 	var_05.weakspots[var_05.weakspots.size] = var_06;
 }
 
-//Function Number: 58
-setupweakspot(param_00)
-{
-	if(!isdefined(param_00))
-	{
+setupweakspot(param_00) {
+	if(!isdefined(param_00)) {
 		return;
 	}
 
@@ -1376,49 +1131,39 @@ setupweakspot(param_00)
 	level thread play_meph_vo(level.dlc4_boss scripts\cp\utility::get_closest_living_player(),"meph_damage_weak",5);
 }
 
-//Function Number: 59
-cleanupweakspot(param_00)
-{
+cleanupweakspot(param_00) {
 	var_01 = level.fbd;
-	if(!isdefined(param_00))
-	{
+	if(!isdefined(param_00)) {
 		return;
 	}
 
 	var_02 = getbosstunedata().min_health_percent * param_00.weakspot.maxhealth;
 	param_00.weakspot.health = int(max(param_00.weakspot.model.health,var_02));
-	if(isdefined(param_00.weakspot.model))
-	{
+	if(isdefined(param_00.weakspot.model)) {
 		param_00.weakspot.model delete();
 	}
 
-	if(isdefined(param_00.weakspot.vfxent))
-	{
+	if(isdefined(param_00.weakspot.vfxent)) {
 		var_03 = param_00.weakspot.vfxent;
 		param_00.weakspot.vfxent delete();
 	}
 }
 
-//Function Number: 60
-weakspotmonitor(param_00)
-{
+weakspotmonitor(param_00) {
 	var_01 = level.fbd;
 	var_02 = getbosstunedata();
 	var_03 = param_00.weakspot;
 	var_03 endon("death");
 	var_03.model setcandamage(1);
-	for(;;)
-	{
+	for(;;) {
 		var_03.model waittill("damage",var_04,var_05,var_06,var_07);
-		if(!isdefined(var_05) || var_05 == var_01.boss || !isplayer(var_05))
-		{
+		if(!isdefined(var_05) || var_05 == var_01.boss || !isplayer(var_05)) {
 			continue;
 		}
 
 		var_08 = var_06 * -1;
 		playfx(level._effect["weak_spot_hit"],var_07,var_08);
-		if(var_03.model.health <= 0 && !var_01.sectioncomplete)
-		{
+		if(var_03.model.health <= 0 && !var_01.sectioncomplete) {
 			clearsouls();
 			param_00.var_3CB7 = 1;
 			param_00.model setscriptablepartstate("symbol","complete");
@@ -1427,8 +1172,7 @@ weakspotmonitor(param_00)
 			var_01.boss._blackboard.desirednode = 0;
 			self.automaticspawn = 0;
 			var_09 = var_01.boss.unlockedactions.size;
-			if(var_09 == 4)
-			{
+			if(var_09 == 4) {
 				var_01.bossstate = "FRENZIED";
 				var_01.boss.showblood = 1;
 				level notify("restart_ammo_timer");
@@ -1450,9 +1194,7 @@ weakspotmonitor(param_00)
 	}
 }
 
-//Function Number: 61
-blinkweakspots()
-{
+blinkweakspots() {
 	self endon("last_stand");
 	self endon("death");
 	var_00 = getbosstunedata();
@@ -1460,16 +1202,12 @@ blinkweakspots()
 	var_02 = ["completed","off","on","active"];
 	var_03 = [0,0,0,0,0];
 	wait(1);
-	for(;;)
-	{
-		foreach(var_05 in var_01.circles)
-		{
-			if(var_05.blinkable && randomfloat(1) < var_00.frenzied_blink_chance)
-			{
+	for(;;) {
+		foreach(var_05 in var_01.circles) {
+			if(var_05.blinkable && randomfloat(1) < var_00.frenzied_blink_chance) {
 				var_06 = var_03[var_05.index] + randomint(var_02.size - 1) + 1 % var_02.size;
 				var_01.boss setscriptablepartstate("circle_" + var_05.index,var_02[var_06]);
-				if(var_02[var_06] != "completed")
-				{
+				if(var_02[var_06] != "completed") {
 					var_05.model setscriptablepartstate("symbol",var_02[var_06]);
 				}
 				else
@@ -1486,9 +1224,7 @@ blinkweakspots()
 	}
 }
 
-//Function Number: 62
-gointolaststand()
-{
+gointolaststand() {
 	var_00 = level.fbd;
 	var_01 = getbosstunedata();
 	self.cantakedamage = 0;
@@ -1502,18 +1238,14 @@ gointolaststand()
 	self._blackboard.painnotifytime = 100;
 }
 
-//Function Number: 63
-frenzyprogressmonitor()
-{
+frenzyprogressmonitor() {
 	var_00 = level.fbd;
 	var_00.boss endon("death");
 	var_01 = getbosstunedata();
 	var_02 = var_01.frenzied_health;
-	for(var_03 = 0;var_03 < 5;var_03++)
-	{
+	for(var_03 = 0;var_03 < 5;var_03++) {
 		var_04 = int(1 * 4 - var_03 / 5 * var_02);
-		while(var_00.boss.frenziedhealth > var_04)
-		{
+		while(var_00.boss.frenziedhealth > var_04) {
 			wait(0.2);
 		}
 
@@ -1530,8 +1262,7 @@ frenzyprogressmonitor()
 	}
 
 	wait(2);
-	foreach(var_05 in var_00.circles)
-	{
+	foreach(var_05 in var_00.circles) {
 		var_05.talisman setscriptablepartstate("effects","charge_complete_pulsing");
 		var_05.model setscriptablepartstate("symbol","on");
 		var_05.model setscriptablepartstate("meter","10");
@@ -1540,29 +1271,24 @@ frenzyprogressmonitor()
 	}
 
 	var_00.circlesactivated = 0;
-	while(var_00.circlesactivated < 5)
-	{
+	while(var_00.circlesactivated < 5) {
 		wait(0.1);
 	}
 
 	var_09 = spawn("script_origin",var_00.boss.arenacenter + (0,0,300));
 	wait(0.5);
-	foreach(var_05 in var_00.circles)
-	{
+	foreach(var_05 in var_00.circles) {
 		playfx(level._effect["talisman_flash"],var_05.talisman.origin);
 	}
 
 	level notify("STOP_FRENZY_SPAWN");
 	level notify("STOP_FRENZY_ARMAGEDDON");
-	foreach(var_0D in level.agentarray)
-	{
-		if(var_0D == level.dlc4_boss)
-		{
+	foreach(var_0D in level.agentarray) {
+		if(var_0D == level.dlc4_boss) {
 			continue;
 		}
 
-		if(isalive(var_0D) && isdefined(var_0D.isactive) && var_0D.isactive)
-		{
+		if(isalive(var_0D) && isdefined(var_0D.isactive) && var_0D.isactive) {
 			var_0D.nodamagescale = 1;
 			var_0D dodamage(var_0D.health + 1000,var_00.boss.arenacenter);
 		}
@@ -1570,8 +1296,7 @@ frenzyprogressmonitor()
 
 	var_09 playsound("cp_final_frenzy_laser_build_up");
 	wait(3);
-	foreach(var_05 in var_00.circles)
-	{
+	foreach(var_05 in var_00.circles) {
 		var_10 = self.origin + (0,0,250) - var_05.talisman.origin;
 		var_05.talisman rotateto(vectortoangles(var_10),0.25,0.08,0.08);
 	}
@@ -1580,8 +1305,7 @@ frenzyprogressmonitor()
 	level notify("KILL_TALISMAN_MOVEMENT");
 	playsoundatpos(var_00.boss.arenacenter + (0,0,300),"cp_final_frenzy_laser_beam_fire_npc_start");
 	var_09 playloopsound("cp_final_frenzy_laser_beam_fire_npc_loop");
-	foreach(var_05 in var_00.circles)
-	{
+	foreach(var_05 in var_00.circles) {
 		var_05.talisman thread activatetalismanbeam();
 	}
 
@@ -1589,8 +1313,7 @@ frenzyprogressmonitor()
 	wait(2.5);
 	playsoundatpos(var_09.origin,"cp_final_frenzy_laser_beam_fire_npc_end");
 	var_09 delete();
-	foreach(var_05 in var_00.circles)
-	{
+	foreach(var_05 in var_00.circles) {
 		playfx(level._effect["flying_soul_death"],var_05.talisman.origin);
 		var_00.boss setscriptablepartstate("circle_" + var_05.index,"destroyed");
 		var_05.talisman delete();
@@ -1599,17 +1322,14 @@ frenzyprogressmonitor()
 	}
 }
 
-//Function Number: 64
-talismanmovementmonitor(param_00)
-{
+talismanmovementmonitor(param_00) {
 	level.fbd.boss endon("death");
 	level endon("KILL_TALISMAN_MOVEMENT");
 	var_01 = 1.5;
 	var_02 = 4;
 	var_03 = 3;
 	wait(1);
-	for(;;)
-	{
+	for(;;) {
 		param_00 movez(var_02,var_01,var_01 / var_03,var_01 / var_03);
 		wait(var_01);
 		param_00 movez(0 - var_02,var_01,var_01 / var_03,var_01 / var_03);
@@ -1617,17 +1337,13 @@ talismanmovementmonitor(param_00)
 	}
 }
 
-//Function Number: 65
-activatetalismanbeam()
-{
+activatetalismanbeam() {
 	function_02DF(level._effect["vfx_talisman_beam"],self,"tag_origin",level.fbd.boss,"j_spine4");
 	wait(0.5);
 	function_02DF(level._effect["vfx_talisman_beam"],self,"tag_origin",level.fbd.boss,"j_spine4");
 }
 
-//Function Number: 66
-victory()
-{
+victory() {
 	var_00 = level.fbd;
 	level.dlc4_boss stoploopsound();
 	thread killbomb();
@@ -1636,11 +1352,8 @@ victory()
 	level notify("FINAL_BOSS_VICTORY");
 }
 
-//Function Number: 67
-killbomb()
-{
-	if(isdefined(level.laststandfx))
-	{
+killbomb() {
+	if(isdefined(level.laststandfx)) {
 		level.laststandfx delete();
 	}
 
@@ -1648,10 +1361,8 @@ killbomb()
 	playsoundatpos(level.fbd.boss.arenacenter + (0,0,450),"cp_final_meph_final_soul_bomb_diffuse");
 	playfx(level._effect["soul_bomb_die"],level.fbd.boss.arenacenter + (0,0,450));
 	var_00 = scripts\mp\mp_agent::getaliveagentsofteam("axis");
-	foreach(var_02 in var_00)
-	{
-		if(var_02 == level.dlc4_boss)
-		{
+	foreach(var_02 in var_00) {
+		if(var_02 == level.dlc4_boss) {
 			continue;
 		}
 
@@ -1661,39 +1372,30 @@ killbomb()
 	level.meph_battle_over = 1;
 }
 
-//Function Number: 68
-getbosstunedata()
-{
+getbosstunedata() {
 	return level.agenttunedata["dlc4_boss"];
 }
 
-//Function Number: 69
-meph_consumable_check(param_00)
-{
-	if(param_00 == "secret_service" || param_00 == "anywhere_but_here")
-	{
+meph_consumable_check(param_00) {
+	if(param_00 == "secret_service" || param_00 == "anywhere_but_here") {
 		return 0;
 	}
 
-	if(isdefined(self.consumables) && isdefined(self.consumables[param_00]) && isdefined(self.consumables[param_00].on) && self.consumables[param_00].on == 1)
-	{
+	if(isdefined(self.consumables) && isdefined(self.consumables[param_00]) && isdefined(self.consumables[param_00].on) && self.consumables[param_00].on == 1) {
 		return 1;
 	}
 
 	return 0;
 }
 
-//Function Number: 70
-meph_intermission_func(param_00)
-{
+meph_intermission_func(param_00) {
 	self.forcespawnorigin = level.dlc4_boss.arenacenter + (-250,0,500);
 	self.forcespawnangles = (60,0,0);
 	var_01 = self.forcespawnangles;
 	scripts\cp\cp_globallogic::spawnplayer();
 	self setclientdvar("cg_everyoneHearsEveryone",1);
 	self setdepthoffield(0,128,512,4000,6,1.8);
-	if(level.console)
-	{
+	if(level.console) {
 		self setclientdvar("cg_fov","90");
 	}
 

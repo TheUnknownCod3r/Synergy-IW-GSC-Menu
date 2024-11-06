@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\cp\crafted_trap_mindcontrol.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 21
- * Decompile Time: 1039 ms
- * Timestamp: 10/27/2023 12:10:23 AM
-*******************************************************************/
+/***********************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\cp\crafted_trap_mindcontrol.gsc
+***********************************************************/
 
-//Function Number: 1
-init()
-{
+init() {
 	level.mindcontrol_trap_settings = [];
 	var_00 = spawnstruct();
 	var_00.var_39B = "zmb_robotprojectile_mp";
@@ -29,43 +23,34 @@ init()
 	level.mindcontrol_trap_settings["crafted_mindcontrol"] = var_00;
 }
 
-//Function Number: 2
-give_crafted_mindcontrol_trap(param_00,param_01)
-{
+give_crafted_mindcontrol_trap(param_00,param_01) {
 	param_01 thread watch_dpad();
 	param_01 notify("new_power","crafted_mindcontrol");
 	param_01 setclientomnvar("zom_crafted_weapon",15);
 	scripts\cp\utility::set_crafted_inventory_item("crafted_mindcontrol",::give_crafted_mindcontrol_trap,param_01);
 }
 
-//Function Number: 3
-watch_dpad()
-{
+watch_dpad() {
 	self endon("death");
 	self endon("disconnect");
 	self notify("craft_dpad_watcher");
 	self endon("craft_dpad_watcher");
 	self notifyonplayercommand("pullout_ims","+actionslot 3");
-	for(;;)
-	{
+	for(;;) {
 		self waittill("pullout_ims");
-		if(scripts\engine\utility::istrue(self.iscarrying))
-		{
+		if(scripts\engine\utility::istrue(self.iscarrying)) {
 			continue;
 		}
 
-		if(scripts\engine\utility::istrue(self.linked_to_coaster))
-		{
+		if(scripts\engine\utility::istrue(self.linked_to_coaster)) {
 			continue;
 		}
 
-		if(isdefined(self.allow_carry) && self.allow_carry == 0)
-		{
+		if(isdefined(self.allow_carry) && self.allow_carry == 0) {
 			continue;
 		}
 
-		if(scripts\cp\utility::is_valid_player())
-		{
+		if(scripts\cp\utility::is_valid_player()) {
 			break;
 		}
 	}
@@ -73,9 +58,7 @@ watch_dpad()
 	thread give_mindcontrol_trap("crafted_mindcontrol");
 }
 
-//Function Number: 4
-give_mindcontrol_trap(param_00)
-{
+give_mindcontrol_trap(param_00) {
 	self endon("disconnect");
 	scripts\cp\utility::clearlowermessage("msg_power_hint");
 	var_01 = create_mindcontrol_trap_for_player(param_00,self);
@@ -89,57 +72,46 @@ give_mindcontrol_trap(param_00)
 	return var_02;
 }
 
-//Function Number: 5
-set_carrying_mindcontrol(param_00,param_01,param_02)
-{
+set_carrying_mindcontrol(param_00,param_01,param_02) {
 	self endon("disconnect");
 	param_00 thread mindcontrol_trap_setcarried(self);
 	scripts\engine\utility::allow_weapon(0);
 	self notifyonplayercommand("place_ims","+attack");
 	self notifyonplayercommand("place_ims","+attack_akimbo_accessible");
 	self notifyonplayercommand("cancel_ims","+actionslot 3");
-	if(!level.console)
-	{
+	if(!level.console) {
 		self notifyonplayercommand("cancel_ims","+actionslot 5");
 		self notifyonplayercommand("cancel_ims","+actionslot 6");
 		self notifyonplayercommand("cancel_ims","+actionslot 7");
 	}
 
-	for(;;)
-	{
+	for(;;) {
 		var_03 = scripts\engine\utility::waittill_any_return("place_ims","cancel_ims","force_cancel_placement","player_action_slot_restart");
-		if(!isdefined(var_03))
-		{
+		if(!isdefined(var_03)) {
 			var_03 = "force_cancel_placement";
 		}
 
-		if(var_03 == "cancel_ims" || var_03 == "force_cancel_placement" || var_03 == "player_action_slot_restart")
-		{
-			if(!param_01 && var_03 == "cancel_ims")
-			{
+		if(var_03 == "cancel_ims" || var_03 == "force_cancel_placement" || var_03 == "player_action_slot_restart") {
+			if(!param_01 && var_03 == "cancel_ims") {
 				continue;
 			}
 
 			param_00 mindcontrol_trap_setcancelled(var_03 == "force_cancel_placement" && !isdefined(param_00.firstplacement));
-			if(var_03 != "force_cancel_placement")
-			{
+			if(var_03 != "force_cancel_placement") {
 				thread watch_dpad();
 			}
-			else if(param_01)
-			{
+			else if(param_01) {
 				scripts\cp\utility::remove_crafted_item_from_inventory(self);
 			}
 
 			return 0;
 		}
 
-		if(!param_00.canbeplaced)
-		{
+		if(!param_00.canbeplaced) {
 			continue;
 		}
 
-		if(param_01)
-		{
+		if(param_01) {
 			scripts\cp\utility::remove_crafted_item_from_inventory(self);
 		}
 
@@ -150,11 +122,8 @@ set_carrying_mindcontrol(param_00,param_01,param_02)
 	}
 }
 
-//Function Number: 6
-create_mindcontrol_trap_for_player(param_00,param_01)
-{
-	if(isdefined(param_01.iscarrying) && param_01.iscarrying)
-	{
+create_mindcontrol_trap_for_player(param_00,param_01) {
+	if(isdefined(param_01.iscarrying) && param_01.iscarrying) {
 		return;
 	}
 
@@ -173,9 +142,7 @@ create_mindcontrol_trap_for_player(param_00,param_01)
 	return var_02;
 }
 
-//Function Number: 7
-create_mindcontrol_trap(param_00,param_01)
-{
+create_mindcontrol_trap(param_00,param_01) {
 	var_02 = param_00.triggerportableradarping;
 	var_03 = param_00.mindcontrol_trap_type;
 	var_04 = spawn("script_model",param_00.origin + (0,0,2));
@@ -191,8 +158,7 @@ create_mindcontrol_trap(param_00,param_01)
 	var_04.hidden = 0;
 	var_04.config = level.mindcontrol_trap_settings[var_03];
 	var_04 thread mindcontrol_trap_handleuse();
-	if(isdefined(param_01))
-	{
+	if(isdefined(param_01)) {
 		var_04 thread scripts\cp\utility::item_timeout(param_01);
 	}
 	else
@@ -203,26 +169,20 @@ create_mindcontrol_trap(param_00,param_01)
 	return var_04;
 }
 
-//Function Number: 8
-func_936D(param_00)
-{
+func_936D(param_00) {
 	self.var_933C = 1;
 	self notify("death");
 }
 
-//Function Number: 9
-func_9367(param_00)
-{
+func_9367(param_00) {
 	self endon("carried");
 	self waittill("death");
-	if(!isdefined(self))
-	{
+	if(!isdefined(self)) {
 		return;
 	}
 
 	mindcontrol_trap_setinactive();
-	if(isdefined(self.inuseby))
-	{
+	if(isdefined(self.inuseby)) {
 		self.inuseby scripts\cp\utility::restore_player_perk();
 		self notify("deleting");
 		wait(1);
@@ -232,9 +192,7 @@ func_9367(param_00)
 	self delete();
 }
 
-//Function Number: 10
-func_66A7()
-{
+func_66A7() {
 	self playsound("trap_boom_box_explode");
 	playfx(level._effect["violet_light_explode"],self.origin);
 	wait(0.1);
@@ -244,38 +202,30 @@ func_66A7()
 	physicsexplosionsphere(self.origin,256,256,2);
 }
 
-//Function Number: 11
-mindcontrol_trap_handleuse()
-{
+mindcontrol_trap_handleuse() {
 	self endon("death");
 	level endon("game_ended");
-	for(;;)
-	{
+	for(;;) {
 		self waittill("trigger",var_00);
-		if(!var_00 scripts\cp\utility::is_valid_player())
-		{
+		if(!var_00 scripts\cp\utility::is_valid_player()) {
 			continue;
 		}
 
-		if(scripts\engine\utility::istrue(var_00.iscarrying))
-		{
+		if(scripts\engine\utility::istrue(var_00.iscarrying)) {
 			continue;
 		}
 
-		if(scripts\engine\utility::istrue(var_00.kung_fu_mode))
-		{
+		if(scripts\engine\utility::istrue(var_00.kung_fu_mode)) {
 			continue;
 		}
 
 		var_01 = create_mindcontrol_trap_for_player(self.mindcontrol_trap_type,var_00);
-		if(!isdefined(var_01))
-		{
+		if(!isdefined(var_01)) {
 			continue;
 		}
 
 		mindcontrol_trap_setinactive();
-		if(isdefined(self getlinkedparent()))
-		{
+		if(isdefined(self getlinkedparent())) {
 			self unlink();
 		}
 
@@ -285,19 +235,15 @@ mindcontrol_trap_handleuse()
 	}
 }
 
-//Function Number: 12
-mindcontrol_trap_setplaced(param_00)
-{
+mindcontrol_trap_setplaced(param_00) {
 	self endon("death");
 	level endon("game_ended");
-	if(isdefined(self.carriedby))
-	{
+	if(isdefined(self.carriedby)) {
 		self.carriedby getrigindexfromarchetyperef();
 	}
 
 	self.carriedby = undefined;
-	if(isdefined(self.triggerportableradarping))
-	{
+	if(isdefined(self.triggerportableradarping)) {
 		self.triggerportableradarping.iscarrying = 0;
 	}
 
@@ -309,8 +255,7 @@ mindcontrol_trap_setplaced(param_00)
 	self notify("placed");
 	var_01 thread mindcontrol_trap_setactive();
 	var_02 = spawnstruct();
-	if(isdefined(self.moving_platform))
-	{
+	if(isdefined(self.moving_platform)) {
 		var_02.linkparent = self.moving_platform;
 	}
 
@@ -321,11 +266,8 @@ mindcontrol_trap_setplaced(param_00)
 	self delete();
 }
 
-//Function Number: 13
-mindcontrol_trap_setcancelled(param_00)
-{
-	if(isdefined(self.carriedby))
-	{
+mindcontrol_trap_setcancelled(param_00) {
+	if(isdefined(self.carriedby)) {
 		var_01 = self.carriedby;
 		var_01 getrigindexfromarchetyperef();
 		var_01.iscarrying = undefined;
@@ -333,8 +275,7 @@ mindcontrol_trap_setcancelled(param_00)
 		var_01 scripts\engine\utility::allow_weapon(1);
 	}
 
-	if(isdefined(param_00) && param_00)
-	{
+	if(isdefined(param_00) && param_00) {
 		func_66A7();
 	}
 
@@ -342,9 +283,7 @@ mindcontrol_trap_setcancelled(param_00)
 	self delete();
 }
 
-//Function Number: 14
-mindcontrol_trap_setcarried(param_00)
-{
+mindcontrol_trap_setcarried(param_00) {
 	self setsentrycarrier(param_00);
 	self setcontents(0);
 	self setcandamage(0);
@@ -354,17 +293,14 @@ mindcontrol_trap_setcarried(param_00)
 	thread scripts\cp\utility::item_oncarrierdeath(param_00);
 	thread func_936F(param_00);
 	thread func_9371(param_00);
-	if(isdefined(level.var_5CF2))
-	{
-		self thread [[ level.var_5CF2 ]](param_00);
+	if(isdefined(level.var_5CF2)) {
+		self thread [[level.var_5CF2]](param_00);
 	}
 
 	self notify("carried");
 }
 
-//Function Number: 15
-func_936F(param_00)
-{
+func_936F(param_00) {
 	self endon("placed");
 	self endon("death");
 	param_00 endon("last_stand");
@@ -372,9 +308,7 @@ func_936F(param_00)
 	mindcontrol_trap_setcancelled();
 }
 
-//Function Number: 16
-func_9371(param_00)
-{
+func_9371(param_00) {
 	self endon("placed");
 	self endon("death");
 	param_00 endon("last_stand");
@@ -382,9 +316,7 @@ func_9371(param_00)
 	mindcontrol_trap_setcancelled();
 }
 
-//Function Number: 17
-mindcontrol_trap_setactive()
-{
+mindcontrol_trap_setactive() {
 	self endon("death");
 	self setcursorhint("HINT_NOICON");
 	self sethintstring(level.mindcontrol_trap_settings[self.mindcontrol_trap_type].pow);
@@ -396,30 +328,25 @@ mindcontrol_trap_setactive()
 	self setuserange(96);
 	thread mindcontrol_trap_kill_zombies();
 	thread scripts\cp\utility::item_handleownerdisconnect("mindcontrol_disconnect");
-	if(!isdefined(var_00.next_trap_time))
-	{
+	if(!isdefined(var_00.next_trap_time)) {
 		var_00.next_trap_time = gettime();
 	}
 
 	wait(1);
-	if(isdefined(var_00))
-	{
-		if(gettime() >= var_00.next_trap_time)
-		{
+	if(isdefined(var_00)) {
+		if(gettime() >= var_00.next_trap_time) {
 			self setscriptablepartstate("mindcontrol","on");
 		}
 		else
 		{
-			while(gettime() <= var_00.next_trap_time)
-			{
+			while(gettime() <= var_00.next_trap_time) {
 				wait(0.05);
 			}
 
 			self setscriptablepartstate("mindcontrol","on");
 		}
 
-		if(isdefined(var_00))
-		{
+		if(isdefined(var_00)) {
 			var_00.next_trap_time = gettime() + 3000;
 			return;
 		}
@@ -430,49 +357,38 @@ mindcontrol_trap_setactive()
 	self notify("death");
 }
 
-//Function Number: 18
-mindcontrol_trap_setinactive()
-{
+mindcontrol_trap_setinactive() {
 	self makeunusable();
 	self stoploopsound();
 	self setscriptablepartstate("mindcontrol","off");
-	if(isdefined(self.dmg_trig))
-	{
+	if(isdefined(self.dmg_trig)) {
 		self.dmg_trig delete();
 	}
 
 	scripts\cp\utility::removefromtraplist();
 }
 
-//Function Number: 19
-mindcontrol_trap_kill_zombies()
-{
+mindcontrol_trap_kill_zombies() {
 	self endon("death");
 	self.dmg_trig = spawn("trigger_radius",self.origin,0,200,64);
-	for(;;)
-	{
+	for(;;) {
 		var_00 = 0;
 		self waittill("scriptableNotification");
 		var_01 = scripts\cp\cp_agent_utils::getaliveagentsofteam("axis");
-		foreach(var_03 in var_01)
-		{
-			if(!var_03 istouching(self.dmg_trig))
-			{
+		foreach(var_03 in var_01) {
+			if(!var_03 istouching(self.dmg_trig)) {
 				continue;
 			}
 
-			if(!scripts\cp\utility::should_be_affected_by_trap(var_03) || scripts\engine\utility::istrue(var_03.controlled) || scripts\engine\utility::istrue(var_03.about_to_dance) || scripts\engine\utility::istrue(var_03.is_dancing))
-			{
+			if(!scripts\cp\utility::should_be_affected_by_trap(var_03) || scripts\engine\utility::istrue(var_03.controlled) || scripts\engine\utility::istrue(var_03.about_to_dance) || scripts\engine\utility::istrue(var_03.is_dancing)) {
 				continue;
 			}
 
-			if(var_03.agent_type == "crab_mini" || var_03.agent_type == "crab_brute")
-			{
+			if(var_03.agent_type == "crab_mini" || var_03.agent_type == "crab_brute") {
 				continue;
 			}
 
-			if(var_00 >= 3)
-			{
+			if(var_00 >= 3) {
 				continue;
 			}
 
@@ -482,9 +398,7 @@ mindcontrol_trap_kill_zombies()
 	}
 }
 
-//Function Number: 20
-control_zombie(param_00)
-{
+control_zombie(param_00) {
 	self endon("death");
 	self.controlled = 1;
 	self.triggerportableradarping = param_00.triggerportableradarping;
@@ -513,29 +427,23 @@ control_zombie(param_00)
 	self setscriptablepartstate("eyes","yellow_eyes");
 }
 
-//Function Number: 21
-kill_intersecting_zombies(param_00)
-{
+kill_intersecting_zombies(param_00) {
 	self endon("death");
 	self endon("end_control");
 	var_01 = 576;
-	for(;;)
-	{
+	for(;;) {
 		var_02 = scripts\cp\cp_agent_utils::getaliveagentsofteam("axis");
-		if(var_02.size == 0)
-		{
+		if(var_02.size == 0) {
 			wait(0.05);
 			continue;
 		}
 
 		var_03 = scripts\engine\utility::getclosest(self.origin,var_02);
-		if(distancesquared(var_03.origin,self.origin) < var_01)
-		{
+		if(distancesquared(var_03.origin,self.origin) < var_01) {
 			var_03.full_gib = 1;
 			var_03.customdeath = 1;
 			var_03 dodamage(var_03.health + 100,var_03.origin,self,self,"MOD_MELEE","none");
-			if(isdefined(param_00.triggerportableradarping))
-			{
+			if(isdefined(param_00.triggerportableradarping)) {
 				param_00.triggerportableradarping scripts\cp\cp_merits::processmerit("mt_dlc3_crafted_kills");
 			}
 		}

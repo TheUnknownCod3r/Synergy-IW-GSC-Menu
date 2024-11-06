@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: 4308.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 1
- * Decompile Time: 61 ms
- * Timestamp: 10/27/2023 12:32:04 AM
-*******************************************************************/
+/****************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\4308.gsc
+****************************/
 
-//Function Number: 1
-main()
-{
+main() {
 	var_00 = scripts\engine\utility::createoneshoteffect("vfx_pipes_rising_steam");
 	var_00 scripts\common\createfx::set_origin_and_angles((-409.145,260.668,394.787),(0,249,0));
 	var_00.v["fxid"] = "vfx_pipes_rising_steam";

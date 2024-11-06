@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: 4301.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 1
- * Decompile Time: 35 ms
- * Timestamp: 10/27/2023 12:32:04 AM
-*******************************************************************/
+/****************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\4301.gsc
+****************************/
 
-//Function Number: 1
-main()
-{
+main() {
 	var_00 = scripts\engine\utility::createoneshoteffect("vfx_fallen_steam_vent_med");
 	var_00 scripts\common\createfx::set_origin_and_angles((1397.72,2467.37,993.534),(16.505,178.488,-101.896));
 	var_00.v["fxid"] = "vfx_fallen_steam_vent_med";

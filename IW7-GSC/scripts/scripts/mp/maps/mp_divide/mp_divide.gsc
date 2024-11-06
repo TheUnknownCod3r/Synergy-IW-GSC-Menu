@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\mp\maps\mp_divide\mp_divide.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 20
- * Decompile Time: 1077 ms
- * Timestamp: 10/27/2023 12:13:25 AM
-*******************************************************************/
+/***********************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\mp\maps\mp_divide\mp_divide.gsc
+***********************************************************/
 
-//Function Number: 1
-main()
-{
+main() {
 	lib_0F94::main();
 	scripts\mp\maps\mp_divide\gen\mp_divide_art::main();
 	lib_0F93::main();
@@ -37,9 +31,7 @@ main()
 	thread spawn_oob_trigger();
 }
 
-//Function Number: 2
-fix_collision()
-{
+fix_collision() {
 	var_00 = getent("clip256x256x128","targetname");
 	var_01 = spawn("script_model",(-1696,416,1204));
 	var_01.angles = (90,270,0);
@@ -91,9 +83,7 @@ fix_collision()
 	var_16 clonebrushmodeltoscriptmodel(var_15);
 }
 
-//Function Number: 3
-kill_triggers()
-{
+kill_triggers() {
 	var_00 = spawn("trigger_radius",(2588,732,438),0,256,128);
 	var_00.var_257 = 256;
 	var_00.height = 128;
@@ -104,24 +94,17 @@ kill_triggers()
 	var_01 thread kill_trigger_loop("script_vehicle");
 }
 
-//Function Number: 4
-kill_trigger_loop(param_00)
-{
-	for(;;)
-	{
+kill_trigger_loop(param_00) {
+	for(;;) {
 		self waittill("trigger",var_01);
-		if(isdefined(var_01) && isdefined(var_01.classname) && var_01.classname == param_00)
-		{
-			if(isdefined(var_01.var_110EA))
-			{
-				if(var_01.var_110EA == "minijackal")
-				{
+		if(isdefined(var_01) && isdefined(var_01.classname) && var_01.classname == param_00) {
+			if(isdefined(var_01.var_110EA)) {
+				if(var_01.var_110EA == "minijackal") {
 					var_01 notify("minijackal_end");
 					continue;
 				}
 
-				if(var_01.var_110EA == "venom")
-				{
+				if(var_01.var_110EA == "venom") {
 					var_01 notify("venom_end",var_01.origin);
 				}
 			}
@@ -129,17 +112,13 @@ kill_trigger_loop(param_00)
 	}
 }
 
-//Function Number: 5
-fix_umbra()
-{
+fix_umbra() {
 	var_00 = spawn("script_model",(-1880.5,575.5,762));
 	var_00 setmodel("building_stilt_support_leg_arm_cylinder_01_mp_divide_patch");
 	var_00.angles = (180,-45,90);
 }
 
-//Function Number: 6
-fix_broshot()
-{
+fix_broshot() {
 	var_00 = getent("character_loc_broshot_a","targetname");
 	var_01 = getent("character_loc_broshot_b","targetname");
 	var_02 = getent("character_loc_broshot_c","targetname");
@@ -154,16 +133,10 @@ fix_broshot()
 	var_03.origin = (var_04[0],var_04[1],510);
 }
 
-//Function Number: 7
-func_E838()
-{
-}
+func_E838() {}
 
-//Function Number: 8
-mpdividecollisionfunc(param_00)
-{
-	if(param_00.origin[2] - self.origin[2] > 30)
-	{
+mpdividecollisionfunc(param_00) {
+	if(param_00.origin[2] - self.origin[2] > 30) {
 		param_00 method_84DC((0,-40,10),200);
 		return;
 	}
@@ -171,19 +144,15 @@ mpdividecollisionfunc(param_00)
 	param_00 scripts\mp\_movers::func_BCDE();
 }
 
-//Function Number: 9
-func_1F87()
-{
+func_1F87() {
 	level endon("game_ended");
 	var_00 = getentarray("animObj_container","targetname");
 	var_01 = getentarray("animObj_barrier_entry","targetname");
 	var_02 = getentarray("animObj_barrier_exit","targetname");
 	var_03 = getentarray("door_interior_sliding","targetname");
 	var_04 = getentarray("door_exterior_raising","targetname");
-	foreach(var_06 in var_00)
-	{
-		if(var_06.classname == "script_brushmodel")
-		{
+	foreach(var_06 in var_00) {
+		if(var_06.classname == "script_brushmodel") {
 			var_06.var_12BEC = 10;
 			var_06.var_12BE8 = 1;
 			var_06.var_12BE7 = ::mpdividecollisionfunc;
@@ -198,8 +167,7 @@ func_1F87()
 	var_02 func_110C1();
 	var_08 = 10;
 	var_09 = 27;
-	for(;;)
-	{
+	for(;;) {
 		func_E268(var_00);
 		wait(0.1);
 		thread func_1F6C(var_00,var_08);
@@ -217,61 +185,43 @@ func_1F87()
 	}
 }
 
-//Function Number: 10
-func_110C1()
-{
-	foreach(var_01 in self)
-	{
+func_110C1() {
+	foreach(var_01 in self) {
 		var_01.var_10B89 = var_01.origin;
 	}
 }
 
-//Function Number: 11
-func_E268(param_00)
-{
-	foreach(var_02 in param_00)
-	{
+func_E268(param_00) {
+	foreach(var_02 in param_00) {
 		var_02 movez(-200,0.01);
 	}
 
 	wait(0.1);
-	foreach(var_02 in param_00)
-	{
+	foreach(var_02 in param_00) {
 		var_02 moveto((var_02.var_10B89[0],var_02.var_10B89[1],var_02.var_10B89[2]),0.01);
 	}
 }
 
-//Function Number: 12
-func_1F6C(param_00,param_01)
-{
-	foreach(var_03 in param_00)
-	{
+func_1F6C(param_00,param_01) {
+	foreach(var_03 in param_00) {
 		var_03 movex(363,param_01);
 	}
 }
 
-//Function Number: 13
-func_1F76(param_00,param_01)
-{
-	foreach(var_03 in param_00)
-	{
+func_1F76(param_00,param_01) {
+	foreach(var_03 in param_00) {
 		var_03 movey(144,1.5,0,0.5);
 	}
 
 	wait(param_01);
-	foreach(var_03 in param_00)
-	{
+	foreach(var_03 in param_00) {
 		var_03 movey(-144,2,0,0.5);
 	}
 }
 
-//Function Number: 14
-func_1F71(param_00)
-{
-	foreach(var_02 in param_00)
-	{
-		if(isdefined(var_02.script_noteworthy) && var_02.script_noteworthy == "barrier_top")
-		{
+func_1F71(param_00) {
+	foreach(var_02 in param_00) {
+		if(isdefined(var_02.script_noteworthy) && var_02.script_noteworthy == "barrier_top") {
 			var_02 movez(36,2,0.5,0.5);
 			continue;
 		}
@@ -280,10 +230,8 @@ func_1F71(param_00)
 	}
 
 	wait(5);
-	foreach(var_02 in param_00)
-	{
-		if(isdefined(var_02.script_noteworthy) && var_02.script_noteworthy == "barrier_top")
-		{
+	foreach(var_02 in param_00) {
+		if(isdefined(var_02.script_noteworthy) && var_02.script_noteworthy == "barrier_top") {
 			var_02 movez(-36,2,0.5,0.5);
 			continue;
 		}
@@ -292,61 +240,43 @@ func_1F71(param_00)
 	}
 }
 
-//Function Number: 15
-func_1F6D(param_00,param_01)
-{
-	foreach(var_03 in param_00)
-	{
+func_1F6D(param_00,param_01) {
+	foreach(var_03 in param_00) {
 		var_03 movey(1050,param_01);
 	}
 }
 
-//Function Number: 16
-func_1F72(param_00)
-{
-	foreach(var_02 in param_00)
-	{
+func_1F72(param_00) {
+	foreach(var_02 in param_00) {
 		var_02 movez(43,2,0.2,0.2);
 	}
 
 	wait(8);
-	foreach(var_02 in param_00)
-	{
+	foreach(var_02 in param_00) {
 		var_02 movez(-43,2,0.2,0.2);
 	}
 }
 
-//Function Number: 17
-func_1F73(param_00,param_01)
-{
+func_1F73(param_00,param_01) {
 	wait(5);
-	foreach(var_03 in param_00)
-	{
+	foreach(var_03 in param_00) {
 		var_03 movez(84,2.5,0,0.5);
 	}
 }
 
-//Function Number: 18
-func_1F6B(param_00)
-{
-	foreach(var_02 in param_00)
-	{
+func_1F6B(param_00) {
+	foreach(var_02 in param_00) {
 		var_02 movez(-84,3,0,0.5);
 	}
 }
 
-//Function Number: 19
-func_CDA4(param_00)
-{
+func_CDA4(param_00) {
 	wait(30);
 	function_030E(param_00);
 }
 
-//Function Number: 20
-spawn_oob_trigger()
-{
-	if(level.gametype == "sd" || level.gametype == "sr")
-	{
+spawn_oob_trigger() {
+	if(level.gametype == "sd" || level.gametype == "sr") {
 		var_00 = spawn("trigger_radius",(340,1120,280),0,250,300);
 		var_00 hide();
 		level.var_C7B3[level.var_C7B3.size] = var_00;

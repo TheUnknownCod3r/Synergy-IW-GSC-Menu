@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\mp\killstreaks\_jammer_drone.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 26
- * Decompile Time: 1317 ms
- * Timestamp: 10/27/2023 12:28:56 AM
-*******************************************************************/
+/************************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\mp\killstreaks\_jammer_drone.gsc
+************************************************************/
 
-//Function Number: 1
-init()
-{
+init() {
 	level.teamemped["allies"] = 0;
 	level.teamemped["axis"] = 0;
 	level.empplayer = undefined;
@@ -37,41 +31,32 @@ init()
 	func_F765();
 }
 
-//Function Number: 2
-func_F764()
-{
+func_F764() {
 	level.var_A433 = scripts\engine\utility::getstructarray("jammer_drone_start","targetname");
 }
 
-//Function Number: 3
-func_F765()
-{
+func_F765() {
 	level.var_A432 = scripts\engine\utility::getstructarray("jammer_drone_emp","script_noteworthy");
 }
 
-//Function Number: 4
-func_618B(param_00)
-{
+func_618B(param_00) {
 	var_01 = 1;
 	var_02 = func_7E37(self.origin);
 	var_03 = func_6CBF(var_02);
 	var_04 = vectortoangles(var_03.origin - var_02.origin);
-	if(!isdefined(level.var_A433) || !isdefined(var_02) || !isdefined(var_03))
-	{
+	if(!isdefined(level.var_A433) || !isdefined(var_02) || !isdefined(var_03)) {
 		scripts\mp\_hud_message::showerrormessage("KILLSTREAKS_UNAVAILABLE_IN_LEVEL");
 		return 0;
 	}
 
-	if(scripts\mp\_utility::currentactivevehiclecount() >= scripts\mp\_utility::maxvehiclesallowed() || level.fauxvehiclecount + var_01 >= scripts\mp\_utility::maxvehiclesallowed())
-	{
+	if(scripts\mp\_utility::currentactivevehiclecount() >= scripts\mp\_utility::maxvehiclesallowed() || level.fauxvehiclecount + var_01 >= scripts\mp\_utility::maxvehiclesallowed()) {
 		scripts\mp\_hud_message::showerrormessage("KILLSTREAKS_TOO_MANY_VEHICLES");
 		return 0;
 	}
 
 	scripts\mp\_utility::incrementfauxvehiclecount();
 	var_05 = func_49DE(self,var_02,var_03,var_04,"air_patrol",param_00.streakname,param_00.lifeid);
-	if(!isdefined(var_05))
-	{
+	if(!isdefined(var_05)) {
 		return 0;
 	}
 
@@ -79,16 +64,13 @@ func_618B(param_00)
 	return 1;
 }
 
-//Function Number: 5
-func_49DE(param_00,param_01,param_02,param_03,param_04,param_05,param_06)
-{
+func_49DE(param_00,param_01,param_02,param_03,param_04,param_05,param_06) {
 	var_07 = getent("airstrikeheight","targetname");
 	var_08 = param_02.origin;
 	var_09 = anglestoforward(param_03);
 	var_0A = param_01.origin;
 	var_0B = spawnhelicopter(param_00,var_0A,var_09,level.var_A434[param_04].vehicleinfo,level.var_A434[param_04].modelbase);
-	if(!isdefined(var_0B))
-	{
+	if(!isdefined(var_0B)) {
 		return;
 	}
 
@@ -128,51 +110,42 @@ func_49DE(param_00,param_01,param_02,param_03,param_04,param_05,param_06)
 	return var_0B;
 }
 
-//Function Number: 6
-func_376F(param_00)
-{
+func_376F(param_00) {
 	self endon("disconnect");
 	level endon("game_ended");
 	param_00 endon("death");
 	var_01 = 1;
 	var_02 = undefined;
 	thread scripts\mp\_utility::teamplayercardsplash("used_jammer",self);
-	for(;;)
-	{
-		if(param_00.var_A435 && !isdefined(var_02))
-		{
+	for(;;) {
+		if(param_00.var_A435 && !isdefined(var_02)) {
 			playfxontag(scripts\engine\utility::getfx("jammer_drone_pulse"),param_00,"tag_origin");
 			var_02 = 1;
 		}
-		else if(!param_00.var_A435 && isdefined(var_02))
-		{
+		else if(!param_00.var_A435 && isdefined(var_02)) {
 			stopfxontag(scripts\engine\utility::getfx("jammer_drone_pulse"),param_00,"tag_origin");
 			var_02 = undefined;
 		}
 
 		param_00 setvehgoalpos(param_00.var_C96C,var_01);
 		param_00 waittill("near_goal");
-		if(func_9DD5(param_00.var_4BF7) && !param_00.var_A435)
-		{
+		if(func_9DD5(param_00.var_4BF7) && !param_00.var_A435) {
 			param_00 waittill("goal");
 		}
 
-		if(!isdefined(param_00.var_DD1C))
-		{
+		if(!isdefined(param_00.var_DD1C)) {
 			param_00 vehicle_setspeed(10,5,500);
 			param_00.var_DD1C = 1;
 		}
 
-		if(func_9DD5(param_00.var_4BF7) && !param_00.var_A435)
-		{
+		if(func_9DD5(param_00.var_4BF7) && !param_00.var_A435) {
 			param_00 thread func_5C83(self);
 			param_00 waittill("finished_emp_pulse");
 		}
 
 		param_00.var_4BF7 = func_6CBF(param_00.var_4BF7);
 		param_00.var_C96C = param_00.var_4BF7.origin;
-		if(func_9DD5(param_00.var_4BF7) && !param_00.var_A435)
-		{
+		if(func_9DD5(param_00.var_4BF7) && !param_00.var_A435) {
 			var_01 = 1;
 			continue;
 		}
@@ -181,14 +154,10 @@ func_376F(param_00)
 	}
 }
 
-//Function Number: 7
-func_9DD5(param_00)
-{
+func_9DD5(param_00) {
 	var_01 = 0;
-	foreach(var_03 in level.var_A432)
-	{
-		if(param_00 == var_03)
-		{
+	foreach(var_03 in level.var_A432) {
+		if(param_00 == var_03) {
 			var_01 = 1;
 			break;
 		}
@@ -197,86 +166,67 @@ func_9DD5(param_00)
 	return var_01;
 }
 
-//Function Number: 8
-func_6CBF(param_00)
-{
+func_6CBF(param_00) {
 	var_01 = param_00.target;
 	var_02 = scripts\engine\utility::getstruct(var_01,"targetname");
 	return var_02;
 }
 
-//Function Number: 9
-func_3758(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08,param_09,param_0A,param_0B)
-{
+func_3758(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08,param_09,param_0A,param_0B) {
 	var_0C = self;
-	if(isdefined(var_0C.var_1D41) && var_0C.var_1D41)
-	{
+	if(isdefined(var_0C.var_1D41) && var_0C.var_1D41) {
 		return;
 	}
 
-	if(!scripts\mp\_weapons::friendlyfirecheck(var_0C.triggerportableradarping,param_01))
-	{
+	if(!scripts\mp\_weapons::friendlyfirecheck(var_0C.triggerportableradarping,param_01)) {
 		return;
 	}
 
-	if(isdefined(param_03) && param_03 & level.idflags_penetration)
-	{
+	if(isdefined(param_03) && param_03 & level.idflags_penetration) {
 		var_0C.wasdamagedfrombulletpenetration = 1;
 	}
 
-	if(isdefined(param_03) && param_03 & level.idflags_ricochet)
-	{
+	if(isdefined(param_03) && param_03 & level.idflags_ricochet) {
 		self.wasdamagedfrombulletricochet = 1;
 	}
 
 	var_0C.wasdamaged = 1;
-	if(isdefined(param_05))
-	{
-		switch(param_05)
-		{
+	if(isdefined(param_05)) {
+		switch(param_05) {
 			case "precision_airstrike_mp":
 				param_02 = param_02 * 4;
 				break;
 		}
 	}
 
-	if(param_04 == "MOD_MELEE")
-	{
+	if(param_04 == "MOD_MELEE") {
 		param_02 = var_0C.maxhealth * 0.5;
 	}
 
 	var_0D = param_02;
-	if(isplayer(param_01))
-	{
+	if(isplayer(param_01)) {
 		param_01 scripts\mp\_damagefeedback::updatedamagefeedback("");
-		if(param_04 == "MOD_RIFLE_BULLET" || param_04 == "MOD_PISTOL_BULLET")
-		{
-			if(param_01 scripts\mp\_utility::_hasperk("specialty_armorpiercing"))
-			{
+		if(param_04 == "MOD_RIFLE_BULLET" || param_04 == "MOD_PISTOL_BULLET") {
+			if(param_01 scripts\mp\_utility::_hasperk("specialty_armorpiercing")) {
 				var_0D = var_0D + param_02 * level.armorpiercingmod;
 			}
 		}
 
-		if(function_0107(param_04))
-		{
+		if(function_0107(param_04)) {
 			var_0D = var_0D + param_02;
 		}
 	}
 
-	if(function_0107(param_04) && isdefined(param_05) && param_05 == "destructible_car")
-	{
+	if(function_0107(param_04) && isdefined(param_05) && param_05 == "destructible_car") {
 		var_0D = var_0C.maxhealth;
 	}
 
-	if(isdefined(param_01.triggerportableradarping) && isplayer(param_01.triggerportableradarping))
-	{
+	if(isdefined(param_01.triggerportableradarping) && isplayer(param_01.triggerportableradarping)) {
 		param_01.triggerportableradarping scripts\mp\_damagefeedback::updatedamagefeedback("");
 	}
 
-	if(isdefined(param_05))
-	{
-		switch(param_05)
-		{
+	if(isdefined(param_05)) {
+		switch(param_05) {
 			case "remotemissile_projectile_mp":
 			case "javelin_mp":
 			case "remote_mortar_missile_mp":
@@ -312,10 +262,8 @@ func_3758(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_0
 	}
 
 	var_0C.var_E1 = var_0C.var_E1 + var_0D;
-	if(var_0C.var_E1 >= var_0C.maxhealth)
-	{
-		if(isplayer(param_01) && !isdefined(var_0C.triggerportableradarping) || param_01 != var_0C.triggerportableradarping)
-		{
+	if(var_0C.var_E1 >= var_0C.maxhealth) {
+		if(isplayer(param_01) && !isdefined(var_0C.triggerportableradarping) || param_01 != var_0C.triggerportableradarping) {
 			var_0C.var_1D41 = 1;
 			var_0C scripts\mp\_damage::onkillstreakkilled("jammer",param_01,param_05,param_04,param_02,"destroyed_" + var_0C.streakname,var_0C.streakname + "_destroyed","callout_destroyed_" + var_0C.streakname,1);
 		}
@@ -324,57 +272,43 @@ func_3758(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_0
 	}
 }
 
-//Function Number: 10
-func_5C29()
-{
+func_5C29() {
 	self endon("death");
 	self.triggerportableradarping waittill("disconnect");
 	self notify("death");
 }
 
-//Function Number: 11
-func_5C2A()
-{
+func_5C2A() {
 	self endon("death");
 	self.triggerportableradarping waittill("stop_using_remote");
 	self notify("death");
 }
 
-//Function Number: 12
-func_5C26()
-{
+func_5C26() {
 	self endon("death");
 	self.triggerportableradarping scripts\engine\utility::waittill_any_3("joined_team","joined_spectators");
 	self notify("death");
 }
 
-//Function Number: 13
-func_5C2B()
-{
+func_5C2B() {
 	self endon("death");
 	var_00 = level.var_A434[self.var_A436].var_AC75;
 	scripts\mp\_hostmigration::waitlongdurationwithhostmigrationpause(var_00);
 	self notify("death");
 }
 
-//Function Number: 14
-func_5C27()
-{
+func_5C27() {
 	self endon("death");
 	level endon("game_ended");
-	for(;;)
-	{
+	for(;;) {
 		self waittill("damage",var_00,var_01,var_02,var_03,var_04,var_05,var_06,var_07,var_08,var_09);
-		if(isdefined(self.var_10955))
-		{
-			self [[ self.var_10955 ]](undefined,var_01,var_00,var_08,var_04,var_09,var_03,var_02,undefined,undefined,var_05,var_07);
+		if(isdefined(self.var_10955)) {
+			self [[self.var_10955]](undefined,var_01,var_00,var_08,var_04,var_09,var_03,var_02,undefined,undefined,var_05,var_07);
 		}
 	}
 }
 
-//Function Number: 15
-func_5C28()
-{
+func_5C28() {
 	level endon("game_ended");
 	self waittill("death");
 	self playsound("sentry_explode");
@@ -383,9 +317,7 @@ func_5C28()
 	self delete();
 }
 
-//Function Number: 16
-func_5C83(param_00)
-{
+func_5C83(param_00) {
 	self endon("death");
 	self.var_A435 = 1;
 	self playsound("jammer_drone_charge");
@@ -396,8 +328,7 @@ func_5C83(param_00)
 	self playsound("jammer_drone_shockwave");
 	thread empremovecallback();
 	var_01 = param_00.pers["team"];
-	if(level.teambased)
-	{
+	if(level.teambased) {
 		var_02 = scripts\mp\_utility::getotherteam(var_01);
 		thread func_6165(var_02,param_00);
 	}
@@ -411,15 +342,11 @@ func_5C83(param_00)
 	self notify("finished_emp_pulse");
 }
 
-//Function Number: 17
-empremovecallback()
-{
+empremovecallback() {
 	self endon("death");
 	level waittill("player_spawned",var_00);
-	if(level.teambased)
-	{
-		if(var_00 scripts\mp\killstreaks\_emp_common::func_FFC5() && var_00 != self.triggerportableradarping && var_00.team != self.triggerportableradarping.team)
-		{
+	if(level.teambased) {
+		if(var_00 scripts\mp\killstreaks\_emp_common::func_FFC5() && var_00 != self.triggerportableradarping && var_00.team != self.triggerportableradarping.team) {
 			var_00 scripts\mp\killstreaks\_emp_common::func_20C3();
 			var_00 shellshock("flashbang_mp",0.5);
 			var_00 thread remotedefusecallback(self);
@@ -429,25 +356,20 @@ empremovecallback()
 		return;
 	}
 
-	if(var_00 scripts\mp\killstreaks\_emp_common::func_FFC5() && var_00 != self.triggerportableradarping)
-	{
+	if(var_00 scripts\mp\killstreaks\_emp_common::func_FFC5() && var_00 != self.triggerportableradarping) {
 		var_00 scripts\mp\killstreaks\_emp_common::func_20C3();
 		var_00 shellshock("flashbang_mp",0.5);
 		var_00 thread remotedefusecallback(self);
 	}
 }
 
-//Function Number: 18
-func_6165(param_00,param_01)
-{
+func_6165(param_00,param_01) {
 	level endon("game_ended");
 	wait(0.5);
 	level notify("EMP_JamTeam" + param_00);
 	level endon("EMP_JamTeam" + param_00);
-	foreach(var_03 in level.players)
-	{
-		if(var_03 scripts\mp\killstreaks\_emp_common::func_FFC5() && var_03 != param_01 && var_03.team != param_01.team)
-		{
+	foreach(var_03 in level.players) {
+		if(var_03 scripts\mp\killstreaks\_emp_common::func_FFC5() && var_03 != param_01 && var_03.team != param_01.team) {
 			var_03 scripts\mp\killstreaks\_emp_common::func_20C3();
 			var_03 shellshock("flashbang_mp",0.5);
 			var_03 thread remotedefusecallback(self);
@@ -460,30 +382,24 @@ func_6165(param_00,param_01)
 	level.teamemped[param_00] = 1;
 	scripts\mp\_hostmigration::waitlongdurationwithhostmigrationpause(60);
 	level.teamemped[param_00] = 0;
-	if(isdefined(self))
-	{
+	if(isdefined(self)) {
 		self.var_A435 = 0;
 	}
 
 	level notify("emp_update");
 }
 
-//Function Number: 19
-func_6164(param_00)
-{
+func_6164(param_00) {
 	level notify("EMP_JamPlayers");
 	level endon("EMP_JamPlayers");
 	wait(0.5);
-	if(!isdefined(param_00))
-	{
+	if(!isdefined(param_00)) {
 		return;
 	}
 
 	level.empplayer = param_00;
-	foreach(var_02 in level.players)
-	{
-		if(var_02 scripts\mp\killstreaks\_emp_common::func_FFC5() && var_02 != param_00)
-		{
+	foreach(var_02 in level.players) {
+		if(var_02 scripts\mp\killstreaks\_emp_common::func_FFC5() && var_02 != param_00) {
 			var_02 scripts\mp\killstreaks\_emp_common::func_20C3();
 			var_02 shellshock("flashbang_mp",0.5);
 			var_02 thread remotedefusecallback(self);
@@ -495,8 +411,7 @@ func_6164(param_00)
 	level.empplayer thread empradarwatcher();
 	level func_52C5(param_00);
 	scripts\mp\_hostmigration::waitlongdurationwithhostmigrationpause(60);
-	if(isdefined(self))
-	{
+	if(isdefined(self)) {
 		self.var_A435 = 0;
 	}
 
@@ -504,35 +419,27 @@ func_6164(param_00)
 	level notify("emp_ended");
 }
 
-//Function Number: 20
-func_A577()
-{
+func_A577() {
 	level notify("keepEMPTimeRemaining");
 	level endon("keepEMPTimeRemaining");
 	level endon("emp_ended");
 	level.emptriggerholdonuse = int(level.empstuntime);
-	while(level.emptriggerholdonuse)
-	{
+	while(level.emptriggerholdonuse) {
 		wait(1);
 		level.var_61B6--;
 	}
 }
 
-//Function Number: 21
-empradarwatcher()
-{
+empradarwatcher() {
 	level endon("EMP_JamPlayers");
 	level endon("emp_ended");
 	self waittill("disconnect");
 	level notify("emp_update");
 }
 
-//Function Number: 22
-func_531D(param_00,param_01,param_02)
-{
+func_531D(param_00,param_01,param_02) {
 	var_03 = "killstreak_jammer_mp";
-	if(isdefined(param_02))
-	{
+	if(isdefined(param_02)) {
 		var_03 = param_02;
 	}
 
@@ -542,12 +449,9 @@ func_531D(param_00,param_01,param_02)
 	scripts\mp\killstreaks\_killstreaks::func_532A(param_00,param_01,var_03,level.mines);
 }
 
-//Function Number: 23
-func_52CA(param_00,param_01,param_02)
-{
+func_52CA(param_00,param_01,param_02) {
 	var_03 = "aamissile_projectile_mp";
-	if(isdefined(param_02))
-	{
+	if(isdefined(param_02)) {
 		var_03 = param_02;
 	}
 
@@ -556,17 +460,14 @@ func_52CA(param_00,param_01,param_02)
 	scripts\mp\killstreaks\_killstreaks::func_532A(param_00,param_01,var_03,level.remote_uav);
 	scripts\mp\killstreaks\_killstreaks::func_532A(param_00,param_01,var_03,level.planes);
 	scripts\mp\killstreaks\_killstreaks::func_532A(param_00,param_01,var_03,level.var_105EA);
-	if(isdefined(param_01))
-	{
+	if(isdefined(param_01)) {
 		scripts\mp\killstreaks\_killstreaks::func_532A(param_00,param_01,var_03,level.uavmodels[param_01]);
 	}
 	else
 	{
 		var_04 = [];
-		foreach(var_07, var_06 in level.uavmodels)
-		{
-			if(issubstr(var_07,param_00.guid))
-			{
+		foreach(var_07, var_06 in level.uavmodels) {
+			if(issubstr(var_07,param_00.guid)) {
 				continue;
 			}
 
@@ -577,17 +478,13 @@ func_52CA(param_00,param_01,param_02)
 	}
 
 	var_08 = [];
-	if(isdefined(param_01))
-	{
-		foreach(var_0A in level.players)
-		{
-			if(var_0A.team == param_00.team)
-			{
+	if(isdefined(param_01)) {
+		foreach(var_0A in level.players) {
+			if(var_0A.team == param_00.team) {
 				continue;
 			}
 
-			if(scripts\mp\_utility::func_9EF0(var_0A))
-			{
+			if(scripts\mp\_utility::func_9EF0(var_0A)) {
 				var_08[var_08.size] = var_0A;
 			}
 		}
@@ -596,23 +493,17 @@ func_52CA(param_00,param_01,param_02)
 	}
 }
 
-//Function Number: 24
-func_52C5(param_00,param_01,param_02)
-{
+func_52C5(param_00,param_01,param_02) {
 	level func_531D(param_00,param_01,param_02);
 	level func_52CA(param_00,param_01,param_02);
 }
 
-//Function Number: 25
-func_7E37(param_00)
-{
+func_7E37(param_00) {
 	var_01 = undefined;
 	var_02 = 999999;
-	foreach(var_04 in level.var_A433)
-	{
+	foreach(var_04 in level.var_A433) {
 		var_05 = distance(var_04.origin,param_00);
-		if(var_05 < var_02)
-		{
+		if(var_05 < var_02) {
 			var_01 = var_04;
 			var_02 = var_05;
 		}
@@ -621,9 +512,7 @@ func_7E37(param_00)
 	return var_01;
 }
 
-//Function Number: 26
-remotedefusecallback(param_00)
-{
+remotedefusecallback(param_00) {
 	self endon("death");
 	self endon("disconnect");
 	param_00 waittill("death");

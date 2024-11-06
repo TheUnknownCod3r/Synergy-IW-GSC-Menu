@@ -1,26 +1,17 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\mp\scoreboard.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 4
- * Decompile Time: 198 ms
- * Timestamp: 10/27/2023 12:21:28 AM
-*******************************************************************/
+/*********************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\mp\scoreboard.gsc
+*********************************************/
 
-//Function Number: 1
-func_D9AB()
-{
-	foreach(var_01 in level.placement["all"])
-	{
+func_D9AB() {
+	foreach(var_01 in level.placement["all"]) {
 		var_01 func_F7F8();
 	}
 
-	if(level.multiteambased)
-	{
+	if(level.multiteambased) {
 		func_3219("multiteam");
-		foreach(var_01 in level.players)
-		{
+		foreach(var_01 in level.players) {
 			var_01 setplayerdata("common","round","scoreboardType","multiteam");
 		}
 
@@ -29,34 +20,28 @@ func_D9AB()
 		setclientmatchdata("alliesKills",-1);
 		setclientmatchdata("alliesDeaths",-1);
 	}
-	else if(level.teambased)
-	{
+	else if(level.teambased) {
 		var_05 = getteamscore("allies");
 		var_06 = getteamscore("axis");
 		var_07 = 0;
 		var_08 = 0;
-		foreach(var_01 in level.players)
-		{
-			if(isdefined(var_01.pers["team"]) && var_01.pers["team"] == "allies")
-			{
+		foreach(var_01 in level.players) {
+			if(isdefined(var_01.pers["team"]) && var_01.pers["team"] == "allies") {
 				var_07 = var_07 + var_01.pers["kills"];
 				var_08 = var_08 + var_01.pers["deaths"];
 			}
 		}
 
 		var_0B = "tied";
-		if(scripts\mp\utility::inovertime() && scripts\mp\utility::istimetobeatrulegametype())
-		{
-			if(game["timeToBeatTeam"] == "none")
-			{
+		if(scripts\mp\utility::inovertime() && scripts\mp\utility::istimetobeatrulegametype()) {
+			if(game["timeToBeatTeam"] == "none") {
 				setclientmatchdata("alliesTTB",0);
 				setclientmatchdata("axisTTB",0);
 				var_0B = "tied";
 			}
 			else
 			{
-				if("allies" == game["timeToBeatTeam"])
-				{
+				if("allies" == game["timeToBeatTeam"]) {
 					var_05++;
 				}
 				else
@@ -69,12 +54,10 @@ func_D9AB()
 				var_0B = game["timeToBeatTeam"];
 			}
 		}
-		else if(var_05 == var_06)
-		{
+		else if(var_05 == var_06) {
 			var_0B = "tied";
 		}
-		else if(var_05 > var_06)
-		{
+		else if(var_05 > var_06) {
 			var_0B = "allies";
 		}
 		else
@@ -86,20 +69,16 @@ func_D9AB()
 		setclientmatchdata("axisScore",var_06);
 		setclientmatchdata("alliesKills",var_07);
 		setclientmatchdata("alliesDeaths",var_08);
-		if(var_0B == "tied")
-		{
+		if(var_0B == "tied") {
 			func_3219("allies");
 			func_3219("axis");
-			foreach(var_01 in level.players)
-			{
+			foreach(var_01 in level.players) {
 				var_0D = var_01.pers["team"];
-				if(!isdefined(var_0D))
-				{
+				if(!isdefined(var_0D)) {
 					continue;
 				}
 
-				if(var_0D == "spectator")
-				{
+				if(var_0D == "spectator") {
 					var_01 setplayerdata("common","round","scoreboardType","allies");
 					continue;
 				}
@@ -110,8 +89,7 @@ func_D9AB()
 		else
 		{
 			func_3219(var_0B);
-			foreach(var_01 in level.players)
-			{
+			foreach(var_01 in level.players) {
 				var_01 setplayerdata("common","round","scoreboardType",var_0B);
 			}
 		}
@@ -119,8 +97,7 @@ func_D9AB()
 	else
 	{
 		func_3219("neutral");
-		foreach(var_01 in level.players)
-		{
+		foreach(var_01 in level.players) {
 			var_01 setplayerdata("common","round","scoreboardType","neutral");
 		}
 
@@ -130,8 +107,7 @@ func_D9AB()
 		setclientmatchdata("alliesDeaths",-1);
 	}
 
-	foreach(var_01 in level.players)
-	{
+	foreach(var_01 in level.players) {
 		var_01 setplayerdata("common","round","totalXp",var_01.pers["summary"]["xp"]);
 		var_01 setplayerdata("common","round","scoreXp",var_01.pers["summary"]["score"]);
 		var_01 setplayerdata("common","round","challengeXp",var_01.pers["summary"]["challenge"]);
@@ -142,17 +118,13 @@ func_D9AB()
 	}
 }
 
-//Function Number: 2
-func_F7F8()
-{
+func_F7F8() {
 	var_00 = function_0080("scoreboardPlayerCount");
-	if(var_00 <= 24)
-	{
+	if(var_00 <= 24) {
 		setclientmatchdata("players",self.clientmatchdataid,"score",self.pers["score"]);
 		var_01 = self.pers["kills"];
 		setclientmatchdata("players",self.clientmatchdataid,"kills",var_01);
-		if(level.gametype == "dm" || level.gametype == "gun")
-		{
+		if(level.gametype == "dm" || level.gametype == "gun") {
 			var_02 = self.var_4D;
 		}
 		else
@@ -182,47 +154,35 @@ func_F7F8()
 	}
 }
 
-//Function Number: 3
-computescoreboardslot(param_00,param_01)
-{
-	if(param_00 == "none")
-	{
+computescoreboardslot(param_00,param_01) {
+	if(param_00 == "none") {
 		return 0 + param_01;
 	}
 
-	if(param_00 == "neutral")
-	{
+	if(param_00 == "neutral") {
 		return 24 + param_01;
 	}
 
-	if(param_00 == "allies")
-	{
+	if(param_00 == "allies") {
 		return 48 + param_01;
 	}
 
-	if(param_00 == "axis")
-	{
+	if(param_00 == "axis") {
 		return 72 + param_01;
 	}
 
-	if(param_00 == "multiteam")
-	{
+	if(param_00 == "multiteam") {
 		return 96 + param_01;
 	}
 
 	return 0;
 }
 
-//Function Number: 4
-func_3219(param_00)
-{
-	if(param_00 == "multiteam")
-	{
+func_3219(param_00) {
+	if(param_00 == "multiteam") {
 		var_01 = 0;
-		foreach(var_03 in level.teamnamelist)
-		{
-			foreach(var_05 in level.placement[var_03])
-			{
+		foreach(var_03 in level.teamnamelist) {
+			foreach(var_05 in level.placement[var_03]) {
 				setclientmatchdata("scoreboards",computescoreboardslot("multiteam",var_01),var_05.clientmatchdataid);
 				var_01++;
 			}
@@ -231,11 +191,9 @@ func_3219(param_00)
 		return;
 	}
 
-	if(var_05 == "neutral")
-	{
+	if(var_05 == "neutral") {
 		var_01 = 0;
-		foreach(var_05 in level.placement["all"])
-		{
+		foreach(var_05 in level.placement["all"]) {
 			setclientmatchdata("scoreboards",computescoreboardslot(param_00,var_01),var_05.clientmatchdataid);
 			var_01++;
 		}
@@ -245,14 +203,12 @@ func_3219(param_00)
 
 	var_0A = scripts\mp\utility::getotherteam(var_05);
 	var_01 = 0;
-	foreach(var_05 in level.placement[param_00])
-	{
+	foreach(var_05 in level.placement[param_00]) {
 		setclientmatchdata("scoreboards",computescoreboardslot(param_00,var_01),var_05.clientmatchdataid);
 		var_01++;
 	}
 
-	foreach(var_05 in level.placement[var_0A])
-	{
+	foreach(var_05 in level.placement[var_0A]) {
 		setclientmatchdata("scoreboards",computescoreboardslot(param_00,var_01),var_05.clientmatchdataid);
 		var_01++;
 	}

@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: 3428.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 121
- * Decompile Time: 92 ms
- * Timestamp: 10/27/2023 12:27:25 AM
-*******************************************************************/
+/******************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\cp\zombies\zombies_wor.gsc
+******************************************************/
 
-//Function Number: 1
-init()
-{
+init() {
 	scripts\engine\utility::flag_init("dischord_glasses_pickedup");
 	scripts\engine\utility::flag_init("green_crystal_placed");
 	scripts\engine\utility::flag_init("red_crystal_placed");
@@ -46,38 +40,28 @@ init()
 	level thread getarkqueststruct();
 }
 
-//Function Number: 2
-getarkqueststruct()
-{
+getarkqueststruct() {
 	var_00 = scripts\engine\utility::getstructarray("interaction","targetname");
-	foreach(var_02 in var_00)
-	{
-		if(!isdefined(var_02.script_noteworthy))
-		{
+	foreach(var_02 in var_00) {
+		if(!isdefined(var_02.script_noteworthy)) {
 			continue;
 		}
 
-		if(var_02.script_noteworthy == "ark_quest_station")
-		{
+		if(var_02.script_noteworthy == "ark_quest_station") {
 			level.arkqueststation = var_02;
 			break;
 		}
 	}
 }
 
-//Function Number: 3
-wor_init()
-{
+wor_init() {
 	thread listen_for_triton_power();
 	thread init_wor_items();
 	thread listen_for_grenade_in_volume();
 }
 
-//Function Number: 4
-init_wor_items()
-{
-	if(isdefined(level.wor_items_picked_up))
-	{
+init_wor_items() {
+	if(isdefined(level.wor_items_picked_up)) {
 		return;
 	}
 
@@ -125,30 +109,23 @@ init_wor_items()
 	level.wor_items_placed["iw7_dischord_zm"]["weapon"] = 0;
 }
 
-//Function Number: 5
-init_standee_slots(param_00,param_01)
-{
+init_standee_slots(param_00,param_01) {
 	self.gun_slot = spawnstruct();
 	self.gun_slot.standee = self.standee;
 	self.gun_slot.finished = 0;
 	self.gun_slot.gun = param_01;
 	self.gun_slot setup_standee_data(param_01);
 	var_02 = [1,2,3];
-	foreach(var_04 in var_02)
-	{
-		level thread [[ param_00 ]](self.gun_slot,var_04);
+	foreach(var_04 in var_02) {
+		level thread [[param_00]](self.gun_slot,var_04);
 	}
 }
 
-//Function Number: 6
-put_gun_back_on_standee(param_00,param_01,param_02,param_03)
-{
+put_gun_back_on_standee(param_00,param_01,param_02,param_03) {
 	level notify("gun_replaced " + param_01);
-	if(isdefined(param_02))
-	{
+	if(isdefined(param_02)) {
 		var_04 = isdefined(param_03) && isdefined(param_03.ephemeralweapon) && issubstr(param_03.ephemeralweapon,param_01);
-		if(issubstr(param_02,"pap1") && !var_04)
-		{
+		if(issubstr(param_02,"pap1") && !var_04) {
 			param_00.standee.upgraded = 1;
 		}
 		else
@@ -165,22 +142,17 @@ put_gun_back_on_standee(param_00,param_01,param_02,param_03)
 	param_00.standee setscriptablepartstate("zapper","craft_zapper",1);
 }
 
-//Function Number: 7
-standee_hint_logic(param_00,param_01)
-{
+standee_hint_logic(param_00,param_01) {
 	var_02 = param_00.standee;
-	if(level.wor_items_placed[var_02.script_noteworthy]["toy"] && level.wor_items_placed[var_02.script_noteworthy]["battery"] && level.wor_items_placed[var_02.script_noteworthy]["crystal"])
-	{
-		if(var_02.gun_on_standee)
-		{
+	if(level.wor_items_placed[var_02.script_noteworthy]["toy"] && level.wor_items_placed[var_02.script_noteworthy]["battery"] && level.wor_items_placed[var_02.script_noteworthy]["crystal"]) {
+		if(var_02.gun_on_standee) {
 			return level.ww_hintstrings[var_02.script_noteworthy];
 		}
 		else
 		{
 			var_03 = param_01 getcurrentweapon();
 			var_04 = getweaponbasename(var_03);
-			if(issubstr(var_04,param_00.gun_slot.gun))
-			{
+			if(issubstr(var_04,param_00.gun_slot.gun)) {
 				return param_00.gun_slot.place_on_standee_string;
 			}
 			else
@@ -190,30 +162,23 @@ standee_hint_logic(param_00,param_01)
 		}
 	}
 
-	if(level.wor_items_picked_up[var_02.script_noteworthy]["toy"] && !level.wor_items_placed[var_02.script_noteworthy]["toy"])
-	{
+	if(level.wor_items_picked_up[var_02.script_noteworthy]["toy"] && !level.wor_items_placed[var_02.script_noteworthy]["toy"]) {
 		return &"CP_QUEST_WOR_PLACE_PART";
 	}
-	else if(level.wor_items_picked_up[var_02.script_noteworthy]["battery"] && !level.wor_items_placed[var_02.script_noteworthy]["battery"])
-	{
+	else if(level.wor_items_picked_up[var_02.script_noteworthy]["battery"] && !level.wor_items_placed[var_02.script_noteworthy]["battery"]) {
 		return &"CP_QUEST_WOR_PLACE_PART";
 	}
-	else if(level.wor_items_picked_up[var_02.script_noteworthy]["crystal"] && !level.wor_items_placed[var_02.script_noteworthy]["crystal"])
-	{
+	else if(level.wor_items_picked_up[var_02.script_noteworthy]["crystal"] && !level.wor_items_placed[var_02.script_noteworthy]["crystal"]) {
 		return &"CP_QUEST_WOR_PLACE_PART";
 	}
 
 	return &"CP_QUEST_WOR_ASSEMBLY";
 }
 
-//Function Number: 8
-standee_activate_logic(param_00,param_01)
-{
+standee_activate_logic(param_00,param_01) {
 	var_02 = param_00.standee;
-	if(level.wor_items_placed[var_02.script_noteworthy]["toy"] && level.wor_items_placed[var_02.script_noteworthy]["battery"] && level.wor_items_placed[var_02.script_noteworthy]["crystal"])
-	{
-		if(var_02.gun_on_standee)
-		{
+	if(level.wor_items_placed[var_02.script_noteworthy]["toy"] && level.wor_items_placed[var_02.script_noteworthy]["battery"] && level.wor_items_placed[var_02.script_noteworthy]["crystal"]) {
+		if(var_02.gun_on_standee) {
 			var_02.gun_on_standee = 0;
 			var_02 setscriptablepartstate("zapper","hide_zapper",1);
 			param_01 notify("weapon_purchased");
@@ -226,28 +191,22 @@ standee_activate_logic(param_00,param_01)
 		{
 			var_03 = param_01 getcurrentweapon();
 			var_04 = getweaponbasename(var_03);
-			if(issubstr(var_04,param_00.gun_slot.gun))
-			{
+			if(issubstr(var_04,param_00.gun_slot.gun)) {
 				var_05 = param_01 scripts\cp\utility::getvalidtakeweapon();
 				param_01 takeweapon(var_05);
 				var_06 = param_01 getweaponslistprimaries();
 				var_07 = 0;
-				for(var_08 = 0;var_08 < var_06.size;var_08++)
-				{
-					if(var_06[var_08] == "none")
-					{
+				for(var_08 = 0;var_08 < var_06.size;var_08++) {
+					if(var_06[var_08] == "none") {
 						continue;
 					}
-					else if(scripts\engine\utility::array_contains(level.additional_laststand_weapon_exclusion,var_06[var_08]))
-					{
+					else if(scripts\engine\utility::array_contains(level.additional_laststand_weapon_exclusion,var_06[var_08])) {
 						continue;
 					}
-					else if(scripts\engine\utility::array_contains(level.additional_laststand_weapon_exclusion,getweaponbasename(var_06[var_08])))
-					{
+					else if(scripts\engine\utility::array_contains(level.additional_laststand_weapon_exclusion,getweaponbasename(var_06[var_08]))) {
 						continue;
 					}
-					else if(scripts\cp\utility::is_melee_weapon(var_06[var_08],1))
-					{
+					else if(scripts\cp\utility::is_melee_weapon(var_06[var_08],1)) {
 						continue;
 					}
 
@@ -256,8 +215,7 @@ standee_activate_logic(param_00,param_01)
 					break;
 				}
 
-				if(!var_07)
-				{
+				if(!var_07) {
 					var_09 = "iw7_fists_zm";
 					param_01 scripts\cp\utility::_giveweapon(var_09,undefined,undefined,1);
 					param_01 switchtoweaponimmediate(var_09);
@@ -269,12 +227,10 @@ standee_activate_logic(param_00,param_01)
 		}
 	}
 
-	if(level.wor_items_picked_up[var_02.script_noteworthy]["toy"] && !level.wor_items_placed[var_02.script_noteworthy]["toy"])
-	{
+	if(level.wor_items_picked_up[var_02.script_noteworthy]["toy"] && !level.wor_items_placed[var_02.script_noteworthy]["toy"]) {
 		level.wor_items_placed[var_02.script_noteworthy]["toy"] = 1;
 		var_02 place_part("toy");
-		if(level.wor_items_placed[var_02.script_noteworthy]["toy"] && level.wor_items_placed[var_02.script_noteworthy]["battery"] && level.wor_items_placed[var_02.script_noteworthy]["crystal"])
-		{
+		if(level.wor_items_placed[var_02.script_noteworthy]["toy"] && level.wor_items_placed[var_02.script_noteworthy]["battery"] && level.wor_items_placed[var_02.script_noteworthy]["crystal"]) {
 			var_02 setscriptablepartstate("zapper","craft_zapper",1);
 			return;
 		}
@@ -282,12 +238,10 @@ standee_activate_logic(param_00,param_01)
 		return;
 	}
 
-	if(level.wor_items_picked_up[var_02.script_noteworthy]["battery"] && !level.wor_items_placed[var_02.script_noteworthy]["battery"])
-	{
+	if(level.wor_items_picked_up[var_02.script_noteworthy]["battery"] && !level.wor_items_placed[var_02.script_noteworthy]["battery"]) {
 		level.wor_items_placed[var_02.script_noteworthy]["battery"] = 1;
 		var_02 place_part("battery");
-		if(level.wor_items_placed[var_02.script_noteworthy]["toy"] && level.wor_items_placed[var_02.script_noteworthy]["battery"] && level.wor_items_placed[var_02.script_noteworthy]["crystal"])
-		{
+		if(level.wor_items_placed[var_02.script_noteworthy]["toy"] && level.wor_items_placed[var_02.script_noteworthy]["battery"] && level.wor_items_placed[var_02.script_noteworthy]["crystal"]) {
 			var_02 setscriptablepartstate("zapper","craft_zapper",1);
 			return;
 		}
@@ -295,12 +249,10 @@ standee_activate_logic(param_00,param_01)
 		return;
 	}
 
-	if(level.wor_items_picked_up[var_02.script_noteworthy]["crystal"] && !level.wor_items_placed[var_02.script_noteworthy]["crystal"])
-	{
+	if(level.wor_items_picked_up[var_02.script_noteworthy]["crystal"] && !level.wor_items_placed[var_02.script_noteworthy]["crystal"]) {
 		level.wor_items_placed[var_02.script_noteworthy]["crystal"] = 1;
 		var_02 place_part("crystal");
-		if(level.wor_items_placed[var_02.script_noteworthy]["toy"] && level.wor_items_placed[var_02.script_noteworthy]["battery"] && level.wor_items_placed[var_02.script_noteworthy]["crystal"])
-		{
+		if(level.wor_items_placed[var_02.script_noteworthy]["toy"] && level.wor_items_placed[var_02.script_noteworthy]["battery"] && level.wor_items_placed[var_02.script_noteworthy]["crystal"]) {
 			var_02 setscriptablepartstate("zapper","craft_zapper",1);
 			return;
 		}
@@ -309,64 +261,49 @@ standee_activate_logic(param_00,param_01)
 	}
 }
 
-//Function Number: 9
-place_part(param_00)
-{
+place_part(param_00) {
 	self setscriptablepartstate(param_00,"part_placed");
 	wait(1);
 	self setscriptablepartstate(param_00,"part_placed_no_fx");
 }
 
-//Function Number: 10
-returnclosestcrystal(param_00)
-{
+returnclosestcrystal(param_00) {
 	return scripts\engine\utility::getclosest(param_00.origin,level.miniufos);
 }
 
-//Function Number: 11
-ent_near_crystal(param_00,param_01)
-{
-	if(level.miniufos.size < 1)
-	{
+ent_near_crystal(param_00,param_01) {
+	if(level.miniufos.size < 1) {
 		return 0;
 	}
 
-	if(!scripts\cp\utility::weaponhasattachment(param_01,"arcane_base"))
-	{
+	if(!scripts\cp\utility::weaponhasattachment(param_01,"arcane_base")) {
 		return 0;
 	}
 
 	var_02 = 0;
-	foreach(var_04 in level.miniufos)
-	{
+	foreach(var_04 in level.miniufos) {
 		var_05 = 562500;
-		if(!isdefined(var_04) || scripts\engine\utility::istrue(var_04.fully_charged))
-		{
+		if(!isdefined(var_04) || scripts\engine\utility::istrue(var_04.fully_charged)) {
 			continue;
 		}
 
-		if(distancesquared(var_04.origin,param_00.origin) < var_05)
-		{
+		if(distancesquared(var_04.origin,param_00.origin) < var_05) {
 			var_02 = 1;
 		}
 
-		if(var_02)
-		{
+		if(var_02) {
 			break;
 		}
 	}
 
-	if(var_02)
-	{
+	if(var_02) {
 		return 1;
 	}
 
 	return 0;
 }
 
-//Function Number: 12
-fake_crystal_logic(param_00,param_01,param_02,param_03,param_04)
-{
+fake_crystal_logic(param_00,param_01,param_02,param_03,param_04) {
 	var_05 = get_part_model(param_01,param_03);
 	param_00 setmodel(var_05);
 	wait(0.25);
@@ -381,30 +318,23 @@ fake_crystal_logic(param_00,param_01,param_02,param_03,param_04)
 	level.wor_items_picked_up[param_01.gun][param_04] = 1;
 }
 
-//Function Number: 13
-update_ufo_angles(param_00,param_01,param_02,param_03,param_04,param_05)
-{
+update_ufo_angles(param_00,param_01,param_02,param_03,param_04,param_05) {
 	param_00 endon("fully_charged");
-	for(;;)
-	{
+	for(;;) {
 		param_00 waittill("next_position_found",var_06,var_07);
 		var_08 = vectortoangles(var_07.origin - var_06.origin) + (180,0,0);
 		param_00 rotateto(var_08,0.5,0.05,0.05);
 	}
 }
 
-//Function Number: 14
-start_crystal_path(param_00,param_01,param_02,param_03,param_04,param_05,param_06)
-{
+start_crystal_path(param_00,param_01,param_02,param_03,param_04,param_05,param_06) {
 	var_07 = scripts\engine\utility::getclosest(param_06.origin,scripts\engine\utility::getstructarray("essence_ufo_path","script_noteworthy"));
 	var_08 = 0;
 	var_09 = var_07;
 	var_0A = 1;
 	var_0B = undefined;
-	for(var_0C = get_next_valid_struct(param_06,var_09);var_0A;var_0C = var_0F)
-	{
-		if(isdefined(var_09.script_speed))
-		{
+	for(var_0C = get_next_valid_struct(param_06,var_09);var_0A;var_0C = var_0F) {
+		if(isdefined(var_09.script_speed)) {
 			var_0D = var_09.script_speed;
 		}
 		else
@@ -418,14 +348,11 @@ start_crystal_path(param_00,param_01,param_02,param_03,param_04,param_05,param_0
 		thread changeangledelay(param_06,var_0E,var_0F,var_09,var_0C);
 		param_06 moveto(var_0C.origin,var_0E);
 		var_10 = param_06 scripts\engine\utility::waittill_any_return("movedone","fully_charged");
-		if(scripts\engine\utility::istrue(param_06.fully_charged))
-		{
-			for(;;)
-			{
+		if(scripts\engine\utility::istrue(param_06.fully_charged)) {
+			for(;;) {
 				var_0E = get_move_rate(param_06,param_06.origin,var_0C.origin,2000);
 				param_06 moveto(var_0C.origin,var_0E);
-				if(can_use_struct_for_final_pos(param_00,var_0C))
-				{
+				if(can_use_struct_for_final_pos(param_00,var_0C)) {
 					var_11 = scripts\engine\utility::drop_to_ground(var_0C.origin,0,-400) + (0,0,40);
 					var_12 = magicbullet("bolasprayprojhome_mp",param_06.origin,var_11);
 					scripts\engine\utility::play_sound_in_space("miniufo_fire",param_06.origin,0,param_06);
@@ -434,8 +361,7 @@ start_crystal_path(param_00,param_01,param_02,param_03,param_04,param_05,param_0
 					param_06.fully_charged = undefined;
 					param_06 thread movetotraploop(param_06,param_06.origin,param_01);
 					var_12 scripts\engine\utility::waittill_any_timeout_1(1.25,"death");
-					if(isdefined(var_12))
-					{
+					if(isdefined(var_12)) {
 						var_12 delete();
 					}
 
@@ -459,16 +385,12 @@ start_crystal_path(param_00,param_01,param_02,param_03,param_04,param_05,param_0
 	}
 }
 
-//Function Number: 15
-changeangledelay(param_00,param_01,param_02,param_03,param_04)
-{
+changeangledelay(param_00,param_01,param_02,param_03,param_04) {
 	wait(max(0.05,param_01 - 0.35));
 	param_00 notify("next_position_found",param_04,param_02);
 }
 
-//Function Number: 16
-movetotraploop(param_00,param_01,param_02)
-{
+movetotraploop(param_00,param_01,param_02) {
 	param_00 waittill("movedone");
 	param_00 setscriptablepartstate("miniufo","mini_ufo");
 	var_03 = scripts\engine\utility::random(param_02.starting_move_structs);
@@ -477,13 +399,9 @@ movetotraploop(param_00,param_01,param_02)
 	param_00.angles = var_03.angles;
 }
 
-//Function Number: 17
-can_use_struct_for_final_pos(param_00,param_01)
-{
-	if(isdefined(param_01.name))
-	{
-		if(isdefined(param_01.name == "cant_stop_wont_stop"))
-		{
+can_use_struct_for_final_pos(param_00,param_01) {
+	if(isdefined(param_01.name)) {
+		if(isdefined(param_01.name == "cant_stop_wont_stop")) {
 			return 0;
 		}
 	}
@@ -491,9 +409,7 @@ can_use_struct_for_final_pos(param_00,param_01)
 	return 1;
 }
 
-//Function Number: 18
-get_next_valid_struct(param_00,param_01)
-{
+get_next_valid_struct(param_00,param_01) {
 	var_02 = scripts\engine\utility::getstructarray(param_01.target,"targetname");
 	var_03 = [];
 	var_04 = undefined;
@@ -501,33 +417,26 @@ get_next_valid_struct(param_00,param_01)
 	return var_04;
 }
 
-//Function Number: 19
-get_move_rate(param_00,param_01,param_02,param_03)
-{
+get_move_rate(param_00,param_01,param_02,param_03) {
 	var_04 = distance(param_01,param_02);
-	if(!isdefined(param_03))
-	{
+	if(!isdefined(param_03)) {
 		param_03 = int(clamp(level.wave_num * 15,75,150));
 	}
 
 	var_05 = var_04 / param_03;
-	if(var_05 < 0.05)
-	{
+	if(var_05 < 0.05) {
 		var_05 = 0.05;
 	}
 
 	return var_05;
 }
 
-//Function Number: 20
-move_crystal_to_end_pos(param_00)
-{
+move_crystal_to_end_pos(param_00) {
 	var_01 = scripts\engine\utility::drop_to_ground(param_00.origin,0,-400) + (0,0,40);
 	var_02 = distance(param_00.origin,var_01);
 	var_03 = 2000;
 	var_04 = var_02 / var_03;
-	if(var_04 < 0.05)
-	{
+	if(var_04 < 0.05) {
 		var_04 = 0.05;
 	}
 
@@ -536,35 +445,26 @@ move_crystal_to_end_pos(param_00)
 	param_00.at_end_loc = 1;
 }
 
-//Function Number: 21
-getminiufostartingstruct(param_00)
-{
-	if(param_00.crystal_model == "zmb_weapon_crystal_green" && isdefined(level.dichordtraptrigger))
-	{
+getminiufostartingstruct(param_00) {
+	if(param_00.crystal_model == "zmb_weapon_crystal_green" && isdefined(level.dichordtraptrigger)) {
 		return level.dichordtraptrigger;
 	}
 
-	if(param_00.crystal_model == "zmb_weapon_crystal_blue" && isdefined(level.fmtraptrigger))
-	{
+	if(param_00.crystal_model == "zmb_weapon_crystal_blue" && isdefined(level.fmtraptrigger)) {
 		return level.fmtraptrigger;
 	}
 
-	if(param_00.crystal_model == "zmb_weapon_crystal_yellow" && isdefined(level.hctraptrigger))
-	{
+	if(param_00.crystal_model == "zmb_weapon_crystal_yellow" && isdefined(level.hctraptrigger)) {
 		return level.hctraptrigger;
 	}
 
 	return scripts\engine\utility::random(param_00.starting_move_structs);
 }
 
-//Function Number: 22
-getminoufofromorbeffect(param_00,param_01)
-{
-	switch(param_00)
-	{
+getminoufofromorbeffect(param_00,param_01) {
+	switch(param_00) {
 		case "blue":
-			if(!isdefined(level.rocket_mini_ufo))
-			{
+			if(!isdefined(level.rocket_mini_ufo)) {
 				var_02 = spawn("script_model",param_01.origin);
 				var_02 setmodel("tag_origin_mini_ufo");
 				scripts\engine\utility::waitframe();
@@ -572,8 +472,7 @@ getminoufofromorbeffect(param_00,param_01)
 			else
 			{
 				var_02 = level.rocket_mini_ufo;
-				if(var_02.model != "tag_origin_mini_ufo")
-				{
+				if(var_02.model != "tag_origin_mini_ufo") {
 					var_02 setmodel("tag_origin_mini_ufo");
 					var_02 dontinterpolate();
 					var_02.origin = param_01.origin;
@@ -583,8 +482,7 @@ getminoufofromorbeffect(param_00,param_01)
 			break;
 
 		case "green":
-			if(!isdefined(level.disco_mini_ufo))
-			{
+			if(!isdefined(level.disco_mini_ufo)) {
 				var_02 = spawn("script_model",var_02.origin);
 				var_02 setmodel("tag_origin_mini_ufo");
 				scripts\engine\utility::waitframe();
@@ -592,8 +490,7 @@ getminoufofromorbeffect(param_00,param_01)
 			else
 			{
 				var_02 = level.disco_mini_ufo;
-				if(var_02.model != "tag_origin_mini_ufo")
-				{
+				if(var_02.model != "tag_origin_mini_ufo") {
 					var_02 setmodel("tag_origin_mini_ufo");
 					var_02 dontinterpolate();
 					var_02.origin = param_01.origin;
@@ -603,8 +500,7 @@ getminoufofromorbeffect(param_00,param_01)
 			break;
 
 		case "yellow":
-			if(!isdefined(level.steel_dragon_mini_ufo))
-			{
+			if(!isdefined(level.steel_dragon_mini_ufo)) {
 				var_02 = spawn("script_model",var_02.origin);
 				var_02 setmodel("tag_origin_mini_ufo");
 				scripts\engine\utility::waitframe();
@@ -612,8 +508,7 @@ getminoufofromorbeffect(param_00,param_01)
 			else
 			{
 				var_02 = level.steel_dragon_mini_ufo;
-				if(var_02.model != "tag_origin_mini_ufo")
-				{
+				if(var_02.model != "tag_origin_mini_ufo") {
 					var_02 setmodel("tag_origin_mini_ufo");
 					var_02 dontinterpolate();
 					var_02.origin = param_01.origin;
@@ -623,8 +518,7 @@ getminoufofromorbeffect(param_00,param_01)
 			break;
 
 		case "red":
-			if(!isdefined(level.chromosphere_mini_ufo))
-			{
+			if(!isdefined(level.chromosphere_mini_ufo)) {
 				var_02 = spawn("script_model",var_02.origin);
 				var_02 setmodel("tag_origin_mini_ufo");
 				scripts\engine\utility::waitframe();
@@ -632,8 +526,7 @@ getminoufofromorbeffect(param_00,param_01)
 			else
 			{
 				var_02 = level.chromosphere_mini_ufo;
-				if(var_02.model != "tag_origin_mini_ufo")
-				{
+				if(var_02.model != "tag_origin_mini_ufo") {
 					var_02 setmodel("tag_origin_mini_ufo");
 					var_02 dontinterpolate();
 					var_02.origin = param_01.origin;
@@ -654,9 +547,7 @@ getminoufofromorbeffect(param_00,param_01)
 	return var_02;
 }
 
-//Function Number: 23
-collect_arcane_essense(param_00,param_01,param_02,param_03,param_04,param_05)
-{
+collect_arcane_essense(param_00,param_01,param_02,param_03,param_04,param_05) {
 	var_06 = getminiufostartingstruct(param_01);
 	var_07 = param_01.largeessencefx;
 	var_08 = getminoufofromorbeffect(var_07,var_06);
@@ -670,20 +561,17 @@ collect_arcane_essense(param_00,param_01,param_02,param_03,param_04,param_05)
 	param_00 setuserange(64);
 	param_00 setusefov(120);
 	param_00.gun_slot = param_01;
-	if(scripts\engine\utility::istrue(param_05))
-	{
+	if(scripts\engine\utility::istrue(param_05)) {
 		param_00 thread timeout_crystal(param_00,param_01,param_03,var_08);
 	}
 
 	param_00 endon("death");
 	create_essence_interaction(param_00);
-	for(;;)
-	{
+	for(;;) {
 		param_00 waittill("mini_ufo_completed",var_09);
 		param_00 setscriptablepartstate("miniufo","neutral");
 		param_00 notify("picked_up");
-		switch(param_01.color)
-		{
+		switch(param_01.color) {
 			case "blue":
 				var_09 thread scripts\cp\cp_vo::try_to_play_vo("quest_arcane_blue_essence","zmb_comment_vo","highest",10,1,0,0,100);
 				break;
@@ -708,8 +596,7 @@ collect_arcane_essense(param_00,param_01,param_02,param_03,param_04,param_05)
 		level thread waittillnextwave(var_08,param_01);
 		reset_trap_kill_count(param_00,param_01,param_03);
 		param_00 makeunusable();
-		if(scripts\engine\utility::istrue(param_05))
-		{
+		if(scripts\engine\utility::istrue(param_05)) {
 			param_00 delete();
 		}
 		else
@@ -721,28 +608,21 @@ collect_arcane_essense(param_00,param_01,param_02,param_03,param_04,param_05)
 	}
 }
 
-//Function Number: 24
-waittillnextwave(param_00,param_01)
-{
+waittillnextwave(param_00,param_01) {
 	level waittill("regular_wave_starting");
-	if(param_00.model != "tag_origin_mini_ufo")
-	{
+	if(param_00.model != "tag_origin_mini_ufo") {
 		param_00 setmodel("tag_origin_mini_ufo");
 	}
 
 	scripts\engine\utility::flag_clear("mini_ufo_" + param_01.color + "_collecting");
 }
 
-//Function Number: 25
-essence_pickup_func(param_00,param_01)
-{
-	if(!isdefined(param_00.at_end_loc))
-	{
+essence_pickup_func(param_00,param_01) {
+	if(!isdefined(param_00.at_end_loc)) {
 		return;
 	}
 
-	if(!scripts\cp\utility::weaponhasattachment(param_01 getcurrentweapon(),"arcane_base"))
-	{
+	if(!scripts\cp\utility::weaponhasattachment(param_01 getcurrentweapon(),"arcane_base")) {
 		return;
 	}
 
@@ -752,9 +632,7 @@ essence_pickup_func(param_00,param_01)
 	param_01 thread charge_players_arcane_base_attachment(param_01,param_00.gun_slot);
 }
 
-//Function Number: 26
-create_essence_interaction(param_00)
-{
+create_essence_interaction(param_00) {
 	param_00.script_noteworthy = "spawned_essence";
 	param_00.requires_power = 0;
 	param_00.powered_on = 1;
@@ -763,9 +641,7 @@ create_essence_interaction(param_00)
 	scripts\cp\cp_interaction::add_to_current_interaction_list(param_00);
 }
 
-//Function Number: 27
-remove_essence_interaction(param_00)
-{
+remove_essence_interaction(param_00) {
 	scripts\cp\cp_interaction::remove_from_current_interaction_list(param_00);
 	param_00.script_noteworthy = undefined;
 	param_00.requires_power = undefined;
@@ -774,41 +650,31 @@ remove_essence_interaction(param_00)
 	param_00.custom_search_dist = undefined;
 }
 
-//Function Number: 28
-playufoeffectonplayerconnect(param_00,param_01)
-{
+playufoeffectonplayerconnect(param_00,param_01) {
 	level endon("game_ended");
-	for(;;)
-	{
+	for(;;) {
 		level waittill("connected",var_02);
 		thread playeffectwhenspawned(param_00,param_01,var_02);
 	}
 }
 
-//Function Number: 29
-playeffectwhenspawned(param_00,param_01,param_02)
-{
+playeffectwhenspawned(param_00,param_01,param_02) {
 	level endon("game_ended");
 	param_02 endon("disconnect");
 	param_02 waittill("spawned_player");
 	playfxontag(param_00,param_01,"tag_origin");
 }
 
-//Function Number: 30
-disablepickuppromptfortime(param_00,param_01)
-{
+disablepickuppromptfortime(param_00,param_01) {
 	param_00 disableplayeruse(param_01);
 	wait(1);
 	param_00 enableplayeruse(param_01);
 }
 
-//Function Number: 31
-run_mini_ufo_logic(param_00,param_01,param_02,param_03,param_04)
-{
+run_mini_ufo_logic(param_00,param_01,param_02,param_03,param_04) {
 	param_00 endon("timed_out");
 	var_05 = scripts\engine\utility::get_array_of_closest(param_00.origin,level.players,undefined,4,512);
-	foreach(var_07 in var_05)
-	{
+	foreach(var_07 in var_05) {
 		var_07 thread scripts\cp\cp_vo::try_to_play_vo("arcane_core_event","zmb_comment_vo","highest",10,0,0,1);
 	}
 
@@ -817,9 +683,7 @@ run_mini_ufo_logic(param_00,param_01,param_02,param_03,param_04)
 	struct_wait_for_damage(var_09,param_01.crystal_model,param_00,param_01,param_02,param_03,param_04);
 }
 
-//Function Number: 32
-timeout_crystal(param_00,param_01,param_02,param_03)
-{
+timeout_crystal(param_00,param_01,param_02,param_03) {
 	param_00 endon("picked_up");
 	wait(30);
 	level thread waittillnextwave(param_03,param_01);
@@ -833,12 +697,9 @@ timeout_crystal(param_00,param_01,param_02,param_03)
 	param_00 delete();
 }
 
-//Function Number: 33
-reset_trap_kill_count(param_00,param_01,param_02)
-{
+reset_trap_kill_count(param_00,param_01,param_02) {
 	var_03 = param_01.crystal_model;
-	switch(var_03)
-	{
+	switch(var_03) {
 		case "zmb_weapon_crystal_red":
 			level.angry_mike_trap_kills = 0;
 			scripts\engine\utility::flag_clear("mini_ufo_red_ready");
@@ -866,16 +727,13 @@ reset_trap_kill_count(param_00,param_01,param_02)
 	thread crystal_listener(param_01,param_02);
 }
 
-//Function Number: 34
-crystal_listener(param_00,param_01)
-{
+crystal_listener(param_00,param_01) {
 	var_02 = get_part_name(param_01);
 	var_03 = undefined;
 	level waittill("ww_" + param_00.gun + "_" + var_02 + "_dropped",var_04);
 	var_05 = spawn("script_model",var_04 + (0,0,30));
 	var_06 = get_part_model(param_00,param_01);
-	if(scripts\engine\utility::istrue(level.skip_crystal_logic))
-	{
+	if(scripts\engine\utility::istrue(level.skip_crystal_logic)) {
 		level.skip_crystal_logic = 0;
 		fake_crystal_logic(var_05,param_00,var_04,param_01,var_02);
 		return;
@@ -884,9 +742,7 @@ crystal_listener(param_00,param_01)
 	var_05 collect_arcane_essense(var_05,param_00,var_04,param_01,var_02,1);
 }
 
-//Function Number: 35
-struct_wait_for_damage(param_00,param_01,param_02,param_03,param_04,param_05,param_06)
-{
+struct_wait_for_damage(param_00,param_01,param_02,param_03,param_04,param_05,param_06) {
 	scripts\engine\utility::flag_wait("gator_tooth_broken");
 	var_07 = strtok(param_01,"_");
 	var_08 = var_07[3];
@@ -901,31 +757,26 @@ struct_wait_for_damage(param_00,param_01,param_02,param_03,param_04,param_05,par
 	var_0B.team = "axis";
 	var_0B.max_health = 100;
 	var_0B.health = 100;
-	for(;;)
-	{
+	for(;;) {
 		wait(0.05);
 		scripts\engine\utility::flag_wait("gator_gold_tooth_placed");
 		var_0B waittill("damage",var_0C,var_0D,var_0E,var_0F,var_10,var_11,var_12,var_13,var_14,var_15,var_16,var_17,var_18);
-		if(!isdefined(var_0D))
-		{
+		if(!isdefined(var_0D)) {
 			continue;
 		}
 
-		if(!isdefined(var_15))
-		{
+		if(!isdefined(var_15)) {
 			var_15 = var_0D getcurrentweapon();
 		}
 
-		if(!scripts\cp\utility::weaponhasattachment(var_15,"ark" + var_08))
-		{
+		if(!scripts\cp\utility::weaponhasattachment(var_15,"ark" + var_08)) {
 			continue;
 		}
 
 		playsoundatpos(param_02.origin,"arc_machine_door_shoot_off");
 		var_0B setcandamage(0);
 		var_0B hide();
-		if(!isdefined(var_09.crystals))
-		{
+		if(!isdefined(var_09.crystals)) {
 			var_09.crystals = [];
 		}
 
@@ -935,10 +786,8 @@ struct_wait_for_damage(param_00,param_01,param_02,param_03,param_04,param_05,par
 	}
 
 	level.wor_items_picked_up[param_03.gun][param_06] = 1;
-	if(isplayer(var_0D))
-	{
-		switch(param_03.gun)
-		{
+	if(isplayer(var_0D)) {
+		switch(param_03.gun) {
 			case "iw7_headcutter_zm":
 				var_0D thread scripts\cp\cp_vo::try_to_play_vo("quest_cutter_crystal_yellow","zmb_comment_vo","highest",10,1,0,0,100);
 				break;
@@ -962,16 +811,12 @@ struct_wait_for_damage(param_00,param_01,param_02,param_03,param_04,param_05,par
 	}
 }
 
-//Function Number: 36
-run_battery_logic(param_00,param_01,param_02,param_03,param_04)
-{
+run_battery_logic(param_00,param_01,param_02,param_03,param_04) {
 	var_05 = get_part_model(param_01,param_03);
 	param_00 setmodel(var_05);
-	if(param_01.gun == "iw7_dischord_zm")
-	{
+	if(param_01.gun == "iw7_dischord_zm") {
 		var_06 = "dischord";
-		if(scripts\engine\utility::istrue(level.skip_battery_logic))
-		{
+		if(scripts\engine\utility::istrue(level.skip_battery_logic)) {
 			level.skip_battery_logic = 0;
 			wait(0.25);
 		}
@@ -980,14 +825,12 @@ run_battery_logic(param_00,param_01,param_02,param_03,param_04)
 			param_00 dischord_battery_move();
 		}
 	}
-	else if(param_02.gun == "iw7_facemelter_zm")
-	{
+	else if(param_02.gun == "iw7_facemelter_zm") {
 		var_06 = "melter";
 		level.facemelter_battery = param_00;
 		wait(0.25);
 	}
-	else if(param_02.gun == "iw7_shredder_zm")
-	{
+	else if(param_02.gun == "iw7_shredder_zm") {
 		var_06 = "shredder";
 		level.shredder_battery = param_00;
 		wait(0.25);
@@ -1012,12 +855,9 @@ run_battery_logic(param_00,param_01,param_02,param_03,param_04)
 	param_00 setscriptablepartstate("model","neutral");
 }
 
-//Function Number: 37
-rotate_wor_piece()
-{
+rotate_wor_piece() {
 	self endon("death");
-	for(;;)
-	{
+	for(;;) {
 		self rotateyaw(360,2);
 		self movez(-5,2);
 		self waittill("movedone");
@@ -1027,13 +867,10 @@ rotate_wor_piece()
 	}
 }
 
-//Function Number: 38
-run_toy_logic(param_00,param_01,param_02,param_03,param_04)
-{
+run_toy_logic(param_00,param_01,param_02,param_03,param_04) {
 	var_05 = (0,0,0);
 	var_06 = (0,0,0);
-	switch(param_01.gun)
-	{
+	switch(param_01.gun) {
 		case "iw7_shredder_zm":
 			var_07 = getent("toy_angry_mike","targetname");
 			var_05 = var_07.origin;
@@ -1070,8 +907,7 @@ run_toy_logic(param_00,param_01,param_02,param_03,param_04)
 	param_00 setscriptablepartstate("model",param_01.toy_model_state);
 	var_08 = scripts\engine\utility::getstructarray("interaction","targetname");
 	var_09 = scripts\engine\utility::getclosest(param_00.origin,var_08);
-	if(!isdefined(var_09.angles))
-	{
+	if(!isdefined(var_09.angles)) {
 		var_09.angles = (0,0,0);
 	}
 
@@ -1082,8 +918,7 @@ run_toy_logic(param_00,param_01,param_02,param_03,param_04)
 	param_00 sethintstring(&"CP_QUEST_WOR_PART");
 	param_00 thread spin_toy();
 	param_00 waittill("trigger",var_0A);
-	switch(param_00.model)
-	{
+	switch(param_00.model) {
 		case "zmb_ice_monster_toy":
 			var_0A thread scripts\cp\cp_vo::try_to_play_vo("quest_cutter_icemonster","zmb_comment_vo","highest",10,1,0,0,100);
 			break;
@@ -1112,26 +947,21 @@ run_toy_logic(param_00,param_01,param_02,param_03,param_04)
 	param_00 setmodel("tag_origin");
 }
 
-//Function Number: 39
-part_listener(param_00,param_01)
-{
+part_listener(param_00,param_01) {
 	var_02 = get_part_name(param_01);
 	var_03 = undefined;
 	level waittill("ww_" + param_00.gun + "_" + var_02 + "_dropped",var_04);
 	var_05 = param_00.gun;
 	var_06 = (0,0,30);
-	if(param_00.gun == "iw7_headcutter_zm" && var_02 == "battery")
-	{
+	if(param_00.gun == "iw7_headcutter_zm" && var_02 == "battery") {
 		var_06 = (0,0,0);
 	}
 
 	var_07 = spawn("script_model",var_04 + var_06);
 	var_08 = get_part_model(param_00,param_01);
-	switch(var_02)
-	{
+	switch(var_02) {
 		case "crystal":
-			if(level.skip_crystal_logic)
-			{
+			if(level.skip_crystal_logic) {
 				level.skip_crystal_logic = 0;
 				fake_crystal_logic(var_07,param_00,var_04,param_01,var_02);
 			}
@@ -1157,24 +987,19 @@ part_listener(param_00,param_01)
 	level scripts\cp\utility::set_quest_icon(var_09);
 }
 
-//Function Number: 40
-wait_for_crystal_to_charge(param_00,param_01,param_02,param_03)
-{
+wait_for_crystal_to_charge(param_00,param_01,param_02,param_03) {
 	var_04 = 0;
 	param_02.runner_count = 0;
 	param_02.expected_souls = 0;
 	var_05 = 25;
-	while(var_04 < var_05)
-	{
+	while(var_04 < var_05) {
 		level waittill("kill_near_crystal",var_06,var_07,var_08);
 		param_02.expected_souls--;
-		if(param_02 != var_08)
-		{
+		if(param_02 != var_08) {
 			continue;
 		}
 
-		if(!scripts\cp\utility::weaponhasattachment(var_07,"arcane_base"))
-		{
+		if(!scripts\cp\utility::weaponhasattachment(var_07,"arcane_base")) {
 			continue;
 		}
 
@@ -1183,15 +1008,13 @@ wait_for_crystal_to_charge(param_00,param_01,param_02,param_03)
 		var_04++;
 	}
 
-	while(param_02.runner_count >= 1)
-	{
+	while(param_02.runner_count >= 1) {
 		wait(0.05);
 	}
 
 	param_02.fully_charged = 1;
 	param_02 notify("fully_charged");
-	while(!isdefined(param_00.at_end_loc))
-	{
+	while(!isdefined(param_00.at_end_loc)) {
 		wait(0.1);
 	}
 
@@ -1199,33 +1022,27 @@ wait_for_crystal_to_charge(param_00,param_01,param_02,param_03)
 	scripts\cp\cp_vo::try_to_play_vo_on_all_players("quest_arcane_ufo_start");
 	scripts\engine\utility::waitframe();
 	param_00 setscriptablepartstate("miniufo",param_03);
-	if(isdefined(param_02) && scripts\engine\utility::array_contains(level.miniufos,param_02))
-	{
+	if(isdefined(param_02) && scripts\engine\utility::array_contains(level.miniufos,param_02)) {
 		level.miniufos = scripts\engine\utility::array_remove(level.miniufos,param_02);
 	}
 }
 
-//Function Number: 41
-crytsal_capture_killed_essense(param_00,param_01)
-{
+crytsal_capture_killed_essense(param_00,param_01) {
 	var_02 = spawn("script_model",param_00);
 	var_02 setmodel("tag_origin_soultrail");
 	var_03 = param_01.origin;
 	var_04 = param_00 + (0,0,40);
-	for(;;)
-	{
+	for(;;) {
 		var_05 = distance(var_04,var_03);
 		var_06 = 1500;
 		var_07 = var_05 / var_06;
-		if(var_07 < 0.05)
-		{
+		if(var_07 < 0.05) {
 			var_07 = 0.05;
 		}
 
 		var_02 moveto(var_03,var_07);
 		var_02 waittill("movedone");
-		if(distance(var_02.origin,param_01.origin) > 16)
-		{
+		if(distance(var_02.origin,param_01.origin) > 16) {
 			var_03 = param_01.origin;
 			var_04 = var_02.origin;
 			continue;
@@ -1241,9 +1058,7 @@ crytsal_capture_killed_essense(param_00,param_01)
 	var_02 delete();
 }
 
-//Function Number: 42
-charge_players_arcane_base_attachment(param_00,param_01)
-{
+charge_players_arcane_base_attachment(param_00,param_01) {
 	var_02 = strtok(param_01.crystal_model,"_");
 	var_03 = var_02[3];
 	var_04 = "ark" + var_03;
@@ -1252,8 +1067,7 @@ charge_players_arcane_base_attachment(param_00,param_01)
 	param_00 scripts\engine\utility::allow_weapon_switch(0);
 	var_05 = param_00 getcurrentweapon();
 	param_00 scripts\cp\cp_weapon::add_attachment_to_weapon(var_04,var_05,1);
-	while(param_00 isswitchingweapon())
-	{
+	while(param_00 isswitchingweapon()) {
 		wait(0.05);
 	}
 
@@ -1262,9 +1076,7 @@ charge_players_arcane_base_attachment(param_00,param_01)
 	param_00 scripts\cp\cp_persistence::give_player_xp(500,1);
 }
 
-//Function Number: 43
-play_arcane_vo(param_00)
-{
+play_arcane_vo(param_00) {
 	level endon("game_ended");
 	param_00 endon("disconnect");
 	param_00 endon("last_stand");
@@ -1274,11 +1086,8 @@ play_arcane_vo(param_00)
 	level thread scripts\cp\cp_vo::try_to_play_vo("ww_arcane_corecharged_complete","zmb_ww_vo","highest",60,0,0,1);
 }
 
-//Function Number: 44
-set_gun_slot_from_part_num(param_00,param_01)
-{
-	switch(param_01)
-	{
+set_gun_slot_from_part_num(param_00,param_01) {
+	switch(param_01) {
 		case 1:
 			param_00.part_1 = 1;
 			break;
@@ -1293,12 +1102,9 @@ set_gun_slot_from_part_num(param_00,param_01)
 	}
 }
 
-//Function Number: 45
-setup_standee_data(param_00)
-{
+setup_standee_data(param_00) {
 	var_01 = getweaponbasename(param_00);
-	switch(var_01)
-	{
+	switch(var_01) {
 		case "iw7_headcutter_zm":
 			init_headcutter_data();
 			break;
@@ -1317,9 +1123,7 @@ setup_standee_data(param_00)
 	}
 }
 
-//Function Number: 46
-init_headcutter_data()
-{
+init_headcutter_data() {
 	self.toy_model = "zmb_ice_monster_toy";
 	self.toy_model_state = "ice_monster";
 	self.battery_model = "alien_crafting_battery_single_01";
@@ -1336,9 +1140,7 @@ init_headcutter_data()
 	self.place_on_standee_string = &"CP_QUEST_WOR_PLACE_HC";
 }
 
-//Function Number: 47
-init_facemelter_data()
-{
+init_facemelter_data() {
 	self.toy_model = "decor_spaceshuttle_boosters_toy";
 	self.toy_model_state = "spaceshuttle";
 	self.battery_model = "alien_crafting_battery_single_01";
@@ -1355,9 +1157,7 @@ init_facemelter_data()
 	self.place_on_standee_string = &"CP_QUEST_WOR_PLACE_FACEMELTER";
 }
 
-//Function Number: 48
-init_dischord_data()
-{
+init_dischord_data() {
 	self.toy_model = "zmb_spaceland_discoball_toy";
 	self.toy_model_state = "discoball";
 	self.battery_model = "alien_crafting_battery_single_01";
@@ -1374,9 +1174,7 @@ init_dischord_data()
 	self.place_on_standee_string = &"CP_QUEST_WOR_PLACE_DISCHORD";
 }
 
-//Function Number: 49
-init_shredder_data()
-{
+init_shredder_data() {
 	self.toy_model = "statue_angry_mike_toy";
 	self.toy_model_state = "angry_mike";
 	self.battery_model = "alien_crafting_battery_single_01";
@@ -1393,11 +1191,8 @@ init_shredder_data()
 	self.place_on_standee_string = &"CP_QUEST_WOR_PLACE_SHREDDER";
 }
 
-//Function Number: 50
-get_part_name(param_00)
-{
-	switch(param_00)
-	{
+get_part_name(param_00) {
+	switch(param_00) {
 		case 1:
 			return "toy";
 
@@ -1411,15 +1206,11 @@ get_part_name(param_00)
 	return undefined;
 }
 
-//Function Number: 51
-get_omnvar_bit(param_00,param_01)
-{
+get_omnvar_bit(param_00,param_01) {
 	var_02 = getweaponbasename(param_00);
-	switch(var_02)
-	{
+	switch(var_02) {
 		case "iw7_headcutter_zm":
-			switch(param_01)
-			{
+			switch(param_01) {
 				case 1:
 					return 10;
 	
@@ -1432,8 +1223,7 @@ get_omnvar_bit(param_00,param_01)
 			break;
 
 		case "iw7_facemelter_zm":
-			switch(param_01)
-			{
+			switch(param_01) {
 				case 1:
 					return 13;
 	
@@ -1446,8 +1236,7 @@ get_omnvar_bit(param_00,param_01)
 			break;
 
 		case "iw7_dischord_zm":
-			switch(param_01)
-			{
+			switch(param_01) {
 				case 1:
 					return 16;
 	
@@ -1460,8 +1249,7 @@ get_omnvar_bit(param_00,param_01)
 			break;
 
 		case "iw7_shredder_zm":
-			switch(param_01)
-			{
+			switch(param_01) {
 				case 1:
 					return 19;
 	
@@ -1477,11 +1265,8 @@ get_omnvar_bit(param_00,param_01)
 	return undefined;
 }
 
-//Function Number: 52
-get_part_model(param_00,param_01)
-{
-	switch(param_01)
-	{
+get_part_model(param_00,param_01) {
+	switch(param_01) {
 		case 1:
 			return param_00.toy_model;
 
@@ -1495,12 +1280,9 @@ get_part_model(param_00,param_01)
 	return undefined;
 }
 
-//Function Number: 53
-get_toy_angle_offset(param_00)
-{
+get_toy_angle_offset(param_00) {
 	var_01 = getweaponbasename(param_00.gun);
-	switch(var_01)
-	{
+	switch(var_01) {
 		case "iw7_headcutter_zm":
 			return (0,-90,0);
 
@@ -1517,12 +1299,9 @@ get_toy_angle_offset(param_00)
 	return undefined;
 }
 
-//Function Number: 54
-get_toy_pos_offset(param_00)
-{
+get_toy_pos_offset(param_00) {
 	var_01 = getweaponbasename(param_00.gun);
-	switch(var_01)
-	{
+	switch(var_01) {
 		case "iw7_headcutter_zm":
 			return (-4,1,3);
 
@@ -1539,33 +1318,25 @@ get_toy_pos_offset(param_00)
 	return undefined;
 }
 
-//Function Number: 55
-wor_quest_death_update_func(param_00,param_01)
-{
-	if(scripts\engine\utility::flag("mini_ufo_yellow_ready") && level.head_cutter_trap_kills >= 15)
-	{
+wor_quest_death_update_func(param_00,param_01) {
+	if(scripts\engine\utility::flag("mini_ufo_yellow_ready") && level.head_cutter_trap_kills >= 15) {
 		level notify("ww_iw7_headcutter_zm_crystal_dropped",param_00.origin);
 	}
 
-	if(scripts\engine\utility::flag("mini_ufo_red_ready") && level.angry_mike_trap_kills >= 15)
-	{
+	if(scripts\engine\utility::flag("mini_ufo_red_ready") && level.angry_mike_trap_kills >= 15) {
 		level notify("ww_iw7_shredder_zm_crystal_dropped",param_00.origin);
 	}
 
-	if(scripts\engine\utility::flag("mini_ufo_green_ready") && level.disco_trap_kills >= 15)
-	{
+	if(scripts\engine\utility::flag("mini_ufo_green_ready") && level.disco_trap_kills >= 15) {
 		level notify("ww_iw7_dischord_zm_crystal_dropped",param_00.origin);
 	}
 
-	if(scripts\engine\utility::flag("mini_ufo_blue_ready") && level.rocket_trap_kills >= 15)
-	{
+	if(scripts\engine\utility::flag("mini_ufo_blue_ready") && level.rocket_trap_kills >= 15) {
 		level notify("ww_iw7_facemelter_zm_crystal_dropped",param_00.origin);
 	}
 }
 
-//Function Number: 56
-wor_quest_crafting_func()
-{
+wor_quest_crafting_func() {
 	level.headcutter_crafting_list = ["zmb_coin_ice","zmb_coin_ice","zmb_coin_ice"];
 	level.shredder_crafting_list = ["zmb_coin_alien","zmb_coin_alien","zmb_coin_alien"];
 	level.dischord_crafting_list = ["zmb_coin_alien","zmb_coin_space","zmb_coin_ice"];
@@ -1575,45 +1346,35 @@ wor_quest_crafting_func()
 	var_02 = "mars_3";
 	var_03 = "moon_bumpercars";
 	var_04 = [];
-	while(var_04.size < 4)
-	{
+	while(var_04.size < 4) {
 		level waittill("quest_crafting_check",var_05);
-		if(scripts\cp\utility::is_codxp())
-		{
+		if(scripts\cp\utility::is_codxp()) {
 			continue;
 		}
 
-		if(!isdefined(var_04["iw7_headcutter_zm"]) && ingredient_list_check(var_05.ingredient_list,level.headcutter_crafting_list))
-		{
-			if(isdefined(var_05.power_area) && var_05.power_area == var_00)
-			{
+		if(!isdefined(var_04["iw7_headcutter_zm"]) && ingredient_list_check(var_05.ingredient_list,level.headcutter_crafting_list)) {
+			if(isdefined(var_05.power_area) && var_05.power_area == var_00) {
 				level notify("ww_iw7_headcutter_zm_toy_dropped",var_05.origin);
 				var_04["iw7_headcutter_zm"] = 1;
 			}
 		}
 
-		if(!isdefined(var_04["iw7_shredder_zm"]) && ingredient_list_check(var_05.ingredient_list,level.shredder_crafting_list))
-		{
-			if(isdefined(var_05.power_area) && var_05.power_area == var_02)
-			{
+		if(!isdefined(var_04["iw7_shredder_zm"]) && ingredient_list_check(var_05.ingredient_list,level.shredder_crafting_list)) {
+			if(isdefined(var_05.power_area) && var_05.power_area == var_02) {
 				level notify("ww_iw7_shredder_zm_toy_dropped",var_05.origin);
 				var_04["iw7_shredder_zm"] = 1;
 			}
 		}
 
-		if(!isdefined(var_04["iw7_dischord_zm"]) && ingredient_list_check(var_05.ingredient_list,level.dischord_crafting_list))
-		{
-			if(isdefined(var_05.power_area) && var_05.power_area == var_03)
-			{
+		if(!isdefined(var_04["iw7_dischord_zm"]) && ingredient_list_check(var_05.ingredient_list,level.dischord_crafting_list)) {
+			if(isdefined(var_05.power_area) && var_05.power_area == var_03) {
 				level notify("ww_iw7_dischord_zm_toy_dropped",var_05.origin);
 				var_04["iw7_dischord_zm"] = 1;
 			}
 		}
 
-		if(!isdefined(var_04["iw7_facemelter_zm"]) && ingredient_list_check(var_05.ingredient_list,level.facemelter_crafting_list))
-		{
-			if(isdefined(var_05.power_area) && var_05.power_area == var_01)
-			{
+		if(!isdefined(var_04["iw7_facemelter_zm"]) && ingredient_list_check(var_05.ingredient_list,level.facemelter_crafting_list)) {
+			if(isdefined(var_05.power_area) && var_05.power_area == var_01) {
 				level notify("ww_iw7_facemelter_zm_toy_dropped",var_05.origin);
 				var_04["iw7_facemelter_zm"] = 1;
 			}
@@ -1621,28 +1382,21 @@ wor_quest_crafting_func()
 	}
 }
 
-//Function Number: 57
-ingredient_list_check(param_00,param_01)
-{
-	if(param_01.size == 0)
-	{
+ingredient_list_check(param_00,param_01) {
+	if(param_01.size == 0) {
 		return 0;
 	}
 
-	foreach(var_03 in param_00)
-	{
+	foreach(var_03 in param_00) {
 		var_04 = undefined;
-		foreach(var_06 in param_01)
-		{
-			if(var_03 == var_06)
-			{
+		foreach(var_06 in param_01) {
+			if(var_03 == var_06) {
 				var_04 = var_06;
 				break;
 			}
 		}
 
-		if(!isdefined(var_04))
-		{
+		if(!isdefined(var_04)) {
 			return 0;
 		}
 		else
@@ -1654,21 +1408,16 @@ ingredient_list_check(param_00,param_01)
 	return 1;
 }
 
-//Function Number: 58
-array_remove_single(param_00,param_01)
-{
+array_remove_single(param_00,param_01) {
 	var_02 = 0;
 	var_03 = [];
-	foreach(var_05 in param_00)
-	{
-		if(var_02)
-		{
+	foreach(var_05 in param_00) {
+		if(var_02) {
 			var_03[var_03.size] = var_05;
 			continue;
 		}
 
-		if(var_05 != param_01)
-		{
+		if(var_05 != param_01) {
 			var_03[var_03.size] = var_05;
 			continue;
 		}
@@ -1679,9 +1428,7 @@ array_remove_single(param_00,param_01)
 	return var_03;
 }
 
-//Function Number: 59
-follow_struct_trail(param_00,param_01,param_02)
-{
+follow_struct_trail(param_00,param_01,param_02) {
 	var_03 = scripts\engine\utility::getstructarray("toy_trail_start","targetname");
 	var_04 = scripts\engine\utility::getclosest(self.origin,var_03);
 	wait(0.5);
@@ -1690,11 +1437,9 @@ follow_struct_trail(param_00,param_01,param_02)
 	var_05 = scripts\engine\utility::getstruct(var_04.target,"targetname");
 	self moveto(var_05.origin,0.5);
 	self waittill("movedone");
-	while(isdefined(var_05.target))
-	{
+	while(isdefined(var_05.target)) {
 		var_05 = scripts\engine\utility::getstruct(var_05.target,"targetname");
-		if(!isdefined(var_05.target))
-		{
+		if(!isdefined(var_05.target)) {
 			var_06 = var_05.origin - var_04.origin;
 			var_06 = vectornormalize(var_06);
 			var_06 = var_06 * 40;
@@ -1710,13 +1455,10 @@ follow_struct_trail(param_00,param_01,param_02)
 	wait(0.5);
 }
 
-//Function Number: 60
-spin_toy()
-{
+spin_toy() {
 	self endon("death");
 	self endon("trigger");
-	for(;;)
-	{
+	for(;;) {
 		self rotateyaw(360,2);
 		self movez(5,2);
 		self waittill("movedone");
@@ -1726,80 +1468,61 @@ spin_toy()
 	}
 }
 
-//Function Number: 61
-listen_for_shredder_battery_hit()
-{
+listen_for_shredder_battery_hit() {
 	level.shredder_battery_dropped = 1;
 	level notify("ww_iw7_shredder_zm_battery_dropped",self.origin);
 }
 
-//Function Number: 62
-listen_for_grenade_in_volume()
-{
-	if(scripts\cp\utility::is_codxp())
-	{
+listen_for_grenade_in_volume() {
+	if(scripts\cp\utility::is_codxp()) {
 		return;
 	}
 
 	self endon("disconnect");
-	while(!scripts\engine\utility::flag_exist("fast_travel_init_done"))
-	{
+	while(!scripts\engine\utility::flag_exist("fast_travel_init_done")) {
 		wait(0.1);
 	}
 
 	scripts\engine\utility::flag_wait("fast_travel_init_done");
 	var_00 = getentarray("portal_grenade_volume","targetname");
-	for(;;)
-	{
+	for(;;) {
 		self waittill("grenade_fire",var_01,var_02);
-		if(isdefined(var_01) && isdefined(var_02))
-		{
+		if(isdefined(var_01) && isdefined(var_02)) {
 			var_01 thread wait_for_impact(var_00[0],var_02,self);
 		}
 	}
 }
 
-//Function Number: 63
-check_for_grenade_in_volume(param_00,param_01,param_02)
-{
+check_for_grenade_in_volume(param_00,param_01,param_02) {
 	self endon("death");
 	scripts\engine\utility::waitframe();
-	if(!isdefined(level.hot_potato_stage))
-	{
+	if(!isdefined(level.hot_potato_stage)) {
 		level.hot_potato_stage = 0;
 	}
 
-	for(;;)
-	{
-		if(level.hot_potato_stage == 0)
-		{
-			if(!level.facemelter_portal.portal_is_open && !level.facemelter_portal.portal_charging)
-			{
+	for(;;) {
+		if(level.hot_potato_stage == 0) {
+			if(!level.facemelter_portal.portal_is_open && !level.facemelter_portal.portal_charging) {
 				wait(0.1);
 				continue;
 			}
 
-			if(self istouching(param_00))
-			{
+			if(self istouching(param_00)) {
 				level.hot_potato_stage = 1;
 				level thread start_hot_potato(self,param_00,param_01,param_02);
 			}
 		}
-		else if(isdefined(level.hot_potato_carrier) && param_02 == level.hot_potato_carrier && is_thrown_back_grenade(param_02))
-		{
+		else if(isdefined(level.hot_potato_carrier) && param_02 == level.hot_potato_carrier && is_thrown_back_grenade(param_02)) {
 			self.potato = 1;
 			level.hot_potato_carrier = undefined;
 			level.last_potato_carrier = param_02;
-			if(self istouching(param_00))
-			{
+			if(self istouching(param_00)) {
 				level thread throw_battery_out_of_portal(self,param_02);
 			}
 		}
 
-		if(scripts\engine\utility::istrue(self.potato))
-		{
-			if(self istouching(param_00))
-			{
+		if(scripts\engine\utility::istrue(self.potato)) {
+			if(self istouching(param_00)) {
 				level thread throw_battery_out_of_portal(self,param_02);
 			}
 		}
@@ -1808,9 +1531,7 @@ check_for_grenade_in_volume(param_00,param_01,param_02)
 	}
 }
 
-//Function Number: 64
-start_hot_potato(param_00,param_01,param_02,param_03)
-{
+start_hot_potato(param_00,param_01,param_02,param_03) {
 	level endon("end_hot_potato_stage_1");
 	level.potatoes_needed = 1;
 	var_04 = param_00 throw_grenade_back(param_01,param_02,param_03,5);
@@ -1818,10 +1539,8 @@ start_hot_potato(param_00,param_01,param_02,param_03)
 	var_04 thread notify_on_explode();
 	var_04 thread listen_for_pickup();
 	var_05 = level scripts\engine\utility::waittill_any_return("hot_potato_timed_out");
-	if(var_05 == "hot_potato_timed_out")
-	{
-		if(isdefined(level.last_potato_carrier))
-		{
+	if(var_05 == "hot_potato_timed_out") {
+		if(isdefined(level.last_potato_carrier)) {
 			level thread play_fail_sound(level.last_potato_carrier,2);
 		}
 
@@ -1831,43 +1550,32 @@ start_hot_potato(param_00,param_01,param_02,param_03)
 	}
 }
 
-//Function Number: 65
-play_fail_sound(param_00,param_01)
-{
+play_fail_sound(param_00,param_01) {
 	param_00 endon("death");
 	wait(param_01);
 	param_00 playlocalsound("zapper_grenade_toss_fail");
 }
 
-//Function Number: 66
-listen_for_pickup()
-{
+listen_for_pickup() {
 	level endon("hot_potato_timed_out");
 	self waittill("trigger",var_00);
 	level.hot_potato_carrier = var_00;
 }
 
-//Function Number: 67
-throw_battery_out_of_portal(param_00,param_01)
-{
+throw_battery_out_of_portal(param_00,param_01) {
 	level.hot_potato_stage = 2;
 	level notify("ww_iw7_facemelter_zm_battery_dropped",param_01.origin);
 	param_00 delete();
 }
 
-//Function Number: 68
-notify_on_explode()
-{
+notify_on_explode() {
 	self waittill("explode");
 	level.hot_potato_stage = 0;
 	level notify("hot_potato_timed_out");
 }
 
-//Function Number: 69
-throw_grenade_back(param_00,param_01,param_02,param_03)
-{
-	if(!isdefined(param_03))
-	{
+throw_grenade_back(param_00,param_01,param_02,param_03) {
+	if(!isdefined(param_03)) {
 		param_03 = 5;
 	}
 
@@ -1880,48 +1588,36 @@ throw_grenade_back(param_00,param_01,param_02,param_03)
 	return var_06;
 }
 
-//Function Number: 70
-is_thrown_back_grenade(param_00)
-{
-	if(!isdefined(param_00.throwinggrenade))
-	{
+is_thrown_back_grenade(param_00) {
+	if(!isdefined(param_00.throwinggrenade)) {
 		return 1;
 	}
 
 	return 0;
 }
 
-//Function Number: 71
-notify_test(param_00)
-{
+notify_test(param_00) {
 	self waittill(param_00,var_01,var_02,var_03,var_04,var_05);
 	var_06 = 0;
 }
 
-//Function Number: 72
-wait_for_impact(param_00,param_01,param_02)
-{
+wait_for_impact(param_00,param_01,param_02) {
 	self endon("death");
 	var_03 = 20;
 	var_04 = var_03 * var_03;
 	var_05 = scripts\engine\utility::getstructarray("freeze_breath_struct","targetname");
 	var_05 = scripts\engine\utility::get_array_of_closest(self.origin,var_05);
 	var_06 = var_05[0];
-	if(!isdefined(level.facemelter_portal))
-	{
+	if(!isdefined(level.facemelter_portal)) {
 		level.facemelter_portal = scripts\engine\utility::getclosest(param_00.origin,level.fast_travel_spots);
 	}
 
-	if(facemelter_grenade_check(param_01))
-	{
-		if(!isdefined(level.hot_potato_stage) || level.hot_potato_stage < 1)
-		{
+	if(facemelter_grenade_check(param_01)) {
+		if(!isdefined(level.hot_potato_stage) || level.hot_potato_stage < 1) {
 			thread check_for_grenade_in_volume(param_00,param_01,param_02);
 		}
-		else if(level.hot_potato_stage < 2)
-		{
-			if(isdefined(level.hot_potato_carrier) && level.hot_potato_carrier == param_02)
-			{
+		else if(level.hot_potato_stage < 2) {
+			if(isdefined(level.hot_potato_carrier) && level.hot_potato_carrier == param_02) {
 				self.potato = 1;
 				level.hot_potato_carrier = undefined;
 				thread notify_on_explode();
@@ -1935,11 +1631,8 @@ wait_for_impact(param_00,param_01,param_02)
 	thread listen_for_mouth_explosion(var_04,var_06,param_02);
 }
 
-//Function Number: 73
-facemelter_grenade_check(param_00)
-{
-	switch(param_00)
-	{
+facemelter_grenade_check(param_00) {
+	switch(param_00) {
 		case "cluster_grenade_zm":
 		case "semtex_zm":
 		case "frag_grenade_zm":
@@ -1949,73 +1642,54 @@ facemelter_grenade_check(param_00)
 	return 0;
 }
 
-//Function Number: 74
-listen_for_mouth_explosion(param_00,param_01,param_02)
-{
-	if(!isdefined(self.weapon_name) || self.weapon_name != "zfreeze_semtex_mp")
-	{
+listen_for_mouth_explosion(param_00,param_01,param_02) {
+	if(!isdefined(self.weapon_name) || self.weapon_name != "zfreeze_semtex_mp") {
 		return;
 	}
 
 	self waittill("explode",var_03);
 	var_04 = getent("headcutter_grenade_vol","targetname");
-	if(function_010F(var_03,var_04))
-	{
+	if(function_010F(var_03,var_04)) {
 		param_01 notify("cryo_hit");
-		if(isdefined(param_02))
-		{
+		if(isdefined(param_02)) {
 			param_02 thread scripts\cp\cp_vo::try_to_play_vo("quest_icemonster_grenade","zmb_comment_vo","highest",10,1,0,0,100);
 		}
 	}
 }
 
-//Function Number: 75
-listen_for_triton_power()
-{
+listen_for_triton_power() {
 	level scripts\engine\utility::waittill_any_return("power_on","europa_tunnel power_on");
 	scripts\engine\utility::flag_init("listen_for_cryo_hit");
 	scripts\engine\utility::flag_set("listen_for_cryo_hit");
 }
 
-//Function Number: 76
-wor_change_portal(param_00)
-{
-	if(!isdefined(level.wor_portal_change_time) || level.wor_portal_change_time < 5)
-	{
+wor_change_portal(param_00) {
+	if(!isdefined(level.wor_portal_change_time) || level.wor_portal_change_time < 5) {
 		level.wor_portal_change_time = 5;
 	}
 
-	while(level.wor_portal_change_time > 0)
-	{
+	while(level.wor_portal_change_time > 0) {
 		level.var_13DB5--;
 		wait(1);
 	}
 }
 
-//Function Number: 77
-wait_to_spawn_facemelter_battery()
-{
+wait_to_spawn_facemelter_battery() {
 	level waittill("player_entering_wor_changed_portal",var_00);
 	var_01 = scripts\engine\utility::getstruct("facemelter_battery_org","targetname");
 	level notify("ww_iw7_facemelter_zm_battery_dropped",var_01.origin);
-	while(!isdefined(level.facemelter_battery))
-	{
+	while(!isdefined(level.facemelter_battery)) {
 		wait(0.1);
 	}
 
 	level thread facemelter_battery_phase_listener();
 }
 
-//Function Number: 78
-facemelter_battery_phase_listener()
-{
+facemelter_battery_phase_listener() {
 	level endon("ww_iw7_facemelter_zm_battery_picked_up");
-	for(;;)
-	{
-		foreach(var_01 in level.players)
-		{
-			if(!var_01 is_in_fake_phase_shift())
-			{
+	for(;;) {
+		foreach(var_01 in level.players) {
+			if(!var_01 is_in_fake_phase_shift()) {
 				level.facemelter_battery hidefromplayer(var_01);
 				level.facemelter_battery disableplayeruse(var_01);
 				continue;
@@ -2029,15 +1703,11 @@ facemelter_battery_phase_listener()
 	}
 }
 
-//Function Number: 79
-is_in_fake_phase_shift()
-{
+is_in_fake_phase_shift() {
 	return scripts\engine\utility::istrue(self.wor_phase_shift);
 }
 
-//Function Number: 80
-dischord_glasses_listener()
-{
+dischord_glasses_listener() {
 	level.wor_glasses = 0;
 	level.dischord_targets_hit = 0;
 	var_00 = getentarray("dischord_target","targetname");
@@ -2046,21 +1716,17 @@ dischord_glasses_listener()
 	var_02 = scripts\engine\utility::getclosest((3504,-1297,172),var_00,500);
 	var_03 = scripts\engine\utility::getclosest((1865,-2068,1046),var_00,500);
 	level.dischord_targets = [5];
-	foreach(var_05 in var_00)
-	{
-		if(var_01 < 5)
-		{
+	foreach(var_05 in var_00) {
+		if(var_01 < 5) {
 			level.dischord_targets[var_01] = var_05;
 			level thread dischord_target_listener(var_05);
 		}
 
-		if(var_05 == var_02)
-		{
+		if(var_05 == var_02) {
 			var_05.origin = var_05.origin + (0,-25,5);
 		}
 
-		if(var_05 == var_03)
-		{
+		if(var_05 == var_03) {
 			var_05.origin = (1866,-2107,835);
 			var_05.angles = (74,117,0);
 		}
@@ -2073,21 +1739,16 @@ dischord_glasses_listener()
 	level waittill("ww_iw7_dischord_zm_battery_dropped");
 }
 
-//Function Number: 81
-dischord_target_listener(param_00)
-{
+dischord_target_listener(param_00) {
 	param_00 hudoutlineenable(1,1,0);
 	param_00 setcandamage(1);
 	var_01 = 0;
-	while(!var_01)
-	{
+	while(!var_01) {
 		param_00 waittill("damage",var_02,var_03);
-		if(isplayer(var_03) && scripts\engine\utility::istrue(var_03.wearing_dischord_glasses) || level.debug_dischord_targets)
-		{
+		if(isplayer(var_03) && scripts\engine\utility::istrue(var_03.wearing_dischord_glasses) || level.debug_dischord_targets) {
 			level.var_5629++;
 			var_01 = 1;
-			if(level.dischord_targets_hit >= 5)
-			{
+			if(level.dischord_targets_hit >= 5) {
 				level notify("ww_iw7_dischord_zm_battery_dropped",param_00.origin - (0,0,50));
 			}
 		}
@@ -2095,31 +1756,23 @@ dischord_target_listener(param_00)
 
 	playfx(level._effect["pickup"],param_00.origin);
 	param_00 notify("stop_visibility_listener");
-	if(scripts\engine\utility::array_contains(level.dischord_targets,param_00))
-	{
+	if(scripts\engine\utility::array_contains(level.dischord_targets,param_00)) {
 		level.dischord_targets = scripts\engine\utility::array_remove(level.dischord_targets,param_00);
 	}
 
 	param_00 delete();
 }
 
-//Function Number: 82
-dischord_visibility_listener()
-{
+dischord_visibility_listener() {
 	self endon("stop_visibility_listener");
-	if(!isdefined(level.debug_dischord_targets))
-	{
+	if(!isdefined(level.debug_dischord_targets)) {
 		level.debug_dischord_targets = 0;
 	}
 
-	for(;;)
-	{
-		foreach(var_01 in level.dischord_targets)
-		{
-			foreach(var_03 in level.players)
-			{
-				if(scripts\engine\utility::istrue(var_03.wearing_dischord_glasses) || level.debug_dischord_targets)
-				{
+	for(;;) {
+		foreach(var_01 in level.dischord_targets) {
+			foreach(var_03 in level.players) {
+				if(scripts\engine\utility::istrue(var_03.wearing_dischord_glasses) || level.debug_dischord_targets) {
 					var_01 showtoplayer(var_03);
 					var_01 hudoutlineenable(1,1,0);
 					continue;
@@ -2133,21 +1786,15 @@ dischord_visibility_listener()
 	}
 }
 
-//Function Number: 83
-debug_show_dischord_targets()
-{
-	if(!isdefined(level.debug_dischord_targets))
-	{
+debug_show_dischord_targets() {
+	if(!isdefined(level.debug_dischord_targets)) {
 		level.debug_dischord_targets = 0;
 	}
 
-	for(;;)
-	{
+	for(;;) {
 		var_00 = getdvarint("scr_show_dischord_targets",0);
-		if(var_00 != 0)
-		{
-			if(level.debug_dischord_targets)
-			{
+		if(var_00 != 0) {
+			if(level.debug_dischord_targets) {
 				level.debug_dischord_targets = 0;
 				debug_make_dischord_targets_invisible();
 			}
@@ -2164,48 +1811,36 @@ debug_show_dischord_targets()
 	}
 }
 
-//Function Number: 84
-debug_make_dischord_targets_visible()
-{
+debug_make_dischord_targets_visible() {
 	var_00 = getentarray("dischord_target","targetname");
-	foreach(var_02 in var_00)
-	{
+	foreach(var_02 in var_00) {
 		var_02 show();
 		var_02 hudoutlineenable(1,0,0);
 	}
 }
 
-//Function Number: 85
-debug_make_dischord_targets_invisible()
-{
+debug_make_dischord_targets_invisible() {
 	var_00 = getentarray("dischord_target","targetname");
-	foreach(var_02 in var_00)
-	{
+	foreach(var_02 in var_00) {
 		var_02 hudoutlineenable(1,1,0);
 		var_02 hide();
 	}
 }
 
-//Function Number: 86
-dischord_battery_move()
-{
+dischord_battery_move() {
 	var_00 = scripts\engine\utility::getstruct("dischord_battery_end_loc","targetname");
 	self moveto(var_00.origin,5,0.1,0.1);
 	self waittill("movedone");
 }
 
-//Function Number: 87
-wor_quest_pillage_func()
-{
-	if(!isdefined(level.glasses_drop_change_increase))
-	{
+wor_quest_pillage_func() {
+	if(!isdefined(level.glasses_drop_change_increase)) {
 		level.glasses_drop_change_increase = 0;
 	}
 
 	var_00 = randomint(100);
 	var_01 = 10 + level.glasses_drop_change_increase;
-	if(var_00 < var_01 && !level.wor_glasses)
-	{
+	if(var_00 < var_01 && !level.wor_glasses) {
 		level.glasses_drop_change_increase = 0;
 		return "quest";
 	}
@@ -2217,27 +1852,21 @@ wor_quest_pillage_func()
 	return undefined;
 }
 
-//Function Number: 88
-wor_quest_specific_pillage_show_func(param_00,param_01,param_02)
-{
+wor_quest_specific_pillage_show_func(param_00,param_01,param_02) {
 	playfx(level._effect["souvenir_pickup"],param_02.origin + (0,0,30));
 	param_00 give_glasses_power();
 	param_00 scripts\cp\utility::setlowermessage("msg_power_hint",&"CP_QUEST_WOR_GLASSES_TOGGLE",4);
 	param_02 notify("all_players_searched");
 }
 
-//Function Number: 89
-give_glasses_power()
-{
+give_glasses_power() {
 	var_00 = spawnstruct();
 	var_00.power_name = "power_glasses";
 	scripts\cp\powers\coop_powers::give_player_wall_bought_power(var_00,self);
 	var_00 = undefined;
 }
 
-//Function Number: 90
-wor_quest_create_pillage_interaction(param_00,param_01)
-{
+wor_quest_create_pillage_interaction(param_00,param_01) {
 	param_00.type = "quest";
 	param_00.randomintrange = "quest";
 	param_01.effect = spawnfx(level._effect["quest_glasses_drop"],param_01.origin);
@@ -2247,21 +1876,16 @@ wor_quest_create_pillage_interaction(param_00,param_01)
 	triggerfx(param_01.effect);
 }
 
-//Function Number: 91
-unset_flag_if_not_picked_up(param_00)
-{
+unset_flag_if_not_picked_up(param_00) {
 	self endon("picked_up");
 	self waittill("stop_pillage_spot_think");
 	level.wor_glasses = 0;
-	if(isdefined(param_00))
-	{
+	if(isdefined(param_00)) {
 		param_00 delete();
 	}
 }
 
-//Function Number: 92
-give_glasses_to_player()
-{
+give_glasses_to_player() {
 	self.has_dischord_glasses = 1;
 	self.dont_use_charges = "power_glasses";
 	thread listen_to_toggle_glasses();
@@ -2269,12 +1893,9 @@ give_glasses_to_player()
 	scripts\engine\utility::flag_set("dischord_glasses_pickedup");
 }
 
-//Function Number: 93
-put_glasses_on_player(param_00)
-{
+put_glasses_on_player(param_00) {
 	var_01 = "ges_visor_up";
-	if(!self isgestureplaying())
-	{
+	if(!self isgestureplaying()) {
 		var_02 = 0;
 		self setweaponammostock("iw7_sunglasses_zm_on",1);
 		self giveandfireoffhand("iw7_sunglasses_zm_on");
@@ -2284,9 +1905,7 @@ put_glasses_on_player(param_00)
 	scripts\engine\utility::flag_set("dischord_glasses_pickedup");
 }
 
-//Function Number: 94
-remove_glasses_from_player()
-{
+remove_glasses_from_player() {
 	self notify("removing_glasses_from_player");
 	self.wearing_dischord_glasses = 0;
 	self.has_dischord_glasses = 0;
@@ -2294,9 +1913,7 @@ remove_glasses_from_player()
 	self.dont_use_charges = undefined;
 }
 
-//Function Number: 95
-put_glasses_on()
-{
+put_glasses_on() {
 	wait(1);
 	self.wearing_dischord_glasses = 1;
 	self visionsetnakedforplayer("cp_zmb_bw",0.1);
@@ -2305,33 +1922,26 @@ put_glasses_on()
 	thread scripts\cp\cp_vo::try_to_play_vo("sunglasses","zmb_comment_vo","low",30,0,0,0,30);
 }
 
-//Function Number: 96
-reapply_visionset_after_host_migration()
-{
+reapply_visionset_after_host_migration() {
 	self endon("death");
 	self endon("disconnect");
 	self endon("removing_glasses_from_player");
 	level waittill("host_migration_begin");
 	level waittill("host_migration_end");
-	if(scripts\engine\utility::istrue(self.wearing_dischord_glasses))
-	{
+	if(scripts\engine\utility::istrue(self.wearing_dischord_glasses)) {
 		self visionsetnakedforplayer("cp_zmb_bw");
 		thread wait_to_knock_off_glasses();
 	}
 }
 
-//Function Number: 97
-take_glasses_off(param_00)
-{
-	if(param_00)
-	{
+take_glasses_off(param_00) {
+	if(param_00) {
 		thread launch_glasses();
 		return;
 	}
 
 	self.wearing_dischord_glasses = 0;
-	if(isdefined(level.vision_set_override))
-	{
+	if(isdefined(level.vision_set_override)) {
 		self visionsetnakedforplayer(level.vision_set_override,0.1);
 	}
 	else
@@ -2340,17 +1950,14 @@ take_glasses_off(param_00)
 	}
 
 	var_01 = "ges_visor_down";
-	if(!self isgestureplaying())
-	{
+	if(!self isgestureplaying()) {
 		var_02 = 0;
 		self setweaponammostock("iw7_sunglasses_zm_off",1);
 		self giveandfireoffhand("iw7_sunglasses_zm_off");
 	}
 }
 
-//Function Number: 98
-launch_glasses()
-{
+launch_glasses() {
 	self endon("deleting_glasses");
 	scripts\cp\powers\coop_powers::removepower("power_glasses");
 	var_00 = 400;
@@ -2373,19 +1980,14 @@ launch_glasses()
 	var_05 delete();
 }
 
-//Function Number: 99
-wait_to_knock_off_glasses()
-{
+wait_to_knock_off_glasses() {
 	level endon("ww_iw7_dischord_zm_battery_dropped");
 	self notify("waiting_for_knock_off");
 	self endon("waiting_for_knock_off");
-	while(self.has_dischord_glasses)
-	{
+	while(self.has_dischord_glasses) {
 		self waittill("damage",var_00,var_01);
-		if(isdefined(var_01.team) && var_01.team != self.team)
-		{
-			if(scripts\engine\utility::istrue(self.wearing_dischord_glasses))
-			{
+		if(isdefined(var_01.team) && var_01.team != self.team) {
+			if(scripts\engine\utility::istrue(self.wearing_dischord_glasses)) {
 				take_glasses_off(1);
 				wait(0.1);
 				break;
@@ -2394,15 +1996,11 @@ wait_to_knock_off_glasses()
 	}
 }
 
-//Function Number: 100
-listen_to_toggle_glasses()
-{
+listen_to_toggle_glasses() {
 	self endon("removing_glasses_from_player");
-	while(self.has_dischord_glasses)
-	{
+	while(self.has_dischord_glasses) {
 		self waittill("glasses_change");
-		if(scripts\engine\utility::istrue(self.wearing_dischord_glasses))
-		{
+		if(scripts\engine\utility::istrue(self.wearing_dischord_glasses)) {
 			take_glasses_off(0);
 			continue;
 		}
@@ -2411,9 +2009,7 @@ listen_to_toggle_glasses()
 	}
 }
 
-//Function Number: 101
-reset_flags_on_death()
-{
+reset_flags_on_death() {
 	self notify("glasses_flag_check_reset");
 	self endon("glasses_flag_check_reset");
 	self waittill("death");
@@ -2422,9 +2018,7 @@ reset_flags_on_death()
 	self.dont_use_charges = undefined;
 }
 
-//Function Number: 102
-delete_glasses_after_time(param_00)
-{
+delete_glasses_after_time(param_00) {
 	self endon("glasses_picked_up");
 	wait(param_00);
 	self notify("deleting_glasses");
@@ -2432,65 +2026,48 @@ delete_glasses_after_time(param_00)
 	self delete();
 }
 
-//Function Number: 103
-pick_up_knocked_off_glasses()
-{
+pick_up_knocked_off_glasses() {
 	self hudoutlineenable(2,1,0);
 	self makeusable();
 	var_00 = &"CP_QUEST_WOR_PART";
 	self sethintstring(var_00);
 }
 
-//Function Number: 104
-init_dischord_glasses_power()
-{
-	while(!scripts\engine\utility::flag_exist("powers_init_done"))
-	{
+init_dischord_glasses_power() {
+	while(!scripts\engine\utility::flag_exist("powers_init_done")) {
 		wait(0.1);
 	}
 
-	while(!scripts\engine\utility::flag("powers_init_done"))
-	{
+	while(!scripts\engine\utility::flag("powers_init_done")) {
 		wait(0.1);
 	}
 
 	scripts\cp\powers\coop_powers::powersetupfunctions("power_glasses",::setdischordglasses,::unsetdischordglasses,::usedischordglasses,"powers_glasses_update",undefined,undefined);
 }
 
-//Function Number: 105
-setdischordglasses(param_00)
-{
+setdischordglasses(param_00) {
 	give_glasses_to_player();
 }
 
-//Function Number: 106
-unsetdischordglasses()
-{
+unsetdischordglasses() {
 	remove_glasses_from_player();
 }
 
-//Function Number: 107
-usedischordglasses()
-{
+usedischordglasses() {
 	self notify("glasses_change");
 	self.powers["power_glasses"].charges = 1;
 }
 
-//Function Number: 108
-headcutter_freeze_test()
-{
+headcutter_freeze_test() {
 	level.headcutter_org = scripts\engine\utility::getstruct("headcutter_battery_loc","targetname");
-	if(scripts\cp\utility::is_codxp())
-	{
+	if(scripts\cp\utility::is_codxp()) {
 		return;
 	}
 
 	level thread wait_to_drop_headcutter_battery();
 	var_00 = scripts\engine\utility::getstructarray("freeze_breath_struct","targetname");
-	foreach(var_02 in var_00)
-	{
-		if(var_02.target == "freeze_volume_1")
-		{
+	foreach(var_02 in var_00) {
+		if(var_02.target == "freeze_volume_1") {
 			var_02 thread headcutter_freeze_loop();
 			var_02 thread freeze_check_loop();
 			var_02 thread listen_for_cryo_kills();
@@ -2498,25 +2075,19 @@ headcutter_freeze_test()
 	}
 }
 
-//Function Number: 109
-headcutter_freeze_loop()
-{
+headcutter_freeze_loop() {
 	level endon("hc_freeze_done");
 	self.freeze_active = 1;
 }
 
-//Function Number: 110
-freeze_check_loop()
-{
+freeze_check_loop() {
 	self endon("stop_feeze_loop");
 	self.freeze_volume = getent(self.target,"targetname");
 	var_00 = getent("main_street_monster","targetname");
 	var_01 = 10;
-	for(;;)
-	{
+	for(;;) {
 		self waittill("cryo_hit");
-		if(self.freeze_active)
-		{
+		if(self.freeze_active) {
 			var_00 setscriptablepartstate("main","breath_attack_in");
 			thread freeze_breath(var_01);
 			activate_freeze_volume(var_01);
@@ -2527,18 +2098,12 @@ freeze_check_loop()
 	}
 }
 
-//Function Number: 111
-activate_freeze_volume(param_00)
-{
+activate_freeze_volume(param_00) {
 	var_01 = gettime() + param_00 * 1000;
-	while(gettime() < var_01)
-	{
-		foreach(var_03 in level.spawned_enemies)
-		{
-			if(isdefined(var_03.agent_type) && var_03.agent_type == "generic_zombie" || var_03.agent_type == "zombie_cop")
-			{
-				if(var_03 istouching(self.freeze_volume))
-				{
+	while(gettime() < var_01) {
+		foreach(var_03 in level.spawned_enemies) {
+			if(isdefined(var_03.agent_type) && var_03.agent_type == "generic_zombie" || var_03.agent_type == "zombie_cop") {
+				if(var_03 istouching(self.freeze_volume)) {
 					var_03.freeze_struct = self;
 					var_03 dodamage(1,var_03.origin,level.players[0],level.players[0],"MOD_GRENADE_SPLASH","zfreeze_semtex_mp");
 				}
@@ -2549,9 +2114,7 @@ activate_freeze_volume(param_00)
 	}
 }
 
-//Function Number: 112
-freeze_breath(param_00)
-{
+freeze_breath(param_00) {
 	var_01 = getent("main_street_monster","targetname");
 	var_02 = spawnfx(level._effect["coaster_ice_frost"],self.origin,anglestoforward(self.angles),anglestoup(self.angles));
 	wait(2);
@@ -2561,13 +2124,10 @@ freeze_breath(param_00)
 	var_02 delete();
 }
 
-//Function Number: 113
-listen_for_cryo_kills()
-{
+listen_for_cryo_kills() {
 	var_00 = 0;
 	var_01 = 10;
-	while(var_00 < var_01)
-	{
+	while(var_00 < var_01) {
 		self waittill("headcutter_cryo_kill",var_02,var_03);
 		var_00++;
 		level.var_11A20++;
@@ -2577,13 +2137,9 @@ listen_for_cryo_kills()
 	var_04 playsound("yeti_growl");
 }
 
-//Function Number: 114
-wait_to_drop_headcutter_battery()
-{
-	for(;;)
-	{
-		if(level.total_cryo_kills >= 10)
-		{
+wait_to_drop_headcutter_battery() {
+	for(;;) {
+		if(level.total_cryo_kills >= 10) {
 			level notify("ww_iw7_headcutter_zm_battery_dropped",level.headcutter_org.origin);
 		}
 
@@ -2591,40 +2147,31 @@ wait_to_drop_headcutter_battery()
 	}
 }
 
-//Function Number: 115
-dj_quest_vo_init_timer()
-{
+dj_quest_vo_init_timer() {
 	wait(1000);
 	level thread scripts\cp\cp_vo::add_to_nag_vo("dj_quest_ufo_partsrecovery_hint","zmb_dj_vo",60,15,2,1);
 }
 
-//Function Number: 116
-wor_give_weapon(param_00,param_01,param_02)
-{
+wor_give_weapon(param_00,param_01,param_02) {
 	level endon("game_ended");
 	param_00 endon("disconnect");
-	if(scripts\cp\zombies\zombies_weapons::should_take_players_current_weapon(param_00))
-	{
+	if(scripts\cp\zombies\zombies_weapons::should_take_players_current_weapon(param_00)) {
 		var_03 = param_00 scripts\cp\utility::getvalidtakeweapon();
 		var_04 = scripts\cp\utility::getrawbaseweaponname(var_03);
 		param_00 takeweapon(var_03);
-		if(isdefined(param_00.pap[var_04]))
-		{
+		if(isdefined(param_00.pap[var_04])) {
 			param_00.pap[var_04] = undefined;
 			param_00 notify("weapon_level_changed");
 		}
 	}
 
 	var_05 = scripts\cp\utility::getrawbaseweaponname(param_01);
-	if(param_00 hasweapon("iw7_fists_zm"))
-	{
+	if(param_00 hasweapon("iw7_fists_zm")) {
 		param_00 takeweapon("iw7_fists_zm");
 	}
 
-	if(scripts\engine\utility::istrue(param_02.standee.upgraded))
-	{
-		switch(param_01)
-		{
+	if(scripts\engine\utility::istrue(param_02.standee.upgraded)) {
+		switch(param_01) {
 			case "iw7_facemelter_zm":
 				param_01 = "iw7_facemelter_zm_pap1+fmpap1+camo22";
 				break;
@@ -2644,36 +2191,30 @@ wor_give_weapon(param_00,param_01,param_02)
 	}
 
 	param_01 = param_00 scripts\cp\utility::_giveweapon(param_01,undefined,undefined,0);
-	if(issubstr(param_01,"emc"))
-	{
+	if(issubstr(param_01,"emc")) {
 		param_00.has_replaced_starting_pistol = 1;
 	}
 
 	param_00 notify("wor_item_pickup",param_01);
 	var_06 = 1;
-	if(isdefined(param_02.clip))
-	{
+	if(isdefined(param_02.clip)) {
 		var_06 = 0;
 		param_00 setweaponammoclip(param_01,param_02.clip);
 	}
 
-	if(isdefined(param_02.stock))
-	{
+	if(isdefined(param_02.stock)) {
 		var_06 = 0;
 		param_00 setweaponammostock(param_01,param_02.stock);
 	}
 
 	param_00 switchtoweapon(param_01);
-	if(var_06)
-	{
+	if(var_06) {
 		param_00 givemaxammo(param_01);
 	}
 
 	var_07 = scripts\cp\utility::getrawbaseweaponname(param_01);
-	if(issubstr(param_01,"dischord"))
-	{
-		if(param_00.vo_prefix == "p3_")
-		{
+	if(issubstr(param_01,"dischord")) {
+		if(param_00.vo_prefix == "p3_") {
 			param_00 thread scripts\cp\cp_vo::try_to_play_vo("receive_wor_fav","zmb_comment_vo","highest",10,0,0,1);
 		}
 		else
@@ -2683,10 +2224,8 @@ wor_give_weapon(param_00,param_01,param_02)
 
 		scripts\cp\zombies\zombie_analytics::log_crafted_wor_dischord(level.wave_num);
 	}
-	else if(issubstr(param_01,"facemelter"))
-	{
-		if(param_00.vo_prefix == "p2_")
-		{
+	else if(issubstr(param_01,"facemelter")) {
+		if(param_00.vo_prefix == "p2_") {
 			param_00 thread scripts\cp\cp_vo::try_to_play_vo("receive_wor_fav","zmb_comment_vo","highest",10,0,0,1);
 		}
 		else
@@ -2696,10 +2235,8 @@ wor_give_weapon(param_00,param_01,param_02)
 
 		scripts\cp\zombies\zombie_analytics::log_crafted_wor_facemelter(level.wave_num);
 	}
-	else if(issubstr(param_01,"shredder"))
-	{
-		if(param_00.vo_prefix == "p4_")
-		{
+	else if(issubstr(param_01,"shredder")) {
+		if(param_00.vo_prefix == "p4_") {
 			param_00 thread scripts\cp\cp_vo::try_to_play_vo("receive_wor_fav","zmb_comment_vo","highest",10,0,0,1);
 		}
 		else
@@ -2709,10 +2246,8 @@ wor_give_weapon(param_00,param_01,param_02)
 
 		scripts\cp\zombies\zombie_analytics::log_crafted_wor_shredder(level.wave_num);
 	}
-	else if(issubstr(param_01,"headcutter"))
-	{
-		if(param_00.vo_prefix == "p1_")
-		{
+	else if(issubstr(param_01,"headcutter")) {
+		if(param_00.vo_prefix == "p1_") {
 			param_00 thread scripts\cp\cp_vo::try_to_play_vo("receive_wor_fav","zmb_comment_vo","highest",10,0,0,1);
 		}
 		else
@@ -2731,50 +2266,40 @@ wor_give_weapon(param_00,param_01,param_02)
 	param_00 notify("weapon_level_changed");
 }
 
-//Function Number: 117
-trackplayersworammo(param_00,param_01,param_02)
-{
+trackplayersworammo(param_00,param_01,param_02) {
 	param_00 endon("disconnect");
 	level endon("game_ended");
 	level endon("gun_replaced " + param_01);
 	param_02.stock = param_00 getweaponammostock(param_01);
 	param_02.clip = param_00 getweaponammoclip(param_01);
-	for(;;)
-	{
+	for(;;) {
 		param_00 scripts\engine\utility::waittill_any_3("weapon_fired","reload");
-		if(scripts\engine\utility::istrue(param_00.inlaststand))
-		{
+		if(scripts\engine\utility::istrue(param_00.inlaststand)) {
 			continue;
 		}
 
-		if(scripts\engine\utility::istrue(level.infinite_ammo))
-		{
+		if(scripts\engine\utility::istrue(level.infinite_ammo)) {
 			continue;
 		}
 
 		var_03 = param_00 getcurrentweapon();
 		var_04 = getweaponbasename(var_03);
-		if(var_04 == param_01 || var_04 == param_01 + "_pap1")
-		{
+		if(var_04 == param_01 || var_04 == param_01 + "_pap1") {
 			param_02.stock = param_00 getweaponammostock(var_03);
 			param_02.clip = param_00 getweaponammoclip(var_03);
 		}
 	}
 }
 
-//Function Number: 118
-watchforplayerdeath(param_00,param_01,param_02)
-{
+watchforplayerdeath(param_00,param_01,param_02) {
 	level thread watchforplayerdisconnect(param_00,param_01,param_02);
 	level endon("gun_replaced " + param_01);
 	level endon("game_ended");
 	param_00 endon("disconnect");
 	var_03 = getweaponbasename(param_01);
 	var_04 = 1;
-	for(;;)
-	{
-		if(!var_04)
-		{
+	for(;;) {
+		if(!var_04) {
 			break;
 		}
 
@@ -2782,21 +2307,17 @@ watchforplayerdeath(param_00,param_01,param_02)
 		param_00 waittill("last_stand");
 		var_04 = 0;
 		var_06 = param_00 scripts\engine\utility::waittill_any_return_no_endon_death_3("player_entered_ala","revive","death");
-		if(var_06 != "revive")
-		{
+		if(var_06 != "revive") {
 			var_05 = param_00 scripts\engine\utility::waittill_any_return("lost_and_found_collected","lost_and_found_time_out");
-			if(isdefined(var_05) && var_05 == "lost_and_found_time_out")
-			{
+			if(isdefined(var_05) && var_05 == "lost_and_found_time_out") {
 				continue;
 			}
 		}
 
 		var_07 = param_00 getweaponslistall();
-		foreach(var_09 in var_07)
-		{
+		foreach(var_09 in var_07) {
 			var_0A = getweaponbasename(var_09);
-			if(var_0A == var_03)
-			{
+			if(var_0A == var_03) {
 				param_00 thread watchforweaponremoved(param_00,param_01,param_02);
 				var_04 = 1;
 				break;
@@ -2808,17 +2329,12 @@ watchforplayerdeath(param_00,param_01,param_02)
 	param_00 scripts\cp\utility::updatelaststandpistol();
 }
 
-//Function Number: 119
-init_standee_interaction()
-{
+init_standee_interaction() {
 	var_00 = scripts\engine\utility::getstructarray("wor_standee","script_noteworthy");
-	foreach(var_02 in var_00)
-	{
-		if(isdefined(var_02.target))
-		{
+	foreach(var_02 in var_00) {
+		if(isdefined(var_02.target)) {
 			var_03 = getscriptablearray(var_02.target,"targetname");
-			if(var_03.size > 0)
-			{
+			if(var_03.size > 0) {
 				var_02.standee = var_03[0];
 				var_02.standee.gun_on_standee = 1;
 				var_02 thread init_standee_slots(::part_listener,var_02.standee.script_noteworthy);
@@ -2827,9 +2343,7 @@ init_standee_interaction()
 	}
 }
 
-//Function Number: 120
-watchforweaponremoved(param_00,param_01,param_02)
-{
+watchforweaponremoved(param_00,param_01,param_02) {
 	level thread watchforplayerdisconnect(param_00,param_01,param_02);
 	level endon("gun_replaced " + param_01);
 	level endon("game_ended");
@@ -2837,21 +2351,17 @@ watchforweaponremoved(param_00,param_01,param_02)
 	param_00 endon("disconnect");
 	var_03 = getweaponbasename(param_01);
 	var_04 = 1;
-	for(;;)
-	{
-		if(!var_04)
-		{
+	for(;;) {
+		if(!var_04) {
 			break;
 		}
 
 		param_00 scripts\engine\utility::waittill_any_3("weapon_purchased","mule_munchies_sold");
 		var_04 = 0;
 		var_05 = param_00 getweaponslistall();
-		foreach(var_07 in var_05)
-		{
+		foreach(var_07 in var_05) {
 			var_08 = getweaponbasename(var_07);
-			if(issubstr(var_08,var_03))
-			{
+			if(issubstr(var_08,var_03)) {
 				var_04 = 1;
 				break;
 			}
@@ -2862,9 +2372,7 @@ watchforweaponremoved(param_00,param_01,param_02)
 	param_00 scripts\cp\utility::updatelaststandpistol();
 }
 
-//Function Number: 121
-watchforplayerdisconnect(param_00,param_01,param_02)
-{
+watchforplayerdisconnect(param_00,param_01,param_02) {
 	level endon("gun_replaced " + param_01);
 	param_00 waittill("disconnect");
 	thread put_gun_back_on_standee(param_02,param_01,undefined,param_00);

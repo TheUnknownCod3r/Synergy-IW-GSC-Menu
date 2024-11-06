@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: 2092.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 2
- * Decompile Time: 0 ms
- * Timestamp: 10/27/2023 12:23:16 AM
-*******************************************************************/
+/****************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\2092.gsc
+****************************/
 
-//Function Number: 1
-main()
-{
+main() {
 	self setmodel("body_un_jackal_pilots");
 	scripts\code\character::attachhead("alias_heads_un_jackal_pilots_pt2",lib_09CB::main());
 	self.hatmodel = "helmet_un_jackal_pilots_generic";
@@ -21,17 +15,14 @@ main()
 	self.var_1FA8 = "soldier";
 	self.voice = "unitednationshelmet";
 	self give_explosive_touch_on_revived("vestlight");
-	if(issentient(self))
-	{
+	if(issentient(self)) {
 		self sethitlocdamagetable("locdmgtable/ai_lochit_dmgtable");
 	}
 
 	self glinton(#animtree);
 }
 
-//Function Number: 2
-precache()
-{
+precache() {
 	precachemodel("body_un_jackal_pilots");
 	scripts\code\character::precachemodelarray(lib_09CB::main());
 	precachemodel("helmet_un_jackal_pilots_generic");

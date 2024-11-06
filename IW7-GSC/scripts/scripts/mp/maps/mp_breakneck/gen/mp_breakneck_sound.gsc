@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\mp\maps\mp_breakneck\gen\mp_breakneck_sound.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 1
- * Decompile Time: 187 ms
- * Timestamp: 10/27/2023 12:13:15 AM
-*******************************************************************/
+/***************************************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\mp\maps\mp_breakneck\gen\mp_breakneck_sound.gsc
+***************************************************************************/
 
-//Function Number: 1
-main()
-{
+main() {
 	var_00 = scripts\common\createfx::func_49E7();
 	var_00 scripts\common\createfx::func_F4AD((-38193.6,742.921,208.747),(270,0,0));
 	var_00.var_13125["soundalias"] = "emt_video_screen_lp_01";

@@ -1,18 +1,11 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: 3909.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 31
- * Decompile Time: 56 ms
- * Timestamp: 10/27/2023 12:31:13 AM
-*******************************************************************/
+/****************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\3909.gsc
+****************************/
 
-//Function Number: 1
-func_2371()
-{
-	if(scripts/asm/asm::func_232E("zombie_brute"))
-	{
+func_2371() {
+	if(scripts/asm/asm::func_232E("zombie_brute")) {
 		return;
 	}
 
@@ -281,182 +274,122 @@ func_2371()
 	scripts/asm/asm::func_2327();
 }
 
-//Function Number: 2
-func_12253(param_00,param_01,param_02,param_03)
-{
+func_12253(param_00,param_01,param_02,param_03) {
 	return scripts/asm/zombie/melee::func_138E4();
 }
 
-//Function Number: 3
-func_1223F(param_00,param_01,param_02,param_03)
-{
+func_1223F(param_00,param_01,param_02,param_03) {
 	return scripts/asm/asm_bb::bb_moverequested();
 }
 
-//Function Number: 4
-func_1224F(param_00,param_01,param_02,param_03)
-{
+func_1224F(param_00,param_01,param_02,param_03) {
 	return scripts/asm/asm_bb::bb_isincombat();
 }
 
-//Function Number: 5
-func_11BB9(param_00,param_01,param_02,param_03)
-{
+func_11BB9(param_00,param_01,param_02,param_03) {
 	return scripts/asm/asm_bb::bb_moverequested();
 }
 
-//Function Number: 6
-func_11BBE(param_00,param_01,param_02,param_03)
-{
+func_11BBE(param_00,param_01,param_02,param_03) {
 	return scripts/asm/asm_bb::bb_isincombat();
 }
 
-//Function Number: 7
-func_12210(param_00,param_01,param_02,param_03)
-{
+func_12210(param_00,param_01,param_02,param_03) {
 	return scripts/asm/zombie/melee::func_138E4();
 }
 
-//Function Number: 8
-func_12207(param_00,param_01,param_02,param_03)
-{
+func_12207(param_00,param_01,param_02,param_03) {
 	return scripts/asm/asm_bb::bb_moverequested();
 }
 
-//Function Number: 9
-func_122A2(param_00,param_01,param_02,param_03)
-{
+func_122A2(param_00,param_01,param_02,param_03) {
 	return scripts/asm/zombie/melee::func_138E1();
 }
 
-//Function Number: 10
-func_1229E(param_00,param_01,param_02,param_03)
-{
+func_1229E(param_00,param_01,param_02,param_03) {
 	return 1;
 }
 
-//Function Number: 11
-func_1227B(param_00,param_01,param_02,param_03)
-{
+func_1227B(param_00,param_01,param_02,param_03) {
 	return scripts/asm/zombie/melee::shouldplayarenaintro();
 }
 
-//Function Number: 12
-func_12283(param_00,param_01,param_02,param_03)
-{
+func_12283(param_00,param_01,param_02,param_03) {
 	return scripts/asm/asm_bb::bb_movetyperequested("walk");
 }
 
-//Function Number: 13
-func_12276(param_00,param_01,param_02,param_03)
-{
+func_12276(param_00,param_01,param_02,param_03) {
 	return scripts/asm/asm_bb::bb_movetyperequested("run");
 }
 
-//Function Number: 14
-func_1227D(param_00,param_01,param_02,param_03)
-{
+func_1227D(param_00,param_01,param_02,param_03) {
 	return scripts/asm/asm_bb::bb_movetyperequested("sprint");
 }
 
-//Function Number: 15
-func_11BEF(param_00,param_01,param_02,param_03)
-{
+func_11BEF(param_00,param_01,param_02,param_03) {
 	return scripts/asm/zombie/melee::shouldplayarenaintro();
 }
 
-//Function Number: 16
-func_11BEE(param_00,param_01,param_02,param_03)
-{
+func_11BEE(param_00,param_01,param_02,param_03) {
 	return 1;
 }
 
-//Function Number: 17
-func_11BE1(param_00,param_01,param_02,param_03)
-{
+func_11BE1(param_00,param_01,param_02,param_03) {
 	return scripts/asm/zombie/zombie::func_BE9A();
 }
 
-//Function Number: 18
-func_11BDA(param_00,param_01,param_02,param_03)
-{
+func_11BDA(param_00,param_01,param_02,param_03) {
 	return scripts/asm/asm_bb::bb_movetyperequested("run");
 }
 
-//Function Number: 19
-func_12437(param_00,param_01,param_02,param_03)
-{
+func_12437(param_00,param_01,param_02,param_03) {
 	return scripts/asm/zombie/zombie::func_BCCD();
 }
 
-//Function Number: 20
-func_1245A(param_00,param_01,param_02,param_03)
-{
+func_1245A(param_00,param_01,param_02,param_03) {
 	return scripts/asm/zombie/melee::func_138E4();
 }
 
-//Function Number: 21
-func_1242F(param_00,param_01,param_02,param_03)
-{
+func_1242F(param_00,param_01,param_02,param_03) {
 	return scripts/asm/zombie/zombie::func_A013();
 }
 
-//Function Number: 22
-func_12448(param_00,param_01,param_02,param_03)
-{
+func_12448(param_00,param_01,param_02,param_03) {
 	return !scripts/asm/asm_bb::bb_moverequested();
 }
 
-//Function Number: 23
-func_124F6(param_00,param_01,param_02,param_03)
-{
+func_124F6(param_00,param_01,param_02,param_03) {
 	return scripts/asm/zombie/zombie::func_BCCD();
 }
 
-//Function Number: 24
-func_1250A(param_00,param_01,param_02,param_03)
-{
+func_1250A(param_00,param_01,param_02,param_03) {
 	return !scripts/asm/asm_bb::bb_moverequested();
 }
 
-//Function Number: 25
-func_12530(param_00,param_01,param_02,param_03)
-{
+func_12530(param_00,param_01,param_02,param_03) {
 	return scripts/asm/zombie/melee::func_138E4();
 }
 
-//Function Number: 26
-func_1246B(param_00,param_01,param_02,param_03)
-{
+func_1246B(param_00,param_01,param_02,param_03) {
 	return scripts/asm/zombie/melee::func_138E4();
 }
 
-//Function Number: 27
-func_1253D(param_00,param_01,param_02,param_03)
-{
+func_1253D(param_00,param_01,param_02,param_03) {
 	return scripts/asm/zombie/melee::func_138E4();
 }
 
-//Function Number: 28
-func_12480(param_00,param_01,param_02,param_03)
-{
+func_12480(param_00,param_01,param_02,param_03) {
 	return scripts/asm/zombie/melee::func_138E4();
 }
 
-//Function Number: 29
-func_1254F(param_00,param_01,param_02,param_03)
-{
+func_1254F(param_00,param_01,param_02,param_03) {
 	return scripts/asm/zombie/melee::func_138E4();
 }
 
-//Function Number: 30
-func_11BA9(param_00,param_01,param_02,param_03)
-{
+func_11BA9(param_00,param_01,param_02,param_03) {
 	return scripts/asm/zombie/zombie::func_BE9A();
 }
 
-//Function Number: 31
-func_125D1(param_00,param_01,param_02,param_03)
-{
+func_125D1(param_00,param_01,param_02,param_03) {
 	return scripts/asm/zombie/melee::func_138E4();
 }

@@ -1,23 +1,15 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: 3547.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 17
- * Decompile Time: 12 ms
- * Timestamp: 10/27/2023 12:30:39 AM
-*******************************************************************/
+/*************************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\mp\equipment\blackout_grenade.gsc
+*************************************************************/
 
-//Function Number: 1
-func_10D6F(param_00,param_01,param_02)
-{
-	if(!func_13151(param_00,param_01))
-	{
+func_10D6F(param_00,param_01,param_02) {
+	if(!func_13151(param_00,param_01)) {
 		return;
 	}
 
-	if(isdefined(self.var_2B4B))
-	{
+	if(isdefined(self.var_2B4B)) {
 		self.var_2B4B thread func_6310(0,1,1);
 	}
 
@@ -26,13 +18,11 @@ func_10D6F(param_00,param_01,param_02)
 	var_03.victim = self;
 	var_03.var_4F = param_00;
 	var_03.starttime = gettime();
-	if(!isdefined(param_02))
-	{
+	if(!isdefined(param_02)) {
 		param_02 = func_7F68(max(0,getweightedchanceroll(param_01,self) + getwholescenedurationmin(param_00)));
 	}
 
-	switch(param_02)
-	{
+	switch(param_02) {
 		case 4:
 			var_03.var_5FEB = 4;
 			var_03.refreshwindowms = 3000;
@@ -144,8 +134,7 @@ func_10D6F(param_00,param_01,param_02)
 
 	var_03.blurdurtotal = var_03.blurindur + var_03.blurdur + var_03.bluroutdur;
 	var_03.overlaydurtotal = var_03.overlayindur + var_03.overlaydur + var_03.overlayoutdur;
-	if(var_03.useoverlay2)
-	{
+	if(var_03.useoverlay2) {
 		var_03.overlaydurtotal = var_03.overlaydurtotal + var_03.overlay2delay + var_03.overlay2indur + var_03.overlay2dur + var_03.overlay2outdur;
 	}
 
@@ -166,19 +155,14 @@ func_10D6F(param_00,param_01,param_02)
 	param_00 scripts\mp\_damage::combatrecordtacticalstat("power_blackoutGrenade");
 }
 
-//Function Number: 2
-func_6310(param_00,param_01,param_02)
-{
+func_6310(param_00,param_01,param_02) {
 	self notify("blackoutEnded");
 	var_03 = self.var_4F;
 	var_04 = self.victim;
-	if(isdefined(var_04))
-	{
+	if(isdefined(var_04)) {
 		var_04.var_2B4B = undefined;
-		if(!param_00)
-		{
-			if(param_02)
-			{
+		if(!param_00) {
+			if(param_02) {
 				thread endblackoutsfx();
 			}
 			else
@@ -186,13 +170,11 @@ func_6310(param_00,param_01,param_02)
 				thread endblackoutsfx(2);
 			}
 
-			if(param_01)
-			{
+			if(param_01) {
 				var_04 setblurforplayer(0,0.05);
 			}
 
-			if(isdefined(var_03))
-			{
+			if(isdefined(var_03)) {
 				scripts\mp\_gamescore::untrackdebuffassist(var_03,var_04,"blackout_grenade_mp");
 			}
 
@@ -208,14 +190,11 @@ func_6310(param_00,param_01,param_02)
 	self.var_C7FD destroy();
 }
 
-//Function Number: 3
-endblackoutsfx(param_00)
-{
+endblackoutsfx(param_00) {
 	self.victim endon("disconnect");
 	self notify("endBlackoutSfx");
 	self endon("endBlackoutSfx");
-	if(isdefined(param_00))
-	{
+	if(isdefined(param_00)) {
 		wait(param_00);
 	}
 
@@ -225,9 +204,7 @@ endblackoutsfx(param_00)
 	self.victim stoplocalsound("blackout_grenade_drone_short_lsrs");
 }
 
-//Function Number: 4
-func_B9BB()
-{
+func_B9BB() {
 	var_00 = self.victim;
 	var_00 endon("disconnect");
 	self endon("blackoutEnded");
@@ -238,8 +215,7 @@ func_B9BB()
 	var_00 playlocalsound(var_02);
 	var_00 scripts\mp\_weapons::func_F7EE();
 	var_00 scripts\mp\_utility::func_8EC6();
-	if(isdefined(self.var_4F))
-	{
+	if(isdefined(self.var_4F)) {
 		scripts\mp\_gamescore::func_11ACE(var_01,var_00,"blackout_grenade_mp");
 	}
 
@@ -252,9 +228,7 @@ func_B9BB()
 	thread func_6310(0,0,0);
 }
 
-//Function Number: 5
-monitorblur()
-{
+monitorblur() {
 	var_00 = self.victim;
 	var_00 endon("disconnect");
 	self endon("blackoutEnded");
@@ -264,8 +238,7 @@ monitorblur()
 	var_04 = self.blurdur;
 	var_05 = self.bluroutdur;
 	var_00 setblurforplayer(var_01,var_03);
-	if(var_02 != var_01 && var_04 > 0.1)
-	{
+	if(var_02 != var_01 && var_04 > 0.1) {
 		wait(var_03 + var_04 - 0.1);
 		var_00 setblurforplayer(var_02,0.05);
 		wait(0.1);
@@ -278,9 +251,7 @@ monitorblur()
 	var_00 setblurforplayer(0,var_05);
 }
 
-//Function Number: 6
-monitoroverlay()
-{
+monitoroverlay() {
 	var_00 = self.victim;
 	var_00 endon("disconnect");
 	self endon("blackoutEnded");
@@ -302,8 +273,7 @@ monitoroverlay()
 	wait(var_03 + var_04);
 	var_01 fadeovertime(var_06);
 	var_01.alpha = var_05;
-	if(var_07)
-	{
+	if(var_07) {
 		wait(var_06 + var_08);
 		var_01 fadeovertime(var_0A);
 		var_01.alpha = var_09;
@@ -313,9 +283,7 @@ monitoroverlay()
 	}
 }
 
-//Function Number: 7
-monitorshock()
-{
+monitorshock() {
 	var_00 = self.victim;
 	var_00 endon("disconnect");
 	self endon("blackoutEnded");
@@ -326,32 +294,25 @@ monitorshock()
 	var_05 = self.shock2dur;
 	wait(var_01);
 	var_00 shellshock("blackout_grenade_mp",var_02,0);
-	if(var_03)
-	{
+	if(var_03) {
 		wait(var_02 + var_04);
 		var_00 shellshock("blackout_grenade_mp",var_05,0);
 	}
 }
 
-//Function Number: 8
-monitorvictimdeathdisconnect()
-{
+monitorvictimdeathdisconnect() {
 	self endon("blackoutEnded");
 	self.victim scripts\engine\utility::waittill_any_3("death","disconnect");
 	thread func_6310(1,0,0);
 }
 
-//Function Number: 9
-monitorgameended()
-{
+monitorgameended() {
 	self endon("blackoutEnded");
 	level scripts\engine\utility::waittill_any_3("game_ended","round_end_finished");
 	thread func_6310(0,1,1);
 }
 
-//Function Number: 10
-getweightedchanceroll(param_00,param_01)
-{
+getweightedchanceroll(param_00,param_01) {
 	var_02 = param_00 - param_01 geteye();
 	var_03 = clamp(length(var_02),100,512);
 	var_04 = 1 - var_03 - 100 / 412 * 70;
@@ -362,125 +323,96 @@ getweightedchanceroll(param_00,param_01)
 	return var_04 + var_07;
 }
 
-//Function Number: 11
-func_7F68(param_00)
-{
-	if(param_00 > 70)
-	{
+func_7F68(param_00) {
+	if(param_00 > 70) {
 		return 4;
 	}
 
-	if(param_00 > 55)
-	{
+	if(param_00 > 55) {
 		return 3;
 	}
 
-	if(param_00 > 30)
-	{
+	if(param_00 > 30) {
 		return 2;
 	}
 
 	return 1;
 }
 
-//Function Number: 12
-getwholescenedurationmin(param_00)
-{
-	if(self == param_00)
-	{
+getwholescenedurationmin(param_00) {
+	if(self == param_00) {
 		return -30;
 	}
 
 	return 0;
 }
 
-//Function Number: 13
-func_13151(param_00,param_01)
-{
-	if(!isplayer(self))
-	{
+func_13151(param_00,param_01) {
+	if(!isplayer(self)) {
 		return 0;
 	}
 
-	if(!scripts\mp\_utility::isreallyalive(self))
-	{
+	if(!scripts\mp\_utility::isreallyalive(self)) {
 		return 0;
 	}
 
-	if(scripts\mp\_utility::_hasperk("specialty_stun_resistance"))
-	{
+	if(scripts\mp\_utility::_hasperk("specialty_stun_resistance")) {
 		scripts\mp\perks\_perkfunctions::applystunresistence(param_00,self);
 		return 0;
 	}
 
 	var_02 = func_7E09();
 	var_03 = getblackoutrefreshwindowms();
-	if(isdefined(var_02) && isdefined(var_03) && var_02 - gettime() > var_03)
-	{
+	if(isdefined(var_02) && isdefined(var_03) && var_02 - gettime() > var_03) {
 		return 0;
 	}
 
 	return 1;
 }
 
-//Function Number: 14
-func_7E09()
-{
-	if(!isdefined(self.var_2B4B))
-	{
+func_7E09() {
+	if(!isdefined(self.var_2B4B)) {
 		return undefined;
 	}
 
 	return self.var_2B4B.starttime + self.var_2B4B.durtotal * 1000;
 }
 
-//Function Number: 15
-getblackoutrefreshwindowms()
-{
-	if(!isdefined(self.var_2B4B))
-	{
+getblackoutrefreshwindowms() {
+	if(!isdefined(self.var_2B4B)) {
 		return undefined;
 	}
 
 	return self.var_2B4B.refreshwindowms;
 }
 
-//Function Number: 16
-func_B92C(param_00,param_01,param_02,param_03,param_04)
-{
-	if(!isdefined(param_03) || !isdefined(param_04) || !isdefined(param_01) || !isdefined(param_02))
-	{
+func_B92C(param_00,param_01,param_02,param_03,param_04) {
+	if(!isdefined(param_03) || !isdefined(param_04) || !isdefined(param_01) || !isdefined(param_02)) {
 		return param_00;
 	}
 
-	if(param_04 != "blackout_grenade_mp")
-	{
+	if(param_04 != "blackout_grenade_mp") {
 		return param_00;
 	}
 
-	if(param_01 != param_02)
-	{
+	if(param_01 != param_02) {
 		return param_00;
 	}
 
-	if(distancesquared(param_02.origin,param_03.origin) <= 65536)
-	{
+	if(distancesquared(param_02.origin,param_03.origin) <= 65536) {
 		return param_00;
 	}
 
 	return 0;
 }
 
-//Function Number: 17
-debug_blackouttestlevels()
-{
+debug_blackouttestlevels() {
 	self endon("disconnect");
 	self notifyonplayercommand("debug_startBlackout_1","+actionslot 1");
 	self notifyonplayercommand("debug_startBlackout_2","+actionslot 4");
 	self notifyonplayercommand("debug_startBlackout_3","+actionslot 2");
 	self notifyonplayercommand("debug_startBlackout_4","+actionslot 3");
-	for(;;)
-	{
+	for(;;) {
 		var_00 = scripts\engine\utility::waittill_any_return_no_endon_death_3("debug_startBlackout_1","debug_startBlackout_2","debug_startBlackout_3","debug_startBlackout_4");
 		var_01 = strtok(var_00,"_");
 		var_02 = int(var_01[2]);

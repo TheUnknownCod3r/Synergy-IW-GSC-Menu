@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\asm\zombie_dlc3\zipline_traversal.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 10
- * Decompile Time: 507 ms
- * Timestamp: 10\27\2023 12:02:51 AM
-*******************************************************************/
+/*****************************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\asm\zombie_dlc3\zipline_traversal.gsc
+*****************************************************************/
 
-//Function Number: 1
-playtraversezipline(param_00,param_01,param_02,param_03)
-{
+playtraversezipline(param_00,param_01,param_02,param_03) {
 	self endon(param_01 + "_finished");
 	scripts\mp\agents\_scriptedagents::setstatelocked(1,"DoTraverse");
 	self.do_immediate_ragdoll_save = self.do_immediate_ragdoll;
@@ -19,14 +13,10 @@ playtraversezipline(param_00,param_01,param_02,param_03)
 	playtraverseziplineinternal(param_00,param_01,var_04);
 }
 
-//Function Number: 2
-get_closest_zipline_traversal(param_00)
-{
+get_closest_zipline_traversal(param_00) {
 	var_01 = 16384;
-	foreach(var_03 in level.zipline_traversals)
-	{
-		if(distance2dsquared(var_03.traversal_start,param_00) < var_01)
-		{
+	foreach(var_03 in level.zipline_traversals) {
+		if(distance2dsquared(var_03.traversal_start,param_00) < var_01) {
 			return var_03;
 		}
 	}
@@ -34,9 +24,7 @@ get_closest_zipline_traversal(param_00)
 	return undefined;
 }
 
-//Function Number: 3
-playtraverseziplineinternal(param_00,param_01,param_02)
-{
+playtraverseziplineinternal(param_00,param_01,param_02) {
 	var_03 = param_02;
 	var_04 = self getsafecircleorigin(param_01,var_03);
 	var_05 = getnotetracktimes(var_04,"flex_height_up_end");
@@ -56,9 +44,7 @@ playtraverseziplineinternal(param_00,param_01,param_02)
 	self.angles = var_09;
 }
 
-//Function Number: 4
-attach_to_zipline_and_go()
-{
+attach_to_zipline_and_go() {
 	self.zipline_ent = spawn("script_model",self.origin);
 	self.zipline_ent setmodel("tag_origin");
 	self.zipline_ent.angles = self.angles;
@@ -72,25 +58,20 @@ attach_to_zipline_and_go()
 	self.zipline.var_6393 = gettime() + int(var_04 * 1000);
 }
 
-//Function Number: 5
-playtraverseziplineloop(param_00,param_01,param_02,param_03)
-{
+playtraverseziplineloop(param_00,param_01,param_02,param_03) {
 	self endon(param_01 + "_finished");
 	var_04 = scripts\asm\asm_mp::asm_getanim(param_00,param_01);
 	var_05 = self getsafecircleorigin(param_01,var_04);
 	self setanimstate(param_01,var_04,1);
 	var_06 = self.zipline.var_6393 - gettime();
-	if(var_06 > 0)
-	{
+	if(var_06 > 0) {
 		wait(var_06 \ 1000);
 	}
 
 	scripts\asm\asm::asm_fireevent(param_01,"loop_finished");
 }
 
-//Function Number: 6
-playtraverseziplinedrop(param_00,param_01,param_02,param_03)
-{
+playtraverseziplinedrop(param_00,param_01,param_02,param_03) {
 	self endon(param_01 + "_finished");
 	var_04 = scripts\asm\asm_mp::asm_getanim(param_00,param_01);
 	var_05 = self getsafecircleorigin(param_01,var_04);
@@ -103,29 +84,21 @@ playtraverseziplinedrop(param_00,param_01,param_02,param_03)
 	thread scripts\asm\zombie\zombie::func_11701(param_00,param_01);
 }
 
-//Function Number: 7
-terminateziplineintro(param_00,param_01,param_02)
-{
-	if(!isalive(self) && isdefined(self.zipline_ent))
-	{
+terminateziplineintro(param_00,param_01,param_02) {
+	if(!isalive(self) && isdefined(self.zipline_ent)) {
 		self unlink();
 		self.zipline_ent delete();
 	}
 }
 
-//Function Number: 8
-terminateziplineloop(param_00,param_01,param_02)
-{
-	if(isdefined(self.zipline_ent))
-	{
+terminateziplineloop(param_00,param_01,param_02) {
+	if(isdefined(self.zipline_ent)) {
 		self unlink();
 		self.zipline_ent delete();
 	}
 }
 
-//Function Number: 9
-terminatezipline(param_00,param_01,param_02)
-{
+terminatezipline(param_00,param_01,param_02) {
 	self.do_immediate_ragdoll = self.do_immedate_ragdoll_save;
 	self.do_immedate_ragdoll_save = undefined;
 	self scragentsetanimscale(1,1);
@@ -135,8 +108,6 @@ terminatezipline(param_00,param_01,param_02)
 	self.zipline = undefined;
 }
 
-//Function Number: 10
-chooseanimzipline(param_00,param_01,param_02)
-{
+chooseanimzipline(param_00,param_01,param_02) {
 	return lib_0F3C::func_3EF4(param_00,param_01,param_02);
 }

@@ -1,24 +1,15 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: 946.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 3
- * Decompile Time: 2 ms
- * Timestamp: 10/27/2023 12:32:12 AM
-*******************************************************************/
+/***************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\946.gsc
+***************************/
 
-//Function Number: 1
-func_13F5E(param_00)
-{
+func_13F5E(param_00) {
 	return lib_0A09::func_5AEA(param_00,200);
 }
 
-//Function Number: 2
-func_2AD0()
-{
-	if(isdefined(level.var_119E["zombie"]))
-	{
+func_2AD0() {
+	if(isdefined(level.var_119E["zombie"])) {
 		return;
 	}
 
@@ -41,9 +32,7 @@ func_2AD0()
 	level.var_119E["zombie"] = var_00;
 }
 
-//Function Number: 3
-func_DEE8()
-{
+func_DEE8() {
 	func_2AD0();
 	function_02D8("zombie");
 }

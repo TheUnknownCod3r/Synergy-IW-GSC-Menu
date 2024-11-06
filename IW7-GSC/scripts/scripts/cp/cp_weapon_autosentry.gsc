@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\cp\cp_weapon_autosentry.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 35
- * Decompile Time: 1807 ms
- * Timestamp: 10/27/2023 12:10:15 AM
-*******************************************************************/
+/*******************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\cp\cp_weapon_autosentry.gsc
+*******************************************************/
 
-//Function Number: 1
-init()
-{
+init() {
 	level._effect["sentry_overheat_mp"] = loadfx("vfx/core/mp/killstreaks/vfx_sg_overheat_smoke");
 	level._effect["sentry_explode_mp"] = loadfx("vfx/core/mp/killstreaks/vfx_ims_explosion");
 	level._effect["sentry_smoke_mp"] = loadfx("vfx/core/mp/killstreaks/vfx_sg_damage_blacksmoke");
@@ -40,9 +34,7 @@ init()
 	level.sentrysettings["crafted_autosentry"].var_9F43 = 0;
 }
 
-//Function Number: 2
-give_crafted_sentry(param_00,param_01)
-{
+give_crafted_sentry(param_00,param_01) {
 	param_01 thread watch_dpad();
 	param_01 notify("new_power","crafted_autosentry");
 	param_01 setclientomnvar("zom_crafted_weapon",1);
@@ -50,34 +42,27 @@ give_crafted_sentry(param_00,param_01)
 	scripts\cp\utility::set_crafted_inventory_item("crafted_autosentry",::give_crafted_sentry,param_01);
 }
 
-//Function Number: 3
-watch_dpad()
-{
+watch_dpad() {
 	self endon("disconnect");
 	self endon("death");
 	self notify("craft_dpad_watcher");
 	self endon("craft_dpad_watcher");
 	self notifyonplayercommand("pullout_sentry","+actionslot 3");
-	for(;;)
-	{
+	for(;;) {
 		self waittill("pullout_sentry");
-		if(scripts\engine\utility::istrue(self.iscarrying))
-		{
+		if(scripts\engine\utility::istrue(self.iscarrying)) {
 			continue;
 		}
 
-		if(scripts\engine\utility::istrue(self.linked_to_coaster))
-		{
+		if(scripts\engine\utility::istrue(self.linked_to_coaster)) {
 			continue;
 		}
 
-		if(isdefined(self.allow_carry) && self.allow_carry == 0)
-		{
+		if(isdefined(self.allow_carry) && self.allow_carry == 0) {
 			continue;
 		}
 
-		if(scripts\cp\utility::is_valid_player())
-		{
+		if(scripts\cp\utility::is_valid_player()) {
 			break;
 		}
 	}
@@ -85,9 +70,7 @@ watch_dpad()
 	thread givesentry("crafted_autosentry");
 }
 
-//Function Number: 4
-givesentry(param_00)
-{
+givesentry(param_00) {
 	self endon("disconnect");
 	self.last_sentry = param_00;
 	scripts\cp\utility::clearlowermessage("msg_power_hint");
@@ -99,20 +82,16 @@ givesentry(param_00)
 	self.carriedsentry = undefined;
 	thread scripts\cp\utility::wait_restore_player_perk();
 	self.iscarrying = 0;
-	if(isdefined(var_01))
-	{
+	if(isdefined(var_01)) {
 		return 1;
 	}
 
 	return 0;
 }
 
-//Function Number: 5
-setcarryingsentry(param_00,param_01)
-{
+setcarryingsentry(param_00,param_01) {
 	self endon("disconnect");
-	if(isdefined(level.forceturretplacement))
-	{
+	if(isdefined(level.forceturretplacement)) {
 		param_01 = 0;
 	}
 
@@ -121,55 +100,45 @@ setcarryingsentry(param_00,param_01)
 	self notifyonplayercommand("place_sentry","+attack");
 	self notifyonplayercommand("place_sentry","+attack_akimbo_accessible");
 	self notifyonplayercommand("cancel_sentry","+actionslot 3");
-	if(!level.console)
-	{
+	if(!level.console) {
 		self notifyonplayercommand("cancel_sentry","+actionslot 5");
 		self notifyonplayercommand("cancel_sentry","+actionslot 6");
 		self notifyonplayercommand("cancel_sentry","+actionslot 7");
 	}
 
-	for(;;)
-	{
+	for(;;) {
 		var_02 = scripts\engine\utility::waittill_any_return("place_sentry","cancel_sentry","force_cancel_placement");
-		if(!isdefined(param_00))
-		{
+		if(!isdefined(param_00)) {
 			scripts\engine\utility::allow_weapon(1);
 			return 1;
 		}
 
-		if(!isdefined(var_02))
-		{
+		if(!isdefined(var_02)) {
 			var_02 = "force_cancel_placement";
 		}
 
-		if(var_02 == "cancel_sentry" || var_02 == "force_cancel_placement")
-		{
-			if(!param_01 && var_02 == "cancel_sentry")
-			{
+		if(var_02 == "cancel_sentry" || var_02 == "force_cancel_placement") {
+			if(!param_01 && var_02 == "cancel_sentry") {
 				continue;
 			}
 
 			scripts\engine\utility::allow_weapon(1);
 			param_00 sentry_setcancelled();
-			if(var_02 != "force_cancel_placement")
-			{
+			if(var_02 != "force_cancel_placement") {
 				thread watch_dpad();
 			}
-			else if(param_01)
-			{
+			else if(param_01) {
 				scripts\cp\utility::remove_crafted_item_from_inventory(self);
 			}
 
 			return 0;
 		}
 
-		if(!param_00.canbeplaced)
-		{
+		if(!param_00.canbeplaced) {
 			continue;
 		}
 
-		if(param_01)
-		{
+		if(param_01) {
 			scripts\cp\utility::remove_crafted_item_from_inventory(self);
 		}
 
@@ -179,9 +148,7 @@ setcarryingsentry(param_00,param_01)
 	}
 }
 
-//Function Number: 6
-createsentryforplayer(param_00,param_01)
-{
+createsentryforplayer(param_00,param_01) {
 	var_02 = spawnturret("misc_turret",param_01.origin,level.sentrysettings[param_00].var_39B);
 	var_02.angles = param_01.angles;
 	var_02.name = "crafted_autosentry";
@@ -189,16 +156,13 @@ createsentryforplayer(param_00,param_01)
 	return var_02;
 }
 
-//Function Number: 7
-sentry_initsentry(param_00,param_01)
-{
+sentry_initsentry(param_00,param_01) {
 	self.sentrytype = param_00;
 	self.canbeplaced = 1;
 	self setmodel(level.sentrysettings[self.sentrytype].modelbase);
 	self.shouldsplash = 1;
 	self setcandamage(1);
-	switch(param_00)
-	{
+	switch(param_00) {
 		case "crafted_autosentry":
 		default:
 			self getvalidattachments();
@@ -223,38 +187,30 @@ sentry_initsentry(param_00,param_01)
 	thread sentry_beepsounds();
 }
 
-//Function Number: 8
-sentry_handledeath(param_00)
-{
+sentry_handledeath(param_00) {
 	self waittill("death");
-	if(!isdefined(self))
-	{
+	if(!isdefined(self)) {
 		return;
 	}
 
 	self setmodel(level.sentrysettings[self.sentrytype].modeldestroyed);
 	sentry_setinactive();
 	self setdefaultdroppitch(40);
-	if(isdefined(self.carriedby))
-	{
+	if(isdefined(self.carriedby)) {
 		self setsentrycarrier(undefined);
 	}
 
 	self setsentryowner(undefined);
 	self playsound("sentry_explode");
-	if(isdefined(self))
-	{
+	if(isdefined(self)) {
 		thread func_F23F();
 	}
 }
 
-//Function Number: 9
-func_F23F()
-{
+func_F23F() {
 	self notify("sentry_delete_turret");
 	self endon("sentry_delete_turret");
-	if(isdefined(self.inuseby))
-	{
+	if(isdefined(self.inuseby)) {
 		playfxontag(scripts\engine\utility::getfx("sentry_explode_mp"),self,"tag_origin");
 		playfxontag(scripts\engine\utility::getfx("sentry_smoke_mp"),self,"tag_aim");
 		self.inuseby scripts\cp\utility::restore_player_perk();
@@ -272,37 +228,29 @@ func_F23F()
 		self notify("deleting");
 	}
 
-	if(isdefined(self.killcament))
-	{
+	if(isdefined(self.killcament)) {
 		self.killcament delete();
 	}
 
-	if(isdefined(self))
-	{
+	if(isdefined(self)) {
 		self delete();
 	}
 }
 
-//Function Number: 10
-sentry_handleuse()
-{
+sentry_handleuse() {
 	self endon("death");
 	level endon("game_ended");
-	for(;;)
-	{
+	for(;;) {
 		self waittill("trigger",var_00);
-		if(!var_00 scripts\cp\utility::is_valid_player())
-		{
+		if(!var_00 scripts\cp\utility::is_valid_player()) {
 			continue;
 		}
 
-		if(scripts\engine\utility::istrue(var_00.iscarrying))
-		{
+		if(scripts\engine\utility::istrue(var_00.iscarrying)) {
 			continue;
 		}
 
-		if(scripts\engine\utility::istrue(var_00.kung_fu_mode))
-		{
+		if(scripts\engine\utility::istrue(var_00.kung_fu_mode)) {
 			continue;
 		}
 
@@ -310,9 +258,7 @@ sentry_handleuse()
 	}
 }
 
-//Function Number: 11
-sentry_setowner(param_00)
-{
+sentry_setowner(param_00) {
 	param_00.var_4BAE = self;
 	self.triggerportableradarping = param_00;
 	self setsentryowner(self.triggerportableradarping);
@@ -321,12 +267,9 @@ sentry_setowner(param_00)
 	thread scripts\cp\utility::item_handleownerdisconnect("sentry_handleOwner");
 }
 
-//Function Number: 12
-sentry_setplaced()
-{
+sentry_setplaced() {
 	self setmodel(level.sentrysettings[self.sentrytype].modelbase);
-	if(self getspawnpoint_safeguard() == "manual")
-	{
+	if(self getspawnpoint_safeguard() == "manual") {
 		self give_player_session_tokens(level.sentrysettings[self.sentrytype].sentrymodeoff);
 	}
 
@@ -334,11 +277,9 @@ sentry_setplaced()
 	sentry_makesolid();
 	self.carriedby getrigindexfromarchetyperef();
 	self.carriedby = undefined;
-	if(isdefined(self.triggerportableradarping))
-	{
+	if(isdefined(self.triggerportableradarping)) {
 		self.triggerportableradarping.iscarrying = 0;
-		if(level.sentrysettings[self.sentrytype].var_9F43)
-		{
+		if(level.sentrysettings[self.sentrytype].var_9F43) {
 			scripts\cp\utility::make_entity_sentient_cp(self.triggerportableradarping.team);
 		}
 
@@ -351,21 +292,16 @@ sentry_setplaced()
 	self notify("placed");
 }
 
-//Function Number: 13
-sentry_setcancelled()
-{
+sentry_setcancelled() {
 	self.carriedby getrigindexfromarchetyperef();
-	if(isdefined(self.triggerportableradarping))
-	{
+	if(isdefined(self.triggerportableradarping)) {
 		self.triggerportableradarping.iscarrying = 0;
 	}
 
 	self delete();
 }
 
-//Function Number: 14
-sentry_setcarried(param_00,param_01)
-{
+sentry_setcarried(param_00,param_01) {
 	self setmodel(level.sentrysettings[self.sentrytype].modelplacement);
 	self setsentrycarrier(param_00);
 	self setcandamage(0);
@@ -383,9 +319,7 @@ sentry_setcarried(param_00,param_01)
 	self notify("carried");
 }
 
-//Function Number: 15
-updatesentryplacement(param_00,param_01)
-{
+updatesentryplacement(param_00,param_01) {
 	self endon("death");
 	self endon("disconnect");
 	level endon("game_ended");
@@ -393,16 +327,12 @@ updatesentryplacement(param_00,param_01)
 	param_00 endon("death");
 	param_00.canbeplaced = 1;
 	var_02 = -1;
-	for(;;)
-	{
+	for(;;) {
 		param_00.canbeplaced = func_3834(param_00);
-		if(param_00.canbeplaced != var_02)
-		{
-			if(param_00.canbeplaced)
-			{
+		if(param_00.canbeplaced != var_02) {
+			if(param_00.canbeplaced) {
 				param_00 setmodel(level.sentrysettings[param_00.sentrytype].modelplacement);
-				if(!param_01)
-				{
+				if(!param_01) {
 					self forceusehinton(&"COOP_CRAFTABLES_PLACE");
 				}
 				else
@@ -422,33 +352,26 @@ updatesentryplacement(param_00,param_01)
 	}
 }
 
-//Function Number: 16
-func_3834(param_00)
-{
+func_3834(param_00) {
 	var_01 = self canplayerplacesentry();
 	param_00.origin = var_01["origin"];
 	param_00.angles = var_01["angles"];
-	if(scripts\cp\utility::ent_is_near_equipment(param_00))
-	{
+	if(scripts\cp\utility::ent_is_near_equipment(param_00)) {
 		return 0;
 	}
 
 	return self isonground() && var_01["result"] && abs(param_00.origin[2] - self.origin[2]) < 10;
 }
 
-//Function Number: 17
-sentry_setactive()
-{
+sentry_setactive() {
 	self give_player_session_tokens(level.sentrysettings[self.sentrytype].sentrymodeon);
 	self setcursorhint("HINT_NOICON");
 	self sethintstring(level.sentrysettings[self.sentrytype].pow);
 	self makeusable();
 	self setusefov(120);
 	self setuserange(96);
-	foreach(var_01 in level.players)
-	{
-		switch(self.sentrytype)
-		{
+	foreach(var_01 in level.players) {
+		switch(self.sentrytype) {
 			case "crafted_autosentry":
 				var_02 = self getentitynumber();
 				func_1862(var_02,var_01);
@@ -457,61 +380,45 @@ sentry_setactive()
 	}
 }
 
-//Function Number: 18
-sentry_setinactive()
-{
+sentry_setinactive() {
 	self give_player_session_tokens(level.sentrysettings[self.sentrytype].sentrymodeoff);
 	self makeunusable();
 	var_00 = self getentitynumber();
 	func_E11F(var_00);
 }
 
-//Function Number: 19
-sentry_makesolid()
-{
+sentry_makesolid() {
 	self getvalidlocation();
 }
 
-//Function Number: 20
-sentry_makenotsolid()
-{
+sentry_makenotsolid() {
 	self setcontents(0);
 }
 
-//Function Number: 21
-func_1862(param_00,param_01)
-{
+func_1862(param_00,param_01) {
 	level.turrets = scripts\engine\utility::array_add_safe(level.turrets,self);
-	if(level.turrets.size > 4)
-	{
-		if(isdefined(level.turrets[0]))
-		{
+	if(level.turrets.size > 4) {
+		if(isdefined(level.turrets[0])) {
 			level.turrets[0] notify("death");
 			param_01 playlocalsound("ww_magicbox_laughter");
 		}
 	}
 }
 
-//Function Number: 22
-func_E11F(param_00)
-{
+func_E11F(param_00) {
 	level.turrets = scripts\engine\utility::array_remove(level.turrets,self);
 }
 
-//Function Number: 23
-sentry_attacktargets()
-{
+sentry_attacktargets() {
 	self endon("death");
 	level endon("game_ended");
 	self.momentum = 0;
 	self.heatlevel = 0;
 	self.overheated = 0;
 	thread sentry_heatmonitor();
-	for(;;)
-	{
+	for(;;) {
 		scripts\engine\utility::waittill_either("turretstatechange","cooled");
-		if(self getteamarray())
-		{
+		if(self getteamarray()) {
 			thread sentry_burstfirestart();
 			continue;
 		}
@@ -521,9 +428,7 @@ sentry_attacktargets()
 	}
 }
 
-//Function Number: 24
-sentry_targetlocksound()
-{
+sentry_targetlocksound() {
 	self endon("death");
 	self playsound("sentry_gun_target_lock_beep");
 	wait(0.19);
@@ -532,26 +437,19 @@ sentry_targetlocksound()
 	self playsound("sentry_gun_target_lock_beep");
 }
 
-//Function Number: 25
-sentry_spinup()
-{
+sentry_spinup() {
 	thread sentry_targetlocksound();
-	while(self.momentum < level.sentrysettings[self.sentrytype].spinuptime)
-	{
+	while(self.momentum < level.sentrysettings[self.sentrytype].spinuptime) {
 		self.momentum = self.momentum + 0.1;
 		wait(0.1);
 	}
 }
 
-//Function Number: 26
-sentry_spindown()
-{
+sentry_spindown() {
 	self.momentum = 0;
 }
 
-//Function Number: 27
-sentry_burstfirestart()
-{
+sentry_burstfirestart() {
 	self endon("death");
 	self endon("stop_shooting");
 	level endon("game_ended");
@@ -561,11 +459,9 @@ sentry_burstfirestart()
 	var_02 = level.sentrysettings[self.sentrytype].burstmax;
 	var_03 = level.sentrysettings[self.sentrytype].pausemin;
 	var_04 = level.sentrysettings[self.sentrytype].pausemax;
-	for(;;)
-	{
+	for(;;) {
 		var_05 = randomintrange(var_01,var_02 + 1);
-		for(var_06 = 0;var_06 < var_05 && !self.overheated;var_06++)
-		{
+		for(var_06 = 0;var_06 < var_05 && !self.overheated;var_06++) {
 			self shootturret();
 			self notify("bullet_fired");
 			self.heatlevel = self.heatlevel + var_00;
@@ -576,23 +472,18 @@ sentry_burstfirestart()
 	}
 }
 
-//Function Number: 28
-sentry_burstfirestop()
-{
+sentry_burstfirestop() {
 	self notify("stop_shooting");
 }
 
-//Function Number: 29
-turret_shotmonitor(param_00)
-{
+turret_shotmonitor(param_00) {
 	self endon("death");
 	self endon("disconnect");
 	level endon("game_ended");
 	param_00 endon("death");
 	param_00 endon("player_dismount");
 	var_01 = function_0240(level.sentrysettings[param_00.sentrytype].var_39B);
-	for(;;)
-	{
+	for(;;) {
 		param_00 waittill("turret_fire");
 		param_00 _meth_8165() notify("turret_fire");
 		param_00.heatlevel = param_00.heatlevel + var_01;
@@ -600,19 +491,15 @@ turret_shotmonitor(param_00)
 	}
 }
 
-//Function Number: 30
-sentry_heatmonitor()
-{
+sentry_heatmonitor() {
 	self endon("death");
 	var_00 = function_0240(level.sentrysettings[self.sentrytype].var_39B);
 	var_01 = 0;
 	var_02 = 0;
 	var_03 = level.sentrysettings[self.sentrytype].overheattime;
 	var_04 = level.sentrysettings[self.sentrytype].cooldowntime;
-	for(;;)
-	{
-		if(self.heatlevel != var_01)
-		{
+	for(;;) {
+		if(self.heatlevel != var_01) {
 			wait(var_00);
 		}
 		else
@@ -620,12 +507,10 @@ sentry_heatmonitor()
 			self.heatlevel = max(0,self.heatlevel - 0.05);
 		}
 
-		if(self.heatlevel > var_03)
-		{
+		if(self.heatlevel > var_03) {
 			self.overheated = 1;
 			thread playheatfx();
-			switch(self.sentrytype)
-			{
+			switch(self.sentrytype) {
 				case "crafted_autosentry":
 					playfxontag(scripts\engine\utility::getfx("sentry_smoke_mp"),self,"tag_aim");
 					break;
@@ -634,8 +519,7 @@ sentry_heatmonitor()
 					break;
 			}
 
-			while(self.heatlevel)
-			{
+			while(self.heatlevel) {
 				self.heatlevel = max(0,self.heatlevel - 0.1);
 				wait(0.1);
 			}
@@ -649,19 +533,14 @@ sentry_heatmonitor()
 	}
 }
 
-//Function Number: 31
-turret_heatmonitor()
-{
+turret_heatmonitor() {
 	self endon("death");
 	var_00 = level.sentrysettings[self.sentrytype].overheattime;
-	for(;;)
-	{
-		if(self.heatlevel > var_00)
-		{
+	for(;;) {
+		if(self.heatlevel > var_00) {
 			self.overheated = 1;
 			thread playheatfx();
-			switch(self.sentrytype)
-			{
+			switch(self.sentrytype) {
 				case "gl_turret":
 					playfxontag(scripts\engine\utility::getfx("sentry_smoke_mp"),self,"tag_aim");
 					break;
@@ -670,8 +549,7 @@ turret_heatmonitor()
 					break;
 			}
 
-			while(self.heatlevel)
-			{
+			while(self.heatlevel) {
 				wait(0.1);
 			}
 
@@ -683,16 +561,11 @@ turret_heatmonitor()
 	}
 }
 
-//Function Number: 32
-turret_coolmonitor()
-{
+turret_coolmonitor() {
 	self endon("death");
-	for(;;)
-	{
-		if(self.heatlevel > 0)
-		{
-			if(self.cooldownwaittime <= 0)
-			{
+	for(;;) {
+		if(self.heatlevel > 0) {
+			if(self.cooldownwaittime <= 0) {
 				self.heatlevel = max(0,self.heatlevel - 0.05);
 			}
 			else
@@ -705,44 +578,34 @@ turret_coolmonitor()
 	}
 }
 
-//Function Number: 33
-playheatfx()
-{
+playheatfx() {
 	self endon("death");
 	self endon("not_overheated");
 	level endon("game_ended");
 	self notify("playing_heat_fx");
 	self endon("playing_heat_fx");
-	for(;;)
-	{
+	for(;;) {
 		playfxontag(scripts\engine\utility::getfx("sentry_overheat_mp"),self,"tag_flash");
 		wait(level.sentrysettings[self.sentrytype].fxtime);
 	}
 }
 
-//Function Number: 34
-playsmokefx()
-{
+playsmokefx() {
 	self endon("death");
 	self endon("not_overheated");
 	level endon("game_ended");
-	for(;;)
-	{
+	for(;;) {
 		playfxontag(scripts\engine\utility::getfx("sentry_smoke_mp"),self,"tag_aim");
 		wait(0.4);
 	}
 }
 
-//Function Number: 35
-sentry_beepsounds()
-{
+sentry_beepsounds() {
 	self endon("death");
 	level endon("game_ended");
-	for(;;)
-	{
+	for(;;) {
 		wait(3);
-		if(!isdefined(self.carriedby))
-		{
+		if(!isdefined(self.carriedby)) {
 			self playsound("sentry_gun_beep");
 		}
 	}

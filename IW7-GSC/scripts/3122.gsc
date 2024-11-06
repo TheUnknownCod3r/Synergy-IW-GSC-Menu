@@ -1,18 +1,11 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: 3122.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 76
- * Decompile Time: 304 ms
- * Timestamp: 10/27/2023 12:26:11 AM
-*******************************************************************/
+/****************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\3122.gsc
+****************************/
 
-//Function Number: 1
-func_2371()
-{
-	if(scripts/asm/asm::func_232E("c6"))
-	{
+func_2371() {
+	if(scripts/asm/asm::func_232E("c6")) {
 		return;
 	}
 
@@ -1106,452 +1099,302 @@ func_2371()
 	scripts/asm/asm::func_2327();
 }
 
-//Function Number: 2
-func_122DB(param_00,param_01,param_02,param_03)
-{
+func_122DB(param_00,param_01,param_02,param_03) {
 	return scripts/asm/asm_bb::bb_moverequested();
 }
 
-//Function Number: 3
-func_122D6(param_00,param_01,param_02,param_03)
-{
+func_122D6(param_00,param_01,param_02,param_03) {
 	return scripts/asm/asm_bb::bb_isincombat();
 }
 
-//Function Number: 4
-func_11B72(param_00,param_01,param_02,param_03)
-{
+func_11B72(param_00,param_01,param_02,param_03) {
 	return !scripts/asm/asm_bb::bb_isincombat() && !scripts/asm/asm_bb::bb_isanimscripted();
 }
 
-//Function Number: 5
-func_11B78(param_00,param_01,param_02,param_03)
-{
+func_11B78(param_00,param_01,param_02,param_03) {
 	return scripts/asm/asm::func_BCE7(param_00,param_01,param_03) && !scripts/asm/asm_bb::bb_isanimscripted();
 }
 
-//Function Number: 6
-func_11B6F(param_00,param_01,param_02,param_03)
-{
+func_11B6F(param_00,param_01,param_02,param_03) {
 	return !scripts/asm/asm_bb::bb_isanimscripted();
 }
 
-//Function Number: 7
-func_125D4(param_00,param_01,param_02,param_03)
-{
+func_125D4(param_00,param_01,param_02,param_03) {
 	return scripts/asm/asm_bb::bb_iscrawlmelee();
 }
 
-//Function Number: 8
-func_12273(param_00,param_01,param_02,param_03)
-{
+func_12273(param_00,param_01,param_02,param_03) {
 	return isdefined(self.melee) && !isdefined(self.melee.target);
 }
 
-//Function Number: 9
-func_12270(param_00,param_01,param_02,param_03)
-{
+func_12270(param_00,param_01,param_02,param_03) {
 	return !lib_0F3D::func_B5FC();
 }
 
-//Function Number: 10
-func_122B0(param_00,param_01,param_02,param_03)
-{
+func_122B0(param_00,param_01,param_02,param_03) {
 	return !scripts/asm/asm_bb::bb_moverequested();
 }
 
-//Function Number: 11
-func_123DC(param_00,param_01,param_02,param_03)
-{
+func_123DC(param_00,param_01,param_02,param_03) {
 	return scripts/asm/asm::func_232B(param_01,"end") && !isdefined(self._blackboard.dismemberedparts);
 }
 
-//Function Number: 12
-func_123D2(param_00,param_01,param_02,param_03)
-{
+func_123D2(param_00,param_01,param_02,param_03) {
 	return scripts/asm/asm::func_232B(param_01,"end") && !isdefined(self._blackboard.dismemberedparts);
 }
 
-//Function Number: 13
-func_12364(param_00,param_01,param_02,param_03)
-{
+func_12364(param_00,param_01,param_02,param_03) {
 	return self.a.pose == "stand" && scripts/asm/asm::func_232B("pain_cover_right","end");
 }
 
-//Function Number: 14
-func_1236E(param_00,param_01,param_02,param_03)
-{
+func_1236E(param_00,param_01,param_02,param_03) {
 	return self.a.pose == "crouch" && scripts/asm/asm::func_232B("pain_cover_right","end");
 }
 
-//Function Number: 15
-func_1234A(param_00,param_01,param_02,param_03)
-{
+func_1234A(param_00,param_01,param_02,param_03) {
 	return self.a.pose == "stand" && scripts/asm/asm::func_232B("pain_cover_left","end");
 }
 
-//Function Number: 16
-func_12354(param_00,param_01,param_02,param_03)
-{
+func_12354(param_00,param_01,param_02,param_03) {
 	return self.a.pose == "crouch" && scripts/asm/asm::func_232B("pain_cover_left","end");
 }
 
-//Function Number: 17
-func_12141(param_00,param_01,param_02,param_03)
-{
+func_12141(param_00,param_01,param_02,param_03) {
 	return scripts/asm/asm_bb::bb_isselfdestruct();
 }
 
-//Function Number: 18
-func_12118(param_00,param_01,param_02,param_03)
-{
+func_12118(param_00,param_01,param_02,param_03) {
 	return scripts/asm/asm_bb::bb_reloadrequested();
 }
 
-//Function Number: 19
-func_120E0(param_00,param_01,param_02,param_03)
-{
+func_120E0(param_00,param_01,param_02,param_03) {
 	return scripts/asm/asm_bb::bb_reloadrequested();
 }
 
-//Function Number: 20
-func_120CA(param_00,param_01,param_02,param_03)
-{
+func_120CA(param_00,param_01,param_02,param_03) {
 	return scripts/asm/asm_bb::bb_moverequested() && scripts/asm/asm_bb::bb_movetyperequested("combat");
 }
 
-//Function Number: 21
-func_120CB(param_00,param_01,param_02,param_03)
-{
+func_120CB(param_00,param_01,param_02,param_03) {
 	return scripts/asm/asm_bb::bb_meleechargerequested();
 }
 
-//Function Number: 22
-func_11F96(param_00,param_01,param_02,param_03)
-{
+func_11F96(param_00,param_01,param_02,param_03) {
 	return scripts/asm/asm_bb::bb_reloadrequested();
 }
 
-//Function Number: 23
-func_11F7B(param_00,param_01,param_02,param_03)
-{
+func_11F7B(param_00,param_01,param_02,param_03) {
 	return scripts/asm/asm_bb::func_291A();
 }
 
-//Function Number: 24
-func_11F4D(param_00,param_01,param_02,param_03)
-{
+func_11F4D(param_00,param_01,param_02,param_03) {
 	return scripts/asm/asm_bb::bb_getrequestedcoverstate() != "exposed";
 }
 
-//Function Number: 25
-func_11F59(param_00,param_01,param_02,param_03)
-{
+func_11F59(param_00,param_01,param_02,param_03) {
 	return scripts/asm/asm_bb::bb_getrequestedcoverstate() != "full exposed";
 }
 
-//Function Number: 26
-func_11F6E(param_00,param_01,param_02,param_03)
-{
+func_11F6E(param_00,param_01,param_02,param_03) {
 	return scripts/asm/asm_bb::bb_getrequestedcoverstate() != "look";
 }
 
-//Function Number: 27
-func_11CA3(param_00,param_01,param_02,param_03)
-{
+func_11CA3(param_00,param_01,param_02,param_03) {
 	return !scripts\asm\shared_utility::isatcovernode();
 }
 
-//Function Number: 28
-func_11C85(param_00,param_01,param_02,param_03)
-{
+func_11C85(param_00,param_01,param_02,param_03) {
 	return scripts/asm/asm_bb::func_291A();
 }
 
-//Function Number: 29
-func_11CAB(param_00,param_01,param_02,param_03)
-{
+func_11CAB(param_00,param_01,param_02,param_03) {
 	return scripts/asm/asm_bb::bb_reloadrequested();
 }
 
-//Function Number: 30
-func_11C0D(param_00,param_01,param_02,param_03)
-{
+func_11C0D(param_00,param_01,param_02,param_03) {
 	return scripts/asm/asm_bb::bb_getrequestedcoverstate() != "exposed";
 }
 
-//Function Number: 31
-func_11C19(param_00,param_01,param_02,param_03)
-{
+func_11C19(param_00,param_01,param_02,param_03) {
 	return weaponclass(self.var_394) == "rocketlauncher" && scripts/asm/asm_bb::bb_getrequestedweapon() != "rocketlauncher";
 }
 
-//Function Number: 32
-func_11C33(param_00,param_01,param_02,param_03)
-{
+func_11C33(param_00,param_01,param_02,param_03) {
 	return weaponclass(self.var_394) == "rocketlauncher" && scripts/asm/asm_bb::bb_getrequestedweapon() != "rocketlauncher";
 }
 
-//Function Number: 33
-func_11C69(param_00,param_01,param_02,param_03)
-{
+func_11C69(param_00,param_01,param_02,param_03) {
 	return weaponclass(self.var_394) == "rocketlauncher" && scripts/asm/asm_bb::bb_getrequestedweapon() != "rocketlauncher";
 }
 
-//Function Number: 34
-func_11EAD(param_00,param_01,param_02,param_03)
-{
+func_11EAD(param_00,param_01,param_02,param_03) {
 	return weaponclass(self.var_394) == "rocketlauncher" && scripts/asm/asm_bb::bb_getrequestedweapon() != "rocketlauncher";
 }
 
-//Function Number: 35
-func_11EC3(param_00,param_01,param_02,param_03)
-{
+func_11EC3(param_00,param_01,param_02,param_03) {
 	return weaponclass(self.var_394) == "rocketlauncher" && scripts/asm/asm_bb::bb_getrequestedweapon() != "rocketlauncher";
 }
 
-//Function Number: 36
-func_11F30(param_00,param_01,param_02,param_03)
-{
+func_11F30(param_00,param_01,param_02,param_03) {
 	return scripts/asm/asm_bb::bb_reloadrequested();
 }
 
-//Function Number: 37
-func_11EE9(param_00,param_01,param_02,param_03)
-{
+func_11EE9(param_00,param_01,param_02,param_03) {
 	return scripts/asm/asm_bb::func_291A();
 }
 
-//Function Number: 38
-func_11F14(param_00,param_01,param_02,param_03)
-{
+func_11F14(param_00,param_01,param_02,param_03) {
 	return lib_0C5E::func_FFD9() && scripts/asm/asm_bb::func_2929() == "B";
 }
 
-//Function Number: 39
-func_11F06(param_00,param_01,param_02,param_03)
-{
+func_11F06(param_00,param_01,param_02,param_03) {
 	return lib_0C5E::func_FFD9() && scripts/asm/asm_bb::func_2929() == "A";
 }
 
-//Function Number: 40
-func_11F22(param_00,param_01,param_02,param_03)
-{
+func_11F22(param_00,param_01,param_02,param_03) {
 	return lib_0C5E::func_FFD9() && scripts/asm/asm_bb::func_2929() == "lean";
 }
 
-//Function Number: 41
-func_11EDC(param_00,param_01,param_02,param_03)
-{
+func_11EDC(param_00,param_01,param_02,param_03) {
 	return scripts/asm/asm_bb::bb_getrequestedcoverstate() != "look";
 }
 
-//Function Number: 42
-func_11E87(param_00,param_01,param_02,param_03)
-{
+func_11E87(param_00,param_01,param_02,param_03) {
 	return scripts/asm/asm_bb::bb_reloadrequested();
 }
 
-//Function Number: 43
-func_11E55(param_00,param_01,param_02,param_03)
-{
+func_11E55(param_00,param_01,param_02,param_03) {
 	return lib_0C5E::func_FFD9() && scripts/asm/asm_bb::func_2929() == "A";
 }
 
-//Function Number: 44
-func_11E63(param_00,param_01,param_02,param_03)
-{
+func_11E63(param_00,param_01,param_02,param_03) {
 	return lib_0C5E::func_FFD9() && scripts/asm/asm_bb::func_2929() == "B";
 }
 
-//Function Number: 45
-func_11E71(param_00,param_01,param_02,param_03)
-{
+func_11E71(param_00,param_01,param_02,param_03) {
 	return lib_0C5E::func_FFD9() && scripts/asm/asm_bb::func_2929() == "lean";
 }
 
-//Function Number: 46
-func_11E0A(param_00,param_01,param_02,param_03)
-{
+func_11E0A(param_00,param_01,param_02,param_03) {
 	return weaponclass(self.var_394) == "rocketlauncher" && scripts/asm/asm_bb::bb_getrequestedweapon() != "rocketlauncher";
 }
 
-//Function Number: 47
-func_11E1E(param_00,param_01,param_02,param_03)
-{
+func_11E1E(param_00,param_01,param_02,param_03) {
 	return weaponclass(self.var_394) == "rocketlauncher" && scripts/asm/asm_bb::bb_getrequestedweapon() != "rocketlauncher";
 }
 
-//Function Number: 48
-func_11E31(param_00,param_01,param_02,param_03)
-{
+func_11E31(param_00,param_01,param_02,param_03) {
 	return scripts/asm/asm_bb::bb_getrequestedcoverstate() != "look";
 }
 
-//Function Number: 49
-func_11DE4(param_00,param_01,param_02,param_03)
-{
+func_11DE4(param_00,param_01,param_02,param_03) {
 	return scripts/asm/asm_bb::bb_reloadrequested();
 }
 
-//Function Number: 50
-func_11D9C(param_00,param_01,param_02,param_03)
-{
+func_11D9C(param_00,param_01,param_02,param_03) {
 	return scripts/asm/asm_bb::func_291A();
 }
 
-//Function Number: 51
-func_11DBA(param_00,param_01,param_02,param_03)
-{
+func_11DBA(param_00,param_01,param_02,param_03) {
 	return lib_0C5E::func_FFD9() && scripts/asm/asm_bb::func_2929() == "A";
 }
 
-//Function Number: 52
-func_11DC8(param_00,param_01,param_02,param_03)
-{
+func_11DC8(param_00,param_01,param_02,param_03) {
 	return lib_0C5E::func_FFD9() && scripts/asm/asm_bb::func_2929() == "B";
 }
 
-//Function Number: 53
-func_11DD6(param_00,param_01,param_02,param_03)
-{
+func_11DD6(param_00,param_01,param_02,param_03) {
 	return lib_0C5E::func_FFD9() && scripts/asm/asm_bb::func_2929() == "lean";
 }
 
-//Function Number: 54
-func_11D6D(param_00,param_01,param_02,param_03)
-{
+func_11D6D(param_00,param_01,param_02,param_03) {
 	return weaponclass(self.var_394) == "rocketlauncher" && scripts/asm/asm_bb::bb_getrequestedweapon() != "rocketlauncher";
 }
 
-//Function Number: 55
-func_11D78(param_00,param_01,param_02,param_03)
-{
+func_11D78(param_00,param_01,param_02,param_03) {
 	return weaponclass(self.var_394) == "rocketlauncher" && scripts/asm/asm_bb::bb_getrequestedweapon() != "rocketlauncher";
 }
 
-//Function Number: 56
-func_11D8E(param_00,param_01,param_02,param_03)
-{
+func_11D8E(param_00,param_01,param_02,param_03) {
 	return scripts/asm/asm_bb::bb_getrequestedcoverstate() != "look";
 }
 
-//Function Number: 57
-func_11D51(param_00,param_01,param_02,param_03)
-{
+func_11D51(param_00,param_01,param_02,param_03) {
 	return scripts/asm/asm_bb::bb_reloadrequested();
 }
 
-//Function Number: 58
-func_11D24(param_00,param_01,param_02,param_03)
-{
+func_11D24(param_00,param_01,param_02,param_03) {
 	return lib_0C5E::func_FFD9() && scripts/asm/asm_bb::func_2929() == "A";
 }
 
-//Function Number: 59
-func_11D33(param_00,param_01,param_02,param_03)
-{
+func_11D33(param_00,param_01,param_02,param_03) {
 	return lib_0C5E::func_FFD9() && scripts/asm/asm_bb::func_2929() == "B";
 }
 
-//Function Number: 60
-func_11D42(param_00,param_01,param_02,param_03)
-{
+func_11D42(param_00,param_01,param_02,param_03) {
 	return lib_0C5E::func_FFD9() && scripts/asm/asm_bb::func_2929() == "lean";
 }
 
-//Function Number: 61
-func_11CD9(param_00,param_01,param_02,param_03)
-{
+func_11CD9(param_00,param_01,param_02,param_03) {
 	return weaponclass(self.var_394) == "rocketlauncher" && scripts/asm/asm_bb::bb_getrequestedweapon() != "rocketlauncher";
 }
 
-//Function Number: 62
-func_11CED(param_00,param_01,param_02,param_03)
-{
+func_11CED(param_00,param_01,param_02,param_03) {
 	return weaponclass(self.var_394) == "rocketlauncher" && scripts/asm/asm_bb::bb_getrequestedweapon() != "rocketlauncher";
 }
 
-//Function Number: 63
-func_11D00(param_00,param_01,param_02,param_03)
-{
+func_11D00(param_00,param_01,param_02,param_03) {
 	return scripts/asm/asm_bb::bb_getrequestedcoverstate() != "look";
 }
 
-//Function Number: 64
-func_1257B(param_00,param_01,param_02,param_03)
-{
+func_1257B(param_00,param_01,param_02,param_03) {
 	return scripts/asm/asm_bb::bb_movetyperequested("sprint");
 }
 
-//Function Number: 65
-func_125AC(param_00,param_01,param_02,param_03)
-{
+func_125AC(param_00,param_01,param_02,param_03) {
 	return self.livestreamingenable || !scripts/asm/asm_bb::bb_movetyperequested("combat");
 }
 
-//Function Number: 66
-func_12597(param_00,param_01,param_02,param_03)
-{
+func_12597(param_00,param_01,param_02,param_03) {
 	return !scripts/asm/asm_bb::bb_moverequested();
 }
 
-//Function Number: 67
-func_12511(param_00,param_01,param_02,param_03)
-{
+func_12511(param_00,param_01,param_02,param_03) {
 	return !scripts/asm/asm_bb::bb_movetyperequested("sprint");
 }
 
-//Function Number: 68
-func_1209D(param_00,param_01,param_02,param_03)
-{
+func_1209D(param_00,param_01,param_02,param_03) {
 	return scripts/asm/asm_bb::bb_moverequested();
 }
 
-//Function Number: 69
-func_12021(param_00,param_01,param_02,param_03)
-{
+func_12021(param_00,param_01,param_02,param_03) {
 	return !scripts/asm/asm_bb::bb_moverequested();
 }
 
-//Function Number: 70
-func_1201A(param_00,param_01,param_02,param_03)
-{
+func_1201A(param_00,param_01,param_02,param_03) {
 	return scripts/asm/asm_bb::bb_moverequested();
 }
 
-//Function Number: 71
-func_12418(param_00,param_01,param_02,param_03)
-{
+func_12418(param_00,param_01,param_02,param_03) {
 	return !scripts/asm/asm::asm_iscrawlmelee();
 }
 
-//Function Number: 72
-func_1225A(param_00,param_01,param_02,param_03)
-{
+func_1225A(param_00,param_01,param_02,param_03) {
 	return !scripts/asm/asm::asm_iscrawlmelee();
 }
 
-//Function Number: 73
-func_12024(param_00,param_01,param_02,param_03)
-{
+func_12024(param_00,param_01,param_02,param_03) {
 	return scripts/asm/asm_bb::bb_iscrawlmelee();
 }
 
-//Function Number: 74
-func_1202A(param_00,param_01,param_02,param_03)
-{
+func_1202A(param_00,param_01,param_02,param_03) {
 	return scripts/asm/asm_bb::bb_reloadrequested();
 }
 
-//Function Number: 75
-func_1202E(param_00,param_01,param_02,param_03)
-{
+func_1202E(param_00,param_01,param_02,param_03) {
 	return scripts/asm/asm_bb::bb_iscrawlmelee();
 }
 
-//Function Number: 76
-func_123FC(param_00,param_01,param_02,param_03)
-{
+func_123FC(param_00,param_01,param_02,param_03) {
 	return scripts/asm/asm_bb::bb_iscrawlmelee();
 }

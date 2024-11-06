@@ -1,18 +1,11 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: behaviortree\zombie_sasquatch.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 2
- * Decompile Time: 105 ms
- * Timestamp: 10\26\2023 11:58:25 PM
-*******************************************************************/
+/*****************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\behaviortree\zombie_sasquatch.gsc
+*****************************************************/
 
-//Function Number: 1
-func_2AD0()
-{
-	if(isdefined(level.var_119E["zombie_sasquatch"]))
-	{
+func_2AD0() {
+	if(isdefined(level.var_119E["zombie_sasquatch"])) {
 		return;
 	}
 
@@ -50,9 +43,7 @@ func_2AD0()
 	level.var_119E["zombie_sasquatch"] = var_00;
 }
 
-//Function Number: 2
-func_DEE8()
-{
+func_DEE8() {
 	func_2AD0();
 	function_02D8("zombie_sasquatch");
 }

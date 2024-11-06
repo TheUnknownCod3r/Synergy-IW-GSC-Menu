@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\cp\maps\cp_final\cp_final_venomx_quest.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 146
- * Decompile Time: 7669 ms
- * Timestamp: 10/27/2023 12:05:41 AM
-*******************************************************************/
+/**********************************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\cp\maps\cp_final\cp_final_venomx_quest.gsc
+**********************************************************************/
 
-//Function Number: 1
-venomx_init()
-{
+venomx_init() {
 	venomxquestregistration();
 	initvenomxquestflags();
 	level thread init_door_ent_model_update();
@@ -20,16 +14,12 @@ venomx_init()
 	level thread init_containment_pad_stuff();
 }
 
-//Function Number: 2
-init_door_ent_model_update()
-{
+init_door_ent_model_update() {
 	var_00 = getent("fuse_box_door","script_noteworthy");
 	var_00 setmodel("cp_final_ship_hallway_control_box_door");
 }
 
-//Function Number: 3
-init_containment_pad_stuff()
-{
+init_containment_pad_stuff() {
 	level.zomb_goal_containment_struct = scripts\engine\utility::getstruct("zomb_goal_containment","script_noteworthy");
 	level.containmentpadtop = getent("pad_top","script_noteworthy");
 	level.openpositioncontainmenttop = (939.5,5620,264);
@@ -42,9 +32,7 @@ init_containment_pad_stuff()
 	level thread unblock_venomx_pad();
 }
 
-//Function Number: 4
-unblock_venomx_pad()
-{
+unblock_venomx_pad() {
 	level.containmentpadtop moveto(level.openpositioncontainmenttop,0.2);
 	level.containmentpadbottom moveto(level.openpositioncontainmentbottom,0.2);
 	var_00 = getent("venomx_pad_blocker","script_noteworthy");
@@ -55,9 +43,7 @@ unblock_venomx_pad()
 	level.zombie_trap hide();
 }
 
-//Function Number: 5
-block_venomx_pad()
-{
+block_venomx_pad() {
 	level.containmentpadtop moveto(level.closedpositioncontainmenttop,0.2);
 	level.containmentpadbottom moveto(level.closedpositioncontainmentbottom,0.2);
 	var_00 = getent("venomx_pad_blocker","script_noteworthy");
@@ -67,9 +53,7 @@ block_venomx_pad()
 	level.zombie_trap show();
 }
 
-//Function Number: 6
-movemodelwithdpad(param_00,param_01)
-{
+movemodelwithdpad(param_00,param_01) {
 	level endon("game_ended");
 	self endon("disconnect");
 	self notifyonplayercommand("pad_up","+actionslot 1");
@@ -77,17 +61,14 @@ movemodelwithdpad(param_00,param_01)
 	self notifyonplayercommand("pad_left","+actionslot 3");
 	self notifyonplayercommand("pad_right","+actionslot 4");
 	var_02 = "";
-	for(;;)
-	{
+	for(;;) {
 		var_02 = scripts\engine\utility::waittill_any_return("pad_up","pad_down","pad_left","pad_right");
-		if(!isdefined(var_02))
-		{
+		if(!isdefined(var_02)) {
 			scripts\engine\utility::waitframe();
 			continue;
 		}
 
-		switch(var_02)
-		{
+		switch(var_02) {
 			case "pad_up":
 				param_00 moveto(level.openpositioncontainmenttop,0.2);
 				break;
@@ -111,15 +92,12 @@ movemodelwithdpad(param_00,param_01)
 	}
 }
 
-//Function Number: 7
-init_tv_model_lines()
-{
+init_tv_model_lines() {
 	wait(5);
 	var_00 = [];
 	var_01 = [(1574,5393,157.5),(1574,5372.5,157.5),(1570.5,5393,137.5),(1570.5,5372.5,137.5),(1362,5372,157.5),(1362,5392.5,157.5),(1365.5,5372,137.5),(1365.5,5392.5,137.5),(408.174,5408.47,184.5),(393.678,5393.97,184.5),(405.699,5410.94,164.5),(391.203,5396.45,164.5),(511.5,4249.5,288.5),(532,4249.5,288.5),(511.5,4246,268.5),(532,4246,268.5)];
 	var_02 = [(0,0,0),(0,0,0),(12,0,0),(12,0,0),(0,180,0),(0,180,0),(12,180,0),(12,180,0),(0,315,0),(0,315,0),(12,315,0),(12,315,0),(0,90,0),(0,90,0),(12,90,0),(12,90,0)];
-	for(var_03 = 0;var_03 < 16;var_03++)
-	{
+	for(var_03 = 0;var_03 < 16;var_03++) {
 		var_04 = spawn("script_model",var_01[var_03]);
 		var_04 setmodel("tag_origin_venomx_puzzle");
 		var_04.angles = var_02[var_03];
@@ -128,16 +106,12 @@ init_tv_model_lines()
 	}
 }
 
-//Function Number: 8
-init_timer_texture()
-{
+init_timer_texture() {
 	wait(10);
 	level.timertexturearr = getentarray("venomx_timer","script_noteworthy");
 	setomnvar("zombie_venomxTimer",666);
-	foreach(var_01 in level.timertexturearr)
-	{
-		switch(var_01.name)
-		{
+	foreach(var_01 in level.timertexturearr) {
+		switch(var_01.name) {
 			case "venomx_timer_01":
 				var_01.origin = (865.5,5620,201);
 				var_01.angles = (0,270,90);
@@ -165,12 +139,9 @@ init_timer_texture()
 	}
 }
 
-//Function Number: 9
-move_venomx_locker_door(param_00)
-{
+move_venomx_locker_door(param_00) {
 	var_01 = getent("venomx_locker_door","script_noteworthy");
-	if(param_00)
-	{
+	if(param_00) {
 		var_01 rotateto((0,105,0),0.1);
 		return;
 	}
@@ -178,28 +149,22 @@ move_venomx_locker_door(param_00)
 	var_01 rotateto((0,315,0),0.1);
 }
 
-//Function Number: 10
-setup_wire_models()
-{
+setup_wire_models() {
 	level.number_of_wires = reroll_number_of_wires();
 	level.wire_active_fx = spawnfx(level._effect["vfx_venmox_spark"],(812,4730,175));
 	setup_wires(level.number_of_wires);
 }
 
-//Function Number: 11
-setup_wires(param_00)
-{
+setup_wires(param_00) {
 	level.wire_models = [];
 	var_01 = scripts\engine\utility::getstructarray("wire_puzzle_model","script_noteworthy");
 	var_02 = ["red","blue","green","black","white","yellow"];
 	var_03 = ["cp_final_control_box_button_01_red","cp_final_control_box_button_01_black","cp_final_control_box_button_01_blue","cp_final_control_box_button_01_green","cp_final_control_box_button_01_white","cp_final_control_box_button_01_yellow"];
 	var_04 = [(813.5,4734.1,165.9),(813.5,4734.1,160.9),(813.5,4734.1,156.9),(813.5,4734.1,152.9),(813.5,4734.1,148.9),(813.5,4734.1,144.9)];
-	for(var_05 = 0;var_05 < param_00;var_05++)
-	{
+	for(var_05 = 0;var_05 < param_00;var_05++) {
 		var_06 = scripts\engine\utility::random(var_01);
 		level.wire_models[var_05] = var_06;
-		switch(var_06.name)
-		{
+		switch(var_06.name) {
 			case "wire_puzzle_6":
 			case "wire_puzzle_5":
 			case "wire_puzzle_4":
@@ -221,12 +186,9 @@ setup_wires(param_00)
 	}
 }
 
-//Function Number: 12
-setup_maze_models()
-{
+setup_maze_models() {
 	level.unsolved_struct_positions_array = scripts\engine\utility::getstructarray("unsolved_grid_start","script_noteworthy");
-	foreach(var_01 in level.unsolved_struct_positions_array)
-	{
+	foreach(var_01 in level.unsolved_struct_positions_array) {
 		var_02 = strtok(var_01.name,"_");
 		var_01.x_coord = int(var_02[3]);
 		var_01.y_coord = int(var_02[4]);
@@ -238,8 +200,7 @@ setup_maze_models()
 	level.test_model setmodel("tag_origin_venomx_puzzle");
 	level.test_model setscriptablepartstate("maze_puzzle","neutral");
 	level.unsolved_struct_positions_array_2 = scripts\engine\utility::getstructarray("unsolved_grid_start_2","script_noteworthy");
-	foreach(var_05 in level.unsolved_struct_positions_array_2)
-	{
+	foreach(var_05 in level.unsolved_struct_positions_array_2) {
 		var_02 = strtok(var_05.name,"_");
 		var_05.x_coord = int(var_02[3]);
 		var_05.y_coord = int(var_02[4]);
@@ -252,9 +213,7 @@ setup_maze_models()
 	level.test_model_2 setscriptablepartstate("maze_puzzle","neutral");
 }
 
-//Function Number: 13
-start_maze_instance(param_00)
-{
+start_maze_instance(param_00) {
 	level.test_model = spawn("script_model",level.unsolved_struct_positions_array[1].origin + (-1,0,0));
 	level.test_model.mod_name = "maze1";
 	level.test_model.angles = (340.099,270.085,0.00674522);
@@ -274,12 +233,9 @@ start_maze_instance(param_00)
 	createmaze(level.test_model,level.test_model_2,param_00);
 }
 
-//Function Number: 14
-start_maze_instance_on_model(param_00,param_01,param_02)
-{
+start_maze_instance_on_model(param_00,param_01,param_02) {
 	var_03 = undefined;
-	if(param_02.name == "unsolved_console_venomx")
-	{
+	if(param_02.name == "unsolved_console_venomx") {
 		var_03 = spawn("script_model",level.unsolved_struct_positions_array[1].origin + (-1,0,0));
 		var_03.mod_name = "maze1";
 		var_03.angles = (340.8,269.6,-0.00136747);
@@ -301,8 +257,7 @@ start_maze_instance_on_model(param_00,param_01,param_02)
 
 	var_03.newmodelsspawned = param_01.newmodelsspawned;
 	param_01 delete();
-	if(var_03.mod_name == "maze1")
-	{
+	if(var_03.mod_name == "maze1") {
 		var_03.othermodel = level.test_model_2;
 		var_03.othermodel.newmodelsspawned = level.test_model_2.newmodelsspawned;
 	}
@@ -315,30 +270,22 @@ start_maze_instance_on_model(param_00,param_01,param_02)
 	createmazeonmodel(var_03,param_00,param_02);
 }
 
-//Function Number: 15
-createmazeonmodel(param_00,param_01,param_02)
-{
-	foreach(var_04 in level.players)
-	{
+createmazeonmodel(param_00,param_01,param_02) {
+	foreach(var_04 in level.players) {
 		var_04 thread control_puzzle_cursor(param_00);
 	}
 
-	if(!isdefined(level.maze_attributes))
-	{
+	if(!isdefined(level.maze_attributes)) {
 		level.maze_attributes = [];
 	}
 
 	level.random_maze_roll = [];
 	level.maze_attributes[param_00.mod_name] = spawnstruct();
 	level.maze_attributes[param_00.mod_name].maze = [];
-	for(var_06 = 0;var_06 < 6;var_06++)
-	{
-		for(var_07 = 0;var_07 < 6;var_07++)
-		{
-			foreach(var_0A, var_09 in level.maze_attributes)
-			{
-				if(var_0A == param_00.mod_name)
-				{
+	for(var_06 = 0;var_06 < 6;var_06++) {
+		for(var_07 = 0;var_07 < 6;var_07++) {
+			foreach(var_0A, var_09 in level.maze_attributes) {
+				if(var_0A == param_00.mod_name) {
 					var_09.maze[var_06][var_07] = spawnstruct();
 					var_09.maze[var_06][var_07].wall_directions = [];
 					var_09.maze[var_06][var_07].visited = 0;
@@ -348,26 +295,21 @@ createmazeonmodel(param_00,param_01,param_02)
 	}
 
 	param_00 setscriptablepartstate("maze_puzzle","cursor");
-	foreach(var_0E, var_0C in level.array_of_small_crt_script_models)
-	{
+	foreach(var_0E, var_0C in level.array_of_small_crt_script_models) {
 		var_0D = var_0E;
-		if(var_0D > 10)
-		{
+		if(var_0D > 10) {
 			var_0D = randomintrange(0,11);
 		}
 
 		var_0C setscriptablepartstate("solved_grid","solved_puzzle_" + var_0D);
 	}
 
-	if(!isdefined(level.mazerollsarray))
-	{
+	if(!isdefined(level.mazerollsarray)) {
 		level.mazerollsarray = [];
 	}
 
-	foreach(var_0E, var_10 in level.maze_attributes)
-	{
-		if(var_0E == param_00.mod_name)
-		{
+	foreach(var_0E, var_10 in level.maze_attributes) {
+		if(var_0E == param_00.mod_name) {
 			level.random_maze_roll[var_0E] = random_maze_roll();
 			level thread store_wall_directions(var_10,level.random_maze_roll[var_0E]);
 		}
@@ -377,11 +319,8 @@ createmazeonmodel(param_00,param_01,param_02)
 	param_02 setscriptablepartstate("unsolved_grid","unsolved_maze_" + level.random_maze_roll[param_00.mod_name]);
 }
 
-//Function Number: 16
-disable_scriptables_for_mazes(param_00)
-{
-	if(param_00.mod_name == "maze1")
-	{
+disable_scriptables_for_mazes(param_00) {
+	if(param_00.mod_name == "maze1") {
 		level.test_model setscriptablepartstate("maze_puzzle","neutral");
 		level.unsolved_crt_model setscriptablepartstate("unsolved_grid","neutral");
 		return;
@@ -391,24 +330,16 @@ disable_scriptables_for_mazes(param_00)
 	level.unsolved_crt_model_2 setscriptablepartstate("unsolved_grid","neutral");
 }
 
-//Function Number: 17
-disable_solved_grids()
-{
-	foreach(var_01 in level.array_of_small_crt_script_models)
-	{
+disable_solved_grids() {
+	foreach(var_01 in level.array_of_small_crt_script_models) {
 		var_01 setscriptablepartstate("solved_grid","neutral");
 	}
 }
 
-//Function Number: 18
-return_position_x_y(param_00,param_01,param_02)
-{
-	if(param_02.mod_name == "maze1")
-	{
-		foreach(var_04 in level.unsolved_struct_positions_array)
-		{
-			if(var_04.x_coord == param_00 && var_04.y_coord == param_01)
-			{
+return_position_x_y(param_00,param_01,param_02) {
+	if(param_02.mod_name == "maze1") {
+		foreach(var_04 in level.unsolved_struct_positions_array) {
+			if(var_04.x_coord == param_00 && var_04.y_coord == param_01) {
 				return var_04.origin;
 			}
 		}
@@ -416,18 +347,14 @@ return_position_x_y(param_00,param_01,param_02)
 		return;
 	}
 
-	foreach(var_07 in level.unsolved_struct_positions_array_2)
-	{
-		if(var_07.x_coord == param_00 && var_07.y_coord == param_01)
-		{
+	foreach(var_07 in level.unsolved_struct_positions_array_2) {
+		if(var_07.x_coord == param_00 && var_07.y_coord == param_01) {
 			return var_07.origin;
 		}
 	}
 }
 
-//Function Number: 19
-input_cursor(param_00,param_01)
-{
+input_cursor(param_00,param_01) {
 	level endon("game_ended");
 	self endon("disconnect");
 	self notify("one_cursor_thread_for_" + param_00.mod_name + "_for_" + self.name);
@@ -439,53 +366,44 @@ input_cursor(param_00,param_01)
 	self notifyonplayercommand("venomxmove_left","+actionslot 3");
 	self notifyonplayercommand("venomxmove_right","+actionslot 4");
 	var_02 = "";
-	for(;;)
-	{
+	for(;;) {
 		var_02 = scripts\engine\utility::waittill_any_return("venomxmove_up","venomxmove_down","venomxmove_left","venomxmove_right");
-		if(distance2dsquared(param_00.origin,self.origin) > 8100)
-		{
+		if(distance2dsquared(param_00.origin,self.origin) > 8100) {
 			param_00 hudoutlinedisableforclient(self);
 			scripts\engine\utility::waitframe();
 			continue;
 		}
 
-		if(!self worldpointinreticle_circle(param_00.origin,100,90))
-		{
+		if(!self worldpointinreticle_circle(param_00.origin,100,90)) {
 			param_00 hudoutlinedisableforclient(self);
 			scripts\engine\utility::waitframe();
 			continue;
 		}
 
-		if(!isdefined(var_02))
-		{
+		if(!isdefined(var_02)) {
 			param_00 hudoutlinedisableforclient(self);
 			scripts\engine\utility::waitframe();
 			continue;
 		}
 
-		if(!isdefined(level.trapped_zombie) || !isdefined(param_00))
-		{
+		if(!isdefined(level.trapped_zombie) || !isdefined(param_00)) {
 			scripts\engine\utility::waitframe();
 			continue;
 		}
 
-		if(!scripts\engine\utility::istrue(level.masterpcinteraction.triggeredsuser))
-		{
+		if(!scripts\engine\utility::istrue(level.masterpcinteraction.triggeredsuser)) {
 			scripts\engine\utility::waitframe();
 			continue;
 		}
 
-		if(isdefined(level.maze_completed))
-		{
-			if(scripts\engine\utility::istrue(level.maze_completed[param_00.mod_name]))
-			{
+		if(isdefined(level.maze_completed)) {
+			if(scripts\engine\utility::istrue(level.maze_completed[param_00.mod_name])) {
 				scripts\engine\utility::waitframe();
 				continue;
 			}
 		}
 
-		if(scripts\engine\utility::istrue(level.failed_puzzle))
-		{
+		if(scripts\engine\utility::istrue(level.failed_puzzle)) {
 			scripts\engine\utility::waitframe();
 			continue;
 		}
@@ -493,8 +411,7 @@ input_cursor(param_00,param_01)
 		param_00 hudoutlineenableforclient(self,3,1,0);
 		thread run_disable_player_actions_logic();
 		self playlocalsound("cp_final_venom_quest_move_red_square");
-		switch(var_02)
-		{
+		switch(var_02) {
 			case "venomxmove_up":
 				runmazeinstanceforpoint(level.maze_attributes[param_00.mod_name].maze,param_00.xcoord - 1,param_00.ycoord,"up",param_00,self,param_01);
 				wait(1);
@@ -527,9 +444,7 @@ input_cursor(param_00,param_01)
 	}
 }
 
-//Function Number: 20
-input_cursor_maze2(param_00,param_01)
-{
+input_cursor_maze2(param_00,param_01) {
 	level endon("game_ended");
 	self endon("disconnect");
 	self notify("one_cursor_thread_for_" + param_00.mod_name + "_for_" + self.name);
@@ -541,53 +456,44 @@ input_cursor_maze2(param_00,param_01)
 	self notifyonplayercommand("venomxmove_left","+actionslot 3");
 	self notifyonplayercommand("venomxmove_right","+actionslot 4");
 	var_02 = "";
-	for(;;)
-	{
+	for(;;) {
 		var_02 = scripts\engine\utility::waittill_any_return("venomxmove_up","venomxmove_down","venomxmove_left","venomxmove_right");
-		if(distance2dsquared(param_00.origin,self.origin) > 8100)
-		{
+		if(distance2dsquared(param_00.origin,self.origin) > 8100) {
 			param_00 hudoutlinedisableforclient(self);
 			scripts\engine\utility::waitframe();
 			continue;
 		}
 
-		if(!self worldpointinreticle_circle(param_00.origin,100,90))
-		{
+		if(!self worldpointinreticle_circle(param_00.origin,100,90)) {
 			param_00 hudoutlinedisableforclient(self);
 			scripts\engine\utility::waitframe();
 			continue;
 		}
 
-		if(!isdefined(var_02))
-		{
+		if(!isdefined(var_02)) {
 			param_00 hudoutlinedisableforclient(self);
 			scripts\engine\utility::waitframe();
 			continue;
 		}
 
-		if(!isdefined(level.trapped_zombie) || !isdefined(param_00))
-		{
+		if(!isdefined(level.trapped_zombie) || !isdefined(param_00)) {
 			scripts\engine\utility::waitframe();
 			continue;
 		}
 
-		if(!scripts\engine\utility::istrue(level.masterpcinteraction.triggeredsuser))
-		{
+		if(!scripts\engine\utility::istrue(level.masterpcinteraction.triggeredsuser)) {
 			scripts\engine\utility::waitframe();
 			continue;
 		}
 
-		if(isdefined(level.maze_completed))
-		{
-			if(scripts\engine\utility::istrue(level.maze_completed[param_00.mod_name]))
-			{
+		if(isdefined(level.maze_completed)) {
+			if(scripts\engine\utility::istrue(level.maze_completed[param_00.mod_name])) {
 				scripts\engine\utility::waitframe();
 				continue;
 			}
 		}
 
-		if(scripts\engine\utility::istrue(level.failed_puzzle))
-		{
+		if(scripts\engine\utility::istrue(level.failed_puzzle)) {
 			scripts\engine\utility::waitframe();
 			continue;
 		}
@@ -595,8 +501,7 @@ input_cursor_maze2(param_00,param_01)
 		param_00 hudoutlineenableforclient(self,3,1,0);
 		thread run_disable_player_actions_logic();
 		self playlocalsound("cp_final_venom_quest_move_red_square");
-		switch(var_02)
-		{
+		switch(var_02) {
 			case "venomxmove_up":
 				runmazeinstanceforpoint(level.maze_attributes[param_00.mod_name].maze,param_00.xcoord - 1,param_00.ycoord,"up",param_00,self,param_01);
 				wait(1);
@@ -629,9 +534,7 @@ input_cursor_maze2(param_00,param_01)
 	}
 }
 
-//Function Number: 21
-run_disable_player_actions_logic()
-{
+run_disable_player_actions_logic() {
 	self endon("disconnect");
 	self notify("one_cursor_thread_only_for" + self.name);
 	self endon("one_cursor_thread_only_for" + self.name);
@@ -650,21 +553,16 @@ run_disable_player_actions_logic()
 	var_00.attemptingpuzzle = undefined;
 }
 
-//Function Number: 22
-phone_exit_move()
-{
+phone_exit_move() {
 	self endon("phonebooth_end");
 	self endon("disconnect");
 	level endon("end_locking_threads_on_the_player_for_venomx_cursor");
 	var_00 = 0;
-	for(;;)
-	{
+	for(;;) {
 		var_01 = self getnormalizedmovement();
-		if(var_01[0] != 0 || var_01[1] != 0)
-		{
+		if(var_01[0] != 0 || var_01[1] != 0) {
 			var_00++;
-			if(var_00 == 1)
-			{
+			if(var_00 == 1) {
 				self._phone_exit_move = 1;
 				self notify("exit_phonebooth");
 			}
@@ -678,9 +576,7 @@ phone_exit_move()
 	}
 }
 
-//Function Number: 23
-phone_exit_damage()
-{
+phone_exit_damage() {
 	self endon("disconect");
 	self endon("phonebooth_end");
 	level endon("end_locking_threads_on_the_player_for_venomx_cursor");
@@ -689,9 +585,7 @@ phone_exit_damage()
 	self notify("exit_phonebooth");
 }
 
-//Function Number: 24
-player_clock_tick_sfx(param_00)
-{
+player_clock_tick_sfx(param_00) {
 	var_01 = spawn("script_origin",param_00.origin);
 	var_01 linkto(param_00);
 	var_01 playloopsound("quest_rewind_clock_tick_long");
@@ -700,46 +594,35 @@ player_clock_tick_sfx(param_00)
 	var_01 delete();
 }
 
-//Function Number: 25
-timer_progress(param_00,param_01,param_02,param_03)
-{
+timer_progress(param_00,param_01,param_02,param_03) {
 	var_04 = level.puzzles_duration;
-	if(getdvar("scr_puzzles_timer","") != "")
-	{
+	if(getdvar("scr_puzzles_timer","") != "") {
 		var_04 = 500000;
 	}
 
-	if(level.players.size < 2)
-	{
+	if(level.players.size < 2) {
 		var_04 = 300000;
 	}
 
 	setomnvar("zombie_venomxTimer",int(var_04 / 1000));
 	wait(1);
 	level thread player_clock_tick_sfx(param_02);
-	while(gettime() <= param_00 + var_04)
-	{
-		if(!scripts\engine\utility::flag("completepuzzles_step4"))
-		{
-			if(scripts\engine\utility::istrue(level.failed_puzzle))
-			{
+	while(gettime() <= param_00 + var_04) {
+		if(!scripts\engine\utility::flag("completepuzzles_step4")) {
+			if(scripts\engine\utility::istrue(level.failed_puzzle)) {
 				break;
 			}
 
-			if(!scripts\engine\utility::istrue(param_01.stop_triggering_zombies))
-			{
+			if(!scripts\engine\utility::istrue(param_01.stop_triggering_zombies)) {
 				break;
 			}
 
-			if(!isdefined(level.trapped_zombie))
-			{
+			if(!isdefined(level.trapped_zombie)) {
 				break;
 			}
 
-			if(isdefined(level.maze_completed))
-			{
-				if(scripts\engine\utility::istrue(level.maze_completed["maze1"]) && scripts\engine\utility::istrue(level.maze_completed["maze2"]))
-				{
+			if(isdefined(level.maze_completed)) {
+				if(scripts\engine\utility::istrue(level.maze_completed["maze1"]) && scripts\engine\utility::istrue(level.maze_completed["maze2"])) {
 					break;
 				}
 			}
@@ -755,14 +638,12 @@ timer_progress(param_00,param_01,param_02,param_03)
 	level thread unblock_venomx_pad();
 	setomnvar("zombie_venomxTimer",0);
 	scripts\cp\cp_interaction::add_to_current_interaction_list(param_03);
-	if(isdefined(level.masterpcinteraction))
-	{
+	if(isdefined(level.masterpcinteraction)) {
 		scripts\cp\cp_interaction::add_to_current_interaction_list(level.masterpcinteraction);
 	}
 
 	param_01.stop_triggering_zombies = 0;
-	if(isdefined(level.trapped_zombie) && level.trapped_zombie scripts\cp\utility::is_zombie_agent())
-	{
+	if(isdefined(level.trapped_zombie) && level.trapped_zombie scripts\cp\utility::is_zombie_agent()) {
 		level.trapped_zombie.precacheleaderboards = 0;
 		level.trapped_zombie.dont_cleanup = 0;
 		level.trapped_zombie.desired_dance_angles = (0,0,0);
@@ -776,26 +657,21 @@ timer_progress(param_00,param_01,param_02,param_03)
 	}
 
 	level.no_zombie_trapped = 1;
-	if(isdefined(level.masterpcinteraction))
-	{
+	if(isdefined(level.masterpcinteraction)) {
 		level.masterpcinteraction.triggeredsuser = 0;
 		level.masterpcinteraction.triggeredsuser_ent = undefined;
 	}
 
-	if(isdefined(level.puzzles_solved) && level.puzzles_solved == 4)
-	{
+	if(isdefined(level.puzzles_solved) && level.puzzles_solved == 4) {
 		return;
 	}
 
-	if(isdefined(level.maze_completed))
-	{
-		if(scripts\engine\utility::istrue(level.maze_completed["maze1"]))
-		{
+	if(isdefined(level.maze_completed)) {
+		if(scripts\engine\utility::istrue(level.maze_completed["maze1"])) {
 			level.maze_completed["maze1"] = 0;
 		}
 
-		if(scripts\engine\utility::istrue(level.maze_completed["maze2"]))
-		{
+		if(scripts\engine\utility::istrue(level.maze_completed["maze2"])) {
 			level.maze_completed["maze2"] = 0;
 		}
 	}
@@ -807,9 +683,7 @@ timer_progress(param_00,param_01,param_02,param_03)
 	level thread delay_containment_for_a_wave(param_02);
 }
 
-//Function Number: 26
-delay_containment_for_a_wave(param_00)
-{
+delay_containment_for_a_wave(param_00) {
 	level thread disable_scriptables_for_mazes(level.test_model);
 	level thread disable_scriptables_for_mazes(level.test_model_2);
 	level thread disable_solved_grids();
@@ -821,29 +695,23 @@ delay_containment_for_a_wave(param_00)
 	level.failed_puzzle = 0;
 }
 
-//Function Number: 27
-update_player_monitor_wires(param_00)
-{
+update_player_monitor_wires(param_00) {
 	level endon("game_ended");
 	self endon("disconnect");
 	level endon("end_wire_threads");
 	self notify("one_player_monitor_thread_for_" + self.name + param_00.name);
 	self endon("one_player_monitor_thread_for_" + self.name + param_00.name);
-	for(;;)
-	{
+	for(;;) {
 		scripts\engine\utility::waitframe();
-		if(scripts\engine\utility::istrue(self.iscarrying))
-		{
+		if(scripts\engine\utility::istrue(self.iscarrying)) {
 			continue;
 		}
 
-		if(distancesquared(self.origin,param_00.origin) > 8100)
-		{
+		if(distancesquared(self.origin,param_00.origin) > 8100) {
 			continue;
 		}
 
-		if(!scripts\engine\utility::istrue(level.electric_phantom_completed))
-		{
+		if(!scripts\engine\utility::istrue(level.electric_phantom_completed)) {
 			continue;
 		}
 
@@ -851,13 +719,10 @@ update_player_monitor_wires(param_00)
 	}
 }
 
-//Function Number: 28
-move_fuse_box_door(param_00)
-{
+move_fuse_box_door(param_00) {
 	var_01 = getent("fuse_box_door","script_noteworthy");
 	var_02 = "";
-	if(param_00)
-	{
+	if(param_00) {
 		var_02 = "zmb_venx_fuse_box_open";
 		var_01 rotateto((0,57.6995,0),0.1);
 	}
@@ -870,15 +735,12 @@ move_fuse_box_door(param_00)
 	playsoundatpos(var_01.origin,var_02);
 }
 
-//Function Number: 29
-update_wires_state_for_player(param_00,param_01)
-{
+update_wires_state_for_player(param_00,param_01) {
 	param_00 endon("disconnect");
 	level endon("end_wire_threads");
 	param_00 notify("one_wirestate_thread_for_" + param_00.name + param_01.name);
 	param_00 endon("one_wirestate_thread_for_" + param_00.name + param_01.name);
-	if(!param_00 worldpointinreticle_circle(param_01.model.origin,25,90))
-	{
+	if(!param_00 worldpointinreticle_circle(param_01.model.origin,25,90)) {
 		param_01.model hudoutlinedisableforclient(param_00);
 		scripts\engine\utility::waitframe();
 		return;
@@ -888,18 +750,14 @@ update_wires_state_for_player(param_00,param_01)
 	param_01.model hudoutlineenableforclient(param_00,3,1,0);
 }
 
-//Function Number: 30
-show_hint_for_time(param_00,param_01,param_02)
-{
+show_hint_for_time(param_00,param_01,param_02) {
 	param_01 endon("disconnect");
 	param_01 notify("end_thread_instance");
 	param_01 endon("end_thread_instance");
 	level endon("end_wire_threads");
 }
 
-//Function Number: 31
-watch_for_input_entered_on_button(param_00)
-{
+watch_for_input_entered_on_button(param_00) {
 	self endon("disconnect");
 	level endon("end_wire_threads");
 	self notify("one_wireinput_thread_for_" + self.name + param_00.name);
@@ -907,50 +765,42 @@ watch_for_input_entered_on_button(param_00)
 	self notifyonplayercommand("select_button","+usereload");
 	self notifyonplayercommand("select_button","+activate");
 	var_01 = "";
-	for(;;)
-	{
+	for(;;) {
 		var_01 = scripts\engine\utility::waittill_any_return("select_button");
-		if(distance2dsquared(param_00.origin,self.origin) > 8100)
-		{
+		if(distance2dsquared(param_00.origin,self.origin) > 8100) {
 			param_00.model hudoutlinedisableforclient(self);
 			scripts\engine\utility::waitframe();
 			continue;
 		}
 
-		if(!self worldpointinreticle_circle(param_00.model.origin,25,90))
-		{
+		if(!self worldpointinreticle_circle(param_00.model.origin,25,90)) {
 			param_00.model hudoutlinedisableforclient(self);
 			scripts\engine\utility::waitframe();
 			continue;
 		}
 
-		if(scripts\engine\utility::istrue(level.wire_struct_disabled))
-		{
+		if(scripts\engine\utility::istrue(level.wire_struct_disabled)) {
 			thread scripts\cp\cp_vo::try_to_play_vo("quest_venx_fusebox_disabled_fail","final_comment_vo","highest",999,1,0,1,100);
 			scripts\engine\utility::waitframe();
 			continue;
 		}
 
-		if(!isdefined(var_01))
-		{
+		if(!isdefined(var_01)) {
 			param_00.model hudoutlinedisableforclient(self);
 			scripts\engine\utility::waitframe();
 			continue;
 		}
 
-		if(!scripts\engine\utility::istrue(level.electric_phantom_completed))
-		{
+		if(!scripts\engine\utility::istrue(level.electric_phantom_completed)) {
 			thread scripts\cp\cp_vo::try_to_play_vo("quest_venx_fusebox_disabled","final_comment_vo","highest",999,1,0,1,100);
 			scripts\engine\utility::waitframe();
 			continue;
 		}
 
 		param_00.model hudoutlineenableforclient(self,3,1,0);
-		if(var_01 == "select_button")
-		{
+		if(var_01 == "select_button") {
 			thread scripts\cp\cp_vo::try_to_play_vo("quest_venx_fusebox_interact","final_comment_vo","highest",999,1,0,1,100);
-			if(validate_wire_logic(param_00))
-			{
+			if(validate_wire_logic(param_00)) {
 				self playlocalsound("zmb_item_pickup");
 				param_00.model hudoutlinedisableforclient(self);
 				level.unlocked_zombie_containment_device = 1;
@@ -961,8 +811,7 @@ watch_for_input_entered_on_button(param_00)
 				continue;
 			}
 
-			if(randomint(100) > 50)
-			{
+			if(randomint(100) > 50) {
 				thread scripts\cp\cp_vo::try_to_play_vo("quest_venx_safe_input_fail","final_comment_vo","highest",999,1,0,1,100);
 			}
 			else
@@ -980,14 +829,10 @@ watch_for_input_entered_on_button(param_00)
 	}
 }
 
-//Function Number: 32
-wire_color_count_func(param_00)
-{
+wire_color_count_func(param_00) {
 	var_01 = 0;
-	foreach(var_03 in level.wire_models)
-	{
-		if(var_03.color == param_00)
-		{
+	foreach(var_03 in level.wire_models) {
+		if(var_03.color == param_00) {
 			var_01++;
 		}
 	}
@@ -995,16 +840,11 @@ wire_color_count_func(param_00)
 	return var_01;
 }
 
-//Function Number: 33
-validate_wire_logic(param_00)
-{
-	switch(level.number_of_wires)
-	{
+validate_wire_logic(param_00) {
+	switch(level.number_of_wires) {
 		case 3:
-			if(wire_color_count_func("black") == 0)
-			{
-				if(param_00.wire_num == 3)
-				{
+			if(wire_color_count_func("black") == 0) {
+				if(param_00.wire_num == 3) {
 					return 1;
 				}
 				else
@@ -1012,10 +852,8 @@ validate_wire_logic(param_00)
 					return 0;
 				}
 			}
-			else if(level.wire_models[level.wire_models.size - 1].color == "green")
-			{
-				if(param_00.wire_num == 1)
-				{
+			else if(level.wire_models[level.wire_models.size - 1].color == "green") {
+				if(param_00.wire_num == 1) {
 					return 1;
 				}
 				else
@@ -1023,20 +861,16 @@ validate_wire_logic(param_00)
 					return 0;
 				}
 			}
-			else if(wire_color_count_func("red") > 1)
-			{
+			else if(wire_color_count_func("red") > 1) {
 				var_01 = level.wire_models[0];
-				for(var_02 = level.wire_models.size - 1;var_02 >= 0;var_02--)
-				{
-					if(level.wire_models[var_02].color == "red")
-					{
+				for(var_02 = level.wire_models.size - 1;var_02 >= 0;var_02--) {
+					if(level.wire_models[var_02].color == "red") {
 						var_01 = level.wire_models[var_02];
 						break;
 					}
 				}
 	
-				if(var_01 == param_00)
-				{
+				if(var_01 == param_00) {
 					return 1;
 				}
 				else
@@ -1044,8 +878,7 @@ validate_wire_logic(param_00)
 					return 0;
 				}
 			}
-			else if(param_00.wire_num == 2)
-			{
+			else if(param_00.wire_num == 2) {
 				return 1;
 			}
 			else
@@ -1055,20 +888,16 @@ validate_wire_logic(param_00)
 			break;
 
 		case 4:
-			if(wire_color_count_func("yellow") > 1 && level.specialwavescompleted >= 2)
-			{
+			if(wire_color_count_func("yellow") > 1 && level.specialwavescompleted >= 2) {
 				var_01 = level.wire_models[0];
-				for(var_02 = level.wire_models.size - 1;var_02 >= 0;var_02--)
-				{
-					if(level.wire_models[var_02].color == "yellow")
-					{
+				for(var_02 = level.wire_models.size - 1;var_02 >= 0;var_02--) {
+					if(level.wire_models[var_02].color == "yellow") {
 						var_01 = level.wire_models[var_02];
 						break;
 					}
 				}
 	
-				if(var_01 == param_00)
-				{
+				if(var_01 == param_00) {
 					return 1;
 				}
 				else
@@ -1079,10 +908,8 @@ validate_wire_logic(param_00)
 			else
 			{
 				var_03 = level.wire_models[level.wire_models.size - 1];
-				if(var_03.color == "white" && wire_color_count_func("blue") == 0)
-				{
-					if(param_00.wire_num == 1)
-					{
+				if(var_03.color == "white" && wire_color_count_func("blue") == 0) {
+					if(param_00.wire_num == 1) {
 						return 1;
 					}
 					else
@@ -1090,10 +917,8 @@ validate_wire_logic(param_00)
 						return 0;
 					}
 				}
-				else if(wire_color_count_func("black") > 1)
-				{
-					if(param_00.wire_num == level.number_of_wires)
-					{
+				else if(wire_color_count_func("black") > 1) {
+					if(param_00.wire_num == level.number_of_wires) {
 						return 1;
 					}
 					else
@@ -1101,8 +926,7 @@ validate_wire_logic(param_00)
 						return 0;
 					}
 				}
-				else if(param_00.wire_num == 3)
-				{
+				else if(param_00.wire_num == 3) {
 					return 1;
 				}
 				else
@@ -1113,10 +937,8 @@ validate_wire_logic(param_00)
 			break;
 
 		case 5:
-			if(level.wave_num <= 3)
-			{
-				if(param_00.wire_num == 1)
-				{
+			if(level.wave_num <= 3) {
+				if(param_00.wire_num == 1) {
 					return 1;
 				}
 				else
@@ -1124,10 +946,8 @@ validate_wire_logic(param_00)
 					return 0;
 				}
 			}
-			else if(wire_color_count_func("white") == 1 && wire_color_count_func("blue") > 1)
-			{
-				if(param_00.wire_num == 2)
-				{
+			else if(wire_color_count_func("white") == 1 && wire_color_count_func("blue") > 1) {
+				if(param_00.wire_num == 2) {
 					return 1;
 				}
 				else
@@ -1135,10 +955,8 @@ validate_wire_logic(param_00)
 					return 0;
 				}
 			}
-			else if(wire_color_count_func("red") == 0 && level.wave_num % 2 == 0 && level.specialwavescompleted < 4)
-			{
-				if(param_00.wire_num == level.number_of_wires)
-				{
+			else if(wire_color_count_func("red") == 0 && level.wave_num % 2 == 0 && level.specialwavescompleted < 4) {
+				if(param_00.wire_num == level.number_of_wires) {
 					return 1;
 				}
 				else
@@ -1146,8 +964,7 @@ validate_wire_logic(param_00)
 					return 0;
 				}
 			}
-			else if(param_00.wire_num == 1)
-			{
+			else if(param_00.wire_num == 1) {
 				return 1;
 			}
 			else
@@ -1157,10 +974,8 @@ validate_wire_logic(param_00)
 			break;
 
 		case 6:
-			if(wire_color_count_func("yellow") != 0)
-			{
-				if(param_00.wire_num == 3)
-				{
+			if(wire_color_count_func("yellow") != 0) {
+				if(param_00.wire_num == 3) {
 					return 1;
 				}
 				else
@@ -1168,10 +983,8 @@ validate_wire_logic(param_00)
 					return 0;
 				}
 			}
-			else if(wire_color_count_func("black") == 1 && wire_color_count_func("white") > 1)
-			{
-				if(param_00.wire_num == 4)
-				{
+			else if(wire_color_count_func("black") == 1 && wire_color_count_func("white") > 1) {
+				if(param_00.wire_num == 4) {
 					return 1;
 				}
 				else
@@ -1179,10 +992,8 @@ validate_wire_logic(param_00)
 					return 0;
 				}
 			}
-			else if(level.specialwavescompleted >= 1 && wire_color_count_func("red") > 1)
-			{
-				if(param_00.wire_num == 5)
-				{
+			else if(level.specialwavescompleted >= 1 && wire_color_count_func("red") > 1) {
+				if(param_00.wire_num == 5) {
 					return 1;
 				}
 				else
@@ -1190,8 +1001,7 @@ validate_wire_logic(param_00)
 					return 0;
 				}
 			}
-			else if(param_00.wire_num == level.number_of_wires)
-			{
+			else if(param_00.wire_num == level.number_of_wires) {
 				return 1;
 			}
 			else
@@ -1205,17 +1015,13 @@ validate_wire_logic(param_00)
 	}
 }
 
-//Function Number: 34
-enable_wire_struct_next_wave()
-{
+enable_wire_struct_next_wave() {
 	level thread move_fuse_box_door(0);
-	foreach(var_01 in level.wire_models)
-	{
+	foreach(var_01 in level.wire_models) {
 		var_01.model delete();
 	}
 
-	if(isdefined(level.wire_active_fx))
-	{
+	if(isdefined(level.wire_active_fx)) {
 		level.wire_active_fx delete();
 	}
 
@@ -1224,10 +1030,8 @@ enable_wire_struct_next_wave()
 	level waittill("spawn_wave_done");
 	level thread move_fuse_box_door(1);
 	setup_wire_models();
-	foreach(var_04 in level.players)
-	{
-		foreach(var_01 in level.wire_models)
-		{
+	foreach(var_04 in level.players) {
+		foreach(var_01 in level.wire_models) {
 			var_04 thread update_player_monitor_wires(var_01);
 			var_04 thread watch_for_input_entered_on_button(var_01);
 		}
@@ -1236,9 +1040,7 @@ enable_wire_struct_next_wave()
 	level.wire_struct_disabled = undefined;
 }
 
-//Function Number: 35
-setup_backstory_interaction(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08,param_09)
-{
+setup_backstory_interaction(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08,param_09) {
 	var_0A = spawnstruct();
 	var_0A.script_noteworthy = "backstory_interaction";
 	var_0A.origin = (-213.9,5640,95.6);
@@ -1251,8 +1053,7 @@ setup_backstory_interaction(param_00,param_01,param_02,param_03,param_04,param_0
 	var_0A.enabled = 1;
 	var_0A.disable_guided_interactions = 0;
 	var_0A.script_parameters = "default";
-	if(!isdefined(param_06))
-	{
+	if(!isdefined(param_06)) {
 		param_06 = 0;
 	}
 
@@ -1265,9 +1066,7 @@ setup_backstory_interaction(param_00,param_01,param_02,param_03,param_04,param_0
 	scripts\cp\cp_interaction::add_to_current_interaction_list(var_0A);
 }
 
-//Function Number: 36
-init_venomx_models_interactions()
-{
+init_venomx_models_interactions() {
 	scripts\cp\maps\cp_final\cp_final_interactions::levelinteractionregistration(1,"containment_interaction",undefined,undefined,::containmentinteractionhintfunc,::containmentinteractionusefunc,0,1,::blank);
 	scripts\cp\maps\cp_final\cp_final_interactions::levelinteractionregistration(1,"master_pc_interaction",undefined,undefined,::master_pcinteractionhintfunc,::master_pcinteractionusefunc,0,1,::blank);
 	scripts\cp\maps\cp_final\cp_final_interactions::levelinteractionregistration(1,"timeperiod_interaction",undefined,undefined,::timeperiodinteractionhintfunc,::timeperiodinteractionusefunc,0,1,::blank);
@@ -1278,8 +1077,7 @@ init_venomx_models_interactions()
 	level thread setup_backstory_interaction(1,"backstory_interaction",undefined,undefined,::backstoryinteractionhintfunc,::backstoryinteractionusefunc,0,0,::blank);
 	level thread setup_wire_models();
 	level thread init_timer_texture();
-	if(!isdefined(level.alphabets))
-	{
+	if(!isdefined(level.alphabets)) {
 		level.alphabets = [];
 		level.alphabets["a"] = level.alphabets.size;
 		level.alphabets["b"] = level.alphabets.size;
@@ -1309,8 +1107,7 @@ init_venomx_models_interactions()
 		level.alphabets["z"] = level.alphabets.size;
 	}
 
-	if(!isdefined(level.alphabets_capped))
-	{
+	if(!isdefined(level.alphabets_capped)) {
 		level.alphabets_capped = [];
 		level.alphabets_capped["A"] = level.alphabets_capped.size;
 		level.alphabets_capped["B"] = level.alphabets_capped.size;
@@ -1346,8 +1143,7 @@ init_venomx_models_interactions()
 	level.chosennumtext = scripts\engine\utility::random(level.splcharbounties);
 	level.splcharbounties = scripts\engine\utility::array_remove(level.splcharbounties,level.chosennumtext);
 	level.chosennumtextpap2 = scripts\engine\utility::random(level.splcharbounties);
-	switch(level.chosennumtext)
-	{
+	switch(level.chosennumtext) {
 		case "fifteen":
 			level.chosen_number_for_morse_code = 15;
 			break;
@@ -1369,8 +1165,7 @@ init_venomx_models_interactions()
 			break;
 	}
 
-	switch(level.chosennumtextpap2)
-	{
+	switch(level.chosennumtextpap2) {
 		case "fifteen":
 			level.chosen_number_for_morse_code_pap2 = 15;
 			break;
@@ -1415,8 +1210,7 @@ init_venomx_models_interactions()
 	level.zombie_venomx_containment_trigger = getent("zombie_containment_volume","targetname");
 	level.zombie_venomx_containment_trigger thread watch_for_containment_trigger();
 	level.hidden_figures_volume = getent("hidden_figures_volume","script_noteworthy");
-	if(!isdefined(level.hidden_figures))
-	{
+	if(!isdefined(level.hidden_figures)) {
 		level.hidden_figures = [];
 	}
 
@@ -1456,67 +1250,52 @@ init_venomx_models_interactions()
 	level.hidden_figures[3].script_parameters = "default";
 	level.hidden_figures[3].var_336 = "interaction";
 	var_04 = scripts\engine\utility::getstructarray("fig_4","script_noteworthy");
-	foreach(var_06 in level.hidden_figures)
-	{
+	foreach(var_06 in level.hidden_figures) {
 		var_06.groupname = "locOverride";
 		var_06.playeroffset = [];
 		setup_hidden_figure_models(var_06,var_06.script_noteworthy);
 	}
 }
 
-//Function Number: 37
-get_chars_of_word_with_spaces_between_letters(param_00)
-{
+get_chars_of_word_with_spaces_between_letters(param_00) {
 	var_01 = [];
-	for(var_02 = 0;var_02 < param_00.size;var_02++)
-	{
+	for(var_02 = 0;var_02 < param_00.size;var_02++) {
 		var_01[var_02] = param_00[var_02] + ",";
 	}
 
 	return var_01;
 }
 
-//Function Number: 38
-keyconversiontomorse(param_00)
-{
+keyconversiontomorse(param_00) {
 	convertwordintomorse(param_00,1);
 }
 
-//Function Number: 39
-watch_for_containment_trigger()
-{
-	for(;;)
-	{
+watch_for_containment_trigger() {
+	for(;;) {
 		self waittill("trigger",var_00);
-		if(isplayer(var_00) && var_00 scripts\cp\utility::is_valid_player())
-		{
+		if(isplayer(var_00) && var_00 scripts\cp\utility::is_valid_player()) {
 			scripts\engine\utility::waitframe();
 			continue;
 		}
 
-		if(scripts\engine\utility::istrue(self.stop_triggering_zombies))
-		{
+		if(scripts\engine\utility::istrue(self.stop_triggering_zombies)) {
 			scripts\engine\utility::waitframe();
 			continue;
 		}
 
-		if(scripts\engine\utility::istrue(level.disable_containment))
-		{
+		if(scripts\engine\utility::istrue(level.disable_containment)) {
 			scripts\engine\utility::waitframe();
 			continue;
 		}
 
-		if(var_00 scripts\cp\utility::is_zombie_agent())
-		{
+		if(var_00 scripts\cp\utility::is_zombie_agent()) {
 			level.trapped_zombie = var_00;
 			scripts\engine\utility::waitframe();
 		}
 	}
 }
 
-//Function Number: 40
-watch_for_zombie_death_containment(param_00)
-{
+watch_for_zombie_death_containment(param_00) {
 	self waittill("death");
 	self.scripted_mode = 0;
 	self.precacheleaderboards = 0;
@@ -1532,24 +1311,19 @@ watch_for_zombie_death_containment(param_00)
 	level.trapped_zombie = undefined;
 }
 
-//Function Number: 41
-containmentinteractionusefunc(param_00,param_01)
-{
+containmentinteractionusefunc(param_00,param_01) {
 	param_01 endon("disconnect");
-	if(scripts\engine\utility::flag_exist("disablesecurity_step3") && !scripts\engine\utility::flag("disablesecurity_step3"))
-	{
+	if(scripts\engine\utility::flag_exist("disablesecurity_step3") && !scripts\engine\utility::flag("disablesecurity_step3")) {
 		return;
 	}
 
-	if(scripts\engine\utility::istrue(level.disable_containment))
-	{
+	if(scripts\engine\utility::istrue(level.disable_containment)) {
 		param_01 playlocalsound("perk_machine_deny");
 		return;
 	}
 
 	scripts\cp\cp_interaction::remove_from_current_interaction_list(param_00);
-	if(isdefined(level.trapped_zombie) && level.trapped_zombie istouching(level.zombie_venomx_containment_trigger))
-	{
+	if(isdefined(level.trapped_zombie) && level.trapped_zombie istouching(level.zombie_venomx_containment_trigger)) {
 		earthquake(0.45,3,param_00.origin,750);
 		level.zombie_venomx_containment_trigger.stop_triggering_zombies = 1;
 		level.trapped_zombie.scripted_mode = 1;
@@ -1560,8 +1334,7 @@ containmentinteractionusefunc(param_00,param_01)
 		level.trapped_zombie.dontmutilate = 1;
 		level.trapped_zombie give_mp_super_weapon(level.zomb_goal_containment_struct.origin);
 		var_02 = level.trapped_zombie scripts\engine\utility::waittill_any_return("goal","goal_reached","death");
-		if(var_02 == "death")
-		{
+		if(var_02 == "death") {
 			playsoundatpos(param_00.origin,"mpq_fail_buzzer");
 			wait(3);
 			scripts\cp\cp_interaction::add_to_current_interaction_list(param_00);
@@ -1582,32 +1355,24 @@ containmentinteractionusefunc(param_00,param_01)
 	scripts\cp\cp_interaction::add_to_current_interaction_list(param_00);
 }
 
-//Function Number: 42
-containmentinteractionhintfunc(param_00,param_01)
-{
-	if(scripts\engine\utility::flag("disablesecurity_step3"))
-	{
+containmentinteractionhintfunc(param_00,param_01) {
+	if(scripts\engine\utility::flag("disablesecurity_step3")) {
 		return &"CP_FINAL_CONTAINMENT_CHAMBER";
 	}
 
 	return "";
 }
 
-//Function Number: 43
-master_pcinteractionusefunc(param_00,param_01)
-{
+master_pcinteractionusefunc(param_00,param_01) {
 	param_01 endon("disconnect");
 	level.masterpcinteraction = param_00;
-	if(!isdefined(param_01.samcrossvoarr))
-	{
+	if(!isdefined(param_01.samcrossvoarr)) {
 		param_01.samcrossvoarr = ["final_cross_log_1","final_cross_log_2","final_cross_log_3"];
 	}
 
 	param_01.chosensamcrossvo = scripts\engine\utility::random(param_01.samcrossvoarr);
-	if(scripts\engine\utility::flag("completepuzzles_step4"))
-	{
-		if(param_01.samcrossvoarr.size > 0)
-		{
+	if(scripts\engine\utility::flag("completepuzzles_step4")) {
+		if(param_01.samcrossvoarr.size > 0) {
 			param_01 thread scripts\cp\cp_vo::try_to_play_vo(param_01.chosensamcrossvo,"final_backstory_vo","highest",999,1,0,1,100);
 			return;
 		}
@@ -1615,8 +1380,7 @@ master_pcinteractionusefunc(param_00,param_01)
 		return;
 	}
 
-	if(scripts\engine\utility::istrue(level.zombie_venomx_containment_trigger.stop_triggering_zombies) && !scripts\engine\utility::istrue(level.masterpcinteraction.triggeredsuser))
-	{
+	if(scripts\engine\utility::istrue(level.zombie_venomx_containment_trigger.stop_triggering_zombies) && !scripts\engine\utility::istrue(level.masterpcinteraction.triggeredsuser)) {
 		scripts\cp\cp_interaction::remove_from_current_interaction_list(level.masterpcinteraction);
 		param_01 playlocalsound("cp_final_venom_quest_turn_on_console");
 		playfx(level._effect["temp_circuit_fx"],param_00.origin);
@@ -1627,52 +1391,38 @@ master_pcinteractionusefunc(param_00,param_01)
 	}
 }
 
-//Function Number: 44
-master_pcinteractionhintfunc(param_00,param_01)
-{
-	if(scripts\engine\utility::flag("disablesecurity_step3") && !scripts\engine\utility::flag("completepuzzles_step4"))
-	{
+master_pcinteractionhintfunc(param_00,param_01) {
+	if(scripts\engine\utility::flag("disablesecurity_step3") && !scripts\engine\utility::flag("completepuzzles_step4")) {
 		return &"CP_FINAL_SUPER_USER";
 	}
 
 	return "";
 }
 
-//Function Number: 45
-watch_for_player_laststand(param_00,param_01)
-{
+watch_for_player_laststand(param_00,param_01) {
 	param_00 endon("disconnect");
 	param_00 waittill("last_stand");
 	scripts\cp\cp_interaction::add_to_current_interaction_list(param_01);
 }
 
-//Function Number: 46
-watch_for_player_disconnect(param_00,param_01)
-{
+watch_for_player_disconnect(param_00,param_01) {
 	param_00 waittill("disconnect");
 	scripts\cp\cp_interaction::add_to_current_interaction_list(param_01);
 }
 
-//Function Number: 47
-start_timing_sequence(param_00,param_01,param_02)
-{
+start_timing_sequence(param_00,param_01,param_02) {
 	param_01 endon("disconnect");
 	param_01 endon("death");
 	level endon("game_ended");
 	var_03 = 0;
-	while(gettime() <= param_02 + -15536)
-	{
-		if(param_01.hidden_figures_hit >= level.chosen_number_for_morse_code_pap2)
-		{
-			foreach(var_05 in level.players)
-			{
+	while(gettime() <= param_02 + -15536) {
+		if(param_01.hidden_figures_hit >= level.chosen_number_for_morse_code_pap2) {
+			foreach(var_05 in level.players) {
 				var_05 playlocalsound("zmb_item_pickup");
 			}
 
-			foreach(var_08 in param_01.personalents)
-			{
-				if(isdefined(var_08.model) && var_08.model == "tag_origin_hidden_figure_final")
-				{
+			foreach(var_08 in param_01.personalents) {
+				if(isdefined(var_08.model) && var_08.model == "tag_origin_hidden_figure_final") {
 					var_08 setscriptablepartstate("figure_effect","neutral");
 					scripts\engine\utility::waitframe();
 					var_08 setscriptablepartstate("figure_effect","death");
@@ -1682,10 +1432,8 @@ start_timing_sequence(param_00,param_01,param_02)
 			break;
 		}
 
-		if(!scripts\engine\utility::istrue(var_03))
-		{
-			if(function_010F(param_01.origin,level.hidden_figures_volume))
-			{
+		if(!scripts\engine\utility::istrue(var_03)) {
+			if(function_010F(param_01.origin,level.hidden_figures_volume)) {
 				var_03 = 1;
 				param_01 thread scripts\cp\maps\cp_final\cp_final::update_special_mode_for_player(param_01);
 			}
@@ -1698,36 +1446,28 @@ start_timing_sequence(param_00,param_01,param_02)
 	level notify("end_timing_sequence");
 }
 
-//Function Number: 48
-delay_enable_linked_interaction(param_00,param_01)
-{
+delay_enable_linked_interaction(param_00,param_01) {
 	param_01 endon("disconnect");
 	level waittill("spawn_wave_done");
 	scripts\cp\cp_interaction::add_to_current_interaction_list(param_00);
 }
 
-//Function Number: 49
-timeperiodinteractionusefunc(param_00,param_01)
-{
+timeperiodinteractionusefunc(param_00,param_01) {
 	param_01 endon("disconnect");
-	if(!isdefined(param_00.time_periods))
-	{
+	if(!isdefined(param_00.time_periods)) {
 		param_00.time_periods = [1950,1980,1970,1990];
 		param_00.pointer = 0;
 	}
 
 	var_02 = param_00.time_periods[param_00.pointer];
 	param_00.pointer++;
-	if(param_00.pointer == param_00.time_periods.size - 1)
-	{
+	if(param_00.pointer == param_00.time_periods.size - 1) {
 		param_00.pointer = 0;
 	}
 
 	level thread changetimeperiodmodel(var_02);
-	if(var_02 == 1950)
-	{
-		if(scripts\engine\utility::istrue(param_01.canattempthiddenfigureschallenge))
-		{
+	if(var_02 == 1950) {
+		if(scripts\engine\utility::istrue(param_01.canattempthiddenfigureschallenge)) {
 			scripts\cp\cp_interaction::remove_from_current_interaction_list(param_00);
 			param_01.hidden_figures_hit = 0;
 			level.hidden_figures_killed = 0;
@@ -1744,17 +1484,13 @@ timeperiodinteractionusefunc(param_00,param_01)
 		return;
 	}
 
-	if(var_03 == 1970)
-	{
+	if(var_03 == 1970) {
 		level notify("70s_activated");
 	}
 }
 
-//Function Number: 50
-changetimeperiodmodel(param_00)
-{
-	switch(param_00)
-	{
+changetimeperiodmodel(param_00) {
+	switch(param_00) {
 		case 1950:
 			level.timeperiodmodel setmodel("cp_final_console_standing_timeperiod_50s");
 			break;
@@ -1773,23 +1509,17 @@ changetimeperiodmodel(param_00)
 	}
 }
 
-//Function Number: 51
-timeperiodinteractionhintfunc(param_00,param_01)
-{
+timeperiodinteractionhintfunc(param_00,param_01) {
 	return "";
 }
 
-//Function Number: 52
-morsecodeinteractionusefunc(param_00,param_01)
-{
-	if(!scripts\engine\utility::flag("completepuzzles_step4"))
-	{
+morsecodeinteractionusefunc(param_00,param_01) {
+	if(!scripts\engine\utility::flag("completepuzzles_step4")) {
 		return;
 	}
 
 	scripts\cp\cp_interaction::remove_from_current_interaction_list(param_00);
-	if(!isdefined(level.morsecodecomponent))
-	{
+	if(!isdefined(level.morsecodecomponent)) {
 		var_02 = spawn("script_model",(609,4388.5,88));
 		var_02 setmodel("tag_origin_morse_code");
 		var_02.angles = (0,180,0);
@@ -1797,8 +1527,7 @@ morsecodeinteractionusefunc(param_00,param_01)
 	}
 
 	level.morsecodecomponent setscriptablepartstate("morse_code","off");
-	if(!scripts\engine\utility::istrue(level.completed_venomx_pap1_challenges))
-	{
+	if(!scripts\engine\utility::istrue(level.completed_venomx_pap1_challenges)) {
 		level thread keyconversiontomorse(level.chosennumtext);
 		param_01 thread venomx_morse_code(level.morsecodemessagesarray,level.morsecodekeypap1,param_00);
 		return;
@@ -1808,41 +1537,32 @@ morsecodeinteractionusefunc(param_00,param_01)
 	param_01 thread venomx_morse_code(level.morsecodemessagesarray,level.morsecodekeypap2,param_00);
 }
 
-//Function Number: 53
-morsecodeinteractionhintfunc(param_00,param_01)
-{
+morsecodeinteractionhintfunc(param_00,param_01) {
 	param_01 endon("disconnect");
 	return "";
 }
 
-//Function Number: 54
-keyinteractionusefunc(param_00,param_01)
-{
+keyinteractionusefunc(param_00,param_01) {
 	param_01 endon("disconnect");
-	if(!scripts\engine\utility::flag("completepuzzles_step4"))
-	{
+	if(!scripts\engine\utility::flag("completepuzzles_step4")) {
 		return;
 	}
 
 	scripts\cp\cp_interaction::remove_from_current_interaction_list(param_00);
-	if(!isdefined(level.keycodecomponent))
-	{
+	if(!isdefined(level.keycodecomponent)) {
 		var_02 = spawn("script_model",(-232.5,4294,224));
 		var_02 setmodel("tag_origin_morse_code");
 		var_02.angles = (0,90,0);
 		level.keycodecomponent = var_02;
 	}
 
-	if(!scripts\engine\utility::istrue(level.completed_venomx_pap1_challenges))
-	{
+	if(!scripts\engine\utility::istrue(level.completed_venomx_pap1_challenges)) {
 		level thread keyconversiontomorse(level.chosennumtext);
 		level convertwordintomorse(level.morsecodekeypap1,0,level.keycodecomponent);
 	}
-	else if(!scripts\engine\utility::istrue(level.completed_venomx_pap2_challenges))
-	{
+	else if(!scripts\engine\utility::istrue(level.completed_venomx_pap2_challenges)) {
 		level thread keyconversiontomorse(level.chosennumtextpap2);
-		if(randomint(100) > 80)
-		{
+		if(randomint(100) > 80) {
 			level convertwordintomorse(scripts\engine\utility::random(level.mission_intel_array),0,level.keycodecomponent);
 		}
 		else
@@ -1854,43 +1574,31 @@ keyinteractionusefunc(param_00,param_01)
 	scripts\cp\cp_interaction::add_to_current_interaction_list(param_00);
 }
 
-//Function Number: 55
-keyinteractionhintfunc(param_00,param_01)
-{
+keyinteractionhintfunc(param_00,param_01) {
 	return "";
 }
 
-//Function Number: 56
-dotinteractionusefunc(param_00,param_01)
-{
+dotinteractionusefunc(param_00,param_01) {
 	param_01 endon("disconnect");
-	if(!scripts\engine\utility::flag("completepuzzles_step4"))
-	{
+	if(!scripts\engine\utility::flag("completepuzzles_step4")) {
 		return;
 	}
 
-	if(!isdefined(level.dotinteraction))
-	{
+	if(!isdefined(level.dotinteraction)) {
 		level.dotinteraction = param_00;
 	}
 
 	scripts\cp\utility::playsoundinspace("payphone_plr_morse_dot",param_00.origin);
-	if(!isdefined(level.inputkeyword))
-	{
+	if(!isdefined(level.inputkeyword)) {
 		level.inputkeyword = "";
 	}
 
 	level.inputkeyword = level.inputkeyword + ".";
-	if(!scripts\engine\utility::istrue(level.completedpap2morsecode))
-	{
-		if(!scripts\engine\utility::istrue(param_00.entered_key))
-		{
-			if(isdefined(level.convertedword))
-			{
-				if(level.convertedword == level.inputkeyword)
-				{
-					foreach(var_03 in level.players)
-					{
+	if(!scripts\engine\utility::istrue(level.completedpap2morsecode)) {
+		if(!scripts\engine\utility::istrue(param_00.entered_key)) {
+			if(isdefined(level.convertedword)) {
+				if(level.convertedword == level.inputkeyword) {
+					foreach(var_03 in level.players) {
 						var_03 playlocalsound("zmb_item_pickup");
 						var_03 thread spawnthreadsforvenomxchallenges(var_03);
 					}
@@ -1906,9 +1614,7 @@ dotinteractionusefunc(param_00,param_01)
 	}
 }
 
-//Function Number: 57
-clearinputafterwaveend(param_00)
-{
+clearinputafterwaveend(param_00) {
 	level notify("one_thread_for_clearInput");
 	level endon("one_thread_for_clearInput");
 	level waittill("spawn_wave_done");
@@ -1916,43 +1622,31 @@ clearinputafterwaveend(param_00)
 	playsoundatpos(param_00.origin,"mpq_fail_buzzer");
 }
 
-//Function Number: 58
-dotinteractionhintfunc(param_00,param_01)
-{
+dotinteractionhintfunc(param_00,param_01) {
 	return "";
 }
 
-//Function Number: 59
-dashinteractionusefunc(param_00,param_01)
-{
+dashinteractionusefunc(param_00,param_01) {
 	param_01 endon("disconnect");
-	if(!scripts\engine\utility::flag("completepuzzles_step4"))
-	{
+	if(!scripts\engine\utility::flag("completepuzzles_step4")) {
 		return;
 	}
 
-	if(!isdefined(level.dashinteraction))
-	{
+	if(!isdefined(level.dashinteraction)) {
 		level.dashinteraction = param_00;
 	}
 
 	scripts\cp\utility::playsoundinspace("payphone_plr_morse_dash",param_00.origin);
-	if(!isdefined(level.inputkeyword))
-	{
+	if(!isdefined(level.inputkeyword)) {
 		level.inputkeyword = "";
 	}
 
 	level.inputkeyword = level.inputkeyword + "-";
-	if(!scripts\engine\utility::istrue(level.completedpap2morsecode))
-	{
-		if(!scripts\engine\utility::istrue(param_00.entered_key))
-		{
-			if(isdefined(level.convertedword))
-			{
-				if(level.convertedword == level.inputkeyword)
-				{
-					foreach(var_03 in level.players)
-					{
+	if(!scripts\engine\utility::istrue(level.completedpap2morsecode)) {
+		if(!scripts\engine\utility::istrue(param_00.entered_key)) {
+			if(isdefined(level.convertedword)) {
+				if(level.convertedword == level.inputkeyword) {
+					foreach(var_03 in level.players) {
 						var_03 playlocalsound("zmb_item_pickup");
 						var_03 thread spawnthreadsforvenomxchallenges(var_03);
 					}
@@ -1968,34 +1662,26 @@ dashinteractionusefunc(param_00,param_01)
 	}
 }
 
-//Function Number: 60
-dashinteractionhintfunc(param_00,param_01)
-{
+dashinteractionhintfunc(param_00,param_01) {
 	return "";
 }
 
-//Function Number: 61
-backstoryinteractionusefunc(param_00,param_01)
-{
+backstoryinteractionusefunc(param_00,param_01) {
 	param_01 endon("disconnect");
 	level.backstoryinteraction = param_00;
-	if(!isdefined(param_01.backstoryvoarr))
-	{
+	if(!isdefined(param_01.backstoryvoarr)) {
 		param_01.backstoryvoarr = ["crew1_quest","crew3_quest","crew4_quest","final_crew_shen_log_1","final_crew_shen_log_2","final_crew_shen_log_3","final_crew_shen_log_4","final_crew_adamson_log_1","final_crew_adamson_log_2","final_crew_adamson_log_3","final_crew_adamson_log_4"];
 	}
 
 	param_01.chosenbackstoryvo = scripts\engine\utility::random(param_01.backstoryvoarr);
-	if(scripts\engine\utility::flag("disable_evil_neil"))
-	{
-		if(param_01.backstoryvoarr.size <= 0)
-		{
+	if(scripts\engine\utility::flag("disable_evil_neil")) {
+		if(param_01.backstoryvoarr.size <= 0) {
 			param_01.backstoryvoarr = ["crew1_quest","crew3_quest","crew4_quest","final_crew_shen_log_1","final_crew_shen_log_2","final_crew_shen_log_3","final_crew_shen_log_4","final_crew_adamson_log_1","final_crew_adamson_log_2","final_crew_adamson_log_3","final_crew_adamson_log_4"];
 			param_01.chosenbackstoryvo = scripts\engine\utility::random(param_01.backstoryvoarr);
 		}
 
 		var_02 = "";
-		switch(param_01.chosenbackstoryvo)
-		{
+		switch(param_01.chosenbackstoryvo) {
 			case "final_crew_shen_log_1":
 				var_02 = "final_n31l_log_shen_1";
 				break;
@@ -2029,8 +1715,7 @@ backstoryinteractionusefunc(param_00,param_01)
 				break;
 		}
 
-		if(isdefined(var_02) && var_02 != "")
-		{
+		if(isdefined(var_02) && var_02 != "") {
 			scripts\cp\maps\cp_final\cp_final_mpq::playneilvo(var_02);
 			var_03 = scripts\cp\cp_vo::get_sound_length(var_02);
 			wait(var_03);
@@ -2044,17 +1729,12 @@ backstoryinteractionusefunc(param_00,param_01)
 	scripts\cp\cp_vo::func_12BE3([param_01]);
 }
 
-//Function Number: 62
-backstoryinteractionhintfunc(param_00,param_01)
-{
+backstoryinteractionhintfunc(param_00,param_01) {
 	return "";
 }
 
-//Function Number: 63
-spawnthreadsforvenomxchallenges(param_00)
-{
-	if(!scripts\engine\utility::istrue(level.completed_venomx_pap1_challenges))
-	{
+spawnthreadsforvenomxchallenges(param_00) {
+	if(!scripts\engine\utility::istrue(level.completed_venomx_pap1_challenges)) {
 		level.cryptidkillswithvenomx = 0;
 		level thread venomx_charge_meter();
 		param_00 thread runkillswatcherforcryptids();
@@ -2063,8 +1743,7 @@ spawnthreadsforvenomxchallenges(param_00)
 
 	setomnvar("zm_venomx_state",1);
 	setomnvar("zom_general_fill_percent_2",0);
-	foreach(var_02 in level.players)
-	{
+	foreach(var_02 in level.players) {
 		var_02.hidden_figures_hit = 0;
 		var_02 thread keyconversiontomorse(level.chosennumtextpap2);
 	}
@@ -2077,16 +1756,11 @@ spawnthreadsforvenomxchallenges(param_00)
 	level thread venomx_charge_meter();
 }
 
-//Function Number: 64
-runkillswatcherforcryptidspap2()
-{
+runkillswatcherforcryptidspap2() {
 	self endon("disconnected");
-	for(;;)
-	{
-		if(level.cryptidkillswithvenomxpap2 >= level.chosen_number_for_morse_code_pap2 && isdefined(level.hidden_figures_killed) && level.hidden_figures_killed >= level.chosen_number_for_morse_code_pap2)
-		{
-			foreach(var_01 in level.players)
-			{
+	for(;;) {
+		if(level.cryptidkillswithvenomxpap2 >= level.chosen_number_for_morse_code_pap2 && isdefined(level.hidden_figures_killed) && level.hidden_figures_killed >= level.chosen_number_for_morse_code_pap2) {
+			foreach(var_01 in level.players) {
 				var_01 playlocalsound("part_pickup");
 			}
 
@@ -2098,25 +1772,19 @@ runkillswatcherforcryptidspap2()
 	}
 }
 
-//Function Number: 65
-runkillswatcherforcryptids()
-{
+runkillswatcherforcryptids() {
 	self endon("disconnected");
-	for(;;)
-	{
-		if(level.cryptidkillswithvenomx >= level.chosen_number_for_morse_code)
-		{
+	for(;;) {
+		if(level.cryptidkillswithvenomx >= level.chosen_number_for_morse_code) {
 			level.completed_venomx_pap1_challenges = 1;
 			level.inputkeyword = "";
 			level.dashinteraction.entered_key = 0;
 			level.dotinteraction.entered_key = 0;
-			if(level.morsecodemessagesarray.size > 1)
-			{
+			if(level.morsecodemessagesarray.size > 1) {
 				level.morsecodemessagesarray = scripts\engine\utility::array_remove(level.morsecodemessagesarray,level.morsecodemessagesarray[0]);
 			}
 
-			foreach(var_01 in level.players)
-			{
+			foreach(var_01 in level.players) {
 				var_01 thread keyconversiontomorse(level.chosennumtextpap2);
 			}
 
@@ -2127,23 +1795,17 @@ runkillswatcherforcryptids()
 	}
 }
 
-//Function Number: 66
-venomx_charge_meter()
-{
+venomx_charge_meter() {
 	level notify("only_one_thread_for_charge_meter");
 	level endon("only_one_thread_for_charge_meter");
-	for(;;)
-	{
+	for(;;) {
 		var_00 = level scripts\engine\utility::waittill_any_return("venomx_kill","venomx_pap1_kill");
 		var_01 = 0;
-		if(var_00 == "venomx_kill")
-		{
+		if(var_00 == "venomx_kill") {
 			var_01 = level.cryptidkillswithvenomx / level.chosen_number_for_morse_code;
 		}
-		else if(var_00 == "venomx_pap1_kill")
-		{
-			if(isdefined(level.hidden_figures_killed))
-			{
+		else if(var_00 == "venomx_pap1_kill") {
+			if(isdefined(level.hidden_figures_killed)) {
 				var_01 = level.cryptidkillswithvenomxpap2 + level.hidden_figures_killed / level.chosen_number_for_morse_code_pap2 * 2;
 			}
 			else
@@ -2152,8 +1814,7 @@ venomx_charge_meter()
 			}
 		}
 
-		if(var_01 >= 1)
-		{
+		if(var_01 >= 1) {
 			setomnvar("zom_general_fill_percent_2",1);
 			continue;
 		}
@@ -2162,18 +1823,14 @@ venomx_charge_meter()
 	}
 }
 
-//Function Number: 67
-venomxquestregistration()
-{
+venomxquestregistration() {
 	finalqueststepregistration("Venom Quest",0,::blank,::restore_power_to_ship,::complete_restore_power_to_ship,::debug_restore_power_to_ship,1,"Restore Power to the Ship");
 	finalqueststepregistration("Venom Quest",1,::blank,::electric_phantom,::complete_electric_phantom,::debug_electric_phantom,1,"Drag a Rhino Into the Electric Trap");
 	finalqueststepregistration("Venom Quest",2,::blank,::disable_security_protocol,::complete_disable_security_protocol,::debug_disable_security_protocol,1,"Disable Security Protocol");
 	finalqueststepregistration("Venom Quest",3,::blank,::interact_and_complete_puzzles,::complete_interact_and_complete_puzzles,::debug_interact_and_complete_puzzles,1,"Interact and Complete All Puzzles");
 }
 
-//Function Number: 68
-initvenomxquestflags()
-{
+initvenomxquestflags() {
 	level.puzzles_duration = 180000;
 	level.puzzles_solved = 0;
 	level.electric_phantom_completed = 0;
@@ -2183,70 +1840,45 @@ initvenomxquestflags()
 	scripts\engine\utility::flag_init("completepuzzles_step4");
 }
 
-//Function Number: 69
-reroll_number_of_wires()
-{
+reroll_number_of_wires() {
 	return randomintrange(3,7);
 }
 
-//Function Number: 70
-blank()
-{
-}
+blank() {}
 
-//Function Number: 71
-restore_power_to_ship()
-{
+restore_power_to_ship() {
 	scripts\engine\utility::flag_wait("restorepower_step1");
 }
 
-//Function Number: 72
-complete_restore_power_to_ship()
-{
-}
+complete_restore_power_to_ship() {}
 
-//Function Number: 73
-debug_restore_power_to_ship()
-{
-}
+debug_restore_power_to_ship() {}
 
-//Function Number: 74
-electric_phantom()
-{
+electric_phantom() {
 	scripts\engine\utility::flag_wait("electricphantom_step2");
 }
 
-//Function Number: 75
-complete_electric_phantom()
-{
+complete_electric_phantom() {
 	level thread move_fuse_box_door(1);
 	triggerfx(level.wire_active_fx);
 	level.electric_phantom_completed = 1;
 }
 
-//Function Number: 76
-debug_electric_phantom()
-{
+debug_electric_phantom() {
 	scripts\engine\utility::flag_set("electricphantom_step2");
 }
 
-//Function Number: 77
-disable_security_protocol()
-{
+disable_security_protocol() {
 	scripts\engine\utility::flag_wait("disablesecurity_step3");
 }
 
-//Function Number: 78
-complete_disable_security_protocol()
-{
+complete_disable_security_protocol() {
 	move_fuse_box_door(0);
-	foreach(var_01 in level.wire_models)
-	{
+	foreach(var_01 in level.wire_models) {
 		var_01.model delete();
 	}
 
-	if(isdefined(level.wire_active_fx))
-	{
+	if(isdefined(level.wire_active_fx)) {
 		level.wire_active_fx delete();
 	}
 
@@ -2254,23 +1886,16 @@ complete_disable_security_protocol()
 	level notify("end_wire_threads");
 }
 
-//Function Number: 79
-debug_disable_security_protocol()
-{
+debug_disable_security_protocol() {
 	scripts\engine\utility::flag_set("disablesecurity_step3");
 }
 
-//Function Number: 80
-interact_and_complete_puzzles()
-{
+interact_and_complete_puzzles() {
 	scripts\engine\utility::flag_wait("completepuzzles_step4");
 }
 
-//Function Number: 81
-complete_interact_and_complete_puzzles()
-{
-	foreach(var_01 in level.players)
-	{
+complete_interact_and_complete_puzzles() {
+	foreach(var_01 in level.players) {
 		var_01 thread scripts\cp\cp_vo::try_to_play_vo("quest_venx_safe_success","zmb_comment_vo");
 		var_01 thread keyconversiontomorse(level.chosennumtext);
 	}
@@ -2278,8 +1903,7 @@ complete_interact_and_complete_puzzles()
 	move_venomx_locker_door(1);
 	unblock_venomx_door();
 	scripts\cp\utility::set_quest_icon(5);
-	if(!isdefined(level.morsecodecomponent))
-	{
+	if(!isdefined(level.morsecodecomponent)) {
 		var_03 = spawn("script_model",(609,4388.5,88));
 		var_03 setmodel("tag_origin_morse_code");
 		var_03.angles = (0,180,0);
@@ -2287,8 +1911,7 @@ complete_interact_and_complete_puzzles()
 		level.morsecodecomponent setscriptablepartstate("morse_code","off");
 	}
 
-	if(!isdefined(level.keycodecomponent))
-	{
+	if(!isdefined(level.keycodecomponent)) {
 		var_03 = spawn("script_model",(-232.5,4294,224));
 		var_03 setmodel("tag_origin_morse_code");
 		var_03.angles = (0,90,0);
@@ -2297,35 +1920,27 @@ complete_interact_and_complete_puzzles()
 	}
 }
 
-//Function Number: 82
-debug_interact_and_complete_puzzles()
-{
+debug_interact_and_complete_puzzles() {
 	scripts\engine\utility::flag_set("completepuzzles_step4");
 	level.puzzles_solved = 4;
 }
 
-//Function Number: 83
-venomx_weapon_logic_start(param_00)
-{
-	if(!isdefined(param_00))
-	{
+venomx_weapon_logic_start(param_00) {
+	if(!isdefined(param_00)) {
 		return;
 	}
 
-	if(!isdefined(param_00.triggerportableradarping.basetriggercount))
-	{
+	if(!isdefined(param_00.triggerportableradarping.basetriggercount)) {
 		param_00.triggerportableradarping.basetriggercount = 0;
 	}
 
-	if(issubstr(param_00.weapon_name,"pap1"))
-	{
+	if(issubstr(param_00.weapon_name,"pap1")) {
 		param_00.triggerportableradarping thread explode_venomx_projectile_early(param_00,2);
 		param_00.triggerportableradarping thread venomx_pap1_effects(param_00);
 		return;
 	}
 
-	if(issubstr(param_00.weapon_name,"pap2"))
-	{
+	if(issubstr(param_00.weapon_name,"pap2")) {
 		param_00.triggerportableradarping thread explode_venomx_projectile_early(param_00,3);
 		param_00.triggerportableradarping thread venomx_pap2_effects(param_00);
 		return;
@@ -2335,20 +1950,16 @@ venomx_weapon_logic_start(param_00)
 	param_00.triggerportableradarping thread deal_venomx_projectile_damage(param_00,1);
 }
 
-//Function Number: 84
-explode_venomx_projectile_early(param_00,param_01)
-{
+explode_venomx_projectile_early(param_00,param_01) {
 	self endon("death");
 	self endon("disconnect");
 	level endon("game_ended");
 	self notify("one_instance_of_explode_early_" + self.name);
 	self endon("one_instance_of_explode_early_" + self.name);
 	var_02 = self;
-	for(;;)
-	{
+	for(;;) {
 		scripts\engine\utility::waittill_any_3("detonate_venomx_projectile_early","detonate_pap1venomx_projectile_early","detonate_pap2venomx_projectile_early");
-		if(!isdefined(param_00.origin) || !isdefined(param_00.angles))
-		{
+		if(!isdefined(param_00.origin) || !isdefined(param_00.angles)) {
 			return;
 		}
 
@@ -2359,8 +1970,7 @@ explode_venomx_projectile_early(param_00,param_01)
 	}
 
 	self notify("delete_older_overlapping_threads");
-	switch(param_01)
-	{
+	switch(param_01) {
 		case 1:
 			var_05 = gettime();
 			var_06 = spawn("trigger_radius",var_03,0,400,64);
@@ -2386,29 +1996,24 @@ explode_venomx_projectile_early(param_00,param_01)
 	}
 }
 
-//Function Number: 85
-deal_venomx_projectile_damage(param_00,param_01)
-{
+deal_venomx_projectile_damage(param_00,param_01) {
 	self endon("disconnect");
 	self endon("death");
 	self endon("delete_older_overlapping_threads");
 	var_02 = param_00.angles;
 	var_03 = param_00.origin;
 	var_04 = 200;
-	if(param_01 == 1)
-	{
+	if(param_01 == 1) {
 		var_04 = 200;
 	}
 
 	param_00 scripts\engine\utility::waittill_any_3("missile_stuck","death");
-	if(!isdefined(param_00.origin))
-	{
+	if(!isdefined(param_00.origin)) {
 		return;
 	}
 
 	var_05 = param_00.origin;
-	while(isdefined(param_00.origin))
-	{
+	while(isdefined(param_00.origin)) {
 		var_05 = param_00.origin;
 		scripts\engine\utility::waitframe();
 	}
@@ -2421,41 +2026,32 @@ deal_venomx_projectile_damage(param_00,param_01)
 	var_07 thread delete_venomx_trigger_after_time(self,var_06);
 }
 
-//Function Number: 86
-deal_venomx_damage_to_enemies(param_00,param_01)
-{
+deal_venomx_damage_to_enemies(param_00,param_01) {
 	param_00 endon("death");
 	param_00 endon("disconnect");
 	self endon("death");
 	param_00 notify("one_instance_of_deal_damage_" + self.name);
 	param_00 endon("one_instance_of_deal_damage_" + self.name);
-	while(gettime() <= param_01 + 5000)
-	{
+	while(gettime() <= param_01 + 5000) {
 		self waittill("trigger",var_02);
-		if(!isdefined(var_02))
-		{
+		if(!isdefined(var_02)) {
 			continue;
 		}
 
-		if(isplayer(var_02))
-		{
+		if(isplayer(var_02)) {
 			continue;
 		}
 
-		if(!isdefined(var_02.agent_type))
-		{
+		if(!isdefined(var_02.agent_type)) {
 			continue;
 		}
 
-		if(!var_02 scripts\cp\utility::is_zombie_agent() && var_02.agent_type != "alien_goon")
-		{
+		if(!var_02 scripts\cp\utility::is_zombie_agent() && var_02.agent_type != "alien_goon") {
 			continue;
 		}
 
-		if(isdefined(param_00))
-		{
-			if(var_02 scripts\cp\utility::agentisinstakillimmune())
-			{
+		if(isdefined(param_00)) {
+			if(var_02 scripts\cp\utility::agentisinstakillimmune()) {
 				var_02.flame_damage_time = gettime() + 200;
 				var_02 dodamage(10,var_02.origin,param_00,param_00,"MOD_RIFLE_BULLET","iw7_venomx_zm");
 			}
@@ -2473,22 +2069,17 @@ deal_venomx_damage_to_enemies(param_00,param_01)
 	}
 }
 
-//Function Number: 87
-delete_venomx_trigger_after_time(param_00,param_01)
-{
+delete_venomx_trigger_after_time(param_00,param_01) {
 	param_00 endon("death");
 	self endon("death");
 	param_00 notify("delete_venomx_trigger_after_time" + self.name);
 	param_00 endon("delete_venomx_trigger_after_time" + self.name);
-	while(gettime() <= param_01 + 5000)
-	{
+	while(gettime() <= param_01 + 5000) {
 		scripts\engine\utility::waitframe();
 	}
 
-	foreach(var_03 in scripts\cp\cp_agent_utils::getaliveagentsofteam("axis"))
-	{
-		if(isalive(var_03))
-		{
+	foreach(var_03 in scripts\cp\cp_agent_utils::getaliveagentsofteam("axis")) {
+		if(isalive(var_03)) {
 			var_03.flame_damage_time = undefined;
 		}
 	}
@@ -2496,17 +2087,14 @@ delete_venomx_trigger_after_time(param_00,param_01)
 	self delete();
 }
 
-//Function Number: 88
-venomx_pap1_effects(param_00)
-{
+venomx_pap1_effects(param_00) {
 	self endon("delete_older_overlapping_threads");
 	self endon("disconnect");
 	var_01 = self;
 	param_00 scripts\engine\utility::waittill_any_3("missile_stuck","detonateExplosive");
 	var_02 = param_00.origin;
 	var_03 = param_00.angles;
-	while(isdefined(param_00.origin))
-	{
+	while(isdefined(param_00.origin)) {
 		var_02 = param_00.origin;
 		var_03 = param_00.angles;
 		scripts\engine\utility::waitframe();
@@ -2518,17 +2106,14 @@ venomx_pap1_effects(param_00)
 	thread delete_venomxpap_effects_after_time(var_04,4);
 }
 
-//Function Number: 89
-venomx_pap2_effects(param_00)
-{
+venomx_pap2_effects(param_00) {
 	self endon("delete_older_overlapping_threads");
 	self endon("disconnect");
 	var_01 = self;
 	param_00 scripts\engine\utility::waittill_any_3("missile_stuck","detonateExplosive");
 	var_02 = param_00.origin;
 	var_03 = param_00.angles;
-	while(isdefined(param_00.origin))
-	{
+	while(isdefined(param_00.origin)) {
 		var_02 = param_00.origin;
 		var_03 = param_00.angles;
 		scripts\engine\utility::waitframe();
@@ -2540,22 +2125,17 @@ venomx_pap2_effects(param_00)
 	thread delete_venomxpap_effects_after_time(var_04,7);
 }
 
-//Function Number: 90
-remove_frozen_effects_on_disconnect(param_00)
-{
+remove_frozen_effects_on_disconnect(param_00) {
 	self notify("one_thread_of_removal_for_" + self.name);
 	self endon("one_thread_of_removal_for_" + self.name);
 	scripts\engine\utility::waittill_any_3("disconnect","death");
-	if(isdefined(self.sacred_grounds))
-	{
-		foreach(var_02 in self.sacred_grounds)
-		{
+	if(isdefined(self.sacred_grounds)) {
+		foreach(var_02 in self.sacred_grounds) {
 			var_02 delete();
 		}
 	}
 
-	if(param_00 == 1)
-	{
+	if(param_00 == 1) {
 		self.slow_mo_active = 0;
 	}
 	else
@@ -2567,13 +2147,10 @@ remove_frozen_effects_on_disconnect(param_00)
 	level.thawzombiefunc = ::scripts\cp\zombies\zombie_scriptable_states::unfreeze_zombie;
 }
 
-//Function Number: 91
-delete_venomxpap_effects_after_time(param_00,param_01)
-{
+delete_venomxpap_effects_after_time(param_00,param_01) {
 	self endon("death");
 	self endon("disconnect");
-	while(gettime() <= param_00 + param_01 * 1000)
-	{
+	while(gettime() <= param_00 + param_01 * 1000) {
 		scripts\engine\utility::waitframe();
 	}
 
@@ -2581,17 +2158,13 @@ delete_venomxpap_effects_after_time(param_00,param_01)
 	level.thawzombiefunc = ::scripts\cp\zombies\zombie_scriptable_states::unfreeze_zombie;
 }
 
-//Function Number: 92
-slow_mo_sphere(param_00,param_01,param_02,param_03,param_04,param_05)
-{
+slow_mo_sphere(param_00,param_01,param_02,param_03,param_04,param_05) {
 	self endon("disconnect");
-	if(!isdefined(self.sacred_ground))
-	{
+	if(!isdefined(self.sacred_ground)) {
 		self.sacred_grounds = [];
 	}
 
-	if(param_04 == 1)
-	{
+	if(param_04 == 1) {
 		self.slow_mo_active = 1;
 	}
 	else
@@ -2604,8 +2177,7 @@ slow_mo_sphere(param_00,param_01,param_02,param_03,param_04,param_05)
 	var_06 = (0,0,180);
 	var_07 = spawn("trigger_rotatable_radius",param_01,0,param_02,256);
 	self.sacred_grounds[self.sacred_grounds.size] = var_07;
-	if(param_04 == 1)
-	{
+	if(param_04 == 1) {
 		playfx(level._effect["pap1_slowtime"],param_01 + (0,0,5),anglestoforward(param_05),anglestoup(param_05 + (-90,0,0)));
 	}
 	else
@@ -2616,8 +2188,7 @@ slow_mo_sphere(param_00,param_01,param_02,param_03,param_04,param_05)
 	self.zombie_list = [];
 	var_07 thread apply_slow_mo_on_trigger(param_00,param_04);
 	wait(param_03);
-	if(param_04 == 1)
-	{
+	if(param_04 == 1) {
 		self.slow_mo_active = 0;
 	}
 	else
@@ -2625,18 +2196,15 @@ slow_mo_sphere(param_00,param_01,param_02,param_03,param_04,param_05)
 		self.slow_mo_active_pap2 = 0;
 	}
 
-	if(isdefined(var_07))
-	{
+	if(isdefined(var_07)) {
 		var_07 delete();
 	}
 
 	level.frozenzombiefunc = ::scripts\cp\zombies\zombie_scriptable_states::freeze_zombie;
 	level.thawzombiefunc = ::scripts\cp\zombies\zombie_scriptable_states::unfreeze_zombie;
 	var_08 = scripts\cp\cp_agent_utils::getaliveagentsofteam("axis");
-	foreach(var_0A in var_08)
-	{
-		if(issubstr(var_0A.agent_type,"alien"))
-		{
+	foreach(var_0A in var_08) {
+		if(issubstr(var_0A.agent_type,"alien")) {
 			var_0A.moveratescale = 0.9;
 			var_0A.var_C081 = 1;
 			var_0A.traverseratescale = 1;
@@ -2653,12 +2221,9 @@ slow_mo_sphere(param_00,param_01,param_02,param_03,param_04,param_05)
 	}
 }
 
-//Function Number: 93
-custom_unslow_func(param_00)
-{
+custom_unslow_func(param_00) {
 	param_00 endon("death");
-	if(!isalive(param_00))
-	{
+	if(!isalive(param_00)) {
 		return;
 	}
 
@@ -2668,9 +2233,7 @@ custom_unslow_func(param_00)
 	param_00.noturnanims = undefined;
 }
 
-//Function Number: 94
-custom_slow_time_func(param_00)
-{
+custom_slow_time_func(param_00) {
 	param_00 endon("death");
 	param_00.isfrozen = 1;
 	param_00.precacheleaderboards = 1;
@@ -2681,27 +2244,20 @@ custom_slow_time_func(param_00)
 	param_00.isfrozen = undefined;
 }
 
-//Function Number: 95
-apply_slow_mo_on_trigger(param_00,param_01)
-{
+apply_slow_mo_on_trigger(param_00,param_01) {
 	self endon("death");
 	level endon("game_ended");
-	for(;;)
-	{
-		foreach(var_03 in level.players)
-		{
-			if(var_03 istouching(self))
-			{
-				if(!scripts\engine\utility::istrue(var_03.inside_slow_sphere))
-				{
+	for(;;) {
+		foreach(var_03 in level.players) {
+			if(var_03 istouching(self)) {
+				if(!scripts\engine\utility::istrue(var_03.inside_slow_sphere)) {
 				}
 
 				var_03.inside_slow_sphere = 1;
 				continue;
 			}
 
-			if(scripts\engine\utility::istrue(var_03.inside_slow_sphere))
-			{
+			if(scripts\engine\utility::istrue(var_03.inside_slow_sphere)) {
 			}
 
 			var_03.inside_slow_sphere = 0;
@@ -2709,38 +2265,28 @@ apply_slow_mo_on_trigger(param_00,param_01)
 
 		var_05 = scripts\cp\cp_agent_utils::getaliveagentsofteam("axis");
 		level.zombie_list = var_05;
-		foreach(var_07 in level.zombie_list)
-		{
-			if(!isdefined(var_07))
-			{
+		foreach(var_07 in level.zombie_list) {
+			if(!isdefined(var_07)) {
 				scripts\engine\utility::waitframe();
 				continue;
 			}
 
-			if(var_07 scripts\cp\utility::agentisfnfimmune())
-			{
+			if(var_07 scripts\cp\utility::agentisfnfimmune()) {
 				scripts\engine\utility::waitframe();
 				continue;
 			}
 
-			if(scripts\engine\utility::istrue(var_07.dot_triggerd))
-			{
+			if(scripts\engine\utility::istrue(var_07.dot_triggerd)) {
 				scripts\engine\utility::waitframe();
 				continue;
 			}
 
-			if(var_07 istouching(self))
-			{
-				if(!scripts\engine\utility::istrue(var_07.dot_triggered))
-				{
-					if(isdefined(var_07))
-					{
-						if(isdefined(var_07.agent_type) && issubstr(var_07.agent_type,"alien"))
-						{
-							if(var_07.agent_type == "alien_rhino")
-							{
-								if(param_01 == 1)
-								{
+			if(var_07 istouching(self)) {
+				if(!scripts\engine\utility::istrue(var_07.dot_triggered)) {
+					if(isdefined(var_07)) {
+						if(isdefined(var_07.agent_type) && issubstr(var_07.agent_type,"alien")) {
+							if(var_07.agent_type == "alien_rhino") {
+								if(param_01 == 1) {
 									var_07 thread scripts\cp\utility::damage_over_time(var_07,param_00,7,var_07.health / 3,"MOD_EXPLOSIVE","iw7_venomx_zm_pap1");
 								}
 								else
@@ -2749,10 +2295,8 @@ apply_slow_mo_on_trigger(param_00,param_01)
 								}
 							}
 
-							if(var_07.agent_type == "alien_phantom")
-							{
-								if(param_01 == 1)
-								{
+							if(var_07.agent_type == "alien_phantom") {
+								if(param_01 == 1) {
 									var_07 thread scripts\cp\utility::damage_over_time(var_07,param_00,7,var_07.health / 2,"MOD_EXPLOSIVE","iw7_venomx_zm_pap1");
 								}
 								else
@@ -2760,8 +2304,7 @@ apply_slow_mo_on_trigger(param_00,param_01)
 									var_07 thread scripts\cp\utility::damage_over_time(var_07,param_00,3,var_07.health + 10000,"MOD_EXPLOSIVE","iw7_venomx_zm_pap2");
 								}
 							}
-							else if(param_01 == 1)
-							{
+							else if(param_01 == 1) {
 								var_07 thread scripts\cp\utility::damage_over_time(var_07,param_00,7,var_07.health + 10000,"MOD_EXPLOSIVE","iw7_venomx_zm_pap1");
 							}
 							else
@@ -2773,8 +2316,7 @@ apply_slow_mo_on_trigger(param_00,param_01)
 							var_07.var_C081 = 0.1;
 							var_07.traverseratescale = 0.1;
 						}
-						else if(param_01 == 1)
-						{
+						else if(param_01 == 1) {
 							var_07 thread scripts\cp\utility::damage_over_time(var_07,param_00,7,var_07.health + 10000,"MOD_EXPLOSIVE","iw7_venomx_zm_pap1");
 						}
 						else
@@ -2792,10 +2334,8 @@ apply_slow_mo_on_trigger(param_00,param_01)
 				continue;
 			}
 
-			if(isdefined(var_07))
-			{
-				if(isdefined(var_07.agent_type) && !issubstr(var_07.agent_type,"alien"))
-				{
+			if(isdefined(var_07)) {
+				if(isdefined(var_07.agent_type) && !issubstr(var_07.agent_type,"alien")) {
 					var_07 scripts\mp\agents\_scriptedagents::setstatelocked(0,"DoAttack");
 					var_07.activated_venomx_sphere = 0;
 					var_07.noturnanims = 0;
@@ -2809,16 +2349,12 @@ apply_slow_mo_on_trigger(param_00,param_01)
 	}
 }
 
-//Function Number: 96
-finalqueststepregistration(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07)
-{
-	if(!isdefined(level.var_13F4D[param_00]))
-	{
+finalqueststepregistration(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07) {
+	if(!isdefined(level.var_13F4D[param_00])) {
 		level.var_13F4D[param_00] = [];
 	}
 
-	if(!isdefined(level.var_13F4C[param_00]))
-	{
+	if(!isdefined(level.var_13F4C[param_00])) {
 		level.var_13F4C[param_00] = -1;
 	}
 
@@ -2831,9 +2367,7 @@ finalqueststepregistration(param_00,param_01,param_02,param_03,param_04,param_05
 	level.var_13F4D[param_00][param_01] = var_08;
 }
 
-//Function Number: 97
-spawn_egg_interaction_for_players(param_00)
-{
+spawn_egg_interaction_for_players(param_00) {
 	level endon("delete_this_eggthread");
 	var_01 = spawnstruct();
 	var_01.script_noteworthy = "venomx_egg";
@@ -2859,25 +2393,19 @@ spawn_egg_interaction_for_players(param_00)
 	var_01.model thread spinegg();
 }
 
-//Function Number: 98
-spinegg()
-{
+spinegg() {
 	self endon("death");
 	wait(0.25);
 	playfxontag(level._effect["vfx_eggsac_glow"],self,"tag_origin");
-	for(;;)
-	{
+	for(;;) {
 		self rotateyaw(36,0.1);
 		wait(0.1);
 	}
 }
 
-//Function Number: 99
-deletemodelaftertimeout(param_00,param_01)
-{
+deletemodelaftertimeout(param_00,param_01) {
 	self endon("death");
-	while(gettime() <= param_01 + 20000)
-	{
+	while(gettime() <= param_01 + 20000) {
 		scripts\engine\utility::waitframe();
 	}
 
@@ -2886,33 +2414,25 @@ deletemodelaftertimeout(param_00,param_01)
 	param_00.model delete();
 }
 
-//Function Number: 100
-venomx_pickup_hint_func(param_00,param_01)
-{
+venomx_pickup_hint_func(param_00,param_01) {
 	var_02 = 0;
 	var_03 = param_01 getweaponslistall();
-	foreach(var_05 in var_03)
-	{
-		if(issubstr(var_05,"venomx"))
-		{
+	foreach(var_05 in var_03) {
+		if(issubstr(var_05,"venomx")) {
 			var_02 = 1;
 			break;
 		}
 	}
 
-	if(scripts\engine\utility::istrue(var_02))
-	{
+	if(scripts\engine\utility::istrue(var_02)) {
 		return &"CP_FINAL_VENOMX_AMMO";
 	}
 
 	return "";
 }
 
-//Function Number: 101
-cangive_ammo(param_00)
-{
-	if(!isdefined(param_00))
-	{
+cangive_ammo(param_00) {
+	if(!isdefined(param_00)) {
 		return 0;
 	}
 
@@ -2921,37 +2441,30 @@ cangive_ammo(param_00)
 	var_03 = weaponclipsize(var_01);
 	var_04 = function_0249(var_01);
 	var_05 = self getweaponammostock(var_01);
-	if(var_05 < var_04 || var_02 < var_03)
-	{
+	if(var_05 < var_04 || var_02 < var_03) {
 		return 1;
 	}
 
 	return 0;
 }
 
-//Function Number: 102
-give_ammo_to_player_through_egg(param_00)
-{
-	if(!scripts\cp\utility::is_valid_player())
-	{
+give_ammo_to_player_through_egg(param_00) {
+	if(!scripts\cp\utility::is_valid_player()) {
 		return;
 	}
 
 	var_01 = 0;
 	var_02 = undefined;
 	var_03 = self getweaponslistall();
-	foreach(var_05 in var_03)
-	{
-		if(issubstr(var_05,"venomx"))
-		{
+	foreach(var_05 in var_03) {
+		if(issubstr(var_05,"venomx")) {
 			var_01 = 1;
 			var_02 = var_05;
 			break;
 		}
 	}
 
-	if(!var_01)
-	{
+	if(!var_01) {
 		self playlocalsound("perk_machine_deny");
 		return;
 	}
@@ -2961,11 +2474,8 @@ give_ammo_to_player_through_egg(param_00)
 	self playlocalsound("weap_ammo_pickup");
 }
 
-//Function Number: 103
-adjust_clip_ammo_from_stock(param_00,param_01,param_02,param_03,param_04)
-{
-	if(!scripts\engine\utility::istrue(param_04))
-	{
+adjust_clip_ammo_from_stock(param_00,param_01,param_02,param_03,param_04) {
+	if(!scripts\engine\utility::istrue(param_04)) {
 		var_05 = function_0249(param_01);
 		var_06 = param_00 getweaponammostock(param_01);
 		var_07 = var_05 - var_06;
@@ -2979,22 +2489,17 @@ adjust_clip_ammo_from_stock(param_00,param_01,param_02,param_03,param_04)
 	param_00 setweaponammoclip(param_01,int(var_0B),param_02);
 }
 
-//Function Number: 104
-venomx_add_ammo(param_00,param_01)
-{
+venomx_add_ammo(param_00,param_01) {
 	var_02 = undefined;
 	var_03 = param_01 getweaponslistall();
-	foreach(var_05 in var_03)
-	{
-		if(issubstr(var_05,"venomx"))
-		{
+	foreach(var_05 in var_03) {
+		if(issubstr(var_05,"venomx")) {
 			var_02 = var_05;
 			break;
 		}
 	}
 
-	if(param_01 cangive_ammo(var_02))
-	{
+	if(param_01 cangive_ammo(var_02)) {
 		param_01 give_ammo_to_player_through_egg(var_02);
 		param_01 thread scripts\cp\cp_vo::try_to_play_vo("pillage_ammo","zmb_comment_vo","low",10,0,1,0,50);
 		scripts\engine\utility::waitframe();
@@ -3008,62 +2513,45 @@ venomx_add_ammo(param_00,param_01)
 	param_01 playlocalsound("perk_machine_deny");
 }
 
-//Function Number: 105
-questdevguientries(param_00,param_01,param_02,param_03)
-{
-}
+questdevguientries(param_00,param_01,param_02,param_03) {}
 
-//Function Number: 106
-is_this_position_safe(param_00,param_01,param_02,param_03,param_04)
-{
-	if(param_01 < 0 || param_01 >= 6)
-	{
+is_this_position_safe(param_00,param_01,param_02,param_03,param_04) {
+	if(param_01 < 0 || param_01 >= 6) {
 		return 0;
 	}
 
-	if(param_02 < 0 || param_02 >= 6)
-	{
+	if(param_02 < 0 || param_02 >= 6) {
 		return 0;
 	}
 
-	if(scripts\engine\utility::array_contains(param_00[param_04.xcoord][param_04.ycoord].wall_directions,param_03))
-	{
+	if(scripts\engine\utility::array_contains(param_00[param_04.xcoord][param_04.ycoord].wall_directions,param_03)) {
 		return 0;
 	}
 
 	return 1;
 }
 
-//Function Number: 107
-runmazeinstanceforpoint(param_00,param_01,param_02,param_03,param_04,param_05,param_06)
-{
-	if(is_this_position_safe(param_00,param_01,param_02,param_03,param_04))
-	{
+runmazeinstanceforpoint(param_00,param_01,param_02,param_03,param_04,param_05,param_06) {
+	if(is_this_position_safe(param_00,param_01,param_02,param_03,param_04)) {
 		param_00[param_01][param_02].visited = 1;
-		if(param_01 == level.maze_attributes[param_04.mod_name].endpoint_x && param_02 == level.maze_attributes[param_04.mod_name].endpoint_y)
-		{
+		if(param_01 == level.maze_attributes[param_04.mod_name].endpoint_x && param_02 == level.maze_attributes[param_04.mod_name].endpoint_y) {
 			param_05 thread scripts\cp\cp_vo::try_to_play_vo("quest_venx_puzzle_success","final_comment_vo");
 			level.puzzles_solved++;
-			if(param_04.newmodelsspawned == 3 && param_04.othermodel.newmodelsspawned == 1)
-			{
+			if(param_04.newmodelsspawned == 3 && param_04.othermodel.newmodelsspawned == 1) {
 				level.maze_completed[param_04.mod_name] = 1;
 			}
-			else if(param_04.newmodelsspawned == 2 && param_04.othermodel.newmodelsspawned == 2)
-			{
+			else if(param_04.newmodelsspawned == 2 && param_04.othermodel.newmodelsspawned == 2) {
 				level.maze_completed[param_04.mod_name] = 1;
 			}
-			else if(param_04.newmodelsspawned == 1 && param_04.othermodel.newmodelsspawned == 3)
-			{
+			else if(param_04.newmodelsspawned == 1 && param_04.othermodel.newmodelsspawned == 3) {
 				level.maze_completed[param_04.mod_name] = 1;
 			}
 
-			if(level.puzzles_solved >= 4)
-			{
+			if(level.puzzles_solved >= 4) {
 				level.maze_completed["maze1"] = 1;
 				level.maze_completed["maze2"] = 1;
 				level thread disable_solved_grids();
-				foreach(var_08 in level.players)
-				{
+				foreach(var_08 in level.players) {
 					var_08 playlocalsound("zmb_item_pickup");
 				}
 
@@ -3076,8 +2564,7 @@ runmazeinstanceforpoint(param_00,param_01,param_02,param_03,param_04,param_05,pa
 				param_05 thread scripts\cp\cp_vo::try_to_play_vo("quest_venx_puzzle_all_complete","final_comment_vo");
 				param_05 notify("end_thread_for_" + param_04.mod_name);
 			}
-			else if(!scripts\engine\utility::istrue(level.maze_completed[param_04.mod_name]))
-			{
+			else if(!scripts\engine\utility::istrue(level.maze_completed[param_04.mod_name])) {
 				param_04.newmodelsspawned++;
 				level thread disable_scriptables_for_mazes(param_04);
 				level thread start_maze_instance_on_model(param_05,param_04,param_06);
@@ -3107,9 +2594,7 @@ runmazeinstanceforpoint(param_00,param_01,param_02,param_03,param_04,param_05,pa
 	level.puzzles_solved = 0;
 }
 
-//Function Number: 108
-show_unsolved_mazes_on_crt()
-{
+show_unsolved_mazes_on_crt() {
 	wait(15);
 	level.unsolved_crt_model = getent("unsolved_console_venomx","script_noteworthy");
 	level.unsolved_crt_model setscriptablepartstate("unsolved_grid","neutral");
@@ -3118,29 +2603,21 @@ show_unsolved_mazes_on_crt()
 	level thread setup_maze_models();
 }
 
-//Function Number: 109
-display_maze_hints_on_crt()
-{
+display_maze_hints_on_crt() {
 	wait(10);
-	foreach(var_01 in level.array_of_small_crt_script_models)
-	{
+	foreach(var_01 in level.array_of_small_crt_script_models) {
 		var_01 setscriptablepartstate("solved_grid","neutral");
 	}
 }
 
-//Function Number: 110
-random_maze_roll()
-{
-	for(;;)
-	{
+random_maze_roll() {
+	for(;;) {
 		var_00 = randomintrange(0,11);
-		if(level.mazerollsarray.size >= 11)
-		{
+		if(level.mazerollsarray.size >= 11) {
 			level.mazerollsarray = [];
 		}
 
-		if(!scripts\engine\utility::array_contains(level.mazerollsarray,var_00))
-		{
+		if(!scripts\engine\utility::array_contains(level.mazerollsarray,var_00)) {
 			level.mazerollsarray[level.mazerollsarray.size] = var_00;
 			return var_00;
 		}
@@ -3152,15 +2629,12 @@ random_maze_roll()
 	}
 }
 
-//Function Number: 111
-choose_start_end_mazepos(param_00,param_01)
-{
+choose_start_end_mazepos(param_00,param_01) {
 	level.maze_attributes[param_00.mod_name].endpoint_x = 0;
 	level.maze_attributes[param_00.mod_name].endpoint_y = 0;
 	param_00.xcoord = 0;
 	param_00.ycoord = 0;
-	switch(param_01)
-	{
+	switch(param_01) {
 		case 0:
 			param_00.xcoord = 4;
 			param_00.ycoord = 4;
@@ -3280,11 +2754,8 @@ choose_start_end_mazepos(param_00,param_01)
 	param_00.origin = return_position_x_y(param_00.xcoord,param_00.ycoord,param_00);
 }
 
-//Function Number: 112
-store_wall_directions(param_00,param_01)
-{
-	switch(param_01)
-	{
+store_wall_directions(param_00,param_01) {
+	switch(param_01) {
 		case 0:
 			param_00.maze[0][0].wall_directions = ["up","left"];
 			param_00.maze[1][0].wall_directions = ["right","left"];
@@ -3914,11 +3385,8 @@ store_wall_directions(param_00,param_01)
 	}
 }
 
-//Function Number: 113
-createmaze(param_00,param_01,param_02)
-{
-	foreach(var_04 in level.players)
-	{
+createmaze(param_00,param_01,param_02) {
+	foreach(var_04 in level.players) {
 		var_04 thread control_puzzle_cursor(param_00);
 		var_04 thread control_puzzle_cursor(param_01);
 	}
@@ -3929,12 +3397,9 @@ createmaze(param_00,param_01,param_02)
 	level.maze_attributes[param_00.mod_name].maze = [];
 	level.maze_attributes[param_01.mod_name] = spawnstruct();
 	level.maze_attributes[param_01.mod_name].maze = [];
-	for(var_06 = 0;var_06 < 6;var_06++)
-	{
-		for(var_07 = 0;var_07 < 6;var_07++)
-		{
-			foreach(var_09 in level.maze_attributes)
-			{
+	for(var_06 = 0;var_06 < 6;var_06++) {
+		for(var_07 = 0;var_07 < 6;var_07++) {
+			foreach(var_09 in level.maze_attributes) {
 				var_09.maze[var_06][var_07] = spawnstruct();
 				var_09.maze[var_06][var_07].wall_directions = [];
 				var_09.maze[var_06][var_07].visited = 0;
@@ -3944,24 +3409,20 @@ createmaze(param_00,param_01,param_02)
 
 	param_00 setscriptablepartstate("maze_puzzle","cursor");
 	param_01 setscriptablepartstate("maze_puzzle","cursor");
-	foreach(var_0E, var_0C in level.array_of_small_crt_script_models)
-	{
+	foreach(var_0E, var_0C in level.array_of_small_crt_script_models) {
 		var_0D = var_0E;
-		if(var_0D > 10)
-		{
+		if(var_0D > 10) {
 			var_0D = randomintrange(0,11);
 		}
 
 		var_0C setscriptablepartstate("solved_grid","solved_puzzle_" + var_0D);
 	}
 
-	if(!isdefined(level.mazerollsarray))
-	{
+	if(!isdefined(level.mazerollsarray)) {
 		level.mazerollsarray = [];
 	}
 
-	foreach(var_0E, var_10 in level.maze_attributes)
-	{
+	foreach(var_0E, var_10 in level.maze_attributes) {
 		level.random_maze_roll[var_0E] = random_maze_roll();
 		level thread store_wall_directions(var_10,level.random_maze_roll[var_0E]);
 	}
@@ -3972,9 +3433,7 @@ createmaze(param_00,param_01,param_02)
 	level.unsolved_crt_model_2 setscriptablepartstate("unsolved_grid","unsolved_maze_" + level.random_maze_roll["maze2"]);
 }
 
-//Function Number: 114
-player_disconnect_during_maze(param_00)
-{
+player_disconnect_during_maze(param_00) {
 	param_00 notify("end_disconnect_thread" + param_00.name);
 	param_00 endon("end_disconnect_thread" + param_00.name);
 	level endon("end_locking_threads_on_the_player_for_venomx_cursor");
@@ -3987,12 +3446,9 @@ player_disconnect_during_maze(param_00)
 	level.puzzles_solved = 0;
 }
 
-//Function Number: 115
-control_puzzle_cursor(param_00)
-{
+control_puzzle_cursor(param_00) {
 	level thread player_disconnect_during_maze(self);
-	if(param_00.mod_name == "maze2")
-	{
+	if(param_00.mod_name == "maze2") {
 		thread input_cursor_maze2(param_00,level.unsolved_crt_model_2);
 		return;
 	}
@@ -4000,21 +3456,16 @@ control_puzzle_cursor(param_00)
 	thread input_cursor(param_00,level.unsolved_crt_model);
 }
 
-//Function Number: 116
-get_chars_of_word_as_array(param_00)
-{
+get_chars_of_word_as_array(param_00) {
 	var_01 = [];
-	for(var_02 = 0;var_02 < param_00.size;var_02++)
-	{
+	for(var_02 = 0;var_02 < param_00.size;var_02++) {
 		var_01[var_02] = param_00[var_02];
 	}
 
 	return var_01;
 }
 
-//Function Number: 117
-solvecipher(param_00,param_01,param_02)
-{
+solvecipher(param_00,param_01,param_02) {
 	level.ciphered_word = cipher(level.morse_phrase,param_00,1);
 	level.decipheredword = cipher(level.ciphered_word,param_00,0);
 	level.ciphered_word = changearraytoword(level.ciphered_word);
@@ -4023,20 +3474,15 @@ solvecipher(param_00,param_01,param_02)
 	scripts\cp\cp_interaction::add_to_current_interaction_list(param_02);
 }
 
-//Function Number: 118
-convertwordintomorse(param_00,param_01,param_02)
-{
-	if(param_01)
-	{
+convertwordintomorse(param_00,param_01,param_02) {
+	if(param_01) {
 		level.convertedword = "";
 	}
 
 	var_03 = get_chars_of_word_as_array(param_00);
 	var_04 = undefined;
-	for(var_05 = 0;var_05 < var_03.size;var_05++)
-	{
-		if(var_05 + 1 == var_03.size)
-		{
+	for(var_05 = 0;var_05 < var_03.size;var_05++) {
+		if(var_05 + 1 == var_03.size) {
 			var_04 = getsubstr(param_00,var_05);
 		}
 		else
@@ -4044,50 +3490,42 @@ convertwordintomorse(param_00,param_01,param_02)
 			var_04 = getsubstr(param_00,var_05,var_05 + 1);
 		}
 
-		switch(var_04)
-		{
+		switch(var_04) {
 			case "0":
-				for(var_06 = 0;var_06 < 5;var_06++)
-				{
+				for(var_06 = 0;var_06 < 5;var_06++) {
 					play_morse_dash(param_01,param_02);
 				}
 				break;
 
 			case "1":
 				play_morse_dot(param_01,param_02);
-				for(var_06 = 0;var_06 < 4;var_06++)
-				{
+				for(var_06 = 0;var_06 < 4;var_06++) {
 					play_morse_dash(param_01,param_02);
 				}
 				break;
 
 			case "2":
-				for(var_06 = 0;var_06 < 2;var_06++)
-				{
+				for(var_06 = 0;var_06 < 2;var_06++) {
 					play_morse_dot(param_01,param_02);
 				}
 	
-				for(var_06 = 0;var_06 < 3;var_06++)
-				{
+				for(var_06 = 0;var_06 < 3;var_06++) {
 					play_morse_dash(param_01,param_02);
 				}
 				break;
 
 			case "3":
-				for(var_06 = 0;var_06 < 3;var_06++)
-				{
+				for(var_06 = 0;var_06 < 3;var_06++) {
 					play_morse_dot(param_01,param_02);
 				}
 	
-				for(var_06 = 0;var_06 < 2;var_06++)
-				{
+				for(var_06 = 0;var_06 < 2;var_06++) {
 					play_morse_dash(param_01,param_02);
 				}
 				break;
 
 			case "4":
-				for(var_06 = 0;var_06 < 4;var_06++)
-				{
+				for(var_06 = 0;var_06 < 4;var_06++) {
 					play_morse_dot(param_01,param_02);
 				}
 	
@@ -4095,47 +3533,40 @@ convertwordintomorse(param_00,param_01,param_02)
 				break;
 
 			case "5":
-				for(var_06 = 0;var_06 < 5;var_06++)
-				{
+				for(var_06 = 0;var_06 < 5;var_06++) {
 					play_morse_dot(param_01,param_02);
 				}
 				break;
 
 			case "6":
 				play_morse_dash(param_01,param_02);
-				for(var_06 = 0;var_06 < 4;var_06++)
-				{
+				for(var_06 = 0;var_06 < 4;var_06++) {
 					play_morse_dot(param_01,param_02);
 				}
 				break;
 
 			case "7":
-				for(var_06 = 0;var_06 < 2;var_06++)
-				{
+				for(var_06 = 0;var_06 < 2;var_06++) {
 					play_morse_dash(param_01,param_02);
 				}
 	
-				for(var_06 = 0;var_06 < 3;var_06++)
-				{
+				for(var_06 = 0;var_06 < 3;var_06++) {
 					play_morse_dot(param_01,param_02);
 				}
 				break;
 
 			case "8":
-				for(var_06 = 0;var_06 < 3;var_06++)
-				{
+				for(var_06 = 0;var_06 < 3;var_06++) {
 					play_morse_dash(param_01,param_02);
 				}
 	
-				for(var_06 = 0;var_06 < 2;var_06++)
-				{
+				for(var_06 = 0;var_06 < 2;var_06++) {
 					play_morse_dot(param_01,param_02);
 				}
 				break;
 
 			case "9":
-				for(var_06 = 0;var_06 < 4;var_06++)
-				{
+				for(var_06 = 0;var_06 < 4;var_06++) {
 					play_morse_dash(param_01,param_02);
 				}
 	
@@ -4145,8 +3576,7 @@ convertwordintomorse(param_00,param_01,param_02)
 			case "A":
 			case "a":
 				play_morse_dot(param_01,param_02);
-				for(var_06 = 0;var_06 < 1;var_06++)
-				{
+				for(var_06 = 0;var_06 < 1;var_06++) {
 					play_morse_dash(param_01,param_02);
 				}
 				break;
@@ -4154,8 +3584,7 @@ convertwordintomorse(param_00,param_01,param_02)
 			case "B":
 			case "b":
 				play_morse_dash(param_01,param_02);
-				for(var_06 = 0;var_06 < 3;var_06++)
-				{
+				for(var_06 = 0;var_06 < 3;var_06++) {
 					play_morse_dot(param_01,param_02);
 				}
 				break;
@@ -4163,18 +3592,15 @@ convertwordintomorse(param_00,param_01,param_02)
 			case "C":
 			case "c":
 				play_morse_dash(param_01,param_02);
-				for(var_06 = 0;var_06 < 1;var_06++)
-				{
+				for(var_06 = 0;var_06 < 1;var_06++) {
 					play_morse_dot(param_01,param_02);
 				}
 	
-				for(var_06 = 0;var_06 < 1;var_06++)
-				{
+				for(var_06 = 0;var_06 < 1;var_06++) {
 					play_morse_dash(param_01,param_02);
 				}
 	
-				for(var_06 = 0;var_06 < 1;var_06++)
-				{
+				for(var_06 = 0;var_06 < 1;var_06++) {
 					play_morse_dot(param_01,param_02);
 				}
 				break;
@@ -4182,8 +3608,7 @@ convertwordintomorse(param_00,param_01,param_02)
 			case "D":
 			case "d":
 				play_morse_dash(param_01,param_02);
-				for(var_06 = 0;var_06 < 2;var_06++)
-				{
+				for(var_06 = 0;var_06 < 2;var_06++) {
 					play_morse_dot(param_01,param_02);
 				}
 				break;
@@ -4195,8 +3620,7 @@ convertwordintomorse(param_00,param_01,param_02)
 
 			case "F":
 			case "f":
-				for(var_06 = 0;var_06 < 2;var_06++)
-				{
+				for(var_06 = 0;var_06 < 2;var_06++) {
 					play_morse_dot(param_01,param_02);
 				}
 	
@@ -4206,8 +3630,7 @@ convertwordintomorse(param_00,param_01,param_02)
 
 			case "G":
 			case "g":
-				for(var_06 = 0;var_06 < 2;var_06++)
-				{
+				for(var_06 = 0;var_06 < 2;var_06++) {
 					play_morse_dash(param_01,param_02);
 				}
 	
@@ -4216,16 +3639,14 @@ convertwordintomorse(param_00,param_01,param_02)
 
 			case "H":
 			case "h":
-				for(var_06 = 0;var_06 < 4;var_06++)
-				{
+				for(var_06 = 0;var_06 < 4;var_06++) {
 					play_morse_dot(param_01,param_02);
 				}
 				break;
 
 			case "I":
 			case "i":
-				for(var_06 = 0;var_06 < 2;var_06++)
-				{
+				for(var_06 = 0;var_06 < 2;var_06++) {
 					play_morse_dot(param_01,param_02);
 				}
 				break;
@@ -4233,8 +3654,7 @@ convertwordintomorse(param_00,param_01,param_02)
 			case "J":
 			case "j":
 				play_morse_dot(param_01,param_02);
-				for(var_06 = 0;var_06 < 3;var_06++)
-				{
+				for(var_06 = 0;var_06 < 3;var_06++) {
 					play_morse_dash(param_01,param_02);
 				}
 				break;
@@ -4250,16 +3670,14 @@ convertwordintomorse(param_00,param_01,param_02)
 			case "l":
 				play_morse_dot(param_01,param_02);
 				play_morse_dash(param_01,param_02);
-				for(var_06 = 0;var_06 < 2;var_06++)
-				{
+				for(var_06 = 0;var_06 < 2;var_06++) {
 					play_morse_dot(param_01,param_02);
 				}
 				break;
 
 			case "M":
 			case "m":
-				for(var_06 = 0;var_06 < 2;var_06++)
-				{
+				for(var_06 = 0;var_06 < 2;var_06++) {
 					play_morse_dash(param_01,param_02);
 				}
 				break;
@@ -4272,8 +3690,7 @@ convertwordintomorse(param_00,param_01,param_02)
 
 			case "O":
 			case "o":
-				for(var_06 = 0;var_06 < 3;var_06++)
-				{
+				for(var_06 = 0;var_06 < 3;var_06++) {
 					play_morse_dash(param_01,param_02);
 				}
 				break;
@@ -4281,8 +3698,7 @@ convertwordintomorse(param_00,param_01,param_02)
 			case "P":
 			case "p":
 				play_morse_dot(param_01,param_02);
-				for(var_06 = 0;var_06 < 2;var_06++)
-				{
+				for(var_06 = 0;var_06 < 2;var_06++) {
 					play_morse_dash(param_01,param_02);
 				}
 	
@@ -4291,8 +3707,7 @@ convertwordintomorse(param_00,param_01,param_02)
 
 			case "Q":
 			case "q":
-				for(var_06 = 0;var_06 < 2;var_06++)
-				{
+				for(var_06 = 0;var_06 < 2;var_06++) {
 					play_morse_dash(param_01,param_02);
 				}
 	
@@ -4309,8 +3724,7 @@ convertwordintomorse(param_00,param_01,param_02)
 
 			case "S":
 			case "s":
-				for(var_06 = 0;var_06 < 3;var_06++)
-				{
+				for(var_06 = 0;var_06 < 3;var_06++) {
 					play_morse_dot(param_01,param_02);
 				}
 				break;
@@ -4322,8 +3736,7 @@ convertwordintomorse(param_00,param_01,param_02)
 
 			case "U":
 			case "u":
-				for(var_06 = 0;var_06 < 2;var_06++)
-				{
+				for(var_06 = 0;var_06 < 2;var_06++) {
 					play_morse_dot(param_01,param_02);
 				}
 	
@@ -4332,8 +3745,7 @@ convertwordintomorse(param_00,param_01,param_02)
 
 			case "V":
 			case "v":
-				for(var_06 = 0;var_06 < 3;var_06++)
-				{
+				for(var_06 = 0;var_06 < 3;var_06++) {
 					play_morse_dot(param_01,param_02);
 				}
 	
@@ -4343,8 +3755,7 @@ convertwordintomorse(param_00,param_01,param_02)
 			case "W":
 			case "w":
 				play_morse_dot(param_01,param_02);
-				for(var_06 = 0;var_06 < 2;var_06++)
-				{
+				for(var_06 = 0;var_06 < 2;var_06++) {
 					play_morse_dash(param_01,param_02);
 				}
 				break;
@@ -4352,8 +3763,7 @@ convertwordintomorse(param_00,param_01,param_02)
 			case "X":
 			case "x":
 				play_morse_dash(param_01,param_02);
-				for(var_06 = 0;var_06 < 2;var_06++)
-				{
+				for(var_06 = 0;var_06 < 2;var_06++) {
 					play_morse_dot(param_01,param_02);
 				}
 	
@@ -4364,21 +3774,18 @@ convertwordintomorse(param_00,param_01,param_02)
 			case "y":
 				play_morse_dash(param_01,param_02);
 				play_morse_dot(param_01,param_02);
-				for(var_06 = 0;var_06 < 2;var_06++)
-				{
+				for(var_06 = 0;var_06 < 2;var_06++) {
 					play_morse_dash(param_01,param_02);
 				}
 				break;
 
 			case "Z":
 			case "z":
-				for(var_06 = 0;var_06 < 2;var_06++)
-				{
+				for(var_06 = 0;var_06 < 2;var_06++) {
 					play_morse_dash(param_01,param_02);
 				}
 	
-				for(var_06 = 0;var_06 < 2;var_06++)
-				{
+				for(var_06 = 0;var_06 < 2;var_06++) {
 					play_morse_dot(param_01,param_02);
 				}
 				break;
@@ -4392,18 +3799,15 @@ convertwordintomorse(param_00,param_01,param_02)
 				break;
 
 			case "?":
-				for(var_06 = 0;var_06 < 2;var_06++)
-				{
+				for(var_06 = 0;var_06 < 2;var_06++) {
 					play_morse_dot(param_01,param_02);
 				}
 	
-				for(var_06 = 0;var_06 < 2;var_06++)
-				{
+				for(var_06 = 0;var_06 < 2;var_06++) {
 					play_morse_dash(param_01,param_02);
 				}
 	
-				for(var_06 = 0;var_06 < 2;var_06++)
-				{
+				for(var_06 = 0;var_06 < 2;var_06++) {
 					play_morse_dot(param_01,param_02);
 				}
 				break;
@@ -4417,25 +3821,19 @@ convertwordintomorse(param_00,param_01,param_02)
 		}
 	}
 
-	if(!param_01)
-	{
+	if(!param_01) {
 		param_02 setscriptablepartstate("morse_code","off");
 	}
 }
 
-//Function Number: 119
-venomx_morse_code(param_00,param_01,param_02)
-{
+venomx_morse_code(param_00,param_01,param_02) {
 	param_00 = scripts\engine\utility::array_randomize(param_00);
 	level.morse_phrase = param_00[0];
 	level thread solvecipher(param_01,self,param_02);
 }
 
-//Function Number: 120
-turn_model_on_off(param_00,param_01)
-{
-	if(scripts\engine\utility::istrue(param_01))
-	{
+turn_model_on_off(param_00,param_01) {
+	if(scripts\engine\utility::istrue(param_01)) {
 		param_00 setscriptablepartstate("morse_code","off");
 		wait(0.3);
 		param_00 setscriptablepartstate("morse_code","off");
@@ -4447,11 +3845,8 @@ turn_model_on_off(param_00,param_01)
 	param_00 setscriptablepartstate("morse_code","off");
 }
 
-//Function Number: 121
-play_morse_dot(param_00,param_01)
-{
-	if(!param_00)
-	{
+play_morse_dot(param_00,param_01) {
+	if(!param_00) {
 		level thread turn_model_on_off(param_01,1);
 		scripts\cp\utility::playsoundinspace("payphone_plr_morse_dot",param_01.origin);
 		wait(0.3);
@@ -4462,11 +3857,8 @@ play_morse_dot(param_00,param_01)
 	level.convertedword = level.convertedword + ".";
 }
 
-//Function Number: 122
-play_morse_dash(param_00,param_01)
-{
-	if(!param_00)
-	{
+play_morse_dash(param_00,param_01) {
+	if(!param_00) {
 		level thread turn_model_on_off(param_01,0);
 		scripts\cp\utility::playsoundinspace("payphone_plr_morse_dash",param_01.origin);
 		wait(0.5);
@@ -4477,22 +3869,16 @@ play_morse_dash(param_00,param_01)
 	level.convertedword = level.convertedword + "-";
 }
 
-//Function Number: 123
-unblock_venomx_door()
-{
+unblock_venomx_door() {
 	var_00 = getent("venomx_door_blocker","script_noteworthy");
 	var_00 notsolid();
 	var_00 connectpaths();
 }
 
-//Function Number: 124
-choose_number_of_goons()
-{
+choose_number_of_goons() {
 	var_00 = 1;
-	if(isdefined(level.players.size) && level.players.size > 0)
-	{
-		switch(level.players.size)
-		{
+	if(isdefined(level.players.size) && level.players.size > 0) {
+		switch(level.players.size) {
 			case 1:
 				var_00 = 1;
 				break;
@@ -4518,9 +3904,7 @@ choose_number_of_goons()
 	}
 }
 
-//Function Number: 125
-start_fake_spawn_sequence(param_00,param_01)
-{
+start_fake_spawn_sequence(param_00,param_01) {
 	level endon("game_ended");
 	var_02 = choose_number_of_goons();
 	var_03 = var_02;
@@ -4535,8 +3919,7 @@ start_fake_spawn_sequence(param_00,param_01)
 	scripts\cp\zombies\zombies_spawning::increase_reserved_spawn_slots(var_03);
 	wait(2);
 	var_0A = skeleton_spawner(var_09,param_00);
-	while(level.goons_alive > 0)
-	{
+	while(level.goons_alive > 0) {
 		wait(0.1);
 	}
 
@@ -4544,19 +3927,14 @@ start_fake_spawn_sequence(param_00,param_01)
 	return 1;
 }
 
-//Function Number: 126
-watch_for_disconnected_player_during_spawn()
-{
+watch_for_disconnected_player_during_spawn() {
 	self waittill("disconnect");
 	level.goons_alive = 0;
 }
 
-//Function Number: 127
-get_rand_point(param_00,param_01)
-{
+get_rand_point(param_00,param_01) {
 	param_01 endon("disconnect");
-	while(![[ level.active_volume_check ]](param_00))
-	{
+	while(![[level.active_volume_check]](param_00)) {
 		param_00 = getrandomnavpoint(param_00,128);
 		scripts\engine\utility::waitframe();
 	}
@@ -4564,17 +3942,13 @@ get_rand_point(param_00,param_01)
 	return param_00;
 }
 
-//Function Number: 128
-skeleton_spawner(param_00,param_01)
-{
+skeleton_spawner(param_00,param_01) {
 	param_01 endon("disconnect");
 	var_02 = [];
-	for(var_03 = 0;var_03 < param_00.size;var_03++)
-	{
+	for(var_03 = 0;var_03 < param_00.size;var_03++) {
 		param_00[var_03] = get_rand_point(param_00[var_03],param_01);
 		var_04 = spawn_skeleton_solo(param_00[var_03],param_01);
-		if(isdefined(var_04))
-		{
+		if(isdefined(var_04)) {
 			var_04 thread skeleton_death_watcher();
 			var_02[var_02.size] = var_04;
 			var_04 thread set_skeleton_attributes();
@@ -4588,17 +3962,13 @@ skeleton_spawner(param_00,param_01)
 	return var_02;
 }
 
-//Function Number: 129
-skeleton_death_watcher()
-{
+skeleton_death_watcher() {
 	level endon("game_ended");
 	self waittill("death");
 	level.goons_alive--;
 }
 
-//Function Number: 130
-spawn_skeleton_solo(param_00,param_01)
-{
+spawn_skeleton_solo(param_00,param_01) {
 	param_01 endon("disconnect");
 	param_00 = scripts\engine\utility::drop_to_ground(param_00,30,-100);
 	var_02 = spawnstruct();
@@ -4607,8 +3977,7 @@ spawn_skeleton_solo(param_00,param_01)
 	var_02.script_animation = "spawn_ground";
 	var_03 = 4;
 	var_04 = 2.7;
-	for(var_05 = 0;var_05 < var_03;var_05++)
-	{
+	for(var_05 = 0;var_05 < var_03;var_05++) {
 		thread scripts\cp\utility::playsoundinspace("zombie_spawn_lightning",param_00);
 		var_06 = level._effect["goon_spawn_bolt"];
 		playfx(var_06,param_00);
@@ -4616,8 +3985,7 @@ spawn_skeleton_solo(param_00,param_01)
 		playrumbleonposition("grenade_rumble",param_00);
 		earthquake(0.3,0.2,param_00,500);
 		var_07 = var_02 scripts\cp\zombies\cp_final_spawning::spawn_brute_wave_enemy("alien_phantom");
-		if(isdefined(var_07))
-		{
+		if(isdefined(var_07)) {
 			return var_07;
 		}
 
@@ -4627,15 +3995,12 @@ spawn_skeleton_solo(param_00,param_01)
 	return undefined;
 }
 
-//Function Number: 131
-set_skeleton_attributes()
-{
+set_skeleton_attributes() {
 	level endon("game_ended");
 	self endon("death");
 	self.dont_cleanup = 1;
 	self.synctransients = "sprint";
-	if(!scripts\engine\utility::istrue(self.aj_goon))
-	{
+	if(!scripts\engine\utility::istrue(self.aj_goon)) {
 		self.aj_goon = 1;
 	}
 
@@ -4643,76 +4008,57 @@ set_skeleton_attributes()
 	self.maxhealth = scripts\cp\zombies\cp_final_spawning::calculatezombiehealth("alien_phantom");
 }
 
-//Function Number: 132
-init_fig1()
-{
+init_fig1() {
 	level.special_mode_activation_funcs["fig_1"] = ::showhiddenfigurestoplayer;
 	level.normal_mode_activation_funcs["fig_1"] = ::showhiddenfigurestoplayer;
 	var_00 = scripts\engine\utility::getstructarray("fig_1","script_noteworthy");
-	foreach(var_02 in var_00)
-	{
+	foreach(var_02 in var_00) {
 		var_02.groupname = "locOverride";
 		var_02.playeroffset = [];
 		setup_hidden_figure_models(var_02,"fig_1");
 	}
 }
 
-//Function Number: 133
-init_fig2()
-{
+init_fig2() {
 	level.special_mode_activation_funcs["fig_2"] = ::showhiddenfigurestoplayer;
 	level.normal_mode_activation_funcs["fig_2"] = ::showhiddenfigurestoplayer;
 	var_00 = scripts\engine\utility::getstructarray("fig_2","script_noteworthy");
-	foreach(var_02 in var_00)
-	{
+	foreach(var_02 in var_00) {
 		var_02.groupname = "locOverride";
 		var_02.playeroffset = [];
 		setup_hidden_figure_models(var_02,"fig_2");
 	}
 }
 
-//Function Number: 134
-init_fig3()
-{
+init_fig3() {
 	level.special_mode_activation_funcs["fig_3"] = ::showhiddenfigurestoplayer;
 	level.normal_mode_activation_funcs["fig_3"] = ::showhiddenfigurestoplayer;
 	var_00 = scripts\engine\utility::getstructarray("fig_3","script_noteworthy");
-	foreach(var_02 in var_00)
-	{
+	foreach(var_02 in var_00) {
 		var_02.groupname = "locOverride";
 		var_02.playeroffset = [];
 		setup_hidden_figure_models(var_02,"fig_3");
 	}
 }
 
-//Function Number: 135
-init_fig4()
-{
+init_fig4() {
 	level.special_mode_activation_funcs["fig_4"] = ::showhiddenfigurestoplayer;
 	level.normal_mode_activation_funcs["fig_4"] = ::showhiddenfigurestoplayer;
 	var_00 = scripts\engine\utility::getstructarray("fig_4","script_noteworthy");
-	foreach(var_02 in var_00)
-	{
+	foreach(var_02 in var_00) {
 		var_02.groupname = "locOverride";
 		var_02.playeroffset = [];
 		setup_hidden_figure_models(var_02,"fig_4");
 	}
 }
 
-//Function Number: 136
-fig_hint(param_00,param_01)
-{
+fig_hint(param_00,param_01) {
 	return "";
 }
 
-//Function Number: 137
-fig_func(param_00,param_01)
-{
-}
+fig_func(param_00,param_01) {}
 
-//Function Number: 138
-activatefiguredamage(param_00,param_01,param_02)
-{
+activatefiguredamage(param_00,param_01,param_02) {
 	level notify(param_00.script_noteworthy + "_" + param_01.name);
 	level endon(param_00.script_noteworthy + "_" + param_01.name);
 	level endon("game_ended");
@@ -4720,8 +4066,7 @@ activatefiguredamage(param_00,param_01,param_02)
 	param_01 endon("last_stand");
 	level endon("end_hidden_figures_sequence_for_" + param_01.name);
 	param_02 endon("p_ent_reset");
-	if(!isdefined(param_02))
-	{
+	if(!isdefined(param_02)) {
 		return;
 	}
 
@@ -4729,34 +4074,28 @@ activatefiguredamage(param_00,param_01,param_02)
 	param_02.maxhealth = 99999999;
 	param_02 setcandamage(1);
 	param_02 endon("end_thread_for_" + param_02.model);
-	for(;;)
-	{
+	for(;;) {
 		param_02 waittill("damage",var_03,var_04,var_05,var_06,var_07,var_08,var_09,var_0A,var_0B,var_0C);
-		if(!isplayer(var_04))
-		{
+		if(!isplayer(var_04)) {
 			continue;
 		}
 
-		if(var_04 != param_01)
-		{
+		if(var_04 != param_01) {
 			continue;
 		}
 
-		if(!var_04 scripts\cp\utility::is_valid_player())
-		{
+		if(!var_04 scripts\cp\utility::is_valid_player()) {
 			continue;
 		}
 
-		if(scripts\engine\utility::istrue(param_02.got_hit_by_player))
-		{
+		if(scripts\engine\utility::istrue(param_02.got_hit_by_player)) {
 			param_02 setscriptablepartstate("figure_effect","death");
 			var_04 thread scripts\cp\maps\cp_final\cp_final::update_special_mode_for_player(var_04);
 			scripts\engine\utility::waitframe();
 			continue;
 		}
 
-		if(!function_010F(var_04.origin,level.hidden_figures_volume))
-		{
+		if(!function_010F(var_04.origin,level.hidden_figures_volume)) {
 			var_04 playlocalsound("perk_machine_deny");
 			continue;
 		}
@@ -4766,19 +4105,15 @@ activatefiguredamage(param_00,param_01,param_02)
 		param_02.maxhealth = 9999999;
 		playsoundatpos(param_02.origin,"town_kill_black_ghost_success");
 		param_02.got_hit_by_player = 1;
-		if(isdefined(var_04.hidden_figures_hit))
-		{
+		if(isdefined(var_04.hidden_figures_hit)) {
 			var_04.hidden_figures_hit++;
-			if(var_04.hidden_figures_hit >= 4)
-			{
+			if(var_04.hidden_figures_hit >= 4) {
 				var_04 thread scripts\cp\maps\cp_final\cp_final::update_special_mode_for_player(var_04);
 			}
 		}
 
-		if(isdefined(level.hidden_figures_killed))
-		{
-			if(level.hidden_figures_killed >= level.chosen_number_for_morse_code_pap2)
-			{
+		if(isdefined(level.hidden_figures_killed)) {
+			if(level.hidden_figures_killed >= level.chosen_number_for_morse_code_pap2) {
 				level.hidden_figures_killed = level.chosen_number_for_morse_code_pap2;
 			}
 			else
@@ -4793,27 +4128,22 @@ activatefiguredamage(param_00,param_01,param_02)
 	}
 }
 
-//Function Number: 139
-showhiddenfigurestoplayer(param_00,param_01,param_02,param_03)
-{
+showhiddenfigurestoplayer(param_00,param_01,param_02,param_03) {
 	param_03 notify("one_instance_of_" + param_01.script_noteworthy + "_for_" + param_03.name);
 	param_03 endon("one_instance_of_" + param_01.script_noteworthy + "_for_" + param_03.name);
 	param_03 endon("death");
 	param_03 endon("disconnect");
 	level endon("game_ended");
 	level endon("end_hidden_figures_sequence_for_" + param_03.name);
-	if(!isdefined(param_03.vo_prefix))
-	{
+	if(!isdefined(param_03.vo_prefix)) {
 		return;
 	}
 
-	if(!isdefined(param_01.script_noteworthy))
-	{
+	if(!isdefined(param_01.script_noteworthy)) {
 		return;
 	}
 
-	if(!scripts\engine\utility::istrue(param_03.triggeredtimequest))
-	{
+	if(!scripts\engine\utility::istrue(param_03.triggeredtimequest)) {
 		return;
 	}
 
@@ -4822,22 +4152,18 @@ showhiddenfigurestoplayer(param_00,param_01,param_02,param_03)
 	var_06 = [];
 	var_07 = gettime();
 	param_00.got_hit_by_player = 0;
-	if(!isdefined(param_03.hidden_figures_hit))
-	{
+	if(!isdefined(param_03.hidden_figures_hit)) {
 		param_03.hidden_figures_hit = 0;
 	}
 
-	if(!isdefined(level.hidden_figures_killed))
-	{
+	if(!isdefined(level.hidden_figures_killed)) {
 		level.hidden_figures_killed = 0;
 	}
 
 	thread activatefiguredamage(param_01,param_03,param_00);
 	param_00 showtoplayer(param_03);
-	for(;;)
-	{
-		if(!scripts\engine\utility::istrue(param_03.triggeredtimequest))
-		{
+	for(;;) {
+		if(!scripts\engine\utility::istrue(param_03.triggeredtimequest)) {
 			break;
 		}
 
@@ -4857,8 +4183,7 @@ showhiddenfigurestoplayer(param_00,param_01,param_02,param_03)
 		var_12 = randomintrange(-200,200);
 		var_13 = randomintrange(90,200);
 		param_03.figure_four_offset = (var_11,var_12,var_13);
-		switch(param_01.script_noteworthy)
-		{
+		switch(param_01.script_noteworthy) {
 			case "fig_1":
 				param_01.playeroffset[param_03.name] = param_03.origin + param_03.figure_one_offset;
 				param_00 setmodel("tag_origin_hidden_figure_final");
@@ -4888,12 +4213,9 @@ showhiddenfigurestoplayer(param_00,param_01,param_02,param_03)
 				break;
 		}
 
-		if(int(distance(param_00.origin,param_03.origin)) <= 120)
-		{
-			if(param_03 _meth_843B())
-			{
-				if(randomint(100) > 50)
-				{
+		if(int(distance(param_00.origin,param_03.origin)) <= 120) {
+			if(param_03 _meth_843B()) {
+				if(randomint(100) > 50) {
 					param_03 dodamage(int(param_03.health / 4),param_03.origin);
 				}
 			}
@@ -4914,12 +4236,9 @@ showhiddenfigurestoplayer(param_00,param_01,param_02,param_03)
 	level notify("end_hidden_figures_sequence_for_" + param_03.name);
 }
 
-//Function Number: 140
-setup_hidden_figure_models(param_00,param_01)
-{
+setup_hidden_figure_models(param_00,param_01) {
 	scripts\cp\maps\cp_final\cp_final::addtopersonalinteractionlist(param_00);
-	switch(param_01)
-	{
+	switch(param_01) {
 		case "fig_4":
 		case "fig_3":
 		case "fig_2":
@@ -4928,19 +4247,13 @@ setup_hidden_figure_models(param_00,param_01)
 	}
 }
 
-//Function Number: 141
-modfunc(param_00,param_01)
-{
+modfunc(param_00,param_01) {
 	return param_00 % param_01 + param_01 % param_01;
 }
 
-//Function Number: 142
-isalphabet(param_00)
-{
-	foreach(var_03, var_02 in level.alphabets)
-	{
-		if(param_00 == var_03)
-		{
+isalphabet(param_00) {
+	foreach(var_03, var_02 in level.alphabets) {
+		if(param_00 == var_03) {
 			return 1;
 		}
 	}
@@ -4948,21 +4261,16 @@ isalphabet(param_00)
 	return 0;
 }
 
-//Function Number: 143
-cipher(param_00,param_01,param_02)
-{
+cipher(param_00,param_01,param_02) {
 	var_03 = param_01.size;
 	var_04 = param_00.size;
 	var_05 = 0;
 	var_06 = [];
-	for(var_07 = 0;var_07 < var_04;var_07++)
-	{
-		if(isalphabet(param_00[var_07]))
-		{
+	for(var_07 = 0;var_07 < var_04;var_07++) {
+		if(isalphabet(param_00[var_07])) {
 			var_08 = var_07 - var_05 % var_03;
 			var_09 = param_01[var_08];
-			if(!param_02)
-			{
+			if(!param_02) {
 				var_09 = -1 * derivenumberfromletter(var_09);
 			}
 			else
@@ -4982,54 +4290,38 @@ cipher(param_00,param_01,param_02)
 	return var_06;
 }
 
-//Function Number: 144
-derivenumberfromletter(param_00)
-{
-	foreach(var_03, var_02 in level.alphabets)
-	{
-		if(param_00 == var_03)
-		{
+derivenumberfromletter(param_00) {
+	foreach(var_03, var_02 in level.alphabets) {
+		if(param_00 == var_03) {
 			return var_02;
 		}
 	}
 
-	foreach(var_06, var_05 in level.alphabets_capped)
-	{
-		if(param_00 == var_06)
-		{
+	foreach(var_06, var_05 in level.alphabets_capped) {
+		if(param_00 == var_06) {
 			return var_05;
 		}
 	}
 }
 
-//Function Number: 145
-deriveletterfromnumber(param_00)
-{
-	foreach(var_03, var_02 in level.alphabets)
-	{
-		if(var_02 == param_00)
-		{
+deriveletterfromnumber(param_00) {
+	foreach(var_03, var_02 in level.alphabets) {
+		if(var_02 == param_00) {
 			return var_03;
 		}
 	}
 
-	foreach(var_06, var_05 in level.alphabets_capped)
-	{
-		if(var_05 == param_00)
-		{
+	foreach(var_06, var_05 in level.alphabets_capped) {
+		if(var_05 == param_00) {
 			return var_06;
 		}
 	}
 }
 
-//Function Number: 146
-changearraytoword(param_00)
-{
+changearraytoword(param_00) {
 	var_01 = "";
-	for(var_02 = 0;var_02 < param_00.size;var_02++)
-	{
-		if(!isdefined(param_00[var_02]))
-		{
+	for(var_02 = 0;var_02 < param_00.size;var_02++) {
+		if(!isdefined(param_00[var_02])) {
 			continue;
 		}
 

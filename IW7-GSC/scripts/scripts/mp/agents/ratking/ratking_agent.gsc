@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\mp\agents\ratking\ratking_agent.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 22
- * Decompile Time: 1147 ms
- * Timestamp: 10/27/2023 12:11:21 AM
-*******************************************************************/
+/***************************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\mp\agents\ratking\ratking_agent.gsc
+***************************************************************/
 
-//Function Number: 1
-registerscriptedagent()
-{
+registerscriptedagent() {
 	scripts/aitypes/bt_util::init();
 	behaviortree\ratking::func_DEE8();
 	scripts\asm\ratking\mp\states::func_2371();
@@ -18,12 +12,9 @@ registerscriptedagent()
 	thread func_FAB0();
 }
 
-//Function Number: 2
-func_FAB0()
-{
+func_FAB0() {
 	level endon("game_ended");
-	if(!isdefined(level.agent_definition))
-	{
+	if(!isdefined(level.agent_definition)) {
 		level waittill("scripted_agents_initialized");
 	}
 
@@ -33,16 +24,12 @@ func_FAB0()
 	level.agent_funcs["ratking"]["on_killed"] = ::onratkingkilled;
 }
 
-//Function Number: 3
-func_FACE(param_00)
-{
+func_FACE(param_00) {
 	self setmodel("zmb_rat_king");
 	thread delaygiveequipment();
 }
 
-//Function Number: 4
-delaygiveequipment()
-{
+delaygiveequipment() {
 	level endon("game_ended");
 	self endon("fake_death");
 	wait(0.1);
@@ -50,9 +37,7 @@ delaygiveequipment()
 	self setscriptablepartstate("shield","shield_activate");
 }
 
-//Function Number: 5
-setupzombiegametypevars()
-{
+setupzombiegametypevars() {
 	self.class = undefined;
 	self.movespeedscaler = undefined;
 	self.avoidkillstreakonspawntimer = undefined;
@@ -138,15 +123,12 @@ setupzombiegametypevars()
 	self.next_pain_time = 0;
 	self.next_forced_teleport_time = 0;
 	self.fake_death = undefined;
-	if(getdvarint("scr_zombie_left_foot_sharp_turn_only",0) == 1)
-	{
+	if(getdvarint("scr_zombie_left_foot_sharp_turn_only",0) == 1) {
 		self.var_AB3F = 1;
 	}
 }
 
-//Function Number: 6
-setupagent()
-{
+setupagent() {
 	setupzombiegametypevars();
 	self.height = self.var_18F4;
 	self.fgetarg = self.var_18F9;
@@ -175,29 +157,23 @@ setupagent()
 	thread listen_for_fake_death();
 }
 
-//Function Number: 7
-accumulatedamage(param_00,param_01)
-{
-	if(!isdefined(self.damageaccumulator))
-	{
+accumulatedamage(param_00,param_01) {
+	if(!isdefined(self.damageaccumulator)) {
 		self.damageaccumulator = spawnstruct();
 		self.damageaccumulator.accumulateddamage = 0;
 	}
-	else if(!isdefined(self.damageaccumulator.lastdamagetime) || gettime() > self.damageaccumulator.lastdamagetime + 1000)
-	{
+	else if(!isdefined(self.damageaccumulator.lastdamagetime) || gettime() > self.damageaccumulator.lastdamagetime + 1000) {
 		self.damageaccumulator.accumulateddamage = 0;
 		self.damageaccumulator.lastdamagetime = 0;
 	}
 
 	self.damageaccumulator.lastdamagetime = gettime();
-	if(!isdefined(param_01))
-	{
+	if(!isdefined(param_01)) {
 		param_01 = (1,1,1);
 	}
 
 	self.damageaccumulator.lastdir = param_01;
-	if(isdefined(self.fake_damage))
-	{
+	if(isdefined(self.fake_damage)) {
 		self.damageaccumulator.accumulateddamage = self.damageaccumulator.accumulateddamage + self.fake_damage;
 		self.fake_damage = undefined;
 		return;
@@ -206,30 +182,22 @@ accumulatedamage(param_00,param_01)
 	self.damageaccumulator.accumulateddamage = self.damageaccumulator.accumulateddamage + param_00;
 }
 
-//Function Number: 8
-isinravemode()
-{
-	if(self isethereal())
-	{
+isinravemode() {
+	if(self isethereal()) {
 		return 1;
 	}
 
 	return 0;
 }
 
-//Function Number: 9
-onratkingdamagefinished(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08,param_09,param_0A,param_0B,param_0C)
-{
+onratkingdamagefinished(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08,param_09,param_0A,param_0B,param_0C) {
 	accumulatedamage(param_02,param_07);
 	ratking_on_damage_finished(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08,param_09,0,param_0B,param_0C);
 }
 
-//Function Number: 10
-ratking_on_damage_finished(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08,param_09,param_0A,param_0B,param_0C)
-{
+ratking_on_damage_finished(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08,param_09,param_0A,param_0B,param_0C) {
 	var_0D = self.health;
-	if(isdefined(param_07))
-	{
+	if(isdefined(param_07)) {
 		var_0E = vectortoyaw(param_07);
 		var_0F = self.angles[1];
 		self.var_E3 = angleclamp180(var_0E - var_0F);
@@ -246,12 +214,10 @@ ratking_on_damage_finished(param_00,param_01,param_02,param_03,param_04,param_05
 	self.var_E1 = param_02;
 	self.var_E2 = param_05;
 	self.var_4D62 = param_06;
-	if(param_02 >= self.health)
-	{
+	if(param_02 >= self.health) {
 		param_02 = 0;
 		level.rat_king_death_pos = self.origin;
-		if(scripts\engine\utility::array_contains(level.spawned_enemies,self))
-		{
+		if(scripts\engine\utility::array_contains(level.spawned_enemies,self)) {
 			level.spawned_enemies = scripts\engine\utility::array_remove(level.spawned_enemies,self);
 		}
 
@@ -259,74 +225,54 @@ ratking_on_damage_finished(param_00,param_01,param_02,param_03,param_04,param_05
 	}
 
 	self getrespawndelay(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08,param_09,0,param_0B,param_0C,0,1);
-	if(self.health > 0 && self.health < var_0D)
-	{
+	if(self.health > 0 && self.health < var_0D) {
 		self notify("pain");
 	}
 
-	if(isalive(self) && isdefined(self.agent_type))
-	{
+	if(isalive(self) && isdefined(self.agent_type)) {
 		var_10 = level.agent_funcs[self.agent_type]["gametype_on_damage_finished"];
-		if(isdefined(var_10))
-		{
-			[[ var_10 ]](param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08,param_09,param_0A,param_0B,param_0C);
+		if(isdefined(var_10)) {
+			[[var_10]](param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08,param_09,param_0A,param_0B,param_0C);
 		}
 	}
 }
 
-//Function Number: 11
-onratkingkilled(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08)
-{
+onratkingkilled(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08) {
 	self.nocorpse = 1;
 	scripts\mp\mp_agent::default_on_killed(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08);
 }
 
-//Function Number: 12
-getratkinggrenadehandoffset()
-{
+getratkinggrenadehandoffset() {
 	return (12,12,100);
 }
 
-//Function Number: 13
-getratkinghandposition()
-{
+getratkinghandposition() {
 	return self gettweakablevalue(self.origin + (12,12,100));
 }
 
-//Function Number: 14
-shouldratkingplaypainanim()
-{
+shouldratkingplaypainanim() {
 	return 0;
 }
 
-//Function Number: 15
-getstructpos()
-{
-	if(isdefined(self.ratkingbouncetarget))
-	{
+getstructpos() {
+	if(isdefined(self.ratkingbouncetarget)) {
 		return self.ratkingbouncetarget;
 	}
 
 	return undefined;
 }
 
-//Function Number: 16
-getenemy()
-{
-	if(isdefined(self.ratkingenemy) && isalive(self.ratkingenemy))
-	{
+getenemy() {
+	if(isdefined(self.ratkingenemy) && isalive(self.ratkingenemy)) {
 		return self.ratkingenemy;
 	}
 
 	return undefined;
 }
 
-//Function Number: 17
-lookatspot()
-{
+lookatspot() {
 	var_00 = getstructpos();
-	if(isdefined(var_00))
-	{
+	if(isdefined(var_00)) {
 		var_01 = var_00.origin - self.origin;
 		var_02 = vectortoangles(var_01);
 		self orientmode("face angle abs",(0,var_02[1],0));
@@ -336,12 +282,9 @@ lookatspot()
 	self orientmode("face angle abs",self.angles);
 }
 
-//Function Number: 18
-lookatenemy()
-{
+lookatenemy() {
 	var_00 = getenemy();
-	if(isdefined(var_00))
-	{
+	if(isdefined(var_00)) {
 		var_01 = var_00.origin - self.origin;
 		var_02 = vectortoangles(var_01);
 		self orientmode("face angle abs",(0,var_02[1],0));
@@ -351,35 +294,27 @@ lookatenemy()
 	self orientmode("face angle abs",self.angles);
 }
 
-//Function Number: 19
-executefakedeath()
-{
+executefakedeath() {
 	self setethereal(1);
 	wait(0.2);
 	self suicide();
 	wait(0.2);
 }
 
-//Function Number: 20
-listen_for_fake_death()
-{
+listen_for_fake_death() {
 	self endon("death");
-	for(;;)
-	{
+	for(;;) {
 		self waittill("fake_death");
-		if(!scripts\engine\utility::istrue(level.ratking_fight))
-		{
+		if(!scripts\engine\utility::istrue(level.ratking_fight)) {
 			self.fake_death = 1;
 			scripts\cp\maps\cp_disco\rat_king_fight::forcerkteleport();
 			continue;
 		}
 
-		if(scripts\engine\utility::istrue(level.ratking_fight))
-		{
+		if(scripts\engine\utility::istrue(level.ratking_fight)) {
 			self.precacheleaderboards = 1;
 			self.scripted_mode = 1;
-			foreach(var_01 in level.players)
-			{
+			foreach(var_01 in level.players) {
 				var_01 thread scripts\cp\maps\cp_disco\rat_king_fight::outroblackscreen();
 			}
 
@@ -389,14 +324,10 @@ listen_for_fake_death()
 	}
 }
 
-//Function Number: 21
-rkhasstaff()
-{
+rkhasstaff() {
 	return scripts\engine\utility::istrue(self.hasstaff);
 }
 
-//Function Number: 22
-rkhasshield()
-{
+rkhasshield() {
 	return self.asm.shieldstate == "equipped";
 }

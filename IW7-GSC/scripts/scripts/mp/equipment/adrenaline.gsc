@@ -1,21 +1,12 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: 3541.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 9
- * Decompile Time: 1 ms
- * Timestamp: 10/27/2023 12:30:37 AM
-*******************************************************************/
+/*******************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\mp\equipment\adrenaline.gsc
+*******************************************************/
 
-//Function Number: 1
-init()
-{
-}
+init() {}
 
-//Function Number: 2
-useadrenaline()
-{
+useadrenaline() {
 	self endon("disconnect");
 	self endon("removeAdrenaline");
 	self notify("adrenaline_used");
@@ -24,8 +15,7 @@ useadrenaline()
 	self playsoundtoteam("mp_adrenaline_on_npc","axis",self);
 	self playsoundtoteam("mp_adrenaline_on_npc","allies",self);
 	self playlocalsound("mp_adrenaline_pulse");
-	if(self.health < self.maxhealth)
-	{
+	if(self.health < self.maxhealth) {
 		scripts\mp\_missions::func_D991("ch_tactical_adrenaline");
 	}
 	else
@@ -45,31 +35,24 @@ useadrenaline()
 	thread removeadrenaline();
 }
 
-//Function Number: 3
-removeadrenaline(param_00)
-{
-	if(!isdefined(param_00))
-	{
+removeadrenaline(param_00) {
+	if(!isdefined(param_00)) {
 		param_00 = "";
 	}
 
-	if(isdefined(self.var_8BC2) && self.var_8BC2)
-	{
+	if(isdefined(self.var_8BC2) && self.var_8BC2) {
 		self notify("removeAdrenaline");
 		self.var_8BC2 = 0;
 		scripts\mp\_utility::removeperk("specialty_adrenaline");
 		self setscriptablepartstate("adrenaline","neutral",0);
 		self setscriptablepartstate("adrenalineHeal","neutral",0);
-		if(param_00 != "death")
-		{
+		if(param_00 != "death") {
 			self playlocalsound("mp_adrenaline_off");
 		}
 	}
 }
 
-//Function Number: 4
-func_E0C4()
-{
+func_E0C4() {
 	self endon("disconnect");
 	self endon("removeAdrenaline");
 	self notify("removeAdrenalineOnDeath");
@@ -78,9 +61,7 @@ func_E0C4()
 	thread removeadrenaline("death");
 }
 
-//Function Number: 5
-func_E0C6()
-{
+func_E0C6() {
 	self endon("disconnect");
 	self endon("removeAdrenaline");
 	self notify("removeAdrenalineOnGameEnd");
@@ -89,9 +70,7 @@ func_E0C6()
 	thread removeadrenaline();
 }
 
-//Function Number: 6
-func_E0C3()
-{
+func_E0C3() {
 	self endon("disconnect");
 	self endon("removeAdrenaline");
 	self notify("removeAdrenalineOnCancel");
@@ -100,9 +79,7 @@ func_E0C3()
 	thread removeadrenaline();
 }
 
-//Function Number: 7
-func_40E0()
-{
+func_40E0() {
 	self endon("disconnect");
 	level endon("game_ended");
 	self notify("cleanupAdrenalineMissionTracking");
@@ -111,15 +88,11 @@ func_40E0()
 	self.usedadrenalineatfullhp = undefined;
 }
 
-//Function Number: 8
-func_7EF5()
-{
+func_7EF5() {
 	return 4;
 }
 
-//Function Number: 9
-func_13A85()
-{
+func_13A85() {
 	self endon("disconnect");
 	self endon("removeAdrenaline");
 	self setscriptablepartstate("adrenaline","active",0);

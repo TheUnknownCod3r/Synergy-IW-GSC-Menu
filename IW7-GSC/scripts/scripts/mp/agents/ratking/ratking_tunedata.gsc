@@ -1,18 +1,11 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\mp\agents\ratking\ratking_tunedata.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 4
- * Decompile Time: 239 ms
- * Timestamp: 10/27/2023 12:11:21 AM
-*******************************************************************/
+/******************************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\mp\agents\ratking\ratking_tunedata.gsc
+******************************************************************/
 
-//Function Number: 1
-setuptunedata()
-{
-	if(!isdefined(level.agenttunedata))
-	{
+setuptunedata() {
+	if(!isdefined(level.agenttunedata)) {
 		level.agenttunedata = [];
 	}
 
@@ -22,9 +15,7 @@ setuptunedata()
 	setupsoloratkingtunedata(level.agenttunedata["ratking"]);
 }
 
-//Function Number: 2
-setupratkingtunedata(param_00)
-{
+setupratkingtunedata(param_00) {
 	param_00.slasher_spin_damage_range_sq = 5625;
 	param_00.slasher_spin_damage_amt = 60;
 	param_00.min_grenade_throw_interval = 10000;
@@ -98,15 +89,12 @@ setupratkingtunedata(param_00)
 	param_00.summon_spawn_min_dist_between_agents_sq = 2500;
 	param_00.max_num_agents_to_allow_summon = 1;
 	param_00.min_time_between_summon_rounds = 5000;
-	if(isdefined(level.rk_tuning_override))
-	{
-		[[ level.rk_tuning_override ]](param_00);
+	if(isdefined(level.rk_tuning_override)) {
+		[[level.rk_tuning_override]](param_00);
 	}
 }
 
-//Function Number: 3
-setupsoloratkingtunedata(param_00)
-{
+setupsoloratkingtunedata(param_00) {
 	param_00.slasher_spin_damage_range_sq = 5625;
 	param_00.slasher_spin_damage_amt = 60;
 	param_00.min_grenade_throw_interval = 10000;
@@ -180,14 +168,11 @@ setupsoloratkingtunedata(param_00)
 	param_00.summon_spawn_min_dist_between_agents_sq = 2500;
 	param_00.max_num_agents_to_allow_summon = 0;
 	param_00.min_time_between_summon_rounds = 3000;
-	if(isdefined(level.rk_solo_tuning_override))
-	{
-		[[ level.rk_solo_tuning_override ]](param_00);
+	if(isdefined(level.rk_solo_tuning_override)) {
+		[[level.rk_solo_tuning_override]](param_00);
 	}
 }
 
-//Function Number: 4
-gettunedata()
-{
+gettunedata() {
 	return level.agenttunedata["ratking"];
 }

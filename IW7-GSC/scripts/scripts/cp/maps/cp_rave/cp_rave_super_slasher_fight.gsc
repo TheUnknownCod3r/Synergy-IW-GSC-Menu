@@ -1,37 +1,24 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\cp\maps\cp_rave\cp_rave_super_slasher_fight.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 109
- * Decompile Time: 5523 ms
- * Timestamp: 10/27/2023 12:06:40 AM
-*******************************************************************/
+/***************************************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\cp\maps\cp_rave\cp_rave_super_slasher_fight.gsc
+***************************************************************************/
 
-//Function Number: 1
-init_super_slasher_quest()
-{
+init_super_slasher_quest() {
 	load_super_slasher_vfx();
 	start_super_slasher_quest();
 }
 
-//Function Number: 2
-start_super_slasher_quest()
-{
+start_super_slasher_quest() {
 	scripts/cp/zombies/zombie_quest::register_quest_step("superslasher",0,::scripts\cp\maps\cp_rave\cp_rave_interactions::init_survivor_trapped,::scripts\cp\maps\cp_rave\cp_rave_interactions::wait_for_survivor_trapped,::blank,::debug_trap_survivor);
 	scripts/cp/zombies/zombie_quest::register_quest_step("superslasher",1,::scripts\cp\maps\cp_rave\cp_rave_interactions::init_survivor_released,::scripts\cp\maps\cp_rave\cp_rave_interactions::wait_for_survivor_released,::debug_release_survivor,::debug_release_survivor);
 	scripts/cp/zombies/zombie_quest::register_quest_step("superslasher",2,::init_get_survivor_to_island,::get_survivor_to_island,::complete_to_island,::debug_get_survivor_to_island);
 	scripts/cp/zombies/zombie_quest::register_quest_step("superslasher",3,::init_super_slasher_fight,::super_slasher_fight,::complete_fight,::debug_super_slasher_fight);
 }
 
-//Function Number: 3
-blank()
-{
-}
+blank() {}
 
-//Function Number: 4
-load_super_slasher_vfx()
-{
+load_super_slasher_vfx() {
 	level._effect["memory_trap_loop"] = loadfx("vfx/iw7/levels/cp_rave/vfx_rave_dcatcher_dmg_loop.vfx");
 	level._effect["memory_trap_start"] = loadfx("vfx/iw7/levels/cp_rave/vfx_rave_dcatcher_dmg_start.vfx");
 	level._effect["memory_trap_idle"] = loadfx("vfx/iw7/levels/cp_rave/vfx_rave_dcatcher_idle.vfx");
@@ -63,38 +50,27 @@ load_super_slasher_vfx()
 	level._effect["initial_weak_spot"] = loadfx("vfx/iw7/levels/cp_rave/superslasher/vfx_rave_superslasher_initial_weak_spot.vfx");
 }
 
-//Function Number: 5
-debug_trap_survivor()
-{
+debug_trap_survivor() {
 	scripts\engine\utility::flag_set("survivor_trapped");
 }
 
-//Function Number: 6
-debug_release_survivor()
-{
+debug_release_survivor() {
 	scripts\engine\utility::flag_set("survivor_released");
-	if(!isdefined(level.boat_survivor))
-	{
+	if(!isdefined(level.boat_survivor)) {
 		level thread scripts\cp\maps\cp_rave\cp_rave_boat::spawn_survivor_on_boat();
 	}
 }
 
-//Function Number: 7
-init_get_survivor_to_island()
-{
+init_get_survivor_to_island() {
 	scripts\engine\utility::flag_init("survivor_got_to_island");
 }
 
-//Function Number: 8
-get_survivor_to_island()
-{
+get_survivor_to_island() {
 	scripts\engine\utility::flag_wait("survivor_got_to_island");
 	scripts\cp\maps\cp_rave\cp_rave_boat::fade_screen_after_ss_intro();
 }
 
-//Function Number: 9
-complete_to_island()
-{
+complete_to_island() {
 	scripts\cp\maps\cp_rave\cp_rave_boat::move_players_to_shore();
 	level.getspawnpoint = ::scripts\cp\maps\cp_rave\cp_rave::respawn_on_island;
 	scripts\engine\utility::flag_clear("survivor_released");
@@ -106,19 +82,14 @@ complete_to_island()
 	scripts\cp\maps\cp_rave\cp_rave_boat::fade_in_for_ss_fight();
 }
 
-//Function Number: 10
-move_lost_and_found(param_00)
-{
-	if(!isdefined(level.lnf_struct))
-	{
+move_lost_and_found(param_00) {
+	if(!isdefined(level.lnf_struct)) {
 		level.lnf_struct = scripts\engine\utility::getstruct("lost_and_found","script_noteworthy");
 		level.lnf_struct.og_origin = level.lnf_struct.origin;
 	}
 
-	if(param_00 == "island")
-	{
-		if(isdefined(level.lnf_sign))
-		{
+	if(param_00 == "island") {
+		if(isdefined(level.lnf_sign)) {
 			level.lnf_sign show();
 		}
 
@@ -126,18 +97,15 @@ move_lost_and_found(param_00)
 	}
 	else
 	{
-		if(isdefined(level.lnf_sign))
-		{
+		if(isdefined(level.lnf_sign)) {
 			level.lnf_sign hide();
 		}
 
 		level.lnf_struct.origin = level.lnf_struct.og_origin;
 	}
 
-	foreach(var_02 in level.players)
-	{
-		if(!isdefined(var_02.lost_and_found_ent))
-		{
+	foreach(var_02 in level.players) {
+		if(!isdefined(var_02.lost_and_found_ent)) {
 			continue;
 		}
 
@@ -145,23 +113,16 @@ move_lost_and_found(param_00)
 	}
 }
 
-//Function Number: 11
-debug_get_survivor_to_island()
-{
-}
+debug_get_survivor_to_island() {}
 
-//Function Number: 12
-init_super_slasher_fight()
-{
+init_super_slasher_fight() {
 	scripts\engine\utility::flag_init("super_slasher_fight_complete");
 	reg_weak_spots();
 	reg_spawns();
 	level thread watch_for_player_deaths();
 }
 
-//Function Number: 13
-super_slasher_fight()
-{
+super_slasher_fight() {
 	level.wave_num_override = int(max(38,level.wave_num));
 	level.disable_loot_fly_to_player = 1;
 	level.loot_time_out = 99999;
@@ -171,11 +132,9 @@ super_slasher_fight()
 	clear_existing_enemies();
 	activate_fight_stage_vfx();
 	scripts\engine\utility::flag_clear("zombie_drop_powerups");
-	for(;;)
-	{
+	for(;;) {
 		level.superslasher = scripts\mp\mp_agent::spawnnewagent("superslasher","axis",level.superslasherspawnspot,level.superslasherspawnangles);
-		if(isdefined(level.superslasher))
-		{
+		if(isdefined(level.superslasher)) {
 			break;
 		}
 		else
@@ -193,8 +152,7 @@ super_slasher_fight()
 	thread scripts\cp\maps\cp_rave\cp_rave::deactivateadjacentvolumes();
 	wait(2);
 	level notify("ss_intro_finished");
-	foreach(var_01 in level.players)
-	{
+	foreach(var_01 in level.players) {
 		var_01 playsoundtoplayer(var_01.vo_prefix + "slasher_super_first",var_01);
 	}
 
@@ -217,36 +175,27 @@ super_slasher_fight()
 	resume_spawn_wave();
 }
 
-//Function Number: 14
-watch_for_player_connect()
-{
+watch_for_player_connect() {
 	level endon("super_slasher_death");
 	level endon("game_ended");
-	foreach(var_01 in level.players)
-	{
-		if(var_01 scripts\cp\utility::isteleportenabled())
-		{
+	foreach(var_01 in level.players) {
+		if(var_01 scripts\cp\utility::isteleportenabled()) {
 			var_01 scripts\cp\utility::allow_player_teleport(0);
 		}
 	}
 
-	for(;;)
-	{
+	for(;;) {
 		level waittill("connected",var_03);
-		if(var_03 scripts\cp\utility::isteleportenabled())
-		{
+		if(var_03 scripts\cp\utility::isteleportenabled()) {
 			var_03 scripts\cp\utility::allow_player_teleport(0);
 		}
 	}
 }
 
-//Function Number: 15
-complete_fight()
-{
+complete_fight() {
 	scripts\engine\utility::flag_set("super_slasher_fight_complete");
 	level thread scripts\cp\cp_vo::try_to_play_vo("ww_superslasher_death","rave_announcer_vo","highest",5,0,0,1);
-	if(!scripts\cp\zombies\directors_cut::directors_cut_is_activated())
-	{
+	if(!scripts\cp\zombies\directors_cut::directors_cut_is_activated()) {
 		scripts\cp\maps\cp_rave\cp_rave_interactions::enable_slasher_weapon();
 	}
 
@@ -255,32 +204,24 @@ complete_fight()
 	level.wave_num_override = undefined;
 }
 
-//Function Number: 16
-delay_drop_soul_key()
-{
+delay_drop_soul_key() {
 	level endon("game_ended");
 	wait(8);
 	drop_soul_key();
-	foreach(var_01 in level.players)
-	{
-		if(!var_01 scripts\cp\utility::isteleportenabled())
-		{
+	foreach(var_01 in level.players) {
+		if(!var_01 scripts\cp\utility::isteleportenabled()) {
 			var_01 scripts\cp\utility::allow_player_teleport(1);
 		}
 	}
 
-	if(isdefined(level.volumes_before_fight) && level.volumes_before_fight.size > 1)
-	{
-		foreach(var_04 in level.volumes_before_fight)
-		{
+	if(isdefined(level.volumes_before_fight) && level.volumes_before_fight.size > 1) {
+		foreach(var_04 in level.volumes_before_fight) {
 			var_04 scripts\cp\zombies\zombies_spawning::make_volume_active();
 		}
 	}
 }
 
-//Function Number: 17
-enableslasherpas()
-{
+enableslasherpas() {
 	level notify("force_new_song");
 	level.jukebox_table = "cp/zombies/cp_rave_music_genre_slasher.csv";
 	scripts\cp\zombies\zombie_jukebox::parse_music_genre_table();
@@ -291,9 +232,7 @@ enableslasherpas()
 	enablepaspeaker("pa_super_slasher");
 }
 
-//Function Number: 18
-disableslasherpas()
-{
+disableslasherpas() {
 	disablepaspeaker("pa_super_slasher");
 	level notify("force_new_song");
 	level.slasherpa = undefined;
@@ -303,15 +242,12 @@ disableslasherpas()
 	level notify("jukebox_start");
 }
 
-//Function Number: 19
-play_slasher_death_vo()
-{
+play_slasher_death_vo() {
 	level endon("game_ended");
 	wait(scripts\cp\cp_vo::get_sound_length("ww_superslasher_death"));
 	var_00 = level.players;
 	var_01 = scripts\engine\utility::random(var_00);
-	switch(var_01.vo_prefix)
-	{
+	switch(var_01.vo_prefix) {
 		case "p1_":
 			level thread scripts\cp\cp_vo::try_to_play_vo("defeatslasher_28_1","rave_dialogue_vo","highest",666,0,0,0,100);
 			break;
@@ -333,19 +269,11 @@ play_slasher_death_vo()
 	}
 }
 
-//Function Number: 20
-debug_super_slasher_fight()
-{
-}
+debug_super_slasher_fight() {}
 
-//Function Number: 21
-use_memory_trap(param_00,param_01)
-{
-}
+use_memory_trap(param_00,param_01) {}
 
-//Function Number: 22
-slasher_trapped(param_00)
-{
+slasher_trapped(param_00) {
 	var_01 = 0.5;
 	level notify("super_slasher_is_trapped");
 	level.superslasher scripts\aitypes\superslasher\util::forcetrapped(6);
@@ -365,15 +293,11 @@ slasher_trapped(param_00)
 	level.superslasher thread activate_weak_spots(level.superslasher);
 }
 
-//Function Number: 23
-get_trap_trigger()
-{
+get_trap_trigger() {
 	var_00 = scripts\engine\utility::getstructarray("memory_trap_trigger","script_noteworthy");
 	var_01 = [];
-	foreach(var_03 in var_00)
-	{
-		if(scripts\engine\utility::istrue(var_03.completed))
-		{
+	foreach(var_03 in var_00) {
+		if(scripts\engine\utility::istrue(var_03.completed)) {
 			continue;
 		}
 
@@ -385,26 +309,19 @@ get_trap_trigger()
 	return var_05;
 }
 
-//Function Number: 24
-init_memory_traps()
-{
+init_memory_traps() {
 	var_00 = scripts\engine\utility::getstructarray("memory_trap_trigger","script_noteworthy");
-	foreach(var_02 in var_00)
-	{
+	foreach(var_02 in var_00) {
 		var_02.completed = 0;
 		scripts\cp\cp_interaction::remove_from_current_interaction_list(var_02);
 	}
 }
 
-//Function Number: 25
-set_up_trap_trigger(param_00)
-{
+set_up_trap_trigger(param_00) {
 	var_01 = scripts\engine\utility::getstructarray(param_00.target,"targetname");
 	param_00.floating_charm_locs = [];
-	foreach(var_03 in var_01)
-	{
-		switch(var_03.script_noteworthy)
-		{
+	foreach(var_03 in var_01) {
+		switch(var_03.script_noteworthy) {
 			case "memory_trap_model":
 				param_00.model_loc = var_03.origin;
 				param_00.model_angles = var_03.angles;
@@ -421,9 +338,7 @@ set_up_trap_trigger(param_00)
 	}
 }
 
-//Function Number: 26
-activate_trap_trigger(param_00)
-{
+activate_trap_trigger(param_00) {
 	var_01 = scripts\engine\utility::drop_to_ground(param_00.memory_trap_loc,0,-500);
 	var_02 = spawn("script_model",var_01);
 	var_02 setmodel("tag_origin");
@@ -434,21 +349,16 @@ activate_trap_trigger(param_00)
 	param_00 thread slasher_in_trap(param_00,var_01);
 }
 
-//Function Number: 27
-set_memory_trap_state(param_00,param_01)
-{
-	if(!isdefined(param_00.current_state))
-	{
+set_memory_trap_state(param_00,param_01) {
+	if(!isdefined(param_00.current_state)) {
 		param_00.current_state = "";
 	}
 
-	if(param_00.current_state == param_01)
-	{
+	if(param_00.current_state == param_01) {
 		return;
 	}
 
-	if(param_00.current_state != "")
-	{
+	if(param_00.current_state != "") {
 		stopfxontag(level._effect["memory_trap_" + param_00.current_state],param_00,"tag_origin");
 	}
 
@@ -456,17 +366,12 @@ set_memory_trap_state(param_00,param_01)
 	playfxontag(level._effect["memory_trap_" + param_01],param_00,"tag_origin");
 }
 
-//Function Number: 28
-slasher_in_trap(param_00,param_01)
-{
+slasher_in_trap(param_00,param_01) {
 	param_00 endon("initial_weak_spot_hit");
 	var_02 = 22500;
-	for(;;)
-	{
-		if(isdefined(level.superslasher))
-		{
-			if(distance2dsquared(level.superslasher.origin,param_01) <= var_02)
-			{
+	for(;;) {
+		if(isdefined(level.superslasher)) {
+			if(distance2dsquared(level.superslasher.origin,param_01) <= var_02) {
 				activate_initial_weak_spot(param_00);
 			}
 			else
@@ -479,37 +384,28 @@ slasher_in_trap(param_00,param_01)
 	}
 }
 
-//Function Number: 29
-activate_initial_weak_spot(param_00)
-{
+activate_initial_weak_spot(param_00) {
 	set_memory_trap_state(param_00.memory_trap_vfx_ent,"active");
-	if(!isdefined(level.superslasher.initial_weak_spot))
-	{
+	if(!isdefined(level.superslasher.initial_weak_spot)) {
 		var_01 = scripts\engine\utility::random(["tag_chest_le","tag_chest_ri"]);
 		level.superslasher.initial_weak_spot = set_up_weak_spot(var_01,level.superslasher,"initial_weak_spot");
 		level.superslasher.initial_weak_spot.weak_spot_model thread initial_weak_spot_damage_monitor(level.superslasher.initial_weak_spot.weak_spot_model,param_00);
 	}
 }
 
-//Function Number: 30
-initial_weak_spot_damage_monitor(param_00,param_01)
-{
+initial_weak_spot_damage_monitor(param_00,param_01) {
 	param_00 endon("death");
 	param_00.health = 9999999;
 	param_00 setcandamage(1);
-	for(;;)
-	{
+	for(;;) {
 		param_00 waittill("damage",var_02,var_03,var_04,var_05);
 		param_00.health = 9999999;
-		if(isdefined(var_03))
-		{
-			if(var_03 == level.superslasher)
-			{
+		if(isdefined(var_03)) {
+			if(var_03 == level.superslasher) {
 				continue;
 			}
 
-			if(!isplayer(var_03))
-			{
+			if(!isplayer(var_03)) {
 				continue;
 			}
 
@@ -519,8 +415,7 @@ initial_weak_spot_damage_monitor(param_00,param_01)
 		}
 	}
 
-	foreach(var_08 in level.players)
-	{
+	foreach(var_08 in level.players) {
 		var_08.unlimited_rave = 0;
 		scripts\cp\maps\cp_rave\cp_rave::exit_rave_mode(var_08);
 	}
@@ -533,21 +428,16 @@ initial_weak_spot_damage_monitor(param_00,param_01)
 	param_00 delete();
 }
 
-//Function Number: 31
-deactivate_initial_weak_spot(param_00)
-{
+deactivate_initial_weak_spot(param_00) {
 	set_memory_trap_state(param_00.memory_trap_vfx_ent,"idle");
-	if(isdefined(level.superslasher.initial_weak_spot))
-	{
+	if(isdefined(level.superslasher.initial_weak_spot)) {
 		level.superslasher.initial_weak_spot.weak_spot_model delete();
 		level.superslasher.initial_weak_spot.weak_spot_vfx_ent delete();
 		level.superslasher.initial_weak_spot = undefined;
 	}
 }
 
-//Function Number: 32
-slasher_weakspot_phase(param_00)
-{
+slasher_weakspot_phase(param_00) {
 	self.bmaystomp = 1;
 	self.bmayjumpattack = 1;
 	self.bmayfrisbee = 0;
@@ -558,9 +448,7 @@ slasher_weakspot_phase(param_00)
 	self.animratescale = 1.1 + min(param_00,3) * 0.15;
 }
 
-//Function Number: 33
-reg_weak_spots()
-{
+reg_weak_spots() {
 	level.super_slasher_weak_spots = [];
 	register_memory_weak_spot("tag_chest_le",(0,0,0),(3,0,0),(90,0,0));
 	register_memory_weak_spot("tag_chest_ri",(0,0,0),(3,0,0),(90,0,0));
@@ -572,9 +460,7 @@ reg_weak_spots()
 	register_memory_weak_spot("tag_shoulder1_ri",(0,0,0),(3,0,0),(90,0,0));
 }
 
-//Function Number: 34
-register_memory_weak_spot(param_00,param_01,param_02,param_03)
-{
+register_memory_weak_spot(param_00,param_01,param_02,param_03) {
 	var_04 = spawnstruct();
 	var_04.tag_name = param_00;
 	var_04.damage_model_offset = param_01;
@@ -583,15 +469,11 @@ register_memory_weak_spot(param_00,param_01,param_02,param_03)
 	level.super_slasher_weak_spots[param_00] = var_04;
 }
 
-//Function Number: 35
-activate_weak_spots(param_00)
-{
+activate_weak_spots(param_00) {
 	param_00 endon("death");
 	var_01 = get_potential_weak_spot_tags();
-	for(var_02 = 0;var_02 < var_01.size;var_02++)
-	{
-		if(var_02 > 0)
-		{
+	for(var_02 = 0;var_02 < var_01.size;var_02++) {
+		if(var_02 > 0) {
 			wait(5);
 		}
 
@@ -602,8 +484,7 @@ activate_weak_spots(param_00)
 	param_00 scripts\aitypes\superslasher\util::forcetrapped(6);
 	wait(6);
 	delete_fight_stage_vfx(param_00.fight_round);
-	if(param_00.fight_round == 3)
-	{
+	if(param_00.fight_round == 3) {
 		switch_to_sad_face(param_00);
 		slasher_abilities_final();
 		return;
@@ -611,24 +492,19 @@ activate_weak_spots(param_00)
 
 	param_00.bmayshockwave = 1;
 	param_00 scripts\aitypes\superslasher\util::requestshockwave();
-	if(distance2dsquared(param_00.origin,level.superslashergotogroundspot) > 4096)
-	{
+	if(distance2dsquared(param_00.origin,level.superslashergotogroundspot) > 4096) {
 		param_00 scripts\aitypes\superslasher\util::dosawsharks();
 	}
 }
 
-//Function Number: 36
-complete_weak_spot(param_00,param_01,param_02)
-{
+complete_weak_spot(param_00,param_01,param_02) {
 	var_03 = set_up_weak_spot(param_00,param_01,"memory_weak_spot");
 	var_03.weak_spot_model weak_spot_damage_monitor(var_03.weak_spot_model,param_01,900 * level.players.size,param_02);
 	var_03.weak_spot_model delete();
 	var_03.weak_spot_vfx_ent delete();
 }
 
-//Function Number: 37
-set_up_weak_spot(param_00,param_01,param_02)
-{
+set_up_weak_spot(param_00,param_01,param_02) {
 	var_03 = level.super_slasher_weak_spots[param_00];
 	var_04 = var_03.tag_name;
 	var_05 = param_01 gettagorigin(var_04);
@@ -648,26 +524,20 @@ set_up_weak_spot(param_00,param_01,param_02)
 	return var_08;
 }
 
-//Function Number: 38
-weak_spot_damage_monitor(param_00,param_01,param_02,param_03)
-{
+weak_spot_damage_monitor(param_00,param_01,param_02,param_03) {
 	param_00 endon("death");
 	param_00.health = 9999999;
 	param_00 setcandamage(1);
 	param_00.fake_health = param_02;
-	for(;;)
-	{
+	for(;;) {
 		param_00 waittill("damage",var_04,var_05,var_06,var_07);
 		param_00.health = 9999999;
-		if(isdefined(var_05))
-		{
-			if(var_05 == param_01)
-			{
+		if(isdefined(var_05)) {
+			if(var_05 == param_01) {
 				continue;
 			}
 
-			if(!isplayer(var_05))
-			{
+			if(!isplayer(var_05)) {
 				continue;
 			}
 
@@ -675,31 +545,24 @@ weak_spot_damage_monitor(param_00,param_01,param_02,param_03)
 			playfx(level._effect[param_03],var_07,var_08);
 			playsoundatpos(param_00.origin,"superslasher_pain_magic_hits");
 			param_00.fake_health = param_00.fake_health - var_04;
-			if(param_00.fake_health <= 0)
-			{
+			if(param_00.fake_health <= 0) {
 				break;
 			}
 		}
 	}
 }
 
-//Function Number: 39
-get_potential_weak_spot_tags()
-{
+get_potential_weak_spot_tags() {
 	var_00 = ["tag_chest_le","tag_chest_ri","tag_thigh_le","tag_thigh_ri","tag_shoulder1_le","tag_shoulder1_ri","tag_shoulder2_le","tag_shoulder2_ri"];
 	return scripts\engine\utility::array_randomize(var_00);
 }
 
-//Function Number: 40
-get_weak_spot_hit_vfx_index(param_00)
-{
+get_weak_spot_hit_vfx_index(param_00) {
 	var_01 = ["weak_spot_J_hit","weak_spot_A_hit","weak_spot_Y_hit","weak_spot_M_hit","weak_spot_E_hit","weak_spot_W_hit","weak_spot_E_hit","weak_spot_S_hit"];
 	return var_01[param_00];
 }
 
-//Function Number: 41
-slasher_abilities_final()
-{
+slasher_abilities_final() {
 	self.bmaystomp = 1;
 	self.bmayjumpattack = 1;
 	self.bmayfrisbee = 0;
@@ -710,9 +573,7 @@ slasher_abilities_final()
 	self.var_E0 = 0;
 }
 
-//Function Number: 42
-slasher_abilities_collection(param_00)
-{
+slasher_abilities_collection(param_00) {
 	self.bmaystomp = 1;
 	self.bmayjumpattack = 1;
 	self.bmayfrisbee = 0;
@@ -721,9 +582,7 @@ slasher_abilities_collection(param_00)
 	self.bmayshark = 0;
 }
 
-//Function Number: 43
-soul_collection_sequence_init()
-{
+soul_collection_sequence_init() {
 	scripts\engine\utility::flag_init("charm_sequence_complete");
 	scripts\engine\utility::flag_init("max_ammo_active");
 	var_00 = (-5083,3909,-89);
@@ -745,11 +604,8 @@ soul_collection_sequence_init()
 	self.animratescale = 1.1;
 }
 
-//Function Number: 44
-soul_collection_sequence()
-{
-	foreach(var_01 in level.players)
-	{
+soul_collection_sequence() {
+	foreach(var_01 in level.players) {
 		var_01.unlimited_rave = 1;
 		scripts\cp\maps\cp_rave\cp_rave::enter_rave_mode(var_01);
 	}
@@ -765,19 +621,14 @@ soul_collection_sequence()
 	level thread delay_change_spawn_loc();
 }
 
-//Function Number: 45
-delay_change_spawn_loc()
-{
+delay_change_spawn_loc() {
 	level endon("game_ended");
 	wait(5);
 	set_zombie_spawning_parameters("continuous",999999,1,0.05,"near_player","generic_zombie");
 }
 
-//Function Number: 46
-register_soul_collection_loc(param_00,param_01)
-{
-	if(!isdefined(level.soul_collection_locs))
-	{
+register_soul_collection_loc(param_00,param_01) {
+	if(!isdefined(level.soul_collection_locs)) {
 		level.soul_collection_locs = [];
 	}
 
@@ -787,21 +638,16 @@ register_soul_collection_loc(param_00,param_01)
 	level.soul_collection_locs[level.soul_collection_locs.size] = var_02;
 }
 
-//Function Number: 47
-activate_soul_collection_locs()
-{
+activate_soul_collection_locs() {
 	level.soul_collection_models = [];
 	var_00 = level.players.size;
-	for(var_01 = 0;var_01 <= var_00;var_01++)
-	{
+	for(var_01 = 0;var_01 <= var_00;var_01++) {
 		activate_soul_collection_loc(level.soul_collection_locs[var_01]);
 		scripts\engine\utility::waitframe();
 	}
 }
 
-//Function Number: 48
-activate_soul_collection_loc(param_00)
-{
+activate_soul_collection_loc(param_00) {
 	var_01 = spawn("script_model",param_00.pos);
 	var_01 setmodel(param_00.model);
 	var_01 thread item_keep_rotating(var_01);
@@ -811,32 +657,25 @@ activate_soul_collection_loc(param_00)
 	level.soul_collection_models[level.soul_collection_models.size] = var_01;
 }
 
-//Function Number: 49
-item_keep_rotating(param_00)
-{
+item_keep_rotating(param_00) {
 	param_00 endon("death");
 	var_01 = param_00.angles;
-	for(;;)
-	{
+	for(;;) {
 		param_00 rotateto(var_01 + (randomintrange(-40,40),randomintrange(-40,90),randomintrange(-40,90)),3);
 		wait(3);
 	}
 }
 
-//Function Number: 50
-soul_collection_monitor(param_00)
-{
+soul_collection_monitor(param_00) {
 	param_00 endon("death");
 	level endon("charm_sequence_complete");
 	set_coll_state(param_00,"none");
 	param_00.soul_collected = 0;
-	for(;;)
-	{
+	for(;;) {
 		param_00 waittill("soul_collected");
 		update_soul_collected(param_00,1);
 		move_up(param_00);
-		if(all_soul_charm_full())
-		{
+		if(all_soul_charm_full()) {
 			level thread mem_trap_seq();
 			continue;
 		}
@@ -845,9 +684,7 @@ soul_collection_monitor(param_00)
 	}
 }
 
-//Function Number: 51
-mem_trap_seq()
-{
+mem_trap_seq() {
 	level.superslasher scripts\asm\superslasher\superslasher_actions::stopwireattack();
 	level.superslasher slasher_abilities_trap(level.superslasher.fight_round);
 	try_drop_max_ammo();
@@ -861,15 +698,11 @@ mem_trap_seq()
 	activate_trap_trigger(var_00);
 }
 
-//Function Number: 52
-vfx_point_to_trap(param_00)
-{
+vfx_point_to_trap(param_00) {
 	var_01 = param_00.memory_trap_loc;
 	var_02 = int(60);
-	for(var_03 = 0;var_03 < var_02;var_03++)
-	{
-		foreach(var_05 in level.soul_collection_models)
-		{
+	for(var_03 = 0;var_03 < var_02;var_03++) {
+		foreach(var_05 in level.soul_collection_models) {
 			var_06 = var_05.origin;
 			var_07 = var_01 - var_06;
 			var_08 = vectortoangles(var_07);
@@ -880,41 +713,29 @@ vfx_point_to_trap(param_00)
 	}
 }
 
-//Function Number: 53
-charm_fly_to_trap_loc(param_00)
-{
+charm_fly_to_trap_loc(param_00) {
 	var_01 = param_00.memory_trap_loc;
-	foreach(var_03 in level.soul_collection_models)
-	{
+	foreach(var_03 in level.soul_collection_models) {
 		var_03 moveto(var_01,1.5);
 	}
 
 	wait(1.5);
-	foreach(var_03 in level.soul_collection_models)
-	{
-		if(isdefined(var_03))
-		{
+	foreach(var_03 in level.soul_collection_models) {
+		if(isdefined(var_03)) {
 			var_03 delete();
 		}
 	}
 }
 
-//Function Number: 54
-turn_off_charm_state_vfx()
-{
-	foreach(var_01 in level.soul_collection_models)
-	{
+turn_off_charm_state_vfx() {
+	foreach(var_01 in level.soul_collection_models) {
 		set_coll_state(var_01,"none");
 	}
 }
 
-//Function Number: 55
-all_soul_charm_full()
-{
-	foreach(var_01 in level.soul_collection_models)
-	{
-		if(var_01.current_collection_state != "full")
-		{
+all_soul_charm_full() {
+	foreach(var_01 in level.soul_collection_models) {
+		if(var_01.current_collection_state != "full") {
 			return 0;
 		}
 	}
@@ -922,17 +743,13 @@ all_soul_charm_full()
 	return 1;
 }
 
-//Function Number: 56
-update_soul_collected(param_00,param_01)
-{
+update_soul_collected(param_00,param_01) {
 	param_00.soul_collected = clamp(param_00.soul_collected + param_01,0,30);
 	var_02 = get_new_coll_state(param_00.soul_collected);
 	set_coll_state(param_00,var_02);
 }
 
-//Function Number: 57
-soul_deplete_mon(param_00)
-{
+soul_deplete_mon(param_00) {
 	param_00 notify("soul_deplete_mon");
 	level endon("charm_sequence_complete");
 	param_00 endon("death");
@@ -941,91 +758,71 @@ soul_deplete_mon(param_00)
 	var_01 = 20;
 	var_02 = var_01 / 30;
 	var_03 = param_00.soul_collected;
-	for(var_04 = 0;var_04 < var_03;var_04++)
-	{
+	for(var_04 = 0;var_04 < var_03;var_04++) {
 		param_00 moveto(param_00.origin - (0,0,var_01),var_02);
 		param_00 waittill("movedone");
 		update_soul_collected(param_00,-1);
 	}
 }
 
-//Function Number: 58
-move_up(param_00)
-{
+move_up(param_00) {
 	var_01 = int(20);
 	var_02 = param_00.original_pos + (0,0,var_01) * param_00.soul_collected;
-	if(param_00.origin != var_02)
-	{
+	if(param_00.origin != var_02) {
 		var_03 = abs(var_02[2] - param_00.origin[2]) / 60;
 		param_00 moveto(var_02,var_03,var_03 / 2,var_03 / 2);
 	}
 }
 
-//Function Number: 59
-get_new_coll_state(param_00)
-{
+get_new_coll_state(param_00) {
 	var_01 = int(15);
-	if(param_00 == 30)
-	{
+	if(param_00 == 30) {
 		return "full";
 	}
 
-	if(param_00 < 30 && param_00 >= var_01)
-	{
+	if(param_00 < 30 && param_00 >= var_01) {
 		return "medium";
 	}
 
-	if(param_00 < var_01 && param_00 > 0)
-	{
+	if(param_00 < var_01 && param_00 > 0) {
 		return "small";
 	}
 
 	return "none";
 }
 
-//Function Number: 60
-set_coll_state(param_00,param_01)
-{
-	if(!isdefined(param_00.current_collection_state))
-	{
+set_coll_state(param_00,param_01) {
+	if(!isdefined(param_00.current_collection_state)) {
 		param_00.current_collection_state = "";
 	}
 
-	if(param_00.current_collection_state == param_01)
-	{
+	if(param_00.current_collection_state == param_01) {
 		return;
 	}
 
 	param_00 setscriptablepartstate("fx",param_01);
-	if(isdefined(param_00.current_state_vfx))
-	{
+	if(isdefined(param_00.current_state_vfx)) {
 		param_00.current_state_vfx delete();
 	}
 
 	param_00.current_collection_state = param_01;
-	if(param_01 != "none")
-	{
+	if(param_01 != "none") {
 		param_00.current_state_vfx = spawnfx(level._effect["soul_charm_beam_" + param_01],param_00.original_pos,(1,0,0),(0,0,1));
 		triggerfx(param_00.current_state_vfx);
 	}
 }
 
-//Function Number: 61
-zom_die_soul_mon()
-{
+zom_die_soul_mon() {
 	level endon("charm_sequence_complete");
 	level.soul_charm_queue = [];
 	level.cp_rave_zombie_death_pos_record_func = ::add_to_zombie_death_pos_record;
-	for(;;)
-	{
-		if(level.soul_charm_queue.size > 0)
-		{
+	for(;;) {
+		if(level.soul_charm_queue.size > 0) {
 			var_00 = level.soul_charm_queue[0];
 			level.soul_charm_queue = scripts\engine\utility::array_remove(level.soul_charm_queue,var_00);
 			var_01 = var_00.pos;
 			var_02 = scripts\engine\utility::getclosest(var_01,level.soul_collection_models);
-			if(distance2dsquared(var_01,var_02.origin) <= 250000)
-			{
+			if(distance2dsquared(var_01,var_02.origin) <= 250000) {
 				level thread soul_fly_charm(var_01,var_02);
 			}
 
@@ -1037,34 +834,27 @@ zom_die_soul_mon()
 	}
 }
 
-//Function Number: 62
-add_to_zombie_death_pos_record(param_00)
-{
+add_to_zombie_death_pos_record(param_00) {
 	var_01 = spawnstruct();
 	var_01.pos = param_00;
 	level.soul_charm_queue[level.soul_charm_queue.size] = var_01;
 }
 
-//Function Number: 63
-soul_fly_charm(param_00,param_01)
-{
+soul_fly_charm(param_00,param_01) {
 	var_02 = spawn("script_model",param_00);
 	var_02 setmodel("tag_origin_soultrail");
-	for(;;)
-	{
+	for(;;) {
 		var_03 = param_01.origin;
 		var_04 = var_02.origin;
 		var_05 = distance(var_04,var_03);
 		var_06 = var_05 / 600;
-		if(var_06 < 0.05)
-		{
+		if(var_06 < 0.05) {
 			var_06 = 0.05;
 		}
 
 		var_02 moveto(var_03,var_06);
 		wait(0.05);
-		if(isdefined(param_01) && distancesquared(var_02.origin,param_01.origin) > 256)
-		{
+		if(isdefined(param_01) && distancesquared(var_02.origin,param_01.origin) > 256) {
 			continue;
 		}
 		else
@@ -1077,36 +867,28 @@ soul_fly_charm(param_00,param_01)
 	var_02 delete();
 }
 
-//Function Number: 64
-slasher_abilities_trap(param_00)
-{
+slasher_abilities_trap(param_00) {
 	self.bmayshockwave = 0;
 	self.bmayfrisbee = 0;
 }
 
-//Function Number: 65
-summon_a_zombie_at(param_00,param_01)
-{
+summon_a_zombie_at(param_00,param_01) {
 	param_00 = scripts\engine\utility::drop_to_ground(param_00,30,-100);
 	var_02 = spawnstruct();
 	var_02.origin = param_00;
 	var_02.script_parameters = "ground_spawn_no_boards";
 	var_02.script_animation = "spawn_ground";
 	var_03 = var_02 scripts\cp\zombies\zombies_spawning::spawn_wave_enemy(get_spawn_type(),1);
-	if(isdefined(var_03))
-	{
+	if(isdefined(var_03)) {
 		var_03.dont_cleanup = 1;
 		var_03 thread play_intro(var_03,param_00,param_01);
 		return var_03;
 	}
 }
 
-//Function Number: 66
-play_intro(param_00,param_01,param_02)
-{
+play_intro(param_00,param_01,param_02) {
 	var_03 = (0,0,-11);
-	if(scripts\engine\utility::istrue(param_02))
-	{
+	if(scripts\engine\utility::istrue(param_02)) {
 		param_00 scragentsetanimscale(0,1);
 	}
 
@@ -1115,8 +897,7 @@ play_intro(param_00,param_01,param_02)
 	playsoundatpos(param_01 + var_03,"zmb_superslasher_summon_activate");
 	var_05 = thread scripts\engine\utility::play_loopsound_in_space("zmb_superslasher_summon_activate_lp",param_01 + var_03);
 	param_00 scripts\engine\utility::waittill_any_3("death","intro_vignette_done");
-	if(scripts\engine\utility::istrue(param_02) && isdefined(param_00))
-	{
+	if(scripts\engine\utility::istrue(param_02) && isdefined(param_00)) {
 		param_00 scragentsetanimscale(1,1);
 	}
 
@@ -1128,42 +909,32 @@ play_intro(param_00,param_01,param_02)
 	var_05 delete();
 }
 
-//Function Number: 67
-unlimited_zombie_spawn()
-{
+unlimited_zombie_spawn() {
 	level endon("stop_unlimited_spawn");
 	scripts\engine\utility::flag_init("stop_unlimited_spawn");
 	scripts\engine\utility::flag_init("start_unlimited_spawn");
 	scripts\engine\utility::flag_wait("start_unlimited_spawn");
-	for(;;)
-	{
+	for(;;) {
 		spawn_up_to_goal();
 		wait_clear_wave();
 		wait(get_wait_between_wave());
 	}
 }
 
-//Function Number: 68
-stop_spawn_wave()
-{
+stop_spawn_wave() {
 	scripts\engine\utility::flag_set("pause_wave_progression");
 	level.zombies_paused = 1;
 	level.dont_resume_wave_after_solo_afterlife = 1;
 }
 
-//Function Number: 69
-resume_spawn_wave()
-{
+resume_spawn_wave() {
 	level.dont_resume_wave_after_solo_afterlife = undefined;
 	level.zombies_paused = 0;
 	scripts\engine\utility::flag_clear("pause_wave_progression");
 }
 
-//Function Number: 70
-clear_existing_enemies()
-{
-	foreach(var_01 in level.spawned_enemies)
-	{
+clear_existing_enemies() {
+	foreach(var_01 in level.spawned_enemies) {
 		var_01.died_poorly = 1;
 		var_01.nocorpse = 1;
 		var_01 suicide();
@@ -1172,17 +943,13 @@ clear_existing_enemies()
 	scripts\engine\utility::waitframe();
 }
 
-//Function Number: 71
-spawn_up_to_goal()
-{
+spawn_up_to_goal() {
 	var_00 = get_num_of_zombies_to_spawn();
 	var_01 = 0;
-	while(var_01 < var_00)
-	{
+	while(var_01 < var_00) {
 		var_02 = level thread summon_a_zombie_at(get_zombie_spawn_spot(),1);
 		wait(get_wait_between_spawn());
-		if(isdefined(var_02))
-		{
+		if(isdefined(var_02)) {
 			var_01++;
 			var_02.dont_cleanup = 1;
 			continue;
@@ -1193,15 +960,10 @@ spawn_up_to_goal()
 	}
 }
 
-//Function Number: 72
-wait_clear_wave()
-{
-	if(get_spawn_mode() == "wave")
-	{
-		for(;;)
-		{
-			if(level.current_num_spawned_enemies == 0)
-			{
+wait_clear_wave() {
+	if(get_spawn_mode() == "wave") {
+		for(;;) {
+			if(level.current_num_spawned_enemies == 0) {
 				break;
 			}
 
@@ -1210,34 +972,26 @@ wait_clear_wave()
 	}
 }
 
-//Function Number: 73
-reg_spawns()
-{
+reg_spawns() {
 	level.super_slasher_zombie_spawn_loc = scripts\engine\utility::getstructarray("super_slasher_zombie_spawn_loc","script_noteworthy");
 	var_00 = gettime();
-	foreach(var_02 in level.super_slasher_zombie_spawn_loc)
-	{
+	foreach(var_02 in level.super_slasher_zombie_spawn_loc) {
 		var_02.previous_used_time_stamp = var_00;
 	}
 }
 
-//Function Number: 74
-get_close_zom_spawn(param_00)
-{
+get_close_zom_spawn(param_00) {
 	var_01 = 4000;
 	var_02 = 360000;
 	var_03 = sortbydistance(level.super_slasher_zombie_spawn_loc,param_00);
 	var_04 = var_03[0];
 	var_05 = gettime();
-	foreach(var_07 in var_03)
-	{
-		if(distance2dsquared(param_00,var_07.origin) < var_02)
-		{
+	foreach(var_07 in var_03) {
+		if(distance2dsquared(param_00,var_07.origin) < var_02) {
 			continue;
 		}
 
-		if(var_07.previous_used_time_stamp + var_01 < var_05)
-		{
+		if(var_07.previous_used_time_stamp + var_01 < var_05) {
 			var_07.previous_used_time_stamp = var_05;
 			var_04 = var_07;
 			break;
@@ -1247,15 +1001,11 @@ get_close_zom_spawn(param_00)
 	return var_04.origin;
 }
 
-//Function Number: 75
-get_zombie_spawn_spot()
-{
-	switch(get_zombie_spawn_location())
-	{
+get_zombie_spawn_spot() {
+	switch(get_zombie_spawn_location()) {
 		case "near_player":
 			var_00 = get_random_available_player();
-			if(isdefined(var_00))
-			{
+			if(isdefined(var_00)) {
 				return get_close_zom_spawn(var_00.origin);
 			}
 			else
@@ -1268,8 +1018,7 @@ get_zombie_spawn_spot()
 
 		case "shockwave":
 			var_02 = get_least_targeted_player();
-			if(isdefined(var_02))
-			{
+			if(isdefined(var_02)) {
 				return get_spawn_shockwave(var_02);
 			}
 			else
@@ -1286,19 +1035,14 @@ get_zombie_spawn_spot()
 	}
 }
 
-//Function Number: 76
-get_least_targeted_player()
-{
+get_least_targeted_player() {
 	var_00 = gettime();
-	foreach(var_02 in level.players)
-	{
-		if(scripts\cp\cp_laststand::player_in_laststand(var_02))
-		{
+	foreach(var_02 in level.players) {
+		if(scripts\cp\cp_laststand::player_in_laststand(var_02)) {
 			continue;
 		}
 
-		if(!isdefined(var_02.last_shockwave_spawn_target_time))
-		{
+		if(!isdefined(var_02.last_shockwave_spawn_target_time)) {
 			var_02.last_shockwave_spawn_target_time = var_00;
 			return var_02;
 		}
@@ -1306,22 +1050,18 @@ get_least_targeted_player()
 
 	var_04 = 999999999;
 	var_05 = undefined;
-	foreach(var_02 in level.players)
-	{
-		if(scripts\cp\cp_laststand::player_in_laststand(var_02))
-		{
+	foreach(var_02 in level.players) {
+		if(scripts\cp\cp_laststand::player_in_laststand(var_02)) {
 			continue;
 		}
 
-		if(var_02.last_shockwave_spawn_target_time < var_04)
-		{
+		if(var_02.last_shockwave_spawn_target_time < var_04) {
 			var_04 = var_02.last_shockwave_spawn_target_time;
 			var_05 = var_02;
 		}
 	}
 
-	if(isdefined(var_05))
-	{
+	if(isdefined(var_05)) {
 		var_05.last_shockwave_spawn_target_time = var_00;
 		return var_05;
 	}
@@ -1329,11 +1069,8 @@ get_least_targeted_player()
 	return undefined;
 }
 
-//Function Number: 77
-get_spawn_shockwave(param_00)
-{
-	if(isdefined(param_00.super_slasher_shockwave_safe_area) && function_010F(param_00.origin,param_00.super_slasher_shockwave_safe_area))
-	{
+get_spawn_shockwave(param_00) {
+	if(isdefined(param_00.super_slasher_shockwave_safe_area) && function_010F(param_00.origin,param_00.super_slasher_shockwave_safe_area)) {
 		var_01 = scripts\engine\utility::getstructarray(param_00.super_slasher_shockwave_safe_area.target,"targetname");
 		var_02 = scripts\engine\utility::random(var_01);
 		return var_02.origin;
@@ -1342,14 +1079,10 @@ get_spawn_shockwave(param_00)
 	return get_close_zom_spawn(var_02.origin);
 }
 
-//Function Number: 78
-get_random_available_player()
-{
+get_random_available_player() {
 	var_00 = [];
-	foreach(var_02 in level.players)
-	{
-		if(scripts\cp\cp_laststand::player_in_laststand(var_02))
-		{
+	foreach(var_02 in level.players) {
+		if(scripts\cp\cp_laststand::player_in_laststand(var_02)) {
 			continue;
 		}
 
@@ -1359,18 +1092,14 @@ get_random_available_player()
 	return scripts\engine\utility::random(var_00);
 }
 
-//Function Number: 79
-activate_super_slasher_barrier(param_00)
-{
+activate_super_slasher_barrier(param_00) {
 	level endon("game_ended");
-	if(!isdefined(level.active_super_slasher_barrierfunc_list))
-	{
+	if(!isdefined(level.active_super_slasher_barrierfunc_list)) {
 		level.active_super_slasher_barrierfunc_list = [];
 	}
 
 	var_01 = getent("super_slasher_barrier_" + param_00,"targetname");
-	if(isdefined(var_01))
-	{
+	if(isdefined(var_01)) {
 		var_02 = var_01.origin;
 		var_03 = (var_02[0],var_02[1],var_02[2] - 1024);
 		var_01 moveto(var_03,0.05);
@@ -1381,8 +1110,7 @@ activate_super_slasher_barrier(param_00)
 	var_01.barrier_models = [];
 	play_barrier_sfx(param_00);
 	var_04 = scripts\engine\utility::getstructarray(var_01.target,"targetname");
-	foreach(var_06 in var_04)
-	{
+	foreach(var_06 in var_04) {
 		var_01 thread barrier_deploy_sequence(var_01,var_06);
 		scripts\engine\utility::waitframe();
 	}
@@ -1390,12 +1118,9 @@ activate_super_slasher_barrier(param_00)
 	level.active_super_slasher_barrierfunc_list[level.active_super_slasher_barrierfunc_list.size] = param_00;
 }
 
-//Function Number: 80
-play_barrier_sfx(param_00)
-{
+play_barrier_sfx(param_00) {
 	var_01 = undefined;
-	switch(param_00)
-	{
+	switch(param_00) {
 		case 1:
 			var_01 = (-4265,4876,-89);
 			break;
@@ -1416,9 +1141,7 @@ play_barrier_sfx(param_00)
 	playsoundatpos(var_01,"superslasher_barrier_spawn_lr");
 }
 
-//Function Number: 81
-barrier_deploy_sequence(param_00,param_01)
-{
+barrier_deploy_sequence(param_00,param_01) {
 	playfx(level._effect["punji_tell"],param_01.origin,anglestoforward(param_01.angles),anglestoup(param_01.angles));
 	wait(2);
 	var_02 = spawn("script_model",param_01.origin + (0,0,-60));
@@ -1428,17 +1151,13 @@ barrier_deploy_sequence(param_00,param_01)
 	param_00.barrier_models[param_00.barrier_models.size] = var_02;
 }
 
-//Function Number: 82
-deactivate_super_slasher_barrier(param_00)
-{
-	if(!scripts\engine\utility::array_contains(level.active_super_slasher_barrierfunc_list,param_00))
-	{
+deactivate_super_slasher_barrier(param_00) {
+	if(!scripts\engine\utility::array_contains(level.active_super_slasher_barrierfunc_list,param_00)) {
 		return;
 	}
 
 	var_01 = getent("super_slasher_barrier_" + param_00,"targetname");
-	if(isdefined(var_01))
-	{
+	if(isdefined(var_01)) {
 		var_02 = var_01.origin;
 		var_03 = (var_02[0],var_02[1],var_02[2] + 1024);
 		var_01 moveto(var_03,0.05);
@@ -1446,8 +1165,7 @@ deactivate_super_slasher_barrier(param_00)
 		var_01 connectpaths();
 	}
 
-	foreach(var_05 in var_01.barrier_models)
-	{
+	foreach(var_05 in var_01.barrier_models) {
 		var_05 thread barrier_destroy_sequence(var_05);
 		scripts\engine\utility::waitframe();
 	}
@@ -1456,31 +1174,23 @@ deactivate_super_slasher_barrier(param_00)
 	level.active_super_slasher_barrierfunc_list = scripts\engine\utility::array_remove(level.active_super_slasher_barrierfunc_list,param_00);
 }
 
-//Function Number: 83
-barrier_destroy_sequence(param_00)
-{
+barrier_destroy_sequence(param_00) {
 	playfx(level._effect["punji_subside"],param_00.origin);
 	wait(2);
 	param_00 delete();
 }
 
-//Function Number: 84
-deactivate_all_super_slasher_barriers()
-{
-	if(!isdefined(level.active_super_slasher_barrierfunc_list))
-	{
+deactivate_all_super_slasher_barriers() {
+	if(!isdefined(level.active_super_slasher_barrierfunc_list)) {
 		return;
 	}
 
-	foreach(var_01 in level.active_super_slasher_barrierfunc_list)
-	{
+	foreach(var_01 in level.active_super_slasher_barrierfunc_list) {
 		deactivate_super_slasher_barrier(var_01);
 	}
 }
 
-//Function Number: 85
-set_zombie_spawning_parameters(param_00,param_01,param_02,param_03,param_04,param_05)
-{
+set_zombie_spawning_parameters(param_00,param_01,param_02,param_03,param_04,param_05) {
 	var_06 = spawnstruct();
 	var_06.spawn_mode = param_00;
 	var_06.num_of_zombies_to_spawn = param_01;
@@ -1491,48 +1201,33 @@ set_zombie_spawning_parameters(param_00,param_01,param_02,param_03,param_04,para
 	level.slasher_spawning = var_06;
 }
 
-//Function Number: 86
-get_num_of_zombies_to_spawn()
-{
+get_num_of_zombies_to_spawn() {
 	return level.slasher_spawning.num_of_zombies_to_spawn;
 }
 
-//Function Number: 87
-get_zombie_spawn_location()
-{
+get_zombie_spawn_location() {
 	return level.slasher_spawning.spawn_location;
 }
 
-//Function Number: 88
-get_wait_between_spawn()
-{
+get_wait_between_spawn() {
 	return level.slasher_spawning.wait_between_spawn;
 }
 
-//Function Number: 89
-get_wait_between_wave()
-{
+get_wait_between_wave() {
 	return level.slasher_spawning.wait_between_wave;
 }
 
-//Function Number: 90
-get_spawn_mode()
-{
+get_spawn_mode() {
 	return level.slasher_spawning.spawn_mode;
 }
 
-//Function Number: 91
-get_spawn_type()
-{
+get_spawn_type() {
 	return level.slasher_spawning.spawn_type;
 }
 
-//Function Number: 92
-kill_off_existing_zombies()
-{
+kill_off_existing_zombies() {
 	var_00 = scripts\cp\cp_agent_utils::getaliveagentsofteam("axis");
-	foreach(var_02 in var_00)
-	{
+	foreach(var_02 in var_00) {
 		var_02.precacheleaderboards = 1;
 		var_02.is_burning = 1;
 		var_02.nocorpse = undefined;
@@ -1541,71 +1236,53 @@ kill_off_existing_zombies()
 	}
 }
 
-//Function Number: 93
-try_drop_max_ammo()
-{
+try_drop_max_ammo() {
 	var_00 = (-5181,4623,-103);
-	if(!scripts\engine\utility::flag("max_ammo_active"))
-	{
+	if(!scripts\engine\utility::flag("max_ammo_active")) {
 		scripts\engine\utility::flag_set("max_ammo_active");
-		level thread [[ level.drop_max_ammo_func ]](var_00,undefined,"ammo_max");
+		level thread [[level.drop_max_ammo_func]](var_00,undefined,"ammo_max");
 	}
 }
 
-//Function Number: 94
-max_ammo_manager()
-{
+max_ammo_manager() {
 	level thread unlimited_max_ammo();
 	level thread max_ammo_pick_up_listener();
 }
 
-//Function Number: 95
-unlimited_max_ammo()
-{
+unlimited_max_ammo() {
 	level endon("game_ended");
 	level endon("super_slasher_fight_complete");
 	var_00 = 360;
-	for(;;)
-	{
+	for(;;) {
 		wait(var_00);
 		try_drop_max_ammo();
 	}
 }
 
-//Function Number: 96
-max_ammo_pick_up_listener()
-{
+max_ammo_pick_up_listener() {
 	level endon("game_ended");
 	level endon("super_slasher_fight_complete");
-	for(;;)
-	{
+	for(;;) {
 		level waittill("pick_up_max_ammo");
 		scripts\engine\utility::flag_clear("max_ammo_active");
 	}
 }
 
-//Function Number: 97
-put_on_happy_face(param_00)
-{
+put_on_happy_face(param_00) {
 	level endon("game_ended");
 	param_00 endon("death");
 	wait(0.1);
 	playfxontag(level._effect["happy_face"],param_00,"j_head");
 }
 
-//Function Number: 98
-switch_to_sad_face(param_00)
-{
+switch_to_sad_face(param_00) {
 	stopfxontag(level._effect["happy_face"],param_00,"j_head");
 	playfxontag(level._effect["sad_face"],param_00,"j_head");
 }
 
-//Function Number: 99
-drop_soul_key()
-{
+drop_soul_key() {
 	var_00 = (-4880,4710,-87);
-	if(isdefined(level.soul_key_drop_pos))
-	{
+	if(isdefined(level.soul_key_drop_pos)) {
 		var_00 = level.soul_key_drop_pos;
 	}
 
@@ -1617,22 +1294,17 @@ drop_soul_key()
 	var_01 thread soul_key_pick_up_monitor(var_01,var_02);
 }
 
-//Function Number: 100
-soul_key_pick_up_monitor(param_00,param_01)
-{
+soul_key_pick_up_monitor(param_00,param_01) {
 	param_00 endon("death");
 	param_00 makeusable();
 	param_00 sethintstring(&"CP_RAVE_PICK_UP_SOUL_KEY");
-	for(;;)
-	{
+	for(;;) {
 		param_00 waittill("trigger",var_02);
-		if(isplayer(var_02))
-		{
+		if(isplayer(var_02)) {
 			stop_spawn_wave();
 			var_02 playlocalsound("part_pickup");
 			scripts\cp\zombies\directors_cut::give_dc_player_extra_xp_for_carrying_newb();
-			foreach(var_02 in level.players)
-			{
+			foreach(var_02 in level.players) {
 				var_02 setplayerdata("cp","haveSoulKeys","any_soul_key",1);
 				var_02 setplayerdata("cp","haveSoulKeys","soul_key_2",1);
 				var_02 scripts/cp/zombies/achievement::update_achievement("LOCKSMITH",1);
@@ -1650,17 +1322,13 @@ soul_key_pick_up_monitor(param_00,param_01)
 	param_00 delete();
 }
 
-//Function Number: 101
-delay_try_drop_talisman(param_00)
-{
+delay_try_drop_talisman(param_00) {
 	level endon("game_ended");
 	wait(32);
 	level thread scripts\cp\zombies\directors_cut::try_drop_talisman(param_00,vectortoangles((0,1,0)));
 }
 
-//Function Number: 102
-delay_resume_wave_progression()
-{
+delay_resume_wave_progression() {
 	level endon("game_ended");
 	wait(37);
 	level thread scripts\cp\cp_vo::try_to_play_vo("ww_easteregg_complete","rave_announcer_vo","highest",5,0,0,1);
@@ -1668,9 +1336,7 @@ delay_resume_wave_progression()
 	resume_spawn_wave();
 }
 
-//Function Number: 103
-deploy_stair_barrier()
-{
+deploy_stair_barrier() {
 	var_00 = getent("super_slasher_stair_clip","targetname");
 	var_01 = scripts\engine\utility::getstruct(var_00.target,"targetname");
 	playfx(level._effect["super_slasher_saw_shark_hit"],scripts\engine\utility::drop_to_ground(var_01.origin,50,-500));
@@ -1685,9 +1351,7 @@ deploy_stair_barrier()
 	var_00.stair_barrier_model = var_04;
 }
 
-//Function Number: 104
-destroy_stair_barrier()
-{
+destroy_stair_barrier() {
 	var_00 = getent("super_slasher_stair_clip","targetname");
 	playfx(level._effect["super_slasher_saw_shark_hit"],scripts\engine\utility::drop_to_ground(var_00.stair_barrier_model.origin,50,-500));
 	var_00 connectpaths();
@@ -1698,50 +1362,38 @@ destroy_stair_barrier()
 	var_00.stair_barrier_model delete();
 }
 
-//Function Number: 105
-activate_fight_stage_vfx()
-{
+activate_fight_stage_vfx() {
 	level.super_slasher_fight_stage_vfx = [];
 	spawn_fight_stage_vfx(1,(-6170,5352,553),anglestoforward((0,-55,0)));
 	spawn_fight_stage_vfx(2,(-6035,4322,553),anglestoforward((0,55,0)));
 	spawn_fight_stage_vfx(3,(-6345,4784,553),anglestoforward((0,7,0)));
 }
 
-//Function Number: 106
-spawn_fight_stage_vfx(param_00,param_01,param_02)
-{
+spawn_fight_stage_vfx(param_00,param_01,param_02) {
 	var_03 = spawnfx(level._effect["fight_stage"],param_01,param_02);
 	triggerfx(var_03);
 	level.super_slasher_fight_stage_vfx[param_00] = var_03;
 }
 
-//Function Number: 107
-delete_fight_stage_vfx(param_00)
-{
+delete_fight_stage_vfx(param_00) {
 	var_01 = level.super_slasher_fight_stage_vfx[param_00];
 	var_01 delete();
 }
 
-//Function Number: 108
-watch_for_player_deaths()
-{
+watch_for_player_deaths() {
 	level endon("super_slasher_fight_complete");
-	while(!scripts\engine\utility::flag("super_slasher_fight_complete"))
-	{
+	while(!scripts\engine\utility::flag("super_slasher_fight_complete")) {
 		level waittill("player_entered_ala",var_00);
 		var_00 thread scripts\cp\maps\cp_rave\cp_rave::exit_rave_mode(var_00);
 		var_00 thread watch_for_revive(var_00);
 	}
 }
 
-//Function Number: 109
-watch_for_revive(param_00)
-{
+watch_for_revive(param_00) {
 	level endon("game_ended");
 	param_00 endon("disconnect");
 	param_00 waittill("spawned_player");
-	if(scripts\engine\utility::istrue(param_00.unlimited_rave))
-	{
+	if(scripts\engine\utility::istrue(param_00.unlimited_rave)) {
 		param_00 thread scripts\cp\maps\cp_rave\cp_rave::enter_rave_mode(param_00);
 	}
 }

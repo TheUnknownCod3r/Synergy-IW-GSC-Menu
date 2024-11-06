@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\mp\maps\mp_overflow\gen\mp_overflow_sound.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 1
- * Decompile Time: 113 ms
- * Timestamp: 10/27/2023 12:13:56 AM
-*******************************************************************/
+/*************************************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\mp\maps\mp_overflow\gen\mp_overflow_sound.gsc
+*************************************************************************/
 
-//Function Number: 1
-main()
-{
+main() {
 	var_00 = scripts\common\createfx::func_49E7();
 	var_00 scripts\common\createfx::func_F4AD((-172.439,1821.56,108.813),(270,0,0));
 	var_00.var_13125["soundalias"] = "emt_ice_cracking_03_lp";

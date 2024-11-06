@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: 3870.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 3
- * Decompile Time: 2 ms
- * Timestamp: 10/27/2023 12:31:04 AM
-*******************************************************************/
+/****************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\3870.gsc
+****************************/
 
-//Function Number: 1
-main()
-{
+main() {
 	level.var_92DE["guy1_convo"] = ::func_8728;
 	level.var_92DE["guy2_convo"] = ::func_8729;
 	level.var_EC85["generic"]["guy1_convo_idle"][0] = %titan_stealth_street_enemy01_convo_idle;
@@ -35,9 +29,7 @@ main()
 	level.var_EC85["generic"]["guy2_convo_exit_right"] = %titan_stealth_street_enemy02_convo_exit_right;
 }
 
-//Function Number: 2
-func_8728(param_00)
-{
+func_8728(param_00) {
 	var_01["left"] = "guy1_convo_react_left";
 	var_01["right"] = "guy1_convo_react_right";
 	var_01["forward"] = "guy1_convo_react_front";
@@ -52,9 +44,7 @@ func_8728(param_00)
 	lib_0F27::func_F320(var_02);
 }
 
-//Function Number: 3
-func_8729(param_00)
-{
+func_8729(param_00) {
 	var_01["left"] = "guy2_convo_react_left";
 	var_01["right"] = "guy2_convo_react_right";
 	var_01["forward"] = "guy2_convo_react_front";

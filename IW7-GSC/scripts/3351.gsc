@@ -1,22 +1,14 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: 3351.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 5
- * Decompile Time: 1 ms
- * Timestamp: 10/27/2023 12:26:44 AM
-*******************************************************************/
+/****************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\3351.gsc
+****************************/
 
-//Function Number: 1
-init()
-{
+init() {
 	level._effect["repulsor_view"] = loadfx("vfx/iw7/_requests/coop/zmb_repulsor_wave_view.vfx");
 }
 
-//Function Number: 2
-userepulsor()
-{
+userepulsor() {
 	var_00 = self getplayerangles();
 	var_01 = anglestoup(var_00);
 	var_02 = anglestoforward(var_00);
@@ -29,9 +21,7 @@ userepulsor()
 	killenemiesinfov();
 }
 
-//Function Number: 3
-killenemiesinfov()
-{
+killenemiesinfov() {
 	var_00 = cos(75);
 	var_01 = 2000;
 	var_02 = 300;
@@ -42,27 +32,22 @@ killenemiesinfov()
 	physicsexplosionsphere(var_06,var_03,1,2.5);
 	var_07 = scripts\cp\cp_agent_utils::getaliveagentsofteam("axis");
 	var_08 = scripts\engine\utility::get_array_of_closest(self.origin,var_07,undefined,var_02);
-	foreach(var_0A in var_08)
-	{
-		if(func_9C0D(var_0A))
-		{
+	foreach(var_0A in var_08) {
+		if(func_9C0D(var_0A)) {
 			continue;
 		}
 
 		var_0B = 0;
 		var_0C = var_0A.origin;
 		var_0D = scripts\engine\utility::within_fov(self geteye(),self.angles,var_0C + (0,0,30),var_00);
-		if(var_0D)
-		{
+		if(var_0D) {
 			var_0E = distance2d(self.origin,var_0C);
-			if(var_0E < var_02)
-			{
+			if(var_0E < var_02) {
 				var_0B = 1;
 			}
 		}
 
-		if(var_0B)
-		{
+		if(var_0B) {
 			var_01 = var_0A.maxhealth;
 			var_04 = anglestoforward(self.angles);
 			var_0F = vectornormalize(var_04) * -100;
@@ -72,23 +57,17 @@ killenemiesinfov()
 	}
 }
 
-//Function Number: 4
-func_9C0D(param_00)
-{
-	if(scripts\engine\utility::istrue(param_00.var_9342))
-	{
+func_9C0D(param_00) {
+	if(scripts\engine\utility::istrue(param_00.var_9342)) {
 		return 1;
 	}
 
 	return 0;
 }
 
-//Function Number: 5
-killrepulsorvictim(param_00,param_01,param_02,param_03)
-{
+killrepulsorvictim(param_00,param_01,param_02,param_03) {
 	self.do_immediate_ragdoll = 1;
-	if(param_01 >= self.health)
-	{
+	if(param_01 >= self.health) {
 		self.customdeath = 1;
 	}
 

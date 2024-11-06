@@ -1,68 +1,52 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\anim\init_move_transitions.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 6
- * Decompile Time: 383 ms
- * Timestamp: 10\27\2023 12:00:39 AM
-*******************************************************************/
+/**********************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\anim\init_move_transitions.gsc
+**********************************************************/
 
-//Function Number: 1
-func_968D()
-{
-	if(isdefined(level.var_BC99))
-	{
+func_968D() {
+	if(isdefined(level.var_BC99)) {
 		return;
 	}
 
 	anim.var_BC99 = 1;
-	if(!isdefined(level.var_4751))
-	{
+	if(!isdefined(level.var_4751)) {
 		anim.var_4751 = [];
 	}
 
-	if(!isdefined(level.var_4719))
-	{
+	if(!isdefined(level.var_4719)) {
 		anim.var_4719 = [];
 	}
 
 	anim.var_B490 = [];
 	anim.var_68CA = [];
 	anim.var_126E7 = [];
-	if(!isdefined(level.var_4754))
-	{
+	if(!isdefined(level.var_4754)) {
 		anim.var_4754 = [];
 	}
 
-	if(!isdefined(level.var_4753))
-	{
+	if(!isdefined(level.var_4753)) {
 		anim.var_4753 = [];
 	}
 
-	if(!isdefined(level.var_471B))
-	{
+	if(!isdefined(level.var_471B)) {
 		anim.var_471B = [];
 	}
 
 	anim.var_471D = [];
 	anim.var_4755 = [];
-	if(!isdefined(level.var_4752))
-	{
+	if(!isdefined(level.var_4752)) {
 		anim.var_4752 = [];
 	}
 
-	if(!isdefined(level.var_471A))
-	{
+	if(!isdefined(level.var_471A)) {
 		anim.var_471A = [];
 	}
 
 	anim.var_22E7 = [];
 }
 
-//Function Number: 2
-func_98A0()
-{
+func_98A0() {
 	func_968D();
 	var_00 = [];
 	var_00[0] = "left";
@@ -134,26 +118,20 @@ func_98A0()
 	level.var_9D8D["Exposed"] = 1;
 	level.var_9D8E["Guard"] = 1;
 	level.var_9D8E["Exposed"] = 1;
-	for(var_02 = 1;var_02 <= 6;var_02++)
-	{
-		if(var_02 == 5)
-		{
+	for(var_02 = 1;var_02 <= 6;var_02++) {
+		if(var_02 == 5) {
 			continue;
 		}
 
-		for(var_03 = 0;var_03 < var_00.size;var_03++)
-		{
+		for(var_03 = 0;var_03 < var_00.size;var_03++) {
 			var_04 = var_00[var_03];
-			if(isdefined(level.archetypes["soldier"]["cover_trans"][var_04]) && isdefined(level.archetypes["soldier"]["cover_trans"][var_04][var_02]))
-			{
+			if(isdefined(level.archetypes["soldier"]["cover_trans"][var_04]) && isdefined(level.archetypes["soldier"]["cover_trans"][var_04][var_02])) {
 				level.archetypes["soldier"]["cover_trans_dist"][var_04][var_02] = getmovedelta(level.archetypes["soldier"]["cover_trans"][var_04][var_02],0,1);
 				level.archetypes["soldier"]["cover_trans_angles"][var_04][var_02] = getangledelta(level.archetypes["soldier"]["cover_trans"][var_04][var_02],0,1);
 			}
 
-			if(isdefined(level.archetypes["soldier"]["cover_exit"][var_04]) && isdefined(level.archetypes["soldier"]["cover_exit"][var_04][var_02]))
-			{
-				if(animhasnotetrack(level.archetypes["soldier"]["cover_exit"][var_04][var_02],"code_move"))
-				{
+			if(isdefined(level.archetypes["soldier"]["cover_exit"][var_04]) && isdefined(level.archetypes["soldier"]["cover_exit"][var_04][var_02])) {
+				if(animhasnotetrack(level.archetypes["soldier"]["cover_exit"][var_04][var_02],"code_move")) {
 					var_05 = getnotetracktimes(level.archetypes["soldier"]["cover_exit"][var_04][var_02],"code_move")[0];
 				}
 				else
@@ -167,20 +145,16 @@ func_98A0()
 		}
 	}
 
-	for(var_03 = 0;var_03 < var_00.size;var_03++)
-	{
+	for(var_03 = 0;var_03 < var_00.size;var_03++) {
 		var_04 = var_00[var_03];
 		level.var_4754[var_04] = 0;
-		for(var_02 = 1;var_02 <= 6;var_02++)
-		{
-			if(var_02 == 5 || !isdefined(level.archetypes["soldier"]["cover_trans"][var_04]) || !isdefined(level.archetypes["soldier"]["cover_trans"][var_04][var_02]))
-			{
+		for(var_02 = 1;var_02 <= 6;var_02++) {
+			if(var_02 == 5 || !isdefined(level.archetypes["soldier"]["cover_trans"][var_04]) || !isdefined(level.archetypes["soldier"]["cover_trans"][var_04][var_02])) {
 				continue;
 			}
 
 			var_06 = lengthsquared(level.archetypes["soldier"]["cover_trans_dist"][var_04][var_02]);
-			if(level.var_4754[var_04] < var_06)
-			{
+			if(level.var_4754[var_04] < var_06) {
 				level.var_4754[var_04] = var_06;
 			}
 		}
@@ -195,39 +169,31 @@ func_98A0()
 	level.var_6A1B["exposed_ready_cqb"] = 1;
 	level.var_6A1B["exposed_ready"] = 1;
 	level.var_6A1B["heat"] = 1;
-	if(!isdefined(level.var_AFE8))
-	{
+	if(!isdefined(level.var_AFE8)) {
 		anim.var_AFE8 = 0;
 	}
 
-	foreach(var_04, var_08 in level.var_6A1B)
-	{
-		for(var_02 = 7;var_02 <= 9;var_02++)
-		{
-			if(isdefined(level.archetypes["soldier"]["cover_trans"][var_04]) && isdefined(level.archetypes["soldier"]["cover_trans"][var_04][var_02]))
-			{
+	foreach(var_04, var_08 in level.var_6A1B) {
+		for(var_02 = 7;var_02 <= 9;var_02++) {
+			if(isdefined(level.archetypes["soldier"]["cover_trans"][var_04]) && isdefined(level.archetypes["soldier"]["cover_trans"][var_04][var_02])) {
 				level.archetypes["soldier"]["cover_trans_dist"][var_04][var_02] = getmovedelta(level.archetypes["soldier"]["cover_trans"][var_04][var_02],0,1);
 				level.archetypes["soldier"]["cover_trans_angles"][var_04][var_02] = getangledelta(level.archetypes["soldier"]["cover_trans"][var_04][var_02],0,1);
 			}
 
-			if(isdefined(level.archetypes["soldier"]["cover_exit"][var_04]) && isdefined(level.archetypes["soldier"]["cover_exit"][var_04][var_02]))
-			{
+			if(isdefined(level.archetypes["soldier"]["cover_exit"][var_04]) && isdefined(level.archetypes["soldier"]["cover_exit"][var_04][var_02])) {
 				var_05 = getnotetracktimes(level.archetypes["soldier"]["cover_exit"][var_04][var_02],"code_move")[0];
 				level.archetypes["soldier"]["cover_exit_dist"][var_04][var_02] = getmovedelta(level.archetypes["soldier"]["cover_exit"][var_04][var_02],0,var_05);
 				level.archetypes["soldier"]["cover_exit_angles"][var_04][var_02] = getangledelta(level.archetypes["soldier"]["cover_exit"][var_04][var_02],0,1);
 			}
 		}
 
-		for(var_02 = 1;var_02 <= 9;var_02++)
-		{
-			if(!isdefined(level.archetypes["soldier"]["cover_trans"][var_04]) || !isdefined(level.archetypes["soldier"]["cover_trans"][var_04][var_02]))
-			{
+		for(var_02 = 1;var_02 <= 9;var_02++) {
+			if(!isdefined(level.archetypes["soldier"]["cover_trans"][var_04]) || !isdefined(level.archetypes["soldier"]["cover_trans"][var_04][var_02])) {
 				continue;
 			}
 
 			var_09 = length(level.archetypes["soldier"]["cover_trans_dist"][var_04][var_02]);
-			if(var_09 > level.var_AFE8)
-			{
+			if(var_09 > level.var_AFE8) {
 				anim.var_AFE8 = var_09;
 			}
 		}
@@ -318,35 +284,25 @@ func_98A0()
 	level.var_E1B7["Conceal Crouch"] = "crouch";
 }
 
-//Function Number: 3
-_meth_814D(param_00)
-{
+_meth_814D(param_00) {
 	_meth_814E(param_00,7,8,0,level.var_10A50,level.var_10A52);
 	_meth_814E(param_00,8,9,1,level.var_10A51,level.var_10A53);
 }
 
-//Function Number: 4
-_meth_814E(param_00,param_01,param_02,param_03,param_04,param_05)
-{
+_meth_814E(param_00,param_01,param_02,param_03,param_04,param_05) {
 	var_06 = 0;
-	for(var_07 = param_01;var_07 <= param_02;var_07++)
-	{
-		if(!var_06)
-		{
-			foreach(var_0A, var_09 in param_04)
-			{
-				if(isdefined(level.archetypes[param_00]["cover_trans"]) && isdefined(level.archetypes[param_00]["cover_trans"][var_0A]) && isdefined(level.archetypes[param_00]["cover_trans"][var_0A][var_07]))
-				{
+	for(var_07 = param_01;var_07 <= param_02;var_07++) {
+		if(!var_06) {
+			foreach(var_0A, var_09 in param_04) {
+				if(isdefined(level.archetypes[param_00]["cover_trans"]) && isdefined(level.archetypes[param_00]["cover_trans"][var_0A]) && isdefined(level.archetypes[param_00]["cover_trans"][var_0A][var_07])) {
 					level.archetypes[param_00]["cover_trans_predist"][var_0A][var_07] = getmovedelta(level.archetypes[param_00]["cover_trans"][var_0A][var_07],0,_meth_81D6(param_00,var_0A,var_07));
 					level.archetypes[param_00]["cover_trans_dist"][var_0A][var_07] = getmovedelta(level.archetypes[param_00]["cover_trans"][var_0A][var_07],0,1) - level.archetypes[param_00]["cover_trans_predist"][var_0A][var_07];
 					level.archetypes[param_00]["cover_trans_angles"][var_0A][var_07] = getangledelta(level.archetypes[param_00]["cover_trans"][var_0A][var_07],0,1);
 				}
 			}
 
-			foreach(var_0A, var_09 in param_05)
-			{
-				if(isdefined(level.archetypes[param_00]["cover_exit"]) && isdefined(level.archetypes[param_00]["cover_exit"][var_0A]) && isdefined(level.archetypes[param_00]["cover_exit"][var_0A][var_07]))
-				{
+			foreach(var_0A, var_09 in param_05) {
+				if(isdefined(level.archetypes[param_00]["cover_exit"]) && isdefined(level.archetypes[param_00]["cover_exit"][var_0A]) && isdefined(level.archetypes[param_00]["cover_exit"][var_0A][var_07])) {
 					level.archetypes[param_00]["cover_exit_dist"][var_0A][var_07] = getmovedelta(level.archetypes[param_00]["cover_exit"][var_0A][var_07],0,func_7EA4(param_00,var_0A,var_07));
 					level.archetypes[param_00]["cover_exit_postdist"][var_0A][var_07] = getmovedelta(level.archetypes[param_00]["cover_exit"][var_0A][var_07],0,1) - level.archetypes[param_00]["cover_exit_dist"][var_0A][var_07];
 					level.archetypes[param_00]["cover_exit_angles"][var_0A][var_07] = getangledelta(level.archetypes[param_00]["cover_exit"][var_0A][var_07],0,1);
@@ -358,14 +314,10 @@ _meth_814E(param_00,param_01,param_02,param_03,param_04,param_05)
 	}
 }
 
-//Function Number: 5
-func_7EA4(param_00,param_01,param_02)
-{
+func_7EA4(param_00,param_01,param_02) {
 	return level.archetypes[param_00]["cover_exit_split"][param_01][param_02];
 }
 
-//Function Number: 6
-_meth_81D6(param_00,param_01,param_02)
-{
+_meth_81D6(param_00,param_01,param_02) {
 	return level.archetypes[param_00]["cover_trans_split"][param_01][param_02];
 }

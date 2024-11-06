@@ -1,18 +1,11 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\asm\ratking\mp\states.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 8
- * Decompile Time: 553 ms
- * Timestamp: 10\27\2023 12:02:03 AM
-*******************************************************************/
+/*****************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\asm\ratking\mp\states.gsc
+*****************************************************/
 
-//Function Number: 1
-func_2371()
-{
-	if(scripts\asm\asm::func_232E("ratking"))
-	{
+func_2371() {
+	if(scripts\asm\asm::func_232E("ratking")) {
 		return;
 	}
 
@@ -146,44 +139,30 @@ func_2371()
 	scripts\asm\asm::func_2327();
 }
 
-//Function Number: 2
-trans_check_move_to_pass_walk_in0(param_00,param_01,param_02,param_03)
-{
+trans_check_move_to_pass_walk_in0(param_00,param_01,param_02,param_03) {
 	return scripts\asm\asm_bb::bb_movetyperequested("walk");
 }
 
-//Function Number: 3
-trans_check_move_to_pass_run_in1(param_00,param_01,param_02,param_03)
-{
+trans_check_move_to_pass_run_in1(param_00,param_01,param_02,param_03) {
 	return scripts\asm\asm_bb::bb_movetyperequested("run");
 }
 
-//Function Number: 4
-trans_pass_walk_in_to_walk_start2(param_00,param_01,param_02,param_03)
-{
+trans_pass_walk_in_to_walk_start2(param_00,param_01,param_02,param_03) {
 	return scripts\asm\asm_bb::bb_moverequested();
 }
 
-//Function Number: 5
-trans_pass_walk_out_to_move_done4(param_00,param_01,param_02,param_03)
-{
+trans_pass_walk_out_to_move_done4(param_00,param_01,param_02,param_03) {
 	return !scripts\asm\asm_bb::bb_moverequested();
 }
 
-//Function Number: 6
-trans_pass_run_in_to_run_start2(param_00,param_01,param_02,param_03)
-{
+trans_pass_run_in_to_run_start2(param_00,param_01,param_02,param_03) {
 	return scripts\asm\asm_bb::bb_moverequested();
 }
 
-//Function Number: 7
-trans_decide_idle_to_platform_idle0(param_00,param_01,param_02,param_03)
-{
+trans_decide_idle_to_platform_idle0(param_00,param_01,param_02,param_03) {
 	return scripts\common\utility::istrue(self.isonplatform);
 }
 
-//Function Number: 8
-trans_platform_idle_to_decide_idle0(param_00,param_01,param_02,param_03)
-{
+trans_platform_idle_to_decide_idle0(param_00,param_01,param_02,param_03) {
 	return !scripts\common\utility::istrue(self.isonplatform);
 }

@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\mp\maps\mp_neon\mp_neon.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 15
- * Decompile Time: 761 ms
- * Timestamp: 10/27/2023 12:13:52 AM
-*******************************************************************/
+/*******************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\mp\maps\mp_neon\mp_neon.gsc
+*******************************************************/
 
-//Function Number: 1
-main()
-{
+main() {
 	scripts\mp\maps\mp_neon\mp_neon_precache::main();
 	scripts\mp\maps\mp_neon\gen\mp_neon_art::main();
 	scripts\mp\maps\mp_neon\mp_neon_fx::main();
@@ -37,9 +31,7 @@ main()
 	level thread spawn_no_zone_trigger();
 }
 
-//Function Number: 2
-fix_collision()
-{
+fix_collision() {
 	var_00 = getent("player128x128x256","targetname");
 	var_01 = spawn("script_model",(-2504,842,676));
 	var_01.angles = (0,0,0);
@@ -82,11 +74,8 @@ fix_collision()
 	var_13 clonebrushmodeltoscriptmodel(var_12);
 }
 
-//Function Number: 3
-callback_vr_playerkilled(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08,param_09)
-{
-	if(param_04 != "MOD_TRIGGER_HURT")
-	{
+callback_vr_playerkilled(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08,param_09) {
+	if(param_04 != "MOD_TRIGGER_HURT") {
 		self.nocorpse = 1;
 	}
 
@@ -94,17 +83,13 @@ callback_vr_playerkilled(param_00,param_01,param_02,param_03,param_04,param_05,p
 	scripts\mp\_damage::func_D3C4(param_00,param_01,self,param_02,param_03,param_04,param_05,param_06,param_07,param_08,param_09,0);
 }
 
-//Function Number: 4
-vrdeatheffects()
-{
+vrdeatheffects() {
 	var_00 = ["j_head","j_chest","j_shoulder_ri","j_shoulder_le","j_elbow_ri","j_elbow_le","j_hip_ri","j_hip_le","j_knee_ri","j_knee_le"];
 	var_01 = var_00.size;
 	thread func_CEF1(0);
 }
 
-//Function Number: 5
-func_CEF1(param_00)
-{
+func_CEF1(param_00) {
 	var_01[0][1]["org"] = self gettagorigin("j_spinelower");
 	var_01[0][1]["angles"] = self gettagangles("j_spinelower");
 	var_01[0][1]["effect"] = "vfx_vr_death_player_vol_chest";
@@ -123,10 +108,8 @@ func_CEF1(param_00)
 	var_01[1][3]["org"] = self gettagorigin("j_elbow_le");
 	var_01[1][3]["angles"] = self gettagangles("j_elbow_le");
 	var_01[1][3]["effect"] = "vfx_vr_enemy_death";
-	foreach(var_03 in var_01)
-	{
-		foreach(var_05 in var_03)
-		{
+	foreach(var_03 in var_01) {
+		foreach(var_05 in var_03) {
 			playfx(scripts\common\utility::getfx(var_05["effect"]),var_05["org"]);
 		}
 
@@ -134,43 +117,32 @@ func_CEF1(param_00)
 	}
 }
 
-//Function Number: 6
-runholodome()
-{
+runholodome() {
 	level endon("game_ended");
-	for(;;)
-	{
+	for(;;) {
 		level waittill("connected",var_00);
 		var_00 thread executeholodome();
 	}
 }
 
-//Function Number: 7
-executeholodome()
-{
+executeholodome() {
 	self waittill("mapCamera_start");
 	wait(2.5);
 	scripts\common\utility::exploder(10,self);
 }
 
-//Function Number: 8
-handleholograms()
-{
+handleholograms() {
 	wait(5);
 	var_00 = getscriptablearray("hologram_object","targetname");
-	foreach(var_02 in var_00)
-	{
+	foreach(var_02 in var_00) {
 		var_02 thread runholograminitialization();
 	}
 }
 
-//Function Number: 9
-runholograminitialization()
-{
+runholograminitialization() {
 	level endon("game_ended");
 	var_00 = spawn("trigger_radius",self.origin - (0,0,512),0,800,1300);
-	if(self.script_noteworthy == "car")
-	{
+	if(self.script_noteworthy == "car") {
 		self setscriptablepartstate("rootModelManager","map_start");
 		var_01 = "rootModelManager";
 		var_02 = "regen";
@@ -185,40 +157,29 @@ runholograminitialization()
 	self setscriptablepartstate(var_01,var_02);
 }
 
-//Function Number: 10
-func_CDA4(param_00)
-{
+func_CDA4(param_00) {
 	wait(30);
 	function_030E(param_00);
 }
 
-//Function Number: 11
-handlelightinggeo()
-{
+handlelightinggeo() {
 	wait(5);
 	var_00 = getentarray("big_screen","targetname");
-	foreach(var_02 in var_00)
-	{
-		if(isdefined(var_02.var_EE79))
-		{
+	foreach(var_02 in var_00) {
+		if(isdefined(var_02.var_EE79)) {
 			var_02 moveto((-2444,1279.5,95),0.1);
 		}
 	}
 }
 
-//Function Number: 12
-sfx_club_music()
-{
+sfx_club_music() {
 	var_00 = spawn("script_origin",(1200,703,238));
 	scripts\common\utility::func_136F7();
 	var_00 playloopsound("emt_mus_neon_club");
 }
 
-//Function Number: 13
-spawn_ball_allowed_trigger()
-{
-	if(level.gametype == "ball")
-	{
+spawn_ball_allowed_trigger() {
+	if(level.gametype == "ball") {
 		wait(1);
 		var_00 = spawn("trigger_radius",(-970,750,750),0,4000,500);
 		var_01 = spawn("trigger_radius",(-720,-400,470),0,230,400);
@@ -233,11 +194,8 @@ spawn_ball_allowed_trigger()
 	}
 }
 
-//Function Number: 14
-spawn_oob_trigger()
-{
-	if(level.gametype == "ball")
-	{
+spawn_oob_trigger() {
+	if(level.gametype == "ball") {
 		wait(1);
 		var_00 = spawn("trigger_radius",(150,-28,560),0,430,300);
 		var_01 = spawn("trigger_radius",(1000,-28,560),0,530,300);
@@ -254,11 +212,8 @@ spawn_oob_trigger()
 	}
 }
 
-//Function Number: 15
-spawn_no_zone_trigger()
-{
-	if(level.gametype == "ball")
-	{
+spawn_no_zone_trigger() {
+	if(level.gametype == "ball") {
 		wait(1);
 		var_00 = spawn("trigger_radius",(-2186,-119,780),0,350,50);
 		var_00.var_336 = "uplink_nozone";

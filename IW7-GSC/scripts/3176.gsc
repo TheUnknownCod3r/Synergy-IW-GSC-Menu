@@ -1,18 +1,11 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: 3176.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 16
- * Decompile Time: 18 ms
- * Timestamp: 10/27/2023 12:26:26 AM
-*******************************************************************/
+/****************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\3176.gsc
+****************************/
 
-//Function Number: 1
-func_51E8(param_00,param_01,param_02,param_03)
-{
-	if(isdefined(self.asm.var_51E8))
-	{
+func_51E8(param_00,param_01,param_02,param_03) {
+	if(isdefined(self.asm.var_51E8)) {
 		return;
 	}
 
@@ -28,22 +21,17 @@ func_51E8(param_00,param_01,param_02,param_03)
 	func_98A7(param_00);
 	func_9810();
 	func_97C3(param_00);
-	if(weaponclass(self.var_394) == "mg")
-	{
+	if(weaponclass(self.var_394) == "mg") {
 		self.var_BC = "cover_lmg";
 	}
 }
 
-//Function Number: 2
-func_98A7(param_00)
-{
-	if(!isdefined(level.var_C05A))
-	{
+func_98A7(param_00) {
+	if(!isdefined(level.var_C05A)) {
 		anim.var_C05A = [];
 	}
 
-	if(isdefined(level.var_C05A[param_00]))
-	{
+	if(isdefined(level.var_C05A[param_00])) {
 		return;
 	}
 
@@ -83,9 +71,7 @@ func_98A7(param_00)
 	level.var_7363[param_00] = var_01;
 }
 
-//Function Number: 3
-func_97C3(param_00)
-{
+func_97C3(param_00) {
 	var_01 = [];
 	var_02 = [];
 	var_03 = [];
@@ -125,8 +111,7 @@ func_97C3(param_00)
 	var_03 = [];
 	var_03["left"] = 15;
 	var_02["cover_right_crouch_lean"] = var_03;
-	if(!isdefined(level.var_43FE))
-	{
+	if(!isdefined(level.var_43FE)) {
 		level.var_43FE = [];
 		level.var_7361 = [];
 		level.var_1A43 = [];
@@ -198,153 +183,135 @@ func_97C3(param_00)
 	level.var_1A43[param_00] = var_04;
 }
 
-//Function Number: 4
-func_9810()
-{
-	if(!isdefined(level.var_85DF))
-	{
+func_9810() {
+	if(!isdefined(level.var_85DF)) {
 		anim.var_85DF = [];
 	}
 
-	if(isdefined(level.var_85DF["soldier"]))
-	{
+	if(isdefined(level.var_85DF["soldier"])) {
 		return;
 	}
 
 	level.var_85DF["soldier"] = [];
 	level.var_85E1["soldier"] = [];
-	level.var_85DF["soldier"]["grenade_return_throw"]["throw_short"] = self [[ self.var_7190 ]]("soldier","grenade_return_throw","throw_short");
+	level.var_85DF["soldier"]["grenade_return_throw"]["throw_short"] = self [[self.var_7190]]("soldier","grenade_return_throw","throw_short");
 	level.var_85E1["soldier"]["grenade_return_throw"]["throw_short"] = [];
 	level.var_85E1["soldier"]["grenade_return_throw"]["throw_short"][0] = (78.9794,10.7276,26.4898);
 	level.var_85E1["soldier"]["grenade_return_throw"]["throw_short"][1] = (78.9794,10.7276,26.4898);
-	level.var_85DF["soldier"]["grenade_return_throw"]["throw_long"] = self [[ self.var_7190 ]]("soldier","grenade_return_throw","throw_long");
+	level.var_85DF["soldier"]["grenade_return_throw"]["throw_long"] = self [[self.var_7190]]("soldier","grenade_return_throw","throw_long");
 	level.var_85E1["soldier"]["grenade_return_throw"]["throw_long"] = [];
 	level.var_85E1["soldier"]["grenade_return_throw"]["throw_long"][0] = (78.9794,10.7276,26.4898);
 	level.var_85E1["soldier"]["grenade_return_throw"]["throw_long"][1] = (108.037,19.9336,58.7762);
-	level.var_85DF["soldier"]["grenade_return_throw"]["throw_default"] = self [[ self.var_7190 ]]("soldier","grenade_return_throw","throw_default");
+	level.var_85DF["soldier"]["grenade_return_throw"]["throw_default"] = self [[self.var_7190]]("soldier","grenade_return_throw","throw_default");
 	level.var_85E1["soldier"]["grenade_return_throw"]["throw_default"] = [];
 	level.var_85E1["soldier"]["grenade_return_throw"]["throw_default"][0] = (108.037,19.9336,58.7762);
-	level.var_85DF["soldier"]["cover_stand_grenade"]["grenade_exposed"] = self [[ self.var_7190 ]]("soldier","cover_stand_grenade","grenade_exposed");
+	level.var_85DF["soldier"]["cover_stand_grenade"]["grenade_exposed"] = self [[self.var_7190]]("soldier","cover_stand_grenade","grenade_exposed");
 	level.var_85E1["soldier"]["cover_stand_grenade"]["grenade_exposed"] = [];
 	level.var_85E1["soldier"]["cover_stand_grenade"]["grenade_exposed"][0] = (-10.4497,12.4254,63.2582);
 	level.var_85E1["soldier"]["cover_stand_grenade"]["grenade_exposed"][1] = (0.852884,19.6649,55.6843);
 	level.var_85E1["soldier"]["cover_stand_grenade"]["grenade_exposed"][2] = (-4.36139,16.7827,65.348);
 	level.var_85E1["soldier"]["cover_stand_grenade"]["grenade_exposed"][3] = (16.8571,-2.85471,67.4137);
-	level.var_85DF["soldier"]["cover_stand_grenade"]["grenade_safe"] = self [[ self.var_7190 ]]("soldier","cover_stand_grenade","grenade_safe");
+	level.var_85DF["soldier"]["cover_stand_grenade"]["grenade_safe"] = self [[self.var_7190]]("soldier","cover_stand_grenade","grenade_safe");
 	level.var_85E1["soldier"]["cover_stand_grenade"]["grenade_safe"] = [];
 	level.var_85E1["soldier"]["cover_stand_grenade"]["grenade_safe"][0] = (-10.4497,12.4254,63.2582);
 	level.var_85E1["soldier"]["cover_stand_grenade"]["grenade_safe"][1] = (0.852884,19.6649,55.6843);
 	level.var_85E1["soldier"]["cover_stand_grenade"]["grenade_safe"][2] = (-4.36139,16.7827,65.348);
 	level.var_85E1["soldier"]["cover_stand_grenade"]["grenade_safe"][3] = (16.8571,-2.85471,67.4137);
-	level.var_85DF["soldier"]["cover_crouch_grenade"]["grenade_exposed"] = self [[ self.var_7190 ]]("soldier","cover_crouch_grenade","grenade_exposed");
+	level.var_85DF["soldier"]["cover_crouch_grenade"]["grenade_exposed"] = self [[self.var_7190]]("soldier","cover_crouch_grenade","grenade_exposed");
 	level.var_85E1["soldier"]["cover_crouch_grenade"]["grenade_exposed"] = [];
 	level.var_85E1["soldier"]["cover_crouch_grenade"]["grenade_exposed"][0] = (-3.96449,8.40924,48.214);
 	level.var_85E1["soldier"]["cover_crouch_grenade"]["grenade_exposed"][1] = (-3.96449,8.40924,48.214);
 	level.var_85E1["soldier"]["cover_crouch_grenade"]["grenade_exposed"][2] = (14.468,19.9791,60.7223);
-	level.var_85DF["soldier"]["cover_crouch_grenade"]["grenade_safe"] = self [[ self.var_7190 ]]("soldier","cover_crouch_grenade","grenade_safe");
+	level.var_85DF["soldier"]["cover_crouch_grenade"]["grenade_safe"] = self [[self.var_7190]]("soldier","cover_crouch_grenade","grenade_safe");
 	level.var_85E1["soldier"]["cover_crouch_grenade"]["grenade_safe"] = [];
 	level.var_85E1["soldier"]["cover_crouch_grenade"]["grenade_safe"][0] = (-3.96449,8.40924,48.214);
 	level.var_85E1["soldier"]["cover_crouch_grenade"]["grenade_safe"][1] = (-3.96449,8.40924,48.214);
 	level.var_85E1["soldier"]["cover_crouch_grenade"]["grenade_safe"][2] = (16.2637,3.38162,58.6737);
-	level.var_85DF["soldier"]["cover_right_grenade"]["grenade_exposed"] = self [[ self.var_7190 ]]("soldier","cover_right_grenade","grenade_exposed");
+	level.var_85DF["soldier"]["cover_right_grenade"]["grenade_exposed"] = self [[self.var_7190]]("soldier","cover_right_grenade","grenade_exposed");
 	level.var_85E1["soldier"]["cover_right_grenade"]["grenade_exposed"] = [];
 	level.var_85E1["soldier"]["cover_right_grenade"]["grenade_exposed"][0] = (56.0294,7.45257,79.3614);
 	level.var_85E1["soldier"]["cover_right_grenade"]["grenade_exposed"][1] = (41.56,-28.3555,72.3737);
 	level.var_85E1["soldier"]["cover_right_grenade"]["grenade_exposed"][2] = (37.3503,13.1342,34.1788);
-	level.var_85DF["soldier"]["cover_right_grenade"]["grenade_safe"] = self [[ self.var_7190 ]]("soldier","cover_right_grenade","grenade_safe");
+	level.var_85DF["soldier"]["cover_right_grenade"]["grenade_safe"] = self [[self.var_7190]]("soldier","cover_right_grenade","grenade_safe");
 	level.var_85E1["soldier"]["cover_right_grenade"]["grenade_safe"] = [];
 	level.var_85E1["soldier"]["cover_right_grenade"]["grenade_safe"][0] = (47.1728,-17.3886,25.1343);
 	level.var_85E1["soldier"]["cover_right_grenade"]["grenade_safe"][1] = (31.7398,-34.8025,76.2959);
 	level.var_85E1["soldier"]["cover_right_grenade"]["grenade_safe"][2] = (37.703,10.9166,24.6772);
-	level.var_85DF["soldier"]["cover_right_crouch_grenade"]["grenade_exposed"] = self [[ self.var_7190 ]]("soldier","cover_right_crouch_grenade","grenade_exposed");
+	level.var_85DF["soldier"]["cover_right_crouch_grenade"]["grenade_exposed"] = self [[self.var_7190]]("soldier","cover_right_crouch_grenade","grenade_exposed");
 	level.var_85E1["soldier"]["cover_right_crouch_grenade"]["grenade_exposed"] = [];
 	level.var_85E1["soldier"]["cover_right_crouch_grenade"]["grenade_exposed"][0] = (1.8289,24.2055,36.719);
 	level.var_85E1["soldier"]["cover_right_crouch_grenade"]["grenade_exposed"][1] = (33.0665,3.91717,15.3247);
-	level.var_85DF["soldier"]["cover_right_crouch_grenade"]["grenade_safe"] = self [[ self.var_7190 ]]("soldier","cover_right_crouch_grenade","grenade_safe");
+	level.var_85DF["soldier"]["cover_right_crouch_grenade"]["grenade_safe"] = self [[self.var_7190]]("soldier","cover_right_crouch_grenade","grenade_safe");
 	level.var_85E1["soldier"]["cover_right_crouch_grenade"]["grenade_safe"] = [];
 	level.var_85E1["soldier"]["cover_right_crouch_grenade"]["grenade_safe"][0] = (-8.86994,17.8445,17.8727);
 	level.var_85E1["soldier"]["cover_right_crouch_grenade"]["grenade_safe"][1] = (30.3572,3.9653,21.9085);
-	level.var_85DF["soldier"]["cover_left_grenade"]["grenade_exposed"] = self [[ self.var_7190 ]]("soldier","cover_left_grenade","grenade_exposed");
+	level.var_85DF["soldier"]["cover_left_grenade"]["grenade_exposed"] = self [[self.var_7190]]("soldier","cover_left_grenade","grenade_exposed");
 	level.var_85E1["soldier"]["cover_left_grenade"]["grenade_exposed"] = [];
 	level.var_85E1["soldier"]["cover_left_grenade"]["grenade_exposed"][0] = (31.1908,-24.4541,70.8929);
 	level.var_85E1["soldier"]["cover_left_grenade"]["grenade_exposed"][1] = (18.5238,31.0193,68.1704);
-	level.var_85DF["soldier"]["cover_left_grenade"]["grenade_safe"] = self [[ self.var_7190 ]]("soldier","cover_left_grenade","grenade_safe");
+	level.var_85DF["soldier"]["cover_left_grenade"]["grenade_safe"] = self [[self.var_7190]]("soldier","cover_left_grenade","grenade_safe");
 	level.var_85E1["soldier"]["cover_left_grenade"]["grenade_safe"] = [];
 	level.var_85E1["soldier"]["cover_left_grenade"]["grenade_safe"][0] = (-17.6088,-34.2477,40.1995);
 	level.var_85E1["soldier"]["cover_left_grenade"]["grenade_safe"][1] = (14.1129,35.2797,29.8152);
-	level.var_85DF["soldier"]["cover_left_crouch_grenade"]["grenade_exposed"] = self [[ self.var_7190 ]]("soldier","cover_left_crouch_grenade","grenade_exposed");
+	level.var_85DF["soldier"]["cover_left_crouch_grenade"]["grenade_exposed"] = self [[self.var_7190]]("soldier","cover_left_crouch_grenade","grenade_exposed");
 	level.var_85E1["soldier"]["cover_left_crouch_grenade"]["grenade_exposed"] = [];
 	level.var_85E1["soldier"]["cover_left_crouch_grenade"]["grenade_exposed"][0] = (5.58822,24.4606,56.0111);
 	level.var_85E1["soldier"]["cover_left_crouch_grenade"]["grenade_exposed"][1] = (19.2915,30.552,26.9116);
-	level.var_85DF["soldier"]["cover_left_crouch_grenade"]["grenade_safe"] = self [[ self.var_7190 ]]("soldier","cover_left_crouch_grenade","grenade_safe");
+	level.var_85DF["soldier"]["cover_left_crouch_grenade"]["grenade_safe"] = self [[self.var_7190]]("soldier","cover_left_crouch_grenade","grenade_safe");
 	level.var_85E1["soldier"]["cover_left_crouch_grenade"]["grenade_safe"] = [];
 	level.var_85E1["soldier"]["cover_left_crouch_grenade"]["grenade_safe"][0] = (19.2915,30.552,26.9116);
-	level.var_85DF["soldier"]["exposed_throw_grenade"]["exposed_grenade"] = self [[ self.var_7190 ]]("soldier","exposed_throw_grenade","exposed_grenade");
+	level.var_85DF["soldier"]["exposed_throw_grenade"]["exposed_grenade"] = self [[self.var_7190]]("soldier","exposed_throw_grenade","exposed_grenade");
 	level.var_85E1["soldier"]["exposed_throw_grenade"]["exposed_grenade"] = [];
 	level.var_85E1["soldier"]["exposed_throw_grenade"]["exposed_grenade"][0] = (38.1638,-0.911074,71.8421);
-	level.var_85DF["soldier"]["exposed_prone_throw_grenade"]["exposed_grenade"] = self [[ self.var_7190 ]]("soldier","exposed_prone_throw_grenade","exposed_grenade");
+	level.var_85DF["soldier"]["exposed_prone_throw_grenade"]["exposed_grenade"] = self [[self.var_7190]]("soldier","exposed_prone_throw_grenade","exposed_grenade");
 	level.var_85E1["soldier"]["exposed_prone_throw_grenade"]["exposed_grenade"] = [];
 	level.var_85E1["soldier"]["exposed_prone_throw_grenade"]["exposed_grenade"][0] = (31.8573,6.47854,40.1133);
-	level.var_85DF["soldier"]["exposed_throw_seeker"]["exposed_seeker_throw"] = self [[ self.var_7190 ]]("soldier","exposed_throw_seeker","exposed_seeker_throw");
+	level.var_85DF["soldier"]["exposed_throw_seeker"]["exposed_seeker_throw"] = self [[self.var_7190]]("soldier","exposed_throw_seeker","exposed_seeker_throw");
 	level.var_85E1["soldier"]["exposed_throw_seeker"]["exposed_seeker_throw"] = [];
 	level.var_85E1["soldier"]["exposed_throw_seeker"]["exposed_seeker_throw"][0] = (23.6411,-21.534,59.3983);
 }
 
-//Function Number: 5
-func_100A9(param_00,param_01,param_02,param_03)
-{
+func_100A9(param_00,param_01,param_02,param_03) {
 	var_04 = scripts/asm/asm_bb::bb_getrequestedweapon();
-	if(!isdefined(var_04))
-	{
+	if(!isdefined(var_04)) {
 		return 0;
 	}
 
-	if(weaponclass(self.var_394) == var_04)
-	{
+	if(weaponclass(self.var_394) == var_04) {
 		return 0;
 	}
 
 	return 1;
 }
 
-//Function Number: 6
-func_BEA0(param_00,param_01,param_02,param_03)
-{
+func_BEA0(param_00,param_01,param_02,param_03) {
 	var_04 = undefined;
-	if(scripts/asm/asm_bb::func_2985())
-	{
-		if(isdefined(self._blackboard.shootparams.pos))
-		{
+	if(scripts/asm/asm_bb::func_2985()) {
+		if(isdefined(self._blackboard.shootparams.pos)) {
 			var_04 = self._blackboard.shootparams.pos;
 		}
-		else if(isdefined(self._blackboard.shootparams.ent))
-		{
+		else if(isdefined(self._blackboard.shootparams.ent)) {
 			var_04 = self._blackboard.shootparams.ent.origin;
 		}
 	}
 
-	if(!isdefined(var_04) && scripts\engine\utility::func_9DA3())
-	{
+	if(!isdefined(var_04) && scripts\engine\utility::func_9DA3()) {
 		var_04 = self.isnodeoccupied.origin;
 	}
 
-	if(!isdefined(var_04) && isdefined(self.target_getindexoftarget) && self.target_getindexoftarget.type == "Exposed" && distancesquared(self.target_getindexoftarget.origin,self.origin) < 36)
-	{
+	if(!isdefined(var_04) && isdefined(self.target_getindexoftarget) && self.target_getindexoftarget.type == "Exposed" && distancesquared(self.target_getindexoftarget.origin,self.origin) < 36) {
 		var_04 = self.target_getindexoftarget.origin + anglestoforward(self.target_getindexoftarget.angles) * 384;
 	}
 
-	if(!isdefined(var_04))
-	{
+	if(!isdefined(var_04)) {
 		return 0;
 	}
 
 	var_05 = self.angles[1] - vectortoyaw(var_04 - self.origin);
 	var_06 = distancesquared(self.origin,var_04);
-	if(var_06 < 65536)
-	{
+	if(var_06 < 65536) {
 		var_07 = sqrt(var_06);
-		if(var_07 > 3)
-		{
+		if(var_07 > 3) {
 			var_05 = var_05 + asin(-3 / var_07);
 		}
 	}
@@ -352,53 +319,41 @@ func_BEA0(param_00,param_01,param_02,param_03)
 	return abs(angleclamp180(var_05)) > self.var_129AF;
 }
 
-//Function Number: 7
-func_BE9F(param_00,param_01,param_02,param_03)
-{
-	if(scripts\engine\utility::istrue(self.var_B3E9) && isdefined(self.target_getindexoftarget))
-	{
+func_BE9F(param_00,param_01,param_02,param_03) {
+	if(scripts\engine\utility::istrue(self.var_B3E9) && isdefined(self.target_getindexoftarget)) {
 		return 0;
 	}
 
 	var_04 = _meth_81DD();
-	if(abs(var_04) > self.var_129AF)
-	{
+	if(abs(var_04) > self.var_129AF) {
 		return 1;
 	}
 
 	var_05 = laststandrevive();
-	if(abs(var_05) > self.var_CBF8)
-	{
+	if(abs(var_05) > self.var_CBF8) {
 		return 1;
 	}
 
 	return 0;
 }
 
-//Function Number: 8
-_meth_81DE()
-{
+_meth_81DE() {
 	var_00 = 0.25;
 	var_01 = undefined;
 	var_02 = undefined;
-	if(scripts/asm/asm_bb::func_2985())
-	{
-		if(isdefined(self._blackboard.shootparams.ent))
-		{
+	if(scripts/asm/asm_bb::func_2985()) {
+		if(isdefined(self._blackboard.shootparams.ent)) {
 			var_01 = self._blackboard.shootparams.ent;
 		}
-		else if(isdefined(self._blackboard.shootparams.pos))
-		{
+		else if(isdefined(self._blackboard.shootparams.pos)) {
 			var_02 = self._blackboard.shootparams.pos;
 		}
 	}
-	else if(isdefined(self.isnodeoccupied) && scripts\engine\utility::func_9DA3())
-	{
+	else if(isdefined(self.isnodeoccupied) && scripts\engine\utility::func_9DA3()) {
 		var_01 = self.isnodeoccupied;
 	}
 
-	if(isdefined(var_01) && !issentient(var_01))
-	{
+	if(isdefined(var_01) && !issentient(var_01)) {
 		var_00 = 1.5;
 	}
 
@@ -406,30 +361,23 @@ _meth_81DE()
 	return var_03;
 }
 
-//Function Number: 9
-_meth_81DD()
-{
+_meth_81DD() {
 	var_00 = 0.25;
 	var_01 = undefined;
 	var_02 = undefined;
-	if(scripts/asm/asm_bb::func_2985())
-	{
-		if(isdefined(self._blackboard.shootparams.ent))
-		{
+	if(scripts/asm/asm_bb::func_2985()) {
+		if(isdefined(self._blackboard.shootparams.ent)) {
 			var_01 = self._blackboard.shootparams.ent;
 		}
-		else if(isdefined(self._blackboard.shootparams.pos))
-		{
+		else if(isdefined(self._blackboard.shootparams.pos)) {
 			var_02 = self._blackboard.shootparams.pos;
 		}
 	}
-	else if(isdefined(self.isnodeoccupied))
-	{
+	else if(isdefined(self.isnodeoccupied)) {
 		var_01 = self.isnodeoccupied;
 	}
 
-	if(isdefined(var_01) && !issentient(var_01))
-	{
+	if(isdefined(var_01) && !issentient(var_01)) {
 		var_00 = 1.5;
 	}
 
@@ -437,30 +385,23 @@ _meth_81DD()
 	return var_03;
 }
 
-//Function Number: 10
-laststandrevive()
-{
+laststandrevive() {
 	var_00 = 0.25;
 	var_01 = undefined;
 	var_02 = undefined;
-	if(scripts/asm/asm_bb::func_2985())
-	{
-		if(isdefined(self._blackboard.shootparams.ent))
-		{
+	if(scripts/asm/asm_bb::func_2985()) {
+		if(isdefined(self._blackboard.shootparams.ent)) {
 			var_01 = self._blackboard.shootparams.ent;
 		}
-		else if(isdefined(self._blackboard.shootparams.pos))
-		{
+		else if(isdefined(self._blackboard.shootparams.pos)) {
 			var_02 = self._blackboard.shootparams.pos;
 		}
 	}
-	else if(isdefined(self.isnodeoccupied))
-	{
+	else if(isdefined(self.isnodeoccupied)) {
 		var_01 = self.isnodeoccupied;
 	}
 
-	if(isdefined(var_01) && !issentient(var_01))
-	{
+	if(isdefined(var_01) && !issentient(var_01)) {
 		var_00 = 1.5;
 	}
 
@@ -468,12 +409,9 @@ laststandrevive()
 	return var_03;
 }
 
-//Function Number: 11
-func_3F0A(param_00,param_01,param_02)
-{
+func_3F0A(param_00,param_01,param_02) {
 	var_03 = _meth_81DE();
-	if(var_03 < 0)
-	{
+	if(var_03 < 0) {
 		var_04 = "right";
 	}
 	else
@@ -483,16 +421,13 @@ func_3F0A(param_00,param_01,param_02)
 
 	var_03 = abs(var_03);
 	var_05 = 0;
-	if(var_03 > 157.5)
-	{
+	if(var_03 > 157.5) {
 		var_05 = 180;
 	}
-	else if(var_03 > 112.5)
-	{
+	else if(var_03 > 112.5) {
 		var_05 = 135;
 	}
-	else if(var_03 > 67.5)
-	{
+	else if(var_03 > 67.5) {
 		var_05 = 90;
 	}
 	else
@@ -505,15 +440,11 @@ func_3F0A(param_00,param_01,param_02)
 	return var_07;
 }
 
-//Function Number: 12
-func_3F09(param_00,param_01,param_02)
-{
+func_3F09(param_00,param_01,param_02) {
 	var_03 = _meth_81DD();
 	var_04 = laststandrevive();
-	if(abs(var_03) > self.var_129AF && abs(var_03) > abs(var_04))
-	{
-		if(var_03 < 0)
-		{
+	if(abs(var_03) > self.var_129AF && abs(var_03) > abs(var_04)) {
+		if(var_03 < 0) {
 			var_05 = "right";
 		}
 		else
@@ -523,16 +454,13 @@ func_3F09(param_00,param_01,param_02)
 
 		var_03 = abs(var_03);
 		var_06 = 0;
-		if(var_03 > 157.5)
-		{
+		if(var_03 > 157.5) {
 			var_06 = 180;
 		}
-		else if(var_03 > 112.5)
-		{
+		else if(var_03 > 112.5) {
 			var_06 = 135;
 		}
-		else if(var_03 > 67.5)
-		{
+		else if(var_03 > 67.5) {
 			var_06 = 90;
 		}
 		else
@@ -545,8 +473,7 @@ func_3F09(param_00,param_01,param_02)
 		return var_08;
 	}
 
-	if(var_08 < 0)
-	{
+	if(var_08 < 0) {
 		var_05 = "up";
 	}
 	else
@@ -556,16 +483,13 @@ func_3F09(param_00,param_01,param_02)
 
 	var_07 = abs(var_07);
 	var_06 = 0;
-	if(var_06 > 157.5)
-	{
+	if(var_06 > 157.5) {
 		var_08 = 180;
 	}
-	else if(var_06 > 112.5)
-	{
+	else if(var_06 > 112.5) {
 		var_08 = 135;
 	}
-	else if(var_06 > 67.5)
-	{
+	else if(var_06 > 67.5) {
 		var_08 = 90;
 	}
 	else
@@ -578,32 +502,23 @@ func_3F09(param_00,param_01,param_02)
 	return var_08;
 }
 
-//Function Number: 13
-func_DF5B(param_00,param_01,param_02,param_03)
-{
+func_DF5B(param_00,param_01,param_02,param_03) {
 	return scripts/asm/asm_bb::bb_reloadrequested();
 }
 
-//Function Number: 14
-func_2B9A(param_00,param_01,param_02,param_03)
-{
+func_2B9A(param_00,param_01,param_02,param_03) {
 	return scripts/asm/asm_bb::func_291A();
 }
 
-//Function Number: 15
-func_3ECC(param_00,param_01,param_02)
-{
+func_3ECC(param_00,param_01,param_02) {
 	var_03 = _meth_81DE();
-	if(var_03 < -135)
-	{
+	if(var_03 < -135) {
 		var_04 = "2r";
 	}
-	else if(var_04 > 135)
-	{
+	else if(var_04 > 135) {
 		var_04 = "2l";
 	}
-	else if(var_04 < 0)
-	{
+	else if(var_04 < 0) {
 		var_04 = "6";
 	}
 	else
@@ -615,36 +530,27 @@ func_3ECC(param_00,param_01,param_02)
 	return var_05;
 }
 
-//Function Number: 16
-func_DF4F(param_00,param_01,param_02)
-{
-	if(!isdefined(self.var_39B) || !isdefined(self.var_39B[self.var_394]))
-	{
+func_DF4F(param_00,param_01,param_02) {
+	if(!isdefined(self.var_39B) || !isdefined(self.var_39B[self.var_394])) {
 		return;
 	}
 
-	if(!scripts/asm/asm::func_232B(param_01,"drop clip"))
-	{
+	if(!scripts/asm/asm::func_232B(param_01,"drop clip")) {
 		return;
 	}
 
-	if(self.var_39B[self.var_394].var_13053)
-	{
+	if(self.var_39B[self.var_394].var_13053) {
 		var_03 = function_00E6(self.var_394);
-		if(isdefined(var_03))
-		{
+		if(isdefined(var_03)) {
 			var_04 = scripts/asm/asm::func_232B(param_01,"attach clip left") || scripts/asm/asm::func_232B(param_01,"attach clip right");
 			var_05 = scripts/asm/asm::func_232B(param_01,"detach clip left") || scripts/asm/asm::func_232B(param_01,"detach clip right") || scripts/asm/asm::func_232B(param_01,"detach clip nohand");
-			if(!var_04)
-			{
+			if(!var_04) {
 				self notify("abort_reload");
 				return;
 			}
 
-			if(var_04 && !var_05)
-			{
-				if(scripts/asm/asm::func_232B(param_01,"attach clip left"))
-				{
+			if(var_04 && !var_05) {
+				if(scripts/asm/asm::func_232B(param_01,"attach clip left")) {
 					var_06 = "tag_accessory_left";
 				}
 				else

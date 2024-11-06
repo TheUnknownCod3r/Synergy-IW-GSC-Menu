@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\mp\maps\mp_depot\mp_depot_fx.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 1
- * Decompile Time: 96 ms
- * Timestamp: 10/27/2023 12:13:21 AM
-*******************************************************************/
+/************************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\mp\maps\mp_depot\mp_depot_fx.gsc
+************************************************************/
 
-//Function Number: 1
-main()
-{
+main() {
 	level._effect["vfx_train_stop"] = loadfx("vfx/iw7/levels/mp_depot/vfx_train_stop.vfx");
 	level._effect["vfx_train_sparks"] = loadfx("vfx/iw7/levels/mp_depot/vfx_train_sparks.vfx");
 	level._effect["vfx_platform_papers"] = loadfx("vfx/iw7/levels/mp_depot/vfx_platform_papers.vfx");

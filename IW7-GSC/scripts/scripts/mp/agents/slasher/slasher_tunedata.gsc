@@ -1,18 +1,11 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\mp\agents\slasher\slasher_tunedata.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 3
- * Decompile Time: 218 ms
- * Timestamp: 10/27/2023 12:11:24 AM
-*******************************************************************/
+/******************************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\mp\agents\slasher\slasher_tunedata.gsc
+******************************************************************/
 
-//Function Number: 1
-setuptunedata()
-{
-	if(!isdefined(level.agenttunedata))
-	{
+setuptunedata() {
+	if(!isdefined(level.agenttunedata)) {
 		level.agenttunedata = [];
 	}
 
@@ -20,9 +13,7 @@ setuptunedata()
 	setupslashertunedata(level.agenttunedata["slasher"]);
 }
 
-//Function Number: 2
-setupslashertunedata(param_00)
-{
+setupslashertunedata(param_00) {
 	param_00.slasher_spin_damage_range_sq = 5625;
 	param_00.slasher_spin_damage_amt = 60;
 	param_00.ram_attack_collision_dist_sq = 1024;
@@ -87,8 +78,6 @@ setupslashertunedata(param_00)
 	param_00.min_moving_pain_dist = 128;
 }
 
-//Function Number: 3
-gettunedata()
-{
+gettunedata() {
 	return level.agenttunedata["slasher"];
 }

@@ -1,27 +1,19 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\mp\gametypes\mugger.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 47
- * Decompile Time: 2350 ms
- * Timestamp: 10/27/2023 12:12:45 AM
-*******************************************************************/
+/***************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\mp\gametypes\mugger.gsc
+***************************************************/
 
-//Function Number: 1
-main()
-{
-	if(getdvar("mapname") == "mp_background")
-	{
+main() {
+	if(getdvar("mapname") == "mp_background") {
 		return;
 	}
 
 	scripts\mp\_globallogic::init();
 	scripts\mp\_globallogic::setupcallbacks();
-	if(function_011C())
-	{
+	if(function_011C()) {
 		level.initializematchrules = ::initializematchrules;
-		[[ level.initializematchrules ]]();
+		[[level.initializematchrules]]();
 		level thread scripts\mp\_utility::reinitializematchrulesonmigration();
 	}
 	else
@@ -49,8 +41,7 @@ main()
 	level.onxpevent = ::onxpevent;
 	level.customcratefunc = ::createmuggercrates;
 	level.assists_disabled = 1;
-	if(level.matchrules_damagemultiplier || level.matchrules_vampirism)
-	{
+	if(level.matchrules_damagemultiplier || level.matchrules_vampirism) {
 		level.modifyplayerdamage = ::scripts\mp\_damage::gamemodemodifyplayerdamage;
 	}
 
@@ -60,9 +51,7 @@ main()
 	level thread onplayerconnect();
 }
 
-//Function Number: 2
-initializematchrules()
-{
+initializematchrules() {
 	scripts\mp\_utility::setcommonrulesfrommatchdata();
 	setdynamicdvar("scr_mugger_roundswitch",0);
 	scripts\mp\_utility::registerroundswitchdvar("mugger",0,0,9);
@@ -81,9 +70,7 @@ initializematchrules()
 	setdynamicdvar("scr_mugger_throwing_knife_mug_frac",level.mugger_throwing_knife_mug_frac);
 }
 
-//Function Number: 3
-onprecachegametype()
-{
+onprecachegametype() {
 	precachemodel("dogtags_iw7_foe");
 	precachemodel("lethal_smoke_grenade_wm");
 	precachempanim("mp_dogtag_spin");
@@ -101,14 +88,11 @@ onprecachegametype()
 	precachestring(&"MPUI_MUGGER_JACKPOT");
 }
 
-//Function Number: 4
-onstartgametype()
-{
+onstartgametype() {
 	setclientnamemode("auto_change");
 	scripts\mp\_utility::setobjectivetext("allies",&"OBJECTIVES_MUGGER");
 	scripts\mp\_utility::setobjectivetext("axis",&"OBJECTIVES_MUGGER");
-	if(level.splitscreen)
-	{
+	if(level.splitscreen) {
 		scripts\mp\_utility::setobjectivescoretext("allies",&"OBJECTIVES_MUGGER");
 		scripts\mp\_utility::setobjectivescoretext("axis",&"OBJECTIVES_MUGGER");
 	}
@@ -135,8 +119,7 @@ onstartgametype()
 	setdynamicdvar("scr_mugger_timeLimit",level.mugger_timelimit);
 	scripts\mp\_utility::registertimelimitdvar("mugger",level.mugger_timelimit);
 	level.mugger_scorelimit = getdvarint("scr_mugger_scorelimit",2500);
-	if(level.mugger_scorelimit == 0)
-	{
+	if(level.mugger_scorelimit == 0) {
 		level.mugger_scorelimit = 2500;
 	}
 
@@ -161,11 +144,8 @@ onstartgametype()
 	level thread mugger_jackpot_watch();
 }
 
-//Function Number: 5
-onplayerconnect()
-{
-	for(;;)
-	{
+onplayerconnect() {
+	for(;;) {
 		level waittill("connected",var_00);
 		var_00.tags_carried = 0;
 		var_00.total_tags_banked = 0;
@@ -173,8 +153,7 @@ onplayerconnect()
 		var_00.pers["assists"] = var_00.total_tags_banked;
 		var_00.objective_additionalentity = var_00.tags_carried;
 		var_00.muggings = [];
-		if(isplayer(var_00) && !isbot(var_00))
-		{
+		if(isplayer(var_00) && !isbot(var_00)) {
 			var_00.dogtagsicon = var_00 scripts\mp\_hud_util::createicon("hud_tagcount",48,48);
 			var_00.dogtagsicon scripts\mp\_hud_util::setpoint("TOP LEFT","TOP LEFT",200,0);
 			var_00.dogtagsicon.alpha = 1;
@@ -197,107 +176,78 @@ onplayerconnect()
 	}
 }
 
-//Function Number: 6
-onspawnplayer()
-{
+onspawnplayer() {
 	self.muggings = [];
-	if(!isagent(self))
-	{
+	if(!isagent(self)) {
 		thread waitreplaysmokefxfornewplayer();
 	}
 }
 
-//Function Number: 7
-hidehudelementongameend(param_00)
-{
+hidehudelementongameend(param_00) {
 	level waittill("game_ended");
-	if(isdefined(param_00))
-	{
+	if(isdefined(param_00)) {
 		param_00.alpha = 0;
 	}
 }
 
-//Function Number: 8
-getspawnpoint()
-{
+getspawnpoint() {
 	var_00 = scripts\mp\_spawnlogic::getteamspawnpoints(self.pers["team"]);
 	var_01 = scripts\mp\_spawnscoring::getspawnpoint(var_00);
 	return var_01;
 	return var_01;
 }
 
-//Function Number: 9
-onxpevent(param_00)
-{
-	if(isdefined(param_00) && param_00 == "suicide")
-	{
+onxpevent(param_00) {
+	if(isdefined(param_00) && param_00 == "suicide") {
 		level thread spawndogtags(self,self);
 	}
 }
 
-//Function Number: 10
-onnormaldeath(param_00,param_01,param_02,param_03,param_04)
-{
+onnormaldeath(param_00,param_01,param_02,param_03,param_04) {
 	scripts\mp\gametypes\common::onnormaldeath(param_00,param_01,param_02,param_03,param_04);
 	level thread spawndogtags(param_00,param_01);
 }
 
-//Function Number: 11
-mugger_init_tags()
-{
+mugger_init_tags() {
 	level.mugger_max_extra_tags = getdvarint("scr_mugger_max_extra_tags",50);
 	level.mugger_extra_tags = [];
 }
 
-//Function Number: 12
-spawndogtags(param_00,param_01)
-{
-	if(isagent(param_01))
-	{
+spawndogtags(param_00,param_01) {
+	if(isagent(param_01)) {
 		param_01 = param_01.triggerportableradarping;
 	}
 
 	var_02 = 0;
 	var_03 = 0;
-	if(isdefined(param_01))
-	{
-		if(param_00 == param_01)
-		{
-			if(param_00.tags_carried > 0)
-			{
+	if(isdefined(param_01)) {
+		if(param_00 == param_01) {
+			if(param_00.tags_carried > 0) {
 				var_02 = param_00.tags_carried;
 				param_00.tags_carried = 0;
 				param_00.objective_additionalentity = 0;
-				if(isplayer(param_00) && !isbot(param_00))
-				{
+				if(isplayer(param_00) && !isbot(param_00)) {
 					param_00.dogtagstext setvalue(param_00.tags_carried);
 					param_00.dogtagstext thread scripts\mp\_hud::fontpulse(param_00);
 					param_00 thread scripts\mp\_hud_message::showsplash("mugger_suicide",var_02);
 				}
 			}
 		}
-		else if(isdefined(param_00.attackerdata) && param_00.attackerdata.size > 0)
-		{
-			if(isplayer(param_01) && isdefined(param_00.attackerdata) && isdefined(param_01.guid) && isdefined(param_00.attackerdata[param_01.guid]))
-			{
+		else if(isdefined(param_00.attackerdata) && param_00.attackerdata.size > 0) {
+			if(isplayer(param_01) && isdefined(param_00.attackerdata) && isdefined(param_01.guid) && isdefined(param_00.attackerdata[param_01.guid])) {
 				var_04 = param_00.attackerdata[param_01.guid];
-				if(isdefined(var_04) && isdefined(var_04.attackerent) && var_04.attackerent == param_01)
-				{
-					if(isdefined(var_04.smeansofdeath) && var_04.smeansofdeath == "MOD_MELEE" || (var_04.var_394 == "throwingknife_mp" || var_04.var_394 == "throwingknifejugg_mp") && level.mugger_throwing_knife_mug_frac > 0)
-					{
+				if(isdefined(var_04) && isdefined(var_04.attackerent) && var_04.attackerent == param_01) {
+					if(isdefined(var_04.smeansofdeath) && var_04.smeansofdeath == "MOD_MELEE" || (var_04.var_394 == "throwingknife_mp" || var_04.var_394 == "throwingknifejugg_mp") && level.mugger_throwing_knife_mug_frac > 0) {
 						var_03 = 1;
-						if(param_00.tags_carried > 0)
-						{
+						if(param_00.tags_carried > 0) {
 							var_02 = param_00.tags_carried;
-							if((var_04.var_394 == "throwingknife_mp" || var_04.var_394 == "throwingknifejugg_mp") && level.mugger_throwing_knife_mug_frac < 1)
-							{
+							if((var_04.var_394 == "throwingknife_mp" || var_04.var_394 == "throwingknifejugg_mp") && level.mugger_throwing_knife_mug_frac < 1) {
 								var_02 = int(ceil(param_00.tags_carried * level.mugger_throwing_knife_mug_frac));
 							}
 
 							param_00.tags_carried = param_00.tags_carried - var_02;
 							param_00.objective_additionalentity = param_00.tags_carried;
-							if(isplayer(param_00) && !isbot(param_00))
-							{
+							if(isplayer(param_00) && !isbot(param_00)) {
 								param_00.dogtagstext setvalue(param_00.tags_carried);
 								param_00.dogtagstext thread scripts\mp\_hud::fontpulse(param_00);
 								param_00 thread scripts\mp\_hud_message::showsplash("callout_mugged",var_02);
@@ -306,8 +256,7 @@ spawndogtags(param_00,param_01)
 
 							playsoundatpos(param_00.origin,"mugger_mugging");
 							param_01 thread scripts\mp\_hud_message::showsplash("callout_mugger",var_02);
-							if(var_04.var_394 == "throwingknife_mp" || var_04.var_394 == "throwingknifejugg_mp")
-							{
+							if(var_04.var_394 == "throwingknife_mp" || var_04.var_394 == "throwingknifejugg_mp") {
 								param_01 playlocalsound("mugger_you_mugged");
 							}
 						}
@@ -320,15 +269,13 @@ spawndogtags(param_00,param_01)
 		}
 	}
 
-	if(isagent(param_00))
-	{
+	if(isagent(param_00)) {
 		var_05 = param_00.origin + (0,0,14);
 		playsoundatpos(var_05,"mp_killconfirm_tags_drop");
 		level notify("mugger_jackpot_increment");
 		var_06 = mugger_tag_temp_spawn(param_00.origin,40,160);
 		var_06.victim = param_00.triggerportableradarping;
-		if(isdefined(param_01) && param_00 != param_01)
-		{
+		if(isdefined(param_01) && param_00 != param_01) {
 			var_06.var_4F = param_01;
 		}
 		else
@@ -338,8 +285,7 @@ spawndogtags(param_00,param_01)
 
 		return;
 	}
-	else if(isdefined(level.dogtags[var_02.guid]))
-	{
+	else if(isdefined(level.dogtags[var_02.guid])) {
 		playfx(level.mugger_fx["vanish"],level.dogtags[var_02.guid].curorigin);
 		level.dogtags[var_02.guid] notify("reset");
 	}
@@ -358,8 +304,7 @@ spawndogtags(param_00,param_01)
 		var_08.dogtag = level.dogtags[var_02.guid];
 		level.dogtags[var_02.guid].victim = var_02;
 		level.dogtags[var_02.guid].objid = scripts\mp\objidpoolmanager::requestminimapid(99);
-		if(level.dogtags[var_02.guid].objid != -1)
-		{
+		if(level.dogtags[var_02.guid].objid != -1) {
 			scripts\mp\objidpoolmanager::minimap_objective_add(level.dogtags[var_02.guid].objid,"invisible",(0,0,0));
 			scripts\mp\objidpoolmanager::minimap_objective_icon(level.dogtags[var_02.guid].objid,"waypoint_dogtags2");
 		}
@@ -375,8 +320,7 @@ spawndogtags(param_00,param_01)
 	level.dogtags[param_01.guid] scripts\mp\_gameobjects::initializetagpathvariables();
 	level.dogtags[param_01.guid] scripts\mp\_gameobjects::allowuse("any");
 	level.dogtags[param_01.guid].visuals[0] show();
-	if(isdefined(var_02) && param_01 != var_02)
-	{
+	if(isdefined(var_02) && param_01 != var_02) {
 		level.dogtags[param_01.guid].var_4F = var_02;
 	}
 	else
@@ -385,8 +329,7 @@ spawndogtags(param_00,param_01)
 	}
 
 	level.dogtags[param_01.guid] thread timeout();
-	if(var_03 < 5)
-	{
+	if(var_03 < 5) {
 		scripts\mp\objidpoolmanager::minimap_objective_position(level.dogtags[param_01.guid].objid,var_06);
 		scripts\mp\objidpoolmanager::minimap_objective_state(level.dogtags[param_01.guid].objid,"active");
 	}
@@ -397,18 +340,15 @@ spawndogtags(param_00,param_01)
 
 	playsoundatpos(var_06,"mp_killconfirm_tags_drop");
 	level.dogtags[param_01.guid].temp_tag = 0;
-	if(var_03 == 0)
-	{
+	if(var_03 == 0) {
 		level notify("mugger_jackpot_increment");
 	}
 
 	var_09 = 0;
-	while(var_06 < var_02)
-	{
+	while(var_06 < var_02) {
 		var_09 = mugger_tag_temp_spawn(param_00.origin,40,160);
 		var_09.victim = param_00;
-		if(isdefined(param_01) && param_00 != param_01)
-		{
+		if(isdefined(param_01) && param_00 != param_01) {
 			var_09.var_4F = param_01;
 			continue;
 		}
@@ -418,28 +358,22 @@ spawndogtags(param_00,param_01)
 	}
 }
 
-//Function Number: 13
-mugger_tag_pickup_wait()
-{
+mugger_tag_pickup_wait() {
 	level endon("game_ended");
 	self endon("reset");
 	self endon("reused");
 	self endon("deleted");
-	for(;;)
-	{
+	for(;;) {
 		self.trigger waittill("trigger",var_00);
-		if(!scripts\mp\_utility::isreallyalive(var_00))
-		{
+		if(!scripts\mp\_utility::isreallyalive(var_00)) {
 			continue;
 		}
 
-		if(var_00 scripts\mp\_utility::isusingremote() || isdefined(var_00.spawningafterremotedeath))
-		{
+		if(var_00 scripts\mp\_utility::isusingremote() || isdefined(var_00.spawningafterremotedeath)) {
 			continue;
 		}
 
-		if(isdefined(var_00.classname) && var_00.classname == "script_vehicle")
-		{
+		if(isdefined(var_00.classname) && var_00.classname == "script_vehicle") {
 			continue;
 		}
 
@@ -447,9 +381,7 @@ mugger_tag_pickup_wait()
 	}
 }
 
-//Function Number: 14
-mugger_add_extra_tag(param_00)
-{
+mugger_add_extra_tag(param_00) {
 	var_01[0] = spawn("script_model",(0,0,0));
 	var_01[0] setmodel("dogtags_iw7_foe");
 	var_02 = spawn("trigger_radius",(0,0,0),0,32,32);
@@ -473,32 +405,25 @@ mugger_add_extra_tag(param_00)
 	return var_03;
 }
 
-//Function Number: 15
-mugger_first_unused_or_oldest_extra_tag()
-{
+mugger_first_unused_or_oldest_extra_tag() {
 	var_00 = undefined;
 	var_01 = -1;
-	foreach(var_03 in level.mugger_extra_tags)
-	{
-		if(var_03.interactteam == "none")
-		{
+	foreach(var_03 in level.mugger_extra_tags) {
+		if(var_03.interactteam == "none") {
 			var_03.last_used_time = gettime();
 			var_03.visuals[0] show();
 			return var_03;
 		}
 
-		if(!isdefined(var_00) || var_03.last_used_time < var_01)
-		{
+		if(!isdefined(var_00) || var_03.last_used_time < var_01) {
 			var_01 = var_03.last_used_time;
 			var_00 = var_03;
 		}
 	}
 
-	if(level.mugger_extra_tags.size < level.mugger_max_extra_tags)
-	{
+	if(level.mugger_extra_tags.size < level.mugger_max_extra_tags) {
 		var_05 = mugger_add_extra_tag(level.mugger_extra_tags.size);
-		if(isdefined(var_05))
-		{
+		if(isdefined(var_05)) {
 			var_05.last_used_time = gettime();
 			return var_05;
 		}
@@ -510,9 +435,7 @@ mugger_first_unused_or_oldest_extra_tag()
 	return var_00;
 }
 
-//Function Number: 16
-mugger_tag_temp_spawn(param_00,param_01,param_02)
-{
+mugger_tag_temp_spawn(param_00,param_01,param_02) {
 	var_03 = mugger_first_unused_or_oldest_extra_tag();
 	var_04 = param_00 + (0,0,14);
 	var_05 = (0,randomfloat(360),0);
@@ -524,8 +447,7 @@ mugger_tag_temp_spawn(param_00,param_01,param_02)
 	var_04 = var_09;
 	var_08 = var_04 + (0,0,-100);
 	var_09 = playerphysicstrace(var_04,var_08);
-	if(var_09[2] != var_08[2])
-	{
+	if(var_09[2] != var_08[2]) {
 		var_09 = var_09 + (0,0,14);
 	}
 
@@ -539,32 +461,25 @@ mugger_tag_temp_spawn(param_00,param_01,param_02)
 	return var_03;
 }
 
-//Function Number: 17
-mugger_tag_pile_notify(param_00,param_01,param_02,param_03,param_04)
-{
+mugger_tag_pile_notify(param_00,param_01,param_02,param_03,param_04) {
 	level notify("mugger_tag_pile",param_00);
 	var_05 = scripts\mp\objidpoolmanager::requestminimapid(99);
-	if(var_05 != -1)
-	{
+	if(var_05 != -1) {
 		scripts\mp\objidpoolmanager::minimap_objective_add(var_05,"active",param_00);
 		scripts\mp\objidpoolmanager::minimap_objective_icon(var_05,"waypoint_dogtag_pile");
 	}
 
 	level scripts\engine\utility::delaythread(5,::mugger_pile_icon_remove,var_05);
-	if(param_02 >= 10)
-	{
+	if(param_02 >= 10) {
 		level.mugger_last_mega_drop = gettime();
 		level.mugger_jackpot_num_tags = 0;
-		foreach(var_07 in level.players)
-		{
+		foreach(var_07 in level.players) {
 			var_07 playsoundtoplayer("mp_defcon_one",var_07);
-			if(isdefined(param_03) && var_07 == param_03)
-			{
+			if(isdefined(param_03) && var_07 == param_03) {
 				continue;
 			}
 
-			if(isdefined(param_04) && var_07 == param_04)
-			{
+			if(isdefined(param_04) && var_07 == param_04) {
 				continue;
 			}
 
@@ -584,39 +499,25 @@ mugger_tag_pile_notify(param_00,param_01,param_02,param_03,param_04)
 	}
 }
 
-//Function Number: 18
-hudelemdestroy()
-{
-	if(isdefined(self))
-	{
+hudelemdestroy() {
+	if(isdefined(self)) {
 		self destroy();
 	}
 }
 
-//Function Number: 19
-mugger_monitor_tank_pickups()
-{
+mugger_monitor_tank_pickups() {
 	level endon("game_ended");
-	for(;;)
-	{
+	for(;;) {
 		var_00 = getentarray("remote_tank","targetname");
 		var_01 = getentarray("trigger_dogtag","targetname");
-		foreach(var_03 in level.players)
-		{
-			if(isdefined(var_03.using_remote_tank) && var_03.using_remote_tank == 1)
-			{
-				foreach(var_05 in var_00)
-				{
-					if(isdefined(var_05) && isdefined(var_05.triggerportableradarping) && var_05.triggerportableradarping == var_03)
-					{
-						foreach(var_07 in var_01)
-						{
-							if(isdefined(var_07) && isdefined(var_07.dogtag))
-							{
-								if(isdefined(var_07.dogtag.interactteam) && var_07.dogtag.interactteam != "none")
-								{
-									if(var_05 istouching(var_07))
-									{
+		foreach(var_03 in level.players) {
+			if(isdefined(var_03.using_remote_tank) && var_03.using_remote_tank == 1) {
+				foreach(var_05 in var_00) {
+					if(isdefined(var_05) && isdefined(var_05.triggerportableradarping) && var_05.triggerportableradarping == var_03) {
+						foreach(var_07 in var_01) {
+							if(isdefined(var_07) && isdefined(var_07.dogtag)) {
+								if(isdefined(var_07.dogtag.interactteam) && var_07.dogtag.interactteam != "none") {
+									if(var_05 istouching(var_07)) {
 										var_07.dogtag onuse(var_05.triggerportableradarping);
 									}
 								}
@@ -631,25 +532,16 @@ mugger_monitor_tank_pickups()
 	}
 }
 
-//Function Number: 20
-mugger_monitor_remote_uav_pickups()
-{
+mugger_monitor_remote_uav_pickups() {
 	level endon("game_ended");
-	for(;;)
-	{
+	for(;;) {
 		var_00 = getentarray("trigger_dogtag","targetname");
-		foreach(var_02 in level.players)
-		{
-			if(isdefined(var_02) && isdefined(var_02.remoteuav))
-			{
-				foreach(var_04 in var_00)
-				{
-					if(isdefined(var_04) && isdefined(var_04.dogtag))
-					{
-						if(isdefined(var_04.dogtag.interactteam) && var_04.dogtag.interactteam != "none")
-						{
-							if(var_02.remoteuav istouching(var_04))
-							{
+		foreach(var_02 in level.players) {
+			if(isdefined(var_02) && isdefined(var_02.remoteuav)) {
+				foreach(var_04 in var_00) {
+					if(isdefined(var_04) && isdefined(var_04.dogtag)) {
+						if(isdefined(var_04.dogtag.interactteam) && var_04.dogtag.interactteam != "none") {
+							if(var_02.remoteuav istouching(var_04)) {
 								var_04.dogtag onuse(var_02);
 							}
 						}
@@ -662,32 +554,26 @@ mugger_monitor_remote_uav_pickups()
 	}
 }
 
-//Function Number: 21
-mugger_check_muggernaut()
-{
+mugger_check_muggernaut() {
 	level endon("game_ended");
 	self endon("disconnect");
 	self notify("checking_muggernaut");
 	self endon("checking_muggernaut");
 	wait(2);
-	if(self.muggings.size < level.mugger_muggernaut_muggings_needed)
-	{
+	if(self.muggings.size < level.mugger_muggernaut_muggings_needed) {
 		return;
 	}
 
 	var_00 = self.muggings[self.muggings.size - 1];
 	var_01 = var_00 - level.mugger_muggernaut_window;
 	var_02 = [];
-	foreach(var_04 in self.muggings)
-	{
-		if(var_04 >= var_01)
-		{
+	foreach(var_04 in self.muggings) {
+		if(var_04 >= var_01) {
 			var_02[var_02.size] = var_04;
 		}
 	}
 
-	if(var_02.size >= level.mugger_muggernaut_muggings_needed)
-	{
+	if(var_02.size >= level.mugger_muggernaut_muggings_needed) {
 		thread scripts\mp\_utility::giveunifiedpoints("muggernaut");
 		mugger_bank_tags(1,1);
 		self.muggings = [];
@@ -697,39 +583,28 @@ mugger_check_muggernaut()
 	self.muggings = var_02;
 }
 
-//Function Number: 22
-mugger_pile_icon_remove(param_00)
-{
+mugger_pile_icon_remove(param_00) {
 	scripts\mp\objidpoolmanager::returnminimapid(param_00);
 }
 
-//Function Number: 23
-_hidefromplayer(param_00)
-{
+_hidefromplayer(param_00) {
 	self hide();
-	foreach(var_02 in level.players)
-	{
-		if(var_02 != param_00)
-		{
+	foreach(var_02 in level.players) {
+		if(var_02 != param_00) {
 			self showtoplayer(var_02);
 		}
 	}
 }
 
-//Function Number: 24
-onuse(param_00)
-{
-	if(isdefined(param_00.triggerportableradarping))
-	{
+onuse(param_00) {
+	if(isdefined(param_00.triggerportableradarping)) {
 		param_00 = param_00.triggerportableradarping;
 	}
 
-	if(self.temp_tag)
-	{
+	if(self.temp_tag) {
 		self.trigger playsound("mp_killconfirm_tags_deny");
 	}
-	else if(isdefined(self.var_4F) && param_00 == self.var_4F)
-	{
+	else if(isdefined(self.var_4F) && param_00 == self.var_4F) {
 		self.trigger playsound("mp_killconfirm_tags_pickup");
 		param_00 scripts\mp\_utility::incperstat("confirmed",1);
 		param_00 scripts\mp\_persistence::statsetchild("round","confirmed",param_00.pers["confirmed"]);
@@ -745,40 +620,32 @@ onuse(param_00)
 	resettags(1);
 }
 
-//Function Number: 25
-onpickup()
-{
+onpickup() {
 	level endon("game_ended");
 	self endon("disconnect");
-	while(!isdefined(self.pers))
-	{
+	while(!isdefined(self.pers)) {
 		wait(0.05);
 	}
 
 	thread mugger_delayed_banking();
 }
 
-//Function Number: 26
-mugger_delayed_banking()
-{
+mugger_delayed_banking() {
 	self notify("banking");
 	self endon("banking");
 	level endon("banking_all");
 	self.var_1141D++;
 	self.objective_additionalentity = self.tags_carried;
-	if(isplayer(self) && !isbot(self))
-	{
+	if(isplayer(self) && !isbot(self)) {
 		self.dogtagstext setvalue(self.tags_carried);
 		self.dogtagstext thread scripts\mp\_hud::fontpulse(self);
 	}
 
 	wait(1.5);
 	var_00 = level.mugger_bank_limit - self.tags_carried;
-	if(var_00 > 0 && var_00 <= 5)
-	{
+	if(var_00 > 0 && var_00 <= 5) {
 		var_01 = undefined;
-		switch(var_00)
-		{
+		switch(var_00) {
 			case 1:
 				var_01 = "mugger_1more";
 				break;
@@ -800,8 +667,7 @@ mugger_delayed_banking()
 				break;
 		}
 
-		if(isdefined(var_01))
-		{
+		if(isdefined(var_01)) {
 			self playsoundtoplayer(var_01,self);
 		}
 	}
@@ -810,12 +676,9 @@ mugger_delayed_banking()
 	mugger_bank_tags(0);
 }
 
-//Function Number: 27
-mugger_bank_tags(param_00,param_01)
-{
+mugger_bank_tags(param_00,param_01) {
 	var_02 = 0;
-	if(param_00 == 1)
-	{
+	if(param_00 == 1) {
 		var_02 = self.tags_carried;
 	}
 	else
@@ -824,11 +687,9 @@ mugger_bank_tags(param_00,param_01)
 		var_02 = self.tags_carried - var_03;
 	}
 
-	if(var_02 > 0)
-	{
+	if(var_02 > 0) {
 		self.tags_to_bank = var_02;
-		if(!isdefined(param_01))
-		{
+		if(!isdefined(param_01)) {
 			thread scripts\mp\_hud_message::showsplash("callout_tags_banked",var_02);
 		}
 
@@ -836,8 +697,7 @@ mugger_bank_tags(param_00,param_01)
 		self.total_tags_banked = self.total_tags_banked + var_02;
 		self.tags_carried = self.tags_carried - var_02;
 		self.objective_additionalentity = self.tags_carried;
-		if(isplayer(self) && !isbot(self))
-		{
+		if(isplayer(self) && !isbot(self)) {
 			self.dogtagstext setvalue(self.tags_carried);
 			self.dogtagstext thread scripts\mp\_hud::fontpulse(self);
 		}
@@ -847,11 +707,8 @@ mugger_bank_tags(param_00,param_01)
 	}
 }
 
-//Function Number: 28
-onplayerscore(param_00,param_01)
-{
-	if(param_00 == "tags_banked" && isdefined(param_01) && isdefined(param_01.tags_to_bank) && param_01.tags_to_bank > 0)
-	{
+onplayerscore(param_00,param_01) {
+	if(param_00 == "tags_banked" && isdefined(param_01) && isdefined(param_01.tags_to_bank) && param_01.tags_to_bank > 0) {
 		var_02 = param_01.tags_to_bank * scripts\mp\_rank::getscoreinfovalue("kill_confirmed");
 		param_01.tags_to_bank = 0;
 		return var_02;
@@ -860,11 +717,8 @@ onplayerscore(param_00,param_01)
 	return 0;
 }
 
-//Function Number: 29
-resettags(param_00)
-{
-	if(!param_00)
-	{
+resettags(param_00) {
+	if(!param_00) {
 		level notify("mugger_jackpot_increment");
 	}
 
@@ -875,20 +729,16 @@ resettags(param_00)
 	self.trigger.origin = (0,0,1000);
 	self.visuals[0].origin = (0,0,1000);
 	scripts\mp\_gameobjects::allowuse("none");
-	if(isdefined(self.jackpot_tag) && self.jackpot_tag == 1)
-	{
+	if(isdefined(self.jackpot_tag) && self.jackpot_tag == 1) {
 		level.var_BD92--;
 	}
 
-	if(!self.temp_tag)
-	{
+	if(!self.temp_tag) {
 		scripts\mp\objidpoolmanager::minimap_objective_state(self.objid,"invisible");
 	}
 }
 
-//Function Number: 30
-timeout()
-{
+timeout() {
 	level endon("game_ended");
 	self endon("death");
 	self endon("deleted");
@@ -898,8 +748,7 @@ timeout()
 	self endon("timeout_start");
 	level scripts\mp\_hostmigration::waitlongdurationwithhostmigrationpause(27);
 	var_00 = 3;
-	while(var_00 > 0)
-	{
+	while(var_00 > 0) {
 		self.visuals[0] hide();
 		wait(0.25);
 		self.visuals[0] show();
@@ -911,24 +760,19 @@ timeout()
 	thread resettags(0);
 }
 
-//Function Number: 31
-clearonvictimdisconnect(param_00)
-{
+clearonvictimdisconnect(param_00) {
 	level endon("game_ended");
 	var_01 = param_00.guid;
 	param_00 waittill("disconnect");
-	if(isdefined(level.dogtags[var_01]))
-	{
+	if(isdefined(level.dogtags[var_01])) {
 		level.dogtags[var_01] scripts\mp\_gameobjects::allowuse("none");
 		playfx(level.mugger_fx["vanish"],level.dogtags[var_01].curorigin);
 		level.dogtags[var_01] notify("reset");
 		wait(0.05);
-		if(isdefined(level.dogtags[var_01]))
-		{
+		if(isdefined(level.dogtags[var_01])) {
 			scripts\mp\objidpoolmanager::returnminimapid(level.dogtags[var_01].objid);
 			level.dogtags[var_01].trigger delete();
-			for(var_02 = 0;var_02 < level.dogtags[var_01].visuals.size;var_02++)
-			{
+			for(var_02 = 0;var_02 < level.dogtags[var_01].visuals.size;var_02++) {
 				level.dogtags[var_01].visuals[var_02] delete();
 			}
 
@@ -938,12 +782,9 @@ clearonvictimdisconnect(param_00)
 	}
 }
 
-//Function Number: 32
-ontimelimit()
-{
+ontimelimit() {
 	level notify("banking_all");
-	foreach(var_01 in level.players)
-	{
+	foreach(var_01 in level.players) {
 		var_01 mugger_bank_tags(1);
 	}
 
@@ -951,13 +792,10 @@ ontimelimit()
 	scripts\mp\_gamelogic::default_ontimelimit();
 }
 
-//Function Number: 33
-mugger_jackpot_watch()
-{
+mugger_jackpot_watch() {
 	level endon("game_ended");
 	level endon("jackpot_stop");
-	if(level.mugger_jackpot_limit <= 0)
-	{
+	if(level.mugger_jackpot_limit <= 0) {
 		return;
 	}
 
@@ -965,18 +803,14 @@ mugger_jackpot_watch()
 	level.mugger_jackpot_tags_unspawned = 0;
 	level.mugger_jackpot_num_tags = 0;
 	level thread mugger_jackpot_timer();
-	for(;;)
-	{
+	for(;;) {
 		level waittill("mugger_jackpot_increment");
 		var_00 = 1;
-		if(var_00)
-		{
+		if(var_00) {
 			level.var_BD8E++;
 			var_01 = clamp(float(level.mugger_jackpot_num_tags / level.mugger_jackpot_limit),0,1);
-			if(level.mugger_jackpot_num_tags >= level.mugger_jackpot_limit)
-			{
-				if(isdefined(level.mugger_jackpot_text))
-				{
+			if(level.mugger_jackpot_num_tags >= level.mugger_jackpot_limit) {
+				if(isdefined(level.mugger_jackpot_text)) {
 					level.mugger_jackpot_text thread scripts\mp\_hud::fontpulse(level.players[0]);
 				}
 
@@ -988,35 +822,27 @@ mugger_jackpot_watch()
 	}
 }
 
-//Function Number: 34
-mugger_jackpot_timer()
-{
+mugger_jackpot_timer() {
 	level endon("game_ended");
 	level endon("jackpot_stop");
 	scripts\mp\_utility::gameflagwait("prematch_done");
-	for(;;)
-	{
+	for(;;) {
 		wait(level.mugger_jackpot_wait_sec);
 		level notify("mugger_jackpot_increment");
 	}
 }
 
-//Function Number: 35
-mugger_jackpot_drop()
-{
+mugger_jackpot_drop() {
 	level endon("game_ended");
 	level notify("reset_airdrop");
 	level endon("reset_airdrop");
 	var_00 = level.mugger_dropzones[level.script][randomint(level.mugger_dropzones[level.script].size)];
 	var_00 = var_00 + (randomintrange(-50,50),randomintrange(-50,50),0);
-	for(;;)
-	{
+	for(;;) {
 		var_01 = level.players[0];
 		var_02 = 1;
-		if(isdefined(var_01) && scripts\mp\_utility::currentactivevehiclecount() < scripts\mp\_utility::maxvehiclesallowed() && level.fauxvehiclecount + var_02 < scripts\mp\_utility::maxvehiclesallowed() && level.numdropcrates < 8)
-		{
-			foreach(var_04 in level.players)
-			{
+		if(isdefined(var_01) && scripts\mp\_utility::currentactivevehiclecount() < scripts\mp\_utility::maxvehiclesallowed() && level.fauxvehiclecount + var_02 < scripts\mp\_utility::maxvehiclesallowed() && level.numdropcrates < 8) {
+			foreach(var_04 in level.players) {
 				var_04 thread scripts\mp\_hud_message::showsplash("mugger_jackpot_incoming");
 			}
 
@@ -1035,32 +861,24 @@ mugger_jackpot_drop()
 	level thread mugger_jackpot_run(var_00);
 }
 
-//Function Number: 36
-mugger_jackpot_pile_notify(param_00,param_01,param_02)
-{
-	if(!isdefined(level.jackpotpileobjid))
-	{
+mugger_jackpot_pile_notify(param_00,param_01,param_02) {
+	if(!isdefined(level.jackpotpileobjid)) {
 		level.jackpotpileobjid = scripts\mp\objidpoolmanager::requestminimapid(99);
-		if(level.jackpotpileobjid != -1)
-		{
+		if(level.jackpotpileobjid != -1) {
 			scripts\mp\objidpoolmanager::minimap_objective_add(level.jackpotpileobjid,"active",param_00);
 			scripts\mp\objidpoolmanager::minimap_objective_icon(level.jackpotpileobjid,"waypoint_jackpot");
 		}
 	}
-	else if(level.jackpotpileobjid != -1)
-	{
+	else if(level.jackpotpileobjid != -1) {
 		scripts\mp\objidpoolmanager::minimap_objective_position(level.jackpotpileobjid,param_00);
 	}
 
-	if(param_02 >= 10)
-	{
-		foreach(var_04 in level.players)
-		{
+	if(param_02 >= 10) {
+		foreach(var_04 in level.players) {
 			var_04 playlocalsound(game["music"]["victory_" + var_04.pers["team"]]);
 		}
 
-		if(!isdefined(level.jackpotpileicon))
-		{
+		if(!isdefined(level.jackpotpileicon)) {
 			level.jackpotpileicon = newhudelem();
 			level.jackpotpileicon setshader("waypoint_jackpot",64,64);
 			level.jackpotpileicon setwaypoint(0,1,0,0);
@@ -1073,11 +891,8 @@ mugger_jackpot_pile_notify(param_00,param_01,param_02)
 	}
 }
 
-//Function Number: 37
-mugger_jackpot_pile_notify_cleanup()
-{
-	if(level.jackpotpileobjid != -1)
-	{
+mugger_jackpot_pile_notify_cleanup() {
+	if(level.jackpotpileobjid != -1) {
 		scripts\mp\objidpoolmanager::minimap_objective_state(level.jackpotpileobjid,"invisible");
 	}
 
@@ -1086,9 +901,7 @@ mugger_jackpot_pile_notify_cleanup()
 	level.jackpotpileicon scripts\engine\utility::delaythread(2,::hudelemdestroy);
 }
 
-//Function Number: 38
-mugger_jackpot_fx(param_00)
-{
+mugger_jackpot_fx(param_00) {
 	mugger_jackpot_fx_cleanup();
 	var_01 = param_00 + (0,0,30);
 	var_02 = param_00 + (0,0,-1000);
@@ -1101,37 +914,29 @@ mugger_jackpot_fx(param_00)
 	thread spawnfxdelay(var_03["position"],var_05,var_06,0.5);
 	wait(0.1);
 	playfxontag(level.mugger_fx["smoke"],level.jackpot_zone,"tag_fx");
-	foreach(var_08 in level.players)
-	{
+	foreach(var_08 in level.players) {
 		var_08.mugger_fx_playing = 1;
 	}
 
 	level.jackpot_zone.mugger_fx_playing = 1;
 }
 
-//Function Number: 39
-mugger_jackpot_fx_cleanup()
-{
+mugger_jackpot_fx_cleanup() {
 	stopfxontag(level.mugger_fx["smoke"],level.jackpot_zone,"tag_fx");
 	level.jackpot_zone hide();
-	if(isdefined(level.jackpot_targetfx))
-	{
+	if(isdefined(level.jackpot_targetfx)) {
 		level.jackpot_targetfx delete();
 	}
 
-	if(level.jackpot_zone.mugger_fx_playing)
-	{
+	if(level.jackpot_zone.mugger_fx_playing) {
 		level.jackpot_zone.mugger_fx_playing = 0;
 		stopfxontag(level.mugger_fx["smoke"],level.jackpot_zone,"tag_fx");
 		wait(0.05);
 	}
 }
 
-//Function Number: 40
-spawnfxdelay(param_00,param_01,param_02,param_03)
-{
-	if(isdefined(level.jackpot_targetfx))
-	{
+spawnfxdelay(param_00,param_01,param_02,param_03) {
+	if(isdefined(level.jackpot_targetfx)) {
 		level.jackpot_targetfx delete();
 	}
 
@@ -1140,23 +945,18 @@ spawnfxdelay(param_00,param_01,param_02,param_03)
 	triggerfx(level.jackpot_targetfx);
 }
 
-//Function Number: 41
-waitreplaysmokefxfornewplayer()
-{
+waitreplaysmokefxfornewplayer() {
 	level endon("game_ended");
 	self endon("disconnect");
 	scripts\mp\_utility::gameflagwait("prematch_done");
 	wait(0.5);
-	if(level.jackpot_zone.mugger_fx_playing == 1 && !isdefined(self.mugger_fx_playing))
-	{
+	if(level.jackpot_zone.mugger_fx_playing == 1 && !isdefined(self.mugger_fx_playing)) {
 		playfxontagforclients(level.mugger_fx["smoke"],level.jackpot_zone,"tag_fx",self);
 		self.mugger_fx_playing = 1;
 	}
 }
 
-//Function Number: 42
-mugger_jackpot_run(param_00)
-{
+mugger_jackpot_run(param_00) {
 	level endon("game_ended");
 	level endon("jackpot_timeout");
 	level notify("jackpot_stop");
@@ -1164,25 +964,21 @@ mugger_jackpot_run(param_00)
 	level thread mugger_jackpot_fx(param_00);
 	level thread mugger_jackpot_abort_after_time(30);
 	level waittill("airdrop_jackpot_landed",param_00);
-	if(level.jackpotpileobjid != -1)
-	{
+	if(level.jackpotpileobjid != -1) {
 		scripts\mp\objidpoolmanager::minimap_objective_position(level.jackpotpileobjid,param_00);
 	}
 
 	level.jackpotpileicon.x = param_00[0];
 	level.jackpotpileicon.y = param_00[1];
 	level.jackpotpileicon.var_3A6 = param_00[2] + 32;
-	foreach(var_02 in level.players)
-	{
+	foreach(var_02 in level.players) {
 		var_02 playsoundtoplayer("mp_defcon_one",var_02);
 		var_02 thread scripts\mp\_hud_message::showsplash("mugger_jackpot",level.mugger_jackpot_tags_unspawned);
 	}
 
 	level.mugger_jackpot_tags_spawned = 0;
-	while(level.mugger_jackpot_tags_unspawned > 0)
-	{
-		if(level.mugger_jackpot_tags_spawned < 10)
-		{
+	while(level.mugger_jackpot_tags_unspawned > 0) {
+		if(level.mugger_jackpot_tags_spawned < 10) {
 			level.var_BD93--;
 			var_04 = mugger_tag_temp_spawn(param_00,0,400);
 			var_04.jackpot_tag = 1;
@@ -1196,26 +992,21 @@ mugger_jackpot_run(param_00)
 	}
 
 	level.mugger_jackpot_num_tags = 0;
-	while(level.mugger_jackpot_tags_spawned > 0)
-	{
+	while(level.mugger_jackpot_tags_spawned > 0) {
 		wait(1);
 	}
 
 	mugger_jackpot_cleanup();
 }
 
-//Function Number: 43
-mugger_jackpot_cleanup()
-{
+mugger_jackpot_cleanup() {
 	level notify("jackpot_cleanup");
 	mugger_jackpot_pile_notify_cleanup();
 	mugger_jackpot_fx_cleanup();
 	level thread mugger_jackpot_watch();
 }
 
-//Function Number: 44
-mugger_jackpot_abort_after_time(param_00)
-{
+mugger_jackpot_abort_after_time(param_00) {
 	level endon("jackpot_cleanup");
 	level notify("jackpot_abort_after_time");
 	level endon("jackpot_abort_after_time");
@@ -1223,31 +1014,23 @@ mugger_jackpot_abort_after_time(param_00)
 	level notify("jackpot_timeout");
 }
 
-//Function Number: 45
-createmuggercrates(param_00,param_01)
-{
+createmuggercrates(param_00,param_01) {
 	scripts\mp\killstreaks\_airdrop::addcratetype("airdrop_mugger","airdrop_jackpot",1,::muggercratethink);
 }
 
-//Function Number: 46
-muggercratethink(param_00)
-{
+muggercratethink(param_00) {
 	self endon("death");
 	level notify("airdrop_jackpot_landed",self.origin);
 	wait(0.5);
 	scripts\mp\killstreaks\_airdrop::deletecrateold();
 }
 
-//Function Number: 47
-createdropzones()
-{
+createdropzones() {
 	level.mugger_dropzones = [];
 	var_00 = undefined;
-	if(isdefined(var_00) && var_00.size)
-	{
+	if(isdefined(var_00) && var_00.size) {
 		var_01 = 0;
-		foreach(var_03 in var_00)
-		{
+		foreach(var_03 in var_00) {
 			level.mugger_dropzones[level.script][var_01] = var_03.origin;
 			var_01++;
 		}

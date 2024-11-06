@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: 3384.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 77
- * Decompile Time: 67 ms
- * Timestamp: 10/27/2023 12:26:52 AM
-*******************************************************************/
+/***********************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\cp\zombies\interaction_neil.gsc
+***********************************************************/
 
-//Function Number: 1
-init_neil_quest()
-{
+init_neil_quest() {
 	level.var_4EFB = ::func_4EFA;
 	level.var_3C10 = 0;
 	level.var_6ACD = [];
@@ -43,9 +37,7 @@ init_neil_quest()
 	func_9697(var_01);
 }
 
-//Function Number: 2
-func_F447()
-{
+func_F447() {
 	level.var_BEB2 = "robot_kevin_black_upper";
 	level.var_BEB1 = "robot_kevin_black_lower";
 	level.var_74B8 = "robot_park_kevin_02";
@@ -54,18 +46,14 @@ func_F447()
 	level.var_BECF = level._effect["neil_light_on_red"];
 }
 
-//Function Number: 3
-func_BED2()
-{
+func_BED2() {
 	func_BED3();
 	func_BED4();
 	func_BED8();
 	level thread func_1176E();
 }
 
-//Function Number: 4
-func_BED3()
-{
+func_BED3() {
 	scripts\engine\utility::flag_wait("neil_head_attached");
 	level.var_13BD2 = level.wave_num;
 	wait(0.5);
@@ -99,17 +87,13 @@ func_BED3()
 	func_BEB6(level.neil);
 }
 
-//Function Number: 5
-func_BED4()
-{
+func_BED4() {
 	func_BED6();
 	func_10778();
 	func_BEBD(level.neil,&"CP_ZMB_INTERACTIONS_MISSING_BATTERY");
-	for(;;)
-	{
+	for(;;) {
 		level.neil.var_13084 waittill("trigger",var_00);
-		if(!var_00 scripts\cp\utility::is_valid_player() || !isdefined(level.var_BEB0))
-		{
+		if(!var_00 scripts\cp\utility::is_valid_player() || !isdefined(level.var_BEB0)) {
 			continue;
 		}
 
@@ -131,9 +115,7 @@ func_BED4()
 	func_BEB6(level.neil);
 }
 
-//Function Number: 6
-func_BED6()
-{
+func_BED6() {
 	scripts\engine\utility::flag_wait("transformation_complete");
 	level.neil vehicle_setspeedimmediate(0);
 	level.neil stoploopsound();
@@ -143,26 +125,20 @@ func_BED6()
 	level.neil.upper_body playsound("n31l_challenge_pause");
 }
 
-//Function Number: 7
-func_BED7()
-{
+func_BED7() {
 	func_BEC4();
 	wait(1);
 	level.neil.upper_body playsound("n31l_challenge_reactivate");
 	wait(4);
 }
 
-//Function Number: 8
-func_BED8()
-{
+func_BED8() {
 	func_BEDA();
 	func_10779();
 	func_BEBD(level.neil,&"CP_ZMB_INTERACTIONS_MISSING_FLOPPY");
-	for(;;)
-	{
+	for(;;) {
 		level.neil.var_13084 waittill("trigger",var_00);
-		if(!var_00 scripts\cp\utility::is_valid_player() || !isdefined(level.var_BEC3))
-		{
+		if(!var_00 scripts\cp\utility::is_valid_player() || !isdefined(level.var_BEC3)) {
 			continue;
 		}
 
@@ -184,17 +160,13 @@ func_BED8()
 	func_BEB6(level.neil);
 }
 
-//Function Number: 9
-func_BEDA()
-{
+func_BEDA() {
 	scripts\engine\utility::flag_wait("transformation_complete");
 	wait(2);
 	func_BEDB(level.neil);
 }
 
-//Function Number: 10
-func_BEDB(param_00)
-{
+func_BEDB(param_00) {
 	wait(1);
 	level.neil vehicle_setspeedimmediate(0);
 	level.neil stoploopsound();
@@ -204,9 +176,7 @@ func_BEDB(param_00)
 	level.neil.upper_body playsound("n31l_challenge_pause");
 }
 
-//Function Number: 11
-func_BED9()
-{
+func_BED9() {
 	func_BEC4();
 	wait(1);
 	level.neil.upper_body playsound("n31l_upgrade");
@@ -215,26 +185,21 @@ func_BED9()
 	wait(4);
 }
 
-//Function Number: 12
-func_BEBD(param_00,param_01,param_02)
-{
-	if(!isdefined(param_02))
-	{
+func_BEBD(param_00,param_01,param_02) {
+	if(!isdefined(param_02)) {
 		level notify("neil_enabled_changed");
 		level.var_1C3F = undefined;
 	}
 
 	param_00.var_13084 makeusable();
-	if(!isdefined(param_01))
-	{
+	if(!isdefined(param_01)) {
 		param_01 = &"CP_ZMB_CHALLENGES_USE_NEIL";
 	}
 
 	param_00.var_13084 sethintstring(param_01);
 	param_00.var_13084 setuserange(90);
 	param_00.var_13084 setusefov(180);
-	if(!scripts\engine\utility::istrue(level.var_A6E1))
-	{
+	if(!scripts\engine\utility::istrue(level.var_A6E1)) {
 		param_00 setscriptablepartstate("light","on");
 	}
 	else
@@ -245,29 +210,22 @@ func_BEBD(param_00,param_01,param_02)
 	}
 
 	param_00.var_6265 = 1;
-	if(!isdefined(param_00.var_13084))
-	{
+	if(!isdefined(param_00.var_13084)) {
 	}
 }
 
-//Function Number: 13
-func_BEBC(param_00)
-{
+func_BEBC(param_00) {
 	param_00 setscriptablepartstate("light","off");
 	param_00.var_6265 = 0;
-	if(!isdefined(param_00.var_13084))
-	{
+	if(!isdefined(param_00.var_13084)) {
 		return;
 	}
 
 	param_00.var_13084 makeunusable();
 }
 
-//Function Number: 14
-func_BEE2(param_00)
-{
-	foreach(var_02 in level.players)
-	{
+func_BEE2(param_00) {
+	foreach(var_02 in level.players) {
 		var_02 playlocalsound("mp_intel_received");
 	}
 
@@ -278,23 +236,17 @@ func_BEE2(param_00)
 	return var_05;
 }
 
-//Function Number: 15
-func_BEB7(param_00,param_01,param_02,param_03)
-{
-	if(param_01 == "challenge_force_complete")
-	{
+func_BEB7(param_00,param_01,param_02,param_03) {
+	if(param_01 == "challenge_force_complete") {
 		level.challenge_data[param_00].success = 1;
 	}
-	else if(param_01 == "challenge_force_fail")
-	{
+	else if(param_01 == "challenge_force_fail") {
 		level.challenge_data[param_00].success = 0;
 	}
 
 	scripts\cp\cp_challenge::deactivate_current_challenge();
-	if(param_01 == "challenge_deactivated" || param_01 == "challenge_force_complete" || param_01 == "challenge_force_fail")
-	{
-		if(param_03 != level.var_C1E1)
-		{
+	if(param_01 == "challenge_deactivated" || param_01 == "challenge_force_complete" || param_01 == "challenge_force_fail") {
+		if(param_03 != level.var_C1E1) {
 			param_03 = level.var_C1E1;
 			level thread setperk();
 			level.var_6ACC = 0;
@@ -305,16 +257,13 @@ func_BEB7(param_00,param_01,param_02,param_03)
 
 		level.var_6ACD[level.var_6ACD.size] = param_00;
 		level.var_6ACC++;
-		if(level.var_6ACC >= 2)
-		{
-			foreach(var_05 in level.players)
-			{
+		if(level.var_6ACC >= 2) {
+			foreach(var_05 in level.players) {
 				var_05 thread scripts\cp\cp_vo::add_to_nag_vo("nag_no_challenge","zmb_comment_vo",60,10,6,1);
 			}
 		}
 
-		if(level.var_6ACC > 3)
-		{
+		if(level.var_6ACC > 3) {
 			level thread func_BEC0();
 		}
 
@@ -322,22 +271,18 @@ func_BEB7(param_00,param_01,param_02,param_03)
 		return;
 	}
 
-	if(param_03 != level.var_C1E1)
-	{
+	if(param_03 != level.var_C1E1) {
 		param_03 = level.var_C1E1;
 		level thread setperk();
 		level.neil.upper_body func_BEDF("happy");
 	}
 }
 
-//Function Number: 16
-func_BED1()
-{
+func_BED1() {
 	wait(5);
 	level thread scripts\cp\cp_challenge::activate_new_challenge("next_challenge");
 	var_00 = int(gettime() + 30000);
-	foreach(var_02 in level.players)
-	{
+	foreach(var_02 in level.players) {
 		var_02 setclientomnvar("ui_intel_timer",var_00);
 	}
 
@@ -345,8 +290,7 @@ func_BED1()
 	var_04 = 5;
 	setomnvar("zm_neil_progress",level.var_C1E1 / var_04);
 	level.neil.upper_body func_BEDF("happy");
-	if(getdvar("challenge_prep_time") != "")
-	{
+	if(getdvar("challenge_prep_time") != "") {
 		wait(3);
 	}
 	else
@@ -356,10 +300,8 @@ func_BED1()
 
 	level notify("next_challenge_starting");
 	wait(1);
-	if(scripts\engine\utility::flag("pause_challenges"))
-	{
-		foreach(var_02 in level.players)
-		{
+	if(scripts\engine\utility::flag("pause_challenges")) {
+		foreach(var_02 in level.players) {
 			var_02 setclientomnvar("zm_show_challenge",10);
 		}
 
@@ -368,10 +310,8 @@ func_BED1()
 
 	scripts\cp\cp_challenge::func_62C6();
 	wait(5);
-	if(scripts\engine\utility::flag("pause_challenges"))
-	{
-		foreach(var_02 in level.players)
-		{
+	if(scripts\engine\utility::flag("pause_challenges")) {
+		foreach(var_02 in level.players) {
 			var_02 setclientomnvar("zm_show_challenge",10);
 		}
 
@@ -379,9 +319,7 @@ func_BED1()
 	}
 }
 
-//Function Number: 17
-func_BEB6(param_00)
-{
+func_BEB6(param_00) {
 	level endon("game_ended");
 	level.var_C1E1 = 0;
 	var_01 = 5;
@@ -389,8 +327,7 @@ func_BEB6(param_00)
 	level.var_6ACD = [];
 	level.var_3C12 = undefined;
 	var_02 = [];
-	switch(level.var_3C16)
-	{
+	switch(level.var_3C16) {
 		case 0:
 			var_02 = level.tier_1_challenges;
 			break;
@@ -405,28 +342,23 @@ func_BEB6(param_00)
 	}
 
 	level.neil playsound("n31l_challenge_start");
-	if(!isdefined(level.var_1C3F))
-	{
+	if(!isdefined(level.var_1C3F)) {
 		level.neil thread func_1C5F();
 	}
 
-	for(;;)
-	{
+	for(;;) {
 		var_03 = level.var_C1E1;
 		var_04 = func_BEE2(var_02);
 		var_05 = level scripts\engine\utility::waittill_any_return("challenge_deactivated","challenge_timed_out","challenge_force_complete","challenge_force_fail");
 		func_BEB7(var_04,var_05,param_00,var_03);
 		level.var_3C12 = scripts\engine\utility::array_remove(level.var_3C12,var_04);
 		var_01 = 5;
-		if(level.var_C1E1 * level.var_3C16 + 1 >= var_01 * level.var_3C16 + 1)
-		{
+		if(level.var_C1E1 * level.var_3C16 + 1 >= var_01 * level.var_3C16 + 1) {
 			break;
 		}
 
-		if(level.var_3C12.size <= 0)
-		{
-			if(isdefined(level.var_6ACD) && level.var_6ACD.size > 0)
-			{
+		if(level.var_3C12.size <= 0) {
+			if(isdefined(level.var_6ACD) && level.var_6ACD.size > 0) {
 				level.var_3C12 = level.var_6ACD;
 				level.var_6ACD = [];
 			}
@@ -444,21 +376,17 @@ func_BEB6(param_00)
 	func_BEB5(param_00);
 }
 
-//Function Number: 18
-func_BEB5(param_00)
-{
+func_BEB5(param_00) {
 	level endon("game_ended");
 	wait(5);
 	var_01 = "iw7_erad_zm";
 	var_02 = "cp_fullbody_synaptic_";
-	foreach(var_04 in level.players)
-	{
+	foreach(var_04 in level.players) {
 		var_04 setclientomnvar("zm_show_challenge",5);
 		level.current_zm_show_challenge = 5;
 	}
 
-	switch(level.var_3C16)
-	{
+	switch(level.var_3C16) {
 		case 1:
 			level thread func_BEB8(param_00,var_01,&"CP_ZMB_CHALLENGES_NEIL_3");
 			break;
@@ -474,21 +402,16 @@ func_BEB5(param_00)
 
 	wait(3);
 	level.neil.upper_body thread func_BECD("n31l_challenge_special_complete");
-	foreach(var_04 in level.players)
-	{
+	foreach(var_04 in level.players) {
 		var_04 setclientomnvar("zm_show_challenge",-1);
 	}
 }
 
-//Function Number: 19
-func_BEB8(param_00,param_01,param_02)
-{
+func_BEB8(param_00,param_01,param_02) {
 	func_BEBD(param_00,param_02);
-	for(;;)
-	{
+	for(;;) {
 		param_00.var_13084 waittill("trigger",var_03);
-		if(!var_03 scripts\cp\utility::is_valid_player())
-		{
+		if(!var_03 scripts\cp\utility::is_valid_player()) {
 			continue;
 		}
 
@@ -499,8 +422,7 @@ func_BEB8(param_00,param_01,param_02)
 	level.neil.upper_body thread func_BECD("n31l_challenge_success_generic_dj");
 	level thread play_dj_vo_kitt_arrival(var_03);
 	wait(5);
-	if(isdefined(var_03))
-	{
+	if(isdefined(var_03)) {
 		var_03 thread scripts\cp\cp_vo::try_to_play_vo("challenge_n31l_complete","zmb_comment_vo","highest",10,1,0,0,100);
 	}
 
@@ -508,22 +430,16 @@ func_BEB8(param_00,param_01,param_02)
 	level thread setspectatedefaults(100);
 }
 
-//Function Number: 20
-play_dj_vo_kitt_arrival(param_00)
-{
+play_dj_vo_kitt_arrival(param_00) {
 	level endon("game_ended");
-	if(!isdefined(param_00))
-	{
+	if(!isdefined(param_00)) {
 		return;
 	}
 
-	if(isdefined(param_00.vo_system.vo_currently_playing))
-	{
-		if(isdefined(param_00.vo_system.vo_currently_playing.alias))
-		{
+	if(isdefined(param_00.vo_system.vo_currently_playing)) {
+		if(isdefined(param_00.vo_system.vo_currently_playing.alias)) {
 			var_01 = strtok(param_00.vo_system.vo_currently_playing.alias,"_");
-			if(var_01[0] == "dj")
-			{
+			if(var_01[0] == "dj") {
 				level thread scripts\cp\cp_vo::try_to_play_vo("dj_sign_off_kitt","zmb_dj_vo","highest",10,1,0,0);
 				return;
 			}
@@ -539,9 +455,7 @@ play_dj_vo_kitt_arrival(param_00)
 	level thread scripts\cp\cp_vo::try_to_play_vo("dj_sign_off_kitt","zmb_dj_vo","highest",10,0,0,0);
 }
 
-//Function Number: 21
-func_5559(param_00)
-{
+func_5559(param_00) {
 	func_BEBC(level.neil);
 	scripts\engine\utility::flag_clear("transformation_complete");
 	level.var_1C3F = undefined;
@@ -551,8 +465,7 @@ func_5559(param_00)
 	scripts\engine\utility::flag_set("transform");
 	scripts\engine\utility::flag_set("halt_neil");
 	level.neil notify("neil_quiet");
-	if(!scripts\engine\utility::istrue(param_00))
-	{
+	if(!scripts\engine\utility::istrue(param_00)) {
 		return;
 	}
 
@@ -560,11 +473,8 @@ func_5559(param_00)
 	level.neil setmodel("robot_kevin_lower_invisi");
 }
 
-//Function Number: 22
-func_106EF(param_00)
-{
-	if(!isdefined(param_00))
-	{
+func_106EF(param_00) {
+	if(!isdefined(param_00)) {
 		param_00 = level.neil;
 	}
 
@@ -578,8 +488,7 @@ func_106EF(param_00)
 	var_01 setnonstick(1);
 	var_01.upper_body setnonstick(1);
 	var_01 setscriptablepartstate("thrusters","liftoff");
-	if(scripts\engine\utility::istrue(level.var_A6E1))
-	{
+	if(scripts\engine\utility::istrue(level.var_A6E1)) {
 		var_01.upper_body func_BEDF("kitt");
 		var_01.upper_body setscriptablepartstate("facefx","kitt");
 	}
@@ -591,26 +500,20 @@ func_106EF(param_00)
 	return var_01;
 }
 
-//Function Number: 23
-func_13631()
-{
-	while(level.dj.current_state != "idle")
-	{
+func_13631() {
+	while(level.dj.current_state != "idle") {
 		wait(1);
 	}
 
 	level.the_hoff = spawnstruct();
 	level.the_hoff.origin = (0,0,0);
-	for(;;)
-	{
-		if(level.dj.current_state != "close_window")
-		{
+	for(;;) {
+		if(level.dj.current_state != "close_window") {
 			scripts\cp\maps\cp_zmb\cp_zmb_dj::set_dj_state("close_window");
 		}
 
 		wait(1);
-		if(level.dj.current_state == "close_window")
-		{
+		if(level.dj.current_state == "close_window") {
 			break;
 		}
 	}
@@ -621,36 +524,27 @@ func_13631()
 	level.dj hide();
 }
 
-//Function Number: 24
-func_54FB()
-{
+func_54FB() {
 	var_00 = scripts\engine\utility::getstructarray("dj_quest_door","script_noteworthy");
-	foreach(var_02 in var_00)
-	{
+	foreach(var_02 in var_00) {
 		scripts\cp\cp_interaction::remove_from_current_interaction_list(var_02);
 	}
 
 	level.disable_broadcast = 1;
 }
 
-//Function Number: 25
-func_61CF()
-{
+func_61CF() {
 	var_00 = scripts\engine\utility::getstructarray("dj_quest_door","script_noteworthy");
-	foreach(var_02 in var_00)
-	{
+	foreach(var_02 in var_00) {
 		scripts\cp\cp_interaction::add_to_current_interaction_list(var_02);
 	}
 }
 
-//Function Number: 26
-func_12636(param_00,param_01)
-{
+func_12636(param_00,param_01) {
 	func_54FB();
 	func_5559(1);
 	level.neil vehicle_teleport(level.neil.origin,level.neil.angles);
-	if(scripts\engine\utility::istrue(level.var_A6E1))
-	{
+	if(scripts\engine\utility::istrue(level.var_A6E1)) {
 		level.neil.upper_body setscriptablepartstate("facefx","off");
 	}
 
@@ -661,8 +555,7 @@ func_12636(param_00,param_01)
 	var_02 movez(2000,3,2,1);
 	var_02 waittill("movedone");
 	playfx(level._effect["neil_flash"],var_02.origin);
-	if(!scripts\engine\utility::istrue(level.var_A6E1))
-	{
+	if(!scripts\engine\utility::istrue(level.var_A6E1)) {
 		var_02 setmodel("robot_kevin_black_lower");
 		var_02.upper_body setmodel("robot_kevin_black_upper");
 		var_02.upper_body func_BEDF("kitt");
@@ -675,11 +568,9 @@ func_12636(param_00,param_01)
 	var_02 hide();
 	var_02.upper_body hide();
 	func_13631();
-	if(isdefined(level.force_song_func))
-	{
-		if(!isdefined(level.forced_songs["knight_rider"]))
-		{
-			level thread [[ level.force_song_func ]](undefined,"mus_pa_sp_knightrider",undefined,undefined,undefined,"knight_rider");
+	if(isdefined(level.force_song_func)) {
+		if(!isdefined(level.forced_songs["knight_rider"])) {
+			level thread [[level.force_song_func]](undefined,"mus_pa_sp_knightrider",undefined,undefined,undefined,"knight_rider");
 		}
 	}
 
@@ -711,16 +602,13 @@ func_12636(param_00,param_01)
 	level.the_hoff scripts\engine\utility::waittill_any_timeout_1(var_04,"death");
 	level.the_hoff_revive = undefined;
 	level notify("hoff_death");
-	if(scripts\cp\utility::isplayingsolo() || scripts\engine\utility::istrue(level.only_one_player))
-	{
-		if(!isalive(level.players[0]) || scripts\engine\utility::istrue(level.players[0].inlaststand))
-		{
-			level thread [[ level.endgame ]]("axis",level.end_game_string_index["kia"]);
+	if(scripts\cp\utility::isplayingsolo() || scripts\engine\utility::istrue(level.only_one_player)) {
+		if(!isalive(level.players[0]) || scripts\engine\utility::istrue(level.players[0].inlaststand)) {
+			level thread [[level.endgame]]("axis",level.end_game_string_index["kia"]);
 		}
 	}
 
-	if(isdefined(level.the_hoff) && isalive(level.the_hoff))
-	{
+	if(isdefined(level.the_hoff) && isalive(level.the_hoff)) {
 		level.the_hoff playsound("dj_kitt_notify_departure");
 		func_5559(0);
 		level.the_hoff notify("timetogo");
@@ -792,21 +680,16 @@ func_12636(param_00,param_01)
 	func_61CF();
 }
 
-//Function Number: 27
-func_A6E2()
-{
+func_A6E2() {
 	self endon("start_intro");
 	self endon("death");
-	for(;;)
-	{
+	for(;;) {
 		self scriptmodelplayanim("IW7_cp_zom_n31l_intro_loop",1);
 		wait(1.3);
 	}
 }
 
-//Function Number: 28
-func_1176C(param_00)
-{
+func_1176C(param_00) {
 	var_01 = param_00.origin + (0,0,-2000);
 	param_00 movez(-2000,6,4,2);
 	wait(3);
@@ -838,17 +721,13 @@ func_1176C(param_00)
 	scripts\engine\utility::flag_clear("transform");
 }
 
-//Function Number: 29
-func_107F0(param_00,param_01)
-{
+func_107F0(param_00,param_01) {
 	func_F447();
 	level.var_A6E1 = 1;
 	var_02 = undefined;
-	while(!isdefined(var_02))
-	{
+	while(!isdefined(var_02)) {
 		var_02 = scripts\cp\zombies\zombies_spawning::func_33B1("the_hoff",param_01.origin,param_01.angles,"allies",undefined,param_00);
-		if(!isdefined(var_02))
-		{
+		if(!isdefined(var_02)) {
 			wait(0.2);
 			continue;
 		}
@@ -863,40 +742,32 @@ func_107F0(param_00,param_01)
 	var_02.scripted_mode = 1;
 	var_02.can_revive = 1;
 	var_02.var_FFEF = 1;
-	foreach(var_04 in level.players)
-	{
+	foreach(var_04 in level.players) {
 		var_04 notify("hoff_spawned");
 	}
 
 	return var_02;
 }
 
-//Function Number: 30
-func_1176D()
-{
+func_1176D() {
 	self endon("death");
 	self endon("timetogo");
 	self ghostskulls_total_waves(48);
 	self.footstepdetectdist = 1500;
-	for(;;)
-	{
+	for(;;) {
 		func_1176B();
 		func_1176F();
 		wait(1);
 	}
 }
 
-//Function Number: 31
-func_1176F()
-{
-	if(!isdefined(self.isnodeoccupied))
-	{
+func_1176F() {
+	if(!isdefined(self.isnodeoccupied)) {
 		_meth_83FF();
 		return;
 	}
 
-	if(self getpersstat(self.isnodeoccupied))
-	{
+	if(self getpersstat(self.isnodeoccupied)) {
 		self.scripted_mode = 0;
 		return;
 	}
@@ -904,16 +775,12 @@ func_1176F()
 	_meth_83FF();
 }
 
-//Function Number: 32
-func_1176B()
-{
+func_1176B() {
 	var_00 = func_78C4();
-	if(isdefined(var_00))
-	{
+	if(isdefined(var_00)) {
 		physics_getbodyid(var_00);
 		self.scripted_mode = 0;
-		if(isalive(self))
-		{
+		if(isalive(self)) {
 			self.precacheleaderboards = 0;
 			scripts\mp\agents\c6\c6_agent::func_41D9();
 			self.disablearrivals = 0;
@@ -921,9 +788,7 @@ func_1176B()
 	}
 }
 
-//Function Number: 33
-physics_getbodyid(param_00)
-{
+physics_getbodyid(param_00) {
 	param_00 endon("death");
 	param_00 endon("reviving");
 	param_00 endon("revive");
@@ -931,8 +796,7 @@ physics_getbodyid(param_00)
 	self endon("death");
 	self endon("timetogo");
 	scripts\mp\agents\c6\c6_agent::func_41D9();
-	if(distancesquared(self.origin,param_00.origin) > 16000000)
-	{
+	if(distancesquared(self.origin,param_00.origin) > 16000000) {
 		return;
 	}
 
@@ -943,8 +807,7 @@ physics_getbodyid(param_00)
 	self waittill("scriptedGoal_reached");
 	self.disablearrivals = 0;
 	self.precacheleaderboards = 0;
-	if(!isdefined(param_00.reviveent))
-	{
+	if(!isdefined(param_00.reviveent)) {
 		return;
 	}
 
@@ -952,26 +815,21 @@ physics_getbodyid(param_00)
 	wait(4);
 }
 
-//Function Number: 34
-_meth_83FF()
-{
+_meth_83FF() {
 	var_00 = scripts\cp\utility::get_array_of_valid_players(1,self.origin);
 	var_01 = scripts\engine\utility::getclosest(self.origin,var_00);
-	if(!isdefined(var_01))
-	{
+	if(!isdefined(var_01)) {
 		return;
 	}
 
 	var_02 = var_01.origin - self.origin;
 	var_03 = length2dsquared(var_02);
-	if(var_03 < -3036)
-	{
+	if(var_03 < -3036) {
 		return;
 	}
 
 	var_04 = gettime();
-	if(isdefined(self.var_A8EF) && var_04 - self.var_A8EF < 500)
-	{
+	if(isdefined(self.var_A8EF) && var_04 - self.var_A8EF < 500) {
 		return;
 	}
 
@@ -984,14 +842,10 @@ _meth_83FF()
 	self.var_3320 = 1;
 }
 
-//Function Number: 35
-func_78C4()
-{
+func_78C4() {
 	var_00 = sortbydistance(level.players,self.origin);
-	foreach(var_02 in var_00)
-	{
-		if(scripts\cp\cp_laststand::player_in_laststand(var_02) && !scripts\engine\utility::istrue(var_02.is_being_revived) && !scripts\engine\utility::istrue(var_02.in_afterlife_arcade))
-		{
+	foreach(var_02 in var_00) {
+		if(scripts\cp\cp_laststand::player_in_laststand(var_02) && !scripts\engine\utility::istrue(var_02.is_being_revived) && !scripts\engine\utility::istrue(var_02.in_afterlife_arcade)) {
 			return var_02;
 		}
 	}
@@ -999,14 +853,11 @@ func_78C4()
 	return undefined;
 }
 
-//Function Number: 36
-func_A82C()
-{
+func_A82C() {
 	wait(0.1);
 	level.neil setscriptablepartstate("lingerfx","on");
 	level thread func_A56E(level.neil.origin);
-	while(scripts\engine\utility::flag("landing_zone_active"))
-	{
+	while(scripts\engine\utility::flag("landing_zone_active")) {
 		wait(0.1);
 	}
 
@@ -1014,31 +865,24 @@ func_A82C()
 	level.neil setscriptablepartstate("lingerfx","off");
 }
 
-//Function Number: 37
-func_A56E(param_00)
-{
+func_A56E(param_00) {
 	var_01 = spawn("trigger_radius",param_00,0,40,72);
 	level thread func_51CE(var_01);
-	while(scripts\engine\utility::flag("landing_zone_active"))
-	{
+	while(scripts\engine\utility::flag("landing_zone_active")) {
 		var_01 waittill("trigger",var_02);
-		if(isdefined(level.the_hoff) && var_02 == level.the_hoff)
-		{
+		if(isdefined(level.the_hoff) && var_02 == level.the_hoff) {
 			continue;
 		}
 
-		if(isdefined(var_02.padding_damage))
-		{
+		if(isdefined(var_02.padding_damage)) {
 			continue;
 		}
 
-		if(!scripts\engine\utility::flag("landing_zone_active"))
-		{
+		if(!scripts\engine\utility::flag("landing_zone_active")) {
 			continue;
 		}
 
-		if(isplayer(var_02))
-		{
+		if(isplayer(var_02)) {
 			var_02 dodamage(5,param_00);
 			var_02.padding_damage = 1;
 			var_02 setvelocity(vectornormalize(var_02.origin - param_00) * 100);
@@ -1046,8 +890,7 @@ func_A56E(param_00)
 			continue;
 		}
 
-		if(scripts\cp\utility::should_be_affected_by_trap(var_02))
-		{
+		if(scripts\cp\utility::should_be_affected_by_trap(var_02)) {
 			var_02.nocorpse = 1;
 			var_02.full_gib = 1;
 			var_02 dodamage(var_02.health + 100,param_00);
@@ -1057,24 +900,17 @@ func_A56E(param_00)
 	var_01 delete();
 }
 
-//Function Number: 38
-func_51CE(param_00)
-{
+func_51CE(param_00) {
 	param_00 endon("death");
-	while(isdefined(param_00))
-	{
+	while(isdefined(param_00)) {
 		var_01 = getentarray("placed_transponder","script_noteworthy");
-		foreach(var_03 in var_01)
-		{
-			if(!isdefined(param_00))
-			{
+		foreach(var_03 in var_01) {
+			if(!isdefined(param_00)) {
 				break;
 			}
 
-			if(var_03 istouching(param_00))
-			{
-				if(isdefined(var_03.triggerportableradarping) && var_03.triggerportableradarping scripts\cp\utility::is_valid_player(1))
-				{
+			if(var_03 istouching(param_00)) {
+				if(isdefined(var_03.triggerportableradarping) && var_03.triggerportableradarping scripts\cp\utility::is_valid_player(1)) {
 					var_03.triggerportableradarping playlocalsound("ww_magicbox_laughter");
 				}
 
@@ -1086,39 +922,30 @@ func_51CE(param_00)
 	}
 }
 
-//Function Number: 39
-remove_padding_damage()
-{
+remove_padding_damage() {
 	self endon("disconnect");
 	wait(0.25);
 	self.padding_damage = undefined;
 }
 
-//Function Number: 40
-func_7895(param_00,param_01)
-{
-	if(!isdefined(level.var_3C12))
-	{
+func_7895(param_00,param_01) {
+	if(!isdefined(level.var_3C12)) {
 		level.var_3C12 = param_01;
 	}
 
 	var_02 = undefined;
-	if(level.players.size > 1)
-	{
+	if(level.players.size > 1) {
 		var_02 = scripts\engine\utility::random(level.var_3C12);
 	}
 	else
 	{
-		for(;;)
-		{
-			if(level.var_3C12.size == 0)
-			{
+		for(;;) {
+			if(level.var_3C12.size == 0) {
 				level.var_3C12 = level.var_6ACD;
 			}
 
 			var_02 = scripts\engine\utility::random(level.var_3C12);
-			if(!level.challenge_data[var_02].var_1C8C)
-			{
+			if(!level.challenge_data[var_02].var_1C8C) {
 				level.var_3C12 = scripts\engine\utility::array_remove(level.var_3C12,var_02);
 				wait(0.05);
 				continue;
@@ -1133,12 +960,9 @@ func_7895(param_00,param_01)
 	return var_02;
 }
 
-//Function Number: 41
-setperk()
-{
+setperk() {
 	wait(3);
-	foreach(var_01 in level.players)
-	{
+	foreach(var_01 in level.players) {
 		scripts\engine\utility::waitframe();
 	}
 
@@ -1147,17 +971,13 @@ setperk()
 	level thread setspectatedefaults(100);
 }
 
-//Function Number: 42
-func_BEE1(param_00,param_01,param_02,param_03)
-{
-	if(!isdefined(param_01))
-	{
+func_BEE1(param_00,param_01,param_02,param_03) {
+	if(!isdefined(param_01)) {
 		param_01 = (0,0,0);
 	}
 
 	var_04 = (0,0,0);
-	if(isdefined(param_00.angles))
-	{
+	if(isdefined(param_00.angles)) {
 		var_04 = param_00.angles;
 	}
 
@@ -1166,8 +986,7 @@ func_BEE1(param_00,param_01,param_02,param_03)
 	var_05.var_13084.origin = var_05.origin + (0,0,60);
 	var_05.var_13084 linkto(var_05);
 	var_05 setcandamage(0);
-	if(scripts\engine\utility::istrue(param_03))
-	{
+	if(scripts\engine\utility::istrue(param_03)) {
 		var_05.is_neil = 1;
 		var_05.upper_body = spawn("script_model",var_05.origin);
 		var_05.upper_body.angles = var_05.angles;
@@ -1178,9 +997,7 @@ func_BEE1(param_00,param_01,param_02,param_03)
 	return var_05;
 }
 
-//Function Number: 43
-func_F999(param_00)
-{
+func_F999(param_00) {
 	level.neil = func_BEE1(param_00,undefined,level.var_8C89);
 	level.neil attachpath(param_00);
 	level.var_BEDC = spawnfx(level._effect["neil_repair_sparks"],level.neil gettagorigin("tag_fx"));
@@ -1191,43 +1008,33 @@ func_F999(param_00)
 	level thread func_BEDE(level.neil);
 }
 
-//Function Number: 44
-func_BEDE(param_00)
-{
+func_BEDE(param_00) {
 	level endon("stop_repair_sounds");
 	wait(1);
 }
 
-//Function Number: 45
-func_BECC(param_00)
-{
+func_BECC(param_00) {
 	wait(1);
 	func_BEC4();
 }
 
-//Function Number: 46
-func_BECD(param_00)
-{
-	if(!isdefined(param_00) || isdefined(level.var_BEE3))
-	{
+func_BECD(param_00) {
+	if(!isdefined(param_00) || isdefined(level.var_BEE3)) {
 		return;
 	}
 
 	level.var_BEE3 = 1;
-	if(!isdefined(level.neil.var_101F6))
-	{
+	if(!isdefined(level.neil.var_101F6)) {
 		level.neil.var_101F6 = gettime() + 5000;
 	}
-	else if(level.neil.var_101F6 >= gettime())
-	{
+	else if(level.neil.var_101F6 >= gettime()) {
 		level.var_BEE3 = undefined;
 		return;
 	}
 
 	level.neil.var_101F6 = gettime() + 5000;
 	var_01 = lookupsoundlength(param_00);
-	if(soundexists(param_00))
-	{
+	if(soundexists(param_00)) {
 		self playsound(param_00);
 	}
 
@@ -1236,16 +1043,12 @@ func_BECD(param_00)
 	level.var_BEE3 = undefined;
 }
 
-//Function Number: 47
-func_11025()
-{
+func_11025() {
 	self endon("death");
 	wait(3);
 	var_00 = 6400;
-	for(;;)
-	{
-		if(!func_203C(self.origin,var_00) || isdefined(self.var_1E8F) || scripts\engine\utility::flag("transform"))
-		{
+	for(;;) {
+		if(!func_203C(self.origin,var_00) || isdefined(self.var_1E8F) || scripts\engine\utility::flag("transform")) {
 			wait(0.25);
 			continue;
 		}
@@ -1257,19 +1060,16 @@ func_11025()
 		self setscriptablepartstate("smoketrail","off");
 		self.upper_body scriptmodelclearanim();
 		self.upper_body scriptmodelplayanim("IW7_cp_zom_n31l_halt",1);
-		if(!isdefined(self.var_118E0))
-		{
+		if(!isdefined(self.var_118E0)) {
 			self.var_118E0 = gettime() + 30000;
 			self.upper_body thread func_BECD("n31l_spawn_assembly");
 		}
-		else if(self.var_118E0 <= gettime())
-		{
+		else if(self.var_118E0 <= gettime()) {
 			self.var_118E0 = gettime() + 30000;
 			self.upper_body thread func_BECD("n31l_spawn_assembly");
 		}
 
-		while(func_203C(self.origin,var_00) || scripts\engine\utility::flag("transform"))
-		{
+		while(func_203C(self.origin,var_00) || scripts\engine\utility::flag("transform")) {
 			wait(0.5);
 		}
 
@@ -1282,18 +1082,14 @@ func_11025()
 	}
 }
 
-//Function Number: 48
-func_BEBF(param_00)
-{
+func_BEBF(param_00) {
 	self endon("neil_quiet");
 	self endon("death");
 	var_01 = gettime();
 	var_02 = var_01 + param_00;
 	var_03 = gettime();
-	while(var_03 <= var_02)
-	{
-		if(isdefined(self.var_1E8F))
-		{
+	while(var_03 <= var_02) {
+		if(isdefined(self.var_1E8F)) {
 			wait(0.5);
 			continue;
 		}
@@ -1304,16 +1100,12 @@ func_BEBF(param_00)
 	}
 }
 
-//Function Number: 49
-func_BEDF(param_00)
-{
-	if(isdefined(level.var_A6E1))
-	{
+func_BEDF(param_00) {
+	if(isdefined(level.var_A6E1)) {
 		param_00 = "kitt";
 	}
 
-	switch(param_00)
-	{
+	switch(param_00) {
 		case "happy":
 			self setscriptablepartstate("happy","show");
 			break;
@@ -1344,14 +1136,10 @@ func_BEDF(param_00)
 	}
 }
 
-//Function Number: 50
-func_203C(param_00,param_01)
-{
+func_203C(param_00,param_01) {
 	var_02 = 0;
-	foreach(var_04 in level.players)
-	{
-		if(var_04 scripts\cp\utility::is_valid_player() && distancesquared(var_04.origin,param_00) < param_01)
-		{
+	foreach(var_04 in level.players) {
+		if(var_04 scripts\cp\utility::is_valid_player() && distancesquared(var_04.origin,param_00) < param_01) {
 			return 1;
 		}
 	}
@@ -1359,9 +1147,7 @@ func_203C(param_00,param_01)
 	return 0;
 }
 
-//Function Number: 51
-pickup_head(param_00,param_01)
-{
+pickup_head(param_00,param_01) {
 	param_01 playlocalsound("neil_part_pickup");
 	playfx(level._effect["souvenir_pickup"],param_00.var_BEC5.origin);
 	scripts\cp\cp_interaction::remove_from_current_interaction_list(param_00);
@@ -1369,8 +1155,7 @@ pickup_head(param_00,param_01)
 	level.var_BEC7 = 1;
 	level scripts\cp\utility::set_quest_icon(7);
 	level.var_13BD1 = level.wave_num;
-	if(randomint(100) > 90)
-	{
+	if(randomint(100) > 90) {
 		param_01 thread scripts\cp\cp_vo::try_to_play_vo("collect_n31l","zmb_comment_vo","low",10,0,0,0,50);
 	}
 	else
@@ -1381,9 +1166,7 @@ pickup_head(param_00,param_01)
 	level thread func_CDA9(param_01);
 }
 
-//Function Number: 52
-func_CDA9(param_00)
-{
+func_CDA9(param_00) {
 	param_00 endon("disconnect");
 	level endon("game_ended");
 	param_00 thread scripts\cp\cp_vo::add_to_nag_vo("nag_return_n31lpart","zmb_comment_vo",60,60,3,1);
@@ -1393,16 +1176,13 @@ func_CDA9(param_00)
 	level thread scripts\cp\cp_vo::add_to_nag_vo("dj_n3il_part_recovered_nag","zmb_dj_vo",60,120,3,1);
 }
 
-//Function Number: 53
-pickup_battery(param_00,param_01)
-{
+pickup_battery(param_00,param_01) {
 	param_01 playlocalsound("neil_part_pickup");
 	playfx(level._effect["souvenir_pickup"],param_00.part.origin);
 	scripts\cp\cp_interaction::remove_from_current_interaction_list(param_00);
 	param_00.part delete();
 	level.var_13BCD = level.wave_num;
-	if(randomint(100) > 90)
-	{
+	if(randomint(100) > 90) {
 		param_01 thread scripts\cp\cp_vo::try_to_play_vo("collect_n31l","zmb_comment_vo","low",10,0,0,0,50);
 	}
 	else
@@ -1415,16 +1195,13 @@ pickup_battery(param_00,param_01)
 	level.neil.var_13084 sethintstring(&"CP_ZMB_INTERACTIONS_LOAD_BATTERY");
 }
 
-//Function Number: 54
-pickup_firmware(param_00,param_01)
-{
+pickup_firmware(param_00,param_01) {
 	param_01 playlocalsound("neil_part_pickup");
 	playfx(level._effect["souvenir_pickup"],param_00.part.origin);
 	scripts\cp\cp_interaction::remove_from_current_interaction_list(param_00);
 	param_00.part delete();
 	level.var_13BCF = level.wave_num;
-	if(randomint(100) > 90)
-	{
+	if(randomint(100) > 90) {
 		param_01 thread scripts\cp\cp_vo::try_to_play_vo("collect_n31l","zmb_comment_vo","low",10,0,0,0,50);
 	}
 	else
@@ -1437,49 +1214,35 @@ pickup_firmware(param_00,param_01)
 	level.neil.var_13084 sethintstring(&"CP_ZMB_INTERACTIONS_LOAD_FLOPPY");
 }
 
-//Function Number: 55
-func_9696(param_00)
-{
+func_9696(param_00) {
 	var_01 = scripts\engine\utility::getstructarray("neil_battery","script_noteworthy");
-	foreach(var_03 in var_01)
-	{
+	foreach(var_03 in var_01) {
 		scripts\cp\cp_interaction::remove_from_current_interaction_list(var_03);
 	}
 }
 
-//Function Number: 56
-func_10778(param_00)
-{
+func_10778(param_00) {
 	var_01 = func_1077B("neil_battery","space_interior_power_adapter");
 	level.var_BEAE = var_01.var_9A3E;
 }
 
-//Function Number: 57
-func_9697(param_00)
-{
+func_9697(param_00) {
 	var_01 = scripts\engine\utility::getstructarray("neil_firmware","script_noteworthy");
-	foreach(var_03 in var_01)
-	{
+	foreach(var_03 in var_01) {
 		scripts\cp\cp_interaction::remove_from_current_interaction_list(var_03);
 	}
 }
 
-//Function Number: 58
-func_10779()
-{
+func_10779() {
 	var_00 = func_1077B("neil_firmware","zmb_n31l_robot_minifloppy");
 	level.var_BEC1 = var_00.var_9A3E;
 }
 
-//Function Number: 59
-func_1077B(param_00,param_01)
-{
+func_1077B(param_00,param_01) {
 	var_02 = scripts\engine\utility::getstructarray(param_00,"script_noteworthy");
 	var_03 = scripts\engine\utility::random(var_02);
-	foreach(var_05 in var_02)
-	{
-		if(var_05 == var_03)
-		{
+	foreach(var_05 in var_02) {
+		if(var_05 == var_03) {
 			scripts\cp\cp_interaction::add_to_current_interaction_list(var_05);
 			break;
 		}
@@ -1487,8 +1250,7 @@ func_1077B(param_00,param_01)
 
 	var_07 = scripts\engine\utility::getstruct(var_03.target,"targetname");
 	var_08 = spawn("script_model",var_07.origin);
-	if(isdefined(var_07.angles))
-	{
+	if(isdefined(var_07.angles)) {
 		var_08.angles = var_07.angles;
 	}
 
@@ -1499,9 +1261,7 @@ func_1077B(param_00,param_01)
 	return var_08;
 }
 
-//Function Number: 60
-func_1077A()
-{
+func_1077A() {
 	var_00 = scripts\engine\utility::getstruct("neil_head","script_noteworthy");
 	var_01 = scripts\engine\utility::getstruct(var_00.target,"targetname");
 	var_02 = spawn("script_model",var_01.origin);
@@ -1514,36 +1274,27 @@ func_1077A()
 	level.var_BEC5 = var_00;
 }
 
-//Function Number: 61
-func_BE86()
-{
+func_BE86() {
 	self endon("disconnect");
 	self forceusehinton(&"COOP_INTERACTIONS_NEED_MONEY");
 	wait(1);
 	self getrigindexfromarchetyperef();
 }
 
-//Function Number: 62
-func_1176E()
-{
-	for(;;)
-	{
+func_1176E() {
+	for(;;) {
 		scripts\engine\utility::flag_wait("transformation_complete");
 		func_BEAC();
 		level.neil vehicle_teleport(level.neil.origin,level.neil.angles);
 		level.neil vehicle_setspeed(2,1,1);
-		for(;;)
-		{
+		for(;;) {
 			level.neil.var_13084 waittill("trigger",var_00);
-			if(!var_00 scripts\cp\utility::is_valid_player() || isdefined(level.neil.cooldown))
-			{
+			if(!var_00 scripts\cp\utility::is_valid_player() || isdefined(level.neil.cooldown)) {
 				continue;
 			}
 
-			if(!var_00 scripts\cp\cp_persistence::player_has_enough_currency(5000))
-			{
-				if(soundexists("purchase_deny"))
-				{
+			if(!var_00 scripts\cp\cp_persistence::player_has_enough_currency(5000)) {
+				if(soundexists("purchase_deny")) {
 					var_00 playlocalsound("purchase_deny");
 				}
 
@@ -1567,9 +1318,7 @@ func_1176E()
 	}
 }
 
-//Function Number: 63
-func_BEAC()
-{
+func_BEAC() {
 	stopfxontag(level.var_BECF,level.neil,"tag_fx");
 	level.neil.var_6265 = 0;
 	level.neil.cooldown = 1;
@@ -1583,79 +1332,62 @@ func_BEAC()
 	level.neil.cooldown = undefined;
 }
 
-//Function Number: 64
-func_DB29(param_00)
-{
+func_DB29(param_00) {
 	self startpath();
 	self vehicle_setspeed(2,1,1);
 	thread func_BED0(param_00);
 }
 
-//Function Number: 65
-func_BED0(param_00)
-{
+func_BED0(param_00) {
 	self endon("death");
 	thread func_BEE4();
 	thread func_BEBA();
 	thread func_BECE();
 	thread func_11025();
 	self setscriptablepartstate("smoketrail","on");
-	for(;;)
-	{
+	for(;;) {
 		self waittill("reached_end_node");
 		self startpath(param_00);
-		while(scripts\engine\utility::flag("transform"))
-		{
+		while(scripts\engine\utility::flag("transform")) {
 			wait(1);
 		}
 	}
 }
 
-//Function Number: 66
-func_BEE4()
-{
+func_BEE4() {
 	self endon("death");
 	self stoploopsound();
 	self playsound("neil_mvmt_start");
 	self playloopsound("neil_mvmt_lp");
-	for(;;)
-	{
-		for(var_00 = 0;scripts\engine\utility::flag("transform") || scripts\engine\utility::flag("halt_neil");var_00 = 0)
-		{
+	for(;;) {
+		for(var_00 = 0;scripts\engine\utility::flag("transform") || scripts\engine\utility::flag("halt_neil");var_00 = 0) {
 			wait(0.1);
 		}
 
-		while(isdefined(self.unloadalltransients))
-		{
+		while(isdefined(self.unloadalltransients)) {
 			wait(0.1);
 			var_00 = 0;
 		}
 
-		if(var_00 == 0)
-		{
+		if(var_00 == 0) {
 			self.upper_body scriptmodelclearanim();
 			self.upper_body scriptmodelplayanim("IW7_cp_zom_n31l_walk",1);
 		}
 
 		wait(0.1);
 		var_00 = var_00 + 1;
-		if(var_00 >= 70)
-		{
+		if(var_00 >= 70) {
 			var_00 = 0;
 		}
 	}
 }
 
-//Function Number: 67
-func_BEBA()
-{
+func_BEBA() {
 	self endon("death");
 	self.upper_body setcandamage(1);
 	self.upper_body.health = 1000000;
-	for(;;)
-	{
-		while(scripts\engine\utility::flag("transform"))
-		{
+	for(;;) {
+		while(scripts\engine\utility::flag("transform")) {
 			wait(1);
 		}
 
@@ -1674,9 +1406,7 @@ func_BEBA()
 	}
 }
 
-//Function Number: 68
-func_E493()
-{
+func_E493() {
 	self endon("death");
 	self endon("transform");
 	self endon("damage");
@@ -1686,23 +1416,18 @@ func_E493()
 	func_BEDF("happy_line");
 }
 
-//Function Number: 69
-func_4EFA()
-{
+func_4EFA() {
 	var_00 = scripts\engine\utility::getstruct("neil_repair","script_noteworthy");
-	if(isdefined(level.var_BEC5.var_BEC5))
-	{
+	if(isdefined(level.var_BEC5.var_BEC5)) {
 		pickup_head(level.var_BEC5,level.players[0]);
 		wait(1);
 		add_part_to_neil(var_00,level.players[0]);
 		return;
 	}
-	else if(isdefined(level.var_BEAE) && isdefined(level.var_BEAE.part))
-	{
+	else if(isdefined(level.var_BEAE) && isdefined(level.var_BEAE.part)) {
 		pickup_battery(level.var_BEAE,level.players[0]);
 	}
-	else if(isdefined(level.var_BEC1) && isdefined(level.var_BEC1.part))
-	{
+	else if(isdefined(level.var_BEC1) && isdefined(level.var_BEC1.part)) {
 		pickup_firmware(level.var_BEC1,level.players[0]);
 	}
 
@@ -1712,37 +1437,28 @@ func_4EFA()
 	add_part_to_neil(var_00,level.players[0]);
 }
 
-//Function Number: 70
-neil_repair_hintstring_logic(param_00,param_01)
-{
-	if(isdefined(level.var_BEC7))
-	{
+neil_repair_hintstring_logic(param_00,param_01) {
+	if(isdefined(level.var_BEC7)) {
 		return &"CP_ZMB_INTERACTIONS_ATTACH_HEAD";
 	}
 
-	if(isdefined(level.var_BEB0))
-	{
+	if(isdefined(level.var_BEB0)) {
 		return &"CP_ZMB_INTERACTIONS_LOAD_BATTERY";
 	}
 
-	if(isdefined(level.var_BEC3))
-	{
+	if(isdefined(level.var_BEC3)) {
 		return &"CP_ZMB_INTERACTIONS_LOAD_FLOPPY";
 	}
 
-	if(!isdefined(level.var_BEC7))
-	{
+	if(!isdefined(level.var_BEC7)) {
 		return &"CP_ZMB_INTERACTIONS_MISSING_HEAD";
 	}
 
 	return &"CP_ZMB_INTERACTIONS_REPAR_NEIL";
 }
 
-//Function Number: 71
-add_part_to_neil(param_00,param_01)
-{
-	if(isdefined(level.var_BEC7))
-	{
+add_part_to_neil(param_00,param_01) {
+	if(isdefined(level.var_BEC7)) {
 		param_01 playlocalsound("neil_part_place");
 		param_01 thread scripts\cp\cp_vo::try_to_play_vo("challenge_n31l_head","zmb_comment_vo","highest",10,1,0,0,100);
 		param_01 thread scripts\cp\cp_vo::try_to_play_vo("part_assemble_n31l","zmb_comment_vo","low",10,0,0,0,50);
@@ -1760,8 +1476,7 @@ add_part_to_neil(param_00,param_01)
 		var_02 delete();
 		scripts\cp\cp_interaction::remove_from_current_interaction_list(param_00);
 	}
-	else if(isdefined(level.var_BEB0))
-	{
+	else if(isdefined(level.var_BEB0)) {
 		param_01 playlocalsound("neil_part_place");
 		level.var_BEAF = 1;
 		param_01 thread scripts\cp\cp_vo::try_to_play_vo("challenge_n31l_battery","zmb_comment_vo","highest",10,1,0,0,100);
@@ -1769,8 +1484,7 @@ add_part_to_neil(param_00,param_01)
 		level thread scripts\cp\cp_vo::remove_from_nag_vo("nag_return_n31lpart");
 		level.var_BEB0 = undefined;
 	}
-	else if(isdefined(level.var_BEC3))
-	{
+	else if(isdefined(level.var_BEC3)) {
 		param_01 playlocalsound("neil_part_place");
 		level.var_BEC2 = 1;
 		param_01 thread scripts\cp\cp_vo::try_to_play_vo("challenge_n31l_disk","zmb_comment_vo","highest",10,1,0,0,100);
@@ -1779,55 +1493,41 @@ add_part_to_neil(param_00,param_01)
 		level.var_BEC3 = undefined;
 	}
 
-	if(isdefined(param_01))
-	{
+	if(isdefined(param_01)) {
 		param_01 scripts\cp\cp_interaction::refresh_interaction();
 	}
 }
 
-//Function Number: 72
-setspectatedefaults(param_00)
-{
-	foreach(var_02 in level.players)
-	{
+setspectatedefaults(param_00) {
+	foreach(var_02 in level.players) {
 		var_02 scripts\cp\cp_persistence::give_player_xp(param_00,1);
 		wait(0.05);
 	}
 }
 
-//Function Number: 73
-func_BEC4()
-{
+func_BEC4() {
 	wait(0.5);
 	level thread _meth_833D(25);
 }
 
-//Function Number: 74
-_meth_833D(param_00)
-{
-	foreach(var_02 in level.players)
-	{
+_meth_833D(param_00) {
+	foreach(var_02 in level.players) {
 		var_02 scripts\cp\zombies\arcade_game_utility::give_player_tickets(var_02,param_00);
 		wait(0.05);
 	}
 }
 
-//Function Number: 75
-func_1C5F()
-{
+func_1C5F() {
 	level.neil endon("death");
 	level.neil endon("transform");
 	level endon("failed_too_many_times");
 	level endon("neil_enabled_changed");
 	level.var_1C3F = 1;
-	for(;;)
-	{
+	for(;;) {
 		func_BEBD(level.neil,&"CP_ZMB_INTERACTIONS_PAUSE_CHALLENGES",1);
-		for(;;)
-		{
+		for(;;) {
 			level.neil.var_13084 waittill("trigger",var_00);
-			if(!var_00 scripts\cp\utility::is_valid_player())
-			{
+			if(!var_00 scripts\cp\utility::is_valid_player()) {
 				continue;
 			}
 
@@ -1840,11 +1540,9 @@ func_1C5F()
 		level.neil.upper_body thread func_BECD("n31l_spawn_assembly");
 		wait(5);
 		func_BEBD(level.neil,&"CP_ZMB_CHALLENGES_RESUME_CHALLENGE",1);
-		for(;;)
-		{
+		for(;;) {
 			level.neil.var_13084 waittill("trigger",var_00);
-			if(!var_00 scripts\cp\utility::is_valid_player())
-			{
+			if(!var_00 scripts\cp\utility::is_valid_player()) {
 				continue;
 			}
 
@@ -1854,8 +1552,7 @@ func_1C5F()
 		func_BEBC(level.neil);
 		level.neil.upper_body thread func_BECD("n31l_challenge_reactivate");
 		scripts\engine\utility::flag_clear("pause_challenges");
-		foreach(var_00 in level.players)
-		{
+		foreach(var_00 in level.players) {
 			var_00 setclientomnvar("zm_show_challenge",11);
 		}
 
@@ -1863,19 +1560,15 @@ func_1C5F()
 	}
 }
 
-//Function Number: 76
-func_BEC0()
-{
+func_BEC0() {
 	level notify("failed_too_many_times");
 	scripts\engine\utility::flag_set("pause_challenges");
 	level waittill("next_challenge_starting");
 	level.var_1C3F = undefined;
 	func_BEBD(level.neil,&"CP_ZMB_CHALLENGES_RESUME_CHALLENGE");
-	for(;;)
-	{
+	for(;;) {
 		level.neil.var_13084 waittill("trigger",var_00);
-		if(!var_00 scripts\cp\utility::is_valid_player())
-		{
+		if(!var_00 scripts\cp\utility::is_valid_player()) {
 			continue;
 		}
 
@@ -1888,22 +1581,17 @@ func_BEC0()
 	level.neil.upper_body thread func_BECD("n31l_spawn_assembly");
 	wait(6);
 	func_BEBD(level.neil,&"CP_ZMB_INTERACTIONS_PAUSE_CHALLENGES");
-	if(!isdefined(level.var_1C3F))
-	{
+	if(!isdefined(level.var_1C3F)) {
 		level.neil thread func_1C5F();
 	}
 }
 
-//Function Number: 77
-func_BECE()
-{
+func_BECE() {
 	self endon("death");
 	var_00 = 1225;
 	var_01 = 4096;
-	for(;;)
-	{
-		while(scripts\engine\utility::flag("transform"))
-		{
+	for(;;) {
+		while(scripts\engine\utility::flag("transform")) {
 			wait(1);
 		}
 
@@ -1911,26 +1599,20 @@ func_BECE()
 		var_02 = sortbydistance(var_02,self.origin);
 		var_03 = var_02[0];
 		var_04 = getentarray("placed_transponder","script_noteworthy");
-		if(!isdefined(var_03) && var_04.size == 0)
-		{
+		if(!isdefined(var_03) && var_04.size == 0) {
 			wait(0.1);
 			continue;
 		}
 
-		if(isdefined(var_03))
-		{
-			if(distance2dsquared(self.origin,var_03.origin) < var_00 && scripts\engine\utility::istrue(var_03.is_dancing) || scripts\engine\utility::istrue(var_03.isfrozen))
-			{
+		if(isdefined(var_03)) {
+			if(distance2dsquared(self.origin,var_03.origin) < var_00 && scripts\engine\utility::istrue(var_03.is_dancing) || scripts\engine\utility::istrue(var_03.isfrozen)) {
 				var_03 dodamage(var_03.health + 100,self.origin);
 			}
 		}
 
-		foreach(var_06 in var_04)
-		{
-			if(distance2dsquared(self.origin,var_06.origin) < var_01)
-			{
-				if(isdefined(var_06.triggerportableradarping) && var_06.triggerportableradarping scripts\cp\utility::is_valid_player(1))
-				{
+		foreach(var_06 in var_04) {
+			if(distance2dsquared(self.origin,var_06.origin) < var_01) {
+				if(isdefined(var_06.triggerportableradarping) && var_06.triggerportableradarping scripts\cp\utility::is_valid_player(1)) {
 					var_06.triggerportableradarping playlocalsound("ww_magicbox_laughter");
 				}
 

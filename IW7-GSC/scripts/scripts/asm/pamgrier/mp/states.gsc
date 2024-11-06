@@ -1,18 +1,11 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\asm\pamgrier\mp\states.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 18
- * Decompile Time: 1112 ms
- * Timestamp: 10\27\2023 12:02:00 AM
-*******************************************************************/
+/******************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\asm\pamgrier\mp\states.gsc
+******************************************************/
 
-//Function Number: 1
-func_2371()
-{
-	if(scripts\asm\asm::func_232E("pamgrier"))
-	{
+func_2371() {
+	if(scripts\asm\asm::func_232E("pamgrier")) {
 		return;
 	}
 
@@ -166,104 +159,70 @@ func_2371()
 	scripts\asm\asm::func_2327();
 }
 
-//Function Number: 2
-trans_check_move_to_check_idle_exit0(param_00,param_01,param_02,param_03)
-{
+trans_check_move_to_check_idle_exit0(param_00,param_01,param_02,param_03) {
 	return scripts\asm\asm_bb::bb_moverequested();
 }
 
-//Function Number: 3
-trans_pass_walk_in_to_walk_loop1(param_00,param_01,param_02,param_03)
-{
+trans_pass_walk_in_to_walk_loop1(param_00,param_01,param_02,param_03) {
 	return scripts\asm\asm_bb::bb_moverequested();
 }
 
-//Function Number: 4
-trans_pass_walk_out_to_choose_movetype0(param_00,param_01,param_02,param_03)
-{
+trans_pass_walk_out_to_choose_movetype0(param_00,param_01,param_02,param_03) {
 	return scripts\asm\zombie\zombie::func_BCCD();
 }
 
-//Function Number: 5
-trans_pass_walk_out_to_move_done4(param_00,param_01,param_02,param_03)
-{
+trans_pass_walk_out_to_move_done4(param_00,param_01,param_02,param_03) {
 	return !scripts\asm\asm_bb::bb_moverequested();
 }
 
-//Function Number: 6
-trans_choose_movetype_to_pass_walk_in0(param_00,param_01,param_02,param_03)
-{
+trans_choose_movetype_to_pass_walk_in0(param_00,param_01,param_02,param_03) {
 	return scripts\asm\asm_bb::bb_movetyperequested("walk");
 }
 
-//Function Number: 7
-trans_choose_movetype_to_pass_run_in1(param_00,param_01,param_02,param_03)
-{
+trans_choose_movetype_to_pass_run_in1(param_00,param_01,param_02,param_03) {
 	return scripts\asm\asm_bb::bb_movetyperequested("run");
 }
 
-//Function Number: 8
-trans_choose_movetype_to_pass_sprint_in2(param_00,param_01,param_02,param_03)
-{
+trans_choose_movetype_to_pass_sprint_in2(param_00,param_01,param_02,param_03) {
 	return scripts\asm\asm_bb::bb_movetyperequested("sprint");
 }
 
-//Function Number: 9
-trans_check_idle_exit_to_idle_exit_walk0(param_00,param_01,param_02,param_03)
-{
+trans_check_idle_exit_to_idle_exit_walk0(param_00,param_01,param_02,param_03) {
 	return scripts\asm\asm_bb::bb_movetyperequested("walk");
 }
 
-//Function Number: 10
-trans_check_idle_exit_to_idle_exit_run1(param_00,param_01,param_02,param_03)
-{
+trans_check_idle_exit_to_idle_exit_run1(param_00,param_01,param_02,param_03) {
 	return scripts\asm\asm_bb::bb_movetyperequested("run");
 }
 
-//Function Number: 11
-trans_check_idle_exit_to_idle_exit_sprint2(param_00,param_01,param_02,param_03)
-{
+trans_check_idle_exit_to_idle_exit_sprint2(param_00,param_01,param_02,param_03) {
 	return scripts\asm\asm_bb::bb_movetyperequested("sprint");
 }
 
-//Function Number: 12
-trans_pass_run_in_to_run_loop1(param_00,param_01,param_02,param_03)
-{
+trans_pass_run_in_to_run_loop1(param_00,param_01,param_02,param_03) {
 	return scripts\asm\asm_bb::bb_moverequested();
 }
 
-//Function Number: 13
-trans_pass_run_out_to_choose_movetype0(param_00,param_01,param_02,param_03)
-{
+trans_pass_run_out_to_choose_movetype0(param_00,param_01,param_02,param_03) {
 	return scripts\asm\zombie\zombie::func_BCCD();
 }
 
-//Function Number: 14
-trans_pass_run_out_to_move_done3(param_00,param_01,param_02,param_03)
-{
+trans_pass_run_out_to_move_done3(param_00,param_01,param_02,param_03) {
 	return !scripts\asm\asm_bb::bb_moverequested();
 }
 
-//Function Number: 15
-trans_pass_sprint_in_to_sprint_loop1(param_00,param_01,param_02,param_03)
-{
+trans_pass_sprint_in_to_sprint_loop1(param_00,param_01,param_02,param_03) {
 	return scripts\asm\asm_bb::bb_moverequested();
 }
 
-//Function Number: 16
-trans_pass_sprint_out_to_choose_movetype0(param_00,param_01,param_02,param_03)
-{
+trans_pass_sprint_out_to_choose_movetype0(param_00,param_01,param_02,param_03) {
 	return scripts\asm\zombie\zombie::func_BCCD();
 }
 
-//Function Number: 17
-trans_pass_sprint_out_to_move_done3(param_00,param_01,param_02,param_03)
-{
+trans_pass_sprint_out_to_move_done3(param_00,param_01,param_02,param_03) {
 	return !scripts\asm\asm_bb::bb_moverequested();
 }
 
-//Function Number: 18
-trans_teleport_done_to_revive_player_loop0(param_00,param_01,param_02,param_03)
-{
+trans_teleport_done_to_revive_player_loop0(param_00,param_01,param_02,param_03) {
 	return isdefined(self.teleporttype) && self.teleporttype == "revive_player";
 }

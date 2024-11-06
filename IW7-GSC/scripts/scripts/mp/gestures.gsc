@@ -1,29 +1,20 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\mp\gestures_mp.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 17
- * Decompile Time: 646 ms
- * Timestamp: 10/27/2023 12:20:29 AM
-*******************************************************************/
+/*******************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\mp\gestures.gsc
+*******************************************/
 
-//Function Number: 1
-init()
-{
+init() {
 	level.var_77C0 = [];
 	var_00 = 0;
-	for(;;)
-	{
+	for(;;) {
 		var_01 = tablelookupbyrow("mp/gesturetable.csv",var_00,0);
-		if(!isdefined(var_01) || var_01 == "")
-		{
+		if(!isdefined(var_01) || var_01 == "") {
 			break;
 		}
 
 		var_02 = tablelookupbyrow("mp/gesturetable.csv",var_00,1);
-		if(!isdefined(var_02) || var_02 == "")
-		{
+		if(!isdefined(var_02) || var_02 == "") {
 			break;
 		}
 
@@ -34,25 +25,18 @@ init()
 	level.rockpaperscissors = ["ges_plyr_gesture043","ges_plyr_gesture114","ges_plyr_gesture115"];
 }
 
-//Function Number: 2
-getgesturedata(param_00)
-{
-	if(isbot(self) && param_00 == "devilhorns_mp")
-	{
+getgesturedata(param_00) {
+	if(isbot(self) && param_00 == "devilhorns_mp") {
 		param_00 = "gesture009";
 	}
 
 	return level.var_77C0[param_00];
 }
 
-//Function Number: 3
-func_41B2()
-{
+func_41B2() {
 	self notify("clearGesture");
-	if(isdefined(self.gestureweapon) && self.gestureweapon != "none")
-	{
-		if(scripts\engine\utility::is_player_gamepad_enabled())
-		{
+	if(isdefined(self.gestureweapon) && self.gestureweapon != "none") {
+		if(scripts\engine\utility::is_player_gamepad_enabled()) {
 			scripts\mp\utility::_setactionslot(3,"");
 		}
 		else
@@ -65,22 +49,17 @@ func_41B2()
 	}
 }
 
-//Function Number: 4
-givegesture(param_00)
-{
-	switch(param_00)
-	{
+givegesture(param_00) {
+	switch(param_00) {
 		case "ges_plyr_gesture043":
 			thread gesture_rockpaperscissorsthink();
 			param_00 = gesture_pickrockpaperscissors();
 			break;
 
 		case "ges_plyr_gesture050":
-			if(scripts\mp\utility::func_9D48("archetype_scout"))
-			{
+			if(scripts\mp\utility::func_9D48("archetype_scout")) {
 				var_01 = getbodymodel();
-				if(!isdefined(var_01) || var_01 != "mp_synaptic_ethan_body" || haschangedarchetype())
-				{
+				if(!isdefined(var_01) || var_01 != "mp_synaptic_ethan_body" || haschangedarchetype()) {
 					var_02 = scripts\engine\utility::ter_op(scripts\engine\utility::cointoss(),"ges_plyr_gesture050_synaptic","ges_plyr_gesture052_synaptic");
 				}
 				else
@@ -98,41 +77,34 @@ givegesture(param_00)
 			break;
 
 		case "ges_plyr_gesture020":
-			if(scripts\mp\utility::func_9D48("archetype_scout"))
-			{
+			if(scripts\mp\utility::func_9D48("archetype_scout")) {
 				var_01 = getbodymodel();
-				if(!isdefined(var_01) || var_01 != "mp_synaptic_ethan_body" || haschangedarchetype())
-				{
+				if(!isdefined(var_01) || var_01 != "mp_synaptic_ethan_body" || haschangedarchetype()) {
 					param_00 = "ges_plyr_gesture020_synaptic";
 				}
 			}
 			break;
 
 		case "ges_plyr_gesture046":
-			if(scripts\mp\utility::func_9D48("archetype_scout"))
-			{
+			if(scripts\mp\utility::func_9D48("archetype_scout")) {
 				var_01 = getbodymodel();
-				if(!isdefined(var_01) || var_01 != "mp_synaptic_ethan_body" || haschangedarchetype())
-				{
+				if(!isdefined(var_01) || var_01 != "mp_synaptic_ethan_body" || haschangedarchetype()) {
 					param_00 = "ges_plyr_gesture046_synaptic";
 				}
 			}
 			break;
 
 		case "ges_plyr_gesture048":
-			if(scripts\mp\utility::func_9D48("archetype_scout"))
-			{
+			if(scripts\mp\utility::func_9D48("archetype_scout")) {
 				var_01 = getbodymodel();
-				if(!isdefined(var_01) || var_01 != "mp_synaptic_ethan_body" || haschangedarchetype())
-				{
+				if(!isdefined(var_01) || var_01 != "mp_synaptic_ethan_body" || haschangedarchetype()) {
 					param_00 = "ges_plyr_gesture048_synaptic";
 				}
 			}
 			break;
 	}
 
-	if(scripts\engine\utility::is_player_gamepad_enabled())
-	{
+	if(scripts\engine\utility::is_player_gamepad_enabled()) {
 		scripts\mp\utility::_setactionslot(3,"taunt");
 	}
 	else
@@ -140,8 +112,7 @@ givegesture(param_00)
 		scripts\mp\utility::_setactionslot(7,"taunt");
 	}
 
-	if(!level.console)
-	{
+	if(!level.console) {
 		thread monitorgamepadswitch();
 	}
 
@@ -151,25 +122,19 @@ givegesture(param_00)
 	thread func_77A4();
 }
 
-//Function Number: 5
-monitorgamepadswitch()
-{
+monitorgamepadswitch() {
 	self endon("clearGesture");
 	self endon("disconnect");
 	var_00 = scripts\engine\utility::is_player_gamepad_enabled();
-	for(;;)
-	{
-		if(isdefined(self.var_55C9) && self.var_55C9 > 0)
-		{
+	for(;;) {
+		if(isdefined(self.var_55C9) && self.var_55C9 > 0) {
 			wait(0.05);
 			continue;
 		}
 
 		var_01 = scripts\engine\utility::is_player_gamepad_enabled();
-		if(var_01 != var_00)
-		{
-			if(var_00)
-			{
+		if(var_01 != var_00) {
+			if(var_00) {
 				scripts\mp\utility::_setactionslot(3,"");
 				scripts\mp\utility::_setactionslot(7,"taunt");
 			}
@@ -185,55 +150,44 @@ monitorgamepadswitch()
 	}
 }
 
-//Function Number: 6
-func_77A4()
-{
+func_77A4() {
 	self endon("clearGesture");
 	self endon("death");
 	self endon("disconnect");
-	for(;;)
-	{
+	for(;;) {
 		self waittill("offhand_pullback",var_00);
-		if(self.gestureweapon == var_00)
-		{
+		if(self.gestureweapon == var_00) {
 			self notify("used_cosmetic_gesture");
 		}
 	}
 }
 
-//Function Number: 7
-gesture_pickrockpaperscissors()
-{
+gesture_pickrockpaperscissors() {
 	return level.rockpaperscissors[randomintrange(0,level.rockpaperscissors.size)];
 }
 
-//Function Number: 8
-gesture_rockpaperscissorsthink()
-{
+gesture_rockpaperscissorsthink() {
 	self endon("clearGesture");
 	self endon("death");
 	self endon("disconnect");
 	level endon("game_ended");
 	self notify("gesture_rockPaperScissorsThink()");
 	self endon("gesture_rockPaperScissorsThink()");
-	for(;;)
-	{
+	for(;;) {
 		self waittill("used_cosmetic_gesture");
 		var_00 = undefined;
-		if(scripts\mp\utility::gameflag("prematch_done") && getdvarint("scr_test_rps",0) == 0)
-		{
-			self [[ level.showerrormessagefunc ]]("MP_INGAME_ONLY_RPS_TOO_LATE");
+		if(scripts\mp\utility::gameflag("prematch_done") && getdvarint("scr_test_rps",0) == 0) {
+			self [[level.showerrormessagefunc]]("MP_INGAME_ONLY_RPS_TOO_LATE");
 			var_00 = 0;
 		}
 		else
 		{
-			self [[ level.showerrormessagefunc ]]("MP_INGAME_ONLY_RPS_START");
+			self [[level.showerrormessagefunc]]("MP_INGAME_ONLY_RPS_START");
 			var_00 = 1;
 		}
 
 		self waittill("offhand_fired");
-		if(var_00)
-		{
+		if(var_00) {
 			thread gesture_playrockpaperscissors();
 		}
 
@@ -242,16 +196,12 @@ gesture_rockpaperscissorsthink()
 	}
 }
 
-//Function Number: 9
-gesture_resetrockpaperscissorsgesture()
-{
+gesture_resetrockpaperscissorsgesture() {
 	func_41B2();
 	givegesture("ges_plyr_gesture043");
 }
 
-//Function Number: 10
-gesture_playrockpaperscissors()
-{
+gesture_playrockpaperscissors() {
 	self endon("death");
 	self endon("disconnect");
 	level endon("game_ended");
@@ -259,20 +209,18 @@ gesture_playrockpaperscissors()
 	self notify("gesture_playRockPaperScissors()");
 	self endon("gesture_playRockPaperScissors()");
 	var_00 = gesture_getrockpaperscissorsplayers();
-	if(isdefined(var_00))
-	{
+	if(isdefined(var_00)) {
 		var_01 = gesture_determinerockpaperscissorswinner(self,self.gestureweapon,var_00,var_00.rockpaperscissorschoice);
-		if(isdefined(var_01))
-		{
-			var_01 [[ level.showerrormessagefunc ]]("MP_INGAME_ONLY_RPS_WIN");
-			var_01 thread [[ level.givemidmatchawardfunc ]]("rock_paper_scissors_win");
+		if(isdefined(var_01)) {
+			var_01 [[level.showerrormessagefunc]]("MP_INGAME_ONLY_RPS_WIN");
+			var_01 thread [[level.givemidmatchawardfunc]]("rock_paper_scissors_win");
 			var_02 = scripts\engine\utility::ter_op(var_01 == self,var_00,self);
-			var_02 [[ level.showerrormessagefunc ]]("MP_INGAME_ONLY_RPS_LOSE");
+			var_02 [[level.showerrormessagefunc]]("MP_INGAME_ONLY_RPS_LOSE");
 		}
 		else
 		{
-			self [[ level.showerrormessagefunc ]]("MP_INGAME_ONLY_RPS_DRAW");
-			var_00 [[ level.showerrormessagefunc ]]("MP_INGAME_ONLY_RPS_DRAW");
+			self [[level.showerrormessagefunc]]("MP_INGAME_ONLY_RPS_DRAW");
+			var_00 [[level.showerrormessagefunc]]("MP_INGAME_ONLY_RPS_DRAW");
 		}
 
 		var_00 notify("rockPaperScissorsFinished");
@@ -285,35 +233,28 @@ gesture_playrockpaperscissors()
 	self.rockpaperscissorschoice = undefined;
 }
 
-//Function Number: 11
-gesture_getrockpaperscissorsplayers()
-{
+gesture_getrockpaperscissorsplayers() {
 	var_00 = anglestoforward(self getplayerangles());
-	foreach(var_02 in level.players)
-	{
-		if(!isdefined(var_02) || var_02 == self)
-		{
+	foreach(var_02 in level.players) {
+		if(!isdefined(var_02) || var_02 == self) {
 			continue;
 		}
 
-		if(!isdefined(var_02.rockpaperscissorschoice))
-		{
+		if(!isdefined(var_02.rockpaperscissorschoice)) {
 			continue;
 		}
 
 		var_03 = var_02.origin - self.origin;
 		var_03 = vectornormalize(var_03);
 		var_04 = vectordot(var_03,var_00);
-		if(var_04 < 0.7071068)
-		{
+		if(var_04 < 0.7071068) {
 			continue;
 		}
 
 		var_05 = anglestoforward(var_02 getplayerangles());
 		var_06 = var_03 * -1;
 		var_07 = vectordot(var_06,var_05);
-		if(var_07 < 0.7071068)
-		{
+		if(var_07 < 0.7071068) {
 			continue;
 		}
 
@@ -321,16 +262,12 @@ gesture_getrockpaperscissorsplayers()
 	}
 }
 
-//Function Number: 12
-gesture_determinerockpaperscissorswinner(param_00,param_01,param_02,param_03)
-{
-	if(param_01 == param_03)
-	{
+gesture_determinerockpaperscissorswinner(param_00,param_01,param_02,param_03) {
+	if(param_01 == param_03) {
 		return undefined;
 	}
 
-	switch(param_01)
-	{
+	switch(param_01) {
 		case "ges_plyr_gesture043":
 			return scripts\engine\utility::ter_op(param_03 == "ges_plyr_gesture114",param_02,param_00);
 
@@ -342,22 +279,17 @@ gesture_determinerockpaperscissorswinner(param_00,param_01,param_02,param_03)
 	}
 }
 
-//Function Number: 13
-gesture_coinflipthink(param_00)
-{
+gesture_coinflipthink(param_00) {
 	self endon("clearGesture");
 	self endon("death");
 	self endon("disconnect");
 	level endon("game_ended");
 	self notify("gesture_coinFlipThink()");
 	self endon("gesture_coinFlipThink()");
-	for(;;)
-	{
+	for(;;) {
 		self waittill("used_cosmetic_gesture");
-		for(;;)
-		{
-			if(!self isgestureplaying(param_00))
-			{
+		for(;;) {
+			if(!self isgestureplaying(param_00)) {
 				break;
 			}
 
@@ -368,24 +300,18 @@ gesture_coinflipthink(param_00)
 	}
 }
 
-//Function Number: 14
-gesture_resetcoinflipgesture()
-{
+gesture_resetcoinflipgesture() {
 	func_41B2();
 	givegesture("ges_plyr_gesture050");
 }
 
-//Function Number: 15
-getbodymodel()
-{
-	if(!isplayer(self) || isai(self))
-	{
+getbodymodel() {
+	if(!isplayer(self) || isai(self)) {
 		return undefined;
 	}
 
 	var_00 = undefined;
-	if(level.rankedmatch)
-	{
+	if(level.rankedmatch) {
 		var_00 = self getplayerdata("rankedloadouts","squadMembers","body");
 	}
 	else
@@ -396,18 +322,13 @@ getbodymodel()
 	return tablelookupbyrow("mp/cac/bodies.csv",var_00,1);
 }
 
-//Function Number: 16
-haschangedarchetype()
-{
-	if(isdefined(self.changedarchetypeinfo))
-	{
-		if(!isdefined(self.lastarchetypeinfo))
-		{
+haschangedarchetype() {
+	if(isdefined(self.changedarchetypeinfo)) {
+		if(!isdefined(self.lastarchetypeinfo)) {
 			return 1;
 		}
 
-		if(self.changedarchetypeinfo != self.lastarchetypeinfo)
-		{
+		if(self.changedarchetypeinfo != self.lastarchetypeinfo) {
 			return 1;
 		}
 	}
@@ -415,17 +336,13 @@ haschangedarchetype()
 	return 0;
 }
 
-//Function Number: 17
-gestureaudioduringcountdown()
-{
+gestureaudioduringcountdown() {
 	self endon("death");
 	self endon("disconnect");
 	level endon("game_ended");
-	while(!scripts\mp\utility::gameflag("prematch_done"))
-	{
+	while(!scripts\mp\utility::gameflag("prematch_done")) {
 		self waittill("offhand_pullback",var_00);
-		if(self.gestureweapon == var_00)
-		{
+		if(self.gestureweapon == var_00) {
 			self playsoundtoteam("gib_fullbody",self.team,self);
 		}
 	}

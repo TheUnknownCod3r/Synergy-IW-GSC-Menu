@@ -1,21 +1,14 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: 3143.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 38
- * Decompile Time: 27 ms
- * Timestamp: 10/27/2023 12:26:15 AM
-*******************************************************************/
+/****************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\3143.gsc
+****************************/
 
-//Function Number: 1
-func_351B()
-{
+func_351B() {
 	self endon("death");
 	thread func_D310();
 	self notify("begin_rodeo");
-	if(self._blackboard.rodeorequested == "left")
-	{
+	if(self._blackboard.rodeorequested == "left") {
 		var_00 = "right";
 	}
 	else
@@ -23,8 +16,7 @@ func_351B()
 		var_00 = "left";
 	}
 
-	if(var_00 == "right")
-	{
+	if(var_00 == "right") {
 		self aiclearanim(lib_0A1E::func_2356("aimset_right","arm_pitch"),0.2);
 		self aiclearanim(lib_0A1E::func_2356("aimset_right","arm_rail"),0.2);
 	}
@@ -48,13 +40,11 @@ func_351B()
 	level.player _meth_84AF(1);
 	level.player scripts\engine\utility::allow_weapon(0);
 	level.player.inrodeo = 1;
-	if(var_00 == "right")
-	{
+	if(var_00 == "right") {
 		var_03 = level.player getcurrentweapon();
 		var_04 = level.player scripts\sp\_utility::func_7D74(1);
 		var_04 = scripts\engine\utility::array_sort_with_func(var_04,::func_445F);
-		if(func_7D6D(var_03) <= func_7D6D(var_04[0]))
-		{
+		if(func_7D6D(var_03) <= func_7D6D(var_04[0])) {
 			self.var_D34D = var_03;
 		}
 		else
@@ -77,8 +67,7 @@ func_351B()
 	lib_0C08::func_351D(var_00,0);
 	func_361A(var_00);
 	var_06 = "rodeo_left";
-	if(var_00 == "left")
-	{
+	if(var_00 == "left") {
 		var_06 = "rodeo_right";
 	}
 
@@ -88,14 +77,11 @@ func_351B()
 	thread func_D433(self.var_D267,var_00);
 	var_07 = func_35F1(lib_0A1E::func_2356(var_06,"mount"),var_00);
 	var_08 = 3;
-	if(var_07 < 2)
-	{
-		while(var_08)
-		{
+	if(var_07 < 2) {
+		while(var_08) {
 			var_07 = func_35F1(lib_0A1E::func_2356(var_06,"miss"),var_00,1);
 			var_08--;
-			if(var_07 == 2)
-			{
+			if(var_07 == 2) {
 				break;
 			}
 
@@ -104,11 +90,9 @@ func_351B()
 	}
 
 	self.var_D267.var_3919 = 0;
-	if(var_07 == 2)
-	{
+	if(var_07 == 2) {
 		thread func_D3F0(self.var_D267,var_00);
-		if(var_00 == "right")
-		{
+		if(var_00 == "right") {
 			func_10907();
 		}
 
@@ -116,8 +100,7 @@ func_351B()
 		self _meth_82E7("RodeoHit",var_09,1,0.2,1);
 		lib_0A1E::func_231F("rodeo","RodeoHit",::func_35EE);
 		self aiclearanim(var_09,0.2);
-		if(var_00 == "left")
-		{
+		if(var_00 == "left") {
 			thread func_35F2(var_02);
 			thread func_D404(var_02);
 			var_0A = lib_0A1E::func_2356(var_06,"struggle");
@@ -130,8 +113,7 @@ func_351B()
 		var_0A = lib_0A1E::func_2356(var_06,"success");
 		thread func_D3ED(self.var_D267,var_00);
 		self _meth_82E7("RodeoDismount",var_0A,1,0.2,1);
-		if(var_00 == "left")
-		{
+		if(var_00 == "left") {
 			self give_attacker_kill_rewards(lib_0A1E::func_2356("rodeo_right","fire"),1,0.2,1);
 		}
 
@@ -156,18 +138,14 @@ func_351B()
 	self notify("end_rodeo");
 }
 
-//Function Number: 2
-func_E245()
-{
+func_E245() {
 	self endon("death");
 	self._blackboard.var_E5F9 = 1;
 	wait(0.75);
 	self._blackboard.var_E5F9 = undefined;
 }
 
-//Function Number: 3
-func_361A(param_00)
-{
+func_361A(param_00) {
 	var_01 = "aimset_" + param_00;
 	var_02 = 0.2;
 	var_03 = lib_0A1E::func_2356(var_01,"arm_rail");
@@ -176,9 +154,7 @@ func_361A(param_00)
 	self aiclearanim(var_03,var_02);
 }
 
-//Function Number: 4
-func_35F1(param_00,param_01,param_02)
-{
+func_35F1(param_00,param_01,param_02) {
 	self endon("death");
 	var_03 = 0;
 	var_04 = [scripts\engine\utility::get_notetrack_time(param_00,"hit_start"),scripts\engine\utility::get_notetrack_time(param_00,"hit_end")];
@@ -187,8 +163,7 @@ func_35F1(param_00,param_01,param_02)
 	thread lib_0A1E::func_231F("rodeo","RodeoHitPlayer",::func_35EE);
 	wait(var_04[0] - 0.05);
 	var_06 = func_4A09(param_01);
-	if(isdefined(param_02) && param_02)
-	{
+	if(isdefined(param_02) && param_02) {
 		level.player viewkick(30,var_06.origin,0);
 		level.player playrumbleonentity("light_1s");
 	}
@@ -200,15 +175,12 @@ func_35F1(param_00,param_01,param_02)
 	var_08 = var_04[1] - var_04[0] * 3000;
 	var_09 = var_05 + var_04[0] * 1000 + var_08;
 	func_E5FE("Can HIT NOW " + var_09 - gettime());
-	while(gettime() < var_09)
-	{
-		if(func_D3B0() && !var_07)
-		{
+	while(gettime() < var_09) {
+		if(func_D3B0() && !var_07) {
 			var_03 = 2;
 			break;
 		}
-		else if(var_07)
-		{
+		else if(var_07) {
 			var_07 = func_D3B0();
 		}
 
@@ -218,8 +190,7 @@ func_35F1(param_00,param_01,param_02)
 	func_E5FE("Cannot HIT");
 	var_06 makeunusable();
 	var_06 delete();
-	while(self getscoreinfocategory(param_00) < 0.99)
-	{
+	while(self getscoreinfocategory(param_00) < 0.99) {
 		wait(0.05);
 	}
 
@@ -227,9 +198,7 @@ func_35F1(param_00,param_01,param_02)
 	return var_03;
 }
 
-//Function Number: 5
-func_35F2(param_00)
-{
+func_35F2(param_00) {
 	self endon("death");
 	var_01 = lib_0A1E::func_2356("rodeo_right","struggle");
 	var_02 = scripts\engine\utility::spawn_tag_origin();
@@ -256,30 +225,25 @@ func_35F2(param_00)
 	var_0A = getdvarint("cg_fov");
 	var_0B = 50;
 	var_0C = var_0A - var_0B;
-	while(var_05 < 0.9)
-	{
+	while(var_05 < 0.9) {
 		scripts\engine\utility::waitframe();
 		var_04 = var_03;
 		var_03 = self.var_B3C3 >= var_08;
 		var_0D = gettime() - self.var_A8E4;
 		var_05 = self getscoreinfocategory(var_01);
-		if(var_03 && !var_04)
-		{
+		if(var_03 && !var_04) {
 			self _meth_82B1(var_01,var_07);
 			param_00 _meth_82B1(param_00.var_11169,var_07);
 		}
 
-		if(!var_03)
-		{
-			if(var_04)
-			{
+		if(!var_03) {
+			if(var_04) {
 				self _meth_82B1(var_01,0);
 				param_00 _meth_82B1(param_00.var_11169,0);
 				continue;
 			}
 
-			if(var_05 > var_06)
-			{
+			if(var_05 > var_06) {
 				var_05 = var_05 - var_06;
 				self _meth_82B0(var_01,var_05);
 				param_00 _meth_82B0(param_00.var_11169,var_05);
@@ -297,8 +261,7 @@ func_35F2(param_00)
 	self _meth_82B1(var_01,var_07);
 	param_00 _meth_82B1(param_00.var_11169,var_07);
 	level.player _meth_81DE(var_0B,getanimlength(var_01) * 1 - var_05 / var_07);
-	while(self getscoreinfocategory(var_01) < 1)
-	{
+	while(self getscoreinfocategory(var_01) < 1) {
 		scripts\engine\utility::waitframe();
 	}
 
@@ -322,19 +285,14 @@ func_35F2(param_00)
 	self notify("struggle_succeeded");
 }
 
-//Function Number: 6
-func_35F4()
-{
+func_35F4() {
 	self endon("mash_end");
 	level.player endon("death");
 	var_00 = 0;
-	for(;;)
-	{
+	for(;;) {
 		scripts\engine\utility::waitframe();
-		if(level.player usebuttonpressed())
-		{
-			if(!var_00)
-			{
+		if(level.player usebuttonpressed()) {
+			if(!var_00) {
 				self.var_A8E4 = gettime();
 				thread func_12DE6();
 			}
@@ -347,9 +305,7 @@ func_35F4()
 	}
 }
 
-//Function Number: 7
-func_35F3()
-{
+func_35F3() {
 	self endon("death");
 	var_00 = isdefined(level.var_470F);
 	level.var_470F = 1;
@@ -361,8 +317,7 @@ func_35F3()
 	var_04 = level.var_35C6;
 	var_05 = "j_weaponshoulder_le";
 	thread func_A661(var_05);
-	while(self.var_6D3E && isalive(level.player))
-	{
+	while(self.var_6D3E && isalive(level.player)) {
 		var_03 = var_03 - var_04;
 		var_06 = level.player.health - var_03;
 		level.player _meth_80A1();
@@ -371,43 +326,34 @@ func_35F3()
 		wait(2);
 	}
 
-	if(!isalive(level.player))
-	{
+	if(!isalive(level.player)) {
 		return;
 	}
 
-	if(scripts\sp\_utility::func_93A6())
-	{
+	if(scripts\sp\_utility::func_93A6()) {
 		level.player.health = var_01;
 		level.player.maxhealth = var_02;
 	}
 
-	if(!var_00)
-	{
+	if(!var_00) {
 		level.var_470F = undefined;
 	}
 }
 
-//Function Number: 8
-func_A661(param_00)
-{
+func_A661(param_00) {
 	self waittill("death");
 	killfxontag(level.var_7649["vfx_c12_knife_sparks"],self,param_00);
 }
 
-//Function Number: 9
-func_116C9()
-{
+func_116C9() {
 	var_00 = undefined;
 	var_01 = 10;
 	var_02 = 400;
 	var_03 = getomnvar("ui_helmet_meter_temperature");
 	var_04 = var_03;
 	var_00 = undefined;
-	while(self.var_6D3E && isalive(self))
-	{
-		if(!isdefined(var_00))
-		{
+	while(self.var_6D3E && isalive(self)) {
+		if(!isdefined(var_00)) {
 			level.player setclientomnvar("ui_show_temperature_gauge",1);
 			var_00 = 1;
 			level.player playsound("scn_c12_rodeo_plr_on_fire");
@@ -422,8 +368,7 @@ func_116C9()
 
 	level.player setclientomnvar("ui_show_temperature_gauge",0);
 	wait(2);
-	while(var_04 > var_03)
-	{
+	while(var_04 > var_03) {
 		wait(0.05);
 		var_04 = var_04 - var_01 * 2;
 		var_04 = max(var_04,var_03);
@@ -431,9 +376,7 @@ func_116C9()
 	}
 }
 
-//Function Number: 10
-func_35EF()
-{
+func_35EF() {
 	var_00 = spawn("script_origin",level.player.origin);
 	var_00 linkto(level.player);
 	wait(0.05);
@@ -446,18 +389,14 @@ func_35EF()
 	level.player playsound("ui_c12_rodeo_temperature_warning_lp_end");
 }
 
-//Function Number: 11
-c12_rodeo_temperature_sfx_lp()
-{
+c12_rodeo_temperature_sfx_lp() {
 	level.player endon("stop_temperature_sfx");
 	level.player endon("death");
 	wait(1.7);
 	self playloopsound("ui_c12_rodeo_temperature_warning_lp");
 }
 
-//Function Number: 12
-func_6D73()
-{
+func_6D73() {
 	self endon("death");
 	self playsound("weap_c12_minigun_spinup");
 	self playloopsound("weap_c12_minigun_fire");
@@ -472,45 +411,37 @@ func_6D73()
 	var_07 = 0;
 	var_08 = "titan_c12_rodeo_bullet_hits_lp";
 	var_09 = 0;
-	for(;;)
-	{
+	for(;;) {
 		var_0A = self gettagorigin(var_01);
 		var_0B = self gettagangles(var_01);
 		var_0C = var_0A + anglestoforward(var_0B);
 		var_0D = function_002C(var_0A,var_0C,4);
 		self _meth_8494(var_00,var_0A,var_0B,1,var_0D,0,0,var_01);
 		var_0E = 0.35;
-		if(!isdefined(self.brodeostrugglesucceeded) || !self.brodeostrugglesucceeded)
-		{
+		if(!isdefined(self.brodeostrugglesucceeded) || !self.brodeostrugglesucceeded) {
 			var_0F = self getscoreinfocategory(var_02);
-			if(var_05 < var_03.size && var_0F >= var_03[var_05])
-			{
+			if(var_05 < var_03.size && var_0F >= var_03[var_05]) {
 				self.var_E5EF = var_04[var_05];
 				var_05++;
 			}
 
-			if(var_07 < var_06.size && var_0F >= var_06[var_07])
-			{
+			if(var_07 < var_06.size && var_0F >= var_06[var_07]) {
 				self setscriptablepartstate("head","rodeo" + var_07);
 				var_07++;
 			}
 
-			if(isdefined(self.var_E5EF))
-			{
+			if(isdefined(self.var_E5EF)) {
 				var_10 = scripts\common\trace::ray_trace_detail(var_0C,var_0D);
-				if(isdefined(var_10["entity"]) && var_10["entity"] == self)
-				{
+				if(isdefined(var_10["entity"]) && var_10["entity"] == self) {
 					var_0E = 0.6;
 					playfxontag(self.var_E5EF,self,"j_helmet");
 					level.player playrumbleonentity("light_1s");
-					if(!var_09)
-					{
+					if(!var_09) {
 						thread scripts\sp\_utility::play_loop_sound_on_tag(var_08,"j_head");
 						var_09 = 1;
 					}
 				}
-				else if(var_09)
-				{
+				else if(var_09) {
 					thread scripts\engine\utility::stop_loop_sound_on_entity(var_08);
 					var_09 = 0;
 				}
@@ -522,12 +453,9 @@ func_6D73()
 	}
 }
 
-//Function Number: 13
-func_12DE6()
-{
+func_12DE6() {
 	var_00 = 1;
-	if(self.var_B3C3 == 0)
-	{
+	if(self.var_B3C3 == 0) {
 		var_00 = 3;
 	}
 
@@ -536,39 +464,28 @@ func_12DE6()
 	self.var_B3C3 = self.var_B3C3 - var_00;
 }
 
-//Function Number: 14
-func_D91A(param_00)
-{
-}
+func_D91A(param_00) {}
 
-//Function Number: 15
-func_D3B0()
-{
+func_D3B0() {
 	return isalive(level.player) && level.player meleebuttonpressed();
 }
 
-//Function Number: 16
-func_D433(param_00,param_01)
-{
+func_D433(param_00,param_01) {
 	self endon("death");
 	param_00 endon("death");
 	var_02 = 0;
-	for(;;)
-	{
+	for(;;) {
 		wait(0.05);
-		if(!param_00.var_3919)
-		{
+		if(!param_00.var_3919) {
 			continue;
 		}
 
-		if(!var_02)
-		{
+		if(!var_02) {
 			var_02 = 1;
 			thread func_D3F3(param_00,param_01);
 		}
 
-		if(!func_D3B0())
-		{
+		if(!func_D3B0()) {
 			continue;
 		}
 
@@ -577,13 +494,10 @@ func_D433(param_00,param_01)
 	}
 }
 
-//Function Number: 17
-func_4A09(param_00)
-{
+func_4A09(param_00) {
 	var_01 = "j_missile_backcover_ri";
 	var_02 = (0,0,0);
-	if(param_00 == "left")
-	{
+	if(param_00 == "left") {
 		var_01 = "tag_brass_le";
 		var_02 = (-3,-12,0);
 	}
@@ -598,15 +512,12 @@ func_4A09(param_00)
 	return var_03;
 }
 
-//Function Number: 18
-func_361C(param_00)
-{
+func_361C(param_00) {
 	var_01 = spawn("script_model",param_00.origin);
 	var_01.angles = param_00.angles;
 	var_01 glinton(#animtree);
 	var_02 = level.player _meth_84C6("currentViewModel");
-	if(isdefined(var_02))
-	{
+	if(isdefined(var_02)) {
 		var_01 setmodel(var_02);
 	}
 
@@ -616,16 +527,12 @@ func_361C(param_00)
 	return var_01;
 }
 
-//Function Number: 19
-func_D3F4(param_00,param_01,param_02)
-{
+func_D3F4(param_00,param_01,param_02) {
 	func_E5FE(" --- PlayerRig_Jump");
 	var_03 = "rodeoJump";
 	var_04 = undefined;
-	if(param_01 == "right")
-	{
-		switch(param_02)
-		{
+	if(param_01 == "right") {
+		switch(param_02) {
 			case "front":
 				var_04 = %titan_c12_rodeo_player_jump_front;
 				break;
@@ -645,8 +552,7 @@ func_D3F4(param_00,param_01,param_02)
 	}
 	else
 	{
-		switch(param_02)
-		{
+		switch(param_02) {
 			case "front":
 				var_04 = %titan_c12_rodeo_gun_player_jump_front;
 				break;
@@ -671,14 +577,11 @@ func_D3F4(param_00,param_01,param_02)
 	param_00 scripts\anim\shared::donotetracks(var_03,::func_D403);
 }
 
-//Function Number: 20
-func_D3FA(param_00,param_01)
-{
+func_D3FA(param_00,param_01) {
 	func_E5FE(" --- PlayerRig_Mount");
 	var_02 = "rodeoMount";
 	var_03 = %titan_c12_rodeo_player_mount;
-	if(param_01 == "left")
-	{
+	if(param_01 == "left") {
 		var_03 = %titan_c12_rodeo_gun_player_mount;
 	}
 
@@ -686,14 +589,11 @@ func_D3FA(param_00,param_01)
 	param_00 scripts\anim\shared::donotetracks(var_02,::func_D403);
 }
 
-//Function Number: 21
-func_D3F0(param_00,param_01)
-{
+func_D3F0(param_00,param_01) {
 	func_E5FE(" --- PlayerRig_Hit");
 	var_02 = "rodeoHit";
 	var_03 = %titan_c12_rodeo_player_hit;
-	if(param_01 == "left")
-	{
+	if(param_01 == "left") {
 		var_03 = %titan_c12_rodeo_gun_player_hit;
 	}
 
@@ -701,13 +601,10 @@ func_D3F0(param_00,param_01)
 	param_00 scripts\anim\shared::donotetracks(var_02,::func_D403);
 }
 
-//Function Number: 22
-func_D3F2(param_00,param_01)
-{
+func_D3F2(param_00,param_01) {
 	func_E5FE(" --- PlayerRig_HitQuickMiss");
 	var_02 = "rodeoQuickMiss";
-	if(param_01 == "right")
-	{
+	if(param_01 == "right") {
 		param_00 _meth_8018(var_02,self gettagorigin("j_spineupper"),self gettagangles("j_spineupper"),%titan_c12_rodeo_player_miss_quick);
 	}
 	else
@@ -718,13 +615,10 @@ func_D3F2(param_00,param_01)
 	param_00 scripts\anim\shared::donotetracks(var_02,::func_D403);
 }
 
-//Function Number: 23
-func_D3F3(param_00,param_01)
-{
+func_D3F3(param_00,param_01) {
 	func_E5FE(" --- PlayerRig_Idle");
 	var_02 = "rodeoIdle";
-	if(param_01 == "right")
-	{
+	if(param_01 == "right") {
 		param_00 _meth_8018(var_02,self gettagorigin("j_spineupper"),self gettagangles("j_spineupper"),%titan_c12_rodeo_player_idle);
 	}
 	else
@@ -735,23 +629,18 @@ func_D3F3(param_00,param_01)
 	param_00 scripts\anim\shared::donotetracks(var_02,::func_D403);
 }
 
-//Function Number: 24
-func_D404(param_00)
-{
+func_D404(param_00) {
 	func_E5FE(" --- PlayerRig_Struggle");
 	var_01 = "rodeoStruggle";
 	param_00 _meth_8018(var_01,self gettagorigin("j_spineupper"),self gettagangles("j_spineupper"),param_00.var_11169);
 	param_00 scripts\anim\shared::donotetracks(var_01,::func_D403);
 }
 
-//Function Number: 25
-func_D3ED(param_00,param_01)
-{
+func_D3ED(param_00,param_01) {
 	func_E5FE(" --- PlayerRig_Dismount");
 	var_02 = "rodeoDismount";
 	var_03 = %titan_c12_rodeo_player_dismount;
-	if(param_01 == "left")
-	{
+	if(param_01 == "left") {
 		var_03 = %titan_c12_rodeo_gun_player_dismount;
 	}
 
@@ -760,14 +649,11 @@ func_D3ED(param_00,param_01)
 	param_00 scripts\anim\shared::donotetracks(var_02,::func_D403);
 }
 
-//Function Number: 26
-func_D3F6(param_00,param_01,param_02)
-{
+func_D3F6(param_00,param_01,param_02) {
 	func_E5FE(" --- PlayerRig_KnockOff");
 	var_03 = "rodeoKnockOff";
 	var_04 = %titan_c12_rodeo_player_miss_knockoff;
-	if(param_01 == "left")
-	{
+	if(param_01 == "left") {
 		var_04 = %titan_c12_rodeo_gun_player_miss_knockoff;
 	}
 
@@ -776,24 +662,17 @@ func_D3F6(param_00,param_01,param_02)
 	param_00 scripts\anim\shared::donotetracks(var_03,::func_D403);
 }
 
-//Function Number: 27
-func_35EE(param_00)
-{
-	if(scripts\sp\_anim::func_C0DB(param_00))
-	{
+func_35EE(param_00) {
+	if(scripts\sp\_anim::func_C0DB(param_00)) {
 	}
 }
 
-//Function Number: 28
-func_D403(param_00,param_01)
-{
-	if(scripts\sp\_anim::func_C0DB(param_00))
-	{
+func_D403(param_00,param_01) {
+	if(scripts\sp\_anim::func_C0DB(param_00)) {
 		return;
 	}
 
-	if(self.var_13CCC == "right")
-	{
+	if(self.var_13CCC == "right") {
 		var_02 = "tag_knife_attach2";
 	}
 	else
@@ -802,11 +681,9 @@ func_D403(param_00,param_01)
 	}
 
 	var_03 = self.var_3508;
-	switch(param_00)
-	{
+	switch(param_00) {
 		case "attach_rocket":
-			if(isdefined(self.var_3508.var_E601))
-			{
+			if(isdefined(self.var_3508.var_E601)) {
 				var_03.var_E601 delete();
 			}
 	
@@ -823,8 +700,7 @@ func_D403(param_00,param_01)
 			break;
 
 		case "knife_hit":
-			if(self.var_13CCC == "left")
-			{
+			if(self.var_13CCC == "left") {
 				playfxontag(level.var_7649["vfx_c12_knife_sparks"],var_03,"j_weaponshoulder_le");
 				var_03 thread scripts\sp\_utility::play_loop_sound_on_tag("titan_c12_rodeo_fire_loop","tag_brass_le");
 			}
@@ -866,21 +742,17 @@ func_D403(param_00,param_01)
 	}
 }
 
-//Function Number: 29
-func_D3EF(param_00,param_01,param_02)
-{
+func_D3EF(param_00,param_01,param_02) {
 	self.precacheleaderboards = 1;
 	self.var_595F = 1;
 	self.playerwillunlink = 1;
 	var_03 = gettime() + 1000 * getanimlength(param_02);
 	param_00 waittill("jump_off");
-	while(gettime() < var_03)
-	{
+	while(gettime() < var_03) {
 		var_04 = level.player.origin;
 		wait(0.05);
 		var_05 = level.player.origin;
-		if(!level.player scripts\common\trace::player_trace_passed(var_05,var_05 + var_05 - var_04,level.player.angles,[param_00,level.player,self]))
-		{
+		if(!level.player scripts\common\trace::player_trace_passed(var_05,var_05 + var_05 - var_04,level.player.angles,[param_00,level.player,self])) {
 			level.player setorigin(var_04);
 			break;
 		}
@@ -888,8 +760,7 @@ func_D3EF(param_00,param_01,param_02)
 
 	level.player unlink();
 	param_00 delete();
-	if(!isdefined(param_00.var_13CC9))
-	{
+	if(!isdefined(param_00.var_13CC9)) {
 		thread func_D3EE(param_01);
 	}
 
@@ -899,24 +770,19 @@ func_D3EF(param_00,param_01,param_02)
 	level.player scripts\engine\utility::allow_prone(1);
 	wait(0.3);
 	level.player.ignoreme = 0;
-	if(!self.var_D461)
-	{
+	if(!self.var_D461) {
 		level.player _meth_80A1();
 	}
 
-	if(param_01 == "left")
-	{
+	if(param_01 == "left") {
 		lib_0A05::func_3634("c12AchievementRodeoLeft");
 	}
 }
 
-//Function Number: 30
-func_D3EE(param_00)
-{
+func_D3EE(param_00) {
 	level.player scripts\engine\utility::allow_weapon(1);
 	level.player scripts\engine\utility::allow_offhand_weapons(1);
-	if(param_00 == "right")
-	{
+	if(param_00 == "right") {
 		self notify("can_damage_rocket");
 		thread lib_0F3D::func_50E8(0);
 		self _meth_84AE();
@@ -929,14 +795,12 @@ func_D3EE(param_00)
 		function_01C5("perk_quickDrawSpeedScaleSniperSP",var_02 * var_04);
 		function_01C5("bg_quickWeaponSwitchSpeedScaleSP",var_03 / var_04);
 		var_05 = int(weaponclipsize(self.var_D34D) * 0.5);
-		if(level.player getweaponammoclip(self.var_D34D) < var_05)
-		{
+		if(level.player getweaponammoclip(self.var_D34D) < var_05) {
 			level.player setweaponammoclip(self.var_D34D,var_05);
 		}
 
 		setslowmotion(1,0.2,0.2);
-		while(isdefined(level.player getlinkedparent()) && isalive(self))
-		{
+		while(isdefined(level.player getlinkedparent()) && isalive(self)) {
 			wait(0.05);
 		}
 
@@ -946,8 +810,7 @@ func_D3EE(param_00)
 		level.player lib_0E42::removeperk("specialty_quickdraw");
 		self _meth_84AD();
 		self setcandamage(1);
-		if(!isalive(self))
-		{
+		if(!isalive(self)) {
 			wait(0.2);
 			setslowmotion(0.2,1,0.2);
 		}
@@ -960,18 +823,13 @@ func_D3EE(param_00)
 	level.player _meth_84AF(0);
 }
 
-//Function Number: 31
-func_445F(param_00,param_01)
-{
+func_445F(param_00,param_01) {
 	return func_7D6D(param_00) < func_7D6D(param_01);
 }
 
-//Function Number: 32
-func_7D6D(param_00)
-{
+func_7D6D(param_00) {
 	var_01 = weaponclass(param_00);
-	switch(var_01)
-	{
+	switch(var_01) {
 		case "pistol":
 		case "smg":
 		case "rifle":
@@ -994,12 +852,9 @@ func_7D6D(param_00)
 	}
 }
 
-//Function Number: 33
-func_7D71(param_00)
-{
+func_7D71(param_00) {
 	var_01 = weaponclass(param_00);
-	switch(var_01)
-	{
+	switch(var_01) {
 		case "pistol":
 		case "smg":
 		case "rifle":
@@ -1022,9 +877,7 @@ func_7D71(param_00)
 	}
 }
 
-//Function Number: 34
-func_CC50(param_00)
-{
+func_CC50(param_00) {
 	self endon("death");
 	var_01 = param_00 gettagorigin("tag_knife_attach2");
 	var_02 = param_00 gettagangles("tag_knife_attach2");
@@ -1038,11 +891,9 @@ func_CC50(param_00)
 	var_03 setcandamage(1);
 	var_03.health = 9999;
 	var_04 = 30;
-	while(isdefined(var_03) && var_04 > 0)
-	{
+	while(isdefined(var_03) && var_04 > 0) {
 		var_03 waittill("damage",var_05,var_06);
-		if(var_06 == level.player)
-		{
+		if(var_06 == level.player) {
 			var_04 = var_04 - var_05;
 			continue;
 		}
@@ -1050,8 +901,7 @@ func_CC50(param_00)
 		var_03.health = var_03.health + var_05;
 	}
 
-	if(!isdefined(var_03))
-	{
+	if(!isdefined(var_03)) {
 		return;
 	}
 
@@ -1074,11 +924,8 @@ func_CC50(param_00)
 	self _meth_81D0(var_01,level.player);
 }
 
-//Function Number: 35
-func_10907()
-{
-	if(isdefined(self.var_E601))
-	{
+func_10907() {
+	if(isdefined(self.var_E601)) {
 		return;
 	}
 
@@ -1092,16 +939,13 @@ func_10907()
 	self.var_E601 = var_00;
 }
 
-//Function Number: 36
-func_D3F7(param_00,param_01,param_02)
-{
+func_D3F7(param_00,param_01,param_02) {
 	self.playerwillunlink = 1;
 	wait(param_02);
 	level.player playrumbleonentity("heavy_1s");
 	thread lib_0F3D::func_50E8(0);
 	level.player _meth_84AF(0);
-	if(param_01 == "right")
-	{
+	if(param_01 == "right") {
 		var_03 = "tag_brass_ri";
 	}
 	else
@@ -1114,8 +958,7 @@ func_D3F7(param_00,param_01,param_02)
 	var_06 = var_05 * 500;
 	level.player setvelocity(var_06);
 	level.player viewkick(75,var_04);
-	if(!self.var_D461)
-	{
+	if(!self.var_D461) {
 		level.player _meth_80A1();
 	}
 
@@ -1132,18 +975,12 @@ func_D3F7(param_00,param_01,param_02)
 	self setcandamage(1);
 }
 
-//Function Number: 37
-func_E5FE(param_00)
-{
-}
+func_E5FE(param_00) {}
 
-//Function Number: 38
-func_D310()
-{
+func_D310() {
 	self endon("end_rodeo");
 	self waittill("death");
-	if(isdefined(self.playerwillunlink))
-	{
+	if(isdefined(self.playerwillunlink)) {
 		return;
 	}
 
@@ -1158,8 +995,7 @@ func_D310()
 	level.player scripts\engine\utility::allow_weapon(1);
 	level.player.ignoreme = 0;
 	level.player.inrodeo = undefined;
-	if(!self.var_D461)
-	{
+	if(!self.var_D461) {
 		level.player _meth_80A1();
 	}
 }

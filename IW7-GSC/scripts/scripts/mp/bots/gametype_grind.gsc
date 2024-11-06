@@ -1,29 +1,19 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\mp\bots\gametype_grind.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 7
- * Decompile Time: 378 ms
- * Timestamp: 10/27/2023 12:11:58 AM
-*******************************************************************/
+/******************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\mp\bots\gametype_grind.gsc
+******************************************************/
 
-//Function Number: 1
-main()
-{
+main() {
 	setup_callbacks();
 	scripts\mp\bots\gametype_conf::setup_bot_conf();
 }
 
-//Function Number: 2
-setup_callbacks()
-{
+setup_callbacks() {
 	level.bot_funcs["gametype_think"] = ::bot_grind_think;
 }
 
-//Function Number: 3
-bot_grind_think()
-{
+bot_grind_think() {
 	self notify("bot_grind_think");
 	self endon("bot_grind_think");
 	self endon("death");
@@ -33,55 +23,42 @@ bot_grind_think()
 	self.goal_zone = undefined;
 	self.conf_camping_zone = 0;
 	self.additional_tactical_logic_func = ::bot_grind_extra_think;
-	if(self botgetdifficultysetting("strategyLevel") > 0)
-	{
+	if(self botgetdifficultysetting("strategyLevel") > 0) {
 		childthread enemy_watcher();
 	}
 
 	scripts\mp\bots\gametype_conf::bot_conf_think();
 }
 
-//Function Number: 4
-bot_grind_extra_think()
-{
-	if(!isdefined(self.tag_getting))
-	{
-		if(self.tagscarried > 0)
-		{
+bot_grind_extra_think() {
+	if(!isdefined(self.tag_getting)) {
+		if(self.tagscarried > 0) {
 			var_00 = squared(500 + self.tagscarried * 250);
-			if(game["teamScores"][self.team] + self.tagscarried >= level.roundscorelimit)
-			{
+			if(game["teamScores"][self.team] + self.tagscarried >= level.roundscorelimit) {
 				var_00 = squared(5000);
 			}
-			else if(!isdefined(self.isnodeoccupied) && !scripts\mp\bots\_bots_util::bot_in_combat())
-			{
+			else if(!isdefined(self.isnodeoccupied) && !scripts\mp\bots\_bots_util::bot_in_combat()) {
 				var_00 = squared(1500 + self.tagscarried * 250);
 			}
 
 			var_01 = undefined;
-			foreach(var_03 in level.var_13FC1)
-			{
+			foreach(var_03 in level.var_13FC1) {
 				var_04 = distancesquared(self.origin,var_03.origin);
-				if(var_04 < var_00)
-				{
+				if(var_04 < var_00) {
 					var_00 = var_04;
 					var_01 = var_03;
 				}
 			}
 
-			if(isdefined(var_01))
-			{
+			if(isdefined(var_01)) {
 				var_06 = 1;
-				if(self.grind_waiting_to_bank)
-				{
-					if(isdefined(self.goal_zone) && self.goal_zone == var_01)
-					{
+				if(self.grind_waiting_to_bank) {
+					if(isdefined(self.goal_zone) && self.goal_zone == var_01) {
 						var_06 = 0;
 					}
 				}
 
-				if(var_06)
-				{
+				if(var_06) {
 					self.grind_waiting_to_bank = 1;
 					self.goal_zone = var_01;
 					self botclearscriptgoal();
@@ -94,42 +71,33 @@ bot_grind_extra_think()
 				}
 			}
 
-			if(self.grind_waiting_to_bank)
-			{
-				if(game["teamScores"][self.team] + self.tagscarried >= level.roundscorelimit)
-				{
+			if(self.grind_waiting_to_bank) {
+				if(game["teamScores"][self.team] + self.tagscarried >= level.roundscorelimit) {
 					self botsetflag("force_sprint",1);
 				}
 			}
 		}
-		else if(self.grind_waiting_to_bank)
-		{
+		else if(self.grind_waiting_to_bank) {
 			self.grind_waiting_to_bank = 0;
 			self.goal_zone = undefined;
 			self notify("stop_going_to_zone");
 			self botclearscriptgoal();
 		}
 
-		if(self.personality == "camper" && !self.conf_camping_tag && !self.grind_waiting_to_bank)
-		{
+		if(self.personality == "camper" && !self.conf_camping_tag && !self.grind_waiting_to_bank) {
 			var_00 = undefined;
 			var_01 = undefined;
-			foreach(var_03 in level.var_13FC1)
-			{
+			foreach(var_03 in level.var_13FC1) {
 				var_04 = distancesquared(self.origin,var_03.origin);
-				if(!isdefined(var_00) || var_04 < var_00)
-				{
+				if(!isdefined(var_00) || var_04 < var_00) {
 					var_00 = var_04;
 					var_01 = var_03;
 				}
 			}
 
-			if(isdefined(var_01))
-			{
-				if(scripts\mp\bots\_bots_personality::should_select_new_ambush_point())
-				{
-					if(scripts\mp\bots\_bots_personality::find_ambush_node(var_01.origin))
-					{
+			if(isdefined(var_01)) {
+				if(scripts\mp\bots\_bots_personality::should_select_new_ambush_point()) {
+					if(scripts\mp\bots\_bots_personality::find_ambush_node(var_01.origin)) {
 						self.conf_camping_zone = 1;
 						self notify("stop_going_to_zone");
 						self.grind_waiting_to_bank = 0;
@@ -162,12 +130,9 @@ bot_grind_extra_think()
 	return self.grind_waiting_to_bank || self.conf_camping_zone;
 }
 
-//Function Number: 5
-bot_goto_zone(param_00,param_01)
-{
+bot_goto_zone(param_00,param_01) {
 	self endon("stop_going_to_zone");
-	if(!isdefined(param_00.calculated_nearest_node))
-	{
+	if(!isdefined(param_00.calculated_nearest_node)) {
 		param_00.nearest_node = getclosestnodeinsight(param_00.origin);
 		param_00.calculated_nearest_node = 1;
 	}
@@ -177,23 +142,18 @@ bot_goto_zone(param_00,param_01)
 	var_03 = scripts\mp\bots\_bots_util::bot_waittill_goal_or_fail();
 }
 
-//Function Number: 6
-bot_camp_zone(param_00,param_01)
-{
+bot_camp_zone(param_00,param_01) {
 	self endon("stop_camping_zone");
 	self botsetscriptgoalnode(self.node_ambushing_from,param_01,self.ambush_yaw);
 	var_02 = scripts\mp\bots\_bots_util::bot_waittill_goal_or_fail();
-	if(var_02 == "goal")
-	{
-		if(!isdefined(param_00.calculated_nearest_node))
-		{
+	if(var_02 == "goal") {
+		if(!isdefined(param_00.calculated_nearest_node)) {
 			param_00.nearest_node = getclosestnodeinsight(param_00.origin);
 			param_00.calculated_nearest_node = 1;
 		}
 
 		var_03 = param_00.nearest_node;
-		if(isdefined(var_03))
-		{
+		if(isdefined(var_03)) {
 			var_04 = findentrances(self.origin);
 			var_04 = scripts\engine\utility::array_add(var_04,var_03);
 			childthread scripts\mp\bots\_bots_util::bot_watch_nodes(var_04);
@@ -201,14 +161,10 @@ bot_camp_zone(param_00,param_01)
 	}
 }
 
-//Function Number: 7
-enemy_watcher()
-{
+enemy_watcher() {
 	self.default_meleechargedist = self botgetdifficultysetting("meleeChargeDist");
-	for(;;)
-	{
-		if(self botgetdifficultysetting("strategyLevel") < 2)
-		{
+	for(;;) {
+		if(self botgetdifficultysetting("strategyLevel") < 2) {
 			wait(0.5);
 		}
 		else
@@ -216,8 +172,7 @@ enemy_watcher()
 			wait(0.2);
 		}
 
-		if(isdefined(self.isnodeoccupied) && isplayer(self.isnodeoccupied) && isdefined(self.isnodeoccupied.tagscarried) && self.isnodeoccupied.tagscarried >= 3 && self botcanseeentity(self.isnodeoccupied) && distance(self.origin,self.isnodeoccupied.origin) <= 500)
-		{
+		if(isdefined(self.isnodeoccupied) && isplayer(self.isnodeoccupied) && isdefined(self.isnodeoccupied.tagscarried) && self.isnodeoccupied.tagscarried >= 3 && self botcanseeentity(self.isnodeoccupied) && distance(self.origin,self.isnodeoccupied.origin) <= 500) {
 			self getpassivestruct("meleeChargeDist",500);
 			self botsetflag("prefer_melee",1);
 			continue;

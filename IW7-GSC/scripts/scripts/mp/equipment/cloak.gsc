@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: 3923.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 34
- * Decompile Time: 61 ms
- * Timestamp: 10/27/2023 12:31:16 AM
-*******************************************************************/
+/**************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\mp\equipment\cloak.gsc
+**************************************************/
 
-//Function Number: 1
-func_97C5()
-{
+func_97C5() {
 	level.var_1BBA = spawnstruct();
 	func_97C6(level.var_1BBA);
 	func_97C8(level.var_1BBA);
@@ -21,37 +15,27 @@ func_97C5()
 	level.var_1BBA.var_1108C = 99.4488;
 }
 
-//Function Number: 2
-func_370B()
-{
+func_370B() {
 	func_36F3();
 	func_3703();
 }
 
-//Function Number: 3
-func_36F3()
-{
+func_36F3() {
 	iprintln("level.alienAnimData.jumpLaunchArrival_maxMoveDelta = " + func_36F6("jump_launch_arrival"));
 }
 
-//Function Number: 4
-func_3703()
-{
+func_3703() {
 	iprintln("level.alienAnimData.stopSoon_NotifyDist = " + func_36F6("run_stop"));
 }
 
-//Function Number: 5
-func_36F6(param_00)
-{
+func_36F6(param_00) {
 	var_01 = 0;
 	var_02 = self getanimentrycount(param_00);
-	for(var_03 = 0;var_03 < var_02;var_03++)
-	{
+	for(var_03 = 0;var_03 < var_02;var_03++) {
 		var_04 = self getsafecircleorigin(param_00,var_03);
 		var_05 = getmovedelta(var_04,0,1);
 		var_06 = lengthsquared(var_05);
-		if(var_06 > var_01)
-		{
+		if(var_06 > var_01) {
 			var_01 = var_06;
 		}
 	}
@@ -59,9 +43,7 @@ func_36F6(param_00)
 	return sqrt(var_01);
 }
 
-//Function Number: 6
-func_97C6(param_00)
-{
+func_97C6(param_00) {
 	param_00.var_38D2 = [];
 	param_00.var_38D2["alien_crawl_door"] = func_DF12("traverse_group_1",[0],0);
 	param_00.var_38D2["alien_jump_sidewall_l"] = func_DF12("traverse_group_1",[1],0);
@@ -136,9 +118,7 @@ func_97C6(param_00)
 	param_00.var_38D2["alien_wall_run"] = func_DF12("run");
 }
 
-//Function Number: 7
-func_97C8(param_00)
-{
+func_97C8(param_00) {
 	level.var_1BBA.var_A4E2 = 907.0294;
 	level.var_1BBA.var_A4E6 = 16.8476;
 	level.var_1BBA.var_A4E7 = 0.111111;
@@ -176,9 +156,7 @@ func_97C8(param_00)
 	level.var_1BBA.var_93B2["jump_launch_down"]["jump_land_sidewall_low"] = 9;
 }
 
-//Function Number: 8
-func_97C9(param_00)
-{
+func_97C9(param_00) {
 	param_00.var_C871 = [];
 	var_01 = [];
 	var_01["front"]["head"] = [0];
@@ -359,9 +337,7 @@ func_97C9(param_00)
 	param_00.var_C871["idleToImpactMap"] = var_09;
 }
 
-//Function Number: 9
-func_97C7(param_00)
-{
+func_97C7(param_00) {
 	param_00.var_4E2D = [];
 	var_01 = [];
 	var_01["front"]["head"] = [0];
@@ -515,64 +491,49 @@ func_97C7(param_00)
 	param_00.var_4E2D["special"] = var_06;
 }
 
-//Function Number: 10
-func_989F()
-{
+func_989F() {
 	level.var_1BBA.var_1BCD[0] = 40;
 	level.var_1BBA.var_1BCD[1] = 40;
 	level.var_1BBA.var_1BCD[2] = 20;
 }
 
-//Function Number: 11
-func_DF12(param_00,param_01,param_02,param_03,param_04,param_05)
-{
+func_DF12(param_00,param_01,param_02,param_03,param_04,param_05) {
 	var_06 = [];
 	var_06["animState"] = param_00;
-	if(isdefined(param_01))
-	{
+	if(isdefined(param_01)) {
 		var_06["animIndexArray"] = param_01;
 	}
 
-	if(isdefined(param_02))
-	{
+	if(isdefined(param_02)) {
 		var_06["endInOriented"] = param_02;
 	}
 
-	if(isdefined(param_03))
-	{
+	if(isdefined(param_03)) {
 		var_06["flexHeightEndAtTraverseEnd"] = param_03;
 	}
 
-	if(isdefined(param_04))
-	{
+	if(isdefined(param_04)) {
 		var_06["traverseSound"] = param_04;
 	}
 
-	if(isdefined(param_05))
-	{
+	if(isdefined(param_05)) {
 		var_06["traverseAnimScale"] = param_05;
 	}
 
 	return var_06;
 }
 
-//Function Number: 12
-func_129B5(param_00)
-{
+func_129B5(param_00) {
 	var_01 = param_00.origin - self.origin;
 	return func_129B7(var_01);
 }
 
-//Function Number: 13
-func_129B7(param_00)
-{
+func_129B7(param_00) {
 	var_01 = _meth_81E1(anglestoforward(self.angles),param_00,anglestoup(self.angles));
 	self orientmode("face angle abs",self.angles);
-	if(var_01 != 4)
-	{
+	if(var_01 != 4) {
 		self.projectileintercept = 1;
-		if(self.trajectorycanattemptaccuratejump)
-		{
+		if(self.trajectorycanattemptaccuratejump) {
 			self ghostlaunched("anim angle delta");
 		}
 		else
@@ -582,8 +543,7 @@ func_129B7(param_00)
 
 		var_02 = linkto();
 		scripts\mp\agents\_scriptedagents::func_CED5(var_02,var_01,"turn_in_place","code_move");
-		if(!lib_0A49::func_9C09())
-		{
+		if(!lib_0A49::func_9C09()) {
 			self.projectileintercept = 0;
 		}
 
@@ -593,46 +553,37 @@ func_129B7(param_00)
 	return 0;
 }
 
-//Function Number: 14
-linkto()
-{
-	if(isdefined(level.var_5750))
-	{
-		var_00 = [[ level.var_5750 ]]();
-		if(isdefined(var_00))
-		{
+linkto() {
+	if(isdefined(level.var_5750)) {
+		var_00 = [[level.var_5750]]();
+		if(isdefined(var_00)) {
 			return var_00;
 		}
 	}
 
 	var_00 = undefined;
-	switch(scripts\cp\cp_agent_utils::get_agent_type(self))
-	{
+	switch(scripts\cp\cp_agent_utils::get_agent_type(self)) {
 		case "gargoyle_boss":
 		case "gargoyle":
-			var_00 = [[ level.var_1B6B["gargoyle"]["turn_in_place_anim_state"] ]]();
+			var_00 = [[level.var_1B6B["gargoyle"]["turn_in_place_anim_state"]]]();
 			break;
 	}
 
-	if(!isdefined(var_00))
-	{
+	if(!isdefined(var_00)) {
 		var_00 = "turn_in_place";
 	}
 
 	return var_00;
 }
 
-//Function Number: 15
-_meth_81E1(param_00,param_01,param_02)
-{
+_meth_81E1(param_00,param_01,param_02) {
 	var_03 = undefined;
 	var_04 = undefined;
 	var_05 = disableforcethirdpersonwhenfollowing(param_00,param_01,param_02);
 	var_06 = var_05.var_E72A;
 	var_07 = var_05.var_DA69;
 	var_08 = 10;
-	if(var_07 > 0)
-	{
+	if(var_07 > 0) {
 		var_04 = int(ceil(180 - var_06 - var_08 / 45));
 	}
 	else
@@ -644,9 +595,7 @@ _meth_81E1(param_00,param_01,param_02)
 	return var_04;
 }
 
-//Function Number: 16
-disableforcethirdpersonwhenfollowing(param_00,param_01,param_02)
-{
+disableforcethirdpersonwhenfollowing(param_00,param_01,param_02) {
 	var_03 = spawnstruct();
 	var_04 = vectornormalize(func_DA68(param_00,param_02));
 	var_05 = vectornormalize(func_DA68(param_01,param_02));
@@ -661,100 +610,73 @@ disableforcethirdpersonwhenfollowing(param_00,param_01,param_02)
 	return var_03;
 }
 
-//Function Number: 17
-func_DA68(param_00,param_01)
-{
+func_DA68(param_00,param_01) {
 	var_02 = vectordot(param_00,param_01);
 	var_03 = param_00 - param_01 * var_02;
 	return var_03;
 }
 
-//Function Number: 18
-func_C864(param_00)
-{
+func_C864(param_00) {
 	return level.var_1BBA.var_C871["hitLoc"][param_00];
 }
 
-//Function Number: 19
-func_C865(param_00)
-{
+func_C865(param_00) {
 	var_01 = scripts\mp\agents\_scriptedagents::func_7DBD(param_00);
 	return level.var_1BBA.var_C871["hitDirection"][var_01];
 }
 
-//Function Number: 20
-func_4E0C(param_00)
-{
+func_4E0C(param_00) {
 	return level.var_1BBA.var_4E2D["hitLoc"][param_00];
 }
 
-//Function Number: 21
-func_4E0D(param_00)
-{
+func_4E0D(param_00) {
 	var_01 = scripts\mp\agents\_scriptedagents::func_7DBD(param_00);
 	return level.var_1BBA.var_4E2D["hitDirection"][var_01];
 }
 
-//Function Number: 22
-botnodepick(param_00,param_01,param_02)
-{
+botnodepick(param_00,param_01,param_02) {
 	var_03 = func_7E59(param_01,param_02);
 	return param_00 + "_" + var_03;
 }
 
-//Function Number: 23
-func_7E59(param_00,param_01)
-{
+func_7E59(param_00,param_01) {
 	var_02 = scripts\cp\cp_agent_utils::get_agent_type(self);
 	var_03 = level.var_1BA4[var_02].var_2552["heavy_damage_threshold"];
-	if(param_00 < var_03 && !param_01)
-	{
+	if(param_00 < var_03 && !param_01) {
 		return "light";
 	}
 
 	return "heavy";
 }
 
-//Function Number: 24
-botnodeavailable(param_00,param_01,param_02)
-{
+botnodeavailable(param_00,param_01,param_02) {
 	param_01 = func_C865(param_01 * -1);
-	if(isdefined(param_02))
-	{
+	if(isdefined(param_02)) {
 		param_02 = func_C864(param_02);
 	}
 
 	return botnodepickmultiple(param_00,param_01,param_02,level.var_1BBA.var_C871);
 }
 
-//Function Number: 25
-func_7F10(param_00)
-{
+func_7F10(param_00) {
 	var_01 = level.var_1BBA.var_C871["idleToImpactMap"][param_00];
 	var_02 = randomintrange(0,var_01.size);
 	return var_01[var_02];
 }
 
-//Function Number: 26
-func_7E62(param_00,param_01)
-{
+func_7E62(param_00,param_01) {
 	var_02 = func_7E59(param_01,0);
 	return param_00 + "_" + var_02;
 }
 
-//Function Number: 27
-func_7E61(param_00,param_01,param_02)
-{
+func_7E61(param_00,param_01,param_02) {
 	param_01 = func_4E0D(param_01 * -1);
 	param_02 = func_4E0C(param_02);
 	return botnodepickmultiple(param_00,param_01,param_02,level.var_1BBA.var_4E2D);
 }
 
-//Function Number: 28
-botnodepickmultiple(param_00,param_01,param_02,param_03)
-{
-	if(isdefined(param_02))
-	{
+botnodepickmultiple(param_00,param_01,param_02,param_03) {
+	if(isdefined(param_02)) {
 		var_04 = param_03[param_00][param_01][param_02];
 	}
 	else
@@ -765,31 +687,23 @@ botnodepickmultiple(param_00,param_01,param_02,param_03)
 	return var_04[randomint(var_04.size)];
 }
 
-//Function Number: 29
-_meth_8146(param_00)
-{
+_meth_8146(param_00) {
 	var_01 = level.var_1BBA.var_4E2D["special"][param_00];
 	return var_01[randomint(var_01.size)];
 }
 
-//Function Number: 30
-func_E26A(param_00,param_01)
-{
+func_E26A(param_00,param_01) {
 	var_02 = getent(param_00,"targetname");
 	var_02 setscriptablepartstate("animpart",0);
 }
 
-//Function Number: 31
-func_CED8(param_00,param_01,param_02)
-{
+func_CED8(param_00,param_01,param_02) {
 	var_03 = getent(param_00,"targetname");
-	if(!isdefined(var_03))
-	{
+	if(!isdefined(var_03)) {
 		return;
 	}
 
-	if(!isdefined(param_02))
-	{
+	if(!isdefined(param_02)) {
 		param_02 = 1;
 	}
 
@@ -797,25 +711,19 @@ func_CED8(param_00,param_01,param_02)
 	level notify("scriptable",param_00);
 }
 
-//Function Number: 32
-func_7F66(param_00)
-{
+func_7F66(param_00) {
 	var_01 = getanimlength(param_00);
 	return min(0.2,var_01);
 }
 
-//Function Number: 33
-_meth_8088(param_00,param_01,param_02,param_03)
-{
+_meth_8088(param_00,param_01,param_02,param_03) {
 	var_04 = getanimlength(param_00);
 	var_05 = getmovedelta(param_00,0,param_03 / var_04);
 	var_06 = rotatevector(var_05,param_02);
 	return param_01 + var_06;
 }
 
-//Function Number: 34
-func_58EA(param_00,param_01)
-{
+func_58EA(param_00,param_01) {
 	self endon("death");
 	level endon("game_ended");
 	self ghostexplode(self.origin,param_00,param_01);

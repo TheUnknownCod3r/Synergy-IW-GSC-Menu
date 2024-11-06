@@ -1,16 +1,10 @@
 /*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\mp\agents\crab_mini\crab_mini_agent.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 15
- * Decompile Time: 793 ms
- * Timestamp: 10/27/2023 12:11:12 AM
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\mp\agents\crab_mini\crab_mini_agent.gsc
 *******************************************************************/
 
-//Function Number: 1
-registerscriptedagent()
-{
+registerscriptedagent() {
 	scripts\mp\agents\crab_mini\crab_mini_tunedata::setuptunedata();
 	scripts/aitypes/bt_util::init();
 	behaviortree\crab_mini::func_DEE8();
@@ -18,12 +12,9 @@ registerscriptedagent()
 	thread func_FAB0();
 }
 
-//Function Number: 2
-func_FAB0()
-{
+func_FAB0() {
 	level endon("game_ended");
-	if(!isdefined(level.agent_definition))
-	{
+	if(!isdefined(level.agent_definition)) {
 		level waittill("scripted_agents_initialized");
 	}
 
@@ -34,35 +25,28 @@ func_FAB0()
 	level.agent_funcs["crab_mini"]["gametype_on_killed"] = ::scripts\cp\maps\cp_town\cp_town_damage::cp_town_onzombiekilled;
 	level.agent_funcs["crab_mini"]["on_damaged_finished"] = ::scripts\mp\agents\zombie\zmb_zombie_agent::onzombiedamagefinished;
 	level.agent_funcs["crab_mini"]["on_killed"] = ::onkilled;
-	if(!isdefined(level.var_8CBD))
-	{
+	if(!isdefined(level.var_8CBD)) {
 		level.var_8CBD = [];
 	}
 
 	level.var_8CBD["crab_mini"] = ::calculatecrabminihealth;
-	if(!isdefined(level.damage_feedback_overrride))
-	{
+	if(!isdefined(level.damage_feedback_overrride)) {
 		level.damage_feedback_overrride = [];
 	}
 
 	level.damage_feedback_overrride["crab_mini"] = ::scripts\cp\maps\cp_town\cp_town_damage::crog_processdamagefeedback;
-	if(!isdefined(level.special_zombie_damage_func))
-	{
+	if(!isdefined(level.special_zombie_damage_func)) {
 		level.special_zombie_damage_func = [];
 	}
 
 	level.special_zombie_damage_func["crab_mini"] = ::crab_mini_special_damage_func;
 }
 
-//Function Number: 3
-func_FACE(param_00)
-{
+func_FACE(param_00) {
 	self setmodel("zmb_minicrab");
 }
 
-//Function Number: 4
-setupzombiegametypevars()
-{
+setupzombiegametypevars() {
 	self.class = undefined;
 	self.movespeedscaler = undefined;
 	self.avoidkillstreakonspawntimer = undefined;
@@ -145,15 +129,12 @@ setupzombiegametypevars()
 	self.dont_cleanup = 1;
 	self.allowpain = 0;
 	self setavoidanceradius(45);
-	if(getdvarint("scr_zombie_left_foot_sharp_turn_only",0) == 1)
-	{
+	if(getdvarint("scr_zombie_left_foot_sharp_turn_only",0) == 1) {
 		self.var_AB3F = 1;
 	}
 }
 
-//Function Number: 5
-setupagent()
-{
+setupagent() {
 	setupzombiegametypevars();
 	thread scripts\mp\agents\zombie\zmb_zombie_agent::func_12EE6();
 	self.height = self.var_18F4;
@@ -177,23 +158,17 @@ setupagent()
 	self.dontmutilate = 1;
 }
 
-//Function Number: 6
-getenemy()
-{
-	if(isdefined(self.myenemy))
-	{
+getenemy() {
+	if(isdefined(self.myenemy)) {
 		return self.myenemy;
 	}
 
 	return undefined;
 }
 
-//Function Number: 7
-lookatenemy()
-{
+lookatenemy() {
 	var_00 = getenemy();
-	if(isdefined(var_00))
-	{
+	if(isdefined(var_00)) {
 		var_01 = var_00.origin - self.origin;
 		var_02 = vectortoangles(var_01);
 		self orientmode("face angle abs",var_02);
@@ -203,12 +178,9 @@ lookatenemy()
 	self orientmode("face angle abs",self.angles);
 }
 
-//Function Number: 8
-calculatecrabminihealth()
-{
+calculatecrabminihealth() {
 	var_00 = 200;
-	switch(level.specialroundcounter)
-	{
+	switch(level.specialroundcounter) {
 		case 0:
 			var_00 = 300;
 			break;
@@ -233,25 +205,19 @@ calculatecrabminihealth()
 	return var_00;
 }
 
-//Function Number: 9
-create_sludge_pool(param_00)
-{
+create_sludge_pool(param_00) {
 	self.var_CE65 = 1;
-	if(!isdefined(level.goo_pool_ent_array))
-	{
+	if(!isdefined(level.goo_pool_ent_array)) {
 		level.goo_pool_ent_array = [];
 	}
 
 	var_01 = 2500;
-	foreach(var_03 in level.goo_pool_ent_array)
-	{
-		if(!isdefined(var_03))
-		{
+	foreach(var_03 in level.goo_pool_ent_array) {
+		if(!isdefined(var_03)) {
 			continue;
 		}
 
-		if(distancesquared(param_00,var_03.origin) < var_01)
-		{
+		if(distancesquared(param_00,var_03.origin) < var_01) {
 			var_03.var_AC75 = gettime() + 10000;
 			return;
 		}
@@ -264,21 +230,15 @@ create_sludge_pool(param_00)
 	var_05 thread run_sludge_pool_damage_func();
 }
 
-//Function Number: 10
-run_sludge_pool_damage_func()
-{
+run_sludge_pool_damage_func() {
 	self endon("death");
 	var_00 = 2500;
 	self.var_AC75 = gettime() + 10000;
-	while(self.var_AC75 > gettime())
-	{
-		foreach(var_02 in level.players)
-		{
-			if(distancesquared(self.origin,var_02.origin) < var_00)
-			{
+	while(self.var_AC75 > gettime()) {
+		foreach(var_02 in level.players) {
+			if(distancesquared(self.origin,var_02.origin) < var_00) {
 				var_03 = gettime();
-				if(!isdefined(var_02.last_crab_sludge_time) || var_02.last_crab_sludge_time + 1000 < var_03)
-				{
+				if(!isdefined(var_02.last_crab_sludge_time) || var_02.last_crab_sludge_time + 1000 < var_03) {
 					var_02 dodamage(20,self.origin,self,self,"MOD_UNKNOWN");
 					var_02.last_crab_sludge_time = gettime();
 				}
@@ -291,38 +251,28 @@ run_sludge_pool_damage_func()
 	self delete();
 }
 
-//Function Number: 11
-setisstuck(param_00)
-{
+setisstuck(param_00) {
 	self.bisstuck = param_00;
 }
 
-//Function Number: 12
-iscrabministuck()
-{
+iscrabministuck() {
 	return isdefined(self.bisstuck) && self.bisstuck;
 }
 
-//Function Number: 13
-crab_mini_special_damage_func(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08,param_09,param_0A,param_0B)
-{
-	if(isdefined(level.insta_kill) && level.insta_kill)
-	{
+crab_mini_special_damage_func(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08,param_09,param_0A,param_0B) {
+	if(isdefined(level.insta_kill) && level.insta_kill) {
 		return self.health;
 	}
 
-	if(isdefined(param_05) && param_05 == "iw7_knife_zm_cleaver")
-	{
+	if(isdefined(param_05) && param_05 == "iw7_knife_zm_cleaver") {
 		return self.health;
 	}
 
-	if(isdefined(param_07))
-	{
+	if(isdefined(param_07)) {
 		var_0C = scripts\mp\agents\crab_mini\crab_mini_tunedata::gettunedata();
 		var_0D = anglestoforward(self.angles) * -1;
 		var_0E = vectordot(var_0D,param_07);
-		if(var_0E > var_0C.reduce_damage_dot)
-		{
+		if(var_0E > var_0C.reduce_damage_dot) {
 			param_02 = param_02 * var_0C.reduce_damage_pct;
 			self.armor_hit = 1;
 		}
@@ -331,16 +281,12 @@ crab_mini_special_damage_func(param_00,param_01,param_02,param_03,param_04,param
 	return param_02;
 }
 
-//Function Number: 14
-onkilled(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08)
-{
+onkilled(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08) {
 	thread play_death_sfx(1);
 	return scripts\mp\agents\zombie\zmb_zombie_agent::onzombiekilled(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08);
 }
 
-//Function Number: 15
-play_death_sfx(param_00)
-{
+play_death_sfx(param_00) {
 	playsoundatpos(self.origin,"minion_crog_pre_explo");
 	wait(param_00);
 	playsoundatpos(self.origin,"minion_crog_explode");

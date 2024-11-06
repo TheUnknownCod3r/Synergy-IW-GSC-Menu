@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\mp\killstreaks\_init_mp.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 1
- * Decompile Time: 53 ms
- * Timestamp: 10/27/2023 12:28:51 AM
-*******************************************************************/
+/*******************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\mp\killstreaks\_init_mp.gsc
+*******************************************************/
 
-//Function Number: 1
-init()
-{
+init() {
 	scripts\mp\killstreaks\_killstreaks::func_9888();
 	level.killstreaksetups = [];
 	thread scripts\mp\killstreaks\_target_marker::init();
@@ -126,9 +120,8 @@ init()
 	level.killstreakweildweapons["deploy_dronepackage_mp"] = "marker";
 	level.killstreakweildweapons["deploy_rc8_mp"] = "marker";
 	level.killstreakweildweapons["deploy_warden_mp"] = "marker";
-	if(isdefined(level.var_B334))
-	{
-		[[ level.var_B334 ]]();
+	if(isdefined(level.var_B334)) {
+		[[level.var_B334]]();
 	}
 
 	level.var_A6AA = scripts\mp\_utility::getintproperty("scr_game_killstreakdelay",12);

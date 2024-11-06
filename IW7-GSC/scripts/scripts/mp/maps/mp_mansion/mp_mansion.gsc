@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\mp\maps\mp_mansion\mp_mansion.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 3
- * Decompile Time: 198 ms
- * Timestamp: 10/27/2023 12:13:45 AM
-*******************************************************************/
+/*************************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\mp\maps\mp_mansion\mp_mansion.gsc
+*************************************************************/
 
-//Function Number: 1
-main()
-{
+main() {
 	scripts\mp\maps\mp_mansion\mp_mansion_precache::main();
 	scripts\mp\maps\mp_mansion\gen\mp_mansion_art::main();
 	scripts\mp\maps\mp_mansion\mp_mansion_fx::main();
@@ -32,9 +26,7 @@ main()
 	level.modifiedspawnpoints["1552 -632 -108"]["mp_ball_spawn"]["origin"] = (1552,-632,-105);
 }
 
-//Function Number: 2
-fix_collision()
-{
+fix_collision() {
 	var_00 = getent("clip64x64x128","targetname");
 	var_01 = spawn("script_model",(736,-208,280));
 	var_01.angles = (0,180,90);
@@ -141,9 +133,7 @@ fix_collision()
 	var_2F clonebrushmodeltoscriptmodel(var_2E);
 }
 
-//Function Number: 3
-spawn_oob_trigger()
-{
+spawn_oob_trigger() {
 	wait(1);
 	var_00 = spawn("trigger_radius",(710,1550,275),0,100,10);
 	var_01 = spawn("trigger_radius",(-1220,1112,210),0,60,15);

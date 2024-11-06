@@ -1,46 +1,30 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: 3431.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 17
- * Decompile Time: 4 ms
- * Timestamp: 10/27/2023 12:27:26 AM
-*******************************************************************/
+/****************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\3431.gsc
+****************************/
 
-//Function Number: 1
-applyarchetype()
-{
-}
+applyarchetype() {}
 
-//Function Number: 2
-func_97D0()
-{
+func_97D0() {
 	level._effect["atomize_body"] = loadfx("vfx/iw7/_requests/mp/vfx_atomize_body.vfx");
 }
 
-//Function Number: 3
-removearchetype()
-{
+removearchetype() {
 	self notify("removeArchetype");
 	self setclientomnvar("ui_dodge_charges",0);
-	if(isdefined(self.var_1166A))
-	{
+	if(isdefined(self.var_1166A)) {
 		self.var_1166A delete();
 	}
 }
 
-//Function Number: 4
-func_CAAF()
-{
+func_CAAF() {
 	self endon("death");
 	self endon("removeArchetype");
-	for(;;)
-	{
+	for(;;) {
 		self setclientomnvar("ui_dodge_charges",4);
 		self waittill("sprint_slide_begin");
-		if(scripts/mp/equipment/phase_shift::isentityphaseshifted(self))
-		{
+		if(scripts/mp/equipment/phase_shift::isentityphaseshifted(self)) {
 			continue;
 		}
 
@@ -53,9 +37,7 @@ func_CAAF()
 	}
 }
 
-//Function Number: 5
-func_CAAE()
-{
+func_CAAE() {
 	self endon("death");
 	self endon("removeArchetype");
 	self endon("phase_shift_power_activated");
@@ -63,34 +45,28 @@ func_CAAE()
 	scripts/mp/equipment/phase_shift::exitphaseshift(0);
 }
 
-//Function Number: 6
-func_1166B()
-{
+func_1166B() {
 	self endon("death");
 	self endon("removeArchetype");
 	var_00 = spawn("script_model",self.origin);
 	var_00 setmodel("ks_marker_mp");
 	var_00 rotatepitch(-90,0.05);
 	self.var_1166A = var_00;
-	for(;;)
-	{
+	for(;;) {
 		self setclientomnvar("ui_dodge_charges",4);
 		self waittill("sprint_slide_begin");
 		var_01 = scripts\engine\utility::waittill_any_timeout_1(0.1,"sprint_slide_end");
-		if(var_01 != "timeout")
-		{
+		if(var_01 != "timeout") {
 			continue;
 		}
 
-		if(scripts/mp/equipment/phase_shift::isentityphaseshifted(self))
-		{
+		if(scripts/mp/equipment/phase_shift::isentityphaseshifted(self)) {
 			continue;
 		}
 
 		var_02 = _meth_81C1(320);
 		var_03 = getdvarint("teleport_minDrawDistanceForFX",16);
-		if(distance2dsquared(var_02,self.origin) <= var_03 * var_03)
-		{
+		if(distance2dsquared(var_02,self.origin) <= var_03 * var_03) {
 			continue;
 		}
 
@@ -110,18 +86,14 @@ func_1166B()
 	}
 }
 
-//Function Number: 7
-func_10148(param_00)
-{
+func_10148(param_00) {
 	self.var_1166A.origin = param_00;
 	self.var_1166A show();
 	wait(0.45);
 	self.var_1166A hide();
 }
 
-//Function Number: 8
-_meth_81C1(param_00)
-{
+_meth_81C1(param_00) {
 	var_01 = self.origin + (0,0,0);
 	var_02 = anglestoforward(self.angles);
 	var_03 = var_01 + var_02 * param_00;
@@ -129,32 +101,26 @@ _meth_81C1(param_00)
 	var_05 = scripts\common\trace::player_trace(var_01,var_03,self.angles,self,var_04,0,35);
 	var_06 = var_05["fraction"];
 	var_07 = var_05["position"];
-	if(var_06 != 1)
-	{
+	if(var_06 != 1) {
 		var_08 = param_00 * var_06;
 		var_08 = var_08 - 32;
 		var_07 = var_01 + var_02 * var_08;
 	}
 
 	var_09 = getclosestpointonnavmesh3d(var_07);
-	if(isdefined(var_09))
-	{
+	if(isdefined(var_09)) {
 		return var_09;
 	}
 
 	return var_07;
 }
 
-//Function Number: 9
-func_CAA7()
-{
+func_CAA7() {
 	self endon("death");
 	self endon("removeArchetype");
-	for(;;)
-	{
+	for(;;) {
 		self waittill("doubleJumpBegin");
-		if(scripts/mp/equipment/phase_shift::isentityphaseshifted(self))
-		{
+		if(scripts/mp/equipment/phase_shift::isentityphaseshifted(self)) {
 			continue;
 		}
 
@@ -163,17 +129,13 @@ func_CAA7()
 	}
 }
 
-//Function Number: 10
-func_CAA6()
-{
+func_CAA6() {
 	self endon("death");
 	self endon("removeArchetype");
 	self endon("phase_shift_power_activated");
 	var_00 = 0;
-	for(;;)
-	{
-		if(var_00 >= 0.5)
-		{
+	for(;;) {
+		if(var_00 >= 0.5) {
 			scripts/mp/equipment/phase_shift::exitphaseshift(0);
 			return;
 		}
@@ -183,17 +145,13 @@ func_CAA6()
 	}
 }
 
-//Function Number: 11
-func_E88E()
-{
+func_E88E() {
 	self endon("death");
 	self endon("disconnect");
 	self endon("removeArchetype");
-	for(;;)
-	{
+	for(;;) {
 		self waittill("got_a_kill",var_00,var_01,var_02);
-		if(var_02 != "MOD_MELEE")
-		{
+		if(var_02 != "MOD_MELEE") {
 			continue;
 		}
 
@@ -203,9 +161,7 @@ func_E88E()
 	}
 }
 
-//Function Number: 12
-func_20D9(param_00,param_01)
-{
+func_20D9(param_00,param_01) {
 	self endon("death");
 	self endon("disconnect");
 	self endon("removeArchetype");
@@ -218,9 +174,7 @@ func_20D9(param_00,param_01)
 	playsoundatpos(param_01,"kinetic_pulse_npc");
 }
 
-//Function Number: 13
-func_CAAD()
-{
+func_CAAD() {
 	self endon("death");
 	self endon("removeArchetype");
 	self endon("phase_shift_power_activated");
@@ -228,31 +182,23 @@ func_CAAD()
 	scripts/mp/equipment/phase_shift::exitphaseshift(0);
 }
 
-//Function Number: 14
-func_1091C()
-{
+func_1091C() {
 	self endon("death");
 	self endon("disconnect");
 	self endon("removeArchetype");
 	var_00 = level.players.size - 1;
-	for(;;)
-	{
-		if(level.players.size != var_00)
-		{
-			foreach(var_02 in level.players)
-			{
-				if(var_02 == self)
-				{
+	for(;;) {
+		if(level.players.size != var_00) {
+			foreach(var_02 in level.players) {
+				if(var_02 == self) {
 					continue;
 				}
 
-				if(var_02.team == self.team)
-				{
+				if(var_02.team == self.team) {
 					continue;
 				}
 
-				if(var_02 scripts\mp\_utility::_hasperk("specialty_coldblooded"))
-				{
+				if(var_02 scripts\mp\_utility::_hasperk("specialty_coldblooded")) {
 					continue;
 				}
 
@@ -266,44 +212,34 @@ func_1091C()
 	}
 }
 
-//Function Number: 15
-func_BA1A(param_00)
-{
+func_BA1A(param_00) {
 	param_00 endon("death");
 	param_00 endon("disconnect");
 	param_00 endon("removearchetype");
 	self endon("end_spawnview");
-	for(;;)
-	{
+	for(;;) {
 		self waittill("spawned_player");
 		wait(0.1);
 		func_C7A6(param_00);
 	}
 }
 
-//Function Number: 16
-func_C7A6(param_00)
-{
+func_C7A6(param_00) {
 	var_01 = scripts\mp\_utility::outlineenableforplayer(self,"red",param_00,0,1,"level_script");
-	if(!isai(param_00))
-	{
+	if(!isai(param_00)) {
 		param_00 scripts\mp\_utility::_hudoutlineviewmodelenable(5);
 	}
 
 	param_00 func_13AA0(var_01,self,6);
 }
 
-//Function Number: 17
-func_13AA0(param_00,param_01,param_02)
-{
+func_13AA0(param_00,param_01,param_02) {
 	self endon("disconnect");
 	level endon("game_ended");
 	scripts\engine\utility::waittill_any_timeout_no_endon_death_2(param_02,"leave","end_spawnview");
-	if(isdefined(param_01))
-	{
+	if(isdefined(param_01)) {
 		scripts\mp\_utility::outlinedisable(param_00,param_01);
-		if(!isai(param_01))
-		{
+		if(!isai(param_01)) {
 			param_01 scripts\mp\_utility::_hudoutlineviewmodeldisable();
 		}
 	}

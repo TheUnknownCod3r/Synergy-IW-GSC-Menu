@@ -1,32 +1,22 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: 3825.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 51
- * Decompile Time: 24 ms
- * Timestamp: 10/27/2023 12:31:02 AM
-*******************************************************************/
+/****************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\3825.gsc
+****************************/
 
-//Function Number: 1
-func_9739()
-{
+func_9739() {
 	level.var_FDBE = spawnstruct();
 	level.var_FDBE func_985A();
 	level.var_FDBE func_9854();
 }
 
-//Function Number: 2
-func_789F(param_00)
-{
+func_789F(param_00) {
 	self endon("death");
-	if(!isdefined(level.var_FDBE))
-	{
+	if(!isdefined(level.var_FDBE)) {
 		func_9739();
 	}
 
-	if(isdefined(param_00))
-	{
+	if(isdefined(param_00)) {
 		var_01 = func_7C05(param_00);
 		return var_01;
 	}
@@ -35,17 +25,13 @@ func_789F(param_00)
 	return var_01;
 }
 
-//Function Number: 3
-func_7BF4(param_00)
-{
+func_7BF4(param_00) {
 	var_01 = func_789F(param_00);
 	var_02 = func_7BEA(var_01);
 	return var_02;
 }
 
-//Function Number: 4
-func_173F()
-{
+func_173F() {
 	var_00 = [];
 	var_00[var_00.size] = "shipcrib_slt_sir";
 	var_00[var_00.size] = "shipcrib_slt_captain";
@@ -67,34 +53,26 @@ func_173F()
 	self.var_A594["salter_moon"] = var_00;
 }
 
-//Function Number: 5
-func_16D2()
-{
+func_16D2() {
 	var_00 = [];
 	var_00[var_00.size] = "shipcrib_eth_sir";
 	var_00[var_00.size] = "shipcrib_eth_captain";
 	self.var_A594["ethan"] = var_00;
 }
 
-//Function Number: 6
-func_16D3()
-{
+func_16D3() {
 	var_00 = [];
 	var_00[var_00.size] = "shipcrib_eth_sir";
 	self.var_A594["ethan_moon"] = var_00;
 }
 
-//Function Number: 7
-func_1724()
-{
+func_1724() {
 	var_00 = [];
 	var_00[var_00.size] = "shipcrib_omr_captain";
 	self.var_A594["omar"] = var_00;
 }
 
-//Function Number: 8
-func_1702()
-{
+func_1702() {
 	var_00 = [];
 	var_00[var_00.size] = "shipcrib_ksh_sir";
 	var_00[var_00.size] = "shipcrib_ksh_captain1";
@@ -102,17 +80,13 @@ func_1702()
 	self.var_A594["kash"] = var_00;
 }
 
-//Function Number: 9
-func_1703()
-{
+func_1703() {
 	var_00 = [];
 	var_00[var_00.size] = "shipcrib_ksh_sir";
 	self.var_A594["kash_moon"] = var_00;
 }
 
-//Function Number: 10
-func_16A7()
-{
+func_16A7() {
 	var_00 = [];
 	var_00[var_00.size] = "shipcrib_brk_sir";
 	var_00[var_00.size] = "shipcrib_brk_captain";
@@ -123,9 +97,7 @@ func_16A7()
 	self.var_A594["brooks"] = var_00;
 }
 
-//Function Number: 11
-func_16E3()
-{
+func_16E3() {
 	var_00 = [];
 	var_00[var_00.size] = "shipcrib_gbs_sir2";
 	var_00[var_00.size] = "shipcrib_gbs_captain2";
@@ -143,17 +115,13 @@ func_16E3()
 	self.var_A594["gibson_upbeat"] = var_00;
 }
 
-//Function Number: 12
-func_16E4()
-{
+func_16E4() {
 	var_00 = [];
 	var_00[var_00.size] = "shipcrib_gbs_sir2";
 	self.var_A594["gibson_moon"] = var_00;
 }
 
-//Function Number: 13
-func_1708()
-{
+func_1708() {
 	var_00 = [];
 	var_00[var_00.size] = "Kloos Alias1";
 	var_00[var_00.size] = "Kloos Alias2";
@@ -161,9 +129,7 @@ func_1708()
 	self.var_A594["kloos"] = var_00;
 }
 
-//Function Number: 14
-func_16DF()
-{
+func_16DF() {
 	var_00 = [];
 	var_00[var_00.size] = "shipcrib_nav_sir";
 	var_00[var_00.size] = "shipcrib_nav_captain";
@@ -171,9 +137,7 @@ func_16DF()
 	self.var_A594["gator"] = var_00;
 }
 
-//Function Number: 15
-func_171C()
-{
+func_171C() {
 	var_00 = [];
 	var_00[var_00.size] = "shipcrib_dpo_captainreyes";
 	var_00[var_00.size] = "shipcrib_dpo_captain";
@@ -181,9 +145,7 @@ func_171C()
 	self.var_A594["drop_officer"] = var_00;
 }
 
-//Function Number: 16
-func_16A0()
-{
+func_16A0() {
 	var_00 = [];
 	var_00[var_00.size] = "shipcrib_bts_captainreyes";
 	var_00[var_00.size] = "shipcrib_bts_sir";
@@ -191,9 +153,7 @@ func_16A0()
 	self.var_A594["sotomura"] = var_00;
 }
 
-//Function Number: 17
-func_1743()
-{
+func_1743() {
 	var_00 = [];
 	var_00[var_00.size] = "Sipes Alias1";
 	var_00[var_00.size] = "Sipes Alias2";
@@ -201,9 +161,7 @@ func_1743()
 	self.var_A594["sipes"] = var_00;
 }
 
-//Function Number: 18
-func_16B0()
-{
+func_16B0() {
 	var_00 = [];
 	var_00[var_00.size] = "shipcrib_cmo_captain";
 	var_00[var_00.size] = "shipcrib_cmo_commander";
@@ -211,9 +169,7 @@ func_16B0()
 	self.var_A594["comms"] = var_00;
 }
 
-//Function Number: 19
-func_16E7()
-{
+func_16E7() {
 	var_00 = [];
 	var_00[var_00.size] = "shipcrib_grf_sir1";
 	var_00[var_00.size] = "shipcrib_grf_captain1";
@@ -224,9 +180,7 @@ func_16E7()
 	self.var_A594["griff"] = var_00;
 }
 
-//Function Number: 20
-func_16FD()
-{
+func_16FD() {
 	var_00 = [];
 	var_00[var_00.size] = "Jack Alias1";
 	var_00[var_00.size] = "Jack Alias2";
@@ -234,9 +188,7 @@ func_16FD()
 	self.var_A594["jack"] = var_00;
 }
 
-//Function Number: 21
-func_170B()
-{
+func_170B() {
 	var_00 = [];
 	var_00[var_00.size] = "shipcrib_mac_captainreyes";
 	var_00[var_00.size] = "shipcrib_mac_sir";
@@ -244,14 +196,9 @@ func_170B()
 	self.var_A594["mac"] = var_00;
 }
 
-//Function Number: 22
-func_16A2()
-{
-}
+func_16A2() {}
 
-//Function Number: 23
-func_16A3()
-{
+func_16A3() {
 	var_00 = [];
 	var_00[var_00.size] = "Broadcast PU2 Alias1";
 	var_00[var_00.size] = "Broadcast PU2 Alias2";
@@ -259,9 +206,7 @@ func_16A3()
 	self.var_A594["broadcast_audience_pu2"] = var_00;
 }
 
-//Function Number: 24
-func_16A4()
-{
+func_16A4() {
 	var_00 = [];
 	var_00[var_00.size] = "Broadcast3 Alias1";
 	var_00[var_00.size] = "Broadcast3 Alias2";
@@ -269,9 +214,7 @@ func_16A4()
 	self.var_A594["broadcast_audience_03"] = var_00;
 }
 
-//Function Number: 25
-func_16A5()
-{
+func_16A5() {
 	var_00 = [];
 	var_00[var_00.size] = "Broadcast4 Alias1";
 	var_00[var_00.size] = "Broadcast4 Alias2";
@@ -279,9 +222,7 @@ func_16A5()
 	self.var_A594["broadcast_audience_04"] = var_00;
 }
 
-//Function Number: 26
-func_16A6()
-{
+func_16A6() {
 	var_00 = [];
 	var_00[var_00.size] = "Broadcast9 Alias1";
 	var_00[var_00.size] = "Broadcast9 Alias2";
@@ -289,9 +230,7 @@ func_16A6()
 	self.var_A594["broadcast_audience_09"] = var_00;
 }
 
-//Function Number: 27
-func_16E1()
-{
+func_16E1() {
 	var_00 = [];
 	var_00[var_00.size] = "shipcrib_un1_captain2";
 	var_00[var_00.size] = "shipcrib_un1_sir2";
@@ -306,9 +245,7 @@ func_16E1()
 	self.var_7741["male"]["generic_male_03"] = var_00;
 }
 
-//Function Number: 28
-func_16E0()
-{
+func_16E0() {
 	var_00 = [];
 	var_00[var_00.size] = "shipcrib_unf2_captain";
 	var_00[var_00.size] = "shipcrib_unf2_youllhavetoexcus";
@@ -323,9 +260,7 @@ func_16E0()
 	self.var_7741["female"]["generic_female_03"] = var_00;
 }
 
-//Function Number: 29
-func_985A()
-{
+func_985A() {
 	self.var_A594 = [];
 	func_173F();
 	func_16D2();
@@ -352,9 +287,7 @@ func_985A()
 	func_16A6();
 }
 
-//Function Number: 30
-func_9854()
-{
+func_9854() {
 	self.var_7741 = [];
 	self.var_7741["male"] = [];
 	self.var_7741["female"] = [];
@@ -362,38 +295,28 @@ func_9854()
 	func_16E0();
 }
 
-//Function Number: 31
-func_7C05(param_00)
-{
-	if(isdefined(level.var_FDBE.var_A594[param_00]))
-	{
+func_7C05(param_00) {
+	if(isdefined(level.var_FDBE.var_A594[param_00])) {
 		return level.var_FDBE.var_A594[param_00];
 	}
 
-	if(isdefined(level.var_FDBE.var_7741["male"][param_00]))
-	{
+	if(isdefined(level.var_FDBE.var_7741["male"][param_00])) {
 		return level.var_FDBE.var_7741["male"][param_00];
 	}
 
-	if(isdefined(level.var_FDBE.var_7741["female"][param_00]))
-	{
+	if(isdefined(level.var_FDBE.var_7741["female"][param_00])) {
 		return level.var_FDBE.var_7741["female"][param_00];
 	}
 }
 
-//Function Number: 32
-func_7A8C(param_00)
-{
-	if(isdefined(param_00.var_1FBB))
-	{
-		if(param_00.var_1FBB == "generic")
-		{
+func_7A8C(param_00) {
+	if(isdefined(param_00.var_1FBB)) {
+		if(param_00.var_1FBB == "generic") {
 			var_01 = func_7BE9(param_00);
 			return var_01;
 		}
 
-		if(isdefined(level.var_FDBE.var_A594[var_01.var_1FBB]))
-		{
+		if(isdefined(level.var_FDBE.var_A594[var_01.var_1FBB])) {
 			var_01 = level.var_FDBE.var_A594[var_01.var_1FBB];
 			return var_01;
 		}
@@ -403,16 +326,12 @@ func_7A8C(param_00)
 	}
 }
 
-//Function Number: 33
-func_7BE9(param_00)
-{
-	if(!isdefined(param_00.gender))
-	{
+func_7BE9(param_00) {
+	if(!isdefined(param_00.gender)) {
 		param_00.gender = "male";
 	}
 
-	if(param_00.gender == "female")
-	{
+	if(param_00.gender == "female") {
 		var_01 = func_7BEA(level.var_FDBE.var_7741["female"]);
 		return var_01;
 	}
@@ -422,19 +341,13 @@ func_7BE9(param_00)
 	return var_01;
 }
 
-//Function Number: 34
-func_7BEA(param_00)
-{
-	if(isarray(param_00))
-	{
+func_7BEA(param_00) {
+	if(isarray(param_00)) {
 		var_01 = randomint(param_00.size);
-		if(!isdefined(param_00[var_01]))
-		{
+		if(!isdefined(param_00[var_01])) {
 			var_02 = 0;
-			foreach(var_04 in param_00)
-			{
-				if(var_02 == var_01)
-				{
+			foreach(var_04 in param_00) {
+				if(var_02 == var_01) {
 					return var_04;
 				}
 
@@ -448,11 +361,8 @@ func_7BEA(param_00)
 	}
 }
 
-//Function Number: 35
-func_7AED(param_00,param_01)
-{
-	if(isdefined(param_01))
-	{
+func_7AED(param_00,param_01) {
+	if(isdefined(param_01)) {
 		var_02 = param_01;
 	}
 	else
@@ -460,11 +370,9 @@ func_7AED(param_00,param_01)
 		var_02 = lib_0EFB::func_7AF0();
 	}
 
-	if(isdefined(var_02))
-	{
+	if(isdefined(var_02)) {
 		var_03 = func_7AEE(var_02);
-		if(isdefined(var_03[param_00]))
-		{
+		if(isdefined(var_03[param_00])) {
 			return var_03[param_00];
 		}
 
@@ -474,34 +382,26 @@ func_7AED(param_00,param_01)
 	return undefined;
 }
 
-//Function Number: 36
-func_7AEE(param_00)
-{
-	if(!isdefined(level.var_FDC6))
-	{
+func_7AEE(param_00) {
+	if(!isdefined(level.var_FDC6)) {
 		func_9865();
 	}
 
-	if(isdefined(param_00) && isdefined(level.var_FDC6[param_00]))
-	{
+	if(isdefined(param_00) && isdefined(level.var_FDC6[param_00])) {
 		return level.var_FDC6[param_00];
 	}
 
 	return undefined;
 }
 
-//Function Number: 37
-func_7AEF()
-{
+func_7AEF() {
 	var_00 = lib_0EFB::func_7C60();
-	if(!isdefined(var_00))
-	{
+	if(!isdefined(var_00)) {
 		var_00 = lib_0EFB::func_7C5F();
 	}
 
 	var_01 = undefined;
-	switch(var_00)
-	{
+	switch(var_00) {
 		case "sa_vips":
 			var_01 = "sa_vips";
 			break;
@@ -562,9 +462,7 @@ func_7AEF()
 	return var_01;
 }
 
-//Function Number: 38
-func_9865()
-{
+func_9865() {
 	var_00 = [];
 	var_00["sa_vips"] = func_173D();
 	var_00["sa_empambush"] = func_173A();
@@ -582,9 +480,7 @@ func_9865()
 	level.var_FDC6 = var_00;
 }
 
-//Function Number: 39
-func_1738()
-{
+func_1738() {
 	var_00 = [];
 	var_00["armory_terminal_entrance"] = ["sc_wnd_grf_gotafullinvento_spk"];
 	var_00["armory_terminal_entrance_griff"] = ["sc_wnd_grf_gotafullinvento"];
@@ -609,9 +505,7 @@ func_1738()
 	return var_00;
 }
 
-//Function Number: 40
-func_173A()
-{
+func_173A() {
 	var_00 = [];
 	var_00["armory_terminal_entrance"] = ["sc_emp_grf_hardwarespreppe_spk"];
 	var_00["armory_terminal_entrance_griff"] = ["sc_emp_grf_hardwarespreppe"];
@@ -636,9 +530,7 @@ func_173A()
 	return var_00;
 }
 
-//Function Number: 41
-func_173D()
-{
+func_173D() {
 	var_00 = [];
 	var_00["armory_terminal_entrance"] = ["sc_vips_grf_gotafreshbatcho_spk"];
 	var_00["armory_terminal_entrance_griff"] = ["sc_vips_grf_gotafreshbatcho"];
@@ -664,9 +556,7 @@ func_173D()
 	return var_00;
 }
 
-//Function Number: 42
-func_173E()
-{
+func_173E() {
 	var_00 = [];
 	var_00["armory_terminal_entrance"] = ["sc_wnd_amo_readytochooseyour_spk"];
 	var_00["armory_terminal_entrance_griff"] = ["sc_wnd_amo_readytochooseyour"];
@@ -691,9 +581,7 @@ func_173E()
 	return var_00;
 }
 
-//Function Number: 43
-func_16F8()
-{
+func_16F8() {
 	var_00 = [];
 	var_00["armory_terminal_entrance"] = [""];
 	var_00["armory_terminal"] = [""];
@@ -717,9 +605,7 @@ func_16F8()
 	return var_00;
 }
 
-//Function Number: 44
-func_16F9()
-{
+func_16F9() {
 	var_00 = [];
 	var_00["armory_terminal_entrance"] = [""];
 	var_00["armory_terminal"] = [""];
@@ -743,9 +629,7 @@ func_16F9()
 	return var_00;
 }
 
-//Function Number: 45
-func_16FA()
-{
+func_16FA() {
 	var_00 = [];
 	var_00["armory_terminal_entrance"] = [""];
 	var_00["armory_terminal"] = [""];
@@ -769,9 +653,7 @@ func_16FA()
 	return var_00;
 }
 
-//Function Number: 46
-func_16FB()
-{
+func_16FB() {
 	var_00 = [];
 	var_00["armory_terminal_entrance"] = [""];
 	var_00["armory_terminal"] = [""];
@@ -795,9 +677,7 @@ func_16FB()
 	return var_00;
 }
 
-//Function Number: 47
-func_16FC()
-{
+func_16FC() {
 	var_00 = [];
 	var_00["armory_terminal_entrance"] = [""];
 	var_00["armory_terminal"] = [""];
@@ -821,9 +701,7 @@ func_16FC()
 	return var_00;
 }
 
-//Function Number: 48
-func_1712()
-{
+func_1712() {
 	var_00 = [];
 	var_00["armory_terminal_entrance"] = [""];
 	var_00["armory_terminal"] = ["sc_moon_grf_youregoingtowalt",1,"sc_moon_grf_gotsomeattach",1,"sc_moon_grf_nowtoroundyou","sc_moon_grf_igotfraggrenade"];
@@ -844,9 +722,7 @@ func_1712()
 	return var_00;
 }
 
-//Function Number: 49
-func_1715()
-{
+func_1715() {
 	var_00 = [];
 	var_00["armory_terminal"] = ["sc_titan_grf_headedtotitanhu",0.33,"sc_titan_grf_ashieldwillhelpsp"];
 	var_00["armory_terminal_exit"] = [1.5,"sc_titan_grf_gearscominup",1.8,"sc_titan_grf_themanknowswhat",0.25,"sc_titan_grf_goodlucksir"];
@@ -868,9 +744,7 @@ func_1715()
 	return var_00;
 }
 
-//Function Number: 50
-func_1714()
-{
+func_1714() {
 	var_00 = [];
 	var_00["armory_terminal"] = ["sc_rogue_grf_nothingbutclosequarters1",1,"sc_rogue_grf_gotsomeofmacs",3,"sc_rogue_grf_addedprotectionisalways1","sc_rogue_grf_workerbotshelpminethe1"];
 	var_00["armory_terminal_exit"] = "sc_rogue_grf_thatlldoyourig";
@@ -890,9 +764,7 @@ func_1714()
 	return var_00;
 }
 
-//Function Number: 51
-func_1713()
-{
+func_1713() {
 	var_00 = [];
 	var_00["armory_terminal"] = ["sc_prisoner_grf_genevastillhasp_spkr"];
 	var_00["armory_terminal_exit"] = ["sc_prisoner_plr_thanksgriffyour",1,"sc_prisoner_grf_staysafedownthe_spkr"];

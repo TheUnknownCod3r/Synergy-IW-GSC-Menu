@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\mp\maps\mp_mansion\mp_mansion_fx.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 1
- * Decompile Time: 101 ms
- * Timestamp: 10/27/2023 12:13:45 AM
-*******************************************************************/
+/****************************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\mp\maps\mp_mansion\mp_mansion_fx.gsc
+****************************************************************/
 
-//Function Number: 1
-main()
-{
+main() {
 	level._effect["vfx_large_mist_hang_ind"] = loadfx("vfx/iw7/levels/mp_mansion/vfx_large_mist_hang_ind.vfx");
 	level._effect["vfx_mansion_sunflare"] = loadfx("vfx/iw7/levels/mp_mansion/vfx_mansion_sunflare.vfx");
 	level._effect["vfx_ceiling_vent_steam"] = loadfx("vfx/iw7/levels/mp_flip/vfx_ceiling_vent_steam.vfx");

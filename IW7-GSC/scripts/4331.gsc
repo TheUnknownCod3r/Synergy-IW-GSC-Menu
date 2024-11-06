@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: 4331.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 1
- * Decompile Time: 97 ms
- * Timestamp: 10/27/2023 12:32:06 AM
-*******************************************************************/
+/****************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\4331.gsc
+****************************/
 
-//Function Number: 1
-main()
-{
+main() {
 	var_00 = scripts\engine\utility::createoneshoteffect("vfx_proto_cloud_horizon_01");
 	var_00 scripts\common\createfx::set_origin_and_angles((0,0,0),(0,35,0));
 	var_00.v["fxid"] = "vfx_proto_cloud_horizon_01";

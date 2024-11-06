@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\mp\maps\mp_mansion\gen\mp_mansion_fx.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 1
- * Decompile Time: 137 ms
- * Timestamp: 10/27/2023 12:13:44 AM
-*******************************************************************/
+/********************************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\mp\maps\mp_mansion\gen\mp_mansion_fx.gsc
+********************************************************************/
 
-//Function Number: 1
-main()
-{
+main() {
 	var_00 = scripts\common\utility::func_49FA("vfx_gn_trash_flys_black");
 	var_00 scripts\common\createfx::func_F4AD((-1213.06,1649.9,63.989),(0,0,0));
 	var_00.var_13125["fxid"] = "vfx_gn_trash_flys_black";

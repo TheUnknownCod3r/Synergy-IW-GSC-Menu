@@ -1,21 +1,14 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\mp\objpoints.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 9
- * Decompile Time: 351 ms
- * Timestamp: 10/27/2023 12:21:07 AM
-*******************************************************************/
+/********************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\mp\objpoints.gsc
+********************************************/
 
-//Function Number: 1
-init()
-{
+init() {
 	precacheshader("objpoint_default");
 	level.objpointnames = [];
 	level.objpoints = [];
-	if(level.splitscreen)
-	{
+	if(level.splitscreen) {
 		level.objpointsize = 15;
 	}
 	else
@@ -27,27 +20,21 @@ init()
 	level.objpointscale = 1;
 }
 
-//Function Number: 2
-func_4A23(param_00,param_01,param_02,param_03,param_04,param_05)
-{
+func_4A23(param_00,param_01,param_02,param_03,param_04,param_05) {
 	var_06 = getobjpointbyname(param_00);
-	if(isdefined(var_06))
-	{
+	if(isdefined(var_06)) {
 		deleteobjpoint(var_06);
 	}
 
-	if(!isdefined(param_03))
-	{
+	if(!isdefined(param_03)) {
 		param_03 = "objpoint_default";
 	}
 
-	if(!isdefined(param_05))
-	{
+	if(!isdefined(param_05)) {
 		param_05 = 1;
 	}
 
-	if(param_02 != "all")
-	{
+	if(param_02 != "all") {
 		var_06 = newteamhudelem(param_02);
 	}
 	else
@@ -64,8 +51,7 @@ func_4A23(param_00,param_01,param_02,param_03,param_04,param_05)
 	var_06.var_9F51 = 1;
 	var_06 setshader(param_03,level.objpointsize,level.objpointsize);
 	var_06 setwaypoint(1,0);
-	if(isdefined(param_04))
-	{
+	if(isdefined(param_04)) {
 		var_06.alpha = param_04;
 	}
 	else
@@ -80,11 +66,8 @@ func_4A23(param_00,param_01,param_02,param_03,param_04,param_05)
 	return var_06;
 }
 
-//Function Number: 3
-deleteobjpoint(param_00)
-{
-	if(level.objpoints.size == 1)
-	{
+deleteobjpoint(param_00) {
+	if(level.objpoints.size == 1) {
 		level.objpoints = [];
 		level.objpointnames = [];
 		param_00 destroy();
@@ -101,66 +84,49 @@ deleteobjpoint(param_00)
 	param_00 destroy();
 }
 
-//Function Number: 4
-updateorigin(param_00)
-{
-	if(self.x != param_00[0])
-	{
+updateorigin(param_00) {
+	if(self.x != param_00[0]) {
 		self.x = param_00[0];
 	}
 
-	if(self.y != param_00[1])
-	{
+	if(self.y != param_00[1]) {
 		self.y = param_00[1];
 	}
 
-	if(self.var_3A6 != param_00[2])
-	{
+	if(self.var_3A6 != param_00[2]) {
 		self.var_3A6 = param_00[2];
 	}
 }
 
-//Function Number: 5
-setoriginbyname(param_00,param_01)
-{
+setoriginbyname(param_00,param_01) {
 	var_02 = getobjpointbyname(param_00);
 	var_02 updateorigin(param_01);
 }
 
-//Function Number: 6
-getobjpointbyname(param_00)
-{
-	if(isdefined(level.objpoints[param_00]))
-	{
+getobjpointbyname(param_00) {
+	if(isdefined(level.objpoints[param_00])) {
 		return level.objpoints[param_00];
 	}
 
 	return undefined;
 }
 
-//Function Number: 7
-getobjpointbyindex(param_00)
-{
-	if(isdefined(level.objpointnames[param_00]))
-	{
+getobjpointbyindex(param_00) {
+	if(isdefined(level.objpointnames[param_00])) {
 		return level.objpoints[level.objpointnames[param_00]];
 	}
 
 	return undefined;
 }
 
-//Function Number: 8
-startflashing()
-{
+startflashing() {
 	self endon("stop_flashing_thread");
-	if(self.isflashing)
-	{
+	if(self.isflashing) {
 		return;
 	}
 
 	self.isflashing = 1;
-	while(self.isflashing)
-	{
+	while(self.isflashing) {
 		self fadeovertime(0.75);
 		self.alpha = 0.35 * self.basealpha;
 		wait(0.75);
@@ -172,11 +138,8 @@ startflashing()
 	self.alpha = self.basealpha;
 }
 
-//Function Number: 9
-stopflashing()
-{
-	if(!self.isflashing)
-	{
+stopflashing() {
+	if(!self.isflashing) {
 		return;
 	}
 

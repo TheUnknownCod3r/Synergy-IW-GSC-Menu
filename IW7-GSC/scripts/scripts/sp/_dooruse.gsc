@@ -1,32 +1,22 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\sp\_dooruse.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 69
- * Decompile Time: 3224 ms
- * Timestamp: 10/27/2023 12:24:13 AM
-*******************************************************************/
+/*******************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\sp\_dooruse.gsc
+*******************************************/
 
-//Function Number: 1
-func_95B6()
-{
+func_95B6() {
 	level.doors = [];
 	func_5983();
 	func_1AC1();
 	var_00 = getentarray("generic_door","script_noteworthy");
-	foreach(var_02 in var_00)
-	{
-		if(isdefined(var_02.var_336) && isdefined(level.doors[var_02.var_336]))
-		{
-			if(!isdefined(level.var_FCD6) || level.var_FCD6 != 1)
-			{
+	foreach(var_02 in var_00) {
+		if(isdefined(var_02.var_336) && isdefined(level.doors[var_02.var_336])) {
+			if(!isdefined(level.var_FCD6) || level.var_FCD6 != 1) {
 				continue;
 			}
 		}
 
-		if(var_02.classname == "script_origin")
-		{
+		if(var_02.classname == "script_origin") {
 			var_03 = var_02 scripts\engine\utility::spawn_tag_origin();
 			var_03.var_336 = var_02.var_336;
 			var_03.script_parameters = var_02.script_parameters;
@@ -34,14 +24,11 @@ func_95B6()
 			var_02 = var_03;
 		}
 
-		if(isdefined(var_02.var_336))
-		{
+		if(isdefined(var_02.var_336)) {
 			level.doors[var_02.var_336] = var_02;
 			var_04 = getentarray(var_02.var_336,"targetname");
-			foreach(var_06 in var_04)
-			{
-				if(var_06.classname == "script_brushmodel")
-				{
+			foreach(var_06 in var_04) {
+				if(var_06.classname == "script_brushmodel") {
 					var_02.collision = var_06;
 				}
 			}
@@ -59,8 +46,7 @@ func_95B6()
 		var_02 scripts\sp\_utility::func_65E0("door_sequence_complete");
 		var_02 scripts\sp\_utility::func_65E0("no_anim_reach");
 		var_02 scripts\sp\_utility::func_65E0("skip_reach_on_use");
-		if(isdefined(var_02.var_EDA0))
-		{
+		if(isdefined(var_02.var_EDA0)) {
 			var_02 scripts\sp\_utility::func_65E0(var_02.var_EDA0);
 		}
 
@@ -71,21 +57,16 @@ func_95B6()
 	thread func_9530("door_peek_armory");
 }
 
-//Function Number: 2
-door_think()
-{
-	if(self.var_5A57 == "airlock" && self.model == "sdf_door_airlock_01")
-	{
+door_think() {
+	if(self.var_5A57 == "airlock" && self.model == "sdf_door_airlock_01") {
 		scripts/sp/anim::func_1EC3(self,"airlock_open_player");
 	}
 
-	if(isdefined(self.var_EDA0))
-	{
+	if(isdefined(self.var_EDA0)) {
 		scripts\sp\_utility::func_65E3(self.var_EDA0);
 	}
 
-	switch(self.var_5A57)
-	{
+	switch(self.var_5A57) {
 		case "no_power":
 			thread buddy_down_skip_post_clear();
 			break;
@@ -114,12 +95,9 @@ door_think()
 	}
 }
 
-//Function Number: 3
-func_168A(param_00)
-{
+func_168A(param_00) {
 	self.var_1684 = param_00;
-	switch(self.var_5A57)
-	{
+	switch(self.var_5A57) {
 		case "no_power":
 			buddy_down_gunner_damage_thread(param_00);
 			break;
@@ -129,49 +107,36 @@ func_168A(param_00)
 	}
 }
 
-//Function Number: 4
-func_AED6()
-{
-	if(!scripts\sp\_utility::func_65DB("locked"))
-	{
+func_AED6() {
+	if(!scripts\sp\_utility::func_65DB("locked")) {
 		scripts\sp\_utility::func_65E1("locked");
 		lib_0E46::func_DFE3();
 	}
 }
 
-//Function Number: 5
-func_12BD3()
-{
-	if(scripts\sp\_utility::func_65DB("locked"))
-	{
+func_12BD3() {
+	if(scripts\sp\_utility::func_65DB("locked")) {
 		scripts\sp\_utility::func_65DD("locked");
 		lib_0E46::func_48C4("tag_ui_front",(0,0,-2));
 	}
 }
 
-//Function Number: 6
-func_599E()
-{
+func_599E() {
 	return scripts\sp\_utility::func_65DB("locked");
 }
 
-//Function Number: 7
-func_1AB0()
-{
+func_1AB0() {
 	var_00 = scripts\sp\_utility::func_7A8F();
 	scripts\engine\utility::array_call(var_00,::linkto,self,"door_jnt");
-	foreach(var_02 in var_00)
-	{
-		if(isdefined(var_02.script_noteworthy) && var_02.script_noteworthy == "player_clip")
-		{
+	foreach(var_02 in var_00) {
+		if(isdefined(var_02.script_noteworthy) && var_02.script_noteworthy == "player_clip") {
 			continue;
 		}
 
 		self.var_C969 = var_02;
 	}
 
-	if(isdefined(self.var_EF20) && self.var_EF20 == "notplayer")
-	{
+	if(isdefined(self.var_EF20) && self.var_EF20 == "notplayer") {
 		return;
 	}
 
@@ -182,14 +147,12 @@ func_1AB0()
 	var_05 = func_D0A6("airlock_open_player");
 	scripts\sp\_utility::func_65E1("begin_opening");
 	var_06 = [self,var_05];
-	if(soundexists("airlock_exit_door_open"))
-	{
+	if(soundexists("airlock_exit_door_open")) {
 		level.player thread scripts\sp\_utility::play_sound_on_entity("airlock_exit_door_open");
 	}
 
 	scripts/sp/anim::func_1F2C(var_06,"airlock_open_player");
-	if(scripts\engine\utility::istrue(self.var_DF3A))
-	{
+	if(scripts\engine\utility::istrue(self.var_DF3A)) {
 		level.player func_5990();
 		level.player unlink();
 		var_05 delete();
@@ -200,9 +163,7 @@ func_1AB0()
 	scripts\sp\_utility::func_65E1("door_sequence_complete");
 }
 
-//Function Number: 8
-func_1AC1()
-{
+func_1AC1() {
 	level.var_1AE3 = [];
 	scripts\engine\utility::flag_init("airlocks_setup");
 	level._effect["vfx_airlock_light_green"] = loadfx("vfx/iw7/_requests/airlock/vfx_light_green.vfx");
@@ -218,15 +179,11 @@ func_1AC1()
 	thread func_1AD9();
 }
 
-//Function Number: 9
-func_1AD9()
-{
+func_1AD9() {
 	scripts\engine\utility::waitframe();
 	var_00 = scripts\engine\utility::getstructarray("generic_airlock_assets","script_noteworthy");
-	foreach(var_02 in var_00)
-	{
-		if(!isdefined(var_02.var_336))
-		{
+	foreach(var_02 in var_00) {
+		if(!isdefined(var_02.var_336)) {
 			continue;
 		}
 
@@ -234,17 +191,14 @@ func_1AD9()
 		var_02.var_ECCE["front"] = [];
 		var_02.var_ECCE["back"] = [];
 		var_03 = getscriptablearray(var_02.var_336,"targetname");
-		foreach(var_05 in var_03)
-		{
+		foreach(var_05 in var_03) {
 			var_06 = "back";
-			if(isdefined(var_05.script_noteworthy) && var_05.script_noteworthy == "forward")
-			{
+			if(isdefined(var_05.script_noteworthy) && var_05.script_noteworthy == "forward") {
 				var_06 = "front";
 			}
 
 			var_02.var_ECCE[var_06] = scripts\engine\utility::array_add(var_02.var_ECCE[var_06],var_05);
-			if(var_06 == "front")
-			{
+			if(var_06 == "front") {
 				var_05 setscriptablepartstate("root","0");
 				continue;
 			}
@@ -256,8 +210,7 @@ func_1AD9()
 		var_02 scripts\sp\_utility::func_65E0("cycling");
 		var_02 scripts\sp\_utility::func_65E0("cycling_complete");
 		thread scripts\engine\utility::play_loopsound_in_space("airlock_light_hum",var_02.origin);
-		if(isdefined(var_02.var_336))
-		{
+		if(isdefined(var_02.var_336)) {
 			level.var_1AE3[var_02.var_336] = var_02;
 		}
 	}
@@ -265,26 +218,20 @@ func_1AD9()
 	scripts\engine\utility::flag_set("airlocks_setup");
 }
 
-//Function Number: 10
-func_1AAE()
-{
+func_1AAE() {
 	var_00 = "airlock_cycling_pressurize";
 	var_01 = "airlock_cycling_depressurize";
 	var_02 = [];
 	var_02["pressurize"] = [];
 	var_02["depressurize"] = [];
-	foreach(var_04 in level.createfxent)
-	{
-		if(isdefined(var_04.v["exploder"]))
-		{
-			if(var_04.v["exploder"] == var_00)
-			{
+	foreach(var_04 in level.createfxent) {
+		if(isdefined(var_04.v["exploder"])) {
+			if(var_04.v["exploder"] == var_00) {
 				var_02["pressurize"] = scripts\engine\utility::array_add(var_02["pressurize"],var_04);
 				continue;
 			}
 
-			if(var_04.v["exploder"] == var_01)
-			{
+			if(var_04.v["exploder"] == var_01) {
 				var_02["depressurize"] = scripts\engine\utility::array_add(var_02["depressurize"],var_04);
 			}
 		}
@@ -293,10 +240,8 @@ func_1AAE()
 	self.var_4CD3["pressurize"] = [];
 	self.var_4CD3["depressurize"] = [];
 	var_06 = ["pressurize","depressurize"];
-	foreach(var_08 in var_06)
-	{
-		foreach(var_04 in var_02[var_08])
-		{
+	foreach(var_08 in var_06) {
+		foreach(var_04 in var_02[var_08]) {
 			var_0A = var_04.v["fxid"];
 			var_0B = var_04.v["origin"];
 			var_0C = var_04.v["angles"];
@@ -311,9 +256,7 @@ func_1AAE()
 	}
 }
 
-//Function Number: 11
-func_1ACF()
-{
+func_1ACF() {
 	var_00 = scripts\common\createfx::createexploderex("vfx_airlock_air_fill","airlock_cycling_pressurize");
 	var_00 scripts\common\createfx::set_origin_and_angles((-2.34019,-5.35077,10.1119),(270,0,0));
 	var_00 = scripts\common\createfx::createexploderex("vfx_airlock_vent_xtrlrg_press","airlock_cycling_pressurize");
@@ -351,9 +294,7 @@ func_1ACF()
 	var_00 scripts\common\createfx::set_origin_and_angles((-72.7803,94.2712,19.7878),(327.999,271.999,0));
 }
 
-//Function Number: 12
-func_1AAF()
-{
+func_1AAF() {
 	var_00 = scripts\common\createfx::createexploderex("vfx_airlock_vent_lrg_depress","airlock_cycling_depressurize");
 	var_00 scripts\common\createfx::set_origin_and_angles((73.2631,-85.4638,129.046),(34.9998,93.9989,0));
 	var_00 = scripts\common\createfx::createexploderex("vfx_airlock_vent_lrg_depress","airlock_cycling_depressurize");
@@ -384,24 +325,18 @@ func_1AAF()
 	var_00 scripts\common\createfx::set_origin_and_angles((7.92258,-4.8918,18.4052),(270,0,0));
 }
 
-//Function Number: 13
-func_1AB7(param_00,param_01,param_02)
-{
+func_1AB7(param_00,param_01,param_02) {
 	var_03 = "back";
-	if(param_00)
-	{
+	if(param_00) {
 		var_03 = "front";
 	}
 
-	if(var_03 == "front")
-	{
-		if(isdefined(param_01))
-		{
+	if(var_03 == "front") {
+		if(isdefined(param_01)) {
 			param_01 func_1AB5(1);
 		}
 
-		if(isdefined(param_02))
-		{
+		if(isdefined(param_02)) {
 			param_02 func_1AB5(0);
 			return;
 		}
@@ -409,28 +344,21 @@ func_1AB7(param_00,param_01,param_02)
 		return;
 	}
 
-	if(isdefined(param_01))
-	{
+	if(isdefined(param_01)) {
 		param_01 func_1AB5(0);
 	}
 
-	if(isdefined(param_02))
-	{
+	if(isdefined(param_02)) {
 		param_02 func_1AB5(1);
 	}
 }
 
-//Function Number: 14
-func_1AB5(param_00)
-{
-	if(self.model != "sdf_door_airlock_01")
-	{
-		if(!isdefined(self.var_ACD5))
-		{
+func_1AB5(param_00) {
+	if(self.model != "sdf_door_airlock_01") {
+		if(!isdefined(self.var_ACD5)) {
 			self.var_ACD5 = [];
 			var_01 = [15,-7];
-			foreach(var_03 in var_01)
-			{
+			foreach(var_03 in var_01) {
 				var_04 = scripts\engine\utility::spawn_tag_origin();
 				var_04 linkto(self,"door_jnt",(38.5,var_03,16),(0,0,0));
 				self.var_ACD5[self.var_ACD5.size] = var_04;
@@ -438,8 +366,7 @@ func_1AB5(param_00)
 		}
 	}
 
-	if(param_00)
-	{
+	if(param_00) {
 		func_1AB6("unlocked");
 		return;
 	}
@@ -447,13 +374,9 @@ func_1AB5(param_00)
 	func_1AB6("locked");
 }
 
-//Function Number: 15
-func_1AB2(param_00)
-{
-	if(isdefined(param_00.var_ACD5))
-	{
-		foreach(var_02 in param_00.var_ACD5)
-		{
+func_1AB2(param_00) {
+	if(isdefined(param_00.var_ACD5)) {
+		foreach(var_02 in param_00.var_ACD5) {
 			var_02 delete();
 		}
 	}
@@ -461,32 +384,25 @@ func_1AB2(param_00)
 	param_00 delete();
 }
 
-//Function Number: 16
-func_1AA9(param_00,param_01,param_02,param_03,param_04)
-{
+func_1AA9(param_00,param_01,param_02,param_03,param_04) {
 	scripts\engine\utility::flag_wait("airlocks_setup");
 	var_05 = scripts\engine\utility::getstruct(param_00,"targetname");
 	var_05 scripts\sp\_utility::func_65DD("cycling_complete");
 	var_05 scripts\sp\_utility::func_65E1("cycling");
 	var_06 = [];
-	if(isdefined(param_02))
-	{
+	if(isdefined(param_02)) {
 		var_06 = scripts\engine\utility::array_add(var_06,param_02);
 	}
 
-	if(isdefined(param_03))
-	{
+	if(isdefined(param_03)) {
 		var_06 = scripts\engine\utility::array_add(var_06,param_03);
 	}
 
-	foreach(var_08 in var_06)
-	{
-		if(isdefined(var_08) && !isdefined(var_08.var_ACD5))
-		{
+	foreach(var_08 in var_06) {
+		if(isdefined(var_08) && !isdefined(var_08.var_ACD5)) {
 			var_08.var_ACD5 = [];
 			var_09 = [15,-7];
-			foreach(var_0B in var_09)
-			{
+			foreach(var_0B in var_09) {
 				var_0C = var_08 scripts\engine\utility::spawn_tag_origin();
 				var_0C linkto(var_08,"door_jnt",(38.5,var_0B,16),(0,0,0));
 				var_08.var_ACD5[var_08.var_ACD5.size] = var_0C;
@@ -495,8 +411,7 @@ func_1AA9(param_00,param_01,param_02,param_03,param_04)
 	}
 
 	var_0F = "airlock_pressurize_lr";
-	if(!isdefined(param_04) || param_04)
-	{
+	if(!isdefined(param_04) || param_04) {
 		function_02A9("atmosphere","",2);
 	}
 	else
@@ -509,8 +424,7 @@ func_1AA9(param_00,param_01,param_02,param_03,param_04)
 	var_05.var_4CD5 = 1;
 	var_05 thread func_1AD7(var_10,param_04);
 	scripts\engine\utility::array_thread(var_06,::func_1AB1,var_05,"cycling");
-	if(!isdefined(param_04))
-	{
+	if(!isdefined(param_04)) {
 		param_04 = 1;
 	}
 
@@ -518,53 +432,43 @@ func_1AA9(param_00,param_01,param_02,param_03,param_04)
 	level.player scripts\sp\_utility::play_sound_on_entity(var_0F);
 	var_05.var_4CD5 = 0;
 	var_11 = "back";
-	if(param_01)
-	{
+	if(param_01) {
 		var_11 = "front";
 	}
 
 	var_12 = ["front","back"];
-	foreach(var_14 in var_12)
-	{
-		if(var_14 == var_11)
-		{
-			foreach(var_16 in var_05.var_ECCE[var_14])
-			{
+	foreach(var_14 in var_12) {
+		if(var_14 == var_11) {
+			foreach(var_16 in var_05.var_ECCE[var_14]) {
 				var_16 setscriptablepartstate("root",12);
 			}
 
 			continue;
 		}
 
-		foreach(var_16 in var_05.var_ECCE[var_14])
-		{
+		foreach(var_16 in var_05.var_ECCE[var_14]) {
 			var_16 setscriptablepartstate("root",0);
 		}
 	}
 
-	if(var_11 == "front")
-	{
-		if(isdefined(param_02))
-		{
+	if(var_11 == "front") {
+		if(isdefined(param_02)) {
 			param_02 func_1AB6("locked");
 		}
 
-		if(isdefined(param_03))
-		{
+		if(isdefined(param_03)) {
 			param_03 func_1AB6("unlocked");
 			param_03 playsound("airlock_light_on");
 		}
 	}
 	else
 	{
-		if(isdefined(param_02))
-		{
+		if(isdefined(param_02)) {
 			param_02 func_1AB6("unlocked");
 			param_02 playsound("airlock_light_on");
 		}
 
-		if(isdefined(param_03))
-		{
+		if(isdefined(param_03)) {
 			param_03 func_1AB6("locked");
 		}
 	}
@@ -573,20 +477,16 @@ func_1AA9(param_00,param_01,param_02,param_03,param_04)
 	var_05 scripts\sp\_utility::func_65DD("cycling");
 }
 
-//Function Number: 17
-func_1AAB(param_00,param_01,param_02,param_03)
-{
+func_1AAB(param_00,param_01,param_02,param_03) {
 	var_04 = level.var_1AE3[param_00];
 	var_04 scripts\sp\_utility::func_65DD("cycling_complete");
 	var_04 scripts\sp\_utility::func_65E1("cycling");
 	var_05 = [];
-	if(isdefined(param_02))
-	{
+	if(isdefined(param_02)) {
 		var_05 = scripts\engine\utility::array_add(var_05,param_02);
 	}
 
-	if(isdefined(param_03))
-	{
+	if(isdefined(param_03)) {
 		var_05 = scripts\engine\utility::array_add(var_05,param_03);
 	}
 
@@ -600,29 +500,22 @@ func_1AAB(param_00,param_01,param_02,param_03)
 	var_04 scripts\sp\_utility::func_65DD("cycling");
 }
 
-//Function Number: 18
-func_1374E(param_00)
-{
+func_1374E(param_00) {
 	scripts\engine\utility::flag_wait("airlocks_setup");
 	var_01 = level.var_1AE3[param_00];
 	var_01 scripts\sp\_utility::func_65E3("cycling_complete");
 }
 
-//Function Number: 19
-func_1AAD(param_00)
-{
+func_1AAD(param_00) {
 	var_01 = "pressurize";
-	if(!param_00)
-	{
+	if(!param_00) {
 		var_01 = "depressurize";
 	}
 
-	foreach(var_03 in self.var_4CD3[var_01])
-	{
+	foreach(var_03 in self.var_4CD3[var_01]) {
 		var_04 = var_03.var_762C;
 		var_05 = 0;
-		if(isdefined(var_03.delay))
-		{
+		if(isdefined(var_03.delay)) {
 			var_05 = var_03.delay;
 		}
 
@@ -637,41 +530,30 @@ func_1AAD(param_00)
 	}
 }
 
-//Function Number: 20
-func_1AAA(param_00)
-{
+func_1AAA(param_00) {
 	scripts\engine\utility::flag_wait("airlocks_setup");
 	var_01 = level.var_1AE3[param_00];
 	var_02 = ["front","back"];
-	foreach(var_04 in var_02)
-	{
-		foreach(var_06 in var_01.var_ECCE[var_04])
-		{
+	foreach(var_04 in var_02) {
+		foreach(var_06 in var_01.var_ECCE[var_04]) {
 			var_06 setscriptablepartstate("root",13);
 		}
 	}
 }
 
-//Function Number: 21
-func_1AD6(param_00)
-{
+func_1AD6(param_00) {
 	var_01 = ["front","back"];
 	var_02 = 0.75;
-	while(self.var_4CD5)
-	{
-		foreach(var_04 in var_01)
-		{
-			foreach(var_06 in self.var_ECCE[var_04][param_00])
-			{
+	while(self.var_4CD5) {
+		foreach(var_04 in var_01) {
+			foreach(var_06 in self.var_ECCE[var_04][param_00]) {
 				var_06 show();
 			}
 		}
 
 		wait(var_02);
-		foreach(var_04 in var_01)
-		{
-			foreach(var_06 in self.var_ECCE[var_04][param_00])
-			{
+		foreach(var_04 in var_01) {
+			foreach(var_06 in self.var_ECCE[var_04][param_00]) {
 				var_06 hide();
 			}
 		}
@@ -682,32 +564,25 @@ func_1AD6(param_00)
 	self notify("blinking_complete");
 }
 
-//Function Number: 22
-func_1AD7(param_00,param_01)
-{
+func_1AD7(param_00,param_01) {
 	var_02 = param_00 / 1000 / 10;
 	var_03 = 1;
 	var_04 = 12;
-	if(isdefined(param_01) && !param_01)
-	{
+	if(isdefined(param_01) && !param_01) {
 		var_03 = 11;
 		var_04 = 1;
 	}
 
 	var_05 = var_03;
 	var_06 = ["front","back"];
-	while(var_05 != var_04)
-	{
-		foreach(var_08 in var_06)
-		{
-			foreach(var_0A in self.var_ECCE[var_08])
-			{
+	while(var_05 != var_04) {
+		foreach(var_08 in var_06) {
+			foreach(var_0A in self.var_ECCE[var_08]) {
 				var_0A setscriptablepartstate("root",var_05);
 			}
 		}
 
-		if(isdefined(param_01) && !param_01)
-		{
+		if(isdefined(param_01) && !param_01) {
 			var_05 = var_05 - 1;
 			continue;
 		}
@@ -717,14 +592,11 @@ func_1AD7(param_00,param_01)
 	}
 }
 
-//Function Number: 23
-func_1AB1(param_00,param_01)
-{
+func_1AB1(param_00,param_01) {
 	self endon("death");
 	func_1AB6("off");
 	var_02 = 0.75;
-	while(param_00.var_4CD5)
-	{
+	while(param_00.var_4CD5) {
 		func_1AB6(param_01);
 		wait(var_02);
 		func_1AB6("off");
@@ -732,94 +604,72 @@ func_1AB1(param_00,param_01)
 	}
 }
 
-//Function Number: 24
-func_1AD8(param_00,param_01,param_02,param_03)
-{
+func_1AD8(param_00,param_01,param_02,param_03) {
 	scripts\engine\utility::flag_wait("airlocks_setup");
 	var_04 = level.var_1AE3[param_00];
 	var_05 = "back";
-	if(param_01)
-	{
+	if(param_01) {
 		var_05 = "front";
 	}
 
 	var_06 = ["front","back"];
-	foreach(var_08 in var_06)
-	{
-		if(var_08 == var_05)
-		{
-			foreach(var_0A in var_04.var_ECCE[var_08])
-			{
+	foreach(var_08 in var_06) {
+		if(var_08 == var_05) {
+			foreach(var_0A in var_04.var_ECCE[var_08]) {
 				var_0A setscriptablepartstate("root",12);
 			}
 
 			continue;
 		}
 
-		foreach(var_0A in var_04.var_ECCE[var_08])
-		{
+		foreach(var_0A in var_04.var_ECCE[var_08]) {
 			var_0A setscriptablepartstate("root",0);
 		}
 	}
 
-	if(isdefined(param_02))
-	{
+	if(isdefined(param_02)) {
 		param_02 func_1AB6("unlocked");
 	}
 
-	if(isdefined(param_03))
-	{
+	if(isdefined(param_03)) {
 		param_03 func_1AB6("locked");
 	}
 }
 
-//Function Number: 25
-func_1AB6(param_00)
-{
-	if(self.model != "sdf_door_airlock_01")
-	{
-		if(isdefined(self.currentstate))
-		{
-			foreach(var_02 in self.var_ACD5)
-			{
+func_1AB6(param_00) {
+	if(self.model != "sdf_door_airlock_01") {
+		if(isdefined(self.currentstate)) {
+			foreach(var_02 in self.var_ACD5) {
 				var_03 = func_1AB4(self.currentstate);
-				if(isdefined(var_03))
-				{
+				if(isdefined(var_03)) {
 					killfxontag(scripts\engine\utility::getfx(var_03),var_02,"tag_origin");
 				}
 			}
 		}
 
-		foreach(var_02 in self.var_ACD5)
-		{
+		foreach(var_02 in self.var_ACD5) {
 			var_03 = func_1AB4(param_00);
-			if(isdefined(var_03))
-			{
+			if(isdefined(var_03)) {
 				playfxontag(scripts\engine\utility::getfx(var_03),var_02,"tag_origin");
 			}
 		}
 	}
-	else if(param_00 != "unlocked")
-	{
-		if(scripts\sp\_utility::hastag(self.model,"tag_screen_locked"))
-		{
+	else if(param_00 != "unlocked") {
+		if(scripts\sp\_utility::hastag(self.model,"tag_screen_locked")) {
 			self giveperk("tag_screen_locked",self.model);
 		}
 
-		if(scripts\sp\_utility::hastag(self.model,"tag_screen_open"))
-		{
+		if(scripts\sp\_utility::hastag(self.model,"tag_screen_open")) {
 			self hidepart("tag_screen_open",self.model);
 		}
 	}
 	else
 	{
-		if(scripts\sp\_utility::hastag(self.model,"tag_screen_locked"))
-		{
+		if(scripts\sp\_utility::hastag(self.model,"tag_screen_locked")) {
 			self hidepart("tag_screen_locked",self.model);
 		}
 
-		if(scripts\sp\_utility::hastag(self.model,"tag_screen_open"))
-		{
+		if(scripts\sp\_utility::hastag(self.model,"tag_screen_open")) {
 			self giveperk("tag_screen_open",self.model);
 		}
 	}
@@ -827,50 +677,37 @@ func_1AB6(param_00)
 	self.currentstate = param_00;
 }
 
-//Function Number: 26
-func_1AB4(param_00)
-{
-	if(param_00 == "unlocked")
-	{
+func_1AB4(param_00) {
+	if(param_00 == "unlocked") {
 		return "vfx_airlock_light_green";
 	}
-	else if(param_00 == "locked")
-	{
+	else if(param_00 == "locked") {
 		return "vfx_airlock_light_red";
 	}
-	else if(param_00 == "cycling")
-	{
+	else if(param_00 == "cycling") {
 		return "vfx_airlock_light_orange";
 	}
-	else if(param_00 == "error")
-	{
+	else if(param_00 == "error") {
 		return undefined;
 	}
-	else if(param_00 == "off")
-	{
+	else if(param_00 == "off") {
 		return undefined;
 	}
 }
 
-//Function Number: 27
-func_A852()
-{
+func_A852() {
 	var_00 = undefined;
 	var_01 = [];
 	var_02 = scripts\sp\_utility::func_7A8F();
-	foreach(var_04 in var_02)
-	{
-		if(var_04.classname == "script_model")
-		{
-			if(isdefined(var_04.script_noteworthy) && var_04.script_noteworthy == "player")
-			{
+	foreach(var_04 in var_02) {
+		if(var_04.classname == "script_model") {
+			if(isdefined(var_04.script_noteworthy) && var_04.script_noteworthy == "player") {
 				self.var_D45A = 1;
 				var_01["player"] = var_04;
 			}
 			else
 			{
-				if(!isdefined(var_01["ai"]))
-				{
+				if(!isdefined(var_01["ai"])) {
 					var_01["ai"] = [];
 				}
 
@@ -885,22 +722,18 @@ func_A852()
 	}
 
 	self.var_454F = var_01;
-	if(isdefined(var_00))
-	{
+	if(isdefined(var_00)) {
 		var_00 waittill("trigger");
 	}
 
-	if(isdefined(var_01["player"]))
-	{
+	if(isdefined(var_01["player"])) {
 		thread func_A855();
 	}
 
 	scripts\sp\_utility::func_65E3("door_sequence_complete");
 }
 
-//Function Number: 28
-func_A855()
-{
+func_A855() {
 	var_00 = self.var_454F;
 	var_00["player"].var_1FBB = "console_plr";
 	var_00["player"] lib_0E46::func_48C4("override_box_jt",undefined,undefined,undefined,5000,undefined,0);
@@ -918,14 +751,10 @@ func_A855()
 	var_02 delete();
 }
 
-//Function Number: 29
-func_A854(param_00,param_01)
-{
+func_A854(param_00,param_01) {
 	var_02 = [param_00];
-	if(isdefined(param_01))
-	{
-		if(param_01.size > 1)
-		{
+	if(isdefined(param_01)) {
+		if(param_01.size > 1) {
 		}
 		else
 		{
@@ -935,8 +764,7 @@ func_A854(param_00,param_01)
 		var_02 = scripts\engine\utility::array_add(var_02,param_01);
 	}
 
-	foreach(var_06, var_04 in var_02)
-	{
+	foreach(var_06, var_04 in var_02) {
 		var_05 = self.var_454F["ai"][var_06];
 		var_05.var_1FBB = "console_ai";
 		var_04.var_A93B = var_04.var_1FBB;
@@ -945,31 +773,26 @@ func_A854(param_00,param_01)
 		thread func_A853(var_04,var_05);
 	}
 
-	if(isdefined(self.var_454F["player"]))
-	{
+	if(isdefined(self.var_454F["player"])) {
 		scripts\sp\_utility::func_178D(::scripts\sp\_utility::func_65E3,"player_at_door");
 	}
 
 	scripts\sp\_utility::func_57D5();
 	scripts\sp\_utility::func_65E1("actor_at_door");
-	if(isdefined(self.var_D45A))
-	{
+	if(isdefined(self.var_D45A)) {
 		scripts\sp\_utility::func_65E3("player_at_door");
 	}
 
 	scripts\sp\_utility::func_65E1("begin_opening");
 	wait(getanimlength(param_00 scripts\sp\_utility::func_7DC1("large_door_open")));
-	foreach(var_04 in var_02)
-	{
+	foreach(var_04 in var_02) {
 		var_04.var_1FBB = var_04.var_A93B;
 	}
 
 	scripts\sp\_utility::func_65E1("door_sequence_complete");
 }
 
-//Function Number: 30
-func_A853(param_00,param_01)
-{
+func_A853(param_00,param_01) {
 	var_02 = [param_00,param_01];
 	param_01 scripts/sp/anim::func_1F17(param_00,"large_door_open_arrive");
 	param_01 scripts/sp/anim::func_1F2C(var_02,"large_door_open_arrive");
@@ -981,34 +804,27 @@ func_A853(param_00,param_01)
 	param_01 thread scripts/sp/anim::func_1F2C(var_02,"large_door_open");
 }
 
-//Function Number: 31
-buddy_down_skip_post_clear()
-{
+buddy_down_skip_post_clear() {
 	scripts\sp\_utility::func_65E0("secondary_actors_going_through");
 	scripts\sp\_utility::func_65E0("player_prying_open_door");
 	thread buddy_down_trigger_damage_onflashbang();
 }
 
-//Function Number: 32
-buddy_down_trigger_damage_onflashbang()
-{
+buddy_down_trigger_damage_onflashbang() {
 	var_00 = "tag_ui_back";
-	if(isdefined(self.var_9027))
-	{
+	if(isdefined(self.var_9027)) {
 		var_00 = self.var_9027;
 	}
 
 	self.var_9027 = var_00;
 	var_01 = undefined;
-	if(isdefined(self.var_901E))
-	{
+	if(isdefined(self.var_901E)) {
 		var_01 = self.var_901E;
 	}
 
 	self.var_10247 = isdefined(self.var_10247);
 	var_02 = undefined;
-	if(isdefined(self.var_9333))
-	{
+	if(isdefined(self.var_9333)) {
 		var_02 = self.var_9333;
 	}
 
@@ -1017,8 +833,7 @@ buddy_down_trigger_damage_onflashbang()
 	lib_0E46::func_9016();
 	scripts\sp\_utility::func_65E1("player_used_door");
 	var_03 = func_D0A6(func_5997("intro"));
-	if(isdefined(self.var_9AEF))
-	{
+	if(isdefined(self.var_9AEF)) {
 		level.player thread scripts\sp\_utility::play_sound_on_entity(self.var_9AEF);
 	}
 
@@ -1030,10 +845,8 @@ buddy_down_trigger_damage_onflashbang()
 	scripts\sp\_utility::func_65E3("actor_at_door");
 	scripts\sp\_utility::func_65E1("begin_opening");
 	var_04 = [self,var_03];
-	foreach(var_06 in self.var_1684)
-	{
-		if(!var_06 func_1FA3(func_5997("pull")))
-		{
+	foreach(var_06 in self.var_1684) {
+		if(!var_06 func_1FA3(func_5997("pull"))) {
 			continue;
 		}
 
@@ -1045,8 +858,7 @@ buddy_down_trigger_damage_onflashbang()
 	scripts\sp\_utility::func_65E1("door_opened");
 	level notify("buddydoor_player_outro");
 	self notify("buddydoor_outro");
-	if(isdefined(self.var_427C))
-	{
+	if(isdefined(self.var_427C)) {
 		level.player thread scripts\sp\_utility::play_sound_on_entity(self.var_427C);
 	}
 
@@ -1059,48 +871,39 @@ buddy_down_trigger_damage_onflashbang()
 	level notify("buddydoor_player_done");
 }
 
-//Function Number: 33
-buddy_down_two_enemy_dead_thread(param_00)
-{
+buddy_down_two_enemy_dead_thread(param_00) {
 	level.player notifyonplayercommand("bash_pressed","+usereload");
 	level.player notifyonplayercommand("bash_pressed","+activate");
 	thread buddy_down_remove_playerclip();
-	if(!isdefined(self.var_C633))
-	{
+	if(!isdefined(self.var_C633)) {
 		self.var_C633 = 1;
 	}
 
 	var_01 = getanimlength(param_00[0] scripts\sp\_utility::func_7DC1(func_5997("pull")));
 	var_02 = var_01 / self.var_C633;
-	if(self.var_10247)
-	{
+	if(self.var_10247) {
 		thread func_2643();
 	}
 
-	for(;;)
-	{
+	for(;;) {
 		level.player waittill("bash_pressed");
 		level notify("buddydoor_pry_open_start");
 		scripts\sp\_utility::func_65E1("player_prying_open_door");
 		level.player.var_2704 = 1;
 		thread buddyspawn();
 		var_03 = buddy_down_price_anim(0.5,1);
-		if(isdefined(var_03))
-		{
+		if(isdefined(var_03)) {
 			continue;
 		}
 
 		scripts\engine\utility::array_thread(param_00,::func_59F3,self);
-		foreach(var_05 in param_00)
-		{
+		foreach(var_05 in param_00) {
 			var_05 givescorefortrophyblocks();
 		}
 
 		scripts/sp/anim::func_1EC1(param_00,func_5997("pull"));
-		foreach(var_05 in param_00)
-		{
-			if(isai(var_05))
-			{
+		foreach(var_05 in param_00) {
+			if(isai(var_05)) {
 				var_05 lib_0A1E::func_2307(::buddyplayerid,::lib_0A1E::func_2385);
 				continue;
 			}
@@ -1111,15 +914,13 @@ buddy_down_two_enemy_dead_thread(param_00)
 
 		thread buddy_down_player_engaging_early(var_02);
 		var_03 = buddy_down_price_anim(var_02);
-		if(!isdefined(var_03))
-		{
+		if(!isdefined(var_03)) {
 			level notify("buddydoor_pry_open_success");
 			break;
 		}
 
 		level notify("buddydoor_pry_open_failed");
-		if(isdefined(self.var_C62B))
-		{
+		if(isdefined(self.var_C62B)) {
 			level.player thread scripts\sp\_utility::play_sound_on_entity(self.var_C62B);
 		}
 
@@ -1127,8 +928,7 @@ buddy_down_two_enemy_dead_thread(param_00)
 		var_0B = param_00[0] getscoreinfocategory(param_00[0] scripts\sp\_utility::func_7DC1(func_5997("pull")));
 		var_0C = var_01 * var_0B;
 		var_0C = var_0C / var_0A;
-		foreach(var_05 in param_00)
-		{
+		foreach(var_05 in param_00) {
 			var_05 _meth_82B1(var_05 scripts\sp\_utility::func_7DC1(func_5997("pull")),var_0A * -1);
 		}
 
@@ -1140,30 +940,23 @@ buddy_down_two_enemy_dead_thread(param_00)
 		thread func_59DE(param_00,func_5997("idle"),1);
 	}
 
-	if(isdefined(self.var_C62F))
-	{
+	if(isdefined(self.var_C62F)) {
 		scripts\engine\utility::stop_loop_sound_on_entity(self.var_C62F);
 	}
 
-	if(isdefined(self.var_C634))
-	{
+	if(isdefined(self.var_C634)) {
 		thread scripts\sp\_utility::play_sound_on_entity(self.var_C634);
 	}
 }
 
-//Function Number: 34
-func_2643()
-{
-	while(!scripts\sp\_utility::func_65DB("door_opened"))
-	{
+func_2643() {
+	while(!scripts\sp\_utility::func_65DB("door_opened")) {
 		level.player notify("bash_pressed");
 		wait(0.05);
 	}
 }
 
-//Function Number: 35
-buddyplayerid()
-{
+buddyplayerid() {
 	self endon("stop_pry_anim");
 	self endon("buddydoor_pull_complete");
 	var_00 = scripts\sp\_utility::func_7DC1(self.var_130FF func_5997("pull"));
@@ -1174,54 +967,42 @@ buddyplayerid()
 	level waittill("ever");
 }
 
-//Function Number: 36
-buddyspawn()
-{
+buddyspawn() {
 	self endon("buddydoor_pull_complete");
-	if(isdefined(self.var_C625))
-	{
+	if(isdefined(self.var_C625)) {
 		self playsound(self.var_C625);
 	}
 
 	wait(0.3);
-	if(isdefined(self.var_C62F))
-	{
+	if(isdefined(self.var_C62F)) {
 		thread scripts\engine\utility::play_loop_sound_on_entity(self.var_C62F);
 	}
 
 	self waittill("buddydoor_pull_failed");
-	if(isdefined(self.var_C62F))
-	{
+	if(isdefined(self.var_C62F)) {
 		thread scripts\engine\utility::stop_loop_sound_on_entity(self.var_C62F);
 	}
 
-	if(isdefined(self.var_C625))
-	{
+	if(isdefined(self.var_C625)) {
 		self stopsounds();
 	}
 }
 
-//Function Number: 37
-buddy_down_price_anim(param_00,param_01)
-{
+buddy_down_price_anim(param_00,param_01) {
 	self endon("buddydoor_pull_complete");
-	if(!isdefined(param_01))
-	{
+	if(!isdefined(param_01)) {
 		thread buddy_down_skip_move();
 	}
 
 	param_00 = param_00 * 1000;
 	var_02 = gettime();
-	for(;;)
-	{
-		if(gettime() - var_02 > param_00)
-		{
+	for(;;) {
+		if(gettime() - var_02 > param_00) {
 			return;
 		}
 
 		var_03 = level.player scripts\engine\utility::waittill_notify_or_timeout_return("bash_pressed",0.4);
-		if(isdefined(var_03))
-		{
+		if(isdefined(var_03)) {
 			break;
 		}
 	}
@@ -1230,31 +1011,24 @@ buddy_down_price_anim(param_00,param_01)
 	return 1;
 }
 
-//Function Number: 38
-buddy_down_skip_move()
-{
+buddy_down_skip_move() {
 	self endon("buddydoor_pull_complete");
 	self endon("buddydoor_pull_failed");
-	for(;;)
-	{
+	for(;;) {
 		level.player playrumbleonentity("damage_light");
 		earthquake(0.15,0.1,level.player.origin,5000);
 		wait(0.05);
 	}
 }
 
-//Function Number: 39
-buddy_down_remove_playerclip()
-{
-	if(self.var_10247)
-	{
+buddy_down_remove_playerclip() {
+	if(self.var_10247) {
 		return;
 	}
 
 	var_00 = scripts\engine\utility::spawn_tag_origin();
 	var_01 = "left_door_01";
-	if(isdefined(self.var_28B6))
-	{
+	if(isdefined(self.var_28B6)) {
 		var_01 = self.var_28B6;
 	}
 
@@ -1265,19 +1039,14 @@ buddy_down_remove_playerclip()
 	var_00 lib_0E46::func_DFE3();
 }
 
-//Function Number: 40
-buddy_down_player_engaging_early(param_00)
-{
+buddy_down_player_engaging_early(param_00) {
 	self endon("buddydoor_pull_failed");
 	wait(param_00);
 	self notify("buddydoor_pull_complete");
 }
 
-//Function Number: 41
-buddy_down_gunner_damage_thread(param_00)
-{
-	foreach(var_02 in param_00)
-	{
+buddy_down_gunner_damage_thread(param_00) {
+	foreach(var_02 in param_00) {
 		var_02.var_130FF = self;
 		var_03 = var_02.var_1FBB + "_door_sequence_complete";
 		var_04 = var_02.var_1FBB + "_at_door";
@@ -1287,10 +1056,8 @@ buddy_down_gunner_damage_thread(param_00)
 
 	scripts\engine\utility::array_thread(param_00,::func_598C);
 	var_06 = [];
-	foreach(var_02 in param_00)
-	{
-		if(!var_02 func_1FA3(func_5997("intro")))
-		{
+	foreach(var_02 in param_00) {
+		if(!var_02 func_1FA3(func_5997("intro"))) {
 			continue;
 		}
 
@@ -1300,28 +1067,22 @@ buddy_down_gunner_damage_thread(param_00)
 	scripts\engine\utility::array_thread(var_06,::buddy_down_gunner_death,self,var_06);
 	self waittill("buddydoor_outro");
 	scripts\engine\utility::array_thread(param_00,::func_59F3,self);
-	foreach(var_02 in param_00)
-	{
+	foreach(var_02 in param_00) {
 		thread buddy_down_gunner_flashed_thread(var_02);
 	}
 }
 
-//Function Number: 42
-buddy_down_gunner_death(param_00,param_01)
-{
+buddy_down_gunner_death(param_00,param_01) {
 	level notify("buddydoor_actors_intro");
 	param_00 thread func_1162A(self);
-	if(param_00 scripts\sp\_utility::func_65DB("skip_reach_on_use"))
-	{
+	if(param_00 scripts\sp\_utility::func_65DB("skip_reach_on_use")) {
 		func_E9FF(param_00);
 	}
-	else if(!param_00 scripts\sp\_utility::func_65DB("no_anim_reach"))
-	{
+	else if(!param_00 scripts\sp\_utility::func_65DB("no_anim_reach")) {
 		param_00 scripts/sp/anim::func_1F17(self,param_00 func_5997("intro"));
 	}
 
-	if(param_00 scripts\sp\_utility::func_65DB("skip_reach_on_use"))
-	{
+	if(param_00 scripts\sp\_utility::func_65DB("skip_reach_on_use")) {
 		func_E9FE(param_00);
 		param_00 thread func_59DE(self,param_00 func_5997("idle"),1);
 	}
@@ -1333,10 +1094,8 @@ buddy_down_gunner_death(param_00,param_01)
 
 	self.var_2412 = 1;
 	param_00 scripts\sp\_utility::func_65E1(self.var_1FBB + "_at_door");
-	foreach(var_03 in param_01)
-	{
-		if(!isdefined(var_03.var_2412))
-		{
+	foreach(var_03 in param_01) {
+		if(!isdefined(var_03.var_2412)) {
 			return;
 		}
 	}
@@ -1344,23 +1103,17 @@ buddy_down_gunner_death(param_00,param_01)
 	param_00 scripts\sp\_utility::func_65E1("actor_at_door");
 }
 
-//Function Number: 43
-func_E9FF(param_00)
-{
+func_E9FF(param_00) {
 	level.player endon("player_attached_to_door");
 	param_00 scripts/sp/anim::func_1F17(self,param_00 func_5997("intro"));
 }
 
-//Function Number: 44
-func_E9FE(param_00)
-{
+func_E9FE(param_00) {
 	level.player endon("player_attached_to_door");
 	param_00 func_59DE(self,param_00 func_5997("intro"));
 }
 
-//Function Number: 45
-buddy_down_gunner_flashed_thread(param_00)
-{
+buddy_down_gunner_flashed_thread(param_00) {
 	param_00 endon("death");
 	self endon("death");
 	level notify("buddydoor_actors_outro");
@@ -1374,24 +1127,18 @@ buddy_down_gunner_flashed_thread(param_00)
 	level notify("buddydoor_actors_outro_done");
 }
 
-//Function Number: 46
-func_21E0()
-{
+func_21E0() {
 	var_00 = scripts\sp\_utility::func_7A97();
-	if(isdefined(var_00))
-	{
-		foreach(var_02 in var_00)
-		{
-			if(isdefined(var_02.var_336) && var_02.var_336 == "loot_hint_struct")
-			{
+	if(isdefined(var_00)) {
+		foreach(var_02 in var_00) {
+			if(isdefined(var_02.var_336) && var_02.var_336 == "loot_hint_struct") {
 				self.var_9026 = var_02;
 			}
 		}
 	}
 
 	self.collision = scripts\sp\_utility::func_7A8E();
-	if(!isdefined(level.var_21E2))
-	{
+	if(!isdefined(level.var_21E2)) {
 		level.var_21E2 = 0;
 	}
 
@@ -1399,13 +1146,10 @@ func_21E0()
 	level.var_21E2++;
 }
 
-//Function Number: 47
-func_21E9(param_00)
-{
+func_21E9(param_00) {
 	self endon("stop_door");
-	if(isdefined(level.var_21E4))
-	{
-		self [[ level.var_21E4 ]]();
+	if(isdefined(level.var_21E4)) {
+		self [[level.var_21E4]]();
 	}
 
 	self.var_9026 lib_0E46::func_48C4();
@@ -1418,20 +1162,16 @@ func_21E9(param_00)
 	wait(0.7);
 	thread scripts\sp\_utility::play_sound_on_entity("armory_door_open");
 	scripts\sp\_armoury::func_489F(param_00);
-	if(!lib_0A2F::func_D9ED(param_00))
-	{
+	if(!lib_0A2F::func_D9ED(param_00)) {
 		lib_0A2F::func_DA49(param_00,1);
 		scripts\sp\_utility::func_9145("fluff_messages_loot_room");
 	}
 }
 
-//Function Number: 48
-func_21E5()
-{
+func_21E5() {
 	var_00 = self;
 	var_00.var_1FBB = "loot_door";
-	if(isdefined(self.var_4386))
-	{
+	if(isdefined(self.var_4386)) {
 		self.collision linkto(self,self.var_4386);
 	}
 	else
@@ -1439,21 +1179,18 @@ func_21E5()
 		self.collision linkto(self,"j_handle");
 	}
 
-	if(scripts\engine\utility::istrue(self.var_72D1))
-	{
+	if(scripts\engine\utility::istrue(self.var_72D1)) {
 		self notify("stop_door");
 		lib_0E46::func_DFE3();
 		self notify("stop_loop");
 		var_00 scripts/sp/anim::func_1EE0(var_00,"open_loot_door");
 		self.collision connectpaths();
 		self.weaponisauto = "open";
-		if(scripts\sp\_utility::hastag(self.model,"tag_locked"))
-		{
+		if(scripts\sp\_utility::hastag(self.model,"tag_locked")) {
 			self hidepart("tag_locked",self.model);
 		}
 
-		if(scripts\sp\_utility::hastag(self.model,"tag_unlocked"))
-		{
+		if(scripts\sp\_utility::hastag(self.model,"tag_unlocked")) {
 			self giveperk("tag_unlocked",self.model);
 		}
 	}
@@ -1470,49 +1207,37 @@ func_21E5()
 	}
 
 	level notify("armory_door_open");
-	if(isdefined(self.var_21E6))
-	{
-		self thread [[ self.var_21E6 ]]();
+	if(isdefined(self.var_21E6)) {
+		self thread [[self.var_21E6]]();
 	}
 }
 
-//Function Number: 49
-func_9530(param_00)
-{
+func_9530(param_00) {
 	var_01 = scripts\engine\utility::getstructarray("door_peek_struct","script_noteworthy");
-	if(var_01.size > 0)
-	{
-		foreach(var_03 in var_01)
-		{
-			if(var_03.var_336 == param_00)
-			{
+	if(var_01.size > 0) {
+		foreach(var_03 in var_01) {
+			if(var_03.var_336 == param_00) {
 				var_03 thread func_13684(var_03.var_336);
 			}
 		}
 	}
 }
 
-//Function Number: 50
-func_13684(param_00)
-{
+func_13684(param_00) {
 	var_01 = self;
 	level waittill(param_00 + "door_peek_start");
 	var_01 thread scripts\sp\_armoury::func_489F(0);
 }
 
-//Function Number: 51
-func_FA17(param_00)
-{
-	if(isdefined(level.var_E982) && level.var_E982 == 1)
-	{
+func_FA17(param_00) {
+	if(isdefined(level.var_E982) && level.var_E982 == 1) {
 		var_01 = scripts\sp\_utility::func_10639("player_rig_disguise");
 	}
 	else
 	{
 		var_01 = scripts\sp\_utility::func_10639("player_arms");
 		var_02 = level.player _meth_84C6("currentViewModel");
-		if(isdefined(var_02))
-		{
+		if(isdefined(var_02)) {
 			var_01 setmodel(var_02);
 		}
 	}
@@ -1529,23 +1254,18 @@ func_FA17(param_00)
 	return var_01;
 }
 
-//Function Number: 52
-func_3232()
-{
+func_3232() {
 	var_00 = scripts\sp\_utility::func_7A8F();
 	scripts\engine\utility::array_call(var_00,::linkto,self,"j_hinge2");
-	foreach(var_02 in var_00)
-	{
-		if(isdefined(var_02.script_noteworthy) && var_02.script_noteworthy == "player_clip")
-		{
+	foreach(var_02 in var_00) {
+		if(isdefined(var_02.script_noteworthy) && var_02.script_noteworthy == "player_clip") {
 			continue;
 		}
 
 		self.var_C969 = var_02;
 	}
 
-	if(isdefined(self.var_EF20) && self.var_EF20 == "notplayer")
-	{
+	if(isdefined(self.var_EF20) && self.var_EF20 == "notplayer") {
 		return;
 	}
 
@@ -1557,8 +1277,7 @@ func_3232()
 	var_06 = var_05 func_D0A6("bulkhead_open");
 	scripts\sp\_utility::func_65E1("begin_opening");
 	var_07 = [self,var_06];
-	if(soundexists("airlock_exit_door_open"))
-	{
+	if(soundexists("airlock_exit_door_open")) {
 		level.player thread scripts\sp\_utility::play_sound_on_entity("airlock_exit_door_open");
 	}
 
@@ -1572,25 +1291,19 @@ func_3232()
 	scripts\sp\_utility::func_65E1("door_sequence_complete");
 }
 
-//Function Number: 53
-func_5982(param_00,param_01,param_02)
-{
+func_5982(param_00,param_01,param_02) {
 	var_03 = self.var_5A18 + "_";
-	var_04 = [[ param_00 ]]();
-	var_05 = [[ param_01 ]]();
-	var_06 = [[ param_02 ]]();
+	var_04 = [[param_00]]();
+	var_05 = [[param_01]]();
+	var_06 = [[param_02]]();
 	var_07 = [var_04,var_05,var_06];
-	foreach(var_09 in var_07)
-	{
-		foreach(var_12, var_0B in var_09)
-		{
+	foreach(var_09 in var_07) {
+		foreach(var_12, var_0B in var_09) {
 			var_0C = 0;
-			foreach(var_0E in var_0B)
-			{
+			foreach(var_0E in var_0B) {
 				var_0F = getarraykeys(var_0B)[var_0C];
 				var_10 = var_03 + var_0F;
-				if(var_0F == "idle")
-				{
+				if(var_0F == "idle") {
 					level.var_EC85[var_12][var_10][0] = var_0B[var_0F];
 				}
 				else
@@ -1604,9 +1317,7 @@ func_5982(param_00,param_01,param_02)
 	}
 }
 
-//Function Number: 54
-func_59EB(param_00,param_01,param_02,param_03,param_04)
-{
+func_59EB(param_00,param_01,param_02,param_03,param_04) {
 	self.var_9AEF = param_00;
 	self.var_C625 = param_01;
 	self.var_C62F = param_02;
@@ -1614,34 +1325,24 @@ func_59EB(param_00,param_01,param_02,param_03,param_04)
 	self.var_C634 = param_04;
 }
 
-//Function Number: 55
-func_598C()
-{
-	if(isdefined(self.var_598E))
-	{
+func_598C() {
+	if(isdefined(self.var_598E)) {
 		scripts\sp\_utility::func_61C7();
 		self.var_598E = undefined;
 	}
 }
 
-//Function Number: 56
-func_598F()
-{
-	if(isdefined(self.var_EDAD))
-	{
+func_598F() {
+	if(isdefined(self.var_EDAD)) {
 		self.var_598E = 1;
 	}
 }
 
-//Function Number: 57
-func_D0A6(param_00)
-{
+func_D0A6(param_00) {
 	var_01 = scripts\sp\_utility::func_10639("door_player_rig");
-	if(var_01.model == "viewmodel_base_viewhands_iw7")
-	{
+	if(var_01.model == "viewmodel_base_viewhands_iw7") {
 		var_02 = level.player _meth_84C6("currentViewModel");
-		if(isdefined(var_02))
-		{
+		if(isdefined(var_02)) {
 			var_01 setmodel(var_02);
 		}
 	}
@@ -1649,15 +1350,12 @@ func_D0A6(param_00)
 	var_01 hide();
 	level.player.var_59E1 = var_01;
 	var_03 = [var_01,self];
-	foreach(var_05 in var_03)
-	{
-		if(!isdefined(var_05.var_1FBB))
-		{
+	foreach(var_05 in var_03) {
+		if(!isdefined(var_05.var_1FBB)) {
 			continue;
 		}
 
-		if(!var_05 func_1FA3(param_00))
-		{
+		if(!var_05 func_1FA3(param_00)) {
 			continue;
 		}
 
@@ -1669,13 +1367,11 @@ func_D0A6(param_00)
 	var_07.angles = level.player getplayerangles();
 	level.player playerlinkto(var_07,"tag_origin",1,0,0,0,0,0);
 	var_08 = 0.45;
-	if(isdefined(self._meth_8483))
-	{
+	if(isdefined(self._meth_8483)) {
 		var_08 = self._meth_8483;
 	}
 
-	if(length(level.player getvelocity()) > 200)
-	{
+	if(length(level.player getvelocity()) > 200) {
 		var_08 = 0.25;
 	}
 
@@ -1693,13 +1389,10 @@ func_D0A6(param_00)
 	return var_01;
 }
 
-//Function Number: 58
-func_1162A(param_00)
-{
+func_1162A(param_00) {
 	param_00 endon("anim_reach_complete");
 	scripts\sp\_utility::func_65E3("player_at_door");
-	if(isdefined(self.var_D83A))
-	{
+	if(isdefined(self.var_D83A)) {
 		var_01 = self.var_D83A;
 	}
 	else
@@ -1707,11 +1400,9 @@ func_1162A(param_00)
 		var_01 = 200;
 	}
 
-	if(distance(param_00.origin,self.origin) >= 200)
-	{
+	if(distance(param_00.origin,self.origin) >= 200) {
 		var_02 = undefined;
-		if(isdefined(self.var_D83B))
-		{
+		if(isdefined(self.var_D83B)) {
 			var_02 = self.var_D83B;
 		}
 		else
@@ -1725,9 +1416,7 @@ func_1162A(param_00)
 	}
 }
 
-//Function Number: 59
-func_598D()
-{
+func_598D() {
 	level.player _meth_84FE();
 	level.player getradiuspathsighttestnodes();
 	level.player freezecontrols(1);
@@ -1738,9 +1427,7 @@ func_598D()
 	level.player getrankinfoxpamt();
 }
 
-//Function Number: 60
-func_5990()
-{
+func_5990() {
 	level.player enableweapons();
 	level.player getnumownedagentsonteambytype(1);
 	level.player freezecontrols(0);
@@ -1750,30 +1437,22 @@ func_5990()
 	level.player _meth_84FD();
 }
 
-//Function Number: 61
-func_5997(param_00)
-{
+func_5997(param_00) {
 	return self.var_5A18 + "_" + param_00;
 }
 
-//Function Number: 62
-func_59DE(param_00,param_01,param_02)
-{
-	if(!isarray(param_00))
-	{
+func_59DE(param_00,param_01,param_02) {
+	if(!isarray(param_00)) {
 		param_00 = [param_00];
 	}
 
 	var_03 = [];
-	foreach(var_05 in param_00)
-	{
-		if(!var_05 func_1FA3(param_01))
-		{
+	foreach(var_05 in param_00) {
+		if(!var_05 func_1FA3(param_01)) {
 			continue;
 		}
 
-		if(isdefined(param_02))
-		{
+		if(isdefined(param_02)) {
 			thread scripts/sp/anim::func_1EEA(var_05,param_01,"stop_loop_" + var_05.var_1FBB);
 		}
 		else
@@ -1784,10 +1463,8 @@ func_59DE(param_00,param_01,param_02)
 		var_03[var_03.size] = var_05;
 	}
 
-	if(!isdefined(param_02) && var_03.size > 0)
-	{
-		foreach(var_05 in var_03)
-		{
+	if(!isdefined(param_02) && var_03.size > 0) {
+		foreach(var_05 in var_03) {
 			var_05 scripts\sp\_utility::func_178D(::scripts\sp\_utility::func_137AA,param_01);
 		}
 
@@ -1795,34 +1472,25 @@ func_59DE(param_00,param_01,param_02)
 	}
 }
 
-//Function Number: 63
-func_5981(param_00,param_01)
-{
+func_5981(param_00,param_01) {
 	scripts/sp/anim::func_1F35(param_00,param_01);
 	param_00 notify(param_01);
 }
 
-//Function Number: 64
-func_59F3(param_00)
-{
+func_59F3(param_00) {
 	param_00 notify("stop_loop_" + self.var_1FBB);
 }
 
-//Function Number: 65
-func_1FA3(param_00)
-{
+func_1FA3(param_00) {
 	var_01 = level.var_EC85[self.var_1FBB][param_00];
-	if(isdefined(var_01))
-	{
+	if(isdefined(var_01)) {
 		return 1;
 	}
 
 	return 0;
 }
 
-//Function Number: 66
-func_5983()
-{
+func_5983() {
 	level.var_EC85["door"]["airlock_open_player"] = %airlock_open_door;
 	level.var_EC85["door"]["bulkhead_open"] = %moon_2_31_secure_hangar_door;
 	level.var_EC85["door"]["large_ally_door"] = %europa_armory_door_metal_bulkhead_double_01_open;
@@ -1836,17 +1504,13 @@ func_5983()
 	func_59DF();
 }
 
-//Function Number: 67
-func_599C()
-{
+func_599C() {
 	level.var_EC85["main"]["large_door_open_arrive"] = %europa_armory_str_override_r_intro;
 	level.var_EC85["main"]["large_door_open_idle"][0] = %europa_armory_str_override_r_idle;
 	level.var_EC85["main"]["large_door_open"] = %europa_armory_str_override_r_pull_handle;
 }
 
-//Function Number: 68
-func_59DF()
-{
+func_59DF() {
 	level.var_EC87["door_player_rig"] = #animtree;
 	level.var_EC8C["door_player_rig"] = "viewmodel_base_viewhands_iw7";
 	level.var_EC85["door_player_rig"]["airlock_open_player"] = %airlock_open_player;
@@ -1856,11 +1520,8 @@ func_59DF()
 	level.var_EC85["door_player_rig"]["bulkhead_open"] = %moon_2_31_secure_hangar_plr;
 }
 
-//Function Number: 69
-func_5A4B()
-{
-	if(!isdefined(level.doors))
-	{
+func_5A4B() {
+	if(!isdefined(level.doors)) {
 		level.doors = spawnstruct();
 	}
 

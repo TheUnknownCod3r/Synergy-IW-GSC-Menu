@@ -1,18 +1,11 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\anim\traverse\jump_across_100.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 2
- * Decompile Time: 141 ms
- * Timestamp: 10\26\2023 11:59:28 PM
-*******************************************************************/
+/*************************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\anim\traverse\jump_across_100.gsc
+*************************************************************/
 
-//Function Number: 1
-main()
-{
-	if(self.type == "dog")
-	{
+main() {
+	if(self.type == "dog") {
 		scripts\anim\traverse\shared::func_5869("window_40",20);
 		return;
 	}
@@ -29,9 +22,7 @@ main()
 	scripts\anim\shared::donotetracks("jumpanim");
 }
 
-//Function Number: 2
-func_7814()
-{
+func_7814() {
 	var_00 = [];
 	var_00[0] = %jump_across_100_spring;
 	var_00[1] = %jump_across_100_lunge;

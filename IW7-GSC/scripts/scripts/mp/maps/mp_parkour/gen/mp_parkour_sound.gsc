@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\mp\maps\mp_parkour\gen\mp_parkour_sound.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 1
- * Decompile Time: 169 ms
- * Timestamp: 10/27/2023 12:14:01 AM
-*******************************************************************/
+/***********************************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\mp\maps\mp_parkour\gen\mp_parkour_sound.gsc
+***********************************************************************/
 
-//Function Number: 1
-main()
-{
+main() {
 	var_00 = scripts\common\createfx::func_49E7();
 	var_00 scripts\common\createfx::func_F4AD((-823.795,2940.06,190.192),(270,0,0));
 	var_00.var_13125["soundalias"] = "emt_plastic_tarp_flap_lp_01";

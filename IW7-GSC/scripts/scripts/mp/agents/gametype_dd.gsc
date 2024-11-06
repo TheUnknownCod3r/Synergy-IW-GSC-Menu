@@ -1,14 +1,7 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\mp\agents\gametype_dd.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 1
- * Decompile Time: 100 ms
- * Timestamp: 10/27/2023 12:11:33 AM
-*******************************************************************/
+/*****************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\mp\agents\gametype_dd.gsc
+*****************************************************/
 
-//Function Number: 1
-main()
-{
-}
+main() {}

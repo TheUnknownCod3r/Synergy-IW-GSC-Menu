@@ -1,18 +1,11 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\sp\_art.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 23
- * Decompile Time: 1086 ms
- * Timestamp: 10/27/2023 12:23:49 AM
-*******************************************************************/
+/***************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\sp\_art.gsc
+***************************************/
 
-//Function Number: 1
-main()
-{
-	if(!isdefined(level.var_ABE6))
-	{
+main() {
+	if(!isdefined(level.var_ABE6)) {
 		level.var_ABE6 = 0;
 	}
 
@@ -28,20 +21,16 @@ main()
 	function_01C5("r_mbEnable",1);
 	function_01C5("r_mbVelocityScale",0);
 	function_01C5("r_mbVelocityScaleViewModel",0.2);
-	if(!isdefined(level.var_11220))
-	{
+	if(!isdefined(level.var_11220)) {
 		level.var_11220 = [];
 	}
 
-	if(!isdefined(level.script))
-	{
+	if(!isdefined(level.script)) {
 		level.script = tolower(getdvar("mapname"));
 	}
 }
 
-//Function Number: 2
-func_5849(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08)
-{
+func_5849(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08) {
 	level.var_5832[param_00][param_01]["nearStart"] = param_02;
 	level.var_5832[param_00][param_01]["nearEnd"] = param_03;
 	level.var_5832[param_00][param_01]["nearBlur"] = param_04;
@@ -51,18 +40,14 @@ func_5849(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_0
 	level.var_5832[param_00][param_01]["weight"] = param_08;
 }
 
-//Function Number: 3
-func_5838(param_00)
-{
-	if(level.var_5832[param_00]["timeRemaining"] <= 0)
-	{
+func_5838(param_00) {
+	if(level.var_5832[param_00]["timeRemaining"] <= 0) {
 		return;
 	}
 
 	var_01 = min(1,0.05 / level.var_5832[param_00]["timeRemaining"]);
 	level.var_5832[param_00]["timeRemaining"] = level.var_5832[param_00]["timeRemaining"] - 0.05;
-	if(level.var_5832[param_00]["timeRemaining"] <= 0)
-	{
+	if(level.var_5832[param_00]["timeRemaining"] <= 0) {
 		level.var_5832[param_00]["timeRemaining"] = 0;
 		level.var_5832[param_00]["current"]["nearStart"] = level.var_5832[param_00]["goal"]["nearStart"];
 		level.var_5832[param_00]["current"]["nearEnd"] = level.var_5832[param_00]["goal"]["nearEnd"];
@@ -83,9 +68,7 @@ func_5838(param_00)
 	level.var_5832[param_00]["current"]["weight"] = level.var_5832[param_00]["current"]["weight"] + var_01 * level.var_5832[param_00]["goal"]["weight"] - level.var_5832[param_00]["current"]["weight"];
 }
 
-//Function Number: 4
-func_583A(param_00,param_01)
-{
+func_583A(param_00,param_01) {
 	var_02 = 1;
 	var_03 = 1;
 	var_04 = 4.5;
@@ -95,11 +78,8 @@ func_583A(param_00,param_01)
 	func_5849(param_00,param_01,var_02,var_03,var_04,var_05,var_06,var_07,1);
 }
 
-//Function Number: 5
-func_5843()
-{
-	if(getdvar("scr_dof_enable") == "")
-	{
+func_5843() {
+	if(getdvar("scr_dof_enable") == "") {
 		function_01C5("scr_dof_enable","1");
 	}
 
@@ -134,84 +114,62 @@ func_5843()
 	level.var_5832["results"] = [];
 	level.var_5832["results"]["current"] = [];
 	func_583A("results","current");
-	foreach(var_01 in level.players)
-	{
+	foreach(var_01 in level.players) {
 		var_01 thread func_584E();
 	}
 }
 
-//Function Number: 6
-func_5848(param_00,param_01,param_02,param_03,param_04,param_05,param_06)
-{
+func_5848(param_00,param_01,param_02,param_03,param_04,param_05,param_06) {
 	func_5849("base","goal",param_00,param_01,param_02,param_03,param_04,param_05,1);
 	level.var_5832["base"]["timeRemaining"] = param_06;
-	if(param_06 <= 0)
-	{
+	if(param_06 <= 0) {
 		func_5849("base","current",param_00,param_01,param_02,param_03,param_04,param_05,1);
 	}
 }
 
-//Function Number: 7
-func_583F(param_00,param_01,param_02,param_03,param_04,param_05,param_06)
-{
+func_583F(param_00,param_01,param_02,param_03,param_04,param_05,param_06) {
 	func_5849("script","goal",param_00,param_01,param_02,param_03,param_04,param_05,1);
 	level.var_5832["script"]["timeRemaining"] = param_06;
-	if(param_06 <= 0)
-	{
+	if(param_06 <= 0) {
 		func_5849("script","current",param_00,param_01,param_02,param_03,param_04,param_05,1);
 		return;
 	}
 
-	if(level.var_5832["script"]["current"]["weight"] <= 0)
-	{
+	if(level.var_5832["script"]["current"]["weight"] <= 0) {
 		func_5849("script","current",param_00,param_01,param_02,param_03,param_04,param_05,0);
 	}
 }
 
-//Function Number: 8
-func_583D(param_00)
-{
+func_583D(param_00) {
 	level.var_5832["script"]["goal"]["weight"] = 0;
 	level.var_5832["script"]["timeRemaining"] = param_00;
-	if(param_00 <= 0)
-	{
+	if(param_00 <= 0) {
 		level.var_5832["script"]["current"]["weight"] = 0;
 	}
 }
 
-//Function Number: 9
-is_dof_script_enabled()
-{
+is_dof_script_enabled() {
 	return level.var_5832["script"]["current"]["weight"] > 0;
 }
 
-//Function Number: 10
-func_583E(param_00,param_01,param_02,param_03,param_04,param_05,param_06)
-{
+func_583E(param_00,param_01,param_02,param_03,param_04,param_05,param_06) {
 	func_5849("ads","goal",param_00,param_01,param_02,param_03,param_04,param_05,param_06);
-	if(level.var_5832["ads"]["current"]["weight"] <= 0)
-	{
+	if(level.var_5832["ads"]["current"]["weight"] <= 0) {
 		func_5849("ads","current",param_00,param_01,param_02,param_03,param_04,param_05,0);
 	}
 }
 
-//Function Number: 11
-func_5836(param_00,param_01,param_02,param_03)
-{
-	if(param_00 > param_01)
-	{
+func_5836(param_00,param_01,param_02,param_03) {
+	if(param_00 > param_01) {
 		var_04 = param_00 - param_01 * param_03;
-		if(var_04 > param_02)
-		{
+		if(var_04 > param_02) {
 			var_04 = param_02;
 		}
-		else if(var_04 < 1)
-		{
+		else if(var_04 < 1) {
 			var_04 = 1;
 		}
 
-		if(param_00 - var_04 <= param_01)
-		{
+		if(param_00 - var_04 <= param_01) {
 			return param_01;
 		}
 		else
@@ -219,20 +177,16 @@ func_5836(param_00,param_01,param_02,param_03)
 			return param_00 - var_04;
 		}
 	}
-	else if(param_00 < param_01)
-	{
+	else if(param_00 < param_01) {
 		var_04 = param_01 - param_00 * param_03;
-		if(var_04 > param_02)
-		{
+		if(var_04 > param_02) {
 			var_04 = param_02;
 		}
-		else if(var_04 < 1)
-		{
+		else if(var_04 < 1) {
 			var_04 = 1;
 		}
 
-		if(param_00 + var_04 >= param_01)
-		{
+		if(param_00 + var_04 >= param_01) {
 			return param_01;
 		}
 		else
@@ -244,14 +198,10 @@ func_5836(param_00,param_01,param_02,param_03)
 	return param_00;
 }
 
-//Function Number: 12
-func_5835()
-{
+func_5835() {
 	var_00 = level.var_5832["ads"]["goal"]["weight"];
-	if(var_00 < 1)
-	{
-		if(self adsbuttonpressed() && self getweaponrankinfominxp() > 0)
-		{
+	if(var_00 < 1) {
+		if(self adsbuttonpressed() && self getweaponrankinfominxp() > 0) {
 			var_00 = min(1,var_00 + 0.7);
 		}
 		else
@@ -269,8 +219,7 @@ func_5835()
 		return;
 	}
 
-	if(isdefined(level.var_5837))
-	{
+	if(isdefined(level.var_5837)) {
 		var_01 = level.var_5837;
 	}
 	else
@@ -293,16 +242,12 @@ func_5835()
 	level.var_5832["ads"]["current"]["weight"] = 1;
 }
 
-//Function Number: 13
-func_583C()
-{
+func_583C() {
 	level.var_5832["ads"]["goal"]["weight"] = 0;
 	level.var_5832["ads"]["current"]["weight"] = 0;
 }
 
-//Function Number: 14
-func_5833(param_00)
-{
+func_5833(param_00) {
 	var_01 = level.var_5832[param_00]["current"]["weight"];
 	var_02 = 1 - var_01;
 	level.var_5832["results"]["current"]["nearStart"] = level.var_5832["results"]["current"]["nearStart"] * var_02 + level.var_5832[param_00]["current"]["nearStart"] * var_01;
@@ -313,9 +258,7 @@ func_5833(param_00)
 	level.var_5832["results"]["current"]["farBlur"] = level.var_5832["results"]["current"]["farBlur"] * var_02 + level.var_5832[param_00]["current"]["farBlur"] * var_01;
 }
 
-//Function Number: 15
-func_5839()
-{
+func_5839() {
 	func_5838("base");
 	func_5838("script");
 	func_5835();
@@ -336,8 +279,7 @@ func_5839()
 	var_02 = min(10,var_02);
 	var_05 = max(0,var_05);
 	var_05 = min(var_02,var_05);
-	if(var_05 > 0)
-	{
+	if(var_05 > 0) {
 		var_03 = max(var_01,var_03);
 	}
 
@@ -349,19 +291,15 @@ func_5839()
 	level.var_5832["results"]["current"]["farBlur"] = var_05;
 }
 
-//Function Number: 16
-func_5845()
-{
+func_5845() {
 	var_00 = self getweaponrankinfominxp();
-	if(var_00 <= 0)
-	{
+	if(var_00 <= 0) {
 		func_583C();
 		return;
 	}
 
-	if(isdefined(level.var_4C4C))
-	{
-		[[ level.var_4C4C ]]();
+	if(isdefined(level.var_4C4C)) {
+		[[level.var_4C4C]]();
 		return;
 	}
 
@@ -376,8 +314,7 @@ func_5845()
 	var_09 = getdvarfloat("ads_dof_farBlur",2.5);
 	var_0A = self geteye();
 	var_0B = self getplayerangles();
-	if(isdefined(self.var_5847))
-	{
+	if(isdefined(self.var_5847)) {
 		var_0C = combineangles(self.var_5847.angles,var_0B);
 	}
 	else
@@ -389,14 +326,12 @@ func_5845()
 	var_0E = bullettrace(var_0A,var_0A + var_0D * var_01,1,self,1,0,0,0,0);
 	var_0F = function_0072("axis");
 	var_10 = self getcurrentweapon();
-	if(isdefined(level.var_1094B[var_10]))
-	{
-		[[ level.var_1094B[var_10] ]](var_0E,var_0F,var_0A,var_0D,var_00);
+	if(isdefined(level.var_1094B[var_10])) {
+		[[level.var_1094B[var_10]]](var_0E,var_0F,var_0A,var_0D,var_00);
 		return;
 	}
 
-	if(var_0E["fraction"] == 1)
-	{
+	if(var_0E["fraction"] == 1) {
 		var_01 = 8192;
 		var_11 = 1024;
 		var_12 = var_01 * var_06 * 2;
@@ -408,52 +343,43 @@ func_5845()
 		var_12 = var_02 * var_07;
 	}
 
-	foreach(var_14 in var_0F)
-	{
+	foreach(var_14 in var_0F) {
 		var_15 = var_14 _meth_819D();
 		var_16 = var_14 getstruct(var_03);
-		if(!var_15 && !var_16)
-		{
+		if(!var_15 && !var_16) {
 			continue;
 		}
 
 		var_17 = vectornormalize(var_14.origin - var_0A);
 		var_18 = vectordot(var_0D,var_17);
-		if(var_18 < 0.923)
-		{
+		if(var_18 < 0.923) {
 			continue;
 		}
 
 		var_19 = distance(var_0A,var_14.origin);
-		if(var_19 - 30 < var_11)
-		{
+		if(var_19 - 30 < var_11) {
 			var_11 = var_19 - 30;
 		}
 
 		var_1A = min(var_19,var_02);
-		if(var_1A + 30 > var_12)
-		{
+		if(var_1A + 30 > var_12) {
 			var_12 = var_1A + 30;
 		}
 	}
 
-	if(var_11 > var_12)
-	{
+	if(var_11 > var_12) {
 		var_11 = var_12 - 256;
 	}
 
-	if(var_11 > var_01)
-	{
+	if(var_11 > var_01) {
 		var_11 = var_01 - 30;
 	}
 
-	if(var_11 < 1)
-	{
+	if(var_11 < 1) {
 		var_11 = 1;
 	}
 
-	if(var_12 < var_01)
-	{
+	if(var_12 < var_01) {
 		var_12 = var_01;
 	}
 
@@ -462,11 +388,8 @@ func_5845()
 	func_583E(var_1C,var_11,var_08,var_12,var_1D,var_09,var_00);
 }
 
-//Function Number: 17
-func_A43D(param_00,param_01,param_02,param_03,param_04)
-{
-	if(param_04 < 0.88)
-	{
+func_A43D(param_00,param_01,param_02,param_03,param_04) {
+	if(param_04 < 0.88) {
 		func_583C();
 		return;
 	}
@@ -475,77 +398,63 @@ func_A43D(param_00,param_01,param_02,param_03,param_04)
 	var_06 = -1;
 	var_05 = 2400;
 	var_07 = 2400;
-	for(var_08 = 0;var_08 < param_01.size;var_08++)
-	{
+	for(var_08 = 0;var_08 < param_01.size;var_08++) {
 		var_09 = vectornormalize(param_01[var_08].origin - param_02);
 		var_0A = vectordot(param_03,var_09);
-		if(var_0A < 0.923)
-		{
+		if(var_0A < 0.923) {
 			continue;
 		}
 
 		var_0B = distance(param_02,param_01[var_08].origin);
-		if(var_0B < 2500)
-		{
+		if(var_0B < 2500) {
 			var_0B = 2500;
 		}
 
-		if(var_0B - 30 < var_05)
-		{
+		if(var_0B - 30 < var_05) {
 			var_05 = var_0B - 30;
 		}
 
-		if(var_0B + 30 > var_06)
-		{
+		if(var_0B + 30 > var_06) {
 			var_06 = var_0B + 30;
 		}
 	}
 
-	if(var_05 > var_06)
-	{
+	if(var_05 > var_06) {
 		var_05 = 2400;
 		var_06 = 3000;
 	}
 	else
 	{
-		if(var_05 < 50)
-		{
+		if(var_05 < 50) {
 			var_05 = 50;
 		}
 
-		if(var_06 > 2500)
-		{
+		if(var_06 > 2500) {
 			var_06 = 2500;
 		}
-		else if(var_06 < 1000)
-		{
+		else if(var_06 < 1000) {
 			var_06 = 1000;
 		}
 	}
 
 	var_0C = distance(param_02,param_00["position"]);
-	if(var_0C < 2500)
-	{
+	if(var_0C < 2500) {
 		var_0C = 2500;
 	}
 
-	if(var_05 > var_0C)
-	{
+	if(var_05 > var_0C) {
 		var_05 = var_0C - 30;
 	}
 
-	if(var_05 < 1)
-	{
+	if(var_05 < 1) {
 		var_05 = 1;
 	}
 
-	if(var_06 < var_0C)
-	{
+	if(var_06 < var_0C) {
 		var_06 = var_0C;
 	}
 
-	if(var_07 >= var_05)
-	{
+	if(var_07 >= var_05) {
 		var_07 = var_05 - 1;
 	}
 
@@ -555,26 +464,20 @@ func_A43D(param_00,param_01,param_02,param_03,param_04)
 	func_583E(var_07,var_05,var_0E,var_06,var_0D,var_0F,param_04);
 }
 
-//Function Number: 18
-func_584E()
-{
-	for(;;)
-	{
+func_584E() {
+	for(;;) {
 		scripts\engine\utility::waitframe();
-		if(level.var_ABE6)
-		{
+		if(level.var_ABE6) {
 			continue;
 		}
 
-		if(!getdvarint("scr_dof_enable"))
-		{
+		if(!getdvarint("scr_dof_enable")) {
 			continue;
 		}
 
 		func_5845();
 		func_5839();
-		if(isdefined(self _meth_8473()))
-		{
+		if(isdefined(self _meth_8473())) {
 			func_583A("results","current");
 		}
 
@@ -588,12 +491,9 @@ func_584E()
 	}
 }
 
-//Function Number: 19
-func_11715()
-{
+func_11715() {
 	var_00 = getdvar("r_tessellation");
-	if(var_00 == "")
-	{
+	if(var_00 == "") {
 		return;
 	}
 
@@ -605,30 +505,23 @@ func_11715()
 	level.var_11714.time_remaining = 0;
 	function_01C5("r_tessellationCutoffDistance",level.var_11714.var_4CA5);
 	function_01C5("r_tessellationCutoffFalloff",level.var_11714.var_4CA7);
-	foreach(var_02 in level.players)
-	{
+	foreach(var_02 in level.players) {
 		var_02 thread func_11717();
 	}
 }
 
-//Function Number: 20
-func_11716(param_00,param_01,param_02)
-{
+func_11716(param_00,param_01,param_02) {
 	level.var_11714.var_4CA6 = param_00;
 	level.var_11714.var_4CA8 = param_01;
 	level.var_11714.time_remaining = param_02;
 }
 
-//Function Number: 21
-func_11717()
-{
-	for(;;)
-	{
+func_11717() {
+	for(;;) {
 		var_00 = level.var_11714.var_4CA5;
 		var_01 = level.var_11714.var_4CA7;
 		scripts\engine\utility::waitframe();
-		if(level.var_11714.time_remaining > 0)
-		{
+		if(level.var_11714.time_remaining > 0) {
 			var_02 = level.var_11714.time_remaining * 20;
 			var_03 = level.var_11714.var_4CA6 - level.var_11714.var_4CA5 / var_02;
 			var_04 = level.var_11714.var_4CA8 - level.var_11714.var_4CA7 / var_02;
@@ -642,23 +535,18 @@ func_11717()
 			level.var_11714.var_4CA7 = level.var_11714.var_4CA8;
 		}
 
-		if(var_00 != level.var_11714.var_4CA5)
-		{
+		if(var_00 != level.var_11714.var_4CA5) {
 			function_01C5("r_tessellationCutoffDistance",level.var_11714.var_4CA5);
 		}
 
-		if(var_01 != level.var_11714.var_4CA7)
-		{
+		if(var_01 != level.var_11714.var_4CA7) {
 			function_01C5("r_tessellationCutoffFalloff",level.var_11714.var_4CA7);
 		}
 	}
 }
 
-//Function Number: 22
-func_1121E(param_00,param_01)
-{
-	if(!isdefined(level.var_11220[param_00]))
-	{
+func_1121E(param_00,param_01) {
+	if(!isdefined(level.var_11220[param_00])) {
 		return;
 	}
 
@@ -670,8 +558,7 @@ func_1121E(param_00,param_01)
 	var_05 = gettime() - var_02;
 	var_06 = level.var_11220[param_00].weaponisauto;
 	level.var_4BC4 = param_00;
-	while(var_05 < var_03)
-	{
+	while(var_05 < var_03) {
 		var_06 = level.var_11220[param_00].weaponisauto;
 		var_07 = min(float(var_05 / var_03),1);
 		var_08 = var_04 + var_06 - var_04 * var_07;
@@ -685,11 +572,8 @@ func_1121E(param_00,param_01)
 	function_01C9(var_06);
 }
 
-//Function Number: 23
-func_F5FD(param_00)
-{
-	switch(param_00)
-	{
+func_F5FD(param_00) {
+	switch(param_00) {
 		case 1:
 			function_01C5("r_veilFalloffWeight1","1 0.95 0.75");
 			function_01C5("r_veilFalloffWeight2","0.25 0.875 0.02");

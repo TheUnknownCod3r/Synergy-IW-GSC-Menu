@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: 3655.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 6
- * Decompile Time: 19 ms
- * Timestamp: 10/27/2023 12:31:00 AM
-*******************************************************************/
+/****************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\3655.gsc
+****************************/
 
-//Function Number: 1
-func_4D8A()
-{
+func_4D8A() {
 	self.var_4D8B = 1;
 	thread func_11ABF();
 	self notifyonplayercommand("jump","+gostand");
@@ -20,17 +14,14 @@ func_4D8A()
 	var_00.angles = (0,0,0);
 	self getwholescenedurationmin(var_00);
 	thread func_A4D9();
-	while(lib_0E4F::func_9C7B())
-	{
-		while(level.player _meth_8439() || level.player _meth_843B() || level.player gettimeremainingpercentage())
-		{
+	while(lib_0E4F::func_9C7B()) {
+		while(level.player _meth_8439() || level.player _meth_843B() || level.player gettimeremainingpercentage()) {
 			wait(0.05);
 		}
 
 		self waittill("juke");
 		var_01 = self getnormalizedmovement();
-		if(self adsbuttonpressed() || self getstance() == "prone")
-		{
+		if(self adsbuttonpressed() || self getstance() == "prone") {
 			continue;
 		}
 
@@ -47,8 +38,7 @@ func_4D8A()
 		var_06 = undefined;
 		var_07 = undefined;
 		var_08 = 0;
-		if(self _meth_843B())
-		{
+		if(self _meth_843B()) {
 			var_01 = var_05 * -1;
 			var_09 = 0.1;
 			var_0A = 0.1;
@@ -58,8 +48,7 @@ func_4D8A()
 			var_0E = 3000;
 			var_08 = 1;
 		}
-		else if(self gettimeremainingpercentage())
-		{
+		else if(self gettimeremainingpercentage()) {
 			var_01 = var_05;
 			var_09 = 0.1;
 			var_0A = 0.1;
@@ -69,8 +58,7 @@ func_4D8A()
 			var_0E = 3000;
 			var_08 = 1;
 		}
-		else if(var_01[0] > 0.7)
-		{
+		else if(var_01[0] > 0.7) {
 			var_09 = 0.1;
 			var_0A = 0.1;
 			var_0B = 0.1;
@@ -88,20 +76,17 @@ func_4D8A()
 			var_0E = 20000;
 		}
 
-		if(var_08 == 1)
-		{
+		if(var_08 == 1) {
 			var_07 = var_01;
 		}
 		else
 		{
 			var_06 = 125;
-			if(var_02["fraction"] > 0.3)
-			{
+			if(var_02["fraction"] > 0.3) {
 				var_0F = self getplayerangles() - vectortoangles(var_01);
 				var_0F = (min(0,var_0F[0]),var_0F[1],var_0F[2]);
 				var_07 = anglestoforward(var_0F) * var_04 * min(1,length(var_01));
-				if(isdefined(self.var_5AD4))
-				{
+				if(isdefined(self.var_5AD4)) {
 					var_07 = var_07 * 1.2;
 				}
 
@@ -119,8 +104,7 @@ func_4D8A()
 
 		earthquake(var_0A,var_09 * 0.5,self.origin,512);
 		self setstance("stand");
-		if(func_9C57())
-		{
+		if(func_9C57()) {
 			self playerlinkto(var_03,"tag_origin",1);
 			earthquake(0.2,0.3,self.origin,256);
 		}
@@ -130,22 +114,19 @@ func_4D8A()
 			level notify("player_SwimWaterCurrent_lerp_savedDvar");
 			var_07 = vectornormalize(var_07);
 			function_01C5("player_SwimWaterCurrent",var_07 * var_0E);
-			if(var_08 != 1)
-			{
+			if(var_08 != 1) {
 				thread func_118C4(var_00,var_07);
 			}
 		}
 
 		wait(var_09);
 		var_10 = self getlinkedparent();
-		if(isdefined(var_10) && var_10 == var_03)
-		{
+		if(isdefined(var_10) && var_10 == var_03) {
 			self setvelocity(var_07 + (0,0,50));
 			self unlink();
 		}
 
-		if(func_9C57())
-		{
+		if(func_9C57()) {
 			thread scripts\sp\_utility::play_sound_on_entity("land");
 			self _meth_80A6();
 		}
@@ -158,8 +139,7 @@ func_4D8A()
 		self allowads(1);
 		thread scripts\sp\_utility::func_D2CD(100,var_0D);
 		thread lib_0E48::func_C144();
-		if(func_9C57())
-		{
+		if(func_9C57()) {
 			self waittill("landed_on_ground");
 		}
 
@@ -168,9 +148,7 @@ func_4D8A()
 	}
 }
 
-//Function Number: 2
-func_AB9C(param_00,param_01,param_02)
-{
+func_AB9C(param_00,param_01,param_02) {
 	var_03 = getdvarvector(param_00);
 	var_04 = var_03;
 	level notify(param_00 + "_lerp_savedDvar");
@@ -178,8 +156,7 @@ func_AB9C(param_00,param_01,param_02)
 	var_05 = 0;
 	var_06 = param_01 - var_03;
 	var_07 = 0.05 / param_02;
-	while(var_05 < 1)
-	{
+	while(var_05 < 1) {
 		var_04 = var_03 + var_05 * var_06;
 		function_01C5(param_00,var_04);
 		var_05 = var_05 + var_07;
@@ -189,19 +166,14 @@ func_AB9C(param_00,param_01,param_02)
 	function_01C5(param_00,param_01);
 }
 
-//Function Number: 3
-func_11ABF()
-{
+func_11ABF() {
 	self notify("track_sprint_button");
 	self endon("track_sprint_button");
-	while(level.player scripts\sp\_utility::func_65DB("player_gravity_off"))
-	{
+	while(level.player scripts\sp\_utility::func_65DB("player_gravity_off")) {
 		var_00 = self getnormalizedmovement();
 		var_01 = length(var_00);
-		if((self buttonpressed("BUTTON_LSTICK") && var_01 > 0.3) || self _meth_843B() || self gettimeremainingpercentage())
-		{
-			if(self.var_4D8B)
-			{
+		if((self buttonpressed("BUTTON_LSTICK") && var_01 > 0.3) || self _meth_843B() || self gettimeremainingpercentage()) {
+			if(self.var_4D8B) {
 				self notify("juke");
 			}
 		}
@@ -210,16 +182,11 @@ func_11ABF()
 	}
 }
 
-//Function Number: 4
-func_A4D9()
-{
-	while(level.player scripts\sp\_utility::func_65DB("player_gravity_off"))
-	{
+func_A4D9() {
+	while(level.player scripts\sp\_utility::func_65DB("player_gravity_off")) {
 		self waittill("jump");
-		if(self buttonpressed("BUTTON_LSTICK"))
-		{
-			while(self buttonpressed("BUTTON_LSTICK"))
-			{
+		if(self buttonpressed("BUTTON_LSTICK")) {
+			while(self buttonpressed("BUTTON_LSTICK")) {
 				self notify("track_sprint_button");
 				scripts\engine\utility::waitframe();
 			}
@@ -229,9 +196,7 @@ func_A4D9()
 	}
 }
 
-//Function Number: 5
-func_118C4(param_00,param_01)
-{
+func_118C4(param_00,param_01) {
 	var_02 = param_01;
 	var_03 = anglestoright(self.angles);
 	var_04 = var_02 - 2 * var_03 * vectordot(var_02,var_03);
@@ -247,8 +212,6 @@ func_118C4(param_00,param_01)
 	param_00 waittill("rotatedone");
 }
 
-//Function Number: 6
-func_9C57()
-{
+func_9C57() {
 	return !isdefined(self.isent) || !self.isent.var_6F43;
 }

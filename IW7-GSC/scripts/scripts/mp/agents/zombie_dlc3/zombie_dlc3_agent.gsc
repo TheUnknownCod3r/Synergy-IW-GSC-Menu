@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\mp\agents\zombie_dlc3\zombie_dlc3_agent.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 11
- * Decompile Time: 576 ms
- * Timestamp: 10/27/2023 12:11:28 AM
-*******************************************************************/
+/***********************************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\mp\agents\zombie_dlc3\zombie_dlc3_agent.gsc
+***********************************************************************/
 
-//Function Number: 1
-registerscriptedagent()
-{
+registerscriptedagent() {
 	scripts/aitypes/bt_util::init();
 	behaviortree\zombie_dlc3::func_DEE8();
 	scripts\asm\zombie_dlc3\mp\states::func_2371();
@@ -35,18 +29,13 @@ registerscriptedagent()
 	thread scripts\mp\agents\zombie\zmb_zombie_agent::func_BC5C();
 }
 
-//Function Number: 2
-zombieinit_dlc()
-{
+zombieinit_dlc() {
 	scripts/asm/zombie/zombie::func_13F9A();
 }
 
-//Function Number: 3
-func_FAB0()
-{
+func_FAB0() {
 	level endon("game_ended");
-	if(!isdefined(level.agent_definition))
-	{
+	if(!isdefined(level.agent_definition)) {
 		level waittill("scripted_agents_initialized");
 	}
 
@@ -61,19 +50,14 @@ func_FAB0()
 	level.soldier_models = ["zombie_dlc3_male_soldier_02","zombie_dlc3_male_soldier_03","zombie_dlc3_male_soldier_04"];
 }
 
-//Function Number: 4
-setupagent()
-{
+setupagent() {
 	scripts\mp\agents\zombie\zmb_zombie_agent::setupagent();
 	self.kung_fu_punched = 0;
 	self.pinched = undefined;
 }
 
-//Function Number: 5
-func_FACE(param_00)
-{
-	if(should_be_soldier())
-	{
+func_FACE(param_00) {
+	if(should_be_soldier()) {
 		self.is_soldier = 1;
 		self.dontmutilate = 1;
 		setup_solider_model();
@@ -84,52 +68,38 @@ func_FACE(param_00)
 	scripts\mp\agents\zombie\zmb_zombie_agent::func_FACE();
 }
 
-//Function Number: 6
-should_be_soldier()
-{
-	if(level.wave_num < 5)
-	{
+should_be_soldier() {
+	if(level.wave_num < 5) {
 		return 0;
 	}
 
 	var_00 = randomint(100);
-	if(var_00 < 15)
-	{
+	if(var_00 < 15) {
 		return 1;
 	}
 
 	return 0;
 }
 
-//Function Number: 7
-setup_solider_model()
-{
+setup_solider_model() {
 	var_00 = randomint(level.soldier_models.size);
 	var_01 = level.soldier_models[var_00];
 	self setmodel(var_01);
 	thread scripts\mp\agents\zombie\zmb_zombie_agent::func_50EF();
 }
 
-//Function Number: 8
-dopiranhatrapdeath()
-{
+dopiranhatrapdeath() {
 	scripts/asm/asm::asm_setstate("piranha_trap");
 }
 
-//Function Number: 9
-onzombiedamagefinished(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08,param_09,param_0A,param_0B,param_0C)
-{
+onzombiedamagefinished(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08,param_09,param_0A,param_0B,param_0C) {
 	scripts\mp\agents\zombie\zmb_zombie_agent::onzombiedamagefinished(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08,param_09,param_0A,param_0B,param_0C);
 }
 
-//Function Number: 10
-onzombiekilled(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08)
-{
+onzombiekilled(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08) {
 	scripts\mp\agents\zombie\zmb_zombie_agent::onzombiekilled(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08);
 }
 
-//Function Number: 11
-func_C4BD(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08,param_09)
-{
+func_C4BD(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08,param_09) {
 	scripts\mp\agents\zombie\zmb_zombie_agent::func_C4BD(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08,param_09);
 }

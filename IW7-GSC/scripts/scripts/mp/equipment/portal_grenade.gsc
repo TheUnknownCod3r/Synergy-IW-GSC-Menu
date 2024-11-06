@@ -1,26 +1,17 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: 3579.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 10
- * Decompile Time: 3 ms
- * Timestamp: 10/27/2023 12:30:47 AM
-*******************************************************************/
+/***********************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\mp\equipment\portal_grenade.gsc
+***********************************************************/
 
-//Function Number: 1
-init()
-{
+init() {
 	level.var_D690 = loadfx("vfx/iw7/_requests/mp/vfx_impulse_grenade_start");
 	level.var_D68D = loadfx("vfx/iw7/_requests/mp/vfx_impulse_gren_exp");
 }
 
-//Function Number: 2
-func_D691(param_00)
-{
+func_D691(param_00) {
 	param_00 endon("death");
-	if(!isdefined(param_00))
-	{
+	if(!isdefined(param_00)) {
 		return;
 	}
 
@@ -32,12 +23,9 @@ func_D691(param_00)
 	param_00 delete();
 }
 
-//Function Number: 3
-func_D68E(param_00,param_01)
-{
+func_D68E(param_00,param_01) {
 	self endon("disconnect");
-	if(scripts\mp\_utility::func_9EF0(self) || !isplayer(self))
-	{
+	if(scripts\mp\_utility::func_9EF0(self) || !isplayer(self)) {
 		return;
 	}
 
@@ -48,8 +36,7 @@ func_D68E(param_00,param_01)
 	var_05 = scripts\common\trace::player_trace(self.origin,var_02,self.angles,self,var_04);
 	var_06 = self.origin;
 	self.var_115FC = 1;
-	if(var_05["fraction"] < 1)
-	{
+	if(var_05["fraction"] < 1) {
 		var_02 = var_05["position"] - (0,0,65);
 		func_11663(var_02);
 		wait(0.05);
@@ -75,24 +62,19 @@ func_D68E(param_00,param_01)
 	self.var_115FD = param_01;
 }
 
-//Function Number: 4
-func_13AF8(param_00)
-{
+func_13AF8(param_00) {
 	self endon("portalGrenadeSave");
 	self endon("disconnect");
 	self endon("death");
 	level endon("game_ended");
 	self waittill("collided",var_01,var_02,var_03,var_04,var_05);
-	if(var_05 == "hittype_entity")
-	{
+	if(var_05 == "hittype_entity") {
 		radiusdamage(self.origin + (0,0,32),128,400,400,param_00,"MOD_EXPLOSIVE","portal_grenade_mp");
 		func_468B(self,self.origin + (0,0,32));
 	}
 }
 
-//Function Number: 5
-func_4E75()
-{
+func_4E75() {
 	self endon("portalGrenadeSave");
 	self endon("disconnect");
 	level endon("game_ended");
@@ -104,15 +86,12 @@ func_4E75()
 	self.var_115FE = undefined;
 }
 
-//Function Number: 6
-func_13B31()
-{
+func_13B31() {
 	level endon("game_ended");
 	self endon("death");
 	self endon("disconnect");
 	scripts\engine\utility::waittill_any_3("phase_shift_power_activated","rewind_power_finished","powers_teleport_used","orbital_deployment_complete","phase_slash_entered","transponder_teleportPlayer");
-	while(!self isonground())
-	{
+	while(!self isonground()) {
 		wait(0.05);
 	}
 
@@ -125,15 +104,12 @@ func_13B31()
 	self.var_115FE = undefined;
 }
 
-//Function Number: 7
-func_13EF3()
-{
+func_13EF3() {
 	level endon("game_ended");
 	self endon("death");
 	self endon("portalGrenadeSave");
 	self endon("disconnect");
-	for(;;)
-	{
+	for(;;) {
 		var_00 = self getvelocity();
 		var_00 = var_00 * (0,0,1);
 		self setvelocity(var_00);
@@ -141,16 +117,13 @@ func_13EF3()
 	}
 }
 
-//Function Number: 8
-func_468B(param_00,param_01)
-{
+func_468B(param_00,param_01) {
 	level endon("game_ended");
 	self endon("disconnect");
 	param_00 endon("diconnect");
 	wait(0.05);
 	var_02 = param_00 _meth_8113();
-	if(!isdefined(var_02))
-	{
+	if(!isdefined(var_02)) {
 		return;
 	}
 
@@ -160,42 +133,35 @@ func_468B(param_00,param_01)
 	param_00 thread scripts\mp\_utility::func_13AF(var_03,64,400,400,param_00,"MOD_EXPLOSIVE","portal_grenade_mp",0);
 	wait(0.1);
 	playfx(level._effect["corpse_pop"],var_03 + (0,0,12));
-	if(isdefined(var_02))
-	{
+	if(isdefined(var_02)) {
 		var_02 hide();
 		var_02.permanentcustommovetransition = 1;
 	}
 }
 
-//Function Number: 9
-func_11663(param_00)
-{
+func_11663(param_00) {
 	self endon("death");
 	self endon("disconnect");
-	if(!isdefined(param_00))
-	{
+	if(!isdefined(param_00)) {
 		return 0;
 	}
 
 	self playlocalsound("ftl_teleport");
 	self playsound("ftl_teleport_npc_out");
-	if(self ismantling())
-	{
+	if(self ismantling()) {
 		self cancelmantle();
 	}
 
 	var_01 = length2dsquared(self getentityvelocity());
 	var_02 = (0,0,0);
 	var_03 = param_00 - self.origin;
-	if(var_01 > 0)
-	{
+	if(var_01 > 0) {
 		var_02 = var_03 * sqrt(var_01) / length(var_03);
 	}
 
 	thread func_E852(self.origin,var_03);
 	scripts\engine\utility::waitframe();
-	if(!isdefined(self))
-	{
+	if(!isdefined(self)) {
 		return 0;
 	}
 
@@ -217,8 +183,7 @@ func_11663(param_00)
 	self setclientdvar("cg_fovScale",1);
 	scripts\engine\utility::waitframe();
 	self playanimscriptevent("power_exit","teleport");
-	if(!isdefined(self))
-	{
+	if(!isdefined(self)) {
 		return 0;
 	}
 
@@ -227,9 +192,7 @@ func_11663(param_00)
 	return 1;
 }
 
-//Function Number: 10
-func_E852(param_00,param_01)
-{
+func_E852(param_00,param_01) {
 	param_00 = param_00 + (0,0,50);
 	var_02 = param_00 + param_01;
 	var_03 = spawn("script_model",param_00);

@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: 3650.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 20
- * Decompile Time: 12 ms
- * Timestamp: 10/27/2023 12:30:59 AM
-*******************************************************************/
+/****************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\3650.gsc
+****************************/
 
-//Function Number: 1
-init()
-{
+init() {
 	level.perksetfuncs = [];
 	level.perkunsetfuncs = [];
 	level.player.perks = [];
@@ -108,49 +102,32 @@ init()
 	func_98B0();
 }
 
-//Function Number: 2
-func_98B0()
-{
-}
+func_98B0() {}
 
-//Function Number: 3
-giveperks(param_00)
-{
-	foreach(var_02 in param_00)
-	{
+giveperks(param_00) {
+	foreach(var_02 in param_00) {
 		giveperk(var_02);
 	}
 }
 
-//Function Number: 4
-giveperk(param_00)
-{
+giveperk(param_00) {
 	_setperk(param_00);
 }
 
-//Function Number: 5
-removeperk(param_00)
-{
+removeperk(param_00) {
 	_unsetperk(param_00);
 }
 
-//Function Number: 6
-takeallweapons(param_00)
-{
-	foreach(var_02 in param_00)
-	{
+takeallweapons(param_00) {
+	foreach(var_02 in param_00) {
 		switchtoweaponimmediate(var_02);
 	}
 }
 
-//Function Number: 7
-switchtoweaponimmediate(param_00)
-{
-	if(isdefined(level.var_12F75[param_00]))
-	{
+switchtoweaponimmediate(param_00) {
+	if(isdefined(level.var_12F75[param_00])) {
 		var_01 = level.var_12F75[param_00];
-		while(_hasperk(var_01))
-		{
+		while(_hasperk(var_01)) {
 			_unsetperk(var_01);
 		}
 	}
@@ -158,17 +135,12 @@ switchtoweaponimmediate(param_00)
 	_setperk(param_00);
 }
 
-//Function Number: 8
-func_E187(param_00)
-{
+func_E187(param_00) {
 	_unsetperk(param_00);
 }
 
-//Function Number: 9
-_setperk(param_00)
-{
-	if(!isdefined(self.perks[param_00]))
-	{
+_setperk(param_00) {
+	if(!isdefined(self.perks[param_00])) {
 		self.perks[param_00] = 1;
 	}
 	else
@@ -176,37 +148,28 @@ _setperk(param_00)
 		self.perks[param_00]++;
 	}
 
-	if(self.perks[param_00] == 1 && !isdefined(self.perksblocked[param_00]))
-	{
+	if(self.perks[param_00] == 1 && !isdefined(self.perksblocked[param_00])) {
 		func_13D2(param_00);
 	}
 }
 
-//Function Number: 10
-func_13D2(param_00)
-{
+func_13D2(param_00) {
 	var_01 = level.perksetfuncs[param_00];
-	if(isdefined(var_01))
-	{
-		self thread [[ var_01 ]]();
+	if(isdefined(var_01)) {
+		self thread [[var_01]]();
 	}
 
 	self setperk(param_00,!isdefined(level.scriptperks[param_00]));
 }
 
-//Function Number: 11
-_unsetperk(param_00)
-{
-	if(!isdefined(self.perks[param_00]))
-	{
+_unsetperk(param_00) {
+	if(!isdefined(self.perks[param_00])) {
 		return;
 	}
 
 	self.perks[param_00]--;
-	if(self.perks[param_00] == 0)
-	{
-		if(!isdefined(self.perksblocked[param_00]))
-		{
+	if(self.perks[param_00] == 0) {
+		if(!isdefined(self.perksblocked[param_00])) {
 			func_1431(param_00);
 		}
 
@@ -214,34 +177,24 @@ _unsetperk(param_00)
 	}
 }
 
-//Function Number: 12
-func_1431(param_00)
-{
-	if(isdefined(level.perkunsetfuncs[param_00]))
-	{
-		self thread [[ level.perkunsetfuncs[param_00] ]]();
+func_1431(param_00) {
+	if(isdefined(level.perkunsetfuncs[param_00])) {
+		self thread [[level.perkunsetfuncs[param_00]]]();
 	}
 }
 
-//Function Number: 13
-_hasperk(param_00)
-{
+_hasperk(param_00) {
 	return isdefined(self.perks) && isdefined(self.perks[param_00]);
 }
 
-//Function Number: 14
-_clearperks()
-{
-	foreach(var_02, var_01 in self.perks)
-	{
-		if(func_12F9(var_02))
-		{
+_clearperks() {
+	foreach(var_02, var_01 in self.perks) {
+		if(func_12F9(var_02)) {
 			continue;
 		}
 
-		if(isdefined(level.perkunsetfuncs[var_02]))
-		{
-			self [[ level.perkunsetfuncs[var_02] ]]();
+		if(isdefined(level.perkunsetfuncs[var_02])) {
+			self [[level.perkunsetfuncs[var_02]]]();
 		}
 
 		self.perks[var_02] = undefined;
@@ -250,19 +203,14 @@ _clearperks()
 	self.perksblocked = [];
 }
 
-//Function Number: 15
-func_11AB()
-{
-	foreach(var_02, var_01 in self.perks)
-	{
-		if(!func_12F9(var_02))
-		{
+func_11AB() {
+	foreach(var_02, var_01 in self.perks) {
+		if(!func_12F9(var_02)) {
 			continue;
 		}
 
-		if(isdefined(level.perkunsetfuncs[var_02]))
-		{
-			self [[ level.perkunsetfuncs[var_02] ]]();
+		if(isdefined(level.perkunsetfuncs[var_02])) {
+			self [[level.perkunsetfuncs[var_02]]]();
 		}
 
 		self.perks[var_02] = undefined;
@@ -271,34 +219,24 @@ func_11AB()
 	self.perksblocked = [];
 }
 
-//Function Number: 16
-func_12F9(param_00)
-{
-	if(scripts\engine\utility::array_contains(level.var_12F79,param_00))
-	{
+func_12F9(param_00) {
+	if(scripts\engine\utility::array_contains(level.var_12F79,param_00)) {
 		return 1;
 	}
 
 	return 0;
 }
 
-//Function Number: 17
-cameraunlink(param_00)
-{
+cameraunlink(param_00) {
 	return tablelookup("sp/perkTable.csv",1,param_00,3);
 }
 
-//Function Number: 18
-cancelmantle(param_00)
-{
+cancelmantle(param_00) {
 	return tablelookupistring("sp/perkTable.csv",1,param_00,2);
 }
 
-//Function Number: 19
-blockperkfunction(param_00)
-{
-	if(!isdefined(self.perksblocked[param_00]))
-	{
+blockperkfunction(param_00) {
+	if(!isdefined(self.perksblocked[param_00])) {
 		self.perksblocked[param_00] = 1;
 	}
 	else
@@ -306,21 +244,16 @@ blockperkfunction(param_00)
 		self.perksblocked[param_00]++;
 	}
 
-	if(self.perksblocked[param_00] == 1 && _hasperk(param_00))
-	{
+	if(self.perksblocked[param_00] == 1 && _hasperk(param_00)) {
 		func_1431(param_00);
 	}
 }
 
-//Function Number: 20
-unblockperkfunction(param_00)
-{
+unblockperkfunction(param_00) {
 	self.perksblocked[param_00]--;
-	if(self.perksblocked[param_00] == 0)
-	{
+	if(self.perksblocked[param_00] == 0) {
 		self.perksblocked[param_00] = undefined;
-		if(_hasperk(param_00))
-		{
+		if(_hasperk(param_00)) {
 			func_13D2(param_00);
 		}
 	}

@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: 4327.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 1
- * Decompile Time: 249 ms
- * Timestamp: 10/27/2023 12:32:05 AM
-*******************************************************************/
+/****************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\4327.gsc
+****************************/
 
-//Function Number: 1
-main()
-{
+main() {
 	var_00 = scripts\engine\utility::createoneshoteffect("vfx_flurries_parkour");
 	var_00 scripts\common\createfx::set_origin_and_angles((235.127,3720.52,409.649),(0,171,0));
 	var_00.v["fxid"] = "vfx_flurries_parkour";

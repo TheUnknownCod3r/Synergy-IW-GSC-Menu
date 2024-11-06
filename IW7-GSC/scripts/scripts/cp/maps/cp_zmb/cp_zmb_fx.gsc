@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\cp\maps\cp_zmb\cp_zmb_fx.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 1
- * Decompile Time: 50 ms
- * Timestamp: 10/27/2023 12:31:16 AM
-*******************************************************************/
+/********************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\cp\maps\cp_zmb\cp_zmb_fx.gsc
+********************************************************/
 
-//Function Number: 1
-main()
-{
+main() {
 	level._effect["vfx_blood_throw"] = loadfx("vfx/iw7/levels/cp_zmb/willard/vfx_blood_throw.vfx");
 	level._effect["vfx_blood_cut"] = loadfx("vfx/iw7/levels/cp_zmb/willard/vfx_blood_cut.vfx");
 	level._effect["vfx_zmb_gns_ghost_float_arms"] = loadfx("vfx/iw7/core/zombie/ghosts_n_skulls/vfx_zmb_ghost_arms.vfx");

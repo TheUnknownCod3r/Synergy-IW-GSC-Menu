@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\mp\maps\mp_frontier\mp_frontier.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 25
- * Decompile Time: 1316 ms
- * Timestamp: 10/27/2023 12:13:36 AM
-*******************************************************************/
+/***************************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\mp\maps\mp_frontier\mp_frontier.gsc
+***************************************************************/
 
-//Function Number: 1
-main()
-{
+main() {
 	lib_0FAD::main();
 	scripts\mp\maps\mp_frontier\gen\mp_frontier_art::main();
 	lib_0FAC::main();
@@ -40,9 +34,7 @@ main()
 	runmodespecifictriggers();
 }
 
-//Function Number: 2
-fix_collision()
-{
+fix_collision() {
 	var_00 = spawn("script_model",(-256,-1336,745));
 	var_00.angles = (0,0,-90);
 	var_00 setmodel("beacon_metal_panel_wall_quad_mp_frontier_patch");
@@ -72,24 +64,17 @@ fix_collision()
 	var_09 setmodel("building_support_steel_beam_04_mp_frontier_patch");
 }
 
-//Function Number: 3
-kill_trigger_loop(param_00)
-{
-	for(;;)
-	{
+kill_trigger_loop(param_00) {
+	for(;;) {
 		self waittill("trigger",var_01);
-		if(isdefined(var_01) && isdefined(var_01.classname) && var_01.classname == param_00)
-		{
-			if(isdefined(var_01.var_110EA))
-			{
-				if(var_01.var_110EA == "minijackal")
-				{
+		if(isdefined(var_01) && isdefined(var_01.classname) && var_01.classname == param_00) {
+			if(isdefined(var_01.var_110EA)) {
+				if(var_01.var_110EA == "minijackal") {
 					var_01 notify("minijackal_end");
 					continue;
 				}
 
-				if(var_01.var_110EA == "venom")
-				{
+				if(var_01.var_110EA == "venom") {
 					var_01 notify("venom_end",var_01.origin);
 				}
 			}
@@ -97,24 +82,18 @@ kill_trigger_loop(param_00)
 	}
 }
 
-//Function Number: 4
-func_1F01()
-{
+func_1F01() {
 	precachempanim("machinery_floor_panel_popup_01_raise");
 }
 
-//Function Number: 5
-func_E837()
-{
+func_E837() {
 	wait(5);
 	thread func_E836();
 	thread func_E834();
 	thread func_E835();
 }
 
-//Function Number: 6
-func_A3FF()
-{
+func_A3FF() {
 	level endon("game_ended");
 	var_00 = func_A402("jackal01");
 	var_01 = func_A402("jackal02");
@@ -124,8 +103,7 @@ func_A3FF()
 	var_01.angles = var_01.var_6106.angles;
 	var_01 func_A403();
 	var_00 func_A3FE();
-	for(;;)
-	{
+	for(;;) {
 		level notify("elevator_open");
 		wait(0.1);
 		level notify("platform_raise");
@@ -155,9 +133,7 @@ func_A3FF()
 	}
 }
 
-//Function Number: 7
-func_A403()
-{
+func_A403() {
 	playfxontag(scripts\common\utility::getfx("taxiThrust"),self,"tag_thrust_rear_le");
 	playfxontag(scripts\common\utility::getfx("taxiThrust"),self,"tag_thrust_rear_ri");
 	thread func_A252();
@@ -165,11 +141,9 @@ func_A403()
 	self moveto(self.var_BE1B.origin,var_00,2,0);
 	wait(var_00);
 	self.var_BF7A = scripts\common\utility::getstruct(self.var_BE1B.target,"targetname");
-	while(isdefined(self.var_BF7A))
-	{
+	while(isdefined(self.var_BF7A)) {
 		var_00 = abs(distance(self.origin,self.var_BF7A.origin) * 0.01);
-		if(isdefined(self.var_BF7A.target))
-		{
+		if(isdefined(self.var_BF7A.target)) {
 			self moveto(self.var_BF7A.origin,var_00,0,0);
 			self rotateto(self.var_BF7A.angles,var_00,0,0);
 			wait(var_00);
@@ -187,9 +161,7 @@ func_A403()
 	stopfxontag(scripts\common\utility::getfx("taxiThrust"),self,"tag_thrust_rear_ri");
 }
 
-//Function Number: 8
-func_A252()
-{
+func_A252() {
 	self playsoundonmovingent("frontier_jackal_launch_01");
 	wait(12.45);
 	self playsoundonmovingent("frontier_jackal_launch_01b");
@@ -197,9 +169,7 @@ func_A252()
 	self playsoundonmovingent("frontier_jackal_launch_01c");
 }
 
-//Function Number: 9
-func_6F1A()
-{
+func_6F1A() {
 	var_00 = [];
 	var_00[0] = "emt_frontier_control_vo_1";
 	var_00[1] = "emt_frontier_control_vo_2";
@@ -227,12 +197,9 @@ func_6F1A()
 	var_02[1] = spawn("script_origin",(752.399,-1607.05,581.218));
 	var_02[2] = spawn("script_origin",(-665.927,130.851,666.278));
 	wait(1);
-	for(;;)
-	{
-		if(var_01 < var_00.size)
-		{
-			foreach(var_04 in var_02)
-			{
+	for(;;) {
+		if(var_01 < var_00.size) {
+			foreach(var_04 in var_02) {
 				var_04 playsound(var_00[var_01]);
 			}
 
@@ -245,9 +212,7 @@ func_6F1A()
 	}
 }
 
-//Function Number: 10
-func_A3FD()
-{
+func_A3FD() {
 	playfxontag(scripts\common\utility::getfx("takeoffThrust2"),self,"tag_thrust_rear_le");
 	playfxontag(scripts\common\utility::getfx("takeoffThrust2"),self,"tag_thrust_rear_ri");
 	self playsoundonmovingent("frontier_jackal_launch_02");
@@ -265,16 +230,12 @@ func_A3FD()
 	wait(3.5);
 }
 
-//Function Number: 11
-func_A3FE()
-{
+func_A3FE() {
 	self.origin = self.var_2C5.origin;
 	self.angles = self.var_2C5.angles;
 }
 
-//Function Number: 12
-func_A402(param_00)
-{
+func_A402(param_00) {
 	var_01 = getent(param_00,"targetname");
 	var_01.var_2C5 = scripts\common\utility::getstruct("jackal_startPos","targetname");
 	var_01.var_BE12 = getent(param_00 + "_col","targetname");
@@ -291,9 +252,7 @@ func_A402(param_00)
 	return var_01;
 }
 
-//Function Number: 13
-func_A401()
-{
+func_A401() {
 	var_00["platform"] = getent("elevator_platform","targetname");
 	var_01 = scripts\common\utility::getstruct("elevatorBot","targetname");
 	var_02 = scripts\common\utility::getstruct("elevatorTop","targetname");
@@ -310,13 +269,10 @@ func_A401()
 	return var_00;
 }
 
-//Function Number: 14
-func_A400()
-{
+func_A400() {
 	level endon("game_ended");
 	self["platform"] thread func_BCB8();
-	for(;;)
-	{
+	for(;;) {
 		level waittill("elevator_open");
 		self["door_left"] moveto(self["door_left"].var_C630,2,0.5,0.5);
 		self["door_right"] moveto(self["door_right"].var_C630,2,0.5,0.5);
@@ -326,15 +282,11 @@ func_A400()
 	}
 }
 
-//Function Number: 15
-func_BCB8()
-{
+func_BCB8() {
 	level endon("game_ended");
-	for(;;)
-	{
+	for(;;) {
 		var_00 = level scripts\common\utility::func_13734("platform_raise","platform_lower");
-		if(var_00 == "platform_raise")
-		{
+		if(var_00 == "platform_raise") {
 			self moveto(self.var_11A06,10,2.5,2.5);
 			continue;
 		}
@@ -343,62 +295,45 @@ func_BCB8()
 	}
 }
 
-//Function Number: 16
-func_CDA4(param_00)
-{
+func_CDA4(param_00) {
 	wait(30);
 	function_030E(param_00);
 }
 
-//Function Number: 17
-func_E834()
-{
+func_E834() {
 	level endon("game_ended");
 	var_00 = getentarray("anim_hydroponics","targetname");
-	foreach(var_02 in var_00)
-	{
+	foreach(var_02 in var_00) {
 		var_02 thread func_1F9A();
 	}
 }
 
-//Function Number: 18
-func_1F9A()
-{
+func_1F9A() {
 	level endon("game_ended");
 	var_00 = 20;
-	for(;;)
-	{
+	for(;;) {
 		self method_8269((0,0,360),var_00,0,0);
 		wait(var_00);
 	}
 }
 
-//Function Number: 19
-func_E835()
-{
+func_E835() {
 	level endon("game_ended");
-	for(var_00 = 0;var_00 <= 3;var_00++)
-	{
+	for(var_00 = 0;var_00 <= 3;var_00++) {
 		var_01[var_00] = getentarray("anim_hydroponic_pots_0" + var_00 + 1,"script_noteworthy");
 		var_02 = [];
-		foreach(var_04 in var_01[var_00])
-		{
-			if(isdefined(var_04.var_336))
-			{
-				if(var_04.var_336 == "cylinder_potted_kale_red" || var_04.var_336 == "cylinder_potted_spinach" || var_04.var_336 == "cylinder_potted_lettuce")
-				{
+		foreach(var_04 in var_01[var_00]) {
+			if(isdefined(var_04.var_336)) {
+				if(var_04.var_336 == "cylinder_potted_kale_red" || var_04.var_336 == "cylinder_potted_spinach" || var_04.var_336 == "cylinder_potted_lettuce") {
 					var_02[var_04.var_336] = var_04;
 					var_02[var_04.var_336] thread func_1F9E();
 				}
 			}
 		}
 
-		foreach(var_07 in var_02)
-		{
-			foreach(var_04 in var_01[var_00])
-			{
-				if(isdefined(var_04.target))
-				{
+		foreach(var_07 in var_02) {
+			foreach(var_04 in var_01[var_00]) {
+				if(isdefined(var_04.target)) {
 					var_04 linkto(var_02[var_04.target]);
 				}
 			}
@@ -406,28 +341,21 @@ func_E835()
 	}
 }
 
-//Function Number: 20
-func_1F9E()
-{
+func_1F9E() {
 	level endon("game_ended");
 	var_00 = 30;
-	for(;;)
-	{
+	for(;;) {
 		self method_8269((0,360,0),var_00,0,0);
 		wait(var_00);
 	}
 }
 
-//Function Number: 21
-func_E836()
-{
+func_E836() {
 	level endon("game_ended");
 	var_00 = getscriptablearray("animating_cover","targetname");
 	var_01 = getent("trig_animating_cover","targetname");
-	foreach(var_03 in var_00)
-	{
-		switch(var_03.script_noteworthy)
-		{
+	foreach(var_03 in var_00) {
+		switch(var_03.script_noteworthy) {
 			case "green":
 			case "red":
 				var_03 thread func_1F9B(var_01);
@@ -440,11 +368,8 @@ func_E836()
 	}
 }
 
-//Function Number: 22
-func_1F9B(param_00)
-{
-	if(isdefined(param_00))
-	{
+func_1F9B(param_00) {
+	if(isdefined(param_00)) {
 		param_00 waittill("trigger");
 	}
 
@@ -452,9 +377,7 @@ func_1F9B(param_00)
 	self setscriptablepartstate("root","raise",0);
 }
 
-//Function Number: 23
-func_BD66()
-{
+func_BD66() {
 	precachemodel("opsmap_solar_system_large");
 	level._effect["vfx_opsmap_3d_planet_sol_large"] = loadfx("vfx/iw7/levels/ship_crib/ops_table/vfx_opsmap_3d_solarsystem_sun_large.vfx");
 	level._effect["vfx_opsmap_3d_planet_mercury_large"] = loadfx("vfx/iw7/levels/ship_crib/ops_table/vfx_opsmap_3d_solarsystem_mercury_large.vfx");
@@ -478,9 +401,7 @@ func_BD66()
 	level._effect["vfx_opsmap_3d_ambient_large"] = loadfx("vfx/iw7/levels/ship_crib/ops_table/vfx_ops_projection_under_glow_02_large.vfx");
 }
 
-//Function Number: 24
-func_10CB4()
-{
+func_10CB4() {
 	var_00 = scripts\common\utility::getstruct("opsmap_org","targetname");
 	var_01 = var_00.origin + (0,0,48);
 	var_02 = spawn("script_model",var_01);
@@ -537,11 +458,8 @@ func_10CB4()
 	playfxontag(scripts\common\utility::getfx("vfx_opsmap_3d_planet_neptune_large"),var_02,"tag_planet_neptune");
 }
 
-//Function Number: 25
-runmodespecifictriggers()
-{
-	if(level.gametype == "ball" || level.gametype == "tdef")
-	{
+runmodespecifictriggers() {
+	if(level.gametype == "ball" || level.gametype == "tdef") {
 		var_00 = spawn("trigger_radius",(48,1848,716),0,75,80);
 		var_00.var_336 = "uplink_nozone";
 		var_00 hide();

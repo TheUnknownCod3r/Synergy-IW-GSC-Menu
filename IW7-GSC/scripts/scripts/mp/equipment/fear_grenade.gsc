@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: 3559.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 28
- * Decompile Time: 6 ms
- * Timestamp: 10/27/2023 12:30:42 AM
-*******************************************************************/
+/*********************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\mp\equipment\fear_grenade.gsc
+*********************************************************/
 
-//Function Number: 1
-init()
-{
+init() {
 	level.var_6BBA = spawnstruct();
 	level.var_6BBA.var_451D = [];
 	level._effect["vfx_haywire_scrn"] = loadfx("vfx/iw7/_requests/mp/vfx_haywire_scrn.vfx");
@@ -28,9 +22,7 @@ init()
 	scripts\mp\_powerloot::func_DF06("power_fearGrenade",["passive_increased_duration","passive_increased_damage","passive_increased_radius"]);
 }
 
-//Function Number: 2
-func_49CF(param_00,param_01,param_02,param_03,param_04)
-{
+func_49CF(param_00,param_01,param_02,param_03,param_04) {
 	var_05 = spawnstruct();
 	var_05.model = param_00;
 	var_05.var_1336D = scripts\engine\utility::getfx(param_01);
@@ -40,26 +32,19 @@ func_49CF(param_00,param_01,param_02,param_03,param_04)
 	level.var_6BBA.var_451D[level.var_6BBA.var_451D.size] = var_05;
 }
 
-//Function Number: 3
-_meth_80BA()
-{
+_meth_80BA() {
 	return level.var_6BBA.var_451D[randomint(level.var_6BBA.var_451D.size)];
 }
 
-//Function Number: 4
-func_6BBC()
-{
+func_6BBC() {
 	self notify("detonateExplosive");
 }
 
-//Function Number: 5
-func_6BBB()
-{
+func_6BBB() {
 	var_00 = self.triggerportableradarping;
 	var_01 = self.origin;
 	playfx(scripts\engine\utility::getfx("fear_mine_vanish"),var_01);
-	if(isdefined(self.var_76CF))
-	{
+	if(isdefined(self.var_76CF)) {
 		self.var_76CF moveto(var_01 + (0,0,72),0.5);
 	}
 
@@ -69,8 +54,7 @@ func_6BBB()
 	var_04 = scripts\mp\_utility::func_108CB(var_00,var_01,"haywire_smoke_friendly","haywire_smoke_enemy",0);
 	var_00 thread func_13A3E(var_03,self.var_76CF);
 	wait(5);
-	foreach(var_06 in var_04)
-	{
+	foreach(var_06 in var_04) {
 		var_06 delete();
 	}
 
@@ -78,54 +62,41 @@ func_6BBB()
 	var_03 delete();
 }
 
-//Function Number: 6
-func_13A3E(param_00,param_01)
-{
+func_13A3E(param_00,param_01) {
 	param_00.triggerportableradarping endon("disconnect");
 	self endon("disconnect");
-	for(;;)
-	{
+	for(;;) {
 		param_00 waittill("trigger",var_02);
-		if(!scripts/mp/equipment/phase_shift::areentitiesinphase(param_00,var_02))
-		{
+		if(!scripts/mp/equipment/phase_shift::areentitiesinphase(param_00,var_02)) {
 			continue;
 		}
 
 		var_03 = func_370F(param_00.triggerportableradarping,var_02);
-		if(var_03.var_13378 > 0)
-		{
+		if(var_03.var_13378 > 0) {
 			var_02 thread func_127C3(var_03.var_13378,param_00.triggerportableradarping,param_01);
 		}
 
-		if(var_03.attackerendzone > 0)
-		{
+		if(var_03.attackerendzone > 0) {
 			param_00.triggerportableradarping thread func_127C3(var_03.attackerendzone,param_00.triggerportableradarping,param_01);
 		}
 	}
 }
 
-//Function Number: 7
-func_370F(param_00,param_01)
-{
+func_370F(param_00,param_01) {
 	var_02 = spawnstruct();
 	var_02.attackerendzone = 0;
 	var_02.var_13378 = 0;
 	var_03 = scripts\mp\_powerloot::func_7FC1("power_fearGrenade",2.5);
-	if(level.teambased && param_00.team == param_01.team && param_00 != param_01)
-	{
-		if(level.friendlyfire == 0)
-		{
+	if(level.teambased && param_00.team == param_01.team && param_00 != param_01) {
+		if(level.friendlyfire == 0) {
 		}
-		else if(level.friendlyfire == 1)
-		{
+		else if(level.friendlyfire == 1) {
 			var_02.var_13378 = var_03;
 		}
-		else if(level.friendlyfire == 2)
-		{
+		else if(level.friendlyfire == 2) {
 			var_02.attackerendzone = var_03;
 		}
-		else if(level.friendlyfire == 3)
-		{
+		else if(level.friendlyfire == 3) {
 			var_02.var_13378 = var_03 * 0.5;
 			var_02.attackerendzone = var_03 * 0.5;
 		}
@@ -138,11 +109,8 @@ func_370F(param_00,param_01)
 	return var_02;
 }
 
-//Function Number: 8
-func_127C3(param_00,param_01,param_02)
-{
-	if(func_9EEA(self))
-	{
+func_127C3(param_00,param_01,param_02) {
+	if(func_9EEA(self)) {
 		func_F703(param_00);
 		return;
 	}
@@ -150,9 +118,7 @@ func_127C3(param_00,param_01,param_02)
 	thread func_2A67(param_00,param_01,param_02);
 }
 
-//Function Number: 9
-func_2A67(param_00,param_01,param_02)
-{
+func_2A67(param_00,param_01,param_02) {
 	self endon("death");
 	self endon("disconnect");
 	self.var_6BB9 = spawnstruct();
@@ -160,12 +126,10 @@ func_2A67(param_00,param_01,param_02)
 	thread func_E84C();
 	var_03 = scripts\mp\_powerloot::func_7FC0("power_fearGrenade",8);
 	self dodamage(var_03,self.origin,param_01,param_02,"MOD_EXPLOSIVE","fear_grenade_mp");
-	for(;;)
-	{
+	for(;;) {
 		var_04 = self.var_6BB9.var_6393 - gettime() / 1000;
 		var_05 = scripts\engine\utility::waittill_any_timeout_1(var_04,"fear_update_duration");
-		if(var_05 == "timeout")
-		{
+		if(var_05 == "timeout") {
 			func_6319();
 			break;
 		}
@@ -176,9 +140,7 @@ func_2A67(param_00,param_01,param_02)
 	}
 }
 
-//Function Number: 10
-func_E84C()
-{
+func_E84C() {
 	self endon("stop_fear_effects");
 	self endon("death");
 	self endon("disconnect");
@@ -192,9 +154,7 @@ func_E84C()
 	childthread func_E854();
 }
 
-//Function Number: 11
-func_6319()
-{
+func_6319() {
 	self notify("stop_fear_effects");
 	scripts\engine\utility::waitframe();
 	func_40F9();
@@ -202,29 +162,21 @@ func_6319()
 	self notify("finished_stop_fear_effects");
 }
 
-//Function Number: 12
-func_4115(param_00)
-{
+func_4115(param_00) {
 	scripts\engine\utility::waittill_any_3("death","disconnect","stop_fear_effects");
 	param_00 delete();
 }
 
-//Function Number: 13
-watchfordeath()
-{
+watchfordeath() {
 	self endon("finished_stop_fear_effects");
 	self waittill("death");
 	func_6319();
 }
 
-//Function Number: 14
-func_F703(param_00)
-{
+func_F703(param_00) {
 	var_01 = gettime() + int(param_00 * 1000);
-	if(isdefined(self.var_6BB9.var_6393))
-	{
-		if(self.var_6BB9.var_6393 > var_01)
-		{
+	if(isdefined(self.var_6BB9.var_6393)) {
+		if(self.var_6BB9.var_6393 > var_01) {
 			return;
 		}
 	}
@@ -233,17 +185,12 @@ func_F703(param_00)
 	self notify("fear_update_duration");
 }
 
-//Function Number: 15
-func_9EEA(param_00)
-{
+func_9EEA(param_00) {
 	return isdefined(param_00.var_6BB9);
 }
 
-//Function Number: 16
-func_E853()
-{
-	for(;;)
-	{
+func_E853() {
+	for(;;) {
 		var_00 = self geteye();
 		var_01 = self getplayerangles();
 		var_02 = anglestoforward(var_01);
@@ -257,22 +204,16 @@ func_E853()
 	}
 }
 
-//Function Number: 17
-func_E8D9()
-{
-	for(;;)
-	{
+func_E8D9() {
+	for(;;) {
 		var_00 = setgametypevip();
 		var_01 = randomfloat(50);
 		wait(randomfloatrange(0.05,0.15));
 	}
 }
 
-//Function Number: 18
-func_E842()
-{
-	for(;;)
-	{
+func_E842() {
+	for(;;) {
 		var_00 = setgametypevip();
 		var_01 = self.health;
 		self dodamage(1,var_00,undefined,undefined,"MOD_FALLING");
@@ -281,24 +222,18 @@ func_E842()
 	}
 }
 
-//Function Number: 19
-func_E85A()
-{
+func_E85A() {
 	self setclientomnvar("ui_hud_shake",1);
 }
 
-//Function Number: 20
-func_E854()
-{
+func_E854() {
 	var_00 = spawn("script_model",self.origin);
 	var_00 hide();
 	self.var_6BB9.scragentsetanimscale = var_00;
 	var_01 = 0;
-	for(;;)
-	{
+	for(;;) {
 		var_02 = undefined;
-		if(!var_01 && randomint(10) == 0)
-		{
+		if(!var_01 && randomint(10) == 0) {
 			var_03 = anglestoforward(self.angles);
 			var_02 = self.origin + var_03 * 25 + (0,0,-5);
 			var_04 = (self.angles[0],180 + self.angles[1],self.angles[2]);
@@ -327,13 +262,10 @@ func_E854()
 	}
 }
 
-//Function Number: 21
-func_E83D()
-{
+func_E83D() {
 	var_00 = spawn("script_model",self.origin);
 	var_00 thread func_4119();
-	for(;;)
-	{
+	for(;;) {
 		var_01 = level.var_6BBA.var_3251[randomint(level.var_6BBA.var_3251.size)];
 		var_00.origin = setgametypevip();
 		var_00 playsoundtoplayer(var_01,self);
@@ -341,25 +273,18 @@ func_E83D()
 	}
 }
 
-//Function Number: 22
-func_4119(param_00)
-{
+func_4119(param_00) {
 	scripts\engine\utility::waittill_any_3("stop_fear_effects","death","disconnect");
 	param_00 delete();
 }
 
-//Function Number: 23
-func_40F9()
-{
-	if(isdefined(self.var_6BB9.scragentsetanimscale))
-	{
+func_40F9() {
+	if(isdefined(self.var_6BB9.scragentsetanimscale)) {
 		self.var_6BB9.scragentsetanimscale delete();
 	}
 }
 
-//Function Number: 24
-func_108CE(param_00,param_01,param_02)
-{
+func_108CE(param_00,param_01,param_02) {
 	var_03 = randomfloatrange(0.4,1.25);
 	var_04 = param_00 scripts\mp\_utility::_launchgrenade("fear_ghost_grenade_mp",param_01,param_02,var_03);
 	var_04 hide();
@@ -377,32 +302,24 @@ func_108CE(param_00,param_01,param_02)
 	var_05 thread func_13A41();
 }
 
-//Function Number: 25
-func_13A3D()
-{
+func_13A3D() {
 	var_00 = scripts\engine\utility::waittill_any_return("explode","death");
 	self.var_6B4A notify("detonate_ghost_grenade");
 }
 
-//Function Number: 26
-func_13A41()
-{
+func_13A41() {
 	self endon("death");
 	var_00 = scripts\engine\utility::waittill_any_timeout_1(4,"detonate_ghost_grenade");
 	thread func_108CF();
 	self delete();
 }
 
-//Function Number: 27
-func_108CF()
-{
+func_108CF() {
 	var_00 = self.config;
 	var_01 = undefined;
-	if(isdefined(var_00.var_1336D))
-	{
+	if(isdefined(var_00.var_1336D)) {
 		var_02 = (0,0,0);
-		if(isdefined(var_00.var_763E))
-		{
+		if(isdefined(var_00.var_763E)) {
 			var_03 = anglestoup(self.angles);
 			var_02 = var_03 * var_00.var_763E;
 		}
@@ -411,48 +328,38 @@ func_108CF()
 		triggerfx(var_01);
 	}
 
-	if(isdefined(var_00.var_FC43))
-	{
+	if(isdefined(var_00.var_FC43)) {
 		self playsoundtoplayer(var_00.var_FC43,self.triggerportableradarping);
 	}
 
 	wait(var_00.var_AC75);
-	if(isdefined(var_01))
-	{
+	if(isdefined(var_01)) {
 		var_01 delete();
 	}
 }
 
-//Function Number: 28
-setgametypevip(param_00,param_01,param_02,param_03,param_04,param_05)
-{
-	if(!isdefined(param_00))
-	{
+setgametypevip(param_00,param_01,param_02,param_03,param_04,param_05) {
+	if(!isdefined(param_00)) {
 		param_00 = -100;
 	}
 
-	if(!isdefined(param_01))
-	{
+	if(!isdefined(param_01)) {
 		param_01 = 100;
 	}
 
-	if(!isdefined(param_02))
-	{
+	if(!isdefined(param_02)) {
 		param_02 = -100;
 	}
 
-	if(!isdefined(param_03))
-	{
+	if(!isdefined(param_03)) {
 		param_03 = 100;
 	}
 
-	if(!isdefined(param_04))
-	{
+	if(!isdefined(param_04)) {
 		param_04 = -100;
 	}
 
-	if(!isdefined(param_05))
-	{
+	if(!isdefined(param_05)) {
 		param_05 = 100;
 	}
 

@@ -1,29 +1,19 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: 3375.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 6
- * Decompile Time: 2 ms
- * Timestamp: 10/27/2023 12:26:48 AM
-*******************************************************************/
+/****************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\3375.gsc
+****************************/
 
-//Function Number: 1
-init_beam_trap()
-{
+init_beam_trap() {
 	level.beamtrapuses = 0;
 	var_00 = scripts\engine\utility::getstructarray("beamtrap","script_noteworthy");
-	foreach(var_02 in var_00)
-	{
+	foreach(var_02 in var_00) {
 		var_02 thread func_2A39();
 	}
 }
 
-//Function Number: 2
-func_2A39()
-{
-	if(scripts\engine\utility::istrue(self.requires_power))
-	{
+func_2A39() {
+	if(scripts\engine\utility::istrue(self.requires_power)) {
 		level scripts\engine\utility::waittill_any_3("power_on",self.power_area + " power_on");
 	}
 
@@ -31,9 +21,7 @@ func_2A39()
 	level thread scripts\cp\cp_vo::add_to_nag_vo("dj_traps_use_nag","zmb_dj_vo",60,15,2,1);
 }
 
-//Function Number: 3
-use_beam_trap(param_00,param_01)
-{
+use_beam_trap(param_00,param_01) {
 	playfx(level._effect["console_spark"],param_00.origin + (0,0,40));
 	level.head_cutter_trap_kills = 0;
 	level.beamtrapuses++;
@@ -66,8 +54,7 @@ use_beam_trap(param_00,param_01)
 	playsoundatpos((-946,-3528,456),"trap_beam_stop");
 	var_06 delete();
 	level notify("beam_trap_done");
-	if(param_01 scripts\cp\utility::is_valid_player(1))
-	{
+	if(param_01 scripts\cp\utility::is_valid_player(1)) {
 		param_01.tickets_earned = param_00.trap_kills;
 		scripts\cp\zombies\arcade_game_utility::update_player_tickets_earned(param_01);
 	}
@@ -77,25 +64,19 @@ use_beam_trap(param_00,param_01)
 	scripts\cp\cp_interaction::interaction_cooldown(param_00,max(level.beamtrapuses * 45,45));
 }
 
-//Function Number: 4
-func_2A37(param_00,param_01,param_02)
-{
+func_2A37(param_00,param_01,param_02) {
 	level endon("beam_trap_done");
-	for(;;)
-	{
+	for(;;) {
 		param_00 waittill("trigger",var_03);
-		if(isdefined(var_03.padding_damage))
-		{
+		if(isdefined(var_03.padding_damage)) {
 			continue;
 		}
 
-		if(isplayer(var_03) && isalive(var_03) && !scripts\cp\cp_laststand::player_in_laststand(var_03))
-		{
+		if(isplayer(var_03) && isalive(var_03) && !scripts\cp\cp_laststand::player_in_laststand(var_03)) {
 			var_03.padding_damage = 1;
 			var_03 thread remove_padding_damage();
 			var_04 = var_03 getstance();
-			if(var_04 == "prone" || var_04 == "crouch" || var_03 issprintsliding())
-			{
+			if(var_04 == "prone" || var_04 == "crouch" || var_03 issprintsliding()) {
 				continue;
 			}
 
@@ -103,8 +84,7 @@ func_2A37(param_00,param_01,param_02)
 			continue;
 		}
 
-		if(scripts\cp\utility::should_be_affected_by_trap(var_03,undefined,1) && !scripts\engine\utility::istrue(var_03.dismember_crawl))
-		{
+		if(scripts\cp\utility::should_be_affected_by_trap(var_03,undefined,1) && !scripts\engine\utility::istrue(var_03.dismember_crawl)) {
 			param_02.trap_kills = param_02.trap_kills + 2;
 			var_03.marked_for_death = 1;
 			var_03.trap_killed_by = param_01;
@@ -113,35 +93,27 @@ func_2A37(param_00,param_01,param_02)
 	}
 }
 
-//Function Number: 5
-remove_padding_damage()
-{
+remove_padding_damage() {
 	self endon("disconnect");
 	wait(1);
 	self.padding_damage = undefined;
 }
 
-//Function Number: 6
-func_3286(param_00)
-{
+func_3286(param_00) {
 	self endon("death");
-	if(!scripts\engine\utility::istrue(self.is_suicide_bomber))
-	{
+	if(!scripts\engine\utility::istrue(self.is_suicide_bomber)) {
 		self.is_burning = 1;
 		thread scripts\cp\zombies\zombie_scriptable_states::applyzombiescriptablestate(self);
 		wait(1);
 		self.disable_armor = 1;
 	}
 
-	if(scripts\engine\utility::flag("mini_ufo_yellow_ready"))
-	{
+	if(scripts\engine\utility::flag("mini_ufo_yellow_ready")) {
 		level.var_8C5C++;
 	}
 
-	if(isdefined(param_00))
-	{
-		if(!isdefined(param_00.trapkills["trap_dragon"]))
-		{
+	if(isdefined(param_00)) {
+		if(!isdefined(param_00.trapkills["trap_dragon"])) {
 			param_00.trapkills["trap_dragon"] = 1;
 		}
 		else

@@ -1,23 +1,15 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\anim\traverse\double_jump_temp.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 3
- * Decompile Time: 154 ms
- * Timestamp: 10\26\2023 11:59:25 PM
-*******************************************************************/
+/**************************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\anim\traverse\double_jump_temp.gsc
+**************************************************************/
 
-//Function Number: 1
-main()
-{
-	if(isdefined(self.unittype) && self.unittype == "c12")
-	{
+main() {
+	if(isdefined(self.unittype) && self.unittype == "c12") {
 		return;
 	}
 
-	if(getdvarint("ai_iw7",0) == 1)
-	{
+	if(getdvarint("ai_iw7",0) == 1) {
 		self endon("killanimscript");
 		self endon("death");
 		wait(0.05);
@@ -27,9 +19,7 @@ main()
 	func_5AD2();
 }
 
-//Function Number: 2
-func_5AD2()
-{
+func_5AD2() {
 	self endon("killanimscript");
 	self endon("death");
 	self.var_DC1A = 1;
@@ -37,8 +27,7 @@ func_5AD2()
 	var_01 = self _meth_8145();
 	var_00.var_126D4 = var_00.var_126D4 - 44;
 	var_02 = [];
-	if(var_00.var_126D4 > var_01.origin[2])
-	{
+	if(var_00.var_126D4 > var_01.origin[2]) {
 		var_03 = var_00.origin[0] + var_01.origin[0] * 0.5;
 		var_04 = var_00.origin[1] + var_01.origin[1] * 0.5;
 		var_02[var_02.size] = (var_03,var_04,var_00.var_126D4);
@@ -54,8 +43,7 @@ func_5AD2()
 	self _meth_82E7("traverseAnim",%traverse_doublejump,1,0.2,1);
 	childthread func_11629(var_05);
 	thread scripts\anim\shared::donotetracks("traverseAnim",::scripts\anim\traverse\shared::func_89F8);
-	foreach(var_08 in var_02)
-	{
+	foreach(var_08 in var_02) {
 		var_09 = var_06 \ var_02.size;
 		var_05 moveto(var_08,var_09);
 		var_05 waittill("movedone");
@@ -66,12 +54,9 @@ func_5AD2()
 	var_05 delete();
 }
 
-//Function Number: 3
-func_11629(param_00)
-{
+func_11629(param_00) {
 	self endon("double_jumped");
-	for(;;)
-	{
+	for(;;) {
 		self _meth_80F1(param_00.origin,param_00.angles,10000);
 		wait(0.05);
 	}

@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: 3119.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 13
- * Decompile Time: 13 ms
- * Timestamp: 10/27/2023 12:26:10 AM
-*******************************************************************/
+/****************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\3119.gsc
+****************************/
 
-//Function Number: 1
-func_3359(param_00,param_01,param_02,param_03)
-{
+func_3359(param_00,param_01,param_02,param_03) {
 	self.asm.var_51E8 = 1;
 	self.asm.footsteps = spawnstruct();
 	self.asm.footsteps.foot = "invalid";
@@ -30,16 +24,12 @@ func_3359(param_00,param_01,param_02,param_03)
 	self.nodetoentitysighttest = 48;
 }
 
-//Function Number: 2
-func_3377(param_00)
-{
-	if(!isdefined(level.var_C05A))
-	{
+func_3377(param_00) {
+	if(!isdefined(level.var_C05A)) {
 		anim.var_C05A = [];
 	}
 
-	if(isdefined(level.var_C05A[param_00]))
-	{
+	if(isdefined(level.var_C05A[param_00])) {
 		return;
 	}
 
@@ -63,65 +53,59 @@ func_3377(param_00)
 	level.var_7363[param_00] = var_01;
 }
 
-//Function Number: 3
-func_3375()
-{
-	if(!isdefined(level.var_85DF))
-	{
+func_3375() {
+	if(!isdefined(level.var_85DF)) {
 		anim.var_85DF = [];
 	}
 
-	if(isdefined(level.var_85DF["c6"]))
-	{
+	if(isdefined(level.var_85DF["c6"])) {
 		return;
 	}
 
 	level.var_85DF["c6"] = [];
 	level.var_85E1["c6"] = [];
-	level.var_85DF["c6"]["exposed_throw_grenade"]["exposed_grenade"] = self [[ self.var_7190 ]]("c6","exposed_throw_grenade","exposed_grenade");
+	level.var_85DF["c6"]["exposed_throw_grenade"]["exposed_grenade"] = self [[self.var_7190]]("c6","exposed_throw_grenade","exposed_grenade");
 	level.var_85E1["c6"]["exposed_throw_grenade"]["exposed_grenade"] = [];
 	level.var_85E1["c6"]["exposed_throw_grenade"]["exposed_grenade"][0] = (1.50443,2.92001,63.2739);
-	level.var_85DF["c6"]["cover_stand_grenade"]["grenade_exposed"] = self [[ self.var_7190 ]]("c6","cover_stand_grenade","grenade_exposed");
+	level.var_85DF["c6"]["cover_stand_grenade"]["grenade_exposed"] = self [[self.var_7190]]("c6","cover_stand_grenade","grenade_exposed");
 	level.var_85E1["c6"]["cover_stand_grenade"]["grenade_exposed"] = [];
 	level.var_85E1["c6"]["cover_stand_grenade"]["grenade_exposed"][0] = (-5.60661,0.535889,63.2995);
-	level.var_85DF["c6"]["cover_stand_grenade"]["grenade_safe"] = self [[ self.var_7190 ]]("c6","cover_stand_grenade","grenade_safe");
+	level.var_85DF["c6"]["cover_stand_grenade"]["grenade_safe"] = self [[self.var_7190]]("c6","cover_stand_grenade","grenade_safe");
 	level.var_85E1["c6"]["cover_stand_grenade"]["grenade_safe"] = [];
 	level.var_85E1["c6"]["cover_stand_grenade"]["grenade_safe"][0] = (-5.60661,0.535889,63.2995);
-	level.var_85DF["c6"]["cover_crouch_grenade"]["grenade_exposed"] = self [[ self.var_7190 ]]("c6","cover_crouch_grenade","grenade_exposed");
+	level.var_85DF["c6"]["cover_crouch_grenade"]["grenade_exposed"] = self [[self.var_7190]]("c6","cover_crouch_grenade","grenade_exposed");
 	level.var_85E1["c6"]["cover_crouch_grenade"]["grenade_exposed"] = [];
 	level.var_85E1["c6"]["cover_crouch_grenade"]["grenade_exposed"][0] = (-5.60582,0.535736,63.2997);
-	level.var_85DF["c6"]["cover_crouch_grenade"]["grenade_safe"] = self [[ self.var_7190 ]]("c6","cover_crouch_grenade","grenade_safe");
+	level.var_85DF["c6"]["cover_crouch_grenade"]["grenade_safe"] = self [[self.var_7190]]("c6","cover_crouch_grenade","grenade_safe");
 	level.var_85E1["c6"]["cover_crouch_grenade"]["grenade_safe"] = [];
 	level.var_85E1["c6"]["cover_crouch_grenade"]["grenade_safe"][0] = (-5.60582,0.535736,63.2997);
-	level.var_85DF["c6"]["cover_right_grenade"]["grenade_exposed"] = self [[ self.var_7190 ]]("c6","cover_right_grenade","grenade_exposed");
+	level.var_85DF["c6"]["cover_right_grenade"]["grenade_exposed"] = self [[self.var_7190]]("c6","cover_right_grenade","grenade_exposed");
 	level.var_85E1["c6"]["cover_right_grenade"]["grenade_exposed"] = [];
 	level.var_85E1["c6"]["cover_right_grenade"]["grenade_exposed"][0] = (-7.74697,-36.7288,63.2998);
-	level.var_85DF["c6"]["cover_right_grenade"]["grenade_safe"] = self [[ self.var_7190 ]]("c6","cover_right_grenade","grenade_safe");
+	level.var_85DF["c6"]["cover_right_grenade"]["grenade_safe"] = self [[self.var_7190]]("c6","cover_right_grenade","grenade_safe");
 	level.var_85E1["c6"]["cover_right_grenade"]["grenade_safe"] = [];
 	level.var_85E1["c6"]["cover_right_grenade"]["grenade_safe"][0] = (-7.74697,-36.7288,63.2998);
-	level.var_85DF["c6"]["cover_right_crouch_grenade"]["grenade_exposed"] = self [[ self.var_7190 ]]("c6","cover_right_crouch_grenade","grenade_exposed");
+	level.var_85DF["c6"]["cover_right_crouch_grenade"]["grenade_exposed"] = self [[self.var_7190]]("c6","cover_right_crouch_grenade","grenade_exposed");
 	level.var_85E1["c6"]["cover_right_crouch_grenade"]["grenade_exposed"] = [];
 	level.var_85E1["c6"]["cover_right_crouch_grenade"]["grenade_exposed"][0] = (-10.7295,-39.4107,63.0914);
-	level.var_85DF["c6"]["cover_right_crouch_grenade"]["grenade_safe"] = self [[ self.var_7190 ]]("c6","cover_right_crouch_grenade","grenade_safe");
+	level.var_85DF["c6"]["cover_right_crouch_grenade"]["grenade_safe"] = self [[self.var_7190]]("c6","cover_right_crouch_grenade","grenade_safe");
 	level.var_85E1["c6"]["cover_right_crouch_grenade"]["grenade_safe"] = [];
 	level.var_85E1["c6"]["cover_right_crouch_grenade"]["grenade_safe"][0] = (-10.7295,-39.4107,63.0914);
-	level.var_85DF["c6"]["cover_left_grenade"]["grenade_exposed"] = self [[ self.var_7190 ]]("c6","cover_left_grenade","grenade_exposed");
+	level.var_85DF["c6"]["cover_left_grenade"]["grenade_exposed"] = self [[self.var_7190]]("c6","cover_left_grenade","grenade_exposed");
 	level.var_85E1["c6"]["cover_left_grenade"]["grenade_exposed"] = [];
 	level.var_85E1["c6"]["cover_left_grenade"]["grenade_exposed"][0] = (-6.18673,44.8321,62.3899);
-	level.var_85DF["c6"]["cover_left_grenade"]["grenade_safe"] = self [[ self.var_7190 ]]("c6","cover_left_grenade","grenade_safe");
+	level.var_85DF["c6"]["cover_left_grenade"]["grenade_safe"] = self [[self.var_7190]]("c6","cover_left_grenade","grenade_safe");
 	level.var_85E1["c6"]["cover_left_grenade"]["grenade_safe"] = [];
 	level.var_85E1["c6"]["cover_left_grenade"]["grenade_safe"][0] = (-6.18673,44.8321,62.3899);
-	level.var_85DF["c6"]["cover_left_crouch_grenade"]["grenade_exposed"] = self [[ self.var_7190 ]]("c6","cover_left_crouch_grenade","grenade_exposed");
+	level.var_85DF["c6"]["cover_left_crouch_grenade"]["grenade_exposed"] = self [[self.var_7190]]("c6","cover_left_crouch_grenade","grenade_exposed");
 	level.var_85E1["c6"]["cover_left_crouch_grenade"]["grenade_exposed"] = [];
 	level.var_85E1["c6"]["cover_left_crouch_grenade"]["grenade_exposed"][0] = (-10.9098,39.5226,63.2997);
-	level.var_85DF["c6"]["cover_left_crouch_grenade"]["grenade_safe"] = self [[ self.var_7190 ]]("c6","cover_left_crouch_grenade","grenade_safe");
+	level.var_85DF["c6"]["cover_left_crouch_grenade"]["grenade_safe"] = self [[self.var_7190]]("c6","cover_left_crouch_grenade","grenade_safe");
 	level.var_85E1["c6"]["cover_left_crouch_grenade"]["grenade_safe"] = [];
 	level.var_85E1["c6"]["cover_left_crouch_grenade"]["grenade_safe"][0] = (-10.9098,39.5226,63.2997);
 }
 
-//Function Number: 4
-func_3374()
-{
+func_3374() {
 	var_00 = [];
 	var_01 = [];
 	var_00["exposed_crouch"] = var_01;
@@ -144,8 +128,7 @@ func_3374()
 	var_01 = [];
 	var_01["left"] = 15;
 	var_00["cover_right_crouch_lean"] = var_01;
-	if(!isdefined(level.var_43FE))
-	{
+	if(!isdefined(level.var_43FE)) {
 		level.var_43FE = [];
 		level.var_7361 = [];
 		level.var_1A43 = [];
@@ -176,19 +159,14 @@ func_3374()
 	level.var_1A43["c6"] = var_03;
 }
 
-//Function Number: 5
-func_335E(param_00,param_01,param_02,param_03)
-{
+func_335E(param_00,param_01,param_02,param_03) {
 	self.asm.crawlmelee = 1;
 	lib_0A1E::func_235F(param_00,param_01,param_02,1);
 }
 
-//Function Number: 6
-func_33AD(param_00,param_01)
-{
+func_33AD(param_00,param_01) {
 	var_02 = undefined;
-	switch(param_00)
-	{
+	switch(param_00) {
 		case "shock_01":
 			var_02 = "c6_emp_shock_reaction_01";
 			break;
@@ -202,27 +180,21 @@ func_33AD(param_00,param_01)
 			break;
 	}
 
-	if(isdefined(var_02) && soundexists(var_02))
-	{
+	if(isdefined(var_02) && soundexists(var_02)) {
 		self playsound(var_02);
 	}
 }
 
-//Function Number: 7
-func_335C(param_00,param_01,param_02)
-{
-	if(scripts/asm/asm_bb::func_293E())
-	{
+func_335C(param_00,param_01,param_02) {
+	if(scripts/asm/asm_bb::func_293E()) {
 		return scripts/asm/asm::asm_lookupanimfromalias(param_01,"haywire");
 	}
 	else
 	{
 		var_03 = scripts/asm/asm::asm_getdemeanor();
-		if(scripts/asm/asm::asm_hasdemeanoranimoverride(var_03,"idle"))
-		{
+		if(scripts/asm/asm::asm_hasdemeanoranimoverride(var_03,"idle")) {
 			var_04 = scripts/asm/asm::asm_getdemeanoranimoverride(var_03,"idle");
-			if(isarray(var_04))
-			{
+			if(isarray(var_04)) {
 				return var_04[randomint(var_04.size)];
 			}
 
@@ -233,54 +205,43 @@ func_335C(param_00,param_01,param_02)
 	return lib_0F3D::func_3EAB(param_01,param_02,var_03);
 }
 
-//Function Number: 8
-func_335D(param_00,param_01,param_02)
-{
+func_335D(param_00,param_01,param_02) {
 	var_03 = scripts/asm/asm::asm_getdemeanor();
-	if(scripts/asm/asm_bb::func_293E())
-	{
+	if(scripts/asm/asm_bb::func_293E()) {
 		return scripts/asm/asm::asm_lookupanimfromalias(param_01,scripts/asm/asm_bb::func_2922());
 	}
-	else if(scripts/asm/asm::asm_hasdemeanoranimoverride(var_03,param_02))
-	{
+	else if(scripts/asm/asm::asm_hasdemeanoranimoverride(var_03,param_02)) {
 		var_04 = scripts/asm/asm::asm_getdemeanoranimoverride(var_03,param_02);
-		if(isarray(var_04))
-		{
+		if(isarray(var_04)) {
 			return var_04[randomint(var_04.size)];
 		}
 
 		return var_04;
 	}
 
-	if(!scripts/asm/asm::asm_hasalias(param_02,var_04))
-	{
+	if(!scripts/asm/asm::asm_hasalias(param_02,var_04)) {
 		return scripts/asm/asm::asm_lookupanimfromalias(param_02,"default");
 	}
 
 	return scripts/asm/asm::asm_lookupanimfromalias(param_02,var_04);
 }
 
-//Function Number: 9
-func_CEB9(param_00,param_01,param_02,param_03)
-{
+func_CEB9(param_00,param_01,param_02,param_03) {
 	self endon(param_01 + "_finished");
 	var_04 = self.angles[1];
-	if(isdefined(self.objective_position) && distancesquared(self.origin,self.objective_position.origin) > 144)
-	{
+	if(isdefined(self.objective_position) && distancesquared(self.origin,self.objective_position.origin) > 144) {
 		var_04 = vectortoyaw(self.objective_position.origin - self.origin);
 	}
 
 	self orientmode("face angle",var_04);
-	var_05 = self [[ self.var_7191 ]](param_00,param_01);
+	var_05 = self [[self.var_7191]](param_00,param_01);
 	self aiclearanim(lib_0A1E::asm_getbodyknob(),param_02);
 	self _meth_82EA(param_01,var_05,1,param_02,1);
 	thread lib_0A1E::func_231F(param_00,param_01);
-	if(animhasnotetrack(var_05,"grenade_left"))
-	{
+	if(animhasnotetrack(var_05,"grenade_left")) {
 		self waittillmatch("grenade_left",param_01);
 	}
-	else if(animhasnotetrack(var_05,"grenade_right"))
-	{
+	else if(animhasnotetrack(var_05,"grenade_right")) {
 		self waittillmatch("grenade_right",param_01);
 	}
 	else
@@ -288,8 +249,7 @@ func_CEB9(param_00,param_01,param_02,param_03)
 		wait(1);
 	}
 
-	if(isdefined(self.objective_position))
-	{
+	if(isdefined(self.objective_position)) {
 		self.objective_position delete();
 		var_06 = randomfloatrange(1,1.5);
 		var_07 = function_0136("frag_c6hug",self gettagorigin("tag_accessory_left"),(0,0,0),var_06);
@@ -301,35 +261,27 @@ func_CEB9(param_00,param_01,param_02,param_03)
 	scripts\anim\battlechatter_ai::func_67CF("frag");
 }
 
-//Function Number: 10
-func_CEB8(param_00,param_01,param_02,param_03)
-{
-	var_04 = self [[ self.var_7191 ]](param_00,param_01);
+func_CEB8(param_00,param_01,param_02,param_03) {
+	var_04 = self [[self.var_7191]](param_00,param_01);
 	self aiclearanim(lib_0A1E::asm_getbodyknob(),param_02);
 	self _meth_82EA(param_01,var_04,1,param_02,1);
 }
 
-//Function Number: 11
-_meth_85C4(param_00,param_01,param_02,param_03)
-{
+_meth_85C4(param_00,param_01,param_02,param_03) {
 	return !isdefined(self._meth_85C0);
 }
 
-//Function Number: 12
-func_CEBA(param_00,param_01,param_02,param_03)
-{
+func_CEBA(param_00,param_01,param_02,param_03) {
 	self endon(param_01 + "_finished");
-	var_04 = self [[ self.var_7191 ]](param_00,param_01);
+	var_04 = self [[self.var_7191]](param_00,param_01);
 	self _meth_82EA(param_01,var_04,1,param_02,1);
 	self.bt.var_5615 = 1;
 	var_05 = ["right_arm","left_arm","torso","right_leg","left_leg"];
-	foreach(var_07 in var_05)
-	{
+	foreach(var_07 in var_05) {
 		var_08 = self _meth_850C(var_07,"upper");
 		var_09 = self _meth_850C(var_07,"lower");
 		var_0A = max(var_08,var_09);
-		if(var_08 > 0 && var_09 > 0)
-		{
+		if(var_08 > 0 && var_09 > 0) {
 			self _meth_850B(int(var_0A),var_07,"upper");
 			self _meth_850B(int(var_0A),var_07,"lower");
 		}
@@ -339,8 +291,6 @@ func_CEBA(param_00,param_01,param_02,param_03)
 	self.bt.var_5615 = undefined;
 }
 
-//Function Number: 13
-func_40FB(param_00,param_01,param_02)
-{
+func_40FB(param_00,param_01,param_02) {
 	scripts/asm/asm::asm_fireephemeralevent("grenade response","return throw complete");
 }

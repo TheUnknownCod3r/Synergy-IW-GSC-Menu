@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\mp\agents\alien_goon\alien_goon_agent.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 10
- * Decompile Time: 544 ms
- * Timestamp: 10/27/2023 12:11:04 AM
-*******************************************************************/
+/*********************************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\mp\agents\alien_goon\alien_goon_agent.gsc
+*********************************************************************/
 
-//Function Number: 1
-registerscriptedagent()
-{
+registerscriptedagent() {
 	scripts\mp\agents\alien_goon\alien_goon_tunedata::setuptunedata();
 	scripts/aitypes/bt_util::init();
 	behaviortree\alien_goon::func_DEE8();
@@ -20,12 +14,9 @@ registerscriptedagent()
 	thread func_FAB0();
 }
 
-//Function Number: 2
-func_FAB0()
-{
+func_FAB0() {
 	level endon("game_ended");
-	if(!isdefined(level.agent_definition))
-	{
+	if(!isdefined(level.agent_definition)) {
 		level waittill("scripted_agents_initialized");
 	}
 
@@ -36,27 +27,21 @@ func_FAB0()
 	level.agent_funcs["alien_goon"]["gametype_on_killed"] = ::scripts\cp\maps\cp_final\cp_final_damage::cp_final_onzombiekilled;
 	level.agent_funcs["alien_goon"]["on_damaged_finished"] = ::scripts\mp\agents\zombie\zmb_zombie_agent::onzombiedamagefinished;
 	level.agent_funcs["alien_goon"]["on_killed"] = ::scripts\mp\agents\zombie\zmb_zombie_agent::onzombiekilled;
-	if(!isdefined(level.var_8CBD))
-	{
+	if(!isdefined(level.var_8CBD)) {
 		level.var_8CBD = [];
 	}
 
 	level.var_8CBD["alien_goon"] = ::calculatealiengoonhealth;
-	if(!isdefined(level.damage_feedback_overrride))
-	{
+	if(!isdefined(level.damage_feedback_overrride)) {
 		level.damage_feedback_overrride = [];
 	}
 }
 
-//Function Number: 3
-func_FACE(param_00)
-{
+func_FACE(param_00) {
 	self setmodel("alien_goon");
 }
 
-//Function Number: 4
-setupzombiegametypevars()
-{
+setupzombiegametypevars() {
 	self.class = undefined;
 	self.movespeedscaler = undefined;
 	self.avoidkillstreakonspawntimer = undefined;
@@ -138,15 +123,12 @@ setupzombiegametypevars()
 	self.death_anim_no_ragdoll = undefined;
 	self.allowpain = 0;
 	self setavoidanceradius(45);
-	if(getdvarint("scr_zombie_left_foot_sharp_turn_only",0) == 1)
-	{
+	if(getdvarint("scr_zombie_left_foot_sharp_turn_only",0) == 1) {
 		self.var_AB3F = 1;
 	}
 }
 
-//Function Number: 5
-setupagent()
-{
+setupagent() {
 	setupzombiegametypevars();
 	thread scripts\mp\agents\zombie\zmb_zombie_agent::func_12EE6();
 	self.height = self.var_18F4;
@@ -168,13 +150,11 @@ setupagent()
 	self.footstepdetectdistsprint = 2500;
 	self.precacheleaderboards = 1;
 	self.dontmutilate = 1;
-	if(scripts\engine\utility::istrue(self.activated_venomx_sphere))
-	{
+	if(scripts\engine\utility::istrue(self.activated_venomx_sphere)) {
 		self.activated_venomx_sphere = undefined;
 	}
 
-	if(scripts\engine\utility::istrue(self.dot_triggered))
-	{
+	if(scripts\engine\utility::istrue(self.dot_triggered)) {
 		self.dot_triggered = undefined;
 	}
 
@@ -183,19 +163,14 @@ setupagent()
 	thread monitorwhizbys();
 }
 
-//Function Number: 6
-func_AEB0()
-{
+func_AEB0() {
 	level._effect["alien_teleport_fx"] = loadfx("vfx/iw7/_requests/coop/zmb_fullbody_gib.vfx");
 }
 
-//Function Number: 7
-monitorwhizbys()
-{
+monitorwhizbys() {
 	self endon("death");
 	self.lastwhizbytime = undefined;
-	for(;;)
-	{
+	for(;;) {
 		self waittill("bulletwhizby",var_00,var_01);
 		self.lastwhizbytime = gettime();
 		self.lastwhizbyshooter = var_00;
@@ -203,12 +178,9 @@ monitorwhizbys()
 	}
 }
 
-//Function Number: 8
-calculatealiengoonhealth()
-{
+calculatealiengoonhealth() {
 	var_00 = 200;
-	switch(level.specialroundcounter)
-	{
+	switch(level.specialroundcounter) {
 		case 0:
 			var_00 = 400;
 			break;
@@ -237,29 +209,23 @@ calculatealiengoonhealth()
 	return var_00;
 }
 
-//Function Number: 9
-accumulatedamage(param_00,param_01)
-{
-	if(!isdefined(self.damageaccumulator))
-	{
+accumulatedamage(param_00,param_01) {
+	if(!isdefined(self.damageaccumulator)) {
 		self.damageaccumulator = spawnstruct();
 		self.damageaccumulator.accumulateddamage = 0;
 	}
-	else if(!isdefined(self.damageaccumulator.lastdamagetime) || gettime() > self.damageaccumulator.lastdamagetime + 1000)
-	{
+	else if(!isdefined(self.damageaccumulator.lastdamagetime) || gettime() > self.damageaccumulator.lastdamagetime + 1000) {
 		self.damageaccumulator.accumulateddamage = 0;
 		self.damageaccumulator.lastdamagetime = 0;
 	}
 
 	self.damageaccumulator.lastdamagetime = gettime();
-	if(!isdefined(param_01))
-	{
+	if(!isdefined(param_01)) {
 		param_01 = (1,1,1);
 	}
 
 	self.damageaccumulator.lastdir = param_01;
-	if(isdefined(self.fake_damage))
-	{
+	if(isdefined(self.fake_damage)) {
 		self.damageaccumulator.accumulateddamage = self.damageaccumulator.accumulateddamage + self.fake_damage;
 		self.fake_damage = undefined;
 		return;
@@ -268,9 +234,7 @@ accumulatedamage(param_00,param_01)
 	self.damageaccumulator.accumulateddamage = self.damageaccumulator.accumulateddamage + param_00;
 }
 
-//Function Number: 10
-func_C4E0(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08,param_09,param_0A,param_0B)
-{
+func_C4E0(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08,param_09,param_0A,param_0B) {
 	accumulatedamage(param_02,param_07);
 	scripts\cp\maps\cp_final\cp_final_damage::cp_final_onzombiedamaged(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08,param_09,param_0A,param_0B);
 }

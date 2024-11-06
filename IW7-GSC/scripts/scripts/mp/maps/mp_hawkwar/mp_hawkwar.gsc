@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\mp\maps\mp_hawkwar\mp_hawkwar.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 2
- * Decompile Time: 179 ms
- * Timestamp: 10/27/2023 12:13:39 AM
-*******************************************************************/
+/*************************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\mp\maps\mp_hawkwar\mp_hawkwar.gsc
+*************************************************************/
 
-//Function Number: 1
-main()
-{
+main() {
 	scripts\mp\maps\mp_hawkwar\mp_hawkwar_precache::main();
 	scripts\mp\maps\mp_hawkwar\gen\mp_hawkwar_art::main();
 	scripts\mp\maps\mp_hawkwar\mp_hawkwar_fx::main();
@@ -30,9 +24,7 @@ main()
 	thread fix_collision();
 }
 
-//Function Number: 2
-fix_collision()
-{
+fix_collision() {
 	var_00 = getent("player128x128x128","targetname");
 	var_01 = spawn("script_model",(1152,2256,-16));
 	var_01.angles = (0,0,0);

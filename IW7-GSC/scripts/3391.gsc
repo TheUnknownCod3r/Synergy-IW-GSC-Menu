@@ -1,83 +1,58 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: 3391.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 23
- * Decompile Time: 9 ms
- * Timestamp: 10/27/2023 12:26:54 AM
-*******************************************************************/
+/****************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\3391.gsc
+****************************/
 
-//Function Number: 1
-init_arcade_counter_ammo_slot()
-{
+init_arcade_counter_ammo_slot() {
 	var_00 = scripts\engine\utility::getstructarray("arcade_counter_ammo","script_noteworthy");
-	foreach(var_02 in var_00)
-	{
+	foreach(var_02 in var_00) {
 		var_02 thread func_9593();
 	}
 }
 
-//Function Number: 2
-init_arcade_grenade_slot()
-{
+init_arcade_grenade_slot() {
 	var_00 = scripts\engine\utility::getstructarray("arcade_counter_grenade","script_noteworthy");
-	foreach(var_02 in var_00)
-	{
+	foreach(var_02 in var_00) {
 		var_02 thread func_9593();
 	}
 }
 
-//Function Number: 3
-init_small_counter_slot()
-{
+init_small_counter_slot() {
 	level thread func_3E93();
 	var_00 = scripts\engine\utility::getstructarray("small_ticket_prize","script_noteworthy");
-	foreach(var_02 in var_00)
-	{
+	foreach(var_02 in var_00) {
 		var_02 thread func_9593();
 		wait(0.05);
 	}
 }
 
-//Function Number: 4
-init_medium_counter_slot()
-{
+init_medium_counter_slot() {
 	var_00 = scripts\engine\utility::getstructarray("medium_ticket_prize","script_noteworthy");
-	foreach(var_02 in var_00)
-	{
+	foreach(var_02 in var_00) {
 		var_02 thread func_9593();
 		wait(0.05);
 	}
 }
 
-//Function Number: 5
-init_large_counter_slot()
-{
+init_large_counter_slot() {
 	level.var_A857 = ["attachment_zmb_arcane_muzzlebrake_wm"];
 	var_00 = scripts\engine\utility::getstructarray("large_ticket_prize","script_noteworthy");
-	foreach(var_02 in var_00)
-	{
+	foreach(var_02 in var_00) {
 		var_02 thread func_9593();
 	}
 }
 
-//Function Number: 6
-func_136DE(param_00)
-{
-	for(;;)
-	{
+func_136DE(param_00) {
+	for(;;) {
 		level notify("ticket_counter_choose_power",param_00);
 		wait(0.25);
 		level waittill("prize_restock");
 	}
 }
 
-//Function Number: 7
-func_9593()
-{
-	if(self.script_noteworthy == "small_ticket_prize" || self.script_noteworthy == "medium_ticket_prize")
-	{
+func_9593() {
+	if(self.script_noteworthy == "small_ticket_prize" || self.script_noteworthy == "medium_ticket_prize") {
 		thread func_136DE(self);
 		wait(0.25);
 	}
@@ -94,39 +69,31 @@ func_9593()
 	self.randomintrange.angles = self.randomintrange.angles + var_04;
 	self.randomintrange.hint_string = func_7CF8(self,var_02);
 	var_05 = getentarray(self.target,"targetname");
-	if(var_05.size > 0)
-	{
+	if(var_05.size > 0) {
 		self.setminimap = scripts\engine\utility::getclosest(self.origin,var_05);
 		thread func_12988();
 	}
 }
 
-//Function Number: 8
-func_3E93()
-{
+func_3E93() {
 	var_00 = ["power_rewind","power_transponder","power_tripMine","power_blackholeGrenade"];
-	if(scripts\cp\utility::is_codxp())
-	{
+	if(scripts\cp\utility::is_codxp()) {
 		var_00 = ["power_rewind","power_tripMine","power_blackholeGrenade"];
 	}
 
 	level.var_1033F = var_00;
 	var_01 = ["power_armageddon","power_portalGenerator","power_repulsor"];
 	level.var_B534 = var_01;
-	for(;;)
-	{
+	for(;;) {
 		level waittill("ticket_counter_choose_power",var_02);
-		if(var_02.script_noteworthy == "small_ticket_prize")
-		{
-			if(level.var_1033F.size < 1)
-			{
+		if(var_02.script_noteworthy == "small_ticket_prize") {
+			if(level.var_1033F.size < 1) {
 				level.var_1033F = var_00;
 			}
 
 			var_02.power = scripts\engine\utility::random(level.var_1033F);
 			level.var_1033F = scripts\engine\utility::array_remove(level.var_1033F,var_02.power);
-			if(isdefined(var_02.randomintrange))
-			{
+			if(isdefined(var_02.randomintrange)) {
 				var_03 = func_7CF9(var_02.script_noteworthy);
 				var_02.randomintrange.hint_string = func_7CF8(var_02,var_03);
 			}
@@ -134,17 +101,14 @@ func_3E93()
 			continue;
 		}
 
-		if(var_02.script_noteworthy == "medium_ticket_prize")
-		{
-			if(level.var_B534.size < 1)
-			{
+		if(var_02.script_noteworthy == "medium_ticket_prize") {
+			if(level.var_B534.size < 1) {
 				level.var_B534 = var_01;
 			}
 
 			var_02.power = scripts\engine\utility::random(level.var_B534);
 			level.var_B534 = scripts\engine\utility::array_remove(level.var_B534,var_02.power);
-			if(isdefined(var_02.randomintrange))
-			{
+			if(isdefined(var_02.randomintrange)) {
 				var_03 = func_7CF9(var_02.script_noteworthy);
 				var_02.randomintrange.hint_string = func_7CF8(var_02,var_03);
 			}
@@ -152,12 +116,9 @@ func_3E93()
 	}
 }
 
-//Function Number: 9
-func_12988()
-{
+func_12988() {
 	wait(10);
-	for(var_00 = 0;var_00 < 4;var_00++)
-	{
+	for(var_00 = 0;var_00 < 4;var_00++) {
 		self.setminimap setlightintensity(65);
 		wait(randomfloat(1));
 		self.setminimap setlightintensity(0);
@@ -168,23 +129,17 @@ func_12988()
 	self.powered_on = 1;
 }
 
-//Function Number: 10
-turn_on_light()
-{
-	if(isdefined(self.setminimap))
-	{
-		for(;;)
-		{
+turn_on_light() {
+	if(isdefined(self.setminimap)) {
+		for(;;) {
 			var_00 = level scripts\engine\utility::waittill_any_return_no_endon_death_3("power_on","power_off");
-			if(var_00 == "power_off")
-			{
+			if(var_00 == "power_off") {
 				self.setminimap setlightintensity(0);
 				self.powered_on = 0;
 				continue;
 			}
 
-			for(var_01 = 0;var_01 < 4;var_01++)
-			{
+			for(var_01 = 0;var_01 < 4;var_01++) {
 				self.setminimap setlightintensity(65);
 				wait(randomfloat(1));
 				self.setminimap setlightintensity(0);
@@ -197,14 +152,10 @@ turn_on_light()
 	}
 }
 
-//Function Number: 11
-ticket_counter_slot_activation(param_00,param_01)
-{
-	if(param_00.script_noteworthy == "small_ticket_prize" || param_00.script_noteworthy == "medium_ticket_prize")
-	{
+ticket_counter_slot_activation(param_00,param_01) {
+	if(param_00.script_noteworthy == "small_ticket_prize" || param_00.script_noteworthy == "medium_ticket_prize") {
 		var_02 = param_00.power;
-		if(isdefined(level.powers[var_02].defaultslot))
-		{
+		if(isdefined(level.powers[var_02].defaultslot)) {
 			var_03 = level.powers[var_02].defaultslot;
 		}
 		else
@@ -217,32 +168,26 @@ ticket_counter_slot_activation(param_00,param_01)
 		return;
 	}
 
-	if(param_00 [[ func_77CB(param_00) ]](param_00,param_01))
-	{
+	if(param_00 [[func_77CB(param_00)]](param_00,param_01)) {
 		thread deactivate_ticket_counter_slot(param_00,param_01);
 	}
 }
 
-//Function Number: 12
-deactivate_ticket_counter_slot(param_00,param_01,param_02)
-{
+deactivate_ticket_counter_slot(param_00,param_01,param_02) {
 	param_01 endon("disconnect");
 	level endon("game_ended");
 	param_00 notify("deactivated");
-	if(scripts\engine\utility::istrue(param_02))
-	{
+	if(scripts\engine\utility::istrue(param_02)) {
 		param_00.randomintrange hide();
 		scripts\cp\cp_interaction::remove_from_current_interaction_list(param_00);
 	}
 	else
 	{
-		if(isdefined(param_00.randomintrange))
-		{
+		if(isdefined(param_00.randomintrange)) {
 			param_00.randomintrange hidefromplayer(param_01);
 		}
 
-		if(isdefined(param_00.trigger))
-		{
+		if(isdefined(param_00.trigger)) {
 			param_00.trigger hidefromplayer(param_01);
 		}
 
@@ -252,13 +197,10 @@ deactivate_ticket_counter_slot(param_00,param_01,param_02)
 	thread func_10149(param_00,param_01,param_02);
 }
 
-//Function Number: 13
-func_10149(param_00,param_01,param_02)
-{
+func_10149(param_00,param_01,param_02) {
 	level endon("game_ended");
 	level waittill("prize_restock");
-	if(isdefined(param_00.randomintrange))
-	{
+	if(isdefined(param_00.randomintrange)) {
 		playsoundatpos(param_00.randomintrange.origin,"zmb_prize_restock");
 		playfx(level._effect["booth_respawn"],param_00.randomintrange.origin);
 	}
@@ -268,22 +210,18 @@ func_10149(param_00,param_01,param_02)
 		playfx(level._effect["booth_respawn"],param_00.origin);
 	}
 
-	if(scripts\engine\utility::istrue(param_02))
-	{
+	if(scripts\engine\utility::istrue(param_02)) {
 		param_00.randomintrange show();
 		scripts\cp\cp_interaction::add_to_current_interaction_list(param_00);
 		return;
 	}
 
-	if(isdefined(param_01))
-	{
-		if(isdefined(param_00.randomintrange))
-		{
+	if(isdefined(param_01)) {
+		if(isdefined(param_00.randomintrange)) {
 			param_00.randomintrange showtoplayer(param_01);
 		}
 
-		if(isdefined(param_00.trigger))
-		{
+		if(isdefined(param_00.trigger)) {
 			param_00.trigger showtoplayer(param_01);
 		}
 
@@ -291,12 +229,9 @@ func_10149(param_00,param_01,param_02)
 	}
 }
 
-//Function Number: 14
-func_7CF9(param_00)
-{
+func_7CF9(param_00) {
 	var_01 = undefined;
-	switch(param_00)
-	{
+	switch(param_00) {
 		case "small_ticket_prize":
 			var_01 = "foam_grenade_vm";
 			break;
@@ -314,8 +249,7 @@ func_7CF9(param_00)
 			break;
 
 		case "large_ticket_prize":
-			if(!isdefined(level.var_A857) || level.var_A857.size < 1)
-			{
+			if(!isdefined(level.var_A857) || level.var_A857.size < 1) {
 				level.var_A857 = ["attachment_zmb_arcane_muzzlebrake_wm"];
 			}
 	
@@ -330,12 +264,9 @@ func_7CF9(param_00)
 	return var_01;
 }
 
-//Function Number: 15
-func_7CFB(param_00)
-{
+func_7CFB(param_00) {
 	var_01 = undefined;
-	switch(param_00)
-	{
+	switch(param_00) {
 		case "equipment_oxygen_tank_01":
 			var_01 = (0,0,0);
 			break;
@@ -363,12 +294,9 @@ func_7CFB(param_00)
 	return var_01;
 }
 
-//Function Number: 16
-func_7CFA(param_00,param_01)
-{
+func_7CFA(param_00,param_01) {
 	var_02 = undefined;
-	switch(param_01)
-	{
+	switch(param_01) {
 		case "equipment_oxygen_tank_01":
 			var_02 = (0,0,0);
 			break;
@@ -396,12 +324,9 @@ func_7CFA(param_00,param_01)
 	return var_02;
 }
 
-//Function Number: 17
-func_77CB(param_00)
-{
+func_77CB(param_00) {
 	var_01 = undefined;
-	switch(param_00.script_noteworthy)
-	{
+	switch(param_00.script_noteworthy) {
 		case "arcade_counter_ammo":
 			var_01 = ::func_2761;
 			break;
@@ -421,16 +346,12 @@ func_77CB(param_00)
 	return var_01;
 }
 
-//Function Number: 18
-func_2761(param_00,param_01)
-{
+func_2761(param_00,param_01) {
 	param_01 playlocalsound("purchase_ticket");
 	var_02 = param_01 getweaponslistprimaries();
-	foreach(var_04 in var_02)
-	{
+	foreach(var_04 in var_02) {
 		param_01 givemaxammo(var_04);
-		if(function_0249(var_04) == weaponclipsize(var_04))
-		{
+		if(function_0249(var_04) == weaponclipsize(var_04)) {
 			param_01 setweaponammoclip(var_04,weaponclipsize(var_04));
 		}
 	}
@@ -438,108 +359,83 @@ func_2761(param_00,param_01)
 	return 1;
 }
 
-//Function Number: 19
-_meth_857F(param_00,param_01)
-{
+_meth_857F(param_00,param_01) {
 	param_01 playlocalsound("purchase_ticket");
 	scripts\cp\gametypes\zombie::replace_grenades_on_player(param_01);
 	return 1;
 }
 
-//Function Number: 20
-func_10931(param_00,param_01)
-{
+func_10931(param_00,param_01) {
 	var_02 = scripts\cp\utility::get_attachment_from_interaction(param_00);
 	var_03 = param_01 getcurrentweapon();
-	if(param_01 scripts\cp\utility::weaponhasattachment(var_03,var_02))
-	{
+	if(param_01 scripts\cp\utility::weaponhasattachment(var_03,var_02)) {
 		return 0;
 	}
 
-	if(!param_01 scripts\cp\cp_weapon::can_use_attachment(var_02,var_03))
-	{
+	if(!param_01 scripts\cp\cp_weapon::can_use_attachment(var_02,var_03)) {
 		return 0;
 	}
 
 	thread deactivate_ticket_counter_slot(param_00,param_01,1);
 	var_04 = param_01 scripts\cp\cp_weapon::add_attachment_to_weapon(var_02,var_03,1);
-	if(var_04)
-	{
+	if(var_04) {
 		param_01 notify("weapon_purchased");
 	}
 
-	if(var_02 == "arcane_base" && var_04 == 1)
-	{
+	if(var_02 == "arcane_base" && var_04 == 1) {
 		param_01 thread scripts\cp\cp_vo::try_to_play_vo("part_collect_arcane","zmb_comment_vo","medium",10,0,0,0,50);
 	}
 
 	return var_04;
 }
 
-//Function Number: 21
-func_E193(param_00,param_01)
-{
+func_E193(param_00,param_01) {
 	wait(120);
 	param_00.randomintrange show();
 	scripts\cp\cp_interaction::add_to_current_interaction_list(param_00);
 }
 
-//Function Number: 22
-func_7CF8(param_00,param_01)
-{
+func_7CF8(param_00,param_01) {
 	var_02 = undefined;
-	switch(param_01)
-	{
+	switch(param_01) {
 		case "foam_grenade_vm":
-			if(param_00.power == "power_phaseShift")
-			{
+			if(param_00.power == "power_phaseShift") {
 				var_02 = &"CP_ZMB_INTERACTIONS_TICKET_PHASESHIFT";
 			}
-			else if(param_00.power == "power_kineticPulse")
-			{
+			else if(param_00.power == "power_kineticPulse") {
 				var_02 = &"CP_ZMB_INTERACTIONS_TICKET_KINETICPULSE";
 			}
-			else if(param_00.power == "power_rewind")
-			{
+			else if(param_00.power == "power_rewind") {
 				var_02 = &"CP_ZMB_INTERACTIONS_TICKET_REWIND";
 			}
-			else if(param_00.power == "power_transponder")
-			{
+			else if(param_00.power == "power_transponder") {
 				var_02 = &"CP_ZMB_INTERACTIONS_TICKET_TRANSPONDER";
 			}
-			else if(param_00.power == "power_tripMine")
-			{
+			else if(param_00.power == "power_tripMine") {
 				var_02 = &"CP_ZMB_INTERACTIONS_TICKET_TRIPMINE";
 			}
-			else if(param_00.power == "power_blackholeGrenade")
-			{
+			else if(param_00.power == "power_blackholeGrenade") {
 				var_02 = &"CP_ZMB_INTERACTIONS_TICKET_BHGRENADE";
 			}
-			else if(param_00.power == "power_repulsor")
-			{
+			else if(param_00.power == "power_repulsor") {
 				var_02 = &"CP_ZMB_INTERACTIONS_TICKET_REPULSOR";
 			}
 			break;
 
 		case "equipment_oxygen_tank_01":
-			if(param_00.power == "power_armageddon")
-			{
+			if(param_00.power == "power_armageddon") {
 				var_02 = &"CP_ZMB_INTERACTIONS_TICKET_ARMAGEDDON";
 			}
-			else if(param_00.power == "power_microTurret")
-			{
+			else if(param_00.power == "power_microTurret") {
 				var_02 = &"CP_ZMB_INTERACTIONS_TICKET_MICROTURRRET";
 			}
-			else if(param_00.power == "power_portalGenerator")
-			{
+			else if(param_00.power == "power_portalGenerator") {
 				var_02 = &"CP_ZMB_INTERACTIONS_TICKET_PORTALGENERATOR";
 			}
-			else if(param_00.power == "power_deployableCover")
-			{
+			else if(param_00.power == "power_deployableCover") {
 				var_02 = &"CP_ZMB_INTERACTIONS_TICKET_DEPLOYABLECOVER";
 			}
-			else if(param_00.power == "power_repulsor")
-			{
+			else if(param_00.power == "power_repulsor") {
 				var_02 = &"CP_ZMB_INTERACTIONS_TICKET_REPULSOR";
 			}
 			break;
@@ -563,14 +459,10 @@ func_7CF8(param_00,param_01)
 	return var_02;
 }
 
-//Function Number: 23
-ticket_counter_slot_hint_func(param_00,param_01)
-{
-	if(!isdefined(param_01.ticket_item_outlined))
-	{
+ticket_counter_slot_hint_func(param_00,param_01) {
+	if(!isdefined(param_01.ticket_item_outlined)) {
 		param_01.ticket_item_outlined = param_00.randomintrange;
-		if(self.num_tickets >= level.interactions[param_00.script_noteworthy].cost)
-		{
+		if(self.num_tickets >= level.interactions[param_00.script_noteworthy].cost) {
 			param_01.ticket_item_outlined hudoutlineenableforclient(param_01,3,1,0);
 		}
 		else
@@ -578,12 +470,10 @@ ticket_counter_slot_hint_func(param_00,param_01)
 			param_01.ticket_item_outlined hudoutlineenableforclient(param_01,1,1,0);
 		}
 	}
-	else if(param_01.ticket_item_outlined != param_00.randomintrange)
-	{
+	else if(param_01.ticket_item_outlined != param_00.randomintrange) {
 		param_01.ticket_item_outlined hudoutlinedisableforclient(param_01);
 		param_01.ticket_item_outlined = param_00.randomintrange;
-		if(self.num_tickets >= level.interactions[param_00.script_noteworthy].cost)
-		{
+		if(self.num_tickets >= level.interactions[param_00.script_noteworthy].cost) {
 			param_01.ticket_item_outlined hudoutlineenableforclient(param_01,3,1,0);
 		}
 		else

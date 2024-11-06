@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\mp\maps\mp_breakneck\mp_breakneck.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 17
- * Decompile Time: 949 ms
- * Timestamp: 10/27/2023 12:13:16 AM
-*******************************************************************/
+/*****************************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\mp\maps\mp_breakneck\mp_breakneck.gsc
+*****************************************************************/
 
-//Function Number: 1
-main()
-{
+main() {
 	lib_0F88::main();
 	scripts\mp\maps\mp_breakneck\gen\mp_breakneck_art::main();
 	lib_0F87::main();
@@ -35,9 +29,7 @@ main()
 	thread fix_collision();
 }
 
-//Function Number: 2
-fix_collision()
-{
+fix_collision() {
 	var_00 = getent("clip512x512x8","targetname");
 	var_01 = spawn("script_model",(-43104,296,512));
 	var_01.angles = (0,0,0);
@@ -157,33 +149,24 @@ fix_collision()
 	thread killtriggerloop(var_33);
 }
 
-//Function Number: 3
-killtriggerloop(param_00)
-{
+killtriggerloop(param_00) {
 	level endon("game_ended");
-	for(;;)
-	{
+	for(;;) {
 		param_00 waittill("trigger",var_01);
-		if(isdefined(var_01))
-		{
-			if(isplayer(var_01))
-			{
+		if(isdefined(var_01)) {
+			if(isplayer(var_01)) {
 				var_01 suicide();
 				continue;
 			}
 
-			if(isdefined(var_01.classname) && var_01.classname == "script_vehicle")
-			{
-				if(isdefined(var_01.var_110EA))
-				{
-					if(var_01.var_110EA == "minijackal")
-					{
+			if(isdefined(var_01.classname) && var_01.classname == "script_vehicle") {
+				if(isdefined(var_01.var_110EA)) {
+					if(var_01.var_110EA == "minijackal") {
 						var_01 notify("minijackal_end");
 						continue;
 					}
 
-					if(var_01.var_110EA == "venom")
-					{
+					if(var_01.var_110EA == "venom") {
 						var_01 notify("venom_end",var_01.origin);
 					}
 				}
@@ -192,41 +175,31 @@ killtriggerloop(param_00)
 	}
 }
 
-//Function Number: 4
-func_D80C()
-{
+func_D80C() {
 	level.var_2B31 = ["superstructure_hull_chunk_01","superstructure_hull_chunk_02","debris_exterior_damaged_metal_panels_01","debris_exterior_damaged_metal_panels_02","debris_exterior_damaged_metal_panels_03","debris_exterior_damaged_metal_panels_08","machinery_tower_pipe_beam_support_01_destroyed"];
-	foreach(var_01 in level.var_2B31)
-	{
+	foreach(var_01 in level.var_2B31) {
 		precachemodel(var_01);
 	}
 
 	level.var_871B = ["weapon_spas12_wm","weapon_ripper_rare_wm","weapon_vr_rifle_wm"];
-	foreach(var_04 in level.var_871B)
-	{
+	foreach(var_04 in level.var_871B) {
 		precachemodel(var_04);
 	}
 
 	precachemodel("armory_weapon_locker_clamp_bn");
 }
 
-//Function Number: 5
-func_2FBC()
-{
-	if(getdvar("r_reflectionProbeGenerate") != "1")
-	{
+func_2FBC() {
+	if(getdvar("r_reflectionProbeGenerate") != "1") {
 		thread func_CDA4("mp_breakneck_collision_bink_01");
 		thread func_FA92();
 		thread func_226A();
 	}
 }
 
-//Function Number: 6
-func_226A()
-{
+func_226A() {
 	scripts\common\utility::func_136F7();
-	if(isdefined(scripts\common\utility::getstruct("gunrack_up","targetname")) && isdefined(scripts\common\utility::getstruct("gunrack_down","targetname")))
-	{
+	if(isdefined(scripts\common\utility::getstruct("gunrack_up","targetname")) && isdefined(scripts\common\utility::getstruct("gunrack_down","targetname"))) {
 		level.var_871A = spawnstruct();
 		level.var_871A.var_12F6C = spawnstruct();
 		level.var_871A.var_12F6C.var_10B89 = scripts\common\utility::getstruct("gunrack_up","targetname");
@@ -241,20 +214,16 @@ func_226A()
 	}
 }
 
-//Function Number: 7
-func_226B(param_00,param_01)
-{
+func_226B(param_00,param_01) {
 	level endon("game_ended");
 	var_02 = [];
-	for(;;)
-	{
+	for(;;) {
 		var_03 = spawn("script_model",(0,0,0));
 		var_03 setmodel("armory_weapon_locker_clamp_bn");
 		var_03.var_870F = spawn("script_model",(0,0,0));
 		var_03.var_870F setmodel("tag_origin");
 		var_03.var_870F.var_C370 = [];
-		if(param_01 == 1)
-		{
+		if(param_01 == 1) {
 			var_03.angles = (90,0,0);
 			var_03.var_870F.angles = (0,354,0);
 			var_03.var_870F.var_C370["weapon_spas12_wm"] = (-15.7,-5,3.2);
@@ -273,8 +242,7 @@ func_226B(param_00,param_01)
 		var_03.var_870F linkto(var_03);
 		var_03.origin = param_00;
 		var_02[var_02.size] = var_03;
-		if(var_02.size == 10)
-		{
+		if(var_02.size == 10) {
 			break;
 		}
 	}
@@ -282,27 +250,20 @@ func_226B(param_00,param_01)
 	return var_02;
 }
 
-//Function Number: 8
-func_2268()
-{
-	foreach(var_01 in self.var_871C)
-	{
+func_2268() {
+	foreach(var_01 in self.var_871C) {
 		thread func_2269(var_01);
 		wait(8);
 	}
 }
 
-//Function Number: 9
-func_2269(param_00)
-{
-	for(;;)
-	{
+func_2269(param_00) {
+	for(;;) {
 		param_00.var_870F unlink();
 		param_00 dontinterpolate();
 		param_00.origin = self.var_10B89.origin;
 		scripts\common\utility::func_136F7();
-		if(randomint(100) < 90)
-		{
+		if(randomint(100) < 90) {
 			param_00.var_870F setmodel(scripts\common\utility::random(level.var_871B));
 			param_00.var_870F.origin = param_00.origin + param_00.var_870F.var_C370[param_00.var_870F.model];
 		}
@@ -318,30 +279,22 @@ func_2269(param_00)
 	}
 }
 
-//Function Number: 10
-func_FA92()
-{
+func_FA92() {
 	level.var_2B2F = spawnstruct();
 	level thread func_FA94();
 }
 
-//Function Number: 11
-func_FA94()
-{
-	if(!isdefined(game["roundsPlayed"]))
-	{
+func_FA94() {
+	if(!isdefined(game["roundsPlayed"])) {
 		level.var_2B2F.var_DAE3 = scripts\common\utility::getstruct("breakneck_blackhole_target_loc","script_noteworthy");
 		level.var_2B2F.var_DAE5 = func_FA93(scripts\common\utility::getstructarray("breakneck_blackhole_spawn_loc","script_noteworthy"));
 		level.var_2B2F.var_DAE4 = getentarray("breakneck_blackhole_pull","targetname");
-		if(isdefined(level.var_2B2F.var_DAE3))
-		{
-			if(level.var_2B2F.var_DAE3.size != 0)
-			{
+		if(isdefined(level.var_2B2F.var_DAE3)) {
+			if(level.var_2B2F.var_DAE3.size != 0) {
 				scripts\common\utility::array_thread(level.var_2B2F.var_DAE5,::func_139AE);
 			}
 
-			if(level.var_2B2F.var_DAE4.size != 0)
-			{
+			if(level.var_2B2F.var_DAE4.size != 0) {
 				level thread func_139AF();
 			}
 		}
@@ -350,12 +303,9 @@ func_FA94()
 	level thread func_2B44();
 }
 
-//Function Number: 12
-func_FA93(param_00)
-{
+func_FA93(param_00) {
 	var_01 = [];
-	foreach(var_03 in param_00)
-	{
+	foreach(var_03 in param_00) {
 		var_04 = spawn("script_model",var_03.origin);
 		var_04 setmodel("tag_origin");
 		var_04.angles = (0,0,0);
@@ -368,34 +318,26 @@ func_FA93(param_00)
 	return var_01;
 }
 
-//Function Number: 13
-func_2B44()
-{
+func_2B44() {
 	level waittill("match_start_real_countdown");
 	var_00 = getscriptablearray("scriptable_spawn_pulls","targetname");
-	if(game["roundsPlayed"] == 0)
-	{
-		foreach(var_02 in var_00)
-		{
+	if(game["roundsPlayed"] == 0) {
+		foreach(var_02 in var_00) {
 			var_02 setscriptablepartstate("default","countdown_anim");
 		}
 
 		return;
 	}
 
-	foreach(var_02 in var_02)
-	{
+	foreach(var_02 in var_02) {
 		var_02 setscriptablepartstate("default","fast_anim");
 	}
 }
 
-//Function Number: 14
-func_139AE()
-{
+func_139AE() {
 	level endon("game_ended");
 	wait(randomint(15));
-	for(;;)
-	{
+	for(;;) {
 		self.angles = (scripts\common\utility::func_4347() * randomint(360),scripts\common\utility::func_4347() * randomint(360),scripts\common\utility::func_4347() * randomint(360));
 		self setmodel(scripts\common\utility::random(level.var_2B31));
 		self moveto(level.var_2B2F.var_DAE3.origin,60 + scripts\common\utility::func_4347() * randomint(15),0,0);
@@ -408,35 +350,27 @@ func_139AE()
 	}
 }
 
-//Function Number: 15
-func_139AF()
-{
+func_139AF() {
 	level endon("game_ended");
-	foreach(var_01 in level.var_2B2F.var_DAE4)
-	{
+	foreach(var_01 in level.var_2B2F.var_DAE4) {
 		var_01.var_CB0B = 0;
 	}
 
-	for(;;)
-	{
+	for(;;) {
 		wait(15 + scripts\common\utility::func_4347() * randomint(15));
 		var_03 = scripts\common\utility::random(level.var_2B2F.var_DAE4);
 		var_03 thread func_2B43();
 		level.var_2B2F.var_DAE4 = scripts\common\utility::func_22A9(level.var_2B2F.var_DAE4,var_03);
-		if(level.var_2B2F.var_DAE4.size == 0)
-		{
+		if(level.var_2B2F.var_DAE4.size == 0) {
 			break;
 		}
 	}
 }
 
-//Function Number: 16
-func_2B43()
-{
+func_2B43() {
 	level endon("game_ended");
 	self endon("death");
-	if(!isdefined(self.angles))
-	{
+	if(!isdefined(self.angles)) {
 		self.angles = (0,0,0);
 	}
 
@@ -455,9 +389,7 @@ func_2B43()
 	self delete();
 }
 
-//Function Number: 17
-func_CDA4(param_00)
-{
+func_CDA4(param_00) {
 	wait(30);
 	function_030E(param_00);
 }

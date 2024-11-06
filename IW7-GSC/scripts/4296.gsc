@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: 4296.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 1
- * Decompile Time: 134 ms
- * Timestamp: 10/27/2023 12:32:03 AM
-*******************************************************************/
+/****************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\4296.gsc
+****************************/
 
-//Function Number: 1
-main()
-{
+main() {
 	var_00 = scripts\engine\utility::createoneshoteffect("vfx_dust_divide");
 	var_00 scripts\common\createfx::set_origin_and_angles((-3293.55,1344.12,560.211),(348,305,0));
 	var_00.v["fxid"] = "vfx_dust_divide";

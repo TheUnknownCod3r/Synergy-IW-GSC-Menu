@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: 4058.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 1
- * Decompile Time: 1 ms
- * Timestamp: 10/27/2023 12:31:57 AM
-*******************************************************************/
+/****************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\4058.gsc
+****************************/
 
-//Function Number: 1
-main()
-{
+main() {
 	level._effect["vfx_iceplain_horizon_haze_proto_lrg"] = loadfx("vfx/iw7/levels/mp_proto/vfx_iceplain_horizon_haze_proto_lrg.vfx");
 	level._effect["vfx_steam_med_proto"] = loadfx("vfx/iw7/levels/mp_proto/vfx_steam_med_proto.vfx");
 	level._effect["vfx_snow_venttwirl_proto"] = loadfx("vfx/iw7/levels/mp_proto/vfx_snow_venttwirl_proto.vfx");

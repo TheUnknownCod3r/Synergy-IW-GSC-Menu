@@ -1,24 +1,15 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: behaviortree\lumberjack.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 3
- * Decompile Time: 139 ms
- * Timestamp: 10\26\2023 11:58:22 PM
-*******************************************************************/
+/***********************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\behaviortree\lumberjack.gsc
+***********************************************/
 
-//Function Number: 1
-lumberjackfn0(param_00)
-{
+lumberjackfn0(param_00) {
 	return lib_0A09::func_5AEA(param_00,200);
 }
 
-//Function Number: 2
-func_2AD0()
-{
-	if(isdefined(level.var_119E["lumberjack"]))
-	{
+func_2AD0() {
+	if(isdefined(level.var_119E["lumberjack"])) {
 		return;
 	}
 
@@ -41,9 +32,7 @@ func_2AD0()
 	level.var_119E["lumberjack"] = var_00;
 }
 
-//Function Number: 3
-func_DEE8()
-{
+func_DEE8() {
 	func_2AD0();
 	function_02D8("lumberjack");
 }

@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\cp\maps\cp_rave\cp_rave_powers.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 5
- * Decompile Time: 289 ms
- * Timestamp: 10/27/2023 12:06:34 AM
-*******************************************************************/
+/**************************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\cp\maps\cp_rave\cp_rave_powers.gsc
+**************************************************************/
 
-//Function Number: 1
-init()
-{
+init() {
 	scripts\cp\powers\coop_powers::powersetupfunctions("power_transponder",::scripts\cp\powers\coop_powers::settransponder,::scripts\cp\powers\coop_powers::unsettransponder,undefined,"transponder_update","powers_transponder_used",undefined);
 	scripts\cp\powers\coop_powers::powersetupfunctions("power_armageddon",undefined,undefined,::scripts\cp\powers\coop_powers::usearmageddon,undefined,undefined,undefined);
 	scripts\cp\powers\coop_powers::powersetupfunctions("power_microTurret",undefined,undefined,undefined,"microTurret_update","powers_microTurret_used",undefined);
@@ -28,38 +22,29 @@ init()
 	thread scripts/cp/powers/coop_blackholegrenade::blackholegrenadeinit();
 }
 
-//Function Number: 2
-listen_for_bait_throw()
-{
+listen_for_bait_throw() {
 	self endon("disconnect");
 	self endon("stop_bait_listen");
-	for(;;)
-	{
+	for(;;) {
 		self waittill("grenade_fire",var_00,var_01);
-		if(isdefined(var_00) && isdefined(var_01))
-		{
+		if(isdefined(var_00) && isdefined(var_01)) {
 			var_00 thread wait_for_impact(var_01,self);
 		}
 	}
 }
 
-//Function Number: 3
-wait_for_impact(param_00,param_01)
-{
+wait_for_impact(param_00,param_01) {
 	self endon("disconnect");
 	self endon("stop_bait_listen");
-	if(!isdefined(self.weapon_name) || self.weapon_name != "iw7_bait_zm")
-	{
+	if(!isdefined(self.weapon_name) || self.weapon_name != "iw7_bait_zm") {
 		return;
 	}
 
 	self waittill("explode",var_02);
 	var_03 = getentarray("bait_head","targetname");
 	var_04 = scripts\engine\utility::getclosest(var_02,var_03,500);
-	if(isdefined(var_04))
-	{
-		if(isdefined(var_04.bait))
-		{
+	if(isdefined(var_04)) {
+		if(isdefined(var_04.bait)) {
 			var_04.bait delete();
 		}
 
@@ -68,15 +53,11 @@ wait_for_impact(param_00,param_01)
 	}
 }
 
-//Function Number: 4
-setbait(param_00)
-{
+setbait(param_00) {
 	self notify("stop_bait_listen");
 	thread listen_for_bait_throw();
 }
 
-//Function Number: 5
-unsetbait()
-{
+unsetbait() {
 	self notify("stop_bait_listen");
 }

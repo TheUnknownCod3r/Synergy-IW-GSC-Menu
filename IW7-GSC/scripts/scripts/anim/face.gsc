@@ -1,24 +1,16 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\anim\face.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 9
- * Decompile Time: 471 ms
- * Timestamp: 10\27\2023 12:00:35 AM
-*******************************************************************/
+/*****************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\anim\face.gsc
+*****************************************/
 
-//Function Number: 1
-saygenericdialogue(param_00)
-{
-	if(self.unittype != "soldier" && self.unittype != "c6")
-	{
+saygenericdialogue(param_00) {
+	if(self.unittype != "soldier" && self.unittype != "c6") {
 		return;
 	}
 
 	var_01 = undefined;
-	switch(param_00)
-	{
+	switch(param_00) {
 		case "meleeattack":
 		case "meleecharge":
 			var_02 = 0.5;
@@ -45,8 +37,7 @@ saygenericdialogue(param_00)
 			break;
 	}
 
-	if(isdefined(var_01) && randomint(100) > var_01)
-	{
+	if(isdefined(var_01) && randomint(100) > var_01) {
 		return;
 	}
 
@@ -54,10 +45,8 @@ saygenericdialogue(param_00)
 	var_04 = "generic_";
 	var_05 = undefined;
 	var_06 = undefined;
-	if(isdefined(self.npcid))
-	{
-		switch(self.npcid)
-		{
+	if(isdefined(self.npcid)) {
+		switch(self.npcid) {
 			case "adm":
 			case "mac":
 			case "omr":
@@ -72,10 +61,8 @@ saygenericdialogue(param_00)
 		}
 	}
 
-	if(!isdefined(var_05))
-	{
-		switch(self.voice)
-		{
+	if(!isdefined(var_05)) {
+		switch(self.voice) {
 			case "unitednationshelmet":
 			case "unitednations":
 				var_05 = "friendly";
@@ -103,10 +90,8 @@ saygenericdialogue(param_00)
 	var_03 = 1 + self getentitynumber() % var_06;
 	var_05 = var_05 + "_" + var_03;
 	var_07 = undefined;
-	if(!isdefined(var_07))
-	{
-		if(isdefined(self.generic_voice_override))
-		{
+	if(!isdefined(var_07)) {
+		if(isdefined(self.generic_voice_override)) {
 			var_07 = self.generic_voice_override + "_" + param_00 + "_" + var_05;
 		}
 		else
@@ -114,8 +99,7 @@ saygenericdialogue(param_00)
 			var_07 = var_04 + param_00 + "_" + var_05;
 		}
 
-		if(!soundexists(var_07))
-		{
+		if(!soundexists(var_07)) {
 			var_07 = "generic_" + param_00 + "_" + var_05;
 		}
 	}
@@ -123,25 +107,18 @@ saygenericdialogue(param_00)
 	thread playfacethread(var_07,undefined);
 }
 
-//Function Number: 2
-sayspecificdialogue(param_00,param_01)
-{
+sayspecificdialogue(param_00,param_01) {
 	thread playfacethread(param_00,param_01);
 }
 
-//Function Number: 3
-playfacethread(param_00,param_01)
-{
-	if(isai(self))
-	{
+playfacethread(param_00,param_01) {
+	if(isai(self)) {
 		self.var_1491.facialanimdone = 1;
 		self.var_1491.facialsounddone = 1;
 	}
 
-	if(isdefined(param_01))
-	{
-		if(isdefined(param_00))
-		{
+	if(isdefined(param_01)) {
+		if(isdefined(param_00)) {
 			playfacesound(param_00,"animscript facesound" + param_01,1);
 			thread waitforfacesound(param_01);
 			return;
@@ -153,19 +130,14 @@ playfacethread(param_00,param_01)
 	playfacesound(param_00);
 }
 
-//Function Number: 4
-playfacesound(param_00,param_01,param_02)
-{
-	if(isai(self))
-	{
-		if(isdefined(param_01) && isdefined(param_02))
-		{
+playfacesound(param_00,param_01,param_02) {
+	if(isai(self)) {
+		if(isdefined(param_01) && isdefined(param_02)) {
 			self getyawtoenemy(param_00,param_01,param_02);
 			return;
 		}
 
-		if(isdefined(param_01))
-		{
+		if(isdefined(param_01)) {
 			self getyawtoenemy(param_00,param_01);
 			return;
 		}
@@ -174,14 +146,12 @@ playfacesound(param_00,param_01,param_02)
 		return;
 	}
 
-	if(isdefined(param_01) && isdefined(param_02))
-	{
+	if(isdefined(param_01) && isdefined(param_02)) {
 		self playsound(param_00,param_01,param_02);
 		return;
 	}
 
-	if(isdefined(param_01))
-	{
+	if(isdefined(param_01)) {
 		self playsound(param_00,param_01);
 		return;
 	}
@@ -189,57 +159,43 @@ playfacesound(param_00,param_01,param_02)
 	self playsound(param_00);
 }
 
-//Function Number: 5
-waitforfacesound(param_00)
-{
+waitforfacesound(param_00) {
 	self endon("death");
 	self waittill("animscript facesound" + param_00);
 	self notify(param_00);
 }
 
-//Function Number: 6
-initlevelface()
-{
+initlevelface() {
 	anim.numenemyvoices = 7;
 	anim.numfriendlyvoices = 7;
 	anim.numfriendlyfemalevoices = 3;
 	initfacialanims();
 }
 
-//Function Number: 7
-initfacialanims()
-{
+initfacialanims() {
 	anim.facial = [];
 }
 
-//Function Number: 8
-animhasfacialoverride(param_00)
-{
+animhasfacialoverride(param_00) {
 	return animhasnotetrack(param_00,"facial_override");
 }
 
-//Function Number: 9
-playfacialanim(param_00,param_01,param_02)
-{
-	if(isdefined(self.bdisabledefaultfacialanims) && self.bdisabledefaultfacialanims)
-	{
+playfacialanim(param_00,param_01,param_02) {
+	if(isdefined(self.bdisabledefaultfacialanims) && self.bdisabledefaultfacialanims) {
 		self aiclearanim(%head,0.2);
 		return;
 	}
 
-	if(isdefined(param_00) && animhasfacialoverride(param_00))
-	{
+	if(isdefined(param_00) && animhasfacialoverride(param_00)) {
 		self aiclearanim(%head,0.2);
 		return;
 	}
 
-	if(!isdefined(level.facial[param_01]))
-	{
+	if(!isdefined(level.facial[param_01])) {
 		return;
 	}
 
-	if(isdefined(param_02) && param_02 >= 0 && param_02 < level.facial[param_01].size)
-	{
+	if(isdefined(param_02) && param_02 >= 0 && param_02 < level.facial[param_01].size) {
 		var_03 = param_02;
 	}
 	else

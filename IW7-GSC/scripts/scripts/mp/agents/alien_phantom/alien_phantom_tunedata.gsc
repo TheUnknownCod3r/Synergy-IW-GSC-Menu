@@ -1,18 +1,11 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\mp\agents\alien_phantom\alien_phantom_tunedata.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 2
- * Decompile Time: 145 ms
- * Timestamp: 10/27/2023 12:11:06 AM
-*******************************************************************/
+/******************************************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\mp\agents\alien_phantom\alien_phantom_tunedata.gsc
+******************************************************************************/
 
-//Function Number: 1
-setuptunedata()
-{
-	if(!isdefined(level.agenttunedata))
-	{
+setuptunedata() {
+	if(!isdefined(level.agenttunedata)) {
 		level.agenttunedata = [];
 	}
 
@@ -20,9 +13,7 @@ setuptunedata()
 	setupmytunedata(level.agenttunedata["alien_phantom"]);
 }
 
-//Function Number: 2
-setupmytunedata(param_00)
-{
+setupmytunedata(param_00) {
 	scripts\mp\agents\alien_goon\alien_goon_tunedata::setupmytunedata(param_00);
 	param_00.goon_health_multiplier = 7;
 	param_00.force_melee_attack_damage_radius_sq = 1024;

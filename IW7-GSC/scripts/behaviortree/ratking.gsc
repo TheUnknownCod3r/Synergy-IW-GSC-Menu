@@ -1,18 +1,11 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: behaviortree\ratking.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 2
- * Decompile Time: 109 ms
- * Timestamp: 10\26\2023 11:58:23 PM
-*******************************************************************/
+/********************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\behaviortree\ratking.gsc
+********************************************/
 
-//Function Number: 1
-func_2AD0()
-{
-	if(isdefined(level.var_119E["ratking"]))
-	{
+func_2AD0() {
+	if(isdefined(level.var_119E["ratking"])) {
 		return;
 	}
 
@@ -33,9 +26,7 @@ func_2AD0()
 	level.var_119E["ratking"] = var_00;
 }
 
-//Function Number: 2
-func_DEE8()
-{
+func_DEE8() {
 	func_2AD0();
 	function_02D8("ratking");
 }

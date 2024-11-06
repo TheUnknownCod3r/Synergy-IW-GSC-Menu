@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\mp\maps\mp_nova\mp_nova_fx.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 1
- * Decompile Time: 99 ms
- * Timestamp: 10/27/2023 12:13:55 AM
-*******************************************************************/
+/**********************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\mp\maps\mp_nova\mp_nova_fx.gsc
+**********************************************************/
 
-//Function Number: 1
-main()
-{
+main() {
 	level._effect["vfx_blowing_sand_vista"] = loadfx("vfx/iw7/levels/mp_nova/vfx_blowing_sand_vista.vfx");
 	level._effect["vfx_nova_oil_slick"] = loadfx("vfx/iw7/levels/mp_nova/vfx_nova_oil_slick.vfx");
 	level._effect["vfx_nova_barrel"] = loadfx("vfx/iw7/levels/mp_nova/vfx_nova_barrel.vfx");

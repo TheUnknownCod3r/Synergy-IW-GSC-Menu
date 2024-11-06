@@ -1,22 +1,14 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\mp\broshot_utilities.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 22
- * Decompile Time: 808 ms
- * Timestamp: 10/27/2023 12:22:33 AM
-*******************************************************************/
+/****************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\mp\broshot_utilities.gsc
+****************************************************/
 
-//Function Number: 1
-processepictaunt(param_00,param_01,param_02)
-{
-	if(param_01 >= 0 && isdefined(level.camera_bro_shot.char_loc))
-	{
+processepictaunt(param_00,param_01,param_02) {
+	if(param_01 >= 0 && isdefined(level.camera_bro_shot.char_loc)) {
 		var_03 = level.camera_bro_shot.char_loc[param_01].origin;
 		var_04 = level.camera_bro_shot.char_loc[param_01].angles;
-		if(isdefined(level.overridebroslot))
-		{
+		if(isdefined(level.overridebroslot)) {
 			param_01 = level.overridebroslot - 1;
 		}
 	}
@@ -27,19 +19,15 @@ processepictaunt(param_00,param_01,param_02)
 		param_01 = 0;
 	}
 
-	if(tauntinprogress(param_01))
-	{
+	if(tauntinprogress(param_01)) {
 		return;
 	}
 
 	var_05 = param_00;
-	if(var_05 == "IW7_mp_taunt_drone_crush_01")
-	{
-		if(param_02 && !isdefined(level.losersinteractable) || level.losersinteractable == 1)
-		{
+	if(var_05 == "IW7_mp_taunt_drone_crush_01") {
+		if(param_02 && !isdefined(level.losersinteractable) || level.losersinteractable == 1) {
 			var_05 = "IW7_mp_taunt_drone_crush_01_nohit";
-			if(isdefined(level.topplayers[3]))
-			{
+			if(isdefined(level.topplayers[3])) {
 				var_05 = "IW7_mp_taunt_drone_crush_01_hit";
 			}
 		}
@@ -76,21 +64,17 @@ processepictaunt(param_00,param_01,param_02)
 	var_20 = [];
 	var_21 = 0;
 	var_22 = "allies";
-	if(param_02 && level.teambased)
-	{
+	if(param_02 && level.teambased) {
 		var_23 = getteamscore("allies");
 		var_24 = getteamscore("axis");
-		if(var_23 < var_24)
-		{
+		if(var_23 < var_24) {
 			var_22 = "axis";
 		}
 	}
 
-	switch(param_00)
-	{
+	switch(param_00) {
 		case "iw7_mp_taunt_flag_plant":
-			if(var_22 == "allies")
-			{
+			if(var_22 == "allies") {
 				var_06[0] = "ctf_game_flag_noStand_blue_mp";
 			}
 			else
@@ -103,8 +87,7 @@ processepictaunt(param_00,param_01,param_02)
 			break;
 
 		case "IW7_mp_taunt_dance_lean_01":
-			if(param_02 && !isdefined(level.losersinteractable) || level.losersinteractable == 1)
-			{
+			if(param_02 && !isdefined(level.losersinteractable) || level.losersinteractable == 1) {
 				level.losersinteractable = 0;
 				var_1D = 3;
 				var_1E = 0.31;
@@ -113,10 +96,8 @@ processepictaunt(param_00,param_01,param_02)
 			break;
 
 		case "IW7_mp_taunt_drone_crush_01":
-			if(param_02 && !isdefined(level.losersinteractable) || level.losersinteractable == 1)
-			{
-				if(isdefined(level.topplayers[3]))
-				{
+			if(param_02 && !isdefined(level.losersinteractable) || level.losersinteractable == 1) {
+				if(isdefined(level.topplayers[3])) {
 					level.losersinteractable = 0;
 					var_1F = 15;
 					var_1D = 1;
@@ -126,14 +107,12 @@ processepictaunt(param_00,param_01,param_02)
 					var_20[0] = level.camera_bro_shot.char_loc[3].origin;
 					var_1E = 4;
 					var_17[0] = 4.4;
-					if(isdefined(level.topplayers[4]))
-					{
+					if(isdefined(level.topplayers[4])) {
 						var_06[1] = "care_package_iw7_ca_wm";
 						var_07[1] = "IW7_mp_taunt_drone_crush_05_carepackage";
 						var_08[1] = 6.6;
 						var_20[1] = level.camera_bro_shot.char_loc[4].origin;
-						if(isdefined(level.topplayers[5]))
-						{
+						if(isdefined(level.topplayers[5])) {
 							var_06[2] = "care_package_iw7_ca_wm";
 							var_07[2] = "IW7_mp_taunt_drone_crush_06_carepackage";
 							var_08[2] = 6.6;
@@ -142,8 +121,7 @@ processepictaunt(param_00,param_01,param_02)
 					}
 				}
 			}
-			else if(!param_02)
-			{
+			else if(!param_02) {
 				var_06[0] = "care_package_iw7_ca_wm";
 				var_07[0] = "IW7_mp_taunt_drone_crush_07_carepackage";
 				var_08[0] = 6.6;
@@ -161,8 +139,7 @@ processepictaunt(param_00,param_01,param_02)
 			break;
 
 		case "IW7_mp_taunt_crush_the_enemies_01":
-			if(param_02 && !isdefined(level.losersinteractable) || level.losersinteractable == 1)
-			{
+			if(param_02 && !isdefined(level.losersinteractable) || level.losersinteractable == 1) {
 				var_1D = 2;
 				var_08[0] = 6.6;
 				var_1E = 5.266;
@@ -173,8 +150,7 @@ processepictaunt(param_00,param_01,param_02)
 			break;
 
 		case "IW7_mp_taunt_ftl_1st_kills_456":
-			if(param_02 && !isdefined(level.losersinteractable) || level.losersinteractable == 1)
-			{
+			if(param_02 && !isdefined(level.losersinteractable) || level.losersinteractable == 1) {
 				var_08[0] = 10;
 				var_18[0] = 0.85;
 				var_18[1] = 2.05;
@@ -184,8 +160,7 @@ processepictaunt(param_00,param_01,param_02)
 			break;
 
 		case "IW7_mp_taunt_ftl_2nd_kills_456":
-			if(param_02 && !isdefined(level.losersinteractable) || level.losersinteractable == 1)
-			{
+			if(param_02 && !isdefined(level.losersinteractable) || level.losersinteractable == 1) {
 				var_08[0] = 10;
 				var_18[0] = 1.1;
 				var_18[1] = 2.7;
@@ -195,8 +170,7 @@ processepictaunt(param_00,param_01,param_02)
 			break;
 
 		case "IW7_mp_taunt_ftl_3rd_kills_456":
-			if(param_02 && !isdefined(level.losersinteractable) || level.losersinteractable == 1)
-			{
+			if(param_02 && !isdefined(level.losersinteractable) || level.losersinteractable == 1) {
 				var_08[0] = 10;
 				var_18[0] = 1.03;
 				var_18[1] = 2.76;
@@ -211,8 +185,7 @@ processepictaunt(param_00,param_01,param_02)
 
 		case "iw7_mp_taunt_super_blackhole":
 			var_08[0] = 7;
-			for(var_28 = 0;var_28 < 20;var_28++)
-			{
+			for(var_28 = 0;var_28 < 20;var_28++) {
 				var_17[var_28] = 2.6 + var_28 * 0.1;
 			}
 			break;
@@ -403,18 +376,14 @@ processepictaunt(param_00,param_01,param_02)
 
 	level.broshotepictauntprops[param_01] = [];
 	level.broshotepictauntsubprops[param_01] = [];
-	if(param_02 && var_0E)
-	{
-		if(!isdefined(level.queuedtaunts))
-		{
+	if(param_02 && var_0E) {
+		if(!isdefined(level.queuedtaunts)) {
 			level.queuedtaunts = [];
 		}
 
-		if(isdefined(level.queuedtaunts[param_00]))
-		{
+		if(isdefined(level.queuedtaunts[param_00])) {
 			var_29 = gettime() - level.queuedtaunts[param_00];
-			if(var_29 < var_0F * 1000)
-			{
+			if(var_29 < var_0F * 1000) {
 				wait(var_0F - var_29 / 1000);
 			}
 		}
@@ -423,21 +392,17 @@ processepictaunt(param_00,param_01,param_02)
 	}
 
 	var_2A = (0,0,0);
-	if(var_21 && isdefined(level.upsidedowntaunts) && level.upsidedowntaunts == 1)
-	{
+	if(var_21 && isdefined(level.upsidedowntaunts) && level.upsidedowntaunts == 1) {
 		var_2A = (180,180,0);
 	}
 
-	if(var_1E > 0)
-	{
+	if(var_1E > 0) {
 		thread spawndelayedprop(var_1E,param_01,var_03,var_06,var_04,var_2A,var_07,var_20);
 	}
 	else
 	{
-		for(var_28 = 0;var_28 < var_06.size;var_28++)
-		{
-			if(isdefined(var_20) && isdefined(var_20[var_28]))
-			{
+		for(var_28 = 0;var_28 < var_06.size;var_28++) {
+			if(isdefined(var_20) && isdefined(var_20[var_28])) {
 				var_03 = var_20[var_28];
 			}
 
@@ -447,20 +412,17 @@ processepictaunt(param_00,param_01,param_02)
 			var_2B notsolid();
 			var_2B dontinterpolate();
 			var_2B scriptmodelplayanimdeltamotion(var_07[var_28]);
-			if(!isdefined(level.broshotepictauntprops))
-			{
+			if(!isdefined(level.broshotepictauntprops)) {
 				level.broshotepictauntprops = [];
 			}
 
 			level.broshotepictauntprops[param_01][var_28] = var_2B;
-			if(!isdefined(var_09[var_28]) && isarray(var_09[var_28]))
-			{
+			if(!isdefined(var_09[var_28]) && isarray(var_09[var_28])) {
 				continue;
 			}
 
 			level.broshotepictauntsubprops[param_01] = [];
-			for(var_2C = 0;var_2C < var_09[var_28].size;var_2C++)
-			{
+			for(var_2C = 0;var_2C < var_09[var_28].size;var_2C++) {
 				var_2D = spawn("script_model",var_03);
 				var_2D setmodel(var_09[var_28][var_2C]);
 				var_2D.angles = var_04 + var_2A;
@@ -473,18 +435,15 @@ processepictaunt(param_00,param_01,param_02)
 	}
 
 	var_2E = 0;
-	for(var_28 = 0;var_28 < var_08.size;var_28++)
-	{
+	for(var_28 = 0;var_28 < var_08.size;var_28++) {
 		var_2E = max(var_2E,var_08[var_28]);
 	}
 
-	for(var_28 = 0;var_28 < var_0B.size;var_28++)
-	{
+	for(var_28 = 0;var_28 < var_0B.size;var_28++) {
 		thread doepictauntscriptablestep(param_02,param_01,var_0B[var_28],var_0C[var_28],var_0D[var_28]);
 	}
 
-	if(param_02 == 0)
-	{
+	if(param_02 == 0) {
 		var_2F = getplayercharacter(-1);
 	}
 	else
@@ -492,52 +451,42 @@ processepictaunt(param_00,param_01,param_02)
 		var_2F = getplayercharacter(param_02);
 	}
 
-	if(param_02 != 0)
-	{
-		for(var_28 = 0;var_28 < var_10.size;var_28++)
-		{
+	if(param_02 != 0) {
+		for(var_28 = 0;var_28 < var_10.size;var_28++) {
 			thread playbeamfx(var_10[var_28],var_11[var_28],var_14[var_28],var_12[var_28],var_13[var_28],var_2F);
 		}
 	}
 
-	if(param_02 != 0)
-	{
-		if(var_1D > 0)
-		{
+	if(param_02 != 0) {
+		if(var_1D > 0) {
 			thread playloseranimation(var_1E,var_1D,var_08[0]);
 		}
 	}
 
-	if(param_02 != 0 && var_15 > 0)
-	{
+	if(param_02 != 0 && var_15 > 0) {
 		thread doshellshock(var_15);
 	}
 
-	if(param_02 != 0 && var_16 > 0)
-	{
+	if(param_02 != 0 && var_16 > 0) {
 		thread doearthquake(var_16,1);
 	}
 
-	for(var_28 = 0;var_28 < var_17.size;var_28++)
-	{
+	for(var_28 = 0;var_28 < var_17.size;var_28++) {
 		thread doearthquake(var_17[var_28],0);
 	}
 
-	for(var_28 = 0;var_28 < var_18.size;var_28++)
-	{
+	for(var_28 = 0;var_28 < var_18.size;var_28++) {
 		thread dodisintegrate(var_18[var_28],var_28);
 	}
 
-	for(var_28 = 0;var_28 < var_1A.size;var_28++)
-	{
+	for(var_28 = 0;var_28 < var_1A.size;var_28++) {
 		var_25 = anglestoforward(level.camera_bro_shot.basecam.angles);
 		var_26 = vectornormalize((var_25[0],var_25[1],0));
 		var_27 = vectorcross(var_26,(0,0,1));
 		var_30 = var_26 * var_1A[var_28][1];
 		var_31 = var_27 * var_1A[var_28][0];
 		var_32 = var_30 + var_31;
-		if(param_02 != 0)
-		{
+		if(param_02 != 0) {
 			var_33 = level.camera_bro_shot.char_loc[0].origin;
 		}
 		else
@@ -545,8 +494,7 @@ processepictaunt(param_00,param_01,param_02)
 			var_33 = var_03;
 		}
 
-		for(var_2C = 0;var_2C < var_19.size;var_2C++)
-		{
+		for(var_2C = 0;var_2C < var_19.size;var_2C++) {
 			thread dospawnvfx(var_19[var_2C],var_1C[var_2C] + var_1B * var_28,var_32,var_33);
 		}
 	}
@@ -554,15 +502,11 @@ processepictaunt(param_00,param_01,param_02)
 	thread cleanupepictauntprops(param_01,var_2E + var_1F,param_00);
 }
 
-//Function Number: 2
-spawndelayedprop(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07)
-{
+spawndelayedprop(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07) {
 	self endon("cancel_taunt_cleanup");
 	wait(param_00);
-	for(var_08 = 0;var_08 < param_03.size;var_08++)
-	{
-		if(isdefined(param_07) && isdefined(param_07[var_08]))
-		{
+	for(var_08 = 0;var_08 < param_03.size;var_08++) {
+		if(isdefined(param_07) && isdefined(param_07[var_08])) {
 			param_02 = param_07[var_08];
 		}
 
@@ -572,8 +516,7 @@ spawndelayedprop(param_00,param_01,param_02,param_03,param_04,param_05,param_06,
 		var_09 notsolid();
 		var_09 dontinterpolate();
 		var_09 scriptmodelplayanimdeltamotion(param_06[var_08]);
-		if(!isdefined(level.broshotepictauntprops))
-		{
+		if(!isdefined(level.broshotepictauntprops)) {
 			level.broshotepictauntprops = [];
 		}
 
@@ -581,103 +524,77 @@ spawndelayedprop(param_00,param_01,param_02,param_03,param_04,param_05,param_06,
 	}
 }
 
-//Function Number: 3
-dospawnvfx(param_00,param_01,param_02,param_03)
-{
+dospawnvfx(param_00,param_01,param_02,param_03) {
 	self endon("cancel_taunt_cleanup");
 	wait(param_01);
 	var_04 = param_03 + param_02;
 	var_05 = spawnfx(level._effect[param_00],var_04);
-	if(isdefined(var_05))
-	{
+	if(isdefined(var_05)) {
 		triggerfx(var_05);
 		var_05 thread delayfxdelete(12);
 	}
 }
 
-//Function Number: 4
-delayfxdelete(param_00)
-{
+delayfxdelete(param_00) {
 	self endon("cancel_taunt_cleanup");
 	wait(param_00);
-	if(isdefined(self))
-	{
+	if(isdefined(self)) {
 		self delete();
 	}
 }
 
-//Function Number: 5
-playloseranimation(param_00,param_01,param_02)
-{
+playloseranimation(param_00,param_01,param_02) {
 	self endon("cancel_taunt_cleanup");
 	wait(param_00);
-	if(isdefined(level.topplayers[3]) || isdefined(level.topplayers[4]) || isdefined(level.topplayers[5]))
-	{
+	if(isdefined(level.topplayers[3]) || isdefined(level.topplayers[4]) || isdefined(level.topplayers[5])) {
 		sendloseranim(param_01,param_02);
 	}
 }
 
-//Function Number: 6
-sendloseranim(param_00,param_01)
-{
+sendloseranim(param_00,param_01) {
 	setomnvar("ui_broshot_anim_0",20000 + param_00);
 	wait(param_01);
 }
 
-//Function Number: 7
-dodisintegrate(param_00,param_01)
-{
+dodisintegrate(param_00,param_01) {
 	self endon("cancel_taunt_cleanup");
 	wait(param_00);
-	if(isdefined(level.topplayers[param_01 + 3]))
-	{
+	if(isdefined(level.topplayers[param_01 + 3])) {
 		level.topplayers[param_01 + 3] scripts\mp\archetypes\archassassin_utility::playbodyfx(undefined,level.camera_bro_shot.char_loc[param_01 + 3].origin - level.topplayers[param_01 + 3].origin);
 		level.topplayers[param_01 + 3].bro hide(1);
 	}
 }
 
-//Function Number: 8
-playbeamfx(param_00,param_01,param_02,param_03,param_04,param_05)
-{
+playbeamfx(param_00,param_01,param_02,param_03,param_04,param_05) {
 	self endon("cancel_taunt_cleanup");
 	wait(param_00);
 	var_06 = function_02DF(level._effect[param_02],param_05,param_03,param_05,param_04);
 	thread cleanupbeamfx(var_06,param_01);
 }
 
-//Function Number: 9
-cleanupbeamfx(param_00,param_01)
-{
+cleanupbeamfx(param_00,param_01) {
 	waittill_notify_or_timeout("cancel_taunt_cleanup",param_01);
 	param_00 delete();
 }
 
-//Function Number: 10
-waittill_notify_or_timeout(param_00,param_01)
-{
+waittill_notify_or_timeout(param_00,param_01) {
 	self endon(param_00);
 	wait(param_01);
 }
 
-//Function Number: 11
-doearthquake(param_00,param_01)
-{
+doearthquake(param_00,param_01) {
 	self endon("cancel_taunt_cleanup");
-	if(!isdefined(level.players))
-	{
+	if(!isdefined(level.players)) {
 		return;
 	}
 
 	wait(param_00);
-	foreach(var_03 in level.players)
-	{
-		if(isbot(var_03))
-		{
+	foreach(var_03 in level.players) {
+		if(isbot(var_03)) {
 			continue;
 		}
 
-		if(param_01)
-		{
+		if(param_01) {
 			var_03 earthquakeforplayer(0.5,0.65,var_03.origin,1000);
 			continue;
 		}
@@ -686,15 +603,11 @@ doearthquake(param_00,param_01)
 	}
 }
 
-//Function Number: 12
-doshellshock(param_00)
-{
+doshellshock(param_00) {
 	self endon("cancel_taunt_cleanup");
 	wait(param_00);
-	foreach(var_02 in level.players)
-	{
-		if(isbot(var_02))
-		{
+	foreach(var_02 in level.players) {
+		if(isbot(var_02)) {
 			continue;
 		}
 
@@ -702,11 +615,8 @@ doshellshock(param_00)
 	}
 }
 
-//Function Number: 13
-getplayercharacter(param_00)
-{
-	if(param_00 == -1)
-	{
+getplayercharacter(param_00) {
+	if(param_00 == -1) {
 		var_01 = level.charactercac;
 	}
 	else
@@ -717,11 +627,8 @@ getplayercharacter(param_00)
 	return var_01;
 }
 
-//Function Number: 14
-doepictauntscriptablestep(param_00,param_01,param_02,param_03,param_04)
-{
-	if(param_00 == 0)
-	{
+doepictauntscriptablestep(param_00,param_01,param_02,param_03,param_04) {
+	if(param_00 == 0) {
 		param_01 = -1;
 	}
 
@@ -729,41 +636,33 @@ doepictauntscriptablestep(param_00,param_01,param_02,param_03,param_04)
 	thread listenepictauntscriptablecancel(param_01,param_02);
 	wait(param_04);
 	var_05 = getplayercharacter(param_01);
-	if(!isdefined(var_05))
-	{
+	if(!isdefined(var_05)) {
 		return;
 	}
 
 	var_05 setscriptablepartstate(param_02,param_03,0);
 }
 
-//Function Number: 15
-listenepictauntscriptablecancel(param_00,param_01)
-{
+listenepictauntscriptablecancel(param_00,param_01) {
 	self waittill("cancel_taunt_cleanup");
 	var_02 = getplayercharacter(param_00);
 	var_02 setscriptablepartstate(param_01,"offImmediate",0);
 }
 
-//Function Number: 16
-respawnclientcharacter()
-{
+respawnclientcharacter() {
 	var_00 = level.charactercac.angles;
 	var_01 = level.charactercac.origin;
 	level.charactercac delete();
 	level.charactercac = spawn("script_character",var_01,0,0,1);
 	level.charactercac.angles = var_00;
 	deleteepictauntprops(0);
-	if(isdefined(level.last_taunt_sfx))
-	{
+	if(isdefined(level.last_taunt_sfx)) {
 		self stoplocalsound(level.last_taunt_sfx);
-		if(soundexists(level.last_taunt_sfx + "_lsrs"))
-		{
+		if(soundexists(level.last_taunt_sfx + "_lsrs")) {
 			self stoplocalsound(level.last_taunt_sfx + "_lsrs");
 		}
 
-		if(soundexists(level.last_taunt_sfx + "_lfe"))
-		{
+		if(soundexists(level.last_taunt_sfx + "_lfe")) {
 			self stoplocalsound(level.last_taunt_sfx + "_lfe");
 		}
 
@@ -771,42 +670,30 @@ respawnclientcharacter()
 	}
 }
 
-//Function Number: 17
-tauntinprogress(param_00)
-{
+tauntinprogress(param_00) {
 	return isdefined(level.broshotepictauntprops) && isarray(level.broshotepictauntprops) && isdefined(level.broshotepictauntprops[param_00]) && level.broshotepictauntprops[param_00].size > 0;
 }
 
-//Function Number: 18
-cleanupepictauntprops(param_00,param_01,param_02)
-{
+cleanupepictauntprops(param_00,param_01,param_02) {
 	self endon("cancel_taunt_cleanup");
 	wait(param_01);
 	level.taunts_done = 1;
 	deleteepictauntprops(param_00);
 }
 
-//Function Number: 19
-deleteepictauntprops(param_00)
-{
-	if(tauntinprogress(param_00))
-	{
-		for(var_01 = 0;var_01 < level.broshotepictauntprops[param_00].size;var_01++)
-		{
-			if(isdefined(level.broshotepictauntprops[param_00][var_01]))
-			{
+deleteepictauntprops(param_00) {
+	if(tauntinprogress(param_00)) {
+		for(var_01 = 0;var_01 < level.broshotepictauntprops[param_00].size;var_01++) {
+			if(isdefined(level.broshotepictauntprops[param_00][var_01])) {
 				level.broshotepictauntprops[param_00][var_01] scriptmodelclearanim();
 				level.broshotepictauntprops[param_00][var_01] delete();
 			}
 		}
 
 		level.broshotepictauntprops[param_00] = [];
-		if(isdefined(level.broshotepictauntsubprops[param_00]) && isarray(level.broshotepictauntsubprops[param_00]))
-		{
-			for(var_01 = 0;var_01 < level.broshotepictauntsubprops[param_00].size;var_01++)
-			{
-				if(isdefined(level.broshotepictauntsubprops[param_00][var_01]))
-				{
+		if(isdefined(level.broshotepictauntsubprops[param_00]) && isarray(level.broshotepictauntsubprops[param_00])) {
+			for(var_01 = 0;var_01 < level.broshotepictauntsubprops[param_00].size;var_01++) {
+				if(isdefined(level.broshotepictauntsubprops[param_00][var_01])) {
 					level.broshotepictauntsubprops[param_00][var_01] scriptmodelclearanim();
 					level.broshotepictauntsubprops[param_00][var_01] delete();
 				}
@@ -819,36 +706,27 @@ deleteepictauntprops(param_00)
 	self notify("cancel_taunt_cleanup");
 }
 
-//Function Number: 20
-processtauntsound(param_00)
-{
-	if(!soundexists(param_00))
-	{
+processtauntsound(param_00) {
+	if(!soundexists(param_00)) {
 		return;
 	}
 
-	if(!isdefined(level.taunts_done))
-	{
+	if(!isdefined(level.taunts_done)) {
 		level.taunts_done = 0;
 	}
 
-	if(!isdefined(level.taunts_used))
-	{
+	if(!isdefined(level.taunts_used)) {
 		level.taunts_used = [];
 	}
 
-	if(soundexists(param_00))
-	{
-		if(isdefined(level.last_taunt_sfx))
-		{
+	if(soundexists(param_00)) {
+		if(isdefined(level.last_taunt_sfx)) {
 			self stoplocalsound(level.last_taunt_sfx);
-			if(soundexists(level.last_taunt_sfx + "_lsrs"))
-			{
+			if(soundexists(level.last_taunt_sfx + "_lsrs")) {
 				self stoplocalsound(level.last_taunt_sfx + "_lsrs");
 			}
 
-			if(soundexists(level.last_taunt_sfx + "_lfe"))
-			{
+			if(soundexists(level.last_taunt_sfx + "_lfe")) {
 				self stoplocalsound(level.last_taunt_sfx + "_lfe");
 			}
 
@@ -861,10 +739,8 @@ processtauntsound(param_00)
 		return;
 	}
 
-	if(soundexists(param_00 + "_quiet"))
-	{
-		if(!array_contains(level.taunts_used,param_00))
-		{
+	if(soundexists(param_00 + "_quiet")) {
+		if(!array_contains(level.taunts_used,param_00)) {
 			playepicbroshotsound(param_00 + "_quiet");
 			level.taunts_used[level.taunts_used.size] = param_00;
 			level.last_taunt_sfx = param_00 + "_quiet";
@@ -873,15 +749,10 @@ processtauntsound(param_00)
 	}
 }
 
-//Function Number: 21
-playepicbroshotsound(param_00)
-{
-	if(isdefined(level.players))
-	{
-		foreach(var_02 in level.players)
-		{
-			if(!isbot(var_02))
-			{
+playepicbroshotsound(param_00) {
+	if(isdefined(level.players)) {
+		foreach(var_02 in level.players) {
+			if(!isbot(var_02)) {
 				var_02 playlocalsound(param_00);
 			}
 		}
@@ -892,18 +763,13 @@ playepicbroshotsound(param_00)
 	self playlocalsound(param_00);
 }
 
-//Function Number: 22
-array_contains(param_00,param_01)
-{
-	if(param_00.size <= 0)
-	{
+array_contains(param_00,param_01) {
+	if(param_00.size <= 0) {
 		return 0;
 	}
 
-	foreach(var_03 in param_00)
-	{
-		if(var_03 == param_01)
-		{
+	foreach(var_03 in param_00) {
+		if(var_03 == param_01) {
 			return 1;
 		}
 	}

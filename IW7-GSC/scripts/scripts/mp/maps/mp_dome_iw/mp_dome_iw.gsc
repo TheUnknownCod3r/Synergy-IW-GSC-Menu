@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\mp\maps\mp_dome_iw\mp_dome_iw.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 5
- * Decompile Time: 332 ms
- * Timestamp: 10/27/2023 12:13:26 AM
-*******************************************************************/
+/*************************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\mp\maps\mp_dome_iw\mp_dome_iw.gsc
+*************************************************************/
 
-//Function Number: 1
-main()
-{
+main() {
 	lib_0F96::main();
 	scripts\mp\maps\mp_dome_iw\gen\mp_dome_iw_art::main();
 	lib_0F95::main();
@@ -30,9 +24,7 @@ main()
 	level.modifiedspawnpoints["-108 -663 60"]["mp_sd_spawn_attacker"]["remove"] = 1;
 }
 
-//Function Number: 2
-patchablecollision()
-{
+patchablecollision() {
 	var_00 = spawn("script_model",(1760,-368,-128));
 	var_00.angles = (0,0,180);
 	var_00 setmodel("mp_desert_uplink_col_01");
@@ -126,33 +118,24 @@ patchablecollision()
 	var_27 clonebrushmodeltoscriptmodel(var_26);
 }
 
-//Function Number: 3
-killtriggerloop(param_00)
-{
+killtriggerloop(param_00) {
 	level endon("game_ended");
-	for(;;)
-	{
+	for(;;) {
 		param_00 waittill("trigger",var_01);
-		if(isdefined(var_01))
-		{
-			if(isplayer(var_01))
-			{
+		if(isdefined(var_01)) {
+			if(isplayer(var_01)) {
 				var_01 suicide();
 				continue;
 			}
 
-			if(isdefined(var_01.classname) && var_01.classname == "script_vehicle")
-			{
-				if(isdefined(var_01.var_110EA))
-				{
-					if(var_01.var_110EA == "minijackal")
-					{
+			if(isdefined(var_01.classname) && var_01.classname == "script_vehicle") {
+				if(isdefined(var_01.var_110EA)) {
+					if(var_01.var_110EA == "minijackal") {
 						var_01 notify("minijackal_end");
 						continue;
 					}
 
-					if(var_01.var_110EA == "venom")
-					{
+					if(var_01.var_110EA == "venom") {
 						var_01 notify("venom_end",var_01.origin);
 					}
 				}
@@ -161,24 +144,18 @@ killtriggerloop(param_00)
 	}
 }
 
-//Function Number: 4
-setup_vista_driving_cars()
-{
+setup_vista_driving_cars() {
 	var_00 = getentarray("vista_car","targetname");
-	foreach(var_02 in var_00)
-	{
+	foreach(var_02 in var_00) {
 		thread vista_car_drive(var_02);
 	}
 }
 
-//Function Number: 5
-vista_car_drive(param_00)
-{
+vista_car_drive(param_00) {
 	level endon("game_ended");
 	var_01 = scripts\common\utility::getstruct(param_00.target,"targetname");
 	var_02 = 0.002;
-	for(;;)
-	{
+	for(;;) {
 		var_03 = abs(distance(param_00.origin,var_01.origin) * var_02);
 		param_00 moveto(var_01.origin,var_03,0,0);
 		param_00 rotateto(var_01.angles,var_03,0,0);

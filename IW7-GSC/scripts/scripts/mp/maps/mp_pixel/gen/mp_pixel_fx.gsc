@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: scripts\mp\maps\mp_pixel\gen\mp_pixel_fx.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 1
- * Decompile Time: 266 ms
- * Timestamp: 10/27/2023 12:14:03 AM
-*******************************************************************/
+/****************************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\mp\maps\mp_pixel\gen\mp_pixel_fx.gsc
+****************************************************************/
 
-//Function Number: 1
-main()
-{
+main() {
 	var_00 = scripts\common\utility::func_49FA("vfx_tree_mouth_dryice");
 	var_00 scripts\common\createfx::func_F4AD((-810.971,2121.83,314.33),(16,305,0));
 	var_00.var_13125["fxid"] = "vfx_tree_mouth_dryice";

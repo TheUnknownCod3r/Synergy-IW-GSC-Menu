@@ -1,16 +1,10 @@
-/*******************************************************************
- * Decompiled By: Bog
- * Decompiled File: 3420.gsc
- * Game: Call of Duty: Infinite Warfare
- * Platform: PC
- * Function Count: 11
- * Decompile Time: 4 ms
- * Timestamp: 10/27/2023 12:27:11 AM
-*******************************************************************/
+/*****************************************************************
+ * Decompiled by Bog
+ * Edited by SyndiShanX
+ * Script: scripts\scripts\cp\zombies\zombies_mini_ufo_quest.gsc
+*****************************************************************/
 
-//Function Number: 1
-init()
-{
+init() {
 	level.active_mini_ufo_trap = [];
 	level.active_mini_ufo_trap["disco"] = 0;
 	level.active_mini_ufo_trap["beam"] = 0;
@@ -21,8 +15,7 @@ init()
 	var_00.miniufos = [];
 	level thread waitforplayertriggered(var_00);
 	var_02 = scripts\engine\utility::array_randomize(["yellow","blue","green","red"]);
-	foreach(var_05, var_04 in var_01)
-	{
+	foreach(var_05, var_04 in var_01) {
 		level thread mini_ufo_init(var_04,var_00,var_02[var_05]);
 		wait(0.05);
 	}
@@ -37,12 +30,9 @@ init()
 	scripts\engine\utility::flag_init("mini_ufo_green_collecting");
 }
 
-//Function Number: 2
-mini_ufo_init(param_00,param_01,param_02)
-{
+mini_ufo_init(param_00,param_01,param_02) {
 	var_03 = spawn("script_model",param_00.origin);
-	if(isdefined(param_00.angles))
-	{
+	if(isdefined(param_00.angles)) {
 		var_03.angles = param_00.angles;
 	}
 
@@ -51,8 +41,7 @@ mini_ufo_init(param_00,param_01,param_02)
 	var_03.effect = param_02;
 	var_03.color = strtok(param_02,"_")[0];
 	var_03.path = [];
-	switch(param_02)
-	{
+	switch(param_02) {
 		case "blue":
 			level.rocket_mini_ufo = var_03;
 			break;
@@ -76,29 +65,21 @@ mini_ufo_init(param_00,param_01,param_02)
 	level thread getminiufopath(param_00,var_03);
 }
 
-//Function Number: 3
-getminiufopath(param_00,param_01)
-{
+getminiufopath(param_00,param_01) {
 	param_01.startingstruct = param_00;
 	var_02 = param_00;
 	var_03 = undefined;
 	var_04 = undefined;
-	for(;;)
-	{
-		if(isdefined(var_03))
-		{
+	for(;;) {
+		if(isdefined(var_03)) {
 			var_04 = var_03;
 			var_03 = undefined;
 		}
-		else if(isdefined(var_02.target))
-		{
+		else if(isdefined(var_02.target)) {
 			var_05 = scripts\engine\utility::getstructarray(var_02.target,"targetname");
-			if(var_05.size > 1)
-			{
-				foreach(var_07 in var_05)
-				{
-					if(isdefined(var_07.script_noteworthy) && var_07.script_noteworthy == param_01.color)
-					{
+			if(var_05.size > 1) {
+				foreach(var_07 in var_05) {
+					if(isdefined(var_07.script_noteworthy) && var_07.script_noteworthy == param_01.color) {
 						var_04 = var_07;
 						break;
 					}
@@ -114,14 +95,12 @@ getminiufopath(param_00,param_01)
 			break;
 		}
 
-		if(scripts\engine\utility::array_contains(param_01.path,var_04))
-		{
+		if(scripts\engine\utility::array_contains(param_01.path,var_04)) {
 			break;
 		}
 
 		param_01.path[param_01.path.size] = var_04;
-		if(isdefined(var_04.script_noteworthy) && var_04.script_noteworthy == "mini_ufo_teleport_to_center")
-		{
+		if(isdefined(var_04.script_noteworthy) && var_04.script_noteworthy == "mini_ufo_teleport_to_center") {
 			var_03 = scripts\engine\utility::getstruct("mini_ufo_center_struct","targetname");
 		}
 
@@ -129,44 +108,33 @@ getminiufopath(param_00,param_01)
 	}
 }
 
-//Function Number: 4
-waitforplayertriggered(param_00)
-{
-	if(scripts\cp\utility::is_codxp())
-	{
+waitforplayertriggered(param_00) {
+	if(scripts\cp\utility::is_codxp()) {
 		return;
 	}
 
 	param_00 waittill("trigger",var_01);
 	var_02 = 0;
-	foreach(var_04 in param_00.miniufos)
-	{
+	foreach(var_04 in param_00.miniufos) {
 		level thread spawnuniversaldangerzone(var_04);
 		var_02++;
 		wait(randomfloatrange(0.25,1));
 	}
 }
 
-//Function Number: 5
-distance_check_for_vo(param_00)
-{
+distance_check_for_vo(param_00) {
 	level endon("game_ended");
 	self endon("death");
 	scripts\engine\utility::flag_wait("mini_ufo_" + param_00 + "_ready");
-	if(!scripts\engine\utility::istrue(self.played_alias_ufostart))
-	{
+	if(!scripts\engine\utility::istrue(self.played_alias_ufostart)) {
 		self.played_alias_ufostart = 0;
 	}
 
-	while(scripts\engine\utility::flag("mini_ufo_" + param_00 + "_ready"))
-	{
+	while(scripts\engine\utility::flag("mini_ufo_" + param_00 + "_ready")) {
 		var_01 = scripts\engine\utility::get_array_of_closest(self.origin,level.players,undefined,10,1000);
-		foreach(var_03 in var_01)
-		{
-			if(sighttracepassed(self.origin,var_03 geteye(),0,self))
-			{
-				if(!scripts\cp\utility::weaponhasattachment(var_03 getcurrentweapon(),"arcane_base") && !self.played_alias_ufostart)
-				{
+		foreach(var_03 in var_01) {
+			if(sighttracepassed(self.origin,var_03 geteye(),0,self)) {
+				if(!scripts\cp\utility::weaponhasattachment(var_03 getcurrentweapon(),"arcane_base") && !self.played_alias_ufostart) {
 					var_03 thread scripts\cp\cp_vo::try_to_play_vo("quest_arcane_nocore_start","zmb_comment_vo");
 					self.played_alias_ufostart = 1;
 					continue;
@@ -184,9 +152,7 @@ distance_check_for_vo(param_00)
 	}
 }
 
-//Function Number: 6
-spawnuniversaldangerzone(param_00,param_01)
-{
+spawnuniversaldangerzone(param_00,param_01) {
 	param_00 setmodel("tag_origin_mini_ufo");
 	param_01 = param_00.effect;
 	param_00 setscriptablepartstate("miniufo",param_01);
@@ -195,27 +161,22 @@ spawnuniversaldangerzone(param_00,param_01)
 	var_03 = get_next_valid_struct(param_00,var_02,param_01);
 	var_04 = 300;
 	param_00 thread distance_check_for_vo(param_01);
-	for(;;)
-	{
-		if(scripts\engine\utility::flag("mini_ufo_" + param_01 + "_collecting"))
-		{
+	for(;;) {
+		if(scripts\engine\utility::flag("mini_ufo_" + param_01 + "_collecting")) {
 			scripts\engine\utility::flag_waitopen("mini_ufo_" + param_01 + "_collecting");
 			param_00 setscriptablepartstate("miniufo","mini_ufo");
 		}
 
-		if(scripts\engine\utility::flag("mini_ufo_" + param_01 + "_ready"))
-		{
+		if(scripts\engine\utility::flag("mini_ufo_" + param_01 + "_ready")) {
 			var_04 = 150;
 		}
-		else if(isdefined(var_02.script_speed))
-		{
+		else if(isdefined(var_02.script_speed)) {
 			var_04 = var_02.script_speed;
 		}
 
 		var_05 = var_03;
 		var_05 = get_next_valid_struct(param_00,var_05,param_01);
-		if(isdefined(var_02.script_noteworthy) && var_02.script_noteworthy == "mini_ufo_teleport_to_center")
-		{
+		if(isdefined(var_02.script_noteworthy) && var_02.script_noteworthy == "mini_ufo_teleport_to_center") {
 			param_00 dontinterpolate();
 			param_00.origin = var_03.origin;
 			param_00.angles = var_03.angles;
@@ -227,8 +188,7 @@ spawnuniversaldangerzone(param_00,param_01)
 			thread changeangledelay(param_00,var_06,var_05,var_02,var_03);
 			param_00 moveto(var_03.origin,var_06);
 			param_00 waittill("movedone");
-			if(isdefined(var_03.script_noteworthy) && var_03.script_noteworthy == "mini_ufo_ready")
-			{
+			if(isdefined(var_03.script_noteworthy) && var_03.script_noteworthy == "mini_ufo_ready") {
 				var_04 = 150;
 				scripts\engine\utility::flag_set("mini_ufo_" + param_01 + "_ready");
 				param_00 setscriptablepartstate("miniufo","mini_ufo");
@@ -240,13 +200,9 @@ spawnuniversaldangerzone(param_00,param_01)
 	}
 }
 
-//Function Number: 7
-update_ufo_angles(param_00,param_01)
-{
-	for(;;)
-	{
-		if(scripts\engine\utility::flag("mini_ufo_" + param_01 + "_collecting"))
-		{
+update_ufo_angles(param_00,param_01) {
+	for(;;) {
+		if(scripts\engine\utility::flag("mini_ufo_" + param_01 + "_collecting")) {
 			scripts\engine\utility::flag_waitopen("mini_ufo_" + param_01 + "_collecting");
 		}
 
@@ -256,11 +212,8 @@ update_ufo_angles(param_00,param_01)
 	}
 }
 
-//Function Number: 8
-changeangledelay(param_00,param_01,param_02,param_03,param_04)
-{
-	if(isdefined(param_02.script_noteworthy) && param_02.script_noteworthy == "mini_ufo_teleport_to_center")
-	{
+changeangledelay(param_00,param_01,param_02,param_03,param_04) {
+	if(isdefined(param_02.script_noteworthy) && param_02.script_noteworthy == "mini_ufo_teleport_to_center") {
 		wait(param_01 + 0.1);
 	}
 	else
@@ -271,16 +224,12 @@ changeangledelay(param_00,param_01,param_02,param_03,param_04)
 	param_00 notify("next_position_found",param_04,param_02);
 }
 
-//Function Number: 9
-get_next_valid_struct(param_00,param_01,param_02)
-{
+get_next_valid_struct(param_00,param_01,param_02) {
 	var_03 = scripts\engine\utility::getstructarray(param_01.target,"targetname");
 	var_04 = [];
 	var_05 = undefined;
-	foreach(var_07 in var_03)
-	{
-		if(isdefined(var_07.script_noteworthy) && var_07.script_noteworthy == param_02)
-		{
+	foreach(var_07 in var_03) {
+		if(isdefined(var_07.script_noteworthy) && var_07.script_noteworthy == param_02) {
 			var_05 = var_07;
 			break;
 		}
@@ -293,13 +242,10 @@ get_next_valid_struct(param_00,param_01,param_02)
 	return var_05;
 }
 
-//Function Number: 10
-startrotationwhenneargoal(param_00,param_01,param_02)
-{
+startrotationwhenneargoal(param_00,param_01,param_02) {
 	var_03 = param_01;
 	var_04 = 0.5;
-	if(param_01 > 0.3)
-	{
+	if(param_01 > 0.3) {
 		var_03 = param_01 - 0.25;
 		var_04 = min(max(var_03 / 10,0.5),param_01);
 	}
@@ -308,13 +254,10 @@ startrotationwhenneargoal(param_00,param_01,param_02)
 	param_00 rotateto(param_02,var_04,0.05,0.05);
 }
 
-//Function Number: 11
-get_move_rate(param_00,param_01,param_02,param_03)
-{
+get_move_rate(param_00,param_01,param_02,param_03) {
 	var_04 = distance(param_01,param_02);
 	var_05 = var_04 / param_03;
-	if(var_05 < 0.05)
-	{
+	if(var_05 < 0.05) {
 		var_05 = 0.05;
 	}
 
