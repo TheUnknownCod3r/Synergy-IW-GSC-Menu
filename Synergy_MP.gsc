@@ -926,8 +926,10 @@ menu_index() {
 		case "Account Options":
 			self add_menu(menu, menu.size);
 			
-			self add_increment("Set Prestige", ::set_prestige, 0, 0, 20, 1);
-			self add_increment("Set Level", ::set_rank, 1, 1, 999, 1);
+			self add_increment("Set Prestige", ::set_prestige, 0, 0, 30, 1);
+			self add_increment("Set Level", ::set_rank, 1, 1, 55, 1);
+			
+			self add_option("Set Prestige 30 Level 1000", ::set_max_level);
 			
 			self add_option("Set Weapons to Max Level", ::set_max_weapons);
 			
@@ -1370,6 +1372,11 @@ set_prestige(value){
 set_rank(value) {
 	value--;
 	self setPlayerData("mp", "progression", "playerLevel", "xp", Int(TableLookup("mp/rankTable.csv", 0, value, (value == Int(TableLookup("mp/rankTable.csv", 0, "maxrank", 1))) ? 7 : 2)));
+}
+
+set_max_level() {
+	self setPlayerData("mp", "progression", "playerLevel", "prestige", 30);
+	self setPlayerData("mp", "progression", "playerLevel", "xp", Int(TableLookup("mp/rankTable.csv", 0, 1000, (1000 == Int(TableLookup("mp/rankTable.csv", 0, "maxrank", 1))) ? 7 : 2)));
 }
 
 set_max_weapons() {
