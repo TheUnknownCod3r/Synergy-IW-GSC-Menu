@@ -422,7 +422,7 @@ initial_variable() {
 	self.syn["weapons"]["launchers"][1] =          ["Spartan SA3", "Howitzer", "P-Law"];
 	self.syn["weapons"]["classics"][1] =           ["M1", "Hornet", "MacTav-45", "S-Ravage", "OSA", "TF-141"];
 	self.syn["weapons"]["melees"][1] =             ["Axe"];
-	self.syn["weapons"]["specials"][1] =           ["Eraser", "Ballista EM3", "Steel Dragon", "Claw", "Gravity Vortex Gun", "Arm-2 Akimbo", "Turdlet"];
+	self.syn["weapons"]["specials"][1] =           ["Eraser", "Ballista EM3", "Steel Dragon", "Claw", "Gravity Vortex Gun"];
 	// Weapon Pack-a-Punch Prefixes
 	self.syn["weapons"]["assault_rifles"][2] =     ["m4", "sdfar", "ar57", "fmg", "ake", "rvn", "vr", "gauss", "erad"];
 	self.syn["weapons"]["sub_machine_guns"][2] =   ["fhr", "crb", "ripper", "ump", "crdb", "mp28", "tacburst"];
@@ -986,6 +986,7 @@ onPlayerSpawned() {
 
 		if(!self.menuInit) {
 			open_controls_menu("Controls");
+			self.menuInit = true;
 		}
 	}
 }
@@ -1055,12 +1056,13 @@ menu_index() {
 			
 			self add_option("Basic Options", ::new_menu, "Basic Options");
 			self add_option("Weapon Options", ::new_menu, "Weapon Options");
-			self add_option("Spawn Powerups", ::new_menu, "Spawn Powerups");
+			self add_option("Fun Options", ::new_menu, "Fun Options");
+			self add_option("Powerup Options", ::new_menu, "Powerup Options");
 			self add_option("Zombie Options", ::new_menu, "Zombie Options");
-			self add_option("Visual Options", ::new_menu, "Visual Options");
 			self add_option("Teleport Options", ::new_menu, "Teleport Options");
 			self add_option("Account Options", ::new_menu, "Account Options");
 			self add_option(self.syn["maps"][level.mapName] + " Options", ::new_menu, self.syn["maps"][level.mapName]);
+			self add_option("Debug Options", ::new_menu, "Debug Options");
 			
 			break;
 		case "Basic Options":
@@ -1071,8 +1073,6 @@ menu_index() {
 			self add_toggle("UFO", ::ufo_mode, self.ufo_mode);
 			self add_toggle("Infinite Ammo", ::infinite_ammo, self.infinite_ammo);
 			self add_toggle("Self Revive", ::self_revive, self.self_revive);
-			self add_toggle("Exo Movement", ::exo_movement, self.exo_movement);
-			self add_increment("Set Speed", ::set_speed, 190, 190, 1190, 50);
 			
 			self add_option("Give Perks", ::new_menu, "Give Perks");
 			self add_option("Take Perks", ::new_menu, "Take Perks");
@@ -1083,14 +1083,7 @@ menu_index() {
 			self add_option("Off-Host Options", ::new_menu, "Off-Host Options");
 			
 			break;
-		case "Spawn Powerups":
-			self add_menu(menu, menu.size, 1);
-			
-			for(i = 0; i < self.syn["powerups"][0].size; i++) {
-				self add_option(self.syn["powerups"][0][i], ::spawn_powerup, self.syn["powerups"][1][i]);
-			}
-			
-			break;
+		
 		case "Weapon Options":
 			self add_menu(menu, menu.size);
 			
@@ -1103,6 +1096,33 @@ menu_index() {
 			
 			self add_option("Give Weapons", ::new_menu, "Give Weapons");
 			self add_option("Take Current Weapon", ::take_weapon);
+			
+			break;
+		case "Fun Options":
+			self add_menu(menu, menu.size);
+			
+			self add_toggle("Forge Mode", ::forge_mode, self.forge_mode);
+			
+			self add_toggle("Exo Movement", ::exo_movement, self.exo_movement);
+			
+			self add_toggle("Fullbright", ::fullbright, self.fullbright);
+			self add_toggle("Third Person", ::third_person, self.third_person);
+			
+			self add_increment("Set Speed", ::set_speed, 190, 190, 1190, 50);
+			self add_increment("Move Menu X", ::modify_x_position, 0, -590, 50, 10);
+			self add_increment("Move Menu Y", ::modify_y_position, 0, -90, 150, 10);
+			
+			self add_option("Visions", ::new_menu, "Visions");
+			
+			break;
+		case "Powerup Options":
+			self add_menu(menu, menu.size);
+			
+			self add_toggle("Shoot Powerups", ::shoot_powerups, self.shoot_powerups);
+			
+			for(i = 0; i < self.syn["powerups"][0].size; i++) {
+				self add_option("Spawn " + self.syn["powerups"][0][i], ::spawn_powerup, self.syn["powerups"][1][i]);
+			}
 			
 			break;
 		case "Zombie Options":
@@ -1122,18 +1142,6 @@ menu_index() {
 			
 			self add_toggle("Zombie ESP", ::outline_zombies, self.outline_zombies);
 			self add_increment("Set ESP Color", ::set_outline_color, 0, 0, 5, 1, true, "outline");
-			
-			break;
-		case "Visual Options":
-			self add_menu(menu, menu.size);
-			
-			self add_toggle("Fullbright", ::fullbright, self.fullbright);
-			self add_toggle("Third Person", ::third_person, self.third_person);
-			
-			self add_increment("Move Menu X", ::modify_x_position, 0, -590, 50, 10);
-			self add_increment("Move Menu Y", ::modify_y_position, 0, -90, 150, 10);
-			
-			self add_option("Visions", ::new_menu, "Visions");
 			
 			break;
 		case "Teleport Options":
@@ -1571,25 +1579,6 @@ self_revive_loop() {
 	}
 }
 
-exo_movement() {
-	self.exo_movement = !return_toggle(self.exo_movement);
-	if(self.exo_movement) {
-		self iPrintln("Exo Movement [^2ON^7]");
-		self allowdoublejump(1);
-		self allowwallrun(1);
-		self allowdodge(1);
-	} else {
-		self iPrintln("Exo Movement [^1OFF^7]");
-		self allowdoublejump(0);
-		self allowwallrun(0);
-		self allowdodge(0);
-	}
-}
-
-set_speed(value) {
-	setdvar("g_speed", value);
-}
-
 give_perkaholic() {
 	scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::give_gns_base_reward(self);
 }
@@ -1598,10 +1587,151 @@ set_points(value) {
 	self setPlayerData("cp", "alienSession", "currency", value);
 }
 
+// Fun Options
+
+exo_movement() {
+	self.exo_movement = !return_toggle(self.exo_movement);
+	if(self.exo_movement) {
+		self iPrintln("Exo Movement [^2ON^7]");
+		self allowdoublejump(1);
+		self allowwallrun(1);
+		self allowdodge(1);
+		self allowMantle(1);
+		self.disabledMantle = 0;
+	} else {
+		self iPrintln("Exo Movement [^1OFF^7]");
+		self allowdoublejump(0);
+		self allowwallrun(0);
+		self allowdodge(0);
+		self allowMantle(0);
+		self.disabledMantle = 1;
+	}
+}
+
+set_speed(value) {
+	setdvar("g_speed", value);
+}
+
+forge_mode() {
+	self.forge_mode = !return_toggle(self.forge_mode);
+	if(self.forge_mode) {
+		self iPrintln("Forge Mode [^2ON^7]");
+		self thread forge_mode_loop();
+		wait 1;
+		self iPrintln("Press [{+speed_throw}] To Pick Up/Drop Objects");
+	} else {
+		self iPrintln("Forge Mode [^1OFF^7]");
+		self notify("stop_forge_mode");
+	}
+}
+
+forge_mode_loop() {
+	self endon("death");
+	self endon("stop_forge_mode");
+	while(true) {
+		trace = bulletTrace(self getTagOrigin("j_head"), self getTagOrigin("j_head") + anglesToForward(self getPlayerAngles()) * 1000000, true, self);
+		if(isDefined(trace["entity"])) {
+			while(self adsButtonPressed()) {
+				trace["entity"] moveTo(self getTagOrigin("j_head") + anglesToForward(self getPlayerAngles()) * 200);
+				trace["entity"].origin = self getTagOrigin("j_head") + anglesToForward(self getPlayerAngles()) * 200;
+				wait .01;
+				
+				if(self attackButtonPressed()) {
+					while(self attackButtonPressed()) {
+						trace["entity"] rotatePitch(1, .01);
+						trace["entity"] moveTo(self getTagOrigin("j_head") + anglesToForward(self getPlayerAngles()) * 200);
+						trace["entity"].origin = self getTagOrigin("j_head") + anglesToForward(self getPlayerAngles()) * 200;
+						wait .01;
+					}
+				}
+				if(self fragButtonPressed()) {
+					while(self fragButtonPressed()) {   
+						trace["entity"] rotateYaw(1, .01);
+						trace["entity"] moveTo(self getTagOrigin("j_head") + anglesToForward(self getPlayerAngles()) * 200);
+						trace["entity"].origin = self getTagOrigin("j_head") + anglesToForward(self getPlayerAngles()) * 200;
+						wait .01;
+					}
+				}
+				if(self secondaryOffhandButtonPressed()) {
+					while(self secondaryOffhandButtonPressed()) {   
+						trace["entity"] rotateRoll(1, .01);
+						trace["entity"] moveTo(self getTagOrigin("j_head") + anglesToForward(self getPlayerAngles()) * 200);
+						trace["entity"].origin = self getTagOrigin("j_head") + anglesToForward(self getPlayerAngles()) * 200;
+						wait .01;
+					}
+				}
+				if(!isPlayer( trace["entity"]) && self meleeButtonPressed()) {
+					trace["entity"] delete();
+					wait .2;
+				}
+				wait .01;
+			}
+		}
+		wait .05;
+	}
+}
+
+fullbright() {
+	self.fullbright = !return_toggle(self.fullbright);
+	if(self.fullbright) {
+		self iPrintln("Fullbright [^2ON^7]");
+		setdvar("r_fullbright", 1);
+		wait .01;
+	} else {
+		self iPrintln("Fullbright [^1OFF^7]");
+		setdvar("r_fullbright", 0);
+		wait .01;
+	}
+}
+
+third_person() {
+	self.third_person = !return_toggle(self.third_person);
+	if(self.third_person) {
+		self iPrintln("Third Person [^2ON^7]");
+		setdvar("camera_thirdPerson", 1);
+		scripts\cp\utility::setThirdPersonDOF(1);
+	} else {
+		self iPrintln("Third Person [^1OFF^7]");
+		setdvar("camera_thirdPerson", 0);
+		scripts\cp\utility::setThirdPersonDOF(0);
+	}
+}
+
+set_vision(vision) {
+	self visionSetNakedForPlayer("", 0.1);
+	wait .25;
+	self visionSetNakedForPlayer(vision, 0.1);
+}
+
 // Powerups
 
 spawn_powerup(powerup) {
 	level scripts\cp\loot::drop_loot(self.origin + anglesToForward(self.angles) * 115, undefined, powerup, undefined, undefined, 1);
+}
+
+shoot_powerups() {
+	self.shoot_powerups = !return_toggle(self.shoot_powerups);
+	if(self.shoot_powerups) {
+		self iPrintln("Shoot Powerups [^2ON^7]");
+		shoot_powerups_loop();
+	} else {
+		self iPrintln("Shoot Powerups [^1OFF^7]");
+		self notify("stop_shoot_powerups");
+	}
+}
+
+shoot_powerups_loop() {
+	self endOn("stop_shoot_powerups");
+	self endOn("game_ended");
+	
+	for(;;) {
+		while(self attackButtonPressed()) {
+			powerup = self.syn["powerups"][1][randomint(self.syn["powerups"][1].size)];
+			level scripts\cp\loot::drop_loot(self.origin + anglesToForward(self.angles) * 115, undefined, powerup, undefined, undefined, 0);
+			wait .5;
+		}
+		wait .05;
+	}
 }
 
 // Off Host Options
@@ -1948,40 +2078,6 @@ set_outline_color(value) {
 	self.outline_color = value;
 }
 
-// Visual Options
-
-fullbright() {
-	self.fullbright = !return_toggle(self.fullbright);
-	if(self.fullbright) {
-		self iPrintln("Fullbright [^2ON^7]");
-		setdvar("r_fullbright", 1);
-		wait .01;
-	} else {
-		self iPrintln("Fullbright [^1OFF^7]");
-		setdvar("r_fullbright", 0);
-		wait .01;
-	}
-}
-
-third_person() {
-	self.third_person = !return_toggle(self.third_person);
-	if(self.third_person) {
-		self iPrintln("Third Person [^2ON^7]");
-		setdvar("camera_thirdPerson", 1);
-		scripts\cp\utility::setThirdPersonDOF(1);
-	} else {
-		self iPrintln("Third Person [^1OFF^7]");
-		setdvar("camera_thirdPerson", 0);
-		scripts\cp\utility::setThirdPersonDOF(0);
-	}
-}
-
-set_vision(vision) {
-	self visionSetNakedForPlayer("", 0.1);
-	wait .25;
-	self visionSetNakedForPlayer(vision, 0.1);
-}
-
 // Teleport Options
 
 set_position(origin, angles) {
@@ -2199,13 +2295,13 @@ move_ufo_to_center_portal() {
 		ufo scriptModelPlayAnim("zmb_spaceland_ufo_idle");
 		scripts\engine\utility::flag_set("ufo_intro_reach_center_portal");
 	} else {
-		level.ufo moveto((647, 621, 901), 5);
+		level.ufo moveTo((647, 621, 901), 5);
 		level.ufo waittill("movedone");
 	}
 }
 
 move_ufo_to_spawn() {
-	level.ufo moveto((650, 2265, 901), 5);
+	level.ufo moveTo((650, 2265, 901), 5);
 	level.ufo waittill("movedone");
 }
 
@@ -2223,7 +2319,7 @@ ufo_follow_player() {
 ufo_follow_player_loop() {
 	self endOn("stop_ufo_follow_player");
 	for(;;) {
-		level.ufo moveto((level.players[0].origin[0], level.players[0].origin[1], 901), 5);
+		level.ufo moveTo((level.players[0].origin[0], level.players[0].origin[1], 901), 5);
 		level.ufo waittill("movedone");
 	}
 }
