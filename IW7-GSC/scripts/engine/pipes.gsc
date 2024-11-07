@@ -150,7 +150,7 @@ pipefx(param_00,param_01,param_02) {
 		var_0B setmodel("tag_origin");
 		var_0B.angles = vectortoangles(param_01);
 		playfxontag(level._pipes._effect[self.script_noteworthy],var_0B,"tag_origin");
-		level._pipes.var_C1FD++;
+		level._pipes.num_pipe_fx++;
 		var_0B rotatepitch(90,var_03,1,1);
 		wait(var_03);
 		stopfxontag(level._pipes._effect[self.script_noteworthy],var_0B,"tag_origin");
@@ -159,7 +159,7 @@ pipefx(param_00,param_01,param_02) {
 	else
 	{
 		playfx(level._pipes._effect[self.script_noteworthy],param_00,param_01);
-		level._pipes.var_C1FD++;
+		level._pipes.num_pipe_fx++;
 		wait(var_03);
 		var_05--;
 	}
@@ -170,7 +170,7 @@ pipefx(param_00,param_01,param_02) {
 			var_0B setmodel("tag_origin");
 			var_0B.angles = vectortoangles(param_01);
 			playfxontag(level._pipes._effect[self.script_noteworthy],var_0B,"tag_origin");
-			level._pipes.var_C1FD++;
+			level._pipes.num_pipe_fx++;
 			var_0B rotatepitch(90,var_03,1,1);
 			wait(var_03);
 			stopfxontag(level._pipes._effect[self.script_noteworthy],var_0B,"tag_origin");
@@ -187,7 +187,7 @@ pipefx(param_00,param_01,param_02) {
 	var_0A stoploopsound(var_08);
 	var_0A delete();
 	self.pipe_fx_array = scripts\engine\utility::array_removeundefined(self.pipe_fx_array);
-	level._pipes.var_C1FD--;
+	level._pipes.num_pipe_fx--;
 }
 
 pipe_damage(param_00,param_01,param_02,param_03) {

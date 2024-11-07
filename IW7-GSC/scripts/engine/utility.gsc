@@ -192,32 +192,32 @@ waittill_multiple(param_00,param_01,param_02,param_03,param_04) {
 	var_05.threads = 0;
 	if(isdefined(param_00)) {
 		childthread waittill_string(param_00,var_05);
-		var_05.var_117B8++;
+		var_05.threads++;
 	}
 
 	if(isdefined(param_01)) {
 		childthread waittill_string(param_01,var_05);
-		var_05.var_117B8++;
+		var_05.threads++;
 	}
 
 	if(isdefined(param_02)) {
 		childthread waittill_string(param_02,var_05);
-		var_05.var_117B8++;
+		var_05.threads++;
 	}
 
 	if(isdefined(param_03)) {
 		childthread waittill_string(param_03,var_05);
-		var_05.var_117B8++;
+		var_05.threads++;
 	}
 
 	if(isdefined(param_04)) {
 		childthread waittill_string(param_04,var_05);
-		var_05.var_117B8++;
+		var_05.threads++;
 	}
 
 	while(var_05.threads) {
 		var_05 waittill("returned");
-		var_05.var_117B8--;
+		var_05.threads--;
 	}
 
 	var_05 notify("die");
@@ -1708,7 +1708,7 @@ allow_usability(param_00) {
 			self.disabledusability = 0;
 		}
 
-		self.var_55E4--;
+		self.disabledusability--;
 		if(!self.disabledusability) {
 			self enableusability();
 			return;
@@ -1721,7 +1721,7 @@ allow_usability(param_00) {
 		self.disabledusability = 0;
 	}
 
-	self.var_55E4++;
+	self.disabledusability++;
 	self disableusability();
 }
 
@@ -1731,7 +1731,7 @@ allow_weapon(param_00) {
 			self.disabledweapon = 0;
 		}
 
-		self.var_55E6--;
+		self.disabledweapon--;
 		if(!self.disabledweapon) {
 			self enableweapons();
 			if(isdefined(level.allow_weapon_func)) {
@@ -1757,7 +1757,7 @@ allow_weapon(param_00) {
 		self getradiuspathsighttestnodes();
 	}
 
-	self.var_55E6++;
+	self.disabledweapon++;
 }
 
 isweaponallowed() {
@@ -1793,7 +1793,7 @@ allow_offhand_weapons(param_00) {
 			self.disabledoffhandweapons = 0;
 		}
 
-		self.var_55D9--;
+		self.disabledoffhandweapons--;
 		if(!self.disabledoffhandweapons) {
 			self enableoffhandweapons();
 		}
@@ -1810,7 +1810,7 @@ allow_offhand_weapons(param_00) {
 		self.disabledoffhandweapons = 0;
 	}
 
-	self.var_55D9++;
+	self.disabledoffhandweapons++;
 	self getquadrant();
 	if(!isdefined(level.ismp) || level.ismp == 0) {
 		allow_offhand_shield_weapons(0);
@@ -1824,7 +1824,7 @@ allow_offhand_primary_weapons(param_00) {
 		}
 		else
 		{
-			self.var_55D6--;
+			self.disabledoffhandprimaryweapons--;
 		}
 
 		if(!self.disabledoffhandprimaryweapons) {
@@ -1839,7 +1839,7 @@ allow_offhand_primary_weapons(param_00) {
 		self.disabledoffhandprimaryweapons = 0;
 	}
 
-	self.var_55D6++;
+	self.disabledoffhandprimaryweapons++;
 	self grenade_earthquakeatposition();
 }
 
@@ -1850,7 +1850,7 @@ allow_offhand_secondary_weapons(param_00) {
 		}
 		else
 		{
-			self.var_55D7--;
+			self.disabledoffhandsecondaryweapons--;
 		}
 
 		if(!self.disabledoffhandsecondaryweapons) {
@@ -1865,7 +1865,7 @@ allow_offhand_secondary_weapons(param_00) {
 		self.disabledoffhandsecondaryweapons = 0;
 	}
 
-	self.var_55D7++;
+	self.disabledoffhandsecondaryweapons++;
 	self disableoffhandsecondaryweapons();
 	allow_offhand_shield_weapons(0);
 }
@@ -1876,7 +1876,7 @@ allow_offhand_shield_weapons(param_00) {
 			self.disabledoffhandshieldweapons = 0;
 		}
 
-		self.var_55D8--;
+		self.disabledoffhandshieldweapons--;
 		if(!self.disabledoffhandshieldweapons) {
 			self allowoffhandshieldweapons(1);
 			return;
@@ -1889,7 +1889,7 @@ allow_offhand_shield_weapons(param_00) {
 		self.disabledoffhandshieldweapons = 0;
 	}
 
-	self.var_55D8++;
+	self.disabledoffhandshieldweapons++;
 	self allowoffhandshieldweapons(0);
 }
 
@@ -1916,7 +1916,7 @@ allow_prone(param_00) {
 		}
 		else
 		{
-			self.var_55DC--;
+			self.disabledprone--;
 		}
 
 		if(!self.disabledprone) {
@@ -1931,7 +1931,7 @@ allow_prone(param_00) {
 		self.disabledprone = 0;
 	}
 
-	self.var_55DC++;
+	self.disabledprone++;
 	self allowprone(0);
 }
 
@@ -1942,7 +1942,7 @@ allow_crouch(param_00) {
 		}
 		else
 		{
-			self.var_55C3--;
+			self.disabledcrouch--;
 		}
 
 		if(!self.disabledcrouch) {
@@ -1957,7 +1957,7 @@ allow_crouch(param_00) {
 		self.disabledcrouch = 0;
 	}
 
-	self.var_55C3++;
+	self.disabledcrouch++;
 	self allowcrouch(0);
 }
 
@@ -1968,7 +1968,7 @@ allow_stances(param_00) {
 		}
 		else
 		{
-			self.var_55E2--;
+			self.disabledstances--;
 		}
 
 		if(!self.disabledstances) {
@@ -1983,7 +1983,7 @@ allow_stances(param_00) {
 		self.disabledstances = 0;
 	}
 
-	self.var_55E2++;
+	self.disabledstances++;
 	self allowstand(0);
 }
 
@@ -1994,7 +1994,7 @@ allow_sprint(param_00) {
 		}
 		else
 		{
-			self.var_55E1--;
+			self.disabledsprint--;
 		}
 
 		if(!self.disabledsprint) {
@@ -2009,7 +2009,7 @@ allow_sprint(param_00) {
 		self.disabledsprint = 0;
 	}
 
-	self.var_55E1++;
+	self.disabledsprint++;
 	self getnumownedagentsonteambytype(0);
 }
 
@@ -2020,7 +2020,7 @@ allow_mantle(param_00) {
 		}
 		else
 		{
-			self.var_55D4--;
+			self.disabledmantle--;
 		}
 
 		if(!self.disabledmantle) {
@@ -2035,7 +2035,7 @@ allow_mantle(param_00) {
 		self.disabledmantle = 0;
 	}
 
-	self.var_55D4++;
+	self.disabledmantle++;
 	self allowmantle(0);
 }
 
@@ -2046,7 +2046,7 @@ allow_fire(param_00) {
 		}
 		else
 		{
-			self.var_55C8--;
+			self.disabledfire--;
 		}
 
 		if(!self.disabledfire) {
@@ -2061,7 +2061,7 @@ allow_fire(param_00) {
 		self.disabledfire = 0;
 	}
 
-	self.var_55C8++;
+	self.disabledfire++;
 	self allowfire(0);
 }
 
@@ -2072,7 +2072,7 @@ allow_ads(param_00) {
 		}
 		else
 		{
-			self.var_55BE--;
+			self.disabledads--;
 		}
 
 		if(!self.disabledads) {
@@ -2087,7 +2087,7 @@ allow_ads(param_00) {
 		self.disabledads = 0;
 	}
 
-	self.var_55BE++;
+	self.disabledads++;
 	self allowads(0);
 }
 
@@ -2098,7 +2098,7 @@ allow_jump(param_00) {
 		}
 		else
 		{
-			self.var_55D0--;
+			self.disabledjump--;
 		}
 
 		if(!self.disabledjump) {
@@ -2113,7 +2113,7 @@ allow_jump(param_00) {
 		self.disabledjump = 0;
 	}
 
-	self.var_55D0++;
+	self.disabledjump++;
 	self allowjump(0);
 }
 
@@ -2124,7 +2124,7 @@ allow_wallrun(param_00) {
 		}
 		else
 		{
-			self.var_55E5--;
+			self.disabledwallrun--;
 		}
 
 		if(!self.disabledwallrun) {
@@ -2139,7 +2139,7 @@ allow_wallrun(param_00) {
 		self.disabledwallrun = 0;
 	}
 
-	self.var_55E5++;
+	self.disabledwallrun++;
 	self allowwallrun(0);
 }
 
@@ -2150,7 +2150,7 @@ allow_doublejump(param_00) {
 		}
 		else
 		{
-			self.var_55C6--;
+			self.disableddoublejump--;
 		}
 
 		if(!self.disableddoublejump) {
@@ -2176,7 +2176,7 @@ allow_doublejump(param_00) {
 		self goalflag(0,0);
 	}
 
-	self.var_55C6++;
+	self.disableddoublejump++;
 	self allowdoublejump(0);
 }
 
@@ -2187,7 +2187,7 @@ allow_melee(param_00) {
 		}
 		else
 		{
-			self.var_55D5--;
+			self.disabledmelee--;
 		}
 
 		if(!self.disabledmelee) {
@@ -2202,7 +2202,7 @@ allow_melee(param_00) {
 		self.disabledmelee = 0;
 	}
 
-	self.var_55D5++;
+	self.disabledmelee++;
 	self allowmelee(0);
 }
 
@@ -2213,7 +2213,7 @@ allow_slide(param_00) {
 		}
 		else
 		{
-			self.var_55E0--;
+			self.disabledslide--;
 		}
 
 		if(!self.disabledslide) {
@@ -2228,7 +2228,7 @@ allow_slide(param_00) {
 		self.disabledslide = 0;
 	}
 
-	self.var_55E0++;
+	self.disabledslide++;
 	self allowslide(0);
 }
 
@@ -3838,7 +3838,7 @@ allow_lean(param_00) {
 		}
 		else
 		{
-			self.var_55D1--;
+			self.disabledlean--;
 		}
 
 		if(!self.disabledlean) {
@@ -3853,7 +3853,7 @@ allow_lean(param_00) {
 		self.disabledlean = 0;
 	}
 
-	self.var_55D1++;
+	self.disabledlean++;
 	self _meth_800E(0);
 }
 
@@ -3864,7 +3864,7 @@ allow_reload(param_00,param_01) {
 		}
 		else
 		{
-			self.var_55DE--;
+			self.disabledreload--;
 		}
 
 		if(!self.disabledreload) {
@@ -3879,7 +3879,7 @@ allow_reload(param_00,param_01) {
 		self.disabledreload = 0;
 	}
 
-	self.var_55DE++;
+	self.disabledreload++;
 	self allowreload(0);
 	if(!isdefined(param_01) || !param_01) {
 		self _meth_8545();
@@ -3893,7 +3893,7 @@ allow_autoreload(param_00) {
 		}
 		else
 		{
-			self.var_55C1--;
+			self.disableautoreload--;
 		}
 
 		if(!self.disableautoreload) {
@@ -3908,7 +3908,7 @@ allow_autoreload(param_00) {
 		self.disableautoreload = 0;
 	}
 
-	self.var_55C1++;
+	self.disableautoreload++;
 	self disableautoreload();
 }
 
