@@ -16,9 +16,17 @@ If you have any Issues/Suggestions, please Submit them in [Issues](https://githu
 
 ### Requirements: [IW7-Mod](https://github.com/auroramod/iw7-mod)
 
+#### Zombies:
 * Download [Synergy.gsc](https://syndishanx.github.io/Synergy-IW-GSC-Menu/Synergy.gsc)
 
 * Place it into `iw7-mod/custom_scripts/cp`
+
+#### Multiplayer:
+* Download [Synergy_MP.gsc](https://syndishanx.github.io/Synergy-IW-GSC-Menu/Synergy_MP.gsc)
+
+* Place it into `iw7-mod/custom_scripts/mp`
+
+* Open `Synergy_MP.gsc` with a Text Editor and Replace `Username` on Line 5 with your Username
 
 ## Credits
 

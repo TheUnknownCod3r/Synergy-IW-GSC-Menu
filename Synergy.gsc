@@ -1,34 +1,5 @@
 #include scripts\cp\cp_weapon;
 
-init() {
-	level thread onPlayerConnect();
-}
-
-on_event() {
-	self endOn("disconnect");
-	self.syn = [];
-	self.syn["user"] = spawnStruct();
-	while (true) {
-		if(!isDefined(self.syn["user"].has_menu)) {
-			self.syn["user"].has_menu = true;
-			
-			self initial_variable();
-			self thread initial_monitor();
-		}
-		break;
-	}
-}
-
-on_ended() {
-	level waitTill("game_ended");
-	if(self in_menu()) {
-		self close_menu();
-	}
-	
-	level notify("on_close_ended");
-	level endOn("on_close_ended");
-}
-
 return_toggle(variable) {
 	return isDefined(variable) && variable;
 }
@@ -72,11 +43,11 @@ has_menu() {
 }
 
 in_menu() {
-	return return_toggle(self.syn["utility"].in_menu);
+	return return_toggle(self.in_menu);
 }
 
 set_state() {
-	self.syn["utility"].in_menu = !return_toggle(self.syn["utility"].in_menu);
+	self.in_menu = !return_toggle(self.in_menu);
 }
 
 execute_function(function, argument_1, argument_2, argument_3, argument_4) {
@@ -652,7 +623,7 @@ initial_monitor() {
 				cursor = self get_cursor();
 				if(self meleeButtonPressed()) {
 					if(return_toggle(self.syn["utility"].interaction)) {
-						self playSoundToPlayer(isDefined(self.previous[(self.previous.size - 1)]) ? "zmb_powerup_activate" : "zmb_powerup_activate", self);
+						self playSoundToPlayer("zmb_powerup_activate", self);
 					}
 					
 					if(isDefined(self.previous[(self.previous.size - 1)])) {
@@ -691,7 +662,7 @@ initial_monitor() {
 				else if(self useButtonPressed()) {
 					if(isDefined(self.structure[cursor].function)) {
 						if(return_toggle(self.syn["utility"].interaction)) {
-							self playSoundToPlayer(isDefined(self.structure[cursor].toggle) ? return_toggle(self.structure[cursor].toggle) ? "part_pickup" : "part_pickup" : "part_pickup", self);
+							self playSoundToPlayer("part_pickup", self);
 						}
 						
 						if(return_toggle(self.structure[cursor].slider)) {
@@ -717,7 +688,10 @@ open_menu(menu) {
 		menu = isDefined(self get_menu()) && self get_menu() != "Synergy" ? self get_menu() : "Synergy";
 	}
 	
-	self.syn["hud"] = [];
+	if(!isDefined(self.syn["hud"])) {
+		self.syn["hud"] = [];
+	}
+	
 	self.syn["hud"]["title"][0] = self create_text(self get_title(), self.syn["utility"].font, self.syn["utility"].font_scale, "left", "CENTER", (self.syn["utility"].x_offset + 86), (self.syn["utility"].y_offset + 2), self.syn["utility"].color[4], 1, 10); // Title Text
 	self.syn["hud"]["title"][1] = self create_text("______", self.syn["utility"].font, self.syn["utility"].font_scale * 1.5, "left", "CENTER", (self.syn["utility"].x_offset + 4), (self.syn["utility"].y_offset - 4), self.syn["utility"].color[5], 1, 10); // Title Separator
 	self.syn["hud"]["title"][2] = self create_text("______", self.syn["utility"].font, self.syn["utility"].font_scale * 1.5, "left", "CENTER", (self.syn["utility"].x_offset + 157), (self.syn["utility"].y_offset - 4), self.syn["utility"].color[5], 1, 10); // Title Separator
@@ -950,6 +924,35 @@ start_rainbow() {
 	}
 }
 
+init() {
+	level thread onPlayerConnect();
+}
+
+on_event() {
+	self endOn("disconnect");
+	self.syn = [];
+	self.syn["user"] = spawnStruct();
+	while (true) {
+		if(!isDefined(self.syn["user"].has_menu)) {
+			self.syn["user"].has_menu = true;
+			
+			self initial_variable();
+			self thread initial_monitor();
+		}
+		break;
+	}
+}
+
+on_ended() {
+	level waitTill("game_ended");
+	if(self in_menu()) {
+		self close_menu();
+	}
+	
+	level notify("on_close_ended");
+	level endOn("on_close_ended");
+}
+
 onPlayerConnect() {
 	for(;;) {
 		level waitTill("connected", player);
@@ -964,14 +967,6 @@ onPlayerSpawned() {
 	level endOn("game_ended");
 	for(;;) {
 		self waitTill("spawned_player");
-		if(isDefined(self.playerSpawned)) {
-			continue;
-		}
-		self.playerSpawned = true;
-		
-		if(!isDefined(level.initial_setup)) {
-			level.initial_setup = true;
-		}
 		
 		self thread on_event();
 		self thread on_ended();
@@ -1062,7 +1057,6 @@ menu_index() {
 			self add_option("Teleport Options", ::new_menu, "Teleport Options");
 			self add_option("Account Options", ::new_menu, "Account Options");
 			self add_option(self.syn["maps"][level.mapName] + " Options", ::new_menu, self.syn["maps"][level.mapName]);
-			self add_option("Debug Options", ::new_menu, "Debug Options");
 			
 			break;
 		case "Basic Options":
