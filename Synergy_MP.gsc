@@ -1182,15 +1182,11 @@ exo_movement() {
 		self allowdoublejump(0);
 		self allowwallrun(0);
 		self allowdodge(0);
-		self allowMantle(0);
-		self.disabledMantle = 1;
 	} else {
 		self iPrintln("Exo Movement [^2ON^7]");
 		self allowdoublejump(1);
 		self allowwallrun(1);
 		self allowdodge(1);
-		self allowMantle(1);
-		self.disabledMantle = 0;
 	}
 }
 
