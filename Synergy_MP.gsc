@@ -403,8 +403,8 @@ initial_variable() {
 	self.syn["perks"][1] = ["Recon", "Blind Eye", "Blast Shield", "Dexterity", "Ghost", "Overclock", "Tac Resist", "Hardline", "Momentum", "Tracker", "Cold Blooded", "Scavenger", "Gung-Ho", "Pin Point", "Hardwired", "Marksman", "Engineer", "Dead Silence"];
 	
 	// Killstreaks
-	self.syn["killstreaks"][0] = ["Scarab", "UAV", "Drone Package", "Counter UAV", "Vulture", "Trinity Rocket", "Scorchers", "Bombardment", "Shock Sentry", "Warden", "Advanced UAV", "T.H.O.R", "R-C8", "AP-3X"];
-	self.syn["killstreaks"][1] = ["venom", "uav", "dronedrop", "counter_uav", "ball_drone_backup", "drone_hive", "precision_airstrike", "bombardment", "sentry_shock", "jackal", "directional_uav", "thor", "remote_c8", "minijackal"];
+	self.syn["killstreaks"][0] = ["Scarab", "UAV", "Drone Package", "Counter UAV", "Vulture", "Trinity Rocket", "Scorchers", "Bombardment", "Shock Sentry", "Warden", "Advanced UAV", "T.H.O.R", "R-C8", "AP-3X", "Nuke"];
+	self.syn["killstreaks"][1] = ["venom", "uav", "dronedrop", "counter_uav", "ball_drone_backup", "drone_hive", "precision_airstrike", "bombardment", "sentry_shock", "jackal", "directional_uav", "thor", "remote_c8", "minijackal", "nuke"];
 	
 	self.syn["utility"].interaction = true;
 	
@@ -929,11 +929,6 @@ menu_index() {
 			self add_increment("Set Prestige", ::set_prestige, 0, 0, 30, 1);
 			self add_increment("Set Level", ::set_rank, 1, 1, 55, 1);
 			
-			self add_option("Set Prestige 30 Level 1000", ::set_max_level);
-			
-			self add_option("Set Weapons to Max Level", ::set_max_weapons);
-			
-			self add_option("Complete All Challenges", ::complete_challenges);
 			self add_option("Complete Active Contracts", ::complete_active_contracts);
 			
 			break;
@@ -1090,6 +1085,16 @@ menu_index() {
 
 // Common Functions
 
+iPrintString(string) {
+	if(!isDefined(self.syn["string"])) {
+		self.syn["string"] = self create_text(string, "default", 1, "center", "top", 0, 150, (1,1,1), 1, 9999, false, true);
+	} else {
+		self.syn["string"] set_text(string);
+	}
+	wait 5;
+	self.syn["string"] set_text("");
+}
+
 modify_x_position(offset) {
 	
 	self.syn["utility"].x_offset = 30 + offset;
@@ -1122,9 +1127,9 @@ god_mode() {
 	executeCommand("god");
 	wait .01;
 	if(self.god_mode) {
-		self iPrintln("God Mode [^2ON^7]");
+		self iPrintString("God Mode [^2ON^7]");
 	} else {
-		self iPrintln("God Mode [^1OFF^7]");
+		self iPrintString("God Mode [^1OFF^7]");
 	}
 }
 
@@ -1133,9 +1138,9 @@ no_clip() {
 	executecommand("noclip");
 	wait .01;
 	if(self.no_clip) {
-		self iPrintln("No Clip [^2ON^7]");
+		self iPrintString("No Clip [^2ON^7]");
 	} else {
-		self iPrintln("No Clip [^1OFF^7]");
+		self iPrintString("No Clip [^1OFF^7]");
 	}
 }
 
@@ -1144,19 +1149,19 @@ ufo_mode() {
 	executecommand("ufo");
 	wait .01;
 	if(self.ufo_mode) {
-		self iPrintln("UFO Mode [^2ON^7]");
+		self iPrintString("UFO Mode [^2ON^7]");
 	} else {
-		self iPrintln("UFO Mode [^1OFF^7]");
+		self iPrintString("UFO Mode [^1OFF^7]");
 	}
 }
 
 infinite_ammo() {
 	self.infinite_ammo = !return_toggle(self.infinite_ammo);
 	if(self.infinite_ammo) {
-		self iPrintln("Infinite Ammo [^2ON^7]");
+		self iPrintString("Infinite Ammo [^2ON^7]");
 		self thread infinite_ammo_loop();
 	} else {
-		self iPrintln("Infinite Ammo [^1OFF^7]");
+		self iPrintString("Infinite Ammo [^1OFF^7]");
 		self notify("stop_infinite_ammo");
 	}
 }
@@ -1180,12 +1185,12 @@ infinite_ammo_loop() {
 exo_movement() {
 	self.exo_movement = !return_toggle(self.exo_movement);
 	if(self.exo_movement) {
-		self iPrintln("Exo Movement [^1OFF^7]");
+		self iPrintString("Exo Movement [^1OFF^7]");
 		self allowdoublejump(0);
 		self allowwallrun(0);
 		self allowdodge(0);
 	} else {
-		self iPrintln("Exo Movement [^2ON^7]");
+		self iPrintString("Exo Movement [^2ON^7]");
 		self allowdoublejump(1);
 		self allowwallrun(1);
 		self allowdodge(1);
@@ -1199,12 +1204,12 @@ set_speed(value) {
 forge_mode() {
 	self.forge_mode = !return_toggle(self.forge_mode);
 	if(self.forge_mode) {
-		self iPrintln("Forge Mode [^2ON^7]");
+		self iPrintString("Forge Mode [^2ON^7]");
 		self thread forge_mode_loop();
 		wait 1;
-		self iPrintln("Press [{+speed_throw}] To Pick Up/Drop Objects");
+		self iPrintString("Press [{+speed_throw}] To Pick Up/Drop Objects");
 	} else {
-		self iPrintln("Forge Mode [^1OFF^7]");
+		self iPrintString("Forge Mode [^1OFF^7]");
 		self notify("stop_forge_mode");
 	}
 }
@@ -1258,11 +1263,11 @@ forge_mode_loop() {
 fullbright() {
 	self.fullbright = !return_toggle(self.fullbright);
 	if(self.fullbright) {
-		self iPrintln("Fullbright [^2ON^7]");
+		self iPrintString("Fullbright [^2ON^7]");
 		setdvar("r_fullbright", 1);
 		wait .01;
 	} else {
-		self iPrintln("Fullbright [^1OFF^7]");
+		self iPrintString("Fullbright [^1OFF^7]");
 		setdvar("r_fullbright", 0);
 		wait .01;
 	}
@@ -1271,10 +1276,10 @@ fullbright() {
 third_person() {
 	self.third_person = !return_toggle(self.third_person);
 	if(self.third_person) {
-		self iPrintln("Third Person [^2ON^7]");
+		self iPrintString("Third Person [^2ON^7]");
 		setdvar("camera_thirdPerson", 1);
 	} else {
-		self iPrintln("Third Person [^1OFF^7]");
+		self iPrintString("Third Person [^1OFF^7]");
 		setdvar("camera_thirdPerson", 0);
 	}
 }
@@ -1298,10 +1303,10 @@ give_killstreak(streak) {
 demi_god_mode() {
 	self.demi_god_mode = !return_toggle(self.demi_god_mode);
 	if(self.demi_god_mode) {
-		self iPrintln("Demi God Mode [^2ON^7]");
+		self iPrintString("Demi God Mode [^2ON^7]");
 		demi_god_mode_loop();
 	} else {
-		self iPrintln("Demi God Mode [^1OFF^7]");
+		self iPrintString("Demi God Mode [^1OFF^7]");
 		self notify("stop_demi_god_mode");
 	}
 }
@@ -1319,10 +1324,10 @@ demi_god_mode_loop() {
 spectator_no_clip() {
 	self.spectator_no_clip = !return_toggle(self.spectator_no_clip);
 	if(self.spectator_no_clip) {
-		self iPrintln("Spectator No Clip [^2ON^7]");
+		self iPrintString("Spectator No Clip [^2ON^7]");
 		updateSessionState("spectator");
 	} else {
-		self iPrintln("Spectator No Clip [^1OFF^7]");
+		self iPrintString("Spectator No Clip [^1OFF^7]");
 		updateSessionState("playing");
 	}
 }
@@ -1372,59 +1377,6 @@ set_prestige(value){
 set_rank(value) {
 	value--;
 	self setPlayerData("mp", "progression", "playerLevel", "xp", Int(TableLookup("mp/rankTable.csv", 0, value, (value == Int(TableLookup("mp/rankTable.csv", 0, "maxrank", 1))) ? 7 : 2)));
-}
-
-set_max_level() {
-	self setPlayerData("mp", "progression", "playerLevel", "prestige", 30);
-	self setPlayerData("mp", "progression", "playerLevel", "xp", Int(TableLookup("mp/rankTable.csv", 0, 1000, (1000 == Int(TableLookup("mp/rankTable.csv", 0, "maxrank", 1))) ? 7 : 2)));
-}
-
-set_max_weapons() {
-	for(x = 1; x < 62; x++) {
-		weapon = TableLookup("mp/statstable.csv", 0, x, 4);
-
-		if(!isDefined(weapon) || weapon == "")
-			continue;
-
-		self setPlayerData("common", "sharedProgression", "weaponLevel", weapon, "cpXP", 54300);
-		self setPlayerData("common", "sharedProgression", "weaponLevel", weapon, "prestige", 3);
-		
-		self iPrintln("Set ^3" + weapon + "^7 to Max Level");
-
-		wait 0.175;
-	}
-}
-
-complete_challenges() {
-	merits = getArrayKeys(level.meritinfo);
-	
-	if(!isDefined(merits) || !merits.size) {
-		return;
-	}
-	
-	foreach(merit in merits) {
-		meritInfo = level.meritinfo[merit]["targetval"];
-		meritState = self getRankedPlayerData("mp", "meritState", merit);
-		meritProgress = self getRankedPlayerData("mp", "meritProgress", merit);
-	
-		if(!isDefined(meritInfo)) {
-			continue;
-		}
-	
-		if(meritState < meritInfo.size || meritProgress < meritInfo[(meritInfo.size - 1)]) {
-			if(meritProgress < meritInfo[(meritInfo.size - 1)]) {
-				self setPlayerData("mp", "meritProgress", merit, meritInfo[(meritInfo.size - 1)]);
-				self iPrintln("Completed Challenge " + merit);
-			}
-	
-			if(meritState < meritInfo.size) {
-				self setPlayerData("mp", "meritState", merit, meritInfo.size);
-				self iPrintln("Completed Challenge " + merit);
-			}
-	
-			wait 0.175;
-		}
-	}
 }
 
 complete_active_contracts() {
