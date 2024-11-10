@@ -116,7 +116,7 @@ func_12F2(param_00,param_01) {
 func_7818(param_00,param_01,param_02) {
 	var_03 = vectortoangles(param_02 - param_01);
 	var_04 = angleclamp180(var_03[1] - param_00[1]);
-	var_05 = function_02F9(var_04,10);
+	var_05 = getangleindex(var_04,10);
 	var_06 = ["2","3","6","9","8","7","4","1","2"];
 	return var_06[var_05];
 }
@@ -643,7 +643,7 @@ func_1951() {
 		else if(isai(self.var_77A3)) {
 			var_0B = self.var_77A3 geteye();
 		}
-		else if(function_02A5(self.var_77A3)) {
+		else if(isvector(self.var_77A3)) {
 			var_0B = self.var_77A3;
 		}
 		else
@@ -738,7 +738,7 @@ func_1953() {
 		else if(isai(self.var_77A3)) {
 			var_02 = self.var_77A3 geteye();
 		}
-		else if(function_02A5(self.var_77A3)) {
+		else if(isvector(self.var_77A3)) {
 			var_02 = self.var_77A3;
 		}
 		else
@@ -807,7 +807,7 @@ func_194D() {
 		else if(isai(self.var_6A5D)) {
 			var_01 = self.var_6A5D geteye();
 		}
-		else if(function_02A5(self.var_6A5D)) {
+		else if(isvector(self.var_6A5D)) {
 			var_01 = self.var_6A5D;
 		}
 		else
@@ -850,7 +850,7 @@ func_1950() {
 		else if(isai(self.var_6A5D)) {
 			var_01 = self.var_6A5D geteye();
 		}
-		else if(function_02A5(self.var_6A5D)) {
+		else if(isvector(self.var_6A5D)) {
 			var_01 = self.var_6A5D;
 		}
 		else
@@ -904,7 +904,7 @@ func_1966() {
 		else if(isai(self.var_77A3)) {
 			var_09 = self.var_77A3 geteye();
 		}
-		else if(function_02A5(self.var_77A3)) {
+		else if(isvector(self.var_77A3)) {
 			var_09 = self.var_77A3;
 		}
 		else
@@ -1036,7 +1036,7 @@ func_195D(param_00) {
 	else if(isai(var_01)) {
 		var_03 = var_01 geteye();
 	}
-	else if(function_02A5(var_01)) {
+	else if(isvector(var_01)) {
 		var_03 = var_01;
 	}
 	else
@@ -1421,7 +1421,7 @@ func_194C(param_00,param_01,param_02) {
 	else if(isai(param_01)) {
 		var_0C = param_01 geteye();
 	}
-	else if(function_02A5(param_01)) {
+	else if(isvector(param_01)) {
 		var_0C = param_01;
 	}
 	else
@@ -1570,7 +1570,7 @@ func_1952() {
 		else if(isai(self.var_77A3)) {
 			var_08 = self.var_77A3 geteye();
 		}
-		else if(function_02A5(self.var_77A3)) {
+		else if(isvector(self.var_77A3)) {
 			var_08 = self.var_77A3;
 		}
 		else
@@ -1615,7 +1615,7 @@ func_1954() {
 		else if(isai(self.var_77A3)) {
 			var_01 = self.var_77A3 geteye();
 		}
-		else if(function_02A5(self.var_77A3)) {
+		else if(isvector(self.var_77A3)) {
 			var_01 = self.var_77A3;
 		}
 		else
@@ -1717,8 +1717,8 @@ func_2B8A() {
 		}
 	}
 
-	var_04 = function_00CE(self.var_1FBD.origin,self.var_1FBD.angles,var_00.var_7540);
-	var_05 = function_00CD(self.var_1FBD.origin,self.var_1FBD.angles,var_00.var_7540);
+	var_04 = getstartorigin(self.var_1FBD.origin,self.var_1FBD.angles,var_00.var_7540);
+	var_05 = getstartangles(self.var_1FBD.origin,self.var_1FBD.angles,var_00.var_7540);
 	if(isai(var_00)) {
 		var_00 _meth_80F1(var_04,var_05,10000);
 	}
@@ -1760,7 +1760,7 @@ func_2B8A() {
 		else if(isai(var_00.var_77A3)) {
 			var_09 = var_00.var_77A3 geteye();
 		}
-		else if(function_02A5(var_00.var_77A3)) {
+		else if(isvector(var_00.var_77A3)) {
 			var_09 = var_00.var_77A3;
 		}
 		else
@@ -1898,8 +1898,8 @@ func_2B86() {
 		}
 	}
 
-	var_04 = function_00CE(self.var_1FBD.origin,self.var_1FBD.angles,var_00.var_7540);
-	var_05 = function_00CD(self.var_1FBD.origin,self.var_1FBD.angles,var_00.var_7540);
+	var_04 = getstartorigin(self.var_1FBD.origin,self.var_1FBD.angles,var_00.var_7540);
+	var_05 = getstartangles(self.var_1FBD.origin,self.var_1FBD.angles,var_00.var_7540);
 	if(isai(var_00)) {
 		var_00 _meth_80F1(var_04,var_05,10000);
 	}
@@ -1942,7 +1942,7 @@ func_2B86() {
 		else if(isai(var_00.var_77A3)) {
 			var_0B = var_00.var_77A3 geteye();
 		}
-		else if(function_02A5(var_00.var_77A3)) {
+		else if(isvector(var_00.var_77A3)) {
 			var_0B = var_00.var_77A3;
 		}
 		else

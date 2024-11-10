@@ -144,10 +144,10 @@ func_509D(param_00) {
 	self endon("entitydeleted");
 	var_01 = undefined;
 	for(;;) {
-		if(function_02A4(param_00) || function_02A6(param_00)) {
+		if(isstruct(param_00) || isent(param_00)) {
 			var_01 = param_00.origin;
 		}
-		else if(function_02A5(param_00)) {
+		else if(isvector(param_00)) {
 			var_01 = param_00;
 		}
 
@@ -226,10 +226,10 @@ func_CD4B(param_00,param_01,param_02) {
 		if(isstring(param_01)) {
 			var_04 = scripts\engine\utility::getstruct(param_01,"targetname");
 		}
-		else if(function_02A4(param_01)) {
+		else if(isstruct(param_01)) {
 			var_04 = param_01;
 		}
-		else if(function_02A6(param_01)) {
+		else if(isent(param_01)) {
 			var_04 = param_01;
 		}
 		else
@@ -238,8 +238,8 @@ func_CD4B(param_00,param_01,param_02) {
 		}
 
 		var_06 = var_05;
-		var_07 = function_00CE(var_04.origin,var_04.angles,var_06);
-		var_08 = function_00CD(var_04.origin,var_04.angles,var_06);
+		var_07 = getstartorigin(var_04.origin,var_04.angles,var_06);
+		var_08 = getstartangles(var_04.origin,var_04.angles,var_06);
 		if(!isdefined(self.var_9B89)) {
 			self _meth_80F1(var_07,var_08);
 		}
@@ -436,7 +436,7 @@ func_137F5(param_00) {
 }
 
 func_4906(param_00) {
-	if(!isarray(param_00) && !function_02A4(param_00) && !isstring(param_00) && !function_02A5(param_00) && !param_00) {
+	if(!isarray(param_00) && !isstruct(param_00) && !isstring(param_00) && !isvector(param_00) && !param_00) {
 		return undefined;
 	}
 
@@ -562,10 +562,10 @@ func_CD53(param_00,param_01,param_02) {
 		if(isstring(param_01)) {
 			var_04 = scripts\engine\utility::getstruct(param_01,"targetname");
 		}
-		else if(function_02A4(param_01)) {
+		else if(isstruct(param_01)) {
 			var_04 = param_01;
 		}
-		else if(function_02A6(param_01)) {
+		else if(isent(param_01)) {
 			var_04 = param_01;
 		}
 		else
@@ -574,8 +574,8 @@ func_CD53(param_00,param_01,param_02) {
 		}
 
 		var_06 = var_05;
-		var_07 = function_00CE(var_04.origin,var_04.angles,var_06);
-		var_08 = function_00CD(var_04.origin,var_04.angles,var_06);
+		var_07 = getstartorigin(var_04.origin,var_04.angles,var_06);
+		var_08 = getstartangles(var_04.origin,var_04.angles,var_06);
 		if(!isdefined(self.var_9B89)) {
 			self _meth_80F1(var_07,var_08);
 		}
@@ -662,10 +662,10 @@ func_CD50(param_00,param_01,param_02) {
 		if(isstring(param_01)) {
 			var_04 = scripts\engine\utility::getstruct(param_01,"targetname");
 		}
-		else if(function_02A4(param_01)) {
+		else if(isstruct(param_01)) {
 			var_04 = param_01;
 		}
-		else if(function_02A6(param_01)) {
+		else if(isent(param_01)) {
 			var_04 = param_01;
 		}
 		else
@@ -674,8 +674,8 @@ func_CD50(param_00,param_01,param_02) {
 		}
 
 		var_06 = var_05;
-		var_07 = function_00CE(var_04.origin,var_04.angles,var_06);
-		var_08 = function_00CD(var_04.origin,var_04.angles,var_06);
+		var_07 = getstartorigin(var_04.origin,var_04.angles,var_06);
+		var_08 = getstartangles(var_04.origin,var_04.angles,var_06);
 		self.var_C6B9 = param_01;
 	}
 
@@ -767,10 +767,10 @@ func_7A47(param_00) {
 	if(isstring(param_00)) {
 		var_01 = scripts\engine\utility::getstruct(param_00,"targetname");
 	}
-	else if(function_02A4(param_00)) {
+	else if(isstruct(param_00)) {
 		var_01 = param_00;
 	}
-	else if(function_02A6(param_00)) {
+	else if(isent(param_00)) {
 		var_01 = param_00;
 	}
 	else
@@ -789,8 +789,8 @@ func_BBFA(param_00) {
 		}
 
 		self.var_C6B8 = param_00;
-		var_03 = function_00CE(var_02.origin,var_02.angles,var_01);
-		var_04 = function_00CD(var_02.origin,var_02.angles,var_01);
+		var_03 = getstartorigin(var_02.origin,var_02.angles,var_01);
+		var_04 = getstartangles(var_02.origin,var_02.angles,var_01);
 		func_1162B(var_03,var_04);
 		if(!isdefined(self.var_9B89)) {
 			self animmode("noclip");
@@ -854,7 +854,7 @@ func_CD4F(param_00,param_01) {
 		if(isstring(param_01)) {
 			var_03 = scripts\engine\utility::getstruct(param_01,"targetname");
 		}
-		else if(function_02A4(param_01)) {
+		else if(isstruct(param_01)) {
 			var_03 = param_01;
 		}
 		else
@@ -943,8 +943,8 @@ func_9A13() {
 		}
 
 		if(isdefined(var_00)) {
-			var_0B = function_00CE(var_00.origin,var_00.angles,var_07);
-			var_0C = function_00CD(var_00.origin,var_00.angles,var_07);
+			var_0B = getstartorigin(var_00.origin,var_00.angles,var_07);
+			var_0C = getstartangles(var_00.origin,var_00.angles,var_07);
 			self _meth_80F1(var_0B,var_0C);
 		}
 
@@ -2228,8 +2228,8 @@ func_101F9() {
 }
 
 func_13CA(param_00,param_01) {
-	var_02 = function_00CE(param_00.origin,param_00.angles,param_01);
-	var_03 = function_00CD(param_00.origin,param_00.angles,param_01);
+	var_02 = getstartorigin(param_00.origin,param_00.angles,param_01);
+	var_03 = getstartangles(param_00.origin,param_00.angles,param_01);
 	if(!isdefined(self.var_9B89)) {
 		self _meth_80F1(var_02,var_03,100000);
 		wait(0.05);
@@ -2545,8 +2545,8 @@ func_DC7D() {
 		var_0A = undefined;
 		var_0B = undefined;
 		if(isdefined(self.var_C6B9)) {
-			var_0A = function_00CE(self.var_C6B9.origin,self.var_C6B9.angles,var_09);
-			var_0B = function_00CD(self.var_C6B9.origin,self.var_C6B9.angles,var_09);
+			var_0A = getstartorigin(self.var_C6B9.origin,self.var_C6B9.angles,var_09);
+			var_0B = getstartangles(self.var_C6B9.origin,self.var_C6B9.angles,var_09);
 			if(!isdefined(self.var_9B89)) {
 				self _meth_80F1(var_0A,var_0B);
 			}
@@ -2571,8 +2571,8 @@ func_DC7D() {
 		}
 
 		if(isdefined(self.var_C6B9)) {
-			var_0A = function_00CE(self.var_C6B9.origin,self.var_C6B9.angles,var_04);
-			var_0B = function_00CD(self.var_C6B9.origin,self.var_C6B9.angles,var_04);
+			var_0A = getstartorigin(self.var_C6B9.origin,self.var_C6B9.angles,var_04);
+			var_0B = getstartangles(self.var_C6B9.origin,self.var_C6B9.angles,var_04);
 			if(!isdefined(self.var_9B89)) {
 				self _meth_80F1(var_0A,var_0B);
 			}
@@ -2657,8 +2657,8 @@ func_DC7E() {
 		var_0A = undefined;
 		var_0B = undefined;
 		if(isdefined(self.var_C6B9)) {
-			var_0A = function_00CE(self.var_C6B9.origin,self.var_C6B9.angles,var_09);
-			var_0B = function_00CD(self.var_C6B9.origin,self.var_C6B9.angles,var_09);
+			var_0A = getstartorigin(self.var_C6B9.origin,self.var_C6B9.angles,var_09);
+			var_0B = getstartangles(self.var_C6B9.origin,self.var_C6B9.angles,var_09);
 			if(!isdefined(self.var_9B89)) {
 				self _meth_80F1(var_0A,var_0B);
 			}
@@ -2683,8 +2683,8 @@ func_DC7E() {
 		}
 
 		if(isdefined(self.var_C6B9)) {
-			var_0A = function_00CE(self.var_C6B9.origin,self.var_C6B9.angles,var_03);
-			var_0B = function_00CD(self.var_C6B9.origin,self.var_C6B9.angles,var_03);
+			var_0A = getstartorigin(self.var_C6B9.origin,self.var_C6B9.angles,var_03);
+			var_0B = getstartangles(self.var_C6B9.origin,self.var_C6B9.angles,var_03);
 			if(!isdefined(self.var_9B89)) {
 				self _meth_80F1(var_0A,var_0B);
 			}
@@ -2783,8 +2783,8 @@ func_DC7F(param_00,param_01,param_02) {
 				}
 
 				var_0F = var_06 scripts\sp\_utility::func_7DC1(var_0C);
-				var_10 = function_00CE(var_06.origin,var_06.angles,var_0F);
-				var_11 = function_00CD(var_06.origin,var_06.angles,var_0F);
+				var_10 = getstartorigin(var_06.origin,var_06.angles,var_0F);
+				var_11 = getstartangles(var_06.origin,var_06.angles,var_0F);
 				if(isai(var_06)) {
 					var_06 _meth_80F1(var_10,var_11);
 				}

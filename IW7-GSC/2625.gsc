@@ -3,18 +3,18 @@
  * Script: scripts\2625.gsc
 ***************************************/
 
-_id_EF33(var_0) {
-  level._id_EF2E = var_0;
+func_EF33(var_00) {
+  level.func_EF2E = var_00;
 }
 
-_id_028A() {
-  if (isdefined(level._id_EF2E))
-  [[level._id_EF2E]]();
+func_028A() {
+  if (isdefined(level.func_EF2E))
+  [[level.func_EF2E]]();
 
-  if (scripts\engine\utility::_id_9F64()) {
-  if (!scripts\engine\utility::_id_6E34("scriptables_ready"))
-  scripts\engine\utility::_id_6E39("scriptables_ready");
+  if (scripts\engine\utility::issp()) {
+  if (!scripts\engine\utility::flag_exist("scriptables_ready"))
+  scripts\engine\utility::flag_init("scriptables_ready");
 
-  scripts\engine\utility::_id_6E3E("scriptables_ready");
+  scripts\engine\utility::flag_set("scriptables_ready");
   }
 }

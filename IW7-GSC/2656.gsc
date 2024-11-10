@@ -7,40 +7,40 @@ main() {
   if (getdvar("r_reflectionProbeGenerate") == "1")
   return;
 
-  level._id_EE36 = [];
-  level._id_EE36["move_time"] = 5;
-  level._id_EE36["accel_time"] = 0;
-  level._id_EE36["decel_time"] = 0;
-  level._id_EE36["wait_time"] = 0;
-  level._id_EE36["delay_time"] = 0;
-  level._id_EE36["usable"] = 0;
-  level._id_EE36["hintstring"] = "activate";
-  _id_EE2E("activate", &"MP_ACTIVATE_MOVER");
-  _id_EE2F("none", "");
-  level._id_EE41 = [];
+  level.script_mover_defaults = [];
+  level.script_mover_defaults["move_time"] = 5;
+  level.script_mover_defaults["accel_time"] = 0;
+  level.script_mover_defaults["decel_time"] = 0;
+  level.script_mover_defaults["wait_time"] = 0;
+  level.script_mover_defaults["delay_time"] = 0;
+  level.script_mover_defaults["usable"] = 0;
+  level.script_mover_defaults["hintstring"] = "activate";
+  script_mover_add_hintstring("activate", &"MP_ACTIVATE_MOVER");
+  script_mover_add_parameters("none", "");
+  level.script_mover_named_goals = [];
   scripts\engine\utility::waitframe();
-  var_0 = [];
-  var_1 = _id_EE34();
+  var_00 = [];
+  var_01 = script_mover_classnames();
 
-  foreach (var_3 in var_1)
-  var_0 = scripts\engine\utility::_id_227F(var_0, getentarray(var_3, "classname"));
+  foreach (var_03 in var_01)
+  var_00 = scripts\engine\utility::array_combine(var_00, getentarray(var_03, "classname"));
 
-  scripts\engine\utility::_id_22D2(var_0, ::_id_EE3C);
+  scripts\engine\utility::array_thread(var_00, ::script_mover_int);
 }
 
-_id_EE34() {
+script_mover_classnames() {
   return ["script_model_mover", "script_brushmodel_mover"];
 }
 
-_id_EE3D() {
-  if (isdefined(self._id_EE2D))
-  return self._id_EE2D;
+script_mover_is_script_mover() {
+  if (isdefined(self.script_mover))
+  return self.script_mover;
 
-  var_0 = _id_EE34();
+  var_00 = script_mover_classnames();
 
-  foreach (var_2 in var_0) {
-  if (self.classname == var_2) {
-  self._id_EE2D = 1;
+  foreach (var_02 in var_00) {
+  if (self.classname == var_02) {
+  self.script_mover = 1;
   return 1;
   }
   }
@@ -48,32 +48,32 @@ _id_EE3D() {
   return 0;
 }
 
-_id_EE2E(var_0, var_1) {
-  if (!isdefined(level._id_EE3A))
-  level._id_EE3A = [];
+script_mover_add_hintstring(var_00, var_01) {
+  if (!isdefined(level.script_mover_hintstrings))
+  level.script_mover_hintstrings = [];
 
-  level._id_EE3A[var_0] = var_1;
+  level.script_mover_hintstrings[var_00] = var_01;
 }
 
-_id_EE2F(var_0, var_1) {
-  if (!isdefined(level._id_EE42))
-  level._id_EE42 = [];
+script_mover_add_parameters(var_00, var_01) {
+  if (!isdefined(level.script_mover_parameters))
+  level.script_mover_parameters = [];
 
-  level._id_EE42[var_0] = var_1;
+  level.script_mover_parameters[var_00] = var_01;
 }
 
-_id_EE3C() {
-  if (!isdefined(self._id_0334))
+script_mover_int() {
+  if (!isdefined(self.target))
   return;
 
-  self._id_EE2D = 1;
-  self._id_BD30 = 0;
-  self._id_C714 = self;
-  self._id_13034 = [];
-  self._id_AD1E = [];
-  var_0 = scripts\engine\utility::_id_8180(self._id_0334, "targetname");
+  self.script_mover = 1;
+  self.moving = 0;
+  self.origin_ent = self;
+  self.use_triggers = [];
+  self.linked_ents = [];
+  var_00 = scripts\engine\utility::getstructarray(self.target, "targetname");
 
-  foreach (var_2 in var_0) {
+  foreach (var_02 in var_00) {
   if (!isdefined(var_2.script_noteworthy))
   continue;
 
@@ -82,59 +82,59 @@ _id_EE3C() {
   if (!isdefined(var_2.angles))
   var_2.angles = (0, 0, 0);
 
-  self._id_C714 = spawn("script_model", var_2.origin);
-  self._id_C714.angles = var_2.angles;
-  self._id_C714 setmodel("tag_origin");
-  self._id_C714 linkto(self);
+  self.origin_ent = spawn("script_model", var_2.origin);
+  self.origin_ent.angles = var_2.angles;
+  self.origin_ent setmodel("tag_origin");
+  self.origin_ent linkto(self);
   break;
   default:
   break;
   }
   }
 
-  var_4 = getentarray(self._id_0334, "targetname");
+  var_04 = getentarray(self.target, "targetname");
 
-  foreach (var_2 in var_4) {
+  foreach (var_02 in var_04) {
   if (!isdefined(var_2.script_noteworthy))
   continue;
 
   switch (var_2.script_noteworthy) {
   case "use_trigger_link":
-  var_2 _meth_80D2();
-  var_2 linkto(self);
+  var_02 getrankxp();
+  var_02 linkto(self);
   case "use_trigger":
-  var_2 _id_EE45();
-  thread _id_EE4F(var_2);
-  self._id_13034[self._id_13034.size] = var_2;
+  var_02 script_mover_parse_targets();
+  thread script_mover_use_trigger(var_02);
+  self.use_triggers[self.use_triggers.size] = var_02;
   break;
   case "link":
-  var_2 linkto(self);
-  self._id_AD1E[self._id_AD1E.size] = var_2;
+  var_02 linkto(self);
+  self.linked_ents[self.linked_ents.size] = var_02;
   break;
   default:
   break;
   }
   }
 
-  thread _id_EE45();
-  thread _id_EE3B();
-  thread _id_EE47();
-  thread _id_EE32(self);
-  thread _id_EE40();
+  thread script_mover_parse_targets();
+  thread script_mover_init_move_parameters();
+  thread script_mover_save_default_move_parameters();
+  thread script_mover_apply_move_parameters(self);
+  thread script_mover_move_to_target();
 
-  foreach (var_8 in self._id_13034)
-  _id_EE4A(var_8, 1);
+  foreach (var_08 in self.use_triggers)
+  script_mover_set_usable(var_08, 1);
 }
 
-_id_EE4F(var_0) {
+script_mover_use_trigger(var_00) {
   self endon("death");
 
   for (;;) {
-  var_0 waittill("trigger");
+  var_00 waittill("trigger");
 
-  if (var_0._id_8436.size > 0) {
+  if (var_0.goals.size > 0) {
   self notify("new_path");
-  thread _id_EE40(var_0);
+  thread script_mover_move_to_target(var_00);
   continue;
   }
 
@@ -142,62 +142,62 @@ _id_EE4F(var_0) {
   }
 }
 
-_id_EE3F(var_0) {
-  if (isdefined(level._id_EE41[var_0])) {
+script_mover_move_to_named_goal(var_00) {
+  if (isdefined(level.script_mover_named_goals[var_00])) {
   self notify("new_path");
-  self._id_8436 = [level._id_EE41[var_0]];
-  thread _id_EE40();
+  self.goals = [level.script_mover_named_goals[var_00]];
+  thread script_mover_move_to_target();
   }
 }
 
-_id_1E8B(var_0) {
+anglesclamp180(var_00) {
   return (angleclamp180(var_0[0]), angleclamp180(var_0[1]), angleclamp180(var_0[2]));
 }
 
-_id_EE45() {
-  if (isdefined(self._id_C907) && self._id_C907)
+script_mover_parse_targets() {
+  if (isdefined(self.parsed) && self.parsed)
   return;
 
-  self._id_C907 = 1;
-  self._id_8436 = [];
-  self._id_BCEA = [];
-  self._id_ABDF = [];
-  var_0 = [];
-  var_1 = [];
+  self.parsed = 1;
+  self.goals = [];
+  self.movers = [];
+  self.level_notify = [];
+  var_00 = [];
+  var_01 = [];
 
-  if (isdefined(self._id_0334)) {
-  var_0 = scripts\engine\utility::_id_8180(self._id_0334, "targetname");
-  var_1 = getentarray(self._id_0334, "targetname");
+  if (isdefined(self.target)) {
+  var_00 = scripts\engine\utility::getstructarray(self.target, "targetname");
+  var_01 = getentarray(self.target, "targetname");
   }
 
-  for (var_2 = 0; var_2 < var_0.size; var_2++) {
-  var_3 = var_0[var_2];
+  for (var_02 = 0; var_02 < var_0.size; var_2++) {
+  var_03 = var_0[var_02];
 
   if (!isdefined(var_3.script_noteworthy))
   var_3.script_noteworthy = "goal";
 
   switch (var_3.script_noteworthy) {
   case "ignore":
-  if (isdefined(var_3._id_0334)) {
-  var_4 = scripts\engine\utility::_id_8180(var_3._id_0334, "targetname");
+  if (isdefined(var_3.target)) {
+  var_04 = scripts\engine\utility::getstructarray(var_3.target, "targetname");
 
-  foreach (var_6 in var_4)
-  var_0[var_0.size] = var_6;
+  foreach (var_06 in var_04)
+  var_0[var_0.size] = var_06;
   }
 
   break;
   case "goal":
-  var_3 _id_EE3B();
-  var_3 _id_EE45();
-  self._id_8436[self._id_8436.size] = var_3;
+  var_03 script_mover_init_move_parameters();
+  var_03 script_mover_parse_targets();
+  self.goals[self.goals.size] = var_03;
 
-  if (isdefined(var_3._id_C8F0["name"]))
-  level._id_EE41[var_3._id_C8F0["name"]] = var_3;
+  if (isdefined(var_3.params["name"]))
+  level.script_mover_named_goals[var_3.params["name"]] = var_03;
 
   break;
   case "level_notify":
-  if (isdefined(var_3._id_EE79))
-  self._id_ABDF[self._id_ABDF.size] = var_3;
+  if (isdefined(var_3.script_parameters))
+  self.level_notify[self.level_notify.size] = var_03;
 
   break;
   default:
@@ -205,9 +205,9 @@ _id_EE45() {
   }
   }
 
-  foreach (var_9 in var_1) {
-  if (var_9 _id_EE3D()) {
-  self._id_BCEA[self._id_BCEA.size] = var_9;
+  foreach (var_09 in var_01) {
+  if (var_09 script_mover_is_script_mover()) {
+  self.movers[self.movers.size] = var_09;
   continue;
   }
 
@@ -221,23 +221,23 @@ _id_EE45() {
 
   switch (var_10[0]) {
   case "delete":
-  thread _id_EE33(var_9, ::delete, var_10[2]);
+  thread script_mover_call_func_on_notify(var_09, ::delete, var_10[2]);
   break;
   case "hide":
-  thread _id_EE33(var_9, ::hide, var_10[2]);
+  thread script_mover_call_func_on_notify(var_09, ::hide, var_10[2]);
   break;
   case "show":
-  var_9 hide();
-  thread _id_EE33(var_9, ::show, var_10[2]);
+  var_09 hide();
+  thread script_mover_call_func_on_notify(var_09, ::show, var_10[2]);
   break;
   case "triggerHide":
   case "triggerhide":
-  thread _id_EE37(var_9, scripts\engine\utility::_id_12778, var_10[2]);
+  thread script_mover_func_on_notify(var_09, scripts\engine\utility::trigger_off, var_10[2]);
   break;
   case "triggerShow":
   case "triggershow":
-  var_9 scripts\engine\utility::_id_12778();
-  thread _id_EE37(var_9, scripts\engine\utility::_id_1277A, var_10[2]);
+  var_09 scripts\engine\utility::trigger_off();
+  thread script_mover_func_on_notify(var_09, scripts\engine\utility::trigger_on, var_10[2]);
   break;
   default:
   break;
@@ -245,165 +245,165 @@ _id_EE45() {
   }
 }
 
-_id_EE37(var_0, var_1, var_2) {
+script_mover_func_on_notify(var_00, var_01, var_02) {
   self endon("death");
-  var_0 endon("death");
+  var_00 endon("death");
 
   for (;;) {
-  self waittill(var_2);
-  var_0 [[var_1]]();
+  self waittill(var_02);
+  var_00 [[var_01]]();
   }
 }
 
-_id_EE33(var_0, var_1, var_2) {
+script_mover_call_func_on_notify(var_00, var_01, var_02) {
   self endon("death");
-  var_0 endon("death");
+  var_00 endon("death");
 
   for (;;) {
-  self waittill(var_2);
-  var_0 call [[var_1]]();
+  self waittill(var_02);
+  var_00 call [[var_01]]();
   }
 }
 
-_id_EE4C() {
-  scripts\engine\utility::_id_1277A();
+script_mover_trigger_on() {
+  scripts\engine\utility::trigger_on();
 }
 
-_id_EE40(var_0) {
+script_mover_move_to_target(var_00) {
   self endon("death");
   self endon("new_path");
 
-  if (!isdefined(var_0))
-  var_0 = self;
+  if (!isdefined(var_00))
+  var_00 = self;
 
-  while (var_0._id_8436.size != 0) {
-  var_1 = scripts\engine\utility::_id_DC6B(var_0._id_8436);
-  var_2 = self;
-  var_2 _id_EE32(var_1);
+  while (var_0.goals.size != 0) {
+  var_01 = scripts\engine\utility::random(var_0.goals);
+  var_02 = self;
+  var_02 script_mover_apply_move_parameters(var_01);
 
-  if (isdefined(var_2._id_C8F0["delay_till"]))
-  level waittill(var_2._id_C8F0["delay_till"]);
+  if (isdefined(var_2.params["delay_till"]))
+  level waittill(var_2.params["delay_till"]);
 
-  if (isdefined(var_2._id_C8F0["delay_till_trigger"]) && var_2._id_C8F0["delay_till_trigger"])
+  if (isdefined(var_2.params["delay_till_trigger"]) && var_2.params["delay_till_trigger"])
   self waittill("trigger");
 
-  if (var_2._id_C8F0["delay_time"] > 0)
-  wait(var_2._id_C8F0["delay_time"]);
+  if (var_2.params["delay_time"] > 0)
+  wait(var_2.params["delay_time"]);
 
-  var_3 = var_2._id_C8F0["move_time"];
-  var_4 = var_2._id_C8F0["accel_time"];
-  var_5 = var_2._id_C8F0["decel_time"];
-  var_6 = 0;
-  var_7 = 0;
-  var_8 = transformmove(var_1.origin, var_1.angles, self._id_C714.origin, self._id_C714.angles, self.origin, self.angles);
+  var_03 = var_2.params["move_time"];
+  var_04 = var_2.params["accel_time"];
+  var_05 = var_2.params["decel_time"];
+  var_06 = 0;
+  var_07 = 0;
+  var_08 = transformmove(var_1.origin, var_1.angles, self.origin_ent.origin, self.origin_ent.angles, self.origin, self.angles);
 
   if (var_2.origin != var_1.origin) {
-  if (isdefined(var_2._id_C8F0["move_speed"])) {
-  var_9 = distance(var_2.origin, var_1.origin);
-  var_3 = var_9 / var_2._id_C8F0["move_speed"];
+  if (isdefined(var_2.params["move_speed"])) {
+  var_09 = distance(var_2.origin, var_1.origin);
+  var_03 = var_09 / var_2.params["move_speed"];
   }
 
-  if (isdefined(var_2._id_C8F0["accel_frac"]))
-  var_4 = var_2._id_C8F0["accel_frac"] * var_3;
+  if (isdefined(var_2.params["accel_frac"]))
+  var_04 = var_2.params["accel_frac"] * var_03;
 
-  if (isdefined(var_2._id_C8F0["decel_frac"]))
-  var_5 = var_2._id_C8F0["decel_frac"] * var_3;
+  if (isdefined(var_2.params["decel_frac"]))
+  var_05 = var_2.params["decel_frac"] * var_03;
 
-  var_2 moveto(var_8["origin"], var_3, var_4, var_5);
+  var_02 moveto(var_8["origin"], var_03, var_04, var_05);
 
-  foreach (var_11 in var_1._id_ABDF)
-  thread _id_EE46(var_11.origin, var_11._id_EE79, self.origin, var_1.origin);
+  foreach (var_11 in var_1.level_notify)
+  thread script_mover_run_notify(var_11.origin, var_11.script_parameters, self.origin, var_1.origin);
 
-  var_6 = 1;
+  var_06 = 1;
   }
 
-  if (_id_1E8B(var_8["angles"]) != _id_1E8B(var_2.angles)) {
-  var_2 rotateto(var_8["angles"], var_3, var_4, var_5);
-  var_7 = 1;
+  if (anglesclamp180(var_8["angles"]) != anglesclamp180(var_2.angles)) {
+  var_02 rotateto(var_8["angles"], var_03, var_04, var_05);
+  var_07 = 1;
   }
 
-  foreach (var_14 in var_2._id_BCEA)
+  foreach (var_14 in var_2.movers)
   var_14 notify("trigger");
 
-  var_0 notify("depart");
-  var_2 _id_EE31(0);
-  self._id_BD30 = 1;
+  var_00 notify("depart");
+  var_02 script_mover_allow_usable(0);
+  self.moving = 1;
 
-  if (isdefined(var_2._id_C8F0["move_time_offset"]) && var_2._id_C8F0["move_time_offset"] + var_3 > 0)
-  wait(var_2._id_C8F0["move_time_offset"] + var_3);
-  else if (var_6)
+  if (isdefined(var_2.params["move_time_offset"]) && var_2.params["move_time_offset"] + var_03 > 0)
+  wait(var_2.params["move_time_offset"] + var_03);
+  else if (var_06)
   self waittill("movedone");
-  else if (var_7)
+  else if (var_07)
   self waittill("rotatedone");
   else
-  wait(var_3);
+  wait(var_03);
 
-  self._id_BD30 = 0;
+  self.moving = 0;
   self notify("move_end");
-  var_1 notify("arrive");
+  var_01 notify("arrive");
 
-  if (isdefined(var_2._id_C8F0["solid"])) {
-  if (var_2._id_C8F0["solid"])
-  var_2 solid();
+  if (isdefined(var_2.params["solid"])) {
+  if (var_2.params["solid"])
+  var_02 solid();
   else
-  var_2 notsolid();
+  var_02 notsolid();
   }
 
-  foreach (var_14 in var_1._id_BCEA)
+  foreach (var_14 in var_1.movers)
   var_14 notify("trigger");
 
-  if (isdefined(var_2._id_C8F0["wait_till"]))
-  level waittill(var_2._id_C8F0["wait_till"]);
+  if (isdefined(var_2.params["wait_till"]))
+  level waittill(var_2.params["wait_till"]);
 
-  if (var_2._id_C8F0["wait_time"] > 0)
-  wait(var_2._id_C8F0["wait_time"]);
+  if (var_2.params["wait_time"] > 0)
+  wait(var_2.params["wait_time"]);
 
-  var_2 _id_EE31(1);
-  var_0 = var_1;
+  var_02 script_mover_allow_usable(1);
+  var_00 = var_01;
   }
 }
 
-_id_EE46(var_0, var_1, var_2, var_3) {
+script_mover_run_notify(var_00, var_01, var_02, var_03) {
   self endon("move_end");
-  var_4 = self;
-  var_5 = vectornormalize(var_3 - var_2);
+  var_04 = self;
+  var_05 = vectornormalize(var_03 - var_02);
 
   for (;;) {
-  var_6 = vectornormalize(var_0 - var_4.origin);
+  var_06 = vectornormalize(var_00 - var_4.origin);
 
-  if (vectordot(var_5, var_6) <= 0)
+  if (vectordot(var_05, var_06) <= 0)
   break;
 
   wait 0.05;
   }
 
-  level notify(var_1);
+  level notify(var_01);
 }
 
-_id_EE3B() {
-  self._id_C8F0 = [];
+script_mover_init_move_parameters() {
+  self.params = [];
 
   if (!isdefined(self.angles))
   self.angles = (0, 0, 0);
 
-  self.angles = _id_1E8B(self.angles);
-  _id_EE43(self._id_EE79);
+  self.angles = anglesclamp180(self.angles);
+  script_mover_parse_move_parameters(self.script_parameters);
 }
 
-_id_EE43(var_0) {
-  if (!isdefined(var_0))
-  var_0 = "";
+script_mover_parse_move_parameters(var_00) {
+  if (!isdefined(var_00))
+  var_00 = "";
 
-  var_1 = strtok(var_0, ";");
+  var_01 = strtok(var_00, ";");
 
-  foreach (var_3 in var_1) {
-  var_4 = strtok(var_3, "=");
+  foreach (var_03 in var_01) {
+  var_04 = strtok(var_03, "=");
 
   if (var_4.size != 2)
   continue;
 
   if (var_4[1] == "undefined" || var_4[1] == "default") {
-  self._id_C8F0[var_4[0]] = undefined;
+  self.params[var_4[0]] = undefined;
   continue;
   }
 
@@ -417,25 +417,25 @@ _id_EE43(var_0) {
   case "decel_time":
   case "accel_time":
   case "move_time":
-  self._id_C8F0[var_4[0]] = _id_EE44(var_4[1]);
+  self.params[var_4[0]] = script_mover_parse_range(var_4[1]);
   break;
   case "wait_till":
   case "delay_till":
   case "hintstring":
   case "name":
-  self._id_C8F0[var_4[0]] = var_4[1];
+  self.params[var_4[0]] = var_4[1];
   break;
   case "delay_till_trigger":
   case "usable":
   case "solid":
-  self._id_C8F0[var_4[0]] = int(var_4[1]);
+  self.params[var_4[0]] = int(var_4[1]);
   break;
   case "script_params":
-  var_5 = var_4[1];
-  var_6 = level._id_EE42[var_5];
+  var_05 = var_4[1];
+  var_06 = level.script_mover_parameters[var_05];
 
-  if (isdefined(var_6))
-  _id_EE43(var_6);
+  if (isdefined(var_06))
+  script_mover_parse_move_parameters(var_06);
 
   break;
   default:
@@ -444,441 +444,441 @@ _id_EE43(var_0) {
   }
 }
 
-_id_EE44(var_0) {
-  var_1 = 0;
-  var_2 = strtok(var_0, ",");
+script_mover_parse_range(var_00) {
+  var_01 = 0;
+  var_02 = strtok(var_00, ",");
 
   if (var_2.size == 1)
-  var_1 = float(var_2[0]);
+  var_01 = float(var_2[0]);
   else if (var_2.size == 2) {
-  var_3 = float(var_2[0]);
-  var_4 = float(var_2[1]);
+  var_03 = float(var_2[0]);
+  var_04 = float(var_2[1]);
 
-  if (var_3 >= var_4)
-  var_1 = var_3;
+  if (var_03 >= var_04)
+  var_01 = var_03;
   else
-  var_1 = randomfloatrange(var_3, var_4);
+  var_01 = randomfloatrange(var_03, var_04);
   }
 
-  return var_1;
+  return var_01;
 }
 
-_id_EE32(var_0) {
-  foreach (var_3, var_2 in var_0._id_C8F0)
-  _id_EE49(var_3, var_2);
+script_mover_apply_move_parameters(var_00) {
+  foreach (var_03, var_02 in var_0.params)
+  script_mover_set_param(var_03, var_02);
 
-  _id_EE48();
+  script_mover_set_defaults();
 }
 
-_id_EE49(var_0, var_1) {
-  if (!isdefined(var_0))
+script_mover_set_param(var_00, var_01) {
+  if (!isdefined(var_00))
   return;
 
-  if (var_0 == "usable" && isdefined(var_1))
-  _id_EE4A(self, var_1);
+  if (var_00 == "usable" && isdefined(var_01))
+  script_mover_set_usable(self, var_01);
 
-  self._id_C8F0[var_0] = var_1;
+  self.params[var_00] = var_01;
 }
 
-_id_EE31(var_0) {
-  if (self._id_C8F0["usable"])
-  _id_EE4A(self, var_0);
+script_mover_allow_usable(var_00) {
+  if (self.params["usable"])
+  script_mover_set_usable(self, var_00);
 
-  foreach (var_2 in self._id_13034)
-  _id_EE4A(var_2, var_0);
+  foreach (var_02 in self.use_triggers)
+  script_mover_set_usable(var_02, var_00);
 }
 
-_id_EE4A(var_0, var_1) {
-  if (var_1) {
-  var_0 makeusable();
-  var_0 setcursorhint("HINT_NOICON");
-  var_0 sethintstring(level._id_EE3A[self._id_C8F0["hintstring"]]);
+script_mover_set_usable(var_00, var_01) {
+  if (var_01) {
+  var_00 makeusable();
+  var_00 setcursorhint("HINT_NOICON");
+  var_00 sethintstring(level.script_mover_hintstrings[self.params["hintstring"]]);
   }
   else
-  var_0 makeunusable();
+  var_00 makeunusable();
 }
 
-_id_EE47() {
-  self._id_C8F1 = [];
+script_mover_save_default_move_parameters() {
+  self.params_default = [];
 
-  foreach (var_2, var_1 in self._id_C8F0)
-  self._id_C8F1[var_2] = var_1;
+  foreach (var_02, var_01 in self.params)
+  self.params_default[var_02] = var_01;
 }
 
-_id_EE48() {
-  foreach (var_2, var_1 in level._id_EE36) {
-  if (!isdefined(self._id_C8F0[var_2]))
-  _id_EE49(var_2, var_1);
+script_mover_set_defaults() {
+  foreach (var_02, var_01 in level.script_mover_defaults) {
+  if (!isdefined(self.params[var_02]))
+  script_mover_set_param(var_02, var_01);
   }
 
-  if (isdefined(self._id_C8F1)) {
-  foreach (var_2, var_1 in self._id_C8F1) {
-  if (!isdefined(self._id_C8F0[var_2]))
-  _id_EE49(var_2, var_1);
+  if (isdefined(self.params_default)) {
+  foreach (var_02, var_01 in self.params_default) {
+  if (!isdefined(self.params[var_02]))
+  script_mover_set_param(var_02, var_01);
   }
   }
 }
 
 init() {
-  level thread _id_EE30();
+  level thread script_mover_agent_spawn_watch();
 }
 
-_id_EE30() {
+script_mover_agent_spawn_watch() {
   for (;;) {
-  level waittill("spawned_agent", var_0);
-  var_0 thread _id_D312();
+  level waittill("spawned_agent", var_00);
+  var_00 thread player_unresolved_collision_watch();
   }
 }
 
-_id_D312() {
+player_unresolved_collision_watch() {
   self endon("disconnect");
 
   if (isagent(self))
   self endon("death");
 
-  self._id_12BE5 = 0;
+  self.func_12BE5 = 0;
 
   for (;;) {
-  self waittill("unresolved_collision", var_0);
-  self._id_12BE5++;
-  thread _id_418E();
-  var_1 = 3;
+  self waittill("unresolved_collision", var_00);
+  self.func_12BE5++;
+  thread func_418E();
+  var_01 = 3;
 
-  if (isdefined(var_0) && isdefined(var_0._id_12BEC))
-  var_1 = var_0._id_12BEC;
+  if (isdefined(var_00) && isdefined(var_0.unresolved_collision_notify_min))
+  var_01 = var_0.unresolved_collision_notify_min;
 
-  if (self._id_12BE5 >= var_1) {
-  if (isdefined(var_0)) {
-  if (isdefined(var_0._id_12BE7))
-  var_0 [[var_0._id_12BE7]](self);
-  else if (isdefined(var_0._id_12BE8) && var_0._id_12BE8)
-  var_0 _id_12BED(self);
+  if (self.func_12BE5 >= var_01) {
+  if (isdefined(var_00)) {
+  if (isdefined(var_0.unresolved_collision_func))
+  var_00 [[var_0.unresolved_collision_func]](self);
+  else if (isdefined(var_0.unresolved_collision_kill) && var_0.unresolved_collision_kill)
+  var_00 unresolved_collision_owner_damage(self);
   else
-  var_0 _id_12BEA(self);
+  var_00 unresolved_collision_nearest_node(self);
   }
   else
-  _id_12BEA(self);
+  unresolved_collision_nearest_node(self);
 
-  self._id_12BE5 = 0;
+  self.func_12BE5 = 0;
   }
   }
 }
 
-_id_418E() {
+func_418E() {
   self endon("unresolved_collision");
   scripts\engine\utility::waitframe();
 
   if (isdefined(self))
-  self._id_12BE5 = 0;
+  self.func_12BE5 = 0;
 }
 
-_id_12BED(var_0) {
-  var_1 = self;
+unresolved_collision_owner_damage(var_00) {
+  var_01 = self;
 
   if (!isdefined(var_1.owner)) {
-  var_0 _id_BCDE();
+  var_00 mover_suicide();
   return;
   }
 
-  var_2 = 0;
+  var_02 = 0;
 
   if (level.teambased) {
   if (isdefined(var_1.owner.team) && var_1.owner.team != var_0.team)
-  var_2 = 1;
+  var_02 = 1;
   }
-  else if (var_0 != var_1.owner)
-  var_2 = 1;
+  else if (var_00 != var_1.owner)
+  var_02 = 1;
 
-  if (!var_2) {
-  var_0 _id_BCDE();
+  if (!var_02) {
+  var_00 mover_suicide();
   return;
   }
 
-  var_3 = 1000;
+  var_03 = 1000;
 
-  if (isdefined(var_1._id_12BE6))
-  var_3 = var_1._id_12BE6;
+  if (isdefined(var_1.unresolved_collision_damage))
+  var_03 = var_1.unresolved_collision_damage;
 
-  var_0 _meth_80B0(var_3, var_1.origin, var_1.owner, var_1, "MOD_CRUSH");
+  var_00 getrandomarmkillstreak(var_03, var_1.origin, var_1.owner, var_01, "MOD_CRUSH");
 }
 
-_id_12BEA(var_0, var_1) {
-  if (isdefined(level._id_C81D)) {
-  self [[level._id_C81D]](var_0, var_1);
+unresolved_collision_nearest_node(var_00, var_01) {
+  if (isdefined(level.func_C81D)) {
+  self [[level.func_C81D]](var_00, var_01);
   return;
   }
 
-  var_2 = self._id_12BEB;
+  var_02 = self.unresolved_collision_nodes;
 
-  if (isdefined(var_2))
-  var_2 = sortbydistance(var_2, var_0.origin);
+  if (isdefined(var_02))
+  var_02 = sortbydistance(var_02, var_0.origin);
   else
   {
-  var_2 = getnodesinradius(var_0.origin, 300, 0, 200);
-  var_2 = sortbydistance(var_2, var_0.origin);
+  var_02 = getnodesinradius(var_0.origin, 300, 0, 200);
+  var_02 = sortbydistance(var_02, var_0.origin);
   }
 
-  var_3 = (0, 0, -100);
-  var_0 _meth_805B();
-  var_0 dontinterpolate();
-  var_0 setorigin(var_0.origin + var_3);
+  var_03 = (0, 0, -100);
+  var_00 cancelmantle();
+  var_00 dontinterpolate();
+  var_00 setorigin(var_0.origin + var_03);
 
-  for (var_4 = 0; var_4 < var_2.size; var_4++) {
-  var_5 = var_2[var_4];
-  var_6 = var_5.origin;
+  for (var_04 = 0; var_04 < var_2.size; var_4++) {
+  var_05 = var_2[var_04];
+  var_06 = var_5.origin;
 
-  if (!canspawn(var_6))
+  if (!canspawn(var_06))
   continue;
 
-  if (positionwouldtelefrag(var_6))
+  if (positionwouldtelefrag(var_06))
   continue;
 
-  if (var_0 getstance() == "prone")
-  var_0 setstance("crouch");
+  if (var_00 getstance() == "prone")
+  var_00 setstance("crouch");
 
-  var_0 setorigin(var_6);
+  var_00 setorigin(var_06);
   return;
   }
 
-  var_0 setorigin(var_0.origin - var_3);
+  var_00 setorigin(var_0.origin - var_03);
 
-  if (!isdefined(var_1))
-  var_1 = 1;
+  if (!isdefined(var_01))
+  var_01 = 1;
 
-  if (var_1)
-  var_0 _id_BCDE();
+  if (var_01)
+  var_00 mover_suicide();
 }
 
-_id_12BEE(var_0) {}
+func_12BEE(var_00) {}
 
-_id_BCDE() {
-  if (isdefined(level._id_9E36) && !isagent(self))
+mover_suicide() {
+  if (isdefined(level.func_9E36) && !isagent(self))
   return;
 
-  _id_0A77::_id_1417();
+  scripts/cp/utility::_suicide();
 }
 
-_id_D246(var_0) {
+player_pushed_kill(var_00) {
   self endon("death");
   self endon("stop_player_pushed_kill");
 
   for (;;) {
-  self waittill("player_pushed", var_1, var_2);
+  self waittill("player_pushed", var_01, var_02);
 
-  if (isplayer(var_1) || isagent(var_1)) {
-  var_3 = length(var_2);
+  if (isplayer(var_01) || isagent(var_01)) {
+  var_03 = length(var_02);
 
-  if (var_3 >= var_0)
-  _id_12BED(var_1);
+  if (var_03 >= var_00)
+  unresolved_collision_owner_damage(var_01);
   }
   }
 }
 
-_id_11030() {
+stop_player_pushed_kill() {
   self notify("stop_player_pushed_kill");
 }
 
-_id_EE38() {
-  var_0 = self _meth_8138();
+script_mover_get_top_parent() {
+  var_00 = self getlinkedparent();
 
-  for (var_1 = var_0; isdefined(var_1); var_1 = var_1 _meth_8138())
-  var_0 = var_1;
+  for (var_01 = var_00; isdefined(var_01); var_01 = var_01 getlinkedparent())
+  var_00 = var_01;
 
-  return var_0;
+  return var_00;
 }
 
-_id_EE4B(var_0) {
-  var_1 = var_0 _id_EE38();
+script_mover_start_use(var_00) {
+  var_01 = var_00 script_mover_get_top_parent();
 
-  if (isdefined(var_1))
-  var_1._id_10E07 = var_1.origin;
+  if (isdefined(var_01))
+  var_1.startuseorigin = var_1.origin;
 
-  self._id_10E06 = self _meth_8140();
+  self.startusemover = self getspawnpointarray();
 
-  if (isdefined(self._id_10E06)) {
-  var_2 = self._id_10E06 _id_EE38();
+  if (isdefined(self.startusemover)) {
+  var_02 = self.startusemover script_mover_get_top_parent();
 
-  if (isdefined(var_2))
-  self._id_10E06 = var_2;
+  if (isdefined(var_02))
+  self.startusemover = var_02;
 
-  self._id_10E06._id_10E07 = self._id_10E06.origin;
+  self.startusemover.startuseorigin = self.startusemover.origin;
   }
 }
 
-_id_EE39(var_0) {
-  if (!isdefined(var_0))
+script_mover_has_parent_moved(var_00) {
+  if (!isdefined(var_00))
   return 0;
 
-  return lengthsquared(var_0.origin - var_0._id_10E07) > 0.001;
+  return lengthsquared(var_0.origin - var_0.startuseorigin) > 0.001;
 }
 
-_id_EE4E(var_0) {
+script_mover_use_can_link(var_00) {
   if (!isplayer(self))
   return 1;
 
-  if (!isdefined(var_0))
+  if (!isdefined(var_00))
   return 0;
 
-  var_1 = var_0 _id_EE38();
-  var_2 = self._id_10E06;
+  var_01 = var_00 script_mover_get_top_parent();
+  var_02 = self.startusemover;
 
-  if (!isdefined(var_1) && !isdefined(var_2))
+  if (!isdefined(var_01) && !isdefined(var_02))
   return 1;
 
-  if (isdefined(var_1) && isdefined(var_2) && var_1 == var_2)
+  if (isdefined(var_01) && isdefined(var_02) && var_01 == var_02)
   return 1;
 
-  if (_id_EE39(var_1))
+  if (script_mover_has_parent_moved(var_01))
   return 0;
 
-  if (_id_EE39(var_2))
+  if (script_mover_has_parent_moved(var_02))
   return 0;
 
   return 1;
 }
 
-_id_EE3E(var_0) {
-  if (isplayer(var_0)) {
-  var_0 _id_EE4B(self);
-  var_1 = var_0 _meth_8140();
-  var_2 = undefined;
+script_mover_link_to_use_object(var_00) {
+  if (isplayer(var_00)) {
+  var_00 script_mover_start_use(self);
+  var_01 = var_00 getspawnpointarray();
+  var_02 = undefined;
 
-  if (isdefined(var_1))
-  var_2 = var_1;
-  else if (!isdefined(_id_EE38()))
-  var_2 = self;
+  if (isdefined(var_01))
+  var_02 = var_01;
+  else if (!isdefined(script_mover_get_top_parent()))
+  var_02 = self;
   else
   {
-  var_2 = spawn("script_model", var_0.origin);
-  var_2 setmodel("tag_origin");
-  var_0._id_EF85 = var_2;
-  var_0 thread _id_EC11(var_2);
+  var_02 = spawn("script_model", var_0.origin);
+  var_02 setmodel("tag_origin");
+  var_0.func_EF85 = var_02;
+  var_00 thread func_EC11(var_02);
   }
 
-  var_0 _meth_823A(var_2);
+  var_00 getweaponvariantattachments(var_02);
   }
   else
-  var_0 linkto(self);
+  var_00 linkto(self);
 
-  var_0 _meth_8234();
+  var_00 getweaponrootname();
 }
 
-_id_EE4D(var_0) {
-  var_0 unlink();
+script_mover_unlink_from_use_object(var_00) {
+  var_00 unlink();
 
-  if (isdefined(var_0._id_EF85)) {
-  var_0 notify("removeMoverLinkDummy");
-  var_0._id_EF85 delete();
-  var_0._id_EF85 = undefined;
+  if (isdefined(var_0.func_EF85)) {
+  var_00 notify("removeMoverLinkDummy");
+  var_0.func_EF85 delete();
+  var_0.func_EF85 = undefined;
   }
 }
 
-_id_EC11(var_0) {
+func_EC11(var_00) {
   self endon("removeMoverLinkDummy");
   scripts\engine\utility::waittill_any("death", "disconnect");
-  self._id_EF85 delete();
-  self._id_EF85 = undefined;
+  self.func_EF85 delete();
+  self.func_EF85 = undefined;
 }
 
-_id_C13B() {
-  var_0 = self _meth_8137(0);
+notify_moving_platform_invalid() {
+  var_00 = self getlinkedchildren(0);
 
-  if (!isdefined(var_0))
+  if (!isdefined(var_00))
   return;
 
-  foreach (var_2 in var_0) {
-  if (isdefined(var_2._id_C000) && var_2._id_C000)
+  foreach (var_02 in var_00) {
+  if (isdefined(var_2.no_moving_platfrom_unlink) && var_2.no_moving_platfrom_unlink)
   continue;
 
-  var_2 unlink();
-  var_2 notify("invalid_parent", self);
+  var_02 unlink();
+  var_02 notify("invalid_parent", self);
   }
 }
 
-_id_D981(var_0, var_1) {
-  if (isdefined(var_1) && isdefined(var_1._id_BFFF) && var_1._id_BFFF)
+process_moving_platform_death(var_00, var_01) {
+  if (isdefined(var_01) && isdefined(var_1.no_moving_platfrom_death) && var_1.no_moving_platfrom_death)
   return;
 
-  if (isdefined(var_0._id_CF14))
-  playfx(scripts\engine\utility::_id_7ECB("airdrop_crate_destroy"), self.origin);
+  if (isdefined(var_0.playdeathfx))
+  playfx(scripts\engine\utility::getfx("airdrop_crate_destroy"), self.origin);
 
-  if (isdefined(var_0._id_4E53)) {
-  var_0._id_AA33 = var_1;
-  self thread [[var_0._id_4E53]](var_0);
+  if (isdefined(var_0.deathoverridecallback)) {
+  var_0.lasttouchedplatform = var_01;
+  self thread [[var_0.deathoverridecallback]](var_00);
   }
   else
   self delete();
 }
 
-_id_892E(var_0) {
+handle_moving_platform_touch(var_00) {
   self notify("handle_moving_platform_touch");
   self endon("handle_moving_platform_touch");
   level endon("game_ended");
   self endon("death");
   self endon("stop_handling_moving_platforms");
 
-  if (isdefined(var_0._id_6371))
-  self endon(var_0._id_6371);
+  if (isdefined(var_0.endonstring))
+  self endon(var_0.endonstring);
 
   for (;;) {
-  self waittill("touching_platform", var_1);
+  self waittill("touching_platform", var_01);
 
-  if (isdefined(var_0._id_13139) && var_0._id_13139) {
-  if (!self istouching(var_1)) {
+  if (isdefined(var_0.func_13139) && var_0.func_13139) {
+  if (!self istouching(var_01)) {
   wait 0.05;
   continue;
   }
   }
 
-  thread _id_D981(var_0, var_1);
+  thread process_moving_platform_death(var_00, var_01);
   break;
   }
 }
 
-_id_892D(var_0) {
+handle_moving_platform_invalid(var_00) {
   self notify("handle_moving_platform_invalid");
   self endon("handle_moving_platform_invalid");
   level endon("game_ended");
   self endon("death");
   self endon("stop_handling_moving_platforms");
 
-  if (isdefined(var_0._id_6371))
-  self endon(var_0._id_6371);
+  if (isdefined(var_0.endonstring))
+  self endon(var_0.endonstring);
 
-  self waittill("invalid_parent", var_1);
+  self waittill("invalid_parent", var_01);
 
-  if (isdefined(var_0._id_9B11))
-  self thread [[var_0._id_9B11]](var_0);
+  if (isdefined(var_0.invalidparentoverridecallback))
+  self thread [[var_0.invalidparentoverridecallback]](var_00);
   else
-  thread _id_D981(var_0, var_1);
+  thread process_moving_platform_death(var_00, var_01);
 }
 
-_id_892F(var_0) {
+handle_moving_platforms(var_00) {
   self notify("handle_moving_platforms");
   self endon("handle_moving_platforms");
   level endon("game_ended");
   self endon("death");
   self endon("stop_handling_moving_platforms");
 
-  if (!isdefined(var_0))
-  var_0 = spawnstruct();
+  if (!isdefined(var_00))
+  var_00 = spawnstruct();
 
-  if (isdefined(var_0._id_6371))
-  self endon(var_0._id_6371);
+  if (isdefined(var_0.endonstring))
+  self endon(var_0.endonstring);
 
-  if (isdefined(var_0._id_AD39)) {
-  var_1 = self _meth_8138();
+  if (isdefined(var_0.linkparent)) {
+  var_01 = self getlinkedparent();
 
-  if (!isdefined(var_1) || var_1 != var_0._id_AD39)
-  self linkto(var_0._id_AD39);
+  if (!isdefined(var_01) || var_01 != var_0.linkparent)
+  self linkto(var_0.linkparent);
   }
 
-  thread _id_892E(var_0);
-  thread _id_892D(var_0);
+  thread handle_moving_platform_touch(var_00);
+  thread handle_moving_platform_invalid(var_00);
 }
 
-_id_11001() {
+stop_handling_moving_platforms() {
   self notify("stop_handling_moving_platforms");
 }
 
-_id_BD3C(var_0) {}
+moving_platform_empty_func(var_00) {}

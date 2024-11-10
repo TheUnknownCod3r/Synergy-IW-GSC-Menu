@@ -94,7 +94,7 @@ func_D573() {
 	self endon("disconnect");
 	self endon("virus_complete");
 	for(;;) {
-		var_00 = function_01E1(scripts\engine\utility::getfx("vfx_virus_particles_screen"),self geteye(),self);
+		var_00 = spawnfxforclient(scripts\engine\utility::getfx("vfx_virus_particles_screen"),self geteye(),self);
 		triggerfx(var_00);
 		var_00 thread scripts\mp\_utility::deleteonplayerdeathdisconnect(self);
 		wait(0.2);

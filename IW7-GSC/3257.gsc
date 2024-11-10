@@ -161,7 +161,7 @@ onzombiedamaged(param_00,param_01,param_02,param_03,param_04,param_05,param_06,p
 				param_01 thread scripts\cp\zombies\zombie_damage::stun_zap(self.origin,self,param_02,param_04);
 			}
 
-			if(var_20 && function_024C(param_05) != "riotshield") {
+			if(var_20 && weapontype(param_05) != "riotshield") {
 				param_01 thread scripts\cp\zombies\zombie_damage::stun_zap(self.origin,self,param_02,"MOD_UNKNOWN",undefined,var_20);
 			}
 
@@ -942,7 +942,7 @@ kill_me_if_stuck() {
 
 	self.died_poorly = 1;
 	if(scripts\engine\utility::istrue(self.marked_for_challenge) && isdefined(level.num_zombies_marked)) {
-		level.var_C20A--;
+		level.num_zombies_marked--;
 	}
 
 	self dodamage(self.health + 1000,self.origin,self,self,"MOD_SUICIDE");

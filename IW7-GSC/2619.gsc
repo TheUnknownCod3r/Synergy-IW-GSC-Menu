@@ -3,19 +3,19 @@
  * Script: scripts\2619.gsc
 ***************************************/
 
-_id_95E2() {
-  if (!scripts\engine\utility::_id_16F3("init_flags", ::_id_95E2))
+init_flags() {
+  if (!scripts\engine\utility::add_init_script("init_flags", ::init_flags))
   return;
 
-  level._id_6E25 = [];
-  level._id_6E6E = [];
-  level._id_7763 = 0;
-  scripts\engine\utility::_id_95C6("sp_stat_tracking_func");
-  level._id_6E46 = spawnstruct();
-  level._id_6E46 _id_23D9();
+  level.flag = [];
+  level.flags_lock = [];
+  level.generic_index = 0;
+  scripts\engine\utility::init_empty_func_ref_MAYBE("sp_stat_tracking_func");
+  level.flag_struct = spawnstruct();
+  level.flag_struct assign_unique_id();
 }
 
-_id_23D9() {
-  self._id_12BA3 = "generic" + level._id_7763;
-  level._id_7763++;
+assign_unique_id() {
+  self.unique_id = "generic" + level.generic_index;
+  level.generic_index++;
 }

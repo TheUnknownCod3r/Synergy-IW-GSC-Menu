@@ -185,7 +185,7 @@ func_127F3() {
 	for(;;) {
 		var_01 = self gettagorigin("tag_laser");
 		var_02 = var_01 + anglestoforward(self gettagangles("tag_laser")) * 210;
-		var_03 = function_0287(var_01,var_02,var_00,self,0,"physicsquery_closest");
+		var_03 = physics_raycast(var_01,var_02,var_00,self,0,"physicsquery_closest");
 		if(isdefined(var_03) && var_03.size > 0) {
 			var_02 = var_03[0]["position"];
 		}
@@ -318,7 +318,7 @@ func_127F7() {
 			var_03 = var_02 geteye();
 		}
 
-		var_04 = function_0287(self.origin,var_02 geteye(),var_01,self,0,"physicsquery_closest");
+		var_04 = physics_raycast(self.origin,var_02 geteye(),var_01,self,0,"physicsquery_closest");
 		if(isdefined(var_04) && var_04.size > 0) {
 			continue;
 		}

@@ -4,17 +4,17 @@
 ***************************************/
 
 init() {
-  _id_97D5();
-  level thread _id_C56E();
+  initawards();
+  level thread onplayerconnect();
   level.givemidmatchawardfunc = ::givemidmatchaward;
 }
 
-_id_C56E() {
+onplayerconnect() {
   for (;;) {
-  level waittill("connected", var_0);
-  var_0 thread onplayerspawned();
-  var_0 thread initaarawardlist();
-  var_0._id_26D7 = [];
+  level waittill("connected", var_00);
+  var_00 thread onplayerspawned();
+  var_00 thread initaarawardlist();
+  var_0.awardqueue = [];
   }
 }
 
@@ -23,141 +23,141 @@ onplayerspawned() {
 
   for (;;) {
   self waittill("spawned_player");
-  self._id_26D9 = [];
+  self.awardsthislife = [];
   }
 }
 
-_id_97D5() {
-  _id_989C();
+initawards() {
+  initmidmatchawards();
 }
 
-_id_97D7(var_0, var_1) {
-  level._id_26D8[var_0] = spawnstruct();
-  level._id_26D8[var_0].type = var_1;
-  var_2 = tablelookup("mp/awardtable.csv", 1, var_0, 10);
+initbaseaward(var_00, var_01) {
+  level.awards[var_00] = spawnstruct();
+  level.awards[var_00].type = var_01;
+  var_02 = tablelookup("mp/awardtable.csv", 1, var_00, 10);
 
-  if (isdefined(var_2) && var_2 != "")
-  level._id_26D8[var_0]._id_13E28 = var_2;
+  if (isdefined(var_02) && var_02 != "")
+  level.awards[var_00].xpscoreevent = var_02;
 
-  var_3 = tablelookup("mp/awardtable.csv", 1, var_0, 11);
+  var_03 = tablelookup("mp/awardtable.csv", 1, var_00, 11);
 
-  if (isdefined(var_3) && var_3 != "")
-  level._id_26D8[var_0]._id_7681 = var_3;
+  if (isdefined(var_03) && var_03 != "")
+  level.awards[var_00].gamescoreevent = var_03;
 
-  var_4 = tablelookup("mp/awardtable.csv", 1, var_0, 3);
+  var_04 = tablelookup("mp/awardtable.csv", 1, var_00, 3);
 
-  if (isdefined(var_4) && var_4 != "")
-  level._id_26D8[var_0]._id_3B95 = var_4;
+  if (isdefined(var_04) && var_04 != "")
+  level.awards[var_00].category = var_04;
 
-  var_5 = tablelookup("mp/awardtable.csv", 1, var_0, 7);
+  var_05 = tablelookup("mp/awardtable.csv", 1, var_00, 7);
 
-  if (isdefined(var_5) && var_5 != "") {
-  var_6 = randomfloat(1.0);
-  level._id_26D8[var_0].aarpriority = float(var_5) + var_6;
+  if (isdefined(var_05) && var_05 != "") {
+  var_06 = randomfloat(1.0);
+  level.awards[var_00].aarpriority = float(var_05) + var_06;
   }
 }
 
-_id_97D8(var_0, var_1) {
-  _id_97D7(var_0, var_1);
+initbasemidmatchaward(var_00, var_01) {
+  initbaseaward(var_00, var_01);
 }
 
-_id_989B(var_0) {
-  _id_97D8(var_0, "midmatch");
+initmidmatchaward(var_00) {
+  initbasemidmatchaward(var_00, "midmatch");
 }
 
-_id_989C() {
-  var_0 = 0;
+initmidmatchawards() {
+  var_00 = 0;
 
   for (;;) {
-  var_1 = tablelookupbyrow("mp/awardtable.csv", var_0, 1);
+  var_01 = tablelookupbyrow("mp/awardtable.csv", var_00, 1);
 
-  if (!isdefined(var_1) || var_1 == "")
+  if (!isdefined(var_01) || var_01 == "")
   break;
 
-  var_2 = tablelookupbyrow("mp/awardtable.csv", var_0, 9);
+  var_02 = tablelookupbyrow("mp/awardtable.csv", var_00, 9);
 
-  if (isdefined(var_2) && var_2 != "")
-  _id_989B(var_1);
+  if (isdefined(var_02) && var_02 != "")
+  initmidmatchaward(var_01);
 
-  level._id_26D8[var_1]._id_92B8 = var_0;
+  level.awards[var_01].id = var_00;
   var_0++;
   }
 }
 
-_id_93E0(var_0) {
-  var_1 = self getrankedplayerdata("common", "awards", var_0);
-  self setrankedplayerdata("common", "awards", var_0, var_1 + 1);
+incplayerrecord(var_00) {
+  var_01 = self getrankedplayerdata("common", "awards", var_00);
+  self setrankedplayerdata("common", "awards", var_00, var_01 + 1);
 }
 
-_id_8352(var_0, var_1, var_2) {
-  if (!isdefined(level._id_26D8[var_0]))
+giveaward(var_00, var_01, var_02) {
+  if (!isdefined(level.awards[var_00]))
   return;
 
-  if (!isenumvaluevalid("mp", "Awards", var_0))
+  if (!isenumvaluevalid("mp", "Awards", var_00))
   return;
 
-  _id_93E0(var_0);
-  addawardtoaarlist(var_0);
-  var_3 = level._id_26D8[var_0]._id_13E28;
+  incplayerrecord(var_00);
+  addawardtoaarlist(var_00);
+  var_03 = level.awards[var_00].xpscoreevent;
 
-  if (isdefined(var_3)) {
-  if (isdefined(var_2))
-  var_4 = var_2;
+  if (isdefined(var_03)) {
+  if (isdefined(var_02))
+  var_04 = var_02;
   else
-  var_4 = scripts\mp\rank::getscoreinfovalue(var_3);
+  var_04 = scripts\mp\rank::getscoreinfovalue(var_03);
 
-  scripts\mp\rank::_id_839A(var_3, var_4);
+  scripts\mp\rank::giverankxp(var_03, var_04);
   }
 
-  var_5 = level._id_26D8[var_0]._id_7681;
+  var_05 = level.awards[var_00].gamescoreevent;
 
-  if (isdefined(var_5))
-  scripts\mp\utility\game::_id_83B4(var_5, undefined, var_1, undefined, undefined, 1);
+  if (isdefined(var_05))
+  scripts\mp\utility\game::giveunifiedpoints(var_05, undefined, var_01, undefined, undefined, 1);
 
-  scripts\mp\utility\game::_id_316C("earned_award_buffered", var_0);
+  scripts\mp\utility\game::bufferednotify("earned_award_buffered", var_00);
 
-  if (isdefined(self._id_26D9[var_0]))
-  self._id_26D9[var_0]++;
+  if (isdefined(self.awardsthislife[var_00]))
+  self.awardsthislife[var_00]++;
   else
-  self._id_26D9[var_0] = 1;
+  self.awardsthislife[var_00] = 1;
 
-  scripts\mp\matchdata::_id_AF97(var_0);
-  scripts\mp\missions::_id_D98F(var_0);
+  scripts\mp\matchdata::func_AF97(var_00);
+  scripts\mp\missions::func_D98F(var_00);
 }
 
-_id_DB92(var_0) {
-  self._id_26D7[self._id_26D7.size] = var_0;
-  thread _id_6F75();
+queuemidmatchaward(var_00) {
+  self.awardqueue[self.awardqueue.size] = var_00;
+  thread flushmidmatchawardqueuewhenable();
 }
 
-_id_6F74() {
-  foreach (var_1 in self._id_26D7)
-  givemidmatchaward(var_1);
+flushmidmatchawardqueue() {
+  foreach (var_01 in self.awardqueue)
+  givemidmatchaward(var_01);
 
-  self._id_26D7 = [];
+  self.awardqueue = [];
 }
 
-_id_6F75() {
+flushmidmatchawardqueuewhenable() {
   self endon("disconnect");
   self notify("flushMidMatchAwardQueueWhenAble()");
   self endon("flushMidMatchAwardQueueWhenAble()");
 
   for (;;) {
-  if (!_id_10064())
+  if (!shouldqueuemidmatchaward())
   break;
 
   scripts\engine\utility::waitframe();
   }
 
-  thread _id_6F74();
+  thread flushmidmatchawardqueue();
 }
 
-_id_10064(var_0) {
-  if (level._id_7669)
+shouldqueuemidmatchaward(var_00) {
+  if (level.gameended)
   return 0;
 
   if (!scripts\mp\utility\game::isreallyalive(self)) {
-  if (!scripts\mp\utility\game::istrue(var_0) || scripts\mp\utility\game::_id_9E4A()) {
+  if (!scripts\mp\utility\game::istrue(var_00) || scripts\mp\utility\game::isinkillcam()) {
   if (!scripts\mp\utility\game::isusingremote())
   return 1;
   }
@@ -166,50 +166,50 @@ _id_10064(var_0) {
   return 0;
 }
 
-_id_B8E6(var_0) {
-  if (!isdefined(var_0) || !isdefined(level._id_26D8) || !isdefined(level._id_26D8[var_0]))
+func_B8E6(var_00) {
+  if (!isdefined(var_00) || !isdefined(level.awards) || !isdefined(level.awards[var_00]))
   return;
 
-  if (!isdefined(self._id_1097C) || !isdefined(self._id_D8B1)) {
-  self._id_1097C = 0;
-  self._id_D8B1 = 0;
+  if (!isdefined(self.func_1097C) || !isdefined(self.func_D8B1)) {
+  self.func_1097C = 0;
+  self.func_D8B1 = 0;
   }
 
-  var_1 = level._id_26D8[var_0]._id_92B8;
+  var_01 = level.awards[var_00].id;
 
-  if (var_1 > 255)
-  scripts\engine\utility::_id_66BD("awardID can't be larger than 255! Must increased bit size for award id stored in ui_spectating_award_event_bitfield");
+  if (var_01 > 255)
+  scripts\engine\utility::error("awardID can't be larger than 255! Must increased bit size for award id stored in ui_spectating_award_event_bitfield");
 
-  var_2 = self._id_D8B1;
-  var_3 = 8 * (self._id_1097C % 4);
-  var_4 = ~(255 << var_3);
-  var_2 = var_2 & var_4;
-  var_5 = var_1 << var_3;
-  var_2 = var_2 | var_5;
-  self setclientomnvar("ui_spectating_award_event_bitfield", var_2);
-  self setclientomnvar("ui_spectating_award_event_index", self._id_1097C);
-  self._id_D8B1 = var_2;
-  self._id_1097C++;
+  var_02 = self.func_D8B1;
+  var_03 = 8 * (self.func_1097C % 4);
+  var_04 = ~(255 << var_03);
+  var_02 = var_02 & var_04;
+  var_05 = var_01 << var_03;
+  var_02 = var_02 | var_05;
+  self setclientomnvar("ui_spectating_award_event_bitfield", var_02);
+  self setclientomnvar("ui_spectating_award_event_index", self.func_1097C);
+  self.func_D8B1 = var_02;
+  self.func_1097C++;
 
-  if (self._id_1097C > 99)
-  self._id_1097C = 0;
+  if (self.func_1097C > 99)
+  self.func_1097C = 0;
 }
 
-givemidmatchaward(var_0, var_1, var_2, var_3) {
+givemidmatchaward(var_00, var_01, var_02, var_03) {
   if (!isplayer(self))
   return;
 
   if (getdvarint("com_codcasterEnabled", 0) == 1) {
-  foreach (var_5 in level.players) {
-  if (var_5 ismlgspectator()) {
-  var_6 = var_5 getspectatingplayer();
+  foreach (var_05 in level.players) {
+  if (var_05 ismlgspectator()) {
+  var_06 = var_05 getspectatingplayer();
 
-  if (isdefined(var_6)) {
-  var_7 = var_6 getentitynumber();
-  var_8 = self getentitynumber();
+  if (isdefined(var_06)) {
+  var_07 = var_06 getentitynumber();
+  var_08 = self getentitynumber();
 
-  if (var_7 == var_8)
-  var_5 _id_B8E6(var_0);
+  if (var_07 == var_08)
+  var_05 func_B8E6(var_00);
   }
   }
   }
@@ -218,70 +218,70 @@ givemidmatchaward(var_0, var_1, var_2, var_3) {
   if (isai(self))
   return;
 
-  if (_id_10064(var_3)) {
-  _id_DB92(var_0);
+  if (shouldqueuemidmatchaward(var_03)) {
+  queuemidmatchaward(var_00);
   return;
   }
 
-  scripts\mp\analyticslog::_id_AF9D(var_0);
-  _id_8352(var_0, var_1, var_2);
+  scripts\mp\analyticslog::logevent_awardgained(var_00);
+  giveaward(var_00, var_01, var_02);
 }
 
-addawardtoaarlist(var_0) {
+addawardtoaarlist(var_00) {
   if (!isdefined(self.aarawards)) {
   self.aarawards = [];
   self.aarawardcount = 0;
 
-  for (var_1 = 0; var_1 < 10; var_1++) {
-  var_2 = spawnstruct();
-  self.aarawards[var_1] = var_2;
-  var_2._id_DE3F = "none";
-  var_2._id_00C1 = 0;
+  for (var_01 = 0; var_01 < 10; var_1++) {
+  var_02 = spawnstruct();
+  self.aarawards[var_01] = var_02;
+  var_2.ref = "none";
+  var_2.count = 0;
   }
   }
 
-  foreach (var_1, var_4 in self.aarawards) {
-  if (var_4._id_DE3F == var_0) {
-  var_4._id_00C1++;
-  self setrankedplayerdata("common", "round", "awards", var_1, "value", var_4._id_00C1);
+  foreach (var_01, var_04 in self.aarawards) {
+  if (var_4.ref == var_00) {
+  var_4.count++;
+  self setrankedplayerdata("common", "round", "awards", var_01, "value", var_4.count);
   return;
   }
   }
 
-  var_5 = level._id_26D8[var_0].aarpriority;
+  var_05 = level.awards[var_00].aarpriority;
 
-  for (var_6 = 0; var_6 < self.aarawards.size; var_6++) {
-  var_4 = self.aarawards[var_6];
+  for (var_06 = 0; var_06 < self.aarawards.size; var_6++) {
+  var_04 = self.aarawards[var_06];
 
-  if (var_4._id_DE3F == "none")
+  if (var_4.ref == "none")
   break;
 
-  var_7 = level._id_26D8[var_4._id_DE3F].aarpriority;
+  var_07 = level.awards[var_4.ref].aarpriority;
 
-  if (var_5 > var_7)
+  if (var_05 > var_07)
   break;
   }
 
-  if (var_6 >= self.aarawards.size)
+  if (var_06 >= self.aarawards.size)
   return;
 
-  for (var_8 = self.aarawards.size - 2; var_8 >= var_6; var_8--) {
-  var_9 = var_8 + 1;
-  self.aarawards[var_9] = self.aarawards[var_8];
-  var_4 = self.aarawards[var_9];
+  for (var_08 = self.aarawards.size - 2; var_08 >= var_06; var_8--) {
+  var_09 = var_08 + 1;
+  self.aarawards[var_09] = self.aarawards[var_08];
+  var_04 = self.aarawards[var_09];
 
-  if (var_4._id_DE3F != "none") {
-  self setrankedplayerdata("common", "round", "awards", var_9, "award", var_4._id_DE3F);
-  self setrankedplayerdata("common", "round", "awards", var_9, "value", var_4._id_00C1);
+  if (var_4.ref != "none") {
+  self setrankedplayerdata("common", "round", "awards", var_09, "award", var_4.ref);
+  self setrankedplayerdata("common", "round", "awards", var_09, "value", var_4.count);
   }
   }
 
-  var_4 = spawnstruct();
-  self.aarawards[var_6] = var_4;
-  var_4._id_DE3F = var_0;
-  var_4._id_00C1 = 1;
-  self setrankedplayerdata("common", "round", "awards", var_6, "award", var_4._id_DE3F);
-  self setrankedplayerdata("common", "round", "awards", var_6, "value", var_4._id_00C1);
+  var_04 = spawnstruct();
+  self.aarawards[var_06] = var_04;
+  var_4.ref = var_00;
+  var_4.count = 1;
+  self setrankedplayerdata("common", "round", "awards", var_06, "award", var_4.ref);
+  self setrankedplayerdata("common", "round", "awards", var_06, "value", var_4.count);
 
   if (self.aarawardcount < 10) {
   self.aarawardcount++;
@@ -302,9 +302,9 @@ initaarawardlist() {
 
   self setrankedplayerdata("common", "round", "awardCount", 0);
 
-  for (var_0 = 0; var_0 < 10; var_0++) {
-  self setrankedplayerdata("common", "round", "awards", var_0, "award", "none");
-  self setrankedplayerdata("common", "round", "awards", var_0, "value", 0);
+  for (var_00 = 0; var_00 < 10; var_0++) {
+  self setrankedplayerdata("common", "round", "awards", var_00, "award", "none");
+  self setrankedplayerdata("common", "round", "awards", var_00, "value", 0);
   }
 }
 

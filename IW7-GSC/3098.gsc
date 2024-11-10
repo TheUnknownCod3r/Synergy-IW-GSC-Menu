@@ -3,340 +3,340 @@
  * Script: scripts\3098.gsc
 ***************************************/
 
-_id_25C5() {
-  if (!isdefined(self._id_2578))
-  self._id_2578 = spawnstruct();
+func_25C5() {
+  if (!isdefined(self.audio))
+  self.audio = spawnstruct();
 }
 
-_id_A3B3(var_0) {
-  if (!isdefined(var_0))
-  var_0 = self._id_02A9;
+func_A3B3(var_00) {
+  if (!isdefined(var_00))
+  var_00 = self.spaceship_mode;
 
-  _id_A3B6(var_0, 0);
+  func_A3B6(var_00, 0);
 }
 
-_id_A3B6(var_0, var_1) {
+func_A3B6(var_00, var_01) {
   if (!isdefined(self) || !isalive(self))
   return;
 
-  if (isdefined(self._id_615D) && self._id_615D._id_619D)
+  if (isdefined(self.func_615D) && self.func_615D.func_619D)
   return;
 
-  if (isdefined(self._id_2578._id_10E19) && self._id_2578._id_10E19 == var_0)
+  if (isdefined(self.audio.state) && self.audio.state == var_00)
   return;
 
-  if (isdefined(self._id_2578._id_552E))
-  self thread [[self._id_2578._id_552E]]();
+  if (isdefined(self.audio.func_552E))
+  self thread [[self.audio.func_552E]]();
 
-  self._id_2578._id_552E = undefined;
+  self.audio.func_552E = undefined;
 
-  switch (var_0) {
+  switch (var_00) {
   case "hover":
-  _id_2396(var_1);
+  func_2396(var_01);
   break;
   case "fly":
-  _id_11130(var_1);
+  func_11130(var_01);
   break;
   case "fly_glide":
-  _id_11134(var_1);
+  func_11134(var_01);
   break;
   case "hover_glide":
-  _id_11134(var_1);
+  func_11134(var_01);
   break;
   case "reentry":
-  _id_11134(var_1);
+  func_11134(var_01);
   break;
   case "launch_mode":
-  _id_AA5D(var_1);
+  func_AA5D(var_01);
   break;
   case "boost_mode":
-  _id_2CAB(var_1);
+  func_2CAB(var_01);
   break;
   case "landed_mode":
-  _id_A7CA(var_1);
+  func_A7CA(var_01);
   break;
   default:
   }
 
-  self._id_2578._id_10E19 = var_0;
+  self.audio.state = var_00;
 }
 
-_id_2396(var_0) {
+func_2396(var_00) {
   if (soundexists("jackal_tread_sfx_lp")) {
-  if (!isdefined(self._id_A381))
-  thread _id_A381();
+  if (!isdefined(self.func_A381))
+  thread func_A381();
   }
 
-  if (!isdefined(self._id_23A5)) {
-  self._id_2578._id_23A5 = _id_31C0();
-  self._id_2578._id_23A5 thread _id_0B91::_id_10461(_id_0BDC::_id_7A5B("jackal_hover_world"), 1, var_0, 1);
-  self._id_2578._id_552E = ::_id_2395;
+  if (!isdefined(self.func_23A5)) {
+  self.audio.func_23A5 = func_31C0();
+  self.audio.func_23A5 thread scripts/sp/utility::func_10461(func_0BDC::func_7A5B("jackal_hover_world"), 1, var_00, 1);
+  self.audio.func_552E = ::func_2395;
   }
 }
 
-_id_2395() {
-  var_0 = 1;
-  var_1 = self._id_2578._id_23A5;
-  var_1 _meth_8278(0, var_0);
-  wait(var_0);
-  _id_DFD8([var_1]);
+func_2395() {
+  var_00 = 1;
+  var_01 = self.audio.func_23A5;
+  var_01 ghostattack(0, var_00);
+  wait(var_00);
+  func_DFD8([var_01]);
 }
 
-_id_11130(var_0) {
-  if (!isdefined(self._id_2578._id_1113C)) {
-  self._id_2578._id_1113C = _id_31C0();
-  var_1 = self._id_EEDE;
+func_11130(var_00) {
+  if (!isdefined(self.audio.func_1113C)) {
+  self.audio.func_1113C = func_31C0();
+  var_01 = self.script_team;
 
-  if (var_1 == "axis")
-  self._id_2578._id_1113C thread _id_0B91::_id_10461(_id_0BDC::_id_7A5B("jackal_sdf_thrust_world"), 1, var_0, 1);
+  if (var_01 == "axis")
+  self.audio.func_1113C thread scripts/sp/utility::func_10461(func_0BDC::func_7A5B("jackal_sdf_thrust_world"), 1, var_00, 1);
   else
-  self._id_2578._id_1113C thread _id_0B91::_id_10461(_id_0BDC::_id_7A5B("jackal_thrust_world"), 1, var_0, 1);
+  self.audio.func_1113C thread scripts/sp/utility::func_10461(func_0BDC::func_7A5B("jackal_thrust_world"), 1, var_00, 1);
 
-  self._id_2578._id_1113C thread _id_0B91::_id_10461(_id_0BDC::_id_7A5B("jackal_thrust_world"), 1, var_0, 1);
-  thread _id_A1D5("jackal_flyby", undefined, 1);
-  self._id_2578._id_552E = ::_id_1112F;
+  self.audio.func_1113C thread scripts/sp/utility::func_10461(func_0BDC::func_7A5B("jackal_thrust_world"), 1, var_00, 1);
+  thread func_A1D5("jackal_flyby", undefined, 1);
+  self.audio.func_552E = ::func_1112F;
   }
 }
 
-_id_11134(var_0) {
-  self._id_2578._id_552E = ::_id_11133;
+func_11134(var_00) {
+  self.audio.func_552E = ::func_11133;
 }
 
-_id_239D(var_0) {
-  self._id_2578._id_552E = ::_id_239C;
+func_239D(var_00) {
+  self.audio.func_552E = ::func_239C;
 }
 
-_id_11133() {}
+func_11133() {}
 
-_id_239C() {}
+func_239C() {}
 
-_id_AA5D(var_0) {
-  self._id_2578._id_552E = ::_id_AA5C;
+func_AA5D(var_00) {
+  self.audio.func_552E = ::func_AA5C;
 }
 
-_id_AA5C() {}
+func_AA5C() {}
 
-_id_2CAB(var_0) {
-  if (!isdefined(self._id_2578._id_2CB5)) {
-  self._id_2578._id_2CB5 = _id_31C0();
-  self._id_2578._id_2CB5 thread _id_0B91::_id_10461(_id_0BDC::_id_7A5B("jackal_npc_boost_lp"), 1, var_0, 1);
-  _func_178(_id_0BDC::_id_7A5B("jackal_npc_boost_init"), self.origin);
-  self._id_2578._id_552E = ::_id_2CAA;
+func_2CAB(var_00) {
+  if (!isdefined(self.audio.func_2CB5)) {
+  self.audio.func_2CB5 = func_31C0();
+  self.audio.func_2CB5 thread scripts/sp/utility::func_10461(func_0BDC::func_7A5B("jackal_npc_boost_lp"), 1, var_00, 1);
+  _playworldsound(func_0BDC::func_7A5B("jackal_npc_boost_init"), self.origin);
+  self.audio.func_552E = ::func_2CAA;
   }
 }
 
-_id_2CAA() {}
+func_2CAA() {}
 
-_id_A7CA(var_0) {
-  self._id_2578._id_552E = ::_id_A7C9;
+func_A7CA(var_00) {
+  self.audio.func_552E = ::func_A7C9;
 }
 
-_id_A7C9() {}
+func_A7C9() {}
 
-_id_1112F() {
-  var_0 = 1;
+func_1112F() {
+  var_00 = 1;
   self notify("notify_stop_thrust_audio");
-  var_1 = self._id_2578._id_1113C;
-  var_1 _meth_8278(0, var_0);
-  wait(var_0);
-  _id_DFD8([var_1]);
+  var_01 = self.audio.func_1113C;
+  var_01 ghostattack(0, var_00);
+  wait(var_00);
+  func_DFD8([var_01]);
 }
 
-_id_31C0() {
-  var_0 = scripts\engine\utility::_id_107E6();
-  var_0 linkto(self, "j_mainroot_ship", (0, 0, 0), (0, 0, 0));
-  self._id_4074[self._id_4074.size] = var_0;
-  return var_0;
+func_31C0() {
+  var_00 = scripts\engine\utility::spawn_tag_origin();
+  var_00 linkto(self, "j_mainroot_ship", (0, 0, 0), (0, 0, 0));
+  self.func_4074[self.func_4074.size] = var_00;
+  return var_00;
 }
 
-_id_DFD8(var_0) {
-  foreach (var_2 in var_0) {
-  if (isdefined(var_2)) {
-  self._id_4074 = scripts\engine\utility::array_remove(self._id_4074, var_2);
-  var_2 delete();
+func_DFD8(var_00) {
+  foreach (var_02 in var_00) {
+  if (isdefined(var_02)) {
+  self.func_4074 = scripts\engine\utility::array_remove(self.func_4074, var_02);
+  var_02 delete();
   }
   }
 }
 
-_id_A1D5(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
+func_A1D5(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07) {
   self endon("death");
   self endon("deathspin");
   self endon("entitydeleted");
   self endon("notify_stop_thrust_audio");
   self endon("terminate_ai_threads");
-  var_8 = [];
+  var_08 = [];
   var_8[0] = 3000;
   var_8[1] = 6000;
   var_8[2] = 10000;
-  var_9 = [];
+  var_09 = [];
   var_9[0] = 320;
   var_9[1] = 230;
   self _meth_83E8();
-  self._id_2578._id_D889 = _id_A16A(var_2);
-  self._id_2578._id_7008 = 0;
-  self._id_2578._id_7007 = 0;
-  self._id_2578._id_4E1F = 0;
-  self._id_2578._id_20EF = 1;
+  self.audio.func_D889 = func_A16A(var_02);
+  self.audio.func_7008 = 0;
+  self.audio.func_7007 = 0;
+  self.audio.func_4E1F = 0;
+  self.audio.func_20EF = 1;
 
-  if (isdefined(var_3))
-  thread _id_A13F(var_3);
+  if (isdefined(var_03))
+  thread func_A13F(var_03);
 
-  if (isdefined(var_4)) {
+  if (isdefined(var_04)) {
   var_10 = spawn("script_origin", self.origin);
   var_10 linkto(self);
-  self._id_4074[self._id_4074.size] = var_10;
-  thread _id_A1D3(var_10, var_4);
+  self.func_4074[self.func_4074.size] = var_10;
+  thread func_A1D3(var_10, var_04);
   }
 
-  self._id_2578._id_B746 = 2;
+  self.audio.func_B746 = 2;
 
-  if (isdefined(var_5))
-  self._id_2578._id_B746 = var_5;
+  if (isdefined(var_05))
+  self.audio.func_B746 = var_05;
 
-  self._id_2578._id_B745 = 2;
+  self.audio.func_B745 = 2;
 
-  if (isdefined(var_6))
-  self._id_2578._id_B745 = var_6;
+  if (isdefined(var_06))
+  self.audio.func_B745 = var_06;
 
   var_11 = 0.05;
 
-  if (isdefined(var_7))
-  var_11 = var_7;
+  if (isdefined(var_07))
+  var_11 = var_07;
 
-  if (isarray(var_1)) {
-  foreach (var_14, var_13 in var_1)
-  thread _id_A1D7(var_14, var_13);
+  if (isarray(var_01)) {
+  foreach (var_14, var_13 in var_01)
+  thread func_A1D7(var_14, var_13);
   }
 
-  if (isarray(var_8)) {
+  if (isarray(var_08)) {
   while (isdefined(self)) {
-  var_15 = _id_A16A(var_2);
+  var_15 = func_A16A(var_02);
 
   for (var_16 = 0; var_16 < var_8.size; var_16++) {
   if (var_15 < var_8[var_16]) {
   if (var_16 == 0) {
-  if (self._id_2578._id_20EF && self._id_2578._id_7008 == 0 && self._id_2578._id_4E1F == 0) {
-  var_17 = _id_A1D1(var_0, var_16, var_9);
+  if (self.audio.func_20EF && self.audio.func_7008 == 0 && self.audio.func_4E1F == 0) {
+  var_17 = func_A1D1(var_00, var_16, var_09);
 
   if (isdefined(var_17))
-  thread _id_A1D4(var_17, var_16);
+  thread func_A1D4(var_17, var_16);
   }
-  else if (var_15 < self._id_2578._id_D889)
-  self._id_2578._id_20EF = 1;
+  else if (var_15 < self.audio.func_D889)
+  self.audio.func_20EF = 1;
   else
-  self._id_2578._id_20EF = 0;
+  self.audio.func_20EF = 0;
   }
-  else if (var_15 > self._id_2578._id_D889) {
-  if (self._id_2578._id_20EF && self._id_2578._id_7008 == 0 && self._id_2578._id_7007 == 0 && self._id_2578._id_4E1F == 0) {
-  self._id_2578._id_20EF = 0;
-  var_17 = _id_A1D1(var_0, var_16, var_9);
+  else if (var_15 > self.audio.func_D889) {
+  if (self.audio.func_20EF && self.audio.func_7008 == 0 && self.audio.func_7007 == 0 && self.audio.func_4E1F == 0) {
+  self.audio.func_20EF = 0;
+  var_17 = func_A1D1(var_00, var_16, var_09);
 
   if (isdefined(var_17))
-  thread _id_A1D4(var_17, var_16);
+  thread func_A1D4(var_17, var_16);
   }
   }
   else if (var_15 < 3500) {
-  if (self._id_2578._id_7008 == 0 && self._id_2578._id_7007 == 0 && self._id_2578._id_4E1F == 0) {
-  var_17 = _id_A1D1(var_0, var_16, var_9);
+  if (self.audio.func_7008 == 0 && self.audio.func_7007 == 0 && self.audio.func_4E1F == 0) {
+  var_17 = func_A1D1(var_00, var_16, var_09);
 
   if (isdefined(var_17))
-  thread _id_A1D4(var_17, var_16);
+  thread func_A1D4(var_17, var_16);
   }
   }
   else
-  self._id_2578._id_20EF = 1;
+  self.audio.func_20EF = 1;
 
   break;
   }
   }
 
-  self._id_2578._id_D889 = var_15;
+  self.audio.func_D889 = var_15;
   wait(var_11);
   }
   }
 }
 
-_id_A1D7(var_0, var_1) {
+func_A1D7(var_00, var_01) {
   self endon("death");
   self endon("deathspin");
   self endon("entitydeleted");
-  wait(var_1);
-  thread _id_A1D4(var_0);
+  wait(var_01);
+  thread func_A1D4(var_00);
 }
 
-_id_A16A(var_0) {
-  var_1 = _id_7BA7();
-  var_2 = 0;
+func_A16A(var_00) {
+  var_01 = func_7BA7();
+  var_02 = 0;
 
-  if (isdefined(var_0))
-  var_2 = var_0;
+  if (isdefined(var_00))
+  var_02 = var_00;
 
-  if (var_2)
-  var_3 = distance(self.origin, var_1);
+  if (var_02)
+  var_03 = distance(self.origin, var_01);
   else
-  var_3 = distance2d(self.origin, var_1);
+  var_03 = distance2d(self.origin, var_01);
 
-  return var_3;
+  return var_03;
 }
 
-_id_A1D1(var_0, var_1, var_2) {
-  var_3 = 0;
-  var_4 = self _meth_83E0();
-  var_5 = length(var_4) * 0.0568182;
+func_A1D1(var_00, var_01, var_02) {
+  var_03 = 0;
+  var_04 = self vehicle_getvelocity();
+  var_05 = length(var_04) * 0.0568182;
 
-  if (var_5 > 125) {
-  if (isarray(var_2)) {
-  if (scripts\engine\utility::_id_D11B())
-  var_6 = level._id_D127._id_02AC * 17.6;
+  if (var_05 > 125) {
+  if (isarray(var_02)) {
+  if (scripts\engine\utility::player_is_in_jackal())
+  var_06 = level.func_D127.spaceship_vel * 17.6;
   else
-  var_6 = level.player _meth_816B();
+  var_06 = level.player getvelocity();
 
-  var_7 = var_4 - var_6;
-  var_8 = length(var_7) * 0.0568182;
+  var_07 = var_04 - var_06;
+  var_08 = length(var_07) * 0.0568182;
 
-  if (var_8 < 125)
+  if (var_08 < 125)
   return undefined;
 
-  for (var_9 = 0; var_9 < var_2.size; var_9++) {
-  var_3 = var_9 + 1;
+  for (var_09 = 0; var_09 < var_2.size; var_9++) {
+  var_03 = var_09 + 1;
 
-  if (var_8 > var_2[var_9]) {
-  var_3 = var_9;
+  if (var_08 > var_2[var_09]) {
+  var_03 = var_09;
   break;
   }
   }
   }
 
-  if (var_3 == 0)
+  if (var_03 == 0)
   var_10 = "fast";
-  else if (var_3 == 1)
+  else if (var_03 == 1)
   var_10 = "med";
   else
   var_10 = "slow";
 
-  if (var_1 == 0)
+  if (var_01 == 0)
   var_11 = "close";
-  else if (var_1 == 1)
+  else if (var_01 == 1)
   var_11 = "mid";
-  else if (var_1 == 2)
+  else if (var_01 == 2)
   var_11 = "far";
   else
   return undefined;
 
-  var_12 = self._id_EEDE;
+  var_12 = self.script_team;
 
   if (var_12 == "axis")
-  var_0 = var_0 + "_sdf";
+  var_00 = var_00 + "_sdf";
 
-  if (scripts\engine\utility::_id_D11B())
-  var_13 = var_0 + "_" + var_10 + "_" + var_11;
+  if (scripts\engine\utility::player_is_in_jackal())
+  var_13 = var_00 + "_" + var_10 + "_" + var_11;
   else
-  var_13 = var_0 + "_" + var_10 + "_" + var_11 + "_grnd";
+  var_13 = var_00 + "_" + var_10 + "_" + var_11 + "_grnd";
 
-  if (var_1 == 0)
-  self._id_2578._id_7008 = 1;
+  if (var_01 == 0)
+  self.audio.func_7008 = 1;
   else
-  self._id_2578._id_7007 = 1;
+  self.audio.func_7007 = 1;
 
   return var_13;
   }
@@ -344,97 +344,97 @@ _id_A1D1(var_0, var_1, var_2) {
   return undefined;
 }
 
-_id_A1D4(var_0, var_1) {
+func_A1D4(var_00, var_01) {
   self endon("death");
   self endon("deathspin");
   self endon("entitydeleted");
-  thread _id_A331(var_1);
-  self._id_2578._id_1113C _meth_8278(0.4, 1);
-  self playsound(var_0);
+  thread func_A331(var_01);
+  self.audio.func_1113C ghostattack(0.4, 1);
+  self playsound(var_00);
   wait 1;
 
-  if (isdefined(self._id_2578._id_1113C))
-  self._id_2578._id_1113C _meth_8278(1, 5);
+  if (isdefined(self.audio.func_1113C))
+  self.audio.func_1113C ghostattack(1, 5);
 }
 
-_id_A13F(var_0) {
+func_A13F(var_00) {
   self endon("crash_done");
   self waittill("deathspin");
-  self playsound(var_0);
+  self playsound(var_00);
 }
 
-_id_A1D3(var_0, var_1) {
+func_A1D3(var_00, var_01) {
   self waittill("crash_done");
-  var_0 playsound(var_1, "sounddone");
-  var_0 waittill("sounddone");
-  var_0 delete();
+  var_00 playsound(var_01, "sounddone");
+  var_00 waittill("sounddone");
+  var_00 delete();
 }
 
-_id_A331(var_0) {
+func_A331(var_00) {
   self endon("death");
   self endon("deathspin");
   self endon("entitydeleted");
   self endon("notify_stop_thrust_audio");
 
-  if (isdefined(var_0)) {
-  if (var_0 == 0) {
-  wait(self._id_2578._id_B746);
+  if (isdefined(var_00)) {
+  if (var_00 == 0) {
+  wait(self.audio.func_B746);
 
   if (isdefined(self))
-  self._id_2578._id_7008 = 0;
+  self.audio.func_7008 = 0;
   } else {
-  wait(self._id_2578._id_B745);
+  wait(self.audio.func_B745);
 
   if (isdefined(self))
-  self._id_2578._id_7007 = 0;
+  self.audio.func_7007 = 0;
   }
   }
 }
 
-_id_A381() {
+func_A381() {
   self endon("death");
   self endon("entitydeleted");
-  thread _id_A380();
-  var_0 = 0.3;
-  var_1 = 0.3;
-  var_2 = 500;
+  thread func_A380();
+  var_00 = 0.3;
+  var_01 = 0.3;
+  var_02 = 500;
 
   for (;;) {
-  var_3 = (0, 0, -100000);
-  var_4 = _id_0B91::_id_864C(self.origin);
-  var_5 = distance(self.origin, var_4);
+  var_03 = (0, 0, -100000);
+  var_04 = scripts/sp/utility::func_864C(self.origin);
+  var_05 = distance(self.origin, var_04);
 
-  if (var_5 < var_2) {
-  if (isdefined(self) && !isdefined(self._id_A381)) {
-  self._id_A381 = spawn("script_origin", var_4);
+  if (var_05 < var_02) {
+  if (isdefined(self) && !isdefined(self.func_A381)) {
+  self.func_A381 = spawn("script_origin", var_04);
   wait 0.05;
 
-  if (isdefined(self) && isdefined(self._id_A381))
-  self._id_A381 _id_0B91::_id_10461("jackal_tread_sfx_lp", var_0, 1, 1);
+  if (isdefined(self) && isdefined(self.func_A381))
+  self.func_A381 scripts/sp/utility::func_10461("jackal_tread_sfx_lp", var_00, 1, 1);
 
   wait 1;
   }
 
-  if (isdefined(self) && isdefined(self._id_A381)) {
-  var_4 = _id_0B91::_id_864C(self.origin);
-  var_5 = distance(self.origin, var_4);
-  var_1 = (var_5 - var_2) / (0 - var_2);
+  if (isdefined(self) && isdefined(self.func_A381)) {
+  var_04 = scripts/sp/utility::func_864C(self.origin);
+  var_05 = distance(self.origin, var_04);
+  var_01 = (var_05 - var_02) / (0 - var_02);
 
-  if (var_1 < var_0)
-  var_1 = var_0;
+  if (var_01 < var_00)
+  var_01 = var_00;
 
-  self._id_A381 _meth_8278(var_1, 0.1);
-  self._id_A381 moveto(var_4, 0.1);
+  self.func_A381 ghostattack(var_01, 0.1);
+  self.func_A381 moveto(var_04, 0.1);
   wait 0.2;
   }
   }
-  else if (var_5 > var_2) {
-  if (isdefined(self) && isdefined(self._id_A381)) {
-  self._id_A381 _meth_8278(0, 2);
+  else if (var_05 > var_02) {
+  if (isdefined(self) && isdefined(self.func_A381)) {
+  self.func_A381 ghostattack(0, 2);
   wait 2;
 
-  if (isdefined(self) && isdefined(self._id_A381))
-  self._id_A381 delete();
+  if (isdefined(self) && isdefined(self.func_A381))
+  self.func_A381 delete();
   }
   }
 
@@ -442,38 +442,38 @@ _id_A381() {
   }
 }
 
-_id_A380() {
+func_A380() {
   self waittill("death");
 
-  if (isdefined(self._id_A381))
-  self._id_A381 delete();
+  if (isdefined(self.func_A381))
+  self.func_A381 delete();
 }
 
-_id_A1D0(var_0, var_1, var_2) {
-  self waittill(var_1);
+func_A1D0(var_00, var_01, var_02) {
+  self waittill(var_01);
 
-  if (isdefined(var_0)) {
-  var_3 = 0.3;
+  if (isdefined(var_00)) {
+  var_03 = 0.3;
 
-  if (isdefined(var_2))
-  var_3 = var_2;
+  if (isdefined(var_02))
+  var_03 = var_02;
 
-  var_0 _meth_8278(0.0, var_3);
-  wait(var_3);
+  var_00 ghostattack(0.0, var_03);
+  wait(var_03);
 
-  if (isdefined(var_0)) {
-  var_0 _meth_83AD();
+  if (isdefined(var_00)) {
+  var_00 stopsounds();
   wait 0.1;
 
-  if (isdefined(var_0))
-  var_0 delete();
+  if (isdefined(var_00))
+  var_00 delete();
   }
   }
 }
 
-_id_7BA7() {
-  if (scripts\engine\utility::_id_D11B())
-  return level._id_D127.origin;
+func_7BA7() {
+  if (scripts\engine\utility::player_is_in_jackal())
+  return level.func_D127.origin;
   else
   return level.player.origin;
 }

@@ -252,7 +252,7 @@ func_CEB9(param_00,param_01,param_02,param_03) {
 	if(isdefined(self.objective_position)) {
 		self.objective_position delete();
 		var_06 = randomfloatrange(1,1.5);
-		var_07 = function_0136("frag_c6hug",self gettagorigin("tag_accessory_left"),(0,0,0),var_06);
+		var_07 = magicgrenademanual("frag_c6hug",self gettagorigin("tag_accessory_left"),(0,0,0),var_06);
 		self._meth_85C0 = var_07;
 		var_07.angles = self gettagangles("tag_accessory_left");
 		var_07 linkto(self,"tag_accessory_left");

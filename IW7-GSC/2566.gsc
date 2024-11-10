@@ -535,7 +535,7 @@ chooseshootstyle(param_00) {
 		return func_F840(var_01,"single",0);
 	}
 
-	if(function_023C(self.var_394) > 0) {
+	if(weaponburstcount(self.var_394) > 0) {
 		return func_F840(var_01,"burst",0);
 	}
 
@@ -550,7 +550,7 @@ chooseshootstyle(param_00) {
 		}
 	}
 	else if(var_08 < var_03 || func_FFC6()) {
-		if(function_0248(self.var_394) || func_FFF6()) {
+		if(weaponissemiauto(self.var_394) || func_FFF6()) {
 			return func_F840(var_01,"semi",1);
 		}
 		else
@@ -665,7 +665,7 @@ choosenumshotsandbursts(param_00) {
 
 func_4F65(param_00) {
 	var_01 = 0;
-	var_02 = function_023C(self.var_394);
+	var_02 = weaponburstcount(self.var_394);
 	if(var_02) {
 		var_01 = var_02;
 	}

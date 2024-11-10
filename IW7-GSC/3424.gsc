@@ -19,15 +19,15 @@ func_7C8A(param_00) {
 }
 
 func_13F59(param_00) {
-	if(!scripts/cp/zombies/func_0D5F::critical_factor(::scripts/cp/zombies/func_0D5F::func_26B8,param_00)) {
+	if(!scripts/cp/zombies/scripts/cp/zombies/func_0D5F::critical_factor(::scripts/cp/zombies/scripts/cp/zombies/func_0D5F::func_26B8,param_00)) {
 		return "secondary";
 	}
 
-	if(!scripts/cp/zombies/func_0D5F::critical_factor(::scripts/cp/zombies/func_0D5F::func_26BC,param_00)) {
+	if(!scripts/cp/zombies/scripts/cp/zombies/func_0D5F::critical_factor(::scripts/cp/zombies/scripts/cp/zombies/func_0D5F::func_26BC,param_00)) {
 		return "secondary";
 	}
 
-	if(!scripts/cp/zombies/func_0D5F::critical_factor(::scripts/cp/zombies/func_0D5F::func_26C4,param_00)) {
+	if(!scripts/cp/zombies/scripts/cp/zombies/func_0D5F::critical_factor(::scripts/cp/zombies/scripts/cp/zombies/func_0D5F::func_26C4,param_00)) {
 		return "secondary";
 	}
 
@@ -298,7 +298,7 @@ allowedstances(param_00) {
 			continue;
 		}
 
-		if(function_010F(var_03.origin,param_00)) {
+		if(ispointinvolume(var_03.origin,param_00)) {
 			var_01++;
 		}
 	}

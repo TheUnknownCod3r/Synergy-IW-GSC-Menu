@@ -918,7 +918,7 @@ func_5C1F() {
 
 	for(;;) {
 		var_00 = [];
-		foreach(var_02 in function_0072("axis")) {
+		foreach(var_02 in getaiarray("axis")) {
 			if(func_64EA(var_02) && !issubstr(var_02.classname,"c12")) {
 				var_00[var_00.size] = var_02;
 			}
@@ -1335,9 +1335,9 @@ func_5C9B(param_00) {
 	thread scripts\engine\utility::stop_loop_sound_on_entity("support_drone_trophy_scan");
 	self playsound("support_drone_trophy_fire");
 	var_01 = vectornormalize(param_00.origin - self.var_5CDB gettagorigin("tag_flash"));
-	function_02E0(level._effect["drone_trophy_laser"],self.var_5CDB gettagorigin("tag_flash"),vectortoangles(var_01),param_00.origin);
+	playfxbetweenpoints(level._effect["drone_trophy_laser"],self.var_5CDB gettagorigin("tag_flash"),vectortoangles(var_01),param_00.origin);
 	playfx(level._effect["drone_trophy_pop"],param_00.origin);
-	function_0178("support_drone_trophy_impact",param_00.origin);
+	playworldsound("support_drone_trophy_impact",param_00.origin);
 	param_00 delete();
 	self.var_1280E = 0;
 }

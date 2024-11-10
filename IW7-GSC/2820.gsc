@@ -98,7 +98,7 @@ func_4842(param_00,param_01) {
 		var_05 = strtok(self.script_noteworthy,"_");
 		var_02.weapon_name = var_05[0];
 		if(var_02.weapon_name != "contextual") {
-			var_02.var_1E2D = function_0249(var_02.weapon_name);
+			var_02.var_1E2D = weaponmaxammo(var_02.weapon_name);
 		}
 
 		if(isdefined(self.var_EDE7)) {
@@ -128,7 +128,7 @@ func_4842(param_00,param_01) {
 	for(;;) {
 		if(param_00 == "ammo") {
 			var_02.var_74B3 = 0;
-			if(function_02A4(self)) {
+			if(isstruct(self)) {
 				var_02 lib_0E46::func_48C4(undefined,undefined,var_06,40,300,undefined,1,undefined,undefined,&"hud_interaction_prompt_center_ammo");
 			}
 			else
@@ -170,7 +170,7 @@ func_4842(param_00,param_01) {
 				}
 
 				var_09 = scripts\sp\_utility::func_7BD7();
-				var_0A = function_0249(var_08);
+				var_0A = weaponmaxammo(var_08);
 				var_0B = min(var_0A,var_09 + var_02.var_1E2D);
 				var_0C = var_0B - var_09;
 				var_02.var_1E2D = var_02.var_1E2D - var_0C;
@@ -188,7 +188,7 @@ func_4842(param_00,param_01) {
 				}
 
 				var_09 = scripts\sp\_utility::func_7C3E();
-				var_0A = function_0249(var_08);
+				var_0A = weaponmaxammo(var_08);
 				var_0B = min(var_0A,var_09 + var_02.var_1E2D);
 				var_0C = var_0B - var_09;
 				var_02.var_1E2D = var_02.var_1E2D - var_0C;
@@ -226,7 +226,7 @@ func_4842(param_00,param_01) {
 					self.var_EDE7 = undefined;
 				}
 				else if(var_08 == "helmet" || var_08 == "nanoshot") {
-					var_0A = function_0249(var_08);
+					var_0A = weaponmaxammo(var_08);
 					level.player setweaponammostock(var_08,var_0A);
 				}
 
@@ -361,7 +361,7 @@ func_4846() {
 	var_0B = scripts\sp\_utility::func_7C3D();
 	var_0C = scripts\sp\_utility::func_7CB1();
 	if(isdefined(var_09) && var_09 != "nanoshot") {
-		var_05 = function_0249(var_09);
+		var_05 = weaponmaxammo(var_09);
 	}
 	else
 	{
@@ -370,7 +370,7 @@ func_4846() {
 	}
 
 	if(isdefined(var_0A) && var_0A != "nanoshot") {
-		var_06 = function_0249(var_0A);
+		var_06 = weaponmaxammo(var_0A);
 	}
 	else
 	{
@@ -379,7 +379,7 @@ func_4846() {
 	}
 
 	if(isdefined(var_0B) && var_0B != "helmet") {
-		var_07 = function_0249(var_0B);
+		var_07 = weaponmaxammo(var_0B);
 	}
 	else
 	{
@@ -388,7 +388,7 @@ func_4846() {
 	}
 
 	if(isdefined(var_0C) && var_0C != "helmet") {
-		var_08 = function_0249(var_0C);
+		var_08 = weaponmaxammo(var_0C);
 	}
 	else
 	{
@@ -438,12 +438,12 @@ func_4846() {
 
 	if(var_12 <= var_14) {
 		var_00.weapon_name = scripts/sp/loadout::func_7C27(var_11);
-		var_00.var_1E2D = function_0249(var_11);
+		var_00.var_1E2D = weaponmaxammo(var_11);
 	}
 	else
 	{
 		var_00.weapon_name = scripts/sp/loadout::func_7C27(var_13);
-		var_00.var_1E2D = function_0249(var_13);
+		var_00.var_1E2D = weaponmaxammo(var_13);
 	}
 
 	return var_00;
@@ -524,7 +524,7 @@ func_4847() {
 
 func_4843(param_00,param_01,param_02) {
 	var_03 = level.player lib_0A2F::func_7BB5(param_01);
-	var_04 = function_0249(var_03);
+	var_04 = weaponmaxammo(var_03);
 	var_05 = scripts/sp/loadout::func_7C27(param_01,1);
 	var_06 = [];
 	if(param_00 == "primary") {

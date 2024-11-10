@@ -3,344 +3,344 @@
  * Script: scripts\2649.gsc
 ***************************************/
 
-_id_4627() {
-  _id_96E3();
-  level thread _id_23D8();
+coop_interaction_pregame() {
+  func_96E3();
+  level thread func_23D8();
 
-  if (_id_0A77::_id_462B("guided_interaction"))
-  level thread _id_23CB();
+  if (scripts/cp/utility::coop_mode_has("guided_interaction"))
+  level thread func_23CB();
 }
 
 init() {
-  scripts\engine\utility::_id_6E39("init_interaction_done");
+  scripts\engine\utility::flag_init("init_interaction_done");
 
-  if (!scripts\engine\utility::_id_6E25("init_spawn_volumes_done"))
-  scripts\engine\utility::_id_6E4C("init_spawn_volumes_done");
+  if (!scripts\engine\utility::flag("init_spawn_volumes_done"))
+  scripts\engine\utility::flag_wait("init_spawn_volumes_done");
 
-  level._id_9A43 = [];
-  level._id_9A12 = [];
-  level._id_1BEC = scripts\engine\utility::_id_8180("interaction", "targetname");
-  level._id_4B88 = level._id_1BEC;
-  level._id_9A46 = 0;
-  level._id_13C1B = ::_id_502F;
-  level._id_13C63 = ::_id_5030;
-  level thread _id_9A3D();
+  level.interactions = [];
+  level.interaction_hintstrings = [];
+  level.all_interaction_structs = scripts\engine\utility::getstructarray("interaction", "targetname");
+  level.current_interaction_structs = level.all_interaction_structs;
+  level.func_9A46 = 0;
+  level.weapon_hint_func = ::func_502F;
+  level.func_13C63 = ::func_5030;
+  level thread func_9A3D();
 
-  foreach (var_1 in level._id_4B88) {
+  foreach (var_01 in level.current_interaction_structs) {
   if (!isdefined(var_1.name))
   var_1.name = var_1.script_noteworthy;
 
-  if (!isdefined(var_1._id_EE79))
-  var_1._id_EE79 = "default";
+  if (!isdefined(var_1.script_parameters))
+  var_1.script_parameters = "default";
 
-  if (var_1._id_EE79 == "requires_power") {
-  var_1._id_E1B9 = 1;
-  var_1._id_D776 = 0;
-  var_1._id_D71C = _id_7829(var_1);
+  if (var_1.script_parameters == "requires_power") {
+  var_1.requires_power = 1;
+  var_1.powered_on = 0;
+  var_1.power_area = get_area_for_power(var_01);
   continue;
   }
 
-  var_1._id_E1B9 = 0;
-  var_1._id_D776 = 0;
+  var_1.requires_power = 0;
+  var_1.powered_on = 0;
   }
 
-  level thread _id_5CF3();
+  level thread func_5CF3();
 
-  if (isdefined(level._id_768C))
-  [[level._id_768C]]();
+  if (isdefined(level.func_768C))
+  [[level.func_768C]]();
 
-  if (isdefined(level._id_B326))
-  [[level._id_B326]]();
+  if (isdefined(level.map_interaction_func))
+  [[level.map_interaction_func]]();
 
-  var_3 = getarraykeys(level._id_9A43);
+  var_03 = getarraykeys(level.interactions);
 
-  for (var_4 = 0; var_4 < var_3.size; var_4++) {
-  if (isdefined(level._id_9A43[var_3[var_4]]._id_95F2))
-  level thread [[level._id_9A43[var_3[var_4]]._id_95F2]]();
+  for (var_04 = 0; var_04 < var_3.size; var_4++) {
+  if (isdefined(level.interactions[var_3[var_04]].init_func))
+  level thread [[level.interactions[var_3[var_04]].init_func]]();
 
   scripts\engine\utility::waitframe();
   }
 
-  scripts\engine\utility::_id_6E3E("init_interaction_done");
+  scripts\engine\utility::flag_set("init_interaction_done");
 
-  foreach (var_6 in level.players) {
-  var_7 = var_6 getcurrentweapon();
+  foreach (var_06 in level.players) {
+  var_07 = var_06 getcurrentweapon();
 
-  if (isdefined(level._id_13BD3) && isdefined(var_7))
-  self._id_13BE8 = [level._id_13BD3][var_7];
+  if (isdefined(level.wave_num) && isdefined(var_07))
+  self.func_13BE8 = [level.wave_num][var_07];
   }
 
-  level thread _id_C00C();
-  level thread _id_4616();
+  level thread func_C00C();
+  level thread func_4616();
 }
 
-_id_5CF3() {
-  if (!scripts\engine\utility::_id_6E34("wall_buy_setup_done"))
-  scripts\engine\utility::_id_6E39("wall_buy_setup_done");
+func_5CF3() {
+  if (!scripts\engine\utility::flag_exist("wall_buy_setup_done"))
+  scripts\engine\utility::flag_init("wall_buy_setup_done");
 
-  if (!scripts\engine\utility::_id_6E25("wall_buy_setup_done"))
-  scripts\engine\utility::_id_6E4C("wall_buy_setup_done");
+  if (!scripts\engine\utility::flag("wall_buy_setup_done"))
+  scripts\engine\utility::flag_wait("wall_buy_setup_done");
 
-  foreach (var_1 in level._id_1BEC) {
-  if (isdefined(var_1._id_86A2) && var_1._id_86A2 == "locOverride")
+  foreach (var_01 in level.all_interaction_structs) {
+  if (isdefined(var_1.groupname) && var_1.groupname == "locOverride")
   continue;
 
-  var_2 = scripts\engine\utility::_id_5D14(var_1.origin, 10, -200);
-  var_1.origin = var_2 + (0, 0, 1);
+  var_02 = scripts\engine\utility::drop_to_ground(var_1.origin, 10, -200);
+  var_1.origin = var_02 + (0, 0, 1);
   wait 0.05;
   }
 }
 
-_id_7829(var_0) {
-  var_1 = getentarray("spawn_volume", "targetname");
+get_area_for_power(var_00) {
+  var_01 = getentarray("spawn_volume", "targetname");
 
-  foreach (var_3 in var_1) {
-  if (ispointinvolume(var_0.origin, var_3)) {
-  if (isdefined(var_3._id_28AB))
-  return var_3._id_28AB;
+  foreach (var_03 in var_01) {
+  if (ispointinvolume(var_0.origin, var_03)) {
+  if (isdefined(var_3.basename))
+  return var_3.basename;
   }
   }
 
   return undefined;
 }
 
-_id_96E3() {
-  var_0 = getentarray("player_use_trigger", "targetname");
+func_96E3() {
+  var_00 = getentarray("player_use_trigger", "targetname");
 
-  foreach (var_2 in var_0) {
-  var_2._id_93A8 = 0;
-  var_2 scripts\engine\utility::_id_12778();
+  foreach (var_02 in var_00) {
+  var_2.in_use = 0;
+  var_02 scripts\engine\utility::trigger_off();
   }
 }
 
-_id_23CB() {
+func_23CB() {
   level endon("game_ended");
   wait 5;
 
   for (;;) {
-  var_0 = getentarray("interactionEnt", "targetname");
+  var_00 = getentarray("interactionEnt", "targetname");
 
-  foreach (var_2 in level.players) {
-  if (!scripts\engine\utility::_id_9CEE(var_2._id_23DE)) {
-  var_2._id_23DE = 1;
-  var_3 = spawn("script_model", var_2.origin);
-  var_2.guidedinteractionent = var_3;
-  var_3 thread _id_DF3C(var_2);
-  var_3 thread _id_BC88(var_2);
-  var_2 setclientomnvar("zm_interaction_cost", -1);
-  var_2 setclientomnvar("zm_interaction_ent", var_3);
+  foreach (var_02 in level.players) {
+  if (!scripts\engine\utility::is_true(var_2.func_23DE)) {
+  var_2.func_23DE = 1;
+  var_03 = spawn("script_model", var_2.origin);
+  var_2.guidedinteractionent = var_03;
+  var_03 thread func_DF3C(var_02);
+  var_03 thread func_BC88(var_02);
+  var_02 setclientomnvar("zm_interaction_cost", -1);
+  var_02 setclientomnvar("zm_interaction_ent", var_03);
 
-  if (_id_0A77::_id_9F02() || level._id_C552) {
-  var_2 thread _id_0D37::magic_wheel_tutorial();
-  var_2 thread _id_0D4C::_id_59FA();
+  if (scripts/cp/utility::isplayingsolo() || level.only_one_player) {
+  var_02 thread scripts/cp/zombies/interaction_magicwheel::magic_wheel_tutorial();
+  var_02 thread scripts/cp/zombies/zombie_doors::func_59FA();
   }
   }
   }
 
-  level waittill("player_spawned", var_2);
+  level waittill("player_spawned", var_02);
   }
 }
 
-_id_BC88(var_0) {
+func_BC88(var_00) {
   level endon("game_ended");
-  var_0 endon("disconnect");
-  var_1 = undefined;
-  var_2 = undefined;
-  var_3 = -1;
-  var_4 = 0;
-  var_5 = squared(75);
+  var_00 endon("disconnect");
+  var_01 = undefined;
+  var_02 = undefined;
+  var_03 = -1;
+  var_04 = 0;
+  var_05 = squared(75);
 
   for (;;) {
-  if (scripts\engine\utility::_id_9CEE(var_0._id_98F3) || scripts\engine\utility::_id_9CEE(var_0._id_101BF) || scripts\engine\utility::_id_9CEE(var_0._id_6F73)) {
-  var_1 = undefined;
-  _id_12E34(var_0, -1, undefined, undefined);
+  if (scripts\engine\utility::is_true(var_0.inlaststand) || scripts\engine\utility::is_true(var_0.siege_activated) || scripts\engine\utility::is_true(var_0.flung)) {
+  var_01 = undefined;
+  func_12E34(var_00, -1, undefined, undefined);
   }
-  else if (!var_0 _id_0A77::_id_213E()) {
-  var_1 = undefined;
-  _id_12E34(var_0, -1, undefined, undefined);
+  else if (!var_00 scripts/cp/utility::areinteractionsenabled()) {
+  var_01 = undefined;
+  func_12E34(var_00, -1, undefined, undefined);
   } else {
-  var_6 = [];
-  level._id_4B88 = scripts\engine\utility::_id_22BC(level._id_4B88);
-  var_7 = scripts\engine\utility::_id_782F(var_0.origin, level._id_4B88, undefined, 10, 750, 1);
+  var_06 = [];
+  level.current_interaction_structs = scripts\engine\utility::array_removeundefined(level.current_interaction_structs);
+  var_07 = scripts\engine\utility::get_array_of_closest(var_0.origin, level.current_interaction_structs, undefined, 10, 750, 1);
 
-  foreach (var_9 in var_0._id_55BB)
-  var_7 = scripts\engine\utility::array_remove(var_7, var_9);
+  foreach (var_09 in var_0.disabled_interactions)
+  var_07 = scripts\engine\utility::array_remove(var_07, var_09);
 
-  foreach (var_9 in var_7) {
-  if (_id_9C64(var_0, var_9, var_1))
-  var_6[var_6.size] = var_9;
+  foreach (var_09 in var_07) {
+  if (func_9C64(var_00, var_09, var_01))
+  var_6[var_6.size] = var_09;
   }
 
-  if (scripts\engine\utility::_id_9CEE(var_0.resetguidedinteraction)) {
-  var_1 = undefined;
-  _id_12E34(var_0, -1, undefined, undefined);
+  if (scripts\engine\utility::is_true(var_0.resetguidedinteraction)) {
+  var_01 = undefined;
+  func_12E34(var_00, -1, undefined, undefined);
   var_0.resetguidedinteraction = undefined;
   wait 0.05;
   continue;
   }
 
-  var_6 = scripts\engine\utility::_id_22BC(var_6);
-  var_6 = scripts\engine\utility::_id_22AF(var_6);
+  var_06 = scripts\engine\utility::array_removeundefined(var_06);
+  var_06 = scripts\engine\utility::array_remove_duplicates(var_06);
 
   if (var_6.size < 1) {
-  var_1 = undefined;
-  _id_12E34(var_0, -1, undefined, undefined);
+  var_01 = undefined;
+  func_12E34(var_00, -1, undefined, undefined);
   wait 0.05;
   continue;
   }
 
-  var_6 = sortbydistance(var_6, var_0.origin);
+  var_06 = sortbydistance(var_06, var_0.origin);
 
-  foreach (var_14 in var_6) {
-  var_4 = 0;
+  foreach (var_14 in var_06) {
+  var_04 = 0;
 
-  if (var_0 adsbuttonpressed()) {
-  _id_12E34(var_0, -1, undefined, undefined);
-  var_1 = undefined;
+  if (var_00 adsbuttonpressed()) {
+  func_12E34(var_00, -1, undefined, undefined);
+  var_01 = undefined;
 
-  while (var_0 adsbuttonpressed())
+  while (var_00 adsbuttonpressed())
   wait 0.05;
   }
 
-  if (distancesquared(var_0.origin, var_14.origin) <= var_5) {
-  _id_12E34(var_0, -1, undefined, undefined);
-  var_1 = undefined;
+  if (distancesquared(var_0.origin, var_14.origin) <= var_05) {
+  func_12E34(var_00, -1, undefined, undefined);
+  var_01 = undefined;
   continue;
   }
-  else if (isdefined(var_1) && var_14 == var_1)
+  else if (isdefined(var_01) && var_14 == var_01)
   break;
   else
   {
-  var_2 = _id_7A4A(var_14, var_0);
-  var_3 = _id_7A48(var_14, var_0);
-  var_1 = var_14;
-  var_4 = 1;
+  var_02 = func_7A4A(var_14, var_00);
+  var_03 = func_7A48(var_14, var_00);
+  var_01 = var_14;
+  var_04 = 1;
   break;
   }
   }
 
-  if (var_4)
-  _id_12E34(var_0, var_3, var_2, var_1);
+  if (var_04)
+  func_12E34(var_00, var_03, var_02, var_01);
   }
 
   wait 0.1;
   }
 }
 
-_id_7A4A(var_0, var_1) {
-  var_2 = (0, 0, 68);
-  var_3 = var_0.origin;
+func_7A4A(var_00, var_01) {
+  var_02 = (0, 0, 68);
+  var_03 = var_0.origin;
 
-  if (_id_9A28(var_0)) {
-  if (isdefined(var_0._id_0334)) {
-  var_4 = scripts\engine\utility::_id_817E(var_0._id_0334, "targetname");
+  if (interaction_is_weapon_buy(var_00)) {
+  if (isdefined(var_0.target)) {
+  var_04 = scripts\engine\utility::getstruct(var_0.target, "targetname");
 
-  if (isdefined(var_4))
-  var_3 = var_4.origin;
+  if (isdefined(var_04))
+  var_03 = var_4.origin;
   else
-  var_3 = var_0.origin;
+  var_03 = var_0.origin;
   }
   }
-  else if (!isdefined(var_3))
-  var_3 = var_0.origin;
+  else if (!isdefined(var_03))
+  var_03 = var_0.origin;
 
   if (isdefined(level.guided_interaction_offset_func))
-  var_2 = [[level.guided_interaction_offset_func]](var_0, var_1);
+  var_02 = [[level.guided_interaction_offset_func]](var_00, var_01);
   else
   {
-  var_5 = _id_7829(var_0);
+  var_05 = get_area_for_power(var_00);
 
   if (isdefined(var_0.name)) {
-  var_6 = var_0.script_noteworthy;
+  var_06 = var_0.script_noteworthy;
 
-  switch (var_6) {
+  switch (var_06) {
   case "iw7_ripper_zmr":
   case "iw7_ripper_zm+ripperscope_zm":
   case "shooting_gallery":
-  var_2 = (0, 0, 12);
+  var_02 = (0, 0, 12);
   break;
   case "iw7_ake_zml":
   case "iw7_ake_zm":
-  if (var_5 == "swamp_stage")
-  var_2 = (0, 0, 12);
+  if (var_05 == "swamp_stage")
+  var_02 = (0, 0, 12);
 
   break;
   case "zfreeze_semtex_mp":
-  var_2 = (0, 0, 20);
+  var_02 = (0, 0, 20);
   break;
   case "iw7_sonic_zmr":
   case "iw7_sonic_zm":
-  if (var_5 == "moon")
-  var_2 = (0, 0, 30);
+  if (var_05 == "moon")
+  var_02 = (0, 0, 30);
   else
-  var_2 = (0, 0, 56);
+  var_02 = (0, 0, 56);
 
   break;
   default:
-  var_2 = (0, 0, 56);
+  var_02 = (0, 0, 56);
   }
   }
   }
 
-  var_7 = scripts\engine\utility::_id_5D14(var_3, 12) + var_2;
-  return var_7;
+  var_07 = scripts\engine\utility::drop_to_ground(var_03, 12) + var_02;
+  return var_07;
 }
 
-_id_7A48(var_0, var_1) {
-  var_2 = 1;
-  var_3 = int(level._id_9A43[var_0.script_noteworthy]._id_46A2);
+func_7A48(var_00, var_01) {
+  var_02 = 1;
+  var_03 = int(level.interactions[var_0.script_noteworthy].cost);
 
-  if (_id_9A28(var_0)) {
-  if (var_1 _id_0A6B::_id_8BBB(var_0.script_noteworthy)) {
-  var_4 = _id_0A77::_id_80D8(var_0.script_noteworthy);
-  var_5 = var_1 _id_0A6B::_id_7D62(var_4);
+  if (interaction_is_weapon_buy(var_00)) {
+  if (var_01 scripts/cp/cp_weapon::has_weapon_variation(var_0.script_noteworthy)) {
+  var_04 = scripts/cp/utility::getrawbaseweaponname(var_0.script_noteworthy);
+  var_05 = var_01 scripts/cp/cp_weapon::get_weapon_level(var_04);
 
-  if (var_5 > 1)
-  var_3 = 4500;
+  if (var_05 > 1)
+  var_03 = 4500;
   else
   {
-  var_2 = 0.5;
-  var_3 = int(var_3 * var_2);
+  var_02 = 0.5;
+  var_03 = int(var_03 * var_02);
   }
   }
   else
-  var_3 = int(var_3 * var_2);
+  var_03 = int(var_03 * var_02);
   }
-  else if (_id_9A29(var_0)) {
-  var_6 = var_1 getcurrentweapon();
+  else if (interaction_is_weapon_upgrade(var_00)) {
+  var_06 = var_01 getcurrentweapon();
 
-  if (var_1 _id_0A6B::_id_385F(var_6)) {
-  var_5 = var_1 _id_0A6B::_id_7D62(var_6);
-  var_3 = scripts\engine\utility::ter_op(var_5 > 1, 10000, 5000);
+  if (var_01 scripts/cp/cp_weapon::can_upgrade(var_06)) {
+  var_05 = var_01 scripts/cp/cp_weapon::get_weapon_level(var_06);
+  var_03 = scripts\engine\utility::ter_op(var_05 > 1, 10000, 5000);
   }
   else
-  var_3 = 0;
+  var_03 = 0;
 
-  if (scripts\engine\utility::_id_9CEE(level.has_picked_up_fuses) && !isdefined(level.placed_alien_fuses))
-  var_3 = 0;
+  if (scripts\engine\utility::is_true(level.has_picked_up_fuses) && !isdefined(level.placed_alien_fuses))
+  var_03 = 0;
   }
-  else if (_id_9CDB(var_0)) {
-  if (isdefined(var_0.name) && !var_1 _id_3867(var_0))
-  var_3 = 0;
-  else if ((_id_0A77::_id_9F02() || level._id_C552) && isdefined(var_0.name) && var_0.name == "perk_machine_revive")
-  var_3 = 500;
+  else if (func_9CDB(var_00)) {
+  if (isdefined(var_0.name) && !var_01 can_use_perk(var_00))
+  var_03 = 0;
+  else if ((scripts/cp/utility::isplayingsolo() || level.only_one_player) && isdefined(var_0.name) && var_0.name == "perk_machine_revive")
+  var_03 = 500;
   else
-  var_3 = _id_7B78(var_0);
+  var_03 = get_perk_machine_cost(var_00);
   }
-  else if (_id_9A1A(var_0)) {
-  if (var_1._id_3A52 == 1)
-  var_3 = level._id_732D;
+  else if (interaction_is_fortune_teller(var_00)) {
+  if (var_1.card_refills == 1)
+  var_03 = level.fortune_visit_cost_2;
   else
-  var_3 = level._id_732C;
+  var_03 = level.fortune_visit_cost_1;
   }
 
-  if (var_1 _id_0A77::_id_9BA0("next_purchase_free"))
-  var_3 = 0;
+  if (var_01 scripts/cp/utility::is_consumable_active("next_purchase_free"))
+  var_03 = 0;
 
-  return var_3;
+  return var_03;
 }
 
-_id_9CDB(var_0) {
+func_9CDB(var_00) {
   if (!isdefined(var_0.name))
   return 0;
 
@@ -350,8 +350,8 @@ _id_9CDB(var_0) {
   return 0;
 }
 
-_id_7B78(var_0) {
-  switch (var_0._id_CA4C) {
+get_perk_machine_cost(var_00) {
+  switch (var_0.perk_type) {
   case "perk_machine_zap":
   case "perk_machine_change":
   case "perk_machine_deadeye":
@@ -371,69 +371,69 @@ _id_7B78(var_0) {
   }
 }
 
-_id_9C64(var_0, var_1, var_2) {
+func_9C64(var_00, var_01, var_02) {
   level endon("game_ended");
-  var_0 endon("disconnect");
+  var_00 endon("disconnect");
 
-  if (!isdefined(var_1))
+  if (!isdefined(var_01))
   return 0;
 
-  var_3 = undefined;
+  var_03 = undefined;
 
   if (isdefined(var_1.name))
-  var_3 = var_1.name;
+  var_03 = var_1.name;
   else
   return 0;
 
-  if (scripts\engine\utility::_id_9CEE(var_1._id_C74D) || isdefined(var_1._id_4622))
+  if (scripts\engine\utility::is_true(var_1.out_of_order) || isdefined(var_1.cooling_down))
   return 0;
 
-  if (isdefined(var_1._id_CA4C) && var_1._id_CA4C == "perk_machine_revive" && var_0._id_F1E7 >= var_0.max_self_revive_machine_use)
+  if (isdefined(var_1.perk_type) && var_1.perk_type == "perk_machine_revive" && var_0.self_revives_purchased >= var_0.max_self_revive_machine_use)
   return 0;
 
-  if (!_id_0A77::_id_462B("wall_buys")) {
-  if (_id_9A28(var_1) || _id_9A1B(var_1) || _id_9A24(var_1) || interaction_is_chi_door(var_1) || isdefined(var_1._id_EE79) && var_1._id_EE79 == "tickets")
-  return 0;
-  }
-
-  if (_id_9A1A(var_1)) {
-  if (var_0._id_3A52 == 2)
+  if (!scripts/cp/utility::coop_mode_has("wall_buys")) {
+  if (interaction_is_weapon_buy(var_01) || interaction_is_grenade_wall_buy(var_01) || interaction_is_ticket_buy(var_01) || interaction_is_chi_door(var_01) || isdefined(var_1.script_parameters) && var_1.script_parameters == "tickets")
   return 0;
   }
 
-  if (var_3 == "secure_window" || var_3 == "white_ark" || var_3 == "wor_standee" || var_3 == "generator" || var_3 == "center_speaker_locs" || var_3 == "fourth_speaker" || var_3 == "ark_quest_station" || var_3 == "dj_quest_part_1" || var_3 == "dj_quest_part_2" || var_3 == "dj_quest_part_3" || var_3 == "dj_quest_door" || var_3 == "dj_quest_speaker" || var_3 == "lost_and_found" || var_3 == "fast_travel" || var_3 == "crafting_pickup" || var_3 == "pap_upgrade" || var_3 == "team_door" || var_3 == "neil_head" || var_3 == "neil_battery" || var_3 == "neil_repair" || var_3 == "neil_firmware" || var_3 == "barnstorming_group" || var_3 == "demon_group" || var_3 == "starmaster_group" || var_3 == "group_cosmicarc" || var_3 == "group_pitfall" || var_3 == "group_riverraid" || var_3 == "spider_arcade_group" || var_3 == "robottank_group" || var_3 == "gator_teeth_placement" || var_3 == "atm_withdrawal" && isdefined(level._id_2416) && level._id_2416 < 1000 || var_3 == "crafting_station" && !isdefined(var_0._id_4B5E))
+  if (interaction_is_fortune_teller(var_01)) {
+  if (var_0.card_refills == 2)
+  return 0;
+  }
+
+  if (var_03 == "secure_window" || var_03 == "white_ark" || var_03 == "wor_standee" || var_03 == "generator" || var_03 == "center_speaker_locs" || var_03 == "fourth_speaker" || var_03 == "ark_quest_station" || var_03 == "dj_quest_part_1" || var_03 == "dj_quest_part_2" || var_03 == "dj_quest_part_3" || var_03 == "dj_quest_door" || var_03 == "dj_quest_speaker" || var_03 == "lost_and_found" || var_03 == "fast_travel" || var_03 == "crafting_pickup" || var_03 == "pap_upgrade" || var_03 == "team_door" || var_03 == "neil_head" || var_03 == "neil_battery" || var_03 == "neil_repair" || var_03 == "neil_firmware" || var_03 == "barnstorming_group" || var_03 == "demon_group" || var_03 == "starmaster_group" || var_03 == "group_cosmicarc" || var_03 == "group_pitfall" || var_03 == "group_riverraid" || var_03 == "spider_arcade_group" || var_03 == "robottank_group" || var_03 == "gator_teeth_placement" || var_03 == "atm_withdrawal" && isdefined(level.atm_amount_deposited) && level.atm_amount_deposited < 1000 || var_03 == "crafting_station" && !isdefined(var_0.current_crafting_struct))
   return 0;
 
   if (isdefined(level.guidedinteractionexclusion)) {
-  if (![[level.guidedinteractionexclusion]](var_1, var_0, var_3))
+  if (![[level.guidedinteractionexclusion]](var_01, var_00, var_03))
   return 0;
   }
 
-  if (scripts\engine\utility::_id_9CEE(var_1._id_E1B9) && !scripts\engine\utility::_id_9CEE(var_1._id_D776))
+  if (scripts\engine\utility::is_true(var_1.requires_power) && !scripts\engine\utility::is_true(var_1.powered_on))
   return 0;
 
-  if (isdefined(level._id_164B)) {
-  if (var_3 == "pap_upgrade" || var_3 == "weapon_upgrade")
+  if (isdefined(level.active_volume_check)) {
+  if (var_03 == "pap_upgrade" || var_03 == "weapon_upgrade")
   return 1;
-  else if (!self [[level._id_164B]](var_1.origin))
+  else if (!self [[level.active_volume_check]](var_1.origin))
   return 0;
   }
 
-  var_4 = var_1.origin;
+  var_04 = var_1.origin;
 
   if (isdefined(level.guidedinteractionendposoverride))
-  var_4 = [[level.guidedinteractionendposoverride]](var_0, var_1);
+  var_04 = [[level.guidedinteractionendposoverride]](var_00, var_01);
 
-  if (!scripts\engine\utility::within_fov(var_0.origin, var_0.angles, var_4, cos(25)))
+  if (!scripts\engine\utility::within_fov(var_0.origin, var_0.angles, var_04, cos(25)))
   return 0;
 
-  if (_id_9A18(var_1) || interaction_is_chi_door(var_1)) {
-  var_5 = _id_7C82(0, undefined, var_0);
+  if (interaction_is_door_buy(var_01) || interaction_is_chi_door(var_01)) {
+  var_05 = get_spawn_volumes_player_is_in(0, undefined, var_00);
 
-  foreach (var_7 in var_5) {
-  var_8 = var_7 _id_77D3();
+  foreach (var_07 in var_05) {
+  var_08 = var_07 func_77D3();
 
-  foreach (var_10 in var_8) {
+  foreach (var_10 in var_08) {
   if (ispointinvolume(var_1.origin, var_10))
   return 0;
   }
@@ -443,258 +443,258 @@ _id_9C64(var_0, var_1, var_2) {
   var_13 = physics_createcontents(["physicscontents_clipshot", "physicscontents_corpseclipshot", "physicscontents_missileclip", "physicscontents_solid"]);
 
   if (var_1.script_noteworthy == "trap_hydrant")
-  var_4 = var_1.origin + (0, 0, 50);
+  var_04 = var_1.origin + (0, 0, 50);
 
-  if (scripts\engine\trace::_id_DCF1(var_0 geteye(), var_4, [var_0], var_13))
+  if (scripts\engine\trace::ray_trace_passed(var_00 geteye(), var_04, [var_00], var_13))
   return 1;
   else
   return 0;
 }
 
-_id_77D3() {
-  if (isdefined(level._id_186E[self._id_28AB])) {
-  var_0 = [];
+func_77D3() {
+  if (isdefined(level.func_186E[self.basename])) {
+  var_00 = [];
 
-  foreach (var_2 in level._id_186E[self._id_28AB])
-  var_0[var_0.size] = level._id_10817[var_2];
+  foreach (var_02 in level.func_186E[self.basename])
+  var_0[var_0.size] = level.func_10817[var_02];
 
-  return var_0;
+  return var_00;
   }
 
   return [];
 }
 
-_id_9C0F(var_0) {
-  if (!isdefined(var_0))
+func_9C0F(var_00) {
+  if (!isdefined(var_00))
   return 0;
 
-  if (!isdefined(var_0._id_186E))
+  if (!isdefined(var_0.func_186E))
   return 0;
 
-  foreach (var_2 in var_0._id_186E) {
-  if (!var_2._id_0019)
+  foreach (var_02 in var_0.func_186E) {
+  if (!var_2.active)
   continue;
 
-  if (self istouching(var_2))
+  if (self istouching(var_02))
   return 1;
   }
 
   return 0;
 }
 
-_id_7C82(var_0, var_1, var_2) {
-  if (isdefined(level._id_7C80))
-  return [[level._id_7C80]]();
+get_spawn_volumes_player_is_in(var_00, var_01, var_02) {
+  if (isdefined(level.func_7C80))
+  return [[level.func_7C80]]();
 
-  var_3 = [];
-  var_4 = level._id_10816;
+  var_03 = [];
+  var_04 = level.spawn_volume_array;
 
-  foreach (var_6 in var_4) {
-  if (!var_6._id_0019)
+  foreach (var_06 in var_04) {
+  if (!var_6.active)
   continue;
 
-  var_7 = 0;
+  var_07 = 0;
 
-  if (isdefined(var_1) && !var_2 _id_0A77::_id_9D05())
+  if (isdefined(var_01) && !var_02 scripts/cp/utility::is_valid_player())
   continue;
 
-  if (var_2 istouching(var_6))
-  var_7 = 1;
-  else if (scripts\engine\utility::_id_9CEE(var_0) && var_2 _id_9C0F(var_6))
-  var_7 = 1;
+  if (var_02 istouching(var_06))
+  var_07 = 1;
+  else if (scripts\engine\utility::is_true(var_00) && var_02 func_9C0F(var_06))
+  var_07 = 1;
 
-  if (var_7)
-  var_3[var_3.size] = var_6;
+  if (var_07)
+  var_3[var_3.size] = var_06;
   }
 
-  return var_3;
+  return var_03;
 }
 
-_id_12E34(var_0, var_1, var_2, var_3) {
-  if (!isdefined(var_1))
-  var_1 = -1;
+func_12E34(var_00, var_01, var_02, var_03) {
+  if (!isdefined(var_01))
+  var_01 = -1;
 
-  if (isdefined(var_2) && var_2 != self.origin) {
-  var_0 setclientomnvar("zm_interaction_cost", -1);
+  if (isdefined(var_02) && var_02 != self.origin) {
+  var_00 setclientomnvar("zm_interaction_cost", -1);
   wait 0.1;
   self dontinterpolate();
-  self.origin = var_2;
+  self.origin = var_02;
   wait 0.1;
   }
 
-  if (isdefined(var_3) && var_3._id_EE79 == "tickets")
-  var_1 = 2;
+  if (isdefined(var_03) && var_3.script_parameters == "tickets")
+  var_01 = 2;
 
-  var_0 setclientomnvar("zm_interaction_cost", var_1);
+  var_00 setclientomnvar("zm_interaction_cost", var_01);
 }
 
-_id_79D0(var_0) {
-  foreach (var_2 in var_0) {
-  if (!scripts\engine\utility::_id_9CEE(var_2._id_93A8)) {
-  var_2._id_93A8 = 1;
-  var_2 setmodel("tag_origin");
-  return var_2;
+func_79D0(var_00) {
+  foreach (var_02 in var_00) {
+  if (!scripts\engine\utility::is_true(var_2.in_use)) {
+  var_2.in_use = 1;
+  var_02 setmodel("tag_origin");
+  return var_02;
   }
   }
 }
 
-_id_DF3C(var_0) {
-  var_0 waittill("disconnect");
-  self._id_93A8 = 0;
+func_DF3C(var_00) {
+  var_00 waittill("disconnect");
+  self.in_use = 0;
   self notify("interaction_ent_released");
 }
 
-_id_23D8() {
+func_23D8() {
   level endon("game_ended");
 
   for (;;) {
-  level waittill("player_spawned", var_0);
-  var_0._id_9A3F = _id_7B99();
+  level waittill("player_spawned", var_00);
+  var_0.interaction_trigger = get_player_interaction_trigger();
 
-  if (!isdefined(var_0._id_9A3F))
+  if (!isdefined(var_0.interaction_trigger))
   break;
 
-  _id_E1F8();
+  reset_interaction_triggers();
 
-  if (!isdefined(var_0._id_9A3F))
+  if (!isdefined(var_0.interaction_trigger))
   iprintlnbold("NO TRIGGER FOUND!");
 
-  var_0._id_A8D3 = undefined;
-  var_0._id_9A3F makeunusable();
-  var_0 thread _id_DF3F();
-  var_0 thread _id_D103();
-  var_0 thread _id_D104();
+  var_0.last_interaction_point = undefined;
+  var_0.interaction_trigger makeunusable();
+  var_00 thread func_DF3F();
+  var_00 thread player_interaction_monitor();
+  var_00 thread func_D104();
   }
 }
 
-_id_D104() {
+func_D104() {
   self endon("disconnect");
   self endon("death");
 
   for (;;) {
   scripts\engine\utility::waittill_any("weapon_switch_started", "weapon_change", "weaponchange");
-  self._id_A8D3 = undefined;
+  self.last_interaction_point = undefined;
   self.resetguidedinteraction = 1;
   self notify("stop_interaction_logic");
   }
 }
 
-_id_7B99() {
-  var_0 = getentarray("player_use_trigger", "targetname");
-  var_1 = undefined;
+get_player_interaction_trigger() {
+  var_00 = getentarray("player_use_trigger", "targetname");
+  var_01 = undefined;
 
-  foreach (var_3 in var_0) {
-  if (!var_3._id_93A8) {
-  var_3._id_93A8 = 1;
-  var_3 scripts\engine\utility::_id_1277A();
-  return var_3;
+  foreach (var_03 in var_00) {
+  if (!var_3.in_use) {
+  var_3.in_use = 1;
+  var_03 scripts\engine\utility::trigger_on();
+  return var_03;
   }
   }
 
   return undefined;
 }
 
-_id_DF3F() {
-  var_0 = self._id_9A3F;
+func_DF3F() {
+  var_00 = self.interaction_trigger;
   scripts\engine\utility::waittill_any("death", "disconnect");
-  var_0._id_93A8 = 0;
+  var_0.in_use = 0;
 }
 
-_id_DEBB(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
-  var_9 = spawnstruct();
-  var_9.name = var_0;
-  var_9._id_8FFA = var_3;
-  var_9._id_109DA = var_1;
-  var_9._id_12AA2 = var_2;
-  var_9._id_161A = var_4;
-  var_9._id_6261 = 1;
+register_interaction(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08) {
+  var_09 = spawnstruct();
+  var_9.name = var_00;
+  var_9.hint_func = var_03;
+  var_9.spend_type = var_01;
+  var_9.tutorial = var_02;
+  var_9.activation_func = var_04;
+  var_9.enabled = 1;
 
-  if (!isdefined(var_5))
-  var_5 = 0;
+  if (!isdefined(var_05))
+  var_05 = 0;
 
-  var_9._id_46A2 = var_5;
+  var_9.cost = var_05;
 
-  if (isdefined(var_6))
-  var_9._id_E1B9 = var_6;
+  if (isdefined(var_06))
+  var_9.requires_power = var_06;
   else
-  var_9._id_E1B9 = 0;
+  var_9.requires_power = 0;
 
-  var_9._id_95F2 = var_7;
-  var_9._id_3865 = var_8;
-  level._id_9A43[var_0] = var_9;
+  var_9.init_func = var_07;
+  var_9.can_use_override_func = var_08;
+  level.interactions[var_00] = var_09;
 }
 
-_id_15BC(var_0, var_1) {
-  level thread [[level._id_9A43[var_0]._id_161A]](var_1);
+func_15BC(var_00, var_01) {
+  level thread [[level.interactions[var_00].activation_func]](var_01);
 }
 
-_id_E1F8() {
-  foreach (var_1 in level.players) {
-  if (isdefined(var_1._id_9A3F))
-  _id_8E90(var_1);
+reset_interaction_triggers() {
+  foreach (var_01 in level.players) {
+  if (isdefined(var_1.interaction_trigger))
+  func_8E90(var_01);
   }
 }
 
-_id_8E90(var_0) {
-  foreach (var_2 in level.players) {
-  if (var_2 == var_0) {
-  var_0._id_9A3F enableplayeruse(var_0);
+func_8E90(var_00) {
+  foreach (var_02 in level.players) {
+  if (var_02 == var_00) {
+  var_0.interaction_trigger enableplayeruse(var_00);
   continue;
   }
 
-  var_0._id_9A3F disableplayeruse(var_2);
+  var_0.interaction_trigger disableplayeruse(var_02);
   }
 }
 
-_id_13D07(var_0, var_1) {
+func_13D07(var_00, var_01) {
   for (;;) {
-  thread scripts\engine\utility::_id_5B44(var_1, 0.1, (1, 0, 0), 1, 0.1);
+  thread scripts\engine\utility::draw_entity_bounds(var_01, 0.1, (1, 0, 0), 1, 0.1);
   wait 0.1;
   }
 }
 
-_id_D103() {
+player_interaction_monitor() {
   self notify("player_interaction_monitor");
   self endon("player_interaction_monitor");
   self endon("disconnect");
   self endon("death");
 
-  while (!isdefined(level._id_4B88))
+  while (!isdefined(level.current_interaction_structs))
   wait 1;
 
-  if (isdefined(level._id_D103)) {
-  self thread [[level._id_D103]]();
+  if (isdefined(level.player_interaction_monitor)) {
+  self thread [[level.player_interaction_monitor]]();
   return;
   }
 }
 
-_id_6EB9() {
+flash_inventory() {
   self endon("window_trap_placed");
   self endon("death");
 
-  if (!isdefined(self._id_BF46))
-  self._id_BF46 = gettime() + 2500;
-  else if (gettime() < self._id_BF46)
+  if (!isdefined(self.func_BF46))
+  self.func_BF46 = gettime() + 2500;
+  else if (gettime() < self.func_BF46)
   return;
 
-  self._id_BF46 = gettime() + 2500;
+  self.func_BF46 = gettime() + 2500;
   self setclientomnvar("zom_crafted_weapon", 0);
   wait 0.5;
   self setclientomnvar("zom_crafted_weapon", 8);
   wait 1.5;
 }
 
-_id_3863(var_0) {
-  if (!isdefined(var_0))
+can_use_interaction(var_00) {
+  if (!isdefined(var_00))
   return 0;
 
-  if (scripts\engine\utility::_id_9CEE(self._id_9D81))
+  if (scripts\engine\utility::is_true(self.iscarrying))
   return 0;
 
-  if (scripts\engine\utility::_id_9CEE(var_0._id_55BA) || !_id_0A77::_id_213E() || self _meth_84D9())
+  if (scripts\engine\utility::is_true(var_0.disabled) || !scripts/cp/utility::areinteractionsenabled() || self isinphase())
   return 0;
 
-  if (self secondaryoffhandbuttonpressed() || self _meth_81C6() || self fragbuttonpressed())
+  if (self secondaryoffhandbuttonpressed() || self isthrowinggrenade() || self fragbuttonpressed())
   return 0;
 
   if (!self isonground())
@@ -703,114 +703,114 @@ _id_3863(var_0) {
   if (var_0.script_noteworthy == "game_race" && distancesquared(self.origin, var_0.origin) > 576)
   return 0;
 
-  if (var_0.script_noteworthy == "ritual_stone" && scripts\engine\utility::_id_9CEE(self._id_DCEB))
+  if (var_0.script_noteworthy == "ritual_stone" && scripts\engine\utility::is_true(self.rave_mode))
   return 0;
 
   return 1;
 }
 
-_id_E1F6() {
-  if (isdefined(self._id_9A3F.name))
-  _id_0D45::_id_AF74(self._id_9A3F.name, 0);
+reset_interaction() {
+  if (isdefined(self.interaction_trigger.name))
+  scripts/cp/zombies/zombie_analytics::func_AF74(self.interaction_trigger.name, 0);
 
   wait 0.2;
   self notify("stop_interaction_logic");
-  self._id_9A3F makeunusable();
-  self._id_A8D3 = undefined;
+  self.interaction_trigger makeunusable();
+  self.last_interaction_point = undefined;
   self setclientomnvar("zm_tutorial_num", 0);
 }
 
-_id_F421(var_0, var_1) {
-  if (scripts\engine\utility::_id_9CEE(self._id_9A3F._id_55F3))
+set_interaction_point(var_00, var_01) {
+  if (scripts\engine\utility::is_true(self.interaction_trigger.func_55F3))
   return;
 
-  self._id_9A3F dontinterpolate();
-  self._id_A8D3 = var_0;
-  var_2 = self geteye();
-  self._id_9A3F.origin = (var_0.origin[0], var_0.origin[1], var_2[2]);
+  self.interaction_trigger dontinterpolate();
+  self.last_interaction_point = var_00;
+  var_02 = self geteye();
+  self.interaction_trigger.origin = (var_0.origin[0], var_0.origin[1], var_2[2]);
 
-  if (!isdefined(level._id_9A43[var_0.script_noteworthy]._id_109DA))
-  level._id_9A43[var_0.script_noteworthy]._id_109DA = "null";
+  if (!isdefined(level.interactions[var_0.script_noteworthy].spend_type))
+  level.interactions[var_0.script_noteworthy].spend_type = "null";
 
-  var_3 = level._id_9A43[var_0.script_noteworthy]._id_109DA;
-  var_4 = undefined;
+  var_03 = level.interactions[var_0.script_noteworthy].spend_type;
+  var_04 = undefined;
 
-  if (_id_0A77::_id_9F02() || level._id_C552) {
-  if (var_3 == "wall_buy")
-  var_4 = _id_0A57::_id_79FC("wall_buy");
+  if (scripts/cp/utility::isplayingsolo() || level.only_one_player) {
+  if (var_03 == "wall_buy")
+  var_04 = scripts/cp/cp_hud_message::get_has_seen_tutorial("wall_buy");
 
-  if (!scripts\engine\utility::_id_9CEE(var_4)) {
-  if (isdefined(level._id_9A43[var_0.script_noteworthy]._id_12AA2))
-  thread _id_0A57::_id_12AAE(var_3);
+  if (!scripts\engine\utility::is_true(var_04)) {
+  if (isdefined(level.interactions[var_0.script_noteworthy].tutorial))
+  thread scripts/cp/cp_hud_message::tutorial_lookup_func(var_03);
   }
   }
 
-  if (_id_9A28(var_0)) {
-  if (!_id_0A6B::_id_8BBB(var_0.script_noteworthy)) {
-  var_5 = _id_8228(var_0.script_noteworthy);
-  var_6 = _id_8220(var_0.script_noteworthy);
-  self._id_9A3F _meth_852E(var_5, var_6);
+  if (interaction_is_weapon_buy(var_00)) {
+  if (!scripts/cp/cp_weapon::has_weapon_variation(var_0.script_noteworthy)) {
+  var_05 = _meth_8228(var_0.script_noteworthy);
+  var_06 = _meth_8220(var_0.script_noteworthy);
+  self.interaction_trigger sethintstringparams(var_05, var_06);
   }
   }
-  else if (_id_9A29(var_0)) {
-  var_7 = self getcurrentweapon();
-  var_5 = _id_8228(var_7);
+  else if (interaction_is_weapon_upgrade(var_00)) {
+  var_07 = self getcurrentweapon();
+  var_05 = _meth_8228(var_07);
 
-  if (_id_0A6B::_id_385F(var_7)) {
-  if (isdefined(var_5)) {
-  var_8 = _id_0A6B::_id_7D62(var_7);
-  var_6 = scripts\engine\utility::ter_op(var_8 > 1, int(10000), int(5000));
-  self._id_9A3F _meth_852E(var_5, var_6);
+  if (scripts/cp/cp_weapon::can_upgrade(var_07)) {
+  if (isdefined(var_05)) {
+  var_08 = scripts/cp/cp_weapon::get_weapon_level(var_07);
+  var_06 = scripts\engine\utility::ter_op(var_08 > 1, int(10000), int(5000));
+  self.interaction_trigger sethintstringparams(var_05, var_06);
   }
   }
-  else if (isdefined(var_5))
-  self._id_9A3F _meth_852E(var_5);
+  else if (isdefined(var_05))
+  self.interaction_trigger sethintstringparams(var_05);
   }
-  else if (_id_9A16(var_0)) {
-  if (!isdefined(self._id_4B5E)) {
-  level thread [[level._id_9A43[var_0.script_noteworthy]._id_161A]](var_0, self);
-  _id_9A34(var_0);
+  else if (func_9A16(var_00)) {
+  if (!isdefined(self.current_crafting_struct)) {
+  level thread [[level.interactions[var_0.script_noteworthy].activation_func]](var_00, self);
+  interaction_post_activate_update(var_00);
   self notify("new_power", "souvenir_pickup");
 
-  if (_id_0A77::map_check(0))
-  thread _id_0A6A::_id_1769("nag_use_souvenircoin", "zmb_comment_vo", 60, 180, 6, 1);
+  if (scripts/cp/utility::map_check(0))
+  thread scripts/cp/cp_vo::add_to_nag_vo("nag_use_souvenircoin", "zmb_comment_vo", 60, 180, 6, 1);
 
   return;
   }
 
-  self._id_9A3F.origin = var_0.origin;
+  self.interaction_trigger.origin = var_0.origin;
   }
-  else if (_id_9A26(var_0))
-  self._id_9A3F.origin = (var_0.origin[0], var_0.origin[1], var_2[2] - 15);
-  else if (_id_9A15(var_0) && var_0.script_noteworthy == "atm_withdrawal")
-  self._id_9A3F _meth_852E(level._id_2416);
-  else if (_id_9A1A(var_0)) {
-  if (self._id_3A52 == 1)
-  self._id_9A3F _meth_852E(level._id_732D);
+  else if (func_9A26(var_00))
+  self.interaction_trigger.origin = (var_0.origin[0], var_0.origin[1], var_2[2] - 15);
+  else if (func_9A15(var_00) && var_0.script_noteworthy == "atm_withdrawal")
+  self.interaction_trigger sethintstringparams(level.atm_amount_deposited);
+  else if (interaction_is_fortune_teller(var_00)) {
+  if (self.card_refills == 1)
+  self.interaction_trigger sethintstringparams(level.fortune_visit_cost_2);
   else
-  self._id_9A3F _meth_852E(level._id_732C);
+  self.interaction_trigger sethintstringparams(level.fortune_visit_cost_1);
   }
   else if (var_0.script_noteworthy == "spawned_essence")
-  self._id_9A3F.origin = var_0.origin;
+  self.interaction_trigger.origin = var_0.origin;
 
-  _id_F422(self._id_9A3F, var_0);
+  func_F422(self.interaction_trigger, var_00);
 
-  if (!isdefined(var_1))
-  thread _id_135DF(var_0);
+  if (!isdefined(var_01))
+  thread func_135DF(var_00);
 
-  self._id_9A3F makeusable();
+  self.interaction_trigger makeusable();
 }
 
-_id_8228(var_0) {
-  if (!isdefined(var_0))
+_meth_8228(var_00) {
+  if (!isdefined(var_00))
   return undefined;
 
-  var_1 = _id_0A77::_id_7DF7(var_0);
+  var_01 = scripts/cp/utility::getbaseweaponname(var_00);
 
-  if (!isdefined(var_1))
+  if (!isdefined(var_01))
   return undefined;
 
-  switch (var_1) {
+  switch (var_01) {
   case "iw7_udm45":
   return &"CP_ZMB_WEAPONS_UDM45";
   case "iw7_rvn":
@@ -916,7 +916,7 @@ _id_8228(var_0) {
   return &"CP_ZMB_WEAPONS_MAD";
   default:
   if (isdefined(level.custom_weaponnamestring_func)) {
-  return [[level.custom_weaponnamestring_func]](var_1, var_0);
+  return [[level.custom_weaponnamestring_func]](var_01, var_00);
   return;
   }
 
@@ -925,148 +925,148 @@ _id_8228(var_0) {
   }
 }
 
-_id_8220(var_0) {
-  return int(level._id_9A43[var_0]._id_46A2);
+_meth_8220(var_00) {
+  return int(level.interactions[var_00].cost);
 }
 
-_id_F422(var_0, var_1) {
-  var_2 = _id_7A49(var_1, self);
+func_F422(var_00, var_01) {
+  var_02 = func_7A49(var_01, self);
 
-  if (isdefined(var_2))
-  self._id_9A3F sethintstring(var_2);
+  if (isdefined(var_02))
+  self.interaction_trigger sethintstring(var_02);
 
-  if (_id_9A28(var_1)) {
-  if (isdefined(var_2) && !isstring(var_2) && var_2 == &"COOP_INTERACTIONS_PURCHASE_AMMO") {
-  var_3 = _id_0A77::_id_80D8(var_1.script_noteworthy);
-  var_4 = _id_0A6B::_id_7D62(var_3);
-  var_5 = _id_8228(var_1.script_noteworthy);
+  if (interaction_is_weapon_buy(var_01)) {
+  if (isdefined(var_02) && !isstring(var_02) && var_02 == &"COOP_INTERACTIONS_PURCHASE_AMMO") {
+  var_03 = scripts/cp/utility::getrawbaseweaponname(var_1.script_noteworthy);
+  var_04 = scripts/cp/cp_weapon::get_weapon_level(var_03);
+  var_05 = _meth_8228(var_1.script_noteworthy);
 
-  if (var_4 > 1)
-  self._id_9A3F _meth_852E(int(4500), var_5);
+  if (var_04 > 1)
+  self.interaction_trigger sethintstringparams(int(4500), var_05);
   else
-  self._id_9A3F _meth_852E(int(0.5 * level._id_9A43[var_1.script_noteworthy]._id_46A2), var_5);
+  self.interaction_trigger sethintstringparams(int(0.5 * level.interactions[var_1.script_noteworthy].cost), var_05);
   }
   }
-  else if (interactionislostandfound(var_1) && scripts\engine\utility::_id_9CEE(self._id_8C46)) {
-  if (isdefined(self._id_B0A2) && self._id_B0A2 == var_1)
-  _id_F474(self);
+  else if (interactionislostandfound(var_01) && scripts\engine\utility::is_true(self.have_things_in_lost_and_found)) {
+  if (isdefined(self.lost_and_found_spot) && self.lost_and_found_spot == var_01)
+  func_F474(self);
   }
-  else if (_id_9A2B(var_1) || _id_9A19(var_1) || _id_9A1C(var_1) || _id_9A1E(var_1) || _id_9A29(var_1) || _id_9A16(var_1)) {
-  self._id_9A3F _meth_83D6(0);
-  self._id_9A3F _meth_84A5(360);
+  else if (interaction_is_window_entrance(var_01) || func_9A19(var_01) || func_9A1C(var_01) || func_9A1E(var_01) || interaction_is_weapon_upgrade(var_01) || func_9A16(var_01)) {
+  self.interaction_trigger usetriggerrequirelookat(0);
+  self.interaction_trigger setusefov(360);
   }
   else if (var_1.script_noteworthy == "coaster") {
-  self._id_9A3F _meth_83D6(1);
-  self._id_9A3F _meth_84A5(245);
+  self.interaction_trigger usetriggerrequirelookat(1);
+  self.interaction_trigger setusefov(245);
   }
   else if (var_1.script_noteworthy == "dj_quest_speaker_mid" || var_1.script_noteworthy == "dj_quest_speaker") {
-  self._id_9A3F _meth_83D6(0);
-  self._id_9A3F _meth_84A5(360);
+  self.interaction_trigger usetriggerrequirelookat(0);
+  self.interaction_trigger setusefov(360);
   }
   else if (var_1.script_noteworthy == "spawned_essence") {
-  self._id_9A3F _meth_83D6(1);
-  self._id_9A3F _meth_84A5(360);
+  self.interaction_trigger usetriggerrequirelookat(1);
+  self.interaction_trigger setusefov(360);
   }
   else if (var_1.script_noteworthy == "dj_quest_part_1" || var_1.script_noteworthy == "dj_quest_part_2" || var_1.script_noteworthy == "dj_quest_part_3") {
-  self._id_9A3F _meth_83D6(0);
-  self._id_9A3F _meth_84A5(245);
+  self.interaction_trigger usetriggerrequirelookat(0);
+  self.interaction_trigger setusefov(245);
   } else {
-  self._id_9A3F _meth_83D6(1);
-  self._id_9A3F _meth_84A5(160);
+  self.interaction_trigger usetriggerrequirelookat(1);
+  self.interaction_trigger setusefov(160);
   }
 
   if (isdefined(level.interaction_trigger_properties_func))
-  [[level.interaction_trigger_properties_func]](var_0, var_1, var_2);
+  [[level.interaction_trigger_properties_func]](var_00, var_01, var_02);
 }
 
-_id_F474(var_0) {
-  if (isdefined(var_0._id_B0A1)) {
-  var_1 = [];
+func_F474(var_00) {
+  if (isdefined(var_0.lost_and_found_primary_count)) {
+  var_01 = [];
 
-  foreach (var_3 in var_0._id_B0A1) {
-  if (_id_0A77::_id_9F7C(var_3, "alt_"))
+  foreach (var_03 in var_0.lost_and_found_primary_count) {
+  if (scripts/cp/utility::isstrstart(var_03, "alt_"))
   continue;
 
-  if (!scripts\engine\utility::array_contains(var_1, var_3))
-  var_1 = scripts\engine\utility::_id_2279(var_1, var_3);
+  if (!scripts\engine\utility::array_contains(var_01, var_03))
+  var_01 = scripts\engine\utility::array_add(var_01, var_03);
   }
 
   if (var_1.size > 2) {
-  var_5 = _id_8228(var_1[1]);
-  var_6 = _id_8228(var_1[2]);
-  var_0._id_9A3F _meth_852E(var_5, var_6);
+  var_05 = _meth_8228(var_1[1]);
+  var_06 = _meth_8228(var_1[2]);
+  var_0.interaction_trigger sethintstringparams(var_05, var_06);
   } else {
-  var_5 = _id_8228(var_1[1]);
-  var_0._id_9A3F _meth_852E(var_5);
+  var_05 = _meth_8228(var_1[1]);
+  var_0.interaction_trigger sethintstringparams(var_05);
   }
   }
 }
 
-_id_7A49(var_0, var_1) {
-  if (isdefined(level._id_9A43[var_0.script_noteworthy]._id_8FFA))
-  return [[level._id_9A43[var_0.script_noteworthy]._id_8FFA]](var_0, var_1);
+func_7A49(var_00, var_01) {
+  if (isdefined(level.interactions[var_0.script_noteworthy].hint_func))
+  return [[level.interactions[var_0.script_noteworthy].hint_func]](var_00, var_01);
 
-  if (isdefined(var_0._id_4622))
+  if (isdefined(var_0.cooling_down))
   return &"COOP_INTERACTIONS_COOLDOWN";
 
-  if (var_0._id_E1B9 && !var_0._id_D776)
+  if (var_0.requires_power && !var_0.powered_on)
   return &"COOP_INTERACTIONS_REQUIRES_POWER";
 
-  if (_id_9A28(var_0)) {
-  if (!_id_0A77::_id_462B("wall_buys"))
+  if (interaction_is_weapon_buy(var_00)) {
+  if (!scripts/cp/utility::coop_mode_has("wall_buys"))
   return undefined;
   }
 
-  if (_id_9A17(var_0)) {
-  if (!isdefined(var_1._id_4B5E) && var_0._id_269F > 0)
-  return level._id_9A12["crafting_nopiece"];
+  if (interaction_is_crafting_station(var_00)) {
+  if (!isdefined(var_1.current_crafting_struct) && var_0.available_ingredient_slots > 0)
+  return level.interaction_hintstrings["crafting_nopiece"];
   }
 
-  if (_id_9A16(var_0))
-  return level._id_9A12["crafting_item_swap"];
+  if (func_9A16(var_00))
+  return level.interaction_hintstrings["crafting_item_swap"];
 
-  return level._id_9A12[var_0.script_noteworthy];
+  return level.interaction_hintstrings[var_0.script_noteworthy];
 }
 
-_id_C00C() {
+func_C00C() {
   self endon("game_ended");
 
   for (;;) {
-  level waittill("player_accessed_nonpowered_interaction", var_0);
-  var_0 thread _id_0A6A::_id_12885("no_power", "zmb_comment_vo", "high", 30, 0, 0, 1, 50);
+  level waittill("player_accessed_nonpowered_interaction", var_00);
+  var_00 thread scripts/cp/cp_vo::try_to_play_vo("no_power", "zmb_comment_vo", "high", 30, 0, 0, 1, 50);
   }
 }
 
-_id_4616() {
+func_4616() {
   self endon("game_ended");
 
   for (;;) {
-  level waittill("player_accessed_interaction_on_cooldown", var_0);
-  var_0 thread _id_0A6A::_id_12885("round_cooldown", "zmb_comment_vo", "high", 30, 0, 0, 1, 50);
+  level waittill("player_accessed_interaction_on_cooldown", var_00);
+  var_00 thread scripts/cp/cp_vo::try_to_play_vo("round_cooldown", "zmb_comment_vo", "high", 30, 0, 0, 1, 50);
   }
 }
 
-_id_135DF(var_0) {
+func_135DF(var_00) {
   if (isdefined(level.wait_for_interaction_func))
-  self thread [[level.wait_for_interaction_func]](var_0);
+  self thread [[level.wait_for_interaction_func]](var_00);
 }
 
-_id_CE96(var_0, var_1) {
-  var_2 = var_0.script_noteworthy;
-  var_3 = getweaponbasename(var_2);
+play_weapon_purchase_vo(var_00, var_01) {
+  var_02 = var_0.script_noteworthy;
+  var_03 = getweaponbasename(var_02);
 
-  switch (var_3) {
+  switch (var_03) {
   case "iw7_cutie_zm":
-  var_1 thread _id_0A6A::_id_12885("player_purchase_wonder", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
+  var_01 thread scripts/cp/cp_vo::try_to_play_vo("player_purchase_wonder", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
   break;
   case "iw7_nunchucks_zm":
-  var_1 thread _id_0A6A::_id_12885("magicwheel_nunchucks", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
+  var_01 thread scripts/cp/cp_vo::try_to_play_vo("magicwheel_nunchucks", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
   break;
   case "iw7_katana_zm":
   if (randomint(100) > 50)
-  var_1 thread _id_0A6A::_id_12885("player_purchase_wonder", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
+  var_01 thread scripts/cp/cp_vo::try_to_play_vo("player_purchase_wonder", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
   else
-  var_1 thread _id_0A6A::_id_12885("magicwheel_katana", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
+  var_01 thread scripts/cp/cp_vo::try_to_play_vo("magicwheel_katana", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
 
   break;
   case "iw7_harpoon4_zm":
@@ -1074,158 +1074,158 @@ _id_CE96(var_0, var_1) {
   case "iw7_harpoon2_zm":
   case "iw7_harpoon1_zm":
   case "iw7_harpoon_zm":
-  var_1 thread _id_0A6A::_id_12885("player_purchase_wonder", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
+  var_01 thread scripts/cp/cp_vo::try_to_play_vo("player_purchase_wonder", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
   break;
   case "iw7_ake_zml":
   case "iw7_ake_zm":
-  var_1 thread _id_0A6A::_id_12885("player_purchase_assault", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
+  var_01 thread scripts/cp/cp_vo::try_to_play_vo("player_purchase_assault", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
   break;
   case "iw7_lmg03_zm":
   case "iw7_ameli_zm":
-  var_1 thread _id_0A6A::_id_12885("purchase_weapon", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
+  var_01 thread scripts/cp/cp_vo::try_to_play_vo("purchase_weapon", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
   break;
   case "iw7_ar57_zm":
-  var_1 thread _id_0A6A::_id_12885("player_purchase_assault", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
+  var_01 thread scripts/cp/cp_vo::try_to_play_vo("player_purchase_assault", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
   break;
   case "iw7_axe_zm_pap2":
   case "iw7_axe_zm_pap1":
   case "iw7_axe_zm":
-  var_1 thread _id_0A6A::_id_12885("purchase_weapon", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
+  var_01 thread scripts/cp/cp_vo::try_to_play_vo("purchase_weapon", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
   break;
   case "iw7_chargeshot_zm":
-  var_1 thread _id_0A6A::_id_12885("player_purchase_launcher", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
+  var_01 thread scripts/cp/cp_vo::try_to_play_vo("player_purchase_launcher", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
   break;
   case "iw7_cheytac_zm":
-  var_1 thread _id_0A6A::_id_12885("player_purchase_sniper", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
+  var_01 thread scripts/cp/cp_vo::try_to_play_vo("player_purchase_sniper", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
   break;
   case "iw7_crb_zml":
   case "iw7_crb_zm":
-  var_1 thread _id_0A6A::_id_12885("player_purchase_smg", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
+  var_01 thread scripts/cp/cp_vo::try_to_play_vo("player_purchase_smg", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
   break;
   case "iw7_devastator_zm":
-  var_1 thread _id_0A6A::_id_12885("player_purchase_shotgun", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
+  var_01 thread scripts/cp/cp_vo::try_to_play_vo("player_purchase_shotgun", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
   break;
   case "iw7_dischord_zm_pap1":
   case "iw7_dischord_zm":
-  var_1 thread _id_0A6A::_id_12885("player_purchase_wonder", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
+  var_01 thread scripts/cp/cp_vo::try_to_play_vo("player_purchase_wonder", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
   break;
   case "iw7_emc_zm":
-  var_1 thread _id_0A6A::_id_12885("player_purchase_pistol", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
+  var_01 thread scripts/cp/cp_vo::try_to_play_vo("player_purchase_pistol", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
   break;
   case "iw7_erad_zm":
-  var_1 thread _id_0A6A::_id_12885("player_purchase_smg", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
+  var_01 thread scripts/cp/cp_vo::try_to_play_vo("player_purchase_smg", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
   break;
   case "iw7_facemelter_zm_pap1":
   case "iw7_facemelter_zm":
-  var_1 thread _id_0A6A::_id_12885("player_purchase_wonder", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
+  var_01 thread scripts/cp/cp_vo::try_to_play_vo("player_purchase_wonder", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
   break;
   case "iw7_fhr_zm":
-  var_1 thread _id_0A6A::_id_12885("player_purchase_smg", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
+  var_01 thread scripts/cp/cp_vo::try_to_play_vo("player_purchase_smg", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
   break;
   case "iw7_fmg_zm":
-  var_1 thread _id_0A6A::_id_12885("player_purchase_smg", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
+  var_01 thread scripts/cp/cp_vo::try_to_play_vo("player_purchase_smg", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
   break;
   case "iw7_forgefreeze_zm_pap2":
   case "iw7_forgefreeze_zm_pap1":
   case "iw7_forgefreeze_zm":
-  var_1 thread _id_0A6A::_id_12885("player_purchase_wonder", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
+  var_01 thread scripts/cp/cp_vo::try_to_play_vo("player_purchase_wonder", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
   break;
   case "iw7_g18_zmr":
   case "iw7_g18_zm":
-  var_1 thread _id_0A6A::_id_12885("player_purchase_pistol", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
+  var_01 thread scripts/cp/cp_vo::try_to_play_vo("player_purchase_pistol", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
   break;
   case "iw7_lockon_zm":
-  var_1 thread _id_0A6A::_id_12885("player_purchase_launcher", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
+  var_01 thread scripts/cp/cp_vo::try_to_play_vo("player_purchase_launcher", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
   break;
   case "iw7_glprox_zm":
-  var_1 thread _id_0A6A::_id_12885("player_purchase_launcher", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
+  var_01 thread scripts/cp/cp_vo::try_to_play_vo("player_purchase_launcher", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
   break;
   case "iw7_headcutter_zm_pap1":
   case "iw7_headcutter_zm":
-  var_1 thread _id_0A6A::_id_12885("player_purchase_wonder", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
+  var_01 thread scripts/cp/cp_vo::try_to_play_vo("player_purchase_wonder", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
   break;
   case "iw7_kbs_zm":
-  var_1 thread _id_0A6A::_id_12885("player_purchase_sniper", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
+  var_01 thread scripts/cp/cp_vo::try_to_play_vo("player_purchase_sniper", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
   break;
   case "iw7_m1c_zm":
   case "iw7_m1_zm":
-  var_1 thread _id_0A6A::_id_12885("player_purchase_sniper", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
+  var_01 thread scripts/cp/cp_vo::try_to_play_vo("player_purchase_sniper", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
   break;
   case "iw7_m4_zm":
-  var_1 thread _id_0A6A::_id_12885("player_purchase_assault", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
+  var_01 thread scripts/cp/cp_vo::try_to_play_vo("player_purchase_assault", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
   break;
   case "iw7_m8_zm":
-  var_1 thread _id_0A6A::_id_12885("player_purchase_assault", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
+  var_01 thread scripts/cp/cp_vo::try_to_play_vo("player_purchase_assault", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
   break;
   case "iw7_mauler_zm":
-  var_1 thread _id_0A6A::_id_12885("purchase_weapon", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
+  var_01 thread scripts/cp/cp_vo::try_to_play_vo("purchase_weapon", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
   break;
   case "iw7_nrg_zm":
-  var_1 thread _id_0A6A::_id_12885("player_purchase_pistol", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
+  var_01 thread scripts/cp/cp_vo::try_to_play_vo("player_purchase_pistol", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
   break;
   case "iw7_revolver_zm":
-  var_1 thread _id_0A6A::_id_12885("player_purchase_pistol", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
+  var_01 thread scripts/cp/cp_vo::try_to_play_vo("player_purchase_pistol", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
   break;
   case "iw7_ripper_zm":
   case "iw7_ripper_zmr":
-  var_1 thread _id_0A6A::_id_12885("player_purchase_smg", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
+  var_01 thread scripts/cp/cp_vo::try_to_play_vo("player_purchase_smg", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
   break;
   case "iw7_sdfar_zm":
-  var_1 thread _id_0A6A::_id_12885("player_purchase_assault", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
+  var_01 thread scripts/cp/cp_vo::try_to_play_vo("player_purchase_assault", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
   break;
   case "iw7_sdflmg_zm":
-  var_1 thread _id_0A6A::_id_12885("purchase_weapon", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
+  var_01 thread scripts/cp/cp_vo::try_to_play_vo("purchase_weapon", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
   break;
   case "iw7_sdfshotty_zm":
-  var_1 thread _id_0A6A::_id_12885("player_purchase_shotgun", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
+  var_01 thread scripts/cp/cp_vo::try_to_play_vo("player_purchase_shotgun", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
   break;
   case "iw7_shredder_zm_pap1":
   case "iw7_shredder_zm":
-  var_1 thread _id_0A6A::_id_12885("player_purchase_wonder", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
+  var_01 thread scripts/cp/cp_vo::try_to_play_vo("player_purchase_wonder", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
   break;
   case "iw7_sonic_zmr":
   case "iw7_sonic_zm":
-  var_1 thread _id_0A6A::_id_12885("player_purchase_shotgun", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
+  var_01 thread scripts/cp/cp_vo::try_to_play_vo("player_purchase_shotgun", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
   break;
   case "iw7_spas_zm":
-  var_1 thread _id_0A6A::_id_12885("player_purchase_shotgun", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
+  var_01 thread scripts/cp/cp_vo::try_to_play_vo("player_purchase_shotgun", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
   break;
   case "iw7_steeldragon_zm":
-  var_1 thread _id_0A6A::_id_12885("player_purchase_wonder", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
+  var_01 thread scripts/cp/cp_vo::try_to_play_vo("player_purchase_wonder", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
   break;
   case "iw7_ump45_zml":
-  var_1 thread _id_0A6A::_id_12885("player_purchase_smg", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
+  var_01 thread scripts/cp/cp_vo::try_to_play_vo("player_purchase_smg", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
   break;
   case "iw7_spasc_zm":
-  var_1 thread _id_0A6A::_id_12885("player_purchase_shotgun", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
+  var_01 thread scripts/cp/cp_vo::try_to_play_vo("player_purchase_shotgun", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
   break;
   }
 }
 
-_id_383D(var_0) {
-  var_1 = self _meth_8173();
-  var_2 = undefined;
-  var_3 = undefined;
-  var_4 = _id_0A77::_id_80D8(var_0);
+can_purchase_ammo(var_00) {
+  var_01 = self getweaponslistall();
+  var_02 = undefined;
+  var_03 = undefined;
+  var_04 = scripts/cp/utility::getrawbaseweaponname(var_00);
 
-  foreach (var_6 in var_1) {
-  var_3 = _id_0A77::_id_80D8(var_6);
+  foreach (var_06 in var_01) {
+  var_03 = scripts/cp/utility::getrawbaseweaponname(var_06);
 
-  if (var_3 == var_4) {
-  var_2 = var_6;
+  if (var_03 == var_04) {
+  var_02 = var_06;
   break;
   }
   }
 
-  if (isdefined(var_2)) {
-  var_8 = self getweaponammostock(var_2);
-  var_9 = weaponmaxammo(var_2);
-  var_10 = _id_0CFF::_id_D876();
-  var_11 = int(var_10 * var_9);
+  if (isdefined(var_02)) {
+  var_08 = self getweaponammostock(var_02);
+  var_09 = weaponmaxammo(var_02);
+  var_10 = scripts/cp/perks/prestige::prestige_getminammo();
+  var_11 = int(var_10 * var_09);
 
-  if (var_8 < var_11)
+  if (var_08 < var_11)
   return 1;
-  else if (weaponmaxammo(var_2) == weaponclipsize(var_2) && self getweaponammoclip(var_2) < weaponclipsize(var_2))
+  else if (weaponmaxammo(var_02) == weaponclipsize(var_02) && self getweaponammoclip(var_02) < weaponclipsize(var_02))
   return 1;
   else
   return 0;
@@ -1234,124 +1234,124 @@ _id_383D(var_0) {
   return 1;
 }
 
-_id_9A33(var_0) {
+interaction_post_activate_delay(var_00) {
   self endon("disconnect");
 
-  if (_id_9A18(var_0))
+  if (interaction_is_door_buy(var_00))
   return;
 
-  if (_id_9A15(var_0))
+  if (func_9A15(var_00))
   return;
 
-  _id_0A77::_id_1C5D(0);
+  scripts/cp/utility::allow_player_interactions(0);
   wait 1.5;
 
-  if (!_id_0A77::_id_213E())
-  _id_0A77::_id_1C5D(1);
+  if (!scripts/cp/utility::areinteractionsenabled())
+  scripts/cp/utility::allow_player_interactions(1);
 }
 
-_id_50FA() {
+delayed_trigger_unset() {
   wait 0.25;
-  self._id_127BA = undefined;
+  self.triggered = undefined;
 }
 
-_id_E019(var_0) {
-  if (scripts\engine\utility::array_contains(level._id_4B88, var_0))
-  level._id_4B88 = scripts\engine\utility::array_remove(level._id_4B88, var_0);
+remove_from_current_interaction_list(var_00) {
+  if (scripts\engine\utility::array_contains(level.current_interaction_structs, var_00))
+  level.current_interaction_structs = scripts\engine\utility::array_remove(level.current_interaction_structs, var_00);
 }
 
-_id_175C(var_0) {
-  if (!scripts\engine\utility::array_contains(level._id_4B88, var_0))
-  level._id_4B88 = scripts\engine\utility::_id_2279(level._id_4B88, var_0);
+add_to_current_interaction_list(var_00) {
+  if (!scripts\engine\utility::array_contains(level.current_interaction_structs, var_00))
+  level.current_interaction_structs = scripts\engine\utility::array_add(level.current_interaction_structs, var_00);
 }
 
-_id_E01A(var_0, var_1) {
-  var_1._id_55BB = scripts\engine\utility::_id_2279(var_1._id_55BB, var_0);
+remove_from_current_interaction_list_for_player(var_00, var_01) {
+  var_1.disabled_interactions = scripts\engine\utility::array_add(var_1.disabled_interactions, var_00);
 }
 
-_id_175D(var_0, var_1) {
-  var_1._id_55BB = scripts\engine\utility::array_remove(var_1._id_55BB, var_0);
+add_to_current_interaction_list_for_player(var_00, var_01) {
+  var_1.disabled_interactions = scripts\engine\utility::array_remove(var_1.disabled_interactions, var_00);
 }
 
-_id_383E(var_0, var_1, var_2, var_3) {
-  if (isdefined(var_0._id_EE04) && var_0._id_EE04 == "afterlife")
+can_purchase_interaction(var_00, var_01, var_02, var_03) {
+  if (isdefined(var_0.script_location) && var_0.script_location == "afterlife")
   return 1;
 
-  if (_id_0D12::_id_9DDF(self))
+  if (scripts/cp/powers/coop_phaseshift::isentityphaseshifted(self))
   return 0;
 
-  if (isdefined(var_1))
-  var_4 = var_1;
+  if (isdefined(var_01))
+  var_04 = var_01;
   else
-  var_4 = level._id_9A43[var_0.script_noteworthy]._id_46A2;
+  var_04 = level.interactions[var_0.script_noteworthy].cost;
 
-  if (_id_9A1A(var_0)) {
-  switch (self._id_3A52) {
+  if (interaction_is_fortune_teller(var_00)) {
+  switch (self.card_refills) {
   case 0:
-  var_4 = level._id_732C;
+  var_04 = level.fortune_visit_cost_1;
   break;
   case 1:
-  var_4 = level._id_732D;
+  var_04 = level.fortune_visit_cost_2;
   break;
   }
   }
-  else if (_id_9A29(var_0) && !_id_0A6B::_id_385F(self getcurrentweapon())) {
-  if (scripts\engine\utility::_id_9CEE(level.has_picked_up_fuses) && !isdefined(level.placed_alien_fuses))
+  else if (interaction_is_weapon_upgrade(var_00) && !scripts/cp/cp_weapon::can_upgrade(self getcurrentweapon())) {
+  if (scripts\engine\utility::is_true(level.has_picked_up_fuses) && !isdefined(level.placed_alien_fuses))
   return 1;
   else
   return 0;
   }
-  else if (_id_9A1D(var_0)) {
-  if ((_id_0A77::_id_9F02() || level._id_C552) && var_0._id_CA4C == "perk_machine_revive" && !_id_0A77::_id_8BBE("perk_machine_revive") && self._id_F1E7 >= self.max_self_revive_machine_use)
+  else if (interaction_is_perk(var_00)) {
+  if ((scripts/cp/utility::isplayingsolo() || level.only_one_player) && var_0.perk_type == "perk_machine_revive" && !scripts/cp/utility::has_zombie_perk("perk_machine_revive") && self.self_revives_purchased >= self.max_self_revive_machine_use)
   return 0;
   }
-  else if (_id_9A22(var_0)) {
-  var_5 = 0;
+  else if (interaction_is_special_door_buy(var_00)) {
+  var_05 = 0;
 
-  switch (var_0._id_EEA9) {
+  switch (var_0.script_side) {
   case "moon":
-  if (!isdefined(level._id_BB11) || level._id_BB11 < 3)
-  var_5 = 1;
+  if (!isdefined(level.moon_donations) || level.moon_donations < 3)
+  var_05 = 1;
 
   break;
   case "kepler":
-  if (!isdefined(level._id_A585) || level._id_A585 < 3)
-  var_5 = 1;
+  if (!isdefined(level.kepler_donations) || level.kepler_donations < 3)
+  var_05 = 1;
 
   break;
   case "triton":
-  if (!isdefined(level._id_127FE) || level._id_127FE < 3)
-  var_5 = 1;
+  if (!isdefined(level.triton_donations) || level.triton_donations < 3)
+  var_05 = 1;
 
   break;
   }
 
-  if (!var_5)
+  if (!var_05)
   return 0;
   }
-  else if (interaction_is_chi_door(var_0)) {
+  else if (interaction_is_chi_door(var_00)) {
   switch (var_0.script_noteworthy) {
   case "chi_0":
-  if (var_1 != 0)
+  if (var_01 != 0)
   break;
 
-  if (!isdefined(level.kungfu_weapons) || !isdefined(scripts\engine\utility::_id_2291(level.kungfu_weapons[0], var_3)))
+  if (!isdefined(level.kungfu_weapons) || !isdefined(scripts\engine\utility::array_find(level.kungfu_weapons[0], var_03)))
   break;
 
   return 1;
   case "chi_1":
-  if (var_1 != 1)
+  if (var_01 != 1)
   break;
 
-  if (!isdefined(level.kungfu_weapons) || !isdefined(scripts\engine\utility::_id_2291(level.kungfu_weapons[1], var_3)))
+  if (!isdefined(level.kungfu_weapons) || !isdefined(scripts\engine\utility::array_find(level.kungfu_weapons[1], var_03)))
   break;
 
   return 1;
   case "chi_2":
-  if (var_1 != 2)
+  if (var_01 != 2)
   break;
 
-  if (!isdefined(level.kungfu_weapons) || !isdefined(scripts\engine\utility::_id_2291(level.kungfu_weapons[2], var_3)))
+  if (!isdefined(level.kungfu_weapons) || !isdefined(scripts\engine\utility::array_find(level.kungfu_weapons[2], var_03)))
   break;
 
   return 1;
@@ -1359,48 +1359,48 @@ _id_383E(var_0, var_1, var_2, var_3) {
 
   return 0;
   }
-  else if (_id_9A28(var_0)) {
-  var_6 = var_0.script_noteworthy;
+  else if (interaction_is_weapon_buy(var_00)) {
+  var_06 = var_0.script_noteworthy;
 
-  if (var_0._id_EE79 == "tickets") {
-  if (self hasweapon(var_6))
+  if (var_0.script_parameters == "tickets") {
+  if (self hasweapon(var_06))
   return 0;
 
-  self._id_A035 = var_0.script_noteworthy;
-  level._id_12631 = randomint(100);
-  _id_0D45::_id_AF75(level._id_13BD3, self._id_A035, level._id_12631);
+  self.itempicked = var_0.script_noteworthy;
+  level.transactionid = randomint(100);
+  scripts/cp/zombies/zombie_analytics::log_item_purchase_with_tickets(level.wave_num, self.itempicked, level.transactionid);
   }
 
-  var_7 = weaponmaxammo(var_0.script_noteworthy);
-  var_8 = _id_0CFF::_id_D876();
-  var_9 = int(var_8 * var_7);
-  var_10 = self getweaponammostock(var_6);
+  var_07 = weaponmaxammo(var_0.script_noteworthy);
+  var_08 = scripts/cp/perks/prestige::prestige_getminammo();
+  var_09 = int(var_08 * var_07);
+  var_10 = self getweaponammostock(var_06);
 
-  if (var_10 >= var_9)
+  if (var_10 >= var_09)
   return 0;
   }
 
-  if (var_0._id_EE79 == "tickets") {
-  if (self._id_C206 >= var_4)
+  if (var_0.script_parameters == "tickets") {
+  if (self.num_tickets >= var_04)
   return 1;
 
   return 0;
   }
 
-  if (_id_0A63::_id_D0BB(var_4, var_2))
+  if (scripts/cp/cp_persistence::player_has_enough_currency(var_04, var_02))
   return 1;
 
   return 0;
 }
 
-_id_11449(var_0, var_1) {
-  _id_0A63::_id_11445(var_0, 1, var_1);
+take_player_money(var_00, var_01) {
+  scripts/cp/cp_persistence::take_player_currency(var_00, 1, var_01);
 }
 
-_id_FF5A(var_0) {
-  if (!isdefined(var_0)) {}
+should_interaction_fill_consumable_meter(var_00) {
+  if (!isdefined(var_00)) {}
 
-  switch (var_0) {
+  switch (var_00) {
   case "wondercard_machine":
   case "bleedoutPenalty":
   case "atm":
@@ -1410,34 +1410,34 @@ _id_FF5A(var_0) {
   }
 }
 
-_id_5030(var_0, var_1) {}
+func_5030(var_00, var_01) {}
 
-_id_7DBA(var_0, var_1) {
-  var_2 = level._id_9A43[var_0.script_noteworthy]._id_46A2;
-  var_3 = _id_0A77::_id_80D8(var_0.script_noteworthy);
-  var_4 = var_1 getcurrentweapon();
-  var_5 = _id_0A77::_id_7DF7(var_4);
-  var_6 = weaponmaxammo(var_4);
-  var_7 = var_1 _id_0CFF::_id_D876();
-  var_8 = int(var_7 * var_6);
-  var_9 = var_1 getweaponammostock(var_4);
-  var_10 = self _meth_8173();
+func_7DBA(var_00, var_01) {
+  var_02 = level.interactions[var_0.script_noteworthy].cost;
+  var_03 = scripts/cp/utility::getrawbaseweaponname(var_0.script_noteworthy);
+  var_04 = var_01 getcurrentweapon();
+  var_05 = scripts/cp/utility::getbaseweaponname(var_04);
+  var_06 = weaponmaxammo(var_04);
+  var_07 = var_01 scripts/cp/perks/prestige::prestige_getminammo();
+  var_08 = int(var_07 * var_06);
+  var_09 = var_01 getweaponammostock(var_04);
+  var_10 = self getweaponslistall();
 
   foreach (var_12 in var_10) {
-  var_13 = _id_0A77::_id_80D8(var_12);
+  var_13 = scripts/cp/utility::getrawbaseweaponname(var_12);
 
-  if (var_13 == _id_0A77::_id_80D8(var_0.script_noteworthy)) {
+  if (var_13 == scripts/cp/utility::getrawbaseweaponname(var_0.script_noteworthy)) {
   var_14 = var_12;
-  var_9 = self getweaponammostock(var_14);
-  var_6 = weaponmaxammo(var_14);
-  var_8 = int(var_7 * var_6);
+  var_09 = self getweaponammostock(var_14);
+  var_06 = weaponmaxammo(var_14);
+  var_08 = int(var_07 * var_06);
   }
   }
 
-  if (var_0._id_EE79 == "tickets")
-  return level._id_9A12[var_0.script_noteworthy];
+  if (var_0.script_parameters == "tickets")
+  return level.interaction_hintstrings[var_0.script_noteworthy];
 
-  switch (var_2) {
+  switch (var_02) {
   case 250:
   return &"CP_ZMB_INTERACTIONS_TICKETS_AMMO";
   case 1500:
@@ -1450,159 +1450,159 @@ _id_7DBA(var_0, var_1) {
   }
 }
 
-_id_502F(var_0, var_1) {
-  if (var_1 _id_0A6B::_id_8BBB(var_0.script_noteworthy))
-  return _id_7DBA(var_0, var_1);
+func_502F(var_00, var_01) {
+  if (var_01 scripts/cp/cp_weapon::has_weapon_variation(var_0.script_noteworthy))
+  return func_7DBA(var_00, var_01);
 
   return undefined;
 }
 
-_id_9A3D() {
+func_9A3D() {
   level endon("game_ended");
 
   for (;;) {
-  level waittill("interaction", var_0, var_1, var_2);
+  level waittill("interaction", var_00, var_01, var_02);
 
-  switch (var_0) {
+  switch (var_00) {
   case "wall_buy":
-  if (isdefined(var_2._id_DB02)) {
+  if (isdefined(var_2.purchasing_ammo)) {
   if (soundexists("purchase_ammo"))
-  var_2 playlocalsound("purchase_ammo");
+  var_02 playlocalsound("purchase_ammo");
   }
   else if (soundexists("purchase_weapon"))
-  var_2 playlocalsound("purchase_weapon");
+  var_02 playlocalsound("purchase_weapon");
 
   break;
   case "purchase":
-  var_3 = _id_7A4B(var_1, var_2);
+  var_03 = func_7A4B(var_01, var_02);
 
-  if (isdefined(var_3) && soundexists(var_3))
-  var_2 playlocalsound(var_3);
+  if (isdefined(var_03) && soundexists(var_03))
+  var_02 playlocalsound(var_03);
 
   break;
   case "purchase_denied":
   if (var_1.name == "jaroslav_machine" && soundexists("ui_consumable_purchase_deny"))
-  var_2 playlocalsound("ui_consumable_purchase_deny");
+  var_02 playlocalsound("ui_consumable_purchase_deny");
   else if (var_1.name == "lost_and_found" && soundexists("lost_and_found_deny"))
-  var_2 playlocalsound("lost_and_found_deny");
+  var_02 playlocalsound("lost_and_found_deny");
   else if (soundexists("trap_control_panel_deny") && var_1.name == "beamtrap" || var_1.name == "interaction_discoballtrap" || var_1.name == "scrambler" || var_1.name == "blackhole_trap" || var_1.name == "rockettrap")
-  var_2 playlocalsound("trap_control_panel_deny");
+  var_02 playlocalsound("trap_control_panel_deny");
   else if (soundexists("purchase_deny"))
-  var_2 playlocalsound("purchase_deny");
+  var_02 playlocalsound("purchase_deny");
 
   break;
   }
   }
 }
 
-_id_7A4B(var_0, var_1) {
-  var_2 = [];
+func_7A4B(var_00, var_01) {
+  var_02 = [];
 
   switch (var_0.name) {
   case "secure_window":
   return undefined;
   case "lost_and_found":
-  var_2 = ["lost_and_found_purchase"];
+  var_02 = ["lost_and_found_purchase"];
   break;
   case "rockettrap":
   case "blackhole_trap":
   case "scrambler":
   case "interaction_discoballtrap":
   case "beamtrap":
-  var_2 = ["trap_control_panel_purchase"];
+  var_02 = ["trap_control_panel_purchase"];
   break;
   case "sliding_door":
   case "debris":
-  var_2 = ["purchase_door"];
+  var_02 = ["purchase_door"];
   break;
   case "team_door_switch":
-  var_2 = ["purchase_door"];
+  var_02 = ["purchase_door"];
   break;
   case "atm_deposit":
-  var_2 = ["atm_deposit"];
+  var_02 = ["atm_deposit"];
   break;
   case "atm_withdrawal":
-  var_2 = ["atm_withdrawal"];
+  var_02 = ["atm_withdrawal"];
   break;
   case "repair_kevin":
   case "kevin_battery":
   case "kevin_head":
   case "souvenir_pickup":
-  var_2 = ["zmb_item_pickup"];
+  var_02 = ["zmb_item_pickup"];
   break;
   case "medium_ticket_prize":
   case "small_ticket_prize":
   case "iw7_forgefreeze_zm+forgefreezealtfire":
   case "zfreeze_semtex_mp":
-  var_2 = ["purchase_ticket"];
+  var_02 = ["purchase_ticket"];
   break;
   case "large_ticket_prize":
-  var_2 = ["ark_purchase"];
+  var_02 = ["ark_purchase"];
   break;
   case "ark_quest_station":
-  var_2 = ["ark_turn_in"];
+  var_02 = ["ark_turn_in"];
   break;
   }
 
   if (!var_2.size)
   return undefined;
 
-  return scripts\engine\utility::_id_DC6B(var_2);
+  return scripts\engine\utility::random(var_02);
 }
 
-_id_9A34(var_0) {
-  if (!isdefined(var_0._id_D6B3))
+interaction_post_activate_update(var_00) {
+  if (!isdefined(var_0.post_activate_update))
   return;
 
   if (isdefined(level.interaction_post_activate_update_func)) {
-  level thread [[level.interaction_post_activate_update_func]](var_0, self);
+  level thread [[level.interaction_post_activate_update_func]](var_00, self);
   return;
   }
 
-  if (isdefined(var_0._id_10485)) {
-  var_0._id_1048E delete();
-  var_0._id_1048E = spawn("script_model", var_0._id_1048A);
-  var_0._id_1048E setmodel(var_0._id_10489);
+  if (isdefined(var_0.souvenir)) {
+  var_0.souvenir_toy delete();
+  var_0.souvenir_toy = spawn("script_model", var_0.souvenir_origin);
+  var_0.souvenir_toy setmodel(var_0.souvenir_model);
   var_0.script_noteworthy = "crafting_station";
-  var_0._id_E1B9 = 1;
-  var_0._id_D776 = 1;
-  var_0._id_EE79 = "requires_power";
+  var_0.requires_power = 1;
+  var_0.powered_on = 1;
+  var_0.script_parameters = "requires_power";
   var_0.name = "crafting_station";
 
-  if (isdefined(var_0._id_10486))
-  var_0._id_10486 delete();
+  if (isdefined(var_0.souvenir_fx))
+  var_0.souvenir_fx delete();
 
-  if (_id_0A77::_id_9D05())
+  if (scripts/cp/utility::is_valid_player())
   self playlocalsound("zmb_item_pickup");
 
-  var_0._id_10485 = undefined;
-  var_0._id_D6B3 = undefined;
-  var_0._id_D742 = undefined;
-  var_0._id_47B2 = undefined;
+  var_0.souvenir = undefined;
+  var_0.post_activate_update = undefined;
+  var_0.power_name = undefined;
+  var_0.crafted_souvenir = undefined;
   }
 }
 
-_id_9A26(var_0) {
+func_9A26(var_00) {
   return var_0.script_noteworthy == "trap_electric" || var_0.script_noteworthy == "trap_firebarrel";
 }
 
-_id_9A2A(var_0) {
+interaction_is_white_ark(var_00) {
   return var_0.script_noteworthy == "white_ark";
 }
 
-_id_9A14(var_0) {
+interaction_is_ark_quest_station(var_00) {
   return var_0.script_noteworthy == "ark_quest_station";
 }
 
-_id_9A15(var_0) {
+func_9A15(var_00) {
   return var_0.script_noteworthy == "atm_withdrawal" || var_0.script_noteworthy == "atm_deposit";
 }
 
-_id_9A1C(var_0) {
+func_9A1C(var_00) {
   return var_0.script_noteworthy == "neil_head";
 }
 
-interactionislostandfound(var_0) {
+interactionislostandfound(var_00) {
   if (isdefined(var_0.script_noteworthy) && var_0.script_noteworthy == "lost_and_found")
   return 1;
 
@@ -1612,296 +1612,296 @@ interactionislostandfound(var_0) {
   return 0;
 }
 
-_id_9A2B(var_0) {
+interaction_is_window_entrance(var_00) {
   return var_0.script_noteworthy == "secure_window";
 }
 
-_id_9A1E(var_0) {
+func_9A1E(var_00) {
   return var_0.script_noteworthy == "pillage_item";
 }
 
-_id_9A19(var_0) {
+func_9A19(var_00) {
   return var_0.script_noteworthy == "fast_travel";
 }
 
-_id_9A17(var_0) {
+interaction_is_crafting_station(var_00) {
   return var_0.script_noteworthy == "crafting_station";
 }
 
-_id_9A1B(var_0) {
+interaction_is_grenade_wall_buy(var_00) {
   return var_0.script_noteworthy == "power_bioSpike" || var_0.script_noteworthy == "power_c4";
 }
 
-_id_9A16(var_0) {
+func_9A16(var_00) {
   return var_0.script_noteworthy == "crafting_pickup";
 }
 
-_id_9A1A(var_0) {
+interaction_is_fortune_teller(var_00) {
   return var_0.script_noteworthy == "jaroslav_machine";
 }
 
-_id_9A1D(var_0) {
-  return isdefined(var_0._id_CA4C);
+interaction_is_perk(var_00) {
+  return isdefined(var_0.perk_type);
 }
 
-_id_9A42(var_0) {
-  return var_0._id_E1B9 && !var_0._id_D776;
+func_9A42(var_00) {
+  return var_0.requires_power && !var_0.powered_on;
 }
 
-_id_9A21(var_0) {
-  return isdefined(var_0._id_47B2);
+interaction_is_souvenir(var_00) {
+  return isdefined(var_0.crafted_souvenir);
 }
 
-_id_D0C5(var_0, var_1) {
-  if (isdefined(var_1._id_4B5C))
-  return var_1._id_4B5C._id_0195 == var_0.script_noteworthy;
+player_has_souvenir(var_00, var_01) {
+  if (isdefined(var_1.current_crafted_inventory))
+  return var_1.current_crafted_inventory.item == var_0.script_noteworthy;
 
   return 0;
 }
 
-_id_9A2C(var_0) {
+func_9A2C(var_00) {
   return var_0.script_noteworthy == "crafted_windowtrap";
 }
 
-interaction_is_challenge_station(var_0) {
-  return isdefined(var_0._id_86A2) && var_0._id_86A2 == "challenge";
+interaction_is_challenge_station(var_00) {
+  return isdefined(var_0.groupname) && var_0.groupname == "challenge";
 }
 
-_id_9A27(var_0, var_1) {
-  if (var_1 _meth_84D9())
+interaction_is_valid(var_00, var_01) {
+  if (var_01 isinphase())
   return 0;
 
-  if (isdefined(var_0._id_127BA))
+  if (isdefined(var_0.triggered))
   return 0;
 
-  if (!scripts\engine\utility::array_contains(level._id_4B88, var_0))
+  if (!scripts\engine\utility::array_contains(level.current_interaction_structs, var_00))
   return 0;
 
-  if (scripts\engine\utility::_id_9CEE(var_0._id_C74D)) {
-  level notify("player_accessed_interaction_on_cooldown", var_1);
+  if (scripts\engine\utility::is_true(var_0.out_of_order)) {
+  level notify("player_accessed_interaction_on_cooldown", var_01);
   return 0;
   }
 
-  if (scripts\engine\utility::_id_9CEE(var_0._id_93A8))
+  if (scripts\engine\utility::is_true(var_0.in_use))
   return 0;
 
-  if (_id_9A42(var_0)) {
-  level notify("player_accessed_nonpowered_interaction", var_1);
+  if (func_9A42(var_00)) {
+  level notify("player_accessed_nonpowered_interaction", var_01);
 
-  if (isdefined(var_0._id_CA4C) && soundexists("perk_machine_deny"))
-  var_1 playlocalsound("perk_machine_deny");
+  if (isdefined(var_0.perk_type) && soundexists("perk_machine_deny"))
+  var_01 playlocalsound("perk_machine_deny");
   else
-  var_1 playlocalsound("purchase_deny");
+  var_01 playlocalsound("purchase_deny");
 
   return 0;
   }
 
-  if (isdefined(var_0._id_4622)) {
-  level notify("player_accessed_interaction_on_cooldown", var_1);
+  if (isdefined(var_0.cooling_down)) {
+  level notify("player_accessed_interaction_on_cooldown", var_01);
   return 0;
   }
 
-  if (scripts\engine\utility::array_contains(var_1._id_55BB, var_0))
+  if (scripts\engine\utility::array_contains(var_1.disabled_interactions, var_00))
   return 0;
 
   return 1;
 }
 
-_id_9A29(var_0) {
+interaction_is_weapon_upgrade(var_00) {
   return var_0.script_noteworthy == "weapon_upgrade";
 }
 
-_id_9A28(var_0) {
+interaction_is_weapon_buy(var_00) {
   if (isdefined(var_0.name))
   return var_0.name == "wall_buy";
   else
   return 0;
 }
 
-_id_9A18(var_0) {
+interaction_is_door_buy(var_00) {
   return var_0.script_noteworthy == "debris_350" || var_0.script_noteworthy == "debris_750" || var_0.script_noteworthy == "debris_1000" || var_0.script_noteworthy == "debris_1250" || var_0.script_noteworthy == "debris_1500" || var_0.script_noteworthy == "debris_2000" || var_0.script_noteworthy == "team_door_switch" || var_0.script_noteworthy == "team_door";
 }
 
-_id_9A22(var_0) {
+interaction_is_special_door_buy(var_00) {
   return var_0.script_noteworthy == "power_door_sliding" || var_0.script_noteworthy == "team_door_switch" || var_0.script_noteworthy == "team_door";
 }
 
-interaction_is_chi_door(var_0) {
+interaction_is_chi_door(var_00) {
   return var_0.script_noteworthy == "chi_0" || var_0.script_noteworthy == "chi_1" || var_0.script_noteworthy == "chi_2";
 }
 
-_id_9A24(var_0) {
+interaction_is_ticket_buy(var_00) {
   return var_0.script_noteworthy == "small_ticket_prize" || var_0.script_noteworthy == "medium_ticket_prize" || var_0.script_noteworthy == "arcade_counter_grenade" || var_0.script_noteworthy == "arcade_counter_ammo" || var_0.script_noteworthy == "large_ticket_prize" || var_0.script_noteworthy == "zfreeze_semtex_mp" || var_0.script_noteworthy == "iw7_forgefreeze_zm+forgefreezealtfire" || var_0.script_noteworthy == "gold_teeth";
 }
 
-_id_9A1F(var_0) {
-  return isdefined(var_0._id_D742);
+func_9A1F(var_00) {
+  return isdefined(var_0.power_name);
 }
 
-_id_D0C3(var_0) {
-  return _id_0D15::_id_8C17(var_0._id_D742);
+func_D0C3(var_00) {
+  return scripts/cp/powers/coop_powers::hasequipment(var_0.power_name);
 }
 
-_id_3867(var_0) {
-  if (_id_0A77::_id_8BBE(var_0._id_CA4C))
+can_use_perk(var_00) {
+  if (scripts/cp/utility::has_zombie_perk(var_0.perk_type))
   return 0;
-  else if (self._id_F1E7 >= self.max_self_revive_machine_use && var_0._id_CA4C == "perk_machine_revive")
+  else if (self.self_revives_purchased >= self.max_self_revive_machine_use && var_0.perk_type == "perk_machine_revive")
   return 0;
-  else if (isdefined(self._id_13FA4) && self._id_13FA4.size > 4)
+  else if (isdefined(self.zombies_perks) && self.zombies_perks.size > 4)
   return 0;
 
   return 1;
 }
 
-_id_9A3C(var_0, var_1, var_2, var_3) {
-  thread interaction_fail_internal(var_0, var_1, var_2, var_3);
+interaction_show_fail_reason(var_00, var_01, var_02, var_03) {
+  thread interaction_fail_internal(var_00, var_01, var_02, var_03);
 }
 
-interaction_fail_internal(var_0, var_1, var_2, var_3) {
+interaction_fail_internal(var_00, var_01, var_02, var_03) {
   self endon("disconnect");
-  level notify("interaction", "purchase_denied", level._id_9A43[var_0.script_noteworthy], self);
-  self._id_50BC = 1;
-  self._id_9A3F sethintstring(var_1);
+  level notify("interaction", "purchase_denied", level.interactions[var_0.script_noteworthy], self);
+  self.delay_hint = 1;
+  self.interaction_trigger sethintstring(var_01);
   wait 1;
-  self._id_50BC = undefined;
-  _id_F422(self._id_9A3F, var_0);
+  self.delay_hint = undefined;
+  func_F422(self.interaction_trigger, var_00);
 }
 
-_id_554F(var_0) {
-  var_1 = scripts\engine\utility::_id_8180(var_0.script_noteworthy, "script_noteworthy");
+disable_linked_interactions(var_00) {
+  var_01 = scripts\engine\utility::getstructarray(var_0.script_noteworthy, "script_noteworthy");
 
-  foreach (var_3 in var_1) {
-  if (var_3._id_0334 == var_0._id_0334) {
-  _id_0D45::_id_AF74(var_3.name, 0);
-  _id_E019(var_3);
-  }
-  }
-}
-
-_id_6214(var_0) {
-  var_1 = scripts\engine\utility::_id_8180(var_0.script_noteworthy, "script_noteworthy");
-
-  foreach (var_3 in var_1) {
-  if (var_3._id_0334 == var_0._id_0334) {
-  _id_0D45::_id_AF74(var_3.name, 1);
-  _id_175C(var_3);
+  foreach (var_03 in var_01) {
+  if (var_3.target == var_0.target) {
+  scripts/cp/zombies/zombie_analytics::func_AF74(var_3.name, 0);
+  remove_from_current_interaction_list(var_03);
   }
   }
 }
 
-disable_like_interactions(var_0) {
-  var_1 = scripts\engine\utility::_id_8180(var_0.script_noteworthy, "script_noteworthy");
+enable_linked_interactions(var_00) {
+  var_01 = scripts\engine\utility::getstructarray(var_0.script_noteworthy, "script_noteworthy");
 
-  foreach (var_3 in var_1) {
-  _id_0D45::_id_AF74(var_3.name, 0);
-  _id_E019(var_3);
+  foreach (var_03 in var_01) {
+  if (var_3.target == var_0.target) {
+  scripts/cp/zombies/zombie_analytics::func_AF74(var_3.name, 1);
+  add_to_current_interaction_list(var_03);
+  }
   }
 }
 
-enable_like_interactions(var_0) {
-  var_1 = scripts\engine\utility::_id_8180(var_0.script_noteworthy, "script_noteworthy");
+disable_like_interactions(var_00) {
+  var_01 = scripts\engine\utility::getstructarray(var_0.script_noteworthy, "script_noteworthy");
 
-  foreach (var_3 in var_1) {
-  _id_0D45::_id_AF74(var_3.name, 1);
-  _id_175C(var_3);
+  foreach (var_03 in var_01) {
+  scripts/cp/zombies/zombie_analytics::func_AF74(var_3.name, 0);
+  remove_from_current_interaction_list(var_03);
   }
 }
 
-_id_9A0D(var_0, var_1) {
-  var_2 = scripts\engine\utility::_id_8180(var_0.script_noteworthy, "script_noteworthy");
+enable_like_interactions(var_00) {
+  var_01 = scripts\engine\utility::getstructarray(var_0.script_noteworthy, "script_noteworthy");
 
-  foreach (var_4 in var_2) {
-  if (var_4._id_0334 == var_0._id_0334)
-  var_4._id_4622 = 1;
+  foreach (var_03 in var_01) {
+  scripts/cp/zombies/zombie_analytics::func_AF74(var_3.name, 1);
+  add_to_current_interaction_list(var_03);
+  }
+}
+
+interaction_cooldown(var_00, var_01) {
+  var_02 = scripts\engine\utility::getstructarray(var_0.script_noteworthy, "script_noteworthy");
+
+  foreach (var_04 in var_02) {
+  if (var_4.target == var_0.target)
+  var_4.cooling_down = 1;
   }
 
-  if (scripts\engine\utility::_id_9CEE(level._id_4614))
+  if (scripts\engine\utility::is_true(level.func_4614))
   wait 1;
   else
-  level scripts\engine\utility::_id_13736(var_1, "override_cooldowns");
+  level scripts\engine\utility::waittill_any_timeout(var_01, "override_cooldowns");
 
-  foreach (var_4 in var_2) {
-  if (var_4._id_0334 == var_0._id_0334)
-  var_4._id_4622 = undefined;
+  foreach (var_04 in var_02) {
+  if (var_4.target == var_0.target)
+  var_4.cooling_down = undefined;
   }
 
-  var_8 = 5184;
+  var_08 = 5184;
 
   foreach (var_10 in level.players) {
-  foreach (var_4 in var_2) {
-  if (distancesquared(var_10.origin, var_4.origin) >= var_8)
+  foreach (var_04 in var_02) {
+  if (distancesquared(var_10.origin, var_4.origin) >= var_08)
   continue;
 
-  var_10 _id_DE6E();
+  var_10 refresh_interaction();
   }
   }
 }
 
-_id_7A90(var_0) {
-  var_1 = [];
-  var_2 = scripts\engine\utility::_id_8180(var_0.script_noteworthy, "script_noteworthy");
+get_linked_interactions(var_00) {
+  var_01 = [];
+  var_02 = scripts\engine\utility::getstructarray(var_0.script_noteworthy, "script_noteworthy");
 
-  foreach (var_4 in var_2) {
-  if (var_4._id_0334 == var_0._id_0334)
-  var_1[var_1.size] = var_4;
+  foreach (var_04 in var_02) {
+  if (var_4.target == var_0.target)
+  var_1[var_1.size] = var_04;
   }
 
-  return var_1;
+  return var_01;
 }
 
-_id_DE6E() {
-  if (isdefined(self._id_9A3F.name))
-  _id_0D45::_id_AF74(self._id_9A3F.name, 0);
+refresh_interaction() {
+  if (isdefined(self.interaction_trigger.name))
+  scripts/cp/zombies/zombie_analytics::func_AF74(self.interaction_trigger.name, 0);
 
   self notify("stop_interaction_logic");
-  self._id_A8D3 = undefined;
-  self._id_9A3F _meth_852E();
+  self.last_interaction_point = undefined;
+  self.interaction_trigger sethintstringparams();
   self setclientomnvar("zm_interaction_cost", -1);
 }
 
-_id_9A3A(var_0) {
-  return scripts\engine\utility::_id_9CEE(var_0._id_E1B9) && isdefined(var_0._id_D71C);
+func_9A3A(var_00) {
+  return scripts\engine\utility::is_true(var_0.requires_power) && isdefined(var_0.power_area);
 }
 
-_id_55A2() {
-  var_0 = scripts\engine\utility::_id_8180("interaction", "targetname");
+func_55A2() {
+  var_00 = scripts\engine\utility::getstructarray("interaction", "targetname");
 
-  foreach (var_2 in var_0) {
-  if (_id_9A28(var_2) || _id_9A1B(var_2) || _id_9A24(var_2) || isdefined(var_2._id_EE79) && var_2._id_EE79 == "tickets") {
-  var_2._id_55BA = 1;
-  _id_0D45::_id_AF74(var_2.name, 0);
+  foreach (var_02 in var_00) {
+  if (interaction_is_weapon_buy(var_02) || interaction_is_grenade_wall_buy(var_02) || interaction_is_ticket_buy(var_02) || isdefined(var_2.script_parameters) && var_2.script_parameters == "tickets") {
+  var_2.disabled = 1;
+  scripts/cp/zombies/zombie_analytics::func_AF74(var_2.name, 0);
   continue;
   }
   }
 }
 
-_id_55A3(var_0) {
-  var_1 = scripts\engine\utility::_id_8180("interaction", "targetname");
+func_55A3(var_00) {
+  var_01 = scripts\engine\utility::getstructarray("interaction", "targetname");
 
-  foreach (var_3 in var_1) {
-  if (_id_9A28(var_3) || _id_9A1B(var_3) || _id_9A24(var_3) || isdefined(var_3._id_EE79) && var_3._id_EE79 == "tickets") {
-  _id_0D45::_id_AF74(var_3.name, 0);
-  _id_E01A(var_3, var_0);
+  foreach (var_03 in var_01) {
+  if (interaction_is_weapon_buy(var_03) || interaction_is_grenade_wall_buy(var_03) || interaction_is_ticket_buy(var_03) || isdefined(var_3.script_parameters) && var_3.script_parameters == "tickets") {
+  scripts/cp/zombies/zombie_analytics::func_AF74(var_3.name, 0);
+  remove_from_current_interaction_list_for_player(var_03, var_00);
   continue;
   }
   }
 }
 
-_id_6255(var_0) {
-  var_1 = scripts\engine\utility::_id_8180("interaction", "targetname");
+func_6255(var_00) {
+  var_01 = scripts\engine\utility::getstructarray("interaction", "targetname");
 
-  foreach (var_3 in var_1) {
-  if (_id_9A28(var_3) || _id_9A1B(var_3) || _id_9A24(var_3) || isdefined(var_3._id_EE79) && var_3._id_EE79 == "tickets") {
-  _id_0D45::_id_AF74(var_3.name, 1);
-  _id_175D(var_3, var_0);
+  foreach (var_03 in var_01) {
+  if (interaction_is_weapon_buy(var_03) || interaction_is_grenade_wall_buy(var_03) || interaction_is_ticket_buy(var_03) || isdefined(var_3.script_parameters) && var_3.script_parameters == "tickets") {
+  scripts/cp/zombies/zombie_analytics::func_AF74(var_3.name, 1);
+  add_to_current_interaction_list_for_player(var_03, var_00);
   continue;
   }
   }
 }
 
-_id_1048D(var_0, var_1) {
-  foreach (var_3 in level.players) {
-  var_3 thread _id_0A57::showsplash(var_0, undefined, var_1);
+souvenir_team_splash(var_00, var_01) {
+  foreach (var_03 in level.players) {
+  var_03 thread scripts/cp/cp_hud_message::showsplash(var_00, undefined, var_01);
   wait 0.1;
   }
 }

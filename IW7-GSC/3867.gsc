@@ -352,7 +352,7 @@ func_F299(param_00) {
 	self.var_28 = lib_0F27::func_1B40(param_00);
 	var_01 = self.var_29 > 2;
 	lib_0F1C::func_6837(!var_01);
-	self._func_182 = !var_01;
+	self.__func_182 = !var_01;
 }
 
 func_F345() {

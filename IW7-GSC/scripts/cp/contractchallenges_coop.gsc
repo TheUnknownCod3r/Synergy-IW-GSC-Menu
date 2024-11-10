@@ -106,7 +106,7 @@ contractkills(param_00) {
 			var_13 = var_02 scripts\cp\utility::is_trap(var_01,var_05);
 		}
 
-		var_14 = function_0107(var_04);
+		var_14 = isexplosivedamagemod(var_04);
 		if(var_14) {
 			if(issubstr(var_05,"shuriken")) {
 				var_14 = 0;

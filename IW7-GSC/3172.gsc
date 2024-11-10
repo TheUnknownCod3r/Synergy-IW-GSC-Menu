@@ -106,7 +106,7 @@ donotetracks_vsplayer(param_00,param_01) {
 									var_0C = 10;
 									var_0D = 0.7;
 									var_0E = 0.5;
-									function_01C5("player_meleeDamageMultiplier",0.05);
+									setsaveddvar("player_meleeDamageMultiplier",0.05);
 								}
 		
 								self melee(undefined,var_09,sqrt(var_08),var_0A,var_0B);
@@ -130,7 +130,7 @@ donotetracks_vsplayer(param_00,param_01) {
 								}
 								else
 								{
-									function_01C5("player_meleeDamageMultiplier",level.playermeleedamagemultiplier_dvar);
+									setsaveddvar("player_meleeDamageMultiplier",level.playermeleedamagemultiplier_dvar);
 								}
 							}
 						}
@@ -312,7 +312,7 @@ func_67D6(param_00,param_01,param_02,param_03) {
 
 	if(var_08) {
 		var_0B = var_04.angles - (0,var_0A * 0.5,0);
-		var_0C = function_00CE(var_04.origin,var_0B,var_06);
+		var_0C = getstartorigin(var_04.origin,var_0B,var_06);
 	}
 	else
 	{
@@ -353,9 +353,9 @@ func_38A7(param_00) {
 	var_02 = var_01.origin;
 	var_03 = self.origin - var_02;
 	var_04 = vectortoangles(var_03);
-	var_05 = function_00CE(var_02,var_04,param_00);
+	var_05 = getstartorigin(var_02,var_04,param_00);
 	self.melee.areanynavvolumesloaded = var_05;
-	self.melee.var_10D6D = function_00CD(var_02,var_04,param_00);
+	self.melee.var_10D6D = getstartangles(var_02,var_04,param_00);
 	var_01.melee.var_10E0E = var_04[1];
 	return 1;
 }

@@ -27,7 +27,7 @@ func_E2B3() {
 	level.player getrankinfoxpamt();
 	var_01 = scripts\sp\_endmission::fireweapon(level.script);
 	if(isdefined(var_01)) {
-		function_0039(var_01,0,0);
+		changelevel(var_01,0,0);
 		return;
 	}
 

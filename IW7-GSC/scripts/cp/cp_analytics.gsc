@@ -11,12 +11,12 @@ start_game_type(param_00,param_01,param_02) {
 
 init_matchdata(param_00,param_01) {
 	setmatchdatadef(param_00);
-	function_01A9(param_01);
+	setclientmatchdatadef(param_01);
 	setmatchdata("commonMatchData","map",level.script);
 	setmatchdata("commonMatchData","gametype",getdvar("ui_gametype"));
-	setmatchdata("commonMatchData","buildVersion",function_007F());
-	setmatchdata("commonMatchData","buildNumber",function_007E());
-	setmatchdata("commonMatchData","utcStartTimeSeconds",function_00D2());
+	setmatchdata("commonMatchData","buildVersion",getbuildversion());
+	setmatchdata("commonMatchData","buildNumber",getbuildnumber());
+	setmatchdata("commonMatchData","utcStartTimeSeconds",getsystemtime());
 	setmatchdata("commonMatchData","isPrivateMatch",getdvarint("xblive_privatematch"));
 	setmatchdata("commonMatchData","isRankedMatch",1);
 	setmatchdataid();
@@ -170,7 +170,7 @@ endgame(param_00,param_01) {
 	}
 
 	sendmatchdata();
-	function_01A3();
+	sendclientmatchdata();
 }
 
 set_player_data(param_00) {
@@ -201,7 +201,7 @@ set_game_data(param_00,param_01) {
 	}
 
 	setmatchdata("commonMatchData","playerCountEnd",level.players.size);
-	setmatchdata("commonMatchData","utcEndTimeSeconds",function_00D2());
+	setmatchdata("commonMatchData","utcEndTimeSeconds",getsystemtime());
 	setmatchdata("commonMatchData","playerCount",validate_byte(level.player_count));
 	setmatchdata("commonMatchData","playerCountLeft",validate_byte(level.player_count_left));
 	setmatchdata("playerCountMaxConcurrent",validate_byte(level.max_concurrent_player_count));

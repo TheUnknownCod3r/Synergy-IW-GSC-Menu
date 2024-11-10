@@ -4,61 +4,61 @@
 ***************************************/
 
 init() {
-  level._id_F26E = [];
-  level._id_F26E["sentry_minigun"] = "sentry";
-  level._id_F26E["sam_turret"] = "sam_turret";
-  level._id_F26E["super_trophy"] = "super_trophy";
-  level._id_F26E["sentry_shock"] = "sentry_shock";
-  scripts\mp\killstreaks\killstreaks::registerkillstreak("sentry_shock", ::_id_12902);
-  _id_0AC7::_id_DF07("sentry_shock", ["passive_extra_health", "passive_increased_duration"]);
-  level._id_F26B = [];
-  level._id_F26B["super_trophy"] = spawnstruct();
-  level._id_F26B["super_trophy"].health = 999999;
-  level._id_F26B["super_trophy"].maxhealth = 100;
-  level._id_F26B["super_trophy"]._id_F269 = "sentry";
-  level._id_F26B["super_trophy"]._id_F268 = "sentry_offline";
-  level._id_F26B["super_trophy"]._id_039B = "sentry_laser_mp";
-  level._id_F26B["super_trophy"]._id_B91A = "super_trophy_mp";
-  level._id_F26B["super_trophy"]._id_B920 = "super_trophy_mp_placement";
-  level._id_F26B["super_trophy"]._id_B919 = "super_trophy_mp_placement_fail";
-  level._id_F26B["super_trophy"]._id_B91D = "super_trophy_mp";
-  level._id_F26B["super_trophy"]._id_017B = &"SENTRY_PICKUP";
-  level._id_F26B["super_trophy"]._id_016F = 1;
-  level._id_F26B["super_trophy"]._id_115EB = "used_super_trophy";
-  level._id_F26B["super_trophy"]._id_10085 = 0;
-  level._id_F26B["super_trophy"]._id_ACB6 = "tag_fx";
-  level._id_F26B["sentry_shock"] = spawnstruct();
-  level._id_F26B["sentry_shock"].health = 999999;
-  level._id_F26B["sentry_shock"].maxhealth = 670;
-  level._id_F26B["sentry_shock"]._id_32C1 = 20;
-  level._id_F26B["sentry_shock"]._id_32C0 = 120;
-  level._id_F26B["sentry_shock"]._id_C9D3 = 0.15;
-  level._id_F26B["sentry_shock"]._id_C9D1 = 0.35;
-  level._id_F26B["sentry_shock"]._id_F269 = "sentry";
-  level._id_F26B["sentry_shock"]._id_F268 = "sentry_offline";
-  level._id_F26B["sentry_shock"]._id_11901 = 90.0;
-  level._id_F26B["sentry_shock"]._id_10A13 = 0.05;
-  level._id_F26B["sentry_shock"]._id_C7FB = 8.0;
-  level._id_F26B["sentry_shock"]._id_461D = 0.1;
-  level._id_F26B["sentry_shock"]._id_7645 = 0.3;
-  level._id_F26B["sentry_shock"]._id_110EA = "sentry_shock";
-  level._id_F26B["sentry_shock"]._id_039B = "sentry_shock_mp";
-  level._id_F26B["sentry_shock"]._id_0289 = "ks_shock_sentry_mp";
-  level._id_F26B["sentry_shock"]._id_B91A = "shock_sentry_gun_wm";
-  level._id_F26B["sentry_shock"]._id_B920 = "shock_sentry_gun_wm_obj";
-  level._id_F26B["sentry_shock"]._id_B919 = "shock_sentry_gun_wm_obj_red";
-  level._id_F26B["sentry_shock"]._id_B91D = "shock_sentry_gun_wm_destroyed";
-  level._id_F26B["sentry_shock"]._id_017B = &"SENTRY_PICKUP";
-  level._id_F26B["sentry_shock"]._id_016F = 1;
-  level._id_F26B["sentry_shock"]._id_115EB = "used_shock_sentry";
-  level._id_F26B["sentry_shock"].destroyedsplash = "callout_destroyed_sentry_shock";
-  level._id_F26B["sentry_shock"]._id_10085 = 1;
-  level._id_F26B["sentry_shock"]._id_13554 = "sentry_shock_timeout";
-  level._id_F26B["sentry_shock"]._id_13523 = "sentry_shock_destroy";
-  level._id_F26B["sentry_shock"]._id_EC44 = "destroyed_sentry";
-  level._id_F26B["sentry_shock"]._id_ACB6 = "tag_fx";
-  level._id_F26B["sentry_shock"]._id_9E63 = 1;
-  level._id_F26B["sentry_shock"]._id_8C7A = (0, 0, 75);
+  level.sentrytype = [];
+  level.sentrytype["sentry_minigun"] = "sentry";
+  level.sentrytype["sam_turret"] = "sam_turret";
+  level.sentrytype["super_trophy"] = "super_trophy";
+  level.sentrytype["sentry_shock"] = "sentry_shock";
+  scripts\mp\killstreaks\killstreaks::registerkillstreak("sentry_shock", ::tryuseshocksentry);
+  scripts/mp/killstreak_loot::func_DF07("sentry_shock", ["passive_extra_health", "passive_increased_duration"]);
+  level.sentrysettings = [];
+  level.sentrysettings["super_trophy"] = spawnstruct();
+  level.sentrysettings["super_trophy"].health = 999999;
+  level.sentrysettings["super_trophy"].maxhealth = 100;
+  level.sentrysettings["super_trophy"].sentrymodeon = "sentry";
+  level.sentrysettings["super_trophy"].sentrymodeoff = "sentry_offline";
+  level.sentrysettings["super_trophy"].weaponinfo = "sentry_laser_mp";
+  level.sentrysettings["super_trophy"].modelbase = "super_trophy_mp";
+  level.sentrysettings["super_trophy"].modelgood = "super_trophy_mp_placement";
+  level.sentrysettings["super_trophy"].modelbad = "super_trophy_mp_placement_fail";
+  level.sentrysettings["super_trophy"].modeldestroyed = "super_trophy_mp";
+  level.sentrysettings["super_trophy"].hintstring = &"SENTRY_PICKUP";
+  level.sentrysettings["super_trophy"].headicon = 1;
+  level.sentrysettings["super_trophy"].teamsplash = "used_super_trophy";
+  level.sentrysettings["super_trophy"].shouldsplash = 0;
+  level.sentrysettings["super_trophy"].lightfxtag = "tag_fx";
+  level.sentrysettings["sentry_shock"] = spawnstruct();
+  level.sentrysettings["sentry_shock"].health = 999999;
+  level.sentrysettings["sentry_shock"].maxhealth = 670;
+  level.sentrysettings["sentry_shock"].burstmin = 20;
+  level.sentrysettings["sentry_shock"].burstmax = 120;
+  level.sentrysettings["sentry_shock"].pausemin = 0.15;
+  level.sentrysettings["sentry_shock"].pausemax = 0.35;
+  level.sentrysettings["sentry_shock"].sentrymodeon = "sentry";
+  level.sentrysettings["sentry_shock"].sentrymodeoff = "sentry_offline";
+  level.sentrysettings["sentry_shock"].timeout = 90.0;
+  level.sentrysettings["sentry_shock"].spinuptime = 0.05;
+  level.sentrysettings["sentry_shock"].overheattime = 8.0;
+  level.sentrysettings["sentry_shock"].cooldowntime = 0.1;
+  level.sentrysettings["sentry_shock"].fxtime = 0.3;
+  level.sentrysettings["sentry_shock"].streakname = "sentry_shock";
+  level.sentrysettings["sentry_shock"].weaponinfo = "sentry_shock_mp";
+  level.sentrysettings["sentry_shock"].scriptable = "ks_shock_sentry_mp";
+  level.sentrysettings["sentry_shock"].modelbase = "shock_sentry_gun_wm";
+  level.sentrysettings["sentry_shock"].modelgood = "shock_sentry_gun_wm_obj";
+  level.sentrysettings["sentry_shock"].modelbad = "shock_sentry_gun_wm_obj_red";
+  level.sentrysettings["sentry_shock"].modeldestroyed = "shock_sentry_gun_wm_destroyed";
+  level.sentrysettings["sentry_shock"].hintstring = &"SENTRY_PICKUP";
+  level.sentrysettings["sentry_shock"].headicon = 1;
+  level.sentrysettings["sentry_shock"].teamsplash = "used_shock_sentry";
+  level.sentrysettings["sentry_shock"].destroyedsplash = "callout_destroyed_sentry_shock";
+  level.sentrysettings["sentry_shock"].shouldsplash = 1;
+  level.sentrysettings["sentry_shock"].votimeout = "sentry_shock_timeout";
+  level.sentrysettings["sentry_shock"].vodestroyed = "sentry_shock_destroy";
+  level.sentrysettings["sentry_shock"].scorepopup = "destroyed_sentry";
+  level.sentrysettings["sentry_shock"].lightfxtag = "tag_fx";
+  level.sentrysettings["sentry_shock"].iskillstreak = 1;
+  level.sentrysettings["sentry_shock"].headiconoffset = (0, 0, 75);
   level._effect["sentry_overheat_mp"] = loadfx("vfx/core/mp/killstreaks/vfx_sg_overheat_smoke");
   level._effect["sentry_explode_mp"] = loadfx("vfx/iw7/_requests/mp/vfx_generic_equipment_exp_lg.vfx");
   level._effect["sentry_sparks_mp"] = loadfx("vfx/core/mp/killstreaks/vfx_sentry_gun_explosion");
@@ -70,85 +70,85 @@ init() {
   level._effect["sentry_shock_explosion"] = loadfx("vfx/iw7/_requests/mp/vfx_sentry_shock_end.vfx");
   level._effect["sentry_shock_trail"] = loadfx("vfx/iw7/_requests/mp/vfx_sentry_shock_proj_trail.vfx");
   level._effect["sentry_shock_arc"] = loadfx("vfx/iw7/_requests/mp/vfx_sentry_shock_arc.vfx");
-  var_0 = ["passive_fast_sweep", "passive_decreased_health", "passive_sam_turret", "passive_no_shock", "passive_mini_explosives", "passive_slow_turret"];
-  _id_0AC7::_id_DF07("sentry_shock", var_0);
+  var_00 = ["passive_fast_sweep", "passive_decreased_health", "passive_sam_turret", "passive_no_shock", "passive_mini_explosives", "passive_slow_turret"];
+  scripts/mp/killstreak_loot::func_DF07("sentry_shock", var_00);
 }
 
-_id_128D9(var_0, var_1) {
-  var_2 = _id_83A3("sentry_minigun");
+tryuseautosentry(var_00, var_01) {
+  var_02 = givesentry("sentry_minigun");
 
-  if (var_2)
-  scripts\mp\matchdata::_id_AFC9(level._id_F26B["sentry_minigun"]._id_110EA, self.origin);
+  if (var_02)
+  scripts\mp\matchdata::logkillstreakevent(level.sentrysettings["sentry_minigun"].streakname, self.origin);
 
-  return var_2;
+  return var_02;
 }
 
-_id_12901(var_0, var_1) {
-  var_2 = _id_83A3("sam_turret");
+tryusesam(var_00, var_01) {
+  var_02 = givesentry("sam_turret");
 
-  if (var_2)
-  scripts\mp\matchdata::_id_AFC9(level._id_F26B["sam_turret"]._id_110EA, self.origin);
+  if (var_02)
+  scripts\mp\matchdata::logkillstreakevent(level.sentrysettings["sam_turret"].streakname, self.origin);
 
-  return var_2;
+  return var_02;
 }
 
-_id_12902(var_0) {
-  var_1 = _id_83A3("sentry_shock", undefined, var_0);
+tryuseshocksentry(var_00) {
+  var_01 = givesentry("sentry_shock", undefined, var_00);
 
-  if (var_1)
-  scripts\mp\matchdata::_id_AFC9(var_0._id_110EA, self.origin);
+  if (var_01)
+  scripts\mp\matchdata::logkillstreakevent(var_0.streakname, self.origin);
   else
   scripts\engine\utility::waitframe();
 
-  return var_1;
+  return var_01;
 }
 
-_id_83A3(var_0, var_1, var_2) {
-  self._id_A904 = var_0;
+givesentry(var_00, var_01, var_02) {
+  self.last_sentry = var_00;
 
-  if (!isdefined(self._id_CC14))
-  self._id_CC14 = [];
+  if (!isdefined(self.placedsentries))
+  self.placedsentries = [];
 
-  if (!isdefined(self._id_CC14[var_0]))
-  self._id_CC14[var_0] = [];
+  if (!isdefined(self.placedsentries[var_00]))
+  self.placedsentries[var_00] = [];
 
-  var_3 = 1;
+  var_03 = 1;
 
-  if (isdefined(var_1))
-  var_3 = var_1;
+  if (isdefined(var_01))
+  var_03 = var_01;
 
-  var_4 = _id_4A11(var_0, self, var_3, var_2);
+  var_04 = createsentryforplayer(var_00, self, var_03, var_02);
 
-  if (isdefined(var_2))
-  var_2._id_F265 = var_4;
+  if (isdefined(var_02))
+  var_2.sentrygun = var_04;
 
-  _id_E152();
-  self._id_3AA5 = var_4;
-  var_5 = _id_F688(var_4, 1, var_3);
-  self._id_3AA5 = undefined;
-  thread _id_1370F();
-  self._id_9D81 = 0;
+  removeperks();
+  self.carriedsentry = var_04;
+  var_05 = setcarryingsentry(var_04, 1, var_03);
+  self.carriedsentry = undefined;
+  thread waitrestoreperks();
+  self.iscarrying = 0;
 
-  if (isdefined(var_4))
+  if (isdefined(var_04))
   return 1;
   else
   return 0;
 }
 
-_id_F688(var_0, var_1, var_2, var_3) {
+setcarryingsentry(var_00, var_01, var_02, var_03) {
   self endon("death");
   self endon("disconnect");
-  var_0 _id_F255(self, var_2, var_3);
-  scripts\engine\utility::_id_1C6E(0);
-  _id_1CB4(0);
-  scripts\engine\utility::_id_1C53(0);
+  var_00 sentry_setcarried(self, var_02, var_03);
+  scripts\engine\utility::allow_usability(0);
+  allowweaponsforsentry(0);
+  scripts\engine\utility::allow_melee(0);
 
   if (!isai(self)) {
   self notifyonplayercommand("place_sentry", "+attack");
   self notifyonplayercommand("place_sentry", "+attack_akimbo_accessible");
   self notifyonplayercommand("cancel_sentry", "+actionslot 4");
 
-  if (!level._id_4542) {
+  if (!level.console) {
   self notifyonplayercommand("cancel_sentry", "+actionslot 5");
   self notifyonplayercommand("cancel_sentry", "+actionslot 6");
   self notifyonplayercommand("cancel_sentry", "+actionslot 7");
@@ -156,107 +156,107 @@ _id_F688(var_0, var_1, var_2, var_3) {
   }
 
   for (;;) {
-  var_4 = scripts\engine\utility::_id_13734("place_sentry", "cancel_sentry", "force_cancel_placement", "apply_player_emp");
+  var_04 = scripts\engine\utility::waittill_any_return("place_sentry", "cancel_sentry", "force_cancel_placement", "apply_player_emp");
 
-  if (!isdefined(var_0)) {
-  _id_1CB4(1);
-  scripts\engine\utility::_id_1C6E(1);
-  thread _id_6270();
+  if (!isdefined(var_00)) {
+  allowweaponsforsentry(1);
+  scripts\engine\utility::allow_usability(1);
+  thread enablemeleeforsentry();
   return 1;
   }
 
-  if (var_4 == "cancel_sentry" || var_4 == "force_cancel_placement" || var_4 == "apply_player_emp") {
-  if (!var_1 && (var_4 == "cancel_sentry" || var_4 == "apply_player_emp"))
+  if (var_04 == "cancel_sentry" || var_04 == "force_cancel_placement" || var_04 == "apply_player_emp") {
+  if (!var_01 && (var_04 == "cancel_sentry" || var_04 == "apply_player_emp"))
   continue;
 
-  var_0 _id_F253(var_4 == "force_cancel_placement" && !isdefined(var_0._id_6DEC));
+  var_00 sentry_setcancelled(var_04 == "force_cancel_placement" && !isdefined(var_0.firstplacement));
   return 0;
   }
 
-  if (!var_0._id_3872)
+  if (!var_0.canbeplaced)
   continue;
 
-  var_0 _id_F259(var_2);
+  var_00 sentry_setplaced(var_02);
   return 1;
   }
 }
 
-_id_6270() {
+enablemeleeforsentry() {
   self endon("death");
   self endon("disconnect");
   wait 0.25;
-  scripts\engine\utility::_id_1C53(1);
+  scripts\engine\utility::allow_melee(1);
 }
 
-_id_E18E() {
+removeweapons() {
   if (self hasweapon("iw6_riotshield_mp")) {
-  self._id_E2E6 = "iw6_riotshield_mp";
-  scripts\mp\utility\game::_id_141E("iw6_riotshield_mp");
+  self.restoreweapon = "iw6_riotshield_mp";
+  scripts\mp\utility\game::_takeweapon("iw6_riotshield_mp");
   }
 }
 
-_id_E152() {
-  if (scripts\mp\utility\game::_id_12D6("specialty_explosivebullets")) {
-  self._id_E2DF = "specialty_explosivebullets";
-  scripts\mp\utility\game::_id_E150("specialty_explosivebullets");
+removeperks() {
+  if (scripts\mp\utility\game::_hasperk("specialty_explosivebullets")) {
+  self.restoreperk = "specialty_explosivebullets";
+  scripts\mp\utility\game::removeperk("specialty_explosivebullets");
   }
 }
 
-_id_E2E8() {
-  if (isdefined(self._id_E2E6)) {
-  scripts\mp\utility\game::_id_12C6(self._id_E2E6);
-  self._id_E2E6 = undefined;
+restoreweapons() {
+  if (isdefined(self.restoreweapon)) {
+  scripts\mp\utility\game::_giveweapon(self.restoreweapon);
+  self.restoreweapon = undefined;
   }
 }
 
-_id_E2E0() {
-  if (isdefined(self._id_E2DF)) {
-  scripts\mp\utility\game::giveperk(self._id_E2DF);
-  self._id_E2DF = undefined;
+restoreperks() {
+  if (isdefined(self.restoreperk)) {
+  scripts\mp\utility\game::giveperk(self.restoreperk);
+  self.restoreperk = undefined;
   }
 }
 
-_id_1370F() {
+waitrestoreperks() {
   self endon("death");
   self endon("disconnect");
   level endon("game_ended");
   wait 0.05;
-  _id_E2E0();
+  restoreperks();
 }
 
-_id_4A11(var_0, var_1, var_2, var_3) {
-  var_4 = level._id_F26B[var_0]._id_039B;
+createsentryforplayer(var_00, var_01, var_02, var_03) {
+  var_04 = level.sentrysettings[var_00].weaponinfo;
 
-  if (_id_0DC9::_id_A69F(var_3, "passive_fast_sweep"))
-  var_4 = "sentry_shock_fast_mp";
+  if (scripts/mp/killstreaks/utility::func_A69F(var_03, "passive_fast_sweep"))
+  var_04 = "sentry_shock_fast_mp";
 
-  var_5 = spawnturret("misc_turret", var_1.origin, var_4);
+  var_05 = spawnturret("misc_turret", var_1.origin, var_04);
   var_5.angles = var_1.angles;
-  var_5._id_110E8 = var_3;
-  var_5 _id_F246(var_0, var_1, var_2);
-  var_5 thread sentry_destroyongameend();
-  return var_5;
+  var_5.streakinfo = var_03;
+  var_05 sentry_initsentry(var_00, var_01, var_02);
+  var_05 thread sentry_destroyongameend();
+  return var_05;
 }
 
-_id_F246(var_0, var_1, var_2, var_3) {
-  if (!isdefined(var_3))
-  var_3 = 1;
+sentry_initsentry(var_00, var_01, var_02, var_03) {
+  if (!isdefined(var_03))
+  var_03 = 1;
 
-  self._id_F26E = var_0;
-  self._id_3872 = 1;
-  self setmodel(level._id_F26B[var_0]._id_B91A);
-  self _meth_8318(1);
-  self _meth_8317(1);
+  self.sentrytype = var_00;
+  self.canbeplaced = 1;
+  self setmodel(level.sentrysettings[var_00].modelbase);
+  self setnonstick(1);
+  self give_player_tickets(1);
 
-  if (level._id_F26B[var_0]._id_10085)
-  self._id_10085 = 1;
+  if (level.sentrysettings[var_00].shouldsplash)
+  self.shouldsplash = 1;
   else
-  self._id_10085 = 0;
+  self.shouldsplash = 0;
 
-  self._id_6DEC = 1;
+  self.firstplacement = 1;
   self setcandamage(1);
 
-  switch (var_0) {
+  switch (var_00) {
   case "gl_turret_4":
   case "gl_turret_3":
   case "gl_turret_2":
@@ -267,33 +267,33 @@ _id_F246(var_0, var_1, var_2, var_3) {
   case "minigun_turret_2":
   case "minigun_turret_1":
   case "minigun_turret":
-  self _meth_82FB(80);
-  self _meth_8330(80);
-  self _meth_82B6(50);
+  self setleftarc(80);
+  self setrightarc(80);
+  self give_crafted_gascan(50);
   self setdefaultdroppitch(0.0);
-  self._id_C731 = var_1;
+  self.originalowner = var_01;
   break;
   case "scramble_turret":
   case "sam_turret":
   self maketurretinoperable();
-  self _meth_82FB(180);
-  self _meth_8330(180);
-  self _meth_8353(80);
+  self setleftarc(180);
+  self setrightarc(180);
+  self settoparc(80);
   self setdefaultdroppitch(-89.0);
-  self._id_A86B = 0;
-  var_4 = spawn("script_model", self gettagorigin("tag_laser"));
-  var_4 linkto(self);
-  self._id_A63A = var_4;
-  self._id_A63A setscriptmoverkillcam("explosive");
+  self.laser_on = 0;
+  var_04 = spawn("script_model", self gettagorigin("tag_laser"));
+  var_04 linkto(self);
+  self.killcament = var_04;
+  self.killcament setscriptmoverkillcam("explosive");
   break;
   case "sentry_shock":
   self maketurretinoperable();
-  var_5 = anglestoforward(self.angles);
-  var_6 = self gettagorigin("tag_laser") + (0, 0, 10);
-  var_6 = var_6 - var_5 * 20;
-  var_4 = spawn("script_model", var_6);
-  var_4 linkto(self);
-  self._id_A63A = var_4;
+  var_05 = anglestoforward(self.angles);
+  var_06 = self gettagorigin("tag_laser") + (0, 0, 10);
+  var_06 = var_06 - var_05 * 20;
+  var_04 = spawn("script_model", var_06);
+  var_04 linkto(self);
+  self.killcament = var_04;
   break;
   default:
   self maketurretinoperable();
@@ -301,108 +301,108 @@ _id_F246(var_0, var_1, var_2, var_3) {
   break;
   }
 
-  self _meth_835B(1);
-  _id_F257();
-  _id_F258(var_1);
+  self setturretmodechangewait(1);
+  sentry_setinactive();
+  sentry_setowner(var_01);
 
-  if (var_3)
-  thread _id_F261();
+  if (var_03)
+  thread sentry_timeout();
 
-  switch (var_0) {
+  switch (var_00) {
   case "minigun_turret_4":
   case "minigun_turret_3":
   case "minigun_turret_2":
   case "minigun_turret_1":
   case "minigun_turret":
-  self._id_B941 = 0;
-  self._id_8CDE = 0;
-  self._id_C7F9 = 0;
-  thread _id_F245();
+  self.momentum = 0;
+  self.heatlevel = 0;
+  self.overheated = 0;
+  thread sentry_heatmonitor();
   break;
   case "gl_turret_4":
   case "gl_turret_3":
   case "gl_turret_2":
   case "gl_turret_1":
   case "gl_turret":
-  self._id_B941 = 0;
-  self._id_8CDE = 0;
-  self._id_4621 = 0;
-  self._id_C7F9 = 0;
-  thread _id_12A00();
-  thread _id_129D7();
+  self.momentum = 0;
+  self.heatlevel = 0;
+  self.cooldownwaittime = 0;
+  self.overheated = 0;
+  thread turret_heatmonitor();
+  thread turret_coolmonitor();
   break;
   case "scramble_turret":
   case "sam_turret":
   case "sentry_shock":
-  self._id_B941 = 0;
-  thread _id_F244(var_2);
-  thread _id_F23A();
+  self.momentum = 0;
+  thread sentry_handleuse(var_02);
+  thread sentry_beepsounds();
   break;
   case "super_trophy":
-  thread _id_F244(0);
-  thread _id_F23A();
+  thread sentry_handleuse(0);
+  thread sentry_beepsounds();
   break;
   default:
-  thread _id_F244(var_2);
-  thread _id_F239();
-  thread _id_F23A();
+  thread sentry_handleuse(var_02);
+  thread sentry_attacktargets();
+  thread sentry_beepsounds();
   break;
   }
 }
 
-_id_F23E(var_0) {
-  if (isdefined(level._id_F26B[var_0]._id_B91C)) {
-  var_1 = spawn("script_model", self.origin);
+sentry_createbombsquadmodel(var_00) {
+  if (isdefined(level.sentrysettings[var_00].modelbombsquad)) {
+  var_01 = spawn("script_model", self.origin);
   var_1.angles = self.angles;
-  var_1 hide();
-  var_1 thread scripts\mp\weapons::_id_2C69(self.owner);
-  var_1 setmodel(level._id_F26B[var_0]._id_B91C);
-  var_1 linkto(self);
-  var_1 _meth_82C7(0);
-  self._id_2C68 = var_1;
+  var_01 hide();
+  var_01 thread scripts\mp\weapons::bombsquadvisibilityupdater(self.owner);
+  var_01 setmodel(level.sentrysettings[var_00].modelbombsquad);
+  var_01 linkto(self);
+  var_01 setcontents(0);
+  self.bombsquadmodel = var_01;
   self waittill("death");
 
-  if (isdefined(var_1))
-  var_1 delete();
+  if (isdefined(var_01))
+  var_01 delete();
   }
 }
 
 sentry_setteamheadicon() {
-  var_0 = level._id_F26B[self._id_F26E]._id_8C7A;
+  var_00 = level.sentrysettings[self.sentrytype].headiconoffset;
 
-  if (!isdefined(var_0))
+  if (!isdefined(var_00))
   return;
 
   if (!isdefined(self.owner))
   return;
 
-  var_1 = self.owner;
-  var_2 = var_1.team;
+  var_01 = self.owner;
+  var_02 = var_1.team;
 
-  if (level.teambased && !scripts\mp\utility\game::istrue(self._id_115D1)) {
-  scripts\mp\entityheadicons::_id_F877(var_2, var_0);
-  self._id_115D1 = 1;
+  if (level.teambased && !scripts\mp\utility\game::istrue(self.func_115D1)) {
+  scripts\mp\entityheadicons::setteamheadicon(var_02, var_00);
+  self.func_115D1 = 1;
   }
-  else if (!scripts\mp\utility\game::istrue(self._id_D3AA)) {
-  scripts\mp\entityheadicons::_id_F7F2(var_1, var_0);
-  self._id_D3AA = 1;
+  else if (!scripts\mp\utility\game::istrue(self.func_D3AA)) {
+  scripts\mp\entityheadicons::setplayerheadicon(var_01, var_00);
+  self.func_D3AA = 1;
   }
 }
 
 sentry_clearteamheadicon() {
-  var_0 = level._id_F26B[self._id_F26E]._id_8C7A;
+  var_00 = level.sentrysettings[self.sentrytype].headiconoffset;
 
-  if (!isdefined(var_0))
+  if (!isdefined(var_00))
   return;
 
-  if (scripts\mp\utility\game::istrue(self._id_115D1)) {
-  scripts\mp\entityheadicons::_id_F877("none", (0, 0, 0));
-  self._id_115D1 = undefined;
+  if (scripts\mp\utility\game::istrue(self.func_115D1)) {
+  scripts\mp\entityheadicons::setteamheadicon("none", (0, 0, 0));
+  self.func_115D1 = undefined;
   }
 
-  if (scripts\mp\utility\game::istrue(self._id_D3AA)) {
-  scripts\mp\entityheadicons::_id_F7F2(undefined, (0, 0, 0));
-  self._id_D3AA = undefined;
+  if (scripts\mp\utility\game::istrue(self.func_D3AA)) {
+  scripts\mp\entityheadicons::setplayerheadicon(undefined, (0, 0, 0));
+  self.func_D3AA = undefined;
   }
 }
 
@@ -412,262 +412,262 @@ sentry_destroyongameend() {
   self notify("death");
 }
 
-_id_F241() {
+sentry_handledamage() {
   self endon("carried");
-  var_0 = level._id_F26B[self._id_F26E].maxhealth;
+  var_00 = level.sentrysettings[self.sentrytype].maxhealth;
 
-  if (_id_0DC9::_id_A69F(self._id_110E8, "passive_fast_sweep"))
-  var_0 = int(var_0 / 1.25);
+  if (scripts/mp/killstreaks/utility::func_A69F(self.streakinfo, "passive_fast_sweep"))
+  var_00 = int(var_00 / 1.25);
 
-  var_1 = 0;
+  var_01 = 0;
 
-  if (self.owner scripts\mp\utility\game::_id_12D6("specialty_rugged_eqp")) {
-  var_2 = self._id_13C2E;
+  if (self.owner scripts\mp\utility\game::_hasperk("specialty_rugged_eqp")) {
+  var_02 = self.weapon_name;
 
-  if (isdefined(var_2)) {
-  switch (var_2) {
+  if (isdefined(var_02)) {
+  switch (var_02) {
   default:
   }
   }
   }
 
-  var_0 = var_0 + int(var_1);
-  scripts\mp\damage::monitordamage(var_0, "sentry", ::_id_F266, ::_id_F26A, 1);
+  var_00 = var_00 + int(var_01);
+  scripts\mp\damage::monitordamage(var_00, "sentry", ::sentryhandledeathdamage, ::sentrymodifydamage, 1);
 }
 
-_id_F26A(var_0, var_1, var_2, var_3, var_4) {
-  var_5 = var_3;
+sentrymodifydamage(var_00, var_01, var_02, var_03, var_04) {
+  var_05 = var_03;
 
-  if (var_2 == "MOD_MELEE")
-  var_5 = self.maxhealth * 0.34;
+  if (var_02 == "MOD_MELEE")
+  var_05 = self.maxhealth * 0.34;
 
-  var_5 = _id_0DC9::_id_7FBD(var_0, var_1, var_2, var_5, self.maxhealth, 2, 3, 4);
+  var_05 = scripts/mp/killstreaks/utility::getmodifiedantikillstreakdamage(var_00, var_01, var_02, var_05, self.maxhealth, 2, 3, 4);
 
-  if (isdefined(var_0) && isplayer(var_0) && scripts\mp\equipment\phase_shift::_id_9DDF(var_0))
-  var_5 = 0;
+  if (isdefined(var_00) && isplayer(var_00) && scripts\mp\equipment\phase_shift::isentityphaseshifted(var_00))
+  var_05 = 0;
 
-  return var_5;
+  return var_05;
 }
 
-_id_F266(var_0, var_1, var_2, var_3) {
-  var_4 = level._id_F26B[self._id_F26E];
+sentryhandledeathdamage(var_00, var_01, var_02, var_03) {
+  var_04 = level.sentrysettings[self.sentrytype];
 
-  if (var_4._id_9E63) {
-  if (isdefined(var_1) && var_1 == "concussion_grenade_mp") {
-  if (scripts\mp\utility\game::istrue(scripts\mp\utility\game::playersareenemies(self.owner, var_0)))
-  var_0 scripts\mp\missions::_id_D991("ch_tactical_emp_eqp");
+  if (var_4.iskillstreak) {
+  if (isdefined(var_01) && var_01 == "concussion_grenade_mp") {
+  if (scripts\mp\utility\game::istrue(scripts\mp\utility\game::playersareenemies(self.owner, var_00)))
+  var_00 scripts\mp\missions::func_D991("ch_tactical_emp_eqp");
   }
 
-  var_5 = var_4.destroyedsplash;
-  var_6 = _id_0AC7::getrarityforlootitem(self._id_110E8._id_1318B);
+  var_05 = var_4.destroyedsplash;
+  var_06 = scripts/mp/killstreak_loot::getrarityforlootitem(self.streakinfo.variantid);
 
-  if (var_6 != "")
-  var_5 = var_5 + "_" + var_6;
+  if (var_06 != "")
+  var_05 = var_05 + "_" + var_06;
 
-  var_7 = scripts\mp\damage::onkillstreakkilled(var_4._id_110EA, var_0, var_1, var_2, var_3, var_4._id_EC44, var_4._id_13523, var_5);
+  var_07 = scripts\mp\damage::onkillstreakkilled(var_4.streakname, var_00, var_01, var_02, var_03, var_4.scorepopup, var_4.vodestroyed, var_05);
 
-  if (var_7) {
-  var_0 notify("destroyed_equipment");
+  if (var_07) {
+  var_00 notify("destroyed_equipment");
   return;
   }
   } else {
-  var_8 = undefined;
-  var_9 = var_0;
+  var_08 = undefined;
+  var_09 = var_00;
 
-  if (isdefined(var_9) && isdefined(self.owner)) {
+  if (isdefined(var_09) && isdefined(self.owner)) {
   if (isdefined(var_0.owner) && isplayer(var_0.owner))
-  var_9 = var_0.owner;
+  var_09 = var_0.owner;
 
-  if (self.owner scripts\mp\utility\game::isenemy(var_9))
-  var_8 = var_9;
+  if (self.owner scripts\mp\utility\game::isenemy(var_09))
+  var_08 = var_09;
   }
 
-  if (isdefined(var_8)) {
-  var_8 thread scripts\mp\events::_id_11265(self.owner);
-  var_8 notify("destroyed_equipment");
+  if (isdefined(var_08)) {
+  var_08 thread scripts\mp\events::supershutdown(self.owner);
+  var_08 notify("destroyed_equipment");
   }
 
   self notify("death");
   }
 }
 
-_id_F263() {
+sentry_watchdisabled() {
   self endon("carried");
   self endon("death");
   level endon("game_ended");
 
   for (;;) {
-  self waittill("emp_damage", var_0, var_1, var_2, var_3, var_4);
-  _id_0DC9::dodamagetokillstreak(100, var_0, var_0, self.team, var_2, var_4, var_3);
+  self waittill("emp_damage", var_00, var_01, var_02, var_03, var_04);
+  scripts/mp/killstreaks/utility::dodamagetokillstreak(100, var_00, var_00, self.team, var_02, var_04, var_03);
 
-  if (!scripts\mp\utility\game::istrue(self._id_55BA))
-  thread disablesentry(var_1);
+  if (!scripts\mp\utility\game::istrue(self.disabled))
+  thread disablesentry(var_01);
   }
 }
 
-disablesentry(var_0) {
+disablesentry(var_00) {
   self endon("carried");
   self endon("death");
   level endon("game_ended");
-  self._id_55BA = 1;
-  scripts\mp\weapons::_id_11061();
+  self.disabled = 1;
+  scripts\mp\weapons::stopblinkinglight();
   self setdefaultdroppitch(40);
-  self _meth_830F(level._id_F26B[self._id_F26E]._id_F268);
+  self give_player_session_tokens(level.sentrysettings[self.sentrytype].sentrymodeoff);
   self cleartargetentity();
   self setscriptablepartstate("coil", "neutral");
   self setscriptablepartstate("muzzle", "neutral", 0);
   self setscriptablepartstate("stunned", "active");
   sentry_clearteamheadicon();
-  scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(var_0);
+  scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(var_00);
   self setdefaultdroppitch(-89.0);
-  self _meth_830F(level._id_F26B[self._id_F26E]._id_F269);
-  thread scripts\mp\weapons::_id_57EB(level._id_F26B[self._id_F26E]._id_ACB6);
+  self give_player_session_tokens(level.sentrysettings[self.sentrytype].sentrymodeon);
+  thread scripts\mp\weapons::doblinkinglight(level.sentrysettings[self.sentrytype].lightfxtag);
   self setscriptablepartstate("coil", "idle");
   self setscriptablepartstate("stunned", "neutral");
   sentry_setteamheadicon();
-  self._id_55BA = undefined;
+  self.disabled = undefined;
 }
 
-_id_F242() {
+sentry_handledeath() {
   self endon("carried");
   self waittill("death");
 
   if (isdefined(self.owner))
-  self.owner._id_CC14[self._id_F26E] = scripts\engine\utility::array_remove(self.owner._id_CC14[self._id_F26E], self);
+  self.owner.placedsentries[self.sentrytype] = scripts\engine\utility::array_remove(self.owner.placedsentries[self.sentrytype], self);
 
   if (!isdefined(self))
   return;
 
   self cleartargetentity();
   self laseroff();
-  self setmodel(level._id_F26B[self._id_F26E]._id_B91D);
+  self setmodel(level.sentrysettings[self.sentrytype].modeldestroyed);
 
-  if (isdefined(self._id_7627) && self._id_7627.size > 0) {
-  foreach (var_1 in self._id_7627) {
-  if (isdefined(var_1))
-  var_1 delete();
+  if (isdefined(self.fxentdeletelist) && self.fxentdeletelist.size > 0) {
+  foreach (var_01 in self.fxentdeletelist) {
+  if (isdefined(var_01))
+  var_01 delete();
   }
 
-  self._id_7627 = undefined;
+  self.fxentdeletelist = undefined;
   }
 
-  _id_F257();
+  sentry_setinactive();
   self setdefaultdroppitch(40);
-  self _meth_8336(undefined);
+  self setsentryowner(undefined);
 
-  if (isdefined(self._id_9B05))
-  self _meth_83D3(self._id_9B05);
+  if (isdefined(self.inuseby))
+  self _meth_83D3(self.inuseby);
 
-  self _meth_835A(0);
+  self setturretminimapvisible(0);
 
-  if (isdefined(self._id_C840))
-  self._id_C840 delete();
+  if (isdefined(self.ownertrigger))
+  self.ownertrigger delete();
 
   self playsound("mp_equip_destroyed");
 
-  switch (self._id_F26E) {
+  switch (self.sentrytype) {
   case "gl_turret":
   case "minigun_turret":
-  self._id_72B5 = 1;
-  self _meth_83C6();
+  self.forcedisable = 1;
+  self turretfiredisable();
   break;
   default:
   break;
   }
 
-  if (isdefined(self._id_9B05)) {
-  playfxontag(scripts\engine\utility::_id_7ECB("sentry_explode_mp"), self, "tag_origin");
-  playfxontag(scripts\engine\utility::_id_7ECB("sentry_smoke_mp"), self, "tag_aim");
-  self._id_9B05._id_12A1A scripts\mp\hud_util::_id_52DC();
-  self._id_9B05 _id_E2E0();
-  self._id_9B05 _id_E2E8();
+  if (isdefined(self.inuseby)) {
+  playfxontag(scripts\engine\utility::getfx("sentry_explode_mp"), self, "tag_origin");
+  playfxontag(scripts\engine\utility::getfx("sentry_smoke_mp"), self, "tag_aim");
+  self.inuseby.turret_overheat_bar scripts\mp\hud_util::destroyelem();
+  self.inuseby restoreperks();
+  self.inuseby restoreweapons();
   self notify("deleting");
   wait 1.0;
-  stopfxontag(scripts\engine\utility::_id_7ECB("sentry_explode_mp"), self, "tag_origin");
-  stopfxontag(scripts\engine\utility::_id_7ECB("sentry_smoke_mp"), self, "tag_aim");
+  stopfxontag(scripts\engine\utility::getfx("sentry_explode_mp"), self, "tag_origin");
+  stopfxontag(scripts\engine\utility::getfx("sentry_smoke_mp"), self, "tag_aim");
   } else {
   self playsound("sentry_explode_smoke");
   self setscriptablepartstate("destroyed", "sparks");
   wait 5;
-  playfx(scripts\engine\utility::_id_7ECB("sentry_explode_mp"), self.origin + (0, 0, 10));
+  playfx(scripts\engine\utility::getfx("sentry_explode_mp"), self.origin + (0, 0, 10));
   self notify("deleting");
   }
 
-  scripts\mp\weapons::_id_66A8();
+  scripts\mp\weapons::equipmentdeletevfx();
 
-  if (isdefined(self._id_A63A))
-  self._id_A63A delete();
+  if (isdefined(self.killcament))
+  self.killcament delete();
 
   if (isdefined(self.airlookatent))
   self.airlookatent delete();
 
-  scripts\mp\utility\game::_id_D915("killstreak ended - shock_sentry", self.owner);
+  scripts\mp\utility\game::printgameaction("killstreak ended - shock_sentry", self.owner);
   self delete();
 }
 
-_id_F244(var_0) {
+sentry_handleuse(var_00) {
   self endon("death");
   level endon("game_ended");
 
   for (;;) {
-  self waittill("trigger", var_1);
+  self waittill("trigger", var_01);
 
-  if (!scripts\mp\utility\game::isreallyalive(var_1))
+  if (!scripts\mp\utility\game::isreallyalive(var_01))
   continue;
 
-  if (self._id_F26E == "sam_turret" || self._id_F26E == "scramble_turret" || self._id_F26E == "sentry_shock" && _id_0DC9::_id_A69F(self._id_110E8, "passive_sam_turret"))
-  self _meth_830F(level._id_F26B[self._id_F26E]._id_F268);
+  if (self.sentrytype == "sam_turret" || self.sentrytype == "scramble_turret" || self.sentrytype == "sentry_shock" && scripts/mp/killstreaks/utility::func_A69F(self.streakinfo, "passive_sam_turret"))
+  self give_player_session_tokens(level.sentrysettings[self.sentrytype].sentrymodeoff);
 
-  var_1._id_CC14[self._id_F26E] = scripts\engine\utility::array_remove(var_1._id_CC14[self._id_F26E], self);
-  var_1 _id_F688(self, 0, var_0);
+  var_1.placedsentries[self.sentrytype] = scripts\engine\utility::array_remove(var_1.placedsentries[self.sentrytype], self);
+  var_01 setcarryingsentry(self, 0, var_00);
   }
 }
 
-_id_129FD(var_0) {
+turret_handlepickup(var_00) {
   self endon("disconnect");
   level endon("game_ended");
-  var_0 endon("death");
+  var_00 endon("death");
 
-  if (!isdefined(var_0._id_C840))
+  if (!isdefined(var_0.ownertrigger))
   return;
 
-  var_1 = 0;
+  var_01 = 0;
 
   for (;;) {
-  if (isalive(self) && self istouching(var_0._id_C840) && !isdefined(var_0._id_9B05) && !isdefined(var_0._id_3A9D) && self isonground()) {
+  if (isalive(self) && self istouching(var_0.ownertrigger) && !isdefined(var_0.inuseby) && !isdefined(var_0.carriedby) && self isonground()) {
   if (self usebuttonpressed()) {
-  if (isdefined(self._id_13107) && self._id_13107)
+  if (isdefined(self.using_remote_turret) && self.using_remote_turret)
   continue;
 
-  var_1 = 0;
+  var_01 = 0;
 
   while (self usebuttonpressed()) {
-  var_1 = var_1 + 0.05;
+  var_01 = var_01 + 0.05;
   wait 0.05;
   }
 
-  if (var_1 >= 0.5)
+  if (var_01 >= 0.5)
   continue;
 
-  var_1 = 0;
+  var_01 = 0;
 
-  while (!self usebuttonpressed() && var_1 < 0.5) {
-  var_1 = var_1 + 0.05;
+  while (!self usebuttonpressed() && var_01 < 0.5) {
+  var_01 = var_01 + 0.05;
   wait 0.05;
   }
 
-  if (var_1 >= 0.5)
+  if (var_01 >= 0.5)
   continue;
 
   if (!scripts\mp\utility\game::isreallyalive(self))
   continue;
 
-  if (isdefined(self._id_13107) && self._id_13107)
+  if (isdefined(self.using_remote_turret) && self.using_remote_turret)
   continue;
 
-  var_0 _meth_830F(level._id_F26B[var_0._id_F26E]._id_F268);
-  thread _id_F688(var_0, 0);
-  var_0._id_C840 delete();
+  var_00 give_player_session_tokens(level.sentrysettings[var_0.sentrytype].sentrymodeoff);
+  thread setcarryingsentry(var_00, 0);
+  var_0.ownertrigger delete();
   return;
   }
   }
@@ -676,92 +676,92 @@ _id_129FD(var_0) {
   }
 }
 
-_id_129FF() {
+turret_handleuse() {
   self notify("turret_handluse");
   self endon("turret_handleuse");
   self endon("deleting");
   level endon("game_ended");
-  self._id_72B5 = 0;
-  var_0 = (1, 0.9, 0.7);
-  var_1 = (1, 0.65, 0);
-  var_2 = (1, 0.25, 0);
+  self.forcedisable = 0;
+  var_00 = (1, 0.9, 0.7);
+  var_01 = (1, 0.65, 0);
+  var_02 = (1, 0.25, 0);
 
   for (;;) {
-  self waittill("trigger", var_3);
+  self waittill("trigger", var_03);
 
-  if (isdefined(self._id_3A9D))
+  if (isdefined(self.carriedby))
   continue;
 
-  if (isdefined(self._id_9B05))
+  if (isdefined(self.inuseby))
   continue;
 
-  if (!scripts\mp\utility\game::isreallyalive(var_3))
+  if (!scripts\mp\utility\game::isreallyalive(var_03))
   continue;
 
-  var_3 _id_E152();
-  var_3 _id_E18E();
-  self._id_9B05 = var_3;
-  self _meth_830F(level._id_F26B[self._id_F26E]._id_F268);
-  _id_F258(var_3);
-  self _meth_830F(level._id_F26B[self._id_F26E]._id_F269);
-  var_3 thread _id_12A31(self);
-  var_3._id_12A1A = var_3 scripts\mp\hud_util::_id_4987(var_0, 100, 6);
-  var_3._id_12A1A scripts\mp\hud_util::_id_F801("CENTER", "BOTTOM", 0, -70);
-  var_3._id_12A1A.alpha = 0.65;
-  var_3._id_12A1A._id_2812.alpha = 0.65;
-  var_4 = 0;
+  var_03 removeperks();
+  var_03 removeweapons();
+  self.inuseby = var_03;
+  self give_player_session_tokens(level.sentrysettings[self.sentrytype].sentrymodeoff);
+  sentry_setowner(var_03);
+  self give_player_session_tokens(level.sentrysettings[self.sentrytype].sentrymodeon);
+  var_03 thread turret_shotmonitor(self);
+  var_3.turret_overheat_bar = var_03 scripts\mp\hud_util::createbar(var_00, 100, 6);
+  var_3.turret_overheat_bar scripts\mp\hud_util::setpoint("CENTER", "BOTTOM", 0, -70);
+  var_3.turret_overheat_bar.alpha = 0.65;
+  var_3.turret_overheat_bar.bar.alpha = 0.65;
+  var_04 = 0;
 
   for (;;) {
-  if (!scripts\mp\utility\game::isreallyalive(var_3)) {
-  self._id_9B05 = undefined;
-  var_3._id_12A1A scripts\mp\hud_util::_id_52DC();
+  if (!scripts\mp\utility\game::isreallyalive(var_03)) {
+  self.inuseby = undefined;
+  var_3.turret_overheat_bar scripts\mp\hud_util::destroyelem();
   break;
   }
 
-  if (!var_3 isusingturret()) {
+  if (!var_03 isusingturret()) {
   self notify("player_dismount");
-  self._id_9B05 = undefined;
-  var_3._id_12A1A scripts\mp\hud_util::_id_52DC();
-  var_3 _id_E2E0();
-  var_3 _id_E2E8();
-  self sethintstring(level._id_F26B[self._id_F26E]._id_017B);
-  self _meth_830F(level._id_F26B[self._id_F26E]._id_F268);
-  _id_F258(self._id_C731);
-  self _meth_830F(level._id_F26B[self._id_F26E]._id_F269);
+  self.inuseby = undefined;
+  var_3.turret_overheat_bar scripts\mp\hud_util::destroyelem();
+  var_03 restoreperks();
+  var_03 restoreweapons();
+  self sethintstring(level.sentrysettings[self.sentrytype].hintstring);
+  self give_player_session_tokens(level.sentrysettings[self.sentrytype].sentrymodeoff);
+  sentry_setowner(self.originalowner);
+  self give_player_session_tokens(level.sentrysettings[self.sentrytype].sentrymodeon);
   break;
   }
 
-  if (self._id_8CDE >= level._id_F26B[self._id_F26E]._id_C7FB)
-  var_5 = 1;
+  if (self.heatlevel >= level.sentrysettings[self.sentrytype].overheattime)
+  var_05 = 1;
   else
-  var_5 = self._id_8CDE / level._id_F26B[self._id_F26E]._id_C7FB;
+  var_05 = self.heatlevel / level.sentrysettings[self.sentrytype].overheattime;
 
-  var_3._id_12A1A scripts\mp\hud_util::_id_12E63(var_5);
+  var_3.turret_overheat_bar scripts\mp\hud_util::updatebar(var_05);
 
-  if (scripts\engine\utility::string_starts_with(self._id_F26E, "minigun_turret"))
-  var_6 = "minigun_turret";
+  if (scripts\engine\utility::string_starts_with(self.sentrytype, "minigun_turret"))
+  var_06 = "minigun_turret";
 
-  if (self._id_72B5 || self._id_C7F9) {
-  self _meth_83C6();
-  var_3._id_12A1A._id_2812._id_00B9 = var_2;
-  var_4 = 0;
+  if (self.forcedisable || self.overheated) {
+  self turretfiredisable();
+  var_3.turret_overheat_bar.bar.color = var_02;
+  var_04 = 0;
   }
-  else if (self._id_8CDE > level._id_F26B[self._id_F26E]._id_C7FB * 0.75 && scripts\engine\utility::string_starts_with(self._id_F26E, "minigun_turret")) {
-  var_3._id_12A1A._id_2812._id_00B9 = var_1;
+  else if (self.heatlevel > level.sentrysettings[self.sentrytype].overheattime * 0.75 && scripts\engine\utility::string_starts_with(self.sentrytype, "minigun_turret")) {
+  var_3.turret_overheat_bar.bar.color = var_01;
 
   if (randomintrange(0, 10) < 6)
-  self _meth_83C7();
+  self turretfireenable();
   else
-  self _meth_83C6();
+  self turretfiredisable();
 
-  if (!var_4) {
-  var_4 = 1;
-  thread _id_D497();
+  if (!var_04) {
+  var_04 = 1;
+  thread playheatfx();
   }
   } else {
-  var_3._id_12A1A._id_2812._id_00B9 = var_0;
-  self _meth_83C7();
-  var_4 = 0;
+  var_3.turret_overheat_bar.bar.color = var_00;
+  self turretfireenable();
+  var_04 = 0;
   self notify("not_overheated");
   }
 
@@ -772,7 +772,7 @@ _id_129FF() {
   }
 }
 
-_id_F243() {
+sentry_handleownerdisconnect() {
   self endon("death");
   level endon("game_ended");
   self notify("sentry_handleOwner");
@@ -781,57 +781,57 @@ _id_F243() {
   self notify("death");
 }
 
-_id_F258(var_0) {
-  self.owner = var_0;
-  self _meth_8336(self.owner);
-  self _meth_835A(1, self._id_F26E);
+sentry_setowner(var_00) {
+  self.owner = var_00;
+  self setsentryowner(self.owner);
+  self setturretminimapvisible(1, self.sentrytype);
 
   if (level.teambased) {
   self.team = self.owner.team;
-  self _meth_835E(self.team);
+  self setturretteam(self.team);
   }
 
-  thread _id_F243();
+  thread sentry_handleownerdisconnect();
 }
 
-_id_F24B(var_0) {
+sentry_moving_platform_death(var_00) {
   self notify("death");
 }
 
-_id_F259(var_0) {
+sentry_setplaced(var_00) {
   if (isdefined(self.owner)) {
-  var_1 = self.owner._id_CC14[self._id_F26E].size;
-  self.owner._id_CC14[self._id_F26E][var_1] = self;
+  var_01 = self.owner.placedsentries[self.sentrytype].size;
+  self.owner.placedsentries[self.sentrytype][var_01] = self;
 
-  if (var_1 + 1 > 2)
-  self.owner._id_CC14[self._id_F26E][0] notify("death");
+  if (var_01 + 1 > 2)
+  self.owner.placedsentries[self.sentrytype][0] notify("death");
 
-  self.owner _id_1CB4(1);
-  self.owner scripts\engine\utility::_id_1C6E(1);
-  self.owner thread _id_6270();
-  self.owner _meth_85BD(1);
+  self.owner allowweaponsforsentry(1);
+  self.owner scripts\engine\utility::allow_usability(1);
+  self.owner thread enablemeleeforsentry();
+  self.owner enableworldup(1);
   }
 
-  var_2 = level._id_F26B[self._id_F26E]._id_B91A;
-  var_3 = _id_0AC7::getrarityforlootitem(self._id_110E8._id_1318B);
+  var_02 = level.sentrysettings[self.sentrytype].modelbase;
+  var_03 = scripts/mp/killstreak_loot::getrarityforlootitem(self.streakinfo.variantid);
 
-  if (var_3 != "")
-  var_2 = var_2 + "_" + var_3;
+  if (var_03 != "")
+  var_02 = var_02 + "_" + var_03;
 
-  self setmodel(var_2);
+  self setmodel(var_02);
 
-  if (self _meth_813D() == "manual")
-  self _meth_830F(level._id_F26B[self._id_F26E]._id_F268);
+  if (self getspawnpoint_safeguard() == "manual")
+  self give_player_session_tokens(level.sentrysettings[self.sentrytype].sentrymodeoff);
 
-  if (self._id_F26E == "sentry_shock")
+  if (self.sentrytype == "sentry_shock")
   self setscriptablepartstate("coil", "idle");
 
-  thread _id_F241();
-  thread _id_F242();
-  self _meth_8335(undefined);
+  thread sentry_handledamage();
+  thread sentry_handledeath();
+  self setsentrycarrier(undefined);
   self setcandamage(1);
 
-  switch (self._id_F26E) {
+  switch (self.sentrytype) {
   case "gl_turret_4":
   case "gl_turret_3":
   case "gl_turret_2":
@@ -842,17 +842,17 @@ _id_F259(var_0) {
   case "minigun_turret_2":
   case "minigun_turret_1":
   case "minigun_turret":
-  if (var_0) {
-  self.angles = self._id_3A9D.angles;
+  if (var_00) {
+  self.angles = self.carriedby.angles;
 
-  if (isalive(self._id_C731))
-  self._id_C731 scripts\mp\utility\game::_id_F78C("pickup_hint", level._id_F26B[self._id_F26E]._id_C837, 3.0, undefined, undefined, undefined, undefined, undefined, 1);
+  if (isalive(self.originalowner))
+  self.originalowner scripts\mp\utility\game::setlowermessage("pickup_hint", level.sentrysettings[self.sentrytype].ownerhintstring, 3.0, undefined, undefined, undefined, undefined, undefined, 1);
 
-  self._id_C840 = spawn("trigger_radius", self.origin + (0, 0, 1), 0, 105, 64);
-  self._id_C840 _meth_80D2();
-  self._id_C840 linkto(self);
-  self._id_C731 thread _id_129FD(self);
-  thread _id_129FF();
+  self.ownertrigger = spawn("trigger_radius", self.origin + (0, 0, 1), 0, 105, 64);
+  self.ownertrigger getrankxp();
+  self.ownertrigger linkto(self);
+  self.originalowner thread turret_handlepickup(self);
+  thread turret_handleuse();
   }
 
   break;
@@ -860,176 +860,176 @@ _id_F259(var_0) {
   break;
   }
 
-  _id_F24A();
+  sentry_makesolid();
 
-  if (isdefined(self._id_2C68)) {
-  self._id_2C68 show();
+  if (isdefined(self.bombsquadmodel)) {
+  self.bombsquadmodel show();
   level notify("update_bombsquad");
   }
 
-  self._id_3A9D _meth_80F3();
-  self._id_3A9D = undefined;
-  self._id_6DEC = undefined;
+  self.carriedby getrigindexfromarchetyperef();
+  self.carriedby = undefined;
+  self.firstplacement = undefined;
 
   if (isdefined(self.owner)) {
-  self.owner._id_9D81 = 0;
+  self.owner.iscarrying = 0;
   self.owner notify("new_sentry", self);
   }
 
-  _id_F252(var_0);
-  var_4 = spawnstruct();
+  sentry_setactive(var_00);
+  var_04 = spawnstruct();
 
-  if (isdefined(self._id_BD3B))
-  var_4._id_AD39 = self._id_BD3B;
+  if (isdefined(self.moving_platform))
+  var_4.linkparent = self.moving_platform;
 
-  var_4._id_6371 = "carried";
-  var_4._id_4E53 = ::_id_F24B;
-  thread scripts\mp\movers::_id_892F(var_4);
+  var_4.endonstring = "carried";
+  var_4.deathoverridecallback = ::sentry_moving_platform_death;
+  thread scripts\mp\movers::handle_moving_platforms(var_04);
 
-  if (self._id_F26E != "multiturret")
+  if (self.sentrytype != "multiturret")
   self playsound("sentry_gun_plant");
 
-  thread scripts\mp\weapons::_id_57EB(level._id_F26B[self._id_F26E]._id_ACB6);
+  thread scripts\mp\weapons::doblinkinglight(level.sentrysettings[self.sentrytype].lightfxtag);
   self notify("placed");
 }
 
-_id_F253(var_0) {
-  if (isdefined(self._id_3A9D)) {
-  var_1 = self._id_3A9D;
-  var_1 _meth_80F3();
-  var_1._id_9D81 = undefined;
-  var_1._id_3AA0 = undefined;
-  var_1 _id_1CB4(1);
-  var_1 scripts\engine\utility::_id_1C6E(1);
-  var_1 thread _id_6270();
-  var_1 _meth_85BD(1);
+sentry_setcancelled(var_00) {
+  if (isdefined(self.carriedby)) {
+  var_01 = self.carriedby;
+  var_01 getrigindexfromarchetyperef();
+  var_1.iscarrying = undefined;
+  var_1.carrieditem = undefined;
+  var_01 allowweaponsforsentry(1);
+  var_01 scripts\engine\utility::allow_usability(1);
+  var_01 thread enablemeleeforsentry();
+  var_01 enableworldup(1);
 
-  if (isdefined(self._id_2C68))
-  self._id_2C68 delete();
+  if (isdefined(self.bombsquadmodel))
+  self.bombsquadmodel delete();
   }
 
-  if (isdefined(var_0) && var_0)
-  scripts\mp\weapons::_id_66A8();
+  if (isdefined(var_00) && var_00)
+  scripts\mp\weapons::equipmentdeletevfx();
 
   self delete();
 }
 
-_id_F255(var_0, var_1, var_2) {
-  if (isdefined(self._id_C731)) {} else {}
+sentry_setcarried(var_00, var_01, var_02) {
+  if (isdefined(self.originalowner)) {} else {}
 
-  if (self._id_F26E == "sentry_shock") {
+  if (self.sentrytype == "sentry_shock") {
   self setscriptablepartstate("coil", "neutral");
   self setscriptablepartstate("muzzle", "neutral", 0);
   }
 
-  self setmodel(level._id_F26B[self._id_F26E]._id_B920);
-  self _meth_8335(var_0);
+  self setmodel(level.sentrysettings[self.sentrytype].modelgood);
+  self setsentrycarrier(var_00);
   self setcandamage(0);
-  _id_F249();
-  var_0 _meth_85BD(0);
-  self._id_3A9D = var_0;
-  var_0._id_9D81 = 1;
-  self._id_CB40 = var_1;
-  thread sentry_oncarrierdeathoremp(var_0, var_2);
-  var_0 thread _id_12F16(self);
-  thread _id_F24E(var_0);
-  thread _id_F24C(var_0);
-  thread _id_F24F();
+  sentry_makenotsolid();
+  var_00 enableworldup(0);
+  self.carriedby = var_00;
+  var_0.iscarrying = 1;
+  self.pickupenabled = var_01;
+  thread sentry_oncarrierdeathoremp(var_00, var_02);
+  var_00 thread updatesentryplacement(self);
+  thread sentry_oncarrierdisconnect(var_00);
+  thread sentry_oncarrierchangedteam(var_00);
+  thread sentry_ongameended();
   self setdefaultdroppitch(-89.0);
-  _id_F257();
+  sentry_setinactive();
 
-  if (isdefined(self _meth_8138()))
+  if (isdefined(self getlinkedparent()))
   self unlink();
 
   self notify("carried");
 
-  if (isdefined(self._id_2C68))
-  self._id_2C68 hide();
+  if (isdefined(self.bombsquadmodel))
+  self.bombsquadmodel hide();
 }
 
-_id_12F16(var_0) {
+updatesentryplacement(var_00) {
   self endon("death");
   self endon("disconnect");
   level endon("game_ended");
-  var_0 endon("placed");
-  var_0 endon("death");
-  var_0._id_3872 = 1;
-  var_1 = -1;
+  var_00 endon("placed");
+  var_00 endon("death");
+  var_0.canbeplaced = 1;
+  var_01 = -1;
 
   for (;;) {
-  var_2 = self canplayerplacesentry(1, 40);
+  var_02 = self canplayerplacesentry(1, 40);
   var_0.origin = var_2["origin"];
   var_0.angles = var_2["angles"];
-  var_3 = scripts\engine\utility::_id_227F(level._id_12A83, level._id_B726, level._id_11267._id_12801, level._id_B779);
-  var_4 = var_0 getistouchingentities(var_3);
-  var_0._id_3872 = self isonground() && var_2["result"] && abs(var_0.origin[2] - self.origin[2]) < 30 && !scripts\mp\utility\game::_id_9FAE(self) && var_4.size == 0;
+  var_03 = scripts\engine\utility::array_combine(level.turrets, level.microturrets, level.supertrophy.trophies, level.mines);
+  var_04 = var_00 getistouchingentities(var_03);
+  var_0.canbeplaced = self isonground() && var_2["result"] && abs(var_0.origin[2] - self.origin[2]) < 30 && !scripts\mp\utility\game::func_9FAE(self) && var_4.size == 0;
 
   if (isdefined(var_2["entity"]))
-  var_0._id_BD3B = var_2["entity"];
+  var_0.moving_platform = var_2["entity"];
   else
-  var_0._id_BD3B = undefined;
+  var_0.moving_platform = undefined;
 
-  if (var_0._id_3872 != var_1) {
-  if (var_0._id_3872) {
-  var_0 setmodel(level._id_F26B[var_0._id_F26E]._id_B920);
-  var_0 _id_CC1B();
+  if (var_0.canbeplaced != var_01) {
+  if (var_0.canbeplaced) {
+  var_00 setmodel(level.sentrysettings[var_0.sentrytype].modelgood);
+  var_00 placehinton();
   } else {
-  var_0 setmodel(level._id_F26B[var_0._id_F26E]._id_B919);
-  var_0 _id_38E2();
+  var_00 setmodel(level.sentrysettings[var_0.sentrytype].modelbad);
+  var_00 cannotplacehinton();
   }
   }
 
-  var_1 = var_0._id_3872;
+  var_01 = var_0.canbeplaced;
   wait 0.05;
   }
 }
 
-sentry_oncarrierdeathoremp(var_0, var_1) {
+sentry_oncarrierdeathoremp(var_00, var_01) {
   self endon("placed");
   self endon("death");
-  var_0 endon("disconnect");
-  var_0 scripts\engine\utility::waittill_any("death", "apply_player_emp");
+  var_00 endon("disconnect");
+  var_00 scripts\engine\utility::waittill_any("death", "apply_player_emp");
 
-  if (self._id_3872 && !scripts\mp\utility\game::istrue(var_1))
-  _id_F259(self._id_CB40);
+  if (self.canbeplaced && !scripts\mp\utility\game::istrue(var_01))
+  sentry_setplaced(self.pickupenabled);
   else
-  _id_F253(0);
+  sentry_setcancelled(0);
 }
 
-_id_F24E(var_0) {
+sentry_oncarrierdisconnect(var_00) {
   self endon("placed");
   self endon("death");
-  var_0 waittill("disconnect");
+  var_00 waittill("disconnect");
   self delete();
 }
 
-_id_F24C(var_0) {
+sentry_oncarrierchangedteam(var_00) {
   self endon("placed");
   self endon("death");
-  var_0 scripts\engine\utility::waittill_any("joined_team", "joined_spectators");
+  var_00 scripts\engine\utility::waittill_any("joined_team", "joined_spectators");
   self delete();
 }
 
-_id_F24F(var_0) {
+sentry_ongameended(var_00) {
   self endon("placed");
   self endon("death");
   level waittill("game_ended");
   self delete();
 }
 
-_id_F252(var_0) {
-  self _meth_830F(level._id_F26B[self._id_F26E]._id_F269);
+sentry_setactive(var_00) {
+  self give_player_session_tokens(level.sentrysettings[self.sentrytype].sentrymodeon);
 
-  if (var_0) {
+  if (var_00) {
   self setcursorhint("HINT_NOICON");
-  self sethintstring(level._id_F26B[self._id_F26E]._id_017B);
+  self sethintstring(level.sentrysettings[self.sentrytype].hintstring);
   self makeusable();
   }
 
   sentry_setteamheadicon();
 
-  foreach (var_2 in level.players) {
-  switch (self._id_F26E) {
+  foreach (var_02 in level.players) {
+  switch (self.sentrytype) {
   case "gl_turret_4":
   case "gl_turret_3":
   case "gl_turret_2":
@@ -1040,113 +1040,113 @@ _id_F252(var_0) {
   case "minigun_turret_2":
   case "minigun_turret_1":
   case "minigun_turret":
-  if (var_0)
-  self enableplayeruse(var_2);
+  if (var_00)
+  self enableplayeruse(var_02);
 
   break;
   default:
-  _id_0DC9::_id_1843(self._id_F26E, "Killstreak_Ground", self.owner, 1, "carried");
+  scripts/mp/killstreaks/utility::func_1843(self.sentrytype, "Killstreak_Ground", self.owner, 1, "carried");
 
-  if (var_2 == self.owner && var_0)
-  self enableplayeruse(var_2);
+  if (var_02 == self.owner && var_00)
+  self enableplayeruse(var_02);
   else
-  self disableplayeruse(var_2);
+  self disableplayeruse(var_02);
 
   break;
   }
   }
 
-  var_4 = level._id_F26B[self._id_F26E]._id_115EB;
-  var_5 = _id_0AC7::getrarityforlootitem(self._id_110E8._id_1318B);
+  var_04 = level.sentrysettings[self.sentrytype].teamsplash;
+  var_05 = scripts/mp/killstreak_loot::getrarityforlootitem(self.streakinfo.variantid);
 
-  if (var_5 != "")
-  var_4 = var_4 + "_" + var_5;
+  if (var_05 != "")
+  var_04 = var_04 + "_" + var_05;
 
-  if (self._id_10085) {
-  level thread scripts\mp\utility\game::_id_115DE(var_4, self.owner);
-  self._id_10085 = 0;
+  if (self.shouldsplash) {
+  level thread scripts\mp\utility\game::teamplayercardsplash(var_04, self.owner);
+  self.shouldsplash = 0;
   }
 
-  if (self._id_F26E == "sam_turret")
-  thread _id_EB09();
+  if (self.sentrytype == "sam_turret")
+  thread sam_attacktargets();
 
-  if (self._id_F26E == "scramble_turret")
-  thread _id_ECA3();
+  if (self.sentrytype == "scramble_turret")
+  thread scrambleturretattacktargets();
 
-  if (self._id_F26E == "sentry_shock")
-  thread _id_F26D();
+  if (self.sentrytype == "sentry_shock")
+  thread sentryshocktargets();
 
-  thread _id_F263();
+  thread sentry_watchdisabled();
 }
 
-_id_F257() {
-  self _meth_830F(level._id_F26B[self._id_F26E]._id_F268);
+sentry_setinactive() {
+  self give_player_session_tokens(level.sentrysettings[self.sentrytype].sentrymodeoff);
   self makeunusable();
-  scripts\mp\weapons::_id_11061();
+  scripts\mp\weapons::stopblinkinglight();
   sentry_clearteamheadicon();
 }
 
-_id_F24A() {
-  self _meth_81F7();
+sentry_makesolid() {
+  self getvalidlocation();
 }
 
-_id_F249() {
-  self _meth_82C7(0);
+sentry_makenotsolid() {
+  self setcontents(0);
 }
 
-_id_9E0A(var_0) {
+isfriendlytosentry(var_00) {
   if (level.teambased && self.team == var_0.team)
   return 1;
 
   return 0;
 }
 
-_id_F239() {
+sentry_attacktargets() {
   self endon("death");
   level endon("game_ended");
-  self._id_B941 = 0;
-  self._id_8CDE = 0;
-  self._id_C7F9 = 0;
-  thread _id_F245();
+  self.momentum = 0;
+  self.heatlevel = 0;
+  self.overheated = 0;
+  thread sentry_heatmonitor();
 
   for (;;) {
-  scripts\engine\utility::_id_13762("turretstatechange", "cooled");
+  scripts\engine\utility::waittill_either("turretstatechange", "cooled");
 
-  if (self _meth_81A0()) {
-  thread _id_F23B();
+  if (self getteamarray()) {
+  thread sentry_burstfirestart();
   continue;
   }
 
-  _id_F25B();
-  thread _id_F23C();
+  sentry_spindown();
+  thread sentry_burstfirestop();
   }
 }
 
-_id_F261() {
+sentry_timeout() {
   self endon("death");
   level endon("game_ended");
-  var_0 = level._id_F26B[self._id_F26E]._id_11901;
+  var_00 = level.sentrysettings[self.sentrytype].timeout;
 
-  if (isdefined(var_0) && var_0 == 0)
+  if (isdefined(var_00) && var_00 == 0)
   return;
 
-  while (var_0) {
+  while (var_00) {
   wait 1.0;
   scripts\mp\hostmigration::waittillhostmigrationdone();
 
-  if (!isdefined(self._id_3A9D))
-  var_0 = max(0, var_0 - 1.0);
+  if (!isdefined(self.carriedby))
+  var_00 = max(0, var_00 - 1.0);
   }
 
   if (isdefined(self.owner)) {
-  if (isdefined(level._id_F26B[self._id_F26E]._id_13554))
-  self.owner scripts\mp\utility\game::_id_D4B6(level._id_F26B[self._id_F26E]._id_13554, undefined, undefined, self.owner.origin);
+  if (isdefined(level.sentrysettings[self.sentrytype].votimeout))
+  self.owner scripts\mp\utility\game::playkillstreakdialogonplayer(level.sentrysettings[self.sentrytype].votimeout, undefined, undefined, self.owner.origin);
   }
 
   self notify("death");
 }
 
-_id_F260() {
+sentry_targetlocksound() {
   self endon("death");
   self playsound("sentry_gun_beep");
   wait 0.1;
@@ -1155,159 +1155,159 @@ _id_F260() {
   self playsound("sentry_gun_beep");
 }
 
-_id_F25C() {
-  thread _id_F260();
+sentry_spinup() {
+  thread sentry_targetlocksound();
 
-  while (self._id_B941 < level._id_F26B[self._id_F26E]._id_10A13) {
-  self._id_B941 = self._id_B941 + 0.1;
+  while (self.momentum < level.sentrysettings[self.sentrytype].spinuptime) {
+  self.momentum = self.momentum + 0.1;
   wait 0.1;
   }
 }
 
-_id_F25B() {
-  self._id_B941 = 0;
+sentry_spindown() {
+  self.momentum = 0;
 }
 
-_id_F248() {
+sentry_laser_burstfirestart() {
   self endon("death");
   self endon("stop_shooting");
   level endon("game_ended");
-  _id_F25C();
-  var_0 = weaponfiretime(level._id_F26B[self._id_F26E]._id_039B);
-  var_1 = level._id_F26B[self._id_F26E]._id_32C1;
-  var_2 = level._id_F26B[self._id_F26E]._id_32C0;
+  sentry_spinup();
+  var_00 = weaponfiretime(level.sentrysettings[self.sentrytype].weaponinfo);
+  var_01 = level.sentrysettings[self.sentrytype].burstmin;
+  var_02 = level.sentrysettings[self.sentrytype].burstmax;
 
-  if (isdefined(self._id_112C5) && self._id_112C5) {
-  var_0 = 0.05;
-  var_3 = 50;
+  if (isdefined(self.supportturret) && self.supportturret) {
+  var_00 = 0.05;
+  var_03 = 50;
   } else {
-  var_0 = 0.5 / (self._id_AD80.size + 1);
-  var_3 = var_1;
+  var_00 = 0.5 / (self.listoffoundturrets.size + 1);
+  var_03 = var_01;
   }
 
-  for (var_4 = 0; var_4 < var_3; var_4++) {
-  var_5 = self getturrettarget(1);
+  for (var_04 = 0; var_04 < var_03; var_4++) {
+  var_05 = self getturrettarget(1);
 
-  if (!isdefined(var_5))
+  if (!isdefined(var_05))
   break;
 
   self shootturret();
-  wait(var_0);
+  wait(var_00);
   }
 
   self notify("doneFiring");
   self cleartargetentity();
 }
 
-_id_F23B() {
+sentry_burstfirestart() {
   self endon("death");
   self endon("stop_shooting");
   level endon("game_ended");
-  _id_F25C();
-  var_0 = weaponfiretime(level._id_F26B[self._id_F26E]._id_039B);
-  var_1 = level._id_F26B[self._id_F26E]._id_32C1;
-  var_2 = level._id_F26B[self._id_F26E]._id_32C0;
-  var_3 = level._id_F26B[self._id_F26E]._id_C9D3;
-  var_4 = level._id_F26B[self._id_F26E]._id_C9D1;
+  sentry_spinup();
+  var_00 = weaponfiretime(level.sentrysettings[self.sentrytype].weaponinfo);
+  var_01 = level.sentrysettings[self.sentrytype].burstmin;
+  var_02 = level.sentrysettings[self.sentrytype].burstmax;
+  var_03 = level.sentrysettings[self.sentrytype].pausemin;
+  var_04 = level.sentrysettings[self.sentrytype].pausemax;
 
   for (;;) {
-  var_5 = randomintrange(var_1, var_2 + 1);
+  var_05 = randomintrange(var_01, var_02 + 1);
 
-  for (var_6 = 0; var_6 < var_5 && !self._id_C7F9; var_6++) {
+  for (var_06 = 0; var_06 < var_05 && !self.overheated; var_6++) {
   self shootturret();
   self notify("bullet_fired");
-  self._id_8CDE = self._id_8CDE + var_0;
-  wait(var_0);
+  self.heatlevel = self.heatlevel + var_00;
+  wait(var_00);
   }
 
-  wait(randomfloatrange(var_3, var_4));
+  wait(randomfloatrange(var_03, var_04));
   }
 }
 
-_id_F23C() {
+sentry_burstfirestop() {
   self notify("stop_shooting");
 }
 
-_id_12A31(var_0) {
+turret_shotmonitor(var_00) {
   self endon("death");
   self endon("disconnect");
   level endon("game_ended");
-  var_0 endon("death");
-  var_0 endon("player_dismount");
-  var_1 = weaponfiretime(level._id_F26B[var_0._id_F26E]._id_039B);
+  var_00 endon("death");
+  var_00 endon("player_dismount");
+  var_01 = weaponfiretime(level.sentrysettings[var_0.sentrytype].weaponinfo);
 
   for (;;) {
-  var_0 waittill("turret_fire");
-  var_0._id_8CDE = var_0._id_8CDE + var_1;
-  var_0._id_4621 = var_1;
+  var_00 waittill("turret_fire");
+  var_0.heatlevel = var_0.heatlevel + var_01;
+  var_0.cooldownwaittime = var_01;
   }
 }
 
-_id_F245() {
+sentry_heatmonitor() {
   self endon("death");
-  var_0 = weaponfiretime(level._id_F26B[self._id_F26E]._id_039B);
-  var_1 = 0;
-  var_2 = 0;
-  var_3 = level._id_F26B[self._id_F26E]._id_C7FB;
-  var_4 = level._id_F26B[self._id_F26E]._id_461D;
+  var_00 = weaponfiretime(level.sentrysettings[self.sentrytype].weaponinfo);
+  var_01 = 0;
+  var_02 = 0;
+  var_03 = level.sentrysettings[self.sentrytype].overheattime;
+  var_04 = level.sentrysettings[self.sentrytype].cooldowntime;
 
   for (;;) {
-  if (self._id_8CDE != var_1)
-  wait(var_0);
+  if (self.heatlevel != var_01)
+  wait(var_00);
   else
-  self._id_8CDE = max(0, self._id_8CDE - 0.05);
+  self.heatlevel = max(0, self.heatlevel - 0.05);
 
-  if (self._id_8CDE > var_3) {
-  self._id_C7F9 = 1;
-  thread _id_D497();
+  if (self.heatlevel > var_03) {
+  self.overheated = 1;
+  thread playheatfx();
 
-  switch (self._id_F26E) {
+  switch (self.sentrytype) {
   case "minigun_turret_4":
   case "minigun_turret_3":
   case "minigun_turret_2":
   case "minigun_turret_1":
   case "minigun_turret":
-  playfxontag(scripts\engine\utility::_id_7ECB("sentry_smoke_mp"), self, "tag_aim");
+  playfxontag(scripts\engine\utility::getfx("sentry_smoke_mp"), self, "tag_aim");
   break;
   default:
   break;
   }
 
-  while (self._id_8CDE) {
-  self._id_8CDE = max(0, self._id_8CDE - var_4);
+  while (self.heatlevel) {
+  self.heatlevel = max(0, self.heatlevel - var_04);
   wait 0.1;
   }
 
-  self._id_C7F9 = 0;
+  self.overheated = 0;
   self notify("not_overheated");
   }
 
-  var_1 = self._id_8CDE;
+  var_01 = self.heatlevel;
   wait 0.05;
   }
 }
 
-_id_12A00() {
+turret_heatmonitor() {
   self endon("death");
-  var_0 = level._id_F26B[self._id_F26E]._id_C7FB;
+  var_00 = level.sentrysettings[self.sentrytype].overheattime;
 
   for (;;) {
-  if (self._id_8CDE > var_0) {
-  self._id_C7F9 = 1;
-  thread _id_D497();
+  if (self.heatlevel > var_00) {
+  self.overheated = 1;
+  thread playheatfx();
 
-  switch (self._id_F26E) {
+  switch (self.sentrytype) {
   case "gl_turret":
-  playfxontag(scripts\engine\utility::_id_7ECB("sentry_smoke_mp"), self, "tag_aim");
+  playfxontag(scripts\engine\utility::getfx("sentry_smoke_mp"), self, "tag_aim");
   break;
   default:
   break;
   }
 
-  while (self._id_8CDE)
+  while (self.heatlevel)
   wait 0.1;
 
-  self._id_C7F9 = 0;
+  self.overheated = 0;
   self notify("not_overheated");
   }
 
@@ -1315,22 +1315,22 @@ _id_12A00() {
   }
 }
 
-_id_129D7() {
+turret_coolmonitor() {
   self endon("death");
 
   for (;;) {
-  if (self._id_8CDE > 0) {
-  if (self._id_4621 <= 0)
-  self._id_8CDE = max(0, self._id_8CDE - 0.05);
+  if (self.heatlevel > 0) {
+  if (self.cooldownwaittime <= 0)
+  self.heatlevel = max(0, self.heatlevel - 0.05);
   else
-  self._id_4621 = max(0, self._id_4621 - 0.05);
+  self.cooldownwaittime = max(0, self.cooldownwaittime - 0.05);
   }
 
   wait 0.05;
   }
 }
 
-_id_D497() {
+playheatfx() {
   self endon("death");
   self endon("not_overheated");
   level endon("game_ended");
@@ -1338,228 +1338,228 @@ _id_D497() {
   self endon("playing_heat_fx");
 
   for (;;) {
-  playfxontag(scripts\engine\utility::_id_7ECB("sentry_overheat_mp"), self, "tag_flash");
-  wait(level._id_F26B[self._id_F26E]._id_7645);
+  playfxontag(scripts\engine\utility::getfx("sentry_overheat_mp"), self, "tag_flash");
+  wait(level.sentrysettings[self.sentrytype].fxtime);
   }
 }
 
-_id_D51F() {
+playsmokefx() {
   self endon("death");
   self endon("not_overheated");
   level endon("game_ended");
 
   for (;;) {
-  playfxontag(scripts\engine\utility::_id_7ECB("sentry_smoke_mp"), self, "tag_aim");
+  playfxontag(scripts\engine\utility::getfx("sentry_smoke_mp"), self, "tag_aim");
   wait 0.4;
   }
 }
 
-_id_F23A() {
+sentry_beepsounds() {
   self endon("death");
   level endon("game_ended");
 
   for (;;) {
   wait 3.0;
 
-  if (!isdefined(self._id_3A9D))
+  if (!isdefined(self.carriedby))
   self playsound("sentry_gun_beep");
   }
 }
 
-_id_EB09() {
+sam_attacktargets() {
   self endon("carried");
   self endon("death");
   level endon("game_ended");
-  self._id_EB19 = undefined;
-  self._id_EB16 = [];
+  self.samtargetent = undefined;
+  self.sammissilegroups = [];
 
   for (;;) {
-  self._id_EB19 = _id_EB08();
-  _id_EB0C();
+  self.samtargetent = sam_acquiretarget();
+  sam_fireontarget();
   wait 0.05;
   }
 }
 
-_id_EB08() {
-  var_0 = self gettagorigin("tag_laser");
+sam_acquiretarget() {
+  var_00 = self gettagorigin("tag_laser");
 
-  if (!isdefined(self._id_EB19)) {
+  if (!isdefined(self.samtargetent)) {
   if (level.teambased) {
-  var_1 = [];
+  var_01 = [];
 
-  if (level._id_BDCC) {
-  foreach (var_3 in level._id_115DA) {
-  if (var_3 != self.team) {
-  foreach (var_5 in level._id_12AF3[var_3])
-  var_1[var_1.size] = var_5;
+  if (level.multiteambased) {
+  foreach (var_03 in level.teamnamelist) {
+  if (var_03 != self.team) {
+  foreach (var_05 in level.uavmodels[var_03])
+  var_1[var_1.size] = var_05;
   }
   }
   }
   else
-  var_1 = level._id_12AF3[level._id_C74B[self.team]];
+  var_01 = level.uavmodels[level.otherteam[self.team]];
 
-  foreach (var_9 in var_1) {
-  if (isdefined(var_9._id_9E78) && var_9._id_9E78)
+  foreach (var_09 in var_01) {
+  if (isdefined(var_9.isleaving) && var_9.isleaving)
   continue;
 
-  if (sighttracepassed(var_0, var_9.origin, 0, self))
-  return var_9;
+  if (sighttracepassed(var_00, var_9.origin, 0, self))
+  return var_09;
   }
 
-  foreach (var_12 in level._id_AD8B) {
+  foreach (var_12 in level.littlebirds) {
   if (isdefined(var_12.team) && var_12.team == self.team)
   continue;
 
-  if (sighttracepassed(var_0, var_12.origin, 0, self))
+  if (sighttracepassed(var_00, var_12.origin, 0, self))
   return var_12;
   }
 
-  foreach (var_15 in level._id_8DD3) {
+  foreach (var_15 in level.helis) {
   if (isdefined(var_15.team) && var_15.team == self.team)
   continue;
 
-  if (sighttracepassed(var_0, var_15.origin, 0, self))
+  if (sighttracepassed(var_00, var_15.origin, 0, self))
   return var_15;
   }
 
-  foreach (var_9 in level._id_DF74) {
-  if (!isdefined(var_9))
+  foreach (var_09 in level.remote_uav) {
+  if (!isdefined(var_09))
   continue;
 
   if (isdefined(var_9.team) && var_9.team == self.team)
   continue;
 
-  if (sighttracepassed(var_0, var_9.origin, 0, self, var_9))
-  return var_9;
+  if (sighttracepassed(var_00, var_9.origin, 0, self, var_09))
+  return var_09;
   }
   } else {
-  foreach (var_9 in level._id_12AF3) {
-  if (isdefined(var_9._id_9E78) && var_9._id_9E78)
+  foreach (var_09 in level.uavmodels) {
+  if (isdefined(var_9.isleaving) && var_9.isleaving)
   continue;
 
   if (isdefined(var_9.owner) && isdefined(self.owner) && var_9.owner == self.owner)
   continue;
 
-  if (sighttracepassed(var_0, var_9.origin, 0, self))
-  return var_9;
+  if (sighttracepassed(var_00, var_9.origin, 0, self))
+  return var_09;
   }
 
-  foreach (var_12 in level._id_AD8B) {
+  foreach (var_12 in level.littlebirds) {
   if (isdefined(var_12.owner) && isdefined(self.owner) && var_12.owner == self.owner)
   continue;
 
-  if (sighttracepassed(var_0, var_12.origin, 0, self))
+  if (sighttracepassed(var_00, var_12.origin, 0, self))
   return var_12;
   }
 
-  foreach (var_15 in level._id_8DD3) {
+  foreach (var_15 in level.helis) {
   if (isdefined(var_15.owner) && isdefined(self.owner) && var_15.owner == self.owner)
   continue;
 
-  if (sighttracepassed(var_0, var_15.origin, 0, self))
+  if (sighttracepassed(var_00, var_15.origin, 0, self))
   return var_15;
   }
 
-  foreach (var_9 in level._id_DF74) {
-  if (!isdefined(var_9))
+  foreach (var_09 in level.remote_uav) {
+  if (!isdefined(var_09))
   continue;
 
   if (isdefined(var_9.owner) && isdefined(self.owner) && var_9.owner == self.owner)
   continue;
 
-  if (sighttracepassed(var_0, var_9.origin, 0, self, var_9))
-  return var_9;
+  if (sighttracepassed(var_00, var_9.origin, 0, self, var_09))
+  return var_09;
   }
   }
 
   self cleartargetentity();
   return undefined;
   } else {
-  if (!sighttracepassed(var_0, self._id_EB19.origin, 0, self)) {
+  if (!sighttracepassed(var_00, self.samtargetent.origin, 0, self)) {
   self cleartargetentity();
   return undefined;
   }
 
-  return self._id_EB19;
+  return self.samtargetent;
   }
 }
 
-_id_EB0C() {
-  if (isdefined(self._id_EB19)) {
-  if (self._id_EB19 == level._id_1537._id_CC44 && !isdefined(level._id_1541)) {
-  self._id_EB19 = undefined;
+sam_fireontarget() {
+  if (isdefined(self.samtargetent)) {
+  if (self.samtargetent == level.ac130.planemodel && !isdefined(level.ac130player)) {
+  self.samtargetent = undefined;
   self cleartargetentity();
   return;
   }
 
-  self settargetentity(self._id_EB19);
+  self settargetentity(self.samtargetent);
   self waittill("turret_on_target");
 
-  if (!isdefined(self._id_EB19))
+  if (!isdefined(self.samtargetent))
   return;
 
-  if (!self._id_A86B) {
-  thread _id_EB0E();
-  thread _id_EB0D();
-  thread _id_EB0F();
-  thread _id_EB10();
+  if (!self.laser_on) {
+  thread sam_watchlaser();
+  thread sam_watchcrashing();
+  thread sam_watchleaving();
+  thread sam_watchlineofsight();
   }
 
   wait 2.0;
 
-  if (!isdefined(self._id_EB19))
+  if (!isdefined(self.samtargetent))
   return;
 
-  if (self._id_EB19 == level._id_1537._id_CC44 && !isdefined(level._id_1541)) {
-  self._id_EB19 = undefined;
+  if (self.samtargetent == level.ac130.planemodel && !isdefined(level.ac130player)) {
+  self.samtargetent = undefined;
   self cleartargetentity();
   return;
   }
 
-  var_0 = [];
+  var_00 = [];
   var_0[0] = self gettagorigin("tag_le_missile1");
   var_0[1] = self gettagorigin("tag_le_missile2");
   var_0[2] = self gettagorigin("tag_ri_missile1");
   var_0[3] = self gettagorigin("tag_ri_missile2");
-  var_1 = self._id_EB16.size;
+  var_01 = self.sammissilegroups.size;
 
-  for (var_2 = 0; var_2 < 4; var_2++) {
-  if (!isdefined(self._id_EB19))
+  for (var_02 = 0; var_02 < 4; var_2++) {
+  if (!isdefined(self.samtargetent))
   return;
 
-  if (isdefined(self._id_3A9D))
+  if (isdefined(self.carriedby))
   return;
 
   self shootturret();
-  var_3 = scripts\mp\utility\game::_id_1309("sam_projectile_mp", var_0[var_2], self._id_EB19.origin, self.owner);
-  var_3 _meth_8206(self._id_EB19);
-  var_3 _meth_8204();
-  var_3._id_EB1A = self;
-  var_3._id_EB15 = var_1;
-  self._id_EB16[var_1][var_2] = var_3;
-  level notify("sam_missile_fired", self.owner, var_3, self._id_EB19);
+  var_03 = scripts\mp\utility\game::_magicbullet("sam_projectile_mp", var_0[var_02], self.samtargetent.origin, self.owner);
+  var_03 missile_settargetent(self.samtargetent);
+  var_03 missile_setflightmodedirect();
+  var_3.samturret = self;
+  var_3.sammissilegroup = var_01;
+  self.sammissilegroups[var_01][var_02] = var_03;
+  level notify("sam_missile_fired", self.owner, var_03, self.samtargetent);
 
-  if (var_2 == 3)
+  if (var_02 == 3)
   break;
 
   wait 0.25;
   }
 
-  level notify("sam_fired", self.owner, self._id_EB16[var_1], self._id_EB19);
+  level notify("sam_fired", self.owner, self.sammissilegroups[var_01], self.samtargetent);
   wait 3.0;
   }
 }
 
-_id_EB10() {
+sam_watchlineofsight() {
   level endon("game_ended");
   self endon("death");
 
-  while (isdefined(self._id_EB19) && isdefined(self getturrettarget(1)) && self getturrettarget(1) == self._id_EB19) {
-  var_0 = self gettagorigin("tag_laser");
+  while (isdefined(self.samtargetent) && isdefined(self getturrettarget(1)) && self getturrettarget(1) == self.samtargetent) {
+  var_00 = self gettagorigin("tag_laser");
 
-  if (!sighttracepassed(var_0, self._id_EB19.origin, 0, self, self._id_EB19)) {
+  if (!sighttracepassed(var_00, self.samtargetent.origin, 0, self, self.samtargetent)) {
   self cleartargetentity();
-  self._id_EB19 = undefined;
+  self.samtargetent = undefined;
   break;
   }
 
@@ -1567,136 +1567,136 @@ _id_EB10() {
   }
 }
 
-_id_EB0E() {
+sam_watchlaser() {
   self endon("death");
   self laseron();
-  self._id_A86B = 1;
+  self.laser_on = 1;
 
-  while (isdefined(self._id_EB19) && isdefined(self getturrettarget(1)) && self getturrettarget(1) == self._id_EB19)
+  while (isdefined(self.samtargetent) && isdefined(self getturrettarget(1)) && self getturrettarget(1) == self.samtargetent)
   wait 0.05;
 
   self laseroff();
-  self._id_A86B = 0;
+  self.laser_on = 0;
 }
 
-_id_EB0D() {
+sam_watchcrashing() {
   self endon("death");
-  self._id_EB19 endon("death");
+  self.samtargetent endon("death");
 
-  if (!isdefined(self._id_EB19.helitype))
+  if (!isdefined(self.samtargetent.helitype))
   return;
 
-  self._id_EB19 waittill("crashing");
+  self.samtargetent waittill("crashing");
   self cleartargetentity();
-  self._id_EB19 = undefined;
+  self.samtargetent = undefined;
 }
 
-_id_EB0F() {
+sam_watchleaving() {
   self endon("death");
-  self._id_EB19 endon("death");
+  self.samtargetent endon("death");
 
-  if (!isdefined(self._id_EB19._id_01F1))
+  if (!isdefined(self.samtargetent.model))
   return;
 
-  if (self._id_EB19._id_01F1 == "vehicle_uav_static_mp") {
-  self._id_EB19 waittill("leaving");
+  if (self.samtargetent.model == "vehicle_uav_static_mp") {
+  self.samtargetent waittill("leaving");
   self cleartargetentity();
-  self._id_EB19 = undefined;
+  self.samtargetent = undefined;
   }
 }
 
-_id_ECA3() {
+scrambleturretattacktargets() {
   self endon("carried");
   self endon("death");
   level endon("game_ended");
-  self._id_ECA1 = undefined;
+  self.scrambletargetent = undefined;
 
   for (;;) {
-  self._id_ECA1 = _id_EC96();
+  self.scrambletargetent = scramble_acquiretarget();
 
-  if (isdefined(self._id_ECA1) && isdefined(self._id_ECA1._id_EC9B) && !self._id_ECA1._id_EC9B)
-  _id_ECA0();
+  if (isdefined(self.scrambletargetent) && isdefined(self.scrambletargetent.scrambled) && !self.scrambletargetent.scrambled)
+  scrambletarget();
 
   wait 0.05;
   }
 }
 
-_id_EC96() {
-  return _id_EB08();
+scramble_acquiretarget() {
+  return sam_acquiretarget();
 }
 
-_id_ECA0() {
-  if (isdefined(self._id_ECA1)) {
-  if (self._id_ECA1 == level._id_1537._id_CC44 && !isdefined(level._id_1541)) {
-  self._id_ECA1 = undefined;
+scrambletarget() {
+  if (isdefined(self.scrambletargetent)) {
+  if (self.scrambletargetent == level.ac130.planemodel && !isdefined(level.ac130player)) {
+  self.scrambletargetent = undefined;
   self cleartargetentity();
   return;
   }
 
-  self settargetentity(self._id_ECA1);
+  self settargetentity(self.scrambletargetent);
   self waittill("turret_on_target");
 
-  if (!isdefined(self._id_ECA1))
+  if (!isdefined(self.scrambletargetent))
   return;
 
-  if (!self._id_A86B) {
-  thread _id_EC98();
-  thread _id_EC97();
-  thread _id_EC99();
-  thread _id_EC9A();
+  if (!self.laser_on) {
+  thread scramble_watchlaser();
+  thread scramble_watchcrashing();
+  thread scramble_watchleaving();
+  thread scramble_watchlineofsight();
   }
 
   wait 2.0;
 
-  if (!isdefined(self._id_ECA1))
+  if (!isdefined(self.scrambletargetent))
   return;
 
-  if (self._id_ECA1 == level._id_1537._id_CC44 && !isdefined(level._id_1541)) {
-  self._id_ECA1 = undefined;
+  if (self.scrambletargetent == level.ac130.planemodel && !isdefined(level.ac130player)) {
+  self.scrambletargetent = undefined;
   self cleartargetentity();
   return;
   }
 
-  if (!isdefined(self._id_ECA1))
+  if (!isdefined(self.scrambletargetent))
   return;
 
-  if (isdefined(self._id_3A9D))
+  if (isdefined(self.carriedby))
   return;
 
   self shootturret();
-  thread _id_F82E();
+  thread setscrambled();
   self notify("death");
   }
 }
 
-_id_F82E() {
-  var_0 = self._id_ECA1;
-  var_0 notify("scramble_fired", self.owner);
-  var_0 endon("scramble_fired");
-  var_0 endon("death");
-  var_0 thread scripts\mp\killstreaks\helicopter::_id_8D99();
-  var_0._id_EC9B = 1;
-  var_0._id_F0C5 = self.owner;
-  var_0 notify("findNewTarget");
+setscrambled() {
+  var_00 = self.scrambletargetent;
+  var_00 notify("scramble_fired", self.owner);
+  var_00 endon("scramble_fired");
+  var_00 endon("death");
+  var_00 thread scripts\mp\killstreaks\helicopter::heli_targeting();
+  var_0.scrambled = 1;
+  var_0.secondowner = self.owner;
+  var_00 notify("findNewTarget");
   wait 30;
 
-  if (isdefined(var_0)) {
-  var_0._id_EC9B = 0;
-  var_0._id_F0C5 = undefined;
-  var_0 thread scripts\mp\killstreaks\helicopter::_id_8D99();
+  if (isdefined(var_00)) {
+  var_0.scrambled = 0;
+  var_0.secondowner = undefined;
+  var_00 thread scripts\mp\killstreaks\helicopter::heli_targeting();
   }
 }
 
-_id_EC9A() {
+scramble_watchlineofsight() {
   level endon("game_ended");
   self endon("death");
 
-  while (isdefined(self._id_ECA1) && isdefined(self getturrettarget(1)) && self getturrettarget(1) == self._id_ECA1) {
-  var_0 = self gettagorigin("tag_laser");
+  while (isdefined(self.scrambletargetent) && isdefined(self getturrettarget(1)) && self getturrettarget(1) == self.scrambletargetent) {
+  var_00 = self gettagorigin("tag_laser");
 
-  if (!sighttracepassed(var_0, self._id_ECA1.origin, 0, self, self._id_ECA1)) {
+  if (!sighttracepassed(var_00, self.scrambletargetent.origin, 0, self, self.scrambletargetent)) {
   self cleartargetentity();
-  self._id_ECA1 = undefined;
+  self.scrambletargetent = undefined;
   break;
   }
 
@@ -1704,57 +1704,57 @@ _id_EC9A() {
   }
 }
 
-_id_EC98() {
+scramble_watchlaser() {
   self endon("death");
   self laseron();
-  self._id_A86B = 1;
+  self.laser_on = 1;
 
-  while (isdefined(self._id_ECA1) && isdefined(self getturrettarget(1)) && self getturrettarget(1) == self._id_ECA1)
+  while (isdefined(self.scrambletargetent) && isdefined(self getturrettarget(1)) && self getturrettarget(1) == self.scrambletargetent)
   wait 0.05;
 
   self laseroff();
-  self._id_A86B = 0;
+  self.laser_on = 0;
 }
 
-_id_EC97() {
+scramble_watchcrashing() {
   self endon("death");
-  self._id_ECA1 endon("death");
+  self.scrambletargetent endon("death");
 
-  if (!isdefined(self._id_ECA1.helitype))
+  if (!isdefined(self.scrambletargetent.helitype))
   return;
 
-  self._id_ECA1 waittill("crashing");
+  self.scrambletargetent waittill("crashing");
   self cleartargetentity();
-  self._id_ECA1 = undefined;
+  self.scrambletargetent = undefined;
 }
 
-_id_EC99() {
+scramble_watchleaving() {
   self endon("death");
-  self._id_ECA1 endon("death");
+  self.scrambletargetent endon("death");
 
-  if (!isdefined(self._id_ECA1._id_01F1))
+  if (!isdefined(self.scrambletargetent.model))
   return;
 
-  if (self._id_ECA1._id_01F1 == "vehicle_uav_static_mp") {
-  self._id_ECA1 waittill("leaving");
+  if (self.scrambletargetent.model == "vehicle_uav_static_mp") {
+  self.scrambletargetent waittill("leaving");
   self cleartargetentity();
-  self._id_ECA1 = undefined;
+  self.scrambletargetent = undefined;
   }
 }
 
-_id_F26D() {
+sentryshocktargets() {
   self endon("death");
   self endon("carried");
   level endon("game_ended");
-  thread _id_13B37();
-  self.airlookatent = scripts\engine\utility::_id_107E6(self.origin, self.angles);
+  thread watchsentryshockpickup();
+  self.airlookatent = scripts\engine\utility::spawn_tag_origin(self.origin, self.angles);
   self.airlookatent linkto(self, "tag_flash");
 
   for (;;) {
-  var_0 = scripts\engine\utility::_id_13736(1, "turret_on_target");
+  var_00 = scripts\engine\utility::waittill_any_timeout(1, "turret_on_target");
 
-  if (var_0 == "timeout") {
-  if (_id_0DC9::_id_A69F(self._id_110E8, "passive_sam_turret")) {
+  if (var_00 == "timeout") {
+  if (scripts/mp/killstreaks/utility::func_A69F(self.streakinfo, "passive_sam_turret")) {
   self.sentryshocksamtarget = thread searchforshocksentryairtarget();
 
   if (isdefined(self.sentryshocksamtarget)) {
@@ -1766,36 +1766,36 @@ _id_F26D() {
   continue;
   }
 
-  self._id_F26C = self getturrettarget(1);
+  self.sentryshocktargetent = self getturrettarget(1);
 
-  if (isdefined(self._id_F26C) && scripts\mp\utility\game::isreallyalive(self._id_F26C)) {
-  thread _id_FE4F(self._id_F26C);
+  if (isdefined(self.sentryshocktargetent) && scripts\mp\utility\game::isreallyalive(self.sentryshocktargetent)) {
+  thread shocktarget(self.sentryshocktargetent);
   self waittill("done_firing");
   }
   }
 }
 
 searchforshocksentryairtarget() {
-  if (isdefined(level._id_12AF3)) {
+  if (isdefined(level.uavmodels)) {
   if (level.teambased) {
-  foreach (var_1 in level._id_12AF3[scripts\mp\utility\game::_id_8027(self.owner.team)]) {
-  if (targetvisibleinfront(var_1))
-  return var_1;
+  foreach (var_01 in level.uavmodels[scripts\mp\utility\game::getotherteam(self.owner.team)]) {
+  if (targetvisibleinfront(var_01))
+  return var_01;
   }
   } else {
-  foreach (var_1 in level._id_12AF3) {
+  foreach (var_01 in level.uavmodels) {
   if (var_1.owner == self.owner)
   continue;
 
-  if (targetvisibleinfront(var_1))
-  return var_1;
+  if (targetvisibleinfront(var_01))
+  return var_01;
   }
   }
   }
 
-  if (isdefined(level._id_27EF)) {
-  foreach (var_6 in level._id_27EF) {
-  if (var_6._id_110EA != "ball_drone_backup")
+  if (isdefined(level.balldrones)) {
+  foreach (var_06 in level.balldrones) {
+  if (var_6.streakname != "ball_drone_backup")
   continue;
 
   if (level.teambased && var_6.team == self.owner.team)
@@ -1804,14 +1804,14 @@ searchforshocksentryairtarget() {
   if (!level.teambased && var_6.owner == self.owner)
   continue;
 
-  if (targetvisibleinfront(var_6))
-  return var_6;
+  if (targetvisibleinfront(var_06))
+  return var_06;
   }
   }
 
-  if (isdefined(level._id_8DD3)) {
-  foreach (var_9 in level._id_8DD3) {
-  if (var_9._id_110EA != "jackal")
+  if (isdefined(level.helis)) {
+  foreach (var_09 in level.helis) {
+  if (var_9.streakname != "jackal")
   continue;
 
   if (level.teambased && var_9.team == self.owner.team)
@@ -1820,14 +1820,14 @@ searchforshocksentryairtarget() {
   if (!level.teambased && var_9.owner == self.owner)
   continue;
 
-  if (targetvisibleinfront(var_9))
-  return var_9;
+  if (targetvisibleinfront(var_09))
+  return var_09;
   }
   }
 
-  if (isdefined(level._id_DA61)) {
-  foreach (var_12 in level._id_DA61) {
-  if (var_12._id_110EA != "thor")
+  if (isdefined(level.func_DA61)) {
+  foreach (var_12 in level.func_DA61) {
+  if (var_12.streakname != "thor")
   continue;
 
   if (isdefined(var_12.team)) {
@@ -1843,9 +1843,9 @@ searchforshocksentryairtarget() {
   }
   }
 
-  if (isdefined(level._id_105EA)) {
-  foreach (var_12 in level._id_105EA) {
-  if (var_12._id_110EA != "minijackal")
+  if (isdefined(level.func_105EA)) {
+  foreach (var_12 in level.func_105EA) {
+  if (var_12.streakname != "minijackal")
   continue;
 
   if (isdefined(var_12.team)) {
@@ -1862,99 +1862,99 @@ searchforshocksentryairtarget() {
   }
 }
 
-targetvisibleinfront(var_0) {
-  if (!isdefined(var_0))
+targetvisibleinfront(var_00) {
+  if (!isdefined(var_00))
   return 0;
 
-  var_1 = 0;
-  var_2 = self gettagorigin("tag_flash");
-  var_3 = var_0.origin;
-  var_4 = vectornormalize(var_3 - var_2);
-  var_5 = anglestoforward(self.angles);
-  var_6 = [self, self.owner, var_0];
-  var_7 = physics_createcontents(["physicscontents_solid", "physicscontents_glass", "physicscontents_water", "physicscontents_vehicle", "physicscontents_item"]);
+  var_01 = 0;
+  var_02 = self gettagorigin("tag_flash");
+  var_03 = var_0.origin;
+  var_04 = vectornormalize(var_03 - var_02);
+  var_05 = anglestoforward(self.angles);
+  var_06 = [self, self.owner, var_00];
+  var_07 = physics_createcontents(["physicscontents_solid", "physicscontents_glass", "physicscontents_water", "physicscontents_vehicle", "physicscontents_item"]);
 
-  if (scripts\engine\trace::_id_DCF1(var_2, var_3, var_6, var_7) && vectordot(var_5, var_4) > 0.25 && distance2dsquared(var_2, var_3) > 10000)
-  var_1 = 1;
+  if (scripts\engine\trace::ray_trace_passed(var_02, var_03, var_06, var_07) && vectordot(var_05, var_04) > 0.25 && distance2dsquared(var_02, var_03) > 10000)
+  var_01 = 1;
 
-  return var_1;
+  return var_01;
 }
 
-shootshocksentrysamtarget(var_0, var_1) {
+shootshocksentrysamtarget(var_00, var_01) {
   self endon("death");
   self endon("carried");
   level endon("game_ended");
-  self _meth_830F("manual");
-  thread setshocksamtargetent(var_0, var_1);
+  self give_player_session_tokens("manual");
+  thread setshocksamtargetent(var_00, var_01);
   self.sentryshocksamtarget = undefined;
   self waittill("turret_on_target");
-  thread _id_B383(var_0);
+  thread marktargetlaser(var_00);
   self playsound("shock_sentry_charge_up");
-  playfxontag(scripts\engine\utility::_id_7ECB("sentry_shock_charge"), self, "tag_laser");
-  _id_F25C();
-  stopfxontag(scripts\engine\utility::_id_7ECB("sentry_shock_charge"), self, "tag_laser");
+  playfxontag(scripts\engine\utility::getfx("sentry_shock_charge"), self, "tag_laser");
+  sentry_spinup();
+  stopfxontag(scripts\engine\utility::getfx("sentry_shock_charge"), self, "tag_laser");
   self notify("start_firing");
   self setscriptablepartstate("coil", "active");
-  var_2 = 2;
-  var_3 = 1;
+  var_02 = 2;
+  var_03 = 1;
 
-  while (isdefined(var_0) && targetvisibleinfront(var_0)) {
-  var_4 = self gettagorigin("tag_flash");
-  var_5 = scripts\mp\utility\game::_id_1309("sentry_shock_missile_mp", var_4, var_0.origin, self.owner);
-  var_5 _meth_8206(var_0);
-  var_5 _meth_8204();
-  var_5._id_A63A = self._id_A63A;
-  var_5._id_110E8 = self._id_110E8;
-  self setscriptablepartstate("muzzle", "fire" + var_3, 0);
-  level notify("laserGuidedMissiles_incoming", self.owner, var_5, var_0);
+  while (isdefined(var_00) && targetvisibleinfront(var_00)) {
+  var_04 = self gettagorigin("tag_flash");
+  var_05 = scripts\mp\utility\game::_magicbullet("sentry_shock_missile_mp", var_04, var_0.origin, self.owner);
+  var_05 missile_settargetent(var_00);
+  var_05 missile_setflightmodedirect();
+  var_5.killcament = self.killcament;
+  var_5.streakinfo = self.streakinfo;
+  self setscriptablepartstate("muzzle", "fire" + var_03, 0);
+  level notify("laserGuidedMissiles_incoming", self.owner, var_05, var_00);
   var_3++;
 
-  if (var_3 > 2)
-  var_3 = 1;
+  if (var_03 > 2)
+  var_03 = 1;
 
-  wait(var_2);
+  wait(var_02);
   }
 
   self setscriptablepartstate("muzzle", "neutral", 0);
   self notify("sentry_lost_target");
-  var_1 unlink();
+  var_01 unlink();
   var_1.origin = self gettagorigin("tag_flash");
-  var_1 linkto(self, "tag_flash");
-  self _meth_830F("sentry");
+  var_01 linkto(self, "tag_flash");
+  self give_player_session_tokens("sentry");
   self cleartargetentity();
   self setscriptablepartstate("coil", "idle");
-  _id_F25B();
+  sentry_spindown();
   self notify("done_firing");
 }
 
-setshocksamtargetent(var_0, var_1) {
+setshocksamtargetent(var_00, var_01) {
   self endon("death");
   self endon("carried");
   self endon("sentry_lost_target");
-  var_0 endon("death");
+  var_00 endon("death");
   level endon("game_ended");
 
   for (;;) {
-  var_2 = self gettagorigin("tag_aim");
-  var_3 = var_0.origin;
-  var_4 = vectornormalize(var_3 - var_2);
-  var_5 = var_2 + var_4 * 500;
-  var_1 unlink();
-  var_1.origin = var_5;
-  var_1 linkto(self);
-  self settargetentity(var_1);
+  var_02 = self gettagorigin("tag_aim");
+  var_03 = var_0.origin;
+  var_04 = vectornormalize(var_03 - var_02);
+  var_05 = var_02 + var_04 * 500;
+  var_01 unlink();
+  var_1.origin = var_05;
+  var_01 linkto(self);
+  self settargetentity(var_01);
   scripts\engine\utility::waitframe();
   }
 }
 
-_id_13B37() {
+watchsentryshockpickup() {
   self endon("death");
 
   for (;;) {
   self waittill("carried");
 
-  if (isdefined(self._id_F26C))
-  self._id_F26C = undefined;
+  if (isdefined(self.sentryshocktargetent))
+  self.sentryshocktargetent = undefined;
 
   if (isdefined(self.sentryshocksamtarget))
   self.sentryshocksamtarget = undefined;
@@ -1963,141 +1963,141 @@ _id_13B37() {
   }
 }
 
-_id_FE4F(var_0) {
+shocktarget(var_00) {
   self endon("death");
   self endon("carried");
 
-  if (!isdefined(var_0))
+  if (!isdefined(var_00))
   return;
 
-  thread _id_B383(var_0);
+  thread marktargetlaser(var_00);
 
-  if (!_id_0DC9::_id_A69F(self._id_110E8, "passive_sam_turret"))
-  thread _id_13B3C(var_0);
+  if (!scripts/mp/killstreaks/utility::func_A69F(self.streakinfo, "passive_sam_turret"))
+  thread watchshockdamage(var_00);
 
   self playsound("shock_sentry_charge_up");
-  playfxontag(scripts\engine\utility::_id_7ECB("sentry_shock_charge"), self, "tag_laser");
-  _id_F25C();
-  stopfxontag(scripts\engine\utility::_id_7ECB("sentry_shock_charge"), self, "tag_laser");
+  playfxontag(scripts\engine\utility::getfx("sentry_shock_charge"), self, "tag_laser");
+  sentry_spinup();
+  stopfxontag(scripts\engine\utility::getfx("sentry_shock_charge"), self, "tag_laser");
   self notify("start_firing");
   self setscriptablepartstate("coil", "active");
-  level thread scripts\mp\battlechatter_mp::_id_EB87(var_0, "plr_killstreak_target");
-  var_1 = weaponfiretime(level._id_F26B[self._id_F26E]._id_039B);
+  level thread scripts\mp\battlechatter_mp::saytoself(var_00, "plr_killstreak_target");
+  var_01 = weaponfiretime(level.sentrysettings[self.sentrytype].weaponinfo);
 
-  while (isdefined(var_0) && scripts\mp\utility\game::isreallyalive(var_0) && isdefined(self getturrettarget(1)) && self getturrettarget(1) == var_0 && !scripts\mp\utility\game::_id_C7A0(self gettagorigin("tag_flash"), var_0 geteye())) {
-  if (_id_0DC9::_id_A69F(self._id_110E8, "passive_mini_explosives")) {
-  thread missileburstfire(var_0);
-  var_1 = 1.5;
+  while (isdefined(var_00) && scripts\mp\utility\game::isreallyalive(var_00) && isdefined(self getturrettarget(1)) && self getturrettarget(1) == var_00 && !scripts\mp\utility\game::func_C7A0(self gettagorigin("tag_flash"), var_00 geteye())) {
+  if (scripts/mp/killstreaks/utility::func_A69F(self.streakinfo, "passive_mini_explosives")) {
+  thread missileburstfire(var_00);
+  var_01 = 1.5;
   }
   else
   self shootturret();
 
-  wait(var_1);
+  wait(var_01);
   }
 
   self setscriptablepartstate("coil", "idle");
   self setscriptablepartstate("muzzle", "neutral", 0);
-  self._id_F26C = undefined;
+  self.sentryshocktargetent = undefined;
   self cleartargetentity();
-  _id_F25B();
+  sentry_spindown();
   self notify("done_firing");
 }
 
-missileburstfire(var_0) {
+missileburstfire(var_00) {
   self endon("death");
   self endon("carried");
-  var_1 = 3;
-  var_2 = 1;
+  var_01 = 3;
+  var_02 = 1;
 
-  while (var_1 > 0) {
-  if (!isdefined(var_0))
+  while (var_01 > 0) {
+  if (!isdefined(var_00))
   return;
 
   if (!isdefined(self.owner))
   return;
 
-  var_3 = scripts\mp\utility\game::_id_1309("sentry_shock_grenade_mp", self gettagorigin("tag_flash"), var_0.origin, self.owner);
+  var_03 = scripts\mp\utility\game::_magicbullet("sentry_shock_grenade_mp", self gettagorigin("tag_flash"), var_0.origin, self.owner);
 
-  if (_id_0DC9::manualmissilecantracktarget(var_0)) {
-  var_3 _meth_8206(var_0, gettargetoffset(var_0));
-  var_0 thread watchtarget(var_3);
+  if (scripts/mp/killstreaks/utility::manualmissilecantracktarget(var_00)) {
+  var_03 missile_settargetent(var_00, gettargetoffset(var_00));
+  var_00 thread watchtarget(var_03);
   }
 
-  var_3._id_A63A = self._id_A63A;
-  var_3._id_110E8 = self._id_110E8;
-  self setscriptablepartstate("muzzle", "fire" + var_2, 0);
+  var_3.killcament = self.killcament;
+  var_3.streakinfo = self.streakinfo;
+  self setscriptablepartstate("muzzle", "fire" + var_02, 0);
   var_2++;
 
-  if (var_2 > 2)
-  var_2 = 1;
+  if (var_02 > 2)
+  var_02 = 1;
 
   var_1--;
   wait 0.2;
   }
 }
 
-gettargetoffset(var_0) {
-  var_1 = (0, 0, 40);
-  var_2 = var_0 getstance();
+gettargetoffset(var_00) {
+  var_01 = (0, 0, 40);
+  var_02 = var_00 getstance();
 
-  switch (var_2) {
+  switch (var_02) {
   case "stand":
-  var_1 = (0, 0, 40);
+  var_01 = (0, 0, 40);
   break;
   case "crouch":
-  var_1 = (0, 0, 20);
+  var_01 = (0, 0, 20);
   break;
   case "prone":
-  var_1 = (0, 0, 5);
+  var_01 = (0, 0, 5);
   break;
   }
 
-  return var_1;
+  return var_01;
 }
 
-watchtarget(var_0) {
+watchtarget(var_00) {
   self endon("disconnect");
 
   for (;;) {
-  if (!_id_0DC9::manualmissilecantracktarget(self))
+  if (!scripts/mp/killstreaks/utility::manualmissilecantracktarget(self))
   break;
 
-  if (!isdefined(var_0))
+  if (!isdefined(var_00))
   break;
 
   scripts\engine\utility::waitframe();
   }
 
-  if (isdefined(var_0))
-  var_0 _meth_8203();
+  if (isdefined(var_00))
+  var_00 missile_cleartarget();
 }
 
-_id_B383(var_0) {
+marktargetlaser(var_00) {
   self endon("death");
   self laseron();
-  self._id_A86B = 1;
+  self.laser_on = 1;
   scripts\engine\utility::waittill_any("done_firing", "carried");
   self laseroff();
-  self._id_A86B = 0;
+  self.laser_on = 0;
 }
 
-_id_13B3C(var_0) {
+watchshockdamage(var_00) {
   self endon("death");
   self endon("done_firing");
-  var_1 = undefined;
+  var_01 = undefined;
 
   for (;;) {
-  self waittill("victim_damaged", var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11);
+  self waittill("victim_damaged", var_02, var_03, var_04, var_05, var_06, var_07, var_08, var_09, var_10, var_11);
 
-  if (var_2 == var_0) {
+  if (var_02 == var_00) {
   var_12 = 100;
-  var_13 = scripts\mp\utility\game::_id_807D(var_8, var_12, var_2.team, self.owner);
-  playfx(scripts\engine\utility::_id_7ECB("sentry_shock_explosion"), var_8);
+  var_13 = scripts\mp\utility\game::getplayersinradiusview(var_08, var_12, var_2.team, self.owner);
+  playfx(scripts\engine\utility::getfx("sentry_shock_explosion"), var_08);
 
   if (var_13.size > 0) {
   foreach (var_15 in var_13) {
-  if (var_15.player != var_2) {
-  var_15.player _meth_80B0(5, var_8, self.owner, self, var_6, var_7);
+  if (var_15.player != var_02) {
+  var_15.player getrandomarmkillstreak(5, var_08, self.owner, self, var_06, var_07);
   var_16 = undefined;
   var_17 = undefined;
 
@@ -2108,7 +2108,7 @@ _id_13B3C(var_0) {
   else
   var_16 = var_15.visiblelocations[0];
 
-  playfxbetweenpoints(scripts\engine\utility::_id_7ECB("sentry_shock_arc"), var_8, vectortoangles(var_16 - var_8), var_16);
+  playfxbetweenpoints(scripts\engine\utility::getfx("sentry_shock_arc"), var_08, vectortoangles(var_16 - var_08), var_16);
   }
   }
   }
@@ -2116,34 +2116,34 @@ _id_13B3C(var_0) {
   }
 }
 
-_id_1CB4(var_0) {
-  if (var_0) {
-  scripts\engine\utility::_id_1C71(1);
-  thread scripts\mp\supers::_id_12D6C();
+allowweaponsforsentry(var_00) {
+  if (var_00) {
+  scripts\engine\utility::allow_weapon(1);
+  thread scripts\mp\supers::unstowsuperweapon();
   } else {
-  thread scripts\mp\supers::_id_1CAB();
-  scripts\engine\utility::_id_1C71(0);
+  thread scripts\mp\supers::allowsuperweaponstow();
+  scripts\engine\utility::allow_weapon(0);
   }
 }
 
-_id_CC1B() {
-  var_0 = self._id_F26E;
+placehinton() {
+  var_00 = self.sentrytype;
 
-  if (var_0 == "super_trophy") {
-  self.owner _meth_80F4(&"LUA_MENU_MP_PLACE_SUPER_TROPHY");
+  if (var_00 == "super_trophy") {
+  self.owner forceusehinton(&"LUA_MENU_MP_PLACE_SUPER_TROPHY");
   return;
   }
   else
-  self.owner _meth_80F4(&"SENTRY_PLACE");
+  self.owner forceusehinton(&"SENTRY_PLACE");
 }
 
-_id_38E2() {
-  var_0 = self._id_F26E;
+cannotplacehinton() {
+  var_00 = self.sentrytype;
 
-  if (var_0 == "super_trophy") {
-  self.owner _meth_80F4(&"LUA_MENU_MP_CANNOT_PLACE_SUPER_TROPHY");
+  if (var_00 == "super_trophy") {
+  self.owner forceusehinton(&"LUA_MENU_MP_CANNOT_PLACE_SUPER_TROPHY");
   return;
   }
   else
-  self.owner _meth_80F4(&"SENTRY_CANNOT_PLACE");
+  self.owner forceusehinton(&"SENTRY_CANNOT_PLACE");
 }

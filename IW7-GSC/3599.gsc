@@ -20,7 +20,7 @@ missilespawned(param_00,param_01) {
 	var_03 = param_01.origin;
 	var_04 = anglestoforward(param_01.angles);
 	var_05 = var_03 + var_04 * 1920;
-	var_06 = function_0287(var_03,var_05,var_02,param_01,1,"physicsquery_closest");
+	var_06 = physics_raycast(var_03,var_05,var_02,param_01,1,"physicsquery_closest");
 	var_07 = isdefined(var_06) && var_06.size > 0;
 	if(var_07) {
 		var_08 = var_06[0]["position"];
@@ -80,7 +80,7 @@ projectilearrived(param_00,param_01) {
 	self endon("death");
 	self notify("projectile_arrived");
 	cleanupprojectile();
-	var_02 = function_0287(self.origin,self.origin - (0,0,42),param_01,undefined,1,"physicsquery_closest");
+	var_02 = physics_raycast(self.origin,self.origin - (0,0,42),param_01,undefined,1,"physicsquery_closest");
 	var_03 = isdefined(var_02) && var_02.size > 0;
 	if(var_03) {
 		var_04 = var_02[0]["position"];
@@ -104,7 +104,7 @@ ownerdisconnectcleanup(param_00) {
 }
 
 makeblackholeimpulsefield(param_00) {
-	var_01 = function_02AF(self.triggerportableradarping,"bhgunfield_mp",self.origin);
+	var_01 = spawnimpulsefield(self.triggerportableradarping,"bhgunfield_mp",self.origin);
 	var_01 linkto(self);
 	return var_01;
 }
@@ -120,7 +120,7 @@ singularityquake() {
 }
 
 trydodamage(param_00,param_01,param_02,param_03) {
-	var_04 = function_0287(self.origin,param_01,param_03,self,0,"physicsquery_closest");
+	var_04 = physics_raycast(self.origin,param_01,param_03,self,0,"physicsquery_closest");
 	var_05 = !isdefined(var_04) && var_04.size > 0;
 	if(var_05) {
 		param_00 dodamage(param_02,self.origin,self.triggerportableradarping,self,"MOD_EXPLOSIVE","iw7_blackholegun_mp");

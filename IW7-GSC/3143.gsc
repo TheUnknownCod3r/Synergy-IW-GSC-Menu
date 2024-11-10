@@ -415,7 +415,7 @@ func_6D73() {
 		var_0A = self gettagorigin(var_01);
 		var_0B = self gettagangles(var_01);
 		var_0C = var_0A + anglestoforward(var_0B);
-		var_0D = function_002C(var_0A,var_0C,4);
+		var_0D = bulletspread(var_0A,var_0C,4);
 		self _meth_8494(var_00,var_0A,var_0B,1,var_0D,0,0,var_01);
 		var_0E = 0.35;
 		if(!isdefined(self.brodeostrugglesucceeded) || !self.brodeostrugglesucceeded) {
@@ -791,9 +791,9 @@ func_D3EE(param_00) {
 		var_02 = getdvarfloat("perk_quickDrawSpeedScaleSniperSP",1);
 		var_03 = getdvarfloat("bg_quickWeaponSwitchSpeedScaleSP",1);
 		var_04 = func_7D71(self.var_D34D);
-		function_01C5("perk_quickDrawSpeedScaleSP",var_01 * var_04);
-		function_01C5("perk_quickDrawSpeedScaleSniperSP",var_02 * var_04);
-		function_01C5("bg_quickWeaponSwitchSpeedScaleSP",var_03 / var_04);
+		setsaveddvar("perk_quickDrawSpeedScaleSP",var_01 * var_04);
+		setsaveddvar("perk_quickDrawSpeedScaleSniperSP",var_02 * var_04);
+		setsaveddvar("bg_quickWeaponSwitchSpeedScaleSP",var_03 / var_04);
 		var_05 = int(weaponclipsize(self.var_D34D) * 0.5);
 		if(level.player getweaponammoclip(self.var_D34D) < var_05) {
 			level.player setweaponammoclip(self.var_D34D,var_05);
@@ -804,9 +804,9 @@ func_D3EE(param_00) {
 			wait(0.05);
 		}
 
-		function_01C5("perk_quickDrawSpeedScaleSP",var_01);
-		function_01C5("perk_quickDrawSpeedScaleSniperSP",var_02);
-		function_01C5("bg_quickWeaponSwitchSpeedScaleSP",var_03);
+		setsaveddvar("perk_quickDrawSpeedScaleSP",var_01);
+		setsaveddvar("perk_quickDrawSpeedScaleSniperSP",var_02);
+		setsaveddvar("bg_quickWeaponSwitchSpeedScaleSP",var_03);
 		level.player lib_0E42::removeperk("specialty_quickdraw");
 		self _meth_84AD();
 		self setcandamage(1);

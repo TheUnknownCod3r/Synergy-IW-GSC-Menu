@@ -979,8 +979,8 @@ func_6D53(param_00) {
 	childthread func_1A2E();
 	wait(0.25);
 	var_01 = weaponclipsize(self.var_394);
-	var_02 = function_0240(self.var_394);
-	var_03 = function_023C(self.var_394);
+	var_02 = weaponfiretime(self.var_394);
+	var_03 = weaponburstcount(self.var_394);
 	var_04 = weaponclass(self.var_394);
 	var_05 = var_01;
 	if(var_04 == "sniper") {
@@ -1042,7 +1042,7 @@ func_77C8(param_00) {
 	}
 
 	var_03 = distance(self.origin,self.var_1A2C.origin);
-	var_04 = function_02A0(self.var_394,var_03,isplayer(self.var_1A2C));
+	var_04 = getaccuracyfraction(self.var_394,var_03,isplayer(self.var_1A2C));
 	var_05 = "stand";
 	if(isplayer(self.var_1A2C)) {
 		var_05 = self.var_1A2C getstance();
@@ -1073,7 +1073,7 @@ func_77C8(param_00) {
 }
 
 func_6ADC(param_00,param_01,param_02,param_03) {
-	function_002F(param_01,param_02,param_00);
+	bullettracer(param_01,param_02,param_00);
 	playfxontag(scripts\engine\utility::getfx("fakeactor_muzflash"),self,"tag_flash");
 	if(!isdefined(param_03) || !param_03) {
 	}
@@ -1690,7 +1690,7 @@ func_4E22() {
 }
 
 func_5D16() {
-	var_00 = function_00EA(self.var_394);
+	var_00 = getweaponmodel(self.var_394);
 	if(isdefined(var_00) && var_00 != "") {
 		self detach(var_00,"tag_weapon_right");
 		if(!isdefined(self.var_C05C)) {

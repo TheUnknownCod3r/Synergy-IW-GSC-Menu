@@ -1125,13 +1125,13 @@ func_1F1B(param_00,param_01,param_02,param_03,param_04,param_05,param_06) {
 
 		if(isdefined(level.var_EC85[var_0F][param_01])) {
 			if(isarray(level.var_EC85[var_0F][param_01])) {
-				var_10 = function_00CE(var_08,var_09,level.var_EC85[var_0F][param_01][0]);
-				var_11 = function_00CD(var_08,var_09,level.var_EC85[var_0F][param_01][0]);
+				var_10 = getstartorigin(var_08,var_09,level.var_EC85[var_0F][param_01][0]);
+				var_11 = getstartangles(var_08,var_09,level.var_EC85[var_0F][param_01][0]);
 			}
 			else
 			{
-				var_10 = function_00CE(var_08,var_09,level.var_EC85[var_0F][param_01]);
-				var_11 = function_00CD(var_08,var_09,level.var_EC85[var_0F][param_01]);
+				var_10 = getstartorigin(var_08,var_09,level.var_EC85[var_0F][param_01]);
+				var_11 = getstartangles(var_08,var_09,level.var_EC85[var_0F][param_01]);
 			}
 		}
 		else
@@ -1195,8 +1195,8 @@ func_1F57(param_00,param_01,param_02) {
 	var_04 = var_03["origin"];
 	var_05 = var_03["angles"];
 	foreach(var_07 in param_00) {
-		var_08 = function_00CE(var_04,var_05,level.var_EC85[var_07.var_1FBB][param_01]);
-		var_09 = function_00CD(var_04,var_05,level.var_EC85[var_07.var_1FBB][param_01]);
+		var_08 = getstartorigin(var_04,var_05,level.var_EC85[var_07.var_1FBB][param_01]);
+		var_09 = getstartangles(var_04,var_05,level.var_EC85[var_07.var_1FBB][param_01]);
 		if(isai(var_07)) {
 			var_07 _meth_83B9(var_08);
 			continue;
@@ -1212,8 +1212,8 @@ func_1EEE(param_00,param_01,param_02,param_03,param_04,param_05) {
 	var_07 = var_06["origin"];
 	var_08 = var_06["angles"];
 	foreach(var_0A in param_00) {
-		var_0B = function_00CE(var_07,var_08,level.var_EC85[var_0A.var_1FBB][param_01]);
-		var_0C = function_00CD(var_07,var_08,level.var_EC85[var_0A.var_1FBB][param_01]);
+		var_0B = getstartorigin(var_07,var_08,level.var_EC85[var_0A.var_1FBB][param_01]);
+		var_0C = getstartangles(var_07,var_08,level.var_EC85[var_0A.var_1FBB][param_01]);
 		if(isai(var_0A)) {
 			continue;
 		}
@@ -1227,8 +1227,8 @@ func_1ED2(param_00,param_01,param_02) {
 	var_03 = func_781C(param_02);
 	var_04 = var_03["origin"];
 	var_05 = var_03["angles"];
-	var_06 = function_00CE(var_04,var_05,level.var_EC85["generic"][param_01]);
-	var_07 = function_00CD(var_04,var_05,level.var_EC85["generic"][param_01]);
+	var_06 = getstartorigin(var_04,var_05,level.var_EC85["generic"][param_01]);
+	var_07 = getstartangles(var_04,var_05,level.var_EC85["generic"][param_01]);
 	if(isai(param_00)) {
 		param_00 _meth_83B9(var_06);
 		return;
@@ -1246,8 +1246,8 @@ func_1F42(param_00,param_01,param_02,param_03) {
 	var_04 = func_781C(param_03);
 	var_05 = var_04["origin"];
 	var_06 = var_04["angles"];
-	var_07 = function_00CE(var_05,var_06,level.var_EC85[param_01][param_02]);
-	var_08 = function_00CE(var_05,var_06,level.var_EC85[param_01][param_02]);
+	var_07 = getstartorigin(var_05,var_06,level.var_EC85[param_01][param_02]);
+	var_08 = getstartorigin(var_05,var_06,level.var_EC85[param_01][param_02]);
 	var_09 = spawn("script_model",var_07);
 	var_09 setmodel(param_00);
 	var_09.angles = var_08;
@@ -1272,7 +1272,7 @@ func_1F45(param_00,param_01,param_02) {
 	var_05 = var_03["angles"];
 	var_06 = spawnstruct();
 	foreach(var_08 in param_00) {
-		var_09 = function_00CE(var_04,var_05,level.var_EC85[var_08.var_1FBB][param_01]);
+		var_09 = getstartorigin(var_04,var_05,level.var_EC85[var_08.var_1FBB][param_01]);
 		var_08.origin = var_09;
 	}
 }
@@ -1475,8 +1475,8 @@ func_1F0C(param_00,param_01,param_02,param_03,param_04) {
 			var_0A = level.var_EC85[var_0A][param_02];
 		}
 
-		var_07 = function_00CE(var_07,var_08,var_0A);
-		var_08 = function_00CE(var_07,var_08,var_0A);
+		var_07 = getstartorigin(var_07,var_08,var_0A);
+		var_08 = getstartorigin(var_07,var_08,var_0A);
 	}
 
 	var_0B = spawn("script_origin",var_07);
@@ -1987,7 +1987,7 @@ func_1EBF(param_00,param_01) {
 	var_05 = self.var_EF82;
 	if(var_03 != "") {
 		var_05 = lib_0A1E::func_2356("Knobs","head");
-		var_04 = function_02EF(var_03,"facial_animation","facial_talk",0);
+		var_04 = _func_2EF(var_03,"facial_animation","facial_talk",0);
 	}
 
 	scripts\sp\_utility::func_F6FE("filler");
@@ -2092,8 +2092,8 @@ func_F5B0(param_00,param_01,param_02,param_03,param_04) {
 	}
 
 	if(isai(self)) {
-		var_07 = function_00CE(param_01,param_02,var_06);
-		var_08 = function_00CD(param_01,param_02,var_06);
+		var_07 = getstartorigin(param_01,param_02,var_06);
+		var_08 = getstartangles(param_01,param_02,var_06);
 		if(isdefined(self.var_1F4E)) {
 			var_07 = scripts\sp\_utility::func_864C(var_07);
 		}
@@ -2103,12 +2103,12 @@ func_F5B0(param_00,param_01,param_02,param_03,param_04) {
 	}
 
 	if(self.var_9F == "script_vehicle") {
-		self vehicle_teleport(function_00CE(param_01,param_02,var_06),function_00CD(param_01,param_02,var_06));
+		self vehicle_teleport(getstartorigin(param_01,param_02,var_06),getstartangles(param_01,param_02,var_06));
 		return;
 	}
 
-	self.origin = function_00CE(param_01,param_02,var_06);
-	self.angles = function_00CD(param_01,param_02,var_06);
+	self.origin = getstartorigin(param_01,param_02,var_06);
+	self.angles = getstartangles(param_01,param_02,var_06);
 }
 
 func_1E9F(param_00,param_01) {

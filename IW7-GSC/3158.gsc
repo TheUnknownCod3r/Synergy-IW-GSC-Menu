@@ -270,16 +270,16 @@ func_FE5C(param_00,param_01,param_02,param_03) {
 		shootatshootentorpos(var_0B);
 		if(var_0C) {
 			if(randomint(3) == 0) {
-				self.var_3250--;
+				self.bulletsinclip--;
 			}
 		}
 		else
 		{
-			self.var_3250--;
+			self.bulletsinclip--;
 		}
 
 		if(var_07) {
-			self.a.var_E5DE--;
+			self.a.rockets--;
 		}
 
 		var_09++;

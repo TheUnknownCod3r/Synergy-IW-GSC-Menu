@@ -5,18 +5,18 @@
 ****************************/
 
 _meth_83D5() {
-	function_01C5("cg_fovScale","1");
-	function_01C5("sv_saveOnStartMap",!isdefined(level.var_4A3A));
-	function_01C5("sm_roundRobinPrioritySpotShadows",4);
-	function_01C5("sm_spotUpdateLimit",4);
-	function_01C5("cg_hud_outline_colors_0","0.000 0.000 0.000 0.000");
-	function_01C5("cg_hud_outline_colors_1","0.882 0.882 0.882 1.000");
-	function_01C5("cg_hud_outline_colors_2","0.804 0.157 0.157 1.000");
-	function_01C5("cg_hud_outline_colors_3","0.431 0.745 0.235 1.000");
-	function_01C5("cg_hud_outline_colors_4","0.157 0.784 0.784 1.000");
-	function_01C5("cg_hud_outline_colors_5","0.784 0.490 0.157 1.000");
-	function_01C5("cg_hud_outline_colors_6","0.804 0.804 0.035 1.000");
-	function_01C5("cg_hud_outline_colors_7","0.000 0.000 0.000 0.000");
+	setsaveddvar("cg_fovScale","1");
+	setsaveddvar("sv_saveOnStartMap",!isdefined(level.var_4A3A));
+	setsaveddvar("sm_roundRobinPrioritySpotShadows",4);
+	setsaveddvar("sm_spotUpdateLimit",4);
+	setsaveddvar("cg_hud_outline_colors_0","0.000 0.000 0.000 0.000");
+	setsaveddvar("cg_hud_outline_colors_1","0.882 0.882 0.882 1.000");
+	setsaveddvar("cg_hud_outline_colors_2","0.804 0.157 0.157 1.000");
+	setsaveddvar("cg_hud_outline_colors_3","0.431 0.745 0.235 1.000");
+	setsaveddvar("cg_hud_outline_colors_4","0.157 0.784 0.784 1.000");
+	setsaveddvar("cg_hud_outline_colors_5","0.784 0.490 0.157 1.000");
+	setsaveddvar("cg_hud_outline_colors_6","0.804 0.804 0.035 1.000");
+	setsaveddvar("cg_hud_outline_colors_7","0.000 0.000 0.000 0.000");
 }
 
 vehicle_finishdamage() {
@@ -63,7 +63,7 @@ func_F7C2() {
 	var_00 = "1.0 1.0 1.0";
 	var_01 = "0.9 0.9 0.9";
 	var_02 = "0.85 0.85 0.85";
-	function_01C5("con_typewriterColorBase",var_00);
+	setsaveddvar("con_typewriterColorBase",var_00);
 }
 
 func_579A() {

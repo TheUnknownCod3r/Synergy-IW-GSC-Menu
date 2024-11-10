@@ -146,7 +146,7 @@ func_3EA7(param_00,param_01,param_02) {
 	var_05 = var_04[1];
 	var_06 = self.angles[1];
 	var_07 = angleclamp180(var_05 - var_06);
-	var_08 = function_02F9(var_07,15);
+	var_08 = getangleindex(var_07,15);
 	var_09 = func_B32D(var_08);
 	if(var_09 == 8) {
 		return undefined;
@@ -269,7 +269,7 @@ func_3722(param_00,param_01,param_02,param_03) {
 	{
 		var_07 = self.angles[1];
 		var_08 = angleclamp180(var_04[1] - var_07);
-		var_06 = function_02F9(var_08,22.5);
+		var_06 = getangleindex(var_08,22.5);
 	}
 
 	var_09 = lib_0C5D::_meth_8174(param_00,undefined,1);

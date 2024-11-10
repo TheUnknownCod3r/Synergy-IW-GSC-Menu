@@ -67,12 +67,12 @@ on_deploy() {
 	setomnvar("ui_offhandshield_in_use",1);
 	setomnvar("ui_wrist_pc",6);
 	if(!level.player.var_C337.var_9936) {
-		function_01C5("offhandShield_outlineMode",2);
+		setsaveddvar("offhandShield_outlineMode",2);
 		thread func_CB92();
 	}
 	else
 	{
-		function_01C5("offhandShield_outlineMode",1);
+		setsaveddvar("offhandShield_outlineMode",1);
 	}
 
 	thread func_C32D(1);
@@ -216,7 +216,7 @@ func_CB92(param_00) {
 	for(;;) {
 		level.player.var_C337.var_CB8F.queuedialog = 5;
 		var_02 = scripts\engine\utility::array_remove_array(var_02,var_02);
-		var_03 = function_0072();
+		var_03 = getaiarray();
 		if(isdefined(level.player.var_C337.var_6A48)) {
 			var_03 = scripts\engine\utility::array_combine(var_03,level.var_C337.var_6A48);
 		}
@@ -321,8 +321,8 @@ func_C76C(param_00,param_01) {
 		wait(param_01);
 	}
 
-	var_02 = function_0072();
-	var_03 = function_00C8();
+	var_02 = getaiarray();
+	var_03 = getspawnerarray();
 	if(param_00) {
 		scripts\engine\utility::array_thread(var_02,::func_C76A);
 		if(var_03.size) {
@@ -360,13 +360,13 @@ func_C769() {
 }
 
 func_C77F() {
-	function_01C5("r_hudoutlineWidth","1");
-	function_01C5("r_hudoutlineFillColor0","0.8 0.8 0.8 1");
-	function_01C5("r_hudoutlineOccludedOutlineColor","0.8 0.8 0.8 1");
-	function_01C5("r_hudoutlineOccludedInteriorColor","0.5 0.5 0.5 1");
-	function_01C5("r_hudoutlineOccludedInlineColor","0.5 0.5 0.5 1");
-	function_01C5("r_hudoutlineFillColor1","0.8 0.8 0.8 .2");
-	function_01C5("r_hudOutlineOccludedColorFromFill","1");
+	setsaveddvar("r_hudoutlineWidth","1");
+	setsaveddvar("r_hudoutlineFillColor0","0.8 0.8 0.8 1");
+	setsaveddvar("r_hudoutlineOccludedOutlineColor","0.8 0.8 0.8 1");
+	setsaveddvar("r_hudoutlineOccludedInteriorColor","0.5 0.5 0.5 1");
+	setsaveddvar("r_hudoutlineOccludedInlineColor","0.5 0.5 0.5 1");
+	setsaveddvar("r_hudoutlineFillColor1","0.8 0.8 0.8 .2");
+	setsaveddvar("r_hudOutlineOccludedColorFromFill","1");
 }
 
 func_FC8B() {
@@ -397,17 +397,17 @@ func_AB81(param_00) {
 	var_03 = "0.8 0.8 0.8 ";
 	var_04 = "0.5 0.5 0.5 ";
 	for(var_05 = 1;var_05 < 11;var_05++) {
-		function_01C5("r_hudoutlineFillColor0",var_03 + var_01 + "");
-		function_01C5("r_hudoutlineOccludedOutlineColor",var_03 + var_01 + "");
-		function_01C5("r_hudoutlineOccludedInteriorColor",var_04 + var_01 + "");
+		setsaveddvar("r_hudoutlineFillColor0",var_03 + var_01 + "");
+		setsaveddvar("r_hudoutlineOccludedOutlineColor",var_03 + var_01 + "");
+		setsaveddvar("r_hudoutlineOccludedInteriorColor",var_04 + var_01 + "");
 		if(param_00 && var_05 < 2) {
-			function_01C5("r_hudoutlineFillColor1",var_03 + var_01 + "");
+			setsaveddvar("r_hudoutlineFillColor1",var_03 + var_01 + "");
 		}
 		else if(!param_00 && var_05 > 2) {
-			function_01C5("r_hudoutlineFillColor1",var_03 + var_01 + "");
+			setsaveddvar("r_hudoutlineFillColor1",var_03 + var_01 + "");
 		}
 
-		function_01C5("r_hudoutlineOccludedInlineColor",var_04 + var_01 + "");
+		setsaveddvar("r_hudoutlineOccludedInlineColor",var_04 + var_01 + "");
 		if(param_00) {
 			var_01 = scripts\engine\utility::ter_op(var_05 == 9,1,var_01 + 0.1);
 		}

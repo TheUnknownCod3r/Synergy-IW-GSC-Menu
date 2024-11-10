@@ -3,51 +3,51 @@
  * Script: scripts\2910.gsc
 ***************************************/
 
-_id_CBAA() {
+func_CBAA() {
   return;
 }
 
-_id_CBB5(var_0, var_1, var_2, var_3, var_4, var_5) {
+func_CBB5(var_00, var_01, var_02, var_03, var_04, var_05) {
   if (getdvarint("e3"))
   return;
 
   if (gettime() < 500)
   wait 0.5;
 
-  if (!isdefined(var_1))
+  if (!isdefined(var_01))
   return;
 
-  if (!isdefined(level._id_CB9C))
-  level._id_CB9C = level.player _meth_8216();
+  if (!isdefined(level.func_CB9C))
+  level.func_CB9C = level.player getweaponattachmentarray();
 
-  if (_id_CBAC())
+  if (func_CBAC())
   return;
 
-  level._id_CB9C._id_0108 = 1;
-  level._id_CB9C._id_0262 = 1;
-  level._id_CB9C._id_009E = 5000;
-  level._id_CB9C._id_01FA = 2;
-  level._id_CB9C._id_004C = 1;
-  level._id_CB9C._id_C719 = (0, 0, 0);
-  level._id_CB9C._id_0042 = (0, 0, 0);
-  level._id_CB9C._id_02DD = var_1;
-  level._id_CB9C._id_0144 = scripts\engine\utility::ter_op(isdefined(var_2), var_2, 30);
+  level.func_CB9C.enableshadows = 1;
+  level.func_CB9C.rendertotexture = 1;
+  level.func_CB9C.clipdistance = 5000;
+  level.func_CB9C.nearz = 2;
+  level.func_CB9C.aspectratio = 1;
+  level.func_CB9C.origin_offset = (0, 0, 0);
+  level.func_CB9C.angles_offset = (0, 0, 0);
+  level.func_CB9C.tag = var_01;
+  level.func_CB9C.fov = scripts\engine\utility::ter_op(isdefined(var_02), var_02, 30);
 
-  if (isdefined(var_3))
-  level._id_CB9C._id_C719 = var_3;
+  if (isdefined(var_03))
+  level.func_CB9C.origin_offset = var_03;
 
-  if (isdefined(var_4))
-  level._id_CB9C._id_0042 = var_4;
+  if (isdefined(var_04))
+  level.func_CB9C.angles_offset = var_04;
 
-  level._id_CB9C._id_0114 = var_0;
-  level._id_CB9C._id_0106 = 1;
-  level._id_CB9C._id_014B = 1;
+  level.func_CB9C.entity = var_00;
+  level.func_CB9C.enable = 1;
+  level.func_CB9C.freecamera = 1;
   setomnvar("ui_pip_static", 0);
   setomnvar("ui_pip_message_text_top", "script_pip_default_top");
   setomnvar("ui_pip_message_text_bottom", "script_pip_default_bottom");
   setomnvar("ui_pip_message_type", 1);
 
-  if (!isdefined(var_5)) {
+  if (!isdefined(var_05)) {
   setomnvar("ui_show_pip", 1);
 
   if (isdefined(level.player _meth_8473()))
@@ -57,19 +57,19 @@ _id_CBB5(var_0, var_1, var_2, var_3, var_4, var_5) {
   }
 }
 
-_id_2ADF(var_0) {
+func_2ADF(var_00) {
   level.player playsound("ui_pip_on_hud_right");
   setomnvar("ui_pip_message_text_top", "script_pip_default_top");
   setomnvar("ui_pip_message_text_bottom", "script_pip_default_bottom");
-  _func_1F1();
-  _func_1C5("bg_cinematicFullScreen", "0");
-  _func_1C5("bg_cinematicCanPause", "1");
+  _stopcinematicingame();
+  _setsaveddvar("bg_cinematicFullScreen", "0");
+  _setsaveddvar("bg_cinematicCanPause", "1");
   setomnvar("ui_show_pip", 1);
   wait 0.05;
   setomnvar("ui_show_pip", 0);
   wait 0.05;
   setomnvar("ui_show_pip", 1);
-  _func_03D(var_0);
+  _cinematicingame(var_00);
 
   while (!iscinematicplaying())
   wait 0.05;
@@ -77,59 +77,59 @@ _id_2ADF(var_0) {
   while (iscinematicplaying())
   wait 0.05;
 
-  _func_1F1();
+  _stopcinematicingame();
   setomnvar("ui_show_pip", 0);
   level.player playsound("ui_pip_off_hud_right");
-  _func_1C5("bg_cinematicFullScreen", "1");
-  _func_1C5("bg_cinematicCanPause", "1");
+  _setsaveddvar("bg_cinematicFullScreen", "1");
+  _setsaveddvar("bg_cinematicCanPause", "1");
 }
 
-_id_CBC3(var_0) {
-  level._id_CB9C._id_001A = "naked";
-  level._id_CB9C._id_001B = 0.5;
-  level._id_CB9C._id_0386 = var_0;
+func_CBC3(var_00) {
+  level.func_CB9C.activevisionset = "naked";
+  level.func_CB9C.activevisionsetduration = 0.5;
+  level.func_CB9C.visionsetnaked = var_00;
 }
 
-_id_CBA3() {
+func_CBA3() {
   if (getdvarint("e3"))
   return;
 
-  if (!isdefined(level._id_CB9C))
+  if (!isdefined(level.func_CB9C))
   return;
 
   setomnvar("ui_show_pip", 0);
   setomnvar("ui_jackal_hide_follow_pip", 1);
-  level._id_CB9C._id_0106 = 0;
+  level.func_CB9C.enable = 0;
   level notify("pip_closed");
 }
 
-_id_CBAC() {
-  return isdefined(level._id_CB9C) && isdefined(level._id_CB9C._id_0106) && level._id_CB9C._id_0106;
+func_CBAC() {
+  return isdefined(level.func_CB9C) && isdefined(level.func_CB9C.enable) && level.func_CB9C.enable;
 }
 
-_id_CBA5(var_0) {
-  _id_6A67();
-  _id_0B91::_id_10347(var_0);
-  _id_CBA3();
+func_CBA5(var_00) {
+  func_6A67();
+  scripts/sp/utility::func_10347(var_00);
+  func_CBA3();
 }
 
-_id_6A67(var_0) {
-  switch (tolower(self._id_12BA4)) {
+func_6A67(var_00) {
+  switch (tolower(self.unittype)) {
   case "c6i":
-  _id_CBB5(self, "tag_eye", 29, (18, 7, 1), (0, 200, 3), var_0);
+  func_CBB5(self, "tag_eye", 29, (18, 7, 1), (0, 200, 3), var_00);
   break;
   case "jackal":
-  _id_CBB5(self, "tag_barrel", 13, (150, 0, 20), (8.5, 180, 0), var_0);
+  func_CBB5(self, "tag_barrel", 13, (150, 0, 20), (8.5, 180, 0), var_00);
   break;
   default:
-  _id_CBB5(self, "tag_eye", 29, (18, 7, -1), (0, 200, 3), var_0);
-  level._id_CB9C._id_01FA = 17;
+  func_CBB5(self, "tag_eye", 29, (18, 7, -1), (0, 200, 3), var_00);
+  level.func_CB9C.nearz = 17;
   break;
   }
 }
 
-_id_CBC4() {
-  _id_6A67();
+func_CBC4() {
+  func_6A67();
   self waittill("close_pip");
-  _id_CBA3();
+  func_CBA3();
 }

@@ -195,7 +195,7 @@ weapon_upgrade(param_00,param_01) {
 			var_09 = 1;
 		}
 
-		level.var_1192E++;
+		level.timespapused++;
 		scripts\cp\zombies\zombie_analytics::log_papused(level.wave_num,var_03,level.timespapused);
 		param_01 scripts/cp/zombies/achievement::update_achievement("GET_PACKED",1);
 		param_01 thread scripts\cp\cp_vo::try_to_play_vo("weapon_pap","zmb_pap_vo","high",undefined,undefined,undefined,1);
@@ -204,7 +204,7 @@ weapon_upgrade(param_00,param_01) {
 			var_07 = undefined;
 		}
 
-		var_11 = function_00E3(var_02);
+		var_11 = getweaponattachments(var_02);
 		if(issubstr(var_02,"g18_z")) {
 			foreach(var_13 in var_11) {
 				if(issubstr(var_13,"akimbo")) {
@@ -502,7 +502,7 @@ wait_for_player_to_take_weapon(param_00,param_01,param_02) {
 
 	var_03 switchtoweapon(param_00);
 	var_04 = scripts\cp\utility::getrawbaseweaponname(param_00);
-	var_03.pap[var_04].var_B111++;
+	var_03.pap[var_04].lvl++;
 	var_03 scripts\cp\cp_persistence::give_player_xp(500,1);
 	var_03 notify("weapon_level_changed");
 }
@@ -665,7 +665,7 @@ func_12F72(param_00,param_01,param_02) {
 				var_07 = undefined;
 			}
 
-			var_08 = function_00E3(param_01);
+			var_08 = getweaponattachments(param_01);
 			if(issubstr(param_01,"g18_z")) {
 				foreach(var_0A in var_08) {
 					if(issubstr(var_0A,"akimbo")) {
@@ -676,7 +676,7 @@ func_12F72(param_00,param_01,param_02) {
 
 			var_0C = param_00 scripts\cp\cp_weapon::return_weapon_name_with_like_attachments(param_01,var_07,var_08,undefined,var_04);
 			var_0C = param_00 scripts\cp\utility::_giveweapon(var_0C,undefined,undefined,1);
-			param_00.pap[var_03].var_B111++;
+			param_00.pap[var_03].lvl++;
 			param_00 notify("weapon_level_changed");
 			param_00 givemaxammo(var_0C);
 			return var_0C;

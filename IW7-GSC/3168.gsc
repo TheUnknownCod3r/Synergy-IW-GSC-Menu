@@ -808,7 +808,7 @@ func_8E17() {
 		playfx(self.var_8E1A,var_00,var_01);
 	}
 
-	function_0178("bullet_small_flesh_helmet_npc",var_00);
+	playworldsound("bullet_small_flesh_helmet_npc",var_00);
 	if(isdefined(self.var_8E1E)) {
 		self.var_8E1E = undefined;
 		var_02 = self _meth_850C("helmet","helmet");
@@ -934,7 +934,7 @@ func_C703() {
 	if(self.var_DE == "MOD_MELEE" && isdefined(self.var_4F) && !scripts\engine\utility::wasdamagedbyoffhandshield() && !scripts\sp\_utility::func_9DB4("iw7_sonic")) {
 		if(scripts\engine\utility::actor_is3d()) {
 			var_00 = self.var_4F.origin - self.origin;
-			var_01 = function_02D7(var_00,self.angles);
+			var_01 = generateaxisanglesfromforwardvector(var_00,self.angles);
 			self orientmode("face angle 3d",var_01);
 			return;
 		}
@@ -1031,7 +1031,7 @@ func_1001C() {
 		return 0;
 	}
 
-	if(isdefined(self.var_DE) && function_0107(self.var_DE)) {
+	if(isdefined(self.var_DE) && isexplosivedamagemod(self.var_DE)) {
 		if(self.var_E1 > 120) {
 			return 1;
 		}
@@ -1049,7 +1049,7 @@ func_1001C() {
 		return 1;
 	}
 
-	return function_02BE(self.var_E2);
+	return weaponisbeam(self.var_E2);
 }
 
 func_58B9(param_00) {
@@ -1072,7 +1072,7 @@ func_58B8() {
 }
 
 func_10051(param_00,param_01,param_02,param_03) {
-	if(isdefined(self.var_E2) && function_024C(self.var_E2) == "shield" || self.var_E2 == "iw7_mauler_c8hack" || self.var_E2 == "iw7_c6hack_melee" || self.var_E2 == "iw7_c6worker_fists") {
+	if(isdefined(self.var_E2) && weapontype(self.var_E2) == "shield" || self.var_E2 == "iw7_mauler_c8hack" || self.var_E2 == "iw7_c6hack_melee" || self.var_E2 == "iw7_c6worker_fists") {
 		return 1;
 	}
 
@@ -1139,7 +1139,7 @@ func_58E4(param_00,param_01,param_02,param_03) {
 
 	playfxontag(level.var_7649["c6_death"],self,"j_spine4");
 	if(soundexists("shock_knife_blast")) {
-		function_0178("shock_knife_blast",level.player geteye());
+		playworldsound("shock_knife_blast",level.player geteye());
 	}
 
 	thread lib_0C66::func_FE4E(param_00,var_04,0.02,1,0,1);

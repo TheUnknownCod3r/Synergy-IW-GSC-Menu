@@ -193,7 +193,7 @@ func_E4C7() {
 
 		if(var_0E) {
 			var_0F = self getweaponammoclip(var_03,"left") + self getweaponammoclip(var_03,"right") + self getweaponammostock(var_03);
-			var_0F = int(max(var_0F,function_024B(var_03)));
+			var_0F = int(max(var_0F,weaponstartammo(var_03)));
 			var_10 = weaponclipsize(var_03);
 			var_11 = int(max(0,var_0F - var_10 * 2));
 			self setweaponammoclip(var_03,var_10,"left");
@@ -203,7 +203,7 @@ func_E4C7() {
 		}
 
 		var_0F = self getweaponammoclip(var_03) + self getweaponammostock(var_03);
-		var_0F = int(max(var_0F,function_024B(var_03)));
+		var_0F = int(max(var_0F,weaponstartammo(var_03)));
 		var_10 = weaponclipsize(var_03);
 		var_11 = int(max(0,var_0F - var_10));
 		self setweaponammoclip(var_03,var_10);

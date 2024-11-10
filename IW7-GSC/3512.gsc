@@ -3,80 +3,80 @@
  * Script: scripts\3512.gsc
 ***************************************/
 
-_id_45D0(var_0, var_1, var_2, var_3, var_4, var_5) {
-  self._id_DAD6 = undefined;
+func_45D0(var_00, var_01, var_02, var_03, var_04, var_05) {
+  self.func_DAD6 = undefined;
 
-  if (var_3 < 3.0) {
-  scripts\mp\hud_message::_id_10122("KILLSTREAKS_SCORESTREAK_ENDING");
+  if (var_03 < 3.0) {
+  scripts\mp\hud_message::showerrormessage("KILLSTREAKS_SCORESTREAK_ENDING");
   return 0;
   }
 
-  var_6 = scripts\mp\killstreaks\killstreaks::_id_D507(var_1, 1);
+  var_06 = scripts\mp\killstreaks\killstreaks::func_D507(var_01, 1);
 
-  if (!var_6)
+  if (!var_06)
   return 0;
 
-  thread _id_13B05(var_2);
+  thread watchplayerkillstreakend(var_02);
   thread watchgameend();
 
-  if (!isdefined(var_4) || !var_4)
-  thread _id_13B03(var_2);
+  if (!isdefined(var_04) || !var_04)
+  thread watchplayerkillstreakearlyexit(var_02);
 
-  if (isalive(var_0) && !scripts\mp\utility\game::istrue(var_0._id_5F6F))
-  _id_10D7E(var_0, var_1._id_110EA, var_2, var_5);
+  if (isalive(var_00) && !scripts\mp\utility\game::istrue(var_0.func_5F6F))
+  startcontrol(var_00, var_1.streakname, var_02, var_05);
   else
   {
-  self notify(var_2);
+  self notify(var_02);
   return 0;
   }
 
   return 1;
 }
 
-_id_13B01(var_0, var_1) {
+func_13B01(var_00, var_01) {
   self endon("disconnect");
-  self endon(var_0);
+  self endon(var_00);
 
   for (;;) {
-  self waittill("player_killstreak_death", var_2, var_3, var_4, var_5, var_6, var_7);
+  self waittill("player_killstreak_death", var_02, var_03, var_04, var_05, var_06, var_07);
 
-  if (var_3 != self && isplayer(var_3)) {
-  var_3 notify("destroyed_killstreak", var_7);
-  var_3 scripts\mp\utility\game::_id_83B4("destroyed_" + var_1);
-  thread scripts\mp\utility\game::_id_115DE("callout_destroyed_" + var_1, var_3);
-  thread scripts\mp\missions::_id_A6A3(var_1, self, self, undefined, var_3, var_4, var_6, var_7, "destroyed_" + var_1);
-  thread scripts\mp\utility\game::leaderdialogonplayer(var_1 + "_destroyed", undefined, undefined, self.origin);
+  if (var_03 != self && isplayer(var_03)) {
+  var_03 notify("destroyed_killstreak", var_07);
+  var_03 scripts\mp\utility\game::giveunifiedpoints("destroyed_" + var_01);
+  thread scripts\mp\utility\game::teamplayercardsplash("callout_destroyed_" + var_01, var_03);
+  thread scripts\mp\missions::killstreakkilled(var_01, self, self, undefined, var_03, var_04, var_06, var_07, "destroyed_" + var_01);
+  thread scripts\mp\utility\game::leaderdialogonplayer(var_01 + "_destroyed", undefined, undefined, self.origin);
   }
 
-  self notify(var_0, 1);
+  self notify(var_00, 1);
   }
 }
 
-_id_13B02(var_0) {
-  self endon(var_0);
+watchplayerkillstreakdisconnect(var_00) {
+  self endon(var_00);
   self waittill("disconnect");
-  self notify(var_0, 1);
+  self notify(var_00, 1);
 }
 
-_id_13B06(var_0) {
-  self endon(var_0);
+watchplayerkillstreakswitchteam(var_00) {
+  self endon(var_00);
   self waittill("joined_team");
-  self notify(var_0, 1);
+  self notify(var_00, 1);
 }
 
-_id_13B03(var_0) {
+watchplayerkillstreakearlyexit(var_00) {
   self endon("disconnect");
-  self endon(var_0);
+  self endon(var_00);
 
   for (;;) {
-  var_1 = 0;
+  var_01 = 0;
 
   while (self usebuttonpressed()) {
-  var_1 = var_1 + 0.05;
+  var_01 = var_01 + 0.05;
 
-  if (var_1 > 0.75) {
-  self._id_D3CB = self.origin;
-  self notify(var_0);
+  if (var_01 > 0.75) {
+  self.func_D3CB = self.origin;
+  self notify(var_00);
   return;
   }
 
@@ -87,24 +87,24 @@ _id_13B03(var_0) {
   }
 }
 
-_id_13B07(var_0, var_1) {
+watchplayerkillstreaktimeout(var_00, var_01) {
   self endon("disconnect");
-  self endon(var_0);
-  wait(var_1);
-  self notify(var_0, 1);
+  self endon(var_00);
+  wait(var_01);
+  self notify(var_00, 1);
 }
 
-_id_13B04(var_0) {
+watchplayerkillstreakemp(var_00) {
   self endon("disconnect");
-  self endon(var_0);
+  self endon(var_00);
 
   for (;;)
-  self waittill("emp_damage", var_1, var_2);
+  self waittill("emp_damage", var_01, var_02);
 }
 
-_id_13B05(var_0) {
-  scripts\engine\utility::waittill_any(var_0, "level_game_ended");
-  _id_11066();
+watchplayerkillstreakend(var_00) {
+  scripts\engine\utility::waittill_any(var_00, "level_game_ended");
+  stopcontrol();
 }
 
 watchgameend() {
@@ -112,78 +112,78 @@ watchgameend() {
   self notify("level_game_ended");
 }
 
-_id_10D7E(var_0, var_1, var_2, var_3) {
-  if (isdefined(self) && isalive(var_0)) {
-  self _meth_84E2(var_0);
+startcontrol(var_00, var_01, var_02, var_03) {
+  if (isdefined(self) && isalive(var_00)) {
+  self controlagent(var_00);
 
-  if (isdefined(var_3))
-  self visionsetnakedforplayer(var_3, 0);
+  if (isdefined(var_03))
+  self visionsetnakedforplayer(var_03, 0);
 
-  self._id_D3E7 = var_0;
+  self.playerproxyagent = var_00;
   }
 }
 
-_id_8077(var_0) {
-  var_1 = 0;
+getplayerlookattarget(var_00) {
+  var_01 = 0;
 
-  switch (var_0) {
+  switch (var_00) {
   case "spiderbot":
-  var_1 = 0.45;
+  var_01 = 0.45;
   break;
   case "remote_c8":
-  var_1 = -0.2;
+  var_01 = -0.2;
   break;
   }
 
-  return var_1;
+  return var_01;
 }
 
-_id_11066() {
+stopcontrol() {
   if (isdefined(self)) {
-  if (scripts\mp\utility\game::_id_9D92()) {
-  self _meth_84E3();
+  if (scripts\mp\utility\game::iscontrollingproxyagent()) {
+  self restorecontrolagent();
   self visionsetnakedforplayer("", 0);
   }
 
-  thread scripts\mp\killstreaks\killstreaks::_id_11086(1);
-  self._id_D3E7 = undefined;
-  self._id_165A = undefined;
+  thread scripts\mp\killstreaks\killstreaks::func_11086(1);
+  self.playerproxyagent = undefined;
+  self.func_165A = undefined;
   }
 }
 
-_id_4198(var_0) {
-  scripts\mp\archetypes\archcommon::_id_E0D0(var_0._id_AE62);
-  scripts\mp\perks::_id_11AA();
+cleararchetype(var_00) {
+  scripts\mp\archetypes\archcommon::removearchetype(var_0.loadoutarchetype);
+  scripts\mp\perks::_clearperks();
 }
 
-_id_DDA3(var_0) {
-  var_1 = undefined;
+func_DDA3(var_00) {
+  var_01 = undefined;
 
-  switch (var_0._id_AE62) {
+  switch (var_0.loadoutarchetype) {
   case "archetype_assault":
-  var_1 = scripts\mp\archetypes\archassault::_id_20BB;
+  var_01 = scripts\mp\archetypes\archassault::applyarchetype;
   break;
   case "archetype_heavy":
-  var_1 = _id_0D6C::_id_20BB;
+  var_01 = scripts/mp/archetypes/archheavy::applyarchetype;
   break;
   case "archetype_scout":
-  var_1 = _id_0D6F::_id_20BB;
+  var_01 = scripts/mp/archetypes/archscout::applyarchetype;
   break;
   case "archetype_assassin":
-  var_1 = _id_0D67::_id_20BB;
+  var_01 = scripts/mp/archetypes/archassassin::applyarchetype;
   break;
   case "archetype_engineer":
-  var_1 = _id_0D6B::_id_20BB;
+  var_01 = scripts/mp/archetypes/archengineer::applyarchetype;
   break;
   case "archetype_sniper":
-  var_1 = _id_0D70::_id_20BB;
+  var_01 = scripts/mp/archetypes/archsniper::applyarchetype;
   break;
   }
 
-  scripts\mp\class::_id_AE58(var_0);
+  scripts\mp\class::loadout_updateplayerperks(var_00);
 
-  if (isdefined(var_1))
-  self [[var_1]]();
+  if (isdefined(var_01))
+  self [[var_01]]();
 }
 
-_id_A670(var_0) {}
+func_A670(var_00) {}

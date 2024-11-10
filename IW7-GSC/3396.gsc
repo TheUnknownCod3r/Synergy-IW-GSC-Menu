@@ -3,74 +3,74 @@
  * Script: scripts\3396.gsc
 ***************************************/
 
-_id_6603(var_0) {
+enter_afterlife_arcade(var_00) {
   if (isdefined(level.rewind_afterlife_func))
-  level thread [[level.rewind_afterlife_func]](var_0);
+  level thread [[level.rewind_afterlife_func]](var_00);
 
-  if (!isdefined(var_0._id_6DDD))
-  var_0._id_6DDD = 1;
+  if (!isdefined(var_0.first_time_in_arcade))
+  var_0.first_time_in_arcade = 1;
 
-  var_1 = _id_77D5(var_0);
-  _id_41CE(var_0);
-  level notify("player_entered_ala", var_0);
-  var_0 notify("player_entered_ala");
-  var_0._id_6977 = 0;
+  var_01 = get_afterlife_arcade_start_point(var_00);
+  clearplayersweaponlevels(var_00);
+  level notify("player_entered_ala", var_00);
+  var_00 notify("player_entered_ala");
+  var_0.exitingafterlifearcade = 0;
 
-  if (isdefined(level._id_11929))
-  level._id_11929++;
+  if (isdefined(level.timesinafterlife))
+  level.timesinafterlife++;
 
-  var_0._id_118EE = gettime();
+  var_0.timeenteringafterlife = gettime();
   var_0.health = var_0.maxhealth;
-  var_0 _meth_8070(0.02);
-  var_0 _id_0A77::stoplocalsound_safe("zmb_laststand_music");
-  var_0 setorigin(var_1.origin);
-  var_0 _meth_81DC();
-  var_0 setstance("stand");
-  var_0 takeallweapons();
-  var_0 _meth_8447();
-  var_0 _id_0A77::_id_12C6("iw7_gunless_zm", undefined, undefined, 1);
-  var_0 scripts\engine\utility::_id_1C53(0);
-  var_0 _id_0D5B::_id_F53F(var_0, "afterlife");
-  var_0 _id_0A77::_id_7298();
-  var_0 _id_18E5(var_0);
-  var_0 _id_F3FA(var_0, 0);
-  var_0 _id_93E4(var_0);
+  var_00 clearclienttriggeraudiozone(0.02);
+  var_00 scripts/cp/utility::stoplocalsound_safe("zmb_laststand_music");
+  var_00 setorigin(var_1.origin);
+  var_00 laststandrevive();
+  var_00 setstance("stand");
+  var_00 takeallweapons();
+  var_00 gold_teeth_pickup();
+  var_00 scripts/cp/utility::_giveweapon("iw7_gunless_zm", undefined, undefined, 1);
+  var_00 scripts\engine\utility::allow_melee(0);
+  var_00 scripts/cp/zombies/zombies_loadout::set_player_photo_status(var_00, "afterlife");
+  var_00 scripts/cp/utility::force_usability_enabled();
+  var_00 afterlife_enable_player_interaction(var_00);
+  var_00 set_has_self_revive_token(var_00, 0);
+  var_00 increase_afterlife_count(var_00);
 
-  if (isdefined(var_0)) {
-  if (_id_3DCA(var_0))
-  var_0 _id_0A77::_id_F78C("welcome_to_afterlife", &"CP_ZOMBIE_AFTERLIFE_ARCADE_WELCOME", 6.0);
+  if (isdefined(var_00)) {
+  if (check_self_revive_attempts(var_00))
+  var_00 scripts/cp/utility::setlowermessage("welcome_to_afterlife", &"CP_ZOMBIE_AFTERLIFE_ARCADE_WELCOME", 6.0);
   else
-  var_0 _id_0A77::_id_F78C("welcome_to_afterlife_no_self_revives", &"CP_ZOMBIE_AFTERLIFE_ARCADE_NO_REVIVES", 6.0);
+  var_00 scripts/cp/utility::setlowermessage("welcome_to_afterlife_no_self_revives", &"CP_ZOMBIE_AFTERLIFE_ARCADE_NO_REVIVES", 6.0);
 
-  _id_0D45::_id_AF69(1, var_0, level._id_13BD3, var_0._id_10450, int(level._id_13BD3 / 10) + 1 - var_0._id_11924);
+  scripts/cp/zombies/zombie_analytics::log_enteringafterlifearcade(1, var_00, level.wave_num, var_0.soul_power_earned, int(level.wave_num / 10) + 1 - var_0.times_self_revived);
   }
 
-  if (var_0._id_6DDD) {
-  var_0 thread _id_0A6A::_id_12885("spawn_arcade_first", "zmb_comment_vo", "highest", 15, 0, 0, 1, 50);
-  var_0._id_6DDD = 0;
+  if (var_0.first_time_in_arcade) {
+  var_00 thread scripts/cp/cp_vo::try_to_play_vo("spawn_arcade_first", "zmb_comment_vo", "highest", 15, 0, 0, 1, 50);
+  var_0.first_time_in_arcade = 0;
   }
   else
-  var_0 thread _id_0A6A::_id_12885("spawn_arcade", "zmb_comment_vo", "high", 15, 0, 0, 1, 50);
+  var_00 thread scripts/cp/cp_vo::try_to_play_vo("spawn_arcade", "zmb_comment_vo", "high", 15, 0, 0, 1, 50);
 
-  var_0 _id_E226(var_0);
-  var_0 thread _id_D058(var_0);
-  var_0 thread _id_50CD(var_0, var_1.angles);
-  var_0 thread _id_2B1D(var_0);
-  var_0 thread _id_D052(var_0);
-  level thread _id_C5DA(var_0, 10);
-  var_0 _id_F418(var_0, 1);
-  var_0 _id_18E4(var_0, 1);
-  var_0 _id_0A77::_id_8EC2(var_0._id_92B4);
-  var_0 visionsetnakedforplayer("cp_zmb_afterlife", 1.0);
-  var_0 setclientomnvar("zm_ui_player_in_afterlife_arcade", 1);
-  var_0 _meth_82BE("player_damaged", 1, 0);
-  var_0 _meth_82BE("player_damaged", 2, 0);
+  var_00 reset_soul_power(var_00);
+  var_00 thread player_exit_afterlife_monitor(var_00);
+  var_00 thread delay_set_player_angles(var_00, var_1.angles);
+  var_00 thread black_screen_fades_in(var_00);
+  var_00 thread player_enter_transition_monitor(var_00);
+  level thread open_afterlife_door_for_player(var_00, 10);
+  var_00 set_in_afterlife_arcade(var_00, 1);
+  var_00 afterlife_disable_player_outline(var_00, 1);
+  var_00 scripts/cp/utility::hideheadicon(var_0.icons_to_hide_when_in_afterlife);
+  var_00 visionsetnakedforplayer("cp_zmb_afterlife", 1.0);
+  var_00 setclientomnvar("zm_ui_player_in_afterlife_arcade", 1);
+  var_00 setclientomnvarbit("player_damaged", 1, 0);
+  var_00 setclientomnvarbit("player_damaged", 2, 0);
 
-  if (_id_0A77::_id_9F02() || level._id_C552) {
-  scripts\engine\utility::_id_6E3E("pause_wave_progression");
-  level._id_13FA3 = 1;
+  if (scripts/cp/utility::isplayingsolo() || level.only_one_player) {
+  scripts\engine\utility::flag_set("pause_wave_progression");
+  level.zombies_paused = 1;
 
-  foreach (var_3 in _id_0A4A::_id_7DB0("axis")) {
+  foreach (var_03 in scripts/cp/cp_agent_utils::getaliveagentsofteam("axis")) {
   if (isdefined(var_3.dont_cleanup))
   continue;
 
@@ -80,40 +80,40 @@ _id_6603(var_0) {
   if (isdefined(var_3.agent_type) && (var_3.agent_type == "crab_mini" || var_3.agent_type == "crab_brute"))
   var_3.vignette_nocorpse = 1;
 
-  var_3._id_54CB = 1;
-  var_3 suicide();
+  var_3.died_poorly = 1;
+  var_03 suicide();
   }
 
-  var_0 thread _id_0A57::wait_and_play_tutorial_message("afterlife", 18);
-  thread give_solo_self_revive_token(var_0);
+  var_00 thread scripts/cp/cp_hud_message::wait_and_play_tutorial_message("afterlife", 18);
+  thread give_solo_self_revive_token(var_00);
   }
 
   if (isdefined(level.enter_afterlife_clear_player_scriptable_func))
-  [[level.enter_afterlife_clear_player_scriptable_func]](var_0);
+  [[level.enter_afterlife_clear_player_scriptable_func]](var_00);
 
   if (isdefined(level.aa_ww_char_vo))
-  var_0 thread [[level.aa_ww_char_vo]](var_0);
+  var_00 thread [[level.aa_ww_char_vo]](var_00);
   else
-  var_0 thread _id_0A6A::_id_12885("ww_afterlife_arrive", "zmb_afterlife_vo", "high", 20, 0, 0, 1);
+  var_00 thread scripts/cp/cp_vo::try_to_play_vo("ww_afterlife_arrive", "zmb_afterlife_vo", "high", 20, 0, 0, 1);
 
   if (isdefined(level.aa_memoirs_vo))
-  var_0 thread [[level.aa_memoirs_vo]](var_0);
+  var_00 thread [[level.aa_memoirs_vo]](var_00);
 
-  var_0 thread freeze_controls_for_time();
+  var_00 thread freeze_controls_for_time();
 }
 
 freeze_controls_for_time() {
   self endon("disconnect");
-  self _meth_8423(0);
+  self goal_head_icon(0);
   wait 3;
-  self _meth_8423(1);
+  self goal_head_icon(1);
 }
 
-play_ww_vo_memoirs(var_0) {
-  var_0 endon("disconnect");
-  var_0 endon("death");
+play_ww_vo_memoirs(var_00) {
+  var_00 endon("disconnect");
+  var_00 endon("death");
   level endon("game_ended");
-  var_0 endon("player_done_exit_afterlife");
+  var_00 endon("player_done_exit_afterlife");
   wait(randomintrange(30, 40));
 
   if (!isdefined(var_0.array_of_memoir_vos))
@@ -121,13 +121,13 @@ play_ww_vo_memoirs(var_0) {
 
   while (var_0.array_of_memoir_vos.size > 0) {
   if (randomint(100) < 30)
-  scripts\engine\utility::_id_CE2B(var_0.array_of_memoir_vos[0], level.willard_speaker.origin);
+  scripts\engine\utility::play_sound_in_space(var_0.array_of_memoir_vos[0], level.willard_speaker.origin);
 
   var_0.array_of_memoir_vos = scripts\engine\utility::array_remove(var_0.array_of_memoir_vos, var_0.array_of_memoir_vos[0]);
 
   if (isdefined(var_0.array_of_memoir_vos[0])) {
   if (soundexists(var_0.array_of_memoir_vos[0]))
-  wait(randomfloatrange(80.0, 110.0) + _id_0A6A::_id_7C76(var_0.array_of_memoir_vos[0]));
+  wait(randomfloatrange(80.0, 110.0) + scripts/cp/cp_vo::get_sound_length(var_0.array_of_memoir_vos[0]));
 
   continue;
   }
@@ -136,468 +136,468 @@ play_ww_vo_memoirs(var_0) {
   }
 }
 
-choose_correct_vo_for_player(var_0) {
+choose_correct_vo_for_player(var_00) {
   wait 10;
-  var_1 = "";
+  var_01 = "";
 
-  if (var_0._id_11924 >= var_0.max_self_revive_machine_use)
-  var_1 = "ww_afterlife_p4_notoken";
+  if (var_0.times_self_revived >= var_0.max_self_revive_machine_use)
+  var_01 = "ww_afterlife_p4_notoken";
   else
   {
-  var_2 = ["ww_afterlife_p1_generic", "ww_afterlife_p5_alt_1", "ww_afterlife_arrive"];
-  var_1 = scripts\engine\utility::_id_DC6B(var_2);
+  var_02 = ["ww_afterlife_p1_generic", "ww_afterlife_p5_alt_1", "ww_afterlife_arrive"];
+  var_01 = scripts\engine\utility::random(var_02);
   }
 
-  if (var_1 == "ww_afterlife_arrive") {
-  var_0 thread _id_0A6A::_id_12885(var_1, "zmb_afterlife_vo", "high", 20, 0, 0, 1);
+  if (var_01 == "ww_afterlife_arrive") {
+  var_00 thread scripts/cp/cp_vo::try_to_play_vo(var_01, "zmb_afterlife_vo", "high", 20, 0, 0, 1);
   return;
   }
 
-  var_3 = strtok(var_1, "_");
-  var_4 = "";
-  var_5 = var_3[3];
-  var_6 = var_0.vo_suffix;
-  var_7 = strtok(var_6, "_");
-  var_8 = var_7[0];
+  var_03 = strtok(var_01, "_");
+  var_04 = "";
+  var_05 = var_3[3];
+  var_06 = var_0.vo_suffix;
+  var_07 = strtok(var_06, "_");
+  var_08 = var_7[0];
 
-  switch (var_8) {
+  switch (var_08) {
   case "p5":
   case "p4":
   case "p3":
   case "p2":
   case "p1":
-  var_4 = choose_vo_based_on_type(var_8, var_5);
+  var_04 = choose_vo_based_on_type(var_08, var_05);
   break;
   default:
-  var_4 = var_1;
+  var_04 = var_01;
   break;
   }
 
-  if (soundexists(var_4))
-  var_0 thread _id_0A6A::_id_12885(var_4, "zmb_afterlife_vo", "high", 60, 1, 0, 1);
+  if (soundexists(var_04))
+  var_00 thread scripts/cp/cp_vo::try_to_play_vo(var_04, "zmb_afterlife_vo", "high", 60, 1, 0, 1);
 }
 
-choose_vo_based_on_type(var_0, var_1) {
-  var_2 = "ww_afterlife_";
+choose_vo_based_on_type(var_00, var_01) {
+  var_02 = "ww_afterlife_";
 
   for (;;) {
-  var_2 = "ww_afterlife_";
+  var_02 = "ww_afterlife_";
 
-  switch (var_1) {
+  switch (var_01) {
   case "generic":
-  var_2 = var_2 + var_0 + "_generic";
+  var_02 = var_02 + var_00 + "_generic";
   break;
   case "notoken":
-  var_2 = var_2 + var_0 + "_notoken";
+  var_02 = var_02 + var_00 + "_notoken";
   break;
   case "alt":
-  var_2 = var_2 + var_0 + "_alt_1";
+  var_02 = var_02 + var_00 + "_alt_1";
   break;
   default:
   break;
   }
 
-  if (!soundexists(var_2)) {
-  var_3 = ["ww_afterlife_p1_generic", "ww_afterlife_arrive", "ww_afterlife_p5_alt_1"];
-  var_2 = scripts\engine\utility::_id_DC6B(var_3);
+  if (!soundexists(var_02)) {
+  var_03 = ["ww_afterlife_p1_generic", "ww_afterlife_arrive", "ww_afterlife_p5_alt_1"];
+  var_02 = scripts\engine\utility::random(var_03);
 
-  if (var_2 == "ww_afterlife_arrive")
-  return var_2;
+  if (var_02 == "ww_afterlife_arrive")
+  return var_02;
   else
   {
-  var_4 = strtok(var_2, "_");
-  var_1 = var_4[3];
+  var_04 = strtok(var_02, "_");
+  var_01 = var_4[3];
   continue;
   }
   }
   else
-  return var_2;
+  return var_02;
 
   scripts\engine\utility::waitframe();
   }
 
-  return var_2;
+  return var_02;
 }
 
-_id_41CE(var_0) {
-  var_0._id_C8A2 = [];
+clearplayersweaponlevels(var_00) {
+  var_0.pap = [];
 }
 
-_id_77D5(var_0) {
-  var_1 = scripts\engine\utility::_id_8180("afterlife_arcade", "targetname");
+get_afterlife_arcade_start_point(var_00) {
+  var_01 = scripts\engine\utility::getstructarray("afterlife_arcade", "targetname");
 
   if (isdefined(level.additional_afterlife_arcade_start_point))
-  var_1 = scripts\engine\utility::_id_227F(var_1, level.additional_afterlife_arcade_start_point);
+  var_01 = scripts\engine\utility::array_combine(var_01, level.additional_afterlife_arcade_start_point);
 
-  var_1 = scripts\engine\utility::_id_22A7(var_1);
+  var_01 = scripts\engine\utility::array_randomize(var_01);
 
-  foreach (var_3 in var_1) {
-  if (can_spawn_at_afterlife_arcade_start_point(var_3, var_0))
-  return var_3;
+  foreach (var_03 in var_01) {
+  if (can_spawn_at_afterlife_arcade_start_point(var_03, var_00))
+  return var_03;
   }
 
-  return scripts\engine\utility::_id_DC6B(var_1);
+  return scripts\engine\utility::random(var_01);
 }
 
-can_spawn_at_afterlife_arcade_start_point(var_0, var_1) {
-  var_2 = 16;
+can_spawn_at_afterlife_arcade_start_point(var_00, var_01) {
+  var_02 = 16;
 
-  foreach (var_4 in level.players) {
-  if (var_4 == var_1)
+  foreach (var_04 in level.players) {
+  if (var_04 == var_01)
   continue;
 
-  if (distance2d(var_0.origin, var_4.origin) < var_2)
+  if (distance2d(var_0.origin, var_4.origin) < var_02)
   return 0;
   }
 
   return 1;
 }
 
-_id_12859(var_0) {
-  if (_id_9C10(var_0))
-  _id_693F(var_0);
+try_exit_afterlife_arcade(var_00) {
+  if (is_in_afterlife_arcade(var_00))
+  exit_afterlife_arcade(var_00);
 }
 
-clear_up_all_vo_in_afterlife(var_0) {
-  foreach (var_2 in level._id_134FE) {
-  if (isdefined(var_0._id_13516._id_134FF[var_2]) && var_0._id_13516._id_134FF[var_2].size > 0) {
-  foreach (var_4 in var_0._id_13516._id_134FF[var_2]) {
-  if (isdefined(var_4)) {
-  if (issubstr(var_4._id_1B46, "afterlife"))
-  var_0 stopolcalsound(var_4._id_1B46);
+clear_up_all_vo_in_afterlife(var_00) {
+  foreach (var_02 in level.vo_priority_level) {
+  if (isdefined(var_0.vo_system.vo_queue[var_02]) && var_0.vo_system.vo_queue[var_02].size > 0) {
+  foreach (var_04 in var_0.vo_system.vo_queue[var_02]) {
+  if (isdefined(var_04)) {
+  if (issubstr(var_4.alias, "afterlife"))
+  var_00 stopolcalsound(var_4.alias);
   }
   }
   }
   }
 
-  var_7 = undefined;
+  var_07 = undefined;
 
-  if (isdefined(var_0._id_13516)) {
-  if (isdefined(var_0._id_13516._id_134C6)) {
-  if (isdefined(var_0._id_13516._id_134C6._id_1B46))
-  var_7 = var_0._id_13516._id_134C6._id_1B46;
+  if (isdefined(var_0.vo_system)) {
+  if (isdefined(var_0.vo_system.vo_currently_playing)) {
+  if (isdefined(var_0.vo_system.vo_currently_playing.alias))
+  var_07 = var_0.vo_system.vo_currently_playing.alias;
   }
   }
 
-  if (isdefined(var_7))
-  var_0 stopolcalsound(var_7);
+  if (isdefined(var_07))
+  var_00 stopolcalsound(var_07);
 }
 
-_id_693F(var_0) {
-  if (var_0._id_AF9B == "wave_complete")
-  var_0._id_DDAD = "Wave Complete";
+exit_afterlife_arcade(var_00) {
+  if (var_0.logevent == "wave_complete")
+  var_0.reason = "Wave Complete";
   else
-  var_0._id_DDAD = "Self Revive";
+  var_0.reason = "Self Revive";
 
-  if (var_0 hasweapon("iw7_gunless_zm"))
-  var_0 _meth_83B8("iw7_gunless_zm");
+  if (var_00 hasweapon("iw7_gunless_zm"))
+  var_00 giveuponsuppressiontime("iw7_gunless_zm");
 
-  level thread _id_4250(var_0);
-  level thread clear_up_all_vo_in_afterlife(var_0);
+  level thread close_afterlife_door_for_player(var_00);
+  level thread clear_up_all_vo_in_afterlife(var_00);
 
-  if (isdefined(var_0._id_55D5) && var_0._id_55D5 >= 1)
-  var_0 scripts\engine\utility::_id_1C53(1);
+  if (isdefined(var_0.disabledmelee) && var_0.disabledmelee >= 1)
+  var_00 scripts\engine\utility::allow_melee(1);
 
-  var_0._id_6977 = 1;
-  var_0._id_1192F = (gettime() - var_0._id_118EE) / 1000;
-  _id_0D45::_id_AF6B(1, var_0, level._id_13BD3, var_0._id_DDAD, var_0._id_1192F);
-  var_0 scripts\engine\utility::_id_1C6E(0);
-  var_0 _id_F418(var_0, 0);
-  var_0 _id_18E4(var_0, 0);
-  var_0 _id_0A77::_id_1012C(var_0._id_92B4);
-  var_0 visionsetnakedforplayer("", 0);
-  var_0 setclientomnvar("zm_ui_player_in_afterlife_arcade", 0);
-  var_0._id_9C54 = undefined;
+  var_0.exitingafterlifearcade = 1;
+  var_0.timespentinafterlife = (gettime() - var_0.timeenteringafterlife) / 1000;
+  scripts/cp/zombies/zombie_analytics::log_exitingafterlifearcade(1, var_00, level.wave_num, var_0.reason, var_0.timespentinafterlife);
+  var_00 scripts\engine\utility::allow_usability(0);
+  var_00 set_in_afterlife_arcade(var_00, 0);
+  var_00 afterlife_disable_player_outline(var_00, 0);
+  var_00 scripts/cp/utility::showheadicon(var_0.icons_to_hide_when_in_afterlife);
+  var_00 visionsetnakedforplayer("", 0);
+  var_00 setclientomnvar("zm_ui_player_in_afterlife_arcade", 0);
+  var_0.is_off_grid = undefined;
   var_0.is_in_pap = undefined;
-  var_0 setclientomnvar("zombie_afterlife_soul_power_needed", -1);
-  var_0 thread _id_CD06(var_0);
-  var_0 notify("player_done_exit_afterlife");
+  var_00 setclientomnvar("zombie_afterlife_soul_power_needed", -1);
+  var_00 thread play_exit_afterlife_arcade_vo(var_00);
+  var_00 notify("player_done_exit_afterlife");
 }
 
-_id_CD06(var_0) {
-  var_0 endon("disconnect");
+play_exit_afterlife_arcade_vo(var_00) {
+  var_00 endon("disconnect");
 
   if (isdefined(var_0.ignoreselfrevive))
   return;
 
   wait 4.0;
 
-  if (!isdefined(var_0._id_C1F9))
-  var_0._id_C1F9 = 0;
+  if (!isdefined(var_0.num_of_times_exit_afterlife_arcade))
+  var_0.num_of_times_exit_afterlife_arcade = 0;
 
-  var_0._id_C1F9++;
+  var_0.num_of_times_exit_afterlife_arcade++;
 
-  if (var_0._id_C1F9 == 1)
-  var_0 thread _id_0A6A::_id_12885("arcade_token_revive_first", "zmb_comment_vo", "low", 3, 0, 0, 1);
+  if (var_0.num_of_times_exit_afterlife_arcade == 1)
+  var_00 thread scripts/cp/cp_vo::try_to_play_vo("arcade_token_revive_first", "zmb_comment_vo", "low", 3, 0, 0, 1);
   else
-  var_0 thread _id_0A6A::_id_12885("arcade_token_revive", "zmb_comment_vo", "low", 3, 0, 0, 1);
+  var_00 thread scripts/cp/cp_vo::try_to_play_vo("arcade_token_revive", "zmb_comment_vo", "low", 3, 0, 0, 1);
 }
 
-_id_5172() {
+delete_move_ent() {
   wait 0.1;
   self delete();
 }
 
-_id_50CD(var_0, var_1) {
+delay_set_player_angles(var_00, var_01) {
   level endon("game_ended");
-  var_0 endon("disconnect");
-  var_0 endon("player_exit_afterlife");
+  var_00 endon("disconnect");
+  var_00 endon("player_exit_afterlife");
   scripts\engine\utility::waitframe();
-  var_0 setplayerangles(var_1);
+  var_00 setplayerangles(var_01);
 }
 
-_id_2B1D(var_0) {
-  var_0 endon("disconnect");
-  var_1 = newclienthudelem(var_0);
+black_screen_fades_in(var_00) {
+  var_00 endon("disconnect");
+  var_01 = newclienthudelem(var_00);
   var_1.x = 0;
   var_1.y = 0;
-  var_1 setshader("black", 640, 480);
-  var_1._id_002B = "left";
-  var_1._id_002C = "top";
-  var_1._id_02A4 = 1;
-  var_1._id_017D = "fullscreen";
-  var_1._id_0382 = "fullscreen";
+  var_01 setshader("black", 640, 480);
+  var_1.alignx = "left";
+  var_1.aligny = "top";
+  var_1.sort = 1;
+  var_1.horzalign = "fullscreen";
+  var_1.vertalign = "fullscreen";
   var_1.alpha = 1;
-  var_1._id_0142 = 1;
-  var_1 fadeovertime(15.0);
+  var_1.foreground = 1;
+  var_01 fadeovertime(15.0);
   var_1.alpha = 0;
-  var_1 _id_0A77::_id_1372C(15.0, var_0, "player_exit_afterlife", level, "game_ended");
-  var_1 destroy();
+  var_01 scripts/cp/utility::waittill_any_ents_or_timeout_return(15.0, var_00, "player_exit_afterlife", level, "game_ended");
+  var_01 destroy();
 }
 
-_id_18E5(var_0) {
-  var_0._id_9A3F = _id_0A59::_id_7B99();
-  _id_0A59::_id_E1F8();
-  var_0._id_A8D3 = undefined;
-  var_0._id_9A3F makeunusable();
-  var_0 thread _id_18E7();
-  var_0 thread _id_0A59::_id_D103();
+afterlife_enable_player_interaction(var_00) {
+  var_0.interaction_trigger = scripts/cp/cp_interaction::get_player_interaction_trigger();
+  scripts/cp/cp_interaction::reset_interaction_triggers();
+  var_0.last_interaction_point = undefined;
+  var_0.interaction_trigger makeunusable();
+  var_00 thread afterlife_release_player_interaction_trigger();
+  var_00 thread scripts/cp/cp_interaction::player_interaction_monitor();
 }
 
-_id_18E7() {
-  var_0 = self._id_9A3F;
+afterlife_release_player_interaction_trigger() {
+  var_00 = self.interaction_trigger;
   scripts\engine\utility::waittill_any("player_exit_afterlife", "spawned", "disconnect");
-  var_0._id_93A8 = 0;
+  var_0.in_use = 0;
 }
 
-_id_F418(var_0, var_1) {
-  var_0._id_9387 = var_1;
+set_in_afterlife_arcade(var_00, var_01) {
+  var_0.in_afterlife_arcade = var_01;
 }
 
-_id_18E4(var_0, var_1) {
-  var_0._id_C004 = var_1;
-  var_0._id_C016 = var_1;
+afterlife_disable_player_outline(var_00, var_01) {
+  var_0.no_outline = var_01;
+  var_0.no_team_outlines = var_01;
 }
 
-_id_9C10(var_0) {
-  return scripts\engine\utility::_id_9CEE(var_0._id_9387);
+is_in_afterlife_arcade(var_00) {
+  return scripts\engine\utility::is_true(var_0.in_afterlife_arcade);
 }
 
-_id_975E() {}
+init_spectate_door() {}
 
-_id_972F() {}
+init_selfrevive_door() {}
 
-_id_1301F(var_0, var_1) {
+use_spectate_door(var_00, var_01) {
   if (level.players.size == 1) {
-  var_1 _id_0A59::_id_9A3C(var_0, &"CP_ZOMBIE_AFTERLIFE_ARCADE_CANNOT_SPECTATE");
+  var_01 scripts/cp/cp_interaction::interaction_show_fail_reason(var_00, &"CP_ZOMBIE_AFTERLIFE_ARCADE_CANNOT_SPECTATE");
   return;
   }
 
-  var_1._id_D7DC = var_1.origin;
-  var_1._id_D7DB = var_1 getplayerangles();
-  var_1 _id_0A55::_id_662C();
-  var_1 thread _id_6962(var_1);
+  var_1.pre_spectate_pos = var_1.origin;
+  var_1.pre_spectate_angles = var_01 getplayerangles();
+  var_01 scripts/cp/cp_globallogic::enterspectator();
+  var_01 thread exit_spectator_request_monitor(var_01);
 }
 
-_id_6962(var_0) {
+exit_spectator_request_monitor(var_00) {
   level endon("game_ended");
-  var_0 endon("disconnect");
-  var_0 endon("player_exit_afterlife");
-  var_0 endon("spawned");
-  var_0 notifyonplayercommand("release_use_button", "-usereload");
-  var_0 notifyonplayercommand("release_use_button", "-activate");
-  var_0 notifyonplayercommand("press_use_button", "+usereload");
-  var_0 notifyonplayercommand("press_use_button", "+activate");
-  var_0 waittill("release_use_button");
-  var_0 waittill("press_use_button");
-  var_0 _id_0A77::updatesessionstate("playing");
-  var_0 spawn(var_0._id_D7DC, var_0._id_D7DB);
-  var_0 _meth_8422(0);
-  var_0 _meth_8424(0);
+  var_00 endon("disconnect");
+  var_00 endon("player_exit_afterlife");
+  var_00 endon("spawned");
+  var_00 notifyonplayercommand("release_use_button", "-usereload");
+  var_00 notifyonplayercommand("release_use_button", "-activate");
+  var_00 notifyonplayercommand("press_use_button", "+usereload");
+  var_00 notifyonplayercommand("press_use_button", "+activate");
+  var_00 waittill("release_use_button");
+  var_00 waittill("press_use_button");
+  var_00 scripts/cp/utility::updatesessionstate("playing");
+  var_00 spawn(var_0.pre_spectate_pos, var_0.pre_spectate_angles);
+  var_00 allowdoublejump(0);
+  var_00 allowwallrun(0);
 }
 
-_id_1300F(var_0, var_1) {
-  var_1 endon("disconnect");
+use_selfrevive_door(var_00, var_01) {
+  var_01 endon("disconnect");
 
-  if (var_1 _id_0A77::_id_9F02() || level._id_C552) {
-  if (!scripts\engine\utility::_id_9CEE(level.dont_resume_wave_after_solo_afterlife))
+  if (var_01 scripts/cp/utility::isplayingsolo() || level.only_one_player) {
+  if (!scripts\engine\utility::is_true(level.dont_resume_wave_after_solo_afterlife))
   level thread resumespawningaftertime();
   }
 
   if (!isdefined(var_1.ignoreselfrevive))
-  var_1 _id_1794();
+  var_01 add_white_screen();
 
-  if (isdefined(var_1._id_55D5) && var_1._id_55D5 >= 1)
-  var_1 scripts\engine\utility::_id_1C53(1);
+  if (isdefined(var_1.disabledmelee) && var_1.disabledmelee >= 1)
+  var_01 scripts\engine\utility::allow_melee(1);
 
   if (!isdefined(var_1.ignoreselfrevive)) {
-  _id_BC83(var_1, "fast_travel_tube_start", "fast_travel_tube_end");
-  var_1 thread _id_E0AE(0.1);
+  move_through_tube(var_01, "fast_travel_tube_start", "fast_travel_tube_end");
+  var_01 thread remove_white_screen(0.1);
   }
 
-  var_1 notify("player_exit_afterlife");
-  var_1 _id_0A5B::_id_992F(var_1);
-  var_1 setclientomnvar("zombie_afterlife_soul_power_earned", 0);
-  var_1 setclientomnvar("zombie_afterlife_soul_power_goal", 0);
-  var_1 setclientomnvar("zombie_afterlife_soul_power_needed", -1);
-  var_1 _id_F3FA(var_1, 0);
+  var_01 notify("player_exit_afterlife");
+  var_01 scripts/cp/cp_laststand::instant_revive(var_01);
+  var_01 setclientomnvar("zombie_afterlife_soul_power_earned", 0);
+  var_01 setclientomnvar("zombie_afterlife_soul_power_goal", 0);
+  var_01 setclientomnvar("zombie_afterlife_soul_power_needed", -1);
+  var_01 set_has_self_revive_token(var_01, 0);
 
-  if (var_1 _id_0A77::_id_9BA0("self_revive"))
+  if (var_01 scripts/cp/utility::is_consumable_active("self_revive"))
   return;
 
-  if (var_1 _id_0A77::_id_9F02() || level._id_C552) {
-  var_1._id_11924 = var_1._id_F1E7;
-  var_2 = var_1.max_self_revive_machine_use - var_1._id_11924;
+  if (var_01 scripts/cp/utility::isplayingsolo() || level.only_one_player) {
+  var_1.times_self_revived = var_1.self_revives_purchased;
+  var_02 = var_1.max_self_revive_machine_use - var_1.times_self_revived;
   } else {
-  var_1._id_11924 = var_1._id_11924 + 1;
-  var_2 = int(level._id_13BD3 / 10) + 1 - var_1._id_11924;
+  var_1.times_self_revived = var_1.times_self_revived + 1;
+  var_02 = int(level.wave_num / 10) + 1 - var_1.times_self_revived;
   }
 
-  var_1 setclientomnvar("zombie_afterlife_self_revive_count", int(max(var_2, 0)));
-  var_1 thread set_spawn_defaults();
+  var_01 setclientomnvar("zombie_afterlife_self_revive_count", int(max(var_02, 0)));
+  var_01 thread set_spawn_defaults();
 }
 
 set_spawn_defaults() {
   self endon("disconnect");
   wait 0.15;
-  self _meth_8422(0);
-  self _meth_8427(1);
-  self _meth_8424(0);
-  self _meth_8412(0);
+  self allowdoublejump(0);
+  self allowslide(1);
+  self allowwallrun(0);
+  self allowdodge(0);
   self _meth_8426(0);
   self _meth_8425(0);
   self _meth_8454(3);
 
   if (isdefined(level.player_suit))
-  self _meth_845A(level.player_suit);
+  self setsuit(level.player_suit);
   else
-  self _meth_845A("zom_suit");
+  self setsuit("zom_suit");
 
-  self._id_111BC = "zom_suit";
+  self.suit = "zom_suit";
 }
 
 resumespawningaftertime() {
   level endon("game_ended");
   wait 20;
-  level._id_13FA3 = 0;
-  scripts\engine\utility::_id_6E2A("pause_wave_progression");
+  level.zombies_paused = 0;
+  scripts\engine\utility::flag_clear("pause_wave_progression");
 }
 
-_id_12E0E(var_0) {
+update_player_revives_every_ten_waves(var_00) {
   level endon("game_ended");
-  var_0 endon("disconnect");
-  var_1 = 0;
+  var_00 endon("disconnect");
+  var_01 = 0;
 
-  while (var_1 < 2) {
+  while (var_01 < 2) {
   level scripts\engine\utility::waittill_any("regular_wave_starting", "event_wave_starting");
 
-  if (var_0 _id_0A77::_id_9F02() || level._id_C552)
+  if (var_00 scripts/cp/utility::isplayingsolo() || level.only_one_player)
   continue;
   else
-  var_2 = int(level._id_13BD3 / 10) + 1 - var_0._id_11924;
+  var_02 = int(level.wave_num / 10) + 1 - var_0.times_self_revived;
 
-  var_0 setclientomnvar("zombie_afterlife_self_revive_count", int(max(var_2, 0)));
+  var_00 setclientomnvar("zombie_afterlife_self_revive_count", int(max(var_02, 0)));
   var_1++;
   }
 }
 
-_id_BC83(var_0, var_1, var_2) {
-  var_3 = getent(var_1, "targetname");
-  var_4 = getent(var_2, "targetname");
+move_through_tube(var_00, var_01, var_02) {
+  var_03 = getent(var_01, "targetname");
+  var_04 = getent(var_02, "targetname");
 
-  if (!isdefined(var_3) || !isdefined(var_4))
+  if (!isdefined(var_03) || !isdefined(var_04))
   return;
 
-  var_0 _meth_844F(0.3, 0.2, var_0.origin, 200);
-  var_0 _meth_805B();
-  var_0._id_C004 = 1;
-  var_0._id_C016 = 1;
-  var_5 = var_3.origin + (0, 0, -45);
-  var_6 = var_4.origin + (0, 0, -45);
-  var_0._id_9BE1 = 1;
-  var_0 _id_0A77::_id_1C5C(1);
-  var_0 dontinterpolate();
-  var_0 setorigin(var_5);
-  var_0 setplayerangles(var_3.angles);
-  var_0 playlocalsound("zmb_portal_travel_lr");
-  var_7 = spawn("script_origin", var_5);
-  var_0 _meth_823A(var_7);
+  var_00 earthquakeforplayer(0.3, 0.2, var_0.origin, 200);
+  var_00 cancelmantle();
+  var_0.no_outline = 1;
+  var_0.no_team_outlines = 1;
+  var_05 = var_3.origin + (0, 0, -45);
+  var_06 = var_4.origin + (0, 0, -45);
+  var_0.is_fast_traveling = 1;
+  var_00 scripts/cp/utility::allow_player_ignore_me(1);
+  var_00 dontinterpolate();
+  var_00 setorigin(var_05);
+  var_00 setplayerangles(var_3.angles);
+  var_00 playlocalsound("zmb_portal_travel_lr");
+  var_07 = spawn("script_origin", var_05);
+  var_00 getweaponvariantattachments(var_07);
   wait 0.1;
-  var_7 moveto(var_6, 1);
-  var_0 thread _id_E0AE(0.1);
+  var_07 moveto(var_06, 1);
+  var_00 thread remove_white_screen(0.1);
   wait 1;
-  var_0._id_9BE1 = undefined;
+  var_0.is_fast_traveling = undefined;
 
-  if (var_0 _id_0A77::_id_9E3A())
-  var_0 _id_0A77::_id_1C5C(0);
+  if (var_00 scripts/cp/utility::isignoremeenabled())
+  var_00 scripts/cp/utility::allow_player_ignore_me(0);
 
-  var_0._id_C004 = 0;
-  var_0._id_C016 = 0;
+  var_0.no_outline = 0;
+  var_0.no_team_outlines = 0;
 
-  if (isdefined(level._id_D679)) {
-  var_8 = anglestoforward((0, 90, 0));
-  playfx(level._effect["vfx_zmb_portal_exit_burst"], level._id_D679, var_8);
+  if (isdefined(level.portal_exit_fx_org)) {
+  var_08 = anglestoforward((0, 90, 0));
+  playfx(level._effect["vfx_zmb_portal_exit_burst"], level.portal_exit_fx_org, var_08);
   }
 
-  var_0 _id_1794();
-  var_7 thread _id_5172();
+  var_00 add_white_screen();
+  var_07 thread delete_move_ent();
 }
 
-_id_1794() {
-  if (isdefined(self._id_13D0C))
+add_white_screen() {
+  if (isdefined(self.white_screen_overlay))
   return;
 
-  self._id_13D0C = newclienthudelem(self);
-  self._id_13D0C.x = 0;
-  self._id_13D0C.y = 0;
-  self._id_13D0C setshader("white", 640, 480);
-  self._id_13D0C._id_002B = "left";
-  self._id_13D0C._id_002C = "top";
-  self._id_13D0C._id_02A4 = 1;
-  self._id_13D0C._id_017D = "fullscreen";
-  self._id_13D0C._id_0382 = "fullscreen";
-  self._id_13D0C.alpha = 1;
-  self._id_13D0C._id_0142 = 1;
+  self.white_screen_overlay = newclienthudelem(self);
+  self.white_screen_overlay.x = 0;
+  self.white_screen_overlay.y = 0;
+  self.white_screen_overlay setshader("white", 640, 480);
+  self.white_screen_overlay.alignx = "left";
+  self.white_screen_overlay.aligny = "top";
+  self.white_screen_overlay.sort = 1;
+  self.white_screen_overlay.horzalign = "fullscreen";
+  self.white_screen_overlay.vertalign = "fullscreen";
+  self.white_screen_overlay.alpha = 1;
+  self.white_screen_overlay.foreground = 1;
 }
 
-_id_E0AE(var_0) {
+remove_white_screen(var_00) {
   self endon("disconnect");
 
-  if (isdefined(var_0))
-  wait(var_0);
+  if (isdefined(var_00))
+  wait(var_00);
 
-  if (isdefined(self._id_13D0C)) {
-  self._id_13D0C.alpha = 0;
+  if (isdefined(self.white_screen_overlay)) {
+  self.white_screen_overlay.alpha = 0;
   wait 0.1;
 
-  if (isdefined(self._id_13D0C))
-  self._id_13D0C destroy();
+  if (isdefined(self.white_screen_overlay))
+  self.white_screen_overlay destroy();
   }
 }
 
-_id_386A(var_0, var_1) {
-  if (_id_0A77::_id_9F02() || scripts\engine\utility::_id_9CEE(level._id_C552))
+can_use_selfrevive_door(var_00, var_01) {
+  if (scripts/cp/utility::isplayingsolo() || scripts\engine\utility::is_true(level.only_one_player))
   return 1;
 
-  if (_id_8BA8(var_1))
+  if (has_self_revive_token(var_01))
   return 1;
 
   return 0;
 }
 
-_id_7C53(var_0, var_1) {
-  if (_id_3DCA(var_1)) {
-  if (_id_8BA8(var_1) || _id_0A77::_id_9F02() || scripts\engine\utility::_id_9CEE(level._id_C552))
+get_self_revive_door_hint(var_00, var_01) {
+  if (check_self_revive_attempts(var_01)) {
+  if (has_self_revive_token(var_01) || scripts/cp/utility::isplayingsolo() || scripts\engine\utility::is_true(level.only_one_player))
   return &"CP_ZOMBIE_AFTERLIFE_ARCADE_SELFREVIVE_DOOR";
   else
   return &"CP_ZOMBIE_AFTERLIFE_ARCADE_NEED_SELFREVIVE_TOKEN";
@@ -606,203 +606,203 @@ _id_7C53(var_0, var_1) {
   return &"CP_ZOMBIE_AFTERLIFE_ARCADE_NO_MORE_SELF_REVIVES";
 }
 
-_id_832E(var_0) {
-  var_0 thread _id_0A6A::_id_12885("arcade_token_earn", "zmb_comment_vo", "low", 3, 0, 0, 1);
-  var_0 playlocalsound("zmb_ala_soul_meter_filled");
-  var_0 _id_F3FA(var_0, 1);
-  var_0._id_10450 = 0;
-  var_0._id_1044F = 0;
-  level thread _id_C5DA(var_0, 165);
+give_self_revive_token(var_00) {
+  var_00 thread scripts/cp/cp_vo::try_to_play_vo("arcade_token_earn", "zmb_comment_vo", "low", 3, 0, 0, 1);
+  var_00 playlocalsound("zmb_ala_soul_meter_filled");
+  var_00 set_has_self_revive_token(var_00, 1);
+  var_0.soul_power_earned = 0;
+  var_0.soul_power_displayed = 0;
+  level thread open_afterlife_door_for_player(var_00, 165);
   wait 5;
-  var_0 thread _id_0A6A::_id_12885("ww_afterlife_overstay", "zmb_afterlife_vo", "high", undefined, undefined, undefined, 1);
+  var_00 thread scripts/cp/cp_vo::try_to_play_vo("ww_afterlife_overstay", "zmb_afterlife_vo", "high", undefined, undefined, undefined, 1);
 }
 
-give_solo_self_revive_token(var_0) {
-  var_0 playlocalsound("zmb_ala_soul_meter_filled");
-  var_0 _id_F3FA(var_0, 1);
-  var_0 setclientomnvar("zombie_afterlife_soul_power_needed", -1);
-  var_0._id_10450 = 0;
-  var_0._id_1044F = 0;
-  level thread _id_C5DA(var_0, 165);
+give_solo_self_revive_token(var_00) {
+  var_00 playlocalsound("zmb_ala_soul_meter_filled");
+  var_00 set_has_self_revive_token(var_00, 1);
+  var_00 setclientomnvar("zombie_afterlife_soul_power_needed", -1);
+  var_0.soul_power_earned = 0;
+  var_0.soul_power_displayed = 0;
+  level thread open_afterlife_door_for_player(var_00, 165);
 }
 
-_id_C5DA(var_0, var_1) {
-  if (!isdefined(level._id_1B14)) {
-  level._id_1B15 = getent("ala_revive_door", "targetname");
-  var_2 = scripts\engine\utility::_id_817E("selfrevive_portal", "targetname");
-  level._id_1B14 = spawn("script_model", var_2.origin);
-  level._id_1B14 setmodel("tag_origin");
-  level._id_1B14.angles = var_2.angles;
+open_afterlife_door_for_player(var_00, var_01) {
+  if (!isdefined(level.ala_portal_org)) {
+  level.ala_revive_door = getent("ala_revive_door", "targetname");
+  var_02 = scripts\engine\utility::getstruct("selfrevive_portal", "targetname");
+  level.ala_portal_org = spawn("script_model", var_2.origin);
+  level.ala_portal_org setmodel("tag_origin");
+  level.ala_portal_org.angles = var_2.angles;
   wait 0.1;
   }
 
-  if (!isdefined(var_0._id_E498)) {
-  var_0._id_E498 = spawn("script_model", level._id_1B15.origin + (0, 0, -300));
-  var_0._id_E498 setmodel(level._id_1B15._id_01F1);
-  var_0._id_E498.angles = level._id_1B15.angles;
+  if (!isdefined(var_0.revive_door)) {
+  var_0.revive_door = spawn("script_model", level.ala_revive_door.origin + (0, 0, -300));
+  var_0.revive_door setmodel(level.ala_revive_door.model);
+  var_0.revive_door.angles = level.ala_revive_door.angles;
 
-  foreach (var_4 in level.players) {
-  if (var_4 != var_0)
-  var_0._id_E498 _meth_8429(var_4);
+  foreach (var_04 in level.players) {
+  if (var_04 != var_00)
+  var_0.revive_door hidefromplayer(var_04);
   }
 
   wait 0.1;
-  var_0._id_E498.origin = var_0._id_E498.origin + (0, 0, 300);
+  var_0.revive_door.origin = var_0.revive_door.origin + (0, 0, 300);
   wait 0.1;
-  level._id_1B15 _meth_8429(var_0);
+  level.ala_revive_door hidefromplayer(var_00);
   }
 
-  var_0._id_E498 _meth_8271(var_1, 0.2);
-  var_6 = level._effect["vfx_zmb_portal_centhub"];
+  var_0.revive_door rotateyaw(var_01, 0.2);
+  var_06 = level._effect["vfx_zmb_portal_centhub"];
 
   if (isdefined(level.centhub_portal_fx))
-  var_6 = level.centhub_portal_fx;
+  var_06 = level.centhub_portal_fx;
 
-  playfxontagforclients(var_6, level._id_1B14, "tag_origin", var_0);
+  playfxontagforclients(var_06, level.ala_portal_org, "tag_origin", var_00);
 }
 
-_id_4250(var_0) {
-  if (isdefined(var_0._id_E498))
-  var_0._id_E498.angles = level._id_1B15.angles;
+close_afterlife_door_for_player(var_00) {
+  if (isdefined(var_0.revive_door))
+  var_0.revive_door.angles = level.ala_revive_door.angles;
 
-  _func_297(level._effect["vfx_zmb_portal_centhub"], level._id_1B14, "tag_origin", var_0);
+  _stopfxontagforclients(level._effect["vfx_zmb_portal_centhub"], level.ala_portal_org, "tag_origin", var_00);
 }
 
-_id_F3FA(var_0, var_1) {
-  var_0._id_8BA8 = var_1;
+set_has_self_revive_token(var_00, var_01) {
+  var_0.has_self_revive_token = var_01;
 
-  if (var_1 == 1)
-  var_0 setclientomnvar("zombie_afterlife_has_self_revive_token", 1);
+  if (var_01 == 1)
+  var_00 setclientomnvar("zombie_afterlife_has_self_revive_token", 1);
   else
-  var_0 setclientomnvar("zombie_afterlife_has_self_revive_token", 0);
+  var_00 setclientomnvar("zombie_afterlife_has_self_revive_token", 0);
 }
 
-_id_8BA8(var_0) {
-  return scripts\engine\utility::_id_9CEE(var_0._id_8BA8);
+has_self_revive_token(var_00) {
+  return scripts\engine\utility::is_true(var_0.has_self_revive_token);
 }
 
-_id_3DCA(var_0) {
-  if (_id_0A77::_id_9F02() || level._id_C552)
+check_self_revive_attempts(var_00) {
+  if (scripts/cp/utility::isplayingsolo() || level.only_one_player)
   return 1;
-  else if (scripts\engine\utility::_id_9CEE(var_0.have_gns_perk))
+  else if (scripts\engine\utility::is_true(var_0.have_gns_perk))
   return 1;
-  else if (var_0._id_11924 >= var_0.max_self_revive_machine_use)
+  else if (var_0.times_self_revived >= var_0.max_self_revive_machine_use)
   return 0;
-  else if (int(level._id_13BD3 / 10) + 1 - var_0._id_11924 >= 1)
+  else if (int(level.wave_num / 10) + 1 - var_0.times_self_revived >= 1)
   return 1;
   else
   return 0;
 }
 
-_id_D058(var_0) {
+player_exit_afterlife_monitor(var_00) {
   level endon("game_ended");
-  var_0 endon("disconnect");
-  var_0 endon("player_done_exit_afterlife");
-  var_0 scripts\engine\utility::_id_13734("player_exit_afterlife", "spawned");
-  var_0 _id_693F(var_0);
+  var_00 endon("disconnect");
+  var_00 endon("player_done_exit_afterlife");
+  var_00 scripts\engine\utility::waittill_any_return("player_exit_afterlife", "spawned");
+  var_00 exit_afterlife_arcade(var_00);
 }
 
-_id_94D7() {
-  level._id_11929 = 0;
-  level._id_CF91 = ::_id_6603;
+init_afterlife_arcade() {
+  level.timesinafterlife = 0;
+  level.player_bleed_out_func = ::enter_afterlife_arcade;
 }
 
-_id_10B95() {
-  var_0 = spawn("script_origin", (-10100, 114, -1753));
-  var_0 playloopsound("zmb_afterlife_music");
+start_afterlife_arcade_music() {
+  var_00 = spawn("script_origin", (-10100, 114, -1753));
+  var_00 playloopsound("zmb_afterlife_music");
 }
 
-_id_D052(var_0) {
+player_enter_transition_monitor(var_00) {
   level endon("game_ended");
-  var_0 endon("disconnect");
-  var_0 endon("player_done_exit_afterlife");
+  var_00 endon("disconnect");
+  var_00 endon("player_done_exit_afterlife");
   wait 3.0;
 
-  if (_id_3DCA(var_0))
-  _id_12991(var_0);
+  if (check_self_revive_attempts(var_00))
+  turn_on_soul_power_progress_bar(var_00);
 
-  var_0 visionsetnakedforplayer("", 2.0);
+  var_00 visionsetnakedforplayer("", 2.0);
 }
 
-_id_12991(var_0) {
-  var_0 setclientomnvar("zombie_afterlife_soul_power_earned", var_0._id_10450);
-  var_0 setclientomnvar("zombie_afterlife_soul_power_needed", var_0._id_10451);
-  var_0 setclientomnvar("zombie_afterlife_soul_power_goal", var_0._id_10451);
+turn_on_soul_power_progress_bar(var_00) {
+  var_00 setclientomnvar("zombie_afterlife_soul_power_earned", var_0.soul_power_earned);
+  var_00 setclientomnvar("zombie_afterlife_soul_power_needed", var_0.soul_power_goal);
+  var_00 setclientomnvar("zombie_afterlife_soul_power_goal", var_0.soul_power_goal);
 }
 
-_id_D0F7(var_0) {
-  var_0._id_92B4 = [];
+player_init_afterlife(var_00) {
+  var_0.icons_to_hide_when_in_afterlife = [];
 }
 
-_id_1766(var_0, var_1) {
-  var_0._id_92B4[var_0._id_92B4.size] = var_1;
+add_to_icons_to_hide_in_afterlife(var_00, var_01) {
+  var_0.icons_to_hide_when_in_afterlife[var_0.icons_to_hide_when_in_afterlife.size] = var_01;
 }
 
-_id_E01E(var_0, var_1) {
-  if (!isdefined(var_0))
+remove_from_icons_to_hide_in_afterlife(var_00, var_01) {
+  if (!isdefined(var_00))
   return;
 
-  var_0._id_92B4 = scripts\engine\utility::array_remove(var_0._id_92B4, var_1);
-  var_0._id_92B4 = scripts\engine\utility::_id_22BC(var_0._id_92B4);
+  var_0.icons_to_hide_when_in_afterlife = scripts\engine\utility::array_remove(var_0.icons_to_hide_when_in_afterlife, var_01);
+  var_0.icons_to_hide_when_in_afterlife = scripts\engine\utility::array_removeundefined(var_0.icons_to_hide_when_in_afterlife);
 }
 
-_id_974F(var_0) {
-  var_0._id_10450 = 0;
-  var_0._id_1044F = 0;
-  var_0._id_11924 = 0;
-  var_0._id_10451 = _id_7C74(var_0);
+init_soul_power(var_00) {
+  var_0.soul_power_earned = 0;
+  var_0.soul_power_displayed = 0;
+  var_0.times_self_revived = 0;
+  var_0.soul_power_goal = get_soul_power_goal(var_00);
 }
 
-_id_8334(var_0, var_1) {
-  if (_id_3DCA(var_0) && !_id_8BA8(var_0)) {
-  var_0._id_10450 = var_0._id_10450 + var_1;
-  var_0 thread _id_56C9(var_0);
+give_soul_power(var_00, var_01) {
+  if (check_self_revive_attempts(var_00) && !has_self_revive_token(var_00)) {
+  var_0.soul_power_earned = var_0.soul_power_earned + var_01;
+  var_00 thread display_soul_power_earned(var_00);
   }
 }
 
-_id_56C9(var_0) {
-  var_0 notify("display_soul_power_earned");
+display_soul_power_earned(var_00) {
+  var_00 notify("display_soul_power_earned");
   level endon("game_ended");
-  var_0 endon("display_soul_power_earned");
-  var_0 endon("revive");
+  var_00 endon("display_soul_power_earned");
+  var_00 endon("revive");
 
-  while (var_0._id_1044F < min(var_0._id_10450, var_0._id_10451)) {
-  var_1 = min(var_0._id_10450, var_0._id_10451);
-  var_2 = var_0._id_1044F + 5;
-  var_0._id_1044F = min(var_2, var_1);
-  var_0 setclientomnvar("zombie_afterlife_soul_power_earned", int(var_0._id_1044F));
-  var_0 setclientomnvar("zombie_afterlife_soul_power_needed", int(var_0._id_10451 - var_0._id_1044F));
+  while (var_0.soul_power_displayed < min(var_0.soul_power_earned, var_0.soul_power_goal)) {
+  var_01 = min(var_0.soul_power_earned, var_0.soul_power_goal);
+  var_02 = var_0.soul_power_displayed + 5;
+  var_0.soul_power_displayed = min(var_02, var_01);
+  var_00 setclientomnvar("zombie_afterlife_soul_power_earned", int(var_0.soul_power_displayed));
+  var_00 setclientomnvar("zombie_afterlife_soul_power_needed", int(var_0.soul_power_goal - var_0.soul_power_displayed));
   scripts\engine\utility::waitframe();
   }
 
-  if (var_0._id_10450 >= var_0._id_10451) {
-  if (_id_3DCA(var_0))
-  _id_832E(var_0);
+  if (var_0.soul_power_earned >= var_0.soul_power_goal) {
+  if (check_self_revive_attempts(var_00))
+  give_self_revive_token(var_00);
   }
 }
 
-_id_93E4(var_0) {
-  if (!isdefined(var_0._id_C207))
-  var_0._id_C207 = 0;
+increase_afterlife_count(var_00) {
+  if (!isdefined(var_0.num_times_in_afterlife))
+  var_0.num_times_in_afterlife = 0;
 
-  var_0._id_C207++;
+  var_0.num_times_in_afterlife++;
 }
 
-_id_7C74(var_0) {
-  if (_id_0A77::_id_9F02() || scripts\engine\utility::_id_9CEE(level._id_C552))
+get_soul_power_goal(var_00) {
+  if (scripts/cp/utility::isplayingsolo() || scripts\engine\utility::is_true(level.only_one_player))
   return 0;
   else
   return 200;
 }
 
-_id_DEBC() {
-  level._id_9A12["afterlife_spectate_door"] = &"CP_ZOMBIE_AFTERLIFE_ARCADE_SPECTATE_DOOR";
-  _id_0A59::_id_DEBB("afterlife_spectate_door", undefined, undefined, undefined, ::_id_1301F, 0, 0, ::_id_975E);
-  _id_0A59::_id_DEBB("afterlife_selfrevive_door", undefined, undefined, ::_id_7C53, ::_id_1300F, 0, 0, ::_id_972F, ::_id_386A);
+register_interactions() {
+  level.interaction_hintstrings["afterlife_spectate_door"] = &"CP_ZOMBIE_AFTERLIFE_ARCADE_SPECTATE_DOOR";
+  scripts/cp/cp_interaction::register_interaction("afterlife_spectate_door", undefined, undefined, undefined, ::use_spectate_door, 0, 0, ::init_spectate_door);
+  scripts/cp/cp_interaction::register_interaction("afterlife_selfrevive_door", undefined, undefined, ::get_self_revive_door_hint, ::use_selfrevive_door, 0, 0, ::init_selfrevive_door, ::can_use_selfrevive_door);
 }
 
-_id_E226(var_0) {
-  var_0._id_10450 = 0;
-  var_0._id_1044F = 0;
-  var_0 setclientomnvar("zombie_afterlife_soul_power_earned", var_0._id_10450);
+reset_soul_power(var_00) {
+  var_0.soul_power_earned = 0;
+  var_0.soul_power_displayed = 0;
+  var_00 setclientomnvar("zombie_afterlife_soul_power_earned", var_0.soul_power_earned);
 }

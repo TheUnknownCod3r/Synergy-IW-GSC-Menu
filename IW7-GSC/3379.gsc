@@ -162,7 +162,7 @@ func_13633(param_00,param_01) {
 			continue;
 		}
 
-		param_00.var_278++;
+		param_00.destroynavrepulsor++;
 		self playsound("arcade_cryptid_attack_tooth_hit");
 		if(isdefined(self.script_noteworthy)) {
 			self playsound("arcade_" + self.script_noteworthy);

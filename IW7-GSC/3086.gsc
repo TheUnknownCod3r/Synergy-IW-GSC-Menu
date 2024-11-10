@@ -37,7 +37,7 @@ func_12E8F(param_00) {
 		}
 	}
 
-	var_05 = function_0072("axis");
+	var_05 = getaiarray("axis");
 	foreach(var_07 in var_05) {
 		if(distancesquared(var_07.origin,self.origin) < 262144) {
 			scripts/asm/asm_bb::bb_setcivilianstate("combat");

@@ -3,115 +3,115 @@
  * Script: scripts\2745.gsc
 ***************************************/
 
-_id_17CE(var_0) {
-  var_1 = self._id_8CFC;
+addheavyarmor(var_00) {
+  var_01 = self.heavyarmor;
 
   if (!isdefined(self.struct)) {
-  var_1 = spawnstruct(self._id_8CFC);
+  var_01 = spawnstruct(self.heavyarmor);
   var_1.player = self;
-  var_1._id_9118 = 0;
-  self._id_8CFC = var_1;
-  var_1._id_9118 = var_1._id_9118 + var_0;
+  var_1.hp = 0;
+  self.heavyarmor = var_01;
+  var_1.hp = var_1.hp + var_00;
   self notify("heavyArmor_added");
   }
   else
-  var_1._id_9118 = var_1._id_9118 + var_0;
+  var_1.hp = var_1.hp + var_00;
 }
 
-_id_111AB(var_0) {
-  var_1 = self._id_8CFC;
+subtractheavyarmor(var_00) {
+  var_01 = self.heavyarmor;
 
-  if (scripts\mp\utility\game::istrue(var_1._id_9344))
+  if (scripts\mp\utility\game::istrue(var_1.func_9344))
   return;
 
-  if (var_1._id_9118 > 0) {
-  var_1._id_9118 = max(0, var_1._id_9118 - var_0);
-  scripts\mp\missions::_id_D991("ch_heavy_armor_absorb", var_0);
+  if (var_1.hp > 0) {
+  var_1.hp = max(0, var_1.hp - var_00);
+  scripts\mp\missions::func_D991("ch_heavy_armor_absorb", var_00);
 
-  if (var_1._id_9118 <= 0)
-  thread _id_8CFD();
+  if (var_1.hp <= 0)
+  thread heavyarmor_break();
   }
 }
 
-_id_E12B() {
+removeheavyarmor() {
   self notify("heavyArmor_removed");
-  self._id_8CFC = undefined;
+  self.heavyarmor = undefined;
 }
 
-_id_8D07(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10) {
-  if (var_2 <= 0 && var_3 <= 0)
-  return [0, var_2, var_3];
+heavyarmormodifydamage(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08, var_09, var_10) {
+  if (var_02 <= 0 && var_03 <= 0)
+  return [0, var_02, var_03];
 
-  if (var_4 == "MOD_SUICIDE")
-  return [0, var_2, var_3];
+  if (var_04 == "MOD_SUICIDE")
+  return [0, var_02, var_03];
 
-  if (isdefined(var_1) && (var_1.classname == "trigger_hurt" || var_1.classname == "worldspawn"))
-  return [0, var_2, var_3];
+  if (isdefined(var_01) && (var_1.classname == "trigger_hurt" || var_1.classname == "worldspawn"))
+  return [0, var_02, var_03];
 
-  if (!var_0 _id_8BFA())
-  return [0, var_2, var_3];
+  if (!var_00 hasheavyarmor())
+  return [0, var_02, var_03];
 
-  if (scripts\mp\utility\game::_id_9D6E(var_5))
-  return [0, var_2, var_3];
+  if (scripts\mp\utility\game::isbombsiteweapon(var_05))
+  return [0, var_02, var_03];
 
-  if (var_0 _id_8BFB())
+  if (var_00 hasheavyarmorinvulnerability())
   return [1, 1, 0];
 
-  var_11 = var_0 _id_7EF8();
-  var_12 = _id_8D01(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10);
-  var_13 = var_2 * var_12;
-  var_14 = var_3 * var_12;
+  var_11 = var_00 getheavyarmor();
+  var_12 = heavyarmor_getdamagemodifier(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08, var_09, var_10);
+  var_13 = var_02 * var_12;
+  var_14 = var_03 * var_12;
   var_15 = var_13 + var_14;
 
   if (!var_10)
-  var_0 _id_111AB(var_15);
+  var_00 subtractheavyarmor(var_15);
 
-  if (var_0 _id_8BFB())
+  if (var_00 hasheavyarmorinvulnerability())
   return [var_11, 1, 0];
 
-  return [var_2 + var_3, 1, 0];
+  return [var_02 + var_03, 1, 0];
 }
 
-_id_7EF8() {
-  if (!_id_8BFA())
+getheavyarmor() {
+  if (!hasheavyarmor())
   return 0;
 
-  return self._id_8CFC._id_9118;
+  return self.heavyarmor.hp;
 }
 
-_id_8BFA() {
-  return isdefined(self._id_8CFC) && (self._id_8CFC._id_9118 > 0 || scripts\mp\utility\game::istrue(self._id_8CFC._id_9B30));
+hasheavyarmor() {
+  return isdefined(self.heavyarmor) && (self.heavyarmor.hp > 0 || scripts\mp\utility\game::istrue(self.heavyarmor.invulnerabilityframe));
 }
 
-_id_8BFB() {
-  return isdefined(self._id_8CFC) && scripts\mp\utility\game::istrue(self._id_8CFC._id_9B30);
+hasheavyarmorinvulnerability() {
+  return isdefined(self.heavyarmor) && scripts\mp\utility\game::istrue(self.heavyarmor.invulnerabilityframe);
 }
 
-_id_8CFD() {
+heavyarmor_break() {
   self endon("disconnect");
   self endon("heavyArmor_removed");
 
-  if (!scripts\mp\utility\game::_id_9D46())
-  self._id_8CFC._id_9B30 = 1;
+  if (!scripts\mp\utility\game::isanymlgmatch())
+  self.heavyarmor.invulnerabilityframe = 1;
 
   self notify("heavyArmor_broken");
   waittillframeend;
-  thread _id_E12B();
+  thread removeheavyarmor();
 }
 
-_id_8D01(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10) {
+heavyarmor_getdamagemodifier(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08, var_09, var_10) {
   var_11 = [];
 
-  if (scripts\mp\utility\game::_id_9F8D(var_4))
+  if (scripts\mp\utility\game::issuperweapon(var_04))
   var_11[var_11.size] = 1.33;
 
-  if (isexplosivedamagemod(var_4))
+  if (isexplosivedamagemod(var_04))
   var_11[var_11.size] = 1.5;
 
-  if (var_4 == "MOD_MELEE")
+  if (var_04 == "MOD_MELEE")
   var_11[var_11.size] = 1.5;
 
-  if (scripts\mp\utility\game::isheadshot(var_5, var_8, var_4, var_1))
+  if (scripts\mp\utility\game::isheadshot(var_05, var_08, var_04, var_01))
   var_11[var_11.size] = 1.5;
 
   var_12 = 1;

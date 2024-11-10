@@ -196,5 +196,5 @@ func_2AD0() {
 
 func_DEE8() {
 	func_2AD0();
-	function_02D8("enemy_combatant");
+	btregistertree("enemy_combatant");
 }

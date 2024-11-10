@@ -5,33 +5,33 @@
 
 init() {}
 
-_id_1014E(var_0, var_1, var_2, var_3, var_4, var_5) {}
+func_1014E(var_00, var_01, var_02, var_03, var_04, var_05) {}
 
-_id_12F00() {}
+func_12F00() {}
 
-_id_DE5E() {}
+func_DE5E() {}
 
-_id_DE5D() {}
+reflectionprobe_hide_hp() {}
 
-_id_DE5C() {}
+reflectionprobe_hide_front() {}
 
-_id_8470() {}
+_meth_8470() {}
 
-_id_8472() {}
+allowmantle() {}
 
-_id_53E0() {}
+devaliengiveplayersmoney() {}
 
-_id_10607() {
-  var_0 = ["headshot", "avenger", "longshot", "posthumous", "double", "triple", "multi"];
+spam_points_popup() {
+  var_00 = ["headshot", "avenger", "longshot", "posthumous", "double", "triple", "multi"];
 
-  for (var_1 = 0; var_1 < var_0.size; var_1++) {
-  thread scripts\mp\rank::_id_EC42(100);
-  thread scripts\mp\rank::scoreeventpopup(var_0[var_1]);
+  for (var_01 = 0; var_01 < var_0.size; var_1++) {
+  thread scripts\mp\rank::scorepointspopup(100);
+  thread scripts\mp\rank::scoreeventpopup(var_0[var_01]);
   wait 2.0;
   }
 }
 
-_id_A5AC() {
+func_A5AC() {
   for (;;) {
   if (getdvarint("scr_dropAllies") > 0)
   break;
@@ -39,22 +39,22 @@ _id_A5AC() {
   wait 1;
   }
 
-  var_0 = undefined;
+  var_00 = undefined;
 
-  foreach (var_2 in level._id_3CB5) {
-  if (isplayer(var_2) && !isbot(var_2)) {
-  var_0 = var_2;
+  foreach (var_02 in level.characters) {
+  if (isplayer(var_02) && !isbot(var_02)) {
+  var_00 = var_02;
   break;
   }
   }
 
-  if (!isdefined(var_0))
+  if (!isdefined(var_00))
   return;
 
-  foreach (var_2 in level._id_3CB5) {
+  foreach (var_02 in level.characters) {
   if (level.teambased) {
   if (var_2.team == var_0.team)
-  kick(var_2 getentitynumber());
+  kick(var_02 getentitynumber());
 
   continue;
   }
@@ -63,28 +63,28 @@ _id_A5AC() {
   }
 }
 
-_id_53EE() {
-  level._id_D788 = getdvarint("scr_power_short_cooldown", 0);
+func_53EE() {
+  level.func_D788 = getdvarint("scr_power_short_cooldown", 0);
 
   for (;;) {
-  var_0 = getdvarint("scr_power_short_cooldown", 0);
+  var_00 = getdvarint("scr_power_short_cooldown", 0);
 
-  if (var_0 != level._id_D788) {
-  level._id_D788 = var_0;
+  if (var_00 != level.func_D788) {
+  level.func_D788 = var_00;
 
-  foreach (var_2 in level.players) {
-  if (isbot(var_2))
+  foreach (var_02 in level.players) {
+  if (isbot(var_02))
   continue;
 
-  var_3 = var_2 _id_0AE2::_id_808C("primary");
+  var_03 = var_02 scripts/mp/powers::getcurrentequipment("primary");
 
-  if (isdefined(var_3))
-  _id_53E4(var_3, "primary");
+  if (isdefined(var_03))
+  func_53E4(var_03, "primary");
 
-  var_3 = var_2 _id_0AE2::_id_808C("secondary");
+  var_03 = var_02 scripts/mp/powers::getcurrentequipment("secondary");
 
-  if (isdefined(var_3))
-  _id_53E4(var_3, "secondary");
+  if (isdefined(var_03))
+  func_53E4(var_03, "secondary");
   }
   }
 
@@ -92,28 +92,28 @@ _id_53EE() {
   }
 }
 
-_id_53ED() {
-  level._id_D7A3 = getdvarint("scr_power_use_cooldown", -1);
+func_53ED() {
+  level.func_D7A3 = getdvarint("scr_power_use_cooldown", -1);
 
   for (;;) {
-  var_0 = getdvarint("scr_power_use_cooldown", -1);
+  var_00 = getdvarint("scr_power_use_cooldown", -1);
 
-  if (var_0 != level._id_D7A3) {
-  level._id_D7A3 = var_0;
+  if (var_00 != level.func_D7A3) {
+  level.func_D7A3 = var_00;
 
-  foreach (var_2 in level.players) {
-  if (isbot(var_2))
+  foreach (var_02 in level.players) {
+  if (isbot(var_02))
   continue;
 
-  var_3 = var_2 _id_0AE2::_id_808C("primary");
+  var_03 = var_02 scripts/mp/powers::getcurrentequipment("primary");
 
-  if (isdefined(var_3))
-  _id_53E4(var_3, "primary");
+  if (isdefined(var_03))
+  func_53E4(var_03, "primary");
 
-  var_3 = var_2 _id_0AE2::_id_808C("secondary");
+  var_03 = var_02 scripts/mp/powers::getcurrentequipment("secondary");
 
-  if (isdefined(var_3))
-  _id_53E4(var_3, "secondary");
+  if (isdefined(var_03))
+  func_53E4(var_03, "secondary");
   }
   }
 
@@ -121,28 +121,28 @@ _id_53ED() {
   }
 }
 
-_id_53EC() {
-  level._id_D777 = getdvarint("scr_power_extra_charge", 0);
+func_53EC() {
+  level.func_D777 = getdvarint("scr_power_extra_charge", 0);
 
   for (;;) {
-  var_0 = getdvarint("scr_power_extra_charge", 0);
+  var_00 = getdvarint("scr_power_extra_charge", 0);
 
-  if (var_0 != level._id_D777) {
-  level._id_D777 = var_0;
+  if (var_00 != level.func_D777) {
+  level.func_D777 = var_00;
 
-  foreach (var_2 in level.players) {
-  if (isbot(var_2))
+  foreach (var_02 in level.players) {
+  if (isbot(var_02))
   continue;
 
-  var_3 = var_2 _id_0AE2::_id_808C("primary");
+  var_03 = var_02 scripts/mp/powers::getcurrentequipment("primary");
 
-  if (isdefined(var_3))
-  _id_53E4(var_3, "primary");
+  if (isdefined(var_03))
+  func_53E4(var_03, "primary");
 
-  var_3 = var_2 _id_0AE2::_id_808C("secondary");
+  var_03 = var_02 scripts/mp/powers::getcurrentequipment("secondary");
 
-  if (isdefined(var_3))
-  _id_53E4(var_3, "secondary");
+  if (isdefined(var_03))
+  func_53E4(var_03, "secondary");
   }
   }
 
@@ -150,112 +150,112 @@ _id_53EC() {
   }
 }
 
-_id_53E5() {
+func_53E5() {
   for (;;) {
-  var_0 = getdvar("scr_givepowerprimary", "");
+  var_00 = getdvar("scr_givepowerprimary", "");
 
-  if (var_0 != "")
-  _id_53E4(var_0, "primary");
+  if (var_00 != "")
+  func_53E4(var_00, "primary");
 
-  var_0 = getdvar("scr_givepowersecondary", "");
+  var_00 = getdvar("scr_givepowersecondary", "");
 
-  if (var_0 != "")
-  _id_53E4(var_0, "secondary");
+  if (var_00 != "")
+  func_53E4(var_00, "secondary");
 
   wait 0.25;
   }
 }
 
-_id_53E4(var_0, var_1) {
-  foreach (var_3 in level.players) {
-  if (isbot(var_3))
+func_53E4(var_00, var_01) {
+  foreach (var_03 in level.players) {
+  if (isbot(var_03))
   continue;
 
-  var_4 = var_3 _id_0AE2::_id_808C(var_1);
+  var_04 = var_03 scripts/mp/powers::getcurrentequipment(var_01);
 
-  if (isdefined(var_4))
-  var_3 _id_0AE2::_id_E15E(var_4);
+  if (isdefined(var_04))
+  var_03 scripts/mp/powers::removepower(var_04);
 
-  var_3 _id_0AE2::_id_8397(var_0, var_1, 0);
+  var_03 scripts/mp/powers::givepower(var_00, var_01, 0);
   }
 }
 
-_id_53EA() {
-  var_0 = getdvar("scr_list_inventory", "");
+devlistinventory() {
+  var_00 = getdvar("scr_list_inventory", "");
 
-  if (var_0 != "") {
-  var_1 = _id_53E3();
+  if (var_00 != "") {
+  var_01 = devfindhost();
 
-  if (!isdefined(var_1))
+  if (!isdefined(var_01))
   return;
 
-  var_2 = undefined;
-  var_3 = undefined;
-  var_4 = 0;
+  var_02 = undefined;
+  var_03 = undefined;
+  var_04 = 0;
 
-  if (var_0 == "all") {
-  var_3 = "all weapons";
-  var_2 = var_1 _meth_8173();
+  if (var_00 == "all") {
+  var_03 = "all weapons";
+  var_02 = var_01 getweaponslistall();
   }
-  else if (var_0 == "primaryCurrent") {
-  var_3 = "current weapon";
-  var_4 = 1;
-  var_2 = [var_1 getcurrentweapon()];
+  else if (var_00 == "primaryCurrent") {
+  var_03 = "current weapon";
+  var_04 = 1;
+  var_02 = [var_01 getcurrentweapon()];
   } else {
-  var_3 = var_0 + " inventory";
-  var_2 = var_1 _meth_8172(var_0);
+  var_03 = var_00 + " inventory";
+  var_02 = var_01 getweaponslist(var_00);
   }
 
-  var_1 _id_53EF(var_2, var_3, var_4);
+  var_01 devprintweaponlist(var_02, var_03, var_04);
   }
 }
 
-_id_53EF(var_0, var_1, var_2) {
-  if (isdefined(var_0) && var_0.size > 0) {
-  foreach (var_4 in var_0) {
-  var_5 = self getweaponammoclip(var_4);
-  var_6 = self getweaponammostock(var_4);
-  var_7 = "  " + var_4 + " " + var_5 + "/" + var_6;
+devprintweaponlist(var_00, var_01, var_02) {
+  if (isdefined(var_00) && var_0.size > 0) {
+  foreach (var_04 in var_00) {
+  var_05 = self getweaponammoclip(var_04);
+  var_06 = self getweaponammostock(var_04);
+  var_07 = "  " + var_04 + " " + var_05 + "/" + var_06;
 
-  if (var_2)
-  iprintlnbold(var_7);
+  if (var_02)
+  iprintlnbold(var_07);
   }
   } else {}
 }
 
-_id_53E6() {
-  var_0 = getdvarint("scr_super_short_cooldown", 0);
+func_53E6() {
+  var_00 = getdvarint("scr_super_short_cooldown", 0);
 
   for (;;) {
-  var_1 = getdvar("scr_givesuper", "");
+  var_01 = getdvar("scr_givesuper", "");
 
-  if (var_1 != "") {
-  var_2 = _id_53E3();
-  var_2 scripts\mp\supers::_id_83A8(var_1);
+  if (var_01 != "") {
+  var_02 = devfindhost();
+  var_02 scripts\mp\supers::stopridingvehicle(var_01);
   }
 
   if (getdvarint("scr_super_short_cooldown", 0) != 0) {
-  if (!var_0) {
-  var_0 = 1;
+  if (!var_00) {
+  var_00 = 1;
 
-  foreach (var_4 in level.players) {
-  if (isbot(var_4))
+  foreach (var_04 in level.players) {
+  if (isbot(var_04))
   continue;
 
-  if (var_4 scripts\mp\supers::_id_9F89())
-  var_4 scripts\mp\supers::_id_E276();
+  if (var_04 scripts\mp\supers::issupercharging())
+  var_04 scripts\mp\supers::func_E276();
   }
   }
   }
-  else if (var_0) {
-  var_0 = 0;
+  else if (var_00) {
+  var_00 = 0;
 
-  foreach (var_4 in level.players) {
-  if (isbot(var_4))
+  foreach (var_04 in level.players) {
+  if (isbot(var_04))
   continue;
 
-  if (var_4 scripts\mp\supers::_id_9F89())
-  var_4 scripts\mp\supers::_id_E276();
+  if (var_04 scripts\mp\supers::issupercharging())
+  var_04 scripts\mp\supers::func_E276();
   }
   }
 
@@ -263,38 +263,38 @@ _id_53E6() {
   }
 }
 
-_id_53E3() {
-  var_0 = undefined;
+devfindhost() {
+  var_00 = undefined;
 
-  foreach (var_2 in level.players) {
-  if (var_2 ishost()) {
-  var_0 = var_2;
+  foreach (var_02 in level.players) {
+  if (var_02 ishost()) {
+  var_00 = var_02;
   break;
   }
   }
 
-  return var_0;
+  return var_00;
 }
 
-_id_53F0() {
-  var_0 = getdvar("scr_debug_streak_passive", "none");
+func_53F0() {
+  var_00 = getdvar("scr_debug_streak_passive", "none");
 
   for (;;) {
-  var_1 = getdvar("scr_debug_streak_passive", "none");
+  var_01 = getdvar("scr_debug_streak_passive", "none");
 
-  if (var_0 != var_1) {
-  iprintlnbold("All Killstreaks from the DevGui will have " + var_1);
-  var_0 = var_1;
+  if (var_00 != var_01) {
+  iprintlnbold("All Killstreaks from the DevGui will have " + var_01);
+  var_00 = var_01;
   }
 
   wait 1.0;
   }
 }
 
-_id_13AB3() {
+watchlethaldelaycancel() {
   for (;;) {
   if (getdvarint("scr_lethalDelayCancel", 0)) {
-  scripts\mp\weapons::_id_3882();
+  scripts\mp\weapons::cancellethaldelay();
   return;
   }
 
@@ -302,10 +302,10 @@ _id_13AB3() {
   }
 }
 
-_id_13B6C() {
+watchsuperdelaycancel() {
   for (;;) {
   if (getdvarint("scr_superDelayCancel", 0)) {
-  scripts\mp\supers::_id_3887();
+  scripts\mp\supers::cancelsuperdelay();
   return;
   }
 
@@ -313,7 +313,7 @@ _id_13B6C() {
   }
 }
 
-_id_13B46() {
+watchslowmo() {
   for (;;) {
   if (getdvar("scr_slowmo") != "")
   break;
@@ -321,32 +321,32 @@ _id_13B46() {
   wait 1;
   }
 
-  var_0 = getdvarfloat("scr_slowmo");
-  setslowmotion(var_0, var_0, 0.0);
-  thread _id_13B46();
+  var_00 = getdvarfloat("scr_slowmo");
+  setslowmotion(var_00, var_00, 0.0);
+  thread watchslowmo();
 }
 
-_id_53E2() {
+func_53E2() {
   for (;;) {
   if (getdvar("scr_jt_devbroshot") != "") {
   iprintlnbold(" BRO ");
-  level._id_58D7 = scripts\mp\broshot::_id_97E0();
+  level.doingbroshot = scripts\mp\broshot::initbroshot();
 
-  if (level._id_58D7) {
+  if (level.doingbroshot) {
   setomnvarforallclients("post_game_state", 6);
   wait 0.1;
-  scripts\mp\broshot::_id_10D73();
+  scripts\mp\broshot::func_10D73();
   }
   }
 
   if (getdvarint("scr_debug_start_broshot")) {
   iprintlnbold("Test Broshot");
-  level._id_58D7 = scripts\mp\broshot::forceinitbroshot();
+  level.doingbroshot = scripts\mp\broshot::forceinitbroshot();
 
-  if (level._id_58D7) {
+  if (level.doingbroshot) {
   setomnvarforallclients("post_game_state", 6);
   wait 0.1;
-  level.players[0] scripts\mp\broshot::_id_10D73();
+  level.players[0] scripts\mp\broshot::func_10D73();
   }
   }
 

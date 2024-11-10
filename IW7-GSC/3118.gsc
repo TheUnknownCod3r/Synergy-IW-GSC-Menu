@@ -407,7 +407,7 @@ getteleportlonertargetplayer(param_00) {
 		}
 	}
 
-	var_05.var_C205++;
+	var_05.num_teleport_loner_encountered++;
 	return var_05;
 }
 
@@ -589,7 +589,7 @@ process_stop_regen_health_action(param_00) {
 		param_00.num_of_times_stop_regen_health = 0;
 	}
 
-	param_00.var_C1FA++;
+	param_00.num_of_times_stop_regen_health++;
 	if(param_00.num_of_times_stop_regen_health == 1) {
 		param_00.health_regen_minimum = int(param_00.maxhealth * 0.33);
 		param_00.should_regen_summon = 1;

@@ -217,17 +217,17 @@ func_5678() {
 
 func_6620() {
 	var_00 = level.player getthreatbiasgroup();
-	if(!function_0218("c12")) {
-		function_004E("c12");
+	if(!threatbiasgroupexists("c12")) {
+		createthreatbiasgroup("c12");
 	}
 
-	if(!function_0218("player")) {
-		function_004E("player");
+	if(!threatbiasgroupexists("player")) {
+		createthreatbiasgroup("player");
 	}
 
 	self give_zombies_perk("c12");
 	level.player give_zombies_perk("player");
-	function_01D1("player","c12",99999);
+	setthreatbias("player","c12",99999);
 	self waittill("death");
 	if(var_00 != "") {
 		level.player give_zombies_perk(var_00);

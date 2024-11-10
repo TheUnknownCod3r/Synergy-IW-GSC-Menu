@@ -150,7 +150,7 @@ func_2008() {
 	radiusdamage(self.origin,2,1,0,self);
 	scripts\engine\utility::waitframe();
 	if(soundexists("antigrav_battery_explode")) {
-		function_0178("antigrav_battery_explode",self.origin);
+		playworldsound("antigrav_battery_explode",self.origin);
 	}
 
 	playfx(scripts\engine\utility::getfx("antigrav_explosion"),self.origin);

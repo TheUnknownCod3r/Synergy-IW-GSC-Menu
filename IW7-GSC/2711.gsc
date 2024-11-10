@@ -3,111 +3,111 @@
  * Script: scripts\2711.gsc
 ***************************************/
 
-_id_44EE(var_0) {
-  var_0 thread _id_13A20();
+func_44EE(var_00) {
+  var_00 thread func_13A20();
 }
 
-_id_13A20() {
-  var_0 = scripts\engine\utility::_id_107E6();
-  var_0 linkto(self);
-  self._id_A63A = var_0;
-  thread _id_A639(var_0);
-  thread scripts\mp\utility\game::_id_C15A("death", "end_explode");
+func_13A20() {
+  var_00 = scripts\engine\utility::spawn_tag_origin();
+  var_00 linkto(self);
+  self.killcament = var_00;
+  thread func_A639(var_00);
+  thread scripts\mp\utility\game::notifyafterframeend("death", "end_explode");
   self endon("end_explode");
-  var_1 = self.owner;
-  self waittill("explode", var_2);
-  thread _id_0118(var_2, 512, var_1, var_0);
+  var_01 = self.owner;
+  self waittill("explode", var_02);
+  thread func_0118(var_02, 512, var_01, var_00);
 }
 
-_id_0118(var_0, var_1, var_2, var_3) {
-  var_4 = scripts\mp\weapons::_id_7E8C(var_0, var_1, 0);
+func_0118(var_00, var_01, var_02, var_03) {
+  var_04 = scripts\mp\weapons::getempdamageents(var_00, var_01, 0);
 
-  foreach (var_6 in var_4) {
-  if (!isdefined(var_6))
+  foreach (var_06 in var_04) {
+  if (!isdefined(var_06))
   continue;
 
-  var_7 = scripts\engine\utility::ter_op(isdefined(var_6.owner), var_6.owner, var_6);
+  var_07 = scripts\engine\utility::ter_op(isdefined(var_6.owner), var_6.owner, var_06);
 
-  if (!scripts\mp\weapons::_id_7415(var_2, var_7) && var_7 != var_2)
+  if (!scripts\mp\weapons::friendlyfirecheck(var_02, var_07) && var_07 != var_02)
   continue;
 
-  var_6 notify("emp_damage", var_2, 3, var_0, "emp_grenade_mp", "MOD_EXPLOSIVE");
-  var_2 scripts\mp\damage::combatrecordtacticalstat("power_concussionGrenade");
+  var_06 notify("emp_damage", var_02, 3, var_00, "emp_grenade_mp", "MOD_EXPLOSIVE");
+  var_02 scripts\mp\damage::combatrecordtacticalstat("power_concussionGrenade");
   }
 }
 
-_id_C5CB(var_0, var_1, var_2, var_3, var_4) {
-  if (!isdefined(var_0))
+onweapondamage(var_00, var_01, var_02, var_03, var_04) {
+  if (!isdefined(var_00))
   return;
-  else if (var_2 == "MOD_IMPACT")
+  else if (var_02 == "MOD_IMPACT")
   return;
 
-  _id_20BF(var_0, var_4);
-  _id_20C3(var_0, var_4);
-  var_4 scripts\mp\damage::combatrecordtacticalstat("power_concussionGrenade");
+  func_20BF(var_00, var_04);
+  func_20C3(var_00, var_04);
+  var_04 scripts\mp\damage::combatrecordtacticalstat("power_concussionGrenade");
 }
 
-_id_20BF(var_0, var_1) {
-  var_2 = 2;
-  var_3 = 4;
+func_20BF(var_00, var_01) {
+  var_02 = 2;
+  var_03 = 4;
 
-  if (self == var_1) {
-  var_2 = 0.75;
-  var_3 = 1.5;
+  if (self == var_01) {
+  var_02 = 0.75;
+  var_03 = 1.5;
   }
 
-  var_4 = 1 - distance(self.origin, var_0.origin) / 512;
+  var_04 = 1 - distance(self.origin, var_0.origin) / 512;
 
-  if (var_4 < 0)
-  var_4 = 0;
+  if (var_04 < 0)
+  var_04 = 0;
 
-  var_5 = var_2 + var_3 * var_4;
-  var_5 = scripts\mp\perks\perkfunctions::_id_20E0(var_1, self, var_5);
-  thread scripts\mp\gamescore::_id_11ACF(var_1, self, "concussion_grenade_mp", var_5);
-  var_1 notify("stun_hit");
-  self notify("concussed", var_1);
-  scripts\mp\weapons::_id_F7FC();
-  thread scripts\mp\weapons::_id_40EA(var_5);
-  self shellshock("concussion_grenade_mp", var_5);
-  self._id_44ED = gettime() + var_5 * 1000;
+  var_05 = var_02 + var_03 * var_04;
+  var_05 = scripts\mp\perks\perkfunctions::applystunresistence(var_01, self, var_05);
+  thread scripts\mp\gamescore::func_11ACF(var_01, self, "concussion_grenade_mp", var_05);
+  var_01 notify("stun_hit");
+  self notify("concussed", var_01);
+  scripts\mp\weapons::func_F7FC();
+  thread scripts\mp\weapons::func_40EA(var_05);
+  self shellshock("concussion_grenade_mp", var_05);
+  self.concussionendtime = gettime() + var_05 * 1000;
 }
 
-_id_20C3(var_0, var_1) {
-  if (!scripts\mp\killstreaks\emp_common::_id_FFC5()) {
-  if (var_1 != self)
-  var_1 scripts\mp\damagefeedback::updatedamagefeedback("hiticonempimmune", undefined, undefined, undefined, 1);
+func_20C3(var_00, var_01) {
+  if (!scripts\mp\killstreaks\emp_common::func_FFC5()) {
+  if (var_01 != self)
+  var_01 scripts\mp\damagefeedback::updatedamagefeedback("hiticonempimmune", undefined, undefined, undefined, 1);
 
   return;
   }
 
-  var_2 = 3;
+  var_02 = 3;
 
-  if (self == var_1)
-  var_2 = 1;
+  if (self == var_01)
+  var_02 = 1;
 
-  scripts\mp\killstreaks\emp_common::_id_20C7(var_2);
-  thread scripts\mp\gamescore::_id_11ACF(var_1, self, "emp_grenade_mp", var_2);
+  scripts\mp\killstreaks\emp_common::func_20C7(var_02);
+  thread scripts\mp\gamescore::func_11ACF(var_01, self, "emp_grenade_mp", var_02);
 }
 
-_id_A639(var_0) {
-  var_0 endon("death");
+func_A639(var_00) {
+  var_00 endon("death");
   self waittill("death");
   wait 5;
-  var_0 delete();
+  var_00 delete();
 }
 
-_id_B92C(var_0, var_1, var_2, var_3, var_4) {
-  if (!isdefined(var_3) || !isdefined(var_4) || !isdefined(var_1) || !isdefined(var_2))
-  return var_0;
+func_B92C(var_00, var_01, var_02, var_03, var_04) {
+  if (!isdefined(var_03) || !isdefined(var_04) || !isdefined(var_01) || !isdefined(var_02))
+  return var_00;
 
-  if (var_4 != "concussion_grenade_mp" && var_4 != "emp_grenade_mp")
-  return var_0;
+  if (var_04 != "concussion_grenade_mp" && var_04 != "emp_grenade_mp")
+  return var_00;
 
-  if (var_1 != var_2)
-  return var_0;
+  if (var_01 != var_02)
+  return var_00;
 
   if (distancesquared(var_2.origin, var_3.origin) <= 65536)
-  return var_0;
+  return var_00;
 
   return 0;
 }

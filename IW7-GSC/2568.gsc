@@ -149,7 +149,7 @@ func_3DE5() {
 	}
 
 	var_00 = isdefined(self.var_18CC) && self.var_18CC;
-	if(!var_00 && function_0073(self.team) < function_0073(self.isnodeoccupied.team)) {
+	if(!var_00 && getaicount(self.team) < getaicount(self.isnodeoccupied.team)) {
 		return 0;
 	}
 
@@ -241,7 +241,7 @@ func_12E93() {
 
 	var_00 = gettime();
 	if(!isdefined(self._blackboard.var_7362) || self._blackboard.var_7362 > var_00) {
-		var_01 = function_0072(scripts\engine\utility::get_enemy_team(self.team));
+		var_01 = getaiarray(scripts\engine\utility::get_enemy_team(self.team));
 		var_02 = 0;
 		var_03 = 10000;
 		var_04 = 4194304;

@@ -190,7 +190,7 @@ func_31CD(param_00,param_01,param_02) {
 func_AE39() {
 	scripts\engine\utility::waitframe();
 	setomnvar("ui_open_loadout_menu",1);
-	function_01C5("selectingLoadout","1");
+	setsaveddvar("selectingLoadout","1");
 	level.player _meth_84C7("selectedLoadout",0);
 	for(;;) {
 		level.player waittill("luinotifyserver",var_00,var_01);
@@ -200,7 +200,7 @@ func_AE39() {
 	}
 
 	setomnvar("ui_open_loadout_menu",0);
-	function_01C5("selectingLoadout","0");
+	setsaveddvar("selectingLoadout","0");
 	setdvar("loadout_chosen",1);
 	setdvar("loadout_level_name",level.script);
 	setdvar("loadout_start_point",level.var_10CDA);
@@ -358,7 +358,7 @@ func_EB5B() {
 	}
 
 	foreach(var_04 in var_01) {
-		var_05 = function_0244(var_04);
+		var_05 = weaponinventorytype(var_04);
 		if(var_05 != "primary") {
 			continue;
 		}

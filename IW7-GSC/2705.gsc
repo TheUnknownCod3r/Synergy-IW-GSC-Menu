@@ -4,101 +4,101 @@
 ***************************************/
 
 init() {
-  level._id_377C = spawnstruct();
-  level._id_377C._id_3780 = "mp/map_callouts/" + level._id_B335 + "_callouts.csv";
-  _id_498F();
-  level._id_377C._id_213C = getentarray("callout_area", "targetname");
+  level.calloutglobals = spawnstruct();
+  level.calloutglobals.callouttable = "mp/map_callouts/" + level.mapname + "_callouts.csv";
+  createcalloutareaidmap();
+  level.calloutglobals.areatriggers = getentarray("callout_area", "targetname");
 
-  foreach (var_1 in level._id_377C._id_213C)
-  var_1 thread _id_377A();
+  foreach (var_01 in level.calloutglobals.areatriggers)
+  var_01 thread calloutareathink();
 
-  thread _id_BA04();
+  thread monitorplayers();
 }
 
-_id_498F() {
-  var_0 = level._id_377C;
-  var_0._id_2138 = [];
-  var_0._id_2138["none"] = -1;
-  var_1 = 0;
+createcalloutareaidmap() {
+  var_00 = level.calloutglobals;
+  var_0.areaidmap = [];
+  var_0.areaidmap["none"] = -1;
+  var_01 = 0;
 
   for (;;) {
-  var_2 = tablelookupbyrow(level._id_377C._id_3780, var_1, 0);
+  var_02 = tablelookupbyrow(level.calloutglobals.callouttable, var_01, 0);
 
-  if (!isdefined(var_2) || var_2 == "")
+  if (!isdefined(var_02) || var_02 == "")
   break;
 
-  var_2 = int(var_2);
-  var_3 = tablelookupbyrow(level._id_377C._id_3780, var_1, 3);
+  var_02 = int(var_02);
+  var_03 = tablelookupbyrow(level.calloutglobals.callouttable, var_01, 3);
 
-  if (var_3 != "area") {} else {
-  var_4 = tablelookupbyrow(level._id_377C._id_3780, var_1, 1);
-  var_0._id_2138[var_4] = var_2;
+  if (var_03 != "area") {} else {
+  var_04 = tablelookupbyrow(level.calloutglobals.callouttable, var_01, 1);
+  var_0.areaidmap[var_04] = var_02;
   }
 
   var_1++;
   }
 }
 
-_id_BA04() {
+monitorplayers() {
   level endon("game_ended");
 
   for (;;) {
-  level waittill("connected", var_0);
-  var_0 _id_F7EF("none");
+  level waittill("connected", var_00);
+  var_00 setplayercalloutarea("none");
   }
 }
 
-_id_377A() {
+calloutareathink() {
   level endon("game_ended");
 
   for (;;) {
-  self waittill("trigger", var_0);
+  self waittill("trigger", var_00);
 
-  if (!isplayer(var_0))
+  if (!isplayer(var_00))
   continue;
 
-  var_0 _id_F7EF(self.script_noteworthy, self);
+  var_00 setplayercalloutarea(self.script_noteworthy, self);
   }
 }
 
-_id_F7EF(var_0, var_1) {
-  if (isdefined(self._id_3779) && self._id_3779 == var_0)
+setplayercalloutarea(var_00, var_01) {
+  if (isdefined(self.calloutarea) && self.calloutarea == var_00)
   return;
 
-  if (isdefined(self._id_3779) && var_0 != "none" && self._id_3779 != "none")
+  if (isdefined(self.calloutarea) && var_00 != "none" && self.calloutarea != "none")
   return;
 
-  self._id_3779 = var_0;
+  self.calloutarea = var_00;
 
-  if (isdefined(var_1))
-  thread _id_13B08(var_1, var_1.script_noteworthy);
+  if (isdefined(var_01))
+  thread watchplayerleavingcalloutarea(var_01, var_1.script_noteworthy);
 
-  var_2 = level._id_377C._id_2138[var_0];
+  var_02 = level.calloutglobals.areaidmap[var_00];
 
-  if (isdefined(var_2)) {
-  self setclientomnvar("ui_callout_area_id", var_2);
-  var_3 = scripts\mp\utility\game::_id_7BC3(1, 0);
+  if (isdefined(var_02)) {
+  self setclientomnvar("ui_callout_area_id", var_02);
+  var_03 = scripts\mp\utility\game::get_players_watching(1, 0);
 
-  foreach (var_5 in var_3) {
-  if (var_5 ismlgspectator())
-  var_5 setclientomnvar("ui_callout_area_id", var_2);
+  foreach (var_05 in var_03) {
+  if (var_05 ismlgspectator())
+  var_05 setclientomnvar("ui_callout_area_id", var_02);
   }
   }
-  else if (var_0 != "none")
+  else if (var_00 != "none")
   return;
 }
 
-_id_13B08(var_0, var_1) {
+watchplayerleavingcalloutarea(var_00, var_01) {
   self endon("death");
   self endon("disconnect");
-  thread _id_419F();
+  thread clearcalloutareaondeath();
 
   for (;;) {
-  if (self._id_3779 != var_1)
+  if (self.calloutarea != var_01)
   return;
 
-  if (!self istouching(var_0)) {
-  _id_F7EF("none");
+  if (!self istouching(var_00)) {
+  setplayercalloutarea("none");
   return;
   }
 
@@ -106,8 +106,8 @@ _id_13B08(var_0, var_1) {
   }
 }
 
-_id_419F() {
+clearcalloutareaondeath() {
   self endon("disconnect");
   self waittill("death");
-  _id_F7EF("none");
+  setplayercalloutarea("none");
 }

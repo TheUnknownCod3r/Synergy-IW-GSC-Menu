@@ -4,622 +4,622 @@
 ***************************************/
 
 init() {
-  level thread scripts\mp\perks\weaponpassives::_id_13CB1();
-  level._id_CA51 = [];
-  level._id_108D3["enemy"] = "tactical_insertion_marker_wm_dropmodel";
-  level._id_108D3["friendly"] = "tactical_insertion_marker_wm_dropmodel";
-  level._id_108D2["enemy"] = loadfx("vfx/core/mp/core/vfx_flare_glow_en.vfx");
-  level._id_108D2["friendly"] = loadfx("vfx/core/mp/core/vfx_flare_glow_fr.vfx");
-  level._id_10888 = loadfx("vfx/props/barrelexp.vfx");
+  level thread scripts\mp\perks\weaponpassives::weaponpassivesinit();
+  level.func_CA51 = [];
+  level.func_108D3["enemy"] = "tactical_insertion_marker_wm_dropmodel";
+  level.func_108D3["friendly"] = "tactical_insertion_marker_wm_dropmodel";
+  level.func_108D2["enemy"] = loadfx("vfx/core/mp/core/vfx_flare_glow_en.vfx");
+  level.func_108D2["friendly"] = loadfx("vfx/core/mp/core/vfx_flare_glow_fr.vfx");
+  level.func_10888 = loadfx("vfx/props/barrelexp.vfx");
   level._effect["ricochet"] = loadfx("vfx/core/impacts/large_metalhit_1");
   level._effect["tracker_cloak_tag"] = loadfx("vfx/iw7/_requests/mp/vfx_tesla_shock_sparks_tracker.vfx");
-  level._id_B674 = [];
-  level._id_EF86 = [];
-  level._id_CA60 = [];
-  level._id_CA66 = [];
-  level._id_6A50 = [];
-  level._id_B676 = [];
-  level._id_EF86["specialty_afterburner"] = 1;
-  level._id_EF86["specialty_blastshield"] = 1;
-  level._id_EF86["specialty_autospot"] = 1;
-  level._id_EF86["specialty_boom"] = 1;
-  level._id_EF86["specialty_delaymine"] = 1;
-  level._id_EF86["specialty_dexterity"] = 1;
-  level._id_EF86["specialty_empimmune"] = 1;
-  level._id_EF86["specialty_engineer"] = 1;
-  level._id_EF86["specialty_explosivedamage"] = 1;
-  level._id_EF86["specialty_extraammo"] = 1;
-  level._id_EF86["specialty_falldamage"] = 1;
-  level._id_EF86["specialty_ghost"] = 1;
-  level._id_EF86["specialty_hard_shell"] = 1;
-  level._id_EF86["specialty_hardline"] = 1;
-  level._id_EF86["specialty_powercell"] = 1;
-  level._id_EF86["specialty_hunter"] = 1;
-  level._id_EF86["specialty_incog"] = 1;
-  level._id_EF86["specialty_localjammer"] = 1;
-  level._id_EF86["specialty_overclock"] = 1;
-  level._id_EF86["specialty_outlinekillstreaks"] = 1;
-  level._id_EF86["specialty_pitcher"] = 1;
-  level._id_EF86["specialty_regenfaster"] = 1;
-  level._id_EF86["specialty_stun_resistance"] = 1;
-  level._id_EF86["specialty_tracker"] = 1;
-  level._id_EF86["specialty_twoprimaries"] = 1;
-  level._id_EF86["specialty_bullet_outline"] = 1;
-  level._id_EF86["specialty_activereload"] = 1;
-  level._id_EF86["specialty_sixth_sense"] = 1;
-  level._id_EF86["specialty_enhanced_sixth_sense"] = 1;
-  level._id_EF86["specialty_meleekill"] = 1;
-  level._id_EF86["specialty_gung_ho"] = 1;
-  level._id_EF86["specialty_man_at_arms"] = 1;
-  level._id_EF86["specialty_blast_suppressor"] = 1;
-  level._id_EF86["specialty_momentum"] = 1;
-  level._id_EF86["specialty_improvedmelee"] = 1;
-  level._id_EF86["specialty_thief"] = 1;
-  level._id_EF86["specialty_silentkill"] = 1;
-  level._id_EF86["specialty_armorpiercingks"] = 1;
-  level._id_EF86["specialty_fastcrouch"] = 1;
-  level._id_EF86["specialty_battleslide"] = 1;
-  level._id_EF86["specialty_battleslide_offense"] = 1;
-  level._id_EF86["specialty_battleslide_shield"] = 1;
-  level._id_EF86["specialty_disruptor_punch"] = 1;
-  level._id_EF86["specialty_ground_pound"] = 1;
-  level._id_EF86["specialty_ground_pound_shield"] = 1;
-  level._id_EF86["specialty_ground_pound_shock"] = 1;
-  level._id_EF86["specialty_thruster"] = 1;
-  level._id_EF86["specialty_dodge"] = 1;
-  level._id_EF86["specialty_extra_dodge"] = 1;
-  level._id_EF86["specialty_extend_dodge"] = 1;
-  level._id_EF86["specialty_phase_slide"] = 1;
-  level._id_EF86["specialty_tele_slide"] = 1;
-  level._id_EF86["specialty_phaseslash"] = 1;
-  level._id_EF86["specialty_phaseslash_rephase"] = 1;
-  level._id_EF86["specialty_phase_fall"] = 1;
-  level._id_EF86["specialty_aura_regen"] = 1;
-  level._id_EF86["specialty_aura_quickswap"] = 1;
-  level._id_EF86["specialty_aura_speed"] = 1;
-  level._id_EF86["specialty_mark_targets"] = 1;
-  level._id_EF86["specialty_batterypack"] = 1;
-  level._id_EF86["specialty_camo_elite"] = 1;
-  level._id_EF86["specialty_scorestreakpack"] = 1;
-  level._id_EF86["specialty_superpack"] = 1;
-  level._id_EF86["specialty_dodge_defense"] = 1;
-  level._id_EF86["specialty_spawncloak"] = 1;
-  level._id_EF86["specialty_commando"] = 1;
-  level._id_EF86["specialty_personal_trophy"] = 1;
-  level._id_EF86["specialty_equipment_ping"] = 1;
-  level._id_EF86["specialty_rugged_eqp"] = 1;
-  level._id_EF86["specialty_cloak"] = 1;
-  level._id_EF86["specialty_wall_lock"] = 1;
-  level._id_EF86["specialty_rush"] = 1;
-  level._id_EF86["specialty_hover"] = 1;
-  level._id_EF86["specialty_scavenger_eqp"] = 1;
-  level._id_EF86["specialty_spawnview"] = 1;
-  level._id_EF86["specialty_headgear"] = 1;
-  level._id_EF86["specialty_ftlslide"] = 1;
-  level._id_EF86["specialty_improved_prone"] = 1;
-  level._id_EF86["specialty_support_killstreaks"] = 1;
-  level._id_EF86["specialty_overrideweaponspeed"] = 1;
-  level._id_EF86["specialty_ballcarrier"] = 1;
-  level._id_EF86["specialty_cloak_aerial"] = 1;
-  level._id_EF86["specialty_spawn_radar"] = 1;
-  level._id_EF86["specialty_ads_awareness"] = 1;
-  level._id_EF86["specialty_rearguard"] = 1;
-  level._id_EF86["specialty_sharp_focus"] = 1;
-  level._id_EF86["specialty_bling"] = 1;
-  level._id_EF86["specialty_moredamage"] = 1;
-  level._id_EF86["specialty_comexp"] = 1;
-  level._id_EF86["specialty_paint"] = 1;
-  level._id_EF86["specialty_paint_pro"] = 1;
-  level._id_EF86["specialty_adrenaline"] = 1;
-  level._id_EF86["specialty_adrenaline_lite"] = 1;
-  level._id_EF86["specialty_block_health_regen"] = 1;
-  level._id_EF86["specialty_rshieldradar"] = 1;
-  level._id_EF86["specialty_rshieldscrambler"] = 1;
-  level._id_EF86["specialty_combathigh"] = 1;
-  level._id_EF86["specialty_finalstand"] = 1;
-  level._id_EF86["specialty_c4death"] = 1;
-  level._id_EF86["specialty_juiced"] = 1;
-  level._id_EF86["specialty_revenge"] = 1;
-  level._id_EF86["specialty_light_armor"] = 1;
-  level._id_EF86["specialty_carepackage"] = 1;
-  level._id_EF86["specialty_stopping_power"] = 1;
-  level._id_EF86["specialty_uav"] = 1;
-  level._id_EF86["specialty_viewkickoverride"] = 1;
-  level._id_EF86["specialty_affinityspeedboost"] = 1;
-  level._id_EF86["specialty_affinityextralauncher"] = 1;
-  level._id_EF86["bouncingbetty_mp"] = 1;
-  level._id_EF86["c4_mp"] = 1;
-  level._id_EF86["claymore_mp"] = 1;
-  level._id_EF86["frag_grenade_mp"] = 1;
-  level._id_EF86["semtex_mp"] = 1;
-  level._id_EF86["cluster_grenade_mp"] = 1;
-  level._id_EF86["throwingknife_mp"] = 1;
-  level._id_EF86["throwingknifec4_mp"] = 1;
-  level._id_EF86["throwingknifeteleport_mp"] = 1;
-  level._id_EF86["throwingknifejugg_mp"] = 1;
-  level._id_EF86["throwingknifesmokewall_mp"] = 1;
-  level._id_EF86["proximity_explosive_mp"] = 1;
-  level._id_EF86["mortar_shelljugg_mp"] = 1;
-  level._id_EF86["case_bomb_mp"] = 1;
-  level._id_EF86["blackhole_grenade_mp"] = 1;
-  level._id_EF86["throwingreaper_mp"] = 1;
-  level._id_EF86["transponder_mp"] = 1;
-  level._id_EF86["sonic_sensor_mp"] = 1;
-  level._id_EF86["sticky_mine_mp"] = 1;
-  level._id_EF86["throwingknifedisruptor_mp"] = 1;
-  level._id_EF86["pulse_grenade_mp"] = 1;
-  level._id_EF86["portal_grenade_mp"] = 1;
-  level._id_EF86["virus_grenade_mp"] = 1;
-  level._id_EF86["concussion_grenade_mp"] = 1;
-  level._id_EF86["sensor_grenade_mp"] = 1;
-  level._id_EF86["gravity_grenade_mp"] = 1;
-  level._id_EF86["flash_grenade_mp"] = 1;
-  level._id_EF86["smoke_grenade_mp"] = 1;
-  level._id_EF86["smoke_grenadejugg_mp"] = 1;
-  level._id_EF86["emp_grenade_mp"] = 1;
-  level._id_EF86["specialty_tacticalinsertion"] = 1;
-  level._id_EF86["trophy_mp"] = 1;
-  level._id_EF86["motion_sensor_mp"] = 1;
-  level._id_EF86["proto_ricochet_device_mp"] = 1;
-  level._id_EF86["bulletstorm_device_mp"] = 1;
-  level._id_EF86["mobile_radar_mp"] = 1;
-  level._id_EF86["gas_grenade_mp"] = 1;
-  level._id_EF86["blackout_grenade_mp"] = 1;
-  level._id_EF86["proxy_bomb_mp"] = 1;
-  level._id_EF86["adrenaline_mist_mp"] = 1;
-  level._id_EF86["domeshield_mp"] = 1;
-  level._id_EF86["copycat_grenade_mp"] = 1;
-  level._id_EF86["speed_strip_mp"] = 1;
-  level._id_EF86["shard_ball_mp"] = 1;
-  level._id_EF86["splash_grenade_mp"] = 1;
-  level._id_EF86["forcepush_mp"] = 1;
-  level._id_EF86["portal_generator_mp"] = 1;
-  level._id_EF86["ammo_box_mp"] = 1;
-  level._id_EF86["blackhat_mp"] = 1;
-  level._id_EF86["flare_mp"] = 1;
-  var_0 = scripts\mp\passives::_id_8239();
+  level.menuperks = [];
+  level.scriptperks = [];
+  level.perksetfuncs = [];
+  level.perkunsetfuncs = [];
+  level.extraperkmap = [];
+  level.menurigperks = [];
+  level.scriptperks["specialty_afterburner"] = 1;
+  level.scriptperks["specialty_blastshield"] = 1;
+  level.scriptperks["specialty_autospot"] = 1;
+  level.scriptperks["specialty_boom"] = 1;
+  level.scriptperks["specialty_delaymine"] = 1;
+  level.scriptperks["specialty_dexterity"] = 1;
+  level.scriptperks["specialty_empimmune"] = 1;
+  level.scriptperks["specialty_engineer"] = 1;
+  level.scriptperks["specialty_explosivedamage"] = 1;
+  level.scriptperks["specialty_extraammo"] = 1;
+  level.scriptperks["specialty_falldamage"] = 1;
+  level.scriptperks["specialty_ghost"] = 1;
+  level.scriptperks["specialty_hard_shell"] = 1;
+  level.scriptperks["specialty_hardline"] = 1;
+  level.scriptperks["specialty_powercell"] = 1;
+  level.scriptperks["specialty_hunter"] = 1;
+  level.scriptperks["specialty_incog"] = 1;
+  level.scriptperks["specialty_localjammer"] = 1;
+  level.scriptperks["specialty_overclock"] = 1;
+  level.scriptperks["specialty_outlinekillstreaks"] = 1;
+  level.scriptperks["specialty_pitcher"] = 1;
+  level.scriptperks["specialty_regenfaster"] = 1;
+  level.scriptperks["specialty_stun_resistance"] = 1;
+  level.scriptperks["specialty_tracker"] = 1;
+  level.scriptperks["specialty_twoprimaries"] = 1;
+  level.scriptperks["specialty_bullet_outline"] = 1;
+  level.scriptperks["specialty_activereload"] = 1;
+  level.scriptperks["specialty_sixth_sense"] = 1;
+  level.scriptperks["specialty_enhanced_sixth_sense"] = 1;
+  level.scriptperks["specialty_meleekill"] = 1;
+  level.scriptperks["specialty_gung_ho"] = 1;
+  level.scriptperks["specialty_man_at_arms"] = 1;
+  level.scriptperks["specialty_blast_suppressor"] = 1;
+  level.scriptperks["specialty_momentum"] = 1;
+  level.scriptperks["specialty_improvedmelee"] = 1;
+  level.scriptperks["specialty_thief"] = 1;
+  level.scriptperks["specialty_silentkill"] = 1;
+  level.scriptperks["specialty_armorpiercingks"] = 1;
+  level.scriptperks["specialty_fastcrouch"] = 1;
+  level.scriptperks["specialty_battleslide"] = 1;
+  level.scriptperks["specialty_battleslide_offense"] = 1;
+  level.scriptperks["specialty_battleslide_shield"] = 1;
+  level.scriptperks["specialty_disruptor_punch"] = 1;
+  level.scriptperks["specialty_ground_pound"] = 1;
+  level.scriptperks["specialty_ground_pound_shield"] = 1;
+  level.scriptperks["specialty_ground_pound_shock"] = 1;
+  level.scriptperks["specialty_thruster"] = 1;
+  level.scriptperks["specialty_dodge"] = 1;
+  level.scriptperks["specialty_extra_dodge"] = 1;
+  level.scriptperks["specialty_extend_dodge"] = 1;
+  level.scriptperks["specialty_phase_slide"] = 1;
+  level.scriptperks["specialty_tele_slide"] = 1;
+  level.scriptperks["specialty_phaseslash"] = 1;
+  level.scriptperks["specialty_phaseslash_rephase"] = 1;
+  level.scriptperks["specialty_phase_fall"] = 1;
+  level.scriptperks["specialty_aura_regen"] = 1;
+  level.scriptperks["specialty_aura_quickswap"] = 1;
+  level.scriptperks["specialty_aura_speed"] = 1;
+  level.scriptperks["specialty_mark_targets"] = 1;
+  level.scriptperks["specialty_batterypack"] = 1;
+  level.scriptperks["specialty_camo_elite"] = 1;
+  level.scriptperks["specialty_scorestreakpack"] = 1;
+  level.scriptperks["specialty_superpack"] = 1;
+  level.scriptperks["specialty_dodge_defense"] = 1;
+  level.scriptperks["specialty_spawncloak"] = 1;
+  level.scriptperks["specialty_commando"] = 1;
+  level.scriptperks["specialty_personal_trophy"] = 1;
+  level.scriptperks["specialty_equipment_ping"] = 1;
+  level.scriptperks["specialty_rugged_eqp"] = 1;
+  level.scriptperks["specialty_cloak"] = 1;
+  level.scriptperks["specialty_wall_lock"] = 1;
+  level.scriptperks["specialty_rush"] = 1;
+  level.scriptperks["specialty_hover"] = 1;
+  level.scriptperks["specialty_scavenger_eqp"] = 1;
+  level.scriptperks["specialty_spawnview"] = 1;
+  level.scriptperks["specialty_headgear"] = 1;
+  level.scriptperks["specialty_ftlslide"] = 1;
+  level.scriptperks["specialty_improved_prone"] = 1;
+  level.scriptperks["specialty_support_killstreaks"] = 1;
+  level.scriptperks["specialty_overrideweaponspeed"] = 1;
+  level.scriptperks["specialty_ballcarrier"] = 1;
+  level.scriptperks["specialty_cloak_aerial"] = 1;
+  level.scriptperks["specialty_spawn_radar"] = 1;
+  level.scriptperks["specialty_ads_awareness"] = 1;
+  level.scriptperks["specialty_rearguard"] = 1;
+  level.scriptperks["specialty_sharp_focus"] = 1;
+  level.scriptperks["specialty_bling"] = 1;
+  level.scriptperks["specialty_moredamage"] = 1;
+  level.scriptperks["specialty_comexp"] = 1;
+  level.scriptperks["specialty_paint"] = 1;
+  level.scriptperks["specialty_paint_pro"] = 1;
+  level.scriptperks["specialty_adrenaline"] = 1;
+  level.scriptperks["specialty_adrenaline_lite"] = 1;
+  level.scriptperks["specialty_block_health_regen"] = 1;
+  level.scriptperks["specialty_rshieldradar"] = 1;
+  level.scriptperks["specialty_rshieldscrambler"] = 1;
+  level.scriptperks["specialty_combathigh"] = 1;
+  level.scriptperks["specialty_finalstand"] = 1;
+  level.scriptperks["specialty_c4death"] = 1;
+  level.scriptperks["specialty_juiced"] = 1;
+  level.scriptperks["specialty_revenge"] = 1;
+  level.scriptperks["specialty_light_armor"] = 1;
+  level.scriptperks["specialty_carepackage"] = 1;
+  level.scriptperks["specialty_stopping_power"] = 1;
+  level.scriptperks["specialty_uav"] = 1;
+  level.scriptperks["specialty_viewkickoverride"] = 1;
+  level.scriptperks["specialty_affinityspeedboost"] = 1;
+  level.scriptperks["specialty_affinityextralauncher"] = 1;
+  level.scriptperks["bouncingbetty_mp"] = 1;
+  level.scriptperks["c4_mp"] = 1;
+  level.scriptperks["claymore_mp"] = 1;
+  level.scriptperks["frag_grenade_mp"] = 1;
+  level.scriptperks["semtex_mp"] = 1;
+  level.scriptperks["cluster_grenade_mp"] = 1;
+  level.scriptperks["throwingknife_mp"] = 1;
+  level.scriptperks["throwingknifec4_mp"] = 1;
+  level.scriptperks["throwingknifeteleport_mp"] = 1;
+  level.scriptperks["throwingknifejugg_mp"] = 1;
+  level.scriptperks["throwingknifesmokewall_mp"] = 1;
+  level.scriptperks["proximity_explosive_mp"] = 1;
+  level.scriptperks["mortar_shelljugg_mp"] = 1;
+  level.scriptperks["case_bomb_mp"] = 1;
+  level.scriptperks["blackhole_grenade_mp"] = 1;
+  level.scriptperks["throwingreaper_mp"] = 1;
+  level.scriptperks["transponder_mp"] = 1;
+  level.scriptperks["sonic_sensor_mp"] = 1;
+  level.scriptperks["sticky_mine_mp"] = 1;
+  level.scriptperks["throwingknifedisruptor_mp"] = 1;
+  level.scriptperks["pulse_grenade_mp"] = 1;
+  level.scriptperks["portal_grenade_mp"] = 1;
+  level.scriptperks["virus_grenade_mp"] = 1;
+  level.scriptperks["concussion_grenade_mp"] = 1;
+  level.scriptperks["sensor_grenade_mp"] = 1;
+  level.scriptperks["gravity_grenade_mp"] = 1;
+  level.scriptperks["flash_grenade_mp"] = 1;
+  level.scriptperks["smoke_grenade_mp"] = 1;
+  level.scriptperks["smoke_grenadejugg_mp"] = 1;
+  level.scriptperks["emp_grenade_mp"] = 1;
+  level.scriptperks["specialty_tacticalinsertion"] = 1;
+  level.scriptperks["trophy_mp"] = 1;
+  level.scriptperks["motion_sensor_mp"] = 1;
+  level.scriptperks["proto_ricochet_device_mp"] = 1;
+  level.scriptperks["bulletstorm_device_mp"] = 1;
+  level.scriptperks["mobile_radar_mp"] = 1;
+  level.scriptperks["gas_grenade_mp"] = 1;
+  level.scriptperks["blackout_grenade_mp"] = 1;
+  level.scriptperks["proxy_bomb_mp"] = 1;
+  level.scriptperks["adrenaline_mist_mp"] = 1;
+  level.scriptperks["domeshield_mp"] = 1;
+  level.scriptperks["copycat_grenade_mp"] = 1;
+  level.scriptperks["speed_strip_mp"] = 1;
+  level.scriptperks["shard_ball_mp"] = 1;
+  level.scriptperks["splash_grenade_mp"] = 1;
+  level.scriptperks["forcepush_mp"] = 1;
+  level.scriptperks["portal_generator_mp"] = 1;
+  level.scriptperks["ammo_box_mp"] = 1;
+  level.scriptperks["blackhat_mp"] = 1;
+  level.scriptperks["flare_mp"] = 1;
+  var_00 = scripts\mp\passives::_meth_8239();
 
-  foreach (var_2 in var_0) {
-  level._id_EF86[var_2] = 1;
-  var_3 = scripts\mp\passives::_id_804A(var_2);
+  foreach (var_02 in var_00) {
+  level.scriptperks[var_02] = 1;
+  var_03 = scripts\mp\passives::getpassivemessage(var_02);
 
-  if (isdefined(var_3))
-  level._id_6A50[var_2] = [var_3];
+  if (isdefined(var_03))
+  level.extraperkmap[var_02] = [var_03];
   }
 
-  level._id_EF86["specialty_null"] = 1;
-  level._id_CA60["specialty_afterburner"] = scripts\mp\perks\perkfunctions::_id_F634;
-  level._id_CA66["specialty_afterburner"] = scripts\mp\perks\perkfunctions::_id_12C6E;
-  level._id_CA60["specialty_blastshield"] = scripts\mp\perks\perkfunctions::_id_F667;
-  level._id_CA66["specialty_blastshield"] = scripts\mp\perks\perkfunctions::_id_12C82;
-  level._id_CA60["specialty_falldamage"] = scripts\mp\perks\perkfunctions::_id_F719;
-  level._id_CA66["specialty_falldamage"] = scripts\mp\perks\perkfunctions::_id_12CC1;
-  level._id_CA60["specialty_localjammer"] = scripts\mp\perks\perkfunctions::_id_F78A;
-  level._id_CA66["specialty_localjammer"] = scripts\mp\perks\perkfunctions::_id_12CE9;
-  level._id_CA60["specialty_thermal"] = scripts\mp\perks\perkfunctions::_id_F885;
-  level._id_CA66["specialty_thermal"] = scripts\mp\perks\perkfunctions::_id_12D49;
-  level._id_CA60["specialty_lightweight"] = scripts\mp\perks\perkfunctions::_id_F788;
-  level._id_CA66["specialty_lightweight"] = scripts\mp\perks\perkfunctions::_id_12CE6;
-  level._id_CA60["specialty_steelnerves"] = scripts\mp\perks\perkfunctions::_id_F862;
-  level._id_CA66["specialty_steelnerves"] = scripts\mp\perks\perkfunctions::_id_12D39;
-  level._id_CA60["specialty_delaymine"] = scripts\mp\perks\perkfunctions::_id_F6C1;
-  level._id_CA66["specialty_delaymine"] = scripts\mp\perks\perkfunctions::_id_12CA1;
-  level._id_CA60["specialty_saboteur"] = scripts\mp\perks\perkfunctions::_id_F827;
-  level._id_CA66["specialty_saboteur"] = scripts\mp\perks\perkfunctions::_id_12D21;
-  level._id_CA60["specialty_endgame"] = scripts\mp\perks\perkfunctions::_id_F6DE;
-  level._id_CA66["specialty_endgame"] = scripts\mp\perks\perkfunctions::_id_12CAA;
-  level._id_CA60["specialty_onemanarmy"] = scripts\mp\perks\perkfunctions::_id_F7C6;
-  level._id_CA66["specialty_onemanarmy"] = scripts\mp\perks\perkfunctions::_id_12CF9;
-  level._id_CA60["specialty_tacticalinsertion"] = scripts\mp\perks\perkfunctions::_id_F870;
-  level._id_CA66["specialty_tacticalinsertion"] = scripts\mp\perks\perkfunctions::_id_12D41;
-  level._id_CA60["specialty_weaponlaser"] = scripts\mp\perks\perkfunctions::_id_FB17;
-  level._id_CA66["specialty_weaponlaser"] = scripts\mp\perks\perkfunctions::_id_12D68;
-  level._id_CA60["specialty_steadyaimpro"] = scripts\mp\perks\perkfunctions::_id_F860;
-  level._id_CA66["specialty_steadyaimpro"] = scripts\mp\perks\perkfunctions::_id_12D37;
-  level._id_CA60["specialty_stun_resistance"] = scripts\mp\perks\perkfunctions::_id_F869;
-  level._id_CA66["specialty_stun_resistance"] = scripts\mp\perks\perkfunctions::_id_12D3C;
-  level._id_CA60["specialty_marksman"] = scripts\mp\perks\perkfunctions::_id_F78F;
-  level._id_CA66["specialty_marksman"] = scripts\mp\perks\perkfunctions::_id_12CEC;
-  level._id_CA60["specialty_rshieldradar"] = scripts\mp\perks\perkfunctions::_id_F821;
-  level._id_CA66["specialty_rshieldradar"] = scripts\mp\perks\perkfunctions::_id_12D1D;
-  level._id_CA60["specialty_rshieldscrambler"] = scripts\mp\perks\perkfunctions::_id_F823;
-  level._id_CA66["specialty_rshieldscrambler"] = scripts\mp\perks\perkfunctions::_id_12D1E;
-  level._id_CA60["specialty_double_load"] = scripts\mp\perks\perkfunctions::_id_F6D7;
-  level._id_CA66["specialty_double_load"] = scripts\mp\perks\perkfunctions::_id_12CA8;
-  level._id_CA60["specialty_sharp_focus"] = scripts\mp\perks\perkfunctions::_id_F83C;
-  level._id_CA66["specialty_sharp_focus"] = scripts\mp\perks\perkfunctions::_id_12D29;
-  level._id_CA60["specialty_hard_shell"] = scripts\mp\perks\perkfunctions::_id_F73A;
-  level._id_CA66["specialty_hard_shell"] = scripts\mp\perks\perkfunctions::_id_12CCC;
-  level._id_CA60["specialty_regenfaster"] = scripts\mp\perks\perkfunctions::_id_F81B;
-  level._id_CA66["specialty_regenfaster"] = scripts\mp\perks\perkfunctions::_id_12D19;
-  level._id_CA60["specialty_autospot"] = scripts\mp\perks\perkfunctions::_id_F650;
-  level._id_CA66["specialty_autospot"] = scripts\mp\perks\perkfunctions::_id_12C76;
-  level._id_CA60["specialty_empimmune"] = scripts\mp\perks\perkfunctions::_id_F6DC;
-  level._id_CA66["specialty_empimmune"] = scripts\mp\perks\perkfunctions::_id_12CA9;
-  level._id_CA60["specialty_overkill_pro"] = scripts\mp\perks\perkfunctions::_id_F7D0;
-  level._id_CA66["specialty_overkill_pro"] = scripts\mp\perks\perkfunctions::_id_12D01;
-  level._id_CA60["specialty_refill_grenades"] = scripts\mp\perks\perkfunctions::_id_F819;
-  level._id_CA66["specialty_refill_grenades"] = scripts\mp\perks\perkfunctions::_id_12D17;
-  level._id_CA60["specialty_refill_ammo"] = scripts\mp\perks\perkfunctions::_id_F818;
-  level._id_CA66["specialty_refill_ammo"] = scripts\mp\perks\perkfunctions::_id_12D16;
-  level._id_CA60["specialty_combat_speed"] = scripts\mp\perks\perkfunctions::_id_F698;
-  level._id_CA66["specialty_combat_speed"] = scripts\mp\perks\perkfunctions::_id_12C95;
-  level._id_CA60["specialty_gambler"] = scripts\mp\perks\perkfunctions::_id_F71F;
-  level._id_CA66["specialty_gambler"] = scripts\mp\perks\perkfunctions::_id_12CC5;
-  level._id_CA60["specialty_comexp"] = scripts\mp\perks\perkfunctions::_id_F69B;
-  level._id_CA66["specialty_comexp"] = scripts\mp\perks\perkfunctions::_id_12C97;
-  level._id_CA60["specialty_gunsmith"] = scripts\mp\perks\perkfunctions::_id_F737;
-  level._id_CA66["specialty_gunsmith"] = scripts\mp\perks\perkfunctions::_id_12CCB;
-  level._id_CA60["specialty_tagger"] = scripts\mp\perks\perkfunctions::_id_F871;
-  level._id_CA66["specialty_tagger"] = scripts\mp\perks\perkfunctions::_id_12D42;
-  level._id_CA60["specialty_pitcher"] = scripts\mp\perks\perkfunctions::_id_F7E9;
-  level._id_CA66["specialty_pitcher"] = scripts\mp\perks\perkfunctions::_id_12D0C;
-  level._id_CA60["specialty_boom"] = scripts\mp\perks\perkfunctions::_id_F670;
-  level._id_CA66["specialty_boom"] = scripts\mp\perks\perkfunctions::_id_12C87;
-  level._id_CA60["specialty_triggerhappy"] = scripts\mp\perks\perkfunctions::_id_F897;
-  level._id_CA66["specialty_triggerhappy"] = scripts\mp\perks\perkfunctions::_id_12D51;
-  level._id_CA60["specialty_incog"] = scripts\mp\perks\perkfunctions::_id_F754;
-  level._id_CA66["specialty_incog"] = scripts\mp\perks\perkfunctions::_id_12CD7;
-  level._id_CA60["specialty_blindeye"] = scripts\mp\perks\perkfunctions::_id_F668;
-  level._id_CA66["specialty_blindeye"] = scripts\mp\perks\perkfunctions::_id_12C83;
-  level._id_CA60["specialty_quickswap"] = scripts\mp\perks\perkfunctions::_id_F810;
-  level._id_CA66["specialty_quickswap"] = scripts\mp\perks\perkfunctions::_id_12D13;
-  level._id_CA60["specialty_extraammo"] = scripts\mp\perks\perkfunctions::_id_F6F4;
-  level._id_CA66["specialty_extraammo"] = scripts\mp\perks\perkfunctions::_id_12CB3;
-  level._id_CA60["specialty_extra_equipment"] = scripts\mp\perks\perkfunctions::_id_F6F8;
-  level._id_CA66["specialty_extra_equipment"] = scripts\mp\perks\perkfunctions::_id_12CB7;
-  level._id_CA60["specialty_extra_deadly"] = scripts\mp\perks\perkfunctions::_id_F6F6;
-  level._id_CA66["specialty_extra_deadly"] = scripts\mp\perks\perkfunctions::_id_12CB5;
-  level._id_CA60["specialty_fastcrouch"] = scripts\mp\perks\perkfunctions::setfastcrouch;
-  level._id_CA66["specialty_fastcrouch"] = scripts\mp\perks\perkfunctions::unsetfastcrouch;
-  level._id_CA60["specialty_battleslide"] = scripts\mp\perks\perkfunctions::_id_F65B;
-  level._id_CA66["specialty_battleslide"] = scripts\mp\perks\perkfunctions::_id_12C7B;
-  level._id_CA60["specialty_battleslide_shield"] = scripts\mp\perks\perkfunctions::_id_F65D;
-  level._id_CA66["specialty_battleslide_shield"] = scripts\mp\perks\perkfunctions::_id_12C7D;
-  level._id_CA60["specialty_bullet_outline"] = scripts\mp\perks\perkfunctions::_id_F675;
-  level._id_CA66["specialty_bullet_outline"] = scripts\mp\perks\perkfunctions::_id_12C88;
-  level._id_CA60["specialty_twoprimaries"] = scripts\mp\perks\perkfunctions::_id_F7CF;
-  level._id_CA66["specialty_twoprimaries"] = scripts\mp\perks\perkfunctions::_id_12D00;
-  level._id_CA60["specialty_activereload"] = scripts\mp\perks\perkfunctions::_id_F62C;
-  level._id_CA66["specialty_activereload"] = scripts\mp\perks\perkfunctions::_id_12C66;
-  level._id_CA60["specialty_lifepack"] = scripts\mp\perks\perkfunctions::_id_F782;
-  level._id_CA66["specialty_lifepack"] = scripts\mp\perks\perkfunctions::_id_12CE4;
-  level._id_CA60["specialty_toughenup"] = scripts\mp\perks\perkfunctions::_id_F891;
-  level._id_CA66["specialty_toughenup"] = scripts\mp\perks\perkfunctions::_id_12D4D;
-  level._id_CA60["specialty_scoutping"] = scripts\mp\perks\perkfunctions::_id_F82D;
-  level._id_CA66["specialty_scoutping"] = scripts\mp\perks\perkfunctions::_id_12D26;
-  level._id_CA60["specialty_corpse_steal"] = scripts\mp\perks\perkfunctions::_id_F6A1;
-  level._id_CA66["specialty_corpse_steal"] = scripts\mp\perks\perkfunctions::_id_12C9A;
-  level._id_CA60["specialty_phase_speed"] = scripts\mp\perks\perkfunctions::_id_F7E6;
-  level._id_CA66["specialty_phase_speed"] = scripts\mp\perks\perkfunctions::_id_12D0A;
-  level._id_CA60["specialty_dodge"] = scripts\mp\perks\perkfunctions::_id_F6CC;
-  level._id_CA66["specialty_dodge"] = scripts\mp\perks\perkfunctions::_id_12CA4;
-  level._id_CA60["specialty_extra_dodge"] = scripts\mp\perks\perkfunctions::_id_F6F7;
-  level._id_CA66["specialty_extra_dodge"] = scripts\mp\perks\perkfunctions::_id_12CB6;
-  level._id_CA60["specialty_ground_pound"] = scripts\mp\perks\perkfunctions::_id_F72D;
-  level._id_CA66["specialty_ground_pound"] = scripts\mp\perks\perkfunctions::_id_12CC7;
-  level._id_CA60["specialty_ground_pound_shock"] = scripts\mp\perks\perkfunctions::_id_F730;
-  level._id_CA66["specialty_ground_pound_shock"] = scripts\mp\perks\perkfunctions::_id_12CCA;
-  level._id_CA60["specialty_ground_pound_shield"] = scripts\mp\perks\perkfunctions::_id_F72F;
-  level._id_CA66["specialty_ground_pound_shield"] = scripts\mp\perks\perkfunctions::_id_12CC9;
-  level._id_CA60["specialty_thruster"] = scripts\mp\perks\perkfunctions::_id_F888;
-  level._id_CA66["specialty_thruster"] = scripts\mp\perks\perkfunctions::_id_12D4B;
-  level._id_CA60["specialty_phase_slide"] = scripts\mp\perks\perkfunctions::_id_F7E5;
-  level._id_CA66["specialty_phase_slide"] = scripts\mp\perks\perkfunctions::_id_12D09;
-  level._id_CA60["specialty_tele_slide"] = scripts\mp\perks\perkfunctions::_id_F880;
-  level._id_CA66["specialty_tele_slide"] = scripts\mp\perks\perkfunctions::_id_12D46;
-  level._id_CA60["specialty_phaseslash_rephase"] = scripts\mp\perks\perkfunctions::_id_F7E4;
-  level._id_CA66["specialty_phaseslash_rephase"] = scripts\mp\perks\perkfunctions::_id_12D08;
-  level._id_CA60["specialty_phase_fall"] = scripts\mp\perks\perkfunctions::_id_F7E0;
-  level._id_CA66["specialty_phase_fall"] = scripts\mp\perks\perkfunctions::_id_12D05;
-  level._id_CA60["specialty_sixth_sense"] = scripts\mp\perks\perkfunctions::_id_F846;
-  level._id_CA66["specialty_sixth_sense"] = scripts\mp\perks\perkfunctions::_id_12D2E;
-  level._id_CA60["specialty_enchanced_sixth_sense"] = scripts\mp\perks\perkfunctions::_id_F6E9;
-  level._id_CA66["specialty_enhanced_sixth_sense"] = scripts\mp\perks\perkfunctions::_id_12CAD;
-  level._id_CA60["specialty_adrenaline"] = scripts\mp\perks\perkfunctions::_id_F62F;
-  level._id_CA66["specialty_adrenaline"] = scripts\mp\perks\perkfunctions::_id_12C68;
-  level._id_CA60["specialty_adrenaline_lite"] = scripts\mp\perks\perkfunctions::_id_F630;
-  level._id_CA66["specialty_adrenaline_lite"] = scripts\mp\perks\perkfunctions::_id_12C69;
-  level._id_CA60["specialty_extend_dodge"] = scripts\mp\perks\perkfunctions::_id_F6F1;
-  level._id_CA66["specialty_extend_dodge"] = scripts\mp\perks\perkfunctions::_id_12CB1;
-  level._id_CA60["specialty_aura_regen"] = scripts\mp\perks\perkfunctions::_id_F64E;
-  level._id_CA66["specialty_aura_regen"] = scripts\mp\perks\perkfunctions::_id_12C74;
-  level._id_CA60["specialty_aura_quickswap"] = scripts\mp\perks\perkfunctions::_id_F64D;
-  level._id_CA66["specialty_aura_quickswap"] = scripts\mp\perks\perkfunctions::_id_12C73;
-  level._id_CA60["specialty_aura_speed"] = scripts\mp\perks\perkfunctions::_id_F64F;
-  level._id_CA66["specialty_aura_speed"] = scripts\mp\perks\perkfunctions::_id_12C75;
-  level._id_CA60["specialty_mark_targets"] = scripts\mp\perks\perkfunctions::_id_F790;
-  level._id_CA66["specialty_mark_targets"] = scripts\mp\perks\perkfunctions::_id_12CED;
-  level._id_CA60["specialty_batterypack"] = scripts\mp\perks\perkfunctions::_id_F65A;
-  level._id_CA66["specialty_batterypack"] = scripts\mp\perks\perkfunctions::_id_12C7A;
-  level._id_CA60["specialty_camo_clone"] = scripts\mp\perks\perkfunctions::_id_F67A;
-  level._id_CA66["specialty_camo_clone"] = scripts\mp\perks\perkfunctions::_id_12C8B;
-  level._id_CA60["specialty_camo_elite"] = scripts\mp\perks\perkfunctions::_id_F67B;
-  level._id_CA66["specialty_camo_elite"] = scripts\mp\perks\perkfunctions::_id_12C8C;
-  level._id_CA60["specialty_block_health_regen"] = scripts\mp\perks\perkfunctions::_id_F669;
-  level._id_CA66["specialty_block_health_regen"] = scripts\mp\perks\perkfunctions::_id_12C84;
-  level._id_CA60["specialty_scorestreakpack"] = scripts\mp\perks\perkfunctions::_id_F82C;
-  level._id_CA66["specialty_scorestreakpack"] = scripts\mp\perks\perkfunctions::_id_12D25;
-  level._id_CA60["specialty_superpack"] = scripts\mp\perks\perkfunctions::_id_F86B;
-  level._id_CA66["specialty_superpack"] = scripts\mp\perks\perkfunctions::_id_12D3E;
-  level._id_CA60["specialty_dodge_defense"] = scripts\mp\perks\perkfunctions::_id_F6CE;
-  level._id_CA66["specialty_dodge_defense"] = scripts\mp\perks\perkfunctions::_id_12CA5;
-  level._id_CA60["specialty_battleslide_offense"] = scripts\mp\perks\perkfunctions::_id_F65C;
-  level._id_CA66["specialty_battleslide_offense"] = scripts\mp\perks\perkfunctions::_id_12C7C;
-  level._id_CA60["specialty_spawncloak"] = scripts\mp\perks\perkfunctions::_id_F84F;
-  level._id_CA66["specialty_spawncloak"] = scripts\mp\perks\perkfunctions::_id_12D32;
-  level._id_CA60["specialty_meleekill"] = scripts\mp\perks\perkfunctions::_id_F793;
-  level._id_CA66["specialty_meleekill"] = scripts\mp\perks\perkfunctions::_id_12CEE;
-  level._id_CA60["specialty_powercell"] = scripts\mp\perks\perkfunctions::_id_F807;
-  level._id_CA66["specialty_powercell"] = scripts\mp\perks\perkfunctions::_id_12D0F;
-  level._id_CA60["specialty_hardline"] = scripts\mp\perks\perkfunctions::sethardline;
-  level._id_CA66["specialty_hardline"] = scripts\mp\perks\perkfunctions::unsethardline;
-  level._id_CA60["specialty_hunter"] = scripts\mp\perks\perkfunctions::_id_F74A;
-  level._id_CA66["specialty_hunter"] = scripts\mp\perks\perkfunctions::_id_12CD3;
-  level._id_CA60["specialty_overclock"] = scripts\mp\perks\perkfunctions::_id_F7CD;
-  level._id_CA66["specialty_overclock"] = scripts\mp\perks\perkfunctions::_id_12CFE;
-  level._id_CA60["specialty_tracker"] = scripts\mp\perks\perkfunctions::_id_F894;
-  level._id_CA66["specialty_tracker"] = scripts\mp\perks\perkfunctions::_id_12D4E;
-  level._id_CA60["specialty_personal_trophy"] = scripts\mp\perks\perkfunctions::_id_F7DE;
-  level._id_CA66["specialty_personal_trophy"] = scripts\mp\perks\perkfunctions::_id_12D04;
-  level._id_CA60["specialty_disruptor_punch"] = scripts\mp\perks\perkfunctions::_id_F6CA;
-  level._id_CA66["specialty_disruptor_punch"] = scripts\mp\perks\perkfunctions::_id_12CA3;
-  level._id_CA60["specialty_equipment_ping"] = scripts\mp\perks\perkfunctions::_id_F6EB;
-  level._id_CA66["specialty_equipment_ping"] = scripts\mp\perks\perkfunctions::_id_12CAE;
-  level._id_CA60["specialty_rugged_eqp"] = scripts\mp\perks\perkfunctions::_id_F825;
-  level._id_CA66["specialty_rugged_eqp"] = scripts\mp\perks\perkfunctions::_id_12D1F;
-  level._id_CA60["specialty_man_at_arms"] = scripts\mp\perks\perkfunctions::_id_F78D;
-  level._id_CA66["specialty_man_at_arms"] = scripts\mp\perks\perkfunctions::_id_12CEB;
-  level._id_CA60["specialty_outlinekillstreaks"] = scripts\mp\perks\perkfunctions::_id_F7CB;
-  level._id_CA66["specialty_outlinekillstreaks"] = scripts\mp\perks\perkfunctions::_id_12CFC;
-  level._id_CA60["specialty_engineer"] = scripts\mp\perks\perkfunctions::_id_F6E4;
-  level._id_CA66["specialty_engineer"] = scripts\mp\perks\perkfunctions::_id_12CAB;
-  level._id_CA60["specialty_cloak"] = scripts\mp\perks\perkfunctions::_id_F693;
-  level._id_CA66["specialty_cloak"] = scripts\mp\perks\perkfunctions::_id_12C90;
-  level._id_CA60["specialty_wall_lock"] = scripts\mp\perks\perkfunctions::_id_FB15;
-  level._id_CA66["specialty_wall_lock"] = scripts\mp\perks\perkfunctions::_id_12D66;
-  level._id_CA60["specialty_momentum"] = scripts\mp\perks\perkfunctions::_id_F7A4;
-  level._id_CA66["specialty_momentum"] = scripts\mp\perks\perkfunctions::_id_12CF2;
-  level._id_CA60["specialty_hover"] = scripts\mp\perks\perkfunctions::_id_F747;
-  level._id_CA66["specialty_hover"] = scripts\mp\perks\perkfunctions::_id_12CD2;
-  level._id_CA60["specialty_rush"] = scripts\mp\perks\perkfunctions::_id_F826;
-  level._id_CA66["specialty_rush"] = scripts\mp\perks\perkfunctions::_id_12D20;
-  level._id_CA60["specialty_scavenger_eqp"] = scripts\mp\perks\perkfunctions::_id_F829;
-  level._id_CA66["specialty_scavenger_eqp"] = scripts\mp\perks\perkfunctions::_id_12D22;
-  level._id_CA60["specialty_spawnview"] = scripts\mp\perks\perkfunctions::_id_F854;
-  level._id_CA66["specialty_spawnview"] = scripts\mp\perks\perkfunctions::_id_12D34;
-  level._id_CA60["specialty_headgear"] = scripts\mp\perks\perkfunctions::_id_F73C;
-  level._id_CA66["specialty_headgear"] = scripts\mp\perks\perkfunctions::_id_12CCD;
-  level._id_CA60["specialty_ftlslide"] = scripts\mp\perks\perkfunctions::_id_F71D;
-  level._id_CA66["specialty_ftlslide"] = scripts\mp\perks\perkfunctions::_id_12CC3;
-  level._id_CA60["specialty_improved_prone"] = scripts\mp\perks\perkfunctions::_id_F753;
-  level._id_CA66["specialty_improved_prone"] = scripts\mp\perks\perkfunctions::_id_12CD6;
-  level._id_CA60["specialty_ghost"] = scripts\mp\perks\perkfunctions::_id_F721;
-  level._id_CA66["specialty_ghost"] = scripts\mp\perks\perkfunctions::_id_12CC6;
-  level._id_CA60["specialty_support_killstreaks"] = scripts\mp\perks\perkfunctions::_id_F86D;
-  level._id_CA66["specialty_support_killstreaks"] = scripts\mp\perks\perkfunctions::_id_12D40;
-  level._id_CA60["specialty_overrideweaponspeed"] = scripts\mp\perks\perkfunctions::_id_F7D2;
-  level._id_CA66["specialty_overrideweaponspeed"] = scripts\mp\perks\perkfunctions::_id_12D02;
-  level._id_CA60["specialty_ballcarrier"] = scripts\mp\perks\perkfunctions::_id_F657;
-  level._id_CA66["specialty_ballcarrier"] = scripts\mp\perks\perkfunctions::_id_12C77;
-  level._id_CA60["specialty_cloak_aerial"] = scripts\mp\perks\perkfunctions::_id_F694;
-  level._id_CA66["specialty_cloak_aerial"] = scripts\mp\perks\perkfunctions::_id_12C91;
-  level._id_CA60["specialty_spawn_radar"] = scripts\mp\perks\perkfunctions::_id_F852;
-  level._id_CA66["specialty_spawn_radar"] = scripts\mp\perks\perkfunctions::_id_12D33;
-  level._id_CA60["specialty_improvedmelee"] = scripts\mp\perks\perkfunctions::_id_F752;
-  level._id_CA66["specialty_improvedmelee"] = scripts\mp\perks\perkfunctions::_id_12CD5;
-  level._id_CA60["specialty_thief"] = scripts\mp\perks\perkfunctions::_id_F886;
-  level._id_CA66["specialty_thief"] = scripts\mp\perks\perkfunctions::_id_12D4A;
-  level._id_CA60["specialty_ads_awareness"] = scripts\mp\perks\perkfunctions::_id_F631;
-  level._id_CA66["specialty_ads_awareness"] = scripts\mp\perks\perkfunctions::_id_12C6B;
-  level._id_CA60["specialty_rearguard"] = scripts\mp\perks\perkfunctions::_id_F815;
-  level._id_CA66["specialty_rearguard"] = scripts\mp\perks\perkfunctions::_id_12D14;
-  level._id_CA60["specialty_combathigh"] = scripts\mp\perks\perkfunctions::_id_F696;
-  level._id_CA66["specialty_combathigh"] = scripts\mp\perks\perkfunctions::_id_12C92;
-  level._id_CA60["specialty_light_armor"] = scripts\mp\perks\perkfunctions::_id_F785;
-  level._id_CA66["specialty_light_armor"] = scripts\mp\perks\perkfunctions::_id_12CE5;
-  level._id_CA60["specialty_revenge"] = scripts\mp\perks\perkfunctions::_id_F81D;
-  level._id_CA66["specialty_revenge"] = scripts\mp\perks\perkfunctions::_id_12D1A;
-  level._id_CA60["specialty_c4death"] = scripts\mp\perks\perkfunctions::_id_F678;
-  level._id_CA66["specialty_c4death"] = scripts\mp\perks\perkfunctions::_id_12C8A;
-  level._id_CA60["specialty_finalstand"] = scripts\mp\perks\perkfunctions::_id_F704;
-  level._id_CA66["specialty_finalstand"] = scripts\mp\perks\perkfunctions::_id_12CBD;
-  level._id_CA60["specialty_juiced"] = scripts\mp\perks\perkfunctions::_id_F769;
-  level._id_CA66["specialty_juiced"] = scripts\mp\perks\perkfunctions::_id_12CDC;
-  level._id_CA60["specialty_carepackage"] = scripts\mp\perks\perkfunctions::_id_F67E;
-  level._id_CA66["specialty_carepackage"] = scripts\mp\perks\perkfunctions::_id_12C8D;
-  level._id_CA60["specialty_stopping_power"] = scripts\mp\perks\perkfunctions::_id_F864;
-  level._id_CA66["specialty_stopping_power"] = scripts\mp\perks\perkfunctions::_id_12D3A;
-  level._id_CA60["specialty_uav"] = scripts\mp\perks\perkfunctions::_id_F89F;
-  level._id_CA66["specialty_uav"] = scripts\mp\perks\perkfunctions::_id_12D53;
-  level._id_CA60["specialty_viewkickoverride"] = scripts\mp\perks\perkfunctions::_id_FB0D;
-  level._id_CA66["specialty_viewkickoverride"] = scripts\mp\perks\perkfunctions::_id_12D64;
-  level._id_CA60["specialty_affinityspeedboost"] = scripts\mp\perks\perkfunctions::_id_F633;
-  level._id_CA66["specialty_affinityspeedboost"] = scripts\mp\perks\perkfunctions::_id_12C6D;
-  level._id_CA60["specialty_affinityextralauncher"] = scripts\mp\perks\perkfunctions::_id_F632;
-  level._id_CA66["specialty_affinityextralauncher"] = scripts\mp\perks\perkfunctions::_id_12C6C;
-  level._id_CA60["passive_minimap_decoys"] = scripts\mp\perks\weaponpassives::_id_F79A;
-  level._id_CA66["passive_minimap_decoys"] = scripts\mp\perks\weaponpassives::_id_12CF0;
-  level._id_CA60["passive_headshot_ammo"] = scripts\mp\perks\weaponpassives::_id_F73F;
-  level._id_CA66["passive_headshot_ammo"] = scripts\mp\perks\weaponpassives::_id_12CCE;
-  level._id_CA60["passive_scrambler"] = scripts\mp\perks\weaponpassives::_id_F82F;
-  level._id_CA66["passive_scrambler"] = scripts\mp\perks\weaponpassives::_id_12D27;
-  level._id_CA60["passive_last_shots_ammo"] = scripts\mp\perks\weaponpassives::_id_F77D;
-  level._id_CA66["passive_last_shots_ammo"] = scripts\mp\perks\weaponpassives::_id_12CE2;
-  level._id_CA60["passive_health_on_kill"] = scripts\mp\perks\weaponpassives::_id_F740;
-  level._id_CA66["passive_health_on_kill"] = scripts\mp\perks\weaponpassives::_id_12CCF;
-  level._id_CA60["passive_double_kill_reload"] = scripts\mp\perks\weaponpassives::_id_F6D6;
-  level._id_CA66["passive_double_kill_reload"] = scripts\mp\perks\weaponpassives::_id_12CA7;
-  level._id_CA60["passive_explosive_kills"] = scripts\mp\perks\weaponpassives::_id_F6F0;
-  level._id_CA66["passive_explosive_kills"] = scripts\mp\perks\weaponpassives::_id_12CB0;
-  level._id_CA60["passive_miss_refund"] = scripts\mp\perks\weaponpassives::_id_F79B;
-  level._id_CA66["passive_miss_refund"] = scripts\mp\perks\weaponpassives::_id_12CF1;
-  level._id_CA60["passive_move_speed"] = scripts\mp\perks\weaponpassives::_id_F7AA;
-  level._id_CA66["passive_move_speed"] = scripts\mp\perks\weaponpassives::_id_12CF5;
-  level._id_CA60["passive_fast_rechamber_move_speed"] = scripts\mp\perks\weaponpassives::setrechambermovespeedpassive;
-  level._id_CA66["passive_fast_rechamber_move_speed"] = scripts\mp\perks\weaponpassives::unsetrechambermovespeedpassive;
-  level._id_CA60["passive_extra_xp"] = scripts\mp\perks\weaponpassives::_id_F6FD;
-  level._id_CA66["passive_extra_xp"] = scripts\mp\perks\weaponpassives::_id_12CBA;
-  level._id_CA60["passive_nuke"] = scripts\mp\perks\weaponpassives::_id_F7BD;
-  level._id_CA66["passive_nuke"] = scripts\mp\perks\weaponpassives::_id_12CF8;
-  level._id_CA60["passive_berserk"] = scripts\mp\perks\weaponpassives::setquadfeederpassive;
-  level._id_CA66["passive_berserk "] = scripts\mp\perks\weaponpassives::unsetquadfeederpassive;
-  level._id_CA60["passive_streak_ammo"] = scripts\mp\perks\weaponpassives::_id_F865;
-  level._id_CA66["passive_streak_ammo"] = scripts\mp\perks\weaponpassives::_id_12D3B;
-  level._id_CA60["passive_score_bonus_kills"] = scripts\mp\perks\weaponpassives::_id_F82A;
-  level._id_CA66["passive_score_bonus_kills"] = scripts\mp\perks\weaponpassives::_id_12D23;
-  level._id_CA60["passive_score_bonus_objectives"] = scripts\mp\perks\weaponpassives::_id_F82B;
-  level._id_CA66["passive_score_bonus_objectives"] = scripts\mp\perks\weaponpassives::_id_12D24;
-  level._id_CA60["passive_hivemind"] = scripts\mp\perks\weaponpassives::_id_F746;
-  level._id_CA66["passive_hivemind"] = scripts\mp\perks\weaponpassives::_id_12CD1;
-  level._id_CA60["passive_scoutping"] = scripts\mp\perks\perkfunctions::_id_F82D;
-  level._id_CA66["passive_scoutping"] = scripts\mp\perks\perkfunctions::_id_12D26;
-  level._id_CA60["passive_hunter_killer"] = scripts\mp\perks\weaponpassives::_id_F74B;
-  level._id_CA66["passive_hunter_killer"] = scripts\mp\perks\weaponpassives::_id_12CD4;
-  level._id_CA66["passive_double_kill_super"] = scripts\mp\perks\weaponpassives::unsetdoublekillsuperpassive;
-  level._id_CA60["passive_wallrun_quieter"] = scripts\mp\perks\weaponpassives::setwallrunquieterpassive;
-  level._id_CA66["passive_wallrun_quieter"] = scripts\mp\perks\weaponpassives::unsetwallrunquieterpassive;
-  level._id_CA60["passive_slide_blastshield"] = scripts\mp\perks\weaponpassives::setslideblastshield;
-  level._id_CA66["passive_slide_blastshield"] = scripts\mp\perks\weaponpassives::unsetslideblastshield;
-  level._id_CA60["passive_prone_blindeye"] = scripts\mp\perks\weaponpassives::setproneblindeye;
-  level._id_CA66["passive_prone_blindeye"] = scripts\mp\perks\weaponpassives::unsetproneblindeye;
-  level._id_CA60["passive_stationary_engineer"] = scripts\mp\perks\weaponpassives::setstationaryengineer;
-  level._id_CA66["passive_stationary_engineer"] = scripts\mp\perks\weaponpassives::unsetstationaryengineer;
-  level._id_CA60["passive_doppleganger"] = scripts\mp\perks\weaponpassives::setdoppleganger;
-  level._id_CA66["passive_doppleganger"] = scripts\mp\perks\weaponpassives::unsetdoppleganger;
-  level._id_CA60["passive_collat_streak"] = scripts\mp\perks\weaponpassives::setcollatstreak;
-  level._id_CA66["passive_collat_streak"] = scripts\mp\perks\weaponpassives::unsetcollatstreak;
-  level._id_6A50["specialty_coldblooded"] = ["specialty_spygame", "specialty_heartbreaker", "specialty_radarringresist"];
-  level._id_6A50["specialty_blindeye"] = ["specialty_noplayertarget"];
-  level._id_6A50["specialty_quickswap"] = ["specialty_fastoffhand"];
-  level._id_6A50["specialty_improvedgunkick"] = ["specialty_reducedsway"];
-  level._id_6A50["specialty_dexterity"] = ["specialty_fastreload", "specialty_quickswap"];
-  level._id_6A50["specialty_engineer"] = ["specialty_detectexplosive", "specialty_delaymine", "specialty_outlinekillstreaks", "specialty_drawenemyturrets"];
-  level._id_6A50["specialty_empimmune"] = ["specialty_tracker_jammer", "specialty_noscopeoutline"];
-  level._id_6A50["specialty_afterburner"] = ["specialty_thruster"];
-  level._id_6A50["specialty_man_at_arms"] = ["specialty_extraammo", "specialty_overrideweaponspeed"];
-  level._id_6A50["specialty_phaseslash"] = ["specialty_phaseslash_rephase"];
-  level._id_6A50["specialty_ghost"] = ["specialty_gpsjammer"];
-  level._id_6A50["specialty_equipment_ping"] = ["specialty_paint"];
-  level._id_6A50["specialty_blast_suppressor"] = ["specialty_silentdoublejump", "specialty_silentdoublejump_audio"];
-  level._id_6A50["specialty_quieter"] = ["specialty_silentdoublejump_audio"];
-  level._id_6A50["specialty_improvedmelee"] = ["specialty_extendedmelee", "specialty_fastermelee", "specialty_thief"];
-  level._id_6A50["specialty_marksman"] = ["specialty_viewkickoverride"];
-  level._id_6A50["specialty_tracker"] = ["specialty_selectivehearing", "specialty_tracker_pro"];
-  level._id_6A50["specialty_sprintfire"] = ["specialty_fastsprintrecovery"];
-  _id_98B0();
-  _id_B675();
-  _id_B673();
-  _id_98B2();
-  level thread _id_C56E();
+  level.scriptperks["specialty_null"] = 1;
+  level.perksetfuncs["specialty_afterburner"] = scripts\mp\perks\perkfunctions::setafterburner;
+  level.perkunsetfuncs["specialty_afterburner"] = scripts\mp\perks\perkfunctions::unsetafterburner;
+  level.perksetfuncs["specialty_blastshield"] = scripts\mp\perks\perkfunctions::setblastshield;
+  level.perkunsetfuncs["specialty_blastshield"] = scripts\mp\perks\perkfunctions::unsetblastshield;
+  level.perksetfuncs["specialty_falldamage"] = scripts\mp\perks\perkfunctions::setfreefall;
+  level.perkunsetfuncs["specialty_falldamage"] = scripts\mp\perks\perkfunctions::unsetfreefall;
+  level.perksetfuncs["specialty_localjammer"] = scripts\mp\perks\perkfunctions::setlocaljammer;
+  level.perkunsetfuncs["specialty_localjammer"] = scripts\mp\perks\perkfunctions::unsetlocaljammer;
+  level.perksetfuncs["specialty_thermal"] = scripts\mp\perks\perkfunctions::setthermal;
+  level.perkunsetfuncs["specialty_thermal"] = scripts\mp\perks\perkfunctions::unsetthermal;
+  level.perksetfuncs["specialty_lightweight"] = scripts\mp\perks\perkfunctions::setlightweight;
+  level.perkunsetfuncs["specialty_lightweight"] = scripts\mp\perks\perkfunctions::unsetlightweight;
+  level.perksetfuncs["specialty_steelnerves"] = scripts\mp\perks\perkfunctions::setsteelnerves;
+  level.perkunsetfuncs["specialty_steelnerves"] = scripts\mp\perks\perkfunctions::unsetsteelnerves;
+  level.perksetfuncs["specialty_delaymine"] = scripts\mp\perks\perkfunctions::setdelaymine;
+  level.perkunsetfuncs["specialty_delaymine"] = scripts\mp\perks\perkfunctions::unsetdelaymine;
+  level.perksetfuncs["specialty_saboteur"] = scripts\mp\perks\perkfunctions::setsaboteur;
+  level.perkunsetfuncs["specialty_saboteur"] = scripts\mp\perks\perkfunctions::unsetsaboteur;
+  level.perksetfuncs["specialty_endgame"] = scripts\mp\perks\perkfunctions::setendgame;
+  level.perkunsetfuncs["specialty_endgame"] = scripts\mp\perks\perkfunctions::unsetendgame;
+  level.perksetfuncs["specialty_onemanarmy"] = scripts\mp\perks\perkfunctions::setonemanarmy;
+  level.perkunsetfuncs["specialty_onemanarmy"] = scripts\mp\perks\perkfunctions::unsetonemanarmy;
+  level.perksetfuncs["specialty_tacticalinsertion"] = scripts\mp\perks\perkfunctions::settacticalinsertion;
+  level.perkunsetfuncs["specialty_tacticalinsertion"] = scripts\mp\perks\perkfunctions::unsettacticalinsertion;
+  level.perksetfuncs["specialty_weaponlaser"] = scripts\mp\perks\perkfunctions::setweaponlaser;
+  level.perkunsetfuncs["specialty_weaponlaser"] = scripts\mp\perks\perkfunctions::unsetweaponlaser;
+  level.perksetfuncs["specialty_steadyaimpro"] = scripts\mp\perks\perkfunctions::setsteadyaimpro;
+  level.perkunsetfuncs["specialty_steadyaimpro"] = scripts\mp\perks\perkfunctions::unsetsteadyaimpro;
+  level.perksetfuncs["specialty_stun_resistance"] = scripts\mp\perks\perkfunctions::setstunresistance;
+  level.perkunsetfuncs["specialty_stun_resistance"] = scripts\mp\perks\perkfunctions::unsetstunresistance;
+  level.perksetfuncs["specialty_marksman"] = scripts\mp\perks\perkfunctions::setmarksman;
+  level.perkunsetfuncs["specialty_marksman"] = scripts\mp\perks\perkfunctions::unsetmarksman;
+  level.perksetfuncs["specialty_rshieldradar"] = scripts\mp\perks\perkfunctions::setrshieldradar;
+  level.perkunsetfuncs["specialty_rshieldradar"] = scripts\mp\perks\perkfunctions::func_12D1D;
+  level.perksetfuncs["specialty_rshieldscrambler"] = scripts\mp\perks\perkfunctions::setrshieldscrambler;
+  level.perkunsetfuncs["specialty_rshieldscrambler"] = scripts\mp\perks\perkfunctions::unsetrshieldscrambler;
+  level.perksetfuncs["specialty_double_load"] = scripts\mp\perks\perkfunctions::setdoubleload;
+  level.perkunsetfuncs["specialty_double_load"] = scripts\mp\perks\perkfunctions::unsetdoubleload;
+  level.perksetfuncs["specialty_sharp_focus"] = scripts\mp\perks\perkfunctions::setsharpfocus;
+  level.perkunsetfuncs["specialty_sharp_focus"] = scripts\mp\perks\perkfunctions::unsetsharpfocus;
+  level.perksetfuncs["specialty_hard_shell"] = scripts\mp\perks\perkfunctions::sethardshell;
+  level.perkunsetfuncs["specialty_hard_shell"] = scripts\mp\perks\perkfunctions::unsethardshell;
+  level.perksetfuncs["specialty_regenfaster"] = scripts\mp\perks\perkfunctions::setregenfaster;
+  level.perkunsetfuncs["specialty_regenfaster"] = scripts\mp\perks\perkfunctions::unsetregenfaster;
+  level.perksetfuncs["specialty_autospot"] = scripts\mp\perks\perkfunctions::setautospot;
+  level.perkunsetfuncs["specialty_autospot"] = scripts\mp\perks\perkfunctions::unsetautospot;
+  level.perksetfuncs["specialty_empimmune"] = scripts\mp\perks\perkfunctions::setempimmune;
+  level.perkunsetfuncs["specialty_empimmune"] = scripts\mp\perks\perkfunctions::unsetempimmune;
+  level.perksetfuncs["specialty_overkill_pro"] = scripts\mp\perks\perkfunctions::setoverridearchetype;
+  level.perkunsetfuncs["specialty_overkill_pro"] = scripts\mp\perks\perkfunctions::unsetoverridearchetype;
+  level.perksetfuncs["specialty_refill_grenades"] = scripts\mp\perks\perkfunctions::setrefillgrenades;
+  level.perkunsetfuncs["specialty_refill_grenades"] = scripts\mp\perks\perkfunctions::unsetrefillgrenades;
+  level.perksetfuncs["specialty_refill_ammo"] = scripts\mp\perks\perkfunctions::setrefillammo;
+  level.perkunsetfuncs["specialty_refill_ammo"] = scripts\mp\perks\perkfunctions::unsetrefillammo;
+  level.perksetfuncs["specialty_combat_speed"] = scripts\mp\perks\perkfunctions::setcombatspeed;
+  level.perkunsetfuncs["specialty_combat_speed"] = scripts\mp\perks\perkfunctions::unsetcombatspeed;
+  level.perksetfuncs["specialty_gambler"] = scripts\mp\perks\perkfunctions::func_F71F;
+  level.perkunsetfuncs["specialty_gambler"] = scripts\mp\perks\perkfunctions::func_12CC5;
+  level.perksetfuncs["specialty_comexp"] = scripts\mp\perks\perkfunctions::setcomexp;
+  level.perkunsetfuncs["specialty_comexp"] = scripts\mp\perks\perkfunctions::unsetcomexp;
+  level.perksetfuncs["specialty_gunsmith"] = scripts\mp\perks\perkfunctions::func_F737;
+  level.perkunsetfuncs["specialty_gunsmith"] = scripts\mp\perks\perkfunctions::func_12CCB;
+  level.perksetfuncs["specialty_tagger"] = scripts\mp\perks\perkfunctions::settagger;
+  level.perkunsetfuncs["specialty_tagger"] = scripts\mp\perks\perkfunctions::unsettagger;
+  level.perksetfuncs["specialty_pitcher"] = scripts\mp\perks\perkfunctions::setpitcher;
+  level.perkunsetfuncs["specialty_pitcher"] = scripts\mp\perks\perkfunctions::func_12D0C;
+  level.perksetfuncs["specialty_boom"] = scripts\mp\perks\perkfunctions::setboom;
+  level.perkunsetfuncs["specialty_boom"] = scripts\mp\perks\perkfunctions::unsetboom;
+  level.perksetfuncs["specialty_triggerhappy"] = scripts\mp\perks\perkfunctions::settriggerhappy;
+  level.perkunsetfuncs["specialty_triggerhappy"] = scripts\mp\perks\perkfunctions::unsettriggerhappy;
+  level.perksetfuncs["specialty_incog"] = scripts\mp\perks\perkfunctions::setincog;
+  level.perkunsetfuncs["specialty_incog"] = scripts\mp\perks\perkfunctions::unsetincog;
+  level.perksetfuncs["specialty_blindeye"] = scripts\mp\perks\perkfunctions::setblindeye;
+  level.perkunsetfuncs["specialty_blindeye"] = scripts\mp\perks\perkfunctions::unsetblindeye;
+  level.perksetfuncs["specialty_quickswap"] = scripts\mp\perks\perkfunctions::setquickswap;
+  level.perkunsetfuncs["specialty_quickswap"] = scripts\mp\perks\perkfunctions::unsetquickswap;
+  level.perksetfuncs["specialty_extraammo"] = scripts\mp\perks\perkfunctions::setextraammo;
+  level.perkunsetfuncs["specialty_extraammo"] = scripts\mp\perks\perkfunctions::unsetextraammo;
+  level.perksetfuncs["specialty_extra_equipment"] = scripts\mp\perks\perkfunctions::setextraequipment;
+  level.perkunsetfuncs["specialty_extra_equipment"] = scripts\mp\perks\perkfunctions::unsetextraequipment;
+  level.perksetfuncs["specialty_extra_deadly"] = scripts\mp\perks\perkfunctions::setextradeadly;
+  level.perkunsetfuncs["specialty_extra_deadly"] = scripts\mp\perks\perkfunctions::unsetextradeadly;
+  level.perksetfuncs["specialty_fastcrouch"] = scripts\mp\perks\perkfunctions::setfastcrouch;
+  level.perkunsetfuncs["specialty_fastcrouch"] = scripts\mp\perks\perkfunctions::unsetfastcrouch;
+  level.perksetfuncs["specialty_battleslide"] = scripts\mp\perks\perkfunctions::setbattleslide;
+  level.perkunsetfuncs["specialty_battleslide"] = scripts\mp\perks\perkfunctions::unsetbattleslide;
+  level.perksetfuncs["specialty_battleslide_shield"] = scripts\mp\perks\perkfunctions::setbattleslideshield;
+  level.perkunsetfuncs["specialty_battleslide_shield"] = scripts\mp\perks\perkfunctions::unsetbattleslideshield;
+  level.perksetfuncs["specialty_bullet_outline"] = scripts\mp\perks\perkfunctions::setbulletoutline;
+  level.perkunsetfuncs["specialty_bullet_outline"] = scripts\mp\perks\perkfunctions::unsetbulletoutline;
+  level.perksetfuncs["specialty_twoprimaries"] = scripts\mp\perks\perkfunctions::setoverkill;
+  level.perkunsetfuncs["specialty_twoprimaries"] = scripts\mp\perks\perkfunctions::unsetoverkill;
+  level.perksetfuncs["specialty_activereload"] = scripts\mp\perks\perkfunctions::setactivereload;
+  level.perkunsetfuncs["specialty_activereload"] = scripts\mp\perks\perkfunctions::unsetactivereload;
+  level.perksetfuncs["specialty_lifepack"] = scripts\mp\perks\perkfunctions::setlifepack;
+  level.perkunsetfuncs["specialty_lifepack"] = scripts\mp\perks\perkfunctions::unsetlifepack;
+  level.perksetfuncs["specialty_toughenup"] = scripts\mp\perks\perkfunctions::settoughenup;
+  level.perkunsetfuncs["specialty_toughenup"] = scripts\mp\perks\perkfunctions::unsettoughenup;
+  level.perksetfuncs["specialty_scoutping"] = scripts\mp\perks\perkfunctions::setscoutping;
+  level.perkunsetfuncs["specialty_scoutping"] = scripts\mp\perks\perkfunctions::unsetscoutping;
+  level.perksetfuncs["specialty_corpse_steal"] = scripts\mp\perks\perkfunctions::setphasespeed;
+  level.perkunsetfuncs["specialty_corpse_steal"] = scripts\mp\perks\perkfunctions::unsetcritchance;
+  level.perksetfuncs["specialty_phase_speed"] = scripts\mp\perks\perkfunctions::setphasespeed;
+  level.perkunsetfuncs["specialty_phase_speed"] = scripts\mp\perks\perkfunctions::unsetphasespeed;
+  level.perksetfuncs["specialty_dodge"] = scripts\mp\perks\perkfunctions::setdodge;
+  level.perkunsetfuncs["specialty_dodge"] = scripts\mp\perks\perkfunctions::unsetdodge;
+  level.perksetfuncs["specialty_extra_dodge"] = scripts\mp\perks\perkfunctions::setextradodge;
+  level.perkunsetfuncs["specialty_extra_dodge"] = scripts\mp\perks\perkfunctions::unsetextradodge;
+  level.perksetfuncs["specialty_ground_pound"] = scripts\mp\perks\perkfunctions::setgroundpound;
+  level.perkunsetfuncs["specialty_ground_pound"] = scripts\mp\perks\perkfunctions::unsetgroundpound;
+  level.perksetfuncs["specialty_ground_pound_shock"] = scripts\mp\perks\perkfunctions::setgroundpoundshock;
+  level.perkunsetfuncs["specialty_ground_pound_shock"] = scripts\mp\perks\perkfunctions::unsetgroundpoundshock;
+  level.perksetfuncs["specialty_ground_pound_shield"] = scripts\mp\perks\perkfunctions::setgroundpoundshield;
+  level.perkunsetfuncs["specialty_ground_pound_shield"] = scripts\mp\perks\perkfunctions::unsetgroundpoundshield;
+  level.perksetfuncs["specialty_thruster"] = scripts\mp\perks\perkfunctions::setthruster;
+  level.perkunsetfuncs["specialty_thruster"] = scripts\mp\perks\perkfunctions::unsetthruster;
+  level.perksetfuncs["specialty_phase_slide"] = scripts\mp\perks\perkfunctions::setphaseslide;
+  level.perkunsetfuncs["specialty_phase_slide"] = scripts\mp\perks\perkfunctions::unsetphaseslide;
+  level.perksetfuncs["specialty_tele_slide"] = scripts\mp\perks\perkfunctions::setteleslide;
+  level.perkunsetfuncs["specialty_tele_slide"] = scripts\mp\perks\perkfunctions::unsetteleslide;
+  level.perksetfuncs["specialty_phaseslash_rephase"] = scripts\mp\perks\perkfunctions::setphaseslashrephase;
+  level.perkunsetfuncs["specialty_phaseslash_rephase"] = scripts\mp\perks\perkfunctions::unsetphaseslashrephase;
+  level.perksetfuncs["specialty_phase_fall"] = scripts\mp\perks\perkfunctions::func_F7E0;
+  level.perkunsetfuncs["specialty_phase_fall"] = scripts\mp\perks\perkfunctions::func_12D05;
+  level.perksetfuncs["specialty_sixth_sense"] = scripts\mp\perks\perkfunctions::setsixthsense;
+  level.perkunsetfuncs["specialty_sixth_sense"] = scripts\mp\perks\perkfunctions::unsetsixthsense;
+  level.perksetfuncs["specialty_enchanced_sixth_sense"] = scripts\mp\perks\perkfunctions::func_F6E9;
+  level.perkunsetfuncs["specialty_enhanced_sixth_sense"] = scripts\mp\perks\perkfunctions::func_12CAD;
+  level.perksetfuncs["specialty_adrenaline"] = scripts\mp\perks\perkfunctions::func_F62F;
+  level.perkunsetfuncs["specialty_adrenaline"] = scripts\mp\perks\perkfunctions::func_12C68;
+  level.perksetfuncs["specialty_adrenaline_lite"] = scripts\mp\perks\perkfunctions::func_F630;
+  level.perkunsetfuncs["specialty_adrenaline_lite"] = scripts\mp\perks\perkfunctions::func_12C69;
+  level.perksetfuncs["specialty_extend_dodge"] = scripts\mp\perks\perkfunctions::func_F6F1;
+  level.perkunsetfuncs["specialty_extend_dodge"] = scripts\mp\perks\perkfunctions::func_12CB1;
+  level.perksetfuncs["specialty_aura_regen"] = scripts\mp\perks\perkfunctions::func_F64E;
+  level.perkunsetfuncs["specialty_aura_regen"] = scripts\mp\perks\perkfunctions::func_12C74;
+  level.perksetfuncs["specialty_aura_quickswap"] = scripts\mp\perks\perkfunctions::func_F64D;
+  level.perkunsetfuncs["specialty_aura_quickswap"] = scripts\mp\perks\perkfunctions::func_12C73;
+  level.perksetfuncs["specialty_aura_speed"] = scripts\mp\perks\perkfunctions::func_F64F;
+  level.perkunsetfuncs["specialty_aura_speed"] = scripts\mp\perks\perkfunctions::func_12C75;
+  level.perksetfuncs["specialty_mark_targets"] = scripts\mp\perks\perkfunctions::func_F790;
+  level.perkunsetfuncs["specialty_mark_targets"] = scripts\mp\perks\perkfunctions::func_12CED;
+  level.perksetfuncs["specialty_batterypack"] = scripts\mp\perks\perkfunctions::func_F65A;
+  level.perkunsetfuncs["specialty_batterypack"] = scripts\mp\perks\perkfunctions::func_12C7A;
+  level.perksetfuncs["specialty_camo_clone"] = scripts\mp\perks\perkfunctions::func_F67A;
+  level.perkunsetfuncs["specialty_camo_clone"] = scripts\mp\perks\perkfunctions::func_12C8B;
+  level.perksetfuncs["specialty_camo_elite"] = scripts\mp\perks\perkfunctions::setcamoelite;
+  level.perkunsetfuncs["specialty_camo_elite"] = scripts\mp\perks\perkfunctions::unsetcamoelite;
+  level.perksetfuncs["specialty_block_health_regen"] = scripts\mp\perks\perkfunctions::setblockhealthregen;
+  level.perkunsetfuncs["specialty_block_health_regen"] = scripts\mp\perks\perkfunctions::unsetblockhealthregen;
+  level.perksetfuncs["specialty_scorestreakpack"] = scripts\mp\perks\perkfunctions::setscorestreakpack;
+  level.perkunsetfuncs["specialty_scorestreakpack"] = scripts\mp\perks\perkfunctions::unsetscorestreakpack;
+  level.perksetfuncs["specialty_superpack"] = scripts\mp\perks\perkfunctions::setsuperpack;
+  level.perkunsetfuncs["specialty_superpack"] = scripts\mp\perks\perkfunctions::unsetsuperpack;
+  level.perksetfuncs["specialty_dodge_defense"] = scripts\mp\perks\perkfunctions::setdodgedefense;
+  level.perkunsetfuncs["specialty_dodge_defense"] = scripts\mp\perks\perkfunctions::unsetdodgedefense;
+  level.perksetfuncs["specialty_battleslide_offense"] = scripts\mp\perks\perkfunctions::setbattleslideoffense;
+  level.perkunsetfuncs["specialty_battleslide_offense"] = scripts\mp\perks\perkfunctions::unsetbattleslideoffense;
+  level.perksetfuncs["specialty_spawncloak"] = scripts\mp\perks\perkfunctions::setspawncloak;
+  level.perkunsetfuncs["specialty_spawncloak"] = scripts\mp\perks\perkfunctions::unsetspawncloak;
+  level.perksetfuncs["specialty_meleekill"] = scripts\mp\perks\perkfunctions::setmeleekill;
+  level.perkunsetfuncs["specialty_meleekill"] = scripts\mp\perks\perkfunctions::unsetmeleekill;
+  level.perksetfuncs["specialty_powercell"] = scripts\mp\perks\perkfunctions::setpowercell;
+  level.perkunsetfuncs["specialty_powercell"] = scripts\mp\perks\perkfunctions::unsetpowercell;
+  level.perksetfuncs["specialty_hardline"] = scripts\mp\perks\perkfunctions::sethardline;
+  level.perkunsetfuncs["specialty_hardline"] = scripts\mp\perks\perkfunctions::unsethardline;
+  level.perksetfuncs["specialty_hunter"] = scripts\mp\perks\perkfunctions::func_F74A;
+  level.perkunsetfuncs["specialty_hunter"] = scripts\mp\perks\perkfunctions::func_12CD3;
+  level.perksetfuncs["specialty_overclock"] = scripts\mp\perks\perkfunctions::func_F7CD;
+  level.perkunsetfuncs["specialty_overclock"] = scripts\mp\perks\perkfunctions::unsetoverclock;
+  level.perksetfuncs["specialty_tracker"] = scripts\mp\perks\perkfunctions::func_F894;
+  level.perkunsetfuncs["specialty_tracker"] = scripts\mp\perks\perkfunctions::func_12D4E;
+  level.perksetfuncs["specialty_personal_trophy"] = scripts\mp\perks\perkfunctions::func_F7DE;
+  level.perkunsetfuncs["specialty_personal_trophy"] = scripts\mp\perks\perkfunctions::func_12D04;
+  level.perksetfuncs["specialty_disruptor_punch"] = scripts\mp\perks\perkfunctions::func_F6CA;
+  level.perkunsetfuncs["specialty_disruptor_punch"] = scripts\mp\perks\perkfunctions::func_12CA3;
+  level.perksetfuncs["specialty_equipment_ping"] = scripts\mp\perks\perkfunctions::setequipmentping;
+  level.perkunsetfuncs["specialty_equipment_ping"] = scripts\mp\perks\perkfunctions::unsetequipmentping;
+  level.perksetfuncs["specialty_rugged_eqp"] = scripts\mp\perks\perkfunctions::setruggedeqp;
+  level.perkunsetfuncs["specialty_rugged_eqp"] = scripts\mp\perks\perkfunctions::unsetruggedeqp;
+  level.perksetfuncs["specialty_man_at_arms"] = scripts\mp\perks\perkfunctions::setmanatarms;
+  level.perkunsetfuncs["specialty_man_at_arms"] = scripts\mp\perks\perkfunctions::unsetmanatarms;
+  level.perksetfuncs["specialty_outlinekillstreaks"] = scripts\mp\perks\perkfunctions::func_F7CB;
+  level.perkunsetfuncs["specialty_outlinekillstreaks"] = scripts\mp\perks\perkfunctions::func_12CFC;
+  level.perksetfuncs["specialty_engineer"] = scripts\mp\perks\perkfunctions::setengineer;
+  level.perkunsetfuncs["specialty_engineer"] = scripts\mp\perks\perkfunctions::unsetengineer;
+  level.perksetfuncs["specialty_cloak"] = scripts\mp\perks\perkfunctions::setcloak;
+  level.perkunsetfuncs["specialty_cloak"] = scripts\mp\perks\perkfunctions::unsetcloak;
+  level.perksetfuncs["specialty_wall_lock"] = scripts\mp\perks\perkfunctions::setwalllock;
+  level.perkunsetfuncs["specialty_wall_lock"] = scripts\mp\perks\perkfunctions::unsetwalllock;
+  level.perksetfuncs["specialty_momentum"] = scripts\mp\perks\perkfunctions::setmomentum;
+  level.perkunsetfuncs["specialty_momentum"] = scripts\mp\perks\perkfunctions::unsetmomentum;
+  level.perksetfuncs["specialty_hover"] = scripts\mp\perks\perkfunctions::sethover;
+  level.perkunsetfuncs["specialty_hover"] = scripts\mp\perks\perkfunctions::unsethover;
+  level.perksetfuncs["specialty_rush"] = scripts\mp\perks\perkfunctions::setrush;
+  level.perkunsetfuncs["specialty_rush"] = scripts\mp\perks\perkfunctions::unsetrush;
+  level.perksetfuncs["specialty_scavenger_eqp"] = scripts\mp\perks\perkfunctions::setscavengereqp;
+  level.perkunsetfuncs["specialty_scavenger_eqp"] = scripts\mp\perks\perkfunctions::unsetscavengereqp;
+  level.perksetfuncs["specialty_spawnview"] = scripts\mp\perks\perkfunctions::setspawnview;
+  level.perkunsetfuncs["specialty_spawnview"] = scripts\mp\perks\perkfunctions::unsetspawnview;
+  level.perksetfuncs["specialty_headgear"] = scripts\mp\perks\perkfunctions::setheadgear;
+  level.perkunsetfuncs["specialty_headgear"] = scripts\mp\perks\perkfunctions::unsetheadgear;
+  level.perksetfuncs["specialty_ftlslide"] = scripts\mp\perks\perkfunctions::setftlslide;
+  level.perkunsetfuncs["specialty_ftlslide"] = scripts\mp\perks\perkfunctions::unsetftlslide;
+  level.perksetfuncs["specialty_improved_prone"] = scripts\mp\perks\perkfunctions::func_F753;
+  level.perkunsetfuncs["specialty_improved_prone"] = scripts\mp\perks\perkfunctions::func_12CD6;
+  level.perksetfuncs["specialty_ghost"] = scripts\mp\perks\perkfunctions::setghost;
+  level.perkunsetfuncs["specialty_ghost"] = scripts\mp\perks\perkfunctions::unsetghost;
+  level.perksetfuncs["specialty_support_killstreaks"] = scripts\mp\perks\perkfunctions::setsupportkillstreaks;
+  level.perkunsetfuncs["specialty_support_killstreaks"] = scripts\mp\perks\perkfunctions::unsetsupportkillstreaks;
+  level.perksetfuncs["specialty_overrideweaponspeed"] = scripts\mp\perks\perkfunctions::func_F7D2;
+  level.perkunsetfuncs["specialty_overrideweaponspeed"] = scripts\mp\perks\perkfunctions::unsetoverrideweaponspeed;
+  level.perksetfuncs["specialty_ballcarrier"] = scripts\mp\perks\perkfunctions::func_F657;
+  level.perkunsetfuncs["specialty_ballcarrier"] = scripts\mp\perks\perkfunctions::func_12C77;
+  level.perksetfuncs["specialty_cloak_aerial"] = scripts\mp\perks\perkfunctions::setcloakaerial;
+  level.perkunsetfuncs["specialty_cloak_aerial"] = scripts\mp\perks\perkfunctions::unsetcloakaerial;
+  level.perksetfuncs["specialty_spawn_radar"] = scripts\mp\perks\perkfunctions::setspawnradar;
+  level.perkunsetfuncs["specialty_spawn_radar"] = scripts\mp\perks\perkfunctions::unsetspawnradar;
+  level.perksetfuncs["specialty_improvedmelee"] = scripts\mp\perks\perkfunctions::setimprovedmelee;
+  level.perkunsetfuncs["specialty_improvedmelee"] = scripts\mp\perks\perkfunctions::unsetimprovedmelee;
+  level.perksetfuncs["specialty_thief"] = scripts\mp\perks\perkfunctions::setthief;
+  level.perkunsetfuncs["specialty_thief"] = scripts\mp\perks\perkfunctions::unsetthief;
+  level.perksetfuncs["specialty_ads_awareness"] = scripts\mp\perks\perkfunctions::setadsawareness;
+  level.perkunsetfuncs["specialty_ads_awareness"] = scripts\mp\perks\perkfunctions::unsetadsawareness;
+  level.perksetfuncs["specialty_rearguard"] = scripts\mp\perks\perkfunctions::setrearguard;
+  level.perkunsetfuncs["specialty_rearguard"] = scripts\mp\perks\perkfunctions::unsetrearguard;
+  level.perksetfuncs["specialty_combathigh"] = scripts\mp\perks\perkfunctions::setcombathigh;
+  level.perkunsetfuncs["specialty_combathigh"] = scripts\mp\perks\perkfunctions::unsetcombathigh;
+  level.perksetfuncs["specialty_light_armor"] = scripts\mp\perks\perkfunctions::setlightarmor;
+  level.perkunsetfuncs["specialty_light_armor"] = scripts\mp\perks\perkfunctions::unsetlightarmor;
+  level.perksetfuncs["specialty_revenge"] = scripts\mp\perks\perkfunctions::setrevenge;
+  level.perkunsetfuncs["specialty_revenge"] = scripts\mp\perks\perkfunctions::unsetrevenge;
+  level.perksetfuncs["specialty_c4death"] = scripts\mp\perks\perkfunctions::func_F678;
+  level.perkunsetfuncs["specialty_c4death"] = scripts\mp\perks\perkfunctions::func_12C8A;
+  level.perksetfuncs["specialty_finalstand"] = scripts\mp\perks\perkfunctions::func_F704;
+  level.perkunsetfuncs["specialty_finalstand"] = scripts\mp\perks\perkfunctions::func_12CBD;
+  level.perksetfuncs["specialty_juiced"] = scripts\mp\perks\perkfunctions::setjuiced;
+  level.perkunsetfuncs["specialty_juiced"] = scripts\mp\perks\perkfunctions::unsetjuiced;
+  level.perksetfuncs["specialty_carepackage"] = scripts\mp\perks\perkfunctions::setcarepackage;
+  level.perkunsetfuncs["specialty_carepackage"] = scripts\mp\perks\perkfunctions::unsetcarepackage;
+  level.perksetfuncs["specialty_stopping_power"] = scripts\mp\perks\perkfunctions::func_F864;
+  level.perkunsetfuncs["specialty_stopping_power"] = scripts\mp\perks\perkfunctions::func_12D3A;
+  level.perksetfuncs["specialty_uav"] = scripts\mp\perks\perkfunctions::setuav;
+  level.perkunsetfuncs["specialty_uav"] = scripts\mp\perks\perkfunctions::unsetuav;
+  level.perksetfuncs["specialty_viewkickoverride"] = scripts\mp\perks\perkfunctions::setviewkickoverride;
+  level.perkunsetfuncs["specialty_viewkickoverride"] = scripts\mp\perks\perkfunctions::unsetviewkickoverride;
+  level.perksetfuncs["specialty_affinityspeedboost"] = scripts\mp\perks\perkfunctions::setaffinityspeedboost;
+  level.perkunsetfuncs["specialty_affinityspeedboost"] = scripts\mp\perks\perkfunctions::unsetaffinityspeedboost;
+  level.perksetfuncs["specialty_affinityextralauncher"] = scripts\mp\perks\perkfunctions::setaffinityextralauncher;
+  level.perkunsetfuncs["specialty_affinityextralauncher"] = scripts\mp\perks\perkfunctions::unsetaffinityextralauncher;
+  level.perksetfuncs["passive_minimap_decoys"] = scripts\mp\perks\weaponpassives::func_F79A;
+  level.perkunsetfuncs["passive_minimap_decoys"] = scripts\mp\perks\weaponpassives::func_12CF0;
+  level.perksetfuncs["passive_headshot_ammo"] = scripts\mp\perks\weaponpassives::func_F73F;
+  level.perkunsetfuncs["passive_headshot_ammo"] = scripts\mp\perks\weaponpassives::func_12CCE;
+  level.perksetfuncs["passive_scrambler"] = scripts\mp\perks\weaponpassives::func_F82F;
+  level.perkunsetfuncs["passive_scrambler"] = scripts\mp\perks\weaponpassives::func_12D27;
+  level.perksetfuncs["passive_last_shots_ammo"] = scripts\mp\perks\weaponpassives::func_F77D;
+  level.perkunsetfuncs["passive_last_shots_ammo"] = scripts\mp\perks\weaponpassives::unsetkineticwave;
+  level.perksetfuncs["passive_health_on_kill"] = scripts\mp\perks\weaponpassives::func_F740;
+  level.perkunsetfuncs["passive_health_on_kill"] = scripts\mp\perks\weaponpassives::func_12CCF;
+  level.perksetfuncs["passive_double_kill_reload"] = scripts\mp\perks\weaponpassives::func_F6D6;
+  level.perkunsetfuncs["passive_double_kill_reload"] = scripts\mp\perks\weaponpassives::func_12CA7;
+  level.perksetfuncs["passive_explosive_kills"] = scripts\mp\perks\weaponpassives::func_F6F0;
+  level.perkunsetfuncs["passive_explosive_kills"] = scripts\mp\perks\weaponpassives::func_12CB0;
+  level.perksetfuncs["passive_miss_refund"] = scripts\mp\perks\weaponpassives::func_F79B;
+  level.perkunsetfuncs["passive_miss_refund"] = scripts\mp\perks\weaponpassives::func_12CF1;
+  level.perksetfuncs["passive_move_speed"] = scripts\mp\perks\weaponpassives::func_F7AA;
+  level.perkunsetfuncs["passive_move_speed"] = scripts\mp\perks\weaponpassives::func_12CF5;
+  level.perksetfuncs["passive_fast_rechamber_move_speed"] = scripts\mp\perks\weaponpassives::setrechambermovespeedpassive;
+  level.perkunsetfuncs["passive_fast_rechamber_move_speed"] = scripts\mp\perks\weaponpassives::unsetrechambermovespeedpassive;
+  level.perksetfuncs["passive_extra_xp"] = scripts\mp\perks\weaponpassives::func_F6FD;
+  level.perkunsetfuncs["passive_extra_xp"] = scripts\mp\perks\weaponpassives::func_12CBA;
+  level.perksetfuncs["passive_nuke"] = scripts\mp\perks\weaponpassives::func_F7BD;
+  level.perkunsetfuncs["passive_nuke"] = scripts\mp\perks\weaponpassives::func_12CF8;
+  level.perksetfuncs["passive_berserk"] = scripts\mp\perks\weaponpassives::setquadfeederpassive;
+  level.perkunsetfuncs["passive_berserk "] = scripts\mp\perks\weaponpassives::unsetquadfeederpassive;
+  level.perksetfuncs["passive_streak_ammo"] = scripts\mp\perks\weaponpassives::func_F865;
+  level.perkunsetfuncs["passive_streak_ammo"] = scripts\mp\perks\weaponpassives::func_12D3B;
+  level.perksetfuncs["passive_score_bonus_kills"] = scripts\mp\perks\weaponpassives::func_F82A;
+  level.perkunsetfuncs["passive_score_bonus_kills"] = scripts\mp\perks\weaponpassives::func_12D23;
+  level.perksetfuncs["passive_score_bonus_objectives"] = scripts\mp\perks\weaponpassives::func_F82B;
+  level.perkunsetfuncs["passive_score_bonus_objectives"] = scripts\mp\perks\weaponpassives::func_12D24;
+  level.perksetfuncs["passive_hivemind"] = scripts\mp\perks\weaponpassives::func_F746;
+  level.perkunsetfuncs["passive_hivemind"] = scripts\mp\perks\weaponpassives::func_12CD1;
+  level.perksetfuncs["passive_scoutping"] = scripts\mp\perks\perkfunctions::setscoutping;
+  level.perkunsetfuncs["passive_scoutping"] = scripts\mp\perks\perkfunctions::unsetscoutping;
+  level.perksetfuncs["passive_hunter_killer"] = scripts\mp\perks\weaponpassives::func_F74B;
+  level.perkunsetfuncs["passive_hunter_killer"] = scripts\mp\perks\weaponpassives::func_12CD4;
+  level.perkunsetfuncs["passive_double_kill_super"] = scripts\mp\perks\weaponpassives::unsetdoublekillsuperpassive;
+  level.perksetfuncs["passive_wallrun_quieter"] = scripts\mp\perks\weaponpassives::setwallrunquieterpassive;
+  level.perkunsetfuncs["passive_wallrun_quieter"] = scripts\mp\perks\weaponpassives::unsetwallrunquieterpassive;
+  level.perksetfuncs["passive_slide_blastshield"] = scripts\mp\perks\weaponpassives::setslideblastshield;
+  level.perkunsetfuncs["passive_slide_blastshield"] = scripts\mp\perks\weaponpassives::unsetslideblastshield;
+  level.perksetfuncs["passive_prone_blindeye"] = scripts\mp\perks\weaponpassives::setproneblindeye;
+  level.perkunsetfuncs["passive_prone_blindeye"] = scripts\mp\perks\weaponpassives::unsetproneblindeye;
+  level.perksetfuncs["passive_stationary_engineer"] = scripts\mp\perks\weaponpassives::setstationaryengineer;
+  level.perkunsetfuncs["passive_stationary_engineer"] = scripts\mp\perks\weaponpassives::unsetstationaryengineer;
+  level.perksetfuncs["passive_doppleganger"] = scripts\mp\perks\weaponpassives::setdoppleganger;
+  level.perkunsetfuncs["passive_doppleganger"] = scripts\mp\perks\weaponpassives::unsetdoppleganger;
+  level.perksetfuncs["passive_collat_streak"] = scripts\mp\perks\weaponpassives::setcollatstreak;
+  level.perkunsetfuncs["passive_collat_streak"] = scripts\mp\perks\weaponpassives::unsetcollatstreak;
+  level.extraperkmap["specialty_coldblooded"] = ["specialty_spygame", "specialty_heartbreaker", "specialty_radarringresist"];
+  level.extraperkmap["specialty_blindeye"] = ["specialty_noplayertarget"];
+  level.extraperkmap["specialty_quickswap"] = ["specialty_fastoffhand"];
+  level.extraperkmap["specialty_improvedgunkick"] = ["specialty_reducedsway"];
+  level.extraperkmap["specialty_dexterity"] = ["specialty_fastreload", "specialty_quickswap"];
+  level.extraperkmap["specialty_engineer"] = ["specialty_detectexplosive", "specialty_delaymine", "specialty_outlinekillstreaks", "specialty_drawenemyturrets"];
+  level.extraperkmap["specialty_empimmune"] = ["specialty_tracker_jammer", "specialty_noscopeoutline"];
+  level.extraperkmap["specialty_afterburner"] = ["specialty_thruster"];
+  level.extraperkmap["specialty_man_at_arms"] = ["specialty_extraammo", "specialty_overrideweaponspeed"];
+  level.extraperkmap["specialty_phaseslash"] = ["specialty_phaseslash_rephase"];
+  level.extraperkmap["specialty_ghost"] = ["specialty_gpsjammer"];
+  level.extraperkmap["specialty_equipment_ping"] = ["specialty_paint"];
+  level.extraperkmap["specialty_blast_suppressor"] = ["specialty_silentdoublejump", "specialty_silentdoublejump_audio"];
+  level.extraperkmap["specialty_quieter"] = ["specialty_silentdoublejump_audio"];
+  level.extraperkmap["specialty_improvedmelee"] = ["specialty_extendedmelee", "specialty_fastermelee", "specialty_thief"];
+  level.extraperkmap["specialty_marksman"] = ["specialty_viewkickoverride"];
+  level.extraperkmap["specialty_tracker"] = ["specialty_selectivehearing", "specialty_tracker_pro"];
+  level.extraperkmap["specialty_sprintfire"] = ["specialty_fastsprintrecovery"];
+  func_98B0();
+  menurigperkparsetable();
+  menuperkparsetable();
+  func_98B2();
+  level thread onplayerconnect();
 }
 
-_id_B675() {
-  if (!isdefined(level._id_B676))
-  level._id_B676 = [];
+menurigperkparsetable() {
+  if (!isdefined(level.menurigperks))
+  level.menurigperks = [];
 
-  var_0 = 0;
+  var_00 = 0;
 
   for (;;) {
-  var_1 = tablelookupbyrow("mp/menuRigPerks.csv", var_0, 0);
+  var_01 = tablelookupbyrow("mp/menuRigPerks.csv", var_00, 0);
 
-  if (var_1 == "")
+  if (var_01 == "")
   break;
 
-  var_2 = tablelookupbyrow("mp/menuRigPerks.csv", var_0, 1);
-  var_3 = tablelookupbyrow("mp/menuRigPerks.csv", var_0, 2);
-  var_4 = spawnstruct();
-  var_4._id_92B8 = var_1;
-  var_4._id_DE3F = var_3;
-  var_4._id_2123 = var_2;
+  var_02 = tablelookupbyrow("mp/menuRigPerks.csv", var_00, 1);
+  var_03 = tablelookupbyrow("mp/menuRigPerks.csv", var_00, 2);
+  var_04 = spawnstruct();
+  var_4.id = var_01;
+  var_4.ref = var_03;
+  var_4.archetype = var_02;
 
-  if (!isdefined(level._id_B676[var_3]))
-  level._id_B676[var_3] = var_4;
+  if (!isdefined(level.menurigperks[var_03]))
+  level.menurigperks[var_03] = var_04;
 
   var_0++;
   }
 }
 
-_id_B673() {
-  if (!isdefined(level._id_B674))
-  level._id_B674 = [];
+menuperkparsetable() {
+  if (!isdefined(level.menuperks))
+  level.menuperks = [];
 
-  var_0 = 0;
+  var_00 = 0;
 
   for (;;) {
-  var_1 = tablelookupbyrow("mp/menuPerks.csv", var_0, 0);
+  var_01 = tablelookupbyrow("mp/menuPerks.csv", var_00, 0);
 
-  if (var_1 == "")
+  if (var_01 == "")
   break;
 
-  var_2 = tablelookupbyrow("mp/menuPerks.csv", var_0, 1);
-  var_3 = tablelookupbyrow("mp/menuPerks.csv", var_0, 2);
-  var_4 = spawnstruct();
-  var_4.name = var_3;
-  var_4._id_DE3F = var_3;
-  var_4._id_10307 = var_2;
+  var_02 = tablelookupbyrow("mp/menuPerks.csv", var_00, 1);
+  var_03 = tablelookupbyrow("mp/menuPerks.csv", var_00, 2);
+  var_04 = spawnstruct();
+  var_4.name = var_03;
+  var_4.ref = var_03;
+  var_4.slot = var_02;
 
-  if (!isdefined(level._id_B674[var_3]))
-  level._id_B674[var_3] = var_4;
+  if (!isdefined(level.menuperks[var_03]))
+  level.menuperks[var_03] = var_04;
 
   var_0++;
   }
 }
 
-_id_98B2() {
-  if (!isdefined(level._id_CA63))
-  level._id_CA63 = [];
+func_98B2() {
+  if (!isdefined(level.perksuseslot))
+  level.perksuseslot = [];
 
-  level._id_CA5E = [];
-  var_0 = 0;
+  level.func_CA5E = [];
+  var_00 = 0;
 
   for (;;) {
-  var_1 = tablelookupbyrow("mp/perkTable.csv", var_0, 0);
+  var_01 = tablelookupbyrow("mp/perkTable.csv", var_00, 0);
 
-  if (var_1 == "")
+  if (var_01 == "")
   break;
 
-  var_2 = tablelookupbyrow("mp/perkTable.csv", var_0, 1);
-  var_3 = spawnstruct();
-  var_3._id_DE3F = var_2;
-  var_3._id_92B8 = int(var_1);
+  var_02 = tablelookupbyrow("mp/perkTable.csv", var_00, 1);
+  var_03 = spawnstruct();
+  var_3.ref = var_02;
+  var_3.id = int(var_01);
 
-  if (!isdefined(level._id_CA63[var_2]))
-  level._id_CA63[var_2] = var_3;
+  if (!isdefined(level.perksuseslot[var_02]))
+  level.perksuseslot[var_02] = var_03;
 
-  level._id_CA5E[var_3._id_92B8] = var_3._id_DE3F;
+  level.func_CA5E[var_3.id] = var_3.ref;
   var_0++;
   }
 }
 
-_id_7DE8() {
-  var_0 = [];
+func_7DE8() {
+  var_00 = [];
 
-  foreach (var_2 in level._id_B674) {
-  if (scripts\mp\utility\game::_id_12D6(var_2.name))
+  foreach (var_02 in level.menuperks) {
+  if (scripts\mp\utility\game::_hasperk(var_2.name))
   continue;
 
   var_0[var_0.size] = var_2.name;
   }
 
-  return var_0;
+  return var_00;
 }
 
-_id_805C(var_0) {
-  var_1 = level._id_B674[var_0];
+_meth_805C(var_00) {
+  var_01 = level.menuperks[var_00];
 
-  if (!isdefined(var_1))
+  if (!isdefined(var_01))
   return undefined;
 
-  return int(var_1._id_10307);
+  return int(var_1.slot);
 }
 
-_id_13144(var_0) {
-  if (!scripts\mp\utility\game::_id_CA5F())
-  var_0 = "specialty_null";
+func_13144(var_00) {
+  if (!scripts\mp\utility\game::perksenabled())
+  var_00 = "specialty_null";
   else
   {
-  switch (var_0) {
+  switch (var_00) {
   case "specialty_deadeye":
   case "specialty_scavenger":
   case "specialty_bulletaccuracy":
@@ -666,166 +666,166 @@ _id_13144(var_0) {
   case "specialty_hardline":
   break;
   default:
-  var_0 = "specialty_null";
+  var_00 = "specialty_null";
   break;
   }
   }
 
-  return var_0;
+  return var_00;
 }
 
-_id_C56E() {
+onplayerconnect() {
   for (;;) {
-  level waittill("connected", var_0);
-  var_0 thread onplayerspawned();
+  level waittill("connected", var_00);
+  var_00 thread onplayerspawned();
   }
 }
 
 onplayerspawned() {
   self endon("disconnect");
-  self._id_CA5B = [];
-  self._id_CA5D = [];
-  self._id_11B2C = undefined;
-  self._id_13CA0 = [];
-  self._id_C47E = 0;
+  self.perks = [];
+  self.perksblocked = [];
+  self.trait = undefined;
+  self.weaponlist = [];
+  self.func_C47E = 0;
 
   for (;;) {
   self waittill("spawned_player");
-  self._id_C47E = 0;
-  thread scripts\mp\killstreaks\portableaoegenerator::_id_7737();
+  self.func_C47E = 0;
+  thread scripts\mp\killstreaks\portableaoegenerator::func_7737();
   }
 }
 
-_id_98B0() {
-  level._id_8488 = 0.08;
-  level._id_A4A7 = 0.08;
-  level._id_A4A6 = 0.08;
-  level._id_218B = 1.5;
+func_98B0() {
+  level.allowgroundpound = 0.08;
+  level.func_A4A7 = 0.08;
+  level.func_A4A6 = 0.08;
+  level.armorpiercingmod = 1.5;
   level.armorpiercingmodks = 1.25;
-  level._id_DE8A = scripts\mp\utility\game::_id_7F1D("perk_fastRegenWaitMS", 800) / 1000;
-  level._id_DE89 = scripts\mp\utility\game::_id_7F1D("perk_fastRegenRate", 2);
-  level._id_3245 = scripts\mp\utility\game::_id_7F1D("perk_bulletDamage", 40) / 100;
-  level._id_69FE = scripts\mp\utility\game::_id_7F1D("perk_explosiveDamage", 40) / 100;
-  level._id_2B68 = scripts\mp\utility\game::_id_7F1D("perk_blastShieldScale", 65) / 100;
-  level._id_2B67 = scripts\mp\utility\game::_id_7F1D("perk_blastShieldClampHP", 80);
-  level._id_1177E = scripts\mp\utility\game::_id_7F1D("weap_thermoDebuffMod", 185) / 100;
-  level._id_E559 = scripts\mp\utility\game::_id_7F1D("perk_riotShield", 100) / 100;
-  level._id_21A3 = scripts\mp\utility\game::_id_7F1D("perk_armorVest", 75) / 100;
-  level._id_8C74 = scripts\mp\utility\game::_id_7F1D("perk_headgear", 55) / 100;
-  level._id_848A = scripts\mp\utility\game::_id_7F1D("perk_gpsjammer_graceperiods", 4);
-  level._id_B7CB = scripts\mp\utility\game::_id_7F1D("perk_gpsjammer_min_speed", 100);
-  level._id_B75C = scripts\mp\utility\game::_id_7F1D("perk_gpsjammer_min_distance", 10);
-  level._id_1190C = scripts\mp\utility\game::_id_7F1D("perk_gpsjammer_time_period", 200) / 1000;
-  level._id_B7CC = level._id_B7CB * level._id_B7CB;
-  level._id_B75E = level._id_B75C * level._id_B75C;
+  level.func_DE8A = scripts\mp\utility\game::getintproperty("perk_fastRegenWaitMS", 800) / 1000;
+  level.func_DE89 = scripts\mp\utility\game::getintproperty("perk_fastRegenRate", 2);
+  level.func_3245 = scripts\mp\utility\game::getintproperty("perk_bulletDamage", 40) / 100;
+  level.func_69FE = scripts\mp\utility\game::getintproperty("perk_explosiveDamage", 40) / 100;
+  level.func_2B68 = scripts\mp\utility\game::getintproperty("perk_blastShieldScale", 65) / 100;
+  level.func_2B67 = scripts\mp\utility\game::getintproperty("perk_blastShieldClampHP", 80);
+  level.func_1177E = scripts\mp\utility\game::getintproperty("weap_thermoDebuffMod", 185) / 100;
+  level.func_E559 = scripts\mp\utility\game::getintproperty("perk_riotShield", 100) / 100;
+  level.func_21A3 = scripts\mp\utility\game::getintproperty("perk_armorVest", 75) / 100;
+  level.func_8C74 = scripts\mp\utility\game::getintproperty("perk_headgear", 55) / 100;
+  level._meth_848A = scripts\mp\utility\game::getintproperty("perk_gpsjammer_graceperiods", 4);
+  level.func_B7CB = scripts\mp\utility\game::getintproperty("perk_gpsjammer_min_speed", 100);
+  level.func_B75C = scripts\mp\utility\game::getintproperty("perk_gpsjammer_min_distance", 10);
+  level.timeperiod = scripts\mp\utility\game::getintproperty("perk_gpsjammer_time_period", 200) / 1000;
+  level.minspeedsq = level.func_B7CB * level.func_B7CB;
+  level.func_B75E = level.func_B75C * level.func_B75C;
 
-  if (isdefined(level._id_8B38) && level._id_8B38) {
-  level._id_2B68 = scripts\mp\utility\game::_id_7F1D("perk_blastShieldScale_HC", 20) / 100;
-  level._id_2B67 = scripts\mp\utility\game::_id_7F1D("perk_blastShieldClampHP_HC", 20);
+  if (isdefined(level.hardcoremode) && level.hardcoremode) {
+  level.func_2B68 = scripts\mp\utility\game::getintproperty("perk_blastShieldScale_HC", 20) / 100;
+  level.func_2B67 = scripts\mp\utility\game::getintproperty("perk_blastShieldClampHP_HC", 20);
   }
 
   if (level.tactical) {
-  level._id_2B68 = 0.65;
-  level._id_2B67 = 50;
+  level.func_2B68 = 0.65;
+  level.func_2B67 = 50;
   }
 }
 
-_id_838A(var_0, var_1) {
-  var_1 = scripts\engine\utility::ter_op(isdefined(var_1), var_1, 1);
+giveperks(var_00, var_01) {
+  var_01 = scripts\engine\utility::ter_op(isdefined(var_01), var_01, 1);
 
-  foreach (var_3 in var_0) {
-  if (var_1)
-  var_3 = _id_13144(var_3);
+  foreach (var_03 in var_00) {
+  if (var_01)
+  var_03 = func_13144(var_03);
 
-  scripts\mp\utility\game::giveperk(var_3);
+  scripts\mp\utility\game::giveperk(var_03);
   }
 }
 
-_id_13D1(var_0) {
-  if (!isdefined(self._id_CA5B[var_0]))
-  self._id_CA5B[var_0] = 1;
+_setperk(var_00) {
+  if (!isdefined(self.perks[var_00]))
+  self.perks[var_00] = 1;
   else
-  self._id_CA5B[var_0]++;
+  self.perks[var_00]++;
 
-  if (self._id_CA5B[var_0] == 1 && !isdefined(self._id_CA5D[var_0]))
-  _id_13D2(var_0);
+  if (self.perks[var_00] == 1 && !isdefined(self.perksblocked[var_00]))
+  func_13D2(var_00);
 }
 
-_id_13D2(var_0) {
-  var_1 = level._id_CA60[var_0];
+func_13D2(var_00) {
+  var_01 = level.perksetfuncs[var_00];
 
-  if (isdefined(var_1))
-  self thread [[var_1]]();
+  if (isdefined(var_01))
+  self thread [[var_01]]();
 
-  self _meth_8320(var_0, !isdefined(level._id_EF86[var_0]));
+  self setperk(var_00, !isdefined(level.scriptperks[var_00]));
 }
 
-_id_13CC(var_0) {
-  foreach (var_6, var_2 in level._id_6A50) {
-  if (var_0 == var_6) {
-  foreach (var_4 in var_2)
-  _id_13D1(var_4);
+_setextraperks(var_00) {
+  foreach (var_06, var_02 in level.extraperkmap) {
+  if (var_00 == var_06) {
+  foreach (var_04 in var_02)
+  _setperk(var_04);
 
   break;
   }
   }
 }
 
-_id_142F(var_0) {
-  foreach (var_6, var_2 in level._id_6A50) {
-  if (var_0 == var_6) {
-  foreach (var_4 in var_2)
-  _id_1430(var_4);
+func_142F(var_00) {
+  foreach (var_06, var_02 in level.extraperkmap) {
+  if (var_00 == var_06) {
+  foreach (var_04 in var_02)
+  _unsetperk(var_04);
 
   break;
   }
   }
 }
 
-_id_1430(var_0) {
-  if (!isdefined(self._id_CA5B[var_0]))
+_unsetperk(var_00) {
+  if (!isdefined(self.perks[var_00]))
   return;
 
-  self._id_CA5B[var_0]--;
+  self.perks[var_00]--;
 
-  if (self._id_CA5B[var_0] == 0) {
-  if (!isdefined(self._id_CA5D[var_0]))
-  _id_1431(var_0);
+  if (self.perks[var_00] == 0) {
+  if (!isdefined(self.perksblocked[var_00]))
+  func_1431(var_00);
 
-  self._id_CA5B[var_0] = undefined;
+  self.perks[var_00] = undefined;
   }
 }
 
-_id_1431(var_0) {
-  if (isdefined(level._id_CA66[var_0]))
-  self thread [[level._id_CA66[var_0]]]();
+func_1431(var_00) {
+  if (isdefined(level.perkunsetfuncs[var_00]))
+  self thread [[level.perkunsetfuncs[var_00]]]();
 
-  self _meth_83CC(var_0, !isdefined(level._id_EF86[var_0]));
+  self unsetperk(var_00, !isdefined(level.scriptperks[var_00]));
 }
 
-_id_11AA() {
-  foreach (var_2, var_1 in self._id_CA5B) {
-  if (isdefined(level._id_CA66[var_2]))
-  self [[level._id_CA66[var_2]]]();
+_clearperks() {
+  foreach (var_02, var_01 in self.perks) {
+  if (isdefined(level.perkunsetfuncs[var_02]))
+  self [[level.perkunsetfuncs[var_02]]]();
   }
 
-  self._id_CA5B = [];
-  self._id_CA5D = [];
-  self _meth_8077();
+  self.perks = [];
+  self.perksblocked = [];
+  self getplayerlookattarget();
 }
 
-_id_E130(var_0) {
-  var_1 = [];
+func_E130(var_00) {
+  var_01 = [];
 
-  foreach (var_3 in var_0) {
-  if (_id_13144(var_3) != "specialty_null")
-  var_1[var_1.size] = var_3;
+  foreach (var_03 in var_00) {
+  if (func_13144(var_03) != "specialty_null")
+  var_1[var_1.size] = var_03;
   }
 
-  return var_1;
+  return var_01;
 }
 
-_id_838B() {
+giveperksafterspawn() {
   self endon("death");
   self endon("disconnect");
   self endon("giveLoadout_start");
@@ -833,77 +833,77 @@ _id_838B() {
   scripts\mp\utility\game::giveperk("specialty_gpsjammer");
   scripts\mp\utility\game::giveperk("specialty_noscopeoutline");
 
-  while (self._id_26B9 > 0) {
-  self._id_26B9 = self._id_26B9 - 0.05;
+  while (self.avoidkillstreakonspawntimer > 0) {
+  self.avoidkillstreakonspawntimer = self.avoidkillstreakonspawntimer - 0.05;
   wait 0.05;
   }
 
-  if (scripts\mp\utility\game::_id_9EF0(self) && isdefined(self._id_D3E7) && isalive(self._id_D3E7))
+  if (scripts\mp\utility\game::func_9EF0(self) && isdefined(self.playerproxyagent) && isalive(self.playerproxyagent))
   return;
   else
   {
-  scripts\mp\utility\game::_id_E150("specialty_blindeye");
-  scripts\mp\utility\game::_id_E150("specialty_gpsjammer");
-  scripts\mp\utility\game::_id_E150("specialty_noscopeoutline");
+  scripts\mp\utility\game::removeperk("specialty_blindeye");
+  scripts\mp\utility\game::removeperk("specialty_gpsjammer");
+  scripts\mp\utility\game::removeperk("specialty_noscopeoutline");
   self notify("removed_spawn_perks");
   }
 }
 
-updateactiveperks(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
-  var_8 = isdefined(var_0) && isplayer(var_0);
-  var_9 = scripts\mp\utility\game::_id_8234(var_5);
-  var_10 = isdefined(var_9) && var_9 == "iw7_axe";
-  var_11 = var_10 && isdefined(var_0) && isdefined(var_0.classname) && var_0.classname == "grenade";
-  var_12 = isdefined(var_1) && isplayer(var_1) && var_1 != var_2;
+updateactiveperks(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07) {
+  var_08 = isdefined(var_00) && isplayer(var_00);
+  var_09 = scripts\mp\utility\game::getweaponrootname(var_05);
+  var_10 = isdefined(var_09) && var_09 == "iw7_axe";
+  var_11 = var_10 && isdefined(var_00) && isdefined(var_0.classname) && var_0.classname == "grenade";
+  var_12 = isdefined(var_01) && isplayer(var_01) && var_01 != var_02;
 
-  if (var_12 && (var_8 || var_11)) {
-  thread scripts\mp\perks\weaponpassives::_id_12F61(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7);
+  if (var_12 && (var_08 || var_11)) {
+  thread scripts\mp\perks\weaponpassives::func_12F61(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07);
 
-  if (var_1 scripts\mp\utility\game::_id_12D6("specialty_triggerhappy"))
-  var_1 thread scripts\mp\perks\perkfunctions::_id_F898();
+  if (var_01 scripts\mp\utility\game::_hasperk("specialty_triggerhappy"))
+  var_01 thread scripts\mp\perks\perkfunctions::settriggerhappyinternal();
 
-  if (var_1 scripts\mp\utility\game::_id_12D6("specialty_boom"))
-  var_2 thread scripts\mp\perks\perkfunctions::_id_F671(var_1);
+  if (var_01 scripts\mp\utility\game::_hasperk("specialty_boom"))
+  var_02 thread scripts\mp\perks\perkfunctions::setboominternal(var_01);
 
-  if (var_1 scripts\mp\utility\game::_id_12D6("specialty_deadeye"))
-  var_1._id_4DF0++;
+  if (var_01 scripts\mp\utility\game::_hasperk("specialty_deadeye"))
+  var_1.func_4DF0++;
 
   var_13 = var_1.pers["abilityRecharging"];
 
   if (isdefined(var_13) && var_13)
-  var_1 notify("abilityFastRecharge");
+  var_01 notify("abilityFastRecharge");
 
   var_14 = var_1.pers["abilityOn"];
 
   if (isdefined(var_14) && var_14)
-  var_1 notify("abilityExtraTime");
+  var_01 notify("abilityExtraTime");
   }
 }
 
-_id_F7C5(var_0, var_1) {
-  var_2 = [];
+func_F7C5(var_00, var_01) {
+  var_02 = [];
 
-  foreach (var_4 in var_1) {
-  if (!isdefined(level._id_CA63[var_4]))
+  foreach (var_04 in var_01) {
+  if (!isdefined(level.perksuseslot[var_04]))
   continue;
 
-  var_5 = _id_805C(var_4);
+  var_05 = _meth_805C(var_04);
 
-  if (!isdefined(var_5))
+  if (!isdefined(var_05))
   continue;
 
-  if (!isdefined(var_2[var_5]))
-  var_2[var_5] = [];
+  if (!isdefined(var_2[var_05]))
+  var_2[var_05] = [];
 
-  var_2[var_5][var_2[var_5].size] = level._id_CA63[var_4]._id_92B8;
+  var_2[var_05][var_2[var_05].size] = level.perksuseslot[var_04].id;
   }
 
-  var_7 = [];
+  var_07 = [];
 
-  for (var_5 = 1; var_5 < 4; var_5++) {
-  if (isdefined(var_2[var_5])) {
-  foreach (var_4 in var_2[var_5])
-  var_7[var_7.size] = var_4;
+  for (var_05 = 1; var_05 < 4; var_5++) {
+  if (isdefined(var_2[var_05])) {
+  foreach (var_04 in var_2[var_05])
+  var_7[var_7.size] = var_04;
   }
   }
 
@@ -913,24 +913,24 @@ _id_F7C5(var_0, var_1) {
   if (!isdefined(var_11))
   var_11 = -1;
 
-  self setclientomnvar(var_0 + var_10, var_11);
+  self setclientomnvar(var_00 + var_10, var_11);
   }
 }
 
-_id_9EDF(var_0) {
-  var_1 = self.pers["loadoutPerks"];
+func_9EDF(var_00) {
+  var_01 = self.pers["loadoutPerks"];
 
-  foreach (var_3 in var_1) {
-  if (var_3 == var_0)
+  foreach (var_03 in var_01) {
+  if (var_03 == var_00)
   return 1;
   }
 
   return 0;
 }
 
-_id_805A(var_0) {
-  if (!isdefined(var_0) || !isdefined(level._id_CA63[var_0]))
+getequipmenttableinfo(var_00) {
+  if (!isdefined(var_00) || !isdefined(level.perksuseslot[var_00]))
   return 0;
 
-  return level._id_CA63[var_0]._id_92B8;
+  return level.perksuseslot[var_00].id;
 }

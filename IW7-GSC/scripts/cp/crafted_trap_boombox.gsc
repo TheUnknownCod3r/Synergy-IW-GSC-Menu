@@ -433,7 +433,7 @@ create_attract_positions(param_00,param_01,param_02,param_03) {
 		{
 			if(abs(var_0A[2] - self.origin[2]) < 60) {
 				if(level.script != "cp_disco") {
-					if(function_010F(var_0A,level.dance_floor_volume)) {
+					if(ispointinvolume(var_0A,level.dance_floor_volume)) {
 						if(isdefined(level.discotrap_active)) {
 							continue;
 						}

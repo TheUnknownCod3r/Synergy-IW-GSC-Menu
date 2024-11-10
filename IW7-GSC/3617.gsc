@@ -150,7 +150,7 @@ func_200F() {
 	lib_0F18::func_10E8A("broadcast","attack",self.origin,1000);
 	level scripts\engine\utility::flag_wait_or_timeout("antigrav_force_delete",0.55);
 	var_02 = [];
-	foreach(var_04 in function_0072()) {
+	foreach(var_04 in getaiarray()) {
 		if(func_FF4F(var_04,self)) {
 			var_02[var_02.size] = var_04;
 		}
@@ -198,8 +198,8 @@ func_200F() {
 func_4926(param_00,param_01) {
 	var_02 = ["axis","allies","team3","neutral","bad_guys"];
 	if(!isdefined(level.var_2006.var_5602) || level.var_2006.var_5602.size == 0) {
-		self.var_C2CA = function_0315(param_00,(self.var_85D2,self.var_85D2,param_01),(0,0,0));
-		function_0277("antigrav" + self getentitynumber(),-1,param_00,self.var_85D2,1);
+		self.var_C2CA = _func_315(param_00,(self.var_85D2,self.var_85D2,param_01),(0,0,0));
+		createnavrepulsor("antigrav" + self getentitynumber(),-1,param_00,self.var_85D2,1);
 		return;
 	}
 
@@ -209,20 +209,20 @@ func_4926(param_00,param_01) {
 		}
 
 		if(scripts\engine\utility::array_contains(level.var_2006.var_5602,"allies") && scripts\engine\utility::array_contains(level.var_2006.var_5602,"axis")) {
-			self.var_C2CA = function_0315(param_00,(self.var_85D2,self.var_85D2,param_01),(0,0,0),"team3","neutral","bad_guys");
-			function_0277("antigrav" + self getentitynumber(),-1,param_00,self.var_85D2,0,"team3","neutral","bad_guys");
+			self.var_C2CA = _func_315(param_00,(self.var_85D2,self.var_85D2,param_01),(0,0,0),"team3","neutral","bad_guys");
+			createnavrepulsor("antigrav" + self getentitynumber(),-1,param_00,self.var_85D2,0,"team3","neutral","bad_guys");
 			return;
 		}
 
 		if(scripts\engine\utility::array_contains(level.var_2006.var_5602,"allies")) {
-			self.var_C2CA = function_0315(param_00,(self.var_85D2,self.var_85D2,param_01),(0,0,0),"axis","team3","neutral","bad_guys");
-			function_0277("antigrav" + self getentitynumber(),-1,param_00,self.var_85D2,0,"team3","neutral","bad_guys");
+			self.var_C2CA = _func_315(param_00,(self.var_85D2,self.var_85D2,param_01),(0,0,0),"axis","team3","neutral","bad_guys");
+			createnavrepulsor("antigrav" + self getentitynumber(),-1,param_00,self.var_85D2,0,"team3","neutral","bad_guys");
 			return;
 		}
 
 		if(scripts\engine\utility::array_contains(level.var_2006.var_5602,"axis")) {
-			self.var_C2CA = function_0315(param_00,(self.var_85D2,self.var_85D2,param_01),(0,0,0),"allies","team3","neutral","bad_guys");
-			function_0277("antigrav" + self getentitynumber(),-1,param_00,self.var_85D2,0,"team3","neutral","bad_guys");
+			self.var_C2CA = _func_315(param_00,(self.var_85D2,self.var_85D2,param_01),(0,0,0),"allies","team3","neutral","bad_guys");
+			createnavrepulsor("antigrav" + self getentitynumber(),-1,param_00,self.var_85D2,0,"team3","neutral","bad_guys");
 			return;
 		}
 
@@ -265,7 +265,7 @@ func_DFC5() {
 
 	if(isdefined(self.var_C2CA)) {
 		destroynavobstacle(self.var_C2CA);
-		function_0278("antigrav" + self getentitynumber());
+		destroynavrepulsor("antigrav" + self getentitynumber());
 	}
 
 	if(isdefined(self.var_132AA)) {
@@ -390,7 +390,7 @@ func_365A() {
 	for(;;) {
 		waittillframeend;
 		level.player.var_D363 = scripts\engine\utility::array_removeundefined(level.player.var_D363);
-		var_00 = function_0075("all","C12");
+		var_00 = getaiunittypearray("all","C12");
 		foreach(var_02 in var_00) {
 			if(!isalive(var_02)) {
 				continue;
@@ -480,17 +480,17 @@ func_6228() {
 		level.player.var_2028 = 1;
 		level.player.var_2024 = level.player getstance();
 		if(level.player.var_2024 == "crouch") {
-			function_01C5("player_spaceViewHeight",40);
-			function_01C5("player_spaceCapsuleHeight",50);
+			setsaveddvar("player_spaceViewHeight",40);
+			setsaveddvar("player_spaceCapsuleHeight",50);
 		}
 		else if(level.player.var_2024 == "prone") {
-			function_01C5("player_spaceViewHeight",11);
-			function_01C5("player_spaceCapsuleHeight",30);
+			setsaveddvar("player_spaceViewHeight",11);
+			setsaveddvar("player_spaceCapsuleHeight",30);
 		}
 		else
 		{
-			function_01C5("player_spaceViewHeight",60);
-			function_01C5("player_spaceCapsuleHeight",70);
+			setsaveddvar("player_spaceViewHeight",60);
+			setsaveddvar("player_spaceCapsuleHeight",70);
 		}
 	}
 

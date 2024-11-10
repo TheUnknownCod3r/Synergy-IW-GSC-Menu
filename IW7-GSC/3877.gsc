@@ -179,7 +179,7 @@ func_11AE9() {
 	setdvarifuninitialized("tagging_foliage",0);
 	setdvarifuninitialized("tagging_vehicle_ride",0);
 	scripts\sp\_utility::func_9189("tagging",-1,"default");
-	function_01C5("r_hudoutlineEnable",1);
+	setsaveddvar("r_hudoutlineEnable",1);
 }
 
 func_11405() {
@@ -206,7 +206,7 @@ func_1140E() {
 func_11401() {
 	var_00 = level.var_10E6D.enemies[self.team];
 	var_01 = getentarray("rss_static_robot","script_noteworthy");
-	var_02 = function_0072(self.team);
+	var_02 = getaiarray(self.team);
 	var_03 = scripts\engine\utility::array_combine(var_00,var_01);
 	var_04 = scripts\engine\utility::array_combine(var_03,var_02);
 	return var_04;

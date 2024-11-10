@@ -3,35 +3,35 @@
  * Script: scripts\2740.gsc
 ***************************************/
 
-_id_83D8(var_0, var_1, var_2, var_3, var_4) {
-  var_5 = scripts\engine\utility::_id_8180(var_0, "targetname");
+global_fx(var_00, var_01, var_02, var_03, var_04) {
+  var_05 = scripts\engine\utility::getstructarray(var_00, "targetname");
 
   if (var_5.size <= 0)
   return;
 
-  if (!isdefined(var_2))
-  var_2 = randomfloatrange(-20, -15);
+  if (!isdefined(var_02))
+  var_02 = randomfloatrange(-20, -15);
 
-  if (!isdefined(var_3))
-  var_3 = var_1;
+  if (!isdefined(var_03))
+  var_03 = var_01;
 
-  foreach (var_7 in var_5) {
+  foreach (var_07 in var_05) {
   if (!isdefined(level._effect))
   level._effect = [];
 
-  if (!isdefined(level._effect[var_3]))
-  level._effect[var_3] = loadfx(var_1);
+  if (!isdefined(level._effect[var_03]))
+  level._effect[var_03] = loadfx(var_01);
 
   if (!isdefined(var_7.angles))
   var_7.angles = (0, 0, 0);
 
-  var_8 = scripts\engine\utility::_id_49FA(var_3);
+  var_08 = scripts\engine\utility::createoneshoteffect(var_03);
   var_8.v["origin"] = var_7.origin;
   var_8.v["angles"] = var_7.angles;
-  var_8.v["fxid"] = var_3;
-  var_8.v["delay"] = var_2;
+  var_8.v["fxid"] = var_03;
+  var_8.v["delay"] = var_02;
 
-  if (isdefined(var_4))
-  var_8.v["soundalias"] = var_4;
+  if (isdefined(var_04))
+  var_8.v["soundalias"] = var_04;
   }
 }

@@ -136,7 +136,7 @@ func_10D23(param_00,param_01,param_02) {
 			level.var_1027E[param_00].precachesuit = scripts\engine\utility::array_add(level.var_1027E[param_00].precachesuit,var_08);
 			var_08 thread func_E02B(param_00);
 			var_09 = 0;
-			if(function_00FD(var_08) && !var_07 func_C8ED("no_chase"," ")) {
+			if(isaircraft(var_08) && !var_07 func_C8ED("no_chase"," ")) {
 				var_0A = 1;
 				if(level.var_11A24 >= var_03) {
 					var_0A = 0;
@@ -295,7 +295,7 @@ func_9747(param_00) {
 func_E02B(param_00) {
 	level endon("delete_" + param_00);
 	var_01 = 0;
-	if(function_00FD(self)) {
+	if(isaircraft(self)) {
 		level.var_11A24++;
 		var_01 = 1;
 	}
@@ -337,8 +337,8 @@ func_48B2(param_00,param_01,param_02) {
 
 	thread func_A147();
 	var_03 = getcsplineid(param_00.target);
-	var_04 = function_008C(var_03,0);
-	var_05 = function_008D(var_03,0);
+	var_04 = getcsplinepointposition(var_03,0);
+	var_05 = getcsplinepointtangent(var_03,0);
 	var_06 = level.var_10281["axis"];
 	var_07 = "axis";
 	if(param_00.script_team == "axis") {
@@ -408,7 +408,7 @@ func_4958(param_00) {
 		self.var_A420 = [];
 	}
 
-	if(function_00FD(self)) {
+	if(isaircraft(self)) {
 		var_01 = func_4921(self.origin,self.angles,self.script_team);
 	}
 	else
@@ -533,7 +533,7 @@ func_19FF(param_00) {
 	if(!isdefined(var_01.spawners)) {
 		var_01.spawners = [];
 		var_02 = getentarray(var_01.target,"targetname");
-		var_03 = function_00C8(var_01.target);
+		var_03 = getspawnerarray(var_01.target);
 		var_02 = scripts\engine\utility::array_combine(var_02,var_03);
 		var_04 = 0;
 		foreach(var_06 in var_02) {
@@ -704,7 +704,7 @@ func_489C(param_00,param_01,param_02) {
 	scripts\sp\_utility::func_57D6();
 	var_03 delete();
 	if(isdefined(self)) {
-		function_0178(param_00,self.origin);
+		playworldsound(param_00,self.origin);
 	}
 }
 
@@ -715,7 +715,7 @@ func_DC18() {
 	wait(2);
 	for(;;) {
 		self waittill("damage",var_00,var_00,var_00,var_00,var_01);
-		if(isdefined(var_01) && function_0107(var_01)) {
+		if(isdefined(var_01) && isexplosivedamagemod(var_01)) {
 			if(isdefined(self.var_71C8)) {
 				self [[self.var_71C8]]();
 			}

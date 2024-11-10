@@ -5,76 +5,76 @@
 
 init() {
   precacheshader("objpoint_default");
-  level._id_C2C1 = [];
+  level.objpointnames = [];
   level.objpoints = [];
 
-  if (level._id_10A56)
-  level._id_C2C4 = 15;
+  if (level.splitscreen)
+  level.objpointsize = 15;
   else
-  level._id_C2C4 = 8;
+  level.objpointsize = 8;
 
-  level._id_C2C0 = 0.75;
-  level._id_C2C3 = 1.0;
+  level.objpoint_alpha_default = 0.75;
+  level.objpointscale = 1.0;
 }
 
-_id_4A23(var_0, var_1, var_2, var_3, var_4, var_5) {
-  var_6 = _id_801E(var_0);
+func_4A23(var_00, var_01, var_02, var_03, var_04, var_05) {
+  var_06 = getobjpointbyname(var_00);
 
-  if (isdefined(var_6))
-  deleteobjpoint(var_6);
+  if (isdefined(var_06))
+  deleteobjpoint(var_06);
 
-  if (!isdefined(var_3))
-  var_3 = "objpoint_default";
+  if (!isdefined(var_03))
+  var_03 = "objpoint_default";
 
-  if (!isdefined(var_5))
-  var_5 = 1.0;
+  if (!isdefined(var_05))
+  var_05 = 1.0;
 
-  if (var_2 != "all")
-  var_6 = newteamhudelem(var_2);
+  if (var_02 != "all")
+  var_06 = newteamhudelem(var_02);
   else
-  var_6 = newhudelem();
+  var_06 = newhudelem();
 
-  var_6.name = var_0;
+  var_6.name = var_00;
   var_6.x = var_1[0];
   var_6.y = var_1[1];
   var_6.z = var_1[2];
-  var_6.team = var_2;
-  var_6._id_9DFC = 0;
-  var_6._id_9F51 = 1;
-  var_6 setshader(var_3, level._id_C2C4, level._id_C2C4);
-  var_6 setwaypoint(1, 0);
+  var_6.team = var_02;
+  var_6.isflashing = 0;
+  var_6.func_9F51 = 1;
+  var_06 setshader(var_03, level.objpointsize, level.objpointsize);
+  var_06 setwaypoint(1, 0);
 
-  if (isdefined(var_4))
-  var_6.alpha = var_4;
+  if (isdefined(var_04))
+  var_6.alpha = var_04;
   else
-  var_6.alpha = level._id_C2C0;
+  var_6.alpha = level.objpoint_alpha_default;
 
-  var_6._id_2897 = var_6.alpha;
-  var_6.index = level._id_C2C1.size;
-  level.objpoints[var_0] = var_6;
-  level._id_C2C1[level._id_C2C1.size] = var_0;
-  return var_6;
+  var_6.basealpha = var_6.alpha;
+  var_6.index = level.objpointnames.size;
+  level.objpoints[var_00] = var_06;
+  level.objpointnames[level.objpointnames.size] = var_00;
+  return var_06;
 }
 
-deleteobjpoint(var_0) {
+deleteobjpoint(var_00) {
   if (level.objpoints.size == 1) {
   level.objpoints = [];
-  level._id_C2C1 = [];
-  var_0 destroy();
+  level.objpointnames = [];
+  var_00 destroy();
   return;
   }
 
-  var_1 = var_0.index;
-  var_2 = level._id_C2C1.size - 1;
-  var_3 = _id_801D(var_2);
-  level._id_C2C1[var_1] = var_3.name;
-  var_3.index = var_1;
-  level._id_C2C1[var_2] = undefined;
+  var_01 = var_0.index;
+  var_02 = level.objpointnames.size - 1;
+  var_03 = getobjpointbyindex(var_02);
+  level.objpointnames[var_01] = var_3.name;
+  var_3.index = var_01;
+  level.objpointnames[var_02] = undefined;
   level.objpoints[var_0.name] = undefined;
-  var_0 destroy();
+  var_00 destroy();
 }
 
-_id_12EE3(var_0) {
+updateorigin(var_00) {
   if (self.x != var_0[0])
   self.x = var_0[0];
 
@@ -85,48 +85,48 @@ _id_12EE3(var_0) {
   self.z = var_0[2];
 }
 
-_id_F7CA(var_0, var_1) {
-  var_2 = _id_801E(var_0);
-  var_2 _id_12EE3(var_1);
+setoriginbyname(var_00, var_01) {
+  var_02 = getobjpointbyname(var_00);
+  var_02 updateorigin(var_01);
 }
 
-_id_801E(var_0) {
-  if (isdefined(level.objpoints[var_0]))
-  return level.objpoints[var_0];
+getobjpointbyname(var_00) {
+  if (isdefined(level.objpoints[var_00]))
+  return level.objpoints[var_00];
   else
   return undefined;
 }
 
-_id_801D(var_0) {
-  if (isdefined(level._id_C2C1[var_0]))
-  return level.objpoints[level._id_C2C1[var_0]];
+getobjpointbyindex(var_00) {
+  if (isdefined(level.objpointnames[var_00]))
+  return level.objpoints[level.objpointnames[var_00]];
   else
   return undefined;
 }
 
-_id_10D9B() {
+startflashing() {
   self endon("stop_flashing_thread");
 
-  if (self._id_9DFC)
+  if (self.isflashing)
   return;
 
-  self._id_9DFC = 1;
+  self.isflashing = 1;
 
-  while (self._id_9DFC) {
+  while (self.isflashing) {
   self fadeovertime(0.75);
-  self.alpha = 0.35 * self._id_2897;
+  self.alpha = 0.35 * self.basealpha;
   wait 0.75;
   self fadeovertime(0.75);
-  self.alpha = self._id_2897;
+  self.alpha = self.basealpha;
   wait 0.75;
   }
 
-  self.alpha = self._id_2897;
+  self.alpha = self.basealpha;
 }
 
-_id_11070() {
-  if (!self._id_9DFC)
+stopflashing() {
+  if (!self.isflashing)
   return;
 
-  self._id_9DFC = 0;
+  self.isflashing = 0;
 }

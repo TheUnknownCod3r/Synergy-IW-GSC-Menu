@@ -4,19 +4,19 @@
 ******************************************/
 
 main() {
-  self._id_17DB = "";
+  self.func_17DB = "";
   self.team = "axis";
   self.type = "human";
-  self._id_12BA4 = "soldier";
-  self._id_111A4 = "noboost";
-  self._id_0010 = 0.2;
+  self.unittype = "soldier";
+  self.subclass = "noboost";
+  self.accuracy = 0.2;
   self.health = 150;
-  self._id_0166 = "";
-  self._id_0162 = 0;
-  self._id_F0C4 = "";
-  self._id_101B4 = "";
-  self._id_2A80 = "enemy_combatant";
-  self._id_1FA9 = "soldier";
+  self.grenadeweapon = "";
+  self.grenadeammo = 0;
+  self.secondaryweapon = "";
+  self.func_101B4 = "";
+  self.behaviortreeasset = "enemy_combatant";
+  self.func_1FA9 = "soldier";
 
   if (isai(self)) {
   self _meth_82DC(256.0, 0.0);
@@ -24,17 +24,17 @@ main() {
   }
 
   self.weapon = "none";
-  _id_0921::main();
+  func_0921::main();
 }
 
-_id_02AE() {
+spawner() {
   self _meth_833A("axis");
 }
 
-_id_0247() {
-  _id_0921::_id_0247();
+precache() {
+  func_0921::precache();
   scripts\aitypes\bt_util::init();
-  _id_09FD::_id_103F2();
-  _id_03AE::_id_DEE8();
-  _id_0C69::_id_2371();
+  func_09FD::soldier();
+  func_03AE::func_DEE8();
+  func_0C69::func_2371();
 }

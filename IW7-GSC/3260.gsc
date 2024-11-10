@@ -230,7 +230,7 @@ onzombiedamaged(param_00,param_01,param_02,param_03,param_04,param_05,param_06,p
 				thread scripts\cp\zombies\zombie_scriptable_states::applyzombiescriptablestate(self);
 			}
 			else if(isdefined(self.frozentick)) {
-				self.var_7455++;
+				self.frozentick++;
 				if(var_2C > 15 && self.frozentick >= 8) {
 					self.allowpain = 1;
 				}
@@ -250,7 +250,7 @@ onzombiedamaged(param_00,param_01,param_02,param_03,param_04,param_05,param_06,p
 		}
 		else if(var_12) {
 			if(isdefined(self.frozentick)) {
-				self.var_7455++;
+				self.frozentick++;
 			}
 			else
 			{
@@ -479,7 +479,7 @@ onzombiedamaged(param_00,param_01,param_02,param_03,param_04,param_05,param_06,p
 			}
 			else
 			{
-				param_01.var_154B++;
+				param_01.accuracy_shots_on_target++;
 			}
 
 			scripts\cp\cp_persistence::increment_player_career_shots_on_target(param_01);
@@ -733,7 +733,7 @@ onzombiekilled(param_00,param_01,param_02,param_03,param_04,param_05,param_06,pa
 			scripts\cp\cp_persistence::increment_player_career_explosive_kills(param_01);
 		}
 
-		param_01.var_1AB++;
+		param_01.setculldist++;
 		param_01.weapon_name_log = scripts\cp\utility::getbaseweaponname(param_04);
 		if(!isdefined(param_01.aggregateweaponkills[param_01.weapon_name_log])) {
 			param_01.aggregateweaponkills[param_01.weapon_name_log] = 1;
@@ -998,7 +998,7 @@ process_kill_rewards(param_00,param_01,param_02,param_03,param_04,param_05) {
 				var_07 scripts\cp\cp_persistence::eog_player_update_stat("headShots",1);
 			}
 
-			var_07.var_11A25++;
+			var_07.total_match_headshots++;
 			if(issubstr(param_05,"dischord")) {
 				var_07 thread scripts\cp\cp_vo::try_to_play_vo("killfirm_dischord","zmb_comment_vo","high",10,0,0,0,10);
 			}
@@ -2128,7 +2128,7 @@ kill_me_if_stuck() {
 
 	self.died_poorly = 1;
 	if(scripts\engine\utility::istrue(self.marked_for_challenge) && isdefined(level.num_zombies_marked)) {
-		level.var_C20A--;
+		level.num_zombies_marked--;
 	}
 
 	self dodamage(self.health + 1000,self.origin,self,self,"MOD_SUICIDE");
@@ -2203,18 +2203,18 @@ is_non_standard_zombie() {
 }
 
 func_97BA() {
-	function_004E("player1");
-	function_004E("player2");
-	function_004E("player3");
-	function_004E("player4");
-	function_004E("player1_enemy");
-	function_004E("player2_enemy");
-	function_004E("player3_enemy");
-	function_004E("player4_enemy");
-	function_01D1("player1","player1_enemy",10000);
-	function_01D1("player2","player2_enemy",10000);
-	function_01D1("player3","player3_enemy",10000);
-	function_01D1("player4","player4_enemy",10000);
+	createthreatbiasgroup("player1");
+	createthreatbiasgroup("player2");
+	createthreatbiasgroup("player3");
+	createthreatbiasgroup("player4");
+	createthreatbiasgroup("player1_enemy");
+	createthreatbiasgroup("player2_enemy");
+	createthreatbiasgroup("player3_enemy");
+	createthreatbiasgroup("player4_enemy");
+	setthreatbias("player1","player1_enemy",10000);
+	setthreatbias("player2","player2_enemy",10000);
+	setthreatbias("player3","player3_enemy",10000);
+	setthreatbias("player4","player4_enemy",10000);
 }
 
 func_93EC(param_00,param_01) {
@@ -2222,7 +2222,7 @@ func_93EC(param_00,param_01) {
 	param_01 endon("death");
 	if(issentient(param_01)) {
 		var_02 = param_01 getthreatbiasgroup();
-		if(function_0218(var_02 + "_enemy")) {
+		if(threatbiasgroupexists(var_02 + "_enemy")) {
 			param_00 give_zombies_perk(var_02 + "_enemy");
 		}
 

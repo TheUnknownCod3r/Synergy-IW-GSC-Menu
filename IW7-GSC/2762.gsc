@@ -3,166 +3,166 @@
  * Script: scripts\2762.gsc
 ***************************************/
 
-_id_8C07(var_0) {
-  return _id_7F73(var_0) > 0;
+haslightarmor(var_00) {
+  return getlightarmorvalue(var_00) > 0;
 }
 
-_id_7F73(var_0) {
-  if (isdefined(var_0._id_ACAE))
-  return var_0._id_ACAE;
+getlightarmorvalue(var_00) {
+  if (isdefined(var_0.lightarmorhp))
+  return var_0.lightarmorhp;
 
   return 0;
 }
 
-_id_F786(var_0, var_1, var_2, var_3) {
-  if (!isdefined(var_2))
-  var_2 = 1;
+setlightarmorvalue(var_00, var_01, var_02, var_03) {
+  if (!isdefined(var_02))
+  var_02 = 1;
 
-  if (!isdefined(var_3))
-  var_3 = 1;
+  if (!isdefined(var_03))
+  var_03 = 1;
 
-  if (_id_ACA6(var_0)) {
-  var_1 = 0;
-  var_2 = 1;
+  if (lightarmor_lightarmor_disabled(var_00)) {
+  var_01 = 0;
+  var_02 = 1;
   }
 
-  var_4 = _id_7F73(var_0);
+  var_04 = getlightarmorvalue(var_00);
 
-  if (!var_2 && var_4 > var_1)
-  var_1 = var_4;
+  if (!var_02 && var_04 > var_01)
+  var_01 = var_04;
 
-  if (var_4 <= 0 && var_1 > 0) {
-  _id_ACA9(var_0, var_1, var_3);
+  if (var_04 <= 0 && var_01 > 0) {
+  lightarmor_set(var_00, var_01, var_03);
   return;
   }
 
-  if (var_4 > 0 && var_1 <= 0) {
-  _id_ACAC(var_0);
+  if (var_04 > 0 && var_01 <= 0) {
+  lightarmor_unset(var_00);
   return;
   }
 
-  var_0._id_ACAE = var_1;
+  var_0.lightarmorhp = var_01;
 
-  if (isplayer(var_0) && var_4 <= var_1 && var_1 > 0 && var_3 == 1)
-  thread _id_ACAA(var_0);
+  if (isplayer(var_00) && var_04 <= var_01 && var_01 > 0 && var_03 == 1)
+  thread lightarmor_setfx(var_00);
 
-  if (isplayer(var_0))
-  _id_ACAD(var_0);
+  if (isplayer(var_00))
+  lightarmor_updatehud(var_00);
 }
 
 init() {
   level._effect["lightArmor_persistent"] = loadfx("vfx/core/mp/core/vfx_uplink_carrier.vfx");
 }
 
-_id_ACA9(var_0, var_1, var_2) {
-  var_0 notify("lightArmor_set");
-  var_0._id_ACAE = var_1;
-  _id_ACAD(var_0);
-  thread _id_ACA8(var_0);
+lightarmor_set(var_00, var_01, var_02) {
+  var_00 notify("lightArmor_set");
+  var_0.lightarmorhp = var_01;
+  lightarmor_updatehud(var_00);
+  thread lightarmor_monitordeath(var_00);
 
-  if (isplayer(var_0) && var_2 == 1)
-  thread _id_ACAA(var_0);
+  if (isplayer(var_00) && var_02 == 1)
+  thread lightarmor_setfx(var_00);
 }
 
-_id_ACAC(var_0) {
-  var_0 notify("lightArmor_unset");
-  var_0._id_ACAE = undefined;
-  _id_ACAD(var_0);
+lightarmor_unset(var_00) {
+  var_00 notify("lightArmor_unset");
+  var_0.lightarmorhp = undefined;
+  lightarmor_updatehud(var_00);
 
-  if (isplayer(var_0))
-  var_0 setscriptablepartstate("light_armor", "neutral", 0);
+  if (isplayer(var_00))
+  var_00 setscriptablepartstate("light_armor", "neutral", 0);
 
-  var_0 notify("remove_light_armor");
+  var_00 notify("remove_light_armor");
 }
 
-_id_ACA7(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10) {
+lightarmor_modifydamage(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08, var_09, var_10) {
   var_11 = 0;
   var_12 = 0;
-  var_13 = var_0._id_ACAE;
+  var_13 = var_0.lightarmorhp;
 
   if (!isdefined(var_10))
   var_10 = 1;
 
   if (!var_11) {
-  if (var_4 == "MOD_FALLING" || var_4 == "MOD_MELEE")
+  if (var_04 == "MOD_FALLING" || var_04 == "MOD_MELEE")
   var_11 = 1;
   }
 
   if (!var_11) {
-  if (scripts\engine\utility::_id_9D74(var_4) && scripts\mp\utility\game::isheadshot(var_5, var_8, var_4, var_1))
+  if (scripts\engine\utility::isbulletdamage(var_04) && scripts\mp\utility\game::isheadshot(var_05, var_08, var_04, var_01))
   var_11 = 1;
   }
 
   if (!var_11) {
-  if (var_4 == "MOD_IMPACT") {
-  if (scripts\mp\weapons::_id_9FA9(var_5) || scripts\mp\weapons::isaxeweapon(var_5))
-  var_11 = 1;
-  }
-  }
-
-  if (!var_11) {
-  if (isexplosivedamagemod(var_4)) {
-  if (isdefined(var_9) && isdefined(var_9._id_11180) && var_9._id_11180 == var_0)
+  if (var_04 == "MOD_IMPACT") {
+  if (scripts\mp\weapons::func_9FA9(var_05) || scripts\mp\weapons::isaxeweapon(var_05))
   var_11 = 1;
   }
   }
 
   if (!var_11) {
-  if (scripts\mp\utility\game::issuperdamagesource(var_5))
+  if (isexplosivedamagemod(var_04)) {
+  if (isdefined(var_09) && isdefined(var_9.stuckenemyentity) && var_9.stuckenemyentity == var_00)
+  var_11 = 1;
+  }
+  }
+
+  if (!var_11) {
+  if (scripts\mp\utility\game::issuperdamagesource(var_05))
   var_11 = 1;
   }
 
   if (!var_11) {
-  var_12 = min(var_2 + var_3, var_0._id_ACAE);
-  var_13 = var_13 - (var_2 + var_3);
+  var_12 = min(var_02 + var_03, var_0.lightarmorhp);
+  var_13 = var_13 - (var_02 + var_03);
 
   if (!var_10)
-  var_0._id_ACAE = var_0._id_ACAE - (var_2 + var_3);
+  var_0.lightarmorhp = var_0.lightarmorhp - (var_02 + var_03);
 
-  var_2 = 0;
-  var_3 = 0;
+  var_02 = 0;
+  var_03 = 0;
 
   if (var_13 <= 0) {
-  var_2 = abs(var_13);
-  var_3 = 0;
+  var_02 = abs(var_13);
+  var_03 = 0;
 
   if (!var_10)
-  _id_ACAC(var_0);
+  lightarmor_unset(var_00);
   }
   }
 
   if (!var_10)
-  _id_ACAD(self);
+  lightarmor_updatehud(self);
 
-  if (var_12 > 0 && var_2 == 0)
-  var_2 = 1;
+  if (var_12 > 0 && var_02 == 0)
+  var_02 = 1;
 
-  return [var_12, var_2, var_3];
+  return [var_12, var_02, var_03];
 }
 
-_id_ACA6(var_0) {
-  if (var_0 scripts\mp\heavyarmor::_id_8BFA())
+lightarmor_lightarmor_disabled(var_00) {
+  if (var_00 scripts\mp\heavyarmor::hasheavyarmor())
   return 1;
 
   return 0;
 }
 
-_id_ACA8(var_0) {
-  var_0 endon("disconnect");
-  var_0 endon("lightArmor_set");
-  var_0 endon("lightArmor_unset");
-  var_0 waittill("death");
-  thread _id_ACAC(var_0);
+lightarmor_monitordeath(var_00) {
+  var_00 endon("disconnect");
+  var_00 endon("lightArmor_set");
+  var_00 endon("lightArmor_unset");
+  var_00 waittill("death");
+  thread lightarmor_unset(var_00);
 }
 
-_id_ACAD(var_0) {
-  if (!isplayer(var_0))
+lightarmor_updatehud(var_00) {
+  if (!isplayer(var_00))
   return;
 
-  if (isdefined(level._id_3AEC))
-  var_0 setclientomnvar("ui_uplink_carrier_armor", int(_id_7F73(var_0)));
+  if (isdefined(level.carrierarmor))
+  var_00 setclientomnvar("ui_uplink_carrier_armor", int(getlightarmorvalue(var_00)));
 }
 
-_id_ACAA(var_0) {
-  var_0 setscriptablepartstate("light_armor", "active", 0);
+lightarmor_setfx(var_00) {
+  var_00 setscriptablepartstate("light_armor", "active", 0);
 }

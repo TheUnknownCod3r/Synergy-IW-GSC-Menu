@@ -36,7 +36,7 @@ init() {
 	level.spawnmins = (0,0,0);
 	level.spawnmaxs = (0,0,0);
 	level.mapcenter = findboxcenter(level.spawnmins,level.spawnmaxs);
-	function_01B4(level.mapcenter);
+	setmapcenter(level.mapcenter);
 }
 
 findboxcenter(param_00,param_01) {
@@ -48,7 +48,7 @@ findboxcenter(param_00,param_01) {
 
 func_F6BD() {
 	level.var_1307 = 1;
-	level.splitscreen = function_0114();
+	level.splitscreen = issplitscreen();
 	level.onlinegame = getdvarint("onlinegame");
 	level.rankedmatch = (level.onlinegame && !getdvarint("xblive_privatematch")) || getdvarint("force_ranking");
 	level.script = tolower(getdvar("mapname"));
@@ -190,16 +190,16 @@ func_F6BB() {
 }
 
 func_F6BF() {
-	function_0237("",0);
-	function_0238("default_night_mp");
-	function_0236("missilecam");
-	function_023A(game["thermal_vision"]);
-	function_0239("",0);
+	visionsetnaked("",0);
+	visionsetnight("default_night_mp");
+	visionsetmissilecam("missilecam");
+	visionsetthermal(game["thermal_vision"]);
+	visionsetpain("",0);
 }
 
 func_F6BC() {
-	function_01BC(0);
-	function_01BD(0);
+	setnojipscore(0);
+	setnojiptime(0);
 }
 
 defaultgetspawnpoint() {
@@ -286,7 +286,7 @@ _meth_8489() {
 	level notify("coop_grace_period");
 	level endon("game_ended");
 	level endon("coop_grace_period");
-	while(function_0071() == 0) {
+	while(getactiveclientcount() == 0) {
 		scripts\engine\utility::waitframe();
 	}
 
@@ -768,7 +768,7 @@ func_5049() {
 			}
 		}
 
-		level.var_90A8++;
+		level.hostmigrationreturnedplayercount++;
 		if(level.hostmigrationreturnedplayercount >= var_00 * 2 / 3) {
 			level notify("hostmigration_enoughplayers");
 		}

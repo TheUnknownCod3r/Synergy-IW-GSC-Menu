@@ -3,86 +3,86 @@
  * Script: scripts\3477.gsc
 ***************************************/
 
-_id_526C(var_0, var_1, var_2) {
+func_526C(var_00, var_01, var_02) {
   self endon("death");
-  self._id_B377 = undefined;
+  self.marker = undefined;
 
-  if (self getcurrentweapon() == var_1) {
-  thread _id_5268(var_1);
-  thread _id_526D(var_0, var_1, var_2);
-  _id_526E(var_1);
-  return !(self getammocount(var_1) && self hasweapon(var_1));
+  if (self getcurrentweapon() == var_01) {
+  thread func_5268(var_01);
+  thread func_526D(var_00, var_01, var_02);
+  func_526E(var_01);
+  return !(self getammocount(var_01) && self hasweapon(var_01));
   }
 
   return 0;
 }
 
-_id_5268(var_0) {
+func_5268(var_00) {
   self endon("death");
   self endon("disconnect");
-  var_1 = "";
+  var_01 = "";
 
-  while (var_1 != var_0)
-  self waittill("grenade_pullback", var_1);
+  while (var_01 != var_00)
+  self waittill("grenade_pullback", var_01);
 
-  scripts\engine\utility::_id_1C6E(0);
-  _id_5269();
+  scripts\engine\utility::allow_usability(0);
+  func_5269();
 }
 
-_id_5269() {
+func_5269() {
   self endon("death");
   self endon("disconnect");
   scripts\engine\utility::waittill_any("grenade_fire", "weapon_change");
-  scripts\engine\utility::_id_1C6E(1);
+  scripts\engine\utility::allow_usability(1);
 }
 
-_id_526D(var_0, var_1, var_2) {
+func_526D(var_00, var_01, var_02) {
   self endon("designator_finished");
   self endon("spawned_player");
   self endon("disconnect");
-  var_3 = undefined;
-  var_4 = "";
+  var_03 = undefined;
+  var_04 = "";
 
-  while (var_4 != var_1)
-  self waittill("grenade_fire", var_3, var_4);
+  while (var_04 != var_01)
+  self waittill("grenade_fire", var_03, var_04);
 
   if (isalive(self)) {
   var_3.owner = self;
-  var_3.weaponname = var_1;
-  self._id_B377 = var_3;
-  thread _id_526A(var_0, var_3, var_2);
+  var_3.weaponname = var_01;
+  self.marker = var_03;
+  thread func_526A(var_00, var_03, var_02);
   }
   else
-  var_3 delete();
+  var_03 delete();
 
   self notify("designator_finished");
 }
 
-_id_526E(var_0) {
+func_526E(var_00) {
   self endon("spawned_player");
   self endon("disconnect");
-  var_1 = self getcurrentweapon();
+  var_01 = self getcurrentweapon();
 
-  while (var_1 == var_0)
-  self waittill("weapon_change", var_1);
+  while (var_01 == var_00)
+  self waittill("weapon_change", var_01);
 
-  if (self getammocount(var_0) == 0)
-  _id_526B(var_0);
+  if (self getammocount(var_00) == 0)
+  func_526B(var_00);
 
   self notify("designator_finished");
 }
 
-_id_526B(var_0) {
-  if (self hasweapon(var_0))
-  scripts\mp\utility\game::_id_141E(var_0);
+func_526B(var_00) {
+  if (self hasweapon(var_00))
+  scripts\mp\utility\game::_takeweapon(var_00);
 }
 
-_id_526A(var_0, var_1, var_2) {
-  var_1 waittill("missile_stuck", var_3);
+func_526A(var_00, var_01, var_02) {
+  var_01 waittill("missile_stuck", var_03);
 
   if (isdefined(var_1.owner))
-  self thread [[var_2]](var_0, var_1);
+  self thread [[var_02]](var_00, var_01);
 
-  if (isdefined(var_1))
-  var_1 delete();
+  if (isdefined(var_01))
+  var_01 delete();
 }

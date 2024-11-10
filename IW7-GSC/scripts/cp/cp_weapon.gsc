@@ -495,7 +495,7 @@ run_stun_logic(param_00,param_01,param_02,param_03) {
 	var_04 = vectornormalize(var_04);
 	var_04 = var_04 * 100;
 	var_05 = -1 * var_04;
-	var_06 = function_02D3(self.angles);
+	var_06 = anglestoleft(self.angles);
 	var_06 = vectornormalize(var_06);
 	var_06 = var_06 * 100;
 	var_07 = -1 * var_06;
@@ -880,7 +880,7 @@ connect_to_nearby_harpoon_projectiles(param_00,param_01) {
 }
 
 play_vfx_between_points_trap_gun(param_00,param_01,param_02) {
-	var_03 = function_02DF(level._effect["trap_ww_beam"],param_00,"tag_fx",param_01,"tag_fx");
+	var_03 = playfxontagsbetweenclients(level._effect["trap_ww_beam"],param_00,"tag_fx",param_01,"tag_fx");
 	thread kill_fx_on_death(param_00,param_01,param_02,var_03);
 }
 
@@ -903,7 +903,7 @@ kill_fx_on_death(param_00,param_01,param_02,param_03) {
 		param_03 delete();
 	}
 
-	function_02E0(level._effect["trap_ww_beam_death"],var_05,vectortoangles(var_06 - var_05),var_06);
+	playfxbetweenpoints(level._effect["trap_ww_beam_death"],var_05,vectortoangles(var_06 - var_05),var_06);
 }
 
 play_sfx_on_harpoon_trap(param_00,param_01,param_02) {
@@ -1058,7 +1058,7 @@ monitorlauncherspawnedgrenades() {
 glprox_trygetweaponname(param_00) {
 	if(param_00 != "none" && getweaponbasename(param_00) == "iw7_glprox_mp") {
 		if(scripts\cp\utility::isaltmodeweapon(param_00)) {
-			var_01 = function_00E3(param_00);
+			var_01 = getweaponattachments(param_00);
 			param_00 = var_01[0];
 		}
 		else
@@ -1323,7 +1323,7 @@ updatesavedlastweapon() {
 			continue;
 		}
 
-		var_02 = function_0244(var_01);
+		var_02 = weaponinventorytype(var_01);
 		if(var_02 != "primary" && var_02 != "altmode") {
 			self.saved_lastweapon = var_00;
 			continue;
@@ -1548,7 +1548,7 @@ isinvalidzone(param_00,param_01,param_02,param_03,param_04,param_05) {
 	}
 
 	foreach(var_08 in var_06) {
-		if(function_010F(param_00,var_08)) {
+		if(ispointinvolume(param_00,var_08)) {
 			return 0;
 		}
 	}
@@ -1576,11 +1576,11 @@ placeequipmentfailed(param_00,param_01,param_02,param_03) {
 		if(isplayer(self)) {
 			self playlocalsound("ww_magicbox_laughter");
 			if(isdefined(param_03)) {
-				var_04 = function_01E1(scripts\engine\utility::getfx("placeEquipmentFailed"),param_02,self,anglestoforward(param_03),anglestoup(param_03));
+				var_04 = spawnfxforclient(scripts\engine\utility::getfx("placeEquipmentFailed"),param_02,self,anglestoforward(param_03),anglestoup(param_03));
 			}
 			else
 			{
-				var_04 = function_01E1(scripts\engine\utility::getfx("placeEquipmentFailed"),param_02,self);
+				var_04 = spawnfxforclient(scripts\engine\utility::getfx("placeEquipmentFailed"),param_02,self);
 			}
 		}
 		else
@@ -2105,7 +2105,7 @@ throwingknifeteleport_fxstartburst(param_00,param_01) {
 		var_09 setmodel("tag_origin");
 		var_09 hidefromplayer(param_00);
 		scripts\engine\utility::waitframe();
-		function_029A(scripts\engine\utility::getfx("vfx_knife_tele_start_friendly"),var_09,"tag_origin",param_00.team);
+		playfxontagforteam(scripts\engine\utility::getfx("vfx_knife_tele_start_friendly"),var_09,"tag_origin",param_00.team);
 		wait(3);
 		var_09 delete();
 		return;
@@ -2825,7 +2825,7 @@ clustergrenadeexplode(param_00,param_01,param_02,param_03) {
 	var_05 = 0;
 	var_06 = param_00 + (0,0,3);
 	var_07 = var_06 + (0,0,-5);
-	var_08 = function_0287(var_06,var_07,var_04,undefined,0,"physicsquery_closest");
+	var_08 = physics_raycast(var_06,var_07,var_04,undefined,0,"physicsquery_closest");
 	if(isdefined(var_08) && var_08.size > 0) {
 		var_05 = 1;
 	}
@@ -2848,7 +2848,7 @@ clustergrenadeexplode(param_00,param_01,param_02,param_03) {
 		var_15 = (var_12,var_13,var_14) * var_11;
 		var_06 = var_0A;
 		var_07 = var_0A + var_15;
-		var_08 = function_0287(var_06,var_07,var_04,undefined,0,"physicsquery_closest");
+		var_08 = physics_raycast(var_06,var_07,var_04,undefined,0,"physicsquery_closest");
 		if(isdefined(var_08) && var_08.size > 0) {
 			var_07 = var_08[0]["position"];
 		}
@@ -2925,7 +2925,7 @@ remove_attachment(param_00,param_01,param_02) {
 			var_08 = scripts\cp\utility::getrawbaseweaponname(var_07);
 			var_09 = getweaponbasename(var_07);
 			param_01 takeweapon(var_07);
-			var_0A = function_00E3(var_07);
+			var_0A = getweaponattachments(var_07);
 			foreach(var_0C in var_0A) {
 				if(issubstr(var_0C,param_00)) {
 					var_0A = scripts\engine\utility::array_remove(var_0A,var_0C);
@@ -3346,7 +3346,7 @@ add_attachment_to_weapon(param_00,param_01,param_02,param_03) {
 
 	var_05 = getweaponbasename(var_04);
 	var_06 = 0;
-	var_07 = function_00E3(var_04);
+	var_07 = getweaponattachments(var_04);
 	var_08 = scripts\cp\utility::getcurrentcamoname(var_04);
 	var_09 = return_weapon_name_with_like_attachments(var_04,param_00,var_07,undefined,var_08);
 	if(!isdefined(var_09) || isdefined(var_09) && var_09 == "none") {
@@ -3657,7 +3657,7 @@ return_weapon_name_with_like_attachments(param_00,param_01,param_02,param_03,par
 	}
 
 	if(!isdefined(param_02)) {
-		param_02 = function_00E3(var_05);
+		param_02 = getweaponattachments(var_05);
 	}
 
 	if(scripts\cp\utility::has_zombie_perk("perk_machine_rat_a_tat")) {
@@ -4099,12 +4099,12 @@ enableweaponlaser() {
 		self.weaponlasercalls = 0;
 	}
 
-	self.var_13C9E++;
+	self.weaponlasercalls++;
 	self laseron();
 }
 
 disableweaponlaser() {
-	self.var_13C9E--;
+	self.weaponlasercalls--;
 	if(self.weaponlasercalls == 0) {
 		self laseroff();
 		self.weaponlasercalls = undefined;
@@ -4406,7 +4406,7 @@ isprimaryweapon(param_00) {
 		return 0;
 	}
 
-	if(function_0244(param_00) != "primary") {
+	if(weaponinventorytype(param_00) != "primary") {
 		return 0;
 	}
 

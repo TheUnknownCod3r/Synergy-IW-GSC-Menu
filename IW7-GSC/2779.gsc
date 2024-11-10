@@ -4,404 +4,404 @@
 ***************************************/
 
 init() {
-  level._id_CA70 = [];
-  level thread _id_12E6A();
-  level thread _id_12F85();
-  level thread _id_13E05();
+  level.persistentdatainfo = [];
+  level thread func_12E6A();
+  level thread func_12F85();
+  level thread func_13E05();
 }
 
-_id_97E2() {
-  self._id_316E = [];
-  self._id_10AEC = [];
+initbufferedstats() {
+  self.bufferedstats = [];
+  self.squadmemberbufferedstats = [];
 
-  if (scripts\mp\utility\game::_id_DCD5()) {
-  self._id_316E["totalShots"] = self getrankedplayerdata("mp", "totalShots");
-  self._id_316E["accuracy"] = self getrankedplayerdata("mp", "accuracy");
-  self._id_316E["misses"] = self getrankedplayerdata("mp", "misses");
-  self._id_316E["hits"] = self getrankedplayerdata("mp", "hits");
+  if (scripts\mp\utility\game::rankingenabled()) {
+  self.bufferedstats["totalShots"] = self getrankedplayerdata("mp", "totalShots");
+  self.bufferedstats["accuracy"] = self getrankedplayerdata("mp", "accuracy");
+  self.bufferedstats["misses"] = self getrankedplayerdata("mp", "misses");
+  self.bufferedstats["hits"] = self getrankedplayerdata("mp", "hits");
   }
 
-  self._id_316E["timePlayedAllies"] = self getrankedplayerdata("mp", "timePlayedAllies");
-  self._id_316E["timePlayedOpfor"] = self getrankedplayerdata("mp", "timePlayedOpfor");
-  self._id_316E["timePlayedOther"] = self getrankedplayerdata("mp", "timePlayedOther");
-  self._id_316E["timePlayedTotal"] = self getrankedplayerdata("mp", "timePlayedTotal");
-  self._id_3169 = [];
-  self._id_3169["round"] = [];
-  self._id_3169["round"]["timePlayed"] = self getrankedplayerdata("common", "round", "timePlayed");
+  self.bufferedstats["timePlayedAllies"] = self getrankedplayerdata("mp", "timePlayedAllies");
+  self.bufferedstats["timePlayedOpfor"] = self getrankedplayerdata("mp", "timePlayedOpfor");
+  self.bufferedstats["timePlayedOther"] = self getrankedplayerdata("mp", "timePlayedOther");
+  self.bufferedstats["timePlayedTotal"] = self getrankedplayerdata("mp", "timePlayedTotal");
+  self.bufferedchildstats = [];
+  self.bufferedchildstats["round"] = [];
+  self.bufferedchildstats["round"]["timePlayed"] = self getrankedplayerdata("common", "round", "timePlayed");
 
-  if (scripts\mp\utility\game::_id_DCD5()) {
-  self._id_3169["xpMultiplierTimePlayed"] = [];
-  self._id_3169["xpMultiplierTimePlayed"][0] = self getrankedplayerdata("mp", "xpMultiplierTimePlayed", 0);
-  self._id_3169["xpMultiplierTimePlayed"][1] = self getrankedplayerdata("mp", "xpMultiplierTimePlayed", 1);
-  self._id_3169["xpMultiplierTimePlayed"][2] = self getrankedplayerdata("mp", "xpMultiplierTimePlayed", 2);
-  self._id_316A["xpMaxMultiplierTimePlayed"] = [];
-  self._id_316A["xpMaxMultiplierTimePlayed"][0] = self getrankedplayerdata("mp", "xpMaxMultiplierTimePlayed", 0);
-  self._id_316A["xpMaxMultiplierTimePlayed"][1] = self getrankedplayerdata("mp", "xpMaxMultiplierTimePlayed", 1);
-  self._id_316A["xpMaxMultiplierTimePlayed"][2] = self getrankedplayerdata("mp", "xpMaxMultiplierTimePlayed", 2);
-  self._id_3169["challengeXPMultiplierTimePlayed"] = [];
-  self._id_3169["challengeXPMultiplierTimePlayed"][0] = self getrankedplayerdata("mp", "challengeXPMultiplierTimePlayed", 0);
-  self._id_316A["challengeXPMaxMultiplierTimePlayed"] = [];
-  self._id_316A["challengeXPMaxMultiplierTimePlayed"][0] = self getrankedplayerdata("mp", "challengeXPMaxMultiplierTimePlayed", 0);
-  self._id_3169["weaponXPMultiplierTimePlayed"] = [];
-  self._id_3169["weaponXPMultiplierTimePlayed"][0] = self getrankedplayerdata("mp", "weaponXPMultiplierTimePlayed", 0);
-  self._id_316A["weaponXPMaxMultiplierTimePlayed"] = [];
-  self._id_316A["weaponXPMaxMultiplierTimePlayed"][0] = self getrankedplayerdata("mp", "weaponXPMaxMultiplierTimePlayed", 0);
-  self._id_316E["prestigeDoubleWeaponXp"] = self getrankedplayerdata("mp", "prestigeDoubleWeaponXp");
-  self._id_316E["prestigeDoubleWeaponXpTimePlayed"] = self getrankedplayerdata("mp", "prestigeDoubleWeaponXpTimePlayed");
-  self._id_316F["prestigeDoubleWeaponXpMaxTimePlayed"] = self getrankedplayerdata("mp", "prestigeDoubleWeaponXpMaxTimePlayed");
+  if (scripts\mp\utility\game::rankingenabled()) {
+  self.bufferedchildstats["xpMultiplierTimePlayed"] = [];
+  self.bufferedchildstats["xpMultiplierTimePlayed"][0] = self getrankedplayerdata("mp", "xpMultiplierTimePlayed", 0);
+  self.bufferedchildstats["xpMultiplierTimePlayed"][1] = self getrankedplayerdata("mp", "xpMultiplierTimePlayed", 1);
+  self.bufferedchildstats["xpMultiplierTimePlayed"][2] = self getrankedplayerdata("mp", "xpMultiplierTimePlayed", 2);
+  self.bufferedchildstatsmax["xpMaxMultiplierTimePlayed"] = [];
+  self.bufferedchildstatsmax["xpMaxMultiplierTimePlayed"][0] = self getrankedplayerdata("mp", "xpMaxMultiplierTimePlayed", 0);
+  self.bufferedchildstatsmax["xpMaxMultiplierTimePlayed"][1] = self getrankedplayerdata("mp", "xpMaxMultiplierTimePlayed", 1);
+  self.bufferedchildstatsmax["xpMaxMultiplierTimePlayed"][2] = self getrankedplayerdata("mp", "xpMaxMultiplierTimePlayed", 2);
+  self.bufferedchildstats["challengeXPMultiplierTimePlayed"] = [];
+  self.bufferedchildstats["challengeXPMultiplierTimePlayed"][0] = self getrankedplayerdata("mp", "challengeXPMultiplierTimePlayed", 0);
+  self.bufferedchildstatsmax["challengeXPMaxMultiplierTimePlayed"] = [];
+  self.bufferedchildstatsmax["challengeXPMaxMultiplierTimePlayed"][0] = self getrankedplayerdata("mp", "challengeXPMaxMultiplierTimePlayed", 0);
+  self.bufferedchildstats["weaponXPMultiplierTimePlayed"] = [];
+  self.bufferedchildstats["weaponXPMultiplierTimePlayed"][0] = self getrankedplayerdata("mp", "weaponXPMultiplierTimePlayed", 0);
+  self.bufferedchildstatsmax["weaponXPMaxMultiplierTimePlayed"] = [];
+  self.bufferedchildstatsmax["weaponXPMaxMultiplierTimePlayed"][0] = self getrankedplayerdata("mp", "weaponXPMaxMultiplierTimePlayed", 0);
+  self.bufferedstats["prestigeDoubleWeaponXp"] = self getrankedplayerdata("mp", "prestigeDoubleWeaponXp");
+  self.bufferedstats["prestigeDoubleWeaponXpTimePlayed"] = self getrankedplayerdata("mp", "prestigeDoubleWeaponXpTimePlayed");
+  self.bufferedstatsmax["prestigeDoubleWeaponXpMaxTimePlayed"] = self getrankedplayerdata("mp", "prestigeDoubleWeaponXpMaxTimePlayed");
   }
 
-  _id_97DB();
+  initbestscorestatstable();
 }
 
-_id_97DB() {
-  var_0 = "mp/bestscorestatsTable.csv";
-  self._id_2A98 = [];
-  self._id_3168 = [];
-  var_1 = 0;
+initbestscorestatstable() {
+  var_00 = "mp/bestscorestatsTable.csv";
+  self.bestscorestats = [];
+  self.bufferedbestscorestats = [];
+  var_01 = 0;
 
   for (;;) {
-  var_2 = tablelookupbyrow(var_0, var_1, 0);
+  var_02 = tablelookupbyrow(var_00, var_01, 0);
 
-  if (var_2 == "")
+  if (var_02 == "")
   break;
 
-  self._id_2A98[var_2] = self getrankedplayerdata("mp", "bestScores", var_2);
+  self.bestscorestats[var_02] = self getrankedplayerdata("mp", "bestScores", var_02);
   var_1++;
   }
 }
 
-_id_10E33(var_0) {
-  return self getrankedplayerdata("mp", var_0);
+statget(var_00) {
+  return self getrankedplayerdata("mp", var_00);
 }
 
-_id_10E54(var_0, var_1) {
-  if (!scripts\mp\utility\game::_id_DCD5())
+func_10E54(var_00, var_01) {
+  if (!scripts\mp\utility\game::rankingenabled())
   return;
 
-  self setrankedplayerdata("mp", var_0, var_1);
+  self setrankedplayerdata("mp", var_00, var_01);
 }
 
-_id_10E12(var_0, var_1, var_2) {
-  if (!scripts\mp\utility\game::_id_DCD5())
+statadd(var_00, var_01, var_02) {
+  if (!scripts\mp\utility\game::rankingenabled())
   return;
 
-  if (isdefined(var_2)) {
-  var_3 = self getrankedplayerdata("mp", var_0, var_2);
-  self setrankedplayerdata("mp", var_0, var_2, var_1 + var_3);
+  if (isdefined(var_02)) {
+  var_03 = self getrankedplayerdata("mp", var_00, var_02);
+  self setrankedplayerdata("mp", var_00, var_02, var_01 + var_03);
   } else {
-  var_4 = self getrankedplayerdata("mp", var_0) + var_1;
-  self setrankedplayerdata("mp", var_0, var_4);
+  var_04 = self getrankedplayerdata("mp", var_00) + var_01;
+  self setrankedplayerdata("mp", var_00, var_04);
   }
 }
 
-_id_10E35(var_0, var_1) {
-  if (var_0 == "round")
-  return self getrankedplayerdata("common", var_0, var_1);
+statgetchild(var_00, var_01) {
+  if (var_00 == "round")
+  return self getrankedplayerdata("common", var_00, var_01);
   else
-  return self getrankedplayerdata("mp", var_0, var_1);
+  return self getrankedplayerdata("mp", var_00, var_01);
 }
 
-statsetchild(var_0, var_1, var_2, var_3) {
+statsetchild(var_00, var_01, var_02, var_03) {
   if (isagent(self))
   return;
 
-  if (isdefined(var_3) || !scripts\mp\utility\game::_id_DCD5())
+  if (isdefined(var_03) || !scripts\mp\utility\game::rankingenabled())
   return;
 
-  if (var_0 == "round") {
-  self setrankedplayerdata("common", var_0, var_1, var_2);
-  _id_F662(var_1, var_2);
+  if (var_00 == "round") {
+  self setrankedplayerdata("common", var_00, var_01, var_02);
+  setbestscore(var_01, var_02);
   }
   else
-  self setrankedplayerdata("mp", var_0, var_1, var_2);
+  self setrankedplayerdata("mp", var_00, var_01, var_02);
 }
 
-_id_10E15(var_0, var_1, var_2) {
-  if (!scripts\mp\utility\game::_id_DCD5())
+stataddchild(var_00, var_01, var_02) {
+  if (!scripts\mp\utility\game::rankingenabled())
   return;
 
-  var_3 = self getrankedplayerdata("mp", var_0, var_1);
-  self setrankedplayerdata("mp", var_0, var_1, var_3 + var_2);
+  var_03 = self getrankedplayerdata("mp", var_00, var_01);
+  self setrankedplayerdata("mp", var_00, var_01, var_03 + var_02);
 }
 
-_id_10E36(var_0, var_1, var_2) {
-  if (!scripts\mp\utility\game::_id_DCD5() && !scripts\mp\utility\game::istrue(var_2))
+statgetchildbuffered(var_00, var_01, var_02) {
+  if (!scripts\mp\utility\game::rankingenabled() && !scripts\mp\utility\game::istrue(var_02))
   return 0;
 
-  return self._id_3169[var_0][var_1];
+  return self.bufferedchildstats[var_00][var_01];
 }
 
-_id_10E57(var_0, var_1, var_2, var_3) {
-  if (!scripts\mp\utility\game::_id_DCD5() && !scripts\mp\utility\game::istrue(var_3))
+statsetchildbuffered(var_00, var_01, var_02, var_03) {
+  if (!scripts\mp\utility\game::rankingenabled() && !scripts\mp\utility\game::istrue(var_03))
   return;
 
-  self._id_3169[var_0][var_1] = var_2;
+  self.bufferedchildstats[var_00][var_01] = var_02;
 }
 
-_id_10E16(var_0, var_1, var_2, var_3) {
-  if (!scripts\mp\utility\game::_id_DCD5() && !scripts\mp\utility\game::istrue(var_3))
+stataddchildbuffered(var_00, var_01, var_02, var_03) {
+  if (!scripts\mp\utility\game::rankingenabled() && !scripts\mp\utility\game::istrue(var_03))
   return;
 
-  var_4 = _id_10E36(var_0, var_1, var_3);
-  _id_10E57(var_0, var_1, var_4 + var_2, var_3);
+  var_04 = statgetchildbuffered(var_00, var_01, var_03);
+  statsetchildbuffered(var_00, var_01, var_04 + var_02, var_03);
 }
 
-_id_10E14(var_0, var_1, var_2) {
-  if (!scripts\mp\utility\game::_id_DCD5())
+stataddbufferedwithmax(var_00, var_01, var_02) {
+  if (!scripts\mp\utility\game::rankingenabled())
   return;
 
-  var_3 = _id_10E34(var_0) + var_1;
+  var_03 = statgetbuffered(var_00) + var_01;
 
-  if (var_3 > var_2)
-  var_3 = var_2;
+  if (var_03 > var_02)
+  var_03 = var_02;
 
-  if (var_3 < _id_10E34(var_0))
-  var_3 = var_2;
+  if (var_03 < statgetbuffered(var_00))
+  var_03 = var_02;
 
-  _id_10E55(var_0, var_3);
+  func_10E55(var_00, var_03);
 }
 
-_id_10E17(var_0, var_1, var_2, var_3) {
-  if (!scripts\mp\utility\game::_id_DCD5())
+stataddchildbufferedwithmax(var_00, var_01, var_02, var_03) {
+  if (!scripts\mp\utility\game::rankingenabled())
   return;
 
-  var_4 = _id_10E36(var_0, var_1) + var_2;
+  var_04 = statgetchildbuffered(var_00, var_01) + var_02;
 
-  if (var_4 > var_3)
-  var_4 = var_3;
+  if (var_04 > var_03)
+  var_04 = var_03;
 
-  if (var_4 < _id_10E36(var_0, var_1))
-  var_4 = var_3;
+  if (var_04 < statgetchildbuffered(var_00, var_01))
+  var_04 = var_03;
 
-  _id_10E57(var_0, var_1, var_4);
+  statsetchildbuffered(var_00, var_01, var_04);
 }
 
-_id_10E34(var_0, var_1) {
-  if (!scripts\mp\utility\game::_id_DCD5() && !scripts\mp\utility\game::istrue(var_1))
+statgetbuffered(var_00, var_01) {
+  if (!scripts\mp\utility\game::rankingenabled() && !scripts\mp\utility\game::istrue(var_01))
   return 0;
 
-  return self._id_316E[var_0];
+  return self.bufferedstats[var_00];
 }
 
-_id_10E37(var_0) {
-  if (!scripts\mp\utility\game::_id_DCD5())
+func_10E37(var_00) {
+  if (!scripts\mp\utility\game::rankingenabled())
   return 0;
 
-  return self._id_10AEC[var_0];
+  return self.squadmemberbufferedstats[var_00];
 }
 
-_id_10E55(var_0, var_1, var_2) {
-  if (!scripts\mp\utility\game::_id_DCD5() && !scripts\mp\utility\game::istrue(var_2))
+func_10E55(var_00, var_01, var_02) {
+  if (!scripts\mp\utility\game::rankingenabled() && !scripts\mp\utility\game::istrue(var_02))
   return;
 
-  self._id_316E[var_0] = var_1;
+  self.bufferedstats[var_00] = var_01;
 }
 
-_id_10E58(var_0, var_1) {
-  if (!scripts\mp\utility\game::_id_DCD5())
+func_10E58(var_00, var_01) {
+  if (!scripts\mp\utility\game::rankingenabled())
   return;
 
-  self._id_10AEC[var_0] = var_1;
+  self.squadmemberbufferedstats[var_00] = var_01;
 }
 
-_id_10E13(var_0, var_1, var_2) {
-  if (!scripts\mp\utility\game::_id_DCD5() && !scripts\mp\utility\game::istrue(var_2))
+stataddbuffered(var_00, var_01, var_02) {
+  if (!scripts\mp\utility\game::rankingenabled() && !scripts\mp\utility\game::istrue(var_02))
   return;
 
-  var_3 = _id_10E34(var_0, var_2);
-  _id_10E55(var_0, var_3 + var_1, var_2);
+  var_03 = statgetbuffered(var_00, var_02);
+  func_10E55(var_00, var_03 + var_01, var_02);
 }
 
-_id_10E18(var_0, var_1) {
-  if (!scripts\mp\utility\game::_id_DCD5())
+func_10E18(var_00, var_01) {
+  if (!scripts\mp\utility\game::rankingenabled())
   return;
 
-  var_2 = _id_10E37(var_0);
-  _id_10E58(var_0, var_2 + var_1);
+  var_02 = func_10E37(var_00);
+  func_10E58(var_00, var_02 + var_01);
 }
 
-_id_12E6A() {
+func_12E6A() {
   wait 0.15;
-  var_0 = 0;
+  var_00 = 0;
 
-  while (!level._id_7669) {
+  while (!level.gameended) {
   scripts\mp\hostmigration::waittillhostmigrationdone();
   var_0++;
 
-  if (var_0 >= level.players.size)
-  var_0 = 0;
+  if (var_00 >= level.players.size)
+  var_00 = 0;
 
-  if (isdefined(level.players[var_0])) {
-  level.players[var_0] _id_13E04();
-  level.players[var_0] _id_12F5E();
+  if (isdefined(level.players[var_00])) {
+  level.players[var_00] writebufferedstats();
+  level.players[var_00] func_12F5E();
   }
 
   wait 2.0;
   }
 
-  foreach (var_2 in level.players) {
-  var_2 _id_13E04();
-  var_2 _id_12F5E();
+  foreach (var_02 in level.players) {
+  var_02 writebufferedstats();
+  var_02 func_12F5E();
   }
 }
 
-_id_F662(var_0, var_1) {
-  var_2 = scripts\mp\utility\game::_id_DCD5();
+setbestscore(var_00, var_01) {
+  var_02 = scripts\mp\utility\game::rankingenabled();
 
-  if (!var_2)
+  if (!var_02)
   return;
 
-  if (isdefined(self._id_2A98[var_0]) && var_1 > self._id_2A98[var_0]) {
-  self._id_2A98[var_0] = var_1;
-  self._id_3168[var_0] = var_1;
+  if (isdefined(self.bestscorestats[var_00]) && var_01 > self.bestscorestats[var_00]) {
+  self.bestscorestats[var_00] = var_01;
+  self.bufferedbestscorestats[var_00] = var_01;
   }
 }
 
-_id_13E03() {
-  foreach (var_1 in level.players) {
-  if (isdefined(var_1) && var_1 scripts\mp\utility\game::_id_DCD5()) {
-  foreach (var_4, var_3 in var_1._id_3168)
-  var_1 setrankedplayerdata("mp", "bestScores", var_4, var_3);
+writebestscores() {
+  foreach (var_01 in level.players) {
+  if (isdefined(var_01) && var_01 scripts\mp\utility\game::rankingenabled()) {
+  foreach (var_04, var_03 in var_1.bufferedbestscorestats)
+  var_01 setrankedplayerdata("mp", "bestScores", var_04, var_03);
   }
   }
 }
 
-_id_13E04() {
-  var_0 = scripts\mp\utility\game::_id_DCD5();
+writebufferedstats() {
+  var_00 = scripts\mp\utility\game::rankingenabled();
 
-  if (var_0) {
-  foreach (var_3, var_2 in self._id_316E)
-  self setrankedplayerdata("mp", var_3, var_2);
+  if (var_00) {
+  foreach (var_03, var_02 in self.bufferedstats)
+  self setrankedplayerdata("mp", var_03, var_02);
 
   if (!isai(self)) {
-  foreach (var_3, var_2 in self._id_10AEC)
-  self setrankedplayerdata("rankedloadouts", "squadMembers", var_3, var_2);
+  foreach (var_03, var_02 in self.squadmemberbufferedstats)
+  self setrankedplayerdata("rankedloadouts", "squadMembers", var_03, var_02);
   }
   }
 
-  foreach (var_3, var_2 in self._id_3169) {
-  foreach (var_8, var_7 in var_2) {
-  if (var_3 == "round") {
-  self setrankedplayerdata("common", var_3, var_8, var_7);
-  _id_F662(var_8, var_7);
+  foreach (var_03, var_02 in self.bufferedchildstats) {
+  foreach (var_08, var_07 in var_02) {
+  if (var_03 == "round") {
+  self setrankedplayerdata("common", var_03, var_08, var_07);
+  setbestscore(var_08, var_07);
   continue;
   }
 
-  if (var_0)
-  self setrankedplayerdata("mp", var_3, var_8, var_7);
+  if (var_00)
+  self setrankedplayerdata("mp", var_03, var_08, var_07);
   }
   }
 }
 
-_id_13E05() {
+func_13E05() {
   if (!scripts\mp\utility\game::matchmakinggame())
   return;
 
   level waittill("game_ended");
   wait 0.1;
 
-  if (scripts\mp\utility\game::_id_13916() || !scripts\mp\utility\game::_id_9F32() && scripts\mp\utility\game::_id_9049()) {
-  foreach (var_1 in level.players)
-  var_1 _id_93FB(var_1.kills, var_1.deaths);
+  if (scripts\mp\utility\game::waslastround() || !scripts\mp\utility\game::isroundbased() && scripts\mp\utility\game::hittimelimit()) {
+  foreach (var_01 in level.players)
+  var_01 func_93FB(var_1.kills, var_1.deaths);
   }
 }
 
-_id_93FB(var_0, var_1) {
-  if (!scripts\mp\utility\game::_id_DCD5())
+func_93FB(var_00, var_01) {
+  if (!scripts\mp\utility\game::rankingenabled())
   return;
 
-  for (var_2 = 0; var_2 < 4; var_2++) {
-  var_3 = self getrankedplayerdata("mp", "kdHistoryK", var_2 + 1);
-  self setrankedplayerdata("mp", "kdHistoryK", var_2, var_3);
-  var_3 = self getrankedplayerdata("mp", "kdHistoryD", var_2 + 1);
-  self setrankedplayerdata("mp", "kdHistoryD", var_2, var_3);
+  for (var_02 = 0; var_02 < 4; var_2++) {
+  var_03 = self getrankedplayerdata("mp", "kdHistoryK", var_02 + 1);
+  self setrankedplayerdata("mp", "kdHistoryK", var_02, var_03);
+  var_03 = self getrankedplayerdata("mp", "kdHistoryD", var_02 + 1);
+  self setrankedplayerdata("mp", "kdHistoryD", var_02, var_03);
   }
 
-  self setrankedplayerdata("mp", "kdHistoryK", 4, int(clamp(var_0, 0, 255)));
-  self setrankedplayerdata("mp", "kdHistoryD", 4, int(clamp(var_1, 0, 255)));
+  self setrankedplayerdata("mp", "kdHistoryK", 4, int(clamp(var_00, 0, 255)));
+  self setrankedplayerdata("mp", "kdHistoryD", 4, int(clamp(var_01, 0, 255)));
 }
 
-_id_93FC(var_0, var_1, var_2) {
-  if (scripts\mp\utility\game::_id_9E6C(var_0))
+func_93FC(var_00, var_01, var_02) {
+  if (scripts\mp\utility\game::iskillstreakweapon(var_00))
   return;
 
-  if (isdefined(level._id_561D))
+  if (isdefined(level.func_561D))
   return;
 
-  if (scripts\mp\utility\game::_id_DCD5()) {
-  var_3 = self getrankedplayerdata("mp", "weaponStats", var_0, var_1);
-  self setrankedplayerdata("mp", "weaponStats", var_0, var_1, var_3 + var_2);
-  }
-}
-
-_id_93F9(var_0, var_1, var_2) {
-  if (isdefined(level._id_561D))
-  return;
-
-  if (!scripts\mp\utility\game::_id_2490(var_0))
-  return;
-
-  if (scripts\mp\utility\game::_id_DCD5()) {
-  var_3 = self getrankedplayerdata("mp", "attachmentsStats", var_0, var_1);
-  self setrankedplayerdata("mp", "attachmentsStats", var_0, var_1, var_3 + var_2);
+  if (scripts\mp\utility\game::rankingenabled()) {
+  var_03 = self getrankedplayerdata("mp", "weaponStats", var_00, var_01);
+  self setrankedplayerdata("mp", "weaponStats", var_00, var_01, var_03 + var_02);
   }
 }
 
-_id_12F5E() {
-  if (!isdefined(self._id_11AF0))
+func_93F9(var_00, var_01, var_02) {
+  if (isdefined(level.func_561D))
   return;
 
-  if (self._id_11AF0 == "" || self._id_11AF0 == "none")
+  if (!scripts\mp\utility\game::func_2490(var_00))
   return;
 
-  if (scripts\mp\utility\game::_id_9E6C(self._id_11AF0) || scripts\mp\utility\game::_id_9DE2(self._id_11AF0) || scripts\mp\utility\game::_id_9D6E(self._id_11AF0))
+  if (scripts\mp\utility\game::rankingenabled()) {
+  var_03 = self getrankedplayerdata("mp", "attachmentsStats", var_00, var_01);
+  self setrankedplayerdata("mp", "attachmentsStats", var_00, var_01, var_03 + var_02);
+  }
+}
+
+func_12F5E() {
+  if (!isdefined(self.trackingweapon))
   return;
 
-  var_0 = self._id_11AF0;
-  var_1 = undefined;
-  var_2 = getsubstr(var_0, 0, 4);
+  if (self.trackingweapon == "" || self.trackingweapon == "none")
+  return;
 
-  if (var_2 == "alt_") {
-  var_3 = scripts\mp\utility\game::_id_821A(var_0);
+  if (scripts\mp\utility\game::iskillstreakweapon(self.trackingweapon) || scripts\mp\utility\game::isenvironmentweapon(self.trackingweapon) || scripts\mp\utility\game::isbombsiteweapon(self.trackingweapon))
+  return;
 
-  foreach (var_5 in var_3) {
-  if (var_5 == "shotgun" || var_5 == "gl") {
-  var_1 = var_5;
+  var_00 = self.trackingweapon;
+  var_01 = undefined;
+  var_02 = getsubstr(var_00, 0, 4);
+
+  if (var_02 == "alt_") {
+  var_03 = scripts\mp\utility\game::getweaponattachmentsbasenames(var_00);
+
+  foreach (var_05 in var_03) {
+  if (var_05 == "shotgun" || var_05 == "gl") {
+  var_01 = var_05;
   break;
   }
   }
   }
 
-  if (!isdefined(var_1)) {
-  if (var_2 == "alt_") {
-  var_0 = getsubstr(var_0, 4);
-  var_2 = getsubstr(var_0, 0, 4);
+  if (!isdefined(var_01)) {
+  if (var_02 == "alt_") {
+  var_00 = getsubstr(var_00, 4);
+  var_02 = getsubstr(var_00, 0, 4);
   }
 
-  if (var_2 == "iw6_" || var_2 == "iw7_") {
-  var_7 = strtok(var_0, "_");
-  var_1 = var_7[0] + "_" + var_7[1];
+  if (var_02 == "iw6_" || var_02 == "iw7_") {
+  var_07 = strtok(var_00, "_");
+  var_01 = var_7[0] + "_" + var_7[1];
   }
   }
 
-  if (var_1 == "gl" || var_1 == "shotgun" || var_1 == "missglprox" || var_1 == "stickglprox" || var_1 == "shotgunglprox" || var_1 == "shotgunglr") {
-  _id_CA72(var_1);
-  _id_CA6D();
+  if (var_01 == "gl" || var_01 == "shotgun" || var_01 == "missglprox" || var_01 == "stickglprox" || var_01 == "shotgunglprox" || var_01 == "shotgunglr") {
+  func_CA72(var_01);
+  persclear_stats();
   return;
   }
 
-  if (!scripts\mp\utility\game::_id_9D78(var_1) && !scripts\mp\utility\game::_id_9D79(var_1))
+  if (!scripts\mp\utility\game::iscacprimaryweapon(var_01) && !scripts\mp\utility\game::iscacsecondaryweapon(var_01))
   return;
 
-  var_8 = getweaponvariantindex(var_0);
-  _id_CA73(var_1, var_8);
-  var_3 = getweaponattachments(var_0);
+  var_08 = getweaponvariantindex(var_00);
+  func_CA73(var_01, var_08);
+  var_03 = getweaponattachments(var_00);
 
-  foreach (var_5 in var_3) {
-  var_10 = scripts\mp\utility\game::_id_2494(var_5);
+  foreach (var_05 in var_03) {
+  var_10 = scripts\mp\utility\game::attachmentmap_tobase(var_05);
 
-  if (!scripts\mp\utility\game::_id_2490(var_10))
+  if (!scripts\mp\utility\game::func_2490(var_10))
   continue;
 
   switch (var_10) {
@@ -410,113 +410,113 @@ _id_12F5E() {
   continue;
   }
 
-  _id_CA72(var_10);
+  func_CA72(var_10);
   }
 
-  _id_CA6D();
+  persclear_stats();
 }
 
-_id_CA6D() {
-  self._id_11AF0 = "none";
-  self._id_11AF1 = 0;
-  self._id_11AEF = 0;
-  self._id_11AEE = 0;
-  self._id_11AED = 0;
-  self._id_11AEC = 0;
+persclear_stats() {
+  self.trackingweapon = "none";
+  self.trackingweaponshots = 0;
+  self.trackingweaponkills = 0;
+  self.trackingweaponhits = 0;
+  self.trackingweaponheadshots = 0;
+  self.trackingweapondeaths = 0;
 }
 
-_id_CA73(var_0, var_1) {
-  if (self._id_11AF1 > 0) {
-  _id_93FC(var_0, "shots", self._id_11AF1);
-  scripts\mp\matchdata::_id_AFDC(var_0, "shots", self._id_11AF1, var_1);
+func_CA73(var_00, var_01) {
+  if (self.trackingweaponshots > 0) {
+  func_93FC(var_00, "shots", self.trackingweaponshots);
+  scripts\mp\matchdata::func_AFDC(var_00, "shots", self.trackingweaponshots, var_01);
   }
 
-  if (self._id_11AEF > 0) {
-  _id_93FC(var_0, "kills", self._id_11AEF);
-  scripts\mp\matchdata::_id_AFDC(var_0, "kills", self._id_11AEF, var_1);
+  if (self.trackingweaponkills > 0) {
+  func_93FC(var_00, "kills", self.trackingweaponkills);
+  scripts\mp\matchdata::func_AFDC(var_00, "kills", self.trackingweaponkills, var_01);
   }
 
-  if (self._id_11AEE > 0) {
-  _id_93FC(var_0, "hits", self._id_11AEE);
-  scripts\mp\matchdata::_id_AFDC(var_0, "hits", self._id_11AEE, var_1);
+  if (self.trackingweaponhits > 0) {
+  func_93FC(var_00, "hits", self.trackingweaponhits);
+  scripts\mp\matchdata::func_AFDC(var_00, "hits", self.trackingweaponhits, var_01);
   }
 
-  if (self._id_11AED > 0) {
-  _id_93FC(var_0, "headShots", self._id_11AED);
-  scripts\mp\matchdata::_id_AFDC(var_0, "headShots", self._id_11AED, var_1);
+  if (self.trackingweaponheadshots > 0) {
+  func_93FC(var_00, "headShots", self.trackingweaponheadshots);
+  scripts\mp\matchdata::func_AFDC(var_00, "headShots", self.trackingweaponheadshots, var_01);
   }
 
-  if (self._id_11AEC > 0) {
-  _id_93FC(var_0, "deaths", self._id_11AEC);
-  scripts\mp\matchdata::_id_AFDC(var_0, "deaths", self._id_11AEC, var_1);
+  if (self.trackingweapondeaths > 0) {
+  func_93FC(var_00, "deaths", self.trackingweapondeaths);
+  scripts\mp\matchdata::func_AFDC(var_00, "deaths", self.trackingweapondeaths, var_01);
   }
 }
 
-_id_CA72(var_0) {
-  if (!scripts\mp\utility\game::_id_2490(var_0))
+func_CA72(var_00) {
+  if (!scripts\mp\utility\game::func_2490(var_00))
   return;
 
-  if (self._id_11AF1 > 0 && var_0 != "tactical") {
-  _id_93F9(var_0, "shots", self._id_11AF1);
-  scripts\mp\matchdata::_id_AF94(var_0, "shots", self._id_11AF1);
+  if (self.trackingweaponshots > 0 && var_00 != "tactical") {
+  func_93F9(var_00, "shots", self.trackingweaponshots);
+  scripts\mp\matchdata::func_AF94(var_00, "shots", self.trackingweaponshots);
   }
 
-  if (self._id_11AEF > 0 && var_0 != "tactical") {
-  _id_93F9(var_0, "kills", self._id_11AEF);
-  scripts\mp\matchdata::_id_AF94(var_0, "kills", self._id_11AEF);
+  if (self.trackingweaponkills > 0 && var_00 != "tactical") {
+  func_93F9(var_00, "kills", self.trackingweaponkills);
+  scripts\mp\matchdata::func_AF94(var_00, "kills", self.trackingweaponkills);
   }
 
-  if (self._id_11AEE > 0 && var_0 != "tactical") {
-  _id_93F9(var_0, "hits", self._id_11AEE);
-  scripts\mp\matchdata::_id_AF94(var_0, "hits", self._id_11AEE);
+  if (self.trackingweaponhits > 0 && var_00 != "tactical") {
+  func_93F9(var_00, "hits", self.trackingweaponhits);
+  scripts\mp\matchdata::func_AF94(var_00, "hits", self.trackingweaponhits);
   }
 
-  if (self._id_11AED > 0 && var_0 != "tactical") {
-  _id_93F9(var_0, "headShots", self._id_11AED);
-  scripts\mp\matchdata::_id_AF94(var_0, "headShots", self._id_11AED);
+  if (self.trackingweaponheadshots > 0 && var_00 != "tactical") {
+  func_93F9(var_00, "headShots", self.trackingweaponheadshots);
+  scripts\mp\matchdata::func_AF94(var_00, "headShots", self.trackingweaponheadshots);
   }
 
-  if (self._id_11AEC > 0) {
-  _id_93F9(var_0, "deaths", self._id_11AEC);
-  scripts\mp\matchdata::_id_AF94(var_0, "deaths", self._id_11AEC);
+  if (self.trackingweapondeaths > 0) {
+  func_93F9(var_00, "deaths", self.trackingweapondeaths);
+  scripts\mp\matchdata::func_AF94(var_00, "deaths", self.trackingweapondeaths);
   }
 }
 
-_id_12F85() {
+func_12F85() {
   level waittill("game_ended");
 
   if (!scripts\mp\utility\game::matchmakinggame())
   return;
 
-  var_0 = 0;
-  var_1 = 0;
-  var_2 = 0;
-  var_3 = 0;
-  var_4 = 0;
-  var_5 = 0;
+  var_00 = 0;
+  var_01 = 0;
+  var_02 = 0;
+  var_03 = 0;
+  var_04 = 0;
+  var_05 = 0;
 
-  foreach (var_7 in level.players)
-  var_5 = var_5 + var_7._id_1190E["total"];
+  foreach (var_07 in level.players)
+  var_05 = var_05 + var_7.timeplayed["total"];
 
-  incrementcounter("global_minutes", int(var_5 / 60));
+  incrementcounter("global_minutes", int(var_05 / 60));
 
-  if (scripts\mp\utility\game::_id_9F32() && !scripts\mp\utility\game::_id_13916())
+  if (scripts\mp\utility\game::isroundbased() && !scripts\mp\utility\game::waslastround())
   return;
 
   wait 0.05;
 
-  foreach (var_7 in level.players) {
-  var_0 = var_0 + var_7.kills;
-  var_1 = var_1 + var_7.deaths;
-  var_2 = var_2 + var_7.assists;
-  var_3 = var_3 + var_7.headshots;
-  var_4 = var_4 + var_7.suicides;
+  foreach (var_07 in level.players) {
+  var_00 = var_00 + var_7.kills;
+  var_01 = var_01 + var_7.deaths;
+  var_02 = var_02 + var_7.assists;
+  var_03 = var_03 + var_7.headshots;
+  var_04 = var_04 + var_7.suicides;
   }
 
-  incrementcounter("global_headshots", var_3);
-  incrementcounter("global_suicides", var_4);
+  incrementcounter("global_headshots", var_03);
+  incrementcounter("global_suicides", var_04);
   incrementcounter("global_games", 1);
 
   if (!isdefined(level.assists_disabled))
-  incrementcounter("global_assists", var_2);
+  incrementcounter("global_assists", var_02);
 }

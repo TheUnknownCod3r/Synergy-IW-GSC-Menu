@@ -4,99 +4,99 @@
 ***************************************/
 
 init() {
-  thread _id_13962();
-  level._id_5CC0 = [];
-  level._id_5CC0["ability_pet_1"] = spawnstruct();
-  level._id_5CC0["ability_pet_1"]._id_1088C = ::_id_10610;
-  level._id_5CC0["ability_pet_2"] = spawnstruct();
-  level._id_5CC0["ability_pet_2"]._id_1088C = ::_id_10611;
-  level._id_5CC0["ability_pet_3"] = spawnstruct();
-  level._id_5CC0["ability_pet_3"]._id_1088C = ::_id_10612;
-  level._id_5CC0["ability_pet_4"] = spawnstruct();
-  level._id_5CC0["ability_pet_4"]._id_1088C = ::_id_10613;
+  thread func_13962();
+  level.func_5CC0 = [];
+  level.func_5CC0["ability_pet_1"] = spawnstruct();
+  level.func_5CC0["ability_pet_1"].func_1088C = ::func_10610;
+  level.func_5CC0["ability_pet_2"] = spawnstruct();
+  level.func_5CC0["ability_pet_2"].func_1088C = ::func_10611;
+  level.func_5CC0["ability_pet_3"] = spawnstruct();
+  level.func_5CC0["ability_pet_3"].func_1088C = ::func_10612;
+  level.func_5CC0["ability_pet_4"] = spawnstruct();
+  level.func_5CC0["ability_pet_4"].func_1088C = ::func_10613;
 }
 
-_id_13962() {
+func_13962() {
   for (;;) {
-  level waittill("connected", var_0);
-  var_0 thread _id_D2FA();
+  level waittill("connected", var_00);
+  var_00 thread func_D2FA();
   }
 }
 
-_id_D2FA() {
+func_D2FA() {
   self endon("disconnect");
 
   for (;;) {
   if (getdvarint("scr_drone_pet_debug_spawn") != 0) {
   self waittill("spawned_player");
-  var_0 = getdvarint("scr_drone_pet_debug_spawn");
-  var_1 = "select_ability";
+  var_00 = getdvarint("scr_drone_pet_debug_spawn");
+  var_01 = "select_ability";
   } else {
-  self waittill("luinotifyserver", var_1, var_0);
+  self waittill("luinotifyserver", var_01, var_00);
 
-  if (var_1 != "select_ability")
+  if (var_01 != "select_ability")
   continue;
   }
 
-  if (!scripts\mp\killstreaks\ball_drone::_id_128DB(0, "ball_drone_ability_pet"))
+  if (!scripts\mp\killstreaks\ball_drone::tryuseballdrone(0, "ball_drone_ability_pet"))
   continue;
 
-  self._id_27D3._id_151C = var_0;
-  var_2 = "ability_pet_" + (var_0 + 1);
-  var_3 = level._id_5CC0[var_2];
-  self [[var_3._id_1088C]]();
+  self.balldrone.func_151C = var_00;
+  var_02 = "ability_pet_" + (var_00 + 1);
+  var_03 = level.func_5CC0[var_02];
+  self [[var_3.func_1088C]]();
   }
 }
 
-_id_10610() {
-  level._id_112C0 = 1;
-  level._id_47EF = 30.0;
-  scripts\mp\utility\game::_id_B2AC("");
+func_10610() {
+  level.supportcranked = 1;
+  level.crankedbombtimer = 30.0;
+  scripts\mp\utility\game::func_B2AC("");
 }
 
-_id_10611() {
+func_10611() {
   self.health = 200;
-  self._id_BCF6 = 0.6;
-  scripts\mp\weapons::_id_12ED5();
+  self.movespeedscaler = 0.6;
+  scripts\mp\weapons::updatemovespeedscale();
 }
 
-_id_10612() {
-  var_0 = self getcurrentprimaryweapon();
+func_10612() {
+  var_00 = self getcurrentprimaryweapon();
 
-  if (var_0 == "none")
-  var_0 = scripts\engine\utility::_id_7F62();
+  if (var_00 == "none")
+  var_00 = scripts\engine\utility::getlastweapon();
 
-  if (!self hasweapon(var_0))
-  var_0 = _id_0DC9::_id_7EB7();
+  if (!self hasweapon(var_00))
+  var_00 = scripts/mp/killstreaks/utility::getfirstprimaryweapon();
 
-  scripts\mp\utility\game::_id_141E(var_0);
-  scripts\mp\utility\game::_id_12C6("iw7_knife_mp", 0);
-  scripts\mp\utility\game::_id_141A("iw7_knife_mp");
-  thread _id_94A9();
+  scripts\mp\utility\game::_takeweapon(var_00);
+  scripts\mp\utility\game::_giveweapon("iw7_knife_mp", 0);
+  scripts\mp\utility\game::_switchtoweapon("iw7_knife_mp");
+  thread func_94A9();
 }
 
-_id_10613() {
-  var_0 = self getcurrentprimaryweapon();
+func_10613() {
+  var_00 = self getcurrentprimaryweapon();
 
-  if (var_0 == "none")
-  var_0 = scripts\engine\utility::_id_7F62();
+  if (var_00 == "none")
+  var_00 = scripts\engine\utility::getlastweapon();
 
-  if (!self hasweapon(var_0))
-  var_0 = _id_0DC9::_id_7EB7();
+  if (!self hasweapon(var_00))
+  var_00 = scripts/mp/killstreaks/utility::getfirstprimaryweapon();
 
-  scripts\mp\utility\game::_id_141E(var_0);
-  scripts\mp\utility\game::_id_12C6("iw7_knife_mp", 0);
-  scripts\mp\utility\game::_id_141A("iw7_knife_mp");
-  self._id_BCF6 = 1.5;
+  scripts\mp\utility\game::_takeweapon(var_00);
+  scripts\mp\utility\game::_giveweapon("iw7_knife_mp", 0);
+  scripts\mp\utility\game::_switchtoweapon("iw7_knife_mp");
+  self.movespeedscaler = 1.5;
 }
 
-_id_94A9() {
+func_94A9() {
   self endon("disconnect");
   self endon("death");
 
   for (;;) {
-  var_0 = self _meth_8115();
-  self givemaxammo(var_0);
+  var_00 = self getcurrentoffhand();
+  self givemaxammo(var_00);
   wait 2.0;
   }
 }

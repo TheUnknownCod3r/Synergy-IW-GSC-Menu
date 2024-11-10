@@ -39,21 +39,21 @@ func_7D7A(param_00,param_01) {
 		}
 	}
 
-	if(function_02A5(param_00)) {
+	if(isvector(param_00)) {
 		var_06 = scripts\engine\utility::spawn_tag_origin();
 		var_06.var_8779 = 1;
 		var_06.origin = param_00;
 		return var_06;
 	}
 	else if(isstring(param_01)) {
-		if(function_02A4(scripts\engine\utility::getstruct(param_01,"targetname"))) {
+		if(isstruct(scripts\engine\utility::getstruct(param_01,"targetname"))) {
 			return scripts\engine\utility::getstruct(param_01,"targetname");
 		}
-		else if(function_02A6(getent(param_01,"targetname"))) {
+		else if(isent(getent(param_01,"targetname"))) {
 			return getent(param_01,"targetname");
 		}
-		else if(function_02A7(function_00B3(param_01,"targetname"))) {
-			return function_00B3(param_01,"targetname");
+		else if(isnode(getnode(param_01,"targetname"))) {
+			return getnode(param_01,"targetname");
 		}
 		else if(getsubstr(param_01,0,2) == "**") {
 			return getsubstr(param_01,2);
@@ -605,7 +605,7 @@ func_45A5() {
 func_F59B(param_00) {
 	level.var_FDFA = param_00;
 	scripts/sp/loadout::func_F56D(level.var_FDFA);
-	function_01C5("missionSelected","1");
+	setsaveddvar("missionSelected","1");
 	setomnvar("ui_opsmap_selected_mission",param_00);
 }
 
@@ -917,7 +917,7 @@ func_FDB2(param_00) {
 func_FDBD(param_00,param_01) {
 	func_FE05();
 	if(!isdefined(level.var_FD6E.var_111D7)) {
-		level.var_FD6E.var_111D7 = function_00AC()[3];
+		level.var_FD6E.var_111D7 = getmapsuncolorandintensity()[3];
 	}
 
 	var_02 = param_01 / 0.05;
@@ -929,11 +929,11 @@ func_FDBD(param_00,param_01) {
 		}
 
 		level.var_FD6E.var_111D7 = level.var_FD6E.var_111D7 + var_04;
-		function_01CB(level.var_FD6E.var_111D7);
+		setsuncolorandintensity(level.var_FD6E.var_111D7);
 		scripts\engine\utility::waitframe();
 	}
 
-	function_01CB(param_00);
+	setsuncolorandintensity(param_00);
 	level.var_FD6E.var_111D7 = param_00;
 }
 
@@ -946,15 +946,15 @@ func_FDCD() {
 func_25ED() {
 	var_00 = randomintrange(0,3);
 	if(var_00 == 0) {
-		function_02A9("vr_fire_speed","",0);
+		setglobalsoundcontext("vr_fire_speed","",0);
 	}
 
 	if(var_00 == 1) {
-		function_02A9("vr_fire_speed","1",0);
+		setglobalsoundcontext("vr_fire_speed","1",0);
 	}
 
 	if(var_00 == 2) {
-		function_02A9("vr_fire_speed","2",0);
+		setglobalsoundcontext("vr_fire_speed","2",0);
 	}
 }
 
@@ -1321,7 +1321,7 @@ func_AE45(param_00,param_01) {
 func_3DDE(param_00,param_01) {
 	param_00 = getweaponbasename(param_00);
 	var_02 = "weapon_" + param_00 + "_tr";
-	if(!function_0119(var_02)) {
+	if(!istransientloaded(var_02)) {
 		scripts\sp\_utility::func_13705();
 		scripts\sp\_utility::func_12641(var_02);
 		if(!scripts\engine\utility::array_contains(level.var_D9E5["loaded_weapons"],param_00)) {

@@ -3,51 +3,51 @@
  * Script: scripts\2724.gsc
 ***************************************/
 
-_id_13A12() {
-  var_0 = scripts\engine\utility::_id_107E6();
-  var_0 linkto(self);
-  self._id_A63A = var_0;
-  thread _id_A639(var_0);
-  thread scripts\mp\utility\game::_id_C15A("death", "end_explode");
+func_13A12() {
+  var_00 = scripts\engine\utility::spawn_tag_origin();
+  var_00 linkto(self);
+  self.killcament = var_00;
+  thread func_A639(var_00);
+  thread scripts\mp\utility\game::notifyafterframeend("death", "end_explode");
   self endon("end_explode");
-  var_1 = self.owner;
-  self waittill("explode", var_2);
-  thread _id_0118(var_2, 256, var_1, var_0);
+  var_01 = self.owner;
+  self waittill("explode", var_02);
+  thread func_0118(var_02, 256, var_01, var_00);
 }
 
-_id_C5CB(var_0, var_1, var_2, var_3, var_4) {
-  if (!isdefined(var_0))
+onweapondamage(var_00, var_01, var_02, var_03, var_04) {
+  if (!isdefined(var_00))
   return;
-  else if (var_2 == "MOD_IMPACT")
+  else if (var_02 == "MOD_IMPACT")
   return;
 
-  if (issubstr(self._id_13C2E, "iw7_tacburst_mpl"))
-  _id_20BF(var_0, var_4);
+  if (issubstr(self.weapon_name, "iw7_tacburst_mpl"))
+  func_20BF(var_00, var_04);
 
-  _id_20C3(var_0, var_4, var_1);
+  func_20C3(var_00, var_04, var_01);
 }
 
-_id_0118(var_0, var_1, var_2, var_3) {
-  var_4 = "gltacburst";
+func_0118(var_00, var_01, var_02, var_03) {
+  var_04 = "gltacburst";
 
-  if (issubstr(self._id_13C2E, "iw7_tacburst_mpl"))
-  var_4 = "gltacburst_big";
+  if (issubstr(self.weapon_name, "iw7_tacburst_mpl"))
+  var_04 = "gltacburst_big";
 
-  var_5 = scripts\mp\weapons::_id_7E8C(var_0, var_1, 0);
+  var_05 = scripts\mp\weapons::getempdamageents(var_00, var_01, 0);
 
-  foreach (var_7 in var_5) {
-  if (!isdefined(var_7))
+  foreach (var_07 in var_05) {
+  if (!isdefined(var_07))
   continue;
 
-  var_8 = scripts\engine\utility::ter_op(isdefined(var_7.owner), var_7.owner, var_7);
+  var_08 = scripts\engine\utility::ter_op(isdefined(var_7.owner), var_7.owner, var_07);
 
-  if (!scripts\mp\weapons::_id_7415(var_2, var_8) && var_8 != var_2)
+  if (!scripts\mp\weapons::friendlyfirecheck(var_02, var_08) && var_08 != var_02)
   continue;
 
-  var_7 notify("emp_damage", var_2, 3, var_0, var_4, "MOD_EXPLOSIVE");
+  var_07 notify("emp_damage", var_02, 3, var_00, var_04, "MOD_EXPLOSIVE");
   }
 
-  var_10 = scripts\mp\utility\game::_id_807C(var_0, var_1);
+  var_10 = scripts\mp\utility\game::clearscrambler(var_00, var_01);
 
   foreach (var_12 in var_10) {
   if (!isdefined(var_12))
@@ -56,99 +56,99 @@ _id_0118(var_0, var_1, var_2, var_3) {
   if (!scripts\mp\utility\game::isreallyalive(var_12))
   continue;
 
-  if (scripts\mp\equipment\phase_shift::_id_9DDF(var_12))
+  if (scripts\mp\equipment\phase_shift::isentityphaseshifted(var_12))
   continue;
 
-  if (var_12 != var_2 && scripts\mp\utility\game::_id_9E05(var_2.team, var_12))
+  if (var_12 != var_02 && scripts\mp\utility\game::func_9E05(var_2.team, var_12))
   continue;
 
-  if (!var_12 scripts\mp\killstreaks\emp_common::_id_FFC5())
+  if (!var_12 scripts\mp\killstreaks\emp_common::func_FFC5())
   continue;
 
-  var_12 _meth_80B0(1, var_2.origin, var_2, var_3, "MOD_EXPLOSIVE", var_4);
-  var_12 scripts\mp\killstreaks\emp_common::_id_20C7(3);
+  var_12 getrandomarmkillstreak(1, var_2.origin, var_02, var_03, "MOD_EXPLOSIVE", var_04);
+  var_12 scripts\mp\killstreaks\emp_common::func_20C7(3);
 
-  if (var_4 == "gltacburst_big")
-  var_12 _id_20BF(self, var_2);
+  if (var_04 == "gltacburst_big")
+  var_12 func_20BF(self, var_02);
 
-  thread scripts\mp\gamescore::_id_11ACF(var_2, var_12, var_4, 3);
+  thread scripts\mp\gamescore::func_11ACF(var_02, var_12, var_04, 3);
   }
 }
 
-_id_20C3(var_0, var_1, var_2) {
-  if (!scripts\mp\killstreaks\emp_common::_id_FFC5()) {
-  if (var_1 != self)
-  var_1 scripts\mp\damagefeedback::updatedamagefeedback("hiticonempimmune", undefined, undefined, undefined, 1);
+func_20C3(var_00, var_01, var_02) {
+  if (!scripts\mp\killstreaks\emp_common::func_FFC5()) {
+  if (var_01 != self)
+  var_01 scripts\mp\damagefeedback::updatedamagefeedback("hiticonempimmune", undefined, undefined, undefined, 1);
 
   return;
   }
 
-  var_3 = 3;
+  var_03 = 3;
 
-  if (self == var_1)
-  var_3 = 1;
+  if (self == var_01)
+  var_03 = 1;
 
-  scripts\mp\killstreaks\emp_common::_id_20C7(var_3);
-  thread scripts\mp\gamescore::_id_11ACF(var_1, self, scripts\engine\utility::ter_op(issubstr(var_2, "iw7_tacburst_mpl"), "gltacburst_big", "gltacburst"), var_3);
+  scripts\mp\killstreaks\emp_common::func_20C7(var_03);
+  thread scripts\mp\gamescore::func_11ACF(var_01, self, scripts\engine\utility::ter_op(issubstr(var_02, "iw7_tacburst_mpl"), "gltacburst_big", "gltacburst"), var_03);
 }
 
-_id_20BF(var_0, var_1) {
-  var_2 = 2;
-  var_3 = 4;
+func_20BF(var_00, var_01) {
+  var_02 = 2;
+  var_03 = 4;
 
-  if (self == var_1) {
-  var_2 = 0.75;
-  var_3 = 1.5;
+  if (self == var_01) {
+  var_02 = 0.75;
+  var_03 = 1.5;
   }
 
-  var_4 = 1 - distance(self.origin, var_0.origin) / 256;
+  var_04 = 1 - distance(self.origin, var_0.origin) / 256;
 
-  if (var_4 < 0)
-  var_4 = 0;
+  if (var_04 < 0)
+  var_04 = 0;
 
-  var_5 = var_2 + var_3 * var_4;
-  var_5 = scripts\mp\perks\perkfunctions::_id_20E0(var_1, self, var_5);
-  thread scripts\mp\gamescore::_id_11ACF(var_1, self, "gltacburst_big", var_5);
-  var_1 notify("stun_hit");
-  self notify("concussed", var_1);
-  scripts\mp\weapons::_id_F7FC();
-  thread scripts\mp\weapons::_id_40EA(var_5);
-  self shellshock("concussion_grenade_mp", var_5);
-  self._id_44ED = gettime() + var_5 * 1000;
+  var_05 = var_02 + var_03 * var_04;
+  var_05 = scripts\mp\perks\perkfunctions::applystunresistence(var_01, self, var_05);
+  thread scripts\mp\gamescore::func_11ACF(var_01, self, "gltacburst_big", var_05);
+  var_01 notify("stun_hit");
+  self notify("concussed", var_01);
+  scripts\mp\weapons::func_F7FC();
+  thread scripts\mp\weapons::func_40EA(var_05);
+  self shellshock("concussion_grenade_mp", var_05);
+  self.concussionendtime = gettime() + var_05 * 1000;
 }
 
-_id_61B2(var_0) {
+empsitewatcher(var_00) {
   self endon("death");
   self endon("disconnect");
   self endon("emp_rumble_loop");
   self notify("emp_rumble_loop");
-  var_1 = gettime() + var_0 * 1000;
+  var_01 = gettime() + var_00 * 1000;
 
-  while (gettime() < var_1) {
+  while (gettime() < var_01) {
   self playrumbleonentity("damage_light");
   wait 0.05;
   }
 }
 
-_id_A639(var_0) {
-  var_0 endon("death");
+func_A639(var_00) {
+  var_00 endon("death");
   self waittill("death");
   wait 5;
-  var_0 delete();
+  var_00 delete();
 }
 
-_id_B92C(var_0, var_1, var_2, var_3, var_4) {
-  if (!isdefined(var_3) || !isdefined(var_4) || !isdefined(var_1) || !isdefined(var_2))
-  return var_0;
+func_B92C(var_00, var_01, var_02, var_03, var_04) {
+  if (!isdefined(var_03) || !isdefined(var_04) || !isdefined(var_01) || !isdefined(var_02))
+  return var_00;
 
-  if (var_4 != "gltacburst")
-  return var_0;
+  if (var_04 != "gltacburst")
+  return var_00;
 
-  if (var_1 != var_2)
-  return var_0;
+  if (var_01 != var_02)
+  return var_00;
 
   if (distancesquared(var_2.origin, var_3.origin) <= 16384)
-  return var_0;
+  return var_00;
 
   return 0;
 }

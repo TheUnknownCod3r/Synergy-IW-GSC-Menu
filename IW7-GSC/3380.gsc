@@ -260,7 +260,7 @@ func_27C9(param_00,param_01,param_02,param_03) {
 			var_04.trap_killed_by = param_02;
 			param_03.trap_kills = param_03.trap_kills + 2;
 			if(scripts\engine\utility::flag("mini_ufo_green_ready")) {
-				level.var_562D++;
+				level.disco_trap_kills++;
 			}
 
 			if(isdefined(param_02)) {

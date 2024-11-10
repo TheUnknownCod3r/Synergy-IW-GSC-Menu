@@ -3,41 +3,41 @@
  * Script: scripts\3452.gsc
 ***************************************/
 
-_id_2EA3() {
-  level._id_2D1D["super_claw"] = ::_id_89EF;
-  level._id_2D1D["super_steeldragon"] = ::_id_89EF;
-  level._id_2D1D["super_armmgs"] = ::_id_89EF;
-  level._id_2D1D["super_atomizer"] = ::_id_89EF;
-  level._id_2D1D["super_blackholegun"] = ::_id_89EF;
-  level._id_2D1D["super_penetrationrailgun"] = ::_id_89EF;
-  level._id_2D1D["super_amplify"] = ::_id_89EE;
-  level._id_2D1D["super_overdrive"] = ::_id_89EE;
-  level._id_2D1D["super_armorup"] = ::_id_89EE;
-  level._id_2D1D["super_rewind"] = ::_id_89EE;
-  level._id_2D1D["super_phaseshift"] = ::_id_89EE;
-  level._id_2D1D["super_teleport"] = ::_id_89EE;
-  level._id_2D1D["super_invisible"] = ::_id_89EE;
-  level._id_2D1D["super_visionpulse"] = ::_id_89EE;
+func_2EA3() {
+  level.func_2D1D["super_claw"] = ::func_89EF;
+  level.func_2D1D["super_steeldragon"] = ::func_89EF;
+  level.func_2D1D["super_armmgs"] = ::func_89EF;
+  level.func_2D1D["super_atomizer"] = ::func_89EF;
+  level.func_2D1D["super_blackholegun"] = ::func_89EF;
+  level.func_2D1D["super_penetrationrailgun"] = ::func_89EF;
+  level.func_2D1D["super_amplify"] = ::func_89EE;
+  level.func_2D1D["super_overdrive"] = ::func_89EE;
+  level.func_2D1D["super_armorup"] = ::func_89EE;
+  level.func_2D1D["super_rewind"] = ::func_89EE;
+  level.func_2D1D["super_phaseshift"] = ::func_89EE;
+  level.func_2D1D["super_teleport"] = ::func_89EE;
+  level.func_2D1D["super_invisible"] = ::func_89EE;
+  level.func_2D1D["super_visionpulse"] = ::func_89EE;
 }
 
-_id_9F8B(var_0) {
-  if (!isdefined(level._id_2D1D))
+func_9F8B(var_00) {
+  if (!isdefined(level.func_2D1D))
   return 0;
 
-  if (!isdefined(level._id_2D1D[var_0]))
+  if (!isdefined(level.func_2D1D[var_00]))
   return 0;
 
   return 1;
 }
 
-_id_2EE9() {
-  var_0 = self._id_2ED8;
-  var_1 = randomint(level._id_2EFC[var_0].size);
-  return level._id_2EFC[var_0][var_1];
+func_2EE9() {
+  var_00 = self.botarchetype;
+  var_01 = randomint(level.func_2EFC[var_00].size);
+  return level.func_2EFC[var_00][var_01];
 }
 
 botpicktrait() {
-  var_0 = self._id_2ED8;
+  var_00 = self.botarchetype;
 
   if (!isdefined(level.botsupportedarchetypetraits)) {
   level.botsupportedarchetypetraits = [];
@@ -59,8 +59,8 @@ botpicktrait() {
   level.botsupportedarchetypetraits["archetype_sniper"][level.botsupportedarchetypetraits["archetype_sniper"].size] = "specialty_mark_targets";
   }
 
-  var_1 = randomint(level.botsupportedarchetypetraits[var_0].size);
-  return level.botsupportedarchetypetraits[var_0][var_1];
+  var_01 = randomint(level.botsupportedarchetypetraits[var_00].size);
+  return level.botsupportedarchetypetraits[var_00][var_01];
 }
 
 bot_think_supers() {
@@ -76,11 +76,11 @@ bot_think_supers() {
   for (;;) {
   self waittill("super_ready");
 
-  if (!isdefined(self._id_AEAA))
+  if (!isdefined(self.loadoutsuper))
   continue;
 
-  if (isdefined(level._id_2D1D[self._id_AEAA]))
-  self [[level._id_2D1D[self._id_AEAA]]]();
+  if (isdefined(level.func_2D1D[self.loadoutsuper]))
+  self [[level.func_2D1D[self.loadoutsuper]]]();
   else
   {}
 
@@ -89,30 +89,30 @@ bot_think_supers() {
   }
 }
 
-_id_89EF() {
+func_89EF() {
   level endon("game_ended");
   self endon("disconnect");
 
   for (;;) {
-  var_0 = randomfloatrange(3, 6);
-  wait(var_0);
+  var_00 = randomfloatrange(3, 6);
+  wait(var_00);
 
   if (!isalive(self))
   continue;
 
-  if (!isdefined(self._id_010C) || !isalive(self._id_010C))
+  if (!isdefined(self.enemy) || !isalive(self.enemy))
   scripts\engine\utility::waittill_any("enemy", "death");
 
   if (!isalive(self))
   continue;
 
-  if (!isdefined(self._id_010C))
+  if (!isdefined(self.enemy))
   continue;
 
-  var_1 = distance(self._id_010C.origin, self.origin);
+  var_01 = distance(self.enemy.origin, self.origin);
 
-  if (var_1 < 800 && _id_0D79::_id_8BEE()) {
-  if (var_1 < 550)
+  if (var_01 < 800 && scripts/mp/bots/bots_powers::func_8BEE()) {
+  if (var_01 < 550)
   continue;
   }
 
@@ -123,7 +123,7 @@ _id_89EF() {
   self waittill("super_started");
 }
 
-_id_89EE() {
+func_89EE() {
   level endon("game_ended");
   self endon("disconnect");
   wait(randomfloatrange(1, 3));
@@ -134,16 +134,16 @@ _id_89EE() {
   if (!isalive(self))
   continue;
 
-  if (!isdefined(self._id_010C) || !isalive(self._id_010C))
+  if (!isdefined(self.enemy) || !isalive(self.enemy))
   scripts\engine\utility::waittill_any("enemy", "death");
 
   if (!isalive(self))
   continue;
 
-  if (_id_0D79::_id_8BEE()) {
-  var_0 = distance(self._id_010C.origin, self.origin);
+  if (scripts/mp/bots/bots_powers::func_8BEE()) {
+  var_00 = distance(self.enemy.origin, self.origin);
 
-  if (var_0 < 600)
+  if (var_00 < 600)
   continue;
   }
 

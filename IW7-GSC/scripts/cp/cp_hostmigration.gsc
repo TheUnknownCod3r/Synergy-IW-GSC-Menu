@@ -143,14 +143,14 @@ waitlongdurationwithgameendtimeupdate(param_00) {
 		waittillhostmigrationstarts(var_02 - gettime() / 1000);
 		while(isdefined(level.hostmigrationtimer)) {
 			var_02 = var_02 + 1000;
-			function_01AF(int(var_02));
+			setgameendtime(int(var_02));
 			wait(1);
 		}
 	}
 
 	while(isdefined(level.hostmigrationtimer)) {
 		var_02 = var_02 + 1000;
-		function_01AF(int(var_02));
+		setgameendtime(int(var_02));
 		wait(1);
 	}
 
@@ -165,12 +165,12 @@ matchstarttimer(param_00,param_01) {
 	if(var_02 >= 2) {
 		setomnvar("ui_match_start_text",param_00);
 		matchstarttimer_internal(var_02);
-		function_0237("",3);
+		visionsetnaked("",3);
 		return;
 	}
 
 	introvisionset();
-	function_0237("",1);
+	visionsetnaked("",1);
 }
 
 matchstarttimer_internal(param_00) {
@@ -180,7 +180,7 @@ matchstarttimer_internal(param_00) {
 	while(param_00 > 0 && !level.gameended) {
 		setomnvar("ui_match_start_countdown",param_00);
 		if(param_00 == 0) {
-			function_0237("",0);
+			visionsetnaked("",0);
 		}
 
 		param_00--;
@@ -195,5 +195,5 @@ introvisionset() {
 		level.introvisionset = "mpIntro";
 	}
 
-	function_0237(level.introvisionset,0);
+	visionsetnaked(level.introvisionset,0);
 }

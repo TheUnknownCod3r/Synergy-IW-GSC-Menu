@@ -4,25 +4,25 @@
 ***************************************/
 
 init() {
-  level._id_5B78 = 0;
-  game["headicon_allies"] = scripts\mp\teams::_id_81B0("allies");
-  game["headicon_axis"] = scripts\mp\teams::_id_81B0("axis");
+  level.drawfriend = 0;
+  game["headicon_allies"] = scripts\mp\teams::_meth_81B0("allies");
+  game["headicon_axis"] = scripts\mp\teams::_meth_81B0("axis");
   precacheheadicon(game["headicon_allies"]);
   precacheheadicon(game["headicon_axis"]);
   precacheshader("waypoint_revive");
-  level thread _id_C56E();
+  level thread onplayerconnect();
 
   for (;;) {
-  _id_12E97();
+  updatefriendiconsettings();
   wait 5;
   }
 }
 
-_id_C56E() {
+onplayerconnect() {
   for (;;) {
-  level waittill("connected", var_0);
-  var_0 thread onplayerspawned();
-  var_0 thread _id_C577();
+  level waittill("connected", var_00);
+  var_00 thread onplayerspawned();
+  var_00 thread onplayerkilled();
   }
 }
 
@@ -31,66 +31,66 @@ onplayerspawned() {
 
   for (;;) {
   self waittill("spawned_player");
-  thread _id_10128();
+  thread showfriendicon();
   }
 }
 
-_id_C577() {
+onplayerkilled() {
   self endon("disconnect");
 
   for (;;) {
   self waittill("killed_player");
-  self._id_016F = "";
+  self.headicon = "";
   }
 }
 
-_id_10128() {
-  if (level._id_5B78) {
+showfriendicon() {
+  if (level.drawfriend) {
   if (self.pers["team"] == "allies") {
-  self._id_016F = game["headicon_allies"];
-  self._id_0170 = "allies";
+  self.headicon = game["headicon_allies"];
+  self.headiconteam = "allies";
   } else {
-  self._id_016F = game["headicon_axis"];
-  self._id_0170 = "axis";
+  self.headicon = game["headicon_axis"];
+  self.headiconteam = "axis";
   }
   }
 }
 
-_id_12E97() {
-  var_0 = scripts\mp\utility\game::_id_7F1D("scr_drawfriend", level._id_5B78);
+updatefriendiconsettings() {
+  var_00 = scripts\mp\utility\game::getintproperty("scr_drawfriend", level.drawfriend);
 
-  if (level._id_5B78 != var_0) {
-  level._id_5B78 = var_0;
-  _id_12E96();
+  if (level.drawfriend != var_00) {
+  level.drawfriend = var_00;
+  updatefriendicons();
   }
 }
 
-_id_12E96() {
-  var_0 = level.players;
+updatefriendicons() {
+  var_00 = level.players;
 
-  for (var_1 = 0; var_1 < var_0.size; var_1++) {
-  var_2 = var_0[var_1];
+  for (var_01 = 0; var_01 < var_0.size; var_1++) {
+  var_02 = var_0[var_01];
 
   if (isdefined(var_2.pers["team"]) && var_2.pers["team"] != "spectator" && var_2.sessionstate == "playing") {
-  if (level._id_5B78) {
+  if (level.drawfriend) {
   if (var_2.pers["team"] == "allies") {
-  var_2._id_016F = game["headicon_allies"];
-  var_2._id_0170 = "allies";
+  var_2.headicon = game["headicon_allies"];
+  var_2.headiconteam = "allies";
   } else {
-  var_2._id_016F = game["headicon_axis"];
-  var_2._id_0170 = "axis";
+  var_2.headicon = game["headicon_axis"];
+  var_2.headiconteam = "axis";
   }
 
   continue;
   }
 
-  var_0 = level.players;
+  var_00 = level.players;
 
-  for (var_1 = 0; var_1 < var_0.size; var_1++) {
-  var_2 = var_0[var_1];
+  for (var_01 = 0; var_01 < var_0.size; var_1++) {
+  var_02 = var_0[var_01];
 
   if (isdefined(var_2.pers["team"]) && var_2.pers["team"] != "spectator" && var_2.sessionstate == "playing")
-  var_2._id_016F = "";
+  var_2.headicon = "";
   }
   }
   }

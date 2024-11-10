@@ -4,73 +4,73 @@
 ***************************************/
 
 init() {
-  level._id_90AE = getserverhostname();
-  _id_F71B(scripts\mp\tweakables::_id_81E7("team", "fftype"));
-  _id_4555(getdvar("g_gametype"));
+  level.func_90AE = getserverhostname();
+  setfriendlyfire(scripts\mp\tweakables::gettweakablevalue("team", "fftype"));
+  constraingametype(getdvar("g_gametype"));
 
   for (;;) {
-  _id_12F18();
+  updateserversettings();
   wait 5;
   }
 }
 
-_id_12F18() {
-  var_0 = scripts\mp\tweakables::_id_81E7("team", "fftype");
+updateserversettings() {
+  var_00 = scripts\mp\tweakables::gettweakablevalue("team", "fftype");
 
-  if (level._id_740A != var_0)
-  _id_F71B(var_0);
+  if (level.friendlyfire != var_00)
+  setfriendlyfire(var_00);
 }
 
-_id_4555(var_0) {
-  var_1 = getentarray();
+constraingametype(var_00) {
+  var_01 = getentarray();
 
-  for (var_2 = 0; var_2 < var_1.size; var_2++) {
-  var_3 = var_1[var_2];
+  for (var_02 = 0; var_02 < var_1.size; var_2++) {
+  var_03 = var_1[var_02];
 
-  if (var_0 == "dm") {
-  if (isdefined(var_3._id_EDC1) && var_3._id_EDC1 != "1")
-  var_3 delete();
-
-  continue;
-  }
-
-  if (var_0 == "tdm") {
-  if (isdefined(var_3._id_EDC5) && var_3._id_EDC5 != "1")
-  var_3 delete();
+  if (var_00 == "dm") {
+  if (isdefined(var_3.script_gametype_dm) && var_3.script_gametype_dm != "1")
+  var_03 delete();
 
   continue;
   }
 
-  if (var_0 == "ctf") {
-  if (isdefined(var_3._id_EDC0) && var_3._id_EDC0 != "1")
-  var_3 delete();
+  if (var_00 == "tdm") {
+  if (isdefined(var_3.script_gametype_tdm) && var_3.script_gametype_tdm != "1")
+  var_03 delete();
 
   continue;
   }
 
-  if (var_0 == "hq") {
-  if (isdefined(var_3._id_EDC2) && var_3._id_EDC2 != "1")
-  var_3 delete();
+  if (var_00 == "ctf") {
+  if (isdefined(var_3.script_gametype_ctf) && var_3.script_gametype_ctf != "1")
+  var_03 delete();
 
   continue;
   }
 
-  if (var_0 == "sd") {
-  if (isdefined(var_3._id_EDC4) && var_3._id_EDC4 != "1")
-  var_3 delete();
+  if (var_00 == "hq") {
+  if (isdefined(var_3.script_gametype_hq) && var_3.script_gametype_hq != "1")
+  var_03 delete();
 
   continue;
   }
 
-  if (var_0 == "koth") {
-  if (isdefined(var_3._id_EDC3) && var_3._id_EDC3 != "1")
-  var_3 delete();
+  if (var_00 == "sd") {
+  if (isdefined(var_3.script_gametype_sd) && var_3.script_gametype_sd != "1")
+  var_03 delete();
+
+  continue;
+  }
+
+  if (var_00 == "koth") {
+  if (isdefined(var_3.script_gametype_koth) && var_3.script_gametype_koth != "1")
+  var_03 delete();
   }
   }
 }
 
-_id_F71B(var_0) {
-  level._id_740A = var_0;
-  setdvar("ui_friendlyfire", var_0);
-  setdvar("cg_drawFriendlyHUDGrenades", var_0);
+setfriendlyfire(var_00) {
+  level.friendlyfire = var_00;
+  setdvar("ui_friendlyfire", var_00);
+  setdvar("cg_drawFriendlyHUDGrenades", var_00);
 }

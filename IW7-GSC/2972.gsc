@@ -12,12 +12,12 @@ func_13BFD() {
 			var_03 = getsubstr(var_02.classname,7);
 			if(isdefined(var_02.var_ECF2)) {
 				var_04 = weaponclipsize(var_03);
-				var_05 = function_0249(var_03);
+				var_05 = weaponmaxammo(var_03);
 				var_02 gettimepassedpercentage(var_04,var_05,var_04,0);
 				var_06 = weaponaltweaponname(var_03);
 				if(var_06 != "none") {
 					var_07 = weaponclipsize(var_06);
-					var_08 = function_0249(var_06);
+					var_08 = weaponmaxammo(var_06);
 					var_02 gettimepassedpercentage(var_07,var_08,var_07,1);
 				}
 

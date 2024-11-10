@@ -4,54 +4,54 @@
 ***************************************/
 
 init() {
-  level._id_115C1 = getdvarint("scr_teambalance");
-  level._id_B488 = getmaxclients();
-  _id_F7F6();
-  level._id_7371 = [];
+  level.teambalance = getdvarint("scr_teambalance");
+  level.maxclients = getmaxclients();
+  func_F7F6();
+  level.func_7371 = [];
 
   if (level.teambased) {
-  level thread _id_C56E();
-  level thread _id_12F37();
+  level thread onplayerconnect();
+  level thread func_12F37();
   wait 0.15;
-  level thread _id_12EF3();
+  level thread func_12EF3();
   level thread finalizeplayertimes();
   } else {
-  level thread _id_C532();
+  level thread func_C532();
   wait 0.15;
-  level thread _id_12E95();
+  level thread func_12E95();
   }
 
   if (scripts\mp\utility\game::matchmakinggame())
   level thread watchafk();
 }
 
-_id_C56E() {
+onplayerconnect() {
   for (;;) {
-  level waittill("connected", var_0);
-  var_0 thread _id_C541();
-  var_0 thread _id_C540();
-  var_0 thread onplayerspawned();
-  var_0 thread _id_11B01();
+  level waittill("connected", var_00);
+  var_00 thread func_C541();
+  var_00 thread func_C540();
+  var_00 thread onplayerspawned();
+  var_00 thread func_11B01();
   }
 }
 
-_id_C532() {
+func_C532() {
   for (;;) {
-  level waittill("connected", var_0);
-  var_0 thread _id_11B01();
+  level waittill("connected", var_00);
+  var_00 thread func_11B01();
   }
 }
 
-_id_C541() {
+func_C541() {
   self endon("disconnect");
 
   for (;;) {
   self waittill("joined_team");
-  _id_12F3E();
+  updateteamtime();
   }
 }
 
-_id_C540() {
+func_C540() {
   self endon("disconnect");
 
   for (;;) {
@@ -60,27 +60,27 @@ _id_C540() {
   }
 }
 
-_id_11B01() {
+func_11B01() {
   self endon("disconnect");
-  self._id_1190E["allies"] = 0;
-  self._id_1190E["axis"] = 0;
-  self._id_1190E["free"] = 0;
-  self._id_1190E["other"] = 0;
-  self._id_1190E["total"] = 0;
-  self._id_1190E["missionTeam"] = 0;
+  self.timeplayed["allies"] = 0;
+  self.timeplayed["axis"] = 0;
+  self.timeplayed["free"] = 0;
+  self.timeplayed["other"] = 0;
+  self.timeplayed["total"] = 0;
+  self.timeplayed["missionTeam"] = 0;
 
   if (!isdefined(self.pers["validKickTime"]))
   self.pers["validKickTime"] = 0;
 
-  scripts\mp\utility\game::_id_7670("prematch_done");
+  scripts\mp\utility\game::gameflagwait("prematch_done");
 
-  while (!level._id_7669) {
+  while (!level.gameended) {
   wait 1.0;
 
-  if (self._id_0291 == "allies") {
-  self._id_1190E["allies"]++;
-  self._id_1190E["total"]++;
-  self._id_1190E["missionTeam"]++;
+  if (self.sessionteam == "allies") {
+  self.timeplayed["allies"]++;
+  self.timeplayed["total"]++;
+  self.timeplayed["missionTeam"]++;
 
   if (scripts\mp\utility\game::isreallyalive(self))
   self.pers["validKickTime"]++;
@@ -88,10 +88,10 @@ _id_11B01() {
   continue;
   }
 
-  if (self._id_0291 == "axis") {
-  self._id_1190E["axis"]++;
-  self._id_1190E["total"]++;
-  self._id_1190E["missionTeam"]++;
+  if (self.sessionteam == "axis") {
+  self.timeplayed["axis"]++;
+  self.timeplayed["total"]++;
+  self.timeplayed["missionTeam"]++;
 
   if (scripts\mp\utility\game::isreallyalive(self))
   self.pers["validKickTime"]++;
@@ -99,14 +99,14 @@ _id_11B01() {
   continue;
   }
 
-  if (self._id_0291 == "none") {
+  if (self.sessionteam == "none") {
   if (isdefined(self.pers["team"]) && self.pers["team"] == "allies")
-  self._id_1190E["allies"]++;
+  self.timeplayed["allies"]++;
   else if (isdefined(self.pers["team"]) && self.pers["team"] == "axis")
-  self._id_1190E["axis"]++;
+  self.timeplayed["axis"]++;
 
-  self._id_1190E["total"]++;
-  self._id_1190E["missionTeam"]++;
+  self.timeplayed["total"]++;
+  self.timeplayed["missionTeam"]++;
 
   if (scripts\mp\utility\game::isreallyalive(self))
   self.pers["validKickTime"]++;
@@ -114,96 +114,96 @@ _id_11B01() {
   continue;
   }
 
-  if (self._id_0291 == "spectator")
-  self._id_1190E["other"]++;
+  if (self.sessionteam == "spectator")
+  self.timeplayed["other"]++;
   }
 }
 
-_id_12EF3() {
+func_12EF3() {
   level endon("game_ended");
 
   for (;;) {
   scripts\mp\hostmigration::waittillhostmigrationdone();
 
-  foreach (var_1 in level.players)
-  var_1 _id_12EEE();
+  foreach (var_01 in level.players)
+  var_01 func_12EEE();
 
   wait 10.0;
   }
 }
 
 finalizeplayertimes() {
-  while (!level._id_7669)
+  while (!level.gameended)
   wait 2.0;
 
-  foreach (var_1 in level.players) {
-  var_1 _id_12EEE();
-  var_1 scripts\mp\persistence::_id_13E04();
-  var_1 scripts\mp\persistence::_id_12F5E();
+  foreach (var_01 in level.players) {
+  var_01 func_12EEE();
+  var_01 scripts\mp\persistence::writebufferedstats();
+  var_01 scripts\mp\persistence::func_12F5E();
   }
 }
 
-_id_12EEE() {
+func_12EEE() {
   if (isai(self))
   return;
 
-  if (!scripts\mp\utility\game::_id_DCD5()) {
-  if (self._id_1190E["allies"]) {
-  scripts\mp\persistence::_id_10E13("timePlayedAllies", self._id_1190E["allies"], 1);
-  scripts\mp\persistence::_id_10E13("timePlayedTotal", self._id_1190E["allies"], 1);
-  scripts\mp\persistence::_id_10E16("round", "timePlayed", self._id_1190E["allies"], 1);
+  if (!scripts\mp\utility\game::rankingenabled()) {
+  if (self.timeplayed["allies"]) {
+  scripts\mp\persistence::stataddbuffered("timePlayedAllies", self.timeplayed["allies"], 1);
+  scripts\mp\persistence::stataddbuffered("timePlayedTotal", self.timeplayed["allies"], 1);
+  scripts\mp\persistence::stataddchildbuffered("round", "timePlayed", self.timeplayed["allies"], 1);
   }
 
-  if (self._id_1190E["axis"]) {
-  scripts\mp\persistence::_id_10E13("timePlayedOpfor", self._id_1190E["axis"], 1);
-  scripts\mp\persistence::_id_10E13("timePlayedTotal", self._id_1190E["axis"], 1);
-  scripts\mp\persistence::_id_10E16("round", "timePlayed", self._id_1190E["axis"], 1);
+  if (self.timeplayed["axis"]) {
+  scripts\mp\persistence::stataddbuffered("timePlayedOpfor", self.timeplayed["axis"], 1);
+  scripts\mp\persistence::stataddbuffered("timePlayedTotal", self.timeplayed["axis"], 1);
+  scripts\mp\persistence::stataddchildbuffered("round", "timePlayed", self.timeplayed["axis"], 1);
   }
 
-  if (self._id_1190E["other"]) {
-  scripts\mp\persistence::_id_10E13("timePlayedOther", self._id_1190E["other"], 1);
-  scripts\mp\persistence::_id_10E13("timePlayedTotal", self._id_1190E["other"], 1);
-  scripts\mp\persistence::_id_10E16("round", "timePlayed", self._id_1190E["other"], 1);
+  if (self.timeplayed["other"]) {
+  scripts\mp\persistence::stataddbuffered("timePlayedOther", self.timeplayed["other"], 1);
+  scripts\mp\persistence::stataddbuffered("timePlayedTotal", self.timeplayed["other"], 1);
+  scripts\mp\persistence::stataddchildbuffered("round", "timePlayed", self.timeplayed["other"], 1);
   }
   } else {
-  if (self._id_1190E["allies"]) {
-  scripts\mp\persistence::_id_10E13("timePlayedAllies", self._id_1190E["allies"]);
-  scripts\mp\persistence::_id_10E13("timePlayedTotal", self._id_1190E["allies"]);
-  scripts\mp\persistence::_id_10E16("round", "timePlayed", self._id_1190E["allies"]);
-  scripts\mp\persistence::_id_10E17("xpMultiplierTimePlayed", 0, self._id_1190E["allies"], self._id_316A["xpMaxMultiplierTimePlayed"][0]);
-  scripts\mp\persistence::_id_10E17("xpMultiplierTimePlayed", 1, self._id_1190E["allies"], self._id_316A["xpMaxMultiplierTimePlayed"][1]);
-  scripts\mp\persistence::_id_10E17("xpMultiplierTimePlayed", 2, self._id_1190E["allies"], self._id_316A["xpMaxMultiplierTimePlayed"][2]);
-  scripts\mp\persistence::_id_10E17("challengeXPMultiplierTimePlayed", 0, self._id_1190E["allies"], self._id_316A["challengeXPMaxMultiplierTimePlayed"][0]);
-  scripts\mp\persistence::_id_10E17("weaponXPMultiplierTimePlayed", 0, self._id_1190E["allies"], self._id_316A["weaponXPMaxMultiplierTimePlayed"][0]);
+  if (self.timeplayed["allies"]) {
+  scripts\mp\persistence::stataddbuffered("timePlayedAllies", self.timeplayed["allies"]);
+  scripts\mp\persistence::stataddbuffered("timePlayedTotal", self.timeplayed["allies"]);
+  scripts\mp\persistence::stataddchildbuffered("round", "timePlayed", self.timeplayed["allies"]);
+  scripts\mp\persistence::stataddchildbufferedwithmax("xpMultiplierTimePlayed", 0, self.timeplayed["allies"], self.bufferedchildstatsmax["xpMaxMultiplierTimePlayed"][0]);
+  scripts\mp\persistence::stataddchildbufferedwithmax("xpMultiplierTimePlayed", 1, self.timeplayed["allies"], self.bufferedchildstatsmax["xpMaxMultiplierTimePlayed"][1]);
+  scripts\mp\persistence::stataddchildbufferedwithmax("xpMultiplierTimePlayed", 2, self.timeplayed["allies"], self.bufferedchildstatsmax["xpMaxMultiplierTimePlayed"][2]);
+  scripts\mp\persistence::stataddchildbufferedwithmax("challengeXPMultiplierTimePlayed", 0, self.timeplayed["allies"], self.bufferedchildstatsmax["challengeXPMaxMultiplierTimePlayed"][0]);
+  scripts\mp\persistence::stataddchildbufferedwithmax("weaponXPMultiplierTimePlayed", 0, self.timeplayed["allies"], self.bufferedchildstatsmax["weaponXPMaxMultiplierTimePlayed"][0]);
   }
 
-  if (self._id_1190E["axis"]) {
-  scripts\mp\persistence::_id_10E13("timePlayedOpfor", self._id_1190E["axis"]);
-  scripts\mp\persistence::_id_10E13("timePlayedTotal", self._id_1190E["axis"]);
-  scripts\mp\persistence::_id_10E16("round", "timePlayed", self._id_1190E["axis"]);
-  scripts\mp\persistence::_id_10E17("xpMultiplierTimePlayed", 0, self._id_1190E["axis"], self._id_316A["xpMaxMultiplierTimePlayed"][0]);
-  scripts\mp\persistence::_id_10E17("xpMultiplierTimePlayed", 1, self._id_1190E["axis"], self._id_316A["xpMaxMultiplierTimePlayed"][1]);
-  scripts\mp\persistence::_id_10E17("xpMultiplierTimePlayed", 2, self._id_1190E["axis"], self._id_316A["xpMaxMultiplierTimePlayed"][2]);
-  scripts\mp\persistence::_id_10E17("challengeXPMultiplierTimePlayed", 0, self._id_1190E["axis"], self._id_316A["challengeXPMaxMultiplierTimePlayed"][0]);
-  scripts\mp\persistence::_id_10E17("weaponXPMultiplierTimePlayed", 0, self._id_1190E["axis"], self._id_316A["weaponXPMaxMultiplierTimePlayed"][0]);
+  if (self.timeplayed["axis"]) {
+  scripts\mp\persistence::stataddbuffered("timePlayedOpfor", self.timeplayed["axis"]);
+  scripts\mp\persistence::stataddbuffered("timePlayedTotal", self.timeplayed["axis"]);
+  scripts\mp\persistence::stataddchildbuffered("round", "timePlayed", self.timeplayed["axis"]);
+  scripts\mp\persistence::stataddchildbufferedwithmax("xpMultiplierTimePlayed", 0, self.timeplayed["axis"], self.bufferedchildstatsmax["xpMaxMultiplierTimePlayed"][0]);
+  scripts\mp\persistence::stataddchildbufferedwithmax("xpMultiplierTimePlayed", 1, self.timeplayed["axis"], self.bufferedchildstatsmax["xpMaxMultiplierTimePlayed"][1]);
+  scripts\mp\persistence::stataddchildbufferedwithmax("xpMultiplierTimePlayed", 2, self.timeplayed["axis"], self.bufferedchildstatsmax["xpMaxMultiplierTimePlayed"][2]);
+  scripts\mp\persistence::stataddchildbufferedwithmax("challengeXPMultiplierTimePlayed", 0, self.timeplayed["axis"], self.bufferedchildstatsmax["challengeXPMaxMultiplierTimePlayed"][0]);
+  scripts\mp\persistence::stataddchildbufferedwithmax("weaponXPMultiplierTimePlayed", 0, self.timeplayed["axis"], self.bufferedchildstatsmax["weaponXPMaxMultiplierTimePlayed"][0]);
   }
 
-  if (self._id_1190E["other"]) {
-  scripts\mp\persistence::_id_10E13("timePlayedOther", self._id_1190E["other"]);
-  scripts\mp\persistence::_id_10E13("timePlayedTotal", self._id_1190E["other"]);
-  scripts\mp\persistence::_id_10E16("round", "timePlayed", self._id_1190E["other"]);
-  scripts\mp\persistence::_id_10E17("xpMultiplierTimePlayed", 0, self._id_1190E["other"], self._id_316A["xpMaxMultiplierTimePlayed"][0]);
-  scripts\mp\persistence::_id_10E17("xpMultiplierTimePlayed", 1, self._id_1190E["other"], self._id_316A["xpMaxMultiplierTimePlayed"][1]);
-  scripts\mp\persistence::_id_10E17("xpMultiplierTimePlayed", 2, self._id_1190E["other"], self._id_316A["xpMaxMultiplierTimePlayed"][2]);
-  scripts\mp\persistence::_id_10E17("challengeXPMultiplierTimePlayed", 0, self._id_1190E["other"], self._id_316A["challengeXPMaxMultiplierTimePlayed"][0]);
-  scripts\mp\persistence::_id_10E17("weaponXPMultiplierTimePlayed", 0, self._id_1190E["other"], self._id_316A["weaponXPMaxMultiplierTimePlayed"][0]);
+  if (self.timeplayed["other"]) {
+  scripts\mp\persistence::stataddbuffered("timePlayedOther", self.timeplayed["other"]);
+  scripts\mp\persistence::stataddbuffered("timePlayedTotal", self.timeplayed["other"]);
+  scripts\mp\persistence::stataddchildbuffered("round", "timePlayed", self.timeplayed["other"]);
+  scripts\mp\persistence::stataddchildbufferedwithmax("xpMultiplierTimePlayed", 0, self.timeplayed["other"], self.bufferedchildstatsmax["xpMaxMultiplierTimePlayed"][0]);
+  scripts\mp\persistence::stataddchildbufferedwithmax("xpMultiplierTimePlayed", 1, self.timeplayed["other"], self.bufferedchildstatsmax["xpMaxMultiplierTimePlayed"][1]);
+  scripts\mp\persistence::stataddchildbufferedwithmax("xpMultiplierTimePlayed", 2, self.timeplayed["other"], self.bufferedchildstatsmax["xpMaxMultiplierTimePlayed"][2]);
+  scripts\mp\persistence::stataddchildbufferedwithmax("challengeXPMultiplierTimePlayed", 0, self.timeplayed["other"], self.bufferedchildstatsmax["challengeXPMaxMultiplierTimePlayed"][0]);
+  scripts\mp\persistence::stataddchildbufferedwithmax("weaponXPMultiplierTimePlayed", 0, self.timeplayed["other"], self.bufferedchildstatsmax["weaponXPMaxMultiplierTimePlayed"][0]);
   }
 
-  if (self._id_1190E["missionTeam"]) {
-  if (scripts\mp\utility\game::_id_DCD5() && isdefined(self._id_9978) && isdefined(self._id_9978._id_4C0D)) {
-  var_0 = self._id_B8D4;
-  var_1 = self getrankedplayerdata("mp", "missionTeamPerformanceData", var_0, "timePlayed");
-  self setrankedplayerdata("mp", "missionTeamPerformanceData", var_0, "timePlayed", var_1 + self._id_1190E["missionTeam"]);
+  if (self.timeplayed["missionTeam"]) {
+  if (scripts\mp\utility\game::rankingenabled() && isdefined(self.func_9978) && isdefined(self.func_9978.func_4C0D)) {
+  var_00 = self.func_B8D4;
+  var_01 = self getrankedplayerdata("mp", "missionTeamPerformanceData", var_00, "timePlayed");
+  self setrankedplayerdata("mp", "missionTeamPerformanceData", var_00, "timePlayed", var_01 + self.timeplayed["missionTeam"]);
   }
   }
   }
@@ -211,58 +211,58 @@ _id_12EEE() {
   if (game["state"] == "postgame")
   return;
 
-  self._id_1190E["allies"] = 0;
-  self._id_1190E["axis"] = 0;
-  self._id_1190E["other"] = 0;
-  self._id_1190E["missionTeam"] = 0;
+  self.timeplayed["allies"] = 0;
+  self.timeplayed["axis"] = 0;
+  self.timeplayed["other"] = 0;
+  self.timeplayed["missionTeam"] = 0;
 }
 
-_id_12F3E() {
+updateteamtime() {
   if (game["state"] != "playing")
   return;
 
   self.pers["teamTime"] = gettime();
 }
 
-_id_12F38() {
+updateteambalancedvar() {
   for (;;) {
-  var_0 = getdvarint("scr_teambalance");
+  var_00 = getdvarint("scr_teambalance");
 
-  if (level._id_115C1 != var_0)
-  level._id_115C1 = getdvarint("scr_teambalance");
+  if (level.teambalance != var_00)
+  level.teambalance = getdvarint("scr_teambalance");
 
   wait 1;
   }
 }
 
-_id_12F37() {
-  level._id_115D7 = level._id_B488 / 2;
-  level thread _id_12F38();
+func_12F37() {
+  level.func_115D7 = level.maxclients / 2;
+  level thread updateteambalancedvar();
   wait 0.15;
 
-  if (level._id_115C1 && scripts\mp\utility\game::_id_9F32()) {
+  if (level.teambalance && scripts\mp\utility\game::isroundbased()) {
   if (isdefined(game["BalanceTeamsNextRound"]))
-  scripts\mp\hud_message::_id_10123("MP_AUTOBALANCE_NEXT_ROUND");
+  scripts\mp\hud_message::showerrormessagetoallplayers("MP_AUTOBALANCE_NEXT_ROUND");
 
   level waittill("restarting");
 
   if (isdefined(game["BalanceTeamsNextRound"])) {
-  level _id_2765();
+  level balanceteams();
   game["BalanceTeamsNextRound"] = undefined;
   }
-  else if (!_id_81A2())
+  else if (!_meth_81A2())
   game["BalanceTeamsNextRound"] = 1;
   } else {
   level endon("game_ended");
 
   for (;;) {
-  if (level._id_115C1) {
-  if (!_id_81A2()) {
-  scripts\mp\hud_message::_id_10123("MP_AUTOBALANCE_SECONDS", 15);
+  if (level.teambalance) {
+  if (!_meth_81A2()) {
+  scripts\mp\hud_message::showerrormessagetoallplayers("MP_AUTOBALANCE_SECONDS", 15);
   wait 15.0;
 
-  if (!_id_81A2())
-  level _id_2765();
+  if (!_meth_81A2())
+  level balanceteams();
   }
 
   wait 59.0;
@@ -273,142 +273,142 @@ _id_12F37() {
   }
 }
 
-_id_81A2() {
+_meth_81A2() {
   level.team["allies"] = 0;
   level.team["axis"] = 0;
-  var_0 = level.players;
+  var_00 = level.players;
 
-  for (var_1 = 0; var_1 < var_0.size; var_1++) {
-  if (isdefined(var_0[var_1].pers["team"]) && var_0[var_1].pers["team"] == "allies") {
+  for (var_01 = 0; var_01 < var_0.size; var_1++) {
+  if (isdefined(var_0[var_01].pers["team"]) && var_0[var_01].pers["team"] == "allies") {
   level.team["allies"]++;
   continue;
   }
 
-  if (isdefined(var_0[var_1].pers["team"]) && var_0[var_1].pers["team"] == "axis")
+  if (isdefined(var_0[var_01].pers["team"]) && var_0[var_01].pers["team"] == "axis")
   level.team["axis"]++;
   }
 
-  if (level.team["allies"] > level.team["axis"] + level._id_115C1 || level.team["axis"] > level.team["allies"] + level._id_115C1)
+  if (level.team["allies"] > level.team["axis"] + level.teambalance || level.team["axis"] > level.team["allies"] + level.teambalance)
   return 0;
   else
   return 1;
 }
 
-_id_2765() {
+balanceteams() {
   iprintlnbold(game["strings"]["autobalance"]);
-  var_0 = [];
-  var_1 = [];
-  var_2 = level.players;
+  var_00 = [];
+  var_01 = [];
+  var_02 = level.players;
 
-  for (var_3 = 0; var_3 < var_2.size; var_3++) {
-  if (!isdefined(var_2[var_3].pers["teamTime"]))
+  for (var_03 = 0; var_03 < var_2.size; var_3++) {
+  if (!isdefined(var_2[var_03].pers["teamTime"]))
   continue;
 
-  if (isdefined(var_2[var_3].pers["team"]) && var_2[var_3].pers["team"] == "allies") {
-  var_0[var_0.size] = var_2[var_3];
+  if (isdefined(var_2[var_03].pers["team"]) && var_2[var_03].pers["team"] == "allies") {
+  var_0[var_0.size] = var_2[var_03];
   continue;
   }
 
-  if (isdefined(var_2[var_3].pers["team"]) && var_2[var_3].pers["team"] == "axis")
-  var_1[var_1.size] = var_2[var_3];
+  if (isdefined(var_2[var_03].pers["team"]) && var_2[var_03].pers["team"] == "axis")
+  var_1[var_1.size] = var_2[var_03];
   }
 
-  var_4 = undefined;
+  var_04 = undefined;
 
   while (var_0.size > var_1.size + 1 || var_1.size > var_0.size + 1) {
   if (var_0.size > var_1.size + 1) {
-  for (var_5 = 0; var_5 < var_0.size; var_5++) {
-  if (isdefined(var_0[var_5]._id_5940))
+  for (var_05 = 0; var_05 < var_0.size; var_5++) {
+  if (isdefined(var_0[var_05].dont_auto_balance))
   continue;
 
-  if (!isdefined(var_4)) {
-  var_4 = var_0[var_5];
+  if (!isdefined(var_04)) {
+  var_04 = var_0[var_05];
   continue;
   }
 
-  if (var_0[var_5].pers["teamTime"] > var_4.pers["teamTime"])
-  var_4 = var_0[var_5];
+  if (var_0[var_05].pers["teamTime"] > var_4.pers["teamTime"])
+  var_04 = var_0[var_05];
   }
 
-  var_4 [[level._id_C5B1]]("axis");
+  var_04 [[level.onteamselection]]("axis");
   }
   else if (var_1.size > var_0.size + 1) {
-  for (var_5 = 0; var_5 < var_1.size; var_5++) {
-  if (isdefined(var_1[var_5]._id_5940))
+  for (var_05 = 0; var_05 < var_1.size; var_5++) {
+  if (isdefined(var_1[var_05].dont_auto_balance))
   continue;
 
-  if (!isdefined(var_4)) {
-  var_4 = var_1[var_5];
-  continue;
-  }
-
-  if (var_1[var_5].pers["teamTime"] > var_4.pers["teamTime"])
-  var_4 = var_1[var_5];
-  }
-
-  var_4 [[level._id_C5B1]]("allies");
-  }
-
-  var_4 = undefined;
-  var_0 = [];
-  var_1 = [];
-  var_2 = level.players;
-
-  for (var_3 = 0; var_3 < var_2.size; var_3++) {
-  if (isdefined(var_2[var_3].pers["team"]) && var_2[var_3].pers["team"] == "allies") {
-  var_0[var_0.size] = var_2[var_3];
+  if (!isdefined(var_04)) {
+  var_04 = var_1[var_05];
   continue;
   }
 
-  if (isdefined(var_2[var_3].pers["team"]) && var_2[var_3].pers["team"] == "axis")
-  var_1[var_1.size] = var_2[var_3];
+  if (var_1[var_05].pers["teamTime"] > var_4.pers["teamTime"])
+  var_04 = var_1[var_05];
+  }
+
+  var_04 [[level.onteamselection]]("allies");
+  }
+
+  var_04 = undefined;
+  var_00 = [];
+  var_01 = [];
+  var_02 = level.players;
+
+  for (var_03 = 0; var_03 < var_2.size; var_3++) {
+  if (isdefined(var_2[var_03].pers["team"]) && var_2[var_03].pers["team"] == "allies") {
+  var_0[var_0.size] = var_2[var_03];
+  continue;
+  }
+
+  if (isdefined(var_2[var_03].pers["team"]) && var_2[var_03].pers["team"] == "axis")
+  var_1[var_1.size] = var_2[var_03];
   }
   }
 }
 
-_id_F7F6() {
-  _id_F6B8();
+func_F7F6() {
+  func_F6B8();
 }
 
-_id_D3D8(var_0, var_1) {}
+func_D3D8(var_00, var_01) {}
 
-_id_46BB() {
-  var_0 = [];
+countplayers() {
+  var_00 = [];
 
-  for (var_1 = 0; var_1 < level._id_115DA.size; var_1++)
-  var_0[level._id_115DA[var_1]] = 0;
+  for (var_01 = 0; var_01 < level.teamnamelist.size; var_1++)
+  var_0[level.teamnamelist[var_01]] = 0;
 
-  for (var_1 = 0; var_1 < level.players.size; var_1++) {
-  if (level.players[var_1] == self)
+  for (var_01 = 0; var_01 < level.players.size; var_1++) {
+  if (level.players[var_01] == self)
   continue;
 
-  if (level.players[var_1].pers["team"] == "spectator")
+  if (level.players[var_01].pers["team"] == "spectator")
   continue;
 
-  if (isdefined(level.players[var_1].pers["team"]))
-  var_0[level.players[var_1].pers["team"]]++;
+  if (isdefined(level.players[var_01].pers["team"]))
+  var_0[level.players[var_01].pers["team"]]++;
   }
 
-  return var_0;
+  return var_00;
 }
 
-_id_F6B8() {
-  if (!isdefined(level._id_503D)) {
-  level._id_503D = [];
-  level._id_503D["allies"] = "mp_warfighter_head_1_3";
-  level._id_503D["axis"] = "mp_warfighter_head_1_3";
+func_F6B8() {
+  if (!isdefined(level.func_503D)) {
+  level.func_503D = [];
+  level.func_503D["allies"] = "mp_warfighter_head_1_3";
+  level.func_503D["axis"] = "mp_warfighter_head_1_3";
   }
 
-  if (!isdefined(level._id_5033)) {
-  level._id_5033 = [];
-  level._id_5033["allies"] = "mp_warfighter_body_1_3";
-  level._id_5033["axis"] = "mp_warfighter_body_1_3";
+  if (!isdefined(level.func_5033)) {
+  level.func_5033 = [];
+  level.func_5033["allies"] = "mp_warfighter_body_1_3";
+  level.func_5033["axis"] = "mp_warfighter_body_1_3";
   }
 
-  if (!isdefined(level._id_5050)) {
-  level._id_5050 = [];
-  level._id_5050["allies"] = "viewhands_us_rangers_urban";
-  level._id_5050["axis"] = "viewhands_us_rangers_woodland";
+  if (!isdefined(level.func_5050)) {
+  level.func_5050 = [];
+  level.func_5050["allies"] = "viewhands_us_rangers_urban";
+  level.func_5050["axis"] = "viewhands_us_rangers_woodland";
   }
 
   if (!isdefined(level.dropscavengerfordeath)) {
@@ -418,158 +418,158 @@ _id_F6B8() {
   }
 }
 
-_id_F68D(var_0, var_1, var_2) {
-  if (isdefined(self._id_8C98))
-  self _meth_8096(self._id_8C98);
+setcharactermodels(var_00, var_01, var_02) {
+  if (isdefined(self.headmodel))
+  self detach(self.headmodel);
 
-  self setmodel(var_0);
-  self setviewmodel(var_2);
-  self attach(var_1, "", 1);
-  self._id_8C98 = var_1;
+  self setmodel(var_00);
+  self setviewmodel(var_02);
+  self attach(var_01, "", 1);
+  self.headmodel = var_01;
 }
 
-_id_72A5(var_0) {
-  var_1 = undefined;
-  var_2 = undefined;
-  var_3 = [];
+func_72A5(var_00) {
+  var_01 = undefined;
+  var_02 = undefined;
+  var_03 = [];
 
-  switch (var_0) {
+  switch (var_00) {
   case 1:
-  var_1 = "mp_warfighter_body_1_3";
-  var_2 = "mp_warfighter_head_1_3";
+  var_01 = "mp_warfighter_body_1_3";
+  var_02 = "mp_warfighter_head_1_3";
   break;
   case 2:
-  var_1 = "mp_body_heavy_1_2";
-  var_2 = "mp_head_heavy_1_2";
+  var_01 = "mp_body_heavy_1_2";
+  var_02 = "mp_head_heavy_1_2";
   break;
   case 3:
   if (level.gametype == "infect") {
-  var_1 = "mp_synaptic_body_1_4";
-  var_2 = "mp_synaptic_head_1_4";
+  var_01 = "mp_synaptic_body_1_4";
+  var_02 = "mp_synaptic_head_1_4";
   } else {
-  var_1 = "mp_synaptic_body_1_1";
-  var_2 = "mp_synaptic_head_1_1";
+  var_01 = "mp_synaptic_body_1_1";
+  var_02 = "mp_synaptic_head_1_1";
   }
 
   break;
   case 4:
-  var_1 = "mp_ftl_body_3_1";
-  var_2 = "mp_ftl_head_5_1";
+  var_01 = "mp_ftl_body_3_1";
+  var_02 = "mp_ftl_head_5_1";
   break;
   case 5:
-  var_1 = "mp_stryker_body_2_1";
-  var_2 = "mp_stryker_head_3_1";
+  var_01 = "mp_stryker_body_2_1";
+  var_02 = "mp_stryker_head_3_1";
   break;
   case 6:
-  var_1 = "mp_ghost_body_1_3";
-  var_2 = "mp_ghost_head_1_1";
+  var_01 = "mp_ghost_body_1_3";
+  var_02 = "mp_ghost_head_1_1";
   break;
   }
 
-  self _meth_84FB(var_1, var_2);
-  var_4 = self getcustomizationbody();
-  var_5 = self getcustomizationhead();
-  var_6 = self getcustomizationviewmodel();
-  _id_F68D(var_4, var_5, var_6);
+  self setcustomization(var_01, var_02);
+  var_04 = self getcustomizationbody();
+  var_05 = self getcustomizationhead();
+  var_06 = self getcustomizationviewmodel();
+  setcharactermodels(var_04, var_05, var_06);
 }
 
-_id_7E55() {
-  var_0 = undefined;
-  var_1 = undefined;
-  var_2 = [];
-  var_3 = _id_8078();
-  var_4 = _id_8073();
-  self._id_006A = var_3;
-  self._id_0171 = var_4;
-  var_0 = tablelookupbyrow("mp/cac/bodies.csv", var_3, 1);
-  var_1 = tablelookupbyrow("mp/cac/heads.csv", var_4, 1);
-  var_2["body"] = var_0;
-  var_2["head"] = var_1;
-  return var_2;
+getcustomization() {
+  var_00 = undefined;
+  var_01 = undefined;
+  var_02 = [];
+  var_03 = getplayermodelindex();
+  var_04 = getplayerheadmodel();
+  self.bodyindex = var_03;
+  self.headindex = var_04;
+  var_00 = tablelookupbyrow("mp/cac/bodies.csv", var_03, 1);
+  var_01 = tablelookupbyrow("mp/cac/heads.csv", var_04, 1);
+  var_2["body"] = var_00;
+  var_2["head"] = var_01;
+  return var_02;
 }
 
-_id_F7A2() {
-  var_0 = _id_7E55();
-  self _meth_84FB(var_0["body"], var_0["head"]);
-  var_1 = self getcustomizationbody();
-  var_2 = self getcustomizationhead();
-  var_3 = self getcustomizationviewmodel();
-  _id_F68D(var_1, var_2, var_3);
+setmodelfromcustomization() {
+  var_00 = getcustomization();
+  self setcustomization(var_0["body"], var_0["head"]);
+  var_01 = self getcustomizationbody();
+  var_02 = self getcustomizationhead();
+  var_03 = self getcustomizationviewmodel();
+  setcharactermodels(var_01, var_02, var_03);
 }
 
-_id_F6BE() {
-  var_0 = level._id_5033[self.team];
-  var_1 = level._id_503D[self.team];
-  var_2 = level._id_5050[self.team];
-  _id_F68D(var_0, var_1, var_2);
+func_F6BE() {
+  var_00 = level.func_5033[self.team];
+  var_01 = level.func_503D[self.team];
+  var_02 = level.func_5050[self.team];
+  setcharactermodels(var_00, var_01, var_02);
 }
 
-_id_8078() {
+getplayermodelindex() {
   if (level.rankedmatch)
   return self getrankedplayerdata("rankedloadouts", "squadMembers", "body");
   else
   return self getrankedplayerdata("privateloadouts", "squadMembers", "body");
 }
 
-_id_8073() {
+getplayerheadmodel() {
   if (level.rankedmatch)
   return self getrankedplayerdata("rankedloadouts", "squadMembers", "head");
   else
   return self getrankedplayerdata("privateloadouts", "squadMembers", "head");
 }
 
-_id_8070(var_0) {
-  return tablelookup("mp/cac/bodies.csv", 0, var_0, 5);
+clearclienttriggeraudiozone(var_00) {
+  return tablelookup("mp/cac/bodies.csv", 0, var_00, 5);
 }
 
-_id_8079(var_0) {
-  return tablelookup("mp/cac/bodies.csv", 0, var_0, 1);
+getplayermodelname(var_00) {
+  return tablelookup("mp/cac/bodies.csv", 0, var_00, 1);
 }
 
-_id_FADC() {
+func_FADC() {
   if (isai(self) || level.gametype == "infect" && self.team == "allies" && isdefined(self.infected_archtype) && self.infected_archtype == "archetype_scout")
-  var_0 = scripts\mp\archetypes\archcommon::_id_80F3(self._id_AE62) + 1;
-  else if (isdefined(self._id_3C56))
-  var_0 = scripts\mp\archetypes\archcommon::_id_80F3(self._id_3C56._id_2123) + 1;
+  var_00 = scripts\mp\archetypes\archcommon::getrigindexfromarchetyperef(self.loadoutarchetype) + 1;
+  else if (isdefined(self.changedarchetypeinfo))
+  var_00 = scripts\mp\archetypes\archcommon::getrigindexfromarchetyperef(self.changedarchetypeinfo.archetype) + 1;
   else
-  var_0 = getdvarint("forceArchetype", 0);
+  var_00 = getdvarint("forceArchetype", 0);
 
   if (level.gametype == "infect" && self.team == "axis")
-  var_0 = 3;
+  var_00 = 3;
 
-  if (isplayer(self) && var_0 == 0)
-  _id_F7A2();
+  if (isplayer(self) && var_00 == 0)
+  setmodelfromcustomization();
   else
-  _id_72A5(var_0);
+  func_72A5(var_00);
 
   if (!isai(self)) {
-  var_1 = _id_8078();
-  self._id_006A = var_1;
-  var_2 = _id_8070(var_1);
+  var_01 = getplayermodelindex();
+  self.bodyindex = var_01;
+  var_02 = clearclienttriggeraudiozone(var_01);
   }
   else
-  self _meth_82C6("vestLight");
+  self give_explosive_touch_on_revived("vestLight");
 
-  self._id_13525 = level.dropscavengerfordeath[self.team];
+  self.voice = level.dropscavengerfordeath[self.team];
 
-  if (scripts\mp\utility\game::_id_9D46() && !isai(self)) {
-  var_3 = _id_8079(_id_8078());
+  if (scripts\mp\utility\game::isanymlgmatch() && !isai(self)) {
+  var_03 = getplayermodelname(getplayermodelindex());
 
-  if (issubstr(var_3, "fullbody_sniper"))
-  thread _id_72B2();
+  if (issubstr(var_03, "fullbody_sniper"))
+  thread func_72B2();
   }
 
   if (scripts\mp\utility\game::isjuggernaut()) {
-  if (isdefined(self._id_9E5D) && self._id_9E5D)
+  if (isdefined(self.isjuggernautmaniac) && self.isjuggernautmaniac)
   thread [[game[self.team + "_model"]["JUGGERNAUT_MANIAC"]]]();
-  else if (isdefined(self._id_9E5C) && self._id_9E5C)
+  else if (isdefined(self.isjuggernautlevelcustom) && self.isjuggernautlevelcustom)
   thread [[game[self.team + "_model"]["JUGGERNAUT_CUSTOM"]]]();
   else
   thread [[game[self.team + "_model"]["JUGGERNAUT"]]]();
   }
 }
 
-_id_72B2() {
+func_72B2() {
   if (self.team == "axis") {
   self setmodel("mp_fullbody_heavy");
   self setviewmodel("viewmodel_mp_warfighter_1");
@@ -578,107 +578,107 @@ _id_72B2() {
   self setviewmodel("viewmodel_mp_warfighter_1");
   }
 
-  if (isdefined(self._id_8C98)) {
-  self _meth_8096(self._id_8C98, "");
-  self._id_8C98 = undefined;
+  if (isdefined(self.headmodel)) {
+  self detach(self.headmodel, "");
+  self.headmodel = undefined;
   }
 
   self attach("head_mp_infected", "", 1);
-  self._id_8C98 = "head_mp_infected";
-  self _meth_82C6("cloth");
+  self.headmodel = "head_mp_infected";
+  self give_explosive_touch_on_revived("cloth");
 }
 
-_id_12E95() {
+func_12E95() {
   if (!level.rankedmatch)
   return;
 
-  var_0 = 0;
+  var_00 = 0;
 
   for (;;) {
   var_0++;
 
-  if (var_0 >= level.players.size)
-  var_0 = 0;
+  if (var_00 >= level.players.size)
+  var_00 = 0;
 
-  if (isdefined(level.players[var_0]))
-  level.players[var_0] _id_12E94();
+  if (isdefined(level.players[var_00]))
+  level.players[var_00] func_12E94();
 
   wait 1.0;
   }
 }
 
-_id_12E94() {
+func_12E94() {
   if (isai(self))
   return;
 
-  if (!scripts\mp\utility\game::_id_DCD5()) {
-  if (self._id_1190E["allies"]) {
-  scripts\mp\persistence::_id_10E13("timePlayedAllies", self._id_1190E["allies"], 1);
-  scripts\mp\persistence::_id_10E13("timePlayedTotal", self._id_1190E["allies"], 1);
-  scripts\mp\persistence::_id_10E16("round", "timePlayed", self._id_1190E["allies"], 1);
+  if (!scripts\mp\utility\game::rankingenabled()) {
+  if (self.timeplayed["allies"]) {
+  scripts\mp\persistence::stataddbuffered("timePlayedAllies", self.timeplayed["allies"], 1);
+  scripts\mp\persistence::stataddbuffered("timePlayedTotal", self.timeplayed["allies"], 1);
+  scripts\mp\persistence::stataddchildbuffered("round", "timePlayed", self.timeplayed["allies"], 1);
   }
 
-  if (self._id_1190E["axis"]) {
-  scripts\mp\persistence::_id_10E13("timePlayedOpfor", self._id_1190E["axis"], 1);
-  scripts\mp\persistence::_id_10E13("timePlayedTotal", self._id_1190E["axis"], 1);
-  scripts\mp\persistence::_id_10E16("round", "timePlayed", self._id_1190E["axis"], 1);
+  if (self.timeplayed["axis"]) {
+  scripts\mp\persistence::stataddbuffered("timePlayedOpfor", self.timeplayed["axis"], 1);
+  scripts\mp\persistence::stataddbuffered("timePlayedTotal", self.timeplayed["axis"], 1);
+  scripts\mp\persistence::stataddchildbuffered("round", "timePlayed", self.timeplayed["axis"], 1);
   }
 
-  if (self._id_1190E["other"]) {
-  scripts\mp\persistence::_id_10E13("timePlayedOther", self._id_1190E["other"], 1);
-  scripts\mp\persistence::_id_10E13("timePlayedTotal", self._id_1190E["other"], 1);
-  scripts\mp\persistence::_id_10E16("round", "timePlayed", self._id_1190E["other"], 1);
+  if (self.timeplayed["other"]) {
+  scripts\mp\persistence::stataddbuffered("timePlayedOther", self.timeplayed["other"], 1);
+  scripts\mp\persistence::stataddbuffered("timePlayedTotal", self.timeplayed["other"], 1);
+  scripts\mp\persistence::stataddchildbuffered("round", "timePlayed", self.timeplayed["other"], 1);
   }
 
   return;
   }
 
-  if (self._id_1190E["allies"]) {
-  scripts\mp\persistence::_id_10E13("timePlayedAllies", self._id_1190E["allies"]);
-  scripts\mp\persistence::_id_10E13("timePlayedTotal", self._id_1190E["allies"]);
-  scripts\mp\persistence::_id_10E16("round", "timePlayed", self._id_1190E["allies"]);
-  scripts\mp\persistence::_id_10E17("xpMultiplierTimePlayed", 0, self._id_1190E["allies"], self._id_316A["xpMaxMultiplierTimePlayed"][0]);
-  scripts\mp\persistence::_id_10E17("xpMultiplierTimePlayed", 1, self._id_1190E["allies"], self._id_316A["xpMaxMultiplierTimePlayed"][1]);
-  scripts\mp\persistence::_id_10E17("xpMultiplierTimePlayed", 2, self._id_1190E["allies"], self._id_316A["xpMaxMultiplierTimePlayed"][2]);
+  if (self.timeplayed["allies"]) {
+  scripts\mp\persistence::stataddbuffered("timePlayedAllies", self.timeplayed["allies"]);
+  scripts\mp\persistence::stataddbuffered("timePlayedTotal", self.timeplayed["allies"]);
+  scripts\mp\persistence::stataddchildbuffered("round", "timePlayed", self.timeplayed["allies"]);
+  scripts\mp\persistence::stataddchildbufferedwithmax("xpMultiplierTimePlayed", 0, self.timeplayed["allies"], self.bufferedchildstatsmax["xpMaxMultiplierTimePlayed"][0]);
+  scripts\mp\persistence::stataddchildbufferedwithmax("xpMultiplierTimePlayed", 1, self.timeplayed["allies"], self.bufferedchildstatsmax["xpMaxMultiplierTimePlayed"][1]);
+  scripts\mp\persistence::stataddchildbufferedwithmax("xpMultiplierTimePlayed", 2, self.timeplayed["allies"], self.bufferedchildstatsmax["xpMaxMultiplierTimePlayed"][2]);
   }
 
-  if (self._id_1190E["axis"]) {
-  scripts\mp\persistence::_id_10E13("timePlayedOpfor", self._id_1190E["axis"]);
-  scripts\mp\persistence::_id_10E13("timePlayedTotal", self._id_1190E["axis"]);
-  scripts\mp\persistence::_id_10E16("round", "timePlayed", self._id_1190E["axis"]);
-  scripts\mp\persistence::_id_10E17("xpMultiplierTimePlayed", 0, self._id_1190E["axis"], self._id_316A["xpMaxMultiplierTimePlayed"][0]);
-  scripts\mp\persistence::_id_10E17("xpMultiplierTimePlayed", 1, self._id_1190E["axis"], self._id_316A["xpMaxMultiplierTimePlayed"][1]);
-  scripts\mp\persistence::_id_10E17("xpMultiplierTimePlayed", 2, self._id_1190E["axis"], self._id_316A["xpMaxMultiplierTimePlayed"][2]);
+  if (self.timeplayed["axis"]) {
+  scripts\mp\persistence::stataddbuffered("timePlayedOpfor", self.timeplayed["axis"]);
+  scripts\mp\persistence::stataddbuffered("timePlayedTotal", self.timeplayed["axis"]);
+  scripts\mp\persistence::stataddchildbuffered("round", "timePlayed", self.timeplayed["axis"]);
+  scripts\mp\persistence::stataddchildbufferedwithmax("xpMultiplierTimePlayed", 0, self.timeplayed["axis"], self.bufferedchildstatsmax["xpMaxMultiplierTimePlayed"][0]);
+  scripts\mp\persistence::stataddchildbufferedwithmax("xpMultiplierTimePlayed", 1, self.timeplayed["axis"], self.bufferedchildstatsmax["xpMaxMultiplierTimePlayed"][1]);
+  scripts\mp\persistence::stataddchildbufferedwithmax("xpMultiplierTimePlayed", 2, self.timeplayed["axis"], self.bufferedchildstatsmax["xpMaxMultiplierTimePlayed"][2]);
   }
 
-  if (self._id_1190E["other"]) {
-  scripts\mp\persistence::_id_10E13("timePlayedOther", self._id_1190E["other"]);
-  scripts\mp\persistence::_id_10E13("timePlayedTotal", self._id_1190E["other"]);
-  scripts\mp\persistence::_id_10E16("round", "timePlayed", self._id_1190E["other"]);
-  scripts\mp\persistence::_id_10E17("xpMultiplierTimePlayed", 0, self._id_1190E["other"], self._id_316A["xpMaxMultiplierTimePlayed"][0]);
-  scripts\mp\persistence::_id_10E17("xpMultiplierTimePlayed", 1, self._id_1190E["other"], self._id_316A["xpMaxMultiplierTimePlayed"][1]);
-  scripts\mp\persistence::_id_10E17("xpMultiplierTimePlayed", 2, self._id_1190E["other"], self._id_316A["xpMaxMultiplierTimePlayed"][2]);
+  if (self.timeplayed["other"]) {
+  scripts\mp\persistence::stataddbuffered("timePlayedOther", self.timeplayed["other"]);
+  scripts\mp\persistence::stataddbuffered("timePlayedTotal", self.timeplayed["other"]);
+  scripts\mp\persistence::stataddchildbuffered("round", "timePlayed", self.timeplayed["other"]);
+  scripts\mp\persistence::stataddchildbufferedwithmax("xpMultiplierTimePlayed", 0, self.timeplayed["other"], self.bufferedchildstatsmax["xpMaxMultiplierTimePlayed"][0]);
+  scripts\mp\persistence::stataddchildbufferedwithmax("xpMultiplierTimePlayed", 1, self.timeplayed["other"], self.bufferedchildstatsmax["xpMaxMultiplierTimePlayed"][1]);
+  scripts\mp\persistence::stataddchildbufferedwithmax("xpMultiplierTimePlayed", 2, self.timeplayed["other"], self.bufferedchildstatsmax["xpMaxMultiplierTimePlayed"][2]);
   }
 
-  self._id_1190E["allies"] = 0;
-  self._id_1190E["axis"] = 0;
-  self._id_1190E["other"] = 0;
+  self.timeplayed["allies"] = 0;
+  self.timeplayed["axis"] = 0;
+  self.timeplayed["other"] = 0;
 }
 
 watchafk() {
-  var_0 = 0;
+  var_00 = 0;
 
   for (;;) {
   var_0++;
 
-  if (var_0 >= level.players.size)
-  var_0 = 0;
+  if (var_00 >= level.players.size)
+  var_00 = 0;
 
-  if (isdefined(level.players[var_0])) {
-  if (isai(level.players[var_0]))
+  if (isdefined(level.players[var_00])) {
+  if (isai(level.players[var_00]))
   continue;
 
-  level.players[var_0] checkforafk();
+  level.players[var_00] checkforafk();
   }
 
   wait 1.0;
@@ -687,71 +687,71 @@ watchafk() {
 }
 
 checkforafk() {
-  if (scripts\mp\utility\game::istrue(level._id_7669))
+  if (scripts\mp\utility\game::istrue(level.gameended))
   return;
 
   if (!isdefined(self.pers["validKickTime"]))
   self.pers["validKickTime"] = 0;
 
-  var_0 = self.pers["validKickTime"];
-  var_1 = 0;
-  var_2 = self.pers["kills"];
-  var_3 = self.pers["assists"];
-  var_4 = var_2 == 0 && var_3 == 0;
+  var_00 = self.pers["validKickTime"];
+  var_01 = 0;
+  var_02 = self.pers["kills"];
+  var_03 = self.pers["assists"];
+  var_04 = var_02 == 0 && var_03 == 0;
 
-  if (isdefined(self.pers["stanceTracking"]) && var_0 > 30) {
-  var_5 = self.pers["stanceTracking"]["crouch"] / var_0;
+  if (isdefined(self.pers["stanceTracking"]) && var_00 > 30) {
+  var_05 = self.pers["stanceTracking"]["crouch"] / var_00;
 
-  if (var_5 > 1.0)
-  var_1 = 1;
+  if (var_05 > 1.0)
+  var_01 = 1;
   }
 
-  if (var_4 && var_0 > 60) {
+  if (var_04 && var_00 > 60) {
   if (!isdefined(self.pers["distTrackingPassed"])) {
   if (level.gametype == "infect") {
   if (self.team == "axis")
-  var_1 = 1;
+  var_01 = 1;
   }
   else
-  var_1 = 1;
+  var_01 = 1;
   }
   }
 
-  if (var_4 && var_0 > 120) {
-  if (!isdefined(self._id_A96A) || self._id_A96A + 60000 < gettime()) {
+  if (var_04 && var_00 > 120) {
+  if (!isdefined(self.lastdamagetime) || self.lastdamagetime + 60000 < gettime()) {
   switch (level.gametype) {
   case "gun":
   if (scripts\mp\utility\game::istrue(level.kick_afk_check))
-  var_1 = 1;
+  var_01 = 1;
 
   break;
   }
   }
   }
 
-  if (var_1 && !isgamebattlematch())
+  if (var_01 && !isgamebattlematch())
   kick(self getentitynumber(), "EXE_PLAYERKICKED_INACTIVE", 1);
 }
 
-getjointeampermissions(var_0) {
-  var_1 = 0;
-  var_2 = 0;
-  var_3 = level.players;
+getjointeampermissions(var_00) {
+  var_01 = 0;
+  var_02 = 0;
+  var_03 = level.players;
 
-  for (var_4 = 0; var_4 < var_3.size; var_4++) {
-  var_5 = var_3[var_4];
+  for (var_04 = 0; var_04 < var_3.size; var_4++) {
+  var_05 = var_3[var_04];
 
-  if (isdefined(var_5.pers["team"]) && var_5.pers["team"] == var_0) {
+  if (isdefined(var_5.pers["team"]) && var_5.pers["team"] == var_00) {
   var_1++;
 
-  if (isbot(var_5))
+  if (isbot(var_05))
   var_2++;
   }
   }
 
-  if (var_1 < level._id_115D7)
+  if (var_01 < level.func_115D7)
   return 1;
-  else if (var_2 > 0)
+  else if (var_02 > 0)
   return 1;
   else if (!scripts\mp\utility\game::matchmakinggame())
   return 1;
@@ -778,82 +778,82 @@ onplayerspawned() {
   self waittill("spawned_player");
 }
 
-_id_BD73(var_0) {
-  return tablelookupistring("mp/MTTable.csv", 0, var_0, 1);
+func_BD73(var_00) {
+  return tablelookupistring("mp/MTTable.csv", 0, var_00, 1);
 }
 
-_id_BD72(var_0) {
-  return tablelookup("mp/MTTable.csv", 0, var_0, 2);
+func_BD72(var_00) {
+  return tablelookup("mp/MTTable.csv", 0, var_00, 2);
 }
 
-_id_BD71(var_0) {
-  return tablelookup("mp/MTTable.csv", 0, var_0, 3);
+func_BD71(var_00) {
+  return tablelookup("mp/MTTable.csv", 0, var_00, 3);
 }
 
-_id_81B5(var_0) {
-  return tablelookupistring("mp/factionTable.csv", 0, game[var_0], 1);
+isonladder(var_00) {
+  return tablelookupistring("mp/factionTable.csv", 0, game[var_00], 1);
 }
 
-_id_81B7(var_0) {
-  return tablelookupistring("mp/factionTable.csv", 0, game[var_0], 2);
+_meth_81B7(var_00) {
+  return tablelookupistring("mp/factionTable.csv", 0, game[var_00], 2);
 }
 
-_id_81AF(var_0) {
-  return tablelookupistring("mp/factionTable.csv", 0, game[var_0], 4);
+ismlgspectator(var_00) {
+  return tablelookupistring("mp/factionTable.csv", 0, game[var_00], 4);
 }
 
-_id_81A8(var_0) {
-  return tablelookupistring("mp/factionTable.csv", 0, game[var_0], 3);
+_meth_81A8(var_00) {
+  return tablelookupistring("mp/factionTable.csv", 0, game[var_00], 3);
 }
 
-_id_81B2(var_0) {
-  return tablelookup("mp/factionTable.csv", 0, game[var_0], 5);
+_meth_81B2(var_00) {
+  return tablelookup("mp/factionTable.csv", 0, game[var_00], 5);
 }
 
-_id_81B1(var_0) {
-  return tablelookup("mp/factionTable.csv", 0, game[var_0], 6);
+_meth_81B1(var_00) {
+  return tablelookup("mp/factionTable.csv", 0, game[var_00], 6);
 }
 
-_id_81B0(var_0) {
-  return tablelookup("mp/factionTable.csv", 0, game[var_0], 17);
+_meth_81B0(var_00) {
+  return tablelookup("mp/factionTable.csv", 0, game[var_00], 17);
 }
 
-_id_81BC(var_0) {
-  return tablelookup("mp/factionTable.csv", 0, game[var_0], 7);
+getteamvoiceprefix(var_00) {
+  return tablelookup("mp/factionTable.csv", 0, game[var_00], 7);
 }
 
-_id_81B9(var_0) {
-  return tablelookup("mp/factionTable.csv", 0, game[var_0], 8);
+getteamspawnmusic(var_00) {
+  return tablelookup("mp/factionTable.csv", 0, game[var_00], 8);
 }
 
-_id_81BD(var_0) {
-  return tablelookup("mp/factionTable.csv", 0, game[var_0], 9);
+issprinting(var_00) {
+  return tablelookup("mp/factionTable.csv", 0, game[var_00], 9);
 }
 
-_id_81AE(var_0) {
-  return tablelookup("mp/factionTable.csv", 0, game[var_0], 10);
+ismeleeing(var_00) {
+  return tablelookup("mp/factionTable.csv", 0, game[var_00], 10);
 }
 
-_id_81AA(var_0) {
-  return tablelookup("mp/factionTable.csv", 0, game[var_0], 11);
+_meth_81AA(var_00) {
+  return tablelookup("mp/factionTable.csv", 0, game[var_00], 11);
 }
 
-_id_81AD(var_0) {
-  return tablelookup("mp/factionTable.csv", 0, game[var_0], 12);
+ismantling(var_00) {
+  return tablelookup("mp/factionTable.csv", 0, game[var_00], 12);
 }
 
-_id_81AC(var_0) {
-  return tablelookup("mp/factionTable.csv", 0, game[var_0], 13);
+_meth_81AC(var_00) {
+  return tablelookup("mp/factionTable.csv", 0, game[var_00], 13);
 }
 
-_id_81A4(var_0) {
-  return (scripts\mp\utility\game::_id_1114F(tablelookup("mp/factionTable.csv", 0, game[var_0], 14)), scripts\mp\utility\game::_id_1114F(tablelookup("mp/factionTable.csv", 0, game[var_0], 15)), scripts\mp\utility\game::_id_1114F(tablelookup("mp/factionTable.csv", 0, game[var_0], 16)));
+_meth_81A4(var_00) {
+  return (scripts\mp\utility\game::func_1114F(tablelookup("mp/factionTable.csv", 0, game[var_00], 14)), scripts\mp\utility\game::func_1114F(tablelookup("mp/factionTable.csv", 0, game[var_00], 15)), scripts\mp\utility\game::func_1114F(tablelookup("mp/factionTable.csv", 0, game[var_00], 16)));
 }
 
-_id_81A5(var_0) {
-  return tablelookup("mp/factionTable.csv", 0, game[var_0], 18);
+_meth_81A5(var_00) {
+  return tablelookup("mp/factionTable.csv", 0, game[var_00], 18);
 }
 
-_id_81A6(var_0) {
-  return tablelookup("mp/factionTable.csv", 0, game[var_0], 19);
+_meth_81A6(var_00) {
+  return tablelookup("mp/factionTable.csv", 0, game[var_00], 19);
 }

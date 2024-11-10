@@ -28,7 +28,7 @@ func_48CD(param_00,param_01,param_02,param_03,param_04) {
 		var_05.var_EC13 = param_04;
 	}
 
-	var_05.model = function_00EA(param_01);
+	var_05.model = getweaponmodel(param_01);
 	var_05.var_DB01 = param_03;
 	level.var_138A1[param_02] = var_05;
 }
@@ -145,7 +145,7 @@ func_FA1D(param_00) {
 				param_00 loadweaponsforplayer([param_00.weapon_build_models[var_08]],1);
 			}
 
-			var_13 = function_00E3(param_00.weapon_build_models[var_08]);
+			var_13 = getweaponattachments(param_00.weapon_build_models[var_08]);
 			foreach(var_12 in var_13) {
 				if(issubstr(var_12,"rof")) {
 					param_00.rofweaponslist[param_00.rofweaponslist.size] = getweaponbasename(param_00.weapon_build_models[var_08]);
@@ -350,7 +350,7 @@ givevalidweapon(param_00,param_01) {
 		param_01 = param_00.weapon_build_models[var_05];
 	}
 
-	var_06 = function_00E3(param_01);
+	var_06 = getweaponattachments(param_01);
 	param_01 = param_00 scripts\cp\cp_weapon::return_weapon_name_with_like_attachments(param_01,undefined,var_06,undefined,undefined);
 	param_01 = param_00 scripts\cp\utility::_giveweapon(param_01,undefined,undefined,0);
 	var_07 = spawnstruct();
@@ -433,7 +433,7 @@ _meth_834A(param_00) {
 		}
 
 		if(scripts\cp\utility::is_consumable_active("wall_power")) {
-			var_10 = scripts\engine\utility::array_combine(function_00E3(var_04),["pap1"]);
+			var_10 = scripts\engine\utility::array_combine(getweaponattachments(var_04),["pap1"]);
 			if(issubstr(var_04,"venomx")) {
 				var_10 = undefined;
 				var_06 = undefined;
@@ -501,7 +501,7 @@ _meth_834A(param_00) {
 		}
 		else
 		{
-			var_10 = function_00E3(var_07);
+			var_10 = getweaponattachments(var_07);
 			var_11 = scripts\cp\cp_weapon::return_weapon_name_with_like_attachments(var_06,undefined,var_13);
 			var_13 = scripts\cp\utility::_giveweapon(var_13,undefined,undefined,1);
 			self.itempicked = var_13;
@@ -544,7 +544,7 @@ _meth_834A(param_00) {
 			}
 		}
 
-		var_1B = function_0249(var_17);
+		var_1B = weaponmaxammo(var_17);
 		var_1C = scripts/cp/perks/prestige::prestige_getminammo();
 		var_1D = int(var_1C * var_1B);
 		var_1E = self getweaponammostock(var_17);
@@ -553,7 +553,7 @@ _meth_834A(param_00) {
 		}
 
 		if(self hasweapon("alt_" + var_17)) {
-			var_1B = function_0249("alt_" + var_17);
+			var_1B = weaponmaxammo("alt_" + var_17);
 			var_1C = scripts/cp/perks/prestige::prestige_getminammo();
 			var_1D = int(var_1C * var_1B);
 			var_1E = self getweaponammostock("alt_" + var_17);
@@ -599,7 +599,7 @@ setgrenadethrowscale() {
 		foreach(var_02 in var_00) {
 			var_03 = scripts\cp\utility::coop_getweaponclass(var_02);
 			if(var_03 == "weapon_pistol") {
-				var_04 = function_0249(var_02);
+				var_04 = weaponmaxammo(var_02);
 				var_05 = int(var_04 * 0.25);
 				var_06 = self getrunningforwardpainanim(var_02);
 				if(var_05 > var_06) {
@@ -657,7 +657,7 @@ func_7C04() {
 		}
 
 		self.copy_fullweaponlist = undefined;
-		if(function_0244(var_05) == "altmode") {
+		if(weaponinventorytype(var_05) == "altmode") {
 			var_05 = func_7D66(var_05);
 		}
 
@@ -668,7 +668,7 @@ func_7C04() {
 }
 
 func_7D66(param_00) {
-	if(function_0244(param_00) != "altmode") {
+	if(weaponinventorytype(param_00) != "altmode") {
 		return param_00;
 	}
 

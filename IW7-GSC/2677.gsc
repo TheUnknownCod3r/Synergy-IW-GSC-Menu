@@ -6,33 +6,33 @@
 init() {
   level._effect["revocator_idle"] = loadfx("vfx/iw7/core/zombie/vfx_zmb_revocator_idle.vfx");
   level._effect["revocator_activate"] = loadfx("vfx/iw7/_requests/coop/vfx_revocator_use.vfx");
-  var_0 = spawnstruct();
-  var_0._id_11901 = 30.0;
-  var_0._id_B91A = "revocator";
-  var_0._id_B924 = "revocator";
-  var_0._id_B925 = "revocator_bad";
-  var_0._id_CC12 = "revocator";
-  var_0._id_017B = &"COOP_CRAFTABLES_PICKUP";
-  var_0._id_CC28 = &"COOP_CRAFTABLES_PLACE";
-  var_0._id_38E3 = &"COOP_CRAFTABLES_CANNOT_PLACE";
-  var_0._id_CC0A = &"COOP_CRAFTABLES_PLACE_CANCELABLE";
-  var_0._id_CC22 = 30.0;
-  var_0._id_CC25 = 24.0;
-  var_0._id_3AA7 = (0, 0, 25);
-  var_0._id_3AA6 = (0, 0, 0);
-  level._id_47B1 = [];
-  level._id_47B1["crafted_revocator"] = var_0;
+  var_00 = spawnstruct();
+  var_0.timeout = 30.0;
+  var_0.modelbase = "revocator";
+  var_0.modelplacement = "revocator";
+  var_0.modelplacementfailed = "revocator_bad";
+  var_0.placedmodel = "revocator";
+  var_0.hintstring = &"COOP_CRAFTABLES_PICKUP";
+  var_0.placestring = &"COOP_CRAFTABLES_PLACE";
+  var_0.cannotplacestring = &"COOP_CRAFTABLES_CANNOT_PLACE";
+  var_0.placecancelablestring = &"COOP_CRAFTABLES_PLACE_CANCELABLE";
+  var_0.placementheighttolerance = 30.0;
+  var_0.placementradius = 24.0;
+  var_0.carriedtrapoffset = (0, 0, 25);
+  var_0.carriedtrapangles = (0, 0, 0);
+  level.func_47B1 = [];
+  level.func_47B1["crafted_revocator"] = var_00;
 }
 
-_id_82B9(var_0, var_1) {
-  var_1 thread _id_13932();
-  var_1 notify("new_power", "crafted_revocator");
-  var_1 setclientomnvar("zom_crafted_weapon", 6);
-  var_1 thread _id_0A77::_id_1308C(var_1, "iw7_pickup_zm");
-  _id_0A77::_id_F313("crafted_revocator", ::_id_82B9, var_1);
+give_crafted_revocator(var_00, var_01) {
+  var_01 thread watch_dpad();
+  var_01 notify("new_power", "crafted_revocator");
+  var_01 setclientomnvar("zom_crafted_weapon", 6);
+  var_01 thread scripts/cp/utility::usegrenadegesture(var_01, "iw7_pickup_zm");
+  scripts/cp/utility::set_crafted_inventory_item("crafted_revocator", ::give_crafted_revocator, var_01);
 }
 
-_id_13932() {
+watch_dpad() {
   self endon("disconnect");
   self endon("death");
   self notify("craft_dpad_watcher");
@@ -42,288 +42,288 @@ _id_13932() {
   for (;;) {
   self waittill("pullout_revocator");
 
-  if (scripts\engine\utility::_id_9CEE(self._id_9D81))
+  if (scripts\engine\utility::is_true(self.iscarrying))
   continue;
 
-  if (scripts\engine\utility::_id_9CEE(self._id_AD2C))
+  if (scripts\engine\utility::is_true(self.linked_to_coaster))
   continue;
 
   if (isdefined(self.allow_carry) && self.allow_carry == 0)
   continue;
 
-  if (_id_0A77::_id_9D05())
+  if (scripts/cp/utility::is_valid_player())
   break;
   }
 
-  thread _id_8329(1);
+  thread _meth_8329(1);
 }
 
-_id_8329(var_0, var_1, var_2) {
+_meth_8329(var_00, var_01, var_02) {
   self endon("disconnect");
-  _id_0A77::_id_41C4("msg_power_hint");
-  var_3 = _id_4A08(self, var_2);
-  self._id_A039 = var_3.name;
-  _id_E152();
-  self._id_3AA5 = var_3;
+  scripts/cp/utility::clearlowermessage("msg_power_hint");
+  var_03 = func_4A08(self, var_02);
+  self.itemtype = var_3.name;
+  removeperks();
+  self.carriedsentry = var_03;
 
-  if (var_0)
-  var_3._id_6DEC = 1;
+  if (var_00)
+  var_3.firstplacement = 1;
 
-  var_4 = _id_F687(var_3, var_0, var_1);
-  self._id_3AA5 = undefined;
-  thread _id_1370F();
-  self._id_9D81 = 0;
+  var_04 = func_F687(var_03, var_00, var_01);
+  self.carriedsentry = undefined;
+  thread waitrestoreperks();
+  self.iscarrying = 0;
 
-  if (isdefined(var_3))
+  if (isdefined(var_03))
   return 1;
   else
   return 0;
 }
 
-_id_F687(var_0, var_1, var_2) {
+func_F687(var_00, var_01, var_02) {
   self endon("disconnect");
-  var_0 _id_E4B7(self, var_1);
-  scripts\engine\utility::_id_1C71(0);
+  var_00 func_E4B7(self, var_01);
+  scripts\engine\utility::allow_weapon(0);
   self notifyonplayercommand("place_revocator", "+attack");
   self notifyonplayercommand("place_revocator", "+attack_akimbo_accessible");
   self notifyonplayercommand("cancel_revocator", "+actionslot 3");
 
-  if (!level._id_4542) {
+  if (!level.console) {
   self notifyonplayercommand("cancel_revocator", "+actionslot 5");
   self notifyonplayercommand("cancel_revocator", "+actionslot 6");
   self notifyonplayercommand("cancel_revocator", "+actionslot 7");
   }
 
   for (;;) {
-  var_3 = scripts\engine\utility::_id_13734("place_revocator", "cancel_revocator", "force_cancel_placement");
+  var_03 = scripts\engine\utility::waittill_any_return("place_revocator", "cancel_revocator", "force_cancel_placement");
 
-  if (!isdefined(var_0)) {
-  scripts\engine\utility::_id_1C71(1);
+  if (!isdefined(var_00)) {
+  scripts\engine\utility::allow_weapon(1);
   return 1;
   }
 
-  if (!isdefined(var_3))
-  var_3 = "force_cancel_placement";
+  if (!isdefined(var_03))
+  var_03 = "force_cancel_placement";
 
-  if (var_3 == "cancel_revocator" || var_3 == "force_cancel_placement") {
-  if (!var_1 && var_3 == "cancel_revocator")
+  if (var_03 == "cancel_revocator" || var_03 == "force_cancel_placement") {
+  if (!var_01 && var_03 == "cancel_revocator")
   continue;
 
-  scripts\engine\utility::_id_1C71(1);
-  var_0 _id_E4B6();
+  scripts\engine\utility::allow_weapon(1);
+  var_00 func_E4B6();
 
-  if (var_3 != "force_cancel_placement")
-  thread _id_13932();
-  else if (var_1)
-  _id_0A77::_id_DFE0(self);
+  if (var_03 != "force_cancel_placement")
+  thread watch_dpad();
+  else if (var_01)
+  scripts/cp/utility::remove_crafted_item_from_inventory(self);
 
   return 0;
   }
 
-  if (!var_0._id_3872)
+  if (!var_0.canbeplaced)
   continue;
 
-  if (var_1)
-  _id_0A77::_id_DFE0(self);
+  if (var_01)
+  scripts/cp/utility::remove_crafted_item_from_inventory(self);
 
-  var_0 _id_E4B9(var_2, self);
-  scripts\engine\utility::_id_1C71(1);
+  var_00 func_E4B9(var_02, self);
+  scripts\engine\utility::allow_weapon(1);
   return 1;
   }
 }
 
-_id_E152() {
-  if (_id_0A77::_id_12D6("specialty_explosivebullets")) {
-  self._id_E2DF = "specialty_explosivebullets";
-  _id_0A77::_id_1430("specialty_explosivebullets");
+removeperks() {
+  if (scripts/cp/utility::_hasperk("specialty_explosivebullets")) {
+  self.restoreperk = "specialty_explosivebullets";
+  scripts/cp/utility::_unsetperk("specialty_explosivebullets");
   }
 }
 
-_id_E2E0() {
-  if (isdefined(self._id_E2DF)) {
-  _id_0A77::giveperk(self._id_E2DF);
-  self._id_E2DF = undefined;
+restoreperks() {
+  if (isdefined(self.restoreperk)) {
+  scripts/cp/utility::giveperk(self.restoreperk);
+  self.restoreperk = undefined;
   }
 }
 
-_id_1370F() {
+waitrestoreperks() {
   self endon("death");
   self endon("disconnect");
   level endon("game_ended");
   wait 0.05;
-  _id_E2E0();
+  restoreperks();
 }
 
-_id_4A08(var_0, var_1) {
-  var_2 = spawnturret("misc_turret", var_0.origin + (0, 0, 25), "sentry_minigun_mp");
+func_4A08(var_00, var_01) {
+  var_02 = spawnturret("misc_turret", var_0.origin + (0, 0, 25), "sentry_minigun_mp");
   var_2.angles = var_0.angles;
-  var_2.owner = var_0;
+  var_2.owner = var_00;
   var_2.name = "crafted_revocator";
-  var_2._id_3AA4 = spawn("script_model", var_2.origin);
-  var_2._id_3AA4.angles = var_0.angles;
-  var_2 maketurretinoperable();
-  var_2 _meth_835B(1);
-  var_2 _meth_830F("sentry_offline");
-  var_2 makeunusable();
-  var_2 _meth_8336(var_0);
+  var_2.carriedrevocator = spawn("script_model", var_2.origin);
+  var_2.carriedrevocator.angles = var_0.angles;
+  var_02 maketurretinoperable();
+  var_02 setturretmodechangewait(1);
+  var_02 give_player_session_tokens("sentry_offline");
+  var_02 makeunusable();
+  var_02 setsentryowner(var_00);
 
-  if (!isdefined(var_1))
-  var_2._id_130D2 = 1;
+  if (!isdefined(var_01))
+  var_2.func_130D2 = 1;
   else
-  var_2._id_130D2 = var_1;
+  var_2.func_130D2 = var_01;
 
-  var_2 _id_E4B4(var_0);
-  return var_2;
+  var_02 func_E4B4(var_00);
+  return var_02;
 }
 
-_id_E4B4(var_0) {
-  self._id_3872 = 1;
-  _id_E4B8();
+func_E4B4(var_00) {
+  self.canbeplaced = 1;
+  func_E4B8();
 }
 
-_id_E4B1(var_0) {
+func_E4B1(var_00) {
   self waittill("death");
 
   if (!isdefined(self))
   return;
 
-  _id_E4B8();
+  func_E4B8();
   playloopsound(self.origin, "trap_revocator_deactivate");
 
-  if (isdefined(self._id_3CBF))
-  self._id_3CBF delete();
+  if (isdefined(self.charge_fx))
+  self.charge_fx delete();
 
-  if (isdefined(self._id_13E61))
-  self._id_13E61 delete();
+  if (isdefined(self.zap_model))
+  self.zap_model delete();
 
-  _id_0A77::_id_E11E();
+  scripts/cp/utility::removefromtraplist();
 
   if (isdefined(self))
   self delete();
 }
 
-_id_E4B9(var_0, var_1) {
-  var_2 = spawn("script_model", self.origin + (0, 0, 1));
+func_E4B9(var_00, var_01) {
+  var_02 = spawn("script_model", self.origin + (0, 0, 1));
   var_2.angles = self.angles;
-  var_2 solid();
-  var_2 setmodel(level._id_47B1["crafted_revocator"]._id_CC12);
-  self._id_3A9D _meth_80F3();
-  self._id_3A9D = undefined;
-  var_1._id_9D81 = 0;
-  var_2.owner = var_1;
-  var_2._id_130D2 = self._id_130D2;
+  var_02 solid();
+  var_02 setmodel(level.func_47B1["crafted_revocator"].placedmodel);
+  self.carriedby getrigindexfromarchetyperef();
+  self.carriedby = undefined;
+  var_1.iscarrying = 0;
+  var_2.owner = var_01;
+  var_2.func_130D2 = self.func_130D2;
   var_2.name = "crafted_revocator";
-  var_2 thread _id_E4B5(var_0);
-  var_2 playsound("trap_revocator_activate");
+  var_02 thread func_E4B5(var_00);
+  var_02 playsound("trap_revocator_activate");
   self notify("placed");
-  self._id_3AA4 delete();
+  self.carriedrevocator delete();
   self delete();
 }
 
-_id_E4B6() {
-  self._id_3A9D _meth_80F3();
+func_E4B6() {
+  self.carriedby getrigindexfromarchetyperef();
 
   if (isdefined(self.owner))
-  self.owner._id_9D81 = 0;
+  self.owner.iscarrying = 0;
 
-  self._id_3AA4 delete();
+  self.carriedrevocator delete();
   self delete();
 }
 
-_id_E4B7(var_0, var_1) {
-  self setmodel(level._id_47B1["crafted_revocator"]._id_B924);
+func_E4B7(var_00, var_01) {
+  self setmodel(level.func_47B1["crafted_revocator"].modelplacement);
   self hide();
-  self _meth_8335(var_0);
+  self setsentrycarrier(var_00);
   self setcandamage(0);
-  self._id_3A9D = var_0;
-  var_0._id_9D81 = 1;
-  var_0 thread _id_0A77::_id_12E3F(self, self._id_3AA4, level._id_47B1["crafted_revocator"]);
-  thread _id_0A77::_id_A025(var_0);
-  thread _id_0A77::_id_A026(var_0);
-  thread _id_0A77::_id_A027(var_0);
-  _id_E4B8();
+  self.carriedby = var_00;
+  var_0.iscarrying = 1;
+  var_00 thread scripts/cp/utility::update_trap_placement_internal(self, self.carriedrevocator, level.func_47B1["crafted_revocator"]);
+  thread scripts/cp/utility::item_oncarrierdeath(var_00);
+  thread scripts/cp/utility::item_oncarrierdisconnect(var_00);
+  thread scripts/cp/utility::item_ongameended(var_00);
+  func_E4B8();
   self notify("carried");
 }
 
-_id_E4B5(var_0) {
+func_E4B5(var_00) {
   self endon("death");
   self setcursorhint("HINT_NOICON");
-  self sethintstring(level._id_47B1["crafted_revocator"]._id_017B);
+  self sethintstring(level.func_47B1["crafted_revocator"].hintstring);
   self makeusable();
   self _meth_84A7("tag_fx");
-  self _meth_84A5(120);
-  self _meth_84A2(96);
-  thread _id_E4B1(self.owner);
-  thread _id_0A77::_id_A021("elecrevocator_handleOwner");
-  thread _id_0A77::_id_A030(var_0, level._id_47B1["crafted_revocator"]._id_11901);
-  thread _id_E4B2();
-  thread _id_E4BA();
-  _id_0A77::_id_1861();
+  self setusefov(120);
+  self setuserange(96);
+  thread func_E4B1(self.owner);
+  thread scripts/cp/utility::item_handleownerdisconnect("elecrevocator_handleOwner");
+  thread scripts/cp/utility::item_timeout(var_00, level.func_47B1["crafted_revocator"].timeout);
+  thread func_E4B2();
+  thread func_E4BA();
+  scripts/cp/utility::addtotraplist();
   wait 1;
   self setscriptablepartstate("base", "idle");
 }
 
-_id_E4B2() {
+func_E4B2() {
   self endon("death");
   level endon("game_ended");
 
   for (;;) {
-  self waittill("trigger", var_0);
+  self waittill("trigger", var_00);
 
-  if (!var_0 _id_0A77::_id_9D05())
+  if (!var_00 scripts/cp/utility::is_valid_player())
   continue;
 
-  if (scripts\engine\utility::_id_9CEE(var_0._id_9D81))
+  if (scripts\engine\utility::is_true(var_0.iscarrying))
   continue;
 
   self playsound("trap_revocator_pickup");
-  var_0 thread _id_8329(0, self._id_AC71, self._id_130D2);
+  var_00 thread _meth_8329(0, self.lifespan, self.func_130D2);
 
-  if (isdefined(self._id_3CBF))
-  self._id_3CBF delete();
+  if (isdefined(self.charge_fx))
+  self.charge_fx delete();
 
-  _id_0A77::_id_E11E();
+  scripts/cp/utility::removefromtraplist();
   self delete();
   }
 }
 
-_id_E4B8() {
+func_E4B8() {
   self makeunusable();
-  _id_0A77::_id_E11E();
+  scripts/cp/utility::removefromtraplist();
 }
 
-_id_E4BA() {
+func_E4BA() {
   self endon("death");
-  var_0 = 0;
-  var_1 = 1600;
+  var_00 = 0;
+  var_01 = 1600;
 
-  while (self._id_130D2 > 0) {
-  var_2 = _id_0A4A::_id_7DAF();
-  var_2 = scripts\engine\utility::_id_782F(self.origin, var_2);
+  while (self.func_130D2 > 0) {
+  var_02 = scripts/cp/cp_agent_utils::getaliveagents();
+  var_02 = scripts\engine\utility::get_array_of_closest(self.origin, var_02);
 
-  foreach (var_4 in var_2) {
+  foreach (var_04 in var_02) {
   if (!isdefined(var_4.agent_type))
   continue;
 
-  if (var_4.agent_type == "superslasher" || var_4.agent_type == "slasher" || var_4.agent_type == "zombie_sasquatch" || var_4.agent_type == "lumberjack" || scripts\engine\utility::_id_9CEE(var_4.is_skeleton))
+  if (var_4.agent_type == "superslasher" || var_4.agent_type == "slasher" || var_4.agent_type == "zombie_sasquatch" || var_4.agent_type == "lumberjack" || scripts\engine\utility::is_true(var_4.is_skeleton))
   continue;
 
-  if (!isdefined(var_4) || !isalive(var_4) || !var_4._id_6622 || scripts\engine\utility::_id_9CEE(var_4._id_B36E) || var_4.agent_type == "zombie_brute" || var_4.agent_type == "zombie_grey" || var_4.agent_type == "zombie_ghost" || var_4.team == "allies")
+  if (!isdefined(var_04) || !isalive(var_04) || !var_4.entered_playspace || scripts\engine\utility::is_true(var_4.marked_for_death) || var_4.agent_type == "zombie_brute" || var_4.agent_type == "zombie_grey" || var_4.agent_type == "zombie_ghost" || var_4.team == "allies")
   continue;
 
-  if (distancesquared(self.origin, var_4.origin) < var_1) {
+  if (distancesquared(self.origin, var_4.origin) < var_01) {
   self setscriptablepartstate("base", "active");
 
-  if (scripts\engine\utility::_id_9CEE(var_4._id_9CDD) || scripts\engine\utility::_id_9CEE(var_4._id_9BB0) || scripts\engine\utility::_id_6E34("defense_sequence_active") && scripts\engine\utility::_id_6E25("defense_sequence_active"))
-  var_4 _meth_80B0(var_4.health + 50, self.origin);
+  if (scripts\engine\utility::is_true(var_4.is_suicide_bomber) || scripts\engine\utility::is_true(var_4.is_dancing) || scripts\engine\utility::flag_exist("defense_sequence_active") && scripts\engine\utility::flag("defense_sequence_active"))
+  var_04 getrandomarmkillstreak(var_4.health + 50, self.origin);
   else
-  var_4 _id_1299C(self.owner);
+  var_04 turn_zombie(self.owner);
 
-  self._id_130D2--;
+  self.func_130D2--;
   wait 1;
   self setscriptablepartstate("base", "idle");
 
-  if (self._id_130D2 <= 0)
+  if (self.func_130D2 <= 0)
   break;
   }
   }
@@ -334,67 +334,67 @@ _id_E4BA() {
   self notify("death");
 }
 
-_id_1299C(var_0) {
-  var_1 = self;
+turn_zombie(var_00) {
+  var_01 = self;
   var_1.team = "allies";
-  var_1._id_01F5 = "sprint";
-  var_1._id_9CA2 = 1;
-  var_1._id_9CEF = 1;
+  var_1.movemode = "sprint";
+  var_1.is_reserved = 1;
+  var_1.is_turned = 1;
   var_1.maxhealth = 900;
   var_1.health = 900;
-  var_1._id_0033 = 0;
-  var_1 notify("turned");
+  var_1.allowpain = 0;
+  var_01 notify("turned");
 
-  if (scripts\engine\utility::_id_9CEE(var_1._id_152C)) {
-  if (isdefined(var_1._id_C37F))
-  var_1._id_015C = var_1._id_C37F;
+  if (scripts\engine\utility::is_true(var_1.about_to_dance)) {
+  if (isdefined(var_1.og_goalradius))
+  var_1.goalradius = var_1.og_goalradius;
 
-  var_1._id_C37F = undefined;
-  var_1._id_152C = 0;
-  var_1._id_EF64 = 0;
+  var_1.og_goalradius = undefined;
+  var_1.about_to_dance = 0;
+  var_1.scripted_mode = 0;
   }
 
-  var_1._id_B57A = int(_id_0D61::_id_3728("generic_zombie") * 0.5);
-  level._id_1084F = scripts\engine\utility::array_remove(level._id_1084F, var_1);
-  level._id_4B6E++;
-  level._id_4B95--;
-  var_1 setscriptablepartstate("eyes", "turned_eyes");
-  var_1 setscriptablepartstate("pet", "active");
-  var_1 thread _id_A626(180);
-  var_1 thread _id_E0B2();
+  var_1.melee_damage_amt = int(scripts/cp/zombies/zombies_spawning::calculatezombiehealth("generic_zombie") * 0.5);
+  level.spawned_enemies = scripts\engine\utility::array_remove(level.spawned_enemies, var_01);
+  level.current_enemy_deaths++;
+  level.current_num_spawned_enemies--;
+  var_01 setscriptablepartstate("eyes", "turned_eyes");
+  var_01 setscriptablepartstate("pet", "active");
+  var_01 thread kill_turned_zombie_after_time(180);
+  var_01 thread remove_zombie_from_turned_list_on_death();
 
-  if (isdefined(var_0))
-  var_0 _id_0A5E::_id_D9AD("mt_turned_zombies");
+  if (isdefined(var_00))
+  var_00 scripts/cp/cp_merits::processmerit("mt_turned_zombies");
 
-  _id_B2EB(var_1);
+  func_B2EB(var_01);
 }
 
-_id_B2EB(var_0) {
-  if (!isdefined(level._id_1299F))
-  level._id_1299F = [];
+func_B2EB(var_00) {
+  if (!isdefined(level.turned_zombies))
+  level.turned_zombies = [];
 
-  level._id_1299F[level._id_1299F.size] = var_0;
+  level.turned_zombies[level.turned_zombies.size] = var_00;
 
-  if (level._id_1299F.size > 6) {
-  var_0 = level._id_1299F[0];
-  level._id_1299F = scripts\engine\utility::array_remove(level._id_1299F, var_0);
-  var_0 _meth_80B0(var_0.health + 100, var_0.origin);
+  if (level.turned_zombies.size > 6) {
+  var_00 = level.turned_zombies[0];
+  level.turned_zombies = scripts\engine\utility::array_remove(level.turned_zombies, var_00);
+  var_00 getrandomarmkillstreak(var_0.health + 100, var_0.origin);
   }
 }
 
-_id_A626(var_0) {
+kill_turned_zombie_after_time(var_00) {
   self endon("death");
 
-  while (var_0 > 0) {
+  while (var_00 > 0) {
   wait 1;
   var_0--;
   }
 
-  self _meth_80B0(self.health + 100, self.origin);
+  self getrandomarmkillstreak(self.health + 100, self.origin);
 }
 
-_id_E0B2() {
+remove_zombie_from_turned_list_on_death() {
   self waittill("death");
-  level._id_1299F = scripts\engine\utility::array_remove(level._id_1299F, self);
-  _id_0D61::_id_4FB8(1);
+  level.turned_zombies = scripts\engine\utility::array_remove(level.turned_zombies, self);
+  scripts/cp/zombies/zombies_spawning::decrease_reserved_spawn_slots(1);
 }

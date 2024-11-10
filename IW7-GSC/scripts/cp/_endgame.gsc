@@ -1,7 +1,7 @@
 /*******************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\_endgame.gsc
+ * Script: scripts\scripts\cp\cp_endgame.gsc
 *******************************************/
 
 init() {
@@ -13,7 +13,7 @@ endgame(param_00,param_01) {
 		return;
 	}
 
-	function_01BD(1);
+	setnojiptime(1);
 	level thread kill_all_zombies();
 	func_B37C();
 	level notify("game_ended",param_00);
@@ -50,7 +50,7 @@ endgame(param_00,param_01) {
 	setdvar("ui_allow_teamchange",0);
 	setdvar("bg_compassShowEnemies",0);
 	setdvar("scr_gameended",1);
-	function_01AF(0);
+	setgameendtime(0);
 	setomnvar("zm_ui_timer",0);
 	scripts\cp\cp_challenge::deactivate_current_challenge();
 	foreach(var_04 in level.players) {

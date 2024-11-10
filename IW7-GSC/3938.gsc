@@ -3,83 +3,83 @@
  * Script: scripts\3938.gsc
 ***************************************/
 
-_id_DF0C() {
+registerscriptedagent() {
   scripts\aitypes\bt_util::init();
-  _id_03A9::_id_DEE8();
-  _id_0F37::_id_2371();
+  func_03A9::func_DEE8();
+  func_0F37::func_2371();
 
   if (level.gametype != "zombie")
-  _id_09FD::_id_3353();
+  func_09FD::func_3353();
 
-  _id_9812();
-  thread _id_FAB0();
+  func_9812();
+  thread func_FAB0();
 }
 
-_id_FAB0() {
+func_FAB0() {
   level endon("game_ended");
 
-  if (!isdefined(level._id_18EE))
+  if (!isdefined(level.agent_definition))
   level waittill("scripted_agents_initialized");
 
-  if (!isdefined(level._id_10970))
-  level._id_10970 = [];
+  if (!isdefined(level.species_funcs))
+  level.species_funcs = [];
 
-  level._id_10970["c6"] = [];
-  level._id_18EE["c6"]["setup_func"] = ::_id_FA8A;
+  level.species_funcs["c6"] = [];
+  level.agent_definition["c6"]["setup_func"] = ::setupagent;
 }
 
-_id_FA8A() {
-  self._id_0010 = 0.5;
-  self._id_0202 = 0;
-  self._id_0293 = 48;
-  self._id_A8BA = 0;
-  self._id_5277 = 360;
-  self._id_5278 = 340;
-  self._id_B4CD = 3000;
-  self._id_110D7 = self._id_5277 + 100;
-  self._id_272A = self._id_5278 - 100;
-  self._id_6B97 = 12;
-  self._id_72C5 = 340;
-  self._id_6B98 = 40;
-  self._id_565E = 2500;
-  self._id_69EF = 75;
-  self._id_69EE = 30;
-  self._id_69ED = 50;
-  self._id_B632 = 9216;
-  self._id_B5F1 = 160;
-  self._id_B5F4 = 250;
-  self._id_B5F2 = 1.2;
-  self._id_B4D9 = 50;
-  self._id_B5D9 = 32;
-  self._id_B628 = 30;
-  self._id_B626 = 45;
-  self._id_013C = 600;
-  self._id_013E = 600;
-  self._id_013D = 600;
-  self._id_1A44 = 50;
-  _id_FAFE();
-  thread _id_EF7F();
-  thread _id_899D();
+setupagent() {
+  self.accuracy = 0.5;
+  self.noattackeraccuracymod = 0;
+  self.sharpturnnotifydist = 48;
+  self.last_enemy_sight_time = 0;
+  self.desiredenemydistmax = 360;
+  self.desiredenemydistmin = 340;
+  self.maxtimetostrafewithoutlos = 3000;
+  self.strafeifwithindist = self.desiredenemydistmax + 100;
+  self.backawayenemydist = self.desiredenemydistmin - 100;
+  self.fastcrawlanimscale = 12;
+  self.forcefastcrawldist = 340;
+  self.fastcrawlmaxhealth = 40;
+  self.dismemberchargeexplodedistsq = 2500;
+  self.explosionradius = 75;
+  self.explosiondamagemin = 30;
+  self.explosiondamagemax = 50;
+  self.meleerangesq = 9216;
+  self.meleechargedist = 160;
+  self.meleechargedistvsplayer = 250;
+  self.meleechargedistreloadmultiplier = 1.2;
+  self.maxzdiff = 50;
+  self.meleeactorboundsradius = 32;
+  self.meleemindamage = 30;
+  self.meleemaxdamage = 45;
+  self.footstepdetectdist = 600;
+  self.footstepdetectdistwalk = 600;
+  self.footstepdetectdistsprint = 600;
+  self.func_1A44 = 50;
+  func_FAFE();
+  thread scriptedgoalwaitforarrival();
+  thread func_899D();
 }
 
-_id_FAFE() {
-  self._id_3402 = ::_id_11562;
-  self._id_3404 = [::_id_11562, ::_id_11559, ::_id_1156F, ::_id_1157B, ::_id_11570];
-  self._id_3403 = [15, 40, 17, 17, 11];
+func_FAFE() {
+  self.func_3402 = ::func_11562;
+  self.func_3404 = [::func_11562, ::func_11559, ::func_1156F, ::func_1157B, ::func_11570];
+  self.func_3403 = [15, 40, 17, 17, 11];
 }
 
-_id_899D() {
+func_899D() {
   self endon("death");
 
   for (;;) {
   self waittill("enemy");
 
   for (;;) {
-  if (isdefined(self._id_010C))
-  self._id_6571 = gettime() + 1000;
-  else if (isdefined(self._id_6571)) {
-  if (gettime() > self._id_6571) {
-  self._id_6571 = undefined;
+  if (isdefined(self.enemy))
+  self.func_6571 = gettime() + 1000;
+  else if (isdefined(self.func_6571)) {
+  if (gettime() > self.func_6571) {
+  self.func_6571 = undefined;
   break;
   }
   }
@@ -89,91 +89,91 @@ _id_899D() {
   }
 }
 
-_id_11570() {
-  var_0 = 70;
-  var_1 = 15;
+func_11570() {
+  var_00 = 70;
+  var_01 = 15;
 
-  if (isdefined(self._id_010C._id_18F4)) {
-  var_0 = self._id_010C._id_18F4;
-  var_1 = self._id_010C._id_18F9;
+  if (isdefined(self.enemy.func_18F4)) {
+  var_00 = self.enemy.func_18F4;
+  var_01 = self.enemy.func_18F9;
   }
 
-  var_2 = var_0 * randomfloatrange(0.25, 0.35);
-  var_3 = var_1 * 0.5;
-  var_4 = var_3 * -1;
-  var_5 = randomfloatrange(var_4, var_3);
-  var_6 = anglestoright(self.angles);
-  var_7 = (var_6[0] * var_5, var_6[1] * var_5, var_2);
-  var_8 = self._id_010C.origin + var_7;
-  return var_8;
+  var_02 = var_00 * randomfloatrange(0.25, 0.35);
+  var_03 = var_01 * 0.5;
+  var_04 = var_03 * -1;
+  var_05 = randomfloatrange(var_04, var_03);
+  var_06 = anglestoright(self.angles);
+  var_07 = (var_6[0] * var_05, var_6[1] * var_05, var_02);
+  var_08 = self.enemy.origin + var_07;
+  return var_08;
 }
 
-_id_1157B() {
-  var_0 = 70;
-  var_1 = 15;
+func_1157B() {
+  var_00 = 70;
+  var_01 = 15;
 
-  if (isdefined(self._id_010C._id_18F4)) {
-  var_0 = self._id_010C._id_18F4;
-  var_1 = self._id_010C._id_18F9;
+  if (isdefined(self.enemy.func_18F4)) {
+  var_00 = self.enemy.func_18F4;
+  var_01 = self.enemy.func_18F9;
   }
 
-  var_2 = var_0 * randomfloatrange(0.65, 0.75);
-  var_3 = var_1 * 0.75;
-  var_4 = anglestoright(self.angles);
-  var_5 = (var_4[0] * var_3, var_4[1] * var_3, var_2);
-  var_6 = self._id_010C.origin + var_5;
-  return var_6;
+  var_02 = var_00 * randomfloatrange(0.65, 0.75);
+  var_03 = var_01 * 0.75;
+  var_04 = anglestoright(self.angles);
+  var_05 = (var_4[0] * var_03, var_4[1] * var_03, var_02);
+  var_06 = self.enemy.origin + var_05;
+  return var_06;
 }
 
-_id_1156F() {
-  var_0 = 70;
-  var_1 = 15;
+func_1156F() {
+  var_00 = 70;
+  var_01 = 15;
 
-  if (isdefined(self._id_010C._id_18F4)) {
-  var_0 = self._id_010C._id_18F4;
-  var_1 = self._id_010C._id_18F9;
+  if (isdefined(self.enemy.func_18F4)) {
+  var_00 = self.enemy.func_18F4;
+  var_01 = self.enemy.func_18F9;
   }
 
-  var_2 = var_0 * randomfloatrange(0.65, 0.75);
-  var_3 = var_1 * -0.75;
-  var_4 = anglestoright(self.angles);
-  var_5 = (var_4[0] * var_3, var_4[1] * var_3, var_2);
-  var_6 = self._id_010C.origin + var_5;
-  return var_6;
+  var_02 = var_00 * randomfloatrange(0.65, 0.75);
+  var_03 = var_01 * -0.75;
+  var_04 = anglestoright(self.angles);
+  var_05 = (var_4[0] * var_03, var_4[1] * var_03, var_02);
+  var_06 = self.enemy.origin + var_05;
+  return var_06;
 }
 
-_id_11559() {
-  var_0 = 70;
-  var_1 = 15;
+func_11559() {
+  var_00 = 70;
+  var_01 = 15;
 
-  if (isdefined(self._id_010C._id_18F4)) {
-  var_0 = self._id_010C._id_18F4;
-  var_1 = self._id_010C._id_18F9;
+  if (isdefined(self.enemy.func_18F4)) {
+  var_00 = self.enemy.func_18F4;
+  var_01 = self.enemy.func_18F9;
   }
 
-  var_2 = var_0 * randomfloatrange(0.65, 0.75);
-  var_3 = var_1 * 0.5;
-  var_4 = var_3 * -1;
-  var_5 = randomfloatrange(var_4, var_3);
-  var_6 = anglestoright(self.angles);
-  var_7 = (var_6[0] * var_5, var_6[1] * var_5, var_2);
-  var_8 = self._id_010C.origin + var_7;
-  return var_8;
+  var_02 = var_00 * randomfloatrange(0.65, 0.75);
+  var_03 = var_01 * 0.5;
+  var_04 = var_03 * -1;
+  var_05 = randomfloatrange(var_04, var_03);
+  var_06 = anglestoright(self.angles);
+  var_07 = (var_6[0] * var_05, var_6[1] * var_05, var_02);
+  var_08 = self.enemy.origin + var_07;
+  return var_08;
 }
 
-_id_11562() {
-  var_0 = self._id_010C gettagorigin("j_head");
-  return var_0;
+func_11562() {
+  var_00 = self.enemy gettagorigin("j_head");
+  return var_00;
 }
 
-_id_2475() {
-  if (isdefined(self._id_2AB4) && self._id_2AB4 == 0)
+func_2475() {
+  if (isdefined(self.func_2AB4) && self.func_2AB4 == 0)
   return;
 
-  self._id_13525 = "american";
-  self _meth_82C6("cloth");
+  self.voice = "american";
+  self give_explosive_touch_on_revived("cloth");
   self attach("robot_c6_armor");
-  var_0 = [];
+  var_00 = [];
   var_0["tag_armor_head_ri"] = 165;
   var_0["tag_armor_head_le"] = 165;
   var_0["tag_armor_head_front"] = 165;
@@ -196,103 +196,103 @@ _id_2475() {
   var_0["tag_armor_kneepad_behind_ri"] = 50;
   var_0["tag_armor_kneepad_down_ri"] = 50;
   var_0["tag_armor_kneepad_upper_ri"] = 50;
-  self._id_2AB4 = 1;
+  self.func_2AB4 = 1;
 }
 
-_id_FAA6() {
-  self._id_2AB5 = 1;
+setupdestructibleparts() {
+  self.func_2AB5 = 1;
 }
 
-_id_17CC(var_0, var_1) {
-  if (!isdefined(anim._id_85DF)) {
-  anim._id_85DF = [];
-  anim._id_85E1 = [];
+func_17CC(var_00, var_01) {
+  if (!isdefined(anim.func_85DF)) {
+  anim.func_85DF = [];
+  anim.func_85E1 = [];
   }
 
-  var_2 = anim._id_85DF.size;
-  anim._id_85DF[var_2] = var_0;
-  anim._id_85E1[var_2] = var_1;
+  var_02 = anim.func_85DF.size;
+  anim.func_85DF[var_02] = var_00;
+  anim.func_85E1[var_02] = var_01;
 }
 
-_id_9812() {
-  _id_17CC(0, (41.5391, 7.28883, 72.2128));
-  _id_17CC(1, (34.8849, -4.77048, 74.0488));
+func_9812() {
+  func_17CC(0, (41.5391, 7.28883, 72.2128));
+  func_17CC(1, (34.8849, -4.77048, 74.0488));
 }
 
-_id_EF7F() {
+scriptedgoalwaitforarrival() {
   self endon("death");
 
   for (;;) {
   self waittill("goal_reached");
 
-  if (isdefined(self._id_EF7D))
-  var_0 = self._id_EF7D;
-  else if (isdefined(self._id_EF7A))
-  var_0 = self._id_EF7A.origin;
-  else if (isdefined(self._id_EF7C))
-  var_0 = self._id_EF7C.origin;
+  if (isdefined(self.func_EF7D))
+  var_00 = self.func_EF7D;
+  else if (isdefined(self.func_EF7A))
+  var_00 = self.func_EF7A.origin;
+  else if (isdefined(self.func_EF7C))
+  var_00 = self.func_EF7C.origin;
   else
   continue;
 
-  var_1 = 16;
+  var_01 = 16;
 
-  if (isdefined(self._id_EF7E))
-  var_1 = self._id_EF7E * self._id_EF7E;
+  if (isdefined(self.func_EF7E))
+  var_01 = self.func_EF7E * self.func_EF7E;
 
-  if (distance2dsquared(self.origin, var_0) <= var_1) {
-  self._id_EF7D = undefined;
-  self._id_EF7C = undefined;
+  if (distance2dsquared(self.origin, var_00) <= var_01) {
+  self.func_EF7D = undefined;
+  self.func_EF7C = undefined;
 
-  if (!isdefined(self._id_EF7B))
-  self._id_EF7A = undefined;
+  if (!isdefined(self.func_EF7B))
+  self.func_EF7A = undefined;
 
   self notify("scriptedGoal_reached");
   }
   }
 }
 
-_id_F834(var_0, var_1) {
-  if (!isdefined(var_1))
-  var_1 = 0;
+func_F834(var_00, var_01) {
+  if (!isdefined(var_01))
+  var_01 = 0;
 
-  self._id_EF79 = var_1;
-  self._id_EF73 = var_0;
+  self.func_EF79 = var_01;
+  self.func_EF73 = var_00;
 }
 
-_id_F835(var_0, var_1) {
-  self._id_EF7A = undefined;
-  self._id_EF7B = undefined;
-  self._id_EF7C = undefined;
-  self._id_EF7D = var_0;
-  self._id_EF7E = var_1;
+func_F835(var_00, var_01) {
+  self.func_EF7A = undefined;
+  self.func_EF7B = undefined;
+  self.func_EF7C = undefined;
+  self.func_EF7D = var_00;
+  self.func_EF7E = var_01;
 }
 
-_id_F833(var_0, var_1) {
-  self._id_EF7D = undefined;
-  self._id_EF7A = undefined;
-  self._id_EF7B = undefined;
-  self._id_EF7C = var_0;
-  self._id_EF7E = var_1;
+func_F833(var_00, var_01) {
+  self.func_EF7D = undefined;
+  self.func_EF7A = undefined;
+  self.func_EF7B = undefined;
+  self.func_EF7C = var_00;
+  self.func_EF7E = var_01;
 }
 
-_id_F832(var_0, var_1, var_2) {
-  self._id_EF7D = undefined;
-  self._id_EF7C = undefined;
-  self._id_EF7A = var_0;
-  self._id_EF7E = var_1;
+func_F832(var_00, var_01, var_02) {
+  self.func_EF7D = undefined;
+  self.func_EF7C = undefined;
+  self.func_EF7A = var_00;
+  self.func_EF7E = var_01;
 
-  if (isdefined(var_2) && var_2)
-  self._id_EF7B = var_2;
+  if (isdefined(var_02) && var_02)
+  self.func_EF7B = var_02;
   else
-  self._id_EF7B = undefined;
+  self.func_EF7B = undefined;
 }
 
-_id_41D9() {
-  if (isdefined(self._id_EF7D) || isdefined(self._id_EF7A) || isdefined(self._id_EF7C)) {
-  self._id_EF7D = undefined;
-  self._id_EF7A = undefined;
-  self._id_EF7B = undefined;
-  self._id_EF7C = undefined;
-  self _meth_841F();
+func_41D9() {
+  if (isdefined(self.func_EF7D) || isdefined(self.func_EF7A) || isdefined(self.func_EF7C)) {
+  self.func_EF7D = undefined;
+  self.func_EF7A = undefined;
+  self.func_EF7B = undefined;
+  self.func_EF7C = undefined;
+  self clearpath();
   }
 }

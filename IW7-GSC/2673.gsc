@@ -6,32 +6,32 @@
 init() {
   level._effect["boombox_c4light"] = loadfx("vfx/iw7/_requests/coop/vfx_boombox_blink");
   level._effect["boombox_explode"] = loadfx("vfx/iw7/_requests/coop/vfx_ghetto_blast.vfx");
-  var_0 = spawnstruct();
-  var_0._id_11901 = 18.0;
-  var_0._id_B91A = "boom_box_c4_wm";
-  var_0._id_B924 = "boom_box_c4_wm";
-  var_0._id_B925 = "boom_box_c4_wm_bad";
-  var_0._id_CC12 = "boom_box_c4_wm";
-  var_0._id_CC28 = &"COOP_CRAFTABLES_PLACE";
-  var_0._id_38E3 = &"COOP_CRAFTABLES_CANNOT_PLACE";
-  var_0._id_CC0A = &"COOP_CRAFTABLES_PLACE_CANCELABLE";
-  var_0._id_CC22 = 30.0;
-  var_0._id_CC25 = 16.0;
-  var_0._id_3AA7 = (0, 0, 35);
-  var_0._id_3AA6 = (0, 180, 0);
-  level._id_47AE = [];
-  level._id_47AE["crafted_boombox"] = var_0;
+  var_00 = spawnstruct();
+  var_0.timeout = 18.0;
+  var_0.modelbase = "boom_box_c4_wm";
+  var_0.modelplacement = "boom_box_c4_wm";
+  var_0.modelplacementfailed = "boom_box_c4_wm_bad";
+  var_0.placedmodel = "boom_box_c4_wm";
+  var_0.placestring = &"COOP_CRAFTABLES_PLACE";
+  var_0.cannotplacestring = &"COOP_CRAFTABLES_CANNOT_PLACE";
+  var_0.placecancelablestring = &"COOP_CRAFTABLES_PLACE_CANCELABLE";
+  var_0.placementheighttolerance = 30.0;
+  var_0.placementradius = 16.0;
+  var_0.carriedtrapoffset = (0, 0, 35);
+  var_0.carriedtrapangles = (0, 180, 0);
+  level.crafted_boombox_settings = [];
+  level.crafted_boombox_settings["crafted_boombox"] = var_00;
 }
 
-_id_82B4(var_0, var_1) {
-  var_1 thread _id_13932();
-  var_1 notify("new_power", "crafted_boombox");
-  var_1 setclientomnvar("zom_crafted_weapon", 5);
-  var_1 thread _id_0A77::_id_1308C(var_1, "iw7_pickup_zm");
-  _id_0A77::_id_F313("crafted_boombox", ::_id_82B4, var_1);
+give_crafted_boombox(var_00, var_01) {
+  var_01 thread watch_dpad();
+  var_01 notify("new_power", "crafted_boombox");
+  var_01 setclientomnvar("zom_crafted_weapon", 5);
+  var_01 thread scripts/cp/utility::usegrenadegesture(var_01, "iw7_pickup_zm");
+  scripts/cp/utility::set_crafted_inventory_item("crafted_boombox", ::give_crafted_boombox, var_01);
 }
 
-_id_13932() {
+watch_dpad() {
   self endon("disconnect");
   self endon("death");
   self notify("craft_dpad_watcher");
@@ -41,273 +41,273 @@ _id_13932() {
   for (;;) {
   self waittill("pullout_boombox");
 
-  if (scripts\engine\utility::_id_9CEE(self._id_9D81))
+  if (scripts\engine\utility::is_true(self.iscarrying))
   continue;
 
-  if (scripts\engine\utility::_id_9CEE(self._id_AD2C))
+  if (scripts\engine\utility::is_true(self.linked_to_coaster))
   continue;
 
   if (isdefined(self.allow_carry) && self.allow_carry == 0)
   continue;
 
-  if (_id_0A77::_id_9D05())
+  if (scripts/cp/utility::is_valid_player())
   break;
   }
 
-  thread _id_82A8(1);
+  thread give_boombox(1);
 }
 
-_id_82A8(var_0, var_1) {
+give_boombox(var_00, var_01) {
   self endon("disconnect");
-  _id_0A77::_id_41C4("msg_power_hint");
-  var_2 = _id_4989(self);
-  self._id_A039 = var_2.name;
-  _id_E152();
-  var_2 = _id_4989(self);
-  self._id_3AA5 = var_2;
-  var_2._id_6DEC = 1;
-  var_3 = _id_F682(var_2, var_0, var_1);
-  self._id_3AA5 = undefined;
-  thread _id_1370F();
-  self._id_9D81 = 0;
+  scripts/cp/utility::clearlowermessage("msg_power_hint");
+  var_02 = createboomboxforplayer(self);
+  self.itemtype = var_2.name;
+  removeperks();
+  var_02 = createboomboxforplayer(self);
+  self.carriedsentry = var_02;
+  var_2.firstplacement = 1;
+  var_03 = setcarryingboombox(var_02, var_00, var_01);
+  self.carriedsentry = undefined;
+  thread waitrestoreperks();
+  self.iscarrying = 0;
 
-  if (isdefined(var_2))
+  if (isdefined(var_02))
   return 1;
   else
   return 0;
 }
 
-_id_F682(var_0, var_1, var_2) {
+setcarryingboombox(var_00, var_01, var_02) {
   self endon("disconnect");
-  var_0 _id_2CA3(self, var_1);
-  scripts\engine\utility::_id_1C71(0);
+  var_00 boombox_setcarried(self, var_01);
+  scripts\engine\utility::allow_weapon(0);
   self notifyonplayercommand("place_boombox", "+attack");
   self notifyonplayercommand("place_boombox", "+attack_akimbo_accessible");
   self notifyonplayercommand("cancel_boombox", "+actionslot 3");
 
-  if (!level._id_4542) {
+  if (!level.console) {
   self notifyonplayercommand("cancel_boombox", "+actionslot 5");
   self notifyonplayercommand("cancel_boombox", "+actionslot 6");
   self notifyonplayercommand("cancel_boombox", "+actionslot 7");
   }
 
   for (;;) {
-  var_3 = scripts\engine\utility::_id_13734("place_boombox", "cancel_boombox", "force_cancel_placement");
+  var_03 = scripts\engine\utility::waittill_any_return("place_boombox", "cancel_boombox", "force_cancel_placement");
 
-  if (!isdefined(var_0)) {
-  scripts\engine\utility::_id_1C71(1);
+  if (!isdefined(var_00)) {
+  scripts\engine\utility::allow_weapon(1);
   return 1;
   }
 
-  if (!isdefined(var_3))
-  var_3 = "force_cancel_placement";
+  if (!isdefined(var_03))
+  var_03 = "force_cancel_placement";
 
-  if (var_3 == "cancel_boombox" || var_3 == "force_cancel_placement") {
-  if (!var_1 && var_3 == "cancel_boombox")
+  if (var_03 == "cancel_boombox" || var_03 == "force_cancel_placement") {
+  if (!var_01 && var_03 == "cancel_boombox")
   continue;
 
-  scripts\engine\utility::_id_1C71(1);
-  var_0 _id_2CA2();
+  scripts\engine\utility::allow_weapon(1);
+  var_00 boombox_setcancelled();
 
-  if (var_3 != "force_cancel_placement")
-  thread _id_13932();
-  else if (var_1)
-  _id_0A77::_id_DFE0(self);
+  if (var_03 != "force_cancel_placement")
+  thread watch_dpad();
+  else if (var_01)
+  scripts/cp/utility::remove_crafted_item_from_inventory(self);
 
   return 0;
   }
 
-  if (!var_0._id_3872)
+  if (!var_0.canbeplaced)
   continue;
 
-  if (var_1)
-  _id_0A77::_id_DFE0(self);
+  if (var_01)
+  scripts/cp/utility::remove_crafted_item_from_inventory(self);
 
-  var_0 _id_2CA5(var_2, self);
-  scripts\engine\utility::_id_1C71(1);
+  var_00 boombox_setplaced(var_02, self);
+  scripts\engine\utility::allow_weapon(1);
   return 1;
   }
 }
 
-_id_E18E() {
+removeweapons() {
   if (self.hasriotshield) {
-  var_0 = _id_0A77::_id_E55C();
-  self._id_E2E6 = var_0;
-  self._id_E556 = self getammocount(var_0);
-  self _meth_83B8(var_0);
+  var_00 = scripts/cp/utility::riotshieldname();
+  self.restoreweapon = var_00;
+  self.riotshieldammo = self getammocount(var_00);
+  self giveuponsuppressiontime(var_00);
   }
 }
 
-_id_E152() {
-  if (_id_0A77::_id_12D6("specialty_explosivebullets")) {
-  self._id_E2DF = "specialty_explosivebullets";
-  _id_0A77::_id_1430("specialty_explosivebullets");
+removeperks() {
+  if (scripts/cp/utility::_hasperk("specialty_explosivebullets")) {
+  self.restoreperk = "specialty_explosivebullets";
+  scripts/cp/utility::_unsetperk("specialty_explosivebullets");
   }
 }
 
-_id_E2E8() {
-  if (isdefined(self._id_E2E6)) {
-  _id_0A77::_id_12C6(self._id_E2E6);
+restoreweapons() {
+  if (isdefined(self.restoreweapon)) {
+  scripts/cp/utility::_giveweapon(self.restoreweapon);
 
   if (self.hasriotshield) {
-  var_0 = _id_0A77::_id_E55C();
-  self setweaponammoclip(var_0, self._id_E556);
+  var_00 = scripts/cp/utility::riotshieldname();
+  self setweaponammoclip(var_00, self.riotshieldammo);
   }
   }
 
-  self._id_E2E6 = undefined;
+  self.restoreweapon = undefined;
 }
 
-_id_E2E0() {
-  if (isdefined(self._id_E2DF)) {
-  _id_0A77::giveperk(self._id_E2DF);
-  self._id_E2DF = undefined;
+restoreperks() {
+  if (isdefined(self.restoreperk)) {
+  scripts/cp/utility::giveperk(self.restoreperk);
+  self.restoreperk = undefined;
   }
 }
 
-_id_1370F() {
+waitrestoreperks() {
   self endon("death");
   self endon("disconnect");
   level endon("game_ended");
   wait 0.05;
-  _id_E2E0();
+  restoreperks();
 }
 
-_id_4989(var_0) {
-  var_1 = spawnturret("misc_turret", var_0.origin + (0, 0, 25), "sentry_minigun_mp");
+createboomboxforplayer(var_00) {
+  var_01 = spawnturret("misc_turret", var_0.origin + (0, 0, 25), "sentry_minigun_mp");
   var_1.angles = var_0.angles;
-  var_1.owner = var_0;
+  var_1.owner = var_00;
   var_1.name = "crafted_boombox";
-  var_1._id_3A9C = spawn("script_model", var_1.origin);
-  var_1._id_3A9C.angles = var_0.angles;
-  var_1 maketurretinoperable();
-  var_1 _meth_835B(1);
-  var_1 _meth_830F("sentry_offline");
-  var_1 makeunusable();
-  var_1 _meth_8336(var_0);
-  var_1 _id_2CA0(var_0);
-  return var_1;
+  var_1.carriedboombox = spawn("script_model", var_1.origin);
+  var_1.carriedboombox.angles = var_0.angles;
+  var_01 maketurretinoperable();
+  var_01 setturretmodechangewait(1);
+  var_01 give_player_session_tokens("sentry_offline");
+  var_01 makeunusable();
+  var_01 setsentryowner(var_00);
+  var_01 boombox_initboombox(var_00);
+  return var_01;
 }
 
-_id_2CA0(var_0) {
-  self._id_3872 = 1;
-  _id_2CA4();
+boombox_initboombox(var_00) {
+  self.canbeplaced = 1;
+  boombox_setinactive();
 }
 
-_id_2C9E(var_0) {
+boombox_handledeath(var_00) {
   self waittill("death");
 
   if (!isdefined(self))
   return;
 
-  _id_2CA4();
+  boombox_setinactive();
   self playsound("sentry_explode");
 
-  if (isdefined(self._id_3CBF))
-  self._id_3CBF delete();
+  if (isdefined(self.charge_fx))
+  self.charge_fx delete();
 
-  if (isdefined(self._id_13E61))
-  self._id_13E61 delete();
+  if (isdefined(self.zap_model))
+  self.zap_model delete();
 
-  _id_0A77::_id_E11E();
+  scripts/cp/utility::removefromtraplist();
 
   if (isdefined(self))
   self delete();
 }
 
-_id_2CA5(var_0, var_1) {
-  var_2 = getgroundposition(self._id_3A9C.origin, 4);
-  var_3 = spawn("script_model", self._id_3A9C.origin);
-  var_3.angles = self._id_3A9C.angles;
-  var_3 solid();
-  var_3 setmodel(level._id_47AE["crafted_boombox"]._id_CC12);
-  var_3 physicslaunchserver(var_3.origin, (0, 0, 1));
-  self._id_3A9D _meth_80F3();
-  self._id_3A9D = undefined;
-  var_1._id_9D81 = 0;
-  self._id_3A9C delete();
+boombox_setplaced(var_00, var_01) {
+  var_02 = getgroundposition(self.carriedboombox.origin, 4);
+  var_03 = spawn("script_model", self.carriedboombox.origin);
+  var_3.angles = self.carriedboombox.angles;
+  var_03 solid();
+  var_03 setmodel(level.crafted_boombox_settings["crafted_boombox"].placedmodel);
+  var_03 physicslaunchserver(var_3.origin, (0, 0, 1));
+  self.carriedby getrigindexfromarchetyperef();
+  self.carriedby = undefined;
+  var_1.iscarrying = 0;
+  self.carriedboombox delete();
   self delete();
-  var_3 moveto(var_2, 0.5);
+  var_03 moveto(var_02, 0.5);
   wait 0.6;
-  var_4 = spawn("script_model", var_3.origin);
+  var_04 = spawn("script_model", var_3.origin);
   var_4.angles = var_3.angles;
-  var_4.owner = var_1;
+  var_4.owner = var_01;
   var_4.team = "allies";
-  var_4 setmodel(level._id_47AE["crafted_boombox"]._id_CC12);
+  var_04 setmodel(level.crafted_boombox_settings["crafted_boombox"].placedmodel);
   var_4.name = "crafted_boombox";
-  var_3 delete();
-  var_4._id_A9A9 = gettime();
-  var_4._id_A9C2 = gettime();
-  var_4 thread _id_2CA1(var_0);
-  var_4 playsound("trap_boom_box_drop");
+  var_03 delete();
+  var_4.lastkilltime = gettime();
+  var_4.lastmultikilltime = gettime();
+  var_04 thread boombox_setactive(var_00);
+  var_04 playsound("trap_boom_box_drop");
   self notify("placed");
 }
 
-_id_2CA2() {
-  self._id_3A9D _meth_80F3();
+boombox_setcancelled() {
+  self.carriedby getrigindexfromarchetyperef();
 
   if (isdefined(self.owner))
-  self.owner._id_9D81 = 0;
+  self.owner.iscarrying = 0;
 
-  self._id_3A9C delete();
+  self.carriedboombox delete();
   self delete();
 }
 
-_id_2CA3(var_0, var_1) {
-  if (isdefined(self._id_C731)) {} else {}
+boombox_setcarried(var_00, var_01) {
+  if (isdefined(self.originalowner)) {} else {}
 
-  self setmodel(level._id_47AE["crafted_boombox"]._id_B924);
+  self setmodel(level.crafted_boombox_settings["crafted_boombox"].modelplacement);
   self hide();
-  self _meth_8335(var_0);
+  self setsentrycarrier(var_00);
   self setcandamage(0);
-  self._id_3A9D = var_0;
-  var_0._id_9D81 = 1;
-  var_0 thread _id_0A77::_id_12E3F(self, self._id_3A9C, level._id_47AE["crafted_boombox"], 1);
-  thread _id_0A77::_id_A025(var_0);
-  thread _id_0A77::_id_A026(var_0);
-  thread _id_0A77::_id_A027(var_0);
-  _id_2CA4();
+  self.carriedby = var_00;
+  var_0.iscarrying = 1;
+  var_00 thread scripts/cp/utility::update_trap_placement_internal(self, self.carriedboombox, level.crafted_boombox_settings["crafted_boombox"], 1);
+  thread scripts/cp/utility::item_oncarrierdeath(var_00);
+  thread scripts/cp/utility::item_oncarrierdisconnect(var_00);
+  thread scripts/cp/utility::item_ongameended(var_00);
+  boombox_setinactive();
   self notify("carried");
 }
 
-_id_2CA1(var_0) {
-  _id_48A7((1, 1, 0), 0, 10, 48);
-  thread _id_2C9E(self.owner);
-  thread _id_0A77::_id_A021("elecboombox_handleOwner");
-  thread _id_0A77::_id_A030(var_0, level._id_47AE["crafted_boombox"]._id_11901, "explode");
-  thread _id_2CA6();
-  thread _id_2C9D();
-  _id_0A77::_id_1861();
+boombox_setactive(var_00) {
+  create_attract_positions((1, 1, 0), 0, 10, 48);
+  thread boombox_handledeath(self.owner);
+  thread scripts/cp/utility::item_handleownerdisconnect("elecboombox_handleOwner");
+  thread scripts/cp/utility::item_timeout(var_00, level.crafted_boombox_settings["crafted_boombox"].timeout, "explode");
+  thread boombox_trap_enemies();
+  thread boombox_explode();
+  scripts/cp/utility::addtotraplist();
   wait 1;
   playfxontag(level._effect["boombox_c4light"], self, "c4_fx_tag");
 }
 
-_id_2CA4() {
-  _id_0A77::_id_E11E();
+boombox_setinactive() {
+  scripts/cp/utility::removefromtraplist();
 }
 
-_id_2CA6() {
+boombox_trap_enemies() {
   self endon("death");
   self endon("boombox_explode");
-  self._id_4D7E = [];
+  self.dancers = [];
   self playloopsound("mus_zombies_boombox");
-  var_0 = 262144;
+  var_00 = 262144;
 
   for (;;) {
-  var_1 = _id_0A4A::_id_7DB0("axis");
-  var_1 = scripts\engine\utility::_id_782F(self.origin, var_1);
+  var_01 = scripts/cp/cp_agent_utils::getaliveagentsofteam("axis");
+  var_01 = scripts\engine\utility::get_array_of_closest(self.origin, var_01);
 
-  foreach (var_3 in var_1) {
-  if (!_id_0A77::_id_FF18(var_3) || var_3._id_152C)
+  foreach (var_03 in var_01) {
+  if (!scripts/cp/utility::should_be_affected_by_trap(var_03) || var_3.about_to_dance)
   continue;
 
-  if (scripts\engine\utility::_id_9CEE(self._id_9CDD))
+  if (scripts\engine\utility::is_true(self.is_suicide_bomber))
   continue;
 
-  if (distancesquared(self.origin, var_3.origin) < var_0) {
-  var_4 = _id_78AD(self, var_3);
-  var_3 thread _id_841C(self, var_4);
-  var_3 thread _id_DF44(self);
+  if (distancesquared(self.origin, var_3.origin) < var_00) {
+  var_04 = get_closest_attract_position(self, var_03);
+  var_03 thread go_to_radio_and_dance(self, var_04);
+  var_03 thread release_zombie_on_radio_death(self);
   scripts\engine\utility::waitframe();
   }
   }
@@ -316,37 +316,37 @@ _id_2CA6() {
   }
 }
 
-_id_841C(var_0, var_1) {
-  var_0 endon("death");
-  var_0 endon("boombox_explode");
+go_to_radio_and_dance(var_00, var_01) {
+  var_00 endon("death");
+  var_00 endon("boombox_explode");
   self endon("death");
   self endon("turned");
-  self._id_152C = 1;
-  self._id_EF64 = 1;
-  self._id_C37F = self._id_015C;
-  self._id_015C = 32;
-  var_2 = var_0.origin - var_1.origin;
-  var_3 = vectortoangles(var_2);
-  self._id_5273 = (0, var_3[1], 0);
-  self _meth_82EF(var_1.origin);
+  self.about_to_dance = 1;
+  self.scripted_mode = 1;
+  self.og_goalradius = self.goalradius;
+  self.goalradius = 32;
+  var_02 = var_0.origin - var_1.origin;
+  var_03 = vectortoangles(var_02);
+  self.desired_dance_angles = (0, var_3[1], 0);
+  self give_mp_super_weapon(var_1.origin);
   scripts\engine\utility::waittill_any("goal", "goal_reached");
-  self._id_9BB0 = 1;
-  var_0._id_4D7E[var_0._id_4D7E.size] = self;
+  self.is_dancing = 1;
+  var_0.dancers[var_0.dancers.size] = self;
 }
 
-_id_DF44(var_0) {
+release_zombie_on_radio_death(var_00) {
   self endon("death");
-  var_0 scripts\engine\utility::waittill_any("boombox_explode", "death");
+  var_00 scripts\engine\utility::waittill_any("boombox_explode", "death");
 
-  if (isdefined(self._id_C37F))
-  self._id_015C = self._id_C37F;
+  if (isdefined(self.og_goalradius))
+  self.goalradius = self.og_goalradius;
 
-  self._id_C37F = undefined;
-  self._id_152C = 0;
-  self._id_EF64 = 0;
+  self.og_goalradius = undefined;
+  self.about_to_dance = 0;
+  self.scripted_mode = 0;
 }
 
-_id_2C9D() {
+boombox_explode() {
   self waittill("explode");
   self playsound("mus_zombies_boombox_slow_down");
   self stoploopsound();
@@ -356,23 +356,23 @@ _id_2C9D() {
   self playsound("trap_boom_box_explode");
   playfx(level._effect["boombox_explode"], self.origin);
   physicsexplosionsphere(self.origin, 256, 256, 2);
-  var_0 = self._id_4D7E;
-  var_1 = 0;
-  var_2 = 65536;
+  var_00 = self.dancers;
+  var_01 = 0;
+  var_02 = 65536;
 
-  foreach (var_4 in var_0) {
-  if (var_1 > 5) {
-  var_4._id_C026 = 1;
-  var_4._id_74B5 = 1;
-  var_4._id_4E4C = "boombox";
-  var_4 _meth_80B0(var_4.health + 100, self.origin, self, self, "MOD_EXPLOSIVE", "zmb_imsprojectile_mp");
+  foreach (var_04 in var_00) {
+  if (var_01 > 5) {
+  var_4.nocorpse = 1;
+  var_4.full_gib = 1;
+  var_4.deathmethod = "boombox";
+  var_04 getrandomarmkillstreak(var_4.health + 100, self.origin, self, self, "MOD_EXPLOSIVE", "zmb_imsprojectile_mp");
   continue;
   }
 
-  var_4 _meth_8366(vectornormalize(var_4.origin - self.origin) * 400 + (0, 0, 200));
-  var_4._id_5793 = 1;
-  var_4._id_4C87 = 1;
-  var_4 thread _id_2C9C(self);
+  var_04 giveflagcapturexp(vectornormalize(var_4.origin - self.origin) * 400 + (0, 0, 200));
+  var_4.do_immediate_ragdoll = 1;
+  var_4.customdeath = 1;
+  var_04 thread boombox_delayed_death(self);
   var_1++;
   }
 
@@ -383,63 +383,63 @@ _id_2C9D() {
   self notify("death");
 }
 
-_id_2C9C(var_0) {
+boombox_delayed_death(var_00) {
   self endon("death");
   wait 0.1;
-  self _meth_80B0(self.health + 100, self.origin, var_0, var_0, "MOD_EXPLOSIVE", "zmb_imsprojectile_mp");
+  self getrandomarmkillstreak(self.health + 100, self.origin, var_00, var_00, "MOD_EXPLOSIVE", "zmb_imsprojectile_mp");
 }
 
-_id_78AD(var_0, var_1) {
-  var_2 = sortbydistance(var_0._id_254B, var_1.origin);
+get_closest_attract_position(var_00, var_01) {
+  var_02 = sortbydistance(var_0.attract_positions, var_1.origin);
 
-  foreach (var_4 in var_2) {
-  if (!var_4._id_C2CF) {
-  var_4._id_C2CF = 1;
-  return var_4;
+  foreach (var_04 in var_02) {
+  if (!var_4.occupied) {
+  var_4.occupied = 1;
+  return var_04;
   }
   }
 
   return var_2[0];
 }
 
-_id_48A7(var_0, var_1, var_2, var_3) {
+create_attract_positions(var_00, var_01, var_02, var_03) {
   self endon("death");
-  var_4 = 38416;
-  var_5 = 0;
-  var_6 = 360 / var_2;
-  self._id_254B = [];
-  self._id_C2D1 = 0;
-  self._id_563E = 0;
+  var_04 = 38416;
+  var_05 = 0;
+  var_06 = 360 / var_02;
+  self.attract_positions = [];
+  self.occupied_positions = 0;
+  self.discotrap_disabled = 0;
 
-  for (var_7 = var_1; var_7 < 360 + var_1; var_7 = var_7 + var_6) {
-  var_8 = var_0 * var_3;
-  var_9 = (cos(var_7) * var_8[0] - sin(var_7) * var_8[1], sin(var_7) * var_8[0] + cos(var_7) * var_8[1], var_8[2]);
-  var_10 = getclosestpointonnavmesh(self.origin + var_9 + (0, 0, 10));
+  for (var_07 = var_01; var_07 < 360 + var_01; var_07 = var_07 + var_06) {
+  var_08 = var_00 * var_03;
+  var_09 = (cos(var_07) * var_8[0] - sin(var_07) * var_8[1], sin(var_07) * var_8[0] + cos(var_07) * var_8[1], var_8[2]);
+  var_10 = getclosestpointonnavmesh(self.origin + var_09 + (0, 0, 10));
 
-  if (!_id_0A76::_id_9C0E(var_10))
+  if (!scripts/cp/loot::is_in_active_volume(var_10))
   continue;
 
-  if (isdefined(var_10) && distancesquared(var_10, self.origin) > var_4)
+  if (isdefined(var_10) && distancesquared(var_10, self.origin) > var_04)
   continue;
   else
   {
   if (abs(var_10[2] - self.origin[2]) < 60) {
   if (level.script != "cp_disco") {
-  if (ispointinvolume(var_10, level._id_4D7C)) {
-  if (isdefined(level._id_563D))
+  if (ispointinvolume(var_10, level.dance_floor_volume)) {
+  if (isdefined(level.discotrap_active))
   continue;
-  else if (!self._id_563E) {
-  self._id_563E = 1;
-  var_11 = scripts\engine\utility::_id_8180("interaction_discoballtrap", "script_noteworthy");
-  level thread _id_0A59::_id_9A0D(var_11[0], 30);
+  else if (!self.discotrap_disabled) {
+  self.discotrap_disabled = 1;
+  var_11 = scripts\engine\utility::getstructarray("interaction_discoballtrap", "script_noteworthy");
+  level thread scripts/cp/cp_interaction::interaction_cooldown(var_11[0], 30);
   }
   }
   }
 
   var_12 = spawnstruct();
   var_12.origin = var_10;
-  var_12._id_C2CF = 0;
-  self._id_254B[self._id_254B.size] = var_12;
+  var_12.occupied = 0;
+  self.attract_positions[self.attract_positions.size] = var_12;
   continue;
   }
 
@@ -447,23 +447,23 @@ _id_48A7(var_0, var_1, var_2, var_3) {
   }
   }
 
-  for (var_7 = var_1; var_7 < 360 + var_1; var_7 = var_7 + var_6) {
-  var_8 = var_0 * (var_3 + 56);
-  var_9 = (cos(var_7) * var_8[0] - sin(var_7) * var_8[1], sin(var_7) * var_8[0] + cos(var_7) * var_8[1], var_8[2]);
-  var_10 = getclosestpointonnavmesh(self.origin + var_9 + (0, 0, 10));
+  for (var_07 = var_01; var_07 < 360 + var_01; var_07 = var_07 + var_06) {
+  var_08 = var_00 * (var_03 + 56);
+  var_09 = (cos(var_07) * var_8[0] - sin(var_07) * var_8[1], sin(var_07) * var_8[0] + cos(var_07) * var_8[1], var_8[2]);
+  var_10 = getclosestpointonnavmesh(self.origin + var_09 + (0, 0, 10));
 
-  if (!_id_0A76::_id_9C0E(var_10))
+  if (!scripts/cp/loot::is_in_active_volume(var_10))
   continue;
 
-  if (isdefined(var_10) && distancesquared(var_10, self.origin) > var_4)
+  if (isdefined(var_10) && distancesquared(var_10, self.origin) > var_04)
   continue;
   else
   {
   if (abs(var_10[2] - self.origin[2]) < 60) {
   var_12 = spawnstruct();
   var_12.origin = var_10;
-  var_12._id_C2CF = 0;
-  self._id_254B[self._id_254B.size] = var_12;
+  var_12.occupied = 0;
+  self.attract_positions[self.attract_positions.size] = var_12;
   continue;
   }
 
@@ -471,5 +471,5 @@ _id_48A7(var_0, var_1, var_2, var_3) {
   }
   }
 
-  return var_5;
+  return var_05;
 }

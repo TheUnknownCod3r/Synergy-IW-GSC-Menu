@@ -94,7 +94,7 @@ func_3361(param_00,param_01,param_02,param_03) {
 	thread func_3368();
 	playfxontag(level.var_7649["c6_death"],self,"j_spine4");
 	if(soundexists("emp_shock_short")) {
-		function_0178("shock_knife_blast",level.player geteye());
+		playworldsound("shock_knife_blast",level.player geteye());
 	}
 
 	thread lib_0C66::func_FE4E(self.asmname,var_04,0.02,1,0,1);

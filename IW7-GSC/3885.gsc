@@ -1034,7 +1034,7 @@ func_1085F(param_00,param_01,param_02) {
 	}
 	else
 	{
-		var_03 = function_00B3(param_02.target,"targetname");
+		var_03 = getnode(param_02.target,"targetname");
 		self.angles = param_01.angles;
 	}
 
@@ -1188,7 +1188,7 @@ func_336D() {
 
 func_A62A() {
 	var_00 = level.var_13563.var_63A1;
-	function_0042();
+	clearallcorpses();
 	foreach(var_02 in var_00) {
 		if(isdefined(var_02.var_FE4A)) {
 			if(var_02.var_FE4A) {
@@ -1858,9 +1858,9 @@ func_13598() {
 	switch(var_00) {
 		case "player_vr_reset_request":
 			scripts\engine\utility::flag_set("vr_tutorial_leave_shown");
-			function_01C5("bg_cinematicAboveUI","1");
-			function_01C5("bg_cinematicFullScreen","1");
-			function_01C5("bg_cinematicCanPause","1");
+			setsaveddvar("bg_cinematicAboveUI","1");
+			setsaveddvar("bg_cinematicFullScreen","1");
+			setsaveddvar("bg_cinematicCanPause","1");
 			func_CE8D(undefined,0);
 			func_E241();
 			func_F620();
@@ -1869,9 +1869,9 @@ func_13598() {
 
 		case "player_vr_exit_request":
 			scripts\engine\utility::flag_set("vr_tutorial_leave_shown");
-			function_01C5("bg_cinematicAboveUI","1");
-			function_01C5("bg_cinematicFullScreen","1");
-			function_01C5("bg_cinematicCanPause","1");
+			setsaveddvar("bg_cinematicAboveUI","1");
+			setsaveddvar("bg_cinematicFullScreen","1");
+			setsaveddvar("bg_cinematicCanPause","1");
 			level.player clearclienttriggeraudiozone(2);
 			if(scripts\engine\utility::flag_exist("acceped_vr")) {
 				scripts\engine\utility::flag_clear("acceped_vr");
@@ -1894,7 +1894,7 @@ func_F61F() {
 	level.player scripts\sp\_utility::func_11428();
 	level.player _meth_8559(0);
 	if(issubstr(level.script,"shipcrib")) {
-		function_01CB(0);
+		setsuncolorandintensity(0);
 	}
 
 	wait(0.75);
@@ -1913,8 +1913,8 @@ func_F61F() {
 		level.player _meth_80A1();
 		level.player getrankinfofull(1);
 		level.player switchtoweaponimmediate(level.player getcurrentprimaryweapon());
-		function_01C5("mantle_enable",1);
-		function_01C5("cg_drawCrosshair",1);
+		setsaveddvar("mantle_enable",1);
+		setsaveddvar("cg_drawCrosshair",1);
 		setomnvar("ui_hide_weapon_info",0);
 		setomnvar("ui_hide_hud",0);
 	}
@@ -1933,7 +1933,7 @@ func_F620() {
 	scripts\sp\_utility::func_28D8("axis");
 	level thread create_fx_resume();
 	if(issubstr(level.script,"shipcrib")) {
-		function_01CB(level.var_FD6E.var_111D7);
+		setsuncolorandintensity(level.var_FD6E.var_111D7);
 		return;
 	}
 
@@ -1943,8 +1943,8 @@ func_F620() {
 	level.player scripts\engine\utility::allow_prone(0);
 	level.player getrankinfoxpamt();
 	level.player getrankinfofull(0);
-	function_01C5("mantle_enable",0);
-	function_01C5("cg_drawCrosshair",0);
+	setsaveddvar("mantle_enable",0);
+	setsaveddvar("cg_drawCrosshair",0);
 	setomnvar("ui_hide_weapon_info",1);
 }
 
@@ -1985,11 +1985,11 @@ func_12BA8() {
 }
 
 waittilbinkend() {
-	while(function_0102()) {
+	while(iscinematicplaying()) {
 		scripts\engine\utility::waitframe();
 	}
 
-	function_01C5("bg_cinematicAboveUI","0");
+	setsaveddvar("bg_cinematicAboveUI","0");
 }
 
 func_CE8D(param_00,param_01) {
@@ -2003,11 +2003,11 @@ func_CE8D(param_00,param_01) {
 		param_01 = 0;
 	}
 
-	function_01F1();
+	stopcinematicingame();
 	wait(0.1);
-	function_01C5("bg_cinematicFullScreen","1");
-	function_01C5("bg_cinematicCanPause","0");
-	function_01C5("bg_cinematicAboveUI","1");
+	setsaveddvar("bg_cinematicFullScreen","1");
+	setsaveddvar("bg_cinematicCanPause","0");
+	setsaveddvar("bg_cinematicAboveUI","1");
 	if(param_01) {
 		var_02 = "weapon_loadout_terminal_intro";
 	}
@@ -2016,15 +2016,15 @@ func_CE8D(param_00,param_01) {
 		var_02 = "weapon_loadout_terminal_transition";
 	}
 
-	function_003D(var_02);
-	while(!function_0102()) {
+	cinematicingame(var_02);
+	while(!iscinematicplaying()) {
 		scripts\engine\utility::waitframe();
 	}
 
 	level.player playsound(param_00);
 	level thread waittilbinkend();
-	while(function_0102()) {
-		var_03 = function_003C();
+	while(iscinematicplaying()) {
+		var_03 = cinematicgettimeinmsec();
 		if(var_03 > 750) {
 			level notify("vr_transition_bink_full_opacity");
 			setomnvar("ui_close_vr_pause_menu",1);

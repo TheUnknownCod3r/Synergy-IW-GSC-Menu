@@ -3,139 +3,139 @@
  * Script: scripts\2915.gsc
 ***************************************/
 
-_id_9768() {
-  self._id_10E53["kills"] = 0;
-  self._id_10E53["kills_melee"] = 0;
-  self._id_10E53["kills_explosives"] = 0;
-  self._id_10E53["kills_juggernaut"] = 0;
-  self._id_10E53["kills_vehicle"] = 0;
-  self._id_10E53["kills_sentry"] = 0;
-  self._id_10E53["headshots"] = 0;
-  self._id_10E53["shots_fired"] = 0;
-  self._id_10E53["shots_hit"] = 0;
-  self._id_10E53["weapon"] = [];
-  thread _id_FF05();
+func_9768() {
+  self.func_10E53["kills"] = 0;
+  self.func_10E53["kills_melee"] = 0;
+  self.func_10E53["kills_explosives"] = 0;
+  self.func_10E53["kills_juggernaut"] = 0;
+  self.func_10E53["kills_vehicle"] = 0;
+  self.func_10E53["kills_sentry"] = 0;
+  self.func_10E53["headshots"] = 0;
+  self.func_10E53["shots_fired"] = 0;
+  self.func_10E53["shots_hit"] = 0;
+  self.func_10E53["weapon"] = [];
+  thread func_FF05();
 }
 
-_id_13901() {
-  if (isdefined(self._id_54CA) && self._id_54CA)
+func_13901() {
+  if (isdefined(self.func_54CA) && self.func_54CA)
   return 1;
 
-  if (!isdefined(self._id_00DD))
+  if (!isdefined(self.damagelocation))
   return 0;
 
-  return self._id_00DD == "helmet" || self._id_00DD == "head" || self._id_00DD == "neck";
+  return self.damagelocation == "helmet" || self.damagelocation == "head" || self.damagelocation == "neck";
 }
 
-_id_DEBD(var_0, var_1, var_2, var_3) {
-  var_4 = self;
+func_DEBD(var_00, var_01, var_02, var_03) {
+  var_04 = self;
 
   if (isdefined(self.owner))
-  var_4 = self.owner;
+  var_04 = self.owner;
 
-  if (!isplayer(var_4)) {
-  if (isdefined(level._id_D5ED) && level._id_D5ED)
-  var_4 = level.players[randomint(level.players.size)];
+  if (!isplayer(var_04)) {
+  if (isdefined(level.func_D5ED) && level.func_D5ED)
+  var_04 = level.players[randomint(level.players.size)];
   }
 
-  if (!isplayer(var_4))
+  if (!isplayer(var_04))
   return;
 
-  if (isdefined(level._id_10259) && isdefined(var_0._id_5BD6) && var_0._id_5BD6)
+  if (isdefined(level.func_10259) && isdefined(var_0.func_5BD6) && var_0.func_5BD6)
   return;
 
-  var_4._id_10E53["kills"]++;
+  var_4.func_10E53["kills"]++;
 
-  if (isdefined(var_0)) {
-  if (var_0 _id_13901())
-  var_4._id_10E53["headshots"]++;
+  if (isdefined(var_00)) {
+  if (var_00 func_13901())
+  var_4.func_10E53["headshots"]++;
 
-  if (isdefined(var_0._id_A4A3))
-  var_4._id_10E53["kills_juggernaut"]++;
+  if (isdefined(var_0.func_A4A3))
+  var_4.func_10E53["kills_juggernaut"]++;
 
-  if (isdefined(var_0._id_9F45))
-  var_4._id_10E53["kills_sentry"]++;
+  if (isdefined(var_0.func_9F45))
+  var_4.func_10E53["kills_sentry"]++;
 
   if (var_0.code_classname == "script_vehicle") {
-  var_4._id_10E53["kills_vehicle"]++;
+  var_4.func_10E53["kills_vehicle"]++;
 
-  if (isdefined(var_0._id_E4FB)) {
-  foreach (var_6 in var_0._id_E4FB) {
-  if (isdefined(var_6))
-  var_4 _id_DEBD(var_6, var_1, var_2, var_3);
+  if (isdefined(var_0.func_E4FB)) {
+  foreach (var_06 in var_0.func_E4FB) {
+  if (isdefined(var_06))
+  var_04 func_DEBD(var_06, var_01, var_02, var_03);
   }
   }
   }
   }
 
-  if (_id_3B9F(var_1))
-  var_4._id_10E53["kills_explosives"]++;
+  if (func_3B9F(var_01))
+  var_4.func_10E53["kills_explosives"]++;
 
-  if (!isdefined(var_2))
-  var_2 = var_4 getcurrentweapon();
+  if (!isdefined(var_02))
+  var_02 = var_04 getcurrentweapon();
 
-  if (issubstr(tolower(var_1), "melee")) {
-  var_4._id_10E53["kills_melee"]++;
+  if (issubstr(tolower(var_01), "melee")) {
+  var_4.func_10E53["kills_melee"]++;
 
-  if (weaponinventorytype(var_2) == "primary")
+  if (weaponinventorytype(var_02) == "primary")
   return;
   }
 
-  if (var_4 _id_9C49(var_2))
-  var_4 _id_DEC5(var_2);
+  if (var_04 func_9C49(var_02))
+  var_04 func_DEC5(var_02);
 
-  var_4._id_10E53["weapon"][var_2].kills++;
+  var_4.func_10E53["weapon"][var_02].kills++;
 }
 
-_id_DED8() {
+func_DED8() {
   if (!isplayer(self))
   return;
 
-  if (isdefined(self._id_DEF6))
+  if (isdefined(self.func_DEF6))
   return;
 
-  self._id_DEF6 = 1;
-  self._id_10E53["shots_hit"]++;
-  var_0 = self getcurrentweapon();
+  self.func_DEF6 = 1;
+  self.func_10E53["shots_hit"]++;
+  var_00 = self getcurrentweapon();
 
-  if (_id_9C49(var_0))
-  _id_DEC5(var_0);
+  if (func_9C49(var_00))
+  func_DEC5(var_00);
 
-  self._id_10E53["weapon"][var_0]._id_FF06++;
+  self.func_10E53["weapon"][var_00].func_FF06++;
   waittillframeend;
-  self._id_DEF6 = undefined;
+  self.func_DEF6 = undefined;
 }
 
-_id_FF05() {
+func_FF05() {
   self endon("death");
 
   for (;;) {
   self waittill("weapon_fired");
-  var_0 = self getcurrentweapon();
+  var_00 = self getcurrentweapon();
 
-  if (!isdefined(var_0) || !_id_0B91::_id_9F0E(var_0))
+  if (!isdefined(var_00) || !scripts/sp/utility::isprimaryweapon(var_00))
   continue;
 
-  self._id_10E53["shots_fired"]++;
+  self.func_10E53["shots_fired"]++;
 
-  if (_id_9C49(var_0))
-  _id_DEC5(var_0);
+  if (func_9C49(var_00))
+  func_DEC5(var_00);
 
-  self._id_10E53["weapon"][var_0]._id_FF04++;
+  self.func_10E53["weapon"][var_00].func_FF04++;
   }
 }
 
-_id_9C49(var_0) {
-  if (isdefined(self._id_10E53["weapon"][var_0]))
+func_9C49(var_00) {
+  if (isdefined(self.func_10E53["weapon"][var_00]))
   return 0;
 
   return 1;
 }
 
-_id_3B9F(var_0) {
-  var_0 = tolower(var_0);
+func_3B9F(var_00) {
+  var_00 = tolower(var_00);
 
-  switch (var_0) {
+  switch (var_00) {
   case "splash":
   case "mod_explosive":
   case "mod_projectile_splash":
@@ -150,89 +150,89 @@ _id_3B9F(var_0) {
   return 0;
 }
 
-_id_DEC5(var_0) {
-  self._id_10E53["weapon"][var_0] = spawnstruct();
-  self._id_10E53["weapon"][var_0].name = var_0;
-  self._id_10E53["weapon"][var_0]._id_FF04 = 0;
-  self._id_10E53["weapon"][var_0]._id_FF06 = 0;
-  self._id_10E53["weapon"][var_0].kills = 0;
+func_DEC5(var_00) {
+  self.func_10E53["weapon"][var_00] = spawnstruct();
+  self.func_10E53["weapon"][var_00].name = var_00;
+  self.func_10E53["weapon"][var_00].func_FF04 = 0;
+  self.func_10E53["weapon"][var_00].func_FF06 = 0;
+  self.func_10E53["weapon"][var_00].kills = 0;
 }
 
-_id_F5B2() {
-  var_0 = 1;
+func_F5B2() {
+  var_00 = 1;
 
-  foreach (var_2 in level.players) {
-  setdvar("stats_" + var_0 + "_kills_melee", var_2._id_10E53["kills_melee"]);
-  setdvar("stats_" + var_0 + "_kills_juggernaut", var_2._id_10E53["kills_juggernaut"]);
-  setdvar("stats_" + var_0 + "_kills_explosives", var_2._id_10E53["kills_explosives"]);
-  setdvar("stats_" + var_0 + "_kills_vehicle", var_2._id_10E53["kills_vehicle"]);
-  setdvar("stats_" + var_0 + "_kills_sentry", var_2._id_10E53["kills_sentry"]);
-  var_3 = var_2 _id_7867(5);
+  foreach (var_02 in level.players) {
+  setdvar("stats_" + var_00 + "_kills_melee", var_2.func_10E53["kills_melee"]);
+  setdvar("stats_" + var_00 + "_kills_juggernaut", var_2.func_10E53["kills_juggernaut"]);
+  setdvar("stats_" + var_00 + "_kills_explosives", var_2.func_10E53["kills_explosives"]);
+  setdvar("stats_" + var_00 + "_kills_vehicle", var_2.func_10E53["kills_vehicle"]);
+  setdvar("stats_" + var_00 + "_kills_sentry", var_2.func_10E53["kills_sentry"]);
+  var_03 = var_02 func_7867(5);
 
-  foreach (var_5 in var_3) {
-  var_5._id_0010 = 0;
+  foreach (var_05 in var_03) {
+  var_5.accuracy = 0;
 
-  if (var_5._id_FF04 > 0)
-  var_5._id_0010 = int(var_5._id_FF06 / var_5._id_FF04 * 100);
+  if (var_5.func_FF04 > 0)
+  var_5.accuracy = int(var_5.func_FF06 / var_5.func_FF04 * 100);
   }
 
-  for (var_7 = 1; var_7 < 6; var_7++) {
-  setdvar("stats_" + var_0 + "_weapon" + var_7 + "_name", " ");
-  setdvar("stats_" + var_0 + "_weapon" + var_7 + "_kills", " ");
-  setdvar("stats_" + var_0 + "_weapon" + var_7 + "_shots", " ");
-  setdvar("stats_" + var_0 + "_weapon" + var_7 + "_accuracy", " ");
+  for (var_07 = 1; var_07 < 6; var_7++) {
+  setdvar("stats_" + var_00 + "_weapon" + var_07 + "_name", " ");
+  setdvar("stats_" + var_00 + "_weapon" + var_07 + "_kills", " ");
+  setdvar("stats_" + var_00 + "_weapon" + var_07 + "_shots", " ");
+  setdvar("stats_" + var_00 + "_weapon" + var_07 + "_accuracy", " ");
   }
 
-  for (var_7 = 0; var_7 < var_3.size; var_7++) {
-  if (!isdefined(var_3[var_7]))
+  for (var_07 = 0; var_07 < var_3.size; var_7++) {
+  if (!isdefined(var_3[var_07]))
   break;
 
-  setdvar("stats_" + var_0 + "_weapon" + (var_7 + 1) + "_name", var_3[var_7].name);
-  setdvar("stats_" + var_0 + "_weapon" + (var_7 + 1) + "_kills", var_3[var_7].kills);
-  setdvar("stats_" + var_0 + "_weapon" + (var_7 + 1) + "_shots", var_3[var_7]._id_FF04);
-  setdvar("stats_" + var_0 + "_weapon" + (var_7 + 1) + "_accuracy", var_3[var_7]._id_0010 + "%");
+  setdvar("stats_" + var_00 + "_weapon" + (var_07 + 1) + "_name", var_3[var_07].name);
+  setdvar("stats_" + var_00 + "_weapon" + (var_07 + 1) + "_kills", var_3[var_07].kills);
+  setdvar("stats_" + var_00 + "_weapon" + (var_07 + 1) + "_shots", var_3[var_07].func_FF04);
+  setdvar("stats_" + var_00 + "_weapon" + (var_07 + 1) + "_accuracy", var_3[var_07].accuracy + "%");
   }
 
   var_0++;
   }
 }
 
-_id_7867(var_0) {
-  var_1 = [];
+func_7867(var_00) {
+  var_01 = [];
 
-  for (var_2 = 0; var_2 < var_0; var_2++)
-  var_1[var_2] = _id_7D73(var_1);
+  for (var_02 = 0; var_02 < var_00; var_2++)
+  var_1[var_02] = func_7D73(var_01);
 
-  return var_1;
+  return var_01;
 }
 
-_id_7D73(var_0) {
-  if (!isdefined(var_0))
-  var_0 = [];
+func_7D73(var_00) {
+  if (!isdefined(var_00))
+  var_00 = [];
 
-  var_1 = undefined;
+  var_01 = undefined;
 
-  foreach (var_3 in self._id_10E53["weapon"]) {
-  var_4 = 0;
+  foreach (var_03 in self.func_10E53["weapon"]) {
+  var_04 = 0;
 
-  foreach (var_6 in var_0) {
+  foreach (var_06 in var_00) {
   if (var_3.name == var_6.name) {
-  var_4 = 1;
+  var_04 = 1;
   break;
   }
   }
 
-  if (var_4)
+  if (var_04)
   continue;
 
-  if (!isdefined(var_1)) {
-  var_1 = var_3;
+  if (!isdefined(var_01)) {
+  var_01 = var_03;
   continue;
   }
 
   if (var_3.kills > var_1.kills)
-  var_1 = var_3;
+  var_01 = var_03;
   }
 
-  return var_1;
+  return var_01;
 }

@@ -104,7 +104,7 @@ givedefaultloadout(param_00,param_01) {
 	var_02 giveweapon("super_default_zm");
 	var_02 assignweaponoffhandspecial("super_default_zm");
 	var_02.specialoffhandgrenade = "super_default_zm";
-	if(function_0114()) {
+	if(issplitscreen()) {
 		var_02 thread func_1358A(var_02.default_starting_pistol);
 	}
 	else
@@ -490,7 +490,7 @@ getplayerspeedbyweapon(param_00) {
 		}
 		else
 		{
-			var_03 = function_0244(var_02);
+			var_03 = weaponinventorytype(var_02);
 			if(var_03 != "primary" && var_03 != "altmode") {
 				if(isdefined(self.saved_lastweapon)) {
 					var_02 = self.saved_lastweapon;
@@ -595,7 +595,7 @@ func_4003(param_00) {
 func_EBA1(param_00) {
 	var_01 = func_3D8F();
 	if(var_01 != 1) {
-		var_02 = function_0249(param_00);
+		var_02 = weaponmaxammo(param_00);
 		self setweaponammostock(param_00,int(var_02 * var_01));
 	}
 }

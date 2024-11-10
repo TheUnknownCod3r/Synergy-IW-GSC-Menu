@@ -118,7 +118,7 @@ func_D4CE(param_00,param_01,param_02,param_03) {
 
 	var_07 = [self];
 	var_04 scripts/asm/asm::asm_setstate(param_01 + "_victim",var_07);
-	function_0277("ent_" + self getentitynumber() + "_seeker_repulsor",-1,self,250,1,self.bt.var_652A);
+	createnavrepulsor("ent_" + self getentitynumber() + "_seeker_repulsor",-1,self,250,1,self.bt.var_652A);
 	self animmode("zonly_physics");
 	self linktoblendtotag(self.melee.target,"tag_sync",0,0);
 	self aiclearanim(lib_0A1E::asm_getbodyknob(),0);
@@ -131,15 +131,15 @@ func_D4CE(param_00,param_01,param_02,param_03) {
 	childthread func_F172();
 	scripts\engine\utility::waittill_notify_or_timeout("on_screen",1.5);
 	wait(0.4);
-	function_0178("seeker_expl_beep",self.origin);
+	playworldsound("seeker_expl_beep",self.origin);
 	wait(0.6);
-	function_0278("ent_" + self getentitynumber() + "_seeker_repulsor");
+	destroynavrepulsor("ent_" + self getentitynumber() + "_seeker_repulsor");
 	self.var_9BB9 = 1;
 	thread lib_0E26::func_F11E();
 }
 
 func_D4CF(param_00,param_01,param_02) {
-	function_0278("ent_" + self getentitynumber() + "_seeker_repulsor");
+	destroynavrepulsor("ent_" + self getentitynumber() + "_seeker_repulsor");
 	if(isdefined(self.melee.target)) {
 		if(isdefined(self.melee.target.melee)) {
 			self.melee.target.melee.var_2720 = 1;
@@ -173,7 +173,7 @@ func_F153() {
 	var_01 = lib_0F3D::func_108F6();
 	var_01.angles = var_00;
 	self notify("jumped_on_player");
-	function_0178("seeker_expl_beep",self.origin);
+	playworldsound("seeker_expl_beep",self.origin);
 	level.player.melee.partner = self;
 	level.player.melee.var_E505 = var_01;
 	var_02 = func_F130();
@@ -312,10 +312,10 @@ func_F152(param_00) {
 func_F151() {
 	wait(0.1);
 	var_00 = level.player.origin + anglestoforward(level.player.angles) * -100;
-	function_01A2(var_00,10,2,1,0.4,0.2,0.2,700,0.2,1,1);
+	screenshake(var_00,10,2,1,0.4,0.2,0.2,700,0.2,1,1);
 	wait(0.5);
 	var_00 = level.player.origin + anglestoforward(level.player.angles) * 100;
-	function_01A2(var_00,10,2,1,0.6,0.3,0.3,700,0.2,1,1);
+	screenshake(var_00,10,2,1,0.6,0.3,0.3,700,0.2,1,1);
 }
 
 func_F145(param_00) {
@@ -376,7 +376,7 @@ func_F149(param_00,param_01,param_02,param_03) {
 	var_06 thread scripts\anim\shared::donotetracks("meleeCounter",::func_F145);
 	var_07 = lib_0A1E::asm_getallanimsforstate(param_00,param_01);
 	self aiclearanim(lib_0A1E::asm_getbodyknob(),param_02);
-	function_0178("seeker_expl_beep",self.origin);
+	playworldsound("seeker_expl_beep",self.origin);
 	thread func_F116();
 	self _meth_82E7(param_01,var_07,1,param_02,1);
 	thread scripts/sp/anim::func_10CBF(self,param_01);

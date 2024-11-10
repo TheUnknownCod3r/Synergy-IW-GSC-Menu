@@ -106,7 +106,7 @@ func_53CA(param_00) {
 		var_0A = _meth_8162(var_01);
 	}
 
-	var_0B = function_02F8(var_07);
+	var_0B = getangleindices(var_07);
 	var_0C = undefined;
 	var_0D = undefined;
 	for(var_0E = 0;var_0E < var_0B.size;var_0E++) {
@@ -244,7 +244,7 @@ func_371C(param_00,param_01,param_02,param_03) {
 		}
 	}
 
-	var_07 = function_02F8(var_06,var_04);
+	var_07 = getangleindices(var_06,var_04);
 	if(scripts\engine\utility::istrue(self.var_AB3F)) {
 		var_08 = getcurrentweapon(param_01,0);
 	}

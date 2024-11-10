@@ -4,364 +4,364 @@
 ***************************************/
 
 init() {
-  level thread _id_C56E();
+  level thread onplayerconnect();
 }
 
-_id_C56E() {
+onplayerconnect() {
   for (;;) {
-  level waittill("connected", var_0);
-  var_0 thread _id_901D();
-  var_0 thread _id_B0E1();
-  var_0 thread _id_10A40();
+  level waittill("connected", var_00);
+  var_00 thread hintmessagedeaththink();
+  var_00 thread lowermessagethink();
+  var_00 thread splashshownthink();
   }
 }
 
-_id_10134(var_0, var_1, var_2) {
+showkillstreaksplash(var_00, var_01, var_02) {
   if (!isplayer(self))
   return;
 
-  var_3 = spawnstruct();
+  var_03 = spawnstruct();
 
-  if (isdefined(var_2))
-  var_0 = var_0 + ("_" + var_2);
+  if (isdefined(var_02))
+  var_00 = var_00 + ("_" + var_02);
 
-  showsplash(var_0, var_1);
+  showsplash(var_00, var_01);
 }
 
-_id_10117(var_0, var_1) {
-  var_2 = undefined;
+showchallengesplash(var_00, var_01) {
+  var_02 = undefined;
 
-  if (isdefined(var_1))
-  var_2 = var_1;
+  if (isdefined(var_01))
+  var_02 = var_01;
   else
-  var_2 = _id_0A58::_id_BD6F(var_0) - 1;
+  var_02 = scripts/cp/cp_hud_util::mt_getstate(var_00) - 1;
 
-  var_3 = level._id_B684[var_0]["displayParam"];
+  var_03 = level.meritinfo[var_00]["displayParam"];
 
-  if (!isdefined(var_3)) {
-  var_3 = _id_0A58::_id_BD70(var_0, var_2);
+  if (!isdefined(var_03)) {
+  var_03 = scripts/cp/cp_hud_util::mt_gettarget(var_00, var_02);
 
-  if (var_3 == 0)
-  var_3 = 1;
+  if (var_03 == 0)
+  var_03 = 1;
 
-  var_4 = level._id_B684[var_0]["paramScale"];
+  var_04 = level.meritinfo[var_00]["paramScale"];
 
-  if (isdefined(var_4))
-  var_3 = int(var_3 / var_4);
+  if (isdefined(var_04))
+  var_03 = int(var_03 / var_04);
   }
 
-  thread showsplash(var_0, var_3);
+  thread showsplash(var_00, var_03);
 }
 
-showsplash(var_0, var_1, var_2) {
-  if (isdefined(self._id_DDCD) && self._id_DDCD >= 6) {
-  _id_DB99(var_0, var_1, var_2);
+showsplash(var_00, var_01, var_02) {
+  if (isdefined(self.recentsplashcount) && self.recentsplashcount >= 6) {
+  queuesplash(var_00, var_01, var_02);
   return;
   }
 
-  _id_10152(var_0, var_1, var_2);
+  showsplashinternal(var_00, var_01, var_02);
 }
 
-_id_10152(var_0, var_1, var_2) {
+showsplashinternal(var_00, var_01, var_02) {
   if (!isplayer(self))
   return;
 
-  var_3 = tablelookuprownum(_id_814B(), 0, var_0);
+  var_03 = tablelookuprownum(getsplashtablename(), 0, var_00);
 
-  if (!isdefined(var_3) || var_3 < 0)
+  if (!isdefined(var_03) || var_03 < 0)
   return;
 
-  if (!isdefined(self._id_BFAE))
-  self._id_BFAE = 0;
+  if (!isdefined(self.nextsplashlistindex))
+  self.nextsplashlistindex = 0;
 
-  if (!isdefined(self._id_10A37))
-  self._id_10A37 = 1;
+  if (!isdefined(self.splashlisttoggle))
+  self.splashlisttoggle = 1;
 
-  var_4 = var_3;
+  var_04 = var_03;
 
-  if (self._id_10A37)
-  var_4 = var_4 | 1024;
+  if (self.splashlisttoggle)
+  var_04 = var_04 | 1024;
 
-  if (isdefined(var_1))
-  self setclientomnvar("ui_player_splash_param_" + self._id_BFAE, var_1);
+  if (isdefined(var_01))
+  self setclientomnvar("ui_player_splash_param_" + self.nextsplashlistindex, var_01);
   else
-  self setclientomnvar("ui_player_splash_param_" + self._id_BFAE, -1);
+  self setclientomnvar("ui_player_splash_param_" + self.nextsplashlistindex, -1);
 
-  if (isdefined(var_2))
-  self setclientomnvar("ui_player_splash_cardClientId_" + self._id_BFAE, var_2 getentitynumber());
+  if (isdefined(var_02))
+  self setclientomnvar("ui_player_splash_cardClientId_" + self.nextsplashlistindex, var_02 getentitynumber());
   else
-  self setclientomnvar("ui_player_splash_cardClientId_" + self._id_BFAE, -1);
+  self setclientomnvar("ui_player_splash_cardClientId_" + self.nextsplashlistindex, -1);
 
-  self setclientomnvar("ui_player_splash_id_" + self._id_BFAE, var_4);
+  self setclientomnvar("ui_player_splashfunc_" + self.nextsplashlistindex, var_04);
 
-  if (!isdefined(self._id_DDCD))
-  self._id_DDCD = 1;
+  if (!isdefined(self.recentsplashcount))
+  self.recentsplashcount = 1;
   else
-  self._id_DDCD++;
+  self.recentsplashcount++;
 
-  thread _id_4103();
-  self._id_BFAE++;
+  thread cleanuplocalplayersplashlist();
+  self.nextsplashlistindex++;
 
-  if (self._id_BFAE >= 6) {
-  self._id_BFAE = 0;
-  self._id_10A37 = !self._id_10A37;
+  if (self.nextsplashlistindex >= 6) {
+  self.nextsplashlistindex = 0;
+  self.splashlisttoggle = !self.splashlisttoggle;
   }
 }
 
-_id_DB99(var_0, var_1, var_2) {
-  var_3 = spawnstruct();
-  var_3._id_DE3F = var_0;
-  var_3._id_C6BB = var_1;
-  var_3._id_D390 = var_2;
+queuesplash(var_00, var_01, var_02) {
+  var_03 = spawnstruct();
+  var_3.ref = var_00;
+  var_3.optionalnumber = var_01;
+  var_3.playerforplayercard = var_02;
 
-  if (!isdefined(self._id_10A3E)) {
-  self._id_10A3E = var_3;
-  self._id_10A3F = var_3;
-  thread _id_89E9();
+  if (!isdefined(self.splashqueuehead)) {
+  self.splashqueuehead = var_03;
+  self.splashqueuetail = var_03;
+  thread handlesplashqueue();
   } else {
-  var_4 = self._id_10A3F;
-  var_4._id_BFAD = var_3;
-  self._id_10A3F = var_3;
+  var_04 = self.splashqueuetail;
+  var_4.nextsplash = var_03;
+  self.splashqueuetail = var_03;
   }
 }
 
-_id_89E9() {
+handlesplashqueue() {
   level endon("game_ended");
   self endon("death");
   self endon("disconnect");
 
-  while (isdefined(self._id_10A3E)) {
+  while (isdefined(self.splashqueuehead)) {
   self waittill("splash_list_cleared");
 
-  for (var_0 = 0; var_0 < 6; var_0++) {
-  var_1 = self._id_10A3E;
-  _id_10152(var_1._id_DE3F, var_1._id_C6BB, var_1._id_D390);
-  self._id_10A3E = var_1._id_BFAD;
+  for (var_00 = 0; var_00 < 6; var_0++) {
+  var_01 = self.splashqueuehead;
+  showsplashinternal(var_1.ref, var_1.optionalnumber, var_1.playerforplayercard);
+  self.splashqueuehead = var_1.nextsplash;
 
-  if (!isdefined(self._id_10A3E))
+  if (!isdefined(self.splashqueuehead))
   break;
   }
   }
 
-  self._id_10A3F = undefined;
+  self.splashqueuetail = undefined;
 }
 
-_id_B0E1() {
+lowermessagethink() {
   self endon("disconnect");
-  self._id_B0E0 = [];
-  var_0 = "default";
+  self.lowermessages = [];
+  var_00 = "default";
 
-  if (isdefined(level._id_B0DF))
-  var_0 = level._id_B0DF;
+  if (isdefined(level.lowermessagefont))
+  var_00 = level.lowermessagefont;
 
-  var_1 = level._id_B0E5;
-  var_2 = level._id_B0E4;
-  var_3 = 1.25;
+  var_01 = level.lowertexty;
+  var_02 = level.lowertextfontsize;
+  var_03 = 1.25;
 
-  if (level._id_10A56 || self issplitscreenplayer() && !isai(self)) {
-  var_1 = var_1 - 40;
-  var_2 = level._id_B0E4 * 1.3;
-  var_3 = var_3 * 1.5;
+  if (level.splitscreen || self issplitscreenplayer() && !isai(self)) {
+  var_01 = var_01 - 40;
+  var_02 = level.lowertextfontsize * 1.3;
+  var_03 = var_03 * 1.5;
   }
 
-  self._id_B0DE = _id_0A77::_id_49B2(var_0, var_2);
-  self._id_B0DE _meth_834D("");
-  self._id_B0DE._id_0049 = 0;
-  self._id_B0DE._id_02A4 = 10;
-  self._id_B0DE._id_0295 = 0;
-  self._id_B0DE _id_0A77::_id_F801("CENTER", level._id_B0E6, 0, var_1);
-  self._id_B0E7 = _id_0A77::_id_49B2("default", var_3);
-  self._id_B0E7 _id_0A77::_id_F7D6(self._id_B0DE);
-  self._id_B0E7 _id_0A77::_id_F801("TOP", "BOTTOM", 0, 0);
-  self._id_B0E7 _meth_834D("");
-  self._id_B0E7._id_0049 = 0;
-  self._id_B0E7._id_02A4 = 10;
-  self._id_B0E7._id_0295 = 0;
+  self.lowermessage = scripts/cp/utility::createfontstring(var_00, var_02);
+  self.lowermessage give_zap_perk("");
+  self.lowermessage.archived = 0;
+  self.lowermessage.sort = 10;
+  self.lowermessage.showinkillcam = 0;
+  self.lowermessage scripts/cp/utility::setpoint("CENTER", level.lowertextyalign, 0, var_01);
+  self.lowertimer = scripts/cp/utility::createfontstring("default", var_03);
+  self.lowertimer scripts/cp/utility::setparent(self.lowermessage);
+  self.lowertimer scripts/cp/utility::setpoint("TOP", "BOTTOM", 0, 0);
+  self.lowertimer give_zap_perk("");
+  self.lowertimer.archived = 0;
+  self.lowertimer.sort = 10;
+  self.lowertimer.showinkillcam = 0;
 }
 
-_id_9DC6() {
+isdoingsplash() {
   return 0;
 }
 
-_id_814B() {
+getsplashtablename() {
   return "cp/zombies/zombie_splashtable.csv";
 }
 
-_id_4103() {
+cleanuplocalplayersplashlist() {
   self endon("disconnect");
   self notify("cleanupLocalPlayerSplashList()");
   self endon("cleanupLocalPlayerSplashList()");
-  scripts\engine\utility::_id_137B7("death", 0.5);
-  self._id_DDCD = undefined;
+  scripts\engine\utility::waittill_notify_or_timeout("death", 0.5);
+  self.recentsplashcount = undefined;
   self notify("splash_list_cleared");
 }
 
-_id_10A40() {
+splashshownthink() {
   self endon("disconnect");
 
   for (;;) {
-  self waittill("luinotifyserver", var_0, var_1);
+  self waittill("luinotifyserver", var_00, var_01);
 
-  if (var_0 != "splash_shown")
+  if (var_00 != "splash_shown")
   continue;
 
-  var_2 = tablelookupbyrow(_id_814B(), var_1, 0);
-  var_3 = tablelookupbyrow(_id_814B(), var_1, 5);
+  var_02 = tablelookupbyrow(getsplashtablename(), var_01, 0);
+  var_03 = tablelookupbyrow(getsplashtablename(), var_01, 5);
 
-  switch (var_3) {
+  switch (var_03) {
   case "killstreak_splash":
   break;
   }
   }
 }
 
-_id_C549(var_0) {}
+onkillstreaksplashshown(var_00) {}
 
-_id_10122(var_0, var_1) {
-  var_2 = tablelookuprownum("mp/errorMessages.csv", 0, var_0);
+showerrormessage(var_00, var_01) {
+  var_02 = tablelookuprownum("mp/errorMessages.csv", 0, var_00);
 
-  if (isdefined(var_1))
-  self setclientomnvar("ui_mp_error_message_param", var_1);
+  if (isdefined(var_01))
+  self setclientomnvar("ui_mp_error_message_param", var_01);
   else
   self setclientomnvar("ui_mp_error_message_param", -1);
 
-  self setclientomnvar("ui_mp_error_message_id", var_2);
+  self setclientomnvar("ui_mp_error_message_id", var_02);
 
-  if (!isdefined(self._id_66BF))
-  self._id_66BF = 0;
+  if (!isdefined(self.errormessagebitflipper))
+  self.errormessagebitflipper = 0;
 
-  self._id_66BF = !self._id_66BF;
-  self setclientomnvar("ui_mp_error_trigger", scripts\engine\utility::ter_op(self._id_66BF, 2, 1));
+  self.errormessagebitflipper = !self.errormessagebitflipper;
+  self setclientomnvar("ui_mp_error_trigger", scripts\engine\utility::ter_op(self.errormessagebitflipper, 2, 1));
 }
 
-_id_10123(var_0, var_1) {
-  foreach (var_3 in level.players)
-  _id_10122(var_0, var_1);
+showerrormessagetoallplayers(var_00, var_01) {
+  foreach (var_03 in level.players)
+  showerrormessage(var_00, var_01);
 }
 
-_id_1013D(var_0) {
-  var_1 = tablelookuprownum("mp/miscMessages.csv", 0, var_0);
-  var_2 = tablelookupbyrow("mp/miscMessages.csv", var_1, 3);
+showmiscmessage(var_00) {
+  var_01 = tablelookuprownum("mp/miscMessages.csv", 0, var_00);
+  var_02 = tablelookupbyrow("mp/miscMessages.csv", var_01, 3);
 
-  if (isdefined(var_2) && var_2 != "")
-  self playlocalsound(var_2);
+  if (isdefined(var_02) && var_02 != "")
+  self playlocalsound(var_02);
 
-  self setclientomnvar("ui_misc_message_id", var_1);
+  self setclientomnvar("ui_misc_message_id", var_01);
 
-  if (!isdefined(self._id_B7D7))
-  self._id_B7D7 = 0;
+  if (!isdefined(self.func_B7D7))
+  self.func_B7D7 = 0;
 
-  self._id_B7D7 = !self._id_B7D7;
-  self setclientomnvar("ui_misc_message_trigger", scripts\engine\utility::ter_op(self._id_B7D7, 1, 0));
+  self.func_B7D7 = !self.func_B7D7;
+  self setclientomnvar("ui_misc_message_trigger", scripts\engine\utility::ter_op(self.func_B7D7, 1, 0));
 }
 
-_id_901D() {
+hintmessagedeaththink() {
   self endon("disconnect");
 
   for (;;) {
   self waittill("death");
 
-  if (isdefined(self._id_901C))
-  self._id_901C _id_0A77::_id_52DC();
+  if (isdefined(self.hintmessage))
+  self.hintmessage scripts/cp/utility::destroyelem();
   }
 }
 
-_id_978F() {
+init_tutorial_message_array() {
   self setrankedplayerdata("cp", "zombiePlayerLoadout", "tutorialOff", 1);
-  self._id_8EB0 = 1;
+  self.hide_tutorial = 1;
   thread check_for_more_players();
 }
 
 check_for_more_players() {
   level waittill("multiple_players");
-  self._id_8EB0 = 0;
+  self.hide_tutorial = 0;
 
   if (!isdefined(level.tutorial_interaction_1) || !isdefined(level.tutorial_interaction_2))
   return;
 
-  _id_0A59::_id_E019(level.tutorial_interaction_1);
-  _id_0A59::_id_E019(level.tutorial_interaction_2);
+  scripts/cp/cp_interaction::remove_from_current_interaction_list(level.tutorial_interaction_1);
+  scripts/cp/cp_interaction::remove_from_current_interaction_list(level.tutorial_interaction_2);
 }
 
 tutorial_interaction() {
   level endon("game_ended");
   self endon("disconnect");
   self endon("death");
-  self waittill("luinotifyserver", var_0);
+  self waittill("luinotifyserver", var_00);
 
-  if (var_0 == "tutorial_off") {
+  if (var_00 == "tutorial_off") {
   self setrankedplayerdata("cp", "zombiePlayerLoadout", "tutorialOff", 1);
-  self._id_8EB0 = 1;
+  self.hide_tutorial = 1;
   }
 
-  if (var_0 == "tutorial_on") {
+  if (var_00 == "tutorial_on") {
   self setrankedplayerdata("cp", "zombiePlayerLoadout", "tutorialOff", 0);
-  self._id_8EB0 = 0;
+  self.hide_tutorial = 0;
   }
 }
 
-_id_12AAE(var_0) {
-  if (!(_id_0A77::_id_9F02() || level._id_C552))
+tutorial_lookup_func(var_00) {
+  if (!(scripts/cp/utility::isplayingsolo() || level.only_one_player))
   return;
 
-  var_1 = level.players[0];
+  var_01 = level.players[0];
 
-  if (var_1._id_8EB0 == 1)
+  if (var_1.hide_tutorial == 1)
   return;
 
-  if (!isdefined(level._id_12AB0))
+  if (!isdefined(level.tutorial_message_table))
   return;
 
-  if (!_id_1007B(var_0))
+  if (!shouldshowtutorial(var_00))
   return;
 
-  if (var_1 _id_79FC(var_0))
+  if (var_01 get_has_seen_tutorial(var_00))
   return;
 
-  if (var_0 != "null" && !scripts\engine\utility::_id_9CEE(level._id_12AA3)) {
-  level._id_12AA3 = 1;
-  var_2 = int(tablelookup(level._id_12AB0, 1, var_0, 0));
-  var_1 setclientomnvar("zm_tutorial_num", var_2);
-  var_1 _id_F3F9(var_0, 1);
-  level._id_12AA3 = undefined;
+  if (var_00 != "null" && !scripts\engine\utility::is_true(level.tutorial_activated)) {
+  level.tutorial_activated = 1;
+  var_02 = int(tablelookup(level.tutorial_message_table, 1, var_00, 0));
+  var_01 setclientomnvar("zm_tutorial_num", var_02);
+  var_01 set_has_seen_tutorial(var_00, 1);
+  level.tutorial_activated = undefined;
   }
 }
 
-_id_F3F9(var_0, var_1) {
-  self setrankedplayerdata("cp", "tutorial", var_0, "saw_message", var_1);
+set_has_seen_tutorial(var_00, var_01) {
+  self setrankedplayerdata("cp", "tutorial", var_00, "saw_message", var_01);
 }
 
-_id_F3F8(var_0, var_1) {
-  self setrankedplayerdata("cp", "tutorialPerm", var_0, "saw_message", var_1);
+set_has_seen_perm_tutorial(var_00, var_01) {
+  self setrankedplayerdata("cp", "tutorialPerm", var_00, "saw_message", var_01);
 }
 
-_id_79FC(var_0) {
-  var_1 = self getrankedplayerdata("cp", "tutorial", var_0, "saw_message");
-  return var_1;
+get_has_seen_tutorial(var_00) {
+  var_01 = self getrankedplayerdata("cp", "tutorial", var_00, "saw_message");
+  return var_01;
 }
 
-_id_1363B() {
+wait_for_tutorial_unpause() {
   level endon("game_ended");
   self endon("disconnect");
-  self waittill("luinotifyserver", var_0);
+  self waittill("luinotifyserver", var_00);
 
-  if (var_0 == "tutorial_unpause")
+  if (var_00 == "tutorial_unpause")
   setslowmotion(1.0, 1.0, 0);
 }
 
-_id_1007B(var_0) {
-  if (isdefined(level._id_FF8C))
-  return [[level._id_FF8C]](var_0);
+shouldshowtutorial(var_00) {
+  if (isdefined(level.should_show_tutorial_func))
+  return [[level.should_show_tutorial_func]](var_00);
   else
   return 1;
 }
 
-wait_and_play_tutorial_message(var_0, var_1) {
+wait_and_play_tutorial_message(var_00, var_01) {
   level endon("game_ended");
   self endon("disconnect");
   self endon("death");
   self notify("clear_message");
   self endon("clear_message");
-  wait(var_1);
-  _id_12AAE(var_0);
+  wait(var_01);
+  tutorial_lookup_func(var_00);
 }

@@ -52,7 +52,7 @@ func_12EE7(param_00) {
 		}
 
 		if(self.damageshieldcounter > 0) {
-			self.var_4D68--;
+			self.damageshieldcounter--;
 		}
 	}
 
@@ -510,7 +510,7 @@ func_236A(param_00) {
 
 	if(var_01 != "") {
 		scripts\sp\_utility::func_F6FE("asm");
-		var_02 = function_02EF(var_01,"facial_animation",param_00,0);
+		var_02 = _func_2EF(var_01,"facial_animation",param_00,0);
 		if(param_00 == "facial_death") {
 			if(isdefined(self.var_6A84)) {
 				if(self.var_6A84 == param_00) {
@@ -531,7 +531,7 @@ func_236A(param_00) {
 
 func_236C(param_00) {
 	var_01 = "soldier";
-	var_02 = function_02EF(var_01,"facial_animation","facial_death",0);
+	var_02 = _func_2EF(var_01,"facial_animation","facial_death",0);
 	if(isdefined(var_02)) {
 		param_00 setanimknob(var_02,1,0,0);
 	}
@@ -613,7 +613,7 @@ func_236D(param_00) {
 	if(param_00 == "left") {
 		var_02 = "ik_finger_pose_l";
 		var_03 = "ik_fingers_l";
-		var_05 = function_00E3(var_01);
+		var_05 = getweaponattachments(var_01);
 		if(isdefined(var_05)) {
 			if(scripts\engine\utility::array_contains(var_05,"foregrip")) {
 				var_04 = "foregrip";
@@ -756,7 +756,7 @@ func_2305(param_00,param_01,param_02) {
 }
 
 func_2359(param_00,param_01,param_02) {
-	return function_02EF(param_00,param_01,param_02,scripts/asm/asm::asm_getdemeanor());
+	return _func_2EF(param_00,param_01,param_02,scripts/asm/asm::asm_getdemeanor());
 }
 
 func_235B(param_00,param_01) {
@@ -766,7 +766,7 @@ func_235B(param_00,param_01) {
 
 func_234B(param_00,param_01) {
 	if(archetypeassetloaded(param_00)) {
-		return function_02F1(param_00,param_01);
+		return _func_2F1(param_00,param_01);
 	}
 
 	return 0;

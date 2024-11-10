@@ -4,40 +4,40 @@
 ***************************************/
 
 init() {
-  level._id_13CBD = spawnstruct();
-  level._id_13CBD._id_DCD4 = [];
-  var_0 = 0;
+  level.weaponranktable = spawnstruct();
+  level.weaponranktable.rankinfo = [];
+  var_00 = 0;
 
   for (;;) {
-  var_1 = int(tablelookuprownum("mp/weaponRankTable.csv", 0, var_0));
+  var_01 = int(tablelookuprownum("mp/weaponRankTable.csv", 0, var_00));
 
-  if (!isdefined(var_1) || var_1 < 0)
+  if (!isdefined(var_01) || var_01 < 0)
   break;
 
-  var_2 = spawnstruct();
-  level._id_13CBD._id_DCD4[var_0] = var_2;
-  var_2._id_B7CF = int(tablelookupbyrow("mp/weaponRankTable.csv", var_0, 1));
-  var_2._id_13E29 = int(tablelookupbyrow("mp/weaponRankTable.csv", var_0, 2));
-  var_2._id_B4D6 = int(tablelookupbyrow("mp/weaponRankTable.csv", var_0, 3));
+  var_02 = spawnstruct();
+  level.weaponranktable.rankinfo[var_00] = var_02;
+  var_2.minxp = int(tablelookupbyrow("mp/weaponRankTable.csv", var_00, 1));
+  var_2.xptonextrank = int(tablelookupbyrow("mp/weaponRankTable.csv", var_00, 2));
+  var_2.maxxp = int(tablelookupbyrow("mp/weaponRankTable.csv", var_00, 3));
   var_0++;
   }
 
-  level._id_13CBD._id_B4C0 = var_0 - 1;
-  level._id_13CBD._id_B4D4 = [];
-  var_3 = 1;
+  level.weaponranktable.maxrank = var_00 - 1;
+  level.weaponranktable.maxweaponranks = [];
+  var_03 = 1;
 
   for (;;) {
-  var_1 = int(tablelookuprownum("mp/statstable.csv", 0, var_3));
+  var_01 = int(tablelookuprownum("mp/statstable.csv", 0, var_03));
 
-  if (!isdefined(var_1) || var_1 < 0)
+  if (!isdefined(var_01) || var_01 < 0)
   break;
 
-  var_4 = tablelookupbyrow("mp/statstable.csv", var_1, 4);
-  var_5 = tablelookupbyrow("mp/statstable.csv", var_1, 42);
+  var_04 = tablelookupbyrow("mp/statstable.csv", var_01, 4);
+  var_05 = tablelookupbyrow("mp/statstable.csv", var_01, 42);
 
-  if (!isdefined(var_4) || var_4 == "" || !isdefined(var_5) || var_5 == "") {} else {
-  var_5 = int(var_5);
-  level._id_13CBD._id_B4D4[var_4] = var_5;
+  if (!isdefined(var_04) || var_04 == "" || !isdefined(var_05) || var_05 == "") {} else {
+  var_05 = int(var_05);
+  level.weaponranktable.maxweaponranks[var_04] = var_05;
   }
 
   var_3++;
@@ -47,173 +47,173 @@ init() {
 }
 
 init_weapon_rank_events() {
-  var_0 = "scripts/cp/maps/cp_zmb/cp_zmb_weaponrank_event.csv";
+  var_00 = "scripts/cp/maps/cp_zmb/cp_zmb_weaponrank_event.csv";
 
   if (isdefined(level.weapon_rank_event_table))
-  var_0 = level.weapon_rank_event_table;
+  var_00 = level.weapon_rank_event_table;
 
   level.weapon_rank_event = [];
-  var_1 = 1;
+  var_01 = 1;
 
   for (;;) {
-  var_2 = tablelookup(var_0, 0, var_1, 1);
+  var_02 = tablelookup(var_00, 0, var_01, 1);
 
-  if (!isdefined(var_2) || var_2 == "")
+  if (!isdefined(var_02) || var_02 == "")
   break;
 
-  var_3 = int(tablelookup(var_0, 0, var_1, 2));
-  level.weapon_rank_event[var_2] = var_3;
+  var_03 = int(tablelookup(var_00, 0, var_01, 2));
+  level.weapon_rank_event[var_02] = var_03;
   var_1++;
   }
 }
 
-_id_1285E(var_0, var_1, var_2, var_3) {
+try_give_player_weapon_xp(var_00, var_01, var_02, var_03) {
   if (!level.onlinegame)
   return;
 
-  if (isai(var_0) || !isplayer(var_0) || !_id_13C3E() || !_id_9D1B(var_0, var_1))
+  if (isai(var_00) || !isplayer(var_00) || !weapon_progression_enabled() || !is_weapon_unlocked(var_00, var_01))
   return;
 
-  var_4 = _id_0A77::_id_7DF7(var_1);
+  var_04 = scripts/cp/utility::getbaseweaponname(var_01);
 
-  if (!_id_13C48(var_4))
+  if (!weapon_should_get_xp(var_04))
   return;
 
-  _id_831B(var_0, var_4, _id_7D83(var_0, var_2, var_3));
+  give_player_weapon_xp(var_00, var_04, get_xp_value(var_00, var_02, var_03));
 }
 
-_id_831B(var_0, var_1, var_2) {
-  var_3 = get_player_weapon_rank_cp_xp(var_0, var_1);
-  var_4 = get_player_weapon_rank_mp_xp(var_0, var_1);
-  var_5 = var_3 + var_4;
-  var_6 = get_weapon_rank_for_xp(var_5);
-  var_7 = _id_7ACF(var_1);
-  var_8 = _id_7D65(var_1);
-  var_9 = var_8 - var_4;
-  var_10 = var_3 + var_2;
+give_player_weapon_xp(var_00, var_01, var_02) {
+  var_03 = get_player_weapon_rank_cp_xp(var_00, var_01);
+  var_04 = get_player_weapon_rank_mp_xp(var_00, var_01);
+  var_05 = var_03 + var_04;
+  var_06 = get_weapon_rank_for_xp(var_05);
+  var_07 = get_max_weapon_rank_for_root_weapon(var_01);
+  var_08 = get_weapon_max_rank_xp(var_01);
+  var_09 = var_08 - var_04;
+  var_10 = var_03 + var_02;
 
-  if (var_10 > var_9)
-  var_10 = var_9;
+  if (var_10 > var_09)
+  var_10 = var_09;
 
-  var_11 = var_10 + var_4;
-  var_12 = var_0 getrankedplayerdata("common", "sharedProgression", "weaponLevel", var_1, "prestige");
-  var_13 = int(min(get_weapon_rank_for_xp(var_11), var_7));
-  var_0 setrankedplayerdata("common", "sharedProgression", "weaponLevel", var_1, "cpXP", var_10);
+  var_11 = var_10 + var_04;
+  var_12 = var_00 getrankedplayerdata("common", "sharedProgression", "weaponLevel", var_01, "prestige");
+  var_13 = int(min(get_weapon_rank_for_xp(var_11), var_07));
+  var_00 setrankedplayerdata("common", "sharedProgression", "weaponLevel", var_01, "cpXP", var_10);
 
-  if (var_6 < var_13)
-  var_0 _id_0A57::showsplash("ranked_up_weapon_" + var_1, var_13 + 1);
+  if (var_06 < var_13)
+  var_00 scripts/cp/cp_hud_message::showsplash("ranked_up_weapon_" + var_01, var_13 + 1);
 }
 
-_id_13C3E() {
-  if (scripts\engine\utility::_id_9CEE(level._id_55A5))
+weapon_progression_enabled() {
+  if (scripts\engine\utility::is_true(level.disable_weapon_progression))
   return 0;
 
   return 1;
 }
 
-_id_9D1B(var_0, var_1) {
-  var_2 = var_0 _id_0A63::_id_7BAA();
-  var_3 = _id_0A77::_id_7DF7(var_1);
-  var_4 = int(tablelookup("mp/unlocks/CPWeaponUnlocks.csv", 0, var_3, 7));
+is_weapon_unlocked(var_00, var_01) {
+  var_02 = var_00 scripts/cp/cp_persistence::get_player_rank();
+  var_03 = scripts/cp/utility::getbaseweaponname(var_01);
+  var_04 = int(tablelookup("mp/unlocks/CPWeaponUnlocks.csv", 0, var_03, 7));
 
-  if (var_2 >= var_4)
+  if (var_02 >= var_04)
   return 1;
   else
   return 0;
 }
 
-get_player_weapon_rank_cp_xp(var_0, var_1) {
-  var_2 = var_0 getrankedplayerdata("common", "sharedProgression", "weaponLevel", var_1, "cpXP");
-  return var_2;
+get_player_weapon_rank_cp_xp(var_00, var_01) {
+  var_02 = var_00 getrankedplayerdata("common", "sharedProgression", "weaponLevel", var_01, "cpXP");
+  return var_02;
 }
 
-get_player_weapon_rank_mp_xp(var_0, var_1) {
-  var_2 = var_0 getrankedplayerdata("common", "sharedProgression", "weaponLevel", var_1, "mpXP");
-  return var_2;
+get_player_weapon_rank_mp_xp(var_00, var_01) {
+  var_02 = var_00 getrankedplayerdata("common", "sharedProgression", "weaponLevel", var_01, "mpXP");
+  return var_02;
 }
 
-_id_13C48(var_0) {
-  return _id_13C19(var_0);
+weapon_should_get_xp(var_00) {
+  return weapon_has_ranks(var_00);
 }
 
-_id_13C19(var_0) {
-  if (!isdefined(level._id_13CBD._id_B4D4[var_0]))
+weapon_has_ranks(var_00) {
+  if (!isdefined(level.weaponranktable.maxweaponranks[var_00]))
   return 0;
 
   return 1;
 }
 
-get_weapon_rank_for_xp(var_0) {
-  if (var_0 == 0)
+get_weapon_rank_for_xp(var_00) {
+  if (var_00 == 0)
   return 0;
 
-  for (var_1 = get_max_weapon_rank() - 1; var_1 >= 0; var_1--) {
-  if (var_0 >= get_weapon_rank_info_min_xp(var_1))
-  return var_1;
+  for (var_01 = get_max_weapon_rank() - 1; var_01 >= 0; var_1--) {
+  if (var_00 >= get_weapon_rank_info_min_xp(var_01))
+  return var_01;
   }
 
-  return var_1;
+  return var_01;
 }
 
 get_max_weapon_rank() {
-  return level._id_13CBD._id_B4C0;
+  return level.weaponranktable.maxrank;
 }
 
-get_weapon_rank_info_min_xp(var_0) {
-  return level._id_13CBD._id_DCD4[var_0]._id_B7CF;
+get_weapon_rank_info_min_xp(var_00) {
+  return level.weaponranktable.rankinfo[var_00].minxp;
 }
 
-_id_7D65(var_0) {
-  var_1 = _id_7ACF(var_0);
-  return _id_7D6E(var_1);
+get_weapon_max_rank_xp(var_00) {
+  var_01 = get_max_weapon_rank_for_root_weapon(var_00);
+  return get_weapon_rank_info_max_xp(var_01);
 }
 
-_id_7ACF(var_0) {
-  return level._id_13CBD._id_B4D4[var_0];
+get_max_weapon_rank_for_root_weapon(var_00) {
+  return level.weaponranktable.maxweaponranks[var_00];
 }
 
-_id_7D6E(var_0) {
-  return level._id_13CBD._id_DCD4[var_0]._id_B4D6;
+get_weapon_rank_info_max_xp(var_00) {
+  return level.weaponranktable.rankinfo[var_00].maxxp;
 }
 
-_id_7D83(var_0, var_1, var_2) {
-  var_3 = _id_79A2(var_1);
-  var_4 = _id_79A3(var_2);
-  var_5 = get_player_weapon_xp_scalar(var_0);
-  var_6 = int(var_3 * var_4 * var_5);
-  return var_6;
+get_xp_value(var_00, var_01, var_02) {
+  var_03 = get_event_xp_base_value(var_01);
+  var_04 = get_event_xp_multiplier_value(var_02);
+  var_05 = get_player_weapon_xp_scalar(var_00);
+  var_06 = int(var_03 * var_04 * var_05);
+  return var_06;
 }
 
-_id_12861(var_0, var_1, var_2, var_3, var_4) {
-  _id_1285E(var_0, var_1, var_4, _id_7D88(var_1, var_2, var_3, var_0));
+try_give_weapon_xp_zombie_killed(var_00, var_01, var_02, var_03, var_04) {
+  try_give_player_weapon_xp(var_00, var_01, var_04, get_zombie_killed_weapon_xp_multiplier_type(var_01, var_02, var_03, var_00));
 }
 
-_id_7D88(var_0, var_1, var_2, var_3) {
-  if (_id_0A77::isheadshot(var_0, var_1, var_2, var_3))
+get_zombie_killed_weapon_xp_multiplier_type(var_00, var_01, var_02, var_03) {
+  if (scripts/cp/utility::isheadshot(var_00, var_01, var_02, var_03))
   return "headshot";
 
   return undefined;
 }
 
-get_player_weapon_xp_scalar(var_0) {
+get_player_weapon_xp_scalar(var_00) {
   if (isdefined(var_0.weaponxpscale))
   return var_0.weaponxpscale;
   else
   return 1;
 }
 
-_id_79A2(var_0) {
-  if (!isdefined(level.weapon_rank_event[var_0]))
+get_event_xp_base_value(var_00) {
+  if (!isdefined(level.weapon_rank_event[var_00]))
   return 0;
 
-  return level.weapon_rank_event[var_0];
+  return level.weapon_rank_event[var_00];
 }
 
-_id_79A3(var_0) {
-  if (!isdefined(var_0))
+get_event_xp_multiplier_value(var_00) {
+  if (!isdefined(var_00))
   return 1;
 
-  switch (var_0) {
+  switch (var_00) {
   case "headshot":
   return 1.5;
   default:

@@ -80,7 +80,7 @@ trygrenadethrow(param_00,param_01,param_02,param_03,param_04,param_05,param_06,p
 		func_F72C(self.var_1652,min(gettime() + 3000,var_0E));
 		var_0F = 0;
 		if(usingplayer()) {
-			param_02.var_C231++;
+			param_02.numgrenadesinprogresstowardsplayer++;
 			thread func_DE37(param_01,param_02);
 			if(param_02.numgrenadesinprogresstowardsplayer > 1) {
 				var_0F = 1;
@@ -154,7 +154,7 @@ usingplayer() {
 func_DE37(param_00,param_01) {
 	self endon("dont_reduce_giptp_on_killanimscript");
 	self waittill(param_00 + "_finished");
-	param_01.var_C231--;
+	param_01.numgrenadesinprogresstowardsplayer--;
 }
 
 func_89AD(param_00,param_01,param_02,param_03,param_04) {
@@ -182,7 +182,7 @@ func_89AD(param_00,param_01,param_02,param_03,param_04) {
 			}
 
 			if(var_0B == "end") {
-				self.var_1652.player.var_C231--;
+				self.var_1652.player.numgrenadesinprogresstowardsplayer--;
 				self notify("dont_reduce_giptp_on_killanimscript");
 				return 0;
 			}
@@ -260,7 +260,7 @@ func_5392(param_00,param_01,param_02) {
 func_13A98(param_00,param_01,param_02) {
 	param_01 endon("death");
 	func_13A99(param_00,param_02);
-	param_01.var_C231--;
+	param_01.numgrenadesinprogresstowardsplayer--;
 }
 
 func_13A99(param_00,param_01) {

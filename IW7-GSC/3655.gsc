@@ -113,7 +113,7 @@ func_4D8A() {
 			earthquake(var_0B,var_0C,self.origin,2048);
 			level notify("player_SwimWaterCurrent_lerp_savedDvar");
 			var_07 = vectornormalize(var_07);
-			function_01C5("player_SwimWaterCurrent",var_07 * var_0E);
+			setsaveddvar("player_SwimWaterCurrent",var_07 * var_0E);
 			if(var_08 != 1) {
 				thread func_118C4(var_00,var_07);
 			}
@@ -158,12 +158,12 @@ func_AB9C(param_00,param_01,param_02) {
 	var_07 = 0.05 / param_02;
 	while(var_05 < 1) {
 		var_04 = var_03 + var_05 * var_06;
-		function_01C5(param_00,var_04);
+		setsaveddvar(param_00,var_04);
 		var_05 = var_05 + var_07;
 		scripts\engine\utility::waitframe();
 	}
 
-	function_01C5(param_00,param_01);
+	setsaveddvar(param_00,param_01);
 }
 
 func_11ABF() {

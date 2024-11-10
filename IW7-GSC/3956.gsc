@@ -110,7 +110,7 @@ func_8BDA() {
 func_7FDE() {
 	var_00 = self getnearestnode();
 	var_01 = self.var_5719.var_BE81["0"];
-	if(!function_027D(var_01)) {
+	if(!isnumber(var_01)) {
 		return var_01;
 	}
 

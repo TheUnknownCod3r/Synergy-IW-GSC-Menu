@@ -9,7 +9,7 @@ func_2A2D() {
 	level.player.var_2A23 = 100;
 	level.player.var_2A2E = 0;
 	level.player.var_4BDD = 0;
-	var_00 = function_00C9("axis");
+	var_00 = getspawnerteamarray("axis");
 	scripts\sp\_utility::func_22C7(var_00,::func_2A32);
 	level.player thread func_2A35();
 }
@@ -78,7 +78,7 @@ func_2A2B() {
 
 func_2A2C(param_00) {
 	setdvar("hideHudFast",0);
-	function_01C5("hud_showStance",1);
+	setsaveddvar("hud_showStance",1);
 	setomnvar("ui_hide_weapon_info",0);
 	foreach(var_02 in param_00) {
 		if(isdefined(var_02.bar)) {
@@ -410,7 +410,7 @@ func_2A25(param_00) {
 
 	var_02 = self.var_2A23 + 15;
 	func_2A34(var_02);
-	function_0178("weap_ammo_pickup",param_00.origin);
+	playworldsound("weap_ammo_pickup",param_00.origin);
 	var_01 delete();
 	param_00 delete();
 }
@@ -453,6 +453,6 @@ func_2A32() {
 		return;
 	}
 
-	function_0178("frag_grenade_explode",self.origin);
+	playworldsound("frag_grenade_explode",self.origin);
 	playfx(scripts\engine\utility::getfx("beam_rifle_robot_explosion"),self gettagorigin("j_SpineUpper"));
 }

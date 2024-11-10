@@ -96,13 +96,13 @@ main() {
 	level.player allowmelee(0);
 	if(scripts\sp\_utility::func_93AB()) {
 		level.player _meth_8591(1);
-		function_0229();
+		updategamerprofile();
 		scripts\sp\_endmission::func_41ED();
 	}
 
 	if(scripts\sp\_utility::func_93A6() && scripts/sp/specialist_MAYBE::func_2C8D()) {
 		scripts/sp/analytics::func_D37D();
-		function_02AB(scripts\sp\_utility::func_93AB());
+		finishplayerdeath(scripts\sp\_utility::func_93AB());
 		return;
 	}
 
@@ -113,9 +113,9 @@ main() {
 
 	setomnvar("ui_hide_weapon_info",1);
 	setomnvar("ui_player_dead",1);
-	function_01C5("hud_showstance",0);
-	function_01C5("actionSlotsHide",1);
-	function_01C5("cg_drawcrosshair",0);
+	setsaveddvar("hud_showstance",0);
+	setsaveddvar("actionSlotsHide",1);
+	setsaveddvar("cg_drawcrosshair",0);
 	if(level.player scripts\sp\_utility::func_7B93() < 2) {
 		thread scripts\sp\_gameskill::func_4766(5,1);
 	}
@@ -169,7 +169,7 @@ main() {
 	setomnvar("ui_player_dead",0);
 	setdvar("player_death_animated",1);
 	scripts/sp/analytics::func_D37D();
-	function_02AB(scripts\sp\_utility::func_93AB());
+	finishplayerdeath(scripts\sp\_utility::func_93AB());
 }
 
 func_10FD3() {
@@ -306,7 +306,7 @@ func_12854(param_00,param_01,param_02,param_03) {
 
 func_11A18(param_00) {
 	if(!isdefined(param_00)) {
-		param_00 = function_00EA(level.player getcurrentprimaryweapon());
+		param_00 = getweaponmodel(level.player getcurrentprimaryweapon());
 	}
 
 	var_01 = spawn("script_model",level.player.origin + (0,-7,20));
@@ -582,7 +582,7 @@ func_FF31() {
 }
 
 func_CFAE() {
-	var_00 = function_0072("axis");
+	var_00 = getaiarray("axis");
 	foreach(var_02 in var_00) {
 		if(!scripts\engine\utility::within_fov(level.player.origin,level.player.angles,var_02.origin,0.173648)) {
 			continue;
@@ -724,7 +724,7 @@ func_11493() {
 		}
 	}
 
-	if(function_0244(var_01) == "altmode") {
+	if(weaponinventorytype(var_01) == "altmode") {
 		var_00[var_00.size] = adsbuttonpressed(var_01);
 	}
 	else
@@ -936,7 +936,7 @@ func_F32D(param_00,param_01,param_02,param_03,param_04) {
 
 			case "MOD_GRENADE_SPLASH":
 			case "MOD_GRENADE":
-				if(isdefined(param_03) && !function_011F(param_03)) {
+				if(isdefined(param_03) && !isweapondetonationtimed(param_03)) {
 					func_F32F();
 					return;
 				}

@@ -399,7 +399,7 @@ func_139AD() {
 }
 
 func_10831(param_00,param_01,param_02,param_03,param_04) {
-	var_05 = function_02AF(param_03,param_04,param_01);
+	var_05 = spawnimpulsefield(param_03,param_04,param_01);
 	var_05.angles = param_02;
 	var_05 linkto(param_00);
 	var_05 thread cleanuponparentdeath(param_00);

@@ -3,337 +3,337 @@
  * Script: scripts\3371.gsc
 ***************************************/
 
-_id_12E11(var_0) {
-  if (var_0._id_1189F > 0)
-  level thread _id_D2FE(var_0);
+update_player_tickets_earned(var_00) {
+  if (var_0.tickets_earned > 0)
+  level thread player_ticket_queue(var_00);
 }
 
-_id_D2FE(var_0) {
-  var_0 notify("ticket_queue");
-  var_0 endon("ticket_queue");
-  var_0 endon("disconnect");
+player_ticket_queue(var_00) {
+  var_00 notify("ticket_queue");
+  var_00 endon("ticket_queue");
+  var_00 endon("disconnect");
 
-  if (gettime() > var_0._id_118DE) {
-  var_1 = var_0._id_1189F;
+  if (gettime() > var_0.time_to_give_next_tickets) {
+  var_01 = var_0.tickets_earned;
 
-  if (var_1 > 10)
-  var_1 = 10;
+  if (var_01 > 10)
+  var_01 = 10;
 
-  var_0._id_118DE = gettime() + var_1 / 1.5 * 1000 + 500;
-  var_2 = var_0._id_1189F;
-  var_0._id_1189F = 0;
-  _id_8317(var_0, var_2);
+  var_0.time_to_give_next_tickets = gettime() + var_01 / 1.5 * 1000 + 500;
+  var_02 = var_0.tickets_earned;
+  var_0.tickets_earned = 0;
+  give_player_tickets(var_00, var_02);
   } else {
-  while (gettime() < var_0._id_118DE && var_0._id_1189F > 0)
+  while (gettime() < var_0.time_to_give_next_tickets && var_0.tickets_earned > 0)
   wait 0.1;
 
-  if (var_0._id_1189F > 0) {
-  var_1 = var_0._id_1189F;
+  if (var_0.tickets_earned > 0) {
+  var_01 = var_0.tickets_earned;
 
-  if (var_1 > 10)
-  var_1 = 10;
+  if (var_01 > 10)
+  var_01 = 10;
 
-  var_0._id_118DE = gettime() + var_1 / 1.5 * 1000 + 500;
-  var_2 = var_0._id_1189F;
-  var_0._id_1189F = 0;
-  _id_8317(var_0, var_2);
+  var_0.time_to_give_next_tickets = gettime() + var_01 / 1.5 * 1000 + 500;
+  var_02 = var_0.tickets_earned;
+  var_0.tickets_earned = 0;
+  give_player_tickets(var_00, var_02);
   }
   }
 }
 
-_id_8317(var_0, var_1, var_2, var_3) {
+give_player_tickets(var_00, var_01, var_02, var_03) {
   if (isdefined(level.no_ticket_machine))
   return;
 
-  if (scripts\engine\utility::_id_9CEE(var_0._id_5AD6))
-  var_1 = var_1 * 2;
+  if (scripts\engine\utility::is_true(var_0.double_money))
+  var_01 = var_01 * 2;
 
-  if (!isdefined(var_0._id_C206))
-  var_0._id_C206 = 0;
+  if (!isdefined(var_0.num_tickets))
+  var_0.num_tickets = 0;
 
-  if (var_1 < 0)
-  var_1 = max(var_0._id_C206 * -1, var_1);
+  if (var_01 < 0)
+  var_01 = max(var_0.num_tickets * -1, var_01);
 
-  var_0._id_C206 = var_0._id_C206 + var_1;
+  var_0.num_tickets = var_0.num_tickets + var_01;
 
-  if (var_0._id_C206 < 0)
-  var_0._id_C206 = 0;
+  if (var_0.num_tickets < 0)
+  var_0.num_tickets = 0;
 
-  var_1 = int(var_1);
+  var_01 = int(var_01);
 
-  if (var_1 == 0)
+  if (var_01 == 0)
   return;
 
-  if (var_1 > 0 && !scripts\engine\utility::_id_9CEE(var_3))
-  var_0 playlocalsound("zmb_ui_earn_tickets");
+  if (var_01 > 0 && !scripts\engine\utility::is_true(var_03))
+  var_00 playlocalsound("zmb_ui_earn_tickets");
 
-  var_0 setclientomnvar("zombie_number_of_ticket", int(var_0._id_C206));
+  var_00 setclientomnvar("zombie_number_of_ticket", int(var_0.num_tickets));
 
-  if (!scripts\engine\utility::_id_9CEE(var_3))
-  var_0 thread _id_10101(var_1);
+  if (!scripts\engine\utility::is_true(var_03))
+  var_00 thread show_ticket_machine(var_01);
 
-  var_0 _id_0A63::_id_666A("tickettotal", int(var_0._id_C206), 1);
-  _id_0D5A::_id_12E3B(var_0, var_1);
+  var_00 scripts/cp/cp_persistence::eog_player_update_stat("tickettotal", int(var_0.num_tickets), 1);
+  scripts/cp/zombies/zombies_gamescore::update_tickets_earned_performance(var_00, var_01);
 }
 
-_id_2110(var_0, var_1) {
-  if (var_0._id_E1B9 && !var_0._id_D776)
+arcade_game_hint_func(var_00, var_01) {
+  if (var_0.requires_power && !var_0.powered_on)
   return &"COOP_INTERACTIONS_REQUIRES_POWER";
 
-  if (scripts\engine\utility::_id_9CEE(var_0._id_C74D))
+  if (scripts\engine\utility::is_true(var_0.out_of_order))
   return &"CP_ZMB_INTERACTIONS_MACHINE_OUT_OF_ORDER";
 
-  return level._id_9A12[var_0.script_noteworthy];
+  return level.interaction_hintstrings[var_0.script_noteworthy];
 }
 
-_id_10101(var_0) {
+show_ticket_machine(var_00) {
   self endon("disconnect");
 
-  if (var_0 < 0)
+  if (var_00 < 0)
   return;
 
-  self setclientomnvar("zm_tickets_dispersed", var_0);
+  self setclientomnvar("zm_tickets_dispersed", var_00);
 
-  if (var_0 > 10)
-  var_0 = 10;
+  if (var_00 > 10)
+  var_00 = 10;
 
   wait 2.5;
   self setclientomnvar("zm_tickets_dispersed", -1);
 }
 
-_id_2111(var_0, var_1, var_2, var_3) {
-  var_0 endon("arcade_game_over_for_player");
-  var_4 = var_0 scripts\engine\utility::_id_13735("disconnect", "last_stand", "spawned");
+arcade_game_player_disconnect_or_death(var_00, var_01, var_02, var_03) {
+  var_00 endon("arcade_game_over_for_player");
+  var_04 = var_00 scripts\engine\utility::waittill_any_return_no_endon_death("disconnect", "last_stand", "spawned");
 
-  if (var_4 == "disconnect")
-  var_1._id_163D = undefined;
+  if (var_04 == "disconnect")
+  var_1.active_player = undefined;
   else
   {
-  [[var_3]](var_1, var_0);
-  var_0 _meth_83B8(var_2);
-  var_0 scripts\engine\utility::_id_1C76(1);
+  [[var_03]](var_01, var_00);
+  var_00 giveuponsuppressiontime(var_02);
+  var_00 scripts\engine\utility::allow_weapon_switch(1);
 
-  if (!var_0 scripts\engine\utility::_id_9FBE())
-  var_0 scripts\engine\utility::_id_1C6E(1);
+  if (!var_00 scripts\engine\utility::isusabilityallowed())
+  var_00 scripts\engine\utility::allow_usability(1);
   }
 
-  _id_0A59::_id_175C(var_1);
-  var_0 notify("arcade_game_over_for_player");
+  scripts/cp/cp_interaction::add_to_current_interaction_list(var_01);
+  var_00 notify("arcade_game_over_for_player");
 }
 
-_id_2112(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
-  var_0 endon("arcade_game_over_for_player");
-  var_0 endon("stop_too_far_check");
-  var_0 endon("last_stand");
-  var_0 endon("disconnect");
-  var_0 endon("spawned");
-  var_7 = 10000;
+arcade_game_player_gets_too_far_away(var_00, var_01, var_02, var_03, var_04, var_05, var_06) {
+  var_00 endon("arcade_game_over_for_player");
+  var_00 endon("stop_too_far_check");
+  var_00 endon("last_stand");
+  var_00 endon("disconnect");
+  var_00 endon("spawned");
+  var_07 = 10000;
 
-  if (isdefined(var_5))
-  var_7 = var_5;
+  if (isdefined(var_05))
+  var_07 = var_05;
 
   for (;;) {
   wait 0.1;
 
-  if (distancesquared(var_0.origin, var_1.origin) > var_7 || var_0 getstance() == "prone") {
-  var_0 playlocalsound("purchase_deny");
+  if (distancesquared(var_0.origin, var_1.origin) > var_07 || var_00 getstance() == "prone") {
+  var_00 playlocalsound("purchase_deny");
   wait 0.5;
 
-  if (distancesquared(self.origin, var_1.origin) > var_7 || var_0 getstance() == "prone") {
-  if (isdefined(var_1._id_28BB)) {
-  if (isdefined(var_4))
-  var_1._id_28BB scripts\engine\utility::_id_50E1(1.0, ::playsound, var_4);
+  if (distancesquared(self.origin, var_1.origin) > var_07 || var_00 getstance() == "prone") {
+  if (isdefined(var_1.basketball_game_music)) {
+  if (isdefined(var_04))
+  var_1.basketball_game_music scripts\engine\utility::delaycall(1.0, ::playsound, var_04);
 
-  var_1._id_28BB scripts\engine\utility::_id_50E1(1.0, ::stoploopsound);
+  var_1.basketball_game_music scripts\engine\utility::delaycall(1.0, ::stoploopsound);
   }
 
-  if (isdefined(var_2))
-  var_0 _meth_83B8(var_2);
+  if (isdefined(var_02))
+  var_00 giveuponsuppressiontime(var_02);
 
-  [[var_3]](var_1, var_0);
-  var_1._id_163D = undefined;
-  _id_0A59::_id_175C(var_1);
-  var_0 scripts\engine\utility::_id_1C76(1);
+  [[var_03]](var_01, var_00);
+  var_1.active_player = undefined;
+  scripts/cp/cp_interaction::add_to_current_interaction_list(var_01);
+  var_00 scripts\engine\utility::allow_weapon_switch(1);
 
-  if (!var_0 scripts\engine\utility::_id_9FBE())
-  var_0 scripts\engine\utility::_id_1C6E(1);
+  if (!var_00 scripts\engine\utility::isusabilityallowed())
+  var_00 scripts\engine\utility::allow_usability(1);
 
-  var_0 _id_82F5(var_0);
-  var_0 _id_E2CB();
+  var_00 give_player_back_weapon(var_00);
+  var_00 restore_player_grenades_post_game();
 
-  if (var_0._id_210E == "tickets") {
-  if (isdefined(var_1._id_2994) && var_1._id_2994 >= 1) {
-  var_8 = var_1._id_2994 * 15;
-  var_0 _id_8317(var_0, var_1._id_2994 * 15);
+  if (var_0.arcade_game_award_type == "tickets") {
+  if (isdefined(var_1.bball_game_score) && var_1.bball_game_score >= 1) {
+  var_08 = var_1.bball_game_score * 15;
+  var_00 give_player_tickets(var_00, var_1.bball_game_score * 15);
 
-  if (var_1._id_2994 * 15 > var_1._id_2993) {
-  playloopsound(var_1._id_BDDB.origin, "basketball_anc_highscore");
-  setomnvar("zombie_bball_game_" + var_6 + "_hiscore", var_1._id_2994 * 15);
-  var_1._id_2993 = var_1._id_2994 * 15;
-  }
-  }
-
-  if (isdefined(var_1._id_10227) && var_1._id_10227 >= 1) {
-  var_8 = var_1._id_10227 * 1;
-  var_0 _id_8317(var_0, var_8);
-  }
-
-  if (isdefined(var_1._id_10227) && var_1._id_10227 >= 1) {
-  var_8 = var_1._id_10227 * 1;
-  var_0 _id_8317(var_0, var_8);
+  if (var_1.bball_game_score * 15 > var_1.bball_game_hiscore) {
+  playloopsound(var_1.music_ent.origin, "basketball_anc_highscore");
+  setomnvar("zombie_bball_game_" + var_06 + "_hiscore", var_1.bball_game_score * 15);
+  var_1.bball_game_hiscore = var_1.bball_game_score * 15;
   }
   }
 
-  var_0 notify("too_far_from_game");
-  var_0 notify("arcade_game_over_for_player");
+  if (isdefined(var_1.func_10227) && var_1.func_10227 >= 1) {
+  var_08 = var_1.func_10227 * 1;
+  var_00 give_player_tickets(var_00, var_08);
+  }
+
+  if (isdefined(var_1.func_10227) && var_1.func_10227 >= 1) {
+  var_08 = var_1.func_10227 * 1;
+  var_00 give_player_tickets(var_00, var_08);
+  }
+  }
+
+  var_00 notify("too_far_from_game");
+  var_00 notify("arcade_game_over_for_player");
   }
   }
   }
 }
 
-_id_12962(var_0, var_1) {
-  if (!isdefined(var_0))
-  var_0 = 4;
+turn_off_machine_after_uses(var_00, var_01) {
+  if (!isdefined(var_00))
+  var_00 = 4;
 
-  if (!isdefined(var_1))
-  var_1 = 7;
+  if (!isdefined(var_01))
+  var_01 = 7;
 
   for (;;) {
-  var_2 = 1;
-  self._id_C74D = 0;
-  var_3 = 0;
-  var_4 = randomintrange(var_0, var_1 + 1);
+  var_02 = 1;
+  self.out_of_order = 0;
+  var_03 = 0;
+  var_04 = randomintrange(var_00, var_01 + 1);
 
-  while (var_2) {
+  while (var_02) {
   self waittill("machine_used");
   var_3++;
 
-  if (var_3 >= var_4) {
-  self._id_C74D = 1;
-  var_2 = 0;
+  if (var_03 >= var_04) {
+  self.out_of_order = 1;
+  var_02 = 0;
   level scripts\engine\utility::waittill_any("regular_wave_starting", "event_wave_starting");
   }
 
-  foreach (var_6 in level.players) {
-  if (isdefined(var_6._id_A8D3) && var_6._id_A8D3 == self)
-  var_6 thread _id_0A59::_id_DE6E();
+  foreach (var_06 in level.players) {
+  if (isdefined(var_6.last_interaction_point) && var_6.last_interaction_point == self)
+  var_06 thread scripts/cp/cp_interaction::refresh_interaction();
   }
   }
   }
 }
 
-_id_EB76(var_0) {
-  if (scripts\engine\utility::_id_9CEE(var_0._id_9387))
+saveplayerpregameweapon(var_00) {
+  if (scripts\engine\utility::is_true(var_0.in_afterlife_arcade))
   return;
 
-  var_1 = var_0 getcurrentweapon();
-  var_2 = 0;
+  var_01 = var_00 getcurrentweapon();
+  var_02 = 0;
 
-  if (var_1 == "none")
-  var_2 = 1;
-  else if (scripts\engine\utility::array_contains(level._id_17D7, var_1))
-  var_2 = 1;
-  else if (scripts\engine\utility::array_contains(level._id_17D7, getweaponbasename(var_1)))
-  var_2 = 1;
-  else if (_id_0A77::_id_9C42(var_1, 1))
-  var_2 = 1;
+  if (var_01 == "none")
+  var_02 = 1;
+  else if (scripts\engine\utility::array_contains(level.additional_laststand_weapon_exclusion, var_01))
+  var_02 = 1;
+  else if (scripts\engine\utility::array_contains(level.additional_laststand_weapon_exclusion, getweaponbasename(var_01)))
+  var_02 = 1;
+  else if (scripts/cp/utility::is_melee_weapon(var_01, 1))
+  var_02 = 1;
 
-  if (var_2) {
-  var_0._id_4643 = var_0 _meth_8173();
-  var_1 = var_0 _id_0A5B::_id_3E88(level._id_17D7, 1, 1);
+  if (var_02) {
+  var_0.copy_fullweaponlist = var_00 getweaponslistall();
+  var_01 = var_00 scripts/cp/cp_laststand::choose_last_weapon(level.additional_laststand_weapon_exclusion, 1, 1);
   }
 
-  var_0._id_4643 = undefined;
+  var_0.copy_fullweaponlist = undefined;
 
-  if (isdefined(var_1))
-  return var_1;
+  if (isdefined(var_01))
+  return var_01;
   else
-  return var_0 getcurrentweapon();
+  return var_00 getcurrentweapon();
 }
 
-_id_82F5(var_0) {
-  if (_id_0A5B::_id_D0EF(var_0))
+give_player_back_weapon(var_00) {
+  if (scripts/cp/cp_laststand::player_in_laststand(var_00))
   return;
 
-  if (isdefined(var_0._id_D7AB)) {
-  if (var_0 hasweapon(var_0._id_D7AB))
-  var_0 _meth_83B5(var_0._id_D7AB);
+  if (isdefined(var_0.pre_arcade_game_weapon)) {
+  if (var_00 hasweapon(var_0.pre_arcade_game_weapon))
+  var_00 switchtoweapon(var_0.pre_arcade_game_weapon);
   } else {
-  var_1 = var_0 getweaponslistprimaries();
+  var_01 = var_00 getweaponslistprimaries();
 
   if (isdefined(var_1[1]))
-  var_0 _meth_83B5(var_1[1]);
+  var_00 switchtoweapon(var_1[1]);
   }
 
-  var_0._id_D7AC = undefined;
-  var_0._id_D7AD = undefined;
-  var_0._id_D7AB = undefined;
+  var_0.pre_arcade_game_weapon_clip = undefined;
+  var_0.pre_arcade_game_weapon_stock = undefined;
+  var_0.pre_arcade_game_weapon = undefined;
 }
 
-_id_11447() {
-  if (_id_0A5B::_id_D0EF(self))
+take_player_grenades_pre_game() {
+  if (scripts/cp/cp_laststand::player_in_laststand(self))
   return;
 
-  var_0 = _id_0D15::_id_13CFC("primary");
-  var_1 = _id_0D15::_id_13CFC("secondary");
-  self._id_D7AE = var_0;
-  self._id_D7B0 = var_1;
+  var_00 = scripts/cp/powers/coop_powers::what_power_is_in_slot("primary");
+  var_01 = scripts/cp/powers/coop_powers::what_power_is_in_slot("secondary");
+  self.pre_arcade_primary_power = var_00;
+  self.pre_arcade_secondary_power = var_01;
 
-  if (isdefined(var_0)) {
-  self._id_D7AF = self._id_D782[self._id_D7AE]._id_3D23;
-  _id_0D15::_id_E15E(var_0);
+  if (isdefined(var_00)) {
+  self.pre_arcade_primary_power_charges = self.powers[self.pre_arcade_primary_power].charges;
+  scripts/cp/powers/coop_powers::removepower(var_00);
   }
 
-  if (isdefined(var_1)) {
-  self._id_D7B1 = self._id_D782[self._id_D7B0]._id_3D23;
-  _id_0D15::_id_E15E(var_1);
+  if (isdefined(var_01)) {
+  self.pre_arcade_secondary_power_charges = self.powers[self.pre_arcade_secondary_power].charges;
+  scripts/cp/powers/coop_powers::removepower(var_01);
   }
 }
 
 take_player_super_pre_game() {
-  if (_id_0A5B::_id_D0EF(self))
+  if (scripts/cp/cp_laststand::player_in_laststand(self))
   return;
 
-  self _meth_84C3();
-  self _meth_83B8("super_default_zm");
+  self clearoffhandspecial();
+  self giveuponsuppressiontime("super_default_zm");
 }
 
-_id_E2CB() {
-  _id_0A77::_id_E2D4();
+restore_player_grenades_post_game() {
+  scripts/cp/utility::restore_super_weapon();
 
-  if (_id_0A5B::_id_D0EF(self))
+  if (scripts/cp/cp_laststand::player_in_laststand(self))
   return;
 
-  if (isdefined(self._id_D7AE)) {
-  var_0 = level._id_D782[self._id_D7AE]._id_504B;
-  _id_0D15::_id_4171(var_0);
-  _id_0D15::_id_8397(self._id_D7AE, var_0, undefined, undefined, undefined, undefined, 1);
-  _id_0D15::_id_D71A(self._id_D7AF, var_0, 1);
+  if (isdefined(self.pre_arcade_primary_power)) {
+  var_00 = level.powers[self.pre_arcade_primary_power].defaultslot;
+  scripts/cp/powers/coop_powers::func_4171(var_00);
+  scripts/cp/powers/coop_powers::givepower(self.pre_arcade_primary_power, var_00, undefined, undefined, undefined, undefined, 1);
+  scripts/cp/powers/coop_powers::power_adjustcharges(self.pre_arcade_primary_power_charges, var_00, 1);
   }
 
-  if (isdefined(self._id_D7B0)) {
-  var_0 = level._id_D782[self._id_D7B0]._id_504B;
-  _id_0D15::_id_4171(var_0);
-  _id_0D15::_id_8397(self._id_D7B0, var_0, undefined, undefined, undefined, undefined, 0);
-  _id_0D15::_id_D71A(self._id_D7B1, var_0, 1);
+  if (isdefined(self.pre_arcade_secondary_power)) {
+  var_00 = level.powers[self.pre_arcade_secondary_power].defaultslot;
+  scripts/cp/powers/coop_powers::func_4171(var_00);
+  scripts/cp/powers/coop_powers::givepower(self.pre_arcade_secondary_power, var_00, undefined, undefined, undefined, undefined, 0);
+  scripts/cp/powers/coop_powers::power_adjustcharges(self.pre_arcade_secondary_power_charges, var_00, 1);
   }
 
-  self._id_D7AE = undefined;
-  self._id_D7AF = undefined;
-  self._id_D7B0 = undefined;
-  self._id_D7B1 = undefined;
+  self.pre_arcade_primary_power = undefined;
+  self.pre_arcade_primary_power_charges = undefined;
+  self.pre_arcade_secondary_power = undefined;
+  self.pre_arcade_secondary_power_charges = undefined;
 }
 
-_id_F2C7(var_0) {
-  if (scripts\engine\utility::_id_9CEE(var_0._id_9387))
-  var_0._id_210E = "soul_power";
+set_arcade_game_award_type(var_00) {
+  if (scripts\engine\utility::is_true(var_0.in_afterlife_arcade))
+  var_0.arcade_game_award_type = "soul_power";
   else
-  var_0._id_210E = "tickets";
+  var_0.arcade_game_award_type = "tickets";
 }
 
-update_song_playing(var_0, var_1) {
+update_song_playing(var_00, var_01) {
   var_0.song_playing = 1;
-  var_2 = lookupsoundlength(var_1);
-  wait(var_2 / 1000);
+  var_02 = lookupsoundlength(var_01);
+  wait(var_02 / 1000);
   var_0.song_playing = 0;
 }

@@ -48,7 +48,7 @@ func_44F5() {
 	var_01 = self gettagorigin("tag_eye");
 	var_02 = self geteye() + anglestoforward(self getplayerangles()) * 454;
 	var_03 = scripts\common\trace::create_contents(0,1,1,0,0,0,0);
-	var_04 = function_0287(var_01,var_02,var_03,undefined,0,"physicsquery_closest");
+	var_04 = physics_raycast(var_01,var_02,var_03,undefined,0,"physicsquery_closest");
 	if(isdefined(var_04) && var_04.size > 0) {
 		var_02 = var_04[0]["position"];
 	}
@@ -69,7 +69,7 @@ func_44F5() {
 			continue;
 		}
 
-		var_04 = function_0287(self geteye(),var_0C geteye(),var_03,undefined,0,"physicsquery_closest");
+		var_04 = physics_raycast(self geteye(),var_0C geteye(),var_03,undefined,0,"physicsquery_closest");
 		if(isdefined(var_04) && var_04.size != 0) {
 			continue;
 		}

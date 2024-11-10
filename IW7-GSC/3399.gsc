@@ -143,7 +143,7 @@ wait_for_ark_placed(param_00,param_01) {
 			scripts\cp\zombies\zombies_weapons::clear_arcane_effects(var_06);
 			var_06 setscriptablepartstate("arcane","arcane_disperse",0);
 			var_06 takeweapon(var_07);
-			var_08 = function_00E3(var_07);
+			var_08 = getweaponattachments(var_07);
 			var_09 = scripts\cp\utility::getcurrentcamoname(var_07);
 			var_0A = var_06 scripts\cp\cp_weapon::return_weapon_name_with_like_attachments(var_07,"arcane_base",var_08,undefined,var_09);
 			var_0A = var_06 scripts\cp\utility::_giveweapon(var_0A,undefined,undefined,1);

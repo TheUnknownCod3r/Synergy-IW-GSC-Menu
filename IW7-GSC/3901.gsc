@@ -478,8 +478,8 @@ func_9D4C(param_00,param_01,param_02,param_03) {
 	}
 
 	var_06 = scripts/asm/asm::asm_getdemeanor();
-	var_07 = (!function_02A7(var_05) || var_05 getrandomattachments("stand")) && self getteleportlonertargetplayer("stand");
-	var_08 = (!function_02A7(var_05) || var_05 getrandomattachments("crouch")) && self getteleportlonertargetplayer("crouch") && var_06 != "casual" && var_06 != "casual_gun";
+	var_07 = (!isnode(var_05) || var_05 getrandomattachments("stand")) && self getteleportlonertargetplayer("stand");
+	var_08 = (!isnode(var_05) || var_05 getrandomattachments("crouch")) && self getteleportlonertargetplayer("crouch") && var_06 != "casual" && var_06 != "casual_gun";
 	if(param_00 == "zero_gravity_space") {
 		switch(var_04) {
 			case "Exposed 3D":
@@ -620,7 +620,7 @@ func_C057(param_00) {
 		return 1;
 	}
 
-	if(function_02A4(param_00)) {
+	if(isstruct(param_00)) {
 		return 0;
 	}
 

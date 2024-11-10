@@ -77,7 +77,7 @@ func_10EE3(param_00) {
 		if(self getweaponrankinfominxp() > 0.3) {
 			var_03 = self geteye();
 			var_04 = anglestoforward(self getplayerangles());
-			var_05 = function_0072();
+			var_05 = getaiarray();
 			foreach(var_07 in var_05) {
 				var_08 = var_07 getentitynumber();
 				if(isdefined(self.var_10E6D.var_10EDF[var_08])) {
@@ -152,7 +152,7 @@ func_10EE1() {
 			var_00 = 0;
 		}
 
-		var_09 = isdefined(var_07) && function_024C(var_07) == "bullet";
+		var_09 = isdefined(var_07) && weapontype(var_07) == "bullet";
 		if(var_08 >= 2 && var_09) {
 			thread func_10EE0("good_kill_double",var_04,1);
 		}
@@ -365,7 +365,7 @@ func_1D7D(param_00,param_01) {
 
 	var_05 = level.var_10E6D.enemies[self.team];
 	if(param_00) {
-		var_05 = scripts\engine\utility::array_combine(var_05,function_0083());
+		var_05 = scripts\engine\utility::array_combine(var_05,getcorpsearrayinradius());
 	}
 
 	var_05 = scripts\engine\utility::array_removeundefined(var_05);

@@ -207,7 +207,7 @@ func_9B23(param_00) {
 			return;
 		}
 
-		if(function_02A7(var_06)) {
+		if(isnode(var_06)) {
 		}
 		else
 		{
@@ -224,7 +224,7 @@ func_9B23(param_00) {
 
 func_7B1A() {
 	if(isdefined(self.var_10E6D.var_9B27) && isdefined(self.var_10E6D.var_9B27.target)) {
-		var_00 = function_00B3(self.var_10E6D.var_9B27.target,"targetname");
+		var_00 = getnode(self.var_10E6D.var_9B27.target,"targetname");
 		if(isdefined(var_00) && distancesquared(var_00.origin,self.origin) > squared(100)) {
 			var_00.var_13070 = gettime();
 			return var_00;
@@ -418,7 +418,7 @@ func_7C3B(param_00,param_01,param_02) {
 	var_05 = squared(param_01);
 	var_06 = [];
 	var_07 = [];
-	var_08 = function_00B4("seek_patrol","targetname");
+	var_08 = getnodearray("seek_patrol","targetname");
 	var_06 = scripts\engine\utility::array_combine(var_08,var_06);
 	var_08 = scripts\engine\utility::getstructarray("seek_patrol","targetname");
 	var_06 = scripts\engine\utility::array_combine(var_08,var_06);

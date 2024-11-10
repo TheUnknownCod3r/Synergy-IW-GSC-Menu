@@ -15,10 +15,10 @@ func_3535() {
 		}
 		else
 		{
-			var_00 = function_0107(self.var_DE) && self.var_E1 > 50;
+			var_00 = isexplosivedamagemod(self.var_DE) && self.var_E1 > 50;
 		}
 
-		var_01 = function_0107(self.var_DE);
+		var_01 = isexplosivedamagemod(self.var_DE);
 		if(var_00) {
 			func_3559(1);
 		}
@@ -35,7 +35,7 @@ func_3620() {
 		var_03 = 0;
 		var_04 = 0;
 		foreach(var_06 in var_00) {
-			if(function_0107(var_06.type)) {
+			if(isexplosivedamagemod(var_06.type)) {
 				var_02 = var_02 + var_06.var_3C;
 			}
 
@@ -264,7 +264,7 @@ func_F1FD() {
 	earthquake(2.25,0.3,var_00,1200);
 	level thread func_F20A(var_00);
 	lib_0C60::func_4E36();
-	function_0278("c12_selfdestruct");
+	destroynavrepulsor("c12_selfdestruct");
 	self delete();
 }
 

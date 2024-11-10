@@ -5,514 +5,514 @@
 
 init() {
   precacheshellshock("frag_grenade_mp");
-  _id_DBDE();
-  _id_DBE3();
-  _id_1338C();
-  _id_D0F6();
+  func_DBDE();
+  func_DBE3();
+  func_1338C();
+  player_init();
 }
 
-_id_DBDE() {
-  _id_BF26("main", "player_view1_start", "player_view1_end");
-  var_0 = _id_BF25("main", "Primary Weapon", "radial_weapons_primary", ::_id_157D);
-  var_1 = _id_BF25("main", "Secondary Weapon", "radial_weapons_secondary", ::_id_157E);
-  var_2 = _id_BF25("main", "Gears", "radial_gears", ::_id_1578);
-  var_3 = _id_BF25("main", "Kill Streaks", "radial_killstreaks", ::_id_1579);
-  var_4 = _id_BF25("main", "Leaderboards", "radial_leaderboards", ::_id_157A);
-  _id_BF26("gears", "player_view2_start", "player_view2_end");
-  _id_BF26("weapons_primary", "player_view3_start", "player_view3_end");
-  _id_BF26("weapons_secondary", "player_view3_start", "player_view3_end");
-  _id_BF26("killstreak", "player_view4_start", "player_view4_end");
-  _id_BF26("leaderboards", "player_view5_start", "player_view5_end");
+func_DBDE() {
+  func_BF26("main", "player_view1_start", "player_view1_end");
+  var_00 = func_BF25("main", "Primary Weapon", "radial_weapons_primary", ::func_157D);
+  var_01 = func_BF25("main", "Secondary Weapon", "radial_weapons_secondary", ::func_157E);
+  var_02 = func_BF25("main", "Gears", "radial_gears", ::func_1578);
+  var_03 = func_BF25("main", "Kill Streaks", "radial_killstreaks", ::func_1579);
+  var_04 = func_BF25("main", "Leaderboards", "radial_leaderboards", ::func_157A);
+  func_BF26("gears", "player_view2_start", "player_view2_end");
+  func_BF26("weapons_primary", "player_view3_start", "player_view3_end");
+  func_BF26("weapons_secondary", "player_view3_start", "player_view3_end");
+  func_BF26("killstreak", "player_view4_start", "player_view4_end");
+  func_BF26("leaderboards", "player_view5_start", "player_view5_end");
 }
 
-_id_DBE3() {
-  foreach (var_1 in level._id_DBDF) {
-  _id_10417(var_1);
+func_DBE3() {
+  foreach (var_01 in level.func_DBDF) {
+  func_10417(var_01);
 
-  for (var_2 = 0; var_2 < var_1.size; var_2++) {
-  if (isdefined(var_1[var_2 + 1])) {
-  var_3 = _id_7FB4(var_1[var_2]._id_D69A, var_1[var_2 + 1]._id_D69A);
-  var_1[var_2]._id_62A6 = var_3;
-  var_1[var_2 + 1]._id_10BA0 = var_3;
+  for (var_02 = 0; var_02 < var_1.size; var_2++) {
+  if (isdefined(var_1[var_02 + 1])) {
+  var_03 = func_7FB4(var_1[var_02].func_D69A, var_1[var_02 + 1].func_D69A);
+  var_1[var_02].func_62A6 = var_03;
+  var_1[var_02 + 1].func_10BA0 = var_03;
   continue;
   }
 
-  var_3 = _id_7FB4(var_1[var_2]._id_D69A, var_1[0]._id_D69A) + 180;
+  var_03 = func_7FB4(var_1[var_02].func_D69A, var_1[0].func_D69A) + 180;
 
-  if (var_3 > 360)
-  var_3 = var_3 - 360;
+  if (var_03 > 360)
+  var_03 = var_03 - 360;
 
-  var_1[var_2]._id_62A6 = var_3;
-  var_1[0]._id_10BA0 = var_3;
+  var_1[var_02].func_62A6 = var_03;
+  var_1[0].func_10BA0 = var_03;
   }
   }
 
-  thread _id_12F12();
-  thread _id_13B36();
-  thread _id_139A7();
-  thread _id_4F2A();
+  thread func_12F12();
+  thread func_13B36();
+  thread func_139A7();
+  thread func_4F2A();
 }
 
-_id_4F2A() {
+func_4F2A() {
   level endon("game_ended");
-  level._id_4A6B = 1;
+  level.func_4A6B = 1;
 
   for (;;) {
-  if (!isdefined(level._id_C2C8)) {
+  if (!isdefined(level.func_C2C8)) {
   wait 0.05;
   continue;
   }
 
-  var_0 = 1;
+  var_00 = 1;
 
-  while (!level._id_C2C8 buttonpressed("BUTTON_Y"))
+  while (!level.func_C2C8 buttonpressed("BUTTON_Y"))
   wait 0.05;
 
-  level._id_C2C8 playsound("mouse_click");
+  level.func_C2C8 playsound("mouse_click");
 
-  if (var_0) {
-  level._id_4A6B = level._id_4A6B * -1;
-  var_0 = 0;
+  if (var_00) {
+  level.func_4A6B = level.func_4A6B * -1;
+  var_00 = 0;
   }
 
-  while (level._id_C2C8 buttonpressed("BUTTON_Y"))
+  while (level.func_C2C8 buttonpressed("BUTTON_Y"))
   wait 0.05;
   }
 }
 
-_id_D0F6() {
-  level thread _id_C56E();
-  level thread _id_E459();
+player_init() {
+  level thread onplayerconnect();
+  level thread func_E459();
 }
 
-_id_E459() {
+func_E459() {
   level waittill("game_ended");
   setdvar("cg_draw2d", 1);
 }
 
-_id_C56E() {
-  level waittill("connected", var_0);
-  var_0 thread _id_DD78();
-  var_0 waittill("spawned_player");
+onplayerconnect() {
+  level waittill("connected", var_00);
+  var_00 thread func_DD78();
+  var_00 waittill("spawned_player");
   wait 1;
-  var_0 takeallweapons();
+  var_00 takeallweapons();
   setdvar("cg_draw2d", 0);
 
-  if (!isdefined(var_0))
+  if (!isdefined(var_00))
   return;
   else
-  level._id_C2C8 = var_0;
+  level.func_C2C8 = var_00;
 
-  var_0 thread _id_7C17();
-  _id_13FC9("main");
+  var_00 thread func_7C17();
+  func_13FC9("main");
 }
 
-_id_DD78() {
+func_DD78() {
   self endon("disconnect");
-  var_0 = "autoassign";
+  var_00 = "autoassign";
 
   while (!isdefined(self.pers["team"]))
   wait 0.05;
 
-  self notify("menuresponse", game["menu_team"], var_0);
+  self notify("menuresponse", game["menu_team"], var_00);
   wait 0.5;
-  var_1 = getarraykeys(level._id_400C);
-  var_2 = [];
+  var_01 = getarraykeys(level.classmap);
+  var_02 = [];
 
-  for (var_3 = 0; var_3 < var_1.size; var_3++) {
-  if (!issubstr(var_1[var_3], "custom"))
-  var_2[var_2.size] = var_1[var_3];
+  for (var_03 = 0; var_03 < var_1.size; var_3++) {
+  if (!issubstr(var_1[var_03], "custom"))
+  var_2[var_2.size] = var_1[var_03];
   }
 
   for (;;) {
-  var_4 = var_2[0];
-  self notify("menuresponse", "changeclass", var_4);
+  var_04 = var_2[0];
+  self notify("menuresponse", "changeclass", var_04);
   self waittill("spawned_player");
   wait 0.1;
   }
 }
 
-_id_7C17() {
+func_7C17() {
   level endon("game_ended");
   self endon("disconnect");
 
   for (;;) {
-  var_0 = self _meth_814C();
-  var_1 = vectortoangles(var_0);
-  level._id_E77B = int(var_1[1]);
+  var_00 = self getnormalizedmovement();
+  var_01 = vectortoangles(var_00);
+  level.func_E77B = int(var_1[1]);
   wait 0.05;
   }
 }
 
-_id_BF26(var_0, var_1, var_2) {
-  if (isdefined(level._id_DBDF) && level._id_DBDF.size) {}
+func_BF26(var_00, var_01, var_02) {
+  if (isdefined(level.func_DBDF) && level.func_DBDF.size) {}
 
-  var_3 = getent(var_2, "targetname");
-  var_4 = vectornormalize(anglestoforward(var_3.angles)) * 40;
-  level._id_DBDF[var_0] = [];
-  level.radial_button_group[var_0]["view_start"] = var_1;
-  level.radial_button_group[var_0]["view_pos"] = var_3.origin + var_4;
-  level.radial_button_group[var_0]["player_view_pos"] = var_3.origin;
-  level.radial_button_group[var_0]["view_angles"] = var_3.angles;
+  var_03 = getent(var_02, "targetname");
+  var_04 = vectornormalize(anglestoforward(var_3.angles)) * 40;
+  level.func_DBDF[var_00] = [];
+  level.radial_button_group[var_00]["view_start"] = var_01;
+  level.radial_button_group[var_00]["view_pos"] = var_3.origin + var_04;
+  level.radial_button_group[var_00]["player_view_pos"] = var_3.origin;
+  level.radial_button_group[var_00]["view_angles"] = var_3.angles;
 }
 
-_id_BF25(var_0, var_1, var_2, var_3) {
-  var_4 = getent(var_2, "targetname");
-  var_5 = _id_80A9(var_0, var_4);
-  var_6 = spawnstruct();
-  var_6._id_D699 = var_4.origin;
-  var_6._id_01AD = var_1;
-  var_6._id_724E = 1;
-  var_6._id_724D = (0.5, 0.5, 1);
-  var_6._id_D69A = var_5;
-  var_6._id_1577 = var_3;
-  var_6._id_DC07 = 8;
-  level._id_DBDF[var_0][level._id_DBDF[var_0].size] = var_6;
-  return var_6;
+func_BF25(var_00, var_01, var_02, var_03) {
+  var_04 = getent(var_02, "targetname");
+  var_05 = disableweaponpickup(var_00, var_04);
+  var_06 = spawnstruct();
+  var_6.pos = var_4.origin;
+  var_6.label = var_01;
+  var_6.func_724E = 1;
+  var_6.func_724D = (0.5, 0.5, 1);
+  var_6.func_D69A = var_05;
+  var_6.func_1577 = var_03;
+  var_6.func_DC07 = 8;
+  level.func_DBDF[var_00][level.func_DBDF[var_00].size] = var_06;
+  return var_06;
 }
 
-_id_12F12() {
+func_12F12() {
   level endon("game_ended");
 
   for (;;) {
-  if (!isdefined(level._id_DBDD)) {
+  if (!isdefined(level.func_DBDD)) {
   wait 0.05;
   continue;
   }
 
-  var_0 = level._id_1622;
+  var_00 = level.func_1622;
 
-  foreach (var_2 in level._id_DBDF[level._id_DBDD]) {
-  if (_id_9E4E(var_2._id_10BA0, var_2._id_62A6)) {
-  level._id_1622 = var_2;
+  foreach (var_02 in level.func_DBDF[level.func_DBDD]) {
+  if (func_9E4E(var_2.func_10BA0, var_2.func_62A6)) {
+  level.func_1622 = var_02;
   continue;
   }
 
-  var_2._id_724D = (0.5, 0.5, 1);
+  var_2.func_724D = (0.5, 0.5, 1);
   }
 
-  if (isdefined(level._id_1622)) {
-  level._id_1622._id_724D = (1, 1, 0.5);
+  if (isdefined(level.func_1622)) {
+  level.func_1622.func_724D = (1, 1, 0.5);
 
-  if (isdefined(var_0) && var_0 != level._id_1622)
-  level._id_C2C8 playsound("mouse_over");
+  if (isdefined(var_00) && var_00 != level.func_1622)
+  level.func_C2C8 playsound("mouse_over");
   }
 
   wait 0.05;
   }
 }
 
-_id_13B36() {
+func_13B36() {
   level endon("game_ended");
 
   for (;;) {
-  if (!isdefined(level._id_C2C8)) {
+  if (!isdefined(level.func_C2C8)) {
   wait 0.05;
   continue;
   }
 
-  var_0 = 1;
+  var_00 = 1;
 
-  while (!level._id_C2C8 buttonpressed("BUTTON_A"))
+  while (!level.func_C2C8 buttonpressed("BUTTON_A"))
   wait 0.05;
 
-  level._id_C2C8 playsound("mouse_click");
+  level.func_C2C8 playsound("mouse_click");
 
-  if (isdefined(level._id_1622) && var_0) {
-  level._id_1622 notify("select_button_pressed");
-  [[level._id_1622._id_1577]]();
-  var_0 = 0;
+  if (isdefined(level.func_1622) && var_00) {
+  level.func_1622 notify("select_button_pressed");
+  [[level.func_1622.func_1577]]();
+  var_00 = 0;
   }
 
-  while (level._id_C2C8 buttonpressed("BUTTON_A"))
+  while (level.func_C2C8 buttonpressed("BUTTON_A"))
   wait 0.05;
   }
 }
 
-_id_139A7() {
+func_139A7() {
   level endon("game_ended");
 
   for (;;) {
-  if (!isdefined(level._id_C2C8)) {
+  if (!isdefined(level.func_C2C8)) {
   wait 0.05;
   continue;
   }
 
-  var_0 = 1;
+  var_00 = 1;
 
-  while (!level._id_C2C8 buttonpressed("BUTTON_X"))
+  while (!level.func_C2C8 buttonpressed("BUTTON_X"))
   wait 0.05;
 
-  level._id_C2C8 playsound("mouse_click");
+  level.func_C2C8 playsound("mouse_click");
 
-  if (var_0) {
-  _id_1576();
-  var_0 = 0;
+  if (var_00) {
+  func_1576();
+  var_00 = 0;
   }
 
-  while (level._id_C2C8 buttonpressed("BUTTON_X"))
+  while (level.func_C2C8 buttonpressed("BUTTON_X"))
   wait 0.05;
   }
 }
 
-_id_10417(var_0) {
-  for (var_1 = 0; var_1 < var_0.size - 1; var_1++) {
-  for (var_2 = 0; var_2 < var_0.size - 1 - var_1; var_2++) {
-  if (var_0[var_2 + 1]._id_D69A < var_0[var_2]._id_D69A)
-  _id_32EA(var_0[var_2], var_0[var_2 + 1]);
+func_10417(var_00) {
+  for (var_01 = 0; var_01 < var_0.size - 1; var_1++) {
+  for (var_02 = 0; var_02 < var_0.size - 1 - var_01; var_2++) {
+  if (var_0[var_02 + 1].func_D69A < var_0[var_02].func_D69A)
+  button_sound(var_0[var_02], var_0[var_02 + 1]);
   }
   }
 }
 
-_id_32EA(var_0, var_1) {
-  var_2 = var_0._id_D699;
-  var_3 = var_0._id_01AD;
-  var_4 = var_0._id_D69A;
-  var_5 = var_0._id_1577;
-  var_6 = var_0._id_DC07;
-  var_0._id_D699 = var_1._id_D699;
-  var_0._id_01AD = var_1._id_01AD;
-  var_0._id_D69A = var_1._id_D69A;
-  var_0._id_1577 = var_1._id_1577;
-  var_0._id_DC07 = var_1._id_DC07;
-  var_1._id_D699 = var_2;
-  var_1._id_01AD = var_3;
-  var_1._id_D69A = var_4;
-  var_1._id_1577 = var_5;
-  var_1._id_DC07 = var_6;
+button_sound(var_00, var_01) {
+  var_02 = var_0.pos;
+  var_03 = var_0.label;
+  var_04 = var_0.func_D69A;
+  var_05 = var_0.func_1577;
+  var_06 = var_0.func_DC07;
+  var_0.pos = var_1.pos;
+  var_0.label = var_1.label;
+  var_0.func_D69A = var_1.func_D69A;
+  var_0.func_1577 = var_1.func_1577;
+  var_0.func_DC07 = var_1.func_DC07;
+  var_1.pos = var_02;
+  var_1.label = var_03;
+  var_1.func_D69A = var_04;
+  var_1.func_1577 = var_05;
+  var_1.func_DC07 = var_06;
 }
 
-_id_5B5C(var_0) {
-  foreach (var_2 in level._id_DBDF[var_0])
-  var_2 thread _id_5B5B(var_0);
+func_5B5C(var_00) {
+  foreach (var_02 in level.func_DBDF[var_00])
+  var_02 thread func_5B5B(var_00);
 }
 
-_id_5B5B(var_0) {
+func_5B5B(var_00) {
   level endon("game_ended");
   self endon("remove_button");
-  var_1 = level.radial_button_group[var_0]["view_pos"];
-  var_2 = var_1 + _id_DBDA(self._id_D69A, 4);
+  var_01 = level.radial_button_group[var_00]["view_pos"];
+  var_02 = var_01 + func_DBDA(self.func_D69A, 4);
 
   for (;;) {
-  var_3 = (1, 0, 0);
+  var_03 = (1, 0, 0);
 
-  if (_id_9E4E(self._id_10BA0, self._id_62A6))
-  var_3 = (1, 1, 0);
+  if (func_9E4E(self.func_10BA0, self.func_62A6))
+  var_03 = (1, 1, 0);
 
-  if (isdefined(level._id_4A6B) && level._id_4A6B > 0)
-  var_4 = var_1 + _id_DBDA(level._id_E77B, 2);
+  if (isdefined(level.func_4A6B) && level.func_4A6B > 0)
+  var_04 = var_01 + func_DBDA(level.func_E77B, 2);
 
   wait 0.05;
   }
 }
 
-_id_13FC9(var_0, var_1) {
-  level._id_1622 = undefined;
+func_13FC9(var_00, var_01) {
+  level.func_1622 = undefined;
 
-  if (isdefined(level._id_DBDD) && level._id_DBDD != "")
-  level._id_DBE1 = level._id_DBDD;
+  if (isdefined(level.func_DBDD) && level.func_DBDD != "")
+  level.func_DBE1 = level.func_DBDD;
   else
   {
-  level._id_DBE1 = "main";
-  level._id_DBDD = "main";
+  level.func_DBE1 = "main";
+  level.func_DBDD = "main";
   }
 
-  foreach (var_3 in level._id_DBDF[level._id_DBE1])
-  var_3 notify("remove_button");
+  foreach (var_03 in level.func_DBDF[level.func_DBE1])
+  var_03 notify("remove_button");
 
-  if (isdefined(var_1) && var_1)
-  level._id_C2C8 _id_83FD(level.radial_button_group[level._id_DBE1]["view_start"], var_0);
+  if (isdefined(var_01) && var_01)
+  level.func_C2C8 _meth_83FD(level.radial_button_group[level.func_DBE1]["view_start"], var_00);
   else
-  level._id_C2C8 _id_83FC(level.radial_button_group[var_0]["view_start"]);
+  level.func_C2C8 _meth_83FC(level.radial_button_group[var_00]["view_start"]);
 
-  level thread _id_5B5C(var_0);
-  level._id_DBDD = var_0;
+  level thread func_5B5C(var_00);
+  level.func_DBDD = var_00;
 }
 
-_id_80A9(var_0, var_1) {
-  var_2 = level.radial_button_group[var_0]["view_angles"];
-  var_3 = level.radial_button_group[var_0]["view_pos"];
-  var_3 = var_3 + vectornormalize(anglestoforward(var_2)) * 40;
-  var_4 = anglestoforward(var_2);
-  var_5 = vectornormalize(anglestoup(var_2));
-  var_6 = var_1.angles;
-  var_7 = var_1.origin;
-  var_8 = vectornormalize(vectorfromlinetopoint(var_3, var_3 + var_4, var_7));
-  var_9 = acos(vectordot(var_8, var_5));
+disableweaponpickup(var_00, var_01) {
+  var_02 = level.radial_button_group[var_00]["view_angles"];
+  var_03 = level.radial_button_group[var_00]["view_pos"];
+  var_03 = var_03 + vectornormalize(anglestoforward(var_02)) * 40;
+  var_04 = anglestoforward(var_02);
+  var_05 = vectornormalize(anglestoup(var_02));
+  var_06 = var_1.angles;
+  var_07 = var_1.origin;
+  var_08 = vectornormalize(vectorfromlinetopoint(var_03, var_03 + var_04, var_07));
+  var_09 = acos(vectordot(var_08, var_05));
 
-  if (vectordot(anglestoright(var_2), var_8) < 0)
-  var_9 = 360 - var_9;
+  if (vectordot(anglestoright(var_02), var_08) < 0)
+  var_09 = 360 - var_09;
 
-  return var_9;
+  return var_09;
 }
 
-_id_DBDA(var_0, var_1) {
-  var_2 = (270 - var_0, 0, 0);
-  var_3 = anglestoforward(var_2);
-  var_4 = vectornormalize(var_3);
-  var_5 = var_4 * var_1;
-  return var_5;
+func_DBDA(var_00, var_01) {
+  var_02 = (270 - var_00, 0, 0);
+  var_03 = anglestoforward(var_02);
+  var_04 = vectornormalize(var_03);
+  var_05 = var_04 * var_01;
+  return var_05;
 }
 
-_id_7FB4(var_0, var_1) {
-  var_2 = (var_0 + var_1 + 720) / 2 - 360;
-  return var_2;
+func_7FB4(var_00, var_01) {
+  var_02 = (var_00 + var_01 + 720) / 2 - 360;
+  return var_02;
 }
 
-_id_9E4E(var_0, var_1) {
-  var_2 = level._id_E77B > var_0 && level._id_E77B < 360;
-  var_3 = level._id_E77B > 0 && level._id_E77B < var_1;
+func_9E4E(var_00, var_01) {
+  var_02 = level.func_E77B > var_00 && level.func_E77B < 360;
+  var_03 = level.func_E77B > 0 && level.func_E77B < var_01;
 
-  if (var_0 > var_1)
-  var_4 = var_2 || var_3;
+  if (var_00 > var_01)
+  var_04 = var_02 || var_03;
   else
-  var_4 = level._id_E77B > var_0 && level._id_E77B < var_1;
+  var_04 = level.func_E77B > var_00 && level.func_E77B < var_01;
 
-  return var_4;
+  return var_04;
 }
 
-_id_1576() {
-  if (isdefined(level._id_DBDD) && level._id_DBDD != "main")
-  _id_13FC9("main", 1);
+func_1576() {
+  if (isdefined(level.func_DBDD) && level.func_DBDD != "main")
+  func_13FC9("main", 1);
   else
   return;
 }
 
-_id_157D() {
+func_157D() {
   iprintlnbold("action_weapons_primary");
-  _id_13FC9("weapons_primary");
+  func_13FC9("weapons_primary");
 }
 
-_id_157E() {
+func_157E() {
   iprintlnbold("action_weapons_secondary");
-  _id_13FC9("weapons_secondary");
+  func_13FC9("weapons_secondary");
 }
 
-_id_1578() {
+func_1578() {
   iprintlnbold("action_gears");
-  _id_13FC9("gears");
+  func_13FC9("gears");
 }
 
-_id_1579() {
+func_1579() {
   iprintlnbold("action_killstreak");
-  _id_13FC9("killstreak");
+  func_13FC9("killstreak");
 }
 
-_id_157A() {
+func_157A() {
   iprintlnbold("action_leaderboards");
-  _id_13FC9("leaderboards");
+  func_13FC9("leaderboards");
 }
 
-_id_1338C() {
-  level._id_1338D = [];
-  _id_31AD("player_view1_start");
-  _id_31AD("player_view2_start");
-  _id_31AD("player_view3_start");
-  _id_31AD("player_view4_start");
-  _id_31AD("player_view5_start");
+func_1338C() {
+  level.func_1338D = [];
+  func_31AD("player_view1_start");
+  func_31AD("player_view2_start");
+  func_31AD("player_view3_start");
+  func_31AD("player_view4_start");
+  func_31AD("player_view5_start");
 }
 
-_id_31AD(var_0) {
-  level._id_1338D[var_0] = [];
-  var_1 = getent(var_0, "targetname");
+func_31AD(var_00) {
+  level.func_1338D[var_00] = [];
+  var_01 = getent(var_00, "targetname");
 
-  for (level._id_1338D[var_0][level._id_1338D[var_0].size] = var_1; isdefined(var_1) && isdefined(var_1._id_0334); var_1 = var_2) {
-  var_2 = getent(var_1._id_0334, "targetname");
-  level._id_1338D[var_0][level._id_1338D[var_0].size] = var_2;
+  for (level.func_1338D[var_00][level.func_1338D[var_00].size] = var_01; isdefined(var_01) && isdefined(var_1.target); var_01 = var_02) {
+  var_02 = getent(var_1.target, "targetname");
+  level.func_1338D[var_00][level.func_1338D[var_00].size] = var_02;
   }
 }
 
-_id_83FC(var_0) {
-  if (!isdefined(level._id_5F21)) {
-  var_1 = level._id_1338D[var_0][0];
-  level._id_5F21 = spawn("script_model", var_1.origin);
-  level._id_5F21.angles = var_1.angles;
-  self setorigin(level._id_5F21.origin - (0, 0, 65));
-  self linkto(level._id_5F21);
+_meth_83FC(var_00) {
+  if (!isdefined(level.func_5F21)) {
+  var_01 = level.func_1338D[var_00][0];
+  level.func_5F21 = spawn("script_model", var_1.origin);
+  level.func_5F21.angles = var_1.angles;
+  self setorigin(level.func_5F21.origin - (0, 0, 65));
+  self linkto(level.func_5F21);
   wait 0.05;
-  self setplayerangles(level._id_5F21.angles);
-  thread _id_7284();
+  self setplayerangles(level.func_5F21.angles);
+  thread func_7284();
   }
 
-  var_2 = 1;
-  var_3 = abs(distance(level._id_5F21.origin, level._id_1338D[var_0][level._id_1338D[var_0].size - 1].origin));
-  var_2 = var_2 * (var_3 / 1200);
-  var_2 = max(var_2, 0.1);
-  var_4 = var_2;
+  var_02 = 1;
+  var_03 = abs(distance(level.func_5F21.origin, level.func_1338D[var_00][level.func_1338D[var_00].size - 1].origin));
+  var_02 = var_02 * (var_03 / 1200);
+  var_02 = max(var_02, 0.1);
+  var_04 = var_02;
 
   if (!1)
-  var_4 = var_4 * (var_2 * (level._id_1338D[var_0].size + 1));
+  var_04 = var_04 * (var_02 * (level.func_1338D[var_00].size + 1));
 
-  thread _id_2BD8(3, var_4);
+  thread func_2BD8(3, var_04);
 
-  foreach (var_7, var_6 in level._id_1338D[var_0]) {
+  foreach (var_07, var_06 in level.func_1338D[var_00]) {
   if (1) {
-  if (var_7 != level._id_1338D[var_0].size - 1)
+  if (var_07 != level.func_1338D[var_00].size - 1)
   continue;
   }
 
-  level._id_5F21 moveto(var_6.origin, var_2, var_2 * 0.5, 0);
-  level._id_5F21 rotateto(var_6.angles, var_2, var_2 * 0.5, 0);
-  wait(var_2);
+  level.func_5F21 moveto(var_6.origin, var_02, var_02 * 0.5, 0);
+  level.func_5F21 rotateto(var_6.angles, var_02, var_02 * 0.5, 0);
+  wait(var_02);
   }
 }
 
-_id_83FD(var_0, var_1) {
-  var_2 = 1;
-  var_3 = abs(distance(level._id_5F21.origin, level.radial_button_group[var_1]["player_view_pos"]));
-  var_2 = var_2 * (var_3 / 1200);
-  var_2 = max(var_2, 0.1);
-  var_4 = var_2;
+_meth_83FD(var_00, var_01) {
+  var_02 = 1;
+  var_03 = abs(distance(level.func_5F21.origin, level.radial_button_group[var_01]["player_view_pos"]));
+  var_02 = var_02 * (var_03 / 1200);
+  var_02 = max(var_02, 0.1);
+  var_04 = var_02;
 
   if (!1)
-  var_4 = var_4 * (var_2 * (level._id_1338D[var_0].size + 1));
+  var_04 = var_04 * (var_02 * (level.func_1338D[var_00].size + 1));
 
-  thread _id_2BD8(3, var_4);
+  thread func_2BD8(3, var_04);
 
   if (!1) {
-  for (var_5 = level._id_1338D[var_0].size - 1; var_5 >= 0; var_5--) {
-  var_6 = level._id_1338D[var_0][var_5];
-  level._id_5F21 moveto(var_6.origin, var_2);
-  level._id_5F21 rotateto(var_6.angles, var_2);
-  wait(var_2);
+  for (var_05 = level.func_1338D[var_00].size - 1; var_05 >= 0; var_5--) {
+  var_06 = level.func_1338D[var_00][var_05];
+  level.func_5F21 moveto(var_6.origin, var_02);
+  level.func_5F21 rotateto(var_6.angles, var_02);
+  wait(var_02);
   }
   }
 
-  thread _id_2BD8(3, var_2);
-  var_7 = level.radial_button_group[var_1]["player_view_pos"];
-  var_8 = level.radial_button_group[var_1]["view_angles"];
-  level._id_5F21 moveto(var_7, var_2, var_2 * 0.5, 0);
-  level._id_5F21 rotateto(var_8, var_2, var_2 * 0.5, 0);
-  wait(var_2);
+  thread func_2BD8(3, var_02);
+  var_07 = level.radial_button_group[var_01]["player_view_pos"];
+  var_08 = level.radial_button_group[var_01]["view_angles"];
+  level.func_5F21 moveto(var_07, var_02, var_02 * 0.5, 0);
+  level.func_5F21 rotateto(var_08, var_02, var_02 * 0.5, 0);
+  wait(var_02);
 }
 
-_id_126C0(var_0) {
-  self setblurforplayer(20, (var_0 + 0.2) / 2);
-  self setblurforplayer(0, (var_0 + 0.2) / 2);
-  self shellshock("frag_grenade_mp", var_0 + 0.2);
+func_126C0(var_00) {
+  self setblurforplayer(20, (var_00 + 0.2) / 2);
+  self setblurforplayer(0, (var_00 + 0.2) / 2);
+  self shellshock("frag_grenade_mp", var_00 + 0.2);
 }
 
-_id_2BD8(var_0, var_1) {
-  var_2 = int(var_1 / 0.05);
+func_2BD8(var_00, var_01) {
+  var_02 = int(var_01 / 0.05);
 
-  for (var_3 = 0; var_3 < var_2; var_3++) {
-  var_4 = var_3 / var_2;
-  var_5 = sin(180 * var_4);
-  var_6 = var_0 * var_5;
-  setdvar("r_blur", var_6);
+  for (var_03 = 0; var_03 < var_02; var_3++) {
+  var_04 = var_03 / var_02;
+  var_05 = sin(180 * var_04);
+  var_06 = var_00 * var_05;
+  setdvar("r_blur", var_06);
   wait 0.05;
   }
 
   setdvar("r_blur", 0);
 }
 
-_id_7284() {
+func_7284() {
   level endon("game_ended");
   self endon("disconnect");
-  level._id_5F21 endon("remove_dummy");
+  level.func_5F21 endon("remove_dummy");
 
   for (;;) {
-  self setplayerangles(level._id_5F21.angles);
+  self setplayerangles(level.func_5F21.angles);
   wait 0.05;
   }
 }

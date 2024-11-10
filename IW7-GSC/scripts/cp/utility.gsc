@@ -422,7 +422,7 @@ getuniqueid() {
 	var_00 = self getguid();
 	if(var_00 == "0000000000000000") {
 		if(isdefined(level.guidgen)) {
-			level.var_86BF++;
+			level.guidgen++;
 		}
 		else
 		{
@@ -599,11 +599,11 @@ strip_suffix(param_00,param_01) {
 playteamfxforclient(param_00,param_01,param_02,param_03,param_04,param_05) {
 	var_06 = undefined;
 	if(self.team != param_00) {
-		var_06 = function_01E1(scripts\engine\utility::getfx(param_03),param_01,self);
+		var_06 = spawnfxforclient(scripts\engine\utility::getfx(param_03),param_01,self);
 	}
 	else
 	{
-		var_06 = function_01E1(scripts\engine\utility::getfx(param_02),param_01,self);
+		var_06 = spawnfxforclient(scripts\engine\utility::getfx(param_02),param_01,self);
 	}
 
 	if(isdefined(var_06)) {
@@ -775,7 +775,7 @@ getkillstreakweapon(param_00) {
 }
 
 _objective_delete(param_00) {
-	function_0154(param_00);
+	objective_delete(param_00);
 	if(!isdefined(level.reclaimedreservedobjectives)) {
 		level.reclaimedreservedobjectives = [];
 		level.reclaimedreservedobjectives[0] = param_00;
@@ -922,7 +922,7 @@ weaponhasattachment(param_00,param_01) {
 }
 
 getweaponattachmentsbasenames(param_00) {
-	var_01 = function_00E3(param_00);
+	var_01 = getweaponattachments(param_00);
 	foreach(var_04, var_03 in var_01) {
 		var_01[var_04] = attachmentmap_tobase(var_03);
 	}
@@ -939,7 +939,7 @@ attachmentmap_tobase(param_00) {
 }
 
 bot_is_fireteam_mode() {
-	var_00 = function_001F() == 2;
+	var_00 = botautoconnectenabled() == 2;
 	if(var_00) {
 		if(!level.teambased || level.gametype != "war" && level.gametype != "dom") {
 			return 0;
@@ -1080,7 +1080,7 @@ iskillstreakweapon(param_00) {
 		return 1;
 	}
 
-	var_01 = function_0244(param_00);
+	var_01 = weaponinventorytype(param_00);
 	if(isdefined(var_01) && var_01 == "exclusive") {
 		return 1;
 	}
@@ -2257,7 +2257,7 @@ allow_player_teleport(param_00,param_01) {
 			}
 		}
 
-		self.var_55E3--;
+		self.disabledteleportation--;
 		if(!self.disabledteleportation) {
 			self.teleportdisableflags = [];
 			self.can_teleport = 1;
@@ -2280,7 +2280,7 @@ allow_player_teleport(param_00,param_01) {
 		self.disabledteleportation = 0;
 	}
 
-	self.var_55E3++;
+	self.disabledteleportation++;
 	self.can_teleport = 0;
 }
 
@@ -2302,7 +2302,7 @@ isteleportenabled() {
 
 allow_player_interactions(param_00) {
 	if(param_00) {
-		self.var_55CD--;
+		self.disabledinteractions--;
 		if(!self.disabledinteractions) {
 			self.interactions_disabled = undefined;
 			return;
@@ -2311,7 +2311,7 @@ allow_player_interactions(param_00) {
 		return;
 	}
 
-	self.var_55CD++;
+	self.disabledinteractions++;
 	self.interactions_disabled = 1;
 }
 
@@ -2762,7 +2762,7 @@ getdamagemodifiertotal() {
 }
 
 isinventoryprimaryweapon(param_00) {
-	switch(function_0244(param_00)) {
+	switch(weaponinventorytype(param_00)) {
 		case "altmode":
 		case "primary":
 			return 1;
@@ -2782,7 +2782,7 @@ _enablecollisionnotifies(param_00) {
 			self enablecollisionnotifies(1);
 		}
 
-		self.var_6262++;
+		self.enabledcollisionnotifies++;
 	}
 	else
 	{
@@ -2790,7 +2790,7 @@ _enablecollisionnotifies(param_00) {
 			self enablecollisionnotifies(0);
 		}
 
-		self.var_6262--;
+		self.enabledcollisionnotifies--;
 	}
 }
 
@@ -2799,9 +2799,9 @@ has_tag(param_00,param_01) {
 		return 0;
 	}
 
-	var_02 = function_00BC(param_00);
+	var_02 = getnumparts(param_00);
 	for(var_03 = 0;var_03 < var_02;var_03++) {
-		if(tolower(function_00BF(param_00,var_03)) == tolower(param_01)) {
+		if(tolower(getpartname(param_00,var_03)) == tolower(param_01)) {
 			return 1;
 		}
 	}
@@ -2848,7 +2848,7 @@ riotshieldname() {
 	}
 
 	foreach(var_02 in var_00) {
-		if(function_024C(var_02) == "riotshield") {
+		if(weapontype(var_02) == "riotshield") {
 			return var_02;
 		}
 	}
@@ -2904,7 +2904,7 @@ isriotshield(param_00) {
 		return 0;
 	}
 
-	return function_024C(param_00) == "riotshield";
+	return weapontype(param_00) == "riotshield";
 }
 
 isaltmodeweapon(param_00) {
@@ -2912,7 +2912,7 @@ isaltmodeweapon(param_00) {
 		return 0;
 	}
 
-	return function_0244(param_00) == "altmode";
+	return weaponinventorytype(param_00) == "altmode";
 }
 
 hasriotshield() {
@@ -3395,7 +3395,7 @@ restore_weapons_status(param_00) {
 
 	foreach(var_03 in self.copy_fullweaponlist) {
 		if(!self hasweapon(var_03)) {
-			var_06 = function_00E3(var_03);
+			var_06 = getweaponattachments(var_03);
 			var_07 = getcurrentcamoname(var_03);
 			self giveweapon(scripts\cp\cp_weapon::return_weapon_name_with_like_attachments(var_03,undefined,var_06,undefined,var_07),-1,0,-1,1);
 		}
@@ -3484,7 +3484,7 @@ restore_primary_weapons_only(param_00) {
 				else
 				{
 					var_07 = getcurrentcamoname(var_03);
-					var_08 = function_00E3(var_03);
+					var_08 = getweaponattachments(var_03);
 					self giveweapon(scripts\cp\cp_weapon::return_weapon_name_with_like_attachments(var_03,undefined,var_08,undefined,var_07),-1,0,-1,1);
 				}
 			}
@@ -4075,7 +4075,7 @@ reassign_weapon_name(param_00,param_01) {
 
 get_weapon_variant_id(param_00,param_01) {
 	var_02 = getbaseweaponname(param_01);
-	if(function_02D9("mp","LoadoutWeapon",var_02) && weaponhasvariants(var_02)) {
+	if(isenumvaluevalid("mp","LoadoutWeapon",var_02) && weaponhasvariants(var_02)) {
 		return param_00 getplayerdata("cp","zombiePlayerLoadout","zombiePlayerWeaponModels",var_02,"variantID");
 	}
 
@@ -4304,7 +4304,7 @@ cachelootweaponweaponinfo(param_00,param_01,param_02) {
 		level.lootweaponcache[param_01] = [];
 	}
 
-	var_03 = function_02C3(param_00);
+	var_03 = getweaponloottable(param_00);
 	var_04 = readweaponinfofromtable(var_03,param_02);
 	level.lootweaponcache[param_01][param_02] = var_04;
 	return var_04;
@@ -4704,7 +4704,7 @@ getweaponqualitybyid(param_00,param_01) {
 		return 0;
 	}
 
-	var_02 = function_02C3(param_00);
+	var_02 = getweaponloottable(param_00);
 	var_03 = int(tablelookup(var_02,0,param_01,4));
 	return var_03;
 }
@@ -5120,9 +5120,9 @@ is_goon(param_00) {
 }
 
 mark_dangerous_nodes(param_00,param_01,param_02) {
-	function_0139(param_00,param_01,1);
+	markdangerousnodes(param_00,param_01,1);
 	wait(param_02);
-	function_0139(param_00,param_01,0);
+	markdangerousnodes(param_00,param_01,0);
 }
 
 healthregeninit(param_00) {
@@ -5424,7 +5424,7 @@ allow_secondary_offhand_weapons(param_00) {
 			self.disabledsecondaryoffhandweapons = 0;
 		}
 
-		self.var_55DF--;
+		self.disabledsecondaryoffhandweapons--;
 		if(!self.disabledsecondaryoffhandweapons) {
 			self enableoffhandsecondaryweapons();
 			return;
@@ -5437,7 +5437,7 @@ allow_secondary_offhand_weapons(param_00) {
 		self.disabledsecondaryoffhandweapons = 0;
 	}
 
-	self.var_55DF++;
+	self.disabledsecondaryoffhandweapons++;
 	self disableoffhandsecondaryweapons();
 }
 
@@ -6115,7 +6115,7 @@ getvalidtakeweapon(param_00) {
 }
 
 getcurrentcamoname(param_00) {
-	var_01 = function_00E5(param_00);
+	var_01 = getweaponcamoname(param_00);
 	if(!isdefined(var_01)) {
 		return undefined;
 	}

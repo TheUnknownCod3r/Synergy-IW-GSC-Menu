@@ -94,7 +94,7 @@ func_11666() {
 	scripts\mp\_utility::_magicbullet("iw7_erad_mp",self.origin + (0,0,1000),self.origin + (0,0,2000),self);
 	self playrumbleonentity("damage_heavy");
 	earthquake(0.25,0.25,self.origin,32);
-	self.var_9F1B++;
+	self.isreaping++;
 	thread func_11668();
 	thread func_139E6();
 	func_DD92(var_04,var_01,var_07);
@@ -168,7 +168,7 @@ func_DD92(param_00,param_01,param_02) {
 	thread func_DD91(self,var_04);
 	func_DD93(param_00,var_04,param_01,param_02);
 	wait(0.25);
-	self.var_9F1B--;
+	self.isreaping--;
 	self notify("stop_reap");
 }
 

@@ -29,5 +29,5 @@ func_2AD0() {
 
 func_DEE8() {
 	func_2AD0();
-	function_02D8("alien_goon");
+	btregistertree("alien_goon");
 }

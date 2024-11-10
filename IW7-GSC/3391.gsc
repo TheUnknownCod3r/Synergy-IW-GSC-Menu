@@ -351,7 +351,7 @@ func_2761(param_00,param_01) {
 	var_02 = param_01 getweaponslistprimaries();
 	foreach(var_04 in var_02) {
 		param_01 givemaxammo(var_04);
-		if(function_0249(var_04) == weaponclipsize(var_04)) {
+		if(weaponmaxammo(var_04) == weaponclipsize(var_04)) {
 			param_01 setweaponammoclip(var_04,weaponclipsize(var_04));
 		}
 	}

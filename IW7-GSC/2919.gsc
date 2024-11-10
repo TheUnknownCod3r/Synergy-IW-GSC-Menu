@@ -3,7 +3,7 @@
  * Script: scripts\2919.gsc
 ***************************************/
 
-_id_DBCA() {
+func_DBCA() {
   precacheshader("hud_radar_background");
   precacheshader("hud_radar_background_yz");
   precacheshader("hud_radar_friendly");
@@ -11,59 +11,59 @@ _id_DBCA() {
   precacheshader("hud_radar_capital_ship");
 }
 
-_id_DBC9() {
-  self._id_DBC5 = spawnstruct();
-  self._id_DBC5._id_26F0 = 0;
-  self._id_DBC5._id_1D2C = 0;
-  self._id_DBC5._id_26E3 = 0;
-  self._id_DBC5._id_1CC7 = 0;
-  self._id_DBC6 = [];
+func_DBC9() {
+  self.func_DBC5 = spawnstruct();
+  self.func_DBC5.func_26F0 = 0;
+  self.func_DBC5.func_1D2C = 0;
+  self.func_DBC5.func_26E3 = 0;
+  self.func_DBC5.func_1CC7 = 0;
+  self.func_DBC6 = [];
   setdvarifuninitialized("radar_color_dist_scaled", 1);
   setdvarifuninitialized("radar_yz", 1);
 }
 
-_id_DBCC() {
-  level._id_DBD5 = 1;
+func_DBCC() {
+  level.func_DBD5 = 1;
 
-  if (!isdefined(self._id_DBC1)) {
-  self._id_DBC1 = _id_0B3F::_id_499B("hud_radar_background", 100, 100);
-  self._id_DBC1 _id_0B3F::_id_F801("BOTTOMRIGHT", "BOTTOMRIGHT", -10, -10, 0);
-  self._id_DBC1._id_02A4 = -10;
-  self._id_DBC1._id_FC44 = "hud_radar_background";
+  if (!isdefined(self.func_DBC1)) {
+  self.func_DBC1 = scripts/sp/hud_util::func_499B("hud_radar_background", 100, 100);
+  self.func_DBC1 scripts/sp/hud_util::setpoint("BOTTOMRIGHT", "BOTTOMRIGHT", -10, -10, 0);
+  self.func_DBC1.sort = -10;
+  self.func_DBC1.shader = "hud_radar_background";
   } else {
-  self._id_DBC1.alpha = 1.0;
+  self.func_DBC1.alpha = 1.0;
 
-  foreach (var_1 in self._id_DBC6)
-  var_1._id_DBC2.alpha = 1.0;
+  foreach (var_01 in self.func_DBC6)
+  var_1.func_DBC2.alpha = 1.0;
   }
 
-  thread _id_DBCD();
+  thread func_DBCD();
 }
 
-_id_DBCD() {
+func_DBCD() {
   self endon("radar_remove");
 
   for (;;) {
-  if (scripts\engine\utility::_id_9CEE(self._id_DBC5._id_26F0) || scripts\engine\utility::_id_9CEE(self._id_DBC5._id_1D2C)) {
-  foreach (var_1 in _id_0B91::_id_81FF()) {
-  var_2 = var_1 _id_DBC7();
+  if (scripts\engine\utility::is_true(self.func_DBC5.func_26F0) || scripts\engine\utility::is_true(self.func_DBC5.func_1D2C)) {
+  foreach (var_01 in scripts/sp/utility::maymovefrompointtopoint()) {
+  var_02 = var_01 func_DBC7();
 
-  if (isdefined(var_2) && (var_2 == "axis" && scripts\engine\utility::_id_9CEE(self._id_DBC5._id_26F0) || var_2 == "allies" && scripts\engine\utility::_id_9CEE(self._id_DBC5._id_1D2C)))
-  _id_DBC0(var_1);
+  if (isdefined(var_02) && (var_02 == "axis" && scripts\engine\utility::is_true(self.func_DBC5.func_26F0) || var_02 == "allies" && scripts\engine\utility::is_true(self.func_DBC5.func_1D2C)))
+  func_DBC0(var_01);
   }
   }
 
-  if (scripts\engine\utility::_id_9CEE(self._id_DBC5._id_26E3)) {
-  foreach (var_5 in _func_072("axis"))
-  _id_DBC0(var_5);
+  if (scripts\engine\utility::is_true(self.func_DBC5.func_26E3)) {
+  foreach (var_05 in _getaiarray("axis"))
+  func_DBC0(var_05);
   }
 
-  if (scripts\engine\utility::_id_9CEE(self._id_DBC5._id_1CC7)) {
-  foreach (var_5 in _func_072("allies"))
-  _id_DBC0(var_5);
+  if (scripts\engine\utility::is_true(self.func_DBC5.func_1CC7)) {
+  foreach (var_05 in _getaiarray("allies"))
+  func_DBC0(var_05);
   }
 
-  var_9 = anglestoforward(self getplayerangles());
+  var_09 = anglestoforward(self getplayerangles());
   var_10 = anglestoup(self getplayerangles());
   var_11 = anglestoright(self getplayerangles());
   var_12 = self geteye();
@@ -71,223 +71,223 @@ _id_DBCD() {
   if (isdefined(self _meth_8473()))
   var_12 = self _meth_8473() gettagorigin("tag_camera");
 
-  foreach (var_14 in self._id_DBC6) {
+  foreach (var_14 in self.func_DBC6) {
   var_15 = var_14.origin - var_12;
 
   if (getdvarint("radar_yz") == 0) {
-  _id_DBC3(var_14, var_9, var_11, var_10, var_15);
+  func_DBC3(var_14, var_09, var_11, var_10, var_15);
   continue;
   }
 
-  _id_DBC4(var_14, var_9, var_11, var_10, var_15);
+  func_DBC4(var_14, var_09, var_11, var_10, var_15);
   }
 
-  if (getdvarint("radar_yz") >= 1 && self._id_DBC1._id_FC44 != "hud_radar_background_yz") {
-  self._id_DBC1 setshader("hud_radar_background_yz", 100, 100);
-  self._id_DBC1._id_FC44 = "hud_radar_background_yz";
+  if (getdvarint("radar_yz") >= 1 && self.func_DBC1.shader != "hud_radar_background_yz") {
+  self.func_DBC1 setshader("hud_radar_background_yz", 100, 100);
+  self.func_DBC1.shader = "hud_radar_background_yz";
   }
-  else if (getdvarint("radar_yz") == 0 && self._id_DBC1._id_FC44 != "hud_radar_background") {
-  self._id_DBC1 setshader("hud_radar_background", 100, 100);
-  self._id_DBC1._id_FC44 = "hud_radar_background";
+  else if (getdvarint("radar_yz") == 0 && self.func_DBC1.shader != "hud_radar_background") {
+  self.func_DBC1 setshader("hud_radar_background", 100, 100);
+  self.func_DBC1.shader = "hud_radar_background";
   }
 
   wait 0.05;
   }
 }
 
-_id_DBC3(var_0, var_1, var_2, var_3, var_4) {
-  var_5 = vectordot(var_1, var_4);
-  var_6 = vectordot(var_2, var_4);
-  var_7 = vectordot(var_3, var_4);
-  var_8 = (var_5, var_6, 0);
-  var_9 = length(var_8);
-  var_10 = vectornormalize(var_8);
-  var_9 = _func_17B(min(var_9 / 63360, 1.0), 0.5);
-  var_11 = var_9 * var_10[1] * (self._id_DBC1._id_039F - var_0._id_DBC2._id_039F * 2.0) / 2.0;
-  var_12 = var_9 * var_10[0] * -1.0 * (self._id_DBC1.height - var_0._id_DBC2.height * 2.0) / 2.0;
-  var_13 = clamp(scripts\engine\utility::_id_101EA(var_7) * abs(var_7) / 63360, -1.0, 1.0);
-  var_0._id_DBC2 _id_0B3F::_id_F801("", undefined, var_11, var_12, 0.05);
+func_DBC3(var_00, var_01, var_02, var_03, var_04) {
+  var_05 = vectordot(var_01, var_04);
+  var_06 = vectordot(var_02, var_04);
+  var_07 = vectordot(var_03, var_04);
+  var_08 = (var_05, var_06, 0);
+  var_09 = length(var_08);
+  var_10 = vectornormalize(var_08);
+  var_09 = _pow(min(var_09 / 63360, 1.0), 0.5);
+  var_11 = var_09 * var_10[1] * (self.func_DBC1.width - var_0.func_DBC2.width * 2.0) / 2.0;
+  var_12 = var_09 * var_10[0] * -1.0 * (self.func_DBC1.height - var_0.func_DBC2.height * 2.0) / 2.0;
+  var_13 = clamp(scripts\engine\utility::sign(var_07) * abs(var_07) / 63360, -1.0, 1.0);
+  var_0.func_DBC2 scripts/sp/hud_util::setpoint("", undefined, var_11, var_12, 0.05);
 
   if (getdvarint("radar_color_dist_scaled") >= 1)
-  var_0._id_DBC2._id_00B9 = (scripts\engine\utility::ter_op(var_13 >= 0, 1.0, _func_17B(1.0 + var_13, 4)), _func_17B(1.0 - abs(var_13), 1), scripts\engine\utility::ter_op(var_13 <= 0, 1.0, _func_17B(1.0 - var_13, 4))) * var_0._id_DBC2._id_439E;
+  var_0.func_DBC2.color = (scripts\engine\utility::ter_op(var_13 >= 0, 1.0, _pow(1.0 + var_13, 4)), _pow(1.0 - abs(var_13), 1), scripts\engine\utility::ter_op(var_13 <= 0, 1.0, _pow(1.0 - var_13, 4))) * var_0.func_DBC2.func_439E;
   else
-  var_0._id_DBC2._id_00B9 = (1, 0, 0) * var_0._id_DBC2._id_439E;
+  var_0.func_DBC2.color = (1, 0, 0) * var_0.func_DBC2.func_439E;
 
-  var_0._id_DBC2.alpha = 1.0;
+  var_0.func_DBC2.alpha = 1.0;
 
-  if (scripts\engine\utility::_id_9CEE(var_0._id_DBC2._id_EB9C)) {
-  var_14 = _func_17B(0.75 * (1.0 - var_9) + 0.25, 0.5);
-  var_0._id_DBC2._id_039F = int(ceil(var_0._id_DBC2._id_13D1C * var_14));
-  var_0._id_DBC2.height = int(ceil(var_0._id_DBC2._id_8D0C * var_14));
-  var_0._id_DBC2 _meth_8276(0.25, var_0._id_DBC2._id_039F, var_0._id_DBC2.height);
+  if (scripts\engine\utility::is_true(var_0.func_DBC2.func_EB9C)) {
+  var_14 = _pow(0.75 * (1.0 - var_09) + 0.25, 0.5);
+  var_0.func_DBC2.width = int(ceil(var_0.func_DBC2.func_13D1C * var_14));
+  var_0.func_DBC2.height = int(ceil(var_0.func_DBC2.func_8D0C * var_14));
+  var_0.func_DBC2 scaleovertime(0.25, var_0.func_DBC2.width, var_0.func_DBC2.height);
   }
 
-  if (scripts\engine\utility::_id_9CEE(var_0._id_DBC2._id_E6F5)) {
+  if (scripts\engine\utility::is_true(var_0.func_DBC2.func_E6F5)) {
   var_15 = anglestoforward(var_0.angles);
-  var_16 = vectordot(var_15, var_1);
-  var_17 = vectordot(var_15, var_3);
-  var_18 = vectordot(var_15, var_2);
-  var_19 = vectornormalize(var_1 * var_16 + var_1 * var_17 + var_2 * var_18);
-  var_5 = vectordot(var_1, var_19);
-  var_6 = vectordot(var_2, var_19);
-  var_0._id_DBC2._id_026E = acos(var_5) * scripts\engine\utility::_id_101EA(var_6);
+  var_16 = vectordot(var_15, var_01);
+  var_17 = vectordot(var_15, var_03);
+  var_18 = vectordot(var_15, var_02);
+  var_19 = vectornormalize(var_01 * var_16 + var_01 * var_17 + var_02 * var_18);
+  var_05 = vectordot(var_01, var_19);
+  var_06 = vectordot(var_02, var_19);
+  var_0.func_DBC2.rotation = acos(var_05) * scripts\engine\utility::sign(var_06);
   }
 }
 
-_id_DBC4(var_0, var_1, var_2, var_3, var_4) {
-  var_5 = length(var_4);
-  var_6 = vectordot(var_1, var_4);
+func_DBC4(var_00, var_01, var_02, var_03, var_04) {
+  var_05 = length(var_04);
+  var_06 = vectordot(var_01, var_04);
 
-  if (var_6 > 0.0)
-  var_4 = vectornormalize(var_4);
+  if (var_06 > 0.0)
+  var_04 = vectornormalize(var_04);
 
-  var_7 = vectordot(var_2, var_4);
-  var_8 = vectordot(var_3, var_4);
-  var_9 = (var_7, var_8, 0);
+  var_07 = vectordot(var_02, var_04);
+  var_08 = vectordot(var_03, var_04);
+  var_09 = (var_07, var_08, 0);
 
-  if (var_6 <= 0.0)
-  var_9 = vectornormalize(var_9);
+  if (var_06 <= 0.0)
+  var_09 = vectornormalize(var_09);
 
-  var_10 = var_9[0] * (self._id_DBC1._id_039F - var_0._id_DBC2._id_039F * 2.0) / 2.0;
-  var_11 = var_9[1] * -1.0 * (self._id_DBC1.height - var_0._id_DBC2.height * 2.0) / 2.0;
-  var_12 = clamp(var_5 / 63360, 0.0, 1.0);
-  var_0._id_DBC2 _id_0B3F::_id_F801("", undefined, var_10, var_11, 0.05);
+  var_10 = var_9[0] * (self.func_DBC1.width - var_0.func_DBC2.width * 2.0) / 2.0;
+  var_11 = var_9[1] * -1.0 * (self.func_DBC1.height - var_0.func_DBC2.height * 2.0) / 2.0;
+  var_12 = clamp(var_05 / 63360, 0.0, 1.0);
+  var_0.func_DBC2 scripts/sp/hud_util::setpoint("", undefined, var_10, var_11, 0.05);
 
   if (getdvarint("radar_color_dist_scaled") >= 1)
-  var_0._id_DBC2._id_00B9 = (0.5 * (1.0 - _func_17B(var_12, 0.5)) + 0.5, 0.0, 0.0) * var_0._id_DBC2._id_439E;
+  var_0.func_DBC2.color = (0.5 * (1.0 - _pow(var_12, 0.5)) + 0.5, 0.0, 0.0) * var_0.func_DBC2.func_439E;
   else
-  var_0._id_DBC2._id_00B9 = (1, 0, 0) * var_0._id_DBC2._id_439E;
+  var_0.func_DBC2.color = (1, 0, 0) * var_0.func_DBC2.func_439E;
 
-  if (var_0._id_DBC2._id_FC44 == "hud_radar_capital_ship")
-  var_0._id_DBC2._id_00B9 = (var_0._id_DBC2._id_00B9[0], var_0._id_DBC2._id_00B9[0], var_0._id_DBC2._id_00B9[0]);
+  if (var_0.func_DBC2.shader == "hud_radar_capital_ship")
+  var_0.func_DBC2.color = (var_0.func_DBC2.color[0], var_0.func_DBC2.color[0], var_0.func_DBC2.color[0]);
 
-  if (var_6 <= 0.0)
-  var_0._id_DBC2.alpha = clamp(1.0 + vectordot(var_1, vectornormalize(var_4)), 0.0, 1.0);
+  if (var_06 <= 0.0)
+  var_0.func_DBC2.alpha = clamp(1.0 + vectordot(var_01, vectornormalize(var_04)), 0.0, 1.0);
 
-  if (scripts\engine\utility::_id_9CEE(var_0._id_DBC2._id_EB9C)) {
-  var_13 = _func_17B(0.75 * (1.0 - _func_17B(var_12, 2.0)) + 0.25, 0.5);
-  var_0._id_DBC2._id_039F = int(ceil(var_0._id_DBC2._id_13D1C * var_13));
-  var_0._id_DBC2.height = int(ceil(var_0._id_DBC2._id_8D0C * var_13));
-  var_0._id_DBC2 _meth_8276(0.25, var_0._id_DBC2._id_039F, var_0._id_DBC2.height);
+  if (scripts\engine\utility::is_true(var_0.func_DBC2.func_EB9C)) {
+  var_13 = _pow(0.75 * (1.0 - _pow(var_12, 2.0)) + 0.25, 0.5);
+  var_0.func_DBC2.width = int(ceil(var_0.func_DBC2.func_13D1C * var_13));
+  var_0.func_DBC2.height = int(ceil(var_0.func_DBC2.func_8D0C * var_13));
+  var_0.func_DBC2 scaleovertime(0.25, var_0.func_DBC2.width, var_0.func_DBC2.height);
   }
 
-  if (scripts\engine\utility::_id_9CEE(var_0._id_DBC2._id_E6F5)) {
+  if (scripts\engine\utility::is_true(var_0.func_DBC2.func_E6F5)) {
   var_14 = anglestoforward(var_0.angles);
-  var_15 = vectordot(var_14, var_1);
-  var_16 = vectordot(var_14, var_3);
-  var_17 = vectordot(var_14, var_2);
-  var_18 = vectornormalize(var_3 * var_15 + var_3 * var_16 + var_2 * var_17);
-  var_6 = vectordot(var_3, var_18);
-  var_7 = vectordot(var_2, var_18);
-  var_0._id_DBC2._id_026E = acos(clamp(var_6, -1.0, 1.0)) * scripts\engine\utility::_id_101EA(var_7);
+  var_15 = vectordot(var_14, var_01);
+  var_16 = vectordot(var_14, var_03);
+  var_17 = vectordot(var_14, var_02);
+  var_18 = vectornormalize(var_03 * var_15 + var_03 * var_16 + var_02 * var_17);
+  var_06 = vectordot(var_03, var_18);
+  var_07 = vectordot(var_02, var_18);
+  var_0.func_DBC2.rotation = acos(clamp(var_06, -1.0, 1.0)) * scripts\engine\utility::sign(var_07);
   }
 }
 
-_id_DBC7() {
+func_DBC7() {
   if (isdefined(self.team))
   return self.team;
-  else if (isdefined(self._id_EEDE))
-  return self._id_EEDE;
+  else if (isdefined(self.script_team))
+  return self.script_team;
 
   return undefined;
 }
 
-_id_DBC8() {
-  self._id_DBC1.alpha = 0.0;
+func_DBC8() {
+  self.func_DBC1.alpha = 0.0;
 
-  foreach (var_1 in self._id_DBC6)
-  var_1._id_DBC2.alpha = 0;
+  foreach (var_01 in self.func_DBC6)
+  var_1.func_DBC2.alpha = 0;
 }
 
-_id_DBCB() {
+func_DBCB() {
   self notify("radar_remove");
-  level._id_DBD5 = undefined;
+  level.func_DBD5 = undefined;
 
-  foreach (var_1 in self._id_DBC6)
-  _id_DBD0(var_1);
+  foreach (var_01 in self.func_DBC6)
+  func_DBD0(var_01);
 
-  self._id_DBC1 destroy();
-  self._id_DBC1 = undefined;
-  self._id_DBC6 = [];
+  self.func_DBC1 destroy();
+  self.func_DBC1 = undefined;
+  self.func_DBC6 = [];
 }
 
-_id_DBC0(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
-  if (scripts\engine\utility::array_contains(self._id_DBC6, var_0))
+func_DBC0(var_00, var_01, var_02, var_03, var_04, var_05, var_06) {
+  if (scripts\engine\utility::array_contains(self.func_DBC6, var_00))
   return;
 
-  var_7 = "hud_radar_enemy";
-  var_8 = 3;
-  var_9 = 3;
+  var_07 = "hud_radar_enemy";
+  var_08 = 3;
+  var_09 = 3;
   var_10 = 1.0;
 
-  if (isdefined(var_2))
-  var_7 = var_2;
+  if (isdefined(var_02))
+  var_07 = var_02;
   else if (issubstr(var_0.classname, "capitalship")) {
-  var_7 = "hud_radar_capital_ship";
-  var_8 = 20;
-  var_9 = 20;
+  var_07 = "hud_radar_capital_ship";
+  var_08 = 20;
+  var_09 = 20;
   var_10 = 0.5;
 
-  if (!isdefined(var_5))
-  var_5 = 1;
+  if (!isdefined(var_05))
+  var_05 = 1;
 
-  if (!isdefined(var_6))
-  var_6 = 1;
+  if (!isdefined(var_06))
+  var_06 = 1;
   }
-  else if (isdefined(var_1) && isenemyteam(var_1, self.team) || isdefined(var_0 _id_DBC7()) && isenemyteam(var_0 _id_DBC7(), self.team))
-  var_7 = "hud_radar_friendly";
+  else if (isdefined(var_01) && isenemyteam(var_01, self.team) || isdefined(var_00 func_DBC7()) && isenemyteam(var_00 func_DBC7(), self.team))
+  var_07 = "hud_radar_friendly";
 
-  if (isdefined(var_3))
-  var_8 = var_3;
+  if (isdefined(var_03))
+  var_08 = var_03;
 
-  if (isdefined(var_4))
-  var_9 = var_4;
+  if (isdefined(var_04))
+  var_09 = var_04;
 
-  if (!isdefined(self._id_DBC1))
-  _id_DBCC();
+  if (!isdefined(self.func_DBC1))
+  func_DBCC();
 
-  self._id_DBC6[self._id_DBC6.size] = var_0;
-  var_0._id_DBC2 = _id_0B3F::_id_49D9(var_7, var_8, var_9);
-  var_0._id_DBC2 _id_0B3F::_id_F801("", undefined, 0, 0);
-  var_0._id_DBC2 _id_0B3F::_id_F7D6(self._id_DBC1);
-  var_0._id_DBC2._id_00B9 = (1, 1, 1);
-  var_0._id_DBC2._id_02A4 = 10;
-  var_0._id_DBC2._id_FC44 = var_7;
-  var_0._id_DBC2._id_E6F5 = var_5;
-  var_0._id_DBC2._id_EB9C = var_6;
-  var_0._id_DBC2._id_13D1C = var_8;
-  var_0._id_DBC2._id_8D0C = var_9;
-  var_0._id_DBC2._id_439E = var_10;
+  self.func_DBC6[self.func_DBC6.size] = var_00;
+  var_0.func_DBC2 = scripts/sp/hud_util::createicon(var_07, var_08, var_09);
+  var_0.func_DBC2 scripts/sp/hud_util::setpoint("", undefined, 0, 0);
+  var_0.func_DBC2 scripts/sp/hud_util::setparent(self.func_DBC1);
+  var_0.func_DBC2.color = (1, 1, 1);
+  var_0.func_DBC2.sort = 10;
+  var_0.func_DBC2.shader = var_07;
+  var_0.func_DBC2.func_E6F5 = var_05;
+  var_0.func_DBC2.func_EB9C = var_06;
+  var_0.func_DBC2.func_13D1C = var_08;
+  var_0.func_DBC2.func_8D0C = var_09;
+  var_0.func_DBC2.func_439E = var_10;
 
-  if (var_8 > 3)
-  var_0._id_DBC2._id_02A4 = var_0._id_DBC2._id_02A4 - 1;
+  if (var_08 > 3)
+  var_0.func_DBC2.sort = var_0.func_DBC2.sort - 1;
 
-  thread _id_DBCF(var_0);
+  thread func_DBCF(var_00);
 }
 
-_id_DBD0(var_0) {
-  if (isdefined(var_0._id_DBC2)) {
-  var_0._id_DBC2 destroy();
-  var_0._id_DBC2 = undefined;
+func_DBD0(var_00) {
+  if (isdefined(var_0.func_DBC2)) {
+  var_0.func_DBC2 destroy();
+  var_0.func_DBC2 = undefined;
   }
 
-  self._id_DBC6 = scripts\engine\utility::array_remove(self._id_DBC6, var_0);
-  var_0 notify("radar_ent_removed");
+  self.func_DBC6 = scripts\engine\utility::array_remove(self.func_DBC6, var_00);
+  var_00 notify("radar_ent_removed");
 }
 
-_id_DBD3(var_0, var_1) {
-  self._id_DBC5._id_26F0 = var_0;
-  self._id_DBC5._id_1D2C = var_1;
+func_DBD3(var_00, var_01) {
+  self.func_DBC5.func_26F0 = var_00;
+  self.func_DBC5.func_1D2C = var_01;
 }
 
-_id_DBD2(var_0, var_1) {
-  self._id_DBC5._id_26E3 = var_0;
-  self._id_DBC5._id_1CC7 = var_1;
+func_DBD2(var_00, var_01) {
+  self.func_DBC5.func_26E3 = var_00;
+  self.func_DBC5.func_1CC7 = var_01;
 }
 
-_id_DBCF(var_0) {
-  var_0 endon("radar_ent_removed");
+func_DBCF(var_00) {
+  var_00 endon("radar_ent_removed");
   self endon("radar_remove");
-  var_0 scripts\engine\utility::waittill_any("death", "entitydeleted");
-  thread _id_DBD0(var_0);
+  var_00 scripts\engine\utility::waittill_any("death", "entitydeleted");
+  thread func_DBD0(var_00);
 }

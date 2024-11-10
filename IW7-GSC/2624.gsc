@@ -4,324 +4,324 @@
 ***************************************/
 
 main() {
-  if (isdefined(level._id_CBD2))
+  if (isdefined(level.pipes_init))
   return;
 
-  level._id_CBD2 = 1;
-  var_0 = getentarray("pipe_shootable", "targetname");
+  level.pipes_init = 1;
+  var_00 = getentarray("pipe_shootable", "targetname");
 
   if (!var_0.size)
   return;
 
-  level._id_1367 = spawnstruct();
-  level._id_1367._id_C1FD = 0;
-  var_0 thread _id_D80E();
-  var_0 thread _id_B6A0();
-  thread _id_D6D7(var_0);
+  level._pipes = spawnstruct();
+  level._pipes.num_pipe_fx = 0;
+  var_00 thread precachefx();
+  var_00 thread methodsinit();
+  thread post_load(var_00);
 }
 
-_id_D6D7(var_0) {
+post_load(var_00) {
   waittillframeend;
 
   if (level.createfx_enabled)
   return;
 
-  scripts\engine\utility::_id_22D2(var_0, ::_id_CBD4);
+  scripts\engine\utility::array_thread(var_00, ::pipesetup);
 }
 
-_id_CBD4() {
+pipesetup() {
   self setcandamage(1);
-  self _meth_82B8(0);
-  self._id_CBCD = [];
-  var_0 = undefined;
+  self give_crafted_medusa(0);
+  self.pipe_fx_array = [];
+  var_00 = undefined;
 
-  if (isdefined(self._id_0334)) {
-  var_0 = scripts\engine\utility::_id_817E(self._id_0334, "targetname");
-  self._id_1491 = var_0.origin;
-  var_1 = anglestoforward(var_0.angles);
-  var_1 = var_1 * 128;
-  self._id_26FF = self._id_1491 + var_1;
+  if (isdefined(self.target)) {
+  var_00 = scripts\engine\utility::getstruct(self.target, "targetname");
+  self.a = var_0.origin;
+  var_01 = anglestoforward(var_0.angles);
+  var_01 = var_01 * 128;
+  self.b = self.a + var_01;
   } else {
-  var_1 = anglestoforward(self.angles);
-  var_2 = var_1 * 64;
-  self._id_1491 = self.origin + var_2;
-  var_2 = var_1 * -64;
-  self._id_26FF = self.origin + var_2;
+  var_01 = anglestoforward(self.angles);
+  var_02 = var_01 * 64;
+  self.a = self.origin + var_02;
+  var_02 = var_01 * -64;
+  self.b = self.origin + var_02;
   }
 
-  thread _id_CBCF();
+  thread pipe_wait_loop();
 }
 
-_id_CBCF() {
-  var_0 = (0, 0, 0);
-  var_1 = 0;
-  var_2 = 4;
+pipe_wait_loop() {
+  var_00 = (0, 0, 0);
+  var_01 = 0;
+  var_02 = 4;
 
   for (;;) {
-  self waittill("damage", var_3, var_4, var_5, var_0, var_6);
+  self waittill("damage", var_03, var_04, var_05, var_00, var_06);
 
-  if (var_1) {
+  if (var_01) {
   if (randomint(100) <= 33)
   continue;
   }
 
-  var_1 = 1;
-  var_7 = _id_CBCE(var_5, var_0, var_6, var_4);
+  var_01 = 1;
+  var_07 = pipe_logic(var_05, var_00, var_06, var_04);
 
-  if (var_7)
+  if (var_07)
   var_2--;
 
-  if (var_2 <= 0)
+  if (var_02 <= 0)
   break;
   }
 
   self setcandamage(0);
 }
 
-_id_CBCE(var_0, var_1, var_2, var_3) {
-  if (level._id_1367._id_C1FD > 12)
+pipe_logic(var_00, var_01, var_02, var_03) {
+  if (level._pipes.num_pipe_fx > 12)
   return 0;
 
-  if (!isdefined(level._id_1367._id_1366[var_2]))
-  var_1 = _id_CBCA(var_1, var_2);
+  if (!isdefined(level._pipes._pipe_methods[var_02]))
+  var_01 = pipe_calc_nofx(var_01, var_02);
   else
-  var_1 = self [[level._id_1367._id_1366[var_2]]](var_1, var_2);
+  var_01 = self [[level._pipes._pipe_methods[var_02]]](var_01, var_02);
 
-  if (!isdefined(var_1))
+  if (!isdefined(var_01))
   return 0;
 
   if (isdefined(var_3.classname) && var_3.classname == "worldspawn")
   return 0;
 
-  foreach (var_5 in self._id_CBCD) {
-  if (distancesquared(var_1, var_5.origin) < 25)
+  foreach (var_05 in self.pipe_fx_array) {
+  if (distancesquared(var_01, var_5.origin) < 25)
   return 0;
   }
 
-  var_7 = undefined;
+  var_07 = undefined;
 
-  if (isai(var_3))
-  var_7 = var_3 geteye();
+  if (isai(var_03))
+  var_07 = var_03 geteye();
   else
-  var_7 = var_3.origin;
+  var_07 = var_3.origin;
 
-  var_8 = var_1 - var_7;
-  var_9 = bullettrace(var_7, var_7 + 1.5 * var_8, 0, var_3, 0);
+  var_08 = var_01 - var_07;
+  var_09 = bullettrace(var_07, var_07 + 1.5 * var_08, 0, var_03, 0);
 
   if (isdefined(var_9["normal"]) && isdefined(var_9["entity"]) && var_9["entity"] == self) {
   var_10 = var_9["normal"];
-  thread _id_CBD0(var_1, var_10, var_3);
+  thread pipefx(var_01, var_10, var_03);
   return 1;
   }
 
   return 0;
 }
 
-_id_CBD0(var_0, var_1, var_2) {
-  var_3 = level._id_1367._id_760B[self.script_noteworthy];
-  var_4 = level._id_1367._id_1365[self.script_noteworthy];
-  var_5 = int(var_4 / var_3);
-  var_6 = 30;
-  var_7 = "mtl_steam_pipe_hit";
-  var_8 = "mtl_steam_pipe_hiss_loop";
-  var_9 = "mtl_steam_pipe_hiss_loop_end";
-  var_10 = spawn("script_origin", var_0);
+pipefx(var_00, var_01, var_02) {
+  var_03 = level._pipes.fx_time[self.script_noteworthy];
+  var_04 = level._pipes._pipe_fx_time[self.script_noteworthy];
+  var_05 = int(var_04 / var_03);
+  var_06 = 30;
+  var_07 = "mtl_steam_pipe_hit";
+  var_08 = "mtl_steam_pipe_hiss_loop";
+  var_09 = "mtl_steam_pipe_hiss_loop_end";
+  var_10 = spawn("script_origin", var_00);
   var_10 hide();
-  var_10 playsound(var_7);
-  var_10 playloopsound(var_8);
-  self._id_CBCD[self._id_CBCD.size] = var_10;
+  var_10 playsound(var_07);
+  var_10 playloopsound(var_08);
+  self.pipe_fx_array[self.pipe_fx_array.size] = var_10;
 
-  if (scripts\engine\utility::_id_9F64() || self.script_noteworthy != "steam")
-  thread _id_CBCC(var_0, var_1, var_2, var_10);
+  if (scripts\engine\utility::issp() || self.script_noteworthy != "steam")
+  thread pipe_damage(var_00, var_01, var_02, var_10);
 
   if (self.script_noteworthy == "oil_leak") {
-  var_11 = spawn("script_model", var_0);
+  var_11 = spawn("script_model", var_00);
   var_11 setmodel("tag_origin");
-  var_11.angles = vectortoangles(var_1);
-  playfxontag(level._id_1367._effect[self.script_noteworthy], var_11, "tag_origin");
-  level._id_1367._id_C1FD++;
-  var_11 _meth_826C(90, var_3, 1, 1);
-  wait(var_3);
-  stopfxontag(level._id_1367._effect[self.script_noteworthy], var_11, "tag_origin");
+  var_11.angles = vectortoangles(var_01);
+  playfxontag(level._pipes._effect[self.script_noteworthy], var_11, "tag_origin");
+  level._pipes.num_pipe_fx++;
+  var_11 ghost_nav_mode(90, var_03, 1, 1);
+  wait(var_03);
+  stopfxontag(level._pipes._effect[self.script_noteworthy], var_11, "tag_origin");
   var_5--;
   } else {
-  playfx(level._id_1367._effect[self.script_noteworthy], var_0, var_1);
-  level._id_1367._id_C1FD++;
-  wait(var_3);
+  playfx(level._pipes._effect[self.script_noteworthy], var_00, var_01);
+  level._pipes.num_pipe_fx++;
+  wait(var_03);
   var_5--;
   }
 
-  while (level._id_1367._id_C1FD <= 12 && var_5 > 0) {
+  while (level._pipes.num_pipe_fx <= 12 && var_05 > 0) {
   if (self.script_noteworthy == "oil_leak") {
-  var_11 = spawn("script_model", var_0);
+  var_11 = spawn("script_model", var_00);
   var_11 setmodel("tag_origin");
-  var_11.angles = vectortoangles(var_1);
-  playfxontag(level._id_1367._effect[self.script_noteworthy], var_11, "tag_origin");
-  level._id_1367._id_C1FD++;
-  var_11 _meth_826C(90, var_3, 1, 1);
-  wait(var_3);
-  stopfxontag(level._id_1367._effect[self.script_noteworthy], var_11, "tag_origin");
+  var_11.angles = vectortoangles(var_01);
+  playfxontag(level._pipes._effect[self.script_noteworthy], var_11, "tag_origin");
+  level._pipes.num_pipe_fx++;
+  var_11 ghost_nav_mode(90, var_03, 1, 1);
+  wait(var_03);
+  stopfxontag(level._pipes._effect[self.script_noteworthy], var_11, "tag_origin");
   continue;
   }
 
-  playfx(level._id_1367._effect[self.script_noteworthy], var_0, var_1);
-  wait(var_3);
+  playfx(level._pipes._effect[self.script_noteworthy], var_00, var_01);
+  wait(var_03);
   var_5--;
   }
 
-  var_10 playsound(var_9);
+  var_10 playsound(var_09);
   wait 0.5;
-  var_10 stoploopsound(var_8);
+  var_10 stoploopsound(var_08);
   var_10 delete();
-  self._id_CBCD = scripts\engine\utility::_id_22BC(self._id_CBCD);
-  level._id_1367._id_C1FD--;
+  self.pipe_fx_array = scripts\engine\utility::array_removeundefined(self.pipe_fx_array);
+  level._pipes.num_pipe_fx--;
 }
 
-_id_CBCC(var_0, var_1, var_2, var_3) {
-  if (!_id_1C5A())
+pipe_damage(var_00, var_01, var_02, var_03) {
+  if (!allow_pipe_damage())
   return;
 
-  var_3 endon("death");
-  var_4 = var_3.origin + vectornormalize(var_1) * 40;
-  var_5 = level._id_1367._id_11E4[self.script_noteworthy];
+  var_03 endon("death");
+  var_04 = var_3.origin + vectornormalize(var_01) * 40;
+  var_05 = level._pipes._dmg[self.script_noteworthy];
 
   for (;;) {
-  if (!isdefined(self._id_4D5C))
-  self _meth_8253(var_4, 36, var_5, var_5 * 0.75, undefined, "MOD_TRIGGER_HURT");
+  if (!isdefined(self.damageowner))
+  self radiusdamage(var_04, 36, var_05, var_05 * 0.75, undefined, "MOD_TRIGGER_HURT");
   else
-  self _meth_8253(var_4, 36, var_5, var_5 * 0.75, var_2, "MOD_TRIGGER_HURT");
+  self radiusdamage(var_04, 36, var_05, var_05 * 0.75, var_02, "MOD_TRIGGER_HURT");
 
   wait 0.4;
   }
 }
 
-_id_1C5A() {
-  if (!scripts\engine\utility::_id_9F64())
+allow_pipe_damage() {
+  if (!scripts\engine\utility::issp())
   return 0;
 
-  if (!isdefined(level._id_CBD3))
+  if (!isdefined(level.pipesdamage))
   return 1;
 
-  return level._id_CBD3;
+  return level.pipesdamage;
 }
 
-_id_B6A0() {
-  level._id_1367._id_1366 = [];
-  level._id_1367._id_1366["MOD_UNKNOWN"] = ::_id_CBCB;
-  level._id_1367._id_1366["MOD_PISTOL_BULLET"] = ::_id_CBC9;
-  level._id_1367._id_1366["MOD_RIFLE_BULLET"] = ::_id_CBC9;
-  level._id_1367._id_1366["MOD_GRENADE"] = ::_id_CBCB;
-  level._id_1367._id_1366["MOD_GRENADE_SPLASH"] = ::_id_CBCB;
-  level._id_1367._id_1366["MOD_PROJECTILE"] = ::_id_CBCB;
-  level._id_1367._id_1366["MOD_PROJECTILE_SPLASH"] = ::_id_CBCB;
-  level._id_1367._id_1366["MOD_TRIGGER_HURT"] = ::_id_CBCB;
-  level._id_1367._id_1366["MOD_EXPLOSIVE"] = ::_id_CBCB;
-  level._id_1367._id_1366["MOD_EXPLOSIVE_BULLET"] = ::_id_CBCB;
+methodsinit() {
+  level._pipes._pipe_methods = [];
+  level._pipes._pipe_methods["MOD_UNKNOWN"] = ::pipe_calc_splash;
+  level._pipes._pipe_methods["MOD_PISTOL_BULLET"] = ::pipe_calc_ballistic;
+  level._pipes._pipe_methods["MOD_RIFLE_BULLET"] = ::pipe_calc_ballistic;
+  level._pipes._pipe_methods["MOD_GRENADE"] = ::pipe_calc_splash;
+  level._pipes._pipe_methods["MOD_GRENADE_SPLASH"] = ::pipe_calc_splash;
+  level._pipes._pipe_methods["MOD_PROJECTILE"] = ::pipe_calc_splash;
+  level._pipes._pipe_methods["MOD_PROJECTILE_SPLASH"] = ::pipe_calc_splash;
+  level._pipes._pipe_methods["MOD_TRIGGER_HURT"] = ::pipe_calc_splash;
+  level._pipes._pipe_methods["MOD_EXPLOSIVE"] = ::pipe_calc_splash;
+  level._pipes._pipe_methods["MOD_EXPLOSIVE_BULLET"] = ::pipe_calc_splash;
 }
 
-_id_CBC9(var_0, var_1) {
-  return var_0;
+pipe_calc_ballistic(var_00, var_01) {
+  return var_00;
 }
 
-_id_CBCB(var_0, var_1) {
-  var_2 = vectornormalize(vectorfromlinetopoint(self._id_1491, self._id_26FF, var_0));
-  var_0 = pointonsegmentnearesttopoint(self._id_1491, self._id_26FF, var_0);
-  return var_0 + var_2 * 4;
+pipe_calc_splash(var_00, var_01) {
+  var_02 = vectornormalize(vectorfromlinetopoint(self.a, self.b, var_00));
+  var_00 = pointonsegmentnearesttopoint(self.a, self.b, var_00);
+  return var_00 + var_02 * 4;
 }
 
-_id_CBCA(var_0, var_1) {
+pipe_calc_nofx(var_00, var_01) {
   return undefined;
 }
 
-_id_D80E() {
-  var_0 = 0;
-  var_1 = 0;
-  var_2 = 0;
-  var_3 = 0;
-  var_4 = 0;
+precachefx() {
+  var_00 = 0;
+  var_01 = 0;
+  var_02 = 0;
+  var_03 = 0;
+  var_04 = 0;
 
-  foreach (var_6 in self) {
+  foreach (var_06 in self) {
   if (var_6.script_noteworthy == "water")
   var_6.script_noteworthy = "steam";
 
   if (var_6.script_noteworthy == "steam") {
-  var_6 willneverchange();
-  var_0 = 1;
+  var_06 willneverchange();
+  var_00 = 1;
   continue;
   }
 
   if (var_6.script_noteworthy == "fire") {
-  var_6 willneverchange();
-  var_1 = 1;
+  var_06 willneverchange();
+  var_01 = 1;
   continue;
   }
 
   if (var_6.script_noteworthy == "steam_small") {
-  var_6 willneverchange();
-  var_2 = 1;
+  var_06 willneverchange();
+  var_02 = 1;
   continue;
   }
 
   if (var_6.script_noteworthy == "oil_leak") {
-  var_6 willneverchange();
-  var_3 = 1;
+  var_06 willneverchange();
+  var_03 = 1;
   continue;
   }
 
   if (var_6.script_noteworthy == "oil_cap") {
-  var_6 willneverchange();
-  var_4 = 1;
+  var_06 willneverchange();
+  var_04 = 1;
   continue;
   }
   }
 
-  if (var_0) {
-  level._id_1367._effect["steam"] = loadfx("vfx/core/impacts/pipe_steam");
-  level._id_1367._id_1408["steam_hit"] = "mtl_steam_pipe_hit";
-  level._id_1367._id_1408["steam_loop"] = "mtl_steam_pipe_hiss_loop";
-  level._id_1367._id_1408["steam_end"] = "mtl_steam_pipe_hiss_loop_end";
-  level._id_1367._id_760B["steam"] = 3;
-  level._id_1367._id_11E4["steam"] = 5;
-  level._id_1367._id_1365["steam"] = 25;
+  if (var_00) {
+  level._pipes._effect["steam"] = loadfx("vfx/core/impacts/pipe_steam");
+  level._pipes._sound["steam_hit"] = "mtl_steam_pipe_hit";
+  level._pipes._sound["steam_loop"] = "mtl_steam_pipe_hiss_loop";
+  level._pipes._sound["steam_end"] = "mtl_steam_pipe_hiss_loop_end";
+  level._pipes.fx_time["steam"] = 3;
+  level._pipes._dmg["steam"] = 5;
+  level._pipes._pipe_fx_time["steam"] = 25;
   }
 
-  if (var_2) {
-  level._id_1367._effect["steam_small"] = loadfx("vfx/core/impacts/pipe_steam_small");
-  level._id_1367._id_1408["steam_small_hit"] = "mtl_steam_pipe_hit";
-  level._id_1367._id_1408["steam_small_loop"] = "mtl_steam_pipe_hiss_loop";
-  level._id_1367._id_1408["steam_small_end"] = "mtl_steam_pipe_hiss_loop_end";
-  level._id_1367._id_760B["steam_small"] = 3;
-  level._id_1367._id_11E4["steam_small"] = 5;
-  level._id_1367._id_1365["steam_small"] = 25;
+  if (var_02) {
+  level._pipes._effect["steam_small"] = loadfx("vfx/core/impacts/pipe_steam_small");
+  level._pipes._sound["steam_small_hit"] = "mtl_steam_pipe_hit";
+  level._pipes._sound["steam_small_loop"] = "mtl_steam_pipe_hiss_loop";
+  level._pipes._sound["steam_small_end"] = "mtl_steam_pipe_hiss_loop_end";
+  level._pipes.fx_time["steam_small"] = 3;
+  level._pipes._dmg["steam_small"] = 5;
+  level._pipes._pipe_fx_time["steam_small"] = 25;
   }
 
-  if (var_1) {
-  level._id_1367._effect["fire"] = loadfx("vfx/core/impacts/pipe_fire");
-  level._id_1367._id_1408["fire_hit"] = "mtl_gas_pipe_hit";
-  level._id_1367._id_1408["fire_loop"] = "mtl_gas_pipe_flame_loop";
-  level._id_1367._id_1408["fire_end"] = "mtl_gas_pipe_flame_end";
-  level._id_1367._id_760B["fire"] = 3;
-  level._id_1367._id_11E4["fire"] = 5;
-  level._id_1367._id_1365["fire"] = 25;
+  if (var_01) {
+  level._pipes._effect["fire"] = loadfx("vfx/core/impacts/pipe_fire");
+  level._pipes._sound["fire_hit"] = "mtl_gas_pipe_hit";
+  level._pipes._sound["fire_loop"] = "mtl_gas_pipe_flame_loop";
+  level._pipes._sound["fire_end"] = "mtl_gas_pipe_flame_end";
+  level._pipes.fx_time["fire"] = 3;
+  level._pipes._dmg["fire"] = 5;
+  level._pipes._pipe_fx_time["fire"] = 25;
   }
 
-  if (var_3) {
-  level._id_1367._effect["oil_leak"] = loadfx("vfx/core/impacts/pipe_oil_barrel_spill");
-  level._id_1367._id_1408["oil_leak_hit"] = "mtl_oil_barrel_hit";
-  level._id_1367._id_1408["oil_leak_loop"] = "mtl_oil_barrel_hiss_loop";
-  level._id_1367._id_1408["oil_leak_end"] = "mtl_oil_barrel_hiss_loop_end";
-  level._id_1367._id_760B["oil_leak"] = 6;
-  level._id_1367._id_1365["oil_leak"] = 6;
-  level._id_1367._id_11E4["oil_leak"] = 5;
+  if (var_03) {
+  level._pipes._effect["oil_leak"] = loadfx("vfx/core/impacts/pipe_oil_barrel_spill");
+  level._pipes._sound["oil_leak_hit"] = "mtl_oil_barrel_hit";
+  level._pipes._sound["oil_leak_loop"] = "mtl_oil_barrel_hiss_loop";
+  level._pipes._sound["oil_leak_end"] = "mtl_oil_barrel_hiss_loop_end";
+  level._pipes.fx_time["oil_leak"] = 6;
+  level._pipes._pipe_fx_time["oil_leak"] = 6;
+  level._pipes._dmg["oil_leak"] = 5;
   }
 
-  if (var_4) {
-  level._id_1367._effect["oil_cap"] = loadfx("vfx/core/impacts/pipe_oil_barrel_squirt");
-  level._id_1367._id_1408["oil_cap_hit"] = "mtl_steam_pipe_hit";
-  level._id_1367._id_1408["oil_cap_loop"] = "mtl_steam_pipe_hiss_loop";
-  level._id_1367._id_1408["oil_cap_end"] = "mtl_steam_pipe_hiss_loop_end";
-  level._id_1367._id_760B["oil_cap"] = 3;
-  level._id_1367._id_11E4["oil_cap"] = 5;
-  level._id_1367._id_1365["oil_cap"] = 5;
+  if (var_04) {
+  level._pipes._effect["oil_cap"] = loadfx("vfx/core/impacts/pipe_oil_barrel_squirt");
+  level._pipes._sound["oil_cap_hit"] = "mtl_steam_pipe_hit";
+  level._pipes._sound["oil_cap_loop"] = "mtl_steam_pipe_hiss_loop";
+  level._pipes._sound["oil_cap_end"] = "mtl_steam_pipe_hiss_loop_end";
+  level._pipes.fx_time["oil_cap"] = 3;
+  level._pipes._dmg["oil_cap"] = 5;
+  level._pipes._pipe_fx_time["oil_cap"] = 5;
   }
 }

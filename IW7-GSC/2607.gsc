@@ -362,7 +362,7 @@ func_DA00() {
 }
 
 func_DA46() {
-	var_00 = scripts\engine\utility::array_combine(function_00C8(),function_0072("allies","axis"));
+	var_00 = scripts\engine\utility::array_combine(getspawnerarray(),getaiarray("allies","axis"));
 	var_01 = 0;
 	if(var_00.size > 0) {
 		var_01 = 1;
@@ -376,7 +376,7 @@ func_DA46() {
 			var_02 = "weapon_" + var_05 + "_tr";
 			level.var_D9E5["default_weapon_transients"] = scripts\engine\utility::array_add(level.var_D9E5["default_weapon_transients"],var_02);
 			precacheitem(var_05);
-			precachemodel(function_030C(var_05));
+			precachemodel(getweaponviewmodel(var_05));
 		}
 	}
 }
@@ -389,7 +389,7 @@ func_9789() {
 	foreach(var_02 in var_00) {
 		scripts\sp\_utility::func_1263F("weapon_" + var_02 + "_tr");
 		precacheitem(var_02);
-		precachemodel(function_030C(var_02));
+		precachemodel(getweaponviewmodel(var_02));
 	}
 
 	var_04 = func_D9FC();
@@ -1420,7 +1420,7 @@ func_DA18(param_00,param_01,param_02,param_03,param_04) {
 			}
 
 			precacheitem(var_09);
-			precachemodel(function_030C(var_09));
+			precachemodel(getweaponviewmodel(var_09));
 			var_31 = level.player _meth_84C6(var_2F,var_09);
 			if(isdefined(var_31)) {
 				level.var_D9E5["weaponstates"][var_09] = var_31;
@@ -1600,9 +1600,9 @@ func_12642() {
 	foreach(var_06 in var_04) {
 		if(scripts\engine\utility::array_contains(func_DA17(),var_06)) {
 			var_09 = "weapon_" + var_06 + "_tr";
-			if(!function_0119(var_09)) {
+			if(!istransientloaded(var_09)) {
 				var_03 = scripts\engine\utility::array_add(var_03,var_06);
-				function_012F(var_09);
+				loadtransient(var_09);
 			}
 
 			if(var_01) {
@@ -1616,7 +1616,7 @@ func_12642() {
 		var_0B = 1;
 		foreach(var_06 in var_03) {
 			var_0D = "weapon_" + var_06 + "_tr";
-			if(!function_0119(var_0D)) {
+			if(!istransientloaded(var_0D)) {
 				var_0B = 0;
 				break;
 			}
@@ -1649,8 +1649,8 @@ func_12644() {
 	var_00 = func_D9FB();
 	var_01 = strtok(var_00,"_");
 	var_02 = var_01[5] + "_" + var_01[6] + "_" + var_01[7] + "_tr";
-	if(!function_0119(var_02)) {
-		function_012F(var_02);
+	if(!istransientloaded(var_02)) {
+		loadtransient(var_02);
 	}
 }
 
@@ -1719,7 +1719,7 @@ func_12650() {
 func_12646(param_00) {
 	param_00 = getweaponbasename(param_00);
 	var_01 = "weapon_" + param_00 + "_tr";
-	if(function_0119(var_01)) {
+	if(istransientloaded(var_01)) {
 		return;
 	}
 
@@ -1852,14 +1852,14 @@ func_DA3D() {
 	level.var_D9E5["weapon_pickups"] = [];
 	foreach(var_02 in var_00) {
 		var_03 = getsubstr(var_02.classname,7);
-		var_04 = function_0244(var_03);
+		var_04 = weaponinventorytype(var_03);
 		if(var_04 != "primary") {
 			level.var_D9E5["weapon_pickups"] = scripts\engine\utility::array_add(level.var_D9E5["weapon_pickups"],var_02);
 			continue;
 		}
 
 		var_05 = getweaponbasename(var_03);
-		var_06 = function_00E3(var_03);
+		var_06 = getweaponattachments(var_03);
 		if(var_06.size > 0) {
 			level.var_D9E5["weapon_pickups"] = scripts\engine\utility::array_add(level.var_D9E5["weapon_pickups"],var_02);
 			continue;
@@ -1903,7 +1903,7 @@ func_13C05(param_00,param_01) {
 		}
 
 		if(isdefined(var_06)) {
-			var_07 = function_00E3(param_00);
+			var_07 = getweaponattachments(param_00);
 			if(param_01 && !scripts\engine\utility::array_contains(var_07,var_06)) {
 				var_07 = scripts\engine\utility::array_add(var_07,var_06);
 				var_07 = scripts\engine\utility::alphabetize(var_07);
@@ -1939,7 +1939,7 @@ func_13E80(param_00,param_01) {
 	var_08 = 0;
 	var_09 = level.player getweaponslistall();
 	foreach(var_0B in var_09) {
-		var_0C = function_0244(var_0B);
+		var_0C = weaponinventorytype(var_0B);
 		if(var_0C != "primary") {
 			continue;
 		}
@@ -2024,7 +2024,7 @@ func_13E76() {
 		var_01 = getweaponbasename(var_00);
 		if(level.player getteamsize()) {
 			wait(1.9);
-			var_02 = function_00E6(var_01);
+			var_02 = getweaponclipmodel(var_01);
 			if(var_02 != "") {
 				var_02 = var_02 + "_zerog";
 				var_03 = level.player getplayerangles();
@@ -2686,7 +2686,7 @@ func_DA50(param_00) {
 
 func_13C46() {
 	var_00 = 1000;
-	var_01 = function_0072("axis");
+	var_01 = getaiarray("axis");
 	foreach(var_03 in var_01) {
 		if(distancesquared(var_03.origin,level.player.origin) < squared(var_00)) {
 			return 1;
@@ -2872,7 +2872,7 @@ func_7BEB() {
 func_7AEA(param_00) {
 	var_01 = getweaponbasename(param_00);
 	var_02 = getsubstr(var_01,4);
-	var_03 = function_00E3(param_00);
+	var_03 = getweaponattachments(param_00);
 	var_04 = [];
 	var_05 = 0;
 	foreach(var_07 in var_03) {
@@ -3068,7 +3068,7 @@ build_attach_models(param_00,param_01,param_02,param_03,param_04,param_05,param_
 					var_16 = var_0D[param_02][param_01][var_08][0].var_24A2;
 					var_17 = var_0D[param_02][param_01][var_08][0].var_9ECE;
 				}
-				else if(function_02D4(param_00) && isdefined(var_0D[param_02][param_01][""][1])) {
+				else if(weaponusesenergybullets(param_00) && isdefined(var_0D[param_02][param_01][""][1])) {
 					var_15 = var_0D[param_02][param_01][""][1].location;
 					var_16 = var_0D[param_02][param_01][""][1].var_24A2;
 					var_17 = var_0D[param_02][param_01][""][1].var_9ECE;

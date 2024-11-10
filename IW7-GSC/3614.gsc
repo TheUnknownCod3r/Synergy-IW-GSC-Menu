@@ -48,7 +48,7 @@ func_329E() {
 	self endon("destroyed");
 	self.var_C528 = 1;
 	wait(0.2);
-	self.var_329F = function_0135("car_grenade",self.origin + (0,0,10),self.origin,9999,0);
+	self.var_329F = magicgrenade("car_grenade",self.origin + (0,0,10),self.origin,9999,0);
 	self.var_329F.var_C182 = 1;
 	self.var_329F makeunusable();
 }

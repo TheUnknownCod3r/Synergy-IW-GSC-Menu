@@ -1274,7 +1274,7 @@ func_8C25(param_00,param_01) {
 
 			if(isdefined(var_06.var_EF76)) {
 				foreach(var_08 in var_06.var_EF76) {
-					if(!function_02A6(var_06.ent) || self seerecently(var_08,param_01)) {
+					if(!isent(var_06.ent) || self seerecently(var_08,param_01)) {
 						return level.success;
 					}
 				}
@@ -1716,7 +1716,7 @@ func_12F13(param_00) {
 
 func_F1F8() {
 	self endon("death");
-	function_0277("c12_selfdestruct",-1,self,1024,1);
+	createnavrepulsor("c12_selfdestruct",-1,self,1024,1);
 	self.ignoreme = 1;
 	self.bt.var_F1F8 = 1;
 	wait(0.2);

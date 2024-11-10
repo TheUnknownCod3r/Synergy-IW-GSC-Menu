@@ -175,7 +175,7 @@ kill_zombies(param_00,param_01) {
 				level.spinner_trap_kills = 0;
 			}
 
-			level.var_10A04++;
+			level.spinner_trap_kills++;
 			var_03 dodamage(var_03.health + 1000,var_04.origin,param_01,param_01,"MOD_UNKNOWN","iw7_escapevelocity_zm");
 			var_03 thread fling_zombie(var_04,param_01);
 		}
@@ -200,7 +200,7 @@ fling_zombie(param_00,param_01) {
 		level.spinner_trap_kills = 0;
 	}
 
-	level.var_10A04++;
+	level.spinner_trap_kills++;
 	self dodamage(self.health + 1000,param_00.origin,param_01,param_01,"MOD_UNKNOWN","iw7_escapevelocity_zm");
 }
 

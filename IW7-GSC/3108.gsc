@@ -3,87 +3,87 @@
  * Script: scripts\3108.gsc
 ***************************************/
 
-_id_965D() {
-  if (isdefined(level._id_4AEC))
+func_965D() {
+  if (isdefined(level.func_4AEC))
   return;
 
-  level._id_4AEC = 1;
-  level._id_4AEE = [];
-  var_0 = getcsplinecount();
+  level.func_4AEC = 1;
+  level.func_4AEE = [];
+  var_00 = getcsplinecount();
 
-  if (var_0 == 0)
+  if (var_00 == 0)
   return;
 
-  var_0 = var_0 + 1;
+  var_00 = var_00 + 1;
 
-  for (var_1 = 1; var_1 < var_0; var_1++) {
-  var_2 = _func_088(var_1);
+  for (var_01 = 1; var_01 < var_00; var_1++) {
+  var_02 = _getcsplinepointcount(var_01);
 
-  for (var_3 = 0; var_3 < var_2; var_3++) {
-  var_4 = _func_08B(var_1, var_3);
+  for (var_03 = 0; var_03 < var_02; var_3++) {
+  var_04 = _getcsplinepointlabel(var_01, var_03);
 
-  if (isdefined(var_4)) {
-  if (!isdefined(level._id_4AEE[var_4]))
-  level._id_4AEE[var_4] = 1;
+  if (isdefined(var_04)) {
+  if (!isdefined(level.func_4AEE[var_04]))
+  level.func_4AEE[var_04] = 1;
   }
   }
   }
 
-  if (level._id_4AEE.size == 0)
+  if (level.func_4AEE.size == 0)
   return;
 }
 
-_id_10A49() {
-  self._id_10A47 = _id_0BDC::_id_A1EF;
+func_10A49() {
+  self.func_10A47 = func_0BDC::func_A1EF;
   self endon("death");
   self endon("entitydeleted");
   self endon("terminate_ai_threads");
   self endon("enter_jackal");
 
-  if (!isdefined(level._id_4AEE))
-  level _id_965D();
+  if (!isdefined(level.func_4AEE))
+  level func_965D();
 
-  childthread _id_10A48();
+  childthread func_10A48();
 }
 
-_id_9EC8() {
+func_9EC8() {
   return 1;
 }
 
-_id_10A48() {
+func_10A48() {
   self notify("notify_splinelablefunc");
   self endon("notify_splinelablefunc");
 
   for (;;) {
-  self waittill("splinenode_label", var_0, var_1, var_2, var_3);
-  var_4 = strtok(var_0, " ");
+  self waittill("splinenode_label", var_00, var_01, var_02, var_03);
+  var_04 = strtok(var_00, " ");
 
-  foreach (var_6 in var_4) {
-  switch (var_6) {
+  foreach (var_06 in var_04) {
+  switch (var_06) {
   case "deleteme":
   self delete();
   break;
   case "loop_path":
-  self._id_10A43 = var_1;
-  _id_B046();
+  self.func_10A43 = var_01;
+  loop_or_delete();
   break;
   case "explode":
-  _id_0118();
+  func_0118();
   break;
   case "junction":
-  thread _id_A50D(var_3);
+  thread func_A50D(var_03);
   break;
   case "continue":
-  thread _id_45A8(var_3);
+  thread func_45A8(var_03);
   break;
   case "flag":
-  thread _id_6E48(var_3);
+  thread func_6E48(var_03);
   break;
   case "playerjackal_state":
-  thread _id_D3B8(var_3);
+  thread func_D3B8(var_03);
   break;
   case "notify":
-  _id_C133(var_3, var_1, var_2);
+  func_C133(var_03, var_01, var_02);
   break;
   default:
   break;
@@ -92,107 +92,107 @@ _id_10A48() {
   }
 }
 
-_id_C133(var_0, var_1, var_2) {
-  self notify(var_0, var_1, var_2);
+func_C133(var_00, var_01, var_02) {
+  self notify(var_00, var_01, var_02);
 }
 
-_id_B046() {
+loop_or_delete() {
   self _meth_847A();
-  self _meth_8479(self._id_10A43);
+  self _meth_8479(self.func_10A43);
   self _meth_847B(1.0);
-  thread _id_B047(self._id_10A43);
+  thread loop_path(self.func_10A43);
 }
 
-_id_B047(var_0) {
+loop_path(var_00) {
   self waittill("near_goal");
-  _id_10A44(var_0);
+  func_10A44(var_00);
 }
 
-_id_10A44(var_0) {
-  var_1 = _func_088(var_0) - 1;
-  var_2 = _func_08B(var_0, var_1);
+func_10A44(var_00) {
+  var_01 = _getcsplinepointcount(var_00) - 1;
+  var_02 = _getcsplinepointlabel(var_00, var_01);
 
-  if (isdefined(var_2) && var_2 != "") {
-  var_3 = _func_2B6(var_0, var_1);
+  if (isdefined(var_02) && var_02 != "") {
+  var_03 = _getcsplinepointstring(var_00, var_01);
 
-  if (isdefined(var_3) && var_2 != "")
-  self notify("splinenode_label", var_2, var_0, var_1, var_3);
+  if (isdefined(var_03) && var_02 != "")
+  self notify("splinenode_label", var_02, var_00, var_01, var_03);
   else
-  self notify("splinenode_label", var_2, var_0, var_1);
+  self notify("splinenode_label", var_02, var_00, var_01);
   }
 }
 
-_id_0118() {
-  self _meth_80B0(20000, self.origin);
+func_0118() {
+  self getrandomarmkillstreak(20000, self.origin);
   self notify("death");
 }
 
-_id_A50D(var_0) {
-  if (isdefined(self._id_1198) && !self._id_1198._id_1FCD) {
+func_A50D(var_00) {
+  if (isdefined(self._blackboard) && !self._blackboard.animscriptedactive) {
   self notify("spline_junction");
   return;
   }
 
-  if (scripts\engine\utility::_id_4347())
-  _id_A4F9(0);
+  if (scripts\engine\utility::cointoss())
+  func_A4F9(0);
 }
 
-_id_A4F9(var_0) {
-  var_1 = _id_0A0D::_id_7E02(undefined, 1000);
-  _id_0BDC::_id_A1EF(var_1["spline"], undefined, undefined, 1, 1.0);
+func_A4F9(var_00) {
+  var_01 = func_0A0D::func_7E02(undefined, 1000);
+  func_0BDC::func_A1EF(var_1["spline"], undefined, undefined, 1, 1.0);
   return;
 }
 
-_id_45A8(var_0) {
-  if (isdefined(self._id_1198) && !self._id_1198._id_1FCD) {
+func_45A8(var_00) {
+  if (isdefined(self._blackboard) && !self._blackboard.animscriptedactive) {
   self notify("spline_junction", "continue");
   return;
   }
 
-  _id_A4F9(1);
+  func_A4F9(1);
 }
 
-_id_6E48(var_0) {
-  var_1 = strtok(var_0, " ");
+func_6E48(var_00) {
+  var_01 = strtok(var_00, " ");
 
   switch (tolower(var_1[0])) {
   case "flag_set":
-  level scripts\engine\utility::_id_6E3E(var_1[1]);
+  level scripts\engine\utility::flag_set(var_1[1]);
   return;
   case "ent_flag_set":
-  _id_0B91::_id_65E1(var_1[1]);
+  scripts/sp/utility::func_65E1(var_1[1]);
   return;
   default:
-  scripts\engine\utility::_id_66BD("Spline with label FLAG is not setup correctly.");
-  scripts\engine\utility::_id_66BD("Set the splinenode_string as 'flag_set' or 'ent_flag_set' followed by the flag to set.");
+  scripts\engine\utility::error("Spline with label FLAG is not setup correctly.");
+  scripts\engine\utility::error("Set the splinenode_string as 'flag_set' or 'ent_flag_set' followed by the flag to set.");
   return;
   }
 }
 
-_id_D3B8(var_0) {
-  _id_0BDC::_id_6B4C(var_0);
+func_D3B8(var_00) {
+  func_0BDC::func_6B4C(var_00);
 }
 
-_id_517E() {
+func_517E() {
   self endon("death");
   self endon("terminate_ai_threads");
   self waittill("end_spline");
   self delete();
 }
 
-_id_10A46(var_0, var_1, var_2) {
-  if (!isdefined(var_1))
-  var_1 = 0.2;
+func_10A46(var_00, var_01, var_02) {
+  if (!isdefined(var_01))
+  var_01 = 0.2;
 
-  self _meth_8479(var_0);
+  self _meth_8479(var_00);
 
-  if (isdefined(var_2))
-  self _meth_847B(var_1, var_2);
+  if (isdefined(var_02))
+  self _meth_847B(var_01, var_02);
   else
-  self _meth_847B(var_1);
+  self _meth_847B(var_01);
 
-  self._id_10A43 = var_0;
+  self.func_10A43 = var_00;
   self waittill("near_goal");
   self notify("end_spline");
-  _id_10A44(var_0);
+  func_10A44(var_00);
 }

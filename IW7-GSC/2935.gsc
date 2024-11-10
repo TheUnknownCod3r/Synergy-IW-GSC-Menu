@@ -26,14 +26,14 @@ main() {
 	}
 
 	precachemodel("grenade_bag");
-	function_004E("allies");
-	function_004E("axis");
-	function_004E("team3");
-	function_004E("civilian");
-	function_004E("equipment");
-	function_01D1("axis","equipment",250);
-	function_01D1("allies","equipment",250);
-	function_01D1("team3","equipment",-1000);
+	createthreatbiasgroup("allies");
+	createthreatbiasgroup("axis");
+	createthreatbiasgroup("team3");
+	createthreatbiasgroup("civilian");
+	createthreatbiasgroup("equipment");
+	setthreatbias("axis","equipment",250);
+	setthreatbias("allies","equipment",250);
+	setthreatbias("team3","equipment",-1000);
 	lib_0B5F::func_965A();
 	foreach(var_02 in level.players) {
 		var_02 give_zombies_perk("allies");
@@ -50,7 +50,7 @@ main() {
 		level.var_12BA5 = [];
 	}
 
-	var_04 = function_00C8();
+	var_04 = getspawnerarray();
 	foreach(var_06 in var_04) {
 	}
 
@@ -71,11 +71,11 @@ main() {
 
 	level.var_D66F = "J_Shoulder_RI";
 	level.var_1349 = 0;
-	var_08 = function_0074();
+	var_08 = getaispeciesarray();
 	scripts\engine\utility::array_thread(var_08,::func_AD8E);
 	level.var_1923 = [];
 	level.var_5C63 = [];
-	var_09 = function_00C8();
+	var_09 = getspawnerarray();
 	for(var_0A = 0;var_0A < var_09.size;var_0A++) {
 		var_09[var_0A] thread func_107AB();
 	}
@@ -237,9 +237,9 @@ func_12797(param_00) {
 		waittillframeend;
 	}
 
-	var_03 = scripts\engine\utility::array_combine(function_00C8(var_02),vehicle_getspawnerarray(var_02));
+	var_03 = scripts\engine\utility::array_combine(getspawnerarray(var_02),vehicle_getspawnerarray(var_02));
 	foreach(var_05 in var_03) {
-		if(!function_02A8(var_05) && var_05.var_9F == "script_vehicle") {
+		if(!isnonentspawner(var_05) && var_05.var_9F == "script_vehicle") {
 			if((isdefined(var_05.var_EE2B) && var_05.var_EE2B == 1) || !isdefined(var_05.target)) {
 				thread scripts\sp\_vehicle::func_13237(var_05);
 			}
@@ -312,7 +312,7 @@ func_7C86(param_00,param_01) {
 		var_03.angles = param_00.angles;
 	}
 	else if(isdefined(param_00.target)) {
-		var_04 = function_00B3(param_00.target,"targetname");
+		var_04 = getnode(param_00.target,"targetname");
 		if(isdefined(var_04)) {
 			var_03.angles = vectortoangles(var_04.origin - var_03.origin);
 		}
@@ -331,7 +331,7 @@ func_7C86(param_00,param_01) {
 }
 
 func_492A(param_00) {
-	var_01 = function_00C8();
+	var_01 = getspawnerarray();
 	var_02 = spawnstruct();
 	var_03 = [];
 	foreach(var_05 in var_01) {
@@ -401,7 +401,7 @@ func_12799() {
 func_12798(param_00) {
 	var_01 = param_00.target;
 	var_02 = 0;
-	var_03 = function_00C8(var_01);
+	var_03 = getspawnerarray(var_01);
 	foreach(var_05 in var_03) {
 		if(!isdefined(var_05.target)) {
 			continue;
@@ -433,7 +433,7 @@ func_12798(param_00) {
 
 	param_00 waittill("trigger");
 	param_00 scripts\sp\_utility::script_delay();
-	var_03 = function_00C8(var_01);
+	var_03 = getspawnerarray(var_01);
 	foreach(var_05 in var_03) {
 		var_05 thread func_1278A();
 	}
@@ -568,12 +568,12 @@ func_A617(param_00) {
 }
 
 func_A67F(param_00) {
-	var_01 = function_00C8();
+	var_01 = getspawnerarray();
 	var_02 = vehicle_getspawnerarray();
 	var_03 = scripts\engine\utility::array_combine(var_01,var_02);
 	for(var_04 = 0;var_04 < var_03.size;var_04++) {
 		if(isdefined(var_03[var_04].var_EDF7) && param_00 == var_03[var_04].var_EDF7) {
-			if(function_02A8(var_03[var_04])) {
+			if(isnonentspawner(var_03[var_04])) {
 				var_03[var_04] notify("death");
 			}
 
@@ -641,7 +641,7 @@ func_4B09(param_00) {
 func_61BD(param_00) {
 	var_01 = param_00.script_emptyspawner;
 	param_00 waittill("trigger");
-	var_02 = function_00C8();
+	var_02 = getspawnerarray();
 	for(var_03 = 0;var_03 < var_02.size;var_03++) {
 		if(!isdefined(var_02[var_03].script_emptyspawner)) {
 			continue;
@@ -659,7 +659,7 @@ func_61BD(param_00) {
 }
 
 func_A618(param_00) {
-	var_01 = function_00C8();
+	var_01 = getspawnerarray();
 	for(var_02 = 0;var_02 < var_01.size;var_02++) {
 		if(!isdefined(var_01[var_02].var_EDF7)) {
 			continue;
@@ -1598,7 +1598,7 @@ func_F3DE() {
 	}
 
 	if(isdefined(var_00.target)) {
-		var_01 = function_00B3(var_00.target,"targetname");
+		var_01 = getnode(var_00.target,"targetname");
 		var_02 = getent(var_00.target,"targetname");
 		var_03 = scripts\engine\utility::getstruct(var_00.target,"targetname");
 		var_04 = undefined;
@@ -1633,7 +1633,7 @@ func_F3DE() {
 }
 
 func_7CDA(param_00) {
-	var_01 = function_00B4(param_00,"targetname");
+	var_01 = getnodearray(param_00,"targetname");
 	var_02 = scripts\engine\utility::getstructarray(param_00,"targetname");
 	foreach(var_04 in var_02) {
 		var_01[var_01.size] = var_04;
@@ -1955,17 +1955,17 @@ allowhighjump(param_00) {
 }
 
 _meth_840F(param_00) {
-	if(function_02A7(param_00)) {
+	if(isnode(param_00)) {
 		_meth_8411(param_00);
 	}
-	else if(function_02A4(param_00)) {
+	else if(isstruct(param_00)) {
 		allowdodge(param_00);
 	}
-	else if(function_02A6(param_00)) {
+	else if(isent(param_00)) {
 		_meth_8410(param_00);
 	}
 
-	if(function_02A4(param_00) || function_02A7(param_00)) {
+	if(isstruct(param_00) || isnode(param_00)) {
 		param_00.var_C9A7 = allowhighjump(param_00);
 	}
 }
@@ -2155,7 +2155,7 @@ func_11054() {
 }
 
 func_73D9(param_00) {
-	var_01 = function_00B3(param_00.target,"targetname");
+	var_01 = getnode(param_00.target,"targetname");
 	var_02 = getent(var_01.target,"targetname");
 	var_02 give_player_session_tokens("auto_ai");
 	var_02 cleartargetentity();
@@ -2318,7 +2318,7 @@ func_73D3() {
 		return;
 	}
 
-	var_01 = function_00B3(var_00.target,"targetname");
+	var_01 = getnode(var_00.target,"targetname");
 	var_02 = self.objective_playermask_showto;
 	self.objective_playermask_showto = 8;
 	self give_more_perk(var_01);
@@ -2326,9 +2326,9 @@ func_73D3() {
 	self.objective_playermask_showto = 384;
 	self waittill("goal");
 	if(isdefined(self.target)) {
-		var_01 = function_00B3(self.target,"targetname");
+		var_01 = getnode(self.target,"targetname");
 		if(isdefined(var_01.target)) {
-			var_01 = function_00B3(var_01.target,"targetname");
+			var_01 = getnode(var_01.target,"targetname");
 		}
 
 		if(isdefined(var_01)) {
@@ -2397,7 +2397,7 @@ func_6F4C(param_00) {
 	}
 
 	level.var_10881 = [];
-	var_01 = function_00C8(self.target);
+	var_01 = getspawnerarray(self.target);
 	scripts\engine\utility::array_thread(var_01,::func_6F50,param_00);
 	var_02 = 0;
 	var_03 = 0;
@@ -2425,14 +2425,14 @@ func_6F4C(param_00) {
 			}
 		}
 
-		var_01 = function_00C8(self.target);
+		var_01 = getspawnerarray(self.target);
 		if(isdefined(var_01[0])) {
 			if(isdefined(var_01[0].var_EE91)) {
 				func_4B09(var_01[0].var_EE91);
 			}
 		}
 
-		var_01 = function_00C8(self.target);
+		var_01 = getspawnerarray(self.target);
 		for(var_05 = 0;var_05 < var_01.size;var_05++) {
 			var_01[var_05].var_D43F = var_02;
 			var_01[var_05] notify("flood_begin");
@@ -2462,7 +2462,7 @@ func_6F50(param_00) {
 
 	var_03 = [];
 	if(isdefined(var_01)) {
-		var_04 = function_00C8(var_01);
+		var_04 = getspawnerarray(var_01);
 		for(var_05 = 0;var_05 < var_04.size;var_05++) {
 			if(!issubstr(var_04[var_05].classname,"actor")) {
 				continue;
@@ -2483,7 +2483,7 @@ func_6F50(param_00) {
 		return;
 	}
 
-	var_04 = function_00C8(var_01);
+	var_04 = getspawnerarray(var_01);
 	if(!var_04.size) {
 		return;
 	}
@@ -2692,7 +2692,7 @@ func_6F4E() {
 	}
 
 	self endon("death");
-	var_00 = function_00B3(self.target,"targetname");
+	var_00 = getnode(self.target,"targetname");
 	if(isdefined(var_00)) {
 		self give_more_perk(var_00);
 	}
@@ -2719,7 +2719,7 @@ func_6F4E() {
 
 	self waittill("goal");
 	while(isdefined(var_00.target)) {
-		var_01 = function_00B3(var_00.target,"targetname");
+		var_01 = getnode(var_00.target,"targetname");
 		if(isdefined(var_01)) {
 			var_00 = var_01;
 		}
@@ -2871,7 +2871,7 @@ camper_trigger_think(param_00) {
 			continue;
 		}
 
-		var_07 = function_00B3(var_05,"script_linkname");
+		var_07 = getnode(var_05,"script_linkname");
 		if(!isdefined(var_07)) {
 			continue;
 		}
@@ -2991,10 +2991,10 @@ func_6CA6(param_00) {
 }
 
 func_6F5D(param_00) {
-	var_01 = function_00C8(param_00.target);
+	var_01 = getspawnerarray(param_00.target);
 	scripts\engine\utility::array_thread(var_01,::func_6F59);
 	param_00 waittill("trigger");
-	var_01 = function_00C8(param_00.target);
+	var_01 = getspawnerarray(param_00.target);
 	scripts\engine\utility::array_thread(var_01,::func_6F5C,param_00);
 }
 
@@ -3122,7 +3122,7 @@ func_9C98() {
 		return 0;
 	}
 
-	var_00 = function_00C8(self.target);
+	var_00 = getspawnerarray(self.target);
 	if(!var_00.size) {
 		return 0;
 	}
@@ -3145,7 +3145,7 @@ func_DB3D(param_00) {
 		}
 	}
 
-	var_02 = function_00C8(self.target);
+	var_02 = getspawnerarray(self.target);
 	self.spawners = 0;
 	scripts\engine\utility::array_thread(var_02,::func_DB3F,self);
 	var_04 = randomint(var_02.size);
@@ -3226,9 +3226,9 @@ func_DB3D(param_00) {
 
 func_DB3F(param_00) {
 	param_00 endon("death");
-	param_00.var_1087B++;
+	param_00.spawners++;
 	self waittill("death");
-	param_00.var_1087B--;
+	param_00.spawners--;
 	if(!param_00.spawners) {
 		param_00 delete();
 	}
@@ -3263,7 +3263,7 @@ func_100C6() {}
 
 func_DC9B(param_00) {
 	param_00 waittill("trigger");
-	var_01 = function_00C8(param_00.target);
+	var_01 = getspawnerarray(param_00.target);
 	if(!var_01.size) {
 		return;
 	}
@@ -3298,9 +3298,9 @@ func_2BD0() {
 func_1085E(param_00) {
 	var_01 = param_00 giveplayeraccessory();
 	if(var_01.var_394 != "none") {
-		var_02 = function_00EA(var_01.var_394);
+		var_02 = getweaponmodel(var_01.var_394);
 		var_01 attach(var_02,"tag_weapon_right");
-		var_03 = function_00E9(var_01.var_394);
+		var_03 = getweaponhidetags(var_01.var_394);
 		for(var_04 = 0;var_04 < var_03.size;var_04++) {
 			var_01 hidepart(var_03[var_04],var_02);
 		}

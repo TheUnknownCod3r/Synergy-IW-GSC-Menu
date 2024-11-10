@@ -3,143 +3,143 @@
  * Script: scripts\2810.gsc
 ***************************************/
 
-_id_1314D(var_0, var_1, var_2) {
-  var_3 = var_0;
+validationerror(var_00, var_01, var_02) {
+  var_03 = var_00;
 
-  if (isdefined(var_1))
-  var_3 = var_3 + "_" + var_1;
+  if (isdefined(var_01))
+  var_03 = var_03 + "_" + var_01;
 
-  if (isdefined(var_2))
-  var_3 = var_3 + " - " + var_2;
+  if (isdefined(var_02))
+  var_03 = var_03 + " - " + var_02;
 
   if (getdvarint("scr_validate_print", 0) == 1) {}
 
   if (getdvarint("scr_validate_assert", 0) == 1) {}
 
   if (getdvarint("scr_validate_record", 0) == 1)
-  scripts\mp\class::_id_DDF5();
+  scripts\mp\class::recordvalidationinfraction();
 }
 
-_id_13140(var_0) {
-  var_1 = spawnstruct();
-  var_1._id_D640 = 0;
-  var_1._id_13D1E = [];
-  var_1._id_9B0F = [];
-  var_1._id_9B0F[2] = [];
-  var_1._id_9B0F[5] = [];
-  var_1._id_9B0F[9] = [];
-  _id_1314B(var_1, var_0._id_AE7F, var_0._id_AE86, var_0._id_AE88, var_0._id_AE90, var_0._id_AE8A, var_0._id_AE91, 0);
-  _id_1314B(var_1, var_0._id_AE94, var_0._id_AE9A, var_0._id_AE9C, var_0._id_AEA4, var_0._id_AE9E, var_0._id_AEA5, 1);
-  _id_13146(var_1, var_0._id_AE7B, "primary", var_0._id_AE69);
-  _id_13146(var_1, var_0._id_AE7D, "secondary", var_0._id_AE6A);
-  _id_13145(var_1, var_0._id_AE79, var_0._id_AE62);
-  _id_13147(var_1, var_0._id_AE6E, var_0._id_AE70, var_0._id_AE72);
-  _id_13148(var_1, var_0._id_AEAA, var_0._id_AE62);
-  _id_1313A(var_1, var_0._id_AE62);
+validateloadout(var_00) {
+  var_01 = spawnstruct();
+  var_1.func_D640 = 0;
+  var_1.func_13D1E = [];
+  var_1.invaliditems = [];
+  var_1.invaliditems[2] = [];
+  var_1.invaliditems[5] = [];
+  var_1.invaliditems[9] = [];
+  func_1314B(var_01, var_0.loadoutprimary, var_0.loadoutprimaryattachments, var_0.loadoutprimarycamo, var_0.loadoutprimaryreticle, var_0.loadoutprimarylootitemid, var_0.loadoutprimaryvariantid, 0);
+  func_1314B(var_01, var_0.loadoutsecondary, var_0.loadoutsecondaryattachments, var_0.loadoutsecondarycamo, var_0.loadoutsecondaryreticle, var_0.func_AE9E, var_0.func_AEA5, 1);
+  func_13146(var_01, var_0.func_AE7B, "primary", var_0.func_AE69);
+  func_13146(var_01, var_0.func_AE7D, "secondary", var_0.func_AE6A);
+  func_13145(var_01, var_0.loadoutperks, var_0.loadoutarchetype);
+  validatestreaks(var_01, var_0.loadoutkillstreak1, var_0.loadoutkillstreak2, var_0.loadoutkillstreak3);
+  func_13148(var_01, var_0.loadoutsuper, var_0.loadoutarchetype);
+  validatearchetype(var_01, var_0.loadoutarchetype);
 
-  if (var_1._id_D640 > 10) {
-  _id_1314D("totalPointCost");
-  var_1._id_9B0F[0] = 1;
+  if (var_1.func_D640 > 10) {
+  validationerror("totalPointCost");
+  var_1.invaliditems[0] = 1;
   }
 
-  _id_1314C(var_1);
-  var_0 = _id_6E06(var_0, var_1._id_9B0F);
-  return var_0;
+  func_1314C(var_01);
+  var_00 = fixinvaliditems(var_00, var_1.invaliditems);
+  return var_00;
 }
 
-_id_1314B(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
-  var_8 = scripts\mp\utility\game::_id_8234(var_1);
-  var_9 = scripts\mp\utility\game::_id_9D79(var_1);
-  var_10 = scripts\engine\utility::ter_op(var_7, "secondary", "primary");
-  var_11 = scripts\engine\utility::ter_op(var_7, 4, 1);
+func_1314B(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07) {
+  var_08 = scripts\mp\utility\game::getweaponrootname(var_01);
+  var_09 = scripts\mp\utility\game::iscacsecondaryweapon(var_01);
+  var_10 = scripts\engine\utility::ter_op(var_07, "secondary", "primary");
+  var_11 = scripts\engine\utility::ter_op(var_07, 4, 1);
 
-  if (isdefined(var_1) && var_1 != "none" && var_1 != "iw7_fists") {
-  var_0._id_D640++;
+  if (isdefined(var_01) && var_01 != "none" && var_01 != "iw7_fists") {
+  var_0.func_D640++;
 
-  if (var_7) {
-  if (!var_9) {
-  var_0._id_D640++;
-  var_0._id_13D1E["overkill"] = 1;
+  if (var_07) {
+  if (!var_09) {
+  var_0.func_D640++;
+  var_0.func_13D1E["overkill"] = 1;
   }
   }
-  else if (var_9) {
-  _id_1314D("secondaryAsPrimary", undefined, var_1);
-  var_0._id_9B0F[var_11] = 1;
+  else if (var_09) {
+  validationerror("secondaryAsPrimary", undefined, var_01);
+  var_0.invaliditems[var_11] = 1;
   }
 
-  var_12 = scripts\mp\utility\game::_id_13CAC(var_8);
+  var_12 = scripts\mp\utility\game::func_13CAC(var_08);
 
   if (!isdefined(var_12)) {
-  _id_1314D("unknownWeapon", var_10, var_1);
-  var_0._id_9B0F[var_11] = 1;
+  validationerror("unknownWeapon", var_10, var_01);
+  var_0.invaliditems[var_11] = 1;
   } else {
   var_13 = tablelookup("mp/statstable.csv", 0, var_12, 41);
 
   if (int(var_13) < 0) {
-  _id_1314D("unreleasedWeapon", var_10, var_1);
-  var_0._id_9B0F[var_11] = 1;
+  validationerror("unreleasedWeapon", var_10, var_01);
+  var_0.invaliditems[var_11] = 1;
   }
   }
 
-  if (!self _meth_81A7(var_8, "weapon") && !weaponunlocksvialoot(var_8)) {
-  _id_1314D("lockedWeapon", var_10, var_1);
-  var_0._id_9B0F[var_11] = 1;
+  if (!self getteamdompoints(var_08, "weapon") && !weaponunlocksvialoot(var_08)) {
+  validationerror("lockedWeapon", var_10, var_01);
+  var_0.invaliditems[var_11] = 1;
   }
 
-  if (var_5 == 0) {
-  if (var_6 != -1) {
-  _id_1314D("emptyItemIDMismatch", var_10, var_1);
-  var_0._id_9B0F[var_11] = 1;
+  if (var_05 == 0) {
+  if (var_06 != -1) {
+  validationerror("emptyItemIDMismatch", var_10, var_01);
+  var_0.invaliditems[var_11] = 1;
   }
   }
-  else if (var_6 == -1) {
-  _id_1314D("emptyVariantIDMismatch", var_10, var_1);
-  var_0._id_9B0F[var_11] = 1;
+  else if (var_06 == -1) {
+  validationerror("emptyVariantIDMismatch", var_10, var_01);
+  var_0.invaliditems[var_11] = 1;
   } else {
-  if (!scripts\mp\loot::_id_A001(var_5)) {
-  _id_1314D("nonWeaponLootItemID", var_10, var_1);
-  var_0._id_9B0F[var_11] = 1;
+  if (!scripts\mp\loot::isweaponitem(var_05)) {
+  validationerror("nonWeaponLootItemID", var_10, var_01);
+  var_0.invaliditems[var_11] = 1;
   }
 
-  var_14 = scripts\mp\loot::getlootweaponref(var_5);
+  var_14 = scripts\mp\loot::getlootweaponref(var_05);
 
   if (!isdefined(var_14)) {
-  _id_1314D("badLootItemID", var_10, var_1);
-  var_0._id_9B0F[var_11] = 1;
+  validationerror("badLootItemID", var_10, var_01);
+  var_0.invaliditems[var_11] = 1;
   } else {
-  var_15 = scripts\mp\loot::lookupvariantref(var_1, var_6);
+  var_15 = scripts\mp\loot::lookupvariantref(var_01, var_06);
 
   if (!isdefined(var_15)) {
-  _id_1314D("badVariantRef", var_10, var_1);
-  var_0._id_9B0F[var_11] = 1;
+  validationerror("badVariantRef", var_10, var_01);
+  var_0.invaliditems[var_11] = 1;
   }
   else if (var_15 != var_14) {
-  _id_1314D("lootDataMismatch", var_10, var_1);
-  var_0._id_9B0F[var_11] = 1;
+  validationerror("lootDataMismatch", var_10, var_01);
+  var_0.invaliditems[var_11] = 1;
   }
   }
   }
 
-  _id_1313B(var_0, var_2, var_1, var_8, var_10);
+  validateattachments(var_00, var_02, var_01, var_08, var_10);
   }
 }
 
-_id_1313B(var_0, var_1, var_2, var_3, var_4) {
-  var_5 = scripts\mp\utility\game::_id_13C8F(var_2);
-  var_6 = getsubstr(var_5, 7) + "Attach";
-  var_7 = scripts\engine\utility::ter_op(var_4 == "primary", 2, 5);
-  var_8 = 0;
-  var_9 = 0;
-  var_10 = scripts\engine\utility::ter_op(var_4 == "primary", 2, 2);
+validateattachments(var_00, var_01, var_02, var_03, var_04) {
+  var_05 = scripts\mp\utility\game::weapongroupmap(var_02);
+  var_06 = getsubstr(var_05, 7) + "Attach";
+  var_07 = scripts\engine\utility::ter_op(var_04 == "primary", 2, 5);
+  var_08 = 0;
+  var_09 = 0;
+  var_10 = scripts\engine\utility::ter_op(var_04 == "primary", 2, 2);
 
-  foreach (var_17, var_12 in var_1) {
+  foreach (var_17, var_12 in var_01) {
   var_13 = 0;
 
   if (isdefined(var_12) && var_12 != "none") {
-  var_14 = scripts\mp\utility\game::_id_7DE1(var_12);
+  var_14 = scripts\mp\utility\game::getattachmenttype(var_12);
 
   if (isdefined(var_14) && var_14 != "") {
-  var_15 = scripts\mp\utility\game::_id_2496(var_12, var_2);
+  var_15 = scripts\mp\utility\game::attachmentmap_tounique(var_12, var_02);
 
   if (isdefined(var_15)) {
   if (var_14 == "rail")
@@ -147,338 +147,338 @@ _id_1313B(var_0, var_1, var_2, var_3, var_4) {
   }
   }
 
-  var_16 = var_3 + "+" + var_12;
+  var_16 = var_03 + "+" + var_12;
 
-  if (!self _meth_81A7(var_16, var_6)) {
-  _id_1314D("lockedAttachment", var_4, var_12);
-  var_0._id_9B0F[var_7][var_0._id_9B0F[var_7].size] = var_17;
+  if (!self getteamdompoints(var_16, var_06)) {
+  validationerror("lockedAttachment", var_04, var_12);
+  var_0.invaliditems[var_07][var_0.invaliditems[var_07].size] = var_17;
   }
 
-  if (!scripts\mp\weapons::_id_9F3C(var_3, var_12)) {
-  _id_1314D("nonSelectableAttachment", var_4, var_12);
-  var_0._id_9B0F[var_7][var_0._id_9B0F[var_7].size] = var_17;
+  if (!scripts\mp\weapons::func_9F3C(var_03, var_12)) {
+  validationerror("nonSelectableAttachment", var_04, var_12);
+  var_0.invaliditems[var_07][var_0.invaliditems[var_07].size] = var_17;
   }
 
   if (var_13) {
   var_8++;
-  var_0._id_D640++;
+  var_0.func_D640++;
   } else {
   var_9++;
 
-  if (var_9 <= var_10)
-  var_0._id_D640++;
+  if (var_09 <= var_10)
+  var_0.func_D640++;
   else
   {
-  var_0._id_13D1E[var_4 + "_attachment_" + (var_9 + 1)] = 1;
-  var_0._id_D640 = var_0._id_D640 + 2;
+  var_0.func_13D1E[var_04 + "_attachment_" + (var_09 + 1)] = 1;
+  var_0.func_D640 = var_0.func_D640 + 2;
   }
   }
   }
   }
 
-  if (var_9 > 5) {
-  _id_1314D("tooManyAttachments", var_4, var_9);
-  var_0._id_9B0F[scripts\engine\utility::ter_op(var_4 == "primary", 3, 6)] = 1;
+  if (var_09 > 5) {
+  validationerror("tooManyAttachments", var_04, var_09);
+  var_0.invaliditems[scripts\engine\utility::ter_op(var_04 == "primary", 3, 6)] = 1;
   }
 
-  if (var_8 > 1) {
-  _id_1314D("tooManyOpticAttachments", var_4, var_8);
-  var_0._id_9B0F[scripts\engine\utility::ter_op(var_4 == "primary", 3, 6)] = 1;
+  if (var_08 > 1) {
+  validationerror("tooManyOpticAttachments", var_04, var_08);
+  var_0.invaliditems[scripts\engine\utility::ter_op(var_04 == "primary", 3, 6)] = 1;
   }
 }
 
-_id_13146(var_0, var_1, var_2, var_3) {
-  var_4 = scripts\engine\utility::ter_op(var_2 == "primary", 7, 8);
+func_13146(var_00, var_01, var_02, var_03) {
+  var_04 = scripts\engine\utility::ter_op(var_02 == "primary", 7, 8);
 
-  if (isdefined(var_1) && var_1 != "none") {
-  if (!isdefined(level._id_D782[var_1])) {
-  _id_1314D("unknownPower", var_2, var_1);
-  var_0._id_9B0F[var_4] = 1;
+  if (isdefined(var_01) && var_01 != "none") {
+  if (!isdefined(level.powers[var_01])) {
+  validationerror("unknownPower", var_02, var_01);
+  var_0.invaliditems[var_04] = 1;
   }
 
-  if (!self _meth_81A7(var_1, "power")) {
-  _id_1314D("lockedPower", var_2, var_1);
-  var_0._id_9B0F[var_4] = 1;
+  if (!self getteamdompoints(var_01, "power")) {
+  validationerror("lockedPower", var_02, var_01);
+  var_0.invaliditems[var_04] = 1;
   }
 
-  var_5 = _id_B02F(var_1);
+  var_05 = lookuppowerslot(var_01);
 
-  if (!isdefined(var_5)) {
-  _id_1314D("unknownMenuPower", var_2, var_1);
-  var_0._id_9B0F[var_4] = 1;
+  if (!isdefined(var_05)) {
+  validationerror("unknownMenuPower", var_02, var_01);
+  var_0.invaliditems[var_04] = 1;
   }
-  else if (var_5 != var_2) {
-  _id_1314D("powerInWrongSlot", var_2, var_1);
-  var_0._id_9B0F[var_4] = 1;
-  }
-
-  var_0._id_D640++;
+  else if (var_05 != var_02) {
+  validationerror("powerInWrongSlot", var_02, var_01);
+  var_0.invaliditems[var_04] = 1;
   }
 
-  if (scripts\mp\utility\game::istrue(var_3)) {
-  var_0._id_D640 = var_0._id_D640 + 2;
-  var_6 = scripts\engine\utility::ter_op(var_2 == "primary", "extra_lethal", "extra_tactical");
-  var_0._id_13D1E[var_6] = 1;
+  var_0.func_D640++;
+  }
+
+  if (scripts\mp\utility\game::istrue(var_03)) {
+  var_0.func_D640 = var_0.func_D640 + 2;
+  var_06 = scripts\engine\utility::ter_op(var_02 == "primary", "extra_lethal", "extra_tactical");
+  var_0.func_13D1E[var_06] = 1;
   }
 }
 
-_id_13145(var_0, var_1, var_2) {
-  var_3 = [];
+func_13145(var_00, var_01, var_02) {
+  var_03 = [];
   var_3[1] = 0;
   var_3[2] = 0;
   var_3[3] = 0;
 
-  foreach (var_5 in var_1) {
-  if (isdefined(var_5) && var_5 != "none") {
-  if (!isdefined(level._id_CA63[var_5])) {
-  _id_1314D("invalidPerk", undefined, var_5);
-  var_0._id_9B0F[9][var_0._id_9B0F[9].size] = var_5;
+  foreach (var_05 in var_01) {
+  if (isdefined(var_05) && var_05 != "none") {
+  if (!isdefined(level.perksuseslot[var_05])) {
+  validationerror("invalidPerk", undefined, var_05);
+  var_0.invaliditems[9][var_0.invaliditems[9].size] = var_05;
   }
 
-  var_6 = scripts\mp\perks::_id_805C(var_5);
+  var_06 = scripts\mp\perks::_meth_805C(var_05);
 
-  if (isdefined(var_6)) {
-  var_3[var_6]++;
+  if (isdefined(var_06)) {
+  var_3[var_06]++;
 
-  if (var_3[var_6] > 2) {
-  _id_1314D("tooManyPerks", var_6, var_5);
-  var_0._id_9B0F[9][var_0._id_9B0F[9].size] = var_5;
+  if (var_3[var_06] > 2) {
+  validationerror("tooManyPerks", var_06, var_05);
+  var_0.invaliditems[9][var_0.invaliditems[9].size] = var_05;
   }
 
-  if (!self _meth_81A7(var_5, "perk")) {
-  _id_1314D("lockedPerk", var_6, var_5);
-  var_0._id_9B0F[9][var_0._id_9B0F[9].size] = var_5;
+  if (!self getteamdompoints(var_05, "perk")) {
+  validationerror("lockedPerk", var_06, var_05);
+  var_0.invaliditems[9][var_0.invaliditems[9].size] = var_05;
   }
 
-  if (var_3[var_6] == 1)
-  var_0._id_D640++;
+  if (var_3[var_06] == 1)
+  var_0.func_D640++;
   else
   {
-  var_0._id_13D1E["extra_perk_" + var_6] = 1;
-  var_0._id_D640 = var_0._id_D640 + 2;
+  var_0.func_13D1E["extra_perk_" + var_06] = 1;
+  var_0.func_D640 = var_0.func_D640 + 2;
   }
   }
-  else if (isdefined(level._id_B676[var_5])) {
-  if (level._id_B676[var_5]._id_2123 != var_2) {
-  _id_1314D("rigPerkOnWrongRig", undefined, var_5);
-  var_0._id_9B0F[9][var_0._id_9B0F[9].size] = var_5;
+  else if (isdefined(level.menurigperks[var_05])) {
+  if (level.menurigperks[var_05].archetype != var_02) {
+  validationerror("rigPerkOnWrongRig", undefined, var_05);
+  var_0.invaliditems[9][var_0.invaliditems[9].size] = var_05;
   }
 
-  if (!self _meth_81A7(var_5, "trait")) {
-  _id_1314D("lockedRigPerk", var_6, var_5);
-  var_0._id_9B0F[9][var_0._id_9B0F[9].size] = var_5;
+  if (!self getteamdompoints(var_05, "trait")) {
+  validationerror("lockedRigPerk", var_06, var_05);
+  var_0.invaliditems[9][var_0.invaliditems[9].size] = var_05;
   }
   } else {
-  _id_1314D("unknownPerkType", undefined, var_5);
-  var_0._id_9B0F[9][var_0._id_9B0F[9].size] = var_5;
+  validationerror("unknownPerkType", undefined, var_05);
+  var_0.invaliditems[9][var_0.invaliditems[9].size] = var_05;
   }
   }
   }
 }
 
-_id_13147(var_0, var_1, var_2, var_3) {
-  var_4 = [var_1, var_2, var_3];
+validatestreaks(var_00, var_01, var_02, var_03) {
+  var_04 = [var_01, var_02, var_03];
 
-  foreach (var_6 in var_4) {
-  if (var_6 == "none")
+  foreach (var_06 in var_04) {
+  if (var_06 == "none")
   continue;
 
-  var_7 = scripts\mp\killstreaks\killstreaks::_id_7F50(var_6);
+  var_07 = scripts\mp\killstreaks\killstreaks::getkillstreaksetupinfo(var_06);
 
-  if (!isdefined(var_7)) {
-  _id_1314D("unknownStreak", undefined, var_6);
-  var_0._id_9B0F[12] = 1;
-  }
-
-  if (!self _meth_81A7(var_6, "killstreak")) {
-  _id_1314D("lockedStreak", undefined, var_6);
-  var_0._id_9B0F[12] = 1;
-  }
+  if (!isdefined(var_07)) {
+  validationerror("unknownStreak", undefined, var_06);
+  var_0.invaliditems[12] = 1;
   }
 
-  if (var_1 == var_2 && var_1 != "none") {
-  _id_1314D("duplicateStreak", undefined, var_1);
-  var_0._id_9B0F[12] = 1;
+  if (!self getteamdompoints(var_06, "killstreak")) {
+  validationerror("lockedStreak", undefined, var_06);
+  var_0.invaliditems[12] = 1;
   }
-  else if (var_1 == var_3 && var_1 != "none") {
-  _id_1314D("duplicateStreak", undefined, var_1);
-  var_0._id_9B0F[12] = 1;
   }
-  else if (var_2 == var_3 && var_2 != "none") {
-  _id_1314D("duplicateStreak", undefined, var_2);
-  var_0._id_9B0F[12] = 1;
+
+  if (var_01 == var_02 && var_01 != "none") {
+  validationerror("duplicateStreak", undefined, var_01);
+  var_0.invaliditems[12] = 1;
+  }
+  else if (var_01 == var_03 && var_01 != "none") {
+  validationerror("duplicateStreak", undefined, var_01);
+  var_0.invaliditems[12] = 1;
+  }
+  else if (var_02 == var_03 && var_02 != "none") {
+  validationerror("duplicateStreak", undefined, var_02);
+  var_0.invaliditems[12] = 1;
   }
 }
 
-_id_1313A(var_0, var_1) {
-  if (!isdefined(level._id_2127[var_1])) {
-  _id_1314D("unknownArchetype", undefined, var_1);
-  var_0._id_9B0F[10] = 1;
+validatearchetype(var_00, var_01) {
+  if (!isdefined(level.archetypeids[var_01])) {
+  validationerror("unknownArchetype", undefined, var_01);
+  var_0.invaliditems[10] = 1;
   }
 
-  if (!self _meth_81A7(var_1, "rig")) {
-  _id_1314D("lockedArchetype", undefined, var_1);
-  var_0._id_9B0F[10] = 1;
+  if (!self getteamdompoints(var_01, "rig")) {
+  validationerror("lockedArchetype", undefined, var_01);
+  var_0.invaliditems[10] = 1;
   }
 }
 
-_id_13148(var_0, var_1, var_2) {
-  if (!isdefined(var_1) || var_1 == "none")
+func_13148(var_00, var_01, var_02) {
+  if (!isdefined(var_01) || var_01 == "none")
   return;
 
-  var_3 = level._id_10E4E[var_1];
+  var_03 = level.func_10E4E[var_01];
 
-  if (!isdefined(var_3)) {
-  _id_1314D("unknownSuper", undefined, var_1);
-  var_0._id_9B0F[11] = 1;
+  if (!isdefined(var_03)) {
+  validationerror("unknownSuper", undefined, var_01);
+  var_0.invaliditems[11] = 1;
   }
-  else if (var_3._id_2123 != var_2) {
-  _id_1314D("superOnWrongRig", undefined, var_1);
-  var_0._id_9B0F[11] = 1;
+  else if (var_3.archetype != var_02) {
+  validationerror("superOnWrongRig", undefined, var_01);
+  var_0.invaliditems[11] = 1;
   }
 
-  if (!self _meth_81A7(var_1, "super")) {
-  _id_1314D("lockedSuper", undefined, var_1);
-  var_0._id_9B0F[11] = 1;
+  if (!self getteamdompoints(var_01, "super")) {
+  validationerror("lockedSuper", undefined, var_01);
+  var_0.invaliditems[11] = 1;
   }
 }
 
-_id_1314C(var_0) {}
+func_1314C(var_00) {}
 
-_id_6E08(var_0) {
-  var_1 = scripts\mp\class::_id_AE31();
-  var_1._id_AE62 = "archetype_assault";
-  var_1._id_AE7F = "iw7_m4";
-  return var_1;
+fixloadout(var_00) {
+  var_01 = scripts\mp\class::loadout_getclassstruct();
+  var_1.loadoutarchetype = "archetype_assault";
+  var_1.loadoutprimary = "iw7_m4";
+  return var_01;
 }
 
-_id_6E10(var_0, var_1) {
-  if (var_1 == "primary") {
-  var_0._id_AE7F = "iw7_m4";
-  var_0._id_AE88 = "none";
-  var_0._id_AE90 = "none";
-  var_0._id_AE8A = 0;
-  var_0._id_AE91 = -1;
+fixweapon(var_00, var_01) {
+  if (var_01 == "primary") {
+  var_0.loadoutprimary = "iw7_m4";
+  var_0.loadoutprimarycamo = "none";
+  var_0.loadoutprimaryreticle = "none";
+  var_0.loadoutprimarylootitemid = 0;
+  var_0.loadoutprimaryvariantid = -1;
 
-  for (var_2 = 0; var_2 < scripts\mp\class::_id_7F9E(); var_2++)
-  var_0._id_AE86[var_2] = "none";
+  for (var_02 = 0; var_02 < scripts\mp\class::getmaxprimaryattachments(); var_2++)
+  var_0.loadoutprimaryattachments[var_02] = "none";
   } else {
-  var_0._id_AE94 = "none";
-  var_0._id_AE9C = "none";
-  var_0._id_AEA4 = "none";
-  var_0._id_AE9E = 0;
-  var_0._id_AEA5 = -1;
+  var_0.loadoutsecondary = "none";
+  var_0.loadoutsecondarycamo = "none";
+  var_0.loadoutsecondaryreticle = "none";
+  var_0.func_AE9E = 0;
+  var_0.func_AEA5 = -1;
 
-  for (var_2 = 0; var_2 < scripts\mp\class::_id_7FA0(); var_2++)
-  var_0._id_AE9A[var_2] = "none";
+  for (var_02 = 0; var_02 < scripts\mp\class::getmaxsecondaryattachments(); var_2++)
+  var_0.loadoutsecondaryattachments[var_02] = "none";
   }
 }
 
-_id_6E00(var_0, var_1, var_2) {
-  if (var_1 == "primary")
-  var_0._id_AE86[var_2] = "none";
+fixattachment(var_00, var_01, var_02) {
+  if (var_01 == "primary")
+  var_0.loadoutprimaryattachments[var_02] = "none";
   else
-  var_0._id_AE9A[var_2] = "none";
+  var_0.loadoutsecondaryattachments[var_02] = "none";
 }
 
-_id_6E0A(var_0, var_1) {
-  if (var_1 == "primary") {
-  var_0._id_AE7B = "none";
-  var_0._id_AE7C = [];
-  var_0._id_AE67 = 0;
+fixpower(var_00, var_01) {
+  if (var_01 == "primary") {
+  var_0.func_AE7B = "none";
+  var_0.func_AE7C = [];
+  var_0.loadoutextrapowerprimary = 0;
   } else {
-  var_0._id_AE7D = "none";
-  var_0._id_AE7E = [];
-  var_0._id_AE68 = 0;
+  var_0.func_AE7D = "none";
+  var_0.func_AE7E = [];
+  var_0.loadoutextrapowersecondary = 0;
   }
 }
 
-_id_6E09(var_0, var_1) {
-  var_0._id_AE79 = scripts\engine\utility::array_remove(var_0._id_AE79, var_1);
+fixperk(var_00, var_01) {
+  var_0.loadoutperks = scripts\engine\utility::array_remove(var_0.loadoutperks, var_01);
 }
 
-_id_6E07(var_0) {
-  var_0._id_AE6E = "none";
-  var_0._id_AE6F = [];
-  var_0._id_AE70 = "none";
-  var_0._id_AE71 = [];
-  var_0._id_AE72 = "none";
-  var_0._id_AE73 = [];
+fixkillstreaks(var_00) {
+  var_0.loadoutkillstreak1 = "none";
+  var_0.func_AE6F = [];
+  var_0.loadoutkillstreak2 = "none";
+  var_0.func_AE71 = [];
+  var_0.loadoutkillstreak3 = "none";
+  var_0.func_AE73 = [];
 }
 
-_id_6DFF(var_0) {
-  var_0._id_AE62 = "archetype_assault";
-  _id_6E0B(var_0);
+fixarchetype(var_00) {
+  var_0.loadoutarchetype = "archetype_assault";
+  fixsuper(var_00);
 
-  foreach (var_2 in var_0._id_AE79) {
-  if (isdefined(level._id_B676[var_2])) {
-  _id_6E09(var_0, var_2);
+  foreach (var_02 in var_0.loadoutperks) {
+  if (isdefined(level.menurigperks[var_02])) {
+  fixperk(var_00, var_02);
   break;
   }
   }
 }
 
-_id_6E0B(var_0) {
-  var_0._id_AEAA = "none";
+fixsuper(var_00) {
+  var_0.loadoutsuper = "none";
 }
 
-_id_6E06(var_0, var_1) {
+fixinvaliditems(var_00, var_01) {
   if (isdefined(var_1[0])) {
-  var_0 = _id_6E08(var_0);
-  return var_0;
+  var_00 = fixloadout(var_00);
+  return var_00;
   }
 
   if (isdefined(var_1[1]))
-  _id_6E10(var_0, "primary");
+  fixweapon(var_00, "primary");
   else if (isdefined(var_1[3])) {
-  for (var_2 = 0; var_2 < scripts\mp\class::_id_7F9E(); var_2++)
-  _id_6E00(var_0, "primary", var_2);
+  for (var_02 = 0; var_02 < scripts\mp\class::getmaxprimaryattachments(); var_2++)
+  fixattachment(var_00, "primary", var_02);
   } else {
-  foreach (var_2 in var_1[2])
-  _id_6E00(var_0, "primary", var_2);
+  foreach (var_02 in var_1[2])
+  fixattachment(var_00, "primary", var_02);
   }
 
   if (isdefined(var_1[4]))
-  _id_6E10(var_0, "secondary");
+  fixweapon(var_00, "secondary");
   else if (isdefined(var_1[6])) {
-  for (var_2 = 0; var_2 < scripts\mp\class::_id_7FA0(); var_2++)
-  _id_6E00(var_0, "secondary", var_2);
+  for (var_02 = 0; var_02 < scripts\mp\class::getmaxsecondaryattachments(); var_2++)
+  fixattachment(var_00, "secondary", var_02);
   } else {
-  foreach (var_2 in var_1[5])
-  _id_6E00(var_0, "secondary", var_2);
+  foreach (var_02 in var_1[5])
+  fixattachment(var_00, "secondary", var_02);
   }
 
   if (isdefined(var_1[7]))
-  _id_6E0A(var_0, "primary");
+  fixpower(var_00, "primary");
 
   if (isdefined(var_1[8]))
-  _id_6E0A(var_0, "secondary");
+  fixpower(var_00, "secondary");
 
-  foreach (var_8 in var_1[9])
-  _id_6E09(var_0, var_8);
+  foreach (var_08 in var_1[9])
+  fixperk(var_00, var_08);
 
   if (isdefined(var_1[10]))
-  _id_6DFF(var_0);
+  fixarchetype(var_00);
   else if (isdefined(var_1[11]))
-  _id_6DFF(var_0);
+  fixarchetype(var_00);
 
   if (isdefined(var_1[12]))
-  _id_6E07(var_0);
+  fixkillstreaks(var_00);
 
-  return var_0;
+  return var_00;
 }
 
-_id_B02F(var_0) {
-  var_1 = tablelookup("mp/menuPowers.csv", 3, var_0, 2);
+lookuppowerslot(var_00) {
+  var_01 = tablelookup("mp/menuPowers.csv", 3, var_00, 2);
 
-  if (!isdefined(var_1) || var_1 != "1" && var_1 != "2")
+  if (!isdefined(var_01) || var_01 != "1" && var_01 != "2")
   return undefined;
 
-  return scripts\engine\utility::ter_op(var_1 == "1", "primary", "secondary");
+  return scripts\engine\utility::ter_op(var_01 == "1", "primary", "secondary");
 }
 
-weaponunlocksvialoot(var_0) {
-  switch (var_0) {
+weaponunlocksvialoot(var_00) {
+  switch (var_00) {
   case "iw7_venomx":
   case "iw7_unsalmg":
   case "iw7_mp28":

@@ -4,109 +4,109 @@
 ***************************************/
 
 main() {
-  level._id_740A["min_participation"] = -200;
-  level._id_740A["max_participation"] = 1000;
-  level._id_740A["enemy_kill_points"] = 250;
-  level._id_740A["friend_kill_points"] = -650;
-  level._id_740A["point_loss_interval"] = 1.25;
-  level.player._id_C929 = 0;
-  level._id_7416 = 0;
-  level._id_7417 = 0;
+  level.friendlyfire["min_participation"] = -200;
+  level.friendlyfire["max_participation"] = 1000;
+  level.friendlyfire["enemy_kill_points"] = 250;
+  level.friendlyfire["friend_kill_points"] = -650;
+  level.friendlyfire["point_loss_interval"] = 1.25;
+  level.player.func_C929 = 0;
+  level.func_7416 = 0;
+  level.func_7417 = 0;
   setdvarifuninitialized("friendlyfire_dev_disabled", "0");
-  scripts\engine\utility::_id_6E39("friendly_fire_warning");
-  thread _id_4EDB();
-  thread _id_C92B();
+  scripts\engine\utility::flag_init("friendly_fire_warning");
+  thread func_4EDB();
+  thread func_C92B();
 }
 
-_id_4EDB() {}
+func_4EDB() {}
 
-_id_20A7(var_0) {
-  level._id_740B = var_0;
+func_20A7(var_00) {
+  level.func_740B = var_00;
 }
 
-_id_E013(var_0) {
-  level._id_740B = undefined;
+func_E013(var_00) {
+  level.func_740B = undefined;
 }
 
-_id_73B1(var_0) {
-  if (!isdefined(var_0))
+func_73B1(var_00) {
+  if (!isdefined(var_00))
   return;
 
   if (!isdefined(var_0.team))
   var_0.team = "allies";
 
-  if (isdefined(level._id_BFED))
+  if (isdefined(level.func_BFED))
   return;
 
   level endon("mission failed");
-  level thread _id_C15E(var_0);
-  level thread _id_C160(var_0);
-  level thread _id_C161(var_0);
+  level thread func_C15E(var_00);
+  level thread func_C160(var_00);
+  level thread func_C161(var_00);
 
   for (;;) {
-  if (!isdefined(var_0))
+  if (!isdefined(var_00))
   return;
 
   if (var_0.health <= 0)
   return;
 
-  var_1 = undefined;
-  var_2 = undefined;
-  var_3 = undefined;
-  var_4 = undefined;
-  var_5 = undefined;
-  var_6 = undefined;
-  var_7 = undefined;
-  var_0 waittill("friendlyfire_notify", var_1, var_2, var_3, var_4, var_5, var_6);
+  var_01 = undefined;
+  var_02 = undefined;
+  var_03 = undefined;
+  var_04 = undefined;
+  var_05 = undefined;
+  var_06 = undefined;
+  var_07 = undefined;
+  var_00 waittill("friendlyfire_notify", var_01, var_02, var_03, var_04, var_05, var_06);
 
-  if (!isdefined(var_0))
+  if (!isdefined(var_00))
   return;
 
-  if (!isdefined(var_2))
+  if (!isdefined(var_02))
   continue;
 
-  if (isdefined(level._id_740B)) {
-  var_1 = var_1 * level._id_740B;
-  var_1 = int(var_1);
+  if (isdefined(level.func_740B)) {
+  var_01 = var_01 * level.func_740B;
+  var_01 = int(var_01);
   }
 
-  var_8 = 0;
+  var_08 = 0;
 
-  if (!isdefined(var_6))
-  var_6 = var_0._id_00E2;
+  if (!isdefined(var_06))
+  var_06 = var_0.damageweapon;
 
-  if (isdefined(level._id_740C)) {
-  if (isdefined(var_2._id_4D5C)) {
-  var_7 = 1;
-  var_2 = var_2._id_4D5C;
+  if (isdefined(level.func_740C)) {
+  if (isdefined(var_2.damageowner)) {
+  var_07 = 1;
+  var_02 = var_2.damageowner;
   }
   }
 
-  if (isdefined(level._id_740D)) {
-  if (isdefined(var_2) && isdefined(var_2.owner) && var_2.owner == level.player)
-  var_8 = 1;
+  if (isdefined(level.func_740D)) {
+  if (isdefined(var_02) && isdefined(var_2.owner) && var_2.owner == level.player)
+  var_08 = 1;
   }
 
-  if (isplayer(var_2)) {
-  var_8 = 1;
+  if (isplayer(var_02)) {
+  var_08 = 1;
 
-  if (isdefined(var_6) && var_6 == "none")
-  var_8 = 0;
+  if (isdefined(var_06) && var_06 == "none")
+  var_08 = 0;
 
-  if (var_2 isusingturret())
-  var_8 = 1;
+  if (var_02 isusingturret())
+  var_08 = 1;
 
-  if (isdefined(var_7))
-  var_8 = 1;
+  if (isdefined(var_07))
+  var_08 = 1;
   }
   else if (isdefined(var_2.code_classname) && var_2.code_classname == "script_vehicle") {
-  var_9 = var_2 _meth_816A();
+  var_09 = var_02 _meth_816A();
 
-  if (isdefined(var_9) && isplayer(var_9))
-  var_8 = 1;
+  if (isdefined(var_09) && isplayer(var_09))
+  var_08 = 1;
   }
 
-  if (!var_8)
+  if (!var_08)
   continue;
 
   if (!isdefined(var_0.team))
@@ -120,131 +120,131 @@ _id_73B1(var_0) {
   else
   var_11 = issubstr(var_0.classname, "civilian");
 
-  var_12 = var_1 == -1;
+  var_12 = var_01 == -1;
 
   if (!var_10 && !var_11) {
   if (var_12) {
-  level.player._id_C929 = level.player._id_C929 + level._id_740A["enemy_kill_points"];
-  _id_C92A();
+  level.player.func_C929 = level.player.func_C929 + level.friendlyfire["enemy_kill_points"];
+  func_C92A();
   return;
   }
   } else {
-  if (isdefined(var_0._id_BFED))
+  if (isdefined(var_0.func_BFED))
   continue;
 
-  if (var_5 == "MOD_PROJECTILE_SPLASH" && isdefined(level._id_BFEE))
+  if (var_05 == "MOD_PROJECTILE_SPLASH" && isdefined(level.func_BFEE))
   continue;
 
-  if (isdefined(var_6) && var_6 == "claymore")
+  if (isdefined(var_06) && var_06 == "claymore")
   continue;
 
   if (var_12) {
-  if (isdefined(var_0._id_738F))
-  level.player._id_C929 = level.player._id_C929 + var_0._id_738F;
+  if (isdefined(var_0.func_738F))
+  level.player.func_C929 = level.player.func_C929 + var_0.func_738F;
   else
-  level.player._id_C929 = level.player._id_C929 + level._id_740A["friend_kill_points"];
+  level.player.func_C929 = level.player.func_C929 + level.friendlyfire["friend_kill_points"];
   }
   else
-  level.player._id_C929 = level.player._id_C929 - var_1;
+  level.player.func_C929 = level.player.func_C929 - var_01;
 
-  _id_C92A();
+  func_C92A();
 
-  if (_id_3DA1(var_0, var_5) && _id_EB68()) {
+  if (func_3DA1(var_00, var_05) && func_EB68()) {
   if (var_12)
   return;
   else
   continue;
   }
 
-  if (isdefined(level._id_73B0)) {
-  [[level._id_73B0]](var_0, var_1, var_2, var_3, var_4, var_5, var_6);
+  if (isdefined(level.func_73B0)) {
+  [[level.func_73B0]](var_00, var_01, var_02, var_03, var_04, var_05, var_06);
   continue;
   }
 
-  _id_73AE(var_11);
+  func_73AE(var_11);
   }
   }
 }
 
-_id_73AE(var_0) {
-  if (isdefined(level._id_6AD2) && level._id_6AD2) {
-  level thread _id_B8CF(var_0);
+func_73AE(var_00) {
+  if (isdefined(level.func_6AD2) && level.func_6AD2) {
+  level thread func_B8CF(var_00);
   return;
   }
 
-  var_1 = level._id_7417;
+  var_01 = level.func_7417;
 
-  if (isdefined(level._id_740C) && var_0)
-  var_1 = 0;
+  if (isdefined(level.func_740C) && var_00)
+  var_01 = 0;
 
-  if (var_1)
+  if (var_01)
   return;
 
-  if (level._id_7416 == 1)
+  if (level.func_7416 == 1)
   return;
 
-  if (level.player._id_C929 <= level._id_740A["min_participation"])
-  level thread _id_B8CF(var_0);
+  if (level.player.func_C929 <= level.friendlyfire["min_participation"])
+  level thread func_B8CF(var_00);
 }
 
-_id_3DA1(var_0, var_1) {
-  if (!isdefined(var_0))
+func_3DA1(var_00, var_01) {
+  if (!isdefined(var_00))
   return 0;
 
-  var_2 = 0;
+  var_02 = 0;
 
-  if (isdefined(var_0._id_00E2) && var_0._id_00E2 == "none")
-  var_2 = 1;
+  if (isdefined(var_0.damageweapon) && var_0.damageweapon == "none")
+  var_02 = 1;
 
-  if (isdefined(var_1) && var_1 == "MOD_GRENADE_SPLASH")
-  var_2 = 1;
+  if (isdefined(var_01) && var_01 == "MOD_GRENADE_SPLASH")
+  var_02 = 1;
 
-  return var_2;
+  return var_02;
 }
 
-_id_EB68() {
-  var_0 = gettime();
+func_EB68() {
+  var_00 = gettime();
 
-  if (var_0 < 4500)
+  if (var_00 < 4500)
   return 1;
-  else if (var_0 - level._id_2668._id_A943 < 4500)
+  else if (var_00 - level.func_2668.func_A943 < 4500)
   return 1;
 
   return 0;
 }
 
-_id_C92A() {
-  if (level.player._id_C929 > level._id_740A["max_participation"])
-  level.player._id_C929 = level._id_740A["max_participation"];
+func_C92A() {
+  if (level.player.func_C929 > level.friendlyfire["max_participation"])
+  level.player.func_C929 = level.friendlyfire["max_participation"];
 
-  if (level.player._id_C929 < level._id_740A["min_participation"])
-  level.player._id_C929 = level._id_740A["min_participation"];
+  if (level.player.func_C929 < level.friendlyfire["min_participation"])
+  level.player.func_C929 = level.friendlyfire["min_participation"];
 }
 
-_id_C92B() {
+func_C92B() {
   level endon("mission failed");
 
   for (;;) {
-  if (level.player._id_C929 > 0)
-  level.player._id_C929--;
-  else if (level.player._id_C929 < 0)
-  level.player._id_C929++;
+  if (level.player.func_C929 > 0)
+  level.player.func_C929--;
+  else if (level.player.func_C929 < 0)
+  level.player.func_C929++;
 
-  wait(level._id_740A["point_loss_interval"]);
+  wait(level.friendlyfire["point_loss_interval"]);
   }
 }
 
-_id_1299E() {
-  level._id_7416 = 0;
+func_1299E() {
+  level.func_7416 = 0;
 }
 
-_id_129A9() {
-  level._id_7416 = 1;
+func_129A9() {
+  level.func_7416 = 1;
 }
 
-_id_B8CF(var_0) {
-  if (!isdefined(var_0))
-  var_0 = 0;
+func_B8CF(var_00) {
+  if (!isdefined(var_00))
+  var_00 = 0;
 
   if (getdvar("friendlyfire_dev_disabled") == "1")
   return;
@@ -261,59 +261,59 @@ _id_B8CF(var_0) {
   level notify("mission failed");
   level notify("friendlyfire_mission_fail");
   waittillframeend;
-  _func_1C5("hud_missionFailed", 1);
+  _setsaveddvar("hud_missionFailed", 1);
   setomnvar("ui_hide_weapon_info", 1);
-  _func_1C5("hud_showstance", 0);
-  _func_1C5("actionSlotsHide", 1);
+  _setsaveddvar("hud_showstance", 0);
+  _setsaveddvar("actionSlotsHide", 1);
 
-  if (isdefined(level.player._id_6AD1))
+  if (isdefined(level.player.func_6AD1))
   return;
 
-  if (var_0)
+  if (var_00)
   setomnvar("ui_death_hint", 9);
-  else if (isdefined(level._id_4C51))
-  _id_0B60::_id_F32D(level._id_4C51);
+  else if (isdefined(level.func_4C51))
+  func_0B60::func_F32D(level.func_4C51);
   else
   setomnvar("ui_death_hint", 12);
 
-  if (isdefined(level._id_4C52))
-  thread _id_0B60::_id_F330(level._id_4C52, 64, 64, 0);
+  if (isdefined(level.func_4C52))
+  thread func_0B60::func_F330(level.func_4C52, 64, 64, 0);
 
-  _id_0B91::_id_B8D1();
+  scripts/sp/utility::func_B8D1();
 }
 
-_id_1D2B() {
+func_1D2B() {
   level.player endon("death");
   self endon("death");
-  self _meth_83A1();
-  _id_0B91::_id_414F();
-  _id_0B91::_id_F417(1);
-  _id_0B91::_id_41E8("axis", "allies");
+  self givescorefortrophyblocks();
+  scripts/sp/utility::func_414F();
+  scripts/sp/utility::func_F417(1);
+  scripts/sp/utility::clearthreatbias("axis", "allies");
 
   for (;;) {
   self.team = "axis";
-  self._id_6BAE = level.player;
+  self.func_6BAE = level.player;
   wait 0.05;
   }
 }
 
-_id_C15E(var_0) {
-  var_0 endon("death");
+func_C15E(var_00) {
+  var_00 endon("death");
 
   for (;;) {
-  var_0 waittill("damage", var_1, var_2, var_3, var_4, var_5, var_6, var_6, var_6, var_6, var_7);
-  var_0 notify("friendlyfire_notify", var_1, var_2, var_3, var_4, var_5, var_7);
+  var_00 waittill("damage", var_01, var_02, var_03, var_04, var_05, var_06, var_06, var_06, var_06, var_07);
+  var_00 notify("friendlyfire_notify", var_01, var_02, var_03, var_04, var_05, var_07);
   }
 }
 
-_id_C160(var_0) {
-  var_0 waittill("damage_notdone", var_1, var_2, var_3, var_4);
-  var_0 notify("friendlyfire_notify", -1, var_2, undefined, undefined, var_4);
+func_C160(var_00) {
+  var_00 waittill("damage_notdone", var_01, var_02, var_03, var_04);
+  var_00 notify("friendlyfire_notify", -1, var_02, undefined, undefined, var_04);
 }
 
-_id_C161(var_0) {
-  var_0 waittill("death", var_1, var_2, var_3);
-  var_0 notify("friendlyfire_notify", -1, var_1, undefined, undefined, var_2, var_3);
+func_C161(var_00) {
+  var_00 waittill("death", var_01, var_02, var_03);
+  var_00 notify("friendlyfire_notify", -1, var_01, undefined, undefined, var_02, var_03);
 }
 
-_id_53AE(var_0) {}
+func_53AE(var_00) {}

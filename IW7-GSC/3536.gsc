@@ -3,62 +3,62 @@
  * Script: scripts\3536.gsc
 ***************************************/
 
-_id_B381() {
+marktarget_init() {
   level._effect["marked_target"] = loadfx("vfx/iw7/_requests/mp/vfx_marked_target_z.vfx");
 }
 
-_id_B382(var_0, var_1) {
+marktarget_run(var_00, var_01) {
   self endon("death");
   self endon("disconnect");
   level endon("game_ended");
 
-  if (scripts\engine\utility::_id_9D74(var_1) && isplayer(var_0) && var_0.team != self.team && !var_0 scripts\mp\utility\game::_id_12D6("specialty_empimmune") && !isdefined(var_0._id_9E92))
-  thread _id_B380(var_0);
+  if (scripts\engine\utility::isbulletdamage(var_01) && isplayer(var_00) && var_0.team != self.team && !var_00 scripts\mp\utility\game::_hasperk("specialty_empimmune") && !isdefined(var_0.ismarkedtarget))
+  thread marktarget_execute(var_00);
 }
 
-_id_B380(var_0) {
-  var_1 = var_0 scripts\engine\utility::_id_107E6();
-  var_2 = spawn("script_model", var_1.origin);
-  var_2 setmodel("tag_origin");
-  var_2 linkto(var_1, "tag_origin", (0, 0, 45), (0, 0, 0));
-  var_1 linkto(var_0, "tag_origin", (0, 0, 0), (0, 0, 0));
-  var_0._id_9E92 = 1;
-  var_0._id_8CC1 = 1;
+marktarget_execute(var_00) {
+  var_01 = var_00 scripts\engine\utility::spawn_tag_origin();
+  var_02 = spawn("script_model", var_1.origin);
+  var_02 setmodel("tag_origin");
+  var_02 linkto(var_01, "tag_origin", (0, 0, 45), (0, 0, 0));
+  var_01 linkto(var_00, "tag_origin", (0, 0, 0), (0, 0, 0));
+  var_0.ismarkedtarget = 1;
+  var_0.healthregendisabled = 1;
   wait 0.1;
-  _id_11417(var_0, var_2);
+  tagmarkedplayer(var_00, var_02);
   wait 0.1;
 
-  if (isdefined(var_0))
-  var_0 _id_E13C(var_1);
+  if (isdefined(var_00))
+  var_00 removemarkfromtarget(var_01);
 }
 
-_id_11417(var_0, var_1) {
+tagmarkedplayer(var_00, var_01) {
   self endon("death");
   self endon("disconnect");
-  scripts\mp\missions::_id_D991("ch_trait_marked_target");
-  var_2 = gettime() + 3000;
+  scripts\mp\missions::func_D991("ch_trait_marked_target");
+  var_02 = gettime() + 3000;
 
-  while (isalive(var_0) && gettime() < var_2) {
+  while (isalive(var_00) && gettime() < var_02) {
   if (level.gametype != "dm")
-  var_3 = _func_29A(scripts\engine\utility::_id_7ECB("marked_target"), var_1, "tag_origin", self.team);
+  var_03 = _playfxontagforteam(scripts\engine\utility::getfx("marked_target"), var_01, "tag_origin", self.team);
   else
-  var_3 = playfxontagforclients(scripts\engine\utility::_id_7ECB("marked_target"), var_1, "tag_origin", self);
+  var_03 = playfxontagforclients(scripts\engine\utility::getfx("marked_target"), var_01, "tag_origin", self);
 
   wait 1.1;
   }
 }
 
-_id_E13C(var_0) {
-  var_0 delete();
-  self._id_9E92 = undefined;
-  self._id_8CC1 = undefined;
+removemarkfromtarget(var_00) {
+  var_00 delete();
+  self.ismarkedtarget = undefined;
+  self.healthregendisabled = undefined;
 }
 
-_id_13AA0(var_0, var_1, var_2) {
+func_13AA0(var_00, var_01, var_02) {
   self endon("disconnect");
   level endon("game_ended");
-  scripts\engine\utility::_id_13737(var_2, "leave");
+  scripts\engine\utility::waittill_any_timeout_no_endon_death(var_02, "leave");
 
-  if (isdefined(var_1))
-  scripts\mp\utility\game::_id_C78F(var_0, var_1);
+  if (isdefined(var_01))
+  scripts\mp\utility\game::outlinedisable(var_00, var_01);
 }

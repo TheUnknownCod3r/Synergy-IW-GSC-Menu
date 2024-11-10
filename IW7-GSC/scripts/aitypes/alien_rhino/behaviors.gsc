@@ -41,11 +41,11 @@ charge_tick(param_00) {
 		return level.failure;
 	}
 
-	if(scripts\common\utility::istrue(self.bchargeaborted)) {
+	if(scripts\engine\utility::istrue(self.bchargeaborted)) {
 		return level.failure;
 	}
 
-	var_01 = getclosestpointonnavmesh(self.var_4B26.origin);
+	var_01 = getclosestpointonnavmesh(self.curmeleetarget.origin);
 	self ghostskulls_complete_status(var_01);
 	if(scripts\aitypes\dlc4\bt_state_api::btstate_tickstates(param_00)) {
 		return level.running;
@@ -60,7 +60,7 @@ charge_end(param_00) {
 	self.bchargehit = undefined;
 	self.desiredyaw = undefined;
 	self.bchargeaborted = undefined;
-	self.var_1198.chargeintroindex = undefined;
+	self._blackboard.chargeintroindex = undefined;
 	self clearpath();
 	var_01 = scripts\asm\dlc4\dlc4_asm::gettunedata();
 	self.nextchargeattacktesttime = gettime() + randomintrange(var_01.min_charge_attack_interval_ms,var_01.max_charge_attack_interval_ms);
@@ -85,7 +85,7 @@ charge_enddone(param_00,param_01) {
 }
 
 trycharge(param_00,param_01,param_02) {
-	if(!scripts\common\utility::istrue(param_02)) {
+	if(!scripts\engine\utility::istrue(param_02)) {
 		if(isdefined(self.nextchargeattacktesttime) && gettime() < self.nextchargeattacktesttime) {
 			return 0;
 		}
@@ -126,7 +126,7 @@ trycharge(param_00,param_01,param_02) {
 		return 0;
 	}
 
-	self.var_1198.chargeintroindex = var_05;
+	self._blackboard.chargeintroindex = var_05;
 	scripts\aitypes\dlc4\bt_action_api::setdesiredbtaction(param_00,"charge");
 	return 1;
 }
@@ -220,7 +220,7 @@ decideaction(param_00) {
 }
 
 followenemy_begin(param_00) {
-	self.var_3135.instancedata[param_00] = spawnstruct();
+	self.bt.instancedata[param_00] = spawnstruct();
 }
 
 followenemy_tick(param_00) {
@@ -251,5 +251,5 @@ followenemy_tick(param_00) {
 }
 
 followenemy_end(param_00) {
-	self.var_3135.instancedata[param_00] = undefined;
+	self.bt.instancedata[param_00] = undefined;
 }

@@ -7,8 +7,8 @@ main() {
   if (isdefined(level.createfx_enabled) && level.createfx_enabled)
   return;
 
-  level._id_274F = ::badplace_cylinder;
-  level._id_2750 = ::badplace_delete;
+  level.badplace_cylinder_func = ::badplace_cylinder;
+  level.badplace_delete_func = ::badplace_delete;
   level thread scripts\mp\agents\agent_common::init();
-  level._id_10A2A = 0;
+  level.func_10A2A = 0;
 }

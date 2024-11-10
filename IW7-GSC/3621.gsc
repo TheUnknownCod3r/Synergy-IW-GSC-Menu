@@ -191,7 +191,7 @@ func_DFFE() {
 	}
 
 	if(isdefined(self.var_E1A8)) {
-		function_0278(self.var_E1A8);
+		destroynavrepulsor(self.var_E1A8);
 	}
 
 	if(isdefined(self.trigger)) {
@@ -291,7 +291,7 @@ func_6142() {
 
 func_6132() {
 	self.var_E1A8 = "emp" + level.var_612D.var_9927;
-	function_0277(self.var_E1A8,-1,level.var_612D.var_4BF1,level.player.var_612D.fgetarg * 2,1);
+	createnavrepulsor(self.var_E1A8,-1,level.var_612D.var_4BF1,level.player.var_612D.fgetarg * 2,1);
 }
 
 func_106C1(param_00) {
@@ -492,8 +492,8 @@ func_5772(param_00,param_01) {
 }
 
 func_3D25(param_00) {
-	function_0178("emp_shock_short",self.origin);
-	function_0178("generic_death_falling_scream",self.origin);
+	playworldsound("emp_shock_short",self.origin);
+	playworldsound("generic_death_falling_scream",self.origin);
 	thread func_B06D(level.var_7649["soldier_shock"],"j_spine4",param_00);
 	var_01 = "emp_electrocute_lp";
 	thread scripts\engine\utility::play_loop_sound_on_entity(var_01);
@@ -502,7 +502,7 @@ func_3D25(param_00) {
 	scripts\sp\_utility::func_178D(::scripts\sp\_utility::timeout,param_00);
 	scripts\sp\_utility::func_57D6();
 	self notify("stop sound" + var_01);
-	function_0178("emp_nade_lp_end",var_02);
+	playworldsound("emp_nade_lp_end",var_02);
 	self notify("stop_looped_vfx");
 	if(isalive(self)) {
 		scripts\anim\face::saygenericdialogue("pain");
@@ -518,7 +518,7 @@ func_3D26(param_00,param_01) {
 		var_05 = self gettagorigin(var_04);
 		var_06 = vectornormalize(var_05 - var_02);
 		var_07 = vectortoangles(var_06);
-		function_02E0(level.var_7649["emp_energy_strand_ptp"],var_02,var_07,var_05,level.player);
+		playfxbetweenpoints(level.var_7649["emp_energy_strand_ptp"],var_02,var_07,var_05,level.player);
 	}
 }
 
@@ -611,7 +611,7 @@ func_D044(param_00) {
 	var_05 = scripts/sp/math::func_6A8E(level.var_612D.var_B44E,level.var_612D.var_B74B,var_04);
 	if(var_02 < var_03) {
 		if(!scripts\engine\utility::flag_exist("in_vr_mode") || scripts\engine\utility::flag_exist("in_vr_mode") && !scripts\engine\utility::flag("in_vr_mode")) {
-			function_0178("gravity_explode_default",self.origin);
+			playworldsound("gravity_explode_default",self.origin);
 			playfx(level.var_7649["c12_impact"],self geteye());
 			scripts\engine\utility::delaythread(0.5,::scripts\sp\_utility::func_54C6);
 		}
@@ -695,7 +695,7 @@ func_D293(param_00,param_01,param_02,param_03) {
 	}
 	else
 	{
-		function_0178("emp_nade_plr_lp_end",self.origin);
+		playworldsound("emp_nade_plr_lp_end",self.origin);
 	}
 
 	self _meth_80A6();
@@ -789,7 +789,7 @@ func_354C(param_00) {
 	}
 
 	level scripts\engine\utility::flag_wait_or_timeout("emp_force_delete",self.empstartcallback);
-	function_0178("c12_selfdestruct_beep",self.origin);
+	playworldsound("c12_selfdestruct_beep",self.origin);
 	if(!var_05) {
 		self.dontevershoot = undefined;
 	}
@@ -903,20 +903,20 @@ func_10209(param_00,param_01) {
 	}
 
 	if(randomint(100) < 25) {
-		function_0178("emp_shock_short",self.origin);
+		playworldsound("emp_shock_short",self.origin);
 	}
 
-	function_02E0(level.var_7649["emp_energy_strand_ptp"],param_00,var_03,param_01,level.player);
+	playfxbetweenpoints(level.var_7649["emp_energy_strand_ptp"],param_00,var_03,param_01,level.player);
 }
 
 func_6172() {
-	function_0178("emp_grenade_explode_default",level.var_612D.var_4BF1);
+	playworldsound("emp_grenade_explode_default",level.var_612D.var_4BF1);
 	var_00 = scripts\engine\utility::play_loopsound_in_space("emp_nade_lp",level.var_612D.var_4BF1);
 	var_00 endon("death");
 	var_00.var_B04F = "emp_nade_lp";
 	self.soundevents[self.soundevents.size] = var_00;
 	level scripts\engine\utility::flag_wait_or_timeout("emp_force_delete",4);
-	function_0178("emp_nade_lp_end",level.var_612D.var_4BF1);
+	playworldsound("emp_nade_lp_end",level.var_612D.var_4BF1);
 	var_00 stoploopsound(var_00.var_B04F);
 	self.soundevents = scripts\engine\utility::array_remove(self.soundevents,var_00);
 	var_00 delete();
@@ -1078,7 +1078,7 @@ func_6156(param_00,param_01) {
 	scripts\sp\_utility::func_178D(::scripts\sp\_utility::timeout,param_00);
 	scripts\sp\_utility::func_57D6();
 	self notify("stop sound" + var_02);
-	function_0178("emp_nade_lp_end",var_03);
+	playworldsound("emp_nade_lp_end",var_03);
 	self notify("stop_looped_vfx");
 	if(isalive(self)) {
 		scripts\anim\face::saygenericdialogue("pain");

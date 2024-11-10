@@ -148,7 +148,7 @@ process_agent_on_killed_merits(param_00,param_01,param_02,param_03,param_04,para
 	var_0D = self.species;
 	var_0E = var_0C == "crouch";
 	var_0F = var_0C == "prone" && !var_0A;
-	var_10 = function_0107(param_03);
+	var_10 = isexplosivedamagemod(param_03);
 	var_11 = param_03 == "MOD_MELEE";
 	var_12 = (scripts\engine\utility::istrue(self.is_burning) || scripts\engine\utility::istrue(self.is_chem_burning)) && !var_0B || param_04 == "incendiary_ammo_mp";
 	var_13 = scripts\engine\utility::istrue(self.dismember_crawl);

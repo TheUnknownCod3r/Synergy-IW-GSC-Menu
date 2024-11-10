@@ -3,167 +3,167 @@
  * Script: scripts\3030.gsc
 ***************************************/
 
-_id_621A() {
-  if (!_id_0BDC::_id_A1AC("missile_drone"))
-  _id_0BDC::_id_A1AA("missile_drone", ::_id_B7ED, ::_id_B7EF, ::_id_B7EE);
+func_621A() {
+  if (!func_0BDC::func_A1AC("missile_drone"))
+  func_0BDC::func_A1AA("missile_drone", ::func_B7ED, ::func_B7EF, ::func_B7EE);
 }
 
 disable_missile_drone_event() {
-  if (_id_0BDC::_id_A1AC("missile_drone"))
-  _id_0BDC::_id_A1AD("missile_drone");
+  if (func_0BDC::func_A1AC("missile_drone"))
+  func_0BDC::func_A1AD("missile_drone");
 
-  if (scripts\engine\utility::_id_6E25("jackal_supply_drop_hint"))
-  scripts\engine\utility::_id_6E2A("jackal_supply_drop_hint");
+  if (scripts\engine\utility::flag("jackal_supply_drop_hint"))
+  scripts\engine\utility::flag_clear("jackal_supply_drop_hint");
 
-  if (scripts\engine\utility::_id_6E25("jackal_missile_drone_primed"))
-  scripts\engine\utility::_id_6E2A("jackal_missile_drone_primed");
+  if (scripts\engine\utility::flag("jackal_missile_drone_primed"))
+  scripts\engine\utility::flag_clear("jackal_missile_drone_primed");
 
   level notify("disable_missiledrone");
 }
 
-_id_B7ED(var_0) {
-  if (level._id_D127._id_B898._id_00C1 > 0)
+func_B7ED(var_00) {
+  if (level.func_D127.missiles.count > 0)
   return 0;
 
-  if (scripts\engine\utility::_id_6E25("jackal_missile_drone_primed"))
+  if (scripts\engine\utility::flag("jackal_missile_drone_primed"))
   return 0;
 
-  var_1 = 7;
+  var_01 = 7;
 
-  if (gettime() - level._id_D127._id_B898._id_A8E8 < var_1 * 1000)
+  if (gettime() - level.func_D127.missiles.func_A8E8 < var_01 * 1000)
   return 0;
 
-  if (scripts\engine\utility::_id_6E25("jackal_runway_landing_active"))
+  if (scripts\engine\utility::flag("jackal_runway_landing_active"))
   return 0;
 
   return 1;
 }
 
-_id_B7EF(var_0) {
+func_B7EF(var_00) {
   thread missile_drone_event_threaded();
 }
 
 missile_drone_event_threaded() {
-  scripts\engine\utility::_id_6E3E("jackal_missile_drone_primed");
-  _id_B35F();
+  scripts\engine\utility::flag_set("jackal_missile_drone_primed");
+  func_B35F();
 
-  if (_id_0BDC::_id_A1AC("missile_drone")) {
-  scripts\engine\utility::_id_6E3E("jackal_missile_drone_active");
-  _id_0BDC::_id_A14A();
-  _id_0BDC::_id_A14E();
-  _id_0BDC::_id_A149();
-  thread _id_13C10();
-  level._id_D127 waittill("missiles_restocked");
-  level._id_A056._id_A9BD = gettime();
-  _id_0BDC::_id_A14A(0);
-  _id_0BDC::_id_A14E(0);
-  _id_0BDC::_id_A149(0);
-  scripts\engine\utility::_id_6E2A("jackal_missile_drone_active");
+  if (func_0BDC::func_A1AC("missile_drone")) {
+  scripts\engine\utility::flag_set("jackal_missile_drone_active");
+  func_0BDC::func_A14A();
+  func_0BDC::func_A14E();
+  func_0BDC::func_A149();
+  thread func_13C10();
+  level.func_D127 waittill("missiles_restocked");
+  level.func_A056.func_A9BD = gettime();
+  func_0BDC::func_A14A(0);
+  func_0BDC::func_A14E(0);
+  func_0BDC::func_A149(0);
+  scripts\engine\utility::flag_clear("jackal_missile_drone_active");
   }
 
-  scripts\engine\utility::_id_6E2A("jackal_missile_drone_primed");
+  scripts\engine\utility::flag_clear("jackal_missile_drone_primed");
 }
 
-_id_B7EE(var_0) {}
+func_B7EE(var_00) {}
 
-_id_B35F() {
+func_B35F() {
   level endon("disable_missiledrone");
-  scripts\engine\utility::_id_6E3E("jackal_supply_drop_hint");
+  scripts\engine\utility::flag_set("jackal_supply_drop_hint");
 
-  if (isdefined(level._id_B833))
-  thread _id_0B91::_id_56BA("jackal_supply_drop");
+  if (isdefined(level.func_B833))
+  thread scripts/sp/utility::func_56BA("jackal_supply_drop");
   else
-  thread _id_0B91::_id_56BE("jackal_supply_drop", 4);
+  thread scripts/sp/utility::func_56BE("jackal_supply_drop", 4);
 
-  _id_0BDC::_id_A112("jackal_hud_missile_supply_available", 20);
+  func_0BDC::func_A112("jackal_hud_missile_supply_available", 20);
   level.player notifyonplayercommand("callin_supply_drone", "+actionslot 2");
   level.player waittill("callin_supply_drone");
-  scripts\engine\utility::_id_6E2A("jackal_supply_drop_hint");
-  level._id_D127 notify("drone_dropzone_marked");
+  scripts\engine\utility::flag_clear("jackal_supply_drop_hint");
+  level.func_D127 notify("drone_dropzone_marked");
 }
 
-_id_13C10() {
-  if (!isdefined(level._id_D127))
+func_13C10() {
+  if (!isdefined(level.func_D127))
   return;
 
-  _id_0BDC::_id_A162();
-  _id_0BDC::_id_A161();
-  scripts\engine\utility::delaythread(0.2, _id_0BDC::_id_A112, "jackal_hud_supplydroneinbo", 2);
-  var_0 = (1500, 0, 200);
-  var_1 = _id_107E5();
-  thread _id_5D07(var_0, var_1);
-  var_1 waittill("deployed");
-  _id_5BFD(var_0, var_1);
-  _id_5CA1(var_1);
-  _id_B7EC(var_1);
-  _id_0BDC::_id_A162(0);
+  func_0BDC::func_A162();
+  func_0BDC::func_A161();
+  scripts\engine\utility::delaythread(0.2, func_0BDC::func_A112, "jackal_hud_supplydroneinbo", 2);
+  var_00 = (1500, 0, 200);
+  var_01 = func_107E5();
+  thread func_5D07(var_00, var_01);
+  var_01 waittill("deployed");
+  func_5BFD(var_00, var_01);
+  func_5CA1(var_01);
+  func_B7EC(var_01);
+  func_0BDC::func_A162(0);
 }
 
 #using_animtree("vehicles");
 
-_id_107E5() {
-  var_0 = spawn("script_model", (0, 0, 0));
-  var_0 setmodel("veh_mil_air_un_support_drone");
-  var_0 hide();
-  var_0 _meth_83D0(#animtree);
-  var_0 _id_13C0C();
-  return var_0;
+func_107E5() {
+  var_00 = spawn("script_model", (0, 0, 0));
+  var_00 setmodel("veh_mil_air_un_support_drone");
+  var_00 hide();
+  var_00 glinton(#animtree);
+  var_00 func_13C0C();
+  return var_00;
 }
 
-_id_10753() {
-  var_0 = spawn("script_model", (0, 0, 0));
-  var_0 setmodel("veh_mil_air_un_landing_drone");
-  var_0 _meth_83D0(#animtree);
-  var_0 _id_A7D5();
-  playfxontag(scripts\engine\utility::_id_7ECB("landing_drone_light_top"), var_0, "j_mainroot");
-  return var_0;
+func_10753() {
+  var_00 = spawn("script_model", (0, 0, 0));
+  var_00 setmodel("veh_mil_air_un_landing_drone");
+  var_00 glinton(#animtree);
+  var_00 func_A7D5();
+  playfxontag(scripts\engine\utility::getfx("landing_drone_light_top"), var_00, "j_mainroot");
+  return var_00;
 }
 
-_id_106AC(var_0) {
-  var_1 = spawn("script_model", var_0);
-  var_1 setmodel("veh_mil_air_un_support_drone_pod");
-  var_1 playsound("drone_pod_incoming");
-  var_1 _id_0BDC::_id_F2FF();
-  var_1 notsolid();
-  return var_1;
+func_106AC(var_00) {
+  var_01 = spawn("script_model", var_00);
+  var_01 setmodel("veh_mil_air_un_support_drone_pod");
+  var_01 playsound("drone_pod_incoming");
+  var_01 func_0BDC::func_F2FF();
+  var_01 notsolid();
+  return var_01;
 }
 
-_id_5D07(var_0, var_1) {
+func_5D07(var_00, var_01) {
   level endon("stop_drop_pod_logic");
-  var_2 = 3.5;
-  var_3 = (4000, 2000, 35000);
-  var_4 = level.player _meth_8473();
-  var_5 = (0, var_4.angles[1], 0);
-  var_6 = anglestoforward(var_5);
-  var_7 = anglestoright(var_5);
-  var_8 = (0, 0, 1);
-  var_9 = var_6 * var_3[0] + var_6 * var_3[1] + var_8 * var_3[2];
-  var_10 = _id_106AC(var_4.origin + var_9);
-  var_1 linkto(var_10, "tag_origin", (0, 0, 0), (0, 0, 0));
-  playfxontag(scripts\engine\utility::_id_7ECB("weapon_drone_pod_trail"), var_10, "tag_origin");
+  var_02 = 3.5;
+  var_03 = (4000, 2000, 35000);
+  var_04 = level.player _meth_8473();
+  var_05 = (0, var_4.angles[1], 0);
+  var_06 = anglestoforward(var_05);
+  var_07 = anglestoright(var_05);
+  var_08 = (0, 0, 1);
+  var_09 = var_06 * var_3[0] + var_06 * var_3[1] + var_08 * var_3[2];
+  var_10 = func_106AC(var_4.origin + var_09);
+  var_01 linkto(var_10, "tag_origin", (0, 0, 0), (0, 0, 0));
+  playfxontag(scripts\engine\utility::getfx("weapon_drone_pod_trail"), var_10, "tag_origin");
   var_11 = 0;
-  thread _id_5D04(var_2);
-  var_12 = var_2;
+  thread func_5D04(var_02);
+  var_12 = var_02;
 
   while (isdefined(var_10)) {
-  var_4 = level.player _meth_8473();
-  var_13 = _id_0B4D::_id_C097(0, var_2, var_12);
-  var_6 = anglestoforward(var_4.angles);
-  var_7 = anglestoforward(var_4.angles);
-  var_8 = anglestoforward(var_4.angles);
-  var_9 = var_3;
-  var_14 = var_6 * var_0[0] + var_7 * var_0[1] + var_8 * var_0[2];
-  var_15 = _id_0B4D::_id_6A8E(var_14, var_9, var_13);
+  var_04 = level.player _meth_8473();
+  var_13 = scripts/sp/math::func_C097(0, var_02, var_12);
+  var_06 = anglestoforward(var_4.angles);
+  var_07 = anglestoforward(var_4.angles);
+  var_08 = anglestoforward(var_4.angles);
+  var_09 = var_03;
+  var_14 = var_06 * var_0[0] + var_07 * var_0[1] + var_08 * var_0[2];
+  var_15 = scripts/sp/math::func_6A8E(var_14, var_09, var_13);
   var_10.origin = var_4.origin + var_15;
   var_12 = var_12 - 0.05;
 
   if (var_12 < 0 && !var_11) {
-  _func_178("drone_pod_open", var_10.origin);
-  playfxontag(scripts\engine\utility::_id_7ECB("weapon_drone_pod_open"), var_10, "tag_origin");
-  earthquake(0.15, 0.6, level._id_D127.origin, 5000);
+  _playworldsound("drone_pod_open", var_10.origin);
+  playfxontag(scripts\engine\utility::getfx("weapon_drone_pod_open"), var_10, "tag_origin");
+  earthquake(0.15, 0.6, level.func_D127.origin, 5000);
   var_10 hide();
-  var_10 thread _id_5D02();
-  var_1 notify("deployed");
+  var_10 thread func_5D02();
+  var_01 notify("deployed");
   var_11 = 1;
   }
 
@@ -171,48 +171,48 @@ _id_5D07(var_0, var_1) {
   }
 }
 
-_id_5D02() {
+func_5D02() {
   wait 0.2;
-  stopfxontag(scripts\engine\utility::_id_7ECB("weapon_drone_pod_trail"), self, "tag_origin");
+  stopfxontag(scripts\engine\utility::getfx("weapon_drone_pod_trail"), self, "tag_origin");
   wait 2;
   level notify("stop_drop_pod_logic");
   self delete();
 }
 
-_id_5D04(var_0) {
-  var_1 = (450, 0, 50);
+func_5D04(var_00) {
+  var_01 = (450, 0, 50);
 
-  for (var_2 = undefined; var_0 > 0; var_0 = var_0 - 0.05) {
-  var_3 = level.player _meth_8473();
-  var_4 = var_1[0];
-  var_5 = var_1[2];
-  var_6 = anglestoforward(var_3.angles);
-  var_7 = anglestoup(var_3.angles);
-  var_8 = anglestoright(var_3.angles);
+  for (var_02 = undefined; var_00 > 0; var_00 = var_00 - 0.05) {
+  var_03 = level.player _meth_8473();
+  var_04 = var_1[0];
+  var_05 = var_1[2];
+  var_06 = anglestoforward(var_3.angles);
+  var_07 = anglestoup(var_3.angles);
+  var_08 = anglestoright(var_3.angles);
 
-  if (!isdefined(var_2)) {
-  var_2 = scripts\engine\utility::_id_107E6(var_3.origin + var_6 * var_4 + var_7 * var_5);
-  var_2 thread _id_10CA7(var_0);
-  var_2 thread _id_13C0F();
-  var_2 _id_0BDC::_id_F2FF();
+  if (!isdefined(var_02)) {
+  var_02 = scripts\engine\utility::spawn_tag_origin(var_3.origin + var_06 * var_04 + var_07 * var_05);
+  var_02 thread func_10CA7(var_00);
+  var_02 thread func_13C0F();
+  var_02 func_0BDC::func_F2FF();
   }
 
-  var_2.origin = var_3.origin + var_6 * var_4 + var_7 * var_5;
-  var_2.angles = _func_017(var_6 * -1, var_8 * -1, var_7);
+  var_2.origin = var_3.origin + var_06 * var_04 + var_07 * var_05;
+  var_2.angles = _axistoangles(var_06 * -1, var_08 * -1, var_07);
   level.player waittill("on_player_update");
   }
 
-  var_2 delete();
+  var_02 delete();
 }
 
-_id_10CA7(var_0) {
-  _id_0BDC::_id_105DB("missile", undefined, "droppod_marker", undefined, 0, undefined, 1);
+func_10CA7(var_00) {
+  func_0BDC::func_105DB("missile", undefined, "droppod_marker", undefined, 0, undefined, 1);
   wait 0.05;
-  wait(var_0 - 0.1);
-  _id_0BDC::_id_105DA();
+  wait(var_00 - 0.1);
+  func_0BDC::func_105DA();
 }
 
-_id_13C0F() {
+func_13C0F() {
   self endon("entitydeleted");
 
   for (;;) {
@@ -221,42 +221,42 @@ _id_13C0F() {
   }
 }
 
-_id_5BFD(var_0, var_1) {
-  var_2 = level.player _meth_8473();
-  var_1 unlink();
-  var_1 _id_0BDC::_id_F2FF();
-  var_1 _meth_82B1(%weapon_drone_fly_init, 1);
-  var_1._id_FC28 = scripts\engine\utility::_id_107E6();
-  var_1._id_FC28 _id_0BDC::_id_F2FF();
-  var_1 thread _id_5C87();
-  var_1 _id_0B91::_id_75C4("landing_drone_light_top_blink", "j_mainroot");
-  var_3 = 0;
-  var_4 = (0, 0, 0);
-  var_5 = [0, 0];
-  var_6 = [0, 0];
-  var_7 = 2500;
-  var_8 = 375;
-  var_9 = [%drone_move_f_overlay, %drone_move_b_overlay, %drone_move_l_overlay, %drone_move_r_overlay];
+func_5BFD(var_00, var_01) {
+  var_02 = level.player _meth_8473();
+  var_01 unlink();
+  var_01 func_0BDC::func_F2FF();
+  var_01 _meth_82B1(%weapon_drone_fly_init, 1);
+  var_1.func_FC28 = scripts\engine\utility::spawn_tag_origin();
+  var_1.func_FC28 func_0BDC::func_F2FF();
+  var_01 thread func_5C87();
+  var_01 scripts/sp/utility::func_75C4("landing_drone_light_top_blink", "j_mainroot");
+  var_03 = 0;
+  var_04 = (0, 0, 0);
+  var_05 = [0, 0];
+  var_06 = [0, 0];
+  var_07 = 2500;
+  var_08 = 375;
+  var_09 = [%drone_move_f_overlay, %drone_move_b_overlay, %drone_move_l_overlay, %drone_move_r_overlay];
   var_10 = [%drone_acc_f_overlay, %drone_acc_b_overlay, %drone_acc_l_overlay, %drone_acc_r_overlay];
   var_11 = 4.4;
   var_12 = 1.5;
   var_13 = 3.0;
   var_14 = 0.5;
   var_15 = undefined;
-  var_1 thread _id_112AA(var_11, var_12, var_14);
-  var_1 _id_0BDC::_id_A25B(var_11, "j_mainroot_ship", (325.491, 0, 14.494), (0, 180, 0));
+  var_01 thread func_112AA(var_11, var_12, var_14);
+  var_01 func_0BDC::func_A25B(var_11, "j_mainroot_ship", (325.491, 0, 14.494), (0, 180, 0));
   var_16 = (0, 0, 0);
 
   while (var_11 > 0) {
   level.player waittill("on_player_update");
 
-  if (var_3)
-  var_1 show();
+  if (var_03)
+  var_01 show();
 
-  var_3 = 1;
-  var_2 = level.player _meth_8473();
+  var_03 = 1;
+  var_02 = level.player _meth_8473();
 
-  if (!isdefined(var_2))
+  if (!isdefined(var_02))
   continue;
 
   var_17 = var_0[0];
@@ -271,14 +271,14 @@ _id_5BFD(var_0, var_1) {
   var_26 = 0.15;
   var_27 = 500;
   var_28 = 0.35;
-  var_29 = _id_0B4D::_id_C097(var_25, var_27, var_24);
-  var_30 = _id_0B4D::_id_6A8E(var_26, var_28, var_29);
-  var_4 = var_4 - rotatevectorinverted(var_2._id_02AC, var_2.angles) * var_19;
-  var_31 = var_2._id_02AB * 0.05;
+  var_29 = scripts/sp/math::func_C097(var_25, var_27, var_24);
+  var_30 = scripts/sp/math::func_6A8E(var_26, var_28, var_29);
+  var_04 = var_04 - rotatevectorinverted(var_2.spaceship_vel, var_2.angles) * var_19;
+  var_31 = var_2.spaceship_rotvel * 0.05;
   var_32 = rotatevectorinverted(var_1.origin - var_2.origin, var_2.angles);
   var_33 = rotatevector(var_32, var_31);
   var_34 = var_33 - var_32;
-  var_4 = var_4 - var_34;
+  var_04 = var_04 - var_34;
 
   if (var_13 > 0)
   var_35 = 1;
@@ -287,59 +287,59 @@ _id_5BFD(var_0, var_1) {
   if (!isdefined(var_15))
   var_15 = var_11;
 
-  var_35 = _id_0B4D::_id_C097(0, var_15, var_11);
-  var_35 = _id_0B4D::_id_C09B(var_35);
+  var_35 = scripts/sp/math::func_C097(0, var_15, var_11);
+  var_35 = scripts/sp/math::func_C09B(var_35);
   }
 
-  var_36 = var_4 - var_16;
-  var_37 = _id_0B4D::_id_C097(0, var_7, length(var_4));
-  var_38 = _id_0B4D::_id_C097(0, var_8, length(var_36));
-  var_39 = vectornormalize(var_4) * var_37;
+  var_36 = var_04 - var_16;
+  var_37 = scripts/sp/math::func_C097(0, var_07, length(var_04));
+  var_38 = scripts/sp/math::func_C097(0, var_08, length(var_36));
+  var_39 = vectornormalize(var_04) * var_37;
   var_40 = vectornormalize(var_36) * var_38;
-  var_5 = var_1 _id_5C4D(var_39, var_5, 1, var_9, var_35);
-  var_6 = var_1 _id_5C4D(var_40, var_6, 1, var_10, var_35);
-  var_4 = var_4 * (1 - var_30);
-  var_41 = rotatevector(var_4, var_2.angles);
+  var_05 = var_01 func_5C4D(var_39, var_05, 1, var_09, var_35);
+  var_06 = var_01 func_5C4D(var_40, var_06, 1, var_10, var_35);
+  var_04 = var_04 * (1 - var_30);
+  var_41 = rotatevector(var_04, var_2.angles);
   var_1.origin = var_23 + var_41;
-  var_1._id_FC28.origin = var_23 + var_41;
-  var_1.angles = _func_017(var_20 * -1, var_22 * -1, var_21);
-  var_16 = var_4;
+  var_1.func_FC28.origin = var_23 + var_41;
+  var_1.angles = _axistoangles(var_20 * -1, var_22 * -1, var_21);
+  var_16 = var_04;
   var_11 = var_11 - 0.05;
   var_13 = var_13 - 0.05;
   }
 
-  var_1 _id_0B91::_id_75A0("landing_drone_light_top_blink", "j_mainroot");
-  var_1 _id_0B91::_id_75C4("landing_drone_light_top", "j_mainroot");
-  var_1._id_FC28 delete();
+  var_01 scripts/sp/utility::func_75A0("landing_drone_light_top_blink", "j_mainroot");
+  var_01 scripts/sp/utility::func_75C4("landing_drone_light_top", "j_mainroot");
+  var_1.func_FC28 delete();
 }
 
-_id_5BFC(var_0) {
-  var_1 = self._id_102D1._id_5BD7;
-  var_1 endon("notify_drone_reset");
-  var_1._id_0019 = 1;
+func_5BFC(var_00) {
+  var_01 = self.func_102D1.func_5BD7;
+  var_01 endon("notify_drone_reset");
+  var_1.active = 1;
 
-  if (!isdefined(var_0))
-  var_2 = level.player _meth_8473();
+  if (!isdefined(var_00))
+  var_02 = level.player _meth_8473();
   else
-  var_2 = level._id_D127;
+  var_02 = level.func_D127;
 
-  var_1 unlink();
-  var_1 _id_0BDC::_id_F2FF();
-  var_1 _meth_82B1(%landing_drone_fly_init, 1);
-  var_1 thread _id_5C3E();
-  var_1 thread _id_5C95();
-  var_3 = var_1.origin - var_2.origin;
-  var_3 = rotatevectorinverted(var_3, var_2.angles);
-  var_4 = 0;
-  var_5 = (0, 0, 0);
-  var_6 = [0, 0];
-  var_7 = [0, 0];
-  var_8 = 2500;
-  var_9 = 375;
+  var_01 unlink();
+  var_01 func_0BDC::func_F2FF();
+  var_01 _meth_82B1(%landing_drone_fly_init, 1);
+  var_01 thread func_5C3E();
+  var_01 thread func_5C95();
+  var_03 = var_1.origin - var_2.origin;
+  var_03 = rotatevectorinverted(var_03, var_2.angles);
+  var_04 = 0;
+  var_05 = (0, 0, 0);
+  var_06 = [0, 0];
+  var_07 = [0, 0];
+  var_08 = 2500;
+  var_09 = 375;
   var_10 = [%drone_move_f_overlay, %drone_move_b_overlay, %drone_move_l_overlay, %drone_move_r_overlay];
   var_11 = [%drone_acc_f_overlay, %drone_acc_b_overlay, %drone_acc_l_overlay, %drone_acc_r_overlay];
 
-  if (!isdefined(var_0)) {
+  if (!isdefined(var_00)) {
   var_12 = 2.4;
   var_13 = 1.0;
   var_14 = 1.0;
@@ -351,14 +351,14 @@ _id_5BFC(var_0) {
   var_15 = undefined;
   }
 
-  thread _id_A7D4(var_12, var_13);
+  thread func_A7D4(var_12, var_13);
   var_16 = (340, 0, 40);
   var_17 = (0, 0, 0);
   var_18 = 0;
   var_19 = 0;
   var_20 = 0.05;
   var_21 = var_12;
-  var_1 _id_0BDC::_id_A25B(var_12, "tag_body", (325.491, 0, 14.494), (0, 180, 0), var_0);
+  var_01 func_0BDC::func_A25B(var_12, "tag_body", (325.491, 0, 14.494), (0, 180, 0), var_00);
 
   for (;;) {
   if (var_21 <= 0)
@@ -366,12 +366,12 @@ _id_5BFC(var_0) {
 
   level.player waittill("on_player_update");
 
-  if (!isdefined(var_0))
-  var_2 = level.player _meth_8473();
+  if (!isdefined(var_00))
+  var_02 = level.player _meth_8473();
   else
-  var_2 = level._id_D127;
+  var_02 = level.func_D127;
 
-  if (!isdefined(var_2))
+  if (!isdefined(var_02))
   continue;
 
   var_22 = var_3[0];
@@ -388,19 +388,19 @@ _id_5BFC(var_0) {
   var_33 = 0.15;
   var_34 = 2500;
   var_35 = 0.25;
-  var_36 = _id_0B4D::_id_C097(var_32, var_34, var_30);
-  var_37 = _id_0B4D::_id_6A8E(var_33, var_35, var_36);
+  var_36 = scripts/sp/math::func_C097(var_32, var_34, var_30);
+  var_37 = scripts/sp/math::func_6A8E(var_33, var_35, var_36);
 
-  if (!isdefined(var_0))
-  var_5 = var_5 - rotatevectorinverted(var_2._id_02AC, var_2.angles) * var_25;
+  if (!isdefined(var_00))
+  var_05 = var_05 - rotatevectorinverted(var_2.spaceship_vel, var_2.angles) * var_25;
   else
-  var_5 = var_5 - rotatevectorinverted(var_2.angles * 100, var_2.angles) * var_25;
+  var_05 = var_05 - rotatevectorinverted(var_2.angles * 100, var_2.angles) * var_25;
 
-  var_38 = var_2._id_02AB * 0.05;
+  var_38 = var_2.spaceship_rotvel * 0.05;
   var_39 = rotatevectorinverted(var_1.origin - var_2.origin, var_2.angles);
   var_40 = rotatevector(var_39, var_38);
   var_41 = var_40 - var_39;
-  var_5 = var_5 - var_41;
+  var_05 = var_05 - var_41;
 
   if (var_14 > 0) {
   var_19 = var_19 + var_20;
@@ -409,438 +409,438 @@ _id_5BFC(var_0) {
   if (!isdefined(var_15))
   var_15 = var_21;
 
-  var_19 = _id_0B4D::_id_C097(0, var_15, var_21);
-  var_19 = _id_0B4D::_id_C09B(var_19);
+  var_19 = scripts/sp/math::func_C097(0, var_15, var_21);
+  var_19 = scripts/sp/math::func_C09B(var_19);
   }
 
-  var_42 = var_5 - var_17;
-  var_43 = _id_0B4D::_id_C097(0, var_8, length(var_5));
-  var_44 = _id_0B4D::_id_C097(0, var_9, length(var_42));
-  var_45 = vectornormalize(var_5) * var_43;
+  var_42 = var_05 - var_17;
+  var_43 = scripts/sp/math::func_C097(0, var_08, length(var_05));
+  var_44 = scripts/sp/math::func_C097(0, var_09, length(var_42));
+  var_45 = vectornormalize(var_05) * var_43;
   var_46 = vectornormalize(var_42) * var_44;
-  var_6 = var_1 _id_5C4D(var_45, var_6, 1, var_10, var_19);
-  var_7 = var_1 _id_5C4D(var_46, var_7, 1, var_11, var_19);
-  var_47 = _id_0B4D::_id_C097(0, var_12, var_21);
-  var_48 = _id_0B4D::_id_6A8E(var_31, var_29, var_47);
+  var_06 = var_01 func_5C4D(var_45, var_06, 1, var_10, var_19);
+  var_07 = var_01 func_5C4D(var_46, var_07, 1, var_11, var_19);
+  var_47 = scripts/sp/math::func_C097(0, var_12, var_21);
+  var_48 = scripts/sp/math::func_6A8E(var_31, var_29, var_47);
   var_49 = var_29;
-  var_5 = var_5 * (1 - var_37);
-  var_50 = rotatevector(var_5, var_2.angles);
+  var_05 = var_05 * (1 - var_37);
+  var_50 = rotatevector(var_05, var_2.angles);
   var_50 = var_50 * var_47;
   var_1.origin = var_48 + var_50;
-  var_1.angles = _func_017(var_26 * -1, var_28 * -1, var_27);
-  var_1._id_1150A = var_48;
-  var_1._id_57F4 = var_47;
-  var_17 = var_5;
+  var_1.angles = _axistoangles(var_26 * -1, var_28 * -1, var_27);
+  var_1.func_1150A = var_48;
+  var_1.func_57F4 = var_47;
+  var_17 = var_05;
   var_21 = var_21 - 0.05;
   var_14 = var_14 - 0.05;
   }
 }
 
-_id_5BE2(var_0) {
-  earthquake(0.25, 0.8, level._id_D127.origin, 5000);
+func_5BE2(var_00) {
+  earthquake(0.25, 0.8, level.func_D127.origin, 5000);
   level.player playrumbleonentity("damage_heavy");
   level.player playsound("landing_drone_attach");
-  self._id_102D1 stoploopsound("landing_drone_sled_lp");
-  self._id_102D1._id_5BD7 _meth_82A4(%landing_drone_fly_docked, 1, 0.2);
-  self._id_102D1._id_5BD7 _id_0BDC::_id_413B();
+  self.func_102D1 stoploopsound("landing_drone_sled_lp");
+  self.func_102D1.func_5BD7 setanimknob(%landing_drone_fly_docked, 1, 0.2);
+  self.func_102D1.func_5BD7 func_0BDC::func_413B();
 
-  if (!isdefined(var_0)) {
-  self._id_102D1._id_5BD7 _meth_836A(1);
-  _id_0BDC::_id_D165(self._id_6C1E, 1.0, 0, 0.0);
-  _id_0BDC::_id_D16C(self._id_102D1._id_20F1, 0.0, 0, 0.0);
+  if (!isdefined(var_00)) {
+  self.func_102D1.func_5BD7 givegrabscore(1);
+  func_0BDC::func_D165(self.func_6C1E, 1.0, 0, 0.0);
+  func_0BDC::func_D16C(self.func_102D1.func_20F1, 0.0, 0, 0.0);
   } else {
-  self._id_102D1._id_5BD7 _meth_8291(0.1, 0.1, 0.1, 0.5);
-  self._id_102D1._id_5BD7 linkto(level._id_D127, "tag_body", (325.491, 0, 14.494), (0, -180, 0));
+  self.func_102D1.func_5BD7 _meth_8291(0.1, 0.1, 0.1, 0.5);
+  self.func_102D1.func_5BD7 linkto(level.func_D127, "tag_body", (325.491, 0, 14.494), (0, -180, 0));
   }
 }
 
-_id_5CA1(var_0) {
-  var_1 = getanimlength(%weapon_drone_arms_docked);
-  thread _id_67ED(var_1, var_0);
-  thread _id_6817(var_1, var_0);
-  thread _id_9319(var_1, 0);
-  thread _id_687C(var_1);
-  wait(var_1);
+func_5CA1(var_00) {
+  var_01 = getanimlength(%weapon_drone_arms_docked);
+  thread func_67ED(var_01, var_00);
+  thread func_6817(var_01, var_00);
+  thread func_9319(var_01, 0);
+  thread func_687C(var_01);
+  wait(var_01);
 }
 
-_id_112AA(var_0, var_1, var_2) {
-  thread _id_E095(var_1, var_0);
-  thread _id_5CEF(var_2);
-  thread _id_9319(var_2, 1);
-  thread _id_68A0(var_0);
+func_112AA(var_00, var_01, var_02) {
+  thread func_E095(var_01, var_00);
+  thread func_5CEF(var_02);
+  thread func_9319(var_02, 1);
+  thread func_68A0(var_00);
 }
 
-_id_A7D4(var_0, var_1) {
-  thread _id_685E();
-  self._id_102D1._id_5BD7 thread _id_E04D(var_1, var_0, "notify_restart_landing progress");
+func_A7D4(var_00, var_01) {
+  thread func_685E();
+  self.func_102D1.func_5BD7 thread func_E04D(var_01, var_00, "notify_restart_landing progress");
 }
 
-_id_5CEF(var_0) {
-  wait(var_0);
-  _id_0BDC::_id_A153();
+func_5CEF(var_00) {
+  wait(var_00);
+  func_0BDC::func_A153();
 }
 
-_id_9319(var_0, var_1) {
-  wait(var_0);
-  level._id_D127._id_0184 = var_1;
+func_9319(var_00, var_01) {
+  wait(var_00);
+  level.func_D127.ignoreme = var_01;
 }
 
-_id_68A0(var_0, var_1) {
-  if (isdefined(var_1))
-  level endon(var_1);
+func_68A0(var_00, var_01) {
+  if (isdefined(var_01))
+  level endon(var_01);
 
-  wait(var_0);
-  earthquake(0.3, 0.8, level._id_D127.origin, 5000);
+  wait(var_00);
+  earthquake(0.3, 0.8, level.func_D127.origin, 5000);
   level.player playrumbleonentity("damage_heavy");
   level.player playsound("drone_attach");
-  self _meth_82A4(%weapon_drone_fly_docked, 1, 0);
+  self setanimknob(%weapon_drone_fly_docked, 1, 0);
 }
 
-_id_685E() {
-  var_0 = spawn("script_origin", self._id_102D1.origin);
-  var_0 linkto(self._id_102D1._id_5BD7);
-  var_0 playsound("landing_drone_launch", "sounddone");
-  var_0 waittill("sounddone");
-  var_0 delete();
+func_685E() {
+  var_00 = spawn("script_origin", self.func_102D1.origin);
+  var_00 linkto(self.func_102D1.func_5BD7);
+  var_00 playsound("landing_drone_launch", "sounddone");
+  var_00 waittill("sounddone");
+  var_00 delete();
 }
 
-_id_685F(var_0) {
-  self _meth_82A4(%landing_drone_recovery);
-  wait(var_0);
+func_685F(var_00) {
+  self setanimknob(%landing_drone_recovery);
+  wait(var_00);
   level.player playrumbleonentity("damage_light");
-  earthquake(0.12, 0.35, level._id_D127.origin, 5000);
+  earthquake(0.12, 0.35, level.func_D127.origin, 5000);
 }
 
-_id_67ED(var_0, var_1) {
+func_67ED(var_00, var_01) {
   wait 1.23;
-  earthquake(0.2, 0.65, level._id_D127.origin, 5000);
+  earthquake(0.2, 0.65, level.func_D127.origin, 5000);
   level.player playrumbleonentity("damage_light");
-  var_1 playsound("drone_grab_missiles");
+  var_01 playsound("drone_grab_missiles");
 }
 
-_id_6817(var_0, var_1) {
+func_6817(var_00, var_01) {
   wait 2.53;
-  earthquake(0.26, 0.6, level._id_D127.origin, 5000);
+  earthquake(0.26, 0.6, level.func_D127.origin, 5000);
   level.player playrumbleonentity("damage_heavy");
   wait 3;
-  _id_0BDC::_id_A161(0);
-  _id_0BDC::_id_A153(0);
+  func_0BDC::func_A161(0);
+  func_0BDC::func_A153(0);
 }
 
-_id_687C(var_0) {
+func_687C(var_00) {
   wait 4.3;
-  level._id_D127 _id_0BDD::_id_A2D5();
-  scripts\engine\utility::delaythread(0.1, _id_0BDC::_id_A112, "jackal_hud_missileready");
-  level._id_D127 playsound("jackal_missiles_active");
+  level.func_D127 func_0BDD::func_A2D5();
+  scripts\engine\utility::delaythread(0.1, func_0BDC::func_A112, "jackal_hud_missileready");
+  level.func_D127 playsound("jackal_missiles_active");
 }
 
-_id_6815() {
-  earthquake(0.2, 0.6, level._id_D127.origin, 50000);
+func_6815() {
+  earthquake(0.2, 0.6, level.func_D127.origin, 50000);
   level.player playrumbleonentity("damage_light");
-  _id_5C91();
-  _id_5C8D();
+  func_5C91();
+  func_5C8D();
 }
 
-_id_680F(var_0) {
-  wait(var_0);
-  earthquake(0.3, 0.7, level._id_D127.origin, 3000);
+func_680F(var_00) {
+  wait(var_00);
+  earthquake(0.3, 0.7, level.func_D127.origin, 3000);
   level.player playrumbleonentity("grenade_rumble");
-  _id_5C8F();
-  _id_5C90();
+  func_5C8F();
+  func_5C90();
 }
 
-_id_685D() {
-  earthquake(0.25, 0.7, level._id_D127.origin, 3000);
+func_685D() {
+  earthquake(0.25, 0.7, level.func_D127.origin, 3000);
   level.player playsound("jackal_landed");
   level.player playsound("landing_drone_stop");
   level.player playrumbleonentity("grenade_rumble");
-  _id_5C8E();
-  _id_0B91::_id_75A0("landing_drone_light_top", "j_mainroot");
-  _id_0B91::_id_75C4("landing_drone_light_top_off", "j_mainroot");
+  func_5C8E();
+  scripts/sp/utility::func_75A0("landing_drone_light_top", "j_mainroot");
+  scripts/sp/utility::func_75C4("landing_drone_light_top_off", "j_mainroot");
 }
 
-_id_E095(var_0, var_1, var_2) {
-  if (isdefined(var_2))
-  level endon(var_2);
+func_E095(var_00, var_01, var_02) {
+  if (isdefined(var_02))
+  level endon(var_02);
 
-  wait(var_0);
-  var_3 = var_1 - var_0;
-  self _meth_82A2(%weapon_drone_fly_init, 0, var_3);
-  self _meth_82A2(%weapon_drone_fly_static, 1, var_3);
-  var_4 = self islegacyagent(%weapon_drone_fly_init);
-  self _meth_82B0(%weapon_drone_fly_static, var_4);
+  wait(var_00);
+  var_03 = var_01 - var_00;
+  self give_attacker_kill_rewards(%weapon_drone_fly_init, 0, var_03);
+  self give_attacker_kill_rewards(%weapon_drone_fly_static, 1, var_03);
+  var_04 = self islegacyagent(%weapon_drone_fly_init);
+  self _meth_82B0(%weapon_drone_fly_static, var_04);
 }
 
-_id_E04D(var_0, var_1, var_2) {
-  if (isdefined(var_2))
-  level endon(var_2);
+func_E04D(var_00, var_01, var_02) {
+  if (isdefined(var_02))
+  level endon(var_02);
 
-  wait(var_0);
-  var_3 = var_1 - var_0;
-  self _meth_82A2(%landing_drone_fly_init, 0, var_3);
-  self _meth_82A2(%landing_drone_fly_static, 1, var_3, 1);
-  var_4 = self islegacyagent(%landing_drone_fly_init);
-  self _meth_82B0(%landing_drone_fly_static, var_4);
+  wait(var_00);
+  var_03 = var_01 - var_00;
+  self give_attacker_kill_rewards(%landing_drone_fly_init, 0, var_03);
+  self give_attacker_kill_rewards(%landing_drone_fly_static, 1, var_03, 1);
+  var_04 = self islegacyagent(%landing_drone_fly_init);
+  self _meth_82B0(%landing_drone_fly_static, var_04);
 }
 
-_id_5C4D(var_0, var_1, var_2, var_3, var_4) {
-  var_5 = var_1[0] + (var_0[0] - var_1[0]) * var_2;
-  var_6 = var_1[1] + (var_0[1] - var_1[1]) * var_2;
-  var_7 = _id_1EC0(var_5);
-  var_8 = _id_1EC0(var_6);
-  self _meth_82A2(var_3[0], var_7[1] * var_4, 0.05);
-  self _meth_82A2(var_3[1], var_7[0] * var_4, 0.05);
-  self _meth_82A2(var_3[2], var_8[1] * var_4, 0.05);
-  self _meth_82A2(var_3[3], var_8[0] * var_4, 0.05);
-  return [var_5, var_6];
+func_5C4D(var_00, var_01, var_02, var_03, var_04) {
+  var_05 = var_1[0] + (var_0[0] - var_1[0]) * var_02;
+  var_06 = var_1[1] + (var_0[1] - var_1[1]) * var_02;
+  var_07 = func_1EC0(var_05);
+  var_08 = func_1EC0(var_06);
+  self give_attacker_kill_rewards(var_3[0], var_7[1] * var_04, 0.05);
+  self give_attacker_kill_rewards(var_3[1], var_7[0] * var_04, 0.05);
+  self give_attacker_kill_rewards(var_3[2], var_8[1] * var_04, 0.05);
+  self give_attacker_kill_rewards(var_3[3], var_8[0] * var_04, 0.05);
+  return [var_05, var_06];
 }
 
-_id_1EC0(var_0) {
-  if (var_0 > 0) {
-  var_1 = 0;
-  var_2 = var_0;
+func_1EC0(var_00) {
+  if (var_00 > 0) {
+  var_01 = 0;
+  var_02 = var_00;
   } else {
-  var_1 = abs(var_0);
-  var_2 = 0;
+  var_01 = abs(var_00);
+  var_02 = 0;
   }
 
-  return [var_1, var_2];
+  return [var_01, var_02];
 }
 
-_id_DC65() {
-  var_0 = 1.5;
-  var_1 = 0;
+func_DC65() {
+  var_00 = 1.5;
+  var_01 = 0;
 
-  while (var_1 < var_0) {
-  self._id_B3D6 = var_1 / var_0;
-  var_1 = var_1 + 0.05;
+  while (var_01 < var_00) {
+  self.func_B3D6 = var_01 / var_00;
+  var_01 = var_01 + 0.05;
   wait 0.05;
   }
 
-  self._id_B3D6 = 1;
+  self.func_B3D6 = 1;
 }
 
-_id_EBA2(var_0, var_1) {
-  thread _id_EBA3(var_0, var_1);
+func_EBA2(var_00, var_01) {
+  thread func_EBA3(var_00, var_01);
 }
 
-_id_EBA3(var_0, var_1) {
+func_EBA3(var_00, var_01) {
   self endon("death");
-  self _meth_8278(0, var_1);
-  wait(var_1);
-  self stoploopsound(var_0);
+  self ghostattack(0, var_01);
+  wait(var_01);
+  self stoploopsound(var_00);
 }
 
-_id_5C8F() {
-  self._id_FB5C _meth_8278(0, 0.0);
-  self._id_FB5C playloopsound("landing_drone_counterthrust2");
-  self._id_FB5C _meth_8278(1, 0.2);
+func_5C8F() {
+  self.func_FB5C ghostattack(0, 0.0);
+  self.func_FB5C playloopsound("landing_drone_counterthrust2");
+  self.func_FB5C ghostattack(1, 0.2);
   self playsound("landing_drone_counterthrust2_init");
-  _id_0B91::_id_75C4("weapon_drone_counterthrust", "TAG_THRUST_8_RI");
-  _id_0B91::_id_75C4("weapon_drone_counterthrust", "TAG_THRUST_6_LE");
+  scripts/sp/utility::func_75C4("weapon_drone_counterthrust", "TAG_THRUST_8_RI");
+  scripts/sp/utility::func_75C4("weapon_drone_counterthrust", "TAG_THRUST_6_LE");
 }
 
-_id_5C8E() {
-  _func_178("landing_drone_counterthrust2_out", self.origin);
-  self._id_FB5C _id_EBA3("landing_drone_counterthrust2", 0.3);
-  _id_0B91::_id_75C4("weapon_drone_counterthrust_exhaust", "TAG_THRUST_8_RI");
-  _id_0B91::_id_75C4("weapon_drone_counterthrust_exhaust", "TAG_THRUST_6_LE");
-  _id_0B91::_id_75A0("weapon_drone_counterthrust", "TAG_THRUST_8_RI");
-  _id_0B91::_id_75A0("weapon_drone_counterthrust", "TAG_THRUST_6_LE");
+func_5C8E() {
+  _playworldsound("landing_drone_counterthrust2_out", self.origin);
+  self.func_FB5C func_EBA3("landing_drone_counterthrust2", 0.3);
+  scripts/sp/utility::func_75C4("weapon_drone_counterthrust_exhaust", "TAG_THRUST_8_RI");
+  scripts/sp/utility::func_75C4("weapon_drone_counterthrust_exhaust", "TAG_THRUST_6_LE");
+  scripts/sp/utility::func_75A0("weapon_drone_counterthrust", "TAG_THRUST_8_RI");
+  scripts/sp/utility::func_75A0("weapon_drone_counterthrust", "TAG_THRUST_6_LE");
 }
 
-_id_5C91() {
-  self._id_FB5B playloopsound("landing_drone_counterthrust");
-  self._id_FB5B _meth_8278(1, 0.3);
+func_5C91() {
+  self.func_FB5B playloopsound("landing_drone_counterthrust");
+  self.func_FB5B ghostattack(1, 0.3);
   self playsound("landing_drone_counterthrust_init");
-  _id_0B91::_id_75C4("weapon_drone_thrust_small", "TAG_THRUST_7_RI");
-  _id_0B91::_id_75C4("weapon_drone_thrust_small", "TAG_THRUST_8_LE");
+  scripts/sp/utility::func_75C4("weapon_drone_thrust_small", "TAG_THRUST_7_RI");
+  scripts/sp/utility::func_75C4("weapon_drone_thrust_small", "TAG_THRUST_8_LE");
 }
 
-_id_5C90() {
-  self._id_FB5B _id_EBA2("landing_drone_counterthrust", 0.3);
-  _id_0B91::_id_75F8("weapon_drone_thrust_small", "TAG_THRUST_7_RI");
-  _id_0B91::_id_75F8("weapon_drone_thrust_small", "TAG_THRUST_8_LE");
+func_5C90() {
+  self.func_FB5B func_EBA2("landing_drone_counterthrust", 0.3);
+  scripts/sp/utility::func_75F8("weapon_drone_thrust_small", "TAG_THRUST_7_RI");
+  scripts/sp/utility::func_75F8("weapon_drone_thrust_small", "TAG_THRUST_8_LE");
 }
 
-_id_5C96() {
-  _id_0B91::_id_75C4("weapon_drone_thrust_med", "tag_thrust_4_LE");
-  _id_0B91::_id_75C4("weapon_drone_thrust_med", "tag_thrust_4_RI");
+func_5C96() {
+  scripts/sp/utility::func_75C4("weapon_drone_thrust_med", "tag_thrust_4_LE");
+  scripts/sp/utility::func_75C4("weapon_drone_thrust_med", "tag_thrust_4_RI");
 }
 
-_id_5C95() {
-  _id_0B91::_id_75F8("weapon_drone_thrust_med", "tag_thrust_4_LE");
-  _id_0B91::_id_75F8("weapon_drone_thrust_med", "tag_thrust_4_RI");
+func_5C95() {
+  scripts/sp/utility::func_75F8("weapon_drone_thrust_med", "tag_thrust_4_LE");
+  scripts/sp/utility::func_75F8("weapon_drone_thrust_med", "tag_thrust_4_RI");
 }
 
-_id_5C87() {
-  _id_0B91::_id_75C4("weapon_drone_thrust_big", "TAG_THRUST_2_RI");
-  _id_0B91::_id_75C4("weapon_drone_thrust_big", "TAG_THRUST_2_LE");
+func_5C87() {
+  scripts/sp/utility::func_75C4("weapon_drone_thrust_big", "TAG_THRUST_2_RI");
+  scripts/sp/utility::func_75C4("weapon_drone_thrust_big", "TAG_THRUST_2_LE");
   wait 0.5;
-  self._id_FC28 _meth_8278(0, 0.0);
-  self._id_FC28 playsound("drone_engine_c");
-  self._id_FC28 _meth_8278(1, 0.2);
+  self.func_FC28 ghostattack(0, 0.0);
+  self.func_FC28 playsound("drone_engine_c");
+  self.func_FC28 ghostattack(1, 0.2);
 }
 
-_id_5C3E() {
-  self._id_FC28 _meth_8278(0, 0.0);
-  self._id_FC28 playsound("drone_engine_c");
-  self._id_FC28 _meth_8278(1, 0.2);
-  _id_0B91::_id_75C4("weapon_drone_thrust_big", "TAG_THRUST_2_RI");
-  _id_0B91::_id_75C4("weapon_drone_thrust_big", "TAG_THRUST_2_LE");
+func_5C3E() {
+  self.func_FC28 ghostattack(0, 0.0);
+  self.func_FC28 playsound("drone_engine_c");
+  self.func_FC28 ghostattack(1, 0.2);
+  scripts/sp/utility::func_75C4("weapon_drone_thrust_big", "TAG_THRUST_2_RI");
+  scripts/sp/utility::func_75C4("weapon_drone_thrust_big", "TAG_THRUST_2_LE");
 }
 
-_id_5C8D() {
-  self._id_FC28 _id_EBA2("drone_engine_c", 0.2);
-  _id_0B91::_id_75A0("weapon_drone_thrust_big", "TAG_THRUST_2_RI");
-  _id_0B91::_id_75A0("weapon_drone_thrust_big", "TAG_THRUST_2_LE");
+func_5C8D() {
+  self.func_FC28 func_EBA2("drone_engine_c", 0.2);
+  scripts/sp/utility::func_75A0("weapon_drone_thrust_big", "TAG_THRUST_2_RI");
+  scripts/sp/utility::func_75A0("weapon_drone_thrust_big", "TAG_THRUST_2_LE");
 }
 
-_id_13C0C() {
+func_13C0C() {
   level endon("kill_old_drone");
-  self _meth_82A2(%weapon_drone_fly_move_f, 1, 0, 0);
-  self _meth_82A2(%drone_move_f_overlay, 0, 0);
-  self _meth_82A2(%weapon_drone_fly_move_b, 1, 0, 0);
-  self _meth_82A2(%drone_move_b_overlay, 0, 0);
-  self _meth_82A2(%weapon_drone_fly_move_l, 1, 0, 0);
-  self _meth_82A2(%drone_move_l_overlay, 0, 0);
-  self _meth_82A2(%weapon_drone_fly_move_r, 1, 0, 0);
-  self _meth_82A2(%drone_move_r_overlay, 0, 0);
-  self _meth_82A2(%weapon_drone_fly_acc_f, 1, 0, 0);
-  self _meth_82A2(%drone_acc_f_overlay, 0, 0);
-  self _meth_82A2(%weapon_drone_fly_acc_b, 1, 0, 0);
-  self _meth_82A2(%drone_acc_b_overlay, 0, 0);
-  self _meth_82A2(%weapon_drone_fly_acc_l, 1, 0, 0);
-  self _meth_82A2(%drone_acc_l_overlay, 0, 0);
-  self _meth_82A2(%weapon_drone_fly_acc_r, 1, 0, 0);
-  self _meth_82A2(%drone_acc_r_overlay, 0, 0);
-  self _meth_82AE(%weapon_drone_fly_init, 1, 0, 0);
-  self _meth_82AE(%weapon_drone_fly_static, 0, 0, 0);
+  self give_attacker_kill_rewards(%weapon_drone_fly_move_f, 1, 0, 0);
+  self give_attacker_kill_rewards(%drone_move_f_overlay, 0, 0);
+  self give_attacker_kill_rewards(%weapon_drone_fly_move_b, 1, 0, 0);
+  self give_attacker_kill_rewards(%drone_move_b_overlay, 0, 0);
+  self give_attacker_kill_rewards(%weapon_drone_fly_move_l, 1, 0, 0);
+  self give_attacker_kill_rewards(%drone_move_l_overlay, 0, 0);
+  self give_attacker_kill_rewards(%weapon_drone_fly_move_r, 1, 0, 0);
+  self give_attacker_kill_rewards(%drone_move_r_overlay, 0, 0);
+  self give_attacker_kill_rewards(%weapon_drone_fly_acc_f, 1, 0, 0);
+  self give_attacker_kill_rewards(%drone_acc_f_overlay, 0, 0);
+  self give_attacker_kill_rewards(%weapon_drone_fly_acc_b, 1, 0, 0);
+  self give_attacker_kill_rewards(%drone_acc_b_overlay, 0, 0);
+  self give_attacker_kill_rewards(%weapon_drone_fly_acc_l, 1, 0, 0);
+  self give_attacker_kill_rewards(%drone_acc_l_overlay, 0, 0);
+  self give_attacker_kill_rewards(%weapon_drone_fly_acc_r, 1, 0, 0);
+  self give_attacker_kill_rewards(%drone_acc_r_overlay, 0, 0);
+  self give_capture_credit(%weapon_drone_fly_init, 1, 0, 0);
+  self give_capture_credit(%weapon_drone_fly_static, 0, 0, 0);
 }
 
-_id_A7D5() {
-  self _meth_82A2(%landing_drone_fly_move_f, 1, 0, 0);
-  self _meth_82A2(%drone_move_f_overlay, 0, 0);
-  self _meth_82A2(%landing_drone_fly_move_b, 1, 0, 0);
-  self _meth_82A2(%drone_move_b_overlay, 0, 0);
-  self _meth_82A2(%landing_drone_fly_move_l, 1, 0, 0);
-  self _meth_82A2(%drone_move_l_overlay, 0, 0);
-  self _meth_82A2(%landing_drone_fly_move_r, 1, 0, 0);
-  self _meth_82A2(%drone_move_r_overlay, 0, 0);
-  self _meth_82A2(%landing_drone_fly_acc_f, 1, 0, 0);
-  self _meth_82A2(%drone_acc_f_overlay, 0, 0);
-  self _meth_82A2(%landing_drone_fly_acc_b, 1, 0, 0);
-  self _meth_82A2(%drone_acc_b_overlay, 0, 0);
-  self _meth_82A2(%landing_drone_fly_acc_l, 1, 0, 0);
-  self _meth_82A2(%drone_acc_l_overlay, 0, 0);
-  self _meth_82A2(%landing_drone_fly_acc_r, 1, 0, 0);
-  self _meth_82A2(%drone_acc_r_overlay, 0, 0);
-  self _meth_82AE(%landing_drone_fly_init, 1, 0, 0);
-  self _meth_82AE(%landing_drone_fly_static, 0, 0, 0);
-  self _meth_82AE(%landing_drone_fly_fail, 0, 0, 0);
-  self _meth_82A2(%landing_drone_fail_overlay, 0, 0, 0);
+func_A7D5() {
+  self give_attacker_kill_rewards(%landing_drone_fly_move_f, 1, 0, 0);
+  self give_attacker_kill_rewards(%drone_move_f_overlay, 0, 0);
+  self give_attacker_kill_rewards(%landing_drone_fly_move_b, 1, 0, 0);
+  self give_attacker_kill_rewards(%drone_move_b_overlay, 0, 0);
+  self give_attacker_kill_rewards(%landing_drone_fly_move_l, 1, 0, 0);
+  self give_attacker_kill_rewards(%drone_move_l_overlay, 0, 0);
+  self give_attacker_kill_rewards(%landing_drone_fly_move_r, 1, 0, 0);
+  self give_attacker_kill_rewards(%drone_move_r_overlay, 0, 0);
+  self give_attacker_kill_rewards(%landing_drone_fly_acc_f, 1, 0, 0);
+  self give_attacker_kill_rewards(%drone_acc_f_overlay, 0, 0);
+  self give_attacker_kill_rewards(%landing_drone_fly_acc_b, 1, 0, 0);
+  self give_attacker_kill_rewards(%drone_acc_b_overlay, 0, 0);
+  self give_attacker_kill_rewards(%landing_drone_fly_acc_l, 1, 0, 0);
+  self give_attacker_kill_rewards(%drone_acc_l_overlay, 0, 0);
+  self give_attacker_kill_rewards(%landing_drone_fly_acc_r, 1, 0, 0);
+  self give_attacker_kill_rewards(%drone_acc_r_overlay, 0, 0);
+  self give_capture_credit(%landing_drone_fly_init, 1, 0, 0);
+  self give_capture_credit(%landing_drone_fly_static, 0, 0, 0);
+  self give_capture_credit(%landing_drone_fly_fail, 0, 0, 0);
+  self give_attacker_kill_rewards(%landing_drone_fail_overlay, 0, 0, 0);
 }
 
-_id_B7EC(var_0) {
-  var_0 _id_0BDC::_id_A387();
-  var_0 delete();
+func_B7EC(var_00) {
+  var_00 func_0BDC::func_A387();
+  var_00 delete();
 }
 
-_id_B7F1() {
+func_B7F1() {
   wait 2;
-  scripts\engine\utility::_id_6E3E("jackal_missile_hint");
-  _id_0B91::_id_56BA("jackal_missile");
-  level._id_D127 waittill("missile_fired", var_0);
-  scripts\engine\utility::_id_6E2A("jackal_missile_hint");
-  scripts\engine\utility::_id_6E2A("jackal_missile_hint");
+  scripts\engine\utility::flag_set("jackal_missile_hint");
+  scripts/sp/utility::func_56BA("jackal_missile");
+  level.func_D127 waittill("missile_fired", var_00);
+  scripts\engine\utility::flag_clear("jackal_missile_hint");
+  scripts\engine\utility::flag_clear("jackal_missile_hint");
 }
 
-_id_B7F3() {
+func_B7F3() {
   level endon("player_failed_tutorial");
-  var_0 = 3;
-  scripts\engine\utility::_id_6E3E("jackal_missile_tutorial");
-  scripts\engine\utility::_id_6E3E("jackal_missile_hint");
-  thread _id_B7F0();
+  var_00 = 3;
+  scripts\engine\utility::flag_set("jackal_missile_tutorial");
+  scripts\engine\utility::flag_set("jackal_missile_hint");
+  thread func_B7F0();
 
   for (;;) {
-  level._id_D127 waittill("missile_fired", var_1);
+  level.func_D127 waittill("missile_fired", var_01);
 
-  if (var_1) {
+  if (var_01) {
   level notify("player_shot_locked_missile");
-  scripts\engine\utility::_id_6E2A("jackal_missile_tutorial");
-  scripts\engine\utility::_id_6E2A("jackal_missile_hint");
+  scripts\engine\utility::flag_clear("jackal_missile_tutorial");
+  scripts\engine\utility::flag_clear("jackal_missile_hint");
   break;
   }
-  else if (scripts\engine\utility::_id_6E25("jackal_missile_hint")) {
+  else if (scripts\engine\utility::flag("jackal_missile_hint")) {
   var_0--;
 
-  if (var_0 <= 0) {
+  if (var_00 <= 0) {
   level notify("player_shot_locked_missile");
-  scripts\engine\utility::_id_6E2A("jackal_missile_tutorial");
-  scripts\engine\utility::_id_6E2A("jackal_missile_hint");
+  scripts\engine\utility::flag_clear("jackal_missile_tutorial");
+  scripts\engine\utility::flag_clear("jackal_missile_hint");
   break;
   }
 
-  thread _id_B7FC();
+  thread func_B7FC();
   }
   }
 }
 
-_id_B7F0() {
-  level._id_D127 endon("missile_fired");
+func_B7F0() {
+  level.func_D127 endon("missile_fired");
   wait 2;
-  _id_0B91::_id_56BA("jackal_missile");
+  scripts/sp/utility::func_56BA("jackal_missile");
 }
 
-_id_B7FC() {
+func_B7FC() {
   level endon("player_shot_locked_missile");
-  scripts\engine\utility::_id_6E2A("jackal_missile_hint");
+  scripts\engine\utility::flag_clear("jackal_missile_hint");
   wait 2;
-  scripts\engine\utility::_id_6E3E("jackal_missile_hint");
-  _id_0B91::_id_56BA("jackal_missile");
+  scripts\engine\utility::flag_set("jackal_missile_hint");
+  scripts/sp/utility::func_56BA("jackal_missile");
 }
 
-_id_B7F2() {
+func_B7F2() {
   level endon("player_shot_locked_missile");
-  thread _id_B7F3();
+  thread func_B7F3();
   wait 2.5;
-  var_0 = -9999999;
+  var_00 = -9999999;
 
-  while (level._id_D127._id_B898._id_00C1 > 0) {
-  var_1 = level.player _meth_848A();
-  var_2 = gettime();
+  while (level.func_D127.missiles.count > 0) {
+  var_01 = level.player _meth_848A();
+  var_02 = gettime();
 
-  if (isdefined(var_1) && isdefined(var_1[0]) && var_1[1] == 0 && !scripts\engine\utility::_id_6E25("jackal_missile_hint") && !scripts\engine\utility::_id_6E25("jackal_find_lockon")) {
-  if (var_2 - var_0 > 1000.0) {
-  scripts\engine\utility::_id_6E3E("jackal_ads_hint");
-  _id_0B91::_id_56BA("jackal_ads");
+  if (isdefined(var_01) && isdefined(var_1[0]) && var_1[1] == 0 && !scripts\engine\utility::flag("jackal_missile_hint") && !scripts\engine\utility::flag("jackal_find_lockon")) {
+  if (var_02 - var_00 > 1000.0) {
+  scripts\engine\utility::flag_set("jackal_ads_hint");
+  scripts/sp/utility::func_56BA("jackal_ads");
   }
   }
-  else if (scripts\engine\utility::_id_6E25("jackal_ads_hint")) {
-  var_0 = var_2;
-  scripts\engine\utility::_id_6E2A("jackal_ads_hint");
+  else if (scripts\engine\utility::flag("jackal_ads_hint")) {
+  var_00 = var_02;
+  scripts\engine\utility::flag_clear("jackal_ads_hint");
   wait 0.05;
   }
 
-  if (isdefined(var_1) && isdefined(var_1[0]) && var_1[1] == 1 && !scripts\engine\utility::_id_6E25("jackal_ads_hint") && !scripts\engine\utility::_id_6E25("jackal_find_lockon")) {
-  scripts\engine\utility::_id_6E3E("jackal_missile_hint");
-  _id_0B91::_id_56BA("jackal_missile");
+  if (isdefined(var_01) && isdefined(var_1[0]) && var_1[1] == 1 && !scripts\engine\utility::flag("jackal_ads_hint") && !scripts\engine\utility::flag("jackal_find_lockon")) {
+  scripts\engine\utility::flag_set("jackal_missile_hint");
+  scripts/sp/utility::func_56BA("jackal_missile");
   }
-  else if (scripts\engine\utility::_id_6E25("jackal_missile_hint")) {
-  var_0 = var_2;
-  scripts\engine\utility::_id_6E2A("jackal_missile_hint");
+  else if (scripts\engine\utility::flag("jackal_missile_hint")) {
+  var_00 = var_02;
+  scripts\engine\utility::flag_clear("jackal_missile_hint");
   wait 0.05;
   }
 
-  if (!isdefined(var_1) || !isdefined(var_1[0]) && !scripts\engine\utility::_id_6E25("jackal_ads_hint") && !scripts\engine\utility::_id_6E25("jackal_missile_hint")) {
-  if (var_2 - var_0 > 3000.0) {
-  scripts\engine\utility::_id_6E3E("jackal_find_lockon");
-  _id_0B91::_id_56BA("jackal_find_lockon");
+  if (!isdefined(var_01) || !isdefined(var_1[0]) && !scripts\engine\utility::flag("jackal_ads_hint") && !scripts\engine\utility::flag("jackal_missile_hint")) {
+  if (var_02 - var_00 > 3000.0) {
+  scripts\engine\utility::flag_set("jackal_find_lockon");
+  scripts/sp/utility::func_56BA("jackal_find_lockon");
   }
   }
-  else if (scripts\engine\utility::_id_6E25("jackal_find_lockon")) {
-  var_0 = var_2;
-  scripts\engine\utility::_id_6E2A("jackal_find_lockon");
+  else if (scripts\engine\utility::flag("jackal_find_lockon")) {
+  var_00 = var_02;
+  scripts\engine\utility::flag_clear("jackal_find_lockon");
   wait 0.05;
   }
 
@@ -852,41 +852,41 @@ _id_B7F2() {
 
 #using_animtree("script_model");
 
-_id_5C40(var_0) {
-  self._id_102D1._id_5BD7 thread _id_5C9F(var_0);
+func_5C40(var_00) {
+  self.func_102D1.func_5BD7 thread func_5C9F(var_00);
 
-  if (isdefined(self._id_5C6B)) {
+  if (isdefined(self.func_5C6B)) {
   self playsound("landing_drone_detach");
-  var_1 = getnotetracktimes(%machinery_landing_drone_recovery, "attach_drone");
-  var_1 = var_1[0] * getanimlength(%machinery_landing_drone_recovery);
-  self._id_102D1._id_5BD7 thread _id_685F(var_1);
-  self._id_5C6B _meth_82B1(%machinery_landing_drone_recovery, 1.0);
-  wait(var_1);
-  self._id_102D1._id_5BD7 linkto(self._id_5C6B, "j_arm_L");
+  var_01 = getnotetracktimes(%machinery_landing_drone_recovery, "attach_drone");
+  var_01 = var_1[0] * getanimlength(%machinery_landing_drone_recovery);
+  self.func_102D1.func_5BD7 thread func_685F(var_01);
+  self.func_5C6B _meth_82B1(%machinery_landing_drone_recovery, 1.0);
+  wait(var_01);
+  self.func_102D1.func_5BD7 linkto(self.func_5C6B, "j_arm_L");
   } else {
   wait 1.1;
-  self._id_102D1._id_5BD7 linkto(self);
+  self.func_102D1.func_5BD7 linkto(self);
   }
 
   wait 1;
 }
 
-_id_5C9F(var_0) {
+func_5C9F(var_00) {
   wait 1;
-  var_1 = level._id_D127 gettagorigin("tag_body");
-  var_2 = level._id_D127 gettagangles("tag_body");
-  var_3 = anglestoforward(var_2);
-  var_4 = anglestoright(var_2);
-  var_5 = anglestoup(var_2);
-  self.origin = var_1 + var_3 * (325.491, 0, 14.494)[0] + var_4 * (325.491, 0, 14.494)[1] + var_5 * (325.491, 0, 14.494)[2];
-  self.angles = _func_017(var_3 * -1, var_4 * -1, var_5);
+  var_01 = level.func_D127 gettagorigin("tag_body");
+  var_02 = level.func_D127 gettagangles("tag_body");
+  var_03 = anglestoforward(var_02);
+  var_04 = anglestoright(var_02);
+  var_05 = anglestoup(var_02);
+  self.origin = var_01 + var_03 * (325.491, 0, 14.494)[0] + var_04 * (325.491, 0, 14.494)[1] + var_05 * (325.491, 0, 14.494)[2];
+  self.angles = _axistoangles(var_03 * -1, var_04 * -1, var_05);
   wait 0.1;
-  self _meth_836A(0);
+  self givegrabscore(0);
 
-  if (!isdefined(var_0))
-  _id_0BDC::_id_A387();
+  if (!isdefined(var_00))
+  func_0BDC::func_A387();
   else
   self unlink();
 
-  scripts\engine\utility::_id_6E3E("jackal_landing_drone_detached");
+  scripts\engine\utility::flag_set("jackal_landing_drone_detached");
 }

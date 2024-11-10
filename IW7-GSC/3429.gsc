@@ -230,7 +230,7 @@ getvalidspawnpathnodenearplayer(param_00,param_01) {
 		var_03 = var_02;
 		var_02 = [];
 		foreach(var_05 in var_03) {
-			if(var_05.origin[2] > level.waterdeletez || !function_010F(var_05.origin,level.trigunderwater)) {
+			if(var_05.origin[2] > level.waterdeletez || !ispointinvolume(var_05.origin,level.trigunderwater)) {
 				var_02[var_02.size] = var_05;
 			}
 		}

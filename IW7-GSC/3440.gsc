@@ -692,7 +692,7 @@ marktarget_execute(param_00) {
 	param_00.healthregendisabled = 1;
 	wait(0.1);
 	if(level.gametype != "dm") {
-		var_03 = function_029A(scripts\engine\utility::getfx("marked_target"),var_02,"tag_origin",self.team);
+		var_03 = playfxontagforteam(scripts\engine\utility::getfx("marked_target"),var_02,"tag_origin",self.team);
 	}
 	else
 	{

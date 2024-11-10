@@ -191,7 +191,7 @@ func_3721(param_00,param_01,param_02,param_03) {
 		var_09 = angleclamp180(var_0B[1] - var_08[1]);
 	}
 
-	var_0C = function_02F9(var_09,22.5);
+	var_0C = getangleindex(var_09,22.5);
 	var_0D = param_01;
 	if(param_02 == "Custom") {
 		var_0E = _meth_8174(self.asm.var_4C86.var_22F1,undefined,self.asm.var_4C86.var_22F6);
@@ -281,7 +281,7 @@ func_3721(param_00,param_01,param_02,param_03) {
 				var_25.log = var_0F.log;
 				var_25.stricmp = var_14;
 				var_25.var_357 = var_1F;
-				var_25._func_2BD = var_20;
+				var_25.__func_2BD = var_20;
 				return var_25;
 			}
 		}

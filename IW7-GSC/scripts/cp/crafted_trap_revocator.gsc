@@ -368,8 +368,8 @@ turn_zombie(param_00) {
 
 	var_01.melee_damage_amt = int(scripts\cp\zombies\zombies_spawning::calculatezombiehealth("generic_zombie") * 0.5);
 	level.spawned_enemies = scripts\engine\utility::array_remove(level.spawned_enemies,var_01);
-	level.var_4B6E++;
-	level.var_4B95--;
+	level.current_enemy_deaths++;
+	level.current_num_spawned_enemies--;
 	var_01 setscriptablepartstate("eyes","turned_eyes");
 	var_01 setscriptablepartstate("pet","active");
 	var_01 thread kill_turned_zombie_after_time(180);

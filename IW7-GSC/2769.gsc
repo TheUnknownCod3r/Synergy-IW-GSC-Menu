@@ -7,14 +7,14 @@ init() {
   if (!isdefined(game["gamestarted"])) {
   game["menu_team"] = "team_marinesopfor";
 
-  if (level._id_BDCC)
+  if (level.multiteambased)
   game["menu_team"] = "team_mt_options";
 
   if (scripts\mp\utility\game::bot_is_fireteam_mode()) {
-  level._id_6D8F = "class_commander_" + level.gametype;
-  game["menu_class"] = level._id_6D8F;
-  game["menu_class_allies"] = level._id_6D8F;
-  game["menu_class_axis"] = level._id_6D8F;
+  level.fireteam_menu = "class_commander_" + level.gametype;
+  game["menu_class"] = level.fireteam_menu;
+  game["menu_class_allies"] = level.fireteam_menu;
+  game["menu_class_axis"] = level.fireteam_menu;
   } else {
   game["menu_class"] = "class";
   game["menu_class_allies"] = "class_marines";
@@ -24,27 +24,27 @@ init() {
   game["menu_changeclass_allies"] = "changeclass_marines";
   game["menu_changeclass_axis"] = "changeclass_opfor";
 
-  if (level._id_BDCC) {
-  for (var_0 = 0; var_0 < level._id_115DA.size; var_0++) {
-  var_1 = "menu_class_" + level._id_115DA[var_0];
-  var_2 = "menu_changeclass_" + level._id_115DA[var_0];
-  game[var_1] = game["menu_class_allies"];
-  game[var_2] = "changeclass_marines";
+  if (level.multiteambased) {
+  for (var_00 = 0; var_00 < level.teamnamelist.size; var_0++) {
+  var_01 = "menu_class_" + level.teamnamelist[var_00];
+  var_02 = "menu_changeclass_" + level.teamnamelist[var_00];
+  game[var_01] = game["menu_class_allies"];
+  game[var_02] = "changeclass_marines";
   }
   }
 
   game["menu_changeclass"] = "changeclass";
 
-  if (level._id_4542) {
+  if (level.console) {
   game["menu_controls"] = "ingame_controls";
 
-  if (level._id_10A56) {
-  if (level._id_BDCC) {
-  for (var_0 = 0; var_0 < level._id_115DA.size; var_0++) {
-  var_1 = "menu_class_" + level._id_115DA[var_0];
-  var_2 = "menu_changeclass_" + level._id_115DA[var_0];
-  game[var_1] = game[var_1] + "_splitscreen";
-  game[var_2] = game[var_2] + "_splitscreen";
+  if (level.splitscreen) {
+  if (level.multiteambased) {
+  for (var_00 = 0; var_00 < level.teamnamelist.size; var_0++) {
+  var_01 = "menu_class_" + level.teamnamelist[var_00];
+  var_02 = "menu_changeclass_" + level.teamnamelist[var_00];
+  game[var_01] = game[var_01] + "_splitscreen";
+  game[var_02] = game[var_02] + "_splitscreen";
   }
   }
 
@@ -63,18 +63,18 @@ init() {
   precachestring(&"MP_HOST_ENDGAME_RESPONSE");
   }
 
-  level thread _id_C56E();
+  level thread onplayerconnect();
   level thread watchforbootmoviecomplete();
   level thread setintrocamnetworkmodel();
 }
 
-_id_C56E() {
+onplayerconnect() {
   for (;;) {
-  level waittill("connected", var_0);
-  var_0 thread _id_13A32();
-  var_0 thread _id_13A72();
-  var_0 thread _id_13A4A();
-  var_0 thread _id_13A67();
+  level waittill("connected", var_00);
+  var_00 thread watchforclasschange();
+  var_00 thread watchforteamchange();
+  var_00 thread watchforleavegame();
+  var_00 thread func_13A67();
   }
 }
 
@@ -87,46 +87,46 @@ setintrocamnetworkmodel() {
 watchforbootmoviecomplete() {
   self endon("disconnect");
   level endon("game_ended");
-  var_0 = 0;
+  var_00 = 0;
 
   for (;;) {
   level waittill("rigBootFinished");
   var_0++;
 
-  if (level._id_4533 <= var_0) {
+  if (level.func_4533 <= var_00) {
   level notify("allRigsBooted");
   break;
   }
   }
 }
 
-_id_7E2A(var_0) {
-  var_1 = undefined;
+getclasschoice(var_00) {
+  var_01 = undefined;
 
-  if (var_0 > 100) {
-  var_2 = var_0 - 100;
-  var_1 = "default" + var_2;
+  if (var_00 > 100) {
+  var_02 = var_00 - 100;
+  var_01 = "default" + var_02;
   }
   else
-  var_1 = "custom" + var_0;
+  var_01 = "custom" + var_00;
 
-  return var_1;
+  return var_01;
 }
 
-_id_D848(var_0) {
-  var_1 = spawnstruct();
-  scripts\mp\playerlogic::_id_806C(var_1, var_0);
-  scripts\mp\playerlogic::_id_AEAD(var_1);
+preloadandqueueclass(var_00) {
+  var_01 = spawnstruct();
+  scripts\mp\playerlogic::getplayerassets(var_01, var_00);
+  scripts\mp\playerlogic::loadplayerassets(var_01);
 }
 
-_id_13A32() {
+watchforclasschange() {
   self endon("disconnect");
   level endon("game_ended");
 
   for (;;) {
-  self waittill("luinotifyserver", var_0, var_1);
+  self waittill("luinotifyserver", var_00, var_01);
 
-  if (var_0 != "class_select")
+  if (var_00 != "class_select")
   continue;
 
   if (getdvarint("systemlink") && getdvarint("xblive_competitionmatch") && self ismlgspectator()) {
@@ -134,36 +134,36 @@ _id_13A32() {
   continue;
   }
 
-  var_2 = isai(self) || issubstr(self.name, "tcBot");
+  var_02 = isai(self) || issubstr(self.name, "tcBot");
 
-  if (!var_2) {
-  if (!isai(self) && "" + var_1 != "callback")
-  self setclientomnvar("ui_loadout_selected", var_1);
+  if (!var_02) {
+  if (!isai(self) && "" + var_01 != "callback")
+  self setclientomnvar("ui_loadout_selected", var_01);
   }
 
-  if (isdefined(self._id_136FE) && self._id_136FE)
+  if (isdefined(self.waitingtoselectclass) && self.waitingtoselectclass)
   continue;
 
-  if (!scripts\mp\utility\game::_id_1C7D() || scripts\mp\utility\game::_id_10125())
+  if (!scripts\mp\utility\game::allowclasschoice() || scripts\mp\utility\game::showfakeloadout())
   continue;
 
-  if ("" + var_1 != "callback") {
+  if ("" + var_01 != "callback") {
   if (isdefined(self.pers["isBot"]) && self.pers["isBot"]) {
-  self.pers["class"] = var_1;
-  self.class = var_1;
+  self.pers["class"] = var_01;
+  self.class = var_01;
   } else {
-  var_3 = var_1 + 1;
-  var_3 = _id_7E2A(var_3);
+  var_03 = var_01 + 1;
+  var_03 = getclasschoice(var_03);
 
-  if (!isdefined(self.pers["class"]) || var_3 == self.pers["class"])
+  if (!isdefined(self.pers["class"]) || var_03 == self.pers["class"])
   continue;
 
-  self.pers["class"] = var_3;
-  self.class = var_3;
-  _id_D848(var_3);
+  self.pers["class"] = var_03;
+  self.class = var_03;
+  preloadandqueueclass(var_03);
 
-  if (scripts\mp\class::_id_FFBB())
-  scripts\mp\class::_id_837A();
+  if (scripts\mp\class::shouldallowinstantclassswap())
+  scripts\mp\class::giveloadoutswap();
   else if (isalive(self))
   self iprintlnbold(game["strings"]["change_class"]);
   }
@@ -171,354 +171,354 @@ _id_13A32() {
   continue;
   }
 
-  _id_B670("callback");
+  menuclass("callback");
   }
 }
 
-_id_13A4A() {
+watchforleavegame() {
   self endon("disconnect");
   level endon("game_ended");
 
   for (;;) {
-  self waittill("luinotifyserver", var_0, var_1);
+  self waittill("luinotifyserver", var_00, var_01);
 
-  if (var_0 != "end_game")
+  if (var_00 != "end_game")
   continue;
 
-  level thread scripts\mp\gamelogic::_id_72BE(var_1);
+  level thread scripts\mp\gamelogic::forceend(var_01);
   }
 }
 
-_id_13A72() {
+watchforteamchange() {
   self endon("disconnect");
   level endon("game_ended");
 
   for (;;) {
-  self waittill("luinotifyserver", var_0, var_1);
+  self waittill("luinotifyserver", var_00, var_01);
 
-  if (var_0 != "team_select")
+  if (var_00 != "team_select")
   continue;
 
   if (scripts\mp\utility\game::matchmakinggame())
   continue;
 
-  var_2 = 0;
+  var_02 = 0;
 
-  if (var_1 >= 3)
-  var_2 = 1;
+  if (var_01 >= 3)
+  var_02 = 1;
 
-  if (var_2) {
+  if (var_02) {
   self setclientomnvar("ui_spectator_selected", 1);
   self setclientomnvar("ui_loadout_selected", -1);
-  self._id_1097B = 1;
+  self.spectating_actively = 1;
   } else {
   self setclientomnvar("ui_spectator_selected", -1);
-  self._id_1097B = 0;
+  self.spectating_actively = 0;
   }
 
-  var_3 = self ismlgspectator();
-  var_4 = !var_3 && isdefined(self.team) && self.team == "spectator";
-  var_5 = var_3 && var_1 == 3 || var_4 && var_1 == 4;
+  var_03 = self ismlgspectator();
+  var_04 = !var_03 && isdefined(self.team) && self.team == "spectator";
+  var_05 = var_03 && var_01 == 3 || var_04 && var_01 == 4;
 
-  if (var_1 == 4) {
-  var_1 = 3;
-  self _meth_830E(1);
+  if (var_01 == 4) {
+  var_01 = 3;
+  self setmlgspectator(1);
   }
   else
-  self _meth_830E(0);
+  self setmlgspectator(0);
 
-  self setclientomnvar("ui_team_selected", var_1);
+  self setclientomnvar("ui_team_selected", var_01);
 
-  if (var_1 == 0)
-  var_1 = "axis";
-  else if (var_1 == 1)
-  var_1 = "allies";
-  else if (var_1 == 2)
-  var_1 = "random";
+  if (var_01 == 0)
+  var_01 = "axis";
+  else if (var_01 == 1)
+  var_01 = "allies";
+  else if (var_01 == 2)
+  var_01 = "random";
   else
-  var_1 = "spectator";
+  var_01 = "spectator";
 
-  if (!var_5 && isdefined(self.pers["team"]) && var_1 == self.pers["team"])
+  if (!var_05 && isdefined(self.pers["team"]) && var_01 == self.pers["team"])
   continue;
 
   self setclientomnvar("ui_loadout_selected", -1);
-  thread _id_AFDB(var_1);
+  thread logteamselection(var_01);
 
-  if (var_1 == "axis") {
-  thread _id_F876("axis");
+  if (var_01 == "axis") {
+  thread setteam("axis");
   continue;
   }
 
-  if (var_1 == "allies") {
-  thread _id_F876("allies");
+  if (var_01 == "allies") {
+  thread setteam("allies");
   continue;
   }
 
-  if (var_1 == "random") {
-  thread _id_2642();
+  if (var_01 == "random") {
+  thread autoassign();
   continue;
   }
 
-  if (var_1 == "spectator")
-  thread _id_F859(var_5);
+  if (var_01 == "spectator")
+  thread setspectator(var_05);
   }
 }
 
-_id_2642() {
+autoassign() {
   if (level.gametype == "infect")
-  thread _id_F876("allies");
+  thread setteam("allies");
   else if (isbotmatchmakingenabled() && isdefined(self.bot_team))
-  thread _id_F876(self.bot_team);
+  thread setteam(self.bot_team);
   else if (!isdefined(self.team)) {
   if (self ismlgspectator())
-  thread _id_F859();
-  else if (level._id_115C6["axis"] < level._id_115C6["allies"])
-  thread _id_F876("axis");
-  else if (level._id_115C6["allies"] < level._id_115C6["axis"])
-  thread _id_F876("allies");
+  thread setspectator();
+  else if (level.teamcount["axis"] < level.teamcount["allies"])
+  thread setteam("axis");
+  else if (level.teamcount["allies"] < level.teamcount["axis"])
+  thread setteam("allies");
   else if (getteamscore("allies") > getteamscore("axis"))
-  thread _id_F876("axis");
+  thread setteam("axis");
   else
-  thread _id_F876("allies");
+  thread setteam("allies");
   } else {
   if (self ismlgspectator()) {
-  thread _id_F859();
+  thread setspectator();
   return;
   }
 
-  if (level._id_115C6["axis"] < level._id_115C6["allies"] && self.team != "axis") {
-  thread _id_F876("axis");
+  if (level.teamcount["axis"] < level.teamcount["allies"] && self.team != "axis") {
+  thread setteam("axis");
   return;
   }
 
-  if (level._id_115C6["allies"] < level._id_115C6["axis"] && self.team != "allies") {
-  thread _id_F876("allies");
+  if (level.teamcount["allies"] < level.teamcount["axis"] && self.team != "allies") {
+  thread setteam("allies");
   return;
   }
 
-  if (level._id_115C6["allies"] == level._id_115C6["axis"]) {
+  if (level.teamcount["allies"] == level.teamcount["axis"]) {
   if (getteamscore("allies") > getteamscore("axis") && self.team != "axis")
-  thread _id_F876("axis");
+  thread setteam("axis");
   else if (self.team != "allies")
-  thread _id_F876("allies");
+  thread setteam("allies");
   else
   {}
   }
   }
 }
 
-_id_F876(var_0) {
+setteam(var_00) {
   self endon("disconnect");
 
-  if (!isai(self) && level.teambased && !scripts\mp\teams::getjointeampermissions(var_0) && !scripts\mp\utility\game::_id_AEB6())
+  if (!isai(self) && level.teambased && !scripts\mp\teams::getjointeampermissions(var_00) && !scripts\mp\utility\game::lobbyteamselectenabled())
   return;
 
-  if (level.ingraceperiod && !self._id_8BE9) {
-  self._id_8C2A = 0;
+  if (level.ingraceperiod && !self.hasdonecombat) {
+  self.hasspawned = 0;
   self.pers["lives"] = scripts\mp\utility\game::getgametypenumlives();
   }
 
   if (self.sessionstate == "playing") {
   self.switching_teams = 1;
-  self._id_A49E = var_0;
-  self._id_AB33 = self.pers["team"];
+  self.joining_team = var_00;
+  self.leaving_team = self.pers["team"];
   }
 
-  _id_185F(var_0);
+  addtoteam(var_00);
 
-  if (scripts\mp\utility\game::_id_9F13())
-  self _meth_859D(1);
+  if (scripts\mp\utility\game::isragdollzerog())
+  self lockdeathcamera(1);
 
   if (self.sessionstate == "playing")
   self suicide();
 
-  _id_136B1();
-  _id_637D();
+  waitforclassselect();
+  endrespawnnotify();
 
   if (self.sessionstate == "spectator") {
   if (game["state"] == "postgame")
   return;
 
-  if (game["state"] == "playing" && !scripts\mp\utility\game::_id_9E4A()) {
-  if (isdefined(self._id_13700) && self._id_13700)
+  if (game["state"] == "playing" && !scripts\mp\utility\game::isinkillcam()) {
+  if (isdefined(self.waitingtospawnamortize) && self.waitingtospawnamortize)
   return;
 
-  thread scripts\mp\playerlogic::_id_1083A();
+  thread scripts\mp\playerlogic::spawnclient();
   }
 
-  thread _id_0AF0::_id_F857();
+  thread scripts/mp/spectating::setspectatepermissions();
   }
 
   self notify("okToSpawn");
 }
 
-_id_F859(var_0) {
-  if ((!isdefined(var_0) || !var_0) && isdefined(self.pers["team"]) && self.pers["team"] == "spectator")
+setspectator(var_00) {
+  if ((!isdefined(var_00) || !var_00) && isdefined(self.pers["team"]) && self.pers["team"] == "spectator")
   return;
 
   if (isalive(self)) {
   self.switching_teams = 1;
-  self._id_A49E = "spectator";
-  self._id_AB33 = self.pers["team"];
+  self.joining_team = "spectator";
+  self.leaving_team = self.pers["team"];
   self suicide();
   }
 
   self notify("becameSpectator");
-  _id_185F("spectator");
+  addtoteam("spectator");
   self.pers["class"] = undefined;
   self.class = undefined;
-  thread scripts\mp\playerlogic::_id_10911();
+  thread scripts\mp\playerlogic::spawnspectator();
 }
 
-_id_136B1() {
+waitforclassselect() {
   self endon("disconnect");
   level endon("game_ended");
-  self._id_136FE = 1;
+  self.waitingtoselectclass = 1;
 
   for (;;) {
-  if (scripts\mp\utility\game::_id_1C7D() || scripts\mp\utility\game::_id_10125() && !isai(self)) {
+  if (scripts\mp\utility\game::allowclasschoice() || scripts\mp\utility\game::showfakeloadout() && !isai(self)) {
   if (!self ismlgspectator())
-  scripts\mp\utility\game::_id_F78C("spawn_info", game["strings"]["must_select_loadout_to_spawn"], undefined, undefined, undefined, undefined, undefined, undefined, 1);
+  scripts\mp\utility\game::setlowermessage("spawn_info", game["strings"]["must_select_loadout_to_spawn"], undefined, undefined, undefined, undefined, undefined, undefined, 1);
 
-  self waittill("luinotifyserver", var_0, var_1);
+  self waittill("luinotifyserver", var_00, var_01);
   } else {
-  _id_3327();
+  bypassclasschoice();
   break;
   }
 
-  if (var_0 != "class_select")
+  if (var_00 != "class_select")
   continue;
 
   if (self.team == "spectator")
   continue;
 
-  if ("" + var_1 != "callback") {
+  if ("" + var_01 != "callback") {
   if (isdefined(self.pers["isBot"]) && self.pers["isBot"]) {
-  self.pers["class"] = var_1;
-  self.class = var_1;
+  self.pers["class"] = var_01;
+  self.class = var_01;
   } else {
-  var_1 = var_1 + 1;
-  self.pers["class"] = _id_7E2A(var_1);
-  self.class = _id_7E2A(var_1);
+  var_01 = var_01 + 1;
+  self.pers["class"] = getclasschoice(var_01);
+  self.class = getclasschoice(var_01);
   }
 
-  self._id_136FE = 0;
+  self.waitingtoselectclass = 0;
   } else {
-  self._id_136FE = 0;
-  _id_B670("callback");
+  self.waitingtoselectclass = 0;
+  menuclass("callback");
   }
 
   break;
   }
 }
 
-_id_2A61(var_0) {
-  var_1 = self.pers["team"];
+beginclasschoice(var_00) {
+  var_01 = self.pers["team"];
 
-  if (scripts\mp\utility\game::_id_1C7D() || scripts\mp\utility\game::_id_10125() && !isai(self)) {
+  if (scripts\mp\utility\game::allowclasschoice() || scripts\mp\utility\game::showfakeloadout() && !isai(self)) {
   self setclientomnvar("ui_options_menu", 2);
 
   if (!self ismlgspectator())
-  _id_136B1();
+  waitforclassselect();
 
-  _id_637D();
+  endrespawnnotify();
 
   if (self.sessionstate == "spectator") {
   if (game["state"] == "postgame")
   return;
 
-  if (game["state"] == "playing" && !scripts\mp\utility\game::_id_9E4A()) {
-  if (isdefined(self._id_13700) && self._id_13700)
+  if (game["state"] == "playing" && !scripts\mp\utility\game::isinkillcam()) {
+  if (isdefined(self.waitingtospawnamortize) && self.waitingtospawnamortize)
   return;
 
-  thread scripts\mp\playerlogic::_id_1083A();
+  thread scripts\mp\playerlogic::spawnclient();
   }
 
-  thread _id_0AF0::_id_F857();
+  thread scripts/mp/spectating::setspectatepermissions();
   }
 
   self.connecttime = gettime();
   self notify("okToSpawn");
   }
   else
-  thread _id_3327();
+  thread bypassclasschoice();
 
   if (!isalive(self))
-  thread scripts\mp\playerlogic::_id_D81E(0.1);
+  thread scripts\mp\playerlogic::predictabouttospawnplayerovertime(0.1);
 }
 
-_id_3327() {
-  self._id_F1BA = 1;
-  self._id_136FE = 0;
+bypassclasschoice() {
+  self.selectedclass = 1;
+  self.waitingtoselectclass = 0;
 
-  if (!isbot(self) && scripts\mp\utility\game::_id_DCD5()) {
+  if (!isbot(self) && scripts\mp\utility\game::rankingenabled()) {
   if (level.gametype == "infect" || isdefined(level.aonrules) && level.aonrules > 0) {
-  scripts\mp\utility\game::_id_F78C("spawn_info", game["strings"]["press_to_spawn"], undefined, undefined, undefined, undefined, undefined, undefined, 1);
+  scripts\mp\utility\game::setlowermessage("spawn_info", game["strings"]["press_to_spawn"], undefined, undefined, undefined, undefined, undefined, undefined, 1);
   self notifyonplayercommand("pressToSpawn", "+usereload");
   self notifyonplayercommand("pressToSpawn", "+activate");
   self waittill("pressToSpawn");
   }
   }
 
-  if (isdefined(level._id_3328)) {
-  var_0 = self [[level._id_3328]]();
-  self.class = var_0;
+  if (isdefined(level.bypassclasschoicefunc)) {
+  var_00 = self [[level.bypassclasschoicefunc]]();
+  self.class = var_00;
   }
   else
   self.class = "class0";
 }
 
-_id_2A7A() {
+beginteamchoice() {
   self setclientomnvar("ui_options_menu", 1);
 }
 
-_id_B678() {
+menuspectator() {
   if (isdefined(self.pers["team"]) && self.pers["team"] == "spectator")
   return;
 
   if (isalive(self)) {
   self.switching_teams = 1;
-  self._id_A49E = "spectator";
-  self._id_AB33 = self.pers["team"];
+  self.joining_team = "spectator";
+  self.leaving_team = self.pers["team"];
   self suicide();
   }
 
-  _id_185F("spectator");
+  addtoteam("spectator");
   self.pers["class"] = undefined;
   self.class = undefined;
-  thread scripts\mp\playerlogic::_id_10911();
+  thread scripts\mp\playerlogic::spawnspectator();
 }
 
-_id_B670(var_0) {
-  var_1 = self.pers["team"];
-  var_2 = scripts\mp\class::_id_7E2A(var_0);
-  var_3 = scripts\mp\class::_id_821E(var_0);
+menuclass(var_00) {
+  var_01 = self.pers["team"];
+  var_02 = scripts\mp\class::getclasschoice(var_00);
+  var_03 = scripts\mp\class::getweaponchoice(var_00);
 
-  if (var_2 == "restricted") {
-  _id_2A61();
+  if (var_02 == "restricted") {
+  beginclasschoice();
   return;
   }
 
-  if (isdefined(self.pers["class"]) && self.pers["class"] == var_2 && (isdefined(self.pers["primary"]) && self.pers["primary"] == var_3))
+  if (isdefined(self.pers["class"]) && self.pers["class"] == var_02 && (isdefined(self.pers["primary"]) && self.pers["primary"] == var_03))
   return;
 
   if (self.sessionstate == "playing") {
   if (isdefined(self.pers["lastClass"]) && isdefined(self.pers["class"])) {
   self.pers["lastClass"] = self.pers["class"];
-  self._id_A95C = self.pers["lastClass"];
+  self.lastclass = self.pers["lastClass"];
   }
 
-  self.pers["class"] = var_2;
-  self.class = var_2;
-  self.pers["primary"] = var_3;
+  self.pers["class"] = var_02;
+  self.class = var_02;
+  self.pers["primary"] = var_03;
 
   if (game["state"] == "postgame")
   return;
 
-  if (level.ingraceperiod && !self._id_8BE9) {
-  scripts\mp\class::_id_F691(self.pers["class"]);
-  self._id_0322 = undefined;
-  self._id_113E7 = undefined;
+  if (level.ingraceperiod && !self.hasdonecombat) {
+  scripts\mp\class::setclass(self.pers["class"]);
+  self.tag_stowed_back = undefined;
+  self.tag_stowed_hip = undefined;
   scripts\mp\class::giveloadout(self.pers["team"], self.pers["class"]);
   }
   else
@@ -526,64 +526,64 @@ _id_B670(var_0) {
   } else {
   if (isdefined(self.pers["lastClass"]) && isdefined(self.pers["class"])) {
   self.pers["lastClass"] = self.pers["class"];
-  self._id_A95C = self.pers["lastClass"];
+  self.lastclass = self.pers["lastClass"];
   }
 
-  self.pers["class"] = var_2;
-  self.class = var_2;
-  self.pers["primary"] = var_3;
+  self.pers["class"] = var_02;
+  self.class = var_02;
+  self.pers["primary"] = var_03;
 
   if (game["state"] == "postgame")
   return;
 
-  if (game["state"] == "playing" && !scripts\mp\utility\game::_id_9E4A())
-  thread scripts\mp\playerlogic::_id_1083A();
+  if (game["state"] == "playing" && !scripts\mp\utility\game::isinkillcam())
+  thread scripts\mp\playerlogic::spawnclient();
   }
 
-  thread _id_0AF0::_id_F857();
+  thread scripts/mp/spectating::setspectatepermissions();
 }
 
-_id_185F(var_0, var_1, var_2) {
+addtoteam(var_00, var_01, var_02) {
   if (isdefined(self.team)) {
-  scripts\mp\playerlogic::_id_E11D();
+  scripts\mp\playerlogic::removefromteamcount();
 
-  if (isdefined(var_2) && var_2)
-  scripts\mp\playerlogic::_id_4FBD(self.team);
+  if (isdefined(var_02) && var_02)
+  scripts\mp\playerlogic::decrementalivecount(self.team);
   }
 
   if (isdefined(self.pers["team"]) && self.pers["team"] != "" && self.pers["team"] != "spectator")
   self.pers["last_team"] = self.pers["team"];
 
-  self.pers["team"] = var_0;
-  self.team = var_0;
+  self.pers["team"] = var_00;
+  self.team = var_00;
 
-  if ((!scripts\mp\utility\game::matchmakinggame() || isdefined(self.pers["isBot"]) || !scripts\mp\utility\game::_id_1CAD()) && !isgamebattlematch()) {
+  if ((!scripts\mp\utility\game::matchmakinggame() || isdefined(self.pers["isBot"]) || !scripts\mp\utility\game::allowteamassignment()) && !isgamebattlematch()) {
   if (level.teambased)
-  self._id_0291 = var_0;
-  else if (var_0 == "spectator")
-  self._id_0291 = "spectator";
+  self.sessionteam = var_00;
+  else if (var_00 == "spectator")
+  self.sessionteam = "spectator";
   else
-  self._id_0291 = "none";
+  self.sessionteam = "none";
   }
 
   if (game["state"] != "postgame") {
-  scripts\mp\playerlogic::_id_1860();
+  scripts\mp\playerlogic::addtoteamcount();
 
-  if (isdefined(var_2) && var_2)
-  scripts\mp\playerlogic::_id_93F8(self.team);
+  if (isdefined(var_02) && var_02)
+  scripts\mp\playerlogic::incrementalivecount(self.team);
   }
 
   if (isgamebattlematch())
-  setmatchdata("players", self._id_41F0, "team", var_0);
+  setmatchdata("players", self.clientid, "team", var_00);
 
-  scripts\mp\utility\game::_id_12EDC();
+  scripts\mp\utility\game::updateobjectivetext();
 
-  if (isdefined(var_1) && var_1)
+  if (isdefined(var_01) && var_01)
   waittillframeend;
 
-  scripts\mp\utility\game::_id_12EC8();
+  scripts\mp\utility\game::updatemainmenu();
 
-  if (var_0 == "spectator") {
+  if (var_00 == "spectator") {
   self notify("joined_spectators");
   level notify("joined_team", self);
   } else {
@@ -592,68 +592,68 @@ _id_185F(var_0, var_1, var_2) {
   }
 }
 
-_id_637D() {
+endrespawnnotify() {
   self.waitingtospawn = 0;
   self notify("end_respawn");
 }
 
-_id_AFDB(var_0) {
+logteamselection(var_00) {
   if (getdvarint("scr_playtest", 0) == 0)
   return;
 
-  if (var_0 != "random")
+  if (var_00 != "random")
   iprintlnbold("" + self.name + " did not select auto-assign");
 }
 
-_id_13A67() {
-  thread _id_13A69();
-  thread _id_13A6A();
-  thread _id_13A6B();
+func_13A67() {
+  thread func_13A69();
+  thread func_13A6A();
+  thread func_13A6B();
 }
 
-_id_13A69() {
+func_13A69() {
   self endon("disconnect");
 
   for (;;) {
-  self waittill("luinotifyserver", var_0, var_1);
+  self waittill("luinotifyserver", var_00, var_01);
 
-  if (var_0 == "rig_selected") {
-  self._id_E535 = spawnstruct();
-  self._id_E535._id_026A = var_1;
+  if (var_00 == "rig_selected") {
+  self.func_E535 = spawnstruct();
+  self.func_E535.rigindex = var_01;
   }
   }
 }
 
-_id_13A6A() {
+func_13A6A() {
   self endon("disconnect");
 
   for (;;) {
-  self waittill("luinotifyserver", var_0, var_1);
+  self waittill("luinotifyserver", var_00, var_01);
 
-  if (var_0 == "super_selected") {
-  if (isdefined(self._id_E535)) {
-  self._id_E535._id_11261 = var_1;
+  if (var_00 == "super_selected") {
+  if (isdefined(self.func_E535)) {
+  self.func_E535.func_11261 = var_01;
   continue;
   }
   }
   }
 }
 
-_id_13A6B() {
+func_13A6B() {
   self endon("disconnect");
 
   for (;;) {
-  self waittill("luinotifyserver", var_0, var_1);
+  self waittill("luinotifyserver", var_00, var_01);
 
-  if (var_0 == "trait_selected") {
-  if (isdefined(self._id_E535)) {
-  self._id_E535._id_11B2D = var_1;
+  if (var_00 == "trait_selected") {
+  if (isdefined(self.func_E535)) {
+  self.func_E535.func_11B2D = var_01;
 
-  if (isdefined(self._id_E535._id_026A) && isdefined(self._id_E535._id_11261)) {
-  var_2 = level._id_2128[self._id_E535._id_026A];
-  var_3 = level._id_11264[self._id_E535._id_11261];
-  var_4 = level._id_CA5E[self._id_E535._id_11B2D];
-  scripts\mp\class::_id_3C53(var_2, var_3, var_4);
+  if (isdefined(self.func_E535.rigindex) && isdefined(self.func_E535.func_11261)) {
+  var_02 = level.archetypes[self.func_E535.rigindex];
+  var_03 = level.func_11264[self.func_E535.func_11261];
+  var_04 = level.func_CA5E[self.func_E535.func_11B2D];
+  scripts\mp\class::changearchetype(var_02, var_03, var_04);
   } else {}
 
   continue;

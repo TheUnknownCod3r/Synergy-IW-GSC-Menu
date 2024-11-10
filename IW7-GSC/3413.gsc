@@ -7,7 +7,7 @@
 fast_travel_init() {
 	func_95D9();
 	level.fast_travel_spots = [];
-	level.zipline_negotiation = function_00B3("zombie_zipline","script_noteworthy");
+	level.zipline_negotiation = getnode("zombie_zipline","script_noteworthy");
 	var_00 = getentarray("zipline_trigger","targetname");
 	level.zipline_traversals = [];
 	level.ziplines_achievement_trigger_list = [];
@@ -50,7 +50,7 @@ func_97AD() {
 	scripts\engine\utility::flag_wait("init_spawn_volumes_done");
 	self.var_164A = undefined;
 	foreach(var_02 in level.spawn_volume_array) {
-		if(function_010F(self.var_13EFB.origin,var_02)) {
+		if(ispointinvolume(self.var_13EFB.origin,var_02)) {
 			self.var_164A = var_02;
 			break;
 		}
@@ -85,7 +85,7 @@ activate_zipline() {
 		level.zipline_traversals[level.zipline_traversals.size] = self;
 		self.traversal_start = var_00;
 		self.traversal_end = var_01;
-		function_004D(self.target,var_00,var_01,level.zipline_negotiation,64,1);
+		createnavlink(self.target,var_00,var_01,level.zipline_negotiation,64,1);
 	}
 }
 
@@ -312,7 +312,7 @@ func_11325(param_00,param_01,param_02) {
 func_ECC7(param_00) {
 	var_01 = gettime();
 	var_02 = gettime() + param_00 * 1000;
-	var_03 = function_01E1(level.var_28C9,self geteye(),self);
+	var_03 = spawnfxforclient(level.var_28C9,self geteye(),self);
 	while(var_01 < var_02) {
 		var_03.origin = self geteye();
 		triggerfx(var_03);

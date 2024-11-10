@@ -4,83 +4,83 @@
 ***************************************/
 
 init() {
-  scripts\mp\killstreaks\killstreaks::registerkillstreak("agent", ::_id_12905);
-  scripts\mp\killstreaks\killstreaks::registerkillstreak("recon_agent", ::_id_128F8);
+  scripts\mp\killstreaks\killstreaks::registerkillstreak("agent", ::tryusesquadmate);
+  scripts\mp\killstreaks\killstreaks::registerkillstreak("recon_agent", ::tryusereconsquadmate);
 }
 
 setup_callbacks() {
   level.agent_funcs["squadmate"] = level.agent_funcs["player"];
-  level.agent_funcs["squadmate"]["think"] = ::_id_10AEA;
-  level.agent_funcs["squadmate"]["on_killed"] = ::_id_C4AA;
+  level.agent_funcs["squadmate"]["think"] = ::squadmate_agent_think;
+  level.agent_funcs["squadmate"]["on_killed"] = ::on_agent_squadmate_killed;
   level.agent_funcs["squadmate"]["on_damaged"] = scripts\mp\agents\agents::on_agent_player_damaged;
-  level.agent_funcs["squadmate"]["gametype_update"] = ::_id_BFF0;
+  level.agent_funcs["squadmate"]["gametype_update"] = ::no_gametype_update;
 }
 
-_id_BFF0() {
+no_gametype_update() {
   return 0;
 }
 
-_id_12905(var_0, var_1) {
-  return _id_130DB("agent");
+tryusesquadmate(var_00, var_01) {
+  return usesquadmate("agent");
 }
 
-_id_128F8(var_0, var_1) {
-  return _id_130DB("reconAgent");
+tryusereconsquadmate(var_00, var_01) {
+  return usesquadmate("reconAgent");
 }
 
-_id_130DB(var_0) {
-  if (scripts\mp\agents\agent_utility::_id_8008("squadmate") >= 5) {
+usesquadmate(var_00) {
+  if (scripts\mp\agents\agent_utility::getnumactiveagents("squadmate") >= 5) {
   self iprintlnbold(&"KILLSTREAKS_AGENT_MAX");
   return 0;
   }
 
-  if (scripts\mp\agents\agent_utility::_id_8010(self) >= 2) {
+  if (scripts\mp\agents\agent_utility::getnumownedactiveagents(self) >= 2) {
   self iprintlnbold(&"KILLSTREAKS_AGENT_MAX");
   return 0;
   }
 
-  var_1 = scripts\mp\agents\agent_utility::_id_81FB(0, 1);
+  var_01 = scripts\mp\agents\agent_utility::getvalidspawnpathnodenearplayer(0, 1);
 
-  if (!isdefined(var_1))
+  if (!isdefined(var_01))
   return 0;
 
   if (!scripts\mp\utility\game::isreallyalive(self))
   return 0;
 
-  var_2 = var_1.origin;
-  var_3 = vectortoangles(self.origin - var_1.origin);
-  var_4 = scripts\mp\agents\agents::_id_16F2("squadmate", self.team, undefined, var_2, var_3, self, 0, 0, "veteran");
+  var_02 = var_1.origin;
+  var_03 = vectortoangles(self.origin - var_1.origin);
+  var_04 = scripts\mp\agents\agents::add_humanoid_agent("squadmate", self.team, undefined, var_02, var_03, self, 0, 0, "veteran");
 
-  if (!isdefined(var_4)) {
+  if (!isdefined(var_04)) {
   self iprintlnbold(&"KILLSTREAKS_AGENT_MAX");
   return 0;
   }
 
-  var_4._id_A6BB = var_0;
+  var_4.killstreaktype = var_00;
 
-  if (var_4._id_A6BB == "reconAgent") {
-  var_4 thread _id_F22B("iw6_riotshield_mp");
-  var_4 thread _id_6CE2();
-  var_4 thread scripts\mp\class::giveloadout(self.pers["team"], "reconAgent", 0);
-  var_4 scripts\mp\agents\agent_common::set_agent_health(250);
-  var_4 scripts\mp\perks\perkfunctions::_id_F785();
-  var_4 setmodel("mp_fullbody_synaptic_1");
-  var_4 _meth_8096(var_4._id_8C98);
-  var_4._id_8C98 = undefined;
+  if (var_4.killstreaktype == "reconAgent") {
+  var_04 thread sendagentweaponnotify("iw6_riotshield_mp");
+  var_04 thread finishreconagentloadout();
+  var_04 thread scripts\mp\class::giveloadout(self.pers["team"], "reconAgent", 0);
+  var_04 scripts\mp\agents\agent_common::set_agent_health(250);
+  var_04 scripts\mp\perks\perkfunctions::setlightarmor();
+  var_04 setmodel("mp_fullbody_synaptic_1");
+  var_04 detach(var_4.headmodel);
+  var_4.headmodel = undefined;
   }
   else
-  var_4 scripts\mp\perks\perkfunctions::_id_F785();
+  var_04 scripts\mp\perks\perkfunctions::setlightarmor();
 
-  var_4 scripts\mp\utility\game::_id_13CE("player_name_bg_green_agent", "player_name_bg_red_agent");
+  var_04 scripts\mp\utility\game::_setnameplatematerial("player_name_bg_green_agent", "player_name_bg_red_agent");
   return 1;
 }
 
-_id_6CE2() {
+finishreconagentloadout() {
   self endon("death");
   self endon("disconnect");
   level endon("game_ended");
   self waittill("giveLoadout");
-  scripts\mp\perks\perkfunctions::_id_F785();
+  scripts\mp\perks\perkfunctions::setlightarmor();
   scripts\mp\utility\game::giveperk("specialty_quickswap");
   scripts\mp\utility\game::giveperk("specialty_regenfaster");
   self botsetdifficultysetting("minInaccuracy", 1.5 * self botgetdifficultysetting("minInaccuracy"));
@@ -89,19 +89,19 @@ _id_6CE2() {
   self botsetdifficultysetting("maxFireTime", 1.25 * self botgetdifficultysetting("maxFireTime"));
 }
 
-_id_F22B(var_0) {
+sendagentweaponnotify(var_00) {
   self endon("death");
   self endon("disconnect");
   level endon("game_ended");
   self waittill("giveLoadout");
 
-  if (!isdefined(var_0))
-  var_0 = "iw6_riotshield_mp";
+  if (!isdefined(var_00))
+  var_00 = "iw6_riotshield_mp";
 
-  self notify("weapon_change", var_0);
+  self notify("weapon_change", var_00);
 }
 
-_id_10AEA() {
+squadmate_agent_think() {
   self endon("death");
   self endon("disconnect");
   self endon("owner_disconnect");
@@ -109,23 +109,23 @@ _id_10AEA() {
 
   for (;;) {
   self botsetflag("prefer_shield_out", 1);
-  var_0 = self [[scripts\mp\agents\agent_utility::agentfunc("gametype_update")]]();
+  var_00 = self [[scripts\mp\agents\agent_utility::agentfunc("gametype_update")]]();
 
-  if (!var_0) {
-  if (!scripts\mp\bots\bots_util::_id_2DDA(self.owner))
-  scripts\mp\bots\bots_strategy::_id_2DC1(self.owner, 350);
+  if (!var_00) {
+  if (!scripts\mp\bots\bots_util::bot_is_guarding_player(self.owner))
+  scripts\mp\bots\bots_strategy::bot_guard_player(self.owner, 350);
   }
 
   wait 0.05;
   }
 }
 
-_id_C4AA(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
-  scripts\mp\agents\agents::_id_C4B3(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, 0);
+on_agent_squadmate_killed(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08) {
+  scripts\mp\agents\agents::on_humanoid_agent_killed_common(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08, 0);
 
-  if (isplayer(var_1) && isdefined(self.owner) && var_1 != self.owner) {
+  if (isplayer(var_01) && isdefined(self.owner) && var_01 != self.owner) {
   self.owner scripts\mp\utility\game::leaderdialogonplayer("squad_killed");
-  scripts\mp\damage::onkillstreakkilled("squad_mate", var_1, var_4, var_3, var_2, "destroyed_squad_mate");
+  scripts\mp\damage::onkillstreakkilled("squad_mate", var_01, var_04, var_03, var_02, "destroyed_squad_mate");
   }
 
   scripts\mp\agents\agent_utility::deactivateagent();

@@ -411,7 +411,7 @@ func_B714(param_00) {
 		var_04 = "j_spine4";
 		var_05 = param_00 gettagorigin(var_04);
 		if(!isdefined(var_01)) {
-			var_06 = function_0287(var_03,var_05,var_02,self,0,"physicsquery_closest");
+			var_06 = physics_raycast(var_03,var_05,var_02,self,0,"physicsquery_closest");
 			var_07 = !isdefined(var_06) || var_06.size == 0;
 			var_01 = scripts\engine\utility::ter_op(var_07,var_04,var_01);
 		}
@@ -424,7 +424,7 @@ func_B714(param_00) {
 			var_04 = "tag_eye";
 			var_05 = param_00 gettagorigin(var_04);
 			if(!isdefined(var_01)) {
-				var_06 = function_0287(var_03,var_05,var_02,self,0,"physicsquery_closest");
+				var_06 = physics_raycast(var_03,var_05,var_02,self,0,"physicsquery_closest");
 				var_07 = !isdefined(var_06) || var_06.size == 0;
 				var_01 = scripts\engine\utility::ter_op(var_07,var_04,var_01);
 			}
@@ -433,7 +433,7 @@ func_B714(param_00) {
 		if(!isdefined(var_01)) {
 			var_05 = param_00.origin;
 			if(!isdefined(var_01)) {
-				var_06 = function_0287(var_03,var_05,var_02,self,0,"physicsquery_closest");
+				var_06 = physics_raycast(var_03,var_05,var_02,self,0,"physicsquery_closest");
 				var_07 = !isdefined(var_06) || var_06.size == 0;
 				var_01 = scripts\engine\utility::ter_op(var_07,var_04,var_01);
 			}
@@ -444,7 +444,7 @@ func_B714(param_00) {
 		var_04 = "tag_origin";
 		var_05 = var_01 gettagorigin(var_05);
 		if(!isdefined(var_01)) {
-			var_06 = function_0287(var_03,var_05,var_02,self,0,"physicsquery_closest");
+			var_06 = physics_raycast(var_03,var_05,var_02,self,0,"physicsquery_closest");
 			var_07 = !isdefined(var_06) || var_06.size == 0;
 			var_01 = scripts\engine\utility::ter_op(var_07,var_04,var_01);
 		}
@@ -492,7 +492,7 @@ func_B6EB() {
 }
 
 func_B6EC() {
-	var_00 = function_0240("micro_turret_gun_zm");
+	var_00 = weaponfiretime("micro_turret_gun_zm");
 	for(;;) {
 		if(func_B701()) {
 			var_01 = self _meth_8161(0);
@@ -621,7 +621,7 @@ func_B6EE(param_00) {
 	level endon("game_ended");
 	var_01 = self;
 	var_02 = level._effect["shoulder_cannon_charge"];
-	var_03 = function_0240("micro_turret_gun_zm");
+	var_03 = weaponfiretime("micro_turret_gun_zm");
 	var_04 = 0.01;
 	while(self.var_1E2D > 0) {
 		if(self.var_1E2D <= 20) {

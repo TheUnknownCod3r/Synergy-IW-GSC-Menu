@@ -10,28 +10,28 @@ init() {
   setclientmatchdata("map", level.script);
   }
 
-  level._id_B48C = 200;
+  level.maxdeathlogs = 200;
 }
 
-_id_38C6(var_0) {
-  if (isagent(var_0))
+canlogclient(var_00) {
+  if (isagent(var_00))
   return 0;
 
-  return var_0._id_41F0 < level._id_B4B0;
+  return var_0.clientid < level.maxlogclients;
 }
 
-_id_38C7(var_0) {
-  return var_0 < level._id_B48C;
+canlogdeath(var_00) {
+  return var_00 < level.maxdeathlogs;
 }
 
-_id_AFD5(var_0) {
-  var_1 = getclientmatchdata("deathCount");
+logplayerdeath(var_00) {
+  var_01 = getclientmatchdata("deathCount");
 
-  if (!_id_38C6(self) || !_id_38C7(var_1))
+  if (!canlogclient(self) || !canlogdeath(var_01))
   return;
 
-  if (isplayer(var_0) && _id_38C6(var_0))
-  self _meth_81E9(var_1, self._id_41F0, var_0, var_0._id_41F0);
+  if (isplayer(var_00) && canlogclient(var_00))
+  self getufolightcolor(var_01, self.clientid, var_00, var_0.clientid);
   else
-  self _meth_81E9(var_1, self._id_41F0, undefined, undefined);
+  self getufolightcolor(var_01, self.clientid, undefined, undefined);
 }

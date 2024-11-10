@@ -18,7 +18,7 @@ main(param_00) {
 func_A22F(param_00) {
 	var_01 = getentarray("script_vehicle","code_classname");
 	foreach(var_03 in var_01) {
-		if(isspawner(var_03) || !function_00FD(var_03) || !func_1312C(var_03)) {
+		if(isspawner(var_03) || !isaircraft(var_03) || !func_1312C(var_03)) {
 			continue;
 		}
 
@@ -131,7 +131,7 @@ func_7DB5() {
 	var_00 = [];
 	var_01 = vehicle_getarray();
 	foreach(var_03 in var_01) {
-		if(function_00FD(var_03)) {
+		if(isaircraft(var_03)) {
 			var_00[var_00.size] = var_03;
 		}
 	}

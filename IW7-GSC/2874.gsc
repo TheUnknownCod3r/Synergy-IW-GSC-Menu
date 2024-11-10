@@ -3,60 +3,60 @@
  * Script: scripts\2874.gsc
 ***************************************/
 
-_id_83D8(var_0, var_1, var_2, var_3, var_4) {
+global_fx(var_00, var_01, var_02, var_03, var_04) {
   init();
-  level._id_83D8[var_0] = var_3;
-  var_5 = _id_0B91::_id_8181(var_0, "targetname");
+  level.global_fx[var_00] = var_03;
+  var_05 = scripts/sp/utility::_meth_8181(var_00, "targetname");
 
-  if (!isdefined(var_5))
+  if (!isdefined(var_05))
   return;
 
   if (!var_5.size)
   return;
 
-  if (!isdefined(var_3))
-  var_3 = var_1;
+  if (!isdefined(var_03))
+  var_03 = var_01;
 
-  if (!isdefined(var_2))
-  var_2 = randomfloatrange(-20, -15);
+  if (!isdefined(var_02))
+  var_02 = randomfloatrange(-20, -15);
 
-  foreach (var_7 in var_5) {
-  if (!isdefined(level._effect[var_3]))
-  level._effect[var_3] = loadfx(var_1);
+  foreach (var_07 in var_05) {
+  if (!isdefined(level._effect[var_03]))
+  level._effect[var_03] = loadfx(var_01);
 
   if (!isdefined(var_7.angles))
   var_7.angles = (0, 0, 0);
 
-  var_8 = scripts\engine\utility::_id_49FA(var_3);
+  var_08 = scripts\engine\utility::createoneshoteffect(var_03);
   var_8.v["origin"] = var_7.origin;
   var_8.v["angles"] = var_7.angles;
-  var_8.v["fxid"] = var_3;
-  var_8.v["delay"] = var_2;
+  var_8.v["fxid"] = var_03;
+  var_8.v["delay"] = var_02;
 
-  if (isdefined(var_4))
-  var_8.v["soundalias"] = var_4;
+  if (isdefined(var_04))
+  var_8.v["soundalias"] = var_04;
 
   if (!isdefined(var_7.script_noteworthy))
   continue;
 
-  var_9 = var_7.script_noteworthy;
+  var_09 = var_7.script_noteworthy;
 
-  if (!isdefined(level._id_12C7[var_9]))
-  level._id_12C7[var_9] = [];
+  if (!isdefined(level.func_12C7[var_09]))
+  level.func_12C7[var_09] = [];
 
-  level._id_12C7[var_9][level._id_12C7[var_9].size] = var_8;
+  level.func_12C7[var_09][level.func_12C7[var_09].size] = var_08;
   }
 }
 
 init() {
-  if (!scripts\engine\utility::_id_16F3("global_FX", ::init))
+  if (!scripts\engine\utility::add_init_script("global_FX", ::init))
   return;
 
   if (!isdefined(level._effect))
   level._effect = [];
 
-  if (!isdefined(level._id_83D8))
-  level._id_83D8 = [];
+  if (!isdefined(level.global_fx))
+  level.global_fx = [];
 
-  level._id_12C7 = [];
+  level.func_12C7 = [];
 }

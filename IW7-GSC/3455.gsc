@@ -4,43 +4,43 @@
 ***************************************/
 
 init() {
-  scripts\mp\killstreaks\killstreaks::registerkillstreak("aa_launcher", ::_id_6D69, undefined, ::_id_5FBC, undefined, ::_id_11378);
-  scripts\mp\laserguidedlauncher::_id_AC0B("vfx/core/mp/killstreaks/vfx_maaws_split", "vfx/core/mp/killstreaks/vfx_maaws_homing");
+  scripts\mp\killstreaks\killstreaks::registerkillstreak("aa_launcher", ::func_6D69, undefined, ::func_5FBC, undefined, ::func_11378);
+  scripts\mp\laserguidedlauncher::func_AC0B("vfx/core/mp/killstreaks/vfx_maaws_split", "vfx/core/mp/killstreaks/vfx_maaws_homing");
 }
 
-_id_7D8F() {
+getaalaunchername() {
   return "iw6_maaws_mp";
 }
 
-_id_7D8D() {
+getaalauncherchildname() {
   return "iw6_maawschild_mp";
 }
 
-_id_7D8E() {
+getaalauncherhomingname() {
   return "iw6_maawshoming_mp";
 }
 
-_id_5FBC(var_0) {
-  var_0._id_14FF = 2;
+func_5FBC(var_00) {
+  var_0.func_14FF = 2;
   return 1;
 }
 
-_id_6D69(var_0) {
-  var_0._id_14FF = var_0._id_14FF - 1;
-  var_1 = var_0._id_14FF <= 0;
-  return var_1;
+func_6D69(var_00) {
+  var_0.func_14FF = var_0.func_14FF - 1;
+  var_01 = var_0.func_14FF <= 0;
+  return var_01;
 }
 
-_id_11378(var_0) {
-  self setweaponammoclip(var_0.weapon, var_0._id_14FF);
-  thread _id_B9B1(var_0);
+func_11378(var_00) {
+  self setweaponammoclip(var_0.weapon, var_0.func_14FF);
+  thread monitorweaponswitch(var_00);
 }
 
-_id_B9B1(var_0) {
+monitorweaponswitch(var_00) {
   self endon("death");
   self endon("disconnect");
-  self waittill("weapon_change", var_1);
-  thread scripts\mp\laserguidedlauncher::_id_AC08(_id_7D8F(), _id_7D8D(), _id_7D8E());
+  self waittill("weapon_change", var_01);
+  thread scripts\mp\laserguidedlauncher::func_AC08(getaalaunchername(), getaalauncherchildname(), getaalauncherhomingname());
   self waittill("weapon_change");
-  scripts\mp\laserguidedlauncher::_id_AC07();
+  scripts\mp\laserguidedlauncher::func_AC07();
 }

@@ -137,7 +137,7 @@ calculate_final_spider_score(param_00) {
 	var_01 = 10;
 	var_02 = vectortoangles(param_00);
 	var_03 = angleclamp180(var_02[1] - self.angles[1]);
-	var_04 = function_02F9(var_03,var_01);
+	var_04 = getangleindex(var_03,var_01);
 	if(var_04 == 4 || var_04 < 0 || var_04 > 8) {
 		return undefined;
 	}

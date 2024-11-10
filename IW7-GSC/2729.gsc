@@ -5,120 +5,120 @@
 
 main() {}
 
-_id_10DC6() {
-  thread _id_B9D9();
+func_10DC6() {
+  thread func_B9D9();
 }
 
-_id_1107E(var_0) {
+func_1107E(var_00) {
   self notify("stop_monitoring_flash");
 }
 
-_id_6EDC(var_0) {
+func_6EDC(var_00) {
   self endon("stop_monitoring_flash");
   self endon("flash_rumble_loop");
   self notify("flash_rumble_loop");
-  var_1 = gettime() + var_0 * 1000;
+  var_01 = gettime() + var_00 * 1000;
 
-  while (gettime() < var_1) {
+  while (gettime() < var_01) {
   self playrumbleonentity("damage_heavy");
   wait 0.05;
   }
 }
 
-_id_B9D9() {
+func_B9D9() {
   self endon("death");
   self endon("disconnect");
   self notify("monitorFlash");
   self endon("monitorFlash");
-  self._id_6ECA = 0;
-  var_0 = 1;
+  self.flashendtime = 0;
+  var_00 = 1;
 
   for (;;) {
-  self waittill("flashbang", var_1, var_2, var_3, var_4, var_5, var_6);
+  self waittill("flashbang", var_01, var_02, var_03, var_04, var_05, var_06);
 
   if (!isalive(self))
   break;
 
-  if (isdefined(self._id_13118))
+  if (isdefined(self.usingremote))
   continue;
 
-  if (isdefined(self.owner) && isdefined(var_4) && var_4 == self.owner)
+  if (isdefined(self.owner) && isdefined(var_04) && var_04 == self.owner)
   continue;
 
-  if (!isdefined(var_6))
-  var_6 = 0;
+  if (!isdefined(var_06))
+  var_06 = 0;
 
-  var_7 = 0;
-  var_8 = 1;
-  var_3 = 1;
-  var_9 = var_2 * var_3 * var_0;
-  var_9 = var_9 + var_6;
-  var_9 = scripts\mp\perks\perkfunctions::_id_20E0(var_4, self, var_9);
+  var_07 = 0;
+  var_08 = 1;
+  var_03 = 1;
+  var_09 = var_02 * var_03 * var_00;
+  var_09 = var_09 + var_06;
+  var_09 = scripts\mp\perks\perkfunctions::applystunresistence(var_04, self, var_09);
 
-  if (var_9 < 0.25)
+  if (var_09 < 0.25)
   continue;
 
   var_10 = undefined;
 
-  if (var_9 > 2)
+  if (var_09 > 2)
   var_10 = 0.75;
   else
   var_10 = 0.25;
 
-  if (level.teambased && isdefined(var_4) && isdefined(var_4.team) && var_4.team == self.team && var_4 != self) {
-  if (level._id_740A == 0)
+  if (level.teambased && isdefined(var_04) && isdefined(var_4.team) && var_4.team == self.team && var_04 != self) {
+  if (level.friendlyfire == 0)
   continue;
-  else if (level._id_740A == 1) {}
-  else if (level._id_740A == 2) {
-  var_9 = var_9 * 0.5;
+  else if (level.friendlyfire == 1) {}
+  else if (level.friendlyfire == 2) {
+  var_09 = var_09 * 0.5;
   var_10 = var_10 * 0.5;
-  var_8 = 0;
-  var_7 = 1;
+  var_08 = 0;
+  var_07 = 1;
   }
-  else if (level._id_740A == 3) {
-  var_9 = var_9 * 0.5;
+  else if (level.friendlyfire == 3) {
+  var_09 = var_09 * 0.5;
   var_10 = var_10 * 0.5;
-  var_7 = 1;
+  var_07 = 1;
   }
   }
-  else if (isdefined(var_4)) {
-  var_4 notify("flash_hit");
+  else if (isdefined(var_04)) {
+  var_04 notify("flash_hit");
 
-  if (var_4 != self)
-  var_4 scripts\mp\missions::_id_D992("ch_indecentexposure");
+  if (var_04 != self)
+  var_04 scripts\mp\missions::processchallenge("ch_indecentexposure");
   }
 
-  if (var_8 && isdefined(self)) {
-  thread _id_20CA(var_9, var_10);
+  if (var_08 && isdefined(self)) {
+  thread func_20CA(var_09, var_10);
 
-  if (isdefined(var_4) && var_4 != self) {
-  var_4 thread scripts\mp\damagefeedback::updatedamagefeedback("flash");
+  if (isdefined(var_04) && var_04 != self) {
+  var_04 thread scripts\mp\damagefeedback::updatedamagefeedback("flash");
   var_11 = self;
 
-  if (isplayer(var_4) && var_4 _meth_81A7("specialty_paint", "perk") && var_4 scripts\mp\utility\game::_id_12D6("specialty_paint"))
-  var_11 thread scripts\mp\perks\perkfunctions::_id_F7D5(var_4);
+  if (isplayer(var_04) && var_04 getteamdompoints("specialty_paint", "perk") && var_04 scripts\mp\utility\game::_hasperk("specialty_paint"))
+  var_11 thread scripts\mp\perks\perkfunctions::setpainted(var_04);
   }
   }
 
-  if (var_7 && isdefined(var_4))
-  var_4 thread _id_20CA(var_9, var_10);
+  if (var_07 && isdefined(var_04))
+  var_04 thread func_20CA(var_09, var_10);
   }
 }
 
-_id_20CA(var_0, var_1) {
+func_20CA(var_00, var_01) {
   self endon("disconnect");
 
-  if (!isdefined(self._id_6EC8) || var_0 > self._id_6EC8)
-  self._id_6EC8 = var_0;
+  if (!isdefined(self.func_6EC8) || var_00 > self.func_6EC8)
+  self.func_6EC8 = var_00;
 
-  if (!isdefined(self._id_6EDB) || var_1 > self._id_6EDB)
-  self._id_6EDB = var_1;
+  if (!isdefined(self.func_6EDB) || var_01 > self.func_6EDB)
+  self.func_6EDB = var_01;
 
   wait 0.05;
-  self._id_6EC8 = undefined;
-  self._id_6EDB = undefined;
+  self.func_6EC8 = undefined;
+  self.func_6EDB = undefined;
 }
 
-_id_9DFA() {
-  return isdefined(self._id_6ECA) && gettime() < self._id_6ECA;
+isflashbanged() {
+  return isdefined(self.flashendtime) && gettime() < self.flashendtime;
 }

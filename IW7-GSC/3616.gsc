@@ -167,7 +167,7 @@ func_DE0D() {
 		}
 	}
 
-	var_10 = function_0072("axis");
+	var_10 = getaiarray("axis");
 	foreach(var_12 in var_10) {
 		var_0C = 400;
 		var_0D = 370;

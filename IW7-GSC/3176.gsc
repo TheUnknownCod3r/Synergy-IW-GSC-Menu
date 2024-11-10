@@ -540,7 +540,7 @@ func_DF4F(param_00,param_01,param_02) {
 	}
 
 	if(self.var_39B[self.var_394].var_13053) {
-		var_03 = function_00E6(self.var_394);
+		var_03 = getweaponclipmodel(self.var_394);
 		if(isdefined(var_03)) {
 			var_04 = scripts/asm/asm::func_232B(param_01,"attach clip left") || scripts/asm/asm::func_232B(param_01,"attach clip right");
 			var_05 = scripts/asm/asm::func_232B(param_01,"detach clip left") || scripts/asm/asm::func_232B(param_01,"detach clip right") || scripts/asm/asm::func_232B(param_01,"detach clip nohand");

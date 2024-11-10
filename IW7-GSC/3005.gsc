@@ -426,7 +426,7 @@ func_A5DA(param_00) {
 
 	playfxontag(level.var_7649["enemy_dropship_engine_death"],self,param_00);
 	if(isdefined(self.var_65CD[param_00].var_5290)) {
-		function_0178(self.var_65CD[param_00].var_5290,self gettagorigin(param_00));
+		playworldsound(self.var_65CD[param_00].var_5290,self gettagorigin(param_00));
 	}
 
 	if(!isdefined(self.var_65CD[param_00].var_4E40)) {

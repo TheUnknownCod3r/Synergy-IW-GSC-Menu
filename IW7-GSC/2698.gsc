@@ -3,37 +3,37 @@
  * Script: scripts\2698.gsc
 ***************************************/
 
-_id_9539() {
-  if (!isdefined(level._id_2578))
-  level._id_2578 = spawnstruct();
+init_audio() {
+  if (!isdefined(level.audio))
+  level.audio = spawnstruct();
 
-  _id_970C();
-  level._id_C56F = ::_id_C56F;
+  init_reverb();
+  level.onplayerconnectaudioinit = ::onplayerconnectaudioinit;
 }
 
-_id_C56F() {
-  _id_20B1("default");
+onplayerconnectaudioinit() {
+  apply_reverb("default");
 }
 
-_id_970C() {
-  _id_1736("default", "generic", 0.15, 0.9, 2);
+init_reverb() {
+  add_reverb("default", "generic", 0.15, 0.9, 2);
 }
 
-_id_1736(var_0, var_1, var_2, var_3, var_4) {
-  var_5 = [];
-  _id_9CAB(var_1);
-  var_5["roomtype"] = var_1;
-  var_5["wetlevel"] = var_2;
-  var_5["drylevel"] = var_3;
-  var_5["fadetime"] = var_4;
-  level._id_2578._id_E490[var_0] = var_5;
+add_reverb(var_00, var_01, var_02, var_03, var_04) {
+  var_05 = [];
+  is_roomtype_valid(var_01);
+  var_5["roomtype"] = var_01;
+  var_5["wetlevel"] = var_02;
+  var_5["drylevel"] = var_03;
+  var_5["fadetime"] = var_04;
+  level.audio.reverb_settings[var_00] = var_05;
 }
 
-_id_9CAB(var_0) {}
+is_roomtype_valid(var_00) {}
 
-_id_20B1(var_0) {
-  if (!isdefined(level._id_2578._id_E490[var_0]))
-  var_1 = level._id_2578._id_E490["default"];
+apply_reverb(var_00) {
+  if (!isdefined(level.audio.reverb_settings[var_00]))
+  var_01 = level.audio.reverb_settings["default"];
   else
-  var_1 = level._id_2578._id_E490[var_0];
+  var_01 = level.audio.reverb_settings[var_00];
 }

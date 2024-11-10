@@ -7,13 +7,13 @@
 func_5AD1(param_00) {
 	scripts\engine\utility::flag_init("allow_double_jump");
 	scripts\engine\utility::flag_set("allow_double_jump");
-	function_014C("jump","+gostand");
-	function_014C("jump","+moveup");
+	notifyoncommand("jump","+gostand");
+	notifyoncommand("jump","+moveup");
 	if(!isdefined(param_00)) {
 		param_00 = 60;
 	}
 
-	function_01C5("jump_height",param_00);
+	setsaveddvar("jump_height",param_00);
 	self.var_AD32 = undefined;
 	self.var_5AD4 = undefined;
 	for(;;) {

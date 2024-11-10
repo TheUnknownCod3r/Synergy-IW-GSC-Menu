@@ -202,7 +202,7 @@ introscreen_corner_line(param_00,param_01) {
 	}
 	else
 	{
-		level.var_9ACA++;
+		level.intro_offset++;
 	}
 
 	var_02 = cornerline_height();

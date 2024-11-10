@@ -897,7 +897,7 @@ func_CE17(param_00) {
 				continue;
 			}
 
-			if(function_027D(var_03)) {
+			if(isnumber(var_03)) {
 				wait(var_03);
 			}
 		}
@@ -1260,7 +1260,7 @@ func_CD27(param_00,param_01) {
 					continue;
 				}
 
-				if(function_027D(var_09)) {
+				if(isnumber(var_09)) {
 					wait(var_09);
 				}
 			}

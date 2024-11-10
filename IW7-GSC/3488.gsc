@@ -9,72 +9,72 @@ init() {
   precachemodel("vehicle_apache_mg");
   precacheturret("apache_minigun_mp");
   precachevehicle("apache_strafe_mp");
-  scripts\mp\killstreaks\killstreaks::registerkillstreak("littlebird_flock", ::_id_128ED);
-  level._id_8D4F = [];
+  scripts\mp\killstreaks\killstreaks::registerkillstreak("littlebird_flock", ::func_128ED);
+  level.func_8D4F = [];
 }
 
-_id_128ED(var_0, var_1) {
-  var_2 = 5;
+func_128ED(var_00, var_01) {
+  var_02 = 5;
 
-  if (_id_8DB7() || scripts\mp\utility\game::_id_4BD7() >= scripts\mp\utility\game::_id_B4D2() || level._id_6BAA + var_2 >= scripts\mp\utility\game::_id_B4D2()) {
+  if (func_8DB7() || scripts\mp\utility\game::currentactivevehiclecount() >= scripts\mp\utility\game::maxvehiclesallowed() || level.fauxvehiclecount + var_02 >= scripts\mp\utility\game::maxvehiclesallowed()) {
   self iprintlnbold(&"KILLSTREAKS_TOO_MANY_VEHICLES");
   return 0;
   }
 
-  scripts\mp\utility\game::_id_93FA();
-  scripts\mp\utility\game::_id_93FA();
-  scripts\mp\utility\game::_id_93FA();
-  scripts\mp\utility\game::_id_93FA();
-  scripts\mp\utility\game::_id_93FA();
-  var_3 = _id_F1C9(var_0, "littlebird_flock");
+  scripts\mp\utility\game::incrementfauxvehiclecount();
+  scripts\mp\utility\game::incrementfauxvehiclecount();
+  scripts\mp\utility\game::incrementfauxvehiclecount();
+  scripts\mp\utility\game::incrementfauxvehiclecount();
+  scripts\mp\utility\game::incrementfauxvehiclecount();
+  var_03 = func_F1C9(var_00, "littlebird_flock");
 
-  if (!isdefined(var_3) || !var_3) {
-  scripts\mp\utility\game::_id_4FC1();
-  scripts\mp\utility\game::_id_4FC1();
-  scripts\mp\utility\game::_id_4FC1();
-  scripts\mp\utility\game::_id_4FC1();
-  scripts\mp\utility\game::_id_4FC1();
+  if (!isdefined(var_03) || !var_03) {
+  scripts\mp\utility\game::decrementfauxvehiclecount();
+  scripts\mp\utility\game::decrementfauxvehiclecount();
+  scripts\mp\utility\game::decrementfauxvehiclecount();
+  scripts\mp\utility\game::decrementfauxvehiclecount();
+  scripts\mp\utility\game::decrementfauxvehiclecount();
   return 0;
   }
 
-  level thread scripts\mp\utility\game::_id_115DE("used_littlebird_flock", self, self.team);
+  level thread scripts\mp\utility\game::teamplayercardsplash("used_littlebird_flock", self, self.team);
   return 1;
 }
 
-_id_8DB7() {
-  var_0 = 0;
+func_8DB7() {
+  var_00 = 0;
 
-  for (var_1 = 0; var_1 < level._id_8D4F.size; var_1++) {
-  if (isdefined(level._id_8D4F[var_1])) {
-  var_0 = 1;
+  for (var_01 = 0; var_01 < level.func_8D4F.size; var_1++) {
+  if (isdefined(level.func_8D4F[var_01])) {
+  var_00 = 1;
   break;
   }
   }
 
-  return var_0;
+  return var_00;
 }
 
-_id_F1C9(var_0, var_1) {
+func_F1C9(var_00, var_01) {
   self playlocalsound(game["voice"][self.team] + "KS_lbd_inposition");
-  scripts\mp\utility\game::_id_1197(var_1, "map_artillery_selector", 1, 500);
+  scripts\mp\utility\game::_beginlocationselection(var_01, "map_artillery_selector", 1, 500);
   self endon("stop_location_selection");
-  self waittill("confirm_location", var_2, var_3);
+  self waittill("confirm_location", var_02, var_03);
 
-  if (_id_8DB7() || scripts\mp\utility\game::_id_4BD7() >= scripts\mp\utility\game::_id_B4D2() || level._id_6BAA >= scripts\mp\utility\game::_id_B4D2()) {
+  if (func_8DB7() || scripts\mp\utility\game::currentactivevehiclecount() >= scripts\mp\utility\game::maxvehiclesallowed() || level.fauxvehiclecount >= scripts\mp\utility\game::maxvehiclesallowed()) {
   self iprintlnbold(&"KILLSTREAKS_TOO_MANY_VEHICLES");
   self notify("cancel_location");
   return 0;
   }
 
-  level._id_8D4F = [];
-  level._id_8D50 = [];
-  thread _id_AD8A();
-  thread _id_6CDC(var_0, var_2, ::_id_3785, var_3);
+  level.func_8D4F = [];
+  level.func_8D50 = [];
+  thread func_AD8A();
+  thread func_6CDC(var_00, var_02, ::callstrike, var_03);
   self setblurforplayer(0, 0.3);
   return 1;
 }
 
-_id_AD8A() {
+func_AD8A() {
   self endon("death");
   self endon("disconnect");
   self playlocalsound(game["voice"][self.team] + "KS_hqr_littlebird");
@@ -82,125 +82,125 @@ _id_AD8A() {
   self playlocalsound(game["voice"][self.team] + "KS_lbd_inbound");
 }
 
-_id_6CDC(var_0, var_1, var_2, var_3) {
+func_6CDC(var_00, var_01, var_02, var_03) {
   self notify("used");
   wait 0.05;
-  thread scripts\mp\utility\game::_id_11079(0);
+  thread scripts\mp\utility\game::func_11079(0);
 
   if (isdefined(self))
-  self thread [[var_2]](var_0, var_1, var_3);
+  self thread [[var_02]](var_00, var_01, var_03);
 }
 
-_id_3785(var_0, var_1, var_2) {
+callstrike(var_00, var_01, var_02) {
   level endon("game_ended");
   self endon("disconnect");
-  thread _id_89D0();
-  var_3 = _id_7EBE(var_1, var_2, 0);
-  var_4 = _id_7EBE(var_1, var_2, -520);
-  var_5 = _id_7EBE(var_1, var_2, 520);
-  var_6 = _id_7EBE(var_1, var_2, -1040);
-  var_7 = _id_7EBE(var_1, var_2, 1040);
-  level thread _id_58E8(var_0, self, var_3, 0);
+  thread func_89D0();
+  var_03 = getflightpath(var_01, var_02, 0);
+  var_04 = getflightpath(var_01, var_02, -520);
+  var_05 = getflightpath(var_01, var_02, 520);
+  var_06 = getflightpath(var_01, var_02, -1040);
+  var_07 = getflightpath(var_01, var_02, 1040);
+  level thread func_58E8(var_00, self, var_03, 0);
   wait 0.3;
-  level thread _id_58E8(var_0, self, var_4, 1);
-  level thread _id_58E8(var_0, self, var_5, 2);
+  level thread func_58E8(var_00, self, var_04, 1);
+  level thread func_58E8(var_00, self, var_05, 2);
   wait 0.3;
-  level thread _id_58E8(var_0, self, var_6, 3);
-  level thread _id_58E8(var_0, self, var_7, 4);
-  scripts\mp\matchdata::_id_AFC9("littlebird_flock", var_1);
+  level thread func_58E8(var_00, self, var_06, 3);
+  level thread func_58E8(var_00, self, var_07, 4);
+  scripts\mp\matchdata::logkillstreakevent("littlebird_flock", var_01);
 }
 
-_id_7EBE(var_0, var_1, var_2) {
-  var_0 = var_0 * (1, 1, 0);
-  var_3 = (0, var_1, 0);
-  var_4 = 12000;
-  var_5 = [];
+getflightpath(var_00, var_01, var_02) {
+  var_00 = var_00 * (1, 1, 0);
+  var_03 = (0, var_01, 0);
+  var_04 = 12000;
+  var_05 = [];
 
-  if (isdefined(var_2) && var_2 != 0)
-  var_0 = var_0 + anglestoright(var_3) * var_2 + (0, 0, randomint(300));
+  if (isdefined(var_02) && var_02 != 0)
+  var_00 = var_00 + anglestoright(var_03) * var_02 + (0, 0, randomint(300));
 
-  var_6 = var_0 + anglestoforward(var_3) * (-1 * var_4);
-  var_7 = var_0 + anglestoforward(var_3) * var_4;
-  var_8 = scripts\mp\killstreaks\airdrop::_id_7EC0(var_0) + 256;
-  var_5["start"] = var_6 + (0, 0, var_8);
-  var_5["end"] = var_7 + (0, 0, var_8);
-  return var_5;
+  var_06 = var_00 + anglestoforward(var_03) * (-1 * var_04);
+  var_07 = var_00 + anglestoforward(var_03) * var_04;
+  var_08 = scripts\mp\killstreaks\airdrop::getflyheightoffset(var_00) + 256;
+  var_5["start"] = var_06 + (0, 0, var_08);
+  var_5["end"] = var_07 + (0, 0, var_08);
+  return var_05;
 }
 
-_id_58E8(var_0, var_1, var_2, var_3) {
+func_58E8(var_00, var_01, var_02, var_03) {
   level endon("game_ended");
 
-  if (!isdefined(var_1))
+  if (!isdefined(var_01))
   return;
 
-  var_4 = vectortoangles(var_2["end"] - var_2["start"]);
-  var_5 = _id_1082F(var_1, var_2["start"], var_4, var_3);
-  var_5._id_AC68 = var_0;
-  var_5._id_1D41 = 0;
-  var_5 thread _id_13B7E();
-  var_5 thread _id_139E8();
-  var_5 thread _id_6F4A();
-  var_5 thread _id_10DBD();
-  var_5 thread _id_B9E7();
-  var_5 endon("death");
-  var_5 setmaxpitchroll(120, 60);
-  var_5 vehicle_setspeed(48, 48);
-  var_5 setvehgoalpos(var_2["end"], 0);
-  var_5 waittill("goal");
-  var_5 setmaxpitchroll(30, 40);
-  var_5 vehicle_setspeed(32, 32);
-  var_5 setvehgoalpos(var_2["start"], 0);
+  var_04 = vectortoangles(var_2["end"] - var_2["start"]);
+  var_05 = func_1082F(var_01, var_2["start"], var_04, var_03);
+  var_5.lifeid = var_00;
+  var_5.func_1D41 = 0;
+  var_05 thread watchtimeout();
+  var_05 thread func_139E8();
+  var_05 thread func_6F4A();
+  var_05 thread func_10DBD();
+  var_05 thread func_B9E7();
+  var_05 endon("death");
+  var_05 setmaxpitchroll(120, 60);
+  var_05 vehicle_setspeed(48, 48);
+  var_05 setvehgoalpos(var_2["end"], 0);
+  var_05 waittill("goal");
+  var_05 setmaxpitchroll(30, 40);
+  var_05 vehicle_setspeed(32, 32);
+  var_05 setvehgoalpos(var_2["start"], 0);
   wait 2;
-  var_5 setmaxpitchroll(100, 60);
-  var_5 vehicle_setspeed(64, 64);
-  var_5 waittill("goal");
-  var_5 notify("gone");
-  var_5 scripts\mp\killstreaks\helicopter::_id_E139();
+  var_05 setmaxpitchroll(100, 60);
+  var_05 vehicle_setspeed(64, 64);
+  var_05 waittill("goal");
+  var_05 notify("gone");
+  var_05 scripts\mp\killstreaks\helicopter::removelittlebird();
 }
 
-_id_1082F(var_0, var_1, var_2, var_3) {
-  var_4 = spawnhelicopter(var_0, var_1, var_2, "apache_strafe_mp", "vehicle_apache_mp");
+func_1082F(var_00, var_01, var_02, var_03) {
+  var_04 = spawnhelicopter(var_00, var_01, var_02, "apache_strafe_mp", "vehicle_apache_mp");
 
-  if (!isdefined(var_4))
+  if (!isdefined(var_04))
   return;
 
-  var_4 scripts\mp\killstreaks\helicopter::_id_1852();
-  var_4 thread scripts\mp\killstreaks\helicopter::_id_E111();
+  var_04 scripts\mp\killstreaks\helicopter::addtolittlebirdlist();
+  var_04 thread scripts\mp\killstreaks\helicopter::func_E111();
   var_4.health = 999999;
   var_4.maxhealth = 2000;
-  var_4._id_00E1 = 0;
-  var_4 setcandamage(1);
-  var_4.owner = var_0;
+  var_4.damagetaken = 0;
+  var_04 setcandamage(1);
+  var_4.owner = var_00;
   var_4.team = var_0.team;
-  var_4._id_A644 = 0;
-  var_4._id_110EA = "littlebird_flock";
+  var_4.func_A644 = 0;
+  var_4.streakname = "littlebird_flock";
   var_4.helitype = "littlebird";
-  var_4._id_10955 = ::_id_3758;
-  var_5 = spawnturret("misc_turret", var_4.origin, "apache_minigun_mp");
-  var_5 linkto(var_4, "tag_turret", (0, 0, 0), (0, 0, 0));
-  var_5 setmodel("vehicle_apache_mg");
+  var_4.func_10955 = ::func_3758;
+  var_05 = spawnturret("misc_turret", var_4.origin, "apache_minigun_mp");
+  var_05 linkto(var_04, "tag_turret", (0, 0, 0), (0, 0, 0));
+  var_05 setmodel("vehicle_apache_mg");
   var_5.angles = var_4.angles;
   var_5.owner = var_4.owner;
   var_5.team = var_5.owner.team;
-  var_5 maketurretinoperable();
-  var_5.vehicle = var_4;
-  var_6 = var_4.origin + (anglestoforward(var_4.angles) * -200 + anglestoright(var_4.angles) * -200) + (0, 0, 50);
-  var_5._id_A63A = spawn("script_model", var_6);
-  var_5._id_A63A setscriptmoverkillcam("explosive");
-  var_5._id_A63A linkto(var_4, "tag_origin");
-  var_4._id_B6BC = var_5;
-  var_4._id_B6BC setdefaultdroppitch(0);
-  var_4._id_B6BC _meth_830F("auto_nonai");
-  var_4._id_B6BC _meth_8336(var_4.owner);
+  var_05 maketurretinoperable();
+  var_5.vehicle = var_04;
+  var_06 = var_4.origin + (anglestoforward(var_4.angles) * -200 + anglestoright(var_4.angles) * -200) + (0, 0, 50);
+  var_5.killcament = spawn("script_model", var_06);
+  var_5.killcament setscriptmoverkillcam("explosive");
+  var_5.killcament linkto(var_04, "tag_origin");
+  var_4.func_B6BC = var_05;
+  var_4.func_B6BC setdefaultdroppitch(0);
+  var_4.func_B6BC give_player_session_tokens("auto_nonai");
+  var_4.func_B6BC setsentryowner(var_4.owner);
 
   if (level.teambased)
-  var_4._id_B6BC _meth_835E(var_4.owner.team);
+  var_4.func_B6BC setturretteam(var_4.owner.team);
 
-  level._id_8D4F[var_3] = var_4;
-  return var_4;
+  level.func_8D4F[var_03] = var_04;
+  return var_04;
 }
 
-_id_13B7E() {
+watchtimeout() {
   level endon("game_ended");
   self endon("gone");
   self endon("death");
@@ -208,62 +208,62 @@ _id_13B7E() {
   self notify("death");
 }
 
-_id_B9E7() {
+func_B9E7() {
   level endon("game_ended");
   self endon("gone");
   self endon("death");
   self endon("stopFiring");
 
   for (;;) {
-  self waittill("killedPlayer", var_0);
-  self._id_A644++;
-  level._id_8D50[level._id_8D50.size] = var_0;
+  self waittill("killedPlayer", var_00);
+  self.func_A644++;
+  level.func_8D50[level.func_8D50.size] = var_00;
   }
 }
 
-_id_10DBD() {
+func_10DBD() {
   self endon("gone");
   self endon("death");
   self endon("stopFiring");
 
   for (;;) {
-  self._id_B6BC waittill("turret_on_target");
-  var_0 = 1;
-  var_1 = self._id_B6BC getturrettarget(0);
+  self.func_B6BC waittill("turret_on_target");
+  var_00 = 1;
+  var_01 = self.func_B6BC getturrettarget(0);
 
-  foreach (var_3 in level._id_8D50) {
-  if (var_1 == var_3) {
-  self._id_B6BC cleartargetentity();
-  var_0 = 0;
+  foreach (var_03 in level.func_8D50) {
+  if (var_01 == var_03) {
+  self.func_B6BC cleartargetentity();
+  var_00 = 0;
   break;
   }
   }
 
-  if (var_0)
-  self._id_B6BC shootturret();
+  if (var_00)
+  self.func_B6BC shootturret();
   }
 }
 
-_id_89D0() {
+func_89D0() {
   level endon("game_ended");
   self endon("flock_done");
-  thread _id_C169();
+  thread func_C169();
   self waittill("killstreak_disowned");
 
-  for (var_0 = 0; var_0 < level._id_8D4F.size; var_0++) {
-  if (isdefined(level._id_8D4F[var_0]))
-  level._id_8D4F[var_0] notify("stopFiring");
+  for (var_00 = 0; var_00 < level.func_8D4F.size; var_0++) {
+  if (isdefined(level.func_8D4F[var_00]))
+  level.func_8D4F[var_00] notify("stopFiring");
   }
 
-  for (var_0 = 0; var_0 < level._id_8D4F.size; var_0++) {
-  if (isdefined(level._id_8D4F[var_0])) {
-  level._id_8D4F[var_0] notify("death");
+  for (var_00 = 0; var_00 < level.func_8D4F.size; var_0++) {
+  if (isdefined(level.func_8D4F[var_00])) {
+  level.func_8D4F[var_00] notify("death");
   wait 0.1;
   }
   }
 }
 
-_id_C169() {
+func_C169() {
   level endon("game_ended");
   self endon("disconnect");
 
@@ -272,96 +272,96 @@ _id_C169() {
   self endon("joined_spectators");
   }
 
-  while (_id_8DB7())
+  while (func_8DB7())
   wait 0.5;
 
   self notify("flock_done");
 }
 
-_id_6F4A() {
+func_6F4A() {
   self endon("death");
   level endon("game_ended");
 
   for (;;) {
-  self waittill("damage", var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9);
+  self waittill("damage", var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08, var_09);
 
-  if (isdefined(self._id_10955))
-  self [[self._id_10955]](undefined, var_1, var_0, var_8, var_4, var_9, var_3, var_2, undefined, undefined, var_5, var_7);
+  if (isdefined(self.func_10955))
+  self [[self.func_10955]](undefined, var_01, var_00, var_08, var_04, var_09, var_03, var_02, undefined, undefined, var_05, var_07);
   }
 }
 
-_id_3758(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11) {
-  if (isdefined(self._id_1D41) && self._id_1D41)
+func_3758(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08, var_09, var_10, var_11) {
+  if (isdefined(self.func_1D41) && self.func_1D41)
   return;
 
-  if (!isdefined(var_1) || var_1 == self)
+  if (!isdefined(var_01) || var_01 == self)
   return;
 
-  if (!scripts\mp\weapons::_id_7415(self.owner, var_1))
+  if (!scripts\mp\weapons::friendlyfirecheck(self.owner, var_01))
   return;
 
-  if (isdefined(var_3) && var_3 & level.idflags_penetration)
-  self._id_1390E = 1;
+  if (isdefined(var_03) && var_03 & level.idflags_penetration)
+  self.wasdamagedfrombulletpenetration = 1;
 
-  if (isdefined(var_3) && var_3 & level.idflags_no_team_protection)
-  self._id_1390F = 1;
+  if (isdefined(var_03) && var_03 & level.idflags_no_team_protection)
+  self.wasdamagedfrombulletricochet = 1;
 
-  self._id_1390B = 1;
-  var_12 = var_2;
+  self.wasdamaged = 1;
+  var_12 = var_02;
 
-  if (isplayer(var_1)) {
-  var_1 scripts\mp\damagefeedback::updatedamagefeedback("helicopter");
+  if (isplayer(var_01)) {
+  var_01 scripts\mp\damagefeedback::updatedamagefeedback("helicopter");
 
-  if (var_4 == "MOD_RIFLE_BULLET" || var_4 == "MOD_PISTOL_BULLET") {
-  if (var_1 scripts\mp\utility\game::_id_12D6("specialty_armorpiercing"))
-  var_12 = var_12 + var_2 * level._id_218B;
+  if (var_04 == "MOD_RIFLE_BULLET" || var_04 == "MOD_PISTOL_BULLET") {
+  if (var_01 scripts\mp\utility\game::_hasperk("specialty_armorpiercing"))
+  var_12 = var_12 + var_02 * level.armorpiercingmod;
   }
   }
 
   if (isdefined(var_1.owner) && isplayer(var_1.owner))
   var_1.owner scripts\mp\damagefeedback::updatedamagefeedback("helicopter");
 
-  if (isdefined(var_5)) {
-  switch (var_5) {
+  if (isdefined(var_05)) {
+  switch (var_05) {
   case "remotemissile_projectile_mp":
   case "javelin_mp":
   case "remote_mortar_missile_mp":
   case "stinger_mp":
   case "ac130_40mm_mp":
   case "ac130_105mm_mp":
-  self._id_A859 = 1;
+  self.largeprojectiledamage = 1;
   var_12 = self.maxhealth + 1;
   break;
   case "sam_projectile_mp":
-  self._id_A859 = 1;
+  self.largeprojectiledamage = 1;
   var_12 = self.maxhealth * 0.25;
   break;
   case "emp_grenade_mp":
-  self._id_A859 = 0;
+  self.largeprojectiledamage = 0;
   var_12 = self.maxhealth + 1;
   break;
   }
 
-  scripts\mp\killstreaks\killstreaks::_id_A6A0(var_1, var_5, self);
+  scripts\mp\killstreaks\killstreaks::killstreakhit(var_01, var_05, self);
   }
 
-  self._id_00E1 = self._id_00E1 + var_12;
+  self.damagetaken = self.damagetaken + var_12;
 
-  if (self._id_00E1 >= self.maxhealth) {
-  if (isplayer(var_1) && (!isdefined(self.owner) || var_1 != self.owner)) {
-  self._id_1D41 = 1;
-  var_1 notify("destroyed_helicopter");
-  var_1 notify("destroyed_killstreak", var_5);
-  thread scripts\mp\utility\game::_id_115DE("callout_destroyed_helicopter", var_1);
-  var_1 thread scripts\mp\utility\game::_id_83B4("kill", var_5, 300);
+  if (self.damagetaken >= self.maxhealth) {
+  if (isplayer(var_01) && (!isdefined(self.owner) || var_01 != self.owner)) {
+  self.func_1D41 = 1;
+  var_01 notify("destroyed_helicopter");
+  var_01 notify("destroyed_killstreak", var_05);
+  thread scripts\mp\utility\game::teamplayercardsplash("callout_destroyed_helicopter", var_01);
+  var_01 thread scripts\mp\utility\game::giveunifiedpoints("kill", var_05, 300);
   }
 
   self notify("death");
   }
 }
 
-_id_139E8() {
+func_139E8() {
   self endon("gone");
   self waittill("death");
-  thread scripts\mp\killstreaks\helicopter::_id_AAC7();
+  thread scripts\mp\killstreaks\helicopter::lbonkilled();
 }

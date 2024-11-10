@@ -5,7 +5,7 @@
 ****************************/
 
 func_95F3() {
-	scripts\engine\utility::add_func_ref_MAYBE("setsaveddvar",::function_01C5);
+	scripts\engine\utility::add_func_ref_MAYBE("setsaveddvar",::setsaveddvar);
 	scripts\engine\utility::add_func_ref_MAYBE("useanimtree",::glinton);
 	scripts\engine\utility::add_func_ref_MAYBE("setanim",::give_attacker_kill_rewards);
 	scripts\engine\utility::add_func_ref_MAYBE("setanimknob",::setanimknob);
@@ -17,7 +17,7 @@ func_95F3() {
 	scripts\engine\utility::add_func_ref_MAYBE("getanimlength",::getanimlength);
 	scripts\engine\utility::add_func_ref_MAYBE("clearanim",::aiclearanim);
 	scripts\engine\utility::add_func_ref_MAYBE("kill",::_meth_81D0);
-	scripts\engine\utility::add_func_ref_MAYBE("magicgrenade",::function_0135);
+	scripts\engine\utility::add_func_ref_MAYBE("magicgrenade",::magicgrenade);
 	scripts\engine\utility::add_func_ref_MAYBE("connectPaths",::connectpaths);
 	scripts\engine\utility::add_func_ref_MAYBE("disconnectPaths",::disconnectpaths);
 	scripts\engine\utility::add_func_ref_MAYBE("makeEntitySentient",::makeentitysentient);
@@ -31,8 +31,8 @@ func_95F3() {
 	scripts\engine\utility::add_func_ref_MAYBE("getspawner",::getspawner);
 	level.var_5A5E = 1;
 	level.var_2681 = 1;
-	level.getnodefunction = ::function_00B3;
-	level.getnodearrayfunction = ::function_00B4;
+	level.getnodefunction = ::getnode;
+	level.getnodearrayfunction = ::getnodearray;
 	level.var_179C = ::getnodeyawfromoffsettable;
-	level._meth_8134 = ::function_00C8;
+	level._meth_8134 = ::getspawnerarray;
 }

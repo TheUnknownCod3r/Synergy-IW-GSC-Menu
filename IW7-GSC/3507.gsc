@@ -43,80 +43,80 @@ init() {
   scripts\mp\killstreaks\killstreaks::registerkillstreak("specialty_deadeye_ks", ::tryuseperkstreak);
   scripts\mp\killstreaks\killstreaks::registerkillstreak("specialty_chain_reaction_ks", ::tryuseperkstreak);
   scripts\mp\killstreaks\killstreaks::registerkillstreak("teleport", ::tryuseperkstreak);
-  scripts\mp\killstreaks\killstreaks::registerkillstreak("all_perks_bonus", ::_id_128D6);
-  scripts\mp\killstreaks\killstreaks::registerkillstreak("speed_boost", ::_id_12904);
-  scripts\mp\killstreaks\killstreaks::registerkillstreak("refill_grenades", ::_id_128FA);
-  scripts\mp\killstreaks\killstreaks::registerkillstreak("refill_ammo", ::_id_128F9);
-  scripts\mp\killstreaks\killstreaks::registerkillstreak("regen_faster", ::_id_128FB);
+  scripts\mp\killstreaks\killstreaks::registerkillstreak("all_perks_bonus", ::func_128D6);
+  scripts\mp\killstreaks\killstreaks::registerkillstreak("speed_boost", ::func_12904);
+  scripts\mp\killstreaks\killstreaks::registerkillstreak("refill_grenades", ::func_128FA);
+  scripts\mp\killstreaks\killstreaks::registerkillstreak("refill_ammo", ::func_128F9);
+  scripts\mp\killstreaks\killstreaks::registerkillstreak("regen_faster", ::func_128FB);
 }
 
-_id_12904(var_0, var_1) {
-  _id_58E3("specialty_juiced", "speed_boost");
+func_12904(var_00, var_01) {
+  func_58E3("specialty_juiced", "speed_boost");
   return 1;
 }
 
-_id_128FA(var_0, var_1) {
-  _id_58E3("specialty_refill_grenades", "refill_grenades");
+func_128FA(var_00, var_01) {
+  func_58E3("specialty_refill_grenades", "refill_grenades");
   return 1;
 }
 
-_id_128F9(var_0, var_1) {
-  _id_58E3("specialty_refill_ammo", "refill_ammo");
+func_128F9(var_00, var_01) {
+  func_58E3("specialty_refill_ammo", "refill_ammo");
   return 1;
 }
 
-_id_128FB(var_0, var_1) {
-  _id_58E3("specialty_regenfaster", "regen_faster");
+func_128FB(var_00, var_01) {
+  func_58E3("specialty_regenfaster", "regen_faster");
   return 1;
 }
 
-_id_128D6(var_0, var_1) {
+func_128D6(var_00, var_01) {
   return 1;
 }
 
-tryuseperkstreak(var_0, var_1) {
-  var_2 = scripts\mp\utility\game::_id_11150(var_1, "_ks");
-  _id_5A5D(var_2);
+tryuseperkstreak(var_00, var_01) {
+  var_02 = scripts\mp\utility\game::strip_suffix(var_01, "_ks");
+  func_5A5D(var_02);
   return 1;
 }
 
-_id_5A5D(var_0) {
-  scripts\mp\utility\game::giveperk(var_0);
-  thread _id_139E8(var_0);
-  thread _id_3E15(var_0);
+func_5A5D(var_00) {
+  scripts\mp\utility\game::giveperk(var_00);
+  thread func_139E8(var_00);
+  thread func_3E15(var_00);
 
-  if (var_0 == "specialty_hardline")
-  scripts\mp\killstreaks\killstreaks::_id_F866();
+  if (var_00 == "specialty_hardline")
+  scripts\mp\killstreaks\killstreaks::func_F866();
 
-  scripts\mp\matchdata::_id_AFC9(var_0 + "_ks", self.origin);
+  scripts\mp\matchdata::logkillstreakevent(var_00 + "_ks", self.origin);
 }
 
-_id_58E3(var_0, var_1) {
-  scripts\mp\utility\game::giveperk(var_0);
+func_58E3(var_00, var_01) {
+  scripts\mp\utility\game::giveperk(var_00);
 
-  if (isdefined(var_1))
-  scripts\mp\matchdata::_id_AFC9(var_1, self.origin);
+  if (isdefined(var_01))
+  scripts\mp\matchdata::logkillstreakevent(var_01, self.origin);
 }
 
-_id_139E8(var_0) {
+func_139E8(var_00) {
   self endon("disconnect");
   self waittill("death");
-  scripts\mp\utility\game::_id_E150(var_0);
+  scripts\mp\utility\game::removeperk(var_00);
 }
 
-_id_3E15(var_0) {
-  var_1 = scripts\mp\class::_id_805D(var_0);
+func_3E15(var_00) {
+  var_01 = scripts\mp\class::canplayerplacesentry(var_00);
 
-  if (var_1 != "specialty_null") {
-  scripts\mp\utility\game::giveperk(var_1);
-  thread _id_139E8(var_1);
+  if (var_01 != "specialty_null") {
+  scripts\mp\utility\game::giveperk(var_01);
+  thread func_139E8(var_01);
   }
 }
 
-_id_9EE0(var_0) {
-  for (var_1 = 1; var_1 < 4; var_1++) {
-  if (isdefined(self.pers["killstreaks"][var_1]._id_110EA) && self.pers["killstreaks"][var_1]._id_110EA == var_0) {
-  if (self.pers["killstreaks"][var_1]._id_269A)
+func_9EE0(var_00) {
+  for (var_01 = 1; var_01 < 4; var_1++) {
+  if (isdefined(self.pers["killstreaks"][var_01].streakname) && self.pers["killstreaks"][var_01].streakname == var_00) {
+  if (self.pers["killstreaks"][var_01].func_269A)
   return 1;
   }
   }

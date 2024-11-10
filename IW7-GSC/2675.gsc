@@ -4,37 +4,37 @@
 ***************************************/
 
 init() {
-  level._id_6DA3 = [];
-  var_0 = spawnstruct();
-  var_0._id_039B = "zmb_fireworksprojectile_mp";
-  var_0._id_B91A = "park_fireworks_trap";
-  var_0._id_B924 = "park_fireworks_trap_good";
-  var_0._id_B925 = "park_fireworks_trap_bad";
-  var_0._id_017B = &"COOP_CRAFTABLES_PICKUP";
-  var_0._id_CC28 = &"COOP_CRAFTABLES_PLACE";
-  var_0._id_38E3 = &"COOP_CRAFTABLES_CANNOT_PLACE";
-  var_0._id_CC0A = &"COOP_CRAFTABLES_PLACE_CANCELABLE";
-  var_0._id_AC71 = 120.0;
-  var_0._id_DDAC = 2;
-  var_0._id_8487 = 0.4;
-  var_0._id_C228 = 12;
-  var_0._id_6A03 = "park_fireworks_trap_rocket";
-  var_0._id_CC22 = 30.0;
-  var_0._id_CC25 = 16.0;
-  var_0._id_3AA7 = (0, 0, 35);
-  var_0._id_3AA6 = (0, 0, 0);
-  level._id_6DA3["crafted_ims"] = var_0;
+  level.func_6DA3 = [];
+  var_00 = spawnstruct();
+  var_0.weaponinfo = "zmb_fireworksprojectile_mp";
+  var_0.modelbase = "park_fireworks_trap";
+  var_0.modelplacement = "park_fireworks_trap_good";
+  var_0.modelplacementfailed = "park_fireworks_trap_bad";
+  var_0.hintstring = &"COOP_CRAFTABLES_PICKUP";
+  var_0.placestring = &"COOP_CRAFTABLES_PLACE";
+  var_0.cannotplacestring = &"COOP_CRAFTABLES_CANNOT_PLACE";
+  var_0.placecancelablestring = &"COOP_CRAFTABLES_PLACE_CANCELABLE";
+  var_0.lifespan = 120.0;
+  var_0.func_DDAC = 2;
+  var_0._meth_8487 = 0.4;
+  var_0.func_C228 = 12;
+  var_0.func_6A03 = "park_fireworks_trap_rocket";
+  var_0.placementheighttolerance = 30.0;
+  var_0.placementradius = 16.0;
+  var_0.carriedtrapoffset = (0, 0, 35);
+  var_0.carriedtrapangles = (0, 0, 0);
+  level.func_6DA3["crafted_ims"] = var_00;
 }
 
-_id_82B5(var_0, var_1) {
-  var_1 thread _id_13932();
-  var_1 notify("new_power", "crafted_ims");
-  var_1 setclientomnvar("zom_crafted_weapon", 2);
-  var_1 thread _id_0A77::_id_1308C(var_1, "iw7_pickup_zm");
-  _id_0A77::_id_F313("crafted_ims", ::_id_82B5, var_1);
+give_crafted_fireworks_trap(var_00, var_01) {
+  var_01 thread watch_dpad();
+  var_01 notify("new_power", "crafted_ims");
+  var_01 setclientomnvar("zom_crafted_weapon", 2);
+  var_01 thread scripts/cp/utility::usegrenadegesture(var_01, "iw7_pickup_zm");
+  scripts/cp/utility::set_crafted_inventory_item("crafted_ims", ::give_crafted_fireworks_trap, var_01);
 }
 
-_id_13932() {
+watch_dpad() {
   self endon("death");
   self endon("disconnect");
   self notify("craft_dpad_watcher");
@@ -44,384 +44,384 @@ _id_13932() {
   for (;;) {
   self waittill("pullout_ims");
 
-  if (scripts\engine\utility::_id_9CEE(self._id_9D81))
+  if (scripts\engine\utility::is_true(self.iscarrying))
   continue;
 
-  if (scripts\engine\utility::_id_9CEE(self._id_AD2C))
+  if (scripts\engine\utility::is_true(self.linked_to_coaster))
   continue;
 
   if (isdefined(self.allow_carry) && self.allow_carry == 0)
   continue;
 
-  if (_id_0A77::_id_9D05())
+  if (scripts/cp/utility::is_valid_player())
   break;
   }
 
-  thread _id_82CA("crafted_ims");
+  thread _meth_82CA("crafted_ims");
 }
 
-_id_82CA(var_0) {
+_meth_82CA(var_00) {
   self endon("disconnect");
-  _id_0A77::_id_41C4("msg_power_hint");
-  var_1 = _id_48EB(var_0, self);
-  self._id_A039 = var_1.name;
-  _id_0A77::_id_E077();
-  self._id_3A9A = var_1;
-  var_1._id_6DEC = 1;
-  var_2 = _id_F684(var_1, 1);
-  self._id_3A9A = undefined;
-  thread _id_0A77::_id_E2CC();
-  return var_2;
+  scripts/cp/utility::clearlowermessage("msg_power_hint");
+  var_01 = func_48EB(var_00, self);
+  self.itemtype = var_1.name;
+  scripts/cp/utility::remove_player_perks();
+  self.carried_fireworks_trap = var_01;
+  var_1.firstplacement = 1;
+  var_02 = func_F684(var_01, 1);
+  self.carried_fireworks_trap = undefined;
+  thread scripts/cp/utility::restore_player_perk();
+  return var_02;
 }
 
-_id_F684(var_0, var_1, var_2) {
+func_F684(var_00, var_01, var_02) {
   self endon("disconnect");
-  var_0 thread _id_6DA0(self);
-  scripts\engine\utility::_id_1C71(0);
+  var_00 thread func_6DA0(self);
+  scripts\engine\utility::allow_weapon(0);
   self notifyonplayercommand("place_ims", "+attack");
   self notifyonplayercommand("place_ims", "+attack_akimbo_accessible");
   self notifyonplayercommand("cancel_ims", "+actionslot 3");
 
-  if (!level._id_4542) {
+  if (!level.console) {
   self notifyonplayercommand("cancel_ims", "+actionslot 5");
   self notifyonplayercommand("cancel_ims", "+actionslot 6");
   self notifyonplayercommand("cancel_ims", "+actionslot 7");
   }
 
   for (;;) {
-  var_3 = scripts\engine\utility::_id_13734("place_ims", "cancel_ims", "force_cancel_placement", "player_action_slot_restart");
+  var_03 = scripts\engine\utility::waittill_any_return("place_ims", "cancel_ims", "force_cancel_placement", "player_action_slot_restart");
 
-  if (!isdefined(var_3))
-  var_3 = "force_cancel_placement";
+  if (!isdefined(var_03))
+  var_03 = "force_cancel_placement";
 
-  if (var_3 == "cancel_ims" || var_3 == "force_cancel_placement" || var_3 == "player_action_slot_restart") {
-  if (!var_1 && var_3 == "cancel_ims")
+  if (var_03 == "cancel_ims" || var_03 == "force_cancel_placement" || var_03 == "player_action_slot_restart") {
+  if (!var_01 && var_03 == "cancel_ims")
   continue;
 
-  var_0 _id_6D9F(var_3 == "force_cancel_placement" && !isdefined(var_0._id_6DEC));
+  var_00 func_6D9F(var_03 == "force_cancel_placement" && !isdefined(var_0.firstplacement));
 
-  if (var_3 != "force_cancel_placement")
-  thread _id_13932();
-  else if (var_1)
-  _id_0A77::_id_DFE0(self);
+  if (var_03 != "force_cancel_placement")
+  thread watch_dpad();
+  else if (var_01)
+  scripts/cp/utility::remove_crafted_item_from_inventory(self);
 
   return 0;
   }
 
-  if (!var_0._id_3872)
+  if (!var_0.canbeplaced)
   continue;
 
-  if (var_1)
-  _id_0A77::_id_DFE0(self);
+  if (var_01)
+  scripts/cp/utility::remove_crafted_item_from_inventory(self);
 
-  var_0 thread _id_6DA2(var_2);
+  var_00 thread func_6DA2(var_02);
   self notify("IMS_placed");
-  scripts\engine\utility::_id_1C71(1);
+  scripts\engine\utility::allow_weapon(1);
   return 1;
   }
 }
 
-_id_48EB(var_0, var_1) {
-  if (isdefined(var_1._id_9D81) && var_1._id_9D81)
+func_48EB(var_00, var_01) {
+  if (isdefined(var_1.iscarrying) && var_1.iscarrying)
   return;
 
-  var_2 = spawnturret("misc_turret", var_1.origin + (0, 0, 25), "sentry_minigun_mp");
+  var_02 = spawnturret("misc_turret", var_1.origin + (0, 0, 25), "sentry_minigun_mp");
   var_2.angles = var_1.angles;
-  var_2._id_6DA4 = var_0;
-  var_2.owner = var_1;
+  var_2.func_6DA4 = var_00;
+  var_2.owner = var_01;
   var_2.name = "crafted_ims";
-  var_2._id_3A9A = spawn("script_model", var_2.origin);
-  var_2._id_3A9A.angles = var_1.angles;
-  var_2 maketurretinoperable();
-  var_2 _meth_835B(1);
-  var_2 _meth_830F("sentry_offline");
-  var_2 makeunusable();
-  var_2 _meth_8336(var_1);
-  return var_2;
+  var_2.carried_fireworks_trap = spawn("script_model", var_2.origin);
+  var_2.carried_fireworks_trap.angles = var_1.angles;
+  var_02 maketurretinoperable();
+  var_02 setturretmodechangewait(1);
+  var_02 give_player_session_tokens("sentry_offline");
+  var_02 makeunusable();
+  var_02 setsentryowner(var_01);
+  return var_02;
 }
 
-_id_48EA(var_0, var_1) {
-  var_2 = var_0.owner;
-  var_3 = var_0._id_6DA4;
-  var_4 = spawn("script_model", var_0.origin + (0, 0, 1));
-  var_4 setmodel(level._id_6DA3[var_3]._id_B91A);
-  var_4._id_EB9C = 3;
+func_48EA(var_00, var_01) {
+  var_02 = var_0.owner;
+  var_03 = var_0.func_6DA4;
+  var_04 = spawn("script_model", var_0.origin + (0, 0, 1));
+  var_04 setmodel(level.func_6DA3[var_03].modelbase);
+  var_4.func_EB9C = 3;
   var_4.angles = var_0.angles;
-  var_4._id_6DA4 = var_3;
-  var_4.owner = var_2;
-  var_4 _meth_831F(var_2);
+  var_4.func_6DA4 = var_03;
+  var_4.owner = var_02;
+  var_04 setotherent(var_02);
   var_4.team = var_2.team;
   var_4.name = "crafted_ims";
-  var_4._id_10085 = 0;
-  var_4._id_8E5A = 0;
-  var_4._id_252E = 1;
-  var_4._id_8BF0 = [];
-  var_4._id_451C = level._id_6DA3[var_3];
-  var_4 thread _id_6D9D();
+  var_4.shouldsplash = 0;
+  var_4.hidden = 0;
+  var_4.func_252E = 1;
+  var_4.func_8BF0 = [];
+  var_4.config = level.func_6DA3[var_03];
+  var_04 thread func_6D9D();
 
-  if (isdefined(var_1))
-  var_4 thread _id_0A77::_id_A030(var_1);
+  if (isdefined(var_01))
+  var_04 thread scripts/cp/utility::item_timeout(var_01);
   else
-  var_4 thread _id_0A77::_id_A030(undefined, level._id_6DA3[self._id_6DA4]._id_AC71);
+  var_04 thread scripts/cp/utility::item_timeout(undefined, level.func_6DA3[self.func_6DA4].lifespan);
 
-  return var_4;
+  return var_04;
 }
 
-_id_936D(var_0) {
-  self._id_933C = 1;
+func_936D(var_00) {
+  self.func_933C = 1;
   self notify("death");
 }
 
-_id_9367(var_0) {
+func_9367(var_00) {
   self endon("carried");
   self waittill("death");
 
   if (!isdefined(self))
   return;
 
-  _id_6DA1();
+  func_6DA1();
 
-  if (isdefined(self._id_9B05)) {
-  self._id_9B05 _id_0A77::_id_E2CC();
+  if (isdefined(self.inuseby)) {
+  self.inuseby scripts/cp/utility::restore_player_perk();
   self notify("deleting");
   wait 1.0;
   }
 
-  _id_66A7();
+  func_66A7();
   self delete();
 }
 
-_id_66A7() {
+func_66A7() {
   self setscriptablepartstate("base", "explode");
   wait 0.5;
   radiusdamage(self.origin + (0, 0, 40), 200, 500, 250, self, "MOD_EXPLOSIVE", "zmb_imsprojectile_mp");
   wait 0.65;
 }
 
-_id_6D9D() {
+func_6D9D() {
   self endon("death");
   level endon("game_ended");
 
   for (;;) {
-  self waittill("trigger", var_0);
+  self waittill("trigger", var_00);
 
-  if (!var_0 _id_0A77::_id_9D05())
+  if (!var_00 scripts/cp/utility::is_valid_player())
   continue;
 
-  if (scripts\engine\utility::_id_9CEE(var_0._id_9D81))
+  if (scripts\engine\utility::is_true(var_0.iscarrying))
   continue;
 
-  var_1 = _id_48EB(self._id_6DA4, var_0);
+  var_01 = func_48EB(self.func_6DA4, var_00);
 
-  if (!isdefined(var_1))
+  if (!isdefined(var_01))
   continue;
 
-  _id_6DA1();
+  func_6DA1();
 
-  if (isdefined(self _meth_8138()))
+  if (isdefined(self getlinkedparent()))
   self unlink();
 
-  var_0 thread _id_F684(var_1, 0, self._id_AC71);
+  var_00 thread func_F684(var_01, 0, self.lifespan);
   self delete();
   break;
   }
 }
 
-_id_6DA2(var_0) {
+func_6DA2(var_00) {
   self endon("death");
   level endon("game_ended");
 
-  if (isdefined(self._id_3A9D))
-  self._id_3A9D _meth_80F3();
+  if (isdefined(self.carriedby))
+  self.carriedby getrigindexfromarchetyperef();
 
-  self._id_3A9D = undefined;
+  self.carriedby = undefined;
 
   if (isdefined(self.owner))
-  self.owner._id_9D81 = 0;
+  self.owner.iscarrying = 0;
 
-  self._id_6DEC = undefined;
-  var_1 = _id_48EA(self, var_0);
-  var_1._id_9EE4 = 1;
-  var_1 thread _id_9367(self.owner);
+  self.firstplacement = undefined;
+  var_01 = func_48EA(self, var_00);
+  var_1.isplaced = 1;
+  var_01 thread func_9367(self.owner);
   self playsound("ims_plant");
   self notify("placed");
-  var_1 thread _id_6D9E();
-  var_2 = spawnstruct();
+  var_01 thread func_6D9E();
+  var_02 = spawnstruct();
 
-  if (isdefined(self._id_BD3B))
-  var_2._id_AD39 = self._id_BD3B;
+  if (isdefined(self.moving_platform))
+  var_2.linkparent = self.moving_platform;
 
-  var_2._id_6371 = "carried";
-  var_2._id_4E53 = ::_id_936D;
-  var_1 thread _id_0A60::_id_892F(var_2);
-  self._id_3A9A delete();
+  var_2.endonstring = "carried";
+  var_2.deathoverridecallback = ::func_936D;
+  var_01 thread scripts/cp/cp_movers::handle_moving_platforms(var_02);
+  self.carried_fireworks_trap delete();
   self delete();
 }
 
-_id_6D9F(var_0) {
-  if (isdefined(self._id_3A9D)) {
-  var_1 = self._id_3A9D;
-  var_1 _meth_80F3();
-  var_1._id_9D81 = undefined;
-  var_1._id_3AA0 = undefined;
-  var_1 scripts\engine\utility::_id_1C71(1);
+func_6D9F(var_00) {
+  if (isdefined(self.carriedby)) {
+  var_01 = self.carriedby;
+  var_01 getrigindexfromarchetyperef();
+  var_1.iscarrying = undefined;
+  var_1.carrieditem = undefined;
+  var_01 scripts\engine\utility::allow_weapon(1);
   }
 
-  if (isdefined(var_0) && var_0)
-  _id_66A7();
+  if (isdefined(var_00) && var_00)
+  func_66A7();
 
-  self._id_3A9A delete();
+  self.carried_fireworks_trap delete();
   self delete();
 }
 
-_id_6DA0(var_0) {
-  self _meth_8335(var_0);
-  self _meth_82C7(0);
+func_6DA0(var_00) {
+  self setsentrycarrier(var_00);
+  self setcontents(0);
   self setcandamage(0);
-  self._id_3A9D = var_0;
-  var_0._id_9D81 = 1;
-  var_0 thread _id_0A77::_id_12E3F(self, self._id_3A9A, level._id_6DA3["crafted_ims"]);
-  thread _id_0A77::_id_A025(var_0);
-  thread _id_936F(var_0);
-  thread _id_9371(var_0);
+  self.carriedby = var_00;
+  var_0.iscarrying = 1;
+  var_00 thread scripts/cp/utility::update_trap_placement_internal(self, self.carried_fireworks_trap, level.func_6DA3["crafted_ims"]);
+  thread scripts/cp/utility::item_oncarrierdeath(var_00);
+  thread func_936F(var_00);
+  thread func_9371(var_00);
 
-  if (isdefined(level._id_5CF2))
-  self thread [[level._id_5CF2]](var_0);
+  if (isdefined(level.func_5CF2))
+  self thread [[level.func_5CF2]](var_00);
 
   self notify("carried");
 }
 
-_id_936F(var_0) {
+func_936F(var_00) {
   self endon("placed");
   self endon("death");
-  var_0 endon("last_stand");
-  var_0 waittill("disconnect");
-  _id_6D9F();
+  var_00 endon("last_stand");
+  var_00 waittill("disconnect");
+  func_6D9F();
 }
 
-_id_9371(var_0) {
+func_9371(var_00) {
   self endon("placed");
   self endon("death");
-  var_0 endon("last_stand");
+  var_00 endon("last_stand");
   level waittill("game_ended");
-  _id_6D9F();
+  func_6D9F();
 }
 
-_id_6D9E() {
+func_6D9E() {
   self endon("death");
   self setcursorhint("HINT_NOICON");
-  self sethintstring(level._id_6DA3[self._id_6DA4]._id_017B);
-  _id_0A77::_id_1861();
-  var_0 = self.owner;
-  var_0 _meth_80F3();
+  self sethintstring(level.func_6DA3[self.func_6DA4].hintstring);
+  scripts/cp/utility::addtotraplist();
+  var_00 = self.owner;
+  var_00 getrigindexfromarchetyperef();
   self makeusable();
-  self _meth_84A5(120);
-  self _meth_84A2(96);
+  self setusefov(120);
+  self setuserange(96);
   wait 0.05;
-  var_1 = (0, 0, 27);
-  var_2 = (0, 0, 500) - var_1;
-  var_3 = self.origin;
-  var_4 = self.origin + var_1;
-  var_5 = bullettrace(var_4, var_4 + var_2, 0, self);
-  var_6 = var_5;
-  self._id_2514 = var_6["position"] - (0, 0, 20) - self.origin;
+  var_01 = (0, 0, 27);
+  var_02 = (0, 0, 500) - var_01;
+  var_03 = self.origin;
+  var_04 = self.origin + var_01;
+  var_05 = bullettrace(var_04, var_04 + var_02, 0, self);
+  var_06 = var_05;
+  self.func_2514 = var_6["position"] - (0, 0, 20) - self.origin;
 
-  if (self._id_2514[2] < 250)
-  self._id_AA7B = "launch_low";
-  else if (self._id_2514[2] < 450)
-  self._id_AA7B = "launch_med";
+  if (self.func_2514[2] < 250)
+  self.func_AA7B = "launch_low";
+  else if (self.func_2514[2] < 450)
+  self.func_AA7B = "launch_med";
   else
-  self._id_AA7B = "launch_high";
+  self.func_AA7B = "launch_high";
 
-  var_7 = spawn("trigger_radius", self.origin, 0, 256, 100);
-  self._id_2536 = var_7;
-  self._id_2536 _meth_80D2();
-  self._id_2536 linkto(self);
-  self._id_2528 = length(self._id_2514) / 400;
+  var_07 = spawn("trigger_radius", self.origin, 0, 256, 100);
+  self.func_2536 = var_07;
+  self.func_2536 getrankxp();
+  self.func_2536 linkto(self);
+  self.func_2528 = length(self.func_2514) / 400;
   wait 0.75;
   self setscriptablepartstate("base", "on");
-  thread _id_6D9C();
-  thread _id_0A77::_id_A021("fireworks_disconnect");
+  thread func_6D9C();
+  thread scripts/cp/utility::item_handleownerdisconnect("fireworks_disconnect");
 }
 
-_id_6DA1() {
+func_6DA1() {
   self makeunusable();
 
-  if (isdefined(self._id_2536))
-  self._id_2536 delete();
+  if (isdefined(self.func_2536))
+  self.func_2536 delete();
 
-  if (isdefined(self._id_69F6)) {
-  self._id_69F6 delete();
-  self._id_69F6 = undefined;
+  if (isdefined(self.func_69F6)) {
+  self.func_69F6 delete();
+  self.func_69F6 = undefined;
   }
 
-  _id_0A77::_id_E11E();
+  scripts/cp/utility::removefromtraplist();
 }
 
-_id_6D9C() {
+func_6D9C() {
   self endon("death");
   level endon("game_ended");
 
   for (;;) {
-  if (!isdefined(self._id_2536))
+  if (!isdefined(self.func_2536))
   break;
 
-  self._id_2536 waittill("trigger", var_0);
+  self.func_2536 waittill("trigger", var_00);
 
-  if (isplayer(var_0) || isdefined(var_0._id_CA80) || isdefined(var_0.agent_type) && var_0.agent_type == "the_hoff")
+  if (isplayer(var_00) || isdefined(var_0.pet) || isdefined(var_0.agent_type) && var_0.agent_type == "the_hoff")
   continue;
 
-  var_1 = var_0.origin + (0, 0, 50);
+  var_01 = var_0.origin + (0, 0, 50);
 
-  if (!sighttracepassed(self._id_2514 + self.origin, var_1, 0, self))
+  if (!sighttracepassed(self.func_2514 + self.origin, var_01, 0, self))
   continue;
 
-  if (!isdefined(self._id_2536))
+  if (!isdefined(self.func_2536))
   break;
 
-  if (!isdefined(self._id_8BF0[self._id_252E])) {
-  self._id_8BF0[self._id_252E] = 1;
-  thread _id_AA75(var_0, self._id_252E);
-  self._id_252E++;
+  if (!isdefined(self.func_8BF0[self.func_252E])) {
+  self.func_8BF0[self.func_252E] = 1;
+  thread func_AA75(var_00, self.func_252E);
+  self.func_252E++;
   }
 
-  if (self._id_252E > self._id_451C._id_C228) {
+  if (self.func_252E > self.config.func_C228) {
   self setscriptablepartstate("firework", "off");
   break;
   }
 
   self waittill("firework_exploded");
   self setscriptablepartstate("firework", "off");
-  wait(self._id_451C._id_DDAC);
+  wait(self.config.func_DDAC);
 
   if (!isdefined(self.owner))
   break;
   }
 
-  if (isdefined(self._id_3A9D) && isdefined(self.owner) && self._id_3A9D == self.owner)
+  if (isdefined(self.carriedby) && isdefined(self.owner) && self.carriedby == self.owner)
   return;
 
   self notify("death");
 }
 
-_id_AA75(var_0, var_1) {
-  self setscriptablepartstate("firework", self._id_AA7B);
-  var_2 = spawn("script_model", self.origin);
-  var_2 setmodel(self._id_451C._id_6A03);
+func_AA75(var_00, var_01) {
+  self setscriptablepartstate("firework", self.func_AA7B);
+  var_02 = spawn("script_model", self.origin);
+  var_02 setmodel(self.config.func_6A03);
   var_2.angles = self.angles;
-  var_2 setscriptablepartstate("rocket", "launch");
-  var_3 = self._id_451C._id_039B;
-  var_4 = self.owner;
-  var_2 moveto(self._id_2514 + self.origin, self._id_2528, self._id_2528 * 0.5, 0);
-  var_2 waittill("movedone");
-  var_2 setscriptablepartstate("rocket", "explode");
+  var_02 setscriptablepartstate("rocket", "launch");
+  var_03 = self.config.weaponinfo;
+  var_04 = self.owner;
+  var_02 moveto(self.func_2514 + self.origin, self.func_2528, self.func_2528 * 0.5, 0);
+  var_02 waittill("movedone");
+  var_02 setscriptablepartstate("rocket", "explode");
   wait 0.1;
 
-  if (isdefined(var_4))
-  magicbullet(var_3, var_2.origin, var_0.origin, var_4);
+  if (isdefined(var_04))
+  magicbullet(var_03, var_2.origin, var_0.origin, var_04);
   else
-  magicbullet(var_3, var_2.origin, var_0.origin, level.players[0]);
+  magicbullet(var_03, var_2.origin, var_0.origin, level.players[0]);
 
-  var_2 delete();
+  var_02 delete();
   self notify("firework_exploded");
 }

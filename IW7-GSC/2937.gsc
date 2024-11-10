@@ -36,7 +36,7 @@ func_57A1() {
 		return;
 	}
 
-	function_01C5("ufoHitsTriggers","1");
+	setsaveddvar("ufoHitsTriggers","1");
 	if(isdefined(level.var_4C63)) {
 		level [[level.var_4C63]]();
 	}
@@ -75,7 +75,7 @@ func_57A2() {
 		}
 
 		if(isdefined(var_04.physics_raycast)) {
-			function_0237(var_04.physics_raycast,0);
+			visionsetnaked(var_04.physics_raycast,0);
 		}
 
 		level.player scripts\sp\_utility::func_11633(var_04);
@@ -89,8 +89,8 @@ func_57A2() {
 }
 
 func_10CBC() {
-	scripts\engine\utility::array_call(function_0072(),::delete);
-	scripts\engine\utility::array_call(function_00C8(),::delete);
+	scripts\engine\utility::array_call(getaiarray(),::delete);
+	scripts\engine\utility::array_call(getspawnerarray(),::delete);
 	var_00 = [];
 	var_00["trigger_multiple_createart_transient"] = ::scripts\sp\_trigger::func_1272E;
 	foreach(var_04, var_02 in var_00) {
@@ -241,8 +241,8 @@ func_10C18(param_00,param_01) {
 
 func_10C9F() {
 	var_00 = [];
-	if(function_02B1()) {
-		var_00 = function_02B2();
+	if(isloadingsavegame()) {
+		var_00 = getsavegametransients();
 	}
 	else
 	{
@@ -260,7 +260,7 @@ func_10C9F() {
 		}
 
 		foreach(var_04 in var_00) {
-			if(!function_0302(var_04)) {
+			if(!isspleveltransient(var_04)) {
 				scripts\engine\utility::error("add_start() list has a non SP level transient in it: " + var_04);
 			}
 		}
@@ -284,7 +284,7 @@ func_10C9F() {
 	}
 
 	if(var_00.size > 0) {
-		function_012E(var_00);
+		loadstartpointtransients(var_00);
 		foreach(var_0A in var_00) {
 			scripts\engine\utility::flag_set(var_0A + "_loaded");
 		}
@@ -293,7 +293,7 @@ func_10C9F() {
 		return;
 	}
 
-	function_02B0();
+	clearstartpointtransients();
 }
 
 func_8960() {
@@ -378,7 +378,7 @@ func_8960() {
 	var_0A = level.var_10BA8[level.var_10CDA];
 	if(isdefined(var_0A) && isdefined(var_0A["start_in_jackal"])) {
 		setomnvar("ui_active_hud","jackal");
-		function_01C5("spaceship_disableViewModelNotetracks",1);
+		setsaveddvar("spaceship_disableViewModelNotetracks",1);
 	}
 	else
 	{
@@ -402,7 +402,7 @@ func_8960() {
 	}
 
 	waittillframeend;
-	if(function_02B1()) {
+	if(isloadingsavegame()) {
 		wait(0.1);
 	}
 
@@ -654,7 +654,7 @@ func_6BBD(param_00,param_01) {
 	}
 
 	if(!isdefined(level.var_6BC3[param_01])) {
-		function_0039("",0);
+		changelevel("",0);
 		level waittill("forever");
 	}
 

@@ -11,9 +11,9 @@ func_1032A() {
 
 	level.var_1031B = spawnstruct();
 	func_10329();
-	function_014C("_cheat_player_press_slowmo","+melee");
-	function_014C("_cheat_player_press_slowmo","+melee_breath");
-	function_014C("_cheat_player_press_slowmo","+melee_zoom");
+	notifyoncommand("_cheat_player_press_slowmo","+melee");
+	notifyoncommand("_cheat_player_press_slowmo","+melee_breath");
+	notifyoncommand("_cheat_player_press_slowmo","+melee_zoom");
 }
 
 func_10329() {

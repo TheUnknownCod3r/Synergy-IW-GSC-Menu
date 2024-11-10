@@ -218,7 +218,7 @@ drop_loot(location, from_consumable, powerup_id, should_fly_to_player, param_04,
 	if(isdefined(param_04)) {
 		level.powerup_drop_increment = level.powerup_drop_increment * 1.14;
 		level.score_to_drop = param_04 + level.powerup_drop_increment;
-		level.var_D79D++;
+		level.powerup_drop_count++;
 		level.last_drop_time = gettime();
 	}
 
@@ -1132,7 +1132,7 @@ additional_ability_hint(param_00,param_01) {
 		}
 
 		scripts\cp\utility::setlowermessage("msg_axe_hint",&"CP_ZOMBIE_ADD_ABILITY__HINT",5);
-		self.var_17D5++;
+		self.additional_ability_hint_display++;
 		wait(var_02);
 	}
 }
@@ -1170,7 +1170,7 @@ give_max_ammo_to_player(param_00) {
 			param_00 givemaxammo(var_03);
 		}
 
-		if(function_0249(var_03) == weaponclipsize(var_03)) {
+		if(weaponmaxammo(var_03) == weaponclipsize(var_03)) {
 			param_00 setweaponammoclip(var_03,weaponclipsize(var_03));
 		}
 	}
@@ -1414,7 +1414,7 @@ nuke_fx(param_00,param_01) {
 	wait(5);
 	foreach(var_04 in param_01) {
 		foreach(var_06 in level.players) {
-			function_0297(level._effect["big_explo"],var_04,"tag_origin",var_06);
+			stopfxontagforclients(level._effect["big_explo"],var_04,"tag_origin",var_06);
 		}
 
 		var_04 delete();
@@ -1513,7 +1513,7 @@ is_in_active_volume(param_00) {
 
 	var_01 = sortbydistance(level.active_spawn_volumes,param_00);
 	foreach(var_03 in var_01) {
-		if(function_010F(param_00,var_03)) {
+		if(ispointinvolume(param_00,var_03)) {
 			return 1;
 		}
 	}

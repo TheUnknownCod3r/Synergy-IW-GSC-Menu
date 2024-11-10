@@ -3,550 +3,550 @@
  * Script: scripts\2753.gsc
 ***************************************/
 
-_id_F7D6(var_0) {
-  if (isdefined(self._id_C8F2) && self._id_C8F2 == var_0)
+setparent(var_00) {
+  if (isdefined(self.parent) && self.parent == var_00)
   return;
 
-  if (isdefined(self._id_C8F2))
-  self._id_C8F2 _id_E0DD(self);
+  if (isdefined(self.parent))
+  self.parent removechild(self);
 
-  self._id_C8F2 = var_0;
-  self._id_C8F2 _id_17BC(self);
+  self.parent = var_00;
+  self.parent addchild(self);
 
-  if (isdefined(self._id_0244))
-  _id_F801(self._id_0244, self._id_DF31, self._id_13E19, self._id_13E5A);
+  if (isdefined(self.point))
+  setpoint(self.point, self.relativepoint, self.xoffset, self.yoffset);
   else
-  _id_F801("TOPLEFT");
+  setpoint("TOPLEFT");
 }
 
-_id_8045() {
-  return self._id_C8F2;
+getparent() {
+  return self.parent;
 }
 
-_id_E0EB() {
-  if (isdefined(self._id_3E66) && self._id_3E66 == gettime())
+removedestroyedchildren() {
+  if (isdefined(self.childchecktime) && self.childchecktime == gettime())
   return;
 
-  self._id_3E66 = gettime();
-  var_0 = [];
+  self.childchecktime = gettime();
+  var_00 = [];
 
-  foreach (var_3, var_2 in self._id_3E67) {
-  if (!isdefined(var_2))
+  foreach (var_03, var_02 in self.children) {
+  if (!isdefined(var_02))
   continue;
 
   var_2.index = var_0.size;
-  var_0[var_0.size] = var_2;
+  var_0[var_0.size] = var_02;
   }
 
-  self._id_3E67 = var_0;
+  self.children = var_00;
 }
 
-_id_17BC(var_0) {
-  var_0.index = self._id_3E67.size;
-  self._id_3E67[self._id_3E67.size] = var_0;
-  _id_E0EB();
+addchild(var_00) {
+  var_0.index = self.children.size;
+  self.children[self.children.size] = var_00;
+  removedestroyedchildren();
 }
 
-_id_E0DD(var_0) {
-  var_0._id_C8F2 = undefined;
+removechild(var_00) {
+  var_0.parent = undefined;
 
-  if (self._id_3E67[self._id_3E67.size - 1] != var_0) {
-  self._id_3E67[var_0.index] = self._id_3E67[self._id_3E67.size - 1];
-  self._id_3E67[var_0.index].index = var_0.index;
+  if (self.children[self.children.size - 1] != var_00) {
+  self.children[var_0.index] = self.children[self.children.size - 1];
+  self.children[var_0.index].index = var_0.index;
   }
 
-  self._id_3E67[self._id_3E67.size - 1] = undefined;
+  self.children[self.children.size - 1] = undefined;
   var_0.index = undefined;
 }
 
-_id_F801(var_0, var_1, var_2, var_3, var_4) {
-  if (!isdefined(var_4))
-  var_4 = 0;
+setpoint(var_00, var_01, var_02, var_03, var_04) {
+  if (!isdefined(var_04))
+  var_04 = 0;
 
-  var_5 = _id_8045();
+  var_05 = getparent();
 
-  if (var_4)
-  self _meth_820C(var_4);
+  if (var_04)
+  self moveovertime(var_04);
 
-  if (!isdefined(var_2))
-  var_2 = 0;
+  if (!isdefined(var_02))
+  var_02 = 0;
 
-  self._id_13E19 = var_2;
+  self.xoffset = var_02;
 
-  if (!isdefined(var_3))
-  var_3 = 0;
+  if (!isdefined(var_03))
+  var_03 = 0;
 
-  self._id_13E5A = var_3;
-  self._id_0244 = var_0;
-  self._id_002B = "center";
-  self._id_002C = "middle";
+  self.yoffset = var_03;
+  self.point = var_00;
+  self.alignx = "center";
+  self.aligny = "middle";
 
-  if (issubstr(var_0, "TOP"))
-  self._id_002C = "top";
+  if (issubstr(var_00, "TOP"))
+  self.aligny = "top";
 
-  if (issubstr(var_0, "BOTTOM"))
-  self._id_002C = "bottom";
+  if (issubstr(var_00, "BOTTOM"))
+  self.aligny = "bottom";
 
-  if (issubstr(var_0, "LEFT"))
-  self._id_002B = "left";
+  if (issubstr(var_00, "LEFT"))
+  self.alignx = "left";
 
-  if (issubstr(var_0, "RIGHT"))
-  self._id_002B = "right";
+  if (issubstr(var_00, "RIGHT"))
+  self.alignx = "right";
 
-  if (!isdefined(var_1))
-  var_1 = var_0;
+  if (!isdefined(var_01))
+  var_01 = var_00;
 
-  self._id_DF31 = var_1;
-  var_6 = "center_adjustable";
-  var_7 = "middle";
+  self.relativepoint = var_01;
+  var_06 = "center_adjustable";
+  var_07 = "middle";
 
-  if (issubstr(var_1, "TOP"))
-  var_7 = "top_adjustable";
+  if (issubstr(var_01, "TOP"))
+  var_07 = "top_adjustable";
 
-  if (issubstr(var_1, "BOTTOM"))
-  var_7 = "bottom_adjustable";
+  if (issubstr(var_01, "BOTTOM"))
+  var_07 = "bottom_adjustable";
 
-  if (issubstr(var_1, "LEFT"))
-  var_6 = "left_adjustable";
+  if (issubstr(var_01, "LEFT"))
+  var_06 = "left_adjustable";
 
-  if (issubstr(var_1, "RIGHT"))
-  var_6 = "right_adjustable";
+  if (issubstr(var_01, "RIGHT"))
+  var_06 = "right_adjustable";
 
-  if (var_5 == level._id_12B29) {
-  self._id_017D = var_6;
-  self._id_0382 = var_7;
+  if (var_05 == level.uiparent) {
+  self.horzalign = var_06;
+  self.vertalign = var_07;
   } else {
-  self._id_017D = var_5._id_017D;
-  self._id_0382 = var_5._id_0382;
+  self.horzalign = var_5.horzalign;
+  self.vertalign = var_5.vertalign;
   }
 
-  if (scripts\mp\utility\game::_id_11150(var_6, "_adjustable") == var_5._id_002B) {
-  var_8 = 0;
-  var_9 = 0;
+  if (scripts\mp\utility\game::strip_suffix(var_06, "_adjustable") == var_5.alignx) {
+  var_08 = 0;
+  var_09 = 0;
   }
-  else if (var_6 == "center" || var_5._id_002B == "center") {
-  var_8 = int(var_5._id_039F / 2);
+  else if (var_06 == "center" || var_5.alignx == "center") {
+  var_08 = int(var_5.width / 2);
 
-  if (var_6 == "left_adjustable" || var_5._id_002B == "right")
-  var_9 = -1;
+  if (var_06 == "left_adjustable" || var_5.alignx == "right")
+  var_09 = -1;
   else
-  var_9 = 1;
+  var_09 = 1;
   } else {
-  var_8 = var_5._id_039F;
+  var_08 = var_5.width;
 
-  if (var_6 == "left_adjustable")
-  var_9 = -1;
+  if (var_06 == "left_adjustable")
+  var_09 = -1;
   else
-  var_9 = 1;
+  var_09 = 1;
   }
 
-  self.x = var_5.x + var_8 * var_9;
+  self.x = var_5.x + var_08 * var_09;
 
-  if (scripts\mp\utility\game::_id_11150(var_7, "_adjustable") == var_5._id_002C) {
+  if (scripts\mp\utility\game::strip_suffix(var_07, "_adjustable") == var_5.aligny) {
   var_10 = 0;
   var_11 = 0;
   }
-  else if (var_7 == "middle" || var_5._id_002C == "middle") {
+  else if (var_07 == "middle" || var_5.aligny == "middle") {
   var_10 = int(var_5.height / 2);
 
-  if (var_7 == "top_adjustable" || var_5._id_002C == "bottom")
+  if (var_07 == "top_adjustable" || var_5.aligny == "bottom")
   var_11 = -1;
   else
   var_11 = 1;
   } else {
   var_10 = var_5.height;
 
-  if (var_7 == "top_adjustable")
+  if (var_07 == "top_adjustable")
   var_11 = -1;
   else
   var_11 = 1;
   }
 
   self.y = var_5.y + var_10 * var_11;
-  self.x = self.x + self._id_13E19;
-  self.y = self.y + self._id_13E5A;
+  self.x = self.x + self.xoffset;
+  self.y = self.y + self.yoffset;
 
-  switch (self._id_601F) {
+  switch (self.elemtype) {
   case "bar":
-  _id_F802(var_0, var_1, var_2, var_3);
+  setpointbar(var_00, var_01, var_02, var_03);
   break;
   }
 
-  _id_12E74();
+  updatechildren();
 }
 
-_id_F802(var_0, var_1, var_2, var_3) {
-  self._id_2812._id_017D = self._id_017D;
-  self._id_2812._id_0382 = self._id_0382;
-  self._id_2812._id_002B = "left";
-  self._id_2812._id_002C = self._id_002C;
-  self._id_2812.y = self.y;
+setpointbar(var_00, var_01, var_02, var_03) {
+  self.bar.horzalign = self.horzalign;
+  self.bar.vertalign = self.vertalign;
+  self.bar.alignx = "left";
+  self.bar.aligny = self.aligny;
+  self.bar.y = self.y;
 
-  if (self._id_002B == "left")
-  self._id_2812.x = self.x;
-  else if (self._id_002B == "right")
-  self._id_2812.x = self.x - self._id_039F;
+  if (self.alignx == "left")
+  self.bar.x = self.x;
+  else if (self.alignx == "right")
+  self.bar.x = self.x - self.width;
   else
-  self._id_2812.x = self.x - int(self._id_039F / 2);
+  self.bar.x = self.x - int(self.width / 2);
 
-  if (self._id_002C == "top")
-  self._id_2812.y = self.y;
-  else if (self._id_002C == "bottom")
-  self._id_2812.y = self.y;
+  if (self.aligny == "top")
+  self.bar.y = self.y;
+  else if (self.aligny == "bottom")
+  self.bar.y = self.y;
 
-  _id_12E63(self._id_2812._id_7349);
+  updatebar(self.bar.frac);
 }
 
-_id_12E63(var_0, var_1) {
-  if (self._id_601F == "bar")
-  _id_12E64(var_0, var_1);
+updatebar(var_00, var_01) {
+  if (self.elemtype == "bar")
+  updatebarscale(var_00, var_01);
 }
 
-_id_12E64(var_0, var_1) {
-  var_2 = int(self._id_039F * var_0 + 0.5);
+updatebarscale(var_00, var_01) {
+  var_02 = int(self.width * var_00 + 0.5);
 
-  if (!var_2)
-  var_2 = 1;
+  if (!var_02)
+  var_02 = 1;
 
-  self._id_2812._id_7349 = var_0;
-  self._id_2812 setshader(self._id_2812._id_FC44, var_2, self.height);
+  self.bar.frac = var_00;
+  self.bar setshader(self.bar.shader, var_02, self.height);
 
-  if (isdefined(var_1) && var_2 < self._id_039F) {
-  if (var_1 > 0)
-  self._id_2812 _meth_8276((1 - var_0) / var_1, self._id_039F, self.height);
-  else if (var_1 < 0)
-  self._id_2812 _meth_8276(var_0 / (-1 * var_1), 1, self.height);
+  if (isdefined(var_01) && var_02 < self.width) {
+  if (var_01 > 0)
+  self.bar scaleovertime((1 - var_00) / var_01, self.width, self.height);
+  else if (var_01 < 0)
+  self.bar scaleovertime(var_00 / (-1 * var_01), 1, self.height);
   }
 
-  self._id_2812._id_DCE7 = var_1;
-  self._id_2812._id_AA36 = gettime();
+  self.bar.rateofchange = var_01;
+  self.bar.lastupdatetime = gettime();
 }
 
-_id_49B2(var_0, var_1) {
-  var_2 = newclienthudelem(self);
-  var_2._id_601F = "font";
-  var_2._id_013A = var_0;
-  var_2._id_013B = var_1;
-  var_2._id_289F = var_1;
+createfontstring(var_00, var_01) {
+  var_02 = newclienthudelem(self);
+  var_2.elemtype = "font";
+  var_2.font = var_00;
+  var_2.fontscale = var_01;
+  var_2.basefontscale = var_01;
   var_2.x = 0;
   var_2.y = 0;
-  var_2._id_039F = 0;
-  var_2.height = int(level._id_724F * var_1);
-  var_2._id_13E19 = 0;
-  var_2._id_13E5A = 0;
-  var_2._id_3E67 = [];
-  var_2 _id_F7D6(level._id_12B29);
-  var_2._id_8E5A = 0;
-  return var_2;
+  var_2.width = 0;
+  var_2.height = int(level.fontheight * var_01);
+  var_2.xoffset = 0;
+  var_2.yoffset = 0;
+  var_2.children = [];
+  var_02 setparent(level.uiparent);
+  var_2.hidden = 0;
+  return var_02;
 }
 
-_id_4A15(var_0, var_1, var_2) {
-  if (isdefined(var_2))
-  var_3 = newteamhudelem(var_2);
+func_4A15(var_00, var_01, var_02) {
+  if (isdefined(var_02))
+  var_03 = newteamhudelem(var_02);
   else
-  var_3 = newhudelem();
+  var_03 = newhudelem();
 
-  var_3._id_601F = "font";
-  var_3._id_013A = var_0;
-  var_3._id_013B = var_1;
-  var_3._id_289F = var_1;
+  var_3.elemtype = "font";
+  var_3.font = var_00;
+  var_3.fontscale = var_01;
+  var_3.basefontscale = var_01;
   var_3.x = 0;
   var_3.y = 0;
-  var_3._id_039F = 0;
-  var_3.height = int(level._id_724F * var_1);
-  var_3._id_13E19 = 0;
-  var_3._id_13E5A = 0;
-  var_3._id_3E67 = [];
-  var_3 _id_F7D6(level._id_12B29);
-  var_3._id_8E5A = 0;
-  return var_3;
+  var_3.width = 0;
+  var_3.height = int(level.fontheight * var_01);
+  var_3.xoffset = 0;
+  var_3.yoffset = 0;
+  var_3.children = [];
+  var_03 setparent(level.uiparent);
+  var_3.hidden = 0;
+  return var_03;
 }
 
-_id_4A17(var_0, var_1, var_2) {
-  if (isdefined(var_2))
-  var_3 = newteamhudelem(var_2);
+createservertimer(var_00, var_01, var_02) {
+  if (isdefined(var_02))
+  var_03 = newteamhudelem(var_02);
   else
-  var_3 = newhudelem();
+  var_03 = newhudelem();
 
-  var_3._id_601F = "timer";
-  var_3._id_013A = var_0;
-  var_3._id_013B = var_1;
-  var_3._id_289F = var_1;
+  var_3.elemtype = "timer";
+  var_3.font = var_00;
+  var_3.fontscale = var_01;
+  var_3.basefontscale = var_01;
   var_3.x = 0;
   var_3.y = 0;
-  var_3._id_039F = 0;
-  var_3.height = int(level._id_724F * var_1);
-  var_3._id_13E19 = 0;
-  var_3._id_13E5A = 0;
-  var_3._id_3E67 = [];
-  var_3 _id_F7D6(level._id_12B29);
-  var_3._id_8E5A = 0;
-  return var_3;
+  var_3.width = 0;
+  var_3.height = int(level.fontheight * var_01);
+  var_3.xoffset = 0;
+  var_3.yoffset = 0;
+  var_3.children = [];
+  var_03 setparent(level.uiparent);
+  var_3.hidden = 0;
+  return var_03;
 }
 
-_id_4A27(var_0, var_1) {
-  var_2 = newclienthudelem(self);
-  var_2._id_601F = "timer";
-  var_2._id_013A = var_0;
-  var_2._id_013B = var_1;
-  var_2._id_289F = var_1;
+createtimer(var_00, var_01) {
+  var_02 = newclienthudelem(self);
+  var_2.elemtype = "timer";
+  var_2.font = var_00;
+  var_2.fontscale = var_01;
+  var_2.basefontscale = var_01;
   var_2.x = 0;
   var_2.y = 0;
-  var_2._id_039F = 0;
-  var_2.height = int(level._id_724F * var_1);
-  var_2._id_13E19 = 0;
-  var_2._id_13E5A = 0;
-  var_2._id_3E67 = [];
-  var_2 _id_F7D6(level._id_12B29);
-  var_2._id_8E5A = 0;
-  return var_2;
+  var_2.width = 0;
+  var_2.height = int(level.fontheight * var_01);
+  var_2.xoffset = 0;
+  var_2.yoffset = 0;
+  var_2.children = [];
+  var_02 setparent(level.uiparent);
+  var_2.hidden = 0;
+  return var_02;
 }
 
-_id_49D9(var_0, var_1, var_2) {
-  var_3 = newclienthudelem(self);
-  var_3._id_601F = "icon";
+createicon(var_00, var_01, var_02) {
+  var_03 = newclienthudelem(self);
+  var_3.elemtype = "icon";
   var_3.x = 0;
   var_3.y = 0;
-  var_3._id_039F = var_1;
-  var_3.height = var_2;
-  var_3._id_28B0 = var_3._id_039F;
-  var_3._id_28A2 = var_3.height;
-  var_3._id_13E19 = 0;
-  var_3._id_13E5A = 0;
-  var_3._id_3E67 = [];
-  var_3 _id_F7D6(level._id_12B29);
-  var_3._id_8E5A = 0;
+  var_3.width = var_01;
+  var_3.height = var_02;
+  var_3.basewidth = var_3.width;
+  var_3.baseheight = var_3.height;
+  var_3.xoffset = 0;
+  var_3.yoffset = 0;
+  var_3.children = [];
+  var_03 setparent(level.uiparent);
+  var_3.hidden = 0;
 
-  if (isdefined(var_0)) {
-  var_3 setshader(var_0, var_1, var_2);
-  var_3._id_FC44 = var_0;
+  if (isdefined(var_00)) {
+  var_03 setshader(var_00, var_01, var_02);
+  var_3.shader = var_00;
   }
 
-  return var_3;
+  return var_03;
 }
 
-_id_4A16(var_0, var_1, var_2, var_3) {
-  if (isdefined(var_3))
-  var_4 = newteamhudelem(var_3);
+func_4A16(var_00, var_01, var_02, var_03) {
+  if (isdefined(var_03))
+  var_04 = newteamhudelem(var_03);
   else
-  var_4 = newhudelem();
+  var_04 = newhudelem();
 
-  var_4._id_601F = "icon";
+  var_4.elemtype = "icon";
   var_4.x = 0;
   var_4.y = 0;
-  var_4._id_039F = var_1;
-  var_4.height = var_2;
-  var_4._id_28B0 = var_4._id_039F;
-  var_4._id_28A2 = var_4.height;
-  var_4._id_13E19 = 0;
-  var_4._id_13E5A = 0;
-  var_4._id_3E67 = [];
-  var_4 _id_F7D6(level._id_12B29);
-  var_4._id_8E5A = 0;
+  var_4.width = var_01;
+  var_4.height = var_02;
+  var_4.basewidth = var_4.width;
+  var_4.baseheight = var_4.height;
+  var_4.xoffset = 0;
+  var_4.yoffset = 0;
+  var_4.children = [];
+  var_04 setparent(level.uiparent);
+  var_4.hidden = 0;
 
-  if (isdefined(var_0)) {
-  var_4 setshader(var_0, var_1, var_2);
-  var_4._id_FC44 = var_0;
+  if (isdefined(var_00)) {
+  var_04 setshader(var_00, var_01, var_02);
+  var_4.shader = var_00;
   }
 
-  return var_4;
+  return var_04;
 }
 
-_id_4A14(var_0, var_1, var_2, var_3, var_4, var_5) {
-  if (isdefined(var_4))
-  var_6 = newteamhudelem(var_4);
+func_4A14(var_00, var_01, var_02, var_03, var_04, var_05) {
+  if (isdefined(var_04))
+  var_06 = newteamhudelem(var_04);
   else
-  var_6 = newhudelem();
+  var_06 = newhudelem();
 
   var_6.x = 0;
   var_6.y = 0;
-  var_6._id_7349 = 0;
-  var_6._id_00B9 = var_0;
-  var_6._id_02A4 = -2;
-  var_6._id_FC44 = "progress_bar_fill";
-  var_6 setshader("progress_bar_fill", var_1, var_2);
-  var_6._id_8E5A = 0;
+  var_6.frac = 0;
+  var_6.color = var_00;
+  var_6.sort = -2;
+  var_6.shader = "progress_bar_fill";
+  var_06 setshader("progress_bar_fill", var_01, var_02);
+  var_6.hidden = 0;
 
-  if (isdefined(var_3))
-  var_6._id_6ECC = var_3;
+  if (isdefined(var_03))
+  var_6.flashfrac = var_03;
 
-  if (isdefined(var_4))
-  var_7 = newteamhudelem(var_4);
+  if (isdefined(var_04))
+  var_07 = newteamhudelem(var_04);
   else
-  var_7 = newhudelem();
+  var_07 = newhudelem();
 
-  var_7._id_601F = "bar";
+  var_7.elemtype = "bar";
   var_7.x = 0;
   var_7.y = 0;
-  var_7._id_039F = var_1;
-  var_7.height = var_2;
-  var_7._id_13E19 = 0;
-  var_7._id_13E5A = 0;
-  var_7._id_2812 = var_6;
-  var_7._id_3E67 = [];
-  var_7._id_02A4 = -3;
-  var_7._id_00B9 = (0, 0, 0);
+  var_7.width = var_01;
+  var_7.height = var_02;
+  var_7.xoffset = 0;
+  var_7.yoffset = 0;
+  var_7.bar = var_06;
+  var_7.children = [];
+  var_7.sort = -3;
+  var_7.color = (0, 0, 0);
   var_7.alpha = 0.5;
-  var_7 _id_F7D6(level._id_12B29);
-  var_7 setshader("progress_bar_bg", var_1, var_2);
-  var_7._id_8E5A = 0;
-  return var_7;
+  var_07 setparent(level.uiparent);
+  var_07 setshader("progress_bar_bg", var_01, var_02);
+  var_7.hidden = 0;
+  return var_07;
 }
 
-_id_4987(var_0, var_1, var_2, var_3) {
-  var_4 = newclienthudelem(self);
+createbar(var_00, var_01, var_02, var_03) {
+  var_04 = newclienthudelem(self);
   var_4.x = 0;
   var_4.y = 0;
-  var_4._id_7349 = 0;
-  var_4._id_00B9 = var_0;
-  var_4._id_02A4 = -2;
-  var_4._id_FC44 = "progress_bar_fill";
-  var_4 setshader("progress_bar_fill", var_1, var_2);
-  var_4._id_8E5A = 0;
+  var_4.frac = 0;
+  var_4.color = var_00;
+  var_4.sort = -2;
+  var_4.shader = "progress_bar_fill";
+  var_04 setshader("progress_bar_fill", var_01, var_02);
+  var_4.hidden = 0;
 
-  if (isdefined(var_3))
-  var_4._id_6ECC = var_3;
+  if (isdefined(var_03))
+  var_4.flashfrac = var_03;
 
-  var_5 = newclienthudelem(self);
-  var_5._id_601F = "bar";
-  var_5._id_039F = var_1;
-  var_5.height = var_2;
-  var_5._id_13E19 = 0;
-  var_5._id_13E5A = 0;
-  var_5._id_2812 = var_4;
-  var_5._id_3E67 = [];
-  var_5._id_02A4 = -3;
-  var_5._id_00B9 = (0, 0, 0);
+  var_05 = newclienthudelem(self);
+  var_5.elemtype = "bar";
+  var_5.width = var_01;
+  var_5.height = var_02;
+  var_5.xoffset = 0;
+  var_5.yoffset = 0;
+  var_5.bar = var_04;
+  var_5.children = [];
+  var_5.sort = -3;
+  var_5.color = (0, 0, 0);
   var_5.alpha = 0.5;
-  var_5 _id_F7D6(level._id_12B29);
-  var_5 setshader("progress_bar_bg", var_1 + 4, var_2 + 4);
-  var_5._id_8E5A = 0;
-  return var_5;
+  var_05 setparent(level.uiparent);
+  var_05 setshader("progress_bar_bg", var_01 + 4, var_02 + 4);
+  var_5.hidden = 0;
+  return var_05;
 }
 
-_id_7E4C() {
-  var_0 = self._id_2812._id_7349;
+getcurrentfraction() {
+  var_00 = self.bar.frac;
 
-  if (isdefined(self._id_2812._id_DCE7)) {
-  var_0 = var_0 + (gettime() - self._id_2812._id_AA36) * self._id_2812._id_DCE7;
+  if (isdefined(self.bar.rateofchange)) {
+  var_00 = var_00 + (gettime() - self.bar.lastupdatetime) * self.bar.rateofchange;
 
-  if (var_0 > 1)
-  var_0 = 1;
+  if (var_00 > 1)
+  var_00 = 1;
 
-  if (var_0 < 0)
-  var_0 = 0;
+  if (var_00 < 0)
+  var_00 = 0;
   }
 
-  return var_0;
+  return var_00;
 }
 
-_id_4A02(var_0, var_1) {
+createprimaryprogressbar(var_00, var_01) {
   if (isagent(self))
   return undefined;
 
-  if (!isdefined(var_0))
-  var_0 = 0;
+  if (!isdefined(var_00))
+  var_00 = 0;
 
-  if (!isdefined(var_1))
-  var_1 = -25;
+  if (!isdefined(var_01))
+  var_01 = -25;
 
   if (self issplitscreenplayer())
-  var_1 = var_1 + 20;
+  var_01 = var_01 + 20;
 
-  var_2 = _id_4987((1, 1, 1), level._id_D8DC, level._id_D8D9);
-  var_2 _id_F801("CENTER", undefined, level._id_D8DD + var_0, level._id_D8DE + var_1);
-  return var_2;
+  var_02 = createbar((1, 1, 1), level.primaryprogressbarwidth, level.primaryprogressbarheight);
+  var_02 setpoint("CENTER", undefined, level.primaryprogressbarx + var_00, level.primaryprogressbary + var_01);
+  return var_02;
 }
 
-_id_4A03(var_0, var_1, var_2, var_3) {
+createprimaryprogressbartext(var_00, var_01, var_02, var_03) {
   if (isagent(self))
   return undefined;
 
-  if (!isdefined(var_0))
-  var_0 = 0;
+  if (!isdefined(var_00))
+  var_00 = 0;
 
-  if (!isdefined(var_1))
-  var_1 = -25;
+  if (!isdefined(var_01))
+  var_01 = -25;
 
   if (self issplitscreenplayer())
-  var_1 = var_1 + 20;
+  var_01 = var_01 + 20;
 
-  var_4 = level._id_D8D8;
-  var_5 = "default";
+  var_04 = level.primaryprogressbarfontsize;
+  var_05 = "default";
 
-  if (isdefined(var_2))
-  var_4 = var_2;
+  if (isdefined(var_02))
+  var_04 = var_02;
 
-  if (isdefined(var_3))
-  var_5 = var_3;
+  if (isdefined(var_03))
+  var_05 = var_03;
 
-  var_6 = _id_49B2(var_5, var_4);
-  var_6 _id_F801("CENTER", undefined, level._id_D8DA + var_0, level._id_D8DB + var_1);
-  var_6._id_02A4 = -1;
-  return var_6;
+  var_06 = createfontstring(var_05, var_04);
+  var_06 setpoint("CENTER", undefined, level.primaryprogressbartextx + var_00, level.primaryprogressbartexty + var_01);
+  var_6.sort = -1;
+  return var_06;
 }
 
-_id_4A24(var_0) {
-  var_1 = _id_4A14((1, 0, 0), level._id_115E3, level._id_115E1, undefined, var_0);
-  var_1 _id_F801("TOP", undefined, 0, level._id_115E4);
-  return var_1;
+func_4A24(var_00) {
+  var_01 = func_4A14((1, 0, 0), level.func_115E3, level.func_115E1, undefined, var_00);
+  var_01 setpoint("TOP", undefined, 0, level.func_115E4);
+  return var_01;
 }
 
-_id_4A25(var_0) {
-  var_1 = _id_4A15("default", level._id_115E0, var_0);
-  var_1 _id_F801("TOP", undefined, 0, level._id_115E2);
-  return var_1;
+func_4A25(var_00) {
+  var_01 = func_4A15("default", level.func_115E0, var_00);
+  var_01 setpoint("TOP", undefined, 0, level.func_115E2);
+  return var_01;
 }
 
-_id_F710(var_0) {
-  self._id_2812._id_6ECC = var_0;
+setflashfrac(var_00) {
+  self.bar.flashfrac = var_00;
 }
 
-_id_8EBD() {
-  if (self._id_8E5A)
+hideelem() {
+  if (self.hidden)
   return;
 
-  self._id_8E5A = 1;
+  self.hidden = 1;
 
   if (self.alpha != 0)
   self.alpha = 0;
 
-  if (self._id_601F == "bar" || self._id_601F == "bar_shader") {
-  self._id_2812._id_8E5A = 1;
+  if (self.elemtype == "bar" || self.elemtype == "bar_shader") {
+  self.bar.hidden = 1;
 
-  if (self._id_2812.alpha != 0)
-  self._id_2812.alpha = 0;
+  if (self.bar.alpha != 0)
+  self.bar.alpha = 0;
   }
 }
 
-_id_1011F() {
-  if (!self._id_8E5A)
+showelem() {
+  if (!self.hidden)
   return;
 
-  self._id_8E5A = 0;
+  self.hidden = 0;
 
-  if (self._id_601F == "bar" || self._id_601F == "bar_shader") {
+  if (self.elemtype == "bar" || self.elemtype == "bar_shader") {
   if (self.alpha != 0.5)
   self.alpha = 0.5;
 
-  self._id_2812._id_8E5A = 0;
+  self.bar.hidden = 0;
 
-  if (self._id_2812.alpha != 1)
-  self._id_2812.alpha = 1;
+  if (self.bar.alpha != 1)
+  self.bar.alpha = 1;
   }
   else if (self.alpha != 1)
   self.alpha = 1;
 }
 
-_id_6EDE() {
+flashthread() {
   self endon("death");
 
-  if (!self._id_8E5A)
+  if (!self.hidden)
   self.alpha = 1;
 
   for (;;) {
-  if (self._id_7349 >= self._id_6ECC) {
-  if (!self._id_8E5A) {
+  if (self.frac >= self.flashfrac) {
+  if (!self.hidden) {
   self fadeovertime(0.3);
   self.alpha = 0.2;
   wait 0.35;
@@ -558,111 +558,111 @@ _id_6EDE() {
   continue;
   }
 
-  if (!self._id_8E5A && self.alpha != 1)
+  if (!self.hidden && self.alpha != 1)
   self.alpha = 1;
 
   wait 0.05;
   }
 }
 
-_id_52DC() {
-  var_0 = [];
+destroyelem() {
+  var_00 = [];
 
-  for (var_1 = 0; var_1 < self._id_3E67.size; var_1++) {
-  if (isdefined(self._id_3E67[var_1]))
-  var_0[var_0.size] = self._id_3E67[var_1];
+  for (var_01 = 0; var_01 < self.children.size; var_1++) {
+  if (isdefined(self.children[var_01]))
+  var_0[var_0.size] = self.children[var_01];
   }
 
-  for (var_1 = 0; var_1 < var_0.size; var_1++)
-  var_0[var_1] _id_F7D6(_id_8045());
+  for (var_01 = 0; var_01 < var_0.size; var_1++)
+  var_0[var_01] setparent(getparent());
 
-  if (self._id_601F == "bar" || self._id_601F == "bar_shader")
-  self._id_2812 destroy();
+  if (self.elemtype == "bar" || self.elemtype == "bar_shader")
+  self.bar destroy();
 
   self destroy();
 }
 
-_id_F74C(var_0) {
-  self setshader(var_0, self._id_039F, self.height);
-  self._id_FC44 = var_0;
+seticonshader(var_00) {
+  self setshader(var_00, self.width, self.height);
+  self.shader = var_00;
 }
 
-_id_7F0B(var_0) {
-  return self._id_FC44;
+func_7F0B(var_00) {
+  return self.shader;
 }
 
-_id_F74D(var_0, var_1) {
-  self setshader(self._id_FC44, var_0, var_1);
+seticonsize(var_00, var_01) {
+  self setshader(self.shader, var_00, var_01);
 }
 
-_id_FB1F(var_0) {
-  self._id_039F = var_0;
+func_FB1F(var_00) {
+  self.width = var_00;
 }
 
-_id_F743(var_0) {
-  self.height = var_0;
+func_F743(var_00) {
+  self.height = var_00;
 }
 
-_id_F847(var_0, var_1) {
-  self._id_039F = var_0;
-  self.height = var_1;
+setsize(var_00, var_01) {
+  self.width = var_00;
+  self.height = var_01;
 }
 
-_id_12E74() {
-  for (var_0 = 0; var_0 < self._id_3E67.size; var_0++) {
-  var_1 = self._id_3E67[var_0];
-  var_1 _id_F801(var_1._id_0244, var_1._id_DF31, var_1._id_13E19, var_1._id_13E5A);
+updatechildren() {
+  for (var_00 = 0; var_00 < self.children.size; var_0++) {
+  var_01 = self.children[var_00];
+  var_01 setpoint(var_1.point, var_1.relativepoint, var_1.xoffset, var_1.yoffset);
   }
 }
 
-_id_1267A() {
-  self.x = self._id_13E19;
-  self.y = self._id_13E5A;
+transitionreset() {
+  self.x = self.xoffset;
+  self.y = self.yoffset;
 
-  if (self._id_601F == "font") {
-  self._id_013B = self._id_289F;
-  self._id_01AD = &"";
+  if (self.elemtype == "font") {
+  self.fontscale = self.basefontscale;
+  self.label = &"";
   }
-  else if (self._id_601F == "icon")
-  self setshader(self._id_FC44, self._id_039F, self.height);
+  else if (self.elemtype == "icon")
+  self setshader(self.shader, self.width, self.height);
 
   self.alpha = 0;
 }
 
-_id_12683(var_0) {
-  switch (self._id_601F) {
+transitionzoomin(var_00) {
+  switch (self.elemtype) {
   case "timer":
   case "font":
-  self._id_013B = 6.3;
-  self _meth_8067(var_0);
-  self._id_013B = self._id_289F;
+  self.fontscale = 6.3;
+  self changefontscaleovertime(var_00);
+  self.fontscale = self.basefontscale;
   break;
   case "icon":
-  self setshader(self._id_FC44, self._id_039F * 6, self.height * 6);
-  self _meth_8276(var_0, self._id_039F, self.height);
+  self setshader(self.shader, self.width * 6, self.height * 6);
+  self scaleovertime(var_00, self.width, self.height);
   break;
   }
 }
 
-_id_12679(var_0, var_1) {
-  var_2 = int(var_0) * 1000;
-  var_3 = int(var_1) * 1000;
+transitionpulsefxin(var_00, var_01) {
+  var_02 = int(var_00) * 1000;
+  var_03 = int(var_01) * 1000;
 
-  switch (self._id_601F) {
+  switch (self.elemtype) {
   case "timer":
   case "font":
-  self _meth_832C(var_2 + 250, var_3 + var_2, var_2 + 250);
+  self setpulsefx(var_02 + 250, var_03 + var_02, var_02 + 250);
   break;
   default:
   break;
   }
 }
 
-_id_1267C(var_0, var_1) {
-  if (!isdefined(var_1))
-  var_1 = "left";
+transitionslidein(var_00, var_01) {
+  if (!isdefined(var_01))
+  var_01 = "left";
 
-  switch (var_1) {
+  switch (var_01) {
   case "left":
   self.x = self.x + 1000;
   break;
@@ -677,61 +677,61 @@ _id_1267C(var_0, var_1) {
   break;
   }
 
-  self _meth_820C(var_0);
-  self.x = self._id_13E19;
-  self.y = self._id_13E5A;
+  self moveovertime(var_00);
+  self.x = self.xoffset;
+  self.y = self.yoffset;
 }
 
-_id_1267D(var_0, var_1) {
-  if (!isdefined(var_1))
-  var_1 = "left";
+transitionslideout(var_00, var_01) {
+  if (!isdefined(var_01))
+  var_01 = "left";
 
-  var_2 = self._id_13E19;
-  var_3 = self._id_13E5A;
+  var_02 = self.xoffset;
+  var_03 = self.yoffset;
 
-  switch (var_1) {
+  switch (var_01) {
   case "left":
-  var_2 = var_2 + 1000;
+  var_02 = var_02 + 1000;
   break;
   case "right":
-  var_2 = var_2 - 1000;
+  var_02 = var_02 - 1000;
   break;
   case "up":
-  var_3 = var_3 - 1000;
+  var_03 = var_03 - 1000;
   break;
   case "down":
-  var_3 = var_3 + 1000;
+  var_03 = var_03 + 1000;
   break;
   }
 
   self.alpha = 1;
-  self _meth_820C(var_0);
-  self.x = var_2;
-  self.y = var_3;
+  self moveovertime(var_00);
+  self.x = var_02;
+  self.y = var_03;
 }
 
-_id_12684(var_0) {
-  switch (self._id_601F) {
+transitionzoomout(var_00) {
+  switch (self.elemtype) {
   case "timer":
   case "font":
-  self _meth_8067(var_0);
-  self._id_013B = 6.3;
+  self changefontscaleovertime(var_00);
+  self.fontscale = 6.3;
   case "icon":
-  self _meth_8276(var_0, self._id_039F * 6, self.height * 6);
+  self scaleovertime(var_00, self.width * 6, self.height * 6);
   break;
   }
 }
 
-_id_12676(var_0) {
-  self fadeovertime(var_0);
+transitionfadein(var_00) {
+  self fadeovertime(var_00);
 
-  if (isdefined(self._id_B47B))
-  self.alpha = self._id_B47B;
+  if (isdefined(self.maxalpha))
+  self.alpha = self.maxalpha;
   else
   self.alpha = 1;
 }
 
-_id_12677(var_0) {
+transitionfadeout(var_00) {
   self fadeovertime(0.15);
   self.alpha = 0;
 }

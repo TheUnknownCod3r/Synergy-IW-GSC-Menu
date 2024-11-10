@@ -1,7 +1,7 @@
 /**************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\_fx.gsc
+ * Script: scripts\scripts\cp\cp_fx.gsc
 **************************************/
 
 main() {

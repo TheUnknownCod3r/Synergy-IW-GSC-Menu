@@ -25,7 +25,7 @@ func_2840(param_00,param_01,param_02,param_03,param_04,param_05,param_06) {
 }
 
 func_2838() {
-	var_00 = function_027A(self.origin,(12,12,50),(0,0,0));
+	var_00 = createnavobstaclebybounds(self.origin,(12,12,50),(0,0,0));
 	while(isdefined(self) && self.var_109DB.size <= 0) {
 		wait(0.05);
 	}
@@ -37,13 +37,13 @@ func_2838() {
 
 	var_01 = self.var_CAF6 / 4.5;
 	var_02 = "barrel" + self getentitynumber();
-	function_0277(var_02,-1,self.origin,var_01,1);
+	createnavrepulsor(var_02,-1,self.origin,var_01,1);
 	while(isdefined(self)) {
 		wait(0.05);
 	}
 
 	destroynavobstacle(var_00);
-	function_0278(var_02);
+	destroynavrepulsor(var_02);
 }
 
 func_2832() {

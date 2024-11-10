@@ -3,81 +3,81 @@
  * Script: scripts\2734.gsc
 ***************************************/
 
-_id_EE8B() {
-  if (!isdefined(self._id_EDBB) || !isdefined(self._id_EDBA) || !isdefined(self._id_027B)) {
+script_print_fx() {
+  if (!isdefined(self.script_fxid) || !isdefined(self.script_fxcommand) || !isdefined(self.script_delay)) {
   self delete();
   return;
   }
 
-  if (isdefined(self._id_0334))
-  var_0 = getent(self._id_0334).origin;
+  if (isdefined(self.target))
+  var_00 = getent(self.target).origin;
   else
-  var_0 = "undefined";
+  var_00 = "undefined";
 
-  if (self._id_EDBA == "OneShotfx") {}
+  if (self.script_fxcommand == "OneShotfx") {}
 
-  if (self._id_EDBA == "loopfx") {}
+  if (self.script_fxcommand == "loopfx") {}
 
-  if (self._id_EDBA == "loopsound")
+  if (self.script_fxcommand == "loopsound")
   return;
 }
 
-_id_85BB(var_0) {
-  playfx(level._effect["mechanical explosion"], var_0);
-  earthquake(0.15, 0.5, var_0, 250);
+grenadeexplosionfx(var_00) {
+  playfx(level._effect["mechanical explosion"], var_00);
+  earthquake(0.15, 0.5, var_00, 250);
 }
 
-_id_1047A(var_0, var_1, var_2) {
-  var_3 = spawn("script_origin", (0, 0, 0));
-  var_3.origin = var_1;
-  var_3 playloopsound(var_0);
+soundfx(var_00, var_01, var_02) {
+  var_03 = spawn("script_origin", (0, 0, 0));
+  var_3.origin = var_01;
+  var_03 playloopsound(var_00);
 
-  if (isdefined(var_2))
-  var_3 thread _id_1047B(var_2);
+  if (isdefined(var_02))
+  var_03 thread soundfxdelete(var_02);
 }
 
-_id_1047B(var_0) {
-  level waittill(var_0);
+soundfxdelete(var_00) {
+  level waittill(var_00);
   self delete();
 }
 
-_id_74CB() {
-  var_0 = [];
-  var_1 = [];
-  var_2 = getentarray("vfx_custom_glass", "targetname");
+func_glass_handler() {
+  var_00 = [];
+  var_01 = [];
+  var_02 = getentarray("vfx_custom_glass", "targetname");
 
-  foreach (var_4 in var_2) {
+  foreach (var_04 in var_02) {
   if (isdefined(var_4.script_noteworthy)) {
-  var_5 = getglass(var_4.script_noteworthy);
+  var_05 = getglass(var_4.script_noteworthy);
 
-  if (isdefined(var_5)) {
-  var_1[var_5] = var_4;
-  var_0[var_0.size] = var_5;
+  if (isdefined(var_05)) {
+  var_1[var_05] = var_04;
+  var_0[var_0.size] = var_05;
   }
   }
   }
 
-  var_7 = var_0.size;
-  var_8 = var_0.size;
-  var_9 = 5;
+  var_07 = var_0.size;
+  var_08 = var_0.size;
+  var_09 = 5;
   var_10 = 0;
 
-  while (var_7 != 0) {
-  var_11 = var_10 + var_9 - 1;
+  while (var_07 != 0) {
+  var_11 = var_10 + var_09 - 1;
 
-  if (var_11 > var_8)
-  var_11 = var_8;
+  if (var_11 > var_08)
+  var_11 = var_08;
 
-  if (var_10 == var_8)
+  if (var_10 == var_08)
   var_10 = 0;
 
   while (var_10 < var_11) {
   var_12 = var_0[var_10];
-  var_4 = var_1[var_12];
+  var_04 = var_1[var_12];
 
-  if (isdefined(var_4)) {
+  if (isdefined(var_04)) {
   if (isglassdestroyed(var_12)) {
-  var_4 delete();
+  var_04 delete();
   var_7--;
   var_1[var_12] = undefined;
   }
@@ -90,7 +90,7 @@ _id_74CB() {
   }
 }
 
-_id_2B85(var_0) {
+blenddelete(var_00) {
   self waittill("death");
-  var_0 delete();
+  var_00 delete();
 }

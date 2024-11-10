@@ -3,94 +3,94 @@
  * Script: scripts\2709.gsc
 ***************************************/
 
-_id_10036() {
+shouldlogcodcasterclientmatchdata() {
   return getdvarint("com_codcasterEnabled", 0) == 1 && getdvarint("systemlink");
 }
 
-_id_38C6(var_0) {
-  if (isagent(var_0))
+canlogclient(var_00) {
+  if (isagent(var_00))
   return 0;
 
-  return var_0._id_41F0 < level._id_B4B0;
+  return var_0.clientid < level.maxlogclients;
 }
 
-_id_499E(var_0) {
-  var_1 = [];
+createcodcastermatchdataforplayer(var_00) {
+  var_01 = [];
 
-  foreach (var_3 in level._id_4333._id_D38C)
+  foreach (var_03 in level.codcastermatchdata.playerfields)
   var_1[var_3[0]] = var_3[1];
 
-  return var_1;
+  return var_01;
 }
 
-_id_E159(var_0) {
+removeplayerdataafterleavinggame(var_00) {
   level endon("game_ended");
-  var_0 waittill("disconnect");
+  var_00 waittill("disconnect");
 
-  if (!isdefined(level._id_4333.players[var_0._id_41F0]))
+  if (!isdefined(level.codcastermatchdata.players[var_0.clientid]))
   return;
 
-  level._id_4333.players[var_0._id_41F0] = undefined;
+  level.codcastermatchdata.players[var_0.clientid] = undefined;
 }
 
-_id_3DFC(var_0) {
-  if (!isdefined(level._id_4333.players[var_0._id_41F0])) {
-  var_1 = _id_499E(var_0);
-  level._id_4333.players[var_0._id_41F0] = var_1;
-  thread _id_E159(var_0);
+checkcodcasterplayerdataexists(var_00) {
+  if (!isdefined(level.codcastermatchdata.players[var_0.clientid])) {
+  var_01 = createcodcastermatchdataforplayer(var_00);
+  level.codcastermatchdata.players[var_0.clientid] = var_01;
+  thread removeplayerdataafterleavinggame(var_00);
   }
 }
 
 init() {
   setcodcasterclientmatchdata("map", level.script);
-  var_0 = spawnstruct();
-  var_0._id_D38C = [["damageDone", 0], ["longestKillstreak", 0], ["shutdowns", 0], ["gametypePoints", 0]];
+  var_00 = spawnstruct();
+  var_0.playerfields = [["damageDone", 0], ["longestKillstreak", 0], ["shutdowns", 0], ["gametypePoints", 0]];
   var_0.players = [];
-  level._id_4333 = var_0;
+  level.codcastermatchdata = var_00;
 }
 
-_id_F6B2(var_0) {
-  foreach (var_2 in level._id_4333._id_D38C)
-  setcodcasterclientmatchdata("players", var_0._id_4334, var_2[0], level._id_4333.players[var_0._id_41F0][var_2[0]]);
+setddlfieldsforplayer(var_00) {
+  foreach (var_02 in level.codcastermatchdata.playerfields)
+  setcodcasterclientmatchdata("players", var_0.codcastermatchdataid, var_2[0], level.codcastermatchdata.players[var_0.clientid][var_2[0]]);
 
-  setcodcasterclientmatchdata("players", var_0._id_4334, "username", var_0.name);
+  setcodcasterclientmatchdata("players", var_0.codcastermatchdataid, "username", var_0.name);
 }
 
-_id_F22C() {
-  var_0 = 0;
+sendcodcastermatchdata() {
+  var_00 = 0;
 
-  foreach (var_2 in level.players) {
-  _id_3DFC(var_2);
-  var_2._id_4334 = var_0;
-  _id_F6B2(var_2);
+  foreach (var_02 in level.players) {
+  checkcodcasterplayerdataexists(var_02);
+  var_2.codcastermatchdataid = var_00;
+  setddlfieldsforplayer(var_02);
   var_0++;
   }
 
   sendcodcasterclientmatchdata();
 }
 
-_id_F695(var_0, var_1, var_2) {
-  if (!_id_38C6(var_0))
+setcodcasterplayervalue(var_00, var_01, var_02) {
+  if (!canlogclient(var_00))
   return;
 
-  _id_3DFC(var_0);
-  var_3 = level._id_4333.players[var_0._id_41F0];
+  checkcodcasterplayerdataexists(var_00);
+  var_03 = level.codcastermatchdata.players[var_0.clientid];
 
-  if (!isdefined(var_3) || !isdefined(var_3[var_1]))
+  if (!isdefined(var_03) || !isdefined(var_3[var_01]))
   return;
 
-  level._id_4333.players[var_0._id_41F0][var_1] = var_2;
+  level.codcastermatchdata.players[var_0.clientid][var_01] = var_02;
 }
 
-_id_7E39(var_0, var_1) {
-  if (!_id_38C6(var_0))
+getcodcasterplayervalue(var_00, var_01) {
+  if (!canlogclient(var_00))
   return;
 
-  _id_3DFC(var_0);
-  var_2 = level._id_4333.players[var_0._id_41F0];
+  checkcodcasterplayerdataexists(var_00);
+  var_02 = level.codcastermatchdata.players[var_0.clientid];
 
-  if (!isdefined(var_2) || !isdefined(var_2[var_1]))
+  if (!isdefined(var_02) || !isdefined(var_2[var_01]))
   return;
 
-  return var_2[var_1];
+  return var_2[var_01];
 }

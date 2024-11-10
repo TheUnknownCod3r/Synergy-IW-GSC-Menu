@@ -9,7 +9,7 @@ try_collect_from_lost_and_found(param_00,param_01) {
 		restore_player_status(param_01);
 	}
 
-	level.var_1192B++;
+	level.timesitemspicked++;
 }
 
 save_items_to_lost_and_found(param_00) {
@@ -157,7 +157,7 @@ lost_and_found_time_out(param_00,param_01) {
 		param_01 setclientomnvar("zm_lostandfound_timer",var_03);
 	}
 
-	level.var_1192C++;
+	level.timesitemstimedout++;
 	param_01.have_things_in_lost_and_found = 0;
 	param_01.lost_and_found_primary_count = undefined;
 	param_01 notify("lost_and_found_time_out");

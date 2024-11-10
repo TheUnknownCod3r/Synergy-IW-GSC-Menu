@@ -6,28 +6,28 @@
 #using_animtree("generic_human");
 
 main() {
-  scripts\code\character::_id_F7A1(_id_093F::main());
-  scripts\code\character::_id_2483("heads_un_marines_male", _id_09F6::main());
-  self._id_8C43 = "helmet_un_marines";
-  self attach(self._id_8C43);
-  self._id_A489 = "pack_un_jackal_pilots";
-  self attach(self._id_A489);
-  self._id_1FEC = "generic_human";
-  self._id_1FA8 = "marine";
-  self._id_13525 = "unitednations";
-  self _meth_82C6("vestlight");
+  scripts\code\character::setmodelfromarray(func_093F::main());
+  scripts\code\character::attachhead("heads_un_marines_male", func_09F6::main());
+  self.hatmodel = "helmet_un_marines";
+  self attach(self.hatmodel);
+  self.func_A489 = "pack_un_jackal_pilots";
+  self attach(self.func_A489);
+  self.func_1FEC = "generic_human";
+  self.func_1FA8 = "marine";
+  self.voice = "unitednations";
+  self give_explosive_touch_on_revived("vestlight");
 
   if (issentient(self))
   self sethitlocdamagetable("locdmgtable/ai_lochit_dmgtable");
 
-  self._id_8E1A = level._id_7649["iw7/core/human/helmet_un_marines_broken"];
-  self _meth_83D0(#animtree);
+  self.func_8E1A = level.func_7649["iw7/core/human/helmet_un_marines_broken"];
+  self glinton(#animtree);
 }
 
-_id_0247() {
-  scripts\code\character::_id_D811(_id_093F::main());
-  scripts\code\character::_id_D811(_id_09F6::main());
+precache() {
+  scripts\code\character::precachemodelarray(func_093F::main());
+  scripts\code\character::precachemodelarray(func_09F6::main());
   precachemodel("helmet_un_marines");
   precachemodel("pack_un_jackal_pilots");
-  level._id_7649["iw7/core/human/helmet_un_marines_broken"] = loadfx("vfx/iw7/core/human/helmet_un_marines_broken.vfx");
+  level.func_7649["iw7/core/human/helmet_un_marines_broken"] = loadfx("vfx/iw7/core/human/helmet_un_marines_broken.vfx");
 }

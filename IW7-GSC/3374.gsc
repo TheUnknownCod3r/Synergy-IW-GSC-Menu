@@ -365,7 +365,7 @@ watch_basketball_landing(param_00,param_01,param_02) {
 
 	param_01 notify("score_a_basket");
 	param_00.hoop_trig playsound("arcade_basketball_basket_point");
-	param_00.var_2994++;
+	param_00.bball_game_score++;
 	playsoundatpos(param_00.music_ent.origin,"basketball_anc_quickshot");
 	if(param_00.bball_game_score * 15 > level.var_28BF) {
 		level.var_28BF = param_00.bball_game_score * 15;

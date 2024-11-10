@@ -3,87 +3,87 @@
  * Script: scripts\2787.gsc
 ***************************************/
 
-_id_C56E() {
+onplayerconnect() {
   for (;;) {
-  level waittill("connected", var_0);
-  var_0._id_C210 = 0;
+  level waittill("connected", var_00);
+  var_0.numareas = 0;
   }
 }
 
-_id_D387(var_0) {
-  self._id_C210++;
+playerenterarea(var_00) {
+  self.numareas++;
 
-  if (self._id_C210 == 1)
-  _id_DBE8();
+  if (self.numareas == 1)
+  radiationeffect();
 }
 
-_id_D3CE(var_0) {
-  self._id_C210--;
+playerleavearea(var_00) {
+  self.numareas--;
 
-  if (self._id_C210 != 0)
+  if (self.numareas != 0)
   return;
 
-  self._id_D64C = 0;
+  self.poison = 0;
   self notify("leftTrigger");
 
-  if (isdefined(self._id_DBE9))
-  self._id_DBE9 _id_6AB9(0.1, 0);
+  if (isdefined(self.radiationoverlay))
+  self.radiationoverlay fadeoutblackout(0.1, 0);
 }
 
-_id_10481(var_0) {
+soundwatcher(var_00) {
   scripts\engine\utility::waittill_any("death", "leftTrigger");
   self stoploopsound();
 }
 
-_id_DBE8() {
+radiationeffect() {
   self endon("disconnect");
   self endon("game_ended");
   self endon("death");
   self endon("leftTrigger");
-  self._id_D64C = 0;
-  thread _id_10481(self);
+  self.poison = 0;
+  thread soundwatcher(self);
 
   for (;;) {
-  self._id_D64C++;
+  self.poison++;
 
-  switch (self._id_D64C) {
+  switch (self.poison) {
   case 1:
-  self._id_DBEA = "item_geigercouner_level2";
-  self playloopsound(self._id_DBEA);
+  self.func_DBEA = "item_geigercouner_level2";
+  self playloopsound(self.func_DBEA);
   self viewkick(1, self.origin);
   break;
   case 3:
   self shellshock("mp_radiation_low", 4);
-  self._id_DBEA = "item_geigercouner_level3";
+  self.func_DBEA = "item_geigercouner_level3";
   self stoploopsound();
-  self playloopsound(self._id_DBEA);
+  self playloopsound(self.func_DBEA);
   self viewkick(3, self.origin);
-  _id_5A64(15);
+  doradiationdamage(15);
   break;
   case 4:
   self shellshock("mp_radiation_med", 5);
-  self._id_DBEA = "item_geigercouner_level3";
+  self.func_DBEA = "item_geigercouner_level3";
   self stoploopsound();
-  self playloopsound(self._id_DBEA);
+  self playloopsound(self.func_DBEA);
   self viewkick(15, self.origin);
-  thread _id_2B48();
-  _id_5A64(25);
+  thread func_2B48();
+  doradiationdamage(25);
   break;
   case 6:
   self shellshock("mp_radiation_high", 5);
-  self._id_DBEA = "item_geigercouner_level4";
+  self.func_DBEA = "item_geigercouner_level4";
   self stoploopsound();
-  self playloopsound(self._id_DBEA);
+  self playloopsound(self.func_DBEA);
   self viewkick(75, self.origin);
-  _id_5A64(45);
+  doradiationdamage(45);
   break;
   case 8:
   self shellshock("mp_radiation_high", 5);
-  self._id_DBEA = "item_geigercouner_level4";
+  self.func_DBEA = "item_geigercouner_level4";
   self stoploopsound();
-  self playloopsound(self._id_DBEA);
+  self playloopsound(self.func_DBEA);
   self viewkick(127, self.origin);
-  _id_5A64(175);
+  doradiationdamage(175);
   break;
   }
 
@@ -93,81 +93,81 @@ _id_DBE8() {
   wait 5;
 }
 
-_id_2B48() {
+func_2B48() {
   self endon("disconnect");
   self endon("game_ended");
   self endon("death");
   self endon("leftTrigger");
 
-  if (!isdefined(self._id_DBE9)) {
-  self._id_DBE9 = newclienthudelem(self);
-  self._id_DBE9.x = 0;
-  self._id_DBE9.y = 0;
-  self._id_DBE9 setshader("black", 640, 480);
-  self._id_DBE9._id_002B = "left";
-  self._id_DBE9._id_002C = "top";
-  self._id_DBE9._id_017D = "fullscreen";
-  self._id_DBE9._id_0382 = "fullscreen";
-  self._id_DBE9.alpha = 0;
+  if (!isdefined(self.radiationoverlay)) {
+  self.radiationoverlay = newclienthudelem(self);
+  self.radiationoverlay.x = 0;
+  self.radiationoverlay.y = 0;
+  self.radiationoverlay setshader("black", 640, 480);
+  self.radiationoverlay.alignx = "left";
+  self.radiationoverlay.aligny = "top";
+  self.radiationoverlay.horzalign = "fullscreen";
+  self.radiationoverlay.vertalign = "fullscreen";
+  self.radiationoverlay.alpha = 0;
   }
 
-  var_0 = 1;
-  var_1 = 2;
-  var_2 = 0.25;
-  var_3 = 1;
-  var_4 = 5;
-  var_5 = 100;
-  var_6 = 0;
+  var_00 = 1;
+  var_01 = 2;
+  var_02 = 0.25;
+  var_03 = 1;
+  var_04 = 5;
+  var_05 = 100;
+  var_06 = 0;
 
   for (;;) {
-  while (self._id_D64C > 1) {
-  var_7 = var_5 - var_4;
-  var_6 = (self._id_D64C - var_4) / var_7;
+  while (self.poison > 1) {
+  var_07 = var_05 - var_04;
+  var_06 = (self.poison - var_04) / var_07;
 
-  if (var_6 < 0)
-  var_6 = 0;
-  else if (var_6 > 1)
-  var_6 = 1;
+  if (var_06 < 0)
+  var_06 = 0;
+  else if (var_06 > 1)
+  var_06 = 1;
 
-  var_8 = var_1 - var_0;
-  var_9 = var_0 + var_8 * (1 - var_6);
-  var_10 = var_3 - var_2;
-  var_11 = var_2 + var_10 * var_6;
-  var_12 = var_6 * 0.5;
+  var_08 = var_01 - var_00;
+  var_09 = var_00 + var_08 * (1 - var_06);
+  var_10 = var_03 - var_02;
+  var_11 = var_02 + var_10 * var_06;
+  var_12 = var_06 * 0.5;
 
-  if (var_6 == 1)
+  if (var_06 == 1)
   break;
 
-  var_13 = var_9 / 2;
-  self._id_DBE9 _id_6AB7(var_13, var_11);
-  self._id_DBE9 _id_6AB9(var_13, var_12);
-  wait(var_6 * 0.5);
+  var_13 = var_09 / 2;
+  self.radiationoverlay func_6AB7(var_13, var_11);
+  self.radiationoverlay fadeoutblackout(var_13, var_12);
+  wait(var_06 * 0.5);
   }
 
-  if (var_6 == 1)
+  if (var_06 == 1)
   break;
 
-  if (self._id_DBE9.alpha != 0)
-  self._id_DBE9 _id_6AB9(1, 0);
+  if (self.radiationoverlay.alpha != 0)
+  self.radiationoverlay fadeoutblackout(1, 0);
 
   wait 0.05;
   }
 
-  self._id_DBE9 _id_6AB7(2, 0);
+  self.radiationoverlay func_6AB7(2, 0);
 }
 
-_id_5A64(var_0) {
-  self thread [[level.callbackplayerdamage]](self, self, var_0, 0, "MOD_SUICIDE", "claymore_mp", self.origin, (0, 0, 0) - self.origin, "none", 0);
+doradiationdamage(var_00) {
+  self thread [[level.callbackplayerdamage]](self, self, var_00, 0, "MOD_SUICIDE", "claymore_mp", self.origin, (0, 0, 0) - self.origin, "none", 0);
 }
 
-_id_6AB7(var_0, var_1) {
-  self fadeovertime(var_0);
-  self.alpha = var_1;
-  wait(var_0);
+func_6AB7(var_00, var_01) {
+  self fadeovertime(var_00);
+  self.alpha = var_01;
+  wait(var_00);
 }
 
-_id_6AB9(var_0, var_1) {
-  self fadeovertime(var_0);
-  self.alpha = var_1;
-  wait(var_0);
+fadeoutblackout(var_00, var_01) {
+  self fadeovertime(var_00);
+  self.alpha = var_01;
+  wait(var_00);
 }

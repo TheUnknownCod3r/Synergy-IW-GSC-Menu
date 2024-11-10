@@ -54,8 +54,8 @@ init() {
 	precacheitem("helmet");
 	precachemodel("equipment_mp_nanoshot_wm");
 	precachemodel("mil_grenade_box_dynamic");
-	function_01C5("ai_suppression_decrement_enemy",0.001);
-	function_01C5("cg_drawDamageDirection",0);
+	setsaveddvar("ai_suppression_decrement_enemy",0.001);
+	setsaveddvar("cg_drawDamageDirection",0);
 	scripts\sp\_utility::func_16EB("helmet_tutorial_hint",&"SPECIALIST_MODE_TUTORIAL_HELMET");
 	scripts\sp\_utility::func_16EB("nanoshot_tutorial_hint",&"SPECIALIST_MODE_TUTORIAL_NANOSHOT");
 	scripts\sp\_utility::func_16EB("suffocate_tutorial_hint",&"SPECIALIST_MODE_TUTORIAL_SUFFOCATE");
@@ -199,7 +199,7 @@ func_4D05() {
 
 func_4CFA(param_00,param_01) {
 	var_02 = param_00 - level.player.origin;
-	var_03 = scripts/sp/math::func_EB9B(function_02D3(level.player.angles),var_02);
+	var_03 = scripts/sp/math::func_EB9B(anglestoleft(level.player.angles),var_02);
 	var_04 = scripts/sp/math::func_EB9B(anglestoright(level.player.angles),var_02);
 	var_05 = max(var_03,var_04);
 	if(var_05 <= 1.35 && param_01) {
@@ -273,7 +273,7 @@ func_4D16(param_00,param_01) {
 		return;
 	}
 
-	function_01A2(level.player.origin,10,20,5,0.75);
+	screenshake(level.player.origin,10,20,5,0.75);
 	var_02 = "leg_" + param_00;
 	var_03 = func_2C94(var_02);
 	func_4CE0(var_02,param_01);
@@ -339,10 +339,10 @@ damage_leg_view_dvar_thread() {
 	for(;;) {
 		var_00 = getdvarint("bg_viewBobConstantAmplitude");
 		if(level.player islinked() && var_00 == 1) {
-			function_01C5("bg_viewBobConstantAmplitude",0);
+			setsaveddvar("bg_viewBobConstantAmplitude",0);
 		}
 		else if(!level.player islinked() && var_00 == 0) {
-			function_01C5("bg_viewBobConstantAmplitude",1);
+			setsaveddvar("bg_viewBobConstantAmplitude",1);
 		}
 
 		wait(0.05);
@@ -415,7 +415,7 @@ func_4D18(param_00,param_01) {
 	}
 
 	playfx(level._effect["vfx_blood_impact"],level.player geteye());
-	function_01A2(level.player.origin,20,30,10,0.75);
+	screenshake(level.player.origin,20,30,10,0.75);
 	var_03 = func_2C94(var_02);
 	func_4CE0(var_02,param_01);
 	if(var_03) {
@@ -454,7 +454,7 @@ func_4D18(param_00,param_01) {
 
 func_4D11(param_00) {
 	var_01 = func_2C94("chest");
-	function_01A2(level.player.origin,20,30,10,0.75);
+	screenshake(level.player.origin,20,30,10,0.75);
 	func_4CE0("chest",param_00);
 	if(var_01) {
 		return;
@@ -606,7 +606,7 @@ func_4D31() {
 func_4D1D() {
 	level.player specialist_allow_invulnerability(1);
 	level.player playgestureviewmodel("ges_shocknade_loop",undefined,1,0.25,0,0);
-	function_0178("bullet_ricochet_heavy",level.player geteye());
+	playworldsound("bullet_ricochet_heavy",level.player geteye());
 	self.var_86F4--;
 	level.player giveweapon("iw7_fists_specialist_mode");
 	level.player switchtoweapon("iw7_fists_specialist_mode");
@@ -777,7 +777,7 @@ func_86CF(param_00) {
 
 	level notify("player_grabbed_weapon");
 	func_86CA();
-	function_0178("scrap_pickup_small",level.player.origin);
+	playworldsound("scrap_pickup_small",level.player.origin);
 	level.player giveweapon(param_00);
 	level.player switchtoweapon(param_00);
 	if(scripts\sp\_utility::func_D0CA("iw7_fists_specialist_mode")) {
@@ -902,7 +902,7 @@ func_BE53() {
 		level.player give_crafted_fireworks_trap(0);
 		level.player endon("leg_damage");
 		wait(var_01);
-		function_01C5("bg_viewBobConstantAmplitude",0);
+		setsaveddvar("bg_viewBobConstantAmplitude",0);
 	}
 }
 
@@ -1004,8 +1004,8 @@ func_BE52(param_00) {
 func_4CFB(param_00,param_01,param_02) {
 	level.player playrumbleonentity("grenade_rumble");
 	if(param_01) {
-		function_01A2(level.player.origin,50,60,10,0.75);
-		function_0178("plr_helmet_glass_break",level.player geteye());
+		screenshake(level.player.origin,50,60,10,0.75);
+		playworldsound("plr_helmet_glass_break",level.player geteye());
 	}
 
 	if(!isdefined(param_02)) {
@@ -1092,8 +1092,8 @@ func_914F(param_00,param_01,param_02,param_03) {
 func_9147(param_00) {
 	level.player playrumbleonentity("grenade_rumble");
 	if(param_00) {
-		function_01A2(level.player.origin,50,60,10,0.75);
-		function_0178("plr_helmet_glass_break",level.player geteye());
+		screenshake(level.player.origin,50,60,10,0.75);
+		playworldsound("plr_helmet_glass_break",level.player geteye());
 	}
 
 	var_01 = newclienthudelem(level.player);
@@ -1110,8 +1110,8 @@ func_9147(param_00) {
 
 func_4CE1() {
 	func_F3FF(0);
-	function_0178("glass_pane_piece_break",level.player geteye());
-	function_01A2(level.player.origin,70,80,40,1);
+	playworldsound("glass_pane_piece_break",level.player geteye());
+	screenshake(level.player.origin,70,80,40,1);
 	thread func_25E9("injury","helmet");
 	level.player specialist_allow_invulnerability(1);
 	level.player scripts\engine\utility::allow_ads(0);
@@ -1154,13 +1154,13 @@ func_4D17() {
 		var_00 = gettime() + 12000;
 		var_01 = 0;
 		while(gettime() < var_00) {
-			function_01A7(var_01,0.05);
+			setblur(var_01,0.05);
 			if(func_2C95()) {
 				self.var_D430 = 0;
 				level.player stopgestureviewmodel("ges_neck_grab");
 				level.player stopshellshock();
 				level.player clearclienttriggeraudiozone(2);
-				function_01A7(0,1);
+				setblur(0,1);
 				level.player scripts\engine\utility::allow_reload(1);
 				level.player scripts\engine\utility::delaythread(1.5,::scripts\sp\_utility::play_sound_on_entity,"breathing_better");
 				scripts\engine\utility::delaythread(2,::func_25E9,"repair","oxygen");
@@ -1256,7 +1256,7 @@ func_4E1A(param_00) {
 	level.player notify("headshot_death");
 	if(scripts\sp\_utility::func_93AB()) {
 		level.player _meth_8591(1);
-		function_0229();
+		updategamerprofile();
 		scripts\sp\_endmission::func_41ED();
 	}
 
@@ -1265,20 +1265,20 @@ func_4E1A(param_00) {
 	level.player stopsounds();
 	scripts\sp\_utility::func_D020();
 	setomnvar("ui_hide_weapon_info",1);
-	function_01C5("hud_showstance",0);
-	function_01C5("actionSlotsHide",1);
+	setsaveddvar("hud_showstance",0);
+	setsaveddvar("actionSlotsHide",1);
 	level.player _meth_82C2("phstreets_building_hvt_breach","reverb","mix","filter","occlusion","ambient","ambient_events","player_adsr","weapon_reflection","contexts","full_occlusion");
 	level.player playrumbleonentity("grenade_rumble");
-	playfx(level.var_7649["human_gib_head"],level.player geteye(),anglestoforward(level.player.angles),function_02D3(level.player.angles));
+	playfx(level.var_7649["human_gib_head"],level.player geteye(),anglestoforward(level.player.angles),anglestoleft(level.player.angles));
 	playfx(level.var_7649["human_gib_fullbody"],level.player geteye() + (0,0,5));
-	function_0178("bullet_large_flesh_head_npc",level.player geteye());
-	function_0178("bullet_impact_headshot",level.player geteye());
+	playworldsound("bullet_large_flesh_head_npc",level.player geteye());
+	playworldsound("bullet_impact_headshot",level.player geteye());
 	self.var_98F1["pristine"].foreground = 1;
 	self.var_98F1["pristine"].alpha_req = 0.5;
 	self.var_98F1["skull"].alpha_req = 0.5;
-	function_01A2(level.player.origin,8,2,2,6);
-	function_01DC(0,7);
-	function_01A7(3,3);
+	screenshake(level.player.origin,8,2,2,6);
+	soundfade(0,7);
+	setblur(3,3);
 	thread func_4E0F();
 	var_01 = level.player getcurrentprimaryweapon();
 	if(isdefined(var_01) && var_01 != "none" && var_01 != "iw7_fists_specialist_mode" && var_01 != "mars_killstreak") {
@@ -1621,7 +1621,7 @@ func_12AB1() {
 		level.var_10964.var_58DE = 1;
 		thread scripts\sp\_utility::func_56BE("nanoshot_tutorial_hint",var_00);
 		level.player scripts\engine\utility::waittill_notify_or_timeout("frag_pressed",var_00);
-		function_01D3(1);
+		settimescale(1);
 		wait(2);
 		level.player specialist_allow_invulnerability(0);
 		level.var_10964.var_58DE = 0;
@@ -1693,7 +1693,7 @@ func_12AAA() {
 		level.var_10964.var_58DE = 1;
 		thread scripts\sp\_utility::func_56BE(var_01,var_03);
 		level.player scripts\engine\utility::waittill_notify_or_timeout("smoke_pressed",var_03);
-		function_01D3(1);
+		settimescale(1);
 		wait(2);
 		if(var_02) {
 			level.player specialist_allow_invulnerability(0);
@@ -2934,7 +2934,7 @@ nanoshot_near_pickup_check() {
 			continue;
 		}
 
-		var_03 = function_0249("nanoshot");
+		var_03 = weaponmaxammo("nanoshot");
 		if(scripts\sp\_utility::func_7CB0() >= var_03) {
 			continue;
 		}

@@ -210,10 +210,10 @@ func_CEC8(param_00,param_01,param_02,param_03) {
 				var_13 = var_13 * 0.6;
 				var_14 = vectornormalize(var_12 + var_13);
 				var_15 = var_14 * var_11;
-				var_0A = function_0136(self.objective_team,var_10,var_15,2);
+				var_0A = magicgrenademanual(self.objective_team,var_10,var_15,2);
 				if(isdefined(var_0A)) {
 					if(self.objective_state > 0) {
-						self.var_162--;
+						self.objective_state--;
 					}
 
 					self notify("grenade_fire",var_0A,self.objective_team);
@@ -228,7 +228,7 @@ func_CEC8(param_00,param_01,param_02,param_03) {
 			}
 
 			if(var_0F == "end") {
-				self.var_1652.player.var_C231--;
+				self.var_1652.player.numgrenadesinprogresstowardsplayer--;
 				self notify("dont_reduce_giptp_on_killanimscript");
 				return 0;
 			}
@@ -308,7 +308,7 @@ trygrenadethrow(param_00,param_01,param_02,param_03,param_04) {
 		func_F72C(self.var_1652,min(gettime() + 3000,var_0A));
 		var_0B = 0;
 		if(usingplayer()) {
-			var_06.var_C231++;
+			var_06.numgrenadesinprogresstowardsplayer++;
 			thread func_DE37(param_01,var_06);
 			if(var_06.numgrenadesinprogresstowardsplayer > 1) {
 				var_0B = 1;
@@ -390,7 +390,7 @@ usingplayer() {
 func_DE37(param_00,param_01) {
 	self endon("dont_reduce_giptp_on_killanimscript");
 	self waittill(param_00 + "_finished");
-	param_01.var_C231--;
+	param_01.numgrenadesinprogresstowardsplayer--;
 }
 
 func_58BA(param_00,param_01,param_02,param_03,param_04,param_05,param_06) {
@@ -433,7 +433,7 @@ func_58BA(param_00,param_01,param_02,param_03,param_04,param_05,param_06) {
 			}
 
 			if(var_0E == "end") {
-				self.var_1652.player.var_C231--;
+				self.var_1652.player.numgrenadesinprogresstowardsplayer--;
 				self notify("dont_reduce_giptp_on_killanimscript");
 				return 0;
 			}
@@ -523,7 +523,7 @@ func_5392(param_00,param_01,param_02) {
 func_13A98(param_00,param_01,param_02) {
 	param_01 endon("death");
 	func_13A99(param_00,param_02);
-	param_01.var_C231--;
+	param_01.numgrenadesinprogresstowardsplayer--;
 }
 
 func_13A99(param_00,param_01) {

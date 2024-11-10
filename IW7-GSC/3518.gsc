@@ -4,247 +4,247 @@
 ***************************************/
 
 init() {
-  level._id_DF98["hit"] = loadfx("vfx/core/impacts/large_metal_painted_hit");
-  level._id_DF98["smoke"] = loadfx("vfx/core/smktrail/remote_heli_damage_smoke_runner");
-  level._id_DF98["explode"] = loadfx("vfx/core/expl/bouncing_betty_explosion");
-  level._id_DF98["missile_explode"] = loadfx("vfx/core/expl/stinger_explosion");
-  level._id_DF91["launch"][0] = "ac130_plt_yeahcleared";
-  level._id_DF91["launch"][1] = "ac130_plt_rollinin";
-  level._id_DF91["launch"][2] = "ac130_plt_scanrange";
-  level._id_DF91["out_of_range"][0] = "ac130_plt_cleanup";
-  level._id_DF91["out_of_range"][1] = "ac130_plt_targetreset";
-  level._id_DF91["track"][0] = "ac130_fco_moreenemy";
-  level._id_DF91["track"][1] = "ac130_fco_getthatguy";
-  level._id_DF91["track"][2] = "ac130_fco_guymovin";
-  level._id_DF91["track"][3] = "ac130_fco_getperson";
-  level._id_DF91["track"][4] = "ac130_fco_guyrunnin";
-  level._id_DF91["track"][5] = "ac130_fco_gotarunner";
-  level._id_DF91["track"][6] = "ac130_fco_backonthose";
-  level._id_DF91["track"][7] = "ac130_fco_gonnagethim";
-  level._id_DF91["track"][8] = "ac130_fco_personnelthere";
-  level._id_DF91["track"][9] = "ac130_fco_rightthere";
-  level._id_DF91["track"][10] = "ac130_fco_tracking";
-  level._id_DF91["tag"][0] = "ac130_fco_nice";
-  level._id_DF91["tag"][1] = "ac130_fco_yougothim";
-  level._id_DF91["tag"][2] = "ac130_fco_yougothim2";
-  level._id_DF91["tag"][3] = "ac130_fco_okyougothim";
-  level._id_DF91["assist"][0] = "ac130_fco_goodkill";
-  level._id_DF91["assist"][1] = "ac130_fco_thatsahit";
-  level._id_DF91["assist"][2] = "ac130_fco_directhit";
-  level._id_DF91["assist"][3] = "ac130_fco_rightontarget";
-  level._id_DF9D = 0;
-  level._id_DFA2 = getentarray("no_vehicles", "targetname");
-  scripts\mp\killstreaks\killstreaks::registerkillstreak("remote_uav", ::_id_130CC);
-  level._id_DF74 = [];
+  level.remoteuav_fx["hit"] = loadfx("vfx/core/impacts/large_metal_painted_hit");
+  level.remoteuav_fx["smoke"] = loadfx("vfx/core/smktrail/remote_heli_damage_smoke_runner");
+  level.remoteuav_fx["explode"] = loadfx("vfx/core/expl/bouncing_betty_explosion");
+  level.remoteuav_fx["missile_explode"] = loadfx("vfx/core/expl/stinger_explosion");
+  level.remoteuav_dialog["launch"][0] = "ac130_plt_yeahcleared";
+  level.remoteuav_dialog["launch"][1] = "ac130_plt_rollinin";
+  level.remoteuav_dialog["launch"][2] = "ac130_plt_scanrange";
+  level.remoteuav_dialog["out_of_range"][0] = "ac130_plt_cleanup";
+  level.remoteuav_dialog["out_of_range"][1] = "ac130_plt_targetreset";
+  level.remoteuav_dialog["track"][0] = "ac130_fco_moreenemy";
+  level.remoteuav_dialog["track"][1] = "ac130_fco_getthatguy";
+  level.remoteuav_dialog["track"][2] = "ac130_fco_guymovin";
+  level.remoteuav_dialog["track"][3] = "ac130_fco_getperson";
+  level.remoteuav_dialog["track"][4] = "ac130_fco_guyrunnin";
+  level.remoteuav_dialog["track"][5] = "ac130_fco_gotarunner";
+  level.remoteuav_dialog["track"][6] = "ac130_fco_backonthose";
+  level.remoteuav_dialog["track"][7] = "ac130_fco_gonnagethim";
+  level.remoteuav_dialog["track"][8] = "ac130_fco_personnelthere";
+  level.remoteuav_dialog["track"][9] = "ac130_fco_rightthere";
+  level.remoteuav_dialog["track"][10] = "ac130_fco_tracking";
+  level.remoteuav_dialog["tag"][0] = "ac130_fco_nice";
+  level.remoteuav_dialog["tag"][1] = "ac130_fco_yougothim";
+  level.remoteuav_dialog["tag"][2] = "ac130_fco_yougothim2";
+  level.remoteuav_dialog["tag"][3] = "ac130_fco_okyougothim";
+  level.remoteuav_dialog["assist"][0] = "ac130_fco_goodkill";
+  level.remoteuav_dialog["assist"][1] = "ac130_fco_thatsahit";
+  level.remoteuav_dialog["assist"][2] = "ac130_fco_directhit";
+  level.remoteuav_dialog["assist"][3] = "ac130_fco_rightontarget";
+  level.remoteuav_lastdialogtime = 0;
+  level.remoteuav_nodeployzones = getentarray("no_vehicles", "targetname");
+  scripts\mp\killstreaks\killstreaks::registerkillstreak("remote_uav", ::useremoteuav);
+  level.remote_uav = [];
 }
 
-_id_130CC(var_0, var_1) {
-  return _id_12900(var_0, "remote_uav");
+useremoteuav(var_00, var_01) {
+  return tryuseremoteuav(var_00, "remote_uav");
 }
 
-_id_68C4(var_0) {
+exceededmaxremoteuavs(var_00) {
   if (level.gametype == "dm") {
-  if (isdefined(level._id_DF74[var_0]) || isdefined(level._id_DF74[level._id_C74B[var_0]]))
+  if (isdefined(level.remote_uav[var_00]) || isdefined(level.remote_uav[level.otherteam[var_00]]))
   return 1;
   else
   return 0;
   }
-  else if (isdefined(level._id_DF74[var_0]))
+  else if (isdefined(level.remote_uav[var_00]))
   return 1;
   else
   return 0;
 }
 
-_id_12900(var_0, var_1) {
-  scripts\engine\utility::_id_1C6E(0);
+tryuseremoteuav(var_00, var_01) {
+  scripts\engine\utility::allow_usability(0);
 
-  if (scripts\mp\utility\game::isusingremote() || self isusingturret() || isdefined(level._id_C1C4)) {
-  scripts\engine\utility::_id_1C6E(1);
+  if (scripts\mp\utility\game::isusingremote() || self isusingturret() || isdefined(level.nukeincoming)) {
+  scripts\engine\utility::allow_usability(1);
   return 0;
   }
 
-  var_2 = 1;
+  var_02 = 1;
 
-  if (_id_68C4(self.team) || level._id_AD8B.size >= 4) {
+  if (exceededmaxremoteuavs(self.team) || level.littlebirds.size >= 4) {
   self iprintlnbold(&"KILLSTREAKS_AIR_SPACE_TOO_CROWDED");
-  scripts\engine\utility::_id_1C6E(1);
+  scripts\engine\utility::allow_usability(1);
   return 0;
   }
-  else if (scripts\mp\utility\game::_id_4BD7() >= scripts\mp\utility\game::_id_B4D2() || level._id_6BAA + var_2 >= scripts\mp\utility\game::_id_B4D2()) {
+  else if (scripts\mp\utility\game::currentactivevehiclecount() >= scripts\mp\utility\game::maxvehiclesallowed() || level.fauxvehiclecount + var_02 >= scripts\mp\utility\game::maxvehiclesallowed()) {
   self iprintlnbold(&"KILLSTREAKS_TOO_MANY_VEHICLES");
-  scripts\engine\utility::_id_1C6E(1);
+  scripts\engine\utility::allow_usability(1);
   return 0;
   }
 
   self setrankedplayerdata("reconDroneState", "staticAlpha", 0);
   self setrankedplayerdata("reconDroneState", "incomingMissile", 0);
-  scripts\mp\utility\game::_id_93FA();
-  var_3 = _id_8355(var_0, var_1);
+  scripts\mp\utility\game::incrementfauxvehiclecount();
+  var_03 = _meth_8355(var_00, var_01);
 
-  if (var_3) {
-  scripts\mp\matchdata::_id_AFC9(var_1, self.origin);
-  thread scripts\mp\utility\game::_id_115DE("used_remote_uav", self);
+  if (var_03) {
+  scripts\mp\matchdata::logkillstreakevent(var_01, self.origin);
+  thread scripts\mp\utility\game::teamplayercardsplash("used_remote_uav", self);
   }
   else
-  scripts\mp\utility\game::_id_4FC1();
+  scripts\mp\utility\game::decrementfauxvehiclecount();
 
-  self._id_9D81 = 0;
-  return var_3;
+  self.iscarrying = 0;
+  return var_03;
 }
 
-_id_8355(var_0, var_1) {
-  var_2 = _id_4994(var_1, self);
-  scripts\mp\utility\game::_id_141E("killstreak_uav_mp");
-  scripts\mp\utility\game::_id_12C6("killstreak_remote_uav_mp");
-  scripts\mp\utility\game::_id_141B("killstreak_remote_uav_mp");
-  _id_F686(var_2);
+_meth_8355(var_00, var_01) {
+  var_02 = func_4994(var_01, self);
+  scripts\mp\utility\game::_takeweapon("killstreak_uav_mp");
+  scripts\mp\utility\game::_giveweapon("killstreak_remote_uav_mp");
+  scripts\mp\utility\game::_switchtoweaponimmediate("killstreak_remote_uav_mp");
+  func_F686(var_02);
 
-  if (isalive(self) && isdefined(var_2)) {
-  var_3 = var_2.origin;
-  var_4 = self.angles;
-  var_2._id_10478 delete();
-  var_2 delete();
-  var_5 = _id_10DEA(var_0, var_1, var_3, var_4);
+  if (isalive(self) && isdefined(var_02)) {
+  var_03 = var_2.origin;
+  var_04 = self.angles;
+  var_2.soundent delete();
+  var_02 delete();
+  var_05 = func_10DEA(var_00, var_01, var_03, var_04);
   } else {
-  var_5 = 0;
+  var_05 = 0;
 
   if (isalive(self)) {
-  scripts\mp\utility\game::_id_141E("killstreak_remote_uav_mp");
-  scripts\mp\utility\game::_id_12C6("killstreak_uav_mp");
+  scripts\mp\utility\game::_takeweapon("killstreak_remote_uav_mp");
+  scripts\mp\utility\game::_giveweapon("killstreak_uav_mp");
   }
   }
 
-  return var_5;
+  return var_05;
 }
 
-_id_4994(var_0, var_1) {
-  var_2 = var_1.origin + anglestoforward(var_1.angles) * 4 + anglestoup(var_1.angles) * 50;
-  var_3 = spawnturret("misc_turret", var_2, "sentry_minigun_mp");
-  var_3.origin = var_2;
+func_4994(var_00, var_01) {
+  var_02 = var_1.origin + anglestoforward(var_1.angles) * 4 + anglestoup(var_1.angles) * 50;
+  var_03 = spawnturret("misc_turret", var_02, "sentry_minigun_mp");
+  var_3.origin = var_02;
   var_3.angles = var_1.angles;
-  var_3._id_F26E = "sentry_minigun";
-  var_3._id_3872 = 1;
-  var_3 _meth_835B(1);
-  var_3 _meth_830F("sentry_offline");
-  var_3 makeunusable();
-  var_3 maketurretinoperable();
-  var_3.owner = var_1;
-  var_3 _meth_8336(var_3.owner);
-  var_3._id_EB9C = 3;
-  var_3._id_94D1 = 0;
-  var_3 thread _id_3AFE();
-  var_3._id_DCD0 = getent("remote_uav_range", "targetname");
+  var_3.sentrytype = "sentry_minigun";
+  var_3.canbeplaced = 1;
+  var_03 setturretmodechangewait(1);
+  var_03 give_player_session_tokens("sentry_offline");
+  var_03 makeunusable();
+  var_03 maketurretinoperable();
+  var_3.owner = var_01;
+  var_03 setsentryowner(var_3.owner);
+  var_3.func_EB9C = 3;
+  var_3.inheliproximity = 0;
+  var_03 thread func_3AFE();
+  var_3.rangetrigger = getent("remote_uav_range", "targetname");
 
-  if (!isdefined(var_3._id_DCD0)) {
-  var_4 = getent("airstrikeheight", "targetname");
-  var_3._id_B4A3 = var_4.origin[2];
-  var_3._id_B492 = 3600;
+  if (!isdefined(var_3.rangetrigger)) {
+  var_04 = getent("airstrikeheight", "targetname");
+  var_3.maxheight = var_4.origin[2];
+  var_3.maxdistance = 3600;
   }
 
-  var_3._id_10478 = spawn("script_origin", var_3.origin);
-  var_3._id_10478.angles = var_3.angles;
-  var_3._id_10478.origin = var_3.origin;
-  var_3._id_10478 linkto(var_3);
-  var_3._id_10478 playloopsound("recondrone_idle_high");
-  return var_3;
+  var_3.soundent = spawn("script_origin", var_3.origin);
+  var_3.soundent.angles = var_3.angles;
+  var_3.soundent.origin = var_3.origin;
+  var_3.soundent linkto(var_03);
+  var_3.soundent playloopsound("recondrone_idle_high");
+  return var_03;
 }
 
-_id_F686(var_0) {
-  var_0 thread _id_3AFF(self);
+func_F686(var_00) {
+  var_00 thread func_3AFF(self);
   self notifyonplayercommand("place_carryRemoteUAV", "+attack");
   self notifyonplayercommand("place_carryRemoteUAV", "+attack_akimbo_accessible");
   self notifyonplayercommand("cancel_carryRemoteUAV", "+actionslot 4");
 
-  if (!level._id_4542) {
+  if (!level.console) {
   self notifyonplayercommand("cancel_carryRemoteUAV", "+actionslot 5");
   self notifyonplayercommand("cancel_carryRemoteUAV", "+actionslot 6");
   self notifyonplayercommand("cancel_carryRemoteUAV", "+actionslot 7");
   }
 
   for (;;) {
-  var_1 = _id_AEBE("place_carryRemoteUAV", "cancel_carryRemoteUAV", "weapon_switch_started", "force_cancel_placement", "death", "disconnect");
-  self _meth_80F3();
+  var_01 = local_waittill_any_return_6("place_carryRemoteUAV", "cancel_carryRemoteUAV", "weapon_switch_started", "force_cancel_placement", "death", "disconnect");
+  self getrigindexfromarchetyperef();
 
-  if (var_1 != "place_carryRemoteUAV") {
-  _id_3AFD(var_0);
+  if (var_01 != "place_carryRemoteUAV") {
+  carryremoteuav_delete(var_00);
   break;
   }
 
-  if (!var_0._id_3872) {
+  if (!var_0.canbeplaced) {
   if (self.team != "spectator")
-  self _meth_80F4(&"KILLSTREAKS_REMOTE_UAV_CANNOT_PLACE");
+  self forceusehinton(&"KILLSTREAKS_REMOTE_UAV_CANNOT_PLACE");
 
   continue;
   }
 
-  if (_id_68C4(self.team) || scripts\mp\utility\game::_id_4BD7() >= scripts\mp\utility\game::_id_B4D2() || level._id_6BAA >= scripts\mp\utility\game::_id_B4D2()) {
+  if (exceededmaxremoteuavs(self.team) || scripts\mp\utility\game::currentactivevehiclecount() >= scripts\mp\utility\game::maxvehiclesallowed() || level.fauxvehiclecount >= scripts\mp\utility\game::maxvehiclesallowed()) {
   self iprintlnbold(&"KILLSTREAKS_TOO_MANY_VEHICLES");
-  _id_3AFD(var_0);
+  carryremoteuav_delete(var_00);
   break;
   }
 
-  self._id_9D81 = 0;
-  var_0._id_3A9D = undefined;
-  var_0 playsound("sentry_gun_plant");
-  var_0 notify("placed");
+  self.iscarrying = 0;
+  var_0.carriedby = undefined;
+  var_00 playsound("sentry_gun_plant");
+  var_00 notify("placed");
   break;
   }
 }
 
-_id_AEBE(var_0, var_1, var_2, var_3, var_4, var_5) {
-  if ((!isdefined(var_0) || var_0 != "death") && (!isdefined(var_1) || var_1 != "death") && (!isdefined(var_2) || var_2 != "death") && (!isdefined(var_3) || var_3 != "death") && (!isdefined(var_4) || var_4 != "death"))
+local_waittill_any_return_6(var_00, var_01, var_02, var_03, var_04, var_05) {
+  if ((!isdefined(var_00) || var_00 != "death") && (!isdefined(var_01) || var_01 != "death") && (!isdefined(var_02) || var_02 != "death") && (!isdefined(var_03) || var_03 != "death") && (!isdefined(var_04) || var_04 != "death"))
   self endon("death");
 
-  var_6 = spawnstruct();
+  var_06 = spawnstruct();
 
-  if (isdefined(var_0))
-  thread scripts\engine\utility::_id_13806(var_0, var_6);
+  if (isdefined(var_00))
+  thread scripts\engine\utility::waittill_string(var_00, var_06);
 
-  if (isdefined(var_1))
-  thread scripts\engine\utility::_id_13806(var_1, var_6);
+  if (isdefined(var_01))
+  thread scripts\engine\utility::waittill_string(var_01, var_06);
 
-  if (isdefined(var_2))
-  thread scripts\engine\utility::_id_13806(var_2, var_6);
+  if (isdefined(var_02))
+  thread scripts\engine\utility::waittill_string(var_02, var_06);
 
-  if (isdefined(var_3))
-  thread scripts\engine\utility::_id_13806(var_3, var_6);
+  if (isdefined(var_03))
+  thread scripts\engine\utility::waittill_string(var_03, var_06);
 
-  if (isdefined(var_4))
-  thread scripts\engine\utility::_id_13806(var_4, var_6);
+  if (isdefined(var_04))
+  thread scripts\engine\utility::waittill_string(var_04, var_06);
 
-  if (isdefined(var_5))
-  thread scripts\engine\utility::_id_13806(var_5, var_6);
+  if (isdefined(var_05))
+  thread scripts\engine\utility::waittill_string(var_05, var_06);
 
-  var_6 waittill("returned", var_7);
-  var_6 notify("die");
-  return var_7;
+  var_06 waittill("returned", var_07);
+  var_06 notify("die");
+  return var_07;
 }
 
-_id_3AFF(var_0) {
+func_3AFF(var_00) {
   self setcandamage(0);
-  self _meth_8335(var_0);
-  self _meth_82C7(0);
-  self._id_3A9D = var_0;
-  var_0._id_9D81 = 1;
-  var_0 thread _id_12E70(self);
+  self setsentrycarrier(var_00);
+  self setcontents(0);
+  self.carriedby = var_00;
+  var_0.iscarrying = 1;
+  var_00 thread func_12E70(self);
   self notify("carried");
 }
 
-_id_3AFD(var_0) {
-  self._id_9D81 = 0;
+carryremoteuav_delete(var_00) {
+  self.iscarrying = 0;
 
-  if (isdefined(var_0)) {
-  if (isdefined(var_0._id_10478))
-  var_0._id_10478 delete();
+  if (isdefined(var_00)) {
+  if (isdefined(var_0.soundent))
+  var_0.soundent delete();
 
-  var_0 delete();
+  var_00 delete();
   }
 }
 
-_id_9E4F() {
-  if (isdefined(level._id_DFA2) && level._id_DFA2.size) {
-  foreach (var_1 in level._id_DFA2) {
-  if (self istouching(var_1))
+isinremotenodeploy() {
+  if (isdefined(level.remoteuav_nodeployzones) && level.remoteuav_nodeployzones.size) {
+  foreach (var_01 in level.remoteuav_nodeployzones) {
+  if (self istouching(var_01))
   return 1;
   }
   }
@@ -252,254 +252,254 @@ _id_9E4F() {
   return 0;
 }
 
-_id_12E70(var_0) {
+func_12E70(var_00) {
   self endon("death");
   self endon("disconnect");
   level endon("game_ended");
-  var_0 endon("placed");
-  var_0 endon("death");
-  var_0._id_3872 = 1;
-  var_1 = -1;
-  scripts\engine\utility::_id_1C6E(1);
+  var_00 endon("placed");
+  var_00 endon("death");
+  var_0.canbeplaced = 1;
+  var_01 = -1;
+  scripts\engine\utility::allow_usability(1);
 
   for (;;) {
-  var_2 = 18;
+  var_02 = 18;
 
   switch (self getstance()) {
   case "stand":
-  var_2 = 40;
+  var_02 = 40;
   break;
   case "crouch":
-  var_2 = 25;
+  var_02 = 25;
   break;
   case "prone":
-  var_2 = 10;
+  var_02 = 10;
   break;
   }
 
-  var_3 = self _meth_805E(22, 22, 50, var_2, 0, 0);
+  var_03 = self _meth_805E(22, 22, 50, var_02, 0, 0);
   var_0.origin = var_3["origin"] + anglestoup(self.angles) * 27;
   var_0.angles = var_3["angles"];
-  var_0._id_3872 = self isonground() && var_3["result"] && var_0 _id_DF9C() && !var_0 _id_9E4F();
+  var_0.canbeplaced = self isonground() && var_3["result"] && var_00 remoteuav_in_range() && !var_00 isinremotenodeploy();
 
-  if (var_0._id_3872 != var_1) {
-  if (var_0._id_3872) {
+  if (var_0.canbeplaced != var_01) {
+  if (var_0.canbeplaced) {
   if (self.team != "spectator")
-  self _meth_80F4(&"KILLSTREAKS_REMOTE_UAV_PLACE");
+  self forceusehinton(&"KILLSTREAKS_REMOTE_UAV_PLACE");
 
   if (self attackbuttonpressed())
   self notify("place_carryRemoteUAV");
   }
   else if (self.team != "spectator")
-  self _meth_80F4(&"KILLSTREAKS_REMOTE_UAV_CANNOT_PLACE");
+  self forceusehinton(&"KILLSTREAKS_REMOTE_UAV_CANNOT_PLACE");
   }
 
-  var_1 = var_0._id_3872;
+  var_01 = var_0.canbeplaced;
   wait 0.05;
   }
 }
 
-_id_3AFE() {
+func_3AFE() {
   level endon("game_ended");
   self.owner endon("place_carryRemoteUAV");
   self.owner endon("cancel_carryRemoteUAV");
   self.owner scripts\engine\utility::waittill_any("death", "disconnect", "joined_team", "joined_spectators");
 
   if (isdefined(self)) {
-  if (isdefined(self._id_10478))
-  self._id_10478 delete();
+  if (isdefined(self.soundent))
+  self.soundent delete();
 
   self delete();
   }
 }
 
-_id_E162() {
+removeremoteweapon() {
   level endon("game_ended");
   self endon("disconnect");
   wait 0.7;
 }
 
-_id_10DEA(var_0, var_1, var_2, var_3) {
-  _id_AF31();
-  scripts\mp\utility\game::_id_FB09(var_1);
-  scripts\mp\utility\game::_id_12C6("uav_remote_mp");
-  scripts\mp\utility\game::_id_141B("uav_remote_mp");
+func_10DEA(var_00, var_01, var_02, var_03) {
+  lockplayerforremoteuavlaunch();
+  scripts\mp\utility\game::setusingremote(var_01);
+  scripts\mp\utility\game::_giveweapon("uav_remote_mp");
+  scripts\mp\utility\game::_switchtoweaponimmediate("uav_remote_mp");
   self visionsetnakedforplayer("black_bw", 0.0);
-  var_4 = scripts\mp\killstreaks\killstreaks::_id_98C2("remote_uav");
+  var_04 = scripts\mp\killstreaks\killstreaks::initridekillstreak("remote_uav");
 
-  if (var_4 != "success") {
-  if (var_4 != "disconnect") {
+  if (var_04 != "success") {
+  if (var_04 != "disconnect") {
   self notify("remoteuav_unlock");
-  scripts\mp\utility\game::_id_141E("uav_remote_mp");
-  scripts\mp\utility\game::_id_41E9();
+  scripts\mp\utility\game::_takeweapon("uav_remote_mp");
+  scripts\mp\utility\game::clearusingremote();
   }
 
   return 0;
   }
 
-  if (_id_68C4(self.team) || scripts\mp\utility\game::_id_4BD7() >= scripts\mp\utility\game::_id_B4D2() || level._id_6BAA >= scripts\mp\utility\game::_id_B4D2()) {
+  if (exceededmaxremoteuavs(self.team) || scripts\mp\utility\game::currentactivevehiclecount() >= scripts\mp\utility\game::maxvehiclesallowed() || level.fauxvehiclecount >= scripts\mp\utility\game::maxvehiclesallowed()) {
   self iprintlnbold(&"KILLSTREAKS_TOO_MANY_VEHICLES");
   self notify("remoteuav_unlock");
-  scripts\mp\utility\game::_id_141E("uav_remote_mp");
-  scripts\mp\utility\game::_id_41E9();
+  scripts\mp\utility\game::_takeweapon("uav_remote_mp");
+  scripts\mp\utility\game::clearusingremote();
   return 0;
   }
 
   self notify("remoteuav_unlock");
-  var_5 = _id_4A07(var_0, self, var_1, var_2, var_3);
+  var_05 = func_4A07(var_00, self, var_01, var_02, var_03);
 
-  if (isdefined(var_5)) {
-  thread _id_DFA7(var_0, var_5, var_1);
+  if (isdefined(var_05)) {
+  thread remoteuav_ride(var_00, var_05, var_01);
   return 1;
   } else {
   self iprintlnbold(&"KILLSTREAKS_TOO_MANY_VEHICLES");
-  scripts\mp\utility\game::_id_141E("uav_remote_mp");
-  scripts\mp\utility\game::_id_41E9();
+  scripts\mp\utility\game::_takeweapon("uav_remote_mp");
+  scripts\mp\utility\game::clearusingremote();
   return 0;
   }
 }
 
-_id_AF31() {
-  var_0 = spawn("script_origin", self.origin);
-  var_0 hide();
-  self _meth_823A(var_0);
-  thread _id_41CD(var_0);
+lockplayerforremoteuavlaunch() {
+  var_00 = spawn("script_origin", self.origin);
+  var_00 hide();
+  self getweaponvariantattachments(var_00);
+  thread clearplayerlockfromremoteuavlaunch(var_00);
 }
 
-_id_41CD(var_0) {
+clearplayerlockfromremoteuavlaunch(var_00) {
   level endon("game_ended");
-  var_1 = scripts\engine\utility::_id_13734("disconnect", "death", "remoteuav_unlock");
+  var_01 = scripts\engine\utility::waittill_any_return("disconnect", "death", "remoteuav_unlock");
 
-  if (var_1 != "disconnect")
+  if (var_01 != "disconnect")
   self unlink();
 
-  var_0 delete();
+  var_00 delete();
 }
 
-_id_4A07(var_0, var_1, var_2, var_3, var_4) {
-  if (level._id_4542)
-  var_5 = spawnhelicopter(var_1, var_3, var_4, "remote_uav_mp", "vehicle_remote_uav");
+func_4A07(var_00, var_01, var_02, var_03, var_04) {
+  if (level.console)
+  var_05 = spawnhelicopter(var_01, var_03, var_04, "remote_uav_mp", "vehicle_remote_uav");
   else
-  var_5 = spawnhelicopter(var_1, var_3, var_4, "remote_uav_mp_pc", "vehicle_remote_uav");
+  var_05 = spawnhelicopter(var_01, var_03, var_04, "remote_uav_mp_pc", "vehicle_remote_uav");
 
-  if (!isdefined(var_5))
+  if (!isdefined(var_05))
   return undefined;
 
-  var_5 scripts\mp\killstreaks\helicopter::_id_1852();
-  var_5 thread scripts\mp\killstreaks\helicopter::_id_E111();
-  var_5 makevehiclesolidcapsule(18, -9, 18);
-  var_5._id_AC68 = var_0;
+  var_05 scripts\mp\killstreaks\helicopter::addtolittlebirdlist();
+  var_05 thread scripts\mp\killstreaks\helicopter::func_E111();
+  var_05 makevehiclesolidcapsule(18, -9, 18);
+  var_5.lifeid = var_00;
   var_5.team = var_1.team;
   var_5.pers["team"] = var_1.team;
-  var_5.owner = var_1;
-  var_5 _meth_831F(var_1);
-  var_5 scripts\mp\sentientpoolmanager::registersentient("Killstreak_Air", var_1);
+  var_5.owner = var_01;
+  var_05 setotherent(var_01);
+  var_05 scripts\mp\sentientpoolmanager::registersentient("Killstreak_Air", var_01);
   var_5.maxhealth = 250;
-  var_5._id_EC9C = spawn("script_model", var_3);
-  var_5._id_EC9C linkto(var_5, "tag_origin", (0, 0, -160), (0, 0, 0));
-  var_5._id_EC9C _meth_81F4(var_1);
-  var_5._id_1037E = 0;
-  var_5._id_94D1 = 0;
+  var_5.scrambler = spawn("script_model", var_03);
+  var_5.scrambler linkto(var_05, "tag_origin", (0, 0, -160), (0, 0, 0));
+  var_5.scrambler makescrambler(var_01);
+  var_5.func_1037E = 0;
+  var_5.inheliproximity = 0;
   var_5.helitype = "remote_uav";
-  var_5._id_B372 = [];
-  var_5 thread _id_DFA0();
-  var_5 thread _id_DF95();
-  var_5 thread _id_DF93();
-  var_5 thread _id_DF94();
-  var_5 thread _id_DF8D();
-  var_5 thread _id_DF9F();
-  var_5 thread _id_DFAD();
-  var_5 thread _id_DFAE();
-  var_5 thread _id_DF99();
-  var_5._id_C22B = 2;
-  var_5._id_8C01 = 0;
-  var_5._id_93DB = [];
-  var_5 thread _id_DF8E();
-  var_5 thread _id_DF9B();
-  var_5 thread _id_DF9A();
-  level._id_DF74[var_5.team] = var_5;
-  return var_5;
+  var_5.markedplayers = [];
+  var_05 thread remoteuav_light_fx();
+  var_05 thread remoteuav_explode_on_disconnect();
+  var_05 thread remoteuav_explode_on_changeteams();
+  var_05 thread remoteuav_explode_on_death();
+  var_05 thread remoteuav_clear_marked_on_gameended();
+  var_05 thread remoteuav_leave_on_timeout();
+  var_05 thread func_DFAD();
+  var_05 thread func_DFAE();
+  var_05 thread remoteuav_handledamage();
+  var_5.numflares = 2;
+  var_5.hasincoming = 0;
+  var_5.incomingmissiles = [];
+  var_05 thread remoteuav_clearincomingwarning();
+  var_05 thread remoteuav_handleincomingstinger();
+  var_05 thread remoteuav_handleincomingsam();
+  level.remote_uav[var_5.team] = var_05;
+  return var_05;
 }
 
-_id_DFA7(var_0, var_1, var_2) {
-  var_1._id_D3D3 = 1;
-  self._id_E2D7 = self.angles;
+remoteuav_ride(var_00, var_01, var_02) {
+  var_1.playerlinked = 1;
+  self.restoreangles = self.angles;
 
   if (getdvarint("camera_thirdPerson"))
-  scripts\mp\utility\game::_id_F887(0);
+  scripts\mp\utility\game::setthirdpersondof(0);
 
-  self cameralinkto(var_1, "tag_origin");
-  self remotecontrolvehicle(var_1);
-  thread _id_DFA4(var_1);
-  thread _id_DFAA(var_1);
-  thread _id_DF96(var_1);
-  self._id_DF75 = var_0;
-  self._id_DF8A = var_1;
-  thread _id_DF90(var_1);
+  self cameralinkto(var_01, "tag_origin");
+  self remotecontrolvehicle(var_01);
+  thread remoteuav_playerexit(var_01);
+  thread func_DFAA(var_01);
+  thread remoteuav_fire(var_01);
+  self.remote_uav_ridelifeid = var_00;
+  self.remoteuav = var_01;
+  thread remoteuav_delaylaunchdialog(var_01);
   self visionsetnakedforplayer("black_bw", 0.0);
   scripts\mp\utility\game::restorebasevisionset(1);
 }
 
-_id_DF90(var_0) {
+remoteuav_delaylaunchdialog(var_00) {
   level endon("game_ended");
   self endon("disconnect");
-  var_0 endon("death");
-  var_0 endon("end_remote");
-  var_0 endon("end_launch_dialog");
+  var_00 endon("death");
+  var_00 endon("end_remote");
+  var_00 endon("end_launch_dialog");
   wait 3;
-  _id_DF91("launch");
+  remoteuav_dialog("launch");
 }
 
-_id_DF92(var_0) {
-  if (isdefined(var_0)) {
-  var_0._id_D3D3 = 0;
-  var_0 notify("end_remote");
-  scripts\mp\utility\game::_id_41E9();
+remoteuav_endride(var_00) {
+  if (isdefined(var_00)) {
+  var_0.playerlinked = 0;
+  var_00 notify("end_remote");
+  scripts\mp\utility\game::clearusingremote();
 
   if (getdvarint("camera_thirdPerson"))
-  scripts\mp\utility\game::_id_F887(1);
+  scripts\mp\utility\game::setthirdpersondof(1);
 
-  self cameraunlink(var_0);
-  self remotecontrolvehicleoff(var_0);
+  self cameraunlink(var_00);
+  self remotecontrolvehicleoff(var_00);
   self thermalvisionoff();
-  self setplayerangles(self._id_E2D7);
-  var_1 = scripts\engine\utility::_id_7F62();
+  self setplayerangles(self.restoreangles);
+  var_01 = scripts\engine\utility::getlastweapon();
 
-  if (!self hasweapon(var_1))
-  var_1 = _id_0DC9::_id_7EB7();
+  if (!self hasweapon(var_01))
+  var_01 = scripts/mp/killstreaks/utility::getfirstprimaryweapon();
 
-  scripts\mp\utility\game::_id_141A(var_1);
-  scripts\mp\utility\game::_id_141E("uav_remote_mp");
-  thread _id_DF97();
+  scripts\mp\utility\game::_switchtoweapon(var_01);
+  scripts\mp\utility\game::_takeweapon("uav_remote_mp");
+  thread remoteuav_freezebuffer();
   }
 
-  self._id_DF8A = undefined;
+  self.remoteuav = undefined;
 }
 
-_id_DF97() {
+remoteuav_freezebuffer() {
   self endon("disconnect");
   self endon("death");
   level endon("game_ended");
-  scripts\mp\utility\game::_id_7385(1);
+  scripts\mp\utility\game::freezecontrolswrapper(1);
   wait 0.5;
-  scripts\mp\utility\game::_id_7385(0);
+  scripts\mp\utility\game::freezecontrolswrapper(0);
 }
 
-_id_DFA4(var_0) {
+remoteuav_playerexit(var_00) {
   level endon("game_ended");
   self endon("disconnect");
-  var_0 endon("death");
-  var_0 endon("end_remote");
+  var_00 endon("death");
+  var_00 endon("end_remote");
   wait 2;
 
   for (;;) {
-  var_1 = 0;
+  var_01 = 0;
 
   while (self usebuttonpressed()) {
-  var_1 = var_1 + 0.05;
+  var_01 = var_01 + 0.05;
 
-  if (var_1 > 0.75) {
-  var_0 thread _id_DF9E();
+  if (var_01 > 0.75) {
+  var_00 thread remoteuav_leave();
   return;
   }
 
@@ -510,184 +510,184 @@ _id_DFA4(var_0) {
   }
 }
 
-_id_DFAA(var_0) {
+func_DFAA(var_00) {
   level endon("game_ended");
   self endon("disconnect");
-  var_0 endon("death");
-  var_0 endon("end_remote");
-  var_0._id_AA34 = 0;
-  self._id_AEFB = undefined;
+  var_00 endon("death");
+  var_00 endon("end_remote");
+  var_0.func_AA34 = 0;
+  self.func_AEFB = undefined;
   self _meth_8403();
   wait 1;
 
   for (;;) {
-  var_1 = var_0 gettagorigin("tag_turret");
-  var_2 = anglestoforward(self getplayerangles());
-  var_3 = var_1 + var_2 * 1024;
-  var_4 = bullettrace(var_1, var_3, 1, var_0);
+  var_01 = var_00 gettagorigin("tag_turret");
+  var_02 = anglestoforward(self getplayerangles());
+  var_03 = var_01 + var_02 * 1024;
+  var_04 = bullettrace(var_01, var_03, 1, var_00);
 
   if (isdefined(var_4["position"]))
-  var_5 = var_4["position"];
+  var_05 = var_4["position"];
   else
   {
-  var_5 = var_3;
-  var_4["endpos"] = var_3;
+  var_05 = var_03;
+  var_4["endpos"] = var_03;
   }
 
-  var_0._id_11A7B = var_4;
-  var_6 = _id_DFAB(var_0, level.players, var_5);
-  var_7 = _id_DFAB(var_0, level._id_12A83, var_5);
-  var_8 = undefined;
+  var_0.func_11A7B = var_04;
+  var_06 = func_DFAB(var_00, level.players, var_05);
+  var_07 = func_DFAB(var_00, level.turrets, var_05);
+  var_08 = undefined;
 
-  if (level._id_BDCC) {
-  var_9 = [];
+  if (level.multiteambased) {
+  var_09 = [];
 
-  foreach (var_11 in level._id_115DA) {
+  foreach (var_11 in level.teamnamelist) {
   if (var_11 != self.team) {
-  foreach (var_13 in level._id_12AF3[var_11])
+  foreach (var_13 in level.uavmodels[var_11])
   var_9[var_9.size] = var_13;
   }
   }
 
-  var_8 = _id_DFAB(var_0, var_9, var_5);
+  var_08 = func_DFAB(var_00, var_09, var_05);
   }
   else if (level.teambased)
-  var_8 = _id_DFAB(var_0, level._id_12AF3[level._id_C74B[self.team]], var_5);
+  var_08 = func_DFAB(var_00, level.uavmodels[level.otherteam[self.team]], var_05);
   else
-  var_8 = _id_DFAB(var_0, level._id_12AF3, var_5);
+  var_08 = func_DFAB(var_00, level.uavmodels, var_05);
 
   var_16 = undefined;
 
-  if (isdefined(var_6))
-  var_16 = var_6;
-  else if (isdefined(var_7))
-  var_16 = var_7;
-  else if (isdefined(var_8))
-  var_16 = var_8;
+  if (isdefined(var_06))
+  var_16 = var_06;
+  else if (isdefined(var_07))
+  var_16 = var_07;
+  else if (isdefined(var_08))
+  var_16 = var_08;
 
   if (isdefined(var_16)) {
-  if (!isdefined(self._id_AEFB) || isdefined(self._id_AEFB) && self._id_AEFB != var_16) {
+  if (!isdefined(self.func_AEFB) || isdefined(self.func_AEFB) && self.func_AEFB != var_16) {
   self _meth_8402(var_16);
-  self._id_AEFB = var_16;
+  self.func_AEFB = var_16;
 
-  if (isdefined(var_6)) {
-  var_0 notify("end_launch_dialog");
-  _id_DF91("track");
+  if (isdefined(var_06)) {
+  var_00 notify("end_launch_dialog");
+  remoteuav_dialog("track");
   }
   }
   } else {
   self _meth_8403();
-  self._id_AEFB = undefined;
+  self.func_AEFB = undefined;
   }
 
   wait 0.05;
   }
 }
 
-_id_DFAB(var_0, var_1, var_2) {
+func_DFAB(var_00, var_01, var_02) {
   level endon("game_ended");
-  var_3 = undefined;
+  var_03 = undefined;
 
-  foreach (var_5 in var_1) {
+  foreach (var_05 in var_01) {
   if (level.teambased && (!isdefined(var_5.team) || var_5.team == self.team))
   continue;
 
-  if (isplayer(var_5)) {
-  if (!scripts\mp\utility\game::isreallyalive(var_5))
+  if (isplayer(var_05)) {
+  if (!scripts\mp\utility\game::isreallyalive(var_05))
   continue;
 
-  if (var_5 == self)
+  if (var_05 == self)
   continue;
 
-  var_6 = var_5.guid;
+  var_06 = var_5.guid;
   }
   else
-  var_6 = var_5._id_0064;
+  var_06 = var_5.birthtime;
 
-  if (isdefined(var_5._id_F26E) || isdefined(var_5._id_12A9A)) {
-  var_7 = (0, 0, 32);
-  var_8 = "hud_fofbox_hostile_vehicle";
+  if (isdefined(var_5.sentrytype) || isdefined(var_5.func_12A9A)) {
+  var_07 = (0, 0, 32);
+  var_08 = "hud_fofbox_hostile_vehicle";
   }
-  else if (isdefined(var_5._id_12AFA)) {
-  var_7 = (0, 0, -52);
-  var_8 = "hud_fofbox_hostile_vehicle";
+  else if (isdefined(var_5.uavtype)) {
+  var_07 = (0, 0, -52);
+  var_08 = "hud_fofbox_hostile_vehicle";
   } else {
-  var_7 = (0, 0, 26);
-  var_8 = "veh_hud_target_unmarked";
+  var_07 = (0, 0, 26);
+  var_08 = "veh_hud_target_unmarked";
   }
 
-  if (isdefined(var_5._id_12AF4)) {
-  if (!isdefined(var_0._id_B372[var_6])) {
-  var_0._id_B372[var_6] = [];
-  var_0._id_B372[var_6]["player"] = var_5;
-  var_0._id_B372[var_6]["icon"] = var_5 scripts\mp\entityheadicons::_id_F73D(self, "veh_hud_target_marked", var_7, 10, 10, 0, 0.05, 0, 0, 0, 0);
-  var_0._id_B372[var_6]["icon"]._id_FC44 = "veh_hud_target_marked";
+  if (isdefined(var_5.func_12AF4)) {
+  if (!isdefined(var_0.markedplayers[var_06])) {
+  var_0.markedplayers[var_06] = [];
+  var_0.markedplayers[var_06]["player"] = var_05;
+  var_0.markedplayers[var_06]["icon"] = var_05 scripts\mp\entityheadicons::setheadicon(self, "veh_hud_target_marked", var_07, 10, 10, 0, 0.05, 0, 0, 0, 0);
+  var_0.markedplayers[var_06]["icon"].shader = "veh_hud_target_marked";
 
-  if (!isdefined(var_5._id_F26E) || !isdefined(var_5._id_12A9A))
-  var_0._id_B372[var_6]["icon"] _meth_8346(var_5);
+  if (!isdefined(var_5.sentrytype) || !isdefined(var_5.func_12A9A))
+  var_0.markedplayers[var_06]["icon"] settargetent(var_05);
   }
-  else if (isdefined(var_0._id_B372[var_6]) && isdefined(var_0._id_B372[var_6]["icon"]) && isdefined(var_0._id_B372[var_6]["icon"]._id_FC44) && var_0._id_B372[var_6]["icon"]._id_FC44 != "veh_hud_target_marked") {
-  var_0._id_B372[var_6]["icon"]._id_FC44 = "veh_hud_target_marked";
-  var_0._id_B372[var_6]["icon"] setshader("veh_hud_target_marked", 10, 10);
-  var_0._id_B372[var_6]["icon"] setwaypoint(0, 0, 0, 0);
+  else if (isdefined(var_0.markedplayers[var_06]) && isdefined(var_0.markedplayers[var_06]["icon"]) && isdefined(var_0.markedplayers[var_06]["icon"].shader) && var_0.markedplayers[var_06]["icon"].shader != "veh_hud_target_marked") {
+  var_0.markedplayers[var_06]["icon"].shader = "veh_hud_target_marked";
+  var_0.markedplayers[var_06]["icon"] setshader("veh_hud_target_marked", 10, 10);
+  var_0.markedplayers[var_06]["icon"] setwaypoint(0, 0, 0, 0);
   }
 
   continue;
   }
 
-  if (isplayer(var_5)) {
-  var_9 = isdefined(var_5._id_10916) && (gettime() - var_5._id_10916) / 1000 <= 5;
-  var_10 = var_5 scripts\mp\utility\game::_id_12D6("specialty_blindeye");
+  if (isplayer(var_05)) {
+  var_09 = isdefined(var_5.spawntime) && (gettime() - var_5.spawntime) / 1000 <= 5;
+  var_10 = var_05 scripts\mp\utility\game::_hasperk("specialty_blindeye");
   var_11 = 0;
   var_12 = 0;
   } else {
-  var_9 = 0;
+  var_09 = 0;
   var_10 = 0;
-  var_11 = isdefined(var_5._id_3A9D);
-  var_12 = isdefined(var_5._id_9E78) && var_5._id_9E78 == 1;
+  var_11 = isdefined(var_5.carriedby);
+  var_12 = isdefined(var_5.isleaving) && var_5.isleaving == 1;
   }
 
-  if (!isdefined(var_0._id_B372[var_6]) && !var_9 && !var_10 && !var_11 && !var_12) {
-  var_0._id_B372[var_6] = [];
-  var_0._id_B372[var_6]["player"] = var_5;
-  var_0._id_B372[var_6]["icon"] = var_5 scripts\mp\entityheadicons::_id_F73D(self, var_8, var_7, 10, 10, 0, 0.05, 0, 0, 0, 0);
-  var_0._id_B372[var_6]["icon"]._id_FC44 = var_8;
+  if (!isdefined(var_0.markedplayers[var_06]) && !var_09 && !var_10 && !var_11 && !var_12) {
+  var_0.markedplayers[var_06] = [];
+  var_0.markedplayers[var_06]["player"] = var_05;
+  var_0.markedplayers[var_06]["icon"] = var_05 scripts\mp\entityheadicons::setheadicon(self, var_08, var_07, 10, 10, 0, 0.05, 0, 0, 0, 0);
+  var_0.markedplayers[var_06]["icon"].shader = var_08;
 
-  if (!isdefined(var_5._id_F26E) || !isdefined(var_5._id_12A9A))
-  var_0._id_B372[var_6]["icon"] _meth_8346(var_5);
+  if (!isdefined(var_5.sentrytype) || !isdefined(var_5.func_12A9A))
+  var_0.markedplayers[var_06]["icon"] settargetent(var_05);
   }
 
-  if ((!isdefined(var_3) || var_3 != var_5) && (isdefined(var_0._id_11A7B["entity"]) && var_0._id_11A7B["entity"] == var_5 && !var_11 && !var_12) || distance(var_5.origin, var_2) < 200 * var_0._id_11A7B["fraction"] && !var_9 && !var_11 && !var_12 || !var_12 && _id_DF8B(var_0, var_5)) {
-  var_13 = bullettrace(var_0.origin, var_5.origin + (0, 0, 32), 1, var_0);
+  if ((!isdefined(var_03) || var_03 != var_05) && (isdefined(var_0.func_11A7B["entity"]) && var_0.func_11A7B["entity"] == var_05 && !var_11 && !var_12) || distance(var_5.origin, var_02) < 200 * var_0.func_11A7B["fraction"] && !var_09 && !var_11 && !var_12 || !var_12 && remoteuav_cantargetuav(var_00, var_05)) {
+  var_13 = bullettrace(var_0.origin, var_5.origin + (0, 0, 32), 1, var_00);
 
-  if (isdefined(var_13["entity"]) && var_13["entity"] == var_5 || var_13["fraction"] == 1) {
+  if (isdefined(var_13["entity"]) && var_13["entity"] == var_05 || var_13["fraction"] == 1) {
   self playlocalsound("recondrone_lockon");
-  var_3 = var_5;
+  var_03 = var_05;
   }
   }
   }
 
-  return var_3;
+  return var_03;
 }
 
-_id_DF8B(var_0, var_1) {
-  if (isdefined(var_1._id_12AFA)) {
-  var_2 = anglestoforward(self getplayerangles());
-  var_3 = vectornormalize(var_1.origin - var_0 gettagorigin("tag_turret"));
-  var_4 = vectordot(var_2, var_3);
+remoteuav_cantargetuav(var_00, var_01) {
+  if (isdefined(var_1.uavtype)) {
+  var_02 = anglestoforward(self getplayerangles());
+  var_03 = vectornormalize(var_1.origin - var_00 gettagorigin("tag_turret"));
+  var_04 = vectordot(var_02, var_03);
 
-  if (var_4 > 0.985)
+  if (var_04 > 0.985)
   return 1;
   }
 
   return 0;
 }
 
-_id_DF96(var_0) {
+remoteuav_fire(var_00) {
   self endon("disconnect");
-  var_0 endon("death");
+  var_00 endon("death");
   level endon("game_ended");
-  var_0 endon("end_remote");
+  var_00 endon("end_remote");
   wait 1;
   self notifyonplayercommand("remoteUAV_tag", "+attack");
   self notifyonplayercommand("remoteUAV_tag", "+attack_akimbo_accessible");
@@ -695,11 +695,11 @@ _id_DF96(var_0) {
   for (;;) {
   self waittill("remoteUAV_tag");
 
-  if (isdefined(self._id_AEFB)) {
+  if (isdefined(self.func_AEFB)) {
   self playlocalsound("recondrone_tag");
   scripts\mp\damagefeedback::updatedamagefeedback("");
-  thread _id_DFA1(self._id_AEFB);
-  thread _id_DFA8(var_0, 3);
+  thread remoteuav_markplayer(self.func_AEFB);
+  thread remoteuav_rumble(var_00, 3);
   wait 0.25;
   continue;
   }
@@ -708,161 +708,161 @@ _id_DF96(var_0) {
   }
 }
 
-_id_DFA8(var_0, var_1) {
+remoteuav_rumble(var_00, var_01) {
   self endon("disconnect");
-  var_0 endon("death");
+  var_00 endon("death");
   level endon("game_ended");
-  var_0 endon("end_remote");
-  var_0 notify("end_rumble");
-  var_0 endon("end_rumble");
+  var_00 endon("end_remote");
+  var_00 notify("end_rumble");
+  var_00 endon("end_rumble");
 
-  for (var_2 = 0; var_2 < var_1; var_2++) {
+  for (var_02 = 0; var_02 < var_01; var_2++) {
   self playrumbleonentity("damage_heavy");
   wait 0.05;
   }
 }
 
-_id_DFA1(var_0) {
+remoteuav_markplayer(var_00) {
   level endon("game_ended");
-  var_0._id_12AF4 = self;
+  var_0.func_12AF4 = self;
 
-  if (isplayer(var_0) && !var_0 scripts\mp\utility\game::isusingremote()) {
-  var_0 playlocalsound("player_hit_while_ads_hurt");
-  var_0 thread scripts\mp\flashgrenades::_id_20CA(2.0, 1.0);
-  var_0 thread scripts\mp\rank::scoreeventpopup("marked_by_remote_uav");
+  if (isplayer(var_00) && !var_00 scripts\mp\utility\game::isusingremote()) {
+  var_00 playlocalsound("player_hit_while_ads_hurt");
+  var_00 thread scripts\mp\flashgrenades::func_20CA(2.0, 1.0);
+  var_00 thread scripts\mp\rank::scoreeventpopup("marked_by_remote_uav");
   }
-  else if (isdefined(var_0._id_12AFA))
-  var_0._id_2B0C = var_0._id_0064;
+  else if (isdefined(var_0.uavtype))
+  var_0.func_2B0C = var_0.birthtime;
   else if (isdefined(var_0.owner) && isalive(var_0.owner))
   var_0.owner thread scripts\mp\rank::scoreeventpopup("turret_marked_by_remote_uav");
 
-  _id_DF91("tag");
+  remoteuav_dialog("tag");
 
   if (level.gametype != "dm") {
-  if (isplayer(var_0))
-  thread scripts\mp\utility\game::_id_83B4("kill");
+  if (isplayer(var_00))
+  thread scripts\mp\utility\game::giveunifiedpoints("kill");
   }
 
-  if (isplayer(var_0))
-  var_0 _meth_8320("specialty_radarblip", 1);
+  if (isplayer(var_00))
+  var_00 setperk("specialty_radarblip", 1);
   else
   {
-  if (isdefined(var_0._id_12AFA))
-  var_1 = "compassping_enemy_uav";
+  if (isdefined(var_0.uavtype))
+  var_01 = "compassping_enemy_uav";
   else
-  var_1 = "compassping_sentry_enemy";
+  var_01 = "compassping_sentry_enemy";
 
   if (level.teambased) {
-  var_2 = scripts\mp\objidpoolmanager::requestminimapid(1);
+  var_02 = scripts\mp\objidpoolmanager::requestminimapid(1);
 
-  if (var_2 != -1) {
-  scripts\mp\objidpoolmanager::minimap_objective_add(var_2, "invisible", (0, 0, 0));
-  scripts\mp\objidpoolmanager::minimap_objective_onentity(var_2, var_0);
-  scripts\mp\objidpoolmanager::minimap_objective_state(var_2, "active");
-  scripts\mp\objidpoolmanager::minimap_objective_team(var_2, self.team);
-  scripts\mp\objidpoolmanager::minimap_objective_icon(var_2, var_1);
+  if (var_02 != -1) {
+  scripts\mp\objidpoolmanager::minimap_objective_add(var_02, "invisible", (0, 0, 0));
+  scripts\mp\objidpoolmanager::minimap_objective_onentity(var_02, var_00);
+  scripts\mp\objidpoolmanager::minimap_objective_state(var_02, "active");
+  scripts\mp\objidpoolmanager::minimap_objective_team(var_02, self.team);
+  scripts\mp\objidpoolmanager::minimap_objective_icon(var_02, var_01);
   }
 
-  var_0._id_DFAF = var_2;
+  var_0.func_DFAF = var_02;
   } else {
-  var_2 = scripts\mp\objidpoolmanager::requestminimapid(1);
+  var_02 = scripts\mp\objidpoolmanager::requestminimapid(1);
 
-  if (var_2 != -1) {
-  scripts\mp\objidpoolmanager::minimap_objective_add(var_2, "invisible", (0, 0, 0));
-  scripts\mp\objidpoolmanager::minimap_objective_onentity(var_2, var_0);
-  scripts\mp\objidpoolmanager::minimap_objective_state(var_2, "active");
-  scripts\mp\objidpoolmanager::minimap_objective_team(var_2, level._id_C74B[self.team]);
-  scripts\mp\objidpoolmanager::minimap_objective_icon(var_2, var_1);
+  if (var_02 != -1) {
+  scripts\mp\objidpoolmanager::minimap_objective_add(var_02, "invisible", (0, 0, 0));
+  scripts\mp\objidpoolmanager::minimap_objective_onentity(var_02, var_00);
+  scripts\mp\objidpoolmanager::minimap_objective_state(var_02, "active");
+  scripts\mp\objidpoolmanager::minimap_objective_team(var_02, level.otherteam[self.team]);
+  scripts\mp\objidpoolmanager::minimap_objective_icon(var_02, var_01);
   }
 
-  var_0._id_DFB0 = var_2;
-  var_2 = scripts\mp\objidpoolmanager::requestminimapid(1);
+  var_0.func_DFB0 = var_02;
+  var_02 = scripts\mp\objidpoolmanager::requestminimapid(1);
 
-  if (var_2 != -1) {
-  scripts\mp\objidpoolmanager::minimap_objective_add(var_2, "invisible", (0, 0, 0));
-  scripts\mp\objidpoolmanager::minimap_objective_onentity(var_2, var_0);
-  scripts\mp\objidpoolmanager::minimap_objective_state(var_2, "active");
-  scripts\mp\objidpoolmanager::minimap_objective_team(var_2, self.team);
-  scripts\mp\objidpoolmanager::minimap_objective_icon(var_2, var_1);
+  if (var_02 != -1) {
+  scripts\mp\objidpoolmanager::minimap_objective_add(var_02, "invisible", (0, 0, 0));
+  scripts\mp\objidpoolmanager::minimap_objective_onentity(var_02, var_00);
+  scripts\mp\objidpoolmanager::minimap_objective_state(var_02, "active");
+  scripts\mp\objidpoolmanager::minimap_objective_team(var_02, self.team);
+  scripts\mp\objidpoolmanager::minimap_objective_icon(var_02, var_01);
   }
 
-  var_0._id_DFB1 = var_2;
+  var_0.func_DFB1 = var_02;
   }
   }
 
-  var_0 thread _id_DFAC(self._id_DF8A);
+  var_00 thread func_DFAC(self.remoteuav);
 }
 
-_id_DFA5(var_0) {
-  _id_DF91("assist");
+remoteuav_processtaggedassist(var_00) {
+  remoteuav_dialog("assist");
 
   if (level.gametype != "dm") {
-  self._id_113FF = 1;
+  self.func_113FF = 1;
 
-  if (isdefined(var_0))
-  thread scripts\mp\gamescore::_id_D98C(var_0);
+  if (isdefined(var_00))
+  thread scripts\mp\gamescore::processassist(var_00);
   else
-  thread scripts\mp\utility\game::_id_83B4("assist");
+  thread scripts\mp\utility\game::giveunifiedpoints("assist");
   }
 }
 
-_id_DFAC(var_0) {
+func_DFAC(var_00) {
   level endon("game_ended");
-  var_1 = scripts\engine\utility::_id_13734("death", "disconnect", "carried", "leaving");
+  var_01 = scripts\engine\utility::waittill_any_return("death", "disconnect", "carried", "leaving");
 
-  if (var_1 == "leaving" || !isdefined(self._id_12AFA))
-  self._id_12AF4 = undefined;
+  if (var_01 == "leaving" || !isdefined(self.uavtype))
+  self.func_12AF4 = undefined;
 
-  if (isdefined(var_0)) {
+  if (isdefined(var_00)) {
   if (isplayer(self))
-  var_2 = self.guid;
-  else if (isdefined(self._id_0064))
-  var_2 = self._id_0064;
+  var_02 = self.guid;
+  else if (isdefined(self.birthtime))
+  var_02 = self.birthtime;
   else
-  var_2 = self._id_2B0C;
+  var_02 = self.func_2B0C;
 
-  if (var_1 == "carried" || var_1 == "leaving") {
-  var_0._id_B372[var_2]["icon"] destroy();
-  var_0._id_B372[var_2]["icon"] = undefined;
+  if (var_01 == "carried" || var_01 == "leaving") {
+  var_0.markedplayers[var_02]["icon"] destroy();
+  var_0.markedplayers[var_02]["icon"] = undefined;
   }
 
-  if (isdefined(var_2) && isdefined(var_0._id_B372[var_2])) {
-  var_0._id_B372[var_2] = undefined;
-  var_0._id_B372 = scripts\engine\utility::_id_22BC(var_0._id_B372);
+  if (isdefined(var_02) && isdefined(var_0.markedplayers[var_02])) {
+  var_0.markedplayers[var_02] = undefined;
+  var_0.markedplayers = scripts\engine\utility::array_removeundefined(var_0.markedplayers);
   }
   }
 
   if (isplayer(self))
-  self _meth_83CC("specialty_radarblip", 1);
+  self unsetperk("specialty_radarblip", 1);
   else
   {
-  if (isdefined(self._id_DFAF))
-  scripts\mp\objidpoolmanager::returnminimapid(self._id_DFAF);
+  if (isdefined(self.func_DFAF))
+  scripts\mp\objidpoolmanager::returnminimapid(self.func_DFAF);
 
-  if (isdefined(self._id_DFB0))
-  scripts\mp\objidpoolmanager::returnminimapid(self._id_DFB0);
+  if (isdefined(self.func_DFB0))
+  scripts\mp\objidpoolmanager::returnminimapid(self.func_DFB0);
 
-  if (isdefined(self._id_DFB1))
-  scripts\mp\objidpoolmanager::returnminimapid(self._id_DFB1);
+  if (isdefined(self.func_DFB1))
+  scripts\mp\objidpoolmanager::returnminimapid(self.func_DFB1);
   }
 }
 
-_id_DF8F() {
-  foreach (var_1 in self._id_B372) {
+remoteuav_clearmarkedforowner() {
+  foreach (var_01 in self.markedplayers) {
   if (isdefined(var_1["icon"])) {
   var_1["icon"] destroy();
   var_1["icon"] = undefined;
   }
   }
 
-  self._id_B372 = undefined;
+  self.markedplayers = undefined;
 }
 
-_id_DFA3(var_0) {
+remoteuav_operationrumble(var_00) {
   self endon("disconnect");
-  var_0 endon("death");
+  var_00 endon("death");
   level endon("game_ended");
-  var_0 endon("end_remote");
+  var_00 endon("end_remote");
 
   for (;;) {
   self playrumbleonentity("damage_light");
@@ -870,244 +870,244 @@ _id_DFA3(var_0) {
   }
 }
 
-_id_DFAD() {
+func_DFAD() {
   self endon("death");
-  self._id_DCD0 = getent("remote_uav_range", "targetname");
+  self.rangetrigger = getent("remote_uav_range", "targetname");
 
-  if (!isdefined(self._id_DCD0)) {
-  var_0 = getent("airstrikeheight", "targetname");
-  self._id_B4A3 = var_0.origin[2];
-  self._id_B492 = 12800;
+  if (!isdefined(self.rangetrigger)) {
+  var_00 = getent("airstrikeheight", "targetname");
+  self.maxheight = var_0.origin[2];
+  self.maxdistance = 12800;
   }
 
-  self._id_3BB7 = spawn("script_model", level.mapcenter);
-  var_1 = self.origin;
-  self._id_DCCE = 0;
+  self.centerref = spawn("script_model", level.mapcenter);
+  var_01 = self.origin;
+  self.func_DCCE = 0;
 
   for (;;) {
-  if (!_id_DF9C()) {
-  var_2 = 0;
+  if (!remoteuav_in_range()) {
+  var_02 = 0;
 
-  while (!_id_DF9C()) {
-  self.owner _id_DF91("out_of_range");
+  while (!remoteuav_in_range()) {
+  self.owner remoteuav_dialog("out_of_range");
 
-  if (!self._id_DCCE) {
-  self._id_DCCE = 1;
-  thread _id_DFA6();
+  if (!self.func_DCCE) {
+  self.func_DCCE = 1;
+  thread remoteuav_rangecountdown();
   }
 
-  if (isdefined(self._id_8DBD)) {
-  var_3 = distance(self.origin, self._id_8DBD.origin);
-  var_2 = 1 - (var_3 - 150) / 150;
+  if (isdefined(self.heliinproximity)) {
+  var_03 = distance(self.origin, self.heliinproximity.origin);
+  var_02 = 1 - (var_03 - 150) / 150;
   } else {
-  var_3 = distance(self.origin, var_1);
-  var_2 = min(1, var_3 / 200);
+  var_03 = distance(self.origin, var_01);
+  var_02 = min(1, var_03 / 200);
   }
 
-  self.owner setrankedplayerdata("reconDroneState", "staticAlpha", var_2);
+  self.owner setrankedplayerdata("reconDroneState", "staticAlpha", var_02);
   wait 0.05;
   }
 
   self notify("in_range");
-  self._id_DCCE = 0;
-  thread _id_DFA9(var_2);
+  self.func_DCCE = 0;
+  thread remoteuav_staticfade(var_02);
   }
 
-  var_1 = self.origin;
+  var_01 = self.origin;
   wait 0.05;
   }
 }
 
-_id_DF9C() {
-  if (isdefined(self._id_DCD0)) {
-  if (!self istouching(self._id_DCD0) && !self._id_94D1)
+remoteuav_in_range() {
+  if (isdefined(self.rangetrigger)) {
+  if (!self istouching(self.rangetrigger) && !self.inheliproximity)
   return 1;
   }
-  else if (distance2d(self.origin, level.mapcenter) < self._id_B492 && self.origin[2] < self._id_B4A3 && !self._id_94D1)
+  else if (distance2d(self.origin, level.mapcenter) < self.maxdistance && self.origin[2] < self.maxheight && !self.inheliproximity)
   return 1;
 
   return 0;
 }
 
-_id_DFA9(var_0) {
+remoteuav_staticfade(var_00) {
   self endon("death");
 
-  while (_id_DF9C()) {
-  var_0 = var_0 - 0.05;
+  while (remoteuav_in_range()) {
+  var_00 = var_00 - 0.05;
 
-  if (var_0 < 0) {
+  if (var_00 < 0) {
   self.owner setrankedplayerdata("reconDroneState", "staticAlpha", 0);
   break;
   }
 
-  self.owner setrankedplayerdata("reconDroneState", "staticAlpha", var_0);
+  self.owner setrankedplayerdata("reconDroneState", "staticAlpha", var_00);
   wait 0.05;
   }
 }
 
-_id_DFA6() {
+remoteuav_rangecountdown() {
   self endon("death");
   self endon("in_range");
 
-  if (isdefined(self._id_8DBD))
-  var_0 = 3;
+  if (isdefined(self.heliinproximity))
+  var_00 = 3;
   else
-  var_0 = 6;
+  var_00 = 6;
 
-  scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(var_0);
+  scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(var_00);
   self notify("death");
 }
 
-_id_DF95() {
+remoteuav_explode_on_disconnect() {
   self endon("death");
   self.owner waittill("disconnect");
   self notify("death");
 }
 
-_id_DF93() {
+remoteuav_explode_on_changeteams() {
   self endon("death");
   self.owner scripts\engine\utility::waittill_any("joined_team", "joined_spectators");
   self notify("death");
 }
 
-_id_DF8D() {
+remoteuav_clear_marked_on_gameended() {
   self endon("death");
   level waittill("game_ended");
-  _id_DF8F();
+  remoteuav_clearmarkedforowner();
 }
 
-_id_DF9F() {
+remoteuav_leave_on_timeout() {
   self endon("death");
-  var_0 = 60.0;
-  scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(var_0);
-  thread _id_DF9E();
+  var_00 = 60.0;
+  scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(var_00);
+  thread remoteuav_leave();
 }
 
-_id_DF9E() {
+remoteuav_leave() {
   level endon("game_ended");
   self endon("death");
   self notify("leaving");
-  self.owner _id_DF92(self);
+  self.owner remoteuav_endride(self);
   self notify("death");
 }
 
-_id_DF94() {
+remoteuav_explode_on_death() {
   level endon("game_ended");
   self waittill("death");
   self playsound("recondrone_destroyed");
-  playfx(level._id_DF98["explode"], self.origin);
-  _id_DF8C();
+  playfx(level.remoteuav_fx["explode"], self.origin);
+  remoteuav_cleanup();
 }
 
-_id_DF8C() {
-  if (self._id_D3D3 == 1 && isdefined(self.owner))
-  self.owner _id_DF92(self);
+remoteuav_cleanup() {
+  if (self.playerlinked == 1 && isdefined(self.owner))
+  self.owner remoteuav_endride(self);
 
-  if (isdefined(self._id_EC9C))
-  self._id_EC9C delete();
+  if (isdefined(self.scrambler))
+  self.scrambler delete();
 
-  if (isdefined(self._id_3BB7))
-  self._id_3BB7 delete();
+  if (isdefined(self.centerref))
+  self.centerref delete();
 
-  _id_DF8F();
-  stopfxontag(level._id_DF98["smoke"], self, "tag_origin");
-  level._id_DF74[self.team] = undefined;
-  scripts\mp\utility\game::_id_4FC1();
+  remoteuav_clearmarkedforowner();
+  stopfxontag(level.remoteuav_fx["smoke"], self, "tag_origin");
+  level.remote_uav[self.team] = undefined;
+  scripts\mp\utility\game::decrementfauxvehiclecount();
   self delete();
 }
 
-_id_DFA0() {
-  playfxontag(level._id_3F19["light"]["belly"], self, "tag_light_nose");
+remoteuav_light_fx() {
+  playfxontag(level.chopper_fx["light"]["belly"], self, "tag_light_nose");
   wait 0.05;
-  playfxontag(level._id_3F19["light"]["tail"], self, "tag_light_tail1");
+  playfxontag(level.chopper_fx["light"]["tail"], self, "tag_light_tail1");
 }
 
-_id_DF91(var_0) {
-  if (var_0 == "tag")
-  var_1 = 1000;
+remoteuav_dialog(var_00) {
+  if (var_00 == "tag")
+  var_01 = 1000;
   else
-  var_1 = 5000;
+  var_01 = 5000;
 
-  if (gettime() - level._id_DF9D < var_1)
+  if (gettime() - level.remoteuav_lastdialogtime < var_01)
   return;
 
-  level._id_DF9D = gettime();
-  var_2 = randomint(level._id_DF91[var_0].size);
-  var_3 = level._id_DF91[var_0][var_2];
-  var_4 = scripts\mp\teams::_id_81BC(self.team) + var_3;
-  self playlocalsound(var_4);
+  level.remoteuav_lastdialogtime = gettime();
+  var_02 = randomint(level.remoteuav_dialog[var_00].size);
+  var_03 = level.remoteuav_dialog[var_00][var_02];
+  var_04 = scripts\mp\teams::getteamvoiceprefix(self.team) + var_03;
+  self playlocalsound(var_04);
 }
 
-_id_DF9B() {
+remoteuav_handleincomingstinger() {
   level endon("game_ended");
   self endon("death");
   self endon("end_remote");
 
   for (;;) {
-  level waittill("stinger_fired", var_0, var_1, var_2);
+  level waittill("stinger_fired", var_00, var_01, var_02);
 
-  if (!isdefined(var_1) || !isdefined(var_2) || var_2 != self)
+  if (!isdefined(var_01) || !isdefined(var_02) || var_02 != self)
   continue;
 
   self.owner playlocalsound("javelin_clu_lock");
   self.owner setrankedplayerdata("reconDroneState", "incomingMissile", 1);
-  self._id_8C01 = 1;
-  self._id_93DB[self._id_93DB.size] = var_1;
-  var_1.owner = var_0;
-  var_1 thread _id_13B5F(var_2);
+  self.hasincoming = 1;
+  self.incomingmissiles[self.incomingmissiles.size] = var_01;
+  var_1.owner = var_00;
+  var_01 thread watchstingerproximity(var_02);
   }
 }
 
-_id_DF9A() {
+remoteuav_handleincomingsam() {
   level endon("game_ended");
   self endon("death");
   self endon("end_remote");
 
   for (;;) {
-  level waittill("sam_fired", var_0, var_1, var_2);
+  level waittill("sam_fired", var_00, var_01, var_02);
 
-  if (!isdefined(var_2) || var_2 != self)
+  if (!isdefined(var_02) || var_02 != self)
   continue;
 
-  var_3 = 0;
+  var_03 = 0;
 
-  foreach (var_5 in var_1) {
-  if (isdefined(var_5)) {
-  self._id_93DB[self._id_93DB.size] = var_5;
-  var_5.owner = var_0;
+  foreach (var_05 in var_01) {
+  if (isdefined(var_05)) {
+  self.incomingmissiles[self.incomingmissiles.size] = var_05;
+  var_5.owner = var_00;
   var_3++;
   }
   }
 
-  if (var_3) {
+  if (var_03) {
   self.owner playlocalsound("javelin_clu_lock");
   self.owner setrankedplayerdata("reconDroneState", "incomingMissile", 1);
-  self._id_8C01 = 1;
-  level thread _id_13B30(var_2, var_1);
+  self.hasincoming = 1;
+  level thread watchsamproximity(var_02, var_01);
   }
   }
 }
 
-_id_13B5F(var_0) {
+watchstingerproximity(var_00) {
   level endon("game_ended");
   self endon("death");
-  self _meth_8206(var_0);
-  var_1 = vectornormalize(var_0.origin - self.origin);
+  self missile_settargetent(var_00);
+  var_01 = vectornormalize(var_0.origin - self.origin);
 
-  while (isdefined(var_0)) {
-  var_2 = var_0 getpointinbounds(0, 0, 0);
-  var_3 = distance(self.origin, var_2);
+  while (isdefined(var_00)) {
+  var_02 = var_00 getpointinbounds(0, 0, 0);
+  var_03 = distance(self.origin, var_02);
 
-  if (var_0._id_C22B > 0 && var_3 < 4000) {
-  var_4 = var_0 _id_5231();
-  self _meth_8206(var_4);
+  if (var_0.numflares > 0 && var_03 < 4000) {
+  var_04 = var_00 deployflares();
+  self missile_settargetent(var_04);
   return;
   } else {
-  var_5 = vectornormalize(var_0.origin - self.origin);
+  var_05 = vectornormalize(var_0.origin - self.origin);
 
-  if (vectordot(var_5, var_1) < 0) {
+  if (vectordot(var_05, var_01) < 0) {
   self playsound("exp_stinger_armor_destroy");
-  playfx(level._id_DF98["missile_explode"], self.origin);
+  playfx(level.remoteuav_fx["missile_explode"], self.origin);
 
   if (isdefined(self.owner))
   radiusdamage(self.origin, 400, 1000, 1000, self.owner, "MOD_EXPLOSIVE", "stinger_mp");
@@ -1119,43 +1119,43 @@ _id_13B5F(var_0) {
   self delete();
   }
   else
-  var_1 = var_5;
+  var_01 = var_05;
   }
 
   wait 0.05;
   }
 }
 
-_id_13B30(var_0, var_1) {
+watchsamproximity(var_00, var_01) {
   level endon("game_ended");
-  var_0 endon("death");
+  var_00 endon("death");
 
-  foreach (var_3 in var_1) {
-  if (isdefined(var_3)) {
-  var_3 _meth_8206(var_0);
-  var_3._id_AA41 = vectornormalize(var_0.origin - var_3.origin);
+  foreach (var_03 in var_01) {
+  if (isdefined(var_03)) {
+  var_03 missile_settargetent(var_00);
+  var_3.lastvectotarget = vectornormalize(var_0.origin - var_3.origin);
   }
   }
 
-  while (var_1.size && isdefined(var_0)) {
-  var_5 = var_0 getpointinbounds(0, 0, 0);
+  while (var_1.size && isdefined(var_00)) {
+  var_05 = var_00 getpointinbounds(0, 0, 0);
 
-  foreach (var_3 in var_1) {
-  if (isdefined(var_3)) {
-  if (isdefined(self._id_B37B)) {
+  foreach (var_03 in var_01) {
+  if (isdefined(var_03)) {
+  if (isdefined(self.markfordetete)) {
   self delete();
   continue;
   }
 
-  if (var_0._id_C22B > 0) {
-  var_7 = distance(var_3.origin, var_5);
+  if (var_0.numflares > 0) {
+  var_07 = distance(var_3.origin, var_05);
 
-  if (var_7 < 4000) {
-  var_8 = var_0 _id_5231();
+  if (var_07 < 4000) {
+  var_08 = var_00 deployflares();
 
-  foreach (var_10 in var_1) {
+  foreach (var_10 in var_01) {
   if (isdefined(var_10))
-  var_10 _meth_8206(var_8);
+  var_10 missile_settargetent(var_08);
   }
 
   return;
@@ -1166,43 +1166,43 @@ _id_13B30(var_0, var_1) {
 
   var_12 = vectornormalize(var_0.origin - var_3.origin);
 
-  if (vectordot(var_12, var_3._id_AA41) < 0) {
-  var_3 playsound("exp_stinger_armor_destroy");
-  playfx(level._id_DF98["missile_explode"], var_3.origin);
+  if (vectordot(var_12, var_3.lastvectotarget) < 0) {
+  var_03 playsound("exp_stinger_armor_destroy");
+  playfx(level.remoteuav_fx["missile_explode"], var_3.origin);
 
   if (isdefined(var_3.owner))
   radiusdamage(var_3.origin, 400, 1000, 1000, var_3.owner, "MOD_EXPLOSIVE", "stinger_mp");
   else
   radiusdamage(var_3.origin, 400, 1000, 1000, undefined, "MOD_EXPLOSIVE", "stinger_mp");
 
-  var_3 hide();
-  var_3._id_B37B = 1;
+  var_03 hide();
+  var_3.markfordetete = 1;
   }
   else
-  var_3._id_AA41 = var_12;
+  var_3.lastvectotarget = var_12;
   }
   }
 
-  var_1 = scripts\engine\utility::_id_22BC(var_1);
+  var_01 = scripts\engine\utility::array_removeundefined(var_01);
   wait 0.05;
   }
 }
 
-_id_5231() {
-  self._id_C22B--;
-  self.owner thread _id_DFA8(self, 6);
+deployflares() {
+  self.numflares--;
+  self.owner thread remoteuav_rumble(self, 6);
   self playsound("WEAP_SHOTGUNATTACH_FIRE_NPC");
-  thread _id_D47A();
-  var_0 = self.origin + (0, 0, -100);
-  var_1 = spawn("script_origin", var_0);
+  thread playflarefx();
+  var_00 = self.origin + (0, 0, -100);
+  var_01 = spawn("script_origin", var_00);
   var_1.angles = self.angles;
-  var_1 movegravity((0, 0, -1), 5.0);
-  var_1 thread _id_51A6(5.0);
-  return var_1;
+  var_01 movegravity((0, 0, -1), 5.0);
+  var_01 thread deleteaftertime(5.0);
+  return var_01;
 }
 
-_id_D47A() {
-  for (var_0 = 0; var_0 < 5; var_0++) {
+playflarefx() {
+  for (var_00 = 0; var_00 < 5; var_0++) {
   if (!isdefined(self))
   return;
 
@@ -1211,94 +1211,94 @@ _id_D47A() {
   }
 }
 
-_id_51A6(var_0) {
-  wait(var_0);
+deleteaftertime(var_00) {
+  wait(var_00);
   self delete();
 }
 
-_id_DF8E() {
+remoteuav_clearincomingwarning() {
   level endon("game_ended");
   self endon("death");
   self endon("end_remote");
 
   for (;;) {
-  var_0 = 0;
+  var_00 = 0;
 
-  for (var_1 = 0; var_1 < self._id_93DB.size; var_1++) {
-  if (isdefined(self._id_93DB[var_1]) && _id_B80A(self._id_93DB[var_1], self))
+  for (var_01 = 0; var_01 < self.incomingmissiles.size; var_1++) {
+  if (isdefined(self.incomingmissiles[var_01]) && missile_isincoming(self.incomingmissiles[var_01], self))
   var_0++;
   }
 
-  if (self._id_8C01 && !var_0) {
-  self._id_8C01 = 0;
+  if (self.hasincoming && !var_00) {
+  self.hasincoming = 0;
   self.owner setrankedplayerdata("reconDroneState", "incomingMissile", 0);
   }
 
-  self._id_93DB = scripts\engine\utility::_id_22BC(self._id_93DB);
+  self.incomingmissiles = scripts\engine\utility::array_removeundefined(self.incomingmissiles);
   wait 0.05;
   }
 }
 
-_id_B80A(var_0, var_1) {
-  var_2 = vectornormalize(var_1.origin - var_0.origin);
-  var_3 = anglestoforward(var_0.angles);
-  return vectordot(var_2, var_3) > 0;
+missile_isincoming(var_00, var_01) {
+  var_02 = vectornormalize(var_1.origin - var_0.origin);
+  var_03 = anglestoforward(var_0.angles);
+  return vectordot(var_02, var_03) > 0;
 }
 
-_id_DFAE() {
+func_DFAE() {
   level endon("game_ended");
   self endon("death");
   self endon("end_remote");
 
   for (;;) {
-  var_0 = 0;
+  var_00 = 0;
 
-  foreach (var_2 in level._id_8DD3) {
+  foreach (var_02 in level.helis) {
   if (distance(var_2.origin, self.origin) < 300) {
-  var_0 = 1;
-  self._id_8DBD = var_2;
+  var_00 = 1;
+  self.heliinproximity = var_02;
   }
   }
 
-  foreach (var_5 in level._id_AD8B) {
-  if (var_5 != self && (!isdefined(var_5.helitype) || var_5.helitype != "remote_uav") && distance(var_5.origin, self.origin) < 300) {
-  var_0 = 1;
-  self._id_8DBD = var_5;
+  foreach (var_05 in level.littlebirds) {
+  if (var_05 != self && (!isdefined(var_5.helitype) || var_5.helitype != "remote_uav") && distance(var_5.origin, self.origin) < 300) {
+  var_00 = 1;
+  self.heliinproximity = var_05;
   }
   }
 
-  if (!self._id_94D1 && var_0)
-  self._id_94D1 = 1;
-  else if (self._id_94D1 && !var_0) {
-  self._id_94D1 = 0;
-  self._id_8DBD = undefined;
+  if (!self.inheliproximity && var_00)
+  self.inheliproximity = 1;
+  else if (self.inheliproximity && !var_00) {
+  self.inheliproximity = 0;
+  self.heliinproximity = undefined;
   }
 
   wait 0.05;
   }
 }
 
-_id_DF99() {
+remoteuav_handledamage() {
   self endon("end_remote");
-  scripts\mp\damage::monitordamage(self.maxhealth, "remote_uav", ::_id_898F, ::_id_B938, 1);
+  scripts\mp\damage::monitordamage(self.maxhealth, "remote_uav", ::handledeathdamage, ::modifydamage, 1);
 }
 
-_id_B938(var_0, var_1, var_2, var_3, var_4) {
-  var_5 = var_3;
-  var_5 = scripts\mp\damage::_id_8999(var_1, var_2, var_5);
-  var_5 = scripts\mp\damage::_id_89C6(var_1, var_2, var_5);
-  var_5 = scripts\mp\damage::_id_8975(var_1, var_2, var_5);
-  playfxontagforclients(level._id_DF98["hit"], self, "tag_origin", self.owner);
+modifydamage(var_00, var_01, var_02, var_03, var_04) {
+  var_05 = var_03;
+  var_05 = scripts\mp\damage::handleempdamage(var_01, var_02, var_05);
+  var_05 = scripts\mp\damage::handlemissiledamage(var_01, var_02, var_05);
+  var_05 = scripts\mp\damage::handleapdamage(var_01, var_02, var_05);
+  playfxontagforclients(level.remoteuav_fx["hit"], self, "tag_origin", self.owner);
   self playsound("recondrone_damaged");
 
-  if (self._id_1037E == 0 && self._id_00E1 >= self.maxhealth / 2) {
-  self._id_1037E = 1;
-  playfxontag(level._id_DF98["smoke"], self, "tag_origin");
+  if (self.func_1037E == 0 && self.damagetaken >= self.maxhealth / 2) {
+  self.func_1037E = 1;
+  playfxontag(level.remoteuav_fx["smoke"], self, "tag_origin");
   }
 
-  return var_5;
+  return var_05;
 }
 
-_id_898F(var_0, var_1, var_2, var_3) {
-  scripts\mp\damage::onkillstreakkilled("remote_uav", var_0, var_1, var_2, var_3, "destroyed_remote_uav", undefined, "callout_destroyed_remote_uav");
+handledeathdamage(var_00, var_01, var_02, var_03) {
+  scripts\mp\damage::onkillstreakkilled("remote_uav", var_00, var_01, var_02, var_03, "destroyed_remote_uav", undefined, "callout_destroyed_remote_uav");
 }

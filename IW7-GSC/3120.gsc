@@ -184,10 +184,10 @@ func_B60E(param_00) {
 func_D395() {
 	wait(0.1);
 	var_00 = level.player.origin + anglestoforward(level.player.angles) * -100;
-	function_01A2(var_00,10,2,1,0.4,0.2,0.2,700,0.2,1,1);
+	screenshake(var_00,10,2,1,0.4,0.2,0.2,700,0.2,1,1);
 	wait(0.5);
 	var_00 = level.player.origin + anglestoforward(level.player.angles) * 100;
-	function_01A2(var_00,10,2,1,0.6,0.3,0.3,700,0.2,1,1);
+	screenshake(var_00,10,2,1,0.6,0.3,0.3,700,0.2,1,1);
 }
 
 func_B61E(param_00,param_01,param_02,param_03) {
@@ -269,7 +269,7 @@ func_B61E(param_00,param_01,param_02,param_03) {
 
 func_7BCF() {
 	var_00 = [];
-	var_01 = function_0072("allies");
+	var_01 = getaiarray("allies");
 	var_02 = ["eth","slt","omr"];
 	foreach(var_04 in var_01) {
 		foreach(var_06 in var_02) {
@@ -351,7 +351,7 @@ func_B062() {
 	level.player endon("bt_stop_loopscreenshake");
 	for(;;) {
 		var_00 = level.player.origin + anglestoforward(level.player.angles) * 100;
-		function_01A2(var_00,10,15,10,1,0.5,0.5,1000,3,1,1);
+		screenshake(var_00,10,15,10,1,0.5,0.5,1000,3,1,1);
 		wait(1);
 	}
 }
@@ -505,7 +505,7 @@ func_B617(param_00) {
 		case "player_kill":
 			level.player notify("bt_stop_meleegrab");
 			func_E128();
-			function_01A7(10,0.1);
+			setblur(10,0.1);
 			level.player _meth_80A1();
 			level.player _meth_81D0();
 			break;

@@ -348,7 +348,7 @@ func_100B7() {
 
 func_FFE0(param_00,param_01,param_02,param_03) {
 	if(isdefined(self.var_E0) && self.var_E0 && !isdefined(self.var_55BF)) {
-		if(isdefined(self.sethalfresparticles) && isdefined(self.sethalfresparticles.unittype) && self.sethalfresparticles.unittype == "c8" && isdefined(self.var_E2) && function_02BE(self.var_E2)) {
+		if(isdefined(self.sethalfresparticles) && isdefined(self.sethalfresparticles.unittype) && self.sethalfresparticles.unittype == "c8" && isdefined(self.var_E2) && weaponisbeam(self.var_E2)) {
 			return 1;
 		}
 	}
@@ -668,7 +668,7 @@ func_4109(param_00,param_01,param_02) {
 }
 
 func_1390C() {
-	if(function_0107(self.var_DE)) {
+	if(isexplosivedamagemod(self.var_DE)) {
 		return 1;
 	}
 

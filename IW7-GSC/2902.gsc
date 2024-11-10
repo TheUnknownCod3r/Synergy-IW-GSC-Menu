@@ -3,179 +3,179 @@
  * Script: scripts\2902.gsc
 ***************************************/
 
-_id_BE57(var_0, var_1, var_2) {
+func_BE57(var_00, var_01, var_02) {
   setdvarifuninitialized("narrative_debug", 0);
 
   if (getdvarint("narrative_debug") == 1) {
   if (!isdefined(self)) {}
 
-  if (!isdefined(var_2))
-  var_2 = (0, 0, 0);
+  if (!isdefined(var_02))
+  var_02 = (0, 0, 0);
 
   self endon("death");
   self endon("narrative_debug_stop");
 
-  for (var_3 = 0; var_3 < var_1; var_3++)
+  for (var_03 = 0; var_03 < var_01; var_3++)
   scripts\engine\utility::waitframe();
   }
 }
 
-_id_BE56(var_0, var_1, var_2) {
+func_BE56(var_00, var_01, var_02) {
   setdvarifuninitialized("narrative_debug", 0);
 
   if (getdvarint("narrative_debug") == 1) {
   if (!isdefined(self.origin))
   return;
   else
-  var_3 = self.origin;
+  var_03 = self.origin;
 
-  if (!isdefined(var_0))
-  var_0 = 6;
+  if (!isdefined(var_00))
+  var_00 = 6;
 
-  if (!isdefined(var_1))
-  var_1 = (1, 1, 1);
+  if (!isdefined(var_01))
+  var_01 = (1, 1, 1);
 
-  if (!isdefined(var_2))
-  var_2 = 400;
+  if (!isdefined(var_02))
+  var_02 = 400;
   }
 }
 
-_id_BE55(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
+func_BE55(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07) {
   setdvarifuninitialized("narrative_debug", 0);
 
   if (getdvarint("narrative_debug") == 1) {
-  if (!isdefined(var_2))
-  var_2 = (1, 1, 1);
+  if (!isdefined(var_02))
+  var_02 = (1, 1, 1);
 
-  if (!isdefined(var_3))
-  var_3 = 1;
+  if (!isdefined(var_03))
+  var_03 = 1;
 
-  if (!isdefined(var_4))
-  var_4 = 0;
+  if (!isdefined(var_04))
+  var_04 = 0;
 
-  if (!isdefined(var_5))
-  var_5 = 200;
+  if (!isdefined(var_05))
+  var_05 = 200;
 
-  if (isdefined(var_6)) {
-  if (isdefined(var_7)) {
-  var_8 = 40;
-  var_1 = self.origin + anglestoforward(self.angles) * var_8;
+  if (isdefined(var_06)) {
+  if (isdefined(var_07)) {
+  var_08 = 40;
+  var_01 = self.origin + anglestoforward(self.angles) * var_08;
   }
   else
-  var_8 = distance2d(var_0, var_1);
+  var_08 = distance2d(var_00, var_01);
 
-  var_9 = var_8 * 0.2;
-  var_10 = var_8 * 0.5;
-  var_11 = var_8 * 0.175;
-  var_12 = var_0 - var_1;
-  var_13 = var_1 + anglestoforward(vectortoangles(var_12)) * var_9;
-  var_14 = var_1 + anglestoforward(vectortoangles(var_12)) * var_10;
+  var_09 = var_08 * 0.2;
+  var_10 = var_08 * 0.5;
+  var_11 = var_08 * 0.175;
+  var_12 = var_00 - var_01;
+  var_13 = var_01 + anglestoforward(vectortoangles(var_12)) * var_09;
+  var_14 = var_01 + anglestoforward(vectortoangles(var_12)) * var_10;
   } else {}
   }
 }
 
-_id_48A9() {
-  if (isdefined(self._id_0334) && isdefined(getent(self._id_0334, "targetname"))) {
-  var_0 = getent(self._id_0334, "targetname");
+func_48A9() {
+  if (isdefined(self.target) && isdefined(getent(self.target, "targetname"))) {
+  var_00 = getent(self.target, "targetname");
 
-  if (isdefined(var_0._id_EE79) && var_0._id_EE79 == "big_collision") {
+  if (isdefined(var_0.script_parameters) && var_0.script_parameters == "big_collision") {
   var_0.origin = self.origin;
   var_0.angles = self.angles;
-  var_0 linkto(self);
-  self._id_2AC1 = var_0;
+  var_00 linkto(self);
+  self.func_2AC1 = var_00;
   }
   }
 }
 
-_id_DFCC() {
-  if (isdefined(self._id_2AC1))
-  self._id_2AC1 delete();
+func_DFCC() {
+  if (isdefined(self.func_2AC1))
+  self.func_2AC1 delete();
 }
 
-_id_196B(var_0, var_1, var_2, var_3) {
+func_196B(var_00, var_01, var_02, var_03) {
   self endon("death");
-  var_2 = squared(var_2);
-  var_1 = _id_0EFB::_id_7D7A(var_1);
-  var_3 = _id_0EFB::_id_7D7A(var_3).origin;
-  var_4 = distance2dsquared(self.origin, var_3);
+  var_02 = squared(var_02);
+  var_01 = func_0EFB::func_7D7A(var_01);
+  var_03 = func_0EFB::func_7D7A(var_03).origin;
+  var_04 = distance2dsquared(self.origin, var_03);
 
-  while (var_4 > var_2) {
-  var_4 = distance2dsquared(self.origin, var_3);
+  while (var_04 > var_02) {
+  var_04 = distance2dsquared(self.origin, var_03);
   scripts\engine\utility::waitframe();
   }
 
-  self thread [[var_0]](var_1);
+  self thread [[var_00]](var_01);
 }
 
-_id_194A(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
+func_194A(var_00, var_01, var_02, var_03, var_04, var_05, var_06) {
   self endon("death");
 
-  if (isdefined(var_6) && scripts\engine\utility::_id_6E25(var_6))
+  if (isdefined(var_06) && scripts\engine\utility::flag(var_06))
   return;
 
-  if (!isdefined(var_3))
-  var_3 = 0;
+  if (!isdefined(var_03))
+  var_03 = 0;
 
-  if (!isdefined(var_4))
-  var_4 = 0.7;
+  if (!isdefined(var_04))
+  var_04 = 0.7;
 
-  thread _id_1949(var_0);
+  thread func_1949(var_00);
 
-  if (isdefined(var_1)) {
-  wait(var_3);
-  var_2 = _id_0EFB::_id_7D7A(var_2);
+  if (isdefined(var_01)) {
+  wait(var_03);
+  var_02 = func_0EFB::func_7D7A(var_02);
 
-  if (isdefined(var_5)) {
-  self thread [[var_1]](var_2, var_5);
-  scripts\engine\utility::delaythread(var_5, _id_0B91::_id_77B9, 0.7);
+  if (isdefined(var_05)) {
+  self thread [[var_01]](var_02, var_05);
+  scripts\engine\utility::delaythread(var_05, scripts/sp/utility::func_77B9, 0.7);
   }
   else
-  self thread [[var_1]](var_2);
+  self thread [[var_01]](var_02);
   }
 
   self waittill("gesture_dialog_finished");
-  _id_0B91::_id_77B9(var_4);
+  scripts/sp/utility::func_77B9(var_04);
 }
 
-_id_1961(var_0, var_1, var_2, var_3) {
+func_1961(var_00, var_01, var_02, var_03) {
   self endon("death");
 
-  if (!isdefined(var_2))
-  var_2 = 0;
+  if (!isdefined(var_02))
+  var_02 = 0;
 
-  thread _id_1949(var_0);
-  _id_0C4C::_id_1960(var_1);
+  thread func_1949(var_00);
+  func_0C4C::func_1960(var_01);
   self waittill("gesture_dialog_finished");
 }
 
-_id_1949(var_0) {
+func_1949(var_00) {
   self endon("death");
-  _id_0B91::_id_10347(var_0);
+  scripts/sp/utility::func_10347(var_00);
   self notify("gesture_dialog_finished");
 }
 
-_id_195C(var_0, var_1, var_2, var_3, var_4) {
+func_195C(var_00, var_01, var_02, var_03, var_04) {
   self endon("death");
 
-  if (!isdefined(var_1))
-  var_1 = 4.0;
+  if (!isdefined(var_01))
+  var_01 = 4.0;
 
-  if (!isdefined(var_4))
-  var_4 = 1.0;
+  if (!isdefined(var_04))
+  var_04 = 1.0;
 
-  if (!isdefined(var_2))
-  var_2 = 0.25;
+  if (!isdefined(var_02))
+  var_02 = 0.25;
 
-  if (!isdefined(var_3))
-  var_3 = 0.35;
+  if (!isdefined(var_03))
+  var_03 = 0.35;
 
-  var_0 = _id_0EFB::_id_7D7A(var_0);
-  thread _id_0C4C::_id_1955(var_0, var_1, var_2);
-  wait(var_4);
-  _id_0C4C::_id_1964(var_3);
+  var_00 = func_0EFB::func_7D7A(var_00);
+  thread func_0C4C::func_1955(var_00, var_01, var_02);
+  wait(var_04);
+  func_0C4C::func_1964(var_03);
 }
 
-_id_10348(var_0, var_1) {
-  if (!scripts\engine\utility::_id_6E25(var_1))
-  _id_0B91::_id_10347(var_0);
+func_10348(var_00, var_01) {
+  if (!scripts\engine\utility::flag(var_01))
+  scripts/sp/utility::func_10347(var_00);
 }

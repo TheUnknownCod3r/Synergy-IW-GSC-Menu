@@ -21,7 +21,7 @@ func_959B() {
 
 func_48C4(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08,param_09,param_0A,param_0B,param_0C,param_0D,param_0E) {
 	var_0F = self;
-	if(function_02A4(var_0F) || var_0F.classname == "script_origin" || isdefined(param_01)) {
+	if(isstruct(var_0F) || var_0F.classname == "script_origin" || isdefined(param_01)) {
 		var_0F = spawn("script_origin",self.origin);
 		self.var_4C1F = var_0F;
 		thread func_8FF7();
@@ -42,14 +42,14 @@ func_48C4(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_0
 		}
 		else if(isdefined(self.angles)) {
 			var_0F.origin = var_0F.origin + rotatevector(param_01,self.angles);
-			if(function_02A6(self)) {
+			if(isent(self)) {
 				var_0F linkto(self);
 			}
 		}
 		else
 		{
 			var_0F.origin = var_0F.origin + param_01;
-			if(function_02A6(self)) {
+			if(isent(self)) {
 				var_0F linkto(self);
 			}
 		}
@@ -166,7 +166,7 @@ func_DFE3() {
 		var_00 scripts\engine\utility::delaycall(0.5,::delete);
 	}
 
-	if(isdefined(var_00) && !function_02A4(var_00)) {
+	if(isdefined(var_00) && !isstruct(var_00)) {
 		var_00 makeunusable();
 	}
 
@@ -200,7 +200,7 @@ func_48C6(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_0
 		param_01 = (0,0,0);
 	}
 
-	if(function_02A6(self)) {
+	if(isent(self)) {
 		self makeunusable();
 	}
 
@@ -219,7 +219,7 @@ func_48C6(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_0
 			var_08.origin = var_08.origin + param_01;
 		}
 	}
-	else if(function_02A6(self)) {
+	else if(isent(self)) {
 		var_08 linkto(self);
 	}
 
@@ -459,7 +459,7 @@ func_10426(param_00,param_01) {
 		var_04.var_369 = 0;
 		var_04.var_9035 = 0;
 		var_05 = level.player;
-		if(isdefined(var_04.var_13084.classname) && function_02A6(var_04.var_13084)) {
+		if(isdefined(var_04.var_13084.classname) && isent(var_04.var_13084)) {
 			var_05 = [level.player,var_04.var_13084];
 		}
 
@@ -644,21 +644,21 @@ func_C360() {
 }
 
 func_100F1() {
-	if(function_0209(self)) {
+	if(target_istarget(self)) {
 		return;
 	}
 
-	function_020B(self);
-	function_0214(self,"alien_dpad_none");
-	function_0212(self,self.var_C362);
+	target_set(self);
+	target_setshader(self,"alien_dpad_none");
+	target_setoffscreenshader(self,self.var_C362);
 }
 
 func_8E9B() {
-	if(!function_0209(self)) {
+	if(!target_istarget(self)) {
 		return;
 	}
 
-	function_020A(self);
+	target_remove(self);
 }
 
 func_408B() {

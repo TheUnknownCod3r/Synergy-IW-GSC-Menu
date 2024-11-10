@@ -381,7 +381,7 @@ _meth_8468() {
 		self.var_EB6E = undefined;
 	}
 
-	if(function_02A7(var_00)) {
+	if(isnode(var_00)) {
 		self.var_10E6D.var_A8C3 = undefined;
 		func_10EE4(0);
 		return;
@@ -1094,10 +1094,10 @@ func_F357(param_00) {
 		level.var_10E6D.var_117EA = 0.4;
 		level.var_10E6D.var_DAB2 = 0;
 		level.var_10E6D.var_DAB3 = 0;
-		function_01C5("ai_threatSightFacingScale",0.25);
-		function_01C5("ai_threatSightFacingScaleDot",cos(90));
-		function_01C5("ai_threatSightDisplaySpikePoint",0.025);
-		function_01C5("ai_threatSightDisplaySpikeValue",0.25);
+		setsaveddvar("ai_threatSightFacingScale",0.25);
+		setsaveddvar("ai_threatSightFacingScaleDot",cos(90));
+		setsaveddvar("ai_threatSightDisplaySpikePoint",0.025);
+		setsaveddvar("ai_threatSightDisplaySpikeValue",0.25);
 	}
 	else
 	{
@@ -1106,13 +1106,13 @@ func_F357(param_00) {
 		level.var_10E6D.var_117EA = undefined;
 		level.var_10E6D.var_DAB2 = 50;
 		level.var_10E6D.var_DAB3 = 100;
-		function_01C5("ai_threatSightFacingScale",0.5);
-		function_01C5("ai_threatSightFacingScaleDot",cos(180));
-		function_01C5("ai_threatSightDisplaySpikePoint",0.01);
-		function_01C5("ai_threatSightDisplaySpikeValue",0.1);
+		setsaveddvar("ai_threatSightFacingScale",0.5);
+		setsaveddvar("ai_threatSightFacingScaleDot",cos(180));
+		setsaveddvar("ai_threatSightDisplaySpikePoint",0.01);
+		setsaveddvar("ai_threatSightDisplaySpikeValue",0.1);
 	}
 
-	var_01 = function_0072();
+	var_01 = getaiarray();
 	foreach(var_03 in var_01) {
 		if(!isalive(var_03)) {
 			continue;
@@ -1153,7 +1153,7 @@ func_10E87() {
 
 func_558C() {
 	scripts\engine\utility::flag_clear("stealth_enabled");
-	var_00 = function_0075("all","all");
+	var_00 = getaiunittypearray("all","all");
 	foreach(var_02 in var_00) {
 		var_02 func_623D(0);
 	}
@@ -1170,7 +1170,7 @@ func_558C() {
 
 func_623F() {
 	scripts\engine\utility::flag_set("stealth_enabled");
-	var_00 = function_0075("all","all");
+	var_00 = getaiunittypearray("all","all");
 	foreach(var_02 in var_00) {
 		var_02 func_623D(1);
 	}
@@ -1265,7 +1265,7 @@ func_CD58(param_00,param_01) {
 	}
 	else
 	{
-		var_07 = function_00CE(var_03.origin,var_03.angles,level.var_EC85[self.var_1FBB][param_01]);
+		var_07 = getstartorigin(var_03.origin,var_03.angles,level.var_EC85[self.var_1FBB][param_01]);
 		var_08 = getclosestpointonnavmesh(var_07,self);
 		if(distance2dsquared(var_07,var_08) > 0.1) {
 			var_0B = 0;

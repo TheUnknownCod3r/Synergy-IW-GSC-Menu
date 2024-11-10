@@ -517,7 +517,7 @@ electrocute_zombie(param_00) {
 	var_03 = scripts\engine\utility::random(var_01);
 	var_04 = param_00 gettagorigin(var_03);
 	playsoundatpos(self.origin,"trap_electric_shock");
-	function_02E0(level._effect["robot_zap"],var_02,vectortoangles(var_04 - var_02),var_04);
+	playfxbetweenpoints(level._effect["robot_zap"],var_02,vectortoangles(var_04 - var_02),var_04);
 }
 
 launch_rocket(param_00,param_01,param_02) {

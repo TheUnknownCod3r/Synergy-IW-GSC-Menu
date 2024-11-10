@@ -363,9 +363,9 @@ func_FF5C() {
 }
 
 has_tag(param_00,param_01) {
-	var_02 = function_00BC(param_00);
+	var_02 = getnumparts(param_00);
 	for(var_03 = 0;var_03 < var_02;var_03++) {
-		if(tolower(function_00BF(param_00,var_03)) == tolower(param_01)) {
+		if(tolower(getpartname(param_00,var_03)) == tolower(param_01)) {
 			return 1;
 		}
 	}

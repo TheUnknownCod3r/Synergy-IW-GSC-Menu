@@ -324,7 +324,7 @@ canseethroughfoliage(param_00) {
 	}
 
 	var_0A = self.isnodeoccupied getsecondspassed();
-	var_0B = function_0288(self gettagorigin("tag_eye"),var_0A,10,var_04,var_06,"physicsquery_closest");
+	var_0B = physics_spherecast(self gettagorigin("tag_eye"),var_0A,10,var_04,var_06,"physicsquery_closest");
 	if(isdefined(var_0B) && var_0B.size > 0) {
 		if(isdefined(var_0B[0]["hittype"]) && var_0B[0]["hittype"] == "hittype_entity") {
 			if(var_0B[0]["entity"] == self.isnodeoccupied) {

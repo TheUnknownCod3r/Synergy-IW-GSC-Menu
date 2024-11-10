@@ -99,7 +99,7 @@ func_AB31(param_00,param_01) {
 	}
 
 	self.a.weaponposdropping[param_01] = param_00;
-	var_02 = function_00EA(param_00);
+	var_02 = getweaponmodel(param_00);
 	var_03 = self gettagorigin("tag_weapon_right");
 	var_04 = self gettagangles("tag_weapon_right");
 	var_05 = spawn("script_model",var_03);

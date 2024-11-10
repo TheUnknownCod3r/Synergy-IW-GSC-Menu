@@ -127,9 +127,9 @@ func_CF18(param_00) {
 	if(isdefined(param_00)) {
 		param_00 playsoundonmovingent("plasma_spear_energy");
 		if(level.teambased) {
-			function_029A(level._effect["plasmaSpear_trail2"],param_00,"tag_origin",self.team);
+			playfxontagforteam(level._effect["plasmaSpear_trail2"],param_00,"tag_origin",self.team);
 			wait(0.05);
-			function_029A(level._effect["plasmaSpear_trail2_enemy"],param_00,"tag_origin",scripts\mp\_utility::getotherteam(self.team));
+			playfxontagforteam(level._effect["plasmaSpear_trail2_enemy"],param_00,"tag_origin",scripts\mp\_utility::getotherteam(self.team));
 			return;
 		}
 

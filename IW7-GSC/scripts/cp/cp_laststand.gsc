@@ -38,7 +38,7 @@ dropintolaststand(param_00,param_01) {
 	var_02 = scripts\cp\utility::has_zombie_perk("perk_machine_revive");
 	enter_gamemodespecificaction();
 	enter_globaldefaultaction();
-	level.var_AA0B++;
+	level.laststandnumber++;
 	enter_laststand();
 	if((scripts\cp\utility::isplayingsolo() || level.only_one_player) && haveselfrevive()) {
 		if(scripts\cp\utility::is_consumable_active("self_revive") || scripts\engine\utility::istrue(level.the_hoff_revive)) {
@@ -1279,11 +1279,11 @@ enable_self_revive(param_00) {
 		param_00.self_revive = 0;
 	}
 
-	param_00.var_F1E5++;
+	param_00.self_revive++;
 }
 
 disable_self_revive(param_00) {
-	param_00.var_F1E5--;
+	param_00.self_revive--;
 }
 
 self_revive(param_00) {

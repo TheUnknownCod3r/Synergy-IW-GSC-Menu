@@ -100,14 +100,14 @@ func_10918(param_00) {
 	}
 
 	wait(0.1);
-	function_029A(scripts\engine\utility::getfx(param_00 + "_friendly"),var_01,"tag_origin",self.team);
-	function_029A(scripts\engine\utility::getfx(param_00),var_01,"tag_origin",scripts\cp\utility::getotherteam(self.team));
+	playfxontagforteam(scripts\engine\utility::getfx(param_00 + "_friendly"),var_01,"tag_origin",self.team);
+	playfxontagforteam(scripts\engine\utility::getfx(param_00),var_01,"tag_origin",scripts\cp\utility::getotherteam(self.team));
 	wait(0.15);
 	var_01 delete();
 }
 
 func_1090A(param_00) {
-	var_01 = function_01E1(scripts\engine\utility::getfx("vfx_phaseshift_fp_scrn"),(0,0,0),self);
+	var_01 = spawnfxforclient(scripts\engine\utility::getfx("vfx_phaseshift_fp_scrn"),(0,0,0),self);
 	var_01 setfxkilldefondelete();
 	triggerfx(var_01);
 	scripts\engine\utility::waittill_any_timeout_1(param_00,"death","phase_shift_completed");
@@ -150,7 +150,7 @@ func_108EE(param_00,param_01,param_02,param_03,param_04) {
 	var_05.var_762C = param_00;
 	wait(0.1);
 	if(param_01 == param_02) {
-		function_029A(param_00,var_05,"tag_origin",param_03);
+		playfxontagforteam(param_00,var_05,"tag_origin",param_03);
 		var_05 hidefromplayer(param_02);
 	}
 	else

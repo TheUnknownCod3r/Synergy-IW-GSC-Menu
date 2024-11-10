@@ -104,7 +104,7 @@ func_A5FB() {
 		}
 
 		playfxontag(level.var_7649["seeker_sparks"],var_00,"tag_fx");
-		function_0178("seeker_expire",var_00.origin);
+		playworldsound("seeker_expire",var_00.origin);
 		var_00 hudoutlinedisable();
 		var_00 _meth_81D0();
 	}
@@ -455,7 +455,7 @@ func_F13A() {
 func_F114() {
 	self endon("death");
 	for(;;) {
-		function_00F3(self.origin,25,1000,1000);
+		glassradiusdamage(self.origin,25,1000,1000);
 		scripts\engine\utility::waitframe();
 	}
 }
@@ -549,7 +549,7 @@ func_F14C() {
 		}
 	}
 
-	function_0178("player_refill_all_ammo",level.player.origin);
+	playworldsound("player_refill_all_ammo",level.player.origin);
 	var_01 = func_8BA7();
 	var_02 = 0;
 	if(var_01 == "current") {
@@ -752,7 +752,7 @@ func_F11C() {
 		return;
 	}
 
-	function_0178("seeker_expl_beep",self.origin);
+	playworldsound("seeker_expl_beep",self.origin);
 	wait(0.6);
 	if(!isdefined(self) || isdefined(self.var_9BB9)) {
 		return;
@@ -764,7 +764,7 @@ func_F11C() {
 
 func_F11E(param_00,param_01,param_02) {
 	if(isdefined(self)) {
-		function_0278("ent_" + self getentitynumber() + "_seeker_repulsor");
+		destroynavrepulsor("ent_" + self getentitynumber() + "_seeker_repulsor");
 		if(isdefined(self.var_F166)) {
 			stopfxontag(level.var_7649[self.var_F166],self,"tag_fx");
 			self.var_F166 = undefined;
@@ -797,7 +797,7 @@ func_F11E(param_00,param_01,param_02) {
 			}
 			else
 			{
-				function_0136("seeker_expl",var_03,(0,0,0),0);
+				magicgrenademanual("seeker_expl",var_03,(0,0,0),0);
 			}
 
 			if(isalive(self)) {
@@ -831,7 +831,7 @@ func_F11E(param_00,param_01,param_02) {
 }
 
 func_F129(param_00) {
-	var_01 = function_0072("axis","allies");
+	var_01 = getaiarray("axis","allies");
 	var_01[var_01.size] = level.player;
 	var_02 = [];
 	foreach(var_04 in var_01) {
@@ -1092,7 +1092,7 @@ func_7C41(param_00) {
 		return self.var_728A;
 	}
 
-	var_02 = function_0075(self.bt.var_652A,"all");
+	var_02 = getaiunittypearray(self.bt.var_652A,"all");
 	if(self.bt.var_652A == "allies") {
 		if(lib_0F3D::func_B575(self.unittype)) {
 			var_02 = scripts\engine\utility::array_add(var_02,level.player);
@@ -1224,7 +1224,7 @@ func_7C41(param_00) {
 }
 
 func_F07D() {
-	var_00 = function_0075("axis","all");
+	var_00 = getaiunittypearray("axis","all");
 	var_01 = 100;
 	var_02 = [];
 	foreach(var_04 in var_00) {
@@ -1288,7 +1288,7 @@ func_797E() {
 	var_02 = scripts\common\trace::ray_trace(self geteye(),var_01,self);
 	if(isdefined(var_02["entity"])) {
 		if(issentient(var_02["entity"])) {
-			if(function_0106(self.team,var_02["entity"].team)) {
+			if(isenemyteam(self.team,var_02["entity"].team)) {
 				var_03 = var_02["entity"];
 				return var_03;
 			}

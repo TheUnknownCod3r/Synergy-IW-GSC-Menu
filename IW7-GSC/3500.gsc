@@ -3,62 +3,62 @@
  * Script: scripts\3500.gsc
 ***************************************/
 
-_id_B337() {
+func_B337() {
   level._effect["map_target_mark"] = loadfx("vfx/iw7/_requests/mp/vfx_marker_map_target");
 }
 
-_id_8112(var_0, var_1, var_2) {
-  if (!isdefined(var_0))
+_meth_8112(var_00, var_01, var_02) {
+  if (!isdefined(var_00))
   return;
 
-  var_3 = 0;
+  var_03 = 0;
 
-  if (scripts\mp\utility\game::_id_9EAF(var_0))
-  var_3 = 1;
+  if (scripts\mp\utility\game::func_9EAF(var_00))
+  var_03 = 1;
 
-  if (!isdefined(var_1))
-  var_1 = 1;
+  if (!isdefined(var_01))
+  var_01 = 1;
 
-  thread _id_13AC4();
-  thread _id_13AE7();
-  var_4 = undefined;
+  thread func_13AC4();
+  thread func_13AE7();
+  var_04 = undefined;
   self setscriptablepartstate("killstreak", "visor_active", 0);
   self visionsetnakedforplayer("map_select_mp", 0.5);
-  var_4 = _id_76F7(var_1, var_2);
-  return var_4;
+  var_04 = func_76F7(var_01, var_02);
+  return var_04;
 }
 
-_id_76F7(var_0, var_1) {
-  var_2 = 1;
+func_76F7(var_00, var_01) {
+  var_02 = 1;
 
-  if (var_0 <= 1) {
+  if (var_00 <= 1) {
   self setclientomnvar("ui_map_select_uses", -1);
-  var_2 = 0;
+  var_02 = 0;
   }
 
-  self._id_B338 = 0;
-  self._id_D8AD = undefined;
-  var_3 = [];
-  thread _id_13AC5();
+  self.func_B338 = 0;
+  self.func_D8AD = undefined;
+  var_03 = [];
+  thread func_13AC5();
 
-  if (scripts\mp\utility\game::istrue(var_2)) {
-  self setclientomnvar("ui_map_select_uses", var_0);
-  self setclientomnvar("ui_map_select_count", var_0);
+  if (scripts\mp\utility\game::istrue(var_02)) {
+  self setclientomnvar("ui_map_select_uses", var_00);
+  self setclientomnvar("ui_map_select_count", var_00);
   }
 
-  while (self._id_B338 < var_0) {
-  var_4 = _id_1374C("confirm_location", "cancel_location");
+  while (self.func_B338 < var_00) {
+  var_04 = func_1374C("confirm_location", "cancel_location");
 
-  if (!isdefined(var_4) || var_4._id_11145 == "cancel_location") {
-  var_3 = undefined;
+  if (!isdefined(var_04) || var_4.string == "cancel_location") {
+  var_03 = undefined;
   break;
   }
 
-  var_3[var_3.size] = var_4;
-  self._id_B338++;
+  var_3[var_3.size] = var_04;
+  self.func_B338++;
 
-  if (scripts\mp\utility\game::istrue(var_2))
-  self setclientomnvar("ui_map_select_uses", var_0 - self._id_B338);
+  if (scripts\mp\utility\game::istrue(var_02))
+  self setclientomnvar("ui_map_select_uses", var_00 - self.func_B338);
 
   self playlocalsound("bombardment_killstreak_select");
   }
@@ -67,18 +67,18 @@ _id_76F7(var_0, var_1) {
   self notify("map_select_exit");
   self visionsetnakedforplayer("", 0);
 
-  if (scripts\mp\utility\game::istrue(level._id_C1BB) && !scripts\mp\utility\game::istrue(level._id_C1B2))
-  thread scripts\mp\killstreaks\nuke::_id_FB0F(0.05);
+  if (scripts\mp\utility\game::istrue(level.nukedetonated) && !scripts\mp\utility\game::istrue(level.func_C1B2))
+  thread scripts\mp\killstreaks\nuke::func_FB0F(0.05);
 
   self setscriptablepartstate("killstreak", "neutral", 0);
 
-  if (isdefined(var_3))
+  if (isdefined(var_03))
   self.pers["startedMapSelect"] = 0;
 
-  return var_3;
+  return var_03;
 }
 
-_id_13AC5() {
+func_13AC5() {
   self endon("map_select_exit");
 
   for (;;) {
@@ -91,42 +91,42 @@ _id_13AC5() {
   }
 }
 
-_id_13AC4() {
+func_13AC4() {
   self endon("disconnect");
   level endon("game_ended");
   self waittill("map_select_exit");
-  _id_1107B();
+  func_1107B();
 }
 
-_id_13AE7() {
+func_13AE7() {
   self endon("disconnect");
   self endon("map_select_exit");
   level endon("game_ended");
   self setclientomnvar("ui_location_selection_countdown", gettime() + 30000);
-  scripts\engine\utility::_id_13736(30, "death");
+  scripts\engine\utility::waittill_any_timeout(30, "death");
   self notify("cancel_location");
 }
 
-_id_10DC2(var_0, var_1, var_2) {
+func_10DC2(var_00, var_01, var_02) {
   if (!self.pers["startedMapSelect"]) {
   triggeroneoffradarsweep(self);
   self.pers["startedMapSelect"] = 1;
   }
 
-  if (!isdefined(var_1))
-  var_1 = 0;
+  if (!isdefined(var_01))
+  var_01 = 0;
 
-  if (!isdefined(var_2))
-  var_2 = 0;
+  if (!isdefined(var_02))
+  var_02 = 0;
 
-  self beginlocationselection(var_0, var_1, var_2, 1);
+  self beginlocationselection(var_00, var_01, var_02, 1);
 }
 
-_id_1107B() {
+func_1107B() {
   self _meth_80DE();
-  self._id_B338 = undefined;
-  self._id_B336 = undefined;
-  self._id_D8AD = undefined;
+  self.func_B338 = undefined;
+  self.func_B336 = undefined;
+  self.func_D8AD = undefined;
 
   if (scripts\mp\utility\game::isreallyalive(self))
   self notify("killstreak_finished_with_weapon_ks_remote_map_mp");
@@ -134,35 +134,35 @@ _id_1107B() {
   self.pers["startedMapSelect"] = 0;
 }
 
-_id_1374C(var_0, var_1, var_2) {
-  if ((!isdefined(var_0) || var_0 != "death") && (!isdefined(var_1) || var_1 != "death"))
+func_1374C(var_00, var_01, var_02) {
+  if ((!isdefined(var_00) || var_00 != "death") && (!isdefined(var_01) || var_01 != "death"))
   self endon("death");
 
-  var_3 = spawnstruct();
+  var_03 = spawnstruct();
 
-  if (isdefined(var_0))
-  childthread _id_137F9(var_0, var_3);
+  if (isdefined(var_00))
+  childthread func_137F9(var_00, var_03);
 
-  if (isdefined(var_1))
-  childthread _id_137F9(var_1, var_3);
+  if (isdefined(var_01))
+  childthread func_137F9(var_01, var_03);
 
-  if (isdefined(var_2))
-  childthread _id_137F9(var_2, var_3);
+  if (isdefined(var_02))
+  childthread func_137F9(var_02, var_03);
 
-  var_3 waittill("returned", var_4, var_5, var_6);
-  var_3 notify("die");
-  var_7 = spawnstruct();
-  var_7._id_AEC4 = var_4;
-  var_7.angles = var_5;
-  var_7._id_11145 = var_6;
-  return var_7;
+  var_03 waittill("returned", var_04, var_05, var_06);
+  var_03 notify("die");
+  var_07 = spawnstruct();
+  var_7.location = var_04;
+  var_7.angles = var_05;
+  var_7.string = var_06;
+  return var_07;
 }
 
-_id_137F9(var_0, var_1) {
-  if (var_0 != "death")
+func_137F9(var_00, var_01) {
+  if (var_00 != "death")
   self endon("death");
 
-  var_1 endon("die");
-  self waittill(var_0, var_2, var_3);
-  var_1 notify("returned", var_2, var_3, var_0);
+  var_01 endon("die");
+  self waittill(var_00, var_02, var_03);
+  var_01 notify("returned", var_02, var_03, var_00);
 }

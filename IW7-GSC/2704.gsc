@@ -3,131 +3,131 @@
  * Script: scripts\2704.gsc
 ***************************************/
 
-_id_3258() {
-  level._id_3257 = [];
-  level._id_3257["bubble"] = spawnstruct();
-  level._id_3257["bubble"]._id_49B3 = ::_id_498C;
-  level._id_3257["bubble"]._id_741D = "prop_mp_bulletstorm";
-  level._id_3257["bubble"]._id_6564 = "prop_mp_bulletstorm_enemy";
-  level._id_3257["section"] = spawnstruct();
-  level._id_3257["section"]._id_49B3 = ::_id_4A0F;
-  level._id_3257["section"]._id_741D = "prop_mp_bulletstorm_v3";
-  level._id_3257["section"]._id_6564 = "prop_mp_bulletstorm_v3_enemy";
+func_3258() {
+  level.bulletstormshield = [];
+  level.bulletstormshield["bubble"] = spawnstruct();
+  level.bulletstormshield["bubble"].createfullscreenimage = ::func_498C;
+  level.bulletstormshield["bubble"].friendlymodel = "prop_mp_bulletstorm";
+  level.bulletstormshield["bubble"].enemymodel = "prop_mp_bulletstorm_enemy";
+  level.bulletstormshield["section"] = spawnstruct();
+  level.bulletstormshield["section"].createfullscreenimage = ::func_4A0F;
+  level.bulletstormshield["section"].friendlymodel = "prop_mp_bulletstorm_v3";
+  level.bulletstormshield["section"].enemymodel = "prop_mp_bulletstorm_v3_enemy";
 }
 
-_id_10D76(var_0) {
-  self._id_D782["power_bulletstorm"]._id_0019 = 1;
-  scripts\engine\utility::_id_1C76(0);
-  self _meth_800A(0);
-  self _meth_8010(0);
-  self _meth_8422(0);
+func_10D76(var_00) {
+  self.powers["power_bulletstorm"].active = 1;
+  scripts\engine\utility::allow_weapon_switch(0);
+  self getnumberoffrozenticksfromwave(0);
+  self getnumownedactiveagents(0);
+  self allowdoublejump(0);
   self _meth_800E(0);
-  self._id_3253 = spawnstruct();
-  self._id_3253._id_4C15 = self getcurrentweapon();
-  self._id_3253._id_DF66 = self getweaponammoclip(self._id_3253._id_4C15);
-  self._id_3253._id_DF67 = self getweaponammostock(self._id_3253._id_4C15);
-  scripts\mp\utility\game::_id_141E(self._id_3253._id_4C15);
-  var_1 = _id_811B(1);
-  var_2 = self [[level._id_3257[var_1]._id_49B3]](var_0);
-  thread _id_139BF(var_1, var_2);
-  thread _id_139BC();
-  self._id_FC99 = 1;
+  self.func_3253 = spawnstruct();
+  self.func_3253.func_4C15 = self getcurrentweapon();
+  self.func_3253.func_DF66 = self getweaponammoclip(self.func_3253.func_4C15);
+  self.func_3253.func_DF67 = self getweaponammostock(self.func_3253.func_4C15);
+  scripts\mp\utility\game::_takeweapon(self.func_3253.func_4C15);
+  var_01 = getcustomizationviewmodel(1);
+  var_02 = self [[level.bulletstormshield[var_01].createfullscreenimage]](var_00);
+  thread func_139BF(var_01, var_02);
+  thread func_139BC();
+  self.func_FC99 = 1;
 }
 
-_id_139BF(var_0, var_1) {
+func_139BF(var_00, var_01) {
   self endon("death");
   self endon("disconnect");
   level endon("game_ended");
 }
 
-_id_139BC() {
+func_139BC() {
   level endon("game_ended");
   scripts\engine\utility::waittill_any("death", "disconnect");
-  self._id_FC99 = undefined;
-  self._id_3255 = undefined;
-  self._id_3254 = undefined;
-  self._id_3256 = undefined;
+  self.func_FC99 = undefined;
+  self.func_3255 = undefined;
+  self.func_3254 = undefined;
+  self.func_3256 = undefined;
 }
 
-_id_811B(var_0) {
-  var_1 = undefined;
+getcustomizationviewmodel(var_00) {
+  var_01 = undefined;
 
-  switch (var_0) {
+  switch (var_00) {
   case 1:
-  var_1 = "bubble";
+  var_01 = "bubble";
   break;
   case 2:
-  var_1 = "section";
+  var_01 = "section";
   break;
   }
 
-  return var_1;
+  return var_01;
 }
 
-_id_498C(var_0) {
-  var_1 = self.origin;
-  var_2 = spawn("script_model", var_1);
-  var_2 setmodel(level._id_3257["bubble"]._id_741D);
+func_498C(var_00) {
+  var_01 = self.origin;
+  var_02 = spawn("script_model", var_01);
+  var_02 setmodel(level.bulletstormshield["bubble"].friendlymodel);
   var_2.health = 999999;
-  var_2._id_AC75 = 4;
-  var_2._id_E749 = 720;
-  var_2._id_11A33 = 0;
-  var_2._id_4D63 = 250;
-  var_2._id_28AF = "bulletstorm_device_mp";
-  var_2 setcandamage(1);
-  var_2 hide();
-  var_2._id_249C = [];
+  var_2.func_AC75 = 4;
+  var_2.func_E749 = 720;
+  var_2.func_11A33 = 0;
+  var_2.func_4D63 = 250;
+  var_2.func_28AF = "bulletstorm_device_mp";
+  var_02 setcandamage(1);
+  var_02 hide();
+  var_2.attachmentrollcount = [];
 
-  if (isdefined(self._id_3255))
-  var_2._id_AC75 = self._id_3255;
+  if (isdefined(self.func_3255))
+  var_2.func_AC75 = self.func_3255;
 
-  if (isdefined(self._id_3254))
-  var_2.health = self._id_3254;
+  if (isdefined(self.func_3254))
+  var_2.health = self.func_3254;
 
-  if (isdefined(self._id_3256))
-  var_2._id_E749 = self._id_3256;
+  if (isdefined(self.func_3256))
+  var_2.func_E749 = self.func_3256;
 
-  var_3 = spawn("script_model", var_2.origin + (0, 0, 10));
-  var_3 setmodel("tag_origin");
-  var_3 thread _id_BD2E(self);
-  var_3 thread _id_13B3A(var_2);
-  var_4 = spawn("script_model", var_1);
-  var_4 setmodel(level._id_3257["bubble"]._id_6564);
-  var_4 hide();
-  var_4 thread _id_BD2E(self);
-  var_4 thread _id_13B3A(var_2);
-  var_2 thread _id_BD2E(self);
-  var_2 thread _id_3259(self, var_3, var_4);
-  _id_10112(self, var_2, var_4);
-  return var_2;
+  var_03 = spawn("script_model", var_2.origin + (0, 0, 10));
+  var_03 setmodel("tag_origin");
+  var_03 thread func_BD2E(self);
+  var_03 thread func_13B3A(var_02);
+  var_04 = spawn("script_model", var_01);
+  var_04 setmodel(level.bulletstormshield["bubble"].enemymodel);
+  var_04 hide();
+  var_04 thread func_BD2E(self);
+  var_04 thread func_13B3A(var_02);
+  var_02 thread func_BD2E(self);
+  var_02 thread func_3259(self, var_03, var_04);
+  func_10112(self, var_02, var_04);
+  return var_02;
 }
 
-_id_4A0F() {
-  var_0 = self gettagorigin("j_mainroot");
-  var_1 = spawn("script_model", var_0);
-  var_1 setmodel("tag_origin");
-  var_1 thread _id_BD2E(self);
-  return var_1;
+func_4A0F() {
+  var_00 = self gettagorigin("j_mainroot");
+  var_01 = spawn("script_model", var_00);
+  var_01 setmodel("tag_origin");
+  var_01 thread func_BD2E(self);
+  return var_01;
 }
 
-_id_24AA(var_0, var_1) {
+func_24AA(var_00, var_01) {
   var_2[0] = (50, 0, 10);
   var_2[1] = (0, 50, 10);
   var_2[2] = (-50, 0, 10);
   var_2[3] = (0, -50, 10);
-  var_3 = 4;
+  var_03 = 4;
 
-  for (var_4 = 0; var_4 < var_3; var_4++) {
-  var_5 = spawn("script_model", self.origin + (0, 0, 50));
-  var_5 setmodel(level._id_3257["section"]._id_741D);
-  var_5 linkto(self, "tag_origin", var_2[var_4], (0, 90 * (var_4 + 1), 0));
-  var_5 thread _id_13B3A(var_1);
+  for (var_04 = 0; var_04 < var_03; var_4++) {
+  var_05 = spawn("script_model", self.origin + (0, 0, 50));
+  var_05 setmodel(level.bulletstormshield["section"].friendlymodel);
+  var_05 linkto(self, "tag_origin", var_2[var_04], (0, 90 * (var_04 + 1), 0));
+  var_05 thread func_13B3A(var_01);
   }
 }
 
-_id_BD2E(var_0) {
-  var_0 endon("death");
-  var_0 endon("disconnect");
+func_BD2E(var_00) {
+  var_00 endon("death");
+  var_00 endon("disconnect");
   self endon("shield_lifetime_hit");
 
   for (;;) {
@@ -138,129 +138,129 @@ _id_BD2E(var_0) {
   }
 }
 
-_id_3259(var_0, var_1, var_2) {
+func_3259(var_00, var_01, var_02) {
   self endon("stop_bulletstorm");
-  thread _id_139B8(var_0);
-  thread _id_13B61(var_0);
-  thread _id_139BA(var_0);
-  thread _id_139BE(var_0);
-  var_3 = "hitbulletstorm";
-  thread _id_10A10(self._id_E749, 4, 1, 1);
-  var_1 thread _id_10A10(self._id_E749, 4, 1, 1);
-  var_2 thread _id_10A10(self._id_E749, 4, 1, 1);
+  thread func_139B8(var_00);
+  thread func_13B61(var_00);
+  thread func_139BA(var_00);
+  thread func_139BE(var_00);
+  var_03 = "hitbulletstorm";
+  thread func_10A10(self.func_E749, 4, 1, 1);
+  var_01 thread func_10A10(self.func_E749, 4, 1, 1);
+  var_02 thread func_10A10(self.func_E749, 4, 1, 1);
 
   for (;;) {
-  self waittill("damage", var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12, var_13);
-  playfx(scripts\engine\utility::_id_7ECB("bulletstorm_shield_hit"), var_7);
-  playloopsound(var_7, "bs_shield_impact");
-  var_5 scripts\mp\damagefeedback::updatedamagefeedback(var_3);
+  self waittill("damage", var_04, var_05, var_06, var_07, var_08, var_09, var_10, var_11, var_12, var_13);
+  playfx(scripts\engine\utility::getfx("bulletstorm_shield_hit"), var_07);
+  playloopsound(var_07, "bs_shield_impact");
+  var_05 scripts\mp\damagefeedback::updatedamagefeedback(var_03);
   }
 }
 
-_id_10112(var_0, var_1, var_2) {
-  foreach (var_4 in level.players) {
-  if (!isdefined(var_4))
+func_10112(var_00, var_01, var_02) {
+  foreach (var_04 in level.players) {
+  if (!isdefined(var_04))
   continue;
 
-  if (!scripts\mp\equipment\phase_shift::_id_9DDF(var_4))
-  var_4 _id_12E6B(var_0.team, var_1, var_2);
+  if (!scripts\mp\equipment\phase_shift::isentityphaseshifted(var_04))
+  var_04 func_12E6B(var_0.team, var_01, var_02);
   }
 }
 
-_id_12E6B(var_0, var_1, var_2) {
-  var_3 = undefined;
+func_12E6B(var_00, var_01, var_02) {
+  var_03 = undefined;
 
-  if (self.team == var_0)
-  var_3 = var_1;
+  if (self.team == var_00)
+  var_03 = var_01;
   else
-  var_3 = var_2;
+  var_03 = var_02;
 
-  if (isdefined(var_3)) {
-  var_3 _meth_8388(self);
-  thread _id_139BD(var_0, var_3, var_1, var_2);
-  thread _id_139BB(var_0, var_3, var_1, var_2);
+  if (isdefined(var_03)) {
+  var_03 giveperkequipment(self);
+  thread func_139BD(var_00, var_03, var_01, var_02);
+  thread func_139BB(var_00, var_03, var_01, var_02);
   }
 }
 
-_id_139BD(var_0, var_1, var_2, var_3) {
+func_139BD(var_00, var_01, var_02, var_03) {
   self endon("disconnect");
   level endon("game_ended");
-  var_1 endon("death");
+  var_01 endon("death");
   self waittill("joined_team");
-  var_1 _meth_8429(self);
+  var_01 hidefromplayer(self);
   scripts\engine\utility::waitframe();
-  _id_12E6B(var_0, var_2, var_3);
+  func_12E6B(var_00, var_02, var_03);
 }
 
-_id_139BB(var_0, var_1, var_2, var_3) {}
+func_139BB(var_00, var_01, var_02, var_03) {}
 
-_id_139B8(var_0) {
+func_139B8(var_00) {
   self endon("stop_bulletstorm");
-  var_0 scripts\engine\utility::waittill_any("death", "disconnect");
+  var_00 scripts\engine\utility::waittill_any("death", "disconnect");
   self notify("stop_bulletstorm", 1);
 }
 
-_id_13B61(var_0) {
-  self waittill("stop_bulletstorm", var_1);
+func_13B61(var_00) {
+  self waittill("stop_bulletstorm", var_01);
 
-  if (isdefined(var_0)) {
-  var_2 = var_0 gettagorigin("j_mainroot");
-  _id_10D75(var_0, self._id_11A33, var_2, self._id_4D63);
-  var_0._id_FC99 = undefined;
-  var_0 setclientomnvar("ui_bulletstorm_update", -1);
-  var_0._id_3255 = undefined;
-  var_0._id_3254 = undefined;
-  var_0._id_3256 = undefined;
-  var_0._id_D782["power_bulletstorm"]._id_0019 = 0;
-  var_3 = -1;
+  if (isdefined(var_00)) {
+  var_02 = var_00 gettagorigin("j_mainroot");
+  func_10D75(var_00, self.func_11A33, var_02, self.func_4D63);
+  var_0.func_FC99 = undefined;
+  var_00 setclientomnvar("ui_bulletstorm_update", -1);
+  var_0.func_3255 = undefined;
+  var_0.func_3254 = undefined;
+  var_0.func_3256 = undefined;
+  var_0.powers["power_bulletstorm"].active = 0;
+  var_03 = -1;
 
-  if (var_1)
-  var_3 = 0;
+  if (var_01)
+  var_03 = 0;
 
-  var_0 notify("powers_bulletstorm_update", var_3);
-  var_0 scripts\engine\utility::_id_1C76(1);
-  var_0 _meth_800A(1);
-  var_0 _meth_8010(1);
-  var_0 _meth_8422(1);
-  var_0 _meth_800E(1);
-  var_4 = var_0._id_3253._id_4C15;
-  var_5 = var_0._id_3253._id_DF66;
-  var_6 = var_0._id_3253._id_DF67;
-  var_0 giveweapon(var_4, 0, 0, 0, 1);
-  var_0 setweaponammoclip(var_4, var_5);
-  var_0 setweaponammostock(var_4, var_6);
-  var_0 scripts\mp\utility\game::_id_141B(var_4);
+  var_00 notify("powers_bulletstorm_update", var_03);
+  var_00 scripts\engine\utility::allow_weapon_switch(1);
+  var_00 getnumberoffrozenticksfromwave(1);
+  var_00 getnumownedactiveagents(1);
+  var_00 allowdoublejump(1);
+  var_00 _meth_800E(1);
+  var_04 = var_0.func_3253.func_4C15;
+  var_05 = var_0.func_3253.func_DF66;
+  var_06 = var_0.func_3253.func_DF67;
+  var_00 giveweapon(var_04, 0, 0, 0, 1);
+  var_00 setweaponammoclip(var_04, var_05);
+  var_00 setweaponammostock(var_04, var_06);
+  var_00 scripts\mp\utility\game::_switchtoweaponimmediate(var_04);
   }
 
   self delete();
 }
 
-_id_139BE(var_0) {
+func_139BE(var_00) {
   self endon("stop_bulletstorm");
 
   for (;;) {
-  var_0 waittill("multi_use_activated", var_1);
+  var_00 waittill("multi_use_activated", var_01);
 
-  if (var_1 == "power_bulletstorm")
+  if (var_01 == "power_bulletstorm")
   self notify("stop_bulletstorm", 1);
   }
 }
 
-_id_139BA(var_0) {
+func_139BA(var_00) {
   self endon("stop_bulletstorm");
-  var_1 = 0.25;
+  var_01 = 0.25;
 
   for (;;) {
-  if (self._id_AC75 >= 1)
-  var_0 setclientomnvar("ui_bulletstorm_update", int(self._id_AC75));
+  if (self.func_AC75 >= 1)
+  var_00 setclientomnvar("ui_bulletstorm_update", int(self.func_AC75));
   else
   break;
 
   wait 0.05;
 
-  if (self._id_AC75 > 1) {
-  self._id_AC75 = self._id_AC75 - 0.05;
-  self notify("powers_bulletstorm_update", self._id_AC75 * var_1);
+  if (self.func_AC75 > 1) {
+  self.func_AC75 = self.func_AC75 - 0.05;
+  self notify("powers_bulletstorm_update", self.func_AC75 * var_01);
   }
   }
 
@@ -268,131 +268,131 @@ _id_139BA(var_0) {
   self notify("stop_bulletstorm", 1);
 }
 
-_id_10D75(var_0, var_1, var_2, var_3) {
-  if (var_1 > 0) {
-  var_4 = getdvarint("scr_bulletstorm_explosion", 1);
-  playfx(scripts\engine\utility::_id_7ECB("bulletstorm_explode"), var_2);
-  playfx(scripts\engine\utility::_id_7ECB("bulletstorm_explode2"), var_2);
+func_10D75(var_00, var_01, var_02, var_03) {
+  if (var_01 > 0) {
+  var_04 = getdvarint("scr_bulletstorm_explosion", 1);
+  playfx(scripts\engine\utility::getfx("bulletstorm_explode"), var_02);
+  playfx(scripts\engine\utility::getfx("bulletstorm_explode2"), var_02);
 
-  if (var_4 == 1) {
-  var_0 playlocalsound("bs_shield_explo");
-  var_0 playsound("bs_shield_explo_npc");
+  if (var_04 == 1) {
+  var_00 playlocalsound("bs_shield_explo");
+  var_00 playsound("bs_shield_explo_npc");
   } else {
-  var_0 playlocalsound("bs_shield_explo");
-  var_0 playsound("bs_shield_explo_npc");
+  var_00 playlocalsound("bs_shield_explo");
+  var_00 playsound("bs_shield_explo_npc");
   }
 
-  var_0 thread scripts\mp\shellshock::_id_858A(undefined, 0);
-  var_1 = int(clamp(var_1, 20, 150));
-  var_3 = int(clamp(var_3, 50, 250));
+  var_00 thread scripts\mp\shellshock::grenade_earthquake(undefined, 0);
+  var_01 = int(clamp(var_01, 20, 150));
+  var_03 = int(clamp(var_03, 50, 250));
 
-  foreach (var_6 in level.players) {
-  if (var_6 == var_0)
+  foreach (var_06 in level.players) {
+  if (var_06 == var_00)
   continue;
 
   if (var_6.team == var_0.team)
   continue;
 
-  var_7 = _id_811A(var_4, var_2, var_3, var_0, var_6, var_1);
+  var_07 = getcustomizationhead(var_04, var_02, var_03, var_00, var_06, var_01);
 
-  if (var_7._id_38BF) {
-  if (var_4 == 1) {
-  if (var_7._id_4D70 >= var_6.health)
-  var_6._id_4C87 = 1;
+  if (var_7.func_38BF) {
+  if (var_04 == 1) {
+  if (var_7.func_4D70 >= var_6.health)
+  var_6.customdeath = 1;
 
-  var_6 _meth_80B0(var_7._id_4D70, var_2, var_0, self, "MOD_EXPLOSIVE");
-  var_6 thread _id_139B9(var_2, var_3, 1.0);
+  var_06 getrandomarmkillstreak(var_7.func_4D70, var_02, var_00, self, "MOD_EXPLOSIVE");
+  var_06 thread func_139B9(var_02, var_03, 1.0);
   continue;
   }
 
-  var_0 notify("stun_hit");
-  var_6 notify("concussed", var_0);
-  var_6 shellshock("concussion_grenade_mp", var_7._id_5FE9);
-  var_6._id_44ED = gettime() + var_7._id_5FE9 * 1000;
-  var_0 thread scripts\mp\damagefeedback::updatedamagefeedback("stun");
+  var_00 notify("stun_hit");
+  var_06 notify("concussed", var_00);
+  var_06 shellshock("concussion_grenade_mp", var_7.func_5FE9);
+  var_6.concussionendtime = gettime() + var_7.func_5FE9 * 1000;
+  var_00 thread scripts\mp\damagefeedback::updatedamagefeedback("stun");
   }
   }
   }
 }
 
-_id_13B3A(var_0) {
+func_13B3A(var_00) {
   level endon("game_ended");
-  var_0 waittill("stop_bulletstorm");
+  var_00 waittill("stop_bulletstorm");
 
   if (isdefined(self))
   self delete();
 }
 
-_id_10A10(var_0, var_1, var_2, var_3, var_4) {
+func_10A10(var_00, var_01, var_02, var_03, var_04) {
   self endon("death");
 
   if (isdefined(self))
-  self _meth_8271(var_0, var_1, var_2, var_3);
+  self rotateyaw(var_00, var_01, var_02, var_03);
 
-  wait(var_1);
-  thread _id_10A10(var_0, var_1, var_2, var_3, var_4);
+  wait(var_01);
+  thread func_10A10(var_00, var_01, var_02, var_03, var_04);
 }
 
-_id_5116(var_0, var_1, var_2, var_3) {
+func_5116(var_00, var_01, var_02, var_03) {
   level endon("game_ended");
-  wait(var_0);
-  physicsexplosionsphere(var_1, var_2, var_2, var_3);
+  wait(var_00);
+  physicsexplosionsphere(var_01, var_02, var_02, var_03);
 }
 
-_id_139B9(var_0, var_1, var_2) {
+func_139B9(var_00, var_01, var_02) {
   self endon("disconnect");
-  self waittill("start_instant_ragdoll", var_3, var_4);
+  self waittill("start_instant_ragdoll", var_03, var_04);
   scripts\engine\utility::waitframe();
-  physicsexplosionsphere(var_0, var_1 + 40, var_1 + 20, var_2);
+  physicsexplosionsphere(var_00, var_01 + 40, var_01 + 20, var_02);
 }
 
-_id_5105(var_0, var_1) {
+func_5105(var_00, var_01) {
   level endon("game_ended");
-  wait(var_0);
+  wait(var_00);
 
-  if (isdefined(var_1))
-  var_1 delete();
+  if (isdefined(var_01))
+  var_01 delete();
 }
 
-_id_811A(var_0, var_1, var_2, var_3, var_4, var_5) {
-  var_6 = spawnstruct();
-  var_6._id_38BF = 0;
-  var_6._id_4D70 = 0;
-  var_6._id_5FE9 = 0;
-  var_7 = distance(var_1, var_4.origin);
+getcustomizationhead(var_00, var_01, var_02, var_03, var_04, var_05) {
+  var_06 = spawnstruct();
+  var_6.func_38BF = 0;
+  var_6.func_4D70 = 0;
+  var_6.func_5FE9 = 0;
+  var_07 = distance(var_01, var_4.origin);
 
-  if (var_7 <= var_2) {
-  if (var_7 <= 50)
-  var_6._id_38BF = 1;
+  if (var_07 <= var_02) {
+  if (var_07 <= 50)
+  var_6.func_38BF = 1;
   else
   {
-  var_8 = [];
+  var_08 = [];
   var_8[var_8.size] = "physicscontents_solid";
   var_8[var_8.size] = "physicscontents_glass";
   var_8[var_8.size] = "physicscontents_vehicle";
-  var_9 = physics_createcontents(var_8);
+  var_09 = physics_createcontents(var_08);
   var_10 = [];
-  var_11 = physics_raycast(var_1, var_4.origin, var_9, var_10, 0, "physicsquery_any");
+  var_11 = physics_raycast(var_01, var_4.origin, var_09, var_10, 0, "physicsquery_any");
 
   if (!var_11)
-  var_6._id_38BF = 1;
+  var_6.func_38BF = 1;
   }
 
-  if (var_6._id_38BF) {
-  if (var_0 == 1)
-  var_6._id_4D70 = var_5 - var_5 / (var_2 / var_7);
+  if (var_6.func_38BF) {
+  if (var_00 == 1)
+  var_6.func_4D70 = var_05 - var_05 / (var_02 / var_07);
   else
   {
-  var_12 = 1 - var_7 / var_2;
+  var_12 = 1 - var_07 / var_02;
 
   if (var_12 < 0)
   var_12 = 0;
 
   var_13 = 2 + 4 * var_12;
-  var_6._id_5FE9 = scripts\mp\perks\perkfunctions::_id_20E0(var_3, var_4, var_13);
+  var_6.func_5FE9 = scripts\mp\perks\perkfunctions::applystunresistence(var_03, var_04, var_13);
   }
   }
   }
 
-  return var_6;
+  return var_06;
 }

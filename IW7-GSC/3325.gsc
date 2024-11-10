@@ -676,7 +676,7 @@ func_28ED() {
 			var_02 = anglestoup(var_07);
 			var_04 = var_03 * 40;
 			var_05 = var_02 * 28;
-			var_08 = function_0287(self geteye(),self.origin + var_04 + var_05,var_06,undefined,0,"physicsquery_closest");
+			var_08 = physics_raycast(self geteye(),self.origin + var_04 + var_05,var_06,undefined,0,"physicsquery_closest");
 			if(isdefined(var_08) && var_08.size > 0) {
 				var_04 = var_03 * vectordot(var_08[0]["position"] - self.origin,var_03);
 				var_04 = var_04 - var_03 * 3;
@@ -761,7 +761,7 @@ func_28E8(param_00,param_01) {
 }
 
 func_28E7(param_00,param_01,param_02) {
-	var_03 = function_0287(param_01,param_00 gettagorigin("j_mainroot"),param_02,undefined,0,"physicsquery_closest");
+	var_03 = physics_raycast(param_01,param_00 gettagorigin("j_mainroot"),param_02,undefined,0,"physicsquery_closest");
 	if(isdefined(var_03) && var_03.size > 0) {
 		return 1;
 	}
@@ -820,7 +820,7 @@ func_28F3() {
 	var_00 = 0;
 	var_01 = 5;
 	while(var_01 > var_00) {
-		var_02 = function_01E1(level.var_28C9,self geteye(),self);
+		var_02 = spawnfxforclient(level.var_28C9,self geteye(),self);
 		thread func_28F4(var_02,0.1);
 		triggerfx(var_02);
 		earthquake(0.2,0.25,self.origin,96);

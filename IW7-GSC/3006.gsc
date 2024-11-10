@@ -577,7 +577,7 @@ func_5DEC(param_00,param_01,param_02) {
 	if(var_05 > 15) {
 		if(isarray(param_02)) {
 			if(scripts\engine\utility::player_is_in_jackal()) {
-				var_06 = level.var_D127._func_2AC * 17.6;
+				var_06 = level.var_D127.__func_2AC * 17.6;
 			}
 			else
 			{

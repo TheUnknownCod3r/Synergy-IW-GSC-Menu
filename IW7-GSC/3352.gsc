@@ -167,7 +167,7 @@ func_E4C7() {
 			continue;
 		}
 
-		var_03 = function_024B(var_02);
+		var_03 = weaponstartammo(var_02);
 		var_04 = self getweaponammoclip(var_02) + self getweaponammostock(var_02);
 		var_05 = scripts\engine\utility::ter_op(var_03 > var_04,var_03,var_04);
 		var_06 = int(min(weaponclipsize(var_02),var_05));

@@ -297,7 +297,7 @@ func_126AA(param_00,param_01) {
 	var_02 setmodel(level.var_47B3["crafted_trap_mower"].modelbase);
 	self.carriedby getrigindexfromarchetyperef();
 	self.carriedby = undefined;
-	var_02.repulsor = function_0277("mower_repulsor",0,var_02.origin,32,1);
+	var_02.repulsor = createnavrepulsor("mower_repulsor",0,var_02.origin,32,1);
 	param_01.iscarrying = 0;
 	var_02.triggerportableradarping = param_01;
 	var_02.name = "crafted_trap_mower";
@@ -324,7 +324,7 @@ func_126A7() {
 	}
 
 	if(isdefined(self.repulsor)) {
-		function_0278(self.repulsor);
+		destroynavrepulsor(self.repulsor);
 	}
 
 	self.carried_trap delete();
@@ -499,7 +499,7 @@ func_126A6(param_00) {
 func_126A9() {
 	self makeunusable();
 	if(isdefined(self.repulsor)) {
-		function_0278(self.repulsor);
+		destroynavrepulsor(self.repulsor);
 	}
 
 	if(isdefined(self.dmg_trigger)) {

@@ -1247,7 +1247,7 @@ func_3635(param_00,param_01,param_02) {
 		var_10 = var_05 * (-1 * sin(var_0D),cos(var_0D),0);
 		var_11 = vectortoangles(param_01 - var_0F);
 		var_12 = combineangles(var_09,var_11);
-		var_13 = function_02EC(var_10,var_12,param_02);
+		var_13 = anglelerpquatfrac(var_10,var_12,param_02);
 		var_13 = combineangles(var_0A,var_13);
 		var_0C.origin = var_0F;
 		var_0C.angles = var_13;
@@ -1264,7 +1264,7 @@ func_35E9(param_00,param_01,param_02,param_03,param_04) {
 	var_0A = 1;
 	var_0B = param_03 / 1000;
 	var_0C = var_0A + level.var_35EC + var_0B;
-	function_0277("c12_rocket",var_0C,param_02,256,1);
+	createnavrepulsor("c12_rocket",var_0C,param_02,256,1);
 	self notify("rocket_targeting");
 	lib_0A16::func_17BA("targeting");
 	self _meth_857A("target",param_02);
@@ -1313,7 +1313,7 @@ func_35EB() {
 
 func_35EA(param_00) {
 	param_00.var_E5E0 = undefined;
-	function_0278("c12_rocket");
+	destroynavrepulsor("c12_rocket");
 	func_35EB();
 }
 
@@ -1424,7 +1424,7 @@ func_35C5(param_00,param_01,param_02) {
 	}
 
 	var_0B = func_3595(param_00,param_02);
-	var_0C = function_002C(var_05,var_0B,4);
+	var_0C = bulletspread(var_05,var_0B,4);
 	self _meth_8494(var_04,var_05,var_06,var_08,var_0C,var_09,param_01,var_03);
 }
 

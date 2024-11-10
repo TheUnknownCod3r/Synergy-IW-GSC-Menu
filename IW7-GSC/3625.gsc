@@ -286,9 +286,9 @@ func_1EE6() {
 }
 
 func_5C25() {
-	function_004E("hacked_drone");
-	function_004E("op_for");
-	function_01B2("hacked_drone","op_for");
+	createthreatbiasgroup("hacked_drone");
+	createthreatbiasgroup("op_for");
+	setignoremegroup("hacked_drone","op_for");
 	level.player.var_9BFA = 0;
 	level.var_6AFC = getent("fake_player_spawn","targetname");
 	if(isdefined(level.var_6AFC)) {
@@ -629,7 +629,7 @@ func_87E4() {
 	scripts\engine\utility::flag_clear("hack_hud_control_outro_finished");
 	level.player scripts\sp\_utility::func_1C3E(0);
 	setomnvar("ui_hack_targeting",1);
-	function_0237("hack_targeting",0);
+	visionsetnaked("hack_targeting",0);
 	thread func_87B8();
 	thread func_87B7();
 }
@@ -754,13 +754,13 @@ func_87AF() {
 	scripts\engine\utility::delaythread(0.35,::func_87B6);
 	thread scripts\sp\_utility::func_C12D("hack_hud_stop_tracking_target",0.35);
 	if(isdefined(level.player.var_884D)) {
-		scripts\engine\utility::noself_delaycall(0.6,::function_0237,level.player.var_884D,0);
+		scripts\engine\utility::noself_delaycall(0.6,::visionsetnaked,level.player.var_884D,0);
 	}
 	else if(level.player.var_8820 == "C6" || level.player.var_8820 == "C6Worker") {
-		scripts\engine\utility::noself_delaycall(0.6,::function_0237,"hack_c6_control",0);
+		scripts\engine\utility::noself_delaycall(0.6,::visionsetnaked,"hack_c6_control",0);
 	}
 	else if(level.player.var_8820 == "C8") {
-		scripts\engine\utility::noself_delaycall(0.6,::function_0237,"hack_c8_control",0);
+		scripts\engine\utility::noself_delaycall(0.6,::visionsetnaked,"hack_c8_control",0);
 	}
 
 	thread scripts\engine\utility::flag_set_delayed("hack_hud_control_intro_black",0.6);
@@ -786,7 +786,7 @@ func_87B0() {
 	setomnvar("ui_hack_control_outro",2);
 	scripts\engine\utility::noself_delaycall(0.05,::setomnvar,"ui_hack_control_outro",0);
 	level.player notify("stop soundhacked_drone_dmg_alarm");
-	scripts\engine\utility::noself_delaycall(0.1,::function_0237,"",0);
+	scripts\engine\utility::noself_delaycall(0.1,::visionsetnaked,"",0);
 	thread scripts\engine\utility::flag_set_delayed("hack_hud_control_outro_black",0.2);
 	scripts\engine\utility::noself_delaycall(0,::setomnvar,"ui_wrist_pc",5);
 	scripts\engine\utility::noself_delaycall(0,::setomnvar,"ui_hack_targeting_status","closing");
@@ -830,7 +830,7 @@ func_87B3() {
 		var_01 destroy();
 	}
 
-	function_0237("",0);
+	visionsetnaked("",0);
 }
 
 func_87B6() {
@@ -843,7 +843,7 @@ func_87B6() {
 		var_01.alpha = 0;
 	}
 
-	function_0237("",0);
+	visionsetnaked("",0);
 }
 
 func_9BF9() {
@@ -959,7 +959,7 @@ func_11AA1() {
 	for(;;) {
 		self.var_87F8 = [];
 		self.var_C123 = [];
-		var_00 = function_0072("bad_guys");
+		var_00 = getaiarray("bad_guys");
 		foreach(var_02 in var_00) {
 			if(isdefined(var_02.subclass) && var_02.subclass != "C6" && var_02.subclass != "C8" && var_02.subclass != "C12") {
 				continue;
@@ -1584,8 +1584,8 @@ func_2A46(param_00) {
 		level.player thread func_880B(param_00);
 		level.player.var_883D = "controllingrobot";
 		level.player scripts\sp\_utility::func_65E1("is_controlling_robot");
-		var_06 = function_0072("bad_guys");
-		var_07 = function_00C9("bad_guys");
+		var_06 = getaiarray("bad_guys");
+		var_07 = getspawnerteamarray("bad_guys");
 		foreach(var_09 in var_06) {
 			var_09 thread func_19C8(1);
 			var_09 thread func_1933();
@@ -1635,7 +1635,7 @@ func_2A46(param_00) {
 		setomnvar("ui_hack_control_selfdestruct",0);
 		setomnvar("ui_hack_control_selfdestruct_timer",0);
 		setomnvar("ui_hack_control_selfdestruct_show_timer",0);
-		var_07 = function_00C9("bad_guys");
+		var_07 = getspawnerteamarray("bad_guys");
 		scripts\engine\utility::array_thread(var_07,::scripts\sp\_utility::func_E08B,::func_19C8);
 		scripts\engine\utility::array_thread(var_07,::scripts\sp\_utility::func_E08B,::func_1933);
 		level.player thread func_2A47(param_00);
@@ -1647,7 +1647,7 @@ func_61E0(param_00) {
 		level.player give_explosive_touch_on_revived("c6servo");
 		level.player setsuit("hacked_c6");
 		level.player.var_C37E = getdvar("cg_fov");
-		function_01C5("cg_fov",75);
+		setsaveddvar("cg_fov",75);
 		level.player _meth_81DE(75,0.05);
 		level.player scripts\engine\utility::allow_reload(1);
 		level.player.health = self.health;
@@ -1684,11 +1684,11 @@ func_61E0(param_00) {
 
 func_61E2(param_00) {
 	if(param_00) {
-		function_01C5("offhandShield_useCustomShader",0);
+		setsaveddvar("offhandShield_useCustomShader",0);
 		level.player give_explosive_touch_on_revived("c8servo");
 		level.player setsuit("hacked_c8");
 		level.player.var_C37E = getdvar("cg_fov");
-		function_01C5("cg_fov",75);
+		setsaveddvar("cg_fov",75);
 		level.player _meth_81DE(75,0.05);
 		level.player.health = self.health;
 		level.player.var_C39C = level.player _meth_816D();
@@ -1707,7 +1707,7 @@ func_61E2(param_00) {
 		return;
 	}
 
-	function_01C5("offhandShield_useCustomShader",1);
+	setsaveddvar("offhandShield_useCustomShader",1);
 	level.player scripts\sp\_utility::func_11428();
 	level.player notify("hack_stop_sustaining_ammo");
 	if(isdefined(level.player.var_C389)) {
@@ -1749,7 +1749,7 @@ func_61E1(param_00) {
 		level.player give_explosive_touch_on_revived("c6servo");
 		level.player setsuit("hacked_c6");
 		level.player.var_C37E = getdvar("cg_fov");
-		function_01C5("cg_fov",75);
+		setsaveddvar("cg_fov",75);
 		level.player _meth_81DE(75,0.05);
 		level.player scripts\engine\utility::allow_reload(1);
 		level.player.health = self.health;
@@ -2155,7 +2155,7 @@ func_5C85(param_00,param_01,param_02) {
 	level.player playsound("hack_hud_self_destruct_start");
 	level.player thread scripts\engine\utility::play_loop_sound_on_entity("hack_hud_self_destruct_alarm");
 	level.player notify("player_suicided_drone");
-	var_03 = function_0313(level.player.origin,(150,150,25),(0,0,0));
+	var_03 = _func_313(level.player.origin,(150,150,25),(0,0,0));
 	thread scripts\engine\utility::noself_delaycall(4.5,::destroynavobstacle,var_03);
 	level.player scripts\engine\utility::allow_offhand_primary_weapons(0);
 	level.player scripts\engine\utility::allow_melee(0);
@@ -2273,7 +2273,7 @@ func_AFE1() {
 func_5C3B(param_00,param_01) {
 	level.player notify("hack_suicide");
 	level.player notify("player_suicided_drone");
-	var_02 = function_0313(level.player.origin,(150,150,25),(0,0,0));
+	var_02 = _func_313(level.player.origin,(150,150,25),(0,0,0));
 	thread scripts\engine\utility::noself_delaycall(4.5,::destroynavobstacle,var_02);
 	thread func_992D();
 	var_03 = scripts\engine\utility::spawn_tag_origin();
@@ -2326,11 +2326,11 @@ func_992D() {
 	level.player endon("death");
 	var_00 = getdvarfloat("bg_viewKickMin",5);
 	var_01 = getdvarfloat("bg_viewKickScale",0.8);
-	function_01C5("bg_viewKickMin",2);
-	function_01C5("bg_viewKickScale",0);
+	setsaveddvar("bg_viewKickMin",2);
+	setsaveddvar("bg_viewKickScale",0);
 	scripts\engine\utility::flag_wait("hack_hud_control_outro_black");
-	function_01C5("bg_viewKickMin",var_00);
-	function_01C5("bg_viewKickScale",var_01);
+	setsaveddvar("bg_viewKickMin",var_00);
+	setsaveddvar("bg_viewKickScale",var_01);
 }
 
 func_113DC() {
@@ -2380,7 +2380,7 @@ func_5C84(param_00) {
 	physicsexplosionsphere(var_01,500,50,1);
 	playfx(level._effect["drone_suicide"],var_01);
 	level.player playsound("c6_hack_self_destruct_explo_plr","sounddone");
-	scripts\engine\utility::noself_delaycall(2,::function_0178,"c6_destruct",param_00);
+	scripts\engine\utility::noself_delaycall(2,::playworldsound,"c6_destruct",param_00);
 	scripts\engine\utility::noself_delaycall(2,::playfx,level._effect["drone_suicide"],var_01);
 	level.player scripts\engine\utility::delaythread(2,::drone_suide_explosion_player_damage);
 }
@@ -2422,7 +2422,7 @@ func_6AFB() {
 func_5C77(param_00) {
 	level.player notify("hack_shutdown_sequence");
 	level.player notify("player_suicided_drone");
-	var_01 = function_0313(level.player.origin,(150,150,25),(0,0,0));
+	var_01 = _func_313(level.player.origin,(150,150,25),(0,0,0));
 	thread scripts\engine\utility::noself_delaycall(4.5,::destroynavobstacle,var_01);
 	level.player playgestureviewmodel("ges_shocknade_loop",undefined,1);
 	var_02 = scripts\engine\utility::spawn_tag_origin();
@@ -2489,7 +2489,7 @@ func_2A47(param_00) {
 	}
 
 	scripts\sp\_utility::func_9199(var_01,0);
-	var_02 = function_0072("bad_guys");
+	var_02 = getaiarray("bad_guys");
 	foreach(var_04 in var_02) {
 		if(isdefined(var_04.var_884A)) {
 			var_04 scripts\sp\_utility::func_F3E6(var_04.var_884A);
@@ -2516,7 +2516,7 @@ func_2A47(param_00) {
 			level.var_CFEF = undefined;
 		}
 
-		var_02 = function_0072("bad_guys");
+		var_02 = getaiarray("bad_guys");
 		scripts\engine\utility::array_thread(var_02,::func_19C8,0);
 		level.player thread func_2A48();
 		level.var_880A thread func_E44E();

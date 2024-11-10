@@ -513,7 +513,7 @@ func_B5F0(param_00) {
 	if(var_10 && isdefined(self.var_B651) && self.var_B651) {
 		if(isdefined(var_02.target_getindexoftarget)) {
 			if(scripts\engine\utility::isnodecoverleft(var_02.target_getindexoftarget)) {
-				var_12 = function_02D3(var_02.target_getindexoftarget.angles);
+				var_12 = anglestoleft(var_02.target_getindexoftarget.angles);
 				var_0E = var_02.target_getindexoftarget.origin + var_12 * var_0C;
 			}
 			else if(scripts\engine\utility::isnodecoverright(var_02.target_getindexoftarget)) {

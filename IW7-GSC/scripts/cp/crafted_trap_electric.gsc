@@ -358,7 +358,7 @@ electrocute_zombie(param_00) {
 		}
 
 		var_07 = param_00 gettagorigin(var_06);
-		function_02E0(level._effect["electric_trap_attack"],self.origin + (0,0,24),vectortoangles(var_07 - self.origin + (0,0,24)),var_07);
+		playfxbetweenpoints(level._effect["electric_trap_attack"],self.origin + (0,0,24),vectortoangles(var_07 - self.origin + (0,0,24)),var_07);
 		scripts\engine\utility::waitframe();
 		playfxontag(level._effect["electric_trap_shock"],param_00,var_06);
 		scripts\engine\utility::waitframe();

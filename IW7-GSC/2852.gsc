@@ -3,174 +3,174 @@
  * Script: scripts\2852.gsc
 ***************************************/
 
-_id_5C21() {
-  _id_23C7();
+func_5C21() {
+  func_23C7();
   self _meth_839E();
 
-  if (isdefined(self._id_EE2C))
-  self._id_BCD6 = self._id_EE2C;
+  if (isdefined(self.func_EE2C))
+  self.moveplaybackrate = self.func_EE2C;
   else
-  self._id_BCD6 = 1;
+  self.moveplaybackrate = 1;
 
   if (self.team == "allies") {
-  _id_0B55::_id_7B05();
+  scripts/sp/names::func_7B05();
   self _meth_8307(self.name, &"");
   }
 
-  if (isdefined(level._id_5CA7))
-  self thread [[level._id_5CA7]]();
+  if (isdefined(level.func_5CA7))
+  self thread [[level.func_5CA7]]();
 
-  if (!isdefined(self._id_EDB7))
-  level thread _id_0B32::_id_73B1(self);
+  if (!isdefined(self.func_EDB7))
+  level thread scripts/sp/friendlyfire::func_73B1(self);
 
-  if (!isdefined(level._id_193D))
-  _id_1177B();
+  if (!isdefined(level.func_193D))
+  func_1177B();
 }
 
-_id_1177B() {
-  if (!isdefined(level._id_5CCB))
-  level._id_5CCB = "all";
+func_1177B() {
+  if (!isdefined(level.func_5CCB))
+  level.func_5CCB = "all";
 
-  var_0 = 0;
+  var_00 = 0;
 
-  switch (level._id_5CCB) {
+  switch (level.func_5CCB) {
   case "all":
-  var_0 = 1;
+  var_00 = 1;
   break;
   case "axis":
-  var_0 = self.team == "axis";
+  var_00 = self.team == "axis";
   break;
   default:
   break;
   }
 
-  if (var_0)
-  self _meth_83BC();
+  if (var_00)
+  self thermaldrawenable();
 }
 
-_id_5C3A() {
-  if (!isdefined(self._id_0334))
+func_5C3A() {
+  if (!isdefined(self.target))
   return;
 
-  if (isdefined(level._id_5C63[self._id_0334]))
+  if (isdefined(level.func_5C63[self.target]))
   return;
 
-  level._id_5C63[self._id_0334] = 1;
-  var_0 = self._id_0334;
-  var_1 = scripts\engine\utility::_id_817E(var_0, "targetname");
+  level.func_5C63[self.target] = 1;
+  var_00 = self.target;
+  var_01 = scripts\engine\utility::getstruct(var_00, "targetname");
 
-  if (!isdefined(var_1))
+  if (!isdefined(var_01))
   return;
 
-  var_2 = [];
-  var_3 = [];
-  var_4 = var_1;
+  var_02 = [];
+  var_03 = [];
+  var_04 = var_01;
 
   for (;;) {
-  var_1 = var_4;
-  var_5 = 0;
+  var_01 = var_04;
+  var_05 = 0;
 
   for (;;) {
-  if (!isdefined(var_1._id_0334))
+  if (!isdefined(var_1.target))
   break;
 
-  var_6 = scripts\engine\utility::_id_8180(var_1._id_0334, "targetname");
+  var_06 = scripts\engine\utility::getstructarray(var_1.target, "targetname");
 
   if (var_6.size)
   break;
 
-  var_7 = undefined;
+  var_07 = undefined;
 
-  foreach (var_9 in var_6) {
+  foreach (var_09 in var_06) {
   if (isdefined(var_3[var_9.origin + ""]))
   continue;
 
-  var_7 = var_9;
+  var_07 = var_09;
   break;
   }
 
-  if (!isdefined(var_7))
+  if (!isdefined(var_07))
   break;
 
   var_3[var_7.origin + ""] = 1;
-  var_2[var_1._id_0336] = var_7.origin - var_1.origin;
-  var_1.angles = vectortoangles(var_2[var_1._id_0336]);
-  var_1 = var_7;
-  var_5 = 1;
+  var_2[var_1.targetname] = var_7.origin - var_1.origin;
+  var_1.angles = vectortoangles(var_2[var_1.targetname]);
+  var_01 = var_07;
+  var_05 = 1;
   }
 
-  if (!var_5)
+  if (!var_05)
   break;
   }
 
-  var_0 = self._id_0334;
-  var_1 = scripts\engine\utility::_id_817E(var_0, "targetname");
-  var_11 = var_1;
-  var_3 = [];
+  var_00 = self.target;
+  var_01 = scripts\engine\utility::getstruct(var_00, "targetname");
+  var_11 = var_01;
+  var_03 = [];
 
   for (;;) {
-  var_1 = var_4;
-  var_5 = 0;
+  var_01 = var_04;
+  var_05 = 0;
 
   for (;;) {
-  if (!isdefined(var_1._id_0334))
+  if (!isdefined(var_1.target))
   return;
 
-  if (!isdefined(var_2[var_1._id_0336]))
+  if (!isdefined(var_2[var_1.targetname]))
   return;
 
-  var_6 = scripts\engine\utility::_id_8180(var_1._id_0334, "targetname");
+  var_06 = scripts\engine\utility::getstructarray(var_1.target, "targetname");
 
   if (var_6.size)
   break;
 
-  var_7 = undefined;
+  var_07 = undefined;
 
-  foreach (var_9 in var_6) {
+  foreach (var_09 in var_06) {
   if (isdefined(var_3[var_9.origin + ""]))
   continue;
 
-  var_7 = var_9;
+  var_07 = var_09;
   break;
   }
 
-  if (!isdefined(var_7))
+  if (!isdefined(var_07))
   break;
 
   if (isdefined(var_1.radius)) {
-  var_14 = var_2[var_11._id_0336];
-  var_15 = var_2[var_1._id_0336];
+  var_14 = var_2[var_11.targetname];
+  var_15 = var_2[var_1.targetname];
   var_16 = (var_14 + var_15) * 0.5;
   var_1.angles = vectortoangles(var_16);
   }
 
-  var_5 = 1;
-  var_11 = var_1;
-  var_1 = var_7;
+  var_05 = 1;
+  var_11 = var_01;
+  var_01 = var_07;
   }
 
-  if (!var_5)
+  if (!var_05)
   break;
   }
 }
 
-_id_23C7() {
+func_23C7() {
   if (isdefined(self.type)) {
   if (self.type == "dog")
-  _id_23B5();
+  func_23B5();
   else
-  _id_23C9();
+  func_23C9();
   }
 }
 
 #using_animtree("generic_human");
 
-_id_23C9() {
-  self _meth_83D0(#animtree);
+func_23C9() {
+  self glinton(#animtree);
 }
 
 #using_animtree("animals");
 
-_id_23B5() {
-  self _meth_83D0(#animtree);
+func_23B5() {
+  self glinton(#animtree);
 }

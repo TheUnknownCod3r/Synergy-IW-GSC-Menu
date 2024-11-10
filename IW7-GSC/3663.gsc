@@ -18,8 +18,8 @@ func_9755(param_00) {
 	}
 
 	if(!isdefined(param_00) || !param_00) {
-		function_01C5("player_spaceViewHeight",60);
-		function_01C5("player_spaceCapsuleHeight",70);
+		setsaveddvar("player_spaceViewHeight",60);
+		setsaveddvar("player_spaceCapsuleHeight",70);
 	}
 
 	if(!isdefined(level.player.isent)) {
@@ -89,40 +89,40 @@ func_40A6() {
 }
 
 func_6251() {
-	function_01C5("bg_viewBobAmplitudeDucked",0);
-	function_01C5("bg_viewBobAmplitudeDuckedAds",0);
-	function_01C5("bg_viewBobAmplitudeSprinting",0);
-	function_01C5("bg_viewBobAmplitudeStanding",0);
-	function_01C5("bg_viewBobAmplitudeStandingAds",0);
-	function_01C5("bg_viewBobMax",0);
-	function_01C5("bg_weaponBobAmplitudeBase",0);
-	function_01C5("bg_weaponBobAmplitudeDucked","0.0 0.0");
-	function_01C5("bg_weaponBobAmplitudeSprinting","0.0 0.0");
-	function_01C5("bg_weaponBobAmplitudeStanding","0.0 0.0");
-	function_01C5("bg_sprintLoopTimeScale",4);
+	setsaveddvar("bg_viewBobAmplitudeDucked",0);
+	setsaveddvar("bg_viewBobAmplitudeDuckedAds",0);
+	setsaveddvar("bg_viewBobAmplitudeSprinting",0);
+	setsaveddvar("bg_viewBobAmplitudeStanding",0);
+	setsaveddvar("bg_viewBobAmplitudeStandingAds",0);
+	setsaveddvar("bg_viewBobMax",0);
+	setsaveddvar("bg_weaponBobAmplitudeBase",0);
+	setsaveddvar("bg_weaponBobAmplitudeDucked","0.0 0.0");
+	setsaveddvar("bg_weaponBobAmplitudeSprinting","0.0 0.0");
+	setsaveddvar("bg_weaponBobAmplitudeStanding","0.0 0.0");
+	setsaveddvar("bg_sprintLoopTimeScale",4);
 	self give_crafted_fireworks_trap(5);
 }
 
 func_559D() {
-	function_01C5("bg_viewBobAmplitudeDucked",0.0075);
-	function_01C5("bg_viewBobAmplitudeDuckedAds",0.0075);
-	function_01C5("bg_viewBobAmplitudeSprinting",0.014);
-	function_01C5("bg_viewBobAmplitudeStanding",0.007);
-	function_01C5("bg_viewBobAmplitudeStandingAds",0.0075);
-	function_01C5("bg_viewBobMax",8);
-	function_01C5("bg_weaponBobAmplitudeBase",0.16);
-	function_01C5("bg_weaponBobAmplitudeDucked","0.045 0.025");
-	function_01C5("bg_weaponBobAmplitudeSprinting","0.02 0.014");
-	function_01C5("bg_weaponBobAmplitudeStanding","0.055 0.025");
-	function_01C5("bg_sprintLoopTimeScale",1);
+	setsaveddvar("bg_viewBobAmplitudeDucked",0.0075);
+	setsaveddvar("bg_viewBobAmplitudeDuckedAds",0.0075);
+	setsaveddvar("bg_viewBobAmplitudeSprinting",0.014);
+	setsaveddvar("bg_viewBobAmplitudeStanding",0.007);
+	setsaveddvar("bg_viewBobAmplitudeStandingAds",0.0075);
+	setsaveddvar("bg_viewBobMax",8);
+	setsaveddvar("bg_weaponBobAmplitudeBase",0.16);
+	setsaveddvar("bg_weaponBobAmplitudeDucked","0.045 0.025");
+	setsaveddvar("bg_weaponBobAmplitudeSprinting","0.02 0.014");
+	setsaveddvar("bg_weaponBobAmplitudeStanding","0.055 0.025");
+	setsaveddvar("bg_sprintLoopTimeScale",1);
 	self give_crafted_fireworks_trap(1);
 }
 
 func_621C(param_00) {
-	function_01C5("cg_footsteps",0);
-	function_01C5("cg_equipmentSounds",0);
-	function_01C5("cg_landingSounds",0);
-	function_01C5("player_spaceEnabled","1");
+	setsaveddvar("cg_footsteps",0);
+	setsaveddvar("cg_equipmentSounds",0);
+	setsaveddvar("cg_landingSounds",0);
+	setsaveddvar("player_spaceEnabled","1");
 	level.player scripts\engine\utility::allow_doublejump(0);
 	level.var_104DA = 500;
 	level.var_104D9 = 500;
@@ -135,13 +135,13 @@ func_621C(param_00) {
 	level.var_10516 = 125;
 	level.var_10513 = 750;
 	level.var_10510 = 1.6;
-	function_01C5("player_swimFriction",level.var_104DA);
-	function_01C5("player_swimAcceleration",level.var_104AE);
-	function_01C5("player_swimVerticalFriction",level.var_10514);
-	function_01C5("player_swimVerticalSpeed",level.var_10515);
-	function_01C5("player_swimVerticalAcceleration",level.var_10513);
-	function_01C5("player_swimSpeed",level.var_1050D);
-	function_01C5("player_sprintSpeedScale",level.var_10510);
+	setsaveddvar("player_swimFriction",level.var_104DA);
+	setsaveddvar("player_swimAcceleration",level.var_104AE);
+	setsaveddvar("player_swimVerticalFriction",level.var_10514);
+	setsaveddvar("player_swimVerticalSpeed",level.var_10515);
+	setsaveddvar("player_swimVerticalAcceleration",level.var_10513);
+	setsaveddvar("player_swimSpeed",level.var_1050D);
+	setsaveddvar("player_sprintSpeedScale",level.var_10510);
 	self _meth_800E(0);
 	self _meth_8014(1);
 	self setviewkickscale(0.6);
@@ -153,19 +153,19 @@ func_621C(param_00) {
 func_5558() {
 	level notify("disable_space");
 	self notify("disable_space");
-	function_01C5("cg_footsteps",1);
-	function_01C5("cg_equipmentSounds",1);
-	function_01C5("cg_landingSounds",1);
-	function_01C5("player_spaceEnabled","0");
-	function_01C5("player_sprintSpeedScale",1.4);
-	function_01C5("player_swimFriction",30);
-	function_01C5("player_swimAcceleration",100);
-	function_01C5("player_swimVerticalFriction",40);
-	function_01C5("player_swimVerticalSpeed",120);
-	function_01C5("player_swimVerticalAcceleration",160);
-	function_01C5("player_swimSpeed",80);
-	function_01C5("player_sprintUnlimited","1");
-	function_01C5("player_swimWaterCurrent",(0,0,0));
+	setsaveddvar("cg_footsteps",1);
+	setsaveddvar("cg_equipmentSounds",1);
+	setsaveddvar("cg_landingSounds",1);
+	setsaveddvar("player_spaceEnabled","0");
+	setsaveddvar("player_sprintSpeedScale",1.4);
+	setsaveddvar("player_swimFriction",30);
+	setsaveddvar("player_swimAcceleration",100);
+	setsaveddvar("player_swimVerticalFriction",40);
+	setsaveddvar("player_swimVerticalSpeed",120);
+	setsaveddvar("player_swimVerticalAcceleration",160);
+	setsaveddvar("player_swimSpeed",80);
+	setsaveddvar("player_sprintUnlimited","1");
+	setsaveddvar("player_swimWaterCurrent",(0,0,0));
 	self _meth_800E(1);
 	self _meth_8014(0);
 	scripts\engine\utility::allow_doublejump(1);

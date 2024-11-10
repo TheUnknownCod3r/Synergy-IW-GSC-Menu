@@ -70,7 +70,7 @@ func_CEE7(param_00,param_01,param_02,param_03,param_04,param_05,param_06) {
 	}
 
 	for(;;) {
-		var_09 = function_01E1(scripts\engine\utility::getfx(param_00),self gettagorigin("tag_eye"),self);
+		var_09 = spawnfxforclient(scripts\engine\utility::getfx(param_00),self gettagorigin("tag_eye"),self);
 		triggerfx(var_09);
 		var_09 thread scripts\mp\_utility::delayentdelete(param_01);
 		wait(param_01);

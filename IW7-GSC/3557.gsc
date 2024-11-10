@@ -57,7 +57,7 @@ createcovernavobstacle() {
 	self endon("entitydeleted");
 	self endon("despawnCover");
 	self waittill("coverwall_expand_finish");
-	self.var_BE64 = function_0314(self);
+	self.var_BE64 = _func_314(self);
 }
 
 func_5285(param_00) {

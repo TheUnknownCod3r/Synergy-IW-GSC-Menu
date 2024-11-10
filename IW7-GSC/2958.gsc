@@ -80,7 +80,7 @@ func_12997(param_00,param_01) {
 
 func_11775() {
 	self.var_9C1F = 1;
-	var_00 = function_0072("allies");
+	var_00 = getaiarray("allies");
 	foreach(var_02 in var_00) {
 		if(isdefined(var_02.var_8BB5)) {
 			continue;
@@ -94,7 +94,7 @@ func_11775() {
 func_11774() {
 	self.var_9C1F = undefined;
 	level notify("thermal_fx_off" + self.unique_id);
-	var_00 = function_0072("allies");
+	var_00 = getaiarray("allies");
 	for(var_01 = 0;var_01 < var_00.size;var_01++) {
 		var_00[var_01].var_8BB5 = undefined;
 	}
@@ -109,7 +109,7 @@ func_13BF6(param_00) {
 		return 0;
 	}
 
-	if(function_0241(param_00)) {
+	if(weaponhasthermalscope(param_00)) {
 		return 1;
 	}
 

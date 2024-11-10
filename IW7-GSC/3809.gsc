@@ -5,402 +5,402 @@
 
 #using_animtree("script_model");
 
-_id_47DA() {
-  level._id_EC85["crane"]["shipcrib_crane_clamp_90_ccw_1"] = %shipcrib_crane_clamp_90_ccw_1;
-  level._id_EC85["crane"]["shipcrib_crane_clamp_90_ccw_2"] = %shipcrib_crane_clamp_90_ccw_2;
-  level._id_EC85["crane"]["shipcrib_crane_clamp_90_cw_1"] = %shipcrib_crane_clamp_90_cw_1;
-  level._id_EC85["crane"]["shipcrib_crane_clamp_90_cw_2"] = %shipcrib_crane_clamp_90_cw_2;
-  level._id_EC85["crane"]["shipcrib_crane_clamp_f_72"] = %shipcrib_crane_clamp_f_72;
-  level._id_EC85["crane"]["shipcrib_crane_clamp_b_72"] = %shipcrib_crane_clamp_b_72;
-  level._id_EC85["crane"]["shipcrib_crane_clamp_up"] = %shipcrib_crane_clamp_up;
-  level._id_EC85["crane"]["shipcrib_crane_clamp_down"] = %shipcrib_crane_clamp_down;
+func_47DA() {
+  level.func_EC85["crane"]["shipcrib_crane_clamp_90_ccw_1"] = %shipcrib_crane_clamp_90_ccw_1;
+  level.func_EC85["crane"]["shipcrib_crane_clamp_90_ccw_2"] = %shipcrib_crane_clamp_90_ccw_2;
+  level.func_EC85["crane"]["shipcrib_crane_clamp_90_cw_1"] = %shipcrib_crane_clamp_90_cw_1;
+  level.func_EC85["crane"]["shipcrib_crane_clamp_90_cw_2"] = %shipcrib_crane_clamp_90_cw_2;
+  level.func_EC85["crane"]["shipcrib_crane_clamp_f_72"] = %shipcrib_crane_clamp_f_72;
+  level.func_EC85["crane"]["shipcrib_crane_clamp_b_72"] = %shipcrib_crane_clamp_b_72;
+  level.func_EC85["crane"]["shipcrib_crane_clamp_up"] = %shipcrib_crane_clamp_up;
+  level.func_EC85["crane"]["shipcrib_crane_clamp_down"] = %shipcrib_crane_clamp_down;
 }
 
-_id_E3D8(var_0) {
-  level _id_47DA();
+func_E3D8(var_00) {
+  level func_47DA();
 
-  if (!isdefined(level._id_E35D))
-  level._id_E35D = spawnstruct();
+  if (!isdefined(level.func_E35D))
+  level.func_E35D = spawnstruct();
 
-  if (!isdefined(var_0)) {
-  var_0 = "_ignore_last_sparam";
-  var_1 = level._id_FD6E._id_E35D;
+  if (!isdefined(var_00)) {
+  var_00 = "_ignore_last_sparam";
+  var_01 = level.func_FD6E.func_E35D;
   }
   else
-  var_1 = level._id_FD6E._id_E35D;
+  var_01 = level.func_FD6E.func_E35D;
 
-  var_2 = _id_0EFB::_id_7CC1("return_crane_a_airlockstart", "script_noteworthy", var_0);
+  var_02 = func_0EFB::func_7CC1("return_crane_a_airlockstart", "script_noteworthy", var_00);
 
   if (var_2.size != 1)
   return;
 
-  level._id_E35D._id_A2E8["a"] = _id_0EFB::_id_798B("return_crane_a_top", "script_noteworthy", "arm_origin", var_0);
-  level._id_E35D._id_A2E8["b"] = _id_0EFB::_id_798B("return_crane_b_top", "script_noteworthy", "arm_origin", var_0);
-  level._id_E35D._id_A2E8["a"]._id_10CC9 = level._id_E35D._id_A2E8["a"].origin;
-  level._id_E35D._id_A2E8["b"]._id_10CC9 = level._id_E35D._id_A2E8["b"].origin;
-  level._id_E35D._id_A2E8["a"]._id_3FFD = _id_0EFB::_id_798B("return_crane_a_top", "script_noteworthy", "clamp", var_0);
-  level._id_E35D._id_A2E8["b"]._id_3FFD = _id_0EFB::_id_798B("return_crane_b_top", "script_noteworthy", "clamp", var_0);
-  level._id_E35D._id_A2E8["a"]._id_3FFB = _id_0EFB::_id_798B("return_crane_a_top", "script_noteworthy", "clamp_origin", var_0);
-  level._id_E35D._id_A2E8["b"]._id_3FFB = _id_0EFB::_id_798B("return_crane_b_top", "script_noteworthy", "clamp_origin", var_0);
-  level._id_E35D._id_A2E8["b"]._id_3FFB._id_EACA = -72;
-  level._id_E35D._id_A2E8["a"]._id_3FFD _meth_83D0(#animtree);
-  level._id_E35D._id_A2E8["b"]._id_3FFD _meth_83D0(#animtree);
-  level._id_E35D._id_A2E8["a"]._id_1ACA = _id_0EFB::_id_7CBE("return_crane_a_airlockstart", "script_noteworthy", var_0).origin;
-  level._id_E35D._id_A2E8["b"]._id_1ACA = _id_0EFB::_id_7CBE("return_crane_b_airlockstart", "script_noteworthy", var_0).origin;
-  level._id_E35D._id_A2E8["a"]._id_1AE0 = _id_0EFB::_id_7CBE("return_crane_a_airlockend", "script_noteworthy", var_0).origin;
-  level._id_E35D._id_A2E8["b"]._id_1AE0 = _id_0EFB::_id_7CBE("return_crane_b_airlockend", "script_noteworthy", var_0).origin;
-  level._id_E35D._id_A2E8["a"]._id_62EB = _id_0EFB::_id_7CBE("return_crane_a_end", "script_noteworthy", var_0).origin;
-  level._id_E35D._id_A2E8["b"]._id_62EB = _id_0EFB::_id_7CBE("return_crane_b_end", "script_noteworthy", var_0).origin;
-  level._id_E35D._id_A2E8["a"]._id_11A05 = _id_0EFB::_id_7CBE("return_crane_a_topmove", "script_noteworthy", var_0).origin;
-  level._id_E35D._id_A2E8["b"]._id_11A05 = _id_0EFB::_id_7CBE("return_crane_b_topmove", "script_noteworthy", var_0).origin;
-  level._id_E35D._id_A2E8["a"]._id_3FFB linkto(level._id_E35D._id_A2E8["a"]);
-  level._id_E35D._id_A2E8["b"]._id_3FFB linkto(level._id_E35D._id_A2E8["b"]);
-  level._id_E35D._id_A2E8["a"]._id_3FFD linkto(level._id_E35D._id_A2E8["a"]);
-  level._id_E35D._id_A2E8["b"]._id_3FFD linkto(level._id_E35D._id_A2E8["b"]);
-  level._id_E35D._id_A2EA = _id_0EFB::_id_798B("jackal_return_door_top", "script_noteworthy", "origin", var_0);
-  var_3 = getentarray(level._id_E35D._id_A2EA._id_0334, "targetname");
-  scripts\engine\utility::_id_227D(var_3, ::linkto, level._id_E35D._id_A2EA);
-  level._id_E35D._id_A2E9 = _id_0EFB::_id_798B("jackal_return_door_mid", "script_noteworthy", "origin", var_0);
-  var_3 = getentarray(level._id_E35D._id_A2E9._id_0334, "targetname");
-  scripts\engine\utility::_id_227D(var_3, ::linkto, level._id_E35D._id_A2E9);
-  level._id_E35D._id_1D05 = level._id_E35D._id_A2E8["b"]._id_0336;
+  level.func_E35D.func_A2E8["a"] = func_0EFB::func_798B("return_crane_a_top", "script_noteworthy", "arm_origin", var_00);
+  level.func_E35D.func_A2E8["b"] = func_0EFB::func_798B("return_crane_b_top", "script_noteworthy", "arm_origin", var_00);
+  level.func_E35D.func_A2E8["a"].func_10CC9 = level.func_E35D.func_A2E8["a"].origin;
+  level.func_E35D.func_A2E8["b"].func_10CC9 = level.func_E35D.func_A2E8["b"].origin;
+  level.func_E35D.func_A2E8["a"].func_3FFD = func_0EFB::func_798B("return_crane_a_top", "script_noteworthy", "clamp", var_00);
+  level.func_E35D.func_A2E8["b"].func_3FFD = func_0EFB::func_798B("return_crane_b_top", "script_noteworthy", "clamp", var_00);
+  level.func_E35D.func_A2E8["a"].func_3FFB = func_0EFB::func_798B("return_crane_a_top", "script_noteworthy", "clamp_origin", var_00);
+  level.func_E35D.func_A2E8["b"].func_3FFB = func_0EFB::func_798B("return_crane_b_top", "script_noteworthy", "clamp_origin", var_00);
+  level.func_E35D.func_A2E8["b"].func_3FFB.func_EACA = -72;
+  level.func_E35D.func_A2E8["a"].func_3FFD glinton(#animtree);
+  level.func_E35D.func_A2E8["b"].func_3FFD glinton(#animtree);
+  level.func_E35D.func_A2E8["a"].func_1ACA = func_0EFB::func_7CBE("return_crane_a_airlockstart", "script_noteworthy", var_00).origin;
+  level.func_E35D.func_A2E8["b"].func_1ACA = func_0EFB::func_7CBE("return_crane_b_airlockstart", "script_noteworthy", var_00).origin;
+  level.func_E35D.func_A2E8["a"].func_1AE0 = func_0EFB::func_7CBE("return_crane_a_airlockend", "script_noteworthy", var_00).origin;
+  level.func_E35D.func_A2E8["b"].func_1AE0 = func_0EFB::func_7CBE("return_crane_b_airlockend", "script_noteworthy", var_00).origin;
+  level.func_E35D.func_A2E8["a"].func_62EB = func_0EFB::func_7CBE("return_crane_a_end", "script_noteworthy", var_00).origin;
+  level.func_E35D.func_A2E8["b"].func_62EB = func_0EFB::func_7CBE("return_crane_b_end", "script_noteworthy", var_00).origin;
+  level.func_E35D.func_A2E8["a"].func_11A05 = func_0EFB::func_7CBE("return_crane_a_topmove", "script_noteworthy", var_00).origin;
+  level.func_E35D.func_A2E8["b"].func_11A05 = func_0EFB::func_7CBE("return_crane_b_topmove", "script_noteworthy", var_00).origin;
+  level.func_E35D.func_A2E8["a"].func_3FFB linkto(level.func_E35D.func_A2E8["a"]);
+  level.func_E35D.func_A2E8["b"].func_3FFB linkto(level.func_E35D.func_A2E8["b"]);
+  level.func_E35D.func_A2E8["a"].func_3FFD linkto(level.func_E35D.func_A2E8["a"]);
+  level.func_E35D.func_A2E8["b"].func_3FFD linkto(level.func_E35D.func_A2E8["b"]);
+  level.func_E35D.func_A2EA = func_0EFB::func_798B("jackal_return_door_top", "script_noteworthy", "origin", var_00);
+  var_03 = getentarray(level.func_E35D.func_A2EA.target, "targetname");
+  scripts\engine\utility::array_call(var_03, ::linkto, level.func_E35D.func_A2EA);
+  level.func_E35D.func_A2E9 = func_0EFB::func_798B("jackal_return_door_mid", "script_noteworthy", "origin", var_00);
+  var_03 = getentarray(level.func_E35D.func_A2E9.target, "targetname");
+  scripts\engine\utility::array_call(var_03, ::linkto, level.func_E35D.func_A2E9);
+  level.func_E35D.func_1D05 = level.func_E35D.func_A2E8["b"].targetname;
 }
 
-_id_F2CE() {
+func_F2CE() {
   level.player _meth_82C0("shipcrib_crane_in_jackal_canopy_closed_airlock_has_no_air", 0.5);
-  thread _id_25C6();
+  thread func_25C6();
 }
 
-_id_F2CD() {
+func_F2CD() {
   level.player _meth_82C0("shipcrib_crane_in_jackal_canopy_closed_airlock_has_air", 12.0);
 }
 
-_id_F2CF() {
+func_F2CF() {
   level.player _meth_82C0("shipcrib_crane_in_jackal_canopy_closed_hangar_has_air", 7.0);
-  thread _id_25C7();
+  thread func_25C7();
 }
 
-_id_F2D0() {
-  level.player _meth_8070(0.2);
+func_F2D0() {
+  level.player clearclienttriggeraudiozone(0.2);
 }
 
-_id_F2D1() {
-  level.player _meth_8070(5.0);
+func_F2D1() {
+  level.player clearclienttriggeraudiozone(5.0);
 }
 
-_id_25C6() {
-  level._id_A2E5 = spawn("script_origin", (-1404, 1623, -285));
-  level._id_A2E6 = spawn("script_origin", (-817, 904, -302));
+func_25C6() {
+  level.func_A2E5 = spawn("script_origin", (-1404, 1623, -285));
+  level.func_A2E6 = spawn("script_origin", (-817, 904, -302));
   wait 0.8;
-  level._id_A2E5 playloopsound("scn_jackal_crane_alarm_high");
-  level._id_A2E6 playloopsound("scn_jackal_crane_alarm_low");
+  level.func_A2E5 playloopsound("scn_jackal_crane_alarm_high");
+  level.func_A2E6 playloopsound("scn_jackal_crane_alarm_low");
   level.player playsound("jackal_airlock_pressurize_lr");
 }
 
-_id_25C7() {
+func_25C7() {
   wait 0.8;
-  level._id_A2E5 _id_0B91::_id_10460(0.2, 1);
-  level._id_A2E6 _id_0B91::_id_10460(0.2, 1);
+  level.func_A2E5 scripts/sp/utility::func_10460(0.2, 1);
+  level.func_A2E6 scripts/sp/utility::func_10460(0.2, 1);
 }
 
-_id_6C94() {
+func_6C94() {
   self endon("death");
 
   for (;;)
   wait 1000;
 }
 
-_id_E3DA(var_0) {
+func_E3DA(var_00) {
   level.player endon("death");
 
-  switch (var_0) {
+  switch (var_00) {
   case "top":
-  level._id_E35D._id_A2E8["a"].origin = level._id_E35D._id_A2E8["a"]._id_10CC9;
-  level._id_E35D._id_A2E8["b"].origin = level._id_E35D._id_A2E8["b"]._id_10CC9;
-  level._id_E35D._id_A2E8["a"]._id_3FFB unlink();
-  level._id_E35D._id_A2E8["a"]._id_3FFB.angles = level._id_E35D._id_A2E8["a"]._id_3FFB.angles + (0, 180, 0);
-  level._id_E35D._id_A2E8["a"]._id_3FFB linkto(level._id_E35D._id_A2E8["a"]);
-  level._id_E35D._id_A2E8["b"]._id_3FFB unlink();
-  level._id_E35D._id_A2E8["b"]._id_3FFB.angles = level._id_E35D._id_A2E8["b"]._id_3FFB.angles + (0, 180, 0);
-  level._id_E35D._id_A2E8["b"]._id_3FFB linkto(level._id_E35D._id_A2E8["b"]);
+  level.func_E35D.func_A2E8["a"].origin = level.func_E35D.func_A2E8["a"].func_10CC9;
+  level.func_E35D.func_A2E8["b"].origin = level.func_E35D.func_A2E8["b"].func_10CC9;
+  level.func_E35D.func_A2E8["a"].func_3FFB unlink();
+  level.func_E35D.func_A2E8["a"].func_3FFB.angles = level.func_E35D.func_A2E8["a"].func_3FFB.angles + (0, 180, 0);
+  level.func_E35D.func_A2E8["a"].func_3FFB linkto(level.func_E35D.func_A2E8["a"]);
+  level.func_E35D.func_A2E8["b"].func_3FFB unlink();
+  level.func_E35D.func_A2E8["b"].func_3FFB.angles = level.func_E35D.func_A2E8["b"].func_3FFB.angles + (0, 180, 0);
+  level.func_E35D.func_A2E8["b"].func_3FFB linkto(level.func_E35D.func_A2E8["b"]);
   break;
   case "airlock":
-  level._id_E35D._id_A2E8["a"]._id_3FFD _meth_82A4(%shipcrib_crane_clamp_extended_rotate_cc, 10, 0, 0);
-  level._id_E35D._id_A2E8["b"]._id_3FFD _meth_82A4(%shipcrib_crane_clamp_extended_rotate_c, 10, 0, 0);
-  level._id_E35D._id_A2E8["a"]._id_3FFB unlink();
-  level._id_E35D._id_A2E8["a"]._id_3FFB.angles = level._id_E35D._id_A2E8["a"]._id_3FFB.angles + (0, -90, 0);
-  level._id_E35D._id_A2E8["a"]._id_3FFB linkto(level._id_E35D._id_A2E8["a"]);
-  level._id_E35D._id_A2E8["b"]._id_3FFB unlink();
-  level._id_E35D._id_A2E8["b"]._id_3FFB.origin = level._id_E35D._id_A2E8["b"]._id_3FFB.origin + anglestoforward(level._id_E35D._id_A2E8["b"]._id_3FFB.angles) * level._id_E35D._id_A2E8["b"]._id_3FFB._id_EACA;
-  level._id_E35D._id_A2E8["b"]._id_3FFB.angles = level._id_E35D._id_A2E8["b"]._id_3FFB.angles + (0, 90, 0);
-  level._id_E35D._id_A2E8["b"]._id_3FFB linkto(level._id_E35D._id_A2E8["b"]);
-  level._id_E35D._id_A2E8["a"].origin = level._id_E35D._id_A2E8["a"]._id_1ACA;
-  level._id_E35D._id_A2E8["b"].origin = level._id_E35D._id_A2E8["b"]._id_1ACA;
+  level.func_E35D.func_A2E8["a"].func_3FFD setanimknob(%shipcrib_crane_clamp_extended_rotate_cc, 10, 0, 0);
+  level.func_E35D.func_A2E8["b"].func_3FFD setanimknob(%shipcrib_crane_clamp_extended_rotate_c, 10, 0, 0);
+  level.func_E35D.func_A2E8["a"].func_3FFB unlink();
+  level.func_E35D.func_A2E8["a"].func_3FFB.angles = level.func_E35D.func_A2E8["a"].func_3FFB.angles + (0, -90, 0);
+  level.func_E35D.func_A2E8["a"].func_3FFB linkto(level.func_E35D.func_A2E8["a"]);
+  level.func_E35D.func_A2E8["b"].func_3FFB unlink();
+  level.func_E35D.func_A2E8["b"].func_3FFB.origin = level.func_E35D.func_A2E8["b"].func_3FFB.origin + anglestoforward(level.func_E35D.func_A2E8["b"].func_3FFB.angles) * level.func_E35D.func_A2E8["b"].func_3FFB.func_EACA;
+  level.func_E35D.func_A2E8["b"].func_3FFB.angles = level.func_E35D.func_A2E8["b"].func_3FFB.angles + (0, 90, 0);
+  level.func_E35D.func_A2E8["b"].func_3FFB linkto(level.func_E35D.func_A2E8["b"]);
+  level.func_E35D.func_A2E8["a"].origin = level.func_E35D.func_A2E8["a"].func_1ACA;
+  level.func_E35D.func_A2E8["b"].origin = level.func_E35D.func_A2E8["b"].func_1ACA;
   scripts\engine\utility::waitframe();
   break;
   }
 }
 
-_id_E3D9(var_0, var_1, var_2, var_3, var_4) {
-  var_1 = level._id_E35D._id_A2E8[var_1];
-  var_1._id_A056 = var_0;
-  var_0 _meth_83E7(var_1._id_3FFD gettagorigin("j_cranebase"), var_1._id_3FFD gettagangles("j_cranebase"));
+func_E3D9(var_00, var_01, var_02, var_03, var_04) {
+  var_01 = level.func_E35D.func_A2E8[var_01];
+  var_1.func_A056 = var_00;
+  var_00 vehicle_teleport(var_1.func_3FFD gettagorigin("j_cranebase"), var_1.func_3FFD gettagangles("j_cranebase"));
 
-  if (isdefined(var_2)) {
-  if (!isdefined(var_3))
-  var_3 = "crib_craneride";
+  if (isdefined(var_02)) {
+  if (!isdefined(var_03))
+  var_03 = "crib_craneride";
 
-  var_0 _id_0BDC::_id_A07D();
-  var_0 thread _id_0BDC::_id_F43D("player");
-  var_0 _id_0BDC::_id_F358(var_3);
-  _id_0BDC::_id_10CD2(var_0);
+  var_00 func_0BDC::func_A07D();
+  var_00 thread func_0BDC::func_F43D("player");
+  var_00 func_0BDC::func_F358(var_03);
+  func_0BDC::func_10CD2(var_00);
   }
 
-  var_5 = length(var_1._id_3FFB.origin - var_1._id_3FFD gettagorigin("j_cranebase"));
+  var_05 = length(var_1.func_3FFB.origin - var_1.func_3FFD gettagorigin("j_cranebase"));
 
-  if (isdefined(var_4))
-  var_0 linkto(var_1._id_3FFD, "j_cranebase", (0, 0, -39.3664), (0, 180, 0));
+  if (isdefined(var_04))
+  var_00 linkto(var_1.func_3FFD, "j_cranebase", (0, 0, -39.3664), (0, 180, 0));
   else
-  var_0 linkto(var_1._id_3FFD, "j_cranebase", (0, 0, -39.3664), (0, 0, 0));
+  var_00 linkto(var_1.func_3FFD, "j_cranebase", (0, 0, -39.3664), (0, 0, 0));
 }
 
-_id_E3CB() {
-  var_0 = 1.3;
-  _id_0BDC::_id_A38E(0.0, undefined, undefined, var_0);
-  wait(var_0);
+func_E3CB() {
+  var_00 = 1.3;
+  func_0BDC::func_A38E(0.0, undefined, undefined, var_00);
+  wait(var_00);
 }
 
-_id_E3D1(var_0, var_1, var_2, var_3, var_4) {
+func_E3D1(var_00, var_01, var_02, var_03, var_04) {
   level endon("stop_jackal_return_do");
-  var_5 = 7;
-  var_6 = 4.25;
-  var_7 = 5;
-  var_8 = 8;
-  var_9 = 1;
+  var_05 = 7;
+  var_06 = 4.25;
+  var_07 = 5;
+  var_08 = 8;
+  var_09 = 1;
   var_10 = undefined;
 
-  switch (var_1) {
+  switch (var_01) {
   case "land":
   var_10 = 1;
   case "full":
-  var_11 = var_5 - var_9;
-  level._id_E35D._id_A2E8[var_0] moveto(level._id_E35D._id_A2E8[var_0]._id_11A05, var_11);
+  var_11 = var_05 - var_09;
+  level.func_E35D.func_A2E8[var_00] moveto(level.func_E35D.func_A2E8[var_00].func_11A05, var_11);
 
-  if (var_0 == "a") {
-  level._id_E35D._id_A2E8[var_0] thread _id_E3CC(var_11, 1);
-  level._id_E35D thread _id_E3CE(var_0, var_11, 1, "shipcrib_crane_clamp_90_cw_1");
+  if (var_00 == "a") {
+  level.func_E35D.func_A2E8[var_00] thread func_E3CC(var_11, 1);
+  level.func_E35D thread func_E3CE(var_00, var_11, 1, "shipcrib_crane_clamp_90_cw_1");
   } else {
-  level._id_E35D._id_A2E8["b"]._id_3FFD _meth_82A2(level._id_EC85["crane"]["shipcrib_crane_clamp_f_72"], 10, 0, 1 / var_11 * 1.15);
-  level._id_E35D thread _id_E3CE(var_0, var_11, 1, "shipcrib_crane_clamp_90_ccw_1");
+  level.func_E35D.func_A2E8["b"].func_3FFD give_attacker_kill_rewards(level.func_EC85["crane"]["shipcrib_crane_clamp_f_72"], 10, 0, 1 / var_11 * 1.15);
+  level.func_E35D thread func_E3CE(var_00, var_11, 1, "shipcrib_crane_clamp_90_ccw_1");
   }
 
-  level._id_E35D._id_A2EA thread _id_E3D4(var_5);
-  level._id_E35D._id_A2EA moveto(level._id_E35D._id_A2EA.origin + anglestoright(level._id_E35D._id_A2EA.angles) * 816, var_5);
-  wait(var_5 - 0.25);
+  level.func_E35D.func_A2EA thread func_E3D4(var_05);
+  level.func_E35D.func_A2EA moveto(level.func_E35D.func_A2EA.origin + anglestoright(level.func_E35D.func_A2EA.angles) * 816, var_05);
+  wait(var_05 - 0.25);
 
-  if (var_0 == "a")
-  level._id_E35D._id_A2E8[var_0] thread _id_E3CC(var_4);
+  if (var_00 == "a")
+  level.func_E35D.func_A2E8[var_00] thread func_E3CC(var_04);
 
-  level._id_E35D._id_A2E8[var_0] moveto(level._id_E35D._id_A2E8[var_0]._id_1ACA, var_4);
-  level._id_E35D._id_A2EA thread _id_E3D2(var_6, var_0);
+  level.func_E35D.func_A2E8[var_00] moveto(level.func_E35D.func_A2E8[var_00].func_1ACA, var_04);
+  level.func_E35D.func_A2EA thread func_E3D2(var_06, var_00);
   level waittill("return_door_closed");
   case "pressurize":
   if (isdefined(var_10))
   break;
 
-  _id_E3CB();
-  level _id_0B28::_id_CCA8("sc_assault_maptrans_jackal_return", 15);
+  func_E3CB();
+  level scripts/sp/endmission::func_CCA8("sc_assault_maptrans_jackal_return", 15);
   case "airlock":
-  level._id_E35D._id_A2E8[var_0] thread _id_E3CC(var_2, 1);
-  level._id_E35D._id_A2E8[var_0] moveto(level._id_E35D._id_A2E8[var_0]._id_1AE0, var_2);
-  level._id_E35D thread _id_E3CE(var_0, var_2, undefined);
-  wait(var_2 + var_9);
+  level.func_E35D.func_A2E8[var_00] thread func_E3CC(var_02, 1);
+  level.func_E35D.func_A2E8[var_00] moveto(level.func_E35D.func_A2E8[var_00].func_1AE0, var_02);
+  level.func_E35D thread func_E3CE(var_00, var_02, undefined);
+  wait(var_02 + var_09);
   level notify("light_jackal_middoor");
-  level._id_E35D._id_A2E9 thread _id_E3D4(var_7);
-  level._id_E35D._id_A2E9 moveto(level._id_E35D._id_A2E9.origin + anglestoright(level._id_E35D._id_A2E9.angles) * 816, var_7);
-  wait(var_7);
+  level.func_E35D.func_A2E9 thread func_E3D4(var_07);
+  level.func_E35D.func_A2E9 moveto(level.func_E35D.func_A2E9.origin + anglestoright(level.func_E35D.func_A2E9.angles) * 816, var_07);
+  wait(var_07);
 
-  if (var_0 == "a")
-  level._id_E35D._id_A2E8[var_0] thread _id_E3CC(var_3);
+  if (var_00 == "a")
+  level.func_E35D.func_A2E8[var_00] thread func_E3CC(var_03);
   else
-  level._id_E35D._id_A2E8[var_0] thread _id_E3CC(var_3, 1);
+  level.func_E35D.func_A2E8[var_00] thread func_E3CC(var_03, 1);
 
-  level._id_E35D._id_A2E8[var_0] moveto(level._id_E35D._id_A2E8[var_0]._id_62EB, var_3);
-  wait(var_3);
+  level.func_E35D.func_A2E8[var_00] moveto(level.func_E35D.func_A2E8[var_00].func_62EB, var_03);
+  wait(var_03);
 
-  if (var_0 == "a") {
-  level scripts\engine\utility::_id_6E3F("jackal_elevator_finished", 1);
-  level _id_0B91::_id_C12D("jackal_elevator_finished", 1);
-  level._id_E35D._id_A2E8[var_0]._id_A056 _id_0B91::_id_C12D("player_dismount", 1);
+  if (var_00 == "a") {
+  level scripts\engine\utility::flag_set_delayed("jackal_elevator_finished", 1);
+  level scripts/sp/utility::func_C12D("jackal_elevator_finished", 1);
+  level.func_E35D.func_A2E8[var_00].func_A056 scripts/sp/utility::func_C12D("player_dismount", 1);
 
   if (level.script == "shipcrib_rogue" || level.script == "shipcrib_prisoner") {
-  if (isdefined(scripts\engine\utility::_id_817E("jackal_return_a_exit", "targetname"))) {
-  level.player scripts\engine\utility::_id_50E1(4.5, ::unlink);
-  level scripts\engine\utility::delaythread(4.5, _id_0B91::_id_11633, scripts\engine\utility::_id_817E("jackal_return_a_exit", "targetname"));
+  if (isdefined(scripts\engine\utility::getstruct("jackal_return_a_exit", "targetname"))) {
+  level.player scripts\engine\utility::delaycall(4.5, ::unlink);
+  level scripts\engine\utility::delaythread(4.5, scripts/sp/utility::func_11633, scripts\engine\utility::getstruct("jackal_return_a_exit", "targetname"));
   }
   }
   }
 
-  level._id_E35D._id_A2E9 thread _id_E3D2(var_8);
+  level.func_E35D.func_A2E9 thread func_E3D2(var_08);
   wait 0.5;
   break;
   case "returned":
   var_12 = 90;
 
-  if (var_0 == "a")
+  if (var_00 == "a")
   var_12 = -90;
 
-  level._id_E35D._id_A2E8[var_0]._id_3FFB unlink();
-  level._id_E35D._id_A2E8[var_0]._id_3FFB rotateby((0, var_12, 0), 0.05);
+  level.func_E35D.func_A2E8[var_00].func_3FFB unlink();
+  level.func_E35D.func_A2E8[var_00].func_3FFB rotateby((0, var_12, 0), 0.05);
   scripts\engine\utility::waitframe();
   scripts\engine\utility::waitframe();
 
-  if (var_0 == "b")
-  level._id_E35D._id_A2E8[var_0]._id_3FFB.origin = level._id_E35D._id_A2E8[var_0]._id_3FFB.origin + anglestoforward(level._id_E35D._id_A2E8["b"]._id_3FFB.angles) * level._id_E35D._id_A2E8[var_0]._id_3FFB._id_EACA;
+  if (var_00 == "b")
+  level.func_E35D.func_A2E8[var_00].func_3FFB.origin = level.func_E35D.func_A2E8[var_00].func_3FFB.origin + anglestoforward(level.func_E35D.func_A2E8["b"].func_3FFB.angles) * level.func_E35D.func_A2E8[var_00].func_3FFB.func_EACA;
 
-  level._id_E35D._id_A2E8[var_0]._id_3FFB linkto(level._id_E35D._id_A2E8[var_0]);
-  level._id_E35D._id_A2E8[var_0] moveto(level._id_E35D._id_A2E8[var_0]._id_62EB, 0.05);
+  level.func_E35D.func_A2E8[var_00].func_3FFB linkto(level.func_E35D.func_A2E8[var_00]);
+  level.func_E35D.func_A2E8[var_00] moveto(level.func_E35D.func_A2E8[var_00].func_62EB, 0.05);
   break;
   }
 }
 
-_id_E3D2(var_0, var_1) {
+func_E3D2(var_00, var_01) {
   self endon("death");
 
-  if (isdefined(self._id_9B94))
+  if (isdefined(self.func_9B94))
   return;
 
-  self._id_9B94 = 1;
+  self.func_9B94 = 1;
 
-  if (isdefined(var_1)) {
-  while (level._id_E35D._id_A2E8[var_1].origin[2] + 20 > self.origin[2])
+  if (isdefined(var_01)) {
+  while (level.func_E35D.func_A2E8[var_01].origin[2] + 20 > self.origin[2])
   scripts\engine\utility::waitframe();
   }
 
-  thread _id_E3D4(var_0);
-  self moveto(self.origin + anglestoright(self.angles) * -816, var_0);
-  wait(var_0);
-  self._id_9B94 = undefined;
+  thread func_E3D4(var_00);
+  self moveto(self.origin + anglestoright(self.angles) * -816, var_00);
+  wait(var_00);
+  self.func_9B94 = undefined;
   level notify("return_door_closed");
 }
 
-_id_E3CE(var_0, var_1, var_2, var_3) {
-  if (isdefined(var_3))
-  level._id_E35D._id_A2E8[var_0]._id_3FFD _meth_82A2(level._id_EC85["crane"][var_3], 10, 0, 1 / var_1);
-  else if (var_0 == "a") {
-  var_1 = getanimlength(%shipcrib_crane_clamp_extended_rotate_cc) / 0.45;
-  level._id_E35D._id_A2E8[var_0]._id_3FFD playsound("scn_ship_titan_jackal_lower_plr_start_lr");
-  level._id_E35D._id_A2E8[var_0]._id_3FFD playloopsound("scn_ship_titan_jackal_lower_plr_lp_lr");
-  level._id_E35D._id_A2E8[var_0]._id_3FFD _meth_82A4(%shipcrib_crane_clamp_extended_rotate_cc, 10, 0, 0.45);
-  level._id_E35D._id_A2E8[var_0]._id_3FFD scripts\engine\utility::_id_50E1(var_1, ::stoploopsound);
-  level._id_E35D._id_A2E8[var_0]._id_3FFD scripts\engine\utility::_id_50E1(var_1, ::playsound, "scn_ship_titan_jackal_lower_plr_stop_lr");
+func_E3CE(var_00, var_01, var_02, var_03) {
+  if (isdefined(var_03))
+  level.func_E35D.func_A2E8[var_00].func_3FFD give_attacker_kill_rewards(level.func_EC85["crane"][var_03], 10, 0, 1 / var_01);
+  else if (var_00 == "a") {
+  var_01 = getanimlength(%shipcrib_crane_clamp_extended_rotate_cc) / 0.45;
+  level.func_E35D.func_A2E8[var_00].func_3FFD playsound("scn_ship_titan_jackal_lower_plr_start_lr");
+  level.func_E35D.func_A2E8[var_00].func_3FFD playloopsound("scn_ship_titan_jackal_lower_plr_lp_lr");
+  level.func_E35D.func_A2E8[var_00].func_3FFD setanimknob(%shipcrib_crane_clamp_extended_rotate_cc, 10, 0, 0.45);
+  level.func_E35D.func_A2E8[var_00].func_3FFD scripts\engine\utility::delaycall(var_01, ::stoploopsound);
+  level.func_E35D.func_A2E8[var_00].func_3FFD scripts\engine\utility::delaycall(var_01, ::playsound, "scn_ship_titan_jackal_lower_plr_stop_lr");
   }
   else
-  level._id_E35D._id_A2E8[var_0]._id_3FFD _meth_82A4(%shipcrib_crane_clamp_extended_rotate_c, 10, 0, 0.45);
+  level.func_E35D.func_A2E8[var_00].func_3FFD setanimknob(%shipcrib_crane_clamp_extended_rotate_c, 10, 0, 0.45);
 }
 
-_id_E3CD(var_0, var_1, var_2, var_3) {
-  if (!isdefined(level._id_E35D._id_A2E8[var_0]._id_3FFB._id_8BA3))
-  level._id_E35D._id_A2E8[var_0]._id_3FFB._id_8BA3 = 1;
+func_E3CD(var_00, var_01, var_02, var_03) {
+  if (!isdefined(level.func_E35D.func_A2E8[var_00].func_3FFB.func_8BA3))
+  level.func_E35D.func_A2E8[var_00].func_3FFB.func_8BA3 = 1;
   else
-  level._id_E35D._id_A2E8[var_0]._id_3FFB._id_8BA3 = level._id_E35D._id_A2E8[var_0]._id_3FFB._id_8BA3 + 1;
+  level.func_E35D.func_A2E8[var_00].func_3FFB.func_8BA3 = level.func_E35D.func_A2E8[var_00].func_3FFB.func_8BA3 + 1;
 
-  var_3 = 1;
+  var_03 = 1;
 
-  if (isdefined(var_3))
-  var_3 = 1;
+  if (isdefined(var_03))
+  var_03 = 1;
 
-  var_4 = 90 * var_3;
+  var_04 = 90 * var_03;
 
-  if (var_0 == "a")
-  var_4 = -90 * var_3;
+  if (var_00 == "a")
+  var_04 = -90 * var_03;
 
-  var_4 = var_4 * level._id_E35D._id_A2E8[var_0]._id_3FFB._id_8BA3;
-  var_5 = undefined;
+  var_04 = var_04 * level.func_E35D.func_A2E8[var_00].func_3FFB.func_8BA3;
+  var_05 = undefined;
 
-  if (var_0 == "b") {
-  var_5 = var_1;
-  var_1 = var_1 * 0.7;
+  if (var_00 == "b") {
+  var_05 = var_01;
+  var_01 = var_01 * 0.7;
   }
 
-  if (!isdefined(var_2))
-  var_6 = 1;
+  if (!isdefined(var_02))
+  var_06 = 1;
   else
-  var_6 = -1;
+  var_06 = -1;
 
-  var_7 = var_1 / 0.05;
-  var_8 = var_4 / var_7;
-  var_9 = undefined;
+  var_07 = var_01 / 0.05;
+  var_08 = var_04 / var_07;
+  var_09 = undefined;
 
-  if (var_0 == "b")
-  var_9 = level._id_E35D._id_A2E8[var_0]._id_3FFB._id_EACA / var_7;
+  if (var_00 == "b")
+  var_09 = level.func_E35D.func_A2E8[var_00].func_3FFB.func_EACA / var_07;
 
-  level._id_E35D._id_A2E8[var_0]._id_3FFB _meth_826F((0, var_4, 0), var_1);
+  level.func_E35D.func_A2E8[var_00].func_3FFB _meth_826F((0, var_04, 0), var_01);
 
-  for (var_10 = 0; var_10 < var_7; var_10++) {
-  if (var_0 == "b") {
-  level._id_E35D._id_A2E8[var_0]._id_3FFB unlink();
-  level._id_E35D._id_A2E8[var_0]._id_3FFB.angles = level._id_E35D._id_A2E8[var_0]._id_3FFB.angles + (0, var_8, 0);
-  level._id_E35D._id_A2E8[var_0]._id_3FFB.origin = level._id_E35D._id_A2E8[var_0]._id_3FFB.origin + anglestoforward(level._id_E35D._id_A2E8["b"].angles) * var_9 * var_6;
-  level._id_E35D._id_A2E8[var_0]._id_3FFB linkto(level._id_E35D._id_A2E8[var_0]);
+  for (var_10 = 0; var_10 < var_07; var_10++) {
+  if (var_00 == "b") {
+  level.func_E35D.func_A2E8[var_00].func_3FFB unlink();
+  level.func_E35D.func_A2E8[var_00].func_3FFB.angles = level.func_E35D.func_A2E8[var_00].func_3FFB.angles + (0, var_08, 0);
+  level.func_E35D.func_A2E8[var_00].func_3FFB.origin = level.func_E35D.func_A2E8[var_00].func_3FFB.origin + anglestoforward(level.func_E35D.func_A2E8["b"].angles) * var_09 * var_06;
+  level.func_E35D.func_A2E8[var_00].func_3FFB linkto(level.func_E35D.func_A2E8[var_00]);
   }
 
   scripts\engine\utility::waitframe();
   }
 
-  if (var_0 == "b")
-  wait(var_5 - var_1);
+  if (var_00 == "b")
+  wait(var_05 - var_01);
 
-  level._id_E35D._id_A2E8[var_0] thread _id_E3D0();
+  level.func_E35D.func_A2E8[var_00] thread func_E3D0();
 }
 
-_id_E3D6() {}
+func_E3D6() {}
 
-_id_E3D7() {
-  self._id_BD30 = undefined;
+func_E3D7() {
+  self.moving = undefined;
 }
 
-_id_E3D4(var_0) {
+func_E3D4(var_00) {
   self endon("middoors_thinking");
 
-  if (isdefined(self._id_BD30))
+  if (isdefined(self.moving))
   return;
 
-  self._id_BD30 = 1;
-  thread _id_E3D6();
+  self.moving = 1;
+  thread func_E3D6();
   self playsound("scn_ship_titan_blast_door_start_lr");
   self playloopsound("scn_ship_titan_blast_door_lp_lr");
-  scripts\engine\utility::_id_50E1(var_0, ::stoploopsound);
-  scripts\engine\utility::_id_50E1(var_0, ::playsound, "scn_ship_titan_blast_door_stop_lr");
-  scripts\engine\utility::delaythread(var_0, ::_id_E3D7);
+  scripts\engine\utility::delaycall(var_00, ::stoploopsound);
+  scripts\engine\utility::delaycall(var_00, ::playsound, "scn_ship_titan_blast_door_stop_lr");
+  scripts\engine\utility::delaythread(var_00, ::func_E3D7);
 }
 
-_id_E3CF(var_0) {
-  if (!isdefined(var_0))
+func_E3CF(var_00) {
+  if (!isdefined(var_00))
   self playsound("scn_ship_titan_jackal_lower_plr_start2_lr");
 
-  _func_1A2(level.player.origin, 0.35, 0.35, 0.35, 0.3, 0, 0, 1024, 9, 9, 9);
+  _screenshake(level.player.origin, 0.35, 0.35, 0.35, 0.3, 0, 0, 1024, 9, 9, 9);
 }
 
-_id_E3D0(var_0) {
-  if (!isdefined(var_0))
+func_E3D0(var_00) {
+  if (!isdefined(var_00))
   self playsound("scn_ship_titan_jackal_lower_plr_stop2_lr");
 
-  _func_1A2(level.player.origin, 0.5, 0.5, 0.5, 0.35, 0, 0, 1024, 9, 9, 9);
+  _screenshake(level.player.origin, 0.5, 0.5, 0.5, 0.35, 0, 0, 1024, 9, 9, 9);
 }
 
-_id_E3CC(var_0, var_1) {
-  thread _id_E3CF(var_1);
+func_E3CC(var_00, var_01) {
+  thread func_E3CF(var_01);
 
-  if (!isdefined(var_1)) {
+  if (!isdefined(var_01)) {
   self playloopsound("scn_ship_titan_jackal_lower_plr_lp2_lr");
-  scripts\engine\utility::_id_50E1(var_0, ::stoploopsound);
+  scripts\engine\utility::delaycall(var_00, ::stoploopsound);
   }
 
-  scripts\engine\utility::delaythread(var_0, ::_id_E3D0, var_1);
-  _func_1A2(level.player.origin, 0.07, 0.07, 0.07, var_0, 0, 0, 1024, 9, 9, 9);
+  scripts\engine\utility::delaythread(var_00, ::func_E3D0, var_01);
+  _screenshake(level.player.origin, 0.07, 0.07, 0.07, var_00, 0, 0, 1024, 9, 9, 9);
 }
 
-_id_7C10(var_0) {
-  return level._id_E35D._id_A2E8[var_0];
+func_7C10(var_00) {
+  return level.func_E35D.func_A2E8[var_00];
 }

@@ -3,228 +3,228 @@
  * Script: scripts\2899.gsc
 ***************************************/
 
-_id_B908(var_0, var_1, var_2) {
-  if (!isdefined(level._id_B901))
-  level._id_B901 = [];
+func_B908(var_00, var_01, var_02) {
+  if (!isdefined(level.func_B901))
+  level.func_B901 = [];
 
-  if (!isdefined(level._id_B901[var_0])) {
-  level._id_B901[var_0] = spawnstruct();
-  level._id_B901[var_0]._id_13C0B = [];
-  level._id_B901[var_0]._id_756F = [];
-  level._id_B901[var_0]._id_7605 = spawnstruct();
-  level._id_B901[var_0]._id_7596 = undefined;
+  if (!isdefined(level.func_B901[var_00])) {
+  level.func_B901[var_00] = spawnstruct();
+  level.func_B901[var_00].func_13C0B = [];
+  level.func_B901[var_00].func_756F = [];
+  level.func_B901[var_00].func_7605 = spawnstruct();
+  level.func_B901[var_00].func_7596 = undefined;
   }
 
-  if (!isdefined(level._id_B902))
-  level._id_B902 = 0;
+  if (!isdefined(level.func_B902))
+  level.func_B902 = 0;
 
-  _id_B900(var_0, var_1);
-  _id_B8FF(var_0, var_2);
-  _id_B907(var_0);
+  func_B900(var_00, var_01);
+  func_B8FF(var_00, var_02);
+  func_B907(var_00);
 }
 
-_id_B90D(var_0) {
-  level._id_B903 = var_0;
+func_B90D(var_00) {
+  level.func_B903 = var_00;
 }
 
-_id_B90C(var_0, var_1) {
-  if (!isdefined(level._id_B901) || !isdefined(level._id_B901[var_0]))
+func_B90C(var_00, var_01) {
+  if (!isdefined(level.func_B901) || !isdefined(level.func_B901[var_00]))
   return;
 
-  level._id_B901[var_0]._id_7596 = var_1;
+  level.func_B901[var_00].func_7596 = var_01;
 }
 
-_id_B900(var_0, var_1) {
-  if (!isdefined(level._id_B901) || !isdefined(level._id_B901[var_0]) || !isdefined(level._id_B901[var_0]._id_13C0B))
+func_B900(var_00, var_01) {
+  if (!isdefined(level.func_B901) || !isdefined(level.func_B901[var_00]) || !isdefined(level.func_B901[var_00].func_13C0B))
   return;
 
-  var_2 = 0;
+  var_02 = 0;
 
   for (;;) {
-  var_3 = tolower(tablelookupbyrow(var_1, var_2, 0));
+  var_03 = tolower(tablelookupbyrow(var_01, var_02, 0));
 
-  if (!isdefined(var_3) || var_3 == "") {
-  var_3 = tolower(tablelookupbyrow(var_1, var_2, 1));
+  if (!isdefined(var_03) || var_03 == "") {
+  var_03 = tolower(tablelookupbyrow(var_01, var_02, 1));
 
-  if (!isdefined(var_3) || var_3 == "")
+  if (!isdefined(var_03) || var_03 == "")
   break;
   }
 
-  if (scripts\engine\utility::string_starts_with(var_3, "#")) {
+  if (scripts\engine\utility::string_starts_with(var_03, "#")) {
   var_2++;
   continue;
   }
 
-  if (!isdefined(level._id_B901[var_0]._id_13C0B[var_3]))
-  level._id_B901[var_0]._id_13C0B[var_3] = spawnstruct();
+  if (!isdefined(level.func_B901[var_00].func_13C0B[var_03]))
+  level.func_B901[var_00].func_13C0B[var_03] = spawnstruct();
 
-  level._id_B901[var_0]._id_13C0B[var_3]._id_CA0A = float(tablelookupbyrow(var_1, var_2, 2));
-  level._id_B901[var_0]._id_13C0B[var_3]._id_CA09 = float(tablelookupbyrow(var_1, var_2, 3));
-  level._id_B901[var_0]._id_13C0B[var_3]._id_98F7 = float(tablelookupbyrow(var_1, var_2, 4));
-  level._id_B901[var_0]._id_13C0B[var_3]._id_C75D = float(tablelookupbyrow(var_1, var_2, 5));
-  level._id_B901[var_0]._id_13C0B[var_3]._id_DC08 = float(tablelookupbyrow(var_1, var_2, 6));
-  level._id_B901[var_0]._id_13C0B[var_3]._id_118D4 = float(tablelookupbyrow(var_1, var_2, 7));
-  level._id_B901[var_0]._id_13C0B[var_3]._id_118D3 = float(tablelookupbyrow(var_1, var_2, 8));
-  level._id_B901[var_0]._id_13C0B[var_3]._id_6B7B = float(tablelookupbyrow(var_1, var_2, 9));
-  level._id_B901[var_0]._id_13C0B[var_3]._id_6B7A = float(tablelookupbyrow(var_1, var_2, 10));
-  level._id_B901[var_0]._id_13C0B[var_3]._id_9348 = tablelookupbyrow(var_1, var_2, 11);
+  level.func_B901[var_00].func_13C0B[var_03].func_CA0A = float(tablelookupbyrow(var_01, var_02, 2));
+  level.func_B901[var_00].func_13C0B[var_03].func_CA09 = float(tablelookupbyrow(var_01, var_02, 3));
+  level.func_B901[var_00].func_13C0B[var_03].func_98F7 = float(tablelookupbyrow(var_01, var_02, 4));
+  level.func_B901[var_00].func_13C0B[var_03].func_C75D = float(tablelookupbyrow(var_01, var_02, 5));
+  level.func_B901[var_00].func_13C0B[var_03].func_DC08 = float(tablelookupbyrow(var_01, var_02, 6));
+  level.func_B901[var_00].func_13C0B[var_03].func_118D4 = float(tablelookupbyrow(var_01, var_02, 7));
+  level.func_B901[var_00].func_13C0B[var_03].func_118D3 = float(tablelookupbyrow(var_01, var_02, 8));
+  level.func_B901[var_00].func_13C0B[var_03].func_6B7B = float(tablelookupbyrow(var_01, var_02, 9));
+  level.func_B901[var_00].func_13C0B[var_03].func_6B7A = float(tablelookupbyrow(var_01, var_02, 10));
+  level.func_B901[var_00].func_13C0B[var_03].func_9348 = tablelookupbyrow(var_01, var_02, 11);
   var_2++;
   }
 }
 
-_id_B8FF(var_0, var_1) {
-  if (!isdefined(level._id_B901) || !isdefined(level._id_B901[var_0]) || !isdefined(level._id_B901[var_0]._id_756F))
+func_B8FF(var_00, var_01) {
+  if (!isdefined(level.func_B901) || !isdefined(level.func_B901[var_00]) || !isdefined(level.func_B901[var_00].func_756F))
   return;
 
-  var_2 = 0;
+  var_02 = 0;
 
   for (;;) {
-  var_3 = tolower(tablelookupbyrow(var_1, var_2, 0));
+  var_03 = tolower(tablelookupbyrow(var_01, var_02, 0));
 
-  if (!isdefined(var_3) || var_3 == "")
+  if (!isdefined(var_03) || var_03 == "")
   break;
 
-  if (scripts\engine\utility::string_starts_with(var_3, "#")) {
+  if (scripts\engine\utility::string_starts_with(var_03, "#")) {
   var_2++;
   continue;
   }
 
-  if (!isdefined(level._id_B901[var_0]._id_756F[var_3]))
-  level._id_B901[var_0]._id_756F[var_3] = [];
+  if (!isdefined(level.func_B901[var_00].func_756F[var_03]))
+  level.func_B901[var_00].func_756F[var_03] = [];
 
-  var_4 = level._id_B901[var_0]._id_756F[var_3].size;
-  level._id_B901[var_0]._id_756F[var_3][var_4] = spawnstruct();
-  level._id_B901[var_0]._id_756F[var_3][var_4]._id_5FDF = tolower(tablelookupbyrow(var_1, var_2, 1));
-  level._id_B901[var_0]._id_756F[var_3][var_4]._id_CE63 = float(tablelookupbyrow(var_1, var_2, 2));
-  level._effect[var_0 + "_" + var_3 + "_" + var_4] = loadfx(level._id_B901[var_0]._id_756F[var_3][var_4]._id_5FDF);
+  var_04 = level.func_B901[var_00].func_756F[var_03].size;
+  level.func_B901[var_00].func_756F[var_03][var_04] = spawnstruct();
+  level.func_B901[var_00].func_756F[var_03][var_04].effect = tolower(tablelookupbyrow(var_01, var_02, 1));
+  level.func_B901[var_00].func_756F[var_03][var_04].func_CE63 = float(tablelookupbyrow(var_01, var_02, 2));
+  level._effect[var_00 + "_" + var_03 + "_" + var_04] = loadfx(level.func_B901[var_00].func_756F[var_03][var_04].effect);
   var_2++;
   }
 }
 
-_id_B907(var_0) {
-  if (!isdefined(level._id_B901) || !isdefined(level._id_B901[var_0]) || !isdefined(level._id_B901[var_0]._id_7605))
+func_B907(var_00) {
+  if (!isdefined(level.func_B901) || !isdefined(level.func_B901[var_00]) || !isdefined(level.func_B901[var_00].func_7605))
   return;
 
-  var_1 = scripts\engine\utility::_id_817E(var_0 + "_fx_tag_origin", "targetname");
+  var_01 = scripts\engine\utility::getstruct(var_00 + "_fx_tag_origin", "targetname");
 
-  if (!isdefined(var_1))
+  if (!isdefined(var_01))
   return;
 
-  level._id_B901[var_0]._id_7605.origin = var_1.origin;
-  level._id_B901[var_0]._id_7605.angles = var_1.angles;
-  level._id_B901[var_0]._id_7605._id_75C6 = scripts\engine\utility::_id_8180(var_0 + "_fx_point", "targetname");
+  level.func_B901[var_00].func_7605.origin = var_1.origin;
+  level.func_B901[var_00].func_7605.angles = var_1.angles;
+  level.func_B901[var_00].func_7605.func_75C6 = scripts\engine\utility::getstructarray(var_00 + "_fx_point", "targetname");
 }
 
-_id_B906(var_0, var_1, var_2, var_3) {
-  var_4 = self._id_01F1;
+func_B906(var_00, var_01, var_02, var_03) {
+  var_04 = self.model;
 
-  if (isdefined(self._id_B904))
-  var_4 = self._id_B904;
+  if (isdefined(self.func_B904))
+  var_04 = self.func_B904;
 
-  if (!isdefined(var_4))
+  if (!isdefined(var_04))
   return;
 
-  if (!isdefined(level._id_B901) || !isdefined(level._id_B901[var_4]))
+  if (!isdefined(level.func_B901) || !isdefined(level.func_B901[var_04]))
   return;
 
-  if (!isdefined(var_2) || !isdefined(level._id_B901[var_4]._id_13C0B[var_2])) {
-  var_2 = var_3;
+  if (!isdefined(var_02) || !isdefined(level.func_B901[var_04].func_13C0B[var_02])) {
+  var_02 = var_03;
 
-  if (!isdefined(var_2) || !isdefined(level._id_B901[var_4]._id_13C0B[var_3]))
+  if (!isdefined(var_02) || !isdefined(level.func_B901[var_04].func_13C0B[var_03]))
   return;
   }
 
-  var_1 = vectornormalize(var_1);
-  thread _id_B90B(var_4, var_0, var_1, var_2);
-  var_5 = level._id_B901[var_4]._id_13C0B[var_2]._id_CA09;
+  var_01 = vectornormalize(var_01);
+  thread func_B90B(var_04, var_00, var_01, var_02);
+  var_05 = level.func_B901[var_04].func_13C0B[var_02].func_CA09;
 
-  if (level._id_B901[var_4]._id_13C0B[var_2]._id_CA09 != level._id_B901[var_4]._id_13C0B[var_2]._id_CA0A)
-  var_5 = randomfloatrange(level._id_B901[var_4]._id_13C0B[var_2]._id_CA0A, level._id_B901[var_4]._id_13C0B[var_2]._id_CA09);
+  if (level.func_B901[var_04].func_13C0B[var_02].func_CA09 != level.func_B901[var_04].func_13C0B[var_02].func_CA0A)
+  var_05 = randomfloatrange(level.func_B901[var_04].func_13C0B[var_02].func_CA0A, level.func_B901[var_04].func_13C0B[var_02].func_CA09);
 
-  var_6 = level._id_B901[var_4]._id_13C0B[var_2]._id_C75D;
+  var_06 = level.func_B901[var_04].func_13C0B[var_02].func_C75D;
 
-  if (level._id_B901[var_4]._id_13C0B[var_2]._id_DC08 > 0.0)
-  var_6 = var_6 + randomfloat(level._id_B901[var_4]._id_13C0B[var_2]._id_DC08);
+  if (level.func_B901[var_04].func_13C0B[var_02].func_DC08 > 0.0)
+  var_06 = var_06 + randomfloat(level.func_B901[var_04].func_13C0B[var_02].func_DC08);
 
-  var_7 = level._id_B901[var_4]._id_13C0B[var_2]._id_118D3;
+  var_07 = level.func_B901[var_04].func_13C0B[var_02].func_118D3;
 
-  if (level._id_B901[var_4]._id_13C0B[var_2]._id_118D3 != level._id_B901[var_4]._id_13C0B[var_2]._id_118D4)
-  var_7 = randomfloatrange(level._id_B901[var_4]._id_13C0B[var_2]._id_118D4, level._id_B901[var_4]._id_13C0B[var_2]._id_118D3);
+  if (level.func_B901[var_04].func_13C0B[var_02].func_118D3 != level.func_B901[var_04].func_13C0B[var_02].func_118D4)
+  var_07 = randomfloatrange(level.func_B901[var_04].func_13C0B[var_02].func_118D4, level.func_B901[var_04].func_13C0B[var_02].func_118D3);
 
-  var_8 = level._id_B901[var_4]._id_13C0B[var_2]._id_6B7A;
+  var_08 = level.func_B901[var_04].func_13C0B[var_02].func_6B7A;
 
-  if (level._id_B901[var_4]._id_13C0B[var_2]._id_6B7A != level._id_B901[var_4]._id_13C0B[var_2]._id_6B7B)
-  var_8 = randomfloatrange(level._id_B901[var_4]._id_13C0B[var_2]._id_6B7B, level._id_B901[var_4]._id_13C0B[var_2]._id_6B7A);
+  if (level.func_B901[var_04].func_13C0B[var_02].func_6B7A != level.func_B901[var_04].func_13C0B[var_02].func_6B7B)
+  var_08 = randomfloatrange(level.func_B901[var_04].func_13C0B[var_02].func_6B7B, level.func_B901[var_04].func_13C0B[var_02].func_6B7A);
 
-  var_9 = var_0 + var_1 * var_5;
-  var_10 = level._id_B901[var_4]._id_7605.origin + rotatevector(var_9 - self.origin, level._id_B901[var_4]._id_7605.angles - self.angles);
-  var_11 = var_6 * var_6;
-  var_12 = _func_17B(level._id_B901[var_4]._id_13C0B[var_2]._id_98F7, 2.0);
+  var_09 = var_00 + var_01 * var_05;
+  var_10 = level.func_B901[var_04].func_7605.origin + rotatevector(var_09 - self.origin, level.func_B901[var_04].func_7605.angles - self.angles);
+  var_11 = var_06 * var_06;
+  var_12 = _pow(level.func_B901[var_04].func_13C0B[var_02].func_98F7, 2.0);
 
-  foreach (var_16, var_14 in level._id_B901[var_4]._id_7605._id_75C6) {
+  foreach (var_16, var_14 in level.func_B901[var_04].func_7605.func_75C6) {
   var_15 = distancesquared(var_14.origin, var_10);
 
   if (var_15 >= var_12 && var_15 <= var_11)
-  thread _id_B90A(var_14, var_16, sqrt(var_15), var_6, var_7, var_8);
+  thread func_B90A(var_14, var_16, sqrt(var_15), var_06, var_07, var_08);
   }
 }
 
-_id_B90B(var_0, var_1, var_2, var_3) {
-  if (isdefined(level._id_B903) && level._id_B902 >= level._id_B903)
+func_B90B(var_00, var_01, var_02, var_03) {
+  if (isdefined(level.func_B903) && level.func_B902 >= level.func_B903)
   return;
 
-  var_4 = level._id_B901[var_0]._id_13C0B[var_3]._id_9348;
+  var_04 = level.func_B901[var_00].func_13C0B[var_03].func_9348;
 
-  if (isdefined(level._id_B901[var_0]._id_756F[var_4])) {
-  var_5 = scripts\engine\trace::_id_DCEE(var_1 - var_2 * 6.0, var_1 + var_2 * 6.0);
+  if (isdefined(level.func_B901[var_00].func_756F[var_04])) {
+  var_05 = scripts\engine\trace::ray_trace_detail(var_01 - var_02 * 6.0, var_01 + var_02 * 6.0);
 
   if (var_5["fraction"] < 1.0) {
-  var_6 = scripts\engine\utility::_id_107E6(var_1, vectortoangles(var_5["normal"]));
-  var_6 linkto(self);
-  var_7 = randomint(level._id_B901[var_0]._id_756F[var_4].size);
-  var_8 = var_0 + "_" + var_4 + "_" + var_7;
-  playfxontag(scripts\engine\utility::_id_7ECB(var_8), var_6, "tag_origin");
-  level._id_B902++;
+  var_06 = scripts\engine\utility::spawn_tag_origin(var_01, vectortoangles(var_5["normal"]));
+  var_06 linkto(self);
+  var_07 = randomint(level.func_B901[var_00].func_756F[var_04].size);
+  var_08 = var_00 + "_" + var_04 + "_" + var_07;
+  playfxontag(scripts\engine\utility::getfx(var_08), var_06, "tag_origin");
+  level.func_B902++;
 
-  if (isdefined(level._id_B901[var_0]._id_756F[var_4][var_7]._id_CE63))
-  scripts\engine\utility::_id_13736(level._id_B901[var_0]._id_756F[var_4][var_7]._id_CE63, "entitydeleted");
+  if (isdefined(level.func_B901[var_00].func_756F[var_04][var_07].func_CE63))
+  scripts\engine\utility::waittill_any_timeout(level.func_B901[var_00].func_756F[var_04][var_07].func_CE63, "entitydeleted");
   else
   self waittill("entitydeleted");
 
-  var_6 delete();
-  level._id_B902--;
+  var_06 delete();
+  level.func_B902--;
   }
   }
 }
 
-_id_B90A(var_0, var_1, var_2, var_3, var_4, var_5) {
-  if (isdefined(self._id_4CEB) && scripts\engine\utility::array_contains(self._id_4CEB, var_1))
+func_B90A(var_00, var_01, var_02, var_03, var_04, var_05) {
+  if (isdefined(self.func_4CEB) && scripts\engine\utility::array_contains(self.func_4CEB, var_01))
   return;
 
-  if (isdefined(level._id_B903) && level._id_B902 >= level._id_B903)
+  if (isdefined(level.func_B903) && level.func_B902 >= level.func_B903)
   return;
 
-  var_6 = self._id_01F1;
+  var_06 = self.model;
 
-  if (isdefined(self._id_B904))
-  var_6 = self._id_B904;
+  if (isdefined(self.func_B904))
+  var_06 = self.func_B904;
 
   if (!isdefined(var_0.script_noteworthy)) {
-  var_7 = var_0.origin - level._id_B901[var_6]._id_7605.origin;
+  var_07 = var_0.origin - level.func_B901[var_06].func_7605.origin;
   return;
   }
 
-  if (!isdefined(self._id_4CEB))
-  self._id_4CEB = [];
+  if (!isdefined(self.func_4CEB))
+  self.func_4CEB = [];
 
-  self._id_4CEB[self._id_4CEB.size] = var_1;
-  var_8 = var_2 / var_3;
-  var_9 = var_4 * _func_17B(var_8, var_5);
+  self.func_4CEB[self.func_4CEB.size] = var_01;
+  var_08 = var_02 / var_03;
+  var_09 = var_04 * _pow(var_08, var_05);
 
-  if (var_9 > 0.05)
-  wait(var_9);
+  if (var_09 > 0.05)
+  wait(var_09);
 
-  if (isdefined(level._id_B903) && level._id_B902 >= level._id_B903)
+  if (isdefined(level.func_B903) && level.func_B902 >= level.func_B903)
   return;
 
   var_10 = var_0.script_noteworthy;
@@ -233,86 +233,86 @@ _id_B90A(var_0, var_1, var_2, var_3, var_4, var_5) {
   if (var_11 == "_sml" || var_11 == "_med" || var_11 == "_lrg") {
   var_10 = getsubstr(var_0.script_noteworthy, 0, var_0.script_noteworthy.size - 4);
 
-  if (var_8 < 0.5)
+  if (var_08 < 0.5)
   var_10 = var_10 + "_sml";
-  else if (var_8 < 0.9)
+  else if (var_08 < 0.9)
   var_10 = var_10 + "_med";
   else
   var_10 = var_10 + "_lrg";
   }
 
   if (isdefined(self)) {
-  var_7 = var_0.origin - level._id_B901[var_6]._id_7605.origin;
-  var_12 = self.angles - level._id_B901[var_6]._id_7605.angles;
-  var_13 = self.origin + rotatevector(var_7, var_12);
+  var_07 = var_0.origin - level.func_B901[var_06].func_7605.origin;
+  var_12 = self.angles - level.func_B901[var_06].func_7605.angles;
+  var_13 = self.origin + rotatevector(var_07, var_12);
   var_14 = var_0.angles + var_12;
 
-  if (!isdefined(var_10) || !isdefined(level._id_B901[var_6]._id_756F[var_10]))
+  if (!isdefined(var_10) || !isdefined(level.func_B901[var_06].func_756F[var_10]))
   return;
 
-  var_15 = int(clamp(floor(level._id_B901[var_6]._id_756F[var_10].size * var_8), 0, level._id_B901[var_6]._id_756F[var_10].size - 1));
-  var_16 = var_6 + "_" + var_10 + "_" + var_15;
+  var_15 = int(clamp(floor(level.func_B901[var_06].func_756F[var_10].size * var_08), 0, level.func_B901[var_06].func_756F[var_10].size - 1));
+  var_16 = var_06 + "_" + var_10 + "_" + var_15;
 
-  if (isdefined(level._id_B901[var_6]._id_7596) && self [[level._id_B901[var_6]._id_7596]](var_6, var_13, var_14, var_16))
+  if (isdefined(level.func_B901[var_06].func_7596) && self [[level.func_B901[var_06].func_7596]](var_06, var_13, var_14, var_16))
   return;
 
-  var_17 = scripts\engine\utility::_id_107E6(var_13, var_14);
+  var_17 = scripts\engine\utility::spawn_tag_origin(var_13, var_14);
   var_17 linkto(self);
-  playfxontag(scripts\engine\utility::_id_7ECB(var_16), var_17, "tag_origin");
-  level._id_B902++;
+  playfxontag(scripts\engine\utility::getfx(var_16), var_17, "tag_origin");
+  level.func_B902++;
 
-  if (isdefined(var_0._id_0334)) {
-  foreach (var_19 in getentarray(var_0._id_0334, "targetname"))
-  thread _id_B90A(var_19, var_2, var_3, 0.0, var_5);
+  if (isdefined(var_0.target)) {
+  foreach (var_19 in getentarray(var_0.target, "targetname"))
+  thread func_B90A(var_19, var_02, var_03, 0.0, var_05);
   }
 
-  if (isdefined(level._id_B901[var_6]._id_756F[var_10][var_15]._id_CE63))
-  scripts\engine\utility::_id_13736(level._id_B901[var_6]._id_756F[var_10][var_15]._id_CE63, "entitydeleted");
+  if (isdefined(level.func_B901[var_06].func_756F[var_10][var_15].func_CE63))
+  scripts\engine\utility::waittill_any_timeout(level.func_B901[var_06].func_756F[var_10][var_15].func_CE63, "entitydeleted");
   else
   self waittill("entitydeleted");
 
   if (isdefined(self))
-  self._id_4CEB = scripts\engine\utility::array_remove(self._id_4CEB, var_1);
+  self.func_4CEB = scripts\engine\utility::array_remove(self.func_4CEB, var_01);
 
   var_17 delete();
-  level._id_B902--;
+  level.func_B902--;
   }
 }
 
-_id_B909() {
+func_B909() {
   self notify("model_damage_end_monitoring");
   self endon("death");
   self endon("destroyed");
   self endon("entitydeleted");
   self endon("model_damage_end_monitoring");
-  var_0 = self._id_01F1;
+  var_00 = self.model;
 
-  if (isdefined(self._id_B904))
-  var_0 = self._id_B904;
+  if (isdefined(self.func_B904))
+  var_00 = self.func_B904;
 
-  if (!isdefined(var_0))
+  if (!isdefined(var_00))
   return;
 
-  if (!isdefined(level._id_B901) || !isdefined(level._id_B901[var_0]))
+  if (!isdefined(level.func_B901) || !isdefined(level.func_B901[var_00]))
   return;
 
   while (isdefined(self)) {
-  self waittill("damage", var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10);
-  thread _id_B906(var_4, var_3, var_10, var_5);
+  self waittill("damage", var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08, var_09, var_10);
+  thread func_B906(var_04, var_03, var_10, var_05);
   }
 }
 
-_id_B905() {
-  var_0 = self._id_01F1;
+func_B905() {
+  var_00 = self.model;
 
-  if (isdefined(self._id_B904))
-  var_0 = self._id_B904;
+  if (isdefined(self.func_B904))
+  var_00 = self.func_B904;
 
-  if (!isdefined(var_0) || !isdefined(level._id_B901) || !isdefined(level._id_B901[var_0]) || level._id_B901[var_0]._id_7605._id_75C6.size == 0)
+  if (!isdefined(var_00) || !isdefined(level.func_B901) || !isdefined(level.func_B901[var_00]) || level.func_B901[var_00].func_7605.func_75C6.size == 0)
   return self.origin;
 
-  var_1 = level._id_B901[var_0]._id_7605._id_75C6[randomint(level._id_B901[var_0]._id_7605._id_75C6.size)];
-  var_2 = var_1.origin - level._id_B901[var_0]._id_7605.origin;
-  var_3 = self.angles - level._id_B901[var_0]._id_7605.angles;
-  return self.origin + rotatevector(var_2, var_3);
+  var_01 = level.func_B901[var_00].func_7605.func_75C6[randomint(level.func_B901[var_00].func_7605.func_75C6.size)];
+  var_02 = var_1.origin - level.func_B901[var_00].func_7605.origin;
+  var_03 = self.angles - level.func_B901[var_00].func_7605.angles;
+  return self.origin + rotatevector(var_02, var_03);
 }

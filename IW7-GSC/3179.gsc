@@ -1247,7 +1247,7 @@ func_3F07(param_00,param_01,param_02) {
 
 	var_07 = var_05[1];
 	var_08 = angleclamp180(var_07 - var_04[1]);
-	var_09 = function_02F9(var_08,22.5);
+	var_09 = getangleindex(var_08,22.5);
 	var_0A = lib_0C5D::_meth_8174(param_01,undefined,1);
 	if(!isdefined(var_0A[var_09])) {
 		return undefined;
@@ -1367,7 +1367,7 @@ func_FFFC(param_00,param_01,param_02,param_03) {
 	var_08 = anglestoforward(self.angles);
 	var_09 = vectortoangles(var_08);
 	var_0A = angleclamp180(var_07 - var_09[1]);
-	var_0B = function_02F9(var_0A,22.5);
+	var_0B = getangleindex(var_0A,22.5);
 	var_0C = lib_0C5D::_meth_8174(param_02,undefined,1);
 	var_0D = var_0C[var_0B];
 	if(!isdefined(var_0D)) {

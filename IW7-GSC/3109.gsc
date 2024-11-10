@@ -132,8 +132,8 @@ func_EA0E() {
 	}
 
 	playfxontag(level.var_7649["seeker_sparks"],self,"tag_fx");
-	function_0178("seeker_expire",self.origin);
-	function_0278("ent_" + self getentitynumber() + "_seeker_repulsor");
+	playworldsound("seeker_expire",self.origin);
+	destroynavrepulsor("ent_" + self getentitynumber() + "_seeker_repulsor");
 	self hudoutlinedisable();
 	self _meth_81D0();
 }
@@ -197,7 +197,7 @@ func_1572(param_00) {
 	if(isdefined(self.bt.var_F15D) && self.bt.var_F15D != self.triggerportableradarping && !isdefined(self.var_9BB9) && !self.bt.var_54AE) {
 		self.bt.var_54AE = 1;
 		self notify("stop soundseeker_seek_lp");
-		function_0178("seeker_acquire_target",self.origin);
+		playworldsound("seeker_acquire_target",self.origin);
 		if(self.var_2A4B) {
 			thread func_CE01();
 		}

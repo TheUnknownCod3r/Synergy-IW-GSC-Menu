@@ -3,32 +3,32 @@
  * Script: scripts\2712.gsc
 ***************************************/
 
-_id_49B4() {
-  level._id_74CF = scripts\engine\utility::_id_1352A;
-  level._id_74D0 = ::_id_74D0;
-  level._id_74CC = scripts\common\fx::_id_B059;
-  level._id_74CD = scripts\common\fx::_id_C51A;
-  level._id_74C5 = scripts\common\fx::_id_4917;
-  level._id_74D3 = scripts\common\createfx::_id_E2AB;
-  level._id_74D2 = scripts\common\createfx::_id_D978;
-  level._id_74CE = ::_id_74CE;
-  level._id_BD5D = 1;
-  level.callbackstartgametype = scripts\engine\utility::_id_1352A;
-  level.callbackplayerconnect = scripts\engine\utility::_id_1352A;
-  level.callbackplayerdisconnect = scripts\engine\utility::_id_1352A;
-  level.callbackplayerdamage = scripts\engine\utility::_id_1352A;
-  level.callbackplayerkilled = scripts\engine\utility::_id_1352A;
-  level.callbackplayerlaststand = scripts\engine\utility::_id_1352A;
+createfx() {
+  level.func_position_player = scripts\engine\utility::void;
+  level.func_position_player_get = ::func_position_player_get;
+  level.func_loopfxthread = scripts\common\fx::loopfxthread;
+  level.func_oneshotfxthread = scripts\common\fx::oneshotfxthread;
+  level.func_create_loopsound = scripts\common\fx::create_loopsound;
+  level.func_updatefx = scripts\common\createfx::restart_fx_looper;
+  level.func_process_fx_rotater = scripts\common\createfx::process_fx_rotater;
+  level.func_player_speed = ::func_player_speed;
+  level.mp_createfx = 1;
+  level.callbackstartgametype = scripts\engine\utility::void;
+  level.callbackplayerconnect = scripts\engine\utility::void;
+  level.callbackplayerdisconnect = scripts\engine\utility::void;
+  level.callbackplayerdamage = scripts\engine\utility::void;
+  level.callbackplayerkilled = scripts\engine\utility::void;
+  level.callbackplayerlaststand = scripts\engine\utility::void;
   level.callbackplayerconnect = ::callback_playerconnect;
-  level.callbackplayermigrated = scripts\engine\utility::_id_1352A;
-  thread _id_DE5D();
-  thread _id_DE5C();
-  thread scripts\common\createfx::_id_74C7();
-  scripts\common\createfx::_id_49B9();
+  level.callbackplayermigrated = scripts\engine\utility::void;
+  thread reflectionprobe_hide_hp();
+  thread reflectionprobe_hide_front();
+  thread scripts\common\createfx::func_get_level_fx();
+  scripts\common\createfx::createfx_common();
   level waittill("eternity");
 }
 
-_id_74D0(var_0) {
+func_position_player_get(var_00) {
   return level.player.origin;
 }
 
@@ -36,23 +36,23 @@ callback_playerconnect() {
   self waittill("begin");
 
   if (!isdefined(level.player)) {
-  var_0 = getentarray("mp_global_intermission", "classname");
+  var_00 = getentarray("mp_global_intermission", "classname");
   self spawn(var_0[0].origin, var_0[0].angles);
   scripts\mp\utility\game::updatesessionstate("playing", "");
   self.maxhealth = 10000000;
   self.health = 10000000;
   level.player = self;
-  thread scripts\common\createfx::_id_49CB();
+  thread scripts\common\createfx::createfxlogic();
   }
   else
   kick(self getentitynumber());
 }
 
-_id_74CE() {
-  var_0 = level._id_11B7._id_D2C7 / 190;
-  level.player setmovespeedscale(var_0);
+func_player_speed() {
+  var_00 = level._createfx.player_speed / 190;
+  level.player setmovespeedscale(var_00);
 }
 
-_id_DE5D() {}
+reflectionprobe_hide_hp() {}
 
-_id_DE5C() {}
+reflectionprobe_hide_front() {}

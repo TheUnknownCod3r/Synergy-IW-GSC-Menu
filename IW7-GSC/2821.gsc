@@ -14,7 +14,7 @@ main() {
 
 func_1E6C() {
 	for(;;) {
-		if(function_0110() || getdvarint("scr_analytics_playerJustDied")) {
+		if(issaverecentlyloaded() || getdvarint("scr_analytics_playerJustDied")) {
 			setdvar("scr_analytics_playerJustDied",0);
 			setdvar("scr_analytics_playerStartTime",gettime());
 		}

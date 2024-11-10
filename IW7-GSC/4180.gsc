@@ -52,7 +52,7 @@ main() {
   level._effect["vfx_destroyer_death_cheap"] = loadfx("vfx/iw7/core/vehicle/capship/ca/destroyer/vfx_ca_destroyer_death_explosion_cheap.vfx");
 
   if (!getdvarint("r_reflectionProbeGenerate")) {
-  _id_1127::main();
+  scripts/sp/maps/phspace/gen/phspace_fx::main();
   scripts\sp\maps\phspace\gen\phspace_sound::main();
   level._effect["vfx_big_explosion_spaceship_low_g"] = loadfx("vfx/iw7/levels/moon/vfx_big_explosion_spaceship_low_g.vfx");
   level._effect["vfx_ph_launch_clouds_scattered_mid_02"] = loadfx("vfx/iw7/levels/pearl_harbor/vfx_ph_launch_clouds_scattered_mid_02.vfx");
@@ -83,28 +83,28 @@ main() {
   level._effect["vfx_ca_destroyer_ambient_debris"] = loadfx("vfx/iw7/core/vehicle/capship/ca/destroyer/vfx_ca_destroyer_ambient_debris.vfx");
   level._effect["vfx_ph_space_dust_cloud_01"] = loadfx("vfx/iw7/levels/pearl_harbor/vfx_ph_space_dust_cloud_01.vfx");
   level._effect["vfx_ph_space_dust_cloud_01_thick"] = loadfx("vfx/iw7/levels/pearl_harbor/vfx_ph_space_dust_cloud_01_thick.vfx");
-  thread _id_1DB7();
+  thread func_1DB7();
   }
 }
 
-_id_1DB7() {
+func_1DB7() {
   wait 0.1;
-  scripts\engine\utility::_id_69A3("ground_fx");
+  scripts\engine\utility::exploder("ground_fx");
 }
 
-_id_1326B(var_0) {
-  switch (var_0) {
+func_1326B(var_00) {
+  switch (var_00) {
   case 0:
-  _func_1C5("r_veilFalloffWeight1", (1, 0.95, 0.75));
-  _func_1C5("r_veilFalloffWeight2", (0.25, 0.0875, 0.02));
+  _setsaveddvar("r_veilFalloffWeight1", (1, 0.95, 0.75));
+  _setsaveddvar("r_veilFalloffWeight2", (0.25, 0.0875, 0.02));
   break;
   case 1:
-  _func_1C5("r_veilFalloffWeight1", (1, 0.9, 0.6));
-  _func_1C5("r_veilFalloffWeight2", (0.3, 0.05, 0.02));
+  _setsaveddvar("r_veilFalloffWeight1", (1, 0.9, 0.6));
+  _setsaveddvar("r_veilFalloffWeight2", (0.3, 0.05, 0.02));
   break;
   case 2:
-  _func_1C5("r_veilFalloffWeight1", (1, 0.6875, 0.375));
-  _func_1C5("r_veilFalloffWeight2", (0.1875, 0.1013, 0.0228));
+  _setsaveddvar("r_veilFalloffWeight1", (1, 0.6875, 0.375));
+  _setsaveddvar("r_veilFalloffWeight2", (0.1875, 0.1013, 0.0228));
   break;
   }
 }

@@ -789,7 +789,7 @@ func_8C20(param_00) {
 	}
 	else
 	{
-		var_02 = var_02 + function_02D3(param_00.angles) * var_01;
+		var_02 = var_02 + anglestoleft(param_00.angles) * var_01;
 	}
 
 	return self maymovetopoint(var_02,0,0);
@@ -1130,7 +1130,7 @@ func_471E(param_00) {
 						continue;
 					}
 
-					if(function_02FA(var_07,var_1C)) {
+					if(hasroomtoplaypeekout(var_07,var_1C)) {
 						var_15[var_15.size] = var_1C;
 					}
 				}

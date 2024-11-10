@@ -7,7 +7,7 @@
 init() {
 	if(!isdefined(game["clientMatchDataDef"])) {
 		game["clientMatchDataDef"] = "mp/zombieclientmatchdata.ddl";
-		function_01A9(game["clientMatchDataDef"]);
+		setclientmatchdatadef(game["clientMatchDataDef"]);
 		setclientmatchdata("map",level.script);
 	}
 
@@ -27,7 +27,7 @@ canlogdeath(param_00) {
 }
 
 logplayerdeath() {
-	var_00 = function_0080("deathCount");
+	var_00 = getclientmatchdata("deathCount");
 	if(!canlogclient(self) || !canlogdeath(var_00)) {
 	}
 }

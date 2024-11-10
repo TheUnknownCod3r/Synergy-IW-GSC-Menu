@@ -229,7 +229,7 @@ func_363A(param_00,param_01) {
 	var_03 = self;
 	var_04 = getsubstr(var_03.classname,7);
 	if(param_01) {
-		var_05 = function_0249(var_04);
+		var_05 = weaponmaxammo(var_04);
 		var_06 = 0;
 	}
 	else

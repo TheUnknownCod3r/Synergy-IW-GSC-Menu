@@ -134,12 +134,12 @@ func_6860() {
 				continue;
 			}
 
-			if(function_00FD(var_02.issplitscreen)) {
+			if(isaircraft(var_02.issplitscreen)) {
 				continue;
 			}
 
 			if(isdefined(var_02.issplitscreen.var_C841)) {
-				if(function_00FD(var_02.issplitscreen.var_C841) || var_02.issplitscreen.var_C841.var_380 == "capital_ship") {
+				if(isaircraft(var_02.issplitscreen.var_C841) || var_02.issplitscreen.var_C841.var_380 == "capital_ship") {
 					continue;
 				}
 			}
@@ -176,7 +176,7 @@ func_6860() {
 }
 
 func_67FF(param_00,param_01,param_02,param_03) {
-	var_04 = function_0075("bad_guys","all");
+	var_04 = getaiunittypearray("bad_guys","all");
 	var_05 = squared(param_02);
 	var_06 = squared(param_03);
 	foreach(var_08 in var_04) {
@@ -211,7 +211,7 @@ func_67FF(param_00,param_01,param_02,param_03) {
 }
 
 func_6800(param_00,param_01,param_02) {
-	var_03 = function_0075("bad_guys");
+	var_03 = getaiunittypearray("bad_guys");
 	var_04 = squared(param_02);
 	foreach(var_06 in var_03) {
 		if(!isalive(var_06)) {

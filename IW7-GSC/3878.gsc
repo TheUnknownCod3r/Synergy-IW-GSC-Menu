@@ -18,7 +18,7 @@ func_117D3(param_00) {
 		level notify("threat_sight_enabled");
 	}
 
-	var_05 = function_0072();
+	var_05 = getaiarray();
 	foreach(var_07 in var_05) {
 		if(isalive(var_07) && isdefined(var_07.var_10E6D) && isdefined(var_07.var_10E6D.var_117DB)) {
 			var_07 func_117D4(var_07.var_10E6D.var_117DB);
@@ -33,7 +33,7 @@ func_117D1(param_00) {
 		return;
 	}
 
-	function_01C5("ai_threatsight",param_00);
+	setsaveddvar("ai_threatsight",param_00);
 	level thread func_117D2(param_00);
 }
 
@@ -44,7 +44,7 @@ func_117D2(param_00) {
 		wait(1);
 	}
 
-	function_01C5("ai_threatsightDisplay",param_00);
+	setsaveddvar("ai_threatsightDisplay",param_00);
 }
 
 func_117C3() {
@@ -398,10 +398,10 @@ func_117CE() {
 func_117C4(param_00,param_01) {
 	self notify("threat_sight_fake");
 	self endon("threat_sight_fake");
-	function_01C5("ai_threatsightFakeThreat",param_01);
-	function_01C5("ai_threatsightFakeX",param_00[0]);
-	function_01C5("ai_threatsightFakeY",param_00[1]);
-	function_01C5("ai_threatsightFakeZ",param_00[2]);
+	setsaveddvar("ai_threatsightFakeThreat",param_01);
+	setsaveddvar("ai_threatsightFakeX",param_00[0]);
+	setsaveddvar("ai_threatsightFakeY",param_00[1]);
+	setsaveddvar("ai_threatsightFakeZ",param_00[2]);
 	if(!isdefined(self.var_10E6D.var_B4CB)) {
 		self.var_10E6D.var_B4CB = 0;
 	}

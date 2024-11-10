@@ -340,8 +340,8 @@ func_106B8(param_00,param_01,param_02,param_03,param_04,param_05) {
 				var_0D makeentitysentient("allies");
 				var_0D setcandamage(1);
 				var_0D setcanradiusdamage(1);
-				if(!function_0218("player_dropship")) {
-					function_004E("player_dropship");
+				if(!threatbiasgroupexists("player_dropship")) {
+					createthreatbiasgroup("player_dropship");
 				}
 
 				var_0D give_zombies_perk("player_dropship");
@@ -617,7 +617,7 @@ func_5EC1(param_00) {
 	var_02.origin = var_01.var_1087A;
 	var_02.angles = var_01.var_10875;
 	param_00 giveweaponpassives(param_00.var_4D94.linkpoint,var_02);
-	function_0217();
+	teleportscene();
 	var_02 delete();
 	scripts\engine\utility::waitframe();
 	param_00 delete();
@@ -752,11 +752,11 @@ func_1243(param_00) {
 		return;
 	}
 
-	if(isdefined(param_00.var_C264) && !function_02A4(param_00.var_C264) && isdefined(param_00.var_C264.model) && param_00.var_C264.model == "tag_origin") {
+	if(isdefined(param_00.var_C264) && !isstruct(param_00.var_C264) && isdefined(param_00.var_C264.model) && param_00.var_C264.model == "tag_origin") {
 		param_00.var_C264 delete();
 	}
 
-	if(!function_02A4(param_00)) {
+	if(!isstruct(param_00)) {
 		param_00 delete();
 	}
 }
@@ -1309,7 +1309,7 @@ func_5EC6(param_00,param_01) {
 	}
 
 	self giveweaponpassives(self,var_03);
-	function_0217();
+	teleportscene();
 	scripts\engine\utility::waitframe();
 	var_03 delete();
 }
@@ -1328,7 +1328,7 @@ func_5E04(param_00,param_01,param_02) {
 	if(isstring(param_00)) {
 		param_00 = func_129F(param_00);
 	}
-	else if(function_02A5(param_00)) {
+	else if(isvector(param_00)) {
 		param_00 = scripts\engine\utility::spawn_tag_origin(param_00);
 		thread func_11D1(param_00);
 	}
@@ -1446,7 +1446,7 @@ func_F37D(param_00,param_01,param_02,param_03,param_04) {
 	if(isstring(param_00)) {
 		var_05 = func_129F(param_00);
 	}
-	else if(function_02A5(param_00)) {
+	else if(isvector(param_00)) {
 		var_05 = scripts\engine\utility::spawn_tag_origin(param_00);
 		thread func_11D2(var_05);
 		var_05 endon("death");

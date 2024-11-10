@@ -3,66 +3,66 @@
  * Script: scripts\2855.gsc
 ***************************************/
 
-_id_5F84(var_0) {
+func_5F84(var_00) {
   self notify("disable_dynamic_move");
   self endon("disable_dynamic_move");
 
-  if (isdefined(self._id_5F76))
-  var_1 = squared(self._id_5F76);
-  else if (isdefined(var_0))
-  var_1 = squared(var_0);
+  if (isdefined(self.func_5F76))
+  var_01 = squared(self.func_5F76);
+  else if (isdefined(var_00))
+  var_01 = squared(var_00);
   else
-  var_1 = squared(300);
+  var_01 = squared(300);
 
-  self._id_51E4 = undefined;
-  _id_0B91::_id_4145();
-  _id_F491("sprint_loop", "sprint_super");
+  self.func_51E4 = undefined;
+  scripts/sp/utility::func_4145();
+  func_F491("sprint_loop", "sprint_super");
 
   for (;;) {
-  var_2 = vectornormalize(level.player.origin - self.origin);
-  var_3 = anglestoforward(self.angles);
-  var_4 = vectordot(var_3, var_2);
-  var_5 = distance2dsquared(level.player.origin, self.origin);
+  var_02 = vectornormalize(level.player.origin - self.origin);
+  var_03 = anglestoforward(self.angles);
+  var_04 = vectordot(var_03, var_02);
+  var_05 = distance2dsquared(level.player.origin, self.origin);
 
-  if (var_4 < 0) {
-  if (var_5 > var_1) {
-  if (!isdefined(self._id_51E3) || isdefined(self._id_51E3) && self._id_51E3 == "sprint") {
-  _id_0B91::_id_4145();
+  if (var_04 < 0) {
+  if (var_05 > var_01) {
+  if (!isdefined(self.demeanoroverride) || isdefined(self.demeanoroverride) && self.demeanoroverride == "sprint") {
+  scripts/sp/utility::func_4145();
 
-  if (isdefined(self._id_51E4))
-  _id_0B91::_id_51E1(self._id_51E4);
+  if (isdefined(self.func_51E4))
+  scripts/sp/utility::func_51E1(self.func_51E4);
   }
   }
-  else if (!isdefined(self._id_51E3) || isdefined(self._id_51E3) && self._id_51E3 != "sprint") {
-  self._id_51E4 = self._id_51E3;
-  _id_0B91::_id_51E1("sprint");
+  else if (!isdefined(self.demeanoroverride) || isdefined(self.demeanoroverride) && self.demeanoroverride != "sprint") {
+  self.func_51E4 = self.demeanoroverride;
+  scripts/sp/utility::func_51E1("sprint");
   }
   }
-  else if (!isdefined(self._id_51E3) || isdefined(self._id_51E3) && self._id_51E3 != "sprint") {
-  self._id_51E4 = self._id_51E3;
-  _id_0B91::_id_51E1("sprint");
+  else if (!isdefined(self.demeanoroverride) || isdefined(self.demeanoroverride) && self.demeanoroverride != "sprint") {
+  self.func_51E4 = self.demeanoroverride;
+  scripts/sp/utility::func_51E1("sprint");
   }
 
   wait 0.05;
   }
 }
 
-_id_5557() {
+func_5557() {
   self notify("disable_dynamic_move");
 
-  if (isdefined(self._id_51E4))
-  _id_0B91::_id_51E1(self._id_51E4);
+  if (isdefined(self.func_51E4))
+  scripts/sp/utility::func_51E1(self.func_51E4);
   else
-  _id_0B91::_id_4145();
+  scripts/sp/utility::func_4145();
 
-  self._id_51E4 = undefined;
-  _id_0B91::_id_4169("sprint");
+  self.func_51E4 = undefined;
+  scripts/sp/utility::func_4169("sprint");
 }
 
-_id_F491(var_0, var_1) {
-  if (!scripts\asm\asm::_id_2346(var_0, var_1))
+func_F491(var_00, var_01) {
+  if (!scripts\asm\asm::asm_hasalias(var_00, var_01))
   return;
 
-  var_2 = scripts\asm\asm::_id_2358(var_0, var_1);
-  scripts\asm\asm::_id_237A("sprint", "move", var_2);
+  var_02 = scripts\asm\asm::asm_lookupanimfromalias(var_00, var_01);
+  scripts\asm\asm::asm_setdemeanoranimoverride("sprint", "move", var_02);
 }

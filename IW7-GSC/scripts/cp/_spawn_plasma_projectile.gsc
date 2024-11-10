@@ -1,7 +1,7 @@
 /***********************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\_spawn_plasma_projectile.gsc
+ * Script: scripts\scripts\cp\cp_spawn_plasma_projectile.gsc
 ***********************************************************/
 
 splashgrenadeinit() {
@@ -86,7 +86,7 @@ setinteractwithethereal(param_00,param_01,param_02,param_03) {
 			continue;
 		}
 
-		var_0F = function_0287(param_00,var_0D.origin,var_0B,undefined,0,"physicsquery_closest");
+		var_0F = physics_raycast(param_00,var_0D.origin,var_0B,undefined,0,"physicsquery_closest");
 		if(!isdefined(var_0F) || var_0F.size > 0) {
 			continue;
 		}

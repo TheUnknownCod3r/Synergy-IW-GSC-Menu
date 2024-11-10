@@ -4,74 +4,74 @@
 ***************************************/
 
 init() {
-  var_0 = getentarray("destructable", "targetname");
+  var_00 = getentarray("destructable", "targetname");
 
   if (getdvar("scr_destructables") == "0") {
-  for (var_1 = 0; var_1 < var_0.size; var_1++)
-  var_0[var_1] delete();
+  for (var_01 = 0; var_01 < var_0.size; var_1++)
+  var_0[var_01] delete();
   } else {
-  for (var_1 = 0; var_1 < var_0.size; var_1++)
-  var_0[var_1] thread _id_5335();
+  for (var_01 = 0; var_01 < var_0.size; var_1++)
+  var_0[var_01] thread destructable_think();
   }
 }
 
-_id_5335() {
-  var_0 = 40;
-  var_1 = 0;
+destructable_think() {
+  var_00 = 40;
+  var_01 = 0;
 
-  if (isdefined(self._id_ECE4))
-  var_0 = self._id_ECE4;
+  if (isdefined(self.script_accumulate))
+  var_00 = self.script_accumulate;
 
-  if (isdefined(self._id_EEE3))
-  var_1 = self._id_EEE3;
+  if (isdefined(self.script_threshold))
+  var_01 = self.script_threshold;
 
-  if (isdefined(self._id_ED59)) {
-  var_2 = strtok(self._id_ED59, " ");
+  if (isdefined(self.script_destructable_area)) {
+  var_02 = strtok(self.script_destructable_area, " ");
 
-  for (var_3 = 0; var_3 < var_2.size; var_3++)
-  _id_2BAB(var_2[var_3]);
+  for (var_03 = 0; var_03 < var_2.size; var_3++)
+  blockarea(var_2[var_03]);
   }
 
-  if (isdefined(self._id_EDBB))
-  self._id_7542 = loadfx(self._id_EDBB);
+  if (isdefined(self.script_fxid))
+  self.fx = loadfx(self.script_fxid);
 
-  var_4 = 0;
+  var_04 = 0;
   self setcandamage(1);
 
   for (;;) {
-  self waittill("damage", var_5, var_6);
+  self waittill("damage", var_05, var_06);
 
-  if (var_5 >= var_1) {
-  var_4 = var_4 + var_5;
+  if (var_05 >= var_01) {
+  var_04 = var_04 + var_05;
 
-  if (var_4 >= var_0) {
-  thread _id_5334();
+  if (var_04 >= var_00) {
+  thread destructable_destruct();
   return;
   }
   }
   }
 }
 
-_id_5334() {
-  var_0 = self;
+destructable_destruct() {
+  var_00 = self;
 
-  if (isdefined(self._id_ED59)) {
-  var_1 = strtok(self._id_ED59, " ");
+  if (isdefined(self.script_destructable_area)) {
+  var_01 = strtok(self.script_destructable_area, " ");
 
-  for (var_2 = 0; var_2 < var_1.size; var_2++)
-  _id_12B81(var_1[var_2]);
+  for (var_02 = 0; var_02 < var_1.size; var_2++)
+  unblockarea(var_1[var_02]);
   }
 
-  if (isdefined(var_0._id_7542))
-  playfx(var_0._id_7542, var_0.origin + (0, 0, 6));
+  if (isdefined(var_0.fx))
+  playfx(var_0.fx, var_0.origin + (0, 0, 6));
 
-  var_0 delete();
+  var_00 delete();
 }
 
-_id_2BAB(var_0) {}
+blockarea(var_00) {}
 
-_id_2BAD(var_0, var_1) {}
+func_2BAD(var_00, var_01) {}
 
-_id_12B81(var_0) {}
+unblockarea(var_00) {}
 
-_id_12B82(var_0, var_1) {}
+func_12B82(var_00, var_01) {}

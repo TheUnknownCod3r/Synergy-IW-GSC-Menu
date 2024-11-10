@@ -175,7 +175,7 @@ suck_zombie(param_00,param_01) {
 	self.disable_armor = 1;
 	param_01.trap_kills = param_01.trap_kills + 2;
 	if(scripts\engine\utility::flag("mini_ufo_red_ready")) {
-		level.var_1E90++;
+		level.angry_mike_trap_kills++;
 	}
 
 	if(isdefined(param_00)) {

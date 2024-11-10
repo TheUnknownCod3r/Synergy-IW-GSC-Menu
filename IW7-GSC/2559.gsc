@@ -18,27 +18,27 @@ func_006E(param_00,param_01,param_02,param_03) {
 }
 
 bt_nativesetregistrar(param_00) {
-	function_02BA(param_00);
+	_func_2BA(param_00);
 }
 
 bt_nativeregistertree(param_00,param_01,param_02,param_03) {
-	function_02B8(param_00,param_01,param_02,param_03);
+	_func_2B8(param_00,param_01,param_02,param_03);
 }
 
 bt_nativeistreeregistered(param_00) {
-	return function_02BC(param_00);
+	return _func_2BC(param_00);
 }
 
 bt_nativeregisterbehavior(param_00,param_01,param_02,param_03,param_04) {
-	function_02B9(param_00,param_01,param_02,param_03,param_04);
+	_func_2B9(param_00,param_01,param_02,param_03,param_04);
 }
 
 bt_nativeregisterbehaviortotree(param_00,param_01,param_02,param_03,param_04) {
-	function_02B9(param_00,param_01,param_02,param_03,param_04);
+	_func_2B9(param_00,param_01,param_02,param_03,param_04);
 }
 
 bt_nativefinalizeregistrar() {
-	function_02BB();
+	_func_2BB();
 }
 
 bt_nativetick() {
@@ -46,7 +46,7 @@ bt_nativetick() {
 }
 
 bt_nativeregisteraction(param_00,param_01,param_02,param_03,param_04,param_05) {
-	function_02BD(param_00,param_01,param_02,param_03,param_04,param_05);
+	_func_2BD(param_00,param_01,param_02,param_03,param_04,param_05);
 }
 
 bt_nativeexecaction(param_00,param_01,param_02,param_03) {

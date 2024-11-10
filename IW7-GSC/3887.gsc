@@ -17,7 +17,7 @@ main() {
 
 func_F990() {
 	level.var_13563 = spawnstruct();
-	level.var_13563.var_1087E = function_00C8("vr_spawner_human");
+	level.var_13563.var_1087E = getspawnerarray("vr_spawner_human");
 	level.var_13563.var_63A1 = [];
 	level.var_13563.var_12B98 = [];
 	level.var_13563.var_2BE3 = [];
@@ -161,7 +161,7 @@ func_F921() {
 
 func_4660(param_00,param_01,param_02) {
 	foreach(var_04 in param_00) {
-		if(function_02A6(var_04)) {
+		if(isent(var_04)) {
 			if(isdefined(var_04.script_noteworthy)) {
 				if(var_04.script_noteworthy == "pivot") {
 					param_02.var_CBFA = var_04;
@@ -180,7 +180,7 @@ func_4660(param_00,param_01,param_02) {
 			continue;
 		}
 
-		if(function_02A4(var_04)) {
+		if(isstruct(var_04)) {
 			if(isdefined(var_04.script_noteworthy)) {
 				if(var_04.script_noteworthy == "spawn_org") {
 					param_02.var_1078F = var_04;
@@ -239,8 +239,8 @@ func_FA3C() {
 			}
 			else if(var_01.var_EDD5 == 1) {
 				var_07 scripts\sp\_utility::func_65E0("segment_dropping_geo");
-				var_07.var_12B96 = function_00B3("vr_ring0_" + var_07.script_index + "_leftnode","targetname");
-				var_07.var_12B97 = function_00B3("vr_ring0_" + var_07.script_index + "_rightnode","targetname");
+				var_07.var_12B96 = getnode("vr_ring0_" + var_07.script_index + "_leftnode","targetname");
+				var_07.var_12B97 = getnode("vr_ring0_" + var_07.script_index + "_rightnode","targetname");
 				var_07.var_6B71 = getentarray("vr_ring" + var_01.var_EDD5 + "_" + var_07.script_index + "_falling_geo","script_noteworthy");
 				var_07.var_75B5 = scripts\engine\utility::getstructarray("vr_ring" + var_01.var_EDD5 + "_" + var_07.script_index + "_fx","targetname");
 			}
@@ -334,7 +334,7 @@ func_FA3C() {
 
 func_F18A(param_00,param_01,param_02) {
 	foreach(var_04 in param_00) {
-		if(function_02A6(var_04)) {
+		if(isent(var_04)) {
 			if(isdefined(var_04.script_noteworthy)) {
 				if(var_04.script_noteworthy == "pivot") {
 					param_02.var_CBFA = var_04;
@@ -347,7 +347,7 @@ func_F18A(param_00,param_01,param_02) {
 			continue;
 		}
 
-		if(function_02A4(var_04)) {
+		if(isstruct(var_04)) {
 			if(var_04.script_noteworthy == "spawn_org") {
 				func_FA4A(var_04,param_01,param_02);
 			}
@@ -465,7 +465,7 @@ func_7AFE(param_00,param_01) {
 	var_02 = [];
 	var_03 = scripts\engine\utility::getstructarray(param_00,param_01);
 	var_04 = getentarray(param_00,param_01);
-	var_05 = function_00B4(param_00,param_01);
+	var_05 = getnodearray(param_00,param_01);
 	var_06 = scripts\engine\utility::array_combine(var_03,var_04);
 	var_06 = scripts\engine\utility::array_combine(var_05,var_06);
 	foreach(var_08 in var_06) {

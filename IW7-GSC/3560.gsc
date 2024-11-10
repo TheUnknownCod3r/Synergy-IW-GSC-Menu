@@ -106,7 +106,7 @@ func_72D7() {
 	var_02 = [self.triggerportableradarping,self.var_AD30];
 	for(;;) {
 		scripts\engine\utility::waitframe();
-		var_03 = function_0288(var_01,self.origin,32,var_00,var_02,"physicsquery_closest");
+		var_03 = physics_spherecast(var_01,self.origin,32,var_00,var_02,"physicsquery_closest");
 		if(var_03.size > 0) {
 			func_72D4(var_03[0]["shape_position"]);
 			break;
@@ -128,7 +128,7 @@ func_72D6() {
 			var_02[var_02.size] = self.var_AD30;
 		}
 
-		var_03 = function_0288(var_01,self.origin,32,var_00,var_02,"physicsquery_closest");
+		var_03 = physics_spherecast(var_01,self.origin,32,var_00,var_02,"physicsquery_closest");
 		if(var_03.size > 0) {
 			var_04 = var_03[0]["entity"];
 			if(func_9FE2(var_04)) {

@@ -998,7 +998,7 @@ func_6D07(param_00,param_01,param_02,param_03,param_04) {
 		var_0C = var_0B * var_05;
 		var_0D = var_0A + var_0C;
 		var_0E = var_0A - var_0C;
-		function_02E0(level._effect["zombie_mini_grey_shock_arc"],var_0D,vectortoangles(var_0E - var_0D),var_0E);
+		playfxbetweenpoints(level._effect["zombie_mini_grey_shock_arc"],var_0D,vectortoangles(var_0E - var_0D),var_0E);
 		scripts\engine\utility::waitframe();
 	}
 
@@ -1025,7 +1025,7 @@ func_7827(param_00,param_01) {
 			return vectortoangles(var_07);
 
 		case 135:
-			var_08 = function_02D3(var_07);
+			var_08 = anglestoleft(var_07);
 			var_05 = anglestoup(var_07);
 			var_06 = var_07 + var_08;
 			return vectortoangles(var_08);

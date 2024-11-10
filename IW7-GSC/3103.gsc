@@ -3,63 +3,63 @@
  * Script: scripts\3103.gsc
 ***************************************/
 
-_id_61F8(var_0) {
+func_61F8(var_00) {
   setdvarifuninitialized("fake_jackal_sfx", 0);
   self endon("terminate_ai_threads");
-  var_1 = 0;
+  var_01 = 0;
 
   if (issubstr(self.classname, "cheap"))
-  var_1 = 1;
+  var_01 = 1;
 
-  if (!isdefined(var_0))
-  var_0 = 0;
+  if (!isdefined(var_00))
+  var_00 = 0;
 
-  if (var_0 || var_1)
-  var_2 = 0;
+  if (var_00 || var_01)
+  var_02 = 0;
   else
-  var_2 = 1;
+  var_02 = 1;
 
-  thread _id_0BDC::_id_1985();
+  thread func_0BDC::func_1985();
 
-  if (!isdefined(self._id_111A4))
-  self._id_111A4 = "jackal";
+  if (!isdefined(self.subclass))
+  self.subclass = "jackal";
 
-  if (self._id_EEDE == "axis")
-  _id_0BDC::_id_105DB("jackal", "JACKAL_R7_SKELTER", "jackal", "enemy_jackal", 1);
+  if (self.script_team == "axis")
+  func_0BDC::func_105DB("jackal", "JACKAL_R7_SKELTER", "jackal", "enemy_jackal", 1);
   else
-  _id_0BDC::_id_105DB("jackal", undefined, "ally_jackal", "ally_jackal");
+  func_0BDC::func_105DB("jackal", undefined, "ally_jackal", "ally_jackal");
 
-  _id_0BDC::_id_A0AF();
-  _id_0BDC::_id_A2DE(1, 0);
-  thread _id_0C20::_id_7598(var_2);
-  thread _id_0C1C::_id_4E13();
-  thread _id_0C1C::_id_6170();
-  thread _id_0C1A::_id_25C5();
+  func_0BDC::func_A0AF();
+  func_0BDC::func_A2DE(1, 0);
+  thread func_0C20::func_7598(var_02);
+  thread func_0C1C::death_monitor();
+  thread func_0C1C::func_6170();
+  thread func_0C1A::func_25C5();
 
-  if (!var_1)
-  thread _id_0C18::_id_1EDC();
+  if (!var_01)
+  thread func_0C18::func_1EDC();
 
-  _id_0C24::_id_10A49();
-  _id_0C1B::_id_13CC4();
-  _id_0C21::_id_D97E();
+  func_0C24::func_10A49();
+  func_0C1B::func_13CC4();
+  func_0C21::func_D97E();
 
-  if (var_1) {
-  _id_0C20::_id_A3B7("fly");
+  if (var_01) {
+  func_0C20::func_A3B7("fly");
 
   if (getdvarint("fake_jackal_sfx") == 1)
-  _id_0C1A::_id_11130(0);
+  func_0C1A::func_11130(0);
   }
-  else if (!var_0)
-  _id_0BDC::_id_6B4C("fly");
+  else if (!var_00)
+  func_0BDC::func_6B4C("fly");
 
-  level._id_A056._id_1630 = scripts\engine\utility::_id_2279(level._id_A056._id_1630, self);
+  level.func_A056.func_1630 = scripts\engine\utility::array_add(level.func_A056.func_1630, self);
 }
 
-_id_552A() {
+func_552A() {
   self notify("terminate_ai_threads");
 
-  if (_id_0BDC::_id_9CC8())
-  _id_0BDC::_id_105DA();
+  if (func_0BDC::func_9CC8())
+  func_0BDC::func_105DA();
 
-  level._id_A056._id_1630 = scripts\engine\utility::array_remove(level._id_A056._id_1630, self);
+  level.func_A056.func_1630 = scripts\engine\utility::array_remove(level.func_A056.func_1630, self);
 }

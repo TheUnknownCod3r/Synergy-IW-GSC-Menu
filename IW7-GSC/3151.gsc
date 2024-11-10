@@ -3,64 +3,64 @@
  * Script: scripts\3151.gsc
 ***************************************/
 
-_id_2371() {
-  if (scripts\asm\asm::_id_232E("jackal"))
+func_2371() {
+  if (scripts\asm\asm::func_232E("jackal"))
   return;
 
-  scripts\asm\asm::_id_230B("jackal", "Start");
-  scripts\asm\asm::_id_2373("evade", _id_0C4E::_id_67C5);
-  scripts\asm\asm::_id_2373("cannons", _id_0C4E::_id_1EA6);
-  scripts\asm\asm::_id_2374("Start", _id_0C4E::_id_A22E, undefined, undefined, undefined, undefined, _id_0F3D::_id_3E96, undefined, undefined, undefined, undefined, undefined, undefined, undefined, "death_generic", undefined, undefined, undefined, undefined, undefined, undefined, undefined);
-  scripts\asm\asm::_id_2375("Hover_Idle", undefined, ::_id_125C3, undefined);
-  scripts\asm\asm::_id_2374("Hover_Idle", _id_0C4E::_id_A3F6, undefined, undefined, undefined, undefined, _id_0C4E::_id_3EDE, undefined, undefined, undefined, undefined, undefined, undefined, undefined, "death_generic", undefined, undefined, undefined, undefined, undefined, undefined, undefined);
-  scripts\asm\asm::_id_2375("Hover_To_Fly", undefined, _id_0C4E::_id_9EAA, "fly");
-  scripts\asm\asm::_id_2375("Hover_Move", undefined, _id_0C4E::_id_A40C, undefined);
-  scripts\asm\asm::_id_2375("Hover_To_Launch", undefined, _id_0C4E::_id_9E75, undefined);
-  scripts\asm\asm::_id_2375("Hover_To_Boost", undefined, _id_0C4E::_id_9D70, undefined);
-  scripts\asm\asm::_id_2374("Fly", _id_0C4E::_id_A3C0, undefined, undefined, undefined, undefined, _id_0C4E::_id_3EDE, undefined, undefined, undefined, undefined, undefined, undefined, undefined, "death_generic", undefined, undefined, undefined, undefined, undefined, undefined, undefined);
-  scripts\asm\asm::_id_2375("Fly_To_Hover", undefined, _id_0C4E::_id_9EAA, "hover");
-  scripts\asm\asm::_id_2375("Fly_To_Hover", undefined, _id_0C4E::_id_9E75, undefined);
-  scripts\asm\asm::_id_2375("Fly_to_boost", undefined, _id_0C4E::_id_9D70, undefined);
-  scripts\asm\asm::_id_2374("Hover_To_Fly", _id_0C4E::_id_A3F9, undefined, undefined, undefined, undefined, _id_0C4E::_id_3EDF, undefined, undefined, undefined, undefined, undefined, undefined, undefined, "death_generic", undefined, undefined, undefined, undefined, undefined, undefined, undefined);
-  scripts\asm\asm::_id_2375("Fly", undefined, scripts\asm\asm::_id_68B0, "end");
-  scripts\asm\asm::_id_2374("Fly_To_Hover", _id_0C4E::_id_A3C2, undefined, undefined, undefined, undefined, _id_0C4E::_id_3EDF, undefined, undefined, undefined, undefined, undefined, undefined, undefined, "death_generic", undefined, undefined, undefined, undefined, undefined, undefined, undefined);
-  scripts\asm\asm::_id_2375("PASS_Finished_Fly_To_Hover", undefined, scripts\asm\asm::_id_68B0, "end");
-  scripts\asm\asm::_id_2374("Hover_Move", _id_0C4E::_id_A3F7, undefined, undefined, undefined, undefined, _id_0C4E::_id_3EDE, undefined, undefined, undefined, undefined, undefined, undefined, undefined, "death_generic", undefined, undefined, undefined, undefined, undefined, undefined, undefined);
-  scripts\asm\asm::_id_2375("Hover_To_Launch", undefined, _id_0C4E::_id_9E75, undefined);
-  scripts\asm\asm::_id_2375("Hover_To_Boost", undefined, _id_0C4E::_id_9D70, undefined);
-  scripts\asm\asm::_id_2375("Hover_Idle", undefined, _id_0C4E::_id_C17E, undefined);
-  scripts\asm\asm::_id_2375("Hover_To_Fly", undefined, _id_0C4E::_id_9EAA, "fly");
-  scripts\asm\asm::_id_2374("PASS_Finished_Fly_To_Hover", scripts\asm\shared\utility::_id_2B58, undefined, undefined, undefined, undefined, _id_0F3D::_id_3E96, undefined, undefined, undefined, undefined, undefined, undefined, undefined, "death_generic", undefined, undefined, undefined, undefined, undefined, undefined, 1);
-  scripts\asm\asm::_id_2375("Hover_Idle", undefined, _id_0C4E::_id_C17E, undefined);
-  scripts\asm\asm::_id_2375("Hover_Move", undefined, _id_0C4E::_id_A40C, undefined);
-  scripts\asm\asm::_id_2374("AnimScripted", scripts\asm\shared\utility::_id_2B58, undefined, undefined, undefined, undefined, _id_0F3D::_id_3E96, undefined, undefined, undefined, undefined, undefined, undefined, undefined, "death_generic", undefined, undefined, undefined, undefined, undefined, undefined, undefined);
-  scripts\asm\asm::_id_2375("Hover_Idle", undefined, _id_0C4E::_id_A41C, "hover");
-  scripts\asm\asm::_id_2375("Fly", undefined, _id_0C4E::_id_A41C, "fly");
-  scripts\asm\asm::_id_2374("Knobs", _id_0F3D::_id_CEA8, undefined, undefined, undefined, undefined, _id_0F3D::_id_3E96, undefined, undefined, undefined, undefined, undefined, undefined, undefined, "death_generic", undefined, undefined, undefined, undefined, undefined, undefined, undefined);
-  scripts\asm\asm::_id_2374("Hover_To_Launch", _id_0C4E::_id_A3FA, undefined, undefined, undefined, undefined, _id_0C4E::_id_3EDF, undefined, undefined, undefined, undefined, undefined, undefined, undefined, "death_generic", undefined, undefined, undefined, undefined, undefined, undefined, undefined);
-  scripts\asm\asm::_id_2375("Launch_Idle", undefined, scripts\asm\asm::_id_68B0, "end");
-  scripts\asm\asm::_id_2374("Launch_Idle", _id_0C4E::_id_A3FC, undefined, undefined, undefined, undefined, _id_0C4E::_id_3EDE, undefined, undefined, undefined, undefined, undefined, undefined, undefined, "death_generic", undefined, undefined, undefined, undefined, undefined, undefined, undefined);
-  scripts\asm\asm::_id_2375("Launch_To_Space_Fly", undefined, _id_0C4E::_id_C17C, undefined);
-  scripts\asm\asm::_id_2374("Launch_To_Space_Fly", _id_0C4E::_id_A405, undefined, undefined, undefined, undefined, _id_0C4E::_id_3EDF, undefined, undefined, undefined, undefined, undefined, undefined, undefined, "death_generic", undefined, undefined, undefined, undefined, undefined, undefined, undefined);
-  scripts\asm\asm::_id_2375("Fly", undefined, scripts\asm\asm::_id_68B0, "end");
-  scripts\asm\asm::_id_2374("Boost", _id_0C4E::_id_A3C0, undefined, undefined, undefined, undefined, _id_0C4E::_id_3EDE, undefined, undefined, undefined, undefined, undefined, undefined, undefined, "death_generic", undefined, undefined, undefined, undefined, undefined, undefined, undefined);
-  scripts\asm\asm::_id_2375("Boost_To_Hover", undefined, _id_0C4E::_id_C17B, undefined);
-  scripts\asm\asm::_id_2375("Boost_To_Fly", undefined, _id_0C4E::_id_C17B, undefined);
-  scripts\asm\asm::_id_2374("Hover_To_Boost", _id_0C4E::_id_A3F8, undefined, undefined, undefined, undefined, _id_0C4E::_id_3EDF, undefined, undefined, undefined, undefined, undefined, undefined, undefined, "death_generic", undefined, undefined, undefined, undefined, undefined, undefined, undefined);
-  scripts\asm\asm::_id_2375("Boost", undefined, scripts\asm\asm::_id_68B0, "end");
-  scripts\asm\asm::_id_2374("Boost_To_Hover", _id_0C4E::_id_A3B1, undefined, undefined, undefined, undefined, _id_0C4E::_id_3EDF, undefined, undefined, undefined, undefined, undefined, undefined, undefined, "death_generic", undefined, undefined, undefined, undefined, undefined, undefined, undefined);
-  scripts\asm\asm::_id_2375("PASS_Finished_Boost_To_Hover", undefined, scripts\asm\asm::_id_68B0, "end");
-  scripts\asm\asm::_id_2374("PASS_Finished_Boost_To_Hover", scripts\asm\shared\utility::_id_2B58, undefined, undefined, undefined, undefined, _id_0F3D::_id_3E96, undefined, undefined, undefined, undefined, undefined, undefined, undefined, "death_generic", undefined, undefined, undefined, undefined, undefined, undefined, 1);
-  scripts\asm\asm::_id_2375("Hover_Idle", undefined, _id_0C4E::_id_C17E, undefined);
-  scripts\asm\asm::_id_2375("Hover_Move", undefined, _id_0C4E::_id_A40C, undefined);
-  scripts\asm\asm::_id_2374("Boost_To_Fly", _id_0C4E::_id_A3B0, undefined, undefined, undefined, undefined, _id_0C4E::_id_3EDF, undefined, undefined, undefined, undefined, undefined, undefined, undefined, "death_generic", undefined, undefined, undefined, undefined, undefined, undefined, undefined);
-  scripts\asm\asm::_id_2375("Fly", undefined, scripts\asm\asm::_id_68B0, "end");
-  scripts\asm\asm::_id_2374("Fly_to_boost", _id_0C4E::_id_A3C1, undefined, undefined, undefined, undefined, _id_0C4E::_id_3EDF, undefined, undefined, undefined, undefined, undefined, undefined, undefined, "death_generic", undefined, undefined, undefined, undefined, undefined, undefined, undefined);
-  scripts\asm\asm::_id_2375("Boost", undefined, scripts\asm\asm::_id_68B0, "end");
-  scripts\asm\asm::_id_2374("cannon_state", _id_0F3D::_id_CEA8, undefined, undefined, undefined, undefined, _id_0F3D::_id_3E96, undefined, undefined, undefined, undefined, undefined, undefined, undefined, "death_generic", undefined, undefined, undefined, undefined, undefined, undefined, undefined);
-  scripts\asm\asm::_id_2327();
+  scripts\asm\asm::func_230B("jackal", "Start");
+  scripts\asm\asm::func_2373("evade", func_0C4E::func_67C5);
+  scripts\asm\asm::func_2373("cannons", func_0C4E::func_1EA6);
+  scripts\asm\asm::func_2374("Start", func_0C4E::func_A22E, undefined, undefined, undefined, undefined, func_0F3D::func_3E96, undefined, undefined, undefined, undefined, undefined, undefined, undefined, "death_generic", undefined, undefined, undefined, undefined, undefined, undefined, undefined);
+  scripts\asm\asm::func_2375("Hover_Idle", undefined, ::func_125C3, undefined);
+  scripts\asm\asm::func_2374("Hover_Idle", func_0C4E::func_A3F6, undefined, undefined, undefined, undefined, func_0C4E::func_3EDE, undefined, undefined, undefined, undefined, undefined, undefined, undefined, "death_generic", undefined, undefined, undefined, undefined, undefined, undefined, undefined);
+  scripts\asm\asm::func_2375("Hover_To_Fly", undefined, func_0C4E::func_9EAA, "fly");
+  scripts\asm\asm::func_2375("Hover_Move", undefined, func_0C4E::func_A40C, undefined);
+  scripts\asm\asm::func_2375("Hover_To_Launch", undefined, func_0C4E::func_9E75, undefined);
+  scripts\asm\asm::func_2375("Hover_To_Boost", undefined, func_0C4E::func_9D70, undefined);
+  scripts\asm\asm::func_2374("Fly", func_0C4E::func_A3C0, undefined, undefined, undefined, undefined, func_0C4E::func_3EDE, undefined, undefined, undefined, undefined, undefined, undefined, undefined, "death_generic", undefined, undefined, undefined, undefined, undefined, undefined, undefined);
+  scripts\asm\asm::func_2375("Fly_To_Hover", undefined, func_0C4E::func_9EAA, "hover");
+  scripts\asm\asm::func_2375("Fly_To_Hover", undefined, func_0C4E::func_9E75, undefined);
+  scripts\asm\asm::func_2375("Fly_to_boost", undefined, func_0C4E::func_9D70, undefined);
+  scripts\asm\asm::func_2374("Hover_To_Fly", func_0C4E::func_A3F9, undefined, undefined, undefined, undefined, func_0C4E::func_3EDF, undefined, undefined, undefined, undefined, undefined, undefined, undefined, "death_generic", undefined, undefined, undefined, undefined, undefined, undefined, undefined);
+  scripts\asm\asm::func_2375("Fly", undefined, scripts\asm\asm::func_68B0, "end");
+  scripts\asm\asm::func_2374("Fly_To_Hover", func_0C4E::func_A3C2, undefined, undefined, undefined, undefined, func_0C4E::func_3EDF, undefined, undefined, undefined, undefined, undefined, undefined, undefined, "death_generic", undefined, undefined, undefined, undefined, undefined, undefined, undefined);
+  scripts\asm\asm::func_2375("PASS_Finished_Fly_To_Hover", undefined, scripts\asm\asm::func_68B0, "end");
+  scripts\asm\asm::func_2374("Hover_Move", func_0C4E::func_A3F7, undefined, undefined, undefined, undefined, func_0C4E::func_3EDE, undefined, undefined, undefined, undefined, undefined, undefined, undefined, "death_generic", undefined, undefined, undefined, undefined, undefined, undefined, undefined);
+  scripts\asm\asm::func_2375("Hover_To_Launch", undefined, func_0C4E::func_9E75, undefined);
+  scripts\asm\asm::func_2375("Hover_To_Boost", undefined, func_0C4E::func_9D70, undefined);
+  scripts\asm\asm::func_2375("Hover_Idle", undefined, func_0C4E::func_C17E, undefined);
+  scripts\asm\asm::func_2375("Hover_To_Fly", undefined, func_0C4E::func_9EAA, "fly");
+  scripts\asm\asm::func_2374("PASS_Finished_Fly_To_Hover", scripts\asm\shared\utility::func_2B58, undefined, undefined, undefined, undefined, func_0F3D::func_3E96, undefined, undefined, undefined, undefined, undefined, undefined, undefined, "death_generic", undefined, undefined, undefined, undefined, undefined, undefined, 1);
+  scripts\asm\asm::func_2375("Hover_Idle", undefined, func_0C4E::func_C17E, undefined);
+  scripts\asm\asm::func_2375("Hover_Move", undefined, func_0C4E::func_A40C, undefined);
+  scripts\asm\asm::func_2374("AnimScripted", scripts\asm\shared\utility::func_2B58, undefined, undefined, undefined, undefined, func_0F3D::func_3E96, undefined, undefined, undefined, undefined, undefined, undefined, undefined, "death_generic", undefined, undefined, undefined, undefined, undefined, undefined, undefined);
+  scripts\asm\asm::func_2375("Hover_Idle", undefined, func_0C4E::func_A41C, "hover");
+  scripts\asm\asm::func_2375("Fly", undefined, func_0C4E::func_A41C, "fly");
+  scripts\asm\asm::func_2374("Knobs", func_0F3D::func_CEA8, undefined, undefined, undefined, undefined, func_0F3D::func_3E96, undefined, undefined, undefined, undefined, undefined, undefined, undefined, "death_generic", undefined, undefined, undefined, undefined, undefined, undefined, undefined);
+  scripts\asm\asm::func_2374("Hover_To_Launch", func_0C4E::func_A3FA, undefined, undefined, undefined, undefined, func_0C4E::func_3EDF, undefined, undefined, undefined, undefined, undefined, undefined, undefined, "death_generic", undefined, undefined, undefined, undefined, undefined, undefined, undefined);
+  scripts\asm\asm::func_2375("Launch_Idle", undefined, scripts\asm\asm::func_68B0, "end");
+  scripts\asm\asm::func_2374("Launch_Idle", func_0C4E::func_A3FC, undefined, undefined, undefined, undefined, func_0C4E::func_3EDE, undefined, undefined, undefined, undefined, undefined, undefined, undefined, "death_generic", undefined, undefined, undefined, undefined, undefined, undefined, undefined);
+  scripts\asm\asm::func_2375("Launch_To_Space_Fly", undefined, func_0C4E::func_C17C, undefined);
+  scripts\asm\asm::func_2374("Launch_To_Space_Fly", func_0C4E::func_A405, undefined, undefined, undefined, undefined, func_0C4E::func_3EDF, undefined, undefined, undefined, undefined, undefined, undefined, undefined, "death_generic", undefined, undefined, undefined, undefined, undefined, undefined, undefined);
+  scripts\asm\asm::func_2375("Fly", undefined, scripts\asm\asm::func_68B0, "end");
+  scripts\asm\asm::func_2374("Boost", func_0C4E::func_A3C0, undefined, undefined, undefined, undefined, func_0C4E::func_3EDE, undefined, undefined, undefined, undefined, undefined, undefined, undefined, "death_generic", undefined, undefined, undefined, undefined, undefined, undefined, undefined);
+  scripts\asm\asm::func_2375("Boost_To_Hover", undefined, func_0C4E::func_C17B, undefined);
+  scripts\asm\asm::func_2375("Boost_To_Fly", undefined, func_0C4E::func_C17B, undefined);
+  scripts\asm\asm::func_2374("Hover_To_Boost", func_0C4E::func_A3F8, undefined, undefined, undefined, undefined, func_0C4E::func_3EDF, undefined, undefined, undefined, undefined, undefined, undefined, undefined, "death_generic", undefined, undefined, undefined, undefined, undefined, undefined, undefined);
+  scripts\asm\asm::func_2375("Boost", undefined, scripts\asm\asm::func_68B0, "end");
+  scripts\asm\asm::func_2374("Boost_To_Hover", func_0C4E::func_A3B1, undefined, undefined, undefined, undefined, func_0C4E::func_3EDF, undefined, undefined, undefined, undefined, undefined, undefined, undefined, "death_generic", undefined, undefined, undefined, undefined, undefined, undefined, undefined);
+  scripts\asm\asm::func_2375("PASS_Finished_Boost_To_Hover", undefined, scripts\asm\asm::func_68B0, "end");
+  scripts\asm\asm::func_2374("PASS_Finished_Boost_To_Hover", scripts\asm\shared\utility::func_2B58, undefined, undefined, undefined, undefined, func_0F3D::func_3E96, undefined, undefined, undefined, undefined, undefined, undefined, undefined, "death_generic", undefined, undefined, undefined, undefined, undefined, undefined, 1);
+  scripts\asm\asm::func_2375("Hover_Idle", undefined, func_0C4E::func_C17E, undefined);
+  scripts\asm\asm::func_2375("Hover_Move", undefined, func_0C4E::func_A40C, undefined);
+  scripts\asm\asm::func_2374("Boost_To_Fly", func_0C4E::func_A3B0, undefined, undefined, undefined, undefined, func_0C4E::func_3EDF, undefined, undefined, undefined, undefined, undefined, undefined, undefined, "death_generic", undefined, undefined, undefined, undefined, undefined, undefined, undefined);
+  scripts\asm\asm::func_2375("Fly", undefined, scripts\asm\asm::func_68B0, "end");
+  scripts\asm\asm::func_2374("Fly_to_boost", func_0C4E::func_A3C1, undefined, undefined, undefined, undefined, func_0C4E::func_3EDF, undefined, undefined, undefined, undefined, undefined, undefined, undefined, "death_generic", undefined, undefined, undefined, undefined, undefined, undefined, undefined);
+  scripts\asm\asm::func_2375("Boost", undefined, scripts\asm\asm::func_68B0, "end");
+  scripts\asm\asm::func_2374("cannon_state", func_0F3D::func_CEA8, undefined, undefined, undefined, undefined, func_0F3D::func_3E96, undefined, undefined, undefined, undefined, undefined, undefined, undefined, "death_generic", undefined, undefined, undefined, undefined, undefined, undefined, undefined);
+  scripts\asm\asm::func_2327();
 }
 
-_id_125C3(var_0, var_1, var_2, var_3) {
+func_125C3(var_00, var_01, var_02, var_03) {
   return 1;
 }

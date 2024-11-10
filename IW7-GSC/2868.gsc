@@ -12,5 +12,5 @@ func_95F7() {
 
 func_12DC3() {
 	level.player _meth_8302("hasEverPlayed_SP",1);
-	function_0229();
+	updategamerprofile();
 }

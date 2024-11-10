@@ -4,74 +4,74 @@
 ***************************************/
 
 init() {
-  if (!isdefined(level._id_CC09))
-  level._id_CC09 = [];
+  if (!isdefined(level.placeableconfigs))
+  level.placeableconfigs = [];
 }
 
-_id_838E(var_0, var_1) {
-  var_2 = _id_49FC(var_0);
-  _id_E152();
-  self._id_3AA0 = var_2;
-  var_3 = _id_C4CA(var_0, var_2, 1, var_1);
-  self._id_3AA0 = undefined;
-  _id_E2E0();
-  return isdefined(var_2);
+giveplaceable(var_00, var_01) {
+  var_02 = createplaceable(var_00);
+  removeperks();
+  self.carrieditem = var_02;
+  var_03 = onbeginnewmode(var_00, var_02, 1, var_01);
+  self.carrieditem = undefined;
+  restoreperks();
+  return isdefined(var_02);
 }
 
-_id_49FC(var_0) {
-  if (isdefined(self._id_9D81) && self._id_9D81)
+createplaceable(var_00) {
+  if (isdefined(self.iscarrying) && self.iscarrying)
   return;
 
-  var_1 = level._id_CC09[var_0];
-  var_2 = spawn("script_model", self.origin);
-  var_2 setmodel(var_1._id_B91A);
+  var_01 = level.placeableconfigs[var_00];
+  var_02 = spawn("script_model", self.origin);
+  var_02 setmodel(var_1.modelbase);
   var_2.angles = self.angles;
   var_2.owner = self;
   var_2.team = self.team;
-  var_2._id_451C = var_1;
-  var_2._id_6DEC = 1;
+  var_2.config = var_01;
+  var_2.firstplacement = 1;
 
-  if (isdefined(var_1._id_C4DE))
-  var_2 [[var_1._id_C4DE]](var_0);
+  if (isdefined(var_1.func_C4DE))
+  var_02 [[var_1.func_C4DE]](var_00);
 
-  var_2 _id_4DA6(var_0);
-  var_2 thread _id_11901(var_0);
-  var_2 thread _id_89FA(var_0);
-  var_2 thread _id_C547(var_0);
-  var_2 thread _id_C533(var_0);
-  var_2 thread _id_4988(var_0);
-  return var_2;
+  var_02 deactivate(var_00);
+  var_02 thread timeout(var_00);
+  var_02 thread func_89FA(var_00);
+  var_02 thread func_C547(var_00);
+  var_02 thread ongameended(var_00);
+  var_02 thread createbombsquadmodel(var_00);
+  return var_02;
 }
 
-_id_89FA(var_0) {
+func_89FA(var_00) {
   self endon("death");
   level endon("game_ended");
 
   for (;;) {
-  self waittill("trigger", var_1);
+  self waittill("trigger", var_01);
 
-  if (!scripts\mp\utility\game::isreallyalive(var_1))
+  if (!scripts\mp\utility\game::isreallyalive(var_01))
   continue;
 
-  if (isdefined(self _meth_8138()))
+  if (isdefined(self getlinkedparent()))
   self unlink();
 
-  var_1 _id_C4CA(var_0, self, 0);
+  var_01 onbeginnewmode(var_00, self, 0);
   }
 }
 
-_id_C4CA(var_0, var_1, var_2, var_3) {
+onbeginnewmode(var_00, var_01, var_02, var_03) {
   self endon("death");
   self endon("disconnect");
-  var_1 thread _id_C4D5(var_0, self);
-  scripts\engine\utility::_id_1C71(0);
+  var_01 thread oncarried(var_00, self);
+  scripts\engine\utility::allow_weapon(0);
 
   if (!isai(self)) {
   self notifyonplayercommand("placePlaceable", "+attack");
   self notifyonplayercommand("placePlaceable", "+attack_akimbo_accessible");
   self notifyonplayercommand("cancelPlaceable", "+actionslot 4");
 
-  if (!level._id_4542) {
+  if (!level.console) {
   self notifyonplayercommand("cancelPlaceable", "+actionslot 5");
   self notifyonplayercommand("cancelPlaceable", "+actionslot 6");
   self notifyonplayercommand("cancelPlaceable", "+actionslot 7");
@@ -79,22 +79,22 @@ _id_C4CA(var_0, var_1, var_2, var_3) {
   }
 
   for (;;) {
-  if (isdefined(var_3) && var_3 == 1 && !self isonladder() && self isonground() && !self _meth_81AD())
-  var_4 = "placePlaceable";
+  if (isdefined(var_03) && var_03 == 1 && !self isonladder() && self isonground() && !self ismantling())
+  var_04 = "placePlaceable";
   else
-  var_4 = scripts\engine\utility::_id_13734("placePlaceable", "cancelPlaceable", "force_cancel_placement");
+  var_04 = scripts\engine\utility::waittill_any_return("placePlaceable", "cancelPlaceable", "force_cancel_placement");
 
-  if (!isdefined(var_1)) {
-  scripts\engine\utility::_id_1C71(1);
+  if (!isdefined(var_01)) {
+  scripts\engine\utility::allow_weapon(1);
   return 1;
   }
-  else if (var_4 == "cancelPlaceable" && var_2 || var_4 == "force_cancel_placement") {
-  var_1 _id_C4D2(var_0, var_4 == "force_cancel_placement" && !isdefined(var_1._id_6DEC));
+  else if (var_04 == "cancelPlaceable" && var_02 || var_04 == "force_cancel_placement") {
+  var_01 oncancel(var_00, var_04 == "force_cancel_placement" && !isdefined(var_1.firstplacement));
   return 0;
   }
-  else if (var_1._id_3872) {
-  var_1 thread _id_C56B(var_0);
-  scripts\engine\utility::_id_1C71(1);
+  else if (var_1.canbeplaced) {
+  var_01 thread onplaced(var_00);
+  scripts\engine\utility::allow_weapon(1);
   return 1;
   }
   else
@@ -102,369 +102,369 @@ _id_C4CA(var_0, var_1, var_2, var_3) {
   }
 }
 
-_id_C4D2(var_0, var_1) {
-  if (isdefined(self._id_3A9D)) {
-  var_2 = self._id_3A9D;
-  var_2 _meth_80F3();
-  var_2._id_9D81 = undefined;
-  var_2._id_3AA0 = undefined;
-  var_2 scripts\engine\utility::_id_1C71(1);
+oncancel(var_00, var_01) {
+  if (isdefined(self.carriedby)) {
+  var_02 = self.carriedby;
+  var_02 getrigindexfromarchetyperef();
+  var_2.iscarrying = undefined;
+  var_2.carrieditem = undefined;
+  var_02 scripts\engine\utility::allow_weapon(1);
   }
 
-  if (isdefined(self._id_2C68))
-  self._id_2C68 delete();
+  if (isdefined(self.bombsquadmodel))
+  self.bombsquadmodel delete();
 
-  if (isdefined(self._id_3AA2))
-  self._id_3AA2 delete();
+  if (isdefined(self.carriedobj))
+  self.carriedobj delete();
 
-  var_3 = level._id_CC09[var_0];
+  var_03 = level.placeableconfigs[var_00];
 
-  if (isdefined(var_3._id_C4D3))
-  self [[var_3._id_C4D3]](var_0);
+  if (isdefined(var_3.oncanceldelegate))
+  self [[var_3.oncanceldelegate]](var_00);
 
-  if (isdefined(var_1) && var_1)
-  scripts\mp\weapons::_id_66A8();
+  if (isdefined(var_01) && var_01)
+  scripts\mp\weapons::equipmentdeletevfx();
 
   self delete();
 }
 
-_id_C56B(var_0) {
-  var_1 = level._id_CC09[var_0];
-  self.origin = self._id_CC24;
-  self.angles = self._id_3AA2.angles;
-  self playsound(var_1._id_CC15);
-  _id_10146(var_0);
+onplaced(var_00) {
+  var_01 = level.placeableconfigs[var_00];
+  self.origin = self.func_CC24;
+  self.angles = self.carriedobj.angles;
+  self playsound(var_1.func_CC15);
+  showplacedmodel(var_00);
 
-  if (isdefined(var_1._id_C56C))
-  self [[var_1._id_C56C]](var_0);
+  if (isdefined(var_1.onplaceddelegate))
+  self [[var_1.onplaceddelegate]](var_00);
 
   self setcursorhint("HINT_NOICON");
-  self sethintstring(var_1._id_017B);
-  var_2 = self.owner;
-  var_2 _meth_80F3();
-  var_2._id_9D81 = undefined;
-  self._id_3A9D = undefined;
-  self._id_9EE4 = 1;
-  self._id_6DEC = undefined;
+  self sethintstring(var_1.hintstring);
+  var_02 = self.owner;
+  var_02 getrigindexfromarchetyperef();
+  var_2.iscarrying = undefined;
+  self.carriedby = undefined;
+  self.isplaced = 1;
+  self.firstplacement = undefined;
 
-  if (isdefined(var_1._id_8C79)) {
+  if (isdefined(var_1.func_8C79)) {
   if (level.teambased)
-  scripts\mp\entityheadicons::_id_F877(self.team, (0, 0, var_1._id_8C79));
+  scripts\mp\entityheadicons::setteamheadicon(self.team, (0, 0, var_1.func_8C79));
   else
-  scripts\mp\entityheadicons::_id_F7F2(var_2, (0, 0, var_1._id_8C79));
+  scripts\mp\entityheadicons::setplayerheadicon(var_02, (0, 0, var_1.func_8C79));
   }
 
-  thread _id_898C(var_0);
-  thread _id_898E(var_0);
+  thread handledamage(var_00);
+  thread handledeath(var_00);
   self makeusable();
   scripts\mp\sentientpoolmanager::registersentient("Killstreak_Ground", self.owner);
 
-  foreach (var_4 in level.players) {
-  if (var_4 == var_2) {
-  self enableplayeruse(var_4);
+  foreach (var_04 in level.players) {
+  if (var_04 == var_02) {
+  self enableplayeruse(var_04);
   continue;
   }
 
-  self disableplayeruse(var_4);
+  self disableplayeruse(var_04);
   }
 
-  if (isdefined(self._id_10085)) {
-  level thread scripts\mp\utility\game::_id_115DE(var_1._id_10A38, var_2);
-  self._id_10085 = 0;
+  if (isdefined(self.shouldsplash)) {
+  level thread scripts\mp\utility\game::teamplayercardsplash(var_1.func_10A38, var_02);
+  self.shouldsplash = 0;
   }
 
-  var_6 = spawnstruct();
-  var_6._id_AD39 = self._id_BD3B;
-  var_6._id_CF14 = 1;
-  var_6._id_6371 = "carried";
+  var_06 = spawnstruct();
+  var_6.linkparent = self.moving_platform;
+  var_6.playdeathfx = 1;
+  var_6.endonstring = "carried";
 
-  if (isdefined(var_1._id_C55B))
-  var_6._id_4E53 = var_1._id_C55B;
+  if (isdefined(var_1.func_C55B))
+  var_6.deathoverridecallback = var_1.func_C55B;
 
-  thread scripts\mp\movers::_id_892F(var_6);
-  thread _id_13AFA();
+  thread scripts\mp\movers::handle_moving_platforms(var_06);
+  thread watchplayerconnected();
   self notify("placed");
-  self._id_3AA2 delete();
-  self._id_3AA2 = undefined;
+  self.carriedobj delete();
+  self.carriedobj = undefined;
 }
 
-_id_C4D5(var_0, var_1) {
-  var_2 = level._id_CC09[var_0];
-  self._id_3AA2 = var_1 _id_4992(var_0);
-  self._id_9EE4 = undefined;
-  self._id_3A9D = var_1;
-  var_1._id_9D81 = 1;
-  _id_4DA6(var_0);
-  _id_8ED4(var_0);
+oncarried(var_00, var_01) {
+  var_02 = level.placeableconfigs[var_00];
+  self.carriedobj = var_01 createcarriedobject(var_00);
+  self.isplaced = undefined;
+  self.carriedby = var_01;
+  var_1.iscarrying = 1;
+  deactivate(var_00);
+  hideplacedmodel(var_00);
 
-  if (isdefined(var_2._id_C4D6))
-  self [[var_2._id_C4D6]](var_0);
+  if (isdefined(var_2.oncarrieddelegate))
+  self [[var_2.oncarrieddelegate]](var_00);
 
-  thread _id_12EEC(var_0, var_1);
-  thread _id_C4D7(var_0, var_1);
+  thread updateplacement(var_00, var_01);
+  thread oncarrierdeath(var_00, var_01);
   self notify("carried");
 }
 
-_id_12EEC(var_0, var_1) {
-  var_1 endon("death");
-  var_1 endon("disconnect");
+updateplacement(var_00, var_01) {
+  var_01 endon("death");
+  var_01 endon("disconnect");
   level endon("game_ended");
   self endon("placed");
   self endon("death");
-  self._id_3872 = 1;
-  var_2 = -1;
-  var_3 = level._id_CC09[var_0];
-  var_4 = (0, 0, 0);
+  self.canbeplaced = 1;
+  var_02 = -1;
+  var_03 = level.placeableconfigs[var_00];
+  var_04 = (0, 0, 0);
 
-  if (isdefined(var_3._id_CC23))
-  var_4 = (0, 0, var_3._id_CC23);
+  if (isdefined(var_3.func_CC23))
+  var_04 = (0, 0, var_3.func_CC23);
 
-  var_5 = self._id_3AA2;
+  var_05 = self.carriedobj;
 
   for (;;) {
-  var_6 = var_1 canplayerplacesentry(1, var_3._id_CC25);
-  self._id_CC24 = var_6["origin"];
-  var_5.origin = self._id_CC24 + var_4;
+  var_06 = var_01 canplayerplacesentry(1, var_3.placementradius);
+  self.func_CC24 = var_6["origin"];
+  var_5.origin = self.func_CC24 + var_04;
   var_5.angles = var_6["angles"];
-  self._id_3872 = var_1 isonground() && var_6["result"] && abs(self._id_CC24[2] - var_1.origin[2]) < var_3._id_CC22;
+  self.canbeplaced = var_01 isonground() && var_6["result"] && abs(self.func_CC24[2] - var_1.origin[2]) < var_3.placementheighttolerance;
 
   if (isdefined(var_6["entity"]))
-  self._id_BD3B = var_6["entity"];
+  self.moving_platform = var_6["entity"];
   else
-  self._id_BD3B = undefined;
+  self.moving_platform = undefined;
 
-  if (self._id_3872 != var_2) {
-  if (self._id_3872) {
-  var_5 setmodel(var_3._id_B924);
-  var_1 _meth_80F4(var_3._id_CC28);
+  if (self.canbeplaced != var_02) {
+  if (self.canbeplaced) {
+  var_05 setmodel(var_3.modelplacement);
+  var_01 forceusehinton(var_3.placestring);
   } else {
-  var_5 setmodel(var_3._id_B925);
-  var_1 _meth_80F4(var_3._id_38E3);
+  var_05 setmodel(var_3.modelplacementfailed);
+  var_01 forceusehinton(var_3.cannotplacestring);
   }
   }
 
-  var_2 = self._id_3872;
+  var_02 = self.canbeplaced;
   wait 0.05;
   }
 }
 
-_id_4DA6(var_0) {
+deactivate(var_00) {
   self makeunusable();
-  _id_8EC3();
-  var_1 = level._id_CC09[var_0];
+  hideheadicons();
+  var_01 = level.placeableconfigs[var_00];
 
-  if (isdefined(var_1._id_C4E7))
-  self [[var_1._id_C4E7]](var_0);
+  if (isdefined(var_1.ondeactivedelegate))
+  self [[var_1.ondeactivedelegate]](var_00);
 }
 
-_id_8EC3() {
+hideheadicons() {
   if (level.teambased)
-  scripts\mp\entityheadicons::_id_F877("none", (0, 0, 0));
+  scripts\mp\entityheadicons::setteamheadicon("none", (0, 0, 0));
   else if (isdefined(self.owner))
-  scripts\mp\entityheadicons::_id_F7F2(undefined, (0, 0, 0));
+  scripts\mp\entityheadicons::setplayerheadicon(undefined, (0, 0, 0));
 }
 
-_id_898C(var_0) {
+handledamage(var_00) {
   self endon("carried");
-  var_1 = level._id_CC09[var_0];
-  scripts\mp\damage::monitordamage(var_1.maxhealth, var_1._id_4D4A, ::_id_898F, ::_id_B938, 1);
+  var_01 = level.placeableconfigs[var_00];
+  scripts\mp\damage::monitordamage(var_1.maxhealth, var_1.damagefeedback, ::handledeathdamage, ::modifydamage, 1);
 }
 
-_id_B938(var_0, var_1, var_2, var_3, var_4) {
-  var_5 = var_3;
-  var_6 = self._id_451C;
+modifydamage(var_00, var_01, var_02, var_03, var_04) {
+  var_05 = var_03;
+  var_06 = self.config;
 
-  if (isdefined(var_6._id_1C9D) && var_6._id_1C9D)
-  var_5 = scripts\mp\damage::_id_89C3(var_1, var_2, var_5);
+  if (isdefined(var_6.allowmeleedamage) && var_6.allowmeleedamage)
+  var_05 = scripts\mp\damage::handlemeleedamage(var_01, var_02, var_05);
 
-  if (isdefined(var_6._id_1C8F) && var_6._id_1C8F)
-  var_5 = scripts\mp\damage::_id_8999(var_1, var_2, var_5);
+  if (isdefined(var_6.func_1C8F) && var_6.func_1C8F)
+  var_05 = scripts\mp\damage::handleempdamage(var_01, var_02, var_05);
 
-  var_5 = scripts\mp\damage::_id_89C6(var_1, var_2, var_5);
-  var_5 = scripts\mp\damage::_id_89AC(var_1, var_2, var_5);
-  var_5 = scripts\mp\damage::_id_8975(var_1, var_2, var_5);
+  var_05 = scripts\mp\damage::handlemissiledamage(var_01, var_02, var_05);
+  var_05 = scripts\mp\damage::handlegrenadedamage(var_01, var_02, var_05);
+  var_05 = scripts\mp\damage::handleapdamage(var_01, var_02, var_05);
 
-  if (isdefined(var_6._id_B938))
-  var_5 = self [[var_6._id_B938]](var_1, var_2, var_5);
+  if (isdefined(var_6.modifydamage))
+  var_05 = self [[var_6.modifydamage]](var_01, var_02, var_05);
 
-  return var_5;
+  return var_05;
 }
 
-_id_898F(var_0, var_1, var_2, var_3) {
-  var_4 = self._id_451C;
-  var_5 = scripts\mp\damage::onkillstreakkilled(self._id_110EA, var_0, var_1, var_2, var_3, var_4._id_EC44, var_4._id_52DA);
+handledeathdamage(var_00, var_01, var_02, var_03) {
+  var_04 = self.config;
+  var_05 = scripts\mp\damage::onkillstreakkilled(self.streakname, var_00, var_01, var_02, var_03, var_4.scorepopup, var_4.func_52DA);
 
-  if (var_5 && isdefined(var_4._id_C4F3))
-  self [[var_4._id_C4F3]](self._id_110EA, var_0, self.owner, var_2);
+  if (var_05 && isdefined(var_4.func_C4F3))
+  self [[var_4.func_C4F3]](self.streakname, var_00, self.owner, var_02);
 }
 
-_id_898E(var_0) {
+handledeath(var_00) {
   self endon("carried");
   self waittill("death");
-  var_1 = level._id_CC09[var_0];
+  var_01 = level.placeableconfigs[var_00];
 
   if (isdefined(self)) {
-  _id_4DA6(var_0);
+  deactivate(var_00);
 
-  if (isdefined(var_1._id_B91D))
-  self setmodel(var_1._id_B91D);
+  if (isdefined(var_1.modeldestroyed))
+  self setmodel(var_1.modeldestroyed);
 
-  if (isdefined(var_1._id_C4EB))
-  self [[var_1._id_C4EB]](var_0);
+  if (isdefined(var_1.ondeathdelegate))
+  self [[var_1.ondeathdelegate]](var_00);
 
   self delete();
   }
 }
 
-_id_C4D7(var_0, var_1) {
+oncarrierdeath(var_00, var_01) {
   self endon("placed");
   self endon("death");
-  var_1 endon("disconnect");
-  var_1 waittill("death");
+  var_01 endon("disconnect");
+  var_01 waittill("death");
 
-  if (self._id_3872)
-  thread _id_C56B(var_0);
+  if (self.canbeplaced)
+  thread onplaced(var_00);
   else
-  _id_C4D2(var_0);
+  oncancel(var_00);
 }
 
-_id_C547(var_0) {
+func_C547(var_00) {
   self endon("death");
   level endon("game_ended");
   self.owner waittill("killstreak_disowned");
-  _id_4045(var_0);
+  cleanup(var_00);
 }
 
-_id_C533(var_0) {
+ongameended(var_00) {
   self endon("death");
   level waittill("game_ended");
-  _id_4045(var_0);
+  cleanup(var_00);
 }
 
-_id_4045(var_0) {
-  if (isdefined(self._id_9EE4))
+cleanup(var_00) {
+  if (isdefined(self.isplaced))
   self notify("death");
   else
-  _id_C4D2(var_0);
+  oncancel(var_00);
 }
 
-_id_13AFA() {
+watchplayerconnected() {
   self endon("death");
 
   for (;;) {
-  level waittill("connected", var_0);
-  thread _id_C570(var_0);
+  level waittill("connected", var_00);
+  thread onplayerconnected(var_00);
   }
 }
 
-_id_C570(var_0) {
+onplayerconnected(var_00) {
   self endon("death");
-  var_0 endon("disconnect");
-  var_0 waittill("spawned_player");
-  self disableplayeruse(var_0);
+  var_00 endon("disconnect");
+  var_00 waittill("spawned_player");
+  self disableplayeruse(var_00);
 }
 
-_id_11901(var_0) {
+timeout(var_00) {
   self endon("death");
   level endon("game_ended");
-  var_1 = level._id_CC09[var_0];
-  var_2 = var_1._id_AC71;
+  var_01 = level.placeableconfigs[var_00];
+  var_02 = var_1.lifespan;
 
-  while (var_2 > 0.0) {
+  while (var_02 > 0.0) {
   wait 1.0;
   scripts\mp\hostmigration::waittillhostmigrationdone();
 
-  if (!isdefined(self._id_3A9D))
-  var_2 = var_2 - 1.0;
+  if (!isdefined(self.carriedby))
+  var_02 = var_02 - 1.0;
   }
 
-  if (isdefined(self.owner) && isdefined(var_1._id_844E))
-  self.owner thread scripts\mp\utility\game::leaderdialogonplayer(var_1._id_844E);
+  if (isdefined(self.owner) && isdefined(var_1.gonevo))
+  self.owner thread scripts\mp\utility\game::leaderdialogonplayer(var_1.gonevo);
 
   self notify("death");
 }
 
-_id_E18E() {
+removeweapons() {
   if (self hasweapon("iw6_riotshield_mp")) {
-  self._id_E2E6 = "iw6_riotshield_mp";
-  scripts\mp\utility\game::_id_141E("iw6_riotshield_mp");
+  self.restoreweapon = "iw6_riotshield_mp";
+  scripts\mp\utility\game::_takeweapon("iw6_riotshield_mp");
   }
 }
 
-_id_E152() {
-  if (scripts\mp\utility\game::_id_12D6("specialty_explosivebullets")) {
-  self._id_E2DF = "specialty_explosivebullets";
-  scripts\mp\utility\game::_id_E150("specialty_explosivebullets");
+removeperks() {
+  if (scripts\mp\utility\game::_hasperk("specialty_explosivebullets")) {
+  self.restoreperk = "specialty_explosivebullets";
+  scripts\mp\utility\game::removeperk("specialty_explosivebullets");
   }
 }
 
-_id_E2E8() {
-  if (isdefined(self._id_E2E6)) {
-  scripts\mp\utility\game::_id_12C6(self._id_E2E6);
-  self._id_E2E6 = undefined;
+restoreweapons() {
+  if (isdefined(self.restoreweapon)) {
+  scripts\mp\utility\game::_giveweapon(self.restoreweapon);
+  self.restoreweapon = undefined;
   }
 }
 
-_id_E2E0() {
-  if (isdefined(self._id_E2DF)) {
-  scripts\mp\utility\game::giveperk(self._id_E2DF);
-  self._id_E2DF = undefined;
+restoreperks() {
+  if (isdefined(self.restoreperk)) {
+  scripts\mp\utility\game::giveperk(self.restoreperk);
+  self.restoreperk = undefined;
   }
 }
 
-_id_4988(var_0) {
-  var_1 = level._id_CC09[var_0];
+createbombsquadmodel(var_00) {
+  var_01 = level.placeableconfigs[var_00];
 
-  if (isdefined(var_1._id_B91C)) {
-  var_2 = spawn("script_model", self.origin);
+  if (isdefined(var_1.modelbombsquad)) {
+  var_02 = spawn("script_model", self.origin);
   var_2.angles = self.angles;
-  var_2 hide();
-  var_2 thread scripts\mp\weapons::_id_2C69(self.owner);
-  var_2 setmodel(var_1._id_B91C);
-  var_2 linkto(self);
-  var_2 _meth_82C7(0);
-  self._id_2C68 = var_2;
+  var_02 hide();
+  var_02 thread scripts\mp\weapons::bombsquadvisibilityupdater(self.owner);
+  var_02 setmodel(var_1.modelbombsquad);
+  var_02 linkto(self);
+  var_02 setcontents(0);
+  self.bombsquadmodel = var_02;
   self waittill("death");
 
-  if (isdefined(var_2)) {
-  var_2 delete();
-  self._id_2C68 = undefined;
+  if (isdefined(var_02)) {
+  var_02 delete();
+  self.bombsquadmodel = undefined;
   }
   }
 }
 
-_id_10146(var_0) {
+showplacedmodel(var_00) {
   self show();
 
-  if (isdefined(self._id_2C68)) {
-  self._id_2C68 show();
+  if (isdefined(self.bombsquadmodel)) {
+  self.bombsquadmodel show();
   level notify("update_bombsquad");
   }
 }
 
-_id_8ED4(var_0) {
+hideplacedmodel(var_00) {
   self hide();
 
-  if (isdefined(self._id_2C68))
-  self._id_2C68 hide();
+  if (isdefined(self.bombsquadmodel))
+  self.bombsquadmodel hide();
 }
 
-_id_4992(var_0) {
-  if (isdefined(self._id_9D81) && self._id_9D81)
+createcarriedobject(var_00) {
+  if (isdefined(self.iscarrying) && self.iscarrying)
   return;
 
-  var_1 = spawnturret("misc_turret", self.origin + (0, 0, 25), "sentry_minigun_mp");
+  var_01 = spawnturret("misc_turret", self.origin + (0, 0, 25), "sentry_minigun_mp");
   var_1.angles = self.angles;
   var_1.owner = self;
-  var_2 = level._id_CC09[var_0];
-  var_1 setmodel(var_2._id_B91A);
-  var_1 maketurretinoperable();
-  var_1 _meth_835B(1);
-  var_1 _meth_830F("sentry_offline");
-  var_1 makeunusable();
-  var_1 _meth_8336(self);
-  var_1 _meth_8335(self);
-  var_1 setcandamage(0);
-  var_1 _meth_82C7(0);
-  return var_1;
+  var_02 = level.placeableconfigs[var_00];
+  var_01 setmodel(var_2.modelbase);
+  var_01 maketurretinoperable();
+  var_01 setturretmodechangewait(1);
+  var_01 give_player_session_tokens("sentry_offline");
+  var_01 makeunusable();
+  var_01 setsentryowner(self);
+  var_01 setsentrycarrier(self);
+  var_01 setcandamage(0);
+  var_01 setcontents(0);
+  return var_01;
 }

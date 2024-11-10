@@ -4,9 +4,9 @@
 ***************************************/
 
 init() {
-  level._id_E5DE = [];
-  level._id_DF7E["explode"] = loadfx("vfx/core/expl/aerial_explosion");
-  scripts\mp\killstreaks\killstreaks::registerkillstreak("orbital_deployment", ::_id_128F2);
+  level.rockets = [];
+  level.remotekillstreaks["explode"] = loadfx("vfx/core/expl/aerial_explosion");
+  scripts\mp\killstreaks\killstreaks::registerkillstreak("orbital_deployment", ::func_128F2);
   level._effect["odin_clouds"] = loadfx("vfx/core/mp/killstreaks/odin/odin_parallax_clouds");
   level._effect["odin_fisheye"] = loadfx("vfx/code/screen/vfx_scrnfx_odin_fisheye.vfx");
   level._effect["odin_targeting"] = loadfx("vfx/core/mp/killstreaks/odin/vfx_marker_good_target");
@@ -15,146 +15,146 @@ init() {
   level._effect["phase_out_enemy"] = loadfx("vfx/core/mp/killstreaks/vfx_phase_orbital_deployment_enemy");
   level._effect["drop_pod_atmo"] = loadfx("vfx/core/expl/emp_flash_mp");
   level._effect["drop_pod_fx"] = loadfx("vfx/core/mp/killstreaks/odin/vfx_odin_flash_small");
-  level._id_C6D7 = [];
-  level._id_C6D7["orbital_deployment"] = spawnstruct();
-  level._id_C6D7["orbital_deployment"]._id_11901 = 60.0;
-  level._id_C6D7["orbital_deployment"]._id_110EA = "orbital_deployment";
-  level._id_C6D7["orbital_deployment"]._id_13260 = "odin_mp";
-  level._id_C6D7["orbital_deployment"]._id_B91A = "vehicle_odin_mp";
-  level._id_C6D7["orbital_deployment"]._id_115EB = "used_orbital_deployment";
-  level._id_C6D7["orbital_deployment"]._id_13553 = "odin_gone";
-  level._id_C6D7["orbital_deployment"]._id_1352D = "odin_target_killed";
-  level._id_C6D7["orbital_deployment"]._id_1352C = "odin_targets_killed";
-  level._id_C6D7["orbital_deployment"]._id_12B20 = 3;
-  level._id_C6D7["orbital_deployment"]._id_12B80 = &"KILLSTREAKS_ODIN_UNAVAILABLE";
-  level._id_C6D7["orbital_deployment"].weapon["juggernaut"] = spawnstruct();
-  level._id_C6D7["orbital_deployment"].weapon["juggernaut"]._id_D5E4 = "null";
-  level._id_C6D7["orbital_deployment"].weapon["juggernaut"]._id_D5DD = "odin_jugg_launch";
+  level.func_C6D7 = [];
+  level.func_C6D7["orbital_deployment"] = spawnstruct();
+  level.func_C6D7["orbital_deployment"].timeout = 60.0;
+  level.func_C6D7["orbital_deployment"].streakname = "orbital_deployment";
+  level.func_C6D7["orbital_deployment"].vehicleinfo = "odin_mp";
+  level.func_C6D7["orbital_deployment"].modelbase = "vehicle_odin_mp";
+  level.func_C6D7["orbital_deployment"].teamsplash = "used_orbital_deployment";
+  level.func_C6D7["orbital_deployment"].votimedout = "odin_gone";
+  level.func_C6D7["orbital_deployment"].func_1352D = "odin_target_killed";
+  level.func_C6D7["orbital_deployment"].func_1352C = "odin_targets_killed";
+  level.func_C6D7["orbital_deployment"].func_12B20 = 3;
+  level.func_C6D7["orbital_deployment"].func_12B80 = &"KILLSTREAKS_ODIN_UNAVAILABLE";
+  level.func_C6D7["orbital_deployment"].weapon["juggernaut"] = spawnstruct();
+  level.func_C6D7["orbital_deployment"].weapon["juggernaut"].func_D5E4 = "null";
+  level.func_C6D7["orbital_deployment"].weapon["juggernaut"].func_D5DD = "odin_jugg_launch";
 
-  if (!isdefined(level._id_8D7C)) {
-  level._id_8D7C = getent("heli_pilot_mesh", "targetname");
+  if (!isdefined(level.heli_pilot_mesh)) {
+  level.heli_pilot_mesh = getent("heli_pilot_mesh", "targetname");
 
-  if (!isdefined(level._id_8D7C)) {}
+  if (!isdefined(level.heli_pilot_mesh)) {}
   else
-  level._id_8D7C.origin = level._id_8D7C.origin + scripts\mp\utility\game::_id_7EF9();
+  level.heli_pilot_mesh.origin = level.heli_pilot_mesh.origin + scripts\mp\utility\game::gethelipilotmeshoffset();
   }
 
-  level._id_163A = [];
+  level.func_163A = [];
 }
 
-_id_128F2(var_0) {
+func_128F2(var_00) {
   self endon("disconnect");
-  var_1 = var_0._id_98F2;
+  var_01 = var_0.func_98F2;
 
-  if (isdefined(self._id_12B90) && self._id_12B90)
+  if (isdefined(self.underwater) && self.underwater)
   return 0;
 
-  var_2 = _id_10DD3(var_0._id_110EA);
+  var_02 = func_10DD3(var_0.streakname);
 
-  if (!isdefined(var_2))
-  var_2 = 0;
+  if (!isdefined(var_02))
+  var_02 = 0;
 
-  return var_2;
+  return var_02;
 }
 
-_id_10DD3(var_0, var_1) {
+func_10DD3(var_00, var_01) {
   level endon("game_ended");
 
-  if (!isdefined(var_1))
-  var_1 = 0;
+  if (!isdefined(var_01))
+  var_01 = 0;
 
-  self._id_E2D7 = vectortoangles(anglestoforward(self.angles));
-  _id_C6CB();
+  self.restoreangles = vectortoangles(anglestoforward(self.angles));
+  func_C6CB();
 
-  if (var_1 == 1) {
-  scripts\engine\utility::_id_1C6E(0);
-  scripts\engine\utility::_id_1C76(0);
-  scripts\mp\utility\game::_id_93FA();
-  var_2 = _id_49FB();
+  if (var_01 == 1) {
+  scripts\engine\utility::allow_usability(0);
+  scripts\engine\utility::allow_weapon_switch(0);
+  scripts\mp\utility\game::incrementfauxvehiclecount();
+  var_02 = func_49FB();
 
-  if (!isdefined(var_2)) {
-  scripts\engine\utility::_id_1C76(1);
-  scripts\mp\utility\game::_id_4FC1();
+  if (!isdefined(var_02)) {
+  scripts\engine\utility::allow_weapon_switch(1);
+  scripts\mp\utility\game::decrementfauxvehiclecount();
   return 0;
   }
 
-  self remotecontrolvehicle(var_2);
+  self remotecontrolvehicle(var_02);
   } else {
-  scripts\engine\utility::_id_1C6E(0);
-  scripts\engine\utility::_id_1C76(0);
-  var_3 = _id_0DAC::_id_8112(var_0);
+  scripts\engine\utility::allow_usability(0);
+  scripts\engine\utility::allow_weapon_switch(0);
+  var_03 = scripts/mp/killstreaks/mapselect::_meth_8112(var_00);
 
-  if (!isdefined(var_3)) {
-  _id_C6C4();
-  scripts\engine\utility::_id_1C6E(1);
-  scripts\engine\utility::_id_1C76(1);
+  if (!isdefined(var_03)) {
+  func_C6C4();
+  scripts\engine\utility::allow_usability(1);
+  scripts\engine\utility::allow_weapon_switch(1);
   return 0;
   }
 
-  _id_10DD4(var_3[0]._id_AEC4, var_3[0]._id_AEC4 + (0, 0, 10000), var_0);
+  func_10DD4(var_3[0].location, var_3[0].location + (0, 0, 10000), var_00);
   }
 
   return 1;
 }
 
-_id_49FB() {
-  var_0 = (0, 0, 0);
-  var_1 = self.origin * (1, 1, 0) + (level._id_8D7C.origin - scripts\mp\utility\game::_id_7EF9()) * (0, 0, 1);
-  var_2 = spawnhelicopter(self, var_1, var_0, level._id_C6D7["orbital_deployment"]._id_13260, level._id_C6D7["orbital_deployment"]._id_B91A);
+func_49FB() {
+  var_00 = (0, 0, 0);
+  var_01 = self.origin * (1, 1, 0) + (level.heli_pilot_mesh.origin - scripts\mp\utility\game::gethelipilotmeshoffset()) * (0, 0, 1);
+  var_02 = spawnhelicopter(self, var_01, var_00, level.func_C6D7["orbital_deployment"].vehicleinfo, level.func_C6D7["orbital_deployment"].modelbase);
 
-  if (!isdefined(var_2))
+  if (!isdefined(var_02))
   return;
 
-  var_2._id_02B3 = 40;
+  var_2.speed = 40;
   var_2.owner = self;
   var_2.team = self.team;
-  var_2._id_110EA = "orbital_deployment";
-  level._id_163A["orbital_deployment"] = 1;
-  self._id_98FF = 1;
-  self._id_A641 = 0;
-  self._id_C6C3 = var_2;
-  var_2 thread _id_C6D4();
-  var_2 thread _id_C6D3();
-  var_2 thread _id_C6D0();
-  var_2 thread _id_C6D2();
-  return var_2;
+  var_2.streakname = "orbital_deployment";
+  level.func_163A["orbital_deployment"] = 1;
+  self.func_98FF = 1;
+  self.func_A641 = 0;
+  self.func_C6C3 = var_02;
+  var_02 thread func_C6D4();
+  var_02 thread func_C6D3();
+  var_02 thread func_C6D0();
+  var_02 thread func_C6D2();
+  return var_02;
 }
 
-_id_C6D4() {
+func_C6D4() {
   self endon("death");
   level endon("game_ended");
-  var_0 = self.owner;
-  var_0 endon("disconnect");
-  var_0 endon("juggernaut_dead");
+  var_00 = self.owner;
+  var_00 endon("disconnect");
+  var_00 endon("juggernaut_dead");
 
-  if (!isai(var_0)) {
-  var_0 notifyonplayercommand("orbital_deployment_action", "+attack");
-  var_0 notifyonplayercommand("orbital_deployment_action", "+attack_akimbo_accessible");
+  if (!isai(var_00)) {
+  var_00 notifyonplayercommand("orbital_deployment_action", "+attack");
+  var_00 notifyonplayercommand("orbital_deployment_action", "+attack_akimbo_accessible");
   }
 
   for (;;) {
-  var_0 waittill("orbital_deployment_action");
+  var_00 waittill("orbital_deployment_action");
 
-  if (scripts\mp\utility\game::istrue(self._id_1156A._id_EA21)) {
-  var_0 setclientomnvar("ui_odin", -1);
-  var_0 _id_10DD4(self._id_1156A.origin, self.origin, self._id_110EA);
-  var_0 remotecontrolvehicleoff(self);
-  _id_4074();
+  if (scripts\mp\utility\game::istrue(self.targeting_marker.func_EA21)) {
+  var_00 setclientomnvar("ui_odin", -1);
+  var_00 func_10DD4(self.targeting_marker.origin, self.origin, self.streakname);
+  var_00 remotecontrolvehicleoff(self);
+  func_4074();
   self notify("death");
   break;
   }
   else
-  var_0 scripts\mp\utility\game::_id_13A7("odin_negative_action");
+  var_00 scripts\mp\utility\game::func_13A7("odin_negative_action");
 
   wait 1.1;
   }
 }
 
-_id_7E6A(var_0) {
-  if (!isdefined(var_0))
+func_7E6A(var_00) {
+  if (!isdefined(var_00))
   return;
 
-  var_1 = getnodesinradiussorted(var_0, 256, 0, 128, "Path");
+  var_01 = getnodesinradiussorted(var_00, 256, 0, 128, "Path");
 
   if (!isdefined(var_1[0]))
   return;
@@ -162,84 +162,84 @@ _id_7E6A(var_0) {
   return var_1[0];
 }
 
-_id_C6D3() {
+func_C6D3() {
   level endon("game_ended");
   self endon("death");
   self.owner endon("disconnect");
   self.owner endon("joined_team");
   self.owner endon("joined_spectators");
-  var_0 = level._id_C6D7["orbital_deployment"];
-  scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(var_0._id_11901);
-  thread _id_C6C7();
+  var_00 = level.func_C6D7["orbital_deployment"];
+  scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(var_0.timeout);
+  thread func_C6C7();
 }
 
-_id_C6D0() {
+func_C6D0() {
   level endon("game_ended");
   self endon("death");
   self endon("leaving");
   self.owner scripts\engine\utility::waittill_any("disconnect", "joined_team", "joined_spectators");
-  thread _id_C6C7();
+  thread func_C6C7();
 }
 
-_id_C6D2() {
+func_C6D2() {
   self endon("death");
   level endon("game_ended");
-  var_0 = self.owner;
-  var_0 endon("disconnect");
-  var_1 = var_0 getvieworigin();
-  var_2 = var_1 + anglestoforward(self gettagangles("tag_player")) * 10000;
-  var_3 = bullettrace(var_1, var_2, 0, self);
-  var_4 = spawn("script_model", var_3["position"]);
+  var_00 = self.owner;
+  var_00 endon("disconnect");
+  var_01 = var_00 getvieworigin();
+  var_02 = var_01 + anglestoforward(self gettagangles("tag_player")) * 10000;
+  var_03 = bullettrace(var_01, var_02, 0, self);
+  var_04 = spawn("script_model", var_3["position"]);
   var_4.angles = vectortoangles((0, 0, 1));
-  var_4 setmodel("tag_origin");
-  self._id_1156A = var_4;
-  var_4 endon("death");
-  var_5 = bullettrace(var_4.origin + (0, 0, 50), var_4.origin + (0, 0, -100), 0, var_4);
+  var_04 setmodel("tag_origin");
+  self.targeting_marker = var_04;
+  var_04 endon("death");
+  var_05 = bullettrace(var_4.origin + (0, 0, 50), var_4.origin + (0, 0, -100), 0, var_04);
   var_4.origin = var_5["position"] + (0, 0, 50);
-  var_4 hide();
-  var_4 _meth_8388(var_0);
-  var_4 childthread _id_B9F2(var_0);
-  thread _id_10129();
-  self _meth_831F(var_4);
+  var_04 hide();
+  var_04 giveperkequipment(var_00);
+  var_04 childthread func_B9F2(var_00);
+  thread func_10129();
+  self setotherent(var_04);
 }
 
-_id_B9F2(var_0) {
-  var_0 endon("disconnect");
+func_B9F2(var_00) {
+  var_00 endon("disconnect");
   self endon("death");
   level endon("game_ended");
   wait 1.5;
-  var_1 = [];
+  var_01 = [];
 
   for (;;) {
-  var_2 = _id_7E6A(self.origin);
+  var_02 = func_7E6A(self.origin);
 
-  if (isdefined(var_2)) {
-  self._id_EA21 = 1;
+  if (isdefined(var_02)) {
+  self.func_EA21 = 1;
   stopfxontag(level._effect["odin_targeting_bad"], self, "tag_origin");
   wait 0.05;
   playfxontag(level._effect["odin_targeting"], self, "tag_origin");
   } else {
-  self._id_EA21 = 0;
+  self.func_EA21 = 0;
   stopfxontag(level._effect["odin_targeting"], self, "tag_origin");
   wait 0.05;
   playfxontag(level._effect["odin_targeting_bad"], self, "tag_origin");
   }
 
-  var_3 = var_0 scripts\mp\utility\game::_id_7BC3();
+  var_03 = var_00 scripts\mp\utility\game::get_players_watching();
 
-  foreach (var_5 in var_1) {
-  if (!scripts\engine\utility::array_contains(var_3, var_5)) {
-  var_1 = scripts\engine\utility::array_remove(var_1, var_5);
+  foreach (var_05 in var_01) {
+  if (!scripts\engine\utility::array_contains(var_03, var_05)) {
+  var_01 = scripts\engine\utility::array_remove(var_01, var_05);
   self hide();
-  self _meth_8388(var_0);
+  self giveperkequipment(var_00);
   }
   }
 
-  foreach (var_5 in var_3) {
-  self _meth_8388(var_5);
+  foreach (var_05 in var_03) {
+  self giveperkequipment(var_05);
 
-  if (!scripts\engine\utility::array_contains(var_1, var_5)) {
-  var_1 = scripts\engine\utility::_id_2279(var_1, var_5);
+  if (!scripts\engine\utility::array_contains(var_01, var_05)) {
+  var_01 = scripts\engine\utility::array_add(var_01, var_05);
   stopfxontag(level._effect["odin_targeting"], self, "tag_origin");
   wait 0.05;
   playfxontag(level._effect["odin_targeting"], self, "tag_origin");
@@ -250,267 +250,267 @@ _id_B9F2(var_0) {
   }
 }
 
-_id_10129() {
+func_10129() {
   self endon("death");
   wait 1.0;
-  var_0 = _id_7E6A(self._id_1156A.origin);
+  var_00 = func_7E6A(self.targeting_marker.origin);
 
-  if (isdefined(var_0))
-  playfxontag(level._effect["odin_targeting"], self._id_1156A, "tag_origin");
+  if (isdefined(var_00))
+  playfxontag(level._effect["odin_targeting"], self.targeting_marker, "tag_origin");
   else
-  playfxontag(level._effect["odin_targeting_bad"], self._id_1156A, "tag_origin");
+  playfxontag(level._effect["odin_targeting_bad"], self.targeting_marker, "tag_origin");
 }
 
-_id_C6C7(var_0) {
+func_C6C7(var_00) {
   self endon("death");
   self notify("leaving");
-  var_1 = level._id_C6D7["orbital_deployment"];
-  scripts\mp\utility\game::_id_AAE7(var_1._id_13553);
+  var_01 = level.func_C6D7["orbital_deployment"];
+  scripts\mp\utility\game::leaderdialog(var_1.votimedout);
 
   if (isdefined(self.owner))
-  self.owner _id_C6C5(self, var_0);
+  self.owner func_C6C5(self, var_00);
 
   self notify("gone");
-  _id_4074();
-  _id_C6CC(3.0);
-  scripts\mp\utility\game::_id_4FC1();
-  level._id_163A["orbital_deployment"] = undefined;
+  func_4074();
+  func_C6CC(3.0);
+  scripts\mp\utility\game::decrementfauxvehiclecount();
+  level.func_163A["orbital_deployment"] = undefined;
   self delete();
 }
 
-_id_4074() {
-  if (isdefined(self._id_1156A))
-  self._id_1156A delete();
+func_4074() {
+  if (isdefined(self.targeting_marker))
+  self.targeting_marker delete();
 
-  if (isdefined(self._id_C6CA))
-  self._id_C6CA delete();
+  if (isdefined(self.func_C6CA))
+  self.func_C6CA delete();
 }
 
-_id_C6CC(var_0) {
-  while (isdefined(self._id_9BE2) && var_0 > 0) {
+func_C6CC(var_00) {
+  while (isdefined(self.func_9BE2) && var_00 > 0) {
   wait 0.05;
-  var_0 = var_0 - 0.05;
+  var_00 = var_00 - 0.05;
   }
 }
 
-_id_C6C5(var_0, var_1) {
-  if (isdefined(var_0)) {
+func_C6C5(var_00, var_01) {
+  if (isdefined(var_00)) {
   self setclientomnvar("ui_odin", -1);
-  var_0 notify("end_remote");
+  var_00 notify("end_remote");
   self notify("odin_ride_ended");
-  _id_C6C4();
+  func_C6C4();
 
   if (getdvarint("camera_thirdPerson"))
-  scripts\mp\utility\game::_id_F887(1);
+  scripts\mp\utility\game::setthirdpersondof(1);
 
   self thermalvisionfofoverlayoff();
-  self remotecontrolvehicleoff(var_0);
-  self setplayerangles(self._id_E2D7);
+  self remotecontrolvehicleoff(var_00);
+  self setplayerangles(self.restoreangles);
 
-  if (isdefined(var_1) && var_1) {
-  _id_108F5();
-  self._id_A641 = 0;
-  scripts\engine\utility::_id_1C71(1);
+  if (isdefined(var_01) && var_01) {
+  func_108F5();
+  self.func_A641 = 0;
+  scripts\engine\utility::allow_weapon(1);
   self notify("weapon_change", self getcurrentweapon());
   }
 
   self stopolcalsound("odin_negative_action");
   self stopolcalsound("odin_positive_action");
 
-  foreach (var_3 in level._id_C6D7["orbital_deployment"].weapon) {
-  if (isdefined(var_3._id_D5E4))
-  self stopolcalsound(var_3._id_D5E4);
+  foreach (var_03 in level.func_C6D7["orbital_deployment"].weapon) {
+  if (isdefined(var_3.func_D5E4))
+  self stopolcalsound(var_3.func_D5E4);
 
-  if (isdefined(var_3._id_D5DD))
-  self stopolcalsound(var_3._id_D5DD);
+  if (isdefined(var_3.func_D5DD))
+  self stopolcalsound(var_3.func_D5DD);
   }
 
-  if (isdefined(var_0._id_A4A3))
-  var_0._id_A4A3 scripts\mp\bots\bots_strategy::_id_2DC1(self, 350);
+  if (isdefined(var_0.func_A4A3))
+  var_0.func_A4A3 scripts\mp\bots\bots_strategy::bot_guard_player(self, 350);
 
   self notify("stop_odin");
   }
 }
 
-_id_108F5() {
-  self._id_98FF = 0;
-  var_0 = self [[level.getspawnpoint]]();
-  var_1 = var_0.origin;
-  var_2 = var_0.angles;
-  self.angles = var_2;
-  self setorigin(var_1, 1);
+func_108F5() {
+  self.func_98FF = 0;
+  var_00 = self [[level.getspawnpoint]]();
+  var_01 = var_0.origin;
+  var_02 = var_0.angles;
+  self.angles = var_02;
+  self setorigin(var_01, 1);
 
-  foreach (var_4 in level.players) {
-  if (var_4 != self)
-  self _meth_8388(var_4);
+  foreach (var_04 in level.players) {
+  if (var_04 != self)
+  self giveperkequipment(var_04);
   }
 }
 
-_id_10DD8() {
-  var_0 = undefined;
+func_10DD8() {
+  var_00 = undefined;
 
   if (self.team == "allies")
-  var_0 = "axis";
+  var_00 = "axis";
   else if (self.team == "axis")
-  var_0 = "allies";
+  var_00 = "allies";
   else
   {}
 
-  var_1 = anglestoforward(self.angles);
-  var_2 = anglestoup(self.angles);
+  var_01 = anglestoforward(self.angles);
+  var_02 = anglestoup(self.angles);
 
-  foreach (var_4 in level.players) {
-  if (var_4 != self) {
-  self _meth_8429(var_4);
+  foreach (var_04 in level.players) {
+  if (var_04 != self) {
+  self hidefromplayer(var_04);
 
   if (var_4.team == self.team) {
-  playfx(level._effect["phase_out_friendly"], self.origin, var_1, var_2);
+  playfx(level._effect["phase_out_friendly"], self.origin, var_01, var_02);
   continue;
   }
 
-  playfx(level._effect["phase_out_enemy"], self.origin, var_1, var_2);
+  playfx(level._effect["phase_out_enemy"], self.origin, var_01, var_02);
   }
   }
 }
 
-_id_C6CB() {
-  scripts\mp\utility\game::_id_FB09("orbital_deployment");
+func_C6CB() {
+  scripts\mp\utility\game::setusingremote("orbital_deployment");
 }
 
-_id_C6C4() {
+func_C6C4() {
   if (isdefined(self))
-  scripts\mp\utility\game::_id_41E9();
+  scripts\mp\utility\game::clearusingremote();
 }
 
-_id_10DD4(var_0, var_1, var_2) {
-  _id_10D70();
+func_10DD4(var_00, var_01, var_02) {
+  func_10D70();
   self waittill("blackout_done");
-  scripts\mp\utility\game::_id_7385(1);
-  level thread _id_B9CB(self);
-  level thread _id_B9DD(self);
-  level thread _id_B9FD(self);
-  var_3 = scripts\mp\killstreaks\killstreaks::_id_98C2(var_2);
+  scripts\mp\utility\game::freezecontrolswrapper(1);
+  level thread func_B9CB(self);
+  level thread monitorgameend(self);
+  level thread monitorobjectivecamera(self);
+  var_03 = scripts\mp\killstreaks\killstreaks::initridekillstreak(var_02);
 
-  if (var_3 == "success")
-  level thread _id_1285(var_0, var_1, self, var_2);
+  if (var_03 == "success")
+  level thread func_1285(var_00, var_01, self, var_02);
   else
   {
   self notify("end_kill_streak");
-  _id_C6C4();
-  scripts\engine\utility::_id_1C6E(1);
-  scripts\engine\utility::_id_1C76(1);
+  func_C6C4();
+  scripts\engine\utility::allow_usability(1);
+  scripts\engine\utility::allow_weapon_switch(1);
   }
 
-  level thread scripts\mp\utility\game::_id_115DE(level._id_C6D7["orbital_deployment"]._id_115EB, self);
+  level thread scripts\mp\utility\game::teamplayercardsplash(level.func_C6D7["orbital_deployment"].teamsplash, self);
 }
 
-_id_1285(var_0, var_1, var_2, var_3) {
-  var_2._id_98FF = 1;
-  var_4 = 0;
-  var_5 = var_0;
-  var_6 = var_1;
-  var_7 = vectornormalize(var_6 - var_5);
-  var_6 = var_7 * 14000 + var_5;
-  var_8 = scripts\mp\utility\game::_id_1309("drone_hive_projectile_mp", var_6 - (0, 0, 5000), var_5, var_2);
-  var_8 _meth_830B(1);
-  var_9 = spawn("script_model", var_8.origin);
-  var_9 setmodel("jsp_drop_pod_top");
-  var_9 linkto(var_8, "tag_origin");
-  var_9 _meth_831F(var_8);
+func_1285(var_00, var_01, var_02, var_03) {
+  var_2.func_98FF = 1;
+  var_04 = 0;
+  var_05 = var_00;
+  var_06 = var_01;
+  var_07 = vectornormalize(var_06 - var_05);
+  var_06 = var_07 * 14000 + var_05;
+  var_08 = scripts\mp\utility\game::_magicbullet("drone_hive_projectile_mp", var_06 - (0, 0, 5000), var_05, var_02);
+  var_08 give_player_next_weapon(1);
+  var_09 = spawn("script_model", var_8.origin);
+  var_09 setmodel("jsp_drop_pod_top");
+  var_09 linkto(var_08, "tag_origin");
+  var_09 setotherent(var_08);
   var_9.team = var_2.team;
-  var_9.owner = var_2;
-  var_9 _id_0DC9::_id_1843(var_3, "Killstreak_Air", var_9.owner, 1);
+  var_9.owner = var_02;
+  var_09 scripts/mp/killstreaks/utility::func_1843(var_03, "Killstreak_Air", var_9.owner, 1);
 
-  if (scripts\mp\utility\game::isreallyalive(var_2))
-  var_2 _id_10DD8();
+  if (scripts\mp\utility\game::isreallyalive(var_02))
+  var_02 func_10DD8();
 
   if (isdefined(var_2.fauxdeath) && var_2.fauxdeath) {
-  var_2._id_6BA6 = var_2 getstance();
-  var_2 thread scripts\mp\playerlogic::_id_108F2(0);
-  var_4 = 1;
+  var_2.faux_spawn_stance = var_02 getstance();
+  var_02 thread scripts\mp\playerlogic::spawnplayer(0);
+  var_04 = 1;
   }
 
-  var_2 setorigin(var_8.origin + (0, 0, 10), 1);
-  var_8 thread _id_13A22("large_rod");
+  var_02 setorigin(var_8.origin + (0, 0, 10), 1);
+  var_08 thread func_13A22("large_rod");
   var_8.team = var_2.team;
   var_8.type = "remote";
-  var_8.owner = var_2;
-  var_8 thread scripts\mp\killstreaks\remotemissile::_id_898C();
-  level._id_DF80 = 1;
-  level thread _id_B9C8(var_8, 1);
-  level thread _id_B9C1(var_8);
-  _id_C6D6(var_2, var_8);
-  var_2 setclientomnvar("ui_predator_missile", 3);
-  var_2 setclientomnvar("ui_predator_missiles_left", 0);
+  var_8.owner = var_02;
+  var_08 thread scripts\mp\killstreaks\remotemissile::handledamage();
+  level.remotemissileinprogress = 1;
+  level thread monitordeath(var_08, 1);
+  level thread monitorboost(var_08);
+  func_C6D6(var_02, var_08);
+  var_02 setclientomnvar("ui_predator_missile", 3);
+  var_02 setclientomnvar("ui_predator_missiles_left", 0);
   playfx(level._effect["drop_pod_atmo"], var_8.origin);
-  var_8 thread _id_5821();
-  var_8 thread _id_13AA4(var_2);
-  var_8 thread _id_13AA3(var_2);
+  var_08 thread func_5821();
+  var_08 thread func_13AA4(var_02);
+  var_08 thread func_13AA3(var_02);
 
   for (;;) {
-  var_10 = var_8 scripts\engine\utility::_id_13734("death", "missileTargetSet");
+  var_10 = var_08 scripts\engine\utility::waittill_any_return("death", "missileTargetSet");
   scripts\mp\hostmigration::waittillhostmigrationdone();
 
   if (var_10 == "death")
   break;
 
-  if (!isdefined(var_8))
+  if (!isdefined(var_08))
   break;
   }
 
-  if (isdefined(var_8)) {
-  var_0 = var_8.origin;
+  if (isdefined(var_08)) {
+  var_00 = var_8.origin;
 
-  if (isdefined(var_2))
-  var_2 scripts\mp\matchdata::_id_AFC9(var_3, var_8.origin);
+  if (isdefined(var_02))
+  var_02 scripts\mp\matchdata::logkillstreakevent(var_03, var_8.origin);
   }
 
-  level thread _id_E474(var_2, undefined, var_0, var_9, var_4);
+  level thread func_E474(var_02, undefined, var_00, var_09, var_04);
 }
 
-_id_B9C1(var_0) {
-  var_0 endon("death");
+monitorboost(var_00) {
+  var_00 endon("death");
 
   for (;;) {
   var_0.owner waittill("missileTargetSet");
-  var_0 notify("missileTargetSet");
+  var_00 notify("missileTargetSet");
   }
 }
 
-_id_C6D6(var_0, var_1) {
-  var_0 scripts\mp\utility\game::_id_7385(1);
-  var_0 cameralinkto(var_1, "tag_origin");
-  var_0 _meth_808D(var_1);
-  var_0 _meth_83F9("default", 0);
-  var_0 thread scripts\mp\utility\game::_id_F607("default", 0, undefined, 1);
-  var_0 _meth_83F9(game["thermal_vision"], 1.0);
-  var_0 thread _id_50FF();
+func_C6D6(var_00, var_01) {
+  var_00 scripts\mp\utility\game::freezecontrolswrapper(1);
+  var_00 cameralinkto(var_01, "tag_origin");
+  var_00 controlslinkto(var_01);
+  var_00 visionsetmissilecamforplayer("default", 0);
+  var_00 thread scripts\mp\utility\game::set_visionset_for_watching_players("default", 0, undefined, 1);
+  var_00 visionsetmissilecamforplayer(game["thermal_vision"], 1.0);
+  var_00 thread delayedfofoverlay();
 }
 
-_id_50FF() {
+delayedfofoverlay() {
   self endon("death");
   self endon("disconnect");
   level endon("game_ended");
   scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(0.25);
-  self _meth_83BE();
+  self thermalvisionfofoverlayon();
 }
 
-_id_13A22(var_0) {
-  self waittill("explode", var_1);
+func_13A22(var_00) {
+  self waittill("explode", var_01);
 
-  if (var_0 == "small_rod") {
-  playrumbleonentity("grenade_rumble", var_1);
-  earthquake(0.7, 1.0, var_1, 1000);
+  if (var_00 == "small_rod") {
+  playrumbleonentity("grenade_rumble", var_01);
+  earthquake(0.7, 1.0, var_01, 1000);
   }
-  else if (var_0 == "large_rod") {
-  playrumbleonentity("artillery_rumble", var_1);
-  earthquake(1.0, 1.0, var_1, 2000);
+  else if (var_00 == "large_rod") {
+  playrumbleonentity("artillery_rumble", var_01);
+  earthquake(1.0, 1.0, var_01, 2000);
   }
 }
 
-_id_13AA4(var_0) {
-  var_0 endon("killstreak_disowned");
-  var_0 endon("disconnect");
+func_13AA4(var_00) {
+  var_00 endon("killstreak_disowned");
+  var_00 endon("disconnect");
   level endon("game_ended");
   self endon("death");
 
@@ -518,19 +518,19 @@ _id_13AA4(var_0) {
   level waittill("host_migration_begin");
 
   if (isdefined(self)) {
-  var_0 _meth_83F9(game["thermal_vision"], 0);
-  var_0 scripts\mp\utility\game::_id_F607("default", 0, undefined, 1);
-  var_0 _meth_83BE();
+  var_00 visionsetmissilecamforplayer(game["thermal_vision"], 0);
+  var_00 scripts\mp\utility\game::set_visionset_for_watching_players("default", 0, undefined, 1);
+  var_00 thermalvisionfofoverlayon();
   continue;
   }
 
-  var_0 setclientomnvar("ui_predator_missile", 2);
+  var_00 setclientomnvar("ui_predator_missile", 2);
   }
 }
 
-_id_13AA3(var_0) {
-  var_0 endon("killstreak_disowned");
-  var_0 endon("disconnect");
+func_13AA3(var_00) {
+  var_00 endon("killstreak_disowned");
+  var_00 endon("disconnect");
   level endon("game_ended");
   self endon("death");
 
@@ -538,138 +538,138 @@ _id_13AA3(var_0) {
   level waittill("host_migration_end");
 
   if (isdefined(self)) {
-  var_0 setclientomnvar("ui_predator_missile", 3);
+  var_00 setclientomnvar("ui_predator_missile", 3);
   continue;
   }
 
-  var_0 setclientomnvar("ui_predator_missile", 2);
+  var_00 setclientomnvar("ui_predator_missile", 2);
   }
 }
 
-_id_B9CB(var_0) {
-  var_0 endon("disconnect");
-  var_0 endon("end_kill_streak");
-  var_0 waittill("killstreak_disowned");
-  level thread _id_E474(var_0);
+func_B9CB(var_00) {
+  var_00 endon("disconnect");
+  var_00 endon("end_kill_streak");
+  var_00 waittill("killstreak_disowned");
+  level thread func_E474(var_00);
 }
 
-_id_B9DD(var_0) {
-  var_0 endon("disconnect");
-  var_0 endon("end_kill_streak");
+monitorgameend(var_00) {
+  var_00 endon("disconnect");
+  var_00 endon("end_kill_streak");
   level waittill("game_ended");
-  level thread _id_E474(var_0);
+  level thread func_E474(var_00);
 }
 
-_id_B9FD(var_0) {
-  var_0 endon("end_kill_streak");
-  var_0 endon("disconnect");
+monitorobjectivecamera(var_00) {
+  var_00 endon("end_kill_streak");
+  var_00 endon("disconnect");
   level waittill("objective_cam");
-  level thread _id_E474(var_0, 1);
+  level thread func_E474(var_00, 1);
 }
 
-_id_B9C8(var_0, var_1) {
-  var_0 waittill("death");
+monitordeath(var_00, var_01) {
+  var_00 waittill("death");
   scripts\mp\hostmigration::waittillhostmigrationdone();
 
-  if (isdefined(var_0._id_114F1))
-  var_0._id_114F1 delete();
+  if (isdefined(var_0.func_114F1))
+  var_0.func_114F1 delete();
 
-  if (isdefined(var_0._id_6649))
-  level._id_E5DE[var_0._id_6649] = undefined;
+  if (isdefined(var_0.entitynumber))
+  level.rockets[var_0.entitynumber] = undefined;
 
-  if (var_1)
-  level._id_DF80 = undefined;
+  if (var_01)
+  level.remotemissileinprogress = undefined;
 }
 
-_id_E474(var_0, var_1, var_2, var_3, var_4) {
-  if (!isdefined(var_0)) {
-  if (isdefined(var_3))
-  var_3 thread _id_51B1();
+func_E474(var_00, var_01, var_02, var_03, var_04) {
+  if (!isdefined(var_00)) {
+  if (isdefined(var_03))
+  var_03 thread func_51B1();
 
   return;
   }
 
-  var_0 setclientomnvar("ui_predator_missile", 2);
-  var_0 notify("end_kill_streak");
-  var_0 notify("orbital_deployment_complete");
-  var_0 thermalvisionfofoverlayoff();
-  var_0 _meth_808E();
+  var_00 setclientomnvar("ui_predator_missile", 2);
+  var_00 notify("end_kill_streak");
+  var_00 notify("orbital_deployment_complete");
+  var_00 thermalvisionfofoverlayoff();
+  var_00 controlsunlink();
 
-  if (!isdefined(var_1))
+  if (!isdefined(var_01))
   scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(0.95);
 
-  var_0 cameraunlink();
-  var_0 setclientomnvar("ui_predator_missile", 0);
+  var_00 cameraunlink();
+  var_00 setclientomnvar("ui_predator_missile", 0);
 
-  if (!var_4) {
-  var_0 _id_C6C4();
-  var_0 scripts\engine\utility::_id_1C76(1);
+  if (!var_04) {
+  var_00 func_C6C4();
+  var_00 scripts\engine\utility::allow_weapon_switch(1);
   } else {
-  var_0 scripts\engine\utility::_id_1C58(0);
-  var_0 scripts\engine\utility::_id_1C76(0);
-  var_0 _id_C6C4();
-  var_0 scripts\engine\utility::_id_1C76(1);
+  var_00 scripts\engine\utility::allow_offhand_weapons(0);
+  var_00 scripts\engine\utility::allow_weapon_switch(0);
+  var_00 func_C6C4();
+  var_00 scripts\engine\utility::allow_weapon_switch(1);
   }
 
-  var_0 scripts\mp\utility\game::_id_7385(0);
-  var_0 scripts\engine\utility::_id_1C6E(1);
+  var_00 scripts\mp\utility\game::freezecontrolswrapper(0);
+  var_00 scripts\engine\utility::allow_usability(1);
 
-  if (isdefined(var_2))
-  var_0 _id_10D89(var_2, var_3);
+  if (isdefined(var_02))
+  var_00 func_10D89(var_02, var_03);
 }
 
-_id_10D89(var_0, var_1) {
-  var_2 = spawn("script_model", var_0);
+func_10D89(var_00, var_01) {
+  var_02 = spawn("script_model", var_00);
   var_2.angles = self.angles;
   var_2.owner = self;
   var_2.team = self.team;
-  self._id_98FF = 0;
-  self setorigin(var_0 + (0, 0, 15), 1);
+  self.func_98FF = 0;
+  self setorigin(var_00 + (0, 0, 15), 1);
 
-  foreach (var_4 in level.players) {
-  if (var_4 != self)
-  self _meth_8388(var_4);
+  foreach (var_04 in level.players) {
+  if (var_04 != self)
+  self giveperkequipment(var_04);
   }
 
   self notify("weapon_change", self getcurrentweapon());
-  var_1 thread _id_51B1();
+  var_01 thread func_51B1();
 }
 
-_id_51B1() {
+func_51B1() {
   wait 0.7;
-  playfx(scripts\engine\utility::_id_7ECB("trophy_spark_fx"), self.origin);
+  playfx(scripts\engine\utility::getfx("trophy_spark_fx"), self.origin);
   self delete();
 }
 
-_id_10D70() {
-  var_0 = newclienthudelem(self);
+func_10D70() {
+  var_00 = newclienthudelem(self);
   var_0.x = 0;
   var_0.y = 0;
-  var_0._id_002B = "left";
-  var_0._id_002C = "top";
-  var_0._id_02A4 = 1;
-  var_0._id_017D = "fullscreen";
-  var_0._id_0382 = "fullscreen";
-  var_0._id_0142 = 1;
-  var_0 setshader("black", 640, 480);
-  thread _id_50E0(var_0, 0, 0.05, 1);
-  var_1 = 0.1;
-  childthread _id_50DE(var_0, var_1);
+  var_0.alignx = "left";
+  var_0.aligny = "top";
+  var_0.sort = 1;
+  var_0.horzalign = "fullscreen";
+  var_0.vertalign = "fullscreen";
+  var_0.foreground = 1;
+  var_00 setshader("black", 640, 480);
+  thread func_50E0(var_00, 0, 0.05, 1);
+  var_01 = 0.1;
+  childthread func_50DE(var_00, var_01);
 }
 
-_id_50E0(var_0, var_1, var_2, var_3) {
+func_50E0(var_00, var_01, var_02, var_03) {
   self endon("disconnect");
-  wait(var_1);
-  var_0 fadeovertime(var_2);
+  wait(var_01);
+  var_00 fadeovertime(var_02);
 }
 
-_id_50DE(var_0, var_1) {
-  wait(var_1);
-  var_0 destroy();
+func_50DE(var_00, var_01) {
+  wait(var_01);
+  var_00 destroy();
   self notify("blackout_done");
 }
 
-_id_5821() {
+func_5821() {
   wait 0.5;
   playfx(level._effect["drop_pod_fx"], self.origin);
   wait 0.3;
@@ -678,13 +678,13 @@ _id_5821() {
   playfx(level._effect["drop_pod_fx"], self.origin);
 }
 
-_id_D39C(var_0) {
-  var_1 = self.pers["killstreaks"];
+func_D39C(var_00) {
+  var_01 = self.pers["killstreaks"];
 
-  for (var_2 = 0; var_2 <= 3; var_2++) {
-  var_3 = var_1[var_2];
+  for (var_02 = 0; var_02 <= 3; var_2++) {
+  var_03 = var_1[var_02];
 
-  if (isdefined(var_3) && var_3._id_110EA == var_0 && var_3._id_269A)
+  if (isdefined(var_03) && var_3.streakname == var_00 && var_3.func_269A)
   return 1;
   }
 

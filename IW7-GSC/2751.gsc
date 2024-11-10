@@ -4,58 +4,58 @@
 ***************************************/
 
 init() {
-  level._id_12B29 = spawnstruct();
-  level._id_12B29._id_017D = "left";
-  level._id_12B29._id_0382 = "top";
-  level._id_12B29._id_002B = "left";
-  level._id_12B29._id_002C = "top";
-  level._id_12B29.x = 0;
-  level._id_12B29.y = 0;
-  level._id_12B29._id_039F = 0;
-  level._id_12B29.height = 0;
-  level._id_12B29._id_3E67 = [];
-  level._id_724F = 12;
-  level._id_912F["allies"] = spawnstruct();
-  level._id_912F["axis"] = spawnstruct();
-  level._id_D8DE = -61;
-  level._id_D8DD = 0;
-  level._id_D8D9 = 9;
-  level._id_D8DC = 120;
-  level._id_D8DB = -75;
-  level._id_D8DA = 0;
-  level._id_D8D8 = 1.2;
-  level._id_115E4 = 32;
-  level._id_115E1 = 14;
-  level._id_115E3 = 192;
-  level._id_115E2 = 8;
-  level._id_115E0 = 1.65;
-  level._id_B0E6 = "BOTTOM";
-  level._id_B0E5 = -140;
-  level._id_B0E4 = 1.6;
+  level.uiparent = spawnstruct();
+  level.uiparent.horzalign = "left";
+  level.uiparent.vertalign = "top";
+  level.uiparent.alignx = "left";
+  level.uiparent.aligny = "top";
+  level.uiparent.x = 0;
+  level.uiparent.y = 0;
+  level.uiparent.width = 0;
+  level.uiparent.height = 0;
+  level.uiparent.children = [];
+  level.fontheight = 12;
+  level.func_912F["allies"] = spawnstruct();
+  level.func_912F["axis"] = spawnstruct();
+  level.primaryprogressbary = -61;
+  level.primaryprogressbarx = 0;
+  level.primaryprogressbarheight = 9;
+  level.primaryprogressbarwidth = 120;
+  level.primaryprogressbartexty = -75;
+  level.primaryprogressbartextx = 0;
+  level.primaryprogressbarfontsize = 1.2;
+  level.func_115E4 = 32;
+  level.func_115E1 = 14;
+  level.func_115E3 = 192;
+  level.func_115E2 = 8;
+  level.func_115E0 = 1.65;
+  level.lowertextyalign = "BOTTOM";
+  level.lowertexty = -140;
+  level.lowertextfontsize = 1.6;
 }
 
-_id_7251(var_0) {
-  self._id_289F = self._id_013B;
+fontpulseinit(var_00) {
+  self.basefontscale = self.fontscale;
 
-  if (isdefined(var_0))
-  self._id_B49C = min(var_0, 6.3);
+  if (isdefined(var_00))
+  self.maxfontscale = min(var_00, 6.3);
   else
-  self._id_B49C = min(self._id_013B * 2, 6.3);
+  self.maxfontscale = min(self.fontscale * 2, 6.3);
 
-  self._id_94C4 = 2;
-  self._id_C766 = 4;
+  self.inframes = 2;
+  self.outframes = 4;
 }
 
-fontpulse(var_0) {
+fontpulse(var_00) {
   self notify("fontPulse");
   self endon("fontPulse");
   self endon("death");
-  var_0 endon("disconnect");
-  var_0 endon("joined_team");
-  var_0 endon("joined_spectators");
-  self _meth_8067(self._id_94C4 * 0.05);
-  self._id_013B = self._id_B49C;
-  wait(self._id_94C4 * 0.05);
-  self _meth_8067(self._id_C766 * 0.05);
-  self._id_013B = self._id_289F;
+  var_00 endon("disconnect");
+  var_00 endon("joined_team");
+  var_00 endon("joined_spectators");
+  self changefontscaleovertime(self.inframes * 0.05);
+  self.fontscale = self.maxfontscale;
+  wait(self.inframes * 0.05);
+  self changefontscaleovertime(self.outframes * 0.05);
+  self.fontscale = self.basefontscale;
 }

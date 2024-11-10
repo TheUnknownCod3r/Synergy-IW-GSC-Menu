@@ -3,102 +3,102 @@
  * Script: scripts\2661.gsc
 ***************************************/
 
-_id_82A2(var_0, var_1) {
+give_attacker_kill_rewards(var_00, var_01) {
   if (self.team == "allies")
   return;
 
-  if (scripts\engine\utility::_id_9CEE(self._id_54CB))
+  if (scripts\engine\utility::is_true(self.died_poorly))
   return;
 
-  if (_id_0A4A::_id_77D7(self) == "elite" || _id_0A4A::_id_77D7(self) == "mammoth") {
-  var_2 = _id_7C13();
+  if (scripts/cp/cp_agent_utils::get_agent_type(self) == "elite" || scripts/cp/cp_agent_utils::get_agent_type(self) == "mammoth") {
+  var_02 = get_reward_point_for_kill();
 
-  foreach (var_4 in level.players)
-  _id_8373(var_4, var_2, "large");
+  foreach (var_04 in level.players)
+  givekillreward(var_04, var_02, "large");
 
   return;
   }
 
-  if (isdefined(self._id_24DA) || isdefined(self._id_B36A)) {
-  if (isdefined(self._id_B36A)) {
-  foreach (var_4 in level.players) {
-  if (isdefined(self._id_D354) && self._id_D354 == var_4 && var_4 != var_0) {
-  var_7 = _id_7DDB();
+  if (isdefined(self.attacker_damage) || isdefined(self.marked_by_hybrid)) {
+  if (isdefined(self.marked_by_hybrid)) {
+  foreach (var_04 in level.players) {
+  if (isdefined(self.player_who_tagged) && self.player_who_tagged == var_04 && var_04 != var_00) {
+  var_07 = getassistbonusamount();
 
-  if (isdefined(level._id_3B0F))
-  var_7 = var_7 * level._id_3B0F;
+  if (isdefined(level.cash_scalar))
+  var_07 = var_07 * level.cash_scalar;
 
-  _id_8373(var_4, var_7 * 2);
-  var_4 _id_0A63::_id_666A("assists", 1);
-  self._id_926B = 1;
+  givekillreward(var_04, var_07 * 2);
+  var_04 scripts/cp/cp_persistence::eog_player_update_stat("assists", 1);
+  self.hybrid_assist = 1;
   }
   }
   }
 
-  if (!isdefined(self._id_926B)) {
-  var_9 = 0.1;
-  var_10 = self.maxhealth * var_9;
-  var_7 = _id_7DDB();
+  if (!isdefined(self.hybrid_assist)) {
+  var_09 = 0.1;
+  var_10 = self.maxhealth * var_09;
+  var_07 = getassistbonusamount();
 
-  if (isdefined(level._id_3B0F))
-  var_7 = var_7 * level._id_3B0F;
+  if (isdefined(level.cash_scalar))
+  var_07 = var_07 * level.cash_scalar;
 
-  foreach (var_12 in self._id_24DA) {
-  if (var_12.player == var_0 || isdefined(var_0.owner) && var_12.player == var_0.owner)
+  foreach (var_12 in self.attacker_damage) {
+  if (var_12.player == var_00 || isdefined(var_0.owner) && var_12.player == var_0.owner)
   continue;
 
   if (var_12.damage >= var_10) {
-  if (isdefined(var_12.player) && var_12.player != var_0) {
-  var_12.player _id_0A63::_id_666A("assists", 1);
-  _id_8373(var_12.player, var_7);
+  if (isdefined(var_12.player) && var_12.player != var_00) {
+  var_12.player scripts/cp/cp_persistence::eog_player_update_stat("assists", 1);
+  givekillreward(var_12.player, var_07);
   }
   }
   }
   }
   }
 
-  if (!isdefined(var_0))
+  if (!isdefined(var_00))
   return;
 
-  if (!isplayer(var_0) && (!isdefined(var_0.owner) || !isplayer(var_0.owner)))
+  if (!isplayer(var_00) && (!isdefined(var_0.owner) || !isplayer(var_0.owner)))
   return;
 
   var_14 = 0;
 
   if (isdefined(var_0.owner)) {
-  var_0 = var_0.owner;
+  var_00 = var_0.owner;
   var_14 = 1;
   }
 
-  var_2 = _id_7C13();
+  var_02 = get_reward_point_for_kill();
 
-  if (isdefined(var_1) && var_1 == "soft" && !var_14)
-  var_2 = int(var_2 * 1.5);
+  if (isdefined(var_01) && var_01 == "soft" && !var_14)
+  var_02 = int(var_02 * 1.5);
 
-  _id_8373(var_0, var_2, "large", var_1);
+  givekillreward(var_00, var_02, "large", var_01);
 }
 
-_id_7DDB() {
-  return level._id_18EE[_id_0A4A::_id_77D7(self)]["reward"] * 0.5;
+getassistbonusamount() {
+  return level.agent_definition[scripts/cp/cp_agent_utils::get_agent_type(self)]["reward"] * 0.5;
 }
 
-_id_7C13() {
-  return level._id_18EE[_id_0A4A::_id_77D7(self)]["reward"];
+get_reward_point_for_kill() {
+  return level.agent_definition[scripts/cp/cp_agent_utils::get_agent_type(self)]["reward"];
 }
 
-_id_8373(var_0, var_1, var_2, var_3) {
-  var_4 = var_1 * level._id_4CC4;
+givekillreward(var_00, var_01, var_02, var_03) {
+  var_04 = var_01 * level.cycle_reward_scalar;
 
-  if (isdefined(level._id_3B0F))
-  var_4 = var_4 * level._id_3B0F;
+  if (isdefined(level.cash_scalar))
+  var_04 = var_04 * level.cash_scalar;
 
-  var_0 _id_0A63::_id_82F9(var_4, var_2, var_3);
+  var_00 scripts/cp/cp_persistence::give_player_currency(var_04, var_02, var_03);
 
-  if (isdefined(level._id_13F56))
-  var_0 _id_0A63::_id_831D(int(var_4));
+  if (isdefined(level.zombie_xp))
+  var_00 scripts/cp/cp_persistence::give_player_xp(int(var_04));
 
-  if (scripts\engine\utility::_id_6E34("cortex_started") && scripts\engine\utility::_id_6E25("cortex_started")) {
-  if (isdefined(level._id_16B4))
-  [[level._id_16B4]](var_1);
+  if (scripts\engine\utility::flag_exist("cortex_started") && scripts\engine\utility::flag("cortex_started")) {
+  if (isdefined(level.add_cortex_charge_func))
+  [[level.add_cortex_charge_func]](var_01);
   }
 }

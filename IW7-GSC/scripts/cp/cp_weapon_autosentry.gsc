@@ -454,7 +454,7 @@ sentry_burstfirestart() {
 	self endon("stop_shooting");
 	level endon("game_ended");
 	sentry_spinup();
-	var_00 = function_0240(level.sentrysettings[self.sentrytype].var_39B);
+	var_00 = weaponfiretime(level.sentrysettings[self.sentrytype].var_39B);
 	var_01 = level.sentrysettings[self.sentrytype].burstmin;
 	var_02 = level.sentrysettings[self.sentrytype].burstmax;
 	var_03 = level.sentrysettings[self.sentrytype].pausemin;
@@ -482,7 +482,7 @@ turret_shotmonitor(param_00) {
 	level endon("game_ended");
 	param_00 endon("death");
 	param_00 endon("player_dismount");
-	var_01 = function_0240(level.sentrysettings[param_00.sentrytype].var_39B);
+	var_01 = weaponfiretime(level.sentrysettings[param_00.sentrytype].var_39B);
 	for(;;) {
 		param_00 waittill("turret_fire");
 		param_00 _meth_8165() notify("turret_fire");
@@ -493,7 +493,7 @@ turret_shotmonitor(param_00) {
 
 sentry_heatmonitor() {
 	self endon("death");
-	var_00 = function_0240(level.sentrysettings[self.sentrytype].var_39B);
+	var_00 = weaponfiretime(level.sentrysettings[self.sentrytype].var_39B);
 	var_01 = 0;
 	var_02 = 0;
 	var_03 = level.sentrysettings[self.sentrytype].overheattime;

@@ -613,7 +613,7 @@ func_10057(param_00,param_01,param_02,param_03) {
 		return 0;
 	}
 
-	if(isdefined(param_02) && function_0107(param_02) && param_00 >= 350) {
+	if(isdefined(param_02) && isexplosivedamagemod(param_02) && param_00 >= 350) {
 		if(isdefined(param_01) && !issubstr(param_01,"g18pap")) {
 			return 1;
 		}
@@ -1643,7 +1643,7 @@ func_1305A(param_00,param_01,param_02,param_03) {
 		return 0;
 	}
 
-	var_04 = function_00B4(self.attack_spot.target,"targetname");
+	var_04 = getnodearray(self.attack_spot.target,"targetname");
 	if(!isdefined(var_04) || var_04.size == 0) {
 		return 0;
 	}
@@ -1653,7 +1653,7 @@ func_1305A(param_00,param_01,param_02,param_03) {
 		return 0;
 	}
 
-	var_04 = function_00B4(var_05.target,"targetname");
+	var_04 = getnodearray(var_05.target,"targetname");
 	if(!isdefined(var_04) || var_04.size == 0) {
 		return 0;
 	}

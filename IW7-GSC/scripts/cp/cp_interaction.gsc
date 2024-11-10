@@ -99,7 +99,7 @@ func_5CF3() {
 get_area_for_power(param_00) {
 	var_01 = getentarray("spawn_volume","targetname");
 	foreach(var_03 in var_01) {
-		if(function_010F(param_00.origin,var_03)) {
+		if(ispointinvolume(param_00.origin,var_03)) {
 			if(isdefined(var_03.basename)) {
 				return var_03.basename;
 			}
@@ -482,7 +482,7 @@ func_9C64(param_00,param_01,param_02) {
 		foreach(var_07 in var_05) {
 			var_08 = var_07 func_77D3();
 			foreach(var_0A in var_08) {
-				if(function_010F(param_01.origin,var_0A)) {
+				if(ispointinvolume(param_01.origin,var_0A)) {
 					return 0;
 				}
 			}
@@ -1466,13 +1466,13 @@ can_purchase_ammo(param_00) {
 
 	if(isdefined(var_02)) {
 		var_08 = self getweaponammostock(var_02);
-		var_09 = function_0249(var_02);
+		var_09 = weaponmaxammo(var_02);
 		var_0A = scripts/cp/perks/prestige::prestige_getminammo();
 		var_0B = int(var_0A * var_09);
 		if(var_08 < var_0B) {
 			return 1;
 		}
-		else if(function_0249(var_02) == weaponclipsize(var_02) && self getweaponammoclip(var_02) < weaponclipsize(var_02)) {
+		else if(weaponmaxammo(var_02) == weaponclipsize(var_02) && self getweaponammoclip(var_02) < weaponclipsize(var_02)) {
 			return 1;
 		}
 		else
@@ -1650,7 +1650,7 @@ can_purchase_interaction(param_00,param_01,param_02,param_03) {
 			scripts\cp\zombies\zombie_analytics::log_item_purchase_with_tickets(level.wave_num,self.itempicked,level.transactionid);
 		}
 
-		var_07 = function_0249(param_00.script_noteworthy);
+		var_07 = weaponmaxammo(param_00.script_noteworthy);
 		var_08 = scripts/cp/perks/prestige::prestige_getminammo();
 		var_09 = int(var_08 * var_07);
 		var_0A = self getweaponammostock(var_06);
@@ -1700,7 +1700,7 @@ func_7DBA(param_00,param_01) {
 	var_03 = scripts\cp\utility::getrawbaseweaponname(param_00.script_noteworthy);
 	var_04 = param_01 getcurrentweapon();
 	var_05 = scripts\cp\utility::getbaseweaponname(var_04);
-	var_06 = function_0249(var_04);
+	var_06 = weaponmaxammo(var_04);
 	var_07 = param_01 scripts/cp/perks/prestige::prestige_getminammo();
 	var_08 = int(var_07 * var_06);
 	var_09 = param_01 getweaponammostock(var_04);
@@ -1710,7 +1710,7 @@ func_7DBA(param_00,param_01) {
 		if(var_0D == scripts\cp\utility::getrawbaseweaponname(param_00.script_noteworthy)) {
 			var_0E = var_0C;
 			var_09 = self getweaponammostock(var_0E);
-			var_06 = function_0249(var_0E);
+			var_06 = weaponmaxammo(var_0E);
 			var_08 = int(var_07 * var_06);
 		}
 	}

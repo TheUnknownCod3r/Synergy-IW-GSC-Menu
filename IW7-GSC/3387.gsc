@@ -141,7 +141,7 @@ func_E5D4(param_00,param_01,param_02) {
 			if(scripts\engine\utility::istrue(var_03.is_suicide_bomber)) {
 				var_03.is_burning = 1;
 				level notify("rocket_trap_kill");
-				param_02.var_126A4++;
+				param_02.trap_kills++;
 				var_03 dodamage(var_03.health + 1000,var_03.origin,undefined,undefined,"MOD_UNKNOWN","iw7_rockettrap_zm");
 				continue;
 			}
@@ -159,7 +159,7 @@ func_E5D4(param_00,param_01,param_02) {
 					param_01.trapkills["trap_rocket"]++;
 				}
 
-				param_02.var_126A4++;
+				param_02.trap_kills++;
 				var_03 thread scripts\cp\utility::damage_over_time(var_03,param_01,1.5,int(var_03.health + 100),"MOD_UNKNOWN","iw7_rockettrap_zm",1,"burning","rocket_trap_kill");
 			}
 			else
@@ -180,7 +180,7 @@ func_13622() {
 	level endon("rocket_trap_done");
 	for(;;) {
 		level waittill("rocket_trap_kill");
-		level.var_E5D7++;
+		level.rocket_trap_kills++;
 	}
 }
 

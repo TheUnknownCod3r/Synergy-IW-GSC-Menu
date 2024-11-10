@@ -114,10 +114,10 @@ func_B2F1() {
 	for(;;) {
 		scripts\engine\utility::flag_wait("stealth_enabled");
 		lib_0F26::func_117D1(1);
-		function_01C5("ai_corpseSynch",1);
+		setsaveddvar("ai_corpseSynch",1);
 		scripts\engine\utility::flag_wait("stealth_spotted");
 		lib_0F26::func_117D1(0);
-		function_01C5("ai_corpseSynch",0);
+		setsaveddvar("ai_corpseSynch",0);
 		if(getdvarint("ai_threatsightDisplay",1)) {
 			foreach(var_01 in level.players) {
 				var_01 thread scripts\sp\_utility::play_sound_on_entity("ui_stealth_busted");
@@ -146,7 +146,7 @@ func_115E8() {
 	for(;;) {
 		scripts\engine\utility::flag_wait("stealth_enabled");
 		level.var_10E6D.enemies["axis"] = level.players;
-		level.var_10E6D.enemies["allies"] = function_0072("axis");
+		level.var_10E6D.enemies["allies"] = getaiarray("axis");
 		wait(0.05);
 	}
 }
@@ -154,9 +154,9 @@ func_115E8() {
 func_6806(param_00) {
 	level.var_10E6D.var_53A0.state = param_00;
 	foreach(var_04, var_02 in level.var_10E6D.var_21) {
-		function_01C5(var_04,var_02[param_00]);
+		setsaveddvar(var_04,var_02[param_00]);
 		var_03 = "ai_busyEvent" + getsubstr(var_04,8);
-		function_01C5(var_03,var_02[param_00]);
+		setsaveddvar(var_03,var_02[param_00]);
 	}
 }
 

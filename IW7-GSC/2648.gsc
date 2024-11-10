@@ -3,207 +3,207 @@
  * Script: scripts\2648.gsc
 ***************************************/
 
-_id_BD6E(var_0) {
-  return self getrankedplayerdata("cp", "meritProgress", var_0);
+mt_getprogress(var_00) {
+  return self getrankedplayerdata("cp", "meritProgress", var_00);
 }
 
-_id_BD6F(var_0) {
-  return self getrankedplayerdata("cp", "meritState", var_0);
+mt_getstate(var_00) {
+  return self getrankedplayerdata("cp", "meritState", var_00);
 }
 
-_id_BD75(var_0, var_1) {
-  if (var_0 == "mt_highest_round") {
-  var_2 = _id_BD6F("mt_highest_round");
-  var_3 = _id_BD70("mt_highest_round", var_2);
+mt_setprogress(var_00, var_01) {
+  if (var_00 == "mt_highest_round") {
+  var_02 = mt_getstate("mt_highest_round");
+  var_03 = mt_gettarget("mt_highest_round", var_02);
 
-  if (level._id_13BD3 >= var_3)
-  return self setrankedplayerdata("cp", "meritProgress", var_0, var_3);
+  if (level.wave_num >= var_03)
+  return self setrankedplayerdata("cp", "meritProgress", var_00, var_03);
   }
   else
-  return self setrankedplayerdata("cp", "meritProgress", var_0, var_1);
+  return self setrankedplayerdata("cp", "meritProgress", var_00, var_01);
 }
 
-_id_BD76(var_0, var_1) {
-  return self setrankedplayerdata("cp", "meritState", var_0, var_1);
+mt_setstate(var_00, var_01) {
+  return self setrankedplayerdata("cp", "meritState", var_00, var_01);
 }
 
-_id_BD70(var_0, var_1) {
-  return int(tablelookup("cp/allMeritsTable.csv", 0, var_0, 10 + var_1 * 3));
+mt_gettarget(var_00, var_01) {
+  return int(tablelookup("cp/allMeritsTable.csv", 0, var_00, 10 + var_01 * 3));
 }
 
-_id_D4F6(var_0, var_1, var_2) {
-  if (_id_0A77::isusingremote() && scripts\engine\utility::_id_9CEE(self._id_13170))
+playpainoverlay(var_00, var_01, var_02) {
+  if (scripts/cp/utility::isusingremote() && scripts\engine\utility::is_true(self.vanguard_num))
   return;
 
-  var_3 = _id_7919(var_2);
+  var_03 = get_damage_direction(var_02);
 
-  if (_id_9CD1(var_1))
-  _id_CE3E(var_3);
-  else if (_id_9CD0(var_1))
-  _id_CE3E("center");
-  else if (_id_9BCA(var_0))
+  if (is_spitter_spit(var_01))
+  play_spitter_pain_overlay(var_03);
+  else if (is_spitter_gas(var_01))
+  play_spitter_pain_overlay("center");
+  else if (is_elite_attack(var_00))
   playfxontagforclients(level._effect["vfx_melee_blood_spray"], self, "tag_eye", self);
   else
-  _id_CCA5(var_3);
+  play_basic_pain_overlay(var_03);
 }
 
-_id_7919(var_0) {
-  var_1 = 0.965;
-  var_2 = ["left", "center", "right"];
+get_damage_direction(var_00) {
+  var_01 = 0.965;
+  var_02 = ["left", "center", "right"];
 
-  if (!isdefined(var_0))
+  if (!isdefined(var_00))
   return var_2[randomint(var_2.size)];
 
-  var_0 = var_0 * -1;
-  var_3 = anglestoforward(self.angles);
-  var_4 = vectordot(var_0, var_3);
+  var_00 = var_00 * -1;
+  var_03 = anglestoforward(self.angles);
+  var_04 = vectordot(var_00, var_03);
 
-  if (var_4 > var_1)
+  if (var_04 > var_01)
   return "center";
 
-  var_5 = anglestoright(self.angles);
-  var_6 = vectordot(var_0, var_5);
+  var_05 = anglestoright(self.angles);
+  var_06 = vectordot(var_00, var_05);
 
-  if (var_6 > 0)
+  if (var_06 > 0)
   return "right";
   else
   return "left";
 }
 
-_id_9CD1(var_0) {
-  if (!isdefined(var_0))
+is_spitter_spit(var_00) {
+  if (!isdefined(var_00))
   return 0;
 
-  return var_0 == "alienspit_mp";
+  return var_00 == "alienspit_mp";
 }
 
-_id_9CD0(var_0) {
-  if (!isdefined(var_0))
+is_spitter_gas(var_00) {
+  if (!isdefined(var_00))
   return 0;
 
-  return var_0 == "alienspit_gas_mp";
+  return var_00 == "alienspit_gas_mp";
 }
 
-_id_9BCA(var_0) {
-  if (!isdefined(var_0) || !var_0 _id_0A4A::_id_9B5A())
+is_elite_attack(var_00) {
+  if (!isdefined(var_00) || !var_00 scripts/cp/cp_agent_utils::is_alien_agent())
   return 0;
 
-  return _id_0A4A::_id_77D7(var_0) == "elite";
+  return scripts/cp/cp_agent_utils::get_agent_type(var_00) == "elite";
 }
 
-_id_CE3E(var_0) {
-  if (!_id_0A77::_id_8BB1(self._id_01F1, "tag_eye"))
+play_spitter_pain_overlay(var_00) {
+  if (!scripts/cp/utility::has_tag(self.model, "tag_eye"))
   return;
 
-  if (var_0 == "left")
+  if (var_00 == "left")
   playfxontagforclients(level._effect["vfx_alien_spitter_hit_left"], self, "tag_eye", self);
-  else if (var_0 == "center")
+  else if (var_00 == "center")
   playfxontagforclients(level._effect["vfx_alien_spitter_hit_center"], self, "tag_eye", self);
-  else if (var_0 == "right")
+  else if (var_00 == "right")
   playfxontagforclients(level._effect["vfx_alien_spitter_hit_right"], self, "tag_eye", self);
   else
   {}
 }
 
-_id_CCA5(var_0) {
-  var_1 = self;
+play_basic_pain_overlay(var_00) {
+  var_01 = self;
 
-  if (!isdefined(self._id_01F1) || self._id_01F1 == "")
+  if (!isdefined(self.model) || self.model == "")
   return;
 
-  if (!_id_0A77::_id_8BB1(self._id_01F1, "tag_eye"))
+  if (!scripts/cp/utility::has_tag(self.model, "tag_eye"))
   return;
 
-  if (var_0 == "left")
-  playfxontagforclients(level._effect["vfx_blood_hit_left"], var_1, "tag_eye", self);
-  else if (var_0 == "center")
-  playfxontagforclients(level._effect["vfx_melee_blood_spray"], var_1, "tag_eye", self);
-  else if (var_0 == "right")
-  playfxontagforclients(level._effect["vfx_blood_hit_right"], var_1, "tag_eye", self);
+  if (var_00 == "left")
+  playfxontagforclients(level._effect["vfx_blood_hit_left"], var_01, "tag_eye", self);
+  else if (var_00 == "center")
+  playfxontagforclients(level._effect["vfx_melee_blood_spray"], var_01, "tag_eye", self);
+  else if (var_00 == "right")
+  playfxontagforclients(level._effect["vfx_blood_hit_right"], var_01, "tag_eye", self);
   else
   {}
 }
 
-_id_13F0C() {
+zom_player_damage_flash() {
   self endon("disconnect");
   level endon("game_ended");
   self endon("death");
-  self _meth_82BE("player_damaged", 1, 1);
+  self setclientomnvarbit("player_damaged", 1, 1);
   wait 0.05;
-  self _meth_82BE("player_damaged", 1, 0);
+  self setclientomnvarbit("player_damaged", 1, 0);
 }
 
-_id_13F0D() {
+zom_player_health_overlay_watcher() {
   self endon("disconnect");
   level endon("game_ended");
   self endon("death");
-  self _meth_82BE("player_damaged", 2, 0);
-  var_0 = 0;
-  var_1 = 1;
+  self setclientomnvarbit("player_damaged", 2, 0);
+  var_00 = 0;
+  var_01 = 1;
 
   for (;;) {
-  if (self.health <= 45 && var_0 == 0) {
+  if (self.health <= 45 && var_00 == 0) {
   if (!self issplitscreenplayer())
-  self _meth_82C3("painvision_cp", 0.02, "mix", "reverb", "filter");
+  self setclienttriggeraudiozonepartialwithfade("painvision_cp", 0.02, "mix", "reverb", "filter");
 
-  var_0 = 1;
+  var_00 = 1;
   }
 
-  if (var_0 && var_1) {
-  if (!_id_0A5B::_id_D0EF(self))
-  self _meth_82BE("player_damaged", 2, 1);
+  if (var_00 && var_01) {
+  if (!scripts/cp/cp_laststand::player_in_laststand(self))
+  self setclientomnvarbit("player_damaged", 2, 1);
 
-  var_1 = 0;
+  var_01 = 0;
   }
 
-  if (var_0 && self.health > 45) {
-  self _meth_8070(0.3);
-  var_0 = 0;
-  self _meth_82BE("player_damaged", 2, 0);
-  var_1 = 1;
+  if (var_00 && self.health > 45) {
+  self clearclienttriggeraudiozone(0.3);
+  var_00 = 0;
+  self setclientomnvarbit("player_damaged", 2, 0);
+  var_01 = 1;
   }
 
   wait 0.05;
   }
 }
 
-_id_9AF5(var_0, var_1) {
-  if (!isdefined(level._id_9ACA))
-  level._id_9ACA = 0;
+introscreen_corner_line(var_00, var_01) {
+  if (!isdefined(level.intro_offset))
+  level.intro_offset = 0;
   else
-  level._id_9ACA++;
+  level.intro_offset++;
 
-  var_2 = _id_4666();
-  var_3 = 1.6;
+  var_02 = cornerline_height();
+  var_03 = 1.6;
 
-  if (level._id_10A56)
-  var_3 = 2;
+  if (level.splitscreen)
+  var_03 = 2;
 
-  var_4 = newhudelem();
+  var_04 = newhudelem();
   var_4.x = 20;
-  var_4.y = var_2;
-  var_4._id_002B = "left";
-  var_4._id_002C = "bottom";
-  var_4._id_017D = "left";
-  var_4._id_0382 = "bottom";
-  var_4._id_02A4 = 3;
-  var_4._id_0142 = 1;
-  var_4 _meth_834D(var_0);
+  var_4.y = var_02;
+  var_4.alignx = "left";
+  var_4.aligny = "bottom";
+  var_4.horzalign = "left";
+  var_4.vertalign = "bottom";
+  var_4.sort = 3;
+  var_4.foreground = 1;
+  var_04 give_zap_perk(var_00);
   var_4.alpha = 1;
-  var_4._id_0177 = 1;
-  var_4._id_013B = var_3;
-  var_4._id_00B9 = (0.8, 1, 0.8);
-  var_4._id_013A = "default";
-  var_4._id_0154 = (0.3, 0.6, 0.3);
-  var_4._id_0153 = 1;
-  return var_4;
+  var_4.hidewheninmenu = 1;
+  var_4.fontscale = var_03;
+  var_4.color = (0.8, 1, 0.8);
+  var_4.font = "default";
+  var_4.glowcolor = (0.3, 0.6, 0.3);
+  var_4.glowalpha = 1;
+  return var_04;
 }
 
-_id_4666() {
-  var_0 = -92;
+cornerline_height() {
+  var_00 = -92;
 
-  if (level._id_10A56)
-  var_0 = -110;
+  if (level.splitscreen)
+  var_00 = -110;
 
-  return level._id_9ACA * 20 - 92;
+  return level.intro_offset * 20 - 92;
 }

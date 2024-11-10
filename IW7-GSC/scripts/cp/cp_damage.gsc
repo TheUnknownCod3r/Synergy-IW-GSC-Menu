@@ -434,7 +434,7 @@ func_3D84(param_00,param_01,param_02,param_03,param_04) {
 }
 
 check_for_special_damage(param_00,param_01,param_02) {
-	if(param_02 == "MOD_MELEE" && function_024C(param_01) != "riotshield") {
+	if(param_02 == "MOD_MELEE" && weapontype(param_01) != "riotshield") {
 		return;
 	}
 
@@ -555,7 +555,7 @@ alien_fire_on() {
 		self.is_burning = 0;
 	}
 
-	self.var_9B81++;
+	self.is_burning++;
 	if(self.is_burning == 1 && self.species == "alien") {
 		if(isdefined(self.agent_type) && self.agent_type != "minion") {
 			self setscriptablepartstate("animpart","burning");
@@ -564,7 +564,7 @@ alien_fire_on() {
 }
 
 alien_fire_off() {
-	self.var_9B81--;
+	self.is_burning--;
 	if(self.is_burning > 0) {
 		return;
 	}
@@ -645,7 +645,7 @@ handlemissiledamage(param_00,param_01,param_02) {
 }
 
 handlegrenadedamage(param_00,param_01,param_02) {
-	if(function_0107(param_01)) {
+	if(isexplosivedamagemod(param_01)) {
 		switch(param_00) {
 			case "iw6_rgm_mp":
 			case "proximity_explosive_mp":

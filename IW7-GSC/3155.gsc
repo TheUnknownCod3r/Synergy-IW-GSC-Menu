@@ -63,7 +63,7 @@ func_F16C(param_00,param_01,param_02,param_03) {
 	}
 
 	playfx(level.var_7649["seeker_sparks"],self gettagorigin("tag_fx"));
-	function_0178("seeker_expire",self.origin);
+	playworldsound("seeker_expire",self.origin);
 	self hudoutlinedisable();
 	self notify("terminate_ai_threads");
 	self notify("killanimscript");

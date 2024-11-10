@@ -17,7 +17,7 @@ func_96D7() {
 	scripts/sp/footsteps::func_4FF0();
 	lib_0B60::func_96DC();
 	scripts/sp/slowmo_init::func_1032A();
-	function_01C5("cg_useplayerbreathsys",1);
+	setsaveddvar("cg_useplayerbreathsys",1);
 	foreach(var_01 in level.players) {
 		var_01.maxhealth = level.player.health;
 		var_01.var_9B34 = 0;
@@ -47,7 +47,7 @@ func_F5FF() {
 		case "shipcrib_rogue":
 		case "shipcrib_titan":
 		case "shipcrib_europa":
-			function_01C5("spaceshipPilotModel","viewmodel_base_animated");
+			setsaveddvar("spaceshipPilotModel","viewmodel_base_animated");
 			level.player _meth_8573("nopack_nohelmet_shadow");
 			level.player _meth_84C7("currentViewModel","viewmodel_base_viewhands_iw7_naval");
 			level.player givegoproattachments("viewmodel_base_viewhands_iw7_naval");
@@ -55,7 +55,7 @@ func_F5FF() {
 			break;
 
 		case "phspace":
-			function_01C5("spaceshipPilotModel","viewmodel_base_animated_naval");
+			setsaveddvar("spaceshipPilotModel","viewmodel_base_animated_naval");
 			level.player _meth_8573("default_character_shadow");
 			level.player _meth_84C7("currentViewModel","viewmodel_base_viewhands_iw7_naval");
 			level.player givegoproattachments("viewmodel_base_viewhands_iw7_naval");
@@ -64,7 +64,7 @@ func_F5FF() {
 
 		case "titanjackal":
 		case "titan":
-			function_01C5("spaceshipPilotModel","viewmodel_base_animated_desert");
+			setsaveddvar("spaceshipPilotModel","viewmodel_base_animated_desert");
 			level.player _meth_8573("default_character_shadow");
 			level.player _meth_84C7("currentViewModel","viewmodel_base_viewhands_iw7_desert");
 			level.player givegoproattachments("viewmodel_base_viewhands_iw7_desert");
@@ -72,7 +72,7 @@ func_F5FF() {
 			break;
 
 		case "sa_assassination":
-			function_01C5("spaceshipPilotModel","viewmodel_body_mp_stryker_2");
+			setsaveddvar("spaceshipPilotModel","viewmodel_body_mp_stryker_2");
 			level.player _meth_8573("default_character_shadow");
 			level.player _meth_84C7("currentViewModel","viewmodel_base_viewhands_iw7");
 			level.player givegoproattachments("viewmodel_base_viewhands_iw7");
@@ -80,7 +80,7 @@ func_F5FF() {
 			break;
 
 		default:
-			function_01C5("spaceshipPilotModel","viewmodel_base_animated");
+			setsaveddvar("spaceshipPilotModel","viewmodel_base_animated");
 			level.player _meth_8573("default_character_shadow");
 			level.player _meth_84C7("currentViewModel","viewmodel_base_viewhands_iw7");
 			level.player givegoproattachments("viewmodel_base_viewhands_iw7");
@@ -137,7 +137,7 @@ func_965A() {
 
 	level.player = level.players[0];
 	level.var_5012 = 190;
-	function_01C5("g_speed",level.var_5012);
+	setsaveddvar("g_speed",level.var_5012);
 	thread func_CFF8();
 }
 

@@ -109,7 +109,7 @@ func_3286(param_00) {
 	}
 
 	if(scripts\engine\utility::flag("mini_ufo_yellow_ready")) {
-		level.var_8C5C++;
+		level.head_cutter_trap_kills++;
 	}
 
 	if(isdefined(param_00)) {

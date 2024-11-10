@@ -3,196 +3,196 @@
  * Script: scripts\2606.gsc
 ***************************************/
 
-_id_F7A1(var_0) {
+setmodelfromarray(var_00) {
   self setmodel(var_0[randomint(var_0.size)]);
 }
 
-_id_D811(var_0) {
-  for (var_1 = 0; var_1 < var_0.size; var_1++)
-  precachemodel(var_0[var_1]);
+precachemodelarray(var_00) {
+  for (var_01 = 0; var_01 < var_0.size; var_1++)
+  precachemodel(var_0[var_01]);
 }
 
-_id_2483(var_0, var_1) {
-  if (!isdefined(level._id_3CAF))
-  level._id_3CAF = [];
+attachhead(var_00, var_01) {
+  if (!isdefined(level.character_head_index))
+  level.character_head_index = [];
 
-  if (!isdefined(level._id_3CAF[var_0]))
-  level._id_3CAF[var_0] = randomint(var_1.size);
+  if (!isdefined(level.character_head_index[var_00]))
+  level.character_head_index[var_00] = randomint(var_1.size);
 
-  var_2 = (level._id_3CAF[var_0] + 1) % var_1.size;
+  var_02 = (level.character_head_index[var_00] + 1) % var_1.size;
 
-  if (isdefined(self._id_ED2A))
-  var_2 = self._id_ED2A % var_1.size;
+  if (isdefined(self.script_char_index))
+  var_02 = self.script_char_index % var_1.size;
 
-  level._id_3CAF[var_0] = var_2;
-  self attach(var_1[var_2], "", 1);
-  self._id_8C98 = var_1[var_2];
+  level.character_head_index[var_00] = var_02;
+  self attach(var_1[var_02], "", 1);
+  self.headmodel = var_1[var_02];
 }
 
-_id_2482(var_0, var_1) {
-  if (!isdefined(level._id_3CAE))
-  level._id_3CAE = [];
+attachhat(var_00, var_01) {
+  if (!isdefined(level.character_hat_index))
+  level.character_hat_index = [];
 
-  if (!isdefined(level._id_3CAE[var_0]))
-  level._id_3CAE[var_0] = randomint(var_1.size);
+  if (!isdefined(level.character_hat_index[var_00]))
+  level.character_hat_index[var_00] = randomint(var_1.size);
 
-  var_2 = (level._id_3CAE[var_0] + 1) % var_1.size;
-  level._id_3CAE[var_0] = var_2;
-  self attach(var_1[var_2]);
-  self._id_8C43 = var_1[var_2];
+  var_02 = (level.character_hat_index[var_00] + 1) % var_1.size;
+  level.character_hat_index[var_00] = var_02;
+  self attach(var_1[var_02]);
+  self.hatmodel = var_1[var_02];
 }
 
-_id_BEFC() {
+new() {
   self detachall();
-  var_0 = self._id_1ED5;
+  var_00 = self.anim_gunhand;
 
-  if (!isdefined(var_0))
+  if (!isdefined(var_00))
   return;
 
-  self._id_1ED5 = "none";
-  self [[anim._id_DB38]](var_0);
+  self.anim_gunhand = "none";
+  self [[anim.putguninhand]](var_00);
 }
 
-_id_EB53() {
-  var_0["gunHand"] = self._id_1ED5;
-  var_0["gunInHand"] = self._id_1ED6;
-  var_0["model"] = self._id_01F1;
-  var_0["hatModel"] = self._id_8C43;
+save() {
+  var_0["gunHand"] = self.anim_gunhand;
+  var_0["gunInHand"] = self.anim_guninhand;
+  var_0["model"] = self.model;
+  var_0["hatModel"] = self.hatmodel;
 
   if (isdefined(self.name))
   var_0["name"] = self.name;
   else
   {}
 
-  var_1 = self getattachsize();
+  var_01 = self getattachsize();
 
-  for (var_2 = 0; var_2 < var_1; var_2++) {
-  var_0["attach"][var_2]["model"] = self getattachmodelname(var_2);
-  var_0["attach"][var_2]["tag"] = self getattachtagname(var_2);
+  for (var_02 = 0; var_02 < var_01; var_2++) {
+  var_0["attach"][var_02]["model"] = self getattachmodelname(var_02);
+  var_0["attach"][var_02]["tag"] = self getattachtagname(var_02);
   }
 
-  return var_0;
+  return var_00;
 }
 
-_id_ADA6(var_0) {
+load(var_00) {
   self detachall();
-  self._id_1ED5 = var_0["gunHand"];
-  self._id_1ED6 = var_0["gunInHand"];
+  self.anim_gunhand = var_0["gunHand"];
+  self.anim_guninhand = var_0["gunInHand"];
   self setmodel(var_0["model"]);
-  self._id_8C43 = var_0["hatModel"];
+  self.hatmodel = var_0["hatModel"];
 
   if (isdefined(var_0["name"]))
   self.name = var_0["name"];
   else
   {}
 
-  var_1 = var_0["attach"];
-  var_2 = var_1.size;
+  var_01 = var_0["attach"];
+  var_02 = var_1.size;
 
-  for (var_3 = 0; var_3 < var_2; var_3++)
-  self attach(var_1[var_3]["model"], var_1[var_3]["tag"]);
+  for (var_03 = 0; var_03 < var_02; var_3++)
+  self attach(var_1[var_03]["model"], var_1[var_03]["tag"]);
 }
 
-_id_0247(var_0) {
+precache(var_00) {
   if (isdefined(var_0["name"])) {} else {}
 
   precachemodel(var_0["model"]);
-  var_1 = var_0["attach"];
-  var_2 = var_1.size;
+  var_01 = var_0["attach"];
+  var_02 = var_1.size;
 
-  for (var_3 = 0; var_3 < var_2; var_3++)
-  precachemodel(var_1[var_3]["model"]);
+  for (var_03 = 0; var_03 < var_02; var_3++)
+  precachemodel(var_1[var_03]["model"]);
 }
 
-_id_7BE5(var_0, var_1, var_2) {
-  var_3 = undefined;
-  var_4 = strtok(self.classname, "_");
+get_random_character(var_00, var_01, var_02) {
+  var_03 = undefined;
+  var_04 = strtok(self.classname, "_");
 
-  if (!scripts\engine\utility::_id_9F64()) {
-  if (isdefined(self.pers["modelIndex"]) && self.pers["modelIndex"] < var_0)
+  if (!scripts\engine\utility::issp()) {
+  if (isdefined(self.pers["modelIndex"]) && self.pers["modelIndex"] < var_00)
   return self.pers["modelIndex"];
 
-  var_3 = randomint(var_0);
-  self.pers["modelIndex"] = var_3;
-  return var_3;
+  var_03 = randomint(var_00);
+  self.pers["modelIndex"] = var_03;
+  return var_03;
   }
   else if (var_4.size <= 2)
-  return randomint(var_0);
+  return randomint(var_00);
 
-  var_5 = "auto";
+  var_05 = "auto";
 
-  if (isdefined(self._id_ED2A))
-  var_3 = self._id_ED2A;
-  else if (isdefined(var_1))
-  var_3 = _id_7BF5(var_1);
+  if (isdefined(self.script_char_index))
+  var_03 = self.script_char_index;
+  else if (isdefined(var_01))
+  var_03 = get_randomly_weighted_character(var_01);
 
-  if (isdefined(self._id_ED29))
-  var_5 = "group_" + self._id_ED29;
+  if (isdefined(self.script_char_group))
+  var_05 = "group_" + self.script_char_group;
 
-  if (!isdefined(level._id_3CB1))
-  level._id_3CB1 = [];
+  if (!isdefined(level.character_index_cache))
+  level.character_index_cache = [];
 
-  if (!isdefined(level._id_3CB1[var_5]))
-  level._id_3CB1[var_5] = [];
+  if (!isdefined(level.character_index_cache[var_05]))
+  level.character_index_cache[var_05] = [];
 
-  if (!isdefined(var_3)) {
-  var_3 = _id_7A7C(var_2, var_5);
+  if (!isdefined(var_03)) {
+  var_03 = get_least_used_index(var_02, var_05);
 
-  if (!isdefined(var_3))
-  var_3 = randomint(var_2.size);
+  if (!isdefined(var_03))
+  var_03 = randomint(var_2.size);
   }
 
-  if (!isdefined(level._id_3CB1[var_5][var_2[var_3]]))
-  level._id_3CB1[var_5][var_2[var_3]] = 0;
+  if (!isdefined(level.character_index_cache[var_05][var_2[var_03]]))
+  level.character_index_cache[var_05][var_2[var_03]] = 0;
 
-  level._id_3CB1[var_5][var_2[var_3]]++;
-  return var_3;
+  level.character_index_cache[var_05][var_2[var_03]]++;
+  return var_03;
 }
 
-_id_7A7C(var_0, var_1) {
-  var_2 = [];
-  var_3 = 999999;
+get_least_used_index(var_00, var_01) {
+  var_02 = [];
+  var_03 = 999999;
   var_2[0] = 0;
 
-  for (var_4 = 0; var_4 < var_0.size; var_4++) {
-  if (!isdefined(level._id_3CB1[var_1][var_0[var_4]]))
-  level._id_3CB1[var_1][var_0[var_4]] = 0;
+  for (var_04 = 0; var_04 < var_0.size; var_4++) {
+  if (!isdefined(level.character_index_cache[var_01][var_0[var_04]]))
+  level.character_index_cache[var_01][var_0[var_04]] = 0;
 
-  var_5 = level._id_3CB1[var_1][var_0[var_4]];
+  var_05 = level.character_index_cache[var_01][var_0[var_04]];
 
-  if (var_5 > var_3)
+  if (var_05 > var_03)
   continue;
 
-  if (var_5 < var_3) {
-  var_2 = [];
-  var_3 = var_5;
+  if (var_05 < var_03) {
+  var_02 = [];
+  var_03 = var_05;
   }
 
-  var_2[var_2.size] = var_4;
+  var_2[var_2.size] = var_04;
   }
 
-  return _id_DC6B(var_2);
+  return random(var_02);
 }
 
-_id_984D(var_0, var_1, var_2) {
-  for (var_3 = 0; var_3 < var_2; var_3++)
-  level._id_3CB1[var_0][var_1][var_3] = 0;
+initialize_character_group(var_00, var_01, var_02) {
+  for (var_03 = 0; var_03 < var_02; var_3++)
+  level.character_index_cache[var_00][var_01][var_03] = 0;
 }
 
-_id_7BF3(var_0) {
-  return randomint(var_0);
+get_random_weapon(var_00) {
+  return randomint(var_00);
 }
 
-_id_DC6B(var_0) {
+random(var_00) {
   return var_0[randomint(var_0.size)];
 }
 
-_id_7BF5(var_0) {
-  var_1 = randomfloat(1);
+get_randomly_weighted_character(var_00) {
+  var_01 = randomfloat(1);
 
-  for (var_2 = 0; var_2 < var_0.size; var_2++) {
-  if (var_1 < var_0[var_2])
-  return var_2;
+  for (var_02 = 0; var_02 < var_0.size; var_2++) {
+  if (var_01 < var_0[var_02])
+  return var_02;
   }
 
   return 0;

@@ -80,7 +80,7 @@ func_95B5(param_00) {
 
 	for(;;) {
 		param_00 waittill("trigger",var_06);
-		if(function_02A6(var_06) && !var_06 scripts\cp\utility::is_valid_player()) {
+		if(isent(var_06) && !var_06 scripts\cp\utility::is_valid_player()) {
 			continue;
 		}
 
@@ -233,7 +233,7 @@ team_killdoor_think() {
 			var_03 = var_03.playerowner;
 		}
 
-		if(!function_02A6(var_03) || !var_03 scripts\cp\utility::is_valid_player()) {
+		if(!isent(var_03) || !var_03 scripts\cp\utility::is_valid_player()) {
 			continue;
 		}
 

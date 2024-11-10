@@ -4,42 +4,42 @@
 ***************************************/
 
 init() {
-  _id_DEB3();
+  func_DEB3();
 }
 
-endgame(var_0, var_1) {
-  if (_id_7668())
+endgame(var_00, var_01) {
+  if (gamealreadyended())
   return;
 
   setnojiptime(1);
   level thread kill_all_zombies();
-  _id_B37C();
-  level notify("game_ended", var_0);
-  _id_7384(1.0, "cg_fovScale", 1);
+  func_B37C();
+  level notify("game_ended", var_00);
+  func_7384(1.0, "cg_fovScale", 1);
 
-  if (var_1 == 4)
+  if (var_01 == 4)
   wait 4.9;
 
-  var_2 = 0;
+  var_02 = 0;
 
-  foreach (var_4 in level.players) {
-  var_4 stopolcalsound("zmb_laststand_music");
+  foreach (var_04 in level.players) {
+  var_04 stopolcalsound("zmb_laststand_music");
 
-  if (var_4 issplitscreenplayer()) {
-  if (var_4 isreloading())
-  var_4 playlocalsound("mus_zombies_gameover");
+  if (var_04 issplitscreenplayer()) {
+  if (var_04 isreloading())
+  var_04 playlocalsound("mus_zombies_gameover");
 
   continue;
   }
 
-  var_4 playlocalsound("mus_zombies_gameover");
+  var_04 playlocalsound("mus_zombies_gameover");
   }
 
   level.ingraceperiod = 0;
   setomnvar("allow_server_pause", 0);
   scripts\engine\utility::waitframe();
-  level._id_118DB = int((gettime() - level._id_10DFF) / 1000);
-  setomnvar("zm_time_survived", level._id_118DB);
+  level.time_survived = int((gettime() - level.starttime) / 1000);
+  setomnvar("zm_time_survived", level.time_survived);
   setomnvarforallclients("post_game_state", 1);
   setdvar("g_deadChat", 1);
   setdvar("ui_allow_teamchange", 0);
@@ -47,57 +47,57 @@ endgame(var_0, var_1) {
   setdvar("scr_gameended", 1);
   setgameendtime(0);
   setomnvar("zm_ui_timer", 0);
-  _id_0A4D::_id_4DAE();
+  scripts/cp/cp_challenge::deactivate_current_challenge();
 
-  foreach (var_4 in level.players)
-  _id_40A5(var_4);
+  foreach (var_04 in level.players)
+  func_40A5(var_04);
 
-  level._id_2AAD = 1;
+  level.func_2AAD = 1;
 
-  foreach (var_9 in level.agentarray) {
-  if (isdefined(var_9._id_9D25) && var_9._id_9D25) {
-  var_9._id_0180 = 1;
-  var_9 _id_0A77::_id_61CD();
+  foreach (var_09 in level.agentarray) {
+  if (isdefined(var_9.isactive) && var_9.isactive) {
+  var_9.ignoreall = 1;
+  var_09 scripts/cp/utility::enable_alien_scripted();
   }
   }
 
   setomnvarforallclients("post_game_state", 0);
-  var_11 = _id_FF5E(var_1);
+  var_11 = func_FF5E(var_01);
 
   if (isdefined(var_11)) {
-  if (isdefined(level._id_ADDF))
-  [[level._id_ADDF]](var_1);
+  if (isdefined(level.func_ADDF))
+  [[level.func_ADDF]](var_01);
 
-  _id_ADDE(var_11);
+  func_ADDE(var_11);
   return;
   } else {}
 
-  _id_0A54::_id_36FD(1);
+  scripts/cp/cp_gamescore::calculate_players_total_end_game_score(1);
 
-  if (isdefined(level._id_D7BB))
-  [[level._id_D7BB]]();
+  if (isdefined(level.func_D7BB))
+  [[level.func_D7BB]]();
 
-  if (!_id_0A77::_id_9B97()) {
-  foreach (var_4 in level.players)
-  var_4 setclientdvar("ui_opensummary", 1);
+  if (!scripts/cp/utility::is_codxp()) {
+  foreach (var_04 in level.players)
+  var_04 setclientdvar("ui_opensummary", 1);
   }
 
   setomnvarforallclients("post_game_state", 2);
-  _id_56DA(var_0, var_1);
+  func_56DA(var_00, var_01);
   setomnvarforallclients("post_game_state", 1);
-  var_14 = _id_0A55::_id_108DD;
+  var_14 = scripts/cp/cp_globallogic::spawnintermission;
 
-  if (isdefined(level._id_4C58))
-  var_14 = level._id_4C58;
+  if (isdefined(level.func_4C58))
+  var_14 = level.func_4C58;
 
-  if (!_id_0A77::_id_9B97()) {
-  foreach (var_4 in level.players)
-  var_4 thread [[var_14]](var_1);
+  if (!scripts/cp/utility::is_codxp()) {
+  foreach (var_04 in level.players)
+  var_04 thread [[var_14]](var_01);
   }
 
-  var_17 = _id_7978(var_1);
-  var_18 = _id_7B85();
-  _id_0A4B::endgame(var_17, var_18);
+  var_17 = func_7978(var_01);
+  var_18 = func_7B85();
+  scripts/cp/cp_analytics::endgame(var_17, var_18);
   setomnvarforallclients("post_game_state", 4);
   wait 11.0;
   setomnvarforallclients("post_game_state", 1);
@@ -107,12 +107,12 @@ endgame(var_0, var_1) {
 
 kill_all_zombies() {
   wait 1;
-  var_0 = _id_0A4A::_id_7DB0("axis");
+  var_00 = scripts/cp/cp_agent_utils::getaliveagentsofteam("axis");
 
-  foreach (var_2 in var_0) {
-  var_2._id_0180 = 1;
-  var_2._id_EF64 = 1;
-  var_2 _meth_8286(getclosestpointonnavmesh(var_2.origin));
+  foreach (var_02 in var_00) {
+  var_2.ignoreall = 1;
+  var_2.scripted_mode = 1;
+  var_02 ghostskulls_complete_status(getclosestpointonnavmesh(var_2.origin));
 
   if (!isdefined(var_2.agent_type))
   continue;
@@ -120,7 +120,7 @@ kill_all_zombies() {
   if (var_2.agent_type == "zombie_grey")
   continue;
 
-  if (scripts\engine\utility::_id_9CEE(var_2._id_6622))
+  if (scripts\engine\utility::is_true(var_2.entered_playspace))
   continue;
 
   switch (var_2.agent_type) {
@@ -130,222 +130,222 @@ kill_all_zombies() {
   case "zombie_brute":
   break;
   case "generic_zombie":
-  playfx(level._effect["head_loss"], var_2 gettagorigin("j_head"));
-  var_2 setscriptablepartstate("head", "detached", 1);
-  var_2 setscriptablepartstate("eyes", "eye_glow_off", 1);
+  playfx(level._effect["head_loss"], var_02 gettagorigin("j_head"));
+  var_02 setscriptablepartstate("head", "detached", 1);
+  var_02 setscriptablepartstate("eyes", "eye_glow_off", 1);
   break;
   }
 
-  var_2 _meth_80B0(var_2.health + 100, var_2.origin);
+  var_02 getrandomarmkillstreak(var_2.health + 100, var_2.origin);
   wait 0.25;
   }
 }
 
-_id_72BF() {
-  level thread endgame("axis", _id_7979("host_end"));
+func_72BF() {
+  level thread endgame("axis", func_7979("host_end"));
 }
 
-_id_B37C() {
+func_B37C() {
   game["state"] = "postgame";
-  level._id_7669 = 1;
+  level.gameended = 1;
 }
 
-_id_7668() {
-  return game["state"] == "postgame" || level._id_7669;
+gamealreadyended() {
+  return game["state"] == "postgame" || level.gameended;
 }
 
-_id_7384(var_0, var_1, var_2) {
-  if (!isdefined(var_0))
-  var_0 = 0;
+func_7384(var_00, var_01, var_02) {
+  if (!isdefined(var_00))
+  var_00 = 0;
 
-  foreach (var_4 in level.players) {
-  var_4 thread _id_7386(var_0);
-  var_4 thread _id_E760(4.0);
-  var_4 _id_736F();
-  var_4 setclientdvars("cg_everyoneHearsEveryone", 1, "cg_drawSpectatorMessages", 0);
+  foreach (var_04 in level.players) {
+  var_04 thread freezeplayerforroundend(var_00);
+  var_04 thread func_E760(4.0);
+  var_04 freegameplayhudelems();
+  var_04 setclientdvars("cg_everyoneHearsEveryone", 1, "cg_drawSpectatorMessages", 0);
 
-  if (isdefined(var_1) && isdefined(var_2))
-  var_4 setclientdvars(var_1, var_2);
+  if (isdefined(var_01) && isdefined(var_02))
+  var_04 setclientdvars(var_01, var_02);
   }
 
-  foreach (var_7 in level.agentarray)
-  var_7 _id_0A77::_id_7385(1);
+  foreach (var_07 in level.agentarray)
+  var_07 scripts/cp/utility::freezecontrolswrapper(1);
 }
 
-_id_7386(var_0) {
+freezeplayerforroundend(var_00) {
   self endon("disconnect");
-  _id_0A77::_id_41C5();
+  scripts/cp/utility::clearlowermessages();
 
-  if (!isdefined(var_0))
-  var_0 = 0.05;
+  if (!isdefined(var_00))
+  var_00 = 0.05;
 
-  wait(var_0);
-  _id_0A77::_id_7385(1);
+  wait(var_00);
+  scripts/cp/utility::freezecontrolswrapper(1);
 }
 
-_id_E760(var_0) {
+func_E760(var_00) {
   self setdepthoffield(0, 128, 512, 4000, 6, 1.8);
 }
 
-_id_7B85() {
-  var_0 = 0;
+func_7B85() {
+  var_00 = 0;
 
-  if (isdefined(level._id_10DFF))
-  var_0 = gettime() - level._id_10DFF;
+  if (isdefined(level.starttime))
+  var_00 = gettime() - level.starttime;
 
-  return var_0;
+  return var_00;
 }
 
-_id_736F() {
-  if (isdefined(self._id_CA52)) {
-  if (isdefined(self._id_CA52[0])) {
-  self._id_CA52[0] _id_0A77::_id_52DC();
-  self._id_CA53[0] _id_0A77::_id_52DC();
+freegameplayhudelems() {
+  if (isdefined(self.perkicon)) {
+  if (isdefined(self.perkicon[0])) {
+  self.perkicon[0] scripts/cp/utility::destroyelem();
+  self.perkname[0] scripts/cp/utility::destroyelem();
   }
 
-  if (isdefined(self._id_CA52[1])) {
-  self._id_CA52[1] _id_0A77::_id_52DC();
-  self._id_CA53[1] _id_0A77::_id_52DC();
+  if (isdefined(self.perkicon[1])) {
+  self.perkicon[1] scripts/cp/utility::destroyelem();
+  self.perkname[1] scripts/cp/utility::destroyelem();
   }
 
-  if (isdefined(self._id_CA52[2])) {
-  self._id_CA52[2] _id_0A77::_id_52DC();
-  self._id_CA53[2] _id_0A77::_id_52DC();
+  if (isdefined(self.perkicon[2])) {
+  self.perkicon[2] scripts/cp/utility::destroyelem();
+  self.perkname[2] scripts/cp/utility::destroyelem();
   }
   }
 
   self notify("perks_hidden");
-  self._id_B0DE _id_0A77::_id_52DC();
-  self._id_B0E7 _id_0A77::_id_52DC();
+  self.lowermessage scripts/cp/utility::destroyelem();
+  self.lowertimer scripts/cp/utility::destroyelem();
 
-  if (isdefined(self._id_DAAE))
-  self._id_DAAE _id_0A77::_id_52DC();
+  if (isdefined(self.proxbar))
+  self.proxbar scripts/cp/utility::destroyelem();
 
-  if (isdefined(self._id_DAAF))
-  self._id_DAAF _id_0A77::_id_52DC();
+  if (isdefined(self.proxbartext))
+  self.proxbartext scripts/cp/utility::destroyelem();
 }
 
-_id_40A5(var_0) {
-  var_0 notify("select_mode");
-  var_0 notify("reset_outcome");
-  var_0.pers["stats"] = var_0._id_10E53;
-  var_0 _id_0A77::_id_1C5C(1);
-  var_0 setclientomnvar("ui_intel_progress_current", -1);
-  var_0 setclientomnvar("ui_intel_progress_max", -1);
-  var_0 setclientomnvar("ui_intel_percent", -1);
-  var_0 setclientomnvar("ui_intel_target_player", -1);
-  var_0 setclientomnvar("ui_intel_prechallenge", 0);
-  var_0 setclientomnvar("ui_intel_timer", -1);
-  var_0 setclientomnvar("ui_intel_challenge_scalar", -1);
-  var_0 setclientomnvar("zombie_number_of_ticket", 0);
-  var_0 setrankedplayerdata("cp", "zombiePlayerLoadout", "tutorialOff", 1);
-  var_0 _id_0A77::_id_41C5();
+func_40A5(var_00) {
+  var_00 notify("select_mode");
+  var_00 notify("reset_outcome");
+  var_0.pers["stats"] = var_0.func_10E53;
+  var_00 scripts/cp/utility::allow_player_ignore_me(1);
+  var_00 setclientomnvar("ui_intel_progress_current", -1);
+  var_00 setclientomnvar("ui_intel_progress_max", -1);
+  var_00 setclientomnvar("ui_intel_percent", -1);
+  var_00 setclientomnvar("ui_intel_target_player", -1);
+  var_00 setclientomnvar("ui_intel_prechallenge", 0);
+  var_00 setclientomnvar("ui_intel_timer", -1);
+  var_00 setclientomnvar("ui_intel_challenge_scalar", -1);
+  var_00 setclientomnvar("zombie_number_of_ticket", 0);
+  var_00 setrankedplayerdata("cp", "zombiePlayerLoadout", "tutorialOff", 1);
+  var_00 scripts/cp/utility::clearlowermessages();
 
-  if (isdefined(var_0._id_C8A2))
-  var_0._id_C8A2 = [];
+  if (isdefined(var_0.pap))
+  var_0.pap = [];
 
-  if (isdefined(var_0._id_D7A0))
-  var_0._id_D7A0 = [];
+  if (isdefined(var_0.powerupicons))
+  var_0.powerupicons = [];
 
-  if (isdefined(var_0._id_456D))
-  var_0._id_456D = [];
+  if (isdefined(var_0.func_456D))
+  var_0.func_456D = [];
 
-  if (isdefined(var_0._id_D782))
-  var_0._id_D782 = [];
+  if (isdefined(var_0.powers))
+  var_0.powers = [];
 
-  var_0 _id_4172();
+  var_00 func_4172();
 }
 
-_id_FF5E(var_0) {
-  if ((var_0 == 1 || var_0 == 2) && getdvar("ui_mapname") == "cp_jackal_ass")
+func_FF5E(var_00) {
+  if ((var_00 == 1 || var_00 == 2) && getdvar("ui_mapname") == "cp_jackal_ass")
   return "cp_titan";
 
   return undefined;
 }
 
-_id_ADDE(var_0) {
-  _id_A5D7();
-  level scripts\engine\utility::_id_13736(15, "intermission_over");
-  setdvar("ui_mapname", var_0);
+func_ADDE(var_00) {
+  func_A5D7();
+  level scripts\engine\utility::waittill_any_timeout(15, "intermission_over");
+  setdvar("ui_mapname", var_00);
   setdvar("g_gametype", "aliens");
-  var_1 = "map " + var_0;
+  var_01 = "map " + var_00;
 }
 
-_id_E2AE() {
-  _id_A5D7();
+func_E2AE() {
+  func_A5D7();
   setomnvar("allow_server_pause", 1);
   setomnvarforallclients("post_game_state", 0);
 
-  for (var_0 = 3; var_0 > 0; var_0--) {
-  iprintlnbold("RESTARTING IN..." + var_0);
+  for (var_00 = 3; var_00 > 0; var_0--) {
+  iprintlnbold("RESTARTING IN..." + var_00);
   wait 1;
   }
 
   map_restart(1);
 }
 
-_id_A5D7() {
-  foreach (var_1 in level._id_3CB5)
-  var_1 _meth_80B0(100000, var_1.origin);
+func_A5D7() {
+  foreach (var_01 in level.characters)
+  var_01 getrandomarmkillstreak(100000, var_1.origin);
 
-  var_3 = _id_0A4A::_id_7D94("alien");
+  var_03 = scripts/cp/cp_agent_utils::getactiveagentsofspecies("alien");
 
-  foreach (var_5 in var_3)
-  var_5 suicide();
+  foreach (var_05 in var_03)
+  var_05 suicide();
 }
 
-_id_D40D(var_0) {
-  if (var_0 == 4) {
-  level._id_E40B = 0;
-  level._id_E40C = 0;
+func_D40D(var_00) {
+  if (var_00 == 4) {
+  level.func_E40B = 0;
+  level.func_E40C = 0;
 
-  foreach (var_2 in level.players)
-  var_2 thread _id_56C4();
+  foreach (var_02 in level.players)
+  var_02 thread func_56C4();
 
-  var_4 = level.players.size - level._id_E40B;
+  var_04 = level.players.size - level.func_E40B;
 
-  while (level._id_E40B < level.players.size) {
-  var_5 = var_4;
-  var_4 = level.players.size - level._id_E40B;
+  while (level.func_E40B < level.players.size) {
+  var_05 = var_04;
+  var_04 = level.players.size - level.func_E40B;
 
-  if (var_4 != var_5)
-  iprintlnbold("Waiting for " + var_4 + " player's to vote");
+  if (var_04 != var_05)
+  iprintlnbold("Waiting for " + var_04 + " player's to vote");
 
   wait 0.5;
   }
 
-  if (level._id_E40C == level.players.size)
+  if (level.func_E40C == level.players.size)
   return 1;
   }
 
   return 0;
 }
 
-_id_56C4() {
+func_56C4() {
   wait 3.0;
-  _id_0A5B::_id_4164(self);
+  scripts/cp/cp_laststand::clear_last_stand_timer(self);
   self setclientomnvar("retry_popup", 1);
-  self waittill("luinotifyserver", var_0);
-  level._id_E40B = level._id_E40B + 1;
+  self waittill("luinotifyserver", var_00);
+  level.func_E40B = level.func_E40B + 1;
 
-  if (var_0 == "retry_level")
-  level._id_E40C = level._id_E40C + 1;
+  if (var_00 == "retry_level")
+  level.func_E40C = level.func_E40C + 1;
 }
 
-_id_4172() {
-  if (isdefined(self._id_D782)) {
-  foreach (var_1 in getarraykeys(self._id_D782)) {
-  var_2 = self._id_D782[var_1]._id_3D23 * -1;
-  _id_0D15::_id_D71A(var_2);
+func_4172() {
+  if (isdefined(self.powers)) {
+  foreach (var_01 in getarraykeys(self.powers)) {
+  var_02 = self.powers[var_01].charges * -1;
+  scripts/cp/powers/coop_powers::power_adjustcharges(var_02);
   }
   }
 
-  _id_0D15::_id_13F00("secondary");
-  _id_0D15::_id_13F00("primary");
+  scripts/cp/powers/coop_powers::func_13F00("secondary");
+  scripts/cp/powers/coop_powers::func_13F00("primary");
 }
 
-_id_7978(var_0) {
-  switch (var_0) {
+func_7978(var_00) {
+  switch (var_00) {
   case 1:
   return "all_escape";
   case 2:
@@ -364,18 +364,18 @@ _id_7978(var_0) {
   }
 }
 
-_id_56C5() {
+func_56C5() {
   level endon("game_ended");
   self endon("disconnect");
 
   for (;;) {
-  self waittill("luinotifyserver", var_0);
+  self waittill("luinotifyserver", var_00);
 
-  if (var_0 == "close_menu") {
-  level._id_AE3F = level._id_AE3F + 1;
+  if (var_00 == "close_menu") {
+  level.func_AE3F = level.func_AE3F + 1;
   continue;
   } else {
-  switch (var_0) {
+  switch (var_00) {
   case "dpad_team_ammo_ap":
   case "dpad_team_ammo_in":
   case "dpad_team_ammo_stun":
@@ -486,110 +486,110 @@ _id_56C5() {
   }
 }
 
-_id_56DA(var_0, var_1) {
-  foreach (var_3 in level.players) {
-  if (isdefined(var_3._id_4530) || var_3.pers["team"] == "spectator")
+func_56DA(var_00, var_01) {
+  foreach (var_03 in level.players) {
+  if (isdefined(var_3.connectedpostgame) || var_3.pers["team"] == "spectator")
   continue;
 
-  var_3 thread _id_C752(var_0, var_1);
-  var_3 thread _id_0A77::_id_7385(1);
+  var_03 thread func_C752(var_00, var_01);
+  var_03 thread scripts/cp/utility::freezecontrolswrapper(1);
   }
 
-  level notify("game_win", var_0);
+  level notify("game_win", var_00);
 }
 
-_id_C752(var_0, var_1) {
+func_C752(var_00, var_01) {
   self endon("disconnect");
   self notify("reset_outcome");
   wait 0.5;
-  var_2 = self.pers["team"];
+  var_02 = self.pers["team"];
 
-  if (!isdefined(var_2) || var_2 != "allies" && var_2 != "axis")
-  var_2 = "allies";
+  if (!isdefined(var_02) || var_02 != "allies" && var_02 != "axis")
+  var_02 = "allies";
 
-  while (_id_0A57::_id_9DC6())
+  while (scripts/cp/cp_hud_message::isdoingsplash())
   wait 0.05;
 
   self endon("reset_outcome");
 
-  if (isdefined(self.pers["team"]) && var_0 == var_2)
-  var_3 = _id_7979("win");
+  if (isdefined(self.pers["team"]) && var_00 == var_02)
+  var_03 = func_7979("win");
   else
-  var_3 = _id_7979("fail");
+  var_03 = func_7979("fail");
 
-  self setclientomnvar("ui_round_end_title", var_3);
+  self setclientomnvar("ui_round_end_title", var_03);
 
-  if (isdefined(var_1))
-  self setclientomnvar("ui_round_end_reason", var_1);
+  if (isdefined(var_01))
+  self setclientomnvar("ui_round_end_reason", var_01);
 
   self setclientomnvar("zm_ui_show_eog_score", 1);
 }
 
-_id_DEB3() {
-  if (isdefined(level._id_62D2))
-  [[level._id_62D2]]();
+func_DEB3() {
+  if (isdefined(level.func_62D2))
+  [[level.func_62D2]]();
   else
-  _id_DEAC();
+  func_DEAC();
 }
 
-_id_DEAC() {
-  level._id_62D1 = [];
-  level._id_62D1["win"] = 1;
-  level._id_62D1["fail"] = 2;
-  level._id_62D1["all_escape"] = 1;
-  level._id_62D1["some_escape"] = 2;
-  level._id_62D1["fail_escape"] = 3;
-  level._id_62D1["kia"] = 4;
-  level._id_62D1["host_end"] = 5;
+func_DEAC() {
+  level.end_game_string_index = [];
+  level.end_game_string_index["win"] = 1;
+  level.end_game_string_index["fail"] = 2;
+  level.end_game_string_index["all_escape"] = 1;
+  level.end_game_string_index["some_escape"] = 2;
+  level.end_game_string_index["fail_escape"] = 3;
+  level.end_game_string_index["kia"] = 4;
+  level.end_game_string_index["host_end"] = 5;
 }
 
-_id_7979(var_0) {
-  return level._id_62D1[var_0];
+func_7979(var_00) {
+  return level.end_game_string_index[var_00];
 }
 
-_id_E761(var_0, var_1) {
-  var_2 = 0;
+func_E761(var_00, var_01) {
+  var_02 = 0;
 
-  while (!var_2) {
-  var_3 = level.players;
-  var_2 = 1;
+  while (!var_02) {
+  var_03 = level.players;
+  var_02 = 1;
 
-  foreach (var_5 in var_3) {
-  if (!isdefined(var_5._id_58DD))
+  foreach (var_05 in var_03) {
+  if (!isdefined(var_5.func_58DD))
   continue;
 
-  if (!var_5 _id_0A57::_id_9DC6())
+  if (!var_05 scripts/cp/cp_hud_message::isdoingsplash())
   continue;
 
-  var_2 = 0;
+  var_02 = 0;
   }
 
   wait 0.5;
   }
 
-  if (!var_1) {
-  wait(var_0);
+  if (!var_01) {
+  wait(var_00);
   level notify("round_end_finished");
   return;
   }
 
-  wait(var_0 / 2);
+  wait(var_00 / 2);
   level notify("give_match_bonus");
-  wait(var_0 / 2);
-  var_2 = 0;
+  wait(var_00 / 2);
+  var_02 = 0;
 
-  while (!var_2) {
-  var_3 = level.players;
-  var_2 = 1;
+  while (!var_02) {
+  var_03 = level.players;
+  var_02 = 1;
 
-  foreach (var_5 in var_3) {
-  if (!isdefined(var_5._id_58DD))
+  foreach (var_05 in var_03) {
+  if (!isdefined(var_5.func_58DD))
   continue;
 
-  if (!var_5 _id_0A57::_id_9DC6())
+  if (!var_05 scripts/cp/cp_hud_message::isdoingsplash())
   continue;
 
-  var_2 = 0;
+  var_02 = 0;
   }
 
   wait 0.5;

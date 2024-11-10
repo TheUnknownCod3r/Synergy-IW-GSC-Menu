@@ -168,7 +168,7 @@ func_53CA(param_00,param_01,param_02) {
 		var_0C = _meth_8162(param_01,param_02);
 	}
 
-	var_0D = function_02F8(var_09);
+	var_0D = getangleindices(var_09);
 	var_0E = self _meth_84AC();
 	var_0F = undefined;
 	var_10 = 0;

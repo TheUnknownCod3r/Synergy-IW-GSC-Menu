@@ -400,7 +400,7 @@ activate_perk_machine(param_00,param_01) {
 		}
 
 		if(param_00.perk_type == "perk_machine_revive") {
-			param_01.var_F1E7--;
+			param_01.self_revives_purchased--;
 		}
 
 		param_01 take_zombies_perk(param_00.perk_type);
@@ -446,7 +446,7 @@ activate_perk_machine_gesture_second(param_00,param_01) {
 		}
 
 		if(param_00.perk_type == "perk_machine_revive") {
-			param_01.var_F1E7--;
+			param_01.self_revives_purchased--;
 		}
 
 		param_01 take_zombies_perk(param_00.perk_type);
@@ -798,7 +798,7 @@ give_revive_perk() {
 	if((scripts\cp\utility::isplayingsolo() || level.only_one_player) && self.self_revives_purchased < self.max_self_revive_machine_use) {
 		scripts\cp\cp_laststand::set_last_stand_count(self,1);
 		thread manage_self_revive();
-		self.var_F1E7++;
+		self.self_revives_purchased++;
 		return;
 	}
 
@@ -1148,7 +1148,7 @@ give_rat_a_tat_perk() {
 			continue;
 		}
 
-		var_04 = function_00E3(var_03);
+		var_04 = getweaponattachments(var_03);
 		var_05 = scripts\cp\utility::getcurrentcamoname(var_03);
 		var_06 = scripts\cp\cp_weapon::return_weapon_name_with_like_attachments(var_03,"doubletap",var_04,1,var_05);
 		var_07 = func_9B58(var_06);
@@ -1237,7 +1237,7 @@ take_rat_a_tat_perk() {
 		}
 
 		self takeweapon(var_03);
-		var_09 = function_00E3(var_03);
+		var_09 = getweaponattachments(var_03);
 		var_0A = scripts\cp\utility::getcurrentcamoname(var_03);
 		if(scripts\engine\utility::array_contains(var_09,"doubletap")) {
 			var_09 = scripts\engine\utility::array_remove(var_09,"doubletap");
@@ -1535,7 +1535,7 @@ create_fire_patch(param_00) {
 	var_01.triggered = 0;
 	var_02 = 1;
 	var_03 = self getvelocity();
-	var_01.fx = function_01E1(level._effect["fire_cloud_1st"],param_00,self,var_03);
+	var_01.fx = spawnfxforclient(level._effect["fire_cloud_1st"],param_00,self,var_03);
 	triggerfx(var_01.fx);
 	playsoundatpos(var_01.origin,"perk_fwoosh_fire_trail");
 	var_01 thread burn_loop(self);
@@ -1550,7 +1550,7 @@ create_fire_patch_3rd(param_00,param_01) {
 	var_02.triggered = 0;
 	var_03 = 1;
 	var_04 = param_01 getvelocity();
-	var_02.fx = function_01E1(level._effect["fire_cloud_3rd"],param_00,self,var_04);
+	var_02.fx = spawnfxforclient(level._effect["fire_cloud_3rd"],param_00,self,var_04);
 	triggerfx(var_02.fx);
 	wait(var_03);
 	var_02.fx delete();

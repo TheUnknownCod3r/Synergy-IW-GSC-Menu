@@ -20,7 +20,7 @@ setsuit(param_00) {
 
 	param_00 scripts\sp\_utility::script_delay();
 	param_00 notify("start_vehiclepath");
-	if(function_00FD(param_00)) {
+	if(isaircraft(param_00)) {
 		if(isdefined(param_00.var_10A47)) {
 			param_00 [[param_00.var_10A47]](scripts\sp\_utility::func_7C9A(param_00.target));
 			return;
@@ -667,7 +667,7 @@ func_8DA3(param_00,param_01,param_02) {
 beginlocationselection(param_00) {
 	var_01 = undefined;
 	var_02 = self.var_380;
-	if(function_00FD(self)) {
+	if(isaircraft(self)) {
 		if(isdefined(self.target)) {
 			var_03 = getcsplineid(self.target);
 			if(isdefined(var_03)) {
@@ -769,7 +769,7 @@ func_12BC7(param_00) {
 		self notify("newpath");
 	}
 
-	var_01 = function_00B3(param_00.var_336,"target");
+	var_01 = getnode(param_00.var_336,"target");
 	if(isdefined(var_01) && self.var_E4FB.size) {
 		foreach(var_03 in self.var_E4FB) {
 			if(isai(var_03)) {

@@ -383,7 +383,7 @@ func_BB7F(param_00,param_01) {
 		var_0E = (0,0,var_03[2]) + var_07 * var_06 * var_0A + var_05;
 		var_0F = (var_03[0],var_03[1],0) + var_09 * var_08 * var_0A;
 		var_0B = var_0E + var_0F;
-		var_10 = function_0287(var_0C,var_0B,var_0D,self,0,"physicsquery_closest");
+		var_10 = physics_raycast(var_0C,var_0B,var_0D,self,0,"physicsquery_closest");
 		if(isdefined(var_10) && var_10.size > 0) {
 			var_0B = var_10[0]["position"];
 			var_02.var_437E = 1;
@@ -470,8 +470,8 @@ func_BB76() {
 				if(var_01) {
 					var_00 show();
 					var_01 = 0;
-					function_029A(scripts\engine\utility::getfx("mortarMount_target_fr"),var_00,"tag_origin",self.team);
-					function_029A(scripts\engine\utility::getfx("mortarMount_target_en"),var_00,"tag_origin",scripts\mp\_utility::getotherteam(self.team));
+					playfxontagforteam(scripts\engine\utility::getfx("mortarMount_target_fr"),var_00,"tag_origin",self.team);
+					playfxontagforteam(scripts\engine\utility::getfx("mortarMount_target_en"),var_00,"tag_origin",scripts\mp\_utility::getotherteam(self.team));
 				}
 
 				var_00.origin = var_02.var_D648[var_02.var_D648.size - 1];

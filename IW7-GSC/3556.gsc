@@ -137,7 +137,7 @@ func_4D8F(param_00) {
 	var_02 = (270,0,0);
 	var_03 = anglestoup(var_02);
 	var_04 = anglestoforward(var_02);
-	var_05 = function_01E1(level._effect[param_00],var_01,self,var_04,var_03);
+	var_05 = spawnfxforclient(level._effect[param_00],var_01,self,var_04,var_03);
 	triggerfx(var_05);
 	wait(0.05);
 	var_05 delete();

@@ -7,41 +7,41 @@ init() {
   level._effect["sentry_overheat_mp"] = loadfx("vfx/core/mp/killstreaks/vfx_sg_overheat_smoke");
   level._effect["sentry_explode_mp"] = loadfx("vfx/core/mp/killstreaks/vfx_ims_explosion");
   level._effect["sentry_smoke_mp"] = loadfx("vfx/core/mp/killstreaks/vfx_sg_damage_blacksmoke");
-  level._id_F26B = [];
-  level._id_F26B["crafted_autosentry"] = spawnstruct();
-  level._id_F26B["crafted_autosentry"].health = 999999;
-  level._id_F26B["crafted_autosentry"].maxhealth = 300;
-  level._id_F26B["crafted_autosentry"]._id_32C1 = 20;
-  level._id_F26B["crafted_autosentry"]._id_32C0 = 40;
-  level._id_F26B["crafted_autosentry"]._id_C9D3 = 0.15;
-  level._id_F26B["crafted_autosentry"]._id_C9D1 = 0.25;
-  level._id_F26B["crafted_autosentry"]._id_F269 = "sentry";
-  level._id_F26B["crafted_autosentry"]._id_F268 = "sentry_offline";
-  level._id_F26B["crafted_autosentry"]._id_11901 = 90.0;
-  level._id_F26B["crafted_autosentry"]._id_10A13 = 1.0;
-  level._id_F26B["crafted_autosentry"]._id_C7FB = 15.0;
-  level._id_F26B["crafted_autosentry"]._id_461D = 0.2;
-  level._id_F26B["crafted_autosentry"]._id_7645 = 0.3;
-  level._id_F26B["crafted_autosentry"]._id_039B = "alien_sentry_minigun_4_mp";
-  level._id_F26B["crafted_autosentry"]._id_B91A = "weapon_sentry_chaingun";
-  level._id_F26B["crafted_autosentry"]._id_B924 = "weapon_sentry_chaingun";
-  level._id_F26B["crafted_autosentry"]._id_B925 = "weapon_sentry_chaingun_obj_red";
-  level._id_F26B["crafted_autosentry"]._id_B91D = "weapon_sentry_chaingun_destroyed";
-  level._id_F26B["crafted_autosentry"]._id_017B = &"COOP_CRAFTABLES_PICKUP";
-  level._id_F26B["crafted_autosentry"]._id_016F = 1;
-  level._id_F26B["crafted_autosentry"]._id_13523 = "sentry_destroyed";
-  level._id_F26B["crafted_autosentry"]._id_9F43 = 0;
+  level.sentrysettings = [];
+  level.sentrysettings["crafted_autosentry"] = spawnstruct();
+  level.sentrysettings["crafted_autosentry"].health = 999999;
+  level.sentrysettings["crafted_autosentry"].maxhealth = 300;
+  level.sentrysettings["crafted_autosentry"].burstmin = 20;
+  level.sentrysettings["crafted_autosentry"].burstmax = 40;
+  level.sentrysettings["crafted_autosentry"].pausemin = 0.15;
+  level.sentrysettings["crafted_autosentry"].pausemax = 0.25;
+  level.sentrysettings["crafted_autosentry"].sentrymodeon = "sentry";
+  level.sentrysettings["crafted_autosentry"].sentrymodeoff = "sentry_offline";
+  level.sentrysettings["crafted_autosentry"].timeout = 90.0;
+  level.sentrysettings["crafted_autosentry"].spinuptime = 1.0;
+  level.sentrysettings["crafted_autosentry"].overheattime = 15.0;
+  level.sentrysettings["crafted_autosentry"].cooldowntime = 0.2;
+  level.sentrysettings["crafted_autosentry"].fxtime = 0.3;
+  level.sentrysettings["crafted_autosentry"].weaponinfo = "alien_sentry_minigun_4_mp";
+  level.sentrysettings["crafted_autosentry"].modelbase = "weapon_sentry_chaingun";
+  level.sentrysettings["crafted_autosentry"].modelplacement = "weapon_sentry_chaingun";
+  level.sentrysettings["crafted_autosentry"].modelplacementfailed = "weapon_sentry_chaingun_obj_red";
+  level.sentrysettings["crafted_autosentry"].modeldestroyed = "weapon_sentry_chaingun_destroyed";
+  level.sentrysettings["crafted_autosentry"].hintstring = &"COOP_CRAFTABLES_PICKUP";
+  level.sentrysettings["crafted_autosentry"].headicon = 1;
+  level.sentrysettings["crafted_autosentry"].vodestroyed = "sentry_destroyed";
+  level.sentrysettings["crafted_autosentry"].func_9F43 = 0;
 }
 
-_id_82BA(var_0, var_1) {
-  var_1 thread _id_13932();
-  var_1 notify("new_power", "crafted_autosentry");
-  var_1 setclientomnvar("zom_crafted_weapon", 1);
-  var_1 thread _id_0A77::_id_1308C(var_1, "iw7_pickup_zm");
-  _id_0A77::_id_F313("crafted_autosentry", ::_id_82BA, var_1);
+give_crafted_sentry(var_00, var_01) {
+  var_01 thread watch_dpad();
+  var_01 notify("new_power", "crafted_autosentry");
+  var_01 setclientomnvar("zom_crafted_weapon", 1);
+  var_01 thread scripts/cp/utility::usegrenadegesture(var_01, "iw7_pickup_zm");
+  scripts/cp/utility::set_crafted_inventory_item("crafted_autosentry", ::give_crafted_sentry, var_01);
 }
 
-_id_13932() {
+watch_dpad() {
   self endon("disconnect");
   self endon("death");
   self notify("craft_dpad_watcher");
@@ -51,116 +51,116 @@ _id_13932() {
   for (;;) {
   self waittill("pullout_sentry");
 
-  if (scripts\engine\utility::_id_9CEE(self._id_9D81))
+  if (scripts\engine\utility::is_true(self.iscarrying))
   continue;
 
-  if (scripts\engine\utility::_id_9CEE(self._id_AD2C))
+  if (scripts\engine\utility::is_true(self.linked_to_coaster))
   continue;
 
   if (isdefined(self.allow_carry) && self.allow_carry == 0)
   continue;
 
-  if (_id_0A77::_id_9D05())
+  if (scripts/cp/utility::is_valid_player())
   break;
   }
 
-  thread _id_83A3("crafted_autosentry");
+  thread givesentry("crafted_autosentry");
 }
 
-_id_83A3(var_0) {
+givesentry(var_00) {
   self endon("disconnect");
-  self._id_A904 = var_0;
-  _id_0A77::_id_41C4("msg_power_hint");
-  var_1 = _id_4A11(var_0, self);
-  self._id_A039 = var_0;
-  _id_0A77::_id_E077();
-  self._id_3AA5 = var_1;
-  var_2 = _id_F688(var_1, 1);
-  self._id_3AA5 = undefined;
-  thread _id_0A77::_id_1365D();
-  self._id_9D81 = 0;
+  self.last_sentry = var_00;
+  scripts/cp/utility::clearlowermessage("msg_power_hint");
+  var_01 = createsentryforplayer(var_00, self);
+  self.itemtype = var_00;
+  scripts/cp/utility::remove_player_perks();
+  self.carriedsentry = var_01;
+  var_02 = setcarryingsentry(var_01, 1);
+  self.carriedsentry = undefined;
+  thread scripts/cp/utility::wait_restore_player_perk();
+  self.iscarrying = 0;
 
-  if (isdefined(var_1))
+  if (isdefined(var_01))
   return 1;
   else
   return 0;
 }
 
-_id_F688(var_0, var_1) {
+setcarryingsentry(var_00, var_01) {
   self endon("disconnect");
-  var_0 _id_F255(self, var_1);
-  scripts\engine\utility::_id_1C71(0);
+  var_00 sentry_setcarried(self, var_01);
+  scripts\engine\utility::allow_weapon(0);
   self notifyonplayercommand("place_sentry", "+attack");
   self notifyonplayercommand("place_sentry", "+attack_akimbo_accessible");
   self notifyonplayercommand("cancel_sentry", "+actionslot 3");
 
-  if (!level._id_4542) {
+  if (!level.console) {
   self notifyonplayercommand("cancel_sentry", "+actionslot 5");
   self notifyonplayercommand("cancel_sentry", "+actionslot 6");
   self notifyonplayercommand("cancel_sentry", "+actionslot 7");
   }
 
   for (;;) {
-  var_2 = scripts\engine\utility::_id_13734("place_sentry", "cancel_sentry", "force_cancel_placement");
+  var_02 = scripts\engine\utility::waittill_any_return("place_sentry", "cancel_sentry", "force_cancel_placement");
 
-  if (!isdefined(var_0)) {
-  scripts\engine\utility::_id_1C71(1);
+  if (!isdefined(var_00)) {
+  scripts\engine\utility::allow_weapon(1);
   return 1;
   }
 
-  if (!isdefined(var_2))
-  var_2 = "force_cancel_placement";
+  if (!isdefined(var_02))
+  var_02 = "force_cancel_placement";
 
-  if (var_2 == "cancel_sentry" || var_2 == "force_cancel_placement") {
-  if (!var_1 && var_2 == "cancel_sentry")
+  if (var_02 == "cancel_sentry" || var_02 == "force_cancel_placement") {
+  if (!var_01 && var_02 == "cancel_sentry")
   continue;
 
-  scripts\engine\utility::_id_1C71(1);
-  var_0 _id_F253();
+  scripts\engine\utility::allow_weapon(1);
+  var_00 sentry_setcancelled();
 
-  if (var_2 != "force_cancel_placement")
-  thread _id_13932();
-  else if (var_1)
-  _id_0A77::_id_DFE0(self);
+  if (var_02 != "force_cancel_placement")
+  thread watch_dpad();
+  else if (var_01)
+  scripts/cp/utility::remove_crafted_item_from_inventory(self);
 
   return 0;
   }
 
-  if (!var_0._id_3872)
+  if (!var_0.canbeplaced)
   continue;
 
-  if (var_1)
-  _id_0A77::_id_DFE0(self);
+  if (var_01)
+  scripts/cp/utility::remove_crafted_item_from_inventory(self);
 
-  var_0 _id_F259();
-  scripts\engine\utility::_id_1C71(1);
+  var_00 sentry_setplaced();
+  scripts\engine\utility::allow_weapon(1);
   return 1;
   }
 }
 
-_id_4A11(var_0, var_1) {
-  var_2 = spawnturret("misc_turret", var_1.origin, level._id_F26B[var_0]._id_039B);
+createsentryforplayer(var_00, var_01) {
+  var_02 = spawnturret("misc_turret", var_1.origin, level.sentrysettings[var_00].weaponinfo);
   var_2.angles = var_1.angles;
   var_2.name = "crafted_autosentry";
-  var_2 _id_F246(var_0, var_1);
-  return var_2;
+  var_02 sentry_initsentry(var_00, var_01);
+  return var_02;
 }
 
-_id_F246(var_0, var_1) {
-  self._id_F26E = var_0;
-  self._id_3872 = 1;
-  self setmodel(level._id_F26B[self._id_F26E]._id_B91A);
-  self._id_10085 = 1;
+sentry_initsentry(var_00, var_01) {
+  self.sentrytype = var_00;
+  self.canbeplaced = 1;
+  self setmodel(level.sentrysettings[self.sentrytype].modelbase);
+  self.shouldsplash = 1;
   self setcandamage(1);
 
-  switch (var_0) {
+  switch (var_00) {
   case "crafted_autosentry":
   default:
   self maketurretinoperable();
-  self _meth_82FB(100);
-  self _meth_8330(100);
-  self _meth_82B6(90);
-  self _meth_8353(60);
+  self setleftarc(100);
+  self setrightarc(100);
+  self give_crafted_gascan(90);
+  self settoparc(60);
   self _meth_82C9(0.3, "pitch");
   self _meth_82C9(0.3, "yaw");
   self _meth_82C8(0.65);
@@ -168,257 +168,257 @@ _id_F246(var_0, var_1) {
   break;
   }
 
-  self _meth_835B(1);
-  _id_F257();
-  _id_F258(var_1);
-  thread _id_F242(var_1);
-  thread _id_0A77::_id_A030(undefined, level._id_F26B[self._id_F26E]._id_11901);
-  thread _id_F244();
-  thread _id_F239();
-  thread _id_F23A();
+  self setturretmodechangewait(1);
+  sentry_setinactive();
+  sentry_setowner(var_01);
+  thread sentry_handledeath(var_01);
+  thread scripts/cp/utility::item_timeout(undefined, level.sentrysettings[self.sentrytype].timeout);
+  thread sentry_handleuse();
+  thread sentry_attacktargets();
+  thread sentry_beepsounds();
 }
 
-_id_F242(var_0) {
+sentry_handledeath(var_00) {
   self waittill("death");
 
   if (!isdefined(self))
   return;
 
-  self setmodel(level._id_F26B[self._id_F26E]._id_B91D);
-  _id_F257();
+  self setmodel(level.sentrysettings[self.sentrytype].modeldestroyed);
+  sentry_setinactive();
   self setdefaultdroppitch(40);
 
-  if (isdefined(self._id_3A9D))
-  self _meth_8335(undefined);
+  if (isdefined(self.carriedby))
+  self setsentrycarrier(undefined);
 
-  self _meth_8336(undefined);
+  self setsentryowner(undefined);
   self playsound("sentry_explode");
 
   if (isdefined(self))
-  thread _id_F23F();
+  thread func_F23F();
 }
 
-_id_F23F() {
+func_F23F() {
   self notify("sentry_delete_turret");
   self endon("sentry_delete_turret");
 
-  if (isdefined(self._id_9B05)) {
-  playfxontag(scripts\engine\utility::_id_7ECB("sentry_explode_mp"), self, "tag_origin");
-  playfxontag(scripts\engine\utility::_id_7ECB("sentry_smoke_mp"), self, "tag_aim");
-  self._id_9B05 _id_0A77::_id_E2CC();
+  if (isdefined(self.inuseby)) {
+  playfxontag(scripts\engine\utility::getfx("sentry_explode_mp"), self, "tag_origin");
+  playfxontag(scripts\engine\utility::getfx("sentry_smoke_mp"), self, "tag_aim");
+  self.inuseby scripts/cp/utility::restore_player_perk();
   self notify("deleting");
-  self _meth_83D3(self._id_9B05);
+  self _meth_83D3(self.inuseby);
   wait 1.0;
   } else {
   wait 1.5;
-  playfxontag(scripts\engine\utility::_id_7ECB("sentry_explode_mp"), self, "tag_aim");
-  playfxontag(scripts\engine\utility::_id_7ECB("sentry_smoke_mp"), self, "tag_aim");
+  playfxontag(scripts\engine\utility::getfx("sentry_explode_mp"), self, "tag_aim");
+  playfxontag(scripts\engine\utility::getfx("sentry_smoke_mp"), self, "tag_aim");
   self playsound("sentry_explode_smoke");
   wait 0.1;
   self notify("deleting");
   }
 
-  if (isdefined(self._id_A63A))
-  self._id_A63A delete();
+  if (isdefined(self.killcament))
+  self.killcament delete();
 
   if (isdefined(self))
   self delete();
 }
 
-_id_F244() {
+sentry_handleuse() {
   self endon("death");
   level endon("game_ended");
 
   for (;;) {
-  self waittill("trigger", var_0);
+  self waittill("trigger", var_00);
 
-  if (!var_0 _id_0A77::_id_9D05())
+  if (!var_00 scripts/cp/utility::is_valid_player())
   continue;
 
-  if (scripts\engine\utility::_id_9CEE(var_0._id_9D81))
+  if (scripts\engine\utility::is_true(var_0.iscarrying))
   continue;
 
-  if (scripts\engine\utility::_id_9CEE(var_0.kung_fu_mode))
+  if (scripts\engine\utility::is_true(var_0.kung_fu_mode))
   continue;
 
-  var_0 _id_F688(self, 0);
+  var_00 setcarryingsentry(self, 0);
   }
 }
 
-_id_F258(var_0) {
-  var_0._id_4BAE = self;
-  self.owner = var_0;
-  self _meth_8336(self.owner);
+sentry_setowner(var_00) {
+  var_0.func_4BAE = self;
+  self.owner = var_00;
+  self setsentryowner(self.owner);
   self.team = self.owner.team;
-  self _meth_835E(self.team);
-  thread _id_0A77::_id_A021("sentry_handleOwner");
+  self setturretteam(self.team);
+  thread scripts/cp/utility::item_handleownerdisconnect("sentry_handleOwner");
 }
 
-_id_F259() {
-  self setmodel(level._id_F26B[self._id_F26E]._id_B91A);
+sentry_setplaced() {
+  self setmodel(level.sentrysettings[self.sentrytype].modelbase);
 
-  if (self _meth_813D() == "manual")
-  self _meth_830F(level._id_F26B[self._id_F26E]._id_F268);
+  if (self getspawnpoint_safeguard() == "manual")
+  self give_player_session_tokens(level.sentrysettings[self.sentrytype].sentrymodeoff);
 
-  self _meth_8335(undefined);
-  _id_F24A();
-  self._id_3A9D _meth_80F3();
-  self._id_3A9D = undefined;
+  self setsentrycarrier(undefined);
+  sentry_makesolid();
+  self.carriedby getrigindexfromarchetyperef();
+  self.carriedby = undefined;
 
   if (isdefined(self.owner)) {
-  self.owner._id_9D81 = 0;
+  self.owner.iscarrying = 0;
 
-  if (level._id_F26B[self._id_F26E]._id_9F43)
-  _id_0A77::_id_B268(self.owner.team);
+  if (level.sentrysettings[self.sentrytype].func_9F43)
+  scripts/cp/utility::make_entity_sentient_cp(self.owner.team);
 
   self.owner notify("new_sentry", self);
   }
 
-  _id_F252();
+  sentry_setactive();
   self playsound("sentry_gun_plant");
   self laseron();
   self notify("placed");
 }
 
-_id_F253() {
-  self._id_3A9D _meth_80F3();
+sentry_setcancelled() {
+  self.carriedby getrigindexfromarchetyperef();
 
   if (isdefined(self.owner))
-  self.owner._id_9D81 = 0;
+  self.owner.iscarrying = 0;
 
   self delete();
 }
 
-_id_F255(var_0, var_1) {
-  self setmodel(level._id_F26B[self._id_F26E]._id_B924);
-  self _meth_8335(var_0);
+sentry_setcarried(var_00, var_01) {
+  self setmodel(level.sentrysettings[self.sentrytype].modelplacement);
+  self setsentrycarrier(var_00);
   self setcandamage(0);
   self laseroff();
-  _id_F249();
-  self._id_3A9D = var_0;
-  var_0._id_9D81 = 1;
-  var_0 thread _id_12F16(self, var_1);
-  thread _id_0A77::_id_A025(var_0);
-  thread _id_0A77::_id_A026(var_0);
-  thread _id_0A77::_id_A027(var_0);
-  self _meth_80F7();
+  sentry_makenotsolid();
+  self.carriedby = var_00;
+  var_0.iscarrying = 1;
+  var_00 thread updatesentryplacement(self, var_01);
+  thread scripts/cp/utility::item_oncarrierdeath(var_00);
+  thread scripts/cp/utility::item_oncarrierdisconnect(var_00);
+  thread scripts/cp/utility::item_ongameended(var_00);
+  self freeentitysentient();
   self setdefaultdroppitch(-89.0);
-  _id_F257();
+  sentry_setinactive();
   self notify("carried");
 }
 
-_id_12F16(var_0, var_1) {
+updatesentryplacement(var_00, var_01) {
   self endon("death");
   self endon("disconnect");
   level endon("game_ended");
-  var_0 endon("placed");
-  var_0 endon("death");
-  var_0._id_3872 = 1;
-  var_2 = -1;
+  var_00 endon("placed");
+  var_00 endon("death");
+  var_0.canbeplaced = 1;
+  var_02 = -1;
 
   for (;;) {
-  var_0._id_3872 = _id_3834(var_0);
+  var_0.canbeplaced = func_3834(var_00);
 
-  if (var_0._id_3872 != var_2) {
-  if (var_0._id_3872) {
-  var_0 setmodel(level._id_F26B[var_0._id_F26E]._id_B924);
+  if (var_0.canbeplaced != var_02) {
+  if (var_0.canbeplaced) {
+  var_00 setmodel(level.sentrysettings[var_0.sentrytype].modelplacement);
 
-  if (!var_1)
-  self _meth_80F4(&"COOP_CRAFTABLES_PLACE");
+  if (!var_01)
+  self forceusehinton(&"COOP_CRAFTABLES_PLACE");
   else
-  self _meth_80F4(&"COOP_CRAFTABLES_PLACE_CANCELABLE");
+  self forceusehinton(&"COOP_CRAFTABLES_PLACE_CANCELABLE");
   } else {
-  var_0 setmodel(level._id_F26B[var_0._id_F26E]._id_B925);
-  self _meth_80F4(&"COOP_CRAFTABLES_CANNOT_PLACE");
+  var_00 setmodel(level.sentrysettings[var_0.sentrytype].modelplacementfailed);
+  self forceusehinton(&"COOP_CRAFTABLES_CANNOT_PLACE");
   }
   }
 
-  var_2 = var_0._id_3872;
+  var_02 = var_0.canbeplaced;
   wait 0.05;
   }
 }
 
-_id_3834(var_0) {
-  var_1 = self canplayerplacesentry();
+func_3834(var_00) {
+  var_01 = self canplayerplacesentry();
   var_0.origin = var_1["origin"];
   var_0.angles = var_1["angles"];
 
-  if (_id_0A77::_id_65F0(var_0))
+  if (scripts/cp/utility::ent_is_near_equipment(var_00))
   return 0;
 
   return self isonground() && var_1["result"] && abs(var_0.origin[2] - self.origin[2]) < 10;
 }
 
-_id_F252() {
-  self _meth_830F(level._id_F26B[self._id_F26E]._id_F269);
+sentry_setactive() {
+  self give_player_session_tokens(level.sentrysettings[self.sentrytype].sentrymodeon);
   self setcursorhint("HINT_NOICON");
-  self sethintstring(level._id_F26B[self._id_F26E]._id_017B);
+  self sethintstring(level.sentrysettings[self.sentrytype].hintstring);
   self makeusable();
-  self _meth_84A5(120);
-  self _meth_84A2(96);
+  self setusefov(120);
+  self setuserange(96);
 
-  foreach (var_1 in level.players) {
-  switch (self._id_F26E) {
+  foreach (var_01 in level.players) {
+  switch (self.sentrytype) {
   case "crafted_autosentry":
-  var_2 = self getentitynumber();
-  _id_1862(var_2, var_1);
+  var_02 = self getentitynumber();
+  func_1862(var_02, var_01);
   break;
   }
   }
 }
 
-_id_F257() {
-  self _meth_830F(level._id_F26B[self._id_F26E]._id_F268);
+sentry_setinactive() {
+  self give_player_session_tokens(level.sentrysettings[self.sentrytype].sentrymodeoff);
   self makeunusable();
-  var_0 = self getentitynumber();
-  _id_E11F(var_0);
+  var_00 = self getentitynumber();
+  func_E11F(var_00);
 }
 
-_id_F24A() {
-  self _meth_81F7();
+sentry_makesolid() {
+  self getvalidlocation();
 }
 
-_id_F249() {
-  self _meth_82C7(0);
+sentry_makenotsolid() {
+  self setcontents(0);
 }
 
-_id_1862(var_0, var_1) {
-  level._id_12A83 = scripts\engine\utility::_id_1756(level._id_12A83, self);
+func_1862(var_00, var_01) {
+  level.turrets = scripts\engine\utility::add_to_array(level.turrets, self);
 
-  if (level._id_12A83.size > 4) {
-  if (isdefined(level._id_12A83[0])) {
-  level._id_12A83[0] notify("death");
-  var_1 playlocalsound("ww_magicbox_laughter");
+  if (level.turrets.size > 4) {
+  if (isdefined(level.turrets[0])) {
+  level.turrets[0] notify("death");
+  var_01 playlocalsound("ww_magicbox_laughter");
   }
   }
 }
 
-_id_E11F(var_0) {
-  level._id_12A83 = scripts\engine\utility::array_remove(level._id_12A83, self);
+func_E11F(var_00) {
+  level.turrets = scripts\engine\utility::array_remove(level.turrets, self);
 }
 
-_id_F239() {
+sentry_attacktargets() {
   self endon("death");
   level endon("game_ended");
-  self._id_B941 = 0;
-  self._id_8CDE = 0;
-  self._id_C7F9 = 0;
-  thread _id_F245();
+  self.momentum = 0;
+  self.heatlevel = 0;
+  self.overheated = 0;
+  thread sentry_heatmonitor();
 
   for (;;) {
-  scripts\engine\utility::_id_13762("turretstatechange", "cooled");
+  scripts\engine\utility::waittill_either("turretstatechange", "cooled");
 
-  if (self _meth_81A0()) {
-  thread _id_F23B();
+  if (self getteamarray()) {
+  thread sentry_burstfirestart();
   continue;
   }
 
-  _id_F25B();
-  thread _id_F23C();
+  sentry_spindown();
+  thread sentry_burstfirestop();
   }
 }
 
-_id_F260() {
+sentry_targetlocksound() {
   self endon("death");
   self playsound("sentry_gun_target_lock_beep");
   wait 0.19;
@@ -427,125 +427,125 @@ _id_F260() {
   self playsound("sentry_gun_target_lock_beep");
 }
 
-_id_F25C() {
-  thread _id_F260();
+sentry_spinup() {
+  thread sentry_targetlocksound();
 
-  while (self._id_B941 < level._id_F26B[self._id_F26E]._id_10A13) {
-  self._id_B941 = self._id_B941 + 0.1;
+  while (self.momentum < level.sentrysettings[self.sentrytype].spinuptime) {
+  self.momentum = self.momentum + 0.1;
   wait 0.1;
   }
 }
 
-_id_F25B() {
-  self._id_B941 = 0;
+sentry_spindown() {
+  self.momentum = 0;
 }
 
-_id_F23B() {
+sentry_burstfirestart() {
   self endon("death");
   self endon("stop_shooting");
   level endon("game_ended");
-  _id_F25C();
-  var_0 = weaponfiretime(level._id_F26B[self._id_F26E]._id_039B);
-  var_1 = level._id_F26B[self._id_F26E]._id_32C1;
-  var_2 = level._id_F26B[self._id_F26E]._id_32C0;
-  var_3 = level._id_F26B[self._id_F26E]._id_C9D3;
-  var_4 = level._id_F26B[self._id_F26E]._id_C9D1;
+  sentry_spinup();
+  var_00 = weaponfiretime(level.sentrysettings[self.sentrytype].weaponinfo);
+  var_01 = level.sentrysettings[self.sentrytype].burstmin;
+  var_02 = level.sentrysettings[self.sentrytype].burstmax;
+  var_03 = level.sentrysettings[self.sentrytype].pausemin;
+  var_04 = level.sentrysettings[self.sentrytype].pausemax;
 
   for (;;) {
-  var_5 = randomintrange(var_1, var_2 + 1);
+  var_05 = randomintrange(var_01, var_02 + 1);
 
-  for (var_6 = 0; var_6 < var_5 && !self._id_C7F9; var_6++) {
+  for (var_06 = 0; var_06 < var_05 && !self.overheated; var_6++) {
   self shootturret();
   self notify("bullet_fired");
-  self._id_8CDE = self._id_8CDE + var_0;
-  wait(var_0);
+  self.heatlevel = self.heatlevel + var_00;
+  wait(var_00);
   }
 
-  wait(randomfloatrange(var_3, var_4));
+  wait(randomfloatrange(var_03, var_04));
   }
 }
 
-_id_F23C() {
+sentry_burstfirestop() {
   self notify("stop_shooting");
 }
 
-_id_12A31(var_0) {
+turret_shotmonitor(var_00) {
   self endon("death");
   self endon("disconnect");
   level endon("game_ended");
-  var_0 endon("death");
-  var_0 endon("player_dismount");
-  var_1 = weaponfiretime(level._id_F26B[var_0._id_F26E]._id_039B);
+  var_00 endon("death");
+  var_00 endon("player_dismount");
+  var_01 = weaponfiretime(level.sentrysettings[var_0.sentrytype].weaponinfo);
 
   for (;;) {
-  var_0 waittill("turret_fire");
-  var_0 _meth_8165() notify("turret_fire");
-  var_0._id_8CDE = var_0._id_8CDE + var_1;
-  var_0._id_4621 = var_1;
+  var_00 waittill("turret_fire");
+  var_00 _meth_8165() notify("turret_fire");
+  var_0.heatlevel = var_0.heatlevel + var_01;
+  var_0.cooldownwaittime = var_01;
   }
 }
 
-_id_F245() {
+sentry_heatmonitor() {
   self endon("death");
-  var_0 = weaponfiretime(level._id_F26B[self._id_F26E]._id_039B);
-  var_1 = 0;
-  var_2 = 0;
-  var_3 = level._id_F26B[self._id_F26E]._id_C7FB;
-  var_4 = level._id_F26B[self._id_F26E]._id_461D;
+  var_00 = weaponfiretime(level.sentrysettings[self.sentrytype].weaponinfo);
+  var_01 = 0;
+  var_02 = 0;
+  var_03 = level.sentrysettings[self.sentrytype].overheattime;
+  var_04 = level.sentrysettings[self.sentrytype].cooldowntime;
 
   for (;;) {
-  if (self._id_8CDE != var_1)
-  wait(var_0);
+  if (self.heatlevel != var_01)
+  wait(var_00);
   else
-  self._id_8CDE = max(0, self._id_8CDE - 0.05);
+  self.heatlevel = max(0, self.heatlevel - 0.05);
 
-  if (self._id_8CDE > var_3) {
-  self._id_C7F9 = 1;
-  thread _id_D497();
+  if (self.heatlevel > var_03) {
+  self.overheated = 1;
+  thread playheatfx();
 
-  switch (self._id_F26E) {
+  switch (self.sentrytype) {
   case "crafted_autosentry":
-  playfxontag(scripts\engine\utility::_id_7ECB("sentry_smoke_mp"), self, "tag_aim");
+  playfxontag(scripts\engine\utility::getfx("sentry_smoke_mp"), self, "tag_aim");
   break;
   default:
   break;
   }
 
-  while (self._id_8CDE) {
-  self._id_8CDE = max(0, self._id_8CDE - 0.1);
+  while (self.heatlevel) {
+  self.heatlevel = max(0, self.heatlevel - 0.1);
   wait 0.1;
   }
 
-  self._id_C7F9 = 0;
+  self.overheated = 0;
   self notify("not_overheated");
   }
 
-  var_1 = self._id_8CDE;
+  var_01 = self.heatlevel;
   wait 0.05;
   }
 }
 
-_id_12A00() {
+turret_heatmonitor() {
   self endon("death");
-  var_0 = level._id_F26B[self._id_F26E]._id_C7FB;
+  var_00 = level.sentrysettings[self.sentrytype].overheattime;
 
   for (;;) {
-  if (self._id_8CDE > var_0) {
-  self._id_C7F9 = 1;
-  thread _id_D497();
+  if (self.heatlevel > var_00) {
+  self.overheated = 1;
+  thread playheatfx();
 
-  switch (self._id_F26E) {
+  switch (self.sentrytype) {
   case "gl_turret":
-  playfxontag(scripts\engine\utility::_id_7ECB("sentry_smoke_mp"), self, "tag_aim");
+  playfxontag(scripts\engine\utility::getfx("sentry_smoke_mp"), self, "tag_aim");
   break;
   default:
   break;
   }
 
-  while (self._id_8CDE)
+  while (self.heatlevel)
   wait 0.1;
 
-  self._id_C7F9 = 0;
+  self.overheated = 0;
   self notify("not_overheated");
   }
 
@@ -553,22 +553,22 @@ _id_12A00() {
   }
 }
 
-_id_129D7() {
+turret_coolmonitor() {
   self endon("death");
 
   for (;;) {
-  if (self._id_8CDE > 0) {
-  if (self._id_4621 <= 0)
-  self._id_8CDE = max(0, self._id_8CDE - 0.05);
+  if (self.heatlevel > 0) {
+  if (self.cooldownwaittime <= 0)
+  self.heatlevel = max(0, self.heatlevel - 0.05);
   else
-  self._id_4621 = max(0, self._id_4621 - 0.05);
+  self.cooldownwaittime = max(0, self.cooldownwaittime - 0.05);
   }
 
   wait 0.05;
   }
 }
 
-_id_D497() {
+playheatfx() {
   self endon("death");
   self endon("not_overheated");
   level endon("game_ended");
@@ -576,30 +576,30 @@ _id_D497() {
   self endon("playing_heat_fx");
 
   for (;;) {
-  playfxontag(scripts\engine\utility::_id_7ECB("sentry_overheat_mp"), self, "tag_flash");
-  wait(level._id_F26B[self._id_F26E]._id_7645);
+  playfxontag(scripts\engine\utility::getfx("sentry_overheat_mp"), self, "tag_flash");
+  wait(level.sentrysettings[self.sentrytype].fxtime);
   }
 }
 
-_id_D51F() {
+playsmokefx() {
   self endon("death");
   self endon("not_overheated");
   level endon("game_ended");
 
   for (;;) {
-  playfxontag(scripts\engine\utility::_id_7ECB("sentry_smoke_mp"), self, "tag_aim");
+  playfxontag(scripts\engine\utility::getfx("sentry_smoke_mp"), self, "tag_aim");
   wait 0.4;
   }
 }
 
-_id_F23A() {
+sentry_beepsounds() {
   self endon("death");
   level endon("game_ended");
 
   for (;;) {
   wait 3.0;
 
-  if (!isdefined(self._id_3A9D))
+  if (!isdefined(self.carriedby))
   self playsound("sentry_gun_beep");
   }
 }

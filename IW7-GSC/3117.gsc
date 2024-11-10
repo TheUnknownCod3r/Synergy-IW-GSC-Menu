@@ -208,7 +208,7 @@ ghostattack(param_00) {
 	}
 
 	if(isdefined(param_00)) {
-		param_00.var_C1F5--;
+		param_00.num_of_ghosts_attacking_me--;
 	}
 
 	var_01 scripts/asm/asm_bb::bb_clearmeleerequest();

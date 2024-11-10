@@ -20,10 +20,10 @@ func_6B3D() {
 	switch(self.var_ED8B) {
 		case "traverse":
 			if(isdefined(self.target)) {
-				var_00 = function_00B4(self.target,"targetname");
+				var_00 = getnodearray(self.target,"targetname");
 				if(!var_00.size) {
 					if(isdefined(self.script_linkto)) {
-						var_00 = function_00B4(self.script_linkto,"script_linkname");
+						var_00 = getnodearray(self.script_linkto,"script_linkname");
 					}
 				}
 	
@@ -63,8 +63,8 @@ func_6B3D() {
 			self.var_1EEF.origin = self.origin;
 			self.var_1EEF.angles = self.angles;
 			var_08 = scripts\sp\_utility::func_7DC3(self.animation);
-			var_09 = function_00CE(self.origin,self.angles,var_08);
-			var_0A = function_00CD(self.origin,self.angles,var_08);
+			var_09 = getstartorigin(self.origin,self.angles,var_08);
+			var_0A = getstartangles(self.origin,self.angles,var_08);
 			self.origin = var_09;
 			self.angles = var_0A;
 			break;

@@ -523,7 +523,7 @@ func_F202(param_00) {
 		self.bt.instancedata[param_00].var_BFA1 = var_01 + 500;
 		self.bt.instancedata[param_00].var_BFB5 = var_01 + randomintrange(1000,4000);
 		var_04 = undefined;
-		var_05 = function_0072(self.team);
+		var_05 = getaiarray(self.team);
 		if(var_05.size > 0) {
 			var_05 = sortbydistance(var_05,self.origin);
 			var_06 = [];
@@ -597,7 +597,7 @@ func_F209(param_00) {
 				var_03 = "axis";
 			}
 
-			var_04 = function_0072(var_03);
+			var_04 = getaiarray(var_03);
 			if(var_03 == "allies") {
 				var_04[var_04.size] = level.player;
 			}
@@ -787,7 +787,7 @@ func_12F13(param_00) {
 			var_03 = "axis";
 		}
 
-		var_04 = function_0072(var_03);
+		var_04 = getaiarray(var_03);
 		if(var_03 == "allies") {
 			var_04[var_04.size] = level.player;
 		}
@@ -1220,8 +1220,8 @@ func_8C93() {
 	self.var_33F = 500;
 	self give_zombies_perk("team3");
 	self.objective_playermask_showto = 500;
-	function_01D1("allies","team3",-2000);
-	function_01D1("axis","team3",1000);
+	setthreatbias("allies","team3",-2000);
+	setthreatbias("axis","team3",1000);
 	self endon("death");
 	wait(2);
 	self.ignoreme = 0;

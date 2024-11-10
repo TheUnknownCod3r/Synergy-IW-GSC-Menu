@@ -4,17 +4,17 @@
 ***************************************/
 
 init() {
-  level thread _id_C56E();
+  level thread onplayerconnect();
 }
 
-_id_C56E() {
+onplayerconnect() {
   for (;;) {
-  level waittill("connected", var_0);
+  level waittill("connected", var_00);
 
-  if (!isai(var_0)) {
-  var_0._id_0240 = var_0 getrankedplayerdata(level._id_AEA6, "squadMembers", "patch");
-  var_0._id_0241 = var_0 getrankedplayerdata(level._id_AEA6, "squadMembers", "patchbacking");
-  var_0._id_023F = var_0 getrankedplayerdata(level._id_AEA6, "squadMembers", "background");
+  if (!isai(var_00)) {
+  var_0.playercardpatch = var_00 getrankedplayerdata(level.loadoutsgroup, "squadMembers", "patch");
+  var_0.playercardpatchbacking = var_00 getrankedplayerdata(level.loadoutsgroup, "squadMembers", "patchbacking");
+  var_0.playercardbackground = var_00 getrankedplayerdata(level.loadoutsgroup, "squadMembers", "background");
   }
   }
 }

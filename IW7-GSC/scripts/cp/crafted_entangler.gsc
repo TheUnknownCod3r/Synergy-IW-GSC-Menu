@@ -283,7 +283,7 @@ entangleitem(param_00,param_01,param_02) {
 	}
 
 	var_03 = gettagfrommodel(param_02);
-	var_04 = function_02DF(level._effect["entangler_beam"],param_00,"tag_flash",param_02,var_03);
+	var_04 = playfxontagsbetweenclients(level._effect["entangler_beam"],param_00,"tag_flash",param_02,var_03);
 	param_02.entangled = 1;
 	param_02.carriedby = param_00;
 	moveitemtowardsplayer(param_00,param_01,var_03);

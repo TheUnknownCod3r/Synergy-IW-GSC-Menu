@@ -60,12 +60,12 @@ shootblankorrpg(param_00,param_01,param_02) {
 		if(self.bulletsinclip > 0) {
 			if(var_08) {
 				if(randomint(3) == 0) {
-					self.var_3250--;
+					self.bulletsinclip--;
 				}
 			}
 			else
 			{
-				self.var_3250--;
+				self.bulletsinclip--;
 			}
 		}
 
@@ -109,12 +109,12 @@ func_FE5C(param_00,param_01,param_02,param_03) {
 		scripts\anim\utility_common::shootenemywrapper(var_0B);
 		if(var_0C) {
 			if(randomint(3) == 0) {
-				self.var_3250--;
+				self.bulletsinclip--;
 			}
 		}
 		else
 		{
-			self.var_3250--;
+			self.bulletsinclip--;
 		}
 
 		if(var_08) {

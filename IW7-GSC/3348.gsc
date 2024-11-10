@@ -224,7 +224,7 @@ func_6979() {
 func_13B14(param_00,param_01) {
 	param_00 scripts\engine\utility::waittill_any_timeout_1(param_01,"death");
 	if(isdefined(self.objid)) {
-		function_0154(self.objid);
+		objective_delete(self.objid);
 	}
 
 	if(isdefined(self.var_D682)) {

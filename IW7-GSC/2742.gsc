@@ -5,93 +5,93 @@
 
 init() {
   setdvar("match_running", 1);
-  level._id_10A56 = _func_114();
-  scripts\mp\utility\game::_id_F305();
+  level.splitscreen = _issplitscreen();
+  scripts\mp\utility\game::func_F305();
   level.onlinegame = getdvarint("onlinegame");
   level.rankedmatch = level.onlinegame && !getdvarint("xblive_privatematch") || getdvarint("force_ranking");
-  scripts\mp\utility\game::_id_F7F1();
+  scripts\mp\utility\game::func_F7F1();
   level.script = tolower(getdvar("mapname"));
   level.gametype = tolower(getdvar("g_gametype"));
-  level._id_115DA = ["axis", "allies"];
-  level._id_C74B["allies"] = "axis";
-  level._id_C74B["axis"] = "allies";
-  level._id_BDCC = 0;
+  level.teamnamelist = ["axis", "allies"];
+  level.otherteam["allies"] = "axis";
+  level.otherteam["axis"] = "allies";
+  level.multiteambased = 0;
   level.teambased = 0;
   level.objectivebased = 0;
-  level._id_6329 = 1;
+  level.func_6329 = 1;
   level.showingfinalkillcam = 0;
-  level._id_11946 = getdvarint("scr_tispawndelay");
+  level.tispawndelay = getdvarint("scr_tispawndelay");
 
-  if (!isdefined(level._id_12AC9))
+  if (!isdefined(level.func_12AC9))
   scripts\mp\tweakables::init();
 
-  level._id_8865 = "halftime";
-  level._id_AA1E = 0;
-  level._id_1391F = "none";
-  level._id_A9F1 = 0;
+  level.func_8865 = "halftime";
+  level.func_AA1E = 0;
+  level.waswinning = "none";
+  level.func_A9F1 = 0;
   level.placement["allies"] = [];
   level.placement["axis"] = [];
   level.placement["all"] = [];
-  level._id_D706 = 3.5;
-  level._id_D420 = [];
-  _id_DEEC();
+  level.func_D706 = 3.5;
+  level.func_D420 = [];
+  func_DEEC();
 
   if (scripts\mp\utility\game::matchmakinggame()) {
-  var_0 = " LB_MAP_" + getdvar("ui_mapname");
-  var_1 = "";
-  var_2 = "";
-  var_2 = "LB_GB_TOTALXP_AT LB_GB_TOTALXP_LT LB_GB_WINS_AT LB_GB_WINS_LT LB_GB_KILLS_AT LB_GB_KILLS_LT LB_GB_ACCURACY_AT LB_ACCOLADES";
-  var_1 = " LB_GM_" + level.gametype;
+  var_00 = " LB_MAP_" + getdvar("ui_mapname");
+  var_01 = "";
+  var_02 = "";
+  var_02 = "LB_GB_TOTALXP_AT LB_GB_TOTALXP_LT LB_GB_WINS_AT LB_GB_WINS_LT LB_GB_KILLS_AT LB_GB_KILLS_LT LB_GB_ACCURACY_AT LB_ACCOLADES";
+  var_01 = " LB_GM_" + level.gametype;
 
   if (getdvarint("g_hardcore"))
-  var_1 = var_1 + "_HC";
+  var_01 = var_01 + "_HC";
 
-  precacheleaderboards(var_2 + var_1 + var_0);
+  precacheleaderboards(var_02 + var_01 + var_00);
   }
 
-  level._id_115C6["allies"] = 0;
-  level._id_115C6["axis"] = 0;
-  level._id_115C6["spectator"] = 0;
-  level._id_1BE6["allies"] = 0;
-  level._id_1BE6["axis"] = 0;
-  level._id_1BE6["spectator"] = 0;
-  level._id_AD8D["allies"] = 0;
-  level._id_AD8D["axis"] = 0;
-  level._id_C50B = [];
-  level._id_8C2A["allies"] = 0;
-  level._id_8C2A["axis"] = 0;
-  var_3 = 9;
-  _id_9694(var_3);
+  level.teamcount["allies"] = 0;
+  level.teamcount["axis"] = 0;
+  level.teamcount["spectator"] = 0;
+  level.alivecount["allies"] = 0;
+  level.alivecount["axis"] = 0;
+  level.alivecount["spectator"] = 0;
+  level.livescount["allies"] = 0;
+  level.livescount["axis"] = 0;
+  level.func_C50B = [];
+  level.hasspawned["allies"] = 0;
+  level.hasspawned["axis"] = 0;
+  var_03 = 9;
+  func_9694(var_03);
 }
 
-_id_6360() {
+endmatchonhostdisconnect() {
   level endon("game_ended");
 
   for (;;) {
-  level waittill("connected", var_0);
+  level waittill("connected", var_00);
 
-  if (var_0 ishost()) {
-  var_1 = var_0;
+  if (var_00 ishost()) {
+  var_01 = var_00;
   break;
   }
   }
 
-  var_1 waittill("disconnect");
+  var_01 waittill("disconnect");
   thread scripts\mp\gamelogic::endgame("draw", game["end_reason"]["host_ended_game"]);
 }
 
-_id_9694(var_0) {
-  for (var_1 = 0; var_1 < var_0; var_1++) {
-  var_2 = "team_" + var_1;
-  level.placement[var_2] = [];
-  level._id_115C6[var_2] = 0;
-  level._id_1BE6[var_2] = 0;
-  level._id_AD8D[var_2] = 0;
-  level._id_8C2A[var_2] = 0;
+func_9694(var_00) {
+  for (var_01 = 0; var_01 < var_00; var_1++) {
+  var_02 = "team_" + var_01;
+  level.placement[var_02] = [];
+  level.teamcount[var_02] = 0;
+  level.alivecount[var_02] = 0;
+  level.livescount[var_02] = 0;
+  level.hasspawned[var_02] = 0;
   }
 }
 
-_id_DEEC() {
+func_DEEC() {
   setomnvar("ui_bomb_timer", 0);
 
   if (getdvar("r_reflectionProbeGenerate") != "1")
@@ -109,25 +109,25 @@ setupcallbacks() {
   scripts\mp\gametypes\common::setupcommoncallbacks();
   level.getspawnpoint = ::blank;
   level.onspawnplayer = scripts\mp\gametypes\common::onspawnplayer;
-  level._id_C583 = ::blank;
-  level.ontimelimit = scripts\mp\gamelogic::_id_500A;
-  level._id_C539 = scripts\mp\gamelogic::_id_5008;
-  level._id_C4E8 = scripts\mp\gamelogic::_id_5007;
-  level._id_C564 = scripts\mp\gamelogic::_id_5009;
+  level.onrespawndelay = ::blank;
+  level.ontimelimit = scripts\mp\gamelogic::default_ontimelimit;
+  level.func_C539 = scripts\mp\gamelogic::default_onhalftime;
+  level.ondeadevent = scripts\mp\gamelogic::func_5007;
+  level.ononeleftevent = scripts\mp\gamelogic::default_ononeleftevent;
   level.onprecachegametype = ::blank;
   level.onstartgametype = ::blank;
-  level._id_C577 = ::blank;
-  level._id_A6A2 = scripts\mp\killstreaks\killstreaks_init::init;
-  level._id_B3E7 = scripts\mp\matchevents::init;
-  level._id_9994 = scripts\mp\intel::init;
-  level._id_B3F8 = scripts\mp\matchrecording::init;
-  level._id_13CA6 = scripts\mp\utility\game::_id_13CA1;
-  level._id_97C2 = scripts\mp\agents\agent_utility::_id_97C2;
-  level._id_F635 = scripts\mp\agents\agent_utility::_id_F290;
-  level._id_190A = scripts\mp\utility\game::_validateattacker;
+  level.onplayerkilled = ::blank;
+  level.func_A6A2 = scripts\mp\killstreaks\killstreaks_init::init;
+  level.func_B3E7 = scripts\mp\matchevents::init;
+  level.func_9994 = scripts\mp\intel::init;
+  level.matchrecording_init = scripts\mp\matchrecording::init;
+  level.weaponmapfunc = scripts\mp\utility\game::func_13CA1;
+  level.initagentscriptvariables = scripts\mp\agents\agent_utility::initagentscriptvariables;
+  level.setagentteam = scripts\mp\agents\agent_utility::set_agent_team;
+  level.agentvalidateattacker = scripts\mp\utility\game::_validateattacker;
   level.agentfunc = scripts\mp\agents\agent_utility::agentfunc;
-  level._id_7EC5 = scripts\mp\agents\agent_utility::_id_7EC5;
-  level._id_184B = scripts\mp\spawnlogic::_id_184B;
+  level.getfreeagent = scripts\mp\agents\agent_utility::getfreeagent;
+  level.addtocharactersarray = scripts\mp\spawnlogic::addtocharactersarray;
 }
 
 setdefaultcallbacks() {
@@ -143,25 +143,25 @@ setdefaultcallbacks() {
   level.callbackfinishweaponchange = scripts\mp\weapons::callback_finishweaponchange;
 }
 
-blank(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {}
+blank(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08, var_09) {}
 
-_id_11757() {
+func_11757() {
   self endon("death");
   self endon("disconnect");
 
   for (;;) {
   wait 3.0;
-  var_0 = randomint(6);
+  var_00 = randomint(6);
 
-  for (var_1 = 0; var_1 < var_0; var_1++) {
-  iprintlnbold(var_0);
+  for (var_01 = 0; var_01 < var_00; var_1++) {
+  iprintlnbold(var_00);
   self shellshock("frag_grenade_mp", 0.2);
   wait 0.1;
   }
   }
 }
 
-_id_4F48(var_0, var_1) {
-  for (var_2 = 0; var_2 < 50; var_2++)
+debugline(var_00, var_01) {
+  for (var_02 = 0; var_02 < 50; var_2++)
   wait 0.05;
 }

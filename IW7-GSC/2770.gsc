@@ -3,40 +3,40 @@
  * Script: scripts\2770.gsc
 ***************************************/
 
-_id_B774() {
-  var_0 = getentarray("minefield", "targetname");
+minefields() {
+  var_00 = getentarray("minefield", "targetname");
 
   if (var_0.size > 0)
   level._effect["mine_explosion"] = loadfx("vfx/core/expl/weap/gre/vfx_exp_gre_dirt_cg");
 
-  for (var_1 = 0; var_1 < var_0.size; var_1++)
-  var_0[var_1] thread _id_B773();
+  for (var_01 = 0; var_01 < var_0.size; var_1++)
+  var_0[var_01] thread minefield_think();
 }
 
-_id_B773() {
+minefield_think() {
   for (;;) {
-  self waittill("trigger", var_0);
+  self waittill("trigger", var_00);
 
-  if (isplayer(var_0))
-  var_0 thread _id_B772(self);
+  if (isplayer(var_00))
+  var_00 thread minefield_kill(self);
   }
 }
 
-_id_B772(var_0) {
-  if (isdefined(self._id_B771))
+minefield_kill(var_00) {
+  if (isdefined(self.minefield))
   return;
 
-  self._id_B771 = 1;
+  self.minefield = 1;
   wait 0.5;
   wait(randomfloat(0.5));
 
-  if (isdefined(self) && self istouching(var_0)) {
-  var_1 = self _meth_814F();
-  var_2 = 300;
-  var_3 = 2000;
-  var_4 = 50;
-  radiusdamage(var_1, var_2, var_3, var_4);
+  if (isdefined(self) && self istouching(var_00)) {
+  var_01 = self getorigin();
+  var_02 = 300;
+  var_03 = 2000;
+  var_04 = 50;
+  radiusdamage(var_01, var_02, var_03, var_04);
   }
 
-  self._id_B771 = undefined;
+  self.minefield = undefined;
 }

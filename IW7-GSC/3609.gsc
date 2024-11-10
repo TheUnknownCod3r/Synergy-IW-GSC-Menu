@@ -355,7 +355,7 @@ func_1129F() {
 				continue;
 			}
 
-			var_07 = function_0287(var_03,var_05.origin,var_00,[self,var_05],0,"physicsquery_closest");
+			var_07 = physics_raycast(var_03,var_05.origin,var_00,[self,var_05],0,"physicsquery_closest");
 			if(isdefined(var_07) && var_07.size > 0) {
 				continue;
 			}
@@ -648,9 +648,9 @@ func_11288(param_00,param_01,param_02) {
 		return 0;
 	}
 
-	var_03 = function_0287(param_01,param_00.origin,param_02,[self,param_00],0,"physicsquery_closest");
+	var_03 = physics_raycast(param_01,param_00.origin,param_02,[self,param_00],0,"physicsquery_closest");
 	if(isdefined(var_03) && var_03.size > 0) {
-		var_03 = function_0287(param_01,param_00 geteye(),param_02,[self,param_00],0,"physicsquery_closest");
+		var_03 = physics_raycast(param_01,param_00 geteye(),param_02,[self,param_00],0,"physicsquery_closest");
 		if(isdefined(var_03) && var_03.size > 0) {
 			return 0;
 		}

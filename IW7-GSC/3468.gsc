@@ -3,167 +3,167 @@
  * Script: scripts\3468.gsc
 ***************************************/
 
-_id_3E6E() {
-  var_0 = spawnstruct();
-  var_0._id_2B9C = [];
-  var_0._id_2B9D = [];
-  var_0._id_2B97 = [];
-  var_0._id_2B9C[0] = "chilledInit";
-  var_0._id_2B9D[0] = "activeWeak";
-  var_0._id_2B97[0] = 2;
-  var_0._id_2B9C[1] = "chilledInit";
-  var_0._id_2B9D[1] = "active";
-  var_0._id_2B97[1] = 2;
-  level._id_3E6B = var_0;
+chill_init() {
+  var_00 = spawnstruct();
+  var_0.blindparts = [];
+  var_0.blindstates = [];
+  var_0.blinddurations = [];
+  var_0.blindparts[0] = "chilledInit";
+  var_0.blindstates[0] = "activeWeak";
+  var_0.blinddurations[0] = 2;
+  var_0.blindparts[1] = "chilledInit";
+  var_0.blindstates[1] = "active";
+  var_0.blinddurations[1] = 2;
+  level.chill_data = var_00;
 }
 
-_id_3E69(var_0, var_1) {
-  if (!isdefined(self._id_3E6B))
-  self._id_3E6B = spawnstruct();
+chill(var_00, var_01) {
+  if (!isdefined(self.chill_data))
+  self.chill_data = spawnstruct();
 
-  var_2 = self._id_3E6B;
-  thread _id_3E6A();
+  var_02 = self.chill_data;
+  thread chill_blind();
 
-  if (!isdefined(var_2._id_0019)) {
+  if (!isdefined(var_2.active)) {
   self notify("chill");
-  var_2._id_0019 = 1;
-  var_2._id_109AE = 0;
-  var_2._id_11921 = [];
-  var_1 = var_1 * 1000;
-  var_3 = gettime();
-  var_4 = var_3 + var_1;
-  var_2._id_11921[var_0] = (var_3, var_4, var_1);
-  _id_3E6C();
+  var_2.active = 1;
+  var_2.speedmod = 0;
+  var_2.times = [];
+  var_01 = var_01 * 1000;
+  var_03 = gettime();
+  var_04 = var_03 + var_01;
+  var_2.times[var_00] = (var_03, var_04, var_01);
+  chill_impair();
   self setscriptablepartstate("chilled", "active", 0);
-  thread _id_3E75();
+  thread chill_update();
   } else {
-  if (!isdefined(var_2._id_11921[var_0]))
-  var_2._id_0019++;
+  if (!isdefined(var_2.times[var_00]))
+  var_2.active++;
 
-  var_1 = var_1 * 1000;
-  var_3 = gettime();
-  var_4 = var_3 + var_1;
-  var_2._id_11921[var_0] = (var_3, var_4, var_1);
+  var_01 = var_01 * 1000;
+  var_03 = gettime();
+  var_04 = var_03 + var_01;
+  var_2.times[var_00] = (var_03, var_04, var_01);
   }
 }
 
-_id_3E76(var_0) {
-  var_1 = self._id_3E6B;
-  var_1._id_0019--;
-  var_1._id_11921[var_0] = undefined;
+chillend(var_00) {
+  var_01 = self.chill_data;
+  var_1.active--;
+  var_1.times[var_00] = undefined;
 
-  if (var_1._id_0019 == 0) {
+  if (var_1.active == 0) {
   self notify("chillEnd");
-  _id_3E6D();
+  chill_impairend();
   self setscriptablepartstate("chilled", "neutral", 0);
-  self._id_3E6B = undefined;
-  scripts\mp\weapons::_id_12ED5();
+  self.chill_data = undefined;
+  scripts\mp\weapons::updatemovespeedscale();
   }
 }
 
-_id_9D8A() {
-  var_0 = self._id_3E6B;
-  return isdefined(var_0) && isdefined(var_0._id_0019);
+ischilled() {
+  var_00 = self.chill_data;
+  return isdefined(var_00) && isdefined(var_0.active);
 }
 
-_id_3E70() {
+chill_resetdata() {
   self notify("chillReset");
-  self._id_3E6B = undefined;
+  self.chill_data = undefined;
 }
 
-_id_3E71() {
+chill_resetscriptable() {
   self setscriptablepartstate("chilled", "neutral", 0);
 
-  foreach (var_1 in level._id_3E6B._id_2B9C)
-  self setscriptablepartstate(var_1, "neutral", 0);
+  foreach (var_01 in level.chill_data.blindparts)
+  self setscriptablepartstate(var_01, "neutral", 0);
 }
 
-_id_3E6C() {
-  scripts\engine\utility::_id_1C67(0);
-  scripts\engine\utility::_id_1C64(0);
-  scripts\engine\utility::_id_1C70(0);
+chill_impair() {
+  scripts\engine\utility::allow_sprint(0);
+  scripts\engine\utility::allow_slide(0);
+  scripts\engine\utility::allow_wallrun(0);
 
   if (!level.tactical)
-  scripts\engine\utility::_id_1C42(0);
+  scripts\engine\utility::allow_doublejump(0);
 
-  scripts\engine\utility::_id_1C52(0);
+  scripts\engine\utility::allow_mantle(0);
 }
 
-_id_3E6D() {
-  scripts\engine\utility::_id_1C67(1);
-  scripts\engine\utility::_id_1C64(1);
-  scripts\engine\utility::_id_1C70(1);
+chill_impairend() {
+  scripts\engine\utility::allow_sprint(1);
+  scripts\engine\utility::allow_slide(1);
+  scripts\engine\utility::allow_wallrun(1);
 
   if (!level.tactical)
-  scripts\engine\utility::_id_1C42(1);
+  scripts\engine\utility::allow_doublejump(1);
 
-  scripts\engine\utility::_id_1C52(1);
+  scripts\engine\utility::allow_mantle(1);
 }
 
-_id_3E6A() {
+chill_blind() {
   self endon("death");
   self endon("disconnect");
-  var_0 = self._id_3E6B;
-  var_1 = level._id_3E6B;
-  var_2 = var_0._id_2B9B;
-  var_3 = scripts\engine\utility::ter_op(scripts\mp\utility\game::_id_12D6("specialty_stun_resistance"), 0, 1);
-  var_4 = var_1._id_2B9C[var_3];
-  var_5 = var_1._id_2B9D[var_3];
-  var_6 = var_1._id_2B97[var_3];
+  var_00 = self.chill_data;
+  var_01 = level.chill_data;
+  var_02 = var_0.func_2B9B;
+  var_03 = scripts\engine\utility::ter_op(scripts\mp\utility\game::_hasperk("specialty_stun_resistance"), 0, 1);
+  var_04 = var_1.blindparts[var_03];
+  var_05 = var_1.blindstates[var_03];
+  var_06 = var_1.blinddurations[var_03];
 
-  if (!isdefined(var_2)) {
-  self setscriptablepartstate(var_4, var_5, 0);
-  var_0._id_2B9B = var_3;
+  if (!isdefined(var_02)) {
+  self setscriptablepartstate(var_04, var_05, 0);
+  var_0.func_2B9B = var_03;
   } else {
-  if (var_2 > var_3)
+  if (var_02 > var_03)
   return;
 
-  var_7 = var_1._id_2B9C[var_2];
+  var_07 = var_1.blindparts[var_02];
 
-  if (var_7 != var_4)
-  self setscriptablepartstate(var_7, "neutral", 0);
+  if (var_07 != var_04)
+  self setscriptablepartstate(var_07, "neutral", 0);
 
-  self setscriptablepartstate(var_4, var_5, 0);
-  var_0._id_2B9B = var_3;
+  self setscriptablepartstate(var_04, var_05, 0);
+  var_0.func_2B9B = var_03;
   }
 
   self notify("chillBlind");
   self endon("chillBlind");
-  scripts\engine\utility::_id_13736(var_6, "chillEnd");
-  self setscriptablepartstate(var_4, "neutral", 0);
-  var_0._id_2B9B = undefined;
+  scripts\engine\utility::waittill_any_timeout(var_06, "chillEnd");
+  self setscriptablepartstate(var_04, "neutral", 0);
+  var_0.func_2B9B = undefined;
 }
 
-_id_3E75() {
+chill_update() {
   self endon("disconnect");
   self endon("chillReset");
   self endon("chillEnd");
-  var_0 = self._id_3E6B;
+  var_00 = self.chill_data;
 
   for (;;) {
-  var_1 = gettime();
-  var_2 = 0;
+  var_01 = gettime();
+  var_02 = 0;
 
-  foreach (var_10, var_4 in var_0._id_11921) {
-  var_5 = var_4[0];
-  var_6 = var_4[1];
-  var_7 = var_4[2];
+  foreach (var_10, var_04 in var_0.times) {
+  var_05 = var_4[0];
+  var_06 = var_4[1];
+  var_07 = var_4[2];
 
-  if (var_1 < var_6) {
-  var_8 = var_1 - var_5;
-  var_9 = 1 - var_8 / var_7;
+  if (var_01 < var_06) {
+  var_08 = var_01 - var_05;
+  var_09 = 1 - var_08 / var_07;
 
-  if (var_9 > var_2)
-  var_2 = var_9;
+  if (var_09 > var_02)
+  var_02 = var_09;
 
   continue;
   }
 
-  thread _id_3E76(var_10);
+  thread chillend(var_10);
   }
 
-  var_0._id_109AE = var_2 * -0.55;
-  scripts\mp\weapons::_id_12ED5();
+  var_0.speedmod = var_02 * -0.55;
+  scripts\mp\weapons::updatemovespeedscale();
   wait 0.1;
   }
 }

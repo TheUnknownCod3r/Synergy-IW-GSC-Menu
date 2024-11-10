@@ -110,11 +110,11 @@ showsplashinternal(param_00,param_01,param_02) {
 	}
 	else
 	{
-		self.var_DDCD++;
+		self.recentsplashcount++;
 	}
 
 	thread cleanuplocalplayersplashlist();
-	self.var_BFAE++;
+	self.nextsplashlistindex++;
 	if(self.nextsplashlistindex >= 6) {
 		self.nextsplashlistindex = 0;
 		self.splashlisttoggle = !self.splashlisttoggle;

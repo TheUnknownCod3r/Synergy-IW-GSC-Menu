@@ -3,11 +3,11 @@
  * Script: scripts\10.gsc
 ***************************************/
 
-_id_197F(var_0, var_1) {
-  self._id_2A80 = var_0;
-  scripts\aitypes\bt_util::_id_0077();
-  scripts\asm\asm_mp::_id_234D(var_1);
-  thread _id_19F7();
+func_197F(var_00, var_01) {
+  self.behaviortreeasset = var_00;
+  scripts\aitypes\bt_util::bt_init();
+  scripts\asm\asm_mp::func_234D(var_01);
+  thread func_19F7();
 }
 
 registernotetracks() {
@@ -17,216 +17,216 @@ registernotetracks() {
   anim.notetracks["footstep_left_small"] = ::notetrackfootstep;
 }
 
-notetrackfootstep(var_0, var_1) {
-  var_2 = issubstr(var_0, "left");
-  var_3 = issubstr(var_0, "large");
-  var_4 = "right";
+notetrackfootstep(var_00, var_01) {
+  var_02 = issubstr(var_00, "left");
+  var_03 = issubstr(var_00, "large");
+  var_04 = "right";
 
-  if (var_2)
-  var_4 = "left";
+  if (var_02)
+  var_04 = "left";
 
-  if (var_3)
+  if (var_03)
   self notify("large_footstep");
 
-  self._id_2303._id_7257._id_7254 = var_4;
-  self._id_2303._id_7257.time = gettime();
+  self.asm.footsteps.foot = var_04;
+  self.asm.footsteps.time = gettime();
 }
 
-_id_89A9(var_0, var_1, var_2) {
-  if (isdefined(anim.notetracks[var_0]))
-  return [[anim.notetracks[var_0]]](var_0, var_1);
+func_89A9(var_00, var_01, var_02) {
+  if (isdefined(anim.notetracks[var_00]))
+  return [[anim.notetracks[var_00]]](var_00, var_01);
 
   return undefined;
 }
 
-_id_0219(var_0, var_1) {
-  if (isdefined(self._id_C50F))
-  self [[self._id_C50F]](var_0, var_1);
+func_0219(var_00, var_01) {
+  if (isdefined(self.onenteranimstate))
+  self [[self.onenteranimstate]](var_00, var_01);
 }
 
-_id_0218() {
+func_0218() {
   self notify("killanimscript");
   self notify("terminate_ai_threads");
 }
 
-_id_19F7() {
+func_19F7() {
   self endon("terminate_ai_threads");
-  thread scripts\asm\asm_mp::_id_C878();
-  thread scripts\asm\asm_mp::_id_126E5();
+  thread scripts\asm\asm_mp::func_C878();
+  thread scripts\asm\asm_mp::traversehandler();
 
   for (;;) {
   if (!isdefined(self))
   break;
 
-  scripts\aitypes\bt_util::_id_0090();
-  scripts\asm\asm::_id_2314();
+  scripts\aitypes\bt_util::bt_tick();
+  scripts\asm\asm::func_2314();
 
-  if (isdefined(self._id_2303._id_10E23)) {
-  scripts\asm\asm::_id_2317(self._id_2303._id_10E23);
-  self._id_2303._id_10E23 = undefined;
+  if (isdefined(self.asm.func_10E23)) {
+  scripts\asm\asm::asm_clearevents(self.asm.func_10E23);
+  self.asm.func_10E23 = undefined;
   }
 
-  scripts\asm\asm::_id_2389();
+  scripts\asm\asm::func_2389();
   wait 0.05;
   }
 }
 
-_id_CED9(var_0, var_1, var_2, var_3) {
-  _id_CED5(var_0, 0, var_1, var_2, var_3);
+func_CED9(var_00, var_01, var_02, var_03) {
+  func_CED5(var_00, 0, var_01, var_02, var_03);
 }
 
-_id_CED5(var_0, var_1, var_2, var_3, var_4) {
-  self setanimstate(var_0, var_1);
+func_CED5(var_00, var_01, var_02, var_03, var_04) {
+  self setanimstate(var_00, var_01);
 
-  if (!isdefined(var_3))
-  var_3 = "end";
+  if (!isdefined(var_03))
+  var_03 = "end";
 
-  _id_1384C(var_2, var_3, var_0, var_1, var_4);
+  func_1384C(var_02, var_03, var_00, var_01, var_04);
 }
 
-_id_CED2(var_0, var_1, var_2, var_3, var_4, var_5) {
-  self setanimstate(var_0, var_1, var_2);
+func_CED2(var_00, var_01, var_02, var_03, var_04, var_05) {
+  self setanimstate(var_00, var_01, var_02);
 
-  if (!isdefined(var_4))
-  var_4 = "end";
+  if (!isdefined(var_04))
+  var_04 = "end";
 
-  _id_1384C(var_3, var_4, var_0, var_1, var_5);
+  func_1384C(var_03, var_04, var_00, var_01, var_05);
 }
 
-_id_1384A(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
-  var_7 = undefined;
+func_1384A(var_00, var_01, var_02, var_03, var_04, var_05, var_06) {
+  var_07 = undefined;
 
-  if (isdefined(var_5))
-  var_7 = (gettime() - var_6) * 0.001 / var_5;
+  if (isdefined(var_05))
+  var_07 = (gettime() - var_06) * 0.001 / var_05;
 
-  _id_89A9(var_0, var_2, var_4);
+  func_89A9(var_00, var_02, var_04);
 
-  if (isdefined(var_2) && isdefined(self._id_2303))
-  scripts\asm\asm_mp::_id_2345(var_0, var_2, var_3, var_7);
+  if (isdefined(var_02) && isdefined(self.asm))
+  scripts\asm\asm_mp::func_2345(var_00, var_02, var_03, var_07);
 
-  if (!isdefined(var_5) || var_7 > 0) {
-  if (var_0 == var_1 || var_0 == "end" || var_0 == "anim_will_finish" || var_0 == "finish")
+  if (!isdefined(var_05) || var_07 > 0) {
+  if (var_00 == var_01 || var_00 == "end" || var_00 == "anim_will_finish" || var_00 == "finish")
   return 1;
   }
 
-  if (isdefined(var_4))
-  [[var_4]](var_0, var_2, var_3, var_7);
+  if (isdefined(var_04))
+  [[var_04]](var_00, var_02, var_03, var_07);
 
   return 0;
 }
 
-_id_1384C(var_0, var_1, var_2, var_3, var_4) {
-  var_5 = gettime();
-  var_6 = undefined;
+func_1384C(var_00, var_01, var_02, var_03, var_04) {
+  var_05 = gettime();
+  var_06 = undefined;
 
-  if (isdefined(var_2) && isdefined(var_3))
-  var_6 = getanimlength(self getanimentry(var_2, var_3));
+  if (isdefined(var_02) && isdefined(var_03))
+  var_06 = getanimlength(self getanimentry(var_02, var_03));
 
-  var_7 = 0;
+  var_07 = 0;
 
-  while (!var_7) {
-  self waittill(var_0, var_8);
+  while (!var_07) {
+  self waittill(var_00, var_08);
 
-  if (isarray(var_8)) {
-  foreach (var_10 in var_8) {
-  if (_id_1384A(var_10, var_1, var_2, var_3, var_4, var_6, var_5))
-  var_7 = 1;
+  if (isarray(var_08)) {
+  foreach (var_10 in var_08) {
+  if (func_1384A(var_10, var_01, var_02, var_03, var_04, var_06, var_05))
+  var_07 = 1;
   }
 
   continue;
   }
 
-  var_7 = _id_1384A(var_8, var_1, var_2, var_3, var_4, var_6, var_5);
+  var_07 = func_1384A(var_08, var_01, var_02, var_03, var_04, var_06, var_05);
   }
 }
 
-_id_CED0(var_0, var_1) {
-  _id_CED4(var_0, 0, var_1);
+func_CED0(var_00, var_01) {
+  func_CED4(var_00, 0, var_01);
 }
 
-_id_CED4(var_0, var_1, var_2) {
-  self setanimstate(var_0, var_1);
-  wait(var_2);
+func_CED4(var_00, var_01, var_02) {
+  self setanimstate(var_00, var_01);
+  wait(var_02);
 }
 
-playanimnwithnotetracksfortime(var_0, var_1, var_2, var_3, var_4) {
-  self setanimstate(var_0, var_1);
-  thread playanimnwithnotetracksfortime_helper(var_0, var_1, var_2, var_4);
-  wait(var_3);
-  self notify(var_0 + var_1);
+playanimnwithnotetracksfortime(var_00, var_01, var_02, var_03, var_04) {
+  self setanimstate(var_00, var_01);
+  thread playanimnwithnotetracksfortime_helper(var_00, var_01, var_02, var_04);
+  wait(var_03);
+  self notify(var_00 + var_01);
 }
 
-playanimnwithnotetracksfortime_helper(var_0, var_1, var_2, var_3) {
-  self notify(var_0 + var_1);
-  self endon(var_0 + var_1);
-  var_4 = 0;
-  var_5 = self getanimentry(var_0, var_1);
-  var_6 = getanimlength(var_5);
-  var_7 = gettime();
+playanimnwithnotetracksfortime_helper(var_00, var_01, var_02, var_03) {
+  self notify(var_00 + var_01);
+  self endon(var_00 + var_01);
+  var_04 = 0;
+  var_05 = self getanimentry(var_00, var_01);
+  var_06 = getanimlength(var_05);
+  var_07 = gettime();
 
-  while (!var_4) {
-  self waittill(var_2, var_8);
+  while (!var_04) {
+  self waittill(var_02, var_08);
 
-  if (!isarray(var_8))
-  var_8 = [var_8];
+  if (!isarray(var_08))
+  var_08 = [var_08];
 
-  foreach (var_10 in var_8) {
-  if (_id_1384A(var_10, "end", var_0, var_1, var_3, var_6, var_7))
-  var_4 = 1;
+  foreach (var_10 in var_08) {
+  if (func_1384A(var_10, "end", var_00, var_01, var_03, var_06, var_07))
+  var_04 = 1;
   }
   }
 }
 
-_id_CED1(var_0, var_1, var_2, var_3) {
-  self setanimstate(var_0, var_1, var_2);
-  wait(var_3);
+func_CED1(var_00, var_01, var_02, var_03) {
+  self setanimstate(var_00, var_01, var_02);
+  wait(var_03);
 }
 
-_id_7DC9(var_0, var_1, var_2) {
-  var_3 = length2d(var_0);
-  var_4 = var_0[2];
-  var_5 = length2d(var_1);
-  var_6 = var_1[2];
-  var_7 = 1;
-  var_8 = 1;
+func_7DC9(var_00, var_01, var_02) {
+  var_03 = length2d(var_00);
+  var_04 = var_0[2];
+  var_05 = length2d(var_01);
+  var_06 = var_1[2];
+  var_07 = 1;
+  var_08 = 1;
 
-  if (isdefined(var_2) && var_2) {
-  var_9 = (var_1[0], var_1[1], 0);
-  var_10 = vectornormalize(var_9);
+  if (isdefined(var_02) && var_02) {
+  var_09 = (var_1[0], var_1[1], 0);
+  var_10 = vectornormalize(var_09);
 
-  if (vectordot(var_10, var_0) < 0)
-  var_7 = 0;
-  else if (var_5 > 0)
-  var_7 = var_3 / var_5;
+  if (vectordot(var_10, var_00) < 0)
+  var_07 = 0;
+  else if (var_05 > 0)
+  var_07 = var_03 / var_05;
   }
-  else if (var_5 > 0)
-  var_7 = var_3 / var_5;
+  else if (var_05 > 0)
+  var_07 = var_03 / var_05;
 
-  if (abs(var_6) > 0.001 && var_6 * var_4 >= 0)
-  var_8 = var_4 / var_6;
+  if (abs(var_06) > 0.001 && var_06 * var_04 >= 0)
+  var_08 = var_04 / var_06;
 
   var_11 = spawnstruct();
-  var_11._id_13E2B = var_7;
-  var_11.z = var_8;
+  var_11.func_13E2B = var_07;
+  var_11.z = var_08;
   return var_11;
 }
 
-_id_5D51(var_0, var_1) {
-  var_2 = 15;
-  var_3 = 45;
+func_5D51(var_00, var_01) {
+  var_02 = 15;
+  var_03 = 45;
 
   if (isdefined(self.radius))
-  var_2 = self.radius;
+  var_02 = self.radius;
 
   if (isdefined(self.height))
-  var_3 = self.height;
+  var_03 = self.height;
 
-  if (!isdefined(var_1))
-  var_1 = 18;
+  if (!isdefined(var_01))
+  var_01 = 18;
 
-  var_4 = var_0 + (0, 0, var_1);
-  var_5 = var_0 + (0, 0, var_1 * -1);
-  var_6 = self aiphysicstrace(var_4, var_5, self.radius, self.height, 1);
+  var_04 = var_00 + (0, 0, var_01);
+  var_05 = var_00 + (0, 0, var_01 * -1);
+  var_06 = self aiphysicstrace(var_04, var_05, self.radius, self.height, 1);
 
   if (abs(var_6[2] - var_4[2]) < 0.1)
   return undefined;
@@ -234,185 +234,185 @@ _id_5D51(var_0, var_1) {
   if (abs(var_6[2] - var_5[2]) < 0.1)
   return undefined;
 
-  return var_6;
+  return var_06;
 }
 
-_id_38D0(var_0, var_1, var_2, var_3) {
-  if (!isdefined(var_2))
-  var_2 = 6;
+func_38D0(var_00, var_01, var_02, var_03) {
+  if (!isdefined(var_02))
+  var_02 = 6;
 
-  if (!isdefined(var_3))
-  var_3 = self.radius;
+  if (!isdefined(var_03))
+  var_03 = self.radius;
 
-  var_4 = (0, 0, 1) * var_2;
-  var_5 = var_0 + var_4;
-  var_6 = var_1 + var_4;
-  return self aiphysicstracepassed(var_5, var_6, var_3, self.height - var_2, 1);
+  var_04 = (0, 0, 1) * var_02;
+  var_05 = var_00 + var_04;
+  var_06 = var_01 + var_04;
+  return self aiphysicstracepassed(var_05, var_06, var_03, self.height - var_02, 1);
 }
 
-_id_81F9(var_0, var_1, var_2) {
-  if (!isdefined(var_2))
-  var_2 = 6;
+getvalidplayersinteam(var_00, var_01, var_02) {
+  if (!isdefined(var_02))
+  var_02 = 6;
 
-  var_3 = (0, 0, 1) * var_2;
-  var_4 = var_0 + var_3;
-  var_5 = var_1 + var_3;
-  return self aiphysicstrace(var_4, var_5, self.radius + 4, self.height - var_2, 1);
+  var_03 = (0, 0, 1) * var_02;
+  var_04 = var_00 + var_03;
+  var_05 = var_01 + var_03;
+  return self aiphysicstrace(var_04, var_05, self.radius + 4, self.height - var_02, 1);
 }
 
-_id_80FE(var_0) {
-  var_1 = getmovedelta(var_0);
-  var_2 = self localtoworldcoords(var_1);
-  var_3 = _id_81F9(self.origin, var_2);
-  var_4 = distance(self.origin, var_3);
-  var_5 = distance(self.origin, var_2);
-  return min(1.0, var_4 / var_5);
+getsafecircleradius(var_00) {
+  var_01 = getmovedelta(var_00);
+  var_02 = self localtoworldcoords(var_01);
+  var_03 = getvalidplayersinteam(self.origin, var_02);
+  var_04 = distance(self.origin, var_03);
+  var_05 = distance(self.origin, var_02);
+  return min(1.0, var_04 / var_05);
 }
 
-_id_EA25(var_0, var_1, var_2, var_3) {
-  var_4 = _id_80AE(var_0);
-  _id_EA24(var_0, var_4, var_1, var_2, var_3);
+func_EA25(var_00, var_01, var_02, var_03) {
+  var_04 = getrandomanimentry(var_00);
+  func_EA24(var_00, var_04, var_01, var_02, var_03);
 }
 
-_id_EA22(var_0, var_1, var_2, var_3, var_4) {
-  var_5 = _id_80AE(var_0);
-  _id_EA23(var_0, var_5, var_1, var_2, var_3, var_4);
+func_EA22(var_00, var_01, var_02, var_03, var_04) {
+  var_05 = getrandomanimentry(var_00);
+  func_EA23(var_00, var_05, var_01, var_02, var_03, var_04);
 }
 
-_id_EA23(var_0, var_1, var_2, var_3, var_4, var_5) {
-  self setanimstate(var_0, var_1, var_2);
-  _id_EA24(var_0, var_1, var_3, var_4, var_5);
+func_EA23(var_00, var_01, var_02, var_03, var_04, var_05) {
+  self setanimstate(var_00, var_01, var_02);
+  func_EA24(var_00, var_01, var_03, var_04, var_05);
 }
 
-_id_EA24(var_0, var_1, var_2, var_3, var_4) {
-  var_5 = self getanimentry(var_0, var_1);
-  var_6 = _id_80FE(var_5);
-  self scragentsetanimscale(var_6, 1.0);
-  _id_CED5(var_0, var_1, var_2, var_3, var_4);
+func_EA24(var_00, var_01, var_02, var_03, var_04) {
+  var_05 = self getanimentry(var_00, var_01);
+  var_06 = getsafecircleradius(var_05);
+  self scragentsetanimscale(var_06, 1.0);
+  func_CED5(var_00, var_01, var_02, var_03, var_04);
   self scragentsetanimscale(1.0, 1.0);
 }
 
-_id_80AE(var_0) {
-  var_1 = self getanimentrycount(var_0);
-  return randomint(var_1);
+getrandomanimentry(var_00) {
+  var_01 = self getanimentrycount(var_00);
+  return randomint(var_01);
 }
 
-_id_7DBD(var_0) {
-  var_1 = vectortoangles(var_0);
-  var_2 = angleclamp180(var_1[1] - self.angles[1]);
-  return getangleindex(var_2);
+func_7DBD(var_00) {
+  var_01 = vectortoangles(var_00);
+  var_02 = angleclamp180(var_1[1] - self.angles[1]);
+  return getangleindex(var_02);
 }
 
-_id_F2B1(var_0, var_1, var_2) {
-  if (isdefined(var_2))
-  self setanimstate(var_0, var_1, var_2);
-  else if (isdefined(var_1))
-  self setanimstate(var_0, var_1);
+func_F2B1(var_00, var_01, var_02) {
+  if (isdefined(var_02))
+  self setanimstate(var_00, var_01, var_02);
+  else if (isdefined(var_01))
+  self setanimstate(var_00, var_01);
   else
-  self setanimstate(var_0);
+  self setanimstate(var_00);
 }
 
-_id_9F77() {
-  if (!isdefined(self._id_02C6))
+isstatelocked() {
+  if (!isdefined(self.statelocked))
   return 0;
 
-  return self._id_02C6;
+  return self.statelocked;
 }
 
-_id_F85E(var_0, var_1) {
-  self._id_02C6 = var_0;
+setstatelocked(var_00, var_01) {
+  self.statelocked = var_00;
 }
 
-_id_CED6(var_0, var_1, var_2, var_3, var_4) {
-  _id_CED3(var_0, var_1, 1.0, var_2, var_3, var_4);
+func_CED6(var_00, var_01, var_02, var_03, var_04) {
+  func_CED3(var_00, var_01, 1.0, var_02, var_03, var_04);
 }
 
-_id_1384D(var_0, var_1, var_2) {
+func_1384D(var_00, var_01, var_02) {
   self endon("disconnect");
   self endon("death");
 
-  if (isdefined(var_2))
-  childthread _id_C0E0(var_0, var_2, var_1);
+  if (isdefined(var_02))
+  childthread func_C0E0(var_00, var_02, var_01);
 
-  _id_1384C(var_0, var_1);
+  func_1384C(var_00, var_01);
   self notify("Notetrack_Timeout");
 }
 
-_id_CED3(var_0, var_1, var_2, var_3, var_4, var_5) {
+func_CED3(var_00, var_01, var_02, var_03, var_04, var_05) {
   self endon("disconnect");
   self endon("death");
 
-  if (isdefined(var_0)) {
-  if (isdefined(var_1))
-  var_6 = getanimlength(self getanimentry(var_0, var_1));
+  if (isdefined(var_00)) {
+  if (isdefined(var_01))
+  var_06 = getanimlength(self getanimentry(var_00, var_01));
   else
-  var_6 = getanimlength(self getanimentry(var_0, 0));
+  var_06 = getanimlength(self getanimentry(var_00, 0));
 
-  childthread _id_C0E0(var_3, var_6 * (1.0 / var_2), var_4);
+  childthread func_C0E0(var_03, var_06 * (1.0 / var_02), var_04);
   }
 
-  _id_CED2(var_0, var_1, var_2, var_3, var_4, var_5);
+  func_CED2(var_00, var_01, var_02, var_03, var_04, var_05);
   self notify("Notetrack_Timeout");
 }
 
-_id_C0E0(var_0, var_1, var_2) {
+func_C0E0(var_00, var_01, var_02) {
   self notify("Notetrack_Timeout");
   self endon("Notetrack_Timeout");
-  var_1 = max(0.05, var_1);
-  wait(var_1);
+  var_01 = max(0.05, var_01);
+  wait(var_01);
 
-  if (isdefined(var_2))
-  self notify(var_0, var_2);
+  if (isdefined(var_02))
+  self notify(var_00, var_02);
   else
-  self notify(var_0, "end");
+  self notify(var_00, "end");
 }
 
-_id_5AC1(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
-  if (var_4 != "highest_point")
-  _id_CED5(var_0, var_1, var_3, var_4, var_7);
+func_5AC1(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07) {
+  if (var_04 != "highest_point")
+  func_CED5(var_00, var_01, var_03, var_04, var_07);
 
-  if (var_6) {
-  var_8 = self._id_6367;
-  var_9 = 1;
+  if (var_06) {
+  var_08 = self.endnode_pos;
+  var_09 = 1;
   } else {
-  var_8 = scripts\engine\utility::_id_817E(self.endnode._id_0334, "targetname");
-  var_8 = var_8.origin;
-  var_10 = getnotetracktimes(var_2, "highest_point");
-  var_9 = var_10[0];
+  var_08 = scripts\engine\utility::getstruct(self.endnode.target, "targetname");
+  var_08 = var_8.origin;
+  var_10 = getnotetracktimes(var_02, "highest_point");
+  var_09 = var_10[0];
   }
 
-  _id_5AC2(var_0, var_1, var_3, var_2, var_4, var_5, var_8, var_9, var_7);
+  func_5AC2(var_00, var_01, var_03, var_02, var_04, var_05, var_08, var_09, var_07);
 }
 
-_id_5AC2(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
-  var_9 = abs(self.origin[2] - var_6[2]);
-  var_10 = getnotetracktimes(var_3, var_4);
+func_5AC2(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08) {
+  var_09 = abs(self.origin[2] - var_6[2]);
+  var_10 = getnotetracktimes(var_03, var_04);
   var_11 = var_10[0];
   var_12 = var_11;
-  var_13 = getnotetracktimes(var_3, var_5);
+  var_13 = getnotetracktimes(var_03, var_05);
   var_14 = var_13[0];
-  var_7 = var_14;
+  var_07 = var_14;
   var_15 = "flex_height_up_top";
-  var_16 = getnotetracktimes(var_3, var_15);
+  var_16 = getnotetracktimes(var_03, var_15);
   var_17 = "flex_height_down_top";
-  var_18 = getnotetracktimes(var_3, var_17);
+  var_18 = getnotetracktimes(var_03, var_17);
   var_19 = "flex_height_down_bottom";
-  var_20 = getnotetracktimes(var_3, var_19);
+  var_20 = getnotetracktimes(var_03, var_19);
 
-  if (var_4 == "flex_height_up_start" && var_16.size > 0)
-  var_7 = var_16[0];
+  if (var_04 == "flex_height_up_start" && var_16.size > 0)
+  var_07 = var_16[0];
 
-  if (var_4 == "flex_height_down_start") {
+  if (var_04 == "flex_height_down_start") {
   if (var_18.size > 0)
   var_12 = var_16[0];
 
   if (var_20.size > 0)
-  var_7 = var_20[0];
+  var_07 = var_20[0];
   }
 
-  var_21 = getmovedelta(var_3, var_12, var_7);
+  var_21 = getmovedelta(var_03, var_12, var_07);
   var_22 = abs(var_21[2]);
-  var_24 = getmovedelta(var_3, var_11, var_14);
+  var_24 = getmovedelta(var_03, var_11, var_14);
   var_25 = abs(var_24[2]);
 
   if (var_25 < 1)
@@ -421,21 +421,21 @@ _id_5AC2(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
   {
   var_27 = var_22 - var_25;
 
-  if (var_9 <= var_27)
-  var_26 = (var_27 - var_9) / var_25;
+  if (var_09 <= var_27)
+  var_26 = (var_27 - var_09) / var_25;
   else
-  var_26 = (var_9 - var_27) / var_25;
+  var_26 = (var_09 - var_27) / var_25;
   }
 
   self scragentsetanimscale(1.0, var_26);
 
   if (var_11 != 0) {
-  var_28 = self islegacyagent(var_3);
+  var_28 = self islegacyagent(var_03);
 
   if (var_28 < var_11)
-  _id_CED2(var_0, var_1, 1.0, var_2, var_4, var_8);
+  func_CED2(var_00, var_01, 1.0, var_02, var_04, var_08);
   }
 
   var_29 = clamp(1 / var_26, 0.33, 3.0);
-  _id_CED2(var_0, var_1, var_29, var_2, var_5, var_8);
+  func_CED2(var_00, var_01, var_29, var_02, var_05, var_08);
 }
