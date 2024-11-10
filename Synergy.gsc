@@ -427,8 +427,8 @@ initial_variable() {
 	self.syn["weapons"]["cp_rave"][2] =  ["", "", "", "", "", "", "", ""];
 	self.syn["weapons"]["cp_rave"][3] =  ["", "", "", "", "", "", "", ""];
 	// Shaolin Shuffle Weapons
-	self.syn["weapons"]["cp_disco"][0] = ["iw7_katana_zm", "iw7_nunchucks_zm", "crane", "snake", "dragon", "tiger"];					
-	self.syn["weapons"]["cp_disco"][1] = ["Katana", "Nunchucks", "Crane Chi", "Snake Chi", "Dragon Chi", "Tiger Chi"];
+	self.syn["weapons"]["cp_disco"][0] = ["iw7_katana_zm", "iw7_nunchucks_zm"];					
+	self.syn["weapons"]["cp_disco"][1] = ["Katana", "Nunchucks"];
 	self.syn["weapons"]["cp_disco"][2] = ["", "", "", "", "", ""];
 	self.syn["weapons"]["cp_disco"][3] = ["", "", "", "", "", ""];
 	// Attack of the Radioactive Thing Weapons
@@ -1863,8 +1863,17 @@ give_weapon(weapon, category, index) {
 			case "iw7_facemelter_zm":
 			case "iw7_headcutter_zm":
 			case "iw7_shredder_zm":
+			case "iw7_golf_club_mp":
+			case "iw7_spiked_bat_mp":
+			case "iw7_two_headed_axe_mp":
+			case "iw7_machete_mp":
+			case "iw7_harpoon1_zm":
+			case "iw7_harpoon2_zm":
+			case "iw7_harpoon3_zm+akimbo":
+			case "iw7_harpoon4_zm":
 			case "iw7_katana_zm":
 			case "iw7_nunchucks_zm":
+			case "iw7_venomx_zm":
 			case "iw7_forgefreeze_zm+forgefreezealtfire":
 			case "iw7_spaceland_wmd":
 			case "iw7_cutie_zm":
