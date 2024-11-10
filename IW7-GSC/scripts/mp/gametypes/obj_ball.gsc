@@ -1,8 +1,8 @@
-/*****************************************************
+/*********************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\gametypes\obj_ball.gsc
-*****************************************************/
+ * Script: scripts\mp\gametypes\obj_ball.gsc
+*********************************************/
 
 ball_default_origins() {
 	level.default_goal_origins = [];
@@ -27,11 +27,11 @@ ball_default_origins() {
 ball_init_map_min_max() {
 	level.ball_mins = (1000,1000,1000);
 	level.ball_maxs = (-1000,-1000,-1000);
-	var_00 = function_0076();
+	var_00 = getallnodes();
 	if(var_00.size > 0) {
 		foreach(var_02 in var_00) {
-			level.ball_mins = scripts\mp\_spawnlogic::expandmins(level.ball_mins,var_02.origin);
-			level.ball_maxs = scripts\mp\_spawnlogic::expandmaxs(level.ball_maxs,var_02.origin);
+			level.ball_mins = scripts\mp\spawnlogic::expandmins(level.ball_mins,var_02.origin);
+			level.ball_maxs = scripts\mp\spawnlogic::expandmaxs(level.ball_maxs,var_02.origin);
 		}
 
 		return;
@@ -69,7 +69,7 @@ ball_create_ball_starts() {
 		}
 	}
 
-	level thread scripts\mp\_utility::global_physics_sound_monitor();
+	level thread scripts\mp\utility::global_physics_sound_monitor();
 }
 
 checkpostshipballspawns(param_00) {
@@ -187,7 +187,7 @@ showballbaseeffecttoplayer(param_00) {
 		var_02 = "allies";
 	}
 
-	var_04 = function_01E1(level._effect["ball_base_glow"],self.baseeffectpos,param_00);
+	var_04 = spawnfxforclient(level._effect["ball_base_glow"],self.baseeffectpos,param_00);
 	var_04 setfxkilldefondelete();
 	param_00._baseeffect[0] = var_04;
 	triggerfx(var_04);
@@ -233,9 +233,9 @@ ball_spawn(param_00) {
 	var_04.baseorigin = var_04.origin;
 	var_04.no_moving_platfrom_unlink = 1;
 	var_05 = [var_02];
-	var_06 = scripts\mp\_gameobjects::createcarryobject("any",var_04,var_05,(0,0,32));
+	var_06 = scripts\mp\gameobjects::createcarryobject("any",var_04,var_05,(0,0,32));
 	var_06.objectiveonvisuals = 1;
-	var_06 scripts\mp\_gameobjects::allowcarry("any");
+	var_06 scripts\mp\gameobjects::allowcarry("any");
 	var_06 ball_waypoint_neutral();
 	var_06.allowweapons = 0;
 	var_06.carryweapon = level.ballweapon;
@@ -261,49 +261,49 @@ ball_spawn(param_00) {
 	if(isdefined(level.showenemycarrier)) {
 		switch(level.showenemycarrier) {
 			case 0:
-				var_06 scripts\mp\_gameobjects::setvisibleteam("friendly");
+				var_06 scripts\mp\gameobjects::setvisibleteam("friendly");
 				var_06.objidpingenemy = 0;
 				var_06.objidpingfriendly = 1;
 				var_06.objpingdelay = 60;
 				break;
 
 			case 1:
-				var_06 scripts\mp\_gameobjects::setvisibleteam("any");
+				var_06 scripts\mp\gameobjects::setvisibleteam("any");
 				var_06.objidpingenemy = 0;
 				var_06.objidpingfriendly = 0;
 				var_06.objpingdelay = 0.05;
 				break;
 
 			case 2:
-				var_06 scripts\mp\_gameobjects::setvisibleteam("any");
+				var_06 scripts\mp\gameobjects::setvisibleteam("any");
 				var_06.objidpingenemy = 0;
 				var_06.objidpingfriendly = 1;
 				var_06.objpingdelay = 1;
 				break;
 
 			case 3:
-				var_06 scripts\mp\_gameobjects::setvisibleteam("any");
+				var_06 scripts\mp\gameobjects::setvisibleteam("any");
 				var_06.objidpingenemy = 0;
 				var_06.objidpingfriendly = 1;
 				var_06.objpingdelay = 1.5;
 				break;
 
 			case 4:
-				var_06 scripts\mp\_gameobjects::setvisibleteam("any");
+				var_06 scripts\mp\gameobjects::setvisibleteam("any");
 				var_06.objidpingenemy = 0;
 				var_06.objidpingfriendly = 1;
 				var_06.objpingdelay = 2;
 				break;
 
 			case 5:
-				var_06 scripts\mp\_gameobjects::setvisibleteam("any");
+				var_06 scripts\mp\gameobjects::setvisibleteam("any");
 				var_06.objidpingenemy = 0;
 				var_06.objidpingfriendly = 1;
 				var_06.objpingdelay = 3;
 				break;
 
 			case 6:
-				var_06 scripts\mp\_gameobjects::setvisibleteam("any");
+				var_06 scripts\mp\gameobjects::setvisibleteam("any");
 				var_06.objidpingenemy = 0;
 				var_06.objidpingfriendly = 1;
 				var_06.objpingdelay = 4;
@@ -312,7 +312,7 @@ ball_spawn(param_00) {
 	}
 	else
 	{
-		var_06 scripts\mp\_gameobjects::setvisibleteam("any");
+		var_06 scripts\mp\gameobjects::setvisibleteam("any");
 		var_06.objidpingenemy = 0;
 		var_06.objidpingfriendly = 1;
 		var_06.objpingdelay = 3;
@@ -324,7 +324,7 @@ ball_spawn(param_00) {
 		level.balls[0] thread starthoveranim();
 	}
 
-	if(!scripts\mp\_utility::istrue(level.devball)) {
+	if(!scripts\mp\utility::istrue(level.devball)) {
 		var_06 thread ball_fx_start(1,1);
 	}
 
@@ -353,11 +353,11 @@ ball_can_pickup(param_00) {
 			return 0;
 		}
 
-		if(scripts\mp\_utility::istrue(param_00.iscarrying)) {
+		if(scripts\mp\utility::istrue(param_00.iscarrying)) {
 			return 0;
 		}
 
-		if(scripts\mp\_utility::istrue(param_00.using_remote_turret)) {
+		if(scripts\mp\utility::istrue(param_00.using_remote_turret)) {
 			return 0;
 		}
 
@@ -379,14 +379,14 @@ ball_can_pickup(param_00) {
 			}
 		}
 
-		if(param_00 scripts\mp\_utility::isanymonitoredweaponswitchinprogress()) {
-			var_02 = param_00 scripts\mp\_utility::getcurrentmonitoredweaponswitchweapon();
+		if(param_00 scripts\mp\utility::isanymonitoredweaponswitchinprogress()) {
+			var_02 = param_00 scripts\mp\utility::getcurrentmonitoredweaponswitchweapon();
 			if(!valid_ball_pickup_weapon(var_02)) {
 				return 0;
 			}
 		}
 
-		if(param_00 scripts\mp\_utility::isusingremote()) {
+		if(param_00 scripts\mp\utility::isusingremote()) {
 			return 0;
 		}
 
@@ -408,19 +408,19 @@ ball_on_pickup(param_00) {
 	var_01 = 0;
 	if(level.ballreset) {
 		if(givegrabscore(param_00)) {
-			param_00 thread scripts\mp\_utility::giveunifiedpoints("ball_grab");
+			param_00 thread scripts\mp\utility::giveunifiedpoints("ball_grab");
 		}
 
 		level.ballpickupscorefrozen = gettime();
 		level.ballreset = 0;
-		if(isdefined(level.possessionresetcondition) && level.possessionresetcondition == 1 && scripts\mp\_utility::istrue(level.possessionresettime)) {
+		if(isdefined(level.possessionresetcondition) && level.possessionresetcondition == 1 && scripts\mp\utility::istrue(level.possessionresettime)) {
 			var_01 = 1;
 		}
 
 		param_00 notify("ball_grab");
 	}
 
-	if(isdefined(level.possessionresetcondition) && level.possessionresetcondition == 2 && scripts\mp\_utility::istrue(level.possessionresettime) && isdefined(self.lastcarrier) && self.lastcarrier != param_00) {
+	if(isdefined(level.possessionresetcondition) && level.possessionresetcondition == 2 && scripts\mp\utility::istrue(level.possessionresettime) && isdefined(self.lastcarrier) && self.lastcarrier != param_00) {
 		var_01 = 1;
 	}
 
@@ -428,11 +428,11 @@ ball_on_pickup(param_00) {
 		param_00 scripts\mp\gametypes\tdef::getsettdefsuit();
 		level thread scripts\mp\gametypes\tdef::awardcapturepoints(param_00.team);
 		if(!level.timerstoppedforgamemode) {
-			level scripts\mp\_gamelogic::pausetimer();
+			level scripts\mp\gamelogic::pausetimer();
 		}
 	}
 
-	if(scripts\mp\_utility::istrue(level.possessionresetcondition)) {
+	if(scripts\mp\utility::istrue(level.possessionresetcondition)) {
 		level updatetimers(param_00.team,0,0,var_01);
 	}
 
@@ -444,37 +444,37 @@ ball_on_pickup(param_00) {
 		self.visuals[0] unlink();
 	}
 
-	if(!scripts\mp\_utility::istrue(level.devball)) {
-		param_00 scripts\mp\_utility::giveperk("specialty_ballcarrier");
+	if(!scripts\mp\utility::istrue(level.devball)) {
+		param_00 scripts\mp\utility::giveperk("specialty_ballcarrier");
 	}
 
 	param_00.ball_carried = self;
 	param_00.objective = 1;
-	self.carrier scripts\mp\_utility::giveperk("specialty_sprintfire");
+	self.carrier scripts\mp\utility::giveperk("specialty_sprintfire");
 	self.carrier.hasperksprintfire = 1;
-	if(!scripts\mp\_utility::istrue(level.devball)) {
-		param_00 scripts\mp\_lightarmor::setlightarmorvalue(param_00,level.carrierarmor);
+	if(!scripts\mp\utility::istrue(level.devball)) {
+		param_00 scripts\mp\lightarmor::setlightarmorvalue(param_00,level.carrierarmor);
 	}
 
-	if(!scripts\mp\_utility::istrue(level.devball)) {
+	if(!scripts\mp\utility::istrue(level.devball)) {
 		thread ball_play_local_team_sound(param_00.team,"mp_uplink_ball_pickedup_friendly","mp_uplink_ball_pickedup_enemy");
 	}
 
 	param_00 scripts\engine\utility::allow_usability(0);
 	foreach(var_05, var_04 in param_00.powers) {
-		param_00 scripts\mp\_powers::func_D727(var_05);
+		param_00 scripts\mp\powers::func_D727(var_05);
 	}
 
 	self.visuals[0] physicslaunchserver(self.visuals[0].origin,(0,0,0));
 	self.visuals[0] physicsstopserver();
-	self.visuals[0] scripts\mp\_movers::notify_moving_platform_invalid();
+	self.visuals[0] scripts\mp\movers::notify_moving_platform_invalid();
 	self.pass = 0;
 	self.visuals[0] stop_fx_idle();
 	self.visuals[0] show();
 	self.visuals[0] hide(1);
 	self.visuals[0] linkto(param_00,"j_wrist_ri",(0,0,0),param_00.angles);
 	self.visuals[0] setscriptablepartstate("uplink_drone_hide","hide",0);
-	self.trigger scripts\mp\_movers::stop_handling_moving_platforms();
+	self.trigger scripts\mp\movers::stop_handling_moving_platforms();
 	self.current_start.in_use = 0;
 	var_06 = 0;
 	if(isdefined(self.projectile)) {
@@ -483,12 +483,12 @@ ball_on_pickup(param_00) {
 	}
 
 	var_07 = param_00.team;
-	var_08 = scripts\mp\_utility::getotherteam(param_00.team);
+	var_08 = scripts\mp\utility::getotherteam(param_00.team);
 	self.visuals[0] setotherent(param_00);
 	if(var_06) {
 		if(self.lastcarrierteam == param_00.team) {
-			if(!scripts\mp\_utility::istrue(level.devball)) {
-				scripts\mp\_utility::statusdialog("pass_complete",var_07);
+			if(!scripts\mp\utility::istrue(level.devball)) {
+				scripts\mp\utility::statusdialog("pass_complete",var_07);
 			}
 
 			param_00.passtime = gettime();
@@ -496,29 +496,29 @@ ball_on_pickup(param_00) {
 		}
 		else
 		{
-			if(!scripts\mp\_utility::istrue(level.devball)) {
-				scripts\mp\_utility::statusdialog("pass_intercepted",var_08);
+			if(!scripts\mp\utility::istrue(level.devball)) {
+				scripts\mp\utility::statusdialog("pass_intercepted",var_08);
 			}
 
-			param_00 thread scripts\mp\_awards::givemidmatchaward("mode_uplink_intercept");
+			param_00 thread scripts\mp\awards::givemidmatchaward("mode_uplink_intercept");
 			if(isplayer(param_00)) {
-				param_00 thread scripts\mp\_matchdata::loggameevent("pickup_interception",param_00.origin);
+				param_00 thread scripts\mp\matchdata::loggameevent("pickup_interception",param_00.origin);
 			}
 		}
 	}
 	else
 	{
-		if(!scripts\mp\_utility::istrue(level.devball) && self.lastcarrierteam != param_00.team) {
-			scripts\mp\_utility::statusdialog("ally_own_drone",var_07);
-			scripts\mp\_utility::statusdialog("enemy_own_drone",var_08);
+		if(!scripts\mp\utility::istrue(level.devball) && self.lastcarrierteam != param_00.team) {
+			scripts\mp\utility::statusdialog("ally_own_drone",var_07);
+			scripts\mp\utility::statusdialog("enemy_own_drone",var_08);
 		}
 
 		if(isplayer(param_00)) {
-			param_00 thread scripts\mp\_matchdata::loggameevent("pickup",param_00.origin);
+			param_00 thread scripts\mp\matchdata::loggameevent("pickup",param_00.origin);
 		}
 	}
 
-	if(!scripts\mp\_utility::istrue(level.devball)) {
+	if(!scripts\mp\utility::istrue(level.devball)) {
 		ball_fx_stop();
 	}
 
@@ -527,15 +527,15 @@ ball_on_pickup(param_00) {
 	self.lastcarrierteam = param_00.team;
 	self.ownerteam = param_00.team;
 	ball_waypoint_held(self.ownerteam);
-	scripts\mp\_utility::setmlgannouncement(12,param_00.team,param_00 getentitynumber());
+	scripts\mp\utility::setmlgannouncement(12,param_00.team,param_00 getentitynumber());
 	param_00 setweaponammoclip(level.ballweapon,1);
 	if(getdvarint("com_codcasterEnabled",0) == 1) {
 		param_00 setgametypevip(1);
 	}
 
 	param_00 thread player_update_pass_target(self);
-	if(!scripts\mp\_utility::istrue(level.devball)) {
-		scripts\mp\_gamelogic::sethasdonecombat(param_00,1);
+	if(!scripts\mp\utility::istrue(level.devball)) {
+		scripts\mp\gamelogic::sethasdonecombat(param_00,1);
 	}
 
 	self notify("physics_timeout");
@@ -554,11 +554,11 @@ checkgesturethread() {
 detonateball() {
 	var_00 = spawn("script_model",self.curorigin);
 	var_00 setmodel("tag_origin");
-	var_01 = self.lastcarrier scripts\mp\_utility::_launchgrenade("blackhole_grenade_mp",self.curorigin,(0,0,0));
+	var_01 = self.lastcarrier scripts\mp\utility::_launchgrenade("blackhole_grenade_mp",self.curorigin,(0,0,0));
 	var_01 linkto(var_00,"tag_origin");
 	var_01.triggerportableradarping = self.lastcarrier;
 	var_01 hide(1);
-	var_01.triggerportableradarping thread scripts\mp\_blackholegrenade::func_2B3E(var_01);
+	var_01.triggerportableradarping thread scripts\mp\blackholegrenade::func_2B3E(var_01);
 }
 
 givegrabscore(param_00) {
@@ -588,12 +588,12 @@ updatebpm() {
 		self.bpm = 0;
 	}
 
-	self.var_C230++;
-	if(scripts\mp\_utility::getminutespassed() < 1) {
+	self.numgrabs++;
+	if(scripts\mp\utility::getminutespassed() < 1) {
 		return 0;
 	}
 
-	self.bpm = self.numgrabs / scripts\mp\_utility::getminutespassed();
+	self.bpm = self.numgrabs / scripts\mp\utility::getminutespassed();
 	if(self.bpm < 4) {
 		return 0;
 	}
@@ -602,7 +602,7 @@ updatebpm() {
 }
 
 ball_play_local_team_sound(param_00,param_01,param_02) {
-	var_03 = scripts\mp\_utility::getotherteam(param_00);
+	var_03 = scripts\mp\utility::getotherteam(param_00);
 	foreach(var_05 in level.players) {
 		if(var_05.team == param_00) {
 			var_05 playlocalsound(param_01);
@@ -656,7 +656,7 @@ ball_set_dropped(param_00,param_01,param_02,param_03) {
 		self.visuals[var_08] setscriptablepartstate("uplink_drone_hide","show",0);
 	}
 
-	if(scripts\mp\_utility::istrue(param_03) || scripts\mp\_utility::istrue(param_02)) {
+	if(scripts\mp\utility::istrue(param_03) || scripts\mp\utility::istrue(param_02)) {
 		var_04 = 1;
 	}
 
@@ -675,26 +675,26 @@ ball_set_dropped(param_00,param_01,param_02,param_03) {
 
 	ball_dont_interpolate();
 	self.curorigin = self.trigger.origin;
-	if(!scripts\mp\_utility::istrue(level.devball)) {
+	if(!scripts\mp\utility::istrue(level.devball)) {
 		thread ball_fx_start(0);
 	}
 
 	self.ownerteam = "any";
 	ball_waypoint_neutral();
-	scripts\mp\_gameobjects::clearcarrier();
+	scripts\mp\gameobjects::clearcarrier();
 	if(isdefined(var_06)) {
 		var_06 player_update_pass_target_hudoutline();
 	}
 
-	scripts\mp\_gameobjects::updatecompassicons();
-	scripts\mp\_gameobjects::updateworldicons();
+	scripts\mp\gameobjects::updatecompassicons();
+	scripts\mp\gameobjects::updateworldicons();
 	self.isresetting = 0;
 	if(!param_00) {
 		var_0A = self.lastcarrierteam;
-		var_0B = scripts\mp\_utility::getotherteam(var_0A);
-		if(!scripts\mp\_utility::istrue(level.devball) && !isdefined(param_01) && !scripts\mp\_utility::istrue(param_02)) {
-			scripts\mp\_utility::statusdialog("ally_drop_drone",var_0A);
-			scripts\mp\_utility::statusdialog("enemy_drop_drone",var_0B);
+		var_0B = scripts\mp\utility::getotherteam(var_0A);
+		if(!scripts\mp\utility::istrue(level.devball) && !isdefined(param_01) && !scripts\mp\utility::istrue(param_02)) {
+			scripts\mp\utility::statusdialog("ally_drop_drone",var_0A);
+			scripts\mp\utility::statusdialog("enemy_drop_drone",var_0B);
 		}
 
 		var_0C = (0,var_05[1],0);
@@ -713,9 +713,9 @@ ball_set_dropped(param_00,param_01,param_02,param_03) {
 	var_0F = spawnstruct();
 	var_0F.carryobject = self;
 	var_0F.deathoverridecallback = ::ball_overridemovingplatformdeath;
-	self.trigger thread scripts\mp\_movers::handle_moving_platforms(var_0F);
+	self.trigger thread scripts\mp\movers::handle_moving_platforms(var_0F);
 	if(level.timerstoppedforgamemode) {
-		level scripts\mp\_gamelogic::resumetimer();
+		level scripts\mp\gamelogic::resumetimer();
 	}
 
 	return 1;
@@ -732,13 +732,13 @@ ball_carrier_cleanup(param_00) {
 		self.carrier player_clear_pass_target();
 		self.carrier notify("cancel_update_pass_target");
 		self.carrier.ball_carried = undefined;
-		if(!scripts\mp\_utility::istrue(level.devball)) {
-			self.carrier scripts\mp\_utility::removeperk("specialty_ballcarrier");
-			self.carrier scripts\mp\_lightarmor::lightarmor_unset(self.carrier);
+		if(!scripts\mp\utility::istrue(level.devball)) {
+			self.carrier scripts\mp\utility::removeperk("specialty_ballcarrier");
+			self.carrier scripts\mp\lightarmor::lightarmor_unset(self.carrier);
 		}
 
 		if(self.carrier.hasperksprintfire) {
-			self.carrier scripts\mp\_utility::removeperk("specialty_sprintfire");
+			self.carrier scripts\mp\utility::removeperk("specialty_sprintfire");
 		}
 
 		self.carrier.hasperksprintfire = 0;
@@ -747,9 +747,9 @@ ball_carrier_cleanup(param_00) {
 		}
 
 		self.carrier scripts\engine\utility::allow_usability(1);
-		if(scripts\mp\_utility::istrue(param_00)) {
+		if(scripts\mp\utility::istrue(param_00)) {
 			foreach(var_03, var_02 in self.carrier.powers) {
-				self.carrier scripts\mp\_powers::func_D72D(var_03);
+				self.carrier scripts\mp\powers::func_D72D(var_03);
 			}
 		}
 
@@ -763,7 +763,7 @@ ball_on_reset() {
 	ball_assign_start(level.ball_starts[self.ballindex]);
 	ball_restore_contents();
 	var_00 = self.visuals[0];
-	var_00 scripts\mp\_movers::notify_moving_platform_invalid();
+	var_00 scripts\mp\movers::notify_moving_platform_invalid();
 	var_01 = var_00 getlinkedparent();
 	if(isdefined(var_01)) {
 		var_00 unlink();
@@ -780,22 +780,22 @@ ball_on_reset() {
 	var_02 = "none";
 	var_03 = self.lastcarrierteam;
 	if(isdefined(var_03)) {
-		var_02 = scripts\mp\_utility::getotherteam(var_03);
+		var_02 = scripts\mp\utility::getotherteam(var_03);
 	}
 
 	self.lastcarrierteam = "none";
 	ball_carrier_cleanup(1);
-	self.trigger scripts\mp\_movers::stop_handling_moving_platforms();
+	self.trigger scripts\mp\movers::stop_handling_moving_platforms();
 	ball_waypoint_download();
 	if(level.gametype != "tdef") {
-		scripts\mp\_gameobjects::setposition(var_00.baseorigin + (0,0,4000),(0,0,0));
+		scripts\mp\gameobjects::setposition(var_00.baseorigin + (0,0,4000),(0,0,0));
 		var_00 moveto(var_00.baseorigin,3,0,3);
 		var_00 rotatevelocity((0,720,0),3,0,3);
 	}
 	else
 	{
 		if(!level.timerstoppedforgamemode) {
-			level scripts\mp\_gamelogic::pausetimer();
+			level scripts\mp\gamelogic::pausetimer();
 		}
 
 		var_00 hide(1);
@@ -803,14 +803,14 @@ ball_on_reset() {
 		thread waitforreset(var_00);
 	}
 
-	if(!scripts\mp\_utility::istrue(level.devball)) {
+	if(!scripts\mp\utility::istrue(level.devball)) {
 		playsoundatpos(var_00.baseorigin,"mp_uplink_ball_reset");
 	}
 
 	if(!self.lastcarrierscored && isdefined(var_03) && isdefined(var_02)) {
-		if(!scripts\mp\_utility::istrue(level.devball) && var_03 != "none") {
-			scripts\mp\_utility::statusdialog("drone_reset",var_03);
-			scripts\mp\_utility::statusdialog("drone_reset",var_02);
+		if(!scripts\mp\utility::istrue(level.devball) && var_03 != "none") {
+			scripts\mp\utility::statusdialog("drone_reset",var_03);
+			scripts\mp\utility::statusdialog("drone_reset",var_02);
 		}
 
 		if(isdefined(self.lastcarrier)) {
@@ -822,11 +822,11 @@ ball_on_reset() {
 		thread ball_download_wait(3);
 	}
 
-	if(!scripts\mp\_utility::istrue(level.devball)) {
+	if(!scripts\mp\utility::istrue(level.devball)) {
 		thread ball_download_fx(var_00,3);
 	}
 
-	thread scripts\mp\_matchdata::loggameevent("obj_return",var_00.baseorigin);
+	thread scripts\mp\matchdata::loggameevent("obj_return",var_00.baseorigin);
 }
 
 ball_clear_contents() {
@@ -900,8 +900,8 @@ ball_shoot_watch() {
 	}
 
 	if(isdefined(self.carryobject)) {
-		thread scripts\mp\_matchdata::loggameevent("pass",self.origin);
-		if(!scripts\mp\_utility::istrue(level.devball)) {
+		thread scripts\mp\matchdata::loggameevent("pass",self.origin);
+		if(!scripts\mp\utility::istrue(level.devball)) {
 			self playsound("mp_uplink_ball_pass");
 		}
 
@@ -1000,7 +1000,7 @@ ball_pass_or_throw_active() {
 	self allowmelee(1);
 	self.pass_or_throw_active = 0;
 	foreach(var_02, var_01 in self.powers) {
-		scripts\mp\_powers::func_D72D(var_02);
+		scripts\mp\powers::func_D72D(var_02);
 	}
 }
 
@@ -1028,7 +1028,7 @@ ball_pass_projectile(param_00,param_01,param_02) {
 	var_08 = param_01 gettargetorigin();
 	var_09 = scripts\common\trace::sphere_trace(var_07,var_08,level.balltraceradius,param_00,level.ballphysicscontentoverride,0);
 	var_0A = 1;
-	if(var_09["fraction"] < 1 || !scripts\mp\_utility::isreallyalive(param_01)) {
+	if(var_09["fraction"] < 1 || !scripts\mp\utility::isreallyalive(param_01)) {
 		if(var_09["hittype"] == "hittype_entity" && isdefined(var_09["entity"]) && isplayer(var_09["entity"])) {
 			var_0A = max(0.1,0.7 * var_09["fraction"]);
 		}
@@ -1037,15 +1037,15 @@ ball_pass_projectile(param_00,param_01,param_02) {
 			var_0A = 0.7 * var_09["fraction"];
 		}
 
-		scripts\mp\_gameobjects::setposition(var_07 + var_05 * var_0A,self.visuals[0].angles);
+		scripts\mp\gameobjects::setposition(var_07 + var_05 * var_0A,self.visuals[0].angles);
 	}
 	else
 	{
-		scripts\mp\_gameobjects::setposition(var_09["position"],self.visuals[0].angles);
+		scripts\mp\gameobjects::setposition(var_09["position"],self.visuals[0].angles);
 	}
 
 	if(isdefined(param_01)) {
-		self.projectile = scripts\mp\_utility::_magicbullet("uplinkball_tracking_mp",var_07 + var_06 * var_0A,var_08,param_00);
+		self.projectile = scripts\mp\utility::_magicbullet("uplinkball_tracking_mp",var_07 + var_06 * var_0A,var_08,param_00);
 		self.projectile missile_settargetent(param_01,param_01 gettargetoffset());
 	}
 
@@ -1085,7 +1085,7 @@ player_update_pass_target(param_00) {
 					continue;
 				}
 
-				if(!scripts\mp\_utility::isreallyalive(var_04)) {
+				if(!scripts\mp\utility::isreallyalive(var_04)) {
 					continue;
 				}
 
@@ -1099,7 +1099,7 @@ player_update_pass_target(param_00) {
 			}
 
 			if(isdefined(var_02) && var_02.size > 0) {
-				var_02 = scripts\mp\_utility::quicksort(var_02,::compare_player_pass_dot);
+				var_02 = scripts\mp\utility::quicksort(var_02,::compare_player_pass_dot);
 				var_06 = self geteye();
 				foreach(var_04 in var_02) {
 					var_08 = var_04 gettargetorigin();
@@ -1153,13 +1153,13 @@ player_update_pass_target_hudoutline() {
 	}
 
 	if(isdefined(self.carryobject.passtargetoutlineid) && isdefined(self.carryobject.passtargetent)) {
-		scripts\mp\_utility::outlinedisable(self.carryobject.passtargetoutlineid,self.carryobject.passtargetent);
+		scripts\mp\utility::outlinedisable(self.carryobject.passtargetoutlineid,self.carryobject.passtargetent);
 		self.carryobject.passtargetoutlineid = undefined;
 		self.carryobject.passtargetent = undefined;
 	}
 
 	if(isdefined(self.carryobject.playeroutlineid) && isdefined(self.carryobject.playeroutlined)) {
-		scripts\mp\_utility::outlinedisable(self.carryobject.playeroutlineid,self.carryobject.playeroutlined);
+		scripts\mp\utility::outlinedisable(self.carryobject.playeroutlineid,self.carryobject.playeroutlined);
 		self.carryobject.playeroutlineid = undefined;
 		self.carryobject.playeroutlined = undefined;
 	}
@@ -1170,7 +1170,7 @@ player_update_pass_target_hudoutline() {
 
 	var_00 = [];
 	var_01 = [];
-	var_02 = scripts\mp\_utility::getotherteam(self.team);
+	var_02 = scripts\mp\utility::getotherteam(self.team);
 	var_03 = undefined;
 	var_04 = undefined;
 	foreach(var_06 in level.players) {
@@ -1193,13 +1193,13 @@ player_update_pass_target_hudoutline() {
 	}
 
 	if(isdefined(self.pass_target)) {
-		var_03 = scripts\mp\_utility::outlineenableforplayer(self.pass_target,"cyan",self,1,0,"level_script");
+		var_03 = scripts\mp\utility::outlineenableforplayer(self.pass_target,"cyan",self,1,0,"level_script");
 	}
 
 	self.carryobject.passtargetoutlineid = var_03;
 	self.carryobject.passtargetent = self.pass_target;
 	if(level.gametype == "tdef" && var_00.size > 0) {
-		var_04 = scripts\mp\_utility::outlineenableforteam(self,"cyan",self.team,0,1,"level_script");
+		var_04 = scripts\mp\utility::outlineenableforteam(self,"cyan",self.team,0,1,"level_script");
 	}
 
 	self.carryobject.playeroutlineid = var_04;
@@ -1249,7 +1249,7 @@ player_set_pass_target(param_00) {
 	var_03 = (0,0,var_01);
 	if(isdefined(self.pass_target) && isdefined(param_00) && self.pass_target == param_00) {
 		if(var_02) {
-			self.pass_icon = param_00 scripts\mp\_entityheadicons::setheadicon(self,"waypoint_ball_pass",var_03,10,10,0,0.05,0,1,0,0);
+			self.pass_icon = param_00 scripts\mp\entityheadicons::setheadicon(self,"waypoint_ball_pass",var_03,10,10,0,0.05,0,1,0,0);
 		}
 
 		return;
@@ -1261,7 +1261,7 @@ player_set_pass_target(param_00) {
 
 	player_clear_pass_target();
 	if(isdefined(param_00)) {
-		self.pass_icon = param_00 scripts\mp\_entityheadicons::setheadicon(self,"waypoint_ball_pass",var_03,10,10,0,0.05,0,1,0,0);
+		self.pass_icon = param_00 scripts\mp\entityheadicons::setheadicon(self,"waypoint_ball_pass",var_03,10,10,0,0.05,0,1,0,0);
 		self.pass_target = param_00;
 		var_04 = [];
 		foreach(var_06 in level.players) {
@@ -1330,7 +1330,7 @@ valid_ball_pickup_weapon(param_00) {
 		return 0;
 	}
 
-	if(scripts\mp\_utility::iskillstreakweapon(param_00)) {
+	if(scripts\mp\utility::iskillstreakweapon(param_00)) {
 		return 0;
 	}
 
@@ -1392,11 +1392,11 @@ ball_track_target(param_00) {
 			break;
 		}
 
-		if(!scripts\mp\_utility::isreallyalive(param_00)) {
+		if(!scripts\mp\utility::isreallyalive(param_00)) {
 			break;
 		}
 
-		if(isdefined(param_00.super) && scripts\mp\_utility::istrue(param_00.super.isinuse)) {
+		if(isdefined(param_00.super) && scripts\mp\utility::istrue(param_00.super.isinuse)) {
 			if(param_00.super.staticdata.ref == "super_phaseshift") {
 				break;
 			}
@@ -1460,18 +1460,18 @@ ball_physics_launch(param_00,param_01) {
 		var_0A = scripts\common\trace::sphere_trace(var_06,var_06 + var_07,38,param_01,var_09);
 		if(var_0A["fraction"] < 1) {
 			var_0B = 0.7 * var_0A["fraction"];
-			scripts\mp\_gameobjects::setposition(var_06 + var_07 * var_0B,var_02.angles);
+			scripts\mp\gameobjects::setposition(var_06 + var_07 * var_0B,var_02.angles);
 		}
 		else
 		{
-			scripts\mp\_gameobjects::setposition(var_0A["position"],var_02.angles);
+			scripts\mp\gameobjects::setposition(var_0A["position"],var_02.angles);
 		}
 	}
 
 	self.visuals[0] physicslaunchserver(var_02.origin,param_00);
-	self.visuals[0] thread scripts\mp\_utility::register_physics_collisions();
+	self.visuals[0] thread scripts\mp\utility::register_physics_collisions();
 	self.visuals[0] physics_registerforcollisioncallback();
-	scripts\mp\_utility::register_physics_collision_func(self.visuals[0],::ball_impact_sounds);
+	scripts\mp\utility::register_physics_collision_func(self.visuals[0],::ball_impact_sounds);
 	self.visuals[0].origin = self.trigger.origin;
 	self.trigger linkto(self.visuals[0]);
 	level.codcasterball = self.visuals[0];
@@ -1497,7 +1497,7 @@ ball_physics_touch_cant_pickup_player(param_00) {
 	self endon("score_event");
 	for(;;) {
 		var_02 waittill("trigger",var_03);
-		if(scripts\mp\_utility::func_9F22(var_03)) {
+		if(scripts\mp\utility::func_9F22(var_03)) {
 			continue;
 		}
 
@@ -1531,7 +1531,7 @@ ball_physics_touch_cant_pickup_player(param_00) {
 ball_physics_fake_bounce(param_00) {
 	var_01 = self.visuals[0];
 	var_02 = var_01 physics_getbodyid(0);
-	var_03 = function_026E(var_02);
+	var_03 = physics_getbodylinvel(var_02);
 	if(isdefined(param_00) && param_00) {
 		var_04 = length(var_03) * 0.4;
 		thread watchstuckinnozone();
@@ -1558,7 +1558,7 @@ physics_impact_watch() {
 			var_04 = level._effect["ball_physics_impact_" + var_03];
 		}
 
-		if(!scripts\mp\_utility::istrue(level.devball)) {
+		if(!scripts\mp\utility::istrue(level.devball)) {
 			playfx(var_04,var_00,var_01);
 		}
 
@@ -1568,7 +1568,7 @@ physics_impact_watch() {
 
 ball_impact_sounds(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08) {
 	var_09 = param_00 physics_getbodyid(0);
-	var_0A = function_026E(var_09);
+	var_0A = physics_getbodylinvel(var_09);
 	var_0B = length(var_0A);
 	if(isdefined(param_00.playing_sound) || var_0B < 70) {
 		return;
@@ -1585,12 +1585,12 @@ ball_impact_sounds(param_00,param_01,param_02,param_03,param_04,param_05,param_0
 
 ball_return_home(param_00,param_01) {
 	self.ball_fx_active = 0;
-	if(scripts\mp\_utility::istrue(level.explodeonexpire) && scripts\mp\_utility::istrue(param_00)) {
+	if(scripts\mp\utility::istrue(level.explodeonexpire) && scripts\mp\utility::istrue(param_00)) {
 		detonateball();
 	}
 
-	if(scripts\mp\_utility::istrue(level.possessionresetcondition)) {
-		if(scripts\mp\_utility::istrue(level.ballactivationdelay)) {
+	if(scripts\mp\utility::istrue(level.possessionresetcondition)) {
+		if(scripts\mp\utility::istrue(level.ballactivationdelay)) {
 			level updatetimers("neutral",0,1);
 		}
 		else
@@ -1606,13 +1606,13 @@ ball_return_home(param_00,param_01) {
 	var_02 = self.visuals[0];
 	var_02 physicslaunchserver(var_02.origin,(0,0,0));
 	var_02 physicsstopserver();
-	if(!scripts\mp\_utility::istrue(level.devball)) {
+	if(!scripts\mp\utility::istrue(level.devball)) {
 		playsoundatpos(var_02.origin,"mp_uplink_ball_out_of_bounds");
 		playfx(scripts\engine\utility::getfx("ball_teleport"),var_02.origin);
 	}
 
 	if(param_01) {
-		scripts\mp\_utility::setmlgannouncement(2,"free");
+		scripts\mp\utility::setmlgannouncement(2,"free");
 	}
 
 	if(isdefined(self.carrier)) {
@@ -1620,7 +1620,7 @@ ball_return_home(param_00,param_01) {
 	}
 
 	self.visuals[0] setscriptablepartstate("uplink_drone_hide","show",0);
-	thread scripts\mp\_gameobjects::returnobjectiveid();
+	thread scripts\mp\gameobjects::returnobjectiveid();
 }
 
 ball_overridemovingplatformdeath(param_00) {
@@ -1629,14 +1629,14 @@ ball_overridemovingplatformdeath(param_00) {
 
 ball_download_wait(param_00) {
 	self endon("pickup_object");
-	scripts\mp\_gameobjects::allowcarry("none");
+	scripts\mp\gameobjects::allowcarry("none");
 	self.isresetting = 1;
 	wait(param_00);
 	self.isresetting = 0;
 	ball_waypoint_neutral();
-	scripts\mp\_gameobjects::allowcarry("any");
+	scripts\mp\gameobjects::allowcarry("any");
 	self notify("ball_ready");
-	if(!scripts\mp\_utility::istrue(level.devball)) {
+	if(!scripts\mp\utility::istrue(level.devball)) {
 		playfx(level._effect["ball_download_end"],self.curorigin);
 		thread ball_fx_start(0,1);
 	}
@@ -1650,16 +1650,16 @@ ball_download_wait(param_00) {
 waitforreset(param_00) {
 	self endon("pickup_object");
 	self endon("game_ended");
-	scripts\mp\_gameobjects::allowcarry("none");
+	scripts\mp\gameobjects::allowcarry("none");
 	if(level.ballactivationdelay != 0) {
-		scripts\mp\_hostmigration::waitlongdurationwithhostmigrationpause(level.ballactivationdelay);
+		scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(level.ballactivationdelay);
 	}
 
 	if(level.timerstoppedforgamemode) {
-		level scripts\mp\_gamelogic::resumetimer();
+		level scripts\mp\gamelogic::resumetimer();
 	}
 
-	scripts\mp\_gameobjects::setposition(param_00.baseorigin,(0,0,0));
+	scripts\mp\gameobjects::setposition(param_00.baseorigin,(0,0,0));
 	self.visuals[0] setscriptablepartstate("uplink_drone_hide","show",0);
 	thread ball_download_wait(0);
 	param_00 rotatevelocity((0,720,0),3,0,3);
@@ -1741,8 +1741,8 @@ ball_physics_bad_trigger_watch() {
 			thread ball_physics_fake_bounce(1);
 		}
 
-		if(!self.visuals[0] scripts\mp\_utility::touchingballallowedtrigger()) {
-			if(self.visuals[0] scripts\mp\_utility::touchingbadtrigger() || self.visuals[0] scripts\mp\_utility::func_11A44()) {
+		if(!self.visuals[0] scripts\mp\utility::touchingballallowedtrigger()) {
+			if(self.visuals[0] scripts\mp\utility::touchingbadtrigger() || self.visuals[0] scripts\mp\utility::func_11A44()) {
 				ball_return_home(0,1);
 				return;
 			}
@@ -1790,7 +1790,7 @@ ball_physics_bad_trigger_at_rest() {
 	var_00 = self.visuals[0];
 	var_00 endon("death");
 	var_00 waittill("physics_finished");
-	if(scripts\mp\_utility::touchingbadtrigger()) {
+	if(scripts\mp\utility::touchingbadtrigger()) {
 		ball_return_home(1,1);
 	}
 }
@@ -1849,7 +1849,7 @@ ball_check_pass_kill_pickup(param_00) {
 	param_00 waittill("pickup_object");
 	var_01 timer_cancel();
 	if(isdefined(param_00.carrier) && param_00.carrier == self) {
-		thread scripts\mp\_utility::giveunifiedpoints("ball_pass_kill");
+		thread scripts\mp\utility::giveunifiedpoints("ball_pass_kill");
 	}
 }
 
@@ -1864,10 +1864,10 @@ timer_cancel() {
 }
 
 ball_waypoint_neutral() {
-	scripts\mp\_gameobjects::set2dicon("friendly","waypoint_neutral_ball");
-	scripts\mp\_gameobjects::set2dicon("enemy","waypoint_neutral_ball");
-	scripts\mp\_gameobjects::set3dicon("friendly","waypoint_neutral_ball");
-	scripts\mp\_gameobjects::set3dicon("enemy","waypoint_neutral_ball");
+	scripts\mp\gameobjects::set2dicon("friendly","waypoint_neutral_ball");
+	scripts\mp\gameobjects::set2dicon("enemy","waypoint_neutral_ball");
+	scripts\mp\gameobjects::set3dicon("friendly","waypoint_neutral_ball");
+	scripts\mp\gameobjects::set3dicon("enemy","waypoint_neutral_ball");
 }
 
 ball_waypoint_held(param_00) {
@@ -1879,10 +1879,10 @@ ball_waypoint_held(param_00) {
 		var_01 = "waypoint_defend_round";
 	}
 
-	scripts\mp\_gameobjects::set2dicon("friendly",var_01);
-	scripts\mp\_gameobjects::set2dicon("enemy","waypoint_capture_kill_round");
-	scripts\mp\_gameobjects::set3dicon("friendly",var_01);
-	scripts\mp\_gameobjects::set3dicon("enemy","waypoint_capture_kill_round");
+	scripts\mp\gameobjects::set2dicon("friendly",var_01);
+	scripts\mp\gameobjects::set2dicon("enemy","waypoint_capture_kill_round");
+	scripts\mp\gameobjects::set3dicon("friendly",var_01);
+	scripts\mp\gameobjects::set3dicon("enemy","waypoint_capture_kill_round");
 }
 
 ball_waypoint_download() {
@@ -1894,17 +1894,17 @@ ball_waypoint_download() {
 		var_00 = "waypoint_reset_marker";
 	}
 
-	scripts\mp\_gameobjects::set2dicon("friendly",var_00);
-	scripts\mp\_gameobjects::set2dicon("enemy",var_00);
-	scripts\mp\_gameobjects::set3dicon("friendly",var_00);
-	scripts\mp\_gameobjects::set3dicon("enemy",var_00);
+	scripts\mp\gameobjects::set2dicon("friendly",var_00);
+	scripts\mp\gameobjects::set2dicon("enemy",var_00);
+	scripts\mp\gameobjects::set3dicon("friendly",var_00);
+	scripts\mp\gameobjects::set3dicon("enemy",var_00);
 }
 
 ball_waypoint_upload() {
-	scripts\mp\_gameobjects::set2dicon("friendly","waypoint_ball_upload");
-	scripts\mp\_gameobjects::set2dicon("enemy","waypoint_ball_upload");
-	scripts\mp\_gameobjects::set3dicon("friendly","waypoint_ball_upload");
-	scripts\mp\_gameobjects::set3dicon("enemy","waypoint_ball_upload");
+	scripts\mp\gameobjects::set2dicon("friendly","waypoint_ball_upload");
+	scripts\mp\gameobjects::set2dicon("enemy","waypoint_ball_upload");
+	scripts\mp\gameobjects::set3dicon("friendly","waypoint_ball_upload");
+	scripts\mp\gameobjects::set3dicon("enemy","waypoint_ball_upload");
 }
 
 ball_restore_contents() {
@@ -1956,24 +1956,24 @@ initballtimer() {
 
 createhudelems() {
 	level endon("game_ended");
-	scripts\mp\_utility::gameflagwait("prematch_done");
+	scripts\mp\utility::gameflagwait("prematch_done");
 	updatetimers("neutral",1,1);
 }
 
 updatetimers(param_00,param_01,param_02,param_03) {
-	if(!scripts\mp\_utility::istrue(level.possessionresetcondition)) {
+	if(!scripts\mp\utility::istrue(level.possessionresetcondition)) {
 		return;
 	}
 
 	var_04 = undefined;
 	var_05 = 1000 * level.possessionresettime;
-	if(scripts\mp\_utility::istrue(param_02)) {
-		if(scripts\mp\_utility::istrue(level.ballactivationdelay) && !scripts\mp\_utility::istrue(level.ballreset)) {
+	if(scripts\mp\utility::istrue(param_02)) {
+		if(scripts\mp\utility::istrue(level.ballactivationdelay) && !scripts\mp\utility::istrue(level.ballreset)) {
 			var_05 = 1000 * level.ballactivationdelay;
 		}
 	}
 
-	if(scripts\mp\_utility::istrue(param_02) || scripts\mp\_utility::istrue(param_03)) {
+	if(scripts\mp\utility::istrue(param_02) || scripts\mp\utility::istrue(param_03)) {
 		level.balltime = level.possessionresettime;
 		level.ballendtime = int(gettime() + var_05);
 	}
@@ -1983,7 +1983,7 @@ updatetimers(param_00,param_01,param_02,param_03) {
 	}
 
 	setomnvar("ui_hardpoint_timer",level.ballendtime);
-	if(var_05 > 0 && scripts\mp\_utility::istrue(param_03) || !param_01 && level.balltimerpaused) {
+	if(var_05 > 0 && scripts\mp\utility::istrue(param_03) || !param_01 && level.balltimerpaused) {
 		level.ball thread ballruntimer(param_00,var_04);
 	}
 
@@ -2003,11 +2003,11 @@ ballruntimer(param_00,param_01) {
 	level.balltimerpaused = 0;
 	balltimerwait(param_00,param_01);
 	if(isdefined(level.ball) && isdefined(level.ball.carrier)) {
-		self.carrier scripts\mp\_missions::func_27FA();
+		self.carrier scripts\mp\missions::func_27FA();
 	}
 
-	if(!scripts\mp\_utility::istrue(level.ballreset)) {
-		scripts\mp\_gameobjects::allowcarry("none");
+	if(!scripts\mp\utility::istrue(level.ballreset)) {
+		scripts\mp\gameobjects::allowcarry("none");
 		ball_set_dropped(1,self.trigger.origin,1);
 		ball_return_home(1,1);
 	}
@@ -2036,14 +2036,14 @@ waitballlongdurationwithgameendtimeupdate(param_00) {
 		waittillballhostmigrationstarts(var_02 - gettime() / 1000);
 		while(isdefined(level.hostmigrationtimer)) {
 			var_02 = var_02 + 1000;
-			function_01AF(int(var_02));
+			setgameendtime(int(var_02));
 			wait(1);
 		}
 	}
 
 	while(isdefined(level.hostmigrationtimer)) {
 		var_02 = var_02 + 1000;
-		function_01AF(int(var_02));
+		setgameendtime(int(var_02));
 		wait(1);
 	}
 
@@ -2066,7 +2066,7 @@ handlehostmigration(param_00) {
 	level endon("disconnect");
 	level waittill("host_migration_begin");
 	setomnvar("ui_uplink_timer_stopped",1);
-	var_01 = scripts\mp\_hostmigration::waittillhostmigrationdone();
+	var_01 = scripts\mp\hostmigration::waittillhostmigrationdone();
 	if(!level.balltimerstopped) {
 		setomnvar("ui_uplink_timer_stopped",0);
 	}
@@ -2088,8 +2088,8 @@ watchtimerpause() {
 	while(level.balltime > 0 && !level.balltimerpaused) {
 		var_02 = gettime();
 		if(!var_00 && level.balltime < 10) {
-			level scripts\mp\_utility::statusdialog("drone_reset_soon","allies");
-			level scripts\mp\_utility::statusdialog("drone_reset_soon","axis");
+			level scripts\mp\utility::statusdialog("drone_reset_soon","allies");
+			level scripts\mp\utility::statusdialog("drone_reset_soon","axis");
 			var_00 = 1;
 		}
 
@@ -2112,7 +2112,7 @@ watchtimerpause() {
 
 updateballtimerpausedness(param_00) {
 	var_01 = level.balltimerpaused || isdefined(level.hostmigrationtimer);
-	if(!scripts\mp\_utility::gameflag("prematch_done")) {
+	if(!scripts\mp\utility::gameflag("prematch_done")) {
 		var_01 = 0;
 	}
 
@@ -2139,7 +2139,7 @@ resumeballtimer(param_00) {
 }
 
 ball_player_on_connect() {
-	if(!scripts\mp\_utility::istrue(level.devball)) {
+	if(!scripts\mp\utility::istrue(level.devball)) {
 		foreach(var_01 in level.balls) {
 			var_01 ball_fx_start_player(self);
 		}
@@ -2156,7 +2156,7 @@ ball_fx_start_player(param_00) {
 ball_fx_start(param_00,param_01) {
 	self endon("reset");
 	self endon("pickup_object");
-	if(scripts\mp\_utility::istrue(param_00)) {
+	if(scripts\mp\utility::istrue(param_00)) {
 		wait(0.2);
 	}
 	else

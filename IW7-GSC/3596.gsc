@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3596.gsc
-****************************/
+ * Script: 3596.gsc
+************************/
 
 func_14FB() {
 	level thread func_14FD();
@@ -41,11 +41,11 @@ func_2B64() {
 	var_00 = 262144;
 	var_01 = 0;
 	foreach(var_03 in level.participants) {
-		if(!scripts\mp\_utility::isreallyalive(var_03)) {
+		if(!scripts\mp\utility::isreallyalive(var_03)) {
 			continue;
 		}
 
-		if(!scripts\mp\_utility::isenemy(var_03)) {
+		if(!scripts\mp\utility::isenemy(var_03)) {
 			continue;
 		}
 
@@ -75,11 +75,11 @@ func_2B62() {
 	var_00 = 262144;
 	var_01 = 0;
 	foreach(var_03 in level.participants) {
-		if(!scripts\mp\_utility::isreallyalive(var_03)) {
+		if(!scripts\mp\utility::isreallyalive(var_03)) {
 			continue;
 		}
 
-		if(!scripts\mp\_utility::isenemy(var_03)) {
+		if(!scripts\mp\utility::isenemy(var_03)) {
 			continue;
 		}
 
@@ -109,19 +109,19 @@ func_2B62() {
 
 func_2B63(param_00,param_01) {
 	self endon("death");
-	var_02 = scripts\mp\_utility::outlineenableforplayer(param_00,"orange",self,0,1,"level_script");
+	var_02 = scripts\mp\utility::outlineenableforplayer(param_00,"orange",self,0,1,"level_script");
 	var_03 = param_01 * 0.0001;
 	wait(0.1 * var_03);
-	if(!scripts\mp\_utility::isreallyalive(param_00)) {
+	if(!scripts\mp\utility::isreallyalive(param_00)) {
 		return;
 	}
 
 	self earthquakeforplayer(0.2,0.5,self.origin,64);
 	var_04 = param_00 gettagorigin("j_mainroot");
 	var_05 = self gettagorigin("j_shouldertwist_le");
-	var_06 = scripts\mp\_utility::_magicbullet("iw7_chargeshot_mp",var_05,var_04,self);
+	var_06 = scripts\mp\utility::_magicbullet("iw7_chargeshot_mp",var_05,var_04,self);
 	if(isdefined(param_00)) {
-		scripts\mp\_utility::outlinedisable(var_02,param_00);
+		scripts\mp\utility::outlinedisable(var_02,param_00);
 	}
 }
 

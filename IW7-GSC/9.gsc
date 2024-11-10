@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\9.gsc
+ * Script: 9.gsc
 ***************************************/
 
 main() {
@@ -10,7 +10,7 @@ main() {
   setup_callbacks();
   level.badplace_cylinder_func = ::badplace_cylinder;
   level.badplace_delete_func = ::badplace_delete;
-  scripts\mp\mp_agent::init_agent("mp/default_agent_definition.csv");
+  scripts\mp\mp_agent::init_agent("mp\default_agent_definition.csv");
   func_0F6E::registerscriptedagent();
   level thread scripts\mp\agents\agent_common::init();
   level thread scripts\mp\killstreaks\agent_killstreak::init();

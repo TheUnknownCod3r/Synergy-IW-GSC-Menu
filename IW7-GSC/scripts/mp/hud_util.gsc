@@ -1,8 +1,8 @@
-/*******************************************
+/***********************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\hud_util.gsc
-*******************************************/
+ * Script: scripts\mp\hud_util.gsc
+***********************************/
 
 setparent(param_00) {
 	if(isdefined(self.parent) && self.parent == param_00) {

@@ -1,8 +1,8 @@
-/**************************************************
+/******************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\cp_blackholegun.gsc
-**************************************************/
+ * Script: scripts\cp\cp_blackholegun.gsc
+******************************************/
 
 init() {
 	level.bhgunphysicsvolumes = [];
@@ -59,7 +59,7 @@ missilespawned(param_00,param_01) {
 	var_10.weapon_name = "blackholegun_indicator_zm";
 	var_10 linkto(var_0F);
 	var_0F thread monitorprojectilearrive(var_0E,self,var_10,var_02);
-	param_01.triggerportableradarping thread scripts/cp/powers/coop_blackholegrenade::grabclosestzombies(var_0F,1);
+	param_01.triggerportableradarping thread scripts\cp\powers\coop_blackholegrenade::grabclosestzombies(var_0F,1);
 	var_0F setscriptablepartstate("projectile","on",0);
 	waittillframeend;
 	param_01 delete();
@@ -140,7 +140,7 @@ watchforincidentalplayerdamage(param_00) {
 				continue;
 			}
 
-			if(!scripts/cp/powers/coop_phaseshift::areentitiesinphase(self,var_04)) {
+			if(!scripts\cp\powers\coop_phaseshift::areentitiesinphase(self,var_04)) {
 				continue;
 			}
 
@@ -182,7 +182,7 @@ watchfordirectplayerdamage(param_00,param_01) {
 			continue;
 		}
 
-		if(!scripts/cp/powers/coop_phaseshift::areentitiesinphase(self,var_03)) {
+		if(!scripts\cp\powers\coop_phaseshift::areentitiesinphase(self,var_03)) {
 			continue;
 		}
 

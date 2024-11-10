@@ -1,12 +1,12 @@
-/********************************************************
+/************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\zombies\directors_cut.gsc
-********************************************************/
+ * Script: scripts\cp\zombies\directors_cut.gsc
+************************************************/
 
 init() {
-	level._effect["directors_cut_golden_film"] = loadfx("vfx/iw7/levels/cp_final/pap/vfx_filmreel_golden_anim.vfx");
-	level._effect["soul_key_place"] = loadfx("vfx/iw7/levels/cp_final/pap/vfx_soulkey_place.vfx");
+	level._effect["directors_cut_golden_film"] = loadfx("vfx\iw7\levels\cp_final\pap\vfx_filmreel_golden_anim.vfx");
+	level._effect["soul_key_place"] = loadfx("vfx\iw7\levels\cp_final\pap\vfx_soulkey_place.vfx");
 }
 
 start_directors_cut() {

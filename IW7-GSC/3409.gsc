@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3409.gsc
-****************************/
+ * Script: 3409.gsc
+************************/
 
 func_96F4() {
 	wait(5);

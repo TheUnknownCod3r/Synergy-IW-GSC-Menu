@@ -1,16 +1,16 @@
-/*************************************************************
+/*****************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\killstreaks\_target_marker.gsc
-*************************************************************/
+ * Script: scripts\mp\killstreaks\_target_marker.gsc
+*****************************************************/
 
 init() {}
 
 _meth_819B(param_00,param_01) {
 	scripts\engine\utility::allow_usability(0);
 	self setscriptablepartstate("killstreak","visor_active",0);
-	scripts\mp\_utility::func_1254();
-	scripts\mp\_utility::func_1C47(0);
+	scripts\mp\utility::func_1254();
+	scripts\mp\utility::func_1C47(0);
 	var_02 = undefined;
 	if(param_00.streakname == "dronedrop") {
 		var_02 = "deploy_dronepackage_mp";
@@ -74,13 +74,13 @@ _meth_819B(param_00,param_01) {
 		var_03.var_1349C _meth_85C8(1);
 	}
 
-	if(scripts\mp\_utility::isreallyalive(self)) {
+	if(scripts\mp\utility::isreallyalive(self)) {
 		self notify("killstreak_finished_with_weapon_" + var_02);
 	}
 
 	self setscriptablepartstate("killstreak","neutral",0);
-	scripts\mp\_utility::func_11DB();
-	scripts\mp\_utility::func_1C47(1);
+	scripts\mp\utility::func_11DB();
+	scripts\mp\utility::func_1C47(1);
 	thread scripts\engine\utility::delaythread(0.05,::scripts\engine\utility::allow_usability,1);
 	return var_03;
 }

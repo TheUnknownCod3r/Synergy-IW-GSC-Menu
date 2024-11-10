@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2838.gsc
+ * Script: 2838.gsc
 ***************************************/
 
 func_4761() {
@@ -15,10 +15,10 @@ func_4761() {
   level.player.func_4759.func_11168 = [];
   level.player.func_4759.func_389C = 0;
   level.player.func_4759.func_A8C6 = undefined;
-  level.func_7649["coverwall_expand"] = loadfx("vfx/iw7/core/equipment/coverwall/vfx_coverwall_foam_expand.vfx");
-  level.func_7649["coverwall_collapse"] = loadfx("vfx/iw7/core/equipment/coverwall/vfx_coverwall_foam_collapse.vfx");
-  level.func_7649["coverwall_explosion"] = loadfx("vfx/iw7/_requests/mp/power/vfx_trip_mine_explode.vfx");
-  level.func_7649["coverwall_dud"] = loadfx("vfx/code/foam/vfx_code_foamblock_death.vfx");
+  level.func_7649["coverwall_expand"] = loadfx("vfx\iw7\core\equipment\coverwall\vfx_coverwall_foam_expand.vfx");
+  level.func_7649["coverwall_collapse"] = loadfx("vfx\iw7\core\equipment\coverwall\vfx_coverwall_foam_collapse.vfx");
+  level.func_7649["coverwall_explosion"] = loadfx("vfx\iw7\_requests\mp\power\vfx_trip_mine_explode.vfx");
+  level.func_7649["coverwall_dud"] = loadfx("vfx\code\foam\vfx_code_foamblock_death.vfx");
   precacheitem("coverwall");
   setdvarifuninitialized("portable_cover_lifetime", 35);
   setdvarifuninitialized("debug_coverwall", 0);
@@ -206,7 +206,7 @@ draw_cool_circle_til_notify() {
   for (;;) {
   var_00 = self.origin;
   var_01 = var_00 + anglestoforward(self.angles) * 100;
-  scripts/sp/debug::func_5B5D(var_00, var_01, (0, 1, 0), 1, 0);
+  scripts\sp\debug::func_5B5D(var_00, var_01, (0, 1, 0), 1, 0);
   wait 0.05;
   }
 }
@@ -366,7 +366,7 @@ func_E0E1(var_00) {
   var_03 = var_0.origin;
 
   _despawncovernode(var_00);
-  self.func_473D = scripts/sp/utility::func_22B2(self.func_473D, var_04);
+  self.func_473D = scripts\sp\utility::func_22B2(self.func_473D, var_04);
   return;
   }
   }
@@ -406,13 +406,13 @@ func_5B54(var_00, var_01, var_02) {
   self endon("death");
 
   for (;;) {
-  scripts/sp/debug::func_5B54(var_00, var_01, var_02, 32, 1);
+  scripts\sp\debug::func_5B54(var_00, var_01, var_02, 32, 1);
   wait 0.05;
   }
 }
 
 func_475E(var_00) {
-  self.func_BE07 thread scripts/sp/utility::func_C12D("expired", var_00);
+  self.func_BE07 thread scripts\sp\utility::func_C12D("expired", var_00);
   var_01 = self.func_BE07 scripts\engine\utility::waittill_any_return("expired", "death");
   var_02 = var_01 == "death";
   var_03 = self.func_BE07.origin;
@@ -462,7 +462,7 @@ func_475D() {
   self endon("death");
   self endon("entitydeleted");
   self waittill("coverwall_expand_finish");
-  self.func_BE64 = __func_316(self);
+  self.func_BE64 = _func_316(self);
 }
 
 func_B9C4() {
@@ -496,7 +496,7 @@ func_B9C4() {
   if (var_00 >= var_01)
   continue;
 
-  thread scripts/sp/utility::play_sound_on_entity("deployable_cover_det_trig");
+  thread scripts\sp\utility::play_sound_on_entity("deployable_cover_det_trig");
   wait 0.3;
   func_2BCE();
   self.func_4759.func_5AE6 = undefined;

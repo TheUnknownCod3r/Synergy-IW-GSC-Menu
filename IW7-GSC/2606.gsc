@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2606.gsc
+ * Script: 2606.gsc
 ***************************************/
 
 setmodelfromarray(var_00) {

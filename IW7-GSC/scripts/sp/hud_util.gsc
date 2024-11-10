@@ -1,8 +1,8 @@
-/*******************************************
+/***********************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\sp\hud_util.gsc
-*******************************************/
+ * Script: scripts\sp\hud_util.gsc
+***********************************/
 
 setparent(param_00) {
 	if(isdefined(self.parent) && self.parent == param_00) {
@@ -536,7 +536,7 @@ func_10B56(param_00) {
 		level.var_10B54 destroy();
 	}
 
-	function_01C5("hud_showStance","0");
+	setsaveddvar("hud_showStance","0");
 	level.var_10B54 = newhudelem();
 	level.var_10B54.x = -75;
 	if(level.console) {
@@ -565,7 +565,7 @@ func_10B55() {
 		level.var_10B54 destroy();
 	}
 
-	function_01C5("hud_showStance","1");
+	setsaveddvar("hud_showStance","1");
 }
 
 func_491A() {

@@ -1,8 +1,8 @@
-/*****************************************************************
+/*********************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\maps\cp_rave\gen\cp_rave_sound.gsc
-*****************************************************************/
+ * Script: scripts\cp\maps\cp_rave\gen\cp_rave_sound.gsc
+*********************************************************/
 
 main() {
 	var_00 = scripts\common\createfx::createloopsound();

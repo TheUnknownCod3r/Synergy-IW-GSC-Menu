@@ -1,17 +1,17 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2813.gsc
+ * Script: 2813.gsc
 ***************************************/
 
 init() {
-  level._effect["whizzby_left"] = loadfx("vfx/old/_requests/mp_gameplay/vfx_near_miss_edge_left.vfx");
-  level._effect["whizzby_right"] = loadfx("vfx/old/_requests/mp_gameplay/vfx_near_miss_edge_right.vfx");
-  level._effect["whizzby_top"] = loadfx("vfx/old/_requests/mp_gameplay/vfx_near_miss_edge_top.vfx");
-  level._effect["whizzby_top_left"] = loadfx("vfx/old/_requests/mp_gameplay/vfx_near_miss_edge_top_left.vfx");
-  level._effect["whizzby_top_right"] = loadfx("vfx/old/_requests/mp_gameplay/vfx_near_miss_edge_top_right.vfx");
-  level._effect["whizzby_bottom"] = loadfx("vfx/old/_requests/mp_gameplay/vfx_near_miss_edge_bottom.vfx");
-  level._effect["whizzby_bottom_left"] = loadfx("vfx/old/_requests/mp_gameplay/vfx_near_miss_edge_bottom_left.vfx");
-  level._effect["whizzby_bottom_right"] = loadfx("vfx/old/_requests/mp_gameplay/vfx_near_miss_edge_bottom_right.vfx");
+  level._effect["whizzby_left"] = loadfx("vfx\old\_requests\mp_gameplay\vfx_near_miss_edge_left.vfx");
+  level._effect["whizzby_right"] = loadfx("vfx\old\_requests\mp_gameplay\vfx_near_miss_edge_right.vfx");
+  level._effect["whizzby_top"] = loadfx("vfx\old\_requests\mp_gameplay\vfx_near_miss_edge_top.vfx");
+  level._effect["whizzby_top_left"] = loadfx("vfx\old\_requests\mp_gameplay\vfx_near_miss_edge_top_left.vfx");
+  level._effect["whizzby_top_right"] = loadfx("vfx\old\_requests\mp_gameplay\vfx_near_miss_edge_top_right.vfx");
+  level._effect["whizzby_bottom"] = loadfx("vfx\old\_requests\mp_gameplay\vfx_near_miss_edge_bottom.vfx");
+  level._effect["whizzby_bottom_left"] = loadfx("vfx\old\_requests\mp_gameplay\vfx_near_miss_edge_bottom_left.vfx");
+  level._effect["whizzby_bottom_right"] = loadfx("vfx\old\_requests\mp_gameplay\vfx_near_miss_edge_bottom_right.vfx");
   level thread onplayerconnect();
 }
 

@@ -1,23 +1,23 @@
-/********************************************************
+/************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\equipment\phase_shift.gsc
-********************************************************/
+ * Script: scripts\mp\equipment\phase_shift.gsc
+************************************************/
 
 init() {
-	level._effect["vfx_phase_shift_trail_friendly"] = loadfx("vfx/iw7/_requests/mp/vfx_phase_shift_body_fr.vfx");
-	level._effect["vfx_phase_shift_trail_enemy"] = loadfx("vfx/iw7/_requests/mp/vfx_phase_shift_body_en.vfx");
-	level._effect["vfx_screen_flash"] = loadfx("vfx/core/mp/core/vfx_screen_flash");
+	level._effect["vfx_phase_shift_trail_friendly"] = loadfx("vfx\iw7\_requests\mp\vfx_phase_shift_body_fr.vfx");
+	level._effect["vfx_phase_shift_trail_enemy"] = loadfx("vfx\iw7\_requests\mp\vfx_phase_shift_body_en.vfx");
+	level._effect["vfx_screen_flash"] = loadfx("vfx\core\mp\core\vfx_screen_flash");
 }
 
 func_E154(param_00) {
-	if(scripts\mp\_utility::istrue(self.phaseshift_active)) {
-		if(!scripts\mp\_utility::istrue(param_00)) {
-			if(scripts\mp\_utility::_hasperk("specialty_ftlslide")) {
-				if(scripts\mp\_utility::isanymlgmatch() && level.tactical) {
+	if(scripts\mp\utility::istrue(self.phaseshift_active)) {
+		if(!scripts\mp\utility::istrue(param_00)) {
+			if(scripts\mp\utility::_hasperk("specialty_ftlslide")) {
+				if(scripts\mp\utility::isanymlgmatch() && level.tactical) {
 					self setsuit("assassin_mlgslide_mp_tactical");
 				}
-				else if(scripts\mp\_utility::isanymlgmatch()) {
+				else if(scripts\mp\utility::isanymlgmatch()) {
 					self setsuit("assassin_mlgslide_mp");
 				}
 				else if(level.tactical) {
@@ -33,18 +33,18 @@ func_E154(param_00) {
 				self setsuit("assassin_mp");
 			}
 
-			if(scripts\mp\_utility::istrue(self.phaseshift_removedtracker)) {
-				scripts\mp\_utility::giveperk("specialty_tracker");
+			if(scripts\mp\utility::istrue(self.phaseshift_removedtracker)) {
+				scripts\mp\utility::giveperk("specialty_tracker");
 			}
 
-			scripts\mp\_utility::removeperk("specialty_blindeye");
-			scripts\mp\_utility::removeperk("specialty_radarringresist");
+			scripts\mp\utility::removeperk("specialty_blindeye");
+			scripts\mp\utility::removeperk("specialty_radarringresist");
 			scripts\engine\utility::allow_offhand_weapons(1);
 			scripts\engine\utility::allow_usability(1);
-			scripts\mp\_utility::func_1C47(1);
+			scripts\mp\utility::func_1C47(1);
 			self.var_38ED = 1;
 			self setscriptablepartstate("compassicon","defaulticon",0);
-			scripts\mp\_utility::func_8ECC();
+			scripts\mp\utility::func_8ECC();
 			self playlocalsound("ftl_phase_in");
 			self playsound("ftl_phase_in_npc");
 			self visionsetnakedforplayer("",0.1);
@@ -63,7 +63,7 @@ func_E154(param_00) {
 }
 
 func_E88D() {
-	if(!scripts\mp\_utility::istrue(self.phaseshift_active)) {
+	if(!scripts\mp\utility::istrue(self.phaseshift_active)) {
 		func_6626(0,4);
 		return 1;
 	}
@@ -87,16 +87,16 @@ func_6626(param_00,param_01) {
 	func_2A71(self,param_01);
 	self _meth_82C0("phaseshift_mp_shock",0.1);
 	scripts\engine\utility::allow_offhand_weapons(0);
-	scripts/mp/equipment/peripheral_vision::func_CA2A();
+	scripts\mp\equipment\peripheral_vision::func_CA2A();
 	self setscriptablepartstate("compassicon","hideIcon",0);
-	scripts\mp\_utility::func_8ECD();
-	scripts\mp\_utility::giveperk("specialty_blindeye");
-	scripts\mp\_utility::giveperk("specialty_radarringresist");
+	scripts\mp\utility::func_8ECD();
+	scripts\mp\utility::giveperk("specialty_blindeye");
+	scripts\mp\utility::giveperk("specialty_radarringresist");
 	scripts\engine\utility::allow_usability(0);
-	scripts\mp\_utility::func_1C47(0);
+	scripts\mp\utility::func_1C47(0);
 	self.var_38ED = 0;
-	if(scripts\mp\_utility::_hasperk("specialty_tracker")) {
-		scripts\mp\_utility::removeperk("specialty_tracker");
+	if(scripts\mp\utility::_hasperk("specialty_tracker")) {
+		scripts\mp\utility::removeperk("specialty_tracker");
 		self.phaseshift_removedtracker = 1;
 	}
 
@@ -109,10 +109,10 @@ restartweaponvfx() {
 	self notify("startWeaponVFX");
 	self endon("restartWeaponVFX");
 	var_00 = self getcurrentprimaryweapon();
-	scripts\mp\_weapons::clearweaponscriptvfx(var_00,scripts\mp\_utility::istrue(self _meth_8519(var_00)));
+	scripts\mp\weapons::clearweaponscriptvfx(var_00,scripts\mp\utility::istrue(self _meth_8519(var_00)));
 	scripts\engine\utility::waitframe();
 	var_00 = self getcurrentprimaryweapon();
-	scripts\mp\_weapons::runweaponscriptvfx(var_00,scripts\mp\_utility::istrue(self _meth_8519(var_00)));
+	scripts\mp\weapons::runweaponscriptvfx(var_00,scripts\mp\utility::istrue(self _meth_8519(var_00)));
 }
 
 exitphaseshift(param_00) {}
@@ -125,8 +125,8 @@ func_10918(param_00) {
 	}
 
 	wait(0.1);
-	function_029A(scripts\engine\utility::getfx(param_00 + "_friendly"),var_01,"tag_origin",self.team);
-	function_029A(scripts\engine\utility::getfx(param_00),var_01,"tag_origin",scripts\mp\_utility::getotherteam(self.team));
+	playfxontagforteam(scripts\engine\utility::getfx(param_00 + "_friendly"),var_01,"tag_origin",self.team);
+	playfxontagforteam(scripts\engine\utility::getfx(param_00),var_01,"tag_origin",scripts\mp\utility::getotherteam(self.team));
 	wait(0.15);
 	var_01 delete();
 }
@@ -140,7 +140,7 @@ func_108EE(param_00,param_01,param_02,param_03,param_04) {
 	var_05.var_762C = param_00;
 	wait(0.1);
 	if(param_01 == param_02) {
-		function_029A(param_00,var_05,"tag_origin",param_03);
+		playfxontagforteam(param_00,var_05,"tag_origin",param_03);
 		var_05 hidefromplayer(param_02);
 	}
 	else
@@ -180,7 +180,7 @@ func_12EEA(param_00) {
 	var_01 = 0;
 	var_02 = 0.15;
 	for(;;) {
-		if(!isdefined(self) || !isdefined(self.triggerportableradarping) || !scripts\mp\_utility::isreallyalive(self.triggerportableradarping) || !isdefined(self.var_CACB) || !scripts\mp\_utility::isreallyalive(self.var_CACB) || !isentityphaseshifted(self.var_CACB) || var_01 > param_00) {
+		if(!isdefined(self) || !isdefined(self.triggerportableradarping) || !scripts\mp\utility::isreallyalive(self.triggerportableradarping) || !isdefined(self.var_CACB) || !scripts\mp\utility::isreallyalive(self.var_CACB) || !isentityphaseshifted(self.var_CACB) || var_01 > param_00) {
 			self.origin = self.origin + (0,0,10000);
 			wait(0.2);
 			self delete();
@@ -240,7 +240,7 @@ func_4524(param_00) {
 	self endon("disconnect");
 	self notify("confuseBotsOnTeleport");
 	self endon("confuseBotsOnTeleport");
-	scripts\mp\_utility::_enableignoreme();
+	scripts\mp\utility::_enableignoreme();
 	wait(param_00);
-	scripts\mp\_utility::_disableignoreme();
+	scripts\mp\utility::_disableignoreme();
 }

@@ -1,8 +1,8 @@
-/******************************************************
+/**********************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\bots\gametype_siege.gsc
-******************************************************/
+ * Script: scripts\mp\bots\gametype_siege.gsc
+**********************************************/
 
 main() {
 	setup_callbacks();
@@ -20,11 +20,11 @@ setup_bot_siege() {
 
 bot_siege_manager_think() {
 	level.siege_bot_team_need_flags = [];
-	scripts\mp\_utility::gameflagwait("prematch_done");
+	scripts\mp\utility::gameflagwait("prematch_done");
 	for(;;) {
 		level.siege_bot_team_need_flags = [];
 		foreach(var_01 in level.players) {
-			if(!scripts\mp\_utility::isreallyalive(var_01) && var_01.hasspawned) {
+			if(!scripts\mp\utility::isreallyalive(var_01) && var_01.hasspawned) {
 				if(var_01.team != "spectator" && var_01.team != "neutral") {
 					level.siege_bot_team_need_flags[var_01.team] = 1;
 				}
@@ -33,7 +33,7 @@ bot_siege_manager_think() {
 
 		var_03 = [];
 		foreach(var_05 in level.magicbullet) {
-			var_06 = var_05.useobj scripts\mp\_gameobjects::getownerteam();
+			var_06 = var_05.useobj scripts\mp\gameobjects::getownerteam();
 			if(var_06 != "neutral") {
 				if(!isdefined(var_03[var_06])) {
 					var_03[var_06] = 1;
@@ -46,7 +46,7 @@ bot_siege_manager_think() {
 
 		foreach(var_06, var_09 in var_03) {
 			if(var_09 >= 2) {
-				var_0A = scripts\mp\_utility::getotherteam(var_06);
+				var_0A = scripts\mp\utility::getotherteam(var_06);
 				level.siege_bot_team_need_flags[var_0A] = 1;
 			}
 		}
@@ -91,7 +91,7 @@ bot_choose_flag() {
 	var_00 = undefined;
 	var_01 = undefined;
 	foreach(var_03 in level.magicbullet) {
-		var_04 = var_03.useobj scripts\mp\_gameobjects::getownerteam();
+		var_04 = var_03.useobj scripts\mp\gameobjects::getownerteam();
 		if(var_04 != self.team) {
 			var_05 = distancesquared(self.origin,var_03.origin);
 			if(!isdefined(var_01) || var_05 < var_01) {

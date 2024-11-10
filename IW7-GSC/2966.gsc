@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2966.gsc
+ * Script: 2966.gsc
 ***************************************/
 
 func_FA79() {
@@ -46,7 +46,7 @@ func_A629(var_00) {
 
 func_1063F(var_00) {
   var_01 = [];
-  var_02 = scripts/sp/utility::func_65DF("no_riders_until_unload");
+  var_02 = scripts\sp\utility::func_65DF("no_riders_until_unload");
 
   foreach (var_04 in var_00) {
   var_4.count = 1;
@@ -55,13 +55,13 @@ func_1063F(var_00) {
 
   if (isdefined(var_4.func_ED6E)) {
   var_05 = 1;
-  var_07 = scripts/sp/utility::func_5CC9(var_04);
+  var_07 = scripts\sp\utility::func_5CC9(var_04);
   var_07 func_0B24::func_5C21();
   }
   else if (isdefined(var_4.func_ED8A) || isdefined(var_4.func_ED1B)) {
   var_05 = 1;
-  var_07 = scripts/sp/utility::func_2C17(var_04);
-  var_07 scripts/sp/fakeactor::func_6B15();
+  var_07 = scripts\sp\utility::func_2C17(var_04);
+  var_07 scripts\sp\fakeactor::func_6B15();
   }
   else if (isdefined(var_4.code_classname) && var_4.code_classname == "script_vehicle") {
   var_06 = 1;
@@ -130,7 +130,7 @@ func_19E4(var_00) {
 }
 
 spawn_group() {
-  if (scripts/sp/utility::func_65DF("no_riders_until_unload") && !scripts/sp/utility::func_65DB("no_riders_until_unload"))
+  if (scripts\sp\utility::func_65DF("no_riders_until_unload") && !scripts\sp\utility::func_65DB("no_riders_until_unload"))
   return [];
 
   var_00 = func_7D47();
@@ -143,7 +143,7 @@ spawn_group() {
   var_02 = func_1041B(var_02);
 
   foreach (var_04 in var_02)
-  thread scripts/sp/vehicle_aianim::func_8739(var_04);
+  thread scripts\sp\vehicle_aianim::func_8739(var_04);
 
   return var_02;
 }
@@ -180,7 +180,7 @@ func_10805(var_00) {
   var_11 = func_1041B(var_11);
 
   foreach (var_14 in var_11)
-  thread scripts/sp/vehicle_aianim::func_8739(var_14);
+  thread scripts\sp\vehicle_aianim::func_8739(var_14);
 
   return var_11;
   }
@@ -223,11 +223,11 @@ func_131F6(var_00) {
   }
 
   if (var_0.vehicletype == "empty" || var_0.vehicletype == "empty_heli") {
-  var_00 thread scripts/sp/vehicle_paths::beginlocationselection();
+  var_00 thread scripts\sp\vehicle_paths::beginlocationselection();
   return;
   }
 
-  var_00 scripts/sp/utility::func_F294();
+  var_00 scripts\sp\utility::func_F294();
 
   if (!isdefined(var_0.func_B91F))
   var_0.func_B91F = 0;
@@ -250,9 +250,9 @@ func_131F6(var_00) {
   var_00 thermaldrawenable();
   }
 
-  var_00 scripts/sp/utility::func_65E0("unloaded");
-  var_00 scripts/sp/utility::func_65E0("loaded");
-  var_00 scripts/sp/utility::func_65E0("landed");
+  var_00 scripts\sp\utility::func_65E0("unloaded");
+  var_00 scripts\sp\utility::func_65E0("loaded");
+  var_00 scripts\sp\utility::func_65E0("landed");
   var_0.func_E4FB = [];
   var_0.func_12BD0 = [];
   var_0.func_12BBC = "default";
@@ -271,14 +271,14 @@ func_131F6(var_00) {
   var_00 thread vehicle_builds();
 
   if (isdefined(var_0.func_EF04))
-  var_00 thread scripts/sp/vehicle_lights::lights_on(var_0.func_EF04);
+  var_00 thread scripts\sp\vehicle_lights::lights_on(var_0.func_EF04);
 
   if (isdefined(var_0.func_EDD1))
   var_0._meth_843F = 1;
 
   var_0.func_4CF5 = [];
   var_00 thread func_740E();
-  var_00 thread scripts/sp/vehicle_aianim::func_88AE();
+  var_00 thread scripts\sp\vehicle_aianim::func_88AE();
 
   if (isdefined(var_0.func_EDB8))
   var_00 _meth_8363(var_0.func_EDB8, &"");
@@ -289,7 +289,7 @@ func_131F6(var_00) {
   var_0.func_5971 = 1;
 
   var_00 thread func_1322A();
-  var_00 thread scripts/sp/vehicle_treads::func_1324B();
+  var_00 thread scripts\sp\vehicle_treads::func_1324B();
   var_00 thread func_92D3();
   var_00 thread func_1F6E();
 
@@ -305,7 +305,7 @@ func_131F6(var_00) {
   var_00 _meth_8364(var_0.script_team);
 
   var_00 thread func_5636();
-  var_00 thread scripts/sp/vehicle_paths::beginlocationselection();
+  var_00 thread scripts\sp\vehicle_paths::beginlocationselection();
 
   if (isdefined(level.func_9334))
   var_11 = level.func_9334;
@@ -369,7 +369,7 @@ func_131FA() {
   var_00 = 1;
 
   if (isdefined(var_01) && isdefined(var_02)) {
-  var_01 scripts/sp/player_stats::func_DEBD(self, var_02, var_03);
+  var_01 scripts\sp\player_stats::func_DEBD(self, var_02, var_03);
 
   if (isdefined(self.func_4D28))
   self.func_4D28 = undefined;
@@ -416,10 +416,10 @@ func_131FA() {
   if (isdefined(level.vehicle.func_116CE.func_4E23[self.vehicletype]))
   thread [[level.vehicle.func_116CE.func_4E23[self.vehicletype]]]();
 
-  scripts\engine\utility::array_levelthread(self.func_E4FB, scripts/sp/vehicle_aianim::func_876B, var_01, self.vehicletype);
+  scripts\engine\utility::array_levelthread(self.func_E4FB, scripts\sp\vehicle_aianim::func_876B, var_01, self.vehicletype);
   thread func_A5CB(self.classname);
   thread func_A5BF(self.classname);
-  thread scripts/sp/vehicle_lights::func_A5F2(self.classname);
+  thread scripts\sp\vehicle_lights::func_A5F2(self.classname);
   func_5144();
 
   if (isdefined(level.vehicle.func_116CE.func_4E4E[self.classname]))
@@ -754,7 +754,7 @@ func_A60E(var_00) {
   continue;
 
   if (isdefined(var_2.func_B14F))
-  var_02 scripts/sp/utility::func_1101B();
+  var_02 scripts\sp\utility::func_1101B();
 
   var_02 _meth_81D0();
   }
@@ -776,7 +776,7 @@ vehicle_caps() {
   self endon("death");
   self endon("enable_spline_path");
   waittillframeend;
-  self.func_E4FB = scripts/sp/utility::func_DFEB(self.func_E4FB);
+  self.func_E4FB = scripts\sp\utility::func_DFEB(self.func_E4FB);
 
   if (self.func_E4FB.size) {
   scripts\engine\utility::array_thread(self.func_E4FB, ::func_13225, self, self.func_E4FB);
@@ -802,9 +802,9 @@ func_143F(var_00, var_01) {
   self settargetyaw(scripts\engine\utility::flat_angle(self.angles)[1]);
 
   if (isdefined(self.func_12BC2))
-  _setvehgoalpos_wrap(scripts/sp/utility::func_864C(self.origin) + (0, 0, self.func_12BC2), 1);
+  _setvehgoalpos_wrap(scripts\sp\utility::func_864C(self.origin) + (0, 0, self.func_12BC2), 1);
   else
-  _setvehgoalpos_wrap(scripts/sp/utility::func_864C(self.origin), 1);
+  _setvehgoalpos_wrap(scripts\sp\utility::func_864C(self.origin), 1);
 
   self waittill("goal");
 }
@@ -842,7 +842,7 @@ func_10809(var_00) {
   if (level.func_650D.size >= 8)
   return;
 
-  var_01 = scripts/sp/utility::func_10808();
+  var_01 = scripts\sp\utility::func_10808();
 
   if (isdefined(var_00))
   var_01 _meth_83F4(var_00);
@@ -850,7 +850,7 @@ func_10809(var_00) {
   var_01 thread vehicle_caps();
   var_01 endon("death");
   var_1.func_5971 = 1;
-  var_01 scripts/sp/vehicle_paths::setsuit(var_01);
+  var_01 scripts\sp\vehicle_paths::setsuit(var_01);
   var_01 func_AB23();
 }
 
@@ -906,12 +906,12 @@ func_1446(var_00) {
   self notify("unloading");
   var_01 = [];
 
-  if (scripts/sp/utility::func_65DF("no_riders_until_unload")) {
-  scripts/sp/utility::func_65E1("no_riders_until_unload");
+  if (scripts\sp\utility::func_65DF("no_riders_until_unload")) {
+  scripts\sp\utility::func_65E1("no_riders_until_unload");
   var_01 = func_10805(var_00);
 
   foreach (var_03 in var_01)
-  scripts/sp/utility::func_106ED(var_03);
+  scripts\sp\utility::func_106ED(var_03);
 
   waittillframeend;
   }
@@ -924,12 +924,12 @@ func_1446(var_00) {
   var_06 notify("unload");
   }
 
-  var_01 = scripts/sp/vehicle_aianim::func_1F74("unload");
+  var_01 = scripts\sp\vehicle_aianim::func_1F74("unload");
   var_08 = level.vehicle.func_116CE.func_12BCF[self.classname];
 
   if (isdefined(var_08)) {
   var_01 = [];
-  var_09 = scripts/sp/vehicle_aianim::func_7D2F();
+  var_09 = scripts\sp\vehicle_aianim::func_7D2F();
 
   foreach (var_12, var_11 in self.func_E4FB) {
   if (isdefined(var_9[var_11.func_1321D]))
@@ -1299,7 +1299,7 @@ func_B03F(var_00, var_01, var_02) {
 }
 
 func_4E05(var_00) {
-  thread scripts/sp/utility::play_loop_sound_on_tag(var_00, undefined, 0, 1);
+  thread scripts\sp\utility::play_loop_sound_on_tag(var_00, undefined, 0, 1);
   scripts\engine\utility::waittill_any("fire_extinguish", "stop_crash_loop_sound");
 
   if (!isdefined(self))
@@ -1404,7 +1404,7 @@ func_12B8(var_00, var_01) {
 func_1322D(var_00) {
   foreach (var_02 in self.func_E4FB) {
   if (isai(var_02)) {
-  var_02 scripts/sp/utility::func_F3B5(var_00);
+  var_02 scripts\sp\utility::func_F3B5(var_00);
   continue;
   }
 
@@ -1507,7 +1507,7 @@ func_4CFC() {
 
   level.func_2184 = 1;
   self.func_56DE = 1;
-  var_01 scripts/sp/utility::func_56BA("invulerable_bullets");
+  var_01 scripts\sp\utility::func_56BA("invulerable_bullets");
   wait 4;
   level.func_2184 = 0;
 
@@ -1550,9 +1550,9 @@ func_4CFD() {
   self.func_56DE = 1;
 
   if (var_04 == "mod_grenade" || var_04 == "mod_grenade_splash")
-  var_01 scripts/sp/utility::func_56BA("invulerable_frags");
+  var_01 scripts\sp\utility::func_56BA("invulerable_frags");
   else
-  var_01 scripts/sp/utility::func_56BA("invulerable_bullets");
+  var_01 scripts\sp\utility::func_56BA("invulerable_bullets");
 
   wait 4;
   level.func_2184 = 0;
@@ -1802,10 +1802,10 @@ func_B6B7() {
   var_7.func_9FF0 = 1;
   var_7.func_C841 = self;
   var_7.script_team = self.script_team;
-  var_07 thread scripts/sp/mgturret::func_32B7();
+  var_07 thread scripts\sp\mgturret::func_32B7();
   var_07 makeunusable();
   func_F5D8(var_07);
-  level thread scripts/sp/mgturret::func_B6A7(var_07, scripts/sp/utility::func_7E72());
+  level thread scripts\sp\mgturret::func_B6A7(var_07, scripts\sp\utility::func_7E72());
 
   if (isdefined(self.func_ED98))
   var_7.func_ED98 = self.func_ED98;
@@ -2091,8 +2091,8 @@ func_131EC() {
   self endon("death");
   var_00 = self.vehicletype;
 
-  if (!scripts/sp/utility::func_65DF("unloaded"))
-  scripts/sp/utility::func_65E0("unloaded");
+  if (!scripts\sp\utility::func_65DF("unloaded"))
+  scripts\sp\utility::func_65E0("unloaded");
 }
 
 func_7D48(var_00) {
@@ -2195,7 +2195,7 @@ func_740E() {
   thread [[var_11]](var_03, var_00, var_04, var_05, var_01, var_06, var_07);
 
   if (isdefined(var_00))
-  var_00 scripts/sp/player_stats::func_DED8();
+  var_00 scripts\sp\player_stats::func_DED8();
 
   if (func_13234(var_00, var_01) || func_12F0())
   self.health = self.func_4BF0;
@@ -2520,7 +2520,7 @@ func_F9C7() {
   level.vehicle = spawnstruct();
   level.vehicle.func_116CE = spawnstruct();
   level.vehicle.func_8DAA = getentarray("helicopter_crash_location", "targetname");
-  level.vehicle.func_8DAA = scripts\engine\utility::array_combine(level.vehicle.func_8DAA, scripts/sp/utility::_meth_8181("helicopter_crash_location", "targetname"));
+  level.vehicle.func_8DAA = scripts\engine\utility::array_combine(level.vehicle.func_8DAA, scripts\sp\utility::_meth_8181("helicopter_crash_location", "targetname"));
   level.vehicle.func_116CE.team = [];
   level.vehicle.func_116CE.func_4E4E = [];
   level.vehicle.func_116CE.func_4E23 = [];
@@ -2553,7 +2553,7 @@ func_F9C7() {
   if (!isdefined(level.vehicle.func_116CE.func_4E1C))
   level.vehicle.func_116CE.func_4E1C = [];
 
-  scripts/sp/vehicle_aianim::func_F8AE();
+  scripts\sp\vehicle_aianim::func_F8AE();
 }
 
 func_FB0A(var_00, var_01) {
@@ -2614,7 +2614,7 @@ func_A5CD(var_00) {
 
   if (isstring(var_00)) {
   self setcandamage(0);
-  var_01 scripts/sp/anim::func_1F35(self, var_00);
+  var_01 scripts\sp\anim::func_1F35(self, var_00);
   } else {
   self glinton(#animtree);
   self _meth_8018("vehicle_death_anim", var_1.origin, var_1.angles, var_00);

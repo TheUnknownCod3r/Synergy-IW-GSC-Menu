@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3137.gsc
-****************************/
+ * Script: 3137.gsc
+************************/
 
 func_3629() {
 	anim.var_362A = [];
@@ -63,7 +63,7 @@ func_358A() {
 }
 
 func_9E4D() {
-	var_00 = scripts/asm/asm::asm_getcurrentstate(self.asm.var_11AC7);
+	var_00 = scripts\asm\asm::asm_getcurrentstate(self.asm.var_11AC7);
 	switch(var_00) {
 		case "exposed_exit":
 		case "stand_turn":
@@ -586,7 +586,7 @@ func_3529() {
 }
 
 func_3582() {
-	var_00 = self._blackboard.shootparams;
+	var_00 = self.var_1198.shootparams;
 	var_01 = lib_0C42::func_3518("left");
 	var_02 = lib_0C42::func_3518("right");
 	if(var_01 && var_02) {
@@ -626,7 +626,7 @@ func_3582() {
 }
 
 func_3595(param_00,param_01) {
-	var_02 = self._blackboard.shootparams;
+	var_02 = self.var_1198.shootparams;
 	if(!isdefined(var_02)) {
 		return undefined;
 	}
@@ -657,7 +657,7 @@ func_3595(param_00,param_01) {
 }
 
 func_351E(param_00,param_01,param_02,param_03,param_04) {
-	var_05 = self._blackboard.shootparams;
+	var_05 = self.var_1198.shootparams;
 	var_06 = func_3595(param_00);
 	if(!isdefined(var_06)) {
 		param_04.var_B7A9 = 0;
@@ -742,7 +742,7 @@ func_3520(param_00,param_01,param_02,param_03,param_04,param_05) {
 }
 
 func_3522(param_00) {
-	var_01 = self._blackboard.shootparams;
+	var_01 = self.var_1198.shootparams;
 	var_02 = spawnstruct();
 	var_03 = func_3582();
 	if(isdefined(var_03)) {
@@ -1003,11 +1003,11 @@ func_362C() {
 	var_0F = 6;
 	var_10 = spawnstruct();
 	for(;;) {
-		var_11 = scripts/asm/asm::func_231B(self.asm.var_11AC7,"aim");
-		if(isdefined(self._blackboard.var_E5F9)) {
+		var_11 = scripts\asm\asm::func_231B(self.asm.var_11AC7,"aim");
+		if(isdefined(self.var_1198.var_E5F9)) {
 			var_11 = 0;
 		}
-		else if(isdefined(self._blackboard.rodeorequested)) {
+		else if(isdefined(self.var_1198.rodeorequested)) {
 			var_11 = 1;
 		}
 
@@ -1016,14 +1016,14 @@ func_362C() {
 				func_35A7();
 			}
 
-			if(isdefined(self._blackboard.rodeorequested)) {
+			if(isdefined(self.var_1198.rodeorequested)) {
 				if(!self.asm.var_11B08.var_30E6) {
 					self.asm.var_11B08.var_30E6 = 1;
 					thread lib_0C47::func_351B();
 					func_3608(var_00,"main","hex",0);
 				}
 			}
-			else if(isdefined(self._blackboard.shootparams) && self.var_13C83["left"] || self.var_13C83["right"]) {
+			else if(isdefined(self.var_1198.shootparams) && self.var_13C83["left"] || self.var_13C83["right"]) {
 				var_10.var_8E54 = self getscoreinfocategory(var_00);
 				var_10.var_AB57 = self getscoreinfocategory(var_01);
 				var_10.var_E530 = self getscoreinfocategory(var_03);
@@ -1108,7 +1108,7 @@ func_35D3(param_00,param_01,param_02) {
 func_35D6(param_00,param_01,param_02,param_03) {
 	self endon(param_01 + "_finished");
 	var_04 = lib_0A1E::asm_getallanimsforstate(param_00,param_01);
-	var_05 = self._blackboard.shootparams;
+	var_05 = self.var_1198.shootparams;
 	var_06 = self.var_164D[param_00].slot;
 	var_07 = var_05.var_13CC3[var_06];
 	self.var_164D[param_00].var_4C1A = var_07;
@@ -1134,13 +1134,13 @@ func_35D6(param_00,param_01,param_02,param_03) {
 
 	if(var_0A.size == 0) {
 		wait(1);
-		scripts/asm/asm::asm_fireevent(param_01,"end");
+		scripts\asm\asm::asm_fireevent(param_01,"end");
 		return;
 	}
 
 	var_0E = ["top","bottom"];
-	if(isdefined(self._blackboard.scriptableparts)) {
-		var_0F = self._blackboard.scriptableparts[var_06 + "_arm"];
+	if(isdefined(self.var_1198.scriptableparts)) {
+		var_0F = self.var_1198.scriptableparts[var_06 + "_arm"];
 		if(isdefined(var_0F)) {
 			if(var_0F.state == "dmg_upper") {
 				var_0E = ["bottom"];
@@ -1227,7 +1227,7 @@ func_35D6(param_00,param_01,param_02,param_03) {
 	}
 
 	wait(3);
-	scripts/asm/asm::asm_fireevent(param_01,"end");
+	scripts\asm\asm::asm_fireevent(param_01,"end");
 }
 
 func_3635(param_00,param_01,param_02) {
@@ -1347,7 +1347,7 @@ func_360F(param_00) {
 
 		foreach(var_03 in var_01) {
 			if(var_03 == "end") {
-				scripts/asm/asm::asm_fireevent(param_00,var_03);
+				scripts\asm\asm::asm_fireevent(param_00,var_03);
 				return;
 			}
 		}
@@ -1357,7 +1357,7 @@ func_360F(param_00) {
 func_35D5(param_00,param_01,param_02,param_03) {
 	self endon(param_01 + "_finished");
 	var_04 = lib_0A1E::asm_getallanimsforstate(param_00,param_01);
-	var_05 = self._blackboard.shootparams;
+	var_05 = self.var_1198.shootparams;
 	var_06 = self.var_164D[param_00].slot;
 	var_07 = var_05.var_13CC3[var_06];
 	var_08 = var_07.var_32BC;
@@ -1407,7 +1407,7 @@ func_35C5(param_00,param_01,param_02) {
 
 	var_05 = func_3587(param_00);
 	var_06 = func_3585(param_00);
-	var_07 = self._blackboard.shootparams.var_13CC3[param_00];
+	var_07 = self.var_1198.shootparams.var_13CC3[param_00];
 	var_08 = 1;
 	var_09 = 0;
 	if(var_07.var_29A1 && !param_02) {
@@ -1429,7 +1429,7 @@ func_35C5(param_00,param_01,param_02) {
 }
 
 func_3615(param_00,param_01,param_02) {
-	var_03 = self._blackboard.shootparams;
+	var_03 = self.var_1198.shootparams;
 	if(!isdefined(var_03)) {
 		return 1;
 	}
@@ -1487,7 +1487,7 @@ func_3613(param_00,param_01,param_02) {
 	var_03 = lib_0A1E::func_2356(param_01,"shoot_knob");
 	self aiclearanim(var_03,0.2);
 	var_04 = self.var_164D[param_00].slot;
-	scripts/asm/asm::asm_fireephemeralevent("rocket_shoot_complete",var_04);
+	scripts\asm\asm::asm_fireephemeralevent("rocket_shoot_complete",var_04);
 	var_05 = self.var_164D[param_00].var_4C1A;
 	if(isdefined(var_05.var_EF77)) {
 		self notify(var_05.var_EF77);
@@ -1500,7 +1500,7 @@ func_3613(param_00,param_01,param_02) {
 func_35D4(param_00,param_01,param_02,param_03) {}
 
 func_3526(param_00,param_01,param_02,param_03) {
-	var_04 = self._blackboard.shootparams;
+	var_04 = self.var_1198.shootparams;
 	var_05 = self.var_164D[param_00].slot;
 	var_06 = var_04.var_13CC3[var_05];
 	if(var_06.var_C241 == 1) {

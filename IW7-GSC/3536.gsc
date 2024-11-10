@@ -1,10 +1,10 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\3536.gsc
+ * Script: 3536.gsc
 ***************************************/
 
 marktarget_init() {
-  level._effect["marked_target"] = loadfx("vfx/iw7/_requests/mp/vfx_marked_target_z.vfx");
+  level._effect["marked_target"] = loadfx("vfx\iw7\_requests\mp\vfx_marked_target_z.vfx");
 }
 
 marktarget_run(var_00, var_01) {

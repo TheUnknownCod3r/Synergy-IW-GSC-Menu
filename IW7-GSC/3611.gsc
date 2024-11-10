@@ -1,15 +1,15 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3611.gsc
-****************************/
+ * Script: 3611.gsc
+************************/
 
 init() {
-	level._effect["visionPulse_ping"] = loadfx("vfx/iw7/_requests/mp/vfx_opticwave.vfx");
+	level._effect["visionPulse_ping"] = loadfx("vfx\iw7\_requests\mp\vfx_opticwave.vfx");
 }
 
 func_12F9B() {
-	level thread scripts\mp\_battlechatter_mp::saytoself(self,"plr_perk_pulse",undefined,0.75);
+	level thread scripts\mp\battlechatter_mp::saytoself(self,"plr_perk_pulse",undefined,0.75);
 	thread func_139A3();
 	thread func_13450();
 	return 1;
@@ -25,7 +25,7 @@ func_139A3() {
 	self.visionpulsevisionsetactive = 1;
 	func_139A4();
 	if(isdefined(self)) {
-		if(scripts\mp\_utility::isreallyalive(self)) {
+		if(scripts\mp\utility::isreallyalive(self)) {
 			self visionsetnakedforplayer("",0.5);
 		}
 		else
@@ -63,14 +63,14 @@ func_13B9F(param_00) {
 	var_01 = self getentitynumber();
 	param_00.var_13455[var_01] = self;
 	if(!isai(self)) {
-		scripts\mp\_utility::_hudoutlineviewmodelenable(5);
+		scripts\mp\utility::_hudoutlineviewmodelenable(5);
 	}
 
-	var_02 = scripts\mp\_utility::outlineenableforplayer(self,"orange",param_00,0,1,"killstreak_personal");
+	var_02 = scripts\mp\utility::outlineenableforplayer(self,"orange",param_00,0,1,"killstreak_personal");
 	func_13BA0(param_00,5);
 	if(isdefined(self)) {
 		if(!isai(self)) {
-			scripts\mp\_utility::_hudoutlineviewmodeldisable();
+			scripts\mp\utility::_hudoutlineviewmodeldisable();
 		}
 	}
 
@@ -80,7 +80,7 @@ func_13B9F(param_00) {
 		}
 	}
 
-	scripts\mp\_utility::outlinedisable(var_02,self);
+	scripts\mp\utility::outlinedisable(var_02,self);
 }
 
 func_13BA0(param_00,param_01) {
@@ -91,11 +91,11 @@ func_13BA0(param_00,param_01) {
 	level endon("game_ended");
 	var_02 = gettime() + param_01 * 1000;
 	while(gettime() <= var_02) {
-		if(scripts\mp\_utility::_hasperk("specialty_noscopeoutline")) {
+		if(scripts\mp\utility::_hasperk("specialty_noscopeoutline")) {
 			break;
 		}
 
-		if(scripts/mp/equipment/phase_shift::isentityphaseshifted(self)) {
+		if(scripts\mp\equipment\phase_shift::isentityphaseshifted(self)) {
 			break;
 		}
 
@@ -112,7 +112,7 @@ func_13151(param_00,param_01,param_02,param_03) {
 		return 0;
 	}
 
-	if(scripts\mp\_utility::func_9E05(self.team,param_00)) {
+	if(scripts\mp\utility::func_9E05(self.team,param_00)) {
 		return 0;
 	}
 
@@ -120,15 +120,15 @@ func_13151(param_00,param_01,param_02,param_03) {
 		return 0;
 	}
 
-	if(scripts/mp/equipment/phase_shift::isentityphaseshifted(param_00)) {
+	if(scripts\mp\equipment\phase_shift::isentityphaseshifted(param_00)) {
 		return 0;
 	}
 
-	if(!scripts\mp\_utility::isreallyalive(param_00)) {
+	if(!scripts\mp\utility::isreallyalive(param_00)) {
 		return 0;
 	}
 
-	if(param_00 scripts\mp\_utility::_hasperk("specialty_noscopeoutline")) {
+	if(param_00 scripts\mp\utility::_hasperk("specialty_noscopeoutline")) {
 		return 0;
 	}
 

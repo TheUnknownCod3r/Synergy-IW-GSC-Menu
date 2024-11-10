@@ -1,8 +1,8 @@
-/***********************************************************
+/***************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\sp\maps\europa\europa_outro.gsc
-***********************************************************/
+ * Script: scripts\sp\maps\europa\europa_outro.gsc
+***************************************************/
 
 func_C7C6() {
 	setdvarifuninitialized("outro_nohelmet","0");
@@ -19,7 +19,7 @@ func_C7C6() {
 	precachemodel("helmet_hero_sipes_crushed");
 	precachemodel("helmet_hero_t_crushed");
 	thread func_FC0E();
-	level._effect["kotch_muzzleflash"] = loadfx("vfx/iw7/core/muzflash/emc/vfx_muz_emc_v.vfx");
+	level._effect["kotch_muzzleflash"] = loadfx("vfx\iw7\core\muzflash\emc\vfx_muz_emc_v.vfx");
 	var_01 = [];
 	var_01[var_01.size] = getent("outro_dropship_static","targetname");
 	var_01[var_01.size] = getent("outro_mons","targetname");
@@ -46,7 +46,7 @@ func_C7D3() {
 	var_00 = scripts\sp\_hud_util::func_7B4F();
 	var_00.alpha = 1;
 	level.player _meth_82C0("europa_suck_out_hit_fade_to_black",0);
-	function_01BA("");
+	setmusicstate("");
 	scripts\engine\utility::flag_set("player_holding_on");
 	thread scripts\sp\maps\europa\europa_util::func_67B6(1,"done",&"EUROPA_OBJECTIVE_ACCESS");
 	thread scripts\sp\maps\europa\europa_util::func_67B6(2,"done",&"EUROPA_OBJECTIVE_FSPAR");
@@ -88,15 +88,15 @@ func_C7B4() {
 	wait(2.5);
 	setomnvar("ui_show_compass",0);
 	scripts\engine\utility::delaythread(0.6,::func_6222);
-	function_0237("europa_outro",1);
+	visionsetnaked("europa_outro",1);
 	var_00 = getdvarint("skip_outro");
 	scripts\sp\_utility::func_28D7();
 	physics_setgravity((0,0,-386.09));
 	thread func_ABE1();
-	function_01C5("r_mbRadialoverridechromaticAberration",0);
-	function_01C5("r_mbradialoverridestrength",0);
-	function_02A9("storm","storm_ext",1);
-	function_02A9("atmosphere","helmet",1);
+	setsaveddvar("r_mbRadialoverridechromaticAberration",0);
+	setsaveddvar("r_mbradialoverridestrength",0);
+	setglobalsoundcontext("storm","storm_ext",1);
+	setglobalsoundcontext("atmosphere","helmet",1);
 	scripts\engine\utility::exploder("outro_amb_fx");
 	var_01 = getent("intro_surface_vista_01","targetname");
 	var_01 show();
@@ -122,7 +122,7 @@ func_ABE1() {
 
 func_EBEA() {
 	level.var_C7BD = [];
-	function_01C5("r_mbenable","0");
+	setsaveddvar("r_mbenable","0");
 	var_00 = scripts\sp\_utility::func_22CD("outro_enemies",1);
 	var_01 = [];
 	foreach(var_03 in var_00) {
@@ -167,7 +167,7 @@ func_EBEA() {
 
 	var_08 = 0;
 	if(scripts\sp\_utility::func_93A6()) {
-		scripts/sp/specialist_MAYBE::func_F52F(1);
+		scripts\sp\specialist_MAYBE::func_F52F(1);
 		level.player.helmet = level.var_10964.helmet;
 	}
 
@@ -185,7 +185,7 @@ func_EBEA() {
 	level.var_A70E attach("oxygen_bottle_air_boss","tag_accessory_right");
 	thread func_C7C9();
 	scripts\engine\utility::array_thread(level.var_EBCA,::scripts\sp\_utility::func_DC45,"lower");
-	level.player.var_E505 = scripts/sp/player_rig::get_player_score(1);
+	level.player.var_E505 = scripts\sp\player_rig::get_player_score(1);
 	var_01[var_01.size] = level.player.var_E505;
 	var_01[var_01.size] = level.var_EBBB;
 	var_01[var_01.size] = level.var_EBBC;
@@ -198,7 +198,7 @@ func_EBEA() {
 	level.player givefriendlyperks(5,5,5,5,1);
 	level.player playerlinktodelta(level.player.var_E505,"tag_player",1,0,0,0,0,1);
 	var_0A = getdvarint("skip_outro_fadeup");
-	var_09 scripts/sp/anim::func_1EC1(var_01,"outro");
+	var_09 scripts\sp\anim::func_1EC1(var_01,"outro");
 	if(!var_0A) {
 		wait(1);
 	}
@@ -210,15 +210,15 @@ func_EBEA() {
 	level.player scripts\engine\utility::delaycall(4.5,::setclientomnvar,"ui_hide_hud",0);
 	thread scripts\sp\_hud_util::func_6A99(8);
 	thread func_C7BC();
-	function_01BA("mx_173_cine_europaoutro");
+	setmusicstate("mx_173_cine_europaoutro");
 	level.player.var_8632 = spawn("script_origin",level.player.origin);
 	level.player.var_8632 linkto(level.player.var_E505,"tag_player",(0,0,0),(0,0,0));
 	level.player.var_E505 thread func_D20A(var_09);
 	thread func_C7D7();
 	level.player giveplayerscore(1,1,1);
 	level.player lerpviewangleclamp(3,1.5,1.5,20,20,20,20);
-	var_09 thread scripts/sp/anim::func_1F2C(var_01,"outro");
-	scripts\engine\utility::noself_delaycall(112,::function_0162,3,"failed");
+	var_09 thread scripts\sp\anim::func_1F2C(var_01,"outro");
+	scripts\engine\utility::noself_delaycall(112,::objective_state,3,"failed");
 	scripts\engine\utility::flag_wait("outro_freeze");
 	level.player _meth_82C0("europa_end_cut_hard",0.05);
 }
@@ -418,7 +418,7 @@ func_C7BD(param_00) {
 	scripts\engine\utility::delaythread(11,::func_CFA5);
 	var_03 = scripts\sp\maps\europa\europa_util::func_5F32(param_00);
 	wait(0.05);
-	var_03 thread scripts/sp/anim::func_1F2C(var_02,"outro");
+	var_03 thread scripts\sp\anim::func_1F2C(var_02,"outro");
 }
 
 func_C7C0(param_00) {
@@ -426,7 +426,7 @@ func_C7C0(param_00) {
 	level.var_C7C1 scripts\sp\_utility::func_86E4();
 	var_02 = scripts\sp\_utility::func_10639("flag");
 	var_03 = [level.var_C7C1,var_02];
-	var_01 thread scripts/sp/anim::func_1F2C(var_03,"outro");
+	var_01 thread scripts\sp\anim::func_1F2C(var_03,"outro");
 }
 
 func_C7C9() {
@@ -459,7 +459,7 @@ func_C7BC() {
 	}
 
 	wait(1);
-	var_01 scripts/sp/vehicle_paths::setsuit();
+	var_01 scripts\sp\vehicle_paths::setsuit();
 }
 
 func_5E0B() {

@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3179.gsc
-****************************/
+ * Script: 3179.gsc
+************************/
 
 func_D55D(param_00,param_01,param_02,param_03) {
 	self endon("death");
@@ -52,7 +52,7 @@ func_D566(param_00,param_01,param_02,param_03) {
 	self endon("terminate_ai_threads");
 	func_3E58(param_01);
 	var_04 = lib_0A1E::asm_getallanimsforstate(param_00,param_01);
-	scripts/asm/asm_bb::bb_requestsmartobject("stand");
+	scripts\asm\asm_bb::bb_requestsmartobject("stand");
 	var_05 = self getspectatepoint();
 	var_05.var_126D4 = var_05.origin[2] + var_05.var_126D5;
 	self orientmode("face angle",var_05.angles[1]);
@@ -132,11 +132,11 @@ func_11701(param_00,param_01) {
 	}
 
 	if(isdefined(var_03)) {
-		thread scripts/asm/asm::asm_setstate(var_03,undefined);
+		thread scripts\asm\asm::asm_setstate(var_03,undefined);
 	}
 	else
 	{
-		scripts/asm/asm::asm_fireevent(param_01,"traverse_end");
+		scripts\asm\asm::asm_fireevent(param_01,"traverse_end");
 	}
 
 	self notify("killanimscript");
@@ -450,13 +450,13 @@ doublejumpterminate(param_00,param_01,param_02) {
 }
 
 doublejumpearlyterminate(param_00,param_01,param_02) {
-	if(!scripts/asm/asm::func_232B(param_01,"end")) {
+	if(!scripts\asm\asm::func_232B(param_01,"end")) {
 		doublejumpterminate(param_00,param_01,param_02);
 	}
 }
 
 isdriving(param_00,param_01,param_02,param_03) {
-	return scripts/asm/asm::func_68B0(param_00,param_01,param_02,"end");
+	return scripts\asm\asm::func_68B0(param_00,param_01,param_02,"end");
 }
 
 func_CF24(param_00,param_01,param_02,param_03) {
@@ -539,7 +539,7 @@ func_3ED2(param_00,param_01,param_02) {
 	}
 
 	var_04 = var_05 + var_04;
-	var_06 = scripts/asm/asm::asm_lookupanimfromalias(param_01,var_04);
+	var_06 = scripts\asm\asm::asm_lookupanimfromalias(param_01,var_04);
 	return var_06;
 }
 
@@ -579,7 +579,7 @@ func_100BF(param_00,param_01,param_02,param_03) {
 }
 
 func_3F0E(param_00,param_01,param_02) {
-	var_03 = scripts/asm/asm::asm_lookupanimfromalias(param_01,self.var_138BC);
+	var_03 = scripts\asm\asm::asm_lookupanimfromalias(param_01,self.var_138BC);
 	return var_03;
 }
 
@@ -752,7 +752,7 @@ wallrunterminate(param_00,param_01,param_02) {
 }
 
 traversalorientearlyterminate(param_00,param_01,param_02) {
-	if(!scripts/asm/asm::func_232B(param_01,"end") && !scripts/asm/asm::func_232B(param_01,"code_move")) {
+	if(!scripts\asm\asm::func_232B(param_01,"end") && !scripts\asm\asm::func_232B(param_01,"code_move")) {
 		func_4123(param_00,param_01,param_02);
 	}
 }
@@ -775,9 +775,9 @@ func_D5CF(param_00,param_01,param_02,param_03) {
 	self aiclearanim(lib_0A1E::asm_getbodyknob(),param_02);
 	self _meth_82E7(param_01,var_04,1,param_02,1);
 	lib_0A1E::func_2369(param_00,param_01,var_04);
-	var_0A = lib_0A1E::func_231F(param_00,param_01,scripts/asm/asm::func_2341(param_00,param_01));
+	var_0A = lib_0A1E::func_231F(param_00,param_01,scripts\asm\asm::func_2341(param_00,param_01));
 	if(var_0A == "end") {
-		thread scripts/asm/asm::func_2310(param_00,param_01,0);
+		thread scripts\asm\asm::func_2310(param_00,param_01,0);
 	}
 }
 
@@ -809,7 +809,7 @@ func_D5D2(param_00,param_01,param_02,param_03) {
 
 	func_D50F(param_00,param_01,var_04,param_02,var_09,var_08,var_0A,0,1);
 	self _meth_80F1(var_09,var_08);
-	thread scripts/asm/asm::func_2310(param_00,param_01,0);
+	thread scripts\asm\asm::func_2310(param_00,param_01,0);
 }
 
 func_D50F(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08) {
@@ -857,7 +857,7 @@ func_3F0D(param_00,param_01,param_02) {
 		}
 	}
 
-	self.var_138B9 = scripts/asm/asm::asm_lookupanimfromalias(param_01,var_03);
+	self.var_138B9 = scripts\asm\asm::asm_lookupanimfromalias(param_01,var_03);
 	return self.var_138B9;
 }
 
@@ -897,14 +897,14 @@ func_3F0F(param_00,param_01,param_02) {
 		var_03 = var_09 + "single_jump";
 	}
 
-	var_0A = scripts/asm/asm::asm_lookupanimfromalias(param_01,var_03);
+	var_0A = scripts\asm\asm::asm_lookupanimfromalias(param_01,var_03);
 	return var_0A;
 }
 
 func_F22D(param_00,param_01,param_02,param_03) {
 	self endon(param_00 + "_finished");
 	wait(param_01);
-	scripts/asm/asm::asm_fireevent(param_00,param_02);
+	scripts\asm\asm::asm_fireevent(param_00,param_02);
 	if(param_03) {
 		self notify(param_02);
 	}
@@ -1083,7 +1083,7 @@ func_3F10(param_00,param_01,param_02) {
 		}
 	}
 
-	var_0C = scripts/asm/asm::asm_lookupanimfromalias(param_01,var_03);
+	var_0C = scripts\asm\asm::asm_lookupanimfromalias(param_01,var_03);
 	return var_0C;
 }
 
@@ -1179,7 +1179,7 @@ func_D55B(param_00,param_01,param_02,param_03) {
 	self endon(param_01 + "_finished");
 	var_04 = lib_0A1E::asm_getallanimsforstate(param_00,param_01);
 	if(!isdefined(var_04)) {
-		scripts/asm/asm::asm_fireevent(param_01,"code_move");
+		scripts\asm\asm::asm_fireevent(param_01,"code_move");
 		return;
 	}
 
@@ -1224,8 +1224,8 @@ func_D55B(param_00,param_01,param_02,param_03) {
 	self aiclearanim(lib_0A1E::asm_getbodyknob(),param_02);
 	self _meth_82E7(param_01,var_04,1,param_02,1);
 	lib_0A1E::func_2369(param_00,param_01,var_04);
-	lib_0A1E::func_231F(param_00,param_01,scripts/asm/asm::func_2341(param_00,param_01));
-	thread scripts/asm/asm::func_2310(param_00,param_01,0);
+	lib_0A1E::func_231F(param_00,param_01,scripts\asm\asm::func_2341(param_00,param_01));
+	thread scripts\asm\asm::func_2310(param_00,param_01,0);
 }
 
 func_3F12(param_00,param_01,param_02) {
@@ -1439,7 +1439,7 @@ func_126CE(param_00,param_01,param_02,param_03) {
 	var_05 = self getspectatepoint();
 	self orientmode("face angle",var_05.angles[1]);
 	self _meth_82EA(param_01,var_04,1,param_02,1);
-	lib_0A1E::func_231F(param_00,param_01,scripts/asm/asm::func_2341(param_00,param_01));
+	lib_0A1E::func_231F(param_00,param_01,scripts\asm\asm::func_2341(param_00,param_01));
 	func_11701(param_00,param_01);
 }
 

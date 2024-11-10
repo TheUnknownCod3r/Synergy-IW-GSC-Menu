@@ -1,8 +1,8 @@
-/*******************************************************
+/***********************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\maps\cp_rave\cp_rave.gsc
-*******************************************************/
+ * Script: scripts\cp\maps\cp_rave\cp_rave.gsc
+***********************************************/
 
 main() {
 	setdvar("sm_sunSampleSizeNear",0.705);
@@ -30,9 +30,9 @@ main() {
 	scripts\cp\crafted_trap_balloons::init();
 	scripts\cp\zombies\craftables\_boombox::init();
 	scripts\cp\zombies\craftables\_revocator::init();
-	scripts/cp/maps/cp_rave/cp_rave_precache::main();
+	scripts\cp\maps\cp_rave\cp_rave_precache::main();
 	scripts\cp\maps\cp_rave\gen\cp_rave_art::main();
-	scripts/cp/maps/cp_rave/cp_rave_fx::main();
+	scripts\cp\maps\cp_rave\cp_rave_fx::main();
 	rave_precache();
 	if(level.createfx_enabled) {
 		return;
@@ -52,7 +52,7 @@ main() {
 	level.wait_for_interaction_func = ::scripts\cp\maps\cp_rave\cp_rave_interactions::cp_rave_wait_for_interaction_triggered;
 	level.player_interaction_monitor = ::scripts\cp\maps\cp_rave\cp_rave_interactions::cp_rave_interaction_monitor;
 	level.callbackplayerdamage = ::scripts\cp\maps\cp_rave\cp_rave_damage::callback_ravezombieplayerdamage;
-	level.coop_weapontable = "cp/cp_rave_weapontable.csv";
+	level.coop_weapontable = "cp\cp_rave_weapontable.csv";
 	level.spawn_score_distance = 750;
 	level.should_continue_progress_bar_think = ::cp_rave_should_continue_progress_bar_think;
 	level.drop_max_ammo_func = ::scripts\cp\loot::drop_loot;
@@ -118,7 +118,7 @@ main() {
 	level.additional_laststand_weapon_exclusion = ["iw7_cpbasketball_mp","iw7_cpskeeball_mp","iw7_cpclowntoothball_mp","iw7_horseracepistol_zm_blue","iw7_horseracepistol_zm_yellow","iw7_horseracepistol_zm_red","iw7_horseracepistol_zm_green","iw7_shootgallery_zm","iw7_blackholegun_mp","iw7_penetrationrail_mp","iw7_atomizer_mp","iw7_glr_mp","iw7_claw_mp","iw7_steeldragon_mp","iw7_shootgallery_zm_blue","iw7_shootgallery_zm_yellow","iw7_shootgallery_zm_red","iw7_lawnmower_zm","iw7_shootgallery_zm_green"];
 	level.last_stand_weapons = ["iw7_g18_zm","iw7_g18_zmr","iw7_g18_zml","iw7_g18c_zm","iw7_mag_zm","iw7_revolver_zm","iw7_revolver_zmr","iw7_revolver_zmr_explosive","iw7_revolver_zml","iw7_revolver_zml_single","iw7_emc_zm","iw7_emc_zmr","iw7_emc_zmr_burst","iw7_emc_zml","iw7_emc_zml_spread","iw7_nrg_zm","iw7_nrg_zmr","iw7_nrg_zmr_smart","iw7_nrg_zml","iw7_nrg_zml_charge","iw7_dischord_zm","iw7_headcutter_zm","iw7_shredder_zm","iw7_facemelter_zm","iw7_dischord_zm_pap1","iw7_headcutter_zm_pap1","iw7_shredder_zm_pap1","iw7_facemelter_zm_pap1","iw7_golf_club_mp_pap1","iw7_two_headed_axe_mp_pap1","iw7_spiked_bat_mp_pap1","iw7_machete_mp_pap1","iw7_golf_club_mp_pap2","iw7_two_headed_axe_mp_pap2","iw7_spiked_bat_mp_pap2","iw7_machete_mp_pap2","iw7_golf_club_mp","iw7_two_headed_axe_mp","iw7_spiked_bat_mp","iw7_machete_mp"];
 	level.melee_weapons = ["iw7_machete_mp","iw7_golf_club_mp","iw7_two_headed_axe_mp","iw7_spiked_bat_mp","iw7_golf_club_mp_pap1","iw7_two_headed_axe_mp_pap1","iw7_spiked_bat_mp_pap1","iw7_machete_mp_pap1","iw7_golf_club_mp_pap2","iw7_two_headed_axe_mp_pap2","iw7_spiked_bat_mp_pap2","iw7_machete_mp_pap2","iw7_slasher_zm"];
-	level.weapon_rank_event_table = "scripts/cp/maps/cp_rave/cp_rave_weaponrank_event.csv";
+	level.weapon_rank_event_table = "scripts\cp\maps\cp_rave\cp_rave_weaponrank_event.csv";
 	scripts\cp\maps\cp_rave\cp_rave_crafting::set_crafting_starting_location("cabin_to_lake");
 	scripts\cp\maps\cp_rave\cp_rave_crafting::init_crafting();
 	setup_generic_zombie_model_list();
@@ -179,7 +179,7 @@ main() {
 	level thread setup_water_respawn_points();
 	level thread show_pap_symbols();
 	level thread fix_map_exploits();
-	function_026C("MatchStarted: Completed");
+	sysprint("MatchStarted: Completed");
 }
 
 fix_map_exploits() {
@@ -393,7 +393,7 @@ watch_ee_song_quest_complete() {
 
 		if(level.total_glyphs_found == level.total_glyphs_to_find) {
 			foreach(var_01 in level.players) {
-				var_01 scripts/cp/zombies/achievement::update_achievement("RAVE_ON",1);
+				var_01 scripts\cp\zombies\achievement::update_achievement("RAVE_ON",1);
 			}
 
 			level notify("add_hidden_song_to_playlist");
@@ -717,7 +717,7 @@ rave_precache() {
 }
 
 setup_pa_speakers() {
-	level.jukebox_table = "cp/zombies/cp_rave_music_genre.csv";
+	level.jukebox_table = "cp\zombies\cp_rave_music_genre.csv";
 	scripts\cp\zombies\zombie_jukebox::parse_music_genre_table();
 	wait(1.15);
 	disablepaspeaker("pa_speaker_stage");
@@ -1781,7 +1781,7 @@ log_swing_trap() {
 }
 
 registerscriptedagents() {
-	scripts\mp\mp_agent::init_agent("mp/dlc1_agent_definition.csv");
+	scripts\mp\mp_agent::init_agent("mp\dlc1_agent_definition.csv");
 	scripts\mp\agents\zombie_dlc1\zombie_dlc1_agent::registerscriptedagent();
 	scripts\mp\agents\lumberjack\lumberjack_agent::registerscriptedagent();
 	scripts\mp\agents\zombie_sasquatch\zombie_sasquatch_agent::registerscriptedagent();
@@ -1931,11 +1931,11 @@ wait_for_pre_game_period() {
 
 	level.current_rave_interaction_structs = [];
 	wait(0.2);
-	scripts/cp/zombies/zombie_entrances::enable_windows_in_area("front_gate");
+	scripts\cp\zombies\zombie_entrances::enable_windows_in_area("front_gate");
 	scripts\engine\utility::flag_set("zombie_drop_powerups");
 	scripts\engine\utility::flag_set("pillage_enabled");
 	init_magic_wheel();
-	level thread scripts/cp/zombies/zombie_zipline::fast_travel_init();
+	level thread scripts\cp\zombies\zombie_zipline::fast_travel_init();
 	scripts\engine\utility::flag_set("pre_game_over");
 	level thread setupmemoryquestitems();
 	level thread init_boat_and_pap_quest_structs();
@@ -1966,12 +1966,12 @@ cp_rave_pillage_init() {
 	level.pillageinfo.clip = 33;
 	level.pillageinfo.explosive = 33;
 	level.pillageinfo.money = 33;
-	scripts/cp/zombies/zombies_pillage::register_zombie_pillageable("backpack_1","backpack","cp_rave_backpack_dropped","cp_rave_backpack","j_spine4");
-	scripts/cp/zombies/zombies_pillage::register_zombie_pillageable("backpack_2","backpack","cp_rave_backpack_dropped_green","cp_rave_backpack_green","j_spine4");
-	scripts/cp/zombies/zombies_pillage::register_zombie_pillageable("backpack_3","backpack","cp_rave_backpack_dropped_purple","cp_rave_backpack_purple","j_spine4");
-	scripts/cp/zombies/zombies_pillage::register_zombie_pillageable("backpack_4","backpack","cp_rave_backpack_dropped_red","cp_rave_backpack_red","j_spine4");
-	scripts/cp/zombies/zombies_pillage::register_zombie_pillageable("fanny_pack_1","backpack","zombies_fanny_pack_dropped","zombies_fanny_pack","J_HipTwist_LE");
-	scripts/cp/zombies/zombies_pillage::register_zombie_pillageable("fanny_pack_3","backpack","zombies_fanny_pack_dropped_purple","zombies_fanny_pack_purple","J_HipTwist_LE");
+	scripts\cp\zombies\zombies_pillage::register_zombie_pillageable("backpack_1","backpack","cp_rave_backpack_dropped","cp_rave_backpack","j_spine4");
+	scripts\cp\zombies\zombies_pillage::register_zombie_pillageable("backpack_2","backpack","cp_rave_backpack_dropped_green","cp_rave_backpack_green","j_spine4");
+	scripts\cp\zombies\zombies_pillage::register_zombie_pillageable("backpack_3","backpack","cp_rave_backpack_dropped_purple","cp_rave_backpack_purple","j_spine4");
+	scripts\cp\zombies\zombies_pillage::register_zombie_pillageable("backpack_4","backpack","cp_rave_backpack_dropped_red","cp_rave_backpack_red","j_spine4");
+	scripts\cp\zombies\zombies_pillage::register_zombie_pillageable("fanny_pack_1","backpack","zombies_fanny_pack_dropped","zombies_fanny_pack","J_HipTwist_LE");
+	scripts\cp\zombies\zombies_pillage::register_zombie_pillageable("fanny_pack_3","backpack","zombies_fanny_pack_dropped_purple","zombies_fanny_pack_purple","J_HipTwist_LE");
 }
 
 cp_rave_introscreen_text() {
@@ -2368,7 +2368,7 @@ watchforstickerachievement(param_00) {
 		}
 
 		if(var_01 && var_05 && var_03 && var_04 && var_02) {
-			param_00 scripts/cp/zombies/achievement::update_achievement("SCRAPBOOKING",1);
+			param_00 scripts\cp\zombies\achievement::update_achievement("SCRAPBOOKING",1);
 			param_00 notify("all_collected");
 		}
 
@@ -3177,7 +3177,7 @@ is_in_active_volume(param_00) {
 
 	var_01 = sortbydistance(level.active_spawn_volumes,param_00);
 	foreach(var_03 in var_01) {
-		if(function_010F(param_00,var_03)) {
+		if(ispointinvolume(param_00,var_03)) {
 			return 1;
 		}
 	}
@@ -3325,7 +3325,7 @@ watch_time_in_rave() {
 		scripts\engine\utility::waitframe();
 	}
 
-	scripts/cp/zombies/achievement::update_achievement("HALLUCINATION_NATION",1);
+	scripts\cp\zombies\achievement::update_achievement("HALLUCINATION_NATION",1);
 }
 
 play_enter_rave_gesture() {
@@ -3525,29 +3525,29 @@ play_slasher_vo() {
 slasher_audio_monitor() {
 	level endon("game_ended");
 	self endon("death");
-	thread scripts/cp/zombies/zombies_vo::play_zombie_death_vo(self.voprefix,undefined,1);
+	thread scripts\cp\zombies\zombies_vo::play_zombie_death_vo(self.voprefix,undefined,1);
 	self.playing_stumble = 0;
 	for(;;) {
 		var_00 = scripts\engine\utility::waittill_any_timeout_1(6,"attack_hit","taunt","attack_charge","attack_shoot");
 		switch(var_00) {
 			case "attack_hit":
-				level thread scripts/cp/zombies/zombies_vo::play_zombie_vo(self,"attack_melee",0);
+				level thread scripts\cp\zombies\zombies_vo::play_zombie_vo(self,"attack_melee",0);
 				break;
 	
 			case "attack_shoot":
-				level thread scripts/cp/zombies/zombies_vo::play_zombie_vo(self,"attack_saw_blade_shoot",0);
+				level thread scripts\cp\zombies\zombies_vo::play_zombie_vo(self,"attack_saw_blade_shoot",0);
 				break;
 	
 			case "taunt":
-				level thread scripts/cp/zombies/zombies_vo::play_zombie_vo(self,"taunt",0);
+				level thread scripts\cp\zombies\zombies_vo::play_zombie_vo(self,"taunt",0);
 				break;
 	
 			case "attack_charge":
-				level thread scripts/cp/zombies/zombies_vo::play_zombie_vo(self,"charge_grunt",0);
+				level thread scripts\cp\zombies\zombies_vo::play_zombie_vo(self,"charge_grunt",0);
 				break;
 	
 			case "timeout":
-				level thread scripts/cp/zombies/zombies_vo::play_zombie_vo(self,"walk_idle_grunt",0);
+				level thread scripts\cp\zombies\zombies_vo::play_zombie_vo(self,"walk_idle_grunt",0);
 				break;
 		}
 	}
@@ -3583,7 +3583,7 @@ slasher_enemy_monitor() {
 
 		if(isdefined(self.main_enemy)) {
 			var_05 = self.main_enemy getthreatbiasgroup();
-			if(function_0218(var_05 + "_enemy")) {
+			if(threatbiasgroupexists(var_05 + "_enemy")) {
 				self give_zombies_perk(var_05 + "_enemy");
 			}
 
@@ -3951,7 +3951,7 @@ updateperks(param_00,param_01) {
 
 	var_02 = getarraykeys(param_00.zombies_perks);
 	foreach(var_04 in var_02) {
-		param_00 scripts/cp/zombies/zombies_perk_machines::give_zombies_perk(var_04);
+		param_00 scripts\cp\zombies\zombies_perk_machines::give_zombies_perk(var_04);
 	}
 }
 
@@ -4619,12 +4619,12 @@ showonscreenbloodeffects() {
 }
 
 setravefwoosh(param_00) {
-	thread scripts/cp/perks/perkfunctions::setbattleslide();
+	thread scripts\cp\perks\perkfunctions::setbattleslide();
 }
 
 unsetravefwoosh(param_00) {
 	self notify(param_00 + "_removed");
-	thread scripts/cp/perks/perkfunctions::unsetbattleslide();
+	thread scripts\cp\perks\perkfunctions::unsetbattleslide();
 }
 
 allownormalmovementinwater(param_00) {
@@ -4782,7 +4782,7 @@ watchforblueboltactivation(param_00,param_01) {
 				var_08 = var_06 - var_07 / var_06;
 				var_09 = max(1045 * var_08,10);
 				var_0A = max(128 * var_08,48);
-				var_04 thread scripts/cp/zombies/zombies_perk_machines::create_zap_ring(var_0A,var_09);
+				var_04 thread scripts\cp\zombies\zombies_perk_machines::create_zap_ring(var_0A,var_09);
 			}
 		}
 	}
@@ -4955,7 +4955,7 @@ deactivateadjacentvolumes() {
 
 		var_03 scripts\cp\zombies\zombies_spawning::make_volume_inactive();
 		foreach(var_05 in var_01) {
-			if(function_010F(var_05.origin,var_03)) {
+			if(ispointinvolume(var_05.origin,var_03)) {
 				var_05 notify("detonateExplosive");
 			}
 		}
@@ -5014,14 +5014,14 @@ init_rave_spawner_locations() {
 	foreach(var_03 in var_00) {
 		var_06 = 0;
 		foreach(var_08 in level.invalid_spawn_volume_array) {
-			if(function_010F(var_03.origin,var_08)) {
+			if(ispointinvolume(var_03.origin,var_08)) {
 				var_06 = 1;
 			}
 		}
 
 		if(!var_06) {
 			foreach(var_08 in level.spawn_volume_array) {
-				if(function_010F(var_03.origin,var_08)) {
+				if(ispointinvolume(var_03.origin,var_08)) {
 					if(!isdefined(var_03.angles)) {
 						var_03.angles = (0,0,0);
 					}
@@ -5138,7 +5138,7 @@ cp_rave_kill_reward(param_00,param_01,param_02,param_03,param_04,param_05,param_
 
 cp_rave_exit_laststand_func(param_00) {
 	param_00 scripts\cp\powers\coop_powers::restore_powers(param_00,param_00.pre_laststand_powers);
-	param_00 scripts/cp/zombies/zombies_loadout::set_player_photo_status(param_00,"healthy");
+	param_00 scripts\cp\zombies\zombies_loadout::set_player_photo_status(param_00,"healthy");
 	param_00.flung = undefined;
 	param_00 setclientomnvar("zm_ui_player_in_laststand",0);
 	param_00 clearclienttriggeraudiozone(0.5);
@@ -5182,7 +5182,7 @@ cp_rave_updatemovespeedscale() {
 	}
 	else
 	{
-		var_00 = scripts/cp/zombies/zombies_loadout::getplayerspeedbyweapon(self);
+		var_00 = scripts\cp\zombies\zombies_loadout::getplayerspeedbyweapon(self);
 		if(isdefined(self.chargemode_speedscale)) {
 			var_00 = self.chargemode_speedscale;
 		}
@@ -5238,7 +5238,7 @@ rave_add_attachment_to_weapon(param_00,param_01) {
 	}
 
 	param_01 notify("weapon_purchased");
-	var_03 = function_00E3(var_02);
+	var_03 = getweaponattachments(var_02);
 	var_04 = scripts\cp\utility::getbaseweaponname(var_02);
 	var_05 = param_01 scripts\cp\utility::getweaponreticle(var_04);
 	var_06 = undefined;
@@ -5249,7 +5249,7 @@ rave_add_attachment_to_weapon(param_00,param_01) {
 	var_07 = param_01 getweaponammoclip(var_02,"right");
 	var_08 = param_01 getweaponammostock(var_02);
 	if(issubstr(var_02,"+camo")) {
-		var_09 = function_00E5(var_02);
+		var_09 = getweaponcamoname(var_02);
 	}
 	else
 	{
@@ -5276,7 +5276,7 @@ rave_add_attachment_to_weapon(param_00,param_01) {
 	}
 
 	foreach(var_10 in param_01 getweaponslistall()) {
-		var_03 = function_00E3(var_10);
+		var_03 = getweaponattachments(var_10);
 		foreach(var_0C in var_03) {
 			if(issubstr(var_0C,"cos_")) {
 				if(isdefined(level.rave_charm_attachment_perks[var_0C])) {
@@ -5372,7 +5372,7 @@ play_char_intro_gesture() {
 	self switchtoweapon(var_00);
 	self.starting_weapon = var_00;
 	self.default_starting_pistol = var_00;
-	var_01 = scripts/cp/zombies/zombies_loadout::get_player_character_num();
+	var_01 = scripts\cp\zombies\zombies_loadout::get_player_character_num();
 	level.player_character_info[var_01].starting_weapon = var_00;
 	level notify("start_pa_music");
 	self notify("finish_intro_gesture");
@@ -5809,7 +5809,7 @@ give_harpoon_weapon(param_00,param_01) {
 			var_03 = param_00.var_394;
 		}
 
-		var_0F = function_00E3(var_03);
+		var_0F = getweaponattachments(var_03);
 		var_10 = scripts\cp\cp_weapon::return_weapon_name_with_like_attachments(var_03,undefined,var_0F);
 		var_10 = scripts\cp\utility::_giveweapon(var_10,undefined,undefined,var_09);
 		self.itempicked = var_10;
@@ -5866,8 +5866,8 @@ give_harpoon_weapon(param_00,param_01) {
 			}
 		}
 
-		var_19 = function_0249(var_15);
-		var_1A = scripts/cp/perks/prestige::prestige_getminammo();
+		var_19 = weaponmaxammo(var_15);
+		var_1A = scripts\cp\perks\prestige::prestige_getminammo();
 		var_1B = int(var_1A * var_19);
 		var_1C = self getweaponammostock(var_15);
 		if(var_1C < var_1B) {
@@ -5953,11 +5953,11 @@ cp_rave_give_weapon(param_00,param_01) {
 			var_04 = scripts\cp\maps\cp_rave\cp_rave_weapon_upgrade::get_pap_camo(2,var_08,var_03);
 			var_0F = scripts\cp\maps\cp_rave\cp_rave_weapon_upgrade::return_pap_attachment(param_01,2,var_08,var_03);
 			if(isdefined(var_0F) && var_0F != "replace_me") {
-				var_10 = scripts\engine\utility::array_combine(function_00E3(var_03),["pap1"]);
+				var_10 = scripts\engine\utility::array_combine(getweaponattachments(var_03),["pap1"]);
 			}
 			else
 			{
-				var_10 = function_00E3(var_03);
+				var_10 = getweaponattachments(var_03);
 			}
 
 			var_11 = scripts\cp\utility::getrawbaseweaponname(var_03);
@@ -5966,7 +5966,7 @@ cp_rave_give_weapon(param_00,param_01) {
 			self.pap[var_11] = var_12;
 			var_13 = scripts\cp\cp_weapon::return_weapon_name_with_like_attachments(var_03,undefined,var_10,undefined,var_04);
 			var_13 = scripts\cp\utility::_giveweapon(var_13,undefined,undefined,var_09);
-			self.pap[var_11].var_B111++;
+			self.pap[var_11].lvl++;
 			scripts\cp\cp_merits::processmerit("mt_upgrade_weapons");
 			scripts\cp\utility::notify_used_consumable("wall_power");
 			removefistsweapons(var_05);
@@ -5974,7 +5974,7 @@ cp_rave_give_weapon(param_00,param_01) {
 		else
 		{
 			self notify("weapon_purchased");
-			var_10 = function_00E3(var_06);
+			var_10 = getweaponattachments(var_06);
 			var_13 = scripts\cp\cp_weapon::return_weapon_name_with_like_attachments(var_05,undefined,var_13);
 			var_13 = scripts\cp\utility::_giveweapon(var_13,undefined,undefined,var_09);
 			self.itempicked = var_13;
@@ -6039,8 +6039,8 @@ cp_rave_give_weapon(param_00,param_01) {
 			}
 		}
 
-		var_1B = function_0249(var_17);
-		var_1C = scripts/cp/perks/prestige::prestige_getminammo();
+		var_1B = weaponmaxammo(var_17);
+		var_1C = scripts\cp\perks\prestige::prestige_getminammo();
 		var_1D = int(var_1C * var_1B);
 		var_1E = self getweaponammostock(var_17);
 		if(var_1E < var_1D) {
@@ -6606,9 +6606,9 @@ cp_rave_ghost_color_manager() {
 }
 
 load_cp_rave_ghost_exp_vfx() {
-	level._effect["ghost_explosion_death_red"] = loadfx("vfx/iw7/core/zombie/ghosts_n_skulls/vfx_zmb_ghost_imp_red.vfx");
-	level._effect["ghost_explosion_death_yellow"] = loadfx("vfx/iw7/core/zombie/ghosts_n_skulls/vfx_zmb_ghost_imp_yellow.vfx");
-	level._effect["ghost_explosion_death_blue"] = loadfx("vfx/iw7/core/zombie/ghosts_n_skulls/vfx_zmb_ghost_imp_blue.vfx");
+	level._effect["ghost_explosion_death_red"] = loadfx("vfx\iw7\core\zombie\ghosts_n_skulls\vfx_zmb_ghost_imp_red.vfx");
+	level._effect["ghost_explosion_death_yellow"] = loadfx("vfx\iw7\core\zombie\ghosts_n_skulls\vfx_zmb_ghost_imp_yellow.vfx");
+	level._effect["ghost_explosion_death_blue"] = loadfx("vfx\iw7\core\zombie\ghosts_n_skulls\vfx_zmb_ghost_imp_blue.vfx");
 }
 
 cp_rave_set_moving_target_color(param_00,param_01) {
@@ -6755,7 +6755,7 @@ take_out_targets(param_00,param_01,param_02) {
 	for(var_06 = 0;var_06 < var_05;var_06++) {
 		var_07 = var_04[var_06];
 		playfx(level._effect["ghost_explosion_death_" + var_07.color],var_07.origin,anglestoforward(var_07.angles),anglestoup(var_07.angles));
-		scripts/aitypes/zombie_ghost/behaviors::remove_moving_target_default(var_07,param_00);
+		scripts\aitypes\zombie_ghost\behaviors::remove_moving_target_default(var_07,param_00);
 	}
 }
 

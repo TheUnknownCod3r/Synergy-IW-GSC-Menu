@@ -1,8 +1,8 @@
-/***********************************************
+/***************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\behaviortree\lumberjack.gsc
-***********************************************/
+ * Script: behaviortree\lumberjack.gsc
+***************************************/
 
 lumberjackfn0(param_00) {
 	return lib_0A09::func_5AEA(param_00,200);

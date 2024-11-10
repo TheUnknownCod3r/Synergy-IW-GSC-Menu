@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2719.gsc
+ * Script: 2719.gsc
 ***************************************/
 
 init() {}
@@ -76,12 +76,12 @@ func_53EE() {
   if (isbot(var_02))
   continue;
 
-  var_03 = var_02 scripts/mp/powers::getcurrentequipment("primary");
+  var_03 = var_02 scripts\mp\powers::getcurrentequipment("primary");
 
   if (isdefined(var_03))
   func_53E4(var_03, "primary");
 
-  var_03 = var_02 scripts/mp/powers::getcurrentequipment("secondary");
+  var_03 = var_02 scripts\mp\powers::getcurrentequipment("secondary");
 
   if (isdefined(var_03))
   func_53E4(var_03, "secondary");
@@ -105,12 +105,12 @@ func_53ED() {
   if (isbot(var_02))
   continue;
 
-  var_03 = var_02 scripts/mp/powers::getcurrentequipment("primary");
+  var_03 = var_02 scripts\mp\powers::getcurrentequipment("primary");
 
   if (isdefined(var_03))
   func_53E4(var_03, "primary");
 
-  var_03 = var_02 scripts/mp/powers::getcurrentequipment("secondary");
+  var_03 = var_02 scripts\mp\powers::getcurrentequipment("secondary");
 
   if (isdefined(var_03))
   func_53E4(var_03, "secondary");
@@ -134,12 +134,12 @@ func_53EC() {
   if (isbot(var_02))
   continue;
 
-  var_03 = var_02 scripts/mp/powers::getcurrentequipment("primary");
+  var_03 = var_02 scripts\mp\powers::getcurrentequipment("primary");
 
   if (isdefined(var_03))
   func_53E4(var_03, "primary");
 
-  var_03 = var_02 scripts/mp/powers::getcurrentequipment("secondary");
+  var_03 = var_02 scripts\mp\powers::getcurrentequipment("secondary");
 
   if (isdefined(var_03))
   func_53E4(var_03, "secondary");
@@ -171,12 +171,12 @@ func_53E4(var_00, var_01) {
   if (isbot(var_03))
   continue;
 
-  var_04 = var_03 scripts/mp/powers::getcurrentequipment(var_01);
+  var_04 = var_03 scripts\mp\powers::getcurrentequipment(var_01);
 
   if (isdefined(var_04))
-  var_03 scripts/mp/powers::removepower(var_04);
+  var_03 scripts\mp\powers::removepower(var_04);
 
-  var_03 scripts/mp/powers::givepower(var_00, var_01, 0);
+  var_03 scripts\mp\powers::givepower(var_00, var_01, 0);
   }
 }
 
@@ -215,7 +215,7 @@ devprintweaponlist(var_00, var_01, var_02) {
   foreach (var_04 in var_00) {
   var_05 = self getweaponammoclip(var_04);
   var_06 = self getweaponammostock(var_04);
-  var_07 = "  " + var_04 + " " + var_05 + "/" + var_06;
+  var_07 = "  " + var_04 + " " + var_05 + "\" + var_06;
 
   if (var_02)
   iprintlnbold(var_07);

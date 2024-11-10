@@ -1,8 +1,8 @@
-/****************************************************************
+/********************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\zombies\interaction_waterfall.gsc
-****************************************************************/
+ * Script: scripts\cp\zombies\interaction_waterfall.gsc
+********************************************************/
 
 init_waterfall_trap() {
 	var_00 = scripts\engine\utility::getstruct("trap_waterfall","script_noteworthy");
@@ -86,7 +86,7 @@ kill_zombies(param_00,param_01) {
 			continue;
 		}
 
-		param_00.var_126A4++;
+		param_00.trap_kills++;
 		var_02 thread fling_zombie(param_00,param_01);
 	}
 }

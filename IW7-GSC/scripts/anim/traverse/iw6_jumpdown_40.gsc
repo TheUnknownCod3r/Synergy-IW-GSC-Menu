@@ -1,8 +1,8 @@
-/*************************************************************
+/*****************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\anim\traverse\iw6_jumpdown_40.gsc
-*************************************************************/
+ * Script: scripts\anim\traverse\iw6_jumpdown_40.gsc
+*****************************************************/
 
 main() {
 	if(self.type == "dog") {

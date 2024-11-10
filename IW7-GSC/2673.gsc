@@ -1,11 +1,11 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2673.gsc
+ * Script: 2673.gsc
 ***************************************/
 
 init() {
-  level._effect["boombox_c4light"] = loadfx("vfx/iw7/_requests/coop/vfx_boombox_blink");
-  level._effect["boombox_explode"] = loadfx("vfx/iw7/_requests/coop/vfx_ghetto_blast.vfx");
+  level._effect["boombox_c4light"] = loadfx("vfx\iw7\_requests\coop\vfx_boombox_blink");
+  level._effect["boombox_explode"] = loadfx("vfx\iw7\_requests\coop\vfx_ghetto_blast.vfx");
   var_00 = spawnstruct();
   var_0.timeout = 18.0;
   var_0.modelbase = "boom_box_c4_wm";
@@ -27,8 +27,8 @@ give_crafted_boombox(var_00, var_01) {
   var_01 thread watch_dpad();
   var_01 notify("new_power", "crafted_boombox");
   var_01 setclientomnvar("zom_crafted_weapon", 5);
-  var_01 thread scripts/cp/utility::usegrenadegesture(var_01, "iw7_pickup_zm");
-  scripts/cp/utility::set_crafted_inventory_item("crafted_boombox", ::give_crafted_boombox, var_01);
+  var_01 thread scripts\cp\utility::usegrenadegesture(var_01, "iw7_pickup_zm");
+  scripts\cp\utility::set_crafted_inventory_item("crafted_boombox", ::give_crafted_boombox, var_01);
 }
 
 watch_dpad() {
@@ -50,7 +50,7 @@ watch_dpad() {
   if (isdefined(self.allow_carry) && self.allow_carry == 0)
   continue;
 
-  if (scripts/cp/utility::is_valid_player())
+  if (scripts\cp\utility::is_valid_player())
   break;
   }
 
@@ -59,7 +59,7 @@ watch_dpad() {
 
 give_boombox(var_00, var_01) {
   self endon("disconnect");
-  scripts/cp/utility::clearlowermessage("msg_power_hint");
+  scripts\cp\utility::clearlowermessage("msg_power_hint");
   var_02 = createboomboxforplayer(self);
   self.itemtype = var_2.name;
   removeperks();
@@ -112,7 +112,7 @@ setcarryingboombox(var_00, var_01, var_02) {
   if (var_03 != "force_cancel_placement")
   thread watch_dpad();
   else if (var_01)
-  scripts/cp/utility::remove_crafted_item_from_inventory(self);
+  scripts\cp\utility::remove_crafted_item_from_inventory(self);
 
   return 0;
   }
@@ -121,7 +121,7 @@ setcarryingboombox(var_00, var_01, var_02) {
   continue;
 
   if (var_01)
-  scripts/cp/utility::remove_crafted_item_from_inventory(self);
+  scripts\cp\utility::remove_crafted_item_from_inventory(self);
 
   var_00 boombox_setplaced(var_02, self);
   scripts\engine\utility::allow_weapon(1);
@@ -131,7 +131,7 @@ setcarryingboombox(var_00, var_01, var_02) {
 
 removeweapons() {
   if (self.hasriotshield) {
-  var_00 = scripts/cp/utility::riotshieldname();
+  var_00 = scripts\cp\utility::riotshieldname();
   self.restoreweapon = var_00;
   self.riotshieldammo = self getammocount(var_00);
   self giveuponsuppressiontime(var_00);
@@ -139,18 +139,18 @@ removeweapons() {
 }
 
 removeperks() {
-  if (scripts/cp/utility::_hasperk("specialty_explosivebullets")) {
+  if (scripts\cp\utility::_hasperk("specialty_explosivebullets")) {
   self.restoreperk = "specialty_explosivebullets";
-  scripts/cp/utility::_unsetperk("specialty_explosivebullets");
+  scripts\cp\utility::_unsetperk("specialty_explosivebullets");
   }
 }
 
 restoreweapons() {
   if (isdefined(self.restoreweapon)) {
-  scripts/cp/utility::_giveweapon(self.restoreweapon);
+  scripts\cp\utility::_giveweapon(self.restoreweapon);
 
   if (self.hasriotshield) {
-  var_00 = scripts/cp/utility::riotshieldname();
+  var_00 = scripts\cp\utility::riotshieldname();
   self setweaponammoclip(var_00, self.riotshieldammo);
   }
   }
@@ -160,7 +160,7 @@ restoreweapons() {
 
 restoreperks() {
   if (isdefined(self.restoreperk)) {
-  scripts/cp/utility::giveperk(self.restoreperk);
+  scripts\cp\utility::giveperk(self.restoreperk);
   self.restoreperk = undefined;
   }
 }
@@ -209,7 +209,7 @@ boombox_handledeath(var_00) {
   if (isdefined(self.zap_model))
   self.zap_model delete();
 
-  scripts/cp/utility::removefromtraplist();
+  scripts\cp\utility::removefromtraplist();
 
   if (isdefined(self))
   self delete();
@@ -262,10 +262,10 @@ boombox_setcarried(var_00, var_01) {
   self setcandamage(0);
   self.carriedby = var_00;
   var_0.iscarrying = 1;
-  var_00 thread scripts/cp/utility::update_trap_placement_internal(self, self.carriedboombox, level.crafted_boombox_settings["crafted_boombox"], 1);
-  thread scripts/cp/utility::item_oncarrierdeath(var_00);
-  thread scripts/cp/utility::item_oncarrierdisconnect(var_00);
-  thread scripts/cp/utility::item_ongameended(var_00);
+  var_00 thread scripts\cp\utility::update_trap_placement_internal(self, self.carriedboombox, level.crafted_boombox_settings["crafted_boombox"], 1);
+  thread scripts\cp\utility::item_oncarrierdeath(var_00);
+  thread scripts\cp\utility::item_oncarrierdisconnect(var_00);
+  thread scripts\cp\utility::item_ongameended(var_00);
   boombox_setinactive();
   self notify("carried");
 }
@@ -273,17 +273,17 @@ boombox_setcarried(var_00, var_01) {
 boombox_setactive(var_00) {
   create_attract_positions((1, 1, 0), 0, 10, 48);
   thread boombox_handledeath(self.owner);
-  thread scripts/cp/utility::item_handleownerdisconnect("elecboombox_handleOwner");
-  thread scripts/cp/utility::item_timeout(var_00, level.crafted_boombox_settings["crafted_boombox"].timeout, "explode");
+  thread scripts\cp\utility::item_handleownerdisconnect("elecboombox_handleOwner");
+  thread scripts\cp\utility::item_timeout(var_00, level.crafted_boombox_settings["crafted_boombox"].timeout, "explode");
   thread boombox_trap_enemies();
   thread boombox_explode();
-  scripts/cp/utility::addtotraplist();
+  scripts\cp\utility::addtotraplist();
   wait 1;
   playfxontag(level._effect["boombox_c4light"], self, "c4_fx_tag");
 }
 
 boombox_setinactive() {
-  scripts/cp/utility::removefromtraplist();
+  scripts\cp\utility::removefromtraplist();
 }
 
 boombox_trap_enemies() {
@@ -294,11 +294,11 @@ boombox_trap_enemies() {
   var_00 = 262144;
 
   for (;;) {
-  var_01 = scripts/cp/cp_agent_utils::getaliveagentsofteam("axis");
+  var_01 = scripts\cp\cp_agent_utils::getaliveagentsofteam("axis");
   var_01 = scripts\engine\utility::get_array_of_closest(self.origin, var_01);
 
   foreach (var_03 in var_01) {
-  if (!scripts/cp/utility::should_be_affected_by_trap(var_03) || var_3.about_to_dance)
+  if (!scripts\cp\utility::should_be_affected_by_trap(var_03) || var_3.about_to_dance)
   continue;
 
   if (scripts\engine\utility::is_true(self.is_suicide_bomber))
@@ -416,7 +416,7 @@ create_attract_positions(var_00, var_01, var_02, var_03) {
   var_09 = (cos(var_07) * var_8[0] - sin(var_07) * var_8[1], sin(var_07) * var_8[0] + cos(var_07) * var_8[1], var_8[2]);
   var_10 = getclosestpointonnavmesh(self.origin + var_09 + (0, 0, 10));
 
-  if (!scripts/cp/loot::is_in_active_volume(var_10))
+  if (!scripts\cp\loot::is_in_active_volume(var_10))
   continue;
 
   if (isdefined(var_10) && distancesquared(var_10, self.origin) > var_04)
@@ -431,7 +431,7 @@ create_attract_positions(var_00, var_01, var_02, var_03) {
   else if (!self.discotrap_disabled) {
   self.discotrap_disabled = 1;
   var_11 = scripts\engine\utility::getstructarray("interaction_discoballtrap", "script_noteworthy");
-  level thread scripts/cp/cp_interaction::interaction_cooldown(var_11[0], 30);
+  level thread scripts\cp\cp_interaction::interaction_cooldown(var_11[0], 30);
   }
   }
   }
@@ -452,7 +452,7 @@ create_attract_positions(var_00, var_01, var_02, var_03) {
   var_09 = (cos(var_07) * var_8[0] - sin(var_07) * var_8[1], sin(var_07) * var_8[0] + cos(var_07) * var_8[1], var_8[2]);
   var_10 = getclosestpointonnavmesh(self.origin + var_09 + (0, 0, 10));
 
-  if (!scripts/cp/loot::is_in_active_volume(var_10))
+  if (!scripts\cp\loot::is_in_active_volume(var_10))
   continue;
 
   if (isdefined(var_10) && distancesquared(var_10, self.origin) > var_04)

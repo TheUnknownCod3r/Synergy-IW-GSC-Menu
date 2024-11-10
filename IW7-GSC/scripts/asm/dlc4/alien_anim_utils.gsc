@@ -1,8 +1,8 @@
-/*********************************************************
+/*************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\asm\dlc4\alien_anim_utils.gsc
-*********************************************************/
+ * Script: scripts\asm\dlc4\alien_anim_utils.gsc
+*************************************************/
 
 func_97C5() {
 	if(isdefined(level.var_1BBA)) {

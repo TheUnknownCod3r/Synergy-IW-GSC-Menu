@@ -1,8 +1,8 @@
-/**********************************************************
+/**************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\killstreaks\_remotetank.gsc
-**********************************************************/
+ * Script: scripts\mp\killstreaks\_remotetank.gsc
+**************************************************/
 
 init() {
 	scripts\mp\killstreaks\_killstreaks::registerkillstreak("remote_tank",::func_128FE);
@@ -25,31 +25,31 @@ init() {
 	level.tanksettings["remote_tank"].var_1114C = &"KILLSTREAKS_REMOTE_TANK_CANNOT_PLACE";
 	level.tanksettings["remote_tank"].var_A84D = "killstreak_remote_tank_laptop_mp";
 	level.tanksettings["remote_tank"].remotedetonatethink = "killstreak_remote_tank_remote_mp";
-	level._effect["remote_tank_dying"] = loadfx("vfx/core/expl/killstreak_explosion_quick");
-	level._effect["remote_tank_explode"] = loadfx("vfx/core/expl/bouncing_betty_explosion");
-	level._effect["remote_tank_spark"] = loadfx("vfx/core/impacts/large_metal_painted_hit");
-	level._effect["remote_tank_antenna_light_mp"] = loadfx("vfx/core/vehicles/aircraft_light_red_blink");
-	level._effect["remote_tank_camera_light_mp"] = loadfx("vfx/core/vehicles/aircraft_light_wingtip_green");
+	level._effect["remote_tank_dying"] = loadfx("vfx\core\expl\killstreak_explosion_quick");
+	level._effect["remote_tank_explode"] = loadfx("vfx\core\expl\bouncing_betty_explosion");
+	level._effect["remote_tank_spark"] = loadfx("vfx\core\impacts\large_metal_painted_hit");
+	level._effect["remote_tank_antenna_light_mp"] = loadfx("vfx\core\vehicles\aircraft_light_red_blink");
+	level._effect["remote_tank_camera_light_mp"] = loadfx("vfx\core\vehicles\aircraft_light_wingtip_green");
 	level.remote_tank_armor_bulletdamage = 0.5;
 }
 
 func_128FE(param_00,param_01) {
 	var_02 = 1;
-	if(scripts\mp\_utility::currentactivevehiclecount() >= scripts\mp\_utility::maxvehiclesallowed() || level.fauxvehiclecount + var_02 >= scripts\mp\_utility::maxvehiclesallowed()) {
+	if(scripts\mp\utility::currentactivevehiclecount() >= scripts\mp\utility::maxvehiclesallowed() || level.fauxvehiclecount + var_02 >= scripts\mp\utility::maxvehiclesallowed()) {
 		self iprintlnbold(&"KILLSTREAKS_TOO_MANY_VEHICLES");
 		return 0;
 	}
 
-	scripts\mp\_utility::incrementfauxvehiclecount();
+	scripts\mp\utility::incrementfauxvehiclecount();
 	var_03 = _meth_83AC(param_00,"remote_tank");
 	if(var_03) {
-		scripts\mp\_matchdata::logkillstreakevent("remote_tank",self.origin);
-		thread scripts\mp\_utility::teamplayercardsplash("used_remote_tank",self);
+		scripts\mp\matchdata::logkillstreakevent("remote_tank",self.origin);
+		thread scripts\mp\utility::teamplayercardsplash("used_remote_tank",self);
 		func_1146D("remote_tank");
 	}
 	else
 	{
-		scripts\mp\_utility::decrementfauxvehiclecount();
+		scripts\mp\utility::decrementfauxvehiclecount();
 	}
 
 	self.iscarrying = 0;
@@ -57,22 +57,22 @@ func_128FE(param_00,param_01) {
 }
 
 func_1146D(param_00) {
-	var_01 = scripts\mp\_utility::getkillstreakweapon(level.tanksettings[param_00].streakname);
+	var_01 = scripts\mp\utility::getkillstreakweapon(level.tanksettings[param_00].streakname);
 	scripts\mp\killstreaks\_killstreaks::func_1146C(var_01);
-	scripts\mp\_utility::_takeweapon(level.tanksettings[param_00].var_A84D);
-	scripts\mp\_utility::_takeweapon(level.tanksettings[param_00].remotedetonatethink);
+	scripts\mp\utility::_takeweapon(level.tanksettings[param_00].var_A84D);
+	scripts\mp\utility::_takeweapon(level.tanksettings[param_00].remotedetonatethink);
 }
 
 removeperks() {
-	if(scripts\mp\_utility::_hasperk("specialty_explosivebullets")) {
+	if(scripts\mp\utility::_hasperk("specialty_explosivebullets")) {
 		self.restoreperk = "specialty_explosivebullets";
-		scripts\mp\_utility::removeperk("specialty_explosivebullets");
+		scripts\mp\utility::removeperk("specialty_explosivebullets");
 	}
 }
 
 restoreperks() {
 	if(isdefined(self.restoreperk)) {
-		scripts\mp\_utility::giveperk(self.restoreperk);
+		scripts\mp\utility::giveperk(self.restoreperk);
 		self.restoreperk = undefined;
 	}
 }
@@ -107,7 +107,7 @@ removeweapons() {
 			continue;
 		}
 
-		scripts\mp\_utility::_takeweapon(var_02);
+		scripts\mp\utility::_takeweapon(var_02);
 	}
 }
 
@@ -124,7 +124,7 @@ restoreweapons() {
 			continue;
 		}
 
-		scripts\mp\_utility::_giveweapon(var_02);
+		scripts\mp\utility::_giveweapon(var_02);
 		if(isdefined(self.restoreweaponclipammo[var_02])) {
 			self setweaponammoclip(var_02,self.restoreweaponclipammo[var_02]);
 		}
@@ -207,10 +207,10 @@ func_F689(param_00,param_01) {
 			}
 
 			if(level.console) {
-				var_03 = scripts\mp\_utility::getkillstreakweapon(level.tanksettings[param_00.tanktype].streakname);
-				if(isdefined(self.var_A6A1) && var_03 == scripts\mp\_utility::getkillstreakweapon(self.pers["killstreaks"][self.var_A6A1].streakname) && !self getweaponslistitems().size) {
-					scripts\mp\_utility::_giveweapon(var_03,0);
-					scripts\mp\_utility::_setactionslot(4,"weapon",var_03);
+				var_03 = scripts\mp\utility::getkillstreakweapon(level.tanksettings[param_00.tanktype].streakname);
+				if(isdefined(self.var_A6A1) && var_03 == scripts\mp\utility::getkillstreakweapon(self.pers["killstreaks"][self.var_A6A1].streakname) && !self getweaponslistitems().size) {
+					scripts\mp\utility::_giveweapon(var_03,0);
+					scripts\mp\utility::_setactionslot(4,"weapon",var_03);
 				}
 			}
 
@@ -346,8 +346,8 @@ func_114BB() {
 	var_00 endon("death");
 	self waittill("placed");
 	var_00 func_1146D(self.tanktype);
-	var_00 scripts\mp\_utility::_giveweapon(level.tanksettings[self.tanktype].var_A84D);
-	var_00 scripts\mp\_utility::_switchtoweaponimmediate(level.tanksettings[self.tanktype].var_A84D);
+	var_00 scripts\mp\utility::_giveweapon(level.tanksettings[self.tanktype].var_A84D);
+	var_00 scripts\mp\utility::_switchtoweaponimmediate(level.tanksettings[self.tanktype].var_A84D);
 }
 
 func_4A1F(param_00) {
@@ -415,7 +415,7 @@ func_114CC() {
 		self.mgturret setturretteam(var_00.team);
 		foreach(var_03 in level.players) {
 			if(var_03 != var_00 && var_03.team == var_00.team) {
-				var_04 = self.mgturret scripts\mp\_entityheadicons::setheadicon(var_03,scripts\mp\_teams::_meth_81B0(self.team),var_01,10,10,0,0.05,0,1,0,1);
+				var_04 = self.mgturret scripts\mp\entityheadicons::setheadicon(var_03,scripts\mp\teams::_meth_81B0(self.team),var_01,10,10,0,0.05,0,1,0,1);
 				if(isdefined(var_04)) {
 					var_04 settargetent(self);
 				}
@@ -435,17 +435,17 @@ func_114CC() {
 
 func_10E09() {
 	var_00 = self.triggerportableradarping;
-	var_00 scripts\mp\_utility::setusingremote(self.tanktype);
+	var_00 scripts\mp\utility::setusingremote(self.tanktype);
 	if(getdvarint("camera_thirdPerson")) {
-		var_00 scripts\mp\_utility::setthirdpersondof(0);
+		var_00 scripts\mp\utility::setthirdpersondof(0);
 	}
 
 	var_00.restoreangles = var_00.angles;
-	var_00 scripts\mp\_utility::freezecontrolswrapper(1);
+	var_00 scripts\mp\utility::freezecontrolswrapper(1);
 	var_01 = var_00 scripts\mp\killstreaks\_killstreaks::initridekillstreak("remote_tank");
 	if(var_01 != "success") {
 		if(var_01 != "disconnect") {
-			var_00 scripts\mp\_utility::clearusingremote();
+			var_00 scripts\mp\utility::clearusingremote();
 		}
 
 		if(isdefined(var_00.disabledweapon) && var_00.disabledweapon) {
@@ -456,13 +456,13 @@ func_10E09() {
 		return 0;
 	}
 
-	var_00 scripts\mp\_utility::freezecontrolswrapper(0);
+	var_00 scripts\mp\utility::freezecontrolswrapper(0);
 	self.mgturret setcandamage(1);
 	self setcandamage(1);
 	var_02 = spawnstruct();
 	var_02.playdeathfx = 1;
 	var_02.deathoverridecallback = ::func_114C9;
-	thread scripts\mp\_movers::handle_moving_platforms(var_02);
+	thread scripts\mp\movers::handle_moving_platforms(var_02);
 	var_00 remotecontrolvehicle(self);
 	var_00 remotecontrolturret(self.mgturret);
 	var_00 thread tank_watchfiring(self);
@@ -470,8 +470,8 @@ func_10E09() {
 	thread func_114B7();
 	thread func_114CA();
 	var_00.using_remote_tank = 1;
-	var_00 scripts\mp\_utility::_giveweapon(level.tanksettings[self.tanktype].remotedetonatethink);
-	var_00 scripts\mp\_utility::_switchtoweaponimmediate(level.tanksettings[self.tanktype].remotedetonatethink);
+	var_00 scripts\mp\utility::_giveweapon(level.tanksettings[self.tanktype].remotedetonatethink);
+	var_00 scripts\mp\utility::_switchtoweaponimmediate(level.tanksettings[self.tanktype].remotedetonatethink);
 	thread func_114BD();
 	self.mgturret thread func_114D5();
 }
@@ -497,10 +497,10 @@ func_114B3() {
 func_114CF() {
 	self.mgturret give_player_session_tokens(level.tanksettings[self.tanktype].sentrymodeoff);
 	if(level.teambased) {
-		scripts\mp\_entityheadicons::setteamheadicon("none",(0,0,0));
+		scripts\mp\entityheadicons::setteamheadicon("none",(0,0,0));
 	}
 	else if(isdefined(self.triggerportableradarping)) {
-		scripts\mp\_entityheadicons::setplayerheadicon(undefined,(0,0,0));
+		scripts\mp\entityheadicons::setplayerheadicon(undefined,(0,0,0));
 	}
 
 	if(!isdefined(self.triggerportableradarping)) {
@@ -512,11 +512,11 @@ func_114CF() {
 		var_00 notify("end_remote");
 		var_00 remotecontrolvehicleoff(self);
 		var_00 geysers_and_boatride(self.mgturret);
-		var_00 scripts\mp\_utility::_switchtoweapon(var_00 scripts\engine\utility::getlastweapon());
-		var_00 scripts\mp\_utility::clearusingremote();
+		var_00 scripts\mp\utility::_switchtoweapon(var_00 scripts\engine\utility::getlastweapon());
+		var_00 scripts\mp\utility::clearusingremote();
 		var_00 setplayerangles(var_00.restoreangles);
 		if(getdvarint("camera_thirdPerson")) {
-			var_00 scripts\mp\_utility::setthirdpersondof(1);
+			var_00 scripts\mp\utility::setthirdpersondof(1);
 		}
 
 		if(isdefined(var_00.disabledusability) && var_00.disabledusability) {
@@ -533,9 +533,9 @@ func_114BA() {
 	self endon("disconnect");
 	self endon("death");
 	level endon("game_ended");
-	scripts\mp\_utility::freezecontrolswrapper(1);
+	scripts\mp\utility::freezecontrolswrapper(1);
 	wait(0.5);
-	scripts\mp\_utility::freezecontrolswrapper(0);
+	scripts\mp\utility::freezecontrolswrapper(0);
 }
 
 func_114BF() {
@@ -563,7 +563,7 @@ func_114BC() {
 func_114C1() {
 	self endon("death");
 	var_00 = level.tanksettings[self.tanktype].timeout;
-	scripts\mp\_hostmigration::waitlongdurationwithhostmigrationpause(var_00);
+	scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(var_00);
 	self notify("death");
 }
 
@@ -579,7 +579,7 @@ func_114BE() {
 	self playsound("talon_destroyed");
 	removefromugvlist(var_00);
 	self setmodel(level.tanksettings[self.tanktype].modeldestroyed);
-	if(isdefined(self.triggerportableradarping) && self.triggerportableradarping.using_remote_tank || self.triggerportableradarping scripts\mp\_utility::isusingremote()) {
+	if(isdefined(self.triggerportableradarping) && self.triggerportableradarping.using_remote_tank || self.triggerportableradarping scripts\mp\utility::isusingremote()) {
 		func_114CF();
 		self.triggerportableradarping.using_remote_tank = 0;
 	}
@@ -591,7 +591,7 @@ func_114BE() {
 	wait(2);
 	playfx(level._effect["remote_tank_explode"],self.origin);
 	self.mgturret delete();
-	scripts\mp\_utility::decrementfauxvehiclecount();
+	scripts\mp\utility::decrementfauxvehiclecount();
 	self delete();
 }
 
@@ -605,7 +605,7 @@ func_3758(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_0
 		return;
 	}
 
-	if(!scripts\mp\_weapons::friendlyfirecheck(var_0C.triggerportableradarping,param_01)) {
+	if(!scripts\mp\weapons::friendlyfirecheck(var_0C.triggerportableradarping,param_01)) {
 		return;
 	}
 
@@ -635,24 +635,24 @@ func_3758(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_0
 
 	var_0D = param_02;
 	if(isplayer(param_01)) {
-		param_01 scripts\mp\_damagefeedback::updatedamagefeedback("remote_tank");
+		param_01 scripts\mp\damagefeedback::updatedamagefeedback("remote_tank");
 		if(param_04 == "MOD_RIFLE_BULLET" || param_04 == "MOD_PISTOL_BULLET") {
-			if(param_01 scripts\mp\_utility::_hasperk("specialty_armorpiercing")) {
+			if(param_01 scripts\mp\utility::_hasperk("specialty_armorpiercing")) {
 				var_0D = var_0D + param_02 * level.armorpiercingmod;
 			}
 		}
 
-		if(function_0107(param_04)) {
+		if(isexplosivedamagemod(param_04)) {
 			var_0D = var_0D + param_02;
 		}
 	}
 
-	if(function_0107(param_04) && isdefined(param_05) && param_05 == "destructible_car") {
+	if(isexplosivedamagemod(param_04) && isdefined(param_05) && param_05 == "destructible_car") {
 		var_0D = var_0C.maxhealth;
 	}
 
 	if(isdefined(param_01.triggerportableradarping) && isplayer(param_01.triggerportableradarping)) {
-		param_01.triggerportableradarping scripts\mp\_damagefeedback::updatedamagefeedback("remote_tank");
+		param_01.triggerportableradarping scripts\mp\damagefeedback::updatedamagefeedback("remote_tank");
 	}
 
 	if(isdefined(param_05)) {
@@ -698,8 +698,8 @@ func_3758(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_0
 		if(isplayer(param_01) && !isdefined(var_0C.triggerportableradarping) || param_01 != var_0C.triggerportableradarping) {
 			var_0C.var_1D41 = 1;
 			param_01 notify("destroyed_killstreak",param_05);
-			thread scripts\mp\_utility::teamplayercardsplash("callout_destroyed_remote_tank",param_01);
-			param_01 thread scripts\mp\_utility::giveunifiedpoints("kill",param_05,300);
+			thread scripts\mp\utility::teamplayercardsplash("callout_destroyed_remote_tank",param_01);
+			param_01 thread scripts\mp\utility::giveunifiedpoints("kill",param_05,300);
 		}
 
 		var_0C notify("death");
@@ -776,7 +776,7 @@ func_114D5() {
 	level endon("game_ended");
 	for(;;) {
 		self waittill("damage",var_00,var_01,var_02,var_03,var_04,var_05,var_06,var_07,var_08,var_09);
-		if(isdefined(self.var_10955) && isdefined(self.var_114B1) && !function_0107(var_04) || isdefined(var_09) && function_0107(var_04) && var_09 == "stealth_bomb_mp" || var_09 == "artillery_mp") {
+		if(isdefined(self.var_10955) && isdefined(self.var_114B1) && !isexplosivedamagemod(var_04) || isdefined(var_09) && isexplosivedamagemod(var_04) && var_09 == "stealth_bomb_mp" || var_09 == "artillery_mp") {
 			self.var_114B1 [[self.var_10955]](undefined,var_01,var_00,var_08,var_04,var_09,var_03,var_02,undefined,undefined,var_05,var_07);
 		}
 	}
@@ -788,7 +788,7 @@ tank_watchfiring(param_00) {
 	param_00 endon("death");
 	var_01 = 50;
 	var_02 = var_01;
-	var_03 = function_0240(level.tanksettings[param_00.tanktype].mgturretinfo);
+	var_03 = weaponfiretime(level.tanksettings[param_00.tanktype].mgturretinfo);
 	for(;;) {
 		if(param_00.mgturret isfiringvehicleturret()) {
 			var_02--;
@@ -831,7 +831,7 @@ func_114B9(param_00) {
 			param_00 playsound("talon_missile_fire");
 			self playlocalsound("talon_missile_fire_plr");
 			var_04 = var_02 + anglestoforward(var_03) * 100;
-			var_05 = scripts\mp\_utility::_magicbullet(level.tanksettings[param_00.tanktype].var_B88D,var_02,var_04,self);
+			var_05 = scripts\mp\utility::_magicbullet(level.tanksettings[param_00.tanktype].var_B88D,var_02,var_04,self);
 			var_01 = var_01 + 1 % 2;
 			wait(5);
 			param_00 playsound("talon_rocket_reload");
@@ -854,7 +854,7 @@ func_114B6(param_00) {
 			var_02 = vectornormalize(var_01["normal"]);
 			var_03 = vectortoangles(var_02);
 			var_03 = var_03 + (90,0,0);
-			var_04 = scripts\mp\_weapons::spawnmine(param_00.origin,self,"equipment",var_03);
+			var_04 = scripts\mp\weapons::spawnmine(param_00.origin,self,"equipment",var_03);
 			param_00 playsound("item_blast_shield_on");
 			wait(8);
 			continue;

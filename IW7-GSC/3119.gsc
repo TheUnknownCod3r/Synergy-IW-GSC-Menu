@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3119.gsc
-****************************/
+ * Script: 3119.gsc
+************************/
 
 func_3359(param_00,param_01,param_02,param_03) {
 	self.asm.var_51E8 = 1;
@@ -11,7 +11,7 @@ func_3359(param_00,param_01,param_02,param_03) {
 	self.asm.footsteps.time = 0;
 	self.asm.var_4C86 = spawnstruct();
 	self.asm.var_7360 = 0;
-	scripts/asm/asm::func_237B(1);
+	scripts\asm\asm::func_237B(1);
 	func_3377(param_00);
 	func_3375();
 	func_3374();
@@ -186,14 +186,14 @@ func_33AD(param_00,param_01) {
 }
 
 func_335C(param_00,param_01,param_02) {
-	if(scripts/asm/asm_bb::func_293E()) {
-		return scripts/asm/asm::asm_lookupanimfromalias(param_01,"haywire");
+	if(scripts\asm\asm_bb::func_293E()) {
+		return scripts\asm\asm::asm_lookupanimfromalias(param_01,"haywire");
 	}
 	else
 	{
-		var_03 = scripts/asm/asm::asm_getdemeanor();
-		if(scripts/asm/asm::asm_hasdemeanoranimoverride(var_03,"idle")) {
-			var_04 = scripts/asm/asm::asm_getdemeanoranimoverride(var_03,"idle");
+		var_03 = scripts\asm\asm::asm_getdemeanor();
+		if(scripts\asm\asm::asm_hasdemeanoranimoverride(var_03,"idle")) {
+			var_04 = scripts\asm\asm::asm_getdemeanoranimoverride(var_03,"idle");
 			if(isarray(var_04)) {
 				return var_04[randomint(var_04.size)];
 			}
@@ -206,12 +206,12 @@ func_335C(param_00,param_01,param_02) {
 }
 
 func_335D(param_00,param_01,param_02) {
-	var_03 = scripts/asm/asm::asm_getdemeanor();
-	if(scripts/asm/asm_bb::func_293E()) {
-		return scripts/asm/asm::asm_lookupanimfromalias(param_01,scripts/asm/asm_bb::func_2922());
+	var_03 = scripts\asm\asm::asm_getdemeanor();
+	if(scripts\asm\asm_bb::func_293E()) {
+		return scripts\asm\asm::asm_lookupanimfromalias(param_01,scripts\asm\asm_bb::func_2922());
 	}
-	else if(scripts/asm/asm::asm_hasdemeanoranimoverride(var_03,param_02)) {
-		var_04 = scripts/asm/asm::asm_getdemeanoranimoverride(var_03,param_02);
+	else if(scripts\asm\asm::asm_hasdemeanoranimoverride(var_03,param_02)) {
+		var_04 = scripts\asm\asm::asm_getdemeanoranimoverride(var_03,param_02);
 		if(isarray(var_04)) {
 			return var_04[randomint(var_04.size)];
 		}
@@ -219,11 +219,11 @@ func_335D(param_00,param_01,param_02) {
 		return var_04;
 	}
 
-	if(!scripts/asm/asm::asm_hasalias(param_02,var_04)) {
-		return scripts/asm/asm::asm_lookupanimfromalias(param_02,"default");
+	if(!scripts\asm\asm::asm_hasalias(param_02,var_04)) {
+		return scripts\asm\asm::asm_lookupanimfromalias(param_02,"default");
 	}
 
-	return scripts/asm/asm::asm_lookupanimfromalias(param_02,var_04);
+	return scripts\asm\asm::asm_lookupanimfromalias(param_02,var_04);
 }
 
 func_CEB9(param_00,param_01,param_02,param_03) {
@@ -275,7 +275,7 @@ func_CEBA(param_00,param_01,param_02,param_03) {
 	self endon(param_01 + "_finished");
 	var_04 = self [[self.var_7191]](param_00,param_01);
 	self _meth_82EA(param_01,var_04,1,param_02,1);
-	self.bt.var_5615 = 1;
+	self.var_3135.var_5615 = 1;
 	var_05 = ["right_arm","left_arm","torso","right_leg","left_leg"];
 	foreach(var_07 in var_05) {
 		var_08 = self _meth_850C(var_07,"upper");
@@ -288,9 +288,9 @@ func_CEBA(param_00,param_01,param_02,param_03) {
 	}
 
 	lib_0A1E::func_231F(param_00,param_01);
-	self.bt.var_5615 = undefined;
+	self.var_3135.var_5615 = undefined;
 }
 
 func_40FB(param_00,param_01,param_02) {
-	scripts/asm/asm::asm_fireephemeralevent("grenade response","return throw complete");
+	scripts\asm\asm::asm_fireephemeralevent("grenade response","return throw complete");
 }

@@ -1,8 +1,8 @@
-/**************************************************
+/******************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\animation_suite.gsc
-**************************************************/
+ * Script: scripts\mp\animation_suite.gsc
+******************************************/
 
 animationsuite() {
 	while(!scripts\mp\utility::istrue(game["gamestarted"])) {

@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2658.gsc
+ * Script: 2658.gsc
 ***************************************/
 
 outline_monitor_think() {
@@ -46,7 +46,7 @@ item_outline_weapon_monitor() {
 get_hudoutline_item(var_00, var_01) {
   var_02 = var_0.cost;
 
-  if (isdefined(var_0.struct.weapon) && scripts/cp/cp_weapon::has_weapon_variation(var_0.struct.weapon)) {
+  if (isdefined(var_0.struct.weapon) && scripts\cp\cp_weapon::has_weapon_variation(var_0.struct.weapon)) {
   if (isdefined(level.get_weapon_level_func)) {
   var_03 = self [[level.get_weapon_level_func]](var_0.struct.weapon);
 
@@ -59,7 +59,7 @@ get_hudoutline_item(var_00, var_01) {
   var_02 = var_0.cost * 0.5;
   }
 
-  if (scripts/cp/cp_persistence::player_has_enough_currency(var_02) || scripts\engine\utility::is_true(var_0.enabled))
+  if (scripts\cp\cp_persistence::player_has_enough_currency(var_02) || scripts\engine\utility::is_true(var_0.enabled))
   return 3;
   else
   return 1;
@@ -71,10 +71,10 @@ func_7D69(var_00) {
   if (!var_01)
   return 0;
 
-  if (scripts/cp/utility::is_holding_deployable())
+  if (scripts\cp\utility::is_holding_deployable())
   return 1;
 
-  if (scripts/cp/utility::has_special_weapon())
+  if (scripts\cp\utility::has_special_weapon())
   return 1;
 
   return 3;
@@ -119,7 +119,7 @@ should_put_player_outline_on(var_00) {
 get_hudoutline_for_player_health(var_00) {
   var_01 = var_0.health / 100;
 
-  if (var_01 <= 0.33 || scripts/cp/cp_laststand::player_in_laststand(var_00))
+  if (var_01 <= 0.33 || scripts\cp\cp_laststand::player_in_laststand(var_00))
   return 4;
   else if (var_01 <= 0.66)
   return 5;
@@ -167,7 +167,7 @@ set_outline(var_00, var_01, var_02) {
   var_02 = 0;
 
   for (;;) {
-  foreach (var_04 in scripts/cp/cp_agent_utils::get_alive_enemies()) {
+  foreach (var_04 in scripts\cp\cp_agent_utils::get_alive_enemies()) {
   if (isdefined(var_4.damaged_by_players))
   continue;
 
@@ -200,7 +200,7 @@ set_outline_for_player(var_00, var_01, var_02) {
   var_02 = 0;
 
   for (;;) {
-  foreach (var_04 in scripts/cp/cp_agent_utils::get_alive_enemies()) {
+  foreach (var_04 in scripts\cp\cp_agent_utils::get_alive_enemies()) {
   if (isdefined(var_4.damaged_by_players))
   continue;
 
@@ -220,7 +220,7 @@ set_outline_for_player(var_00, var_01, var_02) {
 }
 
 unset_outline() {
-  foreach (var_01 in scripts/cp/cp_agent_utils::get_alive_enemies()) {
+  foreach (var_01 in scripts\cp\cp_agent_utils::get_alive_enemies()) {
   if (isdefined(var_1.damaged_by_players))
   continue;
 
@@ -233,7 +233,7 @@ unset_outline() {
 }
 
 unset_outline_for_player() {
-  foreach (var_01 in scripts/cp/cp_agent_utils::get_alive_enemies()) {
+  foreach (var_01 in scripts\cp\cp_agent_utils::get_alive_enemies()) {
   if (isdefined(var_1.damaged_by_players))
   continue;
 

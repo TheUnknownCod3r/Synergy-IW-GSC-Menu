@@ -1,8 +1,8 @@
-/*********************************************************
+/*************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\equipment\micro_turret.gsc
-*********************************************************/
+ * Script: scripts\mp\equipment\micro_turret.gsc
+*************************************************/
 
 func_B703() {
 	if(!isdefined(level.microturrets)) {
@@ -21,7 +21,7 @@ func_B718(param_00) {
 }
 
 microturret_use() {
-	scripts\mp\_utility::func_1254();
+	scripts\mp\utility::func_1254();
 	self setscriptablepartstate("killstreak","visor_active",0);
 	self.var_B710 = 1;
 	func_5232();
@@ -33,19 +33,19 @@ microturret_use() {
 
 func_B6F9(param_00) {
 	self notify("microTurret_end");
-	if(!scripts\mp\_utility::istrue(param_00)) {
-		scripts\mp\_utility::func_11DB();
+	if(!scripts\mp\utility::istrue(param_00)) {
+		scripts\mp\utility::func_11DB();
 	}
 
 	self setscriptablepartstate("killstreak","neutral",0);
 	func_5236(param_00);
 	var_01 = self.var_B710;
 	self.var_B710 = undefined;
-	return scripts\mp\_utility::istrue(var_01);
+	return scripts\mp\utility::istrue(var_01);
 }
 
 func_B711(param_00,param_01,param_02) {
-	level thread scripts\mp\_battlechatter_mp::saytoself(self,"plr_perk_turret",undefined,0.75);
+	level thread scripts\mp\battlechatter_mp::saytoself(self,"plr_perk_turret",undefined,0.75);
 	self notify("microTurret_spawned");
 	if(!isdefined(self.microturrets)) {
 		self.microturrets = [];
@@ -83,23 +83,23 @@ func_B711(param_00,param_01,param_02) {
 	var_03 give_crafted_gascan(45);
 	var_03 setotherent(self);
 	var_03 give_player_tickets(1);
-	var_04 = scripts\mp\_utility::_hasperk("specialty_rugged_eqp");
+	var_04 = scripts\mp\utility::_hasperk("specialty_rugged_eqp");
 	var_05 = scripts\engine\utility::ter_op(var_04,209,119);
 	var_06 = scripts\engine\utility::ter_op(var_04,"hitequip","");
-	var_03 thread scripts\mp\_damage::monitordamage(var_05,var_06,::func_B6FF,::func_B6FE,0,0);
+	var_03 thread scripts\mp\damage::monitordamage(var_05,var_06,::func_B6FF,::func_B6FE,0,0);
 	var_03.killcament = func_B6F3(var_03);
 	if(isdefined(param_02)) {
-		var_03 scripts\mp\_weapons::explosivehandlemovers(param_02);
+		var_03 scripts\mp\weapons::explosivehandlemovers(param_02);
 	}
 
 	var_03.stunned = 0;
 	var_03 thread scripts\mp\perks\_perk_equipmentping::runequipmentping();
-	thread scripts\mp\_weapons::outlinesuperequipment(var_03,self);
+	thread scripts\mp\weapons::outlinesuperequipment(var_03,self);
 	var_03 thread func_B6EA();
 	thread func_B71D();
 	self.var_B710 = undefined;
-	scripts\mp\_supers::func_DE3B(9999000);
-	scripts\mp\_utility::printgameaction("microturret placed",self);
+	scripts\mp\supers::func_DE3B(9999000);
+	scripts\mp\utility::printgameaction("microturret placed",self);
 }
 
 microturret_beepsounds() {
@@ -157,26 +157,26 @@ func_B70F() {
 
 	var_00 = self.triggerportableradarping;
 	var_01 = var_00.team;
-	if(level.teambased && !scripts\mp\_utility::istrue(self.var_115D1)) {
-		scripts\mp\_entityheadicons::setteamheadicon(var_01,(0,0,50));
+	if(level.teambased && !scripts\mp\utility::istrue(self.var_115D1)) {
+		scripts\mp\entityheadicons::setteamheadicon(var_01,(0,0,50));
 		self.var_115D1 = 1;
 		return;
 	}
 
-	if(!scripts\mp\_utility::istrue(self.var_D3AA)) {
-		scripts\mp\_entityheadicons::setplayerheadicon(var_00,(0,0,50));
+	if(!scripts\mp\utility::istrue(self.var_D3AA)) {
+		scripts\mp\entityheadicons::setplayerheadicon(var_00,(0,0,50));
 		self.var_D3AA = 1;
 	}
 }
 
 func_B6F2() {
-	if(scripts\mp\_utility::istrue(self.var_115D1)) {
-		scripts\mp\_entityheadicons::setteamheadicon("none",(0,0,0));
+	if(scripts\mp\utility::istrue(self.var_115D1)) {
+		scripts\mp\entityheadicons::setteamheadicon("none",(0,0,0));
 		self.var_115D1 = undefined;
 	}
 
-	if(scripts\mp\_utility::istrue(self.var_D3AA)) {
-		scripts\mp\_entityheadicons::setplayerheadicon(undefined,(0,0,0));
+	if(scripts\mp\utility::istrue(self.var_D3AA)) {
+		scripts\mp\entityheadicons::setplayerheadicon(undefined,(0,0,0));
 		self.var_D3AA = undefined;
 	}
 }
@@ -187,7 +187,7 @@ func_B71C() {
 	for(;;) {
 		self waittill("emp_damage",var_00,var_01,var_02,var_03,var_04);
 		var_05 = 119;
-		if(self.triggerportableradarping scripts\mp\_utility::_hasperk("specialty_rugged_eqp")) {
+		if(self.triggerportableradarping scripts\mp\utility::_hasperk("specialty_rugged_eqp")) {
 			var_05 = 209;
 		}
 
@@ -324,9 +324,9 @@ func_B6EB() {
 }
 
 func_B6EC() {
-	var_00 = function_0240("micro_turret_gun_mp");
+	var_00 = weaponfiretime("micro_turret_gun_mp");
 	if(isdefined(self.var_1A4A) && isplayer(self.var_1A4A)) {
-		level thread scripts\mp\_battlechatter_mp::saytoself(self.var_1A4A,"plr_killstreak_target");
+		level thread scripts\mp\battlechatter_mp::saytoself(self.var_1A4A,"plr_killstreak_target");
 	}
 
 	for(;;) {
@@ -378,7 +378,7 @@ func_B722() {
 			break;
 		}
 
-		if(var_02 scripts\mp\_utility::_hasperk("specialty_blindeye")) {
+		if(var_02 scripts\mp\utility::_hasperk("specialty_blindeye")) {
 			break;
 		}
 
@@ -386,7 +386,7 @@ func_B722() {
 			break;
 		}
 
-		if(scripts/mp/equipment/phase_shift::isentityphaseshifted(var_02)) {
+		if(scripts\mp\equipment\phase_shift::isentityphaseshifted(var_02)) {
 			if(!isdefined(var_01)) {
 				var_01 = gettime() + 500;
 			}
@@ -437,21 +437,21 @@ func_B705(param_00) {
 
 func_B6FE(param_00,param_01,param_02,param_03,param_04) {
 	var_05 = param_03;
-	var_05 = scripts\mp\_damage::handlemeleedamage(param_01,param_02,var_05);
-	var_05 = scripts\mp\_damage::handleapdamage(param_01,param_02,var_05);
+	var_05 = scripts\mp\damage::handlemeleedamage(param_01,param_02,var_05);
+	var_05 = scripts\mp\damage::handleapdamage(param_01,param_02,var_05);
 	var_05 = microturret_handlesuperandexplosivedamage(param_01,param_02,var_05);
-	var_05 = scripts\mp\_supers::modifysuperequipmentdamage(param_00,param_01,param_02,var_05,param_04);
+	var_05 = scripts\mp\supers::modifysuperequipmentdamage(param_00,param_01,param_02,var_05,param_04);
 	return var_05;
 }
 
 func_B6FF(param_00,param_01,param_02,param_03) {
-	if(scripts\mp\_utility::istrue(scripts\mp\_utility::playersareenemies(self.triggerportableradarping,param_00))) {
-		if(param_00 scripts\mp\_missions::func_66B8("specialty_blindeye")) {
-			param_00 scripts\mp\_missions::func_D991("ch_perk_kills_blindeye");
+	if(scripts\mp\utility::istrue(scripts\mp\utility::playersareenemies(self.triggerportableradarping,param_00))) {
+		if(param_00 scripts\mp\missions::func_66B8("specialty_blindeye")) {
+			param_00 scripts\mp\missions::func_D991("ch_perk_kills_blindeye");
 		}
 
-		param_00 scripts\mp\_missions::func_D991("ch_killjoy_six_ability");
-		param_00 thread scripts\mp\_events::supershutdown(self.triggerportableradarping);
+		param_00 scripts\mp\missions::func_D991("ch_killjoy_six_ability");
+		param_00 thread scripts\mp\events::supershutdown(self.triggerportableradarping);
 		param_00 notify("destroyed_equipment");
 	}
 
@@ -465,8 +465,8 @@ func_B700() {
 	func_B70C();
 	self setscriptablepartstate("effects","activeDestroyed");
 	wait(3);
-	scripts\mp\_weapons::equipmentdeletevfx(self.origin,self.angles);
-	scripts\mp\_utility::printgameaction("microturret destroyed",self.triggerportableradarping);
+	scripts\mp\weapons::equipmentdeletevfx(self.origin,self.angles);
+	scripts\mp\utility::printgameaction("microturret destroyed",self.triggerportableradarping);
 	self delete();
 }
 
@@ -499,7 +499,7 @@ func_139ED() {
 	self endon("microTurret_spawned");
 	self endon("microTurret_end");
 	level waittill("game_ended");
-	scripts\mp\_supers::func_DE3B(9999000);
+	scripts\mp\supers::func_DE3B(9999000);
 }
 
 watcharbitraryup() {
@@ -507,27 +507,27 @@ watcharbitraryup() {
 	self endon("microTurret_spawned");
 	self endon("microTurret_end");
 	scripts\engine\utility::waitframe();
-	while(!scripts\mp\_utility::isinarbitraryup()) {
+	while(!scripts\mp\utility::isinarbitraryup()) {
 		scripts\engine\utility::waitframe();
 	}
 
-	scripts\mp\_supers::superdisabledinarbitraryupmessage();
-	scripts\mp\_supers::func_DE3B(9999000);
+	scripts\mp\supers::superdisabledinarbitraryupmessage();
+	scripts\mp\supers::func_DE3B(9999000);
 }
 
 func_5232() {
 	self.var_B6FB = 1;
 	scripts\engine\utility::allow_usability(0);
-	scripts\mp\_powers::func_D729();
-	scripts\mp\_utility::func_1C47(0);
+	scripts\mp\powers::func_D729();
+	scripts\mp\utility::func_1C47(0);
 }
 
 func_5236(param_00) {
-	if(!scripts\mp\_utility::istrue(param_00)) {
-		if(scripts\mp\_utility::istrue(self.var_B6FB)) {
+	if(!scripts\mp\utility::istrue(param_00)) {
+		if(scripts\mp\utility::istrue(self.var_B6FB)) {
 			scripts\engine\utility::allow_usability(1);
-			scripts\mp\_powers::func_D72F();
-			scripts\mp\_utility::func_1C47(1);
+			scripts\mp\powers::func_D72F();
+			scripts\mp\utility::func_1C47(1);
 		}
 	}
 
@@ -583,11 +583,11 @@ func_B714(param_00) {
 	var_01 = undefined;
 	var_02 = physics_createcontents(["physicscontents_solid","physicscontents_vehicle","physicscontents_glass","physicscontents_ainosight","physicscontents_sky"]);
 	var_03 = self gettagorigin("tag_dummy");
-	if(isplayer(param_00) || isagent(param_00) && !scripts\mp\_utility::func_9F72(param_00)) {
+	if(isplayer(param_00) || isagent(param_00) && !scripts\mp\utility::func_9F72(param_00)) {
 		var_04 = "j_spine4";
 		var_05 = param_00 gettagorigin(var_04);
-		if(!isdefined(var_01) && !scripts\mp\_utility::func_C7A0(var_03,var_05)) {
-			var_06 = function_0287(var_03,var_05,var_02,self,0,"physicsquery_closest");
+		if(!isdefined(var_01) && !scripts\mp\utility::func_C7A0(var_03,var_05)) {
+			var_06 = physics_raycast(var_03,var_05,var_02,self,0,"physicsquery_closest");
 			var_07 = !isdefined(var_06) || var_06.size == 0;
 			var_01 = scripts\engine\utility::ter_op(var_07,var_04,var_01);
 		}
@@ -595,8 +595,8 @@ func_B714(param_00) {
 		if(!isdefined(var_01)) {
 			var_04 = "tag_eye";
 			var_05 = param_00 gettagorigin(var_04);
-			if(!isdefined(var_01) && !scripts\mp\_utility::func_C7A0(var_03,var_05)) {
-				var_06 = function_0287(var_03,var_05,var_02,self,0,"physicsquery_closest");
+			if(!isdefined(var_01) && !scripts\mp\utility::func_C7A0(var_03,var_05)) {
+				var_06 = physics_raycast(var_03,var_05,var_02,self,0,"physicsquery_closest");
 				var_07 = !isdefined(var_06) || var_06.size == 0;
 				var_01 = scripts\engine\utility::ter_op(var_07,var_04,var_01);
 			}
@@ -604,8 +604,8 @@ func_B714(param_00) {
 
 		if(!isdefined(var_01)) {
 			var_05 = param_00.origin;
-			if(!isdefined(var_01) && !scripts\mp\_utility::func_C7A0(var_03,var_05)) {
-				var_06 = function_0287(var_03,var_05,var_02,self,0,"physicsquery_closest");
+			if(!isdefined(var_01) && !scripts\mp\utility::func_C7A0(var_03,var_05)) {
+				var_06 = physics_raycast(var_03,var_05,var_02,self,0,"physicsquery_closest");
 				var_07 = !isdefined(var_06) || var_06.size == 0;
 				var_01 = scripts\engine\utility::ter_op(var_07,var_04,var_01);
 			}
@@ -615,8 +615,8 @@ func_B714(param_00) {
 	{
 		var_04 = "tag_origin";
 		var_05 = var_01 gettagorigin(var_05);
-		if(!isdefined(var_01) && !scripts\mp\_utility::func_C7A0(var_03,var_05)) {
-			var_06 = function_0287(var_03,var_05,var_02,self,0,"physicsquery_closest");
+		if(!isdefined(var_01) && !scripts\mp\utility::func_C7A0(var_03,var_05)) {
+			var_06 = physics_raycast(var_03,var_05,var_02,self,0,"physicsquery_closest");
 			var_07 = !isdefined(var_06) || var_06.size == 0;
 			var_01 = scripts\engine\utility::ter_op(var_07,var_04,var_01);
 		}
@@ -668,24 +668,24 @@ func_B71A(param_00) {
 		return 0;
 	}
 
-	if(scripts/mp/equipment/phase_shift::isentityphaseshifted(param_00)) {
+	if(scripts\mp\equipment\phase_shift::isentityphaseshifted(param_00)) {
 		return 0;
 	}
 
-	if(param_00 scripts\mp\_utility::_hasperk("specialty_blindeye") && !scripts\mp\_utility::func_9F72(param_00)) {
+	if(param_00 scripts\mp\utility::_hasperk("specialty_blindeye") && !scripts\mp\utility::func_9F72(param_00)) {
 		return 0;
 	}
 
 	if(isplayer(param_00) || isagent(param_00)) {
-		if(!scripts\mp\_utility::isreallyalive(param_00)) {
+		if(!scripts\mp\utility::isreallyalive(param_00)) {
 			return 0;
 		}
 
-		if(scripts\mp\_utility::func_9F22(param_00)) {
+		if(scripts\mp\utility::func_9F22(param_00)) {
 			var_01 = param_00.triggerportableradarping;
 		}
 
-		if(scripts\mp\_utility::func_9F72(param_00)) {
+		if(scripts\mp\utility::func_9F72(param_00)) {
 			var_01 = param_00.triggerportableradarping;
 		}
 	}
@@ -694,7 +694,7 @@ func_B71A(param_00) {
 		var_01 = param_00.triggerportableradarping;
 	}
 
-	if(!scripts\mp\_utility::istrue(scripts\mp\_utility::playersareenemies(self.triggerportableradarping,var_01))) {
+	if(!scripts\mp\utility::istrue(scripts\mp\utility::playersareenemies(self.triggerportableradarping,var_01))) {
 		return 0;
 	}
 
@@ -723,7 +723,7 @@ func_B712() {
 
 microturret_getmaxnum() {
 	var_00 = 1;
-	if(scripts\mp\_utility::_hasperk("specialty_rugged_eqp")) {
+	if(scripts\mp\utility::_hasperk("specialty_rugged_eqp")) {
 		var_00++;
 	}
 
@@ -736,7 +736,7 @@ microturret_onruggedequipmentunset() {
 		return;
 	}
 
-	if(!scripts\mp\_utility::isreallyalive(self)) {
+	if(!scripts\mp\utility::isreallyalive(self)) {
 		self waittill("giveLoadout");
 		if(!isdefined(self.microturrets) || self.microturrets.size <= 0) {
 			return;
@@ -771,7 +771,7 @@ microturret_handlesuperandexplosivedamage(param_00,param_01,param_02) {
 			break;
 	}
 
-	if(function_0107(param_01) && var_03 < 1.5) {
+	if(isexplosivedamagemod(param_01) && var_03 < 1.5) {
 		var_03 = 1.5;
 	}
 

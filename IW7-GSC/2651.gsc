@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2651.gsc
+ * Script: 2651.gsc
 ***************************************/
 
 callback_defaultplayerlaststand(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08, var_09) {
@@ -20,7 +20,7 @@ default_playerlaststand(var_00) {
 }
 
 forcebleedout(var_00) {
-  if (scripts/cp/utility::isplayingsolo() || level.only_one_player)
+  if (scripts\cp\utility::isplayingsolo() || level.only_one_player)
   self setorigin(var_0.origin);
 
   self.bleedoutspawnentityoverride = var_00;
@@ -30,15 +30,15 @@ forcebleedout(var_00) {
 dropintolaststand(var_00, var_01) {
   self endon("disconnect");
   level endon("game_ended");
-  self notify("last_stand", scripts/cp/utility::getvalidtakeweapon());
-  var_02 = scripts/cp/utility::has_zombie_perk("perk_machine_revive");
+  self notify("last_stand", scripts\cp\utility::getvalidtakeweapon());
+  var_02 = scripts\cp\utility::has_zombie_perk("perk_machine_revive");
   enter_gamemodespecificaction();
   enter_globaldefaultaction();
   level.laststandnumber++;
   enter_laststand();
 
-  if ((scripts/cp/utility::isplayingsolo() || level.only_one_player) && haveselfrevive()) {
-  if (scripts/cp/utility::is_consumable_active("self_revive") || scripts\engine\utility::is_true(level.the_hoff_revive))
+  if ((scripts\cp\utility::isplayingsolo() || level.only_one_player) && haveselfrevive()) {
+  if (scripts\cp\utility::is_consumable_active("self_revive") || scripts\engine\utility::is_true(level.the_hoff_revive))
   waitinlaststand(var_00, var_01, var_02);
   else
   waitinspectator(var_00, var_01);
@@ -73,7 +73,7 @@ exit_laststand() {
   self setstance("stand");
   self.inlaststand = 0;
   self.health = gethealthcap();
-  scripts/cp/utility::force_usability_enabled();
+  scripts\cp\utility::force_usability_enabled();
 }
 
 gethealthcap() {
@@ -81,7 +81,7 @@ gethealthcap() {
 }
 
 enter_globaldefaultaction() {
-  scripts/cp/cp_gamescore::update_team_encounter_performance(scripts/cp/cp_gamescore::get_team_score_component_name(), "num_players_enter_laststand");
+  scripts\cp\cp_gamescore::update_team_encounter_performance(scripts\cp\cp_gamescore::get_team_score_component_name(), "num_players_enter_laststand");
   var_00 = ["iw7_gunless_zm"];
 
   if (isdefined(level.additional_laststand_weapon_exclusion))
@@ -93,12 +93,12 @@ enter_globaldefaultaction() {
   var_01 = [];
 
   foreach (var_03 in self getweaponslistprimaries()) {
-  if (!scripts/cp/utility::isstrstart(var_03, "alt_"))
+  if (!scripts\cp\utility::isstrstart(var_03, "alt_"))
   var_1[var_1.size] = var_03;
   }
 
   self.lost_and_found_primary_count = var_01;
-  scripts/cp/utility::store_weapons_status(var_00, 1);
+  scripts\cp\utility::store_weapons_status(var_00, 1);
   self.lastweapon = enter_globaldefaultaction_getcurrentweapon(var_00, 1);
   self.bleedoutspawnentityoverride = undefined;
   self.saved_last_stand_pistol = self.last_stand_pistol;
@@ -108,11 +108,11 @@ enter_globaldefaultaction() {
   self.being_revived = 0;
   check_for_invalid_attachments();
   thread only_use_weapon();
-  scripts/cp/cp_persistence::take_player_currency(get_currency_penalty_amount(self), 1, "laststand");
-  scripts/cp/cp_persistence::eog_player_update_stat("downs", 1);
-  scripts/cp/cp_persistence::increment_player_career_downs(self);
-  scripts/cp/cp_analytics::inc_downed_counts();
-  scripts/cp/cp_challenge::update_challenge("no_laststand");
+  scripts\cp\cp_persistence::take_player_currency(get_currency_penalty_amount(self), 1, "laststand");
+  scripts\cp\cp_persistence::eog_player_update_stat("downs", 1);
+  scripts\cp\cp_persistence::increment_player_career_downs(self);
+  scripts\cp\cp_analytics::inc_downed_counts();
+  scripts\cp\cp_challenge::update_challenge("no_laststand");
   self stopgestureviewmodel();
 }
 
@@ -120,7 +120,7 @@ check_for_invalid_attachments() {
   if (!isdefined(self.copy_fullweaponlist))
   return;
 
-  if (scripts/cp/utility::is_consumable_active("just_a_flesh_wound"))
+  if (scripts\cp\utility::is_consumable_active("just_a_flesh_wound"))
   return;
 
   var_00 = undefined;
@@ -129,7 +129,7 @@ check_for_invalid_attachments() {
   self.copy_fullweaponlist = scripts\engine\utility::array_add(self.copy_fullweaponlist, self.lastweapon);
 
   foreach (var_02 in self.copy_fullweaponlist) {
-  if (scripts/cp/cp_weapon::has_attachment(var_02, "doubletap")) {
+  if (scripts\cp\cp_weapon::has_attachment(var_02, "doubletap")) {
   var_03 = strtok(var_02, "+");
   var_00 = var_3[0];
 
@@ -179,7 +179,7 @@ check_for_invalid_attachments() {
 }
 
 enter_globaldefaultaction_getcurrentweapon(var_00, var_01) {
-  var_02 = scripts/cp/utility::getvalidtakeweapon(var_00);
+  var_02 = scripts\cp\utility::getvalidtakeweapon(var_00);
 
   if (isdefined(self.pre_arcade_game_weapon))
   var_02 = self.pre_arcade_game_weapon;
@@ -192,10 +192,10 @@ enter_globaldefaultaction_getcurrentweapon(var_00, var_01) {
   var_03 = 1;
   else if (scripts\engine\utility::array_contains(var_00, getweaponbasename(var_02)))
   var_03 = 1;
-  else if (scripts\engine\utility::is_true(var_01) && scripts/cp/utility::is_melee_weapon(var_02, 1))
+  else if (scripts\engine\utility::is_true(var_01) && scripts\cp\utility::is_melee_weapon(var_02, 1))
   var_03 = 1;
 
-  if (scripts/cp/utility::is_primary_melee_weapon(var_02))
+  if (scripts\cp\utility::is_primary_melee_weapon(var_02))
   var_03 = 0;
 
   if (var_03)
@@ -212,7 +212,7 @@ choose_last_weapon(var_00, var_01, var_02) {
   continue;
   else if (scripts\engine\utility::array_contains(var_00, getweaponbasename(self.copy_fullweaponlist[var_03])))
   continue;
-  else if (scripts\engine\utility::is_true(var_01) && scripts/cp/utility::is_melee_weapon(self.copy_fullweaponlist[var_03], var_02))
+  else if (scripts\engine\utility::is_true(var_01) && scripts\cp\utility::is_melee_weapon(self.copy_fullweaponlist[var_03], var_02))
   continue;
   else
   return self.copy_fullweaponlist[var_03];
@@ -223,7 +223,7 @@ exit_globaldefaultaction() {
   self.haveinvulnerabilityavailable = 1;
   self.damageshieldexpiretime = gettime() + 3000;
   var_00 = [];
-  scripts/cp/utility::restore_weapons_status(var_00);
+  scripts\cp\utility::restore_weapons_status(var_00);
 
   if (isdefined(self.pre_laststand_weapon_stock))
   self setweaponammostock(self.pre_laststand_weapon, self.pre_laststand_weapon_stock);
@@ -238,8 +238,8 @@ exit_globaldefaultaction() {
   self.pre_arcade_game_weapon_clip = undefined;
   self.pre_arcade_game_weapon_stock = undefined;
   self.former_mule_weapon = undefined;
-  scripts/cp/cp_analytics::inc_revived_counts();
-  scripts/cp/cp_damage::set_kill_trigger_event_processed(self, 0);
+  scripts\cp\cp_analytics::inc_revived_counts();
+  scripts\cp\cp_damage::set_kill_trigger_event_processed(self, 0);
   updatemovespeedscale();
   self setclientomnvarbit("player_damaged", 2, 0);
 }
@@ -267,13 +267,13 @@ waitinlaststand(var_00, var_01, var_02) {
 
   var_03 = 35;
 
-  if (scripts/cp/utility::is_consumable_active("coagulant")) {
+  if (scripts\cp\utility::is_consumable_active("coagulant")) {
   var_03 = 60;
-  scripts/cp/utility::notify_used_consumable("coagulant");
+  scripts\cp\utility::notify_used_consumable("coagulant");
   }
 
-  if (scripts/cp/utility::isplayingsolo() || level.only_one_player) {
-  if (scripts/cp/utility::has_zombie_perk("perk_machine_revive") && !isdefined(level.the_hoff_revive)) {
+  if (scripts\cp\utility::isplayingsolo() || level.only_one_player) {
+  if (scripts\cp\utility::has_zombie_perk("perk_machine_revive") && !isdefined(level.the_hoff_revive)) {
   wait 5;
   return 1;
   }
@@ -284,7 +284,7 @@ waitinlaststand(var_00, var_01, var_02) {
   if (!var_01) {
   thread playdeathsoundinlaststand(var_03);
 
-  if (scripts/cp/utility::isplayingsolo() || level.only_one_player) {
+  if (scripts\cp\utility::isplayingsolo() || level.only_one_player) {
   take_laststand(self, 1);
 
   if (scripts\engine\utility::is_true(level.the_hoff_revive))
@@ -296,7 +296,7 @@ waitinlaststand(var_00, var_01, var_02) {
   set_last_stand_timer(self, var_03);
   }
 
-  if (scripts/cp/utility::isplayingsolo() || level.only_one_player && !isdefined(level.the_hoff_revive))
+  if (scripts\cp\utility::isplayingsolo() || level.only_one_player && !isdefined(level.the_hoff_revive))
   return wait_for_self_revive(var_00, var_01);
   else
   return wait_to_be_revived(self, self.origin, undefined, undefined, 1, get_normal_revive_time(), (0.33, 0.75, 0.24), var_03, 0, var_01, 1, var_02);
@@ -330,31 +330,31 @@ waitinspectator(var_00, var_01) {
   if (var_05 == self)
   continue;
 
-  var_06 = var_05 scripts/cp/cp_persistence::get_player_currency();
+  var_06 = var_05 scripts\cp\cp_persistence::get_player_currency();
   var_07 = int(var_06 * 0.1);
-  var_05 scripts/cp/cp_persistence::take_player_currency(var_07, 1, "bleedoutPenalty");
+  var_05 scripts\cp\cp_persistence::take_player_currency(var_07, 1, "bleedoutPenalty");
   }
 
   var_09 = wait_to_be_revived(self, var_02, undefined, undefined, 0, get_spectator_revive_time(), (1, 0, 0), undefined, 1, var_01, 0);
   show_all_revive_icons(self);
   self.spectating = undefined;
-  scripts/cp/utility::updatesessionstate("playing");
+  scripts\cp\utility::updatesessionstate("playing");
   self.forcespawnorigin = var_02;
   self.forcespawnangles = var_03;
 
   if (isdefined(level.prespawnfromspectaorfunc))
   [[level.prespawnfromspectaorfunc]](self);
 
-  scripts/cp/cp_globallogic::spawnplayer();
+  scripts\cp\cp_globallogic::spawnplayer();
 }
 
 record_bleedout(var_00) {
-  scripts/cp/cp_persistence::eog_player_update_stat("deaths", 1);
-  scripts/cp/cp_challenge::update_challenge("no_bleedout");
+  scripts\cp\cp_persistence::eog_player_update_stat("deaths", 1);
+  scripts\cp\cp_challenge::update_challenge("no_bleedout");
 
   if (!is_killed_by_kill_trigger(var_00)) {
-  scripts/cp/cp_gamescore::update_team_encounter_performance(scripts/cp/cp_gamescore::get_team_score_component_name(), "num_players_bleed_out");
-  scripts/cp/cp_analytics::inc_bleedout_counts();
+  scripts\cp\cp_gamescore::update_team_encounter_performance(scripts\cp\cp_gamescore::get_team_score_component_name(), "num_players_bleed_out");
+  scripts\cp\cp_analytics::inc_bleedout_counts();
   }
 }
 
@@ -406,9 +406,9 @@ wait_to_be_revived(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_0
   var_12 thread laststandwaittillrevivebyteammate(var_00, var_05);
 
   if (isdefined(var_07))
-  var_14 = var_12 scripts/cp/utility::waittill_any_ents_or_timeout_return(var_07, var_12, "revive_success", var_00, "force_bleed_out", var_00, "revive_success", var_00, "challenge_complete_revive");
+  var_14 = var_12 scripts\cp\utility::waittill_any_ents_or_timeout_return(var_07, var_12, "revive_success", var_00, "force_bleed_out", var_00, "revive_success", var_00, "challenge_complete_revive");
   else
-  var_14 = var_12 scripts/cp/utility::waittill_any_ents_return(var_12, "revive_success", var_00, "challenge_complete_revive");
+  var_14 = var_12 scripts\cp\utility::waittill_any_ents_return(var_12, "revive_success", var_00, "challenge_complete_revive");
 
   if (var_14 == "timeout" && is_being_revived(var_00))
   var_14 = var_12 scripts\engine\utility::waittill_any_return("revive_success", "revive_fail");
@@ -445,23 +445,23 @@ laststandwaittillrevivebyteammate(var_00, var_01) {
   if (var_05) {
   if (isdefined(var_2.vo_prefix)) {
   if (var_0.vo_prefix == "p4_" && soundexists(var_2.vo_prefix + "respawn_laststand_valleygirl")) {
-  var_02 thread scripts/cp/cp_vo::try_to_play_vo("respawn_laststand_valleygirl", "zmb_comment_vo", "medium", 10, 0, 0, 0, 50);
-  var_00 thread scripts/cp/cp_vo::try_to_play_vo("respawn_laststand", "zmb_comment_vo", "medium", 10, 0, 0, 1, 50);
+  var_02 thread scripts\cp\cp_vo::try_to_play_vo("respawn_laststand_valleygirl", "zmb_comment_vo", "medium", 10, 0, 0, 0, 50);
+  var_00 thread scripts\cp\cp_vo::try_to_play_vo("respawn_laststand", "zmb_comment_vo", "medium", 10, 0, 0, 1, 50);
   }
   else if (var_0.vo_prefix == "p1_" && soundexists(var_2.vo_prefix + "respawn_laststand_aj")) {
-  var_02 thread scripts/cp/cp_vo::try_to_play_vo("respawn_laststand_aj", "zmb_comment_vo", "medium", 10, 0, 0, 0, 50);
-  var_00 thread scripts/cp/cp_vo::try_to_play_vo("respawn_laststand", "zmb_comment_vo", "medium", 10, 0, 0, 1, 50);
+  var_02 thread scripts\cp\cp_vo::try_to_play_vo("respawn_laststand_aj", "zmb_comment_vo", "medium", 10, 0, 0, 0, 50);
+  var_00 thread scripts\cp\cp_vo::try_to_play_vo("respawn_laststand", "zmb_comment_vo", "medium", 10, 0, 0, 1, 50);
   }
   else if (level.script == "cp_town") {
   if (var_2.vo_prefix == "p1_")
-  var_00 thread scripts/cp/cp_vo::try_to_play_vo("respawn_laststand_sally", "town_comment_vo");
+  var_00 thread scripts\cp\cp_vo::try_to_play_vo("respawn_laststand_sally", "town_comment_vo");
   }
   else
-  var_00 thread scripts/cp/cp_vo::try_to_play_vo("respawn_laststand", "zmb_comment_vo", "medium", 10, 0, 0, 1, 50);
+  var_00 thread scripts\cp\cp_vo::try_to_play_vo("respawn_laststand", "zmb_comment_vo", "medium", 10, 0, 0, 1, 50);
   }
 
-  if (var_00 scripts/cp/utility::is_consumable_active("faster_revive_upgrade"))
-  var_00 scripts/cp/utility::notify_used_consumable("faster_revive_upgrade");
+  if (var_00 scripts\cp\utility::is_consumable_active("faster_revive_upgrade"))
+  var_00 scripts\cp\utility::notify_used_consumable("faster_revive_upgrade");
 
   var_02 playlocalsound("revive_teammate");
   record_revive_success(var_02, var_00);
@@ -469,7 +469,7 @@ laststandwaittillrevivebyteammate(var_00, var_01) {
 
   if (isplayer(var_02) && scripts\engine\utility::is_true(var_2.can_give_revive_xp)) {
   var_2.can_give_revive_xp = 0;
-  var_02 scripts/cp/cp_persistence::give_player_xp(int(250), 1);
+  var_02 scripts\cp\cp_persistence::give_player_xp(int(250), 1);
   }
 
   break;
@@ -487,9 +487,9 @@ getrevivetimescaler(var_00, var_01) {
   if (scripts\engine\utility::is_true(var_0.can_revive))
   return 2;
 
-  var_02 = var_00 scripts/cp/perks/perk_utility::perk_getrevivetimescalar();
+  var_02 = var_00 scripts\cp\perks\perk_utility::perk_getrevivetimescalar();
 
-  if (var_01 scripts/cp/utility::is_consumable_active("faster_revive_upgrade"))
+  if (var_01 scripts\cp\utility::is_consumable_active("faster_revive_upgrade"))
   var_02 = var_02 * 2;
 
   return var_02;
@@ -502,11 +502,11 @@ func_B529(var_00, var_01) {
 
 record_revive_success(var_00, var_01) {
   if (isplayer(var_00)) {
-  var_00 scripts/cp/cp_merits::processmerit("mt_reviver");
-  var_00 scripts/cp/cp_persistence::increment_player_career_revives(var_00);
-  var_00 scripts/cp/cp_merits::processmerit("mt_revives");
-  var_00 scripts/cp/cp_persistence::eog_player_update_stat("revives", 1);
-  var_01 thread scripts/cp/cp_hud_message::showsplash("revived", undefined, var_00);
+  var_00 scripts\cp\cp_merits::processmerit("mt_reviver");
+  var_00 scripts\cp\cp_persistence::increment_player_career_revives(var_00);
+  var_00 scripts\cp\cp_merits::processmerit("mt_revives");
+  var_00 scripts\cp\cp_persistence::eog_player_update_stat("revives", 1);
+  var_01 thread scripts\cp\cp_hud_message::showsplash("revived", undefined, var_00);
 
   if (isdefined(level.revive_success_analytics_func))
   [[level.revive_success_analytics_func]](var_00);
@@ -544,7 +544,7 @@ makereviveiconentity(var_00, var_01) {
 }
 
 maydolaststand(var_00, var_01) {
-  if (scripts/cp/utility::isplayingsolo() || level.only_one_player)
+  if (scripts\cp\utility::isplayingsolo() || level.only_one_player)
   return solo_maydolaststand(var_00, var_01);
   else
   return coop_maydolaststand(var_01);
@@ -573,7 +573,7 @@ only_use_weapon() {
   if (self hasweapon(var_00))
   self giveuponsuppressiontime(var_00);
 
-  scripts/cp/utility::_giveweapon(var_00, scripts/cp/utility::get_weapon_variant_id(self, var_00), 0, 1);
+  scripts\cp\utility::_giveweapon(var_00, scripts\cp\utility::get_weapon_variant_id(self, var_00), 0, 1);
   var_01 = ["iw7_knife_zm", "iw7_knife_zm_hoff", "iw7_knife_zm_jock", "iw7_knife_zm_vgirl", "iw7_knife_zm_rapper", "iw7_knife_zm_nerd", "iw7_knife_zm_schoolgirl", "iw7_knife_zm_scientist", "iw7_knife_zm_soldier", "iw7_knife_zm_rebel", "iw7_knife_zm_elvira", "iw7_knife_zm_disco"];
   var_02 = can_use_pistol_during_last_stand(self);
 
@@ -603,7 +603,7 @@ get_last_stand_pistol() {
   var_00 = self.default_starting_pistol;
   var_01 = self getweaponslistprimaries()[0];
 
-  if (scripts/cp/utility::getbaseweaponname(var_00) == scripts/cp/utility::getbaseweaponname(var_01))
+  if (scripts\cp\utility::getbaseweaponname(var_00) == scripts\cp\utility::getbaseweaponname(var_01))
   return var_01;
   else
   return var_00;
@@ -661,10 +661,10 @@ gameshouldend(var_00) {
   if (var_00 self_revive_activated())
   return 0;
 
-  if ((scripts/cp/utility::isplayingsolo() || level.only_one_player) && (var_00 scripts/cp/utility::has_zombie_perk("perk_machine_revive") || scripts\engine\utility::is_true(level.the_hoff_revive)))
+  if ((scripts\cp\utility::isplayingsolo() || level.only_one_player) && (var_00 scripts\cp\utility::has_zombie_perk("perk_machine_revive") || scripts\engine\utility::is_true(level.the_hoff_revive)))
   return 0;
 
-  if (scripts/cp/utility::isplayingsolo() || level.only_one_player)
+  if (scripts\cp\utility::isplayingsolo() || level.only_one_player)
   return solo_gameshouldend(var_00);
   else
   return coop_gameshouldend(var_00);
@@ -713,12 +713,12 @@ playdeathsoundinlaststand(var_00) {
   self endon("disconnect");
   self endon("revive");
   level endon("game_ended");
-  scripts/cp/utility::playdeathsound();
+  scripts\cp\utility::playdeathsound();
   wait(var_00 / 3);
-  scripts/cp/utility::playdeathsound();
+  scripts\cp\utility::playdeathsound();
   wait(var_00 / 3);
-  thread scripts/cp/cp_vo::try_to_play_vo("laststand_bleedout", "zmb_comment_vo", "low", 10, 0, 0, 1, 100);
-  scripts/cp/utility::playdeathsound();
+  thread scripts\cp\cp_vo::try_to_play_vo("laststand_bleedout", "zmb_comment_vo", "low", 10, 0, 0, 1, 100);
+  scripts\cp\utility::playdeathsound();
 }
 
 enter_spectate(var_00, var_01, var_02) {
@@ -764,7 +764,7 @@ enter_bleed_out(var_00) {
   if (isdefined(level.player_bleed_out_func))
   var_00 [[level.player_bleed_out_func]](var_00);
   else
-  var_00 scripts/cp/cp_globallogic::enterspectator();
+  var_00 scripts\cp\cp_globallogic::enterspectator();
 }
 
 enter_camera_zoomout() {
@@ -782,11 +782,11 @@ exit_camera_zoomout() {
 revive_use_hold_think(var_00, var_01, var_02, var_03) {
   if (isdefined(var_1.vo_prefix)) {
   if (var_0.vo_prefix == "p1_" && soundexists(var_1.vo_prefix + "reviving_valleygirl"))
-  var_01 thread scripts/cp/cp_vo::try_to_play_vo("reviving_valleygirl", "zmb_comment_vo");
+  var_01 thread scripts\cp\cp_vo::try_to_play_vo("reviving_valleygirl", "zmb_comment_vo");
   else if (var_0.vo_prefix == "p1_" && soundexists(var_1.vo_prefix + "reviving_sally"))
-  var_01 thread scripts/cp/cp_vo::try_to_play_vo("reviving_sally", "zmb_comment_vo");
+  var_01 thread scripts\cp\cp_vo::try_to_play_vo("reviving_sally", "zmb_comment_vo");
   else
-  var_01 thread scripts/cp/cp_vo::try_to_play_vo("reviving", "zmb_comment_vo");
+  var_01 thread scripts\cp\cp_vo::try_to_play_vo("reviving", "zmb_comment_vo");
   }
 
   enter_revive_use_hold_think(var_00, var_01, var_02, var_03);
@@ -794,7 +794,7 @@ revive_use_hold_think(var_00, var_01, var_02, var_03) {
   if (!isdefined(level.the_hoff) || isdefined(level.the_hoff) && var_01 != level.the_hoff)
   play_revive_gesture(var_01, var_00);
 
-  thread wait_for_exit_revive_use_hold_think(var_00, var_01, var_02, var_01 scripts/cp/utility::getvalidtakeweapon());
+  thread wait_for_exit_revive_use_hold_think(var_00, var_01, var_02, var_01 scripts\cp\utility::getvalidtakeweapon());
   var_0.reviver = var_01;
   var_04 = 0;
   var_05 = 0;
@@ -863,7 +863,7 @@ enter_revive_use_hold_think(var_00, var_01, var_02, var_03) {
   if (isplayer(var_01)) {
   var_01 getweaponvariantattachments(var_02);
   var_01 getweaponrootname();
-  var_01 scripts/cp/powers/coop_powers::power_disablepower();
+  var_01 scripts\cp\powers\coop_powers::power_disablepower();
   var_01 thread play_rescue_anim(var_01);
   }
 
@@ -873,7 +873,7 @@ enter_revive_use_hold_think(var_00, var_01, var_02, var_03) {
 wait_for_exit_revive_use_hold_think(var_00, var_01, var_02, var_03) {
   scripts\engine\utility::waittill_any_ents(var_02, "use_hold_think_complete", var_00, "disconnect", var_00, "revive_success", var_00, "force_bleed_out", var_01, "challenge_complete", var_00, "death");
 
-  if (scripts/cp/utility::isreallyalive(var_00)) {
+  if (scripts\cp\utility::isreallyalive(var_00)) {
   var_0.being_revived = 0;
   var_00 setclientomnvar("ui_securing", 0);
   }
@@ -883,7 +883,7 @@ wait_for_exit_revive_use_hold_think(var_00, var_01, var_02, var_03) {
   if (isplayer(var_01)) {
   var_01 stop_revive_gesture(var_01, var_03);
   var_01 setclientomnvar("ui_securing", 0);
-  var_01 scripts/cp/powers/coop_powers::power_enablepower();
+  var_01 scripts\cp\powers\coop_powers::power_enablepower();
   var_01 unlink();
   var_01 notify("stop_revive");
   }
@@ -901,7 +901,7 @@ should_revive_continue(var_00) {
   if (scripts\engine\utility::is_true(var_0.can_revive))
   return 1;
 
-  return !level.gameended && scripts/cp/utility::isreallyalive(var_00) && var_00 usebuttonpressed() && !player_in_laststand(var_00);
+  return !level.gameended && scripts\cp\utility::isreallyalive(var_00) && var_00 usebuttonpressed() && !player_in_laststand(var_00);
 }
 
 _takeweaponsexceptlist(var_00) {
@@ -1015,7 +1015,7 @@ reviveiconentcleanup(var_00) {
 }
 
 reviveiconcleanup(var_00, var_01) {
-  scripts/cp/utility::waittill_any_ents_return(var_00, "death", var_01, "disconnect");
+  scripts\cp\utility::waittill_any_ents_return(var_00, "death", var_01, "disconnect");
   remove_from_owner_revive_icon_list(self, var_01);
 
   if (isdefined(self))

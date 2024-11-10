@@ -1,8 +1,8 @@
-/*****************************************************
+/*********************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\common\debug_graycard.gsc
-*****************************************************/
+ * Script: scripts\common\debug_graycard.gsc
+*********************************************/
 
 func_960D(param_00) {
 	precachemodel("refmat_plastic_black_matte");

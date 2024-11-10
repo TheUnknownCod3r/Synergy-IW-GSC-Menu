@@ -1,11 +1,11 @@
-/*****************************************************************
+/*********************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\agents\zombie\zmb_zombie_agent.gsc
-*****************************************************************/
+ * Script: scripts\mp\agents\zombie\zmb_zombie_agent.gsc
+*********************************************************/
 
 registerscriptedagent() {
-	scripts/aitypes/bt_util::init();
+	scripts\aitypes\bt_util::init();
 	lib_03B2::func_DEE8();
 	lib_0F44::func_2371();
 	level.var_13BDC = 1;
@@ -104,7 +104,7 @@ setupagent() {
 	self.flung = undefined;
 	self.var_B0FC = 1;
 	self.full_gib = 0;
-	scripts/mp/agents/zombie/zombie_util::func_F794(self.var_B62E);
+	scripts\mp\agents\zombie\zombie_util::func_F794(self.var_B62E);
 	self.loadstartpointtransients = undefined;
 	self.var_E821 = undefined;
 	self.last_damage_time_on_player = [];
@@ -148,8 +148,8 @@ func_899C() {
 	foreach(var_04, var_01 in self.var_164D) {
 		var_02 = var_01.var_4BC0;
 		var_03 = level.asm[var_04].states[var_02];
-		scripts/asm/asm::func_2388(var_04,var_02,var_03,var_03.var_116FB);
-		scripts/asm/asm::func_238A(var_04,"idle",0.2,undefined,undefined,undefined);
+		scripts\asm\asm::func_2388(var_04,var_02,var_03,var_03.var_116FB);
+		scripts\asm\asm::func_238A(var_04,"idle",0.2,undefined,undefined,undefined);
 	}
 }
 
@@ -190,7 +190,7 @@ func_50EF() {
 		return;
 	}
 
-	if(scripts/asm/zombie/zombie::func_9F87()) {
+	if(scripts\asm\zombie\zombie::func_9F87()) {
 		self setscriptablepartstate("right_eye","active");
 		self setscriptablepartstate("left_eye","active");
 		return;
@@ -377,7 +377,7 @@ onzombiedamagefinished(param_00,param_01,param_02,param_03,param_04,param_05,par
 		var_12 = isdefined(self.curmeleetarget) && !isplayer(self.curmeleetarget);
 		if(var_11 || var_12) {
 			if(distancesquared(self.origin,param_01.origin) <= self.var_4D45) {
-				scripts/mp/agents/zombie/zombie_util::func_F702(param_01);
+				scripts\mp\agents\zombie\zombie_util::func_F702(param_01);
 				thread func_E1EB(0.2);
 			}
 		}
@@ -392,7 +392,7 @@ onzombiedamagefinished(param_00,param_01,param_02,param_03,param_04,param_05,par
 	func_C4E4(param_02,param_04,param_05);
 	level notify("zombie_damaged",self,param_01);
 	if(self.agent_type != "skater") {
-		level thread scripts/cp/zombies/zombies_vo::play_zombie_vo(self,"pain",0);
+		level thread scripts\cp\zombies\zombies_vo::play_zombie_vo(self,"pain",0);
 	}
 
 	agent_damage_finished(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08,param_09,param_0B,param_0C);
@@ -463,20 +463,20 @@ func_97FB() {
 }
 
 func_AEB0() {
-	level._effect["gib_full_body"] = loadfx("vfx/iw7/_requests/coop/vfx_zmb_blackhole_death");
-	level._effect["suicide_zmb_death"] = loadfx("vfx/iw7/_requests/coop/vfx_clown_exp.vfx");
-	level._effect["suicide_zmb_explode"] = loadfx("vfx/iw7/core/zombie/vfx_clown_exp_big.vfx");
-	level._effect["gib_full_body_cheap"] = loadfx("vfx/iw7/_requests/coop/zmb_fullbody_gib");
-	level._effect["torso_arm_loss_right"] = loadfx("vfx/iw7/core/zombie/vfx_zombie_dism_arm_r.vfx");
-	level._effect["torso_arm_loss_left"] = loadfx("vfx/iw7/core/zombie/vfx_zombie_dism_arm_l.vfx");
-	level._effect["torso_loss_left"] = loadfx("vfx/iw7/core/zombie/vfx_zombie_impact_torso_l.vfx");
-	level._effect["torso_head_loss"] = loadfx("vfx/iw7/core/zombie/vfx_zombie_dism_head.vfx");
-	level._effect["torso_loss_right"] = loadfx("vfx/iw7/core/zombie/vfx_zombie_impact_torso_r.vfx");
-	level._effect["arm_loss_left"] = loadfx("vfx/iw7/core/zombie/vfx_zombie_impact_arm_l.vfx");
-	level._effect["arm_loss_right"] = loadfx("vfx/iw7/core/zombie/vfx_zombie_impact_arm_r.vfx");
-	level._effect["limb_loss_right"] = loadfx("vfx/iw7/core/zombie/vfx_zombie_impact_limb_r.vfx");
-	level._effect["limb_loss_left"] = loadfx("vfx/iw7/core/zombie/vfx_zombie_impact_limb_l.vfx");
-	level._effect["head_loss"] = loadfx("vfx/iw7/core/zombie/vfx_zombie_impact_head.vfx");
+	level._effect["gib_full_body"] = loadfx("vfx\iw7\_requests\coop\vfx_zmb_blackhole_death");
+	level._effect["suicide_zmb_death"] = loadfx("vfx\iw7\_requests\coop\vfx_clown_exp.vfx");
+	level._effect["suicide_zmb_explode"] = loadfx("vfx\iw7\core\zombie\vfx_clown_exp_big.vfx");
+	level._effect["gib_full_body_cheap"] = loadfx("vfx\iw7\_requests\coop\zmb_fullbody_gib");
+	level._effect["torso_arm_loss_right"] = loadfx("vfx\iw7\core\zombie\vfx_zombie_dism_arm_r.vfx");
+	level._effect["torso_arm_loss_left"] = loadfx("vfx\iw7\core\zombie\vfx_zombie_dism_arm_l.vfx");
+	level._effect["torso_loss_left"] = loadfx("vfx\iw7\core\zombie\vfx_zombie_impact_torso_l.vfx");
+	level._effect["torso_head_loss"] = loadfx("vfx\iw7\core\zombie\vfx_zombie_dism_head.vfx");
+	level._effect["torso_loss_right"] = loadfx("vfx\iw7\core\zombie\vfx_zombie_impact_torso_r.vfx");
+	level._effect["arm_loss_left"] = loadfx("vfx\iw7\core\zombie\vfx_zombie_impact_arm_l.vfx");
+	level._effect["arm_loss_right"] = loadfx("vfx\iw7\core\zombie\vfx_zombie_impact_arm_r.vfx");
+	level._effect["limb_loss_right"] = loadfx("vfx\iw7\core\zombie\vfx_zombie_impact_limb_r.vfx");
+	level._effect["limb_loss_left"] = loadfx("vfx\iw7\core\zombie\vfx_zombie_impact_limb_l.vfx");
+	level._effect["head_loss"] = loadfx("vfx\iw7\core\zombie\vfx_zombie_impact_head.vfx");
 }
 
 func_3DE4(param_00) {
@@ -489,7 +489,7 @@ func_128A7(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_
 		return 0;
 	}
 
-	if(function_0247(param_01)) {
+	if(weaponisimpaling(param_01)) {
 		return 0;
 	}
 
@@ -668,7 +668,7 @@ iskillstreakweapon(param_00) {
 		return 1;
 	}
 
-	var_01 = function_0244(param_00);
+	var_01 = weaponinventorytype(param_00);
 	if(isdefined(var_01) && var_01 == "exclusive") {
 		return 1;
 	}
@@ -979,7 +979,7 @@ func_6A58() {
 
 	self setscriptablepartstate("eyes","eye_glow_off");
 	wait(0.1);
-	if(scripts/asm/zombie/zombie::func_9F87()) {
+	if(scripts\asm\zombie\zombie::func_9F87()) {
 		self setscriptablepartstate("right_eye","active");
 		self setscriptablepartstate("left_eye","active");
 		return;
@@ -1129,7 +1129,7 @@ func_13F55() {
 			continue;
 		}
 
-		if(scripts/mp/agents/zombie/zombie_util::iscrawling()) {
+		if(scripts\mp\agents\zombie\zombie_util::iscrawling()) {
 			self.moveratescale = 0.85;
 		}
 
@@ -1168,12 +1168,12 @@ func_13F55() {
 			}
 
 			self.generalspeedratescale = self.traverseratescale;
-			if(scripts/mp/agents/zombie/zombie_util::iscrawling()) {
+			if(scripts\mp\agents\zombie\zombie_util::iscrawling()) {
 				self.sharpturnnotifydist = 100;
 				self.moveratescale = 0.85;
 			}
 
-			scripts/asm/asm_bb::bb_requestmovetype(self.synctransients);
+			scripts\asm\asm_bb::bb_requestmovetype(self.synctransients);
 		}
 
 		if(self.synctransients == "sprint") {
@@ -1217,7 +1217,7 @@ speed_up_every_now_and_then() {
 }
 
 calulatezombiemovemode(param_00) {
-	if(scripts/asm/zombie/zombie::func_9F87()) {
+	if(scripts\asm\zombie\zombie::func_9F87()) {
 		return "sprint";
 	}
 
@@ -1277,8 +1277,8 @@ func_3729(param_00,param_01,param_02) {
 		var_05 = float(var_05) / float(param_01 - 1);
 	}
 
-	var_06 = scripts/mp/agents/zombie/zombie_util::func_AB6F(var_05,param_01,param_02);
-	if(scripts/asm/zombie/zombie::func_9F87()) {
+	var_06 = scripts\mp\agents\zombie\zombie_util::func_AB6F(var_05,param_01,param_02);
+	if(scripts\asm\zombie\zombie::func_9F87()) {
 		var_06 = var_06 * 1.2;
 	}
 
@@ -1288,7 +1288,7 @@ func_3729(param_00,param_01,param_02) {
 func_372C(param_00,param_01,param_02) {
 	var_03 = func_372B(param_00);
 	var_04 = var_03 / level.var_13F3F.size * param_00 - 1;
-	var_05 = scripts/mp/agents/zombie/zombie_util::func_AB6F(var_04,param_01,param_02);
+	var_05 = scripts\mp\agents\zombie\zombie_util::func_AB6F(var_04,param_01,param_02);
 	return var_05;
 }
 
@@ -1310,7 +1310,7 @@ func_7E10() {
 }
 
 onzombiekilled(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08) {
-	if(scripts/asm/zombie/zombie::func_9F87()) {
+	if(scripts\asm\zombie\zombie::func_9F87()) {
 		if(isdefined(self.agent_type) && self.agent_type == "skater") {
 			self playsound("zmb_skater_explode");
 		}
@@ -1342,20 +1342,20 @@ onzombiekilled(param_00,param_01,param_02,param_03,param_04,param_05,param_06,pa
 	func_10926(self.var_1657,param_03,param_04);
 	if(isdefined(self.var_6658)) {
 		if(isdefined(self.var_BF2F)) {
-			var_09 = scripts/cp/zombies/zombie_entrances::func_7872(self.var_6658,self.var_BF2F - 1);
+			var_09 = scripts\cp\zombies\zombie_entrances::func_7872(self.var_6658,self.var_BF2F - 1);
 			if(var_09 == "destroying") {
-				scripts/cp/zombies/zombie_entrances::func_F2E3(self.var_6658,self.var_BF2F - 1,"boarded");
+				scripts\cp\zombies\zombie_entrances::func_F2E3(self.var_6658,self.var_BF2F - 1,"boarded");
 			}
 
 			self.var_BF2F = undefined;
 		}
 
-		scripts/cp/zombies/zombie_entrances::func_E005(self.var_6658);
+		scripts\cp\zombies\zombie_entrances::func_E005(self.var_6658);
 		self.var_6658 = undefined;
 	}
 
 	if(isdefined(self.attack_spot)) {
-		scripts/cp/zombies/zombie_entrances::release_attack_spot(self.attack_spot);
+		scripts\cp\zombies\zombie_entrances::release_attack_spot(self.attack_spot);
 		self.attack_spot = undefined;
 	}
 
@@ -1453,9 +1453,9 @@ func_C4BD(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_0
 	}
 
 	var_0D = isdefined(self.ragdollimpactvector);
-	if(scripts/asm/asm_mp::func_2382(self.asmname,var_0B)) {
+	if(scripts\asm\asm_mp::func_2382(self.asmname,var_0B)) {
 		if(!var_0C || !scripts\engine\utility::istrue(self.is_traversing)) {
-			scripts/asm/asm::func_231E(self.asmname,var_0B,var_0A);
+			scripts\asm\asm::func_231E(self.asmname,var_0B,var_0A);
 		}
 	}
 
@@ -1585,7 +1585,7 @@ func_B9B9() {
 		var_05 = distancesquared(self.origin,var_01);
 		var_06 = gettime() - var_02 / 1000;
 		var_07 = var_05 > 16384;
-		var_08 = scripts\engine\utility::istrue(self._blackboard.var_2BDE);
+		var_08 = scripts\engine\utility::istrue(self.var_1198.var_2BDE);
 		if(var_07 || var_08) {
 			var_01 = self.origin;
 			var_02 = gettime();

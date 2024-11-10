@@ -1,8 +1,8 @@
-/*********************************************************
+/*************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\killstreaks\_placeable.gsc
-*********************************************************/
+ * Script: scripts\mp\killstreaks\_placeable.gsc
+*************************************************/
 
 init() {
 	if(!isdefined(level.placeableconfigs)) {
@@ -51,7 +51,7 @@ func_89FA(param_00) {
 	level endon("game_ended");
 	for(;;) {
 		self waittill("trigger",var_01);
-		if(!scripts\mp\_utility::isreallyalive(var_01)) {
+		if(!scripts\mp\utility::isreallyalive(var_01)) {
 			continue;
 		}
 
@@ -131,7 +131,7 @@ oncancel(param_00,param_01) {
 	}
 
 	if(isdefined(param_01) && param_01) {
-		scripts\mp\_weapons::equipmentdeletevfx();
+		scripts\mp\weapons::equipmentdeletevfx();
 	}
 
 	self delete();
@@ -157,11 +157,11 @@ onplaced(param_00) {
 	self.firstplacement = undefined;
 	if(isdefined(var_01.var_8C79)) {
 		if(level.teambased) {
-			scripts\mp\_entityheadicons::setteamheadicon(self.team,(0,0,var_01.var_8C79));
+			scripts\mp\entityheadicons::setteamheadicon(self.team,(0,0,var_01.var_8C79));
 		}
 		else
 		{
-			scripts\mp\_entityheadicons::setplayerheadicon(var_02,(0,0,var_01.var_8C79));
+			scripts\mp\entityheadicons::setplayerheadicon(var_02,(0,0,var_01.var_8C79));
 		}
 	}
 
@@ -179,7 +179,7 @@ onplaced(param_00) {
 	}
 
 	if(isdefined(self.shouldsplash)) {
-		level thread scripts\mp\_utility::teamplayercardsplash(var_01.var_10A38,var_02);
+		level thread scripts\mp\utility::teamplayercardsplash(var_01.var_10A38,var_02);
 		self.shouldsplash = 0;
 	}
 
@@ -191,7 +191,7 @@ onplaced(param_00) {
 		var_06.deathoverridecallback = var_01.var_C55B;
 	}
 
-	thread scripts\mp\_movers::handle_moving_platforms(var_06);
+	thread scripts\mp\movers::handle_moving_platforms(var_06);
 	thread watchplayerconnected();
 	self notify("placed");
 	self.carriedobj delete();
@@ -272,35 +272,35 @@ deactivate(param_00) {
 
 hideheadicons() {
 	if(level.teambased) {
-		scripts\mp\_entityheadicons::setteamheadicon("none",(0,0,0));
+		scripts\mp\entityheadicons::setteamheadicon("none",(0,0,0));
 		return;
 	}
 
 	if(isdefined(self.triggerportableradarping)) {
-		scripts\mp\_entityheadicons::setplayerheadicon(undefined,(0,0,0));
+		scripts\mp\entityheadicons::setplayerheadicon(undefined,(0,0,0));
 	}
 }
 
 handledamage(param_00) {
 	self endon("carried");
 	var_01 = level.placeableconfigs[param_00];
-	scripts\mp\_damage::monitordamage(var_01.maxhealth,var_01.damagefeedback,::handledeathdamage,::modifydamage,1);
+	scripts\mp\damage::monitordamage(var_01.maxhealth,var_01.damagefeedback,::handledeathdamage,::modifydamage,1);
 }
 
 modifydamage(param_00,param_01,param_02,param_03,param_04) {
 	var_05 = param_03;
 	var_06 = self.config;
 	if(isdefined(var_06.allowmeleedamage) && var_06.allowmeleedamage) {
-		var_05 = scripts\mp\_damage::handlemeleedamage(param_01,param_02,var_05);
+		var_05 = scripts\mp\damage::handlemeleedamage(param_01,param_02,var_05);
 	}
 
 	if(isdefined(var_06.var_1C8F) && var_06.var_1C8F) {
-		var_05 = scripts\mp\_damage::handleempdamage(param_01,param_02,var_05);
+		var_05 = scripts\mp\damage::handleempdamage(param_01,param_02,var_05);
 	}
 
-	var_05 = scripts\mp\_damage::handlemissiledamage(param_01,param_02,var_05);
-	var_05 = scripts\mp\_damage::handlegrenadedamage(param_01,param_02,var_05);
-	var_05 = scripts\mp\_damage::handleapdamage(param_01,param_02,var_05);
+	var_05 = scripts\mp\damage::handlemissiledamage(param_01,param_02,var_05);
+	var_05 = scripts\mp\damage::handlegrenadedamage(param_01,param_02,var_05);
+	var_05 = scripts\mp\damage::handleapdamage(param_01,param_02,var_05);
 	if(isdefined(var_06.modifydamage)) {
 		var_05 = self [[var_06.modifydamage]](param_01,param_02,var_05);
 	}
@@ -310,7 +310,7 @@ modifydamage(param_00,param_01,param_02,param_03,param_04) {
 
 handledeathdamage(param_00,param_01,param_02,param_03) {
 	var_04 = self.config;
-	var_05 = scripts\mp\_damage::onkillstreakkilled(self.streakname,param_00,param_01,param_02,param_03,var_04.scorepopup,var_04.var_52DA);
+	var_05 = scripts\mp\damage::onkillstreakkilled(self.streakname,param_00,param_01,param_02,param_03,var_04.scorepopup,var_04.var_52DA);
 	if(var_05 && isdefined(var_04.var_C4F3)) {
 		self [[var_04.var_C4F3]](self.streakname,param_00,self.triggerportableradarping,param_02);
 	}
@@ -391,14 +391,14 @@ timeout(param_00) {
 	var_02 = var_01.lifespan;
 	while(var_02 > 0) {
 		wait(1);
-		scripts\mp\_hostmigration::waittillhostmigrationdone();
+		scripts\mp\hostmigration::waittillhostmigrationdone();
 		if(!isdefined(self.carriedby)) {
 			var_02 = var_02 - 1;
 		}
 	}
 
 	if(isdefined(self.triggerportableradarping) && isdefined(var_01.gonevo)) {
-		self.triggerportableradarping thread scripts\mp\_utility::leaderdialogonplayer(var_01.gonevo);
+		self.triggerportableradarping thread scripts\mp\utility::leaderdialogonplayer(var_01.gonevo);
 	}
 
 	self notify("death");
@@ -407,27 +407,27 @@ timeout(param_00) {
 removeweapons() {
 	if(self hasweapon("iw6_riotshield_mp")) {
 		self.restoreweapon = "iw6_riotshield_mp";
-		scripts\mp\_utility::_takeweapon("iw6_riotshield_mp");
+		scripts\mp\utility::_takeweapon("iw6_riotshield_mp");
 	}
 }
 
 removeperks() {
-	if(scripts\mp\_utility::_hasperk("specialty_explosivebullets")) {
+	if(scripts\mp\utility::_hasperk("specialty_explosivebullets")) {
 		self.restoreperk = "specialty_explosivebullets";
-		scripts\mp\_utility::removeperk("specialty_explosivebullets");
+		scripts\mp\utility::removeperk("specialty_explosivebullets");
 	}
 }
 
 restoreweapons() {
 	if(isdefined(self.restoreweapon)) {
-		scripts\mp\_utility::_giveweapon(self.restoreweapon);
+		scripts\mp\utility::_giveweapon(self.restoreweapon);
 		self.restoreweapon = undefined;
 	}
 }
 
 restoreperks() {
 	if(isdefined(self.restoreperk)) {
-		scripts\mp\_utility::giveperk(self.restoreperk);
+		scripts\mp\utility::giveperk(self.restoreperk);
 		self.restoreperk = undefined;
 	}
 }
@@ -438,7 +438,7 @@ createbombsquadmodel(param_00) {
 		var_02 = spawn("script_model",self.origin);
 		var_02.angles = self.angles;
 		var_02 hide();
-		var_02 thread scripts\mp\_weapons::bombsquadvisibilityupdater(self.triggerportableradarping);
+		var_02 thread scripts\mp\weapons::bombsquadvisibilityupdater(self.triggerportableradarping);
 		var_02 setmodel(var_01.modelbombsquad);
 		var_02 linkto(self);
 		var_02 setcontents(0);

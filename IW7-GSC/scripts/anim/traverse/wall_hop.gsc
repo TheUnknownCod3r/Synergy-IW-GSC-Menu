@@ -1,8 +1,8 @@
-/******************************************************
+/**********************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\anim\traverse\wall_hop.gsc
-******************************************************/
+ * Script: scripts\anim\traverse\wall_hop.gsc
+**********************************************/
 
 main() {
 	if(self.type == "dog") {

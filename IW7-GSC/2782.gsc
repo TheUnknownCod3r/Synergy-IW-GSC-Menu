@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2782.gsc
+ * Script: 2782.gsc
 ***************************************/
 
 timeuntilwavespawn(var_00) {
@@ -1286,7 +1286,7 @@ in_spawnspectator(var_00, var_01) {
   scripts\mp\utility\game::clearkillcamstate();
   self.friendlydamage = undefined;
   resetuidvarsonconnect();
-  scripts/mp/spectating::setspectatepermissions();
+  scripts\mp\spectating::setspectatepermissions();
   onspawnspectator(var_00, var_01);
 
   if (level.teambased && !level.splitscreen && !self issplitscreenplayer())
@@ -1487,7 +1487,7 @@ callback_playerdisconnect(var_00) {
 
   var_05 = self getentitynumber();
   var_06 = self.guid;
-  logprint("Q;" + var_06 + ";" + var_05 + ";" + self.name + "//n");
+  logprint("Q;" + var_06 + ";" + var_05 + ";" + self.name + "\\n");
   thread scripts\mp\events::disconnected();
 
   if (level.gameended)
@@ -1795,7 +1795,7 @@ callback_playerconnect() {
 
   self.clientid = self.pers["clientid"];
   self.pers["teamKillPunish"] = 0;
-  logprint("J;" + self.guid + ";" + self getentitynumber() + ";" + self.name + "//n");
+  logprint("J;" + self.guid + ";" + self getentitynumber() + ";" + self.name + "\\n");
   self logstatmatchguid();
   var_05 = _getmatchdata("commonMatchData", "playerCount");
 

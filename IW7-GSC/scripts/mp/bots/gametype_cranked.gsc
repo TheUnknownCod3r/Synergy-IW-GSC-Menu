@@ -1,8 +1,8 @@
-/********************************************************
+/************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\bots\gametype_cranked.gsc
-********************************************************/
+ * Script: scripts\mp\bots\gametype_cranked.gsc
+************************************************/
 
 main() {
 	level.bot_personality_types_desired["active"] = 1;

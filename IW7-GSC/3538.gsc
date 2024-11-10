@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\3538.gsc
+ * Script: 3538.gsc
 ***************************************/
 
 setoverridearchetype() {}
@@ -774,12 +774,12 @@ unsetfreefall() {}
 
 settacticalinsertion() {
   var_00 = "secondary";
-  var_01 = scripts/mp/powers::getcurrentequipment(var_00);
+  var_01 = scripts\mp\powers::getcurrentequipment(var_00);
 
   if (isdefined(var_01))
-  scripts/mp/powers::removepower(var_01);
+  scripts\mp\powers::removepower(var_01);
 
-  scripts/mp/powers::givepower("power_tacInsert", var_00, 0);
+  scripts\mp\powers::givepower("power_tacInsert", var_00, 0);
   thread func_BA34();
 }
 
@@ -1724,7 +1724,7 @@ unsetactivereload() {
 
 setlifepack() {
   if (!isdefined(level._effect["life_pack_pickup"]))
-  level._effect["life_pack_pickup"] = loadfx("vfx/iw7/_requests/mp/vfx_health_pickup");
+  level._effect["life_pack_pickup"] = loadfx("vfx\iw7\_requests\mp\vfx_health_pickup");
 
   thread watchlifepackkills();
 }
@@ -1919,7 +1919,7 @@ unsetlifepack() {
 
 settoughenup() {
   if (!isdefined(level._effect["toughen_up_screen"]))
-  level._effect["toughen_up_screen"] = loadfx("vfx/iw7/_requests/mp/vfx_toughen_up_scrn");
+  level._effect["toughen_up_screen"] = loadfx("vfx\iw7\_requests\mp\vfx_toughen_up_scrn");
 
   thread watchtoughenup();
 }
@@ -2101,7 +2101,7 @@ unsettoughenup() {
 }
 
 setscoutping() {
-  thread scripts/mp/archetypes/archscout::func_13B32();
+  thread scripts\mp\archetypes\archscout::func_13B32();
   thread updatescoutping();
 }
 
@@ -2175,7 +2175,7 @@ unsetscoutping() {
   self.scoutpingmod = undefined;
   self.scoutpingpreviousstage = undefined;
   self notify("unsetScoutPing");
-  thread scripts/mp/archetypes/archscout::func_3886();
+  thread scripts\mp\archetypes\archscout::func_3886();
 }
 
 setphasespeed() {
@@ -2349,8 +2349,8 @@ func_4650(var_00, var_01, var_02) {
   var_08 = var_11;
   }
 
-  var_00 scripts/mp/powers::removepower(var_08);
-  var_00 scripts/mp/powers::givepower(var_06, var_07, 1);
+  var_00 scripts\mp\powers::removepower(var_08);
+  var_00 scripts\mp\powers::givepower(var_06, var_07, 1);
   var_00 thread scripts\mp\weapons::func_139D7(var_06, var_07);
   self.trigger delete();
   self delete();
@@ -3019,7 +3019,7 @@ unsetrevenge() {
 
 setphaseslide() {
   self.canphaseslide = 1;
-  thread scripts/mp/archetypes/archassassin::func_CAAF();
+  thread scripts\mp\archetypes\archassassin::func_CAAF();
 }
 
 unsetphaseslide() {
@@ -3028,7 +3028,7 @@ unsetphaseslide() {
 
 setteleslide() {
   self.canteleslide = 1;
-  thread scripts/mp/archetypes/archassassin::func_1166B();
+  thread scripts\mp\archetypes\archassassin::func_1166B();
 }
 
 unsetteleslide() {
@@ -3037,7 +3037,7 @@ unsetteleslide() {
 
 setphaseslashrephase() {
   self.hasrephase = 1;
-  thread scripts/mp/archetypes/archassassin::func_E88E();
+  thread scripts\mp\archetypes\archassassin::func_E88E();
 }
 
 unsetphaseslashrephase() {
@@ -3070,13 +3070,13 @@ func_12C69() {
 }
 
 func_F6F1() {
-  scripts/mp/archetypes/archscout::func_F6F2();
+  scripts\mp\archetypes\archscout::func_F6F2();
 }
 
 func_12CB1() {}
 
 func_F64E() {
-  scripts/mp/archetypes/archheavy::func_261D();
+  scripts\mp\archetypes\archheavy::func_261D();
 }
 
 func_12C74() {}
@@ -3088,14 +3088,14 @@ func_F64D() {
 func_12C73() {}
 
 func_F64F() {
-  scripts/mp/archetypes/archscout::func_2620();
+  scripts\mp\archetypes\archscout::func_2620();
 }
 
 func_12C75() {}
 
 func_F790() {
   self.func_11B2E = "specialty_mark_targets";
-  scripts/mp/perks/perk_mark_targets::marktarget_init();
+  scripts\mp\perks\perk_mark_targets::marktarget_init();
 }
 
 func_12CED() {
@@ -3103,7 +3103,7 @@ func_12CED() {
 }
 
 func_F65A() {
-  scripts/mp/archetypes/archengineer::func_F6E6("battery");
+  scripts\mp\archetypes\archengineer::func_F6E6("battery");
 }
 
 func_12C7A() {}
@@ -3123,14 +3123,14 @@ unsetblockhealthregen() {
 }
 
 setscorestreakpack() {
-  scripts/mp/archetypes/archengineer::func_F6E6("scorestreak");
+  scripts\mp\archetypes\archengineer::func_F6E6("scorestreak");
 }
 
 unsetscorestreakpack() {}
 
 setsuperpack() {
   self.trait = "specialty_superpack";
-  scripts/mp/archetypes/archengineer::func_F6E6("super");
+  scripts\mp\archetypes\archengineer::func_F6E6("super");
 }
 
 unsetsuperpack() {
@@ -3315,16 +3315,16 @@ func_12D4E() {}
 
 func_F7DE() {
   self.trait = "specialty_personal_trophy";
-  thread scripts/mp/playertrophysystem::func_D446();
+  thread scripts\mp\playertrophysystem::func_D446();
 }
 
 func_12D04() {
   self.trait = undefined;
-  thread scripts/mp/playertrophysystem::func_D448();
+  thread scripts\mp\playertrophysystem::func_D448();
 }
 
 func_F6CA() {
-  thread scripts/mp/archetypes/archheavy::func_56E7();
+  thread scripts\mp\archetypes\archheavy::func_56E7();
 }
 
 func_12CA3() {}
@@ -3495,7 +3495,7 @@ unsetcloak() {}
 
 setwalllock() {
   self.trait = "specialty_wall_lock";
-  thread scripts/mp/archetypes/archsniper::func_E8AC();
+  thread scripts\mp\archetypes\archsniper::func_E8AC();
 }
 
 unsetwalllock() {
@@ -3504,7 +3504,7 @@ unsetwalllock() {
 
 setrush() {
   self.trait = "specialty_rush";
-  thread scripts/mp/archetypes/archscout::func_B947();
+  thread scripts\mp\archetypes\archscout::func_B947();
 }
 
 unsetrush() {
@@ -3598,7 +3598,7 @@ unsetmomentum() {
 
 setscavengereqp() {
   self.trait = "specialty_scavenger_eqp";
-  scripts/mp/archetypes/archengineer::func_F6E6("equipment");
+  scripts\mp\archetypes\archengineer::func_F6E6("equipment");
 }
 
 unsetscavengereqp() {
@@ -3606,7 +3606,7 @@ unsetscavengereqp() {
 }
 
 setspawnview() {
-  thread scripts/mp/archetypes/archassassin::func_1091C();
+  thread scripts\mp\archetypes\archassassin::func_1091C();
 }
 
 unsetspawnview() {
@@ -3638,7 +3638,7 @@ unsetftlslide() {
 }
 
 func_F753() {
-  thread scripts/mp/archetypes/archsniper::func_E7FE();
+  thread scripts\mp\archetypes\archsniper::func_E7FE();
 }
 
 func_12CD6() {}
@@ -3820,7 +3820,7 @@ unsetadsawareness() {
 
 setrearguard() {
   self.trait = "specialty_rearguard";
-  scripts/mp/perks/perk_rearguard::func_E814();
+  scripts\mp\perks\perk_rearguard::func_E814();
 }
 
 unsetrearguard() {
@@ -4131,7 +4131,7 @@ removegpsjammer() {
 }
 
 setgroundpoundshield() {
-  level._effect["groundPoundShield_impact"] = loadfx("vfx/iw7/_requests/mp/vfx_debug_warning.vfx");
+  level._effect["groundPoundShield_impact"] = loadfx("vfx\iw7\_requests\mp\vfx_debug_warning.vfx");
   thread scripts\mp\equipment\ground_pound::func_8655(6, 8, ::groundpoundshield_onimpact, "groundPoundShield_unset");
 }
 
@@ -4377,8 +4377,8 @@ func_865E() {
 }
 
 setgroundpoundshock() {
-  level._effect["groundPoundShock_impact_sm"] = loadfx("vfx/iw7/_requests/mp/vfx_debug_warning.vfx");
-  level._effect["groundPoundShock_impact_lrg"] = loadfx("vfx/iw7/_requests/mp/vfx_debug_warning.vfx");
+  level._effect["groundPoundShock_impact_sm"] = loadfx("vfx\iw7\_requests\mp\vfx_debug_warning.vfx");
+  level._effect["groundPoundShock_impact_lrg"] = loadfx("vfx\iw7\_requests\mp\vfx_debug_warning.vfx");
   thread scripts\mp\equipment\ground_pound::func_8655(7, 8, ::groundpoundshock_onimpact, "groundPoundShock_unset");
 }
 
@@ -4475,7 +4475,7 @@ groundpoundboost_onimpact(var_00) {
 }
 
 setbattleslideshield() {
-  level._effect["battleSlideShield_damage"] = loadfx("vfx/iw7/_requests/mp/vfx_debug_warning.vfx");
+  level._effect["battleSlideShield_damage"] = loadfx("vfx\iw7\_requests\mp\vfx_debug_warning.vfx");
   thread battleslideshield_monitor();
 }
 
@@ -4706,8 +4706,8 @@ getbattleslideoffensedamage() {
 }
 
 setthruster() {
-  level._effect["thrusterRadFr"] = loadfx("vfx/iw7/core/mp/powers/thrust_blast/vfx_thrust_blast_radius_fr");
-  level._effect["thrusterRadEn"] = loadfx("vfx/iw7/core/mp/powers/thrust_blast/vfx_thrust_blast_radius_en");
+  level._effect["thrusterRadFr"] = loadfx("vfx\iw7\core\mp\powers\thrust_blast\vfx_thrust_blast_radius_fr");
+  level._effect["thrusterRadEn"] = loadfx("vfx\iw7\core\mp\powers\thrust_blast\vfx_thrust_blast_radius_en");
   thrusterwatchdoublejump();
 }
 

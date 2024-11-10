@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2798.gsc
+ * Script: 2798.gsc
 ***************************************/
 
 init() {
@@ -175,7 +175,7 @@ func_AEAE() {
 
   for (;;) {
   var_0++;
-  var_01 = tablelookupbyrow("mp/spawnweights.csv", var_00, 0);
+  var_01 = tablelookupbyrow("mp\spawnweights.csv", var_00, 0);
 
   if (!isdefined(var_01) || var_01 == "")
   break;
@@ -185,8 +185,8 @@ func_AEAE() {
   level.spawnglobals.func_AFBF[level.spawnglobals.func_AFBF.size] = var_01;
   }
 
-  var_02 = tablelookupbyrow("mp/spawnweights.csv", var_00, 1);
-  var_03 = tablelookupbyrow("mp/spawnweights.csv", var_00, 2);
+  var_02 = tablelookupbyrow("mp\spawnweights.csv", var_00, 1);
+  var_03 = tablelookupbyrow("mp\spawnweights.csv", var_00, 2);
   var_03 = float(var_03);
   level.spawnglobals.func_10882[var_01][var_02] = var_03;
   }

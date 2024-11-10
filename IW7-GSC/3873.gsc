@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3873.gsc
-****************************/
+ * Script: 3873.gsc
+************************/
 
 main() {
 	lib_0F23::main();

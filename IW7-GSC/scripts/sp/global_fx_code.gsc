@@ -1,8 +1,8 @@
-/*************************************************
+/*****************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\sp\global_fx_code.gsc
-*************************************************/
+ * Script: scripts\sp\global_fx_code.gsc
+*****************************************/
 
 global_fx(param_00,param_01,param_02,param_03,param_04) {
 	init();

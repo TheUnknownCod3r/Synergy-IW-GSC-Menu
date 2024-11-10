@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\3371.gsc
+ * Script: 3371.gsc
 ***************************************/
 
 update_player_tickets_earned(var_00) {
@@ -72,8 +72,8 @@ give_player_tickets(var_00, var_01, var_02, var_03) {
   if (!scripts\engine\utility::is_true(var_03))
   var_00 thread show_ticket_machine(var_01);
 
-  var_00 scripts/cp/cp_persistence::eog_player_update_stat("tickettotal", int(var_0.num_tickets), 1);
-  scripts/cp/zombies/zombies_gamescore::update_tickets_earned_performance(var_00, var_01);
+  var_00 scripts\cp\cp_persistence::eog_player_update_stat("tickettotal", int(var_0.num_tickets), 1);
+  scripts\cp\zombies\zombies_gamescore::update_tickets_earned_performance(var_00, var_01);
 }
 
 arcade_game_hint_func(var_00, var_01) {
@@ -117,7 +117,7 @@ arcade_game_player_disconnect_or_death(var_00, var_01, var_02, var_03) {
   var_00 scripts\engine\utility::allow_usability(1);
   }
 
-  scripts/cp/cp_interaction::add_to_current_interaction_list(var_01);
+  scripts\cp\cp_interaction::add_to_current_interaction_list(var_01);
   var_00 notify("arcade_game_over_for_player");
 }
 
@@ -152,7 +152,7 @@ arcade_game_player_gets_too_far_away(var_00, var_01, var_02, var_03, var_04, var
 
   [[var_03]](var_01, var_00);
   var_1.active_player = undefined;
-  scripts/cp/cp_interaction::add_to_current_interaction_list(var_01);
+  scripts\cp\cp_interaction::add_to_current_interaction_list(var_01);
   var_00 scripts\engine\utility::allow_weapon_switch(1);
 
   if (!var_00 scripts\engine\utility::isusabilityallowed())
@@ -216,7 +216,7 @@ turn_off_machine_after_uses(var_00, var_01) {
 
   foreach (var_06 in level.players) {
   if (isdefined(var_6.last_interaction_point) && var_6.last_interaction_point == self)
-  var_06 thread scripts/cp/cp_interaction::refresh_interaction();
+  var_06 thread scripts\cp\cp_interaction::refresh_interaction();
   }
   }
   }
@@ -235,12 +235,12 @@ saveplayerpregameweapon(var_00) {
   var_02 = 1;
   else if (scripts\engine\utility::array_contains(level.additional_laststand_weapon_exclusion, getweaponbasename(var_01)))
   var_02 = 1;
-  else if (scripts/cp/utility::is_melee_weapon(var_01, 1))
+  else if (scripts\cp\utility::is_melee_weapon(var_01, 1))
   var_02 = 1;
 
   if (var_02) {
   var_0.copy_fullweaponlist = var_00 getweaponslistall();
-  var_01 = var_00 scripts/cp/cp_laststand::choose_last_weapon(level.additional_laststand_weapon_exclusion, 1, 1);
+  var_01 = var_00 scripts\cp\cp_laststand::choose_last_weapon(level.additional_laststand_weapon_exclusion, 1, 1);
   }
 
   var_0.copy_fullweaponlist = undefined;
@@ -252,7 +252,7 @@ saveplayerpregameweapon(var_00) {
 }
 
 give_player_back_weapon(var_00) {
-  if (scripts/cp/cp_laststand::player_in_laststand(var_00))
+  if (scripts\cp\cp_laststand::player_in_laststand(var_00))
   return;
 
   if (isdefined(var_0.pre_arcade_game_weapon)) {
@@ -271,27 +271,27 @@ give_player_back_weapon(var_00) {
 }
 
 take_player_grenades_pre_game() {
-  if (scripts/cp/cp_laststand::player_in_laststand(self))
+  if (scripts\cp\cp_laststand::player_in_laststand(self))
   return;
 
-  var_00 = scripts/cp/powers/coop_powers::what_power_is_in_slot("primary");
-  var_01 = scripts/cp/powers/coop_powers::what_power_is_in_slot("secondary");
+  var_00 = scripts\cp\powers\coop_powers::what_power_is_in_slot("primary");
+  var_01 = scripts\cp\powers\coop_powers::what_power_is_in_slot("secondary");
   self.pre_arcade_primary_power = var_00;
   self.pre_arcade_secondary_power = var_01;
 
   if (isdefined(var_00)) {
   self.pre_arcade_primary_power_charges = self.powers[self.pre_arcade_primary_power].charges;
-  scripts/cp/powers/coop_powers::removepower(var_00);
+  scripts\cp\powers\coop_powers::removepower(var_00);
   }
 
   if (isdefined(var_01)) {
   self.pre_arcade_secondary_power_charges = self.powers[self.pre_arcade_secondary_power].charges;
-  scripts/cp/powers/coop_powers::removepower(var_01);
+  scripts\cp\powers\coop_powers::removepower(var_01);
   }
 }
 
 take_player_super_pre_game() {
-  if (scripts/cp/cp_laststand::player_in_laststand(self))
+  if (scripts\cp\cp_laststand::player_in_laststand(self))
   return;
 
   self clearoffhandspecial();
@@ -299,23 +299,23 @@ take_player_super_pre_game() {
 }
 
 restore_player_grenades_post_game() {
-  scripts/cp/utility::restore_super_weapon();
+  scripts\cp\utility::restore_super_weapon();
 
-  if (scripts/cp/cp_laststand::player_in_laststand(self))
+  if (scripts\cp\cp_laststand::player_in_laststand(self))
   return;
 
   if (isdefined(self.pre_arcade_primary_power)) {
   var_00 = level.powers[self.pre_arcade_primary_power].defaultslot;
-  scripts/cp/powers/coop_powers::func_4171(var_00);
-  scripts/cp/powers/coop_powers::givepower(self.pre_arcade_primary_power, var_00, undefined, undefined, undefined, undefined, 1);
-  scripts/cp/powers/coop_powers::power_adjustcharges(self.pre_arcade_primary_power_charges, var_00, 1);
+  scripts\cp\powers\coop_powers::func_4171(var_00);
+  scripts\cp\powers\coop_powers::givepower(self.pre_arcade_primary_power, var_00, undefined, undefined, undefined, undefined, 1);
+  scripts\cp\powers\coop_powers::power_adjustcharges(self.pre_arcade_primary_power_charges, var_00, 1);
   }
 
   if (isdefined(self.pre_arcade_secondary_power)) {
   var_00 = level.powers[self.pre_arcade_secondary_power].defaultslot;
-  scripts/cp/powers/coop_powers::func_4171(var_00);
-  scripts/cp/powers/coop_powers::givepower(self.pre_arcade_secondary_power, var_00, undefined, undefined, undefined, undefined, 0);
-  scripts/cp/powers/coop_powers::power_adjustcharges(self.pre_arcade_secondary_power_charges, var_00, 1);
+  scripts\cp\powers\coop_powers::func_4171(var_00);
+  scripts\cp\powers\coop_powers::givepower(self.pre_arcade_secondary_power, var_00, undefined, undefined, undefined, undefined, 0);
+  scripts\cp\powers\coop_powers::power_adjustcharges(self.pre_arcade_secondary_power_charges, var_00, 1);
   }
 
   self.pre_arcade_primary_power = undefined;

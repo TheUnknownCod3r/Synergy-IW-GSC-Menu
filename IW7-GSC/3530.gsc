@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\3530.gsc
+ * Script: 3530.gsc
 ***************************************/
 
 init() {
@@ -10,7 +10,7 @@ init() {
   level.remote_uav = [];
   level.vanguard_lastdialogtime = 0;
   level.func_1317F = ::vanguard_firemissile;
-  level.func_A864 = loadfx("vfx/misc/laser_glow");
+  level.func_A864 = loadfx("vfx\misc\laser_glow");
 }
 
 func_FAB1() {}

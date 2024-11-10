@@ -1,8 +1,8 @@
-/*********************************************************
+/*************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\aitype\enemy_sdf_snow_ar_silencer.gsc
-*********************************************************/
+ * Script: aitype\enemy_sdf_snow_ar_silencer.gsc
+*************************************************/
 
 main() {
 	self.var_17DB = "";

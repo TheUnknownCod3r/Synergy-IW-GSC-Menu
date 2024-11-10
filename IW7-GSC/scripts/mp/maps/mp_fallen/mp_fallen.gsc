@@ -1,15 +1,15 @@
-/***********************************************************
+/***************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\maps\mp_fallen\mp_fallen.gsc
-***********************************************************/
+ * Script: scripts\mp\maps\mp_fallen\mp_fallen.gsc
+***************************************************/
 
 main() {
-	lib_0F9E::main();
+	scripts\mp\maps\mp_fallen\mp_fallen_precache::main();
 	scripts\mp\maps\mp_fallen\gen\mp_fallen_art::main();
-	lib_0F9D::main();
-	scripts\mp\_load::main();
-	scripts\mp\_compass::func_FACD("compass_map_mp_fallen");
+	scripts\mp\maps\mp_fallen\mp_fallen_fx::main();
+	scripts\mp\load::main();
+	scripts\mp\compass::setupminimap("compass_map_mp_fallen");
 	setdvar("r_lightGridEnableTweaks",1);
 	setdvar("r_lightGridIntensity",1.33);
 	setdvar("r_umbraMinObjectContribution",8);
@@ -21,7 +21,7 @@ main() {
 	thread func_F9BA();
 	thread func_CBF3();
 	level.var_C7B3 = getentarray("OutOfBounds","targetname");
-	thread scripts\mp\_animation_suite::func_1FAA();
+	thread scripts\mp\animation_suite::animationsuite();
 	thread func_C853();
 	thread fixyourcollision();
 	thread fixyourballs();
@@ -37,7 +37,7 @@ func_C853() {
 }
 
 func_CBF3() {
-	var_00 = scripts\common\utility::getstruct("pitching_machine","script_noteworthy");
+	var_00 = scripts\engine\utility::getstruct("pitching_machine","script_noteworthy");
 	if(isdefined(var_00)) {
 		var_00 thread func_CBF1();
 	}
@@ -50,7 +50,7 @@ func_CBF1() {
 	var_01 = func_CBF0();
 	var_02 = getentarray("pitching_wheel","script_noteworthy");
 	foreach(var_04 in var_02) {
-		var_04.var_CB0B = 0;
+		var_04.physicsactivated = 0;
 	}
 
 	for(;;) {
@@ -82,17 +82,17 @@ func_CBF4() {
 }
 
 func_CBF2(param_00) {
-	param_00.var_CB0B = 0;
+	param_00.physicsactivated = 0;
 	param_00 hide();
 	param_00.origin = self.origin;
 	var_01 = anglestoforward(self.angles);
 	var_02 = 2000 + randomint(500) * var_01;
-	scripts\common\utility::func_136F7();
+	scripts\engine\utility::waitframe();
 	param_00 show();
 	param_00 thread func_139A8();
 	param_00 thread func_139A9();
 	param_00 physicslaunchserver(self.origin,var_02);
-	param_00.var_CB0B = 1;
+	param_00.physicsactivated = 1;
 }
 
 func_139A9() {
@@ -106,7 +106,7 @@ func_139A8() {
 	self endon("ball_initial_pitch_over");
 	for(;;) {
 		self.var_9037 waittill("trigger",var_00);
-		if(isplayer(var_00) && scripts\mp\_utility::func_9F19(var_00)) {
+		if(isplayer(var_00) && scripts\mp\utility::isreallyalive(var_00)) {
 			var_00 dodamage(35,self.origin,self,self,"MOD_IMPACT");
 			thread func_10830(self.origin);
 			break;
@@ -118,7 +118,7 @@ func_10830(param_00) {
 	self hide();
 	var_01 = spawn("script_model",param_00);
 	var_01 setmodel("baseball_single_fn_01_dyn");
-	var_01.var_CB0B = 1;
+	var_01.physicsactivated = 1;
 	var_02 = (0,0,0);
 	var_01 physicslaunchserver(param_00,var_02);
 	self waittill("pitching_machine_ball_reset");

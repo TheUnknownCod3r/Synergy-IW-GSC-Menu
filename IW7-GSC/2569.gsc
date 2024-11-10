@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\2569.gsc
-****************************/
+ * Script: 2569.gsc
+************************/
 
 func_E477(param_00) {
 	return level.success;
@@ -33,12 +33,12 @@ func_9FEE(param_00,param_01) {
 }
 
 func_FAF6(param_00) {
-	self.bt.instancedata[param_00] = [];
-	self.bt.instancedata[param_00]["waitStartTime"] = gettime();
+	self.var_3135.instancedata[param_00] = [];
+	self.var_3135.instancedata[param_00]["waitStartTime"] = gettime();
 }
 
 func_5AEA(param_00,param_01) {
-	var_02 = self.bt.instancedata[param_00]["waitStartTime"];
+	var_02 = self.var_3135.instancedata[param_00]["waitStartTime"];
 	if(gettime() - var_02 < param_01) {
 		return level.running;
 	}
@@ -97,7 +97,7 @@ func_9309(param_00,param_01) {
 }
 
 func_9307(param_00) {
-	if(scripts/asm/asm_bb::bb_isanimscripted()) {
+	if(scripts\asm\asm_bb::bb_isanimscripted()) {
 		return level.success;
 	}
 
@@ -105,7 +105,7 @@ func_9307(param_00) {
 }
 
 func_930C(param_00) {
-	if(scripts/asm/asm_bb::bb_isselfdestruct()) {
+	if(scripts\asm\asm_bb::bb_isselfdestruct()) {
 		return level.success;
 	}
 

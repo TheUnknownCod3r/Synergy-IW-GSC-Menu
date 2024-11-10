@@ -1,11 +1,11 @@
-/***********************************************************
+/***************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\cp_spawn_plasma_projectile.gsc
-***********************************************************/
+ * Script: scripts\cp\_spawn_plasma_projectile.gsc
+***************************************************/
 
 splashgrenadeinit() {
-	level._effect["base_plasma_smoke"] = loadfx("vfx/iw7/_requests/mp/vfx_plasma_smoke");
+	level._effect["base_plasma_smoke"] = loadfx("vfx\iw7\_requests\mp\vfx_plasma_smoke");
 }
 
 splashgrenadeused(param_00) {

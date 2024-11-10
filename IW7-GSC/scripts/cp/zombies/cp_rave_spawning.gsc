@@ -1,12 +1,12 @@
-/***********************************************************
+/***************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\zombies\cp_rave_spawning.gsc
-***********************************************************/
+ * Script: scripts\cp\zombies\cp_rave_spawning.gsc
+***************************************************/
 
 goon_spawn_event_func() {
 	level.agent_funcs["zombie_sasquatch"]["on_damaged"] = ::scripts\cp\maps\cp_rave\cp_rave_damage::cp_rave_onzombiedamaged;
-	level.agent_funcs["zombie_sasquatch"]["gametype_on_damage_finished"] = ::scripts/cp/agents/gametype_zombie::onzombiedamagefinished;
+	level.agent_funcs["zombie_sasquatch"]["gametype_on_damage_finished"] = ::scripts\cp\agents\gametype_zombie::onzombiedamagefinished;
 	level.agent_funcs["zombie_sasquatch"]["gametype_on_killed"] = ::scripts\cp\maps\cp_rave\cp_rave_damage::cp_rave_onzombiekilled;
 	if(!isdefined(level.zombie_sasquatch_vo_prefix)) {
 		level.zombie_sasquatch_vo_prefix = "zmb_vo_sasquatch_";
@@ -267,7 +267,7 @@ func_10719(param_00) {
 	var_05 = scripts\mp\mp_agent::spawnnewagent(var_01,var_04,var_02,var_03);
 	if(isdefined(var_05)) {
 		var_05.voprefix = level.zombie_sasquatch_vo_prefix;
-		level thread scripts/cp/zombies/zombies_vo::play_zombie_vo(var_05,"spawn",1);
+		level thread scripts\cp\zombies\zombies_vo::play_zombie_vo(var_05,"spawn",1);
 		var_05 setavoidanceradius(4);
 		param_00.lastspawntime = gettime();
 		var_05 thread sasquatch_audio_monitor();
@@ -281,25 +281,25 @@ func_10719(param_00) {
 sasquatch_audio_monitor() {
 	level endon("game_ended");
 	self endon("death");
-	thread scripts/cp/zombies/zombies_vo::play_zombie_death_vo(self.voprefix,undefined,1);
+	thread scripts\cp\zombies\zombies_vo::play_zombie_death_vo(self.voprefix,undefined,1);
 	self.playing_stumble = 0;
 	for(;;) {
 		var_00 = scripts\engine\utility::waittill_any_timeout_1(6,"attack_hit","attack_miss","attack_charge");
 		switch(var_00) {
 			case "attack_hit":
-				level thread scripts/cp/zombies/zombies_vo::play_zombie_vo(self,"attack",0);
+				level thread scripts\cp\zombies\zombies_vo::play_zombie_vo(self,"attack",0);
 				break;
 	
 			case "attack_miss":
-				level thread scripts/cp/zombies/zombies_vo::play_zombie_vo(self,"attack",0);
+				level thread scripts\cp\zombies\zombies_vo::play_zombie_vo(self,"attack",0);
 				break;
 	
 			case "attack_charge":
-				level thread scripts/cp/zombies/zombies_vo::play_zombie_vo(self,"charge_grunt",0);
+				level thread scripts\cp\zombies\zombies_vo::play_zombie_vo(self,"charge_grunt",0);
 				break;
 	
 			case "timeout":
-				level thread scripts/cp/zombies/zombies_vo::play_zombie_vo(self,"idle_grunt",0);
+				level thread scripts\cp\zombies\zombies_vo::play_zombie_vo(self,"idle_grunt",0);
 				break;
 		}
 	}
@@ -340,7 +340,7 @@ _meth_8456(param_00) {
 	var_03 = 1;
 	var_04 = 5000;
 	foreach(var_06 in param_00) {
-		if(scripts/cp/zombies/func_0D60::allowedstances(var_06.volume)) {
+		if(scripts\cp\zombies\func_0D60::allowedstances(var_06.volume)) {
 			var_01[var_01.size] = var_06;
 			var_06.modifiedspawnpoints = var_02;
 			continue;
@@ -348,7 +348,7 @@ _meth_8456(param_00) {
 
 		if(isdefined(var_06.volume.var_186E)) {
 			foreach(var_08 in var_06.volume.var_186E) {
-				if(scripts/cp/zombies/func_0D60::allowedstances(var_08)) {
+				if(scripts\cp\zombies\func_0D60::allowedstances(var_08)) {
 					var_01[var_01.size] = var_06;
 					var_06.modifiedspawnpoints = var_03;
 					break;
@@ -473,14 +473,14 @@ func_9608() {
 	foreach(var_02 in var_00) {
 		var_03 = 0;
 		foreach(var_05 in level.invalid_spawn_volume_array) {
-			if(function_010F(var_02.origin,var_05)) {
+			if(ispointinvolume(var_02.origin,var_05)) {
 				var_03 = 1;
 			}
 		}
 
 		if(!var_03) {
 			foreach(var_05 in level.spawn_volume_array) {
-				if(function_010F(var_02.origin,var_05)) {
+				if(ispointinvolume(var_02.origin,var_05)) {
 					if(!isdefined(var_02.angles)) {
 						var_02.angles = (0,0,0);
 					}
@@ -980,7 +980,7 @@ func_5773(param_00) {
 			}
 
 			if(isdefined(var_05) && var_05.basename == "island") {
-				var_09 = scripts/cp/zombies/func_0D60::allowedstances(var_05);
+				var_09 = scripts\cp\zombies\func_0D60::allowedstances(var_05);
 				if(var_09 == 0) {
 					var_02 = 0;
 				}
@@ -1080,7 +1080,7 @@ func_51A5(param_00,param_01) {
 
 	self.died_poorly = 1;
 	if(scripts\engine\utility::istrue(self.marked_for_challenge) && isdefined(level.num_zombies_marked)) {
-		level.var_C20A--;
+		level.num_zombies_marked--;
 	}
 
 	if(scripts\engine\utility::istrue(self.isactive)) {

@@ -1,8 +1,8 @@
-/***********************************************************
+/***************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\killstreaks\_perkstreaks.gsc
-***********************************************************/
+ * Script: scripts\mp\killstreaks\_perkstreaks.gsc
+***************************************************/
 
 init() {
 	scripts\mp\killstreaks\_killstreaks::registerkillstreak("specialty_fastsprintrecovery_ks",::tryuseperkstreak);
@@ -76,39 +76,39 @@ func_128D6(param_00,param_01) {
 }
 
 tryuseperkstreak(param_00,param_01) {
-	var_02 = scripts\mp\_utility::strip_suffix(param_01,"_ks");
+	var_02 = scripts\mp\utility::strip_suffix(param_01,"_ks");
 	func_5A5D(var_02);
 	return 1;
 }
 
 func_5A5D(param_00) {
-	scripts\mp\_utility::giveperk(param_00);
+	scripts\mp\utility::giveperk(param_00);
 	thread func_139E8(param_00);
 	thread func_3E15(param_00);
 	if(param_00 == "specialty_hardline") {
 		scripts\mp\killstreaks\_killstreaks::func_F866();
 	}
 
-	scripts\mp\_matchdata::logkillstreakevent(param_00 + "_ks",self.origin);
+	scripts\mp\matchdata::logkillstreakevent(param_00 + "_ks",self.origin);
 }
 
 func_58E3(param_00,param_01) {
-	scripts\mp\_utility::giveperk(param_00);
+	scripts\mp\utility::giveperk(param_00);
 	if(isdefined(param_01)) {
-		scripts\mp\_matchdata::logkillstreakevent(param_01,self.origin);
+		scripts\mp\matchdata::logkillstreakevent(param_01,self.origin);
 	}
 }
 
 func_139E8(param_00) {
 	self endon("disconnect");
 	self waittill("death");
-	scripts\mp\_utility::removeperk(param_00);
+	scripts\mp\utility::removeperk(param_00);
 }
 
 func_3E15(param_00) {
-	var_01 = scripts\mp\_class::canplayerplacesentry(param_00);
+	var_01 = scripts\mp\class::canplayerplacesentry(param_00);
 	if(var_01 != "specialty_null") {
-		scripts\mp\_utility::giveperk(var_01);
+		scripts\mp\utility::giveperk(var_01);
 		thread func_139E8(var_01);
 	}
 }

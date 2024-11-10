@@ -1,8 +1,8 @@
-/*************************************************************
+/*****************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\asm\alien_goon\alien_goon_asm.gsc
-*************************************************************/
+ * Script: scripts\asm\alien_goon\alien_goon_asm.gsc
+*****************************************************/
 
 asminit(param_00,param_01,param_02,param_03) {
 	scripts\asm\zombie\zombie::func_13F9A(param_00,param_01,param_02,param_03);
@@ -33,7 +33,7 @@ shouldplayentranceanim(param_00,param_01,param_02,param_03) {
 
 playstumble(param_00,param_01,param_02,param_03) {
 	var_04 = scripts\asm\asm_mp::asm_getanim(param_00,param_01);
-	if(scripts\common\utility::istrue(self.activated_venomx_sphere)) {
+	if(scripts\engine\utility::istrue(self.activated_venomx_sphere)) {
 		scripts\asm\asm_mp::func_2365(param_00,param_01,param_02,var_04,0.2);
 		return;
 	}
@@ -49,7 +49,7 @@ playpostattackmanuever(param_00,param_01,param_02,param_03) {
 	}
 
 	var_05 = scripts\asm\asm_mp::asm_getanim(param_00,param_01);
-	if(scripts\common\utility::istrue(self.activated_venomx_sphere)) {
+	if(scripts\engine\utility::istrue(self.activated_venomx_sphere)) {
 		scripts\asm\asm_mp::func_2365(param_00,param_01,param_02,var_05,0.2);
 		return;
 	}
@@ -63,7 +63,7 @@ wantstododge(param_00,param_01,param_02,param_03) {
 
 playdodgeanim(param_00,param_01,param_02,param_03) {
 	var_04 = scripts\asm\asm_mp::asm_getanim(param_00,param_01);
-	if(scripts\common\utility::istrue(self.activated_venomx_sphere)) {
+	if(scripts\engine\utility::istrue(self.activated_venomx_sphere)) {
 		self scragentsetanimscale(0.2,0.2);
 	}
 	else
@@ -73,7 +73,7 @@ playdodgeanim(param_00,param_01,param_02,param_03) {
 
 	self.var_1198.requested_dodge_dir = undefined;
 	self.var_1198.requested_dodge_scale = undefined;
-	if(scripts\common\utility::istrue(self.activated_venomx_sphere)) {
+	if(scripts\engine\utility::istrue(self.activated_venomx_sphere)) {
 		scripts\asm\asm_mp::func_2365(param_00,param_01,param_02,var_04,0.2);
 		return;
 	}
@@ -82,7 +82,7 @@ playdodgeanim(param_00,param_01,param_02,param_03) {
 }
 
 terminate_rundodge(param_00,param_01,param_02) {
-	if(scripts\common\utility::istrue(self.activated_venomx_sphere)) {
+	if(scripts\engine\utility::istrue(self.activated_venomx_sphere)) {
 		self scragentsetanimscale(0.2,0.2);
 		return;
 	}

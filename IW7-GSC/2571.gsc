@@ -1,34 +1,34 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\2571.gsc
-****************************/
+ * Script: 2571.gsc
+************************/
 
 func_98C9(param_00) {
-	if(!isdefined(self._blackboard.scriptableparts)) {
-		self._blackboard.scriptableparts = [];
+	if(!isdefined(self.var_1198.scriptableparts)) {
+		self.var_1198.scriptableparts = [];
 	}
 
-	if(!isdefined(self._blackboard.scriptableparts[param_00])) {
-		self._blackboard.scriptableparts[param_00] = spawnstruct();
-		self._blackboard.scriptableparts[param_00].state = "normal";
+	if(!isdefined(self.var_1198.scriptableparts[param_00])) {
+		self.var_1198.scriptableparts[param_00] = spawnstruct();
+		self.var_1198.scriptableparts[param_00].state = "normal";
 	}
 }
 
 func_F591(param_00,param_01) {
-	if(self._blackboard.scriptableparts[param_00].state == "dismember") {
+	if(self.var_1198.scriptableparts[param_00].state == "dismember") {
 		return;
 	}
 
-	if(self._blackboard.scriptableparts[param_00].state != "normal" && param_01 != "dismember") {
-		self._blackboard.scriptableparts[param_00].state = self._blackboard.scriptableparts[param_00].state + "_both";
+	if(self.var_1198.scriptableparts[param_00].state != "normal" && param_01 != "dismember") {
+		self.var_1198.scriptableparts[param_00].state = self.var_1198.scriptableparts[param_00].state + "_both";
 	}
 	else
 	{
-		self._blackboard.scriptableparts[param_00].state = param_01;
+		self.var_1198.scriptableparts[param_00].state = param_01;
 	}
 
-	self._blackboard.scriptableparts[param_00].time = gettime();
+	self.var_1198.scriptableparts[param_00].time = gettime();
 }
 
 func_F592(param_00,param_01,param_02) {
@@ -42,7 +42,7 @@ func_F592(param_00,param_01,param_02) {
 		return 1;
 	}
 
-	var_03 = self._blackboard.scriptableparts[param_00].state;
+	var_03 = self.var_1198.scriptableparts[param_00].state;
 	if(isdefined(level.var_5667[self.unittype])) {
 		if(param_00 != "head" && var_03 != "dismember") {
 			if(func_13077(self.unittype)) {
@@ -96,15 +96,15 @@ func_13077(param_00) {
 }
 
 func_7C35(param_00) {
-	if(!isdefined(self._blackboard.scriptableparts)) {
+	if(!isdefined(self.var_1198.scriptableparts)) {
 		return "normal";
 	}
 
-	if(!isdefined(self._blackboard.scriptableparts[param_00])) {
+	if(!isdefined(self.var_1198.scriptableparts[param_00])) {
 		return "normal";
 	}
 
-	return self._blackboard.scriptableparts[param_00].state;
+	return self.var_1198.scriptableparts[param_00].state;
 }
 
 func_2040() {

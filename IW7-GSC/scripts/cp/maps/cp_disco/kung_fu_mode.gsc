@@ -1,8 +1,8 @@
-/*************************************************************
+/*****************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\maps\cp_disco\kung_fu_mode.gsc
-*************************************************************/
+ * Script: scripts\cp\maps\cp_disco\kung_fu_mode.gsc
+*****************************************************/
 
 setup_kung_fu_powers() {
 	scripts\engine\utility::flag_wait("interactions_initialized");
@@ -184,7 +184,7 @@ can_enter_kung_fu_mode(param_00) {
 		return 0;
 	}
 
-	if(scripts/mp/agents/zombie/zombie_util::isplayerteleporting(param_00)) {
+	if(scripts\mp\agents\zombie\zombie_util::isplayerteleporting(param_00)) {
 		return 0;
 	}
 
@@ -293,7 +293,7 @@ throw_zombie_left(param_00,param_01,param_02,param_03) {
 	self.customdeath = 1;
 	self.disable_armor = 1;
 	var_04 = vectortoangles(self.origin - param_02.origin);
-	var_05 = function_02D3(var_04);
+	var_05 = anglestoleft(var_04);
 	var_06 = vectornormalize(var_05) * 2000;
 	self setvelocity(var_06 + (0,0,200));
 	wait(0.1);

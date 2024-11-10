@@ -1,8 +1,8 @@
-/*****************************************
+/*********************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\powers.gsc
-*****************************************/
+ * Script: scripts\mp\powers.gsc
+*********************************/
 
 init() {
 	level.powers = [];
@@ -43,14 +43,14 @@ init() {
 	powersetupfunctions("power_blackholeGrenade",undefined,undefined,undefined,undefined,undefined,undefined);
 	powersetupfunctions("power_shardBall",undefined,undefined,undefined,undefined,"powers_shardBall_used",undefined);
 	powersetupfunctions("power_wristRocket",::func_FB22,::func_12D6A,undefined,undefined,undefined,undefined);
-	thread scripts/mp/equipment/ground_pound::init();
-	thread scripts/mp/equipment/adrenaline::init();
-	thread scripts/mp/equipment/exploding_drone::func_69D5();
-	thread scripts/mp/equipment/deployable_cover::func_5223();
-	thread scripts/mp/equipment/wrist_rocket::wristrocketinit();
+	thread scripts\mp\equipment\ground_pound::init();
+	thread scripts\mp\equipment\adrenaline::init();
+	thread scripts\mp\equipment\exploding_drone::func_69D5();
+	thread scripts\mp\equipment\deployable_cover::func_5223();
+	thread scripts\mp\equipment\wrist_rocket::wristrocketinit();
 	thread scripts\mp\blackholegrenade::blackholegrenadeinit();
-	thread scripts/mp/equipment/split_grenade::init();
-	thread scripts/mp/equipment/spider_grenade::spidergrenade_init();
+	thread scripts\mp\equipment\split_grenade::init();
+	thread scripts\mp\equipment\spider_grenade::spidergrenade_init();
 	thread scripts\mp\trophy_system::func_12813();
 	thread scripts\mp\domeshield::domeshield_init();
 	thread scripts\mp\powers\blink_knife::blinkknifeinit();
@@ -76,19 +76,19 @@ func_D724(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_0
 func_D77D() {
 	var_00 = 1;
 	for(;;) {
-		var_01 = tablelookupbyrow("mp/powertable.csv",var_00,0);
+		var_01 = tablelookupbyrow("mp\powertable.csv",var_00,0);
 		if(var_01 == "") {
 			break;
 		}
 
-		var_02 = tablelookupbyrow("mp/powertable.csv",var_00,1);
-		var_03 = tablelookupbyrow("mp/powertable.csv",var_00,6);
-		var_04 = tablelookupbyrow("mp/powertable.csv",var_00,7);
-		var_05 = tablelookupbyrow("mp/powertable.csv",var_00,8);
-		var_06 = tablelookupbyrow("mp/powertable.csv",var_00,9);
-		var_07 = tablelookupbyrow("mp/powertable.csv",var_00,10);
-		var_08 = tablelookupbyrow("mp/powertable.csv",var_00,11);
-		var_09 = tablelookupbyrow("mp/powertable.csv",var_00,15);
+		var_02 = tablelookupbyrow("mp\powertable.csv",var_00,1);
+		var_03 = tablelookupbyrow("mp\powertable.csv",var_00,6);
+		var_04 = tablelookupbyrow("mp\powertable.csv",var_00,7);
+		var_05 = tablelookupbyrow("mp\powertable.csv",var_00,8);
+		var_06 = tablelookupbyrow("mp\powertable.csv",var_00,9);
+		var_07 = tablelookupbyrow("mp\powertable.csv",var_00,10);
+		var_08 = tablelookupbyrow("mp\powertable.csv",var_00,11);
+		var_09 = tablelookupbyrow("mp\powertable.csv",var_00,15);
 		func_D724(var_02,var_03,var_04,int(var_01),float(var_05),int(var_06),int(var_07),int(var_08),var_09);
 		if(isdefined(level.var_D7A4[var_04]) && var_04 != "<power_script_generic_weapon>") {
 			switch(var_04) {
@@ -109,14 +109,14 @@ func_D780() {
 
 	var_00 = 0;
 	for(;;) {
-		var_01 = tablelookupbyrow("mp/powerpassivetable.csv",var_00,0);
+		var_01 = tablelookupbyrow("mp\powerpassivetable.csv",var_00,0);
 		if(var_01 == "") {
 			break;
 		}
 
-		var_02 = tablelookupbyrow("mp/powerpassivetable.csv",var_00,1);
-		var_03 = tablelookupbyrow("mp/powerpassivetable.csv",var_00,2);
-		var_04 = tablelookupbyrow("mp/powerpassivetable.csv",var_00,3);
+		var_02 = tablelookupbyrow("mp\powerpassivetable.csv",var_00,1);
+		var_03 = tablelookupbyrow("mp\powerpassivetable.csv",var_00,2);
+		var_04 = tablelookupbyrow("mp\powerpassivetable.csv",var_00,3);
 		var_05 = spawnstruct();
 		if(var_04 != "") {
 			var_05.var_23B1 = var_04;
@@ -537,7 +537,7 @@ func_D725(param_00,param_01,param_02) {
 	var_04.slot = param_01;
 	var_04.charges = var_03.maxcharges;
 	if(scripts\mp\utility::istrue(param_02)) {
-		var_04.var_3D23++;
+		var_04.charges++;
 	}
 
 	var_04.maxcharges = var_04.charges;
@@ -838,39 +838,39 @@ func_13051() {
 func_F6B1(param_00) {}
 
 func_12C9F() {
-	scripts/mp/equipment/dash::func_E0E9();
+	scripts\mp\equipment\dash::func_E0E9();
 }
 
 func_13072() {
-	return scripts/mp/equipment/dash::func_4D90();
+	return scripts\mp\equipment\dash::func_4D90();
 }
 
 func_F7C8(param_00) {}
 
 func_12CFB() {
-	scripts/mp/equipment/optic_wave::func_E145();
+	scripts\mp\equipment\optic_wave::func_E145();
 }
 
 func_130B4() {
-	scripts/mp/equipment/optic_wave::func_C6AF();
+	scripts\mp\equipment\optic_wave::func_C6AF();
 }
 
 func_F7E7(param_00) {}
 
 func_12D0B() {
-	scripts/mp/equipment/phase_split::func_CABB();
+	scripts\mp\equipment\phase_split::func_CABB();
 }
 
 usephasesplit() {
-	return scripts/mp/equipment/phase_split::func_CAC2();
+	return scripts\mp\equipment\phase_split::func_CAC2();
 }
 
 func_F6EF(param_00) {
-	scripts/mp/equipment/exploding_drone::func_69D0(param_00);
+	scripts\mp\equipment\exploding_drone::func_69D0(param_00);
 }
 
 func_12CAF() {
-	scripts/mp/equipment/exploding_drone::func_69D3();
+	scripts\mp\equipment\exploding_drone::func_69D3();
 }
 
 func_13085() {}
@@ -878,43 +878,43 @@ func_13085() {}
 func_F7CC(param_00) {}
 
 func_12CFD() {
-	scripts/mp/equipment/overcharge::func_E14C();
+	scripts\mp\equipment\overcharge::func_E14C();
 }
 
 useovercharge() {
-	scripts/mp/equipment/overcharge::useovercharge();
+	scripts\mp\equipment\overcharge::useovercharge();
 }
 
 func_F84A(param_00) {}
 
 func_12D30() {
-	scripts/mp/equipment/smoke_wall::func_E16E();
+	scripts\mp\equipment\smoke_wall::func_E16E();
 }
 
 func_130D7() {
-	scripts/mp/equipment/smoke_wall::func_1037D();
+	scripts\mp\equipment\smoke_wall::func_1037D();
 }
 
 func_F69C(param_00) {}
 
 unsetcomlink(param_00) {
-	scripts/mp/equipment/commlink::func_E0E0();
+	scripts\mp\equipment\commlink::func_E0E0();
 }
 
 func_13055() {
-	scripts/mp/equipment/commlink::setturrettargetent();
+	scripts\mp\equipment\commlink::setturrettargetent();
 }
 
 func_F87F(param_00) {
-	scripts/mp/equipment/telereap::_meth_83B2();
+	scripts\mp\equipment\telereap::_meth_83B2();
 }
 
 func_12D45() {
-	scripts/mp/equipment/telereap::removethinker();
+	scripts\mp\equipment\telereap::removethinker();
 }
 
 func_130E8() {
-	var_00 = scripts/mp/equipment/telereap::func_130E8();
+	var_00 = scripts\mp\equipment\telereap::func_130E8();
 	return var_00;
 }
 
@@ -929,23 +929,23 @@ func_130D4() {
 }
 
 settransponder(param_00) {
-	scripts/mp/equipment/transponder::func_F5D3();
+	scripts\mp\equipment\transponder::func_F5D3();
 }
 
 unsettransponder() {
-	scripts/mp/equipment/transponder::removetransponder();
+	scripts\mp\equipment\transponder::removetransponder();
 }
 
 func_130F0() {
-	scripts/mp/equipment/transponder::transponder_use();
+	scripts\mp\equipment\transponder::transponder_use();
 }
 
 func_F7EB(param_00) {
-	scripts/mp/equipment/plasma_spear::giveplayeraccessory();
+	scripts\mp\equipment\plasma_spear::giveplayeraccessory();
 }
 
 func_12D0D() {
-	scripts/mp/equipment/plasma_spear::func_E158();
+	scripts\mp\equipment\plasma_spear::func_E158();
 }
 
 setheadgear(param_00) {
@@ -956,7 +956,7 @@ setheadgear(param_00) {
 unsetheadgear() {}
 
 func_1308F() {
-	scripts/mp/equipment/headgear::func_E855();
+	scripts\mp\equipment\headgear::func_E855();
 }
 
 func_F658(param_00) {
@@ -966,7 +966,7 @@ func_F658(param_00) {
 func_12C78() {}
 
 func_13049() {
-	scripts/mp/equipment/barrier::func_E83A();
+	scripts\mp\equipment\barrier::func_E83A();
 }
 
 func_F659(param_00) {}
@@ -974,73 +974,73 @@ func_F659(param_00) {}
 func_12C79() {}
 
 func_1304B() {
-	scripts/mp/equipment/battery::func_E83B();
+	scripts\mp\equipment\battery::func_E83B();
 }
 
 func_F7A5(param_00) {
-	scripts/mp/equipment/mortar_mount::func_BB90();
+	scripts\mp\equipment\mortar_mount::func_BB90();
 }
 
 func_12CF3() {
-	scripts/mp/equipment/mortar_mount::func_BB93();
+	scripts\mp\equipment\mortar_mount::func_BB93();
 }
 
 func_130A5() {
-	scripts/mp/equipment/mortar_mount::func_BB94();
+	scripts\mp\equipment\mortar_mount::func_BB94();
 }
 
 func_F62E(param_00) {}
 
 func_12C67() {
-	scripts/mp/equipment/adrenaline::removeadrenaline();
+	scripts\mp\equipment\adrenaline::removeadrenaline();
 }
 
 useadrenaline() {
-	thread scripts/mp/equipment/adrenaline::useadrenaline();
+	thread scripts\mp\equipment\adrenaline::useadrenaline();
 }
 
 func_F7AB(param_00) {
-	scripts/mp/equipment/multi_visor::func_F7AB();
+	scripts\mp\equipment\multi_visor::func_F7AB();
 }
 
 func_12CF6() {
-	scripts/mp/equipment/multi_visor::func_E13F();
+	scripts\mp\equipment\multi_visor::func_E13F();
 }
 
 func_130A7() {
-	scripts/mp/equipment/multi_visor::func_130A7();
+	scripts\mp\equipment\multi_visor::func_130A7();
 }
 
 func_F861(param_00) {
-	scripts/mp/archetypes/archscout::func_F861();
+	scripts\mp\archetypes\archscout::func_F861();
 }
 
 func_12D38() {
-	scripts/mp/archetypes/archscout::func_E175();
+	scripts\mp\archetypes\archscout::func_E175();
 }
 
 func_130E0() {
-	scripts/mp/archetypes/archscout::func_130E0();
+	scripts\mp\archetypes\archscout::func_130E0();
 }
 
 func_F7B5(param_00) {
-	scripts/mp/equipment/niagara::func_BFC9();
+	scripts\mp\equipment\niagara::func_BFC9();
 }
 
 func_12CF7() {
-	scripts/mp/equipment/niagara::func_BFCA();
+	scripts\mp\equipment\niagara::func_BFCA();
 }
 
 func_130AA() {
-	scripts/mp/equipment/niagara::func_BFCB();
+	scripts\mp\equipment\niagara::func_BFCB();
 }
 
 func_12D03() {
-	scripts/mp/equipment/peripheral_vision::func_CA2B();
+	scripts\mp\equipment\peripheral_vision::func_CA2B();
 }
 
 usepercent() {
-	scripts/mp/equipment/peripheral_vision::func_CA2C();
+	scripts\mp\equipment\peripheral_vision::func_CA2C();
 }
 
 func_F899(param_00) {
@@ -1052,37 +1052,37 @@ func_12D52() {
 }
 
 func_F677(param_00) {
-	scripts/mp/equipment/c4::c4_set();
+	scripts\mp\equipment\c4::c4_set();
 }
 
 func_F69E(param_00) {
-	scripts/mp/equipment/cone_flash::func_44FB();
+	scripts\mp\equipment\cone_flash::func_44FB();
 }
 
 unsetcooldown() {
-	scripts/mp/equipment/cone_flash::func_44FD();
+	scripts\mp\equipment\cone_flash::func_44FD();
 }
 
 func_13057() {
-	scripts/mp/equipment/cone_flash::func_44FF();
+	scripts\mp\equipment\cone_flash::func_44FF();
 }
 
 func_F664(param_00) {}
 
 func_12C80() {
-	scripts/mp/equipment/blackhat::func_E0D4();
+	scripts\mp\equipment\blackhat::func_E0D4();
 }
 
 func_1304D() {
-	scripts/mp/equipment/blackhat::func_13073();
+	scripts\mp\equipment\blackhat::func_13073();
 }
 
 func_FB22(param_00) {
-	scripts/mp/equipment/wrist_rocket::wristrocket_set();
+	scripts\mp\equipment\wrist_rocket::wristrocket_set();
 }
 
 func_12D6A() {
-	scripts/mp/equipment/wrist_rocket::wristrocket_unset();
+	scripts\mp\equipment\wrist_rocket::wristrocket_unset();
 }
 
 hasequipment(param_00) {
@@ -1605,10 +1605,10 @@ combatrecordpoweruse(param_00) {
 	}
 
 	var_01 = undefined;
-	if(function_02D9("mp","LethalStatItems",param_00)) {
+	if(isenumvaluevalid("mp","LethalStatItems",param_00)) {
 		var_01 = "lethalStats";
 	}
-	else if(function_02D9("mp","TacticalStatItems",param_00)) {
+	else if(isenumvaluevalid("mp","TacticalStatItems",param_00)) {
 		var_01 = "tacticalStats";
 	}
 	else

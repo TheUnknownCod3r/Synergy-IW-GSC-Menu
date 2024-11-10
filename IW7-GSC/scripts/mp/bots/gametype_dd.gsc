@@ -1,8 +1,8 @@
-/***************************************************
+/*******************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\bots\gametype_dd.gsc
-***************************************************/
+ * Script: scripts\mp\bots\gametype_dd.gsc
+*******************************************/
 
 main() {
 	setup_callbacks();
@@ -44,7 +44,7 @@ monitor_zone_control() {
 			}
 
 			if(var_01 != "neutral") {
-				function_002B(var_00,var_01);
+				botzonesetteam(var_00,var_01);
 			}
 		}
 	}
@@ -59,7 +59,7 @@ iw7_ship_hack_add_bombzone_node(param_00,param_01) {
 
 bot_fixup_bombzone_issues() {
 	if(level.mapname == "mp_metropolis") {
-		if(scripts\mp\_utility::inovertime() && level.bombzones[0].bottargets.size == 0) {
+		if(scripts\mp\utility::inovertime() && level.bombzones[0].bottargets.size == 0) {
 			var_00 = (-505,-361,68);
 			iw7_ship_hack_add_bombzone_node(0,var_00);
 			var_00 = (-582,-311,68);
@@ -99,7 +99,7 @@ getovertimebombzone() {
 }
 
 isattacker() {
-	if(!scripts\mp\_utility::inovertime()) {
+	if(!scripts\mp\utility::inovertime()) {
 		if(self.team == game["attackers"]) {
 			return 1;
 		}
@@ -120,7 +120,7 @@ isattacker() {
 }
 
 isdefender() {
-	if(!scripts\mp\_utility::inovertime()) {
+	if(!scripts\mp\utility::inovertime()) {
 		if(self.team == game["defenders"]) {
 			return 1;
 		}
@@ -172,7 +172,7 @@ bot_dd_think() {
 			continue;
 		}
 
-		if(scripts\mp\_utility::inovertime() && !isdefined(self.current_bombzone)) {
+		if(scripts\mp\utility::inovertime() && !isdefined(self.current_bombzone)) {
 			self.current_bombzone = getovertimebombzone();
 		}
 
@@ -289,7 +289,7 @@ func_787A(param_00,param_01) {
 			continue;
 		}
 
-		if(isalive(var_04) && scripts\mp\_utility::isteamparticipant(var_04) && isdefined(var_04.current_bombzone) && var_04.current_bombzone == param_00) {
+		if(isalive(var_04) && scripts\mp\utility::isteamparticipant(var_04) && isdefined(var_04.current_bombzone) && var_04.current_bombzone == param_00) {
 			var_02[var_02.size] = var_04;
 		}
 	}
@@ -362,7 +362,7 @@ func_12DC2() {
 
 	if(level.var_D88D == 2 && var_00.size == 1) {
 		foreach(var_05 in level.participants) {
-			if(scripts\mp\_utility::isteamparticipant(var_05) && isdefined(var_05.current_bombzone) && var_05.current_bombzone != var_00[0]) {
+			if(scripts\mp\utility::isteamparticipant(var_05) && isdefined(var_05.current_bombzone) && var_05.current_bombzone != var_00[0]) {
 				var_05.current_bombzone = undefined;
 				var_05 scripts\mp\bots\_bots_strategy::bot_defend_stop();
 				var_05 notify("dem_bomb_exploded");
@@ -386,7 +386,7 @@ func_12DAD(param_00) {
 
 	var_01 = 0;
 	foreach(var_03 in level.participants) {
-		if(scripts\mp\_utility::isaiteamparticipant(var_03) && isalive(var_03) && var_03 isattacker()) {
+		if(scripts\mp\utility::isaiteamparticipant(var_03) && isalive(var_03) && var_03 isattacker()) {
 			var_01++;
 		}
 	}
@@ -435,7 +435,7 @@ func_12DAD(param_00) {
 func_12DAE(param_00) {
 	var_01 = 0;
 	foreach(var_03 in level.participants) {
-		if(scripts\mp\_utility::isaiteamparticipant(var_03) && isalive(var_03) && var_03 isdefender()) {
+		if(scripts\mp\utility::isaiteamparticipant(var_03) && isalive(var_03) && var_03 isdefender()) {
 			var_01++;
 		}
 	}
@@ -446,8 +446,8 @@ func_12DAE(param_00) {
 		param_00[level.var_BB52].bots_defending_wanted = param_00[level.var_BB52].bots_defending_wanted + var_01 % 2;
 		for(var_05 = 0;var_05 < param_00.size;var_05++) {
 			if(func_9B7E(param_00[var_05])) {
-				param_00[var_05].var_2EED++;
-				param_00[1 - var_05].var_2EED--;
+				param_00[var_05].bots_defending_wanted++;
+				param_00[1 - var_05].bots_defending_wanted--;
 			}
 		}
 	}

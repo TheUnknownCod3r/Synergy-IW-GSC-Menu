@@ -1,8 +1,8 @@
-/**************************************************************************
+/******************************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\maps\cp_final\cp_final_ghost_activation.gsc
-**************************************************************************/
+ * Script: scripts\cp\maps\cp_final\cp_final_ghost_activation.gsc
+******************************************************************/
 
 init_ghost_n_skull_5_quest() {
 	scripts\cp\maps\cp_final\cp_final_mpq::finalqueststepregistration("ghostFive",0,::blank,::blow_up_ghost_box,::complete_blow_up_ghost_box,::debug_blow_up_ghost_box,5,"Blow up Ghost-n-Skull box");
@@ -1319,7 +1319,7 @@ any_other_player_looking_at_it(param_00,param_01) {
 }
 
 player_in_play_space(param_00,param_01) {
-	return function_010F(param_00.origin,param_01.play_area);
+	return ispointinvolume(param_00.origin,param_01.play_area);
 }
 
 player_looking_at_any_queen_piece_struct(param_00) {
@@ -1898,14 +1898,14 @@ cp_final_gns_5_setup() {
 }
 
 load_cp_final_ghost_vfx() {
-	level._effect["ghost_explosion_death_red"] = loadfx("vfx/iw7/core/zombie/ghosts_n_skulls/vfx_zmb_ghost_imp_red.vfx");
-	level._effect["ghost_explosion_death_yellow"] = loadfx("vfx/iw7/core/zombie/ghosts_n_skulls/vfx_zmb_ghost_imp_yellow.vfx");
-	level._effect["ghost_explosion_death_blue"] = loadfx("vfx/iw7/core/zombie/ghosts_n_skulls/vfx_zmb_ghost_imp_blue.vfx");
-	level._effect["combo_arc_long_green"] = loadfx("vfx/iw7/core/zombie/ghosts_n_skulls/vfx_ghost_combo_arc_long_green.vfx");
-	level._effect["combo_arc_long_blue"] = loadfx("vfx/iw7/core/zombie/ghosts_n_skulls/vfx_ghost_combo_arc_long_blue.vfx");
-	level._effect["combo_arc_long_yellow"] = loadfx("vfx/iw7/core/zombie/ghosts_n_skulls/vfx_ghost_combo_arc_long_yellow.vfx");
-	level._effect["sb_quest_item_pickup"] = loadfx("vfx/iw7/core/zombie/vfx_zom_souvenir_pickup.vfx");
-	level._effect["gns_skull_meter_burst"] = loadfx("vfx/iw7/levels/cp_final/gns/vfx_skull_complete.vfx");
+	level._effect["ghost_explosion_death_red"] = loadfx("vfx\iw7\core\zombie\ghosts_n_skulls\vfx_zmb_ghost_imp_red.vfx");
+	level._effect["ghost_explosion_death_yellow"] = loadfx("vfx\iw7\core\zombie\ghosts_n_skulls\vfx_zmb_ghost_imp_yellow.vfx");
+	level._effect["ghost_explosion_death_blue"] = loadfx("vfx\iw7\core\zombie\ghosts_n_skulls\vfx_zmb_ghost_imp_blue.vfx");
+	level._effect["combo_arc_long_green"] = loadfx("vfx\iw7\core\zombie\ghosts_n_skulls\vfx_ghost_combo_arc_long_green.vfx");
+	level._effect["combo_arc_long_blue"] = loadfx("vfx\iw7\core\zombie\ghosts_n_skulls\vfx_ghost_combo_arc_long_blue.vfx");
+	level._effect["combo_arc_long_yellow"] = loadfx("vfx\iw7\core\zombie\ghosts_n_skulls\vfx_ghost_combo_arc_long_yellow.vfx");
+	level._effect["sb_quest_item_pickup"] = loadfx("vfx\iw7\core\zombie\vfx_zom_souvenir_pickup.vfx");
+	level._effect["gns_skull_meter_burst"] = loadfx("vfx\iw7\levels\cp_final\gns\vfx_skull_complete.vfx");
 }
 
 gns4_formation_movement() {
@@ -2117,12 +2117,12 @@ explode_combo_group(param_00,param_01) {
 		if(isdefined(var_06)) {
 			var_04++;
 			playfx(level._effect["ghost_explosion_death_" + var_06.color],var_06.origin,anglestoforward(var_06.angles),anglestoup(var_06.angles));
-			scripts/aitypes/zombie_ghost/behaviors::remove_moving_target_default(var_06,param_01);
+			scripts\aitypes\zombie_ghost\behaviors::remove_moving_target_default(var_06,param_01);
 		}
 	}
 
 	if(var_04 >= 10 && !scripts\engine\utility::istrue(param_01.combo_achievement_awarded)) {
-		param_01 scripts/cp/zombies/achievement::update_achievement("SUPER_DUPER_COMBO",1);
+		param_01 scripts\cp\zombies\achievement::update_achievement("SUPER_DUPER_COMBO",1);
 		param_01.combo_achievement_awarded = 1;
 	}
 }
@@ -2269,7 +2269,7 @@ create_combo_link_between(param_00,param_01) {
 		var_03 = param_01.origin;
 		var_04 = var_03 - var_02;
 		var_05 = vectortoangles(var_04);
-		function_02E0(level._effect["combo_arc_long_" + param_00.color],var_02,var_05,var_03);
+		playfxbetweenpoints(level._effect["combo_arc_long_" + param_00.color],var_02,var_05,var_03);
 		wait(0.2);
 	}
 }
@@ -2279,7 +2279,7 @@ final_gns_player_reward_func() {
 		var_01 thread scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::give_gns_base_reward(var_01);
 		var_01 scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::set_consumable_meter_scalar(var_01,2);
 		if(!scripts\engine\utility::istrue(level.entered_thru_card)) {
-			var_01 scripts/cp/zombies/achievement::update_achievement("CRACKING_SKULLS",1);
+			var_01 scripts\cp\zombies\achievement::update_achievement("CRACKING_SKULLS",1);
 		}
 	}
 
@@ -2301,10 +2301,10 @@ final_pre_gns_end_func() {
 }
 
 reactivate_skullbuster_cabinet() {
-	if(!scripts/cp/zombies/zombie_quest::quest_line_exist("reactivateghost")) {
-		scripts/cp/zombies/zombie_quest::register_quest_step("reactivateghost",0,::scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::reactivate_cabinet,::secret_button_combo,::complete_secret_button_combo,::debug_secret_button_combo,5,"Enter secret button combo");
-		scripts/cp/zombies/zombie_quest::register_quest_step("reactivateghost",1,::blank,::wait_for_player_activation,::complete_clean_arcade_cabinet,::debug_wait_for_player_activation,5,"Wait for player activation");
+	if(!scripts\cp\zombies\zombie_quest::quest_line_exist("reactivateghost")) {
+		scripts\cp\zombies\zombie_quest::register_quest_step("reactivateghost",0,::scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::reactivate_cabinet,::secret_button_combo,::complete_secret_button_combo,::debug_secret_button_combo,5,"Enter secret button combo");
+		scripts\cp\zombies\zombie_quest::register_quest_step("reactivateghost",1,::blank,::wait_for_player_activation,::complete_clean_arcade_cabinet,::debug_wait_for_player_activation,5,"Wait for player activation");
 	}
 
-	level thread scripts/cp/zombies/zombie_quest::start_quest_line("reactivateghost");
+	level thread scripts\cp\zombies\zombie_quest::start_quest_line("reactivateghost");
 }

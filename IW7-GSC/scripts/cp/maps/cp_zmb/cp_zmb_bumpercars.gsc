@@ -1,8 +1,8 @@
-/****************************************************************
+/********************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\maps\cp_zmb\cp_zmb_bumpercars.gsc
-****************************************************************/
+ * Script: scripts\cp\maps\cp_zmb\cp_zmb_bumpercars.gsc
+********************************************************/
 
 init_bumper_cars() {
 	var_00 = getentarray("bumper_car","targetname");
@@ -65,7 +65,7 @@ activate_bumper_car(param_00) {
 	wait(randomfloatrange(1,3));
 	if(self.state == "fwd") {
 		for(;;) {
-			var_04 = function_0288(self.origin + (0,0,60),self.fwd_spot.origin + (0,0,60),32,var_01,var_02,"physicsquery_all");
+			var_04 = physics_spherecast(self.origin + (0,0,60),self.fwd_spot.origin + (0,0,60),32,var_01,var_02,"physicsquery_all");
 			if(var_04.size == 0) {
 				break;
 			}
@@ -125,7 +125,7 @@ activate_bumper_car(param_00) {
 	else
 	{
 		for(;;) {
-			var_04 = function_0288(self.origin + (0,0,60),self.rear_spot.origin + (0,0,60),32,var_01,var_02,"physicsquery_all");
+			var_04 = physics_spherecast(self.origin + (0,0,60),self.rear_spot.origin + (0,0,60),32,var_01,var_02,"physicsquery_all");
 			if(var_04.size == 0) {
 				break;
 			}
@@ -190,7 +190,7 @@ activate_bumper_car(param_00) {
 	self waittill("movedone");
 	wait(0.1);
 	self.can_damage = 0;
-	self.nav_obs = function_027A(self.origin,(56,32,32),self.angles);
+	self.nav_obs = createnavobstaclebybounds(self.origin,(56,32,32),self.angles);
 	var_07 = scripts\engine\utility::getclosest(self.origin,level.bumper_car_impact_spots,128);
 	if(isdefined(var_07)) {
 		playfx(level._effect["bumpercar_impact"],var_07.origin,anglestoforward((0,270,0)),anglestoup((0,270,0)));

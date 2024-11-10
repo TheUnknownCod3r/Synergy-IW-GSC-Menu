@@ -1,8 +1,8 @@
-/******************************************************
+/**********************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\cp_music_and_dialog.gsc
-******************************************************/
+ * Script: scripts\cp\cp_music_and_dialog.gsc
+**********************************************/
 
 init() {
 	scripts\engine\utility::flag_init("vo_system_setup_done");

@@ -1,46 +1,46 @@
-/*******************************************************
+/***********************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\killstreaks\_utility.gsc
-*******************************************************/
+ * Script: scripts\mp\killstreaks\_utility.gsc
+***********************************************/
 
 func_1843(param_00,param_01,param_02,param_03,param_04) {
 	var_05 = self getentitynumber();
 	self.var_1653 = param_02 func_7D98();
 	if(isdefined(param_00)) {
-		if(scripts\mp\_utility::func_9FBA(param_00)) {
+		if(scripts\mp\utility::func_9FBA(param_00)) {
 			func_1863(var_05);
 			thread func_E121(var_05);
 		}
-		else if(scripts\mp\_utility::func_9D35(param_00)) {
+		else if(scripts\mp\utility::func_9D35(param_00)) {
 			func_1844(var_05);
 			thread func_E0FE(var_05);
 		}
-		else if(scripts\mp\_utility::func_9E7F(param_00)) {
+		else if(scripts\mp\utility::func_9E7F(param_00)) {
 			addtolittlebirdlist(var_05);
 			thread func_E111(var_05);
 		}
-		else if(scripts\mp\_utility::func_9E2D(param_00)) {
+		else if(scripts\mp\utility::func_9E2D(param_00)) {
 			func_184E(var_05);
 			thread func_E10A(var_05);
 		}
-		else if(scripts\mp\_utility::func_9F67(param_00)) {
+		else if(scripts\mp\utility::func_9F67(param_00)) {
 			func_185A(var_05);
 			thread func_E118(var_05);
 		}
-		else if(scripts\mp\_utility::func_9D61(param_00)) {
+		else if(scripts\mp\utility::func_9D61(param_00)) {
 			func_1847(var_05);
 			thread func_E102(var_05);
 		}
-		else if(scripts\mp\_utility::func_9FB7(param_00)) {
+		else if(scripts\mp\utility::func_9FB7(param_00)) {
 			func_1862(var_05);
 			thread func_E120(var_05);
 		}
-		else if(scripts\mp\_utility::func_9D82(param_00)) {
+		else if(scripts\mp\utility::func_9D82(param_00)) {
 			func_184A(var_05);
 			thread func_E105(var_05);
 		}
-		else if(scripts\mp\_utility::func_9F0F(param_00)) {
+		else if(scripts\mp\utility::func_9F0F(param_00)) {
 			func_1857(var_05);
 			thread func_E115(var_05);
 		}
@@ -50,25 +50,25 @@ func_1843(param_00,param_01,param_02,param_03,param_04) {
 			thread removefromplayerkillstreaklistondeath(var_05);
 		}
 
-		if(scripts\mp\_utility::iskillstreakaffectedbyemp(param_00)) {
+		if(scripts\mp\utility::iskillstreakaffectedbyemp(param_00)) {
 			self.var_18DD = 1;
 		}
 
-		if(scripts\mp\_utility::func_9E6A(param_00)) {
+		if(scripts\mp\utility::func_9E6A(param_00)) {
 			self.var_18DE = 1;
 		}
 	}
 
 	level.var_1655[var_05] = self;
 	level.var_1655[var_05].streakname = param_00;
-	if(scripts\mp\_utility::istrue(param_03)) {
+	if(scripts\mp\utility::istrue(param_03)) {
 		var_06 = undefined;
 		var_07 = undefined;
 		if(level.teambased) {
-			if(scripts\mp\_utility::func_9F2C(param_00)) {
+			if(scripts\mp\utility::func_9F2C(param_00)) {
 				foreach(var_09 in level.players) {
 					if(var_09.team == self.team && var_09 != self.triggerportableradarping) {
-						var_06 = scripts\mp\_utility::outlineenableforplayer(self,"cyan",var_09,0,0,"lowest");
+						var_06 = scripts\mp\utility::outlineenableforplayer(self,"cyan",var_09,0,0,"lowest");
 					}
 
 					if(isdefined(var_06)) {
@@ -80,15 +80,15 @@ func_1843(param_00,param_01,param_02,param_03,param_04) {
 			}
 			else
 			{
-				var_06 = scripts\mp\_utility::outlineenableforteam(self,"cyan",param_02.team,0,0,"lowest");
+				var_06 = scripts\mp\utility::outlineenableforteam(self,"cyan",param_02.team,0,0,"lowest");
 			}
 		}
 		else
 		{
-			var_06 = scripts\mp\_utility::outlineenableforplayer(self,"cyan",param_02,0,0,"lowest");
+			var_06 = scripts\mp\utility::outlineenableforplayer(self,"cyan",param_02,0,0,"lowest");
 		}
 
-		if(!scripts\mp\_utility::istrue(var_07)) {
+		if(!scripts\mp\utility::istrue(var_07)) {
 			thread func_E14B(var_06,param_04);
 		}
 	}
@@ -98,7 +98,7 @@ func_1843(param_00,param_01,param_02,param_03,param_04) {
 		scripts\mp\sentientpoolmanager::registersentient(param_01,param_02,var_0B,param_04);
 	}
 
-	thread scripts\mp\_missions::func_A691(param_00);
+	thread scripts\mp\missions::func_A691(param_00);
 }
 
 func_7D98() {
@@ -118,7 +118,7 @@ func_E14B(param_00,param_01) {
 	}
 
 	scripts\engine\utility::waittill_any_in_array_return_no_endon_death(var_02);
-	scripts\mp\_utility::outlinedisable(param_00,self);
+	scripts\mp\utility::outlinedisable(param_00,self);
 }
 
 func_E0FD(param_00) {
@@ -379,7 +379,7 @@ func_20CF(param_00,param_01) {
 	var_03 = self.triggerportableradarping;
 	var_04 = undefined;
 	var_05 = undefined;
-	if(!scripts\mp\_utility::isreallyalive(param_00) || param_00.team == "spectator") {
+	if(!scripts\mp\utility::isreallyalive(param_00) || param_00.team == "spectator") {
 		return;
 	}
 
@@ -398,13 +398,13 @@ func_20CF(param_00,param_01) {
 	}
 
 	if(isdefined(var_04)) {
-		if(scripts\mp\_utility::istrue(var_05)) {
-			if(param_00 scripts\mp\_utility::_hasperk("specialty_noplayertarget")) {
+		if(scripts\mp\utility::istrue(var_05)) {
+			if(param_00 scripts\mp\utility::_hasperk("specialty_noplayertarget")) {
 				return;
 			}
 		}
 
-		var_06 = scripts\mp\_utility::outlineenableforplayer(param_00,var_04,self.triggerportableradarping,1,1,"killstreak");
+		var_06 = scripts\mp\utility::outlineenableforplayer(param_00,var_04,self.triggerportableradarping,1,1,"killstreak");
 		thread func_13ADD(var_06,param_00,param_01);
 		thread func_13ADE(var_06,param_00,param_01);
 	}
@@ -415,23 +415,23 @@ func_13ADD(param_00,param_01,param_02) {
 	param_01 endon("death");
 	level endon("game_ended");
 	self waittill(param_02);
-	scripts\mp\_utility::outlinedisable(param_00,param_01);
+	scripts\mp\utility::outlinedisable(param_00,param_01);
 }
 
 func_13ADE(param_00,param_01,param_02) {
 	self endon(param_02);
 	level endon("game_ended");
 	param_01 scripts\engine\utility::waittill_any_3("death","disconnect");
-	scripts\mp\_utility::outlinedisable(param_00,param_01);
+	scripts\mp\utility::outlinedisable(param_00,param_01);
 }
 
 getmodifiedantikillstreakdamage(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08) {
-	param_03 = scripts\mp\_damage::handleshotgundamage(param_01,param_02,param_03);
-	param_03 = scripts\mp\_damage::handleapdamage(param_01,param_02,param_03,param_00);
-	var_09 = scripts\mp\_weapons::isaltmodeweapon(param_01);
+	param_03 = scripts\mp\damage::handleshotgundamage(param_01,param_02,param_03);
+	param_03 = scripts\mp\damage::handleapdamage(param_01,param_02,param_03,param_00);
+	var_09 = scripts\mp\weapons::isaltmodeweapon(param_01);
 	var_0A = 0;
-	if(scripts\mp\_utility::istrue(var_09)) {
-		var_0B = scripts\mp\_utility::getweaponattachmentsbasenames(param_01);
+	if(scripts\mp\utility::istrue(var_09)) {
+		var_0B = scripts\mp\utility::getweaponattachmentsbasenames(param_01);
 		foreach(var_0D in var_0B) {
 			if(var_0D == "gl") {
 				var_0A = 1;
@@ -441,7 +441,7 @@ getmodifiedantikillstreakdamage(param_00,param_01,param_02,param_03,param_04,par
 	}
 
 	var_0F = undefined;
-	var_10 = scripts\mp\_utility::getweaponbasedsmokegrenadecount(param_01);
+	var_10 = scripts\mp\utility::getweaponbasedsmokegrenadecount(param_01);
 	if(param_02 != "MOD_MELEE") {
 		switch(var_10) {
 			case "iw7_lockon_mp":
@@ -465,7 +465,7 @@ getmodifiedantikillstreakdamage(param_00,param_01,param_02,param_03,param_04,par
 
 			case "iw7_tacburst_mpl":
 			case "iw7_tacburst_mp":
-				if(scripts\mp\_utility::istrue(var_0A)) {
+				if(scripts\mp\utility::istrue(var_0A)) {
 					self.largeprojectiledamage = 1;
 					var_0F = param_06;
 				}
@@ -486,7 +486,7 @@ getmodifiedantikillstreakdamage(param_00,param_01,param_02,param_03,param_04,par
 
 			case "iw7_mp28_mpl":
 			case "iw7_arclassic_mp":
-				if(scripts\mp\_utility::istrue(var_0A)) {
+				if(scripts\mp\utility::istrue(var_0A)) {
 					self.largeprojectiledamage = 0;
 					var_0F = param_07;
 				}
@@ -526,10 +526,10 @@ getmodifiedantikillstreakdamage(param_00,param_01,param_02,param_03,param_04,par
 
 isexplosiveantikillstreakweapon(param_00) {
 	var_01 = 0;
-	var_02 = scripts\mp\_weapons::isaltmodeweapon(param_00);
+	var_02 = scripts\mp\weapons::isaltmodeweapon(param_00);
 	var_03 = 0;
-	if(scripts\mp\_utility::istrue(var_02)) {
-		var_04 = scripts\mp\_utility::getweaponattachmentsbasenames(param_00);
+	if(scripts\mp\utility::istrue(var_02)) {
+		var_04 = scripts\mp\utility::getweaponattachmentsbasenames(param_00);
 		foreach(var_06 in var_04) {
 			if(var_06 == "gl") {
 				var_03 = 1;
@@ -538,7 +538,7 @@ isexplosiveantikillstreakweapon(param_00) {
 		}
 	}
 
-	var_08 = scripts\mp\_utility::getweaponbasedsmokegrenadecount(param_00);
+	var_08 = scripts\mp\utility::getweaponbasedsmokegrenadecount(param_00);
 	switch(var_08) {
 		case "sentry_shock_missile_mp":
 		case "jackal_cannon_mp":
@@ -564,7 +564,7 @@ isexplosiveantikillstreakweapon(param_00) {
 			break;
 
 		case "iw7_arclassic_mp":
-			if(scripts\mp\_utility::istrue(var_03)) {
+			if(scripts\mp\utility::istrue(var_03)) {
 				var_01 = 1;
 			}
 			break;
@@ -588,11 +588,11 @@ dodamagetokillstreak(param_00,param_01,param_02,param_03,param_04,param_05,param
 	var_0E = undefined;
 	if(isdefined(param_03)) {
 		if(level.teambased) {
-			if(!scripts\mp\_utility::func_9FE7(param_01,param_03,self)) {
+			if(!scripts\mp\utility::func_9FE7(param_01,param_03,self)) {
 				return;
 			}
 		}
-		else if(!scripts\mp\_utility::func_9FD8(param_01,param_03,self)) {
+		else if(!scripts\mp\utility::func_9FD8(param_01,param_03,self)) {
 			return;
 		}
 	}
@@ -617,7 +617,7 @@ func_139B5(param_00,param_01,param_02) {
 	var_03 = self.triggerportableradarping;
 	var_03 endon("disconnect");
 	var_04 = self;
-	if(scripts\mp\_utility::func_9EF0(self)) {
+	if(scripts\mp\utility::func_9EF0(self)) {
 		var_04 = var_03;
 	}
 
@@ -629,15 +629,15 @@ func_139B5(param_00,param_01,param_02) {
 			continue;
 		}
 
-		if(scripts\mp\_utility::func_9EF0(self) && getplayerkillstreakcombatmode(self) == "NONE") {
+		if(scripts\mp\utility::func_9EF0(self) && getplayerkillstreakcombatmode(self) == "NONE") {
 			continue;
 		}
 
-		if(scripts\mp\_utility::func_9FAE(var_05)) {
+		if(scripts\mp\utility::func_9FAE(var_05)) {
 			continue;
 		}
 
-		if(scripts\mp\_utility::istouchingboundsnullify(var_05)) {
+		if(scripts\mp\utility::istouchingboundsnullify(var_05)) {
 			continue;
 		}
 
@@ -653,7 +653,7 @@ func_13B85(param_00) {
 	}
 
 	var_02 = self;
-	if(scripts\mp\_utility::func_9EF0(self)) {
+	if(scripts\mp\utility::func_9EF0(self)) {
 		var_02 = var_01;
 	}
 
@@ -672,24 +672,24 @@ func_13B84(param_00,param_01,param_02) {
 	var_03 = self.triggerportableradarping;
 	var_03 endon("disconnect");
 	var_04 = self;
-	if(scripts\mp\_utility::func_9EF0(self)) {
+	if(scripts\mp\utility::func_9EF0(self)) {
 		var_04 = var_03;
 	}
 
 	var_04 endon(param_01);
 	level endon("game_ended");
 	if(!isdefined(self.lastboundstimelimit)) {
-		self.lastboundstimelimit = scripts\mp\_utility::func_7F9B();
+		self.lastboundstimelimit = scripts\mp\utility::func_7F9B();
 	}
 
 	var_05 = gettime() + int(self.lastboundstimelimit * 1000);
 	self.var_1D44 = 1;
 	var_06 = var_03;
-	if(scripts\mp\_utility::func_9EF0(self)) {
+	if(scripts\mp\utility::func_9EF0(self)) {
 		var_06 = self;
 	}
 
-	if(!scripts\mp\_utility::func_9EF0(self) || scripts\mp\_utility::func_9EF0(self) && getplayerkillstreakcombatmode(self) == "MANUAL") {
+	if(!scripts\mp\utility::func_9EF0(self) || scripts\mp\utility::func_9EF0(self) && getplayerkillstreakcombatmode(self) == "MANUAL") {
 		var_03 setclientomnvar("ui_out_of_bounds_countdown",var_05);
 		var_06 _meth_859E("mp_out_of_bounds");
 	}
@@ -712,9 +712,9 @@ func_13B84(param_00,param_01,param_02) {
 		self.var_1D44 = undefined;
 	}
 
-	if(scripts\mp\_utility::istrue(var_07)) {
+	if(scripts\mp\utility::istrue(var_07)) {
 		self.lastboundstimelimit = undefined;
-		if(scripts\mp\_utility::func_9EF0(self)) {
+		if(scripts\mp\utility::func_9EF0(self)) {
 			var_04 notify(param_01,0);
 			return;
 		}
@@ -731,7 +731,7 @@ watchtimelimitcooldown() {
 	self endon("death");
 	self notify("start_time_limit_cooldown");
 	self endon("start_time_limit_cooldown");
-	var_00 = scripts\mp\_utility::getmaxoutofboundscooldown();
+	var_00 = scripts\mp\utility::getmaxoutofboundscooldown();
 	while(var_00 > 0) {
 		scripts\engine\utility::waitframe();
 		var_00 = var_00 - 0.05;
@@ -762,11 +762,11 @@ getfirstprimaryweapon() {
 func_CF1D(param_00,param_01) {
 	self endon("death");
 	if(!isdefined(level._effect["dlight_large"])) {
-		level._effect["dlight_large"] = loadfx("vfx/iw7/_requests/mp/vfx_killstreak_dlight");
+		level._effect["dlight_large"] = loadfx("vfx\iw7\_requests\mp\vfx_killstreak_dlight");
 	}
 
 	if(!isdefined(level._effect["dlight_small"])) {
-		level._effect["dlight_small"] = loadfx("vfx/iw7/_requests/mp/vfx_killstreak_dlight_small");
+		level._effect["dlight_small"] = loadfx("vfx\iw7\_requests\mp\vfx_killstreak_dlight_small");
 	}
 
 	if(!isdefined(param_00)) {
@@ -778,7 +778,7 @@ func_CF1D(param_00,param_01) {
 	}
 
 	var_02 = scripts\engine\utility::getfx("dlight_large");
-	if(scripts\mp\_utility::istrue(self.isairdrop)) {
+	if(scripts\mp\utility::istrue(self.isairdrop)) {
 		var_02 = scripts\engine\utility::getfx("dlight_small");
 	}
 
@@ -828,7 +828,7 @@ watchsupertrophynotify(param_00) {
 			continue;
 		}
 
-		param_00 scripts\mp\_damagefeedback::updatedamagefeedback("");
+		param_00 scripts\mp\damagefeedback::updatedamagefeedback("");
 		break;
 	}
 }
@@ -863,7 +863,7 @@ watchhostmigrationlifetime(param_00,param_01,param_02) {
 	if(isdefined(self.var_DCFC) && getplayerkillstreakcombatmode(self.var_DCFC) == "MANUAL") {
 		self.var_DCFC setclientomnvar("ui_remote_c8_countdown",var_07);
 	}
-	else if(isdefined(self.streakname) && scripts\mp\_utility::func_9F2C(self.streakname)) {
+	else if(isdefined(self.streakname) && scripts\mp\utility::func_9F2C(self.streakname)) {
 		self.triggerportableradarping setclientomnvar("ui_killstreak_countdown",var_07);
 	}
 
@@ -873,7 +873,7 @@ watchhostmigrationlifetime(param_00,param_01,param_02) {
 func_7E92(param_00) {
 	var_01 = [];
 	foreach(var_03 in level.players) {
-		if(param_00 scripts\mp\_utility::isenemy(var_03)) {
+		if(param_00 scripts\mp\utility::isenemy(var_03)) {
 			var_01[var_01.size] = var_03;
 		}
 	}
@@ -883,11 +883,11 @@ func_7E92(param_00) {
 
 manualmissilecantracktarget(param_00) {
 	var_01 = 1;
-	if(!isdefined(param_00) || !scripts\mp\_utility::isreallyalive(param_00)) {
+	if(!isdefined(param_00) || !scripts\mp\utility::isreallyalive(param_00)) {
 		var_01 = 0;
 	}
 
-	if(param_00 isinphase() || scripts\mp\_utility::istrue(param_00.var_9D8B) || param_00 scripts\mp\_utility::_hasperk("specialty_noscopeoutline")) {
+	if(param_00 isinphase() || scripts\mp\utility::istrue(param_00.var_9D8B) || param_00 scripts\mp\utility::_hasperk("specialty_noscopeoutline")) {
 		var_01 = 0;
 	}
 

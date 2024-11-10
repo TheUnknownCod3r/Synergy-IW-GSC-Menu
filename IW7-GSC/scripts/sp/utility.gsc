@@ -1,14 +1,14 @@
-/******************************************
+/**********************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\sp\utility.gsc
-******************************************/
+ * Script: scripts\sp\utility.gsc
+**********************************/
 
 func_7CCC(param_00) {
 	var_01 = [];
-	var_02 = function_00BC(param_00);
+	var_02 = getnumparts(param_00);
 	for(var_03 = 0;var_03 < var_02;var_03++) {
-		var_01[var_01.size] = function_00BF(param_00,var_03);
+		var_01[var_01.size] = getpartname(param_00,var_03);
 	}
 
 	return var_01;
@@ -375,7 +375,7 @@ func_ABD2() {
 
 	scripts\engine\utility::flag_set("game_saving");
 	var_02 = "levelshots / autosave / autosave_" + level.script + "end";
-	function_01A0("levelend",&"AUTOSAVE_AUTOSAVE",var_02,1);
+	savegame("levelend",&"AUTOSAVE_AUTOSAVE",var_02,1);
 	scripts\engine\utility::flag_clear("game_saving");
 }
 
@@ -415,7 +415,7 @@ func_266B(param_00,param_01,param_02,param_03) {
 		level.var_4B18 = 1;
 	}
 
-	var_04 = "levelshots/autosave/autosave_" + level.script + level.var_4B18;
+	var_04 = "levelshots\autosave\autosave_" + level.script + level.var_4B18;
 	var_05 = level scripts\sp\_autosave::func_12891(level.var_4B18,"autosave",var_04,param_01,param_02,param_03);
 	if(isdefined(var_05) && var_05) {
 		level.var_4B18++;
@@ -684,11 +684,11 @@ func_78B5(param_00,param_01,param_02) {
 
 func_78AA(param_00,param_01,param_02) {
 	if(isdefined(param_01)) {
-		var_03 = function_0072(param_01);
+		var_03 = getaiarray(param_01);
 	}
 	else
 	{
-		var_03 = function_0072();
+		var_03 = getaiarray();
 	}
 
 	if(var_03.size == 0) {
@@ -704,11 +704,11 @@ func_78AA(param_00,param_01,param_02) {
 
 func_78AB(param_00,param_01,param_02) {
 	if(isdefined(param_01)) {
-		var_03 = function_0072(param_01);
+		var_03 = getaiarray(param_01);
 	}
 	else
 	{
-		var_03 = function_0072();
+		var_03 = getaiarray();
 	}
 
 	if(var_03.size == 0) {
@@ -1409,7 +1409,7 @@ func_7A9D(param_00,param_01) {
 }
 
 func_7A9E(param_00,param_01) {
-	var_02 = function_0074("all","all");
+	var_02 = getaispeciesarray("all","all");
 	var_03 = [];
 	foreach(var_05 in var_02) {
 		if(!isalive(var_05)) {
@@ -1482,8 +1482,8 @@ func_7AA0(param_00,param_01,param_02) {
 		param_02 = "all";
 	}
 
-	var_03 = function_0074("allies",param_02);
-	var_03 = scripts\engine\utility::array_combine(var_03,function_0074("axis",param_02));
+	var_03 = getaispeciesarray("allies",param_02);
+	var_03 = scripts\engine\utility::array_combine(var_03,getaispeciesarray("axis",param_02));
 	var_04 = [];
 	for(var_05 = 0;var_05 < var_03.size;var_05++) {
 		switch(param_01) {
@@ -1742,7 +1742,7 @@ func_28D7(param_00) {
 	scripts\anim\battlechatter::func_29C1();
 	if(isdefined(param_00)) {
 		func_F2DC(param_00,0);
-		var_01 = function_0072(param_00);
+		var_01 = getaiarray(param_00);
 	}
 	else
 	{
@@ -1750,7 +1750,7 @@ func_28D7(param_00) {
 			func_F2DC(param_00,0);
 		}
 
-		var_01 = function_0072();
+		var_01 = getaiarray();
 	}
 
 	if(!isdefined(level.var_3D4B) || !level.var_3D4B) {
@@ -1828,7 +1828,7 @@ func_F5C2(param_00,param_01) {
 		return;
 	}
 
-	var_04 = function_0072(param_00);
+	var_04 = getaiarray(param_00);
 	foreach(var_06 in var_04) {
 		var_06 func_F292(param_01);
 		scripts\engine\utility::waitframe();
@@ -1918,7 +1918,7 @@ func_F3B0(param_00,param_01,param_02) {
 		}
 	}
 
-	var_03 = function_0072(param_01);
+	var_03 = getaiarray(param_01);
 	var_03 = scripts\engine\utility::array_combine(var_03,var_04);
 	scripts\engine\utility::array_thread(var_03,::func_F3AF,param_00);
 }
@@ -1928,7 +1928,7 @@ func_F3AF(param_00) {
 }
 
 func_7412() {
-	var_00 = function_0072("allies");
+	var_00 = getaiarray("allies");
 	foreach(var_02 in var_00) {
 		if(isalive(var_02)) {
 			var_02 func_F3C0(0);
@@ -1939,7 +1939,7 @@ func_7412() {
 }
 
 func_7413() {
-	var_00 = function_0072("allies");
+	var_00 = getaiarray("allies");
 	foreach(var_02 in var_00) {
 		if(isalive(var_02)) {
 			var_02 func_F3C0(1);
@@ -2016,7 +2016,7 @@ func_7A6F(param_00) {
 					break;
 
 				case "pathnode":
-					var_01 = function_00B3(var_01.target,"targetname");
+					var_01 = getnode(var_01.target,"targetname");
 					break;
 
 				case "ent":
@@ -2194,13 +2194,13 @@ func_1115A() {
 func_11161(param_00,param_01) {
 	param_00.var_2274[param_00.lastindex] = param_01;
 	param_01.var_11159 = param_00.lastindex;
-	param_00.var_A9A1++;
+	param_00.lastindex++;
 }
 
 func_11162(param_00,param_01) {
 	func_11167(param_00,param_01);
 	param_00.var_2274[param_00.lastindex - 1] = undefined;
-	param_00.var_A9A1--;
+	param_00.lastindex--;
 }
 
 func_11163(param_00,param_01) {
@@ -2287,7 +2287,7 @@ func_B8D1() {
 
 	if(func_93AB()) {
 		level.player _meth_8591(1);
-		function_0229();
+		updategamerprofile();
 		scripts\sp\_endmission::func_41ED();
 	}
 
@@ -2302,7 +2302,7 @@ func_B8D1() {
 		return;
 	}
 
-	function_0143(func_93AB());
+	missionfailed(func_93AB());
 }
 
 func_F487(param_00) {
@@ -2342,7 +2342,7 @@ func_EF15() {
 }
 
 func_79C8(param_00,param_01) {
-	var_02 = function_0072(param_00);
+	var_02 = getaiarray(param_00);
 	var_03 = [];
 	for(var_04 = 0;var_04 < var_02.size;var_04++) {
 		var_05 = var_02[var_04];
@@ -2361,7 +2361,7 @@ func_79C8(param_00,param_01) {
 }
 
 get_all_force_color_friendlies() {
-	var_00 = function_0072("allies");
+	var_00 = getaiarray("allies");
 	var_01 = [];
 	for(var_02 = 0;var_02 < var_00.size;var_02++) {
 		var_03 = var_00[var_02];
@@ -2540,12 +2540,12 @@ func_9326(param_00) {
 	if(param_00) {
 		self.var_C3DE = self getthreatbiasgroup();
 		var_01 = undefined;
-		function_004E("ignore_everybody");
+		createthreatbiasgroup("ignore_everybody");
 		self give_zombies_perk("ignore_everybody");
 		var_02 = [];
 		var_02["axis"] = "allies";
 		var_02["allies"] = "axis";
-		var_03 = function_0072(var_02[self.team]);
+		var_03 = getaiarray(var_02[self.team]);
 		var_04 = [];
 		for(var_05 = 0;var_05 < var_03.size;var_05++) {
 			var_04[var_03[var_05] getthreatbiasgroup()] = 1;
@@ -2553,7 +2553,7 @@ func_9326(param_00) {
 
 		var_06 = getarraykeys(var_04);
 		for(var_05 = 0;var_05 < var_06.size;var_05++) {
-			function_01D1(var_06[var_05],"ignore_everybody",0);
+			setthreatbias(var_06[var_05],"ignore_everybody",0);
 		}
 
 		return;
@@ -2572,7 +2572,7 @@ func_131CC() {
 }
 
 func_13221() {
-	thread scripts/sp/vehicle_paths::func_13222();
+	thread scripts\sp\vehicle_paths::func_13222();
 }
 
 func_131FF(param_00) {
@@ -2617,9 +2617,9 @@ melee(param_00,param_01) {
 }
 
 func_1749(param_00,param_01,param_02,param_03,param_04,param_05,param_06) {
-	scripts/sp/starts::func_174A();
+	scripts\sp\starts::func_174A();
 	param_00 = tolower(param_00);
-	var_07 = scripts/sp/starts::func_174B(param_00,param_01,param_02,param_03,param_04,param_05,param_06);
+	var_07 = scripts\sp\starts::func_174B(param_00,param_01,param_02,param_03,param_04,param_05,param_06);
 	level.var_10C58[level.var_10C58.size] = var_07;
 	level.var_10BA8[param_00] = var_07;
 }
@@ -2672,12 +2672,12 @@ func_29C0() {
 
 func_5480(param_00) {
 	func_29C0();
-	scripts/sp/anim::func_1F32(self,param_00);
+	scripts\sp\anim::func_1F32(self,param_00);
 }
 
 func_7749(param_00,param_01) {
 	func_29C0();
-	scripts/sp/anim::func_1ECD(self,param_00,undefined,undefined,param_01);
+	scripts\sp\anim::func_1ECD(self,param_00,undefined,undefined,param_01);
 }
 
 func_DBEF(param_00,param_01) {
@@ -2885,8 +2885,8 @@ string(param_00) {
 }
 
 func_9329(param_00,param_01) {
-	function_01B2(param_00,param_01);
-	function_01B2(param_01,param_00);
+	setignoremegroup(param_00,param_01);
+	setignoremegroup(param_01,param_00);
 }
 
 func_16E5(param_00,param_01,param_02,param_03,param_04) {
@@ -3029,7 +3029,7 @@ func_F294() {
 }
 
 func_F5C3(param_00,param_01) {
-	var_02 = function_0072(param_00);
+	var_02 = getaiarray(param_00);
 	for(var_03 = 0;var_03 < var_02.size;var_03++) {
 		var_02[var_03].triggeroneoffradarsweep = param_01;
 	}
@@ -3389,7 +3389,7 @@ func_9591() {
 		}
 	}
 
-	var_01 = function_00EA(self.var_394);
+	var_01 = getweaponmodel(self.var_394);
 	if(isdefined(var_01) && var_01 != "") {
 		if(isai(self)) {
 			func_86E4();
@@ -3456,7 +3456,7 @@ func_4793(param_00) {
 
 func_13861(param_00,param_01,param_02) {
 	if(param_00 == "on") {
-		self._blackboard.var_13863 = 1;
+		self.var_1198.var_13863 = 1;
 		if(isdefined(param_02)) {
 			if(param_02 == "right") {
 				self.var_13862 = "right";
@@ -3480,7 +3480,7 @@ func_13861(param_00,param_01,param_02) {
 		return;
 	}
 
-	self._blackboard.var_13863 = 0;
+	self.var_1198.var_13863 = 0;
 }
 
 func_DC45(param_00) {
@@ -3633,8 +3633,8 @@ func_16EB(param_00,param_01,param_02) {
 }
 
 clearthreatbias(param_00,param_01) {
-	function_01D1(param_00,param_01,0);
-	function_01D1(param_01,param_00,0);
+	setthreatbias(param_00,param_01,0);
+	setthreatbias(param_01,param_00,0);
 }
 
 func_11813() {
@@ -3675,19 +3675,19 @@ func_F582(param_00,param_01) {
 }
 
 func_F48E(param_00,param_01) {
-	scripts/asm/asm::asm_setdemeanoranimoverride(param_00,"move",level.var_EC85[self.var_1FBB][param_01]);
+	scripts\asm\asm::asm_setdemeanoranimoverride(param_00,"move",level.var_EC85[self.var_1FBB][param_01]);
 }
 
 func_4169(param_00) {
-	scripts/asm/asm::asm_cleardemeanoranimoverride(param_00,"move");
+	scripts\asm\asm::asm_cleardemeanoranimoverride(param_00,"move");
 }
 
 func_F40E(param_00,param_01) {
-	scripts/asm/asm::asm_setdemeanoranimoverride(param_00,"idle",level.var_EC85[self.var_1FBB][param_01]);
+	scripts\asm\asm::asm_setdemeanoranimoverride(param_00,"idle",level.var_EC85[self.var_1FBB][param_01]);
 }
 
 func_415D(param_00) {
-	scripts/asm/asm::asm_cleardemeanoranimoverride(param_00,"idle");
+	scripts\asm\asm::asm_cleardemeanoranimoverride(param_00,"idle");
 }
 
 func_F35F() {
@@ -3742,14 +3742,14 @@ func_412D() {
 
 func_C81A(param_00) {
 	var_01 = lib_0A1E::func_2357(self.asm.archetype,"move_walk_loop","casual_purpose");
-	scripts/asm/asm::asm_setdemeanoranimoverride(param_00,"move",var_01);
+	scripts\asm\asm::asm_setdemeanoranimoverride(param_00,"move",var_01);
 	if(param_00 == "casual") {
 		thread func_F2C9(1.15);
 	}
 }
 
 func_416A() {
-	thread func_4169(scripts/asm/asm::asm_getdemeanor());
+	thread func_4169(scripts\asm\asm::asm_getdemeanor());
 	thread func_412D();
 }
 
@@ -3792,8 +3792,8 @@ func_F3C8(param_00) {
 }
 
 func_13035(param_00,param_01,param_02) {
-	scripts/asm/asm_bb::func_296E(param_00);
-	scripts/asm/asm_bb::func_296F(param_01);
+	scripts\asm\asm_bb::func_296E(param_00);
+	scripts\asm\asm_bb::func_296F(param_01);
 	var_04 = (-16,0,0);
 	var_05 = param_00 gettweakablevalue(var_04);
 	var_06 = physicstrace(var_05,var_05 + (0,0,-72));
@@ -3811,13 +3811,13 @@ func_13035(param_00,param_01,param_02) {
 	var_09 = self.asmname;
 	var_0A = self.var_164D[var_09].var_4BC0;
 	var_0B = level.asm[var_09].states[var_0A];
-	scripts/asm/asm::func_2388(var_09,var_0A,var_0B,var_0B.var_116FB);
-	scripts/asm/asm::func_238A(var_09,"script_use_turret",0.2);
+	scripts\asm\asm::func_2388(var_09,var_0A,var_0B,var_0B.var_116FB);
+	scripts\asm\asm::func_238A(var_09,"script_use_turret",0.2);
 }
 
 func_11051() {
-	scripts/asm/asm_bb::func_296E(undefined);
-	scripts/asm/asm_bb::func_296F(undefined);
+	scripts\asm\asm_bb::func_296E(undefined);
+	scripts\asm\asm_bb::func_296F(undefined);
 }
 
 func_4154() {
@@ -3895,7 +3895,7 @@ func_417A() {
 
 	if(getdvarint("ai_iw7",0) == 1) {
 		var_00 = "combat";
-		self._blackboard.alwaysrunforward = 0;
+		self.var_1198.alwaysrunforward = 0;
 		func_4169(var_00);
 		self.var_E80C = undefined;
 		return;
@@ -3944,7 +3944,7 @@ func_CB0F(param_00,param_01,param_02) {
 		param_02 = param_02 * var_07;
 		var_09 = param_02[0] + param_02[1] + param_02[2];
 		if(var_09 > 0.025) {
-			function_016B(self.origin,param_00,param_01,param_02[2],param_02[2] * 2);
+			physicsjitter(self.origin,param_00,param_01,param_02[2],param_02[2] * 2);
 		}
 	}
 }
@@ -4032,7 +4032,7 @@ func_86E4() {
 		return;
 	}
 
-	self detach(function_00EA(self.var_394),"tag_weapon_right");
+	self detach(getweaponmodel(self.var_394),"tag_weapon_right");
 }
 
 func_86E2() {
@@ -4041,7 +4041,7 @@ func_86E2() {
 		return;
 	}
 
-	self attach(function_00EA(self.var_394),"tag_weapon_right");
+	self attach(getweaponmodel(self.var_394),"tag_weapon_right");
 }
 
 func_CC06(param_00,param_01) {
@@ -4325,7 +4325,7 @@ func_61DB() {
 }
 
 func_F2E1(param_00,param_01) {
-	function_01A7(param_00,param_01);
+	setblur(param_00,param_01);
 }
 
 func_F3DD(param_00) {
@@ -4340,7 +4340,7 @@ func_F3D9(param_00) {
 }
 
 func_F3DA(param_00) {
-	var_01 = function_00B3(param_00,"targetname");
+	var_01 = getnode(param_00,"targetname");
 	func_F3D9(var_01);
 }
 
@@ -4354,18 +4354,18 @@ func_F3DC(param_00) {
 func_F3D3(param_00) {
 	func_F3DC(param_00.origin);
 	self.var_A905 = param_00;
-	if(function_02A4(param_00) && !isdefined(param_00.type)) {
+	if(isstruct(param_00) && !isdefined(param_00.type)) {
 		param_00.type = "struct";
 	}
 }
 
 func_C27C(param_00) {
-	function_0162(param_00,"done");
+	objective_state(param_00,"done");
 	level notify("objective_complete" + param_00);
 }
 
 func_7C84(param_00,param_01) {
-	var_02 = function_00C8();
+	var_02 = getspawnerarray();
 	var_03 = [];
 	if(param_01 == "code_classname") {
 		foreach(var_05 in var_02) {
@@ -4422,7 +4422,7 @@ func_22C6(param_00,param_01,param_02) {
 		if(getsubstr(var_05.classname,7,10) == "veh") {
 			var_06 = var_05 func_10808();
 			if(isdefined(var_06.target) && !isdefined(var_06.var_EE2B)) {
-				var_06 thread scripts/sp/vehicle_paths::setsuit();
+				var_06 thread scripts\sp\vehicle_paths::setsuit();
 			}
 
 			var_03[var_03.size] = var_06;
@@ -4443,7 +4443,7 @@ func_22C6(param_00,param_01,param_02) {
 }
 
 func_22CD(param_00,param_01,param_02,param_03) {
-	var_04 = function_00C8(param_00);
+	var_04 = getspawnerarray(param_00);
 	var_04 = func_22A2(var_04,getentarray(param_00,"targetname"));
 	if(isdefined(level.var_107A7)) {
 		var_05 = scripts\engine\utility::getstructarray(param_00,"targetname");
@@ -5176,7 +5176,7 @@ func_9BB5() {
 		return level.var_10CDA == "default";
 	}
 
-	if(scripts/sp/starts::func_ABDA()) {
+	if(scripts\sp\starts::func_ABDA()) {
 		return level.var_10CDA == level.var_10C58[0]["name"];
 	}
 
@@ -5349,13 +5349,13 @@ func_AB9A(param_00,param_01,param_02) {
 		var_07 = var_04 / var_06;
 		while(var_06) {
 			var_03 = var_03 + var_07;
-			function_01C5(param_00,var_03);
+			setsaveddvar(param_00,var_03);
 			wait(var_05);
 			var_06--;
 		}
 	}
 
-	function_01C5(param_00,param_01);
+	setsaveddvar(param_00,param_01);
 }
 
 func_AB89(param_00,param_01,param_02,param_03) {
@@ -5495,8 +5495,8 @@ func_BDF2(param_00,param_01,param_02) {
 		param_02 = 0;
 	}
 
-	function_0146(0);
-	function_0145(param_00,0,1,1,param_02);
+	musicstop(0);
+	musicplay(param_00,0,1,1,param_02);
 }
 
 func_BDDF(param_00,param_01,param_02,param_03,param_04) {
@@ -5527,14 +5527,14 @@ func_BDD5(param_00,param_01,param_02,param_03) {
 	}
 
 	if(isdefined(level.var_1188.var_A90A)) {
-		function_0146(param_01,level.var_1188.var_A90A,param_03);
+		musicstop(param_01,level.var_1188.var_A90A,param_03);
 	}
 	else
 	{
 	}
 
 	level.var_1188.var_A90A = param_00;
-	function_0145(param_00,param_01,param_02,0,param_03);
+	musicplay(param_00,param_01,param_02,0,param_03);
 	level endon("stop_music");
 	wait(param_01);
 	level notify("done_crossfading");
@@ -5542,11 +5542,11 @@ func_BDD5(param_00,param_01,param_02,param_03) {
 
 func_BDEC(param_00) {
 	if(!isdefined(param_00) || param_00 <= 0) {
-		function_0146();
+		musicstop();
 	}
 	else
 	{
-		function_0146(param_00);
+		musicstop(param_00);
 	}
 
 	level notify("stop_music");
@@ -5697,7 +5697,7 @@ func_77E3(param_00,param_01,param_02) {
 		param_01 = "all";
 	}
 
-	var_03 = function_0074(param_00,param_01);
+	var_03 = getaispeciesarray(param_00,param_01);
 	var_04 = [];
 	foreach(var_06 in var_03) {
 		if(var_06 istouching(self)) {
@@ -5908,7 +5908,7 @@ isprimaryweapon(param_00) {
 		return 0;
 	}
 
-	if(function_0244(param_00) != "primary") {
+	if(weaponinventorytype(param_00) != "primary") {
 		return 0;
 	}
 
@@ -6188,7 +6188,7 @@ func_2A75(param_00,param_01,param_02) {
 		var_03 playerlinktodelta(var_05,"tag_origin",0,180,180,180,180);
 	}
 
-	function_01C5("depthSortViewmodel",1);
+	setsaveddvar("depthSortViewmodel",1);
 	var_03 scripts\engine\utility::allow_fire(0);
 	var_03 scripts\engine\utility::allow_prone(0);
 	var_03 scripts\engine\utility::allow_stances(0);
@@ -6231,7 +6231,7 @@ func_6389() {
 	var_00 scripts\engine\utility::allow_prone(1);
 	var_00 scripts\engine\utility::allow_stances(1);
 	var_00 scripts\engine\utility::allow_reload(1);
-	function_01C5("depthSortViewmodel",0);
+	setsaveddvar("depthSortViewmodel",0);
 	var_00 notify("stop_sliding");
 }
 
@@ -6642,7 +6642,7 @@ func_E2CF(param_00,param_01) {
 
 	self takeallweapons();
 	foreach(var_04, var_03 in self.var_110B7[param_00]["inventory"]) {
-		if(function_0244(var_04) != "altmode") {
+		if(weaponinventorytype(var_04) != "altmode") {
 			self giveweapon(var_04);
 		}
 
@@ -6730,19 +6730,19 @@ func_F492(param_00,param_01) {
 	self notify("set_moveplaybackrate");
 	self endon("set_moveplaybackrate");
 	if(isdefined(param_01)) {
-		var_02 = scripts/asm/asm::asm_getmoveplaybackrate();
+		var_02 = scripts\asm\asm::asm_getmoveplaybackrate();
 		var_03 = param_00 - var_02;
 		var_04 = 0.05;
 		var_05 = param_01 / var_04;
 		var_06 = var_03 / var_05;
 		while(abs(param_00 - var_02) > abs(var_06 * 1.1)) {
-			scripts/asm/asm::func_237B(var_02 + var_06);
+			scripts\asm\asm::func_237B(var_02 + var_06);
 			wait(var_04);
-			var_02 = scripts/asm/asm::asm_getmoveplaybackrate();
+			var_02 = scripts\asm\asm::asm_getmoveplaybackrate();
 		}
 	}
 
-	scripts/asm/asm::func_237B(param_00);
+	scripts\asm\asm::func_237B(param_00);
 }
 
 func_22C7(param_00,param_01,param_02,param_03,param_04,param_05) {
@@ -6752,7 +6752,7 @@ func_22C7(param_00,param_01,param_02,param_03,param_04,param_05) {
 }
 
 func_22CA(param_00,param_01,param_02,param_03,param_04,param_05) {
-	var_06 = function_00C8(param_00);
+	var_06 = getspawnerarray(param_00);
 	var_06 = func_22A2(var_06,getentarray(param_00,"targetname"));
 	func_22C7(var_06,param_01,param_02,param_03,param_04,param_05);
 }
@@ -7031,7 +7031,7 @@ func_6EC6(param_00) {
 
 func_13821() {
 	for(;;) {
-		var_00 = function_0074("axis","all");
+		var_00 = getaispeciesarray("axis","all");
 		var_01 = 0;
 		foreach(var_03 in var_00) {
 			if(!isalive(var_03)) {
@@ -7060,7 +7060,7 @@ func_13821() {
 func_13822() {
 	var_00 = 0;
 	for(;;) {
-		var_01 = function_0074("axis","all");
+		var_01 = getaispeciesarray("axis","all");
 		var_02 = 0;
 		foreach(var_04 in var_01) {
 			if(!isalive(var_04)) {
@@ -7281,7 +7281,7 @@ func_ECC4(param_00) {
 	var_05 = vectordot(var_03,var_02);
 	var_06 = [];
 	var_07 = self getcurrentweapon();
-	if(var_04 > 0 && var_04 > 0.5 && function_024C(var_07) != "riotshield") {
+	if(var_04 > 0 && var_04 > 0.5 && weapontype(var_07) != "riotshield") {
 		var_06["bottom"] = 1;
 	}
 
@@ -7491,7 +7491,7 @@ func_F2DC(param_00,param_01) {
 
 func_C27B(param_00) {
 	for(var_01 = 0;var_01 < 8;var_01++) {
-		function_0151(param_00,var_01,(0,0,0));
+		objective_additionalposition(param_00,var_01,(0,0,0));
 	}
 }
 
@@ -7586,7 +7586,7 @@ func_BDF1(param_00) {
 }
 
 func_9B9D(param_00) {
-	var_01 = function_00A5(param_00);
+	var_01 = getkeybinding(param_00);
 	return var_01["count"];
 }
 
@@ -8008,7 +8008,7 @@ func_412C() {
 }
 
 func_12641(param_00) {
-	if(function_0119(param_00)) {
+	if(istransientloaded(param_00)) {
 		return;
 	}
 
@@ -8016,8 +8016,8 @@ func_12641(param_00) {
 		scripts\engine\utility::flag_init(param_00 + "_loaded");
 	}
 
-	function_012F(param_00);
-	while(!function_0119(param_00)) {
+	loadtransient(param_00);
+	while(!istransientloaded(param_00)) {
 		scripts\engine\utility::waitframe();
 	}
 
@@ -8026,12 +8026,12 @@ func_12641(param_00) {
 }
 
 func_1264E(param_00) {
-	if(!function_0119(param_00)) {
+	if(!istransientloaded(param_00)) {
 		return;
 	}
 
-	function_0226(param_00);
-	while(function_0119(param_00)) {
+	unloadtransient(param_00);
+	while(istransientloaded(param_00)) {
 		scripts\engine\utility::waitframe();
 	}
 
@@ -8046,7 +8046,7 @@ func_12643(param_00) {
 	for(;;) {
 		var_04 = 1;
 		foreach(var_02 in param_00) {
-			if(!function_0119(var_02)) {
+			if(!istransientloaded(var_02)) {
 				var_04 = 0;
 				break;
 			}
@@ -8070,7 +8070,7 @@ func_12651(param_00) {
 	for(;;) {
 		var_04 = 1;
 		foreach(var_02 in param_00) {
-			if(function_0119(var_02)) {
+			if(istransientloaded(var_02)) {
 				var_04 = 0;
 				break;
 			}
@@ -8099,7 +8099,7 @@ func_1264C(param_00,param_01) {
 }
 
 func_12653(param_00) {
-	function_0225();
+	unloadalltransients();
 	func_12641(param_00);
 }
 
@@ -8122,11 +8122,11 @@ func_F828(param_00,param_01,param_02) {
 	}
 
 	if(func_9BEE()) {
-		function_01C5(param_00,param_02);
+		setsaveddvar(param_00,param_02);
 		return;
 	}
 
-	function_01C5(param_00,param_01);
+	setsaveddvar(param_00,param_01);
 }
 
 func_7227(param_00,param_01) {
@@ -8285,14 +8285,14 @@ func_722C(param_00,param_01) {
 func_7229(param_00) {
 	self notify("follow_path_new_goal");
 	if(isdefined(param_00.animation)) {
-		param_00 scripts/sp/anim::func_1ECE(self,param_00.animation);
+		param_00 scripts\sp\anim::func_1ECE(self,param_00.animation);
 		self notify("starting_anim",param_00.animation);
 		if(isdefined(param_00.script_parameters) && issubstr(param_00.script_parameters,"gravity")) {
-			param_00 scripts/sp/anim::func_1ECB(self,param_00.animation);
+			param_00 scripts\sp\anim::func_1ECB(self,param_00.animation);
 		}
 		else
 		{
-			param_00 scripts/sp/anim::func_1ED1(self,param_00.animation);
+			param_00 scripts\sp\anim::func_1ED1(self,param_00.animation);
 		}
 
 		self give_mp_super_weapon(self.origin);
@@ -8305,14 +8305,14 @@ func_7229(param_00) {
 func_7228(param_00) {
 	self notify("follow_path_new_goal");
 	if(isdefined(param_00.animation)) {
-		param_00 scripts/sp/anim::func_1ECE(self,param_00.animation);
+		param_00 scripts\sp\anim::func_1ECE(self,param_00.animation);
 		self notify("starting_anim",param_00.animation);
 		if(isdefined(param_00.script_parameters) && issubstr(param_00.script_parameters,"gravity")) {
-			param_00 scripts/sp/anim::func_1ECB(self,param_00.animation);
+			param_00 scripts\sp\anim::func_1ECB(self,param_00.animation);
 		}
 		else
 		{
-			param_00 scripts/sp/anim::func_1ED1(self,param_00.animation);
+			param_00 scripts\sp\anim::func_1ED1(self,param_00.animation);
 		}
 
 		self give_mp_super_weapon(self.origin);
@@ -8325,15 +8325,15 @@ func_7228(param_00) {
 func_722A(param_00) {
 	self notify("follow_path_new_goal");
 	if(isdefined(param_00.animation)) {
-		param_00 scripts/sp/anim::func_1ECE(self,param_00.animation);
+		param_00 scripts\sp\anim::func_1ECE(self,param_00.animation);
 		self notify("starting_anim",param_00.animation);
 		func_5528();
 		if(isdefined(param_00.script_parameters) && issubstr(param_00.script_parameters,"gravity")) {
-			param_00 scripts/sp/anim::func_1ECB(self,param_00.animation);
+			param_00 scripts\sp\anim::func_1ECB(self,param_00.animation);
 		}
 		else
 		{
-			param_00 scripts/sp/anim::func_1ED1(self,param_00.animation);
+			param_00 scripts\sp\anim::func_1ED1(self,param_00.animation);
 		}
 
 		scripts\engine\utility::delaythread(0.05,::func_61F7);
@@ -8389,10 +8389,10 @@ hastag(param_00,param_01) {
 		return level.has_tag[var_02];
 	}
 
-	var_03 = function_00BC(param_00);
+	var_03 = getnumparts(param_00);
 	if(var_03 > 0) {
 		for(var_04 = 0;var_04 < var_03;var_04++) {
-			var_05 = tolower(function_00BF(param_00,var_04));
+			var_05 = tolower(getpartname(param_00,var_04));
 			if(var_05 == tolower(param_01)) {
 				level.has_tag[var_02] = 1;
 				return 1;
@@ -8557,7 +8557,7 @@ func_D090(param_00,param_01) {
 		var_04 = 1;
 	}
 
-	if(isdefined(param_01) && function_02A6(param_01)) {
+	if(isdefined(param_01) && isent(param_01)) {
 		var_02 = self forceplaygestureviewmodel(param_00,param_01,var_03,undefined,undefined);
 	}
 	else
@@ -8778,7 +8778,7 @@ func_960B() {
 func_EBA6(param_00,param_01) {
 	func_960B();
 	if(isdefined(param_00)) {
-		function_01C5("bg_gravity",level.isinphase * param_00);
+		setsaveddvar("bg_gravity",level.isinphase * param_00);
 	}
 
 	if(isdefined(param_01)) {
@@ -8806,7 +8806,7 @@ func_241F(param_00) {
 func_F3E4(param_00,param_01) {
 	func_960B();
 	if(isdefined(param_00)) {
-		function_01C5("bg_gravity",param_00);
+		setsaveddvar("bg_gravity",param_00);
 	}
 
 	if(isdefined(param_01)) {
@@ -8815,7 +8815,7 @@ func_F3E4(param_00,param_01) {
 }
 
 func_E1F0() {
-	function_01C5("bg_gravity",level.isinphase);
+	setsaveddvar("bg_gravity",level.isinphase);
 	physics_setgravity((0,0,level._meth_8519));
 }
 
@@ -8926,10 +8926,10 @@ func_77B8(param_00,param_01,param_02,param_03) {
 	self endon("death");
 	self endon("gesture_stop");
 	var_04 = squared(param_01);
-	scripts/sp/interaction_manager::func_168F();
+	scripts\sp\interaction_manager::func_168F();
 	var_05 = distance2dsquared(self.origin,param_02.origin);
 	for(;;) {
-		if(var_05 < var_04 && scripts/sp/interaction_manager::func_3838(param_01 * 3)) {
+		if(var_05 < var_04 && scripts\sp\interaction_manager::func_3838(param_01 * 3)) {
 			break;
 		}
 
@@ -8948,7 +8948,7 @@ func_77B8(param_00,param_01,param_02,param_03) {
 	}
 
 	wait(2);
-	scripts/sp/interaction_manager::func_DFB5();
+	scripts\sp\interaction_manager::func_DFB5();
 	self.var_D4A4 = 0;
 }
 
@@ -9146,7 +9146,7 @@ func_1C3E(param_00) {
 
 		self.var_55C2--;
 		if(!self.var_55C2) {
-			function_01C5("cg_drawCrosshair",1);
+			setsaveddvar("cg_drawCrosshair",1);
 			return;
 		}
 
@@ -9158,7 +9158,7 @@ func_1C3E(param_00) {
 	}
 
 	self.var_55C2++;
-	function_01C5("cg_drawCrosshair",0);
+	setsaveddvar("cg_drawCrosshair",0);
 }
 
 func_1C72(param_00) {
@@ -9169,7 +9169,7 @@ func_1C72(param_00) {
 
 		self.var_55E7--;
 		if(!self.var_55E7) {
-			function_01C5("bg_disableWeaponFirstRaiseAnims",0);
+			setsaveddvar("bg_disableWeaponFirstRaiseAnims",0);
 			return;
 		}
 
@@ -9181,7 +9181,7 @@ func_1C72(param_00) {
 	}
 
 	self.var_55E7++;
-	function_01C5("bg_disableWeaponFirstRaiseAnims",1);
+	setsaveddvar("bg_disableWeaponFirstRaiseAnims",1);
 }
 
 _meth_82EA(param_00) {
@@ -9504,7 +9504,7 @@ func_91A9(param_00) {
 		param_00 = 1;
 	}
 
-	function_01C5("r_hudoutlineEnable",1);
+	setsaveddvar("r_hudoutlineEnable",1);
 	var_01 = "0.5 0.5 0.5";
 	var_02 = "1 1 1";
 	if(param_00) {
@@ -9523,12 +9523,12 @@ func_91A9(param_00) {
 		var_05 = "0.5 0.5 0.5 0.5";
 	}
 
-	function_01C5("r_hudoutlineFillColor0",var_01);
-	function_01C5("r_hudoutlineFillColor1",var_02);
-	function_01C5("r_hudoutlineOccludedOutlineColor",var_03);
-	function_01C5("r_hudoutlineOccludedInlineColor",var_04);
-	function_01C5("r_hudoutlineOccludedInteriorColor",var_05);
-	function_01C5("r_hudOutlineOccludedColorFromFill",1);
+	setsaveddvar("r_hudoutlineFillColor0",var_01);
+	setsaveddvar("r_hudoutlineFillColor1",var_02);
+	setsaveddvar("r_hudoutlineOccludedOutlineColor",var_03);
+	setsaveddvar("r_hudoutlineOccludedInlineColor",var_04);
+	setsaveddvar("r_hudoutlineOccludedInteriorColor",var_05);
+	setsaveddvar("r_hudOutlineOccludedColorFromFill",1);
 }
 
 func_91A8(param_00,param_01) {
@@ -9557,21 +9557,21 @@ func_91A8(param_00,param_01) {
 
 func_9131(param_00) {
 	setomnvar("ui_show_bink",1);
-	function_01C5("bg_cinematicFullScreen","0");
-	function_01C5("bg_cinematicCanPause","1");
-	function_003D(param_00);
-	while(!function_0102()) {
+	setsaveddvar("bg_cinematicFullScreen","0");
+	setsaveddvar("bg_cinematicCanPause","1");
+	cinematicingame(param_00);
+	while(!iscinematicplaying()) {
 		scripts\engine\utility::waitframe();
 	}
 
-	while(function_0102()) {
+	while(iscinematicplaying()) {
 		scripts\engine\utility::waitframe();
 	}
 
-	function_01F1();
+	stopcinematicingame();
 	setomnvar("ui_show_bink",0);
-	function_01C5("bg_cinematicFullScreen","1");
-	function_01C5("bg_cinematicCanPause","1");
+	setsaveddvar("bg_cinematicFullScreen","1");
+	setsaveddvar("bg_cinematicCanPause","1");
 }
 
 func_918B(param_00,param_01,param_02) {
@@ -9582,7 +9582,7 @@ func_918B(param_00,param_01,param_02) {
 	level.player endon("stop_ar_callout");
 	setomnvar("ui_inworld_ar_ent",undefined);
 	wait(0.05);
-	function_01C5("r_hudoutlineEnable",1);
+	setsaveddvar("r_hudoutlineEnable",1);
 	level.player.var_20F8 = scripts\engine\utility::spawn_tag_origin();
 	setomnvar("ui_inworld_ar_ent",level.player.var_20F8);
 	if(!isdefined(param_00)) {
@@ -9917,7 +9917,7 @@ func_B2FC() {
 		for(var_00 = 0;var_00 < 3;var_00++) {
 			if(self.script_rotation_max[var_00] != 0) {
 				if(self.script_rotation_speed[var_00] > 0) {
-					self.var_E746[var_00] = scripts/sp/math::func_10AB0(self.script_rotation_speed[var_00] * 10,0,self.var_10BA1[var_00] + self.script_rotation_max[var_00],0);
+					self.var_E746[var_00] = scripts\sp\math::func_10AB0(self.script_rotation_speed[var_00] * 10,0,self.var_10BA1[var_00] + self.script_rotation_max[var_00],0);
 					continue;
 				}
 			}
@@ -9936,7 +9936,7 @@ func_B2FC() {
 		for(var_00 = 0;var_00 < 3;var_00++) {
 			if(self.var_EEE9[var_00] != 0) {
 				if(self.var_EEEA[var_00] > 0) {
-					self.var_12689[var_00] = scripts/sp/math::func_10AB0(self.var_EEEA[var_00] * 10,0,self.var_10CCA[var_00] + self.var_EEE9[var_00],0);
+					self.var_12689[var_00] = scripts\sp\math::func_10AB0(self.var_EEEA[var_00] * 10,0,self.var_10CCA[var_00] + self.var_EEE9[var_00],0);
 					continue;
 				}
 			}
@@ -9970,7 +9970,7 @@ func_12686() {
 			}
 
 			if(self.var_EEEA[var_01] > 0 && self.var_EEE9[var_01] != 0) {
-				var_00[var_01] = scripts/sp/math::func_10AB4(self.var_12689[var_01],self.var_10CCA[var_01]);
+				var_00[var_01] = scripts\sp\math::func_10AB4(self.var_12689[var_01],self.var_10CCA[var_01]);
 			}
 		}
 
@@ -10000,7 +10000,7 @@ func_E702() {
 			}
 
 			if(self.script_rotation_speed[var_01] > 0 && self.script_rotation_max[var_01] != 0) {
-				var_00[var_01] = scripts/sp/math::func_10AB4(self.var_E746[var_01],self.var_10BA1[var_01]);
+				var_00[var_01] = scripts\sp\math::func_10AB4(self.var_E746[var_01],self.var_10BA1[var_01]);
 			}
 		}
 
@@ -10026,13 +10026,13 @@ func_B2FA() {
 	scripts\engine\utility::waittill_either("death","stop_manipulate_ent");
 	if(isdefined(self.var_E746)) {
 		foreach(var_01 in self.var_E746) {
-			scripts/sp/math::func_10AAA(var_01);
+			scripts\sp\math::func_10AAA(var_01);
 		}
 	}
 
 	if(isdefined(self.var_12689)) {
 		foreach(var_01 in self.var_12689) {
-			scripts/sp/math::func_10AAA(var_01);
+			scripts\sp\math::func_10AAA(var_01);
 		}
 	}
 }
@@ -10046,7 +10046,7 @@ func_9DB4(param_00) {
 }
 
 func_9FFE(param_00) {
-	var_01 = function_00E3(param_00);
+	var_01 = getweaponattachments(param_00);
 	if(!isdefined(var_01)) {
 		return 0;
 	}
@@ -10089,27 +10089,27 @@ waittill_multiple_ents(param_00,param_01,param_02,param_03,param_04,param_05,par
 	var_08.threads = 0;
 	if(isdefined(param_00)) {
 		param_00 childthread scripts\engine\utility::waittill_string(param_01,var_08);
-		var_08.var_117B8++;
+		var_08.threads++;
 	}
 
 	if(isdefined(param_02)) {
 		param_02 childthread scripts\engine\utility::waittill_string(param_03,var_08);
-		var_08.var_117B8++;
+		var_08.threads++;
 	}
 
 	if(isdefined(param_04)) {
 		param_04 childthread scripts\engine\utility::waittill_string(param_05,var_08);
-		var_08.var_117B8++;
+		var_08.threads++;
 	}
 
 	if(isdefined(param_06)) {
 		param_06 childthread scripts\engine\utility::waittill_string(param_07,var_08);
-		var_08.var_117B8++;
+		var_08.threads++;
 	}
 
 	while(var_08.threads) {
 		var_08 waittill("returned");
-		var_08.var_117B8--;
+		var_08.threads--;
 	}
 
 	var_08 notify("die");
@@ -10156,7 +10156,7 @@ func_E820(param_00,param_01,param_02,param_03,param_04) {
 	if(isdefined(level._meth_8134)) {
 		var_06 = [[level._meth_8134]](param_00);
 		foreach(var_08 in var_06) {
-			if(function_02A8(var_08)) {
+			if(isnonentspawner(var_08)) {
 				scripts\engine\utility::array_thread([var_08],param_01,param_02,param_03,param_04);
 			}
 		}
@@ -10176,7 +10176,7 @@ func_E81F(param_00,param_01,param_02,param_03,param_04) {
 	if(isdefined(level._meth_8134)) {
 		var_06 = [[level._meth_8134]]();
 		foreach(var_08 in var_06) {
-			if(isdefined(var_08.script_noteworthy) && var_08.script_noteworthy == param_00 && function_02A8(var_08)) {
+			if(isdefined(var_08.script_noteworthy) && var_08.script_noteworthy == param_00 && isnonentspawner(var_08)) {
 				scripts\engine\utility::array_thread([var_08],param_01,param_02,param_03,param_04);
 			}
 		}
@@ -10342,7 +10342,7 @@ func_4125(param_00,param_01,param_02) {
 	}
 
 	if(isdefined(param_02)) {
-		if(isdefined(self.var_13C4D) && self.var_13C4D.model == function_00EA(param_02)) {
+		if(isdefined(self.var_13C4D) && self.var_13C4D.model == getweaponmodel(param_02)) {
 			self.var_13C4D delete();
 		}
 
@@ -10363,7 +10363,7 @@ func_4125(param_00,param_01,param_02) {
 
 func_192C(param_00) {
 	self.var_13C4D = spawn("script_model",self gettagorigin("tag_stowed_back"));
-	self.var_13C4D setmodel(function_00EA(param_00));
+	self.var_13C4D setmodel(getweaponmodel(param_00));
 	self.var_13C4D notsolid();
 	self.var_13C4D.angles = self gettagangles("tag_stowed_back");
 	self.var_13C4D linkto(self,"tag_stowed_back");
@@ -10395,13 +10395,13 @@ func_ABD9() {
 }
 
 func_CE10(param_00,param_01,param_02) {
-	function_01C5("bg_cinematicFullScreen","1");
-	function_01C5("bg_cinematicCanPause","1");
-	function_003D(param_00);
+	setsaveddvar("bg_cinematicFullScreen","1");
+	setsaveddvar("bg_cinematicCanPause","1");
+	cinematicingame(param_00);
 	thread scripts\sp\_gameskill::func_E080();
 	func_E006();
 	if(func_93A6()) {
-		scripts/sp/specialist_MAYBE::hide_helmet_impacts();
+		scripts\sp\specialist_MAYBE::hide_helmet_impacts();
 	}
 
 	level.player scripts\engine\utility::allow_weapon(0);
@@ -10412,7 +10412,7 @@ func_CE10(param_00,param_01,param_02) {
 	setomnvar("ui_hide_hud",1);
 	level.player func_1C3E(0);
 	setomnvar("ui_hide_weapon_info",1);
-	while(!function_0102()) {
+	while(!iscinematicplaying()) {
 		scripts\engine\utility::waitframe();
 	}
 
@@ -10420,7 +10420,7 @@ func_CE10(param_00,param_01,param_02) {
 	if(isdefined(param_02)) {
 		func_3F72(param_02);
 		if(func_93A6()) {
-			scripts/sp/specialist_MAYBE::show_helmet_impacts();
+			scripts\sp\specialist_MAYBE::show_helmet_impacts();
 		}
 
 		level.player scripts\engine\utility::allow_weapon(1);
@@ -10433,27 +10433,27 @@ func_CE10(param_00,param_01,param_02) {
 		level.player func_1C3E(1);
 		setomnvar("ui_hide_weapon_info",0);
 		level notify("skippable_cinematic_done");
-		while(function_0102()) {
+		while(iscinematicplaying()) {
 			scripts\engine\utility::waitframe();
 		}
 
-		function_01C5("bg_cinematicFullScreen","0");
-		function_01C5("bg_cinematicCanPause","0");
+		setsaveddvar("bg_cinematicFullScreen","0");
+		setsaveddvar("bg_cinematicCanPause","0");
 		setomnvar("ui_is_bink_skippable",0);
-		function_01F1();
+		stopcinematicingame();
 		return;
 	}
 
-	while(function_0102()) {
+	while(iscinematicplaying()) {
 		scripts\engine\utility::waitframe();
 	}
 
-	function_01C5("bg_cinematicFullScreen","0");
-	function_01C5("bg_cinematicCanPause","0");
+	setsaveddvar("bg_cinematicFullScreen","0");
+	setsaveddvar("bg_cinematicCanPause","0");
 	setomnvar("ui_is_bink_skippable",0);
-	function_01F1();
+	stopcinematicingame();
 	if(func_93A6()) {
-		scripts/sp/specialist_MAYBE::show_helmet_impacts();
+		scripts\sp\specialist_MAYBE::show_helmet_impacts();
 	}
 
 	level.player scripts\engine\utility::allow_weapon(1);
@@ -10479,7 +10479,7 @@ func_3F71(param_00) {
 		level.player waittill("luinotifyserver",var_01,var_02);
 		if(var_01 == "skip_bink_input") {
 			level notify("cinematic_skipped");
-			function_01F1();
+			stopcinematicingame();
 			break;
 		}
 	}
@@ -10489,7 +10489,7 @@ func_3F72(param_00) {
 	level endon("cinematic_skipped");
 	param_00 = param_00 * 1000;
 	for(;;) {
-		var_01 = function_003C();
+		var_01 = cinematicgettimeinmsec();
 		if(var_01 >= param_00) {
 			return;
 		}

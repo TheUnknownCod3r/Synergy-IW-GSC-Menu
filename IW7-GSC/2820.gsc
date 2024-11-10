@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\2820.gsc
-****************************/
+ * Script: 2820.gsc
+************************/
 
 func_94F9() {
 	precacheshader("specialty_ammo_crate");
@@ -197,12 +197,12 @@ func_4842(param_00,param_01) {
 			else if(var_02.var_AE46 == "newequipment_primary" || var_02.var_AE46 == "newequipment_secondary") {
 				if(var_02.var_AE46 == "newequipment_primary") {
 					var_09 = scripts\sp\_utility::func_7BD7();
-					var_03 = scripts/sp/loadout::func_7C27(scripts\sp\_utility::func_7BD6());
+					var_03 = scripts\sp\loadout::func_7C27(scripts\sp\_utility::func_7BD6());
 				}
 				else
 				{
 					var_09 = scripts\sp\_utility::func_7C3E();
-					var_03 = scripts/sp/loadout::func_7C27(scripts\sp\_utility::func_7C3D());
+					var_03 = scripts\sp\loadout::func_7C27(scripts\sp\_utility::func_7C3D());
 				}
 
 				var_08 = level.player lib_0A2F::func_7BB5(var_02.weapon_name);
@@ -270,7 +270,7 @@ func_4842(param_00,param_01) {
 		}
 
 		if(scripts\sp\_utility::func_93A6() && isdefined(var_02.can_save)) {
-			thread scripts/sp/specialist_MAYBE::func_2683();
+			thread scripts\sp\specialist_MAYBE::func_2683();
 			var_02.can_save = undefined;
 		}
 
@@ -437,12 +437,12 @@ func_4846() {
 	}
 
 	if(var_12 <= var_14) {
-		var_00.weapon_name = scripts/sp/loadout::func_7C27(var_11);
+		var_00.weapon_name = scripts\sp\loadout::func_7C27(var_11);
 		var_00.var_1E2D = weaponmaxammo(var_11);
 	}
 	else
 	{
-		var_00.weapon_name = scripts/sp/loadout::func_7C27(var_13);
+		var_00.weapon_name = scripts\sp\loadout::func_7C27(var_13);
 		var_00.var_1E2D = weaponmaxammo(var_13);
 	}
 
@@ -525,17 +525,17 @@ func_4847() {
 func_4843(param_00,param_01,param_02) {
 	var_03 = level.player lib_0A2F::func_7BB5(param_01);
 	var_04 = weaponmaxammo(var_03);
-	var_05 = scripts/sp/loadout::func_7C27(param_01,1);
+	var_05 = scripts\sp\loadout::func_7C27(param_01,1);
 	var_06 = [];
 	if(param_00 == "primary") {
-		var_07 = scripts/sp/loadout::func_7C27(scripts\sp\_utility::func_7BD6(),1);
+		var_07 = scripts\sp\loadout::func_7C27(scripts\sp\_utility::func_7BD6(),1);
 		if(isdefined(var_07) && var_07 == var_05) {
 			if(scripts\sp\_utility::func_7BD7() == var_04) {
 				return param_02;
 			}
 		}
 
-		var_07 = scripts/sp/loadout::func_7C27(scripts\sp\_utility::func_7CAF(),1);
+		var_07 = scripts\sp\loadout::func_7C27(scripts\sp\_utility::func_7CAF(),1);
 		if(isdefined(var_07) && var_07 == var_05) {
 			if(scripts\sp\_utility::func_7CB0() == var_04) {
 				return param_02;
@@ -544,14 +544,14 @@ func_4843(param_00,param_01,param_02) {
 	}
 	else
 	{
-		var_07 = scripts/sp/loadout::func_7C27(scripts\sp\_utility::func_7C3D(),1);
+		var_07 = scripts\sp\loadout::func_7C27(scripts\sp\_utility::func_7C3D(),1);
 		if(isdefined(var_07) && var_07 == var_05) {
 			if(scripts\sp\_utility::func_7C3E() == var_04 || var_07 == "offhandshield") {
 				return param_02;
 			}
 		}
 
-		var_07 = scripts/sp/loadout::func_7C27(scripts\sp\_utility::func_7CB1(),1);
+		var_07 = scripts\sp\loadout::func_7C27(scripts\sp\_utility::func_7CB1(),1);
 		if(isdefined(var_07) && var_07 == var_05) {
 			if(scripts\sp\_utility::func_7CB2() == var_04 || var_07 == "offhandshield") {
 				return param_02;
@@ -858,10 +858,10 @@ func_4845() {
 
 func_4844() {
 	var_00 = func_4847();
-	var_01 = scripts/sp/loadout::func_7C27(scripts\sp\_utility::func_7BD6());
-	var_02 = scripts/sp/loadout::func_7C27(scripts\sp\_utility::func_7CAF());
-	var_03 = scripts/sp/loadout::func_7C27(scripts\sp\_utility::func_7C3D());
-	var_04 = scripts/sp/loadout::func_7C27(scripts\sp\_utility::func_7CB1());
+	var_01 = scripts\sp\loadout::func_7C27(scripts\sp\_utility::func_7BD6());
+	var_02 = scripts\sp\loadout::func_7C27(scripts\sp\_utility::func_7CAF());
+	var_03 = scripts\sp\loadout::func_7C27(scripts\sp\_utility::func_7C3D());
+	var_04 = scripts\sp\loadout::func_7C27(scripts\sp\_utility::func_7CB1());
 	if(!isdefined(var_01)) {
 		var_01 = "none";
 	}

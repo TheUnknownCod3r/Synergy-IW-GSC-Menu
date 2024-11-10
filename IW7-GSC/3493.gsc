@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\3493.gsc
+ * Script: 3493.gsc
 ***************************************/
 
 init() {
@@ -39,10 +39,10 @@ init() {
   var_0.func_6A09 = "tag_explosive";
   var_0.killcamoffset = (0, 0, 12);
   level.func_9385["ims"] = var_00;
-  level._effect["ims_explode_mp"] = loadfx("vfx/iw7/_requests/mp/vfx_generic_equipment_exp_lg.vfx");
-  level._effect["ims_smoke_mp"] = loadfx("vfx/core/mp/killstreaks/vfx_sg_damage_blacksmoke");
-  level._effect["ims_sensor_explode"] = loadfx("vfx/core/mp/killstreaks/vfx_ims_sparks");
-  level._effect["ims_antenna_light_mp"] = loadfx("vfx/core/mp/killstreaks/vfx_light_detonator_blink");
+  level._effect["ims_explode_mp"] = loadfx("vfx\iw7\_requests\mp\vfx_generic_equipment_exp_lg.vfx");
+  level._effect["ims_smoke_mp"] = loadfx("vfx\core\mp\killstreaks\vfx_sg_damage_blacksmoke");
+  level._effect["ims_sensor_explode"] = loadfx("vfx\core\mp\killstreaks\vfx_ims_sparks");
+  level._effect["ims_antenna_light_mp"] = loadfx("vfx\core\mp\killstreaks\vfx_light_detonator_blink");
   level.placedims = [];
 }
 

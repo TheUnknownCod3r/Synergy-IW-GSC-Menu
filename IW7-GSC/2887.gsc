@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2887.gsc
+ * Script: 2887.gsc
 ***************************************/
 
 init() {
@@ -32,14 +32,14 @@ init_light_generic_iw7(var_00, var_01, var_02, var_03, var_04, var_05, var_06, v
   self.func_ACA5 = func_95A8([self.script_type, "generic"]);
   self.func_50D3 = issubstr(self.func_ACA5, "delaystart");
 
-  if (!scripts/sp/utility::func_65DF("light_on"))
-  scripts/sp/utility::func_65E0("light_on");
+  if (!scripts\sp\utility::func_65DF("light_on"))
+  scripts\sp\utility::func_65E0("light_on");
 
   self.func_AD83 = [];
   self.func_12BB6 = [];
   self.func_AD22 = [];
   self.func_127C9 = [];
-  var_08 = scripts/sp/utility::func_7A8F();
+  var_08 = scripts\sp\utility::func_7A8F();
 
   foreach (var_10 in var_08) {
   if (func_9C37(var_10)) {
@@ -114,9 +114,9 @@ func_ACA2() {
   func_ACA3();
 
   for (;;) {
-  if (!scripts/sp/utility::func_65DB("light_on")) {
+  if (!scripts\sp\utility::func_65DB("light_on")) {
   level scripts\engine\utility::waittill_any("bemani_573", self.func_12711, self.func_C14B);
-  scripts/sp/utility::script_delay();
+  scripts\sp\utility::script_delay();
 
   if (isdefined(self.func_50D3)) {
   if (isdefined(self.script_delay))
@@ -137,7 +137,7 @@ func_ACA2() {
   }
 
   level scripts\engine\utility::waittill_any("bemani_573", self.func_12712, self.func_C14C);
-  scripts/sp/utility::script_delay();
+  scripts\sp\utility::script_delay();
 
   if (isdefined(self.func_50D3)) {
   if (isdefined(self.script_delay))
@@ -236,7 +236,7 @@ func_AC88() {
 
   if (isdefined(self.func_C14B) && isdefined(self.func_C14C)) {
   for (;;) {
-  scripts/sp/utility::script_delay();
+  scripts\sp\utility::script_delay();
 
   if (isdefined(self.func_50D3)) {
   if (isdefined(self.script_delay))
@@ -294,10 +294,10 @@ func_AC89() {
   func_ACA3(undefined, self.func_12ACF);
 
   for (;;) {
-  if (!scripts/sp/utility::func_65DB("light_on") && (isdefined(self.func_12711) || isdefined(self.func_C14B)))
+  if (!scripts\sp\utility::func_65DB("light_on") && (isdefined(self.func_12711) || isdefined(self.func_C14B)))
   level scripts\engine\utility::waittill_any("bemani_573", self.func_12711, self.func_C14B);
 
-  scripts/sp/utility::script_delay();
+  scripts\sp\utility::script_delay();
 
   if (isdefined(self.func_50D3)) {
   if (isdefined(self.script_delay))
@@ -314,7 +314,7 @@ func_AC89() {
   self.script_delay_min = undefined;
   }
 
-  if (self.func_12AE2 && !scripts/sp/utility::func_65DB("light_on")) {
+  if (self.func_12AE2 && !scripts\sp\utility::func_65DB("light_on")) {
   childthread func_AC8A(1, self.func_DC8B);
 
   if (self.func_10E46)
@@ -502,10 +502,10 @@ func_AC9D() {
   func_ACA3(undefined, self.func_12ACF);
 
   for (;;) {
-  if (!scripts/sp/utility::func_65DB("light_on") && (isdefined(self.func_12711) || isdefined(self.func_C14B)))
+  if (!scripts\sp\utility::func_65DB("light_on") && (isdefined(self.func_12711) || isdefined(self.func_C14B)))
   level scripts\engine\utility::waittill_any("bemani_573", self.func_12711, self.func_C14B);
 
-  scripts/sp/utility::script_delay();
+  scripts\sp\utility::script_delay();
 
   if (isdefined(self.func_50D3)) {
   if (isdefined(self.script_delay))
@@ -522,7 +522,7 @@ func_AC9D() {
   self.script_delay_min = undefined;
   }
 
-  if (self.func_12AE2 && !scripts/sp/utility::func_65DB("light_on")) {
+  if (self.func_12AE2 && !scripts\sp\utility::func_65DB("light_on")) {
   childthread func_AC9E(1);
 
   if (self.func_10E46)
@@ -607,10 +607,10 @@ init_light_trig(var_00) {
   var_01 = undefined;
 
   if (isdefined(self.script_noteworthy) && self.script_noteworthy == "stop") {
-  var_01 = "trig_light_stop_" + scripts/sp/utility::string(var_00 getentitynumber());
+  var_01 = "trig_light_stop_" + scripts\sp\utility::string(var_00 getentitynumber());
   var_0.func_12712 = var_01;
   } else {
-  var_01 = "trig_light_start_" + scripts/sp/utility::string(var_00 getentitynumber());
+  var_01 = "trig_light_start_" + scripts\sp\utility::string(var_00 getentitynumber());
   var_0.func_12711 = var_01;
   }
 
@@ -619,7 +619,7 @@ init_light_trig(var_00) {
 }
 
 func_ACA4(var_00) {
-  scripts/sp/utility::func_65E1("light_on");
+  scripts\sp\utility::func_65E1("light_on");
 
   if (isdefined(var_00) && var_00 && self.func_99E6 > 0)
   func_F466(randomfloatrange(self.func_99E6 * 0.25, self.func_99E6), self.func_438F);
@@ -638,12 +638,12 @@ func_ACA4(var_00) {
   var_05 show();
 
   if (isdefined(var_5.effect))
-  var_5.effect scripts/sp/utility::func_E2B0();
+  var_5.effect scripts\sp\utility::func_E2B0();
   }
 }
 
 func_ACA3(var_00, var_01) {
-  scripts/sp/utility::func_65DD("light_on");
+  scripts\sp\utility::func_65DD("light_on");
 
   if (isdefined(var_01) && var_01)
   func_F466(0, (0, 0, 0));
@@ -653,7 +653,7 @@ func_ACA3(var_00, var_01) {
   func_F466(self.func_99E7, self.func_4390);
 
   if (isdefined(self.script_prefab_exploder))
-  scripts/sp/utility::func_10FEC(self.script_prefab_exploder);
+  scripts\sp\utility::func_10FEC(self.script_prefab_exploder);
 
   foreach (var_03 in self.func_EF3C)
   var_03 setscriptablepartstate("onoff", "off");
@@ -669,7 +669,7 @@ func_ACA3(var_00, var_01) {
 }
 
 func_AC9B(var_00) {
-  scripts/sp/utility::func_65DD("light_on");
+  scripts\sp\utility::func_65DD("light_on");
   var_01 = int(var_00 / 0.1);
 
   for (var_02 = 1; var_02 <= var_01; var_2++) {
@@ -708,7 +708,7 @@ func_1298C(var_00, var_01, var_02) {
   if (isdefined(var_01))
   var_04 = var_01;
 
-  scripts/sp/utility::func_65E1("light_on");
+  scripts\sp\utility::func_65E1("light_on");
   func_F466(var_03, var_04);
 
   foreach (var_06 in self.func_EF3C)
@@ -720,7 +720,7 @@ func_1298C(var_00, var_01, var_02) {
   var_09 show();
 
   if (isdefined(var_9.effect))
-  var_9.effect scripts/sp/utility::func_E2B0();
+  var_9.effect scripts\sp\utility::func_E2B0();
   }
 }
 
@@ -745,7 +745,7 @@ func_12968(var_00, var_01, var_02) {
   if (isdefined(var_01))
   var_04 = var_01;
 
-  scripts/sp/utility::func_65DD("light_on");
+  scripts\sp\utility::func_65DD("light_on");
   func_F466(var_03, var_04);
 
   foreach (var_06 in self.func_EF3C)
@@ -1128,7 +1128,7 @@ func_8924(var_00) {
   var_03 show();
 
   if (isdefined(var_3.effect))
-  var_3.effect thread scripts/sp/utility::func_E2B0();
+  var_3.effect thread scripts\sp\utility::func_E2B0();
 
   continue;
   }

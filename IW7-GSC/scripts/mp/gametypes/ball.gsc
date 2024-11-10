@@ -1,25 +1,25 @@
-/*************************************************
+/*****************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\gametypes\ball.gsc
-*************************************************/
+ * Script: scripts\mp\gametypes\ball.gsc
+*****************************************/
 
 main() {
-	scripts\mp\_globallogic::init();
-	scripts\mp\_globallogic::setupcallbacks();
-	if(function_011C()) {
+	scripts\mp\globallogic::init();
+	scripts\mp\globallogic::setupcallbacks();
+	if(isusingmatchrulesdata()) {
 		level.initializematchrules = ::initializematchrules;
 		[[level.initializematchrules]]();
-		level thread scripts\mp\_utility::reinitializematchrulesonmigration();
+		level thread scripts\mp\utility::reinitializematchrulesonmigration();
 	}
 	else
 	{
-		scripts\mp\_utility::registerscorelimitdvar(level.gametype,20);
-		scripts\mp\_utility::registertimelimitdvar(level.gametype,5);
-		scripts\mp\_utility::registerroundlimitdvar(level.gametype,2);
-		scripts\mp\_utility::registerroundswitchdvar(level.gametype,1,0,1);
-		scripts\mp\_utility::registerwinlimitdvar(level.gametype,0);
-		scripts\mp\_utility::registernumlivesdvar(level.gametype,0);
+		scripts\mp\utility::registerscorelimitdvar(level.gametype,20);
+		scripts\mp\utility::registertimelimitdvar(level.gametype,5);
+		scripts\mp\utility::registerroundlimitdvar(level.gametype,2);
+		scripts\mp\utility::registerroundswitchdvar(level.gametype,1,0,1);
+		scripts\mp\utility::registerwinlimitdvar(level.gametype,0);
+		scripts\mp\utility::registernumlivesdvar(level.gametype,0);
 		level.matchrules_damagemultiplier = 0;
 	}
 
@@ -38,7 +38,7 @@ main() {
 	level.scorefrozenuntil = 0;
 	level.ballpickupscorefrozen = 0;
 	if(level.matchrules_damagemultiplier) {
-		level.modifyplayerdamage = ::scripts\mp\_damage::gamemodemodifyplayerdamage;
+		level.modifyplayerdamage = ::scripts\mp\damage::gamemodemodifyplayerdamage;
 	}
 
 	game["dialog"]["gametype"] = "uplink";
@@ -65,7 +65,7 @@ main() {
 }
 
 initializematchrules() {
-	scripts\mp\_utility::setcommonrulesfrommatchdata();
+	scripts\mp\utility::setcommonrulesfrommatchdata();
 	setdynamicdvar("scr_ball_scoreCarry",getmatchrulesdata("ballData","scoreCarry"));
 	setdynamicdvar("scr_ball_scoreThrow",getmatchrulesdata("ballData","scoreThrow"));
 	setdynamicdvar("scr_ball_satelliteCount",getmatchrulesdata("ballData","satelliteCount"));
@@ -85,9 +85,9 @@ onprecachegametype() {
 }
 
 onstartgametype() {
-	var_00 = scripts\mp\_utility::inovertime();
+	var_00 = scripts\mp\utility::inovertime();
 	var_01 = game["overtimeRoundsPlayed"] == 0;
-	var_02 = scripts\mp\_utility::istimetobeatvalid();
+	var_02 = scripts\mp\utility::istimetobeatvalid();
 	if(var_00) {
 		if(var_01) {
 			setomnvar("ui_round_hint_override_attackers",1);
@@ -115,26 +115,26 @@ onstartgametype() {
 		game["defenders"] = var_03;
 	}
 
-	scripts\mp\_utility::setobjectivetext("allies",&"OBJECTIVES_BALL");
-	scripts\mp\_utility::setobjectivetext("axis",&"OBJECTIVES_BALL");
+	scripts\mp\utility::setobjectivetext("allies",&"OBJECTIVES_BALL");
+	scripts\mp\utility::setobjectivetext("axis",&"OBJECTIVES_BALL");
 	if(level.splitscreen) {
-		scripts\mp\_utility::setobjectivescoretext("allies",&"OBJECTIVES_BALL");
-		scripts\mp\_utility::setobjectivescoretext("axis",&"OBJECTIVES_BALL");
+		scripts\mp\utility::setobjectivescoretext("allies",&"OBJECTIVES_BALL");
+		scripts\mp\utility::setobjectivescoretext("axis",&"OBJECTIVES_BALL");
 	}
 	else
 	{
-		scripts\mp\_utility::setobjectivescoretext("allies",&"OBJECTIVES_BALL_SCORE");
-		scripts\mp\_utility::setobjectivescoretext("axis",&"OBJECTIVES_BALL_SCORE");
+		scripts\mp\utility::setobjectivescoretext("allies",&"OBJECTIVES_BALL_SCORE");
+		scripts\mp\utility::setobjectivescoretext("axis",&"OBJECTIVES_BALL_SCORE");
 	}
 
-	scripts\mp\_utility::setobjectivehinttext("allies",&"OBJECTIVES_BALL_HINT");
-	scripts\mp\_utility::setobjectivehinttext("axis",&"OBJECTIVES_BALL_HINT");
+	scripts\mp\utility::setobjectivehinttext("allies",&"OBJECTIVES_BALL_HINT");
+	scripts\mp\utility::setobjectivehinttext("axis",&"OBJECTIVES_BALL_HINT");
 	setclientnamemode("auto_change");
 	scripts\mp\gametypes\obj_ball::ball_default_origins();
 	var_05[0] = level.gametype;
 	var_05[1] = "dom";
 	var_05[2] = "ball";
-	scripts\mp\_gameobjects::main(var_05);
+	scripts\mp\gameobjects::main(var_05);
 	level thread run_ball();
 	level thread onplayerconnect();
 	if(level.possessionresetcondition != 0) {
@@ -144,33 +144,33 @@ onstartgametype() {
 
 updategametypedvars() {
 	scripts\mp\gametypes\common::updategametypedvars();
-	level.scorecarry = scripts\mp\_utility::dvarintvalue("scoreCarry",2,1,9);
-	level.scorethrow = scripts\mp\_utility::dvarintvalue("scoreThrow",1,1,9);
-	level.satellitecount = scripts\mp\_utility::dvarintvalue("satelliteCount",1,1,5);
-	level.practicemode = scripts\mp\_utility::dvarintvalue("practiceMode",0,0,1);
-	level.possessionresetcondition = scripts\mp\_utility::dvarintvalue("possessionResetCondition",0,0,2);
-	level.possessionresettime = scripts\mp\_utility::dvarfloatvalue("possessionResetTime",0,0,150);
-	level.explodeonexpire = scripts\mp\_utility::dvarintvalue("explodeOnExpire",0,0,1);
-	level.idleresettime = scripts\mp\_utility::dvarfloatvalue("idleResetTime",15,0,60);
-	level.armormod = scripts\mp\_utility::dvarfloatvalue("armorMod",1,0,2);
-	level.showenemycarrier = scripts\mp\_utility::dvarintvalue("showEnemyCarrier",5,0,6);
+	level.scorecarry = scripts\mp\utility::dvarintvalue("scoreCarry",2,1,9);
+	level.scorethrow = scripts\mp\utility::dvarintvalue("scoreThrow",1,1,9);
+	level.satellitecount = scripts\mp\utility::dvarintvalue("satelliteCount",1,1,5);
+	level.practicemode = scripts\mp\utility::dvarintvalue("practiceMode",0,0,1);
+	level.possessionresetcondition = scripts\mp\utility::dvarintvalue("possessionResetCondition",0,0,2);
+	level.possessionresettime = scripts\mp\utility::dvarfloatvalue("possessionResetTime",0,0,150);
+	level.explodeonexpire = scripts\mp\utility::dvarintvalue("explodeOnExpire",0,0,1);
+	level.idleresettime = scripts\mp\utility::dvarfloatvalue("idleResetTime",15,0,60);
+	level.armormod = scripts\mp\utility::dvarfloatvalue("armorMod",1,0,2);
+	level.showenemycarrier = scripts\mp\utility::dvarintvalue("showEnemyCarrier",5,0,6);
 	level.carrierarmor = int(level.carrierarmor * level.armormod);
 }
 
 ball_goal_useobject() {
 	foreach(var_02, var_01 in level.ball_goals) {
 		var_01.trigger = spawn("trigger_radius",var_01.origin - (0,0,var_01.fgetarg),0,var_01.fgetarg,var_01.fgetarg * 2);
-		var_01.useobject = scripts\mp\_gameobjects::createuseobject(var_02,var_01.trigger,[],(0,0,var_01.fgetarg * 2.1));
+		var_01.useobject = scripts\mp\gameobjects::createuseobject(var_02,var_01.trigger,[],(0,0,var_01.fgetarg * 2.1));
 		var_01.useobject.objective_icon = var_01;
-		var_01.useobject scripts\mp\_gameobjects::set2dicon("friendly","waypoint_blitz_defend");
-		var_01.useobject scripts\mp\_gameobjects::set2dicon("enemy","waypoint_blitz_goal");
-		var_01.useobject scripts\mp\_gameobjects::set3dicon("friendly","waypoint_blitz_defend");
-		var_01.useobject scripts\mp\_gameobjects::set3dicon("enemy","waypoint_blitz_goal");
-		var_01.useobject scripts\mp\_gameobjects::setvisibleteam("any");
-		var_01.useobject scripts\mp\_gameobjects::allowuse("enemy");
-		var_01.useobject scripts\mp\_gameobjects::setkeyobject(level.balls);
-		var_01.useobject scripts\mp\_gameobjects::setusetime(0);
-		var_01.useobject scripts\mp\_gameobjects::cancontestclaim(1);
+		var_01.useobject scripts\mp\gameobjects::set2dicon("friendly","waypoint_blitz_defend");
+		var_01.useobject scripts\mp\gameobjects::set2dicon("enemy","waypoint_blitz_goal");
+		var_01.useobject scripts\mp\gameobjects::set3dicon("friendly","waypoint_blitz_defend");
+		var_01.useobject scripts\mp\gameobjects::set3dicon("enemy","waypoint_blitz_goal");
+		var_01.useobject scripts\mp\gameobjects::setvisibleteam("any");
+		var_01.useobject scripts\mp\gameobjects::allowuse("enemy");
+		var_01.useobject scripts\mp\gameobjects::setkeyobject(level.balls);
+		var_01.useobject scripts\mp\gameobjects::setusetime(0);
+		var_01.useobject scripts\mp\gameobjects::cancontestclaim(1);
 		var_01.useobject.onuse = ::ball_carrier_touched_goal;
 		var_01.useobject.canuseobject = ::ball_goal_can_use;
 		var_01.useobject.oncontested = ::ball_goal_contested;
@@ -181,8 +181,8 @@ ball_goal_useobject() {
 }
 
 ball_get_path_dist(param_00,param_01) {
-	if(scripts\mp\_spawnlogic::ispathdataavailable()) {
-		var_02 = function_00C0(param_00,param_01,999999);
+	if(scripts\mp\spawnlogic::ispathdataavailable()) {
+		var_02 = getpathdist(param_00,param_01,999999);
 		if(isdefined(var_02) && var_02 >= 0) {
 			return var_02;
 		}
@@ -210,7 +210,7 @@ onplayerconnect() {
 	for(;;) {
 		level waittill("connected",var_00);
 		thread onplayerspawned(var_00);
-		if(scripts\mp\_utility::istrue(level.practicemode) && var_00 ishost()) {
+		if(scripts\mp\utility::istrue(level.practicemode) && var_00 ishost()) {
 			var_00 thread scripts\mp\gametypes\obj_ball::practicenotify();
 			var_00 thread scripts\mp\gametypes\obj_ball::moveballtoplayer();
 		}
@@ -219,33 +219,33 @@ onplayerconnect() {
 
 onplayerspawned(param_00) {
 	param_00 waittill("spawned");
-	param_00 scripts\mp\_utility::setextrascore0(0);
+	param_00 scripts\mp\utility::setextrascore0(0);
 	if(isdefined(param_00.pers["touchdowns"])) {
-		param_00 scripts\mp\_utility::setextrascore0(param_00.pers["touchdowns"]);
+		param_00 scripts\mp\utility::setextrascore0(param_00.pers["touchdowns"]);
 	}
 
-	param_00 scripts\mp\_utility::setextrascore1(0);
+	param_00 scripts\mp\utility::setextrascore1(0);
 	if(isdefined(param_00.pers["fieldgoals"])) {
-		param_00 scripts\mp\_utility::setextrascore1(param_00.pers["fieldgoals"]);
+		param_00 scripts\mp\utility::setextrascore1(param_00.pers["fieldgoals"]);
 	}
 }
 
 initspawns() {
-	scripts\mp\_spawnlogic::setactivespawnlogic("Uplink");
+	scripts\mp\spawnlogic::setactivespawnlogic("Uplink");
 	level.spawnmins = (0,0,0);
 	level.spawnmaxs = (0,0,0);
-	scripts\mp\_spawnlogic::addstartspawnpoints("mp_ball_spawn_allies_start");
-	scripts\mp\_spawnlogic::addstartspawnpoints("mp_ball_spawn_axis_start");
-	level.mapcenter = scripts\mp\_spawnlogic::findboxcenter(level.spawnmins,level.spawnmaxs);
-	function_01B4(level.mapcenter);
-	var_00 = scripts\mp\_spawnlogic::getspawnpointarray(level.spawnnodetype);
-	var_01 = scripts\mp\_spawnlogic::getspawnpointarray(level.spawnnodetype + "_secondary");
+	scripts\mp\spawnlogic::addstartspawnpoints("mp_ball_spawn_allies_start");
+	scripts\mp\spawnlogic::addstartspawnpoints("mp_ball_spawn_axis_start");
+	level.mapcenter = scripts\mp\spawnlogic::findboxcenter(level.spawnmins,level.spawnmaxs);
+	setmapcenter(level.mapcenter);
+	var_00 = scripts\mp\spawnlogic::getspawnpointarray(level.spawnnodetype);
+	var_01 = scripts\mp\spawnlogic::getspawnpointarray(level.spawnnodetype + "_secondary");
 	var_02 = assignteamspawns(var_00);
 	var_03 = assignteamspawns(var_01);
-	scripts\mp\_spawnlogic::registerspawnpoints("allies",var_02["allies"]);
-	scripts\mp\_spawnlogic::registerspawnpoints("allies",var_03["allies"],1);
-	scripts\mp\_spawnlogic::registerspawnpoints("axis",var_02["axis"]);
-	scripts\mp\_spawnlogic::registerspawnpoints("axis",var_03["axis"],1);
+	scripts\mp\spawnlogic::registerspawnpoints("allies",var_02["allies"]);
+	scripts\mp\spawnlogic::registerspawnpoints("allies",var_03["allies"],1);
+	scripts\mp\spawnlogic::registerspawnpoints("axis",var_02["axis"]);
+	scripts\mp\spawnlogic::registerspawnpoints("axis",var_03["axis"],1);
 }
 
 assignteamspawns(param_00) {
@@ -293,7 +293,7 @@ assignteamspawns(param_00) {
 }
 
 getspawnpointdist(param_00,param_01) {
-	var_02 = function_00C0(param_00.origin,param_01,16000);
+	var_02 = getpathdist(param_00.origin,param_01,16000);
 	if(var_02 < 0) {
 		var_02 = distance(param_00.origin,param_01);
 	}
@@ -303,22 +303,22 @@ getspawnpointdist(param_00,param_01) {
 
 getspawnpoint() {
 	var_00 = self.pers["team"];
-	if(scripts\mp\_spawnlogic::shoulduseteamstartspawn()) {
+	if(scripts\mp\spawnlogic::shoulduseteamstartspawn()) {
 		if(game["switchedsides"]) {
-			var_00 = scripts\mp\_utility::getotherteam(var_00);
+			var_00 = scripts\mp\utility::getotherteam(var_00);
 		}
 
-		var_01 = scripts\mp\_spawnlogic::getspawnpointarray(level.spawnnodetype + "_" + var_00 + "_start");
-		var_02 = scripts\mp\_spawnlogic::getspawnpoint_startspawn(var_01);
+		var_01 = scripts\mp\spawnlogic::getspawnpointarray(level.spawnnodetype + "_" + var_00 + "_start");
+		var_02 = scripts\mp\spawnlogic::getspawnpoint_startspawn(var_01);
 	}
 	else
 	{
-		var_01 = scripts\mp\_spawnlogic::getteamspawnpoints(var_02);
-		var_03 = scripts\mp\_spawnlogic::getteamfallbackspawnpoints(var_01);
+		var_01 = scripts\mp\spawnlogic::getteamspawnpoints(var_02);
+		var_03 = scripts\mp\spawnlogic::getteamfallbackspawnpoints(var_01);
 		var_04 = [];
 		var_05["homeBaseTeam"] = var_00;
 		var_05["maxDistToHomeBase"] = level.maxspawndisttohomebase[var_00];
-		var_02 = scripts\mp\_spawnscoring::getspawnpoint(var_01,var_03,var_05);
+		var_02 = scripts\mp\spawnscoring::getspawnpoint(var_01,var_03,var_05);
 	}
 
 	return var_02;
@@ -328,17 +328,17 @@ run_ball() {
 	level.ball_starts = [];
 	level.balls = [];
 	level.ballbases = [];
-	scripts\mp\_utility::func_98D3();
+	scripts\mp\utility::func_98D3();
 	ball_create_team_goal("allies");
 	ball_create_team_goal("axis");
-	level._effect["ball_trail"] = loadfx("vfx/core/mp/core/vfx_uplink_ball_trail.vfx");
-	level._effect["ball_idle"] = loadfx("vfx/core/mp/core/vfx_uplink_ball_idle.vfx");
-	level._effect["ball_download_end"] = loadfx("vfx/core/mp/core/vfx_uplink_ball_download_end.vfx");
-	level._effect["ball_goal_enemy"] = loadfx("vfx/core/mp/core/vfx_uplink_goal_orng.vfx");
-	level._effect["ball_goal_friendly"] = loadfx("vfx/core/mp/core/vfx_uplink_goal_cyan.vfx");
-	level._effect["ball_goal_activated_enemy"] = loadfx("vfx/core/mp/core/vfx_uplink_goal_actv_orng.vfx");
-	level._effect["ball_goal_activated_friendly"] = loadfx("vfx/core/mp/core/vfx_uplink_goal_actv_cyan.vfx");
-	level._effect["ball_teleport"] = loadfx("vfx/core/mp/core/vfx_uplink_ball_teleport.vfx");
+	level._effect["ball_trail"] = loadfx("vfx\core\mp\core\vfx_uplink_ball_trail.vfx");
+	level._effect["ball_idle"] = loadfx("vfx\core\mp\core\vfx_uplink_ball_idle.vfx");
+	level._effect["ball_download_end"] = loadfx("vfx\core\mp\core\vfx_uplink_ball_download_end.vfx");
+	level._effect["ball_goal_enemy"] = loadfx("vfx\core\mp\core\vfx_uplink_goal_orng.vfx");
+	level._effect["ball_goal_friendly"] = loadfx("vfx\core\mp\core\vfx_uplink_goal_cyan.vfx");
+	level._effect["ball_goal_activated_enemy"] = loadfx("vfx\core\mp\core\vfx_uplink_goal_actv_orng.vfx");
+	level._effect["ball_goal_activated_friendly"] = loadfx("vfx\core\mp\core\vfx_uplink_goal_actv_cyan.vfx");
+	level._effect["ball_teleport"] = loadfx("vfx\core\mp\core\vfx_uplink_ball_teleport.vfx");
 	level thread ball_connect_watch();
 	scripts\mp\gametypes\obj_ball::ball_init_map_min_max();
 	scripts\mp\gametypes\obj_ball::ball_create_ball_starts();
@@ -368,7 +368,7 @@ ball_find_ground(param_00) {
 ball_create_team_goal(param_00) {
 	var_01 = param_00;
 	if(game["switchedsides"]) {
-		var_01 = scripts\mp\_utility::getotherteam(var_01);
+		var_01 = scripts\mp\utility::getotherteam(var_01);
 	}
 
 	var_02 = scripts\engine\utility::getstruct("ball_goal_" + var_01,"targetname");
@@ -391,10 +391,10 @@ ball_create_team_goal(param_00) {
 		var_02 ball_find_ground();
 	}
 
-	if(scripts\mp\_utility::istrue(level.tactical)) {
+	if(scripts\mp\utility::istrue(level.tactical)) {
 		var_02.origin = var_02.ground_origin + (0,0,130);
 	}
-	else if(scripts\mp\_utility::istrue(level.supportdoublejump_MAYBE)) {
+	else if(scripts\mp\utility::istrue(level.supportdoublejump_MAYBE)) {
 		if(level.mapname == "mp_frontier") {
 			var_02.origin = var_02.ground_origin + (0,0,180);
 		}
@@ -550,19 +550,19 @@ ball_carrier_touched_goal(param_00) {
 
 	param_00 notify("goal_scored");
 	var_01 = level.scorecarry;
-	param_00 thread scripts\mp\_awards::givemidmatchaward("mode_uplink_dunk");
+	param_00 thread scripts\mp\awards::givemidmatchaward("mode_uplink_dunk");
 	ball_check_assist(param_00,1);
-	param_00 scripts\mp\_utility::incperstat("touchdowns",1);
-	param_00 scripts\mp\_persistence::statsetchild("round","touchdowns",param_00.pers["touchdowns"]);
+	param_00 scripts\mp\utility::incperstat("touchdowns",1);
+	param_00 scripts\mp\persistence::statsetchild("round","touchdowns",param_00.pers["touchdowns"]);
 	if(isplayer(param_00)) {
-		param_00 scripts\mp\_utility::setextrascore0(param_00.pers["touchdowns"]);
-		param_00 thread scripts\mp\_matchdata::loggameevent("dunk",param_00.origin);
+		param_00 scripts\mp\utility::setextrascore0(param_00.pers["touchdowns"]);
+		param_00 thread scripts\mp\matchdata::loggameevent("dunk",param_00.origin);
 	}
 
 	var_02 = self.objective_icon.team;
-	var_03 = scripts\mp\_utility::getotherteam(var_02);
-	scripts\mp\_utility::statusdialog("enemy_carry_score",var_02,1);
-	scripts\mp\_utility::statusdialog("ally_carry_score",var_03,1);
+	var_03 = scripts\mp\utility::getotherteam(var_02);
+	scripts\mp\utility::statusdialog("enemy_carry_score",var_02,1);
+	scripts\mp\utility::statusdialog("ally_carry_score",var_03,1);
 	ball_play_score_fx(self.objective_icon);
 	ball_score_sound(var_03,1);
 	var_04 = param_00.carryobject;
@@ -570,12 +570,12 @@ ball_carrier_touched_goal(param_00) {
 	var_04 scripts\mp\gametypes\obj_ball::ball_set_dropped(1,self.trigger.origin,1);
 	var_04 thread ball_score_event(self.objective_icon);
 	ball_give_score(var_03,var_01);
-	scripts\mp\_utility::setmlgannouncement(1,var_03,param_00 getentitynumber());
+	scripts\mp\utility::setmlgannouncement(1,var_03,param_00 getentitynumber());
 }
 
 should_record_final_score_cam(param_00,param_01) {
-	var_02 = scripts\mp\_gamescore::_getteamscore(param_00);
-	var_03 = scripts\mp\_gamescore::_getteamscore(scripts\mp\_utility::getotherteam(param_00));
+	var_02 = scripts\mp\gamescore::_getteamscore(param_00);
+	var_03 = scripts\mp\gamescore::_getteamscore(scripts\mp\utility::getotherteam(param_00));
 	return var_02 + param_01 >= var_03;
 }
 
@@ -605,18 +605,18 @@ ball_touched_goal(param_00) {
 	ball_play_score_fx(param_00);
 	var_01 = level.scorethrow;
 	var_02 = param_00.team;
-	var_03 = scripts\mp\_utility::getotherteam(var_02);
-	scripts\mp\_utility::statusdialog("enemy_throw_score",var_02,1);
-	scripts\mp\_utility::statusdialog("ally_throw_score",var_03,1);
+	var_03 = scripts\mp\utility::getotherteam(var_02);
+	scripts\mp\utility::statusdialog("enemy_throw_score",var_02,1);
+	scripts\mp\utility::statusdialog("ally_throw_score",var_03,1);
 	if(isdefined(self.lastcarrier)) {
 		self.lastcarrierscored = 1;
-		self.lastcarrier thread scripts\mp\_awards::givemidmatchaward("mode_uplink_fieldgoal");
+		self.lastcarrier thread scripts\mp\awards::givemidmatchaward("mode_uplink_fieldgoal");
 		ball_check_assist(self.lastcarrier,0);
-		self.lastcarrier scripts\mp\_utility::incperstat("fieldgoals",1);
-		self.lastcarrier scripts\mp\_persistence::statsetchild("round","fieldgoals",self.lastcarrier.pers["fieldgoals"]);
+		self.lastcarrier scripts\mp\utility::incperstat("fieldgoals",1);
+		self.lastcarrier scripts\mp\persistence::statsetchild("round","fieldgoals",self.lastcarrier.pers["fieldgoals"]);
 		if(isplayer(self.lastcarrier)) {
-			self.lastcarrier scripts\mp\_utility::setextrascore1(self.lastcarrier.pers["fieldgoals"]);
-			self.lastcarrier thread scripts\mp\_matchdata::loggameevent("fieldgoal",self.lastcarrier.origin);
+			self.lastcarrier scripts\mp\utility::setextrascore1(self.lastcarrier.pers["fieldgoals"]);
+			self.lastcarrier thread scripts\mp\matchdata::loggameevent("fieldgoal",self.lastcarrier.origin);
 		}
 	}
 
@@ -628,17 +628,17 @@ ball_touched_goal(param_00) {
 	thread ball_score_event(param_00);
 	ball_give_score(var_03,var_01);
 	if(isdefined(self.lastcarrier)) {
-		scripts\mp\_utility::setmlgannouncement(0,var_03,self.lastcarrier getentitynumber());
+		scripts\mp\utility::setmlgannouncement(0,var_03,self.lastcarrier getentitynumber());
 		return;
 	}
 
-	scripts\mp\_utility::setmlgannouncement(0,var_03);
+	scripts\mp\utility::setmlgannouncement(0,var_03);
 }
 
 istimeup() {
-	var_00 = scripts\mp\_utility::getwatcheddvar("timelimit");
+	var_00 = scripts\mp\utility::getwatcheddvar("timelimit");
 	if(var_00 != 0) {
-		var_01 = scripts\mp\_gamelogic::gettimeremaining();
+		var_01 = scripts\mp\gamelogic::gettimeremaining();
 		if(var_01 <= 0) {
 			return 1;
 		}
@@ -648,13 +648,13 @@ istimeup() {
 }
 
 ball_give_score(param_00,param_01) {
-	level scripts\mp\_gamescore::giveteamscoreforobjective(param_00,param_01,0);
+	level scripts\mp\gamescore::giveteamscoreforobjective(param_00,param_01,0);
 }
 
 ball_score_event(param_00) {
 	level thread scorefrozentimer();
 	self notify("score_event");
-	if(scripts\mp\_utility::istrue(level.practicemode)) {
+	if(scripts\mp\utility::istrue(level.practicemode)) {
 		foreach(var_02 in level.players) {
 			if(var_02 ishost()) {
 				var_02 thread scripts\mp\gametypes\obj_ball::moveballtoplayer();
@@ -672,7 +672,7 @@ ball_score_event(param_00) {
 
 	var_04 physicslaunchserver(var_04.origin,(0,0,0));
 	var_04 physicsstopserver();
-	scripts\mp\_gameobjects::allowcarry("none");
+	scripts\mp\gameobjects::allowcarry("none");
 	scripts\mp\gametypes\obj_ball::ball_waypoint_upload();
 	var_05 = 0.4;
 	var_06 = 1.2;
@@ -698,7 +698,7 @@ ball_check_assist(param_00,param_01) {
 	}
 
 	if(param_01) {
-		param_00.passplayer thread scripts\mp\_awards::givemidmatchaward("mode_uplink_allyoop");
+		param_00.passplayer thread scripts\mp\awards::givemidmatchaward("mode_uplink_allyoop");
 	}
 }
 
@@ -720,24 +720,24 @@ ball_play_score_fx(param_00) {
 }
 
 ball_waypoint_reset() {
-	scripts\mp\_gameobjects::set2dicon("friendly","waypoint_reset_marker");
-	scripts\mp\_gameobjects::set2dicon("enemy","waypoint_reset_marker");
-	scripts\mp\_gameobjects::set3dicon("friendly","waypoint_reset_marker");
-	scripts\mp\_gameobjects::set3dicon("enemy","waypoint_reset_marker");
+	scripts\mp\gameobjects::set2dicon("friendly","waypoint_reset_marker");
+	scripts\mp\gameobjects::set2dicon("enemy","waypoint_reset_marker");
+	scripts\mp\gameobjects::set3dicon("friendly","waypoint_reset_marker");
+	scripts\mp\gameobjects::set3dicon("enemy","waypoint_reset_marker");
 }
 
 ball_waypoint_contest() {
-	scripts\mp\_gameobjects::set2dicon("friendly","waypoint_uplink_contested");
-	scripts\mp\_gameobjects::set2dicon("enemy","waypoint_uplink_contested");
-	scripts\mp\_gameobjects::set3dicon("friendly","waypoint_uplink_contested");
-	scripts\mp\_gameobjects::set3dicon("enemy","waypoint_uplink_contested");
+	scripts\mp\gameobjects::set2dicon("friendly","waypoint_uplink_contested");
+	scripts\mp\gameobjects::set2dicon("enemy","waypoint_uplink_contested");
+	scripts\mp\gameobjects::set3dicon("friendly","waypoint_uplink_contested");
+	scripts\mp\gameobjects::set3dicon("enemy","waypoint_uplink_contested");
 }
 
 goal_waypoint() {
-	scripts\mp\_gameobjects::set2dicon("friendly","waypoint_blitz_defend");
-	scripts\mp\_gameobjects::set2dicon("enemy","waypoint_blitz_goal");
-	scripts\mp\_gameobjects::set3dicon("friendly","waypoint_blitz_defend");
-	scripts\mp\_gameobjects::set3dicon("enemy","waypoint_blitz_goal");
+	scripts\mp\gameobjects::set2dicon("friendly","waypoint_blitz_defend");
+	scripts\mp\gameobjects::set2dicon("enemy","waypoint_blitz_goal");
+	scripts\mp\gameobjects::set3dicon("friendly","waypoint_blitz_defend");
+	scripts\mp\gameobjects::set3dicon("enemy","waypoint_blitz_goal");
 }
 
 ball_score_sound(param_00,param_01) {
@@ -781,7 +781,7 @@ ball_goal_fx_for_player(param_00) {
 	param_00 player_delete_ball_goal_fx();
 	foreach(var_06, var_03 in level.ball_goals) {
 		var_04 = scripts\engine\utility::ter_op(var_06 == var_01,"ball_goal_friendly","ball_goal_enemy");
-		var_05 = function_01E1(scripts\engine\utility::getfx(var_04),var_03.origin,param_00,(1,0,0));
+		var_05 = spawnfxforclient(scripts\engine\utility::getfx(var_04),var_03.origin,param_00,(1,0,0));
 		var_05 setfxkilldefondelete();
 		param_00.ball_goal_fx[var_04] = var_05;
 		triggerfx(var_05);
@@ -851,15 +851,15 @@ onplayerkilled(param_00,param_01,param_02,param_03,param_04,param_05,param_06,pa
 
 	if(isdefined(param_01) && isplayer(param_01) && param_01.pers["team"] != var_0A.pers["team"]) {
 		if(isdefined(param_01.ball_carried) && var_0D) {
-			param_01 thread scripts\mp\_awards::givemidmatchaward("mode_uplink_kill_with_ball");
+			param_01 thread scripts\mp\awards::givemidmatchaward("mode_uplink_kill_with_ball");
 			var_0B = 1;
 		}
 
 		if(isdefined(var_0A.ball_carried)) {
-			param_01 thread scripts\mp\_awards::givemidmatchaward("mode_uplink_kill_carrier");
-			param_01 scripts\mp\_utility::incperstat("defends",1);
-			param_01 scripts\mp\_persistence::statsetchild("round","defends",param_01.pers["defends"]);
-			thread scripts\mp\_matchdata::loginitialstats(param_09,"carrying");
+			param_01 thread scripts\mp\awards::givemidmatchaward("mode_uplink_kill_carrier");
+			param_01 scripts\mp\utility::incperstat("defends",1);
+			param_01 scripts\mp\persistence::statsetchild("round","defends",param_01.pers["defends"]);
+			thread scripts\mp\matchdata::loginitialstats(param_09,"carrying");
 			scripts\mp\gametypes\obj_ball::updatetimers("neutral",1,0);
 			var_0B = 1;
 		}
@@ -871,10 +871,10 @@ onplayerkilled(param_00,param_01,param_02,param_03,param_04,param_05,param_06,pa
 			var_0E = distsquaredcheck(var_0C,var_0A.origin,var_10.curorigin);
 			if(var_0E && param_01.team != var_0A.team) {
 				if(var_10.ownerteam == var_0A.team) {
-					param_01 thread scripts\mp\_awards::givemidmatchaward("mode_x_assault");
+					param_01 thread scripts\mp\awards::givemidmatchaward("mode_x_assault");
 				}
 				else if(var_10.ownerteam == param_01.team) {
-					param_01 thread scripts\mp\_awards::givemidmatchaward("mode_x_defend");
+					param_01 thread scripts\mp\awards::givemidmatchaward("mode_x_defend");
 				}
 
 				break;
@@ -886,11 +886,11 @@ onplayerkilled(param_00,param_01,param_02,param_03,param_04,param_05,param_06,pa
 				var_14 = distsquaredcheck(var_0C,var_0A.origin,var_13.trigger.origin);
 				if(var_14) {
 					if(var_15 == var_0A.team) {
-						param_01 thread scripts\mp\_awards::givemidmatchaward("mode_x_assault");
+						param_01 thread scripts\mp\awards::givemidmatchaward("mode_x_assault");
 						continue;
 					}
 
-					param_01 thread scripts\mp\_awards::givemidmatchaward("mode_x_defend");
+					param_01 thread scripts\mp\awards::givemidmatchaward("mode_x_defend");
 				}
 			}
 		}
@@ -931,7 +931,7 @@ removeuplinkgoal() {
 				var_01 = "axis";
 			}
 
-			level.ball_goals[var_01].useobject scripts\mp\_gameobjects::allowuse("none");
+			level.ball_goals[var_01].useobject scripts\mp\gameobjects::allowuse("none");
 			level.ball_goals[var_01].useobject.trigger = undefined;
 			level.ball_goals[var_01].useobject notify("deleted");
 			foreach(var_03 in level.players) {
@@ -939,10 +939,10 @@ removeuplinkgoal() {
 			}
 
 			level.ball_goals[var_01].useobject.visibleteam = "none";
-			level.ball_goals[var_01].useobject scripts\mp\_gameobjects::set2dicon("friendly",undefined);
-			level.ball_goals[var_01].useobject scripts\mp\_gameobjects::set3dicon("friendly",undefined);
-			level.ball_goals[var_01].useobject scripts\mp\_gameobjects::set2dicon("enemy",undefined);
-			level.ball_goals[var_01].useobject scripts\mp\_gameobjects::set3dicon("enemy",undefined);
+			level.ball_goals[var_01].useobject scripts\mp\gameobjects::set2dicon("friendly",undefined);
+			level.ball_goals[var_01].useobject scripts\mp\gameobjects::set3dicon("friendly",undefined);
+			level.ball_goals[var_01].useobject scripts\mp\gameobjects::set2dicon("enemy",undefined);
+			level.ball_goals[var_01].useobject scripts\mp\gameobjects::set3dicon("enemy",undefined);
 			setdynamicdvar("scr_devRemoveDomFlag","");
 		}
 
@@ -972,17 +972,17 @@ placeuplinkgoal() {
 			var_02.highestspawndistratio = 0;
 			level.ball_goals[var_01] = var_02;
 			var_02.trigger = spawn("trigger_radius",var_02.origin - (0,0,var_02.fgetarg),0,var_02.fgetarg,var_02.fgetarg * 2);
-			var_02.useobject = scripts\mp\_gameobjects::createuseobject(var_01,var_02.trigger,[],(0,0,var_02.fgetarg * 2.1));
+			var_02.useobject = scripts\mp\gameobjects::createuseobject(var_01,var_02.trigger,[],(0,0,var_02.fgetarg * 2.1));
 			var_02.useobject.objective_icon = var_02;
-			var_02.useobject scripts\mp\_gameobjects::set2dicon("friendly","waypoint_blitz_defend");
-			var_02.useobject scripts\mp\_gameobjects::set2dicon("enemy","waypoint_blitz_goal");
-			var_02.useobject scripts\mp\_gameobjects::set3dicon("friendly","waypoint_blitz_defend");
-			var_02.useobject scripts\mp\_gameobjects::set3dicon("enemy","waypoint_blitz_goal");
-			var_02.useobject scripts\mp\_gameobjects::setvisibleteam("any");
-			var_02.useobject scripts\mp\_gameobjects::allowuse("enemy");
-			var_02.useobject scripts\mp\_gameobjects::setkeyobject(level.balls);
-			var_02.useobject scripts\mp\_gameobjects::setusetime(0);
-			var_02.useobject scripts\mp\_gameobjects::cancontestclaim(1);
+			var_02.useobject scripts\mp\gameobjects::set2dicon("friendly","waypoint_blitz_defend");
+			var_02.useobject scripts\mp\gameobjects::set2dicon("enemy","waypoint_blitz_goal");
+			var_02.useobject scripts\mp\gameobjects::set3dicon("friendly","waypoint_blitz_defend");
+			var_02.useobject scripts\mp\gameobjects::set3dicon("enemy","waypoint_blitz_goal");
+			var_02.useobject scripts\mp\gameobjects::setvisibleteam("any");
+			var_02.useobject scripts\mp\gameobjects::allowuse("enemy");
+			var_02.useobject scripts\mp\gameobjects::setkeyobject(level.balls);
+			var_02.useobject scripts\mp\gameobjects::setusetime(0);
+			var_02.useobject scripts\mp\gameobjects::cancontestclaim(1);
 			var_02.useobject.onuse = ::ball_carrier_touched_goal;
 			var_02.useobject.canuseobject = ::ball_goal_can_use;
 			var_02.useobject.oncontested = ::ball_goal_contested;

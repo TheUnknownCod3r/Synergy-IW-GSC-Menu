@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2710.gsc
+ * Script: 2710.gsc
 ***************************************/
 
 setupminimap(var_00) {

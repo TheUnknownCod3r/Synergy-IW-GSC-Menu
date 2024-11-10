@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2905.gsc
+ * Script: 2905.gsc
 ***************************************/
 
 func_C97C(var_00) {
@@ -27,7 +27,7 @@ func_C97C(var_00) {
   self.func_EE7E = 1;
   self.func_C3E8 = self.combatmode;
   self.combatmode = "no_cover";
-  scripts/sp/utility::func_5514();
+  scripts\sp\utility::func_5514();
 
   if (isdefined(self.func_EE2C)) {
   self.func_C3FA = self.moveplaybackrate;
@@ -37,14 +37,14 @@ func_C97C(var_00) {
   func_AD3A();
   func_F4C7();
   var_1["ent"][1] = ::func_7CD9;
-  var_1["ent"][0] = scripts/sp/utility::func_7A8F;
+  var_1["ent"][0] = scripts\sp\utility::func_7A8F;
   var_1["node"][1] = ::func_7CDB;
   var_1["node"][0] = ::func_7A92;
   var_1["struct"][1] = ::func_7CE0;
-  var_1["struct"][0] = scripts/sp/utility::func_7A97;
-  var_2["ent"] = scripts/sp/utility::func_F3D3;
-  var_2["node"] = scripts/sp/utility::func_F3D9;
-  var_2["struct"] = scripts/sp/utility::func_F3D3;
+  var_1["struct"][0] = scripts\sp\utility::func_7A97;
+  var_2["ent"] = scripts\sp\utility::func_F3D3;
+  var_2["node"] = scripts\sp\utility::func_F3D9;
+  var_2["struct"] = scripts\sp\utility::func_F3D3;
 
   if (isdefined(var_00))
   self.target = var_00;
@@ -68,9 +68,9 @@ func_C97C(var_00) {
   }
   } else {
   var_03 = 0;
-  var_04 = scripts/sp/utility::func_7A8F();
+  var_04 = scripts\sp\utility::func_7A8F();
   var_05 = func_7A92();
-  var_06 = scripts/sp/utility::func_7A97();
+  var_06 = scripts\sp\utility::func_7A97();
 
   if (var_4.size) {
   var_07 = scripts\engine\utility::random(var_04);
@@ -117,7 +117,7 @@ func_C97C(var_00) {
   scripts\engine\utility::flag_set(var_7.func_ED9E);
 
   if (isdefined(var_7.func_ED80))
-  scripts/sp/utility::func_65E1(var_7.func_ED80);
+  scripts\sp\utility::func_65E1(var_7.func_ED80);
 
   if (isdefined(var_7.func_ED9B))
   scripts\engine\utility::flag_clear(var_7.func_ED9B);
@@ -177,7 +177,7 @@ func_C97C(var_00) {
   if (isdefined(var_7.func_EDA0) && !scripts\engine\utility::flag(var_7.func_EDA0))
   scripts\engine\utility::flag_wait(var_7.func_EDA0);
 
-  var_07 scripts/sp/utility::script_delay();
+  var_07 scripts\sp\utility::script_delay();
 
   if (isdefined(var_13)) {
   if (isdefined(var_7.func_ED88))
@@ -200,11 +200,11 @@ func_C97C(var_00) {
   }
 
   if (var_15) {
-  var_07 scripts/sp/anim::func_1ECE(self, var_18);
-  var_07 scripts/sp/anim::func_1EC8(self, "gravity", var_18, undefined, var_12);
+  var_07 scripts\sp\anim::func_1ECE(self, var_18);
+  var_07 scripts\sp\anim::func_1EC8(self, "gravity", var_18, undefined, var_12);
   }
   else
-  scripts/sp/anim::func_1EC8(self, "gravity", var_18, undefined, var_12);
+  scripts\sp\anim::func_1EC8(self, "gravity", var_18, undefined, var_12);
   }
 
   self.func_C99C = undefined;
@@ -220,7 +220,7 @@ func_C97C(var_00) {
 
   for (;;) {
   var_19 = self.func_C982[randomint(self.func_C982.size)];
-  scripts/sp/anim::func_1EC8(self, "gravity", var_19, undefined, var_12);
+  scripts\sp\anim::func_1EC8(self, "gravity", var_19, undefined, var_12);
   }
   }
 
@@ -242,20 +242,20 @@ func_C981(var_00, var_01, var_02) {
   }
 
   if (isdefined(self.func_C9A7) && isdefined(self.func_C9A7[var_00]))
-  var_03 scripts/sp/anim::func_1EC8(self, "gravity", self.func_C9A7[var_00], undefined, var_01, var_04);
+  var_03 scripts\sp\anim::func_1EC8(self, "gravity", self.func_C9A7[var_00], undefined, var_01, var_04);
   else if (isdefined(self.script_animation) && isdefined(level.func_EC85["generic"]["patrol_stop_" + self.script_animation]))
-  scripts/sp/anim::func_1EC8(self, "gravity", "patrol_stop_" + self.script_animation, undefined, var_01);
+  scripts\sp\anim::func_1EC8(self, "gravity", "patrol_stop_" + self.script_animation, undefined, var_01);
   else
-  var_03 scripts/sp/anim::func_1EC8(self, "gravity", "patrol_stop", undefined, var_01, var_04);
+  var_03 scripts\sp\anim::func_1EC8(self, "gravity", "patrol_stop", undefined, var_01, var_04);
 }
 
 func_C980(var_00, var_01) {
   if (isdefined(self.func_C9A3) && isdefined(self.func_C9A3[var_00]))
-  scripts/sp/anim::func_1EC8(self, "gravity", self.func_C9A3[var_00], undefined, var_01);
+  scripts\sp\anim::func_1EC8(self, "gravity", self.func_C9A3[var_00], undefined, var_01);
   else if (isdefined(self.script_animation) && isdefined(level.func_EC85["generic"]["patrol_start_" + self.script_animation]))
-  scripts/sp/anim::func_1EC8(self, "gravity", "patrol_start_" + self.script_animation, undefined, var_01);
+  scripts\sp\anim::func_1EC8(self, "gravity", "patrol_start_" + self.script_animation, undefined, var_01);
   else
-  scripts/sp/anim::func_1EC8(self, "gravity", "patrol_start", undefined, var_01);
+  scripts\sp\anim::func_1EC8(self, "gravity", "patrol_start", undefined, var_01);
 }
 
 #using_animtree("generic_human");
@@ -338,10 +338,10 @@ func_F4C7() {
 
   if (isdefined(self.script_animation)) {
   if (isdefined(level.func_EC85["generic"]["patrol_idle_" + self.script_animation]))
-  scripts/sp/utility::func_F3C8("patrol_idle_" + self.script_animation);
+  scripts\sp\utility::func_F3C8("patrol_idle_" + self.script_animation);
   }
 
-  scripts/sp/utility::func_F3CC(var_00, var_01);
+  scripts\sp\utility::func_F3CC(var_00, var_01);
 }
 
 func_1374A() {
@@ -370,16 +370,16 @@ func_13759() {
 func_13749() {
   self endon("death");
   func_1374A();
-  var_00 = scripts/sp/utility::func_65DF("_stealth_enabled") && scripts/sp/utility::func_65DB("_stealth_enabled");
+  var_00 = scripts\sp\utility::func_65DF("_stealth_enabled") && scripts\sp\utility::func_65DB("_stealth_enabled");
   self.func_EE7E = 0;
 
   if (isdefined(self.func_C3E8))
   self.combatmode = self.func_C3E8;
 
   if (!var_00) {
-  scripts/sp/utility::func_4154();
+  scripts\sp\utility::func_4154();
   self.combatmode = self.func_C3E8;
-  scripts/sp/utility::func_417A();
+  scripts\sp\utility::func_417A();
   self allowedstances("stand", "crouch", "prone");
   self.disablearrivals = 0;
   self.func_55ED = 0;
@@ -486,7 +486,7 @@ func_AD3A() {
 }
 
 func_CA83() {
-  scripts/sp/utility::func_106ED(self);
+  scripts\sp\utility::func_106ED(self);
 
   if (isdefined(self.enemy))
   return;
@@ -640,14 +640,14 @@ func_CA86(var_00) {
   self.func_C98C endon("death");
 
   if (isdefined(self.func_C98C.script_noteworthy) && self.func_C98C.script_noteworthy == "cqb_patrol") {
-  scripts/sp/utility::func_F35F();
+  scripts\sp\utility::func_F35F();
   return;
   }
 
   if (!isdefined(var_00))
   var_00 = 200;
 
-  scripts/sp/utility::func_F35F();
+  scripts\sp\utility::func_F35F();
 
   for (;;) {
   wait 0.1;
@@ -658,16 +658,16 @@ func_CA86(var_00) {
   if (self.a.movement == "run")
   continue;
 
-  scripts/sp/anim::func_1EC8(self, "gravity", "patrol_dog_start");
-  scripts/sp/utility::func_417A();
+  scripts\sp\anim::func_1EC8(self, "gravity", "patrol_dog_start");
+  scripts\sp\utility::func_417A();
   self.func_EE56 = 1;
   continue;
   }
 
   if (self.a.movement != "walk") {
   self notify("stopped_while_patrolling");
-  scripts/sp/anim::func_1EC8(self, "gravity", "patrol_dog_stop");
-  scripts/sp/utility::func_F35F();
+  scripts\sp\anim::func_1EC8(self, "gravity", "patrol_dog_stop");
+  scripts\sp\utility::func_F35F();
   }
   }
 }

@@ -1,8 +1,8 @@
-/**********************************************************************
+/**************************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\maps\cp_final\cp_final_interactions.gsc
-**********************************************************************/
+ * Script: scripts\cp\maps\cp_final\cp_final_interactions.gsc
+**************************************************************/
 
 register_interactions() {
 	registerdoorinteractions();
@@ -82,11 +82,11 @@ register_afterlife_games() {
 	level.interaction_hintstrings["bowling_for_planets_afterlife"] = &"COOP_INTERACTIONS_PLAY_GAME";
 	level.interaction_hintstrings["clown_tooth_game_afterlife"] = &"COOP_INTERACTIONS_PLAY_GAME";
 	level.interaction_hintstrings["game_race"] = &"COOP_INTERACTIONS_PLAY_GAME";
-	scripts\cp\cp_interaction::register_interaction("basketball_game_afterlife","afterlife_game",undefined,undefined,::scripts/cp/zombies/interaction_basketball::use_basketball_game,0,0,::scripts/cp/zombies/interaction_basketball::init_afterlife_basketball_game);
-	scripts\cp\cp_interaction::register_interaction("clown_tooth_game_afterlife","afterlife_game",undefined,undefined,::scripts/cp/zombies/interaction_clowntooth::use_clowntooth_game,0,0,::scripts/cp/zombies/interaction_clowntooth::init_afterlife_clowntooth_game);
-	scripts\cp\cp_interaction::register_interaction("laughingclown_afterlife","afterlife_game",undefined,undefined,::scripts/cp/zombies/interaction_laughingclown::laughing_clown,0,0,::scripts/cp/zombies/interaction_laughingclown::init_all_afterlife_laughing_clowns);
-	scripts\cp\cp_interaction::register_interaction("bowling_for_planets_afterlife","afterlife_game",undefined,undefined,::scripts/cp/zombies/interaction_bowling_for_planets::use_bfp_game,0,0,::scripts/cp/zombies/interaction_bowling_for_planets::init_bfp_afterlife_game);
-	scripts\cp\cp_interaction::register_interaction("game_race","arcade_game",undefined,::scripts/cp/zombies/interaction_racing::race_game_hint_logic,::scripts/cp/zombies/interaction_racing::use_race_game,0,1,::scripts/cp/zombies/interaction_racing::init_all_race_games);
+	scripts\cp\cp_interaction::register_interaction("basketball_game_afterlife","afterlife_game",undefined,undefined,::scripts\cp\zombies\interaction_basketball::use_basketball_game,0,0,::scripts\cp\zombies\interaction_basketball::init_afterlife_basketball_game);
+	scripts\cp\cp_interaction::register_interaction("clown_tooth_game_afterlife","afterlife_game",undefined,undefined,::scripts\cp\zombies\interaction_clowntooth::use_clowntooth_game,0,0,::scripts\cp\zombies\interaction_clowntooth::init_afterlife_clowntooth_game);
+	scripts\cp\cp_interaction::register_interaction("laughingclown_afterlife","afterlife_game",undefined,undefined,::scripts\cp\zombies\interaction_laughingclown::laughing_clown,0,0,::scripts\cp\zombies\interaction_laughingclown::init_all_afterlife_laughing_clowns);
+	scripts\cp\cp_interaction::register_interaction("bowling_for_planets_afterlife","afterlife_game",undefined,undefined,::scripts\cp\zombies\interaction_bowling_for_planets::use_bfp_game,0,0,::scripts\cp\zombies\interaction_bowling_for_planets::init_bfp_afterlife_game);
+	scripts\cp\cp_interaction::register_interaction("game_race","arcade_game",undefined,::scripts\cp\zombies\interaction_racing::race_game_hint_logic,::scripts\cp\zombies\interaction_racing::use_race_game,0,1,::scripts\cp\zombies\interaction_racing::init_all_race_games);
 }
 
 register_arcade_roms() {
@@ -98,18 +98,18 @@ register_arcade_roms() {
 	level.interaction_hintstrings["arcade_keyston"] = &"COOP_INTERACTIONS_PLAY_GAME";
 	level.interaction_hintstrings["arcade_plaque"] = &"COOP_INTERACTIONS_PLAY_GAME";
 	level.interaction_hintstrings["arcade_crackpo"] = &"COOP_INTERACTIONS_PLAY_GAME";
-	scripts\cp\cp_interaction::register_interaction("arcade_hero","arcade_game",undefined,undefined,::scripts/cp/zombies/zombie_arcade_games::use_arcade_game,0,1);
-	scripts\cp\cp_interaction::register_interaction("arcade_icehock","arcade_game",undefined,undefined,::scripts/cp/zombies/zombie_arcade_games::use_arcade_game,0,1);
-	scripts\cp\cp_interaction::register_interaction("arcade_seaques","arcade_game",undefined,undefined,::scripts/cp/zombies/zombie_arcade_games::use_arcade_game,0,1);
-	scripts\cp\cp_interaction::register_interaction("arcade_boxing","arcade_game",undefined,undefined,::scripts/cp/zombies/zombie_arcade_games::use_arcade_game,0,1);
-	scripts\cp\cp_interaction::register_interaction("arcade_oink","arcade_game",undefined,undefined,::scripts/cp/zombies/zombie_arcade_games::use_arcade_game,0,1);
-	scripts\cp\cp_interaction::register_interaction("arcade_keyston","arcade_game",undefined,undefined,::scripts/cp/zombies/zombie_arcade_games::use_arcade_game,0,1);
-	scripts\cp\cp_interaction::register_interaction("arcade_plaque","arcade_game",undefined,undefined,::scripts/cp/zombies/zombie_arcade_games::use_arcade_game,0,1);
-	scripts\cp\cp_interaction::register_interaction("arcade_crackpo","arcade_game",undefined,undefined,::scripts/cp/zombies/zombie_arcade_games::use_arcade_game,0,1);
+	scripts\cp\cp_interaction::register_interaction("arcade_hero","arcade_game",undefined,undefined,::scripts\cp\zombies\zombie_arcade_games::use_arcade_game,0,1);
+	scripts\cp\cp_interaction::register_interaction("arcade_icehock","arcade_game",undefined,undefined,::scripts\cp\zombies\zombie_arcade_games::use_arcade_game,0,1);
+	scripts\cp\cp_interaction::register_interaction("arcade_seaques","arcade_game",undefined,undefined,::scripts\cp\zombies\zombie_arcade_games::use_arcade_game,0,1);
+	scripts\cp\cp_interaction::register_interaction("arcade_boxing","arcade_game",undefined,undefined,::scripts\cp\zombies\zombie_arcade_games::use_arcade_game,0,1);
+	scripts\cp\cp_interaction::register_interaction("arcade_oink","arcade_game",undefined,undefined,::scripts\cp\zombies\zombie_arcade_games::use_arcade_game,0,1);
+	scripts\cp\cp_interaction::register_interaction("arcade_keyston","arcade_game",undefined,undefined,::scripts\cp\zombies\zombie_arcade_games::use_arcade_game,0,1);
+	scripts\cp\cp_interaction::register_interaction("arcade_plaque","arcade_game",undefined,undefined,::scripts\cp\zombies\zombie_arcade_games::use_arcade_game,0,1);
+	scripts\cp\cp_interaction::register_interaction("arcade_crackpo","arcade_game",undefined,undefined,::scripts\cp\zombies\zombie_arcade_games::use_arcade_game,0,1);
 }
 
 register_crafting_interactions() {
-	scripts\cp\cp_interaction::register_interaction("pillage_item",undefined,undefined,::scripts/cp/zombies/zombies_pillage::pillage_hint_func,::scripts/cp/zombies/zombies_pillage::player_used_pillage_spot,0,0);
+	scripts\cp\cp_interaction::register_interaction("pillage_item",undefined,undefined,::scripts\cp\zombies\zombies_pillage::pillage_hint_func,::scripts\cp\zombies\zombies_pillage::player_used_pillage_spot,0,0);
 }
 
 level_specific_wait_for_interaction_triggered(param_00) {
@@ -438,21 +438,21 @@ level_specific_player_interaction_monitor() {
 weaponinteractions() {
 	var_00 = 0;
 	for(;;) {
-		var_01 = tablelookupbyrow("cp/zombies/cp_final_weapontable.csv",var_00,0);
+		var_01 = tablelookupbyrow("cp\zombies\cp_final_weapontable.csv",var_00,0);
 		if(var_01 == "") {
 			break;
 		}
 
-		var_02 = tablelookupbyrow("cp/zombies/cp_final_weapontable.csv",var_00,2);
+		var_02 = tablelookupbyrow("cp\zombies\cp_final_weapontable.csv",var_00,2);
 		if(!issubstr(var_02,"wall")) {
 			var_00++;
 			continue;
 		}
 
-		var_03 = int(tablelookupbyrow("cp/zombies/cp_final_weapontable.csv",var_00,4));
-		var_04 = tablelookupbyrow("cp/zombies/cp_final_weapontable.csv",var_00,1);
+		var_03 = int(tablelookupbyrow("cp\zombies\cp_final_weapontable.csv",var_00,4));
+		var_04 = tablelookupbyrow("cp\zombies\cp_final_weapontable.csv",var_00,1);
 		level.interaction_hintstrings[var_04] = &"CP_TOWN_INTERACTIONS_BUY_WEAPON";
-		levelinteractionregistration(0,var_04,"wall_buy",undefined,::scripts/cp/zombies/coop_wall_buys::get_wall_buy_hint_func,::scripts/cp/zombies/coop_wall_buys::interaction_purchase_weapon,var_03);
+		levelinteractionregistration(0,var_04,"wall_buy",undefined,::scripts\cp\zombies\coop_wall_buys::get_wall_buy_hint_func,::scripts\cp\zombies\coop_wall_buys::interaction_purchase_weapon,var_03);
 		var_00++;
 	}
 }
@@ -695,7 +695,7 @@ check_for_charge_fuse_sequence(param_00,param_01) {
 		var_03 setmodel("tag_origin");
 		thread playfusechargesounds(var_02,var_03);
 		level thread playpapupgradevo(param_01);
-		var_04 = function_02DF(scripts\engine\utility::getfx("vfx_charge_fuse_beam"),var_03,"tag_origin",level.fuse_in_hand,"tag_origin");
+		var_04 = playfxontagsbetweenclients(scripts\engine\utility::getfx("vfx_charge_fuse_beam"),var_03,"tag_origin",level.fuse_in_hand,"tag_origin");
 		level thread charging_sequence_rumble(param_00);
 		level thread changetochargedfuses();
 		var_05 = getent("fuse_laser_trigger","script_noteworthy");
@@ -781,7 +781,7 @@ change_reel_func(param_00,param_01) {
 		scripts\engine\utility::flag_set("set_movie_spaceland");
 		generic_place_gesture_and_fx(param_01,param_00.origin + (-3,0,75));
 		level.movie_playing = "cp_zmb_screen_640";
-		function_030E(level.movie_playing);
+		playcinematicforalllooping(level.movie_playing);
 		scripts\cp\cp_interaction::remove_from_current_interaction_list(param_00);
 	}
 }
@@ -1034,7 +1034,7 @@ pickup_helmet() {
 
 generic_pickup_gesture_and_fx(param_00,param_01) {
 	param_00 endon("disconnect");
-	if(function_02A6(param_01) || !function_02A5(param_01)) {
+	if(isent(param_01) || !isvector(param_01)) {
 		param_01 = param_01.origin;
 	}
 
@@ -1046,7 +1046,7 @@ generic_pickup_gesture_and_fx(param_00,param_01) {
 
 generic_place_gesture_and_fx(param_00,param_01) {
 	param_00 endon("disconnect");
-	if(function_02A6(param_01) || !function_02A5(param_01)) {
+	if(isent(param_01) || !isvector(param_01)) {
 		param_01 = param_01.origin;
 	}
 

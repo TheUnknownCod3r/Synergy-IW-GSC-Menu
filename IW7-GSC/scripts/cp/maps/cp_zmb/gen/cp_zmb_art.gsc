@@ -1,8 +1,8 @@
-/*************************************************************
+/*****************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\maps\cp_zmb\gen\cp_zmb_art.gsc
-*************************************************************/
+ * Script: scripts\cp\maps\cp_zmb\gen\cp_zmb_art.gsc
+*****************************************************/
 
 main() {
 	level.tweakfile = 1;

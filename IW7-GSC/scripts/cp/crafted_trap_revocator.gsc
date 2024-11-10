@@ -1,12 +1,12 @@
-/*********************************************************
+/*************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\crafted_trap_revocator.gsc
-*********************************************************/
+ * Script: scripts\cp\crafted_trap_revocator.gsc
+*************************************************/
 
 init() {
-	level._effect["revocator_idle"] = loadfx("vfx/iw7/core/zombie/vfx_zmb_revocator_idle.vfx");
-	level._effect["revocator_activate"] = loadfx("vfx/iw7/_requests/coop/vfx_revocator_use.vfx");
+	level._effect["revocator_idle"] = loadfx("vfx\iw7\core\zombie\vfx_zmb_revocator_idle.vfx");
+	level._effect["revocator_activate"] = loadfx("vfx\iw7\_requests\coop\vfx_revocator_use.vfx");
 	var_00 = spawnstruct();
 	var_00.timeout = 30;
 	var_00.modelbase = "revocator";

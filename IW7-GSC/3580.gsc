@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3580.gsc
-****************************/
+ * Script: 3580.gsc
+************************/
 
 func_DAF5(param_00) {
 	thread func_13A55(param_00);
@@ -21,7 +21,7 @@ func_13A6E(param_00) {
 	param_00 waittill("missile_stuck");
 	var_01 = anglestoup(param_00.angles);
 	var_02 = func_10856(param_00);
-	var_02 scripts/mp/equipment/blackhat::func_2B2A();
+	var_02 scripts\mp\equipment\blackhat::func_2B2A();
 	var_02 thread func_13A3B();
 	thread func_13B19(var_02);
 }
@@ -34,7 +34,7 @@ func_13B19(param_00) {
 	param_00 setscriptablepartstate("effects","warmUp",0);
 	wait(1);
 	param_00 setscriptablepartstate("effects","explode_01",0);
-	var_01 thread scripts\mp\_shellshock::func_DAF3();
+	var_01 thread scripts\mp\shellshock::func_DAF3();
 	param_00 radiusdamage(var_01.origin,256,100,50,var_01.triggerportableradarping,"MOD_EXPLOSIVE",var_01.weapon_name);
 	var_02 = var_01.ticks;
 	for(var_03 = 0;var_03 < var_02;var_03++) {
@@ -57,7 +57,7 @@ func_13B19(param_00) {
 				break;
 		}
 
-		var_01 thread scripts\mp\_shellshock::func_DAF3();
+		var_01 thread scripts\mp\shellshock::func_DAF3();
 		param_00 radiusdamage(var_01.origin,256,40,20,var_01.triggerportableradarping,"MOD_EXPLOSIVE",var_01.weapon_name);
 	}
 
@@ -79,7 +79,7 @@ func_10856(param_00) {
 }
 
 func_13A3B() {
-	scripts\mp\_damage::monitordamage(50,"pulseGrenade",::func_612B,::func_612C,0);
+	scripts\mp\damage::monitordamage(50,"pulseGrenade",::func_612B,::func_612C,0);
 }
 
 func_612B(param_00,param_01,param_02,param_03) {
@@ -88,16 +88,16 @@ func_612B(param_00,param_01,param_02,param_03) {
 		param_00 notify("destroyed_equipment");
 	}
 
-	scripts/mp/equipment/blackhat::func_2B2C();
+	scripts\mp\equipment\blackhat::func_2B2C();
 	self.objective_position delete();
 	self notify("detonateExplosive");
 }
 
 func_612C(param_00,param_01,param_02,param_03,param_04) {
 	var_05 = param_03;
-	var_05 = scripts\mp\_damage::handlemeleedamage(param_01,param_02,var_05);
-	var_05 = scripts\mp\_damage::handleempdamage(param_01,param_02,var_05);
-	var_05 = scripts\mp\_damage::handleapdamage(param_01,param_02,var_05);
+	var_05 = scripts\mp\damage::handlemeleedamage(param_01,param_02,var_05);
+	var_05 = scripts\mp\damage::handleempdamage(param_01,param_02,var_05);
+	var_05 = scripts\mp\damage::handleapdamage(param_01,param_02,var_05);
 	return var_05;
 }
 

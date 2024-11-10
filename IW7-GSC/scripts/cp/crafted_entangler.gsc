@@ -1,8 +1,8 @@
-/****************************************************
+/********************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\crafted_entangler.gsc
-****************************************************/
+ * Script: scripts\cp\crafted_entangler.gsc
+********************************************/
 
 init() {
 	var_00 = spawnstruct();

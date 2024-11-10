@@ -1,8 +1,8 @@
-/********************************************
+/************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\anim\animset.gsc
-********************************************/
+ * Script: scripts\anim\animset.gsc
+************************************/
 
 func_94FD() {
 	if(isdefined(level.var_1FD2)) {
@@ -133,36 +133,36 @@ func_F2B2() {}
 
 func_F2BE() {
 	if(scripts\anim\utility_common::isusingsidearm()) {
-		self.var_1491.var_2274 = scripts\anim\utility::func_B028("pistol_stand");
+		self.a.var_2274 = scripts\anim\utility::func_B028("pistol_stand");
 		return;
 	}
 
 	if(isdefined(self.var_440C)) {
-		self.var_1491.var_2274 = self.var_440C;
+		self.a.var_2274 = self.var_440C;
 		return;
 	}
 
 	if(isdefined(self.heat)) {
-		self.var_1491.var_2274 = scripts\anim\utility::func_B028("heat_stand");
+		self.a.var_2274 = scripts\anim\utility::func_B028("heat_stand");
 		return;
 	}
 
 	if(scripts\anim\utility_common::usingrocketlauncher()) {
-		self.var_1491.var_2274 = scripts\anim\utility::func_B028("rpg_stand");
+		self.a.var_2274 = scripts\anim\utility::func_B028("rpg_stand");
 		return;
 	}
 
 	if(isdefined(self.var_394) && scripts\anim\utility_common::weapon_pump_action_shotgun()) {
-		self.var_1491.var_2274 = scripts\anim\utility::func_B028("shotgun_stand");
+		self.a.var_2274 = scripts\anim\utility::func_B028("shotgun_stand");
 		return;
 	}
 
 	if(scripts\anim\utility::func_9D9B()) {
-		self.var_1491.var_2274 = scripts\anim\utility::func_B028("cqb_stand");
+		self.a.var_2274 = scripts\anim\utility::func_B028("cqb_stand");
 		return;
 	}
 
-	self.var_1491.var_2274 = scripts\anim\utility::func_B028("default_stand");
+	self.a.var_2274 = scripts\anim\utility::func_B028("default_stand");
 }
 
 func_F2B6() {
@@ -171,21 +171,21 @@ func_F2B6() {
 	}
 
 	if(isdefined(self.var_4400)) {
-		self.var_1491.var_2274 = self.var_4400;
+		self.a.var_2274 = self.var_4400;
 		return;
 	}
 
 	if(scripts\anim\utility_common::usingrocketlauncher()) {
-		self.var_1491.var_2274 = scripts\anim\utility::func_B028("rpg_crouch");
+		self.a.var_2274 = scripts\anim\utility::func_B028("rpg_crouch");
 		return;
 	}
 
 	if(isdefined(self.var_394) && scripts\anim\utility_common::weapon_pump_action_shotgun()) {
-		self.var_1491.var_2274 = scripts\anim\utility::func_B028("shotgun_crouch");
+		self.a.var_2274 = scripts\anim\utility::func_B028("shotgun_crouch");
 		return;
 	}
 
-	self.var_1491.var_2274 = scripts\anim\utility::func_B028("default_crouch");
+	self.a.var_2274 = scripts\anim\utility::func_B028("default_crouch");
 }
 
 func_F2BC() {
@@ -193,7 +193,7 @@ func_F2BC() {
 		scripts\anim\shared::placeweaponon(self.primaryweapon,"right");
 	}
 
-	self.var_1491.var_2274 = scripts\anim\utility::func_B028("default_prone");
+	self.a.var_2274 = scripts\anim\utility::func_B028("default_prone");
 }
 
 func_9692() {}
@@ -213,9 +213,9 @@ func_FA33() {
 func_9503() {}
 
 func_F2AC() {
-	self.var_1491.var_BCA5["move_l"] = scripts\anim\utility::func_B027("ambush","move_l");
-	self.var_1491.var_BCA5["move_r"] = scripts\anim\utility::func_B027("ambush","move_r");
-	self.var_1491.var_BCA5["move_b"] = scripts\anim\utility::func_B027("ambush","move_b");
+	self.a.var_BCA5["move_l"] = scripts\anim\utility::func_B027("ambush","move_l");
+	self.a.var_BCA5["move_r"] = scripts\anim\utility::func_B027("ambush","move_r");
+	self.a.var_BCA5["move_b"] = scripts\anim\utility::func_B027("ambush","move_b");
 }
 
 func_8CD8() {
@@ -226,10 +226,10 @@ func_8CD8() {
 	if(isdefined(self.target_getindexoftarget)) {
 		if(self getwatcheddvar()) {
 			var_00 = undefined;
-			if(self.var_205.type == "Cover Left") {
+			if(self.target_getindexoftarget.type == "Cover Left") {
 				var_00 = scripts\anim\utility::func_B027("heat_reload","reload_cover_left");
 			}
-			else if(self.var_205.type == "Cover Right") {
+			else if(self.target_getindexoftarget.type == "Cover Right") {
 				var_00 = scripts\anim\utility::func_B027("heat_reload","reload_cover_right");
 			}
 

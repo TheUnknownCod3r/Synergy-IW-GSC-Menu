@@ -1,8 +1,8 @@
-/******************************************
+/**********************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\utility.gsc
-******************************************/
+ * Script: scripts\mp\utility.gsc
+**********************************/
 
 exploder_sound() {
 	if(isdefined(self.script_delay)) {
@@ -86,7 +86,7 @@ endselectiononendgame() {
 }
 
 isattachment(param_00) {
-	var_01 = tablelookup("mp/attachmentTable.csv",4,param_00,0);
+	var_01 = tablelookup("mp\attachmentTable.csv",4,param_00,0);
 	if(isdefined(var_01) && var_01 != "") {
 		return 1;
 	}
@@ -95,7 +95,7 @@ isattachment(param_00) {
 }
 
 getattachmenttype(param_00) {
-	var_01 = tablelookup("mp/attachmentTable.csv",4,param_00,2);
+	var_01 = tablelookup("mp\attachmentTable.csv",4,param_00,2);
 	return var_01;
 }
 
@@ -849,7 +849,7 @@ leaderdialogonplayer_internal(param_00,param_01,param_02,param_03,param_04) {
 	if(isdefined(var_05) && var_05 == "axis" || var_05 == "allies") {
 		var_06 = self getplayerdata("common","mp_announcer_type");
 		if(var_06 > 0) {
-			var_07 = tablelookupistringbyrow("mp/announcervoicedata.csv",var_06,3);
+			var_07 = tablelookupistringbyrow("mp\announcervoicedata.csv",var_06,3);
 			var_08 = var_07 + "_1mc_" + game["dialog"][param_00];
 		}
 		else
@@ -1591,11 +1591,11 @@ istimetobeatvalid() {
 }
 
 forceplaytimetobeat() {
-	return function_0303() && game["timeToBeat"] == 0;
+	return isgamebattlematch() && game["timeToBeat"] == 0;
 }
 
 func_1005B() {
-	if(function_0303() && game["overtimeRoundsPlayed"] == 1) {
+	if(isgamebattlematch() && game["overtimeRoundsPlayed"] == 1) {
 		return 1;
 	}
 	else if(istimetobeatvalid() && game["overtimeRoundsPlayed"] == 1) {
@@ -1609,7 +1609,7 @@ func_1005B() {
 }
 
 func_9ECF() {
-	if(function_0303() && !iswinbytworulegametype()) {
+	if(isgamebattlematch() && !iswinbytworulegametype()) {
 		return 1;
 	}
 
@@ -1629,7 +1629,7 @@ func_9ECF() {
 }
 
 func_7F9C() {
-	if(function_0303() && !iswinbytworulegametype()) {
+	if(isgamebattlematch() && !iswinbytworulegametype()) {
 		return -1;
 	}
 
@@ -1674,7 +1674,7 @@ issimultaneouskillenabled() {
 		level.simultaneouskillenabled = getdvarint("killswitch_simultaneous_deaths",0) == 0;
 	}
 
-	if(function_0303()) {
+	if(isgamebattlematch()) {
 		level.simultaneouskillenabled = 0;
 	}
 
@@ -1719,7 +1719,7 @@ func_1004B() {
 
 	var_05 = shouldplaywinbytwo();
 	var_06 = func_1005B();
-	if(function_0303() && istimetobeatrulegametype()) {
+	if(isgamebattlematch() && istimetobeatrulegametype()) {
 		if(game["overtimeRoundsPlayed"] == 0) {
 			var_03 = 0;
 			if(var_01 == var_02) {
@@ -2789,7 +2789,7 @@ getweaponattachmentarrayfromstats(param_00) {
 	if(!isdefined(level.weaponattachments[param_00])) {
 		var_01 = [];
 		for(var_02 = 0;var_02 <= 19;var_02++) {
-			var_03 = tablelookup("mp/statsTable.csv",4,param_00,10 + var_02);
+			var_03 = tablelookup("mp\statsTable.csv",4,param_00,10 + var_02);
 			if(var_03 == "") {
 				break;
 			}
@@ -2817,7 +2817,7 @@ getweaponbarsize(param_00,param_01) {
 
 getweaponattachmentfromstats(param_00,param_01) {
 	param_00 = getweaponrootname(param_00);
-	return tablelookup("mp/statsTable.csv",4,param_00,10 + param_01);
+	return tablelookup("mp\statsTable.csv",4,param_00,10 + param_01);
 }
 
 attachmentscompatible(param_00,param_01) {
@@ -2836,8 +2836,8 @@ attachmentscompatible(param_00,param_01) {
 		var_02 = !isdefined(level.attachmentmap_conflicts[var_03[0] + "_" + var_03[1]]);
 	}
 	else if(param_00 != "none" && param_01 != "none") {
-		var_04 = tablelookuprownum("mp/attachmentcombos.csv",0,param_01);
-		if(tablelookup("mp/attachmentcombos.csv",0,param_00,var_04) == "no") {
+		var_04 = tablelookuprownum("mp\attachmentcombos.csv",0,param_01);
+		if(tablelookup("mp\attachmentcombos.csv",0,param_00,var_04) == "no") {
 			var_02 = 0;
 		}
 	}
@@ -2891,7 +2891,7 @@ isburstfireweapon(param_00) {
 		return 1;
 	}
 
-	var_02 = function_02C4(param_00);
+	var_02 = getweaponvariantindex(param_00);
 	if(isdefined(var_02)) {
 		if(var_01 == "iw7_sdfar" && var_02 != 3 && var_02 != 35) {
 			return 1;
@@ -3533,12 +3533,12 @@ enableweaponlaser() {
 		self.weaponlasercalls = 0;
 	}
 
-	self.var_13C9E++;
+	self.weaponlasercalls++;
 	self laseron();
 }
 
 disableweaponlaser() {
-	self.var_13C9E--;
+	self.weaponlasercalls--;
 	if(self.weaponlasercalls == 0) {
 		self laseroff();
 		self.weaponlasercalls = undefined;
@@ -3670,7 +3670,7 @@ func_9D56(param_00,param_01) {
 
 getweaponattachmentsbasenames(param_00) {
 	if(param_00 != "none") {
-		var_01 = function_00E3(param_00);
+		var_01 = getweaponattachments(param_00);
 		foreach(var_04, var_03 in var_01) {
 			var_01[var_04] = attachmentmap_tobase(var_03);
 		}
@@ -3684,15 +3684,15 @@ getweaponattachmentsbasenames(param_00) {
 getattachmentlistbasenames() {
 	var_00 = [];
 	var_01 = 0;
-	var_02 = tablelookup("mp/attachmentTable.csv",0,var_01,5);
+	var_02 = tablelookup("mp\attachmentTable.csv",0,var_01,5);
 	while(var_02 != "") {
-		var_03 = tablelookup("mp/attachmentTable.csv",0,var_01,2);
+		var_03 = tablelookup("mp\attachmentTable.csv",0,var_01,2);
 		if(var_03 != "none" && !scripts\engine\utility::array_contains(var_00,var_02)) {
 			var_00[var_00.size] = var_02;
 		}
 
 		var_01++;
-		var_02 = tablelookup("mp/attachmentTable.csv",0,var_01,5);
+		var_02 = tablelookup("mp\attachmentTable.csv",0,var_01,5);
 	}
 
 	return var_00;
@@ -3887,7 +3887,7 @@ func_13C92(param_00) {
 func_13C95(param_00) {
 	var_01 = getweaponrootname(param_00);
 	if(var_01 == "iw6_dlcweap03") {
-		var_02 = function_00E3(param_00);
+		var_02 = getweaponattachments(param_00);
 		foreach(var_04 in var_02) {
 			if(isstrstart(var_04,"dlcweap03")) {
 				return 1;
@@ -4426,11 +4426,11 @@ isflyingkillstreak(param_00) {
 }
 
 func_7F4D(param_00) {
-	return tablelookuprownum("mp/killstreakTable.csv",1,param_00);
+	return tablelookuprownum("mp\killstreakTable.csv",1,param_00);
 }
 
 getkillstreakindex(param_00) {
-	var_01 = tablelookup("mp/killstreakTable.csv",1,param_00,0);
+	var_01 = tablelookup("mp\killstreakTable.csv",1,param_00,0);
 	if(var_01 == "") {
 		var_02 = -1;
 	}
@@ -4443,24 +4443,24 @@ getkillstreakindex(param_00) {
 }
 
 func_7F4B(param_00) {
-	return tablelookup("mp/killstreakTable.csv",0,param_00,1);
+	return tablelookup("mp\killstreakTable.csv",0,param_00,1);
 }
 
 func_7F4C(param_00) {
-	return tablelookup("mp/killstreakTable.csv",12,param_00,1);
+	return tablelookup("mp\killstreakTable.csv",12,param_00,1);
 }
 
 func_7F47(param_00) {
-	return tablelookupistring("mp/killstreakTable.csv",1,param_00,2);
+	return tablelookupistring("mp\killstreakTable.csv",1,param_00,2);
 }
 
 func_7F38(param_00) {
-	return tablelookupistring("mp/killstreakTable.csv",1,param_00,3);
+	return tablelookupistring("mp\killstreakTable.csv",1,param_00,3);
 }
 
 func_7F46(param_00) {
 	var_01 = scripts\engine\utility::ter_op(_hasperk("specialty_support_killstreaks"),5,4);
-	return tablelookup("mp/killstreakTable.csv",1,param_00,var_01);
+	return tablelookup("mp\killstreakTable.csv",1,param_00,var_01);
 }
 
 getenemyinfo(param_00) {
@@ -4469,55 +4469,55 @@ getenemyinfo(param_00) {
 }
 
 func_7F3C(param_00) {
-	return tablelookupistring("mp/killstreakTable.csv",1,param_00,6);
+	return tablelookupistring("mp\killstreakTable.csv",1,param_00,6);
 }
 
 func_7F51(param_00) {
-	return tablelookup("mp/killstreakTable.csv",1,param_00,7);
+	return tablelookup("mp\killstreakTable.csv",1,param_00,7);
 }
 
 func_7F3B(param_00) {
-	return tablelookup("mp/killstreakTable.csv",1,param_00,8);
+	return tablelookup("mp\killstreakTable.csv",1,param_00,8);
 }
 
 func_7F34(param_00) {
-	return tablelookup("mp/killstreakTable.csv",1,param_00,9);
+	return tablelookup("mp\killstreakTable.csv",1,param_00,9);
 }
 
 func_7F3E(param_00) {
-	return tablelookup("mp/killstreakTable.csv",1,param_00,10);
+	return tablelookup("mp\killstreakTable.csv",1,param_00,10);
 }
 
 func_7F40(param_00) {
-	return int(tablelookup("mp/killstreakTable.csv",1,param_00,11));
+	return int(tablelookup("mp\killstreakTable.csv",1,param_00,11));
 }
 
 getkillstreakweapon(param_00) {
-	return tablelookup("mp/killstreakTable.csv",1,param_00,12);
+	return tablelookup("mp\killstreakTable.csv",1,param_00,12);
 }
 
 func_7F4E(param_00) {
-	return int(tablelookup("mp/killstreakTable.csv",1,param_00,13));
+	return int(tablelookup("mp\killstreakTable.csv",1,param_00,13));
 }
 
 func_7F43(param_00) {
-	return tablelookup("mp/killstreakTable.csv",1,param_00,14);
+	return tablelookup("mp\killstreakTable.csv",1,param_00,14);
 }
 
 getkillstreakoverheadicon(param_00) {
-	return tablelookup("mp/killstreakTable.csv",1,param_00,15);
+	return tablelookup("mp\killstreakTable.csv",1,param_00,15);
 }
 
 func_7F39(param_00) {
-	return tablelookup("mp/killstreakTable.csv",1,param_00,16);
+	return tablelookup("mp\killstreakTable.csv",1,param_00,16);
 }
 
 func_7F53(param_00) {
-	return tablelookup("mp/killstreakTable.csv",1,param_00,17);
+	return tablelookup("mp\killstreakTable.csv",1,param_00,17);
 }
 
 func_7F4F(param_00) {
-	return tablelookup("mp/killstreakTable.csv",1,param_00,18);
+	return tablelookup("mp\killstreakTable.csv",1,param_00,18);
 }
 
 currentactivevehiclecount(param_00) {
@@ -4551,7 +4551,7 @@ fauxvehiclecount() {
 
 incrementfauxvehiclecount(param_00) {
 	if(!isdefined(param_00)) {
-		level.var_6BAA++;
+		level.fauxvehiclecount++;
 		return;
 	}
 
@@ -4560,7 +4560,7 @@ incrementfauxvehiclecount(param_00) {
 
 decrementfauxvehiclecount(param_00) {
 	if(!isdefined(param_00)) {
-		level.var_6BAA--;
+		level.fauxvehiclecount--;
 	}
 	else
 	{
@@ -4582,7 +4582,7 @@ allowteamassignment() {
 	}
 
 	if(!isdefined(self.pers["isBot"])) {
-		if(function_0303()) {
+		if(isgamebattlematch()) {
 			return 0;
 		}
 
@@ -4599,7 +4599,7 @@ allowteamassignment() {
 		return level.teambased;
 	}
 
-	var_00 = int(tablelookup("mp/gametypesTable.csv",0,level.gametype,4));
+	var_00 = int(tablelookup("mp\gametypesTable.csv",0,level.gametype,4));
 	return var_00;
 }
 
@@ -4608,7 +4608,7 @@ allowclasschoice() {
 		return 0;
 	}
 
-	var_00 = int(tablelookup("mp/gametypesTable.csv",0,level.gametype,5));
+	var_00 = int(tablelookup("mp\gametypesTable.csv",0,level.gametype,5));
 	return var_00;
 }
 
@@ -4624,11 +4624,11 @@ func_F6FF(param_00,param_01) {
 	var_02 = getweaponrootname(param_00);
 	var_03 = [];
 	if(var_02 != "iw7_knife") {
-		var_03 = function_00E3(param_00);
+		var_03 = getweaponattachments(param_00);
 	}
 
 	if(isdefined(var_02)) {
-		var_04 = tablelookuprownum("mp/statsTable.csv",4,var_02);
+		var_04 = tablelookuprownum("mp\statsTable.csv",4,var_02);
 	}
 	else
 	{
@@ -4638,7 +4638,7 @@ func_F6FF(param_00,param_01) {
 		var_06 = -1;
 		if(isdefined(var_03[var_05])) {
 			if(!func_9D55(param_00,var_03[var_05])) {
-				var_06 = tablelookuprownum("mp/attachmentTable.csv",4,var_03[var_05]);
+				var_06 = tablelookuprownum("mp\attachmentTable.csv",4,var_03[var_05]);
 			}
 		}
 	}
@@ -5452,7 +5452,7 @@ isspecialistkillstreak(param_00) {
 }
 
 bot_is_fireteam_mode() {
-	var_00 = function_001F() == 2;
+	var_00 = botautoconnectenabled() == 2;
 	if(var_00) {
 		if(!level.teambased || level.gametype != "war" && level.gametype != "dom") {
 			return 0;
@@ -5544,7 +5544,7 @@ func_7F78() {
 	if(isdefined(self.script_linkto)) {
 		var_01 = strtok(self.script_linkto," ");
 		for(var_02 = 0;var_02 < var_01.size;var_02++) {
-			var_03 = function_00B3(var_01[var_02],"script_linkname");
+			var_03 = getnode(var_01[var_02],"script_linkname");
 			if(isdefined(var_03)) {
 				var_00[var_00.size] = var_03;
 			}
@@ -5907,7 +5907,7 @@ getuniqueid() {
 	var_00 = self getguid();
 	if(var_00 == "0000000000000000") {
 		if(isdefined(level.guidgen)) {
-			level.var_86BF++;
+			level.guidgen++;
 		}
 		else
 		{
@@ -6039,7 +6039,7 @@ setmlgannouncement(param_00,param_01,param_02,param_03) {
 	}
 
 	if(isdefined(param_03)) {
-		if(function_027D(param_03)) {
+		if(isnumber(param_03)) {
 			param_00 = param_00 + param_03 + 1 * 1000000;
 		}
 		else
@@ -6062,14 +6062,14 @@ ismoddedroundgame() {
 isusingdefaultclass(param_00,param_01) {
 	var_02 = 0;
 	if(isdefined(param_01)) {
-		if(function_011C() && getmatchrulesdatawithteamandindex("defaultClasses",param_00,param_01,"class","inUse")) {
+		if(isusingmatchrulesdata() && getmatchrulesdatawithteamandindex("defaultClasses",param_00,param_01,"class","inUse")) {
 			var_02 = 1;
 		}
 	}
 	else
 	{
 		for(param_01 = 0;param_01 < 6;param_01++) {
-			if(function_011C() && getmatchrulesdatawithteamandindex("defaultClasses",param_00,param_01,"class","inUse")) {
+			if(isusingmatchrulesdata() && getmatchrulesdatawithteamandindex("defaultClasses",param_00,param_01,"class","inUse")) {
 				var_02 = 1;
 				break;
 			}
@@ -6267,22 +6267,22 @@ func_11071(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_
 		}
 
 		if(var_0A) {
-			function_0297(param_03,param_00,param_01,var_09);
+			stopfxontagforclients(param_03,param_00,param_01,var_09);
 			continue;
 		}
 
-		function_0297(param_04,param_00,param_01,var_09);
+		stopfxontagforclients(param_04,param_00,param_01,var_09);
 	}
 }
 
 playteamfxforclient(param_00,param_01,param_02,param_03,param_04,param_05) {
 	var_06 = undefined;
 	if(self.team != param_00) {
-		var_06 = function_01E1(scripts\engine\utility::getfx(param_03),param_01,self);
+		var_06 = spawnfxforclient(scripts\engine\utility::getfx(param_03),param_01,self);
 	}
 	else
 	{
-		var_06 = function_01E1(scripts\engine\utility::getfx(param_02),param_01,self);
+		var_06 = spawnfxforclient(scripts\engine\utility::getfx(param_02),param_01,self);
 	}
 
 	if(isdefined(var_06)) {
@@ -6374,7 +6374,7 @@ func_7E9B(param_00,param_01,param_02,param_03,param_04) {
 		}
 	}
 
-	var_06 = function_028B(param_00,param_01,param_04,var_05,"physicsquery_all");
+	var_06 = physics_querypoint(param_00,param_01,param_04,var_05,"physicsquery_all");
 	var_07 = [];
 	if(!isdefined(param_02)) {
 		foreach(var_09 in var_06) {
@@ -6556,7 +6556,7 @@ _enablecollisionnotifies(param_00) {
 			self enablecollisionnotifies(1);
 		}
 
-		self.var_6262++;
+		self.enabledcollisionnotifies++;
 	}
 	else
 	{
@@ -6564,7 +6564,7 @@ _enablecollisionnotifies(param_00) {
 			self enablecollisionnotifies(0);
 		}
 
-		self.var_6262--;
+		self.enabledcollisionnotifies--;
 	}
 }
 
@@ -6687,7 +6687,7 @@ func_13A1E(param_00,param_01,param_02,param_03,param_04) {
 					var_09 = self getorigin();
 					var_0A = scripts\engine\utility::ter_op(param_04,var_08 geteye(),var_08.origin);
 					var_0B = physics_createcontents(["physicscontents_solid","physicscontents_structural","physicscontents_vehicleclip","physicscontents_item","physicscontents_canshootclip"]);
-					var_0C = function_0287(var_09,var_0A,var_0B,undefined,0,"physicsquery_closest");
+					var_0C = physics_raycast(var_09,var_0A,var_0B,undefined,0,"physicsquery_closest");
 					if(var_0C.size <= 0) {
 						var_06[var_06.size] = var_08;
 					}
@@ -6741,13 +6741,13 @@ radiusplayerdamage(param_00,param_01,param_02,param_03,param_04,param_05,param_0
 		}
 	}
 
-	var_10 = function_028B(param_05.origin,param_02,var_0A,var_0C,"physicsquery_all");
+	var_10 = physics_querypoint(param_05.origin,param_02,var_0A,var_0C,"physicsquery_all");
 	if(isdefined(var_10) && var_10.size > 0) {
 		for(var_11 = 0;var_11 < var_10.size;var_11++) {
 			var_12 = var_10[var_11]["entity"];
 			var_13 = var_10[var_11]["distance"];
 			var_14 = var_10[var_11]["position"];
-			var_15 = function_0287(param_00,var_14,var_0B,undefined,0,"physicsquery_closest");
+			var_15 = physics_raycast(param_00,var_14,var_0B,undefined,0,"physicsquery_closest");
 			if(isdefined(var_15) && var_15.size > 0) {
 				continue;
 			}
@@ -6997,7 +6997,7 @@ func_B93D(param_00,param_01,param_02) {
 	}
 
 	var_04 = 0;
-	var_04 = var_04 + scripts/mp/supers/super_amplify::func_1E58(var_03);
+	var_04 = var_04 + scripts\mp\supers\super_amplify::func_1E58(var_03);
 	var_05 = _meth_8101(param_00,param_02);
 	var_05 = var_05 - 1;
 	var_04 = var_04 + var_03 * var_05;
@@ -7170,7 +7170,7 @@ iskillstreakweapon(param_00) {
 		return 1;
 	}
 
-	var_01 = function_0244(param_00);
+	var_01 = weaponinventorytype(param_00);
 	if(isdefined(var_01) && var_01 == "exclusive") {
 		return 1;
 	}
@@ -7202,11 +7202,11 @@ placeequipmentfailed(param_00,param_01,param_02,param_03) {
 	if(istrue(param_01)) {
 		var_04 = undefined;
 		if(isdefined(param_03)) {
-			var_04 = function_01E1(scripts\engine\utility::getfx("placeEquipmentFailed"),param_02,self,anglestoforward(param_03),anglestoup(param_03));
+			var_04 = spawnfxforclient(scripts\engine\utility::getfx("placeEquipmentFailed"),param_02,self,anglestoforward(param_03),anglestoup(param_03));
 		}
 		else
 		{
-			var_04 = function_01E1(scripts\engine\utility::getfx("placeEquipmentFailed"),param_02,self);
+			var_04 = spawnfxforclient(scripts\engine\utility::getfx("placeEquipmentFailed"),param_02,self);
 		}
 
 		triggerfx(var_04);
@@ -7231,7 +7231,7 @@ placeequipmentfailed(param_00,param_01,param_02,param_03) {
 }
 
 func_CC18() {
-	level._effect["placeEquipmentFailed"] = loadfx("vfx/core/mp/killstreaks/vfx_ballistic_vest_death");
+	level._effect["placeEquipmentFailed"] = loadfx("vfx\core\mp\killstreaks\vfx_ballistic_vest_death");
 }
 
 placeequipmentfailedcleanup(param_00) {
@@ -7349,7 +7349,7 @@ func_391B(param_00) {
 		if(param_00 == "briefcase_bomb_mp" || param_00 == "briefcase_bomb_defuse_mp" || param_00 == "iw7_uplinkball_mp" || param_00 == "iw7_tdefball_mp") {
 			var_02 = 1;
 		}
-		else if(function_0244(var_01) == "primary") {
+		else if(weaponinventorytype(var_01) == "primary") {
 			var_02 = 1;
 		}
 
@@ -7600,7 +7600,7 @@ func_1254() {
 		self getrankinfolevel(1);
 	}
 
-	self.var_6263++;
+	self.enabledequipdeployvfx++;
 }
 
 func_11DB() {
@@ -7608,7 +7608,7 @@ func_11DB() {
 		self getrankinfolevel(0);
 	}
 
-	self.var_6263--;
+	self.enabledequipdeployvfx--;
 }
 
 func_8EC6() {
@@ -7738,11 +7738,11 @@ canrecordcombatrecordstats() {
 }
 
 getstreakrecordtype(param_00) {
-	if(function_02D9("mp","LethalScorestreakStatItems",param_00)) {
+	if(isenumvaluevalid("mp","LethalScorestreakStatItems",param_00)) {
 		return "lethalScorestreakStats";
 	}
 
-	if(function_02D9("mp","SupportScorestreakStatItems",param_00)) {
+	if(isenumvaluevalid("mp","SupportScorestreakStatItems",param_00)) {
 		return "supportScorestreakStats";
 	}
 

@@ -1,12 +1,12 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\3495.gsc
+ * Script: 3495.gsc
 ***************************************/
 
 func_2A6B(var_00, var_01, var_02, var_03) {
   var_04 = undefined;
 
-  if (scripts/mp/killstreaks/utility::func_A69F(var_03, "passive_support_drop")) {
+  if (scripts\mp\killstreaks\utility::func_A69F(var_03, "passive_support_drop")) {
   var_04 = scripts\mp\killstreaks\target_marker::_meth_819B(var_03);
 
   if (!isdefined(var_4.location)) {
@@ -80,20 +80,20 @@ func_108DE(var_00, var_01, var_02, var_03, var_04) {
   var_16 = 3000;
   var_17 = &"KILLSTREAKS_HINTS_JACKAL_GUARD";
   var_18 = "follow_player";
-  var_19 = scripts/mp/killstreak_loot::getrarityforlootitem(var_4.variantid);
+  var_19 = scripts\mp\killstreak_loot::getrarityforlootitem(var_4.variantid);
 
   if (var_19 != "")
   var_06 = var_06 + "_" + var_19;
 
-  if (scripts/mp/killstreaks/utility::func_A69F(var_04, "passive_extra_flare"))
+  if (scripts\mp\killstreaks\utility::func_A69F(var_04, "passive_extra_flare"))
   var_07 = var_07 + 1;
 
-  if (scripts/mp/killstreaks/utility::func_A69F(var_04, "passive_moving_fortress")) {
+  if (scripts\mp\killstreaks\utility::func_A69F(var_04, "passive_moving_fortress")) {
   var_11 = "jackal_turret_mp";
   var_12 = "veh_mil_air_ca_dropship_mp_turret";
   }
 
-  if (scripts/mp/killstreaks/utility::func_A69F(var_04, "passive_support_drop"))
+  if (scripts\mp\killstreaks\utility::func_A69F(var_04, "passive_support_drop"))
   var_18 = "guard_location";
 
   var_20 = spawnhelicopter(var_01, var_02, var_05, "veh_jackal_mp", var_06);
@@ -124,7 +124,7 @@ func_108DE(var_00, var_01, var_02, var_03, var_04) {
   var_20.turretweapon = var_08;
   var_20.cannonweapon = var_11;
   var_20.cannonon = var_13;
-  var_20 scripts/mp/killstreaks/utility::func_1843(var_4.streakname, "Killstreak_Air", var_01, 1);
+  var_20 scripts\mp\killstreaks\utility::func_1843(var_4.streakname, "Killstreak_Air", var_01, 1);
   var_20 setmaxpitchroll(0, 90);
   var_20 vehicle_setspeed(var_20.speed, var_20.func_1545);
   var_20 sethoverparams(50, 100, 50);
@@ -160,11 +160,11 @@ func_108DE(var_00, var_01, var_02, var_03, var_04) {
   level.jackals = scripts\engine\utility::array_removeundefined(level.jackals);
   level.func_A22D = undefined;
   var_20 _meth_84BE("killstreak_jackal_mp");
-  var_20 thread scripts/mp/killstreaks/flares::func_6EAB(undefined, "j_body");
+  var_20 thread scripts\mp\killstreaks\flares::func_6EAB(undefined, "j_body");
   var_20 thread func_A3BD();
   var_20 thread delayjackalloopsfx(0.05, "dropship_enemy_hover_world_grnd");
   var_20 thread func_50BE();
-  var_20 thread scripts/mp/killstreaks/flares::flares_monitor(var_20.flaresreservecount);
+  var_20 thread scripts\mp\killstreaks\flares::flares_monitor(var_20.flaresreservecount);
   var_20.turret.vehicle_fired_from = var_20;
   var_20.cannon.vehicle_fired_from = var_20;
   var_22 = anglestoforward(var_20.angles);
@@ -172,10 +172,10 @@ func_108DE(var_00, var_01, var_02, var_03, var_04) {
   var_20.turret.vehicle_fired_from.killcament linkto(var_20, "tag_turret_front");
   var_20.cannon.vehicle_fired_from.killcament = var_20.turret.vehicle_fired_from.killcament;
 
-  if (scripts/mp/killstreaks/utility::func_A69F(var_04, "passive_moving_fortress"))
+  if (scripts\mp\killstreaks\utility::func_A69F(var_04, "passive_moving_fortress"))
   var_20.cannon.vehicle_fired_from.killcament linkto(var_20, "tag_turret_rear");
 
-  if (scripts/mp/killstreaks/utility::func_A69F(var_04, "passive_support_drop")) {
+  if (scripts\mp\killstreaks\utility::func_A69F(var_04, "passive_support_drop")) {
   var_23 = -120;
   var_24 = "jackaldrop";
   var_20.dropcrates = [];
@@ -259,7 +259,7 @@ func_5088(var_00, var_01) {
   var_00 thread func_6590();
   }
 
-  var_0.useobj scripts/mp/killstreaks/utility::func_F774(var_0.owner, var_0.func_4C08, 360, 360, 30000, 30000, 2);
+  var_0.useobj scripts\mp\killstreaks\utility::func_F774(var_0.owner, var_0.func_4C08, 360, 360, 30000, 30000, 2);
   var_00 thread patrolfield();
   var_00 thread func_13AD6(getothermode(var_0.combatmode), var_0.func_4C08);
 }
@@ -301,7 +301,7 @@ func_6590() {
   for (;;) {
   var_01 = jackalgettargets();
 
-  if (scripts/mp/killstreaks/utility::func_A69F(self.streakinfo, "passive_moving_fortress")) {
+  if (scripts\mp\killstreaks\utility::func_A69F(self.streakinfo, "passive_moving_fortress")) {
   if (isdefined(var_01) && var_1.size > 0) {
   acquirecannontarget(var_01);
 
@@ -663,7 +663,7 @@ func_A426() {
   level endon("game_ended");
   var_00 = 60;
 
-  if (scripts/mp/killstreaks/utility::func_A69F(self.streakinfo, "passive_extra_flare"))
+  if (scripts\mp\killstreaks\utility::func_A69F(self.streakinfo, "passive_extra_flare"))
   var_00 = var_00 - 10;
 
   scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(var_00);
@@ -808,7 +808,7 @@ fireonturrettarget(var_00) {
   self.turret notify("start_firing");
   var_03 = weaponfiretime(self.turretweapon);
 
-  if (scripts/mp/killstreaks/utility::func_A69F(self.streakinfo, "passive_moving_fortress"))
+  if (scripts\mp\killstreaks\utility::func_A69F(self.streakinfo, "passive_moving_fortress"))
   var_03 = var_03 + 0.13;
 
   while (isdefined(self.turrettarget) && scripts\mp\utility\game::isreallyalive(self.turrettarget) && isdefined(self.turret getturrettarget(1)) && self.turret getturrettarget(1) == self.turrettarget) {
@@ -827,13 +827,13 @@ fireoncannontarget(var_00) {
   self.cannon waittill("turret_on_target");
   level thread scripts\mp\battlechatter_mp::saytoself(self.cannontarget, "plr_killstreak_target");
 
-  if (!scripts/mp/killstreaks/utility::func_A69F(self.streakinfo, "passive_moving_fortress"))
+  if (!scripts\mp\killstreaks\utility::func_A69F(self.streakinfo, "passive_moving_fortress"))
   thread setmissilekillcament();
 
   self.cannon notify("start_firing");
   var_02 = weaponfiretime(self.cannonweapon);
 
-  if (scripts/mp/killstreaks/utility::func_A69F(self.streakinfo, "passive_moving_fortress")) {
+  if (scripts\mp\killstreaks\utility::func_A69F(self.streakinfo, "passive_moving_fortress")) {
   var_02 = var_02 + 0.13;
 
   while (isdefined(self.cannontarget) && scripts\mp\utility\game::isreallyalive(self.cannontarget) && isdefined(self.cannon getturrettarget(1)) && self.cannon getturrettarget(1) == self.cannontarget) {
@@ -1033,7 +1033,7 @@ getbesttarget(var_00) {
   }
   }
 
-  if (scripts/mp/killstreaks/utility::func_A69F(self.streakinfo, "passive_moving_fortress")) {
+  if (scripts\mp\killstreaks\utility::func_A69F(self.streakinfo, "passive_moving_fortress")) {
   if (!isdefined(var_02) && isdefined(self.turrettarget))
   var_02 = self.turrettarget;
   }
@@ -1068,14 +1068,14 @@ func_3758(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08
   if (self.health <= 0)
   return;
 
-  var_02 = scripts/mp/killstreaks/utility::getmodifiedantikillstreakdamage(var_01, var_05, var_04, var_02, self.maxhealth, 3, 4, 5);
+  var_02 = scripts\mp\killstreaks\utility::getmodifiedantikillstreakdamage(var_01, var_05, var_04, var_02, self.maxhealth, 3, 4, 5);
   scripts\mp\killstreaks\killstreaks::killstreakhit(var_01, var_05, self, var_04);
   var_01 scripts\mp\damagefeedback::updatedamagefeedback("");
   scripts\mp\damage::logattackerkillstreak(self, var_02, var_01, var_07, var_06, var_04, var_10, undefined, var_11, var_03, var_05);
 
   if (self.health <= var_02) {
   if (isplayer(var_01) && (!isdefined(self.owner) || var_01 != self.owner)) {
-  var_12 = scripts/mp/killstreak_loot::getrarityforlootitem(self.streakinfo.variantid);
+  var_12 = scripts\mp\killstreak_loot::getrarityforlootitem(self.streakinfo.variantid);
   var_13 = "callout_destroyed_harrier";
 
   if (var_12 != "")
@@ -1283,7 +1283,7 @@ func_13AD6(var_00, var_01) {
   self.useobj makeunusable();
   scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(1);
   self.func_4C08 = var_01;
-  self.useobj scripts/mp/killstreaks/utility::func_F774(self.owner, self.func_4C08, 360, 360, 30000, 30000, 2);
+  self.useobj scripts\mp\killstreaks\utility::func_F774(self.owner, self.func_4C08, 360, 360, 30000, 30000, 2);
   break;
   }
 

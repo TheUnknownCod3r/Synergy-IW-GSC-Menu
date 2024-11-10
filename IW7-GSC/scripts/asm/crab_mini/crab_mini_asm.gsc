@@ -1,8 +1,8 @@
-/***********************************************************
+/***************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\asm\crab_mini\crab_mini_asm.gsc
-***********************************************************/
+ * Script: scripts\asm\crab_mini\crab_mini_asm.gsc
+***************************************************/
 
 asminit(param_00,param_01,param_02,param_03) {
 	scripts\asm\zombie\zombie::func_13F9A(param_00,param_01,param_02,param_03);
@@ -117,7 +117,7 @@ domeleedamageoncontact(param_00,param_01) {
 			break;
 		}
 
-		scripts\common\utility::waitframe();
+		scripts\engine\utility::waitframe();
 	}
 }
 
@@ -145,7 +145,7 @@ movingmeleenotehandler(param_00,param_01,param_02,param_03) {
 				var_0F = distance(var_0E,self.origin);
 				var_10 = 1;
 				if(var_0F > var_0A && var_0A > 0) {
-					var_10 = var_0F \ var_0A;
+					var_10 = var_0F / var_0A;
 					if(var_10 < 1) {
 						var_10 = 1;
 					}
@@ -196,14 +196,14 @@ meleenotehandler(param_00,param_01,param_02,param_03) {
 			}
 		}
 
-		if(!scripts\common\utility::istrue(self.bmovingmelee)) {
+		if(!scripts\engine\utility::istrue(self.bmovingmelee)) {
 			self notify("stop_melee_face_enemy");
 		}
 	}
 }
 
 timetogetstuck(param_00,param_01,param_02,param_03) {
-	if(scripts\common\utility::istrue(self.btimetogetstuck)) {
+	if(scripts\engine\utility::istrue(self.btimetogetstuck)) {
 		self.btimetogetstuck = undefined;
 		return 1;
 	}
@@ -216,7 +216,7 @@ terminate_movingmelee(param_00,param_01,param_02) {
 }
 
 shouldabortaction(param_00,param_01,param_02,param_03) {
-	if(scripts\common\utility::istrue(self.btraversalteleport)) {
+	if(scripts\engine\utility::istrue(self.btraversalteleport)) {
 		return 0;
 	}
 
@@ -303,11 +303,11 @@ choosestuckanim(param_00,param_01,param_02) {
 }
 
 isstuckdone(param_00,param_01,param_02,param_03) {
-	return !scripts\common\utility::istrue(self.bisstuck);
+	return !scripts\engine\utility::istrue(self.bisstuck);
 }
 
 shoulddostuckanim(param_00,param_01,param_02,param_03) {
-	return scripts\common\utility::istrue(self.bisstuck);
+	return scripts\engine\utility::istrue(self.bisstuck);
 }
 
 func_3EE4(param_00,param_01,param_02) {

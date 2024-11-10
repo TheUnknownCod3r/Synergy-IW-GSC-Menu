@@ -1,8 +1,8 @@
-/**********************************************************
+/**************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\killstreaks\_helicopter.gsc
-**********************************************************/
+ * Script: scripts\mp\killstreaks\_helicopter.gsc
+**************************************************/
 
 init() {
 	var_00 = getentarray("heli_start","targetname");
@@ -34,26 +34,26 @@ init() {
 	level.heli_angle_offset = 90;
 	level.var_8D56 = 0;
 	level func_D80F();
-	level.chopper_fx["damage"]["light_smoke"] = loadfx("vfx/core/smktrail/smoke_trail_white_heli_emitter");
-	level.chopper_fx["damage"]["heavy_smoke"] = loadfx("vfx/core/mp/killstreaks/vfx_helo_damage.vfx");
-	level.chopper_fx["damage"]["on_fire"] = loadfx("vfx/core/expl/fire_smoke_trail_l_emitter");
-	level.chopper_fx["light"]["left"] = loadfx("vfx/iw7/_requests/mp/vfx_debug_warning.vfx");
-	level.chopper_fx["light"]["right"] = loadfx("vfx/iw7/_requests/mp/vfx_debug_warning.vfx");
-	level.chopper_fx["light"]["belly"] = loadfx("vfx/iw7/_requests/mp/vfx_debug_warning.vfx");
-	level.chopper_fx["light"]["tail"] = loadfx("vfx/iw7/_requests/mp/vfx_debug_warning.vfx");
-	level.chopper_fx["explode"]["medium"] = loadfx("vfx/core/expl/aerial_explosion");
-	level.chopper_fx["explode"]["large"] = loadfx("vfx/core/expl/helicopter_explosion_secondary_small");
-	level.chopper_fx["smoke"]["trail"] = loadfx("vfx/core/smktrail/smoke_trail_white_heli");
+	level.chopper_fx["damage"]["light_smoke"] = loadfx("vfx\core\smktrail\smoke_trail_white_heli_emitter");
+	level.chopper_fx["damage"]["heavy_smoke"] = loadfx("vfx\core\mp\killstreaks\vfx_helo_damage.vfx");
+	level.chopper_fx["damage"]["on_fire"] = loadfx("vfx\core\expl\fire_smoke_trail_l_emitter");
+	level.chopper_fx["light"]["left"] = loadfx("vfx\iw7\_requests\mp\vfx_debug_warning.vfx");
+	level.chopper_fx["light"]["right"] = loadfx("vfx\iw7\_requests\mp\vfx_debug_warning.vfx");
+	level.chopper_fx["light"]["belly"] = loadfx("vfx\iw7\_requests\mp\vfx_debug_warning.vfx");
+	level.chopper_fx["light"]["tail"] = loadfx("vfx\iw7\_requests\mp\vfx_debug_warning.vfx");
+	level.chopper_fx["explode"]["medium"] = loadfx("vfx\core\expl\aerial_explosion");
+	level.chopper_fx["explode"]["large"] = loadfx("vfx\core\expl\helicopter_explosion_secondary_small");
+	level.chopper_fx["smoke"]["trail"] = loadfx("vfx\core\smktrail\smoke_trail_white_heli");
 	level.chopper_fx["explode"]["death"] = [];
-	level.chopper_fx["explode"]["death"]["apache"] = loadfx("vfx/iw7/_requests/mp/vfx_debug_warning.vfx");
-	level.chopper_fx["explode"]["air_death"]["apache"] = loadfx("vfx/iw7/_requests/mp/vfx_debug_warning.vfx");
+	level.chopper_fx["explode"]["death"]["apache"] = loadfx("vfx\iw7\_requests\mp\vfx_debug_warning.vfx");
+	level.chopper_fx["explode"]["air_death"]["apache"] = loadfx("vfx\iw7\_requests\mp\vfx_debug_warning.vfx");
 	level.lightfxfunc["apache"] = ::defaultlightfx;
 	level.lightfxfunc["cobra"] = ::defaultlightfx;
-	level.chopper_fx["explode"]["death"]["littlebird"] = loadfx("vfx/iw7/_requests/mp/vfx_debug_warning.vfx");
-	level.chopper_fx["explode"]["air_death"]["littlebird"] = loadfx("vfx/iw7/_requests/mp/vfx_debug_warning.vfx");
+	level.chopper_fx["explode"]["death"]["littlebird"] = loadfx("vfx\iw7\_requests\mp\vfx_debug_warning.vfx");
+	level.chopper_fx["explode"]["air_death"]["littlebird"] = loadfx("vfx\iw7\_requests\mp\vfx_debug_warning.vfx");
 	level.lightfxfunc["littlebird"] = ::defaultlightfx;
-	level._effect["vehicle_flares"] = loadfx("vfx/iw7/core/mp/killstreaks/vfx_warden_em_flares.vfx");
-	level.chopper_fx["fire"]["trail"]["medium"] = loadfx("vfx/core/expl/fire_smoke_trail_l_emitter");
+	level._effect["vehicle_flares"] = loadfx("vfx\iw7\core\mp\killstreaks\vfx_warden_em_flares.vfx");
+	level.chopper_fx["fire"]["trail"]["medium"] = loadfx("vfx\core\expl\fire_smoke_trail_l_emitter");
 	scripts\mp\killstreaks\_killstreaks::registerkillstreak("helicopter",::usehelicopter);
 	level.var_8DB6["tracking"][0] = "ac130_fco_moreenemy";
 	level.var_8DB6["tracking"][1] = "ac130_fco_getthatguy";
@@ -90,7 +90,7 @@ init() {
 	var_02.samdamagescale = 0.07;
 	var_02.enginevfxtag = "tag_engine_left";
 	level.heliconfigs["flares"] = var_02;
-	scripts\mp\_utility::func_DB8D("helicopter");
+	scripts\mp\utility::func_DB8D("helicopter");
 }
 
 makehelitype(param_00,param_01,param_02) {
@@ -143,7 +143,7 @@ tryusehelicopter(param_00,param_01) {
 		var_05.lifeid = param_00;
 		var_05.helitype = param_01;
 		var_05.streakname = var_04;
-		scripts\mp\_utility::func_DB8B("helicopter",var_05);
+		scripts\mp\utility::func_DB8B("helicopter",var_05);
 		var_06 = undefined;
 		if(!self hasweapon(scripts\engine\utility::getlastweapon())) {
 			var_06 = scripts\mp\killstreaks\_utility::getfirstprimaryweapon();
@@ -153,10 +153,10 @@ tryusehelicopter(param_00,param_01) {
 			var_06 = scripts\engine\utility::getlastweapon();
 		}
 
-		var_07 = scripts\mp\_utility::getkillstreakweapon("helicopter");
+		var_07 = scripts\mp\utility::getkillstreakweapon("helicopter");
 		return 0;
 	}
-	else if(scripts\mp\_utility::currentactivevehiclecount() >= scripts\mp\_utility::maxvehiclesallowed() || level.fauxvehiclecount + var_06 >= scripts\mp\_utility::maxvehiclesallowed()) {
+	else if(scripts\mp\utility::currentactivevehiclecount() >= scripts\mp\utility::maxvehiclesallowed() || level.fauxvehiclecount + var_06 >= scripts\mp\utility::maxvehiclesallowed()) {
 		self iprintlnbold(&"KILLSTREAKS_TOO_MANY_VEHICLES");
 		return 0;
 	}
@@ -173,7 +173,7 @@ deleteonentnotify(param_00,param_01) {
 }
 
 func_10DA2(param_00,param_01) {
-	scripts\mp\_utility::incrementfauxvehiclecount();
+	scripts\mp\utility::incrementfauxvehiclecount();
 	var_02 = undefined;
 	if(!isdefined(param_01)) {
 		param_01 = "";
@@ -182,7 +182,7 @@ func_10DA2(param_00,param_01) {
 	var_03 = "helicopter";
 	var_04 = self.pers["team"];
 	var_02 = level.var_8D96[randomint(level.var_8D96.size)];
-	scripts\mp\_matchdata::logkillstreakevent(var_03,self.origin);
+	scripts\mp\matchdata::logkillstreakevent(var_03,self.origin);
 	thread func_8D9B(param_00,self,var_02,self.pers["team"],param_01);
 }
 
@@ -241,7 +241,7 @@ func_8DB6(param_00) {
 	level.var_A99A = gettime();
 	var_01 = randomint(level.var_8DB6[param_00].size);
 	var_02 = level.var_8DB6[param_00][var_01];
-	var_03 = scripts\mp\_teams::getteamvoiceprefix(self.team) + var_02;
+	var_03 = scripts\mp\teams::getteamvoiceprefix(self.team) + var_02;
 	self playlocalsound(var_03);
 }
 
@@ -353,7 +353,7 @@ func_8D49() {
 	self notify("helicopter_done");
 	self notify("helicopter_removed");
 	var_01 = undefined;
-	var_02 = scripts\mp\_utility::func_DB94("helicopter");
+	var_02 = scripts\mp\utility::func_DB94("helicopter");
 	if(!isdefined(var_02)) {
 		level.chopper = undefined;
 		return;
@@ -424,7 +424,7 @@ func_3922(param_00) {
 		return 0;
 	}
 
-	if(!self.triggerportableradarping scripts\mp\_utility::isenemy(param_00)) {
+	if(!self.triggerportableradarping scripts\mp\utility::isenemy(param_00)) {
 		return 0;
 	}
 
@@ -432,7 +432,7 @@ func_3922(param_00) {
 		return 0;
 	}
 
-	if(param_00 scripts\mp\_utility::_hasperk("specialty_blindeye")) {
+	if(param_00 scripts\mp\utility::_hasperk("specialty_blindeye")) {
 		return 0;
 	}
 
@@ -561,7 +561,7 @@ modifydamage(param_00,param_01,param_02,param_03,param_04) {
 	var_05 = scripts\mp\killstreaks\_utility::getmodifiedantikillstreakdamage(param_00,param_01,param_02,var_05,self.maxhealth,var_06,var_07,var_08);
 	thread addrecentdamage(var_05);
 	self notify("heli_damage_fx");
-	if(scripts/mp/equipment/phase_shift::isentityphaseshifted(param_00)) {
+	if(scripts\mp\equipment\phase_shift::isentityphaseshifted(param_00)) {
 		var_05 = 0;
 	}
 
@@ -573,7 +573,7 @@ handledeathdamage(param_00,param_01,param_02,param_03) {
 		var_04 = level.heliconfigs[self.streakname];
 		var_05 = "";
 		if(isdefined(self.streakinfo)) {
-			var_05 = scripts\mp\_killstreak_loot::getrarityforlootitem(self.streakinfo.variantid);
+			var_05 = scripts\mp\killstreak_loot::getrarityforlootitem(self.streakinfo.variantid);
 		}
 
 		var_06 = var_04.callout;
@@ -581,17 +581,17 @@ handledeathdamage(param_00,param_01,param_02,param_03) {
 			var_06 = var_06 + "_" + var_05;
 		}
 
-		var_07 = scripts\mp\_damage::onkillstreakkilled(self.streakname,param_00,param_01,param_02,param_03,var_04.scorepopup,var_04.var_52DA,var_06);
+		var_07 = scripts\mp\damage::onkillstreakkilled(self.streakname,param_00,param_01,param_02,param_03,var_04.scorepopup,var_04.var_52DA,var_06);
 		if(var_07) {
 			param_00 notify("destroyed_helicopter");
 			self.var_A667 = param_00;
 		}
 
 		if(param_01 == "heli_pilot_turret_mp") {
-			param_00 scripts\mp\_missions::processchallenge("ch_enemy_down");
+			param_00 scripts\mp\missions::processchallenge("ch_enemy_down");
 		}
 
-		scripts\mp\_missions::func_3DE3(param_00,self,param_01);
+		scripts\mp\missions::func_3DE3(param_00,self,param_01);
 	}
 }
 
@@ -600,11 +600,11 @@ heli_damage_monitor(param_00,param_01,param_02) {
 	self endon("leaving");
 	self.streakname = param_00;
 	self.recentdamageamount = 0;
-	if(!scripts\mp\_utility::istrue(param_02)) {
+	if(!scripts\mp\utility::istrue(param_02)) {
 		thread heli_health();
 	}
 
-	scripts\mp\_damage::monitordamage(self.maxhealth,"helicopter",::handledeathdamage,::modifydamage,1,param_01);
+	scripts\mp\damage::monitordamage(self.maxhealth,"helicopter",::handledeathdamage,::modifydamage,1,param_01);
 }
 
 heli_watchempdamage() {
@@ -764,7 +764,7 @@ heli_explode(param_00) {
 		self.killcament delete();
 	}
 
-	scripts\mp\_utility::decrementfauxvehiclecount();
+	scripts\mp\utility::decrementfauxvehiclecount();
 	self delete();
 }
 
@@ -787,7 +787,7 @@ heli_leave_on_disconnect(param_00) {
 heli_leave_on_changeteams(param_00) {
 	self endon("death");
 	self endon("helicopter_done");
-	if(scripts\mp\_utility::bot_is_fireteam_mode()) {
+	if(scripts\mp\utility::bot_is_fireteam_mode()) {
 		return;
 	}
 
@@ -812,7 +812,7 @@ heli_leave_on_gameended(param_00) {
 heli_leave_on_timeout(param_00) {
 	self endon("death");
 	self endon("helicopter_done");
-	scripts\mp\_hostmigration::waitlongdurationwithhostmigrationpause(param_00);
+	scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(param_00);
 	thread heli_leave();
 }
 
@@ -918,7 +918,7 @@ attackgroundtarget(param_00) {
 		return;
 	}
 
-	var_02 = function_0240("cobra_20mm_mp");
+	var_02 = weaponfiretime("cobra_20mm_mp");
 	var_03 = 0;
 	var_04 = 0;
 	for(var_05 = 0;var_05 < level.heli_turretclipsize;var_05++) {
@@ -1049,12 +1049,12 @@ firemissile(param_00) {
 		}
 
 		if(scripts\engine\utility::cointoss()) {
-			var_03 = scripts\mp\_utility::_magicbullet("hind_missile_mp",self gettagorigin("tag_missile_right") - (0,0,64),param_00.origin,self.triggerportableradarping);
+			var_03 = scripts\mp\utility::_magicbullet("hind_missile_mp",self gettagorigin("tag_missile_right") - (0,0,64),param_00.origin,self.triggerportableradarping);
 			var_03.vehicle_fired_from = self;
 		}
 		else
 		{
-			var_03 = scripts\mp\_utility::_magicbullet("hind_missile_mp",self gettagorigin("tag_missile_left") - (0,0,64),param_00.origin,self.triggerportableradarping);
+			var_03 = scripts\mp\utility::_magicbullet("hind_missile_mp",self gettagorigin("tag_missile_left") - (0,0,64),param_00.origin,self.triggerportableradarping);
 			var_03.vehicle_fired_from = self;
 		}
 
@@ -1075,12 +1075,12 @@ dropbombs(param_00) {
 
 	for(var_01 = 0;var_01 < randomintrange(2,5);var_01++) {
 		if(scripts\engine\utility::cointoss()) {
-			var_02 = scripts\mp\_utility::_magicbullet("hind_bomb_mp",self gettagorigin("tag_missile_left") - (0,0,45),param_00.origin,self.triggerportableradarping);
+			var_02 = scripts\mp\utility::_magicbullet("hind_bomb_mp",self gettagorigin("tag_missile_left") - (0,0,45),param_00.origin,self.triggerportableradarping);
 			var_02.vehicle_fired_from = self;
 		}
 		else
 		{
-			var_02 = scripts\mp\_utility::_magicbullet("hind_bomb_mp",self gettagorigin("tag_missile_right") - (0,0,45),param_00.origin,self.triggerportableradarping);
+			var_02 = scripts\mp\utility::_magicbullet("hind_bomb_mp",self gettagorigin("tag_missile_right") - (0,0,45),param_00.origin,self.triggerportableradarping);
 			var_02.vehicle_fired_from = self;
 		}
 
@@ -1176,8 +1176,8 @@ _setvehgoalposadheretomesh(param_00,param_01) {
 		var_04 = anglestoforward(var_03);
 		var_05 = self.origin + var_04 * (1,1,0) * 250;
 		var_06 = (0,0,2500);
-		var_07 = var_05 + scripts\mp\_utility::gethelipilotmeshoffset() + var_06;
-		var_08 = var_05 + scripts\mp\_utility::gethelipilotmeshoffset() - var_06;
+		var_07 = var_05 + scripts\mp\utility::gethelipilotmeshoffset() + var_06;
+		var_08 = var_05 + scripts\mp\utility::gethelipilotmeshoffset() - var_06;
 		var_09 = bullettrace(var_07,var_08,0,self,0,0,1);
 		var_0A = var_09;
 		if(isdefined(var_09["entity"]) && var_09["entity"] == self && var_09["normal"][2] > 0.1) {
@@ -1192,7 +1192,7 @@ _setvehgoalposadheretomesh(param_00,param_01) {
 				var_09["position"] = var_09["position"] + (0,0,self.origin[2] - 256);
 			}
 
-			var_0A = var_09["position"] - scripts\mp\_utility::gethelipilotmeshoffset() + (0,0,600);
+			var_0A = var_09["position"] - scripts\mp\utility::gethelipilotmeshoffset() + (0,0,600);
 		}
 		else
 		{
@@ -1424,7 +1424,7 @@ heli_leave(param_00) {
 		self.killcament delete();
 	}
 
-	scripts\mp\_utility::decrementfauxvehiclecount();
+	scripts\mp\utility::decrementfauxvehiclecount();
 	self delete();
 }
 
@@ -1610,6 +1610,6 @@ removelittlebird() {
 		level.heli_pilot[self.team] = undefined;
 	}
 
-	scripts\mp\_utility::decrementfauxvehiclecount();
+	scripts\mp\utility::decrementfauxvehiclecount();
 	self delete();
 }

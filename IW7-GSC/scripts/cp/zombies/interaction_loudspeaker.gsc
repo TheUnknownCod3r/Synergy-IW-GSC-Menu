@@ -1,8 +1,8 @@
-/******************************************************************
+/**********************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\zombies\interaction_loudspeaker.gsc
-******************************************************************/
+ * Script: scripts\cp\zombies\interaction_loudspeaker.gsc
+**********************************************************/
 
 init_loudspeaker_trap() {
 	wait(3);
@@ -189,7 +189,7 @@ loudspeaker_damage(param_00,param_01,param_02) {
 	foreach(var_05 in level.rave_dancing_zombies) {
 		if(isdefined(var_05) && isalive(var_05)) {
 			var_05.trap_killed_by = param_01;
-			param_02.var_126A4++;
+			param_02.trap_kills++;
 			if(var_03 > 10) {
 				var_05.nocorpse = 1;
 				var_05.full_gib = 1;

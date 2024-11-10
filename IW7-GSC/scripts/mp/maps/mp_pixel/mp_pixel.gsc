@@ -1,16 +1,16 @@
-/*********************************************************
+/*************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\maps\mp_pixel\mp_pixel.gsc
-*********************************************************/
+ * Script: scripts\mp\maps\mp_pixel\mp_pixel.gsc
+*************************************************/
 
 main() {
 	scripts\mp\maps\mp_pixel\mp_pixel_precache::main();
 	scripts\mp\maps\mp_pixel\gen\mp_pixel_art::main();
 	scripts\mp\maps\mp_pixel\mp_pixel_fx::main();
-	scripts\mp\_load::main();
+	scripts\mp\load::main();
 	level.var_C7B3 = getentarray("OutOfBounds","targetname");
-	scripts\mp\_compass::func_FACD("compass_map_mp_pixel");
+	scripts\mp\compass::setupminimap("compass_map_mp_pixel");
 	setdvar("r_lightGridEnableTweaks",1);
 	setdvar("r_lightGridIntensity",1.33);
 	setdvar("r_umbraMinObjectContribution",3);

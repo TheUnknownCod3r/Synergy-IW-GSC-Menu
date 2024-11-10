@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\10.gsc
+ * Script: 10.gsc
 ***************************************/
 
 func_197F(var_00, var_01) {

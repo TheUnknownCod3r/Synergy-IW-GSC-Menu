@@ -1,8 +1,8 @@
-/****************************
+/************************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\4297.gsc
-****************************/
+ * Script: scripts\mp\maps\mp_dome_iw\gen\mp_dome_iw_fx.gsc
+************************************************************/
 
 main() {
 	var_00 = scripts\engine\utility::createoneshoteffect("vfx_dome_seagulls_01");

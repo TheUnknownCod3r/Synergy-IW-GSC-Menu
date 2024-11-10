@@ -1,8 +1,8 @@
-/**************************************************************
+/******************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\maps\cp_town\cp_town_damage.gsc
-**************************************************************/
+ * Script: scripts\cp\maps\cp_town\cp_town_damage.gsc
+******************************************************/
 
 cp_town_onzombiedamaged(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08,param_09,param_0A,param_0B) {
 	var_0C = self;
@@ -24,7 +24,7 @@ cp_town_onzombiedamaged(param_00,param_01,param_02,param_03,param_04,param_05,pa
 		param_01 = self;
 	}
 
-	var_0D = scripts/cp/agents/gametype_zombie::should_do_damage_checks(param_01,param_02,param_04,param_05,param_08,var_0C);
+	var_0D = scripts\cp\agents\gametype_zombie::should_do_damage_checks(param_01,param_02,param_04,param_05,param_08,var_0C);
 	if(!var_0D) {
 		return;
 	}
@@ -83,7 +83,7 @@ cp_town_onzombiedamaged(param_00,param_01,param_02,param_03,param_04,param_05,pa
 						playfx(level._effect["stimulus_shield"],var_22 gettagorigin("tag_eye"),anglestoforward(var_22.angles),anglestoup(var_22.angles),var_22);
 						if(param_02 >= self.health) {
 							if(scripts\engine\utility::istrue(var_22.inlaststand)) {
-								scripts/cp/zombies/zombies_consumables::revive_downed_entities(var_22);
+								scripts\cp\zombies\zombies_consumables::revive_downed_entities(var_22);
 							}
 						}
 
@@ -104,7 +104,7 @@ cp_town_onzombiedamaged(param_00,param_01,param_02,param_03,param_04,param_05,pa
 					playfx(level._effect["stimulus_shield"],var_22 gettagorigin("tag_eye"));
 					if(param_02 >= self.health) {
 						if(scripts\engine\utility::istrue(var_22.inlaststand)) {
-							scripts/cp/zombies/zombies_consumables::revive_downed_entities(var_22);
+							scripts\cp\zombies\zombies_consumables::revive_downed_entities(var_22);
 						}
 					}
 
@@ -124,7 +124,7 @@ cp_town_onzombiedamaged(param_00,param_01,param_02,param_03,param_04,param_05,pa
 	}
 
 	var_24 = 0;
-	if(!var_0F && scripts/cp/agents/gametype_zombie::checkaltmodestatus(param_05) && var_12 && !isdefined(param_01.linked_to_coaster) && param_01 scripts\cp\utility::is_consumable_active("sniper_soft_upgrade")) {
+	if(!var_0F && scripts\cp\agents\gametype_zombie::checkaltmodestatus(param_05) && var_12 && !isdefined(param_01.linked_to_coaster) && param_01 scripts\cp\utility::is_consumable_active("sniper_soft_upgrade")) {
 		var_24 = param_01 scripts\cp\utility::coop_getweaponclass(param_05) == "weapon_sniper";
 	}
 
@@ -164,9 +164,9 @@ cp_town_onzombiedamaged(param_00,param_01,param_02,param_03,param_04,param_05,pa
 	}
 	else
 	{
-		param_08 = scripts/cp/agents/gametype_zombie::shitloc_mods(param_01,param_04,param_05,param_08);
+		param_08 = scripts\cp\agents\gametype_zombie::shitloc_mods(param_01,param_04,param_05,param_08);
 		var_2A = level.wave_num;
-		var_2B = scripts/cp/agents/gametype_zombie::is_grenade(param_05,param_04);
+		var_2B = scripts\cp\agents\gametype_zombie::is_grenade(param_05,param_04);
 		var_2C = scripts\engine\utility::istrue(self.is_burning) && !var_13;
 		var_2D = var_14 && param_01 scripts\cp\utility::is_consumable_active("sharp_shooter_upgrade");
 		var_2E = var_13 && param_01 scripts\cp\utility::is_consumable_active("bonus_damage_on_last_bullets");
@@ -197,21 +197,21 @@ cp_town_onzombiedamaged(param_00,param_01,param_02,param_03,param_04,param_05,pa
 		}
 
 		if(var_1B && issubstr(param_05,"+gl")) {
-			param_02 = scripts/cp/agents/gametype_zombie::scalegldamage(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08,param_09,param_0A,param_0B);
+			param_02 = scripts\cp\agents\gametype_zombie::scalegldamage(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08,param_09,param_0A,param_0B);
 		}
 
 		if(var_34) {
 			param_02 = param_02 * 0.5;
 		}
 
-		param_02 = scripts/cp/agents/gametype_zombie::initial_weapon_scale(undefined,param_01,param_02,undefined,param_04,param_05,undefined,undefined,param_08,undefined,undefined,undefined);
+		param_02 = scripts\cp\agents\gametype_zombie::initial_weapon_scale(undefined,param_01,param_02,undefined,param_04,param_05,undefined,undefined,param_08,undefined,undefined,undefined);
 		if(var_35) {
 			param_02 = param_02 * 4;
 		}
 
 		if(var_12) {
 			if(var_0F) {
-				param_02 = int(param_02 * param_01 scripts/cp/perks/perk_utility::perk_getmeleescalar());
+				param_02 = int(param_02 * param_01 scripts\cp\perks\perk_utility::perk_getmeleescalar());
 				if(isdefined(param_01.passive_melee_kill_damage)) {
 					param_02 = param_02 + param_01.passive_melee_kill_damage;
 				}
@@ -327,8 +327,8 @@ cp_town_onzombiedamaged(param_00,param_01,param_02,param_03,param_04,param_05,pa
 		}
 	}
 
-	param_02 = scripts/cp/agents/gametype_zombie::shouldapplycrotchdamagemultiplier(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08,param_09,param_0A,param_0B);
-	param_02 = scripts/cp/agents/gametype_zombie::fateandfortuneweaponscale(self,param_05,param_02,0,var_1F,0,0);
+	param_02 = scripts\cp\agents\gametype_zombie::shouldapplycrotchdamagemultiplier(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08,param_09,param_0A,param_0B);
+	param_02 = scripts\cp\agents\gametype_zombie::fateandfortuneweaponscale(self,param_05,param_02,0,var_1F,0,0);
 	if(isdefined(param_01.special_zombie_damage) && var_1F) {
 		param_02 = param_02 * param_01.special_zombie_damage;
 	}
@@ -352,7 +352,7 @@ cp_town_onzombiedamaged(param_00,param_01,param_02,param_03,param_04,param_05,pa
 		}
 
 		if(isdefined(self.has_backpack)) {
-			scripts/cp/zombies/zombies_pillage::pillageable_piece_lethal_monitor(self,self.has_backpack,param_01);
+			scripts\cp\zombies\zombies_pillage::pillageable_piece_lethal_monitor(self,self.has_backpack,param_01);
 		}
 
 		if(var_12 && var_1E) {
@@ -416,14 +416,14 @@ cp_town_onzombiedamaged(param_00,param_01,param_02,param_03,param_04,param_05,pa
 		}
 
 		param_01 thread scripts\cp\utility::add_to_notify_queue("weapon_hit_enemy",self,param_01,param_05,param_02,param_08,param_04);
-		param_01 thread scripts/cp/agents/gametype_zombie::updatemaghits(getweaponbasename(param_05));
+		param_01 thread scripts\cp\agents\gametype_zombie::updatemaghits(getweaponbasename(param_05));
 		if(var_13) {
 			if(!isdefined(param_01.accuracy_shots_on_target)) {
 				param_01.accuracy_shots_on_target = 1;
 			}
 			else
 			{
-				param_01.var_154B++;
+				param_01.accuracy_shots_on_target++;
 			}
 
 			scripts\cp\cp_persistence::increment_player_career_shots_on_target(param_01);
@@ -439,7 +439,7 @@ cp_town_onzombiedamaged(param_00,param_01,param_02,param_03,param_04,param_05,pa
 		}
 	}
 
-	scripts/cp/zombies/zombies_gamescore::update_agent_damage_performance(param_01,param_02,param_04);
+	scripts\cp\zombies\zombies_gamescore::update_agent_damage_performance(param_01,param_02,param_04);
 	scripts\cp\cp_agent_utils::process_damage_rewards(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08,param_09,var_0C);
 	if(isdefined(self.agent_type) && isdefined(level.damage_feedback_overrride) && isdefined(level.damage_feedback_overrride[self.agent_type])) {
 		[[level.damage_feedback_overrride[self.agent_type]]](param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08,param_09,var_0C);
@@ -452,7 +452,7 @@ cp_town_onzombiedamaged(param_00,param_01,param_02,param_03,param_04,param_05,pa
 	scripts\cp\cp_agent_utils::store_attacker_info(param_01,param_02);
 	scripts\cp\zombies\zombies_weapons::special_weapon_logic(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08,param_09,param_0A,param_0B);
 	if(var_12) {
-		thread scripts/cp/agents/gametype_zombie::new_enemy_damage_check(param_01);
+		thread scripts\cp\agents\gametype_zombie::new_enemy_damage_check(param_01);
 	}
 
 	var_0C [[level.agent_funcs[var_0C.agent_type]["on_damaged_finished"]]](param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08,param_09,0,param_0A,param_0B);
@@ -473,13 +473,13 @@ cp_town_onzombiekilled(param_00,param_01,param_02,param_03,param_04,param_05,par
 	}
 
 	if(issubstr(param_04,"iw7_knife") && isplayer(param_01) && scripts\cp\utility::is_melee_weapon(param_04)) {
-		param_01 thread scripts/cp/agents/gametype_zombie::setandunsetmeleekill(param_01);
+		param_01 thread scripts\cp\agents\gametype_zombie::setandunsetmeleekill(param_01);
 	}
 	else if((param_04 == "iw7_axe_zm" || param_04 == "iw7_axe_zm_pap1" || param_04 == "iw7_axe_zm_pap2") && isplayer(param_01) && scripts\cp\utility::is_melee_weapon(param_04)) {
-		param_01 thread scripts/cp/agents/gametype_zombie::setandunsetmeleekill(param_01);
+		param_01 thread scripts\cp\agents\gametype_zombie::setandunsetmeleekill(param_01);
 	}
 	else if(issubstr(param_04,"golf") || issubstr(param_04,"machete") || issubstr(param_04,"spiked_bat") || issubstr(param_04,"two_headed_axe")) {
-		param_01 thread scripts/cp/agents/gametype_zombie::setandunsetmeleekill(param_01);
+		param_01 thread scripts\cp\agents\gametype_zombie::setandunsetmeleekill(param_01);
 	}
 
 	if(isdefined(self.linked_to_boat)) {
@@ -537,7 +537,7 @@ cp_town_onzombiekilled(param_00,param_01,param_02,param_03,param_04,param_05,par
 			scripts\cp\cp_persistence::increment_player_career_explosive_kills(param_01);
 		}
 
-		param_01.var_1AB++;
+		param_01.setculldist++;
 		param_01.weapon_name_log = scripts\cp\utility::getbaseweaponname(param_04);
 		if(!isdefined(param_01.aggregateweaponkills[param_01.weapon_name_log])) {
 			param_01.aggregateweaponkills[param_01.weapon_name_log] = 1;
@@ -617,7 +617,7 @@ cp_town_onzombiekilled(param_00,param_01,param_02,param_03,param_04,param_05,par
 	if(getweaponbasename(param_04) == "iw7_cutie_zm" || getweaponbasename(param_04) == "iw7_cutier_zm" && scripts\engine\utility::istrue(self.affectedbyfovdamage)) {
 		self playsound("bullet_atomizer_impact_npc");
 		if(isdefined(self.body)) {
-			self.body thread scripts/cp/agents/gametype_zombie::playbodyfx();
+			self.body thread scripts\cp\agents\gametype_zombie::playbodyfx();
 			self.body hide(1);
 		}
 
@@ -628,7 +628,7 @@ cp_town_onzombiekilled(param_00,param_01,param_02,param_03,param_04,param_05,par
 		if(!var_16 && !var_13 && !var_14 && !var_15 && !scripts\cp\utility::agentisfnfimmune()) {
 			self playsound("bullet_atomizer_impact_npc");
 			if(isdefined(self.body)) {
-				self.body thread scripts/cp/agents/gametype_zombie::playbodyfx();
+				self.body thread scripts\cp\agents\gametype_zombie::playbodyfx();
 				self.body hide(1);
 			}
 		}
@@ -656,14 +656,14 @@ cp_town_onzombiekilled(param_00,param_01,param_02,param_03,param_04,param_05,par
 		[[level.on_zombie_killed_quests_func]](param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08);
 	}
 
-	if(!scripts/cp/agents/gametype_zombie::isonhumanteam(self)) {
-		scripts/cp/agents/gametype_zombie::enemykilled(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08);
+	if(!scripts\cp\agents\gametype_zombie::isonhumanteam(self)) {
+		scripts\cp\agents\gametype_zombie::enemykilled(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08);
 		if(isdefined(level.onzombiekilledfunc)) {
 			[[level.onzombiekilledfunc]](param_01,param_04);
 		}
 	}
 
-	param_01 scripts/cp/zombies/zombies_consumables::headshot_reload_check(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08);
+	param_01 scripts\cp\zombies\zombies_consumables::headshot_reload_check(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08);
 	if(isdefined(level.spawnloopupdatefunc)) {
 		[[level.spawnloopupdatefunc]](param_01,param_04);
 	}
@@ -696,7 +696,7 @@ cp_town_onzombiekilled(param_00,param_01,param_02,param_03,param_04,param_05,par
 
 		if(isdefined(var_17)) {
 			if(isdefined(level.crystal_killed_notify)) {
-				thread scripts/cp/agents/gametype_zombie::delayminiufocollection(self.origin,param_04,var_17);
+				thread scripts\cp\agents\gametype_zombie::delayminiufocollection(self.origin,param_04,var_17);
 			}
 		}
 	}
@@ -715,7 +715,7 @@ cp_town_onzombiekilled(param_00,param_01,param_02,param_03,param_04,param_05,par
 	}
 
 	if(isdefined(self.attack_spot)) {
-		scripts/cp/zombies/zombie_entrances::release_attack_spot(self.attack_spot);
+		scripts\cp\zombies\zombie_entrances::release_attack_spot(self.attack_spot);
 	}
 
 	self.closest_entrance = undefined;
@@ -727,8 +727,8 @@ cp_town_onzombiekilled(param_00,param_01,param_02,param_03,param_04,param_05,par
 	self.upgraded_dischord_spin = undefined;
 	self.shredder_death = undefined;
 	self.near_medusa = undefined;
-	scripts/cp/agents/gametype_zombie::process_kill_rewards(param_00,param_01,self,param_06,param_03,param_04);
-	scripts/cp/agents/gametype_zombie::process_assist_rewards(param_01);
+	scripts\cp\agents\gametype_zombie::process_kill_rewards(param_00,param_01,self,param_06,param_03,param_04);
+	scripts\cp\agents\gametype_zombie::process_assist_rewards(param_01);
 	scripts\cp\cp_weaponrank::try_give_weapon_xp_zombie_killed(param_01,param_04,param_06,param_03,self.agent_type);
 	if(isdefined(level.death_challenge_update_func)) {
 		[[level.death_challenge_update_func]](param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08);
@@ -986,7 +986,7 @@ callback_townzombieplayerdamage(param_00,param_01,param_02,param_03,param_04,par
 		thread scripts\cp\utility::add_to_notify_queue("player_damaged");
 	}
 
-	scripts/cp/cp_gamescore::update_personal_encounter_performance("personal","damage_taken",param_02);
+	scripts\cp\cp_gamescore::update_personal_encounter_performance("personal","damage_taken",param_02);
 	if(param_02 <= 0) {
 		return;
 	}
@@ -1313,7 +1313,7 @@ change_chews_fire_damage(param_00,param_01) {
 
 change_chews_shock_damage(param_00,param_01) {
 	self endon("death");
-	thread scripts/cp/zombies/zombies_perk_machines::zap_over_time(2,param_00);
+	thread scripts\cp\zombies\zombies_perk_machines::zap_over_time(2,param_00);
 }
 
 change_chews_explosive_damage(param_00,param_01) {

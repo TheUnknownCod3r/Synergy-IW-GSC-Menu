@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2844.gsc
+ * Script: 2844.gsc
 ***************************************/
 
 func_6636() {}
@@ -212,7 +212,7 @@ func_4ED4() {
 func_5B76(var_00) {}
 
 func_5B88(var_00, var_01, var_02) {
-  if (isdefined(self.model) && scripts/sp/utility::hastag(self.model, var_00)) {
+  if (isdefined(self.model) && scripts\sp\utility::hastag(self.model, var_00)) {
   var_03 = self gettagorigin(var_00);
   var_04 = self gettagangles(var_00);
   func_5B6D(var_03, var_04, var_01, var_02);
@@ -371,7 +371,7 @@ func_4747() {
   var_1.count = 1;
   var_00 = var_01 _meth_8393();
 
-  if (scripts/sp/utility::func_106ED(var_00)) {
+  if (scripts\sp\utility::func_106ED(var_00)) {
   func_E0C0(self);
   continue;
   }
@@ -390,7 +390,7 @@ func_4747() {
   var_0.team = "neutral";
   var_00 give_mp_super_weapon(var_0.origin);
   thread func_49E3(self.origin);
-  var_00 thread scripts/sp/utility::func_4F4B();
+  var_00 thread scripts\sp\utility::func_4F4B();
   thread func_49E4(var_00);
   var_00 waittill("death");
   }

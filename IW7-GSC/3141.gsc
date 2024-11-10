@@ -1,11 +1,11 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3141.gsc
-****************************/
+ * Script: 3141.gsc
+************************/
 
 func_BEA0(param_00,param_01,param_02,param_03) {
-	self._blackboard.var_5279 = undefined;
+	self.var_1198.var_5279 = undefined;
 	var_04 = anglestoforward(self.angles);
 	var_05 = 0;
 	if(var_05) {
@@ -13,7 +13,7 @@ func_BEA0(param_00,param_01,param_02,param_03) {
 			if(distancesquared(self.vehicle_getspawnerarray,self.origin) > 144) {
 				var_06 = self.setocclusionpreset;
 				if(vectordot(var_06,var_04) <= 0.857) {
-					self._blackboard.var_5279 = var_06;
+					self.var_1198.var_5279 = var_06;
 					return 1;
 				}
 			}
@@ -29,7 +29,7 @@ func_BEA0(param_00,param_01,param_02,param_03) {
 	if(isdefined(var_07) && !isdefined(self.var_595F)) {
 		var_08 = vectornormalize(var_07 - self.origin);
 		if(vectordot(var_04,var_08) <= 0.5) {
-			self._blackboard.var_5279 = var_08;
+			self.var_1198.var_5279 = var_08;
 			return 1;
 		}
 	}
@@ -37,7 +37,7 @@ func_BEA0(param_00,param_01,param_02,param_03) {
 	if(isdefined(self.physics_querypoint)) {
 		var_09 = anglestoforward(self.physics_querypoint.angles);
 		if(vectordot(var_09,var_04) <= 0.857) {
-			self._blackboard.var_5279 = var_09;
+			self.var_1198.var_5279 = var_09;
 			return 1;
 		}
 
@@ -47,7 +47,7 @@ func_BEA0(param_00,param_01,param_02,param_03) {
 	if(isdefined(self.target_getindexoftarget)) {
 		var_09 = anglestoforward(self.target_getindexoftarget.angles);
 		if(vectordot(var_09,var_04) <= 0.857) {
-			self._blackboard.var_5279 = var_09;
+			self.var_1198.var_5279 = var_09;
 			return 1;
 		}
 
@@ -64,7 +64,7 @@ func_BEA1(param_00,param_01,param_02,param_03) {
 			var_04 = vectornormalize((var_04[0],var_04[1],0));
 			var_05 = anglestoforward(self.angles);
 			if(vectordot(var_04,var_05) <= 0.857) {
-				self._blackboard.var_5279 = var_04;
+				self.var_1198.var_5279 = var_04;
 				return 1;
 			}
 		}
@@ -74,7 +74,7 @@ func_BEA1(param_00,param_01,param_02,param_03) {
 }
 
 func_35DE(param_00,param_01,param_02,param_03) {
-	self._blackboard.var_11936 = gettime();
+	self.var_1198.var_11936 = gettime();
 	var_04 = self.var_164D[param_00];
 	if(isdefined(var_04.var_10E23)) {
 		if(var_04.var_10E23 == "run" || var_04.var_10E23 == "walk" || var_04.var_10E23 == "walk_backward") {
@@ -86,18 +86,18 @@ func_35DE(param_00,param_01,param_02,param_03) {
 }
 
 func_35DF(param_00,param_01,param_02) {
-	self._blackboard.var_11936 = undefined;
+	self.var_1198.var_11936 = undefined;
 }
 
 func_7EAE() {
-	if(!isdefined(self._blackboard.shootparams)) {
+	if(!isdefined(self.var_1198.shootparams)) {
 		return undefined;
 	}
 
 	var_00 = 0;
 	var_01 = (0,0,0);
 	foreach(var_03 in lib_0C08::func_357A()) {
-		var_04 = self._blackboard.shootparams.var_13CC3[var_03];
+		var_04 = self.var_1198.shootparams.var_13CC3[var_03];
 		if(isdefined(var_04)) {
 			if(isdefined(var_04.var_EF76)) {
 				foreach(var_06 in var_04.var_EF76) {
@@ -137,7 +137,7 @@ func_B32D(param_00) {
 }
 
 func_3EA7(param_00,param_01,param_02) {
-	var_03 = self._blackboard.var_5279;
+	var_03 = self.var_1198.var_5279;
 	if(!isdefined(var_03)) {
 		return undefined;
 	}
@@ -171,13 +171,13 @@ func_CEC3(param_00,param_01,param_02,param_03) {
 	self endon(param_01 + "_finished");
 	var_04 = lib_0A1E::asm_getallanimsforstate(param_00,param_01);
 	if(!isdefined(var_04)) {
-		scripts/asm/asm::asm_fireevent(param_01,"end");
+		scripts\asm\asm::asm_fireevent(param_01,"end");
 		return;
 	}
 
 	self aiclearanim(lib_0A1E::asm_getbodyknob(),param_02);
 	self _meth_82EA(param_01,var_04,1,param_02,1);
-	lib_0A1E::func_231F(param_00,param_01,scripts/asm/asm::func_2341(param_00,param_01));
+	lib_0A1E::func_231F(param_00,param_01,scripts\asm\asm::func_2341(param_00,param_01));
 }
 
 func_7DD5() {
@@ -213,7 +213,7 @@ func_1008C(param_00,param_01,param_02,param_03) {
 		return 0;
 	}
 
-	if(!scripts/asm/asm::func_232B(param_01,"cover_approach")) {
+	if(!scripts\asm\asm::func_232B(param_01,"cover_approach")) {
 		return 0;
 	}
 
@@ -368,7 +368,7 @@ func_CEAD(param_00,param_01,param_02,param_03) {
 		self orientmode("face angle",self.angles[1]);
 	}
 
-	lib_0A1E::func_231F(param_00,param_01,scripts/asm/asm::func_2341(param_00,param_01));
+	lib_0A1E::func_231F(param_00,param_01,scripts\asm\asm::func_2341(param_00,param_01));
 	self.a.movement = "stop";
 }
 
@@ -381,7 +381,7 @@ func_1008B(param_00,param_01,param_02,param_03) {
 		return 0;
 	}
 
-	if(!scripts/asm/asm::func_232B(param_01,"cover_approach")) {
+	if(!scripts\asm\asm::func_232B(param_01,"cover_approach")) {
 		return 0;
 	}
 
@@ -487,7 +487,7 @@ func_10048(param_00,param_01,param_02,param_03) {
 		return 0;
 	}
 
-	var_04 = scripts/asm/asm::asm_getdemeanor();
+	var_04 = scripts\asm\asm::asm_getdemeanor();
 	if(var_04 != "walk" && var_04 != "casual") {
 		return 0;
 	}
@@ -541,7 +541,7 @@ func_100BE(param_00,param_01,param_02,param_03) {
 			return 0;
 		}
 
-		if(isplayer(var_07) && isdefined(self._blackboard.var_E5FD) && self._blackboard.var_E5FD) {
+		if(isplayer(var_07) && isdefined(self.var_1198.var_E5FD) && self.var_1198.var_E5FD) {
 			return 0;
 		}
 	}

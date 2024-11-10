@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2722.gsc
+ * Script: 2722.gsc
 ***************************************/
 
 door_system_init(var_00) {

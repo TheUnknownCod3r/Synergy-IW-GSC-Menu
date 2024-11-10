@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2866.gsc
+ * Script: 2866.gsc
 ***************************************/
 
 main() {
@@ -279,16 +279,16 @@ func_B8CF(var_00) {
   if (isdefined(level.func_4C52))
   thread func_0B60::func_F330(level.func_4C52, 64, 64, 0);
 
-  scripts/sp/utility::func_B8D1();
+  scripts\sp\utility::func_B8D1();
 }
 
 func_1D2B() {
   level.player endon("death");
   self endon("death");
   self givescorefortrophyblocks();
-  scripts/sp/utility::func_414F();
-  scripts/sp/utility::func_F417(1);
-  scripts/sp/utility::clearthreatbias("axis", "allies");
+  scripts\sp\utility::func_414F();
+  scripts\sp\utility::func_F417(1);
+  scripts\sp\utility::clearthreatbias("axis", "allies");
 
   for (;;) {
   self.team = "axis";

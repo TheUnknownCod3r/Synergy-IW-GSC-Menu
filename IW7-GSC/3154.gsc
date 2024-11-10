@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3154.gsc
-****************************/
+ * Script: 3154.gsc
+************************/
 
 func_F130() {
 	var_00 = [];
@@ -32,7 +32,7 @@ func_F127(param_00,param_01,param_02,param_03) {
 	var_04.ignoreme = 1;
 	self.ignoreme = 1;
 	self notify("meleegrab_start");
-	self.bt.var_1152B = 1;
+	self.var_3135.var_1152B = 1;
 	return 1;
 }
 
@@ -58,11 +58,11 @@ func_F14B(param_00,param_01) {
 }
 
 func_3EB4(param_00,param_01,param_02) {
-	return scripts/asm/asm::asm_lookupanimfromalias(param_01,"jump_" + param_02);
+	return scripts\asm\asm::asm_lookupanimfromalias(param_01,"jump_" + param_02);
 }
 
 func_3EB5(param_00,param_01,param_02) {
-	return scripts/asm/asm::asm_lookupanimfromalias(param_01,"loop_" + param_02);
+	return scripts\asm\asm::asm_lookupanimfromalias(param_01,"loop_" + param_02);
 }
 
 func_F172() {
@@ -104,7 +104,7 @@ func_D4CE(param_00,param_01,param_02,param_03) {
 	self.melee.var_312F = 1;
 	var_04 = self.melee.target;
 	var_05 = func_3EB4(param_00,param_01,self.melee.var_F2);
-	scripts/asm/asm::asm_fireephemeralevent("melee_attack","begin");
+	scripts\asm\asm::asm_fireephemeralevent("melee_attack","begin");
 	lib_0F42::func_B5CB(param_01,1);
 	if(!isdefined(var_04.var_F184)) {
 		var_04.var_F184 = 1;
@@ -117,8 +117,8 @@ func_D4CE(param_00,param_01,param_02,param_03) {
 	}
 
 	var_07 = [self];
-	var_04 scripts/asm/asm::asm_setstate(param_01 + "_victim",var_07);
-	createnavrepulsor("ent_" + self getentitynumber() + "_seeker_repulsor",-1,self,250,1,self.bt.var_652A);
+	var_04 scripts\asm\asm::asm_setstate(param_01 + "_victim",var_07);
+	createnavrepulsor("ent_" + self getentitynumber() + "_seeker_repulsor",-1,self,250,1,self.var_3135.var_652A);
 	self animmode("zonly_physics");
 	self linktoblendtotag(self.melee.target,"tag_sync",0,0);
 	self aiclearanim(lib_0A1E::asm_getbodyknob(),0);
@@ -155,7 +155,7 @@ func_F148(param_00,param_01,param_02,param_03) {
 	self.ignoreme = 1;
 	scripts\sp\_utility::func_9193("default_seeker");
 	lib_0F3D::func_B60F();
-	scripts/asm/asm::asm_fireephemeralevent("melee_attack","begin");
+	scripts\asm\asm::asm_fireephemeralevent("melee_attack","begin");
 	thread func_F153();
 	lib_0A1E::func_2364(param_00,param_01,0);
 }
@@ -182,7 +182,7 @@ func_F153() {
 	thread func_F152(var_01);
 	var_04 = getanimlength(var_02["seekerMeleeGrab"]);
 	thread func_F142(1.25,0.75);
-	var_01 thread scripts/sp/anim::func_10CBF(var_01,var_03);
+	var_01 thread scripts\sp\anim::func_10CBF(var_01,var_03);
 	var_01 scripts\anim\shared::donotetracks(var_03);
 }
 
@@ -372,15 +372,15 @@ func_F149(param_00,param_01,param_02,param_03) {
 	thread lib_0F3D::func_50E8(0.2);
 	thread lib_0F3D::func_510F(0.2,65,0.4);
 	var_06 _meth_82E4("meleeCounter",var_05,var_06.var_E6E5,1,0.2,1);
-	var_06 thread scripts/sp/anim::func_10CBF(var_06,"meleeCounter");
+	var_06 thread scripts\sp\anim::func_10CBF(var_06,"meleeCounter");
 	var_06 thread scripts\anim\shared::donotetracks("meleeCounter",::func_F145);
 	var_07 = lib_0A1E::asm_getallanimsforstate(param_00,param_01);
 	self aiclearanim(lib_0A1E::asm_getbodyknob(),param_02);
 	playworldsound("seeker_expl_beep",self.origin);
 	thread func_F116();
 	self _meth_82E7(param_01,var_07,1,param_02,1);
-	thread scripts/sp/anim::func_10CBF(self,param_01);
-	lib_0A1E::func_231F(param_00,param_01,scripts/asm/asm::func_2341(param_00,param_01));
+	thread scripts\sp\anim::func_10CBF(self,param_01);
+	lib_0A1E::func_231F(param_00,param_01,scripts\asm\asm::func_2341(param_00,param_01));
 	func_F13E();
 }
 

@@ -1,8 +1,8 @@
-/*******************************************
+/***********************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\cp_endgame.gsc
-*******************************************/
+ * Script: scripts\cp\_endgame.gsc
+***********************************/
 
 init() {
 	func_DEB3();
@@ -79,7 +79,7 @@ endgame(param_00,param_01) {
 	{
 	}
 
-	scripts/cp/cp_gamescore::calculate_players_total_end_game_score(1);
+	scripts\cp\cp_gamescore::calculate_players_total_end_game_score(1);
 	if(isdefined(level.var_D7BB)) {
 		[[level.var_D7BB]]();
 	}
@@ -308,7 +308,7 @@ func_ADDE(param_00) {
 	var_01 = "map " + param_00;
 }
 
-// Restart Map
+\\ Restart Map
 func_E2AE() {
 	func_A5D7();
 	setomnvar("allow_server_pause",1);
@@ -321,7 +321,7 @@ func_E2AE() {
 	map_restart(1);
 }
 
-// Kill Aliens
+\\ Kill Aliens
 func_A5D7() {
 	foreach(var_01 in level.characters) {
 		var_01 dodamage(100000,var_01.origin);

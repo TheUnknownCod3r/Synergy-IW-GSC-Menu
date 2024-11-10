@@ -1,14 +1,14 @@
-/*********************************************************************
+/*************************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\maps\cp_final\cp_final_fast_travel.gsc
-*********************************************************************/
+ * Script: scripts\cp\maps\cp_final\cp_final_fast_travel.gsc
+*************************************************************/
 
 init_teleport_portals() {
-	level._effect["death_ray_cannon_beam"] = loadfx("vfx/iw7/levels/cp_town/death_ray_cannon_beam.vfx");
-	level._effect["death_ray_cannon_rock_impact"] = loadfx("vfx/iw7/levels/cp_final/rhino/vfx_metal_impact.vfx");
-	level._effect["portal_glyph"] = loadfx("vfx/iw7/levels/cp_final/portal/vfx_portal_symbol_1.vfx");
-	level._effect["vfx_pap_return_portal"] = loadfx("vfx/iw7/levels/cp_disco/vfx_paproom_portal.vfx");
+	level._effect["death_ray_cannon_beam"] = loadfx("vfx\iw7\levels\cp_town\death_ray_cannon_beam.vfx");
+	level._effect["death_ray_cannon_rock_impact"] = loadfx("vfx\iw7\levels\cp_final\rhino\vfx_metal_impact.vfx");
+	level._effect["portal_glyph"] = loadfx("vfx\iw7\levels\cp_final\portal\vfx_portal_symbol_1.vfx");
+	level._effect["vfx_pap_return_portal"] = loadfx("vfx\iw7\levels\cp_disco\vfx_paproom_portal.vfx");
 	wait(5);
 	var_00 = scripts\engine\utility::getstructarray("fast_travel_portal","targetname");
 	foreach(var_02 in var_00) {
@@ -147,7 +147,7 @@ trigger_when_player_close_by() {
 			level.used_portal = 1;
 			if(isdefined(self.end_point_name)) {
 				if(self.end_point_name == "theater") {
-					var_05 scripts/cp/zombies/achievement::update_achievement("DOUBLE_FEATURE",1);
+					var_05 scripts\cp\zombies\achievement::update_achievement("DOUBLE_FEATURE",1);
 				}
 			}
 
@@ -290,7 +290,7 @@ blast_doors_with_gun() {
 			var_05.angles = (0,0,0);
 		}
 
-		function_02E0(level._effect[var_00],var_05.origin,var_05.angles,var_08);
+		playfxbetweenpoints(level._effect[var_00],var_05.origin,var_05.angles,var_08);
 	}
 
 	playsoundatpos(level.portal_gun.origin,"zmb_railgun_fire");
@@ -867,7 +867,7 @@ hidden_room_exit_tube(param_00) {
 	wait(0.1);
 	var_01 delete();
 	if(scripts\engine\utility::istrue(param_00.wor_phase_shift)) {
-		param_00 scripts/cp/powers/coop_phaseshift::exitphaseshift(1);
+		param_00 scripts\cp\powers\coop_phaseshift::exitphaseshift(1);
 		param_00.wor_phase_shift = 0;
 	}
 

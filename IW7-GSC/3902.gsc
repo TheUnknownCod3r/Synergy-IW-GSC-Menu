@@ -1,15 +1,15 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3902.gsc
-****************************/
+ * Script: 3902.gsc
+************************/
 
 func_98CC(param_00,param_01,param_02,param_03) {
-	self._blackboard.shootstate = scripts/asm/asm::asm_getcurrentstate(self.asmname);
+	self.var_1198.shootstate = scripts\asm\asm::asm_getcurrentstate(self.asmname);
 }
 
 func_FE75(param_00,param_01,param_02,param_03) {
-	scripts/asm/asm_mp::func_2361(param_00,param_01,param_02,param_03);
+	scripts\asm\asm_mp::func_2361(param_00,param_01,param_02,param_03);
 }
 
 func_FE61(param_00,param_01,param_02,param_03) {
@@ -17,11 +17,11 @@ func_FE61(param_00,param_01,param_02,param_03) {
 	func_FE89();
 	var_04 = func_FE64();
 	self _meth_83CE();
-	var_05 = scripts/asm/asm_mp::asm_getanim(param_00,param_01);
+	var_05 = scripts\asm\asm_mp::asm_getanim(param_00,param_01);
 	shootblankorrpg(param_01,0.2,2);
 	self.asm.shootparams.var_C21C--;
 	func_32BE();
-	scripts/asm/asm::asm_fireevent(param_01,"shoot_finished");
+	scripts\asm\asm::asm_fireevent(param_01,"shoot_finished");
 }
 
 func_FE7D(param_00) {
@@ -46,7 +46,7 @@ shootblankorrpg(param_00,param_01,param_02) {
 	var_08 = 0;
 	var_09 = scripts\anim\utility_common::weapon_pump_action_shotgun();
 	while(var_05 < var_06 && var_06 > 0) {
-		if(!isdefined(self._blackboard.shootparams)) {
+		if(!isdefined(self.var_1198.shootparams)) {
 			break;
 		}
 
@@ -181,7 +181,7 @@ func_FE64() {
 }
 
 func_FE89() {
-	var_00 = self._blackboard.shootparams;
+	var_00 = self.var_1198.shootparams;
 	if(!isdefined(self.asm.shootparams)) {
 		self.asm.shootparams = spawnstruct();
 		self.asm.shootparams.var_C21C = var_00.var_32BD;

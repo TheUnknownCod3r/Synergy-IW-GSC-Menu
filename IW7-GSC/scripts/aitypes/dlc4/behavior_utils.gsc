@@ -1,8 +1,8 @@
-/***********************************************************
+/***************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\aitypes\dlc4\behavior_utils.gsc
-***********************************************************/
+ * Script: scripts\aitypes\dlc4\behavior_utils.gsc
+***************************************************/
 
 pickbetterenemy(param_00,param_01) {
 	var_02 = self getpersstat(param_00);
@@ -29,7 +29,7 @@ shouldignoreenemy(param_00) {
 		return 1;
 	}
 
-	if(param_00.ignoreme || isdefined(param_00.triggerportableradarping) && param_00.var_222.ignoreme) {
+	if(param_00.ignoreme || isdefined(param_00.triggerportableradarping) && param_00.triggerportableradarping.ignoreme) {
 		return 1;
 	}
 
@@ -53,7 +53,7 @@ updateenemy() {
 			continue;
 		}
 
-		if(scripts\common\utility::istrue(var_02.isfasttravelling)) {
+		if(scripts\engine\utility::istrue(var_02.isfasttravelling)) {
 			continue;
 		}
 
@@ -84,7 +84,7 @@ getpredictedenemypos(param_00,param_01) {
 }
 
 facepoint(param_00) {
-	var_01 = scripts\common\utility::getyawtospot(param_00);
+	var_01 = scripts\engine\utility::getyawtospot(param_00);
 	if(abs(var_01) < 8) {
 		var_02 = (self.angles[0],self.angles[1] + var_01,self.angles[2]);
 		self orientmode("face angle abs",var_02);

@@ -1,12 +1,12 @@
-/*******************************************************************
+/***********************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\agents\crab_mini\crab_mini_agent.gsc
-*******************************************************************/
+ * Script: scripts\mp\agents\crab_mini\crab_mini_agent.gsc
+***********************************************************/
 
 registerscriptedagent() {
 	scripts\mp\agents\crab_mini\crab_mini_tunedata::setuptunedata();
-	scripts/aitypes/bt_util::init();
+	scripts\aitypes\bt_util::init();
 	behaviortree\crab_mini::func_DEE8();
 	scripts\asm\crab_mini\mp\states::func_2371();
 	thread func_FAB0();
@@ -21,7 +21,7 @@ func_FAB0() {
 	level.agent_definition["crab_mini"]["setup_func"] = ::setupagent;
 	level.agent_definition["crab_mini"]["setup_model_func"] = ::func_FACE;
 	level.agent_funcs["crab_mini"]["on_damaged"] = ::scripts\cp\maps\cp_town\cp_town_damage::cp_town_onzombiedamaged;
-	level.agent_funcs["crab_mini"]["gametype_on_damage_finished"] = ::scripts/cp/agents/gametype_zombie::onzombiedamagefinished;
+	level.agent_funcs["crab_mini"]["gametype_on_damage_finished"] = ::scripts\cp\agents\gametype_zombie::onzombiedamagefinished;
 	level.agent_funcs["crab_mini"]["gametype_on_killed"] = ::scripts\cp\maps\cp_town\cp_town_damage::cp_town_onzombiekilled;
 	level.agent_funcs["crab_mini"]["on_damaged_finished"] = ::scripts\mp\agents\zombie\zmb_zombie_agent::onzombiedamagefinished;
 	level.agent_funcs["crab_mini"]["on_killed"] = ::onkilled;

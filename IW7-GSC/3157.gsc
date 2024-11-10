@@ -1,13 +1,13 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\3157.gsc
+ * Script: 3157.gsc
 ***************************************/
 
 chooseanimshoot(var_00, var_01, var_02) {
   var_03 = var_02;
-  var_04 = self._blackboard.shootstate + "_" + var_03;
+  var_04 = self.var_1198.shootstate + "_" + var_03;
 
-  if (isdefined(self._blackboard.shootstate) && scripts\asm\asm::asm_hasalias(var_01, var_04))
+  if (isdefined(self.var_1198.shootstate) && scripts\asm\asm::asm_hasalias(var_01, var_04))
   return scripts\asm\asm::asm_lookupanimfromalias(var_01, var_04);
 
   return scripts\asm\asm::asm_lookupanimfromalias(var_01, var_02);
@@ -168,7 +168,7 @@ getnodeyawfromoffsettable(var_00, var_01, var_02) {
 
 func_1C9C() {
   var_00 = scripts\engine\utility::weaponclass(self.weapon) == "mg";
-  return var_00 || isdefined(self._blackboard.func_522F) && isdefined(self.node) && self.node == self._blackboard.func_522F;
+  return var_00 || isdefined(self.var_1198.func_522F) && isdefined(self.node) && self.node == self.var_1198.func_522F;
 }
 
 getnodeyawoffset(var_00, var_01) {
@@ -176,7 +176,7 @@ getnodeyawoffset(var_00, var_01) {
   return 0;
 
   if (getdvarint("ai_iw7", 0) == 1) {
-  if (isdefined(self._blackboard.func_98F4) && self._blackboard.func_98F4 || isdefined(self.asm.func_1310E) && self.asm.func_1310E)
+  if (isdefined(self.var_1198.func_98F4) && self.var_1198.func_98F4 || isdefined(self.asm.func_1310E) && self.asm.func_1310E)
   return 0;
 
   if (self.asm.func_7360 && isdefined(anim.func_7365) && isdefined(anim.func_7365[self.asmname])) {

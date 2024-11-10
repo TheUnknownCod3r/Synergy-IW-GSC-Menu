@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3907.gsc
-****************************/
+ * Script: 3907.gsc
+************************/
 
 func_1000F() {
 	return isdefined(self.isnodeoccupied) && isplayer(self.isnodeoccupied) && self getpersstat(self.isnodeoccupied);
@@ -44,7 +44,7 @@ func_D46D(param_00,param_01,param_02,param_03) {
 	}
 
 	if(isdefined(self.target_getindexoftarget)) {
-		self._blackboard.var_AA3D = self.target_getindexoftarget;
+		self.var_1198.var_AA3D = self.target_getindexoftarget;
 	}
 
 	if(self.team != "allies") {
@@ -71,11 +71,11 @@ reload(param_00,param_01,param_02,param_03) {
 
 func_CECB(param_00,param_01,param_02,param_03) {
 	self endon(param_01 + "_finished");
-	var_04 = scripts/asm/asm_bb::bb_getrequestedweapon();
+	var_04 = scripts\asm\asm_bb::bb_getrequestedweapon();
 	var_05 = lib_0A1E::asm_getallanimsforstate(param_00,param_01);
 	self _meth_82E4(param_01,var_05,lib_0A1E::asm_getbodyknob(),1,param_02,scripts\anim\combat_utility::func_6B9A());
 	lib_0A1E::func_2369(param_00,param_01,var_05);
-	lib_0A1E::func_231F(param_00,param_01,scripts/asm/asm::func_2341(param_00,param_01));
+	lib_0A1E::func_231F(param_00,param_01,scripts\asm\asm::func_2341(param_00,param_01));
 	self notify("switched_to_sidearm");
 	scripts\sp\_gameskill::func_54C4();
 }
@@ -111,7 +111,7 @@ func_D56A(param_00,param_01,param_02,param_03) {
 
 	var_05 = lib_0A1E::func_231F(param_00,param_01);
 	if(var_05 == "end") {
-		thread scripts/asm/asm::func_2310(param_00,param_01,0);
+		thread scripts\asm\asm::func_2310(param_00,param_01,0);
 	}
 }
 
@@ -146,7 +146,7 @@ func_9EB9(param_00,param_01,param_02,param_03) {
 }
 
 func_1007E(param_00,param_01,param_02,param_03) {
-	if(scripts/asm/asm_bb::bb_moverequested()) {
+	if(scripts\asm\asm_bb::bb_moverequested()) {
 		return 0;
 	}
 
@@ -182,7 +182,7 @@ func_4C03(param_00,param_01,param_02,param_03) {
 	}
 
 	if(distance2dsquared(self.origin,self.target_getindexoftarget.origin) > 225) {
-		if(scripts/asm/asm_bb::func_292C() == "stand") {
+		if(scripts\asm\asm_bb::func_292C() == "stand") {
 			return var_04 == "Exposed";
 		}
 		else

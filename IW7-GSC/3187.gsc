@@ -1,11 +1,11 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3187.gsc
-****************************/
+ * Script: 3187.gsc
+************************/
 
 func_138E4(param_00,param_01,param_02,param_03) {
-	if(scripts/asm/asm_bb::bb_meleerequested()) {
+	if(scripts\asm\asm_bb::bb_meleerequested()) {
 		return 1;
 	}
 
@@ -17,7 +17,7 @@ func_138E0() {
 }
 
 func_138E1() {
-	if(!scripts/asm/asm_bb::bb_moverequested()) {
+	if(!scripts\asm\asm_bb::bb_moverequested()) {
 		return 0;
 	}
 
@@ -79,46 +79,46 @@ func_D4C8(param_00,param_01,param_02,param_03) {
 	self endon("terminate_ai_threads");
 	var_04 = makeentitysentient(self.curmeleetarget,1);
 	func_57E5(param_00,param_01,self.curmeleetarget,var_04,1,1,self.var_C081,1);
-	scripts/asm/asm::asm_fireevent(param_01,"end");
+	scripts\asm\asm::asm_fireevent(param_01,"end");
 }
 
 func_D4DC(param_00,param_01,param_02,param_03) {
 	self endon("death");
 	self endon("terminate_ai_threads");
-	var_04 = scripts/asm/asm_bb::bb_getmeleetarget();
+	var_04 = scripts\asm\asm_bb::bb_getmeleetarget();
 	self.var_B629 = undefined;
 	var_05 = makeentitysentient(var_04,1);
 	self.var_CA1C = 1;
 	self.aistate = "melee";
 	func_57E5(param_00,param_01,var_04,var_05,0,1,self.var_C081);
 	self.aistate = "move";
-	scripts/asm/asm::asm_fireevent(param_01,"end");
+	scripts\asm\asm::asm_fireevent(param_01,"end");
 }
 
 func_D539(param_00,param_01,param_02,param_03) {
 	self endon("death");
 	self endon("terminate_ai_threads");
-	var_04 = scripts/asm/asm_bb::bb_getmeleetarget();
+	var_04 = scripts\asm\asm_bb::bb_getmeleetarget();
 	var_05 = makeentitysentient(var_04,1);
 	self.aistate = "melee";
 	func_57E5(param_00,param_01,var_04,var_05,0,1,self.var_C081);
 	self.aistate = "idle";
-	scripts/asm/asm::asm_fireevent(param_01,"end");
+	scripts\asm\asm::asm_fireevent(param_01,"end");
 }
 
 func_CC64(param_00,param_01,param_02,param_03) {
 	self endon("death");
 	self endon("terminate_ai_threads");
-	var_04 = scripts/asm/asm_bb::bb_getmeleetarget();
+	var_04 = scripts\asm\asm_bb::bb_getmeleetarget();
 	var_05 = makeentitysentient(var_04,1);
 	self.aistate = "melee";
 	func_57E5(param_00,param_01,var_04,var_05,0,1,self.var_C081,0,1);
 	self.aistate = "idle";
-	scripts/asm/asm::asm_fireevent(param_01,"end");
+	scripts\asm\asm::asm_fireevent(param_01,"end");
 }
 
 func_2989(param_00,param_01,param_02,param_03) {
-	return isdefined(self._blackboard.var_3134) && self._blackboard.var_3134;
+	return isdefined(self.var_1198.var_3134) && self.var_1198.var_3134;
 }
 
 func_138E5() {
@@ -145,7 +145,7 @@ func_D543(param_00,param_01,param_02,param_03) {
 		playsoundatpos(self gettagorigin("tag_eye"),"zmb_clown_pre_explo");
 	}
 
-	var_04 = scripts/asm/asm_mp::asm_getanim(param_00,param_01);
+	var_04 = scripts\asm\asm_mp::asm_getanim(param_00,param_01);
 	scripts\mp\agents\_scriptedagents::func_CED2(param_01,var_04,2,param_01,"explode");
 	if(isdefined(self.agent_type) && self.agent_type != "skater") {
 		playsoundatpos(self gettagorigin("tag_eye"),"zmb_vo_clown_death");
@@ -162,7 +162,7 @@ func_D553(param_00,param_01,param_02,param_03) {
 	self endon("terminate_ai_threads");
 	self endon(param_01 + "_finished");
 	self.should_play_transformation_anim = undefined;
-	var_04 = scripts/asm/asm_mp::asm_getanim(param_00,param_01);
+	var_04 = scripts\asm\asm_mp::asm_getanim(param_00,param_01);
 	scripts\mp\agents\_scriptedagents::func_CED5(param_01,var_04,param_01);
 }
 
@@ -197,7 +197,7 @@ func_57E5(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_0
 		param_07 = 0;
 	}
 
-	var_09 = scripts/asm/asm_mp::asm_getanim(param_00,param_01);
+	var_09 = scripts\asm\asm_mp::asm_getanim(param_00,param_01);
 	var_0A = self getsafecircleorigin(param_01,var_09);
 	var_0B = getanimlength(var_0A);
 	var_0C = getnotetracktimes(var_0A,"hit");
@@ -265,7 +265,7 @@ func_57E5(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_0
 	}
 
 	wait(var_0D);
-	scripts/asm/asm_bb::bb_clearmeleerequest();
+	scripts\asm\asm_bb::bb_clearmeleerequest();
 	self notify("cancel_updatelerppos");
 	if(param_05 && isdefined(self.isnodeoccupied)) {
 		thread func_6A6A(param_01,self.isnodeoccupied);
@@ -396,7 +396,7 @@ func_12EC0(param_00,param_01,param_02,param_03) {
 		}
 		else
 		{
-			var_08 = scripts/mp/agents/zombie/zombie_util::func_7FAE() - self.fgetarg;
+			var_08 = scripts\mp\agents\zombie\zombie_util::func_7FAE() - self.fgetarg;
 		}
 
 		var_09 = var_07 - var_04;
@@ -426,8 +426,8 @@ makeentitysentient(param_00,param_01) {
 	}
 
 	var_03 = var_03 / var_04;
-	var_05 = scripts/mp/agents/zombie/zombie_util::func_7FAA(param_01);
-	if(scripts/mp/agents/zombie/zombie_util::func_38C2(self.origin,var_05.origin)) {
+	var_05 = scripts\mp\agents\zombie\zombie_util::func_7FAA(param_01);
+	if(scripts\mp\agents\zombie\zombie_util::func_38C2(self.origin,var_05.origin)) {
 		return var_05.origin;
 	}
 
@@ -467,7 +467,7 @@ func_252F(param_00) {
 		return 1;
 	}
 
-	if(scripts/mp/agents/zombie/zombie_util::func_9DE0(param_00)) {
+	if(scripts\mp\agents\zombie\zombie_util::func_9DE0(param_00)) {
 		return 1;
 	}
 
@@ -483,17 +483,17 @@ isenemyinfrontofme(param_00,param_01) {
 
 func_13D99() {
 	var_00 = self.entered_playspace;
-	if(isdefined(self.isnodeoccupied) && !ispointonnavmesh(self.isnodeoccupied.origin) && !scripts/asm/asm_bb::bb_moverequested()) {
-		if(scripts/mp/agents/zombie/zombie_util::func_DD7C("offmesh",var_00)) {
+	if(isdefined(self.isnodeoccupied) && !ispointonnavmesh(self.isnodeoccupied.origin) && !scripts\asm\asm_bb::bb_moverequested()) {
+		if(scripts\mp\agents\zombie\zombie_util::func_DD7C("offmesh",var_00)) {
 			return 1;
 		}
 	}
 
-	if(!scripts/mp/agents/zombie/zombie_util::func_DD7C("normal",var_00)) {
+	if(!scripts\mp\agents\zombie\zombie_util::func_DD7C("normal",var_00)) {
 		return 0;
 	}
 
-	if(scripts/mp/agents/zombie/zombie_util::func_7FAE() > self.var_B62E && !scripts/mp/agents/zombie/zombie_util::func_13D9B()) {
+	if(scripts\mp\agents\zombie\zombie_util::func_7FAE() > self.var_B62E && !scripts\mp\agents\zombie\zombie_util::func_13D9B()) {
 		return 0;
 	}
 

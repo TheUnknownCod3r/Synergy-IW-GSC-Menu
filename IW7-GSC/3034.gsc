@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\3034.gsc
+ * Script: 3034.gsc
 ***************************************/
 
 main(var_00, var_01, var_02, var_03, var_04, var_05) {
@@ -32,30 +32,30 @@ main(var_00, var_01, var_02, var_03, var_04, var_05) {
   precachevehicle(var_03 + "_thrustperk_dualfire");
   }
 
-  scripts/sp/vehicle_build::func_31C5(var_01, var_00, undefined, var_02);
-  scripts/sp/vehicle_build::bugoutontimeout(var_04);
-  scripts/sp/vehicle_build::func_31BF(var_05);
-  scripts/sp/vehicle_build::func_31AC(func_0BD4::func_A298);
-  scripts/sp/vehicle_build::build_all_treadfx(var_01, var_03);
-  scripts/sp/vehicle_build::func_31A3(3000);
-  scripts/sp/vehicle_build::func_3186(var_00, var_00, 0, var_02);
+  scripts\sp\vehicle_build::func_31C5(var_01, var_00, undefined, var_02);
+  scripts\sp\vehicle_build::bugoutontimeout(var_04);
+  scripts\sp\vehicle_build::func_31BF(var_05);
+  scripts\sp\vehicle_build::func_31AC(func_0BD4::func_A298);
+  scripts\sp\vehicle_build::build_all_treadfx(var_01, var_03);
+  scripts\sp\vehicle_build::func_31A3(3000);
+  scripts\sp\vehicle_build::func_3186(var_00, var_00, 0, var_02);
   func_0C21::func_9635();
 
   if (var_06 == "axis") {
-  scripts/sp/vehicle_build::func_31C4("axis");
+  scripts\sp\vehicle_build::func_31C4("axis");
   func_0BD7::init(var_06);
   } else {
-  scripts/sp/vehicle_build::func_31C4("allies");
+  scripts\sp\vehicle_build::func_31C4("allies");
   func_0BD8::init(var_06);
   }
 
   func_0BD4::func_31A1();
-  scripts/sp/vehicle_build::func_31C6(var_02, "default", "vfx/iw7/core/vehicle/jackal/vfx_jackal_wash.vfx", 1);
-  scripts/sp/vehicle_build::func_31C6(var_02, "rock", "vfx/iw7/core/vehicle/jackal/vfx_jackal_wash_concrete.vfx", 1);
-  scripts/sp/vehicle_build::func_31C6(var_02, "concrete_dry", "vfx/iw7/core/vehicle/jackal/vfx_jackal_wash_concrete.vfx", 1);
-  scripts/sp/vehicle_build::func_31C6(var_02, "snow", "vfx/iw7/core/vehicle/jackal/vfx_jackal_wash_lowg.vfx", 1);
-  scripts/sp/vehicle_build::func_31C6(var_02, "metal", "vfx/iw7/core/vehicle/jackal/vfx_jackal_wash_metal.vfx", 1);
-  scripts/sp/vehicle_build::func_31C6(var_02, "water", "vfx/iw7/core/vehicle/jackal/vfx_jackal_water_tread_wash.vfx", 1);
+  scripts\sp\vehicle_build::func_31C6(var_02, "default", "vfx\iw7\core\vehicle\jackal\vfx_jackal_wash.vfx", 1);
+  scripts\sp\vehicle_build::func_31C6(var_02, "rock", "vfx\iw7\core\vehicle\jackal\vfx_jackal_wash_concrete.vfx", 1);
+  scripts\sp\vehicle_build::func_31C6(var_02, "concrete_dry", "vfx\iw7\core\vehicle\jackal\vfx_jackal_wash_concrete.vfx", 1);
+  scripts\sp\vehicle_build::func_31C6(var_02, "snow", "vfx\iw7\core\vehicle\jackal\vfx_jackal_wash_lowg.vfx", 1);
+  scripts\sp\vehicle_build::func_31C6(var_02, "metal", "vfx\iw7\core\vehicle\jackal\vfx_jackal_wash_metal.vfx", 1);
+  scripts\sp\vehicle_build::func_31C6(var_02, "water", "vfx\iw7\core\vehicle\jackal\vfx_jackal_water_tread_wash.vfx", 1);
 
   if (!isdefined(level.func_A056)) {
   level._meth_83DF = func_0BD4::func_10492;
@@ -137,7 +137,7 @@ func_B323(var_00) {
 
 func_57AF(var_00, var_01) {
   if (var_00 == "axis")
-  scripts/sp/vehicle_build::func_31B0("veh_mil_air_ca_jackal_01_player", var_01);
+  scripts\sp\vehicle_build::func_31B0("veh_mil_air_ca_jackal_01_player", var_01);
   else
-  scripts/sp/vehicle_build::func_31B0("veh_mil_air_un_jackal_02_player", var_01);
+  scripts\sp\vehicle_build::func_31B0("veh_mil_air_un_jackal_02_player", var_01);
 }

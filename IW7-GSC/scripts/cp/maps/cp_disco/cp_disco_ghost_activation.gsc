@@ -1,17 +1,17 @@
-/**************************************************************************
+/******************************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\maps\cp_disco\cp_disco_ghost_activation.gsc
-**************************************************************************/
+ * Script: scripts\cp\maps\cp_disco\cp_disco_ghost_activation.gsc
+******************************************************************/
 
 init_ghost_n_skull_3_quest() {
-	scripts/cp/zombies/zombie_quest::register_quest_step("ghostThree",0,::blank,::clean_arcade_cabinet,::complete_clean_arcade_cabinet,::debug_clean_arcade_cabinet);
-	scripts/cp/zombies/zombie_quest::register_quest_step("ghostThree",1,::blank,::make_winning_mahjong_hand,::complete_make_winning_mahjong_hand,::debug_make_winning_mahjong_hand);
-	scripts/cp/zombies/zombie_quest::register_quest_step("ghostThree",2,::blank,::write_1_9_7_2,::complete_write_1_9_7_2,::debug_write_1_9_7_2);
-	scripts/cp/zombies/zombie_quest::register_quest_step("ghostThree",3,::blank,::do_sky_steps,::complete_sky_steps,::debug_do_sky_steps);
-	scripts/cp/zombies/zombie_quest::register_quest_step("ghostThree",4,::blank,::grab_skull_in_front_train,::complete_grab_skull_in_front_train,::debug_grab_skull_in_front_train);
-	scripts/cp/zombies/zombie_quest::register_quest_step("ghostThree",5,::blank,::call_service_number,::complete_call_service_number,::debug_call_service_number);
-	scripts/cp/zombies/zombie_quest::register_quest_step("ghostThree",6,::blank,::wait_for_player_activation,::complete_clean_arcade_cabinet,::debug_wait_for_player_activation);
+	scripts\cp\zombies\zombie_quest::register_quest_step("ghostThree",0,::blank,::clean_arcade_cabinet,::complete_clean_arcade_cabinet,::debug_clean_arcade_cabinet);
+	scripts\cp\zombies\zombie_quest::register_quest_step("ghostThree",1,::blank,::make_winning_mahjong_hand,::complete_make_winning_mahjong_hand,::debug_make_winning_mahjong_hand);
+	scripts\cp\zombies\zombie_quest::register_quest_step("ghostThree",2,::blank,::write_1_9_7_2,::complete_write_1_9_7_2,::debug_write_1_9_7_2);
+	scripts\cp\zombies\zombie_quest::register_quest_step("ghostThree",3,::blank,::do_sky_steps,::complete_sky_steps,::debug_do_sky_steps);
+	scripts\cp\zombies\zombie_quest::register_quest_step("ghostThree",4,::blank,::grab_skull_in_front_train,::complete_grab_skull_in_front_train,::debug_grab_skull_in_front_train);
+	scripts\cp\zombies\zombie_quest::register_quest_step("ghostThree",5,::blank,::call_service_number,::complete_call_service_number,::debug_call_service_number);
+	scripts\cp\zombies\zombie_quest::register_quest_step("ghostThree",6,::blank,::wait_for_player_activation,::complete_clean_arcade_cabinet,::debug_wait_for_player_activation);
 }
 
 blank() {}
@@ -356,7 +356,7 @@ looking_at_the_same_mahjong(param_00,param_01) {
 }
 
 player_in_play_space(param_00,param_01) {
-	return function_010F(param_00.origin,param_01.play_area);
+	return ispointinvolume(param_00.origin,param_01.play_area);
 }
 
 set_mahjong_struct_currently_looking_at(param_00,param_01) {
@@ -1521,12 +1521,12 @@ cp_disco_enter_ghosts_n_skulls_func(param_00) {
 }
 
 load_gns_3_vfx() {
-	level._effect["combo_arc_green"] = loadfx("vfx/iw7/core/zombie/ghosts_n_skulls/vfx_ghost_combo_arc_green.vfx");
-	level._effect["combo_arc_red"] = loadfx("vfx/iw7/core/zombie/ghosts_n_skulls/vfx_ghost_combo_arc_red.vfx");
-	level._effect["combo_arc_blue"] = loadfx("vfx/iw7/core/zombie/ghosts_n_skulls/vfx_ghost_combo_arc_blue.vfx");
-	level._effect["combo_arc_yellow"] = loadfx("vfx/iw7/core/zombie/ghosts_n_skulls/vfx_ghost_combo_arc_yellow.vfx");
-	level._effect["candle_flame"] = loadfx("vfx/iw7/levels/cp_disco/amb/vfx_candle_flame.vfx");
-	level._effect["get_train_skull"] = loadfx("vfx/iw7/core/zombie/ghosts_n_skulls/vfx_zmb_get_train_skull.vfx");
+	level._effect["combo_arc_green"] = loadfx("vfx\iw7\core\zombie\ghosts_n_skulls\vfx_ghost_combo_arc_green.vfx");
+	level._effect["combo_arc_red"] = loadfx("vfx\iw7\core\zombie\ghosts_n_skulls\vfx_ghost_combo_arc_red.vfx");
+	level._effect["combo_arc_blue"] = loadfx("vfx\iw7\core\zombie\ghosts_n_skulls\vfx_ghost_combo_arc_blue.vfx");
+	level._effect["combo_arc_yellow"] = loadfx("vfx\iw7\core\zombie\ghosts_n_skulls\vfx_ghost_combo_arc_yellow.vfx");
+	level._effect["candle_flame"] = loadfx("vfx\iw7\levels\cp_disco\amb\vfx_candle_flame.vfx");
+	level._effect["get_train_skull"] = loadfx("vfx\iw7\core\zombie\ghosts_n_skulls\vfx_zmb_get_train_skull.vfx");
 }
 
 cp_disco_ghost_color_manager() {
@@ -1628,7 +1628,7 @@ cp_disco_hit_wrong_moving_target_func(param_00,param_01,param_02) {
 
 	playfxontag(level._effect["wrong_color_" + param_02.color],param_01,"tag_origin");
 	param_00 playlocalsound("ghosts_8bit_match3_negative");
-	level.var_C1F0++;
+	level.num_moving_target_escaped++;
 	scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::update_num_targets_escaped_hud();
 	level thread delay_determine_game_fail();
 }
@@ -1644,7 +1644,7 @@ disco_gns_player_reward_func() {
 	upgrade_magic_wheel();
 	foreach(var_01 in level.players) {
 		if(!scripts\engine\utility::istrue(level.entered_thru_card)) {
-			var_01 scripts/cp/zombies/achievement::update_achievement("COIN_OP",1);
+			var_01 scripts\cp\zombies\achievement::update_achievement("COIN_OP",1);
 		}
 
 		var_01 thread scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::give_gns_base_reward(var_01);
@@ -1699,15 +1699,15 @@ register_waves_movement() {
 }
 
 load_cp_disco_ghost_exp_vfx() {
-	level._effect["ghost_explosion_death_red"] = loadfx("vfx/iw7/core/zombie/ghosts_n_skulls/vfx_zmb_ghost_imp_red.vfx");
-	level._effect["ghost_explosion_death_yellow"] = loadfx("vfx/iw7/core/zombie/ghosts_n_skulls/vfx_zmb_ghost_imp_yellow.vfx");
-	level._effect["ghost_explosion_death_blue"] = loadfx("vfx/iw7/core/zombie/ghosts_n_skulls/vfx_zmb_ghost_imp_blue.vfx");
-	level._effect["sb_quest_item_pickup"] = loadfx("vfx/iw7/core/zombie/vfx_zom_souvenir_pickup.vfx");
-	level._effect["write_1972_success"] = loadfx("vfx/iw7/levels/cp_disco/vfx_skb_1972_burst.vfx");
-	level._effect["wrong_color_green"] = loadfx("vfx/iw7/core/zombie/ghosts_n_skulls/vfx_zmb_alien_head_x_green.vfx");
-	level._effect["wrong_color_red"] = loadfx("vfx/iw7/core/zombie/ghosts_n_skulls/vfx_zmb_alien_head_x_red.vfx");
-	level._effect["wrong_color_blue"] = loadfx("vfx/iw7/core/zombie/ghosts_n_skulls/vfx_zmb_alien_head_x_blue.vfx");
-	level._effect["wrong_color_yellow"] = loadfx("vfx/iw7/core/zombie/ghosts_n_skulls/vfx_zmb_alien_head_x_yellow.vfx");
+	level._effect["ghost_explosion_death_red"] = loadfx("vfx\iw7\core\zombie\ghosts_n_skulls\vfx_zmb_ghost_imp_red.vfx");
+	level._effect["ghost_explosion_death_yellow"] = loadfx("vfx\iw7\core\zombie\ghosts_n_skulls\vfx_zmb_ghost_imp_yellow.vfx");
+	level._effect["ghost_explosion_death_blue"] = loadfx("vfx\iw7\core\zombie\ghosts_n_skulls\vfx_zmb_ghost_imp_blue.vfx");
+	level._effect["sb_quest_item_pickup"] = loadfx("vfx\iw7\core\zombie\vfx_zom_souvenir_pickup.vfx");
+	level._effect["write_1972_success"] = loadfx("vfx\iw7\levels\cp_disco\vfx_skb_1972_burst.vfx");
+	level._effect["wrong_color_green"] = loadfx("vfx\iw7\core\zombie\ghosts_n_skulls\vfx_zmb_alien_head_x_green.vfx");
+	level._effect["wrong_color_red"] = loadfx("vfx\iw7\core\zombie\ghosts_n_skulls\vfx_zmb_alien_head_x_red.vfx");
+	level._effect["wrong_color_blue"] = loadfx("vfx\iw7\core\zombie\ghosts_n_skulls\vfx_zmb_alien_head_x_blue.vfx");
+	level._effect["wrong_color_yellow"] = loadfx("vfx\iw7\core\zombie\ghosts_n_skulls\vfx_zmb_alien_head_x_yellow.vfx");
 }
 
 disco_get_fake_ghost_model_func(param_00) {
@@ -1856,7 +1856,7 @@ get_vfx_start_moving_target(param_00) {
 delay_moving_target_explode(param_00,param_01,param_02,param_03) {
 	play_combo_arc_vfx(param_00,param_02,param_03);
 	playfx(level._effect["ghost_explosion_death_" + param_00.color],param_00.origin,anglestoforward(param_00.angles),anglestoup(param_00.angles));
-	scripts/aitypes/zombie_ghost/behaviors::remove_moving_target_default(param_00,param_01);
+	scripts\aitypes\zombie_ghost\behaviors::remove_moving_target_default(param_00,param_01);
 }
 
 play_combo_arc_vfx(param_00,param_01,param_02) {
@@ -1867,7 +1867,7 @@ play_combo_arc_vfx(param_00,param_01,param_02) {
 			var_06 = param_00.origin;
 			var_07 = var_06 - var_05;
 			var_08 = vectortoangles(var_07);
-			function_02E0(level._effect["combo_arc_" + param_00.color],var_05,var_08,var_06);
+			playfxbetweenpoints(level._effect["combo_arc_" + param_00.color],var_05,var_08,var_06);
 			scripts\engine\utility::waitframe();
 		}
 
@@ -1914,15 +1914,15 @@ adjust_mahjong_pick_up_pos() {
 }
 
 reactivate_skullbuster_cabinet() {
-	if(!scripts/cp/zombies/zombie_quest::quest_line_exist("reactivateghost")) {
+	if(!scripts\cp\zombies\zombie_quest::quest_line_exist("reactivateghost")) {
 		var_00 = getomnvar("zm_num_ghost_n_skull_coin");
 		if(isdefined(var_00) && var_00 < 5) {
 			return;
 		}
 
-		scripts/cp/zombies/zombie_quest::register_quest_step("reactivateghost",0,::scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::reactivate_cabinet,::call_service_number,::complete_call_service_number,::debug_call_service_number);
-		scripts/cp/zombies/zombie_quest::register_quest_step("reactivateghost",1,::blank,::wait_for_player_activation,::complete_clean_arcade_cabinet,::debug_wait_for_player_activation);
+		scripts\cp\zombies\zombie_quest::register_quest_step("reactivateghost",0,::scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::reactivate_cabinet,::call_service_number,::complete_call_service_number,::debug_call_service_number);
+		scripts\cp\zombies\zombie_quest::register_quest_step("reactivateghost",1,::blank,::wait_for_player_activation,::complete_clean_arcade_cabinet,::debug_wait_for_player_activation);
 	}
 
-	level thread scripts/cp/zombies/zombie_quest::start_quest_line("reactivateghost");
+	level thread scripts\cp\zombies\zombie_quest::start_quest_line("reactivateghost");
 }

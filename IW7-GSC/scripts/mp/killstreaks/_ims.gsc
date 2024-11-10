@@ -1,8 +1,8 @@
-/***************************************************
+/*******************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\killstreaks\_ims.gsc
-***************************************************/
+ * Script: scripts\mp\killstreaks\_ims.gsc
+*******************************************/
 
 init() {
 	scripts\mp\killstreaks\_killstreaks::registerkillstreak("ims",::func_128EA);
@@ -40,10 +40,10 @@ init() {
 	var_00.var_6A09 = "tag_explosive";
 	var_00.killcamoffset = (0,0,12);
 	level.var_9385["ims"] = var_00;
-	level._effect["ims_explode_mp"] = loadfx("vfx/iw7/_requests/mp/vfx_generic_equipment_exp_lg.vfx");
-	level._effect["ims_smoke_mp"] = loadfx("vfx/core/mp/killstreaks/vfx_sg_damage_blacksmoke");
-	level._effect["ims_sensor_explode"] = loadfx("vfx/core/mp/killstreaks/vfx_ims_sparks");
-	level._effect["ims_antenna_light_mp"] = loadfx("vfx/core/mp/killstreaks/vfx_light_detonator_blink");
+	level._effect["ims_explode_mp"] = loadfx("vfx\iw7\_requests\mp\vfx_generic_equipment_exp_lg.vfx");
+	level._effect["ims_smoke_mp"] = loadfx("vfx\core\mp\killstreaks\vfx_sg_damage_blacksmoke");
+	level._effect["ims_sensor_explode"] = loadfx("vfx\core\mp\killstreaks\vfx_ims_sparks");
+	level._effect["ims_antenna_light_mp"] = loadfx("vfx\core\mp\killstreaks\vfx_light_detonator_blink");
 	level.placedims = [];
 }
 
@@ -68,7 +68,7 @@ func_128EA(param_00) {
 	}
 
 	if(var_02) {
-		scripts\mp\_matchdata::logkillstreakevent(param_00.streakname,self.origin);
+		scripts\mp\matchdata::logkillstreakevent(param_00.streakname,self.origin);
 	}
 
 	self.iscarrying = 0;
@@ -127,27 +127,27 @@ func_F684(param_00,param_01) {
 removeweapons() {
 	if(self hasweapon("iw6_riotshield_mp")) {
 		self.restoreweapon = "iw6_riotshield_mp";
-		scripts\mp\_utility::_takeweapon("iw6_riotshield_mp");
+		scripts\mp\utility::_takeweapon("iw6_riotshield_mp");
 	}
 }
 
 removeperks() {
-	if(scripts\mp\_utility::_hasperk("specialty_explosivebullets")) {
+	if(scripts\mp\utility::_hasperk("specialty_explosivebullets")) {
 		self.restoreperk = "specialty_explosivebullets";
-		scripts\mp\_utility::removeperk("specialty_explosivebullets");
+		scripts\mp\utility::removeperk("specialty_explosivebullets");
 	}
 }
 
 restoreweapons() {
 	if(isdefined(self.restoreweapon)) {
-		scripts\mp\_utility::_giveweapon(self.restoreweapon);
+		scripts\mp\utility::_giveweapon(self.restoreweapon);
 		self.restoreweapon = undefined;
 	}
 }
 
 restoreperks() {
 	if(isdefined(self.restoreperk)) {
-		scripts\mp\_utility::giveperk(self.restoreperk);
+		scripts\mp\utility::giveperk(self.restoreperk);
 		self.restoreperk = undefined;
 	}
 }
@@ -206,7 +206,7 @@ func_9363() {
 	var_00 = spawn("script_model",self.origin);
 	var_00.angles = self.angles;
 	var_00 hide();
-	var_00 thread scripts\mp\_weapons::bombsquadvisibilityupdater(self.triggerportableradarping);
+	var_00 thread scripts\mp\weapons::bombsquadvisibilityupdater(self.triggerportableradarping);
 	var_00 setmodel(level.var_9385[self.var_9386].modelbombsquad);
 	var_00 linkto(self);
 	var_00 setcontents(0);
@@ -224,7 +224,7 @@ func_936D(param_00) {
 
 func_9366() {
 	self endon("carried");
-	scripts\mp\_damage::monitordamage(self.config.maxhealth,"ims",::func_9368,::func_936C,1);
+	scripts\mp\damage::monitordamage(self.config.maxhealth,"ims",::func_9368,::func_936C,1);
 }
 
 func_936C(param_00,param_01,param_02,param_03,param_04) {
@@ -237,17 +237,17 @@ func_936C(param_00,param_01,param_02,param_03,param_04) {
 		var_05 = self.maxhealth * 0.25;
 	}
 
-	if(function_0107(param_02)) {
+	if(isexplosivedamagemod(param_02)) {
 		var_05 = param_03 * 1.5;
 	}
 
-	var_05 = scripts\mp\_damage::handlemissiledamage(param_01,param_02,var_05);
-	var_05 = scripts\mp\_damage::handleapdamage(param_01,param_02,var_05);
+	var_05 = scripts\mp\damage::handlemissiledamage(param_01,param_02,var_05);
+	var_05 = scripts\mp\damage::handleapdamage(param_01,param_02,var_05);
 	return var_05;
 }
 
 func_9368(param_00,param_01,param_02,param_03) {
-	var_04 = scripts\mp\_damage::onkillstreakkilled("ims",param_00,param_01,param_02,param_03,"destroyed_ims","ims_destroyed");
+	var_04 = scripts\mp\damage::onkillstreakkilled("ims",param_00,param_01,param_02,param_03,"destroyed_ims","ims_destroyed");
 	if(var_04) {
 		param_00 notify("destroyed_equipment");
 	}
@@ -292,7 +292,7 @@ func_9367() {
 		scripts\mp\objidpoolmanager::returnminimapid(self.var_C2BA);
 	}
 
-	scripts\mp\_weapons::equipmentdeletevfx();
+	scripts\mp\weapons::equipmentdeletevfx();
 	self _meth_80D4();
 	self delete();
 }
@@ -303,7 +303,7 @@ watchempdamage() {
 	level endon("game_ended");
 	for(;;) {
 		self waittill("emp_damage",var_00,var_01);
-		scripts\mp\_weapons::stopblinkinglight();
+		scripts\mp\weapons::stopblinkinglight();
 		playfx(scripts\engine\utility::getfx("emp_stun"),self.origin);
 		playfx(scripts\engine\utility::getfx("ims_smoke_mp"),self.origin);
 		wait(var_01);
@@ -316,7 +316,7 @@ func_9369() {
 	level endon("game_ended");
 	for(;;) {
 		self waittill("trigger",var_00);
-		if(!scripts\mp\_utility::isreallyalive(var_00)) {
+		if(!scripts\mp\utility::isreallyalive(var_00)) {
 			continue;
 		}
 
@@ -388,7 +388,7 @@ func_9379() {
 
 	var_01.endonstring = "carried";
 	var_01.deathoverridecallback = ::func_936D;
-	var_00 thread scripts\mp\_movers::handle_moving_platforms(var_01);
+	var_00 thread scripts\mp\movers::handle_moving_platforms(var_01);
 	self delete();
 }
 
@@ -409,7 +409,7 @@ ims_setcancelled(param_00) {
 	}
 
 	if(isdefined(param_00) && param_00) {
-		scripts\mp\_weapons::equipmentdeletevfx();
+		scripts\mp\weapons::equipmentdeletevfx();
 	}
 
 	self delete();
@@ -523,11 +523,11 @@ func_9375() {
 	var_00 = self.triggerportableradarping;
 	var_00 getrigindexfromarchetyperef();
 	if(level.teambased) {
-		scripts\mp\_entityheadicons::setteamheadicon(self.team,(0,0,60));
+		scripts\mp\entityheadicons::setteamheadicon(self.team,(0,0,60));
 	}
 	else
 	{
-		scripts\mp\_entityheadicons::setplayerheadicon(var_00,(0,0,60));
+		scripts\mp\entityheadicons::setplayerheadicon(var_00,(0,0,60));
 	}
 
 	self makeusable();
@@ -554,7 +554,7 @@ func_9375() {
 	}
 
 	if(self.shouldsplash) {
-		level thread scripts\mp\_utility::teamplayercardsplash(level.var_9385[self.var_9386].var_10A38,var_00);
+		level thread scripts\mp\utility::teamplayercardsplash(level.var_9385[self.var_9386].var_10A38,var_00);
 		self.shouldsplash = 0;
 	}
 
@@ -639,17 +639,17 @@ func_9372() {
 }
 
 func_937B() {
-	thread scripts\mp\_weapons::doblinkinglight("tag_fx");
+	thread scripts\mp\weapons::doblinkinglight("tag_fx");
 	thread func_9362();
 }
 
 func_9378() {
 	self makeunusable();
 	if(level.teambased) {
-		scripts\mp\_entityheadicons::setteamheadicon("none",(0,0,0));
+		scripts\mp\entityheadicons::setteamheadicon("none",(0,0,0));
 	}
 	else if(isdefined(self.triggerportableradarping)) {
-		scripts\mp\_entityheadicons::setplayerheadicon(undefined,(0,0,0));
+		scripts\mp\entityheadicons::setplayerheadicon(undefined,(0,0,0));
 	}
 
 	if(isdefined(self.var_2536)) {
@@ -675,7 +675,7 @@ func_9378() {
 		self.var_69F6 = undefined;
 	}
 
-	scripts\mp\_weapons::stopblinkinglight();
+	scripts\mp\weapons::stopblinkinglight();
 }
 
 isfriendlytoims(param_00) {
@@ -705,7 +705,7 @@ func_9362() {
 				continue;
 			}
 
-			if(!scripts\mp\_utility::isreallyalive(var_00)) {
+			if(!scripts\mp\utility::isreallyalive(var_00)) {
 				continue;
 			}
 		}
@@ -741,7 +741,7 @@ func_9362() {
 		}
 
 		self playsound("ims_trigger");
-		scripts\mp\_weapons::explosivetrigger(var_00,level.var_9385[self.var_9386]._meth_8487,"ims");
+		scripts\mp\weapons::explosivetrigger(var_00,level.var_9385[self.var_9386]._meth_8487,"ims");
 		if(!isdefined(self.var_2536)) {
 			break;
 		}
@@ -806,11 +806,11 @@ func_6D2C(param_00,param_01) {
 	var_07[0] = param_00.origin;
 	for(var_08 = 0;var_08 < var_07.size;var_08++) {
 		if(isdefined(var_05)) {
-			scripts\mp\_utility::_magicbullet(var_04,var_02.origin,var_07[var_08],var_05);
+			scripts\mp\utility::_magicbullet(var_04,var_02.origin,var_07[var_08],var_05);
 			continue;
 		}
 
-		scripts\mp\_utility::_magicbullet(var_04,var_02.origin,var_07[var_08]);
+		scripts\mp\utility::_magicbullet(var_04,var_02.origin,var_07[var_08]);
 	}
 
 	var_02 delete();
@@ -819,7 +819,7 @@ func_6D2C(param_00,param_01) {
 
 deleteaftertime(param_00) {
 	self endon("death");
-	level scripts\mp\_hostmigration::waitlongdurationwithhostmigrationpause(param_00);
+	level scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(param_00);
 	if(isdefined(self)) {
 		self delete();
 	}
@@ -831,7 +831,7 @@ func_937C() {
 	var_00 = level.var_9385[self.var_9386].lifespan;
 	while(var_00) {
 		wait(1);
-		scripts\mp\_hostmigration::waittillhostmigrationdone();
+		scripts\mp\hostmigration::waittillhostmigrationdone();
 		if(!isdefined(self.carriedby)) {
 			var_00 = max(0,var_00 - 1);
 		}

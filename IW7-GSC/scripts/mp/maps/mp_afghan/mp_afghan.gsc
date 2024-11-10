@@ -1,15 +1,15 @@
-/***********************************************************
+/***************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\maps\mp_afghan\mp_afghan.gsc
-***********************************************************/
+ * Script: scripts\mp\maps\mp_afghan\mp_afghan.gsc
+***************************************************/
 
 main() {
-	lib_0F7C::main();
+	scripts\mp\maps\mp_afghan\mp_afghan_precache::main();
 	scripts\mp\maps\mp_afghan\gen\mp_afghan_art::main();
-	lib_0F7B::main();
-	scripts\mp\_load::main();
-	scripts\mp\_compass::func_FACD("compass_map_mp_afghan");
+	scripts\mp\maps\mp_afghan\mp_afghan_fx::main();
+	scripts\mp\load::main();
+	scripts\mp\compass::setupminimap("compass_map_mp_afghan");
 	setdvar("r_lightGridEnableTweaks",1);
 	setdvar("r_lightGridIntensity",1.33);
 	setdvar("sm_sunSampleSizeNear",1.2);
@@ -23,7 +23,7 @@ main() {
 	game["axis_outfit"] = "woodland";
 	thread func_CDA4("mp_afghan_screen");
 	level.var_C7B3 = getentarray("outofbounds","targetname");
-	thread scripts\mp\_animation_suite::func_1FAA();
+	thread scripts\mp\animation_suite::animationsuite();
 	level.modifiedspawnpoints["4194 2331 35"]["mp_tdm_spawn_axis_start"]["origin"] = (4207,2328,7);
 	level.modifiedspawnpoints["4194 2327 36"]["mp_koth_spawn_axis_start"]["origin"] = (4207,2328,7);
 	level.modifiedspawnpoints["4369 308 100"]["mp_front_spawn_allies"]["origin"] = (4496,317,117);
@@ -36,7 +36,7 @@ main() {
 
 func_CDA4(param_00) {
 	wait(30);
-	function_030E(param_00);
+	playcinematicforalllooping(param_00);
 }
 
 spawn_oob_trigger() {

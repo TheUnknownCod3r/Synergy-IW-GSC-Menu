@@ -1,18 +1,18 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3543.gsc
-****************************/
+ * Script: 3543.gsc
+************************/
 
 init() {
 	level.var_2850 = [];
-	level.var_2850["wave"] = loadfx("vfx/iw7/_requests/mp/trail_kinetic_wave");
-	level.var_2850["wedge"] = loadfx("vfx/iw7/_requests/mp/vfx_kinetic_wave_wedge");
-	level.var_2850["halo"] = loadfx("vfx/iw7/_requests/mp/vfx_light_barrier_halo");
-	level.var_2850["body"] = loadfx("vfx/iw7/_requests/mp/vfx_light_barrier_body");
-	level.var_2850["start"] = loadfx("vfx/iw7/_requests/mp/vfx_barrier_start");
-	level.var_2850["shot"] = loadfx("vfx/iw7/_requests/mp/vfx_barrier_trail");
-	level.var_2850["activate"] = loadfx("vfx/iw7/_requests/mp/vfx_barrier_activate");
+	level.var_2850["wave"] = loadfx("vfx\iw7\_requests\mp\trail_kinetic_wave");
+	level.var_2850["wedge"] = loadfx("vfx\iw7\_requests\mp\vfx_kinetic_wave_wedge");
+	level.var_2850["halo"] = loadfx("vfx\iw7\_requests\mp\vfx_light_barrier_halo");
+	level.var_2850["body"] = loadfx("vfx\iw7\_requests\mp\vfx_light_barrier_body");
+	level.var_2850["start"] = loadfx("vfx\iw7\_requests\mp\vfx_barrier_start");
+	level.var_2850["shot"] = loadfx("vfx\iw7\_requests\mp\vfx_barrier_trail");
+	level.var_2850["activate"] = loadfx("vfx\iw7\_requests\mp\vfx_barrier_activate");
 }
 
 func_E0D3() {
@@ -30,7 +30,7 @@ func_E83A() {
 
 func_284E(param_00,param_01) {
 	self endon("disconnect");
-	scripts\mp\_gamescore::trackbuffassist(param_00,self,"power_barrier");
+	scripts\mp\gamescore::trackbuffassist(param_00,self,"power_barrier");
 	var_02 = "j_spinelower";
 	var_03 = "body";
 	if(param_01) {
@@ -41,7 +41,7 @@ func_284E(param_00,param_01) {
 
 	self.var_8BD3 = 1;
 	self iprintlnbold("BARRIER APPLIED");
-	scripts\mp\_lightarmor::setlightarmorvalue(self,35);
+	scripts\mp\lightarmor::setlightarmorvalue(self,35);
 	playfxontag(level.var_2850[var_03],self,var_02);
 	thread func_2852(param_00,param_01);
 	while(isdefined(self.lightarmorhp)) {
@@ -59,13 +59,13 @@ func_2851(param_00,param_01) {
 	}
 
 	self.var_8BD3 = undefined;
-	scripts\mp\_gamescore::untrackbuffassist(param_00,self,"power_barrier");
+	scripts\mp\gamescore::untrackbuffassist(param_00,self,"power_barrier");
 }
 
 func_2852(param_00,param_01) {
 	self endon("disconnect");
 	scripts\engine\utility::waittill_any_3("death");
-	if(scripts\mp\_utility::isreallyalive()) {
+	if(scripts\mp\utility::isreallyalive()) {
 		thread func_2851(param_00,param_01);
 	}
 }
@@ -99,7 +99,7 @@ func_284F() {
 func_68D8(param_00) {
 	var_01 = rotatepointaroundvector(anglestoup(self getplayerangles()),anglestoforward(self getplayerangles()),0);
 	var_02 = self.origin + var_01 * 768;
-	var_03 = scripts\mp\_utility::getteamarray(scripts\mp\_utility::getotherteam(self.team));
+	var_03 = scripts\mp\utility::getteamarray(scripts\mp\utility::getotherteam(self.team));
 	var_04 = scripts\engine\utility::array_combine(var_03,func_7E0D());
 	var_05 = scripts\engine\utility::array_add(var_04,self);
 	var_06 = scripts\common\trace::sphere_trace(self.origin + (0,0,64),var_02,12,var_05);

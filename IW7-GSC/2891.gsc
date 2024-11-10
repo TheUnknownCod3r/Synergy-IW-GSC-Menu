@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2891.gsc
+ * Script: 2891.gsc
 ***************************************/
 
 func_EB77(var_00, var_01) {

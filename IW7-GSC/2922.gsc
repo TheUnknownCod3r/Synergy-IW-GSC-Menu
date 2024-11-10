@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\2922.gsc
-****************************/
+ * Script: 2922.gsc
+************************/
 
 func_EBE9() {
 	scripts\engine\utility::flag_init("setup_sceneblock_anims");
@@ -51,7 +51,7 @@ func_EC01(param_00,param_01,param_02) {
 	self notify("starting_new_sceneblock");
 	self endon("starting_new_sceneblock");
 	self notify("stop_loop");
-	scripts/sp/interaction::func_9A0F();
+	scripts\sp\interaction::func_9A0F();
 	self givescorefortrophyblocks();
 	lib_0A1E::func_2385();
 	if(!isdefined(param_02)) {
@@ -62,22 +62,22 @@ func_EC01(param_00,param_01,param_02) {
 		func_EC08("point",param_00);
 	}
 
-	scripts/sp/anim::func_1EC7(self,param_01);
+	scripts\sp\anim::func_1EC7(self,param_01);
 	self give_mp_super_weapon(self.origin);
 }
 
 func_EC0D(param_00,param_01) {
 	self endon("death");
 	self notify("stop_loop");
-	scripts/sp/interaction::func_9A0F();
+	scripts\sp\interaction::func_9A0F();
 	self givescorefortrophyblocks();
 	lib_0A1E::func_2385();
-	scripts/sp/anim::func_1F12(self);
+	scripts\sp\anim::func_1F12(self);
 	var_02 = lib_0EFB::func_7D7A(param_00);
 	self _meth_80F1(var_02.origin,var_02.angles);
 	self give_mp_super_weapon(self.origin);
 	if(isdefined(param_01) && param_01) {
-		if(param_01 && scripts/sp/interaction::func_9C26(var_02)) {
+		if(param_01 && scripts\sp\interaction::func_9C26(var_02)) {
 			if(isdefined(var_02.var_EE92)) {
 				if(issubstr(var_02.var_EE92,"opsmap")) {
 					if(self.var_1FBB == "salter" || self.var_1FBB == "gator" || self.var_1FBB == "drop_officer") {
@@ -85,17 +85,17 @@ func_EC0D(param_00,param_01) {
 					}
 					else
 					{
-						thread scripts/sp/interaction::func_CD50(var_02.var_EE92);
+						thread scripts\sp\interaction::func_CD50(var_02.var_EE92);
 					}
 				}
 				else
 				{
-					thread scripts/sp/interaction::func_CD4B(var_02.var_EE92);
+					thread scripts\sp\interaction::func_CD4B(var_02.var_EE92);
 				}
 			}
 			else
 			{
-				thread scripts/sp/interaction::func_CD4B(var_02.script_noteworthy);
+				thread scripts\sp\interaction::func_CD4B(var_02.script_noteworthy);
 			}
 		}
 	}
@@ -144,7 +144,7 @@ func_EC08(param_00,param_01,param_02) {
 	self notify("starting_new_sceneblock_orient");
 	self endon("starting_new_sceneblock_orient");
 	self notify("stop_loop");
-	scripts/sp/interaction::func_9A0F();
+	scripts\sp\interaction::func_9A0F();
 	self givescorefortrophyblocks();
 	lib_0A1E::func_2385();
 	var_03 = lib_0EFB::func_7D7A(param_01);
@@ -212,16 +212,16 @@ func_EC0A(param_00,param_01,param_02,param_03,param_04,param_05) {
 			}
 		}
 
-		scripts/sp/anim::func_1F35(self,self.var_EC09);
+		scripts\sp\anim::func_1F35(self,self.var_EC09);
 		self.var_EC09 = undefined;
 		self.a.movement = "stop";
 	}
 
 	self notify("stop_loop");
-	scripts/sp/interaction::func_9A0F();
+	scripts\sp\interaction::func_9A0F();
 	self givescorefortrophyblocks();
 	lib_0A1E::func_2385();
-	scripts/sp/anim::func_1F12(self);
+	scripts\sp\anim::func_1F12(self);
 	var_06 = lib_0EFB::func_7D7A(param_00);
 	if(!isdefined(param_01)) {
 		param_01 = 1;
@@ -248,7 +248,7 @@ func_EC0A(param_00,param_01,param_02,param_03,param_04,param_05) {
 			scripts\engine\utility::delaycall(0.05,::_meth_8250,0);
 		}
 
-		var_06 scripts/sp/anim::func_1ED0(self,param_03,undefined,param_04);
+		var_06 scripts\sp\anim::func_1ED0(self,param_03,undefined,param_04);
 	}
 	else
 	{
@@ -260,7 +260,7 @@ func_EC0A(param_00,param_01,param_02,param_03,param_04,param_05) {
 			scripts\engine\utility::delaycall(0.05,::_meth_8250,0);
 		}
 
-		var_06 scripts/sp/anim::func_1ECE(self,param_03);
+		var_06 scripts\sp\anim::func_1ECE(self,param_03);
 	}
 
 	self.objective_playermask_showto = 0;
@@ -270,7 +270,7 @@ func_EC0A(param_00,param_01,param_02,param_03,param_04,param_05) {
 	}
 
 	self notify("sceneblock_reach_finished");
-	if(param_02 && scripts/sp/interaction::func_9C26(var_06)) {
+	if(param_02 && scripts\sp\interaction::func_9C26(var_06)) {
 		if(isdefined(var_06.var_EE92)) {
 			if(issubstr(var_06.var_EE92,"opsmap")) {
 				if(self.var_1FBB == "salter" || self.var_1FBB == "gator" || self.var_1FBB == "drop_officer") {
@@ -278,22 +278,22 @@ func_EC0A(param_00,param_01,param_02,param_03,param_04,param_05) {
 				}
 				else
 				{
-					thread scripts/sp/interaction::func_CD50(var_06.var_EE92);
+					thread scripts\sp\interaction::func_CD50(var_06.var_EE92);
 				}
 			}
 			else
 			{
-				thread scripts/sp/interaction::func_CD4B(var_06.var_EE92);
+				thread scripts\sp\interaction::func_CD4B(var_06.var_EE92);
 			}
 		}
 		else
 		{
-			thread scripts/sp/interaction::func_CD4B(var_06.script_noteworthy);
+			thread scripts\sp\interaction::func_CD4B(var_06.script_noteworthy);
 		}
 	}
 
-	if(param_02 && scripts/sp/interaction::func_9CD7(var_06)) {
-		thread scripts/sp/interaction_manager::func_CE40(var_06.var_EE92,var_06);
+	if(param_02 && scripts\sp\interaction::func_9CD7(var_06)) {
+		thread scripts\sp\interaction_manager::func_CE40(var_06.var_EE92,var_06);
 	}
 }
 
@@ -306,7 +306,7 @@ func_EC0C(param_00,param_01,param_02) {
 
 	func_EC0A(param_00);
 	self notify("sceneblock_reachloop_reach_finished");
-	scripts/sp/anim::func_1ECC(self,param_01,param_02);
+	scripts\sp\anim::func_1ECC(self,param_01,param_02);
 }
 
 func_EC0B(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07) {
@@ -338,7 +338,7 @@ func_EC0B(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_0
 			}
 		}
 
-		scripts/sp/anim::func_1F35(self,self.var_EC09);
+		scripts\sp\anim::func_1F35(self,self.var_EC09);
 		self.a.movement = "stop";
 	}
 
@@ -433,7 +433,7 @@ func_EC0B(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_0
 			}
 		}
 
-		scripts/sp/anim::func_1F35(self,self.var_EC07);
+		scripts\sp\anim::func_1F35(self,self.var_EC07);
 		self.a.movement = "stop";
 	}
 
@@ -506,7 +506,7 @@ func_EC0F(param_00,param_01,param_02) {
 	self notify("starting_new_sceneblock");
 	self endon("starting_new_sceneblock");
 	self notify("stop_loop");
-	scripts/sp/interaction::func_9A0F();
+	scripts\sp\interaction::func_9A0F();
 	self givescorefortrophyblocks();
 	lib_0A1E::func_2385();
 	var_03 = lib_0EFB::func_7D7A(param_00);
@@ -524,7 +524,7 @@ func_EC0F(param_00,param_01,param_02) {
 		self linkto(var_04["entity"]);
 	}
 
-	thread scripts/sp/anim::func_1ECC(self,param_02,"stop_loop");
+	thread scripts\sp\anim::func_1ECC(self,param_02,"stop_loop");
 	var_05 = 0;
 	for(;;) {
 		if(distance2d(self.origin,var_03.origin) < 12 && !var_05) {

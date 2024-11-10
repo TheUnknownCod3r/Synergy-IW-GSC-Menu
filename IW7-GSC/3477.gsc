@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\3477.gsc
+ * Script: 3477.gsc
 ***************************************/
 
 func_526C(var_00, var_01, var_02) {

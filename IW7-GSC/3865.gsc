@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3865.gsc
-****************************/
+ * Script: 3865.gsc
+************************/
 
 func_4682() {
 	self.var_10E6D.var_466C = spawnstruct();

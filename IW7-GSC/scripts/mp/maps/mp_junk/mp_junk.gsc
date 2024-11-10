@@ -1,15 +1,15 @@
-/*******************************************************
+/***********************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\maps\mp_junk\mp_junk.gsc
-*******************************************************/
+ * Script: scripts\mp\maps\mp_junk\mp_junk.gsc
+***********************************************/
 
 main() {
 	scripts\mp\maps\mp_junk\mp_junk_precache::main();
 	scripts\mp\maps\mp_junk\gen\mp_junk_art::main();
 	scripts\mp\maps\mp_junk\mp_junk_fx::main();
-	scripts\mp\_load::main();
-	scripts\mp\_compass::func_FACD("compass_map_mp_junk");
+	scripts\mp\load::main();
+	scripts\mp\compass::setupminimap("compass_map_mp_junk");
 	setdvar("r_lightGridEnableTweaks",1);
 	setdvar("r_lightGridIntensity",1.33);
 	setdvar("r_umbraMinObjectContribution",8);
@@ -24,7 +24,7 @@ main() {
 	thread apex_not_outofbounds();
 	thread on_connect();
 	thread func_CDA4("mp_junk_screens");
-	level._effect["grinder_kill"] = loadfx("vfx/iw7/levels/mp_junk/vfx_body_exp.vfx");
+	level._effect["grinder_kill"] = loadfx("vfx\iw7\levels\mp_junk\vfx_body_exp.vfx");
 	var_00 = getent("grinderKillTrigger","targetname");
 	thread killtriggerloop(var_00);
 	thread fix_collision();
@@ -87,14 +87,14 @@ fix_collision() {
 
 func_CDA4(param_00) {
 	wait(30);
-	function_030E(param_00);
+	playcinematicforalllooping(param_00);
 }
 
 on_spawn() {
 	for(;;) {
 		self waittill("spawned_player");
 		wait(0.05);
-		self method_85BD(1);
+		self enableworldup(1);
 	}
 }
 
@@ -148,7 +148,7 @@ magupvector(param_00,param_01,param_02) {
 	param_02 playrumbleonentity("damage_heavy");
 	var_03 delete();
 	while(isdefined(param_02) && isalive(param_02) && param_02 istouching(param_00)) {
-		scripts\common\utility::func_136F7();
+		scripts\engine\utility::waitframe();
 	}
 
 	if(isdefined(param_02) && isalive(param_02)) {
@@ -189,10 +189,10 @@ killtriggerloop(param_00) {
 		if(isdefined(var_01)) {
 			if(isplayer(var_01)) {
 				var_01 suicide();
-				var_02 = var_01 method_8113();
+				var_02 = var_01 _meth_8113();
 				var_02 hide(1);
-				var_02.var_CA6C = 1;
-				if(var_01.var_AE62 == "archetype_scout") {
+				var_02.permanentcustommovetransition = 1;
+				if(var_01.loadoutarchetype == "archetype_scout") {
 					playfx(level._effect["reaper_kill_robot"],var_01.origin + (0,0,12));
 				}
 				else
@@ -204,13 +204,13 @@ killtriggerloop(param_00) {
 			}
 
 			if(isdefined(var_01.classname) && var_01.classname == "script_vehicle") {
-				if(isdefined(var_01.var_110EA)) {
-					if(var_01.var_110EA == "minijackal") {
+				if(isdefined(var_01.streakname)) {
+					if(var_01.streakname == "minijackal") {
 						var_01 notify("minijackal_end");
 						continue;
 					}
 
-					if(var_01.var_110EA == "venom") {
+					if(var_01.streakname == "venom") {
 						var_01 notify("venom_end",var_01.origin);
 					}
 				}
@@ -229,7 +229,7 @@ droptonavmeshtriggers() {
 move_frontline_spawns() {
 	if(level.gametype == "front") {
 		wait(1);
-		var_00 = scripts\mp\_spawnlogic::func_8140("mp_front_spawn_axis");
+		var_00 = scripts\mp\spawnlogic::getspawnpointarray("mp_front_spawn_axis");
 		foreach(var_02 in var_00) {
 			if(distance(var_02.origin,(-1664,-2368,32)) < 10) {
 				var_02.origin = (-1664,-2368,40);

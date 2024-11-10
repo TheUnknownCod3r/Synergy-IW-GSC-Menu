@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\3512.gsc
+ * Script: 3512.gsc
 ***************************************/
 
 func_45D0(var_00, var_01, var_02, var_03, var_04, var_05) {
@@ -164,19 +164,19 @@ func_DDA3(var_00) {
   var_01 = scripts\mp\archetypes\archassault::applyarchetype;
   break;
   case "archetype_heavy":
-  var_01 = scripts/mp/archetypes/archheavy::applyarchetype;
+  var_01 = scripts\mp\archetypes\archheavy::applyarchetype;
   break;
   case "archetype_scout":
-  var_01 = scripts/mp/archetypes/archscout::applyarchetype;
+  var_01 = scripts\mp\archetypes\archscout::applyarchetype;
   break;
   case "archetype_assassin":
-  var_01 = scripts/mp/archetypes/archassassin::applyarchetype;
+  var_01 = scripts\mp\archetypes\archassassin::applyarchetype;
   break;
   case "archetype_engineer":
-  var_01 = scripts/mp/archetypes/archengineer::applyarchetype;
+  var_01 = scripts\mp\archetypes\archengineer::applyarchetype;
   break;
   case "archetype_sniper":
-  var_01 = scripts/mp/archetypes/archsniper::applyarchetype;
+  var_01 = scripts\mp\archetypes\archsniper::applyarchetype;
   break;
   }
 

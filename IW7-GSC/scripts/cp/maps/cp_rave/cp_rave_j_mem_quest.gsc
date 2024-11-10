@@ -1,27 +1,27 @@
-/*******************************************************************
+/***********************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\maps\cp_rave\cp_rave_j_mem_quest.gsc
-*******************************************************************/
+ * Script: scripts\cp\maps\cp_rave\cp_rave_j_mem_quest.gsc
+***********************************************************/
 
 j_mem_quest_init() {
 	scripts\engine\utility::flag_init("photo_1_kev_given");
 	scripts\engine\utility::flag_init("photo_2_kev_given");
 	scripts\engine\utility::flag_init("photo_1_kev_vo_done");
 	scripts\engine\utility::flag_init("photo_2_kev_vo_done");
-	level._effect["arm_symbol_column"] = loadfx("vfx/iw7/_requests/coop/vfx_zmb_skel_arm_telgraph.vfx");
-	level._effect["j_mem_start_symbol"] = loadfx("vfx/iw7/levels/cp_rave/vfx_rave_j_mem_start.vfx");
-	level._effect["slasher_appear"] = loadfx("vfx/iw7/levels/cp_rave/slasher/vfx_rave_slasher_teleportation_appear.vfx");
+	level._effect["arm_symbol_column"] = loadfx("vfx\iw7\_requests\coop\vfx_zmb_skel_arm_telgraph.vfx");
+	level._effect["j_mem_start_symbol"] = loadfx("vfx\iw7\levels\cp_rave\vfx_rave_j_mem_start.vfx");
+	level._effect["slasher_appear"] = loadfx("vfx\iw7\levels\cp_rave\slasher\vfx_rave_slasher_teleportation_appear.vfx");
 	level thread init_j_mem_arms();
-	scripts/cp/zombies/zombie_quest::register_quest_step("jmem",0,::blank,::do_find_thing_1,::blank,::blank);
-	scripts/cp/zombies/zombie_quest::register_quest_step("jmem",1,::blank,::do_circle_fight_1,::blank,::blank);
-	scripts/cp/zombies/zombie_quest::register_quest_step("jmem",2,::blank,::do_give_thing_to_kev_1,::blank,::blank);
-	scripts/cp/zombies/zombie_quest::register_quest_step("jmem",3,::blank,::do_find_thing_2,::blank,::blank);
-	scripts/cp/zombies/zombie_quest::register_quest_step("jmem",4,::blank,::do_circle_fight_2,::blank,::blank);
-	scripts/cp/zombies/zombie_quest::register_quest_step("jmem",5,::blank,::do_give_thing_to_kev_2,::blank,::blank);
-	scripts/cp/zombies/zombie_quest::register_quest_step("jmem",6,::blank,::do_find_thing_3,::blank,::blank);
-	scripts/cp/zombies/zombie_quest::register_quest_step("jmem",7,::blank,::do_circle_fight_3,::blank,::blank);
-	scripts/cp/zombies/zombie_quest::register_quest_step("jmem",8,::blank,::do_give_thing_to_kev_3,::blank,::blank);
+	scripts\cp\zombies\zombie_quest::register_quest_step("jmem",0,::blank,::do_find_thing_1,::blank,::blank);
+	scripts\cp\zombies\zombie_quest::register_quest_step("jmem",1,::blank,::do_circle_fight_1,::blank,::blank);
+	scripts\cp\zombies\zombie_quest::register_quest_step("jmem",2,::blank,::do_give_thing_to_kev_1,::blank,::blank);
+	scripts\cp\zombies\zombie_quest::register_quest_step("jmem",3,::blank,::do_find_thing_2,::blank,::blank);
+	scripts\cp\zombies\zombie_quest::register_quest_step("jmem",4,::blank,::do_circle_fight_2,::blank,::blank);
+	scripts\cp\zombies\zombie_quest::register_quest_step("jmem",5,::blank,::do_give_thing_to_kev_2,::blank,::blank);
+	scripts\cp\zombies\zombie_quest::register_quest_step("jmem",6,::blank,::do_find_thing_3,::blank,::blank);
+	scripts\cp\zombies\zombie_quest::register_quest_step("jmem",7,::blank,::do_circle_fight_3,::blank,::blank);
+	scripts\cp\zombies\zombie_quest::register_quest_step("jmem",8,::blank,::do_give_thing_to_kev_3,::blank,::blank);
 	level.slasher_fight = 0;
 }
 
@@ -395,7 +395,7 @@ slash_a_perk(param_00) {
 		var_01 = randomint(param_00.zombies_perks.size);
 		var_02 = getarraykeys(param_00.zombies_perks);
 		var_03 = scripts\engine\utility::random(var_02);
-		param_00 scripts/cp/zombies/zombies_perk_machines::take_zombies_perk(var_03);
+		param_00 scripts\cp\zombies\zombies_perk_machines::take_zombies_perk(var_03);
 	}
 	else
 	{
@@ -601,7 +601,7 @@ startspeakereventspawning(param_00) {
 	}
 
 	foreach(var_09 in var_01) {
-		if(function_010F(param_00.origin,var_09)) {
+		if(ispointinvolume(param_00.origin,var_09)) {
 			var_02 = var_09;
 			break;
 		}
@@ -643,7 +643,7 @@ adjustmovespeed(param_00,param_01) {
 	}
 
 	param_00.synctransients = "sprint";
-	param_00 scripts/asm/asm_bb::bb_requestmovetype("sprint");
+	param_00 scripts\asm\asm_bb::bb_requestmovetype("sprint");
 }
 
 fight_timer(param_00) {

@@ -1,8 +1,8 @@
-/***********************************************************
+/***************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\anim\traverse\iw6_stepup_32.gsc
-***********************************************************/
+ * Script: scripts\anim\traverse\iw6_stepup_32.gsc
+***************************************************/
 
 main() {
 	func_B0CC();

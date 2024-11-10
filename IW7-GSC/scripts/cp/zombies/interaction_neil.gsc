@@ -1,8 +1,8 @@
-/***********************************************************
+/***************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\zombies\interaction_neil.gsc
-***********************************************************/
+ * Script: scripts\cp\zombies\interaction_neil.gsc
+***************************************************/
 
 init_neil_quest() {
 	level.var_4EFB = ::func_4EFA;
@@ -59,7 +59,7 @@ func_BED3() {
 	wait(0.5);
 	level.neil setmodel(level.var_BEB1);
 	level.neil.is_neil = 1;
-	function_0277("neil",0,level.neil,20,1);
+	createnavrepulsor("neil",0,level.neil,20,1);
 	level.neil.upper_body = spawn("script_model",level.neil.origin);
 	level.neil.upper_body.angles = level.neil.angles;
 	level.neil.upper_body setmodel(level.var_BEB2);
@@ -612,7 +612,7 @@ func_12636(param_00,param_01) {
 		level.the_hoff playsound("dj_kitt_notify_departure");
 		func_5559(0);
 		level.the_hoff notify("timetogo");
-		var_05 = getclosestpointonnavmesh(level.neil.origin + scripts\cp\utility::vec_multiply(anglestoforward(level.neil.angles),52) + scripts\cp\utility::vec_multiply(function_02D3(level.neil.angles),11));
+		var_05 = getclosestpointonnavmesh(level.neil.origin + scripts\cp\utility::vec_multiply(anglestoforward(level.neil.angles),52) + scripts\cp\utility::vec_multiply(anglestoleft(level.neil.angles),11));
 		level.the_hoff.scripted_mode = 1;
 		level.the_hoff scripts\mp\agents\c6\c6_agent::func_F835(var_05,6);
 		level.the_hoff.disablearrivals = 1;
@@ -622,10 +622,10 @@ func_12636(param_00,param_01) {
 		wait(0.75);
 		level.neil.upper_body thread func_A6E2();
 		level.the_hoff.var_FFF3 = 1;
-		level.the_hoff setorigin(level.neil.origin + scripts\cp\utility::vec_multiply(anglestoforward(level.neil.angles),52) + scripts\cp\utility::vec_multiply(function_02D3(level.neil.angles),11),0);
+		level.the_hoff setorigin(level.neil.origin + scripts\cp\utility::vec_multiply(anglestoforward(level.neil.angles),52) + scripts\cp\utility::vec_multiply(anglestoleft(level.neil.angles),11),0);
 		wait(7);
 		level.the_hoff takeallweapons();
-		function_0278("neil");
+		destroynavrepulsor("neil");
 		level.neil.upper_body setmodel("robot_kevin_upper_invisi");
 		level.neil setmodel("robot_kevin_lower_invisi");
 		level.neil.upper_body setscriptablepartstate("facefx","off");
@@ -653,7 +653,7 @@ func_12636(param_00,param_01) {
 		var_06 = level.neil.origin;
 		var_02 movez(-2000,6,4,2);
 		wait(3);
-		function_0277("neil",0,level.neil,20,1);
+		createnavrepulsor("neil",0,level.neil,20,1);
 		level.neil setscriptablepartstate("landing","on");
 		wait(3);
 		scripts\engine\utility::flag_clear("landing_zone_active");
@@ -696,7 +696,7 @@ func_1176C(param_00) {
 	level.neil setscriptablepartstate("landing","on");
 	wait(2);
 	level.the_hoff.var_FFEF = undefined;
-	level.the_hoff scripts/asm/asm::asm_fireevent("introloop","introdone");
+	level.the_hoff scripts\asm\asm::asm_fireevent("introloop","introdone");
 	wait(1);
 	level.the_hoff scripts\mp\mp_agent::func_FAFA("iw7_erad_zm");
 	stopfxontag(level._effect["neil_trail"],param_00,"tag_origin");

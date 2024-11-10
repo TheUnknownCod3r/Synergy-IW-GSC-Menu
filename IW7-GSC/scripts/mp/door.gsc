@@ -1,8 +1,8 @@
-/***************************************
+/*******************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\door.gsc
-***************************************/
+ * Script: scripts\mp\door.gsc
+*******************************/
 
 door_system_init(param_00) {
 	var_01 = getentarray(param_00,"targetname");
@@ -574,7 +574,7 @@ func_59BD(param_00) {
 				break;
 
 			case "unresolved_collision_nodes":
-				var_01.unresolved_collision_nodes = function_00B4(var_05[1],"targetname");
+				var_01.unresolved_collision_nodes = getnodearray(var_05[1],"targetname");
 				break;
 
 			case "no_moving_unresolved_collisions":

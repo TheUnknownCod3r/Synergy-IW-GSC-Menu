@@ -1,8 +1,8 @@
-/********************************************************************
+/************************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\maps\cp_disco\cp_disco_challenges.gsc
-********************************************************************/
+ * Script: scripts\cp\maps\cp_disco\cp_disco_challenges.gsc
+************************************************************/
 
 register_default_challenges() {
 	scripts\engine\utility::flag_init("pause_challenges");
@@ -151,7 +151,7 @@ challenge_success(param_00) {
 
 	param_00 setclientomnvarbit("zm_challenges_completed",var_01,1);
 	if(scripts\engine\utility::istrue(param_00.chi_master_tiger) && scripts\engine\utility::istrue(param_00.chi_master_dragon) && scripts\engine\utility::istrue(param_00.chi_master_snake) && scripts\engine\utility::istrue(param_00.chi_master_crane)) {
-		param_00 scripts/cp/zombies/achievement::update_achievement("SHAOLIN_SKILLS",1);
+		param_00 scripts\cp\zombies\achievement::update_achievement("SHAOLIN_SKILLS",1);
 		param_00 thread scripts\cp\cp_vo::try_to_play_vo("pam_rank_all_max","pam_dialogue_vo");
 	}
 

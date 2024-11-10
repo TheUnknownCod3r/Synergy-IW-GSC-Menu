@@ -1,11 +1,11 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2766.gsc
+ * Script: 2766.gsc
 ***************************************/
 
 init() {
   if (!isdefined(game["gamestarted"])) {
-  setmatchdatadef("mp/matchdata.ddl");
+  setmatchdatadef("mp\matchdata.ddl");
   setmatchdata("commonMatchData", "map", level.script);
 
   if (level.hardcoremode) {
@@ -580,12 +580,12 @@ func_322A() {
   var_01 = 149;
 
   for (var_02 = 0; var_02 <= var_01; var_2++) {
-  var_03 = tablelookup("mp/statstable.csv", 0, var_02, 4);
+  var_03 = tablelookup("mp\statstable.csv", 0, var_02, 4);
 
-  if (!issubstr(tablelookup("mp/statsTable.csv", 0, var_02, 2), "weapon_"))
+  if (!issubstr(tablelookup("mp\statsTable.csv", 0, var_02, 2), "weapon_"))
   continue;
 
-  if (tablelookup("mp/statsTable.csv", 0, var_02, 2) == "weapon_other")
+  if (tablelookup("mp\statsTable.csv", 0, var_02, 2) == "weapon_other")
   continue;
 
   var_0[var_0.size] = var_03;

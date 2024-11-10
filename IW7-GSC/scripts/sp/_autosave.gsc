@@ -1,8 +1,8 @@
-/********************************************
+/************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\sp\_autosave.gsc
-********************************************/
+ * Script: scripts\sp\_autosave.gsc
+************************************/
 
 main() {
 	if(!scripts\engine\utility::add_init_script("autosave",::main)) {
@@ -96,7 +96,7 @@ immediatelevelstartsave() {
 	}
 
 	var_03 = "levelshots / autosave / autosave_" + level.script + "immediate_start";
-	function_01A0("immediatelevelstart",&"AUTOSAVE_LEVELSTART",var_03,1);
+	savegame("immediatelevelstart",&"AUTOSAVE_LEVELSTART",var_03,1);
 	setdvar("ui_grenade_death","0");
 	level.player _meth_8591(0);
 	scripts\engine\utility::flag_clear("game_saving");
@@ -141,7 +141,7 @@ func_2A6E() {
 		return;
 	}
 
-	function_01A0("levelstart",&"AUTOSAVE_LEVELSTART",var_00,1);
+	savegame("levelstart",&"AUTOSAVE_LEVELSTART",var_00,1);
 	setdvar("ui_grenade_death","0");
 	level.player _meth_8591(0);
 	scripts\engine\utility::flag_clear("game_saving");
@@ -182,7 +182,7 @@ func_268E(param_00) {
 }
 
 func_268B(param_00) {
-	if(scripts/sp/starts::func_9C4B()) {
+	if(scripts\sp\starts::func_9C4B()) {
 		return;
 	}
 
@@ -247,21 +247,21 @@ func_1190(param_00,param_01) {
 	}
 
 	if(isdefined(param_00)) {
-		var_07 = function_01A1(var_05,var_06,"$default",1);
+		var_07 = savegamenocommit(var_05,var_06,"$default",1);
 	}
 	else
 	{
-		var_07 = function_01A1(var_06,var_07);
+		var_07 = savegamenocommit(var_06,var_07);
 	}
 
 	wait(0.05);
-	if(function_0110()) {
+	if(issaverecentlyloaded()) {
 		level.var_2668.var_A943 = gettime();
 		scripts\engine\utility::flag_clear("game_saving");
 		return 0;
 	}
 
-	if(function_0319()) {
+	if(isloadinganytransients()) {
 		scripts\engine\utility::flag_clear("game_saving");
 		return 0;
 	}
@@ -278,17 +278,17 @@ func_1190(param_00,param_01) {
 
 	wait(2);
 	scripts\engine\utility::flag_clear("game_saving");
-	if(function_0319()) {
+	if(isloadinganytransients()) {
 		scripts\engine\utility::flag_clear("game_saving");
 		return 0;
 	}
 
-	if(!function_004A(var_07)) {
+	if(!commitwouldbevalid(var_07)) {
 		return 0;
 	}
 
 	if(func_12878(var_07)) {
-		function_0049(var_07);
+		commitsave(var_07);
 		level.player _meth_8591(0);
 		setdvar("ui_grenade_death","0");
 	}
@@ -302,7 +302,7 @@ func_2671(param_00) {
 }
 
 func_12878(param_00) {
-	if(!function_0111()) {
+	if(!issavesuccessful()) {
 		return 0;
 	}
 
@@ -388,23 +388,23 @@ func_12891(param_00,param_01,param_02,param_03,param_04,param_05) {
 				}
 			}
 
-			var_0B = function_01A1(param_00,var_08,param_02,param_05);
+			var_0B = savegamenocommit(param_00,var_08,param_02,param_05);
 			if(var_0B < 0) {
 				break;
 			}
 
 			wait(0.05);
-			if(function_0110()) {
+			if(issaverecentlyloaded()) {
 				level.var_2668.var_A943 = gettime();
 				break;
 			}
 
-			if(function_0319()) {
+			if(isloadinganytransients()) {
 				continue;
 			}
 
 			wait(var_06);
-			if(function_0319()) {
+			if(isloadinganytransients()) {
 				continue;
 			}
 
@@ -417,7 +417,7 @@ func_12891(param_00,param_01,param_02,param_03,param_04,param_05) {
 			}
 
 			wait(var_07);
-			if(function_0319()) {
+			if(isloadinganytransients()) {
 				continue;
 			}
 
@@ -435,12 +435,12 @@ func_12891(param_00,param_01,param_02,param_03,param_04,param_05) {
 				break;
 			}
 
-			if(!function_004A(var_0B)) {
+			if(!commitwouldbevalid(var_0B)) {
 				scripts\engine\utility::flag_clear("game_saving");
 				return 0;
 			}
 
-			function_0049(var_0B);
+			commitsave(var_0B);
 			level.player _meth_8591(0);
 			level.var_A9E7 = gettime();
 			setdvar("ui_grenade_death","0");
@@ -457,7 +457,7 @@ func_12891(param_00,param_01,param_02,param_03,param_04,param_05) {
 waitfortransientloading(param_00) {
 	level endon("trying_new_autosave");
 	var_01 = 0;
-	if(function_02B5()) {
+	if(waspreloadzonesstarted()) {
 		while(!ispreloadzonescomplete()) {
 			if(gettime() > var_01) {
 				var_01 = gettime() + 2000;
@@ -467,7 +467,7 @@ waitfortransientloading(param_00) {
 		}
 	}
 
-	while(function_0319()) {
+	while(isloadinganytransients()) {
 		if(gettime() > var_01) {
 			var_01 = gettime() + 2000;
 		}
@@ -553,7 +553,7 @@ func_2685(param_00,param_01,param_02) {
 		return 0;
 	}
 
-	if(!function_0111()) {
+	if(!issavesuccessful()) {
 		return 0;
 	}
 
@@ -606,7 +606,7 @@ func_2684(param_00) {
 
 	var_02 = 1;
 	for(var_03 = 0;var_03 < var_01.size;var_03++) {
-		if(function_0249(var_01[var_03]) > 0) {
+		if(weaponmaxammo(var_01[var_03]) > 0) {
 			var_02 = 0;
 		}
 
@@ -681,7 +681,7 @@ func_268A(param_00) {
 }
 
 func_268F(param_00,param_01) {
-	var_02 = function_0075("bad_guys","all");
+	var_02 = getaiunittypearray("bad_guys","all");
 	foreach(var_04 in var_02) {
 		if(!isdefined(var_04.isnodeoccupied)) {
 			continue;
@@ -724,7 +724,7 @@ func_268F(param_00,param_01) {
 			var_06 = var_04 func_7E19();
 		}
 
-		if(isdefined(var_04.asm.var_11AC7) && var_04 scripts/asm/asm::func_231B(var_04.asm.var_11AC7,"aim") && var_06) {
+		if(isdefined(var_04.asm.var_11AC7) && var_04 scripts\asm\asm::func_231B(var_04.asm.var_11AC7,"aim") && var_06) {
 			return 0;
 		}
 	}
@@ -827,7 +827,7 @@ specialistsavecheck() {
 }
 
 specialistinjackal() {
-	if(scripts/sp/specialist_MAYBE::func_2C97()) {
+	if(scripts\sp\specialist_MAYBE::func_2C97()) {
 		return 1;
 	}
 

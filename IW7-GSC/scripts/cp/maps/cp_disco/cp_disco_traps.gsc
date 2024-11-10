@@ -1,8 +1,8 @@
-/***************************************************************
+/*******************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\maps\cp_disco\cp_disco_traps.gsc
-***************************************************************/
+ * Script: scripts\cp\maps\cp_disco\cp_disco_traps.gsc
+*******************************************************/
 
 init_buffer_trap() {
 	scripts\engine\utility::array_thread(scripts\engine\utility::getstructarray("trap_buffer","script_noteworthy"),::power_on_buffer);
@@ -173,7 +173,7 @@ kill_zombies(param_00,param_01,param_02) {
 		}
 
 		var_03.flung = 1;
-		param_02.var_126A4++;
+		param_02.trap_kills++;
 		level thread fling_zombie(var_03,self,param_01);
 	}
 }
@@ -208,9 +208,9 @@ fling_zombie(param_00,param_01,param_02) {
 }
 
 init_hydrant_trap() {
-	level._effect["trap_hydrant_spray"] = loadfx("vfx/iw7/levels/cp_disco/vfx_trap_hydrant_spray.vfx");
-	level._effect["trap_hydrant_spray2"] = loadfx("vfx/iw7/levels/cp_disco/vfx_trap_hydrant_spray_2.vfx");
-	level._effect["trap_hydrant_pool"] = loadfx("vfx/iw7/levels/cp_disco/vfx_trap_hydrant_pool.vfx");
+	level._effect["trap_hydrant_spray"] = loadfx("vfx\iw7\levels\cp_disco\vfx_trap_hydrant_spray.vfx");
+	level._effect["trap_hydrant_spray2"] = loadfx("vfx\iw7\levels\cp_disco\vfx_trap_hydrant_spray_2.vfx");
+	level._effect["trap_hydrant_pool"] = loadfx("vfx\iw7\levels\cp_disco\vfx_trap_hydrant_pool.vfx");
 }
 
 use_hydrant_trap(param_00,param_01) {
@@ -289,7 +289,7 @@ kill_zombies_hydrant(param_00) {
 			continue;
 		}
 
-		self.interaction.var_126A4++;
+		self.interaction.trap_kills++;
 		var_01 thread fling_zombie_hydrant(self.interaction,self.player);
 	}
 }
@@ -484,7 +484,7 @@ kill_mosh_stragglers(param_00) {
 
 		var_03 = scripts\engine\utility::random(level.punk_speakers);
 		var_04 = var_02 gettagorigin("J_HEAD");
-		function_02E0(level._effect["blue_ark_beam"],var_03.origin,vectortoangles(var_03.origin - var_04),var_04);
+		playfxbetweenpoints(level._effect["blue_ark_beam"],var_03.origin,vectortoangles(var_03.origin - var_04),var_04);
 		var_02 moshdeath(param_00,1);
 		wait(randomfloatrange(0.1,0.2));
 	}

@@ -1,8 +1,8 @@
-/****************************************
+/********************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\anim\atv.gsc
-****************************************/
+ * Script: scripts\anim\atv.gsc
+********************************/
 
 main() {
 	self.var_4B71 = "none";
@@ -13,7 +13,7 @@ main() {
 
 func_255B() {
 	self.objective_state_nomessage = 0;
-	self.var_1491.pose = "crouch";
+	self.a.pose = "crouch";
 	scripts\sp\_utility::func_558D();
 	self.allowpain = 0;
 	self.var_6EC4 = 1;
@@ -31,7 +31,7 @@ func_255A() {
 	self.var_4C37["stop"] = undefined;
 	self._meth_8020 = undefined;
 	self.var_10957 = undefined;
-	self.var_1491.var_1096D = undefined;
+	self.a.var_1096D = undefined;
 	self.disablebulletwhizbyreaction = undefined;
 }
 
@@ -222,7 +222,7 @@ func_2569() {
 func_2556() {
 	self endon("killanimscript");
 	self endon("end_shoot_while_driving");
-	self.var_1491.var_1096D = ::func_2570;
+	self.a.var_1096D = ::func_2570;
 	func_2557();
 	self.var_FE91 = undefined;
 }
@@ -242,7 +242,7 @@ func_2570() {
 
 	self.var_FE9E = self.isnodeoccupied;
 	self.var_FECF = self.isnodeoccupied getshootatpos();
-	var_00 = distancesquared(self.origin,self.var_10C.origin);
+	var_00 = distancesquared(self.origin,self.isnodeoccupied.origin);
 	if(var_00 < 1000000) {
 		self.var_FED7 = "full";
 	}
@@ -254,7 +254,7 @@ func_2570() {
 		self.var_FED7 = "single";
 	}
 
-	if(isdefined(self.var_10C.vehicle)) {
+	if(isdefined(self.isnodeoccupied.vehicle)) {
 		var_01 = 0.5;
 		var_02 = self.var_FE9E.vehicle;
 		var_03 = self.var_E500;
@@ -267,7 +267,7 @@ func_2570() {
 			var_08 = var_08 * 17.6;
 			if(var_08 > 50) {
 				var_09 = vectordot(var_04,var_06);
-				var_09 = var_09 \ 3;
+				var_09 = var_09 / 3;
 				if(var_09 > 128) {
 					var_09 = 128;
 				}
@@ -408,13 +408,13 @@ func_256A() {
 		{
 			var_0A = var_03 - var_02;
 			if(abs(var_0A) > var_01) {
-				var_03 = var_02 + var_01 * scripts\common\utility::sign(var_0A);
+				var_03 = var_02 + var_01 * scripts\engine\utility::sign(var_0A);
 			}
 		}
 
 		var_02 = var_03;
-		var_0B = min(max(0 - var_03,0),90) \ 90 * self.var_1491.var_1A4B;
-		var_0C = min(max(var_03,0),90) \ 90 * self.var_1491.var_1A4B;
+		var_0B = min(max(0 - var_03,0),90) / 90 * self.a.var_1A4B;
+		var_0C = min(max(var_03,0),90) / 90 * self.a.var_1A4B;
 		self _meth_82AC(%atv_aim_4,var_0B,var_00);
 		self _meth_82AC(%atv_aim_6,var_0C,var_00);
 		wait(0.05);
@@ -426,7 +426,7 @@ func_2559(param_00,param_01,param_02) {
 	var_04 = undefined;
 	var_05 = 0;
 	for(var_06 = 0;var_06 < param_00.size;var_06++) {
-		var_07 = scripts\common\utility::absangleclamp180(param_02 - param_01[var_06]);
+		var_07 = scripts\engine\utility::absangleclamp180(param_02 - param_01[var_06]);
 		if(!isdefined(var_03) || var_07 < var_05) {
 			var_04 = var_03;
 			var_03 = param_00[var_06];
@@ -516,51 +516,51 @@ func_51D1() {
 }
 
 func_2564(param_00) {
-	self.var_1491.var_2274["idle"] = level.var_EC85["atv"][param_00]["idle"];
-	self.var_1491.var_2274["drive"] = level.var_EC85["atv"][param_00]["drive"];
-	self.var_1491.var_2274["fire"] = level.var_EC85["atv"][param_00]["fire"];
-	self.var_1491.var_2274["single"] = scripts\anim\utility::func_2274(level.var_EC85["atv"][param_00]["single"]);
-	self.var_1491.var_2274["burst2"] = level.var_EC85["atv"][param_00]["fire"];
-	self.var_1491.var_2274["burst3"] = level.var_EC85["atv"][param_00]["fire"];
-	self.var_1491.var_2274["burst4"] = level.var_EC85["atv"][param_00]["fire"];
-	self.var_1491.var_2274["burst5"] = level.var_EC85["atv"][param_00]["fire"];
-	self.var_1491.var_2274["burst6"] = level.var_EC85["atv"][param_00]["fire"];
-	self.var_1491.var_2274["semi2"] = level.var_EC85["atv"][param_00]["fire"];
-	self.var_1491.var_2274["semi3"] = level.var_EC85["atv"][param_00]["fire"];
-	self.var_1491.var_2274["semi4"] = level.var_EC85["atv"][param_00]["fire"];
-	self.var_1491.var_2274["semi5"] = level.var_EC85["atv"][param_00]["fire"];
+	self.a.var_2274["idle"] = level.var_EC85["atv"][param_00]["idle"];
+	self.a.var_2274["drive"] = level.var_EC85["atv"][param_00]["drive"];
+	self.a.var_2274["fire"] = level.var_EC85["atv"][param_00]["fire"];
+	self.a.var_2274["single"] = scripts\anim\utility::func_2274(level.var_EC85["atv"][param_00]["single"]);
+	self.a.var_2274["burst2"] = level.var_EC85["atv"][param_00]["fire"];
+	self.a.var_2274["burst3"] = level.var_EC85["atv"][param_00]["fire"];
+	self.a.var_2274["burst4"] = level.var_EC85["atv"][param_00]["fire"];
+	self.a.var_2274["burst5"] = level.var_EC85["atv"][param_00]["fire"];
+	self.a.var_2274["burst6"] = level.var_EC85["atv"][param_00]["fire"];
+	self.a.var_2274["semi2"] = level.var_EC85["atv"][param_00]["fire"];
+	self.a.var_2274["semi3"] = level.var_EC85["atv"][param_00]["fire"];
+	self.a.var_2274["semi4"] = level.var_EC85["atv"][param_00]["fire"];
+	self.a.var_2274["semi5"] = level.var_EC85["atv"][param_00]["fire"];
 }
 
 func_2565(param_00) {
-	self.var_1491.var_2274 = [];
+	self.a.var_2274 = [];
 	func_2564("driver");
-	self.var_1491.var_2274["left2right"] = level.var_EC85["atv"]["driver"]["left2right"];
-	self.var_1491.var_2274["right2left"] = level.var_EC85["atv"]["driver"]["right2left"];
-	self.var_1491.var_2274["straight_level_left"] = level.var_EC85["atv"]["driver"]["straight_level"]["left"];
-	self.var_1491.var_2274["straight_level_center"] = level.var_EC85["atv"]["driver"]["straight_level"]["center"];
-	self.var_1491.var_2274["straight_level_right"] = level.var_EC85["atv"]["driver"]["straight_level"]["right"];
-	self.var_1491.var_2274["add_aim_left_left"] = level.var_EC85["atv"]["driver"]["add_aim_left"]["left"];
-	self.var_1491.var_2274["add_aim_left_center"] = level.var_EC85["atv"]["driver"]["add_aim_left"]["center"];
-	self.var_1491.var_2274["add_aim_left_right"] = level.var_EC85["atv"]["driver"]["add_aim_left"]["right"];
-	self.var_1491.var_2274["add_aim_right_left"] = level.var_EC85["atv"]["driver"]["add_aim_right"]["left"];
-	self.var_1491.var_2274["add_aim_right_center"] = level.var_EC85["atv"]["driver"]["add_aim_right"]["center"];
-	self.var_1491.var_2274["add_aim_right_right"] = level.var_EC85["atv"]["driver"]["add_aim_right"]["right"];
+	self.a.var_2274["left2right"] = level.var_EC85["atv"]["driver"]["left2right"];
+	self.a.var_2274["right2left"] = level.var_EC85["atv"]["driver"]["right2left"];
+	self.a.var_2274["straight_level_left"] = level.var_EC85["atv"]["driver"]["straight_level"]["left"];
+	self.a.var_2274["straight_level_center"] = level.var_EC85["atv"]["driver"]["straight_level"]["center"];
+	self.a.var_2274["straight_level_right"] = level.var_EC85["atv"]["driver"]["straight_level"]["right"];
+	self.a.var_2274["add_aim_left_left"] = level.var_EC85["atv"]["driver"]["add_aim_left"]["left"];
+	self.a.var_2274["add_aim_left_center"] = level.var_EC85["atv"]["driver"]["add_aim_left"]["center"];
+	self.a.var_2274["add_aim_left_right"] = level.var_EC85["atv"]["driver"]["add_aim_left"]["right"];
+	self.a.var_2274["add_aim_right_left"] = level.var_EC85["atv"]["driver"]["add_aim_right"]["left"];
+	self.a.var_2274["add_aim_right_center"] = level.var_EC85["atv"]["driver"]["add_aim_right"]["center"];
+	self.a.var_2274["add_aim_right_right"] = level.var_EC85["atv"]["driver"]["add_aim_right"]["right"];
 	if(param_00) {
-		self.var_1491.var_2274["event_jump"] = level.var_EC85["atv"]["driver"]["shoot_jump"];
-		self.var_1491.var_2274["event_bump"] = level.var_EC85["atv"]["driver"]["shoot_bump"];
-		self.var_1491.var_2274["event_bump_big"] = level.var_EC85["atv"]["driver"]["shoot_bump_big"];
-		self.var_1491.var_2274["event_sway"] = [];
-		self.var_1491.var_2274["event_sway"]["left"] = level.var_EC85["atv"]["driver"]["shoot_sway_left"];
-		self.var_1491.var_2274["event_sway"]["right"] = level.var_EC85["atv"]["driver"]["shoot_sway_right"];
-		self.var_1491.var_2274["event_restore"] = %atv_aiming;
+		self.a.var_2274["event_jump"] = level.var_EC85["atv"]["driver"]["shoot_jump"];
+		self.a.var_2274["event_bump"] = level.var_EC85["atv"]["driver"]["shoot_bump"];
+		self.a.var_2274["event_bump_big"] = level.var_EC85["atv"]["driver"]["shoot_bump_big"];
+		self.a.var_2274["event_sway"] = [];
+		self.a.var_2274["event_sway"]["left"] = level.var_EC85["atv"]["driver"]["shoot_sway_left"];
+		self.a.var_2274["event_sway"]["right"] = level.var_EC85["atv"]["driver"]["shoot_sway_right"];
+		self.a.var_2274["event_restore"] = %atv_aiming;
 		return;
 	}
 
-	self.var_1491.var_2274["event_jump"] = level.var_EC85["atv"]["driver"]["drive_jump"];
-	self.var_1491.var_2274["event_bump"] = level.var_EC85["atv"]["driver"]["drive_bump"];
-	self.var_1491.var_2274["event_bump_big"] = level.var_EC85["atv"]["driver"]["drive_bump_big"];
-	self.var_1491.var_2274["event_sway"] = [];
-	self.var_1491.var_2274["event_sway"]["left"] = level.var_EC85["atv"]["driver"]["drive_sway_left"];
-	self.var_1491.var_2274["event_sway"]["right"] = level.var_EC85["atv"]["driver"]["drive_sway_right"];
-	self.var_1491.var_2274["event_restore"] = %atv_turn;
+	self.a.var_2274["event_jump"] = level.var_EC85["atv"]["driver"]["drive_jump"];
+	self.a.var_2274["event_bump"] = level.var_EC85["atv"]["driver"]["drive_bump"];
+	self.a.var_2274["event_bump_big"] = level.var_EC85["atv"]["driver"]["drive_bump_big"];
+	self.a.var_2274["event_sway"] = [];
+	self.a.var_2274["event_sway"]["left"] = level.var_EC85["atv"]["driver"]["drive_sway_left"];
+	self.a.var_2274["event_sway"]["right"] = level.var_EC85["atv"]["driver"]["drive_sway_right"];
+	self.a.var_2274["event_restore"] = %atv_turn;
 }

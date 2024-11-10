@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3186.gsc
-****************************/
+ * Script: 3186.gsc
+************************/
 
 func_566E() {}
 
@@ -13,7 +13,7 @@ func_F6C8(param_00,param_01) {
 
 	self.var_566C.var_2C19 = param_00;
 	self.var_566C.var_8EE5 = param_01;
-	scripts/asm/asm::asm_setstate("dismember");
+	scripts\asm\asm::asm_setstate("dismember");
 }
 
 func_41A7() {
@@ -77,18 +77,18 @@ func_9E2E() {
 }
 
 func_9EDD(param_00) {
-	if(!scripts/asm/asm_bb::bb_moverequested()) {
+	if(!scripts\asm\asm_bb::bb_moverequested()) {
 		return 0;
 	}
 
-	return scripts/asm/asm_bb::bb_movetyperequested(param_00);
+	return scripts\asm\asm_bb::bb_movetyperequested(param_00);
 }
 
 func_CF1B(param_00,param_01,param_02,param_03) {
 	self endon(param_01 + "_finished");
 	self endon("death");
 	self endon("terminate_ai_threads");
-	var_04 = scripts/asm/asm_mp::asm_getanim(param_00,param_01);
+	var_04 = scripts\asm\asm_mp::asm_getanim(param_00,param_01);
 	func_5815(param_01,var_04);
 	func_41A7();
 }

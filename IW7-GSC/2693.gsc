@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2693.gsc
+ * Script: 2693.gsc
 ***************************************/
 
 init() {
@@ -212,7 +212,7 @@ buildkilldeathactionvalue() {
 }
 
 buildloadoutstring() {
-  var_00 = "archetype=" + self.loadoutarchetype + ";" + "powerPrimary=" + self.func_AE7B + ";" + "powerSecondary=" + self.func_AE7D + ";" + "weaponPrimary//t =" + scripts\mp\class::buildweaponname(self.loadoutprimary, self.loadoutprimaryattachments, self.loadoutprimarycamo, self.loadoutprimaryreticle) + ";" + "weaponSecondary =" + scripts\mp\class::buildweaponname(self.loadoutsecondary, self.loadoutsecondaryattachments, self.loadoutsecondarycamo, self.loadoutsecondaryreticle) + ";";
+  var_00 = "archetype=" + self.loadoutarchetype + ";" + "powerPrimary=" + self.func_AE7B + ";" + "powerSecondary=" + self.func_AE7D + ";" + "weaponPrimary\\t =" + scripts\mp\class::buildweaponname(self.loadoutprimary, self.loadoutprimaryattachments, self.loadoutprimarycamo, self.loadoutprimaryreticle) + ";" + "weaponSecondary =" + scripts\mp\class::buildweaponname(self.loadoutsecondary, self.loadoutsecondaryattachments, self.loadoutsecondarycamo, self.loadoutsecondaryreticle) + ";";
   return var_00;
 }
 

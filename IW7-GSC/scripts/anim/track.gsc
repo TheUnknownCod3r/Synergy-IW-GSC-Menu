@@ -1,8 +1,8 @@
-/******************************************
+/**********************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\anim\track.gsc
-******************************************/
+ * Script: scripts\anim\track.gsc
+**********************************/
 
 func_11B07() {
 	self endon("killanimscript");
@@ -34,8 +34,8 @@ func_11AF8(param_00,param_01,param_02,param_03,param_04) {
 		}
 
 		var_10 = self.script;
-		if((var_10 == "cover_left" || var_10 == "cover_right") && isdefined(self.var_1491.var_4667) && self.var_1491.var_4667 == "lean") {
-			var_0F = self.var_473C.angles[1] - self.angles[1];
+		if((var_10 == "cover_left" || var_10 == "cover_right") && isdefined(self.a.var_4667) && self.a.var_4667 == "lean") {
+			var_0F = self.covernode.angles[1] - self.angles[1];
 		}
 
 		var_0C = (var_0E,var_0F,0);
@@ -70,7 +70,7 @@ func_11AF8(param_00,param_01,param_02,param_03,param_04) {
 		opcode::OP_EvalSelfFieldVariable = var_07[0];
 		opcode::OP_Return = var_07[1];
 		var_07 = undefined;
-		if(scripts\common\utility::actor_is3d()) {
+		if(scripts\engine\utility::actor_is3d()) {
 			opcode::OP_CallBuiltin0 = self.angles[2] * -1;
 			opcode::OP_CallBuiltin1 = opcode::OP_EvalSelfFieldVariable * cos(opcode::OP_CallBuiltin0) - opcode::OP_Return * sin(opcode::OP_CallBuiltin0);
 			opcode::OP_CallBuiltin2 = opcode::OP_EvalSelfFieldVariable * sin(opcode::OP_CallBuiltin0) + opcode::OP_Return * cos(opcode::OP_CallBuiltin0);
@@ -150,15 +150,15 @@ func_11AFB(param_00) {
 
 func_11AF9(param_00,param_01) {
 	if(scripts\anim\utility_common::recentlysawenemy()) {
-		var_02 = self.isnodeoccupied getshootatpos() - self.var_10C.origin;
+		var_02 = self.isnodeoccupied getshootatpos() - self.isnodeoccupied.origin;
 		var_03 = self lastknownpos(self.isnodeoccupied) + var_02;
 		return func_11AFC(var_03 - param_00,param_01);
 	}
 
 	var_04 = 0;
 	var_05 = 0;
-	if(isdefined(self.target_getindexoftarget) && isdefined(level.var_9D8E[self.var_205.type]) && distancesquared(self.origin,self.var_205.origin) < 16) {
-		var_05 = angleclamp180(self.var_205.angles[1] - self.angles[1]);
+	if(isdefined(self.target_getindexoftarget) && isdefined(level.var_9D8E[self.target_getindexoftarget.type]) && distancesquared(self.origin,self.target_getindexoftarget.origin) < 16) {
+		var_05 = angleclamp180(self.target_getindexoftarget.angles[1] - self.angles[1]);
 	}
 	else
 	{
@@ -236,20 +236,20 @@ func_11AFE(param_00,param_01,param_02,param_03,param_04,param_05,param_06) {
 	var_0A = 0;
 	var_0B = 0;
 	if(param_06 < 0) {
-		var_0A = param_06 \ self.setdevdvar * self.var_1491.var_1A4B;
+		var_0A = param_06 / self.setdevdvar * self.a.var_1A4B;
 		var_09 = 1;
 	}
 	else if(param_06 > 0) {
-		var_08 = param_06 \ self.setmatchdatadef * self.var_1491.var_1A4B;
+		var_08 = param_06 / self.setmatchdatadef * self.a.var_1A4B;
 		var_09 = 1;
 	}
 
 	if(param_05 < 0) {
-		var_0B = param_05 \ self.var_368 * self.var_1491.var_1A4B;
+		var_0B = param_05 / self.var_368 * self.a.var_1A4B;
 		var_09 = 1;
 	}
 	else if(param_05 > 0) {
-		var_07 = param_05 \ self.isbot * self.var_1491.var_1A4B;
+		var_07 = param_05 / self.isbot * self.a.var_1A4B;
 		var_09 = 1;
 	}
 
@@ -264,29 +264,29 @@ func_11AFE(param_00,param_01,param_02,param_03,param_04,param_05,param_06) {
 
 func_F641(param_00,param_01) {
 	if(!isdefined(param_01) || param_01 <= 0) {
-		self.var_1491.var_1A4B = param_00;
-		self.var_1491.var_1A4D = param_00;
-		self.var_1491.var_1A4C = param_00;
-		self.var_1491.var_1A4F = 0;
+		self.a.var_1A4B = param_00;
+		self.a.var_1A4D = param_00;
+		self.a.var_1A4C = param_00;
+		self.a.var_1A4F = 0;
 	}
 	else
 	{
-		if(!isdefined(self.var_1491.var_1A4B)) {
-			self.var_1491.var_1A4B = 0;
+		if(!isdefined(self.a.var_1A4B)) {
+			self.a.var_1A4B = 0;
 		}
 
-		self.var_1491.var_1A4D = self.var_1491.var_1A4B;
-		self.var_1491.var_1A4C = param_00;
-		self.var_1491.var_1A4F = int(param_01 * 20);
+		self.a.var_1A4D = self.a.var_1A4B;
+		self.a.var_1A4C = param_00;
+		self.a.var_1A4F = int(param_01 * 20);
 	}
 
-	self.var_1491.var_1A4E = 0;
+	self.a.var_1A4E = 0;
 }
 
 func_93E2() {
-	if(self.var_1491.var_1A4E < self.var_1491.var_1A4F) {
-		self.var_1491.var_1A4E++;
-		var_00 = 1 * self.var_1491.var_1A4E \ self.var_1491.var_1A4F;
-		self.var_1491.var_1A4B = self.var_1491.var_1A4D * 1 - var_00 + self.var_1491.var_1A4C * var_00;
+	if(self.a.var_1A4E < self.a.var_1A4F) {
+		self.a.var_1A4E++;
+		var_00 = 1 * self.a.var_1A4E / self.a.var_1A4F;
+		self.a.var_1A4B = self.a.var_1A4D * 1 - var_00 + self.a.var_1A4C * var_00;
 	}
 }

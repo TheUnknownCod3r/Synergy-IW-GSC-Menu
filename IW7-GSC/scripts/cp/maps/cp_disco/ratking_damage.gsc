@@ -1,8 +1,8 @@
-/***************************************************************
+/*******************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\maps\cp_disco\ratking_damage.gsc
-***************************************************************/
+ * Script: scripts\cp\maps\cp_disco\ratking_damage.gsc
+*******************************************************/
 
 cp_ratking_callbacks() {
 	level.agent_funcs["ratking"]["on_damaged"] = ::onratkingdamaged;
@@ -69,7 +69,7 @@ onratkingdamaged(param_00,param_01,param_02,param_03,param_04,param_05,param_06,
 		}
 
 		param_01 thread scripts\cp\utility::add_to_notify_queue("rat_king_damaged",self,param_01,param_05,param_02,param_08,param_04);
-		param_01 thread scripts/cp/agents/gametype_zombie::updatemaghits(getweaponbasename(param_05));
+		param_01 thread scripts\cp\agents\gametype_zombie::updatemaghits(getweaponbasename(param_05));
 		if(!isdefined(param_01.shotsontargetwithweapon[getweaponbasename(param_05)])) {
 			param_01.shotsontargetwithweapon[getweaponbasename(param_05)] = 1;
 		}
@@ -80,11 +80,11 @@ onratkingdamaged(param_00,param_01,param_02,param_03,param_04,param_05,param_06,
 	}
 
 	level thread scripts\cp\utility::add_to_notify_queue("rat_king_damaged",self,param_01,param_05,param_02,param_08,param_04);
-	scripts/cp/zombies/zombies_gamescore::update_agent_damage_performance(param_01,param_02,param_04);
+	scripts\cp\zombies\zombies_gamescore::update_agent_damage_performance(param_01,param_02,param_04);
 	scripts\cp\cp_agent_utils::process_damage_rewards(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08,param_09,var_0C);
 	rkprocessdamagefeedback(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08,param_09,var_0C);
 	scripts\cp\cp_agent_utils::store_attacker_info(param_01,param_02);
-	thread scripts/cp/agents/gametype_zombie::new_enemy_damage_check(param_01);
+	thread scripts\cp\agents\gametype_zombie::new_enemy_damage_check(param_01);
 	var_0C [[level.agent_funcs[var_0C.agent_type]["on_damaged_finished"]]](param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08,param_09,0,param_0A,param_0B);
 }
 
@@ -323,8 +323,8 @@ onratkingdamagefinished(param_00,param_01,param_02,param_03,param_04,param_05,pa
 }
 
 onratkingkilled(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08) {
-	scripts/cp/agents/gametype_zombie::process_kill_rewards(param_00,param_01,self,param_06,param_03,param_04);
-	scripts/cp/agents/gametype_zombie::process_assist_rewards(param_01);
+	scripts\cp\agents\gametype_zombie::process_kill_rewards(param_00,param_01,self,param_06,param_03,param_04);
+	scripts\cp\agents\gametype_zombie::process_assist_rewards(param_01);
 	scripts\cp\cp_weaponrank::try_give_weapon_xp_zombie_killed(param_01,param_04,param_06,param_03,self.agent_type);
 	if(isdefined(level.death_challenge_update_func)) {
 		[[level.death_challenge_update_func]](param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08);
@@ -379,7 +379,7 @@ weapondamageadjustments(param_00,param_01,param_02,param_03,param_04,param_05,pa
 
 		var_10 = var_0E && scripts\cp\utility::isheadshot(param_05,param_08,param_04,param_01);
 		var_11 = isexplosivedamage(param_04,param_08);
-		var_12 = !scripts/cp/agents/gametype_zombie::checkaltmodestatus(param_05) && param_01 scripts\cp\utility::coop_getweaponclass(param_05) == "weapon_sniper";
+		var_12 = !scripts\cp\agents\gametype_zombie::checkaltmodestatus(param_05) && param_01 scripts\cp\utility::coop_getweaponclass(param_05) == "weapon_sniper";
 		var_13 = param_01 scripts\cp\cp_weapon::get_weapon_level(param_05);
 		param_02 = param_02 * var_13;
 		if(var_12) {
@@ -406,7 +406,7 @@ returnkungfuweaponadjustments(param_00,param_01) {
 	}
 	else if(scripts\engine\utility::array_contains(level.kungfu_weapons[1],getweaponbasename(param_00))) {
 		param_01 = param_01 + 10;
-		var_02 = scripts/asm/asm::asm_getcurrentstate("ratking");
+		var_02 = scripts\asm\asm::asm_getcurrentstate("ratking");
 		if(isdefined(var_02) && var_02 == "staff_stomp" || var_02 == "staff_projectile") {
 			thread scripts\aitypes\ratking\behaviors::retrievestaffaftertime();
 		}

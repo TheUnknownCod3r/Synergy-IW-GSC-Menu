@@ -1,8 +1,8 @@
-/******************************************************************
+/**********************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\agents\ratking\ratking_tunedata.gsc
-******************************************************************/
+ * Script: scripts\mp\agents\ratking\ratking_tunedata.gsc
+**********************************************************/
 
 setuptunedata() {
 	if(!isdefined(level.agenttunedata)) {

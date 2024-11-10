@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2800.gsc
+ * Script: 2800.gsc
 ***************************************/
 
 init() {
@@ -48,7 +48,7 @@ func_7F6C() {
   while (!isdefined(level.objidpool))
   wait 0.05;
 
-  var_00 = "mp/CameraPositions";
+  var_00 = "mp\CameraPositions";
   var_01 = var_00 + "_" + level.gametype + ".csv";
   var_00 = var_00 + ".csv";
   level.cameramapobjs = [];

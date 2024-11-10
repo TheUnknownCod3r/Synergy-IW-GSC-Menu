@@ -1,8 +1,8 @@
-/**********************************************************
+/**************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\aitypes\dlc3\bt_action_api.gsc
-**********************************************************/
+ * Script: scripts\aitypes\dlc3\bt_action_api.gsc
+**************************************************/
 
 setupbtaction(param_00,param_01,param_02,param_03) {
 	var_04 = spawnstruct();

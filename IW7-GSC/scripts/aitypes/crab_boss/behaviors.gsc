@@ -1,8 +1,8 @@
-/***********************************************************
+/***************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\aitypes\crab_boss\behaviors.gsc
-***********************************************************/
+ * Script: scripts\aitypes\crab_boss\behaviors.gsc
+***************************************************/
 
 initbehaviors(param_00) {
 	setupbehaviorstates();
@@ -66,7 +66,7 @@ dosimpleaction(param_00,param_01) {
 }
 
 facepoint(param_00,param_01) {
-	var_02 = scripts\common\utility::getyawtospot(param_01);
+	var_02 = scripts\engine\utility::getyawtospot(param_01);
 	if(abs(var_02) < 16) {
 		return 0;
 	}
@@ -96,7 +96,7 @@ planscaledrouteto(param_00) {
 	var_06 = distance2d(param_00,self.origin);
 	var_07 = length2d(var_02) + length2d(var_03);
 	var_08 = var_06 - var_07;
-	var_09 = var_08 \ var_05;
+	var_09 = var_08 / var_05;
 	var_0A = ceil(var_09);
 	if(var_0A - var_09 < 0.5) {
 		var_09 = var_0A;
@@ -108,7 +108,7 @@ planscaledrouteto(param_00) {
 
 	var_0B = var_05 * var_09;
 	var_0C = var_07 + var_0B;
-	self.moveloopscale = var_06 \ var_0C;
+	self.moveloopscale = var_06 / var_0C;
 	self.currentmovedirindex = var_01;
 	self.movedircount = var_09;
 }
@@ -400,8 +400,8 @@ getnumofgasspawn() {
 
 getspawnposarray(param_00) {
 	var_01 = [];
-	var_02 = scripts\common\utility::getstructarray("death_wall_spawner","targetname");
-	var_02 = scripts\common\utility::array_randomize(var_02);
+	var_02 = scripts\engine\utility::getstructarray("death_wall_spawner","targetname");
+	var_02 = scripts\engine\utility::array_randomize(var_02);
 	for(var_03 = 0;var_03 < param_00;var_03++) {
 		var_04 = spawnstruct();
 		var_05 = var_02[var_03 % var_02.size];
@@ -453,7 +453,7 @@ getsubmergebombspawnindex() {
 
 	var_02 = scripts\cp\maps\cp_town\cp_town_crab_boss_fight::get_num_alive_agent_of_type("crab_mini");
 	var_03 = max(0,var_01 - var_02);
-	var_04 = scripts\common\utility::array_randomize([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24]);
+	var_04 = scripts\engine\utility::array_randomize([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24]);
 	var_05 = [];
 	for(var_06 = 0;var_06 < var_03;var_06++) {
 		var_05[var_06] = var_04[var_06];
@@ -511,7 +511,7 @@ gettoxicspawnpos(param_00) {
 	var_05 = [];
 	var_06 = [];
 	foreach(var_08 in level.players) {
-		if(scripts\cp\_laststand::player_in_laststand(var_08)) {
+		if(scripts\cp\cp_laststand::player_in_laststand(var_08)) {
 			continue;
 		}
 
@@ -528,9 +528,9 @@ gettoxicspawnpos(param_00) {
 	else
 	{
 		for(var_0C = 1;var_0C <= var_04;var_0C++) {
-			var_08 = scripts\common\utility::random(var_06);
+			var_08 = scripts\engine\utility::random(var_06);
 			var_0D = vectornormalize(var_08.origin - param_00.origin);
-			var_0E = scripts\common\utility::drop_to_ground(var_08.origin + var_0D * -1 * var_01,50,-2000);
+			var_0E = scripts\engine\utility::drop_to_ground(var_08.origin + var_0D * -1 * var_01,50,-2000);
 			var_0F = randomfloatrange(var_03 * -1,var_03);
 			var_10 = randomfloatrange(var_03 * -1,var_03);
 			var_0E = var_0E + (var_0F,var_10,0);
@@ -563,7 +563,7 @@ dopain(param_00) {
 }
 
 interruptcurrentstate() {
-	if(!scripts\common\utility::istrue(self.binterruptable)) {
+	if(!scripts\engine\utility::istrue(self.binterruptable)) {
 		return;
 	}
 

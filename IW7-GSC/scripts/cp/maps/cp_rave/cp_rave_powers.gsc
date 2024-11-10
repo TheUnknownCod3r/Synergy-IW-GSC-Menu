@@ -1,8 +1,8 @@
-/**************************************************************
+/******************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\maps\cp_rave\cp_rave_powers.gsc
-**************************************************************/
+ * Script: scripts\cp\maps\cp_rave\cp_rave_powers.gsc
+******************************************************/
 
 init() {
 	scripts\cp\powers\coop_powers::powersetupfunctions("power_transponder",::scripts\cp\powers\coop_powers::settransponder,::scripts\cp\powers\coop_powers::unsettransponder,undefined,"transponder_update","powers_transponder_used",undefined);
@@ -15,11 +15,11 @@ init() {
 	scripts\cp\powers\coop_powers::powersetupfunctions("power_portalGenerator",undefined,undefined,undefined,undefined,"powers_portalGenerator_used",undefined);
 	scripts\cp\powers\coop_powers::powersetupfunctions("power_c4",undefined,undefined,undefined,"c4_update",undefined,undefined);
 	scripts\cp\powers\coop_powers::powersetupfunctions("power_bait",::setbait,::unsetbait,undefined,undefined,undefined,undefined);
-	thread scripts/cp/powers/coop_repulsor::init();
-	thread scripts/cp/powers/coop_transponder::init();
-	thread scripts/cp/powers/coop_microturret::init();
-	thread scripts/cp/powers/coop_trip_mine::tripmine_init();
-	thread scripts/cp/powers/coop_blackholegrenade::blackholegrenadeinit();
+	thread scripts\cp\powers\coop_repulsor::init();
+	thread scripts\cp\powers\coop_transponder::init();
+	thread scripts\cp\powers\coop_microturret::init();
+	thread scripts\cp\powers\coop_trip_mine::tripmine_init();
+	thread scripts\cp\powers\coop_blackholegrenade::blackholegrenadeinit();
 }
 
 listen_for_bait_throw() {

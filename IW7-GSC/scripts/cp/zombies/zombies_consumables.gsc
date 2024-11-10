@@ -1,8 +1,8 @@
-/**************************************************************
+/******************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\zombies\zombies_consumables.gsc
-**************************************************************/
+ * Script: scripts\cp\zombies\zombies_consumables.gsc
+******************************************************/
 
 init_consumables() {
 	level.consumables = [];
@@ -72,7 +72,7 @@ parse_consumables_table() {
 	}
 	else
 	{
-		var_00 = "cp/loot/iw7_zombiefatefortune_loot_master.csv";
+		var_00 = "cp\loot\iw7_zombiefatefortune_loot_master.csv";
 	}
 
 	var_01 = 0;
@@ -371,7 +371,7 @@ consumable_activate_internal(param_00,param_01,param_02,param_03,param_04,param_
 
 		if(!isdefined(var_07) || isdefined(var_07) && var_07) {
 			consume_from_inventory(self,param_00);
-			self.consumables[param_00].var_11925++;
+			self.consumables[param_00].times_used++;
 			scripts\cp\zombies\zombie_analytics::log_fafcardused(1,param_00,level.wave_num,self);
 			scripts\cp\cp_merits::processmerit("mt_faf_uses");
 			thread scripts\cp\cp_vo::try_to_play_vo("wonder_consume","zmb_comment_vo","low",10,0,1,0,40);
@@ -488,7 +488,7 @@ consume_from_inventory(param_00,param_01) {
 	}
 	else
 	{
-		var_04 = "cp/loot/iw7_zombiefatefortune_loot_master.csv";
+		var_04 = "cp\loot\iw7_zombiefatefortune_loot_master.csv";
 	}
 
 	var_05 = tablelookup(var_04,1,param_01,3);
@@ -812,7 +812,7 @@ fnf_upgrade_weapon(param_00,param_01,param_02,param_03) {
 	var_04 = undefined;
 	param_00.isusingsupercard = 1;
 	var_05 = "pap" + param_00.pap[param_02].lvl;
-	var_06 = function_00E3(param_03);
+	var_06 = getweaponattachments(param_03);
 	var_07 = 0;
 	var_08 = param_03;
 	if(issubstr(param_03,"g18_z")) {
@@ -959,7 +959,7 @@ fnf_upgrade_weapon(param_00,param_01,param_02,param_03) {
 			var_05 = undefined;
 		}
 
-		var_10 = function_00E3(param_03);
+		var_10 = getweaponattachments(param_03);
 		if(issubstr(param_03,"g18_z")) {
 			foreach(var_0A in var_10) {
 				if(issubstr(var_0A,"akimbo")) {
@@ -971,7 +971,7 @@ fnf_upgrade_weapon(param_00,param_01,param_02,param_03) {
 
 	var_13 = param_00 scripts\cp\cp_weapon::return_weapon_name_with_like_attachments(param_03,var_05,var_06,undefined,var_04);
 	if(isdefined(var_13)) {
-		param_00.pap[param_02].var_B111++;
+		param_00.pap[param_02].lvl++;
 		param_00 notify("weapon_level_changed");
 		param_00.ephemeralweapon = getweaponbasename(var_13);
 		param_00 thread downgradeweaponaftertimeout(param_01,param_00,var_13,var_07);
@@ -1000,7 +1000,7 @@ downgradeweaponaftertimeout(param_00,param_01,param_02,param_03) {
 	var_08 = param_01.pap[var_06].lvl - 2;
 	switch(var_06) {
 		case "venomx":
-			param_01.pap[var_06].var_B111--;
+			param_01.pap[var_06].lvl--;
 			if(param_01.pap[var_06].lvl == 1) {
 				param_01.base_weapon = 1;
 				param_02 = "iw7_venomx_zm";
@@ -1013,7 +1013,7 @@ downgradeweaponaftertimeout(param_00,param_01,param_02,param_03) {
 			break;
 
 		case "katana":
-			param_01.pap[var_06].var_B111--;
+			param_01.pap[var_06].lvl--;
 			if(param_01.pap[var_06].lvl == 1) {
 				param_01.base_weapon = 1;
 				param_02 = "iw7_katana_zm";
@@ -1026,7 +1026,7 @@ downgradeweaponaftertimeout(param_00,param_01,param_02,param_03) {
 			break;
 
 		case "nunchucks":
-			param_01.pap[var_06].var_B111--;
+			param_01.pap[var_06].lvl--;
 			if(param_01.pap[var_06].lvl == 1) {
 				param_01.base_weapon = 1;
 				param_02 = "iw7_nunchucks_zm";
@@ -1039,7 +1039,7 @@ downgradeweaponaftertimeout(param_00,param_01,param_02,param_03) {
 			break;
 
 		case "two":
-			param_01.pap[var_06].var_B111--;
+			param_01.pap[var_06].lvl--;
 			if(param_01.pap[var_06].lvl == 1) {
 				param_01.base_weapon = 1;
 				param_02 = "iw7_two_headed_axe_mp";
@@ -1052,7 +1052,7 @@ downgradeweaponaftertimeout(param_00,param_01,param_02,param_03) {
 			break;
 
 		case "machete":
-			param_01.pap[var_06].var_B111--;
+			param_01.pap[var_06].lvl--;
 			if(param_01.pap[var_06].lvl == 1) {
 				param_01.base_weapon = 1;
 				param_02 = "iw7_machete_mp";
@@ -1065,7 +1065,7 @@ downgradeweaponaftertimeout(param_00,param_01,param_02,param_03) {
 			break;
 
 		case "golf":
-			param_01.pap[var_06].var_B111--;
+			param_01.pap[var_06].lvl--;
 			if(param_01.pap[var_06].lvl == 1) {
 				param_01.base_weapon = 1;
 				param_02 = "iw7_golf_club_mp";
@@ -1078,7 +1078,7 @@ downgradeweaponaftertimeout(param_00,param_01,param_02,param_03) {
 			break;
 
 		case "spiked":
-			param_01.pap[var_06].var_B111--;
+			param_01.pap[var_06].lvl--;
 			if(param_01.pap[var_06].lvl == 1) {
 				param_01.base_weapon = 1;
 				param_02 = "iw7_spiked_bat_mp";
@@ -1237,7 +1237,7 @@ downgradeweapon(param_00,param_01,param_02,param_03,param_04,param_05) {
 			break;
 	}
 
-	var_08 = function_00E3(param_01);
+	var_08 = getweaponattachments(param_01);
 	if(scripts\engine\utility::istrue(param_05)) {
 		var_08 = scripts\engine\utility::array_add(var_08,"akimbo");
 	}
@@ -2006,7 +2006,7 @@ look_at_and_outline_enemies(param_00) {
 			var_04 = anglestoforward(var_02);
 			var_05 = var_03 + var_04 * 500;
 			var_06 = scripts\common\trace::create_contents(1,0,0,0,0,0,0);
-			var_07 = function_0287(var_03,var_05,var_06,self,0,"physicsquery_closest");
+			var_07 = physics_raycast(var_03,var_05,var_06,self,0,"physicsquery_closest");
 			if(var_07.size <= 0) {
 				scripts\engine\utility::waitframe();
 				continue;
@@ -2149,7 +2149,7 @@ deal_damage_to_zombies_entering_the_link(param_00,param_01) {
 playfirechainsfx(param_00,param_01,param_02) {
 	var_03 = [];
 	foreach(var_05 in level.players) {
-		var_03[var_03.size] = function_02DF(level._effect["fire_chains"],self,param_01,param_00,param_01,var_05);
+		var_03[var_03.size] = playfxontagsbetweenclients(level._effect["fire_chains"],self,param_01,param_00,param_01,var_05);
 	}
 
 	self.fx_array_fire_chains = var_03;
@@ -2256,7 +2256,7 @@ consumable_activate_internal_irish(param_00,param_01,param_02,param_03,param_04,
 		self.consumables[level.random_consumable_chosen.name].on = 1;
 		self.consumables[level.random_consumable_chosen.name].times_used = 0;
 		self.consumables[level.random_consumable_chosen.name].usednotify = param_04;
-		level.random_consumable_chosen.ref = int(tablelookup("cp/loot/iw7_zombiefatefortune_loot_master.csv",1,level.random_consumable_chosen.name,0));
+		level.random_consumable_chosen.ref = int(tablelookup("cp\loot\iw7_zombiefatefortune_loot_master.csv",1,level.random_consumable_chosen.name,0));
 		self setclientomnvar("zm_ui_irish_luck",level.random_consumable_chosen.ref);
 		thread clear_omnvar("zm_ui_irish_luck");
 		self setclientomnvar("zm_fate_card_used",param_05);
@@ -2277,7 +2277,7 @@ consumable_activate_internal_irish(param_00,param_01,param_02,param_03,param_04,
 		self.consumables[param_00].on = 0;
 		if(!isdefined(var_07) || isdefined(var_07) && var_07) {
 			consume_from_inventory(self,param_00);
-			self.consumables[param_00].var_11925++;
+			self.consumables[param_00].times_used++;
 			scripts\cp\zombies\zombie_analytics::log_fafcardused(1,param_00,level.wave_num,self);
 			scripts\cp\cp_merits::processmerit("mt_faf_uses");
 			thread scripts\cp\cp_vo::try_to_play_vo("wonder_consume","zmb_comment_vo","low",10,0,1,0,40);
@@ -2768,7 +2768,7 @@ cangive_ammo() {
 	var_00 = scripts\cp\utility::getvalidtakeweapon();
 	var_01 = self getweaponammoclip(var_00);
 	var_02 = weaponclipsize(var_00);
-	var_03 = function_0249(var_00);
+	var_03 = weaponmaxammo(var_00);
 	var_04 = self getweaponammostock(var_00);
 	if(var_04 < var_03 || var_01 < var_02) {
 		return 1;
@@ -2784,7 +2784,7 @@ give_ammo_to_player_through_crate() {
 			continue;
 		}
 
-		if(function_024C(var_02) == "riotshield") {
+		if(weapontype(var_02) == "riotshield") {
 			continue;
 		}
 
@@ -2804,7 +2804,7 @@ give_ammo_to_player_through_crate() {
 
 adjust_clip_ammo_from_stock(param_00,param_01,param_02,param_03,param_04) {
 	if(!scripts\engine\utility::istrue(param_04)) {
-		var_05 = function_0249(param_01);
+		var_05 = weaponmaxammo(param_01);
 		var_06 = param_00 getweaponammostock(param_01);
 		var_07 = var_05 - var_06;
 		var_08 = scripts\engine\utility::ter_op(var_07 >= param_03,var_06 + param_03,var_05);
@@ -3341,7 +3341,7 @@ _meth_834A(param_00,param_01,param_02,param_03) {
 			var_15 = undefined;
 		}
 
-		var_16 = function_00E3(var_06);
+		var_16 = getweaponattachments(var_06);
 		var_17 = scripts\cp\cp_weapon::return_weapon_name_with_like_attachments(var_06,var_15,var_16,undefined,var_08);
 		var_17 = scripts\cp\utility::_giveweapon(var_17,undefined,undefined,1);
 		self.pap2_card_weapon = var_17;
@@ -3372,8 +3372,8 @@ _meth_834A(param_00,param_01,param_02,param_03) {
 			}
 		}
 
-		var_1E = function_0249(var_1B);
-		var_1F = param_00 scripts/cp/perks/prestige::prestige_getminammo();
+		var_1E = weaponmaxammo(var_1B);
+		var_1F = param_00 scripts\cp\perks\prestige::prestige_getminammo();
 		var_20 = int(var_1F * var_1E);
 		var_21 = param_00 getweaponammostock(var_1B);
 		if(var_21 < var_20) {
@@ -3593,12 +3593,12 @@ adjustmovespeed(param_00,param_01,param_02,param_03) {
 		case "walk":
 		case "sprint":
 		case "run":
-			param_00 scripts/asm/asm_bb::bb_requestmovetype("slow_walk");
+			param_00 scripts\asm\asm_bb::bb_requestmovetype("slow_walk");
 			break;
 	}
 
 	param_02 scripts\engine\utility::waittill_any_3(param_01 + "_timeup","last_stand","disconnect");
-	param_00 scripts/asm/asm_bb::bb_requestmovetype(var_04);
+	param_00 scripts\asm\asm_bb::bb_requestmovetype(var_04);
 }
 
 removeslowmoveonlaststand(param_00) {
@@ -3687,7 +3687,7 @@ playlifelinkfx(param_00,param_01,param_02) {
 	var_03 = [];
 	playfxontag(level._effect["life_link_target"],param_00,param_01);
 	foreach(var_05 in level.players) {
-		var_03[var_03.size] = function_02DF(level._effect["life_link"],self,param_01,param_00,param_01,var_05);
+		var_03[var_03.size] = playfxontagsbetweenclients(level._effect["life_link"],self,param_01,param_00,param_01,var_05);
 	}
 
 	self playloopsound("zmb_fnf_lifelink_heal_lp");
@@ -3855,7 +3855,7 @@ use_anywhere_but_here(param_00) {
 	foreach(var_03 in level.active_player_respawn_locs) {
 		var_04 = scripts\cp\zombies\zombies_spawning::get_spawn_volumes_player_is_in(0,1,self);
 		foreach(var_06 in var_04) {
-			if(function_010F(var_03.origin,var_06)) {
+			if(ispointinvolume(var_03.origin,var_06)) {
 				var_01 = scripts\engine\utility::array_remove(var_01,var_03);
 			}
 		}
@@ -3883,7 +3883,7 @@ use_anywhere_but_here(param_00) {
 		}
 	}
 
-	scripts/cp/powers/coop_phaseshift::doscreenflash();
+	scripts\cp\powers\coop_phaseshift::doscreenflash();
 	scripts\cp\cp_interaction::refresh_interaction();
 	scripts\cp\powers\coop_powers::power_enablepower();
 	self getrigindexfromarchetyperef();
@@ -3900,7 +3900,7 @@ jumptoanywherebutherespawns(param_00) {
 	level.players[0] endon("death");
 	level.players[0] endon("last_stand");
 	foreach(var_02 in level.active_player_respawn_locs) {
-		level.players[0] scripts/cp/powers/coop_phaseshift::doscreenflash();
+		level.players[0] scripts\cp\powers\coop_phaseshift::doscreenflash();
 		level.players[0] scripts\cp\cp_interaction::refresh_interaction();
 		level.players[0] scripts\cp\powers\coop_powers::power_enablepower();
 		level.players[0] getrigindexfromarchetyperef();
@@ -3986,7 +3986,7 @@ write_consumable_used(param_00,param_01) {
 }
 
 get_consumable_loot_id(param_00) {
-	return tablelookup("cp/loot/iw7_zombiefatefortune_loot_master.csv",1,param_00,0);
+	return tablelookup("cp\loot\iw7_zombiefatefortune_loot_master.csv",1,param_00,0);
 }
 
 set_consumable(param_00) {

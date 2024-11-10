@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2636.gsc
+ * Script: 2636.gsc
 ***************************************/
 
 init() {
@@ -52,11 +52,11 @@ missilespawned(var_00, var_01) {
   var_15 moveto(var_11, var_14, 0.1, 0.95);
   var_15.owner = var_1.owner;
   var_15 setscriptmoverkillcam("rocket");
-  var_16 = var_15.owner scripts/cp/utility::_launchgrenade("blackholegun_indicator_zm", self.origin, (0, 0, 0));
+  var_16 = var_15.owner scripts\cp\utility::_launchgrenade("blackholegun_indicator_zm", self.origin, (0, 0, 0));
   var_16.weapon_name = "blackholegun_indicator_zm";
   var_16 linkto(var_15);
   var_15 thread monitorprojectilearrive(var_14, self, var_16, var_02);
-  var_1.owner thread scripts/cp/powers/coop_blackholegrenade::grabclosestzombies(var_15, 1);
+  var_1.owner thread scripts\cp\powers\coop_blackholegrenade::grabclosestzombies(var_15, 1);
   var_15 setscriptablepartstate("projectile", "on", 0);
   waittillframeend;
   var_01 delete();
@@ -132,14 +132,14 @@ watchforincidentalplayerdamage(var_00) {
   var_02 = 5898.24;
 
   for (;;) {
-  foreach (var_04 in scripts/cp/cp_agent_utils::getaliveagentsofteam("axis")) {
+  foreach (var_04 in scripts\cp\cp_agent_utils::getaliveagentsofteam("axis")) {
   if (!isdefined(var_04))
   continue;
 
-  if (!scripts/cp/utility::isreallyalive(var_04))
+  if (!scripts\cp\utility::isreallyalive(var_04))
   continue;
 
-  if (!scripts/cp/powers/coop_phaseshift::areentitiesinphase(self, var_04))
+  if (!scripts\cp\powers\coop_phaseshift::areentitiesinphase(self, var_04))
   continue;
 
   if (!level.friendlyfire && var_04 != self.owner && var_4.team != self.owner.team)
@@ -174,10 +174,10 @@ watchfordirectplayerdamage(var_00, var_01) {
   if (!isplayer(var_03) && !isagent(var_03))
   continue;
 
-  if (!scripts/cp/utility::isreallyalive(var_03))
+  if (!scripts\cp\utility::isreallyalive(var_03))
   continue;
 
-  if (!scripts/cp/powers/coop_phaseshift::areentitiesinphase(self, var_03))
+  if (!scripts\cp\powers\coop_phaseshift::areentitiesinphase(self, var_03))
   continue;
 
   var_04 = var_03;

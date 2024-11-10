@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3408.gsc
-****************************/
+ * Script: 3408.gsc
+************************/
 
 try_collect_from_lost_and_found(param_00,param_01) {
 	if(scripts\engine\utility::istrue(param_01.have_things_in_lost_and_found) && can_collect_lost_and_found_items(param_01) && isdefined(param_01.lost_and_found_spot) && param_01.lost_and_found_spot == param_00) {
@@ -73,7 +73,7 @@ store_player_status(param_00,param_01) {
 		param_01 setclientomnvar("zom_crafted_weapon",0);
 	}
 
-	param_00.copy_all_perks = param_01 scripts/cp/zombies/zombies_perk_machines::get_data_for_all_perks();
+	param_00.copy_all_perks = param_01 scripts\cp\zombies\zombies_perk_machines::get_data_for_all_perks();
 	param_00.copy_all_powers = param_01.pre_laststand_powers;
 	param_00.copy_special_ammo_type = param_01.special_ammo_type;
 	if(param_01.copy_fullweaponlist.size > 2) {

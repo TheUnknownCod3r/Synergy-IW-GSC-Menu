@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2897.gsc
+ * Script: 2897.gsc
 ***************************************/
 
 func_B8CB() {
@@ -28,15 +28,15 @@ func_E3C6(var_00, var_01, var_02, var_03, var_04) {
 
   if (var_01) {
   if (isdefined(var_02)) {
-  if (isdefined(level.func_B8D2.func_ABFA[scripts/sp/endmission::func_7F6B(var_02)].func_D845)) {
-  var_05 = scripts\engine\utility::array_add(level.func_B8D2.func_ABFA[scripts/sp/endmission::func_7F6B(var_02)].func_D845, var_02);
+  if (isdefined(level.func_B8D2.func_ABFA[scripts\sp\endmission::func_7F6B(var_02)].func_D845)) {
+  var_05 = scripts\engine\utility::array_add(level.func_B8D2.func_ABFA[scripts\sp\endmission::func_7F6B(var_02)].func_D845, var_02);
   _preloadzones(var_05);
   }
   else
   _preloadzones(var_02);
   }
   else
-  level thread scripts/sp/utility::func_BF97();
+  level thread scripts\sp\utility::func_BF97();
   }
 
   level waittill("jackal_taxi_complete");
@@ -46,13 +46,13 @@ func_E3C6(var_00, var_01, var_02, var_03, var_04) {
   _setsaveddvar("bg_cinematicAboveUI", "0");
   _setsaveddvar("bg_cinematicFullScreen", "1");
   _setsaveddvar("bg_cinematicCanPause", "1");
-  var_06 = level.func_B8D2.func_ABFA[scripts/sp/endmission::func_7F6B(var_02)].func_2AD3;
+  var_06 = level.func_B8D2.func_ABFA[scripts\sp\endmission::func_7F6B(var_02)].func_2AD3;
   setdvar("last_transition_movie", var_06);
   _cinematicingame(var_06, 0, 1);
   _changelevel(var_02);
   }
   else
-  scripts/sp/utility::func_BF95();
+  scripts\sp\utility::func_BF95();
   }
 }
 
@@ -71,7 +71,7 @@ func_E3C7(var_00) {
   switch (var_00) {
   case "player":
   var_03 = func_0EFB::func_798E("ret_jackal_spawner_1", "targetname", var_01);
-  var_04 = var_03 scripts/sp/utility::func_10808();
+  var_04 = var_03 scripts\sp\utility::func_10808();
   var_04 vehicle_teleport(level.func_FD6E.func_E35D.func_A0C9.origin + (0, 0, -138), level.func_FD6E.func_E35D.func_A0C9.angles);
   var_04 func_0BDC::func_6B4C("none");
   var_04 func_0BDC::func_F43D("player");
@@ -175,7 +175,7 @@ func_973A(var_00, var_01) {
   break;
   case "runway_light":
   if (!scripts\engine\utility::fxexists("vfx_glow_red_light_400_strobe"))
-  scripts\engine\utility::add_fx("vfx_glow_red_light_400_strobe", "vfx/misc/lights/vfx_glow_red_light_400_strobe.vfx");
+  scripts\engine\utility::add_fx("vfx_glow_red_light_400_strobe", "vfx\misc\lights\vfx_glow_red_light_400_strobe.vfx");
 
   playfxontag(scripts\engine\utility::getfx("vfx_glow_red_light_400_strobe"), var_06, "light_on_LOD0");
   break;
@@ -262,7 +262,7 @@ func_973A(var_00, var_01) {
 
   var_28 = func_0EFB::func_7CC1("ret_jackal_bay_1", "script_noteworthy", var_01);
   var_29 = func_0EFB::func_7994("ret_jackal_bay_1", "script_noteworthy", var_01);
-  var_30 = scripts/sp/utility::func_22A2(var_28, var_29);
+  var_30 = scripts\sp\utility::func_22A2(var_28, var_29);
 
   foreach (var_32 in var_30) {
   if (isdefined(var_32.func_EE52)) {

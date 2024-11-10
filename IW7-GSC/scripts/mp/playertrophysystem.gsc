@@ -1,19 +1,19 @@
-/*****************************************************
+/*********************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\playertrophysystem.gsc
-*****************************************************/
+ * Script: scripts\mp\playertrophysystem.gsc
+*********************************************/
 
 func_D446() {
 	self endon("death");
 	self endon("disconnect");
 	self endon("player_trophy_unset");
 	if(!isdefined(level._effect["pts_detonate"])) {
-		level._effect["pts_detonate"] = loadfx("vfx/iw7/_requests/mp/vfx_generic_equipment_exp.vfx");
+		level._effect["pts_detonate"] = loadfx("vfx\iw7\_requests\mp\vfx_generic_equipment_exp.vfx");
 	}
 
 	if(!isdefined(level._effect["pts_drone_drop"])) {
-		level._effect["pts_drone_drop"] = loadfx("vfx/iw7/_requests/mp/vfx_pts_drone_drop.vfx");
+		level._effect["pts_drone_drop"] = loadfx("vfx\iw7\_requests\mp\vfx_pts_drone_drop.vfx");
 	}
 
 	for(;;) {
@@ -84,7 +84,7 @@ func_D449() {
 				continue;
 			}
 
-			var_07 = function_0287(var_01,var_05.origin,var_00,[self,var_05],0,"physicsquery_closest");
+			var_07 = physics_raycast(var_01,var_05.origin,var_00,[self,var_05],0,"physicsquery_closest");
 			if(isdefined(var_07) && var_07.size > 0) {
 				continue;
 			}

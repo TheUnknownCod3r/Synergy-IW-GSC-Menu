@@ -1,8 +1,8 @@
-/*******************************************************
+/***********************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\anim\traverse\ladder_up.gsc
-*******************************************************/
+ * Script: scripts\anim\traverse\ladder_up.gsc
+***********************************************/
 
 main() {
 	if(isdefined(self.type) && self.type == "dog") {
@@ -27,8 +27,8 @@ main() {
 	var_05 = self _meth_8145();
 	var_06 = var_05.origin - var_04 + (0,0,1);
 	var_07 = getmovedelta(var_00,0,1);
-	var_08 = var_07[2] * var_03 \ getanimlength(var_00);
-	var_09 = var_06[2] - self.origin[2] \ var_08;
+	var_08 = var_07[2] * var_03 / getanimlength(var_00);
+	var_09 = var_06[2] - self.origin[2] / var_08;
 	if(var_09 > 0) {
 		self.allowpain = 1;
 		scripts\anim\notetracks::donotetracksfortime(var_09,"climbanim");
@@ -37,6 +37,6 @@ main() {
 	}
 
 	self _meth_83C4("gravity");
-	self.var_1491.movement = "run";
-	self.var_1491.pose = "crouch";
+	self.a.movement = "run";
+	self.a.pose = "crouch";
 }

@@ -1,8 +1,8 @@
-/***********************************************
+/***************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\anim\saw\crouch.gsc
-***********************************************/
+ * Script: scripts\anim\saw\crouch.gsc
+***************************************/
 
 main() {
 	if(getdvarint("ai_iw7",0) == 1) {

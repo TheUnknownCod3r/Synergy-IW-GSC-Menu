@@ -1,8 +1,8 @@
-/*************************************************************
+/*****************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\killstreaks\_deployablebox.gsc
-*************************************************************/
+ * Script: scripts\mp\killstreaks\_deployablebox.gsc
+*****************************************************/
 
 init() {
 	if(!isdefined(level.boxsettings)) {
@@ -26,7 +26,7 @@ watchdeployablemarkerplacement(param_00,param_01,param_02,param_03) {
 		return;
 	}
 
-	if(!scripts\mp\_utility::isreallyalive(self)) {
+	if(!scripts\mp\utility::isreallyalive(self)) {
 		param_02 delete();
 	}
 
@@ -74,13 +74,13 @@ markeractivate(param_00,param_01,param_02) {
 	}
 
 	var_06.deathoverridecallback = ::override_box_moving_platform_death;
-	var_05 thread scripts\mp\_movers::handle_moving_platforms(var_06);
+	var_05 thread scripts\mp\movers::handle_moving_platforms(var_06);
 	var_05.moving_platform = var_06.linkparent;
 	var_05 setotherent(var_03);
 	wait(0.05);
 	var_05 thread [[param_02]]();
 	self delete();
-	if(isdefined(var_05) && var_05 scripts\mp\_utility::touchingbadtrigger()) {
+	if(isdefined(var_05) && var_05 scripts\mp\utility::touchingbadtrigger()) {
 		var_05 notify("death");
 	}
 }
@@ -281,11 +281,11 @@ box_addboxforplayer(param_00) {
 	}
 
 	box_disableplayeruse(param_00);
-	scripts\mp\_entityheadicons::setheadicon(param_00,"",(0,0,0));
+	scripts\mp\entityheadicons::setheadicon(param_00,"",(0,0,0));
 }
 
 box_seticon(param_00,param_01,param_02) {
-	scripts\mp\_entityheadicons::setheadicon(param_00,scripts\mp\_utility::getkillstreakoverheadicon(param_01),(0,0,param_02),14,14,undefined,undefined,undefined,undefined,undefined,0);
+	scripts\mp\entityheadicons::setheadicon(param_00,scripts\mp\utility::getkillstreakoverheadicon(param_01),(0,0,param_02),14,14,undefined,undefined,undefined,undefined,undefined,0);
 }
 
 box_enableplayeruse(param_00) {
@@ -307,7 +307,7 @@ box_disableplayeruse(param_00) {
 box_setinactive() {
 	self makeunusable();
 	self.isusable = 0;
-	scripts\mp\_entityheadicons::setheadicon("none","",(0,0,0));
+	scripts\mp\entityheadicons::setheadicon("none","",(0,0,0));
 	if(isdefined(self.objidfriendly)) {
 		scripts\mp\objidpoolmanager::returnminimapid(self.objidfriendly);
 	}
@@ -315,25 +315,25 @@ box_setinactive() {
 
 box_handledamage() {
 	var_00 = level.boxsettings[self.boxtype];
-	scripts\mp\_damage::monitordamage(var_00.maxhealth,var_00.damagefeedback,::box_handledeathdamage,::box_modifydamage,1);
+	scripts\mp\damage::monitordamage(var_00.maxhealth,var_00.damagefeedback,::box_handledeathdamage,::box_modifydamage,1);
 }
 
 box_modifydamage(param_00,param_01,param_02,param_03,param_04) {
 	var_05 = param_03;
 	var_06 = level.boxsettings[self.boxtype];
 	if(var_06.allowmeleedamage) {
-		var_05 = scripts\mp\_damage::handlemeleedamage(param_01,param_02,var_05);
+		var_05 = scripts\mp\damage::handlemeleedamage(param_01,param_02,var_05);
 	}
 
-	var_05 = scripts\mp\_damage::handlemissiledamage(param_01,param_02,var_05);
-	var_05 = scripts\mp\_damage::handlegrenadedamage(param_01,param_02,var_05);
-	var_05 = scripts\mp\_damage::handleapdamage(param_01,param_02,var_05);
+	var_05 = scripts\mp\damage::handlemissiledamage(param_01,param_02,var_05);
+	var_05 = scripts\mp\damage::handlegrenadedamage(param_01,param_02,var_05);
+	var_05 = scripts\mp\damage::handleapdamage(param_01,param_02,var_05);
 	return var_05;
 }
 
 box_handledeathdamage(param_00,param_01,param_02,param_03) {
 	var_04 = level.boxsettings[self.boxtype];
-	var_05 = scripts\mp\_damage::onkillstreakkilled("deployable_ammo",param_00,param_01,param_02,param_03,var_04.scorepopup,var_04.vodestroyed);
+	var_05 = scripts\mp\damage::onkillstreakkilled("deployable_ammo",param_00,param_01,param_02,param_03,var_04.scorepopup,var_04.vodestroyed);
 	if(var_05) {
 		param_00 notify("destroyed_equipment");
 	}
@@ -390,11 +390,11 @@ boxthink(param_00) {
 			}
 
 			if(isdefined(self.triggerportableradarping) && param_00 != self.triggerportableradarping) {
-				self.triggerportableradarping thread scripts\mp\_utility::giveunifiedpoints("support",undefined,var_01.usexp);
+				self.triggerportableradarping thread scripts\mp\utility::giveunifiedpoints("support",undefined,var_01.usexp);
 			}
 
 			if(isdefined(self.usesremaining)) {
-				self.var_130DC--;
+				self.usesremaining--;
 				if(self.usesremaining == 0) {
 					box_leave();
 					break;
@@ -404,14 +404,14 @@ boxthink(param_00) {
 			if(isdefined(var_01.canuseotherboxes) && var_01.canuseotherboxes) {
 				foreach(var_04 in level.deployable_box[var_01.streakname]) {
 					var_04 box_disableplayeruse(self);
-					var_04 scripts\mp\_entityheadicons::setheadicon(self,"",(0,0,0));
+					var_04 scripts\mp\entityheadicons::setheadicon(self,"",(0,0,0));
 					var_04 thread doubledip(self);
 				}
 
 				continue;
 			}
 
-			scripts\mp\_entityheadicons::setheadicon(param_00,"",(0,0,0));
+			scripts\mp\entityheadicons::setheadicon(param_00,"",(0,0,0));
 			box_disableplayeruse(param_00);
 			thread doubledip(param_00);
 		}
@@ -442,7 +442,7 @@ boxcapturethink(param_00) {
 	level endon("game_ended");
 	while(isdefined(self)) {
 		self waittill("trigger",var_01);
-		if(isdefined(level.boxsettings[self.boxtype].nousekillstreak) && level.boxsettings[self.boxtype].nousekillstreak && scripts\mp\_utility::iskillstreakweapon(param_00 getcurrentweapon())) {
+		if(isdefined(level.boxsettings[self.boxtype].nousekillstreak) && level.boxsettings[self.boxtype].nousekillstreak && scripts\mp\utility::iskillstreakweapon(param_00 getcurrentweapon())) {
 			continue;
 		}
 
@@ -461,9 +461,9 @@ box_timeout() {
 	level endon("game_ended");
 	var_00 = level.boxsettings[self.boxtype];
 	var_01 = var_00.lifespan;
-	scripts\mp\_hostmigration::waitlongdurationwithhostmigrationpause(var_01);
+	scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(var_01);
 	if(isdefined(var_00.vogone)) {
-		self.triggerportableradarping thread scripts\mp\_utility::leaderdialogonplayer(var_00.vogone);
+		self.triggerportableradarping thread scripts\mp\utility::leaderdialogonplayer(var_00.vogone);
 	}
 
 	box_leave();
@@ -502,7 +502,7 @@ box_modelteamupdater(param_00) {
 }
 
 useholdthink(param_00,param_01) {
-	scripts\mp\_movers::script_mover_link_to_use_object(param_00);
+	scripts\mp\movers::script_mover_link_to_use_object(param_00);
 	param_00 scripts\engine\utility::allow_weapon(0);
 	param_00.boxparams = spawnstruct();
 	param_00.boxparams.curprogress = 0;
@@ -520,7 +520,7 @@ useholdthink(param_00,param_01) {
 	var_02 = useholdthinkloop(param_00);
 	if(isalive(param_00)) {
 		param_00 scripts\engine\utility::allow_weapon(1);
-		scripts\mp\_movers::script_mover_unlink_from_use_object(param_00);
+		scripts\mp\movers::script_mover_unlink_from_use_object(param_00);
 	}
 
 	if(!isdefined(self)) {
@@ -535,8 +535,8 @@ useholdthink(param_00,param_01) {
 useholdthinkloop(param_00) {
 	var_01 = param_00.boxparams;
 	while(param_00 isplayerusingbox(var_01)) {
-		if(!param_00 scripts\mp\_movers::script_mover_use_can_link(self)) {
-			param_00 scripts\mp\_gameobjects::updateuiprogress(var_01,0);
+		if(!param_00 scripts\mp\movers::script_mover_use_can_link(self)) {
+			param_00 scripts\mp\gameobjects::updateuiprogress(var_01,0);
 			return 0;
 		}
 
@@ -549,16 +549,16 @@ useholdthinkloop(param_00) {
 			var_01.userate = 1;
 		}
 
-		param_00 scripts\mp\_gameobjects::updateuiprogress(var_01,1);
+		param_00 scripts\mp\gameobjects::updateuiprogress(var_01,1);
 		if(var_01.curprogress >= var_01.usetime) {
-			param_00 scripts\mp\_gameobjects::updateuiprogress(var_01,0);
-			return scripts\mp\_utility::isreallyalive(param_00);
+			param_00 scripts\mp\gameobjects::updateuiprogress(var_01,0);
+			return scripts\mp\utility::isreallyalive(param_00);
 		}
 
 		wait(0.05);
 	}
 
-	param_00 scripts\mp\_gameobjects::updateuiprogress(var_01,0);
+	param_00 scripts\mp\gameobjects::updateuiprogress(var_01,0);
 	return 0;
 }
 
@@ -567,7 +567,7 @@ disablewhenjuggernaut() {
 	self endon("death");
 	for(;;) {
 		level waittill("juggernaut_equipped",var_00);
-		scripts\mp\_entityheadicons::setheadicon(var_00,"",(0,0,0));
+		scripts\mp\entityheadicons::setheadicon(var_00,"",(0,0,0));
 		box_disableplayeruse(var_00);
 		thread doubledip(var_00);
 	}
@@ -587,7 +587,7 @@ createbombsquadmodel(param_00) {
 		var_02 = spawn("script_model",self.origin);
 		var_02.angles = self.angles;
 		var_02 hide();
-		var_02 thread scripts\mp\_weapons::bombsquadvisibilityupdater(self.triggerportableradarping);
+		var_02 thread scripts\mp\weapons::bombsquadvisibilityupdater(self.triggerportableradarping);
 		var_02 setmodel(var_01.modelbombsquad);
 		var_02 linkto(self);
 		var_02 setcontents(0);
@@ -601,7 +601,7 @@ createbombsquadmodel(param_00) {
 }
 
 isplayerusingbox(param_00) {
-	return !level.gameended && isdefined(param_00) && scripts\mp\_utility::isreallyalive(self) && self usebuttonpressed() && !self isonladder() && !self meleebuttonpressed() && param_00.curprogress < param_00.usetime && !isdefined(self.teleporting) || !self.teleporting;
+	return !level.gameended && isdefined(param_00) && scripts\mp\utility::isreallyalive(self) && self usebuttonpressed() && !self isonladder() && !self meleebuttonpressed() && param_00.curprogress < param_00.usetime && !isdefined(self.teleporting) || !self.teleporting;
 }
 
 isgrenadedeployable(param_00) {

@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\2936.gsc
-****************************/
+ * Script: 2936.gsc
+************************/
 
 unlockspecialist() {
 	if(getdvarint("mis_cheat") == 0) {
@@ -69,8 +69,8 @@ init() {
 	scripts\sp\_utility::func_16EB("press_use_console",&"SPECIALIST_MODE_USE_CONSOLE",::func_86C8);
 	scripts\sp\_utility::func_16EB("specialist_loadout",&"SPECIALIST_MODE_LOADOUT");
 	level.var_10DB5 = 5;
-	level._effect["vfx_blood_impact"] = loadfx("vfx/code/impacts/flesh_hit_knife.vfx");
-	level._effect["vfx_gun_sparks"] = loadfx("vfx/misc/specialist_mode/gun_sparks.vfx");
+	level._effect["vfx_blood_impact"] = loadfx("vfx\code\impacts\flesh_hit_knife.vfx");
+	level._effect["vfx_gun_sparks"] = loadfx("vfx\misc\specialist_mode\gun_sparks.vfx");
 	level.var_10964 = spawnstruct();
 	level.var_10964.allowhints = 1;
 	level.var_10964.var_98EC = 0;
@@ -199,8 +199,8 @@ func_4D05() {
 
 func_4CFA(param_00,param_01) {
 	var_02 = param_00 - level.player.origin;
-	var_03 = scripts/sp/math::func_EB9B(anglestoleft(level.player.angles),var_02);
-	var_04 = scripts/sp/math::func_EB9B(anglestoright(level.player.angles),var_02);
+	var_03 = scripts\sp\math::func_EB9B(anglestoleft(level.player.angles),var_02);
+	var_04 = scripts\sp\math::func_EB9B(anglestoright(level.player.angles),var_02);
 	var_05 = max(var_03,var_04);
 	if(var_05 <= 1.35 && param_01) {
 		return "chest";
@@ -726,7 +726,7 @@ func_86CE(param_00) {
 		var_0C = distance(self.origin,var_0B);
 		var_0D = vectortoangles(var_0B - self.origin);
 		var_0D = anglestoforward(var_0D);
-		var_0E = scripts/sp/math::func_C097(0,var_04,var_0C);
+		var_0E = scripts\sp\math::func_C097(0,var_04,var_0C);
 		self.origin = self.origin + var_0D * var_07;
 		var_0F = randomfloatrange(-11,-9);
 		self.angles = self.angles + (var_0F,var_0F,var_0F);
@@ -1013,7 +1013,7 @@ func_4CFB(param_00,param_01,param_02) {
 	}
 
 	var_03 = scripts\engine\utility::within_fov(level.player geteye(),level.player.angles,param_02,0.866025);
-	var_04 = level.player scripts/sp/math::func_9C86(param_02);
+	var_04 = level.player scripts\sp\math::func_9C86(param_02);
 	if((var_03 && var_04) || !var_03 && !var_04) {
 		var_05 = [-55,100];
 		var_06 = [30,430];
@@ -2839,7 +2839,7 @@ nanoshot_pickup() {
 		var_01 = 1;
 	}
 
-	var_02 = scripts/sp/loadout::func_7C27(scripts\sp\_utility::func_7BD6());
+	var_02 = scripts\sp\loadout::func_7C27(scripts\sp\_utility::func_7BD6());
 	var_03 = scripts\sp\_utility::func_7BD7();
 	level.player giveweapon("nanoshot");
 	level.player setweaponammostock("nanoshot",1);

@@ -1,12 +1,12 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3557.gsc
-****************************/
+ * Script: 3557.gsc
+************************/
 
 func_5223() {
-	level._effect["deployableCover_explode"] = loadfx("vfx/iw7/core/equipment/coverwall/vfx_coverwall_foam_expand_mp.vfx");
-	level._effect["deployableCover_explode_mist"] = loadfx("vfx/iw7/core/equipment/coverwall/vfx_coverwall_mist_hang_mp.vfx");
+	level._effect["deployableCover_explode"] = loadfx("vfx\iw7\core\equipment\coverwall\vfx_coverwall_foam_expand_mp.vfx");
+	level._effect["deployableCover_explode_mist"] = loadfx("vfx\iw7\core\equipment\coverwall\vfx_coverwall_mist_hang_mp.vfx");
 }
 
 func_5224(param_00) {
@@ -24,7 +24,7 @@ func_10842(param_00) {
 		var_01 func_5285();
 	}
 
-	scripts\mp\_utility::printgameaction("deployable cover spawned",param_00.triggerportableradarping);
+	scripts\mp\utility::printgameaction("deployable cover spawned",param_00.triggerportableradarping);
 	var_02 = anglestoforward(param_00.angles);
 	var_02 = rotatepointaroundvector(anglestoup(param_00.angles),var_02,90);
 	var_03 = anglestoup(param_00.angles);
@@ -76,7 +76,7 @@ func_5285(param_00) {
 	}
 
 	self _meth_8514(param_00);
-	scripts\mp\_utility::printgameaction("deployable cover removed",self.triggerportableradarping);
+	scripts\mp\utility::printgameaction("deployable cover removed",self.triggerportableradarping);
 }
 
 func_139DF(param_00) {
@@ -84,7 +84,7 @@ func_139DF(param_00) {
 	param_00 endon("disconnect");
 	self waittill("coverwall_expand_finish");
 	wait(0.25);
-	thread scripts\mp\_weapons::outlineequipmentforowner(self,param_00);
+	thread scripts\mp\weapons::outlineequipmentforowner(self,param_00);
 	self waittill("coverwall_contract_start");
 	self notify("death");
 }
@@ -95,7 +95,7 @@ func_139DE() {
 	for(;;) {
 		self waittill("damage",var_00,var_01,var_02,var_03);
 		self.health = 9999;
-		var_01 scripts\mp\_damagefeedback::updatedamagefeedback("hitequip");
+		var_01 scripts\mp\damagefeedback::updatedamagefeedback("hitequip");
 	}
 }
 
@@ -129,6 +129,6 @@ func_40EC() {
 
 placementfailed(param_00) {
 	self notify("powers_deployableCover_used",0);
-	scripts\mp\_utility::placeequipmentfailed(param_00.weapon_name,1,param_00.origin);
+	scripts\mp\utility::placeequipmentfailed(param_00.weapon_name,1,param_00.origin);
 	param_00 delete();
 }

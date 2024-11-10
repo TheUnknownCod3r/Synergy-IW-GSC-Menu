@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\2575.gsc
-****************************/
+ * Script: 2575.gsc
+************************/
 
 func_9898(param_00) {
 	self.acceptablemeleefraction = 0.95;
@@ -31,15 +31,15 @@ canmovefrompointtopoint(param_00,param_01) {
 }
 
 ismeleevalid(param_00,param_01) {
-	if(scripts/asm/asm_bb::bb_ismissingaleg()) {
+	if(scripts\asm\asm_bb::bb_ismissingaleg()) {
 		return 0;
 	}
 
-	if(!scripts/aitypes/melee::ismeleevalid_common(param_00,param_01)) {
+	if(!scripts\aitypes\melee::ismeleevalid_common(param_00,param_01)) {
 		return 0;
 	}
 
-	var_02 = scripts/aitypes/melee::gettargetchargepos(param_00);
+	var_02 = scripts\aitypes\melee::gettargetchargepos(param_00);
 	if(!isdefined(var_02)) {
 		return 0;
 	}

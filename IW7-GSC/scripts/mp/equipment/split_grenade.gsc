@@ -1,8 +1,8 @@
-/**********************************************************
+/**************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\equipment\split_grenade.gsc
-**********************************************************/
+ * Script: scripts\mp\equipment\split_grenade.gsc
+**************************************************/
 
 init() {}
 
@@ -13,8 +13,8 @@ func_10A54(param_00) {
 	param_00 thread func_40FA(undefined,self);
 	param_00.var_B79B = [];
 	for(var_01 = 0;var_01 < 2;var_01++) {
-		var_02 = scripts\mp\_utility::_launchgrenade("split_grenade_mini_mp",param_00.origin,(0,0,0),100,1);
-		scripts\mp\_utility::_meth_85C6(var_02,"split_grenade_mp");
+		var_02 = scripts\mp\utility::_launchgrenade("split_grenade_mini_mp",param_00.origin,(0,0,0),100,1);
+		scripts\mp\utility::_meth_85C6(var_02,"split_grenade_mp");
 		var_02.exploding = 1;
 		var_02.parentinflictor = param_00 getentitynumber();
 		var_02 linkto(param_00);
@@ -43,7 +43,7 @@ func_13B68(param_00) {
 
 func_C576(param_00,param_01) {
 	if(param_00.weapon_name == "split_grenade_mp") {
-		scripts\mp\_weapons::grenadestuckto(param_00,param_01,1);
+		scripts\mp\weapons::grenadestuckto(param_00,param_01,1);
 	}
 
 	thread func_0118(param_00);
@@ -72,7 +72,7 @@ func_C55D(param_00,param_01) {
 		var_0E show();
 		var_0E unlink();
 		var_0E forcehidegrenadehudwarning(0);
-		var_0E = scripts\mp\_utility::_launchgrenade("split_grenade_mini_mp",param_00.origin,var_0C,100,1,var_0E);
+		var_0E = scripts\mp\utility::_launchgrenade("split_grenade_mini_mp",param_00.origin,var_0C,100,1,var_0E);
 		var_0E setscriptablepartstate("trail","active",0);
 		thread func_13A84(var_0E,var_0D);
 		thread func_13B68(var_0E);

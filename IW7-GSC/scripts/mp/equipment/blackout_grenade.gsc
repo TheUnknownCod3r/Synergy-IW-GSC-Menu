@@ -1,8 +1,8 @@
-/*************************************************************
+/*****************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\equipment\blackout_grenade.gsc
-*************************************************************/
+ * Script: scripts\mp\equipment\blackout_grenade.gsc
+*****************************************************/
 
 func_10D6F(param_00,param_01,param_02) {
 	if(!func_13151(param_00,param_01)) {
@@ -152,7 +152,7 @@ func_10D6F(param_00,param_01,param_02) {
 	var_04 setshader("black",640,480);
 	var_03.var_C7FD = var_04;
 	var_03 thread func_B9BB();
-	param_00 scripts\mp\_damage::combatrecordtacticalstat("power_blackoutGrenade");
+	param_00 scripts\mp\damage::combatrecordtacticalstat("power_blackoutGrenade");
 }
 
 func_6310(param_00,param_01,param_02) {
@@ -175,11 +175,11 @@ func_6310(param_00,param_01,param_02) {
 			}
 
 			if(isdefined(var_03)) {
-				scripts\mp\_gamescore::untrackdebuffassist(var_03,var_04,"blackout_grenade_mp");
+				scripts\mp\gamescore::untrackdebuffassist(var_03,var_04,"blackout_grenade_mp");
 			}
 
-			var_04 scripts\mp\_weapons::func_F7FF();
-			var_04 scripts\mp\_utility::func_8EC4();
+			var_04 scripts\mp\weapons::func_F7FF();
+			var_04 scripts\mp\utility::func_8EC4();
 		}
 		else
 		{
@@ -213,10 +213,10 @@ func_B9BB() {
 	var_03 = self.durtotal;
 	var_00 shellshock("blackout_grenade_mp",1);
 	var_00 playlocalsound(var_02);
-	var_00 scripts\mp\_weapons::func_F7EE();
-	var_00 scripts\mp\_utility::func_8EC6();
+	var_00 scripts\mp\weapons::func_F7EE();
+	var_00 scripts\mp\utility::func_8EC6();
 	if(isdefined(self.var_4F)) {
-		scripts\mp\_gamescore::func_11ACE(var_01,var_00,"blackout_grenade_mp");
+		scripts\mp\gamescore::func_11ACE(var_01,var_00,"blackout_grenade_mp");
 	}
 
 	thread monitorvictimdeathdisconnect();
@@ -352,11 +352,11 @@ func_13151(param_00,param_01) {
 		return 0;
 	}
 
-	if(!scripts\mp\_utility::isreallyalive(self)) {
+	if(!scripts\mp\utility::isreallyalive(self)) {
 		return 0;
 	}
 
-	if(scripts\mp\_utility::_hasperk("specialty_stun_resistance")) {
+	if(scripts\mp\utility::_hasperk("specialty_stun_resistance")) {
 		scripts\mp\perks\_perkfunctions::applystunresistence(param_00,self);
 		return 0;
 	}

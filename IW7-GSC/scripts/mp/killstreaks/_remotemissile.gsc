@@ -1,8 +1,8 @@
-/*************************************************************
+/*****************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\killstreaks\_remotemissile.gsc
-*************************************************************/
+ * Script: scripts\mp\killstreaks\_remotemissile.gsc
+*****************************************************/
 
 init() {
 	level.var_B897 = 14000;
@@ -10,15 +10,15 @@ init() {
 	level.var_B896 = 1500;
 	level.rockets = [];
 	scripts\mp\killstreaks\_killstreaks::registerkillstreak("predator_missile",::tryusepredatormissile);
-	level.remotekillstreaks["explode"] = loadfx("vfx/core/expl/aerial_explosion");
+	level.remotekillstreaks["explode"] = loadfx("vfx\core\expl\aerial_explosion");
 }
 
 tryusepredatormissile(param_00,param_01) {
-	scripts\mp\_utility::setusingremote("remotemissile");
+	scripts\mp\utility::setusingremote("remotemissile");
 	var_02 = scripts\mp\killstreaks\_killstreaks::initridekillstreak();
 	if(var_02 != "success") {
 		if(var_02 != "disconnect") {
-			scripts\mp\_utility::clearusingremote();
+			scripts\mp\utility::clearusingremote();
 		}
 
 		return 0;
@@ -37,7 +37,7 @@ func_7E01(param_00) {
 	}
 
 	foreach(var_06 in level.players) {
-		if(!scripts\mp\_utility::isreallyalive(var_06)) {
+		if(!scripts\mp\utility::isreallyalive(var_06)) {
 			continue;
 		}
 
@@ -108,7 +108,7 @@ _fire(param_00,param_01) {
 		var_08 = var_06.var_1155F.origin;
 		var_09 = vectornormalize(var_07 - var_08);
 		var_07 = var_09 * 14000 + var_08;
-		var_0A = scripts\mp\_utility::_magicbullet("remotemissile_projectile_mp",var_07,var_08,param_01);
+		var_0A = scripts\mp\utility::_magicbullet("remotemissile_projectile_mp",var_07,var_08,param_01);
 	}
 	else
 	{
@@ -118,11 +118,11 @@ _fire(param_00,param_01) {
 		var_0E = anglestoforward(param_01.angles);
 		var_07 = param_01.origin + var_0B + var_0E * var_0C * -1;
 		var_08 = param_01.origin + var_0E * var_0D;
-		var_0A = scripts\mp\_utility::_magicbullet("remotemissile_projectile_mp",var_07,var_08,param_01);
+		var_0A = scripts\mp\utility::_magicbullet("remotemissile_projectile_mp",var_07,var_08,param_01);
 	}
 
 	if(!isdefined(var_0A)) {
-		param_01 scripts\mp\_utility::clearusingremote();
+		param_01 scripts\mp\utility::clearusingremote();
 		return;
 	}
 
@@ -156,17 +156,17 @@ missileeyes(param_00,param_01) {
 		param_00 cameralinkto(param_01,"tag_origin");
 		param_00 controlslinkto(param_01);
 		if(getdvarint("camera_thirdPerson")) {
-			param_00 scripts\mp\_utility::setthirdpersondof(0);
+			param_00 scripts\mp\utility::setthirdpersondof(0);
 		}
 
 		param_01 waittill("death");
 		param_00 thermalvisionoff();
 		if(isdefined(param_01)) {
-			param_00 scripts\mp\_matchdata::logkillstreakevent("predator_missile",param_01.origin);
+			param_00 scripts\mp\matchdata::logkillstreakevent("predator_missile",param_01.origin);
 		}
 
 		param_00 controlsunlink();
-		param_00 scripts\mp\_utility::freezecontrolswrapper(1);
+		param_00 scripts\mp\utility::freezecontrolswrapper(1);
 		if(!level.gameended) {
 			param_00 setclientomnvar("ui_predator_missile",2);
 		}
@@ -175,12 +175,12 @@ missileeyes(param_00,param_01) {
 		param_00 thermalvisionfofoverlayoff();
 		param_00 cameraunlink();
 		if(getdvarint("camera_thirdPerson")) {
-			param_00 scripts\mp\_utility::setthirdpersondof(1);
+			param_00 scripts\mp\utility::setthirdpersondof(1);
 		}
 	}
 
 	param_00 setclientomnvar("ui_predator_missile",0);
-	param_00 scripts\mp\_utility::clearusingremote();
+	param_00 scripts\mp\utility::clearusingremote();
 }
 
 delayedfofoverlay() {
@@ -200,11 +200,11 @@ player_cleanuponteamchange(param_00) {
 		self controlsunlink();
 		self cameraunlink();
 		if(getdvarint("camera_thirdPerson")) {
-			scripts\mp\_utility::setthirdpersondof(1);
+			scripts\mp\utility::setthirdpersondof(1);
 		}
 	}
 
-	scripts\mp\_utility::clearusingremote();
+	scripts\mp\utility::clearusingremote();
 	level.remotemissileinprogress = undefined;
 }
 
@@ -224,6 +224,6 @@ player_cleanupongameended(param_00) {
 	self controlsunlink();
 	self cameraunlink();
 	if(getdvarint("camera_thirdPerson")) {
-		scripts\mp\_utility::setthirdpersondof(1);
+		scripts\mp\utility::setthirdpersondof(1);
 	}
 }

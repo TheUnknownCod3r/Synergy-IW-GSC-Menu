@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\3099.gsc
+ * Script: 3099.gsc
 ***************************************/
 
 func_13CC4() {
@@ -41,8 +41,8 @@ func_FE56() {
   wait 0.05;
 
   while (func_1A3F()) {
-  if (isdefined(self._blackboard.func_D9BA)) {
-  var_00 = self [[self._blackboard.func_D9BA]](self._blackboard.func_E1AD);
+  if (isdefined(self.var_1198.func_D9BA)) {
+  var_00 = self [[self.var_1198.func_D9BA]](self.var_1198.func_E1AD);
 
   if (!isdefined(var_00) || var_00 == 1)
   func_10208();
@@ -81,26 +81,26 @@ func_FE60() {
 func_6D54() {
   var_00 = func_7912();
   func_9561(var_00, 20000);
-  var_01 = floor(self._blackboard.shootparams.time / (self.func_13C87 * 1000)) + 1;
+  var_01 = floor(self.var_1198.shootparams.time / (self.func_13C87 * 1000)) + 1;
 
   if (func_65F1(var_00))
-  self._blackboard.func_6D83 = "jackal_gatling_fire_at_plr";
+  self.var_1198.func_6D83 = "jackal_gatling_fire_at_plr";
   else
-  self._blackboard.func_6D83 = "jackal_gatling_fire";
+  self.var_1198.func_6D83 = "jackal_gatling_fire";
 
   if (scripts\engine\utility::flag_exist("jackal_shooting")) {
   if (!scripts\engine\utility::flag("jackal_shooting"))
-  thread scripts/sp/utility::play_loop_sound_on_tag(self._blackboard.func_6D83, "tag_spotlight", 1, 1, "jackal_gatling_release");
+  thread scripts\sp\utility::play_loop_sound_on_tag(self.var_1198.func_6D83, "tag_spotlight", 1, 1, "jackal_gatling_release");
   }
   else
-  thread scripts/sp/utility::play_loop_sound_on_tag(self._blackboard.func_6D83, "tag_spotlight", 1, 1, "jackal_gatling_release");
+  thread scripts\sp\utility::play_loop_sound_on_tag(self.var_1198.func_6D83, "tag_spotlight", 1, 1, "jackal_gatling_release");
 
   var_02 = 0;
 
-  if (!scripts/sp/utility::func_65DF("jackal_firing"))
-  scripts/sp/utility::func_65E0("jackal_firing");
+  if (!scripts\sp\utility::func_65DF("jackal_firing"))
+  scripts\sp\utility::func_65E0("jackal_firing");
 
-  scripts/sp/utility::func_65E1("jackal_firing");
+  scripts\sp\utility::func_65E1("jackal_firing");
 
   while (var_02 < var_01) {
   func_6D2F();
@@ -108,8 +108,8 @@ func_6D54() {
   wait(self.func_13C87);
   }
 
-  scripts/sp/utility::func_65DD("jackal_firing");
-  self notify("stop sound" + self._blackboard.func_6D83);
+  scripts\sp\utility::func_65DD("jackal_firing");
+  self notify("stop sound" + self.var_1198.func_6D83);
 }
 
 func_65F1(var_00) {
@@ -124,35 +124,35 @@ func_6D55() {
   self endon("death");
 
   if (func_65F1(func_7912()))
-  self._blackboard.func_6D83 = "jackal_gatling_fire_at_plr";
+  self.var_1198.func_6D83 = "jackal_gatling_fire_at_plr";
   else
-  self._blackboard.func_6D83 = "jackal_gatling_fire";
+  self.var_1198.func_6D83 = "jackal_gatling_fire";
 
   var_00 = 0;
 
   if (scripts\engine\utility::flag_exist("jackal_shooting")) {
   if (!scripts\engine\utility::flag("jackal_shooting"))
-  thread scripts/sp/utility::play_loop_sound_on_tag(self._blackboard.func_6D83, "tag_spotlight", 1, 1, "jackal_gatling_release");
+  thread scripts\sp\utility::play_loop_sound_on_tag(self.var_1198.func_6D83, "tag_spotlight", 1, 1, "jackal_gatling_release");
   }
   else
-  thread scripts/sp/utility::play_loop_sound_on_tag(self._blackboard.func_6D83, "tag_spotlight", 1, 1, "jackal_gatling_release");
+  thread scripts\sp\utility::play_loop_sound_on_tag(self.var_1198.func_6D83, "tag_spotlight", 1, 1, "jackal_gatling_release");
 
-  if (!scripts/sp/utility::func_65DF("jackal_firing"))
-  scripts/sp/utility::func_65E0("jackal_firing");
+  if (!scripts\sp\utility::func_65DF("jackal_firing"))
+  scripts\sp\utility::func_65E0("jackal_firing");
 
-  scripts/sp/utility::func_65E1("jackal_firing");
+  scripts\sp\utility::func_65E1("jackal_firing");
 
   for (;;) {
   func_6D2F();
   wait(self.func_13C87);
   }
 
-  scripts/sp/utility::func_65DD("jackal_firing");
+  scripts\sp\utility::func_65DD("jackal_firing");
 }
 
 func_79CF() {
-  if (isdefined(self._blackboard.shootparams) && isdefined(self._blackboard.shootparams.func_0148))
-  var_00 = self._blackboard.shootparams.func_0148;
+  if (isdefined(self.var_1198.shootparams) && isdefined(self.var_1198.shootparams.func_0148))
+  var_00 = self.var_1198.shootparams.func_0148;
   else
   var_00 = 1.0;
 
@@ -163,7 +163,7 @@ func_77C8() {
   if (isdefined(self.func_154D))
   return self.func_154D;
 
-  return self._blackboard.accuracy;
+  return self.var_1198.accuracy;
 }
 
 func_10208() {
@@ -185,7 +185,7 @@ func_AAE2() {
 }
 
 func_36D1(var_00) {
-  var_01 = scripts/sp/math::func_C097(0, 25000.0, distance(self.origin, var_0.origin));
+  var_01 = scripts\sp\math::func_C097(0, 25000.0, distance(self.origin, var_0.origin));
   var_02 = func_36D2();
   var_02 = var_02 * var_01;
   var_02 = var_02 * (1 - func_77C8());
@@ -223,11 +223,11 @@ func_36D6(var_00) {
 }
 
 func_7912() {
-  if (isdefined(self._blackboard.func_11577))
-  return self._blackboard.func_11577;
+  if (isdefined(self.var_1198.func_11577))
+  return self.var_1198.func_11577;
 
-  if (isdefined(self._blackboard.func_E1AD))
-  return self._blackboard.func_E1AD;
+  if (isdefined(self.var_1198.func_E1AD))
+  return self.var_1198.func_E1AD;
   else if (isdefined(self.enemy))
   return self.enemy;
 }
@@ -236,20 +236,20 @@ func_9561(var_00, var_01) {
   if (isdefined(var_00)) {
   var_02 = func_36CD(var_00, var_01);
   var_03 = func_7BC8(var_00, var_02);
-  self._blackboard.shootparams.func_C36B = var_03 - var_0.origin;
-  self._blackboard.shootparams.func_C36C = var_02 - var_0.origin;
+  self.var_1198.shootparams.func_C36B = var_03 - var_0.origin;
+  self.var_1198.shootparams.func_C36C = var_02 - var_0.origin;
   } else {
-  self._blackboard.shootparams.func_C36B = (0, 0, 0);
-  self._blackboard.shootparams.func_C36C = (0, 0, 0);
+  self.var_1198.shootparams.func_C36B = (0, 0, 0);
+  self.var_1198.shootparams.func_C36C = (0, 0, 0);
   }
 
-  self._blackboard.shootparams.starttime = gettime();
-  self._blackboard.shootparams.time = randomintrange(500, 1500);
-  self._blackboard.shootparams.func_32AF = 1;
+  self.var_1198.shootparams.starttime = gettime();
+  self.var_1198.shootparams.time = randomintrange(500, 1500);
+  self.var_1198.shootparams.func_32AF = 1;
 }
 
 func_9760() {
-  self._blackboard.shootparams.func_32AF = 0;
+  self.var_1198.shootparams.func_32AF = 0;
 }
 
 func_AAE3(var_00, var_01, var_02, var_03) {
@@ -298,18 +298,18 @@ func_7BC8(var_00, var_01) {
 }
 
 func_36D3(var_00) {
-  var_01 = gettime() - self._blackboard.shootparams.starttime;
-  var_02 = clamp(var_01 / self._blackboard.shootparams.time, 0.0, 1.0);
+  var_01 = gettime() - self.var_1198.shootparams.starttime;
+  var_02 = clamp(var_01 / self.var_1198.shootparams.time, 0.0, 1.0);
   var_03 = 0.5;
 
   if (isdefined(self.func_734A))
   var_03 = self.func_734A;
 
   var_02 = max(var_02, var_03);
-  self._blackboard.shootparams.func_0148 = var_02;
+  self.var_1198.shootparams.func_0148 = var_02;
   var_04 = func_36D1(var_00);
   var_04 = var_04 * (1 - var_02);
-  var_05 = vectorlerp(self._blackboard.shootparams.func_C36B, self._blackboard.shootparams.func_C36C, var_02);
+  var_05 = vectorlerp(self.var_1198.shootparams.func_C36B, self.var_1198.shootparams.func_C36C, var_02);
   return var_05;
 }
 
@@ -320,20 +320,20 @@ func_36D8(var_00) {
 }
 
 func_7AAC() {
-  if (self._blackboard.shootparams.func_32AF)
+  if (self.var_1198.shootparams.func_32AF)
   var_00 = func_79CF();
   else
   var_00 = 1;
 
   var_01 = func_77C8();
-  return int(scripts/sp/math::func_AB6F(3.5, 6.9, var_01 * var_00));
+  return int(scripts\sp\math::func_AB6F(3.5, 6.9, var_01 * var_00));
 }
 
 func_6D2F() {
   var_00 = func_7912();
 
   if (isdefined(var_00)) {
-  if (self._blackboard.shootparams.func_32AF)
+  if (self.var_1198.shootparams.func_32AF)
   var_01 = func_36D3(var_00);
   else
   var_01 = func_36D6(var_00);
@@ -502,9 +502,9 @@ func_12D9A() {
   if (!isdefined(self.bt))
   return;
 
-  self.bt.func_A533 = 1;
+  self.var_3135.func_A533 = 1;
   wait 2;
-  self.bt.func_A533 = 0;
+  self.var_3135.func_A533 = 0;
 }
 
 func_6EA1(var_00, var_01) {
@@ -536,8 +536,8 @@ func_6EA1(var_00, var_01) {
   var_11 = vectornormalize(self.origin - self.func_C3CF);
   self.angles = _axistoangles(var_11, var_10, var_09);
   var_00 = var_00 * (1 - var_03);
-  var_05 = scripts/sp/math::func_C097(var_07, var_08, var_06);
-  var_05 = scripts/sp/math::func_6A8E(var_04, 0, var_05);
+  var_05 = scripts\sp\math::func_C097(var_07, var_08, var_06);
+  var_05 = scripts\sp\math::func_6A8E(var_04, 0, var_05);
   var_06 = var_06 + var_05;
   self.func_C3CF = self.origin;
   var_02 = var_02 - 0.05;
@@ -552,7 +552,7 @@ func_13C2B() {
   self endon("terminate_ai_threads");
 
   for (;;) {
-  switch (self._blackboard.func_6D77) {
+  switch (self.var_1198.func_6D77) {
   case "dont_shoot":
   func_594D();
   break;
@@ -591,8 +591,8 @@ func_3702(var_00) {
   var_01 = var_01 + func_DCE6(var_03, 0.0, 10000, 1.0, 0.0);
   var_03 = 0.0;
 
-  if (isdefined(self._blackboard.func_E1AD) && self._blackboard.func_E1AD == var_00) {
-  if (!var_02 || !isdefined(var_0.bt) || isdefined(var_0.bt.func_DB05) && var_0.bt.func_DB05 != self)
+  if (isdefined(self.var_1198.func_E1AD) && self.var_1198.func_E1AD == var_00) {
+  if (!var_02 || !isdefined(var_0.bt) || isdefined(var_0.var_3135.func_DB05) && var_0.var_3135.func_DB05 != self)
   var_01 = var_01 + 1.5;
   }
 
@@ -626,20 +626,20 @@ func_12E3A() {
   var_01 = undefined;
   return;
   }
-  else if (isalive(self._blackboard.func_11577))
-  var_01 = self._blackboard.func_11577;
-  else if (isdefined(self._blackboard.func_90EE))
-  var_01 = self._blackboard.func_90EE;
-  else if (isdefined(self._blackboard.func_7002))
-  var_01 = self._blackboard.func_7002;
-  else if (isdefined(self._blackboard.func_2534))
-  var_01 = self._blackboard.func_2534;
+  else if (isalive(self.var_1198.func_11577))
+  var_01 = self.var_1198.func_11577;
+  else if (isdefined(self.var_1198.func_90EE))
+  var_01 = self.var_1198.func_90EE;
+  else if (isdefined(self.var_1198.func_7002))
+  var_01 = self.var_1198.func_7002;
+  else if (isdefined(self.var_1198.func_2534))
+  var_01 = self.var_1198.func_2534;
   else
   {
   var_02 = self _meth_8493() == "follow";
   var_03 = vehicle_getarray();
 
-  if (isdefined(self._blackboard.func_2520) && self._blackboard.func_2520) {
+  if (isdefined(self.var_1198.func_2520) && self.var_1198.func_2520) {
   var_03 = scripts\engine\utility::array_combine(var_03, _getaiarray());
 
   if (self.team == "axis" && !scripts\engine\utility::player_is_in_jackal())
@@ -662,7 +662,7 @@ func_12E3A() {
   var_06 = var_5.func_C1DB;
 
   if (var_06 > 3 && isdefined(self.enemy) && self.enemy == var_05) {
-  self._blackboard.func_E1AD = undefined;
+  self.var_1198.func_E1AD = undefined;
   var_5.func_C1DB--;
   continue;
   }
@@ -688,15 +688,15 @@ func_12E3A() {
   }
   }
 
-  var_12 = self._blackboard.func_E1AD;
+  var_12 = self.var_1198.func_E1AD;
   var_13 = 0;
 
   if (!isdefined(var_01)) {
   self _meth_846A();
-  self._blackboard.func_E1AD = undefined;
+  self.var_1198.func_E1AD = undefined;
   var_13 = 1;
   }
-  else if (!isdefined(self._blackboard.func_E1AD) || var_01 != self._blackboard.func_E1AD) {
+  else if (!isdefined(self.var_1198.func_E1AD) || var_01 != self.var_1198.func_E1AD) {
   if (!isdefined(var_1.func_C1DB))
   var_1.func_C1DB = 0;
 
@@ -704,7 +704,7 @@ func_12E3A() {
   self.func_6577 = gettime();
   var_13 = 1;
   self _meth_846A(var_01);
-  self._blackboard.func_E1AD = var_01;
+  self.var_1198.func_E1AD = var_01;
   }
 
   if (isdefined(var_12) && var_13)
@@ -726,10 +726,10 @@ func_7941(var_00) {
 func_7AF9(var_00) {
   var_01 = vectornormalize(self.spaceship_vel);
   var_02 = vectornormalize(var_0.spaceship_vel);
-  var_03 = scripts/sp/math::func_C097(40, 360, length(var_0.spaceship_vel));
+  var_03 = scripts\sp\math::func_C097(40, 360, length(var_0.spaceship_vel));
   var_04 = vectordot(var_01, var_02);
-  var_05 = scripts/sp/math::func_6A8E(1, abs(var_04), var_03);
-  return scripts/sp/math::func_6A8E(0.5, 1.0, var_05);
+  var_05 = scripts\sp\math::func_6A8E(1, abs(var_04), var_03);
+  return scripts\sp\math::func_6A8E(0.5, 1.0, var_05);
 }
 
 func_7845(var_00) {
@@ -743,12 +743,12 @@ func_7CFC(var_00) {
 }
 
 func_12D7B() {
-  var_00 = self._blackboard.func_E1AD;
+  var_00 = self.var_1198.func_E1AD;
 
   if (isalive(var_00)) {
   var_01 = isdefined(var_0.vehicletype) && _isaircraft(var_00);
   var_02 = var_01 && isdefined(var_0.owner) && isplayer(var_0.owner);
-  var_03 = self._blackboard.func_2894;
+  var_03 = self.var_1198.func_2894;
 
   if (!var_01)
   var_03 = var_03 * func_7941(var_00);
@@ -763,14 +763,14 @@ func_12D7B() {
   }
 
   var_03 = var_03 * func_7CFC(var_00);
-  self._blackboard.accuracy = var_03;
+  self.var_1198.accuracy = var_03;
   }
   else
   self _meth_846A();
 }
 
 func_9CC7() {
-  var_00 = scripts/sp/vehicle::func_9FEF();
+  var_00 = scripts\sp\vehicle::func_9FEF();
 
   if (!var_00)
   return 0;
@@ -808,7 +808,7 @@ func_12E1A() {
   if (var_4.team == self.team)
   continue;
 
-  if (isdefined(var_4.bt) && isdefined(var_4.bt.func_DB05) && var_4.bt.func_DB05 == self)
+  if (isdefined(var_4.bt) && isdefined(var_4.var_3135.func_DB05) && var_4.var_3135.func_DB05 == self)
   continue;
 
   var_05 = -1;
@@ -825,44 +825,44 @@ func_12E1A() {
   }
 
   if (isdefined(var_02) && var_01 > 0.5) {
-  self.bt.func_DB05 = var_02;
-  self.bt.func_DB06 = var_01;
+  self.var_3135.func_DB05 = var_02;
+  self.var_3135.func_DB06 = var_01;
   } else {
-  self.bt.func_DB05 = undefined;
-  self.bt.func_DB06 = 0;
+  self.var_3135.func_DB05 = undefined;
+  self.var_3135.func_DB06 = 0;
   }
 }
 
 func_12899() {
-  if (self._blackboard.func_9DE4)
+  if (self.var_1198.func_9DE4)
   return;
 
   self notify("newEvade");
   self endon("death");
   self endon("newEvade");
-  self._blackboard.func_1000D = 1;
+  self.var_1198.func_1000D = 1;
   wait 0.2;
-  self._blackboard.func_1000D = 0;
+  self.var_1198.func_1000D = 0;
 }
 
 func_10D72() {
-  if (self._blackboard.func_2CCD)
+  if (self.var_1198.func_2CCD)
   return;
 
-  self._blackboard.func_2CCD = 1;
-  self._blackboard.func_2CD1 = gettime();
-  self._blackboard.func_2CD2 = 4000;
-  self._blackboard.func_BFA6 = gettime() + 4000 + randomintrange(7000, 12000);
-  self._blackboard.func_2CB8 = gettime() + 10000;
+  self.var_1198.func_2CCD = 1;
+  self.var_1198.func_2CD1 = gettime();
+  self.var_1198.func_2CD2 = 4000;
+  self.var_1198.func_BFA6 = gettime() + 4000 + randomintrange(7000, 12000);
+  self.var_1198.func_2CB8 = gettime() + 10000;
   var_00 = func_0BDC::func_1996();
   self _meth_845F(var_0.speed * 1.8, var_0.func_1545 * 1.8, var_0.func_1E91 * 1.8, var_0.func_1E71 * 1.8);
 }
 
 func_11062() {
-  if (self._blackboard.func_2CCD == 0)
+  if (self.var_1198.func_2CCD == 0)
   return;
 
-  self._blackboard.func_2CCD = 0;
+  self.var_1198.func_2CCD = 0;
   var_00 = func_0BDC::func_1996();
   var_01 = var_0.speed;
   self _meth_845F(var_01);
@@ -871,23 +871,23 @@ func_11062() {
 func_12D99() {
   var_00 = gettime();
 
-  if (self._blackboard.func_2CCD) {
-  if (var_00 > self._blackboard.func_2CD1 + self._blackboard.func_2CD2)
+  if (self.var_1198.func_2CCD) {
+  if (var_00 > self.var_1198.func_2CD1 + self.var_1198.func_2CD2)
   func_11062();
   } else {
-  if (var_00 < self._blackboard.func_2CB8)
+  if (var_00 < self.var_1198.func_2CB8)
   return;
 
-  if (self._blackboard.func_2CCF) {
+  if (self.var_1198.func_2CCF) {
   func_10D72();
-  self._blackboard.func_2CCF = 0;
+  self.var_1198.func_2CCF = 0;
   return;
   }
 
-  if (!isalive(self.bt.func_DB05))
+  if (!isalive(self.var_3135.func_DB05))
   return;
 
-  var_01 = distancesquared(self.bt.func_DB05.origin, self.origin);
+  var_01 = distancesquared(self.var_3135.func_DB05.origin, self.origin);
 
   if (var_01 > 144000000)
   return;
@@ -897,7 +897,7 @@ func_12D99() {
   return;
   }
 
-  if (var_00 > self._blackboard.func_BFA6)
+  if (var_00 > self.var_1198.func_BFA6)
   func_10D72();
   }
 }

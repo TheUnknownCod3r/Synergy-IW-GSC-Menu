@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2712.gsc
+ * Script: 2712.gsc
 ***************************************/
 
 createfx() {

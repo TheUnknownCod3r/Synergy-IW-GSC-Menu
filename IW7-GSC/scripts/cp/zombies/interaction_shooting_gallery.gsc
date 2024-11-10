@@ -1,8 +1,8 @@
-/***********************************************************************
+/***************************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\zombies\interaction_shooting_gallery.gsc
-***********************************************************************/
+ * Script: scripts\cp\zombies\interaction_shooting_gallery.gsc
+***************************************************************/
 
 func_13010(param_00,param_01) {
 	param_00.var_45C5.in_afterlife_arcade = scripts\engine\utility::istrue(param_01.in_afterlife_arcade);

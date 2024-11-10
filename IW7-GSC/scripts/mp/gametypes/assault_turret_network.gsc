@@ -1,8 +1,8 @@
-/*******************************************************************
+/***********************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\gametypes\assault_turret_network.gsc
-*******************************************************************/
+ * Script: scripts\mp\gametypes\assault_turret_network.gsc
+***********************************************************/
 
 init() {
 	if(!isdefined(level.var_23AB)) {
@@ -84,7 +84,7 @@ func_12A53(param_00) {
 	}
 
 	thread func_12A5A();
-	thread scripts\mp\_weapons::doblinkinglight(self.var_45C3.settings.lightfxtag);
+	thread scripts\mp\weapons::doblinkinglight(self.var_45C3.settings.lightfxtag);
 	func_12A8E();
 	self setturretminimapvisible(1,"sentry");
 	func_1862(self getentitynumber());
@@ -101,7 +101,7 @@ func_12A5D() {
 	func_E11F(var_00);
 	self setturretminimapvisible(0,"sentry");
 	func_12A6F();
-	scripts\mp\_weapons::stopblinkinglight();
+	scripts\mp\weapons::stopblinkinglight();
 	self notify("deactivated");
 }
 
@@ -110,7 +110,7 @@ func_12A59() {
 	level endon("game_ended");
 	self.momentum = 0;
 	var_00 = self.var_45C3.settings;
-	thread func_12A6E(function_0240(var_00.var_39B),var_00.overheattime,var_00.cooldowntime);
+	thread func_12A6E(weaponfiretime(var_00.var_39B),var_00.overheattime,var_00.cooldowntime);
 	for(;;) {
 		scripts\engine\utility::waittill_either("turretstatechange","cooled");
 		if(self getteamarray()) {
@@ -131,7 +131,7 @@ sentry_burstfirestart() {
 	level endon("game_ended");
 	sentry_spinup();
 	var_00 = self.var_45C3.settings;
-	var_01 = function_0240(var_00.var_39B);
+	var_01 = weaponfiretime(var_00.var_39B);
 	var_02 = var_00.burstmin;
 	var_03 = var_00.burstmax;
 	var_04 = var_00.pausemin;
@@ -201,7 +201,7 @@ func_12A5C(param_00) {
 	var_01 = spawn("script_model",self.origin);
 	var_01.angles = self.angles;
 	var_01 hide();
-	var_01 thread scripts\mp\_weapons::bombsquadvisibilityupdater(self.triggerportableradarping);
+	var_01 thread scripts\mp\weapons::bombsquadvisibilityupdater(self.triggerportableradarping);
 	var_01 setmodel(param_00);
 	var_01 linkto(self);
 	var_01 setcontents(0);
@@ -228,7 +228,7 @@ func_12A6F() {
 }
 
 func_12A6A(param_00) {
-	scripts\mp\_damage::monitordamage(param_00,"sentry",::func_12A6C,::func_12A79,1);
+	scripts\mp\damage::monitordamage(param_00,"sentry",::func_12A6C,::func_12A79,1);
 }
 
 func_12A79(param_00,param_01,param_02,param_03,param_04) {
@@ -237,9 +237,9 @@ func_12A79(param_00,param_01,param_02,param_03,param_04) {
 		var_05 = self.maxhealth * 0.34;
 	}
 
-	var_05 = scripts\mp\_damage::handlemissiledamage(param_01,param_02,var_05);
-	var_05 = scripts\mp\_damage::handlegrenadedamage(param_01,param_02,var_05);
-	var_05 = scripts\mp\_damage::handleapdamage(param_01,param_02,var_05);
+	var_05 = scripts\mp\damage::handlemissiledamage(param_01,param_02,var_05);
+	var_05 = scripts\mp\damage::handlegrenadedamage(param_01,param_02,var_05);
+	var_05 = scripts\mp\damage::handleapdamage(param_01,param_02,var_05);
 	return var_05;
 }
 
@@ -250,14 +250,14 @@ func_12A9B() {
 	level endon("game_ended");
 	for(;;) {
 		self waittill("emp_damage",var_00,var_01);
-		scripts\mp\_weapons::stopblinkinglight();
+		scripts\mp\weapons::stopblinkinglight();
 		playfxontag(scripts\engine\utility::getfx("emp_stun"),self,"tag_aim");
 		self setdefaultdroppitch(40);
 		self give_player_session_tokens("sentry_offline");
 		wait(var_01);
 		self setdefaultdroppitch(15);
 		self give_player_session_tokens("sentry");
-		thread scripts\mp\_weapons::doblinkinglight(self.var_45C3.settings.lightfxtag);
+		thread scripts\mp\weapons::doblinkinglight(self.var_45C3.settings.lightfxtag);
 	}
 }
 
@@ -298,7 +298,7 @@ func_12A6B() {
 		self notify("deleting");
 	}
 
-	scripts\mp\_weapons::equipmentdeletevfx();
+	scripts\mp\weapons::equipmentdeletevfx();
 	if(isdefined(self.killcament)) {
 		self.killcament delete();
 	}
@@ -359,7 +359,7 @@ func_45CC(param_00) {
 
 	var_01.health = 99999;
 	param_00.visuals = var_01;
-	var_02 = scripts\mp\_gameobjects::createuseobject("axis",param_00,[var_01],(0,0,64));
+	var_02 = scripts\mp\gameobjects::createuseobject("axis",param_00,[var_01],(0,0,64));
 	var_02.label = "control_panel_" + param_00.var_336;
 	var_02.id = "use";
 	var_02 func_45CD();
@@ -376,7 +376,7 @@ func_45CF(param_00) {
 		}
 	}
 
-	self.visuals thread scripts\mp\_weapons::doblinkinglight("tag_fx");
+	self.visuals thread scripts\mp\weapons::doblinkinglight("tag_fx");
 	thread func_45CA();
 }
 
@@ -387,7 +387,7 @@ func_45CB() {
 		}
 	}
 
-	self.visuals scripts\mp\_weapons::stopblinkinglight();
+	self.visuals scripts\mp\weapons::stopblinkinglight();
 	self.visuals.triggerportableradarping = undefined;
 	self.triggerportableradarping = undefined;
 	self.team = undefined;
@@ -419,22 +419,22 @@ func_45C9(param_00) {
 }
 
 func_45CD() {
-	scripts\mp\_gameobjects::allowuse("friendly");
-	scripts\mp\_gameobjects::setusetime(1);
-	scripts\mp\_gameobjects::setwaitweaponchangeonuse(1);
-	scripts\mp\_gameobjects::setusetext(&"MP_BREACH_OPERATE_TURRET_ON_ACTION");
-	scripts\mp\_gameobjects::setusehinttext(&"MP_BREACH_OPERATE_TURRET_ON");
+	scripts\mp\gameobjects::allowuse("friendly");
+	scripts\mp\gameobjects::setusetime(1);
+	scripts\mp\gameobjects::setwaitweaponchangeonuse(1);
+	scripts\mp\gameobjects::setusetext(&"MP_BREACH_OPERATE_TURRET_ON_ACTION");
+	scripts\mp\gameobjects::setusehinttext(&"MP_BREACH_OPERATE_TURRET_ON");
 	self.onbeginuse = ::func_45C6;
 	self.onenduse = ::func_45C7;
 	self.onuse = ::func_45C8;
 }
 
 func_45CE() {
-	scripts\mp\_gameobjects::allowuse("enemy");
-	scripts\mp\_gameobjects::setusetime(2);
-	scripts\mp\_gameobjects::setwaitweaponchangeonuse(1);
-	scripts\mp\_gameobjects::setusetext(&"MP_BREACH_OPERATE_TURRET_OFF_ACTION");
-	scripts\mp\_gameobjects::setusehinttext(&"MP_BREACH_OPERATE_TURRET_OFF");
+	scripts\mp\gameobjects::allowuse("enemy");
+	scripts\mp\gameobjects::setusetime(2);
+	scripts\mp\gameobjects::setwaitweaponchangeonuse(1);
+	scripts\mp\gameobjects::setusetext(&"MP_BREACH_OPERATE_TURRET_OFF_ACTION");
+	scripts\mp\gameobjects::setusehinttext(&"MP_BREACH_OPERATE_TURRET_OFF");
 	self.onbeginuse = ::func_45C6;
 	self.onenduse = ::func_45C7;
 	self.onuse = ::func_45C9;

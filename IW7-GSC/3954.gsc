@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\3954.gsc
+ * Script: 3954.gsc
 ***************************************/
 
 registerscriptedagent() {
@@ -103,7 +103,7 @@ setupagent() {
   self.flung = undefined;
   self.func_B0FC = 1;
   self.full_gib = 0;
-  scripts/mp/agents/zombie/zombie_util::func_F794(self.func_B62E);
+  scripts\mp\agents\zombie\zombie_util::func_F794(self.func_B62E);
   self.favoriteenemy = undefined;
   self.func_E821 = undefined;
   self.last_damage_time_on_player = [];
@@ -186,7 +186,7 @@ func_50EF() {
   if (isdefined(level.func_C01F))
   return;
 
-  if (scripts/asm/zombie/zombie::func_9F87()) {
+  if (scripts\asm\zombie\zombie::func_9F87()) {
   self setscriptablepartstate("right_eye", "active");
   self setscriptablepartstate("left_eye", "active");
   }
@@ -353,7 +353,7 @@ onzombiedamagefinished(var_00, var_01, var_02, var_03, var_04, var_05, var_06, v
 
   if (var_17 || var_18) {
   if (distancesquared(self.origin, var_1.origin) <= self.func_4D45) {
-  scripts/mp/agents/zombie/zombie_util::func_F702(var_01);
+  scripts\mp\agents\zombie\zombie_util::func_F702(var_01);
   thread func_E1EB(0.2);
   }
   }
@@ -370,7 +370,7 @@ onzombiedamagefinished(var_00, var_01, var_02, var_03, var_04, var_05, var_06, v
   level notify("zombie_damaged", self, var_01);
 
   if (self.agent_type != "skater")
-  level thread scripts/cp/zombies/zombies_vo::play_zombie_vo(self, "pain", 0);
+  level thread scripts\cp\zombies\zombies_vo::play_zombie_vo(self, "pain", 0);
 
   agent_damage_finished(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08, var_09, var_11, var_12);
 
@@ -443,20 +443,20 @@ func_97FB() {
 }
 
 func_AEB0() {
-  level._effect["gib_full_body"] = loadfx("vfx/iw7/_requests/coop/vfx_zmb_blackhole_death");
-  level._effect["suicide_zmb_death"] = loadfx("vfx/iw7/_requests/coop/vfx_clown_exp.vfx");
-  level._effect["suicide_zmb_explode"] = loadfx("vfx/iw7/core/zombie/vfx_clown_exp_big.vfx");
-  level._effect["gib_full_body_cheap"] = loadfx("vfx/iw7/_requests/coop/zmb_fullbody_gib");
-  level._effect["torso_arm_loss_right"] = loadfx("vfx/iw7/core/zombie/vfx_zombie_dism_arm_r.vfx");
-  level._effect["torso_arm_loss_left"] = loadfx("vfx/iw7/core/zombie/vfx_zombie_dism_arm_l.vfx");
-  level._effect["torso_loss_left"] = loadfx("vfx/iw7/core/zombie/vfx_zombie_impact_torso_l.vfx");
-  level._effect["torso_head_loss"] = loadfx("vfx/iw7/core/zombie/vfx_zombie_dism_head.vfx");
-  level._effect["torso_loss_right"] = loadfx("vfx/iw7/core/zombie/vfx_zombie_impact_torso_r.vfx");
-  level._effect["arm_loss_left"] = loadfx("vfx/iw7/core/zombie/vfx_zombie_impact_arm_l.vfx");
-  level._effect["arm_loss_right"] = loadfx("vfx/iw7/core/zombie/vfx_zombie_impact_arm_r.vfx");
-  level._effect["limb_loss_right"] = loadfx("vfx/iw7/core/zombie/vfx_zombie_impact_limb_r.vfx");
-  level._effect["limb_loss_left"] = loadfx("vfx/iw7/core/zombie/vfx_zombie_impact_limb_l.vfx");
-  level._effect["head_loss"] = loadfx("vfx/iw7/core/zombie/vfx_zombie_impact_head.vfx");
+  level._effect["gib_full_body"] = loadfx("vfx\iw7\_requests\coop\vfx_zmb_blackhole_death");
+  level._effect["suicide_zmb_death"] = loadfx("vfx\iw7\_requests\coop\vfx_clown_exp.vfx");
+  level._effect["suicide_zmb_explode"] = loadfx("vfx\iw7\core\zombie\vfx_clown_exp_big.vfx");
+  level._effect["gib_full_body_cheap"] = loadfx("vfx\iw7\_requests\coop\zmb_fullbody_gib");
+  level._effect["torso_arm_loss_right"] = loadfx("vfx\iw7\core\zombie\vfx_zombie_dism_arm_r.vfx");
+  level._effect["torso_arm_loss_left"] = loadfx("vfx\iw7\core\zombie\vfx_zombie_dism_arm_l.vfx");
+  level._effect["torso_loss_left"] = loadfx("vfx\iw7\core\zombie\vfx_zombie_impact_torso_l.vfx");
+  level._effect["torso_head_loss"] = loadfx("vfx\iw7\core\zombie\vfx_zombie_dism_head.vfx");
+  level._effect["torso_loss_right"] = loadfx("vfx\iw7\core\zombie\vfx_zombie_impact_torso_r.vfx");
+  level._effect["arm_loss_left"] = loadfx("vfx\iw7\core\zombie\vfx_zombie_impact_arm_l.vfx");
+  level._effect["arm_loss_right"] = loadfx("vfx\iw7\core\zombie\vfx_zombie_impact_arm_r.vfx");
+  level._effect["limb_loss_right"] = loadfx("vfx\iw7\core\zombie\vfx_zombie_impact_limb_r.vfx");
+  level._effect["limb_loss_left"] = loadfx("vfx\iw7\core\zombie\vfx_zombie_impact_limb_l.vfx");
+  level._effect["head_loss"] = loadfx("vfx\iw7\core\zombie\vfx_zombie_impact_head.vfx");
 }
 
 func_3DE4(var_00) {
@@ -793,7 +793,7 @@ func_BDFB(var_00, var_01, var_02, var_03, var_04) {
   if (var_00 != self.func_B8BA) {
   var_07 = ~self.func_B8BA & var_00;
 
-  if (scripts/cp/utility::is_codxp()) {
+  if (scripts\cp\utility::is_codxp()) {
   if (!scripts\engine\utility::is_true(self.entered_playspace))
   return 0;
   }
@@ -897,7 +897,7 @@ func_6A58() {
   self setscriptablepartstate("eyes", "eye_glow_off");
   wait 0.1;
 
-  if (scripts/asm/zombie/zombie::func_9F87()) {
+  if (scripts\asm\zombie\zombie::func_9F87()) {
   self setscriptablepartstate("right_eye", "active");
   self setscriptablepartstate("left_eye", "active");
   }
@@ -1036,7 +1036,7 @@ func_13F55() {
   continue;
   }
 
-  if (scripts/mp/agents/zombie/zombie_util::iscrawling())
+  if (scripts\mp\agents\zombie\zombie_util::iscrawling())
   self.moveratescale = 0.85;
 
   if (isdefined(level.movemodefunc[self.agent_type])) {
@@ -1067,7 +1067,7 @@ func_13F55() {
 
   self.generalspeedratescale = self.traverseratescale;
 
-  if (scripts/mp/agents/zombie/zombie_util::iscrawling()) {
+  if (scripts\mp\agents\zombie\zombie_util::iscrawling()) {
   self.sharpturnnotifydist = 100;
   self.moveratescale = 0.85;
   }
@@ -1114,7 +1114,7 @@ speed_up_every_now_and_then() {
 }
 
 calulatezombiemovemode(var_00) {
-  if (scripts/asm/zombie/zombie::func_9F87())
+  if (scripts\asm\zombie\zombie::func_9F87())
   return "sprint";
 
   if (scripts\engine\utility::is_true(self.is_skeleton))
@@ -1164,9 +1164,9 @@ func_3729(var_00, var_01, var_02) {
   else
   var_05 = float(var_04) / float(var_00 - 1);
 
-  var_06 = scripts/mp/agents/zombie/zombie_util::func_AB6F(var_05, var_01, var_02);
+  var_06 = scripts\mp\agents\zombie\zombie_util::func_AB6F(var_05, var_01, var_02);
 
-  if (scripts/asm/zombie/zombie::func_9F87())
+  if (scripts\asm\zombie\zombie::func_9F87())
   var_06 = var_06 * 1.2;
 
   return var_06;
@@ -1175,7 +1175,7 @@ func_3729(var_00, var_01, var_02) {
 func_372C(var_00, var_01, var_02) {
   var_03 = func_372B(var_00);
   var_04 = var_03 / (level.func_13F3F.size * var_00 - 1.0);
-  var_05 = scripts/mp/agents/zombie/zombie_util::func_AB6F(var_04, var_01, var_02);
+  var_05 = scripts\mp\agents\zombie\zombie_util::func_AB6F(var_04, var_01, var_02);
   return var_05;
 }
 
@@ -1196,7 +1196,7 @@ func_7E10() {
 }
 
 onzombiekilled(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08) {
-  if (scripts/asm/zombie/zombie::func_9F87()) {
+  if (scripts\asm\zombie\zombie::func_9F87()) {
   if (isdefined(self.agent_type) && self.agent_type == "skater")
   self playsound("zmb_skater_explode");
   else
@@ -1225,20 +1225,20 @@ onzombiekilled(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, v
 
   if (isdefined(self.func_6658)) {
   if (isdefined(self.func_BF2F)) {
-  var_09 = scripts/cp/zombies/zombie_entrances::func_7872(self.func_6658, self.func_BF2F - 1);
+  var_09 = scripts\cp\zombies\zombie_entrances::func_7872(self.func_6658, self.func_BF2F - 1);
 
   if (var_09 == "destroying")
-  scripts/cp/zombies/zombie_entrances::func_F2E3(self.func_6658, self.func_BF2F - 1, "boarded");
+  scripts\cp\zombies\zombie_entrances::func_F2E3(self.func_6658, self.func_BF2F - 1, "boarded");
 
   self.func_BF2F = undefined;
   }
 
-  scripts/cp/zombies/zombie_entrances::func_E005(self.func_6658);
+  scripts\cp\zombies\zombie_entrances::func_E005(self.func_6658);
   self.func_6658 = undefined;
   }
 
   if (isdefined(self.attack_spot)) {
-  scripts/cp/zombies/zombie_entrances::release_attack_spot(self.attack_spot);
+  scripts\cp\zombies\zombie_entrances::release_attack_spot(self.attack_spot);
   self.attack_spot = undefined;
   }
 
@@ -1334,7 +1334,7 @@ func_C4BD(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08
   }
 
   if (isdefined(self.nocorpse)) {
-  if (scripts/cp/utility::is_melee_weapon(var_04)) {
+  if (scripts\cp\utility::is_melee_weapon(var_04)) {
   var_14 = self cloneagent(var_08, 1);
   var_14 hide(1);
   }
@@ -1443,7 +1443,7 @@ func_B9B9() {
   var_05 = distancesquared(self.origin, var_01);
   var_06 = (gettime() - var_02) / 1000;
   var_07 = var_05 > 16384;
-  var_08 = scripts\engine\utility::is_true(self._blackboard.func_2BDE);
+  var_08 = scripts\engine\utility::is_true(self.var_1198.func_2BDE);
 
   if (var_07 || var_08) {
   var_01 = self.origin;

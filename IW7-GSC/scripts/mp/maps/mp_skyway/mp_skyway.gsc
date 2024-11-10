@@ -1,15 +1,15 @@
-/***********************************************************
+/***************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\maps\mp_skyway\mp_skyway.gsc
-***********************************************************/
+ * Script: scripts\mp\maps\mp_skyway\mp_skyway.gsc
+***************************************************/
 
 main() {
-	lib_0FFB::main();
+	scripts\mp\maps\mp_skyway\mp_skyway_precache::main();
 	scripts\mp\maps\mp_skyway\gen\mp_skyway_art::main();
-	lib_0FFA::main();
-	scripts\mp\_load::main();
-	scripts\mp\_compass::func_FACD("compass_map_mp_skyway");
+	scripts\mp\maps\mp_skyway\mp_skyway_fx::main();
+	scripts\mp\load::main();
+	scripts\mp\compass::setupminimap("compass_map_mp_skyway");
 	setdvar("r_lightGridEnableTweaks",1);
 	setdvar("r_lightGridIntensity",1.33);
 	setdvar("r_drawsun",0);
@@ -25,20 +25,20 @@ main() {
 	thread securitymetaldetectors();
 	thread fix_collision();
 	level.modifiedspawnpoints["1339 2045 0"]["mp_koth_spawn"]["remove"] = 1;
-	scripts\mp\_spawnlogic::addttlosoverride(589,1102,1,1);
-	scripts\mp\_spawnlogic::addttlosoverride(589,907,1,1);
-	scripts\mp\_spawnlogic::addttlosoverride(589,908,1,1);
-	scripts\mp\_spawnlogic::addttlosoverride(589,909,1,1);
-	scripts\mp\_spawnlogic::addttlosoverride(589,217,1,1);
-	scripts\mp\_spawnlogic::addttlosoverride(589,218,1,1);
-	scripts\mp\_spawnlogic::addttlosoverride(589,219,1,1);
-	scripts\mp\_spawnlogic::addttlosoverride(177,1102,1,1);
-	scripts\mp\_spawnlogic::addttlosoverride(177,907,1,1);
-	scripts\mp\_spawnlogic::addttlosoverride(177,908,1,1);
-	scripts\mp\_spawnlogic::addttlosoverride(177,909,1,1);
-	scripts\mp\_spawnlogic::addttlosoverride(177,217,1,1);
-	scripts\mp\_spawnlogic::addttlosoverride(177,218,1,1);
-	scripts\mp\_spawnlogic::addttlosoverride(177,219,1,1);
+	scripts\mp\spawnlogic::addttlosoverride(589,1102,1,1);
+	scripts\mp\spawnlogic::addttlosoverride(589,907,1,1);
+	scripts\mp\spawnlogic::addttlosoverride(589,908,1,1);
+	scripts\mp\spawnlogic::addttlosoverride(589,909,1,1);
+	scripts\mp\spawnlogic::addttlosoverride(589,217,1,1);
+	scripts\mp\spawnlogic::addttlosoverride(589,218,1,1);
+	scripts\mp\spawnlogic::addttlosoverride(589,219,1,1);
+	scripts\mp\spawnlogic::addttlosoverride(177,1102,1,1);
+	scripts\mp\spawnlogic::addttlosoverride(177,907,1,1);
+	scripts\mp\spawnlogic::addttlosoverride(177,908,1,1);
+	scripts\mp\spawnlogic::addttlosoverride(177,909,1,1);
+	scripts\mp\spawnlogic::addttlosoverride(177,217,1,1);
+	scripts\mp\spawnlogic::addttlosoverride(177,218,1,1);
+	scripts\mp\spawnlogic::addttlosoverride(177,219,1,1);
 }
 
 fix_collision() {
@@ -92,13 +92,13 @@ fix_collision() {
 
 func_CDA4(param_00) {
 	wait(30);
-	function_030E(param_00);
+	playcinematicforalllooping(param_00);
 }
 
 func_5364() {
 	wait(5);
 	var_00 = getentarray("destructible_screens","targetname");
-	scripts\common\utility::array_thread(var_00,::func_5365);
+	scripts\engine\utility::array_thread(var_00,::func_5365);
 }
 
 func_5365() {
@@ -114,7 +114,7 @@ func_5365() {
 	}
 
 	if(!isdefined(self.var_ED83)) {
-		playfx(scripts\common\utility::getfx("vfx_moon_adscreen_sparks_runner"),self.origin);
+		playfx(scripts\engine\utility::getfx("vfx_moon_adscreen_sparks_runner"),self.origin);
 	}
 
 	self delete();

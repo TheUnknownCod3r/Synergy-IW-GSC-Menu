@@ -1,8 +1,8 @@
-/******************************************************************
+/**********************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\killstreaks\_deployablebox_ammo.gsc
-******************************************************************/
+ * Script: scripts\mp\killstreaks\_deployablebox_ammo.gsc
+**********************************************************/
 
 init() {
 	var_00 = spawnstruct();
@@ -27,7 +27,7 @@ init() {
 	var_00.maxhealth = 150;
 	var_00.damagefeedback = "deployable_bag";
 	var_00.deathweaponinfo = "deployable_ammo_mp";
-	var_00.deathvfx = loadfx("vfx/iw7/_requests/mp/vfx_debug_warning.vfx");
+	var_00.deathvfx = loadfx("vfx\iw7\_requests\mp\vfx_debug_warning.vfx");
 	var_00.deathdamageradius = 256;
 	var_00.deathdamagemax = 130;
 	var_00.deathdamagemin = 50;
@@ -45,7 +45,7 @@ func_128DE(param_00,param_01) {
 		return 0;
 	}
 
-	scripts\mp\_matchdata::logkillstreakevent("deployable_ammo",self.origin);
+	scripts\mp\matchdata::logkillstreakevent("deployable_ammo",self.origin);
 	return 1;
 }
 
@@ -57,7 +57,7 @@ func_17A6() {
 	var_00 = self getweaponslistall();
 	if(isdefined(var_00)) {
 		foreach(var_02 in var_00) {
-			if(scripts\mp\_weapons::isbulletweapon(var_02)) {
+			if(scripts\mp\weapons::isbulletweapon(var_02)) {
 				func_1805(var_02,2);
 				continue;
 			}
@@ -78,10 +78,10 @@ func_1805(param_00,param_01) {
 func_1819(param_00) {
 	var_01 = self getweaponslistprimaries();
 	foreach(var_03 in var_01) {
-		if(scripts\mp\_weapons::isbulletweapon(var_03)) {
+		if(scripts\mp\weapons::isbulletweapon(var_03)) {
 			if(var_03 != "iw6_alienminigun_mp") {
 				var_04 = self getweaponammostock(var_03);
-				var_05 = function_0249(var_03);
+				var_05 = weaponmaxammo(var_03);
 				var_06 = var_04 + var_05 * param_00;
 				self setweaponammostock(var_03,int(min(var_06,var_05)));
 			}
@@ -98,5 +98,5 @@ func_17C6() {
 }
 
 func_3937(param_00) {
-	return !scripts\mp\_utility::isjuggernaut();
+	return !scripts\mp\utility::isjuggernaut();
 }

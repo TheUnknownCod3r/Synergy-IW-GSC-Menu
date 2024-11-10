@@ -1,15 +1,15 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3898.gsc
-****************************/
+ * Script: 3898.gsc
+************************/
 
 func_FFE6() {
 	if(isdefined(self.disablearrivals) && self.disablearrivals) {
 		return 0;
 	}
 
-	if(isdefined(self.isnodeoccupied) && scripts/asm/asm_bb::bb_wantstostrafe()) {
+	if(isdefined(self.isnodeoccupied) && scripts\asm\asm_bb::bb_wantstostrafe()) {
 		return 0;
 	}
 
@@ -37,7 +37,7 @@ func_1008A(param_00,param_01,param_02,param_03) {
 		return 0;
 	}
 
-	if(!scripts/asm/asm::func_232B(param_01,"cover_approach")) {
+	if(!scripts\asm\asm::func_232B(param_01,"cover_approach")) {
 		return 0;
 	}
 
@@ -71,7 +71,7 @@ func_1008A(param_00,param_01,param_02,param_03) {
 		var_05 = 1;
 	}
 
-	self.asm.var_7360 = scripts/asm/asm_bb::bb_isfrantic();
+	self.asm.var_7360 = scripts\asm\asm_bb::bb_isfrantic();
 	self.asm.var_11068 = func_3721(param_00,param_02,var_04,var_05);
 	if(!isdefined(self.asm.var_11068)) {
 		return 0;
@@ -93,7 +93,7 @@ func_FFD4(param_00,param_01,param_02,param_03) {
 		return 0;
 	}
 
-	if(!scripts/asm/asm::func_232B(param_01,"cover_approach")) {
+	if(!scripts\asm\asm::func_232B(param_01,"cover_approach")) {
 		return 0;
 	}
 
@@ -109,7 +109,7 @@ func_10095(param_00,param_01,param_02,param_03) {
 }
 
 func_10091(param_00,param_01,param_02,param_03) {
-	if(scripts/asm/asm_bb::bb_isincombat()) {
+	if(scripts\asm\asm_bb::bb_isincombat()) {
 		return 0;
 	}
 
@@ -131,7 +131,7 @@ func_9D4C(param_00,param_01,param_02,param_03) {
 			return (self.target_getindexoftarget.type == "Path" || self.target_getindexoftarget.type == "Exposed") && self.target_getindexoftarget getrandomattachments("stand");
 
 		case "Exposed Crouch":
-			if(scripts/asm/asm_bb::func_292C() != "crouch") {
+			if(scripts\asm\asm_bb::func_292C() != "crouch") {
 				return 0;
 			}
 			return (self.target_getindexoftarget.type == "Path" || self.target_getindexoftarget.type == "Exposed") && self.target_getindexoftarget getrandomattachments("crouch");
@@ -281,7 +281,7 @@ func_3721(param_00,param_01,param_02,param_03) {
 				var_25.log = var_0F.log;
 				var_25.stricmp = var_14;
 				var_25.var_357 = var_1F;
-				var_25.__func_2BD = var_20;
+				var_25._func_2BD = var_20;
 				return var_25;
 			}
 		}
@@ -330,7 +330,7 @@ func_CECA(param_00,param_01) {
 		var_02 = var_03;
 	}
 
-	scripts/asm/asm::asm_fireevent(param_01,"abort");
+	scripts\asm\asm::asm_fireevent(param_01,"abort");
 }
 
 func_CEC9(param_00,param_01) {
@@ -344,7 +344,7 @@ func_CEC9(param_00,param_01) {
 		wait(0.05);
 	}
 
-	scripts/asm/asm::asm_fireevent(param_01,"abort");
+	scripts\asm\asm::asm_fireevent(param_01,"abort");
 }
 
 func_136F5(param_00) {
@@ -357,13 +357,13 @@ func_136F5(param_00) {
 func_CEAA(param_00,param_01,param_02,param_03) {
 	self endon(param_01 + "_finished");
 	var_04 = func_7DD6();
-	var_05 = scripts/asm/asm_mp::asm_getanim(param_00,param_01);
+	var_05 = scripts\asm\asm_mp::asm_getanim(param_00,param_01);
 	if(!isdefined(var_05)) {
-		scripts/asm/asm::asm_fireevent(param_01,"abort",undefined);
+		scripts\asm\asm::asm_fireevent(param_01,"abort",undefined);
 		return;
 	}
 
-	var_06 = scripts/asm/asm::asm_getmoveplaybackrate();
+	var_06 = scripts\asm\asm::asm_getmoveplaybackrate();
 	if(!isdefined(var_06)) {
 		var_06 = 1;
 	}
@@ -375,7 +375,7 @@ func_CEAA(param_00,param_01,param_02,param_03) {
 	var_0B = getanimlength(var_0A);
 	var_0B = var_0B * 1 / var_06;
 	self _meth_8396(var_05.areanynavvolumesloaded,var_09[1],var_0B);
-	scripts/asm/asm_mp::func_2365(param_00,param_01,param_02,var_05.var_11060,var_06);
+	scripts\asm\asm_mp::func_2365(param_00,param_01,param_02,var_05.var_11060,var_06);
 }
 
 func_22EA() {
@@ -449,14 +449,14 @@ func_36D9(param_00,param_01,param_02,param_03) {
 
 _meth_8174(param_00,param_01,param_02) {
 	var_03 = [];
-	var_03[5] = scripts/asm/asm::func_235C(1,param_00,param_02);
-	var_03[4] = scripts/asm/asm::func_235C(2,param_00,param_02);
-	var_03[3] = scripts/asm/asm::func_235C(3,param_00,param_02);
-	var_03[6] = scripts/asm/asm::func_235C(4,param_00,param_02);
-	var_03[2] = scripts/asm/asm::func_235C(6,param_00,param_02);
-	var_03[7] = scripts/asm/asm::func_235C(7,param_00,param_02);
-	var_03[0] = scripts/asm/asm::func_235C(8,param_00,param_02);
-	var_03[1] = scripts/asm/asm::func_235C(9,param_00,param_02);
+	var_03[5] = scripts\asm\asm::func_235C(1,param_00,param_02);
+	var_03[4] = scripts\asm\asm::func_235C(2,param_00,param_02);
+	var_03[3] = scripts\asm\asm::func_235C(3,param_00,param_02);
+	var_03[6] = scripts\asm\asm::func_235C(4,param_00,param_02);
+	var_03[2] = scripts\asm\asm::func_235C(6,param_00,param_02);
+	var_03[7] = scripts\asm\asm::func_235C(7,param_00,param_02);
+	var_03[0] = scripts\asm\asm::func_235C(8,param_00,param_02);
+	var_03[1] = scripts\asm\asm::func_235C(9,param_00,param_02);
 	var_03[8] = var_03[0];
 	return var_03;
 }
@@ -524,7 +524,7 @@ func_1008F(param_00,param_01,param_02,param_03) {
 		var_07 = 1;
 	}
 
-	self.asm.var_7360 = scripts/asm/asm_bb::bb_isfrantic();
+	self.asm.var_7360 = scripts\asm\asm_bb::bb_isfrantic();
 	self.asm.var_11068 = func_3721(param_00,param_02,var_04,var_07);
 	if(!isdefined(self.asm.var_11068)) {
 		return 0;

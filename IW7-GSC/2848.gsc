@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2848.gsc
+ * Script: 2848.gsc
 ***************************************/
 
 #using_animtree("player");
@@ -47,8 +47,8 @@ func_5A38() {
   var_00 = scripts\engine\utility::array_combine(var_00, scripts\engine\utility::getstructarray("doors_hinged", "targetname"));
 
   foreach (var_02 in var_00) {
-  var_02 scripts/sp/utility::func_65E0("push_triggered");
-  var_02 scripts/sp/utility::func_65E0("pull_triggered");
+  var_02 scripts\sp\utility::func_65E0("push_triggered");
+  var_02 scripts\sp\utility::func_65E0("pull_triggered");
   var_2.func_5A3C = getent(var_2.target, "targetname");
   var_2.func_5A3C glinton(#animtree);
   var_2.func_5A3C.func_1FBB = "door";
@@ -164,21 +164,21 @@ func_5A42(var_00) {
   switch (var_00) {
   case "unlocked":
   scripts\engine\utility::array_call(self.func_ECCE, ::giveperk, "tag_unlocked");
-  scripts\engine\utility::array_thread(self.func_ECCA, scripts/sp/lights::func_AB83, 0.009, 0.05);
-  scripts\engine\utility::array_thread(self.func_ECCA, scripts/sp/lights::func_3C57, (0.26, 0.98, 0.18), 0.05);
+  scripts\engine\utility::array_thread(self.func_ECCA, scripts\sp\lights::func_AB83, 0.009, 0.05);
+  scripts\engine\utility::array_thread(self.func_ECCA, scripts\sp\lights::func_3C57, (0.26, 0.98, 0.18), 0.05);
   break;
   case "locked":
   scripts\engine\utility::array_call(self.func_ECCE, ::giveperk, "tag_locked");
-  scripts\engine\utility::array_thread(self.func_ECCA, scripts/sp/lights::func_AB83, 0.009, 0.05);
-  scripts\engine\utility::array_thread(self.func_ECCA, scripts/sp/lights::func_3C57, (0.98, 0.18, 0.26), 0.05);
+  scripts\engine\utility::array_thread(self.func_ECCA, scripts\sp\lights::func_AB83, 0.009, 0.05);
+  scripts\engine\utility::array_thread(self.func_ECCA, scripts\sp\lights::func_3C57, (0.98, 0.18, 0.26), 0.05);
   break;
   case "automatic":
   scripts\engine\utility::array_call(self.func_ECCE, ::giveperk, "tag_unlocked");
   break;
   case "open":
   scripts\engine\utility::array_call(self.func_ECCE, ::giveperk, "tag_unlocked");
-  scripts\engine\utility::array_thread(self.func_ECCA, scripts/sp/lights::func_AB83, 0.009, 0.05);
-  scripts\engine\utility::array_thread(self.func_ECCA, scripts/sp/lights::func_3C57, (0.26, 0.98, 0.18), 0.05);
+  scripts\engine\utility::array_thread(self.func_ECCA, scripts\sp\lights::func_AB83, 0.009, 0.05);
+  scripts\engine\utility::array_thread(self.func_ECCA, scripts\sp\lights::func_3C57, (0.26, 0.98, 0.18), 0.05);
   break;
   }
 }
@@ -212,10 +212,10 @@ func_9013(var_00, var_01) {
   self endon("death");
 
   for (;;) {
-  var_00 scripts/sp/utility::func_65DD("push_triggered");
-  var_00 scripts/sp/utility::func_65DD("pull_triggered");
+  var_00 scripts\sp\utility::func_65DD("push_triggered");
+  var_00 scripts\sp\utility::func_65DD("pull_triggered");
   self waittill("trigger");
-  var_00 scripts/sp/utility::func_65E1(var_01);
+  var_00 scripts\sp\utility::func_65E1(var_01);
   var_00 func_DFE5();
   }
 }
@@ -232,7 +232,7 @@ func_5A4E() {
   func_5A34("open");
   }
   else if (self.func_5A33 == "unlocked" || self.func_5A33 == "automatic") {
-  if ((scripts/sp/utility::func_65DB("push_triggered") || scripts/sp/utility::func_65DB("pull_triggered")) && self.func_5A32 != "busy") {
+  if ((scripts\sp\utility::func_65DB("push_triggered") || scripts\sp\utility::func_65DB("pull_triggered")) && self.func_5A32 != "busy") {
   self.func_5A32 = "busy";
 
   if (isdefined(self.func_5A52)) {
@@ -241,11 +241,11 @@ func_5A4E() {
   if (self.func_5A53 == "pushpull")
   self.func_1212 = self.func_5A52;
   else if (self.func_5A53 == "push") {
-  if (scripts/sp/utility::func_65DB("push_triggered"))
+  if (scripts\sp\utility::func_65DB("push_triggered"))
   self.func_1212 = self.func_5A52;
   }
   else if (self.func_5A53 == "pull") {
-  if (scripts/sp/utility::func_65DB("pull_triggered"))
+  if (scripts\sp\utility::func_65DB("pull_triggered"))
   self.func_1212 = self.func_5A52;
   }
 
@@ -265,7 +265,7 @@ func_5A4E() {
 
   thread func_48C7();
   }
-  else if ((!scripts/sp/utility::func_65DB("push_triggered") || !scripts/sp/utility::func_65DB("pull_triggered")) && self.func_5A32 != "notbusy") {
+  else if ((!scripts\sp\utility::func_65DB("push_triggered") || !scripts\sp\utility::func_65DB("pull_triggered")) && self.func_5A32 != "notbusy") {
   self.func_5A32 = "notbusy";
   thread func_5A55(self.func_5A33);
   func_5A34("close");
@@ -292,10 +292,10 @@ func_5A34(var_00) {
   if (isdefined(var_00)) {
   switch (var_00) {
   case "open":
-  self.func_5A3C give_attacker_kill_rewards(self.func_5A3C scripts/sp/utility::func_7DC1(var_02));
+  self.func_5A3C give_attacker_kill_rewards(self.func_5A3C scripts\sp\utility::func_7DC1(var_02));
   return;
   case "close":
-  self.func_5A3C setanimknob(self.func_5A3C scripts/sp/utility::func_7DC1(var_02), 1, 0, 0);
+  self.func_5A3C setanimknob(self.func_5A3C scripts\sp\utility::func_7DC1(var_02), 1, 0, 0);
   return;
   }
   }
@@ -304,7 +304,7 @@ func_5A34(var_00) {
 }
 
 func_5A3D(var_00) {
-  var_01 = scripts/sp/utility::func_7951(var_0.origin, var_0.angles, level.player.origin);
+  var_01 = scripts\sp\utility::func_7951(var_0.origin, var_0.angles, level.player.origin);
 
   if (var_01 > 0)
   return 1;
@@ -360,7 +360,7 @@ func_AB71(var_00, var_01, var_02, var_03, var_04, var_05) {
 
   var_06 = door_pcfov_disableweapons();
   var_0.func_5A30 connectpaths();
-  var_00 thread scripts/sp/utility::func_C12D("safe_to_pass", 2.3);
+  var_00 thread scripts\sp\utility::func_C12D("safe_to_pass", 2.3);
   var_00 func_11EB(var_01, var_02, var_03, var_04, var_05);
   var_0.func_5A30 disconnectpaths();
 
@@ -437,7 +437,7 @@ func_11EB(var_00, var_01, var_02, var_03, var_04) {
   if (!isdefined(var_01))
   var_01 = 0.4;
 
-  var_05 = scripts/sp/utility::func_10639("player_rig");
+  var_05 = scripts\sp\utility::func_10639("player_rig");
   var_06 = level.player _meth_84C6("currentViewModel");
 
   if (isdefined(var_06))
@@ -449,9 +449,9 @@ func_11EB(var_00, var_01, var_02, var_03, var_04) {
   var_7["player_rig"] = var_05;
 
   if (isdefined(var_03))
-  scripts/sp/anim::func_1EC1(var_07, var_00 + "_open");
+  scripts\sp\anim::func_1EC1(var_07, var_00 + "_open");
   else
-  scripts/sp/anim::func_1EC1(var_07, var_00);
+  scripts\sp\anim::func_1EC1(var_07, var_00);
 
   level.player playsound("shipcrib_door_plr_move_to_door");
   level.player getweaponweight(var_05, "tag_player", var_01, 0.2, 0.2);
@@ -472,44 +472,44 @@ func_11EB(var_00, var_01, var_02, var_03, var_04) {
   break;
   }
 
-  scripts/sp/anim::func_1F2C(var_07, var_00 + "_open");
-  thread scripts/sp/anim::func_1EE7(var_07, var_00 + "_hold", "stop_loop");
+  scripts\sp\anim::func_1F2C(var_07, var_00 + "_open");
+  thread scripts\sp\anim::func_1EE7(var_07, var_00 + "_hold", "stop_loop");
   wait(var_04);
   self notify("stop_loop");
 
   switch (self.func_8FDD) {
   case "left":
-  self.func_5A3C thread scripts/sp/utility::play_sound_on_tag("shipcrib_door_left_hinge_push_long_release_and_close", "door_locked");
+  self.func_5A3C thread scripts\sp\utility::play_sound_on_tag("shipcrib_door_left_hinge_push_long_release_and_close", "door_locked");
   level.player playsound("shipcrib_door_left_hinge_push_long_plr_move_finish");
   break;
   case "right":
-  self.func_5A3C thread scripts/sp/utility::play_sound_on_tag("shipcrib_door_right_hinge_push_long_release_and_close", "door_locked");
+  self.func_5A3C thread scripts\sp\utility::play_sound_on_tag("shipcrib_door_right_hinge_push_long_release_and_close", "door_locked");
   level.player playsound("shipcrib_door_right_hinge_push_long_plr_move_finish");
   break;
   }
 
-  scripts/sp/anim::func_1F2C(var_07, var_00 + "_close");
+  scripts\sp\anim::func_1F2C(var_07, var_00 + "_close");
   } else {
   switch (var_00) {
   case "left_push":
   level.player playsound("shipcrib_door_left_hinge_push_handle_down_open");
-  self.func_5A3C scripts\engine\utility::delaythread(2.6, scripts/sp/utility::play_sound_on_tag, "shipcrib_door_left_hinge_push_release_and_close", "door_locked");
+  self.func_5A3C scripts\engine\utility::delaythread(2.6, scripts\sp\utility::play_sound_on_tag, "shipcrib_door_left_hinge_push_release_and_close", "door_locked");
   break;
   case "left_pull":
   level.player playsound("shipcrib_door_left_hinge_pull_handle_down_open");
-  self.func_5A3C scripts\engine\utility::delaythread(2.4, scripts/sp/utility::play_sound_on_tag, "shipcrib_door_left_hinge_pull_release_and_close", "door_locked");
+  self.func_5A3C scripts\engine\utility::delaythread(2.4, scripts\sp\utility::play_sound_on_tag, "shipcrib_door_left_hinge_pull_release_and_close", "door_locked");
   break;
   case "right_push":
   level.player playsound("shipcrib_door_right_hinge_push_handle_down_open");
-  self.func_5A3C scripts\engine\utility::delaythread(2.6, scripts/sp/utility::play_sound_on_tag, "shipcrib_door_right_hinge_push_release_and_close", "door_locked");
+  self.func_5A3C scripts\engine\utility::delaythread(2.6, scripts\sp\utility::play_sound_on_tag, "shipcrib_door_right_hinge_push_release_and_close", "door_locked");
   break;
   case "right_pull":
   level.player playsound("shipcrib_door_right_hinge_pull_handle_down_open");
-  self.func_5A3C scripts\engine\utility::delaythread(2.4, scripts/sp/utility::play_sound_on_tag, "shipcrib_door_right_hinge_pull_release_and_close", "door_locked");
+  self.func_5A3C scripts\engine\utility::delaythread(2.4, scripts\sp\utility::play_sound_on_tag, "shipcrib_door_right_hinge_pull_release_and_close", "door_locked");
   break;
   }
 
-  scripts/sp/anim::func_1F2C(var_07, var_00);
+  scripts\sp\anim::func_1F2C(var_07, var_00);
   }
 
   level notify("door_lerp_finished");

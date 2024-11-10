@@ -1,8 +1,8 @@
-/*************************************************
+/*****************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\asm\dlc4\dlc4_asm.gsc
-*************************************************/
+ * Script: scripts\asm\dlc4\dlc4_asm.gsc
+*****************************************/
 
 gettunedata() {
 	return level.agenttunedata[self.agent_type];
@@ -99,7 +99,7 @@ shoulddoaction(param_00,param_01,param_02,param_03) {
 }
 
 shouldabortaction(param_00,param_01,param_02,param_03) {
-	if(scripts\common\utility::istrue(self.btraversalteleport)) {
+	if(scripts\engine\utility::istrue(self.btraversalteleport)) {
 		return 0;
 	}
 
@@ -194,7 +194,7 @@ domeleedamageoncontact(param_00,param_01,param_02,param_03,param_04) {
 			break;
 		}
 
-		scripts\common\utility::waitframe();
+		scripts\engine\utility::waitframe();
 	}
 }
 
@@ -236,7 +236,7 @@ alienmeleenotehandler(param_00,param_01,param_02,param_03) {
 				var_0F = distance(var_0E,self.origin);
 				var_10 = 1;
 				if(var_0F > var_0A && var_0A > 0) {
-					var_10 = var_0F \ var_0A;
+					var_10 = var_0F / var_0A;
 					if(var_10 < 1) {
 						var_10 = 1;
 					}
@@ -278,7 +278,7 @@ meleenotehandler(param_00,param_01,param_02,param_03) {
 			}
 		}
 
-		if(!scripts\common\utility::istrue(self.bmovingmelee)) {
+		if(!scripts\engine\utility::istrue(self.bmovingmelee)) {
 			self notify("stop_melee_face_enemy");
 		}
 	}
@@ -318,7 +318,7 @@ playmovingmeleeattack(param_00,param_01,param_02,param_03) {
 
 	var_05 = scripts\asm\asm_mp::asm_getanim(param_00,param_01);
 	var_06 = self getsafecircleorigin(param_01,var_05);
-	var_07 = getanimlength(var_06) * 1 \ var_04;
+	var_07 = getanimlength(var_06) * 1 / var_04;
 	var_08 = getnotetracktimes(var_06,"start_melee");
 	var_09 = var_07 * var_08[0];
 	var_0A = gettunedata();
@@ -393,13 +393,13 @@ shouldturn(param_00,param_01,param_02,param_03) {
 
 handleadditionalyaw(param_00,param_01) {
 	self endon(param_00 + "_finished");
-	var_02 = self.additionalyaw \ param_01;
+	var_02 = self.additionalyaw / param_01;
 	for(var_03 = 0;var_03 < param_01;var_03++) {
 		var_04 = self.angles[1];
 		var_04 = var_04 + var_02;
 		var_05 = (self.angles[0],var_04,self.angles[2]);
 		self orientmode("face angle abs",var_05);
-		scripts\common\utility::waitframe();
+		scripts\engine\utility::waitframe();
 	}
 
 	self.additionalyaw = undefined;
@@ -487,7 +487,7 @@ playalienarrival(param_00,param_01,param_02,param_03) {
 		var_05 = gettunedata();
 		var_06 = var_05.arrivalanimdist[param_01];
 		var_07 = distance2d(var_04,self.origin);
-		var_08 = var_07 \ var_06;
+		var_08 = var_07 / var_06;
 		self scragentsetanimscale(var_08,1);
 	}
 
@@ -501,7 +501,7 @@ terminate_arrival(param_00,param_01,param_02) {
 playaliendeathanim(param_00,param_01,param_02,param_03) {
 	self endon(param_01 + "_finished");
 	self gib_fx_override("gravity");
-	if(!scripts\common\utility::istrue(self.var_11B2F)) {
+	if(!scripts\engine\utility::istrue(self.var_11B2F)) {
 		self ghostlaunched("anim deltas");
 	}
 
@@ -563,7 +563,7 @@ doalienjumptraversal(param_00,param_01,param_02,param_03) {
 	self endon(param_01 + "_finished");
 	var_04 = self getspectatepoint();
 	var_05 = self _meth_8146();
-	var_06 = scripts\common\utility::getyawtospot(var_05);
+	var_06 = scripts\engine\utility::getyawtospot(var_05);
 	if(abs(var_06) > 16) {
 		self.desiredyaw = var_06;
 		func_D56A(param_00,"turn",param_02);
@@ -605,7 +605,7 @@ jumpnotehandler(param_00,param_01,param_02,param_03) {
 }
 
 play_teleport_end() {
-	scripts\common\utility::waitframe();
+	scripts\engine\utility::waitframe();
 	self setscriptablepartstate("teleport_fx","teleport_end");
 }
 
@@ -614,7 +614,7 @@ terminate_jump(param_00,param_01,param_02) {
 }
 
 isalienjumpfinished(param_00,param_01,param_02,param_03) {
-	if(scripts\common\utility::istrue(self.var_11B2F)) {
+	if(scripts\engine\utility::istrue(self.var_11B2F)) {
 		return 0;
 	}
 

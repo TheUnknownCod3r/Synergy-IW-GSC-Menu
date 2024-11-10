@@ -1,8 +1,8 @@
-/****************************************
+/********************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\menus.gsc
-****************************************/
+ * Script: scripts\mp\menus.gsc
+********************************/
 
 init() {
 	if(!isdefined(game["gamestarted"])) {
@@ -79,9 +79,9 @@ onplayerconnect() {
 }
 
 setintrocamnetworkmodel() {
-	function_031D(1);
+	setintrocameraactive(1);
 	level waittill("prematch_over");
-	function_031D(0);
+	setintrocameraactive(0);
 }
 
 watchforbootmoviecomplete() {
@@ -280,7 +280,7 @@ autoassign() {
 		return;
 	}
 
-	if(function_0280() && isdefined(self.bot_team)) {
+	if(isbotmatchmakingenabled() && isdefined(self.bot_team)) {
 		thread setteam(self.bot_team);
 		return;
 	}
@@ -606,7 +606,7 @@ addtoteam(param_00,param_01,param_02) {
 
 	self.pers["team"] = param_00;
 	self.team = param_00;
-	if((!scripts\mp\utility::matchmakinggame() || isdefined(self.pers["isBot"]) || !scripts\mp\utility::allowteamassignment()) && !function_0303()) {
+	if((!scripts\mp\utility::matchmakinggame() || isdefined(self.pers["isBot"]) || !scripts\mp\utility::allowteamassignment()) && !isgamebattlematch()) {
 		if(level.teambased) {
 			self.sessionteam = param_00;
 		}
@@ -626,7 +626,7 @@ addtoteam(param_00,param_01,param_02) {
 		}
 	}
 
-	if(function_0303()) {
+	if(isgamebattlematch()) {
 		setmatchdata("players",self.clientid,"team",param_00);
 	}
 

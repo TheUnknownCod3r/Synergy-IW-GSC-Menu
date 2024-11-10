@@ -1,8 +1,8 @@
-/************************************************
+/****************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\anim\cover_right.gsc
-************************************************/
+ * Script: scripts\anim\cover_right.gsc
+****************************************/
 
 func_950A() {}
 
@@ -22,15 +22,15 @@ end_script() {
 
 func_F2C0() {
 	self.var_8EDF = -90;
-	self.var_1491.var_2274 = scripts\anim\utility::func_B028("cover_right_stand");
+	self.a.var_2274 = scripts\anim\utility::func_B028("cover_right_stand");
 	if(isdefined(level.var_DC5B)) {
-		self.var_1491.var_2274["rambo90"] = level.var_DC5B.var_4744;
-		self.var_1491.var_2274["rambo45"] = level.var_DC5B.var_4743;
-		self.var_1491.var_2274["grenade_rambo"] = level.var_DC5B.var_4745;
+		self.a.var_2274["rambo90"] = level.var_DC5B.var_4744;
+		self.a.var_2274["rambo45"] = level.var_DC5B.var_4743;
+		self.a.var_2274["grenade_rambo"] = level.var_DC5B.var_4745;
 	}
 }
 
 func_F2B8() {
 	self.var_8EDF = -90;
-	self.var_1491.var_2274 = scripts\anim\utility::func_B028("cover_right_crouch");
+	self.a.var_2274 = scripts\anim\utility::func_B028("cover_right_crouch");
 }

@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3534.gsc
-****************************/
+ * Script: 3534.gsc
+************************/
 
 func_139F9() {
 	self endon("death");
@@ -13,7 +13,7 @@ func_139F9() {
 	thread func_5802();
 	for(;;) {
 		self waittill("dodgeBegin");
-		scripts\mp\_utility::printgameaction("dodge",self);
+		scripts\mp\utility::printgameaction("dodge",self);
 		if(isdefined(self.controlsfrozen) && self.controlsfrozen == 1) {
 			continue;
 		}
@@ -23,8 +23,8 @@ func_139F9() {
 		}
 
 		self.dodging = 1;
-		scripts\mp\_missions::func_D991("ch_scout_dodge_uses");
-		if(scripts\mp\_utility::_hasperk("specialty_dodge_defense")) {
+		scripts\mp\missions::func_D991("ch_scout_dodge_uses");
+		if(scripts\mp\utility::_hasperk("specialty_dodge_defense")) {
 			self setclientomnvar("ui_light_armor",1);
 		}
 
@@ -124,7 +124,7 @@ func_139FB() {
 	level endon("game_ended");
 	scripts\engine\utility::waittill_any_3("dodgeEnd","death","disconnect");
 	self.dodging = 0;
-	if(scripts\mp\_utility::_hasperk("specialty_dodge_defense")) {
+	if(scripts\mp\utility::_hasperk("specialty_dodge_defense")) {
 		self setclientomnvar("ui_light_armor",0);
 	}
 

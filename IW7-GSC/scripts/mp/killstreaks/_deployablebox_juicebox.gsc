@@ -1,8 +1,8 @@
-/**********************************************************************
+/**************************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\killstreaks\_deployablebox_juicebox.gsc
-**********************************************************************/
+ * Script: scripts\mp\killstreaks\_deployablebox_juicebox.gsc
+**************************************************************/
 
 init() {
 	var_00 = spawnstruct();
@@ -27,7 +27,7 @@ init() {
 	var_00.maxhealth = 300;
 	var_00.damagefeedback = "deployable_bag";
 	var_00.deathweaponinfo = "deployable_ammo_mp";
-	var_00.deathvfx = loadfx("vfx/core/mp/killstreaks/vfx_ballistic_vest_death");
+	var_00.deathvfx = loadfx("vfx\core\mp\killstreaks\vfx_ballistic_vest_death");
 	var_00.allowmeleedamage = 1;
 	var_00.allowhvtspawn = 0;
 	var_00.maxuses = 4;
@@ -42,7 +42,7 @@ func_128E0(param_00,param_01) {
 		return 0;
 	}
 
-	scripts\mp\_matchdata::logkillstreakevent("deployable_juicebox",self.origin);
+	scripts\mp\matchdata::logkillstreakevent("deployable_juicebox",self.origin);
 	return 1;
 }
 
@@ -51,5 +51,5 @@ onusedeployable(param_00) {
 }
 
 func_3937(param_00) {
-	return !scripts\mp\_utility::isjuggernaut() && !scripts\mp\perks\_perkfunctions::hasjuiced();
+	return !scripts\mp\utility::isjuggernaut() && !scripts\mp\perks\_perkfunctions::hasjuiced();
 }

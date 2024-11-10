@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3606.gsc
-****************************/
+ * Script: 3606.gsc
+************************/
 
 func_98AB() {
 	level.var_C7F2 = [];
@@ -18,7 +18,7 @@ func_12CFF() {
 }
 
 func_10DD6() {
-	if(!scripts\mp\_utility::isanymlgmatch()) {
+	if(!scripts\mp\utility::isanymlgmatch()) {
 		self.health = self.maxhealth;
 	}
 
@@ -27,14 +27,14 @@ func_10DD6() {
 	thread func_13AE0();
 	thread func_13AE1();
 	self setscriptablepartstate("overdrive","activeOn",0);
-	level thread scripts\mp\_battlechatter_mp::saytoself(self,"plr_perk_overdrive",undefined,0.75);
+	level thread scripts\mp\battlechatter_mp::saytoself(self,"plr_perk_overdrive",undefined,0.75);
 }
 
 func_6373(param_00) {
 	self notify("overdriveEnd");
 	self motionblurhqdisable();
 	if(self.loadoutarchetype == "archetype_assault") {
-		if(!scripts\mp\_utility::istrue(param_00)) {
+		if(!scripts\mp\utility::istrue(param_00)) {
 			self setscriptablepartstate("overdrive","activeOff",0);
 		}
 
@@ -57,10 +57,10 @@ func_13A4F() {
 		self waittill("overdriveBeginRace");
 		waittillframeend;
 		if(isdefined(var_00.var_6ACF)) {
-			scripts\mp\_supers::refundsuper();
+			scripts\mp\supers::refundsuper();
 		}
 		else if(isdefined(var_00.var_10DE6) && isdefined(var_00.var_637B) || isdefined(var_00.var_4E59) || isdefined(var_00.gameendedreceived)) {
-			scripts\mp\_supers::refundsuper();
+			scripts\mp\supers::refundsuper();
 		}
 		else if(isdefined(var_00.var_4E59)) {
 			func_6373(1);
@@ -125,9 +125,9 @@ func_13ADF() {
 	self endon("overdriveEnd");
 	waittillframeend;
 	while(self _meth_856B()) {
-		var_00 = scripts\mp\_supers::getcurrentsuper();
-		var_00.var_130EF = self _meth_856C() * scripts\mp\_supers::_meth_8188() * 1000;
-		scripts\mp\_supers::func_112A5();
+		var_00 = scripts\mp\supers::getcurrentsuper();
+		var_00.var_130EF = self _meth_856C() * scripts\mp\supers::_meth_8188() * 1000;
+		scripts\mp\supers::func_112A5();
 		scripts\engine\utility::waitframe();
 	}
 }

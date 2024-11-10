@@ -1,8 +1,8 @@
-/***************************************
+/*******************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\loot.gsc
-***************************************/
+ * Script: scripts\cp\loot.gsc
+*******************************/
 
 init_loot() {
 	read_loot_table();
@@ -29,9 +29,9 @@ poweruponplayerconnect() {
 }
 
 init_powerup_effects() {
-	level._effect["pickup"] = loadfx("vfx/iw7/core/zombie/powerups/vfx_zom_powerup_pickup.vfx");
-	level._effect["pickup_fnfmod"] = loadfx("vfx/iw7/core/zombie/powerups/vfx_zd_powerup_pickup.vfx");
-	level._effect["big_explo"] = loadfx("vfx/iw7/_requests/coop/vfx_nuke_explosion_01.vfx");
+	level._effect["pickup"] = loadfx("vfx\iw7\core\zombie\powerups\vfx_zom_powerup_pickup.vfx");
+	level._effect["pickup_fnfmod"] = loadfx("vfx\iw7\core\zombie\powerups\vfx_zd_powerup_pickup.vfx");
+	level._effect["big_explo"] = loadfx("vfx\iw7\_requests\coop\vfx_nuke_explosion_01.vfx");
 }
 
 init_powerup_data() {
@@ -113,7 +113,7 @@ read_loot_table() {
 	}
 	else
 	{
-		var_00 = "cp/zombies/zombie_loot.csv";
+		var_00 = "cp\zombies\zombie_loot.csv";
 	}
 
 	for(var_01 = 1;var_01 <= 100;var_01++) {

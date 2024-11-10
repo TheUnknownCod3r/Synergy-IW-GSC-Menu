@@ -1,8 +1,8 @@
-/********************************************************************
+/************************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\maps\cp_final\cp_final_final_boss.gsc
-********************************************************************/
+ * Script: scripts\cp\maps\cp_final\cp_final_final_boss.gsc
+************************************************************/
 
 init() {
 	scripts\engine\utility::flag_init("meph_fight");
@@ -448,17 +448,17 @@ remove_padding_damage() {
 }
 
 initfx() {
-	level._effect["weak_spot_hit"] = loadfx("vfx/iw7/levels/cp_final/boss_demon/vfx_weakspot_hit.vfx");
-	level._effect["sb_quest_item_pickup"] = loadfx("vfx/iw7/core/zombie/vfx_zom_souvenir_pickup.vfx");
-	level._effect["flying_soul_death"] = loadfx("vfx/iw7/levels/cp_final/boss_demon/vfx_flying_soul_death.vfx");
-	level._effect["flying_soul_birth"] = loadfx("vfx/iw7/levels/cp_final/boss_demon/vfx_flying_soul_birth.vfx");
-	level._effect["flying_soul_hit_fail"] = loadfx("vfx/iw7/levels/cp_final/boss_demon/vfx_flying_soul_hit_fail.vfx");
-	level._effect["boss_shield_hit"] = loadfx("vfx/iw7/levels/cp_final/boss_demon/vfx_boss_shield_hit.vfx");
-	level._effect["boss_teleport_start"] = loadfx("vfx/iw7/levels/cp_final/boss/vfx_dlc4_boss_telep_out.vfx");
-	level._effect["boss_teleport_start_left"] = loadfx("vfx/iw7/levels/cp_final/boss/vfx_dlc4_boss_telep_out_left.vfx");
-	level._effect["boss_teleport_end"] = loadfx("vfx/iw7/levels/cp_final/boss/vfx_dlc4_boss_telep_in.vfx");
-	level._effect["boss_teleport_end_left"] = loadfx("vfx/iw7/levels/cp_final/boss/vfx_dlc4_boss_telep_in_left.vfx");
-	level._effect["talisman_flash"] = loadfx("vfx/iw7/levels/cp_final/boss/vfx_talisman_flash.vfx");
+	level._effect["weak_spot_hit"] = loadfx("vfx\iw7\levels\cp_final\boss_demon\vfx_weakspot_hit.vfx");
+	level._effect["sb_quest_item_pickup"] = loadfx("vfx\iw7\core\zombie\vfx_zom_souvenir_pickup.vfx");
+	level._effect["flying_soul_death"] = loadfx("vfx\iw7\levels\cp_final\boss_demon\vfx_flying_soul_death.vfx");
+	level._effect["flying_soul_birth"] = loadfx("vfx\iw7\levels\cp_final\boss_demon\vfx_flying_soul_birth.vfx");
+	level._effect["flying_soul_hit_fail"] = loadfx("vfx\iw7\levels\cp_final\boss_demon\vfx_flying_soul_hit_fail.vfx");
+	level._effect["boss_shield_hit"] = loadfx("vfx\iw7\levels\cp_final\boss_demon\vfx_boss_shield_hit.vfx");
+	level._effect["boss_teleport_start"] = loadfx("vfx\iw7\levels\cp_final\boss\vfx_dlc4_boss_telep_out.vfx");
+	level._effect["boss_teleport_start_left"] = loadfx("vfx\iw7\levels\cp_final\boss\vfx_dlc4_boss_telep_out_left.vfx");
+	level._effect["boss_teleport_end"] = loadfx("vfx\iw7\levels\cp_final\boss\vfx_dlc4_boss_telep_in.vfx");
+	level._effect["boss_teleport_end_left"] = loadfx("vfx\iw7\levels\cp_final\boss\vfx_dlc4_boss_telep_in_left.vfx");
+	level._effect["talisman_flash"] = loadfx("vfx\iw7\levels\cp_final\boss\vfx_talisman_flash.vfx");
 }
 
 initinteraction(param_00) {
@@ -642,20 +642,20 @@ setupdebugplayerloadouts() {
 		var_03 takeweapon(var_03 scripts\cp\utility::getvalidtakeweapon());
 		var_06 = scripts\cp\utility::getrawbaseweaponname(var_01[var_04]);
 		if(isdefined(var_03.weapon_build_models[var_06])) {
-			scripts/cp/zombies/coop_wall_buys::givevalidweapon(var_03,var_03.weapon_build_models[var_06]);
+			scripts\cp\zombies\coop_wall_buys::givevalidweapon(var_03,var_03.weapon_build_models[var_06]);
 		}
 		else
 		{
-			scripts/cp/zombies/coop_wall_buys::givevalidweapon(var_03,var_01[var_04]);
+			scripts\cp\zombies\coop_wall_buys::givevalidweapon(var_03,var_01[var_04]);
 		}
 
 		var_07 = scripts\cp\utility::getrawbaseweaponname(var_00[var_05]);
 		if(isdefined(var_03.weapon_build_models[var_07])) {
-			scripts/cp/zombies/coop_wall_buys::givevalidweapon(var_03,var_03.weapon_build_models[var_07]);
+			scripts\cp\zombies\coop_wall_buys::givevalidweapon(var_03,var_03.weapon_build_models[var_07]);
 		}
 		else
 		{
-			scripts/cp/zombies/coop_wall_buys::givevalidweapon(var_03,var_01[var_04]);
+			scripts\cp\zombies\coop_wall_buys::givevalidweapon(var_03,var_01[var_04]);
 		}
 
 		var_03.total_currency_earned = min(10000,var_03 scripts\cp\cp_persistence::get_player_max_currency());
@@ -666,7 +666,7 @@ setupdebugplayerloadouts() {
 	}
 
 	if(isdefined(level.pap_max) && level.pap_max < 3) {
-		level.var_C8A4++;
+		level.pap_max++;
 	}
 
 	level [[level.upgrade_weapons_func]]();
@@ -960,7 +960,7 @@ soulprojectilemonitor(param_00,param_01) {
 		if(gettime() - var_04 > var_03.soul_lifetime) {
 			var_06 = param_00 gettagorigin("j_spine4");
 			playfx(level._effect["flying_soul_hit_fail"],var_06,anglestoforward(param_00.angles),anglestoup(param_00.angles));
-			scripts/aitypes/zombie_ghost/behaviors::fake_ghost_explode(param_00,param_01,var_03.soul_explosion_radius);
+			scripts\aitypes\zombie_ghost\behaviors::fake_ghost_explode(param_00,param_01,var_03.soul_explosion_radius);
 		}
 
 		var_07 = var_02.boss gettagorigin("j_mainroot");
@@ -976,7 +976,7 @@ soulprojectilemonitor(param_00,param_01) {
 			var_06 = param_00 gettagorigin("j_spine4");
 			playfx(level._effect["flying_soul_death"],var_06,anglestoforward(param_00.angles),anglestoup(param_00.angles));
 			playsoundatpos(param_00.origin,"weap_soul_projectile_impact_lg");
-			scripts/aitypes/zombie_ghost/behaviors::fake_ghost_explode(param_00,param_01,var_03.soul_explosion_radius);
+			scripts\aitypes\zombie_ghost\behaviors::fake_ghost_explode(param_00,param_01,var_03.soul_explosion_radius);
 			break;
 		}
 
@@ -1065,8 +1065,8 @@ entanglerhitmonitor(param_00) {
 			if(var_03 == var_01.entangler_hit_same_target_notify) {
 				var_02 = var_02 + var_01.entangler_track_update_frequency;
 				var_04 = min(var_02 / var_01.entangler_track_time,1);
-				if(var_04 == 1 && isalive(param_00.current_entangler_target) && !scripts/aitypes/zombie_ghost/behaviors::isentangled(param_00.current_entangler_target) && !isdefined(param_00.ghost_in_entanglement)) {
-					param_00.current_entangler_target scripts/aitypes/zombie_ghost/behaviors::entangleghost(param_00.current_entangler_target,param_00);
+				if(var_04 == 1 && isalive(param_00.current_entangler_target) && !scripts\aitypes\zombie_ghost\behaviors::isentangled(param_00.current_entangler_target) && !isdefined(param_00.ghost_in_entanglement)) {
+					param_00.current_entangler_target scripts\aitypes\zombie_ghost\behaviors::entangleghost(param_00.current_entangler_target,param_00);
 				}
 
 				continue;
@@ -1169,7 +1169,7 @@ weakspotmonitor(param_00) {
 			param_00.model setscriptablepartstate("symbol","complete");
 			param_00.model setscriptablepartstate("meter","10");
 			var_01.activatedcircles[var_01.activatedcircles.size] = param_00;
-			var_01.boss._blackboard.desirednode = 0;
+			var_01.boss.var_1198.desirednode = 0;
 			self.automaticspawn = 0;
 			var_09 = var_01.boss.unlockedactions.size;
 			if(var_09 == 4) {
@@ -1235,7 +1235,7 @@ gointolaststand() {
 	self.blackholetimer = undefined;
 	self notify("pain");
 	self notify("last_stand");
-	self._blackboard.painnotifytime = 100;
+	self.var_1198.painnotifytime = 100;
 }
 
 frenzyprogressmonitor() {
@@ -1338,9 +1338,9 @@ talismanmovementmonitor(param_00) {
 }
 
 activatetalismanbeam() {
-	function_02DF(level._effect["vfx_talisman_beam"],self,"tag_origin",level.fbd.boss,"j_spine4");
+	playfxontagsbetweenclients(level._effect["vfx_talisman_beam"],self,"tag_origin",level.fbd.boss,"j_spine4");
 	wait(0.5);
-	function_02DF(level._effect["vfx_talisman_beam"],self,"tag_origin",level.fbd.boss,"j_spine4");
+	playfxontagsbetweenclients(level._effect["vfx_talisman_beam"],self,"tag_origin",level.fbd.boss,"j_spine4");
 }
 
 victory() {

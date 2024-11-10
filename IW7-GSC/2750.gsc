@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2750.gsc
+ * Script: 2750.gsc
 ***************************************/
 
 callback_hostmigration() {

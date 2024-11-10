@@ -1,15 +1,15 @@
-/*************************************************************
+/*****************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\maps\mp_dome_iw\mp_dome_iw.gsc
-*************************************************************/
+ * Script: scripts\mp\maps\mp_dome_iw\mp_dome_iw.gsc
+*****************************************************/
 
 main() {
-	lib_0F96::main();
+	scripts\mp\maps\mp_dome_iw\mp_dome_iw_precache::main();
 	scripts\mp\maps\mp_dome_iw\gen\mp_dome_iw_art::main();
-	lib_0F95::main();
-	scripts\mp\_load::main();
-	scripts\mp\_compass::func_FACD("compass_map_mp_dome_iw");
+	scripts\mp\maps\mp_dome_iw\mp_dome_iw_fx::main();
+	scripts\mp\load::main();
+	scripts\mp\compass::setupminimap("compass_map_mp_dome_iw");
 	setdvar("r_lightGridEnableTweaks",1);
 	setdvar("r_lightGridIntensity",1.33);
 	setdvar("r_sdfShadowPenumbra",0.2);
@@ -85,7 +85,7 @@ patchablecollision() {
 	var_18.angles = (0,0,0);
 	var_18 clonebrushmodeltoscriptmodel(var_16);
 	var_19 = spawn("trigger_radius",(-64,832,-784),0,512,1024);
-	var_19.var_257 = 512;
+	var_19.fgetarg = 512;
 	var_19.height = 1024;
 	thread killtriggerloop(var_19);
 	var_1A = getent("clip128x128x8","targetname");
@@ -129,13 +129,13 @@ killtriggerloop(param_00) {
 			}
 
 			if(isdefined(var_01.classname) && var_01.classname == "script_vehicle") {
-				if(isdefined(var_01.var_110EA)) {
-					if(var_01.var_110EA == "minijackal") {
+				if(isdefined(var_01.streakname)) {
+					if(var_01.streakname == "minijackal") {
 						var_01 notify("minijackal_end");
 						continue;
 					}
 
-					if(var_01.var_110EA == "venom") {
+					if(var_01.streakname == "venom") {
 						var_01 notify("venom_end",var_01.origin);
 					}
 				}
@@ -153,13 +153,13 @@ setup_vista_driving_cars() {
 
 vista_car_drive(param_00) {
 	level endon("game_ended");
-	var_01 = scripts\common\utility::getstruct(param_00.target,"targetname");
+	var_01 = scripts\engine\utility::getstruct(param_00.target,"targetname");
 	var_02 = 0.002;
 	for(;;) {
 		var_03 = abs(distance(param_00.origin,var_01.origin) * var_02);
 		param_00 moveto(var_01.origin,var_03,0,0);
 		param_00 rotateto(var_01.angles,var_03,0,0);
-		var_01 = scripts\common\utility::getstruct(var_01.target,"targetname");
+		var_01 = scripts\engine\utility::getstruct(var_01.target,"targetname");
 		wait(var_03);
 	}
 }

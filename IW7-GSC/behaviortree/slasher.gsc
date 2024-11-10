@@ -1,8 +1,8 @@
-/********************************************
+/************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\behaviortree\slasher.gsc
-********************************************/
+ * Script: behaviortree\slasher.gsc
+************************************/
 
 func_2AD0() {
 	if(isdefined(level.var_119E["slasher"])) {

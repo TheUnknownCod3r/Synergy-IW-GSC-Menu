@@ -1,8 +1,8 @@
-/****************************
+/**********************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\4347.gsc
-****************************/
+ * Script: scripts\mp\maps\mp_skyway\gen\mp_skyway_fx.gsc
+**********************************************************/
 
 main() {
 	var_00 = scripts\engine\utility::createoneshoteffect("vfx_fish_tk_lrg_skywy");

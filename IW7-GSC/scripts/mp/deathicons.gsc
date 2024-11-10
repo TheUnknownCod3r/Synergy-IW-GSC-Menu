@@ -1,8 +1,8 @@
-/*********************************************
+/*************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\deathicons.gsc
-*********************************************/
+ * Script: scripts\mp\deathicons.gsc
+*************************************/
 
 init() {
 	if(!level.teambased) {

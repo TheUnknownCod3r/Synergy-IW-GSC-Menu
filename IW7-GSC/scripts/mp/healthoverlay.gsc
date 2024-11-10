@@ -1,8 +1,8 @@
-/************************************************
+/****************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\healthoverlay.gsc
-************************************************/
+ * Script: scripts\mp\healthoverlay.gsc
+****************************************/
 
 init() {
 	level.healthoverlaycutoff = 0.55;
@@ -145,7 +145,7 @@ healthregeneration(param_00,param_01) {
 		wait(0.05);
 		var_06 = 0;
 		if(scripts\mp\utility::_hasperk("specialty_adrenaline") || scripts\mp\utility::_hasperk("specialty_adrenaline_lite")) {
-			var_06 = scripts/mp/equipment/adrenaline::func_7EF5();
+			var_06 = scripts\mp\equipment\adrenaline::func_7EF5();
 		}
 		else if(scripts\mp\utility::_hasperk("specialty_regenfaster")) {
 			var_06 = var_03 * level.var_DE89;

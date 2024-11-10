@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\2092.gsc
-****************************/
+ * Script: 2092.gsc
+************************/
 
 main() {
 	self setmodel("body_un_jackal_pilots");
@@ -16,7 +16,7 @@ main() {
 	self.voice = "unitednationshelmet";
 	self give_explosive_touch_on_revived("vestlight");
 	if(issentient(self)) {
-		self sethitlocdamagetable("locdmgtable/ai_lochit_dmgtable");
+		self sethitlocdamagetable("locdmgtable\ai_lochit_dmgtable");
 	}
 
 	self glinton(#animtree);

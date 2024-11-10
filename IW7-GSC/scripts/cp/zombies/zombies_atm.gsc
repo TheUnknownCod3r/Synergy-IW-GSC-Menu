@@ -1,8 +1,8 @@
-/******************************************************
+/**********************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\zombies\zombies_atm.gsc
-******************************************************/
+ * Script: scripts\cp\zombies\zombies_atm.gsc
+**********************************************/
 
 init_atm() {
 	var_00 = scripts\engine\utility::getstructarray("atm_deposit","script_noteworthy");

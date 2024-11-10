@@ -1,8 +1,8 @@
-/***********************************************
+/***************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\sp\friendlyfire.gsc
-***********************************************/
+ * Script: scripts\sp\friendlyfire.gsc
+***************************************/
 
 main() {
 	level.friendlyfire["min_participation"] = -200;
@@ -297,10 +297,10 @@ func_B8CF(param_00) {
 	level notify("mission failed");
 	level notify("friendlyfire_mission_fail");
 	waittillframeend;
-	function_01C5("hud_missionFailed",1);
+	setsaveddvar("hud_missionFailed",1);
 	setomnvar("ui_hide_weapon_info",1);
-	function_01C5("hud_showstance",0);
-	function_01C5("actionSlotsHide",1);
+	setsaveddvar("hud_showstance",0);
+	setsaveddvar("actionSlotsHide",1);
 	if(isdefined(level.player.var_6AD1)) {
 		return;
 	}

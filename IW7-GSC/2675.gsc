@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2675.gsc
+ * Script: 2675.gsc
 ***************************************/
 
 init() {
@@ -30,8 +30,8 @@ give_crafted_fireworks_trap(var_00, var_01) {
   var_01 thread watch_dpad();
   var_01 notify("new_power", "crafted_ims");
   var_01 setclientomnvar("zom_crafted_weapon", 2);
-  var_01 thread scripts/cp/utility::usegrenadegesture(var_01, "iw7_pickup_zm");
-  scripts/cp/utility::set_crafted_inventory_item("crafted_ims", ::give_crafted_fireworks_trap, var_01);
+  var_01 thread scripts\cp\utility::usegrenadegesture(var_01, "iw7_pickup_zm");
+  scripts\cp\utility::set_crafted_inventory_item("crafted_ims", ::give_crafted_fireworks_trap, var_01);
 }
 
 watch_dpad() {
@@ -53,7 +53,7 @@ watch_dpad() {
   if (isdefined(self.allow_carry) && self.allow_carry == 0)
   continue;
 
-  if (scripts/cp/utility::is_valid_player())
+  if (scripts\cp\utility::is_valid_player())
   break;
   }
 
@@ -62,15 +62,15 @@ watch_dpad() {
 
 _meth_82CA(var_00) {
   self endon("disconnect");
-  scripts/cp/utility::clearlowermessage("msg_power_hint");
+  scripts\cp\utility::clearlowermessage("msg_power_hint");
   var_01 = func_48EB(var_00, self);
   self.itemtype = var_1.name;
-  scripts/cp/utility::remove_player_perks();
+  scripts\cp\utility::remove_player_perks();
   self.carried_fireworks_trap = var_01;
   var_1.firstplacement = 1;
   var_02 = func_F684(var_01, 1);
   self.carried_fireworks_trap = undefined;
-  thread scripts/cp/utility::restore_player_perk();
+  thread scripts\cp\utility::restore_player_perk();
   return var_02;
 }
 
@@ -103,7 +103,7 @@ func_F684(var_00, var_01, var_02) {
   if (var_03 != "force_cancel_placement")
   thread watch_dpad();
   else if (var_01)
-  scripts/cp/utility::remove_crafted_item_from_inventory(self);
+  scripts\cp\utility::remove_crafted_item_from_inventory(self);
 
   return 0;
   }
@@ -112,7 +112,7 @@ func_F684(var_00, var_01, var_02) {
   continue;
 
   if (var_01)
-  scripts/cp/utility::remove_crafted_item_from_inventory(self);
+  scripts\cp\utility::remove_crafted_item_from_inventory(self);
 
   var_00 thread func_6DA2(var_02);
   self notify("IMS_placed");
@@ -160,9 +160,9 @@ func_48EA(var_00, var_01) {
   var_04 thread func_6D9D();
 
   if (isdefined(var_01))
-  var_04 thread scripts/cp/utility::item_timeout(var_01);
+  var_04 thread scripts\cp\utility::item_timeout(var_01);
   else
-  var_04 thread scripts/cp/utility::item_timeout(undefined, level.func_6DA3[self.func_6DA4].lifespan);
+  var_04 thread scripts\cp\utility::item_timeout(undefined, level.func_6DA3[self.func_6DA4].lifespan);
 
   return var_04;
 }
@@ -182,7 +182,7 @@ func_9367(var_00) {
   func_6DA1();
 
   if (isdefined(self.inuseby)) {
-  self.inuseby scripts/cp/utility::restore_player_perk();
+  self.inuseby scripts\cp\utility::restore_player_perk();
   self notify("deleting");
   wait 1.0;
   }
@@ -205,7 +205,7 @@ func_6D9D() {
   for (;;) {
   self waittill("trigger", var_00);
 
-  if (!var_00 scripts/cp/utility::is_valid_player())
+  if (!var_00 scripts\cp\utility::is_valid_player())
   continue;
 
   if (scripts\engine\utility::is_true(var_0.iscarrying))
@@ -253,7 +253,7 @@ func_6DA2(var_00) {
 
   var_2.endonstring = "carried";
   var_2.deathoverridecallback = ::func_936D;
-  var_01 thread scripts/cp/cp_movers::handle_moving_platforms(var_02);
+  var_01 thread scripts\cp\cp_movers::handle_moving_platforms(var_02);
   self.carried_fireworks_trap delete();
   self delete();
 }
@@ -280,8 +280,8 @@ func_6DA0(var_00) {
   self setcandamage(0);
   self.carriedby = var_00;
   var_0.iscarrying = 1;
-  var_00 thread scripts/cp/utility::update_trap_placement_internal(self, self.carried_fireworks_trap, level.func_6DA3["crafted_ims"]);
-  thread scripts/cp/utility::item_oncarrierdeath(var_00);
+  var_00 thread scripts\cp\utility::update_trap_placement_internal(self, self.carried_fireworks_trap, level.func_6DA3["crafted_ims"]);
+  thread scripts\cp\utility::item_oncarrierdeath(var_00);
   thread func_936F(var_00);
   thread func_9371(var_00);
 
@@ -311,7 +311,7 @@ func_6D9E() {
   self endon("death");
   self setcursorhint("HINT_NOICON");
   self sethintstring(level.func_6DA3[self.func_6DA4].hintstring);
-  scripts/cp/utility::addtotraplist();
+  scripts\cp\utility::addtotraplist();
   var_00 = self.owner;
   var_00 getrigindexfromarchetyperef();
   self makeusable();
@@ -341,7 +341,7 @@ func_6D9E() {
   wait 0.75;
   self setscriptablepartstate("base", "on");
   thread func_6D9C();
-  thread scripts/cp/utility::item_handleownerdisconnect("fireworks_disconnect");
+  thread scripts\cp\utility::item_handleownerdisconnect("fireworks_disconnect");
 }
 
 func_6DA1() {
@@ -355,7 +355,7 @@ func_6DA1() {
   self.func_69F6 = undefined;
   }
 
-  scripts/cp/utility::removefromtraplist();
+  scripts\cp\utility::removefromtraplist();
 }
 
 func_6D9C() {

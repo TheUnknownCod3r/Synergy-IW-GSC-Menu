@@ -1,8 +1,8 @@
-/*************************************************
+/*****************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\sp\damagefeedback.gsc
-*************************************************/
+ * Script: scripts\sp\damagefeedback.gsc
+*****************************************/
 
 init() {
 	precacheshader("damage_feedback_thin");
@@ -50,10 +50,10 @@ func_4D4C(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_0
 	var_0A = "standard";
 	var_0B = "standard";
 	if(isdefined(param_09)) {
-		if(param_00 <= function_0294(param_09)) {
+		if(param_00 <= weapongetdamagemin(param_09)) {
 			var_0B = "low_damage";
 		}
-		else if(param_00 >= function_0293(param_09)) {
+		else if(param_00 >= weapongetdamagemax(param_09)) {
 			var_0B = "high_damage";
 		}
 	}

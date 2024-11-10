@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2282.gsc
+ * Script: 2282.gsc
 ***************************************/
 
 #using_animtree("generic_human");
@@ -13,7 +13,7 @@ main() {
   self give_explosive_touch_on_revived("c6iservo");
 
   if (issentient(self))
-  self sethitlocdamagetable("locdmgtable/ai_lochit_dmgtable");
+  self sethitlocdamagetable("locdmgtable\ai_lochit_dmgtable");
 
   self glinton(#animtree);
 }

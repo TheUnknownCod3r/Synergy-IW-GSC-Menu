@@ -1,8 +1,8 @@
-/**********************************************
+/**************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\anim\reactions.gsc
-**********************************************/
+ * Script: scripts\anim\reactions.gsc
+**************************************/
 
 main() {
 	if(getdvarint("ai_iw7",0) == 1) {
@@ -42,7 +42,7 @@ func_325D() {
 			continue;
 		}
 
-		if(self.var_1491.pose != "stand") {
+		if(self.a.pose != "stand") {
 			continue;
 		}
 
@@ -69,7 +69,7 @@ func_BF20() {
 	self endon("death");
 	self endon("endNewEnemyReactionAnim");
 	self.var_A9D9 = gettime();
-	self.var_1491.movement = "stop";
+	self.a.movement = "stop";
 	if(isdefined(self._stealth) && self.opcode::OP_inequality != "combat") {
 		func_10F51();
 	}
@@ -94,7 +94,7 @@ func_BF22() {
 		return;
 	}
 
-	if(self.var_1491.pose == "prone" || isdefined(self.var_1491.onback)) {
+	if(self.a.pose == "prone" || isdefined(self.a.onback)) {
 		return;
 	}
 

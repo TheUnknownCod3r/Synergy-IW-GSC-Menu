@@ -1,8 +1,8 @@
-/***************************************************
+/*******************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\battlechatter_mp.gsc
-***************************************************/
+ * Script: scripts\mp\battlechatter_mp.gsc
+*******************************************/
 
 init() {
 	if(level.multiteambased) {
@@ -202,7 +202,7 @@ func_85D1() {
 						break;
 				}
 
-				if(function_0244(var_05.weapon_name) != "offhand" && weaponclass(var_05.weapon_name) == "grenade") {
+				if(weaponinventorytype(var_05.weapon_name) != "offhand" && weaponclass(var_05.weapon_name) == "grenade") {
 					continue;
 				}
 

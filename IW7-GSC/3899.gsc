@@ -1,20 +1,20 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3899.gsc
-****************************/
+ * Script: 3899.gsc
+************************/
 
 func_CEB5(param_00,param_01,param_02,param_03) {
 	self endon(param_01 + "_finished");
-	var_04 = scripts/asm/asm_mp::asm_getanim(param_00,param_01);
+	var_04 = scripts\asm\asm_mp::asm_getanim(param_00,param_01);
 	self.asm.var_4C86.var_697F = undefined;
 	if(!isdefined(var_04)) {
-		scripts/asm/asm::asm_fireevent(param_01,"code_move",undefined);
+		scripts\asm\asm::asm_fireevent(param_01,"code_move",undefined);
 		return;
 	}
 
 	func_D53A(param_00,param_01,var_04,param_02);
-	scripts/asm/asm::asm_fireevent(param_01,"code_move",undefined);
+	scripts\asm\asm::asm_fireevent(param_01,"code_move",undefined);
 }
 
 func_3E9F(param_00,param_01,param_02) {
@@ -28,37 +28,37 @@ func_3E9F(param_00,param_01,param_02) {
 
 _meth_8162(param_00) {
 	var_01 = [];
-	if(scripts/asm/asm::asm_hasalias(param_00,"1")) {
-		var_01[7] = scripts/asm/asm::asm_lookupanimfromalias(param_00,"1");
+	if(scripts\asm\asm::asm_hasalias(param_00,"1")) {
+		var_01[7] = scripts\asm\asm::asm_lookupanimfromalias(param_00,"1");
 	}
 
-	if(scripts/asm/asm::asm_hasalias(param_00,"2")) {
-		var_01[0] = scripts/asm/asm::asm_lookupanimfromalias(param_00,"2");
+	if(scripts\asm\asm::asm_hasalias(param_00,"2")) {
+		var_01[0] = scripts\asm\asm::asm_lookupanimfromalias(param_00,"2");
 		var_01[8] = var_01[0];
 	}
 
-	if(scripts/asm/asm::asm_hasalias(param_00,"3")) {
-		var_01[1] = scripts/asm/asm::asm_lookupanimfromalias(param_00,"3");
+	if(scripts\asm\asm::asm_hasalias(param_00,"3")) {
+		var_01[1] = scripts\asm\asm::asm_lookupanimfromalias(param_00,"3");
 	}
 
-	if(scripts/asm/asm::asm_hasalias(param_00,"4")) {
-		var_01[6] = scripts/asm/asm::asm_lookupanimfromalias(param_00,"4");
+	if(scripts\asm\asm::asm_hasalias(param_00,"4")) {
+		var_01[6] = scripts\asm\asm::asm_lookupanimfromalias(param_00,"4");
 	}
 
-	if(scripts/asm/asm::asm_hasalias(param_00,"6")) {
-		var_01[2] = scripts/asm/asm::asm_lookupanimfromalias(param_00,"6");
+	if(scripts\asm\asm::asm_hasalias(param_00,"6")) {
+		var_01[2] = scripts\asm\asm::asm_lookupanimfromalias(param_00,"6");
 	}
 
-	if(scripts/asm/asm::asm_hasalias(param_00,"7")) {
-		var_01[5] = scripts/asm/asm::asm_lookupanimfromalias(param_00,"7");
+	if(scripts\asm\asm::asm_hasalias(param_00,"7")) {
+		var_01[5] = scripts\asm\asm::asm_lookupanimfromalias(param_00,"7");
 	}
 
-	if(scripts/asm/asm::asm_hasalias(param_00,"8")) {
-		var_01[4] = scripts/asm/asm::asm_lookupanimfromalias(param_00,"8");
+	if(scripts\asm\asm::asm_hasalias(param_00,"8")) {
+		var_01[4] = scripts\asm\asm::asm_lookupanimfromalias(param_00,"8");
 	}
 
-	if(scripts/asm/asm::asm_hasalias(param_00,"9")) {
-		var_01[3] = scripts/asm/asm::asm_lookupanimfromalias(param_00,"9");
+	if(scripts\asm\asm::asm_hasalias(param_00,"9")) {
+		var_01[3] = scripts\asm\asm::asm_lookupanimfromalias(param_00,"9");
 	}
 
 	return var_01;
@@ -74,7 +74,7 @@ func_53CA(param_00) {
 		var_02 = self.vehicle_getspawnerarray;
 	}
 
-	var_03 = scripts/asm/asm_mp::func_7EA3();
+	var_03 = scripts\asm\asm_mp::func_7EA3();
 	var_04 = self _meth_813A();
 	var_05 = vectortoangles(var_04);
 	if(isdefined(var_03)) {
@@ -151,7 +151,7 @@ func_D53A(param_00,param_01,param_02,param_03) {
 
 	self.var_D8C4 = self.var_358;
 	self.var_358 = var_0D;
-	scripts/asm/asm_mp::func_2365(param_00,param_01,param_03,param_02,self.moveplaybackrate);
+	scripts\asm\asm_mp::func_2365(param_00,param_01,param_03,param_02,self.moveplaybackrate);
 	self.var_358 = self.var_D8C4;
 	self.var_D8C4 = undefined;
 	self ghostlaunched("code_move");
@@ -167,7 +167,7 @@ func_3E57() {
 		return 0;
 	}
 
-	if(isdefined(self.isnodeoccupied) && scripts/asm/asm_bb::bb_wantstostrafe()) {
+	if(isdefined(self.isnodeoccupied) && scripts\asm\asm_bb::bb_wantstostrafe()) {
 		return 0;
 	}
 
@@ -183,7 +183,7 @@ func_3E57() {
 }
 
 func_3B1F(param_00,param_01,param_02,param_03) {
-	if(!isdefined(param_03[2]) || !scripts/asm/asm_bb::bb_movetyperequested(param_03[2])) {
+	if(!isdefined(param_03[2]) || !scripts\asm\asm_bb::bb_movetyperequested(param_03[2])) {
 		return 0;
 	}
 
@@ -199,8 +199,8 @@ func_FFF8(param_00,param_01,param_02,param_03) {
 		return 0;
 	}
 
-	var_04 = scripts/asm/asm::asm_getcurrentstatename(param_00);
-	var_05 = scripts/asm/asm::func_233F(var_04,"sharp_turn");
+	var_04 = scripts\asm\asm::asm_getcurrentstatename(param_00);
+	var_05 = scripts\asm\asm::func_233F(var_04,"sharp_turn");
 	if(!isdefined(var_05)) {
 		return 0;
 	}
@@ -279,13 +279,13 @@ func_3EF5(param_00,param_01,param_02,param_03) {
 
 func_D514(param_00,param_01,param_02,param_03) {
 	self endon(param_01 + "_finished");
-	var_04 = scripts/asm/asm_mp::asm_getanim(param_00,param_01);
+	var_04 = scripts\asm\asm_mp::asm_getanim(param_00,param_01);
 	self.var_FC61 = undefined;
-	scripts/asm/asm_mp::func_237E("anim deltas");
-	scripts/asm/asm_mp::func_237F("face current");
-	scripts/asm/asm_mp::func_2365(param_00,param_01,param_02,var_04,self.moveplaybackrate);
-	scripts/asm/asm_mp::func_237E("code_move");
-	scripts/asm/asm_mp::func_237F("face motion");
+	scripts\asm\asm_mp::func_237E("anim deltas");
+	scripts\asm\asm_mp::func_237F("face current");
+	scripts\asm\asm_mp::func_2365(param_00,param_01,param_02,var_04,self.moveplaybackrate);
+	scripts\asm\asm_mp::func_237E("code_move");
+	scripts\asm\asm_mp::func_237F("face motion");
 }
 
 func_38B1(param_00,param_01,param_02) {
@@ -293,7 +293,7 @@ func_38B1(param_00,param_01,param_02) {
 		return 0;
 	}
 
-	if(scripts/asm/asm_bb::bb_wantstostrafe()) {
+	if(scripts\asm\asm_bb::bb_wantstostrafe()) {
 		return 0;
 	}
 
@@ -346,14 +346,14 @@ getcurrentweaponclipammo(param_00,param_01) {
 		var_03 = "left";
 	}
 
-	var_02[0] = scripts/asm/asm::asm_lookupanimfromalias(param_00,var_03 + "2");
-	var_02[1] = scripts/asm/asm::asm_lookupanimfromalias(param_00,var_03 + "3");
-	var_02[2] = scripts/asm/asm::asm_lookupanimfromalias(param_00,var_03 + "6");
-	var_02[3] = scripts/asm/asm::asm_lookupanimfromalias(param_00,var_03 + "9");
-	var_02[5] = scripts/asm/asm::asm_lookupanimfromalias(param_00,var_03 + "7");
-	var_02[6] = scripts/asm/asm::asm_lookupanimfromalias(param_00,var_03 + "4");
-	var_02[7] = scripts/asm/asm::asm_lookupanimfromalias(param_00,var_03 + "1");
-	var_02[8] = scripts/asm/asm::asm_lookupanimfromalias(param_00,var_03 + "2");
+	var_02[0] = scripts\asm\asm::asm_lookupanimfromalias(param_00,var_03 + "2");
+	var_02[1] = scripts\asm\asm::asm_lookupanimfromalias(param_00,var_03 + "3");
+	var_02[2] = scripts\asm\asm::asm_lookupanimfromalias(param_00,var_03 + "6");
+	var_02[3] = scripts\asm\asm::asm_lookupanimfromalias(param_00,var_03 + "9");
+	var_02[5] = scripts\asm\asm::asm_lookupanimfromalias(param_00,var_03 + "7");
+	var_02[6] = scripts\asm\asm::asm_lookupanimfromalias(param_00,var_03 + "4");
+	var_02[7] = scripts\asm\asm::asm_lookupanimfromalias(param_00,var_03 + "1");
+	var_02[8] = scripts\asm\asm::asm_lookupanimfromalias(param_00,var_03 + "2");
 	return var_02;
 }
 
@@ -376,10 +376,10 @@ func_98A2(param_00,param_01,param_02,param_03) {}
 
 func_BCFC(param_00,param_01,param_02) {
 	self endon(param_01 + "_finished");
-	var_03 = scripts/asm/asm::asm_lookupanimfromalias(param_01,"f");
-	var_04 = scripts/asm/asm::asm_lookupanimfromalias(param_01,"l");
-	var_05 = scripts/asm/asm::asm_lookupanimfromalias(param_01,"r");
-	var_06 = scripts/asm/asm::asm_lookupanimfromalias(param_01,"b");
+	var_03 = scripts\asm\asm::asm_lookupanimfromalias(param_01,"f");
+	var_04 = scripts\asm\asm::asm_lookupanimfromalias(param_01,"l");
+	var_05 = scripts\asm\asm::asm_lookupanimfromalias(param_01,"r");
+	var_06 = scripts\asm\asm::asm_lookupanimfromalias(param_01,"b");
 	self ghostlaunched("code_move");
 	var_07 = -1;
 	var_08 = -1;

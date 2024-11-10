@@ -1,8 +1,8 @@
-/***********************************************************
+/***************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\crafted_trap_mindcontrol.gsc
-***********************************************************/
+ * Script: scripts\cp\crafted_trap_mindcontrol.gsc
+***************************************************/
 
 init() {
 	level.mindcontrol_trap_settings = [];

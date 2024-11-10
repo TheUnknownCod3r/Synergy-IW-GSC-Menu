@@ -1,14 +1,14 @@
-/*****************************************************************
+/*********************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\asm\superslasher\superslasher_asm.gsc
-*****************************************************************/
+ * Script: scripts\asm\superslasher\superslasher_asm.gsc
+*********************************************************/
 
 superslasher_init(param_00,param_01,param_02,param_03) {
-	self.var_2303.footsteps = spawnstruct();
-	self.var_2303.var_7257.foot = "left";
-	self.var_2303.var_7257.time = gettime();
-	self.var_2303.var_4C86 = spawnstruct();
+	self.asm.footsteps = spawnstruct();
+	self.asm.footsteps.foot = "left";
+	self.asm.footsteps.time = gettime();
+	self.asm.var_4C86 = spawnstruct();
 	self.despawncovernode = 32;
 	self.sharpturnnotifydist = 160;
 	var_04 = self getsafecircleorigin("jump_to_roof",0);
@@ -108,8 +108,8 @@ ss_play_jumpscale(param_00,param_01,param_02,param_03,param_04) {
 	var_08 = getmovedelta(param_02);
 	var_09 = length2d(var_08);
 	var_0A = length2d(var_05);
-	var_0B = var_0A \ var_09;
-	var_0C = max(var_05[2] \ var_08[2],0);
+	var_0B = var_0A / var_09;
+	var_0C = max(var_05[2] / var_08[2],0);
 	var_0D = 1;
 	self scragentsetanimscale(var_0B,var_0C);
 	scripts\mp\agents\_scriptedagents::func_CED2(param_00,param_01,var_0D,param_00,"end");
@@ -138,8 +138,8 @@ ss_play_jumptoroof_clean(param_00,param_01,param_02) {
 	}
 
 	if(scripts\asm\asm::func_232B(param_01,"end")) {
-		self.var_2303.turndata = spawnstruct();
-		self.var_2303.turndata = angleclamp180(level.superslasherrooftopangles[1] - self.angles[1]);
+		self.asm.turndata = spawnstruct();
+		self.asm.turndata = angleclamp180(level.superslasherrooftopangles[1] - self.angles[1]);
 	}
 }
 
@@ -219,7 +219,7 @@ ss_play_throwsawfan_nt(param_00,param_01,param_02,param_03) {
 ss_play_summon(param_00,param_01,param_02,param_03) {
 	self endon(param_01 + "_finished");
 	var_04 = scripts\asm\asm_mp::asm_getanim(param_00,param_01);
-	scripts\mp\agents\_scriptedagents::func_CED1(param_01,var_04,self.moveratescale,2 \ self.moveratescale);
+	scripts\mp\agents\_scriptedagents::func_CED1(param_01,var_04,self.moveratescale,2 / self.moveratescale);
 	thread scripts\asm\superslasher\superslasher_actions::superslasher_summonminions(param_03);
 	scripts\mp\agents\_scriptedagents::func_1384C(param_01,"end",param_01,var_04);
 }
@@ -352,7 +352,7 @@ ss_play_jumpmove_end(param_00,param_01,param_02,param_03) {
 		var_08 = var_09["position"];
 	}
 
-	var_0A = max(var_08[2] - self.origin[2] \ var_06[2],0);
+	var_0A = max(var_08[2] - self.origin[2] / var_06[2],0);
 	self scragentsetanimscale(1,var_0A);
 	self ghostlaunched("anim deltas");
 	self gib_fx_override("noclip");
@@ -375,7 +375,7 @@ superslasher_shouldstartarrival(param_00,param_01,param_02,param_03) {
 
 	var_04 = gettime();
 	var_05 = 250;
-	if(var_04 - self.var_2303.var_7257.time > var_05) {
+	if(var_04 - self.asm.footsteps.time > var_05) {
 		return 0;
 	}
 
@@ -386,7 +386,7 @@ superslasher_shouldstartarrival(param_00,param_01,param_02,param_03) {
 		return 0;
 	}
 
-	var_09 = gettime() - self.var_2303.var_7257.time;
+	var_09 = gettime() - self.asm.footsteps.time;
 	if(var_09 < 250 || var_09 > 400) {
 		return 0;
 	}
@@ -396,8 +396,8 @@ superslasher_shouldstartarrival(param_00,param_01,param_02,param_03) {
 		var_0A = 0;
 	}
 
-	self.var_2303.var_11068 = func_3722(param_00,param_02,self.vehicle_getspawnerarray,var_0A,0);
-	if(!isdefined(self.var_2303.var_11068)) {
+	self.asm.var_11068 = func_3722(param_00,param_02,self.vehicle_getspawnerarray,var_0A,0);
+	if(!isdefined(self.asm.var_11068)) {
 		return 0;
 	}
 
@@ -453,12 +453,12 @@ func_3722(param_00,param_01,param_02,param_03,param_04) {
 
 ss_play_arrival(param_00,param_01,param_02,param_03) {
 	self endon(param_01 + "_finished");
-	var_04 = self.var_2303.var_11068;
-	self.var_2303.var_11068 = undefined;
+	var_04 = self.asm.var_11068;
+	self.asm.var_11068 = undefined;
 	var_05 = self.angles;
 	if(isdefined(self.vehicle_getspawnerarray)) {
 		var_06 = distance2d(self.origin,self.vehicle_getspawnerarray);
-		var_07 = var_06 \ length2d(var_04.stricmp);
+		var_07 = var_06 / length2d(var_04.stricmp);
 		self scragentsetanimscale(var_07,1);
 		if(var_06 > 12) {
 			var_08 = vectortoyaw(self.vehicle_getspawnerarray - self.origin);
@@ -562,7 +562,7 @@ superslasher_needstoturn(param_00,param_01,param_02,param_03) {
 			var_06 = anglestoforward(self.angles);
 			var_07 = self.origin + var_06 * 128;
 			if(navtrace(self.origin,var_07,self)) {
-				self.var_2303.turndata = var_05;
+				self.asm.turndata = var_05;
 				return 1;
 			}
 		}
@@ -574,7 +574,7 @@ superslasher_needstoturn(param_00,param_01,param_02,param_03) {
 		var_0B = vectortoyaw(var_0A);
 		var_0C = angleclamp180(var_0B - self.angles[1]);
 		if(abs(var_0C) >= 35) {
-			self.var_2303.turndata = var_0C;
+			self.asm.turndata = var_0C;
 			return 1;
 		}
 	}
@@ -583,13 +583,13 @@ superslasher_needstoturn(param_00,param_01,param_02,param_03) {
 }
 
 superslasher_chooseanim_turn(param_00,param_01,param_02) {
-	var_03 = self.var_2303.turndata;
+	var_03 = self.asm.turndata;
 	if(var_03 > 0) {
-		var_04 = int(180 + var_03 + 10 \ 45);
+		var_04 = int(180 + var_03 + 10 / 45);
 	}
 	else
 	{
-		var_04 = int(180 + var_04 - 10 \ 45);
+		var_04 = int(180 + var_04 - 10 / 45);
 	}
 
 	var_05 = ["2r","3","6","9","8","7","4","1","2l"];
@@ -602,12 +602,12 @@ ss_play_turn(param_00,param_01,param_02,param_03) {
 	var_05 = self getsafecircleorigin(param_01,var_04);
 	var_06 = getanimlength(var_05);
 	var_07 = 0.75;
-	var_08 = self.var_2303.turndata;
-	self.var_2303.turndata = undefined;
+	var_08 = self.asm.turndata;
+	self.asm.turndata = undefined;
 	self orientmode("face angle abs",self.angles);
 	self ghostlaunched("anim deltas");
 	self.var_1198.bcommittedtoanim = 1;
-	scripts\mp\agents\_scriptedagents::func_CED1(param_01,var_04,self.moveplaybackrate,var_06 - var_07 \ self.moveplaybackrate);
+	scripts\mp\agents\_scriptedagents::func_CED1(param_01,var_04,self.moveplaybackrate,var_06 - var_07 / self.moveplaybackrate);
 	scripts\asm\asm::asm_fireevent(param_01,"turn_done");
 }
 

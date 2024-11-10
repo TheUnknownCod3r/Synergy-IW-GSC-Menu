@@ -1,8 +1,8 @@
-/******************************************
+/**********************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\sp\trigger.gsc
-******************************************/
+ * Script: scripts\sp\trigger.gsc
+**********************************/
 
 func_7AA4() {
 	var_00 = [];
@@ -29,7 +29,7 @@ func_7AA4() {
 	var_00["trigger_multiple_landingzone"] = ::func_1275E;
 	var_00["trigger_multiple_arbitrary_up"] = ::func_12723;
 	var_00["trigger_multiple_spacejump"] = ::func_12794;
-	if(!scripts/sp/starts::func_9C4B()) {
+	if(!scripts\sp\starts::func_9C4B()) {
 		var_00["trigger_multiple_autosave"] = ::scripts\sp\_autosave::func_12724;
 		var_00["trigger_multiple_spawn"] = ::lib_0B77::func_12797;
 		var_00["trigger_multiple_spawn_reinforcement"] = ::lib_0B77::func_12798;
@@ -46,14 +46,14 @@ func_7AA4() {
 	var_00["trigger_multiple_friendly_stop_respawn"] = ::trigger_friendly_stop_respawn;
 	var_00["trigger_multiple_physics"] = ::func_1277E;
 	var_00["trigger_multiple_fx_watersheeting"] = ::func_1276F;
-	var_00["trigger_multiple_fakeactor_move"] = ::scripts/sp/fakeactor::func_12735;
-	var_00["trigger_multiple_fakeactor_node_disable"] = ::scripts/sp/fakeactor::func_12736;
-	var_00["trigger_multiple_fakeactor_node_enable"] = ::scripts/sp/fakeactor::func_12738;
-	var_00["trigger_multiple_fakeactor_node_disablegroup"] = ::scripts/sp/fakeactor::func_12737;
-	var_00["trigger_multiple_fakeactor_node_enablegroup"] = ::scripts/sp/fakeactor::func_12739;
-	var_00["trigger_multiple_fakeactor_node_passthrough"] = ::scripts/sp/fakeactor::func_1273B;
-	var_00["trigger_multiple_fakeactor_node_lock"] = ::scripts/sp/fakeactor::func_1273A;
-	var_00["trigger_multiple_geo_mover"] = ::scripts/sp/geo_mover::func_12764;
+	var_00["trigger_multiple_fakeactor_move"] = ::scripts\sp\fakeactor::func_12735;
+	var_00["trigger_multiple_fakeactor_node_disable"] = ::scripts\sp\fakeactor::func_12736;
+	var_00["trigger_multiple_fakeactor_node_enable"] = ::scripts\sp\fakeactor::func_12738;
+	var_00["trigger_multiple_fakeactor_node_disablegroup"] = ::scripts\sp\fakeactor::func_12737;
+	var_00["trigger_multiple_fakeactor_node_enablegroup"] = ::scripts\sp\fakeactor::func_12739;
+	var_00["trigger_multiple_fakeactor_node_passthrough"] = ::scripts\sp\fakeactor::func_1273B;
+	var_00["trigger_multiple_fakeactor_node_lock"] = ::scripts\sp\fakeactor::func_1273A;
+	var_00["trigger_multiple_geo_mover"] = ::scripts\sp\geo_mover::func_12764;
 	var_00["trigger_multiple_transient"] = ::func_12773;
 	var_00["trigger_multiple_fire"] = ::func_1273C;
 	var_00["trigger_radius_fire"] = ::func_1273C;
@@ -78,7 +78,7 @@ func_1276F(param_00) {
 func_7AA5() {
 	var_00 = [];
 	var_00["friendly_mgTurret"] = ::lib_0B77::func_73D9;
-	if(!scripts/sp/starts::func_9C4B()) {
+	if(!scripts\sp\starts::func_9C4B()) {
 		var_00["camper_spawner"] = ::lib_0B77::camper_trigger_think;
 		var_00["flood_spawner"] = ::lib_0B77::func_6F5D;
 		var_00["trigger_spawner"] = ::lib_0B77::func_12797;
@@ -117,7 +117,7 @@ func_7AA5() {
 	var_00["trigger_slide"] = ::func_12792;
 	var_00["trigger_dooropen"] = ::func_12734;
 	var_00["stealth_shadow"] = ::func_1279C;
-	var_00["geo_mover"] = ::scripts/sp/geo_mover::func_12764;
+	var_00["geo_mover"] = ::scripts\sp\geo_mover::func_12764;
 	var_00["no_crouch_or_prone"] = ::func_12775;
 	var_00["no_prone"] = ::func_12776;
 	return var_00;
@@ -141,7 +141,7 @@ func_9726() {
 	var_04 = scripts\sp\_utility::func_22A2(var_04,var_08);
 	var_09 = getentarray("trigger_once","classname");
 	var_04 = scripts\sp\_utility::func_22A2(var_04,var_09);
-	if(!scripts/sp/starts::func_9C4B()) {
+	if(!scripts\sp\starts::func_9C4B()) {
 		for(var_0A = 0;var_0A < var_04.size;var_0A++) {
 			if(var_04[var_0A].spawnimpulsefield & 32) {
 				thread lib_0B77::func_12797(var_04[var_0A]);
@@ -333,7 +333,7 @@ func_1273E(param_00) {
 }
 
 func_733E() {
-	var_00 = function_0072("bad_guys");
+	var_00 = getaiarray("bad_guys");
 	for(var_01 = 0;var_01 < var_00.size;var_01++) {
 		var_02 = var_00[var_01];
 		if(!isalive(var_02)) {
@@ -347,7 +347,7 @@ func_733E() {
 		wait(0.1);
 	}
 
-	var_00 = function_0072("bad_guys");
+	var_00 = getaiarray("bad_guys");
 	for(var_01 = 0;var_01 < var_00.size;var_01++) {
 		var_02 = var_00[var_01];
 		if(var_02 istouching(self)) {
@@ -560,7 +560,7 @@ func_1277E(param_00) {
 func_12780(param_00) {
 	var_01 = param_00.var_EEEF;
 	param_00 waittill("trigger");
-	var_02 = function_0072();
+	var_02 = getaiarray();
 	for(var_03 = 0;var_03 < var_02.size;var_03++) {
 		if(!isalive(var_02[var_03])) {
 			continue;
@@ -618,7 +618,7 @@ func_1279E(param_00) {
 			continue;
 		}
 
-		function_01C5("sm_sunenable",0);
+		setsaveddvar("sm_sunenable",0);
 	}
 }
 
@@ -629,7 +629,7 @@ func_1279F(param_00) {
 			continue;
 		}
 
-		function_01C5("sm_sunenable",1);
+		setsaveddvar("sm_sunenable",1);
 	}
 }
 
@@ -1426,7 +1426,7 @@ func_A391(param_00,param_01,param_02) {
 	var_03.var_138F0 = 0;
 	var_04 = 0;
 	if(param_01) {
-		var_05 = function_00BF(self.model,0);
+		var_05 = getpartname(self.model,0);
 		var_03 linkto(self,var_05,(0,0,0),(0,0,0));
 	}
 	else
@@ -1659,7 +1659,7 @@ func_1273C(param_00) {
 			if(param_00.classname == "trigger_radius_fire") {
 				if(isdefined(param_00.script_radius)) {
 					if(distance2dsquared(var_04.origin,param_00.origin) <= squared(param_00.script_radius)) {
-						if(isdefined(param_00.var_EE51) && function_027D(param_00.var_EE51)) {
+						if(isdefined(param_00.var_EE51) && isnumber(param_00.var_EE51)) {
 							var_02 = param_00.var_EE51;
 						}
 
@@ -1672,7 +1672,7 @@ func_1273C(param_00) {
 				var_05 = var_06.origin;
 				if(isdefined(var_06.script_radius)) {
 					if(distance2dsquared(var_04.origin,var_06.origin) <= squared(var_06.script_radius)) {
-						if(isdefined(param_00.var_EE51) && function_027D(param_00.var_EE51)) {
+						if(isdefined(param_00.var_EE51) && isnumber(param_00.var_EE51)) {
 							var_02 = param_00.var_EE51;
 						}
 

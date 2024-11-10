@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\3539.gsc
+ * Script: 3539.gsc
 ***************************************/
 
 init() {
@@ -8,11 +8,11 @@ init() {
   level.func_CA51 = [];
   level.func_108D3["enemy"] = "tactical_insertion_marker_wm_dropmodel";
   level.func_108D3["friendly"] = "tactical_insertion_marker_wm_dropmodel";
-  level.func_108D2["enemy"] = loadfx("vfx/core/mp/core/vfx_flare_glow_en.vfx");
-  level.func_108D2["friendly"] = loadfx("vfx/core/mp/core/vfx_flare_glow_fr.vfx");
-  level.func_10888 = loadfx("vfx/props/barrelexp.vfx");
-  level._effect["ricochet"] = loadfx("vfx/core/impacts/large_metalhit_1");
-  level._effect["tracker_cloak_tag"] = loadfx("vfx/iw7/_requests/mp/vfx_tesla_shock_sparks_tracker.vfx");
+  level.func_108D2["enemy"] = loadfx("vfx\core\mp\core\vfx_flare_glow_en.vfx");
+  level.func_108D2["friendly"] = loadfx("vfx\core\mp\core\vfx_flare_glow_fr.vfx");
+  level.func_10888 = loadfx("vfx\props\barrelexp.vfx");
+  level._effect["ricochet"] = loadfx("vfx\core\impacts\large_metalhit_1");
+  level._effect["tracker_cloak_tag"] = loadfx("vfx\iw7\_requests\mp\vfx_tesla_shock_sparks_tracker.vfx");
   level.menuperks = [];
   level.scriptperks = [];
   level.perksetfuncs = [];
@@ -521,13 +521,13 @@ menurigperkparsetable() {
   var_00 = 0;
 
   for (;;) {
-  var_01 = tablelookupbyrow("mp/menuRigPerks.csv", var_00, 0);
+  var_01 = tablelookupbyrow("mp\menuRigPerks.csv", var_00, 0);
 
   if (var_01 == "")
   break;
 
-  var_02 = tablelookupbyrow("mp/menuRigPerks.csv", var_00, 1);
-  var_03 = tablelookupbyrow("mp/menuRigPerks.csv", var_00, 2);
+  var_02 = tablelookupbyrow("mp\menuRigPerks.csv", var_00, 1);
+  var_03 = tablelookupbyrow("mp\menuRigPerks.csv", var_00, 2);
   var_04 = spawnstruct();
   var_4.id = var_01;
   var_4.ref = var_03;
@@ -547,13 +547,13 @@ menuperkparsetable() {
   var_00 = 0;
 
   for (;;) {
-  var_01 = tablelookupbyrow("mp/menuPerks.csv", var_00, 0);
+  var_01 = tablelookupbyrow("mp\menuPerks.csv", var_00, 0);
 
   if (var_01 == "")
   break;
 
-  var_02 = tablelookupbyrow("mp/menuPerks.csv", var_00, 1);
-  var_03 = tablelookupbyrow("mp/menuPerks.csv", var_00, 2);
+  var_02 = tablelookupbyrow("mp\menuPerks.csv", var_00, 1);
+  var_03 = tablelookupbyrow("mp\menuPerks.csv", var_00, 2);
   var_04 = spawnstruct();
   var_4.name = var_03;
   var_4.ref = var_03;
@@ -574,12 +574,12 @@ func_98B2() {
   var_00 = 0;
 
   for (;;) {
-  var_01 = tablelookupbyrow("mp/perkTable.csv", var_00, 0);
+  var_01 = tablelookupbyrow("mp\perkTable.csv", var_00, 0);
 
   if (var_01 == "")
   break;
 
-  var_02 = tablelookupbyrow("mp/perkTable.csv", var_00, 1);
+  var_02 = tablelookupbyrow("mp\perkTable.csv", var_00, 1);
   var_03 = spawnstruct();
   var_3.ref = var_02;
   var_3.id = int(var_01);

@@ -1,13 +1,13 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\3518.gsc
+ * Script: 3518.gsc
 ***************************************/
 
 init() {
-  level.remoteuav_fx["hit"] = loadfx("vfx/core/impacts/large_metal_painted_hit");
-  level.remoteuav_fx["smoke"] = loadfx("vfx/core/smktrail/remote_heli_damage_smoke_runner");
-  level.remoteuav_fx["explode"] = loadfx("vfx/core/expl/bouncing_betty_explosion");
-  level.remoteuav_fx["missile_explode"] = loadfx("vfx/core/expl/stinger_explosion");
+  level.remoteuav_fx["hit"] = loadfx("vfx\core\impacts\large_metal_painted_hit");
+  level.remoteuav_fx["smoke"] = loadfx("vfx\core\smktrail\remote_heli_damage_smoke_runner");
+  level.remoteuav_fx["explode"] = loadfx("vfx\core\expl\bouncing_betty_explosion");
+  level.remoteuav_fx["missile_explode"] = loadfx("vfx\core\expl\stinger_explosion");
   level.remoteuav_dialog["launch"][0] = "ac130_plt_yeahcleared";
   level.remoteuav_dialog["launch"][1] = "ac130_plt_rollinin";
   level.remoteuav_dialog["launch"][2] = "ac130_plt_scanrange";
@@ -466,7 +466,7 @@ remoteuav_endride(var_00) {
   var_01 = scripts\engine\utility::getlastweapon();
 
   if (!self hasweapon(var_01))
-  var_01 = scripts/mp/killstreaks/utility::getfirstprimaryweapon();
+  var_01 = scripts\mp\killstreaks\utility::getfirstprimaryweapon();
 
   scripts\mp\utility\game::_switchtoweapon(var_01);
   scripts\mp\utility\game::_takeweapon("uav_remote_mp");

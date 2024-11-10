@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\3407.gsc
+ * Script: 3407.gsc
 ***************************************/
 
 parse_music_genre_table() {
@@ -15,7 +15,7 @@ parse_music_genre_table() {
   if (isdefined(level.jukebox_table))
   var_00 = level.jukebox_table;
   else
-  var_00 = "cp/zombies/cp_zmb_music_genre.csv";
+  var_00 = "cp\zombies\cp_zmb_music_genre.csv";
 
   var_01 = 0;
 
@@ -54,7 +54,7 @@ jukebox_start(var_00, var_01, var_02) {
   if (!isdefined(var_01)) {
   level waittill("jukebox_start");
 
-  if (scripts/cp/utility::map_check(0))
+  if (scripts\cp\utility::map_check(0))
   var_03 = lookupsoundlength("dj_jingle_intro") / 1000;
   else
   var_03 = 0.005;
@@ -65,7 +65,7 @@ jukebox_start(var_00, var_01, var_02) {
   if (isdefined(level.jukebox_table))
   var_04 = level.jukebox_table;
   else
-  var_04 = "cp/zombies/cp_zmb_music_genre.csv";
+  var_04 = "cp\zombies\cp_zmb_music_genre.csv";
 
   if (!scripts\engine\utility::is_true(var_02)) {
   var_05 = scripts\engine\utility::array_randomize_objects(level.jukebox_songs);
@@ -184,7 +184,7 @@ force_song(var_00, var_01, var_02, var_03, var_04, var_05, var_06) {
   var_08 stoploopsound();
 
   if (getdvar("ui_mapname") != "cp_disco") {
-  level thread scripts/cp/cp_vo::try_to_play_vo("dj_sign_off", "zmb_dj_vo", "high", 20, 1, 0, 1);
+  level thread scripts\cp\cp_vo::try_to_play_vo("dj_sign_off", "zmb_dj_vo", "high", 20, 1, 0, 1);
   var_10 = lookupsoundlength("dj_sign_off") / 1000;
   wait(var_10);
   }
@@ -213,7 +213,7 @@ get_song_struct(var_00, var_01, var_02) {
   else
   {
   if (isdefined(var_05) && var_05 != "") {
-  level thread scripts/cp/cp_vo::try_to_play_vo(var_05, "zmb_dj_vo");
+  level thread scripts\cp\cp_vo::try_to_play_vo(var_05, "zmb_dj_vo");
   var_07 = lookupsoundlength(var_05) / 1000;
   wait(var_07);
   }
@@ -246,7 +246,7 @@ get_song_struct(var_00, var_01, var_02) {
   var_02 stoploopsound();
   }
   } else {
-  level thread scripts/cp/cp_vo::try_to_play_vo(var_05, "zmb_dj_vo", "high", 20, 1, 0, 1);
+  level thread scripts\cp\cp_vo::try_to_play_vo(var_05, "zmb_dj_vo", "high", 20, 1, 0, 1);
   var_07 = lookupsoundlength(var_05) / 1000;
   wait(var_07);
   }

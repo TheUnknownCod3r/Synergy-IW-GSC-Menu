@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\2972.gsc
-****************************/
+ * Script: 2972.gsc
+************************/
 
 func_13BFD() {
 	var_00 = getentarray();

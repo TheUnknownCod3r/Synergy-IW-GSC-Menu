@@ -1,8 +1,8 @@
-/**************************************************************
+/******************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\maps\cp_town\gen\cp_town_fx.gsc
-**************************************************************/
+ * Script: scripts\cp\maps\cp_town\gen\cp_town_fx.gsc
+******************************************************/
 
 main() {
 	var_00 = scripts\engine\utility::createoneshoteffect("vfx_zb_pack_glow");

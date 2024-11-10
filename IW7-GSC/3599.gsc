@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3599.gsc
-****************************/
+ * Script: 3599.gsc
+************************/
 
 init() {
 	level.bhgunphysicsvolumes = [];
@@ -55,7 +55,7 @@ missilespawned(param_00,param_01) {
 	var_0F moveto(var_0B,var_0E,0.1,0.95);
 	var_0F.triggerportableradarping = param_01.triggerportableradarping;
 	var_0F setscriptmoverkillcam("rocket");
-	var_10 = var_0F.triggerportableradarping scripts\mp\_utility::_launchgrenade("blackholegun_indicator_mp",self.origin,(0,0,0));
+	var_10 = var_0F.triggerportableradarping scripts\mp\utility::_launchgrenade("blackholegun_indicator_mp",self.origin,(0,0,0));
 	var_10.weapon_name = "blackholegun_indicator_mp";
 	var_10 linkto(var_0F);
 	var_0F thread watchfordirectplayerdamage(var_10,var_02);
@@ -114,7 +114,7 @@ singularityquake() {
 	var_00 = 0.4;
 	var_01 = 0.0466;
 	for(var_02 = 0;var_02 < 5;var_02++) {
-		scripts\mp\_shellshock::_earthquake(var_02 + 1 * var_01,var_00 * 2,self.origin,800);
+		scripts\mp\shellshock::_earthquake(var_02 + 1 * var_01,var_00 * 2,self.origin,800);
 		wait(var_00);
 	}
 }
@@ -139,15 +139,15 @@ watchforincidentalplayerdamage(param_00) {
 				continue;
 			}
 
-			if(!scripts\mp\_utility::isreallyalive(var_04)) {
+			if(!scripts\mp\utility::isreallyalive(var_04)) {
 				continue;
 			}
 
-			if(!scripts/mp/equipment/phase_shift::areentitiesinphase(self,var_04)) {
+			if(!scripts\mp\equipment\phase_shift::areentitiesinphase(self,var_04)) {
 				continue;
 			}
 
-			if(!level.friendlyfire && var_04 != self.triggerportableradarping && !scripts\mp\_utility::istrue(scripts\mp\_utility::playersareenemies(var_04,self.triggerportableradarping))) {
+			if(!level.friendlyfire && var_04 != self.triggerportableradarping && !scripts\mp\utility::istrue(scripts\mp\utility::playersareenemies(var_04,self.triggerportableradarping))) {
 				continue;
 			}
 
@@ -158,17 +158,17 @@ watchforincidentalplayerdamage(param_00) {
 			trydodamage(var_04,var_04 geteye(),1000,var_01);
 		}
 
-		var_06 = scripts\mp\_weapons::getempdamageents(self.origin,76.8,0);
+		var_06 = scripts\mp\weapons::getempdamageents(self.origin,76.8,0);
 		foreach(var_08 in var_06) {
 			if(!isdefined(var_08) || !isdefined(var_08.triggerportableradarping) || isplayer(var_08)) {
 				continue;
 			}
 
-			if(!scripts/mp/equipment/phase_shift::areentitiesinphase(self,var_08)) {
+			if(!scripts\mp\equipment\phase_shift::areentitiesinphase(self,var_08)) {
 				continue;
 			}
 
-			if(!level.friendlyfire && var_08.triggerportableradarping != self.triggerportableradarping && !scripts\mp\_utility::istrue(scripts\mp\_utility::playersareenemies(var_08.triggerportableradarping,self.triggerportableradarping))) {
+			if(!level.friendlyfire && var_08.triggerportableradarping != self.triggerportableradarping && !scripts\mp\utility::istrue(scripts\mp\utility::playersareenemies(var_08.triggerportableradarping,self.triggerportableradarping))) {
 				continue;
 			}
 
@@ -202,20 +202,20 @@ watchfordirectplayerdamage(param_00,param_01) {
 			continue;
 		}
 
-		if(!scripts\mp\_utility::isreallyalive(var_03)) {
+		if(!scripts\mp\utility::isreallyalive(var_03)) {
 			continue;
 		}
 
-		if(!scripts/mp/equipment/phase_shift::areentitiesinphase(self,var_03)) {
+		if(!scripts\mp\equipment\phase_shift::areentitiesinphase(self,var_03)) {
 			continue;
 		}
 
 		var_04 = var_03;
-		if(scripts\mp\_utility::func_9F22(var_03) || scripts\mp\_utility::func_9F72(var_03)) {
+		if(scripts\mp\utility::func_9F22(var_03) || scripts\mp\utility::func_9F72(var_03)) {
 			var_04 = var_03.triggerportableradarping;
 		}
 
-		if(!level.friendlyfire && var_04 != self.triggerportableradarping && !scripts\mp\_utility::istrue(scripts\mp\_utility::playersareenemies(var_04,self.triggerportableradarping))) {
+		if(!level.friendlyfire && var_04 != self.triggerportableradarping && !scripts\mp\utility::istrue(scripts\mp\utility::playersareenemies(var_04,self.triggerportableradarping))) {
 			continue;
 		}
 

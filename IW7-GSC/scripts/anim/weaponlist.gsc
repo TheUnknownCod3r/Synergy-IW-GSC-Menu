@@ -1,20 +1,20 @@
-/***********************************************
+/***************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\anim\weaponlist.gsc
-***********************************************/
+ * Script: scripts\anim\weaponlist.gsc
+***************************************/
 
 usingautomaticweapon() {
-	return function_0245(self.var_394) || function_02BE(self.var_394) || function_023C(self.var_394) > 0;
+	return weaponisauto(self.var_394) || weaponisbeam(self.var_394) || weaponburstcount(self.var_394) > 0;
 }
 
 usingsemiautoweapon() {
-	return function_0248(self.var_394);
+	return weaponissemiauto(self.var_394);
 }
 
 autoshootanimrate() {
 	if(usingautomaticweapon()) {
-		return 0.1 \ function_0240(self.var_394);
+		return 0.1 / weaponfiretime(self.var_394);
 	}
 
 	return 0.5;
@@ -22,7 +22,7 @@ autoshootanimrate() {
 
 burstshootanimrate() {
 	if(usingautomaticweapon()) {
-		return 0.1 \ function_0240(self.var_394);
+		return 0.1 / weaponfiretime(self.var_394);
 	}
 
 	return 0.2;
@@ -35,10 +35,10 @@ waitaftershot() {
 shootanimtime(param_00) {
 	if(!usingautomaticweapon() || isdefined(param_00) && param_00 == 1) {
 		var_01 = 0.5 + randomfloat(1);
-		return function_0240(self.var_394) * var_01;
+		return weaponfiretime(self.var_394) * var_01;
 	}
 
-	return function_0240(self.var_394);
+	return weaponfiretime(self.var_394);
 }
 
 refillclip() {

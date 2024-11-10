@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2758.gsc
+ * Script: 2758.gsc
 ***************************************/
 
 init() {
@@ -9,13 +9,13 @@ init() {
   var_00 = 0;
 
   for (;;) {
-  var_01 = tablelookupbyrow("mp/miscKillcamItems.csv", var_00, 0);
+  var_01 = tablelookupbyrow("mp\miscKillcamItems.csv", var_00, 0);
 
   if (!isdefined(var_01) || var_01 == "")
   break;
 
   var_01 = int(var_01);
-  var_02 = tablelookupbyrow("mp/miscKillcamItems.csv", var_00, 1);
+  var_02 = tablelookupbyrow("mp\miscKillcamItems.csv", var_00, 1);
 
   if (!isdefined(var_02) || var_02 == "")
   break;
@@ -580,7 +580,7 @@ func_A639(var_00) {
   if (!level.gameended)
   scripts\mp\utility\game::clearlowermessage("kc_info");
 
-  thread scripts/mp/spectating::setspectatepermissions();
+  thread scripts\mp\spectating::setspectatepermissions();
   self notify("killcam_ended");
 
   if (!var_00)
@@ -608,7 +608,7 @@ setkillcamkilledbyitemomnvars(var_00, var_01) {
 func_F773(var_00, var_01) {
   var_00 = scripts\mp\utility\game::func_13CA1(var_00, var_01);
   var_02 = scripts\mp\utility\game::getweaponrootname(var_00);
-  var_03 = tablelookuprownum("mp/statsTable.csv", 4, var_02);
+  var_03 = tablelookuprownum("mp\statsTable.csv", 4, var_02);
 
   if (!isdefined(var_03) || var_03 < 0) {
   setkillcamkilledbyitemomnvars(-1, -1);
@@ -644,7 +644,7 @@ func_F773(var_00, var_01) {
   if (var_06 >= 6)
   break;
 
-  var_10 = tablelookuprownum("mp/attachmentTable.csv", 4, var_08);
+  var_10 = tablelookuprownum("mp\attachmentTable.csv", 4, var_08);
   self setclientomnvar("ui_killcam_killedby_attachment" + (var_06 + 1), var_10);
   var_6++;
   }

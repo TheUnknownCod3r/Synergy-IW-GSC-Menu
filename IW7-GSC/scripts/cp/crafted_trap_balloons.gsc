@@ -1,11 +1,11 @@
-/********************************************************
+/************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\crafted_trap_balloons.gsc
-********************************************************/
+ * Script: scripts\cp\crafted_trap_balloons.gsc
+************************************************/
 
 init() {
-	level._effect["balloon_death"] = loadfx("vfx/iw7/_requests/coop/vfx_clown_exp.vfx");
+	level._effect["balloon_death"] = loadfx("vfx\iw7\_requests\coop\vfx_clown_exp.vfx");
 	var_00 = spawnstruct();
 	var_00.timeout = 60;
 	var_00.modelbase = "equipment_tank_nitrogen_zmb";
@@ -393,7 +393,7 @@ balloon_death(param_00) {
 	self.shared_damage_points = 1;
 	self.var_55CF = 1;
 	scripts\mp\agents\_scriptedagents::setstatelocked(1,"balloon_trap");
-	scripts/asm/asm::asm_setstate("balloon_grab");
+	scripts\asm\asm::asm_setstate("balloon_grab");
 	self playsoundonmovingent("craftable_balloon_zmb_grab");
 	self waittill("reached_end");
 	self stopsounds();

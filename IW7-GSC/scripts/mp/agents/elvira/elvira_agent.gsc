@@ -1,11 +1,11 @@
-/*************************************************************
+/*****************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\agents\elvira\elvira_agent.gsc
-*************************************************************/
+ * Script: scripts\mp\agents\elvira\elvira_agent.gsc
+*****************************************************/
 
 registerscriptedagent() {
-	scripts/aitypes/bt_util::init();
+	scripts\aitypes\bt_util::init();
 	behaviortree\elvira::func_DEE8();
 	scripts\asm\elvira\mp\states::func_2371();
 	scripts\mp\agents\elvira\elvira_tunedata::setuptunedata();

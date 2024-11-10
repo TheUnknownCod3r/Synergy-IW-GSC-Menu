@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2646.gsc
+ * Script: 2646.gsc
 ***************************************/
 
 hostmigrationwait() {
@@ -35,7 +35,7 @@ hostmigrationname(var_00) {
   if (isplayer(var_00))
   return "player <" + var_02 + ">";
 
-  if (isagent(var_00) && scripts/cp/utility::isgameparticipant(var_00))
+  if (isagent(var_00) && scripts\cp\utility::isgameparticipant(var_00))
   return "participant agent <" + var_01 + ">";
 
   if (isagent(var_00))
@@ -48,11 +48,11 @@ hostmigrationtimerthink_internal() {
   level endon("host_migration_begin");
   level endon("host_migration_end");
 
-  while (!scripts/cp/utility::isreallyalive(self))
+  while (!scripts\cp\utility::isreallyalive(self))
   self waittill("spawned");
 
   self.hostmigrationcontrolsfrozen = 1;
-  scripts/cp/utility::freezecontrolswrapper(1);
+  scripts\cp\utility::freezecontrolswrapper(1);
   level waittill("host_migration_end");
 }
 
@@ -61,8 +61,8 @@ hostmigrationtimerthink() {
   hostmigrationtimerthink_internal();
 
   if (self.hostmigrationcontrolsfrozen) {
-  if (scripts/cp/utility::gameflag("prematch_done"))
-  scripts/cp/utility::freezecontrolswrapper(0);
+  if (scripts\cp\utility::gameflag("prematch_done"))
+  scripts\cp\utility::freezecontrolswrapper(0);
 
   self.hostmigrationcontrolsfrozen = undefined;
   }

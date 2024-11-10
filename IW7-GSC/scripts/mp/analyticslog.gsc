@@ -1,8 +1,8 @@
-/***********************************************
+/***************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\analyticslog.gsc
-***********************************************/
+ * Script: scripts\mp\analyticslog.gsc
+***************************************/
 
 init() {
 	setdvarifuninitialized("enable_analytics_log",0);
@@ -40,7 +40,7 @@ analyticslogenabled() {
 
 getuniqueobjectid() {
 	var_00 = level.analyticslog.nextobjectid;
-	level.analyticslog.var_BF9C++;
+	level.analyticslog.nextobjectid++;
 	return var_00;
 }
 
@@ -271,7 +271,7 @@ logevent_playerconnected() {
 	}
 
 	self.analyticslog.playerid = level.analyticslog.nextplayerid;
-	level.analyticslog.var_BFA4++;
+	level.analyticslog.nextplayerid++;
 	if(!analyticslogenabled()) {
 		return;
 	}
@@ -327,7 +327,7 @@ logevent_playerdeath(param_00,param_01,param_02) {
 	}
 
 	var_0E = level.analyticslog.nextdeathid;
-	level.analyticslog.var_BF79++;
+	level.analyticslog.nextdeathid++;
 	param_02 = scripts\engine\utility::ter_op(isdefined(param_02),param_02,"None");
 	var_0F = "s";
 	if(self.team == "axis") {
@@ -339,7 +339,7 @@ logevent_playerdeath(param_00,param_01,param_02) {
 	}
 
 	bbprint("gamemp_death","@"playerid %i x %f y %f z %f gun_orientx %f gun_orienty %f gun_orientz %f weapon %s mean_of_death %s attackerid %i action %i server_death_id %i victim_life_index %d attacker_life_index %d victim_team %s attacker_team %s attacker_pos_x %f attacker_pos_y %f attacker_pos_z %f attacker_gun_orientx %f attacker_gun_orienty %f attacker_gun_orientz %f victim_weapon %s",self.analyticslog.playerid,self.origin[0],self.origin[1],self.origin[2],var_03[0],var_03[1],var_03[2],param_02,scripts\engine\utility::ter_op(isdefined(param_01),param_01,"None"),var_04,buildkilldeathactionvalue(),var_0E,self.lifeid,var_0C,var_0F,var_0B,var_05,var_06,var_07,var_08,var_09,var_0A,self.primaryweapon);
-	if(isdefined(param_01) && function_0107(param_01)) {
+	if(isdefined(param_01) && isexplosivedamagemod(param_01)) {
 		logevent_explosion(scripts\engine\utility::ter_op(isdefined(param_02),param_02,"generic"),self.origin,param_00,1);
 	}
 
@@ -667,11 +667,11 @@ analyticssend_shouldsenddata(param_00) {
 	if(isdefined(level.nextspawntobeinstrumented) && isdefined(level.spawnidstobeinstrumented)) {
 		if(level.nextspawntobeinstrumented < level.spawnidstobeinstrumented.size) {
 			if(level.spawnidstobeinstrumented[level.nextspawntobeinstrumented] == -1) {
-				level.var_BFAC++;
+				level.nextspawntobeinstrumented++;
 			}
 
 			if(level.spawnidstobeinstrumented[level.nextspawntobeinstrumented] == param_00) {
-				level.var_BFAC++;
+				level.nextspawntobeinstrumented++;
 				return 1;
 			}
 		}

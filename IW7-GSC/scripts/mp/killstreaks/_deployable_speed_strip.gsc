@@ -1,15 +1,15 @@
-/**********************************************************************
+/**************************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\killstreaks\_deployable_speed_strip.gsc
-**********************************************************************/
+ * Script: scripts\mp\killstreaks\_deployable_speed_strip.gsc
+**************************************************************/
 
 init() {
 	var_00 = spawnstruct();
 	var_00.id = "deployable_speed_strip";
 	var_00.var_39B = "deployable_speed_strip_marker_mp";
 	var_00.streakname = "deployable_speed_strip";
-	var_00.grenadeusefunc = ::scripts\mp\_speedboost::func_109C1;
+	var_00.grenadeusefunc = ::scripts\mp\speedboost::func_109C1;
 	level.boxsettings["deployable_speed_strip"] = var_00;
 	scripts\mp\killstreaks\_killstreaks::registerkillstreak("deployable_speed_strip",::func_128DD);
 }
@@ -20,6 +20,6 @@ func_128DD(param_00,param_01) {
 		return 0;
 	}
 
-	scripts\mp\_matchdata::logkillstreakevent("deployable_speed_strip",self.origin);
+	scripts\mp\matchdata::logkillstreakevent("deployable_speed_strip",self.origin);
 	return 1;
 }

@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\3483.gsc
+ * Script: 3483.gsc
 ***************************************/
 
 flares_monitor(var_00) {

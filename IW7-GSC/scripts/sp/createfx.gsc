@@ -1,24 +1,24 @@
-/*******************************************
+/***********************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\sp\createfx.gsc
-*******************************************/
+ * Script: scripts\sp\createfx.gsc
+***********************************/
 
 createfx() {
 	if(!level.createfx_enabled) {
 		return;
 	}
 
-	function_02B0();
+	clearstartpointtransients();
 	level.func_position_player = ::func_position_player;
 	level.func_position_player_get = ::func_position_player_get;
 	level.func_updatefx = ::scripts\common\createfx::restart_fx_looper;
 	level.func_process_fx_rotater = ::scripts\common\createfx::process_fx_rotater;
 	level.func_player_speed = ::func_player_speed;
 	level.mp_createfx = 0;
-	scripts\engine\utility::array_call(function_0072(),::delete);
-	scripts\engine\utility::array_call(function_00C8(),::delete);
-	var_00 = function_0072();
+	scripts\engine\utility::array_call(getaiarray(),::delete);
+	scripts\engine\utility::array_call(getspawnerarray(),::delete);
+	var_00 = getaiarray();
 	scripts\engine\utility::array_call(var_00,::delete);
 	scripts\common\createfx::createfx_common();
 	thread scripts\common\createfx::createfxlogic();
@@ -58,5 +58,5 @@ func_position_player() {
 }
 
 func_player_speed() {
-	function_01C5("g_speed",level._createfx.player_speed);
+	setsaveddvar("g_speed",level._createfx.player_speed);
 }

@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\2861.gsc
-****************************/
+ * Script: 2861.gsc
+************************/
 
 func_6B3D() {
 	if(!isdefined(self.angles)) {

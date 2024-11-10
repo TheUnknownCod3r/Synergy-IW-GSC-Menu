@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3654.gsc
-****************************/
+ * Script: 3654.gsc
+************************/
 
 func_959B() {
 	setdvarifuninitialized("cursor_hint_debug",0);

@@ -1,8 +1,8 @@
-/*********************************************
+/*************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\anim\civilian.gsc
-*********************************************/
+ * Script: scripts\anim\civilian.gsc
+*************************************/
 
 cover() {
 	self endon("killanimscript");
@@ -31,7 +31,7 @@ cover() {
 
 	thread func_BC1C();
 	for(;;) {
-		self _meth_82E3("idle",scripts\common\utility::random(var_01),%root,1,0.2,1);
+		self _meth_82E3("idle",scripts\engine\utility::random(var_01),%root,1,0.2,1);
 		self waittillmatch("end","idle");
 	}
 }

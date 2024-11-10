@@ -1,17 +1,17 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\3531.gsc
+ * Script: 3531.gsc
 ***************************************/
 
 init() {
   scripts\mp\killstreaks\killstreaks::registerkillstreak("venom", ::func_1288B, undefined, undefined, undefined, ::func_13C17);
   var_00 = ["passive_increased_debuff", "passive_decreased_damage", "passive_increased_speed", "passive_decreased_duration", "passive_quiet_vehicle", "passive_decreased_speed", "passive_heavy", "passive_increased_frost", "passive_speed_heavy", "passive_stealth_speed"];
-  scripts/mp/killstreak_loot::func_DF07("venom", var_00);
-  level._effect["venom_gas"] = loadfx("vfx/iw7/_requests/mp/vfx_venom_gas_cloud");
-  level._effect["venom_trail"] = loadfx("vfx/iw7/_requests/mp/vfx_venom_gas_trail");
-  level._effect["venom_eyeglow"] = loadfx("vfx/iw7/_requests/mp/vfx_venom_glint");
-  level._effect["venom_kamikaze_boost"] = loadfx("vfx/iw7/_requests/mp/vfx_venom_kamikaze_boost");
-  level._effect["venom_kamikaze_trail"] = loadfx("vfx/iw7/_requests/mp/vfx_venom_kamikaze_trail");
+  scripts\mp\killstreak_loot::func_DF07("venom", var_00);
+  level._effect["venom_gas"] = loadfx("vfx\iw7\_requests\mp\vfx_venom_gas_cloud");
+  level._effect["venom_trail"] = loadfx("vfx\iw7\_requests\mp\vfx_venom_gas_trail");
+  level._effect["venom_eyeglow"] = loadfx("vfx\iw7\_requests\mp\vfx_venom_glint");
+  level._effect["venom_kamikaze_boost"] = loadfx("vfx\iw7\_requests\mp\vfx_venom_kamikaze_boost");
+  level._effect["venom_kamikaze_trail"] = loadfx("vfx\iw7\_requests\mp\vfx_venom_kamikaze_trail");
   level.venoms = 0;
 }
 
@@ -52,20 +52,20 @@ func_1288B(var_00) {
   var_05 = 10;
   var_06 = "veh_venom_mp";
   var_07 = "used_venom";
-  var_08 = scripts/mp/killstreak_loot::getrarityforlootitem(var_0.variantid);
+  var_08 = scripts\mp\killstreak_loot::getrarityforlootitem(var_0.variantid);
 
   if (var_08 != "") {
   var_03 = var_03 + "_" + var_08;
   var_07 = var_07 + "_" + var_08;
   }
 
-  if (scripts/mp/killstreaks/utility::func_A69F(var_00, "passive_increased_frost"))
+  if (scripts\mp\killstreaks\utility::func_A69F(var_00, "passive_increased_frost"))
   var_04 = var_04 - 10;
 
-  if (scripts/mp/killstreaks/utility::func_A69F(var_00, "passive_speed_heavy"))
+  if (scripts\mp\killstreaks\utility::func_A69F(var_00, "passive_speed_heavy"))
   var_06 = "veh_venom_mp_fast";
 
-  if (scripts/mp/killstreaks/utility::func_A69F(var_00, "passive_stealth_speed"))
+  if (scripts\mp\killstreaks\utility::func_A69F(var_00, "passive_stealth_speed"))
   var_06 = "veh_venom_mp_slow";
 
   var_09 = spawnvehicle(var_03, var_0.streakname, var_06, var_02, self.angles, self);
@@ -77,7 +77,7 @@ func_1288B(var_00) {
   var_9.streakname = var_0.streakname;
   var_9.func_AC75 = var_04;
   var_9.spawnpos = var_02;
-  var_9.nullownerdamagefunc = scripts/mp/killstreaks/utility::func_C1D3;
+  var_9.nullownerdamagefunc = scripts\mp\killstreaks\utility::func_C1D3;
   var_9.weapon_name = "venomproj_mp";
   var_9.streakinfo = var_00;
   var_09 _meth_8491("fly");
@@ -91,7 +91,7 @@ func_1288B(var_00) {
   var_09 setscriptablepartstate("dust", "active", 0);
   var_09 setscriptablepartstate("eye", "idle", 0);
 
-  if (scripts/mp/killstreaks/utility::func_A69F(var_00, "passive_stealth_speed")) {
+  if (scripts\mp\killstreaks\utility::func_A69F(var_00, "passive_stealth_speed")) {
   var_09 setscriptablepartstate("stealth", "active", 0);
   var_09 setscriptablepartstate("center_disc", "hide_fx", 0);
   var_09 setscriptablepartstate("side_discs", "hide_fx", 0);
@@ -109,8 +109,8 @@ func_1288B(var_00) {
   self _meth_8490("disable_guns", 1);
   self _meth_8490("disable_boost", 1);
   thread func_F673();
-  var_09 scripts/mp/killstreaks/utility::func_1843(var_0.streakname, "Killstreak_Ground", var_9.owner, 1);
-  var_09 scripts/mp/killstreaks/utility::func_FAE4("venom_end");
+  var_09 scripts\mp\killstreaks\utility::func_1843(var_0.streakname, "Killstreak_Ground", var_9.owner, 1);
+  var_09 scripts\mp\killstreaks\utility::func_FAE4("venom_end");
   var_09 thread func_13285();
   var_09 thread func_1327E();
   var_09 thread func_1327D();
@@ -188,7 +188,7 @@ func_13285() {
   continue;
   }
 
-  if (scripts/mp/killstreaks/utility::func_A69F(self.streakinfo, "passive_stealth_speed")) {
+  if (scripts\mp\killstreaks\utility::func_A69F(self.streakinfo, "passive_stealth_speed")) {
   self setscriptablepartstate("center_disc", "hide_fx", 0);
   continue;
   }
@@ -211,7 +211,7 @@ func_1327E() {
   continue;
   }
 
-  if (scripts/mp/killstreaks/utility::func_A69F(self.streakinfo, "passive_stealth_speed")) {
+  if (scripts\mp\killstreaks\utility::func_A69F(self.streakinfo, "passive_stealth_speed")) {
   self setscriptablepartstate("side_discs", "hide_fx", 0);
   continue;
   }
@@ -230,7 +230,7 @@ func_1327D() {
   var_00 waittill("energy_depleted", var_01);
 
   if (var_01 == 0) {
-  if (scripts/mp/killstreaks/utility::func_A69F(self.streakinfo, "passive_stealth_speed")) {
+  if (scripts\mp\killstreaks\utility::func_A69F(self.streakinfo, "passive_stealth_speed")) {
   self setscriptablepartstate("center_disc", "hide_fx", 0);
   continue;
   }
@@ -290,7 +290,7 @@ func_13279() {
   continue;
 
   if (isdefined(var_10))
-  var_01 = scripts/mp/killstreaks/utility::getmodifiedantikillstreakdamage(var_02, var_10, var_05, var_01, self.maxhealth, 1, 1, 1);
+  var_01 = scripts\mp\killstreaks\utility::getmodifiedantikillstreakdamage(var_02, var_10, var_05, var_01, self.maxhealth, 1, 1, 1);
 
   self.func_EDD7 = self.func_EDD7 - var_01;
 
@@ -311,7 +311,7 @@ func_13279() {
 
   if (self.func_EDD7 <= 0) {
   var_02 notify("destroyed_killstreak", var_10);
-  var_15 = scripts/mp/killstreak_loot::getrarityforlootitem(self.streakinfo.variantid);
+  var_15 = scripts\mp\killstreak_loot::getrarityforlootitem(self.streakinfo.variantid);
   var_16 = "callout_destroyed_" + self.streakname;
 
   if (var_15 != "")
@@ -381,7 +381,7 @@ func_13281(var_00) {
   self endon("venom_end");
   self endon("host_migration_lifetime_update");
   level endon("game_ended");
-  thread scripts/mp/killstreaks/utility::watchhostmigrationlifetime("venom_end", var_00, ::func_13281);
+  thread scripts\mp\killstreaks\utility::watchhostmigrationlifetime("venom_end", var_00, ::func_13281);
   scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(var_00);
   var_01 scripts\mp\utility\game::playkillstreakdialogonplayer("venom_timeout", undefined, undefined, var_1.origin);
   self notify("venom_end", self.origin);
@@ -411,7 +411,7 @@ venom_watchempdamage() {
 
   for (;;) {
   self waittill("emp_damage", var_00, var_01, var_02, var_03, var_04);
-  scripts/mp/killstreaks/utility::dodamagetokillstreak(100, var_00, var_00, self.team, var_02, var_04, var_03);
+  scripts\mp\killstreaks\utility::dodamagetokillstreak(100, var_00, var_00, self.team, var_02, var_04, var_03);
   }
 }
 
@@ -434,7 +434,7 @@ func_13275() {
   if (var_2.team == var_0.team && var_02 != var_00)
   continue;
 
-  scripts/mp/killstreaks/utility::func_20CF(var_02, "venom_end");
+  scripts\mp\killstreaks\utility::func_20CF(var_02, "venom_end");
   }
 }
 
@@ -451,7 +451,7 @@ func_13276(var_00) {
   if (var_0.team == var_1.team)
   break;
 
-  scripts/mp/killstreaks/utility::func_20CF(var_00, "venom_end");
+  scripts\mp\killstreaks\utility::func_20CF(var_00, "venom_end");
   }
 }
 
@@ -547,7 +547,7 @@ isdamageimmune(var_00) {
 
 venommodifieddamage(var_00, var_01, var_02, var_03, var_04) {
   if (isdefined(var_00) && isdefined(var_03) && isdefined(var_01)) {
-  if (var_03 isvenom() && scripts/mp/killstreaks/utility::func_A69F(var_3.streakinfo, "passive_decreased_damage")) {
+  if (var_03 isvenom() && scripts\mp\killstreaks\utility::func_A69F(var_3.streakinfo, "passive_decreased_damage")) {
   var_05 = distance2dsquared(var_1.origin, var_3.origin);
 
   if (var_05 >= 22500 && var_04 > 10)

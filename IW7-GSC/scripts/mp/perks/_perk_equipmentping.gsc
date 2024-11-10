@@ -1,8 +1,8 @@
-/************************************************************
+/****************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\perks\_perk_equipmentping.gsc
-************************************************************/
+ * Script: scripts\mp\perks\_perk_equipmentping.gsc
+****************************************************/
 
 runequipmentping(param_00,param_01) {
 	self endon("death");
@@ -14,20 +14,20 @@ runequipmentping(param_00,param_01) {
 	}
 
 	self.equipping_lastpingtime = param_01;
-	if(var_02 scripts\mp\_utility::_hasperk("specialty_equipment_ping")) {
+	if(var_02 scripts\mp\utility::_hasperk("specialty_equipment_ping")) {
 		for(;;) {
 			var_04 = 0;
 			if(gettime() >= self.equipping_lastpingtime + 3000) {
 				foreach(var_06 in level.players) {
-					if(!scripts\mp\_utility::isreallyalive(var_06)) {
+					if(!scripts\mp\utility::isreallyalive(var_06)) {
 						continue;
 					}
 
-					if(!var_02 scripts\mp\_utility::isenemy(var_06)) {
+					if(!var_02 scripts\mp\utility::isenemy(var_06)) {
 						continue;
 					}
 
-					if(var_06 scripts\mp\_utility::_hasperk("specialty_engineer")) {
+					if(var_06 scripts\mp\utility::_hasperk("specialty_engineer")) {
 						continue;
 					}
 
@@ -42,7 +42,7 @@ runequipmentping(param_00,param_01) {
 
 					var_08 = self.origin + anglestoup(self.angles) * 10;
 					if(distance2d(var_06.origin,self.origin) < 300 && scripts\common\trace::ray_trace_passed(var_08,var_06 gettagorigin("j_head"),var_07)) {
-						if(!var_06 scripts\mp\_utility::_hasperk("specialty_gpsjammer")) {
+						if(!var_06 scripts\mp\utility::_hasperk("specialty_gpsjammer")) {
 							var_02 thread markasrelaysource(var_06);
 						}
 
@@ -51,14 +51,14 @@ runequipmentping(param_00,param_01) {
 				}
 
 				if(var_04) {
-					if(!scripts\mp\_utility::istrue(self.eyespyalerted)) {
-						var_02 scripts\mp\_missions::func_D991("ch_trait_eye_spy");
+					if(!scripts\mp\utility::istrue(self.eyespyalerted)) {
+						var_02 scripts\mp\missions::func_D991("ch_trait_eye_spy");
 						self.eyespyalerted = 1;
 					}
 
 					playfxontagforclients(var_03.var_7636,self,"tag_origin",var_02);
 					self playsoundtoplayer("ghost_senses_ping",var_02);
-					function_0222(self.origin,var_02,400,800);
+					triggerportableradarping(self.origin,var_02,400,800);
 					wait(3);
 				}
 			}
@@ -71,7 +71,7 @@ runequipmentping(param_00,param_01) {
 markdangerzoneonminimap(param_00,param_01) {
 	param_00 endon("death");
 	param_00 endon("disconnect");
-	if(!isdefined(param_00) || !scripts\mp\_utility::isreallyalive(param_00)) {
+	if(!isdefined(param_00) || !scripts\mp\utility::isreallyalive(param_00)) {
 		return;
 	}
 

@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3374.gsc
-****************************/
+ * Script: 3374.gsc
+************************/
 
 init_basketball_game() {
 	var_00 = scripts\engine\utility::getstructarray("basketball_game","script_noteworthy");

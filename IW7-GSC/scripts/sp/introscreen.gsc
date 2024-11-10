@@ -1,8 +1,8 @@
-/**********************************************
+/**************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\sp\introscreen.gsc
-**********************************************/
+ * Script: scripts\sp\introscreen.gsc
+**************************************/
 
 func_9631() {
 	scripts\engine\utility::flag_init("introscreen_complete");
@@ -68,7 +68,7 @@ func_9AF9(param_00,param_01,param_02,param_03) {
 	wait(param_01);
 	scripts\sp\_hud_util::func_6A99(param_02);
 	wait(param_02);
-	function_01C5("com_cinematicEndInWhite",0);
+	setsaveddvar("com_cinematicEndInWhite",0);
 }
 
 introscreen_corner_line(param_00,param_01,param_02,param_03) {
@@ -78,7 +78,7 @@ introscreen_corner_line(param_00,param_01,param_02,param_03) {
 	}
 	else
 	{
-		level.var_9ACA++;
+		level.intro_offset++;
 	}
 
 	var_04 = cornerline_height();
@@ -883,10 +883,10 @@ func_7661() {
 
 func_7660(param_00) {
 	for(;;) {
-		function_0284(9010);
-		function_0284(param_00);
+		assertdemo(9010);
+		assertdemo(param_00);
 		level waittill(param_00,var_01,var_02);
-		function_0284(9009);
+		assertdemo(9009);
 		func_765E(var_01);
 	}
 }

@@ -1,8 +1,8 @@
-/****************************************************************
+/********************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\maps\cp_disco\gen\cp_disco_fx.gsc
-****************************************************************/
+ * Script: scripts\cp\maps\cp_disco\gen\cp_disco_fx.gsc
+********************************************************/
 
 main() {
 	var_00 = scripts\engine\utility::createoneshoteffect("vfx_zb_carfire_a");

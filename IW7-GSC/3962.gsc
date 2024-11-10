@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\3962.gsc
+ * Script: 3962.gsc
 ***************************************/
 
 registerscriptedagent() {
@@ -24,7 +24,7 @@ func_FAB0() {
   level.agent_definition["zombie_grey"]["setup_func"] = ::setupagent;
   level.agent_funcs["zombie_grey"]["on_killed"] = ::func_C5D1;
   level.agent_funcs["zombie_grey"]["on_damaged"] = ::func_C5CF;
-  level.agent_funcs["zombie_grey"]["gametype_on_killed"] = scripts/cp/agents/gametype_zombie::onzombiekilled;
+  level.agent_funcs["zombie_grey"]["gametype_on_killed"] = scripts\cp\agents\gametype_zombie::onzombiekilled;
   level.agent_funcs["zombie_grey"]["gametype_on_damage_finished"] = ::func_C5D0;
 }
 
@@ -104,9 +104,9 @@ setupagent() {
 
 func_85F6(var_00, var_01) {
   if (scripts\engine\utility::is_true(self.i_am_clone))
-  scripts/asm/asm_bb::bb_requestcombatmovetype_facemotion();
+  scripts\asm\asm_bb::bb_requestcombatmovetype_facemotion();
   else
-  scripts/asm/asm_bb::bb_requestcombatmovetype_strafe();
+  scripts\asm\asm_bb::bb_requestcombatmovetype_strafe();
 }
 
 func_85F8(var_00, var_01) {
@@ -269,7 +269,7 @@ func_C5D1(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08
   scripts\mp\mp_agent::default_on_killed(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08);
 
   foreach (var_10 in level.players)
-  var_10 scripts/cp/cp_persistence::give_player_xp(1000, 1);
+  var_10 scripts\cp\cp_persistence::give_player_xp(1000, 1);
 
   if (isdefined(level.grey_on_killed_func))
   [[level.grey_on_killed_func]](self, var_01, var_04, var_06, var_03);
@@ -314,10 +314,10 @@ func_12BFD(var_00) {
   var_0.can_do_health_regen = 0;
   var_00 setmodel("park_alien_gray");
   var_00 setthreatbiasgroup();
-  scripts/aitypes/zombie_grey/behaviors::set_next_teleport_attack_time(var_00);
-  scripts/aitypes/zombie_grey/behaviors::reset_recent_damage_data(var_00);
-  scripts/asm/zombie_grey/zombie_grey_asm::func_E2FB(var_00);
-  scripts/asm/zombie_grey/zombie_grey_asm::func_E2FA(var_00);
+  scripts\aitypes\zombie_grey\behaviors::set_next_teleport_attack_time(var_00);
+  scripts\aitypes\zombie_grey\behaviors::reset_recent_damage_data(var_00);
+  scripts\asm\zombie_grey\zombie_grey_asm::func_E2FB(var_00);
+  scripts\asm\zombie_grey\zombie_grey_asm::func_E2FA(var_00);
   var_00 thread func_8CAC(var_00);
   var_00 scripts\mp\mp_agent::func_FAFA("iw7_zapper_grey");
 }
@@ -409,13 +409,13 @@ func_C5CF(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08
 
   if (isplayer(var_01)) {
   if (!scripts\engine\utility::is_true(self.actually_doing_regen))
-  scripts/cp/cp_agent_utils::process_damage_feedback(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08, var_09, self);
+  scripts\cp\cp_agent_utils::process_damage_feedback(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08, var_09, self);
 
   if (func_FF8A(self, var_01, var_13)) {
   var_1.func_D8A2 = var_13;
 
   if (randomint(100) > 80)
-  var_01 thread scripts/cp/cp_vo::try_to_play_vo("nag_ufo_fusefail", "zmb_comment_vo", "low", 3, 0, 0, 1);
+  var_01 thread scripts\cp\cp_vo::try_to_play_vo("nag_ufo_fusefail", "zmb_comment_vo", "low", 3, 0, 0, 1);
   }
   }
 
@@ -436,12 +436,12 @@ func_C5CF(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08
   var_02 = min(int(self.maxhealth / 20), 1000);
 
   var_03 = var_03 | level.idflags_no_knockback;
-  scripts/cp/agents/gametype_zombie::onzombiedamaged(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08, var_09, var_10, var_11);
+  scripts\cp\agents\gametype_zombie::onzombiedamaged(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08, var_09, var_10, var_11);
 
   if (isdefined(var_02)) {
   if (isplayer(var_01)) {
   if (!isdefined(self.sum_of_recent_damage))
-  scripts/aitypes/zombie_grey/behaviors::reset_recent_damage_data(self);
+  scripts\aitypes\zombie_grey\behaviors::reset_recent_damage_data(self);
 
   self.sum_of_recent_damage = self.sum_of_recent_damage + var_02;
 
@@ -452,19 +452,19 @@ func_C5CF(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08
 }
 
 func_C5D0(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08, var_09, var_10, var_11, var_12) {
-  scripts/cp/agents/gametype_zombie::onzombiedamagefinished(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08, var_09, var_10, var_11, var_12);
-  scripts/aitypes/zombie_grey/behaviors::try_update_mobile_shield(self, var_01);
-  scripts/aitypes/zombie_grey/behaviors::try_regen_health(self);
+  scripts\cp\agents\gametype_zombie::onzombiedamagefinished(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08, var_09, var_10, var_11, var_12);
+  scripts\aitypes\zombie_grey\behaviors::try_update_mobile_shield(self, var_01);
+  scripts\aitypes\zombie_grey\behaviors::try_regen_health(self);
 }
 
 func_98E9() {
-  level._effect["zombie_grey_shockwave_begin"] = loadfx("vfx/iw7/core/zombie/vfx_zmb_swave_begin.vfx");
-  level._effect["zombie_grey_shockwave_deploy"] = loadfx("vfx/iw7/core/zombie/vfx_zmb_swave_deploy.vfx");
-  level._effect["zombie_grey_teleport"] = loadfx("vfx/old/_requests/archetypes/vfx_phase_shift_start_volume");
-  level._effect["zombie_grey_teleport_trail"] = loadfx("vfx/iw7/core/zombie/vfx_zmb_grey_tport_trail.vfx");
-  level._effect["zombie_grey_start_duplicate"] = loadfx("vfx/iw7/_requests/coop/vfx_magicwheel_beam.vfx");
-  level._effect["summon_zombie_energy_ring"] = loadfx("vfx/iw7/core/zombie/vfx_zmb_grey_spawn_portal.vfx");
-  level._effect["zombie_mini_grey_shock_arc"] = loadfx("vfx/iw7/_requests/coop/vfx_mini_grey_shock_arc.vfx");
+  level._effect["zombie_grey_shockwave_begin"] = loadfx("vfx\iw7\core\zombie\vfx_zmb_swave_begin.vfx");
+  level._effect["zombie_grey_shockwave_deploy"] = loadfx("vfx\iw7\core\zombie\vfx_zmb_swave_deploy.vfx");
+  level._effect["zombie_grey_teleport"] = loadfx("vfx\old\_requests\archetypes\vfx_phase_shift_start_volume");
+  level._effect["zombie_grey_teleport_trail"] = loadfx("vfx\iw7\core\zombie\vfx_zmb_grey_tport_trail.vfx");
+  level._effect["zombie_grey_start_duplicate"] = loadfx("vfx\iw7\_requests\coop\vfx_magicwheel_beam.vfx");
+  level._effect["summon_zombie_energy_ring"] = loadfx("vfx\iw7\core\zombie\vfx_zmb_grey_spawn_portal.vfx");
+  level._effect["zombie_mini_grey_shock_arc"] = loadfx("vfx\iw7\_requests\coop\vfx_mini_grey_shock_arc.vfx");
 }
 
 func_FF8A(var_00, var_01, var_02) {

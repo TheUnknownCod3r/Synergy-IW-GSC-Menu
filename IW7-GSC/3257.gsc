@@ -1,13 +1,13 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3257.gsc
-****************************/
+ * Script: 3257.gsc
+************************/
 
 main() {
 	scripts\mp\agents\zombie\zmb_zombie_agent::registerscriptedagent();
 	scripts\mp\agents\zombie_brute\zombie_brute_agent::registerscriptedagent();
-	scripts/mp/agents/zombie_ghost/zombie_ghost_agent::registerscriptedagent();
+	scripts\mp\agents\zombie_ghost\zombie_ghost_agent::registerscriptedagent();
 	level.agent_funcs["generic_zombie"]["on_damaged"] = ::onzombiedamaged;
 	level.agent_funcs["generic_zombie"]["gametype_on_damage_finished"] = ::onzombiedamagefinished;
 	level.agent_funcs["generic_zombie"]["gametype_on_killed"] = ::onzombiekilled;
@@ -129,7 +129,7 @@ onzombiedamaged(param_00,param_01,param_02,param_03,param_04,param_05,param_06,p
 		var_26 = var_11 && param_01 scripts\cp\utility::has_zombie_perk("perk_machine_smack");
 		var_27 = is_axe_weapon(param_05);
 		if(isdefined(param_02) && isdefined(param_08) && !var_15 && var_10) {
-			var_28 = scripts/cp/zombies/zombie_armor::process_damage_to_armor(var_0C,param_01,param_02,param_08,param_07);
+			var_28 = scripts\cp\zombies\zombie_armor::process_damage_to_armor(var_0C,param_01,param_02,param_08,param_07);
 			if(var_28 <= 0) {
 				return;
 			}
@@ -141,7 +141,7 @@ onzombiedamaged(param_00,param_01,param_02,param_03,param_04,param_05,param_06,p
 		shotgun_scaling(param_01,var_0C,param_05);
 		if(var_11) {
 			if(var_0E) {
-				param_02 = int(param_02 * param_01 scripts/cp/perks/perk_utility::perk_getmeleescalar());
+				param_02 = int(param_02 * param_01 scripts\cp\perks\perk_utility::perk_getmeleescalar());
 				if(var_26) {
 					param_02 = param_02 + 1500;
 				}
@@ -196,7 +196,7 @@ onzombiedamaged(param_00,param_01,param_02,param_03,param_04,param_05,param_06,p
 	}
 
 	param_02 = int(min(param_02,self.maxhealth));
-	scripts/cp/zombies/zombies_gamescore::update_agent_damage_performance(param_01,param_02,param_04);
+	scripts\cp\zombies\zombies_gamescore::update_agent_damage_performance(param_01,param_02,param_04);
 	scripts\cp\cp_agent_utils::process_damage_rewards(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08,param_09,var_0C);
 	scripts\cp\cp_agent_utils::process_damage_feedback(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08,param_09,var_0C);
 	scripts\cp\cp_agent_utils::store_attacker_info(param_01,param_02);
@@ -238,7 +238,7 @@ onzombiekilled(param_00,param_01,param_02,param_03,param_04,param_05,param_06,pa
 		}
 	}
 
-	param_01 scripts/cp/zombies/zombies_consumables::headshot_reload_check(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08);
+	param_01 scripts\cp\zombies\zombies_consumables::headshot_reload_check(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08);
 	if(isdefined(level.spawnloopupdatefunc)) {
 		[[level.spawnloopupdatefunc]](param_01,param_04);
 	}
@@ -276,7 +276,7 @@ onzombiekilled(param_00,param_01,param_02,param_03,param_04,param_05,param_06,pa
 	scripts\cp\cp_challenge::update_death_challenges(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08);
 	scripts\cp\cp_merits::process_agent_on_killed_merits(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08);
 	scripts\cp\cp_agent_utils::deactivateagent();
-	scripts/cp/zombies/zombie_armor::clean_up_zombie_armor(self);
+	scripts\cp\zombies\zombie_armor::clean_up_zombie_armor(self);
 }
 
 process_kill_rewards(param_00,param_01,param_02,param_03,param_04) {
@@ -770,7 +770,7 @@ zombieenterplayspace() {
 
 	if(!scripts\engine\utility::istrue(self.reached_entrance_goal)) {
 		if(!isdefined(self.attack_spot)) {
-			var_01 = scripts/cp/zombies/zombie_entrances::get_open_attack_spot(var_00);
+			var_01 = scripts\cp\zombies\zombie_entrances::get_open_attack_spot(var_00);
 			if(!var_01.occupied) {
 				var_01.occupied = 1;
 			}
@@ -785,9 +785,9 @@ zombieenterplayspace() {
 		self.reached_entrance_goal = 1;
 	}
 
-	while(scripts/cp/zombies/zombie_entrances::entrance_has_barriers(var_00)) {
+	while(scripts\cp\zombies\zombie_entrances::entrance_has_barriers(var_00)) {
 		if(!isdefined(self.attack_spot)) {
-			var_01 = scripts/cp/zombies/zombie_entrances::get_open_attack_spot(var_00);
+			var_01 = scripts\cp\zombies\zombie_entrances::get_open_attack_spot(var_00);
 			if(!var_01.occupied) {
 				var_01.occupied = 1;
 			}
@@ -866,25 +866,25 @@ is_player_near_interaction_point(param_00,param_01) {
 
 attack_nearby_player() {
 	self.curmeleetarget = self.closest_player_near_interaction_point;
-	scripts/asm/asm_bb::bb_requestmelee(self.curmeleetarget);
+	scripts\asm\asm_bb::bb_requestmelee(self.curmeleetarget);
 	var_00 = scripts\engine\utility::waittill_any_return("attack_hit","attack_miss");
 	var_01 = scripts\engine\utility::getclosest(self.origin,level.current_interaction_structs);
 	if(is_player_near_interaction_point(self.closest_player_near_interaction_point,var_01)) {
-		scripts/asm/zombie/melee::domeleedamage(self.closest_player_near_interaction_point,scripts/asm/zombie/melee::get_melee_damage_dealt(),"MOD_IMPACT");
+		scripts\asm\zombie\melee::domeleedamage(self.closest_player_near_interaction_point,scripts\asm\zombie\melee::get_melee_damage_dealt(),"MOD_IMPACT");
 	}
 }
 
 break_barrier_from_entrance(param_00) {
 	self.curmeleetarget = param_00.window_attack_ent;
-	scripts/asm/asm_bb::bb_requestmelee(self.curmeleetarget);
+	scripts\asm\asm_bb::bb_requestmelee(self.curmeleetarget);
 	scripts\engine\utility::waittill_any_3("attack_hit","attack_miss");
-	scripts/cp/zombies/zombie_entrances::remove_barrier_from_entrance(param_00);
-	if(!scripts/cp/zombies/zombie_entrances::entrance_has_barriers(param_00)) {
+	scripts\cp\zombies\zombie_entrances::remove_barrier_from_entrance(param_00);
+	if(!scripts\cp\zombies\zombie_entrances::entrance_has_barriers(param_00)) {
 		if(isdefined(param_00.window_attack_ent)) {
 			param_00.window_attack_ent delete();
 		}
 
-		scripts/asm/asm_bb::bb_clearmeleerequest();
+		scripts\asm\asm_bb::bb_clearmeleerequest();
 		self.curmeleetarget = undefined;
 		self.precacheleaderboards = 0;
 		self.ignoreme = 0;

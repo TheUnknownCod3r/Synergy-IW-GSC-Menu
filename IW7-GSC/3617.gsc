@@ -1,26 +1,26 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3617.gsc
-****************************/
+ * Script: 3617.gsc
+************************/
 
 func_9527() {
 	precacheitem("antigrav");
 	precachemodel("anti_grav_border_wm");
-	level._effect["antigrav_detonate_dud"] = loadfx("vfx/iw7/_requests/equipment/antigrav/antigrav_gren_detonate_dud.vfx");
-	level._effect["antigrav_caltrop_trail"] = loadfx("vfx/iw7/_requests/equipment/antigrav/antigrav_gren_trail.vfx");
-	level._effect["antigrav_detonate"] = loadfx("vfx/iw7/_requests/equipment/antigrav/antigrav_gren_detonate.vfx");
-	level._effect["antigrav_detonate_cheap"] = loadfx("vfx/iw7/_requests/equipment/antigrav/antigrav_gren_detonate_cheap.vfx");
-	level._effect["antigrav_caltrop_barrier"] = loadfx("vfx/iw7/_requests/equipment/antigrav/antigrav_gren_caltrop_barrier.vfx");
-	level._effect["antigrav_caltrop_barrier_cheap"] = loadfx("vfx/iw7/_requests/equipment/antigrav/antigrav_gren_caltrop_barrier_cheap.vfx");
-	level._effect["antigrav_area_small"] = loadfx("vfx/iw7/_requests/equipment/antigrav/antigrav_gren_area_small.vfx");
-	level._effect["antigrav_area_small_cheap"] = loadfx("vfx/iw7/_requests/equipment/antigrav/antigrav_gren_area_small_cheap.vfx");
-	level._effect["antigrav_detonate_up"] = loadfx("vfx/iw7/_requests/equipment/antigrav/antigrav_gren_detonate_upgrade.vfx");
-	level._effect["antigrav_detonate_up_cheap"] = loadfx("vfx/iw7/_requests/equipment/antigrav/antigrav_gren_detonate_upgrade_cheap.vfx");
-	level._effect["antigrav_caltrop_barrier_up"] = loadfx("vfx/iw7/_requests/equipment/antigrav/antigrav_gren_caltrop_barrier_upgrade.vfx");
-	level._effect["antigrav_caltrop_barrier_up_cheap"] = loadfx("vfx/iw7/_requests/equipment/antigrav/antigrav_gren_caltrop_barrier_upgrade_cheap.vfx");
-	level._effect["antigrav_area_small_up"] = loadfx("vfx/iw7/_requests/equipment/antigrav/antigrav_gren_area_small_upgrade.vfx");
-	level._effect["antigrav_area_small_up_cheap"] = loadfx("vfx/iw7/_requests/equipment/antigrav/antigrav_gren_area_small_upgrade_cheap.vfx");
+	level._effect["antigrav_detonate_dud"] = loadfx("vfx\iw7\_requests\equipment\antigrav\antigrav_gren_detonate_dud.vfx");
+	level._effect["antigrav_caltrop_trail"] = loadfx("vfx\iw7\_requests\equipment\antigrav\antigrav_gren_trail.vfx");
+	level._effect["antigrav_detonate"] = loadfx("vfx\iw7\_requests\equipment\antigrav\antigrav_gren_detonate.vfx");
+	level._effect["antigrav_detonate_cheap"] = loadfx("vfx\iw7\_requests\equipment\antigrav\antigrav_gren_detonate_cheap.vfx");
+	level._effect["antigrav_caltrop_barrier"] = loadfx("vfx\iw7\_requests\equipment\antigrav\antigrav_gren_caltrop_barrier.vfx");
+	level._effect["antigrav_caltrop_barrier_cheap"] = loadfx("vfx\iw7\_requests\equipment\antigrav\antigrav_gren_caltrop_barrier_cheap.vfx");
+	level._effect["antigrav_area_small"] = loadfx("vfx\iw7\_requests\equipment\antigrav\antigrav_gren_area_small.vfx");
+	level._effect["antigrav_area_small_cheap"] = loadfx("vfx\iw7\_requests\equipment\antigrav\antigrav_gren_area_small_cheap.vfx");
+	level._effect["antigrav_detonate_up"] = loadfx("vfx\iw7\_requests\equipment\antigrav\antigrav_gren_detonate_upgrade.vfx");
+	level._effect["antigrav_detonate_up_cheap"] = loadfx("vfx\iw7\_requests\equipment\antigrav\antigrav_gren_detonate_upgrade_cheap.vfx");
+	level._effect["antigrav_caltrop_barrier_up"] = loadfx("vfx\iw7\_requests\equipment\antigrav\antigrav_gren_caltrop_barrier_upgrade.vfx");
+	level._effect["antigrav_caltrop_barrier_up_cheap"] = loadfx("vfx\iw7\_requests\equipment\antigrav\antigrav_gren_caltrop_barrier_upgrade_cheap.vfx");
+	level._effect["antigrav_area_small_up"] = loadfx("vfx\iw7\_requests\equipment\antigrav\antigrav_gren_area_small_upgrade.vfx");
+	level._effect["antigrav_area_small_up_cheap"] = loadfx("vfx\iw7\_requests\equipment\antigrav\antigrav_gren_area_small_upgrade_cheap.vfx");
 	scripts\engine\utility::flag_init("antigrav_force_delete");
 	level.player.var_D363 = [];
 	level.player thread func_D0EB();
@@ -339,13 +339,13 @@ func_197D(param_00) {
 		return;
 	}
 
-	if(scripts/asm/asm_bb::bb_isanimscripted()) {
+	if(scripts\asm\asm_bb::bb_isanimscripted()) {
 		self givescorefortrophyblocks();
 	}
 
 	if(!isdefined(self.var_2023)) {
 		func_1978(param_00);
-		scripts/asm/asm::asm_setstate("antigrav_rise");
+		scripts\asm\asm::asm_setstate("antigrav_rise");
 		return;
 	}
 

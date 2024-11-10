@@ -1,8 +1,8 @@
-/*************************************************************
+/*****************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\killstreaks\_escortairdrop.gsc
-*************************************************************/
+ * Script: scripts\mp\killstreaks\_escortairdrop.gsc
+*****************************************************/
 
 init() {
 	level.var_C73F = [];
@@ -35,20 +35,20 @@ init() {
 	level.var_C73F["osprey_gunner"].maxhealth = level.var_8D73 * 2;
 	level.var_C73F["osprey_gunner"].timeout = 75;
 	foreach(var_01 in level.var_C73F) {
-		level.chopper_fx["explode"]["death"][var_01.modelbase] = loadfx("vfx/core/expl/helicopter_explosion_osprey");
-		level.chopper_fx["explode"]["air_death"][var_01.modelbase] = loadfx("vfx/core/expl/helicopter_explosion_osprey_air_mp");
-		level.chopper_fx["anim"]["blades_anim_up"][var_01.modelbase] = loadfx("vfx/props/osprey_blades_anim_up");
-		level.chopper_fx["anim"]["blades_anim_down"][var_01.modelbase] = loadfx("vfx/props/osprey_blades_anim_down");
-		level.chopper_fx["anim"]["blades_static_up"][var_01.modelbase] = loadfx("vfx/props/osprey_blades_up");
-		level.chopper_fx["anim"]["blades_static_down"][var_01.modelbase] = loadfx("vfx/props/osprey_blades_default");
-		level.chopper_fx["anim"]["hatch_left_static_up"][var_01.modelbase] = loadfx("vfx/props/osprey_bottom_door_left_default");
-		level.chopper_fx["anim"]["hatch_left_anim_down"][var_01.modelbase] = loadfx("vfx/props/osprey_bottom_door_left_anim_open");
-		level.chopper_fx["anim"]["hatch_left_static_down"][var_01.modelbase] = loadfx("vfx/props/osprey_bottom_door_left_up");
-		level.chopper_fx["anim"]["hatch_left_anim_up"][var_01.modelbase] = loadfx("vfx/props/osprey_bottom_door_left_anim_close");
-		level.chopper_fx["anim"]["hatch_right_static_up"][var_01.modelbase] = loadfx("vfx/props/osprey_bottom_door_right_default");
-		level.chopper_fx["anim"]["hatch_right_anim_down"][var_01.modelbase] = loadfx("vfx/props/osprey_bottom_door_right_anim_open");
-		level.chopper_fx["anim"]["hatch_right_static_down"][var_01.modelbase] = loadfx("vfx/props/osprey_bottom_door_right_up");
-		level.chopper_fx["anim"]["hatch_right_anim_up"][var_01.modelbase] = loadfx("vfx/props/osprey_bottom_door_right_anim_close");
+		level.chopper_fx["explode"]["death"][var_01.modelbase] = loadfx("vfx\core\expl\helicopter_explosion_osprey");
+		level.chopper_fx["explode"]["air_death"][var_01.modelbase] = loadfx("vfx\core\expl\helicopter_explosion_osprey_air_mp");
+		level.chopper_fx["anim"]["blades_anim_up"][var_01.modelbase] = loadfx("vfx\props\osprey_blades_anim_up");
+		level.chopper_fx["anim"]["blades_anim_down"][var_01.modelbase] = loadfx("vfx\props\osprey_blades_anim_down");
+		level.chopper_fx["anim"]["blades_static_up"][var_01.modelbase] = loadfx("vfx\props\osprey_blades_up");
+		level.chopper_fx["anim"]["blades_static_down"][var_01.modelbase] = loadfx("vfx\props\osprey_blades_default");
+		level.chopper_fx["anim"]["hatch_left_static_up"][var_01.modelbase] = loadfx("vfx\props\osprey_bottom_door_left_default");
+		level.chopper_fx["anim"]["hatch_left_anim_down"][var_01.modelbase] = loadfx("vfx\props\osprey_bottom_door_left_anim_open");
+		level.chopper_fx["anim"]["hatch_left_static_down"][var_01.modelbase] = loadfx("vfx\props\osprey_bottom_door_left_up");
+		level.chopper_fx["anim"]["hatch_left_anim_up"][var_01.modelbase] = loadfx("vfx\props\osprey_bottom_door_left_anim_close");
+		level.chopper_fx["anim"]["hatch_right_static_up"][var_01.modelbase] = loadfx("vfx\props\osprey_bottom_door_right_default");
+		level.chopper_fx["anim"]["hatch_right_anim_down"][var_01.modelbase] = loadfx("vfx\props\osprey_bottom_door_right_anim_open");
+		level.chopper_fx["anim"]["hatch_right_static_down"][var_01.modelbase] = loadfx("vfx\props\osprey_bottom_door_right_up");
+		level.chopper_fx["anim"]["hatch_right_anim_up"][var_01.modelbase] = loadfx("vfx\props\osprey_bottom_door_right_anim_close");
 	}
 
 	level.var_1A6F = [];
@@ -63,16 +63,16 @@ tryuseescortairdrop(param_00,param_01) {
 		return 0;
 	}
 
-	if(scripts\mp\_utility::currentactivevehiclecount() >= scripts\mp\_utility::maxvehiclesallowed() || level.fauxvehiclecount + var_02 >= scripts\mp\_utility::maxvehiclesallowed()) {
+	if(scripts\mp\utility::currentactivevehiclecount() >= scripts\mp\utility::maxvehiclesallowed() || level.fauxvehiclecount + var_02 >= scripts\mp\utility::maxvehiclesallowed()) {
 		self iprintlnbold(&"KILLSTREAKS_TOO_MANY_VEHICLES");
 		return 0;
 	}
 
-	if(scripts\mp\_utility::iskillstreakdenied()) {
+	if(scripts\mp\utility::iskillstreakdenied()) {
 		return 0;
 	}
 
-	scripts\mp\_utility::incrementfauxvehiclecount();
+	scripts\mp\utility::incrementfauxvehiclecount();
 	return 1;
 }
 
@@ -83,19 +83,19 @@ func_128F3(param_00,param_01) {
 		return 0;
 	}
 
-	if(scripts\mp\_utility::currentactivevehiclecount() >= scripts\mp\_utility::maxvehiclesallowed() || level.fauxvehiclecount + var_02 >= scripts\mp\_utility::maxvehiclesallowed()) {
+	if(scripts\mp\utility::currentactivevehiclecount() >= scripts\mp\utility::maxvehiclesallowed() || level.fauxvehiclecount + var_02 >= scripts\mp\utility::maxvehiclesallowed()) {
 		self iprintlnbold(&"KILLSTREAKS_TOO_MANY_VEHICLES");
 		return 0;
 	}
 
-	scripts\mp\_utility::incrementfauxvehiclecount();
+	scripts\mp\utility::incrementfauxvehiclecount();
 	var_04 = func_F1AD(param_00,"osprey_gunner","compass_objpoint_osprey_friendly","compass_objpoint_osprey_enemy",&"KILLSTREAKS_SELECT_MOBILE_MORTAR_LOCATION");
 	if(!isdefined(var_04) || !var_04) {
-		scripts\mp\_utility::decrementfauxvehiclecount();
+		scripts\mp\utility::decrementfauxvehiclecount();
 		return 0;
 	}
 
-	scripts\mp\_matchdata::logkillstreakevent("osprey_gunner",self.origin);
+	scripts\mp\matchdata::logkillstreakevent("osprey_gunner",self.origin);
 	return 1;
 }
 
@@ -155,27 +155,27 @@ func_F1AD(param_00,param_01,param_02,param_03,param_04) {
 		var_06 = var_06 * 1.5;
 	}
 
-	scripts\mp\_utility::_beginlocationselection(param_01,"map_artillery_selector",0,500);
+	scripts\mp\utility::_beginlocationselection(param_01,"map_artillery_selector",0,500);
 	thread func_11089();
 	self waittill("confirm_location",var_07,var_08);
-	scripts\mp\_utility::stoplocationselection(0);
-	scripts\mp\_utility::setusingremote(param_01);
+	scripts\mp\utility::stoplocationselection(0);
+	scripts\mp\utility::setusingremote(param_01);
 	var_09 = scripts\mp\killstreaks\_killstreaks::initridekillstreak(param_01);
 	if(var_09 != "success") {
 		if(var_09 != "disconnect") {
-			scripts\mp\_utility::clearusingremote();
+			scripts\mp\utility::clearusingremote();
 		}
 
 		return 0;
 	}
 
 	if(isdefined(level.chopper)) {
-		scripts\mp\_utility::clearusingremote();
+		scripts\mp\utility::clearusingremote();
 		self iprintlnbold(&"KILLSTREAKS_AIR_SPACE_TOO_CROWDED");
 		return 0;
 	}
-	else if(scripts\mp\_utility::currentactivevehiclecount() >= scripts\mp\_utility::maxvehiclesallowed() || level.fauxvehiclecount >= scripts\mp\_utility::maxvehiclesallowed()) {
-		scripts\mp\_utility::clearusingremote();
+	else if(scripts\mp\utility::currentactivevehiclecount() >= scripts\mp\utility::maxvehiclesallowed() || level.fauxvehiclecount >= scripts\mp\utility::maxvehiclesallowed()) {
+		scripts\mp\utility::clearusingremote();
 		self iprintlnbold(&"KILLSTREAKS_TOO_MANY_VEHICLES");
 		return 0;
 	}
@@ -185,8 +185,8 @@ func_F1AD(param_00,param_01,param_02,param_03,param_04) {
 }
 
 func_1012E(param_00,param_01,param_02,param_03) {
-	var_04 = scripts\mp\_hud_util::createfontstring("bigfixed",0.5);
-	var_04 scripts\mp\_hud_util::setpoint("CENTER","CENTER",0,-150);
+	var_04 = scripts\mp\hud_util::createfontstring("bigfixed",0.5);
+	var_04 scripts\mp\hud_util::setpoint("CENTER","CENTER",0,-150);
 	var_04 settext(param_02);
 	self.locationobjectives = [];
 	for(var_05 = 0;var_05 < param_03;var_05++) {
@@ -206,7 +206,7 @@ func_1012E(param_00,param_01,param_02,param_03) {
 	}
 
 	scripts\engine\utility::waittill_any_3("cancel_location","picked_location","stop_location_selection");
-	var_04 scripts\mp\_hud_util::destroyelem();
+	var_04 scripts\mp\hud_util::destroyelem();
 	for(var_05 = 0;var_05 < param_03;var_05++) {
 		scripts\mp\objidpoolmanager::returnminimapid(self.locationobjectives[var_05]);
 	}
@@ -341,11 +341,11 @@ func_130B6(param_00,param_01,param_02,param_03,param_04,param_05) {
 func_E4F8(param_00,param_01) {
 	self endon("disconnect");
 	param_01 endon("helicopter_done");
-	thread scripts\mp\_utility::teamplayercardsplash("used_osprey_gunner",self);
-	scripts\mp\_utility::_giveweapon("heli_remote_mp");
-	scripts\mp\_utility::_switchtoweapon("heli_remote_mp");
+	thread scripts\mp\utility::teamplayercardsplash("used_osprey_gunner",self);
+	scripts\mp\utility::_giveweapon("heli_remote_mp");
+	scripts\mp\utility::_switchtoweapon("heli_remote_mp");
 	if(getdvarint("camera_thirdPerson")) {
-		scripts\mp\_utility::setthirdpersondof(0);
+		scripts\mp\utility::setthirdpersondof(0);
 	}
 
 	param_01 _meth_83ED(self);
@@ -356,7 +356,7 @@ func_E4F8(param_00,param_01) {
 	self.var_8DD2 = param_00;
 	thread func_6381(param_01);
 	thread waitsetthermal(1,param_01);
-	thread scripts\mp\_utility::reinitializethermal(param_01);
+	thread scripts\mp\utility::reinitializethermal(param_01);
 	for(;;) {
 		param_01 waittill("turret_fire");
 		param_01 fireweapon();
@@ -380,12 +380,12 @@ waitsetthermal(param_00,param_01) {
 func_1011E(param_00) {
 	self endon("disconnect");
 	param_00 endon("helicopter_done");
-	self.var_6741 = scripts\mp\_hud_util::createfontstring("bigfixed",1.5);
-	self.var_6741 scripts\mp\_hud_util::setpoint("CENTER","CENTER",0,-150);
+	self.var_6741 = scripts\mp\hud_util::createfontstring("bigfixed",1.5);
+	self.var_6741 scripts\mp\hud_util::setpoint("CENTER","CENTER",0,-150);
 	self.var_6741 settext(level.var_C73F[param_00.var_C740].var_DA71);
 	wait(6);
 	if(isdefined(self.var_6741)) {
-		self.var_6741 scripts\mp\_hud_util::destroyelem();
+		self.var_6741 scripts\mp\hud_util::destroyelem();
 	}
 }
 
@@ -611,15 +611,15 @@ func_A663(param_00) {
 				continue;
 			}
 
-			if(!scripts\mp\_utility::isreallyalive(var_03)) {
+			if(!scripts\mp\utility::isreallyalive(var_03)) {
 				continue;
 			}
 
-			if(!self.triggerportableradarping scripts\mp\_utility::isenemy(var_03)) {
+			if(!self.triggerportableradarping scripts\mp\utility::isenemy(var_03)) {
 				continue;
 			}
 
-			if(var_03 scripts\mp\_utility::_hasperk("specialty_blindeye")) {
+			if(var_03 scripts\mp\utility::_hasperk("specialty_blindeye")) {
 				continue;
 			}
 
@@ -651,7 +651,7 @@ func_1B01(param_00,param_01) {
 		if(var_02 <= 0) {
 			var_03--;
 			var_02 = 6;
-			if(distancesquared(param_00.origin,param_01) > 500000 || var_03 <= 0 || !scripts\mp\_utility::isreallyalive(param_00)) {
+			if(distancesquared(param_00.origin,param_01) > 500000 || var_03 <= 0 || !scripts\mp\utility::isreallyalive(param_00)) {
 				self notify("abandon_target");
 				return;
 			}
@@ -785,16 +785,16 @@ func_C73D(param_00,param_01,param_02) {
 
 func_6380(param_00) {
 	if(isdefined(self.var_6741)) {
-		self.var_6741 scripts\mp\_hud_util::destroyelem();
+		self.var_6741 scripts\mp\hud_util::destroyelem();
 	}
 
 	self _meth_8258();
 	self thermalvisionoff();
 	self thermalvisionfofoverlayoff();
 	self unlink();
-	scripts\mp\_utility::clearusingremote();
+	scripts\mp\utility::clearusingremote();
 	if(getdvarint("camera_thirdPerson")) {
-		scripts\mp\_utility::setthirdpersondof(1);
+		scripts\mp\utility::setthirdpersondof(1);
 	}
 
 	self visionsetthermalforplayer(game["thermal_vision"],0);
@@ -803,8 +803,8 @@ func_6380(param_00) {
 	}
 
 	self notify("heliPlayer_removed");
-	scripts\mp\_utility::_switchtoweapon(scripts\engine\utility::getlastweapon());
-	scripts\mp\_utility::_takeweapon("heli_remote_mp");
+	scripts\mp\utility::_switchtoweapon(scripts\engine\utility::getlastweapon());
+	scripts\mp\utility::_takeweapon("heli_remote_mp");
 }
 
 func_6381(param_00) {

@@ -1,8 +1,8 @@
-/*********************************************************
+/*************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\asm\zombie_dlc3\mp\states.gsc
-*********************************************************/
+ * Script: scripts\asm\zombie_dlc3\mp\states.gsc
+*************************************************/
 
 func_2371() {
 	if(scripts\asm\asm::func_232E("zombie_dlc3")) {
@@ -1120,7 +1120,7 @@ trans_death_generic_to_death_normal0(param_00,param_01,param_02,param_03) {
 }
 
 trans_death_generic_to_death_kungfu1(param_00,param_01,param_02,param_03) {
-	return scripts\common\utility::istrue(self.kung_fu_punched);
+	return scripts\engine\utility::istrue(self.kung_fu_punched);
 }
 
 trans_death_moving_to_death_moving_normal0(param_00,param_01,param_02,param_03) {
@@ -1128,7 +1128,7 @@ trans_death_moving_to_death_moving_normal0(param_00,param_01,param_02,param_03) 
 }
 
 trans_death_moving_to_death_kungfu1(param_00,param_01,param_02,param_03) {
-	return scripts\common\utility::istrue(self.kung_fu_punched);
+	return scripts\engine\utility::istrue(self.kung_fu_punched);
 }
 
 func_12294(param_00,param_01,param_02,param_03) {
@@ -1404,5 +1404,5 @@ func_12403(param_00,param_01,param_02,param_03) {
 }
 
 trans_headcutter_death_style_to_headcutter_death_prone0(param_00,param_01,param_02,param_03) {
-	return scripts\common\utility::istrue(self.dismember_crawl);
+	return scripts\engine\utility::istrue(self.dismember_crawl);
 }

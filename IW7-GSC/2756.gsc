@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2756.gsc
+ * Script: 2756.gsc
 ***************************************/
 
 func_DEF9() {
@@ -897,7 +897,7 @@ func_99BA(var_00, var_01, var_02, var_03, var_04) {
 
   foreach (var_09 in var_06) {
   if (var_09 <= var_07)
-    return;
+  return;
   }
 
   updatecurrentobjective();
@@ -948,7 +948,7 @@ func_99BA(var_00, var_01, var_02, var_03, var_04) {
   var_16 = getweaponvariantindex(var_02);
 
   if (isdefined(var_16) && (var_16 == 4 || var_16 == 36))
-    updatecurrentobjective();
+  updatecurrentobjective();
   }
   }
   else if (isexplosivedamagemod(var_03)) {
@@ -958,7 +958,7 @@ func_99BA(var_00, var_01, var_02, var_03, var_04) {
   var_16 = getweaponvariantindex(var_02);
 
   if (isdefined(var_16) && (var_16 == 6 || var_16 == 38))
-    updatecurrentobjective();
+  updatecurrentobjective();
   }
   }
   else if (scripts\engine\utility::isbulletdamage(var_03))
@@ -973,7 +973,7 @@ func_99BA(var_00, var_01, var_02, var_03, var_04) {
 
   if (var_15 == "iw7_rvn") {
   if (self _meth_8519(var_02))
-    updatecurrentobjective();
+  updatecurrentobjective();
   }
   }
   else if (isexplosivedamagemod(var_03)) {
@@ -983,8 +983,8 @@ func_99BA(var_00, var_01, var_02, var_03, var_04) {
   var_16 = getweaponvariantindex(var_02);
 
   if (isdefined(var_16) && (var_16 == 3 || var_16 == 35)) {
-    if (self _meth_8519(var_02))
-    updatecurrentobjective();
+  if (self _meth_8519(var_02))
+  updatecurrentobjective();
   }
   }
   }

@@ -1,8 +1,8 @@
-/**********************************************************
+/**************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\archetypes\archassassin.gsc
-**********************************************************/
+ * Script: scripts\mp\archetypes\archassassin.gsc
+**************************************************/
 
 playbodyfx(param_00,param_01) {
 	var_02[0][0]["org"] = self gettagorigin("j_spineupper");

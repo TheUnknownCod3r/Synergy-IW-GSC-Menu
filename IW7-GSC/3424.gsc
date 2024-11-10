@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3424.gsc
-****************************/
+ * Script: 3424.gsc
+************************/
 
 func_13F54() {
 	scripts\engine\utility::flag_init("spawn_point_score_data_init_done");
@@ -19,15 +19,15 @@ func_7C8A(param_00) {
 }
 
 func_13F59(param_00) {
-	if(!scripts/cp/zombies/scripts/cp/zombies/func_0D5F::critical_factor(::scripts/cp/zombies/scripts/cp/zombies/func_0D5F::func_26B8,param_00)) {
+	if(!scripts\cp\zombies\scripts\cp\zombies\func_0D5F::critical_factor(::scripts\cp\zombies\scripts\cp\zombies\func_0D5F::func_26B8,param_00)) {
 		return "secondary";
 	}
 
-	if(!scripts/cp/zombies/scripts/cp/zombies/func_0D5F::critical_factor(::scripts/cp/zombies/scripts/cp/zombies/func_0D5F::func_26BC,param_00)) {
+	if(!scripts\cp\zombies\scripts\cp\zombies\func_0D5F::critical_factor(::scripts\cp\zombies\scripts\cp\zombies\func_0D5F::func_26BC,param_00)) {
 		return "secondary";
 	}
 
-	if(!scripts/cp/zombies/scripts/cp/zombies/func_0D5F::critical_factor(::scripts/cp/zombies/scripts/cp/zombies/func_0D5F::func_26C4,param_00)) {
+	if(!scripts\cp\zombies\scripts\cp\zombies\func_0D5F::critical_factor(::scripts\cp\zombies\scripts\cp\zombies\func_0D5F::func_26C4,param_00)) {
 		return "secondary";
 	}
 

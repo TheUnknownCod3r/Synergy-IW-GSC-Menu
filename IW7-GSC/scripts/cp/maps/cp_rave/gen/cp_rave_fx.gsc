@@ -1,8 +1,8 @@
-/****************************
+/******************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\4276.gsc
-****************************/
+ * Script: scripts\cp\maps\cp_rave\gen\cp_rave_fx.gsc
+******************************************************/
 
 main() {
 	var_00 = scripts\engine\utility::createoneshoteffect("vfx_zmb_candle_flame");

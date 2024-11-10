@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3887.gsc
-****************************/
+ * Script: 3887.gsc
+************************/
 
 main() {
 	func_F990();

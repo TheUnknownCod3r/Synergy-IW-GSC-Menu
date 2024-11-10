@@ -1,8 +1,8 @@
-/****************************************************************************
+/********************************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\agents\karatemaster\karatemaster_tunedata.gsc
-****************************************************************************/
+ * Script: scripts\mp\agents\karatemaster\karatemaster_tunedata.gsc
+********************************************************************/
 
 setuptunedata() {
 	if(!isdefined(level.agenttunedata)) {

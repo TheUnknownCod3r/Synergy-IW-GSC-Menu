@@ -1,18 +1,18 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\3540.gsc
+ * Script: 3540.gsc
 ***************************************/
 
 weaponpassivesinit() {
   level thread func_13B0C();
-  level._effect["loot_mo_money_kill"] = loadfx("vfx/iw7/_requests/mp/vfx_mo_money_cash_exp");
-  level._effect["player_plasma_friendly"] = loadfx("vfx/iw7/_requests/mp/vfx_debug_warning.vfx");
-  level._effect["player_plasma_enemy"] = loadfx("vfx/iw7/_requests/mp/vfx_debug_warning.vfx");
-  level._effect["player_plasma_friendly"] = loadfx("vfx/iw7/_requests/mp/vfx_debug_warning.vfx");
-  level._effect["player_plasma_enemy"] = loadfx("vfx/iw7/_requests/mp/vfx_debug_warning.vfx");
-  level._effect["player_plasma_screen_stand"] = loadfx("vfx/iw7/_requests/mp/vfx_debug_warning.vfx");
-  level._effect["passive_gore"] = loadfx("vfx/iw7/_requests/mp/vfx_meatbag_large.vfx");
-  level._effect["passive_gore_robot"] = loadfx("vfx/iw7/core/impact/robot/vfx_mp_c6_melee.vfx");
+  level._effect["loot_mo_money_kill"] = loadfx("vfx\iw7\_requests\mp\vfx_mo_money_cash_exp");
+  level._effect["player_plasma_friendly"] = loadfx("vfx\iw7\_requests\mp\vfx_debug_warning.vfx");
+  level._effect["player_plasma_enemy"] = loadfx("vfx\iw7\_requests\mp\vfx_debug_warning.vfx");
+  level._effect["player_plasma_friendly"] = loadfx("vfx\iw7\_requests\mp\vfx_debug_warning.vfx");
+  level._effect["player_plasma_enemy"] = loadfx("vfx\iw7\_requests\mp\vfx_debug_warning.vfx");
+  level._effect["player_plasma_screen_stand"] = loadfx("vfx\iw7\_requests\mp\vfx_debug_warning.vfx");
+  level._effect["passive_gore"] = loadfx("vfx\iw7\_requests\mp\vfx_meatbag_large.vfx");
+  level._effect["passive_gore_robot"] = loadfx("vfx\iw7\core\impact\robot\vfx_mp_c6_melee.vfx");
 }
 
 func_13B0C() {
@@ -1788,7 +1788,7 @@ func_89DB(var_00, var_01) {
   if (var_0.pers["passive_refresh_key"] >= 5) {
   var_00 checkpassivemessage("passive_refresh");
   var_00 thread scripts\mp\hud_message::showkillstreaksplash("refresh");
-  var_00 scripts/mp/powers::func_1813(1);
+  var_00 scripts\mp\powers::func_1813(1);
   var_0.pers["passive_refresh_key"] = 0;
   }
   else if (var_0.pers["passive_refresh_key"] == 4)
@@ -1899,7 +1899,7 @@ func_89E0(var_00, var_01) {
   level endon("game_ended");
   self endon("disconnect");
   var_01 endon("diconnect");
-  var_00 scripts/mp/archetypes/archengineer::createentityeventdata(var_00, var_01, "scorestreak");
+  var_00 scripts\mp\archetypes\archengineer::createentityeventdata(var_00, var_01, "scorestreak");
   var_00 checkpassivemessage("passive_scorestreak_pack");
   checkpassivemessage("passive_scorestreak_pack");
 }

@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\3494.gsc
+ * Script: 3494.gsc
 ***************************************/
 
 init() {
@@ -29,7 +29,7 @@ init() {
   thread scripts\mp\killstreaks\uplink::init();
   thread scripts\mp\killstreaks\dronehive::init();
   thread scripts\mp\killstreaks\jammer::init();
-  thread scripts/mp/killstreaks/airdrone::init();
+  thread scripts\mp\killstreaks\airdrone::init();
   thread scripts\mp\killstreaks\odin::init();
   thread scripts\mp\killstreaks\highvaluetarget::init();
   thread scripts\mp\killstreaks\aalauncher::init();
@@ -125,5 +125,5 @@ init() {
 
   level.func_A6AA = scripts\mp\utility\game::getintproperty("scr_game_killstreakdelay", 12);
   level thread scripts\mp\killstreaks\killstreaks::onplayerconnect();
-  scripts/mp/killstreaks/mapselect::func_B337();
+  scripts\mp\killstreaks\mapselect::func_B337();
 }

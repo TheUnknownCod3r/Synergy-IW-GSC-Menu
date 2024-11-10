@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\3103.gsc
+ * Script: 3103.gsc
 ***************************************/
 
 func_61F8(var_00) {

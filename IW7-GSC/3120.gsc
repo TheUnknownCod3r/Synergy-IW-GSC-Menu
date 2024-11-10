@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3120.gsc
-****************************/
+ * Script: 3120.gsc
+************************/
 
 _meth_80A1() {
 	var_00 = [];
@@ -59,13 +59,13 @@ func_B61B(param_00,param_01,param_02,param_03) {
 	self.var_E0 = 1;
 	self.ignoreme = 1;
 	lib_0F3D::func_B60F();
-	scripts/asm/asm::asm_fireephemeralevent("melee_attack","begin");
+	scripts\asm\asm::asm_fireephemeralevent("melee_attack","begin");
 	if(isdefined(self.var_394)) {
 		self.meleegrabweapon = self.var_394;
 	}
 
 	scripts\anim\shared::placeweaponon(self.var_394,"none");
-	scripts/aitypes/melee::func_B5B4(self.unittype);
+	scripts\aitypes\melee::func_B5B4(self.unittype);
 	thread func_D3F9();
 	self playsound("c6_grapple_grab_enter");
 	lib_0A1E::func_2364(param_00,param_01,param_02);
@@ -97,7 +97,7 @@ func_D3F9() {
 		thread func_68D0(var_04);
 	}
 
-	var_01 thread scripts/sp/anim::func_10CBF(var_01,var_03);
+	var_01 thread scripts\sp\anim::func_10CBF(var_01,var_03);
 	var_01 scripts\anim\shared::donotetracks(var_03);
 }
 
@@ -304,8 +304,8 @@ func_B5FA() {
 	if(isalive(self)) {
 		self.var_87F6 = 1;
 		self.ignoreme = 0;
-		scripts/asm/asm_bb::bb_clearmeleerequest();
-		scripts/aitypes/melee::melee_destroy();
+		scripts\asm\asm_bb::bb_clearmeleerequest();
+		scripts\aitypes\melee::melee_destroy();
 	}
 }
 
@@ -324,7 +324,7 @@ func_B61F(param_00,param_01,param_02,param_03) {
 	thread lib_0F3D::func_50E8(0.5);
 	thread lib_0F3D::func_510F(0.5,65,0.4);
 	var_09 _meth_82E4(var_06,var_08,var_09.var_E6E5,1,0.2,1);
-	var_09 thread scripts/sp/anim::func_10CBF(var_09,var_06);
+	var_09 thread scripts\sp\anim::func_10CBF(var_09,var_06);
 	var_09 thread scripts\anim\shared::donotetracks(var_06,::func_B617);
 	var_0B = self gettagorigin("tag_sync");
 	var_0C = self gettagangles("tag_sync");
@@ -340,10 +340,10 @@ func_B61F(param_00,param_01,param_02,param_03) {
 	var_0D = lib_0A1E::asm_getallanimsforstate(param_00,param_01);
 	self aiclearanim(lib_0A1E::asm_getbodyknob(),param_02);
 	self _meth_82E7(param_01,var_0D,1,param_02,1);
-	thread scripts/sp/anim::func_10CBF(self,param_01);
-	var_0E = lib_0A1E::func_231F(param_00,param_01,scripts/asm/asm::func_2341(param_00,param_01));
+	thread scripts\sp\anim::func_10CBF(self,param_01);
+	var_0E = lib_0A1E::func_231F(param_00,param_01,scripts\asm\asm::func_2341(param_00,param_01));
 	if(var_0E == "end") {
-		thread scripts/asm/asm::func_2310(param_00,param_01,0);
+		thread scripts\asm\asm::func_2310(param_00,param_01,0);
 	}
 }
 
@@ -383,7 +383,7 @@ func_B61C(param_00,param_01,param_02,param_03) {
 	thread lib_0F3D::func_50E8(0.5);
 	thread lib_0F3D::func_510F(0.5,65,0.4);
 	var_0C _meth_82E4(var_0A,var_0B,var_0C.var_E6E5,1,0.2,1);
-	var_0C thread scripts/sp/anim::func_10CBF(var_0C,var_0A);
+	var_0C thread scripts\sp\anim::func_10CBF(var_0C,var_0A);
 	var_0C thread scripts\anim\shared::donotetracks(var_0A,::func_B617);
 	self aiclearanim(lib_0A1E::asm_getbodyknob(),param_02);
 	if(isdefined(var_05)) {
@@ -391,8 +391,8 @@ func_B61C(param_00,param_01,param_02,param_03) {
 	}
 
 	self _meth_82E7(param_01,var_08,1,param_02,1);
-	thread scripts/sp/anim::func_10CBF(self,param_01);
-	var_0D = lib_0A1E::func_231F(param_00,param_01,scripts/asm/asm::func_2341(param_00,param_01));
+	thread scripts\sp\anim::func_10CBF(self,param_01);
+	var_0D = lib_0A1E::func_231F(param_00,param_01,scripts\asm\asm::func_2341(param_00,param_01));
 }
 
 func_3675(param_00,param_01,param_02) {
@@ -414,7 +414,7 @@ func_EB7C() {
 	self endon("killanimscript");
 	var_00 = "meleeSave";
 	self _meth_82E4(var_00,self.asm.var_EB67,lib_0A1E::func_2342(),1,0.2,1);
-	thread scripts/sp/anim::func_10CBF(self,var_00);
+	thread scripts\sp\anim::func_10CBF(self,var_00);
 	var_01 = getanimlength(self.asm.var_EB67) + 1;
 	scripts\anim\notetracks::donotetrackswithtimeout(var_00,var_01,::func_B617);
 }
@@ -441,7 +441,7 @@ func_B61A(param_00,param_01,param_02,param_03) {
 	thread lib_0F3D::func_50E8(0.5);
 	thread lib_0F3D::func_510F(0.5,65,0.4);
 	var_08 _meth_82E4(var_05,var_07,var_08.var_E6E5,1,0.2,1);
-	var_08 thread scripts/sp/anim::func_10CBF(var_08,var_05);
+	var_08 thread scripts\sp\anim::func_10CBF(var_08,var_05);
 	var_08 thread scripts\anim\shared::donotetracks(var_05,::func_B617);
 	self playsound("c6_grapple_punch");
 	lib_0A1E::func_2364(param_00,param_01,param_02);
@@ -485,8 +485,8 @@ func_B617(param_00) {
 			break;
 
 		case "player_kick_off":
-			self.bt.var_55CE = 1;
-			self.bt.var_55CF = 1;
+			self.var_3135.var_55CE = 1;
+			self.var_3135.var_55CF = 1;
 			self.var_E0 = 0;
 			thread lib_0BFE::func_4D64();
 			self setcandamage(1);
@@ -622,15 +622,15 @@ func_3366(param_00,param_01,param_02,param_03) {
 func_4885(param_00,param_01,param_02,param_03) {
 	self.var_E0 = 1;
 	self.ignoreme = 1;
-	self.bt.crawlmeleegrab = 1;
+	self.var_3135.crawlmeleegrab = 1;
 	self getplayermodelindex();
 	lib_0F3D::func_D394("crawlmelee");
 	lib_0F3D::func_B60F();
-	scripts/asm/asm::asm_fireephemeralevent("melee_attack","begin");
+	scripts\asm\asm::asm_fireephemeralevent("melee_attack","begin");
 	thread func_D3EC();
-	self.bt.var_F1F9 = undefined;
-	self.bt.var_55CE = 1;
-	self.bt.var_55CF = 1;
+	self.var_3135.var_F1F9 = undefined;
+	self.var_3135.var_55CE = 1;
+	self.var_3135.var_55CF = 1;
 	self stoploopsound();
 	level.player playsound("c6_grapple_crawl_takedown");
 	self playsound("c6_grapple_grab_grunt");
@@ -651,7 +651,7 @@ func_D3EC() {
 	var_01 thread func_4884(self);
 	thread func_487D(var_01);
 	level.player forceplaygestureviewmodel("ges_crawlmelee_enter",undefined,undefined,undefined,1);
-	var_01 thread scripts/sp/anim::func_10CBF(var_01,var_03);
+	var_01 thread scripts\sp\anim::func_10CBF(var_01,var_03);
 	var_01 scripts\anim\shared::donotetracks(var_03);
 }
 
@@ -716,8 +716,8 @@ func_4884(param_00) {
 	}
 	else
 	{
-		if(isdefined(param_00.bt.var_6B4B)) {
-			param_00.health = param_00.bt.var_6B4B;
+		if(isdefined(param_00.var_3135.var_6B4B)) {
+			param_00.health = param_00.var_3135.var_6B4B;
 		}
 
 		param_00.var_E0 = 0;
@@ -778,7 +778,7 @@ func_E128() {
 func_4886(param_00,param_01,param_02,param_03) {
 	level.player endon("crawlmeleegrab_interrupt");
 	level.player thread func_4887(self);
-	self.bt.var_6B4B = self.health;
+	self.var_3135.var_6B4B = self.health;
 	self.health = -15536;
 	level.player thread func_D3EB(self);
 	lib_0A1E::func_235F(param_00,param_01,param_02,1);
@@ -809,7 +809,7 @@ func_4887(param_00) {
 			}
 		}
 
-		if(var_04 >= param_00.bt.var_6B4B) {
+		if(var_04 >= param_00.var_3135.var_6B4B) {
 			level.player.melee.var_46B6 = 1;
 			return;
 		}
@@ -841,7 +841,7 @@ func_488B() {
 	level.player _meth_80A6();
 	level.player stopgestureviewmodel("ges_crawlmelee_grabbed");
 	var_00 _meth_82E4(var_02,var_01["crawlMeleeGrab_win"],var_00.var_E6E5,1,0.2,1);
-	var_00 thread scripts/sp/anim::func_10CBF(var_00,var_02);
+	var_00 thread scripts\sp\anim::func_10CBF(var_00,var_02);
 	var_00 scripts\anim\shared::donotetracks(var_02,::func_B617);
 	level.player allowcrouch(1);
 	level.player allowprone(1);
@@ -868,7 +868,7 @@ func_4888(param_00,param_01,param_02,param_03) {
 	var_04 = _meth_807A();
 	var_05 = "crawlMeleeKill";
 	level.player.melee.var_E505 _meth_82E4(var_05,var_04["crawlMeleeGrab_lose"],level.player.melee.var_E505.var_E6E5,1,0.2,1);
-	level.player.melee.var_E505 thread scripts/sp/anim::func_10CBF(level.player.melee.var_E505,var_05);
+	level.player.melee.var_E505 thread scripts\sp\anim::func_10CBF(level.player.melee.var_E505,var_05);
 	level.player.melee.var_E505 thread scripts\anim\shared::donotetracks(var_05,::func_B617);
 	level.player scripts\engine\utility::delaycall(0.1,::playsound,"c6_grapple_crawl_lose_pound_01");
 	level.player scripts\engine\utility::delaycall(0.7,::playsound,"c6_grapple_crawl_lose_pound_02");

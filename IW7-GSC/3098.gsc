@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\3098.gsc
+ * Script: 3098.gsc
 ***************************************/
 
 func_25C5() {
@@ -69,7 +69,7 @@ func_2396(var_00) {
 
   if (!isdefined(self.func_23A5)) {
   self.audio.func_23A5 = func_31C0();
-  self.audio.func_23A5 thread scripts/sp/utility::func_10461(func_0BDC::func_7A5B("jackal_hover_world"), 1, var_00, 1);
+  self.audio.func_23A5 thread scripts\sp\utility::func_10461(func_0BDC::func_7A5B("jackal_hover_world"), 1, var_00, 1);
   self.audio.func_552E = ::func_2395;
   }
 }
@@ -88,11 +88,11 @@ func_11130(var_00) {
   var_01 = self.script_team;
 
   if (var_01 == "axis")
-  self.audio.func_1113C thread scripts/sp/utility::func_10461(func_0BDC::func_7A5B("jackal_sdf_thrust_world"), 1, var_00, 1);
+  self.audio.func_1113C thread scripts\sp\utility::func_10461(func_0BDC::func_7A5B("jackal_sdf_thrust_world"), 1, var_00, 1);
   else
-  self.audio.func_1113C thread scripts/sp/utility::func_10461(func_0BDC::func_7A5B("jackal_thrust_world"), 1, var_00, 1);
+  self.audio.func_1113C thread scripts\sp\utility::func_10461(func_0BDC::func_7A5B("jackal_thrust_world"), 1, var_00, 1);
 
-  self.audio.func_1113C thread scripts/sp/utility::func_10461(func_0BDC::func_7A5B("jackal_thrust_world"), 1, var_00, 1);
+  self.audio.func_1113C thread scripts\sp\utility::func_10461(func_0BDC::func_7A5B("jackal_thrust_world"), 1, var_00, 1);
   thread func_A1D5("jackal_flyby", undefined, 1);
   self.audio.func_552E = ::func_1112F;
   }
@@ -119,7 +119,7 @@ func_AA5C() {}
 func_2CAB(var_00) {
   if (!isdefined(self.audio.func_2CB5)) {
   self.audio.func_2CB5 = func_31C0();
-  self.audio.func_2CB5 thread scripts/sp/utility::func_10461(func_0BDC::func_7A5B("jackal_npc_boost_lp"), 1, var_00, 1);
+  self.audio.func_2CB5 thread scripts\sp\utility::func_10461(func_0BDC::func_7A5B("jackal_npc_boost_lp"), 1, var_00, 1);
   _playworldsound(func_0BDC::func_7A5B("jackal_npc_boost_init"), self.origin);
   self.audio.func_552E = ::func_2CAA;
   }
@@ -401,7 +401,7 @@ func_A381() {
 
   for (;;) {
   var_03 = (0, 0, -100000);
-  var_04 = scripts/sp/utility::func_864C(self.origin);
+  var_04 = scripts\sp\utility::func_864C(self.origin);
   var_05 = distance(self.origin, var_04);
 
   if (var_05 < var_02) {
@@ -410,13 +410,13 @@ func_A381() {
   wait 0.05;
 
   if (isdefined(self) && isdefined(self.func_A381))
-  self.func_A381 scripts/sp/utility::func_10461("jackal_tread_sfx_lp", var_00, 1, 1);
+  self.func_A381 scripts\sp\utility::func_10461("jackal_tread_sfx_lp", var_00, 1, 1);
 
   wait 1;
   }
 
   if (isdefined(self) && isdefined(self.func_A381)) {
-  var_04 = scripts/sp/utility::func_864C(self.origin);
+  var_04 = scripts\sp\utility::func_864C(self.origin);
   var_05 = distance(self.origin, var_04);
   var_01 = (var_05 - var_02) / (0 - var_02);
 

@@ -1,13 +1,13 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3591.gsc
-****************************/
+ * Script: 3591.gsc
+************************/
 
 init() {
-	level._effect["telereap_trail"] = loadfx("vfx/old/_requests/mp_weapons/vfx_knife_tele_start_blue");
-	level._effect["telereap_smoke"] = loadfx("vfx/core/smktrail/teleport_smoke_bomb_mp");
-	level._effect["dash_dust"] = loadfx("vfx/core/screen/vfx_scrnfx_tocam_slidedust_m");
+	level._effect["telereap_trail"] = loadfx("vfx\old\_requests\mp_weapons\vfx_knife_tele_start_blue");
+	level._effect["telereap_smoke"] = loadfx("vfx\core\smktrail\teleport_smoke_bomb_mp");
+	level._effect["dash_dust"] = loadfx("vfx\core\screen\vfx_scrnfx_tocam_slidedust_m");
 }
 
 _meth_83B2() {}
@@ -15,7 +15,7 @@ _meth_83B2() {}
 removethinker() {
 	self notify("removeTeleReap");
 	if(isdefined(self.var_11669)) {
-		scripts\mp\_utility::outlinedisable(self.var_11669,self.var_11667);
+		scripts\mp\utility::outlinedisable(self.var_11669,self.var_11667);
 		self.var_11669 = undefined;
 		self.var_11667 = undefined;
 	}
@@ -91,7 +91,7 @@ func_11666() {
 	self playlocalsound("reaper_dash");
 	self playsound("reaper_dash_npc");
 	thread func_D504();
-	scripts\mp\_utility::_magicbullet("iw7_erad_mp",self.origin + (0,0,1000),self.origin + (0,0,2000),self);
+	scripts\mp\utility::_magicbullet("iw7_erad_mp",self.origin + (0,0,1000),self.origin + (0,0,2000),self);
 	self playrumbleonentity("damage_heavy");
 	earthquake(0.25,0.25,self.origin,32);
 	self.isreaping++;
@@ -119,7 +119,7 @@ func_139E6() {
 				continue;
 			}
 
-			if(var_03 scripts\mp\_utility::func_9D48("archetype_heavy")) {
+			if(var_03 scripts\mp\utility::func_9D48("archetype_heavy")) {
 				var_05 = self getvelocity();
 				var_06 = var_05 * -1;
 				var_03 setvelocity(var_06);
@@ -152,11 +152,11 @@ func_139E6() {
 func_627D() {
 	self.var_FCA5 = 1;
 	self.var_FC9F.angles = self.angles + (0,90,0);
-	self.var_FC9F.origin = scripts/mp/archetypes/archreaper::func_36DB(64);
+	self.var_FC9F.origin = scripts\mp\archetypes\archreaper::func_36DB(64);
 	self.var_FC9F show();
 	self.var_FC9F setcandamage(1);
-	thread scripts/mp/archetypes/archreaper::func_BCEE(64);
-	thread scripts/mp/archetypes/archreaper::func_FC9C();
+	thread scripts\mp\archetypes\archreaper::func_BCEE(64);
+	thread scripts\mp\archetypes\archreaper::func_FC9C();
 	self getradiuspathsighttestnodes();
 	self allowjump(0);
 	self allowprone(0);
@@ -260,11 +260,11 @@ _meth_808B(param_00) {
 			continue;
 		}
 
-		if(var_03.team != scripts\mp\_utility::getotherteam(self.team)) {
+		if(var_03.team != scripts\mp\utility::getotherteam(self.team)) {
 			continue;
 		}
 
-		if(!scripts\mp\_utility::isreallyalive(var_03)) {
+		if(!scripts\mp\utility::isreallyalive(var_03)) {
 			continue;
 		}
 
@@ -303,7 +303,7 @@ closestenemies(param_00) {
 		var_02[var_02.size] = var_07;
 	}
 
-	var_0B = scripts\mp\_utility::quicksort(var_02);
+	var_0B = scripts\mp\utility::quicksort(var_02);
 	var_0C = [];
 	for(var_0D = 0;var_0D < var_0B.size;var_0D++) {
 		foreach(var_0F in param_00) {

@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3145.gsc
-****************************/
+ * Script: 3145.gsc
+************************/
 
 func_3FCE(param_00,param_01,param_02,param_03) {
 	self.asm.var_7360 = 0;
@@ -21,12 +21,12 @@ func_3EC5(param_00,param_01,param_02) {
 			self.asm.var_1269B = undefined;
 		}
 
-		return scripts/asm/asm::asm_lookupanimfromalias(param_01,var_03);
+		return scripts\asm\asm::asm_lookupanimfromalias(param_01,var_03);
 	}
 
 	var_03 = lib_0A1E::func_235D(param_02);
 	self.asm.var_1269B = var_03;
-	return scripts/asm/asm::asm_lookupanimfromalias(param_01,var_03);
+	return scripts\asm\asm::asm_lookupanimfromalias(param_01,var_03);
 }
 
 func_3EC4(param_00,param_01,param_02) {
@@ -36,7 +36,7 @@ func_3EC4(param_00,param_01,param_02) {
 			self.asm.var_3FDC = undefined;
 		}
 
-		return scripts/asm/asm::asm_lookupanimfromalias(param_01,var_03);
+		return scripts\asm\asm::asm_lookupanimfromalias(param_01,var_03);
 	}
 
 	var_04 = self.asm.var_1269B;
@@ -49,7 +49,7 @@ func_3EC4(param_00,param_01,param_02) {
 	}
 
 	self.asm.var_3FDC = var_05;
-	return scripts/asm/asm::asm_lookupanimfromalias(param_02,var_05);
+	return scripts\asm\asm::asm_lookupanimfromalias(param_02,var_05);
 }
 
 func_3FD4(param_00,param_01,param_02,param_03) {
@@ -60,7 +60,7 @@ func_3FD4(param_00,param_01,param_02,param_03) {
 	}
 
 	if(isdefined(self.target_getindexoftarget)) {
-		self._blackboard.var_AA3D = self.target_getindexoftarget;
+		self.var_1198.var_AA3D = self.target_getindexoftarget;
 	}
 
 	lib_0A1E::func_235F(param_00,param_01,param_02,1);
@@ -86,15 +86,15 @@ func_3FD1(param_00,param_01,param_02) {
 }
 
 func_A00A(param_00,param_01,param_02,param_03) {
-	return scripts/asm/asm_bb::bb_iswhizbyrequested();
+	return scripts\asm\asm_bb::bb_iswhizbyrequested();
 }
 
 func_3FE1(param_00,param_01,param_02,param_03) {
-	return scripts/asm/asm_bb::func_291D() == param_03;
+	return scripts\asm\asm_bb::func_291D() == param_03;
 }
 
 func_FFE3(param_00,param_01,param_02,param_03) {
-	if(func_A00A() || scripts/asm/asm_bb::func_291D() == "combat") {
+	if(func_A00A() || scripts\asm\asm_bb::func_291D() == "combat") {
 		var_04 = self.asm.var_1269B;
 		if(var_04 == "civ02" || var_04 == "civ04" || var_04 == "civ06" || var_04 == "civ07") {
 			return 1;
@@ -105,7 +105,7 @@ func_FFE3(param_00,param_01,param_02,param_03) {
 }
 
 func_FFDF(param_00,param_01,param_02,param_03) {
-	if(scripts/asm/asm_bb::func_291D() == "noncombat") {
+	if(scripts\asm\asm_bb::func_291D() == "noncombat") {
 		var_04 = self.asm.var_1269B;
 		if(var_04 == "civ02" || var_04 == "civ04" || var_04 == "civ06" || var_04 == "civ07") {
 			return 1;

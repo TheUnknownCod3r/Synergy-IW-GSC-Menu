@@ -1,8 +1,8 @@
-/***************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\941.gsc
-***************************/
+ * Script: 941.gsc
+************************/
 
 func_2AD0() {
 	if(isdefined(level.var_119E["civilian"])) {

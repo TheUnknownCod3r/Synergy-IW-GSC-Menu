@@ -1,14 +1,14 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3022.gsc
-****************************/
+ * Script: 3022.gsc
+************************/
 
 main(param_00) {
 	if(!isdefined(level.var_A3B9)) {
 		level.var_A3B9 = spawnstruct();
-		level.var_A3B9.var_11888 = loadfx("vfx/iw7/core/vehicle/jackal/vfx_jackal_rear_thrust_fly_atmosphere.vfx");
-		level.var_A3B9.var_10573 = loadfx("vfx/old/space_fighter/space_particulate_player_oneshot.vfx");
+		level.var_A3B9.var_11888 = loadfx("vfx\iw7\core\vehicle\jackal\vfx_jackal_rear_thrust_fly_atmosphere.vfx");
+		level.var_A3B9.var_10573 = loadfx("vfx\old\space_fighter\space_particulate_player_oneshot.vfx");
 		level.var_A3B9.var_375D = param_00;
 		level.var_A3B9.var_375D.var_444F = ::init;
 		func_A22F(param_00);

@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3332.gsc
-****************************/
+ * Script: 3332.gsc
+************************/
 
 blackholegrenadeinit() {
 	level.var_2ABC = [];
@@ -181,7 +181,7 @@ grabclosestzombies(param_00,param_01) {
 			continue;
 		}
 
-		if(!scripts/cp/powers/coop_phaseshift::areentitiesinphase(param_00,var_04)) {
+		if(!scripts\cp\powers\coop_phaseshift::areentitiesinphase(param_00,var_04)) {
 			continue;
 		}
 
@@ -277,7 +277,7 @@ func_13A58(param_00) {
 			continue;
 		}
 
-		if(!scripts/cp/powers/coop_phaseshift::areentitiesinphase(param_00,var_03)) {
+		if(!scripts\cp\powers\coop_phaseshift::areentitiesinphase(param_00,var_03)) {
 			continue;
 		}
 
@@ -336,7 +336,7 @@ func_DA65(param_00,param_01,param_02,param_03) {
 
 func_DA66(param_00,param_01,param_02,param_03,param_04) {
 	var_05 = param_03;
-	if(scripts/cp/powers/coop_phaseshift::isentityphaseshifted(param_00)) {
+	if(scripts\cp\powers\coop_phaseshift::isentityphaseshifted(param_00)) {
 		return 0;
 	}
 

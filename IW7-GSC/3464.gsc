@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\3464.gsc
+ * Script: 3464.gsc
 ***************************************/
 
 init() {
@@ -10,7 +10,7 @@ init() {
   level.sentrytype["super_trophy"] = "super_trophy";
   level.sentrytype["sentry_shock"] = "sentry_shock";
   scripts\mp\killstreaks\killstreaks::registerkillstreak("sentry_shock", ::tryuseshocksentry);
-  scripts/mp/killstreak_loot::func_DF07("sentry_shock", ["passive_extra_health", "passive_increased_duration"]);
+  scripts\mp\killstreak_loot::func_DF07("sentry_shock", ["passive_extra_health", "passive_increased_duration"]);
   level.sentrysettings = [];
   level.sentrysettings["super_trophy"] = spawnstruct();
   level.sentrysettings["super_trophy"].health = 999999;
@@ -59,19 +59,19 @@ init() {
   level.sentrysettings["sentry_shock"].lightfxtag = "tag_fx";
   level.sentrysettings["sentry_shock"].iskillstreak = 1;
   level.sentrysettings["sentry_shock"].headiconoffset = (0, 0, 75);
-  level._effect["sentry_overheat_mp"] = loadfx("vfx/core/mp/killstreaks/vfx_sg_overheat_smoke");
-  level._effect["sentry_explode_mp"] = loadfx("vfx/iw7/_requests/mp/vfx_generic_equipment_exp_lg.vfx");
-  level._effect["sentry_sparks_mp"] = loadfx("vfx/core/mp/killstreaks/vfx_sentry_gun_explosion");
-  level._effect["sentry_smoke_mp"] = loadfx("vfx/iw7/_requests/mp/vfx_gen_equip_dam_spark_runner.vfx");
-  level._effect["sentry_shock_charge"] = loadfx("vfx/iw7/_requests/mp/vfx_sentry_shock_charge_up.vfx");
-  level._effect["sentry_shock_screen"] = loadfx("vfx/iw7/_requests/mp/vfx_sentry_shock_screen");
-  level._effect["sentry_shock_base"] = loadfx("vfx/iw7/_requests/mp/vfx_sentry_shock_base");
-  level._effect["sentry_shock_radius"] = loadfx("vfx/iw7/_requests/mp/vfx_sentry_shock_radius");
-  level._effect["sentry_shock_explosion"] = loadfx("vfx/iw7/_requests/mp/vfx_sentry_shock_end.vfx");
-  level._effect["sentry_shock_trail"] = loadfx("vfx/iw7/_requests/mp/vfx_sentry_shock_proj_trail.vfx");
-  level._effect["sentry_shock_arc"] = loadfx("vfx/iw7/_requests/mp/vfx_sentry_shock_arc.vfx");
+  level._effect["sentry_overheat_mp"] = loadfx("vfx\core\mp\killstreaks\vfx_sg_overheat_smoke");
+  level._effect["sentry_explode_mp"] = loadfx("vfx\iw7\_requests\mp\vfx_generic_equipment_exp_lg.vfx");
+  level._effect["sentry_sparks_mp"] = loadfx("vfx\core\mp\killstreaks\vfx_sentry_gun_explosion");
+  level._effect["sentry_smoke_mp"] = loadfx("vfx\iw7\_requests\mp\vfx_gen_equip_dam_spark_runner.vfx");
+  level._effect["sentry_shock_charge"] = loadfx("vfx\iw7\_requests\mp\vfx_sentry_shock_charge_up.vfx");
+  level._effect["sentry_shock_screen"] = loadfx("vfx\iw7\_requests\mp\vfx_sentry_shock_screen");
+  level._effect["sentry_shock_base"] = loadfx("vfx\iw7\_requests\mp\vfx_sentry_shock_base");
+  level._effect["sentry_shock_radius"] = loadfx("vfx\iw7\_requests\mp\vfx_sentry_shock_radius");
+  level._effect["sentry_shock_explosion"] = loadfx("vfx\iw7\_requests\mp\vfx_sentry_shock_end.vfx");
+  level._effect["sentry_shock_trail"] = loadfx("vfx\iw7\_requests\mp\vfx_sentry_shock_proj_trail.vfx");
+  level._effect["sentry_shock_arc"] = loadfx("vfx\iw7\_requests\mp\vfx_sentry_shock_arc.vfx");
   var_00 = ["passive_fast_sweep", "passive_decreased_health", "passive_sam_turret", "passive_no_shock", "passive_mini_explosives", "passive_slow_turret"];
-  scripts/mp/killstreak_loot::func_DF07("sentry_shock", var_00);
+  scripts\mp\killstreak_loot::func_DF07("sentry_shock", var_00);
 }
 
 tryuseautosentry(var_00, var_01) {
@@ -227,7 +227,7 @@ waitrestoreperks() {
 createsentryforplayer(var_00, var_01, var_02, var_03) {
   var_04 = level.sentrysettings[var_00].weaponinfo;
 
-  if (scripts/mp/killstreaks/utility::func_A69F(var_03, "passive_fast_sweep"))
+  if (scripts\mp\killstreaks\utility::func_A69F(var_03, "passive_fast_sweep"))
   var_04 = "sentry_shock_fast_mp";
 
   var_05 = spawnturret("misc_turret", var_1.origin, var_04);
@@ -416,7 +416,7 @@ sentry_handledamage() {
   self endon("carried");
   var_00 = level.sentrysettings[self.sentrytype].maxhealth;
 
-  if (scripts/mp/killstreaks/utility::func_A69F(self.streakinfo, "passive_fast_sweep"))
+  if (scripts\mp\killstreaks\utility::func_A69F(self.streakinfo, "passive_fast_sweep"))
   var_00 = int(var_00 / 1.25);
 
   var_01 = 0;
@@ -441,7 +441,7 @@ sentrymodifydamage(var_00, var_01, var_02, var_03, var_04) {
   if (var_02 == "MOD_MELEE")
   var_05 = self.maxhealth * 0.34;
 
-  var_05 = scripts/mp/killstreaks/utility::getmodifiedantikillstreakdamage(var_00, var_01, var_02, var_05, self.maxhealth, 2, 3, 4);
+  var_05 = scripts\mp\killstreaks\utility::getmodifiedantikillstreakdamage(var_00, var_01, var_02, var_05, self.maxhealth, 2, 3, 4);
 
   if (isdefined(var_00) && isplayer(var_00) && scripts\mp\equipment\phase_shift::isentityphaseshifted(var_00))
   var_05 = 0;
@@ -459,7 +459,7 @@ sentryhandledeathdamage(var_00, var_01, var_02, var_03) {
   }
 
   var_05 = var_4.destroyedsplash;
-  var_06 = scripts/mp/killstreak_loot::getrarityforlootitem(self.streakinfo.variantid);
+  var_06 = scripts\mp\killstreak_loot::getrarityforlootitem(self.streakinfo.variantid);
 
   if (var_06 != "")
   var_05 = var_05 + "_" + var_06;
@@ -498,7 +498,7 @@ sentry_watchdisabled() {
 
   for (;;) {
   self waittill("emp_damage", var_00, var_01, var_02, var_03, var_04);
-  scripts/mp/killstreaks/utility::dodamagetokillstreak(100, var_00, var_00, self.team, var_02, var_04, var_03);
+  scripts\mp\killstreaks\utility::dodamagetokillstreak(100, var_00, var_00, self.team, var_02, var_04, var_03);
 
   if (!scripts\mp\utility\game::istrue(self.disabled))
   thread disablesentry(var_01);
@@ -615,7 +615,7 @@ sentry_handleuse(var_00) {
   if (!scripts\mp\utility\game::isreallyalive(var_01))
   continue;
 
-  if (self.sentrytype == "sam_turret" || self.sentrytype == "scramble_turret" || self.sentrytype == "sentry_shock" && scripts/mp/killstreaks/utility::func_A69F(self.streakinfo, "passive_sam_turret"))
+  if (self.sentrytype == "sam_turret" || self.sentrytype == "scramble_turret" || self.sentrytype == "sentry_shock" && scripts\mp\killstreaks\utility::func_A69F(self.streakinfo, "passive_sam_turret"))
   self give_player_session_tokens(level.sentrysettings[self.sentrytype].sentrymodeoff);
 
   var_1.placedsentries[self.sentrytype] = scripts\engine\utility::array_remove(var_1.placedsentries[self.sentrytype], self);
@@ -813,7 +813,7 @@ sentry_setplaced(var_00) {
   }
 
   var_02 = level.sentrysettings[self.sentrytype].modelbase;
-  var_03 = scripts/mp/killstreak_loot::getrarityforlootitem(self.streakinfo.variantid);
+  var_03 = scripts\mp\killstreak_loot::getrarityforlootitem(self.streakinfo.variantid);
 
   if (var_03 != "")
   var_02 = var_02 + "_" + var_03;
@@ -1045,7 +1045,7 @@ sentry_setactive(var_00) {
 
   break;
   default:
-  scripts/mp/killstreaks/utility::func_1843(self.sentrytype, "Killstreak_Ground", self.owner, 1, "carried");
+  scripts\mp\killstreaks\utility::func_1843(self.sentrytype, "Killstreak_Ground", self.owner, 1, "carried");
 
   if (var_02 == self.owner && var_00)
   self enableplayeruse(var_02);
@@ -1057,7 +1057,7 @@ sentry_setactive(var_00) {
   }
 
   var_04 = level.sentrysettings[self.sentrytype].teamsplash;
-  var_05 = scripts/mp/killstreak_loot::getrarityforlootitem(self.streakinfo.variantid);
+  var_05 = scripts\mp\killstreak_loot::getrarityforlootitem(self.streakinfo.variantid);
 
   if (var_05 != "")
   var_04 = var_04 + "_" + var_05;
@@ -1754,7 +1754,7 @@ sentryshocktargets() {
   var_00 = scripts\engine\utility::waittill_any_timeout(1, "turret_on_target");
 
   if (var_00 == "timeout") {
-  if (scripts/mp/killstreaks/utility::func_A69F(self.streakinfo, "passive_sam_turret")) {
+  if (scripts\mp\killstreaks\utility::func_A69F(self.streakinfo, "passive_sam_turret")) {
   self.sentryshocksamtarget = thread searchforshocksentryairtarget();
 
   if (isdefined(self.sentryshocksamtarget)) {
@@ -1972,7 +1972,7 @@ shocktarget(var_00) {
 
   thread marktargetlaser(var_00);
 
-  if (!scripts/mp/killstreaks/utility::func_A69F(self.streakinfo, "passive_sam_turret"))
+  if (!scripts\mp\killstreaks\utility::func_A69F(self.streakinfo, "passive_sam_turret"))
   thread watchshockdamage(var_00);
 
   self playsound("shock_sentry_charge_up");
@@ -1985,7 +1985,7 @@ shocktarget(var_00) {
   var_01 = weaponfiretime(level.sentrysettings[self.sentrytype].weaponinfo);
 
   while (isdefined(var_00) && scripts\mp\utility\game::isreallyalive(var_00) && isdefined(self getturrettarget(1)) && self getturrettarget(1) == var_00 && !scripts\mp\utility\game::func_C7A0(self gettagorigin("tag_flash"), var_00 geteye())) {
-  if (scripts/mp/killstreaks/utility::func_A69F(self.streakinfo, "passive_mini_explosives")) {
+  if (scripts\mp\killstreaks\utility::func_A69F(self.streakinfo, "passive_mini_explosives")) {
   thread missileburstfire(var_00);
   var_01 = 1.5;
   }
@@ -2018,7 +2018,7 @@ missileburstfire(var_00) {
 
   var_03 = scripts\mp\utility\game::_magicbullet("sentry_shock_grenade_mp", self gettagorigin("tag_flash"), var_0.origin, self.owner);
 
-  if (scripts/mp/killstreaks/utility::manualmissilecantracktarget(var_00)) {
+  if (scripts\mp\killstreaks\utility::manualmissilecantracktarget(var_00)) {
   var_03 missile_settargetent(var_00, gettargetoffset(var_00));
   var_00 thread watchtarget(var_03);
   }
@@ -2059,7 +2059,7 @@ watchtarget(var_00) {
   self endon("disconnect");
 
   for (;;) {
-  if (!scripts/mp/killstreaks/utility::manualmissilecantracktarget(self))
+  if (!scripts\mp\killstreaks\utility::manualmissilecantracktarget(self))
   break;
 
   if (!isdefined(var_00))

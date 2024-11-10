@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\4307.gsc
-****************************/
+ * Script: 4307.gsc
+************************/
 
 main() {
 	var_00 = scripts\engine\utility::createoneshoteffect("vfx_front_end_steam_flyby");

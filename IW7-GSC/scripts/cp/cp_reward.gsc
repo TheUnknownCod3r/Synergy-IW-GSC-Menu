@@ -1,8 +1,8 @@
-/********************************************
+/************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\cp_reward.gsc
-********************************************/
+ * Script: scripts\cp\cp_reward.gsc
+************************************/
 
 give_attacker_kill_rewards(param_00,param_01) {
 	if(self.team == "allies") {

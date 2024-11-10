@@ -1,24 +1,24 @@
-/************************************************
+/****************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\gametypes\gun.gsc
-************************************************/
+ * Script: scripts\mp\gametypes\gun.gsc
+****************************************/
 
 main() {
-	scripts\mp\_globallogic::init();
-	scripts\mp\_globallogic::setupcallbacks();
-	if(function_011C()) {
+	scripts\mp\globallogic::init();
+	scripts\mp\globallogic::setupcallbacks();
+	if(isusingmatchrulesdata()) {
 		level.initializematchrules = ::initializematchrules;
 		[[level.initializematchrules]]();
-		level thread scripts\mp\_utility::reinitializematchrulesonmigration();
+		level thread scripts\mp\utility::reinitializematchrulesonmigration();
 	}
 	else
 	{
-		scripts\mp\_utility::registertimelimitdvar(level.gametype,10);
-		scripts\mp\_utility::registerroundlimitdvar(level.gametype,1);
-		scripts\mp\_utility::registerwinlimitdvar(level.gametype,0);
-		scripts\mp\_utility::registernumlivesdvar(level.gametype,0);
-		scripts\mp\_utility::registerhalftimedvar(level.gametype,0);
+		scripts\mp\utility::registertimelimitdvar(level.gametype,10);
+		scripts\mp\utility::registerroundlimitdvar(level.gametype,1);
+		scripts\mp\utility::registerwinlimitdvar(level.gametype,0);
+		scripts\mp\utility::registernumlivesdvar(level.gametype,0);
+		scripts\mp\utility::registerhalftimedvar(level.gametype,0);
 		level.matchrules_damagemultiplier = 0;
 		level.matchrules_vampirism = 0;
 	}
@@ -26,7 +26,7 @@ main() {
 	setspecialloadout();
 	updategametypedvars();
 	setgunladder();
-	function_01CC("ffa");
+	setteammode("ffa");
 	level.teambased = 0;
 	level.ignorekdrstats = 1;
 	level.doprematch = 1;
@@ -42,7 +42,7 @@ main() {
 	level.bypassclasschoicefunc = ::alwaysgamemodeclass;
 	level.modifyunifiedpointscallback = ::modifyunifiedpointscallback;
 	if(level.matchrules_damagemultiplier || level.matchrules_vampirism) {
-		level.modifyplayerdamage = ::scripts\mp\_damage::gamemodemodifyplayerdamage;
+		level.modifyplayerdamage = ::scripts\mp\damage::gamemodemodifyplayerdamage;
 	}
 
 	game["dialog"]["gametype"] = "gungame";
@@ -55,7 +55,7 @@ alwaysgamemodeclass() {
 }
 
 initializematchrules() {
-	scripts\mp\_utility::setcommonrulesfrommatchdata(1);
+	scripts\mp\utility::setcommonrulesfrommatchdata(1);
 	setdynamicdvar("scr_gun_setback",getmatchrulesdata("gunData","setback"));
 	setdynamicdvar("scr_gun_setbackStreak",getmatchrulesdata("gunData","setbackStreak"));
 	setdynamicdvar("scr_gun_killsPerWeapon",getmatchrulesdata("gunData","killsPerWeapon"));
@@ -67,33 +67,33 @@ onprecachegametype() {}
 
 onstartgametype() {
 	setclientnamemode("auto_change");
-	scripts\mp\_utility::setobjectivetext("allies",&"OBJECTIVES_DM");
-	scripts\mp\_utility::setobjectivetext("axis",&"OBJECTIVES_DM");
+	scripts\mp\utility::setobjectivetext("allies",&"OBJECTIVES_DM");
+	scripts\mp\utility::setobjectivetext("axis",&"OBJECTIVES_DM");
 	if(level.splitscreen) {
-		scripts\mp\_utility::setobjectivescoretext("allies",&"OBJECTIVES_DM");
-		scripts\mp\_utility::setobjectivescoretext("axis",&"OBJECTIVES_DM");
+		scripts\mp\utility::setobjectivescoretext("allies",&"OBJECTIVES_DM");
+		scripts\mp\utility::setobjectivescoretext("axis",&"OBJECTIVES_DM");
 	}
 	else
 	{
-		scripts\mp\_utility::setobjectivescoretext("allies",&"OBJECTIVES_DM_SCORE");
-		scripts\mp\_utility::setobjectivescoretext("axis",&"OBJECTIVES_DM_SCORE");
+		scripts\mp\utility::setobjectivescoretext("allies",&"OBJECTIVES_DM_SCORE");
+		scripts\mp\utility::setobjectivescoretext("axis",&"OBJECTIVES_DM_SCORE");
 	}
 
-	scripts\mp\_utility::setobjectivehinttext("allies",&"OBJECTIVES_DM_HINT");
-	scripts\mp\_utility::setobjectivehinttext("axis",&"OBJECTIVES_DM_HINT");
+	scripts\mp\utility::setobjectivehinttext("allies",&"OBJECTIVES_DM_HINT");
+	scripts\mp\utility::setobjectivehinttext("axis",&"OBJECTIVES_DM_HINT");
 	setgunsfinal();
-	scripts\mp\_spawnlogic::setactivespawnlogic("FreeForAll");
+	scripts\mp\spawnlogic::setactivespawnlogic("FreeForAll");
 	level.spawnmins = (0,0,0);
 	level.spawnmaxs = (0,0,0);
-	scripts\mp\_spawnlogic::addstartspawnpoints("mp_dm_spawn_start",1);
-	scripts\mp\_spawnlogic::addspawnpoints("allies","mp_dm_spawn");
-	scripts\mp\_spawnlogic::addspawnpoints("allies","mp_dm_spawn_secondary",1,1);
-	scripts\mp\_spawnlogic::addspawnpoints("axis","mp_dm_spawn");
-	scripts\mp\_spawnlogic::addspawnpoints("axis","mp_dm_spawn_secondary",1,1);
-	level.mapcenter = scripts\mp\_spawnlogic::findboxcenter(level.spawnmins,level.spawnmaxs);
-	function_01B4(level.mapcenter);
+	scripts\mp\spawnlogic::addstartspawnpoints("mp_dm_spawn_start",1);
+	scripts\mp\spawnlogic::addspawnpoints("allies","mp_dm_spawn");
+	scripts\mp\spawnlogic::addspawnpoints("allies","mp_dm_spawn_secondary",1,1);
+	scripts\mp\spawnlogic::addspawnpoints("axis","mp_dm_spawn");
+	scripts\mp\spawnlogic::addspawnpoints("axis","mp_dm_spawn_secondary",1,1);
+	level.mapcenter = scripts\mp\spawnlogic::findboxcenter(level.spawnmins,level.spawnmaxs);
+	setmapcenter(level.mapcenter);
 	var_00 = [];
-	scripts\mp\_gameobjects::main(var_00);
+	scripts\mp\gameobjects::main(var_00);
 	level.quickmessagetoall = 1;
 	level.blockweapondrops = 1;
 	level thread onplayerconnect();
@@ -101,10 +101,10 @@ onstartgametype() {
 
 updategametypedvars() {
 	scripts\mp\gametypes\common::updategametypedvars();
-	level.setback = scripts\mp\_utility::dvarintvalue("setback",1,0,5);
-	level.setbackstreak = scripts\mp\_utility::dvarintvalue("setbackStreak",0,0,5);
-	level.killsperweapon = scripts\mp\_utility::dvarintvalue("killsPerWeapon",1,1,5);
-	level.ladderindex = scripts\mp\_utility::dvarintvalue("ladderIndex",1,1,4);
+	level.setback = scripts\mp\utility::dvarintvalue("setback",1,0,5);
+	level.setbackstreak = scripts\mp\utility::dvarintvalue("setbackStreak",0,0,5);
+	level.killsperweapon = scripts\mp\utility::dvarintvalue("killsPerWeapon",1,1,5);
+	level.ladderindex = scripts\mp\utility::dvarintvalue("ladderIndex",1,1,4);
 }
 
 onplayerconnect() {
@@ -121,7 +121,7 @@ onplayerconnect() {
 		var_00.gungameprevgunindex = 0;
 		var_00 thread refillammo();
 		var_00 thread refillsinglecountammo();
-		var_00 scripts\mp\_utility::func_F6FF(level.gun_guns[0],1);
+		var_00 scripts\mp\utility::func_F6FF(level.gun_guns[0],1);
 	}
 }
 
@@ -141,32 +141,32 @@ getspawnpoint() {
 	if(isplayer(self) && self.gun_firstspawn) {
 		self.gun_firstspawn = 0;
 		if(scripts\engine\utility::cointoss()) {
-			scripts\mp\_menus::addtoteam("axis",1);
+			scripts\mp\menus::addtoteam("axis",1);
 		}
 		else
 		{
-			scripts\mp\_menus::addtoteam("allies",1);
+			scripts\mp\menus::addtoteam("allies",1);
 		}
 	}
 
 	if(level.ingraceperiod) {
 		var_00 = undefined;
-		var_01 = scripts\mp\_spawnlogic::getspawnpointarray("mp_dm_spawn_start");
+		var_01 = scripts\mp\spawnlogic::getspawnpointarray("mp_dm_spawn_start");
 		if(var_01.size > 0) {
-			var_00 = scripts\mp\_spawnlogic::getspawnpoint_startspawn(var_01,1);
+			var_00 = scripts\mp\spawnlogic::getspawnpoint_startspawn(var_01,1);
 		}
 
 		if(!isdefined(var_00)) {
-			var_01 = scripts\mp\_spawnlogic::getteamspawnpoints(self.team);
-			var_00 = scripts\mp\_spawnscoring::getstartspawnpoint_freeforall(var_01);
+			var_01 = scripts\mp\spawnlogic::getteamspawnpoints(self.team);
+			var_00 = scripts\mp\spawnscoring::getstartspawnpoint_freeforall(var_01);
 		}
 
 		return var_00;
 	}
 
-	var_01 = scripts\mp\_spawnlogic::getteamspawnpoints(self.pers["team"]);
-	var_02 = scripts\mp\_spawnlogic::getteamfallbackspawnpoints(self.pers["team"]);
-	var_00 = scripts\mp\_spawnscoring::getspawnpoint(var_01,var_02);
+	var_01 = scripts\mp\spawnlogic::getteamspawnpoints(self.pers["team"]);
+	var_02 = scripts\mp\spawnlogic::getteamfallbackspawnpoints(self.pers["team"]);
+	var_00 = scripts\mp\spawnscoring::getspawnpoint(var_01,var_02);
 	return var_02;
 }
 
@@ -183,7 +183,7 @@ waitloadoutdone() {
 		self.gungamegunindex = self.gungameprevgunindex;
 	}
 
-	scripts\mp\_utility::giveperk("specialty_bling");
+	scripts\mp\utility::giveperk("specialty_bling");
 	thread givenextgun(1);
 }
 
@@ -193,14 +193,14 @@ onplayerkilled(param_00,param_01,param_02,param_03,param_04,param_05,param_06,pa
 	}
 
 	if(param_03 == "MOD_FALLING" || isdefined(param_01) && isplayer(param_01)) {
-		var_0A = scripts\mp\_weapons::isriotshield(param_04);
-		var_0B = scripts\mp\_weapons::isknifeonly(param_04) || scripts\mp\_weapons::isaxeweapon(param_04);
+		var_0A = scripts\mp\weapons::isriotshield(param_04);
+		var_0B = scripts\mp\weapons::isknifeonly(param_04) || scripts\mp\weapons::isaxeweapon(param_04);
 		if(!isdefined(self.ladderdeathsthisweapon)) {
 			self.ladderdeathsthisweapon = 1;
 		}
 		else
 		{
-			self.var_A7A3++;
+			self.ladderdeathsthisweapon++;
 		}
 
 		if(param_03 == "MOD_FALLING" || param_01 == self || param_03 == "MOD_MELEE" && var_0B || self.ladderdeathsthisweapon == level.setbackstreak) {
@@ -210,27 +210,27 @@ onplayerkilled(param_00,param_01,param_02,param_03,param_04,param_05,param_06,pa
 			self.gungameprevgunindex = self.gungamegunindex;
 			self.gungamegunindex = int(max(0,self.gungamegunindex - level.setback));
 			if(self.gungameprevgunindex > self.gungamegunindex) {
-				scripts\mp\_utility::incperstat("setbacks",1);
-				scripts\mp\_persistence::statsetchild("round","setbacks",self.pers["setbacks"]);
+				scripts\mp\utility::incperstat("setbacks",1);
+				scripts\mp\persistence::statsetchild("round","setbacks",self.pers["setbacks"]);
 				if(isplayer(self)) {
-					scripts\mp\_utility::setextrascore1(self.pers["setbacks"]);
+					scripts\mp\utility::setextrascore1(self.pers["setbacks"]);
 				}
 
-				thread scripts\mp\_utility::giveunifiedpoints("dropped_gun_score",param_04,undefined,0,1);
-				scripts\mp\_utility::func_F6FF(level.gun_guns[self.gungamegunindex],1);
+				thread scripts\mp\utility::giveunifiedpoints("dropped_gun_score",param_04,undefined,0,1);
+				scripts\mp\utility::func_F6FF(level.gun_guns[self.gungamegunindex],1);
 			}
 
 			if(param_03 == "MOD_MELEE") {
 				if(self.gungameprevgunindex) {
-					param_01 thread scripts\mp\_utility::giveunifiedpoints("dropped_enemy_gun_rank");
+					param_01 thread scripts\mp\utility::giveunifiedpoints("dropped_enemy_gun_rank");
 				}
 
 				param_01 updateknivesperminute();
-				param_01 scripts\mp\_awards::givemidmatchaward("mode_gun_melee");
-				param_01 scripts\mp\_utility::incperstat("stabs",1);
-				param_01 scripts\mp\_persistence::statsetchild("round","stabs",param_01.pers["stabs"]);
+				param_01 scripts\mp\awards::givemidmatchaward("mode_gun_melee");
+				param_01 scripts\mp\utility::incperstat("stabs",1);
+				param_01 scripts\mp\persistence::statsetchild("round","stabs",param_01.pers["stabs"]);
 				if(isplayer(param_01)) {
-					param_01 scripts\mp\_utility::setextrascore0(param_01.pers["stabs"]);
+					param_01 scripts\mp\utility::setextrascore0(param_01.pers["stabs"]);
 				}
 			}
 
@@ -251,7 +251,7 @@ onplayerkilled(param_00,param_01,param_02,param_03,param_04,param_05,param_06,pa
 			}
 			else
 			{
-				param_01.var_A7A5++;
+				param_01.ladderkillsthisweapon++;
 			}
 
 			if(param_01.ladderkillsthisweapon != level.killsperweapon) {
@@ -261,29 +261,29 @@ onplayerkilled(param_00,param_01,param_02,param_03,param_04,param_05,param_06,pa
 			param_01.ladderkillsthisweapon = 0;
 			param_01.ladderdeathsthisweapon = 0;
 			param_01.gungameprevgunindex = param_01.gungamegunindex;
-			param_01.var_86FB++;
+			param_01.gungamegunindex++;
 			param_01 notify("update_loadweapons");
-			param_01 thread scripts\mp\_utility::giveunifiedpoints("gained_gun_score",param_04,undefined,0,1);
+			param_01 thread scripts\mp\utility::giveunifiedpoints("gained_gun_score",param_04,undefined,0,1);
 			if(param_01.gungamegunindex == level.gun_guns.size - 2) {
 				level.kick_afk_check = 1;
 			}
 
 			if(param_01.gungamegunindex == level.gun_guns.size - 1) {
-				scripts\mp\_utility::playsoundonplayers("mp_enemy_obj_captured");
-				level thread scripts\mp\_utility::teamplayercardsplash("callout_top_gun_rank",param_01);
+				scripts\mp\utility::playsoundonplayers("mp_enemy_obj_captured");
+				level thread scripts\mp\utility::teamplayercardsplash("callout_top_gun_rank",param_01);
 			}
 
 			if(param_01.gungamegunindex < level.gun_guns.size) {
-				var_0E = scripts\mp\_rank::getscoreinfovalue("gained_gun_rank");
-				param_01 thread scripts\mp\_rank::scorepointspopup(var_0E);
-				param_01 thread scripts\mp\_rank::scoreeventpopup("gained_gun_rank");
+				var_0E = scripts\mp\rank::getscoreinfovalue("gained_gun_rank");
+				param_01 thread scripts\mp\rank::scorepointspopup(var_0E);
+				param_01 thread scripts\mp\rank::scoreeventpopup("gained_gun_rank");
 				param_01 playlocalsound("mp_war_objective_taken");
 				param_01 thread givenextgun(0);
-				param_01 scripts\mp\_utility::func_F6FF(level.gun_guns[param_01.gungamegunindex],1);
+				param_01 scripts\mp\utility::func_F6FF(level.gun_guns[param_01.gungamegunindex],1);
 			}
 
 			if(isdefined(param_01.lastgunrankincreasetime) && gettime() - param_01.lastgunrankincreasetime < 5000) {
-				param_01 scripts\mp\_awards::givemidmatchaward("mode_gun_quick_kill");
+				param_01 scripts\mp\awards::givemidmatchaward("mode_gun_quick_kill");
 			}
 
 			param_01.lastgunrankincreasetime = gettime();
@@ -300,21 +300,21 @@ givenextgun(param_00) {
 	}
 
 	var_01 = getnextgun();
-	var_01 = scripts\mp\_weapons::updatesavedaltstate(var_01);
-	scripts\mp\_utility::_giveweapon(var_01);
+	var_01 = scripts\mp\weapons::updatesavedaltstate(var_01);
+	scripts\mp\utility::_giveweapon(var_01);
 	if(param_00) {
 		self setspawnweapon(var_01);
 		foreach(var_03 in self.weaponlist) {
 			if(var_03 != var_01) {
-				thread scripts\mp\_utility::takeweaponwhensafe(var_03);
+				thread scripts\mp\utility::takeweaponwhensafe(var_03);
 			}
 		}
 	}
 
 	self.pers["primaryWeapon"] = var_01;
 	self.primaryweapon = var_01;
-	scripts\mp\_utility::_switchtoweapon(var_01);
-	var_05 = scripts\mp\_weapons::isaxeweapon(var_01);
+	scripts\mp\utility::_switchtoweapon(var_01);
+	var_05 = scripts\mp\weapons::isaxeweapon(var_01);
 	if(var_05) {
 		self setweaponammoclip(var_01,1);
 		thread takeweaponwhensafegungame("iw7_knife_mp_gg",0);
@@ -331,7 +331,7 @@ givenextgun(param_00) {
 	}
 
 	giveortakethrowingknife(var_01);
-	scripts\mp\_weapons::updatetogglescopestate(var_01);
+	scripts\mp\weapons::updatetogglescopestate(var_01);
 	self.gungameprevgunindex = self.gungamegunindex;
 }
 
@@ -339,14 +339,14 @@ takeweaponwhensafegungame(param_00,param_01) {
 	self endon("death");
 	self endon("disconnect");
 	for(;;) {
-		if(!scripts\mp\_utility::iscurrentweapon(param_00)) {
+		if(!scripts\mp\utility::iscurrentweapon(param_00)) {
 			break;
 		}
 
 		scripts\engine\utility::waitframe();
 	}
 
-	scripts\mp\_utility::_takeweapon(param_00);
+	scripts\mp\utility::_takeweapon(param_00);
 	if(param_01) {
 		scripts\engine\utility::allow_weapon_switch(1);
 	}
@@ -360,21 +360,21 @@ getnextgun() {
 ontimelimit() {
 	var_00 = gethighestprogressedplayers();
 	if(!isdefined(var_00) || !var_00.size) {
-		thread scripts\mp\_gamelogic::endgame("tie",game["end_reason"]["time_limit_reached"]);
+		thread scripts\mp\gamelogic::endgame("tie",game["end_reason"]["time_limit_reached"]);
 		return;
 	}
 
 	if(var_00.size == 1) {
-		thread scripts\mp\_gamelogic::endgame(var_00[0],game["end_reason"]["time_limit_reached"]);
+		thread scripts\mp\gamelogic::endgame(var_00[0],game["end_reason"]["time_limit_reached"]);
 		return;
 	}
 
 	if(var_00[var_00.size - 1].gungamegunindex > var_00[var_00.size - 2].gungamegunindex) {
-		thread scripts\mp\_gamelogic::endgame(var_00[var_00.size - 1],game["end_reason"]["time_limit_reached"]);
+		thread scripts\mp\gamelogic::endgame(var_00[var_00.size - 1],game["end_reason"]["time_limit_reached"]);
 		return;
 	}
 
-	thread scripts\mp\_gamelogic::endgame("tie",game["end_reason"]["time_limit_reached"]);
+	thread scripts\mp\gamelogic::endgame("tie",game["end_reason"]["time_limit_reached"]);
 }
 
 gethighestprogressedplayers() {
@@ -403,7 +403,7 @@ refillsinglecountammo() {
 	level endon("game_ended");
 	self endon("disconnect");
 	for(;;) {
-		if(scripts\mp\_utility::isreallyalive(self) && self.team != "spectator" && isdefined(self.primaryweapon) && self getrunningforwardpainanim(self.primaryweapon) == 0) {
+		if(scripts\mp\utility::isreallyalive(self) && self.team != "spectator" && isdefined(self.primaryweapon) && self getrunningforwardpainanim(self.primaryweapon) == 0) {
 			if(getweaponbasename(self.primaryweapon) == "iw7_glprox_mp") {
 				self givemaxammo(self.primaryweapon);
 			}
@@ -512,7 +512,7 @@ setgunladder() {
 
 	var_00 = level.gun_guns.size;
 	setdynamicdvar("scr_gun_scorelimit",var_00);
-	scripts\mp\_utility::registerscorelimitdvar(level.gametype,var_00);
+	scripts\mp\utility::registerscorelimitdvar(level.gametype,var_00);
 }
 
 setgunsfinal() {
@@ -520,12 +520,12 @@ setgunsfinal() {
 	buildrandomweapontable();
 	for(var_00 = 0;var_00 < level.gun_guns.size;var_00++) {
 		var_01 = level.gun_guns[var_00];
-		if(scripts\mp\_utility::isstrstart(var_01,"rand_")) {
+		if(scripts\mp\utility::isstrstart(var_01,"rand_")) {
 			level.gun_guns[var_00] = getrandomweaponfromcategory(var_01);
 			continue;
 		}
 
-		var_02 = scripts\mp\_utility::getweaponrootname(level.gun_guns[var_00]);
+		var_02 = scripts\mp\utility::getweaponrootname(level.gun_guns[var_00]);
 		level.selectedweapons[var_02] = 1;
 		var_03 = var_02;
 		var_04 = 0;
@@ -588,7 +588,7 @@ buildrandomweapontable() {
 	level.weaponcategories = [];
 	var_00 = 0;
 	for(;;) {
-		var_01 = tablelookupbyrow("mp/gunGameWeapons.csv",var_00,0);
+		var_01 = tablelookupbyrow("mp\gunGameWeapons.csv",var_00,0);
 		if(var_01 == "") {
 			break;
 		}
@@ -597,15 +597,15 @@ buildrandomweapontable() {
 			level.weaponcategories[var_01] = [];
 		}
 
-		var_02 = tablelookupbyrow("mp/gunGameWeapons.csv",var_00,5);
+		var_02 = tablelookupbyrow("mp\gunGameWeapons.csv",var_00,5);
 		if(var_02 == "" || getdvarint(var_02,0) == 1) {
 			var_03 = [];
-			var_03["weapon"] = tablelookupbyrow("mp/gunGameWeapons.csv",var_00,1);
-			var_03["min"] = int(tablelookupbyrow("mp/gunGameWeapons.csv",var_00,2));
-			var_03["max"] = int(tablelookupbyrow("mp/gunGameWeapons.csv",var_00,3));
-			var_03["perk"] = tablelookupbyrow("mp/gunGameWeapons.csv",var_00,4);
+			var_03["weapon"] = tablelookupbyrow("mp\gunGameWeapons.csv",var_00,1);
+			var_03["min"] = int(tablelookupbyrow("mp\gunGameWeapons.csv",var_00,2));
+			var_03["max"] = int(tablelookupbyrow("mp\gunGameWeapons.csv",var_00,3));
+			var_03["perk"] = tablelookupbyrow("mp\gunGameWeapons.csv",var_00,4);
 			var_03["variant"] = getlootvariant(var_03["weapon"]);
-			var_03["allowed"] = int(tablelookupbyrow("mp/gunGameWeapons.csv",var_00,7));
+			var_03["allowed"] = int(tablelookupbyrow("mp\gunGameWeapons.csv",var_00,7));
 			if(level.ladderindex == 4 && var_03["variant"] == "") {
 				var_00++;
 				continue;
@@ -627,7 +627,7 @@ getrandomweaponfromcategory(param_00) {
 		for(;;) {
 			var_05 = randomintrange(0,var_01.size);
 			var_03 = var_01[var_05];
-			var_06 = scripts\mp\_utility::getweaponrootname(var_03["weapon"]);
+			var_06 = scripts\mp\utility::getweaponrootname(var_03["weapon"]);
 			var_07 = 1;
 			if(level.ladderindex == 4) {
 				var_07 = var_03["allowed"];
@@ -638,7 +638,7 @@ getrandomweaponfromcategory(param_00) {
 				var_02 = var_03["weapon"];
 				for(var_08 = 0;var_08 < level.weaponcategories[param_00].size;var_08++) {
 					if(level.weaponcategories[param_00][var_08]["weapon"] == var_02) {
-						level.weaponcategories[param_00] = scripts\mp\_utility::array_remove_index(level.weaponcategories[param_00],var_08);
+						level.weaponcategories[param_00] = scripts\mp\utility::array_remove_index(level.weaponcategories[param_00],var_08);
 						break;
 					}
 				}
@@ -663,8 +663,8 @@ getrandomweaponfromcategory(param_00) {
 getlootvariant(param_00) {
 	var_01 = [];
 	var_02 = "";
-	var_03 = scripts\mp\_utility::getweaponrootname(param_00);
-	var_01 = tablelookup("mp/gunGameWeapons.csv",1,var_03,6);
+	var_03 = scripts\mp\utility::getweaponrootname(param_00);
+	var_01 = tablelookup("mp\gunGameWeapons.csv",1,var_03,6);
 	if(var_01.size > 0) {
 		if(var_01.size > 1) {
 			var_01 = strtok(var_01,"+");
@@ -675,9 +675,9 @@ getlootvariant(param_00) {
 			var_02 = var_01[0];
 		}
 
-		var_04 = "mp/loot/weapon/" + var_03 + ".csv";
+		var_04 = "mp\loot\weapon\" + var_03 + ".csv";
 		var_05 = tablelookup(var_04,0,int(var_02),1);
-		var_06 = tablelookup("mp/loot/iw7_weapon_loot_master.csv",1,var_05,1);
+		var_06 = tablelookup("mp\loot\iw7_weapon_loot_master.csv",1,var_05,1);
 		if(var_06 == "") {
 			var_02 = "";
 		}
@@ -712,9 +712,9 @@ modifyweapon(param_00,param_01,param_02) {
 	}
 
 	var_07 = var_06 != "";
-	var_08 = "mp/loot/weapon/" + param_00 + ".csv";
+	var_08 = "mp\loot\weapon\" + param_00 + ".csv";
 	if(param_01 > 0) {
-		var_09 = scripts\mp\_utility::getweaponattachmentarrayfromstats(param_00);
+		var_09 = scripts\mp\utility::getweaponattachmentarrayfromstats(param_00);
 		if(var_09.size > 0) {
 			var_0A = getvalidattachments(var_09,var_05,param_00,var_08,var_06);
 			var_0B = var_0A.size;
@@ -726,7 +726,7 @@ modifyweapon(param_00,param_01,param_02) {
 					if(attachmentcheck(var_0A[var_0E],var_03)) {
 						var_0D = var_0A[var_0E];
 						var_03[var_03.size] = var_0D;
-						if(scripts\mp\_utility::getattachmenttype(var_0D) == "rail") {
+						if(scripts\mp\utility::getattachmenttype(var_0D) == "rail") {
 							var_04 = 1;
 						}
 					}
@@ -737,12 +737,12 @@ modifyweapon(param_00,param_01,param_02) {
 
 	var_0F = "none";
 	var_10 = "none";
-	if(scripts\mp\_utility::istrue(var_05) && var_07) {
-		var_11 = scripts\mp\_class::buildweaponname(param_00,var_03,var_0F,var_10,int(var_06));
+	if(scripts\mp\utility::istrue(var_05) && var_07) {
+		var_11 = scripts\mp\class::buildweaponname(param_00,var_03,var_0F,var_10,int(var_06));
 	}
 	else
 	{
-		var_11 = scripts\mp\_class::buildweaponname(param_01,var_04,var_10,var_11);
+		var_11 = scripts\mp\class::buildweaponname(param_01,var_04,var_10,var_11);
 	}
 
 	return var_11;
@@ -750,7 +750,7 @@ modifyweapon(param_00,param_01,param_02) {
 
 attachmentcheck(param_00,param_01) {
 	for(var_02 = 0;var_02 < param_01.size;var_02++) {
-		if(param_00 == param_01[var_02] || !scripts\mp\_utility::attachmentscompatible(param_00,param_01[var_02])) {
+		if(param_00 == param_01[var_02] || !scripts\mp\utility::attachmentscompatible(param_00,param_01[var_02])) {
 			return 0;
 		}
 	}
@@ -762,18 +762,18 @@ getvalidattachments(param_00,param_01,param_02,param_03,param_04) {
 	var_05 = [];
 	var_06 = [];
 	var_07 = [];
-	if(scripts\mp\_utility::istrue(param_01) && param_04 != "") {
+	if(scripts\mp\utility::istrue(param_01) && param_04 != "") {
 		var_06 = tablelookup(param_03,0,int(param_04),17);
 		var_06 = strtok(var_06,"+");
 		var_07 = tablelookup(param_03,0,int(param_04),18);
 		var_07 = strtok(var_07,"+");
 		for(var_08 = 0;var_08 < var_06.size;var_08++) {
-			var_06[var_08] = scripts\mp\_utility::attachmentmap_tobase(var_06[var_08]);
+			var_06[var_08] = scripts\mp\utility::attachmentmap_tobase(var_06[var_08]);
 		}
 	}
 
 	foreach(var_0A in param_00) {
-		var_0B = scripts\mp\_utility::getattachmenttype(var_0A);
+		var_0B = scripts\mp\utility::getattachmenttype(var_0A);
 		if(var_07.size > 0 && scripts\engine\utility::array_contains(var_07,var_0B)) {
 			continue;
 		}
@@ -797,15 +797,15 @@ getvalidattachments(param_00,param_01,param_02,param_03,param_04) {
 
 giveortakethrowingknife(param_00) {
 	var_01 = "primary";
-	var_02 = scripts\mp\_powers::getcurrentequipment(var_01);
+	var_02 = scripts\mp\powers::getcurrentequipment(var_01);
 	if(isdefined(var_02)) {
-		scripts\mp\_powers::removepower(var_02);
+		scripts\mp\powers::removepower(var_02);
 	}
 
-	if(scripts\mp\_weapons::isknifeonly(param_00) || scripts\mp\_weapons::isaxeweapon(param_00)) {
-		scripts\mp\_utility::giveperk("specialty_scavenger");
-		scripts\mp\_utility::giveperk("specialty_pitcher");
-		scripts\mp\_powers::givepower("power_bioSpike",var_01,undefined,undefined,1);
+	if(scripts\mp\weapons::isknifeonly(param_00) || scripts\mp\weapons::isaxeweapon(param_00)) {
+		scripts\mp\utility::giveperk("specialty_scavenger");
+		scripts\mp\utility::giveperk("specialty_pitcher");
+		scripts\mp\powers::givepower("power_bioSpike",var_01,undefined,undefined,1);
 	}
 }
 
@@ -814,9 +814,9 @@ isvalidthrowingknifekill(param_00) {
 }
 
 onplayerscore(param_00,param_01,param_02) {
-	param_01 scripts\mp\_utility::incperstat("gamemodeScore",param_02,1);
-	var_03 = param_01 scripts\mp\_utility::getpersstat("gamemodeScore");
-	param_01 scripts\mp\_persistence::statsetchild("round","gamemodeScore",var_03);
+	param_01 scripts\mp\utility::incperstat("gamemodeScore",param_02,1);
+	var_03 = param_01 scripts\mp\utility::getpersstat("gamemodeScore");
+	param_01 scripts\mp\persistence::statsetchild("round","gamemodeScore",var_03);
 	var_04 = 0;
 	if(param_00 == "gained_gun_score") {
 		var_04 = 1;
@@ -826,7 +826,7 @@ onplayerscore(param_00,param_01,param_02) {
 		var_04 = var_05 * -1;
 	}
 	else if(param_00 == "assist_ffa" || param_00 == "kill") {
-		param_01 scripts\mp\_utility::bufferednotify("earned_score_buffered",param_02);
+		param_01 scripts\mp\utility::bufferednotify("earned_score_buffered",param_02);
 	}
 
 	return var_04;
@@ -839,11 +839,11 @@ updateknivesperminute() {
 	}
 
 	self.numknives++;
-	if(scripts\mp\_utility::getminutespassed() < 1) {
+	if(scripts\mp\utility::getminutespassed() < 1) {
 		return;
 	}
 
-	self.knivesperminute = self.numknives / scripts\mp\_utility::getminutespassed();
+	self.knivesperminute = self.numknives / scripts\mp\utility::getminutespassed();
 }
 
 modifyunifiedpointscallback(param_00,param_01,param_02,param_03) {

@@ -1,8 +1,8 @@
-/************************************************************
+/****************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\sp\maps\europa\europa_armory.gsc
-************************************************************/
+ * Script: scripts\sp\maps\europa\europa_armory.gsc
+****************************************************/
 
 func_220C() {
 	level.var_7464 = 1;
@@ -127,7 +127,7 @@ func_9531() {
 
 	level.var_220A = 1;
 	scripts\engine\utility::array_thread(getentarray("airlock_fan_02","targetname"),::func_6B81);
-	function_01C5("sm_sunSampleSizeNear",1);
+	setsaveddvar("sm_sunSampleSizeNear",1);
 	func_95B6("armory_doors");
 	thread func_7558();
 	thread func_75D7();
@@ -176,7 +176,7 @@ func_21DF() {
 }
 
 func_21CC() {
-	function_01CB(0.784314,0.937255,1,2);
+	setsuncolorandintensity(0.784314,0.937255,1,2);
 	if(level.var_10CDA == "outro") {
 		return;
 	}
@@ -188,14 +188,14 @@ func_21CC() {
 }
 
 func_7392() {
-	var_00 = function_00B4("tram_friendly_path","targetname");
+	var_00 = getnodearray("tram_friendly_path","targetname");
 	var_00 = sortbydistance(var_00,level.var_EBBB.origin);
 	level.var_EBBB thread func_11B3C(var_00[0]);
 	level.var_EBBC thread func_11B3C(var_00[1]);
 }
 
 func_11B41() {
-	var_00 = function_00B4("initial_battle_node","script_noteworthy");
+	var_00 = getnodearray("initial_battle_node","script_noteworthy");
 	var_00 = sortbydistance(var_00,level.var_EBBB.origin);
 	level.var_EBBB give_more_perk(var_00[0]);
 	level.var_EBBC give_more_perk(var_00[1]);
@@ -210,7 +210,7 @@ func_1353A(param_00,param_01) {
 	var_02 = 1;
 	var_03 = getent(param_00,"targetname");
 	for(;;) {
-		var_04 = function_0072("axis");
+		var_04 = getaiarray("axis");
 		var_05 = 0;
 		var_06 = [];
 		foreach(var_08 in var_04) {
@@ -296,9 +296,9 @@ func_288C() {
 		scripts\sp\_utility::func_4074("office_fight");
 	}
 
-	var_00 = function_00B3("console_node_sipes","targetname");
+	var_00 = getnode("console_node_sipes","targetname");
 	level.var_EBBB thread lib_0B77::worldpointinreticle_circle(var_00);
-	var_00 = function_00B3("console_node_t","targetname");
+	var_00 = getnode("console_node_t","targetname");
 	level.var_EBBC thread lib_0B77::worldpointinreticle_circle(var_00);
 	scripts\engine\utility::flag_wait("goto_vault_door");
 	thread func_288F();
@@ -379,14 +379,14 @@ func_10216() {
 	wait(2.5);
 	var_00 = getent("tram_interact","script_noteworthy");
 	level.var_EBBB linkto(var_00);
-	var_00 scripts/sp/anim::func_1F35(level.var_EBBB,"fspar_boot_intro");
-	var_00 thread scripts/sp/anim::func_1EEA(level.var_EBBB,"fspar_boot_idle");
+	var_00 scripts\sp\anim::func_1F35(level.var_EBBB,"fspar_boot_intro");
+	var_00 thread scripts\sp\anim::func_1EEA(level.var_EBBB,"fspar_boot_idle");
 	thread scripts\engine\utility::flag_set_delayed("selfdestruct_anim_done",1.2);
 	scripts\engine\utility::flag_wait("last_call_before_fight");
 	thread func_10215();
 	thread func_746D();
 	var_00 notify("stop_loop");
-	var_00 thread scripts/sp/anim::func_1F35(level.var_EBBB,"fspar_boot_exit");
+	var_00 thread scripts\sp\anim::func_1F35(level.var_EBBB,"fspar_boot_exit");
 	level.var_EBBB unlink();
 }
 
@@ -401,18 +401,18 @@ func_746C() {
 
 func_288E() {
 	var_00 = 0.4;
-	level.player.var_E505 = scripts/sp/player_rig::get_player_score(1);
+	level.player.var_E505 = scripts\sp\player_rig::get_player_score(1);
 	level.player.var_E505 hide();
 	level.player _meth_84FE();
 	var_01 = getent("selfdestruct_console","targetname");
 	var_01.var_1FBB = "selfdestruct_console";
-	var_01 scripts/sp/anim::func_F64A();
+	var_01 scripts\sp\anim::func_F64A();
 	scripts\engine\utility::flag_set("tram_move");
 	var_02 = [level.player.var_E505,level.var_EBBC,var_01];
 	thread func_4543();
 	thread func_10216();
 	thread func_115F9();
-	var_01 thread scripts/sp/anim::func_1F2C(var_02,"selfdestruct");
+	var_01 thread scripts\sp\anim::func_1F2C(var_02,"selfdestruct");
 	level.player allowstand(1);
 	level.player allowcrouch(0);
 	level.player allowprone(0);
@@ -446,7 +446,7 @@ func_1C38(param_00) {
 
 func_115F9() {
 	wait(5);
-	var_00 = function_00B3("tee_after_handoff","script_noteworthy");
+	var_00 = getnode("tee_after_handoff","script_noteworthy");
 	while(level.var_EBBC _meth_81A6()) {
 		wait(0.05);
 	}
@@ -455,7 +455,7 @@ func_115F9() {
 }
 
 func_10215() {
-	var_00 = function_00B3("sipes_after_handoff","script_noteworthy");
+	var_00 = getnode("sipes_after_handoff","script_noteworthy");
 	while(level.var_EBBB _meth_81A6()) {
 		wait(0.05);
 	}
@@ -588,11 +588,11 @@ func_C84E(param_00) {
 		wait(0.3);
 	}
 
-	level.var_C845.var_9C80++;
+	level.var_C845.is_playing++;
 	self playsound(param_00,"sound_done");
 	self waittill("sound_done");
 	wait(0.1);
-	level.var_C845.var_9C80--;
+	level.var_C845.is_playing--;
 }
 
 func_C846() {
@@ -718,7 +718,7 @@ func_299F() {
 }
 
 func_299E() {
-	var_00 = function_0072("axis");
+	var_00 = getaiarray("axis");
 	var_01 = 0;
 	foreach(var_03 in var_00) {
 		if(scripts\engine\utility::within_fov(level.player geteye(),level.player getplayerangles(),var_03.origin,0.8)) {
@@ -752,7 +752,7 @@ func_2999() {
 	}
 
 	var_00 = 0;
-	var_01 = function_0072("axis");
+	var_01 = getaiarray("axis");
 	foreach(var_03 in self.var_13540) {
 		if(var_03.script_noteworthy == "catwalk_volume" && !scripts\engine\utility::flag("player_in_room1")) {
 			continue;
@@ -840,7 +840,7 @@ func_3568() {
 	thread func_B784();
 	scripts\sp\_utility::func_22CD("tram_initial_enemies",1);
 	thread scripts\sp\_utility::func_1034D("europa_plr_letsgetitout");
-	function_01BA("mx_172_misslefight");
+	setmusicstate("mx_172_misslefight");
 	thread scripts\sp\maps\europa\europa_util::func_67B6(1,"done",&"EUROPA_OBJECTIVE_ACCESS");
 	thread scripts\sp\maps\europa\europa_util::func_67B6(2,"done",&"EUROPA_OBJECTIVE_FSPAR");
 	thread scripts\sp\maps\europa\europa_util::func_67B6(3,"current",&"EUROPA_OBJECTIVE_ESCAPE");
@@ -881,7 +881,7 @@ func_355D() {
 	thread func_35B4();
 	thread func_353D();
 	scripts\engine\utility::flag_wait("c12_spawn");
-	function_01BA("mx_172_misslefight");
+	setmusicstate("mx_172_misslefight");
 	var_04 = scripts\sp\_utility::func_107EA("c12_spawner",1);
 	level.var_3508 = var_04;
 	var_04.var_1FBB = "c12";
@@ -898,9 +898,9 @@ func_355D() {
 	var_04 scripts\engine\utility::delaythread(var_05,::lib_0A05::func_3551,1);
 	var_04 lib_0A05::func_3540();
 	var_04 lib_0A05::func_3552(0);
-	var_06 = function_00B3(var_04.target,"targetname");
+	var_06 = getnode(var_04.target,"targetname");
 	while(isdefined(var_06.target)) {
-		var_06 = function_00B3(var_06.target,"targetname");
+		var_06 = getnode(var_06.target,"targetname");
 	}
 
 	var_04.og_goalradius = 2048;
@@ -1196,12 +1196,12 @@ func_E6D1() {
 	level.player _meth_8251((0,0,0));
 	var_00 = 0.25;
 	level.player.var_8632 rotateto((0,0,0),var_00,var_00);
-	function_01A2(level.player.origin,5,1,1,1,0,1,5000,3,2,0);
+	screenshake(level.player.origin,5,1,1,1,0,1,5000,3,2,0);
 }
 
 func_E6D2() {
 	level endon("fspar_prefire");
-	scripts/sp/specialist_MAYBE::halt_specialist_hints();
+	scripts\sp\specialist_MAYBE::halt_specialist_hints();
 	func_2873(0.5,2.5,500,2500);
 	childthread func_E6D3();
 	childthread func_E6D4();
@@ -1364,7 +1364,7 @@ func_35E1() {
 
 		if(func_35CE() && gettime() > var_01.var_BFB3) {
 			var_05 = level.player getcurrentprimaryweapon();
-			if(!function_02BE(var_05)) {
+			if(!weaponisbeam(var_05)) {
 				level.var_EBBC func_35F6(var_01);
 				continue;
 			}
@@ -1397,7 +1397,7 @@ func_35F6(param_00) {
 }
 
 func_35A9() {
-	if(!isdefined(level.var_3508._blackboard.shootparams)) {
+	if(!isdefined(level.var_3508.var_1198.shootparams)) {
 		return 0;
 	}
 
@@ -1414,11 +1414,11 @@ func_350F() {
 
 func_782D() {
 	var_00 = 0;
-	if(level.var_3508 scripts/asm/asm_bb::ispartdismembered("right_arm")) {
+	if(level.var_3508 scripts\asm\asm_bb::ispartdismembered("right_arm")) {
 		var_00++;
 	}
 
-	if(level.var_3508 scripts/asm/asm_bb::ispartdismembered("left_arm")) {
+	if(level.var_3508 scripts\asm\asm_bb::ispartdismembered("left_arm")) {
 		var_00++;
 	}
 
@@ -1523,9 +1523,9 @@ func_3532() {
 }
 
 func_363D() {
-	function_01BA("");
+	setmusicstate("");
 	wait(2);
-	function_01BA("mx_351_tram_start");
+	setmusicstate("mx_351_tram_start");
 }
 
 func_2AA5() {
@@ -1608,11 +1608,11 @@ func_9C6B() {
 		return 0;
 	}
 
-	if(!isdefined(level.var_3508._blackboard.shootparams)) {
+	if(!isdefined(level.var_3508.var_1198.shootparams)) {
 		return 0;
 	}
 
-	foreach(var_01 in level.var_3508._blackboard.shootparams.var_13CC3) {
+	foreach(var_01 in level.var_3508.var_1198.shootparams.var_13CC3) {
 		if(!isdefined(var_01.ent)) {
 			continue;
 		}
@@ -1626,7 +1626,7 @@ func_9C6B() {
 }
 
 func_7399() {
-	var_00 = function_00B4(self.var_3FF5.target,"targetname");
+	var_00 = getnodearray(self.var_3FF5.target,"targetname");
 	var_01 = scripts\engine\utility::random(var_00);
 	self.objective_playermask_showto = 32;
 	self.var_33F = self.var_33F + 500;
@@ -1852,7 +1852,7 @@ func_11B51() {
 		var_04 = level.var_11B30.origin + rotatevector(var_01.offset,level.var_11B30.angles);
 		var_05 = scripts\engine\utility::drop_to_ground(var_04,15,-100);
 		var_06 = level.var_11B30.angles + var_01.var_C36A;
-		var_01.target_getindexoftarget = function_02CB(var_05,var_06,var_02,var_03);
+		var_01.target_getindexoftarget = spawncovernode(var_05,var_06,var_02,var_03);
 	}
 }
 
@@ -1863,7 +1863,7 @@ debug_line(param_00,param_01) {
 func_11B38() {
 	foreach(var_01 in level.var_11B30.var_C058) {
 		if(isdefined(var_01.target_getindexoftarget)) {
-			function_02CC(var_01.target_getindexoftarget);
+			despawncovernode(var_01.target_getindexoftarget);
 		}
 	}
 }
@@ -2133,7 +2133,7 @@ func_11B3C(param_00) {
 		var_08 = level.var_11B30.var_4C18 + var_06 * var_07;
 		if(var_05) {
 			while(vectordot(var_06,vectornormalize(var_01.origin - var_08)) < 0) {
-				var_09 = function_00B4(var_01.target,"targetname");
+				var_09 = getnodearray(var_01.target,"targetname");
 				var_02 = var_01;
 				var_01 = scripts\engine\utility::random(var_09);
 			}
@@ -2147,7 +2147,7 @@ func_11B3C(param_00) {
 				break;
 			}
 
-			var_09 = function_00B4(var_01.target,"targetname");
+			var_09 = getnodearray(var_01.target,"targetname");
 			var_01 = scripts\engine\utility::random(var_09);
 			thread func_11B3D(var_01);
 		}
@@ -2190,7 +2190,7 @@ func_11B3B() {
 	var_00 = getent("tram_out_volume","targetname");
 	for(;;) {
 		wait(0.1);
-		var_01 = function_0072("bad_guys");
+		var_01 = getaiarray("bad_guys");
 		var_02 = 1;
 		foreach(var_04 in var_01) {
 			if(var_04 scripts\sp\_utility::func_58DA()) {
@@ -2276,7 +2276,7 @@ func_A5D9() {
 	var_00 = getent("enemy_flee_volume","targetname");
 	for(;;) {
 		wait(0.05);
-		var_01 = function_0072("axis");
+		var_01 = getaiarray("axis");
 		var_02 = [];
 		foreach(var_04 in var_01) {
 			if(var_04.unittype == "c12") {
@@ -2356,7 +2356,7 @@ func_1024C() {
 		return 1;
 	}
 
-	if(scripts/asm/asm_bb::func_293E()) {
+	if(scripts\asm\asm_bb::func_293E()) {
 		return 1;
 	}
 
@@ -2376,13 +2376,13 @@ func_D287(param_00) {
 	level.player freezecontrols(1);
 	playfx(scripts\engine\utility::getfx("explosion_med"),level.player.origin + anglestoforward(level.player.angles) * 70);
 	earthquake(0.6,0.5,level.player.origin,100);
-	function_0178("scn_europa_window_explosion",level.player.origin);
+	playworldsound("scn_europa_window_explosion",level.player.origin);
 	if(!isdefined(param_00)) {
 		lib_0B60::func_F322("EUROPA_FAILED_TO_ESCAPE");
 	}
 
 	level.player _meth_80A1();
-	function_0136("frag",level.player.origin,(0,0,0),0);
+	magicgrenademanual("frag",level.player.origin,(0,0,0),0);
 	wait(0.5);
 	foreach(var_02 in level.var_EBCA) {
 		var_02 scripts\sp\_utility::func_1101B();
@@ -2416,13 +2416,13 @@ func_2AC3() {
 	wait(1.5);
 	thread func_D294();
 	scripts\engine\utility::flag_wait("player_on_fspar");
-	function_01BA("");
+	setmusicstate("");
 	level.player scripts\engine\utility::delaycall(2,::playsound,"scn_europa_fspar_button");
 	stopfxontag(scripts\engine\utility::getfx("fspar_light_green"),level.var_11B30.var_1021B,"tag_origin");
 	var_04 = 3.2;
 	if(scripts\sp\_utility::func_93A6()) {
-		level.player thread scripts/sp/specialist_MAYBE::func_BE53();
-		level.player thread scripts/sp/specialist_MAYBE::func_BE51();
+		level.player thread scripts\sp\specialist_MAYBE::func_BE53();
+		level.player thread scripts\sp\specialist_MAYBE::func_BE51();
 	}
 
 	wait(var_04);
@@ -2674,11 +2674,11 @@ func_D294() {
 	var_00 = getent("tram_interact","script_noteworthy");
 	var_01 = scripts\sp\_utility::func_10639("player_rig",var_00.origin + (0,0,500));
 	var_01 hide();
-	var_00 scripts/sp/anim::func_1EC3(var_01,"fspar_fire");
+	var_00 scripts\sp\anim::func_1EC3(var_01,"fspar_fire");
 	var_02 = spawnstruct();
 	var_02.origin = var_01.origin + (0,0,50) + anglestoforward(var_01.angles) * 45;
 	var_02 lib_0E46::func_48C4(undefined,undefined,&"EUROPA_FSPAR_SHOOT");
-	function_0156(3,var_01);
+	objective_onentity(3,var_01);
 	var_02 waittill("trigger");
 	if(scripts\engine\utility::flag("self_destruction_start")) {
 		return;
@@ -2693,12 +2693,12 @@ func_D294() {
 	scripts\engine\utility::delaythread(0.5,::func_AB59);
 	scripts\engine\utility::flag_clear("pause_destruction_explosions");
 	level.player lerpviewangleclamp(0.5,0.25,0.25,5,5,10,10);
-	var_00 scripts/sp/anim::func_1F2C([var_01,level.var_EBBB],"fspar_suckout");
+	var_00 scripts\sp\anim::func_1F2C([var_01,level.var_EBBB],"fspar_suckout");
 }
 
 func_D087(param_00,param_01) {
 	scripts\engine\utility::flag_set("player_on_fspar");
-	function_015F(3,(0,0,0));
+	objective_position(3,(0,0,0));
 	level.player getrankinfoxpamt();
 	var_02 = 0.5;
 	scripts\sp\maps\europa\europa_util::func_D85C();
@@ -2706,9 +2706,9 @@ func_D087(param_00,param_01) {
 	level.player playerlinktoblend(param_01,"tag_player",var_02,var_02 / 2,var_02 / 2);
 	level.player scripts\engine\utility::delaycall(var_02,::playerlinktodelta,param_01,"tag_player",1,20,20,20,20,1);
 	level.var_46B2.alpha = 0;
-	param_00 scripts/sp/anim::func_1F35(param_01,"fspar_fire");
-	param_00 thread scripts/sp/anim::func_1EEA(param_01,"fspar_idle");
-	function_01BA("");
+	param_00 scripts\sp\anim::func_1F35(param_01,"fspar_fire");
+	param_00 thread scripts\sp\anim::func_1EEA(param_01,"fspar_idle");
+	setmusicstate("");
 }
 
 func_7468(param_00,param_01,param_02) {
@@ -2722,7 +2722,7 @@ func_7468(param_00,param_01,param_02) {
 	level.var_11B30.var_113F2 unlink();
 	level.var_11B30.var_113F2.angles = var_06;
 	var_07 = level.var_11B30.var_113F2.origin + anglestoforward(var_06) * 10000;
-	function_02E0(scripts\engine\utility::getfx("vfx_eu_bfg_beam"),level.var_11B30.var_113F2.origin,var_06,var_07);
+	playfxbetweenpoints(scripts\engine\utility::getfx("vfx_eu_bfg_beam"),level.var_11B30.var_113F2.origin,var_06,var_07);
 }
 
 func_746E(param_00,param_01) {
@@ -2787,7 +2787,7 @@ func_7459(param_00,param_01,param_02) {
 		var_06 = scripts\engine\utility::ter_op(isdefined(param_02),param_02,self.origin + anglestoforward(self.angles) * 1000);
 		var_07 = self gettagorigin(var_03);
 		var_08 = self gettagangles(var_03);
-		function_02E0(level._effect["vfx_heist_mons_steeldragon_beam"],var_07,var_08,var_06);
+		playfxbetweenpoints(level._effect["vfx_heist_mons_steeldragon_beam"],var_07,var_08,var_06);
 		earthquake(0.3,0.1,self.origin,150000);
 		wait(0.1);
 	}
@@ -2817,7 +2817,7 @@ func_21DA() {
 		var_00 = scripts\sp\_hud_util::func_7B4F();
 		var_00.alpha = 1;
 		wait(0.05);
-		function_0042();
+		clearallcorpses();
 		func_11B36();
 		return;
 	}
@@ -2846,28 +2846,28 @@ func_21DA() {
 	var_00 = scripts\sp\_hud_util::func_7B4F();
 	var_00.alpha = 1;
 	wait(0.05);
-	function_0042();
+	clearallcorpses();
 	func_11B36();
 }
 
 func_111B4() {
 	var_00 = scripts\engine\utility::getstruct("door_sound_struct","targetname");
 	var_01 = var_00.origin + (0,0,60);
-	function_01C5("r_mbenable",1);
-	function_01C5("r_mbRadialOverridePosition",var_01);
-	function_01C5("r_mbRadialOverridePositionActive",1);
+	setsaveddvar("r_mbenable",1);
+	setsaveddvar("r_mbRadialOverridePosition",var_01);
+	setsaveddvar("r_mbRadialOverridePositionActive",1);
 	thread scripts\sp\_utility::func_AB9A("r_mbRadialOverrideRadius",0.314878,1);
 	thread scripts\sp\_utility::func_AB9A("r_mbRadialoverridechromaticAberration",0.25,2);
 	thread scripts\sp\_utility::func_AB9A("r_mbradialoverridestrength",0.05,1);
 	scripts\engine\utility::flag_wait("player_holding_on");
-	function_01C5("r_mbRadialOverridePosition",level.var_11B30.var_113F2.origin);
+	setsaveddvar("r_mbRadialOverridePosition",level.var_11B30.var_113F2.origin);
 	earthquake(0.3,1,level.player.origin,300);
 	scripts\engine\utility::flag_wait("decompress_blackout");
-	function_01C5("r_mbenable",0);
-	function_01C5("r_mbRadialoverridechromaticAberration",0);
-	function_01C5("r_mbradialoverridestrength",0);
-	function_01C5("r_mbRadialOverrideRadius",0);
-	function_01C5("r_mbRadialOverridePositionActive",0);
+	setsaveddvar("r_mbenable",0);
+	setsaveddvar("r_mbRadialoverridechromaticAberration",0);
+	setsaveddvar("r_mbradialoverridestrength",0);
+	setsaveddvar("r_mbRadialOverrideRadius",0);
+	setsaveddvar("r_mbRadialOverridePositionActive",0);
 }
 
 func_4F99() {
@@ -2888,7 +2888,7 @@ func_224E() {
 	level.player _meth_82C0("europa_suck_out_grab",1);
 	level.player playsound("scn_end_suck_out_plr_grab_bar");
 	wait(2.8);
-	function_0178("scn_euro_guy_impacts_plr_lr",level.player.origin);
+	playworldsound("scn_euro_guy_impacts_plr_lr",level.player.origin);
 	scripts\engine\utility::flag_wait("decompress_blackout");
 	thread func_224F();
 	level.player playrumbleonentity("damage_heavy");
@@ -2898,7 +2898,7 @@ func_224F() {
 	level.player stoprumble("steady_rumble");
 	level.var_4FB4 stoploopsound();
 	level.player _meth_82C0("europa_suck_out_hit_fade_to_black",0);
-	function_01BA("");
+	setmusicstate("");
 	level.player stopsounds();
 	level.player setclientomnvar("ui_hide_hud",1);
 }
@@ -3021,7 +3021,7 @@ func_4FAC() {
 	var_06 = var_05 / var_04;
 	var_03 moveto(var_01.origin,var_06);
 	var_07 = [level.player,level.var_EBBB,level.var_EBBC];
-	var_07 = scripts\engine\utility::array_combine(var_07,function_0072("axis"));
+	var_07 = scripts\engine\utility::array_combine(var_07,getaiarray("axis"));
 	var_07 = scripts\sp\_utility::func_22B9(var_07);
 	for(;;) {
 		var_07 = scripts\sp\_utility::func_22B9(var_07);
@@ -3096,7 +3096,7 @@ func_4F8E(param_00) {
 	var_03 = scripts\engine\utility::getstruct(var_02.target,"targetname");
 	var_04 = pointonsegmentnearesttopoint(var_02.origin,var_03.origin,var_01.origin);
 	if(param_00.unittype == "soldier") {
-		param_00 thread scripts/sp/anim::func_1ECC(param_00,"decompress");
+		param_00 thread scripts\sp\anim::func_1ECC(param_00,"decompress");
 	}
 
 	var_05 = vectornormalize(var_04 - var_01.origin);
@@ -3122,13 +3122,13 @@ func_4FA7() {
 	}
 
 	var_00 = scripts\sp\maps\europa\europa_util::func_5F32(scripts\engine\utility::getstruct("decompress_anim","targetname"));
-	var_00 scripts/sp/anim::func_1F35(level.var_EBBB,"decompress_intro");
-	var_00 thread scripts/sp/anim::func_1EEA(level.var_EBBB,"decompress_loop");
+	var_00 scripts\sp\anim::func_1F35(level.var_EBBB,"decompress_intro");
+	var_00 thread scripts\sp\anim::func_1EEA(level.var_EBBB,"decompress_loop");
 	var_00 notify("stop_loop");
 }
 
 func_4FA8() {
-	level.var_EBBC scripts/sp/anim::func_1F35(level.var_EBBC,"decompress");
+	level.var_EBBC scripts\sp\anim::func_1F35(level.var_EBBC,"decompress");
 }
 
 func_AB59() {
@@ -3458,13 +3458,13 @@ func_4F9F() {
 	var_00 = 485;
 	var_01 = func_4F9B();
 	level.player _meth_84FE();
-	level.player.var_E505 = scripts/sp/player_rig::get_player_score(1);
+	level.player.var_E505 = scripts\sp\player_rig::get_player_score(1);
 	level.player.var_E505 hide();
 	level.player.var_E505.angles = level.player.angles;
 	var_02 = level.player.var_E505 scripts\sp\_utility::func_7DC1(var_01);
 	var_03 = scripts\engine\utility::getstruct("decompress_anim","targetname");
-	var_04 = function_00CE(var_03.origin,var_03.angles,var_02);
-	var_05 = function_00CD(var_03.origin,var_03.angles,var_02);
+	var_04 = getstartorigin(var_03.origin,var_03.angles,var_02);
+	var_05 = getstartangles(var_03.origin,var_03.angles,var_02);
 	var_06 = var_04;
 	var_05 = vectortoangles(var_06 - level.player.var_E505.origin);
 	thread func_4FA1();
@@ -3490,7 +3490,7 @@ func_4F9F() {
 	level.player.var_E505 delete();
 	thread func_4FA0(var_0A);
 	thread func_224E();
-	var_03 scripts/sp/anim::func_1F2C(var_0B,var_01);
+	var_03 scripts\sp\anim::func_1F2C(var_0B,var_01);
 }
 
 func_4F9B() {
@@ -3567,7 +3567,7 @@ func_4FA1() {
 	var_02 = "decompress_loop";
 	for(;;) {
 		var_00 _meth_82E7(var_02,var_01,1,0.2,1);
-		var_00 thread scripts/sp/anim::func_10CBF(var_00,var_02);
+		var_00 thread scripts\sp\anim::func_10CBF(var_00,var_02);
 		var_00 scripts\anim\shared::donotetracks(var_02);
 	}
 }
@@ -3656,7 +3656,7 @@ func_C95E(param_00,param_01,param_02) {
 }
 
 func_11B36() {
-	var_00 = function_0072("bad_guys");
+	var_00 = getaiarray("bad_guys");
 	scripts\engine\utility::array_call(var_00,::delete);
 }
 
@@ -3731,7 +3731,7 @@ func_59F8(param_00) {
 	}
 
 	var_01 = scripts\sp\_utility::func_7853(param_00);
-	function_0178("scn_europa_fspar_door_open",var_01);
+	playworldsound("scn_europa_fspar_door_open",var_01);
 	foreach(var_04, var_03 in param_00) {
 		var_03 thread func_59B8(var_04);
 		wait(randomfloat(0.1));
@@ -3747,7 +3747,7 @@ func_59F8(param_00) {
 	}
 
 	param_00[0] waittill("movedone");
-	function_0178("scn_europa_fspar_door_stop",var_01);
+	playworldsound("scn_europa_fspar_door_stop",var_01);
 	if(isdefined(param_00[0].var_EE88)) {
 		setumbraportalstate(param_00[0].var_EE88,0);
 	}
@@ -3799,7 +3799,7 @@ func_59EA() {
 			var_00 = "scn_europa_armory_door_open";
 			var_01 = "scn_europa_armory_door_open_dist";
 			var_02 = (34159,-11722,-443);
-			function_0178("scn_europa_armory_door_open_decompress",self.origin + (0,0,60));
+			playworldsound("scn_europa_armory_door_open_decompress",self.origin + (0,0,60));
 			if(isdefined(level.var_11B30)) {
 				level.var_11B30 scripts\engine\utility::delaycall(1.8,::playsound,"scn_europa_armory_door_fspar_reveal");
 			}
@@ -3813,11 +3813,11 @@ func_59EA() {
 	}
 
 	if(isdefined(var_00)) {
-		function_0178(var_00,self.origin + (0,0,60));
+		playworldsound(var_00,self.origin + (0,0,60));
 	}
 
 	if(isdefined(var_01)) {
-		function_0178(var_01,var_02);
+		playworldsound(var_01,var_02);
 	}
 }
 
@@ -3932,7 +3932,7 @@ func_537C(param_00) {
 
 	thread func_FB6C();
 	level.player playsound("scn_euro_armory_quake_lr");
-	function_01A2(param_00.origin,1,1,1,var_02,0,var_02,var_01,15,2,10);
+	screenshake(param_00.origin,1,1,1,var_02,0,var_02,var_01,15,2,10);
 	playrumbleonposition("heavy_2s",param_00.origin);
 }
 
@@ -3946,7 +3946,7 @@ func_FB6C() {
 	var_00[5] = (34366,-10310,-520);
 	var_00[6] = (34256,-13322,-520);
 	var_01 = randomint(7);
-	function_0178("scn_europa_dist_expl",var_00[var_01]);
+	playworldsound("scn_europa_dist_expl",var_00[var_01]);
 }
 
 func_532E(param_00) {

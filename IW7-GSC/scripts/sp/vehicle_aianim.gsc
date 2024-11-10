@@ -1,8 +1,8 @@
-/*************************************************
+/*****************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\sp\vehicle_aianim.gsc
-*************************************************/
+ * Script: scripts\sp\vehicle_aianim.gsc
+*****************************************/
 
 func_8739(param_00,param_01) {
 	if(!isdefined(self)) {
@@ -427,7 +427,7 @@ func_8752(param_00,param_01,param_02,param_03) {
 
 			param_01 = param_01 func_7DC5();
 			param_01 thread func_F642(var_0D.var_131E1,var_0D.var_131E2);
-			level thread scripts/sp/anim::func_10CBF(param_01,"vehicle_anim_flag",undefined,undefined,var_0D.var_131E1);
+			level thread scripts\sp\anim::func_10CBF(param_01,"vehicle_anim_flag",undefined,undefined,var_0D.var_131E1);
 		}
 
 		if(isdefined(var_0D.var_131E4)) {
@@ -439,7 +439,7 @@ func_8752(param_00,param_01,param_02,param_03) {
 		}
 
 		if(isdefined(var_0D.var_131E3)) {
-			function_0178(var_0D.var_131E3,var_08);
+			playworldsound(var_0D.var_131E3,var_08);
 		}
 
 		var_0F = undefined;
@@ -966,7 +966,7 @@ func_8766(param_00,param_01) {
 		}
 
 		if(isdefined(var_03.var_131E8) && !var_08) {
-			function_0178(var_03.var_131E8,var_09);
+			playworldsound(var_03.var_131E8,var_09);
 		}
 
 		var_08 = undefined;
@@ -1224,8 +1224,8 @@ func_8766(param_00,param_01) {
 func_8767(param_00,param_01,param_02,param_03,param_04) {
 	var_05 = self gettagorigin(param_01);
 	var_06 = self gettagangles(param_01);
-	var_07 = function_00CE(var_05,var_06,param_02);
-	var_08 = function_00CD(var_05,var_06,param_02);
+	var_07 = getstartorigin(var_05,var_06,param_02);
+	var_08 = getstartangles(var_05,var_06,param_02);
 	var_09 = getmovedelta(param_02,0,1);
 	var_0A = scripts\engine\utility::spawn_tag_origin();
 	var_0A.origin = var_07;
@@ -1234,7 +1234,7 @@ func_8767(param_00,param_01,param_02,param_03,param_04) {
 	var_0A thread scripts\sp\_utility::func_5184("movedone");
 	var_0C = var_0B;
 	var_0D = scripts\sp\_utility::func_864C(var_0C);
-	var_0E = function_00CE(var_05,var_06,param_04);
+	var_0E = getstartorigin(var_05,var_06,param_04);
 	var_09 = getmovedelta(param_04,0,1);
 	var_0F = var_0E + var_09;
 	var_10 = var_0E[2] - var_0F[2];
@@ -1310,7 +1310,7 @@ func_8750(param_00) {
 		return 1;
 	}
 
-	var_01 = function_00B4(param_00.target,"targetname");
+	var_01 = getnodearray(param_00.target,"targetname");
 	var_02 = scripts\engine\utility::getstructarray(param_00.target,"targetname");
 	if(var_01.size > 0 || var_02.size > 0) {
 		return 0;
@@ -1469,7 +1469,7 @@ func_1FC4(param_00,param_01,param_02) {
 	param_00 _meth_81D0(param_02.origin,param_02);
 	if(isdefined(param_00.var_EECD)) {
 		param_00 notsolid();
-		var_06 = function_00EA(param_00.var_394);
+		var_06 = getweaponmodel(param_00.var_394);
 		var_07 = param_00.var_394;
 		if(isdefined(var_06)) {
 			param_00 detach(var_06,"tag_weapon_right");
@@ -1558,7 +1558,7 @@ func_876B(param_00,param_01,param_02) {
 func_19F9() {
 	self endon("death");
 	self waittill("loaded");
-	scripts/sp/vehicle_paths::setsuit(self);
+	scripts\sp\vehicle_paths::setsuit(self);
 }
 
 func_F554(param_00,param_01) {
@@ -1744,8 +1744,8 @@ func_131E0(param_00,param_01,param_02) {
 	var_05 = undefined;
 	var_06 = self gettagorigin(param_01);
 	var_07 = self gettagangles(param_01);
-	var_04 = function_00CE(var_06,var_07,param_00);
-	var_05 = function_00CD(var_06,var_07,param_00);
+	var_04 = getstartorigin(var_06,var_07,param_00);
+	var_05 = getstartangles(var_06,var_07,param_00);
 	var_03.origin = var_04;
 	var_03.angles = var_05;
 	var_03.var_1321D = param_02;

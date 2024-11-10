@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3126.gsc
-****************************/
+ * Script: 3126.gsc
+************************/
 
 func_98C6(param_00,param_01,param_02,param_03) {
 	if(!isdefined(self.var_E873)) {
@@ -33,7 +33,7 @@ func_1006E() {
 		return 0;
 	}
 
-	if(!scripts/asm/asm_bb::func_298D()) {
+	if(!scripts\asm\asm_bb::func_298D()) {
 		return 0;
 	}
 
@@ -41,7 +41,7 @@ func_1006E() {
 		return 0;
 	}
 
-	if(!scripts/asm/asm_bb::bb_movetyperequested("combat")) {
+	if(!scripts\asm\asm_bb::bb_movetyperequested("combat")) {
 		return 0;
 	}
 
@@ -197,7 +197,7 @@ func_E874(param_00,param_01,param_02,param_03) {
 			self _meth_83CE();
 		}
 
-		var_04 = scripts/asm/asm_mp::asm_getanim(param_00,param_01);
+		var_04 = scripts\asm\asm_mp::asm_getanim(param_00,param_01);
 		self setanimstate(param_01,var_04);
 		wait(0.2);
 	}
@@ -212,7 +212,7 @@ func_FFF5(param_00,param_01,param_02,param_03) {
 		return 0;
 	}
 
-	var_04 = scripts/asm/asm_bb::bb_getrequestedwhizby();
+	var_04 = scripts\asm\asm_bb::bb_getrequestedwhizby();
 	if(!isdefined(var_04)) {
 		return 0;
 	}
@@ -226,7 +226,7 @@ func_FFF5(param_00,param_01,param_02,param_03) {
 
 func_D477(param_00,param_01,param_02,param_03) {
 	self endon(param_01 + "_finished");
-	var_04 = scripts/asm/asm_mp::asm_getanim(param_00,param_01);
+	var_04 = scripts\asm\asm_mp::asm_getanim(param_00,param_01);
 	self setanimstate(param_01,var_04,self.fastcrawlanimscale);
 	scripts\mp\agents\_scriptedagents::func_1384C(param_01,"end",param_01,var_04);
 }

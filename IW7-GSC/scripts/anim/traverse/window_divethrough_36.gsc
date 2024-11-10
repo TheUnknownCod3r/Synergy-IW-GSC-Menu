@@ -1,8 +1,8 @@
-/*******************************************************************
+/***********************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\anim\traverse\window_divethrough_36.gsc
-*******************************************************************/
+ * Script: scripts\anim\traverse\window_divethrough_36.gsc
+***********************************************************/
 
 main() {
 	if(self.type == "dog") {

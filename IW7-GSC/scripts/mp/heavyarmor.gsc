@@ -1,8 +1,8 @@
-/*********************************************
+/*************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\heavyarmor.gsc
-*********************************************/
+ * Script: scripts\mp\heavyarmor.gsc
+*************************************/
 
 addheavyarmor(param_00) {
 	var_01 = self.heavyarmor;
@@ -114,7 +114,7 @@ heavyarmor_getdamagemodifier(param_00,param_01,param_02,param_03,param_04,param_
 		var_0B[var_0B.size] = 1.33;
 	}
 
-	if(function_0107(param_04)) {
+	if(isexplosivedamagemod(param_04)) {
 		var_0B[var_0B.size] = 1.5;
 	}
 

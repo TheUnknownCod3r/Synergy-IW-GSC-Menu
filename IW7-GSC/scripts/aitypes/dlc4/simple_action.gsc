@@ -1,8 +1,8 @@
-/**********************************************************
+/**************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\aitypes\dlc4\simple_action.gsc
-**********************************************************/
+ * Script: scripts\aitypes\dlc4\simple_action.gsc
+**************************************************/
 
 setupsimplebtaction(param_00,param_01,param_02) {
 	if(!isdefined(param_00)) {

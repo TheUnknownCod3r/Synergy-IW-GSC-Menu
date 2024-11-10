@@ -1,8 +1,8 @@
-/****************************************
+/********************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\sp\idles.gsc
-****************************************/
+ * Script: scripts\sp\idles.gsc
+********************************/
 
 func_DEB8(param_00,param_01) {
 	level.var_1DBE[param_00] = param_01;
@@ -100,8 +100,8 @@ func_DC81(param_00) {
 	var_04 = [];
 	var_05 = 0;
 	self notify("ambient_idle_scene_start");
-	thread scripts/sp/anim::func_10CBF(param_00,"single anim");
-	thread scripts/sp/anim::func_1FCA(param_00,"single anim");
+	thread scripts\sp\anim::func_10CBF(param_00,"single anim");
+	thread scripts\sp\anim::func_1FCA(param_00,"single anim");
 	for(;;) {
 		if(var_04.size >= var_02) {
 			var_05 = randomint(var_02);
@@ -127,8 +127,8 @@ func_DC81(param_00) {
 		}
 
 		var_06 = level.var_EC85[param_00.var_1FBB]["idle_anims"][var_05];
-		var_07 = function_00CE(self.origin,self.angles,var_03);
-		var_08 = function_00CD(self.origin,self.angles,var_03);
+		var_07 = getstartorigin(self.origin,self.angles,var_03);
+		var_08 = getstartangles(self.origin,self.angles,var_03);
 		if(isdefined(param_00.var_9B89) || !isai(param_00)) {
 			param_00.origin = var_07;
 			param_00.angles = var_08;
@@ -208,11 +208,11 @@ func_DC84(param_00) {
 	self notify("ambient_idle_scene_start");
 	foreach(var_07 in param_00) {
 		if(!isdefined(var_07.var_1FEC)) {
-			var_07 scripts/sp/anim::func_F64A();
+			var_07 scripts\sp\anim::func_F64A();
 		}
 
-		thread scripts/sp/anim::func_10CBF(var_07,"single anim");
-		thread scripts/sp/anim::func_1FCA(var_07,"single anim");
+		thread scripts\sp\anim::func_10CBF(var_07,"single anim");
+		thread scripts\sp\anim::func_1FCA(var_07,"single anim");
 	}
 
 	for(;;) {
@@ -239,8 +239,8 @@ func_DC84(param_00) {
 		var_0A = undefined;
 		foreach(var_07 in param_00) {
 			var_0A = level.var_EC85[var_07.var_1FBB]["idle_anims"][var_05];
-			var_0C = function_00CE(self.origin,self.angles,var_03);
-			var_0D = function_00CD(self.origin,self.angles,var_03);
+			var_0C = getstartorigin(self.origin,self.angles,var_03);
+			var_0D = getstartangles(self.origin,self.angles,var_03);
 			var_03 = level.var_EC85[var_07.var_1FBB]["idle_base"];
 			if(isdefined(var_07.var_9B89) || !isai(var_07)) {
 				var_07.origin = var_0C;
@@ -319,7 +319,7 @@ func_DC85() {
 
 func_DC88(param_00) {
 	foreach(var_02 in param_00) {
-		if(function_02A6(var_02)) {
+		if(isent(var_02)) {
 			var_02 lib_0A1E::func_2386();
 			var_02 notify("ambient_idle_scene_end");
 		}
@@ -329,7 +329,7 @@ func_DC88(param_00) {
 func_DC86(param_00) {
 	self endon("death");
 	self waittill("ambient_scene_end");
-	if(function_02A6(param_00)) {
+	if(isent(param_00)) {
 		param_00 func_4179();
 	}
 
@@ -340,7 +340,7 @@ func_DC87(param_00) {
 	self endon("death");
 	self waittill("ambient_scene_end");
 	foreach(var_02 in param_00) {
-		if(function_02A6(var_02)) {
+		if(isent(var_02)) {
 			var_02 givescorefortrophyblocks();
 		}
 	}
@@ -356,8 +356,8 @@ func_DC82(param_00) {
 	var_03 = [];
 	var_04 = 0;
 	self notify("ambient_idle_scene_start");
-	thread scripts/sp/anim::func_10CBF(param_00,"single anim");
-	thread scripts/sp/anim::func_1FCA(param_00,"single anim");
+	thread scripts\sp\anim::func_10CBF(param_00,"single anim");
+	thread scripts\sp\anim::func_1FCA(param_00,"single anim");
 	for(;;) {
 		if(var_03.size >= var_01) {
 			var_04 = randomint(var_01);
@@ -379,8 +379,8 @@ func_DC82(param_00) {
 		}
 
 		var_05 = level.var_EC85[param_00.var_1FBB]["idle_anims"][var_04];
-		var_06 = function_00CE(self.origin,self.angles,var_02);
-		var_07 = function_00CD(self.origin,self.angles,var_02);
+		var_06 = getstartorigin(self.origin,self.angles,var_02);
+		var_07 = getstartangles(self.origin,self.angles,var_02);
 		if(isdefined(param_00.var_9B89) || !isai(param_00)) {
 			param_00.origin = var_06;
 			param_00.angles = var_07;
@@ -419,12 +419,12 @@ func_DC83(param_00) {
 	self notify("ambient_idle_scene_start");
 	foreach(var_06 in param_00) {
 		var_07 = level.var_EC85[var_06.var_1FBB]["idle_base"];
-		var_08 = function_00CE(self.origin,self.angles,var_07);
-		var_09 = function_00CD(self.origin,self.angles,var_07);
+		var_08 = getstartorigin(self.origin,self.angles,var_07);
+		var_09 = getstartangles(self.origin,self.angles,var_07);
 		var_06.origin = var_08;
 		var_06.angles = var_09;
-		thread scripts/sp/anim::func_10CBF(var_06,"single anim");
-		thread scripts/sp/anim::func_1FCA(var_06,"single anim");
+		thread scripts\sp\anim::func_10CBF(var_06,"single anim");
+		thread scripts\sp\anim::func_1FCA(var_06,"single anim");
 		var_0A = undefined;
 		if(isdefined(var_06.var_1ED4)) {
 			var_0A = [[var_06.var_1ED4]]();
@@ -458,8 +458,8 @@ func_DC83(param_00) {
 		var_0E = randomintrange(1,4);
 		foreach(var_06 in param_00) {
 			var_07 = level.var_EC85[var_06.var_1FBB]["idle_base"];
-			var_08 = function_00CE(self.origin,self.angles,var_07);
-			var_09 = function_00CD(self.origin,self.angles,var_07);
+			var_08 = getstartorigin(self.origin,self.angles,var_07);
+			var_09 = getstartangles(self.origin,self.angles,var_07);
 			var_06.origin = var_08;
 			var_06.angles = var_09;
 			var_0A = undefined;
@@ -477,8 +477,8 @@ func_DC83(param_00) {
 		foreach(var_06 in param_00) {
 			var_07 = level.var_EC85[var_06.var_1FBB]["idle_base"];
 			var_14 = level.var_EC85[var_06.var_1FBB]["idle_anims"][var_03];
-			var_08 = function_00CE(self.origin,self.angles,var_14);
-			var_09 = function_00CD(self.origin,self.angles,var_14);
+			var_08 = getstartorigin(self.origin,self.angles,var_14);
+			var_09 = getstartangles(self.origin,self.angles,var_14);
 			var_06.origin = var_08;
 			var_06.angles = var_09;
 			var_0A = undefined;
@@ -570,13 +570,13 @@ func_CDD6(param_00,param_01,param_02) {
 	var_05 = undefined;
 	param_00.var_DC89 = 1;
 	for(;;) {
-		scripts/sp/anim::func_1F35(param_00,param_01);
+		scripts\sp\anim::func_1F35(param_00,param_01);
 		if(var_04.size < 1) {
 			var_04 = var_03;
 		}
 
 		var_05 = randomint(var_04.size);
-		scripts/sp/anim::func_1F35(param_00,var_04[var_05]);
+		scripts\sp\anim::func_1F35(param_00,var_04[var_05]);
 		var_03 = scripts\engine\utility::array_add(var_03,var_04[var_05]);
 		var_04 = scripts\engine\utility::array_remove(var_04,var_04[var_05]);
 		scripts\engine\utility::waitframe();

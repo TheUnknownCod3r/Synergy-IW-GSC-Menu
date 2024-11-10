@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2804.gsc
+ * Script: 2804.gsc
 ***************************************/
 
 init() {
@@ -26,7 +26,7 @@ init() {
   var_03 = 1;
 
   for (;;) {
-  var_04 = tablelookupbyrow("mp/supertable.csv", var_03, 0);
+  var_04 = tablelookupbyrow("mp\supertable.csv", var_03, 0);
 
   if (!isdefined(var_04) || var_04 == "")
   break;
@@ -97,7 +97,7 @@ init() {
   var_3++;
   }
 
-  var_06 = tablelookup("mp/superratetable.csv", 0, level.gametype, 1);
+  var_06 = tablelookup("mp\superratetable.csv", 0, level.gametype, 1);
 
   if (isdefined(var_06) && var_06 != "")
   level.func_1125E = float(var_06);
@@ -157,7 +157,7 @@ func_DF0F(var_00, var_01, var_02, var_03, var_04) {
 }
 
 func_DD68(var_00, var_01, var_02) {
-  var_03 = tablelookupbyrow("mp/supertable.csv", var_00, var_01);
+  var_03 = tablelookupbyrow("mp\supertable.csv", var_00, var_01);
 
   if (var_03 == "")
   return undefined;
@@ -856,11 +856,11 @@ func_12CFF() {
 }
 
 func_1308A() {
-  return scripts/mp/supers/super_gravwave::_meth_8541();
+  return scripts\mp\supers\super_gravwave::_meth_8541();
 }
 
 func_6332() {
-  scripts/mp/supers/super_gravwave::_meth_853F();
+  scripts\mp\supers\super_gravwave::_meth_853F();
 }
 
 func_130F6() {
@@ -868,19 +868,19 @@ func_130F6() {
 }
 
 func_1303A() {
-  return scripts/mp/supers/super_antiair::func_14F9();
+  return scripts\mp\supers\super_antiair::func_14F9();
 }
 
 func_6308() {
-  scripts/mp/supers/super_antiair::func_14F7();
+  scripts\mp\supers\super_antiair::func_14F7();
 }
 
 func_130A3() {
-  return scripts/mp/supers/super_megaboost::func_B554();
+  return scripts\mp\supers\super_megaboost::func_B554();
 }
 
 func_6361() {
-  scripts/mp/supers/super_megaboost::func_B552();
+  scripts\mp\supers\super_megaboost::func_B552();
 }
 
 func_F75E() {}

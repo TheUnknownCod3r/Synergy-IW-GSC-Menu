@@ -1,8 +1,8 @@
-/****************************************
+/********************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\sp\names.gsc
-****************************************/
+ * Script: scripts\sp\names.gsc
+********************************/
 
 main() {}
 
@@ -40,7 +40,7 @@ func_F9E6() {
 }
 
 func_113B2(param_00,param_01) {
-	var_02 = tablelookuprownum("sp/names.csv",param_01,"__END__");
+	var_02 = tablelookuprownum("sp\names.csv",param_01,"__END__");
 	var_03 = [];
 	for(var_04 = 0;var_04 < var_02;var_04++) {
 		var_03[var_04] = var_04;
@@ -56,7 +56,7 @@ func_113B2(param_00,param_01) {
 }
 
 func_1719(param_00,param_01,param_02) {
-	var_03 = tablelookupbyrow("sp/names.csv",param_01,param_02);
+	var_03 = tablelookupbyrow("sp\names.csv",param_01,param_02);
 	func_1718(param_00,var_03);
 }
 
@@ -80,8 +80,8 @@ func_E05B(param_00,param_01) {
 
 func_9725() {
 	var_00 = [];
-	var_01 = function_00C8();
-	var_02 = function_0072();
+	var_01 = getspawnerarray();
+	var_02 = getaiarray();
 	foreach(var_04 in var_01) {
 		if(isdefined(var_04.var_EDB8) && var_04.var_EDB8 != "none") {
 			var_05 = func_C096(var_04.var_EDB8);

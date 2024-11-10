@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2753.gsc
+ * Script: 2753.gsc
 ***************************************/
 
 setparent(var_00) {

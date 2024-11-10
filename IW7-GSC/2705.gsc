@@ -1,11 +1,11 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2705.gsc
+ * Script: 2705.gsc
 ***************************************/
 
 init() {
   level.calloutglobals = spawnstruct();
-  level.calloutglobals.callouttable = "mp/map_callouts/" + level.mapname + "_callouts.csv";
+  level.calloutglobals.callouttable = "mp\map_callouts\" + level.mapname + "_callouts.csv";
   createcalloutareaidmap();
   level.calloutglobals.areatriggers = getentarray("callout_area", "targetname");
 

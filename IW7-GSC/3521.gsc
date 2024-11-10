@@ -1,10 +1,10 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\3521.gsc
+ * Script: 3521.gsc
 ***************************************/
 
 init() {
-  level._effect["spider_explode"] = loadfx("vfx/core/expl/grenadeexp_default");
+  level._effect["spider_explode"] = loadfx("vfx\core\expl\grenadeexp_default");
   scripts\mp\killstreaks\killstreaks::registerkillstreak("spiderbot", ::func_1288A);
 }
 

@@ -1,8 +1,8 @@
-/*****************************************
+/*********************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\damage.gsc
-*****************************************/
+ * Script: scripts\mp\damage.gsc
+*********************************/
 
 callback_playerdamage_internal(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08,param_09,param_0A,param_0B,param_0C) {
 	if(isdefined(param_01) && scripts\mp\utility::istrue(level.jittermodcheck) && level.jittermodcheck == 2 && scripts\mp\utility::istrue(param_01.ismodded)) {
@@ -87,7 +87,7 @@ callback_playerdamage_internal(param_00,param_01,param_02,param_03,param_04,para
 			}
 
 			if(param_06 == "portal_grenade_mp" && param_03 != 400) {
-				param_02 thread scripts/mp/equipment/portal_grenade::func_D68E(param_00,param_01);
+				param_02 thread scripts\mp\equipment\portal_grenade::func_D68E(param_00,param_01);
 			}
 		}
 	}
@@ -116,7 +116,7 @@ callback_playerdamage_internal(param_00,param_01,param_02,param_03,param_04,para
 
 	if(scripts\mp\utility::func_9EF0(param_02)) {
 		param_03 = param_02 scripts\mp\killstreaks\_utility::getmodifiedantikillstreakdamage(param_01,param_06,param_05,param_03,param_02.maxhealth,3,4,6,0);
-		if(isdefined(param_01) && isplayer(param_01) && scripts/mp/equipment/phase_shift::isentityphaseshifted(param_01)) {
+		if(isdefined(param_01) && isplayer(param_01) && scripts\mp\equipment\phase_shift::isentityphaseshifted(param_01)) {
 			param_03 = 0;
 		}
 	}
@@ -229,7 +229,7 @@ callback_playerdamage_internal(param_00,param_01,param_02,param_03,param_04,para
 			}
 			else
 			{
-				self [[scripts/mp/agents/agent_utility::agentfunc("on_damaged_finished")]](param_00,param_01,param_03,param_04,param_05,param_06,param_07,param_08,param_09,param_0A);
+				self [[scripts\mp\agents\agent_utility::agentfunc("on_damaged_finished")]](param_00,param_01,param_03,param_04,param_05,param_06,param_07,param_08,param_09,param_0A);
 				if(self.var_165A == "remote_c8") {
 					if(isdefined(self.triggerportableradarping) && isdefined(self.triggerportableradarping.var_4BE1) && self.triggerportableradarping.var_4BE1 == "MANUAL") {
 						self setclientomnvar("ui_remote_c8_health",self.health / self.maxhealth);
@@ -239,7 +239,7 @@ callback_playerdamage_internal(param_00,param_01,param_02,param_03,param_04,para
 		}
 		else
 		{
-			self [[scripts/mp/agents/agent_utility::agentfunc("on_damaged_finished")]](param_00,param_01,param_03,param_04,param_05,param_06,param_07,param_08,param_09,param_0A);
+			self [[scripts\mp\agents\agent_utility::agentfunc("on_damaged_finished")]](param_00,param_01,param_03,param_04,param_05,param_06,param_07,param_08,param_09,param_0A);
 		}
 	}
 
@@ -322,7 +322,7 @@ suppressdamageflash(param_00,param_01,param_02,param_03,param_04) {
 	if(isdefined(param_02)) {
 		switch(param_02) {
 			case "super_trophy_mp":
-				return scripts/mp/supers/super_supertrophy::func_11286(param_00,param_01,param_02,param_03,param_04);
+				return scripts\mp\supers\super_supertrophy::func_11286(param_00,param_01,param_02,param_03,param_04);
 		}
 	}
 
@@ -449,9 +449,9 @@ func_3696(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_0
 			param_02 = 0;
 		}
 	}
-	else if(function_0107(param_03)) {
+	else if(isexplosivedamagemod(param_03)) {
 		param_02 = scripts\mp\concussiongrenade::func_B92C(param_02,param_01,param_00,param_08,param_04);
-		param_02 = scripts/mp/equipment/blackout_grenade::func_B92C(param_02,param_01,param_00,param_08,param_04);
+		param_02 = scripts\mp\equipment\blackout_grenade::func_B92C(param_02,param_01,param_00,param_08,param_04);
 		param_02 = scripts\mp\empgrenade::func_B92C(param_02,param_01,param_00,param_08,param_04);
 		param_02 = scripts\mp\weapons::glprox_modifieddamage(param_02,param_01,param_00,param_08,param_04,param_03,param_05);
 		if(param_04 == "proximity_explosive_mp" && isdefined(param_08.origin)) {
@@ -478,14 +478,14 @@ func_3696(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_0
 			var_0B = var_0B + int(param_02 * level.var_1177E);
 		}
 
-		if(isplayer(param_01) && function_0243(param_04) && param_01 scripts\mp\utility::_hasperk("specialty_explosivedamage") && param_00 scripts\mp\utility::_hasperk("specialty_blastshield")) {
+		if(isplayer(param_01) && weaponinheritsperks(param_04) && param_01 scripts\mp\utility::_hasperk("specialty_explosivedamage") && param_00 scripts\mp\utility::_hasperk("specialty_blastshield")) {
 		}
-		else if(isplayer(param_01) && function_0243(param_04) && !scripts\mp\utility::iskillstreakweapon(param_04) && param_01 scripts\mp\utility::_hasperk("specialty_explosivedamage")) {
+		else if(isplayer(param_01) && weaponinheritsperks(param_04) && !scripts\mp\utility::iskillstreakweapon(param_04) && param_01 scripts\mp\utility::_hasperk("specialty_explosivedamage")) {
 			var_0B = var_0B + param_02 * level.var_69FE;
 		}
 		else if(param_00 scripts\mp\utility::_hasperk("specialty_blastshield") && !scripts\mp\utility::func_13C9A(param_04,param_07) && !scripts\mp\utility::func_9F7E(param_00,param_08,param_04,param_03) && !param_03 == "MOD_PROJECTILE") {
 			var_17 = scripts\mp\weapons::glprox_modifiedblastshieldconst(level.var_2B68,param_04);
-			var_17 = scripts/mp/equipment/ground_pound::groundpound_modifiedblastshieldconst(var_17,param_04);
+			var_17 = scripts\mp\equipment\ground_pound::groundpound_modifiedblastshieldconst(var_17,param_04);
 			var_18 = int(param_02 * var_17);
 			if(param_01 != param_00) {
 				var_18 = clamp(var_18,0,level.var_2B67);
@@ -512,7 +512,7 @@ func_3696(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_0
 	else if(param_03 == "MOD_FALLING") {
 		if(isdefined(param_00.var_115FC) && param_00.var_115FC) {
 			param_02 = param_00.health + 100;
-			param_01 thread scripts/mp/equipment/portal_grenade::func_468B(param_00,param_00.origin);
+			param_01 thread scripts\mp\equipment\portal_grenade::func_468B(param_00,param_00.origin);
 			param_00.var_115FC = 0;
 			param_00.var_115FD = undefined;
 			param_00.var_115FE = undefined;
@@ -520,7 +520,7 @@ func_3696(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_0
 		else if(param_00 scripts\mp\utility::isjuggernaut()) {
 			param_02 = param_02 * var_0C;
 		}
-		else if(scripts/mp/equipment/ground_pound::func_8651(param_00)) {
+		else if(scripts\mp\equipment\ground_pound::func_8651(param_00)) {
 			param_02 = 0;
 		}
 		else
@@ -540,10 +540,10 @@ func_3696(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_0
 			var_0B = 0;
 		}
 		else if(param_04 == "iw7_reaperblade_mp") {
-			param_00 thread scripts/mp/supers/super_reaper::func_A668();
+			param_00 thread scripts\mp\supers\super_reaper::func_A668();
 		}
 		else if(isdefined(param_00 scripts\mp\supers::getcurrentsuperref()) && param_00 scripts\mp\supers::getcurrentsuperref() == "super_reaper" && param_00 scripts\mp\supers::issuperinuse()) {
-			param_02 = int(min(param_02,scripts/mp/supers/super_reaper::func_93D9()));
+			param_02 = int(min(param_02,scripts\mp\supers\super_reaper::func_93D9()));
 		}
 		else if(scripts\mp\utility::func_9E7D(param_08,param_00,param_04,param_03)) {
 			param_02 = param_00.health;
@@ -626,10 +626,10 @@ func_3696(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_0
 		}
 	}
 
-	param_02 = scripts/mp/equipment/charge_mode::chargemode_modifieddamage(param_01,param_00,param_04,param_05,param_02);
-	param_02 = scripts/mp/equipment/exploding_drone::explodingdrone_modifieddamage(param_01,param_00,param_04,param_08,param_02);
-	param_02 = scripts/mp/supers/super_supertrophy::func_11280(param_01,param_00,param_04,param_02);
-	param_02 = scripts/mp/equipment/ground_pound::func_8653(param_01,param_00,param_04,param_08,param_02);
+	param_02 = scripts\mp\equipment\charge_mode::chargemode_modifieddamage(param_01,param_00,param_04,param_05,param_02);
+	param_02 = scripts\mp\equipment\exploding_drone::explodingdrone_modifieddamage(param_01,param_00,param_04,param_08,param_02);
+	param_02 = scripts\mp\supers\super_supertrophy::func_11280(param_01,param_00,param_04,param_02);
+	param_02 = scripts\mp\equipment\ground_pound::func_8653(param_01,param_00,param_04,param_08,param_02);
 	param_02 = scripts\mp\killstreaks\_venom::venommodifieddamage(param_01,param_00,param_04,param_08,param_02);
 	var_1B = scripts\mp\playertrophy_system::playertrophy_modifieddamage(param_01,param_00,param_04,param_08,param_02);
 	var_1B = scripts\mp\trophy_system::trophy_modifieddamage(param_01,param_00,param_04,param_02,var_0B);
@@ -983,7 +983,7 @@ handleriotshieldhits(param_00,param_01,param_02,param_03,param_04,param_05,param
 					}
 				}
 			}
-			else if((isdefined(param_05) && param_05 == "destructible_car" || scripts\mp\utility::iskillstreakweapon(param_05)) || function_0107(param_04) || param_04 == "MOD_PROJECTILE") {
+			else if((isdefined(param_05) && param_05 == "destructible_car" || scripts\mp\utility::iskillstreakweapon(param_05)) || isexplosivedamagemod(param_04) || param_04 == "MOD_PROJECTILE") {
 				param_01.var_FC96 = param_01.var_FC96 + param_03;
 				if(func_9D68(var_0A,param_01) && !param_01 scripts\mp\utility::_hasperk("specialty_blastshield")) {
 					return param_03 * 3;
@@ -1164,12 +1164,12 @@ filterdamage(param_00,param_01,param_02,param_03,param_04,param_05,param_06) {
 		return "ffa suicide";
 	}
 
-	if(scripts/mp/equipment/phase_shift::isentityphaseshifted(param_02)) {
+	if(scripts\mp\equipment\phase_shift::isentityphaseshifted(param_02)) {
 		if(!isdefined(param_00)) {
 			return "outOfPhase";
 		}
 
-		if(!scripts/mp/equipment/phase_shift::isentityphaseshifted(param_00)) {
+		if(!scripts\mp\equipment\phase_shift::isentityphaseshifted(param_00)) {
 			if(!isdefined(param_00.classname) || param_00.classname != "trigger_hurt") {
 				return "outOfPhase";
 			}
@@ -1180,7 +1180,7 @@ filterdamage(param_00,param_01,param_02,param_03,param_04,param_05,param_06) {
 		return;
 	}
 
-	if(isdefined(param_00) && !scripts/mp/equipment/phase_shift::areentitiesinphase(param_00,param_02)) {
+	if(isdefined(param_00) && !scripts\mp\equipment\phase_shift::areentitiesinphase(param_00,param_02)) {
 		return "outOfPhase";
 	}
 }
@@ -1312,13 +1312,13 @@ handledamagefeedback(param_00,param_01,param_02,param_03,param_04,param_05,param
 		else if(param_07 & level.idflags_stun) {
 			var_0C = "stun";
 		}
-		else if(function_0107(param_04) && isdefined(param_02.var_1177D) && param_02.var_1177D) {
+		else if(isexplosivedamagemod(param_04) && isdefined(param_02.var_1177D) && param_02.var_1177D) {
 			var_0C = "thermobaric_debuff";
 		}
 		else if(scripts\mp\utility::func_9F93(param_05,param_04) && param_02 scripts\mp\utility::_hasperk("specialty_stun_resistance")) {
 			var_0C = "hittacresist";
 		}
-		else if(function_0107(param_04) && param_02 scripts\mp\utility::_hasperk("specialty_blastshield") && !scripts\mp\utility::func_13C9A(param_05,param_06) && !scripts\mp\utility::func_9F7E(param_02,param_00,param_05,param_04)) {
+		else if(isexplosivedamagemod(param_04) && param_02 scripts\mp\utility::_hasperk("specialty_blastshield") && !scripts\mp\utility::func_13C9A(param_05,param_06) && !scripts\mp\utility::func_9F7E(param_02,param_00,param_05,param_04)) {
 			var_0C = "hitblastshield";
 		}
 		else if(param_02 scripts\mp\utility::_hasperk("specialty_combathigh")) {
@@ -1613,7 +1613,7 @@ playerkilled_internal(param_00,param_01,param_02,param_03,param_04,param_05,para
 		}
 	}
 
-	scripts/mp/equipment/wrist_rocket::wristrocketcooksuicideexplodecheck(param_00,param_01,param_02,param_05,param_06);
+	scripts\mp\equipment\wrist_rocket::wristrocketcooksuicideexplodecheck(param_00,param_01,param_02,param_05,param_06);
 	if(scripts\mp\utility::isheadshot(param_06,param_08,param_05,param_01)) {
 		param_05 = "MOD_HEAD_SHOT";
 	}
@@ -1905,7 +1905,7 @@ playerkilled_internal(param_00,param_01,param_02,param_03,param_04,param_05,para
 		var_2E = param_01 _meth_8519(param_06);
 		if(isdefined(var_2D) && var_2D == "iw7_rvn" && scripts\mp\utility::istrue(var_2E) && param_05 == "MOD_MELEE") {
 			param_0A = param_02 _meth_8231(param_01,"MOD_EXPLOSIVE",param_06,param_08,param_07);
-			var_2F = function_02C4(param_06);
+			var_2F = getweaponvariantindex(param_06);
 			if(!isdefined(var_2F) || var_2F != 3 && var_2F != 35) {
 				playsoundatpos(param_02.origin,"melee_user2_human_default_fatal_npc");
 			}
@@ -2240,7 +2240,7 @@ handlesuicidedeath(param_00,param_01) {
 handlefriendlyfiredeath(param_00) {
 	param_00 thread scripts\mp\rank::scoreeventpopup("teamkill");
 	param_00.pers["teamkills"] = param_00.pers["teamkills"] + 1;
-	param_00.var_115D5++;
+	param_00.teamkillsthisround++;
 	if(scripts\mp\tweakables::gettweakablevalue("team","teamkillpointloss")) {
 		var_01 = scripts\mp\rank::getscoreinfovalue("kill");
 		scripts\mp\gamescore::_setplayerscore(param_00,scripts\mp\gamescore::_getplayerscore(param_00) - var_01);
@@ -2488,7 +2488,7 @@ func_9EFE(param_00) {
 		return 0;
 	}
 
-	if(function_0244(param_00) == "primary" || function_0244(param_00) == "altmode") {
+	if(weaponinventorytype(param_00) == "primary" || weaponinventorytype(param_00) == "altmode") {
 		return 1;
 	}
 
@@ -2668,7 +2668,7 @@ hitlocdebug(param_00,param_01,param_02,param_03,param_04) {
 	param_00.damageinfo[0].bp = param_04 & level.idflags_penetration;
 	param_00.damageinfo[0].jugg = param_01 scripts\mp\utility::isjuggernaut();
 	if(isdefined(param_00.damageinfovictim) && param_00.damageinfovictim != param_01) {
-		param_00.var_4D54++;
+		param_00.damageinfocolorindex++;
 		if(param_00.damageinfocolorindex == var_05.size) {
 			param_00.damageinfocolorindex = 0;
 		}
@@ -2700,7 +2700,7 @@ giverecentshieldxp() {
 	self endon("disconnect");
 	self notify("giveRecentShieldXP");
 	self endon("giveRecentShieldXP");
-	self.var_DDCC++;
+	self.recentshieldxp++;
 	wait(20);
 	self.recentshieldxp = 0;
 }
@@ -2740,7 +2740,7 @@ addattacker(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param
 	}
 	else
 	{
-		param_00.attackerdata[param_01.guid].var_9036++;
+		param_00.attackerdata[param_01.guid].hits++;
 	}
 
 	if(scripts\mp\utility::iscacprimaryweapon(param_03) && !scripts\mp\utility::iscacsecondaryweapon(param_03)) {
@@ -3724,7 +3724,7 @@ monitordamage(param_00,param_01,param_02,param_03,param_04,param_05,param_06) {
 	for(var_07 = 1;var_07;var_07 = monitordamageoneshot(var_08,var_09,var_0A,var_0B,var_0C,var_0D,var_0E,var_0F,var_10,var_11,param_01,param_02,param_03,param_04)) {
 		self waittill("damage",var_08,var_09,var_0A,var_0B,var_0C,var_0D,var_0E,var_0F,var_10,var_11,var_12,var_13,var_14,var_15);
 		var_11 = scripts\mp\utility::func_13CA1(var_11,var_15);
-		if(scripts/mp/equipment/phase_shift::isentityphaseshifted(var_09)) {
+		if(scripts\mp\equipment\phase_shift::isentityphaseshifted(var_09)) {
 			continue;
 		}
 
@@ -3762,7 +3762,7 @@ monitordamageoneshot(param_00,param_01,param_02,param_03,param_04,param_05,param
 		return 0;
 	}
 
-	if(scripts/mp/equipment/phase_shift::isentityphaseshifted(param_01)) {
+	if(scripts\mp\equipment\phase_shift::isentityphaseshifted(param_01)) {
 		return 0;
 	}
 
@@ -3883,7 +3883,7 @@ handlemissiledamage(param_00,param_01,param_02) {
 }
 
 handlegrenadedamage(param_00,param_01,param_02) {
-	if(function_0107(param_01)) {
+	if(isexplosivedamagemod(param_01)) {
 		switch(param_00) {
 			case "iw6_rgm_mp":
 			case "proximity_explosive_mp":
@@ -4154,7 +4154,7 @@ updatecombatrecordkillstats(param_00,param_01,param_02,param_03) {
 			{
 				var_06 = scripts\mp\missions::func_7F48(param_03);
 				if(isdefined(var_06)) {
-					if(function_02D9("mp","LethalScorestreakStatItems",var_06)) {
+					if(isenumvaluevalid("mp","LethalScorestreakStatItems",var_06)) {
 						param_00 combatrecordkillstreakstat(var_06);
 					}
 				}
@@ -4281,7 +4281,7 @@ clearcorpsetablefuncs() {
 enqueueweapononkillcorpsetablefuncs(param_00,param_01,param_02,param_03,param_04) {
 	if(scripts\mp\weapons::isprimaryweapon(param_03)) {
 		var_05 = scripts\mp\utility::getweaponrootname(param_03);
-		var_06 = function_02C4(param_03);
+		var_06 = getweaponvariantindex(param_03);
 		var_07 = param_00 _meth_8519(param_03);
 		if(var_05 == "iw7_rvn" && scripts\mp\utility::istrue(var_07) && param_04 == "MOD_MELEE") {
 			param_01 thread enqueuecorpsetablefunc("passive_melee_cone_expl",::scripts\mp\perks\_weaponpassives::meleeconeexplodevictimcorpsefx);

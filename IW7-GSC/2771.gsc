@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2771.gsc
+ * Script: 2771.gsc
 ***************************************/
 
 init() {
@@ -38,7 +38,7 @@ onroundended() {
 getweaponweight(var_00) {
   for (var_01 = 0; var_01 < 3; var_1++) {
   var_02 = self getrankedplayerdata("mp", "weeklyChallengeId", var_01);
-  var_03 = tablelookupbyrow("mp/weeklyChallengesTable.csv", var_02, 0);
+  var_03 = tablelookupbyrow("mp\weeklyChallengesTable.csv", var_02, 0);
 
   if (var_03 == var_00)
   return "ch_weekly_" + var_01;
@@ -50,7 +50,7 @@ getweaponweight(var_00) {
 func_7E57(var_00) {
   for (var_01 = 0; var_01 < 3; var_1++) {
   var_02 = self getrankedplayerdata("mp", "dailyChallengeId", var_01);
-  var_03 = tablelookupbyrow("mp/dailyChallengesTable.csv", var_02, 0);
+  var_03 = tablelookupbyrow("mp\dailyChallengesTable.csv", var_02, 0);
 
   if (var_03 == var_00)
   return "ch_daily_" + var_01;
@@ -105,9 +105,9 @@ func_3BFA(var_00, var_01) {
   if (level.func_3C2C[var_00]["type"] == 0)
   return func_B029(var_00, var_01);
   else if (level.func_3C2C[var_00]["type"] == 1)
-  return int(tablelookup("mp/dailyChallengesTable.csv", 0, var_00, 9 + var_01 * 3));
+  return int(tablelookup("mp\dailyChallengesTable.csv", 0, var_00, 9 + var_01 * 3));
   else if (level.func_3C2C[var_00]["type"] == 2)
-  return int(tablelookup("mp/weeklyChallengesTable.csv", 0, var_00, 9 + var_01 * 3));
+  return int(tablelookup("mp\weeklyChallengesTable.csv", 0, var_00, 9 + var_01 * 3));
 }
 
 showchallengesplash(var_00, var_01) {
@@ -2677,7 +2677,7 @@ playerkilled(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var
   var_9.func_13375 = scripts\mp\weapons::isstunnedorblinded();
   var_9.func_13380 = self getstance();
   var_9.func_13376 = self.debuffedbyplayers;
-  var_9.func_13384 = scripts/mp/killstreaks/utility::func_9FB9(self.team);
+  var_9.func_13384 = scripts\mp\killstreaks\utility::func_9FB9(self.team);
   var_9.func_13385 = self.func_EB6C;
   var_9.func_1337D = func_66B8("specialty_tracker");
   var_9.func_1337B = func_66B8("specialty_sixth_sense");
@@ -2736,7 +2736,7 @@ killstreakkilled(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07,
   if (var_4.killsthislife.size > 0)
   var_04 func_D9B8();
 
-  if (scripts/mp/killstreaks/utility::func_9D28(var_00)) {
+  if (scripts\mp\killstreaks\utility::func_9D28(var_00)) {
   if (var_04 func_66B8("specialty_blindeye"))
   var_04 func_D991("ch_perk_kills_blindeye");
   }
@@ -3371,11 +3371,11 @@ func_12E71() {
 }
 
 func_7E20(var_00) {
-  return tablelookup("mp/allChallengesTable.csv", 0, var_00, 6);
+  return tablelookup("mp\allChallengesTable.csv", 0, var_00, 6);
 }
 
 func_7E21(var_00) {
-  var_01 = tablelookup("mp/allChallengesTable.csv", 0, var_00, 7);
+  var_01 = tablelookup("mp\allChallengesTable.csv", 0, var_00, 7);
 
   if (isdefined(var_01) && var_01 == "")
   return undefined;
@@ -3384,7 +3384,7 @@ func_7E21(var_00) {
 }
 
 func_B029(var_00, var_01) {
-  return int(tablelookup("mp/allChallengesTable.csv", 0, var_00, 10 + var_01 * 3));
+  return int(tablelookup("mp\allChallengesTable.csv", 0, var_00, 10 + var_01 * 3));
 }
 
 func_9F27(var_00) {
@@ -3578,7 +3578,7 @@ validatemasterchallenges() {
 func_31D7() {
   level.func_3C2C = [];
   var_00 = 0;
-  var_00 = var_00 + func_31D8("mp/allChallengesTable.csv", 0);
+  var_00 = var_00 + func_31D8("mp\allChallengesTable.csv", 0);
 }
 
 func_BA08() {

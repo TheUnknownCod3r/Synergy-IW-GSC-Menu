@@ -1,18 +1,18 @@
-/*****************************************************
+/*********************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\killstreaks\_venom.gsc
-*****************************************************/
+ * Script: scripts\mp\killstreaks\_venom.gsc
+*********************************************/
 
 init() {
 	scripts\mp\killstreaks\_killstreaks::registerkillstreak("venom",::func_1288B,undefined,undefined,undefined,::func_13C17);
 	var_00 = ["passive_increased_debuff","passive_decreased_damage","passive_increased_speed","passive_decreased_duration","passive_quiet_vehicle","passive_decreased_speed","passive_heavy","passive_increased_frost","passive_speed_heavy","passive_stealth_speed"];
-	scripts\mp\_killstreak_loot::func_DF07("venom",var_00);
-	level._effect["venom_gas"] = loadfx("vfx/iw7/_requests/mp/vfx_venom_gas_cloud");
-	level._effect["venom_trail"] = loadfx("vfx/iw7/_requests/mp/vfx_venom_gas_trail");
-	level._effect["venom_eyeglow"] = loadfx("vfx/iw7/_requests/mp/vfx_venom_glint");
-	level._effect["venom_kamikaze_boost"] = loadfx("vfx/iw7/_requests/mp/vfx_venom_kamikaze_boost");
-	level._effect["venom_kamikaze_trail"] = loadfx("vfx/iw7/_requests/mp/vfx_venom_kamikaze_trail");
+	scripts\mp\killstreak_loot::func_DF07("venom",var_00);
+	level._effect["venom_gas"] = loadfx("vfx\iw7\_requests\mp\vfx_venom_gas_cloud");
+	level._effect["venom_trail"] = loadfx("vfx\iw7\_requests\mp\vfx_venom_gas_trail");
+	level._effect["venom_eyeglow"] = loadfx("vfx\iw7\_requests\mp\vfx_venom_glint");
+	level._effect["venom_kamikaze_boost"] = loadfx("vfx\iw7\_requests\mp\vfx_venom_kamikaze_boost");
+	level._effect["venom_kamikaze_trail"] = loadfx("vfx\iw7\_requests\mp\vfx_venom_kamikaze_trail");
 	level.venoms = 0;
 }
 
@@ -24,8 +24,8 @@ func_13C17(param_00) {
 		}
 	}
 
-	if(scripts\mp\_utility::istrue(var_01)) {
-		scripts\mp\_hud_message::showerrormessage("KILLSTREAKS_VENOM_MAX");
+	if(scripts\mp\utility::istrue(var_01)) {
+		scripts\mp\hud_message::showerrormessage("KILLSTREAKS_VENOM_MAX");
 		return 0;
 	}
 
@@ -40,7 +40,7 @@ func_1288B(param_00) {
 
 	var_02 = func_6C9B(80,20,10);
 	if(!isdefined(var_02)) {
-		scripts\mp\_hud_message::showerrormessage("KILLSTREAKS_NOT_ENOUGH_SPACE");
+		scripts\mp\hud_message::showerrormessage("KILLSTREAKS_NOT_ENOUGH_SPACE");
 		thread scripts\mp\killstreaks\_killstreaks::func_11086();
 		return 0;
 	}
@@ -52,7 +52,7 @@ func_1288B(param_00) {
 	var_05 = 10;
 	var_06 = "veh_venom_mp";
 	var_07 = "used_venom";
-	var_08 = scripts\mp\_killstreak_loot::getrarityforlootitem(param_00.variantid);
+	var_08 = scripts\mp\killstreak_loot::getrarityforlootitem(param_00.variantid);
 	if(var_08 != "") {
 		var_03 = var_03 + "_" + var_08;
 		var_07 = var_07 + "_" + var_08;
@@ -121,7 +121,7 @@ func_1288B(param_00) {
 	var_09 thread func_13279();
 	var_09 thread func_1327A();
 	var_0A = var_09.var_AC75;
-	if(scripts\mp\_utility::isanymlgmatch()) {
+	if(scripts\mp\utility::isanymlgmatch()) {
 		var_0A = int(var_0A / 2);
 	}
 
@@ -129,14 +129,14 @@ func_1288B(param_00) {
 	var_09 thread func_13283();
 	var_09 thread func_1327C();
 	var_09 thread venom_watchempdamage();
-	scripts\mp\_matchdata::logkillstreakevent(param_00.streakname,var_09.origin);
+	scripts\mp\matchdata::logkillstreakevent(param_00.streakname,var_09.origin);
 	if(getdvarint("camera_thirdPerson")) {
-		scripts\mp\_utility::setthirdpersondof(0);
+		scripts\mp\utility::setthirdpersondof(0);
 	}
 
 	self.restoreangles = self.angles;
 	thread func_5130(var_09,var_0A);
-	level thread scripts\mp\_utility::teamplayercardsplash(var_07,self);
+	level thread scripts\mp\utility::teamplayercardsplash(var_07,self);
 	return 1;
 }
 
@@ -144,7 +144,7 @@ func_5130(param_00,param_01) {
 	self endon("disconnect");
 	param_00 endon("venom_end");
 	level endon("game_ended");
-	scripts\mp\_hostmigration::waitlongdurationwithhostmigrationpause(0.1);
+	scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(0.1);
 	self setclientomnvar("ui_venom_controls",1);
 	self setclientomnvar("ui_killstreak_countdown",gettime() + int(param_01 * 1000));
 	self setclientomnvar("ui_killstreak_health",param_00.var_EDD7 / 10);
@@ -184,7 +184,7 @@ func_13285() {
 	level endon("game_ended");
 	for(;;) {
 		self waittill("spaceship_thrusting",var_01);
-		if(scripts\mp\_utility::istrue(var_01)) {
+		if(scripts\mp\utility::istrue(var_01)) {
 			self setscriptablepartstate("center_disc","thrust",0);
 			continue;
 		}
@@ -205,7 +205,7 @@ func_1327E() {
 	level endon("game_ended");
 	for(;;) {
 		self waittill("spaceship_juking",var_01,var_02);
-		if(scripts\mp\_utility::istrue(var_02)) {
+		if(scripts\mp\utility::istrue(var_02)) {
 			self setscriptablepartstate("side_discs","thrust",0);
 			continue;
 		}
@@ -242,12 +242,12 @@ func_1327B() {
 	var_00 endon("disconnect");
 	self endon("venom_end");
 	level endon("game_ended");
-	scripts\mp\_hostmigration::waitlongdurationwithhostmigrationpause(0.5);
+	scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(0.5);
 	for(;;) {
 		if(var_00 attackbuttonpressed()) {
 			var_01 = distancesquared(self.spawnpos,self.origin);
 			if(var_01 >= 5760000) {
-				var_00 scripts\mp\_missions::func_D991("ch_venom_distance");
+				var_00 scripts\mp\missions::func_D991("ch_venom_distance");
 			}
 
 			self notify("venom_end",self.origin);
@@ -271,7 +271,7 @@ func_13279() {
 	level endon("game_ended");
 	for(;;) {
 		self waittill("damage",var_01,var_02,var_03,var_04,var_05,var_06,var_07,var_08,var_09,var_0A,var_0B,var_0C,var_0D,var_0E);
-		var_0A = scripts\mp\_utility::func_13CA1(var_0A,var_0E);
+		var_0A = scripts\mp\utility::func_13CA1(var_0A,var_0E);
 		if(isdefined(var_02) && var_02.classname != "trigger_hurt") {
 			if(isdefined(var_02.triggerportableradarping)) {
 				var_02 = var_02.triggerportableradarping;
@@ -282,7 +282,7 @@ func_13279() {
 			}
 		}
 
-		if(scripts/mp/equipment/phase_shift::isentityphaseshifted(var_02)) {
+		if(scripts\mp\equipment\phase_shift::isentityphaseshifted(var_02)) {
 			continue;
 		}
 
@@ -299,21 +299,21 @@ func_13279() {
 		if(isplayer(var_02)) {
 			scripts\mp\killstreaks\_killstreaks::killstreakhit(var_02,var_0A,self,var_05);
 			if(isdefined(var_0A) && var_0A == "concussion_grenade_mp") {
-				if(scripts\mp\_utility::istrue(scripts\mp\_utility::playersareenemies(self.triggerportableradarping,var_02))) {
-					var_02 scripts\mp\_missions::func_D991("ch_tactical_emp_eqp");
+				if(scripts\mp\utility::istrue(scripts\mp\utility::playersareenemies(self.triggerportableradarping,var_02))) {
+					var_02 scripts\mp\missions::func_D991("ch_tactical_emp_eqp");
 				}
 			}
 
-			var_02 scripts\mp\_damagefeedback::updatedamagefeedback("");
+			var_02 scripts\mp\damagefeedback::updatedamagefeedback("");
 			if(self.var_EDD7 <= 0) {
 				var_02 notify("destroyed_killstreak",var_0A);
-				var_0F = scripts\mp\_killstreak_loot::getrarityforlootitem(self.streakinfo.variantid);
+				var_0F = scripts\mp\killstreak_loot::getrarityforlootitem(self.streakinfo.variantid);
 				var_10 = "callout_destroyed_" + self.streakname;
 				if(var_0F != "") {
 					var_10 = var_10 + "_" + var_0F;
 				}
 
-				scripts\mp\_damage::onkillstreakkilled(self.streakname,var_02,var_0A,var_05,var_01,"destroyed_" + self.streakname,"venom_destroyed",var_10,1);
+				scripts\mp\damage::onkillstreakkilled(self.streakname,var_02,var_0A,var_05,var_01,"destroyed_" + self.streakname,"venom_destroyed",var_10,1);
 				self notify("venom_end",self.origin);
 			}
 
@@ -330,9 +330,9 @@ func_1327A() {
 	var_00 = self.triggerportableradarping;
 	level endon("game_ended");
 	self waittill("venom_end",var_01,var_02);
-	scripts\mp\_utility::printgameaction("killstreak ended - venom",var_00);
+	scripts\mp\utility::printgameaction("killstreak ended - venom",var_00);
 	if(getdvarint("camera_thirdPerson")) {
-		scripts\mp\_utility::setthirdpersondof(1);
+		scripts\mp\utility::setthirdpersondof(1);
 	}
 
 	self setscriptablepartstate("body","hide",0);
@@ -348,10 +348,10 @@ func_1327A() {
 	}
 
 	if(isdefined(var_00)) {
-		if(!scripts\mp\_utility::istrue(var_02)) {
-			var_00 scripts\mp\_utility::freezecontrolswrapper(1);
-			scripts\mp\_hostmigration::waitlongdurationwithhostmigrationpause(1);
-			var_00 scripts\mp\_utility::freezecontrolswrapper(0);
+		if(!scripts\mp\utility::istrue(var_02)) {
+			var_00 scripts\mp\utility::freezecontrolswrapper(1);
+			scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(1);
+			var_00 scripts\mp\utility::freezecontrolswrapper(0);
 		}
 
 		var_00 setclientomnvar("ui_out_of_bounds_countdown",0);
@@ -379,8 +379,8 @@ func_13281(param_00) {
 	self endon("host_migration_lifetime_update");
 	level endon("game_ended");
 	thread scripts\mp\killstreaks\_utility::watchhostmigrationlifetime("venom_end",param_00,::func_13281);
-	scripts\mp\_hostmigration::waitlongdurationwithhostmigrationpause(param_00);
-	var_01 scripts\mp\_utility::playkillstreakdialogonplayer("venom_timeout",undefined,undefined,var_01.origin);
+	scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(param_00);
+	var_01 scripts\mp\utility::playkillstreakdialogonplayer("venom_timeout",undefined,undefined,var_01.origin);
 	self notify("venom_end",self.origin);
 }
 
@@ -508,7 +508,7 @@ func_3DCF(param_00,param_01,param_02) {
 	if(capsuletracepassed(param_01,param_02,param_02 * 2 + 0.01,undefined,1,1)) {
 		var_04 = [self];
 		var_05 = physics_createcontents(["physicscontents_solid","physicscontents_glass","physicscontents_vehicleclip","physicscontents_missileclip","physicscontents_clipshot"]);
-		var_06 = function_0287(param_00,param_01,var_05,var_04,0,"physicsquery_closest");
+		var_06 = physics_raycast(param_00,param_01,var_05,var_04,0,"physicsquery_closest");
 		if(var_06.size == 0) {
 			var_03 = 1;
 		}

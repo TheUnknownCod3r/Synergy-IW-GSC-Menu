@@ -1,8 +1,8 @@
-/***************************************************
+/*******************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\bots\gametype_sr.gsc
-***************************************************/
+ * Script: scripts\mp\bots\gametype_sr.gsc
+*******************************************/
 
 main() {
 	scripts\mp\bots\gametype_sd::setup_callbacks();
@@ -108,7 +108,7 @@ sr_pick_up_tag(param_00) {
 		}
 	}
 
-	if(var_02 == "goal" && param_00 scripts\mp\_gameobjects::caninteractwith(self.team)) {
+	if(var_02 == "goal" && param_00 scripts\mp\gameobjects::caninteractwith(self.team)) {
 		wait(3);
 	}
 
@@ -127,7 +127,7 @@ sr_pick_up_tag(param_00) {
 watch_tag_destination(param_00) {
 	self endon("stop_watch_tag_destination");
 	for(;;) {
-		if(!param_00 scripts\mp\_gameobjects::caninteractwith(self.team)) {
+		if(!param_00 scripts\mp\gameobjects::caninteractwith(self.team)) {
 			wait(0.05);
 		}
 
@@ -169,7 +169,7 @@ clear_bot_on_bot_death(param_00) {
 
 notify_when_tag_picked_up_or_unavailable(param_00,param_01) {
 	self endon("stop_tag_watcher");
-	while(param_00 scripts\mp\_gameobjects::caninteractwith(self.team) && !scripts\mp\bots\gametype_conf::func_2D2E(param_00)) {
+	while(param_00 scripts\mp\gameobjects::caninteractwith(self.team) && !scripts\mp\bots\gametype_conf::func_2D2E(param_00)) {
 		wait(0.05);
 	}
 
@@ -195,7 +195,7 @@ sr_camp_tag(param_00) {
 	self.suspend_sd_role = 1;
 	scripts\mp\bots\_bots_personality::clear_camper_data();
 	var_01 = self.role;
-	while(param_00 scripts\mp\_gameobjects::caninteractwith(self.team) && self.role == var_01) {
+	while(param_00 scripts\mp\gameobjects::caninteractwith(self.team) && self.role == var_01) {
 		if(scripts\mp\bots\_bots_personality::should_select_new_ambush_point()) {
 			if(scripts\mp\bots\_bots_personality::find_ambush_node(param_00.curorigin,1000)) {
 				childthread scripts\mp\bots\gametype_conf::bot_camp_tag(param_00,"tactical","new_role");

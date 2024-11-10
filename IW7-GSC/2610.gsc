@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2610.gsc
+ * Script: 2610.gsc
 ***************************************/
 
 createeffect(var_00, var_01) {
@@ -156,7 +156,7 @@ createfx_common() {
   precacheshader("black");
   level._createfx = spawnstruct();
   level._createfx.grenade = spawn("script_origin", (0, 0, 0));
-  level._createfx.grenade.fx = loadfx("vfx/core/expl/grenadeexp_default");
+  level._createfx.grenade.fx = loadfx("vfx\core\expl\grenadeexp_default");
   level._createfx.grenade.sound = "frag_grenade_explode";
   level._createfx.grenade.radius = 256;
   precachemodel("axis_guide_createfx_rot");
@@ -1167,7 +1167,7 @@ print_fx_options(var_00, var_01, var_02) {
   if (var_0.v["type"] == "exploder" && var_05 == "exploder")
   continue;
 
-  var_06 = var_0.v["type"] + "/" + var_05;
+  var_06 = var_0.v["type"] + "\" + var_05;
 
   if (isdefined(level._createfx.defaults[var_06]) && level._createfx.defaults[var_06] == var_0.v[var_05])
   continue;
@@ -1596,7 +1596,7 @@ show_help() {
   set_fx_hudelement("Ctrl-V  Paste");
   set_fx_hudelement("F2  Toggle createfx dot and text drawing");
   set_fx_hudelement("F5  SAVES your work");
-  set_fx_hudelement("Dpad  Move selected entitise on X/Y or rotate pitch/yaw");
+  set_fx_hudelement("Dpad  Move selected entitise on X\Y or rotate pitch\yaw");
   set_fx_hudelement("A button  Toggle the selection of the current entity");
   set_fx_hudelement("X button  Toggle entity rotation mode");
   set_fx_hudelement("Y button  Move selected entites up or rotate roll");
@@ -1608,7 +1608,7 @@ show_help() {
   set_fx_hudelement("N   UFO");
   set_fx_hudelement("T   Toggle Timescale FAST");
   set_fx_hudelement("Y   Toggle Timescale SLOW");
-  set_fx_hudelement("[ Toggle FX Visibility");
+  set_fx_hudelement("[Toggle FX Visibility");
   set_fx_hudelement("]   Toggle ShowTris");
   set_fx_hudelement("F11   Toggle FX Profile");
 }
@@ -1616,15 +1616,15 @@ show_help() {
 generate_fx_log(var_00) {}
 
 write_log(var_00, var_01, var_02, var_03) {
-  var_04 = "//t";
+  var_04 = "\\t";
   cfxprintlnstart();
-  cfxprintln("//_createfx generated. Do not touch!!");
-  cfxprintln("#include scripts//common//utility;");
-  cfxprintln("#include scripts//common//createfx;//n");
+  cfxprintln("\\_createfx generated. Do not touch!!");
+  cfxprintln("#include scripts\\common\\utility;");
+  cfxprintln("#include scripts\\common\\createfx;\\n");
   cfxprintln("");
   cfxprintln("main()");
   cfxprintln("{");
-  cfxprintln(var_04 + "// CreateFX " + var_01 + " entities placed: " + var_0.size);
+  cfxprintln(var_04 + "\\ CreateFX " + var_01 + " entities placed: " + var_0.size);
 
   foreach (var_06 in var_00) {
   if (level.createfx_loopcounter > 16) {
@@ -1845,7 +1845,7 @@ cfxprintlnend(var_00, var_01, var_02) {
   var_05 = scripts\engine\utility::get_template_script_MAYBE();
   var_06 = get_raw_or_devraw_subdir();
   var_07 = get_gamemode_subdir();
-  scripts\engine\utility::fileprint_launcher_end_file("/share/" + var_06 + "/scripts/" + var_07 + "/maps/" + var_05 + "/gen/" + var_04, var_03);
+  scripts\engine\utility::fileprint_launcher_end_file("\share\" + var_06 + "\scripts\" + var_07 + "\maps\" + var_05 + "\gen\" + var_04, var_03);
 }
 
 get_raw_or_devraw_subdir() {

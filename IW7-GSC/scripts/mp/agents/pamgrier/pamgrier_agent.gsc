@@ -1,11 +1,11 @@
-/*****************************************************************
+/*********************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\agents\pamgrier\pamgrier_agent.gsc
-*****************************************************************/
+ * Script: scripts\mp\agents\pamgrier\pamgrier_agent.gsc
+*********************************************************/
 
 registerscriptedagent() {
-	scripts/aitypes/bt_util::init();
+	scripts\aitypes\bt_util::init();
 	behaviortree\pamgrier::func_DEE8();
 	scripts\asm\pamgrier\mp\states::func_2371();
 	scripts\mp\agents\pamgrier\pamgrier_tunedata::setuptunedata();

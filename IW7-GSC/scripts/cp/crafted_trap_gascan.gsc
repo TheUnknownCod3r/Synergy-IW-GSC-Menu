@@ -1,12 +1,12 @@
-/******************************************************
+/**********************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\crafted_trap_gascan.gsc
-******************************************************/
+ * Script: scripts\cp\crafted_trap_gascan.gsc
+**********************************************/
 
 init() {
-	level._effect["candypile_fire"] = loadfx("vfx/iw7/_requests/coop/zmb_candypile_fire.vfx");
-	level._effect["candypile_idle"] = loadfx("vfx/iw7/_requests/coop/zmb_candypile_idle.vfx");
+	level._effect["candypile_fire"] = loadfx("vfx\iw7\_requests\coop\zmb_candypile_fire.vfx");
+	level._effect["candypile_idle"] = loadfx("vfx\iw7\_requests\coop\zmb_candypile_idle.vfx");
 	level.var_47AF = [];
 	level.var_47AF["crafted_gascan"] = spawnstruct();
 	level.var_47AF["crafted_gascan"].timeout = 180;

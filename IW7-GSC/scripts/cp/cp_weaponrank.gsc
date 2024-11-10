@@ -1,24 +1,24 @@
-/************************************************
+/****************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\cp_weaponrank.gsc
-************************************************/
+ * Script: scripts\cp\cp_weaponrank.gsc
+****************************************/
 
 init() {
 	level.weaponranktable = spawnstruct();
 	level.weaponranktable.rankinfo = [];
 	var_00 = 0;
 	for(;;) {
-		var_01 = int(tablelookuprownum("mp/weaponRankTable.csv",0,var_00));
+		var_01 = int(tablelookuprownum("mp\weaponRankTable.csv",0,var_00));
 		if(!isdefined(var_01) || var_01 < 0) {
 			break;
 		}
 
 		var_02 = spawnstruct();
 		level.weaponranktable.rankinfo[var_00] = var_02;
-		var_02.minxp = int(tablelookupbyrow("mp/weaponRankTable.csv",var_00,1));
-		var_02.xptonextrank = int(tablelookupbyrow("mp/weaponRankTable.csv",var_00,2));
-		var_02.maxxp = int(tablelookupbyrow("mp/weaponRankTable.csv",var_00,3));
+		var_02.minxp = int(tablelookupbyrow("mp\weaponRankTable.csv",var_00,1));
+		var_02.xptonextrank = int(tablelookupbyrow("mp\weaponRankTable.csv",var_00,2));
+		var_02.maxxp = int(tablelookupbyrow("mp\weaponRankTable.csv",var_00,3));
 		var_00++;
 	}
 
@@ -26,13 +26,13 @@ init() {
 	level.weaponranktable.maxweaponranks = [];
 	var_03 = 1;
 	for(;;) {
-		var_01 = int(tablelookuprownum("mp/statstable.csv",0,var_03));
+		var_01 = int(tablelookuprownum("mp\statstable.csv",0,var_03));
 		if(!isdefined(var_01) || var_01 < 0) {
 			break;
 		}
 
-		var_04 = tablelookupbyrow("mp/statstable.csv",var_01,4);
-		var_05 = tablelookupbyrow("mp/statstable.csv",var_01,42);
+		var_04 = tablelookupbyrow("mp\statstable.csv",var_01,4);
+		var_05 = tablelookupbyrow("mp\statstable.csv",var_01,42);
 		if(!isdefined(var_04) || var_04 == "" || !isdefined(var_05) || var_05 == "") {
 		}
 		else
@@ -48,7 +48,7 @@ init() {
 }
 
 init_weapon_rank_events() {
-	var_00 = "scripts/cp/maps/cp_zmb/cp_zmb_weaponrank_event.csv";
+	var_00 = "scripts\cp\maps\cp_zmb\cp_zmb_weaponrank_event.csv";
 	if(isdefined(level.weapon_rank_event_table)) {
 		var_00 = level.weapon_rank_event_table;
 	}
@@ -117,7 +117,7 @@ weapon_progression_enabled() {
 is_weapon_unlocked(param_00,param_01) {
 	var_02 = param_00 scripts\cp\cp_persistence::get_player_rank();
 	var_03 = scripts\cp\utility::getbaseweaponname(param_01);
-	var_04 = int(tablelookup("mp/unlocks/CPWeaponUnlocks.csv",0,var_03,7));
+	var_04 = int(tablelookup("mp\unlocks\CPWeaponUnlocks.csv",0,var_03,7));
 	if(var_02 >= var_04) {
 		return 1;
 	}

@@ -1,18 +1,18 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3346.gsc
-****************************/
+ * Script: 3346.gsc
+************************/
 
 init() {
-	level._effect["vfx_phase_shift_start"] = loadfx("vfx/old/_requests/archetypes/vfx_phase_shift_start_volume");
-	level._effect["vfx_phase_shift_end"] = loadfx("vfx/old/_requests/archetypes/vfx_phase_shift_start_volume");
-	level._effect["vfx_phase_shift_start_friendly"] = loadfx("vfx/old/_requests/archetypes/vfx_phase_shift_start_volume_blue");
-	level._effect["vfx_phase_shift_end_friendly"] = loadfx("vfx/old/_requests/archetypes/vfx_phase_shift_start_volume_blue");
-	level._effect["vfx_phase_shift_trail_friendly"] = loadfx("vfx/iw7/_requests/mp/vfx_phase_shift_body_fr.vfx");
-	level._effect["vfx_phase_shift_trail_enemy"] = loadfx("vfx/iw7/_requests/mp/vfx_phase_shift_body_en.vfx");
-	level._effect["vfx_screen_flash"] = loadfx("vfx/core/mp/core/vfx_screen_flash");
-	level._effect["vfx_phaseshift_fp_scrn"] = loadfx("vfx/iw7/_requests/mp/vfx_phase_shift_scrn_warp.vfx");
+	level._effect["vfx_phase_shift_start"] = loadfx("vfx\old\_requests\archetypes\vfx_phase_shift_start_volume");
+	level._effect["vfx_phase_shift_end"] = loadfx("vfx\old\_requests\archetypes\vfx_phase_shift_start_volume");
+	level._effect["vfx_phase_shift_start_friendly"] = loadfx("vfx\old\_requests\archetypes\vfx_phase_shift_start_volume_blue");
+	level._effect["vfx_phase_shift_end_friendly"] = loadfx("vfx\old\_requests\archetypes\vfx_phase_shift_start_volume_blue");
+	level._effect["vfx_phase_shift_trail_friendly"] = loadfx("vfx\iw7\_requests\mp\vfx_phase_shift_body_fr.vfx");
+	level._effect["vfx_phase_shift_trail_enemy"] = loadfx("vfx\iw7\_requests\mp\vfx_phase_shift_body_en.vfx");
+	level._effect["vfx_screen_flash"] = loadfx("vfx\core\mp\core\vfx_screen_flash");
+	level._effect["vfx_phaseshift_fp_scrn"] = loadfx("vfx\iw7\_requests\mp\vfx_phase_shift_scrn_warp.vfx");
 }
 
 func_E154() {

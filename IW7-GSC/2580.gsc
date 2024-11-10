@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\2580.gsc
-****************************/
+ * Script: 2580.gsc
+************************/
 
 func_98C5(param_00) {
 	self.var_10264 = 1;
@@ -62,7 +62,7 @@ func_5673(param_00) {
 			break;
 	}
 
-	self._blackboard.var_5663 = 1;
-	scripts/asm/asm_bb::bb_dismemberedpart(param_00.updategamerprofileall);
+	self.var_1198.var_5663 = 1;
+	scripts\asm\asm_bb::bb_dismemberedpart(param_00.updategamerprofileall);
 	self _meth_8189(param_00.var_332);
 }

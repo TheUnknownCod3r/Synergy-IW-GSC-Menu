@@ -1,8 +1,8 @@
-/*********************************************************
+/*************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\crafted_trap_violetray.gsc
-*********************************************************/
+ * Script: scripts\cp\crafted_trap_violetray.gsc
+*************************************************/
 
 init() {
 	level.violetray_trap_settings = [];
@@ -382,7 +382,7 @@ violetray_trap_attack_zombies() {
 					var_02.var_CF80 = undefined;
 				}
 
-				var_02 scripts/asm/asm::asm_setstate("violetraydeath");
+				var_02 scripts\asm\asm::asm_setstate("violetraydeath");
 				thread scripts\engine\utility::play_sound_in_space("town_xray_burn_zombie",var_02.origin);
 				wait(0.05);
 				if(isdefined(self.triggerportableradarping)) {

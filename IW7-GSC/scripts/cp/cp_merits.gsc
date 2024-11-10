@@ -1,8 +1,8 @@
-/********************************************
+/************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\cp_merits.gsc
-********************************************/
+ * Script: scripts\cp\cp_merits.gsc
+************************************/
 
 init() {
 	precachestring(&"CP_MERIT_COMPLETED");
@@ -232,16 +232,16 @@ process_agent_on_killed_merits(param_00,param_01,param_02,param_03,param_04,para
 				if(!var_21 && !var_24) {
 					param_01 processmerit("mt_sniper_kills");
 				}
-				else if(var_21 && !scripts/cp/agents/gametype_zombie::checkaltmodestatus(param_04)) {
+				else if(var_21 && !scripts\cp\agents\gametype_zombie::checkaltmodestatus(param_04)) {
 					param_01 processmerit("mt_shotgun_kills");
 				}
-				else if(var_21 && scripts/cp/agents/gametype_zombie::checkaltmodestatus(param_04)) {
+				else if(var_21 && scripts\cp\agents\gametype_zombie::checkaltmodestatus(param_04)) {
 					param_01 processmerit("mt_sniper_kills");
 				}
-				else if(var_24 && !scripts/cp/agents/gametype_zombie::checkaltmodestatus(param_04)) {
+				else if(var_24 && !scripts\cp\agents\gametype_zombie::checkaltmodestatus(param_04)) {
 					param_01 processmerit("mt_ar_kills");
 				}
-				else if(var_24 && scripts/cp/agents/gametype_zombie::checkaltmodestatus(param_04)) {
+				else if(var_24 && scripts\cp\agents\gametype_zombie::checkaltmodestatus(param_04)) {
 					param_01 processmerit("mt_sniper_kills");
 				}
 				break;
@@ -559,7 +559,7 @@ areallmerittierscomplete(param_00) {
 }
 
 get_table_name() {
-	return "cp/zombies/zombie_splashtable.csv";
+	return "cp\zombies\zombie_splashtable.csv";
 }
 
 storecompletedmerit(param_00) {
@@ -630,7 +630,7 @@ updatemerits() {
 }
 
 getmeritfilter(param_00) {
-	return tablelookup("cp/allMeritsTable.csv",0,param_00,5);
+	return tablelookup("cp\allMeritsTable.csv",0,param_00,5);
 }
 
 isweaponmerit(param_00) {
@@ -738,7 +738,7 @@ buildmerittableinfo(param_00,param_01) {
 buildmeritinfo() {
 	level.meritinfo = [];
 	var_00 = 0;
-	var_00 = var_00 + buildmerittableinfo("cp/allMeritsTable.csv",0);
+	var_00 = var_00 + buildmerittableinfo("cp\allMeritsTable.csv",0);
 }
 
 ismeritunlocked(param_00) {
@@ -755,7 +755,7 @@ havedataformerit(param_00) {
 }
 
 getmeritmasterchallenge(param_00) {
-	var_01 = tablelookup("cp/allMeritsTable.csv",0,param_00,7);
+	var_01 = tablelookup("cp\allMeritsTable.csv",0,param_00,7);
 	if(isdefined(var_01) && var_01 == "") {
 		return undefined;
 	}

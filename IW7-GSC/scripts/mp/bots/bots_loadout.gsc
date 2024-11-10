@@ -1,8 +1,8 @@
-/****************************************************
+/********************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\bots\bots_loadout.gsc
-****************************************************/
+ * Script: scripts\mp\bots\bots_loadout.gsc
+********************************************/
 
 init() {
 	init_template_table();
@@ -16,7 +16,7 @@ init() {
 }
 
 init_class_table() {
-	var_00 = "mp/botClassTable.csv";
+	var_00 = "mp\botClassTable.csv";
 	level.botloadoutsets = [];
 	var_01 = bot_loadout_fields();
 	var_02 = 0;
@@ -61,7 +61,7 @@ init_class_table() {
 }
 
 init_template_table() {
-	var_00 = "mp/botTemplateTable.csv";
+	var_00 = "mp\botTemplateTable.csv";
 	level.botloadouttemplates = [];
 	var_01 = bot_loadout_fields();
 	var_02 = 0;
@@ -92,7 +92,7 @@ init_bot_archetypes() {
 }
 
 bot_loadout_item_allowed(param_00,param_01,param_02) {
-	if(!function_011C()) {
+	if(!isusingmatchrulesdata()) {
 		return 1;
 	}
 
@@ -121,11 +121,11 @@ bot_loadout_item_allowed(param_00,param_01,param_02) {
 	var_05 = "";
 	switch(param_00) {
 		case "weapon":
-			var_05 = scripts\mp\_utility::getweapongroup(param_01);
+			var_05 = scripts\mp\utility::getweapongroup(param_01);
 			break;
 
 		case "attachment":
-			var_05 = scripts\mp\_utility::getattachmenttype(param_01);
+			var_05 = scripts\mp\utility::getattachmenttype(param_01);
 			break;
 
 		case "killstreak":
@@ -175,10 +175,10 @@ bot_loadout_choose_fallback_primary(param_00) {
 		}
 	}
 
-	if(function_011C()) {
+	if(isusingmatchrulesdata()) {
 		for(var_0C = 0;var_0C < 6 && !isdefined(var_01) || var_01 == "none" || var_01 == "";var_0C++) {
-			if(scripts\mp\_utility::getmatchrulesdatawithteamandindex("defaultClasses",self.team,var_0C,"class","inUse")) {
-				var_01 = scripts\mp\_utility::getmatchrulesdatawithteamandindex("defaultClasses",self.team,var_0C,"class","weaponSetups",0,"weapon");
+			if(scripts\mp\utility::getmatchrulesdatawithteamandindex("defaultClasses",self.team,var_0C,"class","inUse")) {
+				var_01 = scripts\mp\utility::getmatchrulesdatawithteamandindex("defaultClasses",self.team,var_0C,"class","weaponSetups",0,"weapon");
 				if(var_01 != "none") {
 					self.bot_fallback_personality = "weapon";
 					return var_01;
@@ -253,7 +253,7 @@ bot_loadout_pick(param_00,param_01,param_02) {
 }
 
 bot_validate_weapon(param_00,param_01,param_02,param_03) {
-	var_04 = scripts\mp\_utility::getweaponattachmentarrayfromstats(param_00);
+	var_04 = scripts\mp\utility::getweaponattachmentarrayfromstats(param_00);
 	if(isdefined(param_01) && param_01 != "none" && !bot_loadout_item_allowed("attachment",param_01)) {
 		return 0;
 	}
@@ -285,7 +285,7 @@ bot_validate_weapon(param_00,param_01,param_02,param_03) {
 	if(!isdefined(level.bot_invalid_attachment_combos)) {
 		level.bot_invalid_attachment_combos = [];
 		level.allowable_double_attachments = [];
-		var_05 = "mp/attachmentcombos.csv";
+		var_05 = "mp\attachmentcombos.csv";
 		var_06 = 0;
 		for(;;) {
 			var_06++;
@@ -380,12 +380,12 @@ init_perktable() {
 	level.perktable_costs = [];
 	var_00 = 1;
 	for(;;) {
-		var_01 = tablelookupbyrow("mp/perktable.csv",var_00,1);
+		var_01 = tablelookupbyrow("mp\perktable.csv",var_00,1);
 		if(var_01 == "") {
 			break;
 		}
 
-		level.perktable_costs[var_01] = int(tablelookupbyrow("mp/perktable.csv",var_00,10));
+		level.perktable_costs[var_01] = int(tablelookupbyrow("mp\perktable.csv",var_00,10));
 		var_00++;
 	}
 
@@ -398,19 +398,19 @@ init_perktable() {
 	while(isdefined(var_02) && var_02 != "") {
 		var_02 = getsubstr(var_02,8);
 		for(var_03 = 4;var_03 <= 13;var_03++) {
-			var_01 = tablelookupbyrow("mp/cacabilitytable.csv",var_00,var_03);
+			var_01 = tablelookupbyrow("mp\cacabilitytable.csv",var_00,var_03);
 			if(var_01 != "") {
 				perktable_add(var_01,var_02);
 			}
 		}
 
 		var_00++;
-		var_02 = tablelookupbyrow("mp/cacabilitytable.csv",var_00,1);
+		var_02 = tablelookupbyrow("mp\cacabilitytable.csv",var_00,1);
 	}
 }
 
 init_bot_weap_statstable() {
-	var_00 = "mp/statstable.csv";
+	var_00 = "mp\statstable.csv";
 	var_01 = 4;
 	var_02 = 38;
 	var_03 = 39;
@@ -433,10 +433,10 @@ init_bot_weap_statstable() {
 
 		if(var_08 != "" && var_06 != "" && var_09 != "" && var_07 != "") {
 			var_0A = "loadoutPrimary";
-			if(scripts\mp\_utility::iscacsecondaryweapon(var_06)) {
+			if(scripts\mp\utility::iscacsecondaryweapon(var_06)) {
 				var_0A = "loadoutSecondary";
 			}
-			else if(!scripts\mp\_utility::iscacprimaryweapon(var_06)) {
+			else if(!scripts\mp\utility::iscacprimaryweapon(var_06)) {
 				var_05++;
 				continue;
 			}
@@ -583,43 +583,43 @@ bot_loadout_choose_from_default_class(param_00,param_01,param_02,param_03,param_
 	var_06 = int(getsubstr(param_00,5,6)) - 1;
 	switch(param_03) {
 		case "loadoutPrimary":
-			return scripts\mp\_class::table_getweapon(level.classtablename,var_06,0);
+			return scripts\mp\class::table_getweapon(level.classtablename,var_06,0);
 
 		case "loadoutPrimaryAttachment":
-			return scripts\mp\_class::table_getweaponattachment(level.classtablename,var_06,0,0);
+			return scripts\mp\class::table_getweaponattachment(level.classtablename,var_06,0,0);
 
 		case "loadoutPrimaryAttachment2":
-			return scripts\mp\_class::table_getweaponattachment(level.classtablename,var_06,0,1);
+			return scripts\mp\class::table_getweaponattachment(level.classtablename,var_06,0,1);
 
 		case "loadoutPrimaryCamo":
-			return scripts\mp\_class::table_getweaponcamo(level.classtablename,var_06,0);
+			return scripts\mp\class::table_getweaponcamo(level.classtablename,var_06,0);
 
 		case "loadoutPrimaryReticle":
-			return scripts\mp\_class::table_getweaponreticle(level.classtablename,var_06,0);
+			return scripts\mp\class::table_getweaponreticle(level.classtablename,var_06,0);
 
 		case "loadoutSecondary":
-			return scripts\mp\_class::table_getweapon(level.classtablename,var_06,1);
+			return scripts\mp\class::table_getweapon(level.classtablename,var_06,1);
 
 		case "loadoutSecondaryAttachment":
-			return scripts\mp\_class::table_getweaponattachment(level.classtablename,var_06,1,0);
+			return scripts\mp\class::table_getweaponattachment(level.classtablename,var_06,1,0);
 
 		case "loadoutSecondaryAttachment2":
-			return scripts\mp\_class::table_getweaponattachment(level.classtablename,var_06,1,1);
+			return scripts\mp\class::table_getweaponattachment(level.classtablename,var_06,1,1);
 
 		case "loadoutSecondaryCamo":
-			return scripts\mp\_class::table_getweaponcamo(level.classtablename,var_06,1);
+			return scripts\mp\class::table_getweaponcamo(level.classtablename,var_06,1);
 
 		case "loadoutSecondaryReticle":
-			return scripts\mp\_class::table_getweaponreticle(level.classtablename,var_06,1);
+			return scripts\mp\class::table_getweaponreticle(level.classtablename,var_06,1);
 
 		case "loadoutStreak1":
-			return scripts\mp\_class::table_getkillstreak(level.classtablename,var_06,0);
+			return scripts\mp\class::table_getkillstreak(level.classtablename,var_06,0);
 
 		case "loadoutStreak2":
-			return scripts\mp\_class::table_getkillstreak(level.classtablename,var_06,1);
+			return scripts\mp\class::table_getkillstreak(level.classtablename,var_06,1);
 
 		case "loadoutStreak3":
-			return scripts\mp\_class::table_getkillstreak(level.classtablename,var_06,2);
+			return scripts\mp\class::table_getkillstreak(level.classtablename,var_06,2);
 
 		case "loadoutPerk6":
 		case "loadoutPerk5":
@@ -628,14 +628,14 @@ bot_loadout_choose_from_default_class(param_00,param_01,param_02,param_03,param_
 		case "loadoutPerk2":
 		case "loadoutPerk1":
 			var_07 = int(getsubstr(param_03,11));
-			var_08 = scripts\mp\_class::table_getperk(level.classtablename,var_06,var_07);
+			var_08 = scripts\mp\class::table_getperk(level.classtablename,var_06,var_07);
 			if(var_08 == "") {
 				return "specialty_null";
 			}
 	
 			var_09 = int(getsubstr(var_08,0,1));
 			var_0A = int(getsubstr(var_08,1,2));
-			var_0B = tablelookupbyrow("mp/cacabilitytable.csv",var_09 + 1,var_0A + 3);
+			var_0B = tablelookupbyrow("mp\cacabilitytable.csv",var_09 + 1,var_0A + 3);
 			return var_0B;
 	}
 
@@ -643,7 +643,7 @@ bot_loadout_choose_from_default_class(param_00,param_01,param_02,param_03,param_
 }
 
 init_bot_attachmenttable() {
-	var_00 = "mp/attachmenttable.csv";
+	var_00 = "mp\attachmenttable.csv";
 	var_01 = 5;
 	var_02 = 19;
 	var_03 = 11;
@@ -695,7 +695,7 @@ bot_loadout_choose_from_attachmenttable(param_00,param_01,param_02,param_03,para
 }
 
 init_bot_camotable() {
-	var_00 = "mp/camotable.csv";
+	var_00 = "mp\camotable.csv";
 	level.var_2D1E = [];
 	var_01 = 0;
 	for(;;) {
@@ -1008,7 +1008,7 @@ bot_loadout_class_callback() {
 	}
 
 	var_00 = bot_loadout_setup_perks(var_00);
-	if(scripts\mp\_utility::bot_israndom()) {
+	if(scripts\mp\utility::bot_israndom()) {
 		if(scripts\engine\utility::array_contains(self.pers["loadoutPerks"],"specialty_twoprimaries")) {
 			var_06 = bot_loadout_pick("cqb",var_01);
 			var_00["loadoutSecondary"] = var_06["loadoutPrimary"];
@@ -1068,7 +1068,7 @@ bot_loadout_setup_perks(param_00) {
 				continue;
 			}
 
-			var_06 = scripts\mp\_utility::getbaseperkname(var_04);
+			var_06 = scripts\mp\utility::getbaseperkname(var_04);
 			if(var_05 <= 12) {
 				self.pers["loadoutPerks"][self.pers["loadoutPerks"].size] = var_06;
 			}
@@ -1157,18 +1157,18 @@ bot_squad_lookup_ranked(param_00,param_01,param_02,param_03,param_04,param_05,pa
 
 bot_squad_lookup_enemy(param_00,param_01,param_02,param_03,param_04,param_05,param_06) {
 	if(isdefined(param_06)) {
-		return function_0096("squadMembers","loadouts",param_02,param_03,param_04,param_05,param_06);
+		return getenemysquaddata("squadMembers","loadouts",param_02,param_03,param_04,param_05,param_06);
 	}
 
 	if(isdefined(param_05)) {
-		return function_0096("squadMembers","loadouts",param_02,param_03,param_04,param_05);
+		return getenemysquaddata("squadMembers","loadouts",param_02,param_03,param_04,param_05);
 	}
 
 	if(isdefined(param_04)) {
-		return function_0096("squadMembers","loadouts",param_02,param_03,param_04);
+		return getenemysquaddata("squadMembers","loadouts",param_02,param_03,param_04);
 	}
 
-	return function_0096("squadMembers","loadouts",param_02,param_03);
+	return getenemysquaddata("squadMembers","loadouts",param_02,param_03);
 }
 
 bot_squad_lookup(param_00,param_01,param_02,param_03,param_04,param_05,param_06) {
@@ -1176,7 +1176,7 @@ bot_squad_lookup(param_00,param_01,param_02,param_03,param_04,param_05,param_06)
 	if(getdvar("squad_match") == "1" && self.team == "axis") {
 		var_07 = ::bot_squad_lookup_enemy;
 	}
-	else if(!scripts\mp\_utility::matchmakinggame()) {
+	else if(!scripts\mp\utility::matchmakinggame()) {
 		var_07 = ::bot_squad_lookup_private;
 	}
 
@@ -1185,10 +1185,10 @@ bot_squad_lookup(param_00,param_01,param_02,param_03,param_04,param_05,param_06)
 
 bot_squadmember_lookup(param_00,param_01,param_02) {
 	if(getdvar("squad_match") == "1" && self.team == "axis") {
-		return function_0096("squadMembers",param_01,param_02);
+		return getenemysquaddata("squadMembers",param_01,param_02);
 	}
 
-	if(!scripts\mp\_utility::matchmakinggame()) {
+	if(!scripts\mp\utility::matchmakinggame()) {
 		return param_00 getplayerdata("privateloadouts","squadMembers",param_02);
 	}
 

@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2759.gsc
+ * Script: 2759.gsc
 ***************************************/
 
 init() {
@@ -22,13 +22,13 @@ registerkillstreakvariantinfo() {
   level endon("game_ended");
   var_00 = 0;
 
-  for (var_01 = tablelookupbyrow("mp/loot/iw7_killstreak_loot_master.csv", var_00, 0); var_01 != ""; var_01 = tablelookupbyrow("mp/loot/iw7_killstreak_loot_master.csv", var_00, 0)) {
-  level.func_110EC.costoverride[int(var_01)] = int(tablelookup("mp/loot/iw7_killstreak_loot_master.csv", 0, var_01, 17));
-  level.func_110EC.costoverridepersist[int(var_01)] = int(tablelookup("mp/loot/iw7_killstreak_loot_master.csv", 0, var_01, 18));
-  level.func_110EC.rarity[int(var_01)] = int(tablelookup("mp/loot/iw7_killstreak_loot_master.csv", 0, var_01, 2));
+  for (var_01 = tablelookupbyrow("mp\loot\iw7_killstreak_loot_master.csv", var_00, 0); var_01 != ""; var_01 = tablelookupbyrow("mp\loot\iw7_killstreak_loot_master.csv", var_00, 0)) {
+  level.func_110EC.costoverride[int(var_01)] = int(tablelookup("mp\loot\iw7_killstreak_loot_master.csv", 0, var_01, 17));
+  level.func_110EC.costoverridepersist[int(var_01)] = int(tablelookup("mp\loot\iw7_killstreak_loot_master.csv", 0, var_01, 18));
+  level.func_110EC.rarity[int(var_01)] = int(tablelookup("mp\loot\iw7_killstreak_loot_master.csv", 0, var_01, 2));
   level.func_110EC.func_E76D[int(var_01)] = var_00;
-  level.func_110EC.baseref[int(var_01)] = tablelookup("mp/loot/iw7_killstreak_loot_master.csv", 0, var_01, 6);
-  level.func_110EC.ref[int(var_01)] = tablelookup("mp/loot/iw7_killstreak_loot_master.csv", 0, var_01, 1);
+  level.func_110EC.baseref[int(var_01)] = tablelookup("mp\loot\iw7_killstreak_loot_master.csv", 0, var_01, 6);
+  level.func_110EC.ref[int(var_01)] = tablelookup("mp\loot\iw7_killstreak_loot_master.csv", 0, var_01, 1);
   var_0++;
   }
 }
@@ -87,7 +87,7 @@ getpassiveperk(var_00) {
   var_01 = level.func_110EC.passivestringref[var_00];
 
   if (!isdefined(var_01)) {
-  var_02 = tablelookuprownum("mp/loot/iw7_killstreak_loot_master.csv", 0, var_00);
+  var_02 = tablelookuprownum("mp\loot\iw7_killstreak_loot_master.csv", 0, var_00);
   var_03 = [7, 8, 9];
   var_01 = [];
 
@@ -107,7 +107,7 @@ getpassiveperk(var_00) {
 }
 
 func_B030(var_00, var_01) {
-  var_02 = tablelookupbyrow("mp/loot/iw7_killstreak_loot_master.csv", var_00, var_01);
+  var_02 = tablelookupbyrow("mp\loot\iw7_killstreak_loot_master.csv", var_00, var_01);
   return scripts\engine\utility::ter_op(isdefined(var_02) && var_02 != "", var_02, undefined);
 }
 
@@ -148,7 +148,7 @@ func_9ED5(var_00, var_01) {
 }
 
 func_89BC(var_00) {
-  if (scripts/mp/killstreaks/utility::func_A69F(var_00, "passive_extra_points"))
+  if (scripts\mp\killstreaks\utility::func_A69F(var_00, "passive_extra_points"))
   thread func_2A66(self, var_00);
 }
 

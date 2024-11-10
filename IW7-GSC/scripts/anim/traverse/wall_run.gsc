@@ -1,8 +1,8 @@
-/******************************************************
+/**********************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\anim\traverse\wall_run.gsc
-******************************************************/
+ * Script: scripts\anim\traverse\wall_run.gsc
+**********************************************/
 
 main() {
 	func_138D0();

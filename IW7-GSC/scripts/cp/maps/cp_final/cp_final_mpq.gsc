@@ -1,8 +1,8 @@
-/*************************************************************
+/*****************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\maps\cp_final\cp_final_mpq.gsc
-*************************************************************/
+ * Script: scripts\cp\maps\cp_final\cp_final_mpq.gsc
+*****************************************************/
 
 mpq_init() {
 	initmpqflags();
@@ -1010,7 +1010,7 @@ buildpath(param_00,param_01,param_02) {
 			var_08 = [];
 			var_08[var_08.size] = var_09.origin;
 			var_0D = scripts\engine\utility::getstruct(var_09.target,"targetname");
-			if(function_02A4(var_0D)) {
+			if(isstruct(var_0D)) {
 				var_08[var_08.size] = var_0D.origin;
 				var_03 = scripts\engine\utility::array_combine(var_03,var_08);
 			}
@@ -1650,7 +1650,7 @@ activateinteractionsbynoteworthy(param_00) {
 }
 
 initpuzzlecombinations() {
-	var_00 = "cp/zombies/cp_final_puzzle_combos.csv";
+	var_00 = "cp\zombies\cp_final_puzzle_combos.csv";
 	level.puzzle_combinations = [];
 	level.insertedpieces = [];
 	var_01 = 0;
@@ -2452,7 +2452,7 @@ completefusepuzzle() {
 	scripts\cp\utility::set_quest_icon(10);
 	setneilstate("straight");
 	foreach(var_01 in level.players) {
-		var_01 scripts/cp/zombies/achievement::update_achievement("FRIENDS_FOREVER",1);
+		var_01 scripts\cp\zombies\achievement::update_achievement("FRIENDS_FOREVER",1);
 	}
 
 	deactivateinteractionsbynoteworthy("fuse_puzzle");
@@ -2602,7 +2602,7 @@ tryreleaseastronaut(param_00,param_01) {
 		if(level.astronautsshot >= level.astronaut_structs.size) {
 			foreach(var_03 in level.players) {
 				var_03 thread scripts\cp\cp_vo::try_to_play_vo("song_quest_success","final_comment_vo");
-				var_03 scripts/cp/zombies/achievement::update_achievement("BROKEN_RECORD",1);
+				var_03 scripts\cp\zombies\achievement::update_achievement("BROKEN_RECORD",1);
 			}
 
 			if(isdefined(param_00)) {
@@ -2686,7 +2686,7 @@ play_hidden_song(param_00,param_01,param_02) {
 
 generic_interaction_no_gesture(param_00,param_01) {
 	param_00 endon("disconnect");
-	if(function_02A6(param_01) || !function_02A5(param_01)) {
+	if(isent(param_01) || !isvector(param_01)) {
 		param_01 = param_01.origin;
 	}
 
@@ -3173,7 +3173,7 @@ adjustmovespeed(param_00,param_01,param_02) {
 		wait(0.5);
 	}
 
-	param_00 scripts/asm/asm_bb::bb_requestmovetype(param_02);
+	param_00 scripts\asm\asm_bb::bb_requestmovetype(param_02);
 }
 
 neiltriggertrap() {

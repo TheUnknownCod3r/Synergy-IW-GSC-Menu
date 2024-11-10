@@ -1,14 +1,14 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\3001.gsc
+ * Script: 3001.gsc
 ***************************************/
 
 main(var_00, var_01, var_02) {
-  scripts/sp/vehicle_build::func_31C5("droppod", var_00, var_01, var_02);
-  scripts/sp/vehicle_build::func_31A6(::init_location);
-  scripts/sp/vehicle_build::func_31A3(1500);
-  scripts/sp/vehicle_build::build_ace(::func_F57A, ::func_F5FA);
-  scripts/sp/vehicle_build::func_31C4("axis");
+  scripts\sp\vehicle_build::func_31C5("droppod", var_00, var_01, var_02);
+  scripts\sp\vehicle_build::func_31A6(::init_location);
+  scripts\sp\vehicle_build::func_31A3(1500);
+  scripts\sp\vehicle_build::build_ace(::func_F57A, ::func_F5FA);
+  scripts\sp\vehicle_build::func_31C4("axis");
   func_0BBB::func_D623(var_00);
 }
 

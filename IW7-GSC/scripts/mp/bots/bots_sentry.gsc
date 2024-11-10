@@ -1,8 +1,8 @@
-/***************************************************
+/*******************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\bots\bots_sentry.gsc
-***************************************************/
+ * Script: scripts\mp\bots\bots_sentry.gsc
+*******************************************/
 
 bot_killstreak_sentry(param_00,param_01,param_02,param_03) {
 	self endon("bot_sentry_exited");

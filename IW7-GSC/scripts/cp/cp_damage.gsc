@@ -1,8 +1,8 @@
-/********************************************
+/************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\cp_damage.gsc
-********************************************/
+ * Script: scripts\cp\cp_damage.gsc
+************************************/
 
 updatedamagefeedback(param_00,param_01,param_02,param_03,param_04,param_05,param_06) {
 	if(isdefined(level.friendly_damage_check) && [[level.friendly_damage_check]](param_04,param_05,param_06)) {
@@ -256,10 +256,10 @@ scale_alien_damage_by_perks(param_00,param_01,param_02,param_03) {
 	var_04 = 1.05;
 	if(scripts\engine\utility::isbulletdamage(param_02) && !func_9D39(param_03) && !func_9DB8(param_03)) {
 		if(!func_9D39(param_03)) {
-			param_01 = int(param_01 * param_00 scripts/cp/perks/perk_utility::perk_getbulletdamagescalar());
+			param_01 = int(param_01 * param_00 scripts\cp\perks\perk_utility::perk_getbulletdamagescalar());
 		}
 		else if(func_9D38(param_03)) {
-			param_01 = int(param_01 * param_00 scripts/cp/perks/perk_utility::func_CA43());
+			param_01 = int(param_01 * param_00 scripts\cp\perks\perk_utility::func_CA43());
 		}
 
 		if(isdefined(param_00.var_1517)) {
@@ -268,7 +268,7 @@ scale_alien_damage_by_perks(param_00,param_01,param_02,param_03) {
 	}
 
 	if(param_02 == "MOD_EXPLOSIVE") {
-		param_01 = int(param_01 * param_00 scripts/cp/perks/perk_utility::perk_getexplosivedamagescalar());
+		param_01 = int(param_01 * param_00 scripts\cp\perks\perk_utility::perk_getexplosivedamagescalar());
 	}
 
 	if(param_02 == "MOD_MELEE") {
@@ -276,7 +276,7 @@ scale_alien_damage_by_perks(param_00,param_01,param_02,param_03) {
 			playfxontag(level._effect["melee_blood"],param_00,"tag_weapon_right");
 		}
 
-		param_01 = int(param_01 * param_00 scripts/cp/perks/perk_utility::perk_getmeleescalar());
+		param_01 = int(param_01 * param_00 scripts\cp\perks\perk_utility::perk_getmeleescalar());
 		if(isdefined(param_00.var_1518)) {
 			param_01 = int(param_01 * param_00.var_1518);
 		}
@@ -400,7 +400,7 @@ scale_alien_damage_by_weapon_type(param_00,param_01,param_02,param_03,param_04) 
 
 scale_alien_damage_by_prestige(param_00,param_01) {
 	if(isplayer(param_00)) {
-		var_02 = param_00 scripts/cp/perks/prestige::prestige_getweapondamagescalar();
+		var_02 = param_00 scripts\cp\perks\prestige::prestige_getweapondamagescalar();
 		param_01 = param_01 * var_02;
 		param_01 = int(param_01);
 	}
@@ -860,11 +860,11 @@ func_20BA() {
 	self.var_1BD8++;
 	self.var_1BD9 = pow(0.68,self.var_1BD8 + 1 * 0.35);
 	self.var_1BD9 = max(0.58,self.var_1BD9);
-	scripts/cp/perks/perkfunctions::func_12E78();
+	scripts\cp\perks\perkfunctions::func_12E78();
 	wait(0.8);
 	self.var_1BD8 = 0;
 	self.var_1BD9 = 1;
-	scripts/cp/perks/perkfunctions::func_12E78();
+	scripts\cp\perks\perkfunctions::func_12E78();
 }
 
 func_9BE5(param_00,param_01,param_02) {

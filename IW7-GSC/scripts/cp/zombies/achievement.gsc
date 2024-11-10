@@ -1,8 +1,8 @@
-/******************************************************
+/**********************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\zombies\achievement.gsc
-******************************************************/
+ * Script: scripts\cp\zombies\achievement.gsc
+**********************************************/
 
 init_player_achievement(param_00) {
 	level.include_default_achievements = 1;
@@ -125,7 +125,7 @@ update_achievement_braindead(param_00,param_01,param_02) {
 	}
 	else
 	{
-		param_00.var_C213++;
+		param_00.number_of_games_played++;
 	}
 
 	if(param_00.number_of_games_played >= 30 && param_02 >= 10) {

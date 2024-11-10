@@ -1,8 +1,8 @@
-/**************************************************************
+/******************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\anim\traverse\slide_across_car.gsc
-**************************************************************/
+ * Script: scripts\anim\traverse\slide_across_car.gsc
+******************************************************/
 
 main() {
 	if(self.type == "dog") {
@@ -32,7 +32,7 @@ func_102DE() {
 	self aiclearanim(%root,0.1);
 	self _meth_82EA("traverse",level.var_58C7["jump_up_40"],1,0.1,1);
 	scripts\anim\shared::donotetracks("traverse");
-	function_0178("anml_dog_bark",self gettagorigin("tag_eye"));
+	playworldsound("anml_dog_bark",self gettagorigin("tag_eye"));
 	self aiclearanim(%root,0);
 	self _meth_82EA("traverse",level.var_58C7["jump_down_40"],1,0,1);
 	scripts\anim\shared::donotetracks("traverse");

@@ -1,8 +1,8 @@
-/*************************************************
+/*****************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\cp_agent_utils.gsc
-*************************************************/
+ * Script: scripts\cp\cp_agent_utils.gsc
+*****************************************/
 
 spawnnewagent(param_00,param_01,param_02,param_03,param_04) {
 	var_05 = getfreeagent(param_00);

@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\2568.gsc
-****************************/
+ * Script: 2568.gsc
+************************/
 
 func_97EC(param_00) {
 	self.var_71A8 = ::func_7FD3;
@@ -50,7 +50,7 @@ func_7FD3() {
 		return self.var_527B;
 	}
 
-	var_00 = scripts/aitypes/bt_util::func_75();
+	var_00 = scripts\aitypes\bt_util::func_75();
 	return var_00;
 }
 
@@ -92,10 +92,10 @@ func_7EFC() {
 		var_02 = self.target_getindexoftarget getrandomattachments("crouch");
 		var_03 = self.target_getindexoftarget getrandomattachments("prone");
 	}
-	else if(!scripts/asm/asm_bb::bb_moverequested() && isdefined(self._blackboard.shootparams) && isdefined(self._blackboard.shootparams.pos)) {
-		var_04 = distancesquared(self.origin,self._blackboard.shootparams.pos);
+	else if(!scripts\asm\asm_bb::bb_moverequested() && isdefined(self.var_1198.shootparams) && isdefined(self.var_1198.shootparams.pos)) {
+		var_04 = distancesquared(self.origin,self.var_1198.shootparams.pos);
 		if(var_04 > 262144 && self getteleportlonertargetplayer("crouch") && !scripts\engine\utility::actor_is3d() && !scripts\anim\utility_common::isusingsidearm()) {
-			if(sighttracepassed(self.origin + (0,0,32),self._blackboard.shootparams.pos,0,undefined)) {
+			if(sighttracepassed(self.origin + (0,0,32),self.var_1198.shootparams.pos,0,undefined)) {
 				return "crouch";
 			}
 		}
@@ -132,7 +132,7 @@ func_3DE5() {
 		return 0;
 	}
 
-	if(scripts/aitypes/combat::func_10026()) {
+	if(scripts\aitypes\combat::func_10026()) {
 		return 1;
 	}
 
@@ -188,11 +188,11 @@ func_2543() {
 }
 
 func_2542(param_00) {
-	if(!scripts/aitypes/combat::func_FFC2()) {
+	if(!scripts\aitypes\combat::func_FFC2()) {
 		return level.failure;
 	}
 
-	switch(self.bt.instancedata[param_00]) {
+	switch(self.var_3135.instancedata[param_00]) {
 		case 0:
 			if(self getzonearray(32)) {
 				return level.success;
@@ -222,9 +222,9 @@ func_2542(param_00) {
 			break;
 	}
 
-	self.bt.instancedata[param_00]++;
-	if(self.bt.instancedata[param_00] > 60) {
-		self.bt.instancedata[param_00] = 0;
+	self.var_3135.instancedata[param_00]++;
+	if(self.var_3135.instancedata[param_00] > 60) {
+		self.var_3135.instancedata[param_00] = 0;
 	}
 
 	return level.running;
@@ -240,14 +240,14 @@ func_12E93() {
 	}
 
 	var_00 = gettime();
-	if(!isdefined(self._blackboard.var_7362) || self._blackboard.var_7362 > var_00) {
+	if(!isdefined(self.var_1198.var_7362) || self.var_1198.var_7362 > var_00) {
 		var_01 = getaiarray(scripts\engine\utility::get_enemy_team(self.team));
 		var_02 = 0;
 		var_03 = 10000;
 		var_04 = 4194304;
 		var_05 = 5;
-		self._blackboard.var_7362 = var_00 + 10000;
-		self._blackboard.var_7366 = "combat";
+		self.var_1198.var_7362 = var_00 + 10000;
+		self.var_1198.var_7366 = "combat";
 		foreach(var_07 in var_01) {
 			var_08 = distancesquared(self lastknownpos(var_07),self.origin);
 			if(var_08 > var_04) {
@@ -261,12 +261,12 @@ func_12E93() {
 
 			var_02++;
 			if(var_07.unittype == "c8" || var_07.unittype == "c12") {
-				self._blackboard.var_7366 = "frantic";
+				self.var_1198.var_7366 = "frantic";
 				break;
 			}
 
 			if(var_02 >= 3) {
-				self._blackboard.var_7366 = "frantic";
+				self.var_1198.var_7366 = "frantic";
 				break;
 			}
 		}

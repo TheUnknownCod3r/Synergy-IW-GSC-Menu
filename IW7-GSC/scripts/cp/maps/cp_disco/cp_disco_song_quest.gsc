@@ -1,8 +1,8 @@
-/********************************************************************
+/************************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\maps\cp_disco\cp_disco_song_quest.gsc
-********************************************************************/
+ * Script: scripts\cp\maps\cp_disco\cp_disco_song_quest.gsc
+************************************************************/
 
 song_quest_init() {
 	level endon("game_ended");
@@ -48,7 +48,7 @@ song_quest_interactions() {
 	}
 
 	thread scripts\cp\cp_vo::try_to_play_vo("song_quest_success","disco_comment_vo");
-	scripts/cp/zombies/achievement::update_achievement("BEAT_OF_THE_DRUM",1);
+	scripts\cp\zombies\achievement::update_achievement("BEAT_OF_THE_DRUM",1);
 	level notify("add_hidden_song_to_playlist");
 	level thread play_hidden_song((1785,-2077,211),"mus_pa_disco_hidden_track",self);
 	level notify("song_ee_achievement_given");
@@ -139,7 +139,7 @@ remove_radio_for_player(param_00) {
 	level endon("game_ended");
 	self hidefromplayer(param_00);
 	param_00 playsoundtoplayer("ninja_zombie_poof_in",param_00);
-	var_01 = function_01E1(level._effect["rat_cage_poof"],self.origin,param_00,anglestoforward(self.angles),anglestoup(self.angles));
+	var_01 = spawnfxforclient(level._effect["rat_cage_poof"],self.origin,param_00,anglestoforward(self.angles),anglestoup(self.angles));
 	wait(0.1);
 	triggerfx(var_01);
 	wait(1);
@@ -387,8 +387,8 @@ treasure_quest_step_7(param_00) {
 
 		self setplayerdata("cp","coopCareerStats","dlc2_quest",int(7));
 		scripts\cp\cp_merits::processmerit("mt_dlc2_troll");
-		var_03 = function_01E1(level._effect["trolltastic"],param_00.loc_struct.origin,self,anglestoforward(param_00.loc_struct.angles),anglestoup(param_00.loc_struct.angles));
-		var_04 = function_01E1(level._effect["rat_cage_poof"],param_00.loc_struct.origin,self,anglestoforward(param_00.loc_struct.angles),anglestoup(param_00.loc_struct.angles));
+		var_03 = spawnfxforclient(level._effect["trolltastic"],param_00.loc_struct.origin,self,anglestoforward(param_00.loc_struct.angles),anglestoup(param_00.loc_struct.angles));
+		var_04 = spawnfxforclient(level._effect["rat_cage_poof"],param_00.loc_struct.origin,self,anglestoforward(param_00.loc_struct.angles),anglestoup(param_00.loc_struct.angles));
 		wait(0.1);
 		triggerfx(var_04);
 		self playsoundtoplayer("ninja_zombie_poof_in",self);
@@ -414,8 +414,8 @@ treasure_quest_step_7(param_00) {
 
 		self setplayerdata("cp","coopCareerStats","dlc2_quest",int(7));
 		scripts\cp\cp_merits::processmerit("mt_dlc2_troll");
-		var_03 = function_01E1(level._effect["trolltastic"],param_00.loc_struct.origin,self,anglestoforward(param_00.loc_struct.angles),anglestoup(param_00.loc_struct.angles));
-		var_04 = function_01E1(level._effect["rat_cage_poof"],param_00.loc_struct.origin,self,anglestoforward(param_00.loc_struct.angles),anglestoup(param_00.loc_struct.angles));
+		var_03 = spawnfxforclient(level._effect["trolltastic"],param_00.loc_struct.origin,self,anglestoforward(param_00.loc_struct.angles),anglestoup(param_00.loc_struct.angles));
+		var_04 = spawnfxforclient(level._effect["rat_cage_poof"],param_00.loc_struct.origin,self,anglestoforward(param_00.loc_struct.angles),anglestoup(param_00.loc_struct.angles));
 		wait(0.1);
 		triggerfx(var_04);
 		self playsoundtoplayer("ninja_zombie_poof_in",self);
@@ -667,7 +667,7 @@ get_actual_time_from_civil(param_00,param_01,param_02) {
 	}
 	else
 	{
-		var_03 = function_00D2();
+		var_03 = getsystemtime();
 		if(isdefined(level.isdaylightsavings) && level.isdaylightsavings) {
 			var_03 = var_03 + 3600;
 		}
@@ -974,7 +974,7 @@ play_cipher_fx(param_00,param_01) {
 	param_01 endon("disconnect");
 	var_02 = self;
 	foreach(var_04 in param_00) {
-		var_05 = function_01E1(level._effect["cipher_alphabet_" + var_04],var_02.origin + anglestoforward(var_02.angles + (0,90,0)) * -1,param_01,anglestoforward(var_02.angles),anglestoup(var_02.angles));
+		var_05 = spawnfxforclient(level._effect["cipher_alphabet_" + var_04],var_02.origin + anglestoforward(var_02.angles + (0,90,0)) * -1,param_01,anglestoforward(var_02.angles),anglestoup(var_02.angles));
 		wait(0.1);
 		triggerfx(var_05);
 		wait(0.1);

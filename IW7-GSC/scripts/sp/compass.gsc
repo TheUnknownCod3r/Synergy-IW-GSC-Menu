@@ -1,8 +1,8 @@
-/******************************************
+/**********************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\sp\compass.gsc
-******************************************/
+ * Script: scripts\sp\compass.gsc
+**********************************/
 
 setupminimap(param_00,param_01) {
 	level.var_B7AE = param_00;

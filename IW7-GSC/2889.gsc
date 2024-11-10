@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\2889.gsc
-****************************/
+ * Script: 2889.gsc
+************************/
 
 _meth_83D5() {
 	setsaveddvar("cg_fovScale","1");

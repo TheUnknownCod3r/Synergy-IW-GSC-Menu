@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2904.gsc
+ * Script: 2904.gsc
 ***************************************/
 
 func_918F() {

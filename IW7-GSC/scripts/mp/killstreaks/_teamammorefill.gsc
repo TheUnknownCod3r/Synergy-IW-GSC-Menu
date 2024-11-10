@@ -1,8 +1,8 @@
-/**************************************************************
+/******************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\killstreaks\_teamammorefill.gsc
-**************************************************************/
+ * Script: scripts\mp\killstreaks\_teamammorefill.gsc
+******************************************************/
 
 init() {
 	scripts\mp\killstreaks\_killstreaks::registerkillstreak("team_ammo_refill",::func_12908);
@@ -11,7 +11,7 @@ init() {
 func_12908(param_00) {
 	var_01 = stopsounds();
 	if(var_01) {
-		scripts\mp\_matchdata::logkillstreakevent("team_ammo_refill",self.origin);
+		scripts\mp\matchdata::logkillstreakevent("team_ammo_refill",self.origin);
 	}
 
 	return var_01;
@@ -30,7 +30,7 @@ stopsounds() {
 		refillammo(1);
 	}
 
-	level thread scripts\mp\_utility::teamplayercardsplash("used_team_ammo_refill",self);
+	level thread scripts\mp\utility::teamplayercardsplash("used_team_ammo_refill",self);
 	return 1;
 }
 

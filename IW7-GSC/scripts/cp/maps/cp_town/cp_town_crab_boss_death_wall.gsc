@@ -1,8 +1,8 @@
-/****************************************************************************
+/********************************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\maps\cp_town\cp_town_crab_boss_death_wall.gsc
-****************************************************************************/
+ * Script: scripts\cp\maps\cp_town\cp_town_crab_boss_death_wall.gsc
+********************************************************************/
 
 wall_of_death() {
 	wall_of_death_zombie_spawn_initial_settings();
@@ -620,9 +620,9 @@ play_outro_vfx() {
 
 load_death_wall_vfx() {
 	level.toxic_loop_vfx = [];
-	level._effect["toxic_ground_intro"] = loadfx("vfx/iw7/levels/cp_town/crog/vfx_toxic_ground_intro.vfx");
-	level._effect["toxic_ground_loop"] = loadfx("vfx/iw7/levels/cp_town/crog/vfx_toxic_ground_loop.vfx");
-	level._effect["toxic_ground_outro"] = loadfx("vfx/iw7/levels/cp_town/crog/vfx_toxic_ground_outro.vfx");
+	level._effect["toxic_ground_intro"] = loadfx("vfx\iw7\levels\cp_town\crog\vfx_toxic_ground_intro.vfx");
+	level._effect["toxic_ground_loop"] = loadfx("vfx\iw7\levels\cp_town\crog\vfx_toxic_ground_loop.vfx");
+	level._effect["toxic_ground_outro"] = loadfx("vfx\iw7\levels\cp_town\crog\vfx_toxic_ground_outro.vfx");
 }
 
 play_toxic_ground_vfx(param_00) {

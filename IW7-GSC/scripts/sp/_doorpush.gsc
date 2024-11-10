@@ -1,8 +1,8 @@
-/********************************************
+/************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\sp\_doorpush.gsc
-********************************************/
+ * Script: scripts\sp\_doorpush.gsc
+************************************/
 
 func_8FE0() {
 	level.var_EC87["player_rig"] = #animtree;
@@ -465,11 +465,11 @@ func_11EB(param_00,param_01,param_02,param_03,param_04) {
 	var_07["door"] = self.var_5A3C;
 	var_07["player_rig"] = var_05;
 	if(isdefined(param_03)) {
-		scripts/sp/anim::func_1EC1(var_07,param_00 + "_open");
+		scripts\sp\anim::func_1EC1(var_07,param_00 + "_open");
 	}
 	else
 	{
-		scripts/sp/anim::func_1EC1(var_07,param_00);
+		scripts\sp\anim::func_1EC1(var_07,param_00);
 	}
 
 	level.player playsound("shipcrib_door_plr_move_to_door");
@@ -491,8 +491,8 @@ func_11EB(param_00,param_01,param_02,param_03,param_04) {
 				break;
 		}
 
-		scripts/sp/anim::func_1F2C(var_07,param_00 + "_open");
-		thread scripts/sp/anim::func_1EE7(var_07,param_00 + "_hold","stop_loop");
+		scripts\sp\anim::func_1F2C(var_07,param_00 + "_open");
+		thread scripts\sp\anim::func_1EE7(var_07,param_00 + "_hold","stop_loop");
 		wait(param_04);
 		self notify("stop_loop");
 		switch(self.var_8FDD) {
@@ -507,7 +507,7 @@ func_11EB(param_00,param_01,param_02,param_03,param_04) {
 				break;
 		}
 
-		scripts/sp/anim::func_1F2C(var_07,param_00 + "_close");
+		scripts\sp\anim::func_1F2C(var_07,param_00 + "_close");
 	}
 	else
 	{
@@ -533,7 +533,7 @@ func_11EB(param_00,param_01,param_02,param_03,param_04) {
 				break;
 		}
 
-		scripts/sp/anim::func_1F2C(var_07,param_00);
+		scripts\sp\anim::func_1F2C(var_07,param_00);
 	}
 
 	level notify("door_lerp_finished");

@@ -1,30 +1,30 @@
-/*************************************************
+/*****************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\gametypes\lava.gsc
-*************************************************/
+ * Script: scripts\mp\gametypes\lava.gsc
+*****************************************/
 
 main() {
 	if(getdvar("mapname") == "mp_background") {
 		return;
 	}
 
-	scripts\mp\_globallogic::init();
-	scripts\mp\_globallogic::setupcallbacks();
-	if(function_011C()) {
+	scripts\mp\globallogic::init();
+	scripts\mp\globallogic::setupcallbacks();
+	if(isusingmatchrulesdata()) {
 		level.initializematchrules = ::initializematchrules;
 		[[level.initializematchrules]]();
-		level thread scripts\mp\_utility::reinitializematchrulesonmigration();
+		level thread scripts\mp\utility::reinitializematchrulesonmigration();
 	}
 	else
 	{
-		scripts\mp\_utility::registerroundswitchdvar(level.gametype,0,0,9);
-		scripts\mp\_utility::registertimelimitdvar(level.gametype,10);
-		scripts\mp\_utility::registerscorelimitdvar(level.gametype,75);
-		scripts\mp\_utility::registerroundlimitdvar(level.gametype,1);
-		scripts\mp\_utility::registerwinlimitdvar(level.gametype,1);
-		scripts\mp\_utility::registernumlivesdvar(level.gametype,0);
-		scripts\mp\_utility::registerhalftimedvar(level.gametype,0);
+		scripts\mp\utility::registerroundswitchdvar(level.gametype,0,0,9);
+		scripts\mp\utility::registertimelimitdvar(level.gametype,10);
+		scripts\mp\utility::registerscorelimitdvar(level.gametype,75);
+		scripts\mp\utility::registerroundlimitdvar(level.gametype,1);
+		scripts\mp\utility::registerwinlimitdvar(level.gametype,1);
+		scripts\mp\utility::registernumlivesdvar(level.gametype,0);
+		scripts\mp\utility::registerhalftimedvar(level.gametype,0);
 		level.matchrules_damagemultiplier = 0;
 		level.matchrules_vampirism = 0;
 	}
@@ -35,7 +35,7 @@ main() {
 	level.onnormaldeath = ::onnormaldeath;
 	level.onsuicidedeath = ::onsuicidedeath;
 	if(level.matchrules_damagemultiplier || level.matchrules_vampirism) {
-		level.modifyplayerdamage = ::scripts\mp\_damage::gamemodemodifyplayerdamage;
+		level.modifyplayerdamage = ::scripts\mp\damage::gamemodemodifyplayerdamage;
 	}
 
 	game["dialog"]["gametype"] = "tm_death";
@@ -57,15 +57,15 @@ main() {
 }
 
 initializematchrules() {
-	scripts\mp\_utility::setcommonrulesfrommatchdata();
+	scripts\mp\utility::setcommonrulesfrommatchdata();
 	setdynamicdvar("scr_lava_roundswitch",0);
-	scripts\mp\_utility::registerroundswitchdvar("lava",0,0,9);
+	scripts\mp\utility::registerroundswitchdvar("lava",0,0,9);
 	setdynamicdvar("scr_lava_roundlimit",1);
-	scripts\mp\_utility::registerroundlimitdvar("lava",1);
+	scripts\mp\utility::registerroundlimitdvar("lava",1);
 	setdynamicdvar("scr_lava_winlimit",1);
-	scripts\mp\_utility::registerwinlimitdvar("lava",1);
+	scripts\mp\utility::registerwinlimitdvar("lava",1);
 	setdynamicdvar("scr_lava_halftime",0);
-	scripts\mp\_utility::registerhalftimedvar("lava",0);
+	scripts\mp\utility::registerhalftimedvar("lava",0);
 	setdynamicdvar("scr_lava_promode",0);
 }
 
@@ -82,59 +82,59 @@ onstartgametype() {
 		game["defenders"] = var_00;
 	}
 
-	scripts\mp\_utility::setobjectivetext("allies",&"OBJECTIVES_LAVA");
-	scripts\mp\_utility::setobjectivetext("axis",&"OBJECTIVES_LAVA");
+	scripts\mp\utility::setobjectivetext("allies",&"OBJECTIVES_LAVA");
+	scripts\mp\utility::setobjectivetext("axis",&"OBJECTIVES_LAVA");
 	if(level.splitscreen) {
-		scripts\mp\_utility::setobjectivescoretext("allies",&"OBJECTIVES_LAVA");
-		scripts\mp\_utility::setobjectivescoretext("axis",&"OBJECTIVES_LAVA");
+		scripts\mp\utility::setobjectivescoretext("allies",&"OBJECTIVES_LAVA");
+		scripts\mp\utility::setobjectivescoretext("axis",&"OBJECTIVES_LAVA");
 	}
 	else
 	{
-		scripts\mp\_utility::setobjectivescoretext("allies",&"OBJECTIVES_LAVA_SCORE");
-		scripts\mp\_utility::setobjectivescoretext("axis",&"OBJECTIVES_LAVA_SCORE");
+		scripts\mp\utility::setobjectivescoretext("allies",&"OBJECTIVES_LAVA_SCORE");
+		scripts\mp\utility::setobjectivescoretext("axis",&"OBJECTIVES_LAVA_SCORE");
 	}
 
-	scripts\mp\_utility::setobjectivehinttext("allies",&"OBJECTIVES_LAVA_HINT");
-	scripts\mp\_utility::setobjectivehinttext("axis",&"OBJECTIVES_LAVA_HINT");
+	scripts\mp\utility::setobjectivehinttext("allies",&"OBJECTIVES_LAVA_HINT");
+	scripts\mp\utility::setobjectivehinttext("axis",&"OBJECTIVES_LAVA_HINT");
 	initspawns();
 	var_02[0] = level.gametype;
-	scripts\mp\_gameobjects::main(var_02);
+	scripts\mp\gameobjects::main(var_02);
 }
 
 initspawns() {
-	scripts\mp\_spawnlogic::setactivespawnlogic("TDM");
+	scripts\mp\spawnlogic::setactivespawnlogic("TDM");
 	level.spawnmins = (0,0,0);
 	level.spawnmaxs = (0,0,0);
-	scripts\mp\_spawnlogic::addstartspawnpoints("mp_tdm_spawn_allies_start");
-	scripts\mp\_spawnlogic::addstartspawnpoints("mp_tdm_spawn_axis_start");
-	scripts\mp\_spawnlogic::addspawnpoints("allies","mp_tdm_spawn");
-	scripts\mp\_spawnlogic::addspawnpoints("axis","mp_tdm_spawn");
-	level.mapcenter = scripts\mp\_spawnlogic::findboxcenter(level.spawnmins,level.spawnmaxs);
-	function_01B4(level.mapcenter);
+	scripts\mp\spawnlogic::addstartspawnpoints("mp_tdm_spawn_allies_start");
+	scripts\mp\spawnlogic::addstartspawnpoints("mp_tdm_spawn_axis_start");
+	scripts\mp\spawnlogic::addspawnpoints("allies","mp_tdm_spawn");
+	scripts\mp\spawnlogic::addspawnpoints("axis","mp_tdm_spawn");
+	level.mapcenter = scripts\mp\spawnlogic::findboxcenter(level.spawnmins,level.spawnmaxs);
+	setmapcenter(level.mapcenter);
 }
 
 getspawnpoint() {
 	var_00 = self.pers["team"];
 	if(game["switchedsides"]) {
-		var_00 = scripts\mp\_utility::getotherteam(var_00);
+		var_00 = scripts\mp\utility::getotherteam(var_00);
 	}
 
-	if(scripts\mp\_spawnlogic::shoulduseteamstartspawn()) {
-		var_01 = scripts\mp\_spawnlogic::getspawnpointarray("mp_tdm_spawn_" + var_00 + "_start");
-		var_02 = scripts\mp\_spawnlogic::getspawnpoint_startspawn(var_01);
+	if(scripts\mp\spawnlogic::shoulduseteamstartspawn()) {
+		var_01 = scripts\mp\spawnlogic::getspawnpointarray("mp_tdm_spawn_" + var_00 + "_start");
+		var_02 = scripts\mp\spawnlogic::getspawnpoint_startspawn(var_01);
 	}
 	else
 	{
-		var_01 = scripts\mp\_spawnlogic::getteamspawnpoints(var_02);
-		var_02 = scripts\mp\_spawnscoring::getspawnpoint(var_02);
+		var_01 = scripts\mp\spawnlogic::getteamspawnpoints(var_02);
+		var_02 = scripts\mp\spawnscoring::getspawnpoint(var_02);
 	}
 
 	return var_02;
 }
 
 onsuicidedeath(param_00) {
-	var_01 = scripts\mp\_rank::getscoreinfovalue("score_increment");
-	level scripts\mp\_gamescore::giveteamscoreforobjective(scripts\mp\_utility::getotherteam(param_00.pers["team"]),var_01,0);
+	var_01 = scripts\mp\rank::getscoreinfovalue("score_increment");
+	level scripts\mp\gamescore::giveteamscoreforobjective(scripts\mp\utility::getotherteam(param_00.pers["team"]),var_01,0);
 }
 
 onnormaldeath(param_00,param_01,param_02,param_03,param_04) {
@@ -156,7 +156,7 @@ ontimelimit() {
 		var_00 = "allies";
 	}
 
-	thread scripts\mp\_gamelogic::endgame(var_00,game["end_reason"]["time_limit_reached"]);
+	thread scripts\mp\gamelogic::endgame(var_00,game["end_reason"]["time_limit_reached"]);
 }
 
 watchplayerconnect() {
@@ -169,7 +169,7 @@ watchplayerconnect() {
 watchplayeronground() {
 	self endon("disconnect");
 	for(;;) {
-		if(scripts\mp\_utility::isreallyalive(self)) {
+		if(scripts\mp\utility::isreallyalive(self)) {
 			if(self isonground() & !self gold_teeth_hint_func()) {
 				self dodamage(8,self.origin,self,undefined,"MOD_SUICIDE");
 				wait(1);

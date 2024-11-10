@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\3446.gsc
+ * Script: 3446.gsc
 ***************************************/
 
 setup_personalities() {

@@ -1,8 +1,8 @@
-/**********************************************************
+/**************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\zombies\solo_challenges.gsc
-**********************************************************/
+ * Script: scripts\cp\zombies\solo_challenges.gsc
+**************************************************/
 
 init_solo_challenges() {
 	func_956D();
@@ -11,7 +11,7 @@ init_solo_challenges() {
 
 func_956D() {
 	var_00 = getdvar("ui_mapname");
-	level.zombie_challenge_table = "cp/zombies/" + var_00 + "_challenges.csv";
+	level.zombie_challenge_table = "cp\zombies\" + var_00 + "_challenges.csv";
 	if(!tableexists(level.zombie_challenge_table)) {
 		level.zombie_challenge_table = undefined;
 	}

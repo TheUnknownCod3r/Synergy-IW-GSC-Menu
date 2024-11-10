@@ -1,30 +1,30 @@
-/****************************************************
+/********************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\gametypes\cranked.gsc
-****************************************************/
+ * Script: scripts\mp\gametypes\cranked.gsc
+********************************************/
 
 main() {
 	if(getdvar("mapname") == "mp_background") {
 		return;
 	}
 
-	scripts\mp\_globallogic::init();
-	scripts\mp\_globallogic::setupcallbacks();
-	if(function_011C()) {
+	scripts\mp\globallogic::init();
+	scripts\mp\globallogic::setupcallbacks();
+	if(isusingmatchrulesdata()) {
 		level.initializematchrules = ::initializematchrules;
 		[[level.initializematchrules]]();
-		level thread scripts\mp\_utility::reinitializematchrulesonmigration();
+		level thread scripts\mp\utility::reinitializematchrulesonmigration();
 	}
 	else
 	{
-		scripts\mp\_utility::registerroundswitchdvar(level.gametype,0,0,9);
-		scripts\mp\_utility::registertimelimitdvar(level.gametype,10);
-		scripts\mp\_utility::registerscorelimitdvar(level.gametype,100);
-		scripts\mp\_utility::registerroundlimitdvar(level.gametype,1);
-		scripts\mp\_utility::registerwinlimitdvar(level.gametype,1);
-		scripts\mp\_utility::registernumlivesdvar(level.gametype,0);
-		scripts\mp\_utility::registerhalftimedvar(level.gametype,0);
+		scripts\mp\utility::registerroundswitchdvar(level.gametype,0,0,9);
+		scripts\mp\utility::registertimelimitdvar(level.gametype,10);
+		scripts\mp\utility::registerscorelimitdvar(level.gametype,100);
+		scripts\mp\utility::registerroundlimitdvar(level.gametype,1);
+		scripts\mp\utility::registerwinlimitdvar(level.gametype,1);
+		scripts\mp\utility::registernumlivesdvar(level.gametype,0);
+		scripts\mp\utility::registerhalftimedvar(level.gametype,0);
 		level.matchrules_damagemultiplier = 0;
 		level.matchrules_vampirism = 0;
 	}
@@ -36,11 +36,11 @@ main() {
 	if(!level.teambased) {
 		level.onplayerscore = ::onplayerscore;
 		setdvar("scr_cranked_scorelimit",getdvarint("scr_cranked_scorelimit_ffa",60));
-		function_01CC("ffa");
+		setteammode("ffa");
 	}
 
 	if(level.matchrules_damagemultiplier || level.matchrules_vampirism) {
-		level.modifyplayerdamage = ::scripts\mp\_damage::gamemodemodifyplayerdamage;
+		level.modifyplayerdamage = ::scripts\mp\damage::gamemodemodifyplayerdamage;
 	}
 
 	game["dialog"]["gametype"] = "cranked";
@@ -77,15 +77,15 @@ onplayerspawned() {
 }
 
 initializematchrules() {
-	scripts\mp\_utility::setcommonrulesfrommatchdata();
+	scripts\mp\utility::setcommonrulesfrommatchdata();
 	setdynamicdvar("scr_cranked_roundswitch",0);
-	scripts\mp\_utility::registerroundswitchdvar("cranked",0,0,9);
+	scripts\mp\utility::registerroundswitchdvar("cranked",0,0,9);
 	setdynamicdvar("scr_cranked_roundlimit",1);
-	scripts\mp\_utility::registerroundlimitdvar("cranked",1);
+	scripts\mp\utility::registerroundlimitdvar("cranked",1);
 	setdynamicdvar("scr_cranked_winlimit",1);
-	scripts\mp\_utility::registerwinlimitdvar("cranked",1);
+	scripts\mp\utility::registerwinlimitdvar("cranked",1);
 	setdynamicdvar("scr_cranked_halftime",0);
-	scripts\mp\_utility::registerhalftimedvar("cranked",0);
+	scripts\mp\utility::registerhalftimedvar("cranked",0);
 	setdynamicdvar("scr_cranked_promode",0);
 }
 
@@ -111,73 +111,73 @@ onstartgametype() {
 		var_04 = &"OBJECTIVES_DM_HINT";
 	}
 
-	scripts\mp\_utility::setobjectivetext("allies",var_02);
-	scripts\mp\_utility::setobjectivetext("axis",var_02);
+	scripts\mp\utility::setobjectivetext("allies",var_02);
+	scripts\mp\utility::setobjectivetext("axis",var_02);
 	if(level.splitscreen) {
-		scripts\mp\_utility::setobjectivescoretext("allies",var_02);
-		scripts\mp\_utility::setobjectivescoretext("axis",var_02);
+		scripts\mp\utility::setobjectivescoretext("allies",var_02);
+		scripts\mp\utility::setobjectivescoretext("axis",var_02);
 	}
 	else
 	{
-		scripts\mp\_utility::setobjectivescoretext("allies",var_03);
-		scripts\mp\_utility::setobjectivescoretext("axis",var_03);
+		scripts\mp\utility::setobjectivescoretext("allies",var_03);
+		scripts\mp\utility::setobjectivescoretext("axis",var_03);
 	}
 
-	scripts\mp\_utility::setobjectivehinttext("allies",var_04);
-	scripts\mp\_utility::setobjectivehinttext("axis",var_04);
+	scripts\mp\utility::setobjectivehinttext("allies",var_04);
+	scripts\mp\utility::setobjectivehinttext("axis",var_04);
 	initspawns();
 	cranked();
 	var_05[0] = level.gametype;
-	scripts\mp\_gameobjects::main(var_05);
+	scripts\mp\gameobjects::main(var_05);
 }
 
 initspawns() {
 	level.spawnmins = (0,0,0);
 	level.spawnmaxs = (0,0,0);
 	if(level.teambased) {
-		scripts\mp\_spawnlogic::setactivespawnlogic("TDM");
-		scripts\mp\_spawnlogic::addstartspawnpoints("mp_tdm_spawn_allies_start");
-		scripts\mp\_spawnlogic::addstartspawnpoints("mp_tdm_spawn_axis_start");
-		scripts\mp\_spawnlogic::addspawnpoints("allies","mp_tdm_spawn");
-		scripts\mp\_spawnlogic::addspawnpoints("axis","mp_tdm_spawn");
+		scripts\mp\spawnlogic::setactivespawnlogic("TDM");
+		scripts\mp\spawnlogic::addstartspawnpoints("mp_tdm_spawn_allies_start");
+		scripts\mp\spawnlogic::addstartspawnpoints("mp_tdm_spawn_axis_start");
+		scripts\mp\spawnlogic::addspawnpoints("allies","mp_tdm_spawn");
+		scripts\mp\spawnlogic::addspawnpoints("axis","mp_tdm_spawn");
 	}
 	else
 	{
-		scripts\mp\_spawnlogic::setactivespawnlogic("FreeForAll");
-		scripts\mp\_spawnlogic::addspawnpoints("allies","mp_dm_spawn");
-		scripts\mp\_spawnlogic::addspawnpoints("axis","mp_dm_spawn");
+		scripts\mp\spawnlogic::setactivespawnlogic("FreeForAll");
+		scripts\mp\spawnlogic::addspawnpoints("allies","mp_dm_spawn");
+		scripts\mp\spawnlogic::addspawnpoints("axis","mp_dm_spawn");
 	}
 
-	level.mapcenter = scripts\mp\_spawnlogic::findboxcenter(level.spawnmins,level.spawnmaxs);
-	function_01B4(level.mapcenter);
+	level.mapcenter = scripts\mp\spawnlogic::findboxcenter(level.spawnmins,level.spawnmaxs);
+	setmapcenter(level.mapcenter);
 }
 
 getspawnpoint() {
 	if(level.teambased) {
 		var_00 = self.pers["team"];
 		if(game["switchedsides"]) {
-			var_00 = scripts\mp\_utility::getotherteam(var_00);
+			var_00 = scripts\mp\utility::getotherteam(var_00);
 		}
 
-		if(scripts\mp\_spawnlogic::shoulduseteamstartspawn()) {
-			var_01 = scripts\mp\_spawnlogic::getspawnpointarray("mp_tdm_spawn_" + var_00 + "_start");
-			var_02 = scripts\mp\_spawnlogic::getspawnpoint_startspawn(var_01);
+		if(scripts\mp\spawnlogic::shoulduseteamstartspawn()) {
+			var_01 = scripts\mp\spawnlogic::getspawnpointarray("mp_tdm_spawn_" + var_00 + "_start");
+			var_02 = scripts\mp\spawnlogic::getspawnpoint_startspawn(var_01);
 		}
 		else
 		{
-			var_01 = scripts\mp\_spawnlogic::getteamspawnpoints(var_00);
-			var_02 = scripts\mp\_spawnscoring::getspawnpoint(var_01);
+			var_01 = scripts\mp\spawnlogic::getteamspawnpoints(var_00);
+			var_02 = scripts\mp\spawnscoring::getspawnpoint(var_01);
 		}
 	}
 	else
 	{
-		var_01 = scripts\mp\_spawnlogic::getteamspawnpoints(self.team);
+		var_01 = scripts\mp\spawnlogic::getteamspawnpoints(self.team);
 		if(level.ingraceperiod) {
-			var_02 = scripts\mp\_spawnlogic::getspawnpoint_random(var_02);
+			var_02 = scripts\mp\spawnlogic::getspawnpoint_random(var_02);
 		}
 		else
 		{
-			var_02 = scripts\mp\_spawnscoring::getspawnpoint(var_02);
+			var_02 = scripts\mp\spawnscoring::getspawnpoint(var_02);
 		}
 	}
 
@@ -185,30 +185,30 @@ getspawnpoint() {
 }
 
 onnormaldeath(param_00,param_01,param_02,param_03,param_04) {
-	if(isdefined(param_00.cranked) && param_01 scripts\mp\_utility::isenemy(param_00)) {
-		param_01 scripts\mp\_missions::processchallenge("ch_cranky");
+	if(isdefined(param_00.cranked) && param_01 scripts\mp\utility::isenemy(param_00)) {
+		param_01 scripts\mp\missions::processchallenge("ch_cranky");
 	}
 
 	param_00 cleanupcrankedtimer();
-	var_05 = scripts\mp\_rank::getscoreinfovalue("score_increment");
+	var_05 = scripts\mp\rank::getscoreinfovalue("score_increment");
 	if(isdefined(param_01.cranked)) {
 		if(param_01.cranked_end_time - gettime() <= 1000) {
-			param_01 scripts\mp\_missions::processchallenge("ch_cranked_reset");
+			param_01 scripts\mp\missions::processchallenge("ch_cranked_reset");
 		}
 
 		var_05 = var_05 * 2;
 		var_06 = "kill_cranked";
 		param_01 thread onkill(var_06);
 		param_01.pers["killChains"]++;
-		param_01 scripts\mp\_persistence::statsetchild("round","killChains",param_01.pers["killChains"]);
+		param_01 scripts\mp\persistence::statsetchild("round","killChains",param_01.pers["killChains"]);
 	}
-	else if(scripts\mp\_utility::isreallyalive(param_01)) {
+	else if(scripts\mp\utility::isreallyalive(param_01)) {
 		param_01 makecranked("begin_cranked");
 	}
 
 	if(isdefined(param_00.attackers) && !isdefined(level.assists_disabled)) {
 		foreach(var_08 in param_00.attackers) {
-			if(!isdefined(scripts\mp\_utility::_validateattacker(var_08))) {
+			if(!isdefined(scripts\mp\utility::_validateattacker(var_08))) {
 				continue;
 			}
 
@@ -229,7 +229,7 @@ onnormaldeath(param_00,param_01,param_02,param_03,param_04) {
 	}
 
 	if(level.teambased) {
-		level scripts\mp\_gamescore::giveteamscoreforobjective(param_01.pers["team"],var_05,0);
+		level scripts\mp\gamescore::giveteamscoreforobjective(param_01.pers["team"],var_05,0);
 		return;
 	}
 
@@ -262,12 +262,12 @@ ontimelimit() {
 		var_00 = "allies";
 	}
 
-	thread scripts\mp\_gamelogic::endgame(var_00,game["end_reason"]["time_limit_reached"]);
+	thread scripts\mp\gamelogic::endgame(var_00,game["end_reason"]["time_limit_reached"]);
 }
 
 onplayerscore(param_00,param_01) {
 	if(param_00 != "super_kill" && issubstr(param_00,"kill")) {
-		var_02 = scripts\mp\_rank::getscoreinfovalue("score_increment");
+		var_02 = scripts\mp\rank::getscoreinfovalue("score_increment");
 		if(isdefined(param_01.cranked)) {
 			var_02 = var_02 * 2;
 		}
@@ -283,19 +283,19 @@ cranked() {
 }
 
 makecranked(param_00) {
-	scripts\mp\_utility::leaderdialogonplayer(param_00);
-	thread scripts\mp\_rank::scoreeventpopup(param_00);
+	scripts\mp\utility::leaderdialogonplayer(param_00);
+	thread scripts\mp\rank::scoreeventpopup(param_00);
 	setcrankedbombtimer("kill");
 	self.cranked = 1;
-	scripts\mp\_utility::giveperk("specialty_fastreload");
-	scripts\mp\_utility::giveperk("specialty_quickdraw");
-	scripts\mp\_utility::giveperk("specialty_fastoffhand");
-	scripts\mp\_utility::giveperk("specialty_fastsprintrecovery");
-	scripts\mp\_utility::giveperk("specialty_marathon");
-	scripts\mp\_utility::giveperk("specialty_quickswap");
-	scripts\mp\_utility::giveperk("specialty_stalker");
+	scripts\mp\utility::giveperk("specialty_fastreload");
+	scripts\mp\utility::giveperk("specialty_quickdraw");
+	scripts\mp\utility::giveperk("specialty_fastoffhand");
+	scripts\mp\utility::giveperk("specialty_fastsprintrecovery");
+	scripts\mp\utility::giveperk("specialty_marathon");
+	scripts\mp\utility::giveperk("specialty_quickswap");
+	scripts\mp\utility::giveperk("specialty_stalker");
 	self.movespeedscaler = 1.2;
-	scripts\mp\_weapons::updatemovespeedscale();
+	scripts\mp\weapons::updatemovespeedscale();
 }
 
 onkill(param_00) {
@@ -305,14 +305,14 @@ onkill(param_00) {
 		wait(0.05);
 	}
 
-	thread scripts\mp\_utility::giveunifiedpoints(param_00);
+	thread scripts\mp\utility::giveunifiedpoints(param_00);
 	setcrankedbombtimer("kill");
 }
 
 onassist(param_00) {
 	level endon("game_ended");
 	self endon("disconnect");
-	thread scripts\mp\_rank::scoreeventpopup(param_00);
+	thread scripts\mp\rank::scoreeventpopup(param_00);
 	setcrankedbombtimer("assist");
 }
 
@@ -323,20 +323,20 @@ watchbombtimer(param_00) {
 	self endon("disconnect");
 	level endon("game_ended");
 	var_01 = 5;
-	scripts\mp\_hostmigration::waitlongdurationwithhostmigrationpause(param_00 - var_01 - 1);
-	scripts\mp\_utility::leaderdialogonplayer("five_seconds_left");
-	scripts\mp\_hostmigration::waitlongdurationwithhostmigrationpause(1);
+	scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(param_00 - var_01 - 1);
+	scripts\mp\utility::leaderdialogonplayer("five_seconds_left");
+	scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(1);
 	self setclientomnvar("ui_cranked_bomb_timer_final_seconds",1);
 	while(var_01 > 0) {
 		self playsoundtoplayer("mp_cranked_countdown",self);
-		scripts\mp\_hostmigration::waitlongdurationwithhostmigrationpause(1);
+		scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(1);
 		var_01--;
 	}
 
-	if(isdefined(self) && scripts\mp\_utility::isreallyalive(self)) {
+	if(isdefined(self) && scripts\mp\utility::isreallyalive(self)) {
 		self playsound("frag_grenade_explode");
 		playfx(level.mine_explode,self.origin + (0,0,32));
-		scripts\mp\_utility::_suicide();
+		scripts\mp\utility::_suicide();
 		self setclientomnvar("ui_cranked_bomb_timer_end_milliseconds",0);
 	}
 }
@@ -363,7 +363,7 @@ watchcrankedhostmigration() {
 	self endon("disconnect");
 	level waittill("host_migration_begin");
 	self setclientomnvar("ui_cranked_timer_stopped",1);
-	var_00 = scripts\mp\_hostmigration::waittillhostmigrationdone();
+	var_00 = scripts\mp\hostmigration::waittillhostmigrationdone();
 	self setclientomnvar("ui_cranked_timer_stopped",0);
 	if(self.cranked_end_time + var_00 < 5) {
 		self setclientomnvar("ui_cranked_bomb_timer_final_seconds",1);

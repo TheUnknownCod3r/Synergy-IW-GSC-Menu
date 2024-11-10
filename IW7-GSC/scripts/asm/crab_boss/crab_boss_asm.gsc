@@ -1,8 +1,8 @@
-/***********************************************************
+/***************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\asm\crab_boss\crab_boss_asm.gsc
-***********************************************************/
+ * Script: scripts\asm\crab_boss\crab_boss_asm.gsc
+***************************************************/
 
 asminit(param_00,param_01,param_02,param_03) {
 	scripts\asm\zombie\zombie::func_13F9A(param_00,param_01,param_02,param_03);
@@ -75,7 +75,7 @@ clearaction() {
 }
 
 shouldplayentranceanim(param_00,param_01,param_02,param_03) {
-	return !scripts\common\utility::istrue(self.shouldabortentranceanim);
+	return !scripts\engine\utility::istrue(self.shouldabortentranceanim);
 }
 
 isanimdone(param_00,param_01,param_02,param_03) {
@@ -115,7 +115,7 @@ isbeamdone(param_00,param_01,param_02,param_03) {
 
 launchegg(param_00,param_01,param_02) {
 	var_03 = scripts\mp\agents\crab_boss\crab_boss_tunedata::gettunedata();
-	if(scripts\common\utility::istrue(param_02)) {
+	if(scripts\engine\utility::istrue(param_02)) {
 		scripts\cp\maps\cp_town\cp_town_crab_boss_escort::launch_egg_sac(param_00,param_01,var_03.egg_sac_spawn_fly_time,0);
 		return;
 	}
@@ -126,7 +126,7 @@ launchegg(param_00,param_01,param_02) {
 doroarbomb() {
 	foreach(var_01 in level.players) {
 		thread doroarbombnearplayer(var_01,self);
-		scripts\common\utility::waitframe();
+		scripts\engine\utility::waitframe();
 	}
 }
 
@@ -136,7 +136,7 @@ doroarbombnearplayer(param_00,param_01) {
 		var_05 = geteggsaclaunchpos();
 		var_06 = scripts\mp\agents\crab_boss\crab_boss_tunedata::gettunedata();
 		scripts\cp\maps\cp_town\cp_town_crab_boss_escort::launch_egg_sac(var_05,var_04,var_06.roar_bomb_fly_time,0);
-		scripts\common\utility::waitframe();
+		scripts\engine\utility::waitframe();
 	}
 }
 
@@ -161,7 +161,7 @@ adjust_roar_bomb_dist(param_00) {
 	var_01 = 35;
 	var_02 = 0;
 	foreach(var_04 in level.players) {
-		if(scripts\cp\_laststand::player_in_laststand(var_04)) {
+		if(scripts\cp\cp_laststand::player_in_laststand(var_04)) {
 			continue;
 		}
 
@@ -174,7 +174,7 @@ adjust_roar_bomb_dist(param_00) {
 players_commit_to_the_run() {
 	var_00 = 0;
 	foreach(var_02 in level.players) {
-		if(scripts\cp\_laststand::player_in_laststand(var_02)) {
+		if(scripts\cp\cp_laststand::player_in_laststand(var_02)) {
 			continue;
 		}
 
@@ -208,8 +208,8 @@ dospawnsovertime(param_00,param_01) {
 	self endon(param_00 + "_finished");
 	self endon("stop_spawns_over_time");
 	var_02 = scripts\mp\agents\crab_boss\crab_boss_tunedata::gettunedata();
-	var_03 = scripts\common\utility::array_randomize(var_02.egg_sack_launching_tags);
-	var_04 = scripts\common\utility::array_randomize(self.spawnposarray);
+	var_03 = scripts\engine\utility::array_randomize(var_02.egg_sack_launching_tags);
+	var_04 = scripts\engine\utility::array_randomize(self.spawnposarray);
 	self.numofspawnrequested = self.spawnposarray.size;
 	for(var_05 = 0;var_05 < self.numofspawnrequested;var_05++) {
 		var_06 = var_05 % var_03.size;
@@ -250,7 +250,7 @@ trycrabbosssmashattack(param_00,param_01) {
 
 	earthquake(0.5,3,var_08,5000);
 	for(var_0B = 0;var_0B <= var_03;var_0B++) {
-		var_0C = scripts\common\utility::drop_to_ground(param_01.origin + anglestoforward(var_0A) * var_04 * var_0B,1000,-3000);
+		var_0C = scripts\engine\utility::drop_to_ground(param_01.origin + anglestoforward(var_0A) * var_04 * var_0B,1000,-3000);
 		if(var_0B == 0) {
 			playfx(level._effect["claw_trail"],var_0C);
 		}
@@ -367,7 +367,7 @@ dodebrisvfx_3() {
 }
 
 dorightfootstep(param_00) {
-	if(scripts\common\utility::istrue(param_00)) {
+	if(scripts\engine\utility::istrue(param_00)) {
 		earthquake(0.3,1,self.origin,7000);
 	}
 
@@ -377,7 +377,7 @@ dorightfootstep(param_00) {
 }
 
 doleftfootstep(param_00) {
-	if(scripts\common\utility::istrue(param_00)) {
+	if(scripts\engine\utility::istrue(param_00)) {
 		earthquake(0.3,1,self.origin,7000);
 	}
 
@@ -475,8 +475,8 @@ dobeamattackposition(param_00,param_01) {
 	level thread crab_boss_lure_beam_sfx(var_06,param_01);
 	for(var_07 = 0;var_07 < var_05;var_07++) {
 		var_08 = self gettagorigin("tag_laser");
-		function_02E0(level._effect["crab_boss_beam_attack"],var_08,vectortoangles(param_01 - var_08),param_01);
-		scripts\common\utility::waitframe();
+		playfxbetweenpoints(level._effect["crab_boss_beam_attack"],var_08,vectortoangles(param_01 - var_08),param_01);
+		scripts\engine\utility::waitframe();
 	}
 
 	level notify("stop_lure_beam_sfx");
@@ -494,13 +494,13 @@ crab_boss_lure_beam_sfx(param_00,param_01) {
 	var_03 = param_01 + var_02 * 0.3333333;
 	var_04 = param_01 + var_02 * 0.6666667;
 	var_05 = param_01 + var_02 * 0.5;
-	level thread scripts\common\utility::play_sound_in_space("town_weap_beam_fire_npc_start",param_00);
-	level.boss_beam_lure_loop_sfx = scripts\common\utility::play_loopsound_in_space("town_weap_beam_fire_npc_loop",param_00);
-	level.boss_beam_lure_loop_sfx_1 = scripts\common\utility::play_loopsound_in_space("town_weap_beam_fire_npc_loop",var_05);
-	level.boss_beam_lure_loop_sfx_2 = scripts\common\utility::play_loopsound_in_space("town_weap_apex_beam_fire_npc_loop",param_01);
+	level thread scripts\engine\utility::play_sound_in_space("town_weap_beam_fire_npc_start",param_00);
+	level.boss_beam_lure_loop_sfx = scripts\engine\utility::play_loopsound_in_space("town_weap_beam_fire_npc_loop",param_00);
+	level.boss_beam_lure_loop_sfx_1 = scripts\engine\utility::play_loopsound_in_space("town_weap_beam_fire_npc_loop",var_05);
+	level.boss_beam_lure_loop_sfx_2 = scripts\engine\utility::play_loopsound_in_space("town_weap_apex_beam_fire_npc_loop",param_01);
 	level waittill("stop_lure_beam_sfx");
-	level thread scripts\common\utility::play_sound_in_space("town_weap_beam_fire_npc_end",param_00);
-	level scripts\common\utility::play_sound_in_space("town_frag_grenade_explode",param_01);
+	level thread scripts\engine\utility::play_sound_in_space("town_weap_beam_fire_npc_end",param_00);
+	level scripts\engine\utility::play_sound_in_space("town_frag_grenade_explode",param_01);
 	wait(0.15);
 	level.boss_beam_lure_loop_sfx stoploopsound();
 	level.boss_beam_lure_loop_sfx delete();
@@ -537,17 +537,17 @@ beam_notehandler(param_00,param_01,param_02,param_03) {
 			break;
 
 		case "start_beam_fx":
-			if(!scripts\common\utility::istrue(self.bbeamfxstarted)) {
+			if(!scripts\engine\utility::istrue(self.bbeamfxstarted)) {
 				var_04 = self gettagorigin("tag_laser");
-				thread scripts\common\utility::play_sound_in_space("boss_crog_lure_build_up",var_04);
-				playfxontag(scripts\common\utility::getfx("boss_crab_beam_start_fx"),self,"tag_laser");
+				thread scripts\engine\utility::play_sound_in_space("boss_crog_lure_build_up",var_04);
+				playfxontag(scripts\engine\utility::getfx("boss_crab_beam_start_fx"),self,"tag_laser");
 				self.bbeamfxstarted = 1;
 			}
 			break;
 
 		case "stop_beam_fx":
 			self.bbeamfxstarted = undefined;
-			stopfxontag(scripts\common\utility::getfx("boss_crab_beam_start_fx"),self,"tag_laser");
+			stopfxontag(scripts\engine\utility::getfx("boss_crab_beam_start_fx"),self,"tag_laser");
 			break;
 	}
 }
@@ -591,7 +591,7 @@ dosubmergebomb_asm(param_00) {
 
 	var_01 = geteggsaclaunchpos();
 	var_02 = 0;
-	if(isdefined(self.submergebombspawnindex) && scripts\common\utility::array_contains(self.submergebombspawnindex,self.numofbombrequested)) {
+	if(isdefined(self.submergebombspawnindex) && scripts\engine\utility::array_contains(self.submergebombspawnindex,self.numofbombrequested)) {
 		var_02 = 1;
 	}
 
@@ -611,7 +611,7 @@ showweakspot() {
 }
 
 hideweakspot() {
-	if(scripts\common\utility::istrue(self.reveal_weak_spot)) {
+	if(scripts\engine\utility::istrue(self.reveal_weak_spot)) {
 		return;
 	}
 
@@ -687,7 +687,7 @@ playanimwithplaybackrate(param_00,param_01,param_02,param_03) {
 }
 
 chooseidleanim(param_00,param_01,param_02) {
-	if(scripts\common\utility::istrue(self.blookatplayer)) {
+	if(scripts\engine\utility::istrue(self.blookatplayer)) {
 		return 0;
 	}
 
@@ -732,13 +732,13 @@ shouldturn(param_00,param_01,param_02,param_03) {
 
 handleadditionalyaw(param_00,param_01) {
 	self endon(param_00 + "_finished");
-	var_02 = self.additionalyaw \ param_01;
+	var_02 = self.additionalyaw / param_01;
 	for(var_03 = 0;var_03 < param_01;var_03++) {
 		var_04 = self.angles[1];
 		var_04 = var_04 + var_02;
 		var_05 = (self.angles[0],var_04,self.angles[2]);
 		self orientmode("face angle abs",var_05);
-		scripts\common\utility::waitframe();
+		scripts\engine\utility::waitframe();
 	}
 
 	self.additionalyaw = undefined;
@@ -773,7 +773,7 @@ loophealanim(param_00,param_01,param_02,param_03) {
 }
 
 isdonehealing(param_00,param_01,param_02,param_03) {
-	if(!scripts\common\utility::istrue(self.bhealing)) {
+	if(!scripts\engine\utility::istrue(self.bhealing)) {
 		return 1;
 	}
 
@@ -804,8 +804,8 @@ applyallmotiontowards(param_00,param_01,param_02,param_03) {
 	var_04 = 0;
 	var_05 = getanimlength(param_02);
 	while(var_04 < var_05) {
-		var_06 = var_04 \ var_05;
-		var_07 = var_04 + 0.05 \ var_05;
+		var_06 = var_04 / var_05;
+		var_07 = var_04 + 0.05 / var_05;
 		if(var_07 > 1) {
 			var_04 = 0;
 			var_06 = 0;
@@ -890,7 +890,7 @@ dogroupspawn() {
 	for(var_01 = 1;var_01 <= var_00;var_01++) {
 		var_02 = geteggsaclaunchpos();
 		thread launchtoxicspawn(var_02);
-		scripts\common\utility::waitframe();
+		scripts\engine\utility::waitframe();
 	}
 }
 
@@ -901,7 +901,7 @@ startsonicbeam() {
 stopsonicbeam() {}
 
 choosetauntanim(param_00,param_01,param_02) {
-	if(scripts\common\utility::istrue(level.crab_boss_random_taunt_anim)) {
+	if(scripts\engine\utility::istrue(level.crab_boss_random_taunt_anim)) {
 		return lib_0F3C::func_3E96(param_00,param_01);
 	}
 

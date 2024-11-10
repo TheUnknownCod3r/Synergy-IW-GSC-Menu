@@ -1,23 +1,23 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3109.gsc
-****************************/
+ * Script: 3109.gsc
+************************/
 
 func_98CA(param_00) {
-	if(isdefined(self.bt.var_9882)) {
+	if(isdefined(self.var_3135.var_9882)) {
 		return level.success;
 	}
 
-	self.bt.var_F15D = undefined;
-	self.bt.var_1152B = 0;
-	self.bt.var_1154B = 0;
+	self.var_3135.var_F15D = undefined;
+	self.var_3135.var_1152B = 0;
+	self.var_3135.var_1154B = 0;
 	self.asm.var_7360 = 0;
 	self.asm.var_4C86 = spawnstruct();
 	self.asm.footsteps = spawnstruct();
 	self.asm.footsteps.foot = "invalid";
 	self.asm.footsteps.time = 0;
-	self.bt.var_54AE = 0;
+	self.var_3135.var_54AE = 0;
 	lib_0A10::func_F13B(param_00);
 	thread func_AC76();
 	thread damage_monitor();
@@ -35,38 +35,38 @@ func_6744() {
 	}
 
 	if(self.team == "allies") {
-		self.bt.var_652A = "axis";
+		self.var_3135.var_652A = "axis";
 	}
 	else if(self.team == "team3" && isdefined(self.var_C93D)) {
-		self.bt.var_652A = "team3";
+		self.var_3135.var_652A = "team3";
 	}
 	else
 	{
-		self.bt.var_652A = "allies";
+		self.var_3135.var_652A = "allies";
 	}
 
-	self.bt.var_F15D = self.triggerportableradarping;
-	self.bt.var_9882 = 1;
+	self.var_3135.var_F15D = self.triggerportableradarping;
+	self.var_3135.var_9882 = 1;
 }
 
 func_AC76() {
-	if(isdefined(self.bt.var_AC75)) {
+	if(isdefined(self.var_3135.var_AC75)) {
 		return;
 	}
 
 	self endon("death");
-	self.bt.var_AC75 = 40;
+	self.var_3135.var_AC75 = 40;
 	var_00 = 2;
 	var_01 = 0;
 	while(var_01 != var_00) {
-		wait(self.bt.var_AC75);
+		wait(self.var_3135.var_AC75);
 		if(isdefined(self.var_595E)) {
 			wait(5);
 			continue;
 		}
 
 		if(func_9B71()) {
-			self.bt.var_AC75 = self.bt.var_AC75 * 0.5;
+			self.var_3135.var_AC75 = self.var_3135.var_AC75 * 0.5;
 			var_01++;
 			continue;
 		}
@@ -115,7 +115,7 @@ func_F16F() {
 }
 
 func_9B71() {
-	if(self.bt.var_F15D != self.triggerportableradarping && distancesquared(self.origin,self.bt.var_F15D.origin) < 640000 && self.var_164D["seeker"].var_4BC0 == "run_loop") {
+	if(self.var_3135.var_F15D != self.triggerportableradarping && distancesquared(self.origin,self.var_3135.var_F15D.origin) < 640000 && self.var_164D["seeker"].var_4BC0 == "run_loop") {
 		return 1;
 	}
 
@@ -141,7 +141,7 @@ func_EA0E() {
 func_EB63() {
 	self endon("death");
 	for(;;) {
-		if(isdefined(self.bt.var_F15D) && self.bt.var_F15D != self.triggerportableradarping && isdefined(self.vehicle_getspawnerarray)) {
+		if(isdefined(self.var_3135.var_F15D) && self.var_3135.var_F15D != self.triggerportableradarping && isdefined(self.vehicle_getspawnerarray)) {
 			self.var_A9CB = self.vehicle_getspawnerarray;
 		}
 
@@ -153,8 +153,8 @@ func_13940() {
 	self endon("death");
 	for(;;) {
 		self waittill("bad_path");
-		if(isdefined(self.bt.var_F15D) && self.bt.var_F15D != self.triggerportableradarping) {
-			if(isdefined(self.var_728A) || isplayer(self.bt.var_F15D)) {
+		if(isdefined(self.var_3135.var_F15D) && self.var_3135.var_F15D != self.triggerportableradarping) {
+			if(isdefined(self.var_728A) || isplayer(self.var_3135.var_F15D)) {
 				if(isdefined(self.var_A9CB)) {
 					self._meth_8425 = 1;
 					self _meth_8481(self.var_A9CB);
@@ -171,7 +171,7 @@ func_13940() {
 }
 
 func_1572(param_00) {
-	if(!isdefined(self.bt.var_9882)) {
+	if(!isdefined(self.var_3135.var_9882)) {
 		return level.failure;
 	}
 
@@ -179,14 +179,14 @@ func_1572(param_00) {
 		return level.success;
 	}
 
-	if(isdefined(self.bt.var_F15D) && !isdefined(self.var_728A)) {
-		if(!isalive(self.bt.var_F15D) || self.bt.var_F15D.ignoreme || isdefined(self.bt.var_F15D.var_C012)) {
+	if(isdefined(self.var_3135.var_F15D) && !isdefined(self.var_728A)) {
+		if(!isalive(self.var_3135.var_F15D) || self.var_3135.var_F15D.ignoreme || isdefined(self.var_3135.var_F15D.var_C012)) {
 			clear_scripted_anim(0);
 		}
 	}
 
-	if(!self.bt.var_1152B) {
-		var_01 = !isdefined(self.bt.var_F15D) || self.bt.var_F15D == self.triggerportableradarping;
+	if(!self.var_3135.var_1152B) {
+		var_01 = !isdefined(self.var_3135.var_F15D) || self.var_3135.var_F15D == self.triggerportableradarping;
 		var_02 = lib_0E26::func_7C41(!var_01);
 		if(isdefined(var_02) && var_02 != self.triggerportableradarping) {
 			func_DED7(var_02);
@@ -194,8 +194,8 @@ func_1572(param_00) {
 	}
 
 	_meth_8420();
-	if(isdefined(self.bt.var_F15D) && self.bt.var_F15D != self.triggerportableradarping && !isdefined(self.var_9BB9) && !self.bt.var_54AE) {
-		self.bt.var_54AE = 1;
+	if(isdefined(self.var_3135.var_F15D) && self.var_3135.var_F15D != self.triggerportableradarping && !isdefined(self.var_9BB9) && !self.var_3135.var_54AE) {
+		self.var_3135.var_54AE = 1;
 		self notify("stop soundseeker_seek_lp");
 		playworldsound("seeker_acquire_target",self.origin);
 		if(self.var_2A4B) {
@@ -222,7 +222,7 @@ func_F177(param_00) {
 		return level.failure;
 	}
 
-	if(self.bt.var_F15D == self.triggerportableradarping) {
+	if(self.var_3135.var_F15D == self.triggerportableradarping) {
 		return level.failure;
 	}
 
@@ -230,9 +230,9 @@ func_F177(param_00) {
 		return level.failure;
 	}
 
-	if(isdefined(self.bt.var_F15D.unittype)) {
+	if(isdefined(self.var_3135.var_F15D.unittype)) {
 		var_01 = 0;
-		switch(self.bt.var_F15D.unittype) {
+		switch(self.var_3135.var_F15D.unittype) {
 			case "soldier":
 			case "civilian":
 			case "c6":
@@ -245,16 +245,16 @@ func_F177(param_00) {
 		}
 	}
 
-	if(issubstr(self.bt.var_F15D.classname,"worker")) {
+	if(issubstr(self.var_3135.var_F15D.classname,"worker")) {
 		return level.failure;
 	}
 
-	return scripts/aitypes/melee::shouldmelee(param_00,self.bt.var_F15D);
+	return scripts\aitypes\melee::shouldmelee(param_00,self.var_3135.var_F15D);
 }
 
 func_13850(param_00) {
-	if(!isalive(self.bt.var_F15D)) {
-		if(isplayer(self.bt.var_F15D)) {
+	if(!isalive(self.var_3135.var_F15D)) {
+		if(isplayer(self.var_3135.var_F15D)) {
 			self _meth_8481(self.origin);
 		}
 
@@ -265,7 +265,7 @@ func_13850(param_00) {
 		return level.success;
 	}
 
-	var_01 = distancesquared(self.origin,self.bt.var_F15D.origin);
+	var_01 = distancesquared(self.origin,self.var_3135.var_F15D.origin);
 	if(isdefined(self._meth_8425) && isdefined(self.var_A9CB)) {
 		var_01 = distancesquared(self.origin,self.var_A9CB);
 	}
@@ -274,7 +274,7 @@ func_13850(param_00) {
 	}
 
 	var_02 = 72;
-	if(isplayer(self.bt.var_F15D)) {
+	if(isplayer(self.var_3135.var_F15D)) {
 		var_02 = 25;
 	}
 
@@ -296,7 +296,7 @@ func_2BD3(param_00) {
 		return level.failure;
 	}
 
-	if(self.bt.var_F15D == self.triggerportableradarping) {
+	if(self.var_3135.var_F15D == self.triggerportableradarping) {
 		return level.failure;
 	}
 
@@ -317,8 +317,8 @@ _meth_8420() {
 		return;
 	}
 
-	if(isplayer(self.bt.var_F15D)) {
-		if(self.bt.var_F15D == self.triggerportableradarping) {
+	if(isplayer(self.var_3135.var_F15D)) {
+		if(self.var_3135.var_F15D == self.triggerportableradarping) {
 			self.var_6D = 120;
 		}
 		else
@@ -326,7 +326,7 @@ _meth_8420() {
 			self.var_6D = 13;
 		}
 	}
-	else if(isdefined(self.bt.var_F15D) && self.bt.var_F15D == self.triggerportableradarping) {
+	else if(isdefined(self.var_3135.var_F15D) && self.var_3135.var_F15D == self.triggerportableradarping) {
 		self.var_6D = 120;
 	}
 	else
@@ -338,13 +338,13 @@ _meth_8420() {
 		return;
 	}
 
-	if(isdefined(self.bt.var_F15D)) {
-		var_00 = getclosestpointonnavmesh(self.bt.var_F15D.origin,self);
-		var_01 = distancesquared(var_00,self.bt.var_F15D.origin);
+	if(isdefined(self.var_3135.var_F15D)) {
+		var_00 = getclosestpointonnavmesh(self.var_3135.var_F15D.origin,self);
+		var_01 = distancesquared(var_00,self.var_3135.var_F15D.origin);
 		if(var_01 <= squared(12)) {
 			self.var_391C = undefined;
 			self.var_7296 = undefined;
-			self _meth_8482(self.bt.var_F15D);
+			self _meth_8482(self.var_3135.var_F15D);
 			return;
 		}
 
@@ -410,18 +410,18 @@ func_DED7(param_00) {
 		return;
 	}
 
-	if(isdefined(self.bt.var_F15D) && self.bt.var_F15D == param_00) {
+	if(isdefined(self.var_3135.var_F15D) && self.var_3135.var_F15D == param_00) {
 		return;
 	}
 
-	if(isdefined(self.bt.var_F15D) && self.bt.var_F15D != param_00 && scripts\engine\utility::array_contains(level.var_F10A.targets,self.bt.var_F15D)) {
+	if(isdefined(self.var_3135.var_F15D) && self.var_3135.var_F15D != param_00 && scripts\engine\utility::array_contains(level.var_F10A.targets,self.var_3135.var_F15D)) {
 		clear_scripted_anim(0);
 	}
 
 	level.var_F10A.targets[level.var_F10A.targets.size] = param_00;
 	self.loadstartpointtransients = param_00;
-	self.bt.var_F15D = param_00;
-	self.bt.var_1154B = gettime();
+	self.var_3135.var_F15D = param_00;
+	self.var_3135.var_1154B = gettime();
 	param_00.var_F126 = self;
 	self notify("set_bt_target");
 	if(isai(param_00) && isdefined(self.triggerportableradarping) && isplayer(self.triggerportableradarping)) {
@@ -433,25 +433,25 @@ func_DED7(param_00) {
 
 clear_scripted_anim(param_00) {
 	self notify("new_bt_target");
-	self.bt.var_F15D notify("seeker_stop_outline");
+	self.var_3135.var_F15D notify("seeker_stop_outline");
 	self notify("stop soundseeker_target_acquire_lp");
 	if(param_00) {
-		self.var_2745 = scripts\engine\utility::array_add(self.var_2745,self.bt.var_F15D);
+		self.var_2745 = scripts\engine\utility::array_add(self.var_2745,self.var_3135.var_F15D);
 	}
 
-	level.var_F10A.targets = scripts\engine\utility::array_remove(level.var_F10A.targets,self.bt.var_F15D);
+	level.var_F10A.targets = scripts\engine\utility::array_remove(level.var_F10A.targets,self.var_3135.var_F15D);
 	if(isalive(self.triggerportableradarping)) {
-		self.bt.var_F15D = self.triggerportableradarping;
+		self.var_3135.var_F15D = self.triggerportableradarping;
 	}
 	else
 	{
-		self.bt.var_F15D = undefined;
+		self.var_3135.var_F15D = undefined;
 	}
 
-	self.bt.var_1152B = 0;
+	self.var_3135.var_1152B = 0;
 	self.loadstartpointtransients = undefined;
-	self.bt.var_1154B = 0;
-	self.bt.var_54AE = 0;
+	self.var_3135.var_1154B = 0;
+	self.var_3135.var_54AE = 0;
 }
 
 func_F120(param_00) {

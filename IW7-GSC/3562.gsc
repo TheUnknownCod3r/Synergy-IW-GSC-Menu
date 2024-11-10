@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3562.gsc
-****************************/
+ * Script: 3562.gsc
+************************/
 
 func_8841() {
 	self.var_907C = undefined;
@@ -73,17 +73,17 @@ func_8842(param_00) {
 }
 
 func_8843(param_00,param_01) {
-	if(scripts/mp/agents/agent_utility::getnumactiveagents("squadmate") >= 5) {
-		scripts\mp\_hud_message::showerrormessage("KILLSTREAKS_AGENT_MAX");
+	if(scripts\mp\agents\agent_utility::getnumactiveagents("squadmate") >= 5) {
+		scripts\mp\hud_message::showerrormessage("KILLSTREAKS_AGENT_MAX");
 		return 0;
 	}
 
-	if(scripts/mp/agents/agent_utility::getnumownedactiveagents(self) >= 2) {
+	if(scripts\mp\agents\agent_utility::getnumownedactiveagents(self) >= 2) {
 		return 0;
 	}
 
 	if(!isdefined(param_00)) {
-		param_00 = scripts/mp/agents/agent_utility::getvalidspawnpathnodenearplayer(1,1);
+		param_00 = scripts\mp\agents\agent_utility::getvalidspawnpathnodenearplayer(1,1);
 	}
 
 	var_02 = scripts\mp\agents\_agents::add_humanoid_agent("squadmate",self.team,"reconAgent",param_00.origin,param_01,self,0,0,"hardened");
@@ -108,7 +108,7 @@ func_883F(param_00) {
 		self giveweapon(param_00.secondaryweapon);
 	}
 
-	scripts\mp\_utility::_switchtoweapon(param_00.primaryweapon);
+	scripts\mp\utility::_switchtoweapon(param_00.primaryweapon);
 	self botsetflag("disable_attack",0);
 	self.health = 50;
 	thread func_1903();
@@ -152,7 +152,7 @@ func_13BAD(param_00) {
 
 		var_01 = param_00 getcurrentweapon();
 		self giveweapon(var_01);
-		scripts\mp\_utility::_switchtoweapon(var_01);
+		scripts\mp\utility::_switchtoweapon(var_01);
 		param_00 waittill("weapon_change");
 	}
 }

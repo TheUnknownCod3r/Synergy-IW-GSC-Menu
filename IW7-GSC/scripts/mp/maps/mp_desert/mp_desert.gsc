@@ -1,15 +1,15 @@
-/***********************************************************
+/***************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\maps\mp_desert\mp_desert.gsc
-***********************************************************/
+ * Script: scripts\mp\maps\mp_desert\mp_desert.gsc
+***************************************************/
 
 main() {
-	lib_0F92::main();
+	scripts\mp\maps\mp_desert\mp_desert_precache::main();
 	scripts\mp\maps\mp_desert\gen\mp_desert_art::main();
-	lib_0F91::main();
-	scripts\mp\_load::main();
-	scripts\mp\_compass::func_FACD("compass_map_mp_desert");
+	scripts\mp\maps\mp_desert\mp_desert_fx::main();
+	scripts\mp\load::main();
+	scripts\mp\compass::setupminimap("compass_map_mp_desert");
 	setdvar("r_lightGridEnableTweaks",1);
 	setdvar("r_lightGridIntensity",1.33);
 	setdvar("r_umbraAccurateOcclusionThreshold",1200);
@@ -141,14 +141,14 @@ fix_collision() {
 
 func_FAE6(param_00,param_01,param_02) {
 	var_03 = getent(param_00,"targetname");
-	var_03.var_5293 = scripts\common\utility::getstruct(var_03.target,"targetname");
+	var_03.destination = scripts\engine\utility::getstruct(var_03.target,"targetname");
 	var_03.var_BCEF = 1 / param_01;
-	var_03.var_5293 = func_E6E1(var_03,param_02);
+	var_03.destination = func_E6E1(var_03,param_02);
 }
 
 func_E6E1(param_00,param_01) {
 	param_00 endon("death");
-	var_02 = scripts\common\utility::getstruct(param_00.var_5293.target,"targetname");
+	var_02 = scripts\engine\utility::getstruct(param_00.destination.target,"targetname");
 	var_03 = abs(distance(param_00.origin,var_02.origin) * param_00.var_BCEF);
 	param_00 playloopsound("rolling_bot_move_lp");
 	param_00 moveto(var_02.origin,var_03,var_03 * 0.25,var_03 * 0.25);
@@ -170,18 +170,18 @@ runmodespecifictriggers() {
 		var_00 = spawn("trigger_radius",(-240,-608,496),0,160,150);
 		var_00.var_336 = "OutOfBounds";
 		var_00 hide();
-		level.var_C7B3 = scripts\common\utility::array_add(level.var_C7B3,var_00);
+		level.var_C7B3 = scripts\engine\utility::array_add(level.var_C7B3,var_00);
 		var_00 = spawn("trigger_radius",(-1088,-1584,416),0,230,80);
 		var_00.var_336 = "OutOfBounds";
 		var_00 hide();
-		level.var_C7B3 = scripts\common\utility::array_add(level.var_C7B3,var_00);
+		level.var_C7B3 = scripts\engine\utility::array_add(level.var_C7B3,var_00);
 		var_00 = spawn("trigger_radius",(-1952,-96,272),0,100,100);
 		var_00.var_336 = "OutOfBounds";
 		var_00 hide();
-		level.var_C7B3 = scripts\common\utility::array_add(level.var_C7B3,var_00);
+		level.var_C7B3 = scripts\engine\utility::array_add(level.var_C7B3,var_00);
 		var_00 = spawn("trigger_radius",(580,-580,730),0,100,90);
 		var_00.var_336 = "OutOfBounds";
 		var_00 hide();
-		level.var_C7B3 = scripts\common\utility::array_add(level.var_C7B3,var_00);
+		level.var_C7B3 = scripts\engine\utility::array_add(level.var_C7B3,var_00);
 	}
 }

@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3406.gsc
-****************************/
+ * Script: 3406.gsc
+************************/
 
 fast_travel_init() {
 	scripts\engine\utility::flag_init("fast_travel_init_done");
@@ -30,10 +30,10 @@ fast_travel_init() {
 }
 
 func_95D9() {
-	level._effect["hidden_room_portal_locked"] = loadfx("vfx/iw7/_requests/coop/vfx_cp_z_portal_01_idle.vfx");
-	level._effect["hidden_room_portal_locked_exit"] = loadfx("vfx/iw7/_requests/coop/vfx_cp_z_portal_01_out.vfx");
-	level._effect["hidden_room_portal_locked_charging"] = loadfx("vfx/iw7/levels/cp_zmb/vfx_cp_z_portal_01.vfx");
-	level._effect["hidden_room_portal"] = loadfx("vfx/iw7/core/impact/energy_sm/vfx_cp_z_portal_02.vfx");
+	level._effect["hidden_room_portal_locked"] = loadfx("vfx\iw7\_requests\coop\vfx_cp_z_portal_01_idle.vfx");
+	level._effect["hidden_room_portal_locked_exit"] = loadfx("vfx\iw7\_requests\coop\vfx_cp_z_portal_01_out.vfx");
+	level._effect["hidden_room_portal_locked_charging"] = loadfx("vfx\iw7\levels\cp_zmb\vfx_cp_z_portal_01.vfx");
+	level._effect["hidden_room_portal"] = loadfx("vfx\iw7\core\impact\energy_sm\vfx_cp_z_portal_02.vfx");
 }
 
 func_95DA() {
@@ -282,10 +282,10 @@ run_fast_travel_logic(param_00,param_01) {
 
 func_6AF8(param_00) {
 	self.wor_phase_shift = 1;
-	scripts/cp/powers/coop_phaseshift::func_6626(1,param_00);
+	scripts\cp\powers\coop_phaseshift::func_6626(1,param_00);
 	wait(param_00);
 	if(scripts\engine\utility::istrue(self.wor_phase_shift)) {
-		scripts/cp/powers/coop_phaseshift::exitphaseshift(1);
+		scripts\cp\powers\coop_phaseshift::exitphaseshift(1);
 		self.wor_phase_shift = 0;
 	}
 }
@@ -399,7 +399,7 @@ hidden_room_exit_tube(param_00) {
 	wait(0.1);
 	var_01 delete();
 	if(scripts\engine\utility::istrue(param_00.wor_phase_shift)) {
-		param_00 scripts/cp/powers/coop_phaseshift::exitphaseshift(1);
+		param_00 scripts\cp\powers\coop_phaseshift::exitphaseshift(1);
 		param_00.wor_phase_shift = 0;
 	}
 

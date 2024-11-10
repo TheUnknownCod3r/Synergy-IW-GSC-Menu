@@ -1,8 +1,8 @@
-/********************************************
+/************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\sp\gameskill.gsc
-********************************************/
+ * Script: scripts\sp\gameskill.gsc
+************************************/
 
 func_95F9() {
 	if(!scripts\engine\utility::add_init_script("gameskill",::func_95F9)) {
@@ -336,7 +336,7 @@ func_F848(param_00) {
 
 	level.var_A9D0 = 0;
 	level.playermeleedamagemultiplier_dvar = 0.8;
-	function_01C5("player_meleeDamageMultiplier",level.playermeleedamagemultiplier_dvar);
+	setsaveddvar("player_meleeDamageMultiplier",level.playermeleedamagemultiplier_dvar);
 	if(isdefined(level.var_4C53)) {
 		[[level.var_4C53]]();
 	}
@@ -382,7 +382,7 @@ func_F725() {
 	level.var_6A04 = level.var_54D0["explosivePlantTime"][var_01];
 	anim.var_B750 = [[var_00]]("min_sniper_burst_delay_time",level.var_7683);
 	anim.var_B461 = [[var_00]]("max_sniper_burst_delay_time",level.var_7683);
-	function_01C5("ai_accuracyDistScale",[[var_00]]("accuracyDistScale",level.var_7683));
+	setsaveddvar("ai_accuracyDistScale",[[var_00]]("accuracyDistScale",level.var_7683));
 	func_F679();
 	anim.var_3546 = level.var_54D0["c12_DismemberRecoveryTime"][var_01];
 	anim.var_35EC = level.var_54D0["c12_RocketTellHoldTime"][var_01];
@@ -445,11 +445,11 @@ func_F762() {
 	}
 
 	if(isdefined(level.var_D127.var_4C15) && isdefined(level.var_D127.var_4C15.var_105EE)) {
-		function_01C5("spaceshipTargetLockAnglesScale",level.var_D127.var_4C15.var_105EE * level.var_A48E.var_D3B9);
+		setsaveddvar("spaceshipTargetLockAnglesScale",level.var_D127.var_4C15.var_105EE * level.var_A48E.var_D3B9);
 		return;
 	}
 
-	function_01C5("spaceshipTargetLockAnglesScale",level.var_A48E.var_D3B9);
+	setsaveddvar("spaceshipTargetLockAnglesScale",level.var_A48E.var_D3B9);
 }
 
 func_F679() {
@@ -624,7 +624,7 @@ func_C869() {
 		return 0;
 	}
 
-	if(self.var_E2 != "none" && function_0246(self.var_E2)) {
+	if(self.var_E2 != "none" && weaponisboltaction(self.var_E2)) {
 		return 0;
 	}
 
@@ -646,7 +646,7 @@ func_F288() {
 	}
 
 	if(self.script == "move") {
-		if(scripts\engine\utility::actor_is3d() && isdefined(self._blackboard.var_AA3D) && self._blackboard.var_AA3D.type == "Exposed 3D" || self._blackboard.var_AA3D.type == "Path 3D") {
+		if(scripts\engine\utility::actor_is3d() && isdefined(self.var_1198.var_AA3D) && self.var_1198.var_AA3D.type == "Exposed 3D" || self.var_1198.var_AA3D.type == "Path 3D") {
 			self.accuracy = self.var_2894;
 		}
 		else if(scripts\anim\utility::func_9D9C()) {
@@ -1295,7 +1295,7 @@ func_8CBA() {
 		}
 
 		if(scripts\sp\_utility::func_93A6()) {
-			if(scripts/sp/specialist_MAYBE::func_2C97()) {
+			if(scripts\sp\specialist_MAYBE::func_2C97()) {
 				var_02 = 0;
 			}
 			else
@@ -2017,7 +2017,7 @@ func_14ED() {
 }
 
 func_4423(param_00) {
-	var_01 = function_00A5(param_00);
+	var_01 = getkeybinding(param_00);
 	if(var_01["count"] <= 0) {
 		return 0;
 	}
@@ -2154,17 +2154,17 @@ func_262C(param_00) {
 	var_17["gameskill"] = level.var_7683;
 	level.var_262B[param_00] = var_17;
 	var_18 = "Completed AA sequence: ";
-	var_18 = var_18 + level.script + "/" + param_00;
+	var_18 = var_18 + level.script + "\" + param_00;
 	var_19 = getarraykeys(var_17);
 	for(var_1A = 0;var_1A < var_19.size;var_1A++) {
 		var_18 = var_18 + ", " + var_19[var_1A] + ": " + var_17[var_19[var_1A]];
 	}
 
-	function_0132(var_18);
+	logstring(var_18);
 }
 
 func_14F2(param_00,param_01) {
-	function_0132(param_00 + ": " + param_01[param_00]);
+	logstring(param_00 + ": " + param_01[param_00]);
 }
 
 func_14F5() {}

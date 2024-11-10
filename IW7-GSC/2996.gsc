@@ -1,36 +1,36 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2996.gsc
+ * Script: 2996.gsc
 ***************************************/
 
 main(var_00, var_01, var_02) {
-  scripts/sp/vehicle_build::func_31C5("capital_ship", var_00, var_01, var_02);
-  scripts/sp/vehicle_build::func_31A6(::init_location);
+  scripts\sp\vehicle_build::func_31C5("capital_ship", var_00, var_01, var_02);
+  scripts\sp\vehicle_build::func_31A6(::init_location);
   func_0BA9::func_39B3(var_00, "ca", var_02);
-  level._effect["mons_thrust_bottom_front_initiate"] = loadfx("vfx/iw7/core/vehicle/capship/ca/mons/vfx_capship_ca_thruster_down_array_front_initiate.vfx");
-  level._effect["mons_thrust_bottom_front_idle"] = loadfx("vfx/iw7/core/vehicle/capship/ca/mons/vfx_capship_ca_thruster_down_array_front_idle.vfx");
-  level._effect["mons_thrust_bottom_front_rampup"] = loadfx("vfx/iw7/core/vehicle/capship/ca/mons/vfx_capship_ca_thruster_down_array_front_idle_rampup.vfx");
-  level._effect["mons_thrust_bottom_front_heavy"] = loadfx("vfx/iw7/core/vehicle/capship/ca/mons/vfx_capship_ca_thruster_down_array_front.vfx");
-  level._effect["mons_thrust_bottom_front_launch"] = loadfx("vfx/iw7/core/vehicle/capship/ca/mons/vfx_capship_ca_thruster_down_array_front.vfx");
-  level._effect["mons_thrust_bottom_front_hburst"] = loadfx("vfx/iw7/core/vehicle/capship/ca/mons/vfx_capship_ca_thruster_down_array_front_hburst.vfx");
-  level._effect["mons_thrust_bottom_middle_initiate"] = loadfx("vfx/iw7/core/vehicle/capship/ca/mons/vfx_capship_ca_thruster_down_array_mid_initiate.vfx");
-  level._effect["mons_thrust_bottom_middle_idle"] = loadfx("vfx/iw7/core/vehicle/capship/ca/mons/vfx_capship_ca_thruster_down_array_mid_idle.vfx");
-  level._effect["mons_thrust_bottom_middle_rampup"] = loadfx("vfx/iw7/core/vehicle/capship/ca/mons/vfx_capship_ca_thruster_down_array_mid_idle_rampup.vfx");
-  level._effect["mons_thrust_bottom_middle_heavy"] = loadfx("vfx/iw7/core/vehicle/capship/ca/mons/vfx_capship_ca_thruster_down_array_mid.vfx");
-  level._effect["mons_thrust_bottom_middle_launch"] = loadfx("vfx/iw7/core/vehicle/capship/ca/mons/vfx_capship_ca_thruster_down_array_mid.vfx");
-  level._effect["mons_thrust_bottom_middle_hburst"] = loadfx("vfx/iw7/core/vehicle/capship/ca/mons/vfx_capship_ca_thruster_down_array_mid_hburst.vfx");
-  level._effect["mons_thrust_bottom_rear_initiate"] = loadfx("vfx/iw7/core/vehicle/capship/ca/mons/vfx_capship_ca_thruster_down_array_back_initiate.vfx");
-  level._effect["mons_thrust_bottom_rear_idle"] = loadfx("vfx/iw7/core/vehicle/capship/ca/mons/vfx_capship_ca_thruster_down_array_back_idle.vfx");
-  level._effect["mons_thrust_bottom_rear_rampup"] = loadfx("vfx/iw7/core/vehicle/capship/ca/mons/vfx_capship_ca_thruster_down_array_back_idle_rampup.vfx");
-  level._effect["mons_thrust_bottom_rear_heavy"] = loadfx("vfx/iw7/core/vehicle/capship/ca/mons/vfx_capship_ca_thruster_down_array_back.vfx");
-  level._effect["mons_thrust_bottom_rear_launch"] = loadfx("vfx/iw7/core/vehicle/capship/ca/mons/vfx_capship_ca_thruster_down_array_back.vfx");
-  level._effect["mons_thrust_bottom_rear_hburst"] = loadfx("vfx/iw7/core/vehicle/capship/ca/mons/vfx_capship_ca_thruster_down_array_back_hburst.vfx");
-  level._effect["mons_thrust_rear_initiate"] = loadfx("vfx/iw7/core/vehicle/capship/ca/mons/vfx_capship_ca_thruster_rear_array_initiate.vfx");
-  level._effect["mons_thrust_rear_idle"] = loadfx("vfx/iw7/core/vehicle/capship/ca/mons/vfx_capship_ca_thruster_rear_array_idle.vfx");
-  level._effect["mons_thrust_rear_rampup"] = loadfx("vfx/iw7/core/vehicle/capship/ca/mons/vfx_capship_ca_thruster_rear_array_idle_rampup.vfx");
-  level._effect["mons_thrust_rear_heavy"] = loadfx("vfx/iw7/core/vehicle/capship/ca/mons/vfx_capship_ca_thruster_rear_array.vfx");
-  level._effect["mons_thrust_rear_launch"] = loadfx("vfx/iw7/core/vehicle/capship/ca/mons/vfx_capship_ca_thruster_rear_array.vfx");
-  level._effect["vfx_vehicle_mons_warp_out_ftldrive_core"] = loadfx("vfx/iw7/core/vehicle/mons/vfx_vehicle_mons_warp_out_ftldrive_core.vfx");
+  level._effect["mons_thrust_bottom_front_initiate"] = loadfx("vfx\iw7\core\vehicle\capship\ca\mons\vfx_capship_ca_thruster_down_array_front_initiate.vfx");
+  level._effect["mons_thrust_bottom_front_idle"] = loadfx("vfx\iw7\core\vehicle\capship\ca\mons\vfx_capship_ca_thruster_down_array_front_idle.vfx");
+  level._effect["mons_thrust_bottom_front_rampup"] = loadfx("vfx\iw7\core\vehicle\capship\ca\mons\vfx_capship_ca_thruster_down_array_front_idle_rampup.vfx");
+  level._effect["mons_thrust_bottom_front_heavy"] = loadfx("vfx\iw7\core\vehicle\capship\ca\mons\vfx_capship_ca_thruster_down_array_front.vfx");
+  level._effect["mons_thrust_bottom_front_launch"] = loadfx("vfx\iw7\core\vehicle\capship\ca\mons\vfx_capship_ca_thruster_down_array_front.vfx");
+  level._effect["mons_thrust_bottom_front_hburst"] = loadfx("vfx\iw7\core\vehicle\capship\ca\mons\vfx_capship_ca_thruster_down_array_front_hburst.vfx");
+  level._effect["mons_thrust_bottom_middle_initiate"] = loadfx("vfx\iw7\core\vehicle\capship\ca\mons\vfx_capship_ca_thruster_down_array_mid_initiate.vfx");
+  level._effect["mons_thrust_bottom_middle_idle"] = loadfx("vfx\iw7\core\vehicle\capship\ca\mons\vfx_capship_ca_thruster_down_array_mid_idle.vfx");
+  level._effect["mons_thrust_bottom_middle_rampup"] = loadfx("vfx\iw7\core\vehicle\capship\ca\mons\vfx_capship_ca_thruster_down_array_mid_idle_rampup.vfx");
+  level._effect["mons_thrust_bottom_middle_heavy"] = loadfx("vfx\iw7\core\vehicle\capship\ca\mons\vfx_capship_ca_thruster_down_array_mid.vfx");
+  level._effect["mons_thrust_bottom_middle_launch"] = loadfx("vfx\iw7\core\vehicle\capship\ca\mons\vfx_capship_ca_thruster_down_array_mid.vfx");
+  level._effect["mons_thrust_bottom_middle_hburst"] = loadfx("vfx\iw7\core\vehicle\capship\ca\mons\vfx_capship_ca_thruster_down_array_mid_hburst.vfx");
+  level._effect["mons_thrust_bottom_rear_initiate"] = loadfx("vfx\iw7\core\vehicle\capship\ca\mons\vfx_capship_ca_thruster_down_array_back_initiate.vfx");
+  level._effect["mons_thrust_bottom_rear_idle"] = loadfx("vfx\iw7\core\vehicle\capship\ca\mons\vfx_capship_ca_thruster_down_array_back_idle.vfx");
+  level._effect["mons_thrust_bottom_rear_rampup"] = loadfx("vfx\iw7\core\vehicle\capship\ca\mons\vfx_capship_ca_thruster_down_array_back_idle_rampup.vfx");
+  level._effect["mons_thrust_bottom_rear_heavy"] = loadfx("vfx\iw7\core\vehicle\capship\ca\mons\vfx_capship_ca_thruster_down_array_back.vfx");
+  level._effect["mons_thrust_bottom_rear_launch"] = loadfx("vfx\iw7\core\vehicle\capship\ca\mons\vfx_capship_ca_thruster_down_array_back.vfx");
+  level._effect["mons_thrust_bottom_rear_hburst"] = loadfx("vfx\iw7\core\vehicle\capship\ca\mons\vfx_capship_ca_thruster_down_array_back_hburst.vfx");
+  level._effect["mons_thrust_rear_initiate"] = loadfx("vfx\iw7\core\vehicle\capship\ca\mons\vfx_capship_ca_thruster_rear_array_initiate.vfx");
+  level._effect["mons_thrust_rear_idle"] = loadfx("vfx\iw7\core\vehicle\capship\ca\mons\vfx_capship_ca_thruster_rear_array_idle.vfx");
+  level._effect["mons_thrust_rear_rampup"] = loadfx("vfx\iw7\core\vehicle\capship\ca\mons\vfx_capship_ca_thruster_rear_array_idle_rampup.vfx");
+  level._effect["mons_thrust_rear_heavy"] = loadfx("vfx\iw7\core\vehicle\capship\ca\mons\vfx_capship_ca_thruster_rear_array.vfx");
+  level._effect["mons_thrust_rear_launch"] = loadfx("vfx\iw7\core\vehicle\capship\ca\mons\vfx_capship_ca_thruster_rear_array.vfx");
+  level._effect["vfx_vehicle_mons_warp_out_ftldrive_core"] = loadfx("vfx\iw7\core\vehicle\mons\vfx_vehicle_mons_warp_out_ftldrive_core.vfx");
   precachemodel("veh_mil_air_ca_olympus_mons");
   precachemodel("veh_mil_air_ca_olympus_mons_engines");
   precachemodel("vfx_ftl_mons");
@@ -60,16 +60,16 @@ main(var_00, var_01, var_02) {
   precachemodel("veh_mil_air_ca_olympus_mons_heist_space");
 
   func_0BB6::func_12A89();
-  scripts/sp/vehicle_build::func_31C6(var_02, "default", "vfx/iw7/core/tread/tread_airship_mons_titan.vfx", 0);
-  level._effect["mons_ca_warp_pre"] = loadfx("vfx/iw7/core/vehicle/mons/vfx_vehicle_mons_warp_in_anticipation.vfx");
-  level._effect["mons_ca_warp_in"] = loadfx("vfx/iw7/core/vehicle/mons/vfx_vehicle_mons_warp_in.vfx");
-  level._effect["mons_ca_warp_in_post"] = loadfx("vfx/iw7/core/vehicle/mons/vfx_vehicle_mons_warp_in.vfx");
-  level._effect["mons_ca_warp_out"] = loadfx("vfx/iw7/core/vehicle/mons/vfx_vehicle_mons_warp_out.vfx");
-  level._effect["capital_turret_sml_mons_cheap"] = loadfx("vfx/iw7/core/muzflash/cannon/vfx_mons_turret.vfx");
-  level._effect["vfx_heist_mons_steeldragon_beam"] = loadfx("vfx/iw7/levels/heist/vfx_heist_mons_steeldragon_beam.vfx");
-  level._effect["vfx_heist_mons_steeldragon_loop"] = loadfx("vfx/iw7/levels/heist/vfx_heist_mons_steeldragon_loop.vfx");
-  level._effect["vfx_heist_mons_steeldragon_chargeup"] = loadfx("vfx/iw7/levels/heist/vfx_heist_mons_steeldragon_chargeup.vfx");
-  level._effect["vfx_heist_mons_steeldragon_winddown"] = loadfx("vfx/iw7/levels/heist/vfx_heist_mons_steeldragon_winddown.vfx");
+  scripts\sp\vehicle_build::func_31C6(var_02, "default", "vfx\iw7\core\tread\tread_airship_mons_titan.vfx", 0);
+  level._effect["mons_ca_warp_pre"] = loadfx("vfx\iw7\core\vehicle\mons\vfx_vehicle_mons_warp_in_anticipation.vfx");
+  level._effect["mons_ca_warp_in"] = loadfx("vfx\iw7\core\vehicle\mons\vfx_vehicle_mons_warp_in.vfx");
+  level._effect["mons_ca_warp_in_post"] = loadfx("vfx\iw7\core\vehicle\mons\vfx_vehicle_mons_warp_in.vfx");
+  level._effect["mons_ca_warp_out"] = loadfx("vfx\iw7\core\vehicle\mons\vfx_vehicle_mons_warp_out.vfx");
+  level._effect["capital_turret_sml_mons_cheap"] = loadfx("vfx\iw7\core\muzflash\cannon\vfx_mons_turret.vfx");
+  level._effect["vfx_heist_mons_steeldragon_beam"] = loadfx("vfx\iw7\levels\heist\vfx_heist_mons_steeldragon_beam.vfx");
+  level._effect["vfx_heist_mons_steeldragon_loop"] = loadfx("vfx\iw7\levels\heist\vfx_heist_mons_steeldragon_loop.vfx");
+  level._effect["vfx_heist_mons_steeldragon_chargeup"] = loadfx("vfx\iw7\levels\heist\vfx_heist_mons_steeldragon_chargeup.vfx");
+  level._effect["vfx_heist_mons_steeldragon_winddown"] = loadfx("vfx\iw7\levels\heist\vfx_heist_mons_steeldragon_winddown.vfx");
 }
 
 init_location() {
@@ -82,7 +82,7 @@ init_location() {
   self.func_24C4 = ["tag_origin", "amb_turret_r_6", "amb_turret_sml_r_1", "amb_turret_l_5", "amb_turret_sml_r_6", "amb_turret_l_1", "amb_turret_sml_r_16", "amb_turret_sml_l_14", "fx_light_main_a_1", "fx_light_running_lrg_b3_4", "fx_light_running_lrg_b3_2", "amb_missile_l_4", "amb_missile_r_16", "amb_missile_r_25", "fx_entryburn_1"];
   thread func_0BA9::func_396E("ca");
   thread func_1EDC();
-  scripts/sp/vehicle::playgestureviewmodel();
+  scripts\sp\vehicle::playgestureviewmodel();
   self.func_129F5 = [];
   self.func_129F5["front_left"] = ["amb_turret_sml_l_11", "amb_turret_sml_l_12", "amb_turret_sml_l_13", "amb_turret_sml_l_14", "amb_turret_sml_l_15", "amb_turret_sml_l_16", "amb_turret_sml_l_17", "amb_turret_sml_l_18", "amb_turret_l_1", "amb_turret_l_2"];
   self.func_129F5["front_right"] = ["amb_turret_sml_r_11", "amb_turret_sml_r_12", "amb_turret_sml_r_13", "amb_turret_sml_r_14", "amb_turret_sml_r_15", "amb_turret_sml_r_16", "amb_turret_sml_r_17", "amb_turret_sml_r_18", "amb_turret_r_1", "amb_turret_r_2"];

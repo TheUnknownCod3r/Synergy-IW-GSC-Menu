@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\3396.gsc
+ * Script: 3396.gsc
 ***************************************/
 
 enter_afterlife_arcade(var_00) {
@@ -22,35 +22,35 @@ enter_afterlife_arcade(var_00) {
   var_0.timeenteringafterlife = gettime();
   var_0.health = var_0.maxhealth;
   var_00 clearclienttriggeraudiozone(0.02);
-  var_00 scripts/cp/utility::stoplocalsound_safe("zmb_laststand_music");
+  var_00 scripts\cp\utility::stoplocalsound_safe("zmb_laststand_music");
   var_00 setorigin(var_1.origin);
   var_00 laststandrevive();
   var_00 setstance("stand");
   var_00 takeallweapons();
   var_00 gold_teeth_pickup();
-  var_00 scripts/cp/utility::_giveweapon("iw7_gunless_zm", undefined, undefined, 1);
+  var_00 scripts\cp\utility::_giveweapon("iw7_gunless_zm", undefined, undefined, 1);
   var_00 scripts\engine\utility::allow_melee(0);
-  var_00 scripts/cp/zombies/zombies_loadout::set_player_photo_status(var_00, "afterlife");
-  var_00 scripts/cp/utility::force_usability_enabled();
+  var_00 scripts\cp\zombies\zombies_loadout::set_player_photo_status(var_00, "afterlife");
+  var_00 scripts\cp\utility::force_usability_enabled();
   var_00 afterlife_enable_player_interaction(var_00);
   var_00 set_has_self_revive_token(var_00, 0);
   var_00 increase_afterlife_count(var_00);
 
   if (isdefined(var_00)) {
   if (check_self_revive_attempts(var_00))
-  var_00 scripts/cp/utility::setlowermessage("welcome_to_afterlife", &"CP_ZOMBIE_AFTERLIFE_ARCADE_WELCOME", 6.0);
+  var_00 scripts\cp\utility::setlowermessage("welcome_to_afterlife", &"CP_ZOMBIE_AFTERLIFE_ARCADE_WELCOME", 6.0);
   else
-  var_00 scripts/cp/utility::setlowermessage("welcome_to_afterlife_no_self_revives", &"CP_ZOMBIE_AFTERLIFE_ARCADE_NO_REVIVES", 6.0);
+  var_00 scripts\cp\utility::setlowermessage("welcome_to_afterlife_no_self_revives", &"CP_ZOMBIE_AFTERLIFE_ARCADE_NO_REVIVES", 6.0);
 
-  scripts/cp/zombies/zombie_analytics::log_enteringafterlifearcade(1, var_00, level.wave_num, var_0.soul_power_earned, int(level.wave_num / 10) + 1 - var_0.times_self_revived);
+  scripts\cp\zombies\zombie_analytics::log_enteringafterlifearcade(1, var_00, level.wave_num, var_0.soul_power_earned, int(level.wave_num / 10) + 1 - var_0.times_self_revived);
   }
 
   if (var_0.first_time_in_arcade) {
-  var_00 thread scripts/cp/cp_vo::try_to_play_vo("spawn_arcade_first", "zmb_comment_vo", "highest", 15, 0, 0, 1, 50);
+  var_00 thread scripts\cp\cp_vo::try_to_play_vo("spawn_arcade_first", "zmb_comment_vo", "highest", 15, 0, 0, 1, 50);
   var_0.first_time_in_arcade = 0;
   }
   else
-  var_00 thread scripts/cp/cp_vo::try_to_play_vo("spawn_arcade", "zmb_comment_vo", "high", 15, 0, 0, 1, 50);
+  var_00 thread scripts\cp\cp_vo::try_to_play_vo("spawn_arcade", "zmb_comment_vo", "high", 15, 0, 0, 1, 50);
 
   var_00 reset_soul_power(var_00);
   var_00 thread player_exit_afterlife_monitor(var_00);
@@ -60,17 +60,17 @@ enter_afterlife_arcade(var_00) {
   level thread open_afterlife_door_for_player(var_00, 10);
   var_00 set_in_afterlife_arcade(var_00, 1);
   var_00 afterlife_disable_player_outline(var_00, 1);
-  var_00 scripts/cp/utility::hideheadicon(var_0.icons_to_hide_when_in_afterlife);
+  var_00 scripts\cp\utility::hideheadicon(var_0.icons_to_hide_when_in_afterlife);
   var_00 visionsetnakedforplayer("cp_zmb_afterlife", 1.0);
   var_00 setclientomnvar("zm_ui_player_in_afterlife_arcade", 1);
   var_00 setclientomnvarbit("player_damaged", 1, 0);
   var_00 setclientomnvarbit("player_damaged", 2, 0);
 
-  if (scripts/cp/utility::isplayingsolo() || level.only_one_player) {
+  if (scripts\cp\utility::isplayingsolo() || level.only_one_player) {
   scripts\engine\utility::flag_set("pause_wave_progression");
   level.zombies_paused = 1;
 
-  foreach (var_03 in scripts/cp/cp_agent_utils::getaliveagentsofteam("axis")) {
+  foreach (var_03 in scripts\cp\cp_agent_utils::getaliveagentsofteam("axis")) {
   if (isdefined(var_3.dont_cleanup))
   continue;
 
@@ -84,7 +84,7 @@ enter_afterlife_arcade(var_00) {
   var_03 suicide();
   }
 
-  var_00 thread scripts/cp/cp_hud_message::wait_and_play_tutorial_message("afterlife", 18);
+  var_00 thread scripts\cp\cp_hud_message::wait_and_play_tutorial_message("afterlife", 18);
   thread give_solo_self_revive_token(var_00);
   }
 
@@ -94,7 +94,7 @@ enter_afterlife_arcade(var_00) {
   if (isdefined(level.aa_ww_char_vo))
   var_00 thread [[level.aa_ww_char_vo]](var_00);
   else
-  var_00 thread scripts/cp/cp_vo::try_to_play_vo("ww_afterlife_arrive", "zmb_afterlife_vo", "high", 20, 0, 0, 1);
+  var_00 thread scripts\cp\cp_vo::try_to_play_vo("ww_afterlife_arrive", "zmb_afterlife_vo", "high", 20, 0, 0, 1);
 
   if (isdefined(level.aa_memoirs_vo))
   var_00 thread [[level.aa_memoirs_vo]](var_00);
@@ -127,7 +127,7 @@ play_ww_vo_memoirs(var_00) {
 
   if (isdefined(var_0.array_of_memoir_vos[0])) {
   if (soundexists(var_0.array_of_memoir_vos[0]))
-  wait(randomfloatrange(80.0, 110.0) + scripts/cp/cp_vo::get_sound_length(var_0.array_of_memoir_vos[0]));
+  wait(randomfloatrange(80.0, 110.0) + scripts\cp\cp_vo::get_sound_length(var_0.array_of_memoir_vos[0]));
 
   continue;
   }
@@ -149,7 +149,7 @@ choose_correct_vo_for_player(var_00) {
   }
 
   if (var_01 == "ww_afterlife_arrive") {
-  var_00 thread scripts/cp/cp_vo::try_to_play_vo(var_01, "zmb_afterlife_vo", "high", 20, 0, 0, 1);
+  var_00 thread scripts\cp\cp_vo::try_to_play_vo(var_01, "zmb_afterlife_vo", "high", 20, 0, 0, 1);
   return;
   }
 
@@ -174,7 +174,7 @@ choose_correct_vo_for_player(var_00) {
   }
 
   if (soundexists(var_04))
-  var_00 thread scripts/cp/cp_vo::try_to_play_vo(var_04, "zmb_afterlife_vo", "high", 60, 1, 0, 1);
+  var_00 thread scripts\cp\cp_vo::try_to_play_vo(var_04, "zmb_afterlife_vo", "high", 60, 1, 0, 1);
 }
 
 choose_vo_based_on_type(var_00, var_01) {
@@ -300,11 +300,11 @@ exit_afterlife_arcade(var_00) {
 
   var_0.exitingafterlifearcade = 1;
   var_0.timespentinafterlife = (gettime() - var_0.timeenteringafterlife) / 1000;
-  scripts/cp/zombies/zombie_analytics::log_exitingafterlifearcade(1, var_00, level.wave_num, var_0.reason, var_0.timespentinafterlife);
+  scripts\cp\zombies\zombie_analytics::log_exitingafterlifearcade(1, var_00, level.wave_num, var_0.reason, var_0.timespentinafterlife);
   var_00 scripts\engine\utility::allow_usability(0);
   var_00 set_in_afterlife_arcade(var_00, 0);
   var_00 afterlife_disable_player_outline(var_00, 0);
-  var_00 scripts/cp/utility::showheadicon(var_0.icons_to_hide_when_in_afterlife);
+  var_00 scripts\cp\utility::showheadicon(var_0.icons_to_hide_when_in_afterlife);
   var_00 visionsetnakedforplayer("", 0);
   var_00 setclientomnvar("zm_ui_player_in_afterlife_arcade", 0);
   var_0.is_off_grid = undefined;
@@ -328,9 +328,9 @@ play_exit_afterlife_arcade_vo(var_00) {
   var_0.num_of_times_exit_afterlife_arcade++;
 
   if (var_0.num_of_times_exit_afterlife_arcade == 1)
-  var_00 thread scripts/cp/cp_vo::try_to_play_vo("arcade_token_revive_first", "zmb_comment_vo", "low", 3, 0, 0, 1);
+  var_00 thread scripts\cp\cp_vo::try_to_play_vo("arcade_token_revive_first", "zmb_comment_vo", "low", 3, 0, 0, 1);
   else
-  var_00 thread scripts/cp/cp_vo::try_to_play_vo("arcade_token_revive", "zmb_comment_vo", "low", 3, 0, 0, 1);
+  var_00 thread scripts\cp\cp_vo::try_to_play_vo("arcade_token_revive", "zmb_comment_vo", "low", 3, 0, 0, 1);
 }
 
 delete_move_ent() {
@@ -361,17 +361,17 @@ black_screen_fades_in(var_00) {
   var_1.foreground = 1;
   var_01 fadeovertime(15.0);
   var_1.alpha = 0;
-  var_01 scripts/cp/utility::waittill_any_ents_or_timeout_return(15.0, var_00, "player_exit_afterlife", level, "game_ended");
+  var_01 scripts\cp\utility::waittill_any_ents_or_timeout_return(15.0, var_00, "player_exit_afterlife", level, "game_ended");
   var_01 destroy();
 }
 
 afterlife_enable_player_interaction(var_00) {
-  var_0.interaction_trigger = scripts/cp/cp_interaction::get_player_interaction_trigger();
-  scripts/cp/cp_interaction::reset_interaction_triggers();
+  var_0.interaction_trigger = scripts\cp\cp_interaction::get_player_interaction_trigger();
+  scripts\cp\cp_interaction::reset_interaction_triggers();
   var_0.last_interaction_point = undefined;
   var_0.interaction_trigger makeunusable();
   var_00 thread afterlife_release_player_interaction_trigger();
-  var_00 thread scripts/cp/cp_interaction::player_interaction_monitor();
+  var_00 thread scripts\cp\cp_interaction::player_interaction_monitor();
 }
 
 afterlife_release_player_interaction_trigger() {
@@ -399,13 +399,13 @@ init_selfrevive_door() {}
 
 use_spectate_door(var_00, var_01) {
   if (level.players.size == 1) {
-  var_01 scripts/cp/cp_interaction::interaction_show_fail_reason(var_00, &"CP_ZOMBIE_AFTERLIFE_ARCADE_CANNOT_SPECTATE");
+  var_01 scripts\cp\cp_interaction::interaction_show_fail_reason(var_00, &"CP_ZOMBIE_AFTERLIFE_ARCADE_CANNOT_SPECTATE");
   return;
   }
 
   var_1.pre_spectate_pos = var_1.origin;
   var_1.pre_spectate_angles = var_01 getplayerangles();
-  var_01 scripts/cp/cp_globallogic::enterspectator();
+  var_01 scripts\cp\cp_globallogic::enterspectator();
   var_01 thread exit_spectator_request_monitor(var_01);
 }
 
@@ -420,7 +420,7 @@ exit_spectator_request_monitor(var_00) {
   var_00 notifyonplayercommand("press_use_button", "+activate");
   var_00 waittill("release_use_button");
   var_00 waittill("press_use_button");
-  var_00 scripts/cp/utility::updatesessionstate("playing");
+  var_00 scripts\cp\utility::updatesessionstate("playing");
   var_00 spawn(var_0.pre_spectate_pos, var_0.pre_spectate_angles);
   var_00 allowdoublejump(0);
   var_00 allowwallrun(0);
@@ -429,7 +429,7 @@ exit_spectator_request_monitor(var_00) {
 use_selfrevive_door(var_00, var_01) {
   var_01 endon("disconnect");
 
-  if (var_01 scripts/cp/utility::isplayingsolo() || level.only_one_player) {
+  if (var_01 scripts\cp\utility::isplayingsolo() || level.only_one_player) {
   if (!scripts\engine\utility::is_true(level.dont_resume_wave_after_solo_afterlife))
   level thread resumespawningaftertime();
   }
@@ -446,16 +446,16 @@ use_selfrevive_door(var_00, var_01) {
   }
 
   var_01 notify("player_exit_afterlife");
-  var_01 scripts/cp/cp_laststand::instant_revive(var_01);
+  var_01 scripts\cp\cp_laststand::instant_revive(var_01);
   var_01 setclientomnvar("zombie_afterlife_soul_power_earned", 0);
   var_01 setclientomnvar("zombie_afterlife_soul_power_goal", 0);
   var_01 setclientomnvar("zombie_afterlife_soul_power_needed", -1);
   var_01 set_has_self_revive_token(var_01, 0);
 
-  if (var_01 scripts/cp/utility::is_consumable_active("self_revive"))
+  if (var_01 scripts\cp\utility::is_consumable_active("self_revive"))
   return;
 
-  if (var_01 scripts/cp/utility::isplayingsolo() || level.only_one_player) {
+  if (var_01 scripts\cp\utility::isplayingsolo() || level.only_one_player) {
   var_1.times_self_revived = var_1.self_revives_purchased;
   var_02 = var_1.max_self_revive_machine_use - var_1.times_self_revived;
   } else {
@@ -501,7 +501,7 @@ update_player_revives_every_ten_waves(var_00) {
   while (var_01 < 2) {
   level scripts\engine\utility::waittill_any("regular_wave_starting", "event_wave_starting");
 
-  if (var_00 scripts/cp/utility::isplayingsolo() || level.only_one_player)
+  if (var_00 scripts\cp\utility::isplayingsolo() || level.only_one_player)
   continue;
   else
   var_02 = int(level.wave_num / 10) + 1 - var_0.times_self_revived;
@@ -525,7 +525,7 @@ move_through_tube(var_00, var_01, var_02) {
   var_05 = var_3.origin + (0, 0, -45);
   var_06 = var_4.origin + (0, 0, -45);
   var_0.is_fast_traveling = 1;
-  var_00 scripts/cp/utility::allow_player_ignore_me(1);
+  var_00 scripts\cp\utility::allow_player_ignore_me(1);
   var_00 dontinterpolate();
   var_00 setorigin(var_05);
   var_00 setplayerangles(var_3.angles);
@@ -538,8 +538,8 @@ move_through_tube(var_00, var_01, var_02) {
   wait 1;
   var_0.is_fast_traveling = undefined;
 
-  if (var_00 scripts/cp/utility::isignoremeenabled())
-  var_00 scripts/cp/utility::allow_player_ignore_me(0);
+  if (var_00 scripts\cp\utility::isignoremeenabled())
+  var_00 scripts\cp\utility::allow_player_ignore_me(0);
 
   var_0.no_outline = 0;
   var_0.no_team_outlines = 0;
@@ -586,7 +586,7 @@ remove_white_screen(var_00) {
 }
 
 can_use_selfrevive_door(var_00, var_01) {
-  if (scripts/cp/utility::isplayingsolo() || scripts\engine\utility::is_true(level.only_one_player))
+  if (scripts\cp\utility::isplayingsolo() || scripts\engine\utility::is_true(level.only_one_player))
   return 1;
 
   if (has_self_revive_token(var_01))
@@ -597,7 +597,7 @@ can_use_selfrevive_door(var_00, var_01) {
 
 get_self_revive_door_hint(var_00, var_01) {
   if (check_self_revive_attempts(var_01)) {
-  if (has_self_revive_token(var_01) || scripts/cp/utility::isplayingsolo() || scripts\engine\utility::is_true(level.only_one_player))
+  if (has_self_revive_token(var_01) || scripts\cp\utility::isplayingsolo() || scripts\engine\utility::is_true(level.only_one_player))
   return &"CP_ZOMBIE_AFTERLIFE_ARCADE_SELFREVIVE_DOOR";
   else
   return &"CP_ZOMBIE_AFTERLIFE_ARCADE_NEED_SELFREVIVE_TOKEN";
@@ -607,14 +607,14 @@ get_self_revive_door_hint(var_00, var_01) {
 }
 
 give_self_revive_token(var_00) {
-  var_00 thread scripts/cp/cp_vo::try_to_play_vo("arcade_token_earn", "zmb_comment_vo", "low", 3, 0, 0, 1);
+  var_00 thread scripts\cp\cp_vo::try_to_play_vo("arcade_token_earn", "zmb_comment_vo", "low", 3, 0, 0, 1);
   var_00 playlocalsound("zmb_ala_soul_meter_filled");
   var_00 set_has_self_revive_token(var_00, 1);
   var_0.soul_power_earned = 0;
   var_0.soul_power_displayed = 0;
   level thread open_afterlife_door_for_player(var_00, 165);
   wait 5;
-  var_00 thread scripts/cp/cp_vo::try_to_play_vo("ww_afterlife_overstay", "zmb_afterlife_vo", "high", undefined, undefined, undefined, 1);
+  var_00 thread scripts\cp\cp_vo::try_to_play_vo("ww_afterlife_overstay", "zmb_afterlife_vo", "high", undefined, undefined, undefined, 1);
 }
 
 give_solo_self_revive_token(var_00) {
@@ -682,7 +682,7 @@ has_self_revive_token(var_00) {
 }
 
 check_self_revive_attempts(var_00) {
-  if (scripts/cp/utility::isplayingsolo() || level.only_one_player)
+  if (scripts\cp\utility::isplayingsolo() || level.only_one_player)
   return 1;
   else if (scripts\engine\utility::is_true(var_0.have_gns_perk))
   return 1;
@@ -789,7 +789,7 @@ increase_afterlife_count(var_00) {
 }
 
 get_soul_power_goal(var_00) {
-  if (scripts/cp/utility::isplayingsolo() || scripts\engine\utility::is_true(level.only_one_player))
+  if (scripts\cp\utility::isplayingsolo() || scripts\engine\utility::is_true(level.only_one_player))
   return 0;
   else
   return 200;
@@ -797,8 +797,8 @@ get_soul_power_goal(var_00) {
 
 register_interactions() {
   level.interaction_hintstrings["afterlife_spectate_door"] = &"CP_ZOMBIE_AFTERLIFE_ARCADE_SPECTATE_DOOR";
-  scripts/cp/cp_interaction::register_interaction("afterlife_spectate_door", undefined, undefined, undefined, ::use_spectate_door, 0, 0, ::init_spectate_door);
-  scripts/cp/cp_interaction::register_interaction("afterlife_selfrevive_door", undefined, undefined, ::get_self_revive_door_hint, ::use_selfrevive_door, 0, 0, ::init_selfrevive_door, ::can_use_selfrevive_door);
+  scripts\cp\cp_interaction::register_interaction("afterlife_spectate_door", undefined, undefined, undefined, ::use_spectate_door, 0, 0, ::init_spectate_door);
+  scripts\cp\cp_interaction::register_interaction("afterlife_selfrevive_door", undefined, undefined, ::get_self_revive_door_hint, ::use_selfrevive_door, 0, 0, ::init_selfrevive_door, ::can_use_selfrevive_door);
 }
 
 reset_soul_power(var_00) {

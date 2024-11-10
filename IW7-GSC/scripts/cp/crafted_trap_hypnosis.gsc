@@ -1,11 +1,11 @@
-/********************************************************
+/************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\crafted_trap_hypnosis.gsc
-********************************************************/
+ * Script: scripts\cp\crafted_trap_hypnosis.gsc
+************************************************/
 
 init() {
-	level._effect["boombox_explode"] = loadfx("vfx/iw7/_requests/coop/vfx_ghetto_blast.vfx");
+	level._effect["boombox_explode"] = loadfx("vfx\iw7\_requests\coop\vfx_ghetto_blast.vfx");
 	var_00 = spawnstruct();
 	var_00.timeout = 18;
 	var_00.modelplacement = "cp_town_hypnosis_device_good";
@@ -394,11 +394,11 @@ hypnosis_delayed_death(param_00,param_01) {
 	wait(param_00 * 0.05);
 	self.deathmethod = "hypnosis";
 	if(!scripts\engine\utility::istrue(self.is_crawler)) {
-		scripts/asm/asm::asm_setstate("hypnosisdeath");
+		scripts\asm\asm::asm_setstate("hypnosisdeath");
 		return;
 	}
 
-	scripts/asm/asm::asm_setstate("hypnosisdeathcrawling");
+	scripts\asm\asm::asm_setstate("hypnosisdeathcrawling");
 }
 
 get_closest_attract_position(param_00,param_01) {

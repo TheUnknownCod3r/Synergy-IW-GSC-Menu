@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2641.gsc
+ * Script: 2641.gsc
 ***************************************/
 
 init() {
@@ -47,7 +47,7 @@ endgame(var_00, var_01) {
   setdvar("scr_gameended", 1);
   setgameendtime(0);
   setomnvar("zm_ui_timer", 0);
-  scripts/cp/cp_challenge::deactivate_current_challenge();
+  scripts\cp\cp_challenge::deactivate_current_challenge();
 
   foreach (var_04 in level.players)
   func_40A5(var_04);
@@ -57,7 +57,7 @@ endgame(var_00, var_01) {
   foreach (var_09 in level.agentarray) {
   if (isdefined(var_9.isactive) && var_9.isactive) {
   var_9.ignoreall = 1;
-  var_09 scripts/cp/utility::enable_alien_scripted();
+  var_09 scripts\cp\utility::enable_alien_scripted();
   }
   }
 
@@ -72,12 +72,12 @@ endgame(var_00, var_01) {
   return;
   } else {}
 
-  scripts/cp/cp_gamescore::calculate_players_total_end_game_score(1);
+  scripts\cp\cp_gamescore::calculate_players_total_end_game_score(1);
 
   if (isdefined(level.func_D7BB))
   [[level.func_D7BB]]();
 
-  if (!scripts/cp/utility::is_codxp()) {
+  if (!scripts\cp\utility::is_codxp()) {
   foreach (var_04 in level.players)
   var_04 setclientdvar("ui_opensummary", 1);
   }
@@ -85,19 +85,19 @@ endgame(var_00, var_01) {
   setomnvarforallclients("post_game_state", 2);
   func_56DA(var_00, var_01);
   setomnvarforallclients("post_game_state", 1);
-  var_14 = scripts/cp/cp_globallogic::spawnintermission;
+  var_14 = scripts\cp\cp_globallogic::spawnintermission;
 
   if (isdefined(level.func_4C58))
   var_14 = level.func_4C58;
 
-  if (!scripts/cp/utility::is_codxp()) {
+  if (!scripts\cp\utility::is_codxp()) {
   foreach (var_04 in level.players)
   var_04 thread [[var_14]](var_01);
   }
 
   var_17 = func_7978(var_01);
   var_18 = func_7B85();
-  scripts/cp/cp_analytics::endgame(var_17, var_18);
+  scripts\cp\cp_analytics::endgame(var_17, var_18);
   setomnvarforallclients("post_game_state", 4);
   wait 11.0;
   setomnvarforallclients("post_game_state", 1);
@@ -107,7 +107,7 @@ endgame(var_00, var_01) {
 
 kill_all_zombies() {
   wait 1;
-  var_00 = scripts/cp/cp_agent_utils::getaliveagentsofteam("axis");
+  var_00 = scripts\cp\cp_agent_utils::getaliveagentsofteam("axis");
 
   foreach (var_02 in var_00) {
   var_2.ignoreall = 1;
@@ -169,18 +169,18 @@ func_7384(var_00, var_01, var_02) {
   }
 
   foreach (var_07 in level.agentarray)
-  var_07 scripts/cp/utility::freezecontrolswrapper(1);
+  var_07 scripts\cp\utility::freezecontrolswrapper(1);
 }
 
 freezeplayerforroundend(var_00) {
   self endon("disconnect");
-  scripts/cp/utility::clearlowermessages();
+  scripts\cp\utility::clearlowermessages();
 
   if (!isdefined(var_00))
   var_00 = 0.05;
 
   wait(var_00);
-  scripts/cp/utility::freezecontrolswrapper(1);
+  scripts\cp\utility::freezecontrolswrapper(1);
 }
 
 func_E760(var_00) {
@@ -199,37 +199,37 @@ func_7B85() {
 freegameplayhudelems() {
   if (isdefined(self.perkicon)) {
   if (isdefined(self.perkicon[0])) {
-  self.perkicon[0] scripts/cp/utility::destroyelem();
-  self.perkname[0] scripts/cp/utility::destroyelem();
+  self.perkicon[0] scripts\cp\utility::destroyelem();
+  self.perkname[0] scripts\cp\utility::destroyelem();
   }
 
   if (isdefined(self.perkicon[1])) {
-  self.perkicon[1] scripts/cp/utility::destroyelem();
-  self.perkname[1] scripts/cp/utility::destroyelem();
+  self.perkicon[1] scripts\cp\utility::destroyelem();
+  self.perkname[1] scripts\cp\utility::destroyelem();
   }
 
   if (isdefined(self.perkicon[2])) {
-  self.perkicon[2] scripts/cp/utility::destroyelem();
-  self.perkname[2] scripts/cp/utility::destroyelem();
+  self.perkicon[2] scripts\cp\utility::destroyelem();
+  self.perkname[2] scripts\cp\utility::destroyelem();
   }
   }
 
   self notify("perks_hidden");
-  self.lowermessage scripts/cp/utility::destroyelem();
-  self.lowertimer scripts/cp/utility::destroyelem();
+  self.lowermessage scripts\cp\utility::destroyelem();
+  self.lowertimer scripts\cp\utility::destroyelem();
 
   if (isdefined(self.proxbar))
-  self.proxbar scripts/cp/utility::destroyelem();
+  self.proxbar scripts\cp\utility::destroyelem();
 
   if (isdefined(self.proxbartext))
-  self.proxbartext scripts/cp/utility::destroyelem();
+  self.proxbartext scripts\cp\utility::destroyelem();
 }
 
 func_40A5(var_00) {
   var_00 notify("select_mode");
   var_00 notify("reset_outcome");
   var_0.pers["stats"] = var_0.func_10E53;
-  var_00 scripts/cp/utility::allow_player_ignore_me(1);
+  var_00 scripts\cp\utility::allow_player_ignore_me(1);
   var_00 setclientomnvar("ui_intel_progress_current", -1);
   var_00 setclientomnvar("ui_intel_progress_max", -1);
   var_00 setclientomnvar("ui_intel_percent", -1);
@@ -239,7 +239,7 @@ func_40A5(var_00) {
   var_00 setclientomnvar("ui_intel_challenge_scalar", -1);
   var_00 setclientomnvar("zombie_number_of_ticket", 0);
   var_00 setrankedplayerdata("cp", "zombiePlayerLoadout", "tutorialOff", 1);
-  var_00 scripts/cp/utility::clearlowermessages();
+  var_00 scripts\cp\utility::clearlowermessages();
 
   if (isdefined(var_0.pap))
   var_0.pap = [];
@@ -288,7 +288,7 @@ func_A5D7() {
   foreach (var_01 in level.characters)
   var_01 getrandomarmkillstreak(100000, var_1.origin);
 
-  var_03 = scripts/cp/cp_agent_utils::getactiveagentsofspecies("alien");
+  var_03 = scripts\cp\cp_agent_utils::getactiveagentsofspecies("alien");
 
   foreach (var_05 in var_03)
   var_05 suicide();
@@ -323,7 +323,7 @@ func_D40D(var_00) {
 
 func_56C4() {
   wait 3.0;
-  scripts/cp/cp_laststand::clear_last_stand_timer(self);
+  scripts\cp\cp_laststand::clear_last_stand_timer(self);
   self setclientomnvar("retry_popup", 1);
   self waittill("luinotifyserver", var_00);
   level.func_E40B = level.func_E40B + 1;
@@ -336,12 +336,12 @@ func_4172() {
   if (isdefined(self.powers)) {
   foreach (var_01 in getarraykeys(self.powers)) {
   var_02 = self.powers[var_01].charges * -1;
-  scripts/cp/powers/coop_powers::power_adjustcharges(var_02);
+  scripts\cp\powers\coop_powers::power_adjustcharges(var_02);
   }
   }
 
-  scripts/cp/powers/coop_powers::func_13F00("secondary");
-  scripts/cp/powers/coop_powers::func_13F00("primary");
+  scripts\cp\powers\coop_powers::func_13F00("secondary");
+  scripts\cp\powers\coop_powers::func_13F00("primary");
 }
 
 func_7978(var_00) {
@@ -492,7 +492,7 @@ func_56DA(var_00, var_01) {
   continue;
 
   var_03 thread func_C752(var_00, var_01);
-  var_03 thread scripts/cp/utility::freezecontrolswrapper(1);
+  var_03 thread scripts\cp\utility::freezecontrolswrapper(1);
   }
 
   level notify("game_win", var_00);
@@ -507,7 +507,7 @@ func_C752(var_00, var_01) {
   if (!isdefined(var_02) || var_02 != "allies" && var_02 != "axis")
   var_02 = "allies";
 
-  while (scripts/cp/cp_hud_message::isdoingsplash())
+  while (scripts\cp\cp_hud_message::isdoingsplash())
   wait 0.05;
 
   self endon("reset_outcome");
@@ -558,7 +558,7 @@ func_E761(var_00, var_01) {
   if (!isdefined(var_5.func_58DD))
   continue;
 
-  if (!var_05 scripts/cp/cp_hud_message::isdoingsplash())
+  if (!var_05 scripts\cp\cp_hud_message::isdoingsplash())
   continue;
 
   var_02 = 0;
@@ -586,7 +586,7 @@ func_E761(var_00, var_01) {
   if (!isdefined(var_5.func_58DD))
   continue;
 
-  if (!var_05 scripts/cp/cp_hud_message::isdoingsplash())
+  if (!var_05 scripts\cp\cp_hud_message::isdoingsplash())
   continue;
 
   var_02 = 0;

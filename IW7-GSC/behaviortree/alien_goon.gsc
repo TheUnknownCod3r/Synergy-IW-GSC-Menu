@@ -1,8 +1,8 @@
-/***********************************************
+/***************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\behaviortree\alien_goon.gsc
-***********************************************/
+ * Script: behaviortree\alien_goon.gsc
+***************************************/
 
 func_2AD0() {
 	if(isdefined(level.var_119E["alien_goon"])) {

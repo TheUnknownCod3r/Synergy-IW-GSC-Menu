@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2618.gsc
+ * Script: 2618.gsc
 ***************************************/
 
 setup_individual_exploder(var_00) {

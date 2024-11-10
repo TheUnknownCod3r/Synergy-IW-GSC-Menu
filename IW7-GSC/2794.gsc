@@ -1,13 +1,13 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2794.gsc
+ * Script: 2794.gsc
 ***************************************/
 
 func_FC58() {
-  level._effect["shard_ball_rocket_trail"] = loadfx("vfx/iw7/_requests/mp/vfx_shard_ball_launch_trail.vfx");
-  level._effect["shard_ball_explosion_shards"] = loadfx("vfx/iw7/_requests/mp/vfx_shard_ball_proj_exp.vfx");
-  level._effect["shard_ball_explosion_rocket"] = loadfx("vfx/iw7/_requests/mp/vfx_shard_ball_launch_exp.vfx");
-  scripts/mp/powerloot::func_DF06("power_shardBall", ["passive_increased_radius", "passive_increased_entities", "passive_grenade_to_mine"]);
+  level._effect["shard_ball_rocket_trail"] = loadfx("vfx\iw7\_requests\mp\vfx_shard_ball_launch_trail.vfx");
+  level._effect["shard_ball_explosion_shards"] = loadfx("vfx\iw7\_requests\mp\vfx_shard_ball_proj_exp.vfx");
+  level._effect["shard_ball_explosion_rocket"] = loadfx("vfx\iw7\_requests\mp\vfx_shard_ball_launch_exp.vfx");
+  scripts\mp\powerloot::func_DF06("power_shardBall", ["passive_increased_radius", "passive_increased_entities", "passive_grenade_to_mine"]);
 }
 
 func_FC5A() {
@@ -146,15 +146,15 @@ func_13B34(var_00, var_01, var_02, var_03, var_04, var_05) {
   var_08 = scripts\engine\utility::add_to_array(var_08, var_10);
   }
 
-  var_12 = var_01 scripts/mp/powerloot::func_7FC4("power_shardBall", 30);
-  var_13 = var_01 scripts/mp/powerloot::func_7FC4("power_shardBall", 300);
+  var_12 = var_01 scripts\mp\powerloot::func_7FC4("power_shardBall", 30);
+  var_13 = var_01 scripts\mp\powerloot::func_7FC4("power_shardBall", 300);
   var_14 = scripts\engine\utility::get_array_of_closest(var_07, var_08, undefined, undefined, var_13, var_12);
   var_15 = 15;
 
   if (isdefined(var_04))
   var_15 = var_04;
 
-  var_16 = var_01 scripts/mp/powerloot::func_7FC2("power_shardBall", var_15);
+  var_16 = var_01 scripts\mp\powerloot::func_7FC2("power_shardBall", var_15);
 
   for (var_17 = 0; var_17 < var_16; var_17++) {
   var_18 = _meth_80B9(var_07, var_00);

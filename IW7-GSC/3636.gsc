@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3636.gsc
-****************************/
+ * Script: 3636.gsc
+************************/
 
 func_2A2D() {
 	func_2A30();
@@ -15,12 +15,12 @@ func_2A2D() {
 }
 
 func_2A30() {
-	level._effect["beam_rifle_beam"] = loadfx("vfx/iw7/_requests/europa/vfx_beam_rifle_beam");
-	level._effect["beam_rifle_decal"] = loadfx("vfx/old/_requests/future_weapons/vfx_beam_rifle_impact_decal");
-	level._effect["beam_rifle_fire"] = loadfx("vfx/old/_requests/future_weapons/vfx_beam_rifle_fire");
-	level._effect["beam_rifle_smoke"] = loadfx("vfx/old/_requests/future_weapons/vfx_beam_rifle_smoke");
-	level._effect["beam_rifle_ammo"] = loadfx("vfx/iw7/_requests/europa/vfx_beam_rifle_ammo");
-	level._effect["beam_rifle_robot_explosion"] = loadfx("vfx/iw7/_requests/europa/vfx_beam_rifle_robot_explode.vfx");
+	level._effect["beam_rifle_beam"] = loadfx("vfx\iw7\_requests\europa\vfx_beam_rifle_beam");
+	level._effect["beam_rifle_decal"] = loadfx("vfx\old\_requests\future_weapons\vfx_beam_rifle_impact_decal");
+	level._effect["beam_rifle_fire"] = loadfx("vfx\old\_requests\future_weapons\vfx_beam_rifle_fire");
+	level._effect["beam_rifle_smoke"] = loadfx("vfx\old\_requests\future_weapons\vfx_beam_rifle_smoke");
+	level._effect["beam_rifle_ammo"] = loadfx("vfx\iw7\_requests\europa\vfx_beam_rifle_ammo");
+	level._effect["beam_rifle_robot_explosion"] = loadfx("vfx\iw7\_requests\europa\vfx_beam_rifle_robot_explode.vfx");
 	precacheshader("alien_icon_craft_battery");
 	precacheitem("iw7_steeldragon");
 }

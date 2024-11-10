@@ -1,13 +1,13 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3431.gsc
-****************************/
+ * Script: 3431.gsc
+************************/
 
 applyarchetype() {}
 
 func_97D0() {
-	level._effect["atomize_body"] = loadfx("vfx/iw7/_requests/mp/vfx_atomize_body.vfx");
+	level._effect["atomize_body"] = loadfx("vfx\iw7\_requests\mp\vfx_atomize_body.vfx");
 }
 
 removearchetype() {
@@ -24,13 +24,13 @@ func_CAAF() {
 	for(;;) {
 		self setclientomnvar("ui_dodge_charges",4);
 		self waittill("sprint_slide_begin");
-		if(scripts/mp/equipment/phase_shift::isentityphaseshifted(self)) {
+		if(scripts\mp\equipment\phase_shift::isentityphaseshifted(self)) {
 			continue;
 		}
 
 		wait(0.1);
 		self setclientomnvar("ui_dodge_charges",0);
-		scripts/mp/equipment/phase_shift::func_6626(0);
+		scripts\mp\equipment\phase_shift::func_6626(0);
 		func_CAAE();
 		wait(4);
 		self setclientomnvar("ui_dodge_charges",4);
@@ -42,7 +42,7 @@ func_CAAE() {
 	self endon("removeArchetype");
 	self endon("phase_shift_power_activated");
 	scripts\engine\utility::waittill_notify_or_timeout("sprint_slide_end",1);
-	scripts/mp/equipment/phase_shift::exitphaseshift(0);
+	scripts\mp\equipment\phase_shift::exitphaseshift(0);
 }
 
 func_1166B() {
@@ -60,7 +60,7 @@ func_1166B() {
 			continue;
 		}
 
-		if(scripts/mp/equipment/phase_shift::isentityphaseshifted(self)) {
+		if(scripts\mp\equipment\phase_shift::isentityphaseshifted(self)) {
 			continue;
 		}
 
@@ -120,11 +120,11 @@ func_CAA7() {
 	self endon("removeArchetype");
 	for(;;) {
 		self waittill("doubleJumpBegin");
-		if(scripts/mp/equipment/phase_shift::isentityphaseshifted(self)) {
+		if(scripts\mp\equipment\phase_shift::isentityphaseshifted(self)) {
 			continue;
 		}
 
-		scripts/mp/equipment/phase_shift::func_6626(0);
+		scripts\mp\equipment\phase_shift::func_6626(0);
 		func_CAA6();
 	}
 }
@@ -136,7 +136,7 @@ func_CAA6() {
 	var_00 = 0;
 	for(;;) {
 		if(var_00 >= 0.5) {
-			scripts/mp/equipment/phase_shift::exitphaseshift(0);
+			scripts\mp\equipment\phase_shift::exitphaseshift(0);
 			return;
 		}
 
@@ -168,7 +168,7 @@ func_20D9(param_00,param_01) {
 	level endon("game_ended");
 	playfx(scripts\engine\utility::getfx("phase_slash_spool"),param_01 + (0,0,36));
 	playsoundatpos(param_01,"blackhole_grenade_explode_default");
-	scripts\mp\_utility::_launchgrenade("phaseSlash_grenade_mp",param_01 + (0,0,36),(0,0,0),1.5);
+	scripts\mp\utility::_launchgrenade("phaseSlash_grenade_mp",param_01 + (0,0,36),(0,0,0),1.5);
 	wait(1.5);
 	playfx(scripts\engine\utility::getfx("phase_blast"),param_01);
 	playsoundatpos(param_01,"kinetic_pulse_npc");
@@ -179,7 +179,7 @@ func_CAAD() {
 	self endon("removeArchetype");
 	self endon("phase_shift_power_activated");
 	wait(2.5);
-	scripts/mp/equipment/phase_shift::exitphaseshift(0);
+	scripts\mp\equipment\phase_shift::exitphaseshift(0);
 }
 
 func_1091C() {
@@ -198,7 +198,7 @@ func_1091C() {
 					continue;
 				}
 
-				if(var_02 scripts\mp\_utility::_hasperk("specialty_coldblooded")) {
+				if(var_02 scripts\mp\utility::_hasperk("specialty_coldblooded")) {
 					continue;
 				}
 
@@ -225,9 +225,9 @@ func_BA1A(param_00) {
 }
 
 func_C7A6(param_00) {
-	var_01 = scripts\mp\_utility::outlineenableforplayer(self,"red",param_00,0,1,"level_script");
+	var_01 = scripts\mp\utility::outlineenableforplayer(self,"red",param_00,0,1,"level_script");
 	if(!isai(param_00)) {
-		param_00 scripts\mp\_utility::_hudoutlineviewmodelenable(5);
+		param_00 scripts\mp\utility::_hudoutlineviewmodelenable(5);
 	}
 
 	param_00 func_13AA0(var_01,self,6);
@@ -238,9 +238,9 @@ func_13AA0(param_00,param_01,param_02) {
 	level endon("game_ended");
 	scripts\engine\utility::waittill_any_timeout_no_endon_death_2(param_02,"leave","end_spawnview");
 	if(isdefined(param_01)) {
-		scripts\mp\_utility::outlinedisable(param_00,param_01);
+		scripts\mp\utility::outlinedisable(param_00,param_01);
 		if(!isai(param_01)) {
-			param_01 scripts\mp\_utility::_hudoutlineviewmodeldisable();
+			param_01 scripts\mp\utility::_hudoutlineviewmodeldisable();
 		}
 	}
 }

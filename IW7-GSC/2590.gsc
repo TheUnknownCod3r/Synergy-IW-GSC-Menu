@@ -1,13 +1,13 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\2590.gsc
-****************************/
+ * Script: 2590.gsc
+************************/
 
 func_234D(param_00,param_01) {
-	scripts/asm/asm::func_234E();
+	scripts\asm\asm::func_234E();
 	if(param_01 == "hero_salter" || param_01 == "hero_boats") {
-		scripts/asm/asm_bb::func_2984(1);
+		scripts\asm\asm_bb::func_2984(1);
 	}
 
 	self.asm = spawnstruct();
@@ -25,7 +25,7 @@ func_234D(param_00,param_01) {
 	self.var_7192 = ::func_2348;
 	self.var_7191 = ::asm_getallanimsforstate;
 	self.var_7190 = ::asm_getallanimsforalias;
-	scripts/asm/asm::func_2351(param_00,1);
+	scripts\asm\asm::func_2351(param_00,1);
 }
 
 func_2382(param_00,param_01) {
@@ -116,15 +116,15 @@ func_C879() {
 			}
 
 			var_05 = level.asm[var_09].states[var_04.var_C87F];
-			scripts/asm/asm::func_2388(var_09,var_03,var_04,var_04.var_116FB);
+			scripts\asm\asm::func_2388(var_09,var_03,var_04,var_04.var_116FB);
 			var_06 = var_04.var_C87F;
 			if(isdefined(var_05.var_C94B) && var_05.var_C94B) {
-				var_07 = scripts/asm/asm::func_2310(var_09,var_04.var_C87F,1);
+				var_07 = scripts\asm\asm::func_2310(var_09,var_04.var_C87F,1);
 				var_06 = var_07[0];
 				var_08 = var_07[1];
 			}
 
-			scripts/asm/asm::func_238A(var_09,var_06,0.05,undefined,undefined,var_04.var_C87C);
+			scripts\asm\asm::func_238A(var_09,var_06,0.05,undefined,undefined,var_04.var_C87C);
 			if(isdefined(self.unittype) && self.unittype == "c6") {
 				self playsound("shield_death_c6_1");
 			}
@@ -159,8 +159,8 @@ traversehandler() {
 				continue;
 			}
 
-			scripts/asm/asm::func_2388(var_02,var_04,var_05,var_05.var_116FB);
-			scripts/asm/asm::func_238A(var_02,var_00,0.2,undefined,undefined,undefined);
+			scripts\asm\asm::func_2388(var_02,var_04,var_05,var_05.var_116FB);
+			scripts\asm\asm::func_238A(var_02,var_00,0.2,undefined,undefined,undefined);
 		}
 	}
 }
@@ -189,15 +189,15 @@ func_111A9() {
 				}
 
 				var_08 = level.asm[var_0C].states[var_07.var_C87F];
-				scripts/asm/asm::func_2388(var_0C,var_06,var_07,var_07.var_116FB);
+				scripts\asm\asm::func_2388(var_0C,var_06,var_07,var_07.var_116FB);
 				var_09 = var_07.var_C87F;
 				if(isdefined(var_08.var_C94B) && var_08.var_C94B) {
-					var_0A = scripts/asm/asm::func_2310(var_0C,var_07.var_C87F,1);
+					var_0A = scripts\asm\asm::func_2310(var_0C,var_07.var_C87F,1);
 					var_09 = var_0A[0];
 					var_0B = var_0A[1];
 				}
 
-				scripts/asm/asm::func_238A(var_0C,var_09,0.05,undefined,undefined,var_07.var_C87C);
+				scripts\asm\asm::func_238A(var_0C,var_09,0.05,undefined,undefined,var_07.var_C87C);
 				var_03 = 1;
 			}
 
@@ -246,7 +246,7 @@ func_237E(param_00) {
 }
 
 func_230E(param_00,param_01) {
-	if(scripts/asm/asm::func_231B(param_00,"gesture")) {
+	if(scripts\asm\asm::func_231B(param_00,"gesture")) {
 		func_2381(param_00,param_01);
 	}
 }
@@ -258,12 +258,12 @@ func_238D(param_00) {
 		}
 
 		self.a.pose = param_00.var_10B53;
-		scripts/asm/asm_bb::bb_requestsmartobject(param_00.var_10B53);
+		scripts\asm\asm_bb::bb_requestsmartobject(param_00.var_10B53);
 	}
 }
 
 func_230D(param_00,param_01,param_02,param_03) {
-	if(scripts/asm/asm::func_231B(param_00,"aim")) {
+	if(scripts\asm\asm::func_231B(param_00,"aim")) {
 		func_2380(param_00,param_02,param_03);
 	}
 }
@@ -285,7 +285,7 @@ func_2326(param_00,param_01,param_02,param_03,param_04) {
 
 	var_07 = undefined;
 	foreach(var_09 in var_06) {
-		scripts/asm/asm::asm_fireevent(param_01,var_09);
+		scripts\asm\asm::asm_fireevent(param_01,var_09);
 		var_0A = scripts\anim\notetracks::handlenotetrack(var_09,var_05,param_02,param_03);
 		if(!isdefined(var_0A)) {
 			var_0A = func_2344(param_00,var_09,param_01);
@@ -368,8 +368,8 @@ func_231F(param_00,param_01,param_02,param_03,param_04,param_05) {
 	for(;;) {
 		var_06 = func_2326(param_00,param_01,param_02,param_03,param_04);
 		if(isdefined(var_06)) {
-			if(param_05 && !scripts/asm/asm::func_232B(param_01,"end")) {
-				scripts/asm/asm::asm_fireevent(param_01,"end");
+			if(param_05 && !scripts\asm\asm::func_232B(param_01,"end")) {
+				scripts\asm\asm::asm_fireevent(param_01,"end");
 			}
 
 			return var_06;
@@ -395,7 +395,7 @@ func_2322(param_00,param_01,param_02,param_03) {
 				continue;
 			}
 
-			scripts/asm/asm::asm_fireevent(param_01,var_07);
+			scripts\asm\asm::asm_fireevent(param_01,var_07);
 			var_09 = scripts\anim\notetracks::handlenotetrack(var_07,param_01,undefined,undefined);
 			if(isdefined(var_09)) {
 				var_05 = var_09;
@@ -463,7 +463,7 @@ func_2369(param_00,param_01,param_02) {
 }
 
 func_236B(param_00,param_01,param_02) {
-	if(!scripts/asm/asm::asm_hasalias("Knobs","head")) {
+	if(!scripts\asm\asm::asm_hasalias("Knobs","head")) {
 		return;
 	}
 
@@ -484,7 +484,7 @@ func_236B(param_00,param_01,param_02) {
 	if(self.asm.var_6A86 != param_01 || self _meth_8103(var_03) < 1) {
 		self.asm.var_6A86 = param_01;
 		var_04 = "facial_" + param_01;
-		var_05 = scripts/asm/asm::asm_lookupanimfromalias("facial_animation",var_04);
+		var_05 = scripts\asm\asm::asm_lookupanimfromalias("facial_animation",var_04);
 		var_03 = func_2356("Knobs","head");
 		if(isdefined(var_05)) {
 			self setanimknob(var_05,1,0.1,1);
@@ -625,7 +625,7 @@ func_236D(param_00) {
 		return;
 	}
 
-	if(!isdefined(var_04) || !scripts/asm/asm::asm_hasalias(var_02,var_04)) {
+	if(!isdefined(var_04) || !scripts\asm\asm::asm_hasalias(var_02,var_04)) {
 		if(!isdefined(var_04)) {
 			var_04 = "UNDEFINED";
 		}
@@ -633,7 +633,7 @@ func_236D(param_00) {
 		return;
 	}
 
-	var_06 = scripts/asm/asm::asm_lookupanimfromalias(var_02,var_04);
+	var_06 = scripts\asm\asm::asm_lookupanimfromalias(var_02,var_04);
 	var_07 = func_2356("Knobs",var_03);
 	self give_attacker_kill_rewards(var_07,10,0.3,1);
 	self give_attacker_kill_rewards(var_06,1,0.3,1);
@@ -645,7 +645,7 @@ func_2319(param_00) {
 		var_01 = "ik_fingers_r";
 	}
 
-	if(!scripts/asm/asm::asm_hasalias("Knobs",var_01)) {
+	if(!scripts\asm\asm::asm_hasalias("Knobs",var_01)) {
 		return;
 	}
 
@@ -666,13 +666,13 @@ func_2355() {
 
 func_236E() {
 	func_231A();
-	var_00 = scripts/asm/asm::asm_lookupanimfromalias("Visor","helmet_visor_up");
+	var_00 = scripts\asm\asm::asm_lookupanimfromalias("Visor","helmet_visor_up");
 	if(self.asm.var_DC48 == 1) {
 		self give_attacker_kill_rewards(var_00,1,0,1);
 		return;
 	}
 
-	var_01 = scripts/asm/asm::asm_lookupanimfromalias("Visor","helmet_visor_down");
+	var_01 = scripts\asm\asm::asm_lookupanimfromalias("Visor","helmet_visor_down");
 	self give_attacker_kill_rewards(var_01,1,0,1);
 	wait(getanimlength(var_01) - 0.1);
 	func_231A();
@@ -724,7 +724,7 @@ func_2357(param_00,param_01,param_02) {
 	}
 	else
 	{
-		var_03 = archetypegetalias(param_00,param_01,param_02,scripts/asm/asm::asm_getdemeanor());
+		var_03 = archetypegetalias(param_00,param_01,param_02,scripts\asm\asm::asm_getdemeanor());
 	}
 
 	if(isdefined(var_03)) {
@@ -747,7 +747,7 @@ func_2356(param_00,param_01) {
 }
 
 func_2305(param_00,param_01,param_02) {
-	var_03 = archetypegetalias(param_00,param_01,param_02,scripts/asm/asm::asm_getdemeanor());
+	var_03 = archetypegetalias(param_00,param_01,param_02,scripts\asm\asm::asm_getdemeanor());
 	if(isdefined(var_03)) {
 		return 1;
 	}
@@ -756,7 +756,7 @@ func_2305(param_00,param_01,param_02) {
 }
 
 func_2359(param_00,param_01,param_02) {
-	return _func_2EF(param_00,param_01,param_02,scripts/asm/asm::asm_getdemeanor());
+	return _func_2EF(param_00,param_01,param_02,scripts\asm\asm::asm_getdemeanor());
 }
 
 func_235B(param_00,param_01) {
@@ -823,20 +823,20 @@ func_235F(param_00,param_01,param_02,param_03,param_04) {
 	var_05 = asm_getbodyknob();
 	self aiclearanim(var_05,param_02);
 	if(isdefined(param_04) && param_04) {
-		if(scripts/asm/asm::asm_hasalias("Knobs","move")) {
+		if(scripts\asm\asm::asm_hasalias("Knobs","move")) {
 			var_06 = func_2356("Knobs","move");
 			self _meth_84F2(var_06);
 		}
 	}
 
 	var_07 = undefined;
-	var_08 = scripts/asm/asm::func_2341(param_00,param_01);
+	var_08 = scripts\asm\asm::func_2341(param_00,param_01);
 	var_09 = 0.2;
 	var_0A = isdefined(param_04) && param_04;
 	for(;;) {
 		var_0B = asm_getallanimsforstate(param_00,param_01);
 		if(isdefined(param_04) && param_04) {
-			param_03 = scripts/asm/asm::asm_getmoveplaybackrate();
+			param_03 = scripts\asm\asm::asm_getmoveplaybackrate();
 			self _meth_84F1(param_03);
 		}
 
@@ -863,7 +863,7 @@ func_235F(param_00,param_01,param_02,param_03,param_04) {
 		while(!isdefined(var_0D)) {
 			var_0D = func_2323(param_00,param_01,var_09,var_08);
 			if(!isdefined(var_0D) && var_0A) {
-				param_03 = scripts/asm/asm::asm_getmoveplaybackrate();
+				param_03 = scripts\asm\asm::asm_getmoveplaybackrate();
 				if(param_03 != var_0E) {
 					self _meth_84F1(param_03);
 					self _meth_82B1(var_0B,param_03);
@@ -883,11 +883,11 @@ func_2368(param_00,param_01,param_02,param_03,param_04) {
 	func_2369(param_00,param_01,var_05);
 	var_06 = func_2322(param_00,param_01,param_03,param_04);
 	if(var_06 == "end") {
-		if(!scripts/asm/asm::func_232B(param_01,"end")) {
-			scripts/asm/asm::asm_fireevent(param_01,"end");
+		if(!scripts\asm\asm::func_232B(param_01,"end")) {
+			scripts\asm\asm::asm_fireevent(param_01,"end");
 		}
 
-		thread scripts/asm/asm::func_2310(param_00,param_01,0);
+		thread scripts\asm\asm::func_2310(param_00,param_01,0);
 	}
 }
 
@@ -897,7 +897,7 @@ func_2366(param_00,param_01,param_02) {
 	self aiclearanim(asm_getbodyknob(),param_02);
 	self _meth_82E7(param_01,var_03,1,param_02,1);
 	func_2369(param_00,param_01,var_03);
-	var_04 = func_231F(param_00,param_01,scripts/asm/asm::func_2341(param_00,param_01));
+	var_04 = func_231F(param_00,param_01,scripts\asm\asm::func_2341(param_00,param_01));
 }
 
 func_2364(param_00,param_01,param_02) {
@@ -906,13 +906,13 @@ func_2364(param_00,param_01,param_02) {
 	self aiclearanim(asm_getbodyknob(),param_02);
 	self _meth_82E7(param_01,var_03,1,param_02,1);
 	func_2369(param_00,param_01,var_03);
-	var_04 = func_231F(param_00,param_01,scripts/asm/asm::func_2341(param_00,param_01));
+	var_04 = func_231F(param_00,param_01,scripts\asm\asm::func_2341(param_00,param_01));
 	if(var_04 == "code_move") {
-		var_04 = func_231F(param_00,param_01,scripts/asm/asm::func_2341(param_00,param_01));
+		var_04 = func_231F(param_00,param_01,scripts\asm\asm::func_2341(param_00,param_01));
 	}
 
 	if(var_04 == "end") {
-		thread scripts/asm/asm::func_2310(param_00,param_01,0);
+		thread scripts\asm\asm::func_2310(param_00,param_01,0);
 	}
 }
 
@@ -928,7 +928,7 @@ func_2363(param_00,param_01,param_02,param_03) {
 	}
 
 	func_2369(param_00,param_01,var_04);
-	func_231F(param_00,param_01,scripts/asm/asm::func_2341(param_00,param_01));
+	func_231F(param_00,param_01,scripts\asm\asm::func_2341(param_00,param_01));
 }
 
 func_2361(param_00,param_01,param_02,param_03) {
@@ -951,7 +951,7 @@ func_2361(param_00,param_01,param_02,param_03) {
 
 		thread func_2362(param_01,var_06,var_05);
 		func_2369(param_00,param_01,var_06);
-		func_231F(param_00,param_01,scripts/asm/asm::func_2341(param_00,param_01));
+		func_231F(param_00,param_01,scripts\asm\asm::func_2341(param_00,param_01));
 		self notify(param_01 + "additive_cancel");
 	}
 }
@@ -1040,7 +1040,7 @@ func_237D(param_00,param_01) {
 		return;
 	}
 
-	var_03 = scripts/asm/asm::asm_getdemeanor();
+	var_03 = scripts\asm\asm::asm_getdemeanor();
 	if(var_03 && isdefined(level.var_7361[param_00][var_02])) {
 		func_2377(level.var_7361[param_00][var_02]);
 		return;
@@ -1059,18 +1059,18 @@ func_2380(param_00,param_01,param_02,param_03,param_04) {
 		return;
 	}
 
-	if(scripts/asm/asm::asm_hasalias(param_01,"aim_1")) {
+	if(scripts\asm\asm::asm_hasalias(param_01,"aim_1")) {
 		return;
 	}
 
-	if(!scripts/asm/asm::asm_hasalias(param_01,var_05 + "_aim_8")) {
+	if(!scripts\asm\asm::asm_hasalias(param_01,var_05 + "_aim_8")) {
 		var_05 = "rifle";
 	}
 
 	func_237D(param_00,param_01);
 	var_06 = var_05 + "_aim_5";
 	var_07 = undefined;
-	if((!isdefined(param_03) || param_03) && scripts/asm/asm::asm_hasalias(param_01,var_06)) {
+	if((!isdefined(param_03) || param_03) && scripts\asm\asm::asm_hasalias(param_01,var_06)) {
 		var_07 = func_235B(param_01,var_05 + "_aim_5");
 	}
 
@@ -1082,10 +1082,10 @@ func_2380(param_00,param_01,param_02,param_03,param_04) {
 		self _meth_82AC(var_07,1,param_02);
 	}
 
-	if(scripts/asm/asm::asm_hasalias(param_01,"aim_root")) {
+	if(scripts\asm\asm::asm_hasalias(param_01,"aim_root")) {
 		self give_attacker_kill_rewards(func_235B(param_01,"aim_root"),1,param_02);
 	}
-	else if(scripts/asm/asm::asm_hasalias("Knobs","aim_root")) {
+	else if(scripts\asm\asm::asm_hasalias("Knobs","aim_root")) {
 		self give_attacker_kill_rewards(func_235B("Knobs","aim_root"),1,param_02);
 	}
 
@@ -1107,7 +1107,7 @@ func_2380(param_00,param_01,param_02,param_03,param_04) {
 }
 
 func_2381(param_00,param_01) {
-	var_02 = scripts/asm/asm::asm_getdemeanor();
+	var_02 = scripts\asm\asm::asm_getdemeanor();
 	self.asm.var_77C1.var_77A6 = func_235B("gesture","gesture_move_up");
 	self.asm.var_77C1.var_778C = func_235B("gesture","gesture_armup");
 	self.asm.var_77C1.var_77A8 = func_235B("gesture","gesture_on_me");
@@ -1209,8 +1209,8 @@ func_230A(param_00,param_01,param_02,param_03,param_04,param_05,param_06) {
 	var_07 = self.asmname;
 	var_08 = self.var_164D[var_07].var_4BC0;
 	var_09 = level.asm[var_07].states[var_08];
-	scripts/asm/asm::func_2388(var_07,var_08,var_09,var_09.var_116FB);
-	scripts/asm/asm::func_238A(var_07,"AnimScripted",0.2);
+	scripts\asm\asm::func_2388(var_07,var_08,var_09,var_09.var_116FB);
+	scripts\asm\asm::func_238A(var_07,"AnimScripted",0.2);
 }
 
 func_2386() {
@@ -1230,18 +1230,18 @@ func_2307(param_00,param_01) {
 		return;
 	}
 
-	scripts/asm/asm_bb::bb_setanimscripted();
+	scripts\asm\asm_bb::bb_setanimscripted();
 	self.asm.var_1FAC = param_01;
 	self _meth_8015(param_00,::func_2308);
 	var_02 = self.asmname;
 	var_03 = self.var_164D[var_02].var_4BC0;
 	var_04 = level.asm[var_02].states[var_03];
-	scripts/asm/asm::func_2388(var_02,var_03,var_04,var_04.var_116FB);
-	scripts/asm/asm::func_238A(var_02,"AnimScripted",0.2);
+	scripts\asm\asm::func_2388(var_02,var_03,var_04,var_04.var_116FB);
+	scripts\asm\asm::func_238A(var_02,"AnimScripted",0.2);
 }
 
 func_2308() {
-	scripts/asm/asm_bb::bb_clearanimscripted();
+	scripts\asm\asm_bb::bb_clearanimscripted();
 	if(!isdefined(self.asm.var_1FAC)) {
 		return;
 	}

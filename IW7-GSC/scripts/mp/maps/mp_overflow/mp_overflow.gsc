@@ -1,16 +1,16 @@
-/***************************************************************
+/*******************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\maps\mp_overflow\mp_overflow.gsc
-***************************************************************/
+ * Script: scripts\mp\maps\mp_overflow\mp_overflow.gsc
+*******************************************************/
 
 main() {
 	scripts\mp\maps\mp_overflow\mp_overflow_precache::main();
 	scripts\mp\maps\mp_overflow\gen\mp_overflow_art::main();
 	scripts\mp\maps\mp_overflow\mp_overflow_fx::main();
-	scripts\mp\_load::main();
+	scripts\mp\load::main();
 	level.var_C7B3 = getentarray("OutOfBounds","targetname");
-	scripts\mp\_compass::func_FACD("compass_map_mp_overflow");
+	scripts\mp\compass::setupminimap("compass_map_mp_overflow");
 	setdvar("r_lightGridEnableTweaks",1);
 	setdvar("r_lightGridIntensity",1.33);
 	setdvar("r_umbraMinObjectContribution",8);
@@ -43,5 +43,5 @@ runmodespecifictriggers() {
 
 func_CDA4(param_00) {
 	wait(30);
-	function_030E(param_00);
+	playcinematicforalllooping(param_00);
 }

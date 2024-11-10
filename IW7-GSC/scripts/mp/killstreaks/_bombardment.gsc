@@ -1,26 +1,26 @@
-/***********************************************************
+/***************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\killstreaks\_bombardment.gsc
-***********************************************************/
+ * Script: scripts\mp\killstreaks\_bombardment.gsc
+***************************************************/
 
 init() {
 	func_FAB1();
 	scripts\mp\killstreaks\_killstreaks::registerkillstreak("bombardment",::func_128DC,undefined,undefined,::triggeredbombardmentweapon,::func_13C8B);
 	level.dangermaxradius["bombardment"] = 160000;
 	var_00 = ["passive_fast_launch","passive_decreased_explosions","passive_extra_selection","passive_increased_cost","passive_impulse_explosion","passive_single_explosion"];
-	scripts\mp\_killstreak_loot::func_DF07("bombardment",var_00);
+	scripts\mp\killstreak_loot::func_DF07("bombardment",var_00);
 }
 
 func_FAB1() {
-	level._effect["spike_charge"] = loadfx("vfx/iw7/_requests/mp/vfx_bombard_blast_source.vfx");
-	level._effect["spike_fire"] = loadfx("vfx/iw7/_requests/mp/vfx_bombardment_aerial_blast.vfx");
-	level._effect["spike_trail"] = loadfx("vfx/iw7/_requests/mp/vfx_bombard_projectile_trail.vfx");
+	level._effect["spike_charge"] = loadfx("vfx\iw7\_requests\mp\vfx_bombard_blast_source.vfx");
+	level._effect["spike_fire"] = loadfx("vfx\iw7\_requests\mp\vfx_bombardment_aerial_blast.vfx");
+	level._effect["spike_trail"] = loadfx("vfx\iw7\_requests\mp\vfx_bombard_projectile_trail.vfx");
 }
 
 func_13C8B(param_00) {
-	if(scripts\mp\_utility::istrue(level.var_2C48)) {
-		scripts\mp\_hud_message::showerrormessage("KILLSTREAKS_AIR_SPACE_TOO_CROWDED");
+	if(scripts\mp\utility::istrue(level.var_2C48)) {
+		scripts\mp\hud_message::showerrormessage("KILLSTREAKS_AIR_SPACE_TOO_CROWDED");
 		return 0;
 	}
 
@@ -42,7 +42,7 @@ func_F1AC(param_00,param_01,param_02) {
 	var_03 = 3;
 	var_04 = "Multi-Strike";
 	var_05 = "used_bombardment";
-	var_06 = scripts\mp\_killstreak_loot::getrarityforlootitem(param_02.variantid);
+	var_06 = scripts\mp\killstreak_loot::getrarityforlootitem(param_02.variantid);
 	if(var_06 != "") {
 		var_05 = var_05 + "_" + var_06;
 	}
@@ -76,16 +76,16 @@ func_F1AC(param_00,param_01,param_02) {
 		}
 	}
 
-	if(scripts\mp\_utility::istrue(level.var_2C48)) {
-		scripts\mp\_hud_message::showerrormessage("KILLSTREAKS_AIR_SPACE_TOO_CROWDED");
+	if(scripts\mp\utility::istrue(level.var_2C48)) {
+		scripts\mp\hud_message::showerrormessage("KILLSTREAKS_AIR_SPACE_TOO_CROWDED");
 		scripts\engine\utility::allow_usability(1);
 		scripts\engine\utility::allow_weapon_switch(1);
 		return 0;
 	}
 
 	thread func_6CD4(var_07,param_01,var_04,param_02);
-	level thread scripts\mp\_utility::teamplayercardsplash(var_05,self);
-	scripts\mp\_matchdata::logkillstreakevent(param_01,self.origin);
+	level thread scripts\mp\utility::teamplayercardsplash(var_05,self);
+	scripts\mp\matchdata::logkillstreakevent(param_01,self.origin);
 	return 1;
 }
 
@@ -110,7 +110,7 @@ func_6CD4(param_00,param_01,param_02,param_03) {
 		var_08 = physics_createcontents(var_07);
 		var_09 = [];
 		foreach(var_0B in level.players) {
-			if(!scripts\mp\_utility::isreallyalive(var_0B)) {
+			if(!scripts\mp\utility::isreallyalive(var_0B)) {
 				continue;
 			}
 
@@ -136,7 +136,7 @@ func_6CD4(param_00,param_01,param_02,param_03) {
 		var_06 = createkillcaments(var_09,var_05,param_03);
 		scripts\engine\utility::allow_usability(1);
 		scripts\engine\utility::allow_weapon_switch(1);
-		scripts\mp\_hostmigration::waitlongdurationwithhostmigrationpause(0.5);
+		scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(0.5);
 		foreach(var_13, var_11 in var_09) {
 			var_12 = spawnstruct();
 			var_12.origin = var_11.location;
@@ -154,7 +154,7 @@ func_6CD4(param_00,param_01,param_02,param_03) {
 		var_13 = createkillcaments(param_01,var_06,var_04);
 		scripts\engine\utility::allow_usability(1);
 		scripts\engine\utility::allow_weapon_switch(1);
-		scripts\mp\_hostmigration::waitlongdurationwithhostmigrationpause(0.5);
+		scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(0.5);
 		foreach(var_13, var_15 in param_01) {
 			thread sfx_bombardment_designator(var_15.location,param_03);
 			if(param_02 == "Multi-Strike") {
@@ -171,7 +171,7 @@ func_6CD4(param_00,param_01,param_02,param_03) {
 		}
 	}
 
-	scripts\mp\_hostmigration::waitlongdurationwithhostmigrationpause(7);
+	scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(7);
 	level.var_2C48 = undefined;
 	self notify("bombardment_finished");
 	thread func_D910();
@@ -193,7 +193,7 @@ sfx_bombardment_designator(param_00,param_01) {
 	}
 
 	var_02 setscriptablepartstate("buildup",var_03,0);
-	scripts\mp\_hostmigration::waitlongdurationwithhostmigrationpause(var_04);
+	scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(var_04);
 	var_02 setscriptablepartstate("buildup","neutral",0);
 	var_02 delete();
 }
@@ -217,19 +217,19 @@ func_139B2() {
 	self endon("bombardment_finished");
 	level endon("game_ended");
 	scripts\engine\utility::waittill_any_3("disconnect","joined_team");
-	if(scripts\mp\_utility::istrue(level.var_2C48)) {
+	if(scripts\mp\utility::istrue(level.var_2C48)) {
 		level.var_2C48 = undefined;
 	}
 }
 
 func_D910() {
-	scripts\mp\_hostmigration::waitlongdurationwithhostmigrationpause(8);
-	scripts\mp\_utility::printgameaction("killstreak ended - bombardment",self);
+	scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(8);
+	scripts\mp\utility::printgameaction("killstreak ended - bombardment",self);
 }
 
 func_5114(param_00,param_01,param_02,param_03,param_04,param_05,param_06) {
 	wait(param_00);
-	if(scripts\mp\_utility::istrue(param_05)) {
+	if(scripts\mp\utility::istrue(param_05)) {
 		var_07 = 0;
 		var_08 = [];
 		for(var_09 = 0;var_09 < param_06;var_09++) {
@@ -348,12 +348,12 @@ func_6D84(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_0
 		var_09 = 1.5;
 	}
 
-	scripts\mp\_hostmigration::waitlongdurationwithhostmigrationpause(var_09);
+	scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(var_09);
 	var_08 setscriptablepartstate("fire","active");
 	if(isdefined(param_00)) {
 		wait(0.5);
 		var_08 setscriptablepartstate("explosion","active",0);
-		var_08 thread scripts\mp\_utility::delayentdelete(5);
+		var_08 thread scripts\mp\utility::delayentdelete(5);
 		level.artillerydangercenters = scripts\engine\utility::array_remove(level.artillerydangercenters,param_04);
 		return;
 	}

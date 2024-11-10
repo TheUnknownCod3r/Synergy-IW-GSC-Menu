@@ -1,8 +1,8 @@
-/*******************************************
+/***********************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\sp\_dooruse.gsc
-*******************************************/
+ * Script: scripts\sp\_dooruse.gsc
+***********************************/
 
 func_95B6() {
 	level.doors = [];
@@ -59,7 +59,7 @@ func_95B6() {
 
 door_think() {
 	if(self.var_5A57 == "airlock" && self.model == "sdf_door_airlock_01") {
-		scripts/sp/anim::func_1EC3(self,"airlock_open_player");
+		scripts\sp\anim::func_1EC3(self,"airlock_open_player");
 	}
 
 	if(isdefined(self.var_EDA0)) {
@@ -151,7 +151,7 @@ func_1AB0() {
 		level.player thread scripts\sp\_utility::play_sound_on_entity("airlock_exit_door_open");
 	}
 
-	scripts/sp/anim::func_1F2C(var_06,"airlock_open_player");
+	scripts\sp\anim::func_1F2C(var_06,"airlock_open_player");
 	if(scripts\engine\utility::istrue(self.var_DF3A)) {
 		level.player func_5990();
 		level.player unlink();
@@ -166,14 +166,14 @@ func_1AB0() {
 func_1AC1() {
 	level.var_1AE3 = [];
 	scripts\engine\utility::flag_init("airlocks_setup");
-	level._effect["vfx_airlock_light_green"] = loadfx("vfx/iw7/_requests/airlock/vfx_light_green.vfx");
-	level._effect["vfx_airlock_light_orange"] = loadfx("vfx/iw7/_requests/airlock/vfx_light_orange.vfx");
-	level._effect["vfx_airlock_light_red"] = loadfx("vfx/iw7/_requests/airlock/vfx_light_red.vfx");
-	level._effect["vfx_airlock_vent_xtrlrg_press"] = loadfx("vfx/iw7/core/mechanics/airlock/vfx_airlock_vent_xtrlrg_press.vfx");
-	level._effect["vfx_airlock_vents_air"] = loadfx("vfx/iw7/core/mechanics/airlock/vfx_airlock_vent_lrg_press.vfx");
-	level._effect["vfx_airlock_air_fill"] = loadfx("vfx/iw7/core/mechanics/airlock/vfx_airlock_roomcenter_press.vfx");
-	level._effect["vfx_airlock_camcentr_depress"] = loadfx("vfx/iw7/core/mechanics/airlock/vfx_airlock_camcentr_depress.vfx");
-	level._effect["vfx_airlock_vent_lrg_depress"] = loadfx("vfx/iw7/core/mechanics/airlock/vfx_airlock_vent_lrg_depress.vfx");
+	level._effect["vfx_airlock_light_green"] = loadfx("vfx\iw7\_requests\airlock\vfx_light_green.vfx");
+	level._effect["vfx_airlock_light_orange"] = loadfx("vfx\iw7\_requests\airlock\vfx_light_orange.vfx");
+	level._effect["vfx_airlock_light_red"] = loadfx("vfx\iw7\_requests\airlock\vfx_light_red.vfx");
+	level._effect["vfx_airlock_vent_xtrlrg_press"] = loadfx("vfx\iw7\core\mechanics\airlock\vfx_airlock_vent_xtrlrg_press.vfx");
+	level._effect["vfx_airlock_vents_air"] = loadfx("vfx\iw7\core\mechanics\airlock\vfx_airlock_vent_lrg_press.vfx");
+	level._effect["vfx_airlock_air_fill"] = loadfx("vfx\iw7\core\mechanics\airlock\vfx_airlock_roomcenter_press.vfx");
+	level._effect["vfx_airlock_camcentr_depress"] = loadfx("vfx\iw7\core\mechanics\airlock\vfx_airlock_camcentr_depress.vfx");
+	level._effect["vfx_airlock_vent_lrg_depress"] = loadfx("vfx\iw7\core\mechanics\airlock\vfx_airlock_vent_lrg_depress.vfx");
 	func_1ACF();
 	func_1AAF();
 	thread func_1AD9();
@@ -412,12 +412,12 @@ func_1AA9(param_00,param_01,param_02,param_03,param_04) {
 
 	var_0F = "airlock_pressurize_lr";
 	if(!isdefined(param_04) || param_04) {
-		function_02A9("atmosphere","",2);
+		setglobalsoundcontext("atmosphere","",2);
 	}
 	else
 	{
 		var_0F = "airlock_depressurize_lr";
-		function_02A9("atmosphere","space",2);
+		setglobalsoundcontext("atmosphere","space",2);
 	}
 
 	var_10 = lookupsoundlength(var_0F);
@@ -740,12 +740,12 @@ func_A855() {
 	var_00["player"] waittill("trigger",var_01);
 	var_02 = var_00["player"] func_D0A6("large_door_open_arrive");
 	var_03 = [var_00["player"],var_02];
-	var_00["player"] scripts/sp/anim::func_1F2C(var_03,"large_door_open_arrive");
+	var_00["player"] scripts\sp\anim::func_1F2C(var_03,"large_door_open_arrive");
 	scripts\sp\_utility::func_65E1("player_at_door");
-	var_00["player"] thread scripts/sp/anim::func_1EE7(var_03,"large_door_open_idle");
+	var_00["player"] thread scripts\sp\anim::func_1EE7(var_03,"large_door_open_idle");
 	scripts\sp\_utility::func_65E3("begin_opening");
 	var_00["player"] notify("stop_loop");
-	var_00["player"] scripts/sp/anim::func_1F2C(var_03,"large_door_open");
+	var_00["player"] scripts\sp\anim::func_1F2C(var_03,"large_door_open");
 	var_01 func_5990();
 	var_01 unlink();
 	var_02 delete();
@@ -794,14 +794,14 @@ func_A854(param_00,param_01) {
 
 func_A853(param_00,param_01) {
 	var_02 = [param_00,param_01];
-	param_01 scripts/sp/anim::func_1F17(param_00,"large_door_open_arrive");
-	param_01 scripts/sp/anim::func_1F2C(var_02,"large_door_open_arrive");
-	param_01 thread scripts/sp/anim::func_1EE7(var_02,"large_door_open_idle");
+	param_01 scripts\sp\anim::func_1F17(param_00,"large_door_open_arrive");
+	param_01 scripts\sp\anim::func_1F2C(var_02,"large_door_open_arrive");
+	param_01 thread scripts\sp\anim::func_1EE7(var_02,"large_door_open_idle");
 	param_00 notify("actor_at_door");
 	scripts\sp\_utility::func_65E3("begin_opening");
 	param_01 notify("stop_loop");
 	param_00 lib_0A1E::func_2386();
-	param_01 thread scripts/sp/anim::func_1F2C(var_02,"large_door_open");
+	param_01 thread scripts\sp\anim::func_1F2C(var_02,"large_door_open");
 }
 
 buddy_down_skip_post_clear() {
@@ -901,7 +901,7 @@ buddy_down_two_enemy_dead_thread(param_00) {
 			var_05 givescorefortrophyblocks();
 		}
 
-		scripts/sp/anim::func_1EC1(param_00,func_5997("pull"));
+		scripts\sp\anim::func_1EC1(param_00,func_5997("pull"));
 		foreach(var_05 in param_00) {
 			if(isai(var_05)) {
 				var_05 lib_0A1E::func_2307(::buddyplayerid,::lib_0A1E::func_2385);
@@ -1079,7 +1079,7 @@ buddy_down_gunner_death(param_00,param_01) {
 		func_E9FF(param_00);
 	}
 	else if(!param_00 scripts\sp\_utility::func_65DB("no_anim_reach")) {
-		param_00 scripts/sp/anim::func_1F17(self,param_00 func_5997("intro"));
+		param_00 scripts\sp\anim::func_1F17(self,param_00 func_5997("intro"));
 	}
 
 	if(param_00 scripts\sp\_utility::func_65DB("skip_reach_on_use")) {
@@ -1105,7 +1105,7 @@ buddy_down_gunner_death(param_00,param_01) {
 
 func_E9FF(param_00) {
 	level.player endon("player_attached_to_door");
-	param_00 scripts/sp/anim::func_1F17(self,param_00 func_5997("intro"));
+	param_00 scripts\sp\anim::func_1F17(self,param_00 func_5997("intro"));
 }
 
 func_E9FE(param_00) {
@@ -1183,7 +1183,7 @@ func_21E5() {
 		self notify("stop_door");
 		lib_0E46::func_DFE3();
 		self notify("stop_loop");
-		var_00 scripts/sp/anim::func_1EE0(var_00,"open_loot_door");
+		var_00 scripts\sp\anim::func_1EE0(var_00,"open_loot_door");
 		self.collision connectpaths();
 		self.weaponisauto = "open";
 		if(scripts\sp\_utility::hastag(self.model,"tag_locked")) {
@@ -1197,8 +1197,8 @@ func_21E5() {
 	else
 	{
 		var_01 = var_00 func_FA17("open_loot_door");
-		var_00 thread scripts/sp/anim::func_1F35(var_01,"open_loot_door","tag_origin");
-		var_00 scripts/sp/anim::func_1F35(var_00,"open_loot_door","tag_origin");
+		var_00 thread scripts\sp\anim::func_1F35(var_01,"open_loot_door","tag_origin");
+		var_00 scripts\sp\anim::func_1F35(var_00,"open_loot_door","tag_origin");
 		self.collision connectpaths();
 		var_01 delete();
 		level.player func_5990();
@@ -1246,7 +1246,7 @@ func_FA17(param_00) {
 	level.player getradiuspathsighttestnodes();
 	level.player func_598D();
 	var_03 = [var_01,self];
-	thread scripts/sp/anim::func_1EC3(var_01,param_00);
+	thread scripts\sp\anim::func_1EC3(var_01,param_00);
 	var_04 = 0.4;
 	level.player playerlinktoblend(var_01,"tag_player",var_04,0.15,0.15);
 	wait(var_04);
@@ -1281,10 +1281,10 @@ func_3232() {
 		level.player thread scripts\sp\_utility::play_sound_on_entity("airlock_exit_door_open");
 	}
 
-	var_05 scripts/sp/anim::func_1F2C(var_07,"bulkhead_open");
-	var_05 thread scripts/sp/anim::func_1F35(self,"bulkhead_open");
-	var_05 scripts/sp/anim::func_1F2A([self],"bulkhead_open",0.99);
-	var_05 scripts/sp/anim::func_1F27([self],"bulkhead_open",0);
+	var_05 scripts\sp\anim::func_1F2C(var_07,"bulkhead_open");
+	var_05 thread scripts\sp\anim::func_1F35(self,"bulkhead_open");
+	var_05 scripts\sp\anim::func_1F2A([self],"bulkhead_open",0.99);
+	var_05 scripts\sp\anim::func_1F27([self],"bulkhead_open",0);
 	level.player func_5990();
 	level.player unlink();
 	var_06 delete();
@@ -1359,7 +1359,7 @@ func_D0A6(param_00) {
 			continue;
 		}
 
-		thread scripts/sp/anim::func_1EC3(var_05,param_00);
+		thread scripts\sp\anim::func_1EC3(var_05,param_00);
 	}
 
 	var_07 = level.player scripts\engine\utility::spawn_tag_origin();
@@ -1453,7 +1453,7 @@ func_59DE(param_00,param_01,param_02) {
 		}
 
 		if(isdefined(param_02)) {
-			thread scripts/sp/anim::func_1EEA(var_05,param_01,"stop_loop_" + var_05.var_1FBB);
+			thread scripts\sp\anim::func_1EEA(var_05,param_01,"stop_loop_" + var_05.var_1FBB);
 		}
 		else
 		{
@@ -1473,7 +1473,7 @@ func_59DE(param_00,param_01,param_02) {
 }
 
 func_5981(param_00,param_01) {
-	scripts/sp/anim::func_1F35(param_00,param_01);
+	scripts\sp\anim::func_1F35(param_00,param_01);
 	param_00 notify(param_01);
 }
 

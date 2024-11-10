@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2791.gsc
+ * Script: 2791.gsc
 ***************************************/
 
 func_D9AB() {

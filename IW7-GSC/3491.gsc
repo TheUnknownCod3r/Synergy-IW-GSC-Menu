@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\3491.gsc
+ * Script: 3491.gsc
 ***************************************/
 
 init() {
@@ -125,7 +125,7 @@ func_49D1(var_00, var_01, var_02, var_03, var_04, var_05) {
   var_10.attractor = missile_createattractorent(var_10, level.func_8D2E, level.func_8D2D);
   var_10.isdeserteagle = 0;
   var_10.maxhealth = level.func_8D73;
-  var_10 thread scripts/mp/killstreaks/flares::flares_monitor(1);
+  var_10 thread scripts\mp\killstreaks\flares::flares_monitor(1);
   var_10 thread scripts\mp\killstreaks\helicopter::heli_damage_monitor("heli_sniper", 1);
   var_10 thread func_8DB4(var_04);
   var_10.owner = var_00;
@@ -312,7 +312,7 @@ func_5820(var_00) {
   var_01 = scripts\engine\utility::getlastweapon();
 
   if (!self hasweapon(var_01))
-  var_01 = scripts/mp/killstreaks/utility::getfirstprimaryweapon();
+  var_01 = scripts\mp\killstreaks\utility::getfirstprimaryweapon();
 
   scripts\mp\utility\game::func_1136C(var_01);
   wait 1;

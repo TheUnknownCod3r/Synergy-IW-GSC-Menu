@@ -1,14 +1,14 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3010.gsc
-****************************/
+ * Script: 3010.gsc
+************************/
 
 main(param_00,param_01,param_02) {
-	scripts/sp/vehicle_build::func_31C5(param_01,param_00,undefined,param_02);
-	scripts/sp/vehicle_build::func_31A6(::init_location);
-	scripts/sp/vehicle_build::func_31A3(90000);
-	scripts/sp/vehicle_build::func_319F();
+	scripts\sp\vehicle_build::func_31C5(param_01,param_00,undefined,param_02);
+	scripts\sp\vehicle_build::func_31A6(::init_location);
+	scripts\sp\vehicle_build::func_31A3(90000);
+	scripts\sp\vehicle_build::func_319F();
 }
 
 init_location() {

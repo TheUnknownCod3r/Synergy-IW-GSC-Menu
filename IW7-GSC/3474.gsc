@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\3474.gsc
+ * Script: 3474.gsc
 ***************************************/
 
 init() {
@@ -29,7 +29,7 @@ init() {
   var_0.usetime = 1000;
   var_0.maxhealth = 128;
   var_0.damagefeedback = "deployable_bag";
-  var_0.deathvfx = loadfx("vfx/core/mp/killstreaks/vfx_ballistic_vest_death");
+  var_0.deathvfx = loadfx("vfx\core\mp\killstreaks\vfx_ballistic_vest_death");
   var_0.allowmeleedamage = 1;
   var_0.allowhvtspawn = 0;
   var_0.maxuses = 4;
@@ -170,9 +170,9 @@ func_93EF() {
   self endon("disconnect");
   thread scripts\mp\utility\game::func_F5C6(0, 6000, 2, 0);
   thread scripts\mp\utility\game::func_F5C5(0, 1, 2, 0);
-  scripts/mp/powers::power_modifycooldownrate(1.1);
+  scripts\mp\powers::power_modifycooldownrate(1.1);
   wait 2;
-  scripts/mp/powers::func_D74E();
+  scripts\mp\powers::func_D74E();
 }
 
 func_FFB8(var_00) {

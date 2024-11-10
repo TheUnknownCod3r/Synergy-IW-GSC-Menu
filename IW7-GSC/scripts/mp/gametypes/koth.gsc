@@ -1,29 +1,29 @@
-/*************************************************
+/*****************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\gametypes\koth.gsc
-*************************************************/
+ * Script: scripts\mp\gametypes\koth.gsc
+*****************************************/
 
 main() {
 	if(getdvar("mapname") == "mp_background") {
 		return;
 	}
 
-	scripts\mp\_globallogic::init();
-	scripts\mp\_globallogic::setupcallbacks();
-	if(function_011C()) {
+	scripts\mp\globallogic::init();
+	scripts\mp\globallogic::setupcallbacks();
+	if(isusingmatchrulesdata()) {
 		level.initializematchrules = ::initializematchrules;
 		[[level.initializematchrules]]();
-		level thread scripts\mp\_utility::reinitializematchrulesonmigration();
+		level thread scripts\mp\utility::reinitializematchrulesonmigration();
 	}
 	else
 	{
-		scripts\mp\_utility::registertimelimitdvar(level.gametype,30);
-		scripts\mp\_utility::registerscorelimitdvar(level.gametype,300);
-		scripts\mp\_utility::registerroundlimitdvar(level.gametype,1);
-		scripts\mp\_utility::registerwinlimitdvar(level.gametype,1);
-		scripts\mp\_utility::registernumlivesdvar(level.gametype,0);
-		scripts\mp\_utility::registerhalftimedvar(level.gametype,0);
+		scripts\mp\utility::registertimelimitdvar(level.gametype,30);
+		scripts\mp\utility::registerscorelimitdvar(level.gametype,300);
+		scripts\mp\utility::registerroundlimitdvar(level.gametype,1);
+		scripts\mp\utility::registerwinlimitdvar(level.gametype,1);
+		scripts\mp\utility::registernumlivesdvar(level.gametype,0);
+		scripts\mp\utility::registerhalftimedvar(level.gametype,0);
 		level.matchrules_damagemultiplier = 0;
 		level.matchrules_vampirism = 0;
 	}
@@ -32,7 +32,7 @@ main() {
 	level.hpstarttime = 0;
 	level.scoreperplayer = undefined;
 	level.teambased = 1;
-	if(scripts\mp\_utility::isanymlgmatch()) {
+	if(scripts\mp\utility::isanymlgmatch()) {
 		level.var_112BF = 0;
 	}
 
@@ -47,7 +47,7 @@ main() {
 	level.lastcaptureteam = undefined;
 	level.previousclosespawnent = undefined;
 	if(level.matchrules_damagemultiplier || level.matchrules_vampirism) {
-		level.modifyplayerdamage = ::scripts\mp\_damage::gamemodemodifyplayerdamage;
+		level.modifyplayerdamage = ::scripts\mp\damage::gamemodemodifyplayerdamage;
 	}
 
 	game["dialog"]["gametype"] = "hardpoint";
@@ -73,7 +73,7 @@ main() {
 }
 
 initializematchrules() {
-	scripts\mp\_utility::setcommonrulesfrommatchdata();
+	scripts\mp\utility::setcommonrulesfrommatchdata();
 	setdynamicdvar("scr_koth_zoneLifetime",getmatchrulesdata("kothData","zoneLifetime"));
 	setdynamicdvar("scr_koth_zoneCaptureTime",getmatchrulesdata("kothData","zoneCaptureTime"));
 	setdynamicdvar("scr_koth_zoneActivationDelay",getmatchrulesdata("kothData","zoneActivationDelay"));
@@ -83,28 +83,28 @@ initializematchrules() {
 	setdynamicdvar("scr_koth_delayPlayer",getmatchrulesdata("kothData","delayPlayer"));
 	setdynamicdvar("scr_koth_useHQRules",getmatchrulesdata("kothData","useHQRules"));
 	setdynamicdvar("scr_koth_halftime",0);
-	scripts\mp\_utility::registerhalftimedvar("koth",0);
+	scripts\mp\utility::registerhalftimedvar("koth",0);
 }
 
 onstartgametype() {
-	scripts\mp\_utility::setobjectivetext("allies",&"OBJECTIVES_KOTH");
-	scripts\mp\_utility::setobjectivetext("axis",&"OBJECTIVES_KOTH");
+	scripts\mp\utility::setobjectivetext("allies",&"OBJECTIVES_KOTH");
+	scripts\mp\utility::setobjectivetext("axis",&"OBJECTIVES_KOTH");
 	if(level.splitscreen) {
-		scripts\mp\_utility::setobjectivescoretext("allies",&"OBJECTIVES_KOTH");
-		scripts\mp\_utility::setobjectivescoretext("axis",&"OBJECTIVES_KOTH");
+		scripts\mp\utility::setobjectivescoretext("allies",&"OBJECTIVES_KOTH");
+		scripts\mp\utility::setobjectivescoretext("axis",&"OBJECTIVES_KOTH");
 	}
 	else
 	{
-		scripts\mp\_utility::setobjectivescoretext("allies",&"OBJECTIVES_KOTH_SCORE");
-		scripts\mp\_utility::setobjectivescoretext("axis",&"OBJECTIVES_KOTH_SCORE");
+		scripts\mp\utility::setobjectivescoretext("allies",&"OBJECTIVES_KOTH_SCORE");
+		scripts\mp\utility::setobjectivescoretext("axis",&"OBJECTIVES_KOTH_SCORE");
 	}
 
-	scripts\mp\_utility::setobjectivehinttext("allies",&"OBJECTIVES_KOTH_HINT");
-	scripts\mp\_utility::setobjectivehinttext("axis",&"OBJECTIVES_KOTH_HINT");
+	scripts\mp\utility::setobjectivehinttext("allies",&"OBJECTIVES_KOTH_HINT");
+	scripts\mp\utility::setobjectivehinttext("axis",&"OBJECTIVES_KOTH_HINT");
 	setclientnamemode("auto_change");
 	var_00[0] = "hardpoint";
 	var_00[1] = "tdm";
-	scripts\mp\_gameobjects::main(var_00);
+	scripts\mp\gameobjects::main(var_00);
 	level thread setupzones();
 	level thread setupzoneareabrushes();
 	initspawns();
@@ -113,14 +113,14 @@ onstartgametype() {
 
 updategametypedvars() {
 	scripts\mp\gametypes\common::updategametypedvars();
-	level.zoneduration = scripts\mp\_utility::dvarfloatvalue("zoneLifetime",60,0,300);
-	level.zonecapturetime = scripts\mp\_utility::dvarfloatvalue("zoneCaptureTime",0,0,30);
-	level.zoneactivationdelay = scripts\mp\_utility::dvarfloatvalue("zoneActivationDelay",0,0,60);
-	level.zonerandomlocationorder = scripts\mp\_utility::dvarintvalue("randomLocationOrder",0,0,1);
-	level.zoneadditivescoring = scripts\mp\_utility::dvarintvalue("additiveScoring",0,0,1);
-	level.pausemodetimer = scripts\mp\_utility::dvarintvalue("pauseTime",1,0,1);
-	level.delayplayer = scripts\mp\_utility::dvarintvalue("delayPlayer",0,0,1);
-	level.usehqrules = scripts\mp\_utility::dvarintvalue("useHQRules",0,0,1);
+	level.zoneduration = scripts\mp\utility::dvarfloatvalue("zoneLifetime",60,0,300);
+	level.zonecapturetime = scripts\mp\utility::dvarfloatvalue("zoneCaptureTime",0,0,30);
+	level.zoneactivationdelay = scripts\mp\utility::dvarfloatvalue("zoneActivationDelay",0,0,60);
+	level.zonerandomlocationorder = scripts\mp\utility::dvarintvalue("randomLocationOrder",0,0,1);
+	level.zoneadditivescoring = scripts\mp\utility::dvarintvalue("additiveScoring",0,0,1);
+	level.pausemodetimer = scripts\mp\utility::dvarintvalue("pauseTime",1,0,1);
+	level.delayplayer = scripts\mp\utility::dvarintvalue("delayPlayer",0,0,1);
+	level.usehqrules = scripts\mp\utility::dvarintvalue("useHQRules",0,0,1);
 }
 
 seticonnames() {
@@ -143,17 +143,17 @@ hardpointmainloop() {
 	level.zone.gameobject scripts\mp\gametypes\obj_zonecapture::activatezone();
 	level.favorclosespawnent = level.zone;
 	level.zone.gameobject.var_19 = 1;
-	level.zone.gameobject scripts\mp\_gameobjects::setvisibleteam("any");
-	level.zone.gameobject scripts\mp\_gameobjects::setzonestatusicons(level.icontarget);
-	level.zone.gameobject thread scripts\mp\_matchdata::loggameevent("hill_moved",level.zone.origin);
-	scripts\mp\_utility::gameflagwait("prematch_done");
+	level.zone.gameobject scripts\mp\gameobjects::setvisibleteam("any");
+	level.zone.gameobject scripts\mp\gameobjects::setzonestatusicons(level.icontarget);
+	level.zone.gameobject thread scripts\mp\matchdata::loggameevent("hill_moved",level.zone.origin);
+	scripts\mp\utility::gameflagwait("prematch_done");
 	level.zoneendtime = int(gettime() + 5000);
 	setomnvar("ui_hardpoint_timer",level.zoneendtime);
 	setomnvar("ui_uplink_timer_stopped",0);
 	wait(5);
-	scripts\mp\_utility::statusdialog("hp_new_location","allies");
-	scripts\mp\_utility::statusdialog("hp_new_location","axis");
-	scripts\mp\_utility::playsoundonplayers("mp_killstreak_radar");
+	scripts\mp\utility::statusdialog("hp_new_location","allies");
+	scripts\mp\utility::statusdialog("hp_new_location","axis");
+	scripts\mp\utility::playsoundonplayers("mp_killstreak_radar");
 	for(;;) {
 		if(!isdefined(level.mapcalloutsready)) {
 			level thread setupzonecallouts();
@@ -161,19 +161,19 @@ hardpointmainloop() {
 
 		level.objectivesetorder = 1;
 		waittillframeend;
-		level.zone.gameobject scripts\mp\_gameobjects::enableobject();
+		level.zone.gameobject scripts\mp\gameobjects::enableobject();
 		level.zone.gameobject.capturecount = 0;
 		if(getdvarint("com_codcasterEnabled",0) == 1) {
 			level.zone.gameobject thread scripts\mp\gametypes\obj_zonecapture::trackgametypevips();
 		}
 
-		scripts\mp\_spawnlogic::clearlastteamspawns();
+		scripts\mp\spawnlogic::clearlastteamspawns();
 		hqactivatenextzone();
-		scripts\mp\_spawnlogic::clearlastteamspawns();
+		scripts\mp\spawnlogic::clearlastteamspawns();
 		hpcaptureloop();
-		var_00 = level.zone.gameobject scripts\mp\_gameobjects::getownerteam();
+		var_00 = level.zone.gameobject scripts\mp\gameobjects::getownerteam();
 		if(level.timerstoppedforgamemode && level.pausemodetimer) {
-			level scripts\mp\_gamelogic::resumetimer();
+			level scripts\mp\gamelogic::resumetimer();
 		}
 
 		level.lastcaptureteam = undefined;
@@ -185,9 +185,9 @@ hardpointmainloop() {
 			}
 		}
 
-		level.zone.gameobject scripts\mp\_gameobjects::disableobject();
-		level.zone.gameobject scripts\mp\_gameobjects::allowuse("none");
-		level.zone.gameobject scripts\mp\_gameobjects::setownerteam("neutral");
+		level.zone.gameobject scripts\mp\gameobjects::disableobject();
+		level.zone.gameobject scripts\mp\gameobjects::allowuse("none");
+		level.zone.gameobject scripts\mp\gameobjects::setownerteam("neutral");
 		updateservericons("zone_shift",0);
 		level notify("zone_reset");
 		spawn_next_zone();
@@ -233,7 +233,7 @@ getnextzone() {
 	if(level.zonerandomlocationorder) {
 		var_13["allies"] = (0,0,0);
 		var_13["axis"] = (0,0,0);
-		var_01 = scripts\mp\_utility::getpotentiallivingplayers();
+		var_01 = scripts\mp\utility::getpotentiallivingplayers();
 		foreach(var_03 in var_01) {
 			if(var_03.team == "spectator") {
 				continue;
@@ -242,9 +242,9 @@ getnextzone() {
 			var_13[var_03.team] = var_13[var_03.team] + var_03.origin;
 		}
 
-		var_05 = scripts\mp\_utility::getteamarray("allies");
+		var_05 = scripts\mp\utility::getteamarray("allies");
 		var_06 = max(var_05.size,1);
-		var_07 = scripts\mp\_utility::getteamarray("axis");
+		var_07 = scripts\mp\utility::getteamarray("axis");
 		var_08 = max(var_07.size,1);
 		var_09["allies"] = var_13["allies"] / var_06;
 		var_09["axis"] = var_13["axis"] / var_08;
@@ -296,7 +296,7 @@ getnextzone() {
 
 spawn_next_zone() {
 	writecurrentrotationteamscore();
-	scripts\mp\_utility::setmlgannouncement(5,"free");
+	scripts\mp\utility::setmlgannouncement(5,"free");
 	level.zone.gameobject scripts\mp\gametypes\obj_zonecapture::deactivatezone();
 	level.zone = getnextzone();
 	level.kothhillrotation++;
@@ -310,31 +310,31 @@ spawn_next_zone() {
 	level.zone.gameobject.enemybrush = level.enemyzonebrushes[var_00 - 1];
 	level.zone.gameobject.contestedbrush = level.contestedzonebrushes[var_00 - 1];
 	if(level.zoneactivationdelay > 0) {
-		level.zone.gameobject scripts\mp\_gameobjects::setzonestatusicons(level.icontarget);
+		level.zone.gameobject scripts\mp\gameobjects::setzonestatusicons(level.icontarget);
 	}
 	else
 	{
-		level.zone.gameobject scripts\mp\_gameobjects::setzonestatusicons(level.iconneutral);
+		level.zone.gameobject scripts\mp\gameobjects::setzonestatusicons(level.iconneutral);
 	}
 
-	level.zone.gameobject thread scripts\mp\_matchdata::loggameevent("hill_moved",level.zone.origin);
+	level.zone.gameobject thread scripts\mp\matchdata::loggameevent("hill_moved",level.zone.origin);
 }
 
 hqactivatenextzone() {
-	scripts\mp\_utility::statusdialog("hp_new_location","allies");
-	scripts\mp\_utility::statusdialog("hp_new_location","axis");
-	scripts\mp\_utility::playsoundonplayers("mp_killstreak_radar");
+	scripts\mp\utility::statusdialog("hp_new_location","allies");
+	scripts\mp\utility::statusdialog("hp_new_location","axis");
+	scripts\mp\utility::playsoundonplayers("mp_killstreak_radar");
 	level.zone.gameobject thread scripts\mp\gametypes\obj_zonecapture::hardpoint_setneutral();
-	level.zone.gameobject scripts\mp\_gameobjects::allowuse("none");
+	level.zone.gameobject scripts\mp\gameobjects::allowuse("none");
 	if(level.zoneactivationdelay) {
-		level.zone.gameobject scripts\mp\_gameobjects::setzonestatusicons(level.icontarget);
+		level.zone.gameobject scripts\mp\gameobjects::setzonestatusicons(level.icontarget);
 		updateservericons("zone_activation_delay",0);
 		level.zoneendtime = int(gettime() + 1000 * level.zoneactivationdelay);
 		setomnvar("ui_hardpoint_timer",level.zoneendtime);
 	}
 
 	wait(level.zoneactivationdelay);
-	level.zone.gameobject scripts\mp\_gameobjects::setzonestatusicons(level.iconneutral);
+	level.zone.gameobject scripts\mp\gameobjects::setzonestatusicons(level.iconneutral);
 	updateservericons("neutral",0);
 	if(level.zoneduration) {
 		updateservericons("neutral",0);
@@ -366,12 +366,12 @@ hpcaptureloop() {
 	level endon("zone_moved");
 	level.hpstarttime = gettime();
 	for(;;) {
-		level.zone.gameobject scripts\mp\_gameobjects::allowuse("enemy");
-		level.zone.gameobject scripts\mp\_gameobjects::setvisibleteam("any");
-		level.zone.gameobject scripts\mp\_gameobjects::setusetext(&"MP_SECURING_POSITION");
+		level.zone.gameobject scripts\mp\gameobjects::allowuse("enemy");
+		level.zone.gameobject scripts\mp\gameobjects::setvisibleteam("any");
+		level.zone.gameobject scripts\mp\gameobjects::setusetext(&"MP_SECURING_POSITION");
 		if(!level.usehqrules) {
 			level.zone.gameobject thread scripts\mp\gametypes\obj_zonecapture::hardpoint_setneutral();
-			level.zone.gameobject scripts\mp\_gameobjects::cancontestclaim(1);
+			level.zone.gameobject scripts\mp\gameobjects::cancontestclaim(1);
 		}
 
 		if(isdefined(level.matchrules_droptime) && level.matchrules_droptime) {
@@ -383,7 +383,7 @@ hpcaptureloop() {
 			continue;
 		}
 
-		var_01 = level.zone.gameobject scripts\mp\_gameobjects::getownerteam();
+		var_01 = level.zone.gameobject scripts\mp\gameobjects::getownerteam();
 		thread func_12F03();
 		if(level.usehqrules && level.zoneduration > 0) {
 			thread movezoneaftertime(level.zoneduration);
@@ -392,11 +392,11 @@ hpcaptureloop() {
 		level waittill("zone_destroyed",var_02);
 		level.spawndelay = undefined;
 		if(isdefined(var_02)) {
-			level.zone.gameobject scripts\mp\_gameobjects::setownerteam(var_02);
+			level.zone.gameobject scripts\mp\gameobjects::setownerteam(var_02);
 		}
 		else
 		{
-			level.zone.gameobject scripts\mp\_gameobjects::setownerteam("none");
+			level.zone.gameobject scripts\mp\gameobjects::setownerteam("none");
 		}
 
 		if(level.usehqrules) {
@@ -415,7 +415,7 @@ func_12F03() {
 	}
 	else
 	{
-		var_01 = var_01 + scripts\mp\_utility::gettimelimit() * 60 * 1000 - scripts\mp\_utility::gettimepassed();
+		var_01 = var_01 + scripts\mp\utility::gettimelimit() * 60 * 1000 - scripts\mp\utility::gettimepassed();
 	}
 
 	var_02 = var_00;
@@ -427,24 +427,24 @@ func_12F03() {
 }
 
 initspawns() {
-	scripts\mp\_spawnlogic::setactivespawnlogic("Hardpoint");
+	scripts\mp\spawnlogic::setactivespawnlogic("Hardpoint");
 	level.spawnmins = (0,0,0);
 	level.spawnmaxs = (0,0,0);
-	scripts\mp\_spawnlogic::addstartspawnpoints("mp_koth_spawn_allies_start");
-	scripts\mp\_spawnlogic::addstartspawnpoints("mp_koth_spawn_axis_start");
-	scripts\mp\_spawnlogic::addspawnpoints("allies","mp_koth_spawn",1);
-	scripts\mp\_spawnlogic::addspawnpoints("allies","mp_koth_spawn_secondary",1,1);
-	scripts\mp\_spawnlogic::addspawnpoints("axis","mp_koth_spawn",1);
-	scripts\mp\_spawnlogic::addspawnpoints("axis","mp_koth_spawn_secondary",1,1);
+	scripts\mp\spawnlogic::addstartspawnpoints("mp_koth_spawn_allies_start");
+	scripts\mp\spawnlogic::addstartspawnpoints("mp_koth_spawn_axis_start");
+	scripts\mp\spawnlogic::addspawnpoints("allies","mp_koth_spawn",1);
+	scripts\mp\spawnlogic::addspawnpoints("allies","mp_koth_spawn_secondary",1,1);
+	scripts\mp\spawnlogic::addspawnpoints("axis","mp_koth_spawn",1);
+	scripts\mp\spawnlogic::addspawnpoints("axis","mp_koth_spawn_secondary",1,1);
 	if(!isdefined(level.spawnpoints)) {
-		scripts\mp\_spawnlogic::addspawnpoints("allies","mp_tdm_spawn");
-		scripts\mp\_spawnlogic::addspawnpoints("allies","mp_tdm_spawn_secondary",1,1);
-		scripts\mp\_spawnlogic::addspawnpoints("axis","mp_tdm_spawn");
-		scripts\mp\_spawnlogic::addspawnpoints("axis","mp_tdm_spawn_secondary",1,1);
+		scripts\mp\spawnlogic::addspawnpoints("allies","mp_tdm_spawn");
+		scripts\mp\spawnlogic::addspawnpoints("allies","mp_tdm_spawn_secondary",1,1);
+		scripts\mp\spawnlogic::addspawnpoints("axis","mp_tdm_spawn");
+		scripts\mp\spawnlogic::addspawnpoints("axis","mp_tdm_spawn_secondary",1,1);
 	}
 
-	level.mapcenter = scripts\mp\_spawnlogic::findboxcenter(level.spawnmins,level.spawnmaxs);
-	function_01B4(level.mapcenter);
+	level.mapcenter = scripts\mp\spawnlogic::findboxcenter(level.spawnmins,level.spawnmaxs);
+	setmapcenter(level.mapcenter);
 	var_00 = [];
 	foreach(var_02 in level.zones) {
 		var_02.furthestspawndistsq = 0;
@@ -455,7 +455,7 @@ initspawns() {
 
 	foreach(var_05 in level.spawnpoints) {
 		calculatespawndisttozones(var_05);
-		var_06 = scripts\mp\_spawnlogic::getoriginidentifierstring(var_05);
+		var_06 = scripts\mp\spawnlogic::getoriginidentifierstring(var_05);
 		if(isdefined(level.kothextraprimaryspawnpoints) && isdefined(level.kothextraprimaryspawnpoints[var_06])) {
 			foreach(var_08 in level.kothextraprimaryspawnpoints[var_06]) {
 				var_02 = var_00[var_08];
@@ -500,7 +500,7 @@ initspawns() {
 calculatespawndisttozones(param_00) {
 	param_00.distsqtokothzones = [];
 	foreach(var_02 in level.zones) {
-		var_03 = function_00C0(param_00.origin,var_02.baseorigin,5000);
+		var_03 = getpathdist(param_00.origin,var_02.baseorigin,5000);
 		if(var_03 < 0) {
 			var_03 = scripts\engine\utility::distance_2d_squared(param_00.origin,var_02.baseorigin);
 		}
@@ -561,7 +561,7 @@ getzonearray(param_00) {
 }
 
 setupzones() {
-	scripts\mp\_utility::func_98D3();
+	scripts\mp\utility::func_98D3();
 	level.zones = [];
 	level.var_13FC6 = [];
 	var_00 = getzonearray("hardpoint_zone");
@@ -583,8 +583,8 @@ setupzones() {
 	}
 
 	level.var_1BEB = level.zones;
-	var_03 = scripts\mp\_spawnlogic::getspawnpointarray("mp_koth_spawn_axis_start");
-	var_04 = scripts\mp\_spawnlogic::getspawnpointarray("mp_koth_spawn_allies_start");
+	var_03 = scripts\mp\spawnlogic::getspawnpointarray("mp_koth_spawn_axis_start");
+	var_04 = scripts\mp\spawnlogic::getspawnpointarray("mp_koth_spawn_allies_start");
 	level.areanynavvolumesloaded["allies"] = var_04[0].origin;
 	level.areanynavvolumesloaded["axis"] = var_03[0].origin;
 	return 1;
@@ -702,7 +702,7 @@ setupzonecallouts() {
 	}
 
 	foreach(var_04 in level.calloutglobals.areatriggers) {
-		var_00 = function_010F(var_02.baseorigin,var_04);
+		var_00 = ispointinvolume(var_02.baseorigin,var_04);
 		var_01 = isdefined(var_02.script_noteworthy) && isdefined(var_04.script_noteworthy) && var_02.script_noteworthy == var_04.script_noteworthy;
 		if(var_00 || var_01) {
 			var_05 = level.calloutglobals.areaidmap[var_04.script_noteworthy];
@@ -732,9 +732,9 @@ forcespawnplayers() {
 
 getspawnpoint() {
 	var_00 = self.pers["team"];
-	if(scripts\mp\_spawnlogic::shoulduseteamstartspawn()) {
-		var_01 = scripts\mp\_spawnlogic::getspawnpointarray("mp_koth_spawn_" + var_00 + "_start");
-		var_02 = scripts\mp\_spawnlogic::getspawnpoint_startspawn(var_01);
+	if(scripts\mp\spawnlogic::shoulduseteamstartspawn()) {
+		var_01 = scripts\mp\spawnlogic::getspawnpointarray("mp_koth_spawn_" + var_00 + "_start");
+		var_02 = scripts\mp\spawnlogic::getspawnpoint_startspawn(var_01);
 	}
 	else
 	{
@@ -746,7 +746,7 @@ getspawnpoint() {
 		var_05["maxSquaredDistToObjective"] = level.zone.furthestspawndistsq;
 		var_05["kothZoneDeadzoneDistSq"] = var_04 * var_04;
 		var_05["closestEnemyInfluenceDistSq"] = 12250000;
-		var_02 = scripts\mp\_spawnscoring::getspawnpoint(var_01,var_03,var_05);
+		var_02 = scripts\mp\spawnscoring::getspawnpoint(var_01,var_03,var_05);
 	}
 
 	return var_02;
@@ -760,7 +760,7 @@ func_E172(param_00) {
 	var_01 = [];
 	if(isdefined(param_00)) {
 		foreach(var_03 in param_00) {
-			if(!function_010F(var_03.origin,level.zone)) {
+			if(!ispointinvolume(var_03.origin,level.zone)) {
 				var_01[var_01.size] = var_03;
 			}
 		}
@@ -770,7 +770,7 @@ func_E172(param_00) {
 }
 
 onspawnplayer() {
-	scripts\mp\_utility::clearlowermessage("hq_respawn");
+	scripts\mp\utility::clearlowermessage("hq_respawn");
 	self.forcespawnnearteammates = undefined;
 }
 
@@ -804,7 +804,7 @@ onplayerkilled(param_00,param_01,param_02,param_03,param_04,param_05,param_06,pa
 		return;
 	}
 
-	if(isdefined(param_04) && scripts\mp\_utility::iskillstreakweapon(param_04)) {
+	if(isdefined(param_04) && scripts\mp\utility::iskillstreakweapon(param_04)) {
 		return;
 	}
 
@@ -821,11 +821,11 @@ onplayerkilled(param_00,param_01,param_02,param_03,param_04,param_05,param_06,pa
 		if(var_0B istouching(level.zone.gameobject.trigger)) {
 			param_01.lastkilltime = gettime();
 			if(var_0C) {
-				param_01 thread scripts\mp\_utility::giveunifiedpoints("capture_kill");
+				param_01 thread scripts\mp\utility::giveunifiedpoints("capture_kill");
 			}
 
-			param_01 thread scripts\mp\_awards::givemidmatchaward("mode_x_assault");
-			thread scripts\mp\_matchdata::loginitialstats(param_09,"defending");
+			param_01 thread scripts\mp\awards::givemidmatchaward("mode_x_assault");
+			thread scripts\mp\matchdata::loginitialstats(param_09,"defending");
 			return;
 		}
 
@@ -834,30 +834,30 @@ onplayerkilled(param_00,param_01,param_02,param_03,param_04,param_05,param_06,pa
 
 	if(param_01 istouching(level.zone.gameobject.trigger)) {
 		if(var_0C) {
-			param_01 thread scripts\mp\_utility::giveunifiedpoints("capture_kill");
+			param_01 thread scripts\mp\utility::giveunifiedpoints("capture_kill");
 		}
 
-		param_01 thread scripts\mp\_awards::givemidmatchaward("mode_x_defend");
-		param_01 scripts\mp\_utility::incperstat("defends",1);
-		param_01 scripts\mp\_persistence::statsetchild("round","defends",param_01.pers["defends"]);
-		param_01 scripts\mp\_utility::setextrascore1(param_01.pers["defends"]);
+		param_01 thread scripts\mp\awards::givemidmatchaward("mode_x_defend");
+		param_01 scripts\mp\utility::incperstat("defends",1);
+		param_01 scripts\mp\persistence::statsetchild("round","defends",param_01.pers["defends"]);
+		param_01 scripts\mp\utility::setextrascore1(param_01.pers["defends"]);
 	}
 }
 
 give_capture_credit(param_00,param_01,param_02,param_03) {
 	level endon("game_ended");
 	level.lastcaptime = gettime();
-	var_04 = level.zone.gameobject scripts\mp\_gameobjects::getearliestclaimplayer();
+	var_04 = level.zone.gameobject scripts\mp\gameobjects::getearliestclaimplayer();
 	if(isdefined(var_04.triggerportableradarping)) {
 		var_04 = var_04.triggerportableradarping;
 	}
 
 	if(isplayer(var_04)) {
 		if(!isscoreboosting(var_04)) {
-			var_04 thread scripts\mp\_matchdata::loggameevent("capture",var_04.origin);
-			var_04 thread scripts\mp\_awards::givemidmatchaward("mode_hp_secure");
+			var_04 thread scripts\mp\matchdata::loggameevent("capture",var_04.origin);
+			var_04 thread scripts\mp\awards::givemidmatchaward("mode_hp_secure");
 			if(isdefined(level.zone.gameobject.lastactivatetime) && gettime() - level.zone.gameobject.lastactivatetime <= 2100) {
-				var_04 thread scripts\mp\_awards::givemidmatchaward("mode_hp_quick_cap");
+				var_04 thread scripts\mp\awards::givemidmatchaward("mode_hp_quick_cap");
 			}
 
 			if(var_04.lastkilltime + 500 > gettime()) {
@@ -874,8 +874,8 @@ give_capture_credit(param_00,param_01,param_02,param_03) {
 		var_07 = param_00[var_05[var_06]].player;
 		var_07 updatecapsperminute(param_03);
 		if(!isscoreboosting(var_07)) {
-			var_07 scripts\mp\_utility::incperstat("captures",1);
-			var_07 scripts\mp\_persistence::statsetchild("round","captures",var_07.pers["captures"]);
+			var_07 scripts\mp\utility::incperstat("captures",1);
+			var_07 scripts\mp\persistence::statsetchild("round","captures",var_07.pers["captures"]);
 		}
 		else
 		{
@@ -897,14 +897,14 @@ awardcapturepoints() {
 		var_02 = 0;
 		while(var_02 < var_00) {
 			wait(0.05);
-			scripts\mp\_hostmigration::waittillhostmigrationdone();
+			scripts\mp\hostmigration::waittillhostmigrationdone();
 			var_02 = var_02 + 0.05;
 			if(level.zone.gameobject.stalemate) {
 				var_02 = 0;
 			}
 		}
 
-		var_03 = level.zone.gameobject scripts\mp\_gameobjects::getownerteam();
+		var_03 = level.zone.gameobject scripts\mp\gameobjects::getownerteam();
 		if(var_03 == "neutral") {
 			continue;
 		}
@@ -914,7 +914,7 @@ awardcapturepoints() {
 				var_01 = level.zone.gameobject.touchlist[var_03].size;
 			}
 
-			scripts\mp\_gamescore::giveteamscoreforobjective(var_03,var_01,0);
+			scripts\mp\gamescore::giveteamscoreforobjective(var_03,var_01,0);
 			continue;
 		}
 
@@ -923,9 +923,9 @@ awardcapturepoints() {
 				var_01 = level.zone.gameobject.touchlist[var_03].size;
 			}
 
-			scripts\mp\_gamescore::giveteamscoreforobjective(var_03,var_01,0);
+			scripts\mp\gamescore::giveteamscoreforobjective(var_03,var_01,0);
 			foreach(var_05 in level.zone.gameobject.touchlist[var_03]) {
-				var_05.player scripts\mp\_utility::incperstat("objTime",1);
+				var_05.player scripts\mp\utility::incperstat("objTime",1);
 				if(isdefined(var_05.player.timebyrotation[level.kothhillrotation])) {
 					var_05.player.timebyrotation[level.kothhillrotation]++;
 				}
@@ -934,9 +934,9 @@ awardcapturepoints() {
 					var_05.player.timebyrotation[level.kothhillrotation] = 1;
 				}
 
-				var_05.player scripts\mp\_persistence::statsetchild("round","objTime",var_05.player.pers["objTime"]);
-				var_05.player scripts\mp\_utility::setextrascore0(var_05.player.pers["objTime"]);
-				var_05.player scripts\mp\_gamescore::giveplayerscore("koth_in_obj",10);
+				var_05.player scripts\mp\persistence::statsetchild("round","objTime",var_05.player.pers["objTime"]);
+				var_05.player scripts\mp\utility::setextrascore0(var_05.player.pers["objTime"]);
+				var_05.player scripts\mp\gamescore::giveplayerscore("koth_in_obj",10);
 			}
 		}
 	}
@@ -952,8 +952,8 @@ updatecapsperminute(param_00) {
 		return;
 	}
 
-	self.var_C21D++;
-	var_01 = scripts\mp\_utility::gettimepassed() / -5536;
+	self.numcaps++;
+	var_01 = scripts\mp\utility::gettimepassed() / -5536;
 	if(isplayer(self) && isdefined(self.timeplayed["total"])) {
 		var_01 = self.timeplayed["total"] / 60;
 	}
@@ -983,14 +983,14 @@ onplayerconnect() {
 		var_00.numcaps = 0;
 		var_00.capsperminute = 0;
 		var_00.timebyrotation = [];
-		var_00 scripts\mp\_utility::setextrascore0(0);
+		var_00 scripts\mp\utility::setextrascore0(0);
 		if(isdefined(var_00.pers["objTime"])) {
-			var_00 scripts\mp\_utility::setextrascore0(var_00.pers["objTime"]);
+			var_00 scripts\mp\utility::setextrascore0(var_00.pers["objTime"]);
 		}
 
-		var_00 scripts\mp\_utility::setextrascore1(0);
+		var_00 scripts\mp\utility::setextrascore1(0);
 		if(isdefined(var_00.pers["defends"])) {
-			var_00 scripts\mp\_utility::setextrascore1(var_00.pers["defends"]);
+			var_00 scripts\mp\utility::setextrascore1(var_00.pers["defends"]);
 		}
 
 		thread onplayerspawned(var_00);

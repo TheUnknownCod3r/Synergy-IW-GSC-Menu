@@ -1,13 +1,13 @@
-/**************************************************
+/******************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\clientmatchdata.gsc
-**************************************************/
+ * Script: scripts\mp\clientmatchdata.gsc
+******************************************/
 
 init() {
 	if(!isdefined(game["clientMatchDataDef"])) {
-		game["clientMatchDataDef"] = "mp/clientmatchdata.ddl";
-		function_01A9(game["clientMatchDataDef"]);
+		game["clientMatchDataDef"] = "mp\clientmatchdata.ddl";
+		setclientmatchdatadef(game["clientMatchDataDef"]);
 		setclientmatchdata("map",level.script);
 	}
 
@@ -27,7 +27,7 @@ canlogdeath(param_00) {
 }
 
 logplayerdeath(param_00) {
-	var_01 = function_0080("deathCount");
+	var_01 = getclientmatchdata("deathCount");
 	if(!canlogclient(self) || !canlogdeath(var_01)) {
 		return;
 	}

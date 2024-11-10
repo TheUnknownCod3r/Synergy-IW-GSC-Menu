@@ -1,8 +1,8 @@
-/***********************************************
+/***************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\anim\saw\common.gsc
-***********************************************/
+ * Script: scripts\anim\saw\common.gsc
+***************************************/
 
 main(param_00) {
 	self endon("killanimscript");
@@ -10,7 +10,7 @@ main(param_00) {
 		return;
 	}
 
-	self.var_1491.var_10930 = "saw";
+	self.a.var_10930 = "saw";
 	if(isdefined(param_00.script_delay_min)) {
 		var_01 = param_00.script_delay_min;
 	}
@@ -48,14 +48,14 @@ main(param_00) {
 	scripts\anim\shared::placeweaponon(self.var_394,"none");
 	param_00 show();
 	if(isdefined(param_00.var_1A56)) {
-		self.var_1491.var_D707 = ::func_D707;
-		self.var_1491.usingworldspacehitmarkers = param_00;
+		self.a.var_D707 = ::func_D707;
+		self.a.usingworldspacehitmarkers = param_00;
 		param_00 notify("being_used");
 		thread func_1109E();
 	}
 	else
 	{
-		self.var_1491.var_D707 = ::func_D860;
+		self.a.var_D707 = ::func_D860;
 	}
 
 	param_00.var_5855 = 0;
@@ -95,9 +95,9 @@ func_6D63(param_00) {
 	var_01 = cos(15);
 	for(;;) {
 		while(isdefined(self.isnodeoccupied)) {
-			var_02 = self.var_10C.origin;
+			var_02 = self.isnodeoccupied.origin;
 			var_03 = param_00 gettagangles("tag_aim");
-			if(scripts\common\utility::within_fov(param_00.origin,var_03,var_02,var_01) || distancesquared(param_00.origin,var_02) < -25536) {
+			if(scripts\engine\utility::within_fov(param_00.origin,var_03,var_02,var_01) || distancesquared(param_00.origin,var_02) < -25536) {
 				if(!param_00.var_5855) {
 					param_00.var_5855 = 1;
 					param_00 notify("turretstatechange");
@@ -134,7 +134,7 @@ func_12A99(param_00,param_01) {
 func_1109E() {
 	self endon("killanimscript");
 	for(;;) {
-		if(!isdefined(self.target_getindexoftarget) || distancesquared(self.origin,self.var_205.origin) > 4096) {
+		if(!isdefined(self.target_getindexoftarget) || distancesquared(self.origin,self.target_getindexoftarget.origin) > 4096) {
 			self _meth_83AF();
 		}
 
@@ -144,10 +144,10 @@ func_1109E() {
 
 func_D707(param_00) {
 	if(param_00 == "pain") {
-		if(isdefined(self.target_getindexoftarget) && distancesquared(self.origin,self.var_205.origin) < 4096) {
-			self.var_1491.usingworldspacehitmarkers hide();
+		if(isdefined(self.target_getindexoftarget) && distancesquared(self.origin,self.target_getindexoftarget.origin) < 4096) {
+			self.a.usingworldspacehitmarkers hide();
 			scripts\anim\shared::placeweaponon(self.var_394,"right");
-			self.var_1491.var_D707 = ::func_D705;
+			self.a.var_D707 = ::func_D705;
 			return;
 		}
 		else
@@ -161,16 +161,16 @@ func_D707(param_00) {
 		return;
 	}
 
-	self.var_1491.usingworldspacehitmarkers delete();
-	self.var_1491.usingworldspacehitmarkers = undefined;
+	self.a.usingworldspacehitmarkers delete();
+	self.a.usingworldspacehitmarkers = undefined;
 	scripts\anim\shared::placeweaponon(self.var_394,"right");
 }
 
 func_D705(param_00) {
-	if(!isdefined(self.target_getindexoftarget) || distancesquared(self.origin,self.var_205.origin) > 4096) {
+	if(!isdefined(self.target_getindexoftarget) || distancesquared(self.origin,self.target_getindexoftarget.origin) > 4096) {
 		self _meth_83AF();
-		self.var_1491.usingworldspacehitmarkers delete();
-		self.var_1491.usingworldspacehitmarkers = undefined;
+		self.a.usingworldspacehitmarkers delete();
+		self.a.usingworldspacehitmarkers = undefined;
 		if(isdefined(self.var_394) && self.var_394 != "none") {
 			scripts\anim\shared::placeweaponon(self.var_394,"right");
 			return;
@@ -180,7 +180,7 @@ func_D705(param_00) {
 	}
 
 	if(param_00 != "saw") {
-		self.var_1491.usingworldspacehitmarkers delete();
+		self.a.usingworldspacehitmarkers delete();
 	}
 }
 

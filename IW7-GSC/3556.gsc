@@ -1,14 +1,14 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3556.gsc
-****************************/
+ * Script: 3556.gsc
+************************/
 
 init() {
-	level._effect["slam_sml"] = loadfx("vfx/old/_requests/archetypes/vfx_heavy_slam_s");
-	level._effect["slam_lrg"] = loadfx("vfx/old/_requests/archetypes/vfx_heavy_slam_l");
-	level._effect["dash_dust"] = loadfx("vfx/core/screen/vfx_scrnfx_tocam_slidedust_m");
-	level._effect["dash_trail"] = loadfx("vfx/iw7/_requests/mp/vfx_dash_trail");
+	level._effect["slam_sml"] = loadfx("vfx\old\_requests\archetypes\vfx_heavy_slam_s");
+	level._effect["slam_lrg"] = loadfx("vfx\old\_requests\archetypes\vfx_heavy_slam_l");
+	level._effect["dash_dust"] = loadfx("vfx\core\screen\vfx_scrnfx_tocam_slidedust_m");
+	level._effect["dash_trail"] = loadfx("vfx\iw7\_requests\mp\vfx_dash_trail");
 }
 
 _meth_835F() {}
@@ -97,7 +97,7 @@ func_4D8E() {
 func_4D87() {
 	var_00 = [];
 	foreach(var_02 in level.characters) {
-		if(!isdefined(var_02) || !isalive(var_02) || !scripts\mp\_utility::isenemy(var_02)) {
+		if(!isdefined(var_02) || !isalive(var_02) || !scripts\mp\utility::isenemy(var_02)) {
 			continue;
 		}
 

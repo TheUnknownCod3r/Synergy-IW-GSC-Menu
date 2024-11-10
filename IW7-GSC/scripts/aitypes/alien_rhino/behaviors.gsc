@@ -1,8 +1,8 @@
-/*************************************************************
+/*****************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\aitypes\alien_rhino\behaviors.gsc
-*************************************************************/
+ * Script: scripts\aitypes\alien_rhino\behaviors.gsc
+*****************************************************/
 
 initbehaviors(param_00) {
 	setupbehaviorstates();
@@ -60,7 +60,7 @@ charge_end(param_00) {
 	self.bchargehit = undefined;
 	self.desiredyaw = undefined;
 	self.bchargeaborted = undefined;
-	self._blackboard.chargeintroindex = undefined;
+	self.var_1198.chargeintroindex = undefined;
 	self clearpath();
 	var_01 = scripts\asm\dlc4\dlc4_asm::gettunedata();
 	self.nextchargeattacktesttime = gettime() + randomintrange(var_01.min_charge_attack_interval_ms,var_01.max_charge_attack_interval_ms);
@@ -126,7 +126,7 @@ trycharge(param_00,param_01,param_02) {
 		return 0;
 	}
 
-	self._blackboard.chargeintroindex = var_05;
+	self.var_1198.chargeintroindex = var_05;
 	scripts\aitypes\dlc4\bt_action_api::setdesiredbtaction(param_00,"charge");
 	return 1;
 }
@@ -220,7 +220,7 @@ decideaction(param_00) {
 }
 
 followenemy_begin(param_00) {
-	self.bt.instancedata[param_00] = spawnstruct();
+	self.var_3135.instancedata[param_00] = spawnstruct();
 }
 
 followenemy_tick(param_00) {
@@ -251,5 +251,5 @@ followenemy_tick(param_00) {
 }
 
 followenemy_end(param_00) {
-	self.bt.instancedata[param_00] = undefined;
+	self.var_3135.instancedata[param_00] = undefined;
 }

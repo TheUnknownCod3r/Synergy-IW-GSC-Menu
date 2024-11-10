@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\2884.gsc
-****************************/
+ * Script: 2884.gsc
+************************/
 
 func_9A2F() {
 	level.var_9A2E = spawnstruct();
@@ -295,7 +295,7 @@ func_E815(param_00) {
 			var_06 = var_05[0];
 			if(isdefined(var_04.var_13008) && var_04.var_13008) {
 				if(isdefined(var_04.var_DEED) && isdefined(var_04.var_D6E3)) {
-					var_04 thread scripts/sp/interaction::func_CE18(var_04.var_DEED,var_06,var_04.var_D6E3);
+					var_04 thread scripts\sp\interaction::func_CE18(var_04.var_DEED,var_06,var_04.var_D6E3);
 				}
 				else if(isdefined(self.var_D6E0) && isdefined(self.var_D6E2)) {
 					self thread [[self.var_D6E0]](undefined,undefined,self.var_D6E2);
@@ -342,21 +342,21 @@ func_E815(param_00) {
 			if(var_05.size > 1) {
 				if(isdefined(var_04.remind_calltrain)) {
 					var_04.remind_calltrain notify("stop_loop");
-					var_04.remind_calltrain thread scripts/sp/anim::func_1F35(var_04,var_05[1]);
+					var_04.remind_calltrain thread scripts\sp\anim::func_1F35(var_04,var_05[1]);
 					var_09 = getanimlength(var_04 scripts\sp\_utility::func_7DC1(var_05[1]));
 					var_04 thread scripts\sp\_utility::func_C12D("reminder_anim_done",var_09);
 					if(isdefined(var_04.var_E40E)) {
-						var_04.remind_calltrain scripts\engine\utility::delaythread(var_09,::scripts/sp/anim::func_1EEA,var_04,var_04.var_E40E,"stop_loop");
+						var_04.remind_calltrain scripts\engine\utility::delaythread(var_09,::scripts\sp\anim::func_1EEA,var_04,var_04.var_E40E,"stop_loop");
 					}
 				}
 				else
 				{
 					var_05 notify("stop_loop");
-					var_05 thread scripts/sp/anim::func_1F35(var_05,var_06[1]);
+					var_05 thread scripts\sp\anim::func_1F35(var_05,var_06[1]);
 					var_09 = getanimlength(var_05 scripts\sp\_utility::func_7DC1(var_06[1]));
 					var_04 thread scripts\sp\_utility::func_C12D("reminder_anim_done",var_09);
 					if(isdefined(var_04.var_E40E)) {
-						var_04 scripts\engine\utility::delaythread(var_09,::scripts/sp/anim::func_1EEA,var_04,var_04.var_E40E,"stop_loop");
+						var_04 scripts\engine\utility::delaythread(var_09,::scripts\sp\anim::func_1EEA,var_04,var_04.var_E40E,"stop_loop");
 					}
 				}
 
@@ -440,7 +440,7 @@ func_CE40(param_00,param_01,param_02,param_03) {
 	self.var_DD4A = param_00;
 	self.var_DD49 = param_02;
 	if(param_02 == "nag") {
-		thread scripts/sp/interaction::func_CD53(var_04,param_01);
+		thread scripts\sp\interaction::func_CD53(var_04,param_01);
 		self.var_1C4D = 0;
 		self.var_DD49 = param_02;
 		thread scripts\sp\_utility::func_77B9(0.7);
@@ -449,7 +449,7 @@ func_CE40(param_00,param_01,param_02,param_03) {
 		return;
 	}
 	else if(param_02 == "busy") {
-		thread scripts/sp/interaction::func_CD53(var_04,param_01);
+		thread scripts\sp\interaction::func_CD53(var_04,param_01);
 		self.var_1C4D = 0;
 		self.var_DD49 = param_02;
 		thread scripts\sp\_utility::func_77B9(0.7);
@@ -458,12 +458,12 @@ func_CE40(param_00,param_01,param_02,param_03) {
 		return;
 	}
 
-	thread scripts/sp/interaction::func_CD53(var_04,param_01);
+	thread scripts\sp\interaction::func_CD53(var_04,param_01);
 }
 
 func_11048() {
 	if(!isdefined(self.var_9B89)) {
-		thread scripts/sp/interaction::func_9A0F();
+		thread scripts\sp\interaction::func_9A0F();
 	}
 	else
 	{
@@ -1178,7 +1178,7 @@ func_10FF9() {
 
 func_11035() {
 	self notify("stop_smart_reaction");
-	thread scripts/sp/interaction::func_9A0F();
+	thread scripts\sp\interaction::func_9A0F();
 }
 
 func_DB71(param_00) {
@@ -1375,11 +1375,11 @@ func_CDDB(param_00,param_01,param_02,param_03,param_04,param_05) {
 	}
 
 	self notify("stop_loop");
-	thread scripts/sp/anim::func_1F35(param_00,param_03);
+	thread scripts\sp\anim::func_1F35(param_00,param_03);
 	var_08 = getanimlength(param_00 scripts\sp\_utility::func_7DC1(param_03));
 	thread scripts\sp\_utility::func_C12D("reminder_anim_done",var_08);
 	if(isdefined(param_00.var_E40E)) {
-		scripts\engine\utility::delaythread(var_08,::scripts/sp/anim::func_1EEA,param_00,param_00.var_E40E,"stop_loop");
+		scripts\engine\utility::delaythread(var_08,::scripts\sp\anim::func_1EEA,param_00,param_00.var_E40E,"stop_loop");
 	}
 
 	if(isdefined(param_04)) {

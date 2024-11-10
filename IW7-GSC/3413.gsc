@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3413.gsc
-****************************/
+ * Script: 3413.gsc
+************************/
 
 fast_travel_init() {
 	func_95D9();
@@ -27,14 +27,14 @@ watch_for_zipline_achievement() {
 	}
 
 	foreach(var_01 in level.players) {
-		var_01 scripts/cp/zombies/achievement::update_achievement("RIDE_FOR_YOUR_LIFE",4);
+		var_01 scripts\cp\zombies\achievement::update_achievement("RIDE_FOR_YOUR_LIFE",4);
 	}
 
 	level notify("zipline_achievement_done");
 }
 
 func_95D9() {
-	level.var_28C9 = loadfx("vfx/core/mp/core/vfx_battle_slide_camera");
+	level.var_28C9 = loadfx("vfx\core\mp\core\vfx_battle_slide_camera");
 }
 
 func_97AD() {

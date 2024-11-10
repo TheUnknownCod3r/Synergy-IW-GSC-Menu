@@ -1,8 +1,8 @@
-/********************************************
+/************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\sp\coverwall.gsc
-********************************************/
+ * Script: scripts\sp\coverwall.gsc
+************************************/
 
 func_4761() {
 	precachemodel("barrier_cover_foam_128");
@@ -16,10 +16,10 @@ func_4761() {
 	level.player.var_4759.var_11168 = [];
 	level.player.var_4759.var_389C = 0;
 	level.player.var_4759.var_A8C6 = undefined;
-	level.var_7649["coverwall_expand"] = loadfx("vfx/iw7/core/equipment/coverwall/vfx_coverwall_foam_expand.vfx");
-	level.var_7649["coverwall_collapse"] = loadfx("vfx/iw7/core/equipment/coverwall/vfx_coverwall_foam_collapse.vfx");
-	level.var_7649["coverwall_explosion"] = loadfx("vfx/iw7/_requests/mp/power/vfx_trip_mine_explode.vfx");
-	level.var_7649["coverwall_dud"] = loadfx("vfx/code/foam/vfx_code_foamblock_death.vfx");
+	level.var_7649["coverwall_expand"] = loadfx("vfx\iw7\core\equipment\coverwall\vfx_coverwall_foam_expand.vfx");
+	level.var_7649["coverwall_collapse"] = loadfx("vfx\iw7\core\equipment\coverwall\vfx_coverwall_foam_collapse.vfx");
+	level.var_7649["coverwall_explosion"] = loadfx("vfx\iw7\_requests\mp\power\vfx_trip_mine_explode.vfx");
+	level.var_7649["coverwall_dud"] = loadfx("vfx\code\foam\vfx_code_foamblock_death.vfx");
 	precacheitem("coverwall");
 	setdvarifuninitialized("portable_cover_lifetime",35);
 	setdvarifuninitialized("debug_coverwall",0);
@@ -140,10 +140,10 @@ func_4763(param_00,param_01,param_02,param_03) {
 		return;
 	}
 
-	function_0178("deployable_cover_expand",param_00);
+	playworldsound("deployable_cover_expand",param_00);
 	var_04.var_132AA = [];
 	param_03.var_BE07 = var_04;
-	function_0178("deployable_cover_expand",param_00);
+	playworldsound("deployable_cover_expand",param_00);
 	if(isdefined(level.var_93A9)) {
 		var_05 = spawnfx(level.var_7649["coverwall_expand_vr"],param_00,anglestoforward(param_01),anglestoup(param_01));
 		triggerfx(var_05);
@@ -235,7 +235,7 @@ func_10696(param_00) {
 		var_0F = anglestoright(param_00.angles) * var_0B;
 		var_10 = var_01 + var_0A + var_0F;
 		if(param_00 func_3913(var_10,var_0C)) {
-			param_00.var_473D[var_07 + "_" + var_08] = function_02CB(var_10,var_0C,"cover stand",512,var_0E);
+			param_00.var_473D[var_07 + "_" + var_08] = spawncovernode(var_10,var_0C,"cover stand",512,var_0E);
 		}
 		else
 		{
@@ -378,7 +378,7 @@ func_E0E1(param_00) {
 				var_03 = param_00.origin;
 			}
 
-			function_02CC(param_00);
+			despawncovernode(param_00);
 			self.var_473D = scripts\sp\_utility::func_22B2(self.var_473D,var_04);
 			return;
 		}
@@ -436,7 +436,7 @@ func_475E(param_00) {
 	if(isdefined(self.var_BE07) && isdefined(self.var_BE07.var_473D)) {
 		foreach(var_06 in self.var_BE07.var_473D) {
 			if(isdefined(var_06)) {
-				function_02CC(var_06);
+				despawncovernode(var_06);
 			}
 		}
 	}
@@ -458,7 +458,7 @@ func_475E(param_00) {
 	if(!var_02) {
 		var_0B = self.var_BE07.angles;
 		playfx(level.var_7649["coverwall_collapse"],var_03,anglestoforward(var_0B),anglestoup(var_0B));
-		function_0178("deployable_cover_contract",var_03);
+		playworldsound("deployable_cover_contract",var_03);
 	}
 
 	var_04.var_4759.var_19 = scripts\engine\utility::array_remove(var_04.var_4759.var_19,self.var_BE07);
@@ -477,7 +477,7 @@ func_475D() {
 	self endon("death");
 	self endon("entitydeleted");
 	self waittill("coverwall_expand_finish");
-	self.var_BE64 = function_0316(self);
+	self.var_BE64 = _func_316(self);
 }
 
 func_B9C4() {
@@ -541,7 +541,7 @@ func_475C(param_00,param_01) {
 		playfx(level.var_7649["coverwall_explosion"],var_02);
 	}
 
-	function_0178("deployable_cover_explode",var_02);
+	playworldsound("deployable_cover_explode",var_02);
 	earthquake(0.4,0.6,param_00.triggerportableradarping.origin,450);
 	level.player playrumbleonentity("damage_heavy");
 	param_00 notify("death");

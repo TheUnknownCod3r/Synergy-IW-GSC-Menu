@@ -1,8 +1,8 @@
-/********************************************
+/************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\behaviortree\ratking.gsc
-********************************************/
+ * Script: behaviortree\ratking.gsc
+************************************/
 
 func_2AD0() {
 	if(isdefined(level.var_119E["ratking"])) {

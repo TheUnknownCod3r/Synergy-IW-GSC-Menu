@@ -1,11 +1,11 @@
-/***************************************************************
+/*******************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\agents\ratking\ratking_agent.gsc
-***************************************************************/
+ * Script: scripts\mp\agents\ratking\ratking_agent.gsc
+*******************************************************/
 
 registerscriptedagent() {
-	scripts/aitypes/bt_util::init();
+	scripts\aitypes\bt_util::init();
 	behaviortree\ratking::func_DEE8();
 	scripts\asm\ratking\mp\states::func_2371();
 	scripts\mp\agents\ratking\ratking_tunedata::setuptunedata();

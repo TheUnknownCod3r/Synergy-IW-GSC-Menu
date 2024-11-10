@@ -1,30 +1,30 @@
-/************************************************
+/****************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\gametypes\dom.gsc
-************************************************/
+ * Script: scripts\mp\gametypes\dom.gsc
+****************************************/
 
 main() {
 	if(getdvar("mapname") == "mp_background") {
 		return;
 	}
 
-	scripts\mp\_globallogic::init();
-	scripts\mp\_globallogic::setupcallbacks();
-	if(function_011C()) {
+	scripts\mp\globallogic::init();
+	scripts\mp\globallogic::setupcallbacks();
+	if(isusingmatchrulesdata()) {
 		level.initializematchrules = ::initializematchrules;
 		[[level.initializematchrules]]();
-		level thread scripts\mp\_utility::reinitializematchrulesonmigration();
+		level thread scripts\mp\utility::reinitializematchrulesonmigration();
 	}
 	else
 	{
-		scripts\mp\_utility::registertimelimitdvar(level.gametype,30);
-		scripts\mp\_utility::registerscorelimitdvar(level.gametype,200);
-		scripts\mp\_utility::registerroundlimitdvar(level.gametype,2);
-		scripts\mp\_utility::registerroundswitchdvar("dom",1,0,1);
-		scripts\mp\_utility::registerwinlimitdvar(level.gametype,0);
-		scripts\mp\_utility::registernumlivesdvar(level.gametype,0);
-		scripts\mp\_utility::registerhalftimedvar(level.gametype,0);
+		scripts\mp\utility::registertimelimitdvar(level.gametype,30);
+		scripts\mp\utility::registerscorelimitdvar(level.gametype,200);
+		scripts\mp\utility::registerroundlimitdvar(level.gametype,2);
+		scripts\mp\utility::registerroundswitchdvar("dom",1,0,1);
+		scripts\mp\utility::registerwinlimitdvar(level.gametype,0);
+		scripts\mp\utility::registernumlivesdvar(level.gametype,0);
+		scripts\mp\utility::registerhalftimedvar(level.gametype,0);
 		level.matchrules_damagemultiplier = 0;
 		level.matchrules_vampirism = 0;
 	}
@@ -40,7 +40,7 @@ main() {
 	level.alliescapturing = [];
 	level.axiscapturing = [];
 	if(level.matchrules_damagemultiplier || level.matchrules_vampirism) {
-		level.modifyplayerdamage = ::scripts\mp\_damage::gamemodemodifyplayerdamage;
+		level.modifyplayerdamage = ::scripts\mp\damage::gamemodemodifyplayerdamage;
 	}
 
 	game["dialog"]["gametype"] = "domination";
@@ -63,13 +63,13 @@ main() {
 }
 
 initializematchrules() {
-	scripts\mp\_utility::setcommonrulesfrommatchdata();
+	scripts\mp\utility::setcommonrulesfrommatchdata();
 	setdynamicdvar("scr_dom_flagCaptureTime",getmatchrulesdata("domData","flagCaptureTime"));
 	setdynamicdvar("scr_dom_flagsRequiredToScore",getmatchrulesdata("domData","flagsRequiredToScore"));
 	setdynamicdvar("scr_dom_pointsPerFlag",getmatchrulesdata("domData","pointsPerFlag"));
 	setdynamicdvar("scr_dom_flagNeutralization",getmatchrulesdata("domData","flagNeutralization"));
 	setdynamicdvar("scr_dom_halftime",0);
-	scripts\mp\_utility::registerhalftimedvar("dom",0);
+	scripts\mp\utility::registerhalftimedvar("dom",0);
 	setdynamicdvar("scr_dom_promode",0);
 }
 
@@ -84,20 +84,20 @@ seticonnames() {
 
 onstartgametype() {
 	seticonnames();
-	scripts\mp\_utility::setobjectivetext("allies",&"OBJECTIVES_DOM");
-	scripts\mp\_utility::setobjectivetext("axis",&"OBJECTIVES_DOM");
+	scripts\mp\utility::setobjectivetext("allies",&"OBJECTIVES_DOM");
+	scripts\mp\utility::setobjectivetext("axis",&"OBJECTIVES_DOM");
 	if(level.splitscreen) {
-		scripts\mp\_utility::setobjectivescoretext("allies",&"OBJECTIVES_DOM");
-		scripts\mp\_utility::setobjectivescoretext("axis",&"OBJECTIVES_DOM");
+		scripts\mp\utility::setobjectivescoretext("allies",&"OBJECTIVES_DOM");
+		scripts\mp\utility::setobjectivescoretext("axis",&"OBJECTIVES_DOM");
 	}
 	else
 	{
-		scripts\mp\_utility::setobjectivescoretext("allies",&"OBJECTIVES_DOM_SCORE");
-		scripts\mp\_utility::setobjectivescoretext("axis",&"OBJECTIVES_DOM_SCORE");
+		scripts\mp\utility::setobjectivescoretext("allies",&"OBJECTIVES_DOM_SCORE");
+		scripts\mp\utility::setobjectivescoretext("axis",&"OBJECTIVES_DOM_SCORE");
 	}
 
-	scripts\mp\_utility::setobjectivehinttext("allies",&"OBJECTIVES_DOM_HINT");
-	scripts\mp\_utility::setobjectivehinttext("axis",&"OBJECTIVES_DOM_HINT");
+	scripts\mp\utility::setobjectivehinttext("allies",&"OBJECTIVES_DOM_HINT");
+	scripts\mp\utility::setobjectivehinttext("axis",&"OBJECTIVES_DOM_HINT");
 	setclientnamemode("auto_change");
 	if(!isdefined(game["switchedsides"])) {
 		game["switchedsides"] = 0;
@@ -105,7 +105,7 @@ onstartgametype() {
 
 	initspawns();
 	var_00[0] = "dom";
-	scripts\mp\_gameobjects::main(var_00);
+	scripts\mp\gameobjects::main(var_00);
 	thread domflags();
 	thread updatedomscores();
 	thread removedompoint();
@@ -114,51 +114,51 @@ onstartgametype() {
 
 updategametypedvars() {
 	scripts\mp\gametypes\common::updategametypedvars();
-	level.flagcapturetime = scripts\mp\_utility::dvarfloatvalue("flagCaptureTime",10,0,30);
-	level.var_6E7B = scripts\mp\_utility::dvarintvalue("flagsRequiredToScore",1,1,3);
-	level.var_D649 = scripts\mp\_utility::dvarintvalue("pointsPerFlag",1,1,300);
-	level.flagneutralization = scripts\mp\_utility::dvarintvalue("flagNeutralization",0,0,1);
+	level.flagcapturetime = scripts\mp\utility::dvarfloatvalue("flagCaptureTime",10,0,30);
+	level.var_6E7B = scripts\mp\utility::dvarintvalue("flagsRequiredToScore",1,1,3);
+	level.var_D649 = scripts\mp\utility::dvarintvalue("pointsPerFlag",1,1,300);
+	level.flagneutralization = scripts\mp\utility::dvarintvalue("flagNeutralization",0,0,1);
 }
 
 initspawns() {
-	scripts\mp\_spawnlogic::setactivespawnlogic("Domination");
+	scripts\mp\spawnlogic::setactivespawnlogic("Domination");
 	level.spawnmins = (0,0,0);
 	level.spawnmaxs = (0,0,0);
-	scripts\mp\_spawnlogic::addstartspawnpoints("mp_dom_spawn_allies_start");
-	scripts\mp\_spawnlogic::addstartspawnpoints("mp_dom_spawn_axis_start");
-	scripts\mp\_spawnlogic::addspawnpoints("allies","mp_dom_spawn");
-	scripts\mp\_spawnlogic::addspawnpoints("allies","mp_dom_spawn_secondary",1,1);
-	scripts\mp\_spawnlogic::addspawnpoints("axis","mp_dom_spawn");
-	scripts\mp\_spawnlogic::addspawnpoints("axis","mp_dom_spawn_secondary",1,1);
-	level.mapcenter = scripts\mp\_spawnlogic::findboxcenter(level.spawnmins,level.spawnmaxs);
-	function_01B4(level.mapcenter);
+	scripts\mp\spawnlogic::addstartspawnpoints("mp_dom_spawn_allies_start");
+	scripts\mp\spawnlogic::addstartspawnpoints("mp_dom_spawn_axis_start");
+	scripts\mp\spawnlogic::addspawnpoints("allies","mp_dom_spawn");
+	scripts\mp\spawnlogic::addspawnpoints("allies","mp_dom_spawn_secondary",1,1);
+	scripts\mp\spawnlogic::addspawnpoints("axis","mp_dom_spawn");
+	scripts\mp\spawnlogic::addspawnpoints("axis","mp_dom_spawn_secondary",1,1);
+	level.mapcenter = scripts\mp\spawnlogic::findboxcenter(level.spawnmins,level.spawnmaxs);
+	setmapcenter(level.mapcenter);
 }
 
 getspawnpoint() {
 	var_00 = self.pers["team"];
-	var_01 = scripts\mp\_utility::getotherteam(var_00);
+	var_01 = scripts\mp\utility::getotherteam(var_00);
 	if(level.usestartspawns) {
 		if(game["switchedsides"]) {
-			var_02 = scripts\mp\_spawnlogic::getspawnpointarray("mp_dom_spawn_" + var_01 + "_start");
-			var_03 = scripts\mp\_spawnlogic::getspawnpoint_startspawn(var_02);
+			var_02 = scripts\mp\spawnlogic::getspawnpointarray("mp_dom_spawn_" + var_01 + "_start");
+			var_03 = scripts\mp\spawnlogic::getspawnpoint_startspawn(var_02);
 		}
 		else
 		{
-			var_02 = scripts\mp\_spawnlogic::getspawnpointarray("mp_dom_spawn_" + var_02 + "_start");
-			var_03 = scripts\mp\_spawnlogic::getspawnpoint_startspawn(var_03);
+			var_02 = scripts\mp\spawnlogic::getspawnpointarray("mp_dom_spawn_" + var_02 + "_start");
+			var_03 = scripts\mp\spawnlogic::getspawnpoint_startspawn(var_03);
 		}
 	}
 	else
 	{
 		var_04 = getteamdompoints(var_02);
-		var_05 = scripts\mp\_utility::getotherteam(var_00);
+		var_05 = scripts\mp\utility::getotherteam(var_00);
 		var_06 = getteamdompoints(var_05);
 		var_07 = getpreferreddompoints(var_04,var_06);
-		var_02 = scripts\mp\_spawnlogic::getteamspawnpoints(var_00);
-		var_08 = scripts\mp\_spawnlogic::getteamfallbackspawnpoints(var_00);
+		var_02 = scripts\mp\spawnlogic::getteamspawnpoints(var_00);
+		var_08 = scripts\mp\spawnlogic::getteamfallbackspawnpoints(var_00);
 		var_09 = [];
 		var_09["preferredDomPoints"] = var_07;
-		var_03 = scripts\mp\_spawnscoring::getspawnpoint(var_02,var_08,var_09);
+		var_03 = scripts\mp\spawnscoring::getspawnpoint(var_02,var_08,var_09);
 	}
 
 	return var_03;
@@ -188,9 +188,9 @@ getpreferreddompoints(param_00,param_01) {
 		return var_02;
 	}
 
-	if(var_02.size == 1 && var_03.size == 2 && !scripts\mp\_utility::isanymlgmatch()) {
-		var_06 = scripts\mp\_utility::getotherteam(self.team);
-		var_07 = scripts\mp\_gamescore::_getteamscore(var_06) - scripts\mp\_gamescore::_getteamscore(self.team);
+	if(var_02.size == 1 && var_03.size == 2 && !scripts\mp\utility::isanymlgmatch()) {
+		var_06 = scripts\mp\utility::getotherteam(self.team);
+		var_07 = scripts\mp\gamescore::_getteamscore(var_06) - scripts\mp\gamescore::_getteamscore(self.team);
 		if(var_07 > 15) {
 			var_08 = gettimesincedompointcapture(var_02[0]);
 			var_09 = gettimesincedompointcapture(var_03[0]);
@@ -229,7 +229,7 @@ gettimesincedompointcapture(param_00) {
 }
 
 domflags() {
-	scripts\mp\_utility::func_98D3();
+	scripts\mp\utility::func_98D3();
 	var_00 = getentarray("flag_primary","targetname");
 	var_01 = getentarray("flag_secondary","targetname");
 	if(var_00.size + var_01.size < 2) {
@@ -267,8 +267,8 @@ domflags() {
 		level.domflags[level.domflags.size] = var_03;
 	}
 
-	var_04 = scripts\mp\_spawnlogic::getspawnpointarray("mp_dom_spawn_axis_start");
-	var_05 = scripts\mp\_spawnlogic::getspawnpointarray("mp_dom_spawn_allies_start");
+	var_04 = scripts\mp\spawnlogic::getspawnpointarray("mp_dom_spawn_axis_start");
+	var_05 = scripts\mp\spawnlogic::getspawnpointarray("mp_dom_spawn_allies_start");
 	level.areanynavvolumesloaded["allies"] = var_05[0].origin;
 	level.areanynavvolumesloaded["axis"] = var_04[0].origin;
 	level.bestspawnflag = [];
@@ -321,8 +321,8 @@ updatedomscores() {
 			}
 
 			foreach(var_04 in var_02) {
-				var_08 = var_04 scripts\mp\_gameobjects::getownerteam();
-				var_09 = scripts\mp\_utility::getotherteam(var_08);
+				var_08 = var_04 scripts\mp\gameobjects::getownerteam();
+				var_09 = scripts\mp\utility::getotherteam(var_08);
 				var_00 = getteamscore(var_08);
 				var_01 = getteamscore(var_09);
 				var_0A = getteamflagcount(var_08);
@@ -335,7 +335,7 @@ updatedomscores() {
 		updatescores();
 		checkendgame(var_02.size);
 		wait(5);
-		scripts\mp\_hostmigration::waittillhostmigrationdone();
+		scripts\mp\hostmigration::waittillhostmigrationdone();
 	}
 }
 
@@ -353,19 +353,19 @@ updatescores() {
 	}
 
 	if(level.var_EC50["allies"] > 0) {
-		scripts\mp\_gamescore::giveteamscoreforobjective("allies",level.var_EC50["allies"],1);
+		scripts\mp\gamescore::giveteamscoreforobjective("allies",level.var_EC50["allies"],1);
 	}
 
 	if(level.var_EC50["axis"] > 0) {
-		scripts\mp\_gamescore::giveteamscoreforobjective("axis",level.var_EC50["axis"],1);
+		scripts\mp\gamescore::giveteamscoreforobjective("axis",level.var_EC50["axis"],1);
 	}
 }
 
 checkendgame(param_00) {
 	var_01 = gettime() - level.lastcaptime;
-	if(scripts\mp\_utility::matchmakinggame() && param_00 < 2 && var_01 > 120000) {
+	if(scripts\mp\utility::matchmakinggame() && param_00 < 2 && var_01 > 120000) {
 		level.var_72B3 = 1;
-		thread scripts\mp\_gamelogic::endgame("none",game["end_reason"]["time_limit_reached"]);
+		thread scripts\mp\gamelogic::endgame("none",game["end_reason"]["time_limit_reached"]);
 	}
 }
 
@@ -374,7 +374,7 @@ onplayerkilled(param_00,param_01,param_02,param_03,param_04,param_05,param_06,pa
 		return;
 	}
 
-	if(isdefined(param_04) && scripts\mp\_utility::iskillstreakweapon(param_04)) {
+	if(isdefined(param_04) && scripts\mp\utility::iskillstreakweapon(param_04)) {
 		return;
 	}
 
@@ -416,27 +416,27 @@ onplayerkilled(param_00,param_01,param_02,param_03,param_04,param_05,param_06,pa
 				if(var_14.useobj.claimteam == var_0E) {
 					if(!var_0B) {
 						if(var_0A) {
-							param_01 thread scripts\mp\_utility::giveunifiedpoints("capture_kill");
+							param_01 thread scripts\mp\utility::giveunifiedpoints("capture_kill");
 						}
 
 						var_0B = 1;
-						param_01 thread scripts\mp\_awards::givemidmatchaward("mode_x_assault");
-						thread scripts\mp\_matchdata::loginitialstats(param_09,"assaulting");
+						param_01 thread scripts\mp\awards::givemidmatchaward("mode_x_assault");
+						thread scripts\mp\matchdata::loginitialstats(param_09,"assaulting");
 						continue;
 					}
 				}
 				else if(var_14.useobj.claimteam == var_10) {
 					if(!var_0C) {
 						if(var_0A) {
-							param_01 thread scripts\mp\_utility::giveunifiedpoints("capture_kill");
+							param_01 thread scripts\mp\utility::giveunifiedpoints("capture_kill");
 						}
 
 						var_0C = 1;
-						param_01 thread scripts\mp\_awards::givemidmatchaward("mode_x_defend");
-						param_01 scripts\mp\_utility::incperstat("defends",1);
-						param_01 scripts\mp\_persistence::statsetchild("round","defends",param_01.pers["defends"]);
-						param_01 scripts\mp\_utility::setextrascore1(param_01.pers["defends"]);
-						thread scripts\mp\_matchdata::loginitialstats(param_09,"defending");
+						param_01 thread scripts\mp\awards::givemidmatchaward("mode_x_defend");
+						param_01 scripts\mp\utility::incperstat("defends",1);
+						param_01 scripts\mp\persistence::statsetchild("round","defends",param_01.pers["defends"]);
+						param_01 scripts\mp\utility::setextrascore1(param_01.pers["defends"]);
+						thread scripts\mp\matchdata::loginitialstats(param_09,"defending");
 						continue;
 					}
 				}
@@ -450,12 +450,12 @@ onplayerkilled(param_00,param_01,param_02,param_03,param_04,param_05,param_06,pa
 				var_1A = distsquaredcheck(var_14,var_11,var_0F);
 				if(var_1A) {
 					if(var_0A) {
-						param_01 thread scripts\mp\_utility::giveunifiedpoints("capture_kill");
+						param_01 thread scripts\mp\utility::giveunifiedpoints("capture_kill");
 					}
 
 					var_0B = 1;
-					param_01 thread scripts\mp\_awards::givemidmatchaward("mode_x_assault");
-					thread scripts\mp\_matchdata::loginitialstats(param_09,"assaulting");
+					param_01 thread scripts\mp\awards::givemidmatchaward("mode_x_assault");
+					thread scripts\mp\matchdata::loginitialstats(param_09,"assaulting");
 					continue;
 				}
 			}
@@ -467,15 +467,15 @@ onplayerkilled(param_00,param_01,param_02,param_03,param_04,param_05,param_06,pa
 			var_1B = distsquaredcheck(var_14,var_11,var_0F);
 			if(var_1B) {
 				if(var_0A) {
-					param_01 thread scripts\mp\_utility::giveunifiedpoints("capture_kill");
+					param_01 thread scripts\mp\utility::giveunifiedpoints("capture_kill");
 				}
 
 				var_0C = 1;
-				param_01 thread scripts\mp\_awards::givemidmatchaward("mode_x_defend");
-				param_01 scripts\mp\_utility::incperstat("defends",1);
-				param_01 scripts\mp\_persistence::statsetchild("round","defends",param_01.pers["defends"]);
-				param_01 scripts\mp\_utility::setextrascore1(param_01.pers["defends"]);
-				thread scripts\mp\_matchdata::loginitialstats(param_09,"defending");
+				param_01 thread scripts\mp\awards::givemidmatchaward("mode_x_defend");
+				param_01 scripts\mp\utility::incperstat("defends",1);
+				param_01 scripts\mp\persistence::statsetchild("round","defends",param_01.pers["defends"]);
+				param_01 scripts\mp\utility::setextrascore1(param_01.pers["defends"]);
+				thread scripts\mp\matchdata::loginitialstats(param_09,"defending");
 				continue;
 			}
 		}
@@ -503,7 +503,7 @@ distsquaredcheck(param_00,param_01,param_02) {
 getowneddomflags() {
 	var_00 = [];
 	foreach(var_02 in level.domflags) {
-		if(var_02 scripts\mp\_gameobjects::getownerteam() != "neutral" && isdefined(var_02.capturetime)) {
+		if(var_02 scripts\mp\gameobjects::getownerteam() != "neutral" && isdefined(var_02.capturetime)) {
 			var_00[var_00.size] = var_02;
 		}
 	}
@@ -514,7 +514,7 @@ getowneddomflags() {
 getteamflagcount(param_00) {
 	var_01 = 0;
 	for(var_02 = 0;var_02 < level.magicbullet.size;var_02++) {
-		if(level.domflags[var_02] scripts\mp\_gameobjects::getownerteam() == param_00) {
+		if(level.domflags[var_02] scripts\mp\gameobjects::getownerteam() == param_00) {
 			var_01++;
 		}
 	}
@@ -523,7 +523,7 @@ getteamflagcount(param_00) {
 }
 
 getflagteam() {
-	return self.useobj scripts\mp\_gameobjects::getownerteam();
+	return self.useobj scripts\mp\gameobjects::getownerteam();
 }
 
 flagsetup() {
@@ -566,13 +566,13 @@ flagsetup() {
 }
 
 getnearestflagpoint(param_00) {
-	var_01 = scripts\mp\_spawnlogic::ispathdataavailable();
+	var_01 = scripts\mp\spawnlogic::ispathdataavailable();
 	var_02 = undefined;
 	var_03 = undefined;
 	foreach(var_05 in level.domflags) {
 		var_06 = undefined;
 		if(var_01) {
-			var_06 = function_00C0(param_00.origin,var_05.levelflag.origin,999999);
+			var_06 = getpathdist(param_00.origin,var_05.levelflag.origin,999999);
 		}
 
 		if(!isdefined(var_06) || var_06 == -1) {
@@ -602,15 +602,15 @@ onspawnplayer() {}
 
 giveflagcapturexp(param_00) {
 	level endon("game_ended");
-	var_01 = scripts\mp\_gameobjects::getearliestclaimplayer();
+	var_01 = scripts\mp\gameobjects::getearliestclaimplayer();
 	if(isdefined(var_01.triggerportableradarping)) {
 		var_01 = var_01.triggerportableradarping;
 	}
 
 	level.lastcaptime = gettime();
 	if(isplayer(var_01)) {
-		level thread scripts\mp\_utility::teamplayercardsplash("callout_securedposition" + self.label,var_01);
-		var_01 thread scripts\mp\_matchdata::loggameevent("capture",var_01.origin);
+		level thread scripts\mp\utility::teamplayercardsplash("callout_securedposition" + self.label,var_01);
+		var_01 thread scripts\mp\matchdata::loggameevent("capture",var_01.origin);
 	}
 
 	if(self.firstcapture == 1) {
@@ -633,25 +633,25 @@ giveflagcapturexp(param_00) {
 		}
 
 		var_05 thread updatecpm();
-		var_05 scripts\mp\_utility::incperstat("captures",1);
-		var_05 scripts\mp\_persistence::statsetchild("round","captures",var_05.pers["captures"]);
-		var_05 scripts\mp\_missions::processchallenge("ch_domcap");
-		var_05 scripts\mp\_utility::setextrascore0(var_05.pers["captures"]);
+		var_05 scripts\mp\utility::incperstat("captures",1);
+		var_05 scripts\mp\persistence::statsetchild("round","captures",var_05.pers["captures"]);
+		var_05 scripts\mp\missions::processchallenge("ch_domcap");
+		var_05 scripts\mp\utility::setextrascore0(var_05.pers["captures"]);
 		if(var_02) {
 			if(self.label == "_b") {
-				var_05 thread scripts\mp\_awards::givemidmatchaward("mode_dom_secure_b");
+				var_05 thread scripts\mp\awards::givemidmatchaward("mode_dom_secure_b");
 			}
 			else
 			{
-				var_05 thread scripts\mp\_awards::givemidmatchaward("mode_dom_secure_neutral");
+				var_05 thread scripts\mp\awards::givemidmatchaward("mode_dom_secure_neutral");
 			}
 		}
 		else if(level.flagneutralization) {
-			var_05 thread scripts\mp\_awards::givemidmatchaward("mode_dom_neutralized_cap");
+			var_05 thread scripts\mp\awards::givemidmatchaward("mode_dom_neutralized_cap");
 		}
 		else
 		{
-			var_05 thread scripts\mp\_awards::givemidmatchaward("mode_dom_secure");
+			var_05 thread scripts\mp\awards::givemidmatchaward("mode_dom_secure");
 		}
 
 		var_05 scripts\mp\gametypes\obj_dom::setcrankedtimerdomflag(var_05);
@@ -665,12 +665,12 @@ updatecpm() {
 		self.cpm = 0;
 	}
 
-	self.var_C21D++;
-	if(scripts\mp\_utility::getminutespassed() < 1) {
+	self.numcaps++;
+	if(scripts\mp\utility::getminutespassed() < 1) {
 		return;
 	}
 
-	self.cpm = self.numcaps / scripts\mp\_utility::getminutespassed();
+	self.cpm = self.numcaps / scripts\mp\utility::getminutespassed();
 }
 
 getcapxpscale() {
@@ -694,33 +694,33 @@ onplayerspawned(param_00) {
 	self endon("disconnect");
 	for(;;) {
 		self waittill("spawned");
-		scripts\mp\_utility::setextrascore0(0);
+		scripts\mp\utility::setextrascore0(0);
 		if(isdefined(self.pers["captures"])) {
-			scripts\mp\_utility::setextrascore0(self.pers["captures"]);
+			scripts\mp\utility::setextrascore0(self.pers["captures"]);
 		}
 
-		scripts\mp\_utility::setextrascore1(0);
+		scripts\mp\utility::setextrascore1(0);
 		if(isdefined(self.pers["defends"])) {
-			scripts\mp\_utility::setextrascore1(self.pers["defends"]);
+			scripts\mp\utility::setextrascore1(self.pers["defends"]);
 		}
 	}
 }
 
 onflagcapture(param_00,param_01,param_02,param_03,param_04,param_05) {
 	level.usestartspawns = 0;
-	var_06 = scripts\mp\_utility::getotherteam(param_03);
-	thread scripts\mp\_utility::printandsoundoneveryone(param_03,var_06,undefined,undefined,"mp_dom_flag_captured","mp_dom_flag_lost",param_02);
+	var_06 = scripts\mp\utility::getotherteam(param_03);
+	thread scripts\mp\utility::printandsoundoneveryone(param_03,var_06,undefined,undefined,"mp_dom_flag_captured","mp_dom_flag_lost",param_02);
 	if(getteamflagcount(param_03) < level.magicbullet.size) {
-		scripts\mp\_utility::statusdialog("secured" + self.label,param_03,1);
-		scripts\mp\_utility::statusdialog("enemy_has" + self.label,var_06,1);
+		scripts\mp\utility::statusdialog("secured" + self.label,param_03,1);
+		scripts\mp\utility::statusdialog("enemy_has" + self.label,var_06,1);
 	}
 	else
 	{
-		scripts\mp\_utility::statusdialog("secure_all",param_03);
-		scripts\mp\_utility::statusdialog("lost_all",var_06);
+		scripts\mp\utility::statusdialog("secure_all",param_03);
+		scripts\mp\utility::statusdialog("lost_all",var_06);
 		foreach(var_08 in level.players) {
 			if(var_08.team == param_03) {
-				var_08 scripts\mp\_missions::processchallenge("ch_domdom");
+				var_08 scripts\mp\missions::processchallenge("ch_domdom");
 			}
 		}
 	}
@@ -739,11 +739,11 @@ removedompoint() {
 			var_00 = getdvar("scr_devRemoveDomFlag","");
 			foreach(var_02 in level.domflags) {
 				if(isdefined(var_02.label) && var_02.label == var_00) {
-					var_02 scripts\mp\_gameobjects::allowuse("none");
+					var_02 scripts\mp\gameobjects::allowuse("none");
 					var_02.trigger = undefined;
 					var_02 notify("deleted");
 					var_02.visibleteam = "none";
-					var_02 scripts\mp\_gameobjects::setzonestatusicons(undefined);
+					var_02 scripts\mp\gameobjects::setzonestatusicons(undefined);
 					var_03 = [];
 					for(var_04 = 0;var_04 < level.magicbullet.size;var_04++) {
 						if(level.magicbullet[var_04].script_label != var_00) {
@@ -795,14 +795,14 @@ placedompoint() {
 			var_01.visuals[0].angles = var_01.angles;
 			level.magicbullet[level.magicbullet.size] = var_01;
 			level.objectives = level.magicbullet;
-			var_06 = scripts\mp\_gameobjects::createuseobject("neutral",var_01.trigger,var_01.visuals,(0,0,100));
-			var_06 scripts\mp\_gameobjects::allowuse("enemy");
-			var_06 scripts\mp\_gameobjects::setusetime(10);
-			var_06 scripts\mp\_gameobjects::setusetext(&"MP_SECURING_POSITION");
+			var_06 = scripts\mp\gameobjects::createuseobject("neutral",var_01.trigger,var_01.visuals,(0,0,100));
+			var_06 scripts\mp\gameobjects::allowuse("enemy");
+			var_06 scripts\mp\gameobjects::setusetime(10);
+			var_06 scripts\mp\gameobjects::setusetext(&"MP_SECURING_POSITION");
 			var_07 = var_00;
 			var_06.label = var_07;
-			var_06 scripts\mp\_gameobjects::setzonestatusicons(level.icondefend + var_07,level.iconneutral + var_07);
-			var_06 scripts\mp\_gameobjects::setvisibleteam("any");
+			var_06 scripts\mp\gameobjects::setzonestatusicons(level.icondefend + var_07,level.iconneutral + var_07);
+			var_06 scripts\mp\gameobjects::setvisibleteam("any");
 			var_06.onuse = ::scripts\mp\gametypes\obj_dom::dompoint_onuse;
 			var_06.onbeginuse = ::scripts\mp\gametypes\obj_dom::dompoint_onusebegin;
 			var_06.onuseupdate = ::scripts\mp\gametypes\obj_dom::dompoint_onuseupdate;

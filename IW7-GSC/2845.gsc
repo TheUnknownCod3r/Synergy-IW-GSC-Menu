@@ -1,12 +1,12 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2845.gsc
+ * Script: 2845.gsc
 ***************************************/
 
 init() {
-  level.func_7649["c4_light_blink"] = loadfx("vfx/core/equipment/light_c4_blink.vfx");
-  level.func_7649["frag_tel_radius"] = loadfx("vfx/iw7/core/equipment/frag/vfx_frag_tel_radius.vfx");
-  level.player scripts/sp/utility::func_65E0("no_grenade_block_gesture");
+  level.func_7649["c4_light_blink"] = loadfx("vfx\core\equipment\light_c4_blink.vfx");
+  level.func_7649["frag_tel_radius"] = loadfx("vfx\iw7\core\equipment\frag\vfx_frag_tel_radius.vfx");
+  level.player scripts\sp\utility::func_65E0("no_grenade_block_gesture");
   scripts\engine\utility::array_thread(level.players, ::watchgrenadeusage);
   scripts\engine\utility::array_thread(level.players, ::func_13B17);
   level.func_0149 = spawnstruct();
@@ -29,14 +29,14 @@ func_10409() {
 }
 
 func_10408() {
-  scripts/sp/utility::func_9196(1, 1, 1, "sonic");
+  scripts\sp\utility::func_9196(1, 1, 1, "sonic");
   wait 0.15;
-  scripts/sp/utility::func_9193("sonic");
+  scripts\sp\utility::func_9193("sonic");
 }
 
 func_13995() {
   self endon("death");
-  scripts/sp/utility::func_9187("sonic", 190, ::func_10409);
+  scripts\sp\utility::func_9187("sonic", 190, ::func_10409);
 
   for (;;) {
   var_00 = self getcurrentweapon();
@@ -46,7 +46,7 @@ func_13995() {
   continue;
   }
 
-  if (getweaponbasename(var_00) == "iw7_kbs" && scripts/sp/utility::func_9FFE(var_00)) {
+  if (getweaponbasename(var_00) == "iw7_kbs" && scripts\sp\utility::func_9FFE(var_00)) {
   var_01 = _getaiarray("axis");
 
   foreach (var_03 in var_01) {
@@ -98,7 +98,7 @@ begingrenadetracking() {
   thread func_0E25::func_615B(var_00);
   break;
   case "coverwall":
-  thread scripts/sp/coverwall::func_475F(var_00);
+  thread scripts\sp\coverwall::func_475F(var_00);
   break;
   case "frag_up1":
   case "frag":
@@ -143,8 +143,8 @@ func_DBDB(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07) {
   var_05 = scripts\engine\utility::ter_op(isdefined(var_05), var_05, 0.05);
   var_06 = scripts\engine\utility::ter_op(isdefined(var_06), var_06, 0.5);
   var_12 = distance2d(level.player.origin, var_00);
-  var_13 = scripts/sp/math::func_C097(var_08, var_10, var_12);
-  var_14 = scripts/sp/math::func_6A8E(var_01, var_11, var_13);
+  var_13 = scripts\sp\math::func_C097(var_08, var_10, var_12);
+  var_14 = scripts\sp\math::func_6A8E(var_01, var_11, var_13);
   var_14 = clamp(var_14, 0, 1);
 
   if (!isdefined(var_07)) {
@@ -157,8 +157,8 @@ func_DBDB(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07) {
   _setsaveddvar("r_mbradialoverridestrength", var_14);
   _setsaveddvar("r_mbradialoverrideradius", var_04);
   wait(var_05);
-  thread scripts/sp/utility::func_AB9A("r_mbradialoverridestrength", var_9["r_mbradialoverridestrength"], var_06);
-  thread scripts/sp/utility::func_AB9A("r_mbradialoverrideradius", var_9["r_mbradialoverrideradius"], var_06);
+  thread scripts\sp\utility::func_AB9A("r_mbradialoverridestrength", var_9["r_mbradialoverridestrength"], var_06);
+  thread scripts\sp\utility::func_AB9A("r_mbradialoverrideradius", var_9["r_mbradialoverrideradius"], var_06);
   scripts\engine\utility::flag_wait_or_timeout("frag_force_delete", var_06);
   _setsaveddvar("r_mbenable", var_9["r_mbenable"]);
   _setsaveddvar("r_mbRadialOverridePosition", var_9["r_mbRadialOverridePosition"]);
@@ -189,9 +189,9 @@ func_734F(var_00) {
 
   thread func_DBDB(var_04);
   earthquake(0.7, 0.8, var_04, 600);
-  thread scripts/sp/utility::func_54EF(var_04);
+  thread scripts\sp\utility::func_54EF(var_04);
 
-  if (level.player scripts/sp/utility::func_65DB("no_grenade_block_gesture") || level.player isthrowinggrenade() || level.player gold_teeth_pickup_debug())
+  if (level.player scripts\sp\utility::func_65DB("no_grenade_block_gesture") || level.player isthrowinggrenade() || level.player gold_teeth_pickup_debug())
   return;
 
   var_05 = 1;
@@ -397,9 +397,9 @@ func_7352(var_00, var_01) {
 }
 
 func_7353() {
-  scripts/sp/utility::func_9196(0, 0, 0);
+  scripts\sp\utility::func_9196(0, 0, 0);
   scripts\engine\utility::waittill_any("frag_outline_display_done", "death");
-  scripts/sp/utility::func_9193();
+  scripts\sp\utility::func_9193();
 }
 
 func_3465(var_00) {
@@ -447,8 +447,8 @@ func_1339D(var_00) {
   var_03 = vectortoangles(level.player.origin - var_00);
   var_04 = 40;
   var_05 = 5;
-  var_06 = scripts/sp/math::func_C097(0, var_02, var_01);
-  var_07 = scripts/sp/math::func_6A8E(var_05, var_04, var_06);
+  var_06 = scripts\sp\math::func_C097(0, var_02, var_01);
+  var_07 = scripts\sp\math::func_6A8E(var_05, var_04, var_06);
   level.player viewkick(int(var_07), var_00);
 }
 

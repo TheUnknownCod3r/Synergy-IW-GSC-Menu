@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2855.gsc
+ * Script: 2855.gsc
 ***************************************/
 
 func_5F84(var_00) {
@@ -15,7 +15,7 @@ func_5F84(var_00) {
   var_01 = squared(300);
 
   self.func_51E4 = undefined;
-  scripts/sp/utility::func_4145();
+  scripts\sp\utility::func_4145();
   func_F491("sprint_loop", "sprint_super");
 
   for (;;) {
@@ -27,20 +27,20 @@ func_5F84(var_00) {
   if (var_04 < 0) {
   if (var_05 > var_01) {
   if (!isdefined(self.demeanoroverride) || isdefined(self.demeanoroverride) && self.demeanoroverride == "sprint") {
-  scripts/sp/utility::func_4145();
+  scripts\sp\utility::func_4145();
 
   if (isdefined(self.func_51E4))
-  scripts/sp/utility::func_51E1(self.func_51E4);
+  scripts\sp\utility::func_51E1(self.func_51E4);
   }
   }
   else if (!isdefined(self.demeanoroverride) || isdefined(self.demeanoroverride) && self.demeanoroverride != "sprint") {
   self.func_51E4 = self.demeanoroverride;
-  scripts/sp/utility::func_51E1("sprint");
+  scripts\sp\utility::func_51E1("sprint");
   }
   }
   else if (!isdefined(self.demeanoroverride) || isdefined(self.demeanoroverride) && self.demeanoroverride != "sprint") {
   self.func_51E4 = self.demeanoroverride;
-  scripts/sp/utility::func_51E1("sprint");
+  scripts\sp\utility::func_51E1("sprint");
   }
 
   wait 0.05;
@@ -51,12 +51,12 @@ func_5557() {
   self notify("disable_dynamic_move");
 
   if (isdefined(self.func_51E4))
-  scripts/sp/utility::func_51E1(self.func_51E4);
+  scripts\sp\utility::func_51E1(self.func_51E4);
   else
-  scripts/sp/utility::func_4145();
+  scripts\sp\utility::func_4145();
 
   self.func_51E4 = undefined;
-  scripts/sp/utility::func_4169("sprint");
+  scripts\sp\utility::func_4169("sprint");
 }
 
 func_F491(var_00, var_01) {

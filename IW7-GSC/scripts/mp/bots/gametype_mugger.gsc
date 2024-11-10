@@ -1,8 +1,8 @@
-/*******************************************************
+/***********************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\bots\gametype_mugger.gsc
-*******************************************************/
+ * Script: scripts\mp\bots\gametype_mugger.gsc
+***********************************************/
 
 main() {
 	level.bot_tag_obj_radius = 200;
@@ -116,7 +116,7 @@ bot_find_closest_tag() {
 		var_02 = 1000000;
 		var_03 = scripts\engine\utility::array_combine(level.dogtags,level.mugger_extra_tags);
 		foreach(var_05 in var_03) {
-			if(var_05 scripts\mp\_gameobjects::caninteractwith(self.team)) {
+			if(var_05 scripts\mp\gameobjects::caninteractwith(self.team)) {
 				var_06 = distancesquared(self.origin,var_05.curorigin);
 				if(!isdefined(var_01) || var_06 < var_02) {
 					if((self botgetdifficultysetting("strategyLevel") > 0 && var_06 < 122500) || var_06 < 1000000 && scripts\mp\bots\gametype_conf::bot_is_tag_visible(var_05,var_00,self botgetfovdot())) {
@@ -136,7 +136,7 @@ bot_find_visible_tags_mugger(param_00,param_01) {
 	if(isdefined(param_00)) {
 		var_03 = scripts\engine\utility::array_combine(level.dogtags,level.mugger_extra_tags);
 		foreach(var_05 in var_03) {
-			if(var_05 scripts\mp\_gameobjects::caninteractwith(self.team)) {
+			if(var_05 scripts\mp\gameobjects::caninteractwith(self.team)) {
 				if(isplayer(self) || distancesquared(self.origin,var_05.curorigin) < 1000000) {
 					if(scripts\mp\bots\gametype_conf::bot_is_tag_visible(var_05,param_00,param_01)) {
 						var_06 = spawnstruct();
@@ -250,7 +250,7 @@ notify_when_tag_picked_up(param_00,param_01) {
 	self endon("disconnect");
 	level endon("game_ended");
 	self endon("tag_watch_stop");
-	while(param_00 scripts\mp\_gameobjects::caninteractwith(self.team)) {
+	while(param_00 scripts\mp\gameobjects::caninteractwith(self.team)) {
 		wait(0.05);
 	}
 

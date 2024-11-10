@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3404.gsc
-****************************/
+ * Script: 3404.gsc
+************************/
 
 func_97B1() {
 	scripts\engine\utility::flag_init("doors_initialized");

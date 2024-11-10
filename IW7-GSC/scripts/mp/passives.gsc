@@ -1,8 +1,8 @@
-/*******************************************
+/***********************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\passives.gsc
-*******************************************/
+ * Script: scripts\mp\passives.gsc
+***********************************/
 
 init() {
 	level.passivemap = [];
@@ -16,27 +16,27 @@ passiveparsetable() {
 
 	var_00 = 0;
 	for(;;) {
-		var_01 = tablelookupbyrow("mp/passivetable.csv",var_00,0);
+		var_01 = tablelookupbyrow("mp\passivetable.csv",var_00,0);
 		if(var_01 == "") {
 			break;
 		}
 
-		var_02 = tablelookupbyrow("mp/passivetable.csv",var_00,1);
-		var_03 = tablelookupbyrow("mp/passivetable.csv",var_00,12);
-		var_04 = tablelookupbyrow("mp/passivetable.csv",var_00,13);
-		var_05 = tablelookupbyrow("mp/passivetable.csv",var_00,14);
+		var_02 = tablelookupbyrow("mp\passivetable.csv",var_00,1);
+		var_03 = tablelookupbyrow("mp\passivetable.csv",var_00,12);
+		var_04 = tablelookupbyrow("mp\passivetable.csv",var_00,13);
+		var_05 = tablelookupbyrow("mp\passivetable.csv",var_00,14);
 		var_06 = spawnstruct();
 		var_06.name = var_02;
-		var_06.var_13CDE = scripts\engine\utility::ter_op(tablelookupbyrow("mp/passivetable.csv",var_00,8) == "",0,1);
-		var_06.killstreaktype = scripts\engine\utility::ter_op(tablelookupbyrow("mp/passivetable.csv",var_00,9) == "",0,1);
-		var_06.var_ABCA = scripts\engine\utility::ter_op(tablelookupbyrow("mp/passivetable.csv",var_00,10) == "",0,1);
-		var_06.var_113D1 = scripts\engine\utility::ter_op(tablelookupbyrow("mp/passivetable.csv",var_00,11) == "",0,1);
+		var_06.var_13CDE = scripts\engine\utility::ter_op(tablelookupbyrow("mp\passivetable.csv",var_00,8) == "",0,1);
+		var_06.killstreaktype = scripts\engine\utility::ter_op(tablelookupbyrow("mp\passivetable.csv",var_00,9) == "",0,1);
+		var_06.var_ABCA = scripts\engine\utility::ter_op(tablelookupbyrow("mp\passivetable.csv",var_00,10) == "",0,1);
+		var_06.var_113D1 = scripts\engine\utility::ter_op(tablelookupbyrow("mp\passivetable.csv",var_00,11) == "",0,1);
 		if(var_03 != "") {
 			var_06.attachmentroll = var_03;
 		}
 
 		if(getdvar("ui_gametype") == "zombie") {
-			var_07 = tablelookupbyrow("mp/passivetable.csv",var_00,22);
+			var_07 = tablelookupbyrow("mp\passivetable.csv",var_00,22);
 			if(var_07 != "") {
 				var_06.attachmentroll = var_07;
 			}

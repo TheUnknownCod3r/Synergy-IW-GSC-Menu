@@ -1,8 +1,8 @@
-/**********************************************
+/**************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\cp_createfx.gsc
-**********************************************/
+ * Script: scripts\cp\cp_createfx.gsc
+**************************************/
 
 createfx() {
 	level.func_position_player = ::scripts\engine\utility::void;

@@ -1,19 +1,19 @@
-/***********************************************
+/***************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\perks\_perks.gsc
-***********************************************/
+ * Script: scripts\mp\perks\_perks.gsc
+***************************************/
 
 init() {
 	level thread scripts\mp\perks\_weaponpassives::weaponpassivesinit();
 	level.var_CA51 = [];
 	level.var_108D3["enemy"] = "tactical_insertion_marker_wm_dropmodel";
 	level.var_108D3["friendly"] = "tactical_insertion_marker_wm_dropmodel";
-	level.var_108D2["enemy"] = loadfx("vfx/core/mp/core/vfx_flare_glow_en.vfx");
-	level.var_108D2["friendly"] = loadfx("vfx/core/mp/core/vfx_flare_glow_fr.vfx");
-	level.var_10888 = loadfx("vfx/props/barrelexp.vfx");
-	level._effect["ricochet"] = loadfx("vfx/core/impacts/large_metalhit_1");
-	level._effect["tracker_cloak_tag"] = loadfx("vfx/iw7/_requests/mp/vfx_tesla_shock_sparks_tracker.vfx");
+	level.var_108D2["enemy"] = loadfx("vfx\core\mp\core\vfx_flare_glow_en.vfx");
+	level.var_108D2["friendly"] = loadfx("vfx\core\mp\core\vfx_flare_glow_fr.vfx");
+	level.var_10888 = loadfx("vfx\props\barrelexp.vfx");
+	level._effect["ricochet"] = loadfx("vfx\core\impacts\large_metalhit_1");
+	level._effect["tracker_cloak_tag"] = loadfx("vfx\iw7\_requests\mp\vfx_tesla_shock_sparks_tracker.vfx");
 	level.menuperks = [];
 	level.scriptperks = [];
 	level.perksetfuncs = [];
@@ -178,10 +178,10 @@ init() {
 	level.scriptperks["ammo_box_mp"] = 1;
 	level.scriptperks["blackhat_mp"] = 1;
 	level.scriptperks["flare_mp"] = 1;
-	var_00 = scripts\mp\_passives::_meth_8239();
+	var_00 = scripts\mp\passives::_meth_8239();
 	foreach(var_02 in var_00) {
 		level.scriptperks[var_02] = 1;
-		var_03 = scripts\mp\_passives::getpassivemessage(var_02);
+		var_03 = scripts\mp\passives::getpassivemessage(var_02);
 		if(isdefined(var_03)) {
 			level.extraperkmap[var_02] = [var_03];
 		}
@@ -521,13 +521,13 @@ menurigperkparsetable() {
 
 	var_00 = 0;
 	for(;;) {
-		var_01 = tablelookupbyrow("mp/menuRigPerks.csv",var_00,0);
+		var_01 = tablelookupbyrow("mp\menuRigPerks.csv",var_00,0);
 		if(var_01 == "") {
 			break;
 		}
 
-		var_02 = tablelookupbyrow("mp/menuRigPerks.csv",var_00,1);
-		var_03 = tablelookupbyrow("mp/menuRigPerks.csv",var_00,2);
+		var_02 = tablelookupbyrow("mp\menuRigPerks.csv",var_00,1);
+		var_03 = tablelookupbyrow("mp\menuRigPerks.csv",var_00,2);
 		var_04 = spawnstruct();
 		var_04.id = var_01;
 		var_04.ref = var_03;
@@ -547,13 +547,13 @@ menuperkparsetable() {
 
 	var_00 = 0;
 	for(;;) {
-		var_01 = tablelookupbyrow("mp/menuPerks.csv",var_00,0);
+		var_01 = tablelookupbyrow("mp\menuPerks.csv",var_00,0);
 		if(var_01 == "") {
 			break;
 		}
 
-		var_02 = tablelookupbyrow("mp/menuPerks.csv",var_00,1);
-		var_03 = tablelookupbyrow("mp/menuPerks.csv",var_00,2);
+		var_02 = tablelookupbyrow("mp\menuPerks.csv",var_00,1);
+		var_03 = tablelookupbyrow("mp\menuPerks.csv",var_00,2);
 		var_04 = spawnstruct();
 		var_04.name = var_03;
 		var_04.ref = var_03;
@@ -574,12 +574,12 @@ func_98B2() {
 	level.var_CA5E = [];
 	var_00 = 0;
 	for(;;) {
-		var_01 = tablelookupbyrow("mp/perkTable.csv",var_00,0);
+		var_01 = tablelookupbyrow("mp\perkTable.csv",var_00,0);
 		if(var_01 == "") {
 			break;
 		}
 
-		var_02 = tablelookupbyrow("mp/perkTable.csv",var_00,1);
+		var_02 = tablelookupbyrow("mp\perkTable.csv",var_00,1);
 		var_03 = spawnstruct();
 		var_03.ref = var_02;
 		var_03.id = int(var_01);
@@ -595,7 +595,7 @@ func_98B2() {
 func_7DE8() {
 	var_00 = [];
 	foreach(var_02 in level.menuperks) {
-		if(scripts\mp\_utility::_hasperk(var_02.name)) {
+		if(scripts\mp\utility::_hasperk(var_02.name)) {
 			continue;
 		}
 
@@ -615,7 +615,7 @@ _meth_805C(param_00) {
 }
 
 func_13144(param_00) {
-	if(!scripts\mp\_utility::perksenabled()) {
+	if(!scripts\mp\utility::perksenabled()) {
 		param_00 = "specialty_null";
 	}
 	else
@@ -703,25 +703,25 @@ func_98B0() {
 	level.var_A4A6 = 0.08;
 	level.armorpiercingmod = 1.5;
 	level.armorpiercingmodks = 1.25;
-	level.var_DE8A = scripts\mp\_utility::getintproperty("perk_fastRegenWaitMS",800) / 1000;
-	level.var_DE89 = scripts\mp\_utility::getintproperty("perk_fastRegenRate",2);
-	level.var_3245 = scripts\mp\_utility::getintproperty("perk_bulletDamage",40) / 100;
-	level.var_69FE = scripts\mp\_utility::getintproperty("perk_explosiveDamage",40) / 100;
-	level.var_2B68 = scripts\mp\_utility::getintproperty("perk_blastShieldScale",65) / 100;
-	level.var_2B67 = scripts\mp\_utility::getintproperty("perk_blastShieldClampHP",80);
-	level.var_1177E = scripts\mp\_utility::getintproperty("weap_thermoDebuffMod",185) / 100;
-	level.var_E559 = scripts\mp\_utility::getintproperty("perk_riotShield",100) / 100;
-	level.var_21A3 = scripts\mp\_utility::getintproperty("perk_armorVest",75) / 100;
-	level.var_8C74 = scripts\mp\_utility::getintproperty("perk_headgear",55) / 100;
-	level._meth_848A = scripts\mp\_utility::getintproperty("perk_gpsjammer_graceperiods",4);
-	level.var_B7CB = scripts\mp\_utility::getintproperty("perk_gpsjammer_min_speed",100);
-	level.var_B75C = scripts\mp\_utility::getintproperty("perk_gpsjammer_min_distance",10);
-	level.timeperiod = scripts\mp\_utility::getintproperty("perk_gpsjammer_time_period",200) / 1000;
+	level.var_DE8A = scripts\mp\utility::getintproperty("perk_fastRegenWaitMS",800) / 1000;
+	level.var_DE89 = scripts\mp\utility::getintproperty("perk_fastRegenRate",2);
+	level.var_3245 = scripts\mp\utility::getintproperty("perk_bulletDamage",40) / 100;
+	level.var_69FE = scripts\mp\utility::getintproperty("perk_explosiveDamage",40) / 100;
+	level.var_2B68 = scripts\mp\utility::getintproperty("perk_blastShieldScale",65) / 100;
+	level.var_2B67 = scripts\mp\utility::getintproperty("perk_blastShieldClampHP",80);
+	level.var_1177E = scripts\mp\utility::getintproperty("weap_thermoDebuffMod",185) / 100;
+	level.var_E559 = scripts\mp\utility::getintproperty("perk_riotShield",100) / 100;
+	level.var_21A3 = scripts\mp\utility::getintproperty("perk_armorVest",75) / 100;
+	level.var_8C74 = scripts\mp\utility::getintproperty("perk_headgear",55) / 100;
+	level._meth_848A = scripts\mp\utility::getintproperty("perk_gpsjammer_graceperiods",4);
+	level.var_B7CB = scripts\mp\utility::getintproperty("perk_gpsjammer_min_speed",100);
+	level.var_B75C = scripts\mp\utility::getintproperty("perk_gpsjammer_min_distance",10);
+	level.timeperiod = scripts\mp\utility::getintproperty("perk_gpsjammer_time_period",200) / 1000;
 	level.minspeedsq = level.var_B7CB * level.var_B7CB;
 	level.var_B75E = level.var_B75C * level.var_B75C;
 	if(isdefined(level.hardcoremode) && level.hardcoremode) {
-		level.var_2B68 = scripts\mp\_utility::getintproperty("perk_blastShieldScale_HC",20) / 100;
-		level.var_2B67 = scripts\mp\_utility::getintproperty("perk_blastShieldClampHP_HC",20);
+		level.var_2B68 = scripts\mp\utility::getintproperty("perk_blastShieldScale_HC",20) / 100;
+		level.var_2B67 = scripts\mp\utility::getintproperty("perk_blastShieldClampHP_HC",20);
 	}
 
 	if(level.tactical) {
@@ -737,7 +737,7 @@ giveperks(param_00,param_01) {
 			var_03 = func_13144(var_03);
 		}
 
-		scripts\mp\_utility::giveperk(var_03);
+		scripts\mp\utility::giveperk(var_03);
 	}
 }
 
@@ -838,42 +838,42 @@ giveperksafterspawn() {
 	self endon("death");
 	self endon("disconnect");
 	self endon("giveLoadout_start");
-	scripts\mp\_utility::giveperk("specialty_blindeye");
-	scripts\mp\_utility::giveperk("specialty_gpsjammer");
-	scripts\mp\_utility::giveperk("specialty_noscopeoutline");
+	scripts\mp\utility::giveperk("specialty_blindeye");
+	scripts\mp\utility::giveperk("specialty_gpsjammer");
+	scripts\mp\utility::giveperk("specialty_noscopeoutline");
 	while(self.avoidkillstreakonspawntimer > 0) {
 		self.avoidkillstreakonspawntimer = self.avoidkillstreakonspawntimer - 0.05;
 		wait(0.05);
 	}
 
-	if(scripts\mp\_utility::func_9EF0(self) && isdefined(self.playerproxyagent) && isalive(self.playerproxyagent)) {
+	if(scripts\mp\utility::func_9EF0(self) && isdefined(self.playerproxyagent) && isalive(self.playerproxyagent)) {
 		return;
 	}
 
-	scripts\mp\_utility::removeperk("specialty_blindeye");
-	scripts\mp\_utility::removeperk("specialty_gpsjammer");
-	scripts\mp\_utility::removeperk("specialty_noscopeoutline");
+	scripts\mp\utility::removeperk("specialty_blindeye");
+	scripts\mp\utility::removeperk("specialty_gpsjammer");
+	scripts\mp\utility::removeperk("specialty_noscopeoutline");
 	self notify("removed_spawn_perks");
 }
 
 updateactiveperks(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07) {
 	var_08 = isdefined(param_00) && isplayer(param_00);
-	var_09 = scripts\mp\_utility::getweaponrootname(param_05);
+	var_09 = scripts\mp\utility::getweaponrootname(param_05);
 	var_0A = isdefined(var_09) && var_09 == "iw7_axe";
 	var_0B = isdefined(var_09) && var_09 == "iw7_tacburst" && param_01 _meth_8519(param_05);
 	var_0C = var_0A && isdefined(param_00) && isdefined(param_00.classname) && param_00.classname == "grenade";
 	var_0D = isdefined(param_01) && isplayer(param_01) && param_01 != param_02;
 	if(var_0D && var_08 || var_0C || var_0B) {
 		thread scripts\mp\perks\_weaponpassives::func_12F61(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07);
-		if(param_01 scripts\mp\_utility::_hasperk("specialty_triggerhappy")) {
+		if(param_01 scripts\mp\utility::_hasperk("specialty_triggerhappy")) {
 			param_01 thread scripts\mp\perks\_perkfunctions::settriggerhappyinternal();
 		}
 
-		if(param_01 scripts\mp\_utility::_hasperk("specialty_boom")) {
+		if(param_01 scripts\mp\utility::_hasperk("specialty_boom")) {
 			param_02 thread scripts\mp\perks\_perkfunctions::setboominternal(param_01);
 		}
 
-		if(param_01 scripts\mp\_utility::_hasperk("specialty_deadeye")) {
+		if(param_01 scripts\mp\utility::_hasperk("specialty_deadeye")) {
 			param_01.var_4DF0++;
 		}
 

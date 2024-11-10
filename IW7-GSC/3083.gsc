@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3083.gsc
-****************************/
+ * Script: 3083.gsc
+************************/
 
 func_98DD() {
 	if(self.team == level.player.team) {
@@ -62,7 +62,7 @@ func_E5EE() {
 	}
 
 	var_01 = strtok(var_00,"_")[0];
-	while(!self.asm.var_11B08.var_30E6 && !scripts/asm/asm_bb::bb_isselfdestruct()) {
+	while(!self.asm.var_11B08.var_30E6 && !scripts\asm\asm_bb::bb_isselfdestruct()) {
 		while(isdefined(self.var_30E7) && self.var_30E7) {
 			wait(0.05);
 			if(!isalive(self)) {

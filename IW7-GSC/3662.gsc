@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3662.gsc
-****************************/
+ * Script: 3662.gsc
+************************/
 
 func_96F1() {
 	level.player.var_3D4C = [];
@@ -138,8 +138,8 @@ func_D381() {
 	while(isalive(level.player) && scripts\anim\battlechatter::func_29CA() && isdefined(level.player.var_28CF) && level.player.var_28CF) {
 		if(scripts\engine\utility::player_is_in_jackal()) {
 			if(isdefined(level.player.var_58B7)) {
-				if(isdefined(level.player.var_58B7._blackboard) && isdefined(level.player.var_58B7._blackboard.var_9DE4)) {
-					if(level.player.var_58B7._blackboard.var_9DE4) {
+				if(isdefined(level.player.var_58B7.var_1198) && isdefined(level.player.var_58B7.var_1198.var_9DE4)) {
+					if(level.player.var_58B7.var_1198.var_9DE4) {
 						wait(randomfloatrange(0.25,0.5));
 						if(isdefined(level.player.var_58B7)) {
 							level.player scripts\anim\battlechatter_ai::func_181C("movement","generic",level.player.var_58B7,0.9);

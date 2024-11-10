@@ -1,8 +1,8 @@
-/********************************************************************
+/************************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\maps\cp_final\cp_final_rhino_boss.gsc
-********************************************************************/
+ * Script: scripts\cp\maps\cp_final\cp_final_rhino_boss.gsc
+************************************************************/
 
 rhino_boss_init() {
 	if(getdvarint("mammoth_fight") == 1 || 0 || 0) {
@@ -212,33 +212,33 @@ setupplayerloadouts() {
 		var_05 takeweapon(var_05 scripts\cp\utility::getvalidtakeweapon());
 		var_08 = scripts\cp\utility::getrawbaseweaponname(var_01[var_06]);
 		if(isdefined(var_05.weapon_build_models[var_08])) {
-			scripts/cp/zombies/coop_wall_buys::givevalidweapon(var_05,var_05.weapon_build_models[var_08]);
+			scripts\cp\zombies\coop_wall_buys::givevalidweapon(var_05,var_05.weapon_build_models[var_08]);
 		}
 		else
 		{
-			scripts/cp/zombies/coop_wall_buys::givevalidweapon(var_05,var_01[var_06]);
+			scripts\cp\zombies\coop_wall_buys::givevalidweapon(var_05,var_01[var_06]);
 		}
 
 		var_09 = scripts\cp\utility::getrawbaseweaponname(var_00[var_07]);
 		if(isdefined(var_05.weapon_build_models[var_09])) {
-			scripts/cp/zombies/coop_wall_buys::givevalidweapon(var_05,var_05.weapon_build_models[var_09]);
+			scripts\cp\zombies\coop_wall_buys::givevalidweapon(var_05,var_05.weapon_build_models[var_09]);
 		}
 		else
 		{
-			scripts/cp/zombies/coop_wall_buys::givevalidweapon(var_05,var_01[var_06]);
+			scripts\cp\zombies\coop_wall_buys::givevalidweapon(var_05,var_01[var_06]);
 		}
 
 		var_05.total_currency_earned = min(10000,var_05 scripts\cp\cp_persistence::get_player_max_currency());
 		var_05 scripts\cp\cp_persistence::set_player_currency(10000);
 		if(issubstr(var_08,"_g18_")) {
 			foreach(var_0B in var_03) {
-				var_05 thread scripts/cp/zombies/zombies_perk_machines::give_zombies_perk_immediate(var_0B,1);
+				var_05 thread scripts\cp\zombies\zombies_perk_machines::give_zombies_perk_immediate(var_0B,1);
 			}
 		}
 		else
 		{
 			foreach(var_0B in var_02) {
-				var_05 thread scripts/cp/zombies/zombies_perk_machines::give_zombies_perk_immediate(var_0B,1);
+				var_05 thread scripts\cp\zombies\zombies_perk_machines::give_zombies_perk_immediate(var_0B,1);
 			}
 		}
 
@@ -247,7 +247,7 @@ setupplayerloadouts() {
 	}
 
 	if(isdefined(level.pap_max) && level.pap_max < 3) {
-		level.var_C8A4++;
+		level.pap_max++;
 	}
 
 	level [[level.upgrade_weapons_func]]();
@@ -580,7 +580,7 @@ init_cargo_doors() {
 }
 
 func_95B5() {
-	self.nav_id = function_027B(self);
+	self.nav_id = createnavobstaclebyent(self);
 }
 
 break_door(param_00) {
@@ -809,33 +809,33 @@ rhino_audio_monitor() {
 	level endon("game_ended");
 	self endon("death");
 	self.voprefix = "queen_";
-	thread scripts/cp/zombies/zombies_vo::play_zombie_death_vo(self.voprefix);
+	thread scripts\cp\zombies\zombies_vo::play_zombie_death_vo(self.voprefix);
 	self.playing_stumble = 0;
 	for(;;) {
 		var_00 = scripts\engine\utility::waittill_any_timeout_1(3,"attack_hit_big","attack_hit_small","taunt","charge_start","charge_to_stop");
 		switch(var_00) {
 			case "attack_hit_big":
-				level thread scripts/cp/zombies/zombies_vo::play_zombie_vo(self,"attack_pounding_third",0);
+				level thread scripts\cp\zombies\zombies_vo::play_zombie_vo(self,"attack_pounding_third",0);
 				break;
 	
 			case "attack_hit_small":
 				var_01 = scripts\engine\utility::random(["attack_pounding","attack_pounding_second"]);
-				level thread scripts/cp/zombies/zombies_vo::play_zombie_vo(self,var_01,0);
+				level thread scripts\cp\zombies\zombies_vo::play_zombie_vo(self,var_01,0);
 				break;
 	
 			case "taunt":
 				var_01 = scripts\engine\utility::random(["posture_1","posture_2"]);
-				level thread scripts/cp/zombies/zombies_vo::play_zombie_vo(self,var_01,0);
+				level thread scripts\cp\zombies\zombies_vo::play_zombie_vo(self,var_01,0);
 				break;
 	
 			case "charge_start":
 				var_01 = scripts\engine\utility::random(["charge_start","charge_start_v2","charge_start_v3"]);
-				level thread scripts/cp/zombies/zombies_vo::play_zombie_vo(self,var_01,0);
+				level thread scripts\cp\zombies\zombies_vo::play_zombie_vo(self,var_01,0);
 				break;
 	
 			case "charge_to_stop":
 				var_01 = scripts\engine\utility::random(["charge_to_stop"]);
-				level thread scripts/cp/zombies/zombies_vo::play_zombie_vo(self,var_01,0);
+				level thread scripts\cp\zombies\zombies_vo::play_zombie_vo(self,var_01,0);
 				break;
 		}
 	}
@@ -892,7 +892,7 @@ run_tracking_laser() {
 		var_06 = vectornormalize(var_06);
 		var_07 = var_04.origin + var_06 * 2000;
 		var_08 = scripts\engine\utility::array_add(level.players,level.portal_gun);
-		var_03 = function_0287(var_04.origin,var_07,var_02,var_08,0,"physicsquery_closest");
+		var_03 = physics_raycast(var_04.origin,var_07,var_02,var_08,0,"physicsquery_closest");
 		if(isdefined(var_03) && isarray(var_03) && var_03.size > 0) {
 			var_09 = var_03[0]["position"];
 			level.portal_gun.laser_node_end.origin = var_09;
@@ -905,7 +905,7 @@ run_tracking_laser() {
 play_laser_fx(param_00) {
 	wait(1);
 	foreach(var_02 in level.players) {
-		level.target_laser_fx = function_02DF(level._effect["target_laser"],level.portal_gun.laser_node_start,"tag_origin",level.portal_gun.laser_node_end,"tag_origin",var_02);
+		level.target_laser_fx = playfxontagsbetweenclients(level._effect["target_laser"],level.portal_gun.laser_node_start,"tag_origin",level.portal_gun.laser_node_end,"tag_origin",var_02);
 	}
 }
 
@@ -915,7 +915,7 @@ make_laser_angry() {
 	}
 
 	foreach(var_01 in level.players) {
-		level.target_laser_fx = function_02DF(level._effect["target_laser_angry"],level.portal_gun.laser_node_start,"tag_origin",level.portal_gun.laser_node_end,"tag_origin",var_01);
+		level.target_laser_fx = playfxontagsbetweenclients(level._effect["target_laser_angry"],level.portal_gun.laser_node_start,"tag_origin",level.portal_gun.laser_node_end,"tag_origin",var_01);
 	}
 }
 
@@ -995,7 +995,7 @@ func_6D02(param_00) {
 			var_06.angles = (0,0,0);
 		}
 
-		function_02E0(level._effect[var_01],var_06.origin,var_06.angles,var_09);
+		playfxbetweenpoints(level._effect[var_01],var_06.origin,var_06.angles,var_09);
 	}
 
 	playsoundatpos(level.portal_gun.origin,"zmb_railgun_fire");
@@ -1887,10 +1887,10 @@ rhino_fight_over() {
 
 	level.movie_playing = "cp_zmb_screen_640";
 	preloadcinematicforall(level.movie_playing);
-	function_030E(level.movie_playing);
+	playcinematicforalllooping(level.movie_playing);
 	foreach(var_05 in level.players) {
 		scripts\cp\cp_vo::func_12BE3([var_05]);
-		var_05 scripts/cp/zombies/achievement::update_achievement("THE_END",1);
+		var_05 scripts\cp\zombies\achievement::update_achievement("THE_END",1);
 	}
 
 	level.pause_nag_vo = 0;
@@ -2145,7 +2145,7 @@ createperkboxes(param_00) {
 }
 
 perkbox_usefunc(param_00,param_01) {
-	param_01 scripts/cp/zombies/zombies_perk_machines::give_zombies_perk(param_00.perk,0);
+	param_01 scripts\cp\zombies\zombies_perk_machines::give_zombies_perk(param_00.perk,0);
 	scripts\cp\cp_interaction::remove_from_current_interaction_list_for_player(param_00,param_01);
 	param_00.model hidefromplayer(param_01);
 	param_01 playlocalsound("part_pickup");

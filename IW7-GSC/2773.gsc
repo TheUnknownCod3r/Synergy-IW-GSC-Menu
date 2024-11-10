@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2773.gsc
+ * Script: 2773.gsc
 ***************************************/
 
 init_agent(var_00) {

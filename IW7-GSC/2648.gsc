@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2648.gsc
+ * Script: 2648.gsc
 ***************************************/
 
 mt_getprogress(var_00) {
@@ -28,11 +28,11 @@ mt_setstate(var_00, var_01) {
 }
 
 mt_gettarget(var_00, var_01) {
-  return int(tablelookup("cp/allMeritsTable.csv", 0, var_00, 10 + var_01 * 3));
+  return int(tablelookup("cp\allMeritsTable.csv", 0, var_00, 10 + var_01 * 3));
 }
 
 playpainoverlay(var_00, var_01, var_02) {
-  if (scripts/cp/utility::isusingremote() && scripts\engine\utility::is_true(self.vanguard_num))
+  if (scripts\cp\utility::isusingremote() && scripts\engine\utility::is_true(self.vanguard_num))
   return;
 
   var_03 = get_damage_direction(var_02);
@@ -85,14 +85,14 @@ is_spitter_gas(var_00) {
 }
 
 is_elite_attack(var_00) {
-  if (!isdefined(var_00) || !var_00 scripts/cp/cp_agent_utils::is_alien_agent())
+  if (!isdefined(var_00) || !var_00 scripts\cp\cp_agent_utils::is_alien_agent())
   return 0;
 
-  return scripts/cp/cp_agent_utils::get_agent_type(var_00) == "elite";
+  return scripts\cp\cp_agent_utils::get_agent_type(var_00) == "elite";
 }
 
 play_spitter_pain_overlay(var_00) {
-  if (!scripts/cp/utility::has_tag(self.model, "tag_eye"))
+  if (!scripts\cp\utility::has_tag(self.model, "tag_eye"))
   return;
 
   if (var_00 == "left")
@@ -111,7 +111,7 @@ play_basic_pain_overlay(var_00) {
   if (!isdefined(self.model) || self.model == "")
   return;
 
-  if (!scripts/cp/utility::has_tag(self.model, "tag_eye"))
+  if (!scripts\cp\utility::has_tag(self.model, "tag_eye"))
   return;
 
   if (var_00 == "left")
@@ -150,7 +150,7 @@ zom_player_health_overlay_watcher() {
   }
 
   if (var_00 && var_01) {
-  if (!scripts/cp/cp_laststand::player_in_laststand(self))
+  if (!scripts\cp\cp_laststand::player_in_laststand(self))
   self setclientomnvarbit("player_damaged", 2, 1);
 
   var_01 = 0;

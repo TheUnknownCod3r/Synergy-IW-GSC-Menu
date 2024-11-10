@@ -1,27 +1,27 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3125.gsc
-****************************/
+ * Script: 3125.gsc
+************************/
 
 func_D4D9(param_00,param_01,param_02,param_03) {
-	var_04 = scripts/asm/asm_bb::func_2923();
-	scripts/asm/asm_mp::func_2364(param_00,param_01,param_02);
+	var_04 = scripts\asm\asm_bb::func_2923();
+	scripts\asm\asm_mp::func_2364(param_00,param_01,param_02);
 }
 
 func_B644(param_00,param_01,param_02) {
-	var_03 = scripts/asm/asm_bb::func_2924();
+	var_03 = scripts\asm\asm_bb::func_2924();
 	return distancesquared(self.origin,var_03) <= param_02 * param_02;
 }
 
 func_B643(param_00,param_01,param_02) {
 	var_03 = 50;
-	var_04 = scripts/asm/asm_bb::func_2924();
+	var_04 = scripts\asm\asm_bb::func_2924();
 	return distancesquared(self.origin,var_04) <= var_03;
 }
 
 func_D4D7(param_00,param_01,param_02,param_03) {
-	var_04 = scripts/asm/asm_bb::bb_getmeleetarget();
+	var_04 = scripts\asm\asm_bb::bb_getmeleetarget();
 	if(!isdefined(var_04)) {
 		self orientmode("face angle abs",self.angles);
 	}
@@ -39,7 +39,7 @@ func_D4D7(param_00,param_01,param_02,param_03) {
 	self setanimstate(param_01);
 	self endon(param_01 + "_finished");
 	donotetracks_vsplayer(param_00,param_01);
-	scripts/asm/asm::asm_fireevent(param_01,"end");
+	scripts\asm\asm::asm_fireevent(param_01,"end");
 }
 
 donotetracks_vsplayer(param_00,param_01) {
@@ -55,7 +55,7 @@ donotetracks_vsplayer(param_00,param_01) {
 					break;
 	
 				case "stop":
-					var_05 = scripts/asm/asm_bb::bb_getmeleetarget();
+					var_05 = scripts\asm\asm_bb::bb_getmeleetarget();
 					if(!isdefined(var_05)) {
 						return;
 					}
@@ -72,7 +72,7 @@ donotetracks_vsplayer(param_00,param_01) {
 	
 				case "start_melee":
 				case "fire":
-					var_05 = scripts/asm/asm_bb::bb_getmeleetarget();
+					var_05 = scripts\asm\asm_bb::bb_getmeleetarget();
 					if(!isdefined(var_05)) {
 						return;
 					}
@@ -83,7 +83,7 @@ donotetracks_vsplayer(param_00,param_01) {
 					break;
 	
 				default:
-					scripts/asm/asm_mp::func_2345(var_04,param_01);
+					scripts\asm\asm_mp::func_2345(var_04,param_01);
 					break;
 			}
 		}

@@ -1,14 +1,14 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\3513.gsc
+ * Script: 3513.gsc
 ***************************************/
 
 init() {
-  level._effect["rc8_malfunction"] = loadfx("vfx/iw7/core/mp/killstreaks/vfx_rc8_glitch_out.vfx");
-  level._effect["rc8_explode"] = loadfx("vfx/iw7/core/mp/killstreaks/vfx_rc8_dest_exp.vfx");
+  level._effect["rc8_malfunction"] = loadfx("vfx\iw7\core\mp\killstreaks\vfx_rc8_glitch_out.vfx");
+  level._effect["rc8_explode"] = loadfx("vfx\iw7\core\mp\killstreaks\vfx_rc8_dest_exp.vfx");
   scripts\mp\killstreaks\killstreaks::registerkillstreak("remote_c8", ::func_128F7);
   var_00 = ["passive_increased_speed", "passive_decreased_duration", "passive_energy_machgun", "passive_boosters", "passive_speed_duration"];
-  scripts/mp/killstreak_loot::func_DF07("remote_c8", var_00);
+  scripts\mp\killstreak_loot::func_DF07("remote_c8", var_00);
 }
 
 setup_callbacks() {
@@ -539,7 +539,7 @@ func_128F7(var_00) {
   scripts\mp\matchdata::logkillstreakevent(var_0.streakname, self.origin);
   thread func_10D8D(var_00, var_02);
   var_03 = "used_remote_c8";
-  var_04 = scripts/mp/killstreak_loot::getrarityforlootitem(var_0.variantid);
+  var_04 = scripts\mp\killstreak_loot::getrarityforlootitem(var_0.variantid);
 
   if (var_04 != "")
   var_03 = var_03 + "_" + var_04;
@@ -629,7 +629,7 @@ func_10D8D(var_00, var_01) {
   var_06 setscriptablepartstate("laser_target", "start");
   thread func_FBF0(var_6.origin);
   var_07 = "mp_robot_c8";
-  var_08 = scripts/mp/killstreak_loot::getrarityforlootitem(var_0.variantid);
+  var_08 = scripts\mp\killstreak_loot::getrarityforlootitem(var_0.variantid);
 
   if (var_08 != "")
   var_07 = var_07 + "_" + var_08;
@@ -677,7 +677,7 @@ func_10D8D(var_00, var_01) {
   var_9.func_ED75 = 60;
   var_9.mainweapon = "iw7_chargeshot_c8_mp";
 
-  if (scripts/mp/killstreaks/utility::func_A69F(var_9.streakinfo, "passive_energy_machgun"))
+  if (scripts\mp\killstreaks\utility::func_A69F(var_9.streakinfo, "passive_energy_machgun"))
   var_9.mainweapon = "iw7_minigun_c8_mp";
 
   var_09 scripts\mp\utility\game::_giveweapon(var_9.mainweapon);
@@ -705,7 +705,7 @@ func_10D8D(var_00, var_01) {
   var_09 botsetflag("disable_corner_combat", 1);
   var_09 give_explosive_touch_on_revived("c8servo");
 
-  if (scripts/mp/killstreaks/utility::func_A69F(var_9.streakinfo, "passive_boosters")) {
+  if (scripts\mp\killstreaks\utility::func_A69F(var_9.streakinfo, "passive_boosters")) {
   var_09 setsuit("rc8_jump_mp");
   var_09 allowjump(1);
   var_09 allowdoublejump(1);
@@ -716,7 +716,7 @@ func_10D8D(var_00, var_01) {
 
   var_09 setscriptablepartstate("CompassIcon", "remote_c8");
   var_09 scripts\mp\utility\game::func_F751();
-  var_09 scripts/mp/killstreaks/utility::func_FAE4("destroyed_rc8", "rc8_mp");
+  var_09 scripts\mp\killstreaks\utility::func_FAE4("destroyed_rc8", "rc8_mp");
   var_09 scripts\mp\utility\game::giveperk("specialty_blindeye");
   var_09 scripts\mp\damage::resetattackerlist();
   var_09 notify("rc8_launched");
@@ -749,9 +749,9 @@ func_10D8D(var_00, var_01) {
   self.func_DCFC = var_09;
   self.func_4BE1 = "AI";
   func_F697(self.func_4BE1, 1);
-  var_09 scripts/mp/killstreaks/utility::func_1843(var_9.killstreaktype, "Killstreak_Ground", self, 1);
+  var_09 scripts\mp\killstreaks\utility::func_1843(var_9.killstreaktype, "Killstreak_Ground", self, 1);
 
-  if (scripts/mp/killstreaks/utility::func_A69F(var_9.streakinfo, "passive_speed_duration"))
+  if (scripts\mp\killstreaks\utility::func_A69F(var_9.streakinfo, "passive_speed_duration"))
   var_9.func_ED75 = int(var_9.func_ED75 / 1.2);
 
   thread func_13AD7(var_9.useobj);
@@ -761,7 +761,7 @@ func_10D8D(var_00, var_01) {
   thread func_13ACD(var_09);
   thread func_13B0C(var_09);
 
-  if (scripts/mp/killstreaks/utility::func_A69F(var_9.streakinfo, "passive_speed_duration"))
+  if (scripts\mp\killstreaks\utility::func_A69F(var_9.streakinfo, "passive_speed_duration"))
   var_09 setmovespeedscale(1.0);
 }
 
@@ -934,7 +934,7 @@ func_627B(var_00) {
   self.func_DCFC rc8_disable_movement(0);
   self.func_DCFC rc8_disable_rotation(0);
   self.func_DCFC rc8_disable_attack(0);
-  self.func_DCFC.useobj scripts/mp/killstreaks/utility::func_F774(self, &"KILLSTREAKS_HINTS_RC8_CONTROL", 360, 360, 30000, 30000, 1);
+  self.func_DCFC.useobj scripts\mp\killstreaks\utility::func_F774(self, &"KILLSTREAKS_HINTS_RC8_CONTROL", 360, 360, 30000, 30000, 1);
   self.func_DCFC.active = 1;
   self notify("switched_mode");
 }
@@ -1034,7 +1034,7 @@ watchtimeout(var_00) {
   self endon("host_migration_lifetime_update");
   self endon("destroyed_rc8");
   level endon("game_ended");
-  thread scripts/mp/killstreaks/utility::watchhostmigrationlifetime("destroyed_rc8", var_00, ::watchtimeout);
+  thread scripts\mp\killstreaks\utility::watchhostmigrationlifetime("destroyed_rc8", var_00, ::watchtimeout);
 
   while (var_00 > 0) {
   wait 0.05;
@@ -1058,7 +1058,7 @@ watchempdamage(var_00) {
 
   for (;;) {
   var_00 waittill("emp_damage", var_01, var_02, var_03, var_04, var_05);
-  var_00 scripts/mp/killstreaks/utility::dodamagetokillstreak(100, var_01, var_01, self.team, var_03, var_05, var_04);
+  var_00 scripts\mp\killstreaks\utility::dodamagetokillstreak(100, var_01, var_01, self.team, var_03, var_05, var_04);
   }
 }
 
@@ -1094,7 +1094,7 @@ func_13996() {
 
   if (isplayer(var_02) && var_02 != self) {
   var_07 = "callout_destroyed_remote_c8";
-  var_08 = scripts/mp/killstreak_loot::getrarityforlootitem(self.func_DCFC.streakinfo.variantid);
+  var_08 = scripts\mp\killstreak_loot::getrarityforlootitem(self.func_DCFC.streakinfo.variantid);
 
   if (var_08 != "")
   var_07 = var_07 + "_" + var_08;

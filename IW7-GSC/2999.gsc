@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2999.gsc
+ * Script: 2999.gsc
 ***************************************/
 
 func_F8F9() {
@@ -677,7 +677,7 @@ func_B878(var_00, var_01, var_02) {
   var_04 = "JACKAL_MMT38_WHIPLASH";
   var_05 = "small_target";
 
-  if (scripts/sp/utility::func_B324()) {
+  if (scripts\sp\utility::func_B324()) {
   var_00 [[level.func_A056.func_11543]]("missileboat_turret", var_04, var_05, "enemy_jackal");
   var_00 [[level.func_A056.func_F389]]("tag_lockon", [var_0.func_5978]);
   }

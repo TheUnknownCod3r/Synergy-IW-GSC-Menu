@@ -1,8 +1,8 @@
-/**************************************************************
+/******************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\asm\zombie_sasquatch\mp\states.gsc
-**************************************************************/
+ * Script: scripts\asm\zombie_sasquatch\mp\states.gsc
+******************************************************/
 
 func_2371() {
 	if(scripts\asm\asm::func_232E("zombie_sasquatch")) {

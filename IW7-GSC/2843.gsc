@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2843.gsc
+ * Script: 2843.gsc
 ***************************************/
 
 init() {
@@ -27,10 +27,10 @@ monitordamage() {
   if (isdefined(level.func_4D4D))
   return;
 
-  if (scripts/sp/utility::func_93A6())
+  if (scripts\sp\utility::func_93A6())
   return;
 
-  scripts/sp/utility::func_16B7(::func_4D4C);
+  scripts\sp\utility::func_16B7(::func_4D4C);
 }
 
 func_4D4C(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08, var_09) {

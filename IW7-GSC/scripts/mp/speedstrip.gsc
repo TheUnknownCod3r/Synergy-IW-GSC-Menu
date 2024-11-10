@@ -1,8 +1,8 @@
-/*********************************************
+/*************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\speedstrip.gsc
-*********************************************/
+ * Script: scripts\mp\speedstrip.gsc
+*************************************/
 
 func_109B8() {
 	level.var_109BE = [];
@@ -156,7 +156,7 @@ func_13B54(param_00,param_01) {
 			continue;
 		}
 
-		if(scripts/mp/equipment/charge_mode::func_3CEE(var_02)) {
+		if(scripts\mp\equipment\charge_mode::func_3CEE(var_02)) {
 			continue;
 		}
 
@@ -175,7 +175,7 @@ func_13B54(param_00,param_01) {
 			}
 
 			if(isplayer(var_02)) {
-				var_02.var_109A9 = function_01E1(scripts\engine\utility::getfx("speed_strip_screen"),var_02 geteye(),var_02);
+				var_02.var_109A9 = spawnfxforclient(scripts\engine\utility::getfx("speed_strip_screen"),var_02 geteye(),var_02);
 				triggerfx(var_02.var_109A9);
 			}
 
@@ -304,11 +304,11 @@ func_D534(param_00,param_01) {
 	for(;;) {
 		if(isdefined(param_00) && var_04) {
 			if(self.team == param_00.team) {
-				var_02 = function_01E1(scripts\engine\utility::getfx("speed_strip_friendly"),var_03,self,anglestoup(param_00.angles),anglestoforward(param_00.angles));
+				var_02 = spawnfxforclient(scripts\engine\utility::getfx("speed_strip_friendly"),var_03,self,anglestoup(param_00.angles),anglestoforward(param_00.angles));
 			}
 			else
 			{
-				var_02 = function_01E1(scripts\engine\utility::getfx("speed_strip_enemy"),var_03,self,anglestoup(param_00.angles),anglestoforward(param_00.angles));
+				var_02 = spawnfxforclient(scripts\engine\utility::getfx("speed_strip_enemy"),var_03,self,anglestoup(param_00.angles),anglestoforward(param_00.angles));
 			}
 
 			if(isdefined(var_02)) {

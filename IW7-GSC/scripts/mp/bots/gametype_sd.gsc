@@ -1,8 +1,8 @@
-/***************************************************
+/*******************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\bots\gametype_sd.gsc
-***************************************************/
+ * Script: scripts\mp\bots\gametype_sd.gsc
+*******************************************/
 
 main() {
 	setup_callbacks();
@@ -30,7 +30,7 @@ crate_can_use(param_00) {
 		return 0;
 	}
 
-	if(!scripts\mp\_utility::isteamparticipant(self)) {
+	if(!scripts\mp\utility::isteamparticipant(self)) {
 		return 1;
 	}
 
@@ -70,7 +70,7 @@ setup_bot_sd() {
 	foreach(var_02 in level.bombzones) {
 		var_03 = getzonenearest(var_02.curorigin);
 		if(isdefined(var_03)) {
-			function_002B(var_03,game["defenders"]);
+			botzonesetteam(var_03,game["defenders"]);
 		}
 	}
 
@@ -236,7 +236,7 @@ atk_bomber_update() {
 				self botsetscriptgoal(var_02.origin,20,"critical");
 				scripts\mp\bots\_bots_util::bot_waittill_goal_or_fail();
 				if(isdefined(level.sdbomb) && !isdefined(level.sdbomb.carrier)) {
-					level.sdbomb scripts\mp\_gameobjects::setpickedup(self);
+					level.sdbomb scripts\mp\gameobjects::setpickedup(self);
 				}
 			}
 			else
@@ -269,7 +269,7 @@ atk_bomber_update() {
 			if(isdefined(level.sdbomb) && !isdefined(level.sdbomb.carrier)) {
 				var_07 = scripts\mp\bots\_bots_util::bot_queued_process("BotGetClosestNavigablePoint",::scripts\mp\bots\_bots_util::func_bot_get_closest_navigable_point,level.sdbomb.curorigin,var_05 + var_06,self);
 				if(!isdefined(var_07)) {
-					level.sdbomb scripts\mp\_gameobjects::setpickedup(self);
+					level.sdbomb scripts\mp\gameobjects::setpickedup(self);
 					return;
 				}
 
@@ -364,7 +364,7 @@ get_round_end_time() {
 		return level.defuseendtime;
 	}
 
-	return gettime() + scripts\mp\_gamelogic::gettimeremaining();
+	return gettime() + scripts\mp\gamelogic::gettimeremaining();
 }
 
 bomber_monitor_no_path() {
@@ -376,7 +376,7 @@ bomber_monitor_no_path() {
 	level.sdbomb endon("pickup_object");
 	for(;;) {
 		self waittill("no_path");
-		self.var_2414++;
+		self.atk_bomber_no_path_to_bomb_count++;
 	}
 }
 
@@ -454,7 +454,7 @@ bomb_defuser_update() {
 
 	var_04 = scripts\mp\bots\_bots_util::bot_waittill_goal_or_fail();
 	if(var_04 == "bad_path") {
-		self.var_50A8++;
+		self.defuser_bad_path_counter++;
 		if(self.defuser_bad_path_counter >= 4) {
 			for(;;) {
 				var_05 = getnodesinradiussorted(var_02,50,0);
@@ -466,7 +466,7 @@ bomb_defuser_update() {
 				self botsetscriptgoal(var_05[var_06].origin,20,"critical");
 				var_04 = scripts\mp\bots\_bots_util::bot_waittill_goal_or_fail();
 				if(var_04 == "bad_path") {
-					self.var_50A8++;
+					self.defuser_bad_path_counter++;
 					continue;
 				}
 
@@ -576,7 +576,7 @@ backstabber_update() {
 	}
 
 	if(self.backstabber_stage == "2_move_to_enemy_spawn") {
-		var_0B = scripts\mp\_spawnlogic::getspawnpointarray("mp_sd_spawn_attacker");
+		var_0B = scripts\mp\spawnlogic::getspawnpointarray("mp_sd_spawn_attacker");
 		var_0C = scripts\engine\utility::random(var_0B);
 		self getpathactionvalue("scripted");
 		var_09 = self botsetscriptgoal(var_0C.origin,250,"guard");
@@ -822,7 +822,7 @@ bomber_wait_for_bomb_reset() {
 	self endon("stopped_being_bomb_carrier");
 	level.sdbomb endon("pickup_object");
 	level.sdbomb waittill("reset");
-	if(scripts\mp\_utility::isaiteamparticipant(self)) {
+	if(scripts\mp\utility::isaiteamparticipant(self)) {
 		self botclearscriptgoal();
 	}
 
@@ -1011,7 +1011,7 @@ has_override_zone_targets(param_00) {
 get_players_by_role(param_00) {
 	var_01 = [];
 	foreach(var_03 in level.participants) {
-		if(isalive(var_03) && scripts\mp\_utility::isteamparticipant(var_03) && isdefined(var_03.role) && var_03.role == param_00) {
+		if(isalive(var_03) && scripts\mp\utility::isteamparticipant(var_03) && isdefined(var_03.role) && var_03.role == param_00) {
 			var_01[var_01.size] = var_03;
 		}
 	}
@@ -1026,7 +1026,7 @@ get_living_players_on_team(param_00,param_01) {
 			continue;
 		}
 
-		if(scripts\mp\_utility::isreallyalive(var_04) && scripts\mp\_utility::isteamparticipant(var_04) && var_04.team == param_00) {
+		if(scripts\mp\utility::isreallyalive(var_04) && scripts\mp\utility::isteamparticipant(var_04) && var_04.team == param_00) {
 			if(!isdefined(param_01) || param_01 && isai(var_04) && isdefined(var_04.role)) {
 				var_02[var_02.size] = var_04;
 			}

@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3886.gsc
-****************************/
+ * Script: 3886.gsc
+************************/
 
 main() {
 	func_EE1D();
@@ -30,12 +30,12 @@ func_EE1D() {
 	level.var_EC85["ring3"]["vr_intro_part1"] = %vr_intro_part1;
 	level.var_EC85["ring4"]["vr_intro_part1"] = %vr_intro_part1;
 	level.var_EC85["ring5"]["vr_intro_part1"] = %vr_intro_part1;
-	scripts/sp/anim::func_17FC("ring0","show_geo","vr_ring0_intro_show_geo","vr_intro_part1");
-	scripts/sp/anim::func_17FC("ring1","show_geo","vr_ring1_intro_show_geo","vr_intro_part1");
-	scripts/sp/anim::func_17FC("ring2","show_geo","vr_ring2_intro_show_geo","vr_intro_part1");
-	scripts/sp/anim::func_17FC("ring3","show_geo","vr_ring3_intro_show_geo","vr_intro_part1");
-	scripts/sp/anim::func_17FC("ring4","show_geo","vr_ring4_intro_show_geo","vr_intro_part1");
-	scripts/sp/anim::func_17FC("ring5","show_geo","vr_ring5_intro_show_geo","vr_intro_part1");
+	scripts\sp\anim::func_17FC("ring0","show_geo","vr_ring0_intro_show_geo","vr_intro_part1");
+	scripts\sp\anim::func_17FC("ring1","show_geo","vr_ring1_intro_show_geo","vr_intro_part1");
+	scripts\sp\anim::func_17FC("ring2","show_geo","vr_ring2_intro_show_geo","vr_intro_part1");
+	scripts\sp\anim::func_17FC("ring3","show_geo","vr_ring3_intro_show_geo","vr_intro_part1");
+	scripts\sp\anim::func_17FC("ring4","show_geo","vr_ring4_intro_show_geo","vr_intro_part1");
+	scripts\sp\anim::func_17FC("ring5","show_geo","vr_ring5_intro_show_geo","vr_intro_part1");
 }
 
 func_91D0() {}

@@ -1,8 +1,8 @@
-/********************************************
+/************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\cp_relics.gsc
-********************************************/
+ * Script: scripts\cp\cp_relics.gsc
+************************************/
 
 func_DEE0() {
 	level.updateonkillpassivesfunc = ::func_12EDF;
@@ -1140,7 +1140,7 @@ scrambler_stun_damage(param_00,param_01) {
 	param_00 endon("death");
 	if(isdefined(param_00.stun_hit_time)) {
 		if(gettime() > param_00.stun_hit_time) {
-			if(param_00 scripts/mp/agents/zombie/zombie_util::iscrawling()) {
+			if(param_00 scripts\mp\agents\zombie\zombie_util::iscrawling()) {
 				param_00.scripted_mode = 1;
 				param_00.precacheleaderboards = 1;
 				param_00 give_mp_super_weapon(param_00.origin);
@@ -1157,7 +1157,7 @@ scrambler_stun_damage(param_00,param_01) {
 	}
 	else
 	{
-		if(param_00 scripts/mp/agents/zombie/zombie_util::iscrawling()) {
+		if(param_00 scripts\mp\agents\zombie\zombie_util::iscrawling()) {
 			param_00.scripted_mode = 1;
 			param_00.precacheleaderboards = 1;
 			param_00 give_mp_super_weapon(param_00.origin);
@@ -1171,7 +1171,7 @@ scrambler_stun_damage(param_00,param_01) {
 	param_00 dodamage(1,param_00.origin,param_01,param_01,"MOD_UNKNOWN","iw7_scrambler_zm");
 	param_00 thread addhealthback(param_00);
 	wait(1);
-	if(param_00 scripts/mp/agents/zombie/zombie_util::iscrawling()) {
+	if(param_00 scripts\mp\agents\zombie\zombie_util::iscrawling()) {
 		param_00.scripted_mode = 0;
 		param_00.precacheleaderboards = 0;
 	}
@@ -1218,7 +1218,7 @@ trackkillsforrandomperks(param_00,param_01,param_02,param_03,param_04,param_05) 
 			for(;;) {
 				var_07 = scripts\engine\utility::random(var_06);
 				if(!param_01 scripts\cp\utility::has_zombie_perk(var_07)) {
-					param_01 scripts/cp/zombies/zombies_perk_machines::give_zombies_perk(var_07,0);
+					param_01 scripts\cp\zombies\zombies_perk_machines::give_zombies_perk(var_07,0);
 					break;
 				}
 				else
@@ -1646,7 +1646,7 @@ updatepassivecolddamage(param_00,param_01,param_02) {
 		if(scripts\cp\utility::getrawbaseweaponname(param_00.cold_weapon) == scripts\cp\utility::getrawbaseweaponname(param_01)) {
 			param_02 thread unsetslowmovementaftertime(param_02,param_02.synctransients);
 			param_02.synctransients = "slow_walk";
-			param_02 scripts/asm/asm_bb::bb_requestmovetype("slow_walk");
+			param_02 scripts\asm\asm_bb::bb_requestmovetype("slow_walk");
 		}
 	}
 }
@@ -1657,7 +1657,7 @@ unsetslowmovementaftertime(param_00,param_01) {
 	wait(10);
 	if(isdefined(param_01)) {
 		param_00.synctransients = param_01;
-		param_00 scripts/asm/asm_bb::bb_requestmovetype(param_01);
+		param_00 scripts\asm\asm_bb::bb_requestmovetype(param_01);
 	}
 }
 
@@ -2068,7 +2068,7 @@ func_7D6C(param_00,param_01) {
 		return var_03;
 	}
 
-	var_04 = "mp/loot/weapon/" + param_01 + ".csv";
+	var_04 = "mp\loot\weapon\" + param_01 + ".csv";
 	var_05 = tablelookuprownum(var_04,0,var_02);
 	for(var_06 = 0;var_06 < 3;var_06++) {
 		var_07 = tablelookupbyrow(var_04,var_05,21 + var_06);

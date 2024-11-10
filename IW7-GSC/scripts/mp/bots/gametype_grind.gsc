@@ -1,8 +1,8 @@
-/******************************************************
+/**********************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\bots\gametype_grind.gsc
-******************************************************/
+ * Script: scripts\mp\bots\gametype_grind.gsc
+**********************************************/
 
 main() {
 	setup_callbacks();

@@ -1,13 +1,13 @@
-/************************************************
+/****************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\protoricochet.gsc
-************************************************/
+ * Script: scripts\mp\protoricochet.gsc
+****************************************/
 
 func_E4E3() {
 	level.var_E4DF = [];
-	level._effect["proto_ricochet_temp"] = loadfx("vfx/old/misc/proto_ricochet_temp");
-	level._effect["proto_ricochet_shot_temp"] = loadfx("vfx/old/misc/proto_ricochet_shot_temp");
+	level._effect["proto_ricochet_temp"] = loadfx("vfx\old\misc\proto_ricochet_temp");
+	level._effect["proto_ricochet_shot_temp"] = loadfx("vfx\old\misc\proto_ricochet_shot_temp");
 	level.var_E4DF["proto_ricochet_device_mp"] = spawnstruct();
 	level.var_E4DF["proto_ricochet_device_mp"].var_C739 = 60;
 	level.var_E4DF["proto_ricochet_device_mp"].var_B9DC = ::func_E4E5;

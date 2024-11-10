@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\3101.gsc
+ * Script: 3101.gsc
 ***************************************/
 
 bt_registerprefabtaskids(var_00, var_01, var_02) {

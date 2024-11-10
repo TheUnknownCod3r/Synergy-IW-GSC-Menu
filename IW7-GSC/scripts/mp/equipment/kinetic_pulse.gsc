@@ -1,8 +1,8 @@
-/**********************************************************
+/**************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\equipment\kinetic_pulse.gsc
-**********************************************************/
+ * Script: scripts\mp\equipment\kinetic_pulse.gsc
+**************************************************/
 
 kineticpulse_use() {
 	self setscriptablepartstate("kineticPulse","activeWarmUp");
@@ -11,7 +11,7 @@ kineticpulse_use() {
 		return;
 	}
 
-	if(!scripts\mp\_utility::isreallyalive(self)) {
+	if(!scripts\mp\utility::isreallyalive(self)) {
 		self setscriptablepartstate("kineticPulse","neutral");
 		return;
 	}
@@ -28,11 +28,11 @@ kineticpulse_use() {
 	for(var_06 = 0;var_06 < 5;var_06++) {
 		var_07 = undefined;
 		if(level.teambased && !level.friendlyfire) {
-			var_07 = scripts\mp\_utility::clearscrambler(var_05,var_03,scripts\mp\_utility::getotherteam(self.team),undefined);
+			var_07 = scripts\mp\utility::clearscrambler(var_05,var_03,scripts\mp\utility::getotherteam(self.team),undefined);
 		}
 		else
 		{
-			var_07 = scripts\mp\_utility::clearscrambler(var_05,var_03,undefined,self);
+			var_07 = scripts\mp\utility::clearscrambler(var_05,var_03,undefined,self);
 		}
 
 		foreach(var_09 in var_07) {
@@ -41,20 +41,20 @@ kineticpulse_use() {
 				continue;
 			}
 
-			if(!scripts\mp\_utility::isreallyalive(var_09)) {
+			if(!scripts\mp\utility::isreallyalive(var_09)) {
 				continue;
 			}
 
-			if(!scripts/mp/equipment/phase_shift::areentitiesinphase(self,var_09)) {
+			if(!scripts\mp\equipment\phase_shift::areentitiesinphase(self,var_09)) {
 				continue;
 			}
 
 			var_0B = var_05;
 			var_0C = var_09.origin;
-			var_0D = function_0287(var_0B,var_0C,var_04,undefined,0,"physicsquery_closest",1);
+			var_0D = physics_raycast(var_0B,var_0C,var_04,undefined,0,"physicsquery_closest",1);
 			if(isdefined(var_0D) && var_0D.size > 0) {
 				var_0C = var_09 geteye();
-				var_0D = function_0287(var_0B,var_0C,var_04,undefined,0,"physicsquery_closest",1);
+				var_0D = physics_raycast(var_0B,var_0C,var_04,undefined,0,"physicsquery_closest",1);
 				if(isdefined(var_0D) && var_0D.size > 0) {
 					continue;
 				}
@@ -64,7 +64,7 @@ kineticpulse_use() {
 			kineticpulse_playereffects(var_09,var_05);
 		}
 
-		var_07 = scripts\mp\_weapons::getempdamageents(var_05,var_03,0);
+		var_07 = scripts\mp\weapons::getempdamageents(var_05,var_03,0);
 		foreach(var_09 in var_07) {
 			if(!isdefined(var_09)) {
 				continue;
@@ -75,7 +75,7 @@ kineticpulse_use() {
 				continue;
 			}
 
-			if(!scripts/mp/equipment/phase_shift::areentitiesinphase(self,var_09)) {
+			if(!scripts\mp\equipment\phase_shift::areentitiesinphase(self,var_09)) {
 				continue;
 			}
 
@@ -84,7 +84,7 @@ kineticpulse_use() {
 				var_10 = var_09.triggerportableradarping;
 			}
 
-			if(!scripts\mp\_weapons::friendlyfirecheck(self,var_10) && var_10 != self) {
+			if(!scripts\mp\weapons::friendlyfirecheck(self,var_10) && var_10 != self) {
 				continue;
 			}
 
@@ -104,29 +104,29 @@ kineticpulse_playereffects(param_00,param_01) {
 }
 
 kineticpulse_playerconcuss(param_00) {
-	scripts\mp\_gamescore::func_11ACE(self,param_00,"kineticpulse_concuss_mp");
+	scripts\mp\gamescore::func_11ACE(self,param_00,"kineticpulse_concuss_mp");
 	var_01 = scripts\mp\perks\_perkfunctions::applystunresistence(self,param_00,5);
 	param_00 shellshock("concussion_grenade_mp",var_01);
 	param_00 scripts\engine\utility::waittill_any_timeout_no_endon_death_2(var_01,"death","disconnect");
-	if(isdefined(param_00) && scripts\mp\_utility::isreallyalive(param_00)) {
+	if(isdefined(param_00) && scripts\mp\utility::isreallyalive(param_00)) {
 		if(isdefined(self)) {
-			scripts\mp\_gamescore::untrackdebuffassist(self,param_00,"kineticpulse_concuss_mp");
+			scripts\mp\gamescore::untrackdebuffassist(self,param_00,"kineticpulse_concuss_mp");
 		}
 	}
 }
 
 kineticpulse_playeremp(param_00) {
 	if(!scripts\mp\killstreaks\_emp_common::func_FFC5()) {
-		scripts\mp\_damagefeedback::updatedamagefeedback("hiticonempimmune",undefined,undefined,undefined,1);
+		scripts\mp\damagefeedback::updatedamagefeedback("hiticonempimmune",undefined,undefined,undefined,1);
 		return;
 	}
 
-	scripts\mp\_gamescore::func_11ACE(self,param_00,"kineticpulse_emp_mp");
+	scripts\mp\gamescore::func_11ACE(self,param_00,"kineticpulse_emp_mp");
 	param_00 scripts\mp\killstreaks\_emp_common::func_20C3();
 	param_00 scripts\engine\utility::waittill_any_timeout_no_endon_death_2(5,"death","disconnect");
-	if(isdefined(param_00) && scripts\mp\_utility::isreallyalive(param_00)) {
+	if(isdefined(param_00) && scripts\mp\utility::isreallyalive(param_00)) {
 		if(isdefined(self)) {
-			scripts\mp\_gamescore::untrackdebuffassist(self,param_00,"kineticpulse_emp_mp");
+			scripts\mp\gamescore::untrackdebuffassist(self,param_00,"kineticpulse_emp_mp");
 		}
 
 		param_00 scripts\mp\killstreaks\_emp_common::func_E0F3();
@@ -138,12 +138,12 @@ kineticpulse_nonplayereffects(param_00,param_01) {
 }
 
 isplayertaggedbykineticpulse(param_00) {
-	var_01 = scripts\mp\_gamescore::getdebuffattackersbyweapon(param_00,"kineticpulse_concuss_mp");
+	var_01 = scripts\mp\gamescore::getdebuffattackersbyweapon(param_00,"kineticpulse_concuss_mp");
 	if(isdefined(var_01) && scripts\engine\utility::array_contains(var_01,self)) {
 		return 1;
 	}
 
-	var_01 = scripts\mp\_gamescore::getdebuffattackersbyweapon(param_00,"kineticpulse_emp_mp");
+	var_01 = scripts\mp\gamescore::getdebuffattackersbyweapon(param_00,"kineticpulse_emp_mp");
 	if(isdefined(var_01) && scripts\engine\utility::array_contains(var_01,self)) {
 		return 1;
 	}

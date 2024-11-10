@@ -1,26 +1,26 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3123.gsc
-****************************/
+ * Script: 3123.gsc
+************************/
 
 bb_requestcombatmovetype_facemotion() {
-	self._blackboard.combatmode_old = 0;
-	self._blackboard.bwantstostrafe = 0;
+	self.var_1198.combatmode_old = 0;
+	self.var_1198.bwantstostrafe = 0;
 }
 
 bb_requestcombatmovetype_strafe() {
-	self._blackboard.combatmode_old = 1;
-	self._blackboard.bwantstostrafe = 1;
+	self.var_1198.combatmode_old = 1;
+	self.var_1198.bwantstostrafe = 1;
 }
 
 func_295B() {
-	self._blackboard.combatmode_old = 2;
-	self._blackboard.bwantstostrafe = 0;
+	self.var_1198.combatmode_old = 2;
+	self.var_1198.bwantstostrafe = 0;
 }
 
 func_298C() {
-	if(!isdefined(self._blackboard.combatmode_old) || self._blackboard.combatmode_old == 0) {
+	if(!isdefined(self.var_1198.combatmode_old) || self.var_1198.combatmode_old == 0) {
 		return 1;
 	}
 
@@ -28,7 +28,7 @@ func_298C() {
 }
 
 func_298D() {
-	if(isdefined(self._blackboard.combatmode_old) && self._blackboard.combatmode_old == 2) {
+	if(isdefined(self.var_1198.combatmode_old) && self.var_1198.combatmode_old == 2) {
 		return 1;
 	}
 
@@ -36,16 +36,16 @@ func_298D() {
 }
 
 func_2979(param_00) {
-	self._blackboard.var_2AA1 = param_00;
+	self.var_1198.var_2AA1 = param_00;
 	if(param_00) {
 		self.dontevershoot = 1;
 	}
 }
 
 func_2921() {
-	if(!isdefined(self._blackboard.var_2AA1)) {
+	if(!isdefined(self.var_1198.var_2AA1)) {
 		return 0;
 	}
 
-	return self._blackboard.var_2AA1;
+	return self.var_1198.var_2AA1;
 }

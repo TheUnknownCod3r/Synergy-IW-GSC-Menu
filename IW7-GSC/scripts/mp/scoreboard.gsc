@@ -1,8 +1,8 @@
-/*********************************************
+/*************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\scoreboard.gsc
-*********************************************/
+ * Script: scripts\mp\scoreboard.gsc
+*************************************/
 
 func_D9AB() {
 	foreach(var_01 in level.placement["all"]) {
@@ -119,7 +119,7 @@ func_D9AB() {
 }
 
 func_F7F8() {
-	var_00 = function_0080("scoreboardPlayerCount");
+	var_00 = getclientmatchdata("scoreboardPlayerCount");
 	if(var_00 <= 24) {
 		setclientmatchdata("players",self.clientmatchdataid,"score",self.pers["score"]);
 		var_01 = self.pers["kills"];

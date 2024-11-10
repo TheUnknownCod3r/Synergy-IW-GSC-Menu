@@ -1,13 +1,13 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3597.gsc
-****************************/
+ * Script: 3597.gsc
+************************/
 
 func_12F9B() {
 	self setscriptablepartstate("amplify","active",0);
 	self.var_1E57 = 500;
-	level thread scripts\mp\_battlechatter_mp::saytoself(self,"plr_perk_amplify",undefined,0.75);
+	level thread scripts\mp\battlechatter_mp::saytoself(self,"plr_perk_amplify",undefined,0.75);
 	return 1;
 }
 
@@ -24,12 +24,12 @@ unset() {
 }
 
 func_9D41() {
-	var_00 = scripts\mp\_supers::getcurrentsuperref();
+	var_00 = scripts\mp\supers::getcurrentsuperref();
 	if(!isdefined(var_00) || var_00 != "super_amplify") {
 		return 0;
 	}
 
-	if(!scripts\mp\_supers::issuperinuse()) {
+	if(!scripts\mp\supers::issuperinuse()) {
 		return 0;
 	}
 
@@ -49,8 +49,8 @@ func_1E58(param_00) {
 	}
 
 	for(var_03 = 0;var_03 <= var_02;var_03++) {
-		scripts\mp\_supers::func_1613();
-		if(!scripts\mp\_supers::issuperinuse()) {
+		scripts\mp\supers::func_1613();
+		if(!scripts\mp\supers::issuperinuse()) {
 			break;
 		}
 	}

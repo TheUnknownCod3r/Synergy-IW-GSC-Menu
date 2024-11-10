@@ -1,8 +1,8 @@
-/****************************************************
+/********************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\gametypes\obj_dom.gsc
-****************************************************/
+ * Script: scripts\mp\gametypes\obj_dom.gsc
+********************************************/
 
 func_591D(param_00) {
 	var_01 = level.objectives[param_00];
@@ -15,16 +15,16 @@ func_591D(param_00) {
 		var_02[0].angles = var_01.angles;
 	}
 
-	level.flagcapturetime = scripts\mp\_utility::dvarfloatvalue("flagCaptureTime",10,0,30);
-	var_03 = scripts\mp\_gameobjects::createuseobject("neutral",var_01,var_02,(0,0,100));
-	var_03 scripts\mp\_gameobjects::allowuse("enemy");
-	var_03 scripts\mp\_gameobjects::cancontestclaim(1);
-	var_03 scripts\mp\_gameobjects::setusetime(level.flagcapturetime);
-	var_03 scripts\mp\_gameobjects::setusetext(&"MP_SECURING_POSITION");
-	var_04 = var_03 scripts\mp\_gameobjects::getlabel();
+	level.flagcapturetime = scripts\mp\utility::dvarfloatvalue("flagCaptureTime",10,0,30);
+	var_03 = scripts\mp\gameobjects::createuseobject("neutral",var_01,var_02,(0,0,100));
+	var_03 scripts\mp\gameobjects::allowuse("enemy");
+	var_03 scripts\mp\gameobjects::cancontestclaim(1);
+	var_03 scripts\mp\gameobjects::setusetime(level.flagcapturetime);
+	var_03 scripts\mp\gameobjects::setusetext(&"MP_SECURING_POSITION");
+	var_04 = var_03 scripts\mp\gameobjects::getlabel();
 	var_03.label = var_04;
-	var_03 scripts\mp\_gameobjects::setzonestatusicons(level.icondefend + var_04,level.iconneutral + var_04);
-	var_03 scripts\mp\_gameobjects::setvisibleteam("any");
+	var_03 scripts\mp\gameobjects::setzonestatusicons(level.icondefend + var_04,level.iconneutral + var_04);
+	var_03 scripts\mp\gameobjects::setvisibleteam("any");
 	var_03.onuse = ::dompoint_onuse;
 	var_03.onbeginuse = ::dompoint_onusebegin;
 	var_03.onuseupdate = ::dompoint_onuseupdate;
@@ -47,7 +47,7 @@ func_591D(param_00) {
 	var_03.baseeffectforward = anglestoforward(var_0C);
 	var_0D = spawn("script_model",var_03.baseeffectpos);
 	var_0D setmodel("dom_flag_scriptable");
-	var_0D.angles = function_02D7(var_03.baseeffectforward,var_0D.angles);
+	var_0D.angles = generateaxisanglesfromforwardvector(var_03.baseeffectforward,var_0D.angles);
 	var_03.physics_capsulecast = var_0D;
 	var_03.vfxnamemod = "";
 	if(var_03.trigger.fgetarg == 160) {
@@ -140,50 +140,50 @@ initializematchrecording() {
 		self.logeventflag = "FLAG_" + var_00;
 	}
 
-	if(scripts\mp\_analyticslog::analyticslogenabled()) {
-		self.analyticslogid = scripts\mp\_analyticslog::getuniqueobjectid();
+	if(scripts\mp\analyticslog::analyticslogenabled()) {
+		self.analyticslogid = scripts\mp\analyticslog::getuniqueobjectid();
 		self.analyticslogtype = "dom_flag" + self.label;
 	}
 }
 
 domflag_setneutral(param_00) {
 	self notify("flag_neutral");
-	scripts\mp\_gameobjects::setownerteam("neutral");
-	scripts\mp\_gameobjects::setzonestatusicons(level.iconneutral + self.label);
+	scripts\mp\gameobjects::setownerteam("neutral");
+	scripts\mp\gameobjects::setzonestatusicons(level.iconneutral + self.label);
 	updateflagstate("idle",param_00);
 	if(isdefined(level.matchrecording_logevent) && isdefined(self.logid) && isdefined(self.logeventflag)) {
 		[[level.matchrecording_logevent]](self.logid,undefined,self.logeventflag,self.visuals[0].origin[0],self.visuals[0].origin[1],gettime(),0);
 	}
 
-	scripts\mp\_analyticslog::logevent_gameobject(self.analyticslogtype,self.analyticslogid,self.visuals[0].origin,-1,"neutral");
+	scripts\mp\analyticslog::logevent_gameobject(self.analyticslogtype,self.analyticslogid,self.visuals[0].origin,-1,"neutral");
 }
 
 dompoint_setcaptured(param_00) {
-	scripts\mp\_gameobjects::setownerteam(param_00);
-	scripts\mp\_gameobjects::setzonestatusicons(level.icondefend + self.label,level.iconcapture + self.label);
+	scripts\mp\gameobjects::setownerteam(param_00);
+	scripts\mp\gameobjects::setzonestatusicons(level.icondefend + self.label,level.iconcapture + self.label);
 	self.neutralized = 0;
 	updateflagstate(param_00,0);
 	if(isdefined(level.matchrecording_logevent)) {
 		[[level.matchrecording_logevent]](self.logid,undefined,self.logeventflag,self.visuals[0].origin[0],self.visuals[0].origin[1],gettime(),scripts\engine\utility::ter_op(param_00 == "allies",1,2));
 	}
 
-	scripts\mp\_analyticslog::logevent_gameobject(self.analyticslogtype,self.analyticslogid,self.visuals[0].origin,-1,"captured_" + param_00);
+	scripts\mp\analyticslog::logevent_gameobject(self.analyticslogtype,self.analyticslogid,self.visuals[0].origin,-1,"captured_" + param_00);
 }
 
 dompoint_onuse(param_00) {
 	var_01 = param_00.team;
-	var_02 = scripts\mp\_gameobjects::getownerteam();
+	var_02 = scripts\mp\gameobjects::getownerteam();
 	self.capturetime = gettime();
 	self.neutralized = 0;
 	if(level.flagneutralization) {
-		var_03 = scripts\mp\_gameobjects::getownerteam();
+		var_03 = scripts\mp\gameobjects::getownerteam();
 		if(var_03 == "neutral") {
 			dompoint_setcaptured(var_01);
 		}
 		else
 		{
 			thread domflag_setneutral(1);
-			scripts\mp\_utility::playsoundonplayers("mp_dom_flag_lost",var_03);
+			scripts\mp\utility::playsoundonplayers("mp_dom_flag_lost",var_03);
 			level.lastcaptime = gettime();
 			thread giveflagassistedcapturepoints(self.touchlist[var_01]);
 			self.neutralized = 1;
@@ -203,7 +203,7 @@ dompoint_onuse(param_00) {
 			var_04 = 2;
 		}
 
-		scripts\mp\_utility::setmlgannouncement(19,var_01,param_00 getentitynumber(),var_04);
+		scripts\mp\utility::setmlgannouncement(19,var_01,param_00 getentitynumber(),var_04);
 		if(isdefined(level.onobjectivecomplete)) {
 			[[level.onobjectivecomplete]]("dompoint",self.label,param_00,var_01,var_02,self);
 		}
@@ -213,33 +213,33 @@ dompoint_onuse(param_00) {
 }
 
 dompoint_onusebegin(param_00) {
-	var_01 = scripts\mp\_gameobjects::getownerteam();
+	var_01 = scripts\mp\gameobjects::getownerteam();
 	self.neutralizing = level.flagneutralization && var_01 != "neutral";
-	if(!scripts\mp\_utility::istrue(self.neutralized)) {
+	if(!scripts\mp\utility::istrue(self.neutralized)) {
 		self.didstatusnotify = 0;
 	}
 
 	var_02 = scripts\engine\utility::ter_op(level.flagneutralization,level.flagcapturetime * 0.5,level.flagcapturetime);
-	scripts\mp\_gameobjects::setusetime(var_02);
-	thread scripts\mp\_gameobjects::useobjectdecay(param_00.team);
+	scripts\mp\gameobjects::setusetime(var_02);
+	thread scripts\mp\gameobjects::useobjectdecay(param_00.team);
 	if(var_02 > 0) {
 		self.prevownerteam = level.otherteam[param_00.team];
 		updateflagcapturestate(param_00.team);
-		scripts\mp\_gameobjects::setzonestatusicons(level.iconlosing + self.label,level.icontaking + self.label);
+		scripts\mp\gameobjects::setzonestatusicons(level.iconlosing + self.label,level.icontaking + self.label);
 	}
 }
 
 dompoint_onuseupdate(param_00,param_01,param_02,param_03) {
-	var_04 = scripts\mp\_gameobjects::getownerteam();
+	var_04 = scripts\mp\gameobjects::getownerteam();
 	if(param_01 > 0.05 && param_02 && !self.didstatusnotify) {
 		if(var_04 == "neutral") {
 			if(level.flagcapturetime > 0.05) {
-				scripts\mp\_utility::statusdialog("securing" + self.label,param_00);
+				scripts\mp\utility::statusdialog("securing" + self.label,param_00);
 			}
 		}
 		else if(level.flagcapturetime > 0.05) {
-			scripts\mp\_utility::statusdialog("losing" + self.label,var_04,1);
-			scripts\mp\_utility::statusdialog("securing" + self.label,param_00);
+			scripts\mp\utility::statusdialog("losing" + self.label,var_04,1);
+			scripts\mp\utility::statusdialog("securing" + self.label,param_00);
 		}
 
 		self.didstatusnotify = 1;
@@ -252,14 +252,14 @@ dompoint_onuseend(param_00,param_01,param_02) {
 		param_01.ui_dom_securing = undefined;
 	}
 
-	var_03 = scripts\mp\_gameobjects::getownerteam();
+	var_03 = scripts\mp\gameobjects::getownerteam();
 	if(var_03 == "neutral") {
-		scripts\mp\_gameobjects::setzonestatusicons(level.iconneutral + self.label);
+		scripts\mp\gameobjects::setzonestatusicons(level.iconneutral + self.label);
 		updateflagstate("idle",0);
 	}
 	else
 	{
-		scripts\mp\_gameobjects::setzonestatusicons(level.icondefend + self.label,level.iconcapture + self.label);
+		scripts\mp\gameobjects::setzonestatusicons(level.icondefend + self.label,level.iconcapture + self.label);
 		updateflagstate(var_03,0);
 	}
 
@@ -269,19 +269,19 @@ dompoint_onuseend(param_00,param_01,param_02) {
 }
 
 dompoint_oncontested() {
-	scripts\mp\_gameobjects::setzonestatusicons(level.iconcontested + self.label);
+	scripts\mp\gameobjects::setzonestatusicons(level.iconcontested + self.label);
 	updateflagstate("contested",0);
 }
 
 dompoint_onuncontested(param_00) {
-	var_01 = scripts\mp\_gameobjects::getownerteam();
+	var_01 = scripts\mp\gameobjects::getownerteam();
 	if(param_00 == "none" || var_01 == "neutral") {
-		scripts\mp\_gameobjects::setzonestatusicons(level.iconneutral + self.label);
+		scripts\mp\gameobjects::setzonestatusicons(level.iconneutral + self.label);
 		self.didstatusnotify = 0;
 	}
 	else
 	{
-		scripts\mp\_gameobjects::setzonestatusicons(level.icondefend + self.label,level.iconcapture + self.label);
+		scripts\mp\gameobjects::setzonestatusicons(level.icondefend + self.label,level.iconcapture + self.label);
 	}
 
 	var_02 = scripts\engine\utility::ter_op(var_01 == "neutral","idle",var_01);
@@ -290,20 +290,20 @@ dompoint_onuncontested(param_00) {
 
 setcrankedtimerdomflag(param_00) {
 	if(isdefined(level.supportcranked) && level.supportcranked && isdefined(param_00.cranked) && param_00.cranked) {
-		param_00 scripts\mp\_utility::setcrankedplayerbombtimer("assist");
+		param_00 scripts\mp\utility::setcrankedplayerbombtimer("assist");
 	}
 }
 
 dompoint_setupflagmodels() {
 	game["flagmodels"] = [];
 	game["flagmodels"]["neutral"] = "prop_flag_neutral";
-	game["flagmodels"]["allies"] = scripts\mp\_teams::ismeleeing("allies");
-	game["flagmodels"]["axis"] = scripts\mp\_teams::ismeleeing("axis");
+	game["flagmodels"]["allies"] = scripts\mp\teams::ismeleeing("allies");
+	game["flagmodels"]["axis"] = scripts\mp\teams::ismeleeing("axis");
 }
 
 updateflagstate(param_00,param_01) {
 	self.physics_capsulecast setscriptablepartstate("flag",param_00 + self.vfxnamemod);
-	if(!scripts\mp\_utility::istrue(param_01)) {
+	if(!scripts\mp\utility::istrue(param_01)) {
 		self.physics_capsulecast setscriptablepartstate("pulse","off");
 	}
 }
@@ -353,7 +353,7 @@ giveflagassistedcapturepoints(param_00) {
 			continue;
 		}
 
-		var_03 thread scripts\mp\_awards::givemidmatchaward("mode_dom_neutralized");
+		var_03 thread scripts\mp\awards::givemidmatchaward("mode_dom_neutralized");
 		var_03 setclientomnvar("ui_objective_progress",0.01);
 		var_03 setcrankedtimerdomflag(var_03);
 		wait(0.05);

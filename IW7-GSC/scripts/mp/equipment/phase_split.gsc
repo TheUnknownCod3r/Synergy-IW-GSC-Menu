@@ -1,14 +1,14 @@
-/********************************************************
+/************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\equipment\phase_split.gsc
-********************************************************/
+ * Script: scripts\mp\equipment\phase_split.gsc
+************************************************/
 
 init() {
 	level.var_CAA3 = [];
-	level.var_CAA3["spawn"] = loadfx("vfx/iw7/_requests/mp/vfx_phasesplit_holo_spawn");
-	level.var_CAA3["death"] = loadfx("vfx/iw7/_requests/mp/vfx_phasesplit_holo_death");
-	level.var_CAA3["shimmer"] = loadfx("vfx/iw7/_requests/mp/vfx_phasesplit_holo_shimmer");
+	level.var_CAA3["spawn"] = loadfx("vfx\iw7\_requests\mp\vfx_phasesplit_holo_spawn");
+	level.var_CAA3["death"] = loadfx("vfx\iw7\_requests\mp\vfx_phasesplit_holo_death");
+	level.var_CAA3["shimmer"] = loadfx("vfx\iw7\_requests\mp\vfx_phasesplit_holo_shimmer");
 }
 
 func_CAC1() {
@@ -49,7 +49,7 @@ func_CAC4(param_00) {
 	var_0B thread func_CAB4();
 	var_0B thread func_CAB3();
 	var_0B thread func_CAB6();
-	scripts\mp\_powers::func_4575(10,"power_phaseSplit_update","phaseSplit_end");
+	scripts\mp\powers::func_4575(10,"power_phaseSplit_update","phaseSplit_end");
 	thread func_CABB(1);
 }
 
@@ -78,7 +78,7 @@ func_CABB(param_00) {
 
 func_CAC0(param_00) {
 	if(!isdefined(param_00)) {
-		param_00 = scripts/mp/agents/agent_utility::getvalidspawnpathnodenearplayer(1,1);
+		param_00 = scripts\mp\agents\agent_utility::getvalidspawnpathnodenearplayer(1,1);
 	}
 
 	var_01 = scripts\mp\agents\_agents::add_humanoid_agent("phaseSplitAgent",self.team,"callback",param_00.origin,self.angles,self,0,0,"veteran",::func_CAB2);
@@ -128,7 +128,7 @@ func_CAB4() {
 	playfx(level.var_CAA3["death"],var_00.origin,anglestoforward(var_00.angles),anglestoup(var_00.angles));
 	if(isdefined(self.triggerportableradarping)) {
 		self.triggerportableradarping func_CABB();
-		if(scripts\mp\_utility::isreallyalive(self.triggerportableradarping)) {
+		if(scripts\mp\utility::isreallyalive(self.triggerportableradarping)) {
 			self.triggerportableradarping iprintlnbold("Clone Destroyed");
 		}
 	}
@@ -141,7 +141,7 @@ func_CAB3() {
 }
 
 func_CAB5() {
-	var_00 = scripts/mp/agents/agent_utility::getnumownedactiveagents(self);
+	var_00 = scripts\mp\agents\agent_utility::getnumownedactiveagents(self);
 	if(var_00 >= 2) {
 		return 0;
 	}
@@ -160,10 +160,10 @@ func_CAC9() {
 func_CACA(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08) {
 	scripts\mp\agents\_agents::on_humanoid_agent_killed_common(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08,0);
 	if(isplayer(param_01) && isdefined(self.triggerportableradarping) && param_01 != self.triggerportableradarping) {
-		self.triggerportableradarping scripts\mp\_utility::leaderdialogonplayer("squad_killed");
+		self.triggerportableradarping scripts\mp\utility::leaderdialogonplayer("squad_killed");
 	}
 
-	scripts/mp/agents/agent_utility::deactivateagent();
+	scripts\mp\agents\agent_utility::deactivateagent();
 }
 
 func_CAB2() {
@@ -173,7 +173,7 @@ func_CAB2() {
 	var_03 = [];
 	if(var_02.size > 0 && var_02[0] != "none") {
 		for(var_04 = 0;var_04 < var_02.size;var_04++) {
-			if(!scripts\mp\_weapons::isaltmodeweapon(var_02[var_04])) {
+			if(!scripts\mp\weapons::isaltmodeweapon(var_02[var_04])) {
 				var_03[var_03.size] = var_02[var_04];
 			}
 		}
@@ -182,26 +182,26 @@ func_CAB2() {
 	var_02 = var_03;
 	if(var_02.size > 0 && var_02[0] != "none") {
 		var_05 = var_02[0];
-		var_01["loadoutPrimary"] = scripts\mp\_utility::getweaponrootname(var_05);
-		var_06 = function_00E3(var_05);
+		var_01["loadoutPrimary"] = scripts\mp\utility::getweaponrootname(var_05);
+		var_06 = getweaponattachments(var_05);
 		for(var_04 = 0;var_04 < var_06.size;var_04++) {
 			var_07 = scripts\engine\utility::ter_op(var_04 > 0,"loadoutPrimaryAttachment" + var_04 + 1,"loadoutPrimaryAttachment");
 			var_01[var_07] = var_06[var_04];
 		}
 
-		var_01["loadoutPrimaryCamo"] = function_00E5(var_05);
+		var_01["loadoutPrimaryCamo"] = getweaponcamoname(var_05);
 	}
 
 	if(var_02.size > 0 && var_02[1] != "none") {
 		var_05 = var_02[1];
-		var_01["loadoutSecondary"] = scripts\mp\_utility::getweaponrootname(var_05);
-		var_06 = function_00E3(var_05);
+		var_01["loadoutSecondary"] = scripts\mp\utility::getweaponrootname(var_05);
+		var_06 = getweaponattachments(var_05);
 		for(var_04 = 0;var_04 < var_06.size;var_04++) {
 			var_07 = scripts\engine\utility::ter_op(var_04 > 0,"loadoutSecondaryAttachment1" + var_04,"loadoutSecondaryAttachment");
 			var_01[var_07] = var_06[var_04];
 		}
 
-		var_01["loadoutSecondaryCamo"] = function_00E5(var_05);
+		var_01["loadoutSecondaryCamo"] = getweaponcamoname(var_05);
 	}
 
 	return var_01;

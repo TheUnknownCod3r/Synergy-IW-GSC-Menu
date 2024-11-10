@@ -1,8 +1,8 @@
-/****************************
+/**********************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\4310.gsc
-****************************/
+ * Script: scripts\mp\maps\mp_geneva\gen\mp_geneva_fx.gsc
+**********************************************************/
 
 main() {
 	var_00 = scripts\engine\utility::createoneshoteffect("vfx_gn_candle_flame");

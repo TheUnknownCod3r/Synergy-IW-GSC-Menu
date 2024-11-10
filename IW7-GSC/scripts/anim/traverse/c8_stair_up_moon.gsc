@@ -1,8 +1,8 @@
-/**************************************************************
+/******************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\anim\traverse\c8_stair_up_moon.gsc
-**************************************************************/
+ * Script: scripts\anim\traverse\c8_stair_up_moon.gsc
+******************************************************/
 
 main() {
 	self endon("death");

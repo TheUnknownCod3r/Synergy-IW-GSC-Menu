@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2764.gsc
+ * Script: 2764.gsc
 ***************************************/
 
 main() {
@@ -56,7 +56,7 @@ main() {
   var_0[var_01] thread lanterns();
 
   scripts\mp\audio::init_audio();
-  scripts/mp/art::main();
+  scripts\mp\art::main();
   setupexploders();
   thread scripts\common\fx::initfx();
 
@@ -284,7 +284,7 @@ setupexploders() {
 
 lanterns() {
   if (!isdefined(level._effect["lantern_light"]))
-  level._effect["lantern_light"] = loadfx("vfx/props/glow_latern");
+  level._effect["lantern_light"] = loadfx("vfx\props\glow_latern");
 
   scripts\common\fx::loopfx("lantern_light", self.origin, 0.3, self.origin + (0, 0, 1));
 }

@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\3444.gsc
+ * Script: 3444.gsc
 ***************************************/
 
 remote_vehicle_setup() {

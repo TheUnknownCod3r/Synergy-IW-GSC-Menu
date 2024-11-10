@@ -1,37 +1,37 @@
-/***********************************************************
+/***************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\maps\cp_town\cp_town_mpq.gsc
-***********************************************************/
+ * Script: scripts\cp\maps\cp_town\cp_town_mpq.gsc
+***************************************************/
 
 cp_town_mpq_init() {
-	scripts/cp/zombies/zombie_quest::register_quest_step("deathray",0,::default_init,::deathray_step_1,::complete_deathray_step_1,::debug_deathray_step_1,1);
-	scripts/cp/zombies/zombie_quest::register_quest_step("deathray",1,::default_init,::deathray_step_2,::complete_deathray_step_2,::debug_deathray_step_2,1);
-	scripts/cp/zombies/zombie_quest::register_quest_step("deathray",2,::default_init,::deathray_step_3,::complete_deathray_step_3,::debug_deathray_step_3,1);
-	scripts/cp/zombies/zombie_quest::register_quest_step("deathray",3,::default_init,::deathray_step_4,::complete_deathray_step_4,::debug_deathray_step_4,1);
-	scripts/cp/zombies/zombie_quest::register_quest_step("deathray",4,::default_init,::deathray_step_5,::complete_deathray_step_5,::debug_deathray_step_5,1);
-	scripts/cp/zombies/zombie_quest::register_quest_step("deathray",5,::default_init,::deathray_step_6,::complete_deathray_step_6,::debug_deathray_step_6,1);
-	scripts/cp/zombies/zombie_quest::register_quest_step("deathray",6,::default_init,::deathray_step_7,::complete_deathray_step_7,::debug_deathray_step_7,1);
-	scripts/cp/zombies/zombie_quest::register_quest_step("chemistry",0,::init_chemistry_step_1,::chemistry_step_1,::complete_chemistry_step_1,::debug_chemistry_step_1,2);
-	scripts/cp/zombies/zombie_quest::register_quest_step("chemistry",1,::init_chemistry_step_2,::chemistry_step_2,::complete_chemistry_step_2,::debug_chemistry_step_2,2);
-	scripts/cp/zombies/zombie_quest::register_quest_step("chemistry",2,::init_chemistry_step_3,::chemistry_step_3,::complete_chemistry_step_3,::debug_chemistry_step_3,2," Create & carry Chem Mix ");
-	scripts/cp/zombies/zombie_quest::register_quest_step("chemistry",3,::init_chemistry_step_4,::chemistry_step_4,::complete_chemistry_step_4,::debug_chemistry_step_4,2," Add Chem Mix to bomb");
-	scripts/cp/zombies/zombie_quest::register_quest_step("launchcode",0,::init_launchcode_step_1,::launchcode_step_1,::launchcode_step_1_complete,::launchcode_step_1_debug,3," Open safe");
-	scripts/cp/zombies/zombie_quest::register_quest_step("launchcode",1,::default_init,::launchcode_step_2,::launchcode_step_2_complete,::launchcode_step_2_debug,3," Take codes");
-	scripts/cp/zombies/zombie_quest::register_quest_step("launchcode",2,::default_init,::launchcode_step_3,::launchcode_step_3_complete,::launchcode_step_3_debug,3," Build bomb");
-	scripts/cp/zombies/zombie_quest::register_quest_step("launchcode",3,::default_init,::launchcode_step_4,::complete_launchcode_step_4,::debug_launchcode_step_4,3);
+	scripts\cp\zombies\zombie_quest::register_quest_step("deathray",0,::default_init,::deathray_step_1,::complete_deathray_step_1,::debug_deathray_step_1,1);
+	scripts\cp\zombies\zombie_quest::register_quest_step("deathray",1,::default_init,::deathray_step_2,::complete_deathray_step_2,::debug_deathray_step_2,1);
+	scripts\cp\zombies\zombie_quest::register_quest_step("deathray",2,::default_init,::deathray_step_3,::complete_deathray_step_3,::debug_deathray_step_3,1);
+	scripts\cp\zombies\zombie_quest::register_quest_step("deathray",3,::default_init,::deathray_step_4,::complete_deathray_step_4,::debug_deathray_step_4,1);
+	scripts\cp\zombies\zombie_quest::register_quest_step("deathray",4,::default_init,::deathray_step_5,::complete_deathray_step_5,::debug_deathray_step_5,1);
+	scripts\cp\zombies\zombie_quest::register_quest_step("deathray",5,::default_init,::deathray_step_6,::complete_deathray_step_6,::debug_deathray_step_6,1);
+	scripts\cp\zombies\zombie_quest::register_quest_step("deathray",6,::default_init,::deathray_step_7,::complete_deathray_step_7,::debug_deathray_step_7,1);
+	scripts\cp\zombies\zombie_quest::register_quest_step("chemistry",0,::init_chemistry_step_1,::chemistry_step_1,::complete_chemistry_step_1,::debug_chemistry_step_1,2);
+	scripts\cp\zombies\zombie_quest::register_quest_step("chemistry",1,::init_chemistry_step_2,::chemistry_step_2,::complete_chemistry_step_2,::debug_chemistry_step_2,2);
+	scripts\cp\zombies\zombie_quest::register_quest_step("chemistry",2,::init_chemistry_step_3,::chemistry_step_3,::complete_chemistry_step_3,::debug_chemistry_step_3,2," Create & carry Chem Mix ");
+	scripts\cp\zombies\zombie_quest::register_quest_step("chemistry",3,::init_chemistry_step_4,::chemistry_step_4,::complete_chemistry_step_4,::debug_chemistry_step_4,2," Add Chem Mix to bomb");
+	scripts\cp\zombies\zombie_quest::register_quest_step("launchcode",0,::init_launchcode_step_1,::launchcode_step_1,::launchcode_step_1_complete,::launchcode_step_1_debug,3," Open safe");
+	scripts\cp\zombies\zombie_quest::register_quest_step("launchcode",1,::default_init,::launchcode_step_2,::launchcode_step_2_complete,::launchcode_step_2_debug,3," Take codes");
+	scripts\cp\zombies\zombie_quest::register_quest_step("launchcode",2,::default_init,::launchcode_step_3,::launchcode_step_3_complete,::launchcode_step_3_debug,3," Build bomb");
+	scripts\cp\zombies\zombie_quest::register_quest_step("launchcode",3,::default_init,::launchcode_step_4,::complete_launchcode_step_4,::debug_launchcode_step_4,3);
 	level.mpq_arm_func = ::set_quake_flag_if_close_to_arm;
-	level._effect["locker_key"] = loadfx("vfx/iw7/levels/cp_disco/Requests/vfx_locker_key.vfx");
-	level._effect["ufo_glow_death"] = loadfx("vfx/iw7/levels/cp_town/alien/vfx_atomize_zombie.vfx");
-	level._effect["life_ray_beam"] = loadfx("vfx/iw7/levels/cp_town/skq/vfx_life_beam.vfx");
-	level._effect["life_ray_burst"] = loadfx("vfx/iw7/levels/cp_town/skq/vfx_revive_burst.vfx");
-	level._effect["death_ray_beam"] = loadfx("vfx/iw7/levels/cp_town/skq/vfx_death_beam.vfx");
-	level._effect["death_ray_vaporize"] = loadfx("vfx/iw7/_requests/mp/vfx_atomize_body.vfx");
-	level._effect["torso_glow"] = loadfx("vfx/iw7/levels/cp_town/skq/vfx_part_torso_glow.vfx");
-	level._effect["head_glow"] = loadfx("vfx/iw7/levels/cp_town/skq/vfx_part_head_glow.vfx");
-	level._effect["meat_freeze"] = loadfx("vfx/iw7/levels/cp_town/skq/vfx_meat_freeze.vfx");
-	level._effect["mirror_break"] = loadfx("vfx/iw7/levels/cp_town/skq/vfx_mirror_break.vfx");
-	level._effect["turnstile_teleport"] = loadfx("vfx/iw7/levels/cp_town/vfx_town_telep_diss.vfx");
+	level._effect["locker_key"] = loadfx("vfx\iw7\levels\cp_disco\Requests\vfx_locker_key.vfx");
+	level._effect["ufo_glow_death"] = loadfx("vfx\iw7\levels\cp_town\alien\vfx_atomize_zombie.vfx");
+	level._effect["life_ray_beam"] = loadfx("vfx\iw7\levels\cp_town\skq\vfx_life_beam.vfx");
+	level._effect["life_ray_burst"] = loadfx("vfx\iw7\levels\cp_town\skq\vfx_revive_burst.vfx");
+	level._effect["death_ray_beam"] = loadfx("vfx\iw7\levels\cp_town\skq\vfx_death_beam.vfx");
+	level._effect["death_ray_vaporize"] = loadfx("vfx\iw7\_requests\mp\vfx_atomize_body.vfx");
+	level._effect["torso_glow"] = loadfx("vfx\iw7\levels\cp_town\skq\vfx_part_torso_glow.vfx");
+	level._effect["head_glow"] = loadfx("vfx\iw7\levels\cp_town\skq\vfx_part_head_glow.vfx");
+	level._effect["meat_freeze"] = loadfx("vfx\iw7\levels\cp_town\skq\vfx_meat_freeze.vfx");
+	level._effect["mirror_break"] = loadfx("vfx\iw7\levels\cp_town\skq\vfx_mirror_break.vfx");
+	level._effect["turnstile_teleport"] = loadfx("vfx\iw7\levels\cp_town\vfx_town_telep_diss.vfx");
 	init_zom_body();
 	level thread spawn_film_reel_hints();
 	level thread listen_for_zombie_spawn();
@@ -1173,7 +1173,7 @@ bounce_laser(param_00,param_01,param_02) {
 			var_03.angles = (0,0,0);
 		}
 
-		function_02E0(level._effect[param_01],var_03.origin,var_03.angles,var_05.origin);
+		playfxbetweenpoints(level._effect[param_01],var_03.origin,var_03.angles,var_05.origin);
 		wait(0.1);
 		var_04 delete();
 		return;
@@ -1183,7 +1183,7 @@ bounce_laser(param_00,param_01,param_02) {
 		var_03.angles = (0,0,0);
 	}
 
-	function_02E0(level._effect[param_01],var_03.origin,var_03.angles,var_05.origin);
+	playfxbetweenpoints(level._effect[param_01],var_03.origin,var_03.angles,var_05.origin);
 	wait(0.1);
 	var_03 = var_05;
 	var_05 = scripts\engine\utility::getstruct("mirror_spot_2","targetname");
@@ -1193,7 +1193,7 @@ bounce_laser(param_00,param_01,param_02) {
 			var_03.angles = (0,0,0);
 		}
 
-		function_02E0(level._effect[param_01],var_03.origin,var_03.angles,var_05.origin);
+		playfxbetweenpoints(level._effect[param_01],var_03.origin,var_03.angles,var_05.origin);
 		wait(0.1);
 		var_04 delete();
 		return;
@@ -1203,7 +1203,7 @@ bounce_laser(param_00,param_01,param_02) {
 		var_03.angles = (0,0,0);
 	}
 
-	function_02E0(level._effect[param_01],var_03.origin,var_03.angles,var_05.origin);
+	playfxbetweenpoints(level._effect[param_01],var_03.origin,var_03.angles,var_05.origin);
 	wait(0.1);
 	var_03 = var_05;
 	var_05 = scripts\engine\utility::getstruct("mirror_spot_3","targetname");
@@ -1213,7 +1213,7 @@ bounce_laser(param_00,param_01,param_02) {
 			var_03.angles = (0,0,0);
 		}
 
-		function_02E0(level._effect[param_01],var_03.origin,var_03.angles,var_05.origin);
+		playfxbetweenpoints(level._effect[param_01],var_03.origin,var_03.angles,var_05.origin);
 		wait(0.1);
 		var_04 delete();
 		return;
@@ -1223,7 +1223,7 @@ bounce_laser(param_00,param_01,param_02) {
 		var_03.angles = (0,0,0);
 	}
 
-	function_02E0(level._effect[param_01],var_03.origin,var_03.angles,var_05.origin);
+	playfxbetweenpoints(level._effect[param_01],var_03.origin,var_03.angles,var_05.origin);
 	wait(0.1);
 	var_03 = var_05;
 	var_05 = level.life_ray_end;
@@ -1231,7 +1231,7 @@ bounce_laser(param_00,param_01,param_02) {
 		var_03.angles = (0,0,0);
 	}
 
-	function_02E0(level._effect[param_01],var_03.origin,var_03.angles,var_05.origin);
+	playfxbetweenpoints(level._effect[param_01],var_03.origin,var_03.angles,var_05.origin);
 	wait(0.1);
 	playfx(level._effect[param_02],var_05.origin);
 	var_04 delete();
@@ -1256,7 +1256,7 @@ stop_and_fire() {
 	playfxontag(level._effect["death_ray_cannon_muzzle_flash"],self,"tag_origin");
 	var_06 = self gettagorigin("tag_origin");
 	var_07 = self gettagangles("tag_origin");
-	function_02E0(level._effect["death_ray_cannon_beam"],var_06,var_07,var_02.origin);
+	playfxbetweenpoints(level._effect["death_ray_cannon_beam"],var_06,var_07,var_02.origin);
 	playfx(level._effect["death_ray_cannon_rock_impact"],var_02.origin);
 	level thread make_glowing_zombies(var_02.origin);
 	wait(5);

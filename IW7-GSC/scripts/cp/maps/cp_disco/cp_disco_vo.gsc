@@ -1,8 +1,8 @@
-/************************************************************
+/****************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\maps\cp_disco\cp_disco_vo.gsc
-************************************************************/
+ * Script: scripts\cp\maps\cp_disco\cp_disco_vo.gsc
+****************************************************/
 
 disco_vo_init() {
 	level.recent_vo = [];

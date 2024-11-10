@@ -1,8 +1,8 @@
-/*********************************************
+/*************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\lightarmor.gsc
-*********************************************/
+ * Script: scripts\mp\lightarmor.gsc
+*************************************/
 
 haslightarmor(param_00) {
 	return getlightarmorvalue(param_00) > 0;
@@ -56,7 +56,7 @@ setlightarmorvalue(param_00,param_01,param_02,param_03) {
 }
 
 init() {
-	level._effect["lightArmor_persistent"] = loadfx("vfx/core/mp/core/vfx_uplink_carrier.vfx");
+	level._effect["lightArmor_persistent"] = loadfx("vfx\core\mp\core\vfx_uplink_carrier.vfx");
 }
 
 lightarmor_set(param_00,param_01,param_02) {
@@ -109,7 +109,7 @@ lightarmor_modifydamage(param_00,param_01,param_02,param_03,param_04,param_05,pa
 	}
 
 	if(!var_0B) {
-		if(function_0107(param_04)) {
+		if(isexplosivedamagemod(param_04)) {
 			if(isdefined(param_09) && isdefined(param_09.stuckenemyentity) && param_09.stuckenemyentity == param_00) {
 				var_0B = 1;
 			}

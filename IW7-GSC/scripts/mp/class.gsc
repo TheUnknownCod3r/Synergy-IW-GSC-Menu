@@ -1,8 +1,8 @@
-/****************************************
+/********************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\class.gsc
-****************************************/
+ * Script: scripts\mp\class.gsc
+********************************/
 
 init() {
 	level.classmap["class0"] = 0;
@@ -38,7 +38,7 @@ init() {
 	level.classmap["default4"] = 3;
 	level.classmap["default5"] = 4;
 	level.defaultclass = "CLASS_ASSAULT";
-	level.classtablename = "mp/classTable.csv";
+	level.classtablename = "mp\classTable.csv";
 	level thread onplayerconnecting();
 }
 
@@ -345,7 +345,7 @@ loadout_clearweapons() {
 		clearscriptable();
 	}
 
-	scripts/mp/archetypes/archcommon::removearchetype(self.loadoutarchetype);
+	scripts\mp\archetypes\archcommon::removearchetype(self.loadoutarchetype);
 	scripts\mp\perks\_perks::_clearperks();
 	scripts\mp\perks\_weaponpassives::forgetpassives();
 	scripts\mp\gestures_mp::func_41B2();
@@ -1034,42 +1034,42 @@ loadout_updateplayerarchetype(param_00) {
 		case "archetype_assault":
 			var_05 = "assault_mp";
 			var_06 = var_01 | var_02 | var_03;
-			var_07 = ::scripts/mp/archetypes/archassault::applyarchetype;
+			var_07 = ::scripts\mp\archetypes\archassault::applyarchetype;
 			var_08 = "vestlight";
 			break;
 
 		case "archetype_heavy":
 			var_05 = "armor_mp";
 			var_06 = var_01 | var_02 | var_03;
-			var_07 = ::scripts/mp/archetypes/archheavy::applyarchetype;
+			var_07 = ::scripts\mp\archetypes\archheavy::applyarchetype;
 			var_08 = "vestheavy";
 			break;
 
 		case "archetype_scout":
 			var_05 = "scout_mp";
 			var_06 = var_01 | var_02 | var_03;
-			var_07 = ::scripts/mp/archetypes/archscout::applyarchetype;
+			var_07 = ::scripts\mp\archetypes\archscout::applyarchetype;
 			var_08 = "c6servo";
 			break;
 
 		case "archetype_assassin":
 			var_05 = "assassin_mp";
 			var_06 = var_01 | var_02 | var_03;
-			var_07 = ::scripts/mp/archetypes/archassassin::applyarchetype;
+			var_07 = ::scripts\mp\archetypes\archassassin::applyarchetype;
 			var_08 = "vestftl";
 			break;
 
 		case "archetype_engineer":
 			var_05 = "engineer_mp";
 			var_06 = var_01 | var_02 | var_03;
-			var_07 = ::scripts/mp/archetypes/archengineer::applyarchetype;
+			var_07 = ::scripts\mp\archetypes\archengineer::applyarchetype;
 			var_08 = "vestlight";
 			break;
 
 		case "archetype_sniper":
 			var_05 = "sniper_mp";
 			var_06 = var_01 | var_02 | var_03;
-			var_07 = ::scripts/mp/archetypes/archsniper::applyarchetype;
+			var_07 = ::scripts\mp\archetypes\archsniper::applyarchetype;
 			var_08 = "vestghost";
 			break;
 
@@ -1130,8 +1130,8 @@ loadout_updateplayerarchetype(param_00) {
 		self.var_42B0 = var_08;
 	}
 
-	thread scripts/mp/archetypes/archcommon::func_EF38();
-	thread scripts/mp/archetypes/archcommon::func_EF41();
+	thread scripts\mp\archetypes\archcommon::func_EF38();
+	thread scripts\mp\archetypes\archcommon::func_EF41();
 }
 
 loadout_updateclassfinalweapons(param_00) {
@@ -1478,7 +1478,7 @@ setmlgspectatorclientloadoutdata(param_00,param_01) {
 	var_08 = param_01.loadoutrigtrait;
 	var_09 = scripts\mp\perks\_perks::getequipmenttableinfo(var_08);
 	param_00 getrandomindex("rigTrait",var_09);
-	var_0A = scripts/mp/archetypes/archcommon::getrigindexfromarchetyperef(param_01.loadoutarchetype);
+	var_0A = scripts\mp\archetypes\archcommon::getrigindexfromarchetyperef(param_01.loadoutarchetype);
 	param_00 getrandomindex("archetype",var_0A);
 	param_00 setclientextrasuper(0,param_01.loadoutextrapowerprimary);
 	param_00 setclientextrasuper(1,param_01.loadoutextrapowersecondary);
@@ -1669,7 +1669,7 @@ _detachall() {
 }
 
 func_9EE1(param_00) {
-	var_01 = tablelookup("mp/perktable.csv",1,param_00,8);
+	var_01 = tablelookup("mp\perktable.csv",1,param_00,8);
 	if(var_01 == "" || var_01 == "specialty_null") {
 		return 0;
 	}
@@ -1682,7 +1682,7 @@ func_9EE1(param_00) {
 }
 
 canplayerplacesentry(param_00) {
-	var_01 = tablelookup("mp/perktable.csv",1,param_00,8);
+	var_01 = tablelookup("mp\perktable.csv",1,param_00,8);
 	if(var_01 == "" || var_01 == "specialty_null") {
 		return "specialty_null";
 	}
@@ -2165,15 +2165,15 @@ buildweaponassetname(param_00,param_01) {
 buildweaponnamecamo(param_00,param_01,param_02) {
 	var_03 = -1;
 	if(isholidayweapon(param_00,param_02)) {
-		var_03 = int(tablelookup("mp/camoTable.csv",1,"camo89",scripts\engine\utility::getcamotablecolumnindex("weapon_index")));
+		var_03 = int(tablelookup("mp\camoTable.csv",1,"camo89",scripts\engine\utility::getcamotablecolumnindex("weapon_index")));
 		return param_00 + "+camo" + var_03;
 	}
 	else if(issummerholidayweapon(param_00,param_02)) {
-		var_03 = int(tablelookup("mp/camoTable.csv",1,"camo230",scripts\engine\utility::getcamotablecolumnindex("weapon_index")));
+		var_03 = int(tablelookup("mp\camoTable.csv",1,"camo230",scripts\engine\utility::getcamotablecolumnindex("weapon_index")));
 		return param_00 + "+camo" + var_03;
 	}
 	else if(ishalloweenholidayweapon(param_00,param_02)) {
-		var_03 = int(tablelookup("mp/camoTable.csv",1,"camo242",scripts\engine\utility::getcamotablecolumnindex("weapon_index")));
+		var_03 = int(tablelookup("mp\camoTable.csv",1,"camo242",scripts\engine\utility::getcamotablecolumnindex("weapon_index")));
 		return param_00 + "+camo" + var_03;
 	}
 	else if((!isdefined(param_01) || param_01 == "none") && ismark2weapon(param_02)) {
@@ -2200,7 +2200,7 @@ buildweaponnamecamo(param_00,param_01,param_02) {
 						break;
 		}
 
-		var_03 = int(tablelookup("mp/camoTable.csv",1,var_05,scripts\engine\utility::getcamotablecolumnindex("weapon_index")));
+		var_03 = int(tablelookup("mp\camoTable.csv",1,var_05,scripts\engine\utility::getcamotablecolumnindex("weapon_index")));
 		return param_00 + "+camo" + var_03;
 	}
 
@@ -2209,7 +2209,7 @@ buildweaponnamecamo(param_00,param_01,param_02) {
 	}
 	else
 	{
-		var_05 = int(tablelookup("mp/camoTable.csv",1,var_03,scripts\engine\utility::getcamotablecolumnindex("weapon_index")));
+		var_05 = int(tablelookup("mp\camoTable.csv",1,var_03,scripts\engine\utility::getcamotablecolumnindex("weapon_index")));
 	}
 
 	if(var_05 <= 0) {
@@ -2233,7 +2233,7 @@ buildweaponnamecamo(param_00,param_01,param_02) {
 		}
 
 		if(isdefined(var_05)) {
-			var_03 = int(tablelookup("mp/camoTable.csv",1,var_05,scripts\engine\utility::getcamotablecolumnindex("weapon_index")));
+			var_03 = int(tablelookup("mp\camoTable.csv",1,var_05,scripts\engine\utility::getcamotablecolumnindex("weapon_index")));
 		}
 		else
 		{
@@ -2249,7 +2249,7 @@ buildweaponnamereticle(param_00,param_01) {
 		return param_00;
 	}
 
-	var_02 = int(tablelookup("mp/reticleTable.csv",1,param_01,5));
+	var_02 = int(tablelookup("mp\reticleTable.csv",1,param_01,5));
 	if(!isdefined(var_02) || var_02 == 0) {
 		return param_00;
 	}
@@ -2483,8 +2483,8 @@ clearscriptable() {
 	self setscriptablepartstate("CompassIcon","defaultIcon");
 	scripts\mp\killstreaks\_chill_common::chill_resetscriptable();
 	scripts\mp\perks\_weaponpassives::passivecolddamageresetscriptable(self);
-	scripts/mp/archetypes/archscout::func_B946();
-	scripts/mp/equipment/cloak::func_E26A();
+	scripts\mp\archetypes\archscout::func_B946();
+	scripts\mp\equipment\cloak::func_E26A();
 }
 
 changearchetype(param_00,param_01,param_02) {

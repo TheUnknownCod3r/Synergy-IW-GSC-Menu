@@ -1,12 +1,12 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3414.gsc
-****************************/
+ * Script: 3414.gsc
+************************/
 
 init() {
 	if(!isdefined(game["clientMatchDataDef"])) {
-		game["clientMatchDataDef"] = "mp/zombieclientmatchdata.ddl";
+		game["clientMatchDataDef"] = "mp\zombieclientmatchdata.ddl";
 		setclientmatchdatadef(game["clientMatchDataDef"]);
 		setclientmatchdata("map",level.script);
 	}

@@ -1,16 +1,16 @@
-/*********************************************************
+/*************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\maps\mp_rivet\mp_rivet.gsc
-*********************************************************/
+ * Script: scripts\mp\maps\mp_rivet\mp_rivet.gsc
+*************************************************/
 
 main() {
-	lib_0FEB::main();
+	scripts\mp\maps\mp_rivet\mp_rivet_precache::main();
 	scripts\mp\maps\mp_rivet\gen\mp_rivet_art::main();
-	lib_0FEA::main();
+	scripts\mp\maps\mp_rivet\mp_rivet_fx::main();
 	level func_D80C();
-	scripts\mp\_load::main();
-	scripts\mp\_compass::func_FACD("compass_map_mp_rivet");
+	scripts\mp\load::main();
+	scripts\mp\compass::setupminimap("compass_map_mp_rivet");
 	setdvar("r_lightGridEnableTweaks",1);
 	setdvar("r_lightGridIntensity",1.33);
 	setdvar("r_umbraMinObjectContribution",8);
@@ -21,7 +21,7 @@ main() {
 	game["axis_outfit"] = "woodland";
 	level.var_C7B3 = getentarray("OutOfBounds","targetname");
 	level thread func_E563();
-	thread scripts\mp\_animation_suite::func_1FAA();
+	thread scripts\mp\animation_suite::animationsuite();
 	thread fix_collision();
 	thread patchoutofboundstrigger();
 }
@@ -267,9 +267,9 @@ func_1DA5() {
 func_1D9F() {
 	level endon("game_ended");
 	var_00 = [];
-	var_01 = scripts\common\utility::getstructarray("ambient_drone_start_loc","script_noteworthy");
+	var_01 = scripts\engine\utility::getstructarray("ambient_drone_start_loc","script_noteworthy");
 	foreach(var_03 in var_01) {
-		if(!isdefined(var_03.var_EE79)) {
+		if(!isdefined(var_03.script_parameters)) {
 			continue;
 		}
 
@@ -278,17 +278,17 @@ func_1D9F() {
 		var_04 setmodel("shipyard_drone_01_paths");
 		var_04.var_10DC1 = var_03.origin;
 		var_04.var_10D6D = var_03.angles;
-		var_04.var_E87A = 0;
-		var_04.var_EE79 = func_1D92(var_03.var_EE79);
-		if(isdefined(var_04.var_EE79)) {
-			var_04.var_1FB8 = getanimlength(var_04.var_EE79);
+		var_04.running = 0;
+		var_04.script_parameters = func_1D92(var_03.script_parameters);
+		if(isdefined(var_04.script_parameters)) {
+			var_04.var_1FB8 = getanimlength(var_04.script_parameters);
 			var_04.var_C891 = var_04 func_1D9B();
 			var_04.var_C891 linkto(var_04,"tag_ship_wall_panel");
 			var_04 func_1D94();
 			var_04 hide();
 			var_04.origin = var_04.var_10DC1;
 			var_04.angles = var_04.var_10D6D;
-			var_04 scriptmodelplayanimdeltamotion(var_04.var_EE79);
+			var_04 scriptmodelplayanimdeltamotion(var_04.script_parameters);
 			var_00[var_00.size] = var_04;
 		}
 	}
@@ -355,11 +355,11 @@ func_1DA2() {
 	level endon("game_ended");
 	for(;;) {
 		foreach(var_01 in level.var_1D99) {
-			if(!isdefined(var_01.var_E87A)) {
-				var_01.var_E87A = 0;
+			if(!isdefined(var_01.running)) {
+				var_01.running = 0;
 			}
 
-			if(var_01.var_E87A == 0) {
+			if(var_01.running == 0) {
 				var_01 thread func_1DA3();
 			}
 		}
@@ -371,9 +371,9 @@ func_1DA2() {
 func_1DA3() {
 	level endon("game_ended");
 	self endon("death");
-	self.var_E87A = 1;
+	self.running = 1;
 	wait(randomfloat(8));
-	self method_8292();
+	self scriptmodelclearanim();
 	self.origin = self.var_10DC1;
 	self.angles = self.var_10D6D;
 	if(func_4346() == 1) {
@@ -381,9 +381,9 @@ func_1DA3() {
 	}
 
 	self show();
-	thread lib_0FEA::func_CCEB();
-	if(isdefined(self.var_EE79)) {
-		self scriptmodelplayanimdeltamotion(self.var_EE79);
+	thread scripts\mp\maps\mp_rivet\mp_rivet_fx::func_CCEB();
+	if(isdefined(self.script_parameters)) {
+		self scriptmodelplayanimdeltamotion(self.script_parameters);
 	}
 
 	if(isdefined(self.var_1FB8)) {
@@ -395,9 +395,9 @@ func_1DA3() {
 	}
 
 	func_1D94();
-	lib_0FEA::func_10FDF();
+	scripts\mp\maps\mp_rivet\mp_rivet_fx::func_10FDF();
 	self hide();
-	self.var_E87A = 0;
+	self.running = 0;
 }
 
 func_1D9B() {
@@ -414,7 +414,7 @@ func_1D94() {
 
 func_1D95() {
 	self.var_10131 = 1;
-	self.var_C891 setmodel(scripts\common\utility::random(level.var_1D93));
+	self.var_C891 setmodel(scripts\engine\utility::random(level.var_1D93));
 	self.var_C891 show();
 }
 
@@ -427,17 +427,17 @@ func_F03C() {
 
 	if(isdefined(var_00)) {
 		var_00.var_4D29 = getent("mp_rivet_rocket_damage_vol","targetname");
-		var_00 thread lib_0FEA::func_F03D();
+		var_00 thread scripts\mp\maps\mp_rivet\mp_rivet_fx::func_F03D();
 		var_00 thread func_F03F();
 	}
 }
 
 func_F03F() {
 	thread func_6D22();
-	thread func_6D21();
+	thread fire_rocket();
 }
 
-func_6D21() {
+fire_rocket() {
 	level endon("game_ended");
 	self endon("death");
 	for(;;) {
@@ -475,10 +475,10 @@ func_6D22() {
 				break;
 			}
 
-			if(scripts\mp\_utility::func_9F19(var_00)) {
+			if(scripts\mp\utility::isreallyalive(var_00)) {
 				var_00 dodamage(var_00.maxhealth,self.origin,var_00,undefined,"MOD_EXPLOSIVE");
 				if(isplayer(var_00) || isagent(var_00)) {
-					thread func_57D4(var_00 method_8113());
+					thread func_57D4(var_00 _meth_8113());
 				}
 			}
 		}
@@ -488,28 +488,28 @@ func_6D22() {
 func_6D26() {
 	level endon("game_ended");
 	self endon("death");
-	if(!isdefined(level.var_85D5)) {
-		level.var_85D5 = [];
+	if(!isdefined(level.grenades)) {
+		level.grenades = [];
 	}
 
-	if(!isdefined(level.var_B898)) {
-		level.var_B898 = [];
+	if(!isdefined(level.missiles)) {
+		level.missiles = [];
 	}
 
-	if(!isdefined(level.var_B779)) {
-		level.var_B779 = [];
+	if(!isdefined(level.mines)) {
+		level.mines = [];
 	}
 
 	for(;;) {
 		level waittill("rivet_rocket_firing");
 		while(level.var_E5E1 == 1) {
-			var_00 = scripts\common\utility::array_combine(self getistouchingentities(level.var_85D5),self getistouchingentities(level.var_B898));
-			var_00 = scripts\common\utility::array_combine(self getistouchingentities(level.var_B779),var_00);
+			var_00 = scripts\engine\utility::array_combine(self getistouchingentities(level.grenades),self getistouchingentities(level.missiles));
+			var_00 = scripts\engine\utility::array_combine(self getistouchingentities(level.mines),var_00);
 			foreach(var_02 in var_00) {
-				var_02 scripts\mp\_weapons::func_51B5();
+				var_02 scripts\mp\weapons::deleteexplosive();
 			}
 
-			scripts\common\utility::func_136F7();
+			scripts\engine\utility::waitframe();
 		}
 	}
 }

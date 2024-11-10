@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\2603.gsc
-****************************/
+ * Script: 2603.gsc
+************************/
 
 func_11A90(param_00) {
 	func_F724();
@@ -416,14 +416,14 @@ _meth_811E(param_00) {
 	}
 
 	var_03 = undefined;
-	if(isdefined(self._blackboard.shootparams)) {
-		var_03 = self._blackboard.shootparams;
+	if(isdefined(self.var_1198.shootparams)) {
+		var_03 = self.var_1198.shootparams;
 	}
 	else if(isdefined(self.asm.shootparams)) {
 		var_03 = self.asm.shootparams;
 	}
 
-	if(!scripts/asm/asm_bb::func_2985()) {
+	if(!scripts\asm\asm_bb::func_2985()) {
 		return undefined;
 	}
 	else if(isdefined(var_03.ent)) {
@@ -482,12 +482,12 @@ func_11AF8(param_00) {
 	var_05 = 10;
 	for(;;) {
 		func_93E2();
-		var_06 = scripts/asm/asm::func_231B(self.asm.var_11AC7,"aim");
-		if(!var_06 && scripts/asm/asm::func_231B(self.asm.var_11AC7,"notetrackAim")) {
-			var_06 = scripts/asm/asm::func_232B(scripts/asm/asm::asm_getcurrentstate(self.asm.var_11AC7),"start_aim");
+		var_06 = scripts\asm\asm::func_231B(self.asm.var_11AC7,"aim");
+		if(!var_06 && scripts\asm\asm::func_231B(self.asm.var_11AC7,"notetrackAim")) {
+			var_06 = scripts\asm\asm::func_232B(scripts\asm\asm::asm_getcurrentstate(self.asm.var_11AC7),"start_aim");
 		}
 
-		if(!var_06 || !isdefined(self._blackboard.shootparams)) {
+		if(!var_06 || !isdefined(self.var_1198.shootparams)) {
 			if(!var_06 && isdefined(self.var_45E2)) {
 				func_41A1();
 			}
@@ -516,10 +516,10 @@ func_11AF8(param_00) {
 				var_0E = rotatevector(var_0D,var_0C);
 				var_09 = var_07 + var_0E * 512;
 			}
-			else if(scripts/asm/asm_bb::func_2985() && isdefined(self._blackboard.shootparams.pos)) {
-				if(isdefined(self._blackboard.shootparams.var_29AF)) {
-					var_0F = func_45E5(self._blackboard.shootparams);
-					var_09 = func_36DA(self._blackboard.shootparams);
+			else if(scripts\asm\asm_bb::func_2985() && isdefined(self.var_1198.shootparams.pos)) {
+				if(isdefined(self.var_1198.shootparams.var_29AF)) {
+					var_0F = func_45E5(self.var_1198.shootparams);
+					var_09 = func_36DA(self.var_1198.shootparams);
 					self.var_45E2.var_1A2B = var_09;
 					if(var_0F) {
 						func_11B0C();
@@ -553,9 +553,9 @@ func_11AF8(param_00) {
 
 			var_14 = 0;
 			var_15 = 0;
-			var_16 = scripts/asm/asm_bb::bb_getcovernode();
-			if(isdefined(var_16) && scripts/asm/asm_bb::bb_getrequestedcoverstate() == "exposed") {
-				var_17 = scripts/asm/asm_bb::func_2929();
+			var_16 = scripts\asm\asm_bb::bb_getcovernode();
+			if(isdefined(var_16) && scripts\asm\asm_bb::bb_getrequestedcoverstate() == "exposed") {
+				var_17 = scripts\asm\asm_bb::func_2929();
 				if(isdefined(var_17)) {
 					var_14 = scripts\asm\shared_utility::func_7FF2(param_00,var_16,var_17);
 					var_15 = scripts\asm\shared_utility::func_7FF1(param_00,var_16,var_17);
@@ -807,12 +807,12 @@ func_93E2() {
 }
 
 func_1A3A() {
-	if(!isdefined(self._blackboard.shootparams.pos) && !isdefined(self._blackboard.shootparams.ent)) {
+	if(!isdefined(self.var_1198.shootparams.pos) && !isdefined(self.var_1198.shootparams.ent)) {
 		return 1;
 	}
 
 	var_00 = self _meth_8164();
-	if(isdefined(self._blackboard.shootparams.var_29AF)) {
+	if(isdefined(self.var_1198.shootparams.var_29AF)) {
 		if(!isdefined(self.var_45E2)) {
 			return 0;
 		}
@@ -830,7 +830,7 @@ func_1A3A() {
 		return 0;
 	}
 
-	if(scripts/asm/asm_bb::func_293E()) {
+	if(scripts\asm\asm_bb::func_293E()) {
 		return 1;
 	}
 

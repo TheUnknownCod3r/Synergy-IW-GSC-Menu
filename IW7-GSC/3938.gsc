@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\3938.gsc
+ * Script: 3938.gsc
 ***************************************/
 
 registerscriptedagent() {

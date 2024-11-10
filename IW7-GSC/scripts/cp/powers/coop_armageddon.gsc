@@ -1,8 +1,8 @@
-/*********************************************************
+/*************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\powers\coop_armageddon.gsc
-*********************************************************/
+ * Script: scripts\cp\powers\coop_armageddon.gsc
+*************************************************/
 
 init_armageddon() {
 	scripts\engine\utility::flag_init("armageddon_active");
@@ -35,7 +35,7 @@ armageddon_timer() {
 	level endon("game_ended");
 	while(level.armageddon_time_remaining > 0) {
 		wait(1);
-		level.var_2177--;
+		level.armageddon_time_remaining--;
 	}
 
 	reset_armageddon_time();

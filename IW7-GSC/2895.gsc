@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2895.gsc
+ * Script: 2895.gsc
 ***************************************/
 
 func_967C() {
@@ -93,7 +93,7 @@ func_D66E() {
   else
   func_E826(var_03);
 
-  scripts/sp/mg_penetration::func_8715(var_1.turret);
+  scripts\sp\mg_penetration::func_8715(var_1.turret);
 }
 
 func_B6AB() {
@@ -397,9 +397,9 @@ func_140E() {
   }
 
   if (var_2.size)
-  var_03 = scripts/sp/utility::func_78AB(var_0.origin, undefined, var_02);
+  var_03 = scripts\sp\utility::func_78AB(var_0.origin, undefined, var_02);
   else
-  var_03 = scripts/sp/utility::func_78AA(var_0.origin, undefined);
+  var_03 = scripts\sp\utility::func_78AA(var_0.origin, undefined);
 
   var_02 = undefined;
 
@@ -772,7 +772,7 @@ func_129EA(var_00, var_01) {
 func_F6C3() {
   func_967C();
   var_00 = getentarray("misc_turret", "code_classname");
-  var_01 = scripts/sp/utility::func_7E72();
+  var_01 = scripts\sp\utility::func_7E72();
 
   for (var_02 = 0; var_02 < var_0.size; var_2++) {
   if (isdefined(var_0[var_02].func_EEAB)) {
@@ -822,7 +822,7 @@ func_B6A9(var_00, var_01, var_02) {
   var_00 = 0;
 
   self give_player_session_tokens("manual_ai");
-  var_03 = scripts/sp/utility::func_7E72();
+  var_03 = scripts\sp\utility::func_7E72();
 
   if (!isdefined(level.func_5CC3))
   var_04 = 1;
@@ -940,11 +940,11 @@ func_5C88(var_00, var_01, var_02) {
   var_04 = 1;
   }
 
-  scripts/sp/utility::func_12BDD("mg42_drones_target_trace");
+  scripts\sp\utility::func_12BDD("mg42_drones_target_trace");
   }
 
   self givesentry();
-  scripts/sp/utility::func_11165(level.func_5CC3[var_0.team], 1);
+  scripts\sp\utility::func_11165(level.func_5CC3[var_0.team], 1);
 }
 
 func_7868(var_00, var_01) {
@@ -1170,7 +1170,7 @@ func_12A61() {
 
 func_E2DB() {
   self.func_E80C = undefined;
-  scripts/sp/utility::func_F2A4(scripts\anim\init::empty);
+  scripts\sp\utility::func_F2A4(scripts\anim\init::empty);
 }
 
 func_E2E2() {
@@ -1325,9 +1325,9 @@ func_E826(var_00) {
   var_03 = _getstartorigin(var_0.origin, var_0.angles, var_02);
   self give_smack_perk(var_03);
   wait 0.05;
-  scripts/sp/utility::func_F2A4(scripts\anim\combat::func_68C7);
+  scripts\sp\utility::func_F2A4(scripts\anim\combat::func_68C7);
   scripts\engine\utility::clear_exception("move");
-  scripts/sp/utility::func_F398("cover_crouch", ::func_906E);
+  scripts\sp\utility::func_F398("cover_crouch", ::func_906E);
 
   while (distance(self.origin, var_03) > 16) {
   self give_smack_perk(var_03);
@@ -1350,7 +1350,7 @@ func_E826(var_00) {
   scripts\anim\shared::placeweaponon(self.primaryweapon, "right");
   func_13030(var_00);
   self detach(self.func_12A78, level.func_D66F);
-  scripts/sp/utility::func_F2A4(scripts\anim\init::empty);
+  scripts\sp\utility::func_F2A4(scripts\anim\init::empty);
   self notify("bcs_portable_turret_setup");
 }
 
@@ -1409,14 +1409,14 @@ func_12A4E() {
   else
   func_E826(var_05);
 
-  scripts/sp/mg_penetration::func_8715(var_2.turret);
+  scripts\sp\mg_penetration::func_8715(var_2.turret);
 }
 
 func_13030(var_00) {
   var_01 = self _meth_83D7(var_00);
 
   if (var_01) {
-  scripts/sp/utility::func_F398("move", ::func_12A4E);
+  scripts\sp\utility::func_F398("move", ::func_12A4E);
   self.turret = var_00;
   thread func_B6A3(var_00);
   var_00 give_player_session_tokens("manual_ai");

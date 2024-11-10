@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2637.gsc
+ * Script: 2637.gsc
 ***************************************/
 
 init_coop_challenge() {
@@ -19,7 +19,7 @@ func_C9B9() {
 func_956D() {
   scripts\engine\utility::flag_init("pause_challenges");
   var_00 = getdvar("ui_mapname");
-  level.zombie_challenge_table = "cp/zombies/" + var_00 + "_challenges.csv";
+  level.zombie_challenge_table = "cp\zombies\" + var_00 + "_challenges.csv";
 
   if (!_tableexists(level.zombie_challenge_table))
   level.zombie_challenge_table = undefined;
@@ -45,7 +45,7 @@ func_956D() {
 }
 
 update_challenge(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08, var_09) {
-  if (!current_challenge_is(var_00) || !scripts/cp/utility::coop_mode_has("challenge"))
+  if (!current_challenge_is(var_00) || !scripts\cp\utility::coop_mode_has("challenge"))
   return;
 
   if (level.func_D7B7)
@@ -56,7 +56,7 @@ update_challenge(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07,
 }
 
 func_62C6() {
-  if (current_challenge_exist() && scripts/cp/utility::coop_mode_has("challenge"))
+  if (current_challenge_exist() && scripts\cp\utility::coop_mode_has("challenge"))
   deactivate_current_challenge();
 }
 
@@ -75,18 +75,18 @@ deactivate_current_challenge() {
   if (isdefined(level.func_3C24))
   var_01 = level.func_3C24;
 
-  scripts/cp/cp_gamescore::update_players_encounter_performance(var_01, "challenge_complete");
-  scripts/cp/cp_persistence::update_lb_aliensession_challenge(1);
-  scripts/cp/cp_analytics::update_challenges_status(var_0.ref, 1);
+  scripts\cp\cp_gamescore::update_players_encounter_performance(var_01, "challenge_complete");
+  scripts\cp\cp_persistence::update_lb_aliensession_challenge(1);
+  scripts\cp\cp_analytics::update_challenges_status(var_0.ref, 1);
 
   if (func_9F17(var_00)) {
   if (level.current_challenge_timer - level.storechallengetime <= 0.01)
-  scripts/cp/zombies/zombie_analytics::func_AF63(var_0.ref, level.wave_num, level.storechallengetime - level.current_challenge_timer);
+  scripts\cp\zombies\zombie_analytics::func_AF63(var_0.ref, level.wave_num, level.storechallengetime - level.current_challenge_timer);
   else
-  scripts/cp/zombies/zombie_analytics::func_AF63(var_0.ref, level.wave_num, level.current_challenge_timer);
+  scripts\cp\zombies\zombie_analytics::func_AF63(var_0.ref, level.wave_num, level.current_challenge_timer);
 
   foreach (var_03 in level.players)
-  var_03 thread scripts/cp/cp_vo::try_to_play_vo("challenge_success_generic", "zmb_comment_vo");
+  var_03 thread scripts\cp\cp_vo::try_to_play_vo("challenge_success_generic", "zmb_comment_vo");
 
   level.func_C1E1++;
   }
@@ -98,24 +98,24 @@ deactivate_current_challenge() {
   level.func_3C2B[var_0.ref]++;
 
   if (var_0.ref == "no_laststand" || var_0.ref == "no_bleedout" || var_0.ref == "protect_player")
-  scripts/cp/zombies/zombie_analytics::func_AF64(var_0.ref, level.wave_num, 0, level.func_3C2B[var_0.ref]);
+  scripts\cp\zombies\zombie_analytics::func_AF64(var_0.ref, level.wave_num, 0, level.func_3C2B[var_0.ref]);
   else
-  scripts/cp/zombies/zombie_analytics::func_AF64(var_0.ref, level.wave_num, var_0.current_progress / var_0.goal * 100, level.func_3C2B[var_0.ref]);
+  scripts\cp\zombies\zombie_analytics::func_AF64(var_0.ref, level.wave_num, var_0.current_progress / var_0.goal * 100, level.func_3C2B[var_0.ref]);
 
   foreach (var_03 in level.players) {
-  if (!scripts/cp/utility::isplayingsolo() && level.players.size > 1) {
-  scripts/cp/cp_vo::try_to_play_vo_on_all_players("challenge_fail_team");
+  if (!scripts\cp\utility::isplayingsolo() && level.players.size > 1) {
+  scripts\cp\cp_vo::try_to_play_vo_on_all_players("challenge_fail_team");
   continue;
   }
 
-  var_03 thread scripts/cp/cp_vo::try_to_play_vo("challenge_fail_solo", "zmb_comment_vo");
+  var_03 thread scripts\cp\cp_vo::try_to_play_vo("challenge_fail_solo", "zmb_comment_vo");
   }
   }
 
   var_00 [[var_0.func_6AD0]]();
   level.func_1BE8 = 0;
-  scripts/cp/cp_persistence::update_lb_aliensession_challenge(0);
-  scripts/cp/cp_analytics::update_challenges_status(var_0.ref, 0);
+  scripts\cp\cp_persistence::update_lb_aliensession_challenge(0);
+  scripts\cp\cp_analytics::update_challenges_status(var_0.ref, 0);
   }
 
   level notify("challenge_deactivated");
@@ -351,7 +351,7 @@ func_12BF7() {
 
 func_F31A(var_00) {
   level.current_challenge = var_00;
-  scripts/cp/zombies/zombie_analytics::func_AF62(level.current_challenge, level.wave_num);
+  scripts\cp\zombies\zombie_analytics::func_AF62(level.current_challenge, level.wave_num);
   level.func_110AC = gettime() / 1000;
 }
 

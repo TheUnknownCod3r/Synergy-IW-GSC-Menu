@@ -1,8 +1,8 @@
-/**********************************************
+/**************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\engine\utility.gsc
-**********************************************/
+ * Script: scripts\engine\utility.gsc
+**************************************/
 
 noself_func(param_00,param_01,param_02,param_03,param_04) {
 	if(!isdefined(level.func)) {
@@ -2494,7 +2494,7 @@ loop_fx_sound(param_00,param_01,param_02,param_03,param_04) {
 loop_fx_sound_with_angles(param_00,param_01,param_02,param_03,param_04,param_05,param_06) {
 	if(isdefined(param_03) && param_03) {
 		if(!isdefined(level.first_frame) || level.first_frame == 1) {
-			function_01E3(param_00,param_01,param_02);
+			spawnloopingsound(param_00,param_01,param_02);
 			return;
 		}
 
@@ -3410,7 +3410,7 @@ getaimpitchtopoint3d(param_00) {
 getpitchtospot3d(param_00) {
 	var_01 = param_00 - self.origin;
 	var_02 = rotatevectorinverted(var_01,self.angles);
-	var_03 = function_02D1(var_02);
+	var_03 = vectortopitch(var_02);
 	var_04 = angleclamp180(var_03);
 	return var_04;
 }
@@ -3510,7 +3510,7 @@ wasdamagedbyoffhandshield() {
 		return 0;
 	}
 
-	if(!isdefined(self.var_E2) || function_024C(self.var_E2) != "shield") {
+	if(!isdefined(self.var_E2) || weapontype(self.var_E2) != "shield") {
 		return 0;
 	}
 

@@ -1,8 +1,8 @@
-/**********************************************************
+/**************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\killstreaks\_juggernaut.gsc
-**********************************************************/
+ * Script: scripts\mp\killstreaks\_juggernaut.gsc
+**************************************************/
 
 init() {
 	level.var_A4AD = [];
@@ -23,9 +23,9 @@ givejuggernaut(param_00) {
 		scripts\mp\perks\_perkfunctions::unsetlightarmor();
 	}
 
-	scripts\mp\_weapons::func_5608();
-	if(scripts\mp\_utility::_hasperk("specialty_explosivebullets")) {
-		scripts\mp\_utility::removeperk("specialty_explosivebullets");
+	scripts\mp\weapons::func_5608();
+	if(scripts\mp\utility::_hasperk("specialty_explosivebullets")) {
+		scripts\mp\utility::removeperk("specialty_explosivebullets");
 	}
 
 	self.health = self.maxhealth;
@@ -34,42 +34,42 @@ givejuggernaut(param_00) {
 		case "juggernaut":
 			self.isjuggernaut = 1;
 			self.var_A4AA = 0.8;
-			scripts\mp\_class::giveloadout(self.pers["team"],param_00,0);
+			scripts\mp\class::giveloadout(self.pers["team"],param_00,0);
 			self.movespeedscaler = 0.8;
-			scripts\mp\_utility::giveperk("specialty_scavenger");
-			scripts\mp\_utility::giveperk("specialty_quickdraw");
-			scripts\mp\_utility::giveperk("specialty_detectexplosive");
-			scripts\mp\_utility::giveperk("specialty_sharp_focus");
-			scripts\mp\_utility::giveperk("specialty_radarjuggernaut");
+			scripts\mp\utility::giveperk("specialty_scavenger");
+			scripts\mp\utility::giveperk("specialty_quickdraw");
+			scripts\mp\utility::giveperk("specialty_detectexplosive");
+			scripts\mp\utility::giveperk("specialty_sharp_focus");
+			scripts\mp\utility::giveperk("specialty_radarjuggernaut");
 			break;
 
 		case "juggernaut_recon":
 			self.isjuggernautrecon = 1;
 			self.var_A4AA = 0.8;
-			scripts\mp\_class::giveloadout(self.pers["team"],param_00);
+			scripts\mp\class::giveloadout(self.pers["team"],param_00);
 			self.movespeedscaler = 0.8;
-			scripts\mp\_utility::giveperk("specialty_scavenger");
-			scripts\mp\_utility::giveperk("specialty_coldblooded");
-			scripts\mp\_utility::giveperk("specialty_noscopeoutline");
-			scripts\mp\_utility::giveperk("specialty_detectexplosive");
-			scripts\mp\_utility::giveperk("specialty_sharp_focus");
-			scripts\mp\_utility::giveperk("specialty_radarjuggernaut");
+			scripts\mp\utility::giveperk("specialty_scavenger");
+			scripts\mp\utility::giveperk("specialty_coldblooded");
+			scripts\mp\utility::giveperk("specialty_noscopeoutline");
+			scripts\mp\utility::giveperk("specialty_detectexplosive");
+			scripts\mp\utility::giveperk("specialty_sharp_focus");
+			scripts\mp\utility::giveperk("specialty_radarjuggernaut");
 			if(!isagent(self)) {
 				self makeportableradar(self);
-				scripts\mp\_missions::processchallenge("ch_airdrop_juggernaut_recon");
+				scripts\mp\missions::processchallenge("ch_airdrop_juggernaut_recon");
 			}
 			break;
 
 		case "juggernaut_maniac":
 			self.isjuggernautmaniac = 1;
 			self.var_A4AA = 1.15;
-			scripts\mp\_class::giveloadout(self.pers["team"],param_00,0);
-			scripts\mp\_utility::giveperk("specialty_blindeye");
-			scripts\mp\_utility::giveperk("specialty_coldblooded");
-			scripts\mp\_utility::giveperk("specialty_noscopeoutline");
-			scripts\mp\_utility::giveperk("specialty_detectexplosive");
-			scripts\mp\_utility::giveperk("specialty_marathon");
-			scripts\mp\_utility::giveperk("specialty_falldamage");
+			scripts\mp\class::giveloadout(self.pers["team"],param_00,0);
+			scripts\mp\utility::giveperk("specialty_blindeye");
+			scripts\mp\utility::giveperk("specialty_coldblooded");
+			scripts\mp\utility::giveperk("specialty_noscopeoutline");
+			scripts\mp\utility::giveperk("specialty_detectexplosive");
+			scripts\mp\utility::giveperk("specialty_marathon");
+			scripts\mp\utility::giveperk("specialty_falldamage");
 			self.movespeedscaler = 1.15;
 			break;
 
@@ -79,15 +79,15 @@ givejuggernaut(param_00) {
 	}
 
 	if(func_CA4E("specialty_hardline")) {
-		scripts\mp\_utility::giveperk("specialty_hardline");
+		scripts\mp\utility::giveperk("specialty_hardline");
 	}
 
-	scripts\mp\_weapons::updatemovespeedscale();
+	scripts\mp\weapons::updatemovespeedscale();
 	self disableweaponpickup();
 	if(!isagent(self)) {
 		if(var_01) {
 			self setclientomnvar("ui_juggernaut",1);
-			thread scripts\mp\_utility::teamplayercardsplash(level.var_A4AD[param_00].var_10A41,self);
+			thread scripts\mp\utility::teamplayercardsplash(level.var_A4AD[param_00].var_10A41,self);
 			thread func_A4A9();
 			thread func_139F1();
 			thread func_13A13();
@@ -105,7 +105,7 @@ givejuggernaut(param_00) {
 	}
 
 	level notify("juggernaut_equipped",self);
-	scripts\mp\_matchdata::logkillstreakevent(param_00,self.origin);
+	scripts\mp\matchdata::logkillstreakevent(param_00,self.origin);
 }
 
 func_CA4E(param_00) {
@@ -126,7 +126,7 @@ func_A4A9() {
 	self endon("jugg_removed");
 	for(;;) {
 		wait(3);
-		scripts\mp\_utility::playplayerandnpcsounds(self,"juggernaut_breathing_player","juggernaut_breathing_sound");
+		scripts\mp\utility::playplayerandnpcsounds(self,"juggernaut_breathing_player","juggernaut_breathing_sound");
 	}
 }
 
@@ -140,7 +140,7 @@ func_13AB0() {
 			}
 			else
 			{
-				if(var_01 scripts\mp\_utility::isjuggernaut() && !isdefined(var_01.isjuggernautlevelcustom) && var_01.isjuggernautlevelcustom) {
+				if(var_01 scripts\mp\utility::isjuggernaut() && !isdefined(var_01.isjuggernautlevelcustom) && var_01.isjuggernautlevelcustom) {
 					var_01 setclientomnvar("ui_juggernaut",1);
 					continue;
 				}
@@ -206,14 +206,14 @@ func_F767() {
 }
 
 func_55F4() {
-	if(scripts\mp\_utility::isjuggernaut()) {
+	if(scripts\mp\utility::isjuggernaut()) {
 		self.var_A4A4 = 1;
 		self setclientomnvar("ui_juggernaut",0);
 	}
 }
 
 func_626C() {
-	if(scripts\mp\_utility::isjuggernaut()) {
+	if(scripts\mp\utility::isjuggernaut()) {
 		self.var_A4A4 = undefined;
 		self setclientomnvar("ui_juggernaut",1);
 	}
@@ -225,7 +225,7 @@ func_139F1() {
 	self endon("jugg_removed");
 	level endon("game_ended");
 	for(;;) {
-		if(!isdefined(self.var_A4A4) && scripts\mp\_utility::isusingremote()) {
+		if(!isdefined(self.var_A4A4) && scripts\mp\utility::isusingremote()) {
 			self waittill("black_out_done");
 			func_55F4();
 		}
@@ -240,7 +240,7 @@ func_13A13() {
 	self endon("jugg_removed");
 	level endon("game_ended");
 	for(;;) {
-		if(isdefined(self.var_A4A4) && !scripts\mp\_utility::isusingremote()) {
+		if(isdefined(self.var_A4A4) && !scripts\mp\utility::isusingremote()) {
 			func_626C();
 		}
 

@@ -1,8 +1,8 @@
-/************************************************************
+/****************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\zombies\zombies_chi_meter.gsc
-************************************************************/
+ * Script: scripts\cp\zombies\zombies_chi_meter.gsc
+****************************************************/
 
 init_chi_meter(param_00) {
 	param_00.chi_meter_adustment = 0;

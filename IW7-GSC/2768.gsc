@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2768.gsc
+ * Script: 2768.gsc
 ***************************************/
 
 init() {
@@ -142,29 +142,29 @@ matchrecording_eventcharmap(var_00) {
 
 func_B3F4() {
   var_00 = [];
-  var_0[var_0.size] = "<mrec_map> " + level.script + "//n";
-  var_0[var_0.size] = "<mrec_game_type> " + level.gametype + "//n";
-  var_0[var_0.size] = "<mrec_event_def> PATH p//n";
-  var_0[var_0.size] = "<mrec_event_def> PATH_SPAWN s//n";
-  var_0[var_0.size] = "<mrec_event_def> PATH_DEATH d//n";
-  var_0[var_0.size] = "<mrec_event_def> PATH_BULLET b//n";
-  var_0[var_0.size] = "<mrec_event_def> PATH_EXPLOSION e//n";
-  var_0[var_0.size] = "<mrec_event_def> ANCHOR t//n";
-  var_0[var_0.size] = "<mrec_event_def> GENERIC_LINE l 255,0,0,0//n";
-  var_0[var_0.size] = "<mrec_event_def> GENERIC_LINE [255,255,127,0//n";
-  var_0[var_0.size] = "<mrec_event_def> GENERIC_LINE] 255,0,255,255//n";
-  var_0[var_0.size] = "<mrec_event_def> GENERIC_IMAGE A flagA.tga flagAallies.tga flagAaxis.tga//n";
-  var_0[var_0.size] = "<mrec_event_def> GENERIC_IMAGE B flagB.tga flagBallies.tga flagBaxis.tga//n";
-  var_0[var_0.size] = "<mrec_event_def> GENERIC_IMAGE C flagC.tga flagCallies.tga flagCaxis.tga//n";
-  var_0[var_0.size] = "<mrec_event_def> SPAWN_ENTITY S//n";
-  var_0[var_0.size] = "<mrec_event_def> GENERIC_IMAGE O flagAallies.tga flagAaxis.tga//n";
-  var_0[var_0.size] = "<mrec_event_def> LOG_MESSAGE ! \"No good spawns found. Using bad spawn.\" //n";
-  var_0[var_0.size] = "<mrec_event_def> LOG_MESSAGE m \"MSG: \" //n";
-  var_0[var_0.size] = "<mrec_event_def> LOG_MESSAGE u \"User Event From \" //n";
-  var_0[var_0.size] = "<mrec_event_def> LOG_MESSAGE ? \"STAT: \" //n";
-  var_0[var_0.size] = "<mrec_event_def> PLAYER_NAME n//n";
-  var_0[var_0.size] = "<mrec_event_def> GENERIC_IMAGE + bestSpawnAllies.tga//n";
-  var_0[var_0.size] = "<mrec_event_def> GENERIC_IMAGE ^ bestSpawnAxis.tga//n";
+  var_0[var_0.size] = "<mrec_map> " + level.script + "\\n";
+  var_0[var_0.size] = "<mrec_game_type> " + level.gametype + "\\n";
+  var_0[var_0.size] = "<mrec_event_def> PATH p\\n";
+  var_0[var_0.size] = "<mrec_event_def> PATH_SPAWN s\\n";
+  var_0[var_0.size] = "<mrec_event_def> PATH_DEATH d\\n";
+  var_0[var_0.size] = "<mrec_event_def> PATH_BULLET b\\n";
+  var_0[var_0.size] = "<mrec_event_def> PATH_EXPLOSION e\\n";
+  var_0[var_0.size] = "<mrec_event_def> ANCHOR t\\n";
+  var_0[var_0.size] = "<mrec_event_def> GENERIC_LINE l 255,0,0,0\\n";
+  var_0[var_0.size] = "<mrec_event_def> GENERIC_LINE [255,255,127,0\\n";
+  var_0[var_0.size] = "<mrec_event_def> GENERIC_LINE] 255,0,255,255\\n";
+  var_0[var_0.size] = "<mrec_event_def> GENERIC_IMAGE A flagA.tga flagAallies.tga flagAaxis.tga\\n";
+  var_0[var_0.size] = "<mrec_event_def> GENERIC_IMAGE B flagB.tga flagBallies.tga flagBaxis.tga\\n";
+  var_0[var_0.size] = "<mrec_event_def> GENERIC_IMAGE C flagC.tga flagCallies.tga flagCaxis.tga\\n";
+  var_0[var_0.size] = "<mrec_event_def> SPAWN_ENTITY S\\n";
+  var_0[var_0.size] = "<mrec_event_def> GENERIC_IMAGE O flagAallies.tga flagAaxis.tga\\n";
+  var_0[var_0.size] = "<mrec_event_def> LOG_MESSAGE ! \"No good spawns found. Using bad spawn.\" \\n";
+  var_0[var_0.size] = "<mrec_event_def> LOG_MESSAGE m \"MSG: \" \\n";
+  var_0[var_0.size] = "<mrec_event_def> LOG_MESSAGE u \"User Event From \" \\n";
+  var_0[var_0.size] = "<mrec_event_def> LOG_MESSAGE ? \"STAT: \" \\n";
+  var_0[var_0.size] = "<mrec_event_def> PLAYER_NAME n\\n";
+  var_0[var_0.size] = "<mrec_event_def> GENERIC_IMAGE + bestSpawnAllies.tga\\n";
+  var_0[var_0.size] = "<mrec_event_def> GENERIC_IMAGE ^ bestSpawnAxis.tga\\n";
   return var_00;
 }
 
@@ -264,7 +264,7 @@ matchrecording_glog_dump() {
   func_B3F5();
 
   foreach (var_01 in level.matchrecevents)
-  logprint(var_01 + "//n");
+  logprint(var_01 + "\\n");
 
   level.matchrecevents = [];
 }

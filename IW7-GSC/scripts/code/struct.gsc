@@ -1,8 +1,8 @@
-/*******************************************
+/***********************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\code\struct.gsc
-*******************************************/
+ * Script: scripts\code\struct.gsc
+***********************************/
 
 initstructs() {
 	level.struct = [];

@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3835.gsc
-****************************/
+ * Script: 3835.gsc
+************************/
 
 func_FE05() {
 	if(!isdefined(level.var_FD6E)) {
@@ -573,7 +573,7 @@ func_CD3F(param_00) {
 		var_02 = level.var_C6AA["retribution"].var_454F["captain"];
 	}
 
-	thread scripts/sp/interaction::func_CD50(param_00,var_01,var_02);
+	thread scripts\sp\interaction::func_CD50(param_00,var_01,var_02);
 }
 
 func_11004() {
@@ -581,7 +581,7 @@ func_11004() {
 		scripts\sp\_utility::func_65DD("hold_simple_idles");
 	}
 
-	thread scripts/sp/interaction::func_9A0F();
+	thread scripts\sp\interaction::func_9A0F();
 	if(isdefined(self.var_C6B7)) {
 		if(isdefined(self.var_C6B7.var_4B31)) {
 			self.var_C6B7 aiclearanim(self.var_C6B7.var_4B31,0.2);
@@ -604,7 +604,7 @@ func_45A5() {
 
 func_F59B(param_00) {
 	level.var_FDFA = param_00;
-	scripts/sp/loadout::func_F56D(level.var_FDFA);
+	scripts\sp\loadout::func_F56D(level.var_FDFA);
 	setsaveddvar("missionSelected","1");
 	setomnvar("ui_opsmap_selected_mission",param_00);
 }

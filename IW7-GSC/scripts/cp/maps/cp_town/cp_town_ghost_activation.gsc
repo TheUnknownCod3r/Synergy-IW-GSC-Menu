@@ -1,17 +1,17 @@
-/************************************************************************
+/****************************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\maps\cp_town\cp_town_ghost_activation.gsc
-************************************************************************/
+ * Script: scripts\cp\maps\cp_town\cp_town_ghost_activation.gsc
+****************************************************************/
 
 init_ghost_n_skull_4_quest() {
-	scripts/cp/zombies/zombie_quest::register_quest_step("ghostFour",0,::blank,::shoot_skulls_in_map,::complete_shoot_skulls_in_map,::debug_shoot_skulls_in_map,5,"Shoot skulls around the map");
-	scripts/cp/zombies/zombie_quest::register_quest_step("ghostFour",1,::blank,::find_radiation_extractor_collect_radiation,::complete_radiation_extractor_collect_radiation,::debug_radiation_extractor_collect_radiation,5,"Collect radiation");
-	scripts/cp/zombies/zombie_quest::register_quest_step("ghostFour",2,::blank,::pollute_pool_and_kills,::complete_pollute_pool_and_kills,::debug_pollute_pool_and_kills,5,"Pollute Pool and Kill");
-	scripts/cp/zombies/zombie_quest::register_quest_step("ghostFour",3,::blank,::cipher_quest,::complete_cipher_quest,::debug_cipher_quest,5,"Cipher Quest");
-	scripts/cp/zombies/zombie_quest::register_quest_step("ghostFour",4,::blank,::weeping_angels_start,::complete_weeping_angels_start,::debug_weeping_angels_start,5,"Weeping angles");
-	scripts/cp/zombies/zombie_quest::register_quest_step("ghostFour",5,::blank,::shoot_the_machine,::complete_shoot_the_machine,::debug_shoot_the_machine,5,"Shoot the arcade machine");
-	scripts/cp/zombies/zombie_quest::register_quest_step("ghostFour",6,::blank,::wait_for_player_activation,::complete_clean_arcade_cabinet,::debug_wait_for_player_activation,5,"Wait for player activation");
+	scripts\cp\zombies\zombie_quest::register_quest_step("ghostFour",0,::blank,::shoot_skulls_in_map,::complete_shoot_skulls_in_map,::debug_shoot_skulls_in_map,5,"Shoot skulls around the map");
+	scripts\cp\zombies\zombie_quest::register_quest_step("ghostFour",1,::blank,::find_radiation_extractor_collect_radiation,::complete_radiation_extractor_collect_radiation,::debug_radiation_extractor_collect_radiation,5,"Collect radiation");
+	scripts\cp\zombies\zombie_quest::register_quest_step("ghostFour",2,::blank,::pollute_pool_and_kills,::complete_pollute_pool_and_kills,::debug_pollute_pool_and_kills,5,"Pollute Pool and Kill");
+	scripts\cp\zombies\zombie_quest::register_quest_step("ghostFour",3,::blank,::cipher_quest,::complete_cipher_quest,::debug_cipher_quest,5,"Cipher Quest");
+	scripts\cp\zombies\zombie_quest::register_quest_step("ghostFour",4,::blank,::weeping_angels_start,::complete_weeping_angels_start,::debug_weeping_angels_start,5,"Weeping angles");
+	scripts\cp\zombies\zombie_quest::register_quest_step("ghostFour",5,::blank,::shoot_the_machine,::complete_shoot_the_machine,::debug_shoot_the_machine,5,"Shoot the arcade machine");
+	scripts\cp\zombies\zombie_quest::register_quest_step("ghostFour",6,::blank,::wait_for_player_activation,::complete_clean_arcade_cabinet,::debug_wait_for_player_activation,5,"Wait for player activation");
 	init();
 	init_cipher_clue_texture();
 }
@@ -1871,10 +1871,10 @@ init_skulls_to_shoot() {
 }
 
 load_gns_3_vfx() {
-	level._effect["combo_arc_green"] = loadfx("vfx/iw7/core/zombie/ghosts_n_skulls/vfx_ghost_combo_arc_green.vfx");
-	level._effect["combo_arc_red"] = loadfx("vfx/iw7/core/zombie/ghosts_n_skulls/vfx_ghost_combo_arc_red.vfx");
-	level._effect["combo_arc_blue"] = loadfx("vfx/iw7/core/zombie/ghosts_n_skulls/vfx_ghost_combo_arc_blue.vfx");
-	level._effect["combo_arc_yellow"] = loadfx("vfx/iw7/core/zombie/ghosts_n_skulls/vfx_ghost_combo_arc_yellow.vfx");
+	level._effect["combo_arc_green"] = loadfx("vfx\iw7\core\zombie\ghosts_n_skulls\vfx_ghost_combo_arc_green.vfx");
+	level._effect["combo_arc_red"] = loadfx("vfx\iw7\core\zombie\ghosts_n_skulls\vfx_ghost_combo_arc_red.vfx");
+	level._effect["combo_arc_blue"] = loadfx("vfx\iw7\core\zombie\ghosts_n_skulls\vfx_ghost_combo_arc_blue.vfx");
+	level._effect["combo_arc_yellow"] = loadfx("vfx\iw7\core\zombie\ghosts_n_skulls\vfx_ghost_combo_arc_yellow.vfx");
 }
 
 cp_town_set_moving_target_color(param_00,param_01) {}
@@ -1914,7 +1914,7 @@ town_gns_player_reward_func() {
 	level.unlimited_fnf = 1;
 	foreach(var_01 in level.players) {
 		if(!scripts\engine\utility::istrue(level.entered_thru_card)) {
-			var_01 scripts/cp/zombies/achievement::update_achievement("QUARTER_MUNCHER",1);
+			var_01 scripts\cp\zombies\achievement::update_achievement("QUARTER_MUNCHER",1);
 		}
 
 		var_01 thread scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::give_gns_base_reward(var_01);
@@ -1976,11 +1976,11 @@ register_waves_movement() {
 }
 
 load_cp_town_ghost_exp_vfx() {
-	level._effect["ghost_explosion_death_red"] = loadfx("vfx/iw7/core/zombie/ghosts_n_skulls/vfx_zmb_ghost_imp_red.vfx");
-	level._effect["ghost_explosion_death_yellow"] = loadfx("vfx/iw7/core/zombie/ghosts_n_skulls/vfx_zmb_ghost_imp_yellow.vfx");
-	level._effect["ghost_explosion_death_blue"] = loadfx("vfx/iw7/core/zombie/ghosts_n_skulls/vfx_zmb_ghost_imp_blue.vfx");
-	level._effect["ghost_explosion_death_white"] = loadfx("vfx/iw7/core/zombie/ghosts_n_skulls/vfx_zmb_ghost_imp_white.vfx");
-	level._effect["sb_quest_item_pickup"] = loadfx("vfx/iw7/core/zombie/vfx_zom_souvenir_pickup.vfx");
+	level._effect["ghost_explosion_death_red"] = loadfx("vfx\iw7\core\zombie\ghosts_n_skulls\vfx_zmb_ghost_imp_red.vfx");
+	level._effect["ghost_explosion_death_yellow"] = loadfx("vfx\iw7\core\zombie\ghosts_n_skulls\vfx_zmb_ghost_imp_yellow.vfx");
+	level._effect["ghost_explosion_death_blue"] = loadfx("vfx\iw7\core\zombie\ghosts_n_skulls\vfx_zmb_ghost_imp_blue.vfx");
+	level._effect["ghost_explosion_death_white"] = loadfx("vfx\iw7\core\zombie\ghosts_n_skulls\vfx_zmb_ghost_imp_white.vfx");
+	level._effect["sb_quest_item_pickup"] = loadfx("vfx\iw7\core\zombie\vfx_zom_souvenir_pickup.vfx");
 }
 
 activate_gns_platforms() {
@@ -2174,7 +2174,7 @@ get_vfx_start_moving_target(param_00) {
 delay_moving_target_explode(param_00,param_01,param_02,param_03) {
 	play_combo_arc_vfx(param_00,param_02,param_03);
 	playfx(level._effect["ghost_explosion_death_" + param_00.color],param_00.origin,anglestoforward(param_00.angles),anglestoup(param_00.angles));
-	scripts/aitypes/zombie_ghost/behaviors::remove_moving_target_default(param_00,param_01);
+	scripts\aitypes\zombie_ghost\behaviors::remove_moving_target_default(param_00,param_01);
 }
 
 play_combo_arc_vfx(param_00,param_01,param_02) {
@@ -2185,7 +2185,7 @@ play_combo_arc_vfx(param_00,param_01,param_02) {
 			var_06 = param_00.origin;
 			var_07 = var_06 - var_05;
 			var_08 = vectortoangles(var_07);
-			function_02E0(level._effect["combo_arc_" + param_00.color],var_05,var_08,var_06);
+			playfxbetweenpoints(level._effect["combo_arc_" + param_00.color],var_05,var_08,var_06);
 			scripts\engine\utility::waitframe();
 		}
 
@@ -2232,17 +2232,17 @@ adjust_mahjong_pick_up_pos() {
 }
 
 reactivate_skullbuster_cabinet() {
-	if(!scripts/cp/zombies/zombie_quest::quest_line_exist("reactivateghost")) {
+	if(!scripts\cp\zombies\zombie_quest::quest_line_exist("reactivateghost")) {
 		var_00 = getomnvar("zm_num_ghost_n_skull_coin");
 		if(isdefined(var_00) && var_00 < 5) {
 			return;
 		}
 
-		scripts/cp/zombies/zombie_quest::register_quest_step("reactivateghost",0,::scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::reactivate_cabinet,::shoot_the_machine,::complete_shoot_the_machine,::debug_shoot_the_machine);
-		scripts/cp/zombies/zombie_quest::register_quest_step("reactivateghost",1,::blank,::wait_for_player_activation,::complete_clean_arcade_cabinet,::debug_wait_for_player_activation);
+		scripts\cp\zombies\zombie_quest::register_quest_step("reactivateghost",0,::scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::reactivate_cabinet,::shoot_the_machine,::complete_shoot_the_machine,::debug_shoot_the_machine);
+		scripts\cp\zombies\zombie_quest::register_quest_step("reactivateghost",1,::blank,::wait_for_player_activation,::complete_clean_arcade_cabinet,::debug_wait_for_player_activation);
 	}
 
-	level thread scripts/cp/zombies/zombie_quest::start_quest_line("reactivateghost");
+	level thread scripts\cp\zombies\zombie_quest::start_quest_line("reactivateghost");
 }
 
 init_weeping_angels_note() {
@@ -2500,7 +2500,7 @@ func_B545(param_00,param_01,param_02) {
 	self.carriedby = undefined;
 	param_02.iscarrying = 0;
 	var_03.triggerportableradarping = param_02;
-	if(function_010F(var_03.origin,level.pool_placement_volume)) {
+	if(ispointinvolume(var_03.origin,level.pool_placement_volume)) {
 		level thread radiation_extractor_after_pool_part(var_03.origin);
 		level.pool_extraction_fx = spawnfx(level._effect["pool_radiation"],var_03.origin + (0,0,3));
 		triggerfx(level.pool_extraction_fx);

@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2880.gsc
+ * Script: 2880.gsc
 ***************************************/
 
 func_DEB8(var_00, var_01) {
@@ -94,8 +94,8 @@ func_DC81(var_00) {
   var_04 = [];
   var_05 = 0;
   self notify("ambient_idle_scene_start");
-  thread scripts/sp/anim::func_10CBF(var_00, "single anim");
-  thread scripts/sp/anim::func_1FCA(var_00, "single anim");
+  thread scripts\sp\anim::func_10CBF(var_00, "single anim");
+  thread scripts\sp\anim::func_1FCA(var_00, "single anim");
 
   for (;;) {
   if (var_4.size >= var_02) {
@@ -201,10 +201,10 @@ func_DC84(var_00) {
 
   foreach (var_07 in var_00) {
   if (!isdefined(var_7.func_1FEC))
-  var_07 scripts/sp/anim::func_F64A();
+  var_07 scripts\sp\anim::func_F64A();
 
-  thread scripts/sp/anim::func_10CBF(var_07, "single anim");
-  thread scripts/sp/anim::func_1FCA(var_07, "single anim");
+  thread scripts\sp\anim::func_10CBF(var_07, "single anim");
+  thread scripts\sp\anim::func_1FCA(var_07, "single anim");
   }
 
   for (;;) {
@@ -351,8 +351,8 @@ func_DC82(var_00) {
   var_03 = [];
   var_04 = 0;
   self notify("ambient_idle_scene_start");
-  thread scripts/sp/anim::func_10CBF(var_00, "single anim");
-  thread scripts/sp/anim::func_1FCA(var_00, "single anim");
+  thread scripts\sp\anim::func_10CBF(var_00, "single anim");
+  thread scripts\sp\anim::func_1FCA(var_00, "single anim");
 
   for (;;) {
   if (var_3.size >= var_01) {
@@ -418,8 +418,8 @@ func_DC83(var_00) {
   var_09 = _getstartangles(self.origin, self.angles, var_07);
   var_6.origin = var_08;
   var_6.angles = var_09;
-  thread scripts/sp/anim::func_10CBF(var_06, "single anim");
-  thread scripts/sp/anim::func_1FCA(var_06, "single anim");
+  thread scripts\sp\anim::func_10CBF(var_06, "single anim");
+  thread scripts\sp\anim::func_1FCA(var_06, "single anim");
   var_10 = undefined;
 
   if (isdefined(var_6.func_1ED4))
@@ -566,13 +566,13 @@ func_CDD6(var_00, var_01, var_02) {
   var_0.func_DC89 = 1;
 
   for (;;) {
-  scripts/sp/anim::func_1F35(var_00, var_01);
+  scripts\sp\anim::func_1F35(var_00, var_01);
 
   if (var_4.size < 1)
   var_04 = var_03;
 
   var_05 = randomint(var_4.size);
-  scripts/sp/anim::func_1F35(var_00, var_4[var_05]);
+  scripts\sp\anim::func_1F35(var_00, var_4[var_05]);
   var_03 = scripts\engine\utility::array_add(var_03, var_4[var_05]);
   var_04 = scripts\engine\utility::array_remove(var_04, var_4[var_05]);
   scripts\engine\utility::waitframe();

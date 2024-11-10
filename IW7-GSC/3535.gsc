@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\3535.gsc
+ * Script: 3535.gsc
 ***************************************/
 
 runequipmentping(var_00, var_01) {

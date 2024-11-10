@@ -1,17 +1,17 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3129.gsc
-****************************/
+ * Script: 3129.gsc
+************************/
 
 func_3EA8(param_00,param_01,param_02) {
 	return 0;
 }
 
 func_CEC6(param_00,param_01,param_02,param_03) {
-	var_04 = scripts/asm/asm_mp::asm_getanim(param_00,param_01);
+	var_04 = scripts\asm\asm_mp::asm_getanim(param_00,param_01);
 	var_05 = func_7EE8(var_04);
-	var_06 = scripts/asm/asm_bb::bb_getthrowgrenadetarget();
+	var_06 = scripts\asm\asm_bb::bb_getthrowgrenadetarget();
 	if(var_06 == self.isnodeoccupied) {
 		var_07 = trygrenadethrow(param_00,param_01,var_06,undefined,var_04,param_02,var_05);
 	}
@@ -23,7 +23,7 @@ func_CEC6(param_00,param_01,param_02,param_03) {
 	if(!var_07) {
 		self endon(param_01 + "_finished");
 		wait(0.2);
-		scripts/asm/asm::asm_fireevent(param_01,"end");
+		scripts\asm\asm::asm_fireevent(param_01,"end");
 	}
 }
 
@@ -223,12 +223,12 @@ func_58BA(param_00,param_01,param_02,param_03,param_04,param_05,param_06) {
 	self endon("killanimscript");
 	self endon(param_01 + "_finished");
 	thread func_89AD(param_00,param_01,param_02,param_05,param_06);
-	scripts/asm/asm_mp::func_2365(param_00,param_01,param_04,param_02);
+	scripts\asm\asm_mp::func_2365(param_00,param_01,param_04,param_02);
 	self waittillmatch("end",param_01);
 	self notify("done_grenade_throw");
 	self notify("weapon_switch_done");
-	if(!scripts/asm/asm::func_232B(param_01,"end")) {
-		scripts/asm/asm::asm_fireevent(param_01,"end");
+	if(!scripts\asm\asm::func_232B(param_01,"end")) {
+		scripts\asm\asm::asm_fireevent(param_01,"end");
 	}
 }
 

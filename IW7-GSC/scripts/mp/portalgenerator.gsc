@@ -1,11 +1,11 @@
-/**************************************************
+/******************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\portalgenerator.gsc
-**************************************************/
+ * Script: scripts\mp\portalgenerator.gsc
+******************************************/
 
 portalgeneratorinit() {
-	level._effect["portal_open"] = loadfx("vfx/iw7/_requests/mp/vfx_portal_generator");
+	level._effect["portal_open"] = loadfx("vfx\iw7\_requests\mp\vfx_portal_generator");
 }
 
 portalgeneratorused(param_00) {
@@ -126,12 +126,12 @@ func_13B15(param_00) {
 			continue;
 		}
 
-		if(!scripts/mp/equipment/phase_shift::isentityphaseshifted(var_03)) {
+		if(!scripts\mp\equipment\phase_shift::isentityphaseshifted(var_03)) {
 			var_03 thread func_10DDD(var_01);
 		}
 		else
 		{
-			var_03 scripts/mp/equipment/phase_shift::exitphaseshift(1);
+			var_03 scripts\mp\equipment\phase_shift::exitphaseshift(1);
 		}
 
 		var_03 thread func_10DDE(var_02);
@@ -142,7 +142,7 @@ func_10DDD(param_00) {
 	self endon("death");
 	self endon("disconnect");
 	self endon("phase_shift_completed");
-	scripts/mp/equipment/phase_shift::func_6626(1);
+	scripts\mp\equipment\phase_shift::func_6626(1);
 	wait(param_00);
 	thread func_6979();
 }
@@ -157,7 +157,7 @@ func_10DDE(param_00) {
 
 func_6979() {
 	level endon("game_ended");
-	scripts/mp/equipment/phase_shift::exitphaseshift(1);
+	scripts\mp\equipment\phase_shift::exitphaseshift(1);
 	var_00 = self gettagorigin("j_mainroot") + (0,0,10);
 	var_01 = spawnfx(scripts\engine\utility::getfx("portal_open"),var_00);
 	triggerfx(var_01);

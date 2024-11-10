@@ -1,11 +1,11 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3546.gsc
-****************************/
+ * Script: 3546.gsc
+************************/
 
 func_2B29() {
-	scripts\mp\_powerloot::func_DF06("power_blackhat",["passive_increased_radius"]);
+	scripts\mp\powerloot::func_DF06("power_blackhat",["passive_increased_radius"]);
 }
 
 func_E0D4() {
@@ -29,19 +29,19 @@ func_2B2D() {
 	self endon("disconnect");
 	self endon("blackhat_used");
 	self iprintlnbold("Blackhat");
-	var_00 = scripts\mp\_powers::func_D735("power_blackhat");
+	var_00 = scripts\mp\powers::func_D735("power_blackhat");
 	var_01 = 0;
 	self playgestureviewmodel("ges_hack_lock_in",undefined,var_01,0.5);
 	for(;;) {
-		if(!scripts\mp\_powers::func_9F09(var_00)) {
+		if(!scripts\mp\powers::func_9F09(var_00)) {
 			break;
 		}
 
-		if(scripts\mp\_powers::func_9F09(var_00)) {
+		if(scripts\mp\powers::func_9F09(var_00)) {
 			thread func_2B2B(var_00);
-			while(scripts\mp\_powers::func_9F09(var_00)) {
+			while(scripts\mp\powers::func_9F09(var_00)) {
 				wait(0.05);
-				if(!scripts\mp\_powers::func_9F09(var_00)) {
+				if(!scripts\mp\powers::func_9F09(var_00)) {
 					break;
 				}
 			}
@@ -68,9 +68,9 @@ func_2B2B(param_00) {
 	self endon("using_blackhat");
 	var_01 = [];
 	var_02 = [];
-	var_03 = scripts\mp\_powerloot::func_7FC4("power_blackhat",20);
+	var_03 = scripts\mp\powerloot::func_7FC4("power_blackhat",20);
 	for(;;) {
-		if(scripts\mp\_powers::func_9F09(param_00)) {
+		if(scripts\mp\powers::func_9F09(param_00)) {
 			var_04 = [];
 			var_01 = func_7E94(self);
 			foreach(var_06 in var_01) {
@@ -83,7 +83,7 @@ func_2B2B(param_00) {
 			if(var_04.size) {
 				var_02 = sortbydistance(var_04,self.origin);
 				self.var_AA25 = var_02[0];
-				scripts\mp\_hostmigration::waitlongdurationwithhostmigrationpause(0.25);
+				scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(0.25);
 				if(isdefined(self.var_AA25) && isdefined(self.var_AA26) && self.var_AA26) {
 					func_11375(self.var_AA25);
 					self notify("blackhat_fired");
@@ -99,7 +99,7 @@ func_2B2B(param_00) {
 
 			self.var_AA26 = 0;
 			wait(0.1);
-			scripts\mp\_hostmigration::waittillhostmigrationdone();
+			scripts\mp\hostmigration::waittillhostmigrationdone();
 			continue;
 		}
 
@@ -112,8 +112,8 @@ func_11375(param_00) {}
 
 func_11319(param_00) {
 	var_01 = level.weaponconfigs["sticky_mine_mp"];
-	param_00 scripts\mp\_weapons::stopblinkinglight();
-	param_00 thread scripts\mp\_weapons::doblinkinglight("tag_fx",var_01.mine_beacon["friendly"],var_01.mine_beacon["enemy"]);
+	param_00 scripts\mp\weapons::stopblinkinglight();
+	param_00 thread scripts\mp\weapons::doblinkinglight("tag_fx",var_01.mine_beacon["friendly"],var_01.mine_beacon["enemy"]);
 }
 
 func_2B2A() {
@@ -153,7 +153,7 @@ func_7E94(param_00) {
 
 func_2B28(param_00) {
 	var_01 = [];
-	var_02 = scripts\mp\_utility::getotherteam(self.team);
+	var_02 = scripts\mp\utility::getotherteam(self.team);
 	if(level.teambased) {
 		if(isdefined(level.mines)) {
 			foreach(var_04 in level.mines) {

@@ -1,12 +1,12 @@
-/*********************************************************
+/*************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\killstreaks\aalauncher.gsc
-*********************************************************/
+ * Script: scripts\mp\killstreaks\aalauncher.gsc
+*************************************************/
 
 init() {
 	scripts\mp\killstreaks\_killstreaks::registerkillstreak("aa_launcher",::func_6D69,undefined,::func_5FBC,undefined,::func_11378);
-	scripts\mp\_laserguidedlauncher::func_AC0B("vfx/core/mp/killstreaks/vfx_maaws_split","vfx/core/mp/killstreaks/vfx_maaws_homing");
+	scripts\mp\laserguidedlauncher::func_AC0B("vfx\core\mp\killstreaks\vfx_maaws_split","vfx\core\mp\killstreaks\vfx_maaws_homing");
 }
 
 getaalaunchername() {
@@ -41,7 +41,7 @@ monitorweaponswitch(param_00) {
 	self endon("death");
 	self endon("disconnect");
 	self waittill("weapon_change",var_01);
-	thread scripts\mp\_laserguidedlauncher::func_AC08(getaalaunchername(),getaalauncherchildname(),getaalauncherhomingname());
+	thread scripts\mp\laserguidedlauncher::func_AC08(getaalaunchername(),getaalauncherchildname(),getaalauncherhomingname());
 	self waittill("weapon_change");
-	scripts\mp\_laserguidedlauncher::func_AC07();
+	scripts\mp\laserguidedlauncher::func_AC07();
 }

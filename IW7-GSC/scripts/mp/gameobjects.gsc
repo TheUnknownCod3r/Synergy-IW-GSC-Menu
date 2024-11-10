@@ -1,8 +1,8 @@
-/**********************************************
+/**************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\gameobjects.gsc
-**********************************************/
+ * Script: scripts\mp\gameobjects.gsc
+**************************************/
 
 main(param_00) {
 	param_00[param_00.size] = "airdrop_pallet";
@@ -493,7 +493,7 @@ func_CB44(param_00) {
 		wait(0.2);
 	}
 
-	if(!scripts/mp/equipment/phase_shift::isentityphaseshifted(self)) {
+	if(!scripts\mp\equipment\phase_shift::isentityphaseshifted(self)) {
 		self.var_38ED = 1;
 	}
 }
@@ -1573,7 +1573,7 @@ func_DAD2() {
 			continue;
 		}
 
-		if(!scripts/mp/equipment/phase_shift::areentitiesinphase(self,var_01)) {
+		if(!scripts\mp\equipment\phase_shift::areentitiesinphase(self,var_01)) {
 			continue;
 		}
 
@@ -1683,7 +1683,7 @@ func_127CA(param_00) {
 	self.touchtriggers[param_00.entnum] = param_00.trigger;
 	param_00 func_12F57();
 	while(scripts\mp\utility::isreallyalive(self) && isdefined(param_00.trigger) && self istouching(param_00.trigger) && !level.gameended) {
-		if(!scripts/mp/equipment/phase_shift::areentitiesinphase(self,param_00)) {
+		if(!scripts\mp\equipment\phase_shift::areentitiesinphase(self,param_00)) {
 			break;
 		}
 

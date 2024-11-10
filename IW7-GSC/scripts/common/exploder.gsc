@@ -1,8 +1,8 @@
-/***********************************************
+/***************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\common\exploder.gsc
-***********************************************/
+ * Script: scripts\common\exploder.gsc
+***************************************/
 
 setup_individual_exploder(param_00) {
 	var_01 = param_00.script_exploder;
@@ -593,7 +593,7 @@ brush_delete() {
 	}
 
 	if(isdefined(self.model.classname)) {
-		if(!function_02A4(self.model) && isdefined(self.model.classname)) {
+		if(!isstruct(self.model) && isdefined(self.model.classname)) {
 			if(scripts\engine\utility::issp() && self.model.spawnimpulsefield & 1) {
 				self.model [[level.func["connectPaths"]]]();
 			}
@@ -620,7 +620,7 @@ brush_delete() {
 	}
 
 	waittillframeend;
-	if(isdefined(self.model) && !function_02A4(self.model) && isdefined(self.model.classname)) {
+	if(isdefined(self.model) && !isstruct(self.model) && isdefined(self.model.classname)) {
 		self.model delete();
 	}
 }

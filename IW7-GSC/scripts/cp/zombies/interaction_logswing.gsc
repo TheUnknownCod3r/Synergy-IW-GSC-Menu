@@ -1,8 +1,8 @@
-/***************************************************************
+/*******************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\zombies\interaction_logswing.gsc
-***************************************************************/
+ * Script: scripts\cp\zombies\interaction_logswing.gsc
+*******************************************************/
 
 init_logswing_trap() {
 	wait(1);
@@ -75,7 +75,7 @@ kill_zombies(param_00,param_01,param_02) {
 		}
 
 		var_03.flung = 1;
-		param_02.var_126A4++;
+		param_02.trap_kills++;
 		level thread fling_zombie(var_03,self,param_01);
 	}
 }

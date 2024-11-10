@@ -1,8 +1,8 @@
-/*****************************************************
+/*********************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\asm\elvira\elvira_asm.gsc
-*****************************************************/
+ * Script: scripts\asm\elvira\elvira_asm.gsc
+*********************************************/
 
 elvirainit(param_00,param_01,param_02,param_03) {
 	self.var_FFEF = 1;
@@ -57,7 +57,7 @@ isrevivedone(param_00,param_01,param_02,param_03) {
 		return 1;
 	}
 
-	if(!scripts\common\utility::istrue(self.reviveplayer.inlaststand)) {
+	if(!scripts\engine\utility::istrue(self.reviveplayer.inlaststand)) {
 		return 1;
 	}
 
@@ -87,7 +87,7 @@ playreviveanim(param_00,param_01,param_02,param_03) {
 }
 
 shouldabortaction(param_00,param_01,param_02,param_03) {
-	if(scripts\common\utility::istrue(self.btraversalteleport)) {
+	if(scripts\engine\utility::istrue(self.btraversalteleport)) {
 		return 0;
 	}
 
@@ -166,7 +166,7 @@ faceplayer(param_00,param_01) {
 			break;
 		}
 
-		scripts\common\utility::waitframe();
+		scripts\engine\utility::waitframe();
 	}
 }
 

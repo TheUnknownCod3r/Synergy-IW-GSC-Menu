@@ -1,20 +1,20 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2985.gsc
+ * Script: 2985.gsc
 ***************************************/
 
 func_39B3(var_00, var_01, var_02) {
-  scripts/sp/vehicle_build::func_31A3(999, 500, 1500);
+  scripts\sp\vehicle_build::func_31A3(999, 500, 1500);
 
   if (issubstr(var_02, "mons") && level.script != "marscrash")
-  scripts/sp/vehicle_build::func_31B8("mig_rumble", 0.2, 0.15, 1000000, 0.05, 0.05);
+  scripts\sp\vehicle_build::func_31B8("mig_rumble", 0.2, 0.15, 1000000, 0.05, 0.05);
   else
-  scripts/sp/vehicle_build::func_31B8("mig_rumble", 0.2, 0.15, 20300, 0.05, 0.05);
+  scripts\sp\vehicle_build::func_31B8("mig_rumble", 0.2, 0.15, 20300, 0.05, 0.05);
 
-  scripts/sp/vehicle_build::func_31C4("axis");
-  scripts/sp/vehicle_build::func_319F();
-  scripts/sp/vehicle_build::func_31C6(var_02, "default", "vfx/iw7/core/tread/vfx_treadfx_capship_dust_02.vfx", 0);
-  scripts/sp/vehicle_build::func_3186(var_00, "tag_origin");
+  scripts\sp\vehicle_build::func_31C4("axis");
+  scripts\sp\vehicle_build::func_319F();
+  scripts\sp\vehicle_build::func_31C6(var_02, "default", "vfx\iw7\core\tread\vfx_treadfx_capship_dust_02.vfx", 0);
+  scripts\sp\vehicle_build::func_3186(var_00, "tag_origin");
   func_39C7(var_00);
 
   if (issubstr(var_02, "cheap"))
@@ -169,120 +169,120 @@ func_246C(var_00) {
 
 func_3994(var_00) {
   if (!isdefined(level.func_3997)) {
-  level._effect["light_blue_small"] = loadfx("vfx/iw7/core/light/vfx_blue_light_sml.vfx");
-  level._effect["light_red_small"] = loadfx("vfx/core/lights/vfx_orange_lights_med.vfx");
-  level._effect["light_blue_large"] = loadfx("vfx/iw7/core/light/vfx_blue_light_lrg.vfx");
-  level._effect["light_red_large"] = loadfx("vfx/core/lights/vfx_red_lights_big.vfx");
-  level._effect["flak_omni_space"] = loadfx("vfx/iw7/core/vehicle/capship/vfx_capship_flak_omni_space_opt.vfx");
-  level._effect["flak_wall_space"] = loadfx("vfx/iw7/core/vehicle/capship/vfx_capship_flak_wall_space.vfx");
-  level._effect["phalanx_burst_fire"] = loadfx("vfx/iw7/core/vehicle/capship/vfx_capship_phalanx_spray_space.vfx");
-  level._effect["miniflak_muzzle"] = loadfx("vfx/iw7/core/vehicle/capship/vfx_capship_flak_mini_muzz.vfx");
-  level._effect["miniflak_trace"] = loadfx("vfx/iw7/core/vehicle/capship/vfx_capship_flak_mini_trace.vfx");
-  level._effect["miniflak"] = loadfx("vfx/iw7/core/vehicle/capship/vfx_capship_flak_mini.vfx");
-  level._effect["damage_heavy_fire"] = loadfx("vfx/iw7/core/vehicle/capship/vfx_capship_damage_heavy_fire.vfx");
-  level._effect["missile_flare_generic"] = loadfx("vfx/iw7/core/vehicle/jackal/vfx_player_missile.vfx");
-  level._effect["jet_missile_imp_water"] = loadfx("vfx/old/space_fighter/vfx_jet_missile_imp_water.vfx");
-  level._effect["jet_missile_imp_generic"] = loadfx("vfx/iw7/levels/moon/vfx_jet_missile_imp_generic_moon.vfx");
-  level._effect["jet_missile_imp_airburst"] = loadfx("vfx/iw7/levels/moon/vfx_jet_missile_imp_generic_moon_premature.vfx");
-  level._effect["vfx_generic_ship_death"] = loadfx("vfx/iw7/core/expl/vehicle/vfx_destroyer_death_dps.vfx");
-  level._effect["vfx_capship_ca_death_small"] = loadfx("vfx/iw7/core/vehicle/capship/ca/vfx_capship_ca_death_small.vfx");
-  level._effect["vfx_capship_ca_death_med"] = loadfx("vfx/iw7/core/vehicle/capship/ca/vfx_capship_ca_death_med.vfx");
-  level._effect["vfx_capship_ca_death_large"] = loadfx("vfx/iw7/core/vehicle/capship/ca/vfx_capship_ca_death_large.vfx");
-  level._effect["vfx_capship_ca_death_huge"] = loadfx("vfx/iw7/core/vehicle/capship/ca/vfx_capship_ca_death_huge.vfx");
+  level._effect["light_blue_small"] = loadfx("vfx\iw7\core\light\vfx_blue_light_sml.vfx");
+  level._effect["light_red_small"] = loadfx("vfx\core\lights\vfx_orange_lights_med.vfx");
+  level._effect["light_blue_large"] = loadfx("vfx\iw7\core\light\vfx_blue_light_lrg.vfx");
+  level._effect["light_red_large"] = loadfx("vfx\core\lights\vfx_red_lights_big.vfx");
+  level._effect["flak_omni_space"] = loadfx("vfx\iw7\core\vehicle\capship\vfx_capship_flak_omni_space_opt.vfx");
+  level._effect["flak_wall_space"] = loadfx("vfx\iw7\core\vehicle\capship\vfx_capship_flak_wall_space.vfx");
+  level._effect["phalanx_burst_fire"] = loadfx("vfx\iw7\core\vehicle\capship\vfx_capship_phalanx_spray_space.vfx");
+  level._effect["miniflak_muzzle"] = loadfx("vfx\iw7\core\vehicle\capship\vfx_capship_flak_mini_muzz.vfx");
+  level._effect["miniflak_trace"] = loadfx("vfx\iw7\core\vehicle\capship\vfx_capship_flak_mini_trace.vfx");
+  level._effect["miniflak"] = loadfx("vfx\iw7\core\vehicle\capship\vfx_capship_flak_mini.vfx");
+  level._effect["damage_heavy_fire"] = loadfx("vfx\iw7\core\vehicle\capship\vfx_capship_damage_heavy_fire.vfx");
+  level._effect["missile_flare_generic"] = loadfx("vfx\iw7\core\vehicle\jackal\vfx_player_missile.vfx");
+  level._effect["jet_missile_imp_water"] = loadfx("vfx\old\space_fighter\vfx_jet_missile_imp_water.vfx");
+  level._effect["jet_missile_imp_generic"] = loadfx("vfx\iw7\levels\moon\vfx_jet_missile_imp_generic_moon.vfx");
+  level._effect["jet_missile_imp_airburst"] = loadfx("vfx\iw7\levels\moon\vfx_jet_missile_imp_generic_moon_premature.vfx");
+  level._effect["vfx_generic_ship_death"] = loadfx("vfx\iw7\core\expl\vehicle\vfx_destroyer_death_dps.vfx");
+  level._effect["vfx_capship_ca_death_small"] = loadfx("vfx\iw7\core\vehicle\capship\ca\vfx_capship_ca_death_small.vfx");
+  level._effect["vfx_capship_ca_death_med"] = loadfx("vfx\iw7\core\vehicle\capship\ca\vfx_capship_ca_death_med.vfx");
+  level._effect["vfx_capship_ca_death_large"] = loadfx("vfx\iw7\core\vehicle\capship\ca\vfx_capship_ca_death_large.vfx");
+  level._effect["vfx_capship_ca_death_huge"] = loadfx("vfx\iw7\core\vehicle\capship\ca\vfx_capship_ca_death_huge.vfx");
   level.func_3997 = 1;
   }
 
   if (var_00 == "un" && !isdefined(level.func_399A)) {
-  level._effect["un_thruster_down_sml_idle"] = loadfx("vfx/iw7/core/vehicle/capship/un/vfx_capship_un_thruster_down_sml_idle.vfx");
-  level._effect["un_thruster_down_sml_heavy"] = loadfx("vfx/iw7/core/vehicle/capship/un/vfx_capship_un_thruster_down_sml_heavy.vfx");
-  level._effect["un_thruster_down_sml_launch"] = loadfx("vfx/iw7/core/vehicle/capship/un/vfx_capship_un_thruster_down_sml_heavy.vfx");
-  level._effect["un_thruster_down_med_idle"] = loadfx("vfx/iw7/core/vehicle/capship/un/vfx_capship_un_thruster_down_med_idle.vfx");
-  level._effect["un_thruster_down_med_heavy"] = loadfx("vfx/iw7/core/vehicle/capship/un/vfx_capship_un_thruster_down_med_heavy.vfx");
-  level._effect["un_thruster_down_med_launch"] = loadfx("vfx/iw7/core/vehicle/capship/un/vfx_capship_un_thruster_down_med_launch.vfx");
-  level._effect["un_thruster_down_lrg_idle"] = loadfx("vfx/iw7/core/vehicle/capship/un/vfx_capship_un_thruster_down_lrg_idle.vfx");
-  level._effect["un_thruster_down_lrg_heavy"] = loadfx("vfx/iw7/core/vehicle/capship/un/vfx_capship_un_thruster_down_lrg_heavy.vfx");
-  level._effect["un_thruster_down_lrg_launch"] = loadfx("vfx/iw7/core/vehicle/capship/un/vfx_capship_un_thruster_down_lrg_launch.vfx");
-  level._effect["un_thruster_rear_med_idle"] = loadfx("vfx/iw7/core/vehicle/capship/un/vfx_capship_un_thruster_rear_med_idle.vfx");
-  level._effect["un_thruster_rear_med_light"] = loadfx("vfx/iw7/core/vehicle/capship/un/vfx_capship_un_thruster_rear_med_light.vfx");
-  level._effect["un_thruster_rear_med_heavy"] = loadfx("vfx/iw7/core/vehicle/capship/un/vfx_capship_un_thruster_rear_med_heavy.vfx");
-  level._effect["un_thruster_rear_med_launch"] = loadfx("vfx/iw7/core/vehicle/capship/un/vfx_capship_un_thruster_rear_med_launch.vfx");
-  level._effect["un_thruster_rear_lrg_idle"] = loadfx("vfx/iw7/core/vehicle/capship/un/vfx_capship_un_thruster_rear_lrg_idle.vfx");
-  level._effect["un_thruster_rear_lrg_idle_light"] = loadfx("vfx/iw7/core/vehicle/capship/un/vfx_capship_un_thruster_rear_lrg_idle_light.vfx");
-  level._effect["un_thruster_rear_lrg_light"] = loadfx("vfx/iw7/core/vehicle/capship/un/vfx_capship_un_thruster_rear_lrg_light.vfx");
-  level._effect["un_thruster_rear_lrg_heavy"] = loadfx("vfx/iw7/core/vehicle/capship/un/vfx_capship_un_thruster_rear_lrg_heavy.vfx");
-  level._effect["un_thruster_rear_lrg_launch"] = loadfx("vfx/iw7/core/vehicle/capship/un/vfx_capship_un_thruster_rear_lrg_launch.vfx");
+  level._effect["un_thruster_down_sml_idle"] = loadfx("vfx\iw7\core\vehicle\capship\un\vfx_capship_un_thruster_down_sml_idle.vfx");
+  level._effect["un_thruster_down_sml_heavy"] = loadfx("vfx\iw7\core\vehicle\capship\un\vfx_capship_un_thruster_down_sml_heavy.vfx");
+  level._effect["un_thruster_down_sml_launch"] = loadfx("vfx\iw7\core\vehicle\capship\un\vfx_capship_un_thruster_down_sml_heavy.vfx");
+  level._effect["un_thruster_down_med_idle"] = loadfx("vfx\iw7\core\vehicle\capship\un\vfx_capship_un_thruster_down_med_idle.vfx");
+  level._effect["un_thruster_down_med_heavy"] = loadfx("vfx\iw7\core\vehicle\capship\un\vfx_capship_un_thruster_down_med_heavy.vfx");
+  level._effect["un_thruster_down_med_launch"] = loadfx("vfx\iw7\core\vehicle\capship\un\vfx_capship_un_thruster_down_med_launch.vfx");
+  level._effect["un_thruster_down_lrg_idle"] = loadfx("vfx\iw7\core\vehicle\capship\un\vfx_capship_un_thruster_down_lrg_idle.vfx");
+  level._effect["un_thruster_down_lrg_heavy"] = loadfx("vfx\iw7\core\vehicle\capship\un\vfx_capship_un_thruster_down_lrg_heavy.vfx");
+  level._effect["un_thruster_down_lrg_launch"] = loadfx("vfx\iw7\core\vehicle\capship\un\vfx_capship_un_thruster_down_lrg_launch.vfx");
+  level._effect["un_thruster_rear_med_idle"] = loadfx("vfx\iw7\core\vehicle\capship\un\vfx_capship_un_thruster_rear_med_idle.vfx");
+  level._effect["un_thruster_rear_med_light"] = loadfx("vfx\iw7\core\vehicle\capship\un\vfx_capship_un_thruster_rear_med_light.vfx");
+  level._effect["un_thruster_rear_med_heavy"] = loadfx("vfx\iw7\core\vehicle\capship\un\vfx_capship_un_thruster_rear_med_heavy.vfx");
+  level._effect["un_thruster_rear_med_launch"] = loadfx("vfx\iw7\core\vehicle\capship\un\vfx_capship_un_thruster_rear_med_launch.vfx");
+  level._effect["un_thruster_rear_lrg_idle"] = loadfx("vfx\iw7\core\vehicle\capship\un\vfx_capship_un_thruster_rear_lrg_idle.vfx");
+  level._effect["un_thruster_rear_lrg_idle_light"] = loadfx("vfx\iw7\core\vehicle\capship\un\vfx_capship_un_thruster_rear_lrg_idle_light.vfx");
+  level._effect["un_thruster_rear_lrg_light"] = loadfx("vfx\iw7\core\vehicle\capship\un\vfx_capship_un_thruster_rear_lrg_light.vfx");
+  level._effect["un_thruster_rear_lrg_heavy"] = loadfx("vfx\iw7\core\vehicle\capship\un\vfx_capship_un_thruster_rear_lrg_heavy.vfx");
+  level._effect["un_thruster_rear_lrg_launch"] = loadfx("vfx\iw7\core\vehicle\capship\un\vfx_capship_un_thruster_rear_lrg_launch.vfx");
   level.func_399A = 1;
   }
 
   if (var_00 == "ca" && !isdefined(level.func_3993)) {
-  level._effect["ca_thruster_down_sml_idle"] = loadfx("vfx/iw7/core/vehicle/capship/ca/vfx_capship_ca_thruster_down_sml_idle.vfx");
-  level._effect["ca_thruster_down_sml_heavy"] = loadfx("vfx/iw7/core/vehicle/capship/ca/vfx_capship_ca_thruster_down_sml_heavy.vfx");
-  level._effect["ca_thruster_down_sml_launch"] = loadfx("vfx/iw7/core/vehicle/capship/ca/vfx_capship_ca_thruster_down_sml_launch.vfx");
-  level._effect["ca_thruster_down_med_idle"] = loadfx("vfx/iw7/core/vehicle/capship/ca/vfx_capship_ca_thruster_down_med_idle.vfx");
-  level._effect["ca_thruster_down_med_heavy"] = loadfx("vfx/iw7/core/vehicle/capship/ca/vfx_capship_ca_thruster_down_med_heavy.vfx");
-  level._effect["ca_thruster_down_lrg_idle"] = loadfx("vfx/iw7/core/vehicle/capship/ca/vfx_capship_ca_thruster_down_lrg_idle.vfx");
-  level._effect["ca_thruster_down_lrg_heavy"] = loadfx("vfx/iw7/core/vehicle/capship/ca/vfx_capship_ca_thruster_down_lrg_heavy.vfx");
-  level._effect["ca_thruster_down_lrg_launch"] = loadfx("vfx/iw7/core/vehicle/capship/ca/vfx_capship_ca_thruster_down_lrg_launch.vfx");
-  level._effect["ca_thruster_rear_sml_idle"] = loadfx("vfx/iw7/core/vehicle/capship/ca/vfx_capship_ca_thruster_rear_sml_idle.vfx");
-  level._effect["ca_thruster_rear_sml_light"] = loadfx("vfx/iw7/core/vehicle/capship/ca/vfx_capship_ca_thruster_rear_sml_light.vfx");
-  level._effect["ca_thruster_rear_sml_heavy"] = loadfx("vfx/iw7/core/vehicle/capship/ca/vfx_capship_ca_thruster_rear_sml_heavy.vfx");
-  level._effect["ca_thruster_rear_sml_burst"] = loadfx("vfx/iw7/core/vehicle/capship/ca/vfx_capship_ca_thruster_rear_sml_heavy_burst.vfx");
-  level._effect["ca_thruster_rear_sml_launch"] = loadfx("vfx/iw7/core/vehicle/capship/ca/vfx_capship_ca_thruster_rear_sml_launch.vfx");
-  level._effect["ca_thruster_rear_med_idle"] = loadfx("vfx/iw7/core/vehicle/capship/ca/vfx_capship_ca_thruster_rear_med_idle.vfx");
-  level._effect["ca_thruster_rear_med_light"] = loadfx("vfx/iw7/core/vehicle/capship/ca/vfx_capship_ca_thruster_rear_med_light.vfx");
-  level._effect["ca_thruster_rear_med_heavy"] = loadfx("vfx/iw7/core/vehicle/capship/ca/vfx_capship_ca_thruster_rear_med_heavy.vfx");
-  level._effect["ca_thruster_rear_med_burst"] = loadfx("vfx/iw7/core/vehicle/capship/ca/vfx_capship_ca_thruster_rear_med_heavy_burst.vfx");
-  level._effect["ca_thruster_rear_med_launch"] = loadfx("vfx/iw7/core/vehicle/capship/ca/vfx_capship_ca_thruster_rear_med_launch.vfx");
-  level._effect["ca_thruster_rear_lrg_idle"] = loadfx("vfx/iw7/core/vehicle/capship/ca/vfx_capship_ca_thruster_rear_lrg_idle.vfx");
-  level._effect["ca_thruster_rear_lrg_light"] = loadfx("vfx/iw7/core/vehicle/capship/ca/vfx_capship_ca_thruster_rear_lrg_light.vfx");
-  level._effect["ca_thruster_rear_lrg_heavy"] = loadfx("vfx/iw7/core/vehicle/capship/ca/vfx_capship_ca_thruster_rear_lrg_heavy.vfx");
-  level._effect["ca_thruster_rear_lrg_burst"] = loadfx("vfx/iw7/core/vehicle/capship/ca/vfx_capship_ca_thruster_rear_lrg_heavy_burst.vfx");
-  level._effect["ca_thruster_rear_lrg_launch"] = loadfx("vfx/iw7/core/vehicle/capship/ca/vfx_capship_ca_thruster_rear_lrg_launch.vfx");
+  level._effect["ca_thruster_down_sml_idle"] = loadfx("vfx\iw7\core\vehicle\capship\ca\vfx_capship_ca_thruster_down_sml_idle.vfx");
+  level._effect["ca_thruster_down_sml_heavy"] = loadfx("vfx\iw7\core\vehicle\capship\ca\vfx_capship_ca_thruster_down_sml_heavy.vfx");
+  level._effect["ca_thruster_down_sml_launch"] = loadfx("vfx\iw7\core\vehicle\capship\ca\vfx_capship_ca_thruster_down_sml_launch.vfx");
+  level._effect["ca_thruster_down_med_idle"] = loadfx("vfx\iw7\core\vehicle\capship\ca\vfx_capship_ca_thruster_down_med_idle.vfx");
+  level._effect["ca_thruster_down_med_heavy"] = loadfx("vfx\iw7\core\vehicle\capship\ca\vfx_capship_ca_thruster_down_med_heavy.vfx");
+  level._effect["ca_thruster_down_lrg_idle"] = loadfx("vfx\iw7\core\vehicle\capship\ca\vfx_capship_ca_thruster_down_lrg_idle.vfx");
+  level._effect["ca_thruster_down_lrg_heavy"] = loadfx("vfx\iw7\core\vehicle\capship\ca\vfx_capship_ca_thruster_down_lrg_heavy.vfx");
+  level._effect["ca_thruster_down_lrg_launch"] = loadfx("vfx\iw7\core\vehicle\capship\ca\vfx_capship_ca_thruster_down_lrg_launch.vfx");
+  level._effect["ca_thruster_rear_sml_idle"] = loadfx("vfx\iw7\core\vehicle\capship\ca\vfx_capship_ca_thruster_rear_sml_idle.vfx");
+  level._effect["ca_thruster_rear_sml_light"] = loadfx("vfx\iw7\core\vehicle\capship\ca\vfx_capship_ca_thruster_rear_sml_light.vfx");
+  level._effect["ca_thruster_rear_sml_heavy"] = loadfx("vfx\iw7\core\vehicle\capship\ca\vfx_capship_ca_thruster_rear_sml_heavy.vfx");
+  level._effect["ca_thruster_rear_sml_burst"] = loadfx("vfx\iw7\core\vehicle\capship\ca\vfx_capship_ca_thruster_rear_sml_heavy_burst.vfx");
+  level._effect["ca_thruster_rear_sml_launch"] = loadfx("vfx\iw7\core\vehicle\capship\ca\vfx_capship_ca_thruster_rear_sml_launch.vfx");
+  level._effect["ca_thruster_rear_med_idle"] = loadfx("vfx\iw7\core\vehicle\capship\ca\vfx_capship_ca_thruster_rear_med_idle.vfx");
+  level._effect["ca_thruster_rear_med_light"] = loadfx("vfx\iw7\core\vehicle\capship\ca\vfx_capship_ca_thruster_rear_med_light.vfx");
+  level._effect["ca_thruster_rear_med_heavy"] = loadfx("vfx\iw7\core\vehicle\capship\ca\vfx_capship_ca_thruster_rear_med_heavy.vfx");
+  level._effect["ca_thruster_rear_med_burst"] = loadfx("vfx\iw7\core\vehicle\capship\ca\vfx_capship_ca_thruster_rear_med_heavy_burst.vfx");
+  level._effect["ca_thruster_rear_med_launch"] = loadfx("vfx\iw7\core\vehicle\capship\ca\vfx_capship_ca_thruster_rear_med_launch.vfx");
+  level._effect["ca_thruster_rear_lrg_idle"] = loadfx("vfx\iw7\core\vehicle\capship\ca\vfx_capship_ca_thruster_rear_lrg_idle.vfx");
+  level._effect["ca_thruster_rear_lrg_light"] = loadfx("vfx\iw7\core\vehicle\capship\ca\vfx_capship_ca_thruster_rear_lrg_light.vfx");
+  level._effect["ca_thruster_rear_lrg_heavy"] = loadfx("vfx\iw7\core\vehicle\capship\ca\vfx_capship_ca_thruster_rear_lrg_heavy.vfx");
+  level._effect["ca_thruster_rear_lrg_burst"] = loadfx("vfx\iw7\core\vehicle\capship\ca\vfx_capship_ca_thruster_rear_lrg_heavy_burst.vfx");
+  level._effect["ca_thruster_rear_lrg_launch"] = loadfx("vfx\iw7\core\vehicle\capship\ca\vfx_capship_ca_thruster_rear_lrg_launch.vfx");
   level.func_3993 = 1;
   }
 }
 
 func_3995(var_00, var_01) {
   if (!isdefined(level.func_3996)) {
-  level._effect["light_blue_small"] = loadfx("vfx/iw7/core/light/vfx_blue_light_sml.vfx");
-  level._effect["light_red_small"] = loadfx("vfx/core/lights/vfx_orange_lights_med.vfx");
-  level._effect["light_blue_large"] = loadfx("vfx/iw7/core/light/vfx_blue_light_lrg.vfx");
-  level._effect["light_red_large"] = loadfx("vfx/core/lights/vfx_red_lights_big.vfx");
+  level._effect["light_blue_small"] = loadfx("vfx\iw7\core\light\vfx_blue_light_sml.vfx");
+  level._effect["light_red_small"] = loadfx("vfx\core\lights\vfx_orange_lights_med.vfx");
+  level._effect["light_blue_large"] = loadfx("vfx\iw7\core\light\vfx_blue_light_lrg.vfx");
+  level._effect["light_red_large"] = loadfx("vfx\core\lights\vfx_red_lights_big.vfx");
   level.func_3996 = 1;
   }
 
   if (var_00 == "un" && !isdefined(level.func_3999)) {
-  level._effect["un_thruster_down_sml_idle"] = loadfx("vfx/iw7/core/vehicle/capship/un/vfx_capship_un_thruster_down_sml_idle.vfx");
-  level._effect["un_thruster_down_sml_heavy"] = loadfx("vfx/iw7/core/vehicle/capship/un/vfx_capship_un_thruster_down_sml_heavy.vfx");
-  level._effect["un_thruster_down_med_idle"] = loadfx("vfx/iw7/core/vehicle/capship/un/vfx_capship_un_thruster_down_med_idle.vfx");
-  level._effect["un_thruster_down_med_heavy"] = loadfx("vfx/iw7/core/vehicle/capship/un/vfx_capship_un_thruster_down_med_heavy.vfx");
-  level._effect["un_thruster_down_lrg_idle"] = loadfx("vfx/iw7/core/vehicle/capship/un/vfx_capship_un_thruster_down_lrg_idle.vfx");
-  level._effect["un_thruster_down_lrg_heavy"] = loadfx("vfx/iw7/core/vehicle/capship/un/vfx_capship_un_thruster_down_lrg_heavy.vfx");
-  level._effect["un_thruster_rear_med_idle"] = loadfx("vfx/iw7/core/vehicle/capship/un/vfx_capship_un_thruster_rear_med_idle.vfx");
-  level._effect["un_thruster_rear_med_light"] = loadfx("vfx/iw7/core/vehicle/capship/un/vfx_capship_un_thruster_rear_med_light.vfx");
-  level._effect["un_thruster_rear_lrg_idle"] = loadfx("vfx/iw7/core/vehicle/capship/un/vfx_capship_un_thruster_rear_lrg_idle.vfx");
-  level._effect["un_thruster_rear_lrg_light"] = loadfx("vfx/iw7/core/vehicle/capship/un/vfx_capship_un_thruster_rear_lrg_light.vfx");
-  level._effect["un_thruster_rear_med_heavy"] = loadfx("vfx/iw7/core/vehicle/capship/un/vfx_capship_un_thruster_rear_med_heavy.vfx");
-  level._effect["un_thruster_rear_lrg_heavy"] = loadfx("vfx/iw7/core/vehicle/capship/un/vfx_capship_un_thruster_rear_lrg_heavy.vfx");
+  level._effect["un_thruster_down_sml_idle"] = loadfx("vfx\iw7\core\vehicle\capship\un\vfx_capship_un_thruster_down_sml_idle.vfx");
+  level._effect["un_thruster_down_sml_heavy"] = loadfx("vfx\iw7\core\vehicle\capship\un\vfx_capship_un_thruster_down_sml_heavy.vfx");
+  level._effect["un_thruster_down_med_idle"] = loadfx("vfx\iw7\core\vehicle\capship\un\vfx_capship_un_thruster_down_med_idle.vfx");
+  level._effect["un_thruster_down_med_heavy"] = loadfx("vfx\iw7\core\vehicle\capship\un\vfx_capship_un_thruster_down_med_heavy.vfx");
+  level._effect["un_thruster_down_lrg_idle"] = loadfx("vfx\iw7\core\vehicle\capship\un\vfx_capship_un_thruster_down_lrg_idle.vfx");
+  level._effect["un_thruster_down_lrg_heavy"] = loadfx("vfx\iw7\core\vehicle\capship\un\vfx_capship_un_thruster_down_lrg_heavy.vfx");
+  level._effect["un_thruster_rear_med_idle"] = loadfx("vfx\iw7\core\vehicle\capship\un\vfx_capship_un_thruster_rear_med_idle.vfx");
+  level._effect["un_thruster_rear_med_light"] = loadfx("vfx\iw7\core\vehicle\capship\un\vfx_capship_un_thruster_rear_med_light.vfx");
+  level._effect["un_thruster_rear_lrg_idle"] = loadfx("vfx\iw7\core\vehicle\capship\un\vfx_capship_un_thruster_rear_lrg_idle.vfx");
+  level._effect["un_thruster_rear_lrg_light"] = loadfx("vfx\iw7\core\vehicle\capship\un\vfx_capship_un_thruster_rear_lrg_light.vfx");
+  level._effect["un_thruster_rear_med_heavy"] = loadfx("vfx\iw7\core\vehicle\capship\un\vfx_capship_un_thruster_rear_med_heavy.vfx");
+  level._effect["un_thruster_rear_lrg_heavy"] = loadfx("vfx\iw7\core\vehicle\capship\un\vfx_capship_un_thruster_rear_lrg_heavy.vfx");
   level.func_3999 = 1;
   }
 
   if (var_00 == "ca" && !isdefined(level.func_3992)) {
-  level._effect["ca_thruster_down_sml_idle"] = loadfx("vfx/iw7/core/vehicle/capship/ca/vfx_capship_ca_thruster_down_sml_idle.vfx");
-  level._effect["ca_thruster_down_sml_heavy"] = loadfx("vfx/iw7/core/vehicle/capship/ca/vfx_capship_ca_thruster_down_sml_heavy.vfx");
-  level._effect["ca_thruster_down_med_idle"] = loadfx("vfx/iw7/core/vehicle/capship/ca/vfx_capship_ca_thruster_down_med_idle.vfx");
-  level._effect["ca_thruster_down_med_heavy"] = loadfx("vfx/iw7/core/vehicle/capship/ca/vfx_capship_ca_thruster_down_med_heavy.vfx");
-  level._effect["ca_thruster_down_lrg_idle"] = loadfx("vfx/iw7/core/vehicle/capship/ca/vfx_capship_ca_thruster_down_lrg_idle.vfx");
-  level._effect["ca_thruster_down_lrg_heavy"] = loadfx("vfx/iw7/core/vehicle/capship/ca/vfx_capship_ca_thruster_down_lrg_heavy.vfx");
-  level._effect["ca_thruster_rear_sml_idle"] = loadfx("vfx/iw7/core/vehicle/capship/ca/vfx_capship_ca_thruster_rear_sml_idle.vfx");
-  level._effect["ca_thruster_rear_sml_light"] = loadfx("vfx/iw7/core/vehicle/capship/ca/vfx_capship_ca_thruster_rear_sml_light.vfx");
-  level._effect["ca_thruster_rear_med_idle"] = loadfx("vfx/iw7/core/vehicle/capship/ca/vfx_capship_ca_thruster_rear_med_idle.vfx");
-  level._effect["ca_thruster_rear_med_light"] = loadfx("vfx/iw7/core/vehicle/capship/ca/vfx_capship_ca_thruster_rear_med_light.vfx");
-  level._effect["ca_thruster_rear_lrg_idle"] = loadfx("vfx/iw7/core/vehicle/capship/ca/vfx_capship_ca_thruster_rear_lrg_idle.vfx");
-  level._effect["ca_thruster_rear_lrg_light"] = loadfx("vfx/iw7/core/vehicle/capship/ca/vfx_capship_ca_thruster_rear_lrg_light.vfx");
-  level._effect["ca_thruster_rear_sml_heavy"] = loadfx("vfx/iw7/core/vehicle/capship/ca/vfx_capship_ca_thruster_rear_sml_heavy.vfx");
-  level._effect["ca_thruster_rear_med_heavy"] = loadfx("vfx/iw7/core/vehicle/capship/ca/vfx_capship_ca_thruster_rear_med_heavy.vfx");
-  level._effect["ca_thruster_rear_lrg_heavy"] = loadfx("vfx/iw7/core/vehicle/capship/ca/vfx_capship_ca_thruster_rear_lrg_heavy.vfx");
+  level._effect["ca_thruster_down_sml_idle"] = loadfx("vfx\iw7\core\vehicle\capship\ca\vfx_capship_ca_thruster_down_sml_idle.vfx");
+  level._effect["ca_thruster_down_sml_heavy"] = loadfx("vfx\iw7\core\vehicle\capship\ca\vfx_capship_ca_thruster_down_sml_heavy.vfx");
+  level._effect["ca_thruster_down_med_idle"] = loadfx("vfx\iw7\core\vehicle\capship\ca\vfx_capship_ca_thruster_down_med_idle.vfx");
+  level._effect["ca_thruster_down_med_heavy"] = loadfx("vfx\iw7\core\vehicle\capship\ca\vfx_capship_ca_thruster_down_med_heavy.vfx");
+  level._effect["ca_thruster_down_lrg_idle"] = loadfx("vfx\iw7\core\vehicle\capship\ca\vfx_capship_ca_thruster_down_lrg_idle.vfx");
+  level._effect["ca_thruster_down_lrg_heavy"] = loadfx("vfx\iw7\core\vehicle\capship\ca\vfx_capship_ca_thruster_down_lrg_heavy.vfx");
+  level._effect["ca_thruster_rear_sml_idle"] = loadfx("vfx\iw7\core\vehicle\capship\ca\vfx_capship_ca_thruster_rear_sml_idle.vfx");
+  level._effect["ca_thruster_rear_sml_light"] = loadfx("vfx\iw7\core\vehicle\capship\ca\vfx_capship_ca_thruster_rear_sml_light.vfx");
+  level._effect["ca_thruster_rear_med_idle"] = loadfx("vfx\iw7\core\vehicle\capship\ca\vfx_capship_ca_thruster_rear_med_idle.vfx");
+  level._effect["ca_thruster_rear_med_light"] = loadfx("vfx\iw7\core\vehicle\capship\ca\vfx_capship_ca_thruster_rear_med_light.vfx");
+  level._effect["ca_thruster_rear_lrg_idle"] = loadfx("vfx\iw7\core\vehicle\capship\ca\vfx_capship_ca_thruster_rear_lrg_idle.vfx");
+  level._effect["ca_thruster_rear_lrg_light"] = loadfx("vfx\iw7\core\vehicle\capship\ca\vfx_capship_ca_thruster_rear_lrg_light.vfx");
+  level._effect["ca_thruster_rear_sml_heavy"] = loadfx("vfx\iw7\core\vehicle\capship\ca\vfx_capship_ca_thruster_rear_sml_heavy.vfx");
+  level._effect["ca_thruster_rear_med_heavy"] = loadfx("vfx\iw7\core\vehicle\capship\ca\vfx_capship_ca_thruster_rear_med_heavy.vfx");
+  level._effect["ca_thruster_rear_lrg_heavy"] = loadfx("vfx\iw7\core\vehicle\capship\ca\vfx_capship_ca_thruster_rear_lrg_heavy.vfx");
   level.func_3992 = 1;
   }
 }
@@ -483,14 +483,14 @@ func_3974(var_00, var_01) {
   var_02 = 0.2;
   var_03 = 4.0;
   var_04 = distance(level.func_D127.origin, var_00);
-  var_05 = scripts/sp/math::func_C097(7000, 100000, var_04);
-  var_06 = scripts/sp/math::func_6A8E(130, 0, var_05);
-  var_07 = scripts/sp/math::func_6A8E(0.8, 0, var_05);
-  var_08 = scripts/sp/math::func_6A8E(0.25, 0, var_05);
-  var_09 = scripts/sp/math::func_6A8E(0.45, 0.2, var_05);
+  var_05 = scripts\sp\math::func_C097(7000, 100000, var_04);
+  var_06 = scripts\sp\math::func_6A8E(130, 0, var_05);
+  var_07 = scripts\sp\math::func_6A8E(0.8, 0, var_05);
+  var_08 = scripts\sp\math::func_6A8E(0.25, 0, var_05);
+  var_09 = scripts\sp\math::func_6A8E(0.45, 0.2, var_05);
   earthquake(var_09, 1.9, level.func_D127.origin, 25000);
-  var_05 = scripts/sp/math::func_C097(2000, 25000, var_04);
-  var_10 = scripts/sp/math::func_6A8E(0.75, 2.5, var_05);
+  var_05 = scripts\sp\math::func_C097(2000, 25000, var_04);
+  var_10 = scripts\sp\math::func_6A8E(0.75, 2.5, var_05);
   scripts\engine\utility::delaycall(var_10, ::playsound, "capital_ship_explo_jackal_debris");
 
   if (isdefined(level.func_A056) && isdefined(var_01) && var_01)
@@ -516,7 +516,7 @@ func_395F() {
   }
 
   var_01 = var_00 / 20000;
-  var_02 = scripts/sp/math::func_C097(2500, 20000, var_01);
+  var_02 = scripts\sp\math::func_C097(2500, 20000, var_01);
   var_02 = (var_02 - 1) * -1;
 
   if (isdefined(level.func_D127.func_4E93))
@@ -554,7 +554,7 @@ func_3975() {
 
   foreach (var_09, var_08 in level.func_3979[self.type].func_7586) {
   if (issubstr(var_06, var_09)) {
-  var_03 scripts/sp/utility::func_75C4(var_08, var_06, randomfloatrange(var_00, var_01));
+  var_03 scripts\sp\utility::func_75C4(var_08, var_06, randomfloatrange(var_00, var_01));
   break;
   }
   }
@@ -574,7 +574,7 @@ func_3978(var_00) {
 
   foreach (var_08, var_07 in level.func_3979[self.type].func_7586) {
   if (issubstr(var_05, var_08)) {
-  var_02 scripts/sp/utility::func_75F8(var_07, var_05, randomfloatrange(0, var_00));
+  var_02 scripts\sp\utility::func_75F8(var_07, var_05, randomfloatrange(0, var_00));
   break;
   }
   }
@@ -593,8 +593,8 @@ func_39BE(var_00) {
 
 func_7D02(var_00, var_01) {
   var_02 = distance(self.origin, var_00);
-  var_03 = scripts/sp/math::func_C097(200, 7000, var_02);
-  var_04 = scripts/sp/math::func_6A8E(0, var_01, var_03);
+  var_03 = scripts\sp\math::func_C097(200, 7000, var_02);
+  var_04 = scripts\sp\math::func_6A8E(0, var_01, var_03);
   var_04 = var_04 + randomfloatrange(-0.2, 0.2);
 
   if (var_04 < 0)
@@ -679,7 +679,7 @@ func_3977() {
   var_04 = var_03;
 
   if (issubstr(var_04, "_mat_rdc")) {
-  var_05 = scripts/sp/utility::strip_suffix(var_04, "_mat_rdc");
+  var_05 = scripts\sp\utility::strip_suffix(var_04, "_mat_rdc");
   var_06 = "tag_" + var_05;
   }
   else
@@ -779,7 +779,7 @@ func_B2E5() {
   var_07 = 0.8;
 
   for (;;) {
-  if (!scripts/sp/utility::func_D123()) {
+  if (!scripts\sp\utility::func_D123()) {
   wait 1;
   continue;
   }
@@ -797,8 +797,8 @@ func_B2E5() {
   var_11.func_56EA = length(var_12);
   var_13 = vectornormalize(var_12);
   var_11.func_5ABB = vectordot(var_13, var_08);
-  var_14 = 1 - scripts/sp/math::func_C097(0, var_06, var_11.func_56EA);
-  var_15 = scripts/sp/math::func_C097(var_07, 1, var_11.func_5ABB);
+  var_14 = 1 - scripts\sp\math::func_C097(0, var_06, var_11.func_56EA);
+  var_15 = scripts\sp\math::func_C097(var_07, 1, var_11.func_5ABB);
   var_11.func_1153F = var_14 * var_15;
 
   if (var_11.func_1153F > 0) {
@@ -810,8 +810,8 @@ func_B2E5() {
   var_09 = var_11;
   }
 
-  var_16 = scripts/sp/math::func_C097(var_02, var_01, var_11.func_56EA);
-  var_17 = scripts/sp/math::func_6A8E(var_04, var_03, var_16);
+  var_16 = scripts\sp\math::func_C097(var_02, var_01, var_11.func_56EA);
+  var_17 = scripts\sp\math::func_6A8E(var_04, var_03, var_16);
 
   if (var_11.func_5ABB > var_17 && var_11.func_56EA < var_01) {
   if (var_11.func_AEDF.func_3782 != "enemy_capitalship" && var_11.func_3775 == 0) {
@@ -938,7 +938,7 @@ func_39B4() {
   for (;;) {
   wait 0.2;
 
-  if (!scripts/sp/utility::func_D123()) {
+  if (!scripts\sp\utility::func_D123()) {
   wait 1;
   continue;
   }
@@ -1042,10 +1042,10 @@ func_396A(var_00, var_01) {
   return 0;
 
   if (!isdefined(var_01) || !var_01) {
-  if (!level.player scripts/sp/utility::func_65DB("jackal_enemy_homing_missile_allowed"))
+  if (!level.player scripts\sp\utility::func_65DB("jackal_enemy_homing_missile_allowed"))
   return 0;
   }
-  else if (!level.player scripts/sp/utility::func_65DB("jackal_enemy_homing_missile_allowed_hyperaggressive"))
+  else if (!level.player scripts\sp\utility::func_65DB("jackal_enemy_homing_missile_allowed_hyperaggressive"))
   return 0;
   }
 
@@ -1060,10 +1060,10 @@ func_3969(var_00) {
 }
 
 func_9C74() {
-  if (!scripts/sp/utility::func_65DF("player_is_near"))
+  if (!scripts\sp\utility::func_65DF("player_is_near"))
   return 0;
 
-  return scripts/sp/utility::func_65DB("player_is_near");
+  return scripts\sp\utility::func_65DB("player_is_near");
 }
 
 func_39BD() {
@@ -1072,27 +1072,27 @@ func_39BD() {
   self endon("death");
   self endon("disable_combat");
 
-  if (!scripts/sp/utility::func_65DF("player_is_near")) {
-  scripts/sp/utility::func_65E0("missiles_player_close_force");
-  scripts/sp/utility::func_65E0("missiles_player_far_force");
-  scripts/sp/utility::func_65E0("missiles_player_looking");
-  scripts/sp/utility::func_65E0("missiles_player_close");
-  scripts/sp/utility::func_65E0("player_is_near");
+  if (!scripts\sp\utility::func_65DF("player_is_near")) {
+  scripts\sp\utility::func_65E0("missiles_player_close_force");
+  scripts\sp\utility::func_65E0("missiles_player_far_force");
+  scripts\sp\utility::func_65E0("missiles_player_looking");
+  scripts\sp\utility::func_65E0("missiles_player_close");
+  scripts\sp\utility::func_65E0("player_is_near");
   }
 
-  scripts/sp/utility::func_65DD("player_is_near");
+  scripts\sp\utility::func_65DD("player_is_near");
 
   for (;;) {
-  if (!scripts/sp/utility::func_D123()) {
+  if (!scripts\sp\utility::func_D123()) {
   wait 1;
   continue;
   }
 
   func_B8AA();
-  scripts/sp/utility::func_65E1("player_is_near");
+  scripts\sp\utility::func_65E1("player_is_near");
   thread func_12A1E();
   func_B8AB();
-  scripts/sp/utility::func_65DD("player_is_near");
+  scripts\sp\utility::func_65DD("player_is_near");
   self notify("player_not_near");
   }
 }
@@ -1105,9 +1105,9 @@ func_B8AA() {
   wait 0.1;
 
   for (;;) {
-  if (scripts/sp/utility::func_65DB("missiles_player_looking") && scripts/sp/utility::func_65DB("missiles_player_close"))
+  if (scripts\sp\utility::func_65DB("missiles_player_looking") && scripts\sp\utility::func_65DB("missiles_player_close"))
   break;
-  else if (scripts/sp/utility::func_65DB("missiles_player_close_force"))
+  else if (scripts\sp\utility::func_65DB("missiles_player_close_force"))
   break;
 
   wait 0.05;
@@ -1121,12 +1121,12 @@ func_FF48() {
   if (self.func_5ABB >= self.func_B89C) {
   if (isdefined(var_00)) {
   if (gettime() - self.func_B89D * 1000 >= var_00)
-  scripts/sp/utility::func_65E1("missiles_player_looking");
+  scripts\sp\utility::func_65E1("missiles_player_looking");
   }
   else
   var_00 = gettime();
   } else {
-  scripts/sp/utility::func_65DD("missiles_player_looking");
+  scripts\sp\utility::func_65DD("missiles_player_looking");
   var_00 = undefined;
   }
 
@@ -1137,8 +1137,8 @@ func_FF48() {
 func_FF47() {
   for (;;) {
   if (!isdefined(level.func_D127)) {
-  scripts/sp/utility::func_65DD("missiles_player_close_force");
-  scripts/sp/utility::func_65DD("missiles_player_close");
+  scripts\sp\utility::func_65DD("missiles_player_close_force");
+  scripts\sp\utility::func_65DD("missiles_player_close");
   wait 0.05;
   continue;
   }
@@ -1146,14 +1146,14 @@ func_FF47() {
   var_00 = abs(self.origin[2] - level.func_D127.origin[2]);
 
   if (self.func_56EA <= self.func_B89E && var_00 <= self.func_B89F)
-  scripts/sp/utility::func_65E1("missiles_player_close_force");
+  scripts\sp\utility::func_65E1("missiles_player_close_force");
   else
-  scripts/sp/utility::func_65DD("missiles_player_close_force");
+  scripts\sp\utility::func_65DD("missiles_player_close_force");
 
   if (self.func_56EA <= self.func_B89B)
-  scripts/sp/utility::func_65E1("missiles_player_close");
+  scripts\sp\utility::func_65E1("missiles_player_close");
   else
-  scripts/sp/utility::func_65DD("missiles_player_close");
+  scripts\sp\utility::func_65DD("missiles_player_close");
 
   wait 0.05;
   }
@@ -1167,10 +1167,10 @@ func_B8AB() {
   for (;;) {
   wait 0.05;
 
-  if (scripts/sp/utility::func_65DB("missiles_player_far_force"))
+  if (scripts\sp\utility::func_65DB("missiles_player_far_force"))
   break;
 
-  if (!scripts/sp/utility::func_65DB("missiles_player_looking") && !scripts/sp/utility::func_65DB("missiles_player_close"))
+  if (!scripts\sp\utility::func_65DB("missiles_player_looking") && !scripts\sp\utility::func_65DB("missiles_player_close"))
   break;
   }
 
@@ -1186,12 +1186,12 @@ func_FF6E() {
   if (self.func_5ABB < self.func_B8A1) {
   if (isdefined(var_00)) {
   if (gettime() - self.func_B8A2 * 1000 >= var_00)
-  scripts/sp/utility::func_65DD("missiles_player_looking");
+  scripts\sp\utility::func_65DD("missiles_player_looking");
   }
   else
   var_00 = gettime();
   } else {
-  scripts/sp/utility::func_65E1("missiles_player_looking");
+  scripts\sp\utility::func_65E1("missiles_player_looking");
   var_00 = undefined;
   }
 
@@ -1205,14 +1205,14 @@ func_FF6D() {
 
   for (;;) {
   if (self.func_56EA >= self.func_B8A3)
-  scripts/sp/utility::func_65E1("missiles_player_far_force");
+  scripts\sp\utility::func_65E1("missiles_player_far_force");
   else
-  scripts/sp/utility::func_65DD("missiles_player_far_force");
+  scripts\sp\utility::func_65DD("missiles_player_far_force");
 
   if (self.func_56EA >= self.func_B8A0)
-  scripts/sp/utility::func_65DD("missiles_player_close");
+  scripts\sp\utility::func_65DD("missiles_player_close");
   else
-  scripts/sp/utility::func_65E1("missiles_player_close");
+  scripts\sp\utility::func_65E1("missiles_player_close");
 
   wait 0.05;
   }
@@ -1226,7 +1226,7 @@ func_12A1E() {
   for (;;) {
   var_00 = 0;
 
-  if (!scripts/sp/utility::func_D123()) {
+  if (!scripts\sp\utility::func_D123()) {
   wait 1;
   continue;
   }
@@ -1239,9 +1239,9 @@ func_12A1E() {
   if (var_01 <= 8000)
   var_00 = 1;
 
-  if (scripts/sp/utility::func_7B9D() <= 0.1)
+  if (scripts\sp\utility::func_7B9D() <= 0.1)
   var_00 = 0;
-  else if (scripts/sp/utility::func_7B9D() >= 0.6)
+  else if (scripts\sp\utility::func_7B9D() >= 0.6)
   var_00 = 1;
 
   self.func_1D62 = var_00;

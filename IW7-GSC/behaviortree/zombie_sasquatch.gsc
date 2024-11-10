@@ -1,8 +1,8 @@
-/*****************************************************
+/*********************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\behaviortree\zombie_sasquatch.gsc
-*****************************************************/
+ * Script: behaviortree\zombie_sasquatch.gsc
+*********************************************/
 
 func_2AD0() {
 	if(isdefined(level.var_119E["zombie_sasquatch"])) {

@@ -1,8 +1,8 @@
-/***********************************************************************
+/***************************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\bots\bots_killstreaks_remote_vehicle.gsc
-***********************************************************************/
+ * Script: scripts\mp\bots\bots_killstreaks_remote_vehicle.gsc
+***************************************************************/
 
 remote_vehicle_setup() {
 	while(!isdefined(level.bot_variables_initialized)) {
@@ -15,11 +15,11 @@ remote_vehicle_setup() {
 
 	level.bot_ks_heli_offset["heli_pilot"] = (0,0,350);
 	level.bot_ks_heli_offset["heli_sniper"] = (0,0,228);
-	level.bot_ks_funcs["isUsing"]["odin_assault"] = ::scripts\mp\_utility::isusingremote;
-	level.bot_ks_funcs["isUsing"]["odin_support"] = ::scripts\mp\_utility::isusingremote;
-	level.bot_ks_funcs["isUsing"]["heli_pilot"] = ::scripts\mp\_utility::isusingremote;
+	level.bot_ks_funcs["isUsing"]["odin_assault"] = ::scripts\mp\utility::isusingremote;
+	level.bot_ks_funcs["isUsing"]["odin_support"] = ::scripts\mp\utility::isusingremote;
+	level.bot_ks_funcs["isUsing"]["heli_pilot"] = ::scripts\mp\utility::isusingremote;
 	level.bot_ks_funcs["isUsing"]["heli_sniper"] = ::isusinggunship;
-	level.bot_ks_funcs["isUsing"]["switchblade_cluster"] = ::scripts\mp\_utility::isusingremote;
+	level.bot_ks_funcs["isUsing"]["switchblade_cluster"] = ::scripts\mp\utility::isusingremote;
 	level.bot_ks_funcs["isUsing"]["vanguard"] = ::isusingvanguard;
 	level.bot_ks_funcs["waittill_initial_goal"]["heli_pilot"] = ::heli_pilot_waittill_initial_goal;
 	level.bot_ks_funcs["waittill_initial_goal"]["heli_sniper"] = ::heli_sniper_waittill_initial_goal;
@@ -45,7 +45,7 @@ remote_vehicle_setup() {
 		}
 	}
 
-	level.bot_heli_pilot_traceoffset = scripts\mp\_utility::gethelipilottraceoffset();
+	level.bot_heli_pilot_traceoffset = scripts\mp\utility::gethelipilottraceoffset();
 	foreach(var_05 in level.bot_heli_nodes) {
 		var_05.vanguard_origin = var_05.origin;
 		var_06 = var_05.origin + (0,0,50);
@@ -64,9 +64,9 @@ remote_vehicle_setup() {
 	}
 
 	level.bot_vanguard_height_trace_size = var_08 - level.bot_map_min_z + 100;
-	level.odin_large_rod_radius = function_00E7("odin_projectile_large_rod_mp");
-	level.odin_small_rod_radius = function_00E7("odin_projectile_small_rod_mp");
-	level.vanguard_missile_radius = function_00E7("remote_tank_projectile_mp");
+	level.odin_large_rod_radius = getweaponexplosionradius("odin_projectile_large_rod_mp");
+	level.odin_small_rod_radius = getweaponexplosionradius("odin_projectile_small_rod_mp");
+	level.vanguard_missile_radius = getweaponexplosionradius("remote_tank_projectile_mp");
 	level.heli_pilot_missile_radius = getdvarfloat("bg_bulletExplRadius");
 	while(!isdefined(level.odin_marking_flash_radius_max) || !isdefined(level.odin_marking_flash_radius_min)) {
 		wait(0.05);
@@ -86,7 +86,7 @@ remote_vehicle_setup() {
 	}
 
 	foreach(var_0E in var_0B) {
-		if(function_0029(var_0E) < 0.25) {
+		if(botzonegetindoorpercent(var_0E) < 0.25) {
 			level.outside_zones = scripts\engine\utility::array_add(level.outside_zones,var_0E);
 		}
 	}
@@ -126,11 +126,11 @@ bot_killstreak_remote_control(param_00,param_01,param_02,param_03,param_04) {
 				var_0C = var_0B;
 				var_0B = [];
 				foreach(var_0E in var_0C) {
-					if(function_014A(var_0E)) {
+					if(nodeexposedtosky(var_0E)) {
 						var_0F = getlinkednodes(var_0E);
 						var_10 = 0;
 						foreach(var_12 in var_0F) {
-							if(function_014A(var_12)) {
+							if(nodeexposedtosky(var_12)) {
 								var_10++;
 							}
 						}
@@ -339,7 +339,7 @@ bot_control_switchblade_cluster() {
 
 			var_18 = scripts\engine\utility::array_remove_array(var_18,var_19);
 			foreach(var_1D in var_18) {
-				if(var_1D scripts\mp\_utility::_hasperk("specialty_noplayertarget")) {
+				if(var_1D scripts\mp\utility::_hasperk("specialty_noplayertarget")) {
 					continue;
 				}
 
@@ -386,7 +386,7 @@ bot_control_switchblade_cluster() {
 					var_26 = 1;
 				}
 
-				var_09 = function_00C3(var_16,var_26);
+				var_09 = getpredictedentityposition(var_16,var_26);
 			}
 
 			var_27 = missile_get_desired_angles_to_target(var_01,var_09);
@@ -526,7 +526,7 @@ bot_killstreak_vanguard_start(param_00,param_01,param_02,param_03) {
 }
 
 isusingvanguard() {
-	return scripts\mp\_utility::isusingremote() && self.usingremote == "vanguard" && isdefined(self.remoteuav);
+	return scripts\mp\utility::isusingremote() && self.usingremote == "vanguard" && isdefined(self.remoteuav);
 }
 
 bot_control_vanguard() {
@@ -717,7 +717,7 @@ pos_is_valid_outside_for_vanguard(param_00) {
 }
 
 node_is_valid_outside_for_vanguard(param_00) {
-	if(function_014A(param_00)) {
+	if(nodeexposedtosky(param_00)) {
 		return pos_passes_sky_trace(param_00.origin);
 	}
 
@@ -737,7 +737,7 @@ pos_passes_sky_trace(param_00) {
 
 vanguard_is_outside() {
 	var_00 = getclosestnodeinsight(self.origin);
-	if(isdefined(var_00) && !function_014A(var_00)) {
+	if(isdefined(var_00) && !nodeexposedtosky(var_00)) {
 		return 0;
 	}
 
@@ -789,7 +789,7 @@ vanguard_control_aiming() {
 					continue;
 				}
 
-				if(var_0C scripts\mp\_utility::_hasperk("specialty_noplayertarget")) {
+				if(var_0C scripts\mp\utility::_hasperk("specialty_noplayertarget")) {
 					continue;
 				}
 
@@ -827,7 +827,7 @@ vanguard_control_aiming() {
 			}
 			else if(gettime() - var_03 > 500) {
 				var_03 = gettime();
-				var_00 = function_00C3(var_06,3);
+				var_00 = getpredictedentityposition(var_06,3);
 				var_04 = var_06;
 			}
 
@@ -1457,7 +1457,7 @@ func_2E2F(param_00) {
 		}
 		else
 		{
-			self.odin_predicted_loc_for_player[var_01] = function_00C3(param_00,1.5);
+			self.odin_predicted_loc_for_player[var_01] = getpredictedentityposition(param_00,1.5);
 			self.odin_predicted_loc_time_for_player[var_01] = var_02;
 			self.odin_last_predict_position_time = var_02;
 		}
@@ -1701,7 +1701,7 @@ bot_killstreak_get_outside_players(param_00,param_01,param_02) {
 
 		if(var_07) {
 			var_08 = var_06 getnearestnode();
-			if(isdefined(var_08) && function_014A(var_08)) {
+			if(isdefined(var_08) && nodeexposedtosky(var_08)) {
 				var_03 = scripts\engine\utility::array_add(var_03,var_06);
 			}
 		}
@@ -1796,10 +1796,10 @@ bot_control_heli_main_move_loop(param_00,param_01) {
 			if(isdefined(var_05)) {
 				var_0D = [[level.bot_ks_funcs["heli_node_get_origin"][param_00]]](var_05);
 				if(param_01) {
-					var_0E = var_05.origin + scripts\mp\_utility::gethelipilotmeshoffset() + level.bot_heli_pilot_traceoffset;
-					var_0F = var_05.origin + scripts\mp\_utility::gethelipilotmeshoffset() - level.bot_heli_pilot_traceoffset;
+					var_0E = var_05.origin + scripts\mp\utility::gethelipilotmeshoffset() + level.bot_heli_pilot_traceoffset;
+					var_0F = var_05.origin + scripts\mp\utility::gethelipilotmeshoffset() - level.bot_heli_pilot_traceoffset;
 					var_10 = bullettrace(var_0E,var_0F,0,undefined,0,0,1);
-					var_06 = var_10["position"] - scripts\mp\_utility::gethelipilotmeshoffset() + level.bot_ks_heli_offset[param_00];
+					var_06 = var_10["position"] - scripts\mp\utility::gethelipilotmeshoffset() + level.bot_ks_heli_offset[param_00];
 				}
 				else
 				{
@@ -1890,7 +1890,7 @@ get_random_outside_target() {
 	var_05 = undefined;
 	if(var_00.size > 0) {
 		var_06 = scripts\engine\utility::random(var_00);
-		var_07 = scripts\engine\utility::random(function_00EF(var_06));
+		var_07 = scripts\engine\utility::random(getzonenodes(var_06));
 		var_05 = var_07.origin;
 	}
 	else
@@ -1900,7 +1900,7 @@ get_random_outside_target() {
 		}
 		else
 		{
-			var_08 = function_0076();
+			var_08 = getallnodes();
 		}
 
 		var_09 = 0;
@@ -1908,7 +1908,7 @@ get_random_outside_target() {
 			var_09++;
 			var_0A = var_08[randomint(var_08.size)];
 			var_05 = var_0A.origin;
-			if(function_014A(var_0A) && distance2dsquared(var_0A.origin,self.vehicle_controlling.origin) > -3036) {
+			if(nodeexposedtosky(var_0A) && distance2dsquared(var_0A.origin,self.vehicle_controlling.origin) > -3036) {
 				break;
 			}
 		}

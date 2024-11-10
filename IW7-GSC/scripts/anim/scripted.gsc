@@ -1,14 +1,14 @@
-/*********************************************
+/*************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\anim\scripted.gsc
-*********************************************/
+ * Script: scripts\anim\scripted.gsc
+*************************************/
 
 main() {
 	self endon("death");
 	self notify("killanimscript");
 	self notify("clearSuppressionAttack");
-	self.var_1491.var_112CB = 0;
+	self.a.var_112CB = 0;
 	if(getdvarint("ai_iw7") == 1) {
 		lib_0A1E::func_2318();
 		scripts\asm\asm_bb::bb_clearanimscripted();

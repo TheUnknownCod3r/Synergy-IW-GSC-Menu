@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3352.gsc
-****************************/
+ * Script: 3352.gsc
+************************/
 
 setrewind() {
 	thread func_13A62();

@@ -1,8 +1,8 @@
-/***************************************************************************
+/*******************************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\maps\cp_rave\cp_rave_super_slasher_fight.gsc
-***************************************************************************/
+ * Script: scripts\cp\maps\cp_rave\cp_rave_super_slasher_fight.gsc
+*******************************************************************/
 
 init_super_slasher_quest() {
 	load_super_slasher_vfx();
@@ -10,44 +10,44 @@ init_super_slasher_quest() {
 }
 
 start_super_slasher_quest() {
-	scripts/cp/zombies/zombie_quest::register_quest_step("superslasher",0,::scripts\cp\maps\cp_rave\cp_rave_interactions::init_survivor_trapped,::scripts\cp\maps\cp_rave\cp_rave_interactions::wait_for_survivor_trapped,::blank,::debug_trap_survivor);
-	scripts/cp/zombies/zombie_quest::register_quest_step("superslasher",1,::scripts\cp\maps\cp_rave\cp_rave_interactions::init_survivor_released,::scripts\cp\maps\cp_rave\cp_rave_interactions::wait_for_survivor_released,::debug_release_survivor,::debug_release_survivor);
-	scripts/cp/zombies/zombie_quest::register_quest_step("superslasher",2,::init_get_survivor_to_island,::get_survivor_to_island,::complete_to_island,::debug_get_survivor_to_island);
-	scripts/cp/zombies/zombie_quest::register_quest_step("superslasher",3,::init_super_slasher_fight,::super_slasher_fight,::complete_fight,::debug_super_slasher_fight);
+	scripts\cp\zombies\zombie_quest::register_quest_step("superslasher",0,::scripts\cp\maps\cp_rave\cp_rave_interactions::init_survivor_trapped,::scripts\cp\maps\cp_rave\cp_rave_interactions::wait_for_survivor_trapped,::blank,::debug_trap_survivor);
+	scripts\cp\zombies\zombie_quest::register_quest_step("superslasher",1,::scripts\cp\maps\cp_rave\cp_rave_interactions::init_survivor_released,::scripts\cp\maps\cp_rave\cp_rave_interactions::wait_for_survivor_released,::debug_release_survivor,::debug_release_survivor);
+	scripts\cp\zombies\zombie_quest::register_quest_step("superslasher",2,::init_get_survivor_to_island,::get_survivor_to_island,::complete_to_island,::debug_get_survivor_to_island);
+	scripts\cp\zombies\zombie_quest::register_quest_step("superslasher",3,::init_super_slasher_fight,::super_slasher_fight,::complete_fight,::debug_super_slasher_fight);
 }
 
 blank() {}
 
 load_super_slasher_vfx() {
-	level._effect["memory_trap_loop"] = loadfx("vfx/iw7/levels/cp_rave/vfx_rave_dcatcher_dmg_loop.vfx");
-	level._effect["memory_trap_start"] = loadfx("vfx/iw7/levels/cp_rave/vfx_rave_dcatcher_dmg_start.vfx");
-	level._effect["memory_trap_idle"] = loadfx("vfx/iw7/levels/cp_rave/vfx_rave_dcatcher_idle.vfx");
-	level._effect["memory_trap_active"] = loadfx("vfx/iw7/levels/cp_rave/superslasher/vfx_rave_dcatcher_active.vfx");
-	level._effect["memory_weak_spot"] = loadfx("vfx/iw7/levels/cp_rave/superslasher/vfx_rave_superslasher_weak_spot.vfx");
-	level._effect["floating_charm_trail_small"] = loadfx("vfx/iw7/levels/cp_rave/superslasher/vfx_rave_superslasher_floating_charm_small.vfx");
-	level._effect["floating_charm_trail_medium"] = loadfx("vfx/iw7/levels/cp_rave/superslasher/vfx_rave_superslasher_floating_charm_medium.vfx");
-	level._effect["floating_charm_trail_large"] = loadfx("vfx/iw7/levels/cp_rave/superslasher/vfx_rave_superslasher_floating_charm_large.vfx");
-	level._effect["superslasher_summon_zombie_portal"] = loadfx("vfx/iw7/levels/cp_rave/superslasher/vfx_rave_superslasher_spawn_portal.vfx");
-	level._effect["soul_charm_beam_small"] = loadfx("vfx/iw7/levels/cp_rave/superslasher/vfx_rave_superslasher_soul_beam_small.vfx");
-	level._effect["soul_charm_beam_medium"] = loadfx("vfx/iw7/levels/cp_rave/superslasher/vfx_rave_superslasher_soul_beam_small.vfx");
-	level._effect["soul_charm_beam_full"] = loadfx("vfx/iw7/levels/cp_rave/superslasher/vfx_rave_superslasher_soul_beam_full.vfx");
-	level._effect["charm_to_trap"] = loadfx("vfx/iw7/levels/cp_rave/superslasher/vfx_rave_superslasher_soul_charm_arc.vfx");
-	level._effect["initial_weak_spot_hit"] = loadfx("vfx/iw7/levels/cp_rave/superslasher/vfx_rave_ss_weakspot_hit.vfx");
-	level._effect["weak_spot_J_hit"] = loadfx("vfx/iw7/levels/cp_rave/superslasher/vfx_rave_ss_weakspot_hit_j.vfx");
-	level._effect["weak_spot_A_hit"] = loadfx("vfx/iw7/levels/cp_rave/superslasher/vfx_rave_ss_weakspot_hit_a.vfx");
-	level._effect["weak_spot_Y_hit"] = loadfx("vfx/iw7/levels/cp_rave/superslasher/vfx_rave_ss_weakspot_hit_y.vfx");
-	level._effect["weak_spot_M_hit"] = loadfx("vfx/iw7/levels/cp_rave/superslasher/vfx_rave_ss_weakspot_hit_m.vfx");
-	level._effect["weak_spot_E_hit"] = loadfx("vfx/iw7/levels/cp_rave/superslasher/vfx_rave_ss_weakspot_hit_e.vfx");
-	level._effect["weak_spot_W_hit"] = loadfx("vfx/iw7/levels/cp_rave/superslasher/vfx_rave_ss_weakspot_hit_w.vfx");
-	level._effect["weak_spot_S_hit"] = loadfx("vfx/iw7/levels/cp_rave/superslasher/vfx_rave_ss_weakspot_hit_s.vfx");
-	level._effect["punji_tell"] = loadfx("vfx/iw7/levels/cp_rave/superslasher/vfx_punji_tell.vfx");
-	level._effect["punji_subside"] = loadfx("vfx/iw7/levels/cp_rave/superslasher/vfx_punji_subside.vfx");
-	level._effect["happy_face"] = loadfx("vfx/iw7/levels/cp_rave/superslasher/vfx_rave_super_slasher_glow.vfx");
-	level._effect["sad_face"] = loadfx("vfx/iw7/levels/cp_rave/superslasher/vfx_rave_super_slasher_glow_sad.vfx");
-	level._effect["soul_key_glow"] = loadfx("vfx/iw7/core/zombie/vfx_zmb_soulkey_flames.vfx");
-	level._effect["boat_fall_splash"] = loadfx("vfx/iw7/levels/cp_rave/vfx_ks_water_splash.vfx");
-	level._effect["fight_stage"] = loadfx("vfx/iw7/levels/cp_rave/superslasher/vfx_rave_ss_stage.vfx");
-	level._effect["initial_weak_spot"] = loadfx("vfx/iw7/levels/cp_rave/superslasher/vfx_rave_superslasher_initial_weak_spot.vfx");
+	level._effect["memory_trap_loop"] = loadfx("vfx\iw7\levels\cp_rave\vfx_rave_dcatcher_dmg_loop.vfx");
+	level._effect["memory_trap_start"] = loadfx("vfx\iw7\levels\cp_rave\vfx_rave_dcatcher_dmg_start.vfx");
+	level._effect["memory_trap_idle"] = loadfx("vfx\iw7\levels\cp_rave\vfx_rave_dcatcher_idle.vfx");
+	level._effect["memory_trap_active"] = loadfx("vfx\iw7\levels\cp_rave\superslasher\vfx_rave_dcatcher_active.vfx");
+	level._effect["memory_weak_spot"] = loadfx("vfx\iw7\levels\cp_rave\superslasher\vfx_rave_superslasher_weak_spot.vfx");
+	level._effect["floating_charm_trail_small"] = loadfx("vfx\iw7\levels\cp_rave\superslasher\vfx_rave_superslasher_floating_charm_small.vfx");
+	level._effect["floating_charm_trail_medium"] = loadfx("vfx\iw7\levels\cp_rave\superslasher\vfx_rave_superslasher_floating_charm_medium.vfx");
+	level._effect["floating_charm_trail_large"] = loadfx("vfx\iw7\levels\cp_rave\superslasher\vfx_rave_superslasher_floating_charm_large.vfx");
+	level._effect["superslasher_summon_zombie_portal"] = loadfx("vfx\iw7\levels\cp_rave\superslasher\vfx_rave_superslasher_spawn_portal.vfx");
+	level._effect["soul_charm_beam_small"] = loadfx("vfx\iw7\levels\cp_rave\superslasher\vfx_rave_superslasher_soul_beam_small.vfx");
+	level._effect["soul_charm_beam_medium"] = loadfx("vfx\iw7\levels\cp_rave\superslasher\vfx_rave_superslasher_soul_beam_small.vfx");
+	level._effect["soul_charm_beam_full"] = loadfx("vfx\iw7\levels\cp_rave\superslasher\vfx_rave_superslasher_soul_beam_full.vfx");
+	level._effect["charm_to_trap"] = loadfx("vfx\iw7\levels\cp_rave\superslasher\vfx_rave_superslasher_soul_charm_arc.vfx");
+	level._effect["initial_weak_spot_hit"] = loadfx("vfx\iw7\levels\cp_rave\superslasher\vfx_rave_ss_weakspot_hit.vfx");
+	level._effect["weak_spot_J_hit"] = loadfx("vfx\iw7\levels\cp_rave\superslasher\vfx_rave_ss_weakspot_hit_j.vfx");
+	level._effect["weak_spot_A_hit"] = loadfx("vfx\iw7\levels\cp_rave\superslasher\vfx_rave_ss_weakspot_hit_a.vfx");
+	level._effect["weak_spot_Y_hit"] = loadfx("vfx\iw7\levels\cp_rave\superslasher\vfx_rave_ss_weakspot_hit_y.vfx");
+	level._effect["weak_spot_M_hit"] = loadfx("vfx\iw7\levels\cp_rave\superslasher\vfx_rave_ss_weakspot_hit_m.vfx");
+	level._effect["weak_spot_E_hit"] = loadfx("vfx\iw7\levels\cp_rave\superslasher\vfx_rave_ss_weakspot_hit_e.vfx");
+	level._effect["weak_spot_W_hit"] = loadfx("vfx\iw7\levels\cp_rave\superslasher\vfx_rave_ss_weakspot_hit_w.vfx");
+	level._effect["weak_spot_S_hit"] = loadfx("vfx\iw7\levels\cp_rave\superslasher\vfx_rave_ss_weakspot_hit_s.vfx");
+	level._effect["punji_tell"] = loadfx("vfx\iw7\levels\cp_rave\superslasher\vfx_punji_tell.vfx");
+	level._effect["punji_subside"] = loadfx("vfx\iw7\levels\cp_rave\superslasher\vfx_punji_subside.vfx");
+	level._effect["happy_face"] = loadfx("vfx\iw7\levels\cp_rave\superslasher\vfx_rave_super_slasher_glow.vfx");
+	level._effect["sad_face"] = loadfx("vfx\iw7\levels\cp_rave\superslasher\vfx_rave_super_slasher_glow_sad.vfx");
+	level._effect["soul_key_glow"] = loadfx("vfx\iw7\core\zombie\vfx_zmb_soulkey_flames.vfx");
+	level._effect["boat_fall_splash"] = loadfx("vfx\iw7\levels\cp_rave\vfx_ks_water_splash.vfx");
+	level._effect["fight_stage"] = loadfx("vfx\iw7\levels\cp_rave\superslasher\vfx_rave_ss_stage.vfx");
+	level._effect["initial_weak_spot"] = loadfx("vfx\iw7\levels\cp_rave\superslasher\vfx_rave_superslasher_initial_weak_spot.vfx");
 }
 
 debug_trap_survivor() {
@@ -223,7 +223,7 @@ delay_drop_soul_key() {
 
 enableslasherpas() {
 	level notify("force_new_song");
-	level.jukebox_table = "cp/zombies/cp_rave_music_genre_slasher.csv";
+	level.jukebox_table = "cp\zombies\cp_rave_music_genre_slasher.csv";
 	scripts\cp\zombies\zombie_jukebox::parse_music_genre_table();
 	level thread scripts\cp\zombies\zombie_jukebox::jukebox_start((-5867,4938,381),undefined,1);
 	wait(0.5);
@@ -236,7 +236,7 @@ disableslasherpas() {
 	disablepaspeaker("pa_super_slasher");
 	level notify("force_new_song");
 	level.slasherpa = undefined;
-	level.jukebox_table = "cp/zombies/cp_rave_music_genre.csv";
+	level.jukebox_table = "cp\zombies\cp_rave_music_genre.csv";
 	scripts\cp\zombies\zombie_jukebox::parse_music_genre_table();
 	level thread scripts\cp\zombies\zombie_jukebox::jukebox_start((1785,-2077,211));
 	level notify("jukebox_start");
@@ -706,7 +706,7 @@ vfx_point_to_trap(param_00) {
 			var_06 = var_05.origin;
 			var_07 = var_01 - var_06;
 			var_08 = vectortoangles(var_07);
-			function_02E0(level._effect["charm_to_trap"],var_06,var_08,var_01);
+			playfxbetweenpoints(level._effect["charm_to_trap"],var_06,var_08,var_01);
 		}
 
 		scripts\engine\utility::waitframe();
@@ -1070,7 +1070,7 @@ get_least_targeted_player() {
 }
 
 get_spawn_shockwave(param_00) {
-	if(isdefined(param_00.super_slasher_shockwave_safe_area) && function_010F(param_00.origin,param_00.super_slasher_shockwave_safe_area)) {
+	if(isdefined(param_00.super_slasher_shockwave_safe_area) && ispointinvolume(param_00.origin,param_00.super_slasher_shockwave_safe_area)) {
 		var_01 = scripts\engine\utility::getstructarray(param_00.super_slasher_shockwave_safe_area.target,"targetname");
 		var_02 = scripts\engine\utility::random(var_01);
 		return var_02.origin;
@@ -1307,7 +1307,7 @@ soul_key_pick_up_monitor(param_00,param_01) {
 			foreach(var_02 in level.players) {
 				var_02 setplayerdata("cp","haveSoulKeys","any_soul_key",1);
 				var_02 setplayerdata("cp","haveSoulKeys","soul_key_2",1);
-				var_02 scripts/cp/zombies/achievement::update_achievement("LOCKSMITH",1);
+				var_02 scripts\cp\zombies\achievement::update_achievement("LOCKSMITH",1);
 			}
 
 			break;

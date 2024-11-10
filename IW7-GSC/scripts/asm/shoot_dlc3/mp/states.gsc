@@ -1,8 +1,8 @@
-/********************************************************
+/************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\asm\shoot_dlc3\mp\states.gsc
-********************************************************/
+ * Script: scripts\asm\shoot_dlc3\mp\states.gsc
+************************************************/
 
 func_2371() {
 	if(scripts\asm\asm::func_232E("shoot_dlc3")) {
@@ -75,11 +75,11 @@ func_1241D(param_00,param_01,param_02,param_03) {
 }
 
 func_124A9(param_00,param_01,param_02,param_03) {
-	return self.var_1198.var_FECD.var_FF0B == 1;
+	return self.var_1198.shootparams.var_FF0B == 1;
 }
 
 func_124A1(param_00,param_01,param_02,param_03) {
-	return self.var_1198.var_FECD.var_1119D == "full";
+	return self.var_1198.shootparams.var_1119D == "full";
 }
 
 func_124A5(param_00,param_01,param_02,param_03) {
@@ -87,7 +87,7 @@ func_124A5(param_00,param_01,param_02,param_03) {
 }
 
 func_12425(param_00,param_01,param_02,param_03) {
-	return self.var_1491.pose == "crouch";
+	return self.a.pose == "crouch";
 }
 
 func_12428(param_00,param_01,param_02,param_03) {
@@ -103,11 +103,11 @@ func_1204C(param_00,param_01,param_02,param_03) {
 }
 
 func_1203F(param_00,param_01,param_02,param_03) {
-	return self.var_1198.var_FECD.var_FF0B == 1;
+	return self.var_1198.shootparams.var_FF0B == 1;
 }
 
 func_12037(param_00,param_01,param_02,param_03) {
-	return self.var_1198.var_FECD.var_1119D == "full";
+	return self.var_1198.shootparams.var_1119D == "full";
 }
 
 func_1203B(param_00,param_01,param_02,param_03) {

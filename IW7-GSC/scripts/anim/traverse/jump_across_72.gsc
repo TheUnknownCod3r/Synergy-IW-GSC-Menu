@@ -1,8 +1,8 @@
-/************************************************************
+/****************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\anim\traverse\jump_across_72.gsc
-************************************************************/
+ * Script: scripts\anim\traverse\jump_across_72.gsc
+****************************************************/
 
 main() {
 	if(self.type == "dog") {

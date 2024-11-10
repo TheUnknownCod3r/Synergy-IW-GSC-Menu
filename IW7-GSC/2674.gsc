@@ -1,12 +1,12 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2674.gsc
+ * Script: 2674.gsc
 ***************************************/
 
 init() {
-  level._effect["electric_trap_idle"] = loadfx("vfx/iw7/_requests/coop/generator_idle.vfx");
-  level._effect["electric_trap_attack"] = loadfx("vfx/iw7/core/zombie/vfx_electrap_shock_beam.vfx");
-  level._effect["electric_trap_shock"] = loadfx("vfx/iw7/core/zombie/traps/electric_trap/vfx_zmb_hit_shock.vfx");
+  level._effect["electric_trap_idle"] = loadfx("vfx\iw7\_requests\coop\generator_idle.vfx");
+  level._effect["electric_trap_attack"] = loadfx("vfx\iw7\core\zombie\vfx_electrap_shock_beam.vfx");
+  level._effect["electric_trap_shock"] = loadfx("vfx\iw7\core\zombie\traps\electric_trap\vfx_zmb_hit_shock.vfx");
   var_00 = spawnstruct();
   var_0.timeout = 60.0;
   var_0.modelbase = "zom_machinery_generator_portable_01";
@@ -33,8 +33,8 @@ give_crafted_trap(var_00, var_01) {
   var_01 thread watch_dpad();
   var_01 notify("new_power", "crafted_electric_trap");
   var_01 setclientomnvar("zom_crafted_weapon", 4);
-  var_01 thread scripts/cp/utility::usegrenadegesture(var_01, "iw7_pickup_zm");
-  scripts/cp/utility::set_crafted_inventory_item("crafted_electric_trap", ::give_crafted_trap, var_01);
+  var_01 thread scripts\cp\utility::usegrenadegesture(var_01, "iw7_pickup_zm");
+  scripts\cp\utility::set_crafted_inventory_item("crafted_electric_trap", ::give_crafted_trap, var_01);
 }
 
 watch_dpad() {
@@ -56,7 +56,7 @@ watch_dpad() {
   if (isdefined(self.allow_carry) && self.allow_carry == 0)
   continue;
 
-  if (scripts/cp/utility::is_valid_player())
+  if (scripts\cp\utility::is_valid_player())
   break;
   }
 
@@ -65,7 +65,7 @@ watch_dpad() {
 
 _meth_8342(var_00, var_01) {
   self endon("disconnect");
-  scripts/cp/utility::clearlowermessage("msg_power_hint");
+  scripts\cp\utility::clearlowermessage("msg_power_hint");
   var_02 = func_4A2A(self);
   self.itemtype = var_2.name;
   removeperks();
@@ -120,7 +120,7 @@ func_F68A(var_00, var_01, var_02) {
   if (var_03 != "force_cancel_placement")
   thread watch_dpad();
   else if (var_01)
-  scripts/cp/utility::remove_crafted_item_from_inventory(self);
+  scripts\cp\utility::remove_crafted_item_from_inventory(self);
 
   return 0;
   }
@@ -129,7 +129,7 @@ func_F68A(var_00, var_01, var_02) {
   continue;
 
   if (var_01)
-  scripts/cp/utility::remove_crafted_item_from_inventory(self);
+  scripts\cp\utility::remove_crafted_item_from_inventory(self);
 
   var_00 func_126AA(var_02, self);
   scripts\engine\utility::allow_weapon(1);
@@ -139,7 +139,7 @@ func_F68A(var_00, var_01, var_02) {
 
 removeweapons() {
   if (self.hasriotshield) {
-  var_00 = scripts/cp/utility::riotshieldname();
+  var_00 = scripts\cp\utility::riotshieldname();
   self.restoreweapon = var_00;
   self.riotshieldammo = self getammocount(var_00);
   self giveuponsuppressiontime(var_00);
@@ -147,18 +147,18 @@ removeweapons() {
 }
 
 removeperks() {
-  if (scripts/cp/utility::_hasperk("specialty_explosivebullets")) {
+  if (scripts\cp\utility::_hasperk("specialty_explosivebullets")) {
   self.restoreperk = "specialty_explosivebullets";
-  scripts/cp/utility::_unsetperk("specialty_explosivebullets");
+  scripts\cp\utility::_unsetperk("specialty_explosivebullets");
   }
 }
 
 restoreweapons() {
   if (isdefined(self.restoreweapon)) {
-  scripts/cp/utility::_giveweapon(self.restoreweapon);
+  scripts\cp\utility::_giveweapon(self.restoreweapon);
 
   if (self.hasriotshield) {
-  var_00 = scripts/cp/utility::riotshieldname();
+  var_00 = scripts\cp\utility::riotshieldname();
   self setweaponammoclip(var_00, self.riotshieldammo);
   }
   }
@@ -168,7 +168,7 @@ restoreweapons() {
 
 restoreperks() {
   if (isdefined(self.restoreperk)) {
-  scripts/cp/utility::giveperk(self.restoreperk);
+  scripts\cp\utility::giveperk(self.restoreperk);
   self.restoreperk = undefined;
   }
 }
@@ -209,7 +209,7 @@ func_126A0(var_00) {
 
   func_126A9();
   self playsound("sentry_explode");
-  scripts/cp/utility::removefromtraplist();
+  scripts\cp\utility::removefromtraplist();
 
   if (isdefined(self)) {
   playfxontag(scripts\engine\utility::getfx("sentry_explode_mp"), self, "tag_origin");
@@ -232,7 +232,7 @@ func_126A1() {
   for (;;) {
   self waittill("trigger", var_00);
 
-  if (!var_00 scripts/cp/utility::is_valid_player())
+  if (!var_00 scripts\cp\utility::is_valid_player())
   continue;
 
   if (scripts\engine\utility::is_true(var_0.iscarrying))
@@ -243,7 +243,7 @@ func_126A1() {
   if (isdefined(self.charge_fx))
   self.charge_fx delete();
 
-  scripts/cp/utility::removefromtraplist();
+  scripts\cp\utility::removefromtraplist();
   self delete();
   }
 }
@@ -281,10 +281,10 @@ func_126A8(var_00, var_01) {
   self stoploopsound();
   self.carriedby = var_00;
   var_0.iscarrying = 1;
-  var_00 thread scripts/cp/utility::update_trap_placement_internal(self, self.carried_trap, level.func_47B3["crafted_electric_trap"]);
-  thread scripts/cp/utility::item_oncarrierdeath(var_00);
-  thread scripts/cp/utility::item_oncarrierdisconnect(var_00);
-  thread scripts/cp/utility::item_ongameended(var_00);
+  var_00 thread scripts\cp\utility::update_trap_placement_internal(self, self.carried_trap, level.func_47B3["crafted_electric_trap"]);
+  thread scripts\cp\utility::item_oncarrierdeath(var_00);
+  thread scripts\cp\utility::item_oncarrierdisconnect(var_00);
+  thread scripts\cp\utility::item_ongameended(var_00);
   func_126A9();
   self notify("carried");
 }
@@ -298,16 +298,16 @@ func_126A6(var_00) {
   self setusefov(120);
   self setuserange(96);
   thread func_126A0(self.owner);
-  thread scripts/cp/utility::item_handleownerdisconnect("electrap_handleOwner");
-  thread scripts/cp/utility::item_timeout(var_00, level.func_47B3["crafted_electric_trap"].timeout);
+  thread scripts\cp\utility::item_handleownerdisconnect("electrap_handleOwner");
+  thread scripts\cp\utility::item_timeout(var_00, level.func_47B3["crafted_electric_trap"].timeout);
   thread func_126A1();
   thread func_126AF();
-  scripts/cp/utility::addtotraplist();
+  scripts\cp\utility::addtotraplist();
 }
 
 func_126A9() {
   self makeunusable();
-  scripts/cp/utility::removefromtraplist();
+  scripts\cp\utility::removefromtraplist();
 }
 
 func_126AF() {
@@ -316,11 +316,11 @@ func_126AF() {
   wait 1;
 
   for (;;) {
-  var_01 = scripts/cp/cp_agent_utils::getaliveagents();
+  var_01 = scripts\cp\cp_agent_utils::getaliveagents();
   var_01 = scripts\engine\utility::get_array_of_closest(self.origin, var_01);
 
   foreach (var_03 in var_01) {
-  if (!scripts/cp/utility::should_be_affected_by_trap(var_03, undefined, 1) || scripts\engine\utility::is_true(var_3.is_electrified))
+  if (!scripts\cp\utility::should_be_affected_by_trap(var_03, undefined, 1) || scripts\engine\utility::is_true(var_3.is_electrified))
   continue;
 
   if (distancesquared(self.origin + (0, 0, 20), var_3.origin + (0, 0, 20)) < var_00) {
@@ -328,9 +328,9 @@ func_126AF() {
   thread electrocute_zombie(var_03);
 
   if (scripts\engine\utility::is_true(var_3.dismember_crawl))
-  var_03 thread scripts/cp/utility::damage_over_time(var_03, self, 1, var_3.health + 10, "MOD_RIFLE_BULLET", "zmb_imsprojectile_mp", undefined, "electrified");
+  var_03 thread scripts\cp\utility::damage_over_time(var_03, self, 1, var_3.health + 10, "MOD_RIFLE_BULLET", "zmb_imsprojectile_mp", undefined, "electrified");
   else
-  var_03 thread scripts/cp/utility::damage_over_time(var_03, self, 3, var_3.health + 10, "MOD_RIFLE_BULLET", "zmb_imsprojectile_mp", undefined, "electrified");
+  var_03 thread scripts\cp\utility::damage_over_time(var_03, self, 3, var_3.health + 10, "MOD_RIFLE_BULLET", "zmb_imsprojectile_mp", undefined, "electrified");
 
   wait 1.5;
   }
@@ -349,7 +349,7 @@ electrocute_zombie(var_00) {
   var_04 = [scripts\engine\utility::random(var_01), scripts\engine\utility::random(var_02), scripts\engine\utility::random(var_03)];
 
   foreach (var_06 in var_04) {
-  if (!scripts/cp/utility::has_tag(var_0.model, var_06))
+  if (!scripts\cp\utility::has_tag(var_0.model, var_06))
   continue;
 
   var_07 = var_00 gettagorigin(var_06);

@@ -1,8 +1,8 @@
-/********************************************
+/************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\sp\_doorpeek.gsc
-********************************************/
+ * Script: scripts\sp\_doorpeek.gsc
+************************************/
 
 func_11620(param_00,param_01,param_02,param_03) {
 	if(!isdefined(param_03)) {
@@ -15,7 +15,7 @@ func_11620(param_00,param_01,param_02,param_03) {
 	}
 
 	if(param_03) {
-		function_0217();
+		teleportscene();
 	}
 
 	level.var_5A23[param_00].var_5A24 = level.var_5A23[param_00].var_5A25.angles;
@@ -378,7 +378,7 @@ func_1202(param_00,param_01) {
 
 		level.var_5A23[param_00].var_C9FD hide();
 		childthread func_11CE(0.2,level.var_5A23[param_00].var_C9FD);
-		var_04 thread scripts/sp/anim::func_1EC3(level.var_5A23[param_00].var_C9FD,var_05);
+		var_04 thread scripts\sp\anim::func_1EC3(level.var_5A23[param_00].var_C9FD,var_05);
 		var_09 = level.var_5A23[param_00].var_C9FD gettagorigin("tag_player");
 		var_0A = level.player getplayerangles(1);
 		var_0B = var_04.origin - var_09;
@@ -415,18 +415,18 @@ func_1202(param_00,param_01) {
 		scripts\engine\utility::flag_set("doorpeek_hand_on_door");
 		if(var_1B > 0) {
 			level.player scripts\engine\utility::delaycall(var_1B,::forceplaygestureviewmodel,var_03);
-			var_04 thread scripts/sp/anim::func_1EC3(level.var_5A23[param_00].var_C9FD,var_05);
-			var_04 scripts\engine\utility::delaythread(var_1B,::scripts/sp/anim::func_1F35,level.var_5A23[param_00].var_C9FD,var_05);
+			var_04 thread scripts\sp\anim::func_1EC3(level.var_5A23[param_00].var_C9FD,var_05);
+			var_04 scripts\engine\utility::delaythread(var_1B,::scripts\sp\anim::func_1F35,level.var_5A23[param_00].var_C9FD,var_05);
 			if(level.var_5A23[param_00].var_5A57 != "civlever" && level.var_5A23[param_00].var_5A57 != "armoryajar") {
-				level.var_5A23[param_00].var_5978 scripts\engine\utility::delaythread(var_1B,::scripts/sp/anim::func_1F35,level.var_5A23[param_00].var_5978,"doorpeek_" + func_1297(level.var_5A23[param_00].var_5A57) + "_in");
+				level.var_5A23[param_00].var_5978 scripts\engine\utility::delaythread(var_1B,::scripts\sp\anim::func_1F35,level.var_5A23[param_00].var_5978,"doorpeek_" + func_1297(level.var_5A23[param_00].var_5A57) + "_in");
 			}
 		}
 		else
 		{
 			level.player forceplaygestureviewmodel(var_03);
-			var_04 thread scripts/sp/anim::func_1F35(level.var_5A23[param_00].var_C9FD,var_05);
+			var_04 thread scripts\sp\anim::func_1F35(level.var_5A23[param_00].var_C9FD,var_05);
 			if(level.var_5A23[param_00].var_5A57 != "civlever" && level.var_5A23[param_00].var_5A57 != "armoryajar") {
-				level.var_5A23[param_00].var_5978 thread scripts/sp/anim::func_1F35(level.var_5A23[param_00].var_5978,"doorpeek_" + func_1297(level.var_5A23[param_00].var_5A57) + "_in");
+				level.var_5A23[param_00].var_5978 thread scripts\sp\anim::func_1F35(level.var_5A23[param_00].var_5978,"doorpeek_" + func_1297(level.var_5A23[param_00].var_5A57) + "_in");
 			}
 		}
 
@@ -672,7 +672,7 @@ func_11F7(param_00,param_01,param_02,param_03) {
 				continue;
 			}
 
-			var_0F = scripts/sp/math::func_ACE9(var_0C,var_0C + var_0E * 64,self.ogorigin,var_06);
+			var_0F = scripts\sp\math::func_ACE9(var_0C,var_0C + var_0E * 64,self.ogorigin,var_06);
 			var_10 = vectornormalize(var_0F - self.ogorigin);
 			var_0F = self.ogorigin + var_10 * distance(var_0F,self.ogorigin) * 0.75 * var_0B;
 			if(distance(var_0F,self.ogorigin) > 32) {
@@ -803,7 +803,7 @@ func_136C(param_00,param_01,param_02) {
 	wait(0.3);
 	scripts\engine\utility::flag_set("doorpeek_hand_on_door");
 	level.var_5A23[param_01].var_C9FD show();
-	param_00 scripts/sp/anim::func_1F35(level.var_5A23[param_01].var_C9FD,param_02);
+	param_00 scripts\sp\anim::func_1F35(level.var_5A23[param_01].var_C9FD,param_02);
 }
 
 func_1415() {
@@ -1130,11 +1130,11 @@ func_11F9(param_00,param_01,param_02,param_03,param_04,param_05) {
 			var_0F = (var_09[0] - var_0A[0],var_09[1] - var_0A[1],0);
 			var_0C _meth_81E2(level.player,"tag_origin",(0,0,0) + var_0E,var_0F,0);
 			if(!param_02) {
-				var_0C thread scripts/sp/anim::func_1F35(var_0C,"doorpeek_" + func_1297(var_06) + "_out");
+				var_0C thread scripts\sp\anim::func_1F35(var_0C,"doorpeek_" + func_1297(var_06) + "_out");
 			}
 			else
 			{
-				var_0C thread scripts/sp/anim::func_1F35(var_0C,"doorpeek_" + func_1297(var_06) + "_r_out");
+				var_0C thread scripts\sp\anim::func_1F35(var_0C,"doorpeek_" + func_1297(var_06) + "_r_out");
 			}
 
 			var_0C scripts\engine\utility::delaycall(0.2,::delete);
@@ -1794,7 +1794,7 @@ func_11EC(param_00) {
 	var_0D = level.var_5A23[param_00].var_5A24 + (0,0 - var_0B.var_47A3,0);
 	level notify(param_00 + "door_kick_start");
 	func_11EF();
-	level.var_5A23[param_00].var_59FF thread scripts/sp/anim::func_1F35(level.var_5A23[param_00].var_C9FD,"doorpeek_airlock_bash");
+	level.var_5A23[param_00].var_59FF thread scripts\sp\anim::func_1F35(level.var_5A23[param_00].var_C9FD,"doorpeek_airlock_bash");
 	var_0E = 0.2;
 	var_0F = 2.4;
 	var_10 = 1.1;
@@ -1853,7 +1853,7 @@ func_11ED(param_00) {
 	var_0D = level.var_5A23[param_00].var_5A24 + (0,0 - var_0B.var_47A3,0);
 	level notify(param_00 + "door_kick_start");
 	func_11EF();
-	level.var_5A23[param_00].var_59FF thread scripts/sp/anim::func_1F35(level.var_5A23[param_00].var_C9FD,"doorpeek_airlock_bash");
+	level.var_5A23[param_00].var_59FF thread scripts\sp\anim::func_1F35(level.var_5A23[param_00].var_C9FD,"doorpeek_airlock_bash");
 	level.player playgestureviewmodel("ges_doorpeek_airlock_bash",undefined,1);
 	var_0E = 0.2;
 	var_0F = 1.75;
@@ -2003,7 +2003,7 @@ func_11F0(param_00,param_01,param_02) {
 		level.var_5A23[var_04.var_336].var_A5AE setmodel(var_19);
 	}
 
-	var_07 thread scripts/sp/anim::func_1EC3(level.var_5A23[var_04.var_336].var_A5AE,var_15);
+	var_07 thread scripts\sp\anim::func_1EC3(level.var_5A23[var_04.var_336].var_A5AE,var_15);
 	var_1A = level.var_5A23[var_04.var_336].var_A5AE gettagorigin("tag_player");
 	var_1B = var_07.origin - var_1A;
 	var_1C = level.player.origin - var_1A;
@@ -2018,7 +2018,7 @@ func_11F0(param_00,param_01,param_02) {
 	var_07.origin = level.player.origin + var_20 * var_21;
 	var_07.angles = var_07.angles + var_1D;
 	level.player playgestureviewmodel(var_16,undefined,1,0.2);
-	var_07 thread scripts/sp/anim::func_1F35(level.var_5A23[var_04.var_336].var_A5AE,var_15);
+	var_07 thread scripts\sp\anim::func_1F35(level.var_5A23[var_04.var_336].var_A5AE,var_15);
 	var_22 = getanimlength(level.var_5A23[var_04.var_336].var_A5AE scripts\sp\_utility::func_7DC1(var_15));
 	var_23 = 0.4;
 	var_24 = 1.1;
@@ -2439,32 +2439,32 @@ func_1206() {
 	level.var_EC85["player_rig"]["doorpeek_kick"] = %vm_doorpeek_kick;
 	level.var_EC85["player_rig"]["doorpeek_airlock_kick"] = %wm_doorpeek_airlock_kick;
 	level.var_EC85["player_rig"]["doorpeek_civlever_in"] = %wm_doorpeek_civlever_in;
-	scripts/sp/anim::func_17F6("player_rig","doorpeek_handle",::func_5A1B,"doorpeek_civlever_in");
+	scripts\sp\anim::func_17F6("player_rig","doorpeek_handle",::func_5A1B,"doorpeek_civlever_in");
 	level.var_EC85["player_rig"]["doorpeek_civlever_loop"][0] = %wm_doorpeek_civlever_loop;
 	level.var_EC85["player_rig"]["doorpeek_civlever_out"] = %wm_doorpeek_civlever_out;
 	level.var_EC85["player_rig"]["doorpeek_civlever_backon"] = %wm_doorpeek_civlever_backon;
 	level.var_EC89["player_rig"]["doorpeek_civlever_backon"] = 0;
 	level.var_EC85["player_rig"]["doorpeek_civlever_r_in"] = %wm_doorpeek_civlever_r_in;
-	scripts/sp/anim::func_17F6("player_rig","doorpeek_handle",::func_5A1B,"doorpeek_civlever_r_in");
+	scripts\sp\anim::func_17F6("player_rig","doorpeek_handle",::func_5A1B,"doorpeek_civlever_r_in");
 	level.var_EC85["player_rig"]["doorpeek_civlever_r_loop"][0] = %wm_doorpeek_civlever_r_loop;
 	level.var_EC85["player_rig"]["doorpeek_civlever_r_out"] = %wm_doorpeek_civlever_r_out;
 	level.var_EC85["player_rig"]["doorpeek_civlever_r_backon"] = %wm_doorpeek_civlever_r_backon;
 	level.var_EC89["player_rig"]["doorpeek_civlever_r_backon"] = 0;
 	level.var_EC85["player_rig"]["doorpeek_bulkhead_in"] = %wm_doorpeek_bulkhead_in;
-	scripts/sp/anim::func_17F6("player_rig","doorpeek_handle",::func_5A1B,"doorpeek_bulkhead_in");
+	scripts\sp\anim::func_17F6("player_rig","doorpeek_handle",::func_5A1B,"doorpeek_bulkhead_in");
 	level.var_EC85["player_rig"]["doorpeek_bulkhead_loop"][0] = %wm_doorpeek_bulkhead_loop;
 	level.var_EC85["player_rig"]["doorpeek_bulkhead_out"] = %wm_doorpeek_bulkhead_out_b;
 	level.var_EC85["player_rig"]["doorpeek_bulkhead_backon"] = %wm_doorpeek_bulkhead_backon;
 	level.var_EC89["player_rig"]["doorpeek_bulkhead_backon"] = 0;
 	level.var_EC85["player_rig"]["doorpeek_airlock_in"] = %wm_doorpeek_airlock_in;
-	scripts/sp/anim::func_17F6("player_rig","doorpeek_handle",::func_5A1B,"doorpeek_airlock_in");
+	scripts\sp\anim::func_17F6("player_rig","doorpeek_handle",::func_5A1B,"doorpeek_airlock_in");
 	level.var_EC85["player_rig"]["doorpeek_airlock_loop"][0] = %wm_doorpeek_airlock_loop;
 	level.var_EC85["player_rig"]["doorpeek_airlock_out"] = %wm_doorpeek_airlock_out;
 	level.var_EC85["player_rig"]["doorpeek_airlock_bash"] = %wm_doorpeek_airlock_bash;
 	level.var_EC85["player_rig"]["doorpeek_airlock_backon"] = %wm_doorpeek_airlock_backon;
 	level.var_EC89["player_rig"]["doorpeek_airlock_backon"] = 0;
 	level.var_EC85["player_rig"]["doorpeek_armory_in"] = %wm_doorpeek_armory_in;
-	scripts/sp/anim::func_17F6("player_rig","doorpeek_handle",::func_5A1B,"doorpeek_armory_in");
+	scripts\sp\anim::func_17F6("player_rig","doorpeek_handle",::func_5A1B,"doorpeek_armory_in");
 	level.var_EC85["player_rig"]["doorpeek_armory_loop"][0] = %wm_doorpeek_armory_loop;
 	level.var_EC85["player_rig"]["doorpeek_armory_out"] = %wm_doorpeek_armory_out;
 	level.var_EC85["player_rig"]["doorpeek_armory_backon"] = %wm_doorpeek_armory_backon;

@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3604.gsc
-****************************/
+ * Script: 3604.gsc
+************************/
 
 func_B557() {
 	level thread func_B559();

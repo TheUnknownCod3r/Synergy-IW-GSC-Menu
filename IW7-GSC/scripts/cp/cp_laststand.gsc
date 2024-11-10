@@ -1,8 +1,8 @@
-/***********************************************
+/***************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\cp_laststand.gsc
-***********************************************/
+ * Script: scripts\cp\cp_laststand.gsc
+***************************************/
 
 callback_defaultplayerlaststand(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08,param_09) {
 	default_playerlaststand(param_09);
@@ -90,7 +90,7 @@ gethealthcap() {
 }
 
 enter_globaldefaultaction() {
-	scripts/cp/cp_gamescore::update_team_encounter_performance(scripts/cp/cp_gamescore::get_team_score_component_name(),"num_players_enter_laststand");
+	scripts\cp\cp_gamescore::update_team_encounter_performance(scripts\cp\cp_gamescore::get_team_score_component_name(),"num_players_enter_laststand");
 	var_00 = ["iw7_gunless_zm"];
 	if(isdefined(level.additional_laststand_weapon_exclusion)) {
 		var_00 = scripts\engine\utility::array_combine(var_00,level.additional_laststand_weapon_exclusion);
@@ -393,7 +393,7 @@ record_bleedout(param_00) {
 	scripts\cp\cp_persistence::eog_player_update_stat("deaths",1);
 	scripts\cp\cp_challenge::update_challenge("no_bleedout");
 	if(!is_killed_by_kill_trigger(param_00)) {
-		scripts/cp/cp_gamescore::update_team_encounter_performance(scripts/cp/cp_gamescore::get_team_score_component_name(),"num_players_bleed_out");
+		scripts\cp\cp_gamescore::update_team_encounter_performance(scripts\cp\cp_gamescore::get_team_score_component_name(),"num_players_bleed_out");
 		scripts\cp\cp_analytics::inc_bleedout_counts();
 	}
 }
@@ -542,7 +542,7 @@ getrevivetimescaler(param_00,param_01) {
 		return 2;
 	}
 
-	var_02 = param_00 scripts/cp/perks/perk_utility::perk_getrevivetimescalar();
+	var_02 = param_00 scripts\cp\perks\perk_utility::perk_getrevivetimescalar();
 	if(param_01 scripts\cp\utility::is_consumable_active("faster_revive_upgrade")) {
 		var_02 = var_02 * 2;
 	}

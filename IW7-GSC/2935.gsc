@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\2935.gsc
-****************************/
+ * Script: 2935.gsc
+************************/
 
 main() {
 	level.var_10707 = [];
@@ -712,7 +712,7 @@ func_5CEE() {
 
 	self.precachemodel = 1;
 	if(scripts\sp\_utility::func_93A6()) {
-		if(scripts/sp/specialist_MAYBE::spawn_nanoshot()) {
+		if(scripts\sp\specialist_MAYBE::spawn_nanoshot()) {
 			return;
 		}
 	}
@@ -760,7 +760,7 @@ func_5CCA() {
 }
 
 func_6B48() {
-	scripts/sp/fakeactor::func_6B44();
+	scripts\sp\fakeactor::func_6B44();
 }
 
 func_107AB() {
@@ -1409,13 +1409,13 @@ func_107F5() {
 
 func_10662() {
 	if(isdefined(self.var_EEA6)) {
-		self.bt.forceselfdestructtimer = gettime() + self.var_EEA6 * 1000;
+		self.var_3135.forceselfdestructtimer = gettime() + self.var_EEA6 * 1000;
 		self.var_EEA6 = undefined;
 		return;
 	}
 
 	if(isdefined(self.var_EEA5)) {
-		self.bt.forceselfdestructtimer = 1;
+		self.var_3135.forceselfdestructtimer = 1;
 		self.var_EEA5 = undefined;
 	}
 }
@@ -2076,7 +2076,7 @@ func_12F9C(param_00) {
 		self.a.disablelongdeath = 1;
 	}
 
-	scripts/asm/asm_bb::func_296E(param_00);
+	scripts\asm\asm_bb::func_296E(param_00);
 	while(!isdefined(self _meth_8164()) || self _meth_8164() != param_00) {
 		wait(0.05);
 	}
@@ -2149,7 +2149,7 @@ func_11054() {
 	}
 
 	self _meth_83AF();
-	scripts/asm/asm_bb::func_296E(undefined);
+	scripts\asm\asm_bb::func_296E(undefined);
 	self givescorefortrophyblocks();
 	var_00 givesentry();
 }

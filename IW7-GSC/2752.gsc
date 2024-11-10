@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2752.gsc
+ * Script: 2752.gsc
 ***************************************/
 
 init() {
@@ -340,7 +340,7 @@ func_C752(var_00, var_01) {
 }
 
 getsplashtablename() {
-  return "mp/splashTable.csv";
+  return "mp\splashTable.csv";
 }
 
 getsplashtablemaxaltdisplays() {
@@ -385,7 +385,7 @@ onkillstreaksplashshown(var_00) {
 }
 
 showerrormessage(var_00, var_01) {
-  var_02 = tablelookuprownum("mp/errorMessages.csv", 0, var_00);
+  var_02 = tablelookuprownum("mp\errorMessages.csv", 0, var_00);
 
   if (isdefined(var_01))
   self setclientomnvar("ui_mp_error_message_param", var_01);
@@ -407,7 +407,7 @@ showerrormessagetoallplayers(var_00, var_01) {
 }
 
 testmiscmessage(var_00) {
-  var_01 = tablelookuprownum("mp/miscMessages.csv", 0, var_00);
+  var_01 = tablelookuprownum("mp\miscMessages.csv", 0, var_00);
 
   if (isdefined(var_01) && var_01 >= 0)
   return 1;
@@ -416,8 +416,8 @@ testmiscmessage(var_00) {
 }
 
 showmiscmessage(var_00) {
-  var_01 = tablelookuprownum("mp/miscMessages.csv", 0, var_00);
-  var_02 = tablelookupbyrow("mp/miscMessages.csv", var_01, 3);
+  var_01 = tablelookuprownum("mp\miscMessages.csv", 0, var_00);
+  var_02 = tablelookupbyrow("mp\miscMessages.csv", var_01, 3);
 
   if (isdefined(var_02) && var_02 != "")
   self playlocalsound(var_02);

@@ -1,8 +1,8 @@
-/*****************************************************
+/*********************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\bots\gametype_grnd.gsc
-*****************************************************/
+ * Script: scripts\mp\bots\gametype_grnd.gsc
+*********************************************/
 
 main() {
 	setup_callbacks();
@@ -67,7 +67,7 @@ clear_defend() {
 }
 
 getnodeinzone() {
-	var_00 = function_00B7(level.zone.gameobject.trigger);
+	var_00 = getnodesintrigger(level.zone.gameobject.trigger);
 	if(var_00.size == 0 || !isdefined(var_00)) {
 		return undefined;
 	}

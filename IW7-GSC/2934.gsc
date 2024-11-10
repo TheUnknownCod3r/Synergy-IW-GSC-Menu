@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2934.gsc
+ * Script: 2934.gsc
 ***************************************/
 
 func_1945(var_00, var_01, var_02) {
@@ -53,8 +53,8 @@ func_B840() {
   level notify("missile_volley_global_cooldown");
   level endon("missile_volley_global_cooldown");
   level.player endon("death");
-  level.player scripts/sp/utility::func_65DD("jackal_enemy_homing_missile_allowed");
-  level.player scripts/sp/utility::func_65DD("jackal_enemy_homing_missile_allowed_hyperaggressive");
+  level.player scripts\sp\utility::func_65DD("jackal_enemy_homing_missile_allowed");
+  level.player scripts\sp\utility::func_65DD("jackal_enemy_homing_missile_allowed_hyperaggressive");
 
   while (isdefined(self.func_93D2) && self.func_93D2.size > 0)
   wait 0.1;
@@ -63,14 +63,14 @@ func_B840() {
   var_00 = 12.0;
   var_01 = 24.0;
   wait(randomfloatrange(var_00, var_01));
-  level.player scripts/sp/utility::func_65E1("jackal_enemy_homing_missile_allowed");
+  level.player scripts\sp\utility::func_65E1("jackal_enemy_homing_missile_allowed");
 }
 
 func_B841() {
   var_00 = 3.5;
   var_01 = 5.5;
   wait(randomfloatrange(var_00, var_01));
-  level.player scripts/sp/utility::func_65E1("jackal_enemy_homing_missile_allowed_hyperaggressive");
+  level.player scripts\sp\utility::func_65E1("jackal_enemy_homing_missile_allowed_hyperaggressive");
 }
 
 func_7B95() {
@@ -98,8 +98,8 @@ func_B806() {
   return;
 
   var_00 = length(self.origin - level.func_D127.origin);
-  var_01 = scripts/sp/math::func_C097(200, 10000, var_00);
-  var_02 = scripts/sp/math::func_6A8E(0.6, 1.3, var_01);
+  var_01 = scripts\sp\math::func_C097(200, 10000, var_00);
+  var_02 = scripts\sp\math::func_6A8E(0.6, 1.3, var_01);
   self _meth_8277(var_02, 0.05);
   wait 0.05;
   }
@@ -199,10 +199,10 @@ func_B807() {
   var_13 = var_07;
 
   var_14 = distance(self.origin, level.func_D127.origin);
-  var_15 = scripts/sp/math::func_C097(var_00, var_01, var_14);
-  var_16 = scripts/sp/math::func_6A8E(var_13, var_06, var_15);
-  var_17 = scripts/sp/math::func_C097(var_02, var_03, var_14);
-  var_18 = scripts/sp/math::func_6A8E(var_04, var_05, var_17);
+  var_15 = scripts\sp\math::func_C097(var_00, var_01, var_14);
+  var_16 = scripts\sp\math::func_6A8E(var_13, var_06, var_15);
+  var_17 = scripts\sp\math::func_C097(var_02, var_03, var_14);
+  var_18 = scripts\sp\math::func_6A8E(var_04, var_05, var_17);
   } else {
   var_16 = 1400;
   var_18 = 20;
@@ -533,7 +533,7 @@ func_A332(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08
   if (var_18 < var_17)
   var_43 = 0;
   else
-  var_43 = scripts/sp/math::func_C097(0, var_10, var_18 - var_17);
+  var_43 = scripts\sp\math::func_C097(0, var_10, var_18 - var_17);
   }
   else
   var_43 = 1;
@@ -577,17 +577,17 @@ func_A332(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08
   var_48 = vectornormalize(var_46);
   var_49 = anglestoforward(var_32);
   var_50 = vectordot(var_48, var_49);
-  var_51 = 1 - scripts/sp/math::func_C097(0.3, 1, var_50);
-  var_52 = scripts/sp/math::func_6A8E(1, var_19, var_44 * var_51);
+  var_51 = 1 - scripts\sp\math::func_C097(0.3, 1, var_50);
+  var_52 = scripts\sp\math::func_6A8E(1, var_19, var_44 * var_51);
 
   if (var_50 == 1)
   var_53 = 0;
   else
-  var_53 = 1 - scripts/sp/math::func_C097(var_50, 1, var_52);
+  var_53 = 1 - scripts\sp\math::func_C097(var_50, 1, var_52);
 
   var_54 = vectornormalize(var_48 * var_53 + var_49 * (1 - var_53));
-  var_55 = scripts/sp/math::func_C097(0, 17000, var_47);
-  var_55 = scripts/sp/math::func_C09B(var_55);
+  var_55 = scripts\sp\math::func_C097(0, 17000, var_47);
+  var_55 = scripts\sp\math::func_C09B(var_55);
 
   if (var_55 < var_40)
   var_40 = var_55;
@@ -721,7 +721,7 @@ func_A332(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08
   if (isdefined(var_02)) {
   var_02 notify("missile_explode");
 
-  if (scripts/sp/utility::func_D123() && var_02 == level.func_D127)
+  if (scripts\sp\utility::func_D123() && var_02 == level.func_D127)
   player_jackal_scripted_missile_self_damage(var_42["position"]);
   }
   else
@@ -768,8 +768,8 @@ player_jackal_scripted_missile_self_damage(var_00) {
   if (var_01 > var_02)
   return;
 
-  var_03 = scripts/sp/math::func_C097(0, var_02, var_01);
-  var_04 = scripts/sp/math::func_6A8E(1000, 500, var_03);
+  var_03 = scripts\sp\math::func_C097(0, var_02, var_01);
+  var_04 = scripts\sp\math::func_6A8E(1000, 500, var_03);
   level.func_D127 getrandomarmkillstreak(var_04, var_00, level.func_D127, level.func_D127, "MOD_EXPLOSIVE", "spaceship_homing_missile");
 }
 
@@ -878,8 +878,8 @@ func_B7E7() {
   self.func_4D94["target"] = randomfloatrange(self.func_B144 * -1, self.func_B144);
   }
 
-  var_00 = scripts/sp/math::func_C097(0, self.func_4D94["period"], self.func_4D94["time"]);
-  var_00 = scripts/sp/math::func_C09C(var_00);
+  var_00 = scripts\sp\math::func_C097(0, self.func_4D94["period"], self.func_4D94["time"]);
+  var_00 = scripts\sp\math::func_C09C(var_00);
   self.func_4D94["val"] = self.func_4D94["old"] * (1 - var_00) + self.func_4D94["target"] * var_00;
   self.func_4D94["time"] = self.func_4D94["time"] + 0.05;
 }
@@ -931,7 +931,7 @@ func_4C7B(var_00, var_01, var_02, var_03, var_04) {
   else
   thread scripts\engine\utility::play_sound_in_space(var_03, var_7.origin);
 
-  thread scripts/sp/utility::func_5187(var_07);
+  thread scripts\sp\utility::func_5187(var_07);
   wait(var_6[2]);
 
   if (isdefined(var_07))
@@ -1004,7 +1004,7 @@ func_B7E8(var_00, var_01) {
 }
 
 func_F42B(var_00) {
-  if (level.player scripts/sp/utility::func_65DB("disable_jackal_lockon"))
+  if (level.player scripts\sp\utility::func_65DB("disable_jackal_lockon"))
   return;
 
   if (isdefined(self.func_9B4C) && self.func_9B4C)
@@ -1036,7 +1036,7 @@ func_F42B(var_00) {
 }
 
 func_F42C(var_00) {
-  if (level.player scripts/sp/utility::func_65DF("disable_jackal_lockon") && level.player scripts/sp/utility::func_65DB("disable_jackal_lockon"))
+  if (level.player scripts\sp\utility::func_65DF("disable_jackal_lockon") && level.player scripts\sp\utility::func_65DB("disable_jackal_lockon"))
   return;
 
   if (self.func_AEDF.priority) {
@@ -1135,7 +1135,7 @@ func_39C3(var_00, var_01, var_02) {
   var_04 = var_02;
 
   while (var_03 < var_00) {
-  scripts/sp/utility::func_F40A(var_04, 0);
+  scripts\sp\utility::func_F40A(var_04, 0);
 
   if (!var_01)
   self playsound("jackal_scan_ship");

@@ -1,8 +1,8 @@
-/******************************************************
+/**********************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\killstreaks\_uplink.gsc
-******************************************************/
+ * Script: scripts\mp\killstreaks\_uplink.gsc
+**********************************************/
 
 init() {
 	level.uplinks = [];
@@ -14,7 +14,7 @@ init() {
 	level.var_4418["removeComExpBenefits"] = ::func_E0DF;
 	level.var_4418["getRadarStrengthForTeam"] = ::disableusability;
 	level.var_4418["getRadarStrengthForPlayer"] = ::_meth_80A7;
-	level._effect["uav_beam"] = loadfx("vfx/old/_requests/mp_gameplay/vfx_energy_beam");
+	level._effect["uav_beam"] = loadfx("vfx\old\_requests\mp_gameplay\vfx_energy_beam");
 	unblockteamradar("axis");
 	unblockteamradar("allies");
 	level thread func_12F82();
@@ -52,7 +52,7 @@ init() {
 	var_00.var_C55B = ::func_12F80;
 	var_00.ondeathdelegate = ::ondeath_clearscriptedanim;
 	var_00.var_C4F3 = ::func_C4F2;
-	var_00.deathvfx = loadfx("vfx/core/mp/killstreaks/vfx_ballistic_vest_death");
+	var_00.deathvfx = loadfx("vfx\core\mp\killstreaks\vfx_ballistic_vest_death");
 	level.placeableconfigs["uplink"] = var_00;
 	level.placeableconfigs["uplink_support"] = var_00;
 }
@@ -75,7 +75,7 @@ func_1383D() {
 			continue;
 		}
 
-		var_02 = scripts\mp\_utility::outlineenableforteam(var_01,"cyan",var_01.team,0,0,"killstreak");
+		var_02 = scripts\mp\utility::outlineenableforteam(var_01,"cyan",var_01.team,0,0,"killstreak");
 	}
 }
 
@@ -186,7 +186,7 @@ func_12E79() {
 }
 
 setturretmodechangewait() {
-	if(scripts\mp\_utility::_hasperk("specialty_comexp")) {
+	if(scripts\mp\utility::_hasperk("specialty_comexp")) {
 		var_00 = _meth_80A6(self);
 		func_F7F7(self,var_00);
 		func_12F09();
@@ -203,7 +203,7 @@ func_12F09(param_00) {
 		var_01 = _meth_80A7(self);
 	}
 
-	if(scripts\mp\_utility::_hasperk("specialty_comexp")) {
+	if(scripts\mp\utility::_hasperk("specialty_comexp")) {
 		var_01 = _meth_80A6(self);
 	}
 
@@ -243,7 +243,7 @@ func_F7F7(param_00,param_01) {
 func_1290C(param_00,param_01) {
 	var_02 = scripts\mp\killstreaks\_placeable::giveplaceable(param_01,1);
 	if(var_02) {
-		scripts\mp\_matchdata::logkillstreakevent("uplink",self.origin);
+		scripts\mp\matchdata::logkillstreakevent("uplink",self.origin);
 	}
 
 	self.iscarrying = undefined;
@@ -282,11 +282,11 @@ func_12AEF() {
 				continue;
 			}
 
-			if(var_04 scripts\mp\_utility::_hasperk("specialty_gpsjammer")) {
+			if(var_04 scripts\mp\utility::_hasperk("specialty_gpsjammer")) {
 				continue;
 			}
 
-			if(!scripts\mp\_utility::isreallyalive(var_04)) {
+			if(!scripts\mp\utility::isreallyalive(var_04)) {
 				if(isdefined(var_04.var_2A3B)) {
 					var_04.var_2A3B delete();
 				}
@@ -310,12 +310,12 @@ func_12AEF() {
 				var_05 setmodel("tag_origin");
 				var_05.triggerportableradarping = var_04;
 				var_04.var_12AF1 = var_05;
-				var_04.var_12AF2 = var_05 scripts\mp\_entityheadicons::setheadicon(self.team,"headicon_enemy",(0,0,32),2,2,1,0.01,0,1,1,0);
+				var_04.var_12AF2 = var_05 scripts\mp\entityheadicons::setheadicon(self.team,"headicon_enemy",(0,0,32),2,2,1,0.01,0,1,1,0);
 				var_04.var_12AF2.alpha = 0.95;
 				var_04.var_12AF2 thread func_6AB8(var_01,var_02);
 			}
 
-			var_04.var_2A3B = function_0173(scripts\engine\utility::getfx("uav_beam"),var_00,var_04.origin);
+			var_04.var_2A3B = playloopedfx(scripts\engine\utility::getfx("uav_beam"),var_00,var_04.origin);
 		}
 
 		wait(var_01);
@@ -346,12 +346,12 @@ func_B37E() {
 		var_03 setmodel("tag_origin");
 		var_03.triggerportableradarping = self;
 		self.var_12AF1 = var_03;
-		self.var_12AF2 = var_03 scripts\mp\_entityheadicons::setheadicon(scripts\mp\_utility::getotherteam(self.team),"headicon_enemy",(0,0,32),14,14,1,0.01,0,1,1,0);
+		self.var_12AF2 = var_03 scripts\mp\entityheadicons::setheadicon(scripts\mp\utility::getotherteam(self.team),"headicon_enemy",(0,0,32),14,14,1,0.01,0,1,1,0);
 		self.var_12AF2.alpha = 0.95;
 		self.var_12AF2 thread func_6AB8(var_01,var_02);
 	}
 
-	self.var_2A3B = function_0173(scripts\engine\utility::getfx("uav_beam"),var_00,self.origin);
+	self.var_2A3B = playloopedfx(scripts\engine\utility::getfx("uav_beam"),var_00,self.origin);
 	wait(var_01);
 	if(isdefined(self.var_2A3B)) {
 		self.var_2A3B delete();
@@ -393,7 +393,7 @@ func_10E04(param_00) {
 }
 
 func_11099() {
-	scripts\mp\_weapons::stopblinkinglight();
+	scripts\mp\weapons::stopblinkinglight();
 	self scriptmodelclearanim();
 	if(isdefined(self.bombsquadmodel)) {
 		self.bombsquadmodel scriptmodelclearanim();
@@ -408,15 +408,15 @@ func_C4F2(param_00,param_01,param_02,param_03) {
 }
 
 ondeath_clearscriptedanim(param_00,param_01,param_02,param_03) {
-	scripts\mp\_weapons::stopblinkinglight();
-	scripts\mp\_weapons::equipmentdeathvfx();
+	scripts\mp\weapons::stopblinkinglight();
+	scripts\mp\weapons::equipmentdeathvfx();
 	func_E188(self);
 	self scriptmodelclearanim();
 	if(!self.var_933C) {
 		wait(3);
 	}
 
-	scripts\mp\_weapons::equipmentdeletevfx();
+	scripts\mp\weapons::equipmentdeletevfx();
 }
 
 func_1868(param_00) {
@@ -500,7 +500,7 @@ watchempdamage() {
 	level endon("game_ended");
 	for(;;) {
 		self waittill("emp_damage",var_00,var_01);
-		scripts\mp\_weapons::equipmentempstunvfx();
+		scripts\mp\weapons::equipmentempstunvfx();
 		func_11099();
 		wait(var_01);
 		func_10E04(0);

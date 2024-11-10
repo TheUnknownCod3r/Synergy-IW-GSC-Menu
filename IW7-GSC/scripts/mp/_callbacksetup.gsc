@@ -1,8 +1,8 @@
-/*************************************************
+/*****************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\_callbacksetup.gsc
-*************************************************/
+ * Script: scripts\mp\_callbacksetup.gsc
+*****************************************/
 
 codecallback_startgametype() {
 	if(getdvar("r_reflectionProbeGenerate") == "1") {

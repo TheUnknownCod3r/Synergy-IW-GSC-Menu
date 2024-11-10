@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2762.gsc
+ * Script: 2762.gsc
 ***************************************/
 
 haslightarmor(var_00) {
@@ -51,7 +51,7 @@ setlightarmorvalue(var_00, var_01, var_02, var_03) {
 }
 
 init() {
-  level._effect["lightArmor_persistent"] = loadfx("vfx/core/mp/core/vfx_uplink_carrier.vfx");
+  level._effect["lightArmor_persistent"] = loadfx("vfx\core\mp\core\vfx_uplink_carrier.vfx");
 }
 
 lightarmor_set(var_00, var_01, var_02) {

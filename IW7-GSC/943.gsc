@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\943.gsc
+ * Script: 943.gsc
 ***************************************/
 
 func_A3C3(var_00) {

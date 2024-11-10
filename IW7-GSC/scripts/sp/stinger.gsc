@@ -1,8 +1,8 @@
-/******************************************
+/**********************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\sp\stinger.gsc
-******************************************/
+ * Script: scripts\sp\stinger.gsc
+**********************************/
 
 init() {
 	level.player func_41BB();
@@ -185,7 +185,7 @@ stinger_get_closest_to_player_view(param_00,param_01,param_02,param_03) {
 		var_0C = anglestoforward(var_0B);
 		var_0D = vectordot(var_07,var_0C);
 		var_0E = distancesquared(var_04,var_0A.origin);
-		var_0F = 1 - scripts/sp/math::func_C097(squared(250),squared(5000),var_0E);
+		var_0F = 1 - scripts\sp\math::func_C097(squared(250),squared(5000),var_0E);
 		var_0D = var_0D * var_0F;
 		if(var_0D < var_08) {
 			continue;
@@ -267,7 +267,7 @@ func_7E04() {
 }
 
 func_7E4B() {
-	var_00 = function_0072("axis");
+	var_00 = getaiarray("axis");
 	foreach(var_02 in var_00) {
 		if(isdefined(var_02.unittype) && var_02.unittype == "c12") {
 			var_00 = scripts\engine\utility::array_remove(var_00,var_02);

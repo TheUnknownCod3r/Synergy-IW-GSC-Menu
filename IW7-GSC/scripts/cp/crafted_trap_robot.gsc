@@ -1,8 +1,8 @@
-/*****************************************************
+/*********************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\crafted_trap_robot.gsc
-*****************************************************/
+ * Script: scripts\cp\crafted_trap_robot.gsc
+*********************************************/
 
 init() {
 	level.robot_trap_settings = [];

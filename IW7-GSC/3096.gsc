@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\3096.gsc
+ * Script: 3096.gsc
 ***************************************/
 
 func_1EDC() {

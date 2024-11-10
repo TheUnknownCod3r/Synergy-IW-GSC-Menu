@@ -1,8 +1,8 @@
-/*****************************************************
+/*********************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\sp\maps\europa\europa.gsc
-*****************************************************/
+ * Script: scripts\sp\maps\europa\europa.gsc
+*********************************************/
 
 main() {
 	if(getdvarint("r_reflectionprobegenerate")) {
@@ -21,9 +21,9 @@ main() {
 		scripts\sp\maps\europa\europa_armory::func_8EAA();
 	}
 
-	function_01C5("sm_sunsamplesizenear",0.5);
-	function_01C5("sm_spotdistcull",900);
-	function_01C5("r_umbraMinObjectContribution",0);
+	setsaveddvar("sm_sunsamplesizenear",0.5);
+	setsaveddvar("sm_spotdistcull",900);
+	setsaveddvar("r_umbraMinObjectContribution",0);
 	setdvarifuninitialized("kleenex",0);
 	setdvarifuninitialized("no_defend",0);
 	setdvarifuninitialized("debug_ent_count",0);
@@ -33,8 +33,8 @@ main() {
 	setomnvar("ui_chyron",0);
 	scripts\sp\_utility::func_116CB("europa");
 	scripts\sp\maps\europa\gen\europa_art::main();
-	scripts/sp/maps/europa/europa_fx::main();
-	scripts/sp/maps/europa/europa_precache::main();
+	scripts\sp\maps\europa\europa_fx::main();
+	scripts\sp\maps\europa\europa_precache::main();
 	scripts\sp\maps\europa\europa_anim::main();
 	level.weapontype = "iw7_m4+acogm4+fastaim+silencer";
 	func_FA53();
@@ -52,7 +52,7 @@ main() {
 	thread scripts\sp\maps\europa\europa_util::func_4ED5();
 	level thread lib_0A2F::func_3D61();
 	scripts\engine\utility::array_call(getentarray("notsolid_on_load","script_noteworthy"),::notsolid);
-	scripts\engine\utility::array_call(function_00B4("disconnect_on_load","script_noteworthy"),::getrallyvehiclespawndata);
+	scripts\engine\utility::array_call(getnodearray("disconnect_on_load","script_noteworthy"),::getrallyvehiclespawndata);
 	scripts\engine\utility::array_thread(getentarray("hide_on_load","script_noteworthy"),::scripts\sp\_utility::func_8E7E);
 	scripts\engine\utility::array_thread(getentarray("delete_linked","targetname"),::scripts\sp\maps\europa\europa_util::func_5168);
 	scripts\engine\utility::array_thread(getentarray("sunscale_triggers","targetname"),::func_1122F);
@@ -70,8 +70,8 @@ main() {
 		setomnvar("ui_hud_ability_secondary",0);
 	}
 
-	function_01C5("r_mbenable",1);
-	function_01C5("r_mbvelocityscale",0.3);
+	setsaveddvar("r_mbenable",1);
+	setsaveddvar("r_mbvelocityscale",0.3);
 	func_5000();
 	soundsettimescalefactor("music_lr",0);
 	soundsettimescalefactor("music_lsrs",0);
@@ -128,16 +128,16 @@ func_49C4() {
 }
 
 func_5000() {
-	function_01C5("r_mbradialoverridestrength",0.002);
-	function_01C5("r_mbRadialoverridechromaticAberration",0.85);
+	setsaveddvar("r_mbradialoverridestrength",0.002);
+	setsaveddvar("r_mbRadialoverridechromaticAberration",0.85);
 }
 
 footsteps() {
 	var_00 = "soldier";
-	scripts\anim\utility::func_F715(var_00,"snow",loadfx("vfx/iw7/core/footstep/vfx_footstep_snow_medium.vfx"));
-	scripts\anim\utility::func_F715(var_00,"ice",loadfx("vfx/iw7/core/footstep/vfx_footstep_snow_medium.vfx"));
-	scripts\anim\utility::func_F716(var_00,"snow",loadfx("vfx/iw7/core/footstep/vfx_footstep_snow_medium.vfx"));
-	scripts\anim\utility::func_F716(var_00,"ice",loadfx("vfx/iw7/core/footstep/vfx_footstep_snow_medium.vfx"));
+	scripts\anim\utility::func_F715(var_00,"snow",loadfx("vfx\iw7\core\footstep\vfx_footstep_snow_medium.vfx"));
+	scripts\anim\utility::func_F715(var_00,"ice",loadfx("vfx\iw7\core\footstep\vfx_footstep_snow_medium.vfx"));
+	scripts\anim\utility::func_F716(var_00,"snow",loadfx("vfx\iw7\core\footstep\vfx_footstep_snow_medium.vfx"));
+	scripts\anim\utility::func_F716(var_00,"ice",loadfx("vfx\iw7\core\footstep\vfx_footstep_snow_medium.vfx"));
 }
 
 func_FA53() {

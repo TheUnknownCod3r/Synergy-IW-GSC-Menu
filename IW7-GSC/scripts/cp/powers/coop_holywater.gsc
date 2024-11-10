@@ -1,12 +1,12 @@
-/********************************************************
+/************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\powers\coop_holywater.gsc
-********************************************************/
+ * Script: scripts\cp\powers\coop_holywater.gsc
+************************************************/
 
 init() {
-	level._effect["holyWater_ring_idle"] = loadfx("vfx/iw7/levels/cp_disco/vfx_holywater_ring_idle");
-	level._effect["holyWater_explode"] = loadfx("vfx/core/expl/grenade_flash");
+	level._effect["holyWater_ring_idle"] = loadfx("vfx\iw7\levels\cp_disco\vfx_holywater_ring_idle");
+	level._effect["holyWater_explode"] = loadfx("vfx\core\expl\grenade_flash");
 	scripts\engine\utility::flag_init("power_holyWater_enabled");
 	scripts\engine\utility::flag_init("flag_player_holding_holyWater");
 	level.powers["power_holyWater"].var_AD4E = [];
@@ -82,7 +82,7 @@ create_aod(param_00) {
 		var_04 dodamage(var_04.health + 100,self.origin,self,self,"MOD_UNKNOWN","iw7_electrictrap_zm");
 	}
 
-	var_06 = function_027A(self.origin,(72,72,12),(0,0,0),"axis");
+	var_06 = createnavobstaclebybounds(self.origin,(72,72,12),(0,0,0),"axis");
 	while(isdefined(self)) {
 		wait(0.05);
 	}

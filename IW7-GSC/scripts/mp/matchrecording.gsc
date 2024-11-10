@@ -1,8 +1,8 @@
-/*************************************************
+/*****************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\matchrecording.gsc
-*************************************************/
+ * Script: scripts\mp\matchrecording.gsc
+*****************************************/
 
 init() {
 	var_00 = getdvarint("scr_match_recording",0);
@@ -257,7 +257,7 @@ matchrecording_logeventplayername(param_00,param_01,param_02) {
 }
 
 matchrecording_inceventlinecount() {
-	level.var_B3EE++;
+	level.matchreceventcountline++;
 	if(level.matchrecevents.size == 0) {
 		level.matchrecevents[level.matchrecevents.size] = "<mrec_events> ";
 		level.matchreceventcountline = 0;
@@ -305,7 +305,7 @@ matchrecording_glog_dump() {
 	}
 
 	foreach(var_01 in level.matchrecevents) {
-		function_0131(var_01 + "\n");
+		logprint(var_01 + "\n");
 	}
 
 	level.matchrecevents = [];
@@ -314,7 +314,7 @@ matchrecording_glog_dump() {
 func_B3F5() {
 	var_00 = func_B3F4();
 	foreach(var_02 in var_00) {
-		function_0131(var_02);
+		logprint(var_02);
 	}
 }
 

@@ -1,8 +1,8 @@
-/************************************************
+/****************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\hostmigration.gsc
-************************************************/
+ * Script: scripts\mp\hostmigration.gsc
+****************************************/
 
 callback_hostmigration() {
 	level.hostmigrationreturnedplayercount = 0;
@@ -35,7 +35,7 @@ callback_hostmigration() {
 	hostmigrationwait();
 	level.hostmigrationtimer = undefined;
 	setdvar("ui_inhostmigration",0);
-	function_023A(game["thermal_vision"]);
+	visionsetthermal(game["thermal_vision"]);
 	level.hostmigration = 0;
 	level notify("host_migration_end");
 	scripts\mp\gamelogic::func_12F45();
@@ -192,14 +192,14 @@ waitlongdurationwithgameendtimeupdate(param_00) {
 		waittillhostmigrationstarts(var_02 - gettime() / 1000);
 		while(isdefined(level.hostmigrationtimer)) {
 			var_02 = var_02 + 1000;
-			function_01AF(int(var_02));
+			setgameendtime(int(var_02));
 			wait(1);
 		}
 	}
 
 	while(isdefined(level.hostmigrationtimer)) {
 		var_02 = var_02 + 1000;
-		function_01AF(int(var_02));
+		setgameendtime(int(var_02));
 		wait(1);
 	}
 

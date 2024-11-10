@@ -1,8 +1,8 @@
-/************************************************
+/****************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\anim\first_frame.gsc
-************************************************/
+ * Script: scripts\anim\first_frame.gsc
+****************************************/
 
 main() {
 	self endon("death");
@@ -17,7 +17,7 @@ main() {
 		self aiclearanim(self.var_E6E6,0.3);
 	}
 
-	if(scripts\common\utility::actor_is3d()) {
+	if(scripts\engine\utility::actor_is3d()) {
 		self orientmode("face angle 3d",self.angles);
 	}
 	else

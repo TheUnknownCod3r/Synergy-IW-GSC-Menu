@@ -1,8 +1,8 @@
-/********************************************************
+/************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\bots\bots_personality.gsc
-********************************************************/
+ * Script: scripts\mp\bots\bots_personality.gsc
+************************************************/
 
 setup_personalities() {
 	level.bot_personality = [];
@@ -48,7 +48,7 @@ bot_balance_personality() {
 		return;
 	}
 
-	if(scripts\mp\_utility::bot_is_fireteam_mode()) {
+	if(scripts\mp\utility::bot_is_fireteam_mode()) {
 		return;
 	}
 
@@ -193,8 +193,8 @@ update_personality_default() {
 			var_04 = var_03 * 2;
 			if(isdefined(self.bot_memory_goal) && var_02 < var_04 * var_04) {
 				var_05 = botmemoryflags("investigated");
-				function_0021(0,gettime() - self.bot_memory_goal_time,1,self.bot_memory_goal,var_04,"kill",var_05,self);
-				function_0021(0,gettime() - self.bot_memory_goal_time,1,self.bot_memory_goal,var_04,"death",var_05,self);
+				botflagmemoryevents(0,gettime() - self.bot_memory_goal_time,1,self.bot_memory_goal,var_04,"kill",var_05,self);
+				botflagmemoryevents(0,gettime() - self.bot_memory_goal_time,1,self.bot_memory_goal,var_04,"death",var_05,self);
 				self.bot_memory_goal = undefined;
 				self.bot_memory_goal_time = undefined;
 			}
@@ -388,7 +388,7 @@ bot_filter_ambush_vicinity(param_00,param_01,param_02) {
 	var_05 = param_02 * param_02;
 	if(level.teambased) {
 		foreach(var_07 in level.participants) {
-			if(!scripts\mp\_utility::isreallyalive(var_07)) {
+			if(!scripts\mp\utility::isreallyalive(var_07)) {
 				continue;
 			}
 
@@ -491,7 +491,7 @@ find_camp_node_worker() {
 			var_04 = var_06;
 		}
 
-		var_09 = function_00F2(var_00,var_04);
+		var_09 = getzonepath(var_00,var_04);
 		if(isdefined(var_09) && var_09.size > 0) {
 			for(var_0A = 0;var_0A <= int(var_09.size / 2);var_0A++) {
 				var_01 = var_09[var_0A];
@@ -514,9 +514,9 @@ find_camp_node_worker() {
 		var_0D = 1;
 		var_0E = 0;
 		while(var_0C) {
-			var_0F = function_00F0(var_01,800 * var_0D,1);
+			var_0F = getzonenodesbydist(var_01,800 * var_0D,1);
 			if(var_0F.size > 1024) {
-				var_0F = function_00EF(var_01,0);
+				var_0F = getzonenodes(var_01,0);
 			}
 
 			wait(0.05);

@@ -1,11 +1,11 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\3455.gsc
+ * Script: 3455.gsc
 ***************************************/
 
 init() {
   scripts\mp\killstreaks\killstreaks::registerkillstreak("aa_launcher", ::func_6D69, undefined, ::func_5FBC, undefined, ::func_11378);
-  scripts\mp\laserguidedlauncher::func_AC0B("vfx/core/mp/killstreaks/vfx_maaws_split", "vfx/core/mp/killstreaks/vfx_maaws_homing");
+  scripts\mp\laserguidedlauncher::func_AC0B("vfx\core\mp\killstreaks\vfx_maaws_split", "vfx\core\mp\killstreaks\vfx_maaws_homing");
 }
 
 getaalaunchername() {

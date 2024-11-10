@@ -1,16 +1,16 @@
-/*******************************************************
+/***********************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\maps\mp_flip\mp_flip.gsc
-*******************************************************/
+ * Script: scripts\mp\maps\mp_flip\mp_flip.gsc
+***********************************************/
 
 main() {
 	scripts\mp\maps\mp_flip\mp_flip_precache::main();
 	scripts\mp\maps\mp_flip\gen\mp_flip_art::main();
 	scripts\mp\maps\mp_flip\mp_flip_fx::main();
-	scripts\mp\_load::main();
+	scripts\mp\load::main();
 	level.var_C7B3 = getentarray("OutOfBounds","targetname");
-	scripts\mp\_compass::func_FACD("compass_map_mp_flip");
+	scripts\mp\compass::setupminimap("compass_map_mp_flip");
 	setdvar("r_lightGridEnableTweaks",1);
 	setdvar("r_lightGridIntensity",1.33);
 	setdvar("r_umbraMinObjectContribution",8);
@@ -20,7 +20,7 @@ main() {
 	game["defenders"] = "axis";
 	game["allies_outfit"] = "urban";
 	game["axis_outfit"] = "woodland";
-	thread scripts\mp\_animation_suite::func_1FAA();
+	thread scripts\mp\animation_suite::animationsuite();
 	thread func_CDA4("mp_flip_screen");
 	thread rotatefans();
 	var_00 = getentarray("floatingJackal","targetname");
@@ -93,11 +93,11 @@ func_107CC(param_00,param_01,param_02) {
 
 func_CDA4(param_00) {
 	wait(30);
-	function_030E(param_00);
+	playcinematicforalllooping(param_00);
 }
 
 func_90EF(param_00) {
-	param_00.var_2C5 = param_00.origin;
+	param_00.areanynavvolumesloaded = param_00.origin;
 	param_00.var_10D6C = param_00.angles;
 	thread func_5EE1(param_00);
 	thread func_5EE9(param_00);
@@ -107,8 +107,8 @@ func_5EE1(param_00) {
 	var_01 = 1;
 	for(;;) {
 		var_02 = randomintrange(6,13);
-		param_00.var_15B = param_00.var_2C5 + (randomintrange(-16,16),randomintrange(-16,16),var_01 * randomintrange(4,16));
-		param_00 moveto(param_00.var_15B,var_02,var_02 * 0.4,var_02 * 0.4);
+		param_00.objective_playermask_hidefromall = param_00.areanynavvolumesloaded + (randomintrange(-16,16),randomintrange(-16,16),var_01 * randomintrange(4,16));
+		param_00 moveto(param_00.objective_playermask_hidefromall,var_02,var_02 * 0.4,var_02 * 0.4);
 		var_01 = var_01 * -1;
 		wait(var_02);
 	}
@@ -118,8 +118,8 @@ func_5EE9(param_00) {
 	var_01 = 1;
 	for(;;) {
 		var_02 = randomintrange(7,10);
-		param_00.var_8433 = param_00.var_10D6C + (var_01 * randomintrange(1,3),randomintrange(-2,2),randomintrange(-3,3));
-		param_00 rotateto(param_00.var_8433,var_02,var_02 * 0.4,var_02 * 0.4);
+		param_00.energy_getrestorerate = param_00.var_10D6C + (var_01 * randomintrange(1,3),randomintrange(-2,2),randomintrange(-3,3));
+		param_00 rotateto(param_00.energy_getrestorerate,var_02,var_02 * 0.4,var_02 * 0.4);
 		var_01 = var_01 * -1;
 		wait(var_02);
 	}
@@ -133,12 +133,12 @@ func_5EE7(param_00) {
 
 func_5EE8() {
 	wait(5);
-	var_00 = scripts\common\utility::spawn_tag_origin();
+	var_00 = scripts\engine\utility::spawn_tag_origin();
 	var_00 show();
 	var_00 linkto(self);
-	scripts\common\utility::func_136F7();
+	scripts\engine\utility::waitframe();
 	if(isdefined(self.var_336)) {
-		playfxontag(scripts\common\utility::getfx(self.var_336),var_00,"tag_origin");
+		playfxontag(scripts\engine\utility::getfx(self.var_336),var_00,"tag_origin");
 	}
 }
 
@@ -157,7 +157,7 @@ func_E72B(param_00) {
 		var_01 = self.script_noteworthy;
 	}
 
-	var_02 = "Custom rotation axis must be one of yaw/pitch/roll";
+	var_02 = "Custom rotation axis must be one of yaw\pitch\roll";
 	for(;;) {
 		if(var_01 == "yaw") {
 			self rotateyaw(360,param_00,0,0);

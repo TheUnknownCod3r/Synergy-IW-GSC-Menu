@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3127.gsc
-****************************/
+ * Script: 3127.gsc
+************************/
 
 func_3EE5(param_00,param_01,param_02) {
 	return lib_0F3C::func_3EF4(param_00,param_01,param_02);
@@ -40,7 +40,7 @@ func_D4EE(param_00,param_01,param_02,param_03) {
 		self orientmode("face angle abs",self.angles);
 	}
 
-	scripts/asm/asm_mp::func_2365(param_00,param_01,param_02,var_05);
+	scripts\asm\asm_mp::func_2365(param_00,param_01,param_02,var_05);
 	func_6CE0(param_00,param_01,param_03);
 }
 
@@ -56,8 +56,8 @@ func_6CE0(param_00,param_01,param_02) {
 		var_04 = "exposed_idle";
 	}
 
-	scripts/asm/asm::func_2388(param_00,param_01,var_03,var_03.var_116FB);
-	scripts/asm/asm::func_238A(param_00,var_04,0.2,undefined,undefined,undefined);
+	scripts\asm\asm::func_2388(param_00,param_01,var_03,var_03.var_116FB);
+	scripts\asm\asm::func_238A(param_00,var_04,0.2,undefined,undefined,undefined);
 }
 
 func_4109(param_00,param_01,param_02) {}

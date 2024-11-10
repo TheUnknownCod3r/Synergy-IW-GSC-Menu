@@ -1,8 +1,8 @@
-/*************************************************************
+/*****************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\aitypes\zombie_dlc3\behaviors.gsc
-*************************************************************/
+ * Script: scripts\aitypes\zombie_dlc3\behaviors.gsc
+*****************************************************/
 
 checkscripteddlc(param_00) {
 	return lib_0C2B::func_3E48(param_00);
@@ -20,7 +20,7 @@ chaseenemydlc(param_00) {
 	}
 
 	if(isdefined(self.enemyoverride)) {
-		if(self.enemyoverride.ignoreme || isdefined(self.enemyoverride.triggerportableradarping) && self.enemyoverride.var_222.ignoreme || !isalive(self.enemyoverride) || scripts\mp\agents\zombie\zombie_util::shouldignoreent(self.enemyoverride)) {
+		if(self.enemyoverride.ignoreme || isdefined(self.enemyoverride.triggerportableradarping) && self.enemyoverride.triggerportableradarping.ignoreme || !isalive(self.enemyoverride) || scripts\mp\agents\zombie\zombie_util::shouldignoreent(self.enemyoverride)) {
 			self.enemyoverride = undefined;
 		}
 		else if(isdefined(self.enemyoverride)) {
@@ -128,7 +128,7 @@ seekenemydlc(param_00) {
 
 	var_01 = [];
 	foreach(var_03 in level.players) {
-		if(var_03.ignoreme || isdefined(var_03.triggerportableradarping) && var_03.var_222.ignoreme) {
+		if(var_03.ignoreme || isdefined(var_03.triggerportableradarping) && var_03.triggerportableradarping.ignoreme) {
 			continue;
 		}
 

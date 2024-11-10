@@ -1,8 +1,8 @@
-/*******************************************************
+/***********************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\asm\dlc4_boss\mp\states.gsc
-*******************************************************/
+ * Script: scripts\asm\dlc4_boss\mp\states.gsc
+***********************************************/
 
 func_2371() {
 	if(scripts\asm\asm::func_232E("dlc4_boss")) {

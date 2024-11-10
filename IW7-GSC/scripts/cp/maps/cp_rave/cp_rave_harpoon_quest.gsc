@@ -1,17 +1,17 @@
-/*********************************************************************
+/*************************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\maps\cp_rave\cp_rave_harpoon_quest.gsc
-*********************************************************************/
+ * Script: scripts\cp\maps\cp_rave\cp_rave_harpoon_quest.gsc
+*************************************************************/
 
 harpoon_quest_init() {
 	scripts\engine\utility::flag_init("harpoon_unlocked");
 	scripts\engine\utility::flag_init("chains_unlocked");
-	level._effect["deer_head_explosion"] = loadfx("vfx/iw7/core/expl/weap/chargeshot/vfx_expl_chargeshot.vfx");
-	level._effect["harpoon_symbol_1"] = loadfx("vfx/iw7/levels/cp_rave/vfx_rave_harpoon_symbol_1_facing.vfx");
-	level._effect["harpoon_symbol_2"] = loadfx("vfx/iw7/levels/cp_rave/vfx_rave_harpoon_symbol_2_facing.vfx");
-	level._effect["harpoon_symbol_3"] = loadfx("vfx/iw7/levels/cp_rave/vfx_rave_harpoon_symbol_3_facing.vfx");
-	level._effect["chain_dissolve"] = loadfx("vfx/iw7/levels/cp_rave/vfx_rave_chain_dissolve.vfx");
+	level._effect["deer_head_explosion"] = loadfx("vfx\iw7\core\expl\weap\chargeshot\vfx_expl_chargeshot.vfx");
+	level._effect["harpoon_symbol_1"] = loadfx("vfx\iw7\levels\cp_rave\vfx_rave_harpoon_symbol_1_facing.vfx");
+	level._effect["harpoon_symbol_2"] = loadfx("vfx\iw7\levels\cp_rave\vfx_rave_harpoon_symbol_2_facing.vfx");
+	level._effect["harpoon_symbol_3"] = loadfx("vfx\iw7\levels\cp_rave\vfx_rave_harpoon_symbol_3_facing.vfx");
+	level._effect["chain_dissolve"] = loadfx("vfx\iw7\levels\cp_rave\vfx_rave_chain_dissolve.vfx");
 	level.harpoon_locks = 0;
 	level thread break_the_chains();
 	level thread collect_bait();

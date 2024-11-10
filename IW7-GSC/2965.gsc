@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\2965.gsc
-****************************/
+ * Script: 2965.gsc
+************************/
 
 func_31B3(param_00,param_01,param_02,param_03,param_04,param_05) {
 	if(!isdefined(param_04)) {
@@ -169,9 +169,9 @@ func_31A4(param_00,param_01,param_02,param_03,param_04,param_05) {
 	var_06.delay = param_05;
 	var_06.effect = loadfx(param_03);
 	level.vehicle.var_116CE.var_13208[param_00][param_01] = var_06;
-	scripts/sp/vehicle_lights::func_8695(param_00,param_01,"all");
+	scripts\sp\vehicle_lights::func_8695(param_00,param_01,"all");
 	if(isdefined(param_04)) {
-		scripts/sp/vehicle_lights::func_8695(param_00,param_01,param_04);
+		scripts\sp\vehicle_lights::func_8695(param_00,param_01,param_04);
 	}
 }
 
@@ -270,7 +270,7 @@ func_31C6(param_00,param_01,param_02,param_03) {
 	}
 
 	param_00 = level.var_13570;
-	scripts/sp/treadfx::main(param_00);
+	scripts\sp\treadfx::main(param_00);
 }
 
 build_aianims(param_00,param_01) {

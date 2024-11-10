@@ -1,8 +1,8 @@
-/*********************************************************
+/*************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\maps\cp_final\cp_final.gsc
-*********************************************************/
+ * Script: scripts\cp\maps\cp_final\cp_final.gsc
+*************************************************/
 
 setuphacks() {
 	level.announcer_vo_playing = 0;
@@ -35,10 +35,10 @@ main() {
 	scripts\cp\maps\cp_final\cp_final_fx::main();
 	level.player_respawn_locations_init = ::init_player_respawn_locations;
 	setup_generic_zombie_model_list();
-	level.coop_weapontable = "cp/zombies/cp_final_weapontable.csv";
+	level.coop_weapontable = "cp\zombies\cp_final_weapontable.csv";
 	registerscriptedagents();
 	level.var_1094E = undefined;
-	scripts/mp/agents/zombie_clown/zombie_clown::zombie_clown_init();
+	scripts\mp\agents\zombie_clown\zombie_clown::zombie_clown_init();
 	level.clown_spawn_fx_func = ::scripts\cp\zombies\cp_final_spawning::func_1B99;
 	setuphacks();
 	if(level.createfx_enabled) {
@@ -57,11 +57,11 @@ main() {
 	level.enter_area_hint = &"CP_TOWN_INTERACTIONS_ENTER_THIS_AREA";
 	level.needspowerstring = &"CP_FINAL_INTERACTIONS_SYSTEM_OFFLINE";
 	level.zombie_ghost_model = "zombie_ghost_green";
-	scripts/cp/zombies/coop_wall_buys::init();
+	scripts\cp\zombies\coop_wall_buys::init();
 	level.map_interaction_func = ::scripts\cp\maps\cp_final\cp_final_interactions::register_interactions;
 	level.custom_pillageinitfunc = ::pillage_init;
 	level.custom_onplayerconnect_func = ::onplayerconnect;
-	level.weapon_rank_event_table = "scripts/cp/maps/cp_final/cp_final_weaponrank_event.csv";
+	level.weapon_rank_event_table = "scripts\cp\maps\cp_final\cp_final_weaponrank_event.csv";
 	level.player_interaction_monitor = ::scripts\cp\maps\cp_final\cp_final_interactions::level_specific_player_interaction_monitor;
 	level.wait_for_interaction_func = ::scripts\cp\maps\cp_final\cp_final_interactions::level_specific_wait_for_interaction_triggered;
 	level.auto_melee_agent_type_check = ::auto_melee_agent_type_check;
@@ -140,7 +140,7 @@ main() {
 	level thread fix_map_exploits();
 	level thread host_migration_handler();
 	finalprecache();
-	function_026C("MatchStarted: Completed");
+	sysprint("MatchStarted: Completed");
 }
 
 host_migration_handler() {
@@ -368,7 +368,7 @@ watchvenomxpap2usage(param_00) {
 }
 
 setup_pa_speakers() {
-	level.jukebox_table = "cp/zombies/cp_final_music_genre.csv";
+	level.jukebox_table = "cp\zombies\cp_final_music_genre.csv";
 	scripts\cp\zombies\zombie_jukebox::parse_music_genre_table();
 	scripts\engine\utility::flag_wait("interactions_initialized");
 	level thread scripts\cp\zombies\zombie_jukebox::jukebox_start((649,683,254));
@@ -391,7 +391,7 @@ wait_for_pre_game_period() {
 	wait(0.2);
 	scripts\engine\utility::flag_set("zombie_drop_powerups");
 	scripts\engine\utility::flag_set("pillage_enabled");
-	scripts/cp/zombies/zombie_entrances::enable_windows_in_area("facility_start");
+	scripts\cp\zombies\zombie_entrances::enable_windows_in_area("facility_start");
 	init_magic_wheel();
 	if(getdvar("dlc4_boss_fight") == "1" || 0) {
 		level.debug_boss_fight = 1;
@@ -412,7 +412,7 @@ wait_for_pre_game_period() {
 	}
 
 	level.interaction_hintstrings["jaroslav_machine_meph"] = &"CP_FINAL_FNF_MEPH";
-	scripts\cp\cp_interaction::register_interaction("jaroslav_machine_meph","wondercard_machine",0,::scripts/cp/zombies/zombies_consumable_replenishment::jaroslav_hint_logic,::scripts/cp/zombies/zombies_consumable_replenishment::interaction_jaroslav,0,0);
+	scripts\cp\cp_interaction::register_interaction("jaroslav_machine_meph","wondercard_machine",0,::scripts\cp\zombies\zombies_consumable_replenishment::jaroslav_hint_logic,::scripts\cp\zombies\zombies_consumable_replenishment::interaction_jaroslav,0,0);
 	level.interaction_hintstrings["meph_perks"] = &"CP_FINAL_MEPH_PERKS";
 	scripts\cp\cp_interaction::register_interaction("meph_perks","perk",0,undefined,::take_final_fight_perks,0,0);
 	level.interaction_hintstrings["start_meph_battle"] = &"CP_FINAL_EXIT_AFTERLIFE";
@@ -427,7 +427,7 @@ take_final_fight_perks(param_00,param_01) {
 	if(scripts\cp\zombies\directors_cut::directors_cut_activated_for(param_01) || isdefined(param_01.has_meph_perks)) {
 		if(!param_01 scripts\cp\utility::has_zombie_perk("perk_machine_revive")) {
 			if((scripts\cp\utility::isplayingsolo() || level.only_one_player) && self.self_revives_purchased < self.max_self_revive_machine_use) {
-				param_01 scripts/cp/zombies/zombies_perk_machines::give_zombies_perk("perk_machine_revive",0);
+				param_01 scripts\cp\zombies\zombies_perk_machines::give_zombies_perk("perk_machine_revive",0);
 				param_01 playlocalsound("purchase_perk");
 			}
 			else
@@ -454,7 +454,7 @@ take_final_fight_perks(param_00,param_01) {
 			continue;
 		}
 
-		param_01 scripts/cp/zombies/zombies_perk_machines::give_zombies_perk(var_04,0);
+		param_01 scripts\cp\zombies\zombies_perk_machines::give_zombies_perk(var_04,0);
 		wait(0.1);
 	}
 
@@ -466,7 +466,7 @@ cinematic_thread() {
 	level.movie_playing = "cp_final_screen_640";
 	preloadcinematicforall(level.movie_playing);
 	scripts\engine\utility::flag_wait("neil_head_placed");
-	function_030E(level.movie_playing);
+	playcinematicforalllooping(level.movie_playing);
 }
 
 boss_fight_test() {
@@ -536,10 +536,10 @@ pillage_init() {
 	level.pillageinfo.clip = 33;
 	level.pillageinfo.explosive = 33;
 	level.pillageinfo.money = 34;
-	scripts/cp/zombies/zombies_pillage::register_zombie_pillageable("backpack_1","backpack","cp_rave_backpack_dropped","cp_rave_backpack","j_spine4");
-	scripts/cp/zombies/zombies_pillage::register_zombie_pillageable("backpack_2","backpack","cp_rave_backpack_dropped_green","cp_rave_backpack_green","j_spine4");
-	scripts/cp/zombies/zombies_pillage::register_zombie_pillageable("backpack_3","backpack","cp_rave_backpack_dropped_purple","cp_rave_backpack_purple","j_spine4");
-	scripts/cp/zombies/zombies_pillage::register_zombie_pillageable("backpack_4","backpack","cp_rave_backpack_dropped_red","cp_rave_backpack_red","j_spine4");
+	scripts\cp\zombies\zombies_pillage::register_zombie_pillageable("backpack_1","backpack","cp_rave_backpack_dropped","cp_rave_backpack","j_spine4");
+	scripts\cp\zombies\zombies_pillage::register_zombie_pillageable("backpack_2","backpack","cp_rave_backpack_dropped_green","cp_rave_backpack_green","j_spine4");
+	scripts\cp\zombies\zombies_pillage::register_zombie_pillageable("backpack_3","backpack","cp_rave_backpack_dropped_purple","cp_rave_backpack_purple","j_spine4");
+	scripts\cp\zombies\zombies_pillage::register_zombie_pillageable("backpack_4","backpack","cp_rave_backpack_dropped_red","cp_rave_backpack_red","j_spine4");
 }
 
 onplayerconnect(param_00) {
@@ -651,7 +651,7 @@ watch_player_on_ladders(param_00) {
 
 check_cinematic_needed_on_connect() {
 	if(scripts\engine\utility::flag("neil_head_placed")) {
-		function_030E(level.movie_playing);
+		playcinematicforalllooping(level.movie_playing);
 	}
 }
 
@@ -712,7 +712,7 @@ streamweaponsonzonechange(param_00) {
 }
 
 registerscriptedagents() {
-	scripts\mp\mp_agent::init_agent("mp/dlc4_agent_definition.csv");
+	scripts\mp\mp_agent::init_agent("mp\dlc4_agent_definition.csv");
 	level.baliengoondebugger = getdvarint("debug_alien_goon",0);
 	level.balienrhinodebugger = getdvarint("debug_alien_rhino",0);
 	level.balienphantomdebugger = getdvarint("debug_alien_phantom",0);
@@ -762,14 +762,14 @@ init_final_spawner_locations() {
 	foreach(var_03 in var_00) {
 		var_06 = 0;
 		foreach(var_08 in level.invalid_spawn_volume_array) {
-			if(function_010F(var_03.origin,var_08)) {
+			if(ispointinvolume(var_03.origin,var_08)) {
 				var_06 = 1;
 			}
 		}
 
 		if(!var_06) {
 			foreach(var_08 in level.spawn_volume_array) {
-				if(function_010F(var_03.origin,var_08)) {
+				if(ispointinvolume(var_03.origin,var_08)) {
 					if(!isdefined(var_03.angles)) {
 						var_03.angles = (0,0,0);
 					}
@@ -906,7 +906,7 @@ should_drop_pillage(param_00,param_01) {
 		return 0;
 	}
 
-	if(!scripts/cp/zombies/zombies_pillage::is_in_active_volume(param_01)) {
+	if(!scripts\cp\zombies\zombies_pillage::is_in_active_volume(param_01)) {
 		return 0;
 	}
 
@@ -1700,7 +1700,7 @@ is_in_active_volume(param_00) {
 
 	var_01 = sortbydistance(level.active_spawn_volumes,param_00);
 	foreach(var_03 in var_01) {
-		if(function_010F(param_00,var_03)) {
+		if(ispointinvolume(param_00,var_03)) {
 			return 1;
 		}
 	}
@@ -2019,7 +2019,7 @@ cp_final_active_volume_check(param_00) {
 
 	var_01 = sortbydistance(level.active_spawn_volumes,param_00);
 	foreach(var_03 in var_01) {
-		if(function_010F(param_00,var_03)) {
+		if(ispointinvolume(param_00,var_03)) {
 			return 1;
 		}
 	}
@@ -2029,7 +2029,7 @@ cp_final_active_volume_check(param_00) {
 
 cp_final_exit_laststand_func(param_00) {
 	param_00 scripts\cp\powers\coop_powers::restore_powers(param_00,param_00.pre_laststand_powers);
-	param_00 scripts/cp/zombies/zombies_loadout::set_player_photo_status(param_00,"healthy");
+	param_00 scripts\cp\zombies\zombies_loadout::set_player_photo_status(param_00,"healthy");
 	param_00.flung = undefined;
 	param_00 setclientomnvar("zm_ui_player_in_laststand",0);
 	param_00 clearclienttriggeraudiozone(0.5);

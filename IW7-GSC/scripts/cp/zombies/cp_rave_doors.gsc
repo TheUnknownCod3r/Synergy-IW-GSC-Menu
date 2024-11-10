@@ -1,8 +1,8 @@
-/********************************************************
+/************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\zombies\cp_rave_doors.gsc
-********************************************************/
+ * Script: scripts\cp\zombies\cp_rave_doors.gsc
+************************************************/
 
 init_all_debris_and_door_positions() {
 	func_F945("debris_350");

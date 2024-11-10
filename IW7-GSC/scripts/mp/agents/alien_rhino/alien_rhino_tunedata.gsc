@@ -1,8 +1,8 @@
-/**************************************************************************
+/******************************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\agents\alien_rhino\alien_rhino_tunedata.gsc
-**************************************************************************/
+ * Script: scripts\mp\agents\alien_rhino\alien_rhino_tunedata.gsc
+******************************************************************/
 
 setuptunedata() {
 	if(!isdefined(level.agenttunedata)) {

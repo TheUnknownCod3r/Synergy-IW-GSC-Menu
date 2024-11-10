@@ -1,8 +1,8 @@
-/******************************************
+/**********************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\shutter.gsc
-******************************************/
+ * Script: scripts\mp\shutter.gsc
+**********************************/
 
 main() {
 	level.var_93BC = 0;

@@ -1,8 +1,8 @@
-/****************************
+/********************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\4330.gsc
-****************************/
+ * Script: scripts\mp\maps\mp_prime\gen\mp_prime_fx.gsc
+********************************************************/
 
 main() {
 	var_00 = scripts\engine\utility::createoneshoteffect("vfx_prime_rain_groundhit_m_02");

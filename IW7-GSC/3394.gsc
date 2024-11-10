@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3394.gsc
-****************************/
+ * Script: 3394.gsc
+************************/
 
 func_DDAE(param_00,param_01) {
 	scripts\cp\cp_interaction::remove_from_current_interaction_list(param_00);
@@ -28,7 +28,7 @@ func_DDAE(param_00,param_01) {
 			}
 		}
 
-		var_0A = scripts/cp/zombies/zombie_entrances::func_7B13(var_03);
+		var_0A = scripts\cp\zombies\zombie_entrances::func_7B13(var_03);
 		if(!isdefined(var_0A)) {
 			wait(0.5);
 			break;
@@ -48,12 +48,12 @@ func_DDAE(param_00,param_01) {
 		}
 		else
 		{
-			scripts/cp/zombies/zombie_entrances::func_F2E3(var_03,var_0A - 1,"repairing");
+			scripts\cp\zombies\zombie_entrances::func_F2E3(var_03,var_0A - 1,"repairing");
 			func_DDB6(var_03,var_0A,var_06,param_00,param_01);
 			level notify("reboard",1,param_01);
 			param_01 scripts\cp\cp_merits::processmerit("mt_rebuild_barriers");
 			param_01 notify("window_reboard_notify");
-			scripts/cp/zombies/zombie_entrances::func_F2E3(var_03,var_0A - 1,"boarded");
+			scripts\cp\zombies\zombie_entrances::func_F2E3(var_03,var_0A - 1,"boarded");
 		}
 
 		param_01.reboarding_points = param_01.reboarding_points + var_08;
@@ -69,7 +69,7 @@ func_DDAE(param_00,param_01) {
 			var_03.barrier.var_C1DE = 6;
 		}
 
-		if(!isdefined(scripts/cp/zombies/zombie_entrances::func_7B13(var_03))) {
+		if(!isdefined(scripts\cp\zombies\zombie_entrances::func_7B13(var_03))) {
 			break;
 		}
 	}
@@ -118,7 +118,7 @@ func_DDB8(param_00) {
 			return;
 		}
 
-		var_05 = scripts/cp/zombies/zombie_entrances::func_7B13(param_00);
+		var_05 = scripts\cp\zombies\zombie_entrances::func_7B13(param_00);
 		if(!isdefined(var_05)) {
 			return;
 		}
@@ -128,8 +128,8 @@ func_DDB8(param_00) {
 }
 
 func_DDB7(param_00,param_01,param_02,param_03) {
-	scripts/cp/zombies/zombie_entrances::func_F2E3(param_00,param_01 - 1,"boarded");
-	param_00.barrier scripts/cp/zombies/zombie_entrances::func_F2D7("board_" + param_01,"instant_repair");
+	scripts\cp\zombies\zombie_entrances::func_F2E3(param_00,param_01 - 1,"boarded");
+	param_00.barrier scripts\cp\zombies\zombie_entrances::func_F2D7("board_" + param_01,"instant_repair");
 	wait(0.25);
 	param_00.barrier.var_C1DE++;
 	if(param_00.barrier.var_C1DE > 6) {
@@ -140,12 +140,12 @@ func_DDB7(param_00,param_01,param_02,param_03) {
 func_DDB6(param_00,param_01,param_02,param_03,param_04) {
 	if(param_04 scripts\cp\utility::has_zombie_perk("perk_machine_flash")) {
 		var_05 = 0.5;
-		param_00.barrier scripts/cp/zombies/zombie_entrances::func_F2D7("board_" + param_01,"fast_repair");
+		param_00.barrier scripts\cp\zombies\zombie_entrances::func_F2D7("board_" + param_01,"fast_repair");
 	}
 	else
 	{
 		var_05 = 1;
-		param_00.barrier scripts/cp/zombies/zombie_entrances::func_F2D7("board_" + param_01,"repair");
+		param_00.barrier scripts\cp\zombies\zombie_entrances::func_F2D7("board_" + param_01,"repair");
 	}
 
 	wait(var_05);

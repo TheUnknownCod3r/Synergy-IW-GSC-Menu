@@ -1,16 +1,16 @@
-/***************************************************
+/*******************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\bots\bots_powers.gsc
-***************************************************/
+ * Script: scripts\mp\bots\bots_powers.gsc
+*******************************************/
 
 func_2E53() {
 	level.var_2D1C = [];
-	level.var_2D1C["power_domeshield"] = ::scripts/mp/bots/bots_power_reaper::func_8995;
+	level.var_2D1C["power_domeshield"] = ::scripts\mp\bots\bots_power_reaper::func_8995;
 	level.var_2D1C["power_overCharge"] = ::func_5234;
 	level.var_2D1C["power_adrenaline"] = ::func_5234;
 	level.var_2D1C["power_deployableCover"] = ::func_8991;
-	level.var_2D1C["power_rewind"] = ::scripts/mp/bots/bots_power_rewind::func_89DC;
+	level.var_2D1C["power_rewind"] = ::scripts\mp\bots\bots_power_rewind::func_89DC;
 	level.var_2D1C["power_adrenaline"] = ::func_5234;
 	level.var_2D1C["power_multiVisor"] = ::func_5234;
 	level.var_2D1C["power_blinkKnife"] = ::func_897E;

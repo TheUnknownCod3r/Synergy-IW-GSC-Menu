@@ -1,18 +1,18 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\3462.gsc
+ * Script: 3462.gsc
 ***************************************/
 
 init() {
-  level.airstrikefx = loadfx("vfx/iw7/_requests/mp/vfx_debug_warning.vfx");
-  level.airstrikessfx = loadfx("vfx/iw7/_requests/mp/vfx_debug_warning.vfx");
-  level.func_1AF6 = loadfx("vfx/iw7/_requests/mp/vfx_debug_warning.vfx");
-  level.func_A87D = loadfx("vfx/iw7/_requests/mp/vfx_debug_warning.vfx");
-  level.func_BB68 = loadfx("vfx/iw7/_requests/mp/vfx_debug_warning.vfx");
-  level.bombstrike = loadfx("vfx/iw7/_requests/mp/vfx_debug_warning.vfx");
-  level.func_1A8D = loadfx("vfx/iw7/_requests/mp/vfx_debug_warning.vfx");
-  level.func_A3BA = loadfx("vfx/iw7/core/vehicle/jackal/vfx_jackal_death_01_cheap.vfx");
-  level._effect["jackal_explosion"] = loadfx("vfx/iw7/core/mp/killstreaks/vfx_veh_exp_warden.vfx");
+  level.airstrikefx = loadfx("vfx\iw7\_requests\mp\vfx_debug_warning.vfx");
+  level.airstrikessfx = loadfx("vfx\iw7\_requests\mp\vfx_debug_warning.vfx");
+  level.func_1AF6 = loadfx("vfx\iw7\_requests\mp\vfx_debug_warning.vfx");
+  level.func_A87D = loadfx("vfx\iw7\_requests\mp\vfx_debug_warning.vfx");
+  level.func_BB68 = loadfx("vfx\iw7\_requests\mp\vfx_debug_warning.vfx");
+  level.bombstrike = loadfx("vfx\iw7\_requests\mp\vfx_debug_warning.vfx");
+  level.func_1A8D = loadfx("vfx\iw7\_requests\mp\vfx_debug_warning.vfx");
+  level.func_A3BA = loadfx("vfx\iw7\core\vehicle\jackal\vfx_jackal_death_01_cheap.vfx");
+  level._effect["jackal_explosion"] = loadfx("vfx\iw7\core\mp\killstreaks\vfx_veh_exp_warden.vfx");
   level.jackals = [];
   level.dangermaxradius["precision_airstrike"] = 550;
   level.dangerminradius["precision_airstrike"] = 300;
@@ -22,9 +22,9 @@ init() {
   scripts\mp\killstreaks\killstreaks::registerkillstreak("precision_airstrike", ::func_128D4, undefined, undefined, undefined, ::func_13C8A);
   scripts\mp\killstreaks\killstreaks::registerkillstreak("jackal", ::func_128D4, undefined, undefined, ::triggerjackalweapon, ::func_13C8A);
   var_00 = ["passive_precision_strike", "passive_increased_speed", "passive_decreased_damage", "passive_split_strike", "passive_increased_cost", "passive_one_plane", "passive_speed_cost"];
-  scripts/mp/killstreak_loot::func_DF07("precision_airstrike", var_00);
+  scripts\mp\killstreak_loot::func_DF07("precision_airstrike", var_00);
   var_01 = ["passive_extra_flare", "passive_decreased_duration", "passive_moving_fortress", "passive_no_cannon", "passive_slow_turret", "passive_support_drop"];
-  scripts/mp/killstreak_loot::func_DF07("jackal", var_01);
+  scripts\mp\killstreak_loot::func_DF07("jackal", var_01);
   level.planes = [];
   level thread func_7DE9();
 }
@@ -51,10 +51,10 @@ func_13C8A(var_00) {
   return 0;
   }
 
-  if (scripts/mp/killstreaks/utility::func_A69F(var_00, "passive_precision_strike") || scripts/mp/killstreaks/utility::func_A69F(var_00, "passive_split_strike"))
+  if (scripts\mp\killstreaks\utility::func_A69F(var_00, "passive_precision_strike") || scripts\mp\killstreaks\utility::func_A69F(var_00, "passive_split_strike"))
   var_01 = 1;
 
-  scripts/mp/killstreaks/mapselect::func_10DC2(0, 1, var_01);
+  scripts\mp\killstreaks\mapselect::func_10DC2(0, 1, var_01);
   }
 
   return 1;
@@ -64,7 +64,7 @@ func_128D4(var_00) {
   if (var_0.streakname == "jackal" && (isdefined(level.func_A22D) || level.jackals.size > 0)) {
   scripts\mp\hud_message::showerrormessage("KILLSTREAKS_AIR_SPACE_TOO_CROWDED");
 
-  if (scripts/mp/killstreaks/utility::func_A69F(var_00, "passive_support_drop")) {
+  if (scripts\mp\killstreaks\utility::func_A69F(var_00, "passive_support_drop")) {
   if (isdefined(var_0.weapon) && var_0.weapon != "none")
   self notify("killstreak_finished_with_weapon_" + var_0.weapon);
   }
@@ -300,7 +300,7 @@ func_5A60(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08
   var_14 = var_04;
   var_15 = var_05;
   var_16 = "veh_mil_air_ca_jackal_drone_atmos_periph_mp";
-  var_17 = scripts/mp/killstreak_loot::getrarityforlootitem(var_11.variantid);
+  var_17 = scripts\mp\killstreak_loot::getrarityforlootitem(var_11.variantid);
 
   if (var_17 != "")
   var_16 = var_16 + "_" + var_17;
@@ -317,7 +317,7 @@ func_5A60(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08
   var_18 _meth_8549();
   var_18 _meth_8594();
   var_18 _meth_8548();
-  var_18 scripts/mp/killstreaks/utility::func_1843(var_09, "Killstreak_Air", var_01, 1, "kill_outline");
+  var_18 scripts\mp\killstreaks\utility::func_1843(var_09, "Killstreak_Air", var_01, 1, "kill_outline");
   var_18 thread handleemp(var_01);
 
   if (var_09 == "precision_airstrike") {
@@ -326,7 +326,7 @@ func_5A60(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08
   var_21 = "tag_bottom_light";
   var_22 = "icon_minimap_scorcher_friendly";
 
-  if (scripts/mp/killstreaks/utility::func_A69F(var_11, "passive_speed_cost"))
+  if (scripts\mp\killstreaks\utility::func_A69F(var_11, "passive_speed_cost"))
   var_07 = var_07 - 1;
 
   var_18.minimapid = var_18 scripts\mp\killstreaks\airdrop::createobjective(var_22, undefined, undefined, 1, 1);
@@ -690,7 +690,7 @@ callstrike(var_00, var_01, var_02, var_03, var_04, var_05, var_06) {
   var_14 = getflightpath(var_02, var_09, var_10, var_07, var_12, var_11, var_08, var_04);
   var_15 = anglestoright(var_09);
 
-  if (scripts/mp/killstreaks/utility::func_A69F(var_06, "passive_precision_strike")) {
+  if (scripts\mp\killstreaks\utility::func_A69F(var_06, "passive_precision_strike")) {
   level thread func_5A60(var_00, var_01, var_13, var_02, var_14["startPoint"], var_14["endPoint"], var_14["bombTime"], var_14["flyTime"], var_09, var_04, var_05, var_06);
   playloopsound(var_14["startPoint"], "ks_scorchers_init");
   wait(randomfloatrange(0.8, 1.0));
@@ -702,7 +702,7 @@ callstrike(var_00, var_01, var_02, var_03, var_04, var_05, var_06) {
   return;
   }
 
-  if (scripts/mp/killstreaks/utility::func_A69F(var_06, "passive_split_strike")) {
+  if (scripts\mp\killstreaks\utility::func_A69F(var_06, "passive_split_strike")) {
   level thread func_5A60(var_00, var_01, var_13, var_02, var_14["startPoint"], var_14["endPoint"], var_14["bombTime"], var_14["flyTime"], var_09, var_04, var_05, var_06);
   playloopsound(var_14["startPoint"], "ks_scorchers_init");
   return;
@@ -838,7 +838,7 @@ selectairstrikelocation(var_00, var_01, var_02) {
 
   var_09 = spawn("script_origin", self.origin);
   var_10 = "used_" + var_01;
-  var_11 = scripts/mp/killstreak_loot::getrarityforlootitem(var_2.variantid);
+  var_11 = scripts\mp\killstreak_loot::getrarityforlootitem(var_2.variantid);
 
   if (var_11 != "")
   var_10 = var_10 + "_" + var_11;
@@ -847,7 +847,7 @@ selectairstrikelocation(var_00, var_01, var_02) {
   var_12 = 1;
   var_07 = 1;
 
-  if (scripts/mp/killstreaks/utility::func_A69F(var_02, "passive_split_strike"))
+  if (scripts\mp\killstreaks\utility::func_A69F(var_02, "passive_split_strike"))
   var_12 = 3;
 
   scripts\engine\utility::allow_weapon_switch(0);
@@ -860,7 +860,7 @@ selectairstrikelocation(var_00, var_01, var_02) {
   self playlocalsound("bombardment_killstreak_bootup");
   var_09 playloopsound("bombardment_killstreak_hud_loop");
   self setsoundsubmix("mp_killstreak_overlay");
-  var_04 = scripts/mp/killstreaks/mapselect::_meth_8112(var_01, var_12, 1);
+  var_04 = scripts\mp\killstreaks\mapselect::_meth_8112(var_01, var_12, 1);
   scripts\engine\utility::allow_weapon_switch(1);
   }
   else if (var_01 == "jackal" && (isdefined(level.func_A056) || level.jackals.size > 1)) {
@@ -912,7 +912,7 @@ selectairstrikelocation(var_00, var_01, var_02) {
 
   finishairstrikeusage(var_00, var_03, var_05, var_01, var_06, var_02);
 
-  if (var_01 == "jackal" && scripts/mp/killstreaks/utility::func_A69F(var_02, "passive_support_drop")) {
+  if (var_01 == "jackal" && scripts\mp\killstreaks\utility::func_A69F(var_02, "passive_support_drop")) {
   var_14 = scripts\engine\utility::waittill_any_return("called_in_jackal", "cancel_jackal");
 
   if (!isdefined(var_14) || var_14 == "cancel_jackal")
@@ -1003,7 +1003,7 @@ func_11A82() {
 }
 
 triggerjackalweapon(var_00) {
-  if (scripts/mp/killstreaks/utility::func_A69F(var_00, "passive_support_drop")) {
+  if (scripts\mp\killstreaks\utility::func_A69F(var_00, "passive_support_drop")) {
   var_0.func_EF88 = "no_fire_weapon";
   var_0.weapon = "deploy_warden_mp";
   }

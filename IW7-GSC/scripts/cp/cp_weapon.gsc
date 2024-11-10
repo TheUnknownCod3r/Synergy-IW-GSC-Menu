@@ -1,8 +1,8 @@
-/********************************************
+/************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\cp_weapon.gsc
-********************************************/
+ * Script: scripts\cp\cp_weapon.gsc
+************************************/
 
 weaponsinit() {
 	level.maxperplayerexplosives = max(scripts\cp\utility::getintproperty("scr_maxPerPlayerExplosives",2),4);
@@ -44,17 +44,17 @@ powereyeset(param_00) {
 blank(param_00) {}
 
 initeffects() {
-	level._effect["weap_blink_friend"] = loadfx("vfx/core/mp/killstreaks/vfx_detonator_blink_cyan.vfx");
-	level._effect["weap_blink_enemy"] = loadfx("vfx/core/mp/killstreaks/vfx_detonator_blink_cyan.vfx");
-	level._effect["emp_stun"] = loadfx("vfx/core/mp/equipment/vfx_emp_grenade");
-	level._effect["equipment_explode_big"] = loadfx("vfx/core/mp/killstreaks/vfx_ims_explosion");
-	level._effect["equipment_smoke"] = loadfx("vfx/core/mp/killstreaks/vfx_sg_damage_blacksmoke");
-	level._effect["equipment_sparks"] = loadfx("vfx/core/mp/killstreaks/vfx_sentry_gun_explosion.vfx");
-	level.kinetic_pulse_fx["spark"] = loadfx("vfx/iw7/_requests/mp/vfx_kinetic_pulse_shock");
-	level._effect["gas_grenade_smoke_enemy"] = loadfx("vfx/old/_requests/mp_weapons/vfx_poison_gas_enemy");
-	level._effect["equipment_smoke"] = loadfx("vfx/core/mp/killstreaks/vfx_sg_damage_blacksmoke");
-	level._effect["placeEquipmentFailed"] = loadfx("vfx/core/mp/killstreaks/vfx_ballistic_vest_death");
-	level._effect["penetration_railgun_explosion"] = loadfx("vfx/iw7/core/expl/weap/chargeshot/vfx_expl_chargeshot.vfx");
+	level._effect["weap_blink_friend"] = loadfx("vfx\core\mp\killstreaks\vfx_detonator_blink_cyan.vfx");
+	level._effect["weap_blink_enemy"] = loadfx("vfx\core\mp\killstreaks\vfx_detonator_blink_cyan.vfx");
+	level._effect["emp_stun"] = loadfx("vfx\core\mp\equipment\vfx_emp_grenade");
+	level._effect["equipment_explode_big"] = loadfx("vfx\core\mp\killstreaks\vfx_ims_explosion");
+	level._effect["equipment_smoke"] = loadfx("vfx\core\mp\killstreaks\vfx_sg_damage_blacksmoke");
+	level._effect["equipment_sparks"] = loadfx("vfx\core\mp\killstreaks\vfx_sentry_gun_explosion.vfx");
+	level.kinetic_pulse_fx["spark"] = loadfx("vfx\iw7\_requests\mp\vfx_kinetic_pulse_shock");
+	level._effect["gas_grenade_smoke_enemy"] = loadfx("vfx\old\_requests\mp_weapons\vfx_poison_gas_enemy");
+	level._effect["equipment_smoke"] = loadfx("vfx\core\mp\killstreaks\vfx_sg_damage_blacksmoke");
+	level._effect["placeEquipmentFailed"] = loadfx("vfx\core\mp\killstreaks\vfx_ballistic_vest_death");
+	level._effect["penetration_railgun_explosion"] = loadfx("vfx\iw7\core\expl\weap\chargeshot\vfx_expl_chargeshot.vfx");
 }
 
 setupminesettings() {
@@ -71,8 +71,8 @@ setupminesettings() {
 	level.minedamagemax = 1200;
 	level.minedamagehalfheight = 300;
 	level.mineselfdestructtime = 600;
-	level.mine_launch = loadfx("vfx/core/impacts/bouncing_betty_launch_dirt");
-	level.mine_explode = loadfx("vfx/core/expl/bouncing_betty_explosion.vfx");
+	level.mine_launch = loadfx("vfx\core\impacts\bouncing_betty_launch_dirt");
+	level.mine_explode = loadfx("vfx\core\expl\bouncing_betty_explosion.vfx");
 	level.delayminetime = 1.5;
 	level.c4explodethisframe = 0;
 	level.mines = [];
@@ -80,8 +80,8 @@ setupminesettings() {
 
 setupconfigs() {
 	var_00 = spawnstruct();
-	var_00.mine_beacon["enemy"] = loadfx("vfx/core/equipment/light_c4_blink.vfx");
-	var_00.mine_beacon["friendly"] = loadfx("vfx/misc/light_mine_blink_friendly");
+	var_00.mine_beacon["enemy"] = loadfx("vfx\core\equipment\light_c4_blink.vfx");
+	var_00.mine_beacon["friendly"] = loadfx("vfx\misc\light_mine_blink_friendly");
 	level.weaponconfigs["c4_zm"] = var_00;
 	var_00 = spawnstruct();
 	var_00.model = "prop_mp_speed_strip_temp";
@@ -95,8 +95,8 @@ setupconfigs() {
 	var_00.onexplodesfx = "motion_explode_default";
 	var_00.launchheight = 64;
 	var_00.launchtime = 0.65;
-	var_00.ontriggeredfunc = ::scripts/cp/powers/coop_blackholegrenade::blackholeminetrigger;
-	var_00.onexplodefunc = ::scripts/cp/powers/coop_blackholegrenade::blackholemineexplode;
+	var_00.ontriggeredfunc = ::scripts\cp\powers\coop_blackholegrenade::blackholeminetrigger;
+	var_00.onexplodefunc = ::scripts\cp\powers\coop_blackholegrenade::blackholemineexplode;
 	var_00.headiconoffset = 20;
 	var_00.minedetectionradius = 200;
 	var_00.minedetectionheight = 100;
@@ -121,22 +121,22 @@ setupconfigs() {
 }
 
 iteminits() {
-	scripts/cp/powers/coop_portal_generator::portalgeneratorinit();
+	scripts\cp\powers\coop_portal_generator::portalgeneratorinit();
 	scripts\cp\cp_blackholegun::init();
 	clustergrenadeinit();
 	throwingknifec4init();
 }
 
 throwingknifec4init() {
-	level._effect["throwingknifec4_explode"] = loadfx("vfx/iw7/_requests/mp/power/vfx_bio_spike_exp.vfx");
+	level._effect["throwingknifec4_explode"] = loadfx("vfx\iw7\_requests\mp\power\vfx_bio_spike_exp.vfx");
 }
 
 clustergrenadeinit() {
-	level._effect["clusterGrenade_explode"] = loadfx("vfx/iw7/_requests/mp/vfx_cluster_gren_single_runner.vfx");
+	level._effect["clusterGrenade_explode"] = loadfx("vfx\iw7\_requests\mp\vfx_cluster_gren_single_runner.vfx");
 }
 
 mpbuildweaponmap() {
-	var_00 = ["mp/statstable.csv","cp/zombies/mode_string_tables/zombies_statstable.csv"];
+	var_00 = ["mp\statstable.csv","cp\zombies\mode_string_tables\zombies_statstable.csv"];
 	level.weaponmapdata = [];
 	foreach(var_02 in var_00) {
 		for(var_03 = 1;tablelookup(var_02,0,var_03,0) != "";var_03++) {
@@ -197,7 +197,7 @@ mpbuildweaponmap() {
 }
 
 buildweaponmaps() {
-	var_00 = "mp/statstable.csv";
+	var_00 = "mp\statstable.csv";
 	var_01 = level.game_mode_statstable;
 	level.weaponmap_toperk = [];
 	level.weaponmap_toattachdefaults = [];
@@ -1236,7 +1236,7 @@ watch_slasher_killed() {
 	for(;;) {
 		self waittill("slasher_killed_by_own_weapon",var_00,var_01);
 		level thread slasher_killed_vo(var_00);
-		scripts/cp/zombies/achievement::update_achievement("TABLES_TURNED",1);
+		scripts\cp\zombies\achievement::update_achievement("TABLES_TURNED",1);
 		self notify("achievement_done");
 	}
 }
@@ -1433,7 +1433,7 @@ begingrenadetracking() {
 			break;
 
 		case "c4_zm":
-			thread scripts/cp/powers/coop_c4::c4_used(var_01);
+			thread scripts\cp\powers\coop_c4::c4_used(var_01);
 			break;
 
 		case "smoke_grenade_mp":
@@ -1474,26 +1474,26 @@ begingrenadetracking() {
 
 		case "portal_generator_zm":
 		case "portal_generator_mp":
-			thread scripts/cp/powers/coop_portal_generator::portalgeneratorused(var_01);
+			thread scripts\cp\powers\coop_portal_generator::portalgeneratorused(var_01);
 			break;
 
 		case "ztransponder_mp":
 		case "transponder_mp":
-			thread scripts/cp/powers/coop_transponder::transponder_use(var_01);
+			thread scripts\cp\powers\coop_transponder::transponder_use(var_01);
 			break;
 
 		case "micro_turret_zm":
 		case "micro_turret_mp":
-			thread scripts/cp/powers/coop_microturret::microturret_use(var_01);
+			thread scripts\cp\powers\coop_microturret::microturret_use(var_01);
 			break;
 
 		case "blackhole_grenade_zm":
 		case "blackhole_grenade_mp":
-			thread scripts/cp/powers/coop_blackholegrenade::blackholegrenadeused(var_01);
+			thread scripts\cp\powers\coop_blackholegrenade::blackholegrenadeused(var_01);
 			break;
 
 		case "trip_mine_mp":
-			thread scripts/cp/powers/coop_trip_mine::tripmine_used(var_01);
+			thread scripts\cp\powers\coop_trip_mine::tripmine_used(var_01);
 			break;
 
 		case "heart_cp":
@@ -1833,7 +1833,7 @@ heart_used() {
 		}
 
 		if(distancesquared(var_05.origin,var_02) <= 65536) {
-			if(var_05 scripts/mp/agents/zombie/zombie_util::iscrawling()) {
+			if(var_05 scripts\mp\agents\zombie\zombie_util::iscrawling()) {
 				var_05.scripted_mode = 1;
 				var_05.precacheleaderboards = 1;
 				var_05 give_mp_super_weapon(var_05.origin);
@@ -1954,7 +1954,7 @@ throwingknifeused(param_00,param_01,param_02) {
 	}
 
 	if(isdefined(var_03) && isplayer(var_03) || isagent(var_03) && !var_06 && !var_05) {
-		if(!scripts/cp/powers/coop_phaseshift::areentitiesinphase(var_03,param_01)) {
+		if(!scripts\cp\powers\coop_phaseshift::areentitiesinphase(var_03,param_01)) {
 			param_01 delete();
 			return;
 		}
@@ -2184,7 +2184,7 @@ fx_stun_damage(param_00,param_01) {
 	param_00 endon("death");
 	if(isdefined(param_00.stun_hit_time)) {
 		if(gettime() > param_00.stun_hit_time) {
-			if(param_00 scripts/mp/agents/zombie/zombie_util::iscrawling()) {
+			if(param_00 scripts\mp\agents\zombie\zombie_util::iscrawling()) {
 				param_00.scripted_mode = 1;
 				param_00.precacheleaderboards = 1;
 				param_00 give_mp_super_weapon(param_00.origin);
@@ -2201,7 +2201,7 @@ fx_stun_damage(param_00,param_01) {
 	}
 	else
 	{
-		if(param_00 scripts/mp/agents/zombie/zombie_util::iscrawling()) {
+		if(param_00 scripts\mp\agents\zombie\zombie_util::iscrawling()) {
 			param_00.scripted_mode = 1;
 			param_00.precacheleaderboards = 1;
 			param_00 give_mp_super_weapon(param_00.origin);
@@ -2214,7 +2214,7 @@ fx_stun_damage(param_00,param_01) {
 
 	param_00 dodamage(1,param_00.origin,param_01,param_01,"MOD_GRENADE_SPLASH","concussion_grenade_mp");
 	wait(1);
-	if(param_00 scripts/mp/agents/zombie/zombie_util::iscrawling()) {
+	if(param_00 scripts\mp\agents\zombie\zombie_util::iscrawling()) {
 		param_00.scripted_mode = 0;
 		param_00.precacheleaderboards = 0;
 	}
@@ -2726,7 +2726,7 @@ watchc4altdetonate(param_00) {
 				return;
 			}
 
-			if(!scripts/cp/powers/coop_phaseshift::isentityphaseshifted(self)) {
+			if(!scripts\cp\powers\coop_phaseshift::isentityphaseshifted(self)) {
 				self notify("alt_detonate");
 			}
 		}
@@ -2975,7 +2975,7 @@ has_attachment(param_00,param_01) {
 
 getattachmentlist() {
 	var_00 = [];
-	var_01 = ["mp/attachmentTable.csv","cp/zombies/zombie_attachmenttable.csv"];
+	var_01 = ["mp\attachmentTable.csv","cp\zombies\zombie_attachmenttable.csv"];
 	foreach(var_03 in var_01) {
 		var_04 = 0;
 		for(var_05 = tablelookup(var_03,0,var_04,5);var_05 != "";var_05 = tablelookup(var_03,0,var_04,5)) {
@@ -2993,14 +2993,14 @@ getattachmentlist() {
 getarkattachmentlist() {
 	var_00 = [];
 	var_01 = 0;
-	var_02 = tablelookup("cp/zombies/zombie_attachmenttable.csv",0,var_01,5);
+	var_02 = tablelookup("cp\zombies\zombie_attachmenttable.csv",0,var_01,5);
 	while(var_02 != "") {
 		if(!scripts\engine\utility::array_contains(var_00,var_02)) {
 			var_00[var_00.size] = var_02;
 		}
 
 		var_01++;
-		var_02 = tablelookup("cp/zombies/zombie_attachmenttable.csv",0,var_01,5);
+		var_02 = tablelookup("cp\zombies\zombie_attachmenttable.csv",0,var_01,5);
 	}
 
 	return var_00;
@@ -3026,7 +3026,7 @@ create_attachment_variant_list(param_00,param_01,param_02) {
 		var_05 = tablelookup(param_01,4,var_04,5);
 		if(param_02 == "zombie") {
 			if(!isdefined(var_05) || var_05 == "") {
-				var_05 = tablelookup("cp/zombies/zombie_attachmenttable.csv",4,var_04,5);
+				var_05 = tablelookup("cp\zombies\zombie_attachmenttable.csv",4,var_04,5);
 			}
 		}
 
@@ -3035,7 +3035,7 @@ create_attachment_variant_list(param_00,param_01,param_02) {
 		}
 
 		level.attachmentmap_uniquetobase[var_04] = var_05;
-		var_06 = tablelookup("mp/attachmenttable.csv",4,var_04,13);
+		var_06 = tablelookup("mp\attachmenttable.csv",4,var_04,13);
 		if(var_06 != "") {
 			level.attachmentmap_uniquetoextra[var_04] = var_06;
 			level.attachmentextralist[var_06] = 1;
@@ -3044,8 +3044,8 @@ create_attachment_variant_list(param_00,param_01,param_02) {
 }
 
 buildattachmentmaps() {
-	var_00 = ["mp/attachmentTable.csv","cp/zombies/zombie_attachmenttable.csv"];
-	var_01 = ["mp/attachmentmap.csv","cp/zombies/zombie_attachmentmap.csv"];
+	var_00 = ["mp\attachmentTable.csv","cp\zombies\zombie_attachmenttable.csv"];
+	var_01 = ["mp\attachmentmap.csv","cp\zombies\zombie_attachmentmap.csv"];
 	level.attachmentmap_uniquetobase = [];
 	level.attachmentmap_uniquetoextra = [];
 	level.attachmentextralist = [];
@@ -3107,13 +3107,13 @@ buildattachmentmaps() {
 			}
 
 			var_1C = 1;
-			var_1D = tablelookupbyrow("mp/attachmentcombos.csv",var_1C,0);
+			var_1D = tablelookupbyrow("mp\attachmentcombos.csv",var_1C,0);
 			while(var_1D != "") {
 				var_1E = 1;
-				var_1F = tablelookupbyrow("mp/attachmentcombos.csv",0,var_1E);
+				var_1F = tablelookupbyrow("mp\attachmentcombos.csv",0,var_1E);
 				while(var_1F != "") {
 					if(var_1D != var_1F) {
-						var_20 = tablelookupbyrow("mp/attachmentcombos.csv",var_1C,var_1E);
+						var_20 = tablelookupbyrow("mp\attachmentcombos.csv",var_1C,var_1E);
 						var_21 = scripts\engine\utility::alphabetize([var_1D,var_1F]);
 						var_22 = var_21[0] + "_" + var_21[1];
 						if(var_20 == "no" && !isdefined(level.attachmentmap_conflicts[var_22])) {
@@ -3122,11 +3122,11 @@ buildattachmentmaps() {
 					}
 
 					var_1E++;
-					var_1F = tablelookupbyrow("mp/attachmentcombos.csv",0,var_1E);
+					var_1F = tablelookupbyrow("mp\attachmentcombos.csv",0,var_1E);
 				}
 
 				var_1C++;
-				var_1D = tablelookupbyrow("mp/attachmentcombos.csv",var_1C,0);
+				var_1D = tablelookupbyrow("mp\attachmentcombos.csv",var_1C,0);
 			}
 		}
 	}
@@ -3968,7 +3968,7 @@ getattachmenttypeslist(param_00,param_01) {
 
 getattachmentlistbasenames() {
 	var_00 = [];
-	var_01 = ["mp/attachmentTable.csv","cp/zombies/zombie_attachmenttable.csv"];
+	var_01 = ["mp\attachmentTable.csv","cp\zombies\zombie_attachmenttable.csv"];
 	foreach(var_03 in var_01) {
 		var_04 = 0;
 		for(var_05 = tablelookup(var_03,0,var_04,5);var_05 != "";var_05 = tablelookup(var_03,0,var_04,5)) {

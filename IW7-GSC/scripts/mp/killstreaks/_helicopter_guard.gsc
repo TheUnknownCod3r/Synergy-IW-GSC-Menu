@@ -1,8 +1,8 @@
-/****************************************************************
+/********************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\killstreaks\_helicopter_guard.gsc
-****************************************************************/
+ * Script: scripts\mp\killstreaks\_helicopter_guard.gsc
+********************************************************/
 
 init() {
 	scripts\mp\killstreaks\_killstreaks::registerkillstreak("littlebird_support",::func_128EE);
@@ -36,20 +36,20 @@ func_128EE(param_00,param_01) {
 		self iprintlnbold(&"KILLSTREAKS_UNAVAILABLE_IN_LEVEL");
 		return 0;
 	}
-	else if(scripts\mp\_utility::currentactivevehiclecount() >= scripts\mp\_utility::maxvehiclesallowed() || level.fauxvehiclecount + var_03 >= scripts\mp\_utility::maxvehiclesallowed()) {
+	else if(scripts\mp\utility::currentactivevehiclecount() >= scripts\mp\utility::maxvehiclesallowed() || level.fauxvehiclecount + var_03 >= scripts\mp\utility::maxvehiclesallowed()) {
 		self iprintlnbold(&"KILLSTREAKS_TOO_MANY_VEHICLES");
 		return 0;
 	}
 
-	scripts\mp\_utility::incrementfauxvehiclecount();
+	scripts\mp\utility::incrementfauxvehiclecount();
 	var_04 = func_49E1(var_02);
 	if(!isdefined(var_04)) {
-		scripts\mp\_utility::decrementfauxvehiclecount();
+		scripts\mp\utility::decrementfauxvehiclecount();
 		return 0;
 	}
 
 	thread func_10DBE(var_04);
-	level thread scripts\mp\_utility::teamplayercardsplash(level.heliheight[var_02].teamsplash,self,self.team);
+	level thread scripts\mp\utility::teamplayercardsplash(level.heliheight[var_02].teamsplash,self,self.team);
 	return 1;
 }
 
@@ -146,7 +146,7 @@ func_49E1(param_00) {
 	var_08 thread func_AADE();
 	var_08 thread func_AAD6();
 	level.var_AD89 = var_08;
-	var_08.triggerportableradarping scripts\mp\_matchdata::logkillstreakevent(level.heliheight[var_08.heliheightoffset].streakname,var_08.targetpos);
+	var_08.triggerportableradarping scripts\mp\matchdata::logkillstreakevent(level.heliheight[var_08.heliheightoffset].streakname,var_08.targetpos);
 	return var_08;
 }
 
@@ -230,7 +230,7 @@ func_AAE1() {
 	self.triggerportableradarping endon("disconnect");
 	self endon("owner_gone");
 	var_00 = level.heliheight[self.heliheightoffset].timeout;
-	scripts\mp\_hostmigration::waitlongdurationwithhostmigrationpause(var_00);
+	scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(var_00);
 	thread func_AAD5();
 }
 
@@ -251,9 +251,9 @@ func_AADC() {
 	self endon("owner_gone");
 	for(;;) {
 		self.triggerportableradarping waittill("damage",var_00,var_01,var_02,var_03,var_04,var_05,var_06,var_07,var_08,var_09,var_0A,var_0B,var_0C,var_0D);
-		var_09 = scripts\mp\_utility::func_13CA1(var_09,var_0D);
+		var_09 = scripts\mp\utility::func_13CA1(var_09,var_0D);
 		if(isplayer(var_01)) {
-			if(var_01 != self.triggerportableradarping && distance2d(var_01.origin,self.origin) <= self.var_11587 && !var_01 scripts\mp\_utility::_hasperk("specialty_blindeye") && !level.hardcoremode && level.teambased && var_01.team == self.team) {
+			if(var_01 != self.triggerportableradarping && distance2d(var_01.origin,self.origin) <= self.var_11587 && !var_01 scripts\mp\utility::_hasperk("specialty_blindeye") && !level.hardcoremode && level.teambased && var_01.team == self.team) {
 				self setlookatent(var_01);
 				if(isdefined(self.mgturretleft)) {
 					self.mgturretleft settargetentity(var_01);
@@ -313,8 +313,8 @@ func_AAD4() {
 	self setcandamage(1);
 	for(;;) {
 		self waittill("damage",var_00,var_01,var_02,var_03,var_04,var_05,var_06,var_07,var_08,var_09,var_0A,var_0B,var_0C,var_0D);
-		var_09 = scripts\mp\_utility::func_13CA1(var_09,var_0D);
-		if(!scripts\mp\_weapons::friendlyfirecheck(self.triggerportableradarping,var_01)) {
+		var_09 = scripts\mp\utility::func_13CA1(var_09,var_0D);
+		if(!scripts\mp\weapons::friendlyfirecheck(self.triggerportableradarping,var_01)) {
 			continue;
 		}
 
@@ -333,7 +333,7 @@ func_AAD4() {
 		self.wasdamaged = 1;
 		var_0E = var_00;
 		if(isplayer(var_01)) {
-			if(var_01 != self.triggerportableradarping && distance2d(var_01.origin,self.origin) <= self.var_11587 && !var_01 scripts\mp\_utility::_hasperk("specialty_blindeye") && !level.hardcoremode && level.teambased && var_01.team == self.team) {
+			if(var_01 != self.triggerportableradarping && distance2d(var_01.origin,self.origin) <= self.var_11587 && !var_01 scripts\mp\utility::_hasperk("specialty_blindeye") && !level.hardcoremode && level.teambased && var_01.team == self.team) {
 				self setlookatent(var_01);
 				if(isdefined(self.mgturretleft)) {
 					self.mgturretleft settargetentity(var_01);
@@ -344,16 +344,16 @@ func_AAD4() {
 				}
 			}
 
-			var_01 scripts\mp\_damagefeedback::updatedamagefeedback("helicopter");
+			var_01 scripts\mp\damagefeedback::updatedamagefeedback("helicopter");
 			if(var_04 == "MOD_RIFLE_BULLET" || var_04 == "MOD_PISTOL_BULLET") {
-				if(var_01 scripts\mp\_utility::_hasperk("specialty_armorpiercing")) {
+				if(var_01 scripts\mp\utility::_hasperk("specialty_armorpiercing")) {
 					var_0E = var_0E + var_00 * level.armorpiercingmod;
 				}
 			}
 		}
 
 		if(isdefined(var_01.triggerportableradarping) && isplayer(var_01.triggerportableradarping)) {
-			var_01.triggerportableradarping scripts\mp\_damagefeedback::updatedamagefeedback("helicopter");
+			var_01.triggerportableradarping scripts\mp\damagefeedback::updatedamagefeedback("helicopter");
 		}
 
 		if(isdefined(var_09)) {
@@ -392,13 +392,13 @@ func_AAD4() {
 			if(isplayer(var_01) && !isdefined(self.triggerportableradarping) || var_01 != self.triggerportableradarping) {
 				var_01 notify("destroyed_helicopter");
 				var_01 notify("destroyed_killstreak",var_09);
-				thread scripts\mp\_utility::teamplayercardsplash("callout_destroyed_little_bird",var_01);
-				var_01 thread scripts\mp\_utility::giveunifiedpoints("kill",var_09,300);
-				var_01 thread scripts\mp\_rank::scoreeventpopup("destroyed_little_bird");
+				thread scripts\mp\utility::teamplayercardsplash("callout_destroyed_little_bird",var_01);
+				var_01 thread scripts\mp\utility::giveunifiedpoints("kill",var_09,300);
+				var_01 thread scripts\mp\rank::scoreeventpopup("destroyed_little_bird");
 			}
 
 			if(isdefined(self.triggerportableradarping)) {
-				self.triggerportableradarping thread scripts\mp\_utility::leaderdialogonplayer("lbguard_destroyed");
+				self.triggerportableradarping thread scripts\mp\utility::leaderdialogonplayer("lbguard_destroyed");
 			}
 
 			self notify("death");
@@ -617,7 +617,7 @@ func_AACC() {
 		var_05 = randomintrange(var_01,var_02 + 1);
 		for(var_06 = 0;var_06 < var_05;var_06++) {
 			var_07 = self getturrettarget(0);
-			if(isdefined(var_07) && !isdefined(var_07.spawntime) || gettime() - var_07.spawntime / 1000 > 5 && isdefined(var_07.team) && var_07.team != "spectator" && scripts\mp\_utility::isreallyalive(var_07)) {
+			if(isdefined(var_07) && !isdefined(var_07.spawntime) || gettime() - var_07.spawntime / 1000 > 5 && isdefined(var_07.team) && var_07.team != "spectator" && scripts\mp\utility::isreallyalive(var_07)) {
 				self.vehicle setlookatent(var_07);
 				self shootturret();
 			}

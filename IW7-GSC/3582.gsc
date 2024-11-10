@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3582.gsc
-****************************/
+ * Script: 3582.gsc
+************************/
 
 setrewind() {
 	thread func_13A62();
@@ -10,7 +10,7 @@ setrewind() {
 
 unsetrewind(param_00) {
 	self notify("rewindUnset");
-	if(!scripts\mp\_utility::istrue(param_00) && !scripts\mp\_utility::istrue(level.broshotrunning)) {
+	if(!scripts\mp\utility::istrue(param_00) && !scripts\mp\utility::istrue(level.broshotrunning)) {
 		self setscriptablepartstate("jet_pack","neutral",0);
 		self setscriptablepartstate("teamColorPins","teamColorPins",0);
 	}
@@ -23,9 +23,9 @@ unsetrewind(param_00) {
 }
 
 func_10DEB() {
-	level thread scripts\mp\_battlechatter_mp::saytoself(self,"plr_perk_rewind",undefined,0.75);
+	level thread scripts\mp\battlechatter_mp::saytoself(self,"plr_perk_rewind",undefined,0.75);
 	if(self.health < self.maxhealth) {
-		scripts\mp\_missions::func_D991("ch_scout_damaged_rewind");
+		scripts\mp\missions::func_D991("ch_scout_damaged_rewind");
 	}
 
 	self.isrewinding = 1;
@@ -42,9 +42,9 @@ func_637E(param_00) {
 	func_E4D5();
 	func_E4C7();
 	self setscriptablepartstate("rewindIdle","neutral",0);
-	if(!scripts\mp\_utility::istrue(level.broshotrunning)) {
+	if(!scripts\mp\utility::istrue(level.broshotrunning)) {
 		self gold_teeth_pickup();
-		if(!scripts\mp\_utility::istrue(param_00)) {
+		if(!scripts\mp\utility::istrue(param_00)) {
 			self setscriptablepartstate("jet_pack","neutral",0);
 			self setscriptablepartstate("teamColorPins","teamColorPins",0);
 			self setscriptablepartstate("rewindEndFlash","active",0);
@@ -75,13 +75,13 @@ func_13A62() {
 		waittillframeend;
 		if(isdefined(var_00.var_6ACF)) {
 			if(isplayer(self)) {
-				scripts\mp\_hud_message::showerrormessage("MP_REWIND_FAILED");
+				scripts\mp\hud_message::showerrormessage("MP_REWIND_FAILED");
 			}
 
-			scripts\mp\_supers::refundsuper();
+			scripts\mp\supers::refundsuper();
 		}
 		else if(isdefined(var_00.var_10DE6) && isdefined(var_00.var_4E59)) {
-			scripts\mp\_supers::refundsuper();
+			scripts\mp\supers::refundsuper();
 		}
 		else if(isdefined(var_00.var_637B)) {
 			self notify("rewind_success");
@@ -125,7 +125,7 @@ func_13A65(param_00) {
 }
 
 func_E4D5() {
-	if(scripts\mp\_utility::isanymlgmatch()) {
+	if(scripts\mp\utility::isanymlgmatch()) {
 		self.health = int(min(self.maxhealth,self.health + 25));
 		return;
 	}
@@ -138,13 +138,13 @@ func_E4C7() {
 	var_00 = self getweaponslistprimaries();
 	var_01 = [];
 	foreach(var_03 in var_00) {
-		var_04 = scripts\mp\_utility::getweapongroup(var_03);
+		var_04 = scripts\mp\utility::getweapongroup(var_03);
 		if(var_04 == "super" || var_04 == "weapon_mg" || var_04 == "killstreak" || var_04 == "gamemode" || var_04 == "other") {
 			var_01[var_01.size] = var_03;
 			continue;
 		}
 
-		if(scripts\mp\_weapons::isaxeweapon(var_03) || scripts\mp\_weapons::isknifeonly(var_03)) {
+		if(scripts\mp\weapons::isaxeweapon(var_03) || scripts\mp\weapons::isknifeonly(var_03)) {
 			var_01[var_01.size] = var_03;
 			continue;
 		}
@@ -154,9 +154,9 @@ func_E4C7() {
 			continue;
 		}
 
-		if(scripts\mp\_weapons::isaltmodeweapon(var_03)) {
+		if(scripts\mp\weapons::isaltmodeweapon(var_03)) {
 			var_05 = 0;
-			var_06 = scripts\mp\_utility::getweaponattachmentsbasenames(var_03);
+			var_06 = scripts\mp\utility::getweaponattachmentsbasenames(var_03);
 			foreach(var_08 in var_06) {
 				if(getsubstr(var_08,0,2) == "gl") {
 					var_05 = 1;
@@ -184,7 +184,7 @@ func_E4C7() {
 
 	foreach(var_03 in var_00) {
 		var_0E = 0;
-		if(scripts\mp\_utility::getweaponrootname(var_03) == "iw7_fmg") {
+		if(scripts\mp\utility::getweaponrootname(var_03) == "iw7_fmg") {
 			var_0E = self _meth_8519(var_03,1);
 		}
 		else if(issubstr(var_03,"akimbo")) {
@@ -212,7 +212,7 @@ func_E4C7() {
 }
 
 applytempeffects() {
-	if(scripts\mp\_utility::istrue(self.rewind_appliedtempeffects)) {
+	if(scripts\mp\utility::istrue(self.rewind_appliedtempeffects)) {
 		return;
 	}
 
@@ -225,16 +225,16 @@ applytempeffects() {
 	scripts\engine\utility::allow_weapon_switch(0);
 	scripts\engine\utility::allow_usability(0);
 	scripts\engine\utility::allow_ads(0);
-	scripts\mp\_utility::giveperk("specialty_blindeye");
-	scripts\mp\_utility::giveperk("specialty_spygame");
-	scripts\mp\_utility::giveperk("specialty_coldblooded");
-	scripts\mp\_utility::giveperk("specialty_noscopeoutline");
-	scripts\mp\_utility::giveperk("specialty_no_target");
+	scripts\mp\utility::giveperk("specialty_blindeye");
+	scripts\mp\utility::giveperk("specialty_spygame");
+	scripts\mp\utility::giveperk("specialty_coldblooded");
+	scripts\mp\utility::giveperk("specialty_noscopeoutline");
+	scripts\mp\utility::giveperk("specialty_no_target");
 	thread applytempeffectscleanup();
 }
 
 removetempeffects() {
-	if(!scripts\mp\_utility::istrue(self.rewind_appliedtempeffects)) {
+	if(!scripts\mp\utility::istrue(self.rewind_appliedtempeffects)) {
 		return;
 	}
 
@@ -242,11 +242,11 @@ removetempeffects() {
 	scripts\engine\utility::allow_weapon_switch(1);
 	scripts\engine\utility::allow_usability(1);
 	scripts\engine\utility::allow_ads(1);
-	scripts\mp\_utility::removeperk("specialty_blindeye");
-	scripts\mp\_utility::removeperk("specialty_spygame");
-	scripts\mp\_utility::removeperk("specialty_coldblooded");
-	scripts\mp\_utility::removeperk("specialty_noscopeoutline");
-	scripts\mp\_utility::removeperk("specialty_no_target");
+	scripts\mp\utility::removeperk("specialty_blindeye");
+	scripts\mp\utility::removeperk("specialty_spygame");
+	scripts\mp\utility::removeperk("specialty_coldblooded");
+	scripts\mp\utility::removeperk("specialty_noscopeoutline");
+	scripts\mp\utility::removeperk("specialty_no_target");
 }
 
 applytempeffectscleanup() {

@@ -1,8 +1,8 @@
-/*******************************************************
+/***********************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\bots\gametype_infect.gsc
-*******************************************************/
+ * Script: scripts\mp\bots\gametype_infect.gsc
+***********************************************/
 
 main() {
 	setup_callbacks();
@@ -161,7 +161,7 @@ bot_infect_retrieve_knife() {
 		self botsetflag("path_traverse_wait",1);
 		for(;;) {
 			if(self hasweapon("throwingknife_mp")) {
-				if(scripts\mp\_utility::isgameparticipant(self.isnodeoccupied)) {
+				if(scripts\mp\utility::isgameparticipant(self.isnodeoccupied)) {
 					var_01 = gettime();
 					if(!isdefined(self.melee_enemy) || self.melee_enemy != self.isnodeoccupied) {
 						self.melee_enemy = self.isnodeoccupied;
@@ -201,7 +201,7 @@ bot_infect_retrieve_knife() {
 										self setweaponammoclip("throwingknife_mp",1);
 									}
 
-									scripts\mp\_utility::waitfortimeornotify(30,"enemy");
+									scripts\mp\utility::waitfortimeornotify(30,"enemy");
 									self botclearscriptgoal();
 								}
 							}
@@ -249,7 +249,7 @@ bot_infect_find_node_can_see_ent(param_00,param_01) {
 			var_08 = var_06.origin + var_07;
 			var_09 = param_00.origin;
 			if(isplayer(param_00)) {
-				var_09 = param_00 scripts\mp\_utility::getstancecenter();
+				var_09 = param_00 scripts\mp\utility::getstancecenter();
 			}
 
 			if(sighttracepassed(var_08,var_09,0,self,param_00)) {

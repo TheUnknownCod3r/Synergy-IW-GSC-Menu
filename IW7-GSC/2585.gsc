@@ -1,19 +1,19 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\2585.gsc
-****************************/
+ * Script: 2585.gsc
+************************/
 
 func_12F5C(param_00) {
 	if(isdefined(level.var_13CD3) && isdefined(self.var_72BA)) {
-		scripts/asm/asm_bb::bb_clearweaponrequest();
+		scripts\asm\asm_bb::bb_clearweaponrequest();
 		self [[level.var_13CD3]]();
 		return 0;
 	}
 
 	func_98E2();
-	if(scripts/asm/asm_bb::bb_isselfdestruct() || isdefined(scripts/aitypes/combat::makescrambler())) {
-		scripts/asm/asm_bb::bb_clearweaponrequest();
+	if(scripts\asm\asm_bb::bb_isselfdestruct() || isdefined(scripts\aitypes\combat::makescrambler())) {
+		scripts\asm\asm_bb::bb_clearweaponrequest();
 		return level.success;
 	}
 
@@ -24,36 +24,36 @@ func_12F5C(param_00) {
 			var_01 = 1;
 		}
 
-		scripts/asm/asm_bb::bb_requestweapon(var_02);
+		scripts\asm\asm_bb::bb_requestweapon(var_02);
 	}
 	else
 	{
-		scripts/asm/asm_bb::bb_clearweaponrequest();
+		scripts\asm\asm_bb::bb_clearweaponrequest();
 	}
 
 	if(scripts\anim\utility_common::isasniper()) {
 		if(var_01) {
-			if(isdefined(self.var_394) && !scripts\anim\utility_common::issniperrifle(self.var_394) && isdefined(self.bt.shootparams)) {
-				scripts/aitypes/combat::func_FE5A(self.bt.shootparams);
+			if(isdefined(self.var_394) && !scripts\anim\utility_common::issniperrifle(self.var_394) && isdefined(self.var_3135.shootparams)) {
+				scripts\aitypes\combat::func_FE5A(self.var_3135.shootparams);
 			}
 		}
 
-		if(isdefined(self.var_394) && scripts\anim\utility_common::issniperrifle(self.var_394) && isdefined(self.bt.shootparams) && !scripts\asm\shared_utility::isatcovernode()) {
+		if(isdefined(self.var_394) && scripts\anim\utility_common::issniperrifle(self.var_394) && isdefined(self.var_3135.shootparams) && !scripts\asm\shared_utility::isatcovernode()) {
 			var_03 = undefined;
-			if(isdefined(self._blackboard.shootparams) && isdefined(self._blackboard.shootparams.pos)) {
-				var_03 = distancesquared(self.origin,self._blackboard.shootparams.pos);
+			if(isdefined(self.var_1198.shootparams) && isdefined(self.var_1198.shootparams.pos)) {
+				var_03 = distancesquared(self.origin,self.var_1198.shootparams.pos);
 			}
 			else if(isdefined(self.isnodeoccupied)) {
 				var_03 = distancesquared(self.origin,self.isnodeoccupied.origin);
 			}
 
 			if(var_03 < 262144) {
-				scripts/aitypes/combat::func_FE5A(self.bt.shootparams);
+				scripts\aitypes\combat::func_FE5A(self.var_3135.shootparams);
 			}
 		}
 	}
-	else if(isdefined(self.bt.shootparams) && isdefined(self.bt.shootparams.var_29AF) && self.bt.shootparams.var_29AF) {
-		scripts/aitypes/combat::func_FE5A(self.bt.shootparams);
+	else if(isdefined(self.var_3135.shootparams) && isdefined(self.var_3135.shootparams.var_29AF) && self.var_3135.shootparams.var_29AF) {
+		scripts\aitypes\combat::func_FE5A(self.var_3135.shootparams);
 	}
 
 	return level.success;
@@ -79,7 +79,7 @@ func_3EBC() {
 		return "pistol";
 	}
 
-	if(isdefined(self._blackboard.var_5D3B)) {
+	if(isdefined(self.var_1198.var_5D3B)) {
 		return "pistol";
 	}
 
@@ -109,8 +109,8 @@ func_67D7(param_00,param_01) {
 
 		var_02 = scripts\anim\utility_common::isusingsidearm();
 		var_03 = undefined;
-		if(isdefined(self._blackboard.shootparams) && isdefined(self._blackboard.shootparams.pos)) {
-			var_03 = distancesquared(self.origin,self._blackboard.shootparams.pos);
+		if(isdefined(self.var_1198.shootparams) && isdefined(self.var_1198.shootparams.pos)) {
+			var_03 = distancesquared(self.origin,self.var_1198.shootparams.pos);
 		}
 		else if(var_02 && isdefined(self.isnodeoccupied)) {
 			var_03 = distancesquared(self.origin,self.isnodeoccupied.origin);
@@ -196,11 +196,11 @@ func_391A(param_00) {
 		return level.failure;
 	}
 
-	if(scripts/asm/asm_bb::bb_moverequested()) {
+	if(scripts\asm\asm_bb::bb_moverequested()) {
 		return level.failure;
 	}
 
-	var_01 = scripts/asm/asm_bb::bb_getcovernode();
+	var_01 = scripts\asm\asm_bb::bb_getcovernode();
 	if(isdefined(var_01) && distance(self.origin,var_01.origin) < 16) {
 		return level.failure;
 	}

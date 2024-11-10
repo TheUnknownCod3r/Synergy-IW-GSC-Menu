@@ -1,10 +1,10 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2662.gsc
+ * Script: 2662.gsc
 ***************************************/
 
 splashgrenadeinit() {
-  level._effect["base_plasma_smoke"] = loadfx("vfx/iw7/_requests/mp/vfx_plasma_smoke");
+  level._effect["base_plasma_smoke"] = loadfx("vfx\iw7\_requests\mp\vfx_plasma_smoke");
 }
 
 splashgrenadeused(var_00) {
@@ -12,7 +12,7 @@ splashgrenadeused(var_00) {
   var_01 = 6;
 
   for (var_02 = 0; var_02 < var_01; var_2++) {
-  var_03 = scripts/cp/utility::_launchgrenade("zmb_globproj_zm", (0, 0, 0), (0, 0, 0));
+  var_03 = scripts\cp\utility::_launchgrenade("zmb_globproj_zm", (0, 0, 0), (0, 0, 0));
   var_3.owner = self;
   var_3.team = self.team;
   var_3.weapon_name = "zmb_globproj_zm";
@@ -30,7 +30,7 @@ splashgrenadeused(var_00) {
 func_85CD(var_00, var_01) {
   var_00 notify("grenadeOnExplode");
   var_00 endon("grenadeOnExplode");
-  var_00 thread scripts/cp/utility::notifyafterframeend("death", "end_explode");
+  var_00 thread scripts\cp\utility::notifyafterframeend("death", "end_explode");
   var_00 endon("end_explode");
   var_02 = var_0.owner;
   var_03 = var_0.grenades;
@@ -71,14 +71,14 @@ setinteractwithethereal(var_00, var_01, var_02, var_03) {
   var_10 = [];
 
   if (level.teambased)
-  var_09 = scripts/cp/utility::getteamarray(scripts/cp/utility::getotherteam(self.team));
+  var_09 = scripts\cp\utility::getteamarray(scripts\cp\utility::getotherteam(self.team));
   else
   var_09 = level.characters;
 
   var_11 = physics_createcontents(["physicscontents_solid", "physicscontents_glass", "physicscontents_vehicleclip", "physicscontents_missileclip", "physicscontents_clipshot"]);
 
   foreach (var_13 in var_09) {
-  if (!isdefined(var_13) || var_13 == self || !scripts/cp/utility::isreallyalive(var_13))
+  if (!isdefined(var_13) || var_13 == self || !scripts\cp\utility::isreallyalive(var_13))
   continue;
 
   var_14 = distancesquared(var_00, var_13.origin);
@@ -143,7 +143,7 @@ setinteractwithethereal(var_00, var_01, var_02, var_03) {
   var_33 = var_2[var_24];
   var_33 show();
   var_33 unlink(1);
-  var_33 = scripts/cp/utility::_launchgrenade("zmb_globproj_zm", var_32, var_27, undefined, undefined, var_33);
+  var_33 = scripts\cp\utility::_launchgrenade("zmb_globproj_zm", var_32, var_27, undefined, undefined, var_33);
   var_33.owner = self;
   var_33.team = self.team;
   var_33.weapon_name = "zmb_globproj_zm";
@@ -239,7 +239,7 @@ func_13B91() {
   if (!isplayer(var_02) && !isagent(var_02))
   continue;
 
-  if (!scripts/cp/utility::isreallyalive(var_02))
+  if (!scripts\cp\utility::isreallyalive(var_02))
   continue;
 
   if (var_02 != var_00 && level.teambased && var_2.team == var_01)
@@ -261,7 +261,7 @@ func_13B93() {
   continue;
   }
 
-  if (!scripts/cp/utility::isreallyalive(var_01) || !var_01 istouching(self)) {
+  if (!scripts\cp\utility::isreallyalive(var_01) || !var_01 istouching(self)) {
   self.func_127C0[var_02] = undefined;
   var_01 thread func_E0DC(self.func_B799);
   }
@@ -302,7 +302,7 @@ func_6312() {
   self notify("endBurning");
   self.func_3291 = undefined;
 
-  if (scripts/cp/utility::is_zombie_agent()) {
+  if (scripts\cp\utility::is_zombie_agent()) {
   if (isdefined(self.agent_type) && self.agent_type != "zombie_brute" && self.agent_type != "zombie_grey")
   self setscriptablepartstate("burning", "inactive", 1);
   }

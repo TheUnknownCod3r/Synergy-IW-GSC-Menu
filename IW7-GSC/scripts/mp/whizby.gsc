@@ -1,18 +1,18 @@
-/*****************************************
+/*********************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\whizby.gsc
-*****************************************/
+ * Script: scripts\mp\whizby.gsc
+*********************************/
 
 init() {
-	level._effect["whizzby_left"] = loadfx("vfx/old/_requests/mp_gameplay/vfx_near_miss_edge_left.vfx");
-	level._effect["whizzby_right"] = loadfx("vfx/old/_requests/mp_gameplay/vfx_near_miss_edge_right.vfx");
-	level._effect["whizzby_top"] = loadfx("vfx/old/_requests/mp_gameplay/vfx_near_miss_edge_top.vfx");
-	level._effect["whizzby_top_left"] = loadfx("vfx/old/_requests/mp_gameplay/vfx_near_miss_edge_top_left.vfx");
-	level._effect["whizzby_top_right"] = loadfx("vfx/old/_requests/mp_gameplay/vfx_near_miss_edge_top_right.vfx");
-	level._effect["whizzby_bottom"] = loadfx("vfx/old/_requests/mp_gameplay/vfx_near_miss_edge_bottom.vfx");
-	level._effect["whizzby_bottom_left"] = loadfx("vfx/old/_requests/mp_gameplay/vfx_near_miss_edge_bottom_left.vfx");
-	level._effect["whizzby_bottom_right"] = loadfx("vfx/old/_requests/mp_gameplay/vfx_near_miss_edge_bottom_right.vfx");
+	level._effect["whizzby_left"] = loadfx("vfx\old\_requests\mp_gameplay\vfx_near_miss_edge_left.vfx");
+	level._effect["whizzby_right"] = loadfx("vfx\old\_requests\mp_gameplay\vfx_near_miss_edge_right.vfx");
+	level._effect["whizzby_top"] = loadfx("vfx\old\_requests\mp_gameplay\vfx_near_miss_edge_top.vfx");
+	level._effect["whizzby_top_left"] = loadfx("vfx\old\_requests\mp_gameplay\vfx_near_miss_edge_top_left.vfx");
+	level._effect["whizzby_top_right"] = loadfx("vfx\old\_requests\mp_gameplay\vfx_near_miss_edge_top_right.vfx");
+	level._effect["whizzby_bottom"] = loadfx("vfx\old\_requests\mp_gameplay\vfx_near_miss_edge_bottom.vfx");
+	level._effect["whizzby_bottom_left"] = loadfx("vfx\old\_requests\mp_gameplay\vfx_near_miss_edge_bottom_left.vfx");
+	level._effect["whizzby_bottom_right"] = loadfx("vfx\old\_requests\mp_gameplay\vfx_near_miss_edge_bottom_right.vfx");
 	level thread onplayerconnect();
 }
 
@@ -39,7 +39,7 @@ func_13D18() {
 	var_00 = gettime();
 	for(;;) {
 		self waittill("bulletwhizby",var_01,var_02);
-		if(!scripts/mp/equipment/phase_shift::areentitiesinphase(self,var_01)) {
+		if(!scripts\mp\equipment\phase_shift::areentitiesinphase(self,var_01)) {
 			continue;
 		}
 
@@ -85,7 +85,7 @@ func_13D17(param_00) {
 	var_0D = func_13D15(var_06,var_08);
 	if(!isdefined(self.var_1468[var_0D])) {
 		if(isdefined(level._effect[var_0D])) {
-			self.var_1468[var_0D] = function_01E1(level._effect[var_0D],self geteye(),self);
+			self.var_1468[var_0D] = spawnfxforclient(level._effect[var_0D],self geteye(),self);
 		}
 		else
 		{

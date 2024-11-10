@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2881.gsc
+ * Script: 2881.gsc
 ***************************************/
 
 main() {
@@ -95,7 +95,7 @@ func_48A1() {
   var_01 = [];
 
   for (var_02 = 1; var_02 <= var_00; var_2++) {
-  var_03 = tablelookup("sp/intel_items.csv", 0, var_02, 4);
+  var_03 = tablelookup("sp\intel_items.csv", 0, var_02, 4);
 
   if (isdefined(var_03) && var_03 != "undefined") {
   var_04 = strtok(var_03, ",");
@@ -224,7 +224,7 @@ func_EB60() {
   }
 
   logstring("found intel item " + self.func_C1D5);
-  scripts/sp/endmission::func_12F24();
+  scripts\sp\endmission::func_12F24();
 }
 
 setplayerangles() {
@@ -244,7 +244,7 @@ func_9952(var_00) {
   if (var_00 != var_05 && var_05 _meth_8153(self.func_C1D5))
   continue;
 
-  var_06 = var_05 scripts/sp/hud_util::func_4999("objective", 1.5);
+  var_06 = var_05 scripts\sp\hud_util::func_4999("objective", 1.5);
   var_6.glowcolor = (0.7, 0.7, 0.3);
   var_6.glowalpha = 1;
   var_06 func_F99F();
@@ -263,7 +263,7 @@ func_9952(var_00) {
   }
 
   if (var_07 == 18)
-  var_05 scripts/sp/utility::func_D0A1("EXT_1");
+  var_05 scripts\sp\utility::func_D0A1("EXT_1");
 
   var_06 scripts\engine\utility::delaycall(var_03, ::destroy);
   }
@@ -284,7 +284,7 @@ func_23AF() {
   var_00 = [];
 
   for (var_01 = 1; var_01 < 65; var_1++) {
-  var_02 = tablelookup("sp/intel_items.csv", 0, var_01, 4);
+  var_02 = tablelookup("sp\intel_items.csv", 0, var_01, 4);
   var_03 = strtok(var_02, ",");
 
   for (var_01 = 0; var_01 < var_3.size; var_1++)

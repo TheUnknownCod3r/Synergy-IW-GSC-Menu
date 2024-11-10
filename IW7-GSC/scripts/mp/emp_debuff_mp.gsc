@@ -1,8 +1,8 @@
-/************************************************
+/****************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\emp_debuff_mp.gsc
-************************************************/
+ * Script: scripts\mp\emp_debuff_mp.gsc
+****************************************/
 
 func_13A12() {
 	var_00 = scripts\engine\utility::spawn_tag_origin();
@@ -46,7 +46,7 @@ func_0118(param_00,param_01,param_02,param_03) {
 			continue;
 		}
 
-		if(!scripts/mp/equipment/phase_shift::areentitiesinphase(self,var_07)) {
+		if(!scripts\mp\equipment\phase_shift::areentitiesinphase(self,var_07)) {
 			continue;
 		}
 
@@ -68,7 +68,7 @@ func_0118(param_00,param_01,param_02,param_03) {
 			continue;
 		}
 
-		if(!scripts/mp/equipment/phase_shift::areentitiesinphase(var_0C,self)) {
+		if(!scripts\mp\equipment\phase_shift::areentitiesinphase(var_0C,self)) {
 			continue;
 		}
 

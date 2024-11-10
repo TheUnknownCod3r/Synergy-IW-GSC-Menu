@@ -1,16 +1,16 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2645.gsc
+ * Script: 2645.gsc
 ***************************************/
 
 init() {
   scripts\engine\utility::struct_class_init();
   func_F6BD();
   func_F6BA();
-  scripts/cp/utility::func_F305();
+  scripts\cp\utility::func_F305();
   setupcallbacks();
-  scripts/cp/utility::initgameflags();
-  scripts/cp/utility::initlevelflags();
+  scripts\cp\utility::initgameflags();
+  scripts\cp\utility::initlevelflags();
   func_FAAB();
   func_F6BB();
   func_F6BF();
@@ -23,11 +23,11 @@ init() {
   func_988B();
   scripts\common\fx::initfx();
   scripts\mp\callbacksetup::setupdamageflags();
-  scripts/cp/cp_movers::init();
-  scripts/cp/func_0A53::main();
-  scripts/cp/cp_merits::buildmeritinfo();
-  scripts/cp/cp_gamelogic::init();
-  scripts/cp/cp_laststand::init_laststand();
+  scripts\cp\cp_movers::init();
+  scripts\cp\func_0A53::main();
+  scripts\cp\cp_merits::buildmeritinfo();
+  scripts\cp\cp_gamelogic::init();
+  scripts\cp\cp_laststand::init_laststand();
 
   if (func_100BC())
   level thread func_132A3();
@@ -76,7 +76,7 @@ func_F6BA() {
   setdvar("r_lightGridEnableTweaks", 0);
   setdvar("r_lightGridIntensity", 1);
   setdvar("bg_compassShowEnemies", getdvar("scr_game_forceuav"));
-  setdvar("isMatchMakingGame", scripts/cp/utility::matchmakinggame());
+  setdvar("isMatchMakingGame", scripts\cp\utility::matchmakinggame());
   setdvar("ui_overtime", 0);
   setdvar("ui_allow_teamchange", 1);
   setdvar("g_deadChat", 1);
@@ -101,19 +101,19 @@ setupcallbacks() {
   level.onprecachegametype = ::blank;
   level.onstartgametype = ::blank;
   level.func_D3D5 = ::func_5048;
-  level.initagentscriptvariables = scripts/cp/cp_agent_utils::initagentscriptvariables;
-  level.setagentteam = scripts/cp/cp_agent_utils::set_agent_team;
-  level.agentvalidateattacker = scripts/cp/cp_agent_utils::validateattacker;
-  level.agentfunc = scripts/cp/cp_agent_utils::agentfunc;
-  level.getfreeagent = scripts/cp/cp_agent_utils::getfreeagent;
-  level.addtocharactersarray = scripts/cp/cp_agent_utils::addtocharactersarray;
-  level.callbackplayerlaststand = scripts/cp/cp_laststand::callback_defaultplayerlaststand;
-  level.endgame = scripts/cp/cp_gamelogic::endgame;
-  level.func_72BF = scripts/cp/cp_gamelogic::func_72BF;
+  level.initagentscriptvariables = scripts\cp\cp_agent_utils::initagentscriptvariables;
+  level.setagentteam = scripts\cp\cp_agent_utils::set_agent_team;
+  level.agentvalidateattacker = scripts\cp\cp_agent_utils::validateattacker;
+  level.agentfunc = scripts\cp\cp_agent_utils::agentfunc;
+  level.getfreeagent = scripts\cp\cp_agent_utils::getfreeagent;
+  level.addtocharactersarray = scripts\cp\cp_agent_utils::addtocharactersarray;
+  level.callbackplayerlaststand = scripts\cp\cp_laststand::callback_defaultplayerlaststand;
+  level.endgame = scripts\cp\cp_gamelogic::endgame;
+  level.func_72BF = scripts\cp\cp_gamelogic::func_72BF;
 }
 
 func_AE18() {
-  level._effect["slide_dust"] = loadfx("vfx/core/screen/vfx_scrnfx_tocam_slidedust_m");
+  level._effect["slide_dust"] = loadfx("vfx\core\screen\vfx_scrnfx_tocam_slidedust_m");
 }
 
 func_5044(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08, var_09, var_10, var_11) {}
@@ -165,7 +165,7 @@ trackcarepackages() {
 
 func_5048() {
   if (scripts\engine\utility::is_true(self.keep_perks)) {
-  if (scripts/cp/utility::has_zombie_perk("perk_machine_tough"))
+  if (scripts\cp\utility::has_zombie_perk("perk_machine_tough"))
   return 200;
   else
   return 100;
@@ -225,12 +225,12 @@ func_4631() {
   [[level.onprecachegametype]]();
   func_E256();
   func_E255();
-  scripts/cp/perks/perkmachines::func_98B1();
-  scripts/cp/perks/prestige::initprestige();
-  scripts/cp/cp_weaponrank::init();
-  scripts/cp/cp_weaponpassives::init();
-  thread scripts/cp/powers/coop_powers::init();
-  scripts/cp/cp_merits::init();
+  scripts\cp\perks\perkmachines::func_98B1();
+  scripts\cp\perks\prestige::initprestige();
+  scripts\cp\cp_weaponrank::init();
+  scripts\cp\cp_weaponpassives::init();
+  thread scripts\cp\powers\coop_powers::init();
+  scripts\cp\cp_merits::init();
   thread scripts\cp\contracts_coop::init();
   level thread func_E896();
   level thread _meth_8489();
@@ -270,13 +270,13 @@ func_E896() {
   level notify("coop_pre_match");
   level endon("game_ended");
   level endon("coop_pre_match");
-  scripts/cp/utility::gameflaginit("prematch_done", 0);
+  scripts\cp\utility::gameflaginit("prematch_done", 0);
   setomnvar("ui_prematch_period", 1);
 
   if (isdefined(level.prematchfunc))
   [[level.prematchfunc]]();
 
-  scripts/cp/utility::gameflagset("prematch_done");
+  scripts\cp\utility::gameflagset("prematch_done");
   setomnvar("ui_prematch_period", 0);
 }
 
@@ -333,16 +333,16 @@ func_5043() {
   setupsavedactionslots();
   func_98B9();
   func_988E();
-  scripts/cp/perks/prestige::initplayerprestige();
-  scripts/cp/perks/perk_utility::func_95C1();
+  scripts\cp\perks\prestige::initplayerprestige();
+  scripts\cp\perks\perk_utility::func_95C1();
   self.no_team_outlines = 0;
   self.no_outline = 0;
 
-  if (scripts/cp/utility::coop_mode_has("outline"))
-  thread scripts/cp/cp_outline::playeroutlinemonitor();
+  if (scripts\cp\utility::coop_mode_has("outline"))
+  thread scripts\cp\cp_outline::playeroutlinemonitor();
 
-  thread scripts/cp/cp_vo::func_97CC();
-  thread scripts/cp/cp_merits::updatemerits();
+  thread scripts\cp\cp_vo::func_97CC();
+  thread scripts\cp\cp_merits::updatemerits();
 
   if (self ishost())
   level.player = self;
@@ -366,7 +366,7 @@ func_5043() {
   level endon("game_ended");
 
   if (isdefined(level.hostmigrationtimer))
-  thread scripts/cp/cp_hostmigration::hostmigrationtimerthink();
+  thread scripts\cp\cp_hostmigration::hostmigrationtimerthink();
 
   if (isdefined(level.onplayerconnectaudioinit))
   [[level.onplayerconnectaudioinit]]();
@@ -383,7 +383,7 @@ func_D3D9() {
 }
 
 func_F7F0() {
-  self.guid = scripts/cp/utility::getuniqueid();
+  self.guid = scripts\cp\utility::getuniqueid();
   self.clientid = game["clientid"];
   self.usingonlinedataoffline = self isusingonlinedataoffline();
   self.connected = 1;
@@ -471,7 +471,7 @@ spawnintermission(var_00) {
   if (level.console)
   self setclientdvar("cg_fov", "90");
 
-  scripts/cp/utility::updatesessionstate("intermission");
+  scripts\cp\utility::updatesessionstate("intermission");
 }
 
 func_F726() {
@@ -508,7 +508,7 @@ func_108F4(var_00) {
 func_136E9() {
   self.waitingtospawn = 1;
 
-  if (scripts/cp/utility::isusingremote())
+  if (scripts\cp\utility::isusingremote())
   self waittill("stopped_using_remote");
 
   self.waitingtospawn = 0;
@@ -538,15 +538,15 @@ func_108F3(var_00) {
   [[level.onspawnplayer]]();
 
   if (!scripts\engine\utility::flag("introscreen_over"))
-  scripts/cp/utility::freezecontrolswrapper(1);
+  scripts\cp\utility::freezecontrolswrapper(1);
 
   self [[level.custom_giveloadout]](var_00);
 
   if (getdvarint("camera_thirdPerson"))
-  scripts/cp/utility::setthirdpersondof(1);
+  scripts\cp\utility::setthirdpersondof(1);
 
   if (func_1001B())
-  scripts/cp/utility::freezecontrolswrapper(1);
+  scripts\cp\utility::freezecontrolswrapper(1);
 
   waittillframeend;
   self notify("spawned_player");
@@ -572,14 +572,14 @@ resetplayerdamagemodifiers() {
   var_00 = getarraykeys(self.additivedamagemodifiers);
 
   foreach (var_02 in var_00)
-  scripts/cp/utility::removedamagemodifier(var_02, 1);
+  scripts\cp\utility::removedamagemodifier(var_02, 1);
   }
 
   if (isdefined(self.multiplicativedamagemodifiers)) {
   var_00 = getarraykeys(self.multiplicativedamagemodifiers);
 
   foreach (var_02 in var_00)
-  scripts/cp/utility::removedamagemodifier(var_02, 0);
+  scripts\cp\utility::removedamagemodifier(var_02, 0);
   }
 }
 
@@ -605,7 +605,7 @@ getnearestnode() {
 
 func_C07F() {
   func_E25B();
-  scripts/cp/utility::updatesessionstate("playing");
+  scripts\cp\utility::updatesessionstate("playing");
 }
 
 func_E25B() {
@@ -619,7 +619,7 @@ func_E25B() {
 }
 
 func_10828(var_00) {
-  scripts/cp/utility::freezecontrolswrapper(1);
+  scripts\cp\utility::freezecontrolswrapper(1);
 
   if (!var_00) {
   if (isdefined(level.bot_funcs) && isdefined(level.bot_funcs["player_spawned"]))
@@ -678,7 +678,7 @@ enterspectator() {
   self setspectatedefaults(var_0.origin, var_0.angles);
   func_F717(var_0.origin, var_0.angles);
   func_F858();
-  scripts/cp/utility::updatesessionstate("spectator");
+  scripts\cp\utility::updatesessionstate("spectator");
 }
 
 func_F858() {
@@ -699,7 +699,7 @@ func_5045(var_00) {
   if (!isdefined(self.connected))
   return;
 
-  scripts/cp/cp_analytics::on_player_disconnect(var_00);
+  scripts\cp\cp_analytics::on_player_disconnect(var_00);
   func_E15A(self);
 
   if (func_563B())
@@ -716,8 +716,8 @@ func_563B() {
   var_00 = 0;
 
   foreach (var_02 in level.players) {
-  if (scripts/cp/cp_laststand::player_in_laststand(var_02))
-  var_00 = scripts/cp/cp_laststand::gameshouldend(var_02);
+  if (scripts\cp\cp_laststand::player_in_laststand(var_02))
+  var_00 = scripts\cp\cp_laststand::gameshouldend(var_02);
   }
 
   return var_00;
@@ -776,7 +776,7 @@ func_503E() {
 
   foreach (var_01 in level.characters) {
   if (isdefined(var_01))
-  var_01 thread scripts/cp/cp_hostmigration::hostmigrationtimerthink();
+  var_01 thread scripts\cp\cp_hostmigration::hostmigrationtimerthink();
 
   if (isplayer(var_01))
   var_01 setclientomnvar("ui_session_state", var_1.sessionstate);
@@ -784,7 +784,7 @@ func_503E() {
 
   setdvar("ui_game_state", game["state"]);
   level endon("host_migration_begin");
-  scripts/cp/cp_hostmigration::hostmigrationwait();
+  scripts\cp\cp_hostmigration::hostmigrationwait();
   level.hostmigrationtimer = undefined;
   setdvar("ui_inhostmigration", 0);
 
@@ -1060,7 +1060,7 @@ func_988E() {
   if (isdefined(level.func_D0FE))
   [[level.func_D0FE]]();
   else
-  scripts/cp/cp_laststand::default_player_init_laststand();
+  scripts\cp\cp_laststand::default_player_init_laststand();
 }
 
 func_988B() {

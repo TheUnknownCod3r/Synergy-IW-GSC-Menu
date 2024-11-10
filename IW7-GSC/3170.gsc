@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3170.gsc
-****************************/
+ * Script: 3170.gsc
+************************/
 
 _meth_811C() {
 	if(isdefined(self.var_130A9)) {
@@ -20,8 +20,8 @@ func_7AA3() {
 
 func_7AA2(param_00) {
 	var_01 = undefined;
-	if(isdefined(self._blackboard.shootparams)) {
-		var_01 = self._blackboard.shootparams;
+	if(isdefined(self.var_1198.shootparams)) {
+		var_01 = self.var_1198.shootparams;
 	}
 	else if(isdefined(self.asm.shootparams)) {
 		var_01 = self.asm.shootparams;
@@ -58,7 +58,7 @@ func_ADA1(param_00,param_01) {
 }
 
 func_CF03(param_00,param_01,param_02,param_03) {
-	self._blackboard.var_5D3B = undefined;
+	self.var_1198.var_5D3B = undefined;
 	thread lib_0A1E::func_235F(param_00,param_01,param_02,1,0);
 	func_ADA1(param_00,param_01);
 }
@@ -88,7 +88,7 @@ func_4725(param_00,param_01,param_02) {
 }
 
 func_CEB3(param_00,param_01,param_02,param_03) {
-	self._blackboard.var_98F4 = undefined;
+	self.var_1198.var_98F4 = undefined;
 	func_AB30(self.var_394);
 	lib_0A1E::func_2364(param_00,param_01,param_02);
 }
@@ -106,7 +106,7 @@ func_AB31(param_00,param_01) {
 	var_05 setmodel(var_02);
 	var_05.angles = var_04;
 	self.a.weaponposdropping[param_01] = "none";
-	self._blackboard.var_AB58 = var_05;
+	self.var_1198.var_AB58 = var_05;
 }
 
 func_AB30(param_00) {
@@ -121,12 +121,12 @@ func_AB30(param_00) {
 		self.var_394 = "none";
 	}
 
-	self._blackboard.var_5D3B = 1;
+	self.var_1198.var_5D3B = 1;
 	scripts\anim\shared::func_12E61();
 }
 
 func_12A82(param_00,param_01,param_02,param_03) {
-	return isdefined(scripts/asm/asm_bb::bb_getrequestedturret());
+	return isdefined(scripts\asm\asm_bb::bb_getrequestedturret());
 }
 
 func_8BCD(param_00,param_01,param_02,param_03) {
@@ -134,30 +134,30 @@ func_8BCD(param_00,param_01,param_02,param_03) {
 }
 
 func_3E9E(param_00,param_01,param_02) {
-	if(isdefined(self._blackboard.var_5D3B)) {
-		return scripts/asm/asm::asm_lookupanimfromalias(param_01,"remount");
+	if(isdefined(self.var_1198.var_5D3B)) {
+		return scripts\asm\asm::asm_lookupanimfromalias(param_01,"remount");
 	}
 
-	return scripts/asm/asm::asm_lookupanimfromalias(param_01,"default");
+	return scripts\asm\asm::asm_lookupanimfromalias(param_01,"default");
 }
 
 func_CEB0(param_00,param_01,param_02,param_03) {
 	self.asm.var_1310E = 1;
-	var_04 = scripts/asm/asm_bb::bb_getrequestedturret();
+	var_04 = scripts\asm\asm_bb::bb_getrequestedturret();
 	lib_0A1E::func_2366(param_00,param_01,param_02);
 	self.asm.var_12A7E = var_04.origin;
 	self.asm.var_12A57 = var_04.angles;
 	self.asm.turret = var_04;
-	self _meth_83D7(scripts/asm/asm_bb::bb_getrequestedturret());
+	self _meth_83D7(scripts\asm\asm_bb::bb_getrequestedturret());
 }
 
 func_C021(param_00,param_01,param_02,param_03) {
 	self.asm.var_1310E = 1;
-	var_04 = scripts/asm/asm_bb::bb_getrequestedturret();
+	var_04 = scripts\asm\asm_bb::bb_getrequestedturret();
 	self.asm.var_12A7E = var_04.origin;
 	self.asm.var_12A57 = var_04.angles;
 	self.asm.turret = var_04;
-	self _meth_83D7(scripts/asm/asm_bb::bb_getrequestedturret());
+	self _meth_83D7(scripts\asm\asm_bb::bb_getrequestedturret());
 }
 
 func_CEB2(param_00,param_01,param_02,param_03) {
@@ -169,28 +169,28 @@ func_FFE4(param_00,param_01,param_02,param_03) {
 	var_04 = isdefined(self.asm.var_1310E) && self.asm.var_1310E;
 	if(var_04) {
 		var_05 = self _meth_8164();
-		var_06 = scripts/asm/asm_bb::bb_getrequestedturret();
+		var_06 = scripts\asm\asm_bb::bb_getrequestedturret();
 		var_07 = isdefined(var_05) && var_05 _meth_8165() == self;
 		var_08 = var_07 && isdefined(var_06) && var_06 == var_05;
 		return !var_08;
 	}
 
-	var_09 = scripts/asm/asm::func_BCE7(var_04,var_05,var_06,var_07);
+	var_09 = scripts\asm\asm::func_BCE7(var_04,var_05,var_06,var_07);
 	var_0A = scripts\asm\shared_utility::isatcovernode();
 	return var_09 || !var_0A;
 }
 
 func_CEAF(param_00,param_01,param_02,param_03) {
 	if(isdefined(self.target_getindexoftarget)) {
-		self._blackboard.var_522F = self.target_getindexoftarget;
+		self.var_1198.var_522F = self.target_getindexoftarget;
 		self.sendmatchdata = 1;
 	}
 
 	self.var_4C93 = ::func_C0C0;
-	self._blackboard.var_98F4 = 1;
+	self.var_1198.var_98F4 = 1;
 	var_04 = lib_0A1E::asm_getallanimsforstate(param_00,param_01);
 	if(isdefined(self.target_getindexoftarget)) {
-		if(isdefined(self._blackboard.var_5D3B)) {
+		if(isdefined(self.var_1198.var_5D3B)) {
 			self _meth_80F1(self.target_getindexoftarget.origin,self.angles);
 			self orientmode("face angle",self.target_getindexoftarget.angles[1]);
 		}
@@ -210,9 +210,9 @@ func_CEAF(param_00,param_01,param_02,param_03) {
 	self aiclearanim(lib_0A1E::asm_getbodyknob(),param_02);
 	self _meth_82EA(param_01,var_04,1,param_02,1);
 	lib_0A1E::func_2369(param_00,param_01,var_04);
-	var_07 = lib_0A1E::func_231F(param_00,param_01,scripts/asm/asm::func_2341(param_00,param_01));
+	var_07 = lib_0A1E::func_231F(param_00,param_01,scripts\asm\asm::func_2341(param_00,param_01));
 	if(var_07 == "end") {
-		thread scripts/asm/asm::func_2310(param_00,param_01,0);
+		thread scripts\asm\asm::func_2310(param_00,param_01,0);
 	}
 }
 
@@ -221,8 +221,8 @@ func_116E7(param_00,param_01,param_02) {
 }
 
 func_CEB1(param_00,param_01,param_02,param_03) {
-	self._blackboard.var_522F = undefined;
-	self._blackboard.var_98F4 = undefined;
+	self.var_1198.var_522F = undefined;
+	self.var_1198.var_98F4 = undefined;
 	lib_0A1E::func_2364(param_00,param_01,param_02);
 }
 
@@ -233,8 +233,8 @@ func_C0C0(param_00,param_01,param_02,param_03) {
 			break;
 
 		case "lmg_pickup":
-			self._blackboard.var_AB58 delete();
-			self._blackboard.var_AB58 = undefined;
+			self.var_1198.var_AB58 delete();
+			self.var_1198.var_AB58 = undefined;
 			scripts\anim\shared::placeweaponon(self.primaryweapon,"right");
 			break;
 	}
@@ -254,8 +254,8 @@ func_B0E9(param_00,param_01,param_02,param_03) {
 }
 
 func_527F(param_00,param_01,param_02,param_03) {
-	if(isdefined(self._blackboard.var_E1AF)) {
-		return self._blackboard.var_E1AF == param_03;
+	if(isdefined(self.var_1198.var_E1AF)) {
+		return self.var_1198.var_E1AF == param_03;
 	}
 
 	return 0;

@@ -1,8 +1,8 @@
-/*********************************************************
+/*************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\agents\gametype_escape.gsc
-*********************************************************/
+ * Script: scripts\cp\agents\gametype_escape.gsc
+*************************************************/
 
 main() {
 	scripts\cp\cp_globallogic::init();
@@ -11,16 +11,16 @@ main() {
 	init_zombie_flags();
 	init_zombie_fx();
 	scripts\cp\cp_music_and_dialog::init();
-	level.alien_combat_resources_table = "cp/alien/dpad_tree.csv";
+	level.alien_combat_resources_table = "cp\alien\dpad_tree.csv";
 	level.nodefiltertracestime = 0;
 	level.nodefiltertracesthisframe = 0;
 	level.wave_num = 0;
 	level.laststand_currency_penalty_amount_func = ::zombie_laststand_currency_penalth_amount;
 	level.disable_zombie_exo_abilities = 1;
 	level.in_room_check_func = ::scripts\cp\zombies\zombies_spawning::is_in_any_room_volume;
-	level.custom_giveloadout = ::scripts/cp/zombies/zombies_loadout::givedefaultloadout;
-	level.move_speed_scale = ::scripts/cp/zombies/zombies_loadout::updatemovespeedscale;
-	level.getnodearrayfunction = ::function_00B4;
+	level.custom_giveloadout = ::scripts\cp\zombies\zombies_loadout::givedefaultloadout;
+	level.move_speed_scale = ::scripts\cp\zombies\zombies_loadout::updatemovespeedscale;
+	level.getnodearrayfunction = ::getnodearray;
 	level.callbackplayerdamage = ::scripts\cp\zombies\zombie_damage::callback_zombieplayerdamage;
 	level.prespawnfromspectaorfunc = ::zombie_prespawnfromspectatorfunc;
 	level.update_money_performance = ::escape_update_money_performance;
@@ -28,10 +28,10 @@ main() {
 	level.no_power_cooldowns = 1;
 	level.callbackplayerkilled = ::zombie_callbackplayerkilled;
 	level.escape_timer_func = ::escape_timer;
-	level.power_table = "cp/zombies/zombie_powertable.csv";
-	level.statstable = "mp/statstable.csv";
-	level.game_mode_statstable = "cp/zombies/mode_string_tables/zombies_statstable.csv";
-	level.game_mode_attachment_map = "cp/zombies/zombie_attachmentmap.csv";
+	level.power_table = "cp\zombies\zombie_powertable.csv";
+	level.statstable = "mp\statstable.csv";
+	level.game_mode_statstable = "cp\zombies\mode_string_tables\zombies_statstable.csv";
+	level.game_mode_attachment_map = "cp\zombies\zombie_attachmentmap.csv";
 	level.active_volume_check = ::scripts\cp\loot::is_in_active_volume;
 	scripts\cp\cp_weapon::weaponsinit();
 	scripts\cp\utility::healthregeninit(0);
@@ -58,16 +58,16 @@ main() {
 	level.escape_objective_notify = "objective_complete";
 	parse_weapon_table();
 	scripts\cp\zombies\zombie_afterlife_arcade::init_afterlife_arcade();
-	scripts/cp/zombies/zombies_gamescore::init_zombie_scoring();
+	scripts\cp\zombies\zombies_gamescore::init_zombie_scoring();
 	scripts\cp\gametypes\zombie::precachelb();
-	scripts\mp\mp_agent::init_agent("mp/default_agent_definition.csv");
-	scripts/cp/agents/gametype_zombie::main();
+	scripts\mp\mp_agent::init_agent("mp\default_agent_definition.csv");
+	scripts\cp\agents\gametype_zombie::main();
 	level scripts\cp\cp_hud_message::init();
 	level.getspawnpoint = ::getescapespawnpoint;
-	level thread scripts/cp/zombies/zombies_pillage::init_pillage_drops();
+	level thread scripts\cp\zombies\zombies_pillage::init_pillage_drops();
 	dev_damage_show_damage_numbers();
 	level thread escape_weapon_progression();
-	level.power_up_table = "cp/zombies/escape_loot.csv";
+	level.power_up_table = "cp\zombies\escape_loot.csv";
 	level.power_up_drop_override = 1;
 	level.starting_currency = int(0);
 	level.power_up_drop_score = level.starting_currency;
@@ -79,7 +79,7 @@ main() {
 	level thread scripts\cp\cp_interaction::coop_interaction_pregame();
 	level thread scripts\cp\utility::global_physics_sound_monitor();
 	level thread wave_num_loop();
-	level thread scripts/cp/zombies/zombies_clientmatchdata::init();
+	level thread scripts\cp\zombies\zombies_clientmatchdata::init();
 }
 
 escape_weapon_progression() {
@@ -111,7 +111,7 @@ spawn_next_weapon(param_00,param_01,param_02) {
 	var_08 = bullettrace(var_03.origin,var_03.origin + (0,0,-100),0);
 	var_03 = var_08["position"];
 	var_09 = spawn("script_model",var_03 + (0,0,40));
-	var_09 setmodel(function_00EA(param_00));
+	var_09 setmodel(getweaponmodel(param_00));
 	var_09.var_39C = param_00;
 	var_09.oldweapon = param_02;
 	var_09 thread wait_for_player_pickup();
@@ -190,18 +190,18 @@ init_zombie_flags() {
 }
 
 init_zombie_fx() {
-	level._effect["alien_hive_explode"] = loadfx("vfx/core/expl/alien_hive_explosion");
-	level._effect["goon_spawn_bolt"] = loadfx("vfx/iw7/_requests/coop/vfx_clown_spawn.vfx");
-	level._effect["bloody_death"] = loadfx("vfx/core/base/vfx_tentacle_death_burst");
-	level._effect["stun_attack"] = loadfx("vfx/iw7/core/zombie/vfx_zmb_geotrail_tesla_01.vfx");
-	level._effect["stun_shock"] = loadfx("vfx/iw7/core/zombie/vfx_zmb_shock_flash.vfx");
-	level._effect["weapon_glow"] = loadfx("vfx/iw7/_requests/coop/zmb_part_glow_green");
-	level._effect["weapon_pickup"] = loadfx("vfx/iw7/core/zombie/powerups/vfx_zom_powerup_pickup.vfx");
+	level._effect["alien_hive_explode"] = loadfx("vfx\core\expl\alien_hive_explosion");
+	level._effect["goon_spawn_bolt"] = loadfx("vfx\iw7\_requests\coop\vfx_clown_spawn.vfx");
+	level._effect["bloody_death"] = loadfx("vfx\core\base\vfx_tentacle_death_burst");
+	level._effect["stun_attack"] = loadfx("vfx\iw7\core\zombie\vfx_zmb_geotrail_tesla_01.vfx");
+	level._effect["stun_shock"] = loadfx("vfx\iw7\core\zombie\vfx_zmb_shock_flash.vfx");
+	level._effect["weapon_glow"] = loadfx("vfx\iw7\_requests\coop\zmb_part_glow_green");
+	level._effect["weapon_pickup"] = loadfx("vfx\iw7\core\zombie\powerups\vfx_zom_powerup_pickup.vfx");
 }
 
 parse_weapon_table() {
 	level.weapon_progression = [];
-	var_00 = "cp/escape_weapon_progression.csv";
+	var_00 = "cp\escape_weapon_progression.csv";
 	var_01 = 0;
 	for(;;) {
 		var_02 = randomintrange(1,3);
@@ -225,7 +225,7 @@ init_callback_func() {
 
 zombie_onstartgametype() {
 	scripts\cp\cp_persistence::register_eog_to_lb_playerdata_mapping();
-	scripts\cp\cp_analytics::start_game_type("mp/zombieMatchdata.ddl","mp/zombieclientmatchdata.ddl","cp/zombies/zombie_analytics.csv");
+	scripts\cp\cp_analytics::start_game_type("mp\zombieMatchdata.ddl","mp\zombieclientmatchdata.ddl","cp\zombies\zombie_analytics.csv");
 	scripts\cp\cp_laststand::set_revive_time(3000,5000);
 	scripts\cp\cp_persistence::rank_init();
 	level.damagelistsize = 20;
@@ -235,19 +235,19 @@ zombie_onstartgametype() {
 	}
 
 	if(scripts\cp\utility::coop_mode_has("pillage")) {
-		thread scripts/cp/zombies/zombies_pillage::pillage_init();
+		thread scripts\cp\zombies\zombies_pillage::pillage_init();
 	}
 
 	level thread handle_nondeterministic_entities();
 	level thread revive_players_between_waves_monitor();
-	level scripts\engine\utility::delaythread(0.2,::scripts/cp/zombies/zombie_entrances::init_zombie_entrances);
+	level scripts\engine\utility::delaythread(0.2,::scripts\cp\zombies\zombie_entrances::init_zombie_entrances);
 	level.xpscale = getdvarint("scr_aliens_xpscale");
 	level.xpscale = min(level.xpscale,4);
 	level.xpscale = max(level.xpscale,0);
-	level.gamemode_perk_callback_init_func = ::scripts/cp/zombies/zombies_perk_machines::register_zombie_perks;
-	scripts/cp/perks/perkmachines::init_zombie_perks_callback();
-	scripts/cp/perks/perkmachines::init_perks_from_table();
-	thread scripts/cp/zombies/zombies_consumables::init_consumables();
+	level.gamemode_perk_callback_init_func = ::scripts\cp\zombies\zombies_perk_machines::register_zombie_perks;
+	scripts\cp\perks\perkmachines::init_zombie_perks_callback();
+	scripts\cp\perks\perkmachines::init_perks_from_table();
+	thread scripts\cp\zombies\zombies_consumables::init_consumables();
 	scripts\cp\zombies\zombies_weapons::init();
 	level thread scripts\cp\cp_interaction::init();
 	scripts\cp\zombies\zombies_spawning::enemy_spawner_init();
@@ -447,7 +447,7 @@ escape_timer() {
 	setomnvar("zm_ui_timer",int(var_00));
 	while(gettime() < var_00) {
 		wait(1);
-		level.var_672E--;
+		level.escape_timer_time--;
 	}
 
 	level thread [[level.endgame]]("axis",level.end_game_string_index["kia"]);
@@ -457,7 +457,7 @@ zombie_onprecachegametype() {}
 
 zombie_onspawnplayer() {
 	onspawnplayer();
-	thread scripts/cp/zombies/zombies_vo::zombie_behind_vo();
+	thread scripts\cp\zombies\zombies_vo::zombie_behind_vo();
 }
 
 handle_nondeterministic_entities() {
@@ -480,7 +480,7 @@ onplayerconnect() {
 
 			var_00 thread scripts\cp\cp_outline::outline_monitor_think();
 			var_00 thread scripts\cp\cp_globallogic::player_init_health_regen();
-			var_00 scripts/cp/cp_gamescore::init_player_score();
+			var_00 scripts\cp\cp_gamescore::init_player_score();
 			var_00 scripts\cp\cp_persistence::session_stats_init();
 			if(!isdefined(var_00.pap)) {
 				var_00.pap = [];
@@ -498,7 +498,7 @@ onplayerconnect() {
 				var_00.powers_active = [];
 			}
 
-			var_00 scripts/cp/zombies/zombies_consumables::init_player_consumables();
+			var_00 scripts\cp\zombies\zombies_consumables::init_player_consumables();
 			var_00 thread zombie_player_connect_black_screen();
 			var_00.disabledteleportation = 0;
 			var_00.disabledinteractions = 0;
@@ -529,7 +529,7 @@ onplayerconnect() {
 				[[level.custom_onplayerconnect_func]](var_00);
 			}
 
-			var_00 thread scripts/cp/zombies/escape_multiplier_combos::score_multiplier_init(var_00);
+			var_00 thread scripts\cp\zombies\escape_multiplier_combos::score_multiplier_init(var_00);
 		}
 	}
 }
@@ -573,7 +573,7 @@ onspawnplayer() {
 	self.ignorme_count = 0;
 	self.ignoreme = 0;
 	self setclientomnvar("zm_ui_player_in_laststand",0);
-	thread scripts/cp/perks/perkfunctions::watchcombatspeedscaler();
+	thread scripts\cp\perks\perkfunctions::watchcombatspeedscaler();
 	if(isdefined(level.custom_onspawnplayer_func)) {
 		self [[level.custom_onspawnplayer_func]]();
 	}
@@ -690,8 +690,8 @@ revive_players_between_waves_monitor() {
 
 zombie_prespawnfromspectatorfunc(param_00) {
 	param_00.starting_currency_after_revived_from_spectator = param_00 scripts\cp\cp_persistence::get_player_currency();
-	scripts/cp/zombies/zombie_lost_and_found::save_items_to_lost_and_found(param_00);
-	param_00 scripts/cp/zombies/zombies_perk_machines::remove_perks_from_player();
+	scripts\cp\zombies\zombie_lost_and_found::save_items_to_lost_and_found(param_00);
+	param_00 scripts\cp\zombies\zombies_perk_machines::remove_perks_from_player();
 	revive_from_spectator_weapon_setup(param_00);
 	set_spawn_loc(param_00);
 	take_away_special_ammo(param_00);
@@ -702,7 +702,7 @@ revive_from_spectator_weapon_setup(param_00) {
 	param_00 scripts\cp\utility::clear_weapons_status();
 	var_01 = param_00.default_starting_pistol;
 	var_02 = weaponclipsize(var_01);
-	var_03 = function_0249(var_01);
+	var_03 = weaponmaxammo(var_01);
 	var_04 = [];
 	var_05 = [];
 	var_06 = [];
@@ -969,7 +969,7 @@ zombie_laststand_currency_penalth_amount(param_00) {
 
 zombie_callbackplayerkilled(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08,param_09) {
 	[[level.callbackplayerlaststand]](param_00,param_01,param_02,param_04,param_05,param_07,param_08,param_09);
-	scripts/cp/zombies/zombies_clientmatchdata::logplayerdeath();
+	scripts\cp\zombies\zombies_clientmatchdata::logplayerdeath();
 }
 
 dev_damage_show_damage_numbers() {
@@ -1049,7 +1049,7 @@ update_current_money_earned(param_00,param_01) {
 		scripts\engine\utility::flag_set("score goal reached");
 	}
 
-	scripts/cp/zombies/zombies_gamescore::update_money_earned_performance(param_00,param_01);
+	scripts\cp\zombies\zombies_gamescore::update_money_earned_performance(param_00,param_01);
 }
 
 wave_num_loop() {

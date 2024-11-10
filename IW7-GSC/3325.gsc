@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3325.gsc
-****************************/
+ * Script: 3325.gsc
+************************/
 
 func_96C9() {
 	var_00 = spawnstruct();
@@ -165,26 +165,26 @@ func_96C8() {
 
 func_F4E7() {
 	self.perk_data["medic"].revive_time_scalar = 1.5;
-	self.movespeedscaler = scripts/cp/perks/prestige::prestige_getmoveslowscalar();
+	self.movespeedscaler = scripts\cp\perks\prestige::prestige_getmoveslowscalar();
 	self.perk_data["medic"].var_BC6F = self.movespeedscaler;
 }
 
 func_12C2B() {
 	self.perk_data["medic"].revive_time_scalar = 1;
-	self.movespeedscaler = 1 * scripts/cp/perks/prestige::prestige_getmoveslowscalar();
+	self.movespeedscaler = 1 * scripts\cp\perks\prestige::prestige_getmoveslowscalar();
 	self.perk_data["medic"].var_BC6F = self.movespeedscaler;
 }
 
 func_F4E8() {
 	self.perk_data["medic"].revive_time_scalar = 1.5;
-	self.movespeedscaler = 1.06 * scripts/cp/perks/prestige::prestige_getmoveslowscalar();
+	self.movespeedscaler = 1.06 * scripts\cp\perks\prestige::prestige_getmoveslowscalar();
 	self.perk_data["medic"].var_BC6F = self.movespeedscaler;
 	self.perk_data["medic"].var_E496 = 0.75;
 }
 
 func_12C2C() {
 	self.perk_data["medic"].revive_time_scalar = 1;
-	self.movespeedscaler = 1 * scripts/cp/perks/prestige::prestige_getmoveslowscalar();
+	self.movespeedscaler = 1 * scripts\cp\perks\prestige::prestige_getmoveslowscalar();
 	self.perk_data["medic"].var_BC6F = self.movespeedscaler;
 	self.perk_data["medic"].var_E496 = 1;
 }
@@ -193,7 +193,7 @@ func_F4E9() {
 	scripts\cp\utility::giveperk("specialty_longersprint");
 	thread func_B526(65536);
 	self.perk_data["medic"].revive_time_scalar = 1.5;
-	self.movespeedscaler = 1.06 * scripts/cp/perks/prestige::prestige_getmoveslowscalar();
+	self.movespeedscaler = 1.06 * scripts\cp\perks\prestige::prestige_getmoveslowscalar();
 	self.perk_data["medic"].var_BC6F = self.movespeedscaler;
 	self.perk_data["medic"].var_E496 = 0.75;
 }
@@ -202,7 +202,7 @@ func_12C2D() {
 	scripts\cp\utility::_unsetperk("specialty_longersprint");
 	self notify("end_medic_health_regen");
 	self.perk_data["medic"].revive_time_scalar = 1;
-	self.movespeedscaler = 1 * scripts/cp/perks/prestige::prestige_getmoveslowscalar();
+	self.movespeedscaler = 1 * scripts\cp\perks\prestige::prestige_getmoveslowscalar();
 	self.perk_data["medic"].var_BC6F = self.movespeedscaler;
 	self.perk_data["medic"].var_E496 = 1;
 }
@@ -212,7 +212,7 @@ func_F4EA() {
 	scripts\cp\utility::giveperk("specialty_longersprint");
 	thread func_B526(65536);
 	self.perk_data["medic"].revive_time_scalar = 1.5;
-	self.movespeedscaler = 1.06 * scripts/cp/perks/prestige::prestige_getmoveslowscalar();
+	self.movespeedscaler = 1.06 * scripts\cp\perks\prestige::prestige_getmoveslowscalar();
 	self.perk_data["medic"].var_BC6F = self.movespeedscaler;
 	self.perk_data["medic"].var_E496 = 0.75;
 }
@@ -222,7 +222,7 @@ func_12C2E() {
 	scripts\cp\utility::_unsetperk("specialty_longersprint");
 	self notify("end_medic_health_regen");
 	self.perk_data["medic"].revive_time_scalar = 1;
-	self.movespeedscaler = 1 * scripts/cp/perks/prestige::prestige_getmoveslowscalar();
+	self.movespeedscaler = 1 * scripts\cp\perks\prestige::prestige_getmoveslowscalar();
 	self.perk_data["medic"].var_BC6F = self.movespeedscaler;
 	self.perk_data["medic"].var_E496 = 1;
 }
@@ -231,7 +231,7 @@ func_F4EB() {
 	self.perk_data["medic"].revive_time_scalar = 1.5;
 	self.perk_data["medic"].var_76AC = 0;
 	thread func_B526(0);
-	self.movespeedscaler = 1.12 * scripts/cp/perks/prestige::prestige_getmoveslowscalar();
+	self.movespeedscaler = 1.12 * scripts\cp\perks\prestige::prestige_getmoveslowscalar();
 	self.perk_data["medic"].var_BC6F = self.movespeedscaler;
 	scripts\cp\utility::giveperk("specialty_longersprint");
 	scripts\cp\utility::giveperk("specialty_fastsprintrecovery");
@@ -244,7 +244,7 @@ func_12C2F() {
 	self.perk_data["medic"].revive_time_scalar = 1;
 	self.perk_data["medic"].var_76AC = 1;
 	self notify("end_medic_health_regen");
-	self.movespeedscaler = 1 * scripts/cp/perks/prestige::prestige_getmoveslowscalar();
+	self.movespeedscaler = 1 * scripts\cp\perks\prestige::prestige_getmoveslowscalar();
 	self.perk_data["medic"].var_BC6F = self.movespeedscaler;
 	scripts\cp\utility::_unsetperk("specialty_longersprint");
 	scripts\cp\utility::_unsetperk("specialty_fastsprintrecovery");
@@ -357,7 +357,7 @@ func_F514() {
 	self.perk_data["rigger"].var_1269D = 0.8;
 	self.perk_data["rigger"].var_1269F = 1.5;
 	self.perk_data["rigger"].var_1269E = 2;
-	self [[level.var_F480]](8000 * scripts/cp/perks/prestige::prestige_getwalletsizescalar());
+	self [[level.var_F480]](8000 * scripts\cp\perks\prestige::prestige_getwalletsizescalar());
 	self.perk_data["rigger"].var_E18F = 0.75;
 }
 
@@ -368,7 +368,7 @@ func_12C58() {
 	self.perk_data["rigger"].var_1269F = 1;
 	self.perk_data["rigger"].var_1269E = 1;
 	self.perk_data["rigger"].var_4B35 = 1;
-	self [[level.var_F480]](6000 * scripts/cp/perks/prestige::prestige_getwalletsizescalar());
+	self [[level.var_F480]](6000 * scripts\cp\perks\prestige::prestige_getwalletsizescalar());
 	self.perk_data["rigger"].var_E18F = 1;
 }
 
@@ -505,7 +505,7 @@ func_DE49() {
 	for(;;) {
 		var_01 = self getrunningforwardpainanim("aliensemtex_mp");
 		if(var_01 == 0) {
-			for(var_02 = 1;var_02 <= scripts/cp/perks/perk_utility::perk_getoffhandcount();var_02++) {
+			for(var_02 = 1;var_02 <= scripts\cp\perks\perk_utility::perk_getoffhandcount();var_02++) {
 				self _meth_831C("other");
 				scripts\cp\utility::filloffhandweapons("aliensemtex_mp",1);
 				wait(var_00);
@@ -533,7 +533,7 @@ func_F4D8() {
 func_12C1C() {
 	scripts\cp\utility::_unsetperk("specialty_marathon");
 	scripts\cp\utility::_unsetperk("specialty_fastsprintrecovery");
-	self.movespeedscaler = 1 * scripts/cp/perks/prestige::prestige_getmoveslowscalar();
+	self.movespeedscaler = 1 * scripts\cp\perks\prestige::prestige_getmoveslowscalar();
 	self.perk_data["gunslinger"].var_8723 = self.movespeedscaler;
 	scripts\cp\utility::_unsetperk("specialty_fastreload");
 	self setaimspreadmovementscale(1);
@@ -543,7 +543,7 @@ func_12C1C() {
 func_F4D9() {
 	scripts\cp\utility::giveperk("specialty_marathon");
 	scripts\cp\utility::giveperk("specialty_fastsprintrecovery");
-	self.movespeedscaler = 1.1 * scripts/cp/perks/prestige::prestige_getmoveslowscalar();
+	self.movespeedscaler = 1.1 * scripts\cp\perks\prestige::prestige_getmoveslowscalar();
 	self.perk_data["gunslinger"].var_8723 = self.movespeedscaler;
 	scripts\cp\utility::giveperk("specialty_fastreload");
 	self setaimspreadmovementscale(0.5);
@@ -553,7 +553,7 @@ func_F4D9() {
 func_12C1D() {
 	scripts\cp\utility::_unsetperk("specialty_marathon");
 	scripts\cp\utility::_unsetperk("specialty_fastsprintrecovery");
-	self.movespeedscaler = 1 * scripts/cp/perks/prestige::prestige_getmoveslowscalar();
+	self.movespeedscaler = 1 * scripts\cp\perks\prestige::prestige_getmoveslowscalar();
 	self.perk_data["gunslinger"].var_8723 = self.movespeedscaler;
 	scripts\cp\utility::_unsetperk("specialty_fastreload");
 	self setaimspreadmovementscale(1);
@@ -563,7 +563,7 @@ func_12C1D() {
 func_F4DA() {
 	scripts\cp\utility::giveperk("specialty_marathon");
 	scripts\cp\utility::giveperk("specialty_fastsprintrecovery");
-	self.movespeedscaler = 1.15 * scripts/cp/perks/prestige::prestige_getmoveslowscalar();
+	self.movespeedscaler = 1.15 * scripts\cp\perks\prestige::prestige_getmoveslowscalar();
 	self.perk_data["gunslinger"].var_8723 = self.movespeedscaler;
 	scripts\cp\utility::giveperk("specialty_fastreload");
 	self setaimspreadmovementscale(0.5);
@@ -573,7 +573,7 @@ func_F4DA() {
 func_12C1E() {
 	scripts\cp\utility::_unsetperk("specialty_marathon");
 	scripts\cp\utility::_unsetperk("specialty_fastsprintrecovery");
-	self.movespeedscaler = 1 * scripts/cp/perks/prestige::prestige_getmoveslowscalar();
+	self.movespeedscaler = 1 * scripts\cp\perks\prestige::prestige_getmoveslowscalar();
 	self.perk_data["gunslinger"].var_8723 = self.movespeedscaler;
 	scripts\cp\utility::_unsetperk("specialty_fastreload");
 	self setaimspreadmovementscale(1);
@@ -583,7 +583,7 @@ func_12C1E() {
 func_F4DB() {
 	scripts\cp\utility::giveperk("specialty_marathon");
 	scripts\cp\utility::giveperk("specialty_fastsprintrecovery");
-	self.movespeedscaler = 1.2 * scripts/cp/perks/prestige::prestige_getmoveslowscalar();
+	self.movespeedscaler = 1.2 * scripts\cp\perks\prestige::prestige_getmoveslowscalar();
 	self.perk_data["gunslinger"].var_8723 = self.movespeedscaler;
 	scripts\cp\utility::giveperk("specialty_fastreload");
 	self setaimspreadmovementscale(0.5);
@@ -593,7 +593,7 @@ func_F4DB() {
 func_12C1F() {
 	scripts\cp\utility::_unsetperk("specialty_marathon");
 	scripts\cp\utility::_unsetperk("specialty_fastsprintrecovery");
-	self.movespeedscaler = 1 * scripts/cp/perks/prestige::prestige_getmoveslowscalar();
+	self.movespeedscaler = 1 * scripts\cp\perks\prestige::prestige_getmoveslowscalar();
 	self.perk_data["gunslinger"].var_8723 = self.movespeedscaler;
 	scripts\cp\utility::_unsetperk("specialty_fastreload");
 	self setaimspreadmovementscale(1);
@@ -603,7 +603,7 @@ func_12C1F() {
 func_F4DC() {
 	scripts\cp\utility::giveperk("specialty_marathon");
 	scripts\cp\utility::giveperk("specialty_fastsprintrecovery");
-	self.movespeedscaler = 1.25 * scripts/cp/perks/prestige::prestige_getmoveslowscalar();
+	self.movespeedscaler = 1.25 * scripts\cp\perks\prestige::prestige_getmoveslowscalar();
 	self.perk_data["gunslinger"].var_8723 = self.movespeedscaler;
 	scripts\cp\utility::giveperk("specialty_fastreload");
 	self setaimspreadmovementscale(0);
@@ -613,7 +613,7 @@ func_F4DC() {
 func_12C20() {
 	scripts\cp\utility::_unsetperk("specialty_marathon");
 	scripts\cp\utility::_unsetperk("specialty_fastsprintrecovery");
-	self.movespeedscaler = 1 * scripts/cp/perks/prestige::prestige_getmoveslowscalar();
+	self.movespeedscaler = 1 * scripts\cp\perks\prestige::prestige_getmoveslowscalar();
 	self.perk_data["gunslinger"].var_8723 = self.movespeedscaler;
 	scripts\cp\utility::_unsetperk("specialty_fastreload");
 	self setaimspreadmovementscale(1);
@@ -621,7 +621,7 @@ func_12C20() {
 }
 
 setbattleslide() {
-	level.var_28C9 = loadfx("vfx/core/mp/core/vfx_battle_slide_camera");
+	level.var_28C9 = loadfx("vfx\core\mp\core\vfx_battle_slide_camera");
 	thread func_28EC();
 }
 
@@ -867,43 +867,43 @@ func_96C3() {
 }
 
 func_F4E2() {
-	self.movespeedscaler = 1.1 * scripts/cp/perks/prestige::prestige_getmoveslowscalar();
+	self.movespeedscaler = 1.1 * scripts\cp\perks\prestige::prestige_getmoveslowscalar();
 }
 
 func_12C26() {
-	self.movespeedscaler = 1 * scripts/cp/perks/prestige::prestige_getmoveslowscalar();
+	self.movespeedscaler = 1 * scripts\cp\perks\prestige::prestige_getmoveslowscalar();
 }
 
 func_F4E3() {
-	self.movespeedscaler = 1.1 * scripts/cp/perks/prestige::prestige_getmoveslowscalar();
+	self.movespeedscaler = 1.1 * scripts\cp\perks\prestige::prestige_getmoveslowscalar();
 }
 
 func_12C27() {
-	self.movespeedscaler = 1 * scripts/cp/perks/prestige::prestige_getmoveslowscalar();
+	self.movespeedscaler = 1 * scripts\cp\perks\prestige::prestige_getmoveslowscalar();
 }
 
 func_F4E4() {
-	self.movespeedscaler = 1.15 * scripts/cp/perks/prestige::prestige_getmoveslowscalar();
+	self.movespeedscaler = 1.15 * scripts\cp\perks\prestige::prestige_getmoveslowscalar();
 }
 
 func_12C28() {
-	self.movespeedscaler = 1 * scripts/cp/perks/prestige::prestige_getmoveslowscalar();
+	self.movespeedscaler = 1 * scripts\cp\perks\prestige::prestige_getmoveslowscalar();
 }
 
 func_F4E5() {
-	self.movespeedscaler = 1.2 * scripts/cp/perks/prestige::prestige_getmoveslowscalar();
+	self.movespeedscaler = 1.2 * scripts\cp\perks\prestige::prestige_getmoveslowscalar();
 }
 
 func_12C29() {
-	self.movespeedscaler = 1 * scripts/cp/perks/prestige::prestige_getmoveslowscalar();
+	self.movespeedscaler = 1 * scripts\cp\perks\prestige::prestige_getmoveslowscalar();
 }
 
 func_F4E6() {
-	self.movespeedscaler = 1.25 * scripts/cp/perks/prestige::prestige_getmoveslowscalar();
+	self.movespeedscaler = 1.25 * scripts\cp\perks\prestige::prestige_getmoveslowscalar();
 }
 
 func_12C2A() {
-	self.movespeedscaler = 1 * scripts/cp/perks/prestige::prestige_getmoveslowscalar();
+	self.movespeedscaler = 1 * scripts\cp\perks\prestige::prestige_getmoveslowscalar();
 }
 
 func_5AD3() {
@@ -1179,7 +1179,7 @@ func_13A29() {
 }
 
 has_fragile_relic_and_is_sprinting() {
-	if(scripts/cp/perks/prestige::prestige_getslowhealthregenscalar() != 1 && self issprinting()) {
+	if(scripts\cp\perks\prestige::prestige_getslowhealthregenscalar() != 1 && self issprinting()) {
 		return 1;
 	}
 

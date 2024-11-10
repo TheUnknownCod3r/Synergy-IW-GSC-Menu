@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\2958.gsc
-****************************/
+ * Script: 2958.gsc
+************************/
 
 func_977D() {
 	if(!scripts\engine\utility::add_init_script("player_thermal",::func_977D)) {
@@ -15,7 +15,7 @@ func_977D() {
 
 watchweaponchange() {
 	if(!isdefined(level.var_73F8)) {
-		level.var_73F8 = loadfx("vfx/core/equipment/thermal_tapereflect_inverted.vfx");
+		level.var_73F8 = loadfx("vfx\core\equipment\thermal_tapereflect_inverted.vfx");
 	}
 
 	self endon("death");

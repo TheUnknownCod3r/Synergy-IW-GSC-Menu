@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2902.gsc
+ * Script: 2902.gsc
 ***************************************/
 
 func_BE57(var_00, var_01, var_02) {
@@ -127,14 +127,14 @@ func_194A(var_00, var_01, var_02, var_03, var_04, var_05, var_06) {
 
   if (isdefined(var_05)) {
   self thread [[var_01]](var_02, var_05);
-  scripts\engine\utility::delaythread(var_05, scripts/sp/utility::func_77B9, 0.7);
+  scripts\engine\utility::delaythread(var_05, scripts\sp\utility::func_77B9, 0.7);
   }
   else
   self thread [[var_01]](var_02);
   }
 
   self waittill("gesture_dialog_finished");
-  scripts/sp/utility::func_77B9(var_04);
+  scripts\sp\utility::func_77B9(var_04);
 }
 
 func_1961(var_00, var_01, var_02, var_03) {
@@ -150,7 +150,7 @@ func_1961(var_00, var_01, var_02, var_03) {
 
 func_1949(var_00) {
   self endon("death");
-  scripts/sp/utility::func_10347(var_00);
+  scripts\sp\utility::func_10347(var_00);
   self notify("gesture_dialog_finished");
 }
 
@@ -177,5 +177,5 @@ func_195C(var_00, var_01, var_02, var_03, var_04) {
 
 func_10348(var_00, var_01) {
   if (!scripts\engine\utility::flag(var_01))
-  scripts/sp/utility::func_10347(var_00);
+  scripts\sp\utility::func_10347(var_00);
 }

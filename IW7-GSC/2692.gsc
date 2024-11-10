@@ -1,12 +1,12 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2692.gsc
+ * Script: 2692.gsc
 ***************************************/
 
 func_18A0() {
-  level._effect["adrenaline_mist_friendly"] = loadfx("vfx/core/mp/equipment/vfx_adrenaline_device_mist_friend");
-  level._effect["adrenaline_mist_enemy"] = loadfx("vfx/core/mp/equipment/vfx_adrenaline_device_mist_enemy");
-  level._effect["adrenaline_mist_screen"] = loadfx("vfx/iw7/_requests/mp/vfx_adreno_fp_scrn");
+  level._effect["adrenaline_mist_friendly"] = loadfx("vfx\core\mp\equipment\vfx_adrenaline_device_mist_friend");
+  level._effect["adrenaline_mist_enemy"] = loadfx("vfx\core\mp\equipment\vfx_adrenaline_device_mist_enemy");
+  level._effect["adrenaline_mist_screen"] = loadfx("vfx\iw7\_requests\mp\vfx_adreno_fp_scrn");
 }
 
 func_18A5(var_00) {

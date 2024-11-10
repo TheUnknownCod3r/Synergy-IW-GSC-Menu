@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3864.gsc
-****************************/
+ * Script: 3864.gsc
+************************/
 
 func_956A() {
 	level._meth_83D2 = [];

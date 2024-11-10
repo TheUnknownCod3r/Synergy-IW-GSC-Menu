@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\3003.gsc
+ * Script: 3003.gsc
 ***************************************/
 
 func_D623(var_00) {
@@ -12,11 +12,11 @@ func_D623(var_00) {
 }
 
 func_75E7() {
-  level._effect["drop_pod_thruster"] = loadfx("vfx/iw7/core/vehicle/droppod/veh_drop_pod_thruster.vfx");
-  level._effect["drop_pod_trail"] = loadfx("vfx/iw7/core/vehicle/droppod/veh_drop_pod_trail.vfx");
-  level._effect["drop_pod_impact"] = loadfx("vfx/iw7/core/vehicle/droppod/veh_drop_pod_impact.vfx");
-  level._effect["pod_door_close"] = loadfx("vfx/iw7/core/vehicle/droppod/veh_drop_pod_door_close.vfx");
-  level._effect["pod_door_move"] = loadfx("vfx/iw7/core/vehicle/droppod/veh_drop_pod_door_move.vfx");
+  level._effect["drop_pod_thruster"] = loadfx("vfx\iw7\core\vehicle\droppod\veh_drop_pod_thruster.vfx");
+  level._effect["drop_pod_trail"] = loadfx("vfx\iw7\core\vehicle\droppod\veh_drop_pod_trail.vfx");
+  level._effect["drop_pod_impact"] = loadfx("vfx\iw7\core\vehicle\droppod\veh_drop_pod_impact.vfx");
+  level._effect["pod_door_close"] = loadfx("vfx\iw7\core\vehicle\droppod\veh_drop_pod_door_close.vfx");
+  level._effect["pod_door_move"] = loadfx("vfx\iw7\core\vehicle\droppod\veh_drop_pod_door_move.vfx");
 }
 
 func_1F2B() {
@@ -45,7 +45,7 @@ func_D629() {
   self.func_BFEB = 1;
 
   self motionblurhqenable();
-  scripts/sp/vehicle::playgestureviewmodel();
+  scripts\sp\vehicle::playgestureviewmodel();
   thread func_5D49();
   self.func_4D94 = spawnstruct();
   waittillframeend;
@@ -61,7 +61,7 @@ func_D629() {
 
   if (isdefined(self.script_delay)) {
   self hide();
-  scripts/sp/utility::script_delay();
+  scripts\sp\utility::script_delay();
   self show();
   }
 
@@ -95,13 +95,13 @@ func_5D49() {
   var_00 = self.func_E4FB;
 
   foreach (var_02 in var_00)
-  var_02 scripts/sp/utility::func_B14F();
+  var_02 scripts\sp\utility::func_B14F();
 
   self waittill("landed");
-  var_00 = scripts/sp/utility::func_22B9(var_00);
+  var_00 = scripts\sp\utility::func_22B9(var_00);
 
   foreach (var_02 in var_00)
-  var_02 scripts/sp/utility::func_1101B();
+  var_02 scripts\sp\utility::func_1101B();
 }
 
 func_FA1E() {
@@ -111,12 +111,12 @@ func_FA1E() {
   var_00 = [];
 
   for (var_01 = 0; var_01 < 4; var_1++) {
-  var_0[var_01] = scripts/sp/utility::func_10639("droppod_arm");
+  var_0[var_01] = scripts\sp\utility::func_10639("droppod_arm");
   var_0[var_01].func_1FBB = "droppod_arm_" + var_01;
   }
 
   self.func_226D = var_00;
-  scripts/sp/anim::func_1EC1(self.func_226D, "pod_exit");
+  scripts\sp\anim::func_1EC1(self.func_226D, "pod_exit");
 
   foreach (var_03 in self.func_226D)
   var_03 linkto(self);
@@ -186,12 +186,12 @@ func_5FF0() {
   var_00 = self.func_1186F;
 
   foreach (var_02 in self.func_4D94.func_75C6)
-  thread scripts/sp/utility::func_75C4(var_00, var_02);
+  thread scripts\sp\utility::func_75C4(var_00, var_02);
 
   scripts\engine\utility::waittill_any("landed", "death");
 
   foreach (var_02 in self.func_4D94.func_75C6)
-  thread scripts/sp/utility::func_75F8(var_00, var_02);
+  thread scripts\sp\utility::func_75F8(var_00, var_02);
 }
 
 func_D60C() {
@@ -230,9 +230,9 @@ func_D62B() {
   self waittill(self.func_10819);
 
   if (isdefined(self.func_226D))
-  thread scripts/sp/anim::func_1F2C(self.func_226D, "pod_exit");
+  thread scripts\sp\anim::func_1F2C(self.func_226D, "pod_exit");
 
-  thread scripts/sp/vehicle::func_13253();
+  thread scripts\sp\vehicle::func_13253();
 }
 
 func_D60B(var_00) {
@@ -257,7 +257,7 @@ func_D60B(var_00) {
 
 func_514A() {
   if (isdefined(self.func_226D))
-  scripts/sp/utility::func_228A(self.func_226D);
+  scripts\sp\utility::func_228A(self.func_226D);
 
   self delete();
 }
@@ -278,17 +278,17 @@ func_1F82() {
   self hide();
   var_00 = self.script_animation;
   self.func_1FBB = "droppod";
-  self.func_4D94.droptime = getanimlength(scripts/sp/utility::func_7DC1(var_00));
+  self.func_4D94.droptime = getanimlength(scripts\sp\utility::func_7DC1(var_00));
   var_01 = self;
 
   if (isdefined(self.func_1FBE))
   var_01 = self.func_1FBE;
 
   thread func_C12A();
-  var_01 scripts/sp/anim::func_1EC3(self, var_00);
+  var_01 scripts\sp\anim::func_1EC3(self, var_00);
   self show();
   self notify("dropping");
-  var_01 scripts/sp/anim::func_1F35(self, var_00);
+  var_01 scripts\sp\anim::func_1F35(self, var_00);
 }
 
 func_C12A(var_00) {
@@ -305,7 +305,7 @@ func_BC59() {
   self.func_4D94.func_A843 = self.origin;
   self.func_4D94.func_5EF2 = (0, 0, 1);
   var_00 = self.angles;
-  var_01 = scripts/sp/utility::func_7A96();
+  var_01 = scripts\sp\utility::func_7A96();
 
   if (isdefined(var_01)) {
   if (isdefined(var_1.script_noteworthy) && var_1.script_noteworthy == "drop_angle") {
@@ -324,7 +324,7 @@ func_BC59() {
 }
 
 func_2477() {
-  self.func_4D94.doors = scripts/sp/utility::func_10639("droppod_door");
-  scripts/sp/anim::func_1EC3(self.func_4D94.doors, "door_pop");
+  self.func_4D94.doors = scripts\sp\utility::func_10639("droppod_door");
+  scripts\sp\anim::func_1EC3(self.func_4D94.doors, "door_pop");
   self.func_4D94.doors linkto(self);
 }

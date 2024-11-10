@@ -1,8 +1,8 @@
-/*****************************************************************
+/*********************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\zombies\zombies_mini_ufo_quest.gsc
-*****************************************************************/
+ * Script: scripts\cp\zombies\zombies_mini_ufo_quest.gsc
+*********************************************************/
 
 init() {
 	level.active_mini_ufo_trap = [];

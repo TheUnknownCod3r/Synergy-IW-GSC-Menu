@@ -1,8 +1,8 @@
-/**********************************************
+/**************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\code\character.gsc
-**********************************************/
+ * Script: scripts\code\character.gsc
+**************************************/
 
 setmodelfromarray(param_00) {
 	self setmodel(param_00[randomint(param_00.size)]);

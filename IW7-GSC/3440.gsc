@@ -1,13 +1,13 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3440.gsc
-****************************/
+ * Script: 3440.gsc
+************************/
 
 func_97D0() {
 	level.var_37D3 = [];
-	level._effect["marked_target"] = loadfx("vfx/iw7/_requests/mp/vfx_marked_target");
-	level._effect["wall_lock_engaged"] = loadfx("vfx/iw7/_requests/mp/vfx_sonic_sensor_pulse");
+	level._effect["marked_target"] = loadfx("vfx\iw7\_requests\mp\vfx_marked_target");
+	level._effect["wall_lock_engaged"] = loadfx("vfx\iw7\_requests\mp\vfx_sonic_sensor_pulse");
 }
 
 applyarchetype() {}
@@ -22,7 +22,7 @@ func_E89D() {
 	self endon("removeArchetype");
 	for(;;) {
 		self waittill("victim_damaged",var_00,var_01);
-		if(var_00 scripts\mp\_utility::_hasperk("specialty_coldblooded") || var_00 scripts\mp\_utility::_hasperk("specialty_empimmune")) {
+		if(var_00 scripts\mp\utility::_hasperk("specialty_coldblooded") || var_00 scripts\mp\utility::_hasperk("specialty_empimmune")) {
 			continue;
 		}
 
@@ -33,8 +33,8 @@ func_E89D() {
 
 func_10222(param_00) {
 	param_00 endon("disconnect");
-	var_01 = scripts\mp\_utility::outlineenableforplayer(param_00,"red",self,0,0,"level_script");
-	param_00 scripts\mp\_hud_message::showmiscmessage("spotted");
+	var_01 = scripts\mp\utility::outlineenableforplayer(param_00,"red",self,0,0,"level_script");
+	param_00 scripts\mp\hud_message::showmiscmessage("spotted");
 	thread func_13AA0(var_01,param_00,2);
 	wait(2);
 }
@@ -74,7 +74,7 @@ func_37D4() {
 	thread func_37DF();
 	thread func_37E3();
 	thread func_37DE();
-	if(scripts\mp\_utility::_hasperk("specialty_camo_elite")) {
+	if(scripts\mp\utility::_hasperk("specialty_camo_elite")) {
 		self.var_37D2 = "mp_fullbody_synaptic_1";
 	}
 	else
@@ -107,7 +107,7 @@ func_37D5() {
 	self endon("removeArchetype");
 	thread func_37DF();
 	thread func_37E3();
-	if(scripts\mp\_utility::_hasperk("specialty_camo_elite")) {
+	if(scripts\mp\utility::_hasperk("specialty_camo_elite")) {
 		self.var_37D2 = "mp_fullbody_synaptic_1";
 	}
 	else
@@ -155,7 +155,7 @@ func_37E4() {
 	level endon("game_ended");
 	for(;;) {
 		self waittill("weapon_change");
-		if(self.var_9E3F && scripts\mp\_utility::getweapongroup(self getcurrentweapon()) == "weapon_sniper") {
+		if(self.var_9E3F && scripts\mp\utility::getweapongroup(self getcurrentweapon()) == "weapon_sniper") {
 			self notify("camo_off");
 		}
 	}
@@ -227,8 +227,8 @@ func_37DA() {
 		self setmodel(self.var_37D2);
 		func_20CE();
 		self playlocalsound("ghost_wall_camo_on");
-		scripts\mp\_utility::giveperk("specialty_blindeye");
-		scripts\mp\_utility::giveperk("specialty_noscopeoutline");
+		scripts\mp\utility::giveperk("specialty_blindeye");
+		scripts\mp\utility::giveperk("specialty_noscopeoutline");
 		self notify("camo_on");
 	}
 }
@@ -239,8 +239,8 @@ func_37D9() {
 		self setmodel(self.var_C3E6);
 		func_E12D();
 		self playlocalsound("ghost_wall_camo_off");
-		scripts\mp\_utility::removeperk("specialty_blindeye");
-		scripts\mp\_utility::removeperk("specialty_noscopeoutline");
+		scripts\mp\utility::removeperk("specialty_blindeye");
+		scripts\mp\utility::removeperk("specialty_noscopeoutline");
 	}
 }
 
@@ -327,7 +327,7 @@ func_68D7() {
 	var_00 = scripts\engine\utility::spawn_tag_origin();
 	self setscriptablepartstate("perch","active",0);
 	self playerlinkto(var_00);
-	thread func_49EE(var_00.origin,scripts\mp\_utility::getotherteam(self.team));
+	thread func_49EE(var_00.origin,scripts\mp\utility::getotherteam(self.team));
 	thread managetimeout(var_00);
 }
 
@@ -380,7 +380,7 @@ func_E12D() {
 }
 
 func_49EE(param_00,param_01) {
-	if(!isdefined(self) || !scripts\mp\_utility::isreallyalive(self)) {
+	if(!isdefined(self) || !scripts\mp\utility::isreallyalive(self)) {
 		return;
 	}
 
@@ -504,7 +504,7 @@ playflyoveraudioline(param_00) {
 
 	param_00 show();
 	wait(0.1);
-	scripts\mp\_utility::func_D486(self,param_00,"tag_origin",self.team,scripts\engine\utility::getfx("heavyThrustFr"),scripts\engine\utility::getfx("heavyThrustEn"),undefined,undefined,[self]);
+	scripts\mp\utility::func_D486(self,param_00,"tag_origin",self.team,scripts\engine\utility::getfx("heavyThrustFr"),scripts\engine\utility::getfx("heavyThrustEn"),undefined,undefined,[self]);
 }
 
 func_10358() {
@@ -677,7 +677,7 @@ marktarget_run(param_00,param_01) {
 	self endon("death");
 	self endon("disconnect");
 	level endon("game_ended");
-	if(scripts\engine\utility::isbulletdamage(param_01) && isplayer(param_00) && param_00.team != self.team && !param_00 scripts\mp\_utility::_hasperk("specialty_coldblooded") || param_00 scripts\mp\_utility::_hasperk("specialty_empimmune") && !isdefined(param_00.ismarkedtarget)) {
+	if(scripts\engine\utility::isbulletdamage(param_01) && isplayer(param_00) && param_00.team != self.team && !param_00 scripts\mp\utility::_hasperk("specialty_coldblooded") || param_00 scripts\mp\utility::_hasperk("specialty_empimmune") && !isdefined(param_00.ismarkedtarget)) {
 		thread marktarget_execute(param_00);
 	}
 }
@@ -712,7 +712,7 @@ func_13AA0(param_00,param_01,param_02) {
 	level endon("game_ended");
 	scripts\engine\utility::waittill_any_timeout_no_endon_death_2(param_02,"leave");
 	if(isdefined(param_01)) {
-		scripts\mp\_utility::outlinedisable(param_00,param_01);
+		scripts\mp\utility::outlinedisable(param_00,param_01);
 	}
 }
 
@@ -721,14 +721,14 @@ runequipmentping(param_00) {
 	self endon("disconnect");
 	var_01 = self.triggerportableradarping;
 	var_02 = level.uavsettings["uav_3dping"];
-	if(var_01 scripts\mp\_utility::_hasperk("specialty_equipment_ping")) {
+	if(var_01 scripts\mp\utility::_hasperk("specialty_equipment_ping")) {
 		for(;;) {
 			foreach(var_04 in level.players) {
-				if(!var_01 scripts\mp\_utility::isenemy(var_04)) {
+				if(!var_01 scripts\mp\utility::isenemy(var_04)) {
 					continue;
 				}
 
-				if(var_04 scripts\mp\_utility::_hasperk("specialty_engineer") || var_04 scripts\mp\_utility::_hasperk("specialty_noscopeoutline")) {
+				if(var_04 scripts\mp\utility::_hasperk("specialty_engineer") || var_04 scripts\mp\utility::_hasperk("specialty_noscopeoutline")) {
 					continue;
 				}
 
@@ -744,8 +744,8 @@ runequipmentping(param_00) {
 				if(distance2d(var_04.origin,self.origin) < 300 && scripts\common\trace::ray_trace_passed(self.origin,var_04 gettagorigin("j_head"),var_05)) {
 					playfxontagforclients(var_02.var_7636,self,"tag_origin",var_01);
 					playsoundatpos(self.origin + (0,0,5),var_02.var_10469);
-					var_04 scripts\mp\_hud_message::showmiscmessage("spotted");
-					var_01 scripts\mp\_damagefeedback::hudicontype("eqp_ping");
+					var_04 scripts\mp\hud_message::showmiscmessage("spotted");
+					var_01 scripts\mp\damagefeedback::hudicontype("eqp_ping");
 					var_01 thread markdangerzoneonminimap(var_04,self);
 					wait(3);
 				}
@@ -763,7 +763,7 @@ func_1B45() {
 markdangerzoneonminimap(param_00,param_01) {
 	param_00 endon("death");
 	param_00 endon("disconnect");
-	if(!isdefined(self) || !scripts\mp\_utility::isreallyalive(self)) {
+	if(!isdefined(self) || !scripts\mp\utility::isreallyalive(self)) {
 		return;
 	}
 
@@ -786,8 +786,8 @@ watchfordeath(param_00) {
 
 func_C7A6(param_00) {
 	param_00 endon("disconnect");
-	var_01 = scripts\mp\_utility::outlineenableforplayer(param_00,"orange",self,0,0,"level_script");
-	param_00 scripts\mp\_hud_message::showmiscmessage("spotted");
+	var_01 = scripts\mp\utility::outlineenableforplayer(param_00,"orange",self,0,0,"level_script");
+	param_00 scripts\mp\hud_message::showmiscmessage("spotted");
 	param_00.var_C78B = 1;
 	func_13AA0(var_01,param_00,0.35);
 	wait(3);
@@ -798,14 +798,14 @@ func_E7FE() {
 	self endon("death");
 	self endon("disconnect");
 	for(;;) {
-		if(self getstance() == "prone" && scripts\mp\_utility::_hasperk("specialty_improved_prone")) {
+		if(self getstance() == "prone" && scripts\mp\utility::_hasperk("specialty_improved_prone")) {
 			wait(0.2);
 			var_00 = self.movespeedscaler;
 			self.movespeedscaler = 3;
-			scripts\mp\_weapons::updatemovespeedscale();
+			scripts\mp\weapons::updatemovespeedscale();
 			func_BA22();
 			self.movespeedscaler = var_00;
-			scripts\mp\_weapons::updatemovespeedscale();
+			scripts\mp\weapons::updatemovespeedscale();
 		}
 
 		scripts\engine\utility::waitframe();

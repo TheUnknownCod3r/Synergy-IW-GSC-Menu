@@ -1,8 +1,8 @@
-/**********************************************************************
+/**************************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\agents\crab_boss\crab_boss_tunedata.gsc
-**********************************************************************/
+ * Script: scripts\mp\agents\crab_boss\crab_boss_tunedata.gsc
+**************************************************************/
 
 setuptunedata() {
 	if(!isdefined(level.agenttunedata)) {

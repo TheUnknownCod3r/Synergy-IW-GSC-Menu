@@ -1,14 +1,14 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3140.gsc
-****************************/
+ * Script: 3140.gsc
+************************/
 
 func_35BF(param_00,param_01,param_02,param_03) {
 	self endon(param_01 + "_finished");
 	self.melee.var_312F = 1;
 	var_04 = "far";
-	var_05 = scripts/asm/asm_bb::bb_getmeleetarget();
+	var_05 = scripts\asm\asm_bb::bb_getmeleetarget();
 	if(isdefined(var_05)) {
 		var_06 = var_05.origin - self.origin;
 		if(lengthsquared(var_06) < 7744) {
@@ -22,9 +22,9 @@ func_35BF(param_00,param_01,param_02,param_03) {
 	var_08 = 0.8;
 	self aiclearanim(lib_0A1E::asm_getbodyknob(),param_02);
 	self _meth_82EA(param_01,var_07,1,param_02,var_08);
-	scripts/asm/asm::asm_fireephemeralevent("melee_attack","begin");
+	scripts\asm\asm::asm_fireephemeralevent("melee_attack","begin");
 	thread _meth_8482(param_01);
-	lib_0A1E::func_231F(param_00,param_01,scripts/asm/asm::func_2341(param_00,param_01));
+	lib_0A1E::func_231F(param_00,param_01,scripts\asm\asm::func_2341(param_00,param_01));
 }
 
 func_35C0(param_00,param_01,param_02) {
@@ -45,11 +45,11 @@ func_35C3(param_00,param_01,param_02,param_03) {
 	var_04 = lib_0A1E::asm_getallanimsforstate(param_00,param_01);
 	self aiclearanim(lib_0A1E::asm_getbodyknob(),param_02);
 	self _meth_82EA(param_01,var_04,1,param_02,0.5);
-	lib_0A1E::func_231F(param_00,param_01,scripts/asm/asm::func_2341(param_00,param_01));
+	lib_0A1E::func_231F(param_00,param_01,scripts\asm\asm::func_2341(param_00,param_01));
 }
 
 func_35C4(param_00,param_01,param_02) {
-	scripts/asm/asm::asm_fireephemeralevent("melee_attack","end");
+	scripts\asm\asm::asm_fireephemeralevent("melee_attack","end");
 	func_35BB();
 }
 

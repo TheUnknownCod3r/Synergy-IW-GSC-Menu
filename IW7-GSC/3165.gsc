@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3165.gsc
-****************************/
+ * Script: 3165.gsc
+************************/
 
 func_FFE6() {
 	if(isdefined(self.disablearrivals) && self.disablearrivals) {
@@ -34,7 +34,7 @@ func_1008A(param_00,param_01,param_02,param_03) {
 		return 0;
 	}
 
-	if(!scripts/asm/asm::func_232B(param_01,"cover_approach")) {
+	if(!scripts\asm\asm::func_232B(param_01,"cover_approach")) {
 		return 0;
 	}
 
@@ -72,10 +72,10 @@ func_1008A(param_00,param_01,param_02,param_03) {
 
 	var_09 = undefined;
 	if(isdefined(param_03) && isarray(param_03) && param_03.size > 2) {
-		var_09 = scripts/asm/asm_bb::func_2928(param_03[2]);
+		var_09 = scripts\asm\asm_bb::func_2928(param_03[2]);
 	}
 
-	var_0A = scripts/asm/asm::asm_getdemeanor();
+	var_0A = scripts\asm\asm::asm_getdemeanor();
 	if(var_0A == "casual" || var_0A == "casual_gun") {
 		var_0B = 0.4;
 		if(self pathdisttogoal() < 25) {
@@ -97,7 +97,7 @@ func_1008A(param_00,param_01,param_02,param_03) {
 }
 
 func_10094(param_00,param_01,param_02,param_03) {
-	if(!scripts/asm/asm::func_232B(param_01,"code_move")) {
+	if(!scripts\asm\asm::func_232B(param_01,"code_move")) {
 		return 0;
 	}
 
@@ -105,12 +105,12 @@ func_10094(param_00,param_01,param_02,param_03) {
 }
 
 func_10093(param_00,param_01,param_02,param_03) {
-	var_04 = scripts/asm/asm::asm_getdemeanor();
+	var_04 = scripts\asm\asm::asm_getdemeanor();
 	if(!isdefined(param_03) || var_04 != param_03[2]) {
 		return 0;
 	}
 
-	if(!scripts/asm/asm::func_232C(param_01,"pass_left") && !scripts/asm/asm::func_232C(param_01,"pass_right") && self pathdisttogoal() > 25) {
+	if(!scripts\asm\asm::func_232C(param_01,"pass_left") && !scripts\asm\asm::func_232C(param_01,"pass_right") && self pathdisttogoal() > 25) {
 		return 0;
 	}
 
@@ -118,7 +118,7 @@ func_10093(param_00,param_01,param_02,param_03) {
 }
 
 func_10096(param_00,param_01,param_02,param_03) {
-	if(!scripts/asm/asm::func_232B(param_01,"code_move")) {
+	if(!scripts\asm\asm::func_232B(param_01,"code_move")) {
 		return 0;
 	}
 
@@ -126,12 +126,12 @@ func_10096(param_00,param_01,param_02,param_03) {
 }
 
 func_10095(param_00,param_01,param_02,param_03) {
-	var_04 = scripts/asm/asm::asm_getdemeanor();
+	var_04 = scripts\asm\asm::asm_getdemeanor();
 	if(!isdefined(param_03) || var_04 != param_03[2]) {
 		return 0;
 	}
 
-	if(!scripts/asm/asm::func_232C(param_01,"pass_left") && !scripts/asm/asm::func_232C(param_01,"pass_right") && self pathdisttogoal() > 20) {
+	if(!scripts\asm\asm::func_232C(param_01,"pass_left") && !scripts\asm\asm::func_232C(param_01,"pass_right") && self pathdisttogoal() > 20) {
 		return 0;
 	}
 
@@ -152,7 +152,7 @@ func_C9B5() {
 }
 
 func_10091(param_00,param_01,param_02,param_03) {
-	if(scripts/asm/asm_bb::bb_isincombat()) {
+	if(scripts\asm\asm_bb::bb_isincombat()) {
 		return 0;
 	}
 
@@ -176,7 +176,7 @@ func_3EA4(param_00,param_01,param_02) {
 		var_07 = _meth_812C(var_05);
 		var_08 = _meth_812C(var_06);
 		var_09 = var_08 + "_to_" + var_07;
-		var_0A = scripts/asm/asm::asm_lookupanimfromalias(param_01,var_09);
+		var_0A = scripts\asm\asm::asm_lookupanimfromalias(param_01,var_09);
 		return var_0A;
 	}
 }
@@ -223,10 +223,10 @@ func_3721(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_0
 
 	var_09 = "";
 	if(param_04) {
-		if(scripts/asm/asm::func_232C(param_01,"pass_left")) {
+		if(scripts\asm\asm::func_232C(param_01,"pass_left")) {
 			var_09 = param_06 + "left";
 		}
-		else if(scripts/asm/asm::func_232C(param_01,"pass_right")) {
+		else if(scripts\asm\asm::func_232C(param_01,"pass_right")) {
 			var_09 = param_06 + "right";
 		}
 		else if(self.asm.footsteps.foot == "right") {
@@ -263,7 +263,7 @@ func_3721(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_0
 		var_0D = var_08.angles;
 	}
 
-	return self _meth_8547(var_0A,var_0D,func_7E54(),param_05,var_0B,self.asm.archetype,param_02,scripts/asm/asm::asm_getdemeanor(),var_0C,var_09,param_06,param_07,param_03);
+	return self _meth_8547(var_0A,var_0D,func_7E54(),param_05,var_0B,self.asm.archetype,param_02,scripts\asm\asm::asm_getdemeanor(),var_0C,var_09,param_06,param_07,param_03);
 }
 
 func_CECA(param_00,param_01) {
@@ -276,7 +276,7 @@ func_CECA(param_00,param_01) {
 		}
 	}
 
-	scripts/asm/asm::asm_fireevent(param_01,"abort");
+	scripts\asm\asm::asm_fireevent(param_01,"abort");
 }
 
 func_CEC9(param_00,param_01) {
@@ -290,7 +290,7 @@ func_CEC9(param_00,param_01) {
 		wait(0.05);
 	}
 
-	scripts/asm/asm::asm_fireevent(param_01,"abort");
+	scripts\asm\asm::asm_fireevent(param_01,"abort");
 }
 
 func_22F3(param_00,param_01,param_02) {
@@ -325,7 +325,7 @@ func_CEAA(param_00,param_01,param_02,param_03) {
 	thread func_22F4(param_01);
 	var_05 = lib_0A1E::asm_getallanimsforstate(param_00,param_01);
 	if(!isdefined(var_05)) {
-		scripts/asm/asm::asm_fireevent(param_01,"abort",undefined);
+		scripts\asm\asm::asm_fireevent(param_01,"abort",undefined);
 		return;
 	}
 
@@ -393,14 +393,14 @@ func_7E54() {
 
 _meth_8174(param_00,param_01,param_02,param_03) {
 	var_04 = [];
-	var_04[5] = scripts/asm/asm::func_235C(1,param_00,param_02,param_03);
-	var_04[4] = scripts/asm/asm::func_235C(2,param_00,param_02,param_03);
-	var_04[3] = scripts/asm/asm::func_235C(3,param_00,param_02,param_03);
-	var_04[6] = scripts/asm/asm::func_235C(4,param_00,param_02,param_03);
-	var_04[2] = scripts/asm/asm::func_235C(6,param_00,param_02,param_03);
-	var_04[7] = scripts/asm/asm::func_235C(7,param_00,param_02,param_03);
-	var_04[0] = scripts/asm/asm::func_235C(8,param_00,param_02,param_03);
-	var_04[1] = scripts/asm/asm::func_235C(9,param_00,param_02,param_03);
+	var_04[5] = scripts\asm\asm::func_235C(1,param_00,param_02,param_03);
+	var_04[4] = scripts\asm\asm::func_235C(2,param_00,param_02,param_03);
+	var_04[3] = scripts\asm\asm::func_235C(3,param_00,param_02,param_03);
+	var_04[6] = scripts\asm\asm::func_235C(4,param_00,param_02,param_03);
+	var_04[2] = scripts\asm\asm::func_235C(6,param_00,param_02,param_03);
+	var_04[7] = scripts\asm\asm::func_235C(7,param_00,param_02,param_03);
+	var_04[0] = scripts\asm\asm::func_235C(8,param_00,param_02,param_03);
+	var_04[1] = scripts\asm\asm::func_235C(9,param_00,param_02,param_03);
 	var_04[8] = var_04[0];
 	return var_04;
 }
@@ -437,7 +437,7 @@ lerpviewangleclamp(param_00,param_01,param_02,param_03) {
 
 	if(!isdefined(level.archetypes[param_00].var_1FAD[param_01][param_02])) {
 		var_04 = getnormalizedmovement(param_00,param_01,param_02,param_03);
-		var_05 = scripts/asm/asm::func_235C(param_02,param_01,param_03);
+		var_05 = scripts\asm\asm::func_235C(param_02,param_01,param_03);
 		level.archetypes[param_00].var_1FAD[param_01][param_02] = getmovedelta(var_05,0,var_04);
 	}
 
@@ -454,7 +454,7 @@ func_FFD4(param_00,param_01,param_02,param_03) {
 		return 0;
 	}
 
-	scripts/asm/asm::asm_updatefrantic();
+	scripts\asm\asm::asm_updatefrantic();
 	var_04 = lib_0F3D::func_7DD6();
 	if(isdefined(var_04) && isdefined(var_04.type) && var_04.type == "Cover Prone" || var_04.type == "Conceal Prone") {
 		return 0;
@@ -471,7 +471,7 @@ func_FFD4(param_00,param_01,param_02,param_03) {
 	}
 
 	var_07 = self.var_164D[param_00].var_4BC0;
-	if(!scripts/asm/asm::func_232B(var_07,"cover_approach")) {
+	if(!scripts\asm\asm::func_232B(var_07,"cover_approach")) {
 		return 0;
 	}
 
@@ -479,7 +479,7 @@ func_FFD4(param_00,param_01,param_02,param_03) {
 }
 
 func_FFD5(param_00,param_01,param_02,param_03) {
-	if(!scripts/asm/asm::func_232B(param_01,"code_move")) {
+	if(!scripts\asm\asm::func_232B(param_01,"code_move")) {
 		return 0;
 	}
 
@@ -521,7 +521,7 @@ func_1008F(param_00,param_01,param_02,param_03) {
 
 	var_08 = undefined;
 	var_09 = self.var_164D[param_00].var_4BC0;
-	var_0A = scripts/asm/asm::func_233F(var_09,"cover_approach");
+	var_0A = scripts\asm\asm::func_233F(var_09,"cover_approach");
 	if(isdefined(var_0A)) {
 		var_08 = var_0A.params;
 	}
@@ -559,7 +559,7 @@ func_10090(param_00,param_01,param_02,param_03) {
 	}
 
 	var_08 = undefined;
-	var_09 = scripts/asm/asm::func_233F(param_01,"cover_approach");
+	var_09 = scripts\asm\asm::func_233F(param_01,"cover_approach");
 	if(isdefined(var_09)) {
 		var_08 = var_09.params;
 	}

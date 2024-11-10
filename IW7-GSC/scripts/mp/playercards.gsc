@@ -1,8 +1,8 @@
-/**********************************************
+/**************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\playercards.gsc
-**********************************************/
+ * Script: scripts\mp\playercards.gsc
+**************************************/
 
 init() {
 	level thread onplayerconnect();

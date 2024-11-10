@@ -1,8 +1,8 @@
-/*******************************************************
+/***********************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\agents\_agent_common.gsc
-*******************************************************/
+ * Script: scripts\mp\agents\_agent_common.gsc
+***********************************************/
 
 codecallback_agentadded() {
 	self [[level.initagentscriptvariables]]();
@@ -11,8 +11,8 @@ codecallback_agentadded() {
 		var_00 = "allies";
 	}
 
-	level.var_C20F++;
-	self sethitlocdamagetable("locdmgtable/mp_lochit_dmgtable");
+	level.numagents++;
+	self sethitlocdamagetable("locdmgtable\mp_lochit_dmgtable");
 	self [[level.setagentteam]](var_00);
 	level.agentarray[level.agentarray.size] = self;
 }
@@ -85,7 +85,7 @@ initagentlevelvariables() {
 add_agents_to_game() {
 	level endon("game_ended");
 	level waittill("connected",var_00);
-	var_01 = function_00AF();
+	var_01 = getmaxagents();
 	while(level.agentarray.size < var_01) {
 		var_02 = addagent();
 		if(!isdefined(var_02)) {

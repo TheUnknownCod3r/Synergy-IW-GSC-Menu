@@ -1,8 +1,8 @@
-/********************************************************
+/************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\bots\bots_killstreaks.gsc
-********************************************************/
+ * Script: scripts\mp\bots\bots_killstreaks.gsc
+************************************************/
 
 bot_killstreak_setup() {
 	if(!isdefined(level.killstreak_botfunc)) {
@@ -45,7 +45,7 @@ bot_register_killstreak_func(param_00,param_01,param_02,param_03) {
 }
 
 bot_killstreak_valid_for_specific_streaktype(param_00,param_01,param_02) {
-	if(scripts\mp\_utility::bot_is_fireteam_mode()) {
+	if(scripts\mp\utility::bot_is_fireteam_mode()) {
 		return 1;
 	}
 
@@ -72,19 +72,19 @@ bot_killstreak_is_valid_internal(param_00,param_01,param_02,param_03) {
 		var_04 = getsubstr(param_03,11);
 		switch(var_04) {
 			case "assault":
-				if(!scripts\mp\_utility::isassaultkillstreak(param_00)) {
+				if(!scripts\mp\utility::isassaultkillstreak(param_00)) {
 					return 0;
 				}
 				break;
 
 			case "support":
-				if(!scripts\mp\_utility::issupportkillstreak(param_00)) {
+				if(!scripts\mp\utility::issupportkillstreak(param_00)) {
 					return 0;
 				}
 				break;
 
 			case "specialist":
-				if(!scripts\mp\_utility::isspecialistkillstreak(param_00)) {
+				if(!scripts\mp\utility::isspecialistkillstreak(param_00)) {
 					return 0;
 				}
 				break;
@@ -96,7 +96,7 @@ bot_killstreak_is_valid_internal(param_00,param_01,param_02,param_03) {
 
 bot_killstreak_is_valid_single(param_00,param_01) {
 	if(param_01 == "humans") {
-		return isdefined(level.killstreaksetups[param_00]) && scripts\mp\_utility::getkillstreakindex(param_00) != -1;
+		return isdefined(level.killstreaksetups[param_00]) && scripts\mp\utility::getkillstreakindex(param_00) != -1;
 	}
 	else if(param_01 == "bots") {
 		return isdefined(level.killstreak_botfunc[param_00]);
@@ -111,7 +111,7 @@ bot_watch_for_killstreak_use() {
 	level endon("game_ended");
 	for(;;) {
 		self waittill("killstreak_use_finished");
-		scripts\mp\_utility::_switchtoweapon("none");
+		scripts\mp\utility::_switchtoweapon("none");
 	}
 }
 
@@ -171,7 +171,7 @@ bot_think_killstreak() {
 							continue;
 						}
 
-						if(scripts\mp\_utility::isspecialistkillstreak(var_02.streakname)) {
+						if(scripts\mp\utility::isspecialistkillstreak(var_02.streakname)) {
 							if(!var_02.var_9E0B) {
 								var_03 = "specialist";
 							}
@@ -181,13 +181,13 @@ bot_think_killstreak() {
 							}
 						}
 
-						var_02.var_394 = scripts\mp\_utility::getkillstreakweapon(var_02.streakname);
+						var_02.var_394 = scripts\mp\utility::getkillstreakweapon(var_02.streakname);
 						var_04 = level.killstreak_botcanuse[var_03];
 						if(isdefined(var_04) && !self [[var_04]]()) {
 							continue;
 						}
 
-						if(!scripts\mp\_utility::validateusestreak(var_02.streakname,1)) {
+						if(!scripts\mp\utility::validateusestreak(var_02.streakname,1)) {
 							continue;
 						}
 
@@ -230,10 +230,10 @@ bot_start_aa_launcher_tracking() {
 		self waittill("aa_launcher_fire");
 		var_01 = self getrunningforwardpainanim(var_00);
 		if(var_01 == 0) {
-			scripts\mp\_utility::_switchtoweapon(var_00);
+			scripts\mp\utility::_switchtoweapon(var_00);
 			var_02 = scripts\engine\utility::waittill_any_return("LGM_player_allMissilesDestroyed","enemy");
 			wait(0.5);
-			scripts\mp\_utility::_switchtoweapon("none");
+			scripts\mp\utility::_switchtoweapon("none");
 		}
 	}
 }
@@ -257,7 +257,7 @@ bot_can_use_air_superiority() {
 }
 
 aerial_vehicle_allowed() {
-	if(scripts\mp\_utility::isairdenied()) {
+	if(scripts\mp\utility::isairdenied()) {
 		return 0;
 	}
 
@@ -269,7 +269,7 @@ aerial_vehicle_allowed() {
 }
 
 vehicle_would_exceed_limit() {
-	return scripts\mp\_utility::currentactivevehiclecount() >= scripts\mp\_utility::maxvehiclesallowed() || level.fauxvehiclecount + 1 >= scripts\mp\_utility::maxvehiclesallowed();
+	return scripts\mp\utility::currentactivevehiclecount() >= scripts\mp\utility::maxvehiclesallowed() || level.fauxvehiclecount + 1 >= scripts\mp\utility::maxvehiclesallowed();
 }
 
 func_2D28() {
@@ -286,7 +286,7 @@ func_2D28() {
 }
 
 bot_can_use_ball_drone() {
-	if(scripts\mp\_utility::isusingremote()) {
+	if(scripts\mp\utility::isusingremote()) {
 		return 0;
 	}
 
@@ -366,7 +366,7 @@ bot_killstreak_drop(param_00,param_01,param_02,param_03,param_04) {
 		var_0A = [];
 		var_0B = scripts\mp\bots\_bots_util::bot_get_nodes_in_cone(750,0.6,1);
 		foreach(var_0D in var_0B) {
-			if(function_014A(var_0D)) {
+			if(nodeexposedtosky(var_0D)) {
 				var_0A = scripts\engine\utility::array_add(var_0A,var_0D);
 			}
 		}
@@ -407,7 +407,7 @@ bot_killstreak_drop(param_00,param_01,param_02,param_03,param_04) {
 		wait(2);
 		self botpressbutton("attack");
 		wait(1.5);
-		scripts\mp\_utility::_switchtoweapon("none");
+		scripts\mp\utility::_switchtoweapon("none");
 		self botsetflag("disable_movement",0);
 	}
 
@@ -469,7 +469,7 @@ bot_killstreak_choose_loc_enemies(param_00,param_01,param_02,param_03) {
 			var_0B = var_0A;
 		}
 
-		if(var_0B != var_04 && function_0029(var_0B) < 0.25) {
+		if(var_0B != var_04 && botzonegetindoorpercent(var_0B) < 0.25) {
 			var_0C = botzonegetcount(var_0B,self.team,"enemy_predict");
 			if(var_0C > var_07) {
 				var_06 = var_0B;

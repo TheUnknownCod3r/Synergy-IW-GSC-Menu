@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\4334.gsc
-****************************/
+ * Script: 4334.gsc
+************************/
 
 main() {
 	var_00 = scripts\engine\utility::createoneshoteffect("vfx_const_dust_drift");

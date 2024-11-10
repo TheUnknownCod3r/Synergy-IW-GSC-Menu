@@ -1,13 +1,13 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3615.gsc
-****************************/
+ * Script: 3615.gsc
+************************/
 
 func_6137() {
-	level._effect["impact_shock"] = loadfx("vfx/iw7/core/equipment/emp/vfx_equip_emp_a2_thegreatzapper.vfx");
-	level._effect["fuse_shock"] = loadfx("vfx/iw7/core/equipment/emp/vfx_equip_emp_gren_hit_c6_kill.vfx");
-	level._effect["battery_explosion"] = loadfx("vfx/iw7/core/equipment/emp/vfx_equip_emp_a2_barrel_model.vfx");
+	level._effect["impact_shock"] = loadfx("vfx\iw7\core\equipment\emp\vfx_equip_emp_a2_thegreatzapper.vfx");
+	level._effect["fuse_shock"] = loadfx("vfx\iw7\core\equipment\emp\vfx_equip_emp_gren_hit_c6_kill.vfx");
+	level._effect["battery_explosion"] = loadfx("vfx\iw7\core\equipment\emp\vfx_equip_emp_a2_barrel_model.vfx");
 	var_00 = getentarray("phys_battery_destructible","targetname");
 	foreach(var_02 in var_00) {
 		var_02 thread func_6134();

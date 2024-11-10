@@ -1,8 +1,8 @@
-/********************************************************
+/************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\asm\lumberjack\mp\states.gsc
-********************************************************/
+ * Script: scripts\asm\lumberjack\mp\states.gsc
+************************************************/
 
 func_2371() {
 	if(scripts\asm\asm::func_232E("lumberjack")) {
@@ -1415,5 +1415,5 @@ func_12403(param_00,param_01,param_02,param_03) {
 }
 
 trans_headcutter_death_style_to_headcutter_death_prone0(param_00,param_01,param_02,param_03) {
-	return scripts\common\utility::istrue(self.dismember_crawl);
+	return scripts\engine\utility::istrue(self.dismember_crawl);
 }

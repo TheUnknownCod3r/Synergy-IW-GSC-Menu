@@ -1,8 +1,8 @@
-/**************************************************
+/******************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\anim\cover_arrival.gsc
-**************************************************/
+ * Script: scripts\anim\cover_arrival.gsc
+******************************************/
 
 main() {
 	self endon("killanimscript");
@@ -24,21 +24,21 @@ main() {
 	scripts\anim\shared::donotetracks("coverArrival",::func_89EA);
 	var_02 = level.var_22E7[self.var_20F2];
 	if(isdefined(var_02)) {
-		self.var_1491.pose = var_02;
+		self.a.pose = var_02;
 	}
 
-	self.var_1491.movement = "stop";
-	self.var_1491.var_22F5 = self.var_20F2;
+	self.a.movement = "stop";
+	self.a.var_22F5 = self.var_20F2;
 	self aiclearanim(%root,0.3);
 	self.var_A93C = undefined;
 }
 
 func_89EA(param_00) {
 	if(param_00 == "start_aim") {
-		if(self.var_1491.pose == "stand") {
+		if(self.a.pose == "stand") {
 			scripts\anim\animset::func_F2BE();
 		}
-		else if(self.var_1491.pose == "crouch") {
+		else if(self.a.pose == "crouch") {
 			scripts\anim\animset::func_F2B6();
 		}
 		else
@@ -57,7 +57,7 @@ func_9FA5() {
 		return 0;
 	}
 
-	if(isdefined(self.isnodeoccupied) && self seerecently(self.isnodeoccupied,1.5) && distancesquared(self.origin,self.var_10C.origin) < 250000) {
+	if(isdefined(self.isnodeoccupied) && self seerecently(self.isnodeoccupied,1.5) && distancesquared(self.origin,self.isnodeoccupied.origin) < 250000) {
 		return !self _meth_8199();
 	}
 
@@ -95,7 +95,7 @@ func_393C(param_00) {
 		return 0;
 	}
 
-	if(isdefined(self.isnodeoccupied) && distancesquared(self.var_10C.origin,param_00.origin) < 65536) {
+	if(isdefined(self.isnodeoccupied) && distancesquared(self.isnodeoccupied.origin,param_00.origin) < 65536) {
 		return 0;
 	}
 
@@ -254,7 +254,7 @@ func_3DEC(param_00,param_01,param_02) {
 	}
 
 	if(param_00 == "stand" || param_00 == "crouch") {
-		if(scripts\common\utility::absangleclamp180(vectortoyaw(param_01) - param_02.angles[1] + 180) < 60) {
+		if(scripts\engine\utility::absangleclamp180(vectortoyaw(param_01) - param_02.angles[1] + 180) < 60) {
 			return 0;
 		}
 	}
@@ -277,7 +277,7 @@ func_FA90(param_00) {
 		self.print3d = 1;
 	}
 
-	self.var_1491.var_22F5 = undefined;
+	self.a.var_22F5 = undefined;
 	thread func_58E7();
 	self waittill("cover_approach",var_01);
 	if(!func_3DED()) {
@@ -324,17 +324,17 @@ func_4710(param_00,param_01,param_02,param_03,param_04) {
 		return 0;
 	}
 
-	if(abs(self getspawnpoint_searchandrescue()) > 45 && isdefined(self.isnodeoccupied) && vectordot(anglestoforward(self.angles),vectornormalize(self.var_10C.origin - self.origin)) > 0.8) {
+	if(abs(self getspawnpoint_searchandrescue()) > 45 && isdefined(self.isnodeoccupied) && vectordot(anglestoforward(self.angles),vectornormalize(self.isnodeoccupied.origin - self.origin)) > 0.8) {
 		return 0;
 	}
 
-	if(self.var_1491.pose != "stand" || self.var_1491.movement != "run" && !scripts\anim\utility::func_9D9C()) {
+	if(self.a.pose != "stand" || self.a.movement != "run" && !scripts\anim\utility::func_9D9C()) {
 		return 0;
 	}
 
-	if(scripts\common\utility::absangleclamp180(param_04 - self.angles[1]) > 30) {
-		if(isdefined(self.isnodeoccupied) && self getpersstat(self.isnodeoccupied) && distancesquared(self.origin,self.var_10C.origin) < 65536) {
-			if(vectordot(anglestoforward(self.angles),self.var_10C.origin - self.origin) > 0) {
+	if(scripts\engine\utility::absangleclamp180(param_04 - self.angles[1]) > 30) {
+		if(isdefined(self.isnodeoccupied) && self getpersstat(self.isnodeoccupied) && distancesquared(self.origin,self.isnodeoccupied.origin) < 65536) {
+			if(vectordot(anglestoforward(self.angles),self.isnodeoccupied.origin - self.origin) > 0) {
 				return 0;
 			}
 		}
@@ -362,7 +362,7 @@ func_20F4(param_00,param_01) {
 			break;
 		}
 
-		var_03 = var_02 - param_01 \ 250 - 0.1;
+		var_03 = var_02 - param_01 / 250 - 0.1;
 		if(var_03 < 0.05) {
 			var_03 = 0.05;
 		}
@@ -476,7 +476,7 @@ func_58E7() {
 	for(;;) {
 		func_58E6();
 		for(;;) {
-			scripts\common\utility::waittill_any_3("goal_changed","goal_changed_previous_frame");
+			scripts\engine\utility::waittill_any_3("goal_changed","goal_changed_previous_frame");
 			if(isdefined(self.var_4718) && isdefined(self.vehicle_getspawnerarray) && distance2d(self.var_4718,self.vehicle_getspawnerarray) < 1) {
 				continue;
 			}
@@ -516,7 +516,7 @@ func_6A0E(param_00,param_01) {
 			return 0;
 		}
 
-		if(self.var_1491.pose != "stand") {
+		if(self.a.pose != "stand") {
 			return 0;
 		}
 	}
@@ -553,7 +553,7 @@ func_6A0F() {
 			break;
 		}
 
-		var_04 = var_02 - level.var_AFE8 \ 250 - 0.1;
+		var_04 = var_02 - level.var_AFE8 / 250 - 0.1;
 		if(var_04 < 0) {
 			break;
 		}
@@ -590,7 +590,7 @@ func_58E6() {
 	}
 
 	func_6A0F();
-	if(isdefined(self.objective_position) && isdefined(self.var_15F.opcode::OP_EvalSelfFieldVariable) && self.var_15F.opcode::OP_EvalSelfFieldVariable == self) {
+	if(isdefined(self.objective_position) && isdefined(self.objective_position.opcode::OP_EvalSelfFieldVariable) && self.objective_position.opcode::OP_EvalSelfFieldVariable == self) {
 		return;
 	}
 
@@ -635,7 +635,7 @@ func_58E6() {
 		var_05 = self.angles[1];
 	}
 	else if(func_6A6D(var_02)) {
-		var_05 = vectortoyaw(self.var_10C.origin - self.vehicle_getspawnerarray);
+		var_05 = vectortoyaw(self.isnodeoccupied.origin - self.vehicle_getspawnerarray);
 	}
 	else
 	{
@@ -692,10 +692,10 @@ func_58E6() {
 	}
 	else if(var_0E > 0) {
 		var_12 = scripts\anim\utility::func_B031("cover_trans_dist",var_02,self.var_20F0);
-		var_13 = atan(var_12[1] \ var_12[0]);
+		var_13 = atan(var_12[1] / var_12[0]);
 		if(!isdefined(self.var_6A6C) || self.livestreamingenable) {
 			var_10 = var_0F - var_13;
-			if(scripts\common\utility::absangleclamp180(var_10 - self.angles[1]) > 30) {
+			if(scripts\engine\utility::absangleclamp180(var_10 - self.angles[1]) > 30) {
 				return;
 			}
 		}

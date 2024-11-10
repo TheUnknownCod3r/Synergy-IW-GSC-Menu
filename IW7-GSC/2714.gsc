@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2714.gsc
+ * Script: 2714.gsc
 ***************************************/
 
 callback_playerdamage_internal(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08, var_09, var_10, var_11, var_12) {
@@ -103,7 +103,7 @@ callback_playerdamage_internal(var_00, var_01, var_02, var_03, var_04, var_05, v
   return var_03;
 
   if (scripts\mp\utility\game::func_9EF0(var_02)) {
-  var_03 = var_02 scripts/mp/killstreaks/utility::getmodifiedantikillstreakdamage(var_01, var_06, var_05, var_03, var_2.maxhealth, 3, 4, 6, 0);
+  var_03 = var_02 scripts\mp\killstreaks\utility::getmodifiedantikillstreakdamage(var_01, var_06, var_05, var_03, var_2.maxhealth, 3, 4, 6, 0);
 
   if (isdefined(var_01) && isplayer(var_01) && scripts\mp\equipment\phase_shift::isentityphaseshifted(var_01))
   var_03 = 0;
@@ -246,7 +246,7 @@ callback_playerdamage_internal(var_00, var_01, var_02, var_03, var_04, var_05, v
   var_02 showuidamageflash();
 
   if (isdefined(var_01) && var_01 scripts\mp\utility\game::_hasperk("specialty_mark_targets") && var_03 > 0)
-  var_01 thread scripts/mp/perks/perk_mark_targets::marktarget_run(var_02, var_05);
+  var_01 thread scripts\mp\perks\perk_mark_targets::marktarget_run(var_02, var_05);
 
   return "finished";
 }
@@ -414,9 +414,9 @@ func_3696(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08
   var_02 = 0;
   }
   else if (isexplosivedamagemod(var_03)) {
-  var_02 = scripts/mp/concussion::func_B92C(var_02, var_01, var_00, var_08, var_04);
+  var_02 = scripts\mp\concussion::func_B92C(var_02, var_01, var_00, var_08, var_04);
   var_02 = scripts\mp\equipment\blackout_grenade::func_B92C(var_02, var_01, var_00, var_08, var_04);
-  var_02 = scripts/mp/emp_debuff_mp::func_B92C(var_02, var_01, var_00, var_08, var_04);
+  var_02 = scripts\mp\emp_debuff_mp::func_B92C(var_02, var_01, var_00, var_08, var_04);
   var_02 = scripts\mp\weapons::glprox_modifieddamage(var_02, var_01, var_00, var_08, var_04, var_03, var_05);
 
   if (var_04 == "proximity_explosive_mp" && isdefined(var_8.origin)) {
@@ -573,7 +573,7 @@ func_3696(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08
   var_02 = scripts\mp\supers\super_supertrophy::func_11280(var_01, var_00, var_04, var_02);
   var_02 = scripts\mp\equipment\ground_pound::func_8653(var_01, var_00, var_04, var_08, var_02);
   var_02 = scripts\mp\killstreaks\venom::venommodifieddamage(var_01, var_00, var_04, var_08, var_02);
-  var_27 = scripts/mp/playertrophysystem::playertrophy_modifieddamage(var_01, var_00, var_04, var_08, var_02);
+  var_27 = scripts\mp\playertrophysystem::playertrophy_modifieddamage(var_01, var_00, var_04, var_08, var_02);
   var_27 = scripts\mp\trophy_system::trophy_modifieddamage(var_01, var_00, var_04, var_02, var_11);
   var_02 = var_27[0];
   var_11 = var_27[1];
@@ -2238,7 +2238,7 @@ handlenormaldeath(var_00, var_01, var_02, var_03, var_04, var_05, var_06) {
   if (isdefined(var_24) && isdefined(var_24.owner) && var_24.owner != var_01 && !scripts\engine\utility::exist_in_array_MAYBE(var_22, var_24.uavtype)) {
   var_25 = undefined;
 
-  if (scripts/mp/killstreaks/utility::func_A69F(var_24.streakinfo, "passive_extra_assist"))
+  if (scripts\mp\killstreaks\utility::func_A69F(var_24.streakinfo, "passive_extra_assist"))
   var_25 = 20;
 
   var_24.owner thread scripts\mp\utility\game::giveunifiedpoints(var_24.uavtype + "_assist", undefined, var_25);
@@ -3810,7 +3810,7 @@ updatecombatrecordkillstats(var_00, var_01, var_02, var_03) {
   var_04 = scripts\mp\utility\game::getequipmenttype(var_03);
 
   if (isdefined(var_04) && var_04 == "lethal") {
-  var_05 = scripts/mp/powers::func_D737(var_03);
+  var_05 = scripts\mp\powers::func_D737(var_03);
   var_00 combatrecordlethalkill(var_05);
   } else {
   var_06 = scripts\mp\missions::func_7F48(var_03);

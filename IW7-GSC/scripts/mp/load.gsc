@@ -1,8 +1,8 @@
-/***************************************
+/*******************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\load.gsc
-***************************************/
+ * Script: scripts\mp\load.gsc
+*******************************/
 
 main() {
 	if(isdefined(level.var_1307)) {
@@ -45,11 +45,11 @@ main() {
 	}
 
 	game["thermal_vision"] = "thermal_mp";
-	function_0237("",0);
-	function_0238("default_night_mp");
-	function_0236("missilecam");
-	function_023A(game["thermal_vision"]);
-	function_0239("",0);
+	visionsetnaked("",0);
+	visionsetnight("default_night_mp");
+	visionsetmissilecam("missilecam");
+	visionsetthermal(game["thermal_vision"]);
+	visionsetpain("",0);
 	var_00 = getentarray("lantern_glowFX_origin","targetname");
 	for(var_01 = 0;var_01 < var_00.size;var_01++) {
 		var_00[var_01] thread lanterns();
@@ -299,7 +299,7 @@ setupexploders() {
 
 lanterns() {
 	if(!isdefined(level._effect["lantern_light"])) {
-		level._effect["lantern_light"] = loadfx("vfx/props/glow_latern");
+		level._effect["lantern_light"] = loadfx("vfx\props\glow_latern");
 	}
 
 	scripts\common\fx::loopfx("lantern_light",self.origin,0.3,self.origin + (0,0,1));

@@ -1,8 +1,8 @@
-/*****************************************
+/*********************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\supers.gsc
-*****************************************/
+ * Script: scripts\mp\supers.gsc
+*********************************/
 
 init() {
 	level.var_10E4E = [];
@@ -27,7 +27,7 @@ init() {
 
 	var_03 = 1;
 	for(;;) {
-		var_04 = tablelookupbyrow("mp/supertable.csv",var_03,0);
+		var_04 = tablelookupbyrow("mp\supertable.csv",var_03,0);
 		if(!isdefined(var_04) || var_04 == "") {
 			break;
 		}
@@ -114,22 +114,22 @@ init() {
 		var_03++;
 	}
 
-	var_06 = tablelookup("mp/superratetable.csv",0,level.gametype,1);
+	var_06 = tablelookup("mp\superratetable.csv",0,level.gametype,1);
 	if(isdefined(var_06) && var_06 != "") {
 		level.var_1125E = float(var_06);
 	}
 
 	func_DF10();
-	scripts/mp/supers/super_reaper::func_DD9E();
-	scripts/mp/supers/super_armorup::func_218F();
-	scripts/mp/supers/super_visionpulse::init();
-	scripts/mp/supers/super_supertrophy::func_1127D();
-	scripts/mp/equipment/phase_shift::init();
+	scripts\mp\supers\super_reaper::func_DD9E();
+	scripts\mp\supers\super_armorup::func_218F();
+	scripts\mp\supers\super_visionpulse::init();
+	scripts\mp\supers\super_supertrophy::func_1127D();
+	scripts\mp\equipment\phase_shift::init();
 	scripts\mp\teleport::init();
-	scripts/mp/equipment/micro_turret::func_B703();
-	scripts/mp/equipment/charge_mode::func_3CED();
-	scripts/mp/supers/super_blackholegun::init();
-	scripts/mp/supers/super_overdrive::func_98AB();
+	scripts\mp\equipment\micro_turret::func_B703();
+	scripts\mp\equipment\charge_mode::func_3CED();
+	scripts\mp\supers\super_blackholegun::init();
+	scripts\mp\supers\super_overdrive::func_98AB();
 }
 
 func_1831(param_00,param_01,param_02) {
@@ -174,7 +174,7 @@ func_DF0F(param_00,param_01,param_02,param_03,param_04) {
 }
 
 func_DD68(param_00,param_01,param_02) {
-	var_03 = tablelookupbyrow("mp/supertable.csv",param_00,param_01);
+	var_03 = tablelookupbyrow("mp\supertable.csv",param_00,param_01);
 	if(var_03 == "") {
 		return undefined;
 	}
@@ -841,150 +841,150 @@ func_130EA() {
 }
 
 func_130CA() {
-	return scripts/mp/supers/super_reaper::func_DD9D();
+	return scripts\mp\supers\super_reaper::func_DD9D();
 }
 
 func_637A(param_00) {
-	scripts/mp/supers/super_reaper::func_DD97();
+	scripts\mp\supers\super_reaper::func_DD97();
 }
 
 func_1304E() {
-	return scripts/mp/supers/super_blackholegun::beginuse();
+	return scripts\mp\supers\super_blackholegun::beginuse();
 }
 
 func_630F(param_00) {
-	scripts/mp/supers/super_blackholegun::stopuse();
+	scripts\mp\supers\super_blackholegun::stopuse();
 }
 
 func_13044() {
-	return scripts/mp/supers/super_armorup::func_2197();
+	return scripts\mp\supers\super_armorup::func_2197();
 }
 
 func_630C(param_00) {
-	scripts/mp/supers/super_armorup::func_218E(param_00);
+	scripts\mp\supers\super_armorup::func_218E(param_00);
 }
 
 func_13041() {
-	return scripts/mp/supers/super_amplify::func_12F9B();
+	return scripts\mp\supers\super_amplify::func_12F9B();
 }
 
 func_630A(param_00) {
-	scripts/mp/supers/super_amplify::end();
+	scripts\mp\supers\super_amplify::end();
 }
 
 func_12C70() {
-	scripts/mp/supers/super_amplify::unset();
+	scripts\mp\supers\super_amplify::unset();
 }
 
 func_F7CE() {
-	scripts/mp/supers/super_overdrive::func_F7CE();
+	scripts\mp\supers\super_overdrive::func_F7CE();
 }
 
 func_12CFF() {
-	scripts/mp/supers/super_overdrive::func_12CFF();
+	scripts\mp\supers\super_overdrive::func_12CFF();
 }
 
 func_1308A() {
-	return scripts/mp/supers/super_gravwave::_meth_8541();
+	return scripts\mp\supers\super_gravwave::_meth_8541();
 }
 
 func_6332() {
-	scripts/mp/supers/super_gravwave::_meth_853F();
+	scripts\mp\supers\super_gravwave::_meth_853F();
 }
 
 func_130F6() {
-	return scripts/mp/supers/super_visionpulse::func_12F9B();
+	return scripts\mp\supers\super_visionpulse::func_12F9B();
 }
 
 func_1303A() {
-	return scripts/mp/supers/super_antiair::func_14F9();
+	return scripts\mp\supers\super_antiair::func_14F9();
 }
 
 func_6308() {
-	scripts/mp/supers/super_antiair::func_14F7();
+	scripts\mp\supers\super_antiair::func_14F7();
 }
 
 func_130A3() {
-	return scripts/mp/supers/super_megaboost::func_B554();
+	return scripts\mp\supers\super_megaboost::func_B554();
 }
 
 func_6361() {
-	scripts/mp/supers/super_megaboost::func_B552();
+	scripts\mp\supers\super_megaboost::func_B552();
 }
 
 func_F75E() {}
 
 func_12CDA() {
-	scripts/mp/equipment/cloak::end(undefined,1);
+	scripts\mp\equipment\cloak::end(undefined,1);
 }
 
 func_1309A() {
-	return scripts/mp/equipment/cloak::func_12F9B();
+	return scripts\mp\equipment\cloak::func_12F9B();
 }
 
 func_635C(param_00) {
-	scripts/mp/equipment/cloak::end(param_00);
+	scripts\mp\equipment\cloak::end(param_00);
 }
 
 func_130E2() {
-	return scripts/mp/supers/super_supertrophy::func_11297();
+	return scripts\mp\supers\super_supertrophy::func_11297();
 }
 
 func_638F(param_00) {
-	return scripts/mp/supers/super_supertrophy::func_11276(param_00);
+	return scripts\mp\supers\super_supertrophy::func_11276(param_00);
 }
 
 func_12D3F(param_00) {
-	scripts/mp/supers/super_supertrophy::func_11296(param_00);
+	scripts\mp\supers\super_supertrophy::func_11296(param_00);
 }
 
 usephaseshift() {
-	return scripts/mp/equipment/phase_shift::func_E88D();
+	return scripts\mp\equipment\phase_shift::func_E88D();
 }
 
 func_6376(param_00) {
-	scripts/mp/equipment/phase_shift::func_E154(param_00);
+	scripts\mp\equipment\phase_shift::func_E154(param_00);
 }
 
 func_F797() {
-	scripts/mp/equipment/micro_turret::func_B70A();
+	scripts\mp\equipment\micro_turret::func_B70A();
 }
 
 func_12CEF() {
-	scripts/mp/equipment/micro_turret::func_B718();
+	scripts\mp\equipment\micro_turret::func_B718();
 }
 
 func_130A4() {
-	scripts/mp/equipment/micro_turret::microturret_use();
+	scripts\mp\equipment\micro_turret::microturret_use();
 	return 1;
 }
 
 func_6364(param_00) {
-	return scripts/mp/equipment/micro_turret::func_B6F9(param_00);
+	return scripts\mp\equipment\micro_turret::func_B6F9(param_00);
 }
 
 func_F68E() {
-	scripts/mp/equipment/charge_mode::func_3D0E();
+	scripts\mp\equipment\charge_mode::func_3D0E();
 }
 
 func_12C8F() {
-	scripts/mp/equipment/charge_mode::func_3D19();
+	scripts\mp\equipment\charge_mode::func_3D19();
 }
 
 func_13052() {
-	return scripts/mp/equipment/charge_mode::func_3D1A();
+	return scripts\mp\equipment\charge_mode::func_3D1A();
 }
 
 func_6313(param_00) {
-	scripts/mp/equipment/charge_mode::func_3CDD(param_00);
+	scripts\mp\equipment\charge_mode::func_3CDD(param_00);
 }
 
 setrewind() {
-	scripts/mp/equipment/rewind::setrewind();
+	scripts\mp\equipment\rewind::setrewind();
 }
 
 unsetrewind() {
-	scripts/mp/equipment/rewind::unsetrewind();
+	scripts\mp\equipment\rewind::unsetrewind();
 }
 
 func_F87E() {
@@ -996,7 +996,7 @@ func_12D44() {
 }
 
 func_1309C() {
-	thread scripts/mp/equipment/kinetic_pulse::kineticpulse_use();
+	thread scripts\mp\equipment\kinetic_pulse::kineticpulse_use();
 	return 1;
 }
 

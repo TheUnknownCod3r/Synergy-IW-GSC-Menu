@@ -1,8 +1,8 @@
-/******************************************************************
+/**********************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\zombies\zombie_afterlife_arcade.gsc
-******************************************************************/
+ * Script: scripts\cp\zombies\zombie_afterlife_arcade.gsc
+**********************************************************/
 
 enter_afterlife_arcade(param_00) {
 	if(isdefined(level.rewind_afterlife_func)) {
@@ -23,7 +23,7 @@ enter_afterlife_arcade(param_00) {
 	param_00 notify("player_entered_ala");
 	param_00.exitingafterlifearcade = 0;
 	if(isdefined(level.timesinafterlife)) {
-		level.var_11929++;
+		level.timesinafterlife++;
 	}
 
 	param_00.timeenteringafterlife = gettime();
@@ -37,7 +37,7 @@ enter_afterlife_arcade(param_00) {
 	param_00 gold_teeth_pickup();
 	param_00 scripts\cp\utility::_giveweapon("iw7_gunless_zm",undefined,undefined,1);
 	param_00 scripts\engine\utility::allow_melee(0);
-	param_00 scripts/cp/zombies/zombies_loadout::set_player_photo_status(param_00,"afterlife");
+	param_00 scripts\cp\zombies\zombies_loadout::set_player_photo_status(param_00,"afterlife");
 	param_00 scripts\cp\utility::force_usability_enabled();
 	param_00 afterlife_enable_player_interaction(param_00);
 	param_00 set_has_self_revive_token(param_00,0);
@@ -369,7 +369,7 @@ play_exit_afterlife_arcade_vo(param_00) {
 		param_00.num_of_times_exit_afterlife_arcade = 0;
 	}
 
-	param_00.var_C1F9++;
+	param_00.num_of_times_exit_afterlife_arcade++;
 	if(param_00.num_of_times_exit_afterlife_arcade == 1) {
 		param_00 thread scripts\cp\cp_vo::try_to_play_vo("arcade_token_revive_first","zmb_comment_vo","low",3,0,0,1);
 		return;
@@ -719,7 +719,7 @@ close_afterlife_door_for_player(param_00) {
 		param_00.revive_door.angles = level.ala_revive_door.angles;
 	}
 
-	function_0297(level._effect["vfx_zmb_portal_centhub"],level.ala_portal_org,"tag_origin",param_00);
+	stopfxontagforclients(level._effect["vfx_zmb_portal_centhub"],level.ala_portal_org,"tag_origin",param_00);
 }
 
 set_has_self_revive_token(param_00,param_01) {
@@ -849,7 +849,7 @@ increase_afterlife_count(param_00) {
 		param_00.num_times_in_afterlife = 0;
 	}
 
-	param_00.var_C207++;
+	param_00.num_times_in_afterlife++;
 }
 
 get_soul_power_goal(param_00) {

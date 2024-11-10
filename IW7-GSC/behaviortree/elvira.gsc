@@ -1,8 +1,8 @@
-/*******************************************
+/***********************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\behaviortree\elvira.gsc
-*******************************************/
+ * Script: behaviortree\elvira.gsc
+***********************************/
 
 func_2AD0() {
 	if(isdefined(level.var_119E["elvira"])) {

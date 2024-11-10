@@ -1,13 +1,13 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3569.gsc
-****************************/
+ * Script: 3569.gsc
+************************/
 
 func_BB80() {
-	level._effect["mortarMount_path_fr"] = loadfx("vfx/iw7/_requests/mp/power/vfx_mortar_mount_trail_fr");
-	level._effect["mortarMount_target_fr"] = loadfx("vfx/iw7/_requests/mp/power/vfx_mortar_mount_target_fr");
-	level._effect["mortarMount_target_en"] = loadfx("vfx/iw7/_requests/mp/power/vfx_mortar_mount_target_en");
+	level._effect["mortarMount_path_fr"] = loadfx("vfx\iw7\_requests\mp\power\vfx_mortar_mount_trail_fr");
+	level._effect["mortarMount_target_fr"] = loadfx("vfx\iw7\_requests\mp\power\vfx_mortar_mount_target_fr");
+	level._effect["mortarMount_target_en"] = loadfx("vfx\iw7\_requests\mp\power\vfx_mortar_mount_target_en");
 }
 
 func_BB90() {
@@ -114,7 +114,7 @@ func_BB88(param_00) {
 	param_00 radiusdamage(param_00.origin,256,256,135,self,"MOD_EXPLOSIVE","mortarmount_mp");
 	var_01 = undefined;
 	if(level.teambased) {
-		var_01 = scripts\mp\_utility::getteamarray(scripts\mp\_utility::getotherteam(self.team));
+		var_01 = scripts\mp\utility::getteamarray(scripts\mp\utility::getotherteam(self.team));
 	}
 	else
 	{
@@ -123,23 +123,23 @@ func_BB88(param_00) {
 
 	var_01[var_01.size] = self;
 	foreach(var_03 in var_01) {
-		if(!isdefined(var_03) || !scripts\mp\_utility::isreallyalive(var_03)) {
+		if(!isdefined(var_03) || !scripts\mp\utility::isreallyalive(var_03)) {
 			continue;
 		}
 
 		var_04 = distancesquared(param_00.origin,var_03.origin);
 		if(var_04 < 4096) {
-			var_03 scripts\mp\_shellshock::shellshockondamage("MOD_EXPLOSIVE",300);
+			var_03 scripts\mp\shellshock::shellshockondamage("MOD_EXPLOSIVE",300);
 			continue;
 		}
 
 		if(var_04 < 300) {
-			var_03 scripts\mp\_shellshock::shellshockondamage("MOD_EXPLOSIVE",300);
+			var_03 scripts\mp\shellshock::shellshockondamage("MOD_EXPLOSIVE",300);
 			continue;
 		}
 
 		if(var_04 < 135) {
-			var_03 scripts\mp\_shellshock::shellshockondamage("MOD_EXPLOSIVE",300);
+			var_03 scripts\mp\shellshock::shellshockondamage("MOD_EXPLOSIVE",300);
 		}
 	}
 
@@ -159,7 +159,7 @@ func_BB8A(param_00) {
 	self endon("mortarMount_unset");
 	self endon("mortarMount_popOut");
 	self endon("mortarMount_fireButtonPressed");
-	var_01 = scripts\mp\_powers::func_D735("power_mortarMount");
+	var_01 = scripts\mp\powers::func_D735("power_mortarMount");
 	self notifyonplayercommand("mortarMount_powerButtonPressed",var_01);
 	self waittill("mortarMount_powerButtonPressed");
 	func_BB95(0);
@@ -248,7 +248,7 @@ func_BB71() {
 	}
 
 	if(!isdefined(self.var_BB6E.var_D771)) {
-		scripts\mp\_powers::func_D729();
+		scripts\mp\powers::func_D729();
 		self.var_BB6E.var_D771 = 1;
 	}
 }
@@ -259,7 +259,7 @@ func_BB77() {
 	}
 
 	if(isdefined(self.var_BB6E.var_D771)) {
-		scripts\mp\_powers::func_D72F();
+		scripts\mp\powers::func_D72F();
 		self.var_BB6E.var_D771 = undefined;
 	}
 }
@@ -471,7 +471,7 @@ func_BB76() {
 					var_00 show();
 					var_01 = 0;
 					playfxontagforteam(scripts\engine\utility::getfx("mortarMount_target_fr"),var_00,"tag_origin",self.team);
-					playfxontagforteam(scripts\engine\utility::getfx("mortarMount_target_en"),var_00,"tag_origin",scripts\mp\_utility::getotherteam(self.team));
+					playfxontagforteam(scripts\engine\utility::getfx("mortarMount_target_en"),var_00,"tag_origin",scripts\mp\utility::getotherteam(self.team));
 				}
 
 				var_00.origin = var_02.var_D648[var_02.var_D648.size - 1];

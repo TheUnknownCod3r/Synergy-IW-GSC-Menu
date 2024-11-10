@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\3151.gsc
+ * Script: 3151.gsc
 ***************************************/
 
 func_2371() {

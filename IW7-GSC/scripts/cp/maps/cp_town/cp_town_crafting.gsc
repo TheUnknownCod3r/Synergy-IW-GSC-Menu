@@ -1,8 +1,8 @@
-/****************************************************************
+/********************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\maps\cp_town\cp_town_crafting.gsc
-****************************************************************/
+ * Script: scripts\cp\maps\cp_town\cp_town_crafting.gsc
+********************************************************/
 
 register_crafting() {
 	level.interaction_hintstrings["crafting_station"] = &"CP_TOWN_INTERACTIONS_CRAFTING_MISSING_BLUEPRINT";

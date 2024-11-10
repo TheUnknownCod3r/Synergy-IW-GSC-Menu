@@ -1,15 +1,15 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2703.gsc
+ * Script: 2703.gsc
 ***************************************/
 
 initbroshotfx() {
-  level._effect["FX_BRO_LIGHT"] = loadfx("vfx/iw7/_requests/mp/broshot/vfx_bs_light_fill.vfx");
-  level._effect["vfx_taunt_steel_dragon"] = loadfx("vfx/iw7/_requests/mp/frontend/vfx_taunt_steel_dragon.vfx");
-  level._effect["vfx_bombard_antigrav_pre_expl"] = loadfx("vfx/iw7/_requests/mp/vfx_bombard_antigrav_pre_expl.vfx");
-  level._effect["vfx_bombard_projectile_trail"] = loadfx("vfx/iw7/_requests/mp/vfx_bombard_projectile_trail.vfx");
-  level._effect["vfx_bombardment_strike_explosion"] = loadfx("vfx/iw7/_requests/mp/vfx_bombardment_strike_explosion.vfx");
-  level._effect["vfx_tnt_crate_smk"] = loadfx("vfx/iw7/levels/mp_frontend/vfx_tnt_crate_smk.vfx");
+  level._effect["FX_BRO_LIGHT"] = loadfx("vfx\iw7\_requests\mp\broshot\vfx_bs_light_fill.vfx");
+  level._effect["vfx_taunt_steel_dragon"] = loadfx("vfx\iw7\_requests\mp\frontend\vfx_taunt_steel_dragon.vfx");
+  level._effect["vfx_bombard_antigrav_pre_expl"] = loadfx("vfx\iw7\_requests\mp\vfx_bombard_antigrav_pre_expl.vfx");
+  level._effect["vfx_bombard_projectile_trail"] = loadfx("vfx\iw7\_requests\mp\vfx_bombard_projectile_trail.vfx");
+  level._effect["vfx_bombardment_strike_explosion"] = loadfx("vfx\iw7\_requests\mp\vfx_bombardment_strike_explosion.vfx");
+  level._effect["vfx_tnt_crate_smk"] = loadfx("vfx\iw7\levels\mp_frontend\vfx_tnt_crate_smk.vfx");
 }
 
 forceinitbroshot() {
@@ -161,16 +161,16 @@ func_10D73(var_00) {
   else
   var_11 = level.topplayers[var_10].loadoutarchetype;
 
-  var_12 = tablelookuprownum("mp/battleRigTable.csv", 1, var_11);
+  var_12 = tablelookuprownum("mp\battleRigTable.csv", 1, var_11);
 
   if (isbot(level.topplayers[var_10]) || isdefined(level.topplayers[var_10].lastarchetypeinfo)) {
   var_13 = level.topplayers[var_10] getcustomizationbody();
   var_14 = level.topplayers[var_10] getcustomizationhead();
-  var_15 = tablelookuprownum("mp/cac/heads.csv", 1, var_14);
-  var_16 = tablelookuprownum("mp/cac/bodies.csv", 1, var_13);
+  var_15 = tablelookuprownum("mp\cac\heads.csv", 1, var_14);
+  var_16 = tablelookuprownum("mp\cac\bodies.csv", 1, var_13);
 
   if (isdefined(level.topplayers[var_10].lastarchetypeinfo))
-  var_12 = tablelookuprownum("mp/battleRigTable.csv", 1, level.topplayers[var_10].lastarchetypeinfo.archetype);
+  var_12 = tablelookuprownum("mp\battleRigTable.csv", 1, level.topplayers[var_10].lastarchetypeinfo.archetype);
   } else {
   var_16 = level.topplayers[var_10] scripts\mp\teams::getplayermodelindex();
   var_15 = level.topplayers[var_10] scripts\mp\teams::getplayerheadmodel();
@@ -455,19 +455,19 @@ dotaunt(var_00, var_01) {
   var_00 = level.overridebroslot - 1;
 
   if (isdefined(level.overridetaunt))
-  var_03 = tablelookup("mp/cac/taunts.csv", 0, level.overridetaunt, 1);
+  var_03 = tablelookup("mp\cac\taunts.csv", 0, level.overridetaunt, 1);
 
-  var_04 = tablelookuprownum("mp/cac/taunts.csv", 1, var_03);
-  var_05 = tablelookup("mp/cac/taunts.csv", 0, var_04, 5);
+  var_04 = tablelookuprownum("mp\cac\taunts.csv", 1, var_03);
+  var_05 = tablelookup("mp\cac\taunts.csv", 0, var_04, 5);
 
   if (var_05 == "")
   return;
 
-  var_06 = tablelookup("mp/cac/taunts.csv", 0, var_04, 19);
-  var_07 = tablelookup("mp/cac/taunts.csv", 0, var_04, 20);
-  var_08 = tablelookup("mp/cac/taunts.csv", 0, var_04, 21);
-  var_09 = tablelookup("mp/cac/taunts.csv", 0, var_04, 12) == "Y";
-  var_10 = tablelookup("mp/cac/taunts.csv", 0, var_04, 9);
+  var_06 = tablelookup("mp\cac\taunts.csv", 0, var_04, 19);
+  var_07 = tablelookup("mp\cac\taunts.csv", 0, var_04, 20);
+  var_08 = tablelookup("mp\cac\taunts.csv", 0, var_04, 21);
+  var_09 = tablelookup("mp\cac\taunts.csv", 0, var_04, 12) == "Y";
+  var_10 = tablelookup("mp\cac\taunts.csv", 0, var_04, 9);
   var_11 = "ui_broshot_anim_" + var_00;
 
   if (isdefined(level.interruptabletaunts[var_00]) && level.interruptabletaunts[var_00] == var_10) {
@@ -493,8 +493,8 @@ dotaunt(var_00, var_01) {
   level.supergunout[var_11] = 1;
   }
 
-  var_13 = tablelookup("mp/cac/taunts.csv", 0, var_04, 17);
-  var_14 = tablelookup("mp/cac/taunts.csv", 0, var_04, 18);
+  var_13 = tablelookup("mp\cac\taunts.csv", 0, var_04, 17);
+  var_14 = tablelookup("mp\cac\taunts.csv", 0, var_04, 18);
 
   if (var_00 > 0 && var_13 != "" && var_14 != "") {
   if (var_00 == 1)
@@ -644,7 +644,7 @@ setguntypeforui(var_00) {
 putgunaway(var_00) {
   var_01 = getgunanimstring();
   var_02 = var_01 + "_put_away" + getaltgunanimstring();
-  var_03 = tablelookuprownum("mp/cac/taunts.csv", 1, var_02);
+  var_03 = tablelookuprownum("mp\cac\taunts.csv", 1, var_02);
   setomnvar(var_00, -1);
   var_04 = getgunputawayduration(var_01);
   wait(var_04);
@@ -652,7 +652,7 @@ putgunaway(var_00) {
 
 takesupergunout(var_00, var_01) {
   var_02 = getrigtransstringfromref(var_01) + "transout_0";
-  var_03 = tablelookuprownum("mp/cac/taunts.csv", 1, var_02);
+  var_03 = tablelookuprownum("mp\cac\taunts.csv", 1, var_02);
   setomnvar(var_00, var_03 + 30000);
   var_04 = getrigsupertakeoutdurationfromref(var_01);
   wait(var_04);

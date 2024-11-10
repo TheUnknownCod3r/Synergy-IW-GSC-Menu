@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\3037.gsc
+ * Script: 3037.gsc
 ***************************************/
 
 func_D1A2() {
@@ -508,7 +508,7 @@ func_6186(var_00, var_01) {
 }
 
 func_7CAA(var_00) {
-  return scripts/sp/hud_util::func_48B7("overlay_static", var_00, level.player);
+  return scripts\sp\hud_util::func_48B7("overlay_static", var_00, level.player);
 }
 
 func_10304() {
@@ -529,7 +529,7 @@ func_A27A(var_00) {
   self.missiles.active = 0;
   self.missiles.func_A928 = -999999;
   self.missiles.func_A8E8 = -9999999;
-  level.func_D127 scripts/sp/utility::func_65E0("player_jackal_missile");
+  level.func_D127 scripts\sp\utility::func_65E0("player_jackal_missile");
   }
 
   func_A27B();
@@ -537,7 +537,7 @@ func_A27A(var_00) {
 }
 
 func_A27B() {
-  if (scripts/sp/utility::func_D15B("weapons"))
+  if (scripts\sp\utility::func_D15B("weapons"))
   self.missiles.func_B446 = 12;
   else
   self.missiles.func_B446 = 8;
@@ -580,14 +580,14 @@ func_A277() {
   var_02 = 0;
 
   for (;;) {
-  if (level.player fragbuttonpressed() && !var_02 && !level.player scripts/sp/utility::func_65DB("disable_jackal_missiles")) {
+  if (level.player fragbuttonpressed() && !var_02 && !level.player scripts\sp\utility::func_65DB("disable_jackal_missiles")) {
   if (self.missiles.count <= 0)
   func_A273();
   else
   {
-  level.func_D127 scripts/sp/utility::func_65E1("player_jackal_missile");
+  level.func_D127 scripts\sp\utility::func_65E1("player_jackal_missile");
   var_01 = func_A275(var_00, var_01);
-  level.func_D127 scripts/sp/utility::func_65DD("player_jackal_missile");
+  level.func_D127 scripts\sp\utility::func_65DD("player_jackal_missile");
   }
   }
 
@@ -627,7 +627,7 @@ func_A275(var_00, var_01) {
   var_08 = var_9[0];
 
   if (!isdefined(var_03) || var_03 != var_9[0]) {
-  var_08 scripts/sp/utility::func_75C4("jackal_missile_tag", "tag_origin");
+  var_08 scripts\sp\utility::func_75C4("jackal_missile_tag", "tag_origin");
   thread func_0BDC::func_D527("missile_locked_2", var_8.origin, undefined, 2);
   }
   }
@@ -726,8 +726,8 @@ func_A276() {
 func_B838(var_00) {
   self endon("entitydeleted");
   var_01 = distance(self.origin, var_0.origin);
-  var_02 = scripts/sp/math::func_C097(5000, 12000, var_01);
-  var_03 = scripts/sp/math::func_6A8E(0, 0.5, var_02);
+  var_02 = scripts\sp\math::func_C097(5000, 12000, var_01);
+  var_03 = scripts\sp\math::func_6A8E(0, 0.5, var_02);
   wait(var_03);
 
   if (isdefined(var_00) && isvalidmissile(self) && isdefined(self))

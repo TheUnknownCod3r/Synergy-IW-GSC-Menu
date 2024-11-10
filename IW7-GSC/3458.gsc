@@ -1,21 +1,21 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\3458.gsc
+ * Script: 3458.gsc
 ***************************************/
 
 init() {
   level.ac130_use_duration = 40;
   angelflareprecache();
-  level._effect["cloud"] = loadfx("vfx/misc/ac130_cloud");
-  level._effect["beacon"] = loadfx("vfx/misc/ir_beacon_coop");
-  level._effect["ac130_explode"] = loadfx("vfx/core/expl/aerial_explosion_ac130_coop");
-  level._effect["ac130_flare"] = loadfx("vfx/misc/flares_cobra");
-  level._effect["ac130_light_red"] = loadfx("vfx/core/vehicles/aircraft_light_wingtip_red");
-  level._effect["ac130_light_white_blink"] = loadfx("vfx/core/vehicles/aircraft_light_white_blink");
-  level._effect["ac130_light_red_blink"] = loadfx("vfx/core/vehicles/aircraft_light_red_blink");
-  level._effect["ac130_engineeffect"] = loadfx("vfx/misc/jet_engine_ac130");
-  level._effect["coop_muzzleflash_105mm"] = loadfx("vfx/core/muzflash/ac130_105mm");
-  level._effect["coop_muzzleflash_40mm"] = loadfx("vfx/core/muzflash/ac130_40mm");
+  level._effect["cloud"] = loadfx("vfx\misc\ac130_cloud");
+  level._effect["beacon"] = loadfx("vfx\misc\ir_beacon_coop");
+  level._effect["ac130_explode"] = loadfx("vfx\core\expl\aerial_explosion_ac130_coop");
+  level._effect["ac130_flare"] = loadfx("vfx\misc\flares_cobra");
+  level._effect["ac130_light_red"] = loadfx("vfx\core\vehicles\aircraft_light_wingtip_red");
+  level._effect["ac130_light_white_blink"] = loadfx("vfx\core\vehicles\aircraft_light_white_blink");
+  level._effect["ac130_light_red_blink"] = loadfx("vfx\core\vehicles\aircraft_light_red_blink");
+  level._effect["ac130_engineeffect"] = loadfx("vfx\misc\jet_engine_ac130");
+  level._effect["coop_muzzleflash_105mm"] = loadfx("vfx\core\muzflash\ac130_105mm");
+  level._effect["coop_muzzleflash_40mm"] = loadfx("vfx\core\muzflash\ac130_40mm");
   level.radioforcedtransmissionqueue = [];
   level.enemieskilledintimewindow = 0;
   level.lastradiotransmission = gettime();
@@ -1496,8 +1496,8 @@ crashplane(var_00) {
 }
 
 angelflareprecache() {
-  level._effect["angel_flare_geotrail"] = loadfx("fx/smoke/angel_flare_geotrail");
-  level._effect["angel_flare_swirl"] = loadfx("fx/smoke/angel_flare_swirl_runner");
+  level._effect["angel_flare_geotrail"] = loadfx("fx\smoke\angel_flare_geotrail");
+  level._effect["angel_flare_swirl"] = loadfx("fx\smoke\angel_flare_swirl_runner");
 }
 
 angel_flare() {

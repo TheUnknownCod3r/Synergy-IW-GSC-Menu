@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\3490.gsc
+ * Script: 3490.gsc
 ***************************************/
 
 init() {
@@ -151,7 +151,7 @@ func_10DA3(var_00) {
   scripts\mp\utility\game::setthirdpersondof(0);
 
   self.restoreangles = self.angles;
-  var_00 thread scripts/mp/killstreaks/flares::func_A730(2, "+smoke", "ui_heli_pilot_flare_ammo", "ui_heli_pilot_warn");
+  var_00 thread scripts\mp\killstreaks\flares::func_A730(2, "+smoke", "ui_heli_pilot_flare_ammo", "ui_heli_pilot_warn");
   thread watchintrocleared(var_00);
   scripts\mp\utility\game::freezecontrolswrapper(1);
   var_01 = scripts\mp\killstreaks\killstreaks::initridekillstreak(var_0.helipilottype);

@@ -1,17 +1,17 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3168.gsc
-****************************/
+ * Script: 3168.gsc
+************************/
 
 func_4E4A() {
-	if(!isdefined(self._blackboard.var_AB58)) {
+	if(!isdefined(self.var_1198.var_AB58)) {
 		return;
 	}
 
-	var_00 = self._blackboard.var_AB58;
+	var_00 = self.var_1198.var_AB58;
 	var_00 delete();
-	self._blackboard.var_AB58 = undefined;
+	self.var_1198.var_AB58 = undefined;
 	scripts\sp\_utility::func_72EC(self.primaryweapon,"primary");
 }
 
@@ -86,7 +86,7 @@ func_CF0E(param_00,param_01,param_02,param_03) {
 
 	if(func_1001C() && !self _meth_81B7()) {
 		if(self.unittype == "c6") {
-			anim thread [[self.bt.var_71CC]](self,150,120,1);
+			anim thread [[self.var_3135.var_71CC]](self,150,120,1);
 			return;
 		}
 
@@ -122,7 +122,7 @@ func_CF0E(param_00,param_01,param_02,param_03) {
 		}
 
 		if(animhasnotetrack(var_06,"dropgun")) {
-			self._blackboard.var_26C6 = 1;
+			self.var_1198.var_26C6 = 1;
 		}
 
 		func_C703();
@@ -308,7 +308,7 @@ func_4E36() {
 }
 
 func_3EF6(param_00,param_01,param_02,param_03) {
-	return scripts/asm/asm::asm_lookupanimfromalias(param_01,"standing");
+	return scripts\asm\asm::asm_lookupanimfromalias(param_01,"standing");
 }
 
 func_10052(param_00,param_01,param_02,param_03) {
@@ -371,7 +371,7 @@ func_10059(param_00,param_01,param_02,param_03) {
 
 func_11043() {
 	self _meth_83AC("voice_bchatter_1_3d");
-	scripts/sp/anim::func_55C7(0);
+	scripts\sp\anim::func_55C7(0);
 	self stoploopsound();
 }
 
@@ -380,18 +380,18 @@ func_33AA() {
 		return;
 	}
 
-	self.bt.var_55CE = 1;
+	self.var_3135.var_55CE = 1;
 	if(isdefined(self.asm.var_2F3B)) {
 		return;
 	}
 
 	self.asm.var_2F3B = 1;
 	self.var_EF39 = 1;
-	if(!isdefined(self._blackboard.scriptableparts)) {
+	if(!isdefined(self.var_1198.scriptableparts)) {
 		return;
 	}
 
-	foreach(var_03, var_01 in self._blackboard.scriptableparts) {
+	foreach(var_03, var_01 in self.var_1198.scriptableparts) {
 		var_02 = var_01.state;
 		if(var_02 == "normal") {
 			continue;
@@ -408,18 +408,18 @@ func_33AA() {
 }
 
 func_34B9() {
-	self.bt.var_55CE = 1;
+	self.var_3135.var_55CE = 1;
 	if(isdefined(self.asm.var_2F3B)) {
 		return;
 	}
 
 	self.asm.var_2F3B = 1;
 	self.var_EF39 = 1;
-	if(!isdefined(self._blackboard.scriptableparts)) {
+	if(!isdefined(self.var_1198.scriptableparts)) {
 		return;
 	}
 
-	foreach(var_02, var_01 in self._blackboard.scriptableparts) {
+	foreach(var_02, var_01 in self.var_1198.scriptableparts) {
 		if(issubstr(var_02,"dmg_fx")) {
 			self setscriptablepartstate(var_02,"stopfx");
 		}
@@ -430,78 +430,78 @@ func_34B9() {
 
 func_3EE2(param_00,param_01,param_02) {
 	if(abs(self.var_E3) < 45) {
-		return scripts/asm/asm::asm_lookupanimfromalias(param_01,"running_forward_8");
+		return scripts\asm\asm::asm_lookupanimfromalias(param_01,"running_forward_8");
 	}
 
 	if(abs(self.var_E3) > 135) {
-		return scripts/asm/asm::asm_lookupanimfromalias(param_01,"running_forward_2");
+		return scripts\asm\asm::asm_lookupanimfromalias(param_01,"running_forward_2");
 	}
 
 	if(scripts\engine\utility::cointoss()) {
-		return scripts/asm/asm::asm_lookupanimfromalias(param_01,"running_forward_4");
+		return scripts\asm\asm::asm_lookupanimfromalias(param_01,"running_forward_4");
 	}
 
-	return scripts/asm/asm::asm_lookupanimfromalias(param_01,"running_forward_6");
+	return scripts\asm\asm::asm_lookupanimfromalias(param_01,"running_forward_6");
 }
 
 func_3ECA(param_00,param_01,param_02) {
 	if(scripts\engine\utility::damagelocationisany("head","neck")) {
-		return scripts/asm/asm::asm_lookupanimfromalias(param_01,"head");
+		return scripts\asm\asm::asm_lookupanimfromalias(param_01,"head");
 	}
 
 	if(scripts\engine\utility::damagelocationisany("torso_upper","torso_lower","left_arm_upper","right_arm_upper","neck")) {
-		return scripts/asm/asm::asm_lookupanimfromalias(param_01,"torso");
+		return scripts\asm\asm::asm_lookupanimfromalias(param_01,"torso");
 	}
 
-	return scripts/asm/asm::asm_lookupanimfromalias(param_01,"default");
+	return scripts\asm\asm::asm_lookupanimfromalias(param_01,"default");
 }
 
 func_3EC6(param_00,param_01,param_02) {
 	switch(param_02) {
 		case "cover_stand":
-			return scripts/asm/asm::asm_lookupanimfromalias(param_01,"stand");
+			return scripts\asm\asm::asm_lookupanimfromalias(param_01,"stand");
 
 		case "cover_exposed":
-			return scripts/asm/asm::asm_lookupanimfromalias(param_01,"exposed");
+			return scripts\asm\asm::asm_lookupanimfromalias(param_01,"exposed");
 
 		case "cover_crouch":
 			if(scripts\engine\utility::damagelocationisany("head","neck") && self.var_E3 > 135 || self.var_E3 <= -45) {
-				return scripts/asm/asm::asm_lookupanimfromalias(param_01,"crouch_head");
+				return scripts\asm\asm::asm_lookupanimfromalias(param_01,"crouch_head");
 			}
 	
 			if(self.var_E3 > -45 && self.var_E3 <= 45) {
-				return scripts/asm/asm::asm_lookupanimfromalias(param_01,"crouch_back");
+				return scripts\asm\asm::asm_lookupanimfromalias(param_01,"crouch_back");
 			}
-			return scripts/asm/asm::asm_lookupanimfromalias(param_01,"crouch_default");
+			return scripts\asm\asm::asm_lookupanimfromalias(param_01,"crouch_default");
 
 		case "cover_right":
 			if(self.a.pose == "stand") {
-				return scripts/asm/asm::asm_lookupanimfromalias(param_01,"right_stand");
+				return scripts\asm\asm::asm_lookupanimfromalias(param_01,"right_stand");
 			}
 			else
 			{
 				if(scripts\engine\utility::damagelocationisany("head","neck")) {
-					return scripts/asm/asm::asm_lookupanimfromalias(param_01,"right_crouch_head");
+					return scripts\asm\asm::asm_lookupanimfromalias(param_01,"right_crouch_head");
 				}
 	
-				return scripts/asm/asm::asm_lookupanimfromalias(param_01,"right_crouch_default");
+				return scripts\asm\asm::asm_lookupanimfromalias(param_01,"right_crouch_default");
 			}
 	
 			break;
 
 		case "cover_left":
 			if(self.a.pose == "stand") {
-				return scripts/asm/asm::asm_lookupanimfromalias(param_01,"left_stand");
+				return scripts\asm\asm::asm_lookupanimfromalias(param_01,"left_stand");
 			}
 			else
 			{
-				return scripts/asm/asm::asm_lookupanimfromalias(param_01,"left_crouch");
+				return scripts\asm\asm::asm_lookupanimfromalias(param_01,"left_crouch");
 			}
 	
 			break;
 
 		case "cover_3d":
-			return scripts/asm/asm::asm_lookupanimfromalias(param_01,"3d");
+			return scripts\asm\asm::asm_lookupanimfromalias(param_01,"3d");
 	}
 }
 
@@ -516,42 +516,42 @@ func_3F00(param_00,param_01,param_02) {
 
 	var_03 = [];
 	if(scripts\engine\utility::damagelocationisany("torso_lower","left_leg_upper","left_leg_lower","right_leg_lower","right_leg_lower")) {
-		var_03[var_03.size] = scripts/asm/asm::asm_lookupanimfromalias(param_01,"lower_body");
+		var_03[var_03.size] = scripts\asm\asm::asm_lookupanimfromalias(param_01,"lower_body");
 	}
 	else if(scripts\engine\utility::damagelocationisany("head","helmet")) {
-		var_03[var_03.size] = scripts/asm/asm::asm_lookupanimfromalias(param_01,"head");
+		var_03[var_03.size] = scripts\asm\asm::asm_lookupanimfromalias(param_01,"head");
 	}
 	else if(scripts\engine\utility::damagelocationisany("neck")) {
-		var_03[var_03.size] = scripts/asm/asm::asm_lookupanimfromalias(param_01,"neck");
+		var_03[var_03.size] = scripts\asm\asm::asm_lookupanimfromalias(param_01,"neck");
 	}
 	else if(scripts\engine\utility::damagelocationisany("torso_upper","left_arm_upper")) {
-		var_03[var_03.size] = scripts/asm/asm::asm_lookupanimfromalias(param_01,"left_shoulder");
+		var_03[var_03.size] = scripts\asm\asm::asm_lookupanimfromalias(param_01,"left_shoulder");
 	}
 
 	if(scripts\engine\utility::damagelocationisany("torso_upper")) {
-		var_03[var_03.size] = scripts/asm/asm::asm_lookupanimfromalias(param_01,"torso_upper");
+		var_03[var_03.size] = scripts\asm\asm::asm_lookupanimfromalias(param_01,"torso_upper");
 	}
 
 	if(self.var_E3 > 135 || self.var_E3 <= -135) {
 		if(scripts\engine\utility::damagelocationisany("neck","head","helmet")) {
-			var_03[var_03.size] = scripts/asm/asm::asm_lookupanimfromalias(param_01,"torso_2");
+			var_03[var_03.size] = scripts\asm\asm::asm_lookupanimfromalias(param_01,"torso_2");
 		}
 
 		if(scripts\engine\utility::damagelocationisany("torso_upper")) {
-			var_03[var_03.size] = scripts/asm/asm::asm_lookupanimfromalias(param_01,"torso_2");
+			var_03[var_03.size] = scripts\asm\asm::asm_lookupanimfromalias(param_01,"torso_2");
 		}
 	}
 	else if(self.var_E3 > -45 && self.var_E3 <= 45) {
-		var_03[var_03.size] = scripts/asm/asm::asm_lookupanimfromalias(param_01,"back");
+		var_03[var_03.size] = scripts\asm\asm::asm_lookupanimfromalias(param_01,"back");
 	}
 
 	var_04 = var_03.size > 0;
 	if(!var_04 || randomint(100) < 15) {
-		var_03[var_03.size] = scripts/asm/asm::asm_lookupanimfromalias(param_01,"default");
+		var_03[var_03.size] = scripts\asm\asm::asm_lookupanimfromalias(param_01,"default");
 	}
 
 	if(randomint(100) < 10 && func_6DB2()) {
-		var_03[var_03.size] = scripts/asm/asm::asm_lookupanimfromalias(param_01,"default_firing");
+		var_03[var_03.size] = scripts\asm\asm::asm_lookupanimfromalias(param_01,"default_firing");
 	}
 
 	return var_03[randomint(var_03.size)];
@@ -559,17 +559,17 @@ func_3F00(param_00,param_01,param_02) {
 
 func_3ED8(param_00,param_01,param_02) {
 	if(self.var_E3 > 135 || self.var_E3 <= -135) {
-		var_03 = scripts/asm/asm::asm_lookupanimfromalias(param_01,"explosive_b");
+		var_03 = scripts\asm\asm::asm_lookupanimfromalias(param_01,"explosive_b");
 	}
 	else if(self.var_E3 > 45 && self.var_E3 <= 135) {
-		var_03 = scripts/asm/asm::asm_lookupanimfromalias(param_02,"explosive_l");
+		var_03 = scripts\asm\asm::asm_lookupanimfromalias(param_02,"explosive_l");
 	}
 	else if(self.var_E3 > -45 && self.var_E3 <= 45) {
-		var_03 = scripts/asm/asm::asm_lookupanimfromalias(param_02,"explosive_f");
+		var_03 = scripts\asm\asm::asm_lookupanimfromalias(param_02,"explosive_f");
 	}
 	else
 	{
-		var_03 = scripts/asm/asm::asm_lookupanimfromalias(param_02,"explosive_r");
+		var_03 = scripts\asm\asm::asm_lookupanimfromalias(param_02,"explosive_r");
 	}
 
 	if(getdvar("scr_expDeathMayMoveCheck","on") == "on") {
@@ -591,7 +591,7 @@ func_3ED8(param_00,param_01,param_02) {
 		}
 
 		if(!var_08) {
-			var_03 = scripts/asm/asm::asm_lookupanimfromalias(param_01,"default");
+			var_03 = scripts\asm\asm::asm_lookupanimfromalias(param_01,"default");
 		}
 	}
 
@@ -601,31 +601,31 @@ func_3ED8(param_00,param_01,param_02) {
 
 func_3F02(param_00,param_01,param_02) {
 	if(abs(self.var_E3) < 50) {
-		return scripts/asm/asm::asm_lookupanimfromalias(param_01,"pistol_2");
+		return scripts\asm\asm::asm_lookupanimfromalias(param_01,"pistol_2");
 	}
 
 	var_03 = [];
 	if(abs(self.var_E3) < 110) {
-		var_03[var_03.size] = scripts/asm/asm::asm_lookupanimfromalias(param_01,"pistol_2");
+		var_03[var_03.size] = scripts\asm\asm::asm_lookupanimfromalias(param_01,"pistol_2");
 	}
 
 	if(scripts\engine\utility::damagelocationisany("torso_upper","torso_lower","left_leg_upper","left_leg_lower","right_leg_upper","right_leg_lower")) {
-		var_03[var_03.size] = scripts/asm/asm::asm_lookupanimfromalias(param_01,"pistol_torso_upper");
+		var_03[var_03.size] = scripts\asm\asm::asm_lookupanimfromalias(param_01,"pistol_torso_upper");
 	}
 
 	if(!scripts\engine\utility::damagelocationisany("head","neck","helmet","left_foot","right_foot","left_hand","right_hand","gun") && randomint(2) == 0) {
-		var_03[var_03.size] = scripts/asm/asm::asm_lookupanimfromalias(param_01,"pistol_upper_body");
+		var_03[var_03.size] = scripts\asm\asm::asm_lookupanimfromalias(param_01,"pistol_upper_body");
 	}
 
 	if(var_03.size == 0 || scripts\engine\utility::damagelocationisany("torso_lower","torso_upper","neck","head","helmet","right_arm_upper","left_arm_upper")) {
-		var_03[var_03.size] = scripts/asm/asm::asm_lookupanimfromalias(param_01,"pistol_default");
+		var_03[var_03.size] = scripts\asm\asm::asm_lookupanimfromalias(param_01,"pistol_default");
 	}
 
 	return var_03[randomint(var_03.size)];
 }
 
 func_3F01(param_00,param_01,param_02) {
-	return scripts/asm/asm::asm_lookupanimfromalias(param_01,"default");
+	return scripts\asm\asm::asm_lookupanimfromalias(param_01,"default");
 }
 
 func_6DB2() {
@@ -1008,10 +1008,10 @@ func_9F6D(param_00,param_01,param_02,param_03) {
 
 func_3EFD(param_00,param_01,param_02) {
 	if(lib_0A1E::func_9F4C()) {
-		return scripts/asm/asm::asm_lookupanimfromalias(param_01,"shock_death");
+		return scripts\asm\asm::asm_lookupanimfromalias(param_01,"shock_death");
 	}
 
-	return scripts/asm/asm::asm_lookupanimfromalias("death_generic","default");
+	return scripts\asm\asm::asm_lookupanimfromalias("death_generic","default");
 }
 
 func_1001C() {
@@ -1191,19 +1191,19 @@ func_2453() {
 }
 
 atomizercheckpartdismembered(param_00) {
-	if(!isdefined(self._blackboard)) {
+	if(!isdefined(self.var_1198)) {
 		return 0;
 	}
 
-	if(!isdefined(self._blackboard.scriptableparts)) {
+	if(!isdefined(self.var_1198.scriptableparts)) {
 		return 0;
 	}
 
-	if(!isdefined(self._blackboard.scriptableparts[param_00])) {
+	if(!isdefined(self.var_1198.scriptableparts[param_00])) {
 		return 0;
 	}
 
-	return self._blackboard.scriptableparts[param_00].state == "dismember";
+	return self.var_1198.scriptableparts[param_00].state == "dismember";
 }
 
 atomizerrobotbodyfx() {
@@ -1211,19 +1211,19 @@ atomizerrobotbodyfx() {
 	playatomizerfx("j_spinelower");
 	playatomizerfx("j_shoulder_ri");
 	playatomizerfx("j_shoulder_le");
-	if(!scripts/asm/asm_bb::ispartdismembered("head")) {
+	if(!scripts\asm\asm_bb::ispartdismembered("head")) {
 		playatomizerfx("j_head");
 	}
 
-	if(!scripts/asm/asm_bb::ispartdismembered("right_leg")) {
+	if(!scripts\asm\asm_bb::ispartdismembered("right_leg")) {
 		playatomizerfx("j_knee_ri");
 	}
 
-	if(!scripts/asm/asm_bb::ispartdismembered("left_leg")) {
+	if(!scripts\asm\asm_bb::ispartdismembered("left_leg")) {
 		playatomizerfx("j_knee_le");
 	}
 
-	if(!scripts/asm/asm_bb::ispartdismembered("right_arm")) {
+	if(!scripts\asm\asm_bb::ispartdismembered("right_arm")) {
 		if(scripts\engine\utility::cointoss()) {
 			playatomizerfx("j_elbow_ri");
 		}
@@ -1233,7 +1233,7 @@ atomizerrobotbodyfx() {
 		}
 	}
 
-	if(!scripts/asm/asm_bb::ispartdismembered("left_arm") && self.unittype != "c8") {
+	if(!scripts\asm\asm_bb::ispartdismembered("left_arm") && self.unittype != "c8") {
 		if(scripts\engine\utility::cointoss()) {
 			playatomizerfx("j_elbow_le");
 		}
@@ -1243,5 +1243,5 @@ atomizerrobotbodyfx() {
 		}
 	}
 
-	anim thread [[self.bt.var_71CC]](self);
+	anim thread [[self.var_3135.var_71CC]](self);
 }

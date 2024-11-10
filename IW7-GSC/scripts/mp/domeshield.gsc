@@ -1,8 +1,8 @@
-/*********************************************
+/*************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\domeshield.gsc
-*********************************************/
+ * Script: scripts\mp\domeshield.gsc
+*************************************/
 
 domeshield_init() {
 	level.var_590F = [];

@@ -1,8 +1,8 @@
-/********************************************************
+/************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\killstreaks\_vanguard.gsc
-********************************************************/
+ * Script: scripts\mp\killstreaks\_vanguard.gsc
+************************************************/
 
 init() {
 	func_FAB1();
@@ -11,7 +11,7 @@ init() {
 	level.remote_uav = [];
 	level.vanguard_lastdialogtime = 0;
 	level.var_1317F = ::vanguard_firemissile;
-	level.var_A864 = loadfx("vfx/misc/laser_glow");
+	level.var_A864 = loadfx("vfx\misc\laser_glow");
 }
 
 func_FAB1() {}
@@ -25,7 +25,7 @@ func_FAC4() {
 	}
 
 	level.var_9C46 = 0;
-	if(scripts\mp\_utility::getmapname() == "mp_descent" || scripts\mp\_utility::getmapname() == "mp_descent_new") {
+	if(scripts\mp\utility::getmapname() == "mp_descent" || scripts\mp\utility::getmapname() == "mp_descent_new") {
 		level.var_13180 = level.var_13182[0].origin[2] + 360;
 		level.var_9C46 = 1;
 	}
@@ -36,7 +36,7 @@ func_1290D(param_00,param_01) {
 }
 
 func_130F5(param_00,param_01) {
-	if(scripts\mp\_utility::isusingremote() || self isusingturret()) {
+	if(scripts\mp\utility::isusingremote() || self isusingturret()) {
 		return 0;
 	}
 
@@ -45,26 +45,26 @@ func_130F5(param_00,param_01) {
 	}
 
 	if(exceededmaxvanguards(self.team) || level.littlebirds.size >= 4) {
-		scripts\mp\_hud_message::showerrormessage("KILLSTREAKS_AIR_SPACE_TOO_CROWDED");
+		scripts\mp\hud_message::showerrormessage("KILLSTREAKS_AIR_SPACE_TOO_CROWDED");
 		return 0;
 	}
-	else if(scripts\mp\_utility::currentactivevehiclecount() >= scripts\mp\_utility::maxvehiclesallowed() || level.fauxvehiclecount + 1 >= scripts\mp\_utility::maxvehiclesallowed()) {
-		scripts\mp\_hud_message::showerrormessage("KILLSTREAKS_TOO_MANY_VEHICLES");
+	else if(scripts\mp\utility::currentactivevehiclecount() >= scripts\mp\utility::maxvehiclesallowed() || level.fauxvehiclecount + 1 >= scripts\mp\utility::maxvehiclesallowed()) {
+		scripts\mp\hud_message::showerrormessage("KILLSTREAKS_TOO_MANY_VEHICLES");
 		return 0;
 	}
 	else if(isdefined(self.drones_disabled)) {
-		scripts\mp\_hud_message::showerrormessage("KILLSTREAKS_UNAVAILABLE");
+		scripts\mp\hud_message::showerrormessage("KILLSTREAKS_UNAVAILABLE");
 		return 0;
 	}
 
-	scripts\mp\_utility::incrementfauxvehiclecount();
+	scripts\mp\utility::incrementfauxvehiclecount();
 	var_02 = _meth_8356(param_00,param_01);
 	if(!isdefined(var_02)) {
-		scripts\mp\_utility::decrementfauxvehiclecount();
+		scripts\mp\utility::decrementfauxvehiclecount();
 		return 0;
 	}
 
-	scripts\mp\_matchdata::logkillstreakevent(param_01,self.origin);
+	scripts\mp\matchdata::logkillstreakevent(param_01,self.origin);
 	return func_10E0A(var_02,param_01,param_00);
 }
 
@@ -140,9 +140,9 @@ func_3E5C(param_00,param_01) {
 }
 
 _meth_8356(param_00,param_01,param_02) {
-	var_03 = scripts\mp\_spawnscoring::func_6CB5(self,90,20,192);
+	var_03 = scripts\mp\spawnscoring::func_6CB5(self,90,20,192);
 	if(!isdefined(var_03)) {
-		var_03 = scripts\mp\_spawnscoring::func_6CB5(self,0,20,192);
+		var_03 = scripts\mp\spawnscoring::func_6CB5(self,0,20,192);
 		if(!isdefined(var_03)) {
 			var_03 = func_6CCC(80,35);
 			if(!isdefined(var_03)) {
@@ -155,22 +155,22 @@ _meth_8356(param_00,param_01,param_02) {
 		var_04 = self.angles;
 		var_05 = func_4A30(param_00,self,param_01,var_03,var_04,param_02);
 		if(!isdefined(var_05)) {
-			scripts\mp\_hud_message::showerrormessage("KILLSTREAKS_AIR_SPACE_TOO_CROWDED");
+			scripts\mp\hud_message::showerrormessage("KILLSTREAKS_AIR_SPACE_TOO_CROWDED");
 		}
 
 		return var_05;
 	}
 
-	scripts\mp\_hud_message::showerrormessage("KILLSTREAKS_VANGUARD_NO_SPAWN_POINT");
+	scripts\mp\hud_message::showerrormessage("KILLSTREAKS_VANGUARD_NO_SPAWN_POINT");
 	return undefined;
 }
 
 func_10E0A(param_00,param_01,param_02) {
-	scripts\mp\_utility::setusingremote(param_01);
-	scripts\mp\_utility::freezecontrolswrapper(1);
+	scripts\mp\utility::setusingremote(param_01);
+	scripts\mp\utility::freezecontrolswrapper(1);
 	self.restoreangles = self.angles;
 	if(getdvarint("camera_thirdPerson")) {
-		scripts\mp\_utility::setthirdpersondof(0);
+		scripts\mp\utility::setthirdpersondof(0);
 	}
 
 	thread watchintrocleared(param_00);
@@ -183,14 +183,14 @@ func_10E0A(param_00,param_01,param_02) {
 		return 0;
 	}
 
-	scripts\mp\_utility::freezecontrolswrapper(0);
+	scripts\mp\utility::freezecontrolswrapper(0);
 	param_00.playerlinked = 1;
 	self cameralinkto(param_00,"tag_origin");
 	self remotecontrolvehicle(param_00);
 	param_00.ammocount = 100;
 	self.remote_uav_ridelifeid = param_02;
 	self.remoteuav = param_00;
-	thread scripts\mp\_utility::teamplayercardsplash("used_vanguard",self);
+	thread scripts\mp\utility::teamplayercardsplash("used_vanguard",self);
 	return 1;
 }
 
@@ -201,7 +201,7 @@ func_1316F(param_00) {
 	}
 
 	wait(1);
-	thread scripts\mp\_movers::handle_moving_platform_touch(param_00);
+	thread scripts\mp\movers::handle_moving_platform_touch(param_00);
 }
 
 func_4A30(param_00,param_01,param_02,param_03,param_04,param_05) {
@@ -240,7 +240,7 @@ func_4A30(param_00,param_01,param_02,param_03,param_04,param_05) {
 	var_06.helitype = "remote_uav";
 	var_07.triggerportableradarping = param_01;
 	var_07 setentityowner(var_06);
-	var_07 thread scripts\mp\_weapons::doblinkinglight("tag_fx1");
+	var_07 thread scripts\mp\weapons::doblinkinglight("tag_fx1");
 	var_07.parent = var_06;
 	var_07.health = 999999;
 	var_07.maxhealth = 250;
@@ -262,7 +262,7 @@ func_4A30(param_00,param_01,param_02,param_03,param_04,param_05) {
 	var_09 = spawnstruct();
 	var_09.var_13139 = 1;
 	var_09.deathoverridecallback = ::func_1316F;
-	var_06 thread scripts\mp\_movers::handle_moving_platforms(var_09);
+	var_06 thread scripts\mp\movers::handle_moving_platforms(var_09);
 	level.remote_uav[var_06.team] = var_06;
 	return var_06;
 }
@@ -299,7 +299,7 @@ watchintrocleared(param_00) {
 	}
 
 	thread watchhostmigrationfinishedinit(param_00);
-	scripts\mp\_utility::freezecontrolswrapper(0);
+	scripts\mp\utility::freezecontrolswrapper(0);
 }
 
 func_98DE() {
@@ -315,7 +315,7 @@ func_1316C(param_00) {
 	param_00 thread scripts\mp\killstreaks\_killstreaks::allowridekillstreakplayerexit();
 	param_00 waittill("killstreakExit");
 	if(isdefined(param_00.triggerportableradarping)) {
-		param_00.triggerportableradarping scripts\mp\_utility::leaderdialogonplayer("gryphon_gone");
+		param_00.triggerportableradarping scripts\mp\utility::leaderdialogonplayer("gryphon_gone");
 	}
 
 	param_00 notify("death");
@@ -340,7 +340,7 @@ func_1317A(param_00) {
 	param_00 endon("death");
 	param_00 endon("end_remote");
 	for(;;) {
-		if(param_00 scripts\mp\_utility::touchingbadtrigger("gryphon")) {
+		if(param_00 scripts\mp\utility::touchingbadtrigger("gryphon")) {
 			param_00 notify("damage",1019,self,self.angles,self.origin,"MOD_EXPLOSIVE",undefined,undefined,undefined,undefined,"c4_mp");
 		}
 
@@ -370,7 +370,7 @@ func_13179() {
 	self endon("end_remote");
 	if(!level.hardcoremode) {
 		foreach(var_01 in level.players) {
-			if(self.triggerportableradarping scripts\mp\_utility::isenemy(var_01)) {
+			if(self.triggerportableradarping scripts\mp\utility::isenemy(var_01)) {
 				scripts\engine\utility::waitframe();
 				playfxontagforclients(level.vanguard_fx["target_marker_circle"],self.attackarrow,"tag_origin",var_01);
 			}
@@ -419,7 +419,7 @@ func_1316A(param_00) {
 	param_00.var_6D7F = gettime();
 	for(;;) {
 		self waittill("vanguard_fire");
-		scripts\mp\_hostmigration::waittillhostmigrationdone();
+		scripts\mp\hostmigration::waittillhostmigrationdone();
 		if(isdefined(level.hostmigrationtimer)) {
 			continue;
 		}
@@ -466,17 +466,17 @@ vanguard_firemissile(param_00,param_01) {
 		return;
 	}
 
-	param_00.var_1E41--;
+	param_00.ammocount--;
 	self playlocalsound("weap_gryphon_fire_plr");
-	scripts\mp\_utility::playsoundinspace("weap_gryphon_fire_npc",param_00.origin);
+	scripts\mp\utility::playsoundinspace("weap_gryphon_fire_npc",param_00.origin);
 	thread func_13177(param_00,"shotgun_fire",1);
 	earthquake(0.3,0.25,param_00.origin,60);
-	var_03 = scripts\mp\_utility::_magicbullet("remote_tank_projectile_mp",var_02,param_01,self);
+	var_03 = scripts\mp\utility::_magicbullet("remote_tank_projectile_mp",var_02,param_01,self);
 	var_03.vehicle_fired_from = param_00;
 	var_04 = 1500;
 	param_00.var_6D7F = gettime() + var_04;
 	thread func_12F63(param_00,var_04 * 0.001);
-	var_03 scripts\mp\_hostmigration::waittill_notify_or_timeout_hostmigration_pause("death",4);
+	var_03 scripts\mp\hostmigration::waittill_notify_or_timeout_hostmigration_pause("death",4);
 	earthquake(0.3,0.75,param_01,128);
 	if(isdefined(param_00)) {
 		earthquake(0.25,0.75,param_00.origin,60);
@@ -643,7 +643,7 @@ func_13173() {
 		var_00 = 6;
 	}
 
-	scripts\mp\_hostmigration::waitlongdurationwithhostmigrationpause(var_00);
+	scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(var_00);
 	self notify("death","range_death");
 }
 
@@ -656,9 +656,9 @@ func_1316B(param_00) {
 func_1316E(param_00,param_01) {
 	param_00 endon("death");
 	var_02 = 60;
-	scripts\mp\_hostmigration::waitlongdurationwithhostmigrationpause(var_02);
+	scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(var_02);
 	if(isdefined(param_00.triggerportableradarping)) {
-		param_00.triggerportableradarping scripts\mp\_utility::leaderdialogonplayer("gryphon_gone");
+		param_00.triggerportableradarping scripts\mp\utility::leaderdialogonplayer("gryphon_gone");
 	}
 
 	param_00 notify("death");
@@ -669,7 +669,7 @@ func_13169(param_00) {
 	level endon("objective_cam");
 	var_01 = param_00.turret;
 	param_00 waittill("death");
-	param_00 scripts\mp\_weapons::stopblinkinglight();
+	param_00 scripts\mp\weapons::stopblinkinglight();
 	stopfxontag(level.vanguard_fx["target_marker_circle"],param_00.attackarrow,"tag_origin");
 	playfx(level.vanguard_fx["explode"],param_00.origin);
 	param_00 playsound("ball_drone_explode");
@@ -696,7 +696,7 @@ vanguard_endride(param_00,param_01) {
 	func_13174(param_00,param_01);
 	stopfxontag(level.vanguard_fx["smoke"],param_01,"tag_origin");
 	level.remote_uav[param_01.team] = undefined;
-	scripts\mp\_utility::decrementfauxvehiclecount();
+	scripts\mp\utility::decrementfauxvehiclecount();
 	if(isdefined(param_01.killcament)) {
 		param_01.killcament delete();
 	}
@@ -707,7 +707,7 @@ vanguard_endride(param_00,param_01) {
 
 func_E2E5() {
 	self visionsetnakedforplayer("",1);
-	scripts\mp\_utility::set_visionset_for_watching_players("",1);
+	scripts\mp\utility::set_visionset_for_watching_players("",1);
 }
 
 func_13174(param_00,param_01) {
@@ -715,11 +715,11 @@ func_13174(param_00,param_01) {
 		return;
 	}
 
-	param_00 scripts\mp\_utility::clearusingremote();
+	param_00 scripts\mp\utility::clearusingremote();
 	param_00 func_E2E5();
 	param_00 setclientomnvar("ui_vanguard",0);
 	if(getdvarint("camera_thirdPerson")) {
-		param_00 scripts\mp\_utility::setthirdpersondof(1);
+		param_00 scripts\mp\utility::setthirdpersondof(1);
 	}
 
 	param_00 cameraunlink(param_01);
@@ -738,9 +738,9 @@ vanguard_freezecontrolsbuffer(param_00) {
 	param_00 endon("disconnect");
 	param_00 endon("death");
 	level endon("game_ended");
-	param_00 scripts\mp\_utility::freezecontrolswrapper(1);
+	param_00 scripts\mp\utility::freezecontrolswrapper(1);
 	wait(0.5);
-	param_00 scripts\mp\_utility::freezecontrolswrapper(0);
+	param_00 scripts\mp\utility::freezecontrolswrapper(0);
 }
 
 func_1317E() {
@@ -781,7 +781,7 @@ vanguard_handledamage() {
 	self setcandamage(1);
 	for(;;) {
 		self waittill("damage",var_00,var_01,var_02,var_03,var_04,var_05,var_06,var_07,var_08,var_09);
-		scripts\mp\_damage::monitordamageoneshot(var_00,var_01,var_02,var_03,var_04,var_05,var_06,var_07,var_08,var_09,"remote_uav",::handledeathdamage,::modifydamage,1);
+		scripts\mp\damage::monitordamageoneshot(var_00,var_01,var_02,var_03,var_04,var_05,var_06,var_07,var_08,var_09,"remote_uav",::handledeathdamage,::modifydamage,1);
 	}
 }
 
@@ -793,17 +793,17 @@ func_1317B() {
 	for(;;) {
 		self waittill("damage",var_00,var_01,var_02,var_03,var_04,var_05,var_06,var_07,var_08,var_09);
 		if(isdefined(self.parent)) {
-			self.parent scripts\mp\_damage::monitordamageoneshot(var_00,var_01,var_02,var_03,var_04,var_05,var_06,var_07,var_08,var_09,"remote_uav",::handledeathdamage,::modifydamage,1);
+			self.parent scripts\mp\damage::monitordamageoneshot(var_00,var_01,var_02,var_03,var_04,var_05,var_06,var_07,var_08,var_09,"remote_uav",::handledeathdamage,::modifydamage,1);
 		}
 	}
 }
 
 modifydamage(param_00,param_01,param_02,param_03) {
 	var_04 = param_03;
-	var_04 = scripts\mp\_damage::handleempdamage(param_01,param_02,var_04);
-	var_04 = scripts\mp\_damage::handlemissiledamage(param_01,param_02,var_04);
-	var_04 = scripts\mp\_damage::handlegrenadedamage(param_01,param_02,var_04);
-	var_04 = scripts\mp\_damage::handleapdamage(param_01,param_02,var_04);
+	var_04 = scripts\mp\damage::handleempdamage(param_01,param_02,var_04);
+	var_04 = scripts\mp\damage::handlemissiledamage(param_01,param_02,var_04);
+	var_04 = scripts\mp\damage::handlegrenadedamage(param_01,param_02,var_04);
+	var_04 = scripts\mp\damage::handleapdamage(param_01,param_02,var_04);
 	if(param_02 == "MOD_MELEE") {
 		var_04 = self.maxhealth * 0.34;
 	}
@@ -819,13 +819,13 @@ modifydamage(param_00,param_01,param_02,param_03) {
 
 handledeathdamage(param_00,param_01,param_02,param_03) {
 	if(isdefined(self.triggerportableradarping)) {
-		self.triggerportableradarping scripts\mp\_utility::leaderdialogonplayer("gryphon_destroyed");
+		self.triggerportableradarping scripts\mp\utility::leaderdialogonplayer("gryphon_destroyed");
 	}
 
-	scripts\mp\_damage::onkillstreakkilled("vanguard",param_00,param_01,param_02,param_03,"destroyed_vanguard",undefined,"callout_destroyed_vanguard");
+	scripts\mp\damage::onkillstreakkilled("vanguard",param_00,param_01,param_02,param_03,"destroyed_vanguard",undefined,"callout_destroyed_vanguard");
 	if(isdefined(param_00)) {
-		param_00 scripts\mp\_missions::processchallenge("ch_gryphondown");
-		scripts\mp\_missions::func_3DE3(param_00,self,param_01);
+		param_00 scripts\mp\missions::processchallenge("ch_gryphondown");
+		scripts\mp\missions::func_3DE3(param_00,self,param_01);
 	}
 }
 

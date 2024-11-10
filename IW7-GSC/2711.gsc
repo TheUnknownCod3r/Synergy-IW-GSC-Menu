@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2711.gsc
+ * Script: 2711.gsc
 ***************************************/
 
 func_44EE(var_00) {

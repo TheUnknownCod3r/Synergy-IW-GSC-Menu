@@ -1,8 +1,8 @@
-/****************************
+/**********************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\4284.gsc
-****************************/
+ * Script: scripts\mp\maps\mp_afghan\gen\mp_afghan_fx.gsc
+**********************************************************/
 
 main() {
 	var_00 = scripts\engine\utility::createoneshoteffect("vfx_cliff_sand_drift");

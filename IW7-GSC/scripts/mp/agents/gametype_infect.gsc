@@ -1,7 +1,7 @@
-/*********************************************************
+/*************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\agents\gametype_infect.gsc
-*********************************************************/
+ * Script: scripts\mp\agents\gametype_infect.gsc
+*************************************************/
 
 main() {}

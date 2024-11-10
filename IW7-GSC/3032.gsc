@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\3032.gsc
+ * Script: 3032.gsc
 ***************************************/
 
 init(var_00) {

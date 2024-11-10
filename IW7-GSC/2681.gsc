@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2681.gsc
+ * Script: 2681.gsc
 ***************************************/
 
 powershud_init() {

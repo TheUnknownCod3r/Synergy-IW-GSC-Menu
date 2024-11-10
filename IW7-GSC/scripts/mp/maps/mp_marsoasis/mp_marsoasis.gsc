@@ -1,16 +1,16 @@
-/*****************************************************************
+/*********************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\maps\mp_marsoasis\mp_marsoasis.gsc
-*****************************************************************/
+ * Script: scripts\mp\maps\mp_marsoasis\mp_marsoasis.gsc
+*********************************************************/
 
 main() {
 	scripts\mp\maps\mp_marsoasis\mp_marsoasis_precache::main();
 	scripts\mp\maps\mp_marsoasis\gen\mp_marsoasis_art::main();
 	scripts\mp\maps\mp_marsoasis\mp_marsoasis_fx::main();
-	scripts\mp\_load::main();
+	scripts\mp\load::main();
 	level.var_C7B3 = getentarray("OutOfBounds","targetname");
-	scripts\mp\_compass::func_FACD("compass_map_mp_marsoasis");
+	scripts\mp\compass::setupminimap("compass_map_mp_marsoasis");
 	setdvar("r_lightGridEnableTweaks",1);
 	setdvar("r_lightGridIntensity",1.33);
 	setdvar("r_umbraMinObjectContribution",8);
@@ -20,7 +20,7 @@ main() {
 	game["allies_outfit"] = "urban";
 	game["axis_outfit"] = "woodland";
 	thread func_CDA4("mp_marsoasis_casino");
-	thread scripts\mp\_animation_suite::func_1FAA();
+	thread scripts\mp\animation_suite::animationsuite();
 	thread fix_collision();
 	level.modifiedspawnpoints["-896 -2936 476"]["mp_front_spawn_allies"]["no_alternates"] = 1;
 }
@@ -86,5 +86,5 @@ fix_collision() {
 
 func_CDA4(param_00) {
 	wait(30);
-	function_030E(param_00);
+	playcinematicforalllooping(param_00);
 }

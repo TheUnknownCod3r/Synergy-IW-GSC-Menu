@@ -1,8 +1,8 @@
-/*****************************************************************
+/*********************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\maps\cp_final\gen\cp_final_art.gsc
-*****************************************************************/
+ * Script: scripts\cp\maps\cp_final\gen\cp_final_art.gsc
+*********************************************************/
 
 main() {
 	level.tweakfile = 1;

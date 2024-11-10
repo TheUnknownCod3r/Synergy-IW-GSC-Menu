@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2835.gsc
+ * Script: 2835.gsc
 ***************************************/
 
 init_colors() {
@@ -153,7 +153,7 @@ _meth_8467() {
   if (!isalive(self))
   return;
 
-  if (!scripts/sp/utility::func_8B6C())
+  if (!scripts\sp\utility::func_8B6C())
   return;
 
   if (!isdefined(var_00)) {
@@ -296,7 +296,7 @@ func_12732() {
   }
   }
 
-  scripts/sp/utility::func_228A(var_00);
+  scripts\sp\utility::func_228A(var_00);
 }
 
 func_159B(var_00) {
@@ -326,7 +326,7 @@ func_159A(var_00, var_01, var_02, var_03) {
   }
 
   foreach (var_07 in var_01) {
-  level.func_22E0[var_02][var_07] = scripts/sp/utility::func_22B9(level.func_22E0[var_02][var_07]);
+  level.func_22E0[var_02][var_07] = scripts\sp\utility::func_22B9(level.func_22E0[var_02][var_07]);
   level.func_A95D[var_02][var_07] = level.func_4BE0[var_02][var_07];
   level.func_4BE0[var_02][var_07] = var_3[var_07];
   }
@@ -438,7 +438,7 @@ func_78D6(var_00, var_01) {
 }
 
 func_9F85(var_00, var_01, var_02) {
-  level.func_22DC[var_02][var_00] = scripts/sp/utility::func_22B9(level.func_22DC[var_02][var_00]);
+  level.func_22DC[var_02][var_00] = scripts\sp\utility::func_22B9(level.func_22DC[var_02][var_00]);
   var_03 = level.func_22DC[var_02][var_00];
   var_03 = scripts\engine\utility::array_combine(var_03, level.func_22E0[var_02][var_01]);
   var_04 = [];
@@ -565,7 +565,7 @@ func_4399(var_00, var_01) {
   if (level.func_4BE0[var_01][var_02] != var_00)
   return;
 
-  var_03 = scripts/sp/utility::func_79C8(var_01, var_02);
+  var_03 = scripts\sp\utility::func_79C8(var_01, var_02);
 
   for (var_04 = 0; var_04 < var_3.size; var_4++) {
   var_05 = var_3[var_04];
@@ -606,7 +606,7 @@ func_F3D2(var_00) {
   self thread [[self.func_43A9]](var_00);
 
   if (isdefined(self.func_11B0)) {
-  thread scripts/sp/anim::func_1F32(self, self.func_11B0);
+  thread scripts\sp\anim::func_1F32(self, self.func_11B0);
   self.func_11B0 = undefined;
   }
 
@@ -751,7 +751,7 @@ func_BE08() {
   return 1;
   }
 
-  return self.node scripts/sp/utility::script_delay();
+  return self.node scripts\sp\utility::script_delay();
 }
 
 func_D966(var_00, var_01, var_02) {
@@ -760,7 +760,7 @@ func_D966(var_00, var_01, var_02) {
   self endon("death");
 
   if (isdefined(var_01))
-  var_01 scripts/sp/utility::script_delay();
+  var_01 scripts\sp\utility::script_delay();
 
   if (!func_BE08()) {
   if (isdefined(var_02))
@@ -1004,10 +1004,10 @@ func_43AA() {
   if (func_78CE(var_01, var_02) == "none")
   return;
 
-  var_04 = scripts/sp/utility::func_79C8("allies", var_2[var_01]);
+  var_04 = scripts\sp\utility::func_79C8("allies", var_2[var_01]);
 
   if (!isdefined(level.func_4392))
-  var_04 = scripts/sp/utility::func_E0AF(var_04, var_00);
+  var_04 = scripts\sp\utility::func_E0AF(var_04, var_00);
 
   if (!var_4.size) {
   wait 2;
@@ -1020,7 +1020,7 @@ func_43AA() {
   if (!isalive(var_05))
   continue;
 
-  var_05 scripts/sp/utility::func_F3B5(var_01);
+  var_05 scripts\sp\utility::func_F3B5(var_01);
 
   if (isdefined(level.func_73DF))
   var_05 [[level.func_73DF]](var_01);
@@ -1169,7 +1169,7 @@ func_10735(var_00, var_01) {
   var_02 = var_03 _meth_8393();
   var_3.origin = var_04;
 
-  if (scripts/sp/utility::func_106ED(var_02)) {
+  if (scripts\sp\utility::func_106ED(var_02)) {
   thread func_AEE0();
   wait 1;
   continue;
@@ -1190,7 +1190,7 @@ func_10735(var_00, var_01) {
   }
 
   if (isdefined(var_01))
-  var_02 scripts/sp/utility::func_F3B5(var_01);
+  var_02 scripts\sp\utility::func_F3B5(var_01);
 
   thread func_AEE0();
   return var_02;

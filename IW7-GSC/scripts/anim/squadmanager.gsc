@@ -1,8 +1,8 @@
-/*************************************************
+/*****************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\anim\squadmanager.gsc
-*************************************************/
+ * Script: scripts\anim\squadmanager.gsc
+*****************************************/
 
 func_9763() {
 	if(isdefined(level.var_10AE6) && level.var_10AE6) {
@@ -120,7 +120,7 @@ func_1811(param_00) {
 func_D362() {
 	var_00 = getentarray("player","classname")[0];
 	lib_0E4E::func_D313();
-	if(scripts\common\utility::player_is_in_jackal()) {
+	if(scripts\engine\utility::player_is_in_jackal()) {
 		anim.player = level.var_D127;
 		if(!isdefined(level.player.team)) {
 			level.player.team = "allies";
@@ -138,12 +138,12 @@ func_D362() {
 		anim.var_6BB5 = 3;
 		level.player func_1811("jackal_allies");
 		for(var_01 = 0;var_01 < level.var_10AE5.size;var_01++) {
-			level.var_10AE5[var_01].var_B661 = scripts\common\utility::array_removeundefined(level.var_10AE5[var_01].var_B661);
+			level.var_10AE5[var_01].var_B661 = scripts\engine\utility::array_removeundefined(level.var_10AE5[var_01].var_B661);
 			level.var_10AE5[var_01] func_12F25();
 		}
 
 		lib_0E4E::func_96F1();
-		while(scripts\common\utility::player_is_in_jackal()) {
+		while(scripts\engine\utility::player_is_in_jackal()) {
 			wait(0.05);
 		}
 	}
@@ -167,18 +167,18 @@ func_D362() {
 		anim.var_6BB5 = 5;
 		level.player func_1811("allies");
 		for(var_01 = 0;var_01 < level.var_10AE5.size;var_01++) {
-			level.var_10AE5[var_01].var_B661 = scripts\common\utility::array_removeundefined(level.var_10AE5[var_01].var_B661);
+			level.var_10AE5[var_01].var_B661 = scripts\engine\utility::array_removeundefined(level.var_10AE5[var_01].var_B661);
 			level.var_10AE5[var_01] func_12F25();
 		}
 
 		lib_0E4E::func_96F1();
-		while(!scripts\common\utility::player_is_in_jackal()) {
+		while(!scripts\engine\utility::player_is_in_jackal()) {
 			wait(0.05);
 		}
 	}
 
 	for(;;) {
-		if(scripts\common\utility::player_is_in_jackal()) {
+		if(scripts\engine\utility::player_is_in_jackal()) {
 			var_02 = [];
 			foreach(var_04 in level.var_10AF9["allies"].var_B661) {
 				if(var_04 != level.player) {
@@ -205,12 +205,12 @@ func_D362() {
 			anim.var_6BB5 = 3;
 			level.player func_1811("jackal_allies");
 			for(var_01 = 0;var_01 < level.var_10AE5.size;var_01++) {
-				level.var_10AE5[var_01].var_B661 = scripts\common\utility::array_removeundefined(level.var_10AE5[var_01].var_B661);
+				level.var_10AE5[var_01].var_B661 = scripts\engine\utility::array_removeundefined(level.var_10AE5[var_01].var_B661);
 				level.var_10AE5[var_01] func_12F25();
 			}
 
 			lib_0E4E::func_96F1();
-			while(scripts\common\utility::player_is_in_jackal()) {
+			while(scripts\engine\utility::player_is_in_jackal()) {
 				wait(0.05);
 			}
 
@@ -243,12 +243,12 @@ func_D362() {
 		anim.var_6BB5 = 5;
 		level.player func_1811("allies");
 		for(var_01 = 0;var_01 < level.var_10AE5.size;var_01++) {
-			level.var_10AE5[var_01].var_B661 = scripts\common\utility::array_removeundefined(level.var_10AE5[var_01].var_B661);
+			level.var_10AE5[var_01].var_B661 = scripts\engine\utility::array_removeundefined(level.var_10AE5[var_01].var_B661);
 			level.var_10AE5[var_01] func_12F25();
 		}
 
 		lib_0E4E::func_96F1();
-		while(!scripts\common\utility::player_is_in_jackal()) {
+		while(!scripts\engine\utility::player_is_in_jackal()) {
 			wait(0.05);
 		}
 	}
@@ -440,8 +440,8 @@ func_12E77() {
 
 	for(var_00 = 0;var_00 < self.var_B661.size;var_00++) {
 		if(isdefined(self.var_B661[var_00])) {
-			if(isdefined(self.var_B661[var_00].isnodeoccupied) && isdefined(self.var_B661[var_00].var_10C.var_10AC8) && self.var_B661[var_00].var_440E > 0) {
-				self.var_10AE9[self.var_B661[var_00].var_10C.var_10AC8.var_10AEE].var_9E42 = 1;
+			if(isdefined(self.var_B661[var_00].isnodeoccupied) && isdefined(self.var_B661[var_00].isnodeoccupied.var_10AC8) && self.var_B661[var_00].var_440E > 0) {
+				self.var_10AE9[self.var_B661[var_00].isnodeoccupied.var_10AC8.var_10AEE].var_9E42 = 1;
 			}
 		}
 	}
@@ -456,7 +456,7 @@ func_12E59() {
 	func_12E77();
 	var_05 = !isdefined(self.isnodeoccupied);
 	if(!var_05) {
-		self.missionfailed = vectornormalize(self.var_10C.origin - self.origin);
+		self.missionfailed = vectornormalize(self.isnodeoccupied.origin - self.origin);
 	}
 
 	foreach(var_07 in self.var_B661) {
@@ -470,22 +470,22 @@ func_12E59() {
 			var_01 = var_01 + anglestoforward(var_07.angles);
 		}
 
-		if(isdefined(var_07.isnodeoccupied) && isdefined(var_07.var_10C.var_10AC8)) {
+		if(isdefined(var_07.isnodeoccupied) && isdefined(var_07.isnodeoccupied.var_10AC8)) {
 			if(!isdefined(var_03)) {
-				var_03 = var_07.var_10C.var_10AC8;
+				var_03 = var_07.isnodeoccupied.var_10AC8;
 				continue;
 			}
 
-			if(var_07.var_10C.var_10AC8.var_B65C > var_03.var_B65C) {
-				var_03 = var_07.var_10C.var_10AC8;
+			if(var_07.isnodeoccupied.var_10AC8.var_B65C > var_03.var_B65C) {
+				var_03 = var_07.isnodeoccupied.var_10AC8;
 			}
 		}
 	}
 
 	if(var_02) {
-		self.origin = var_00 \ var_02;
+		self.origin = var_00 / var_02;
 		if(var_05) {
-			self.missionfailed = var_01 \ var_02;
+			self.missionfailed = var_01 / var_02;
 		}
 	}
 	else
@@ -539,7 +539,7 @@ func_1B0E(param_00) {
 		case "stop":
 		case "move":
 		case "death":
-			self.var_1491.state = param_00;
+			self.a.state = param_00;
 			break;
 
 		case "grenadecower":
@@ -557,12 +557,12 @@ func_1B0E(param_00) {
 		case "cover_left":
 		case "cover_right":
 		case "cover_crouch":
-			self.var_1491.state = "cover";
+			self.a.state = "cover";
 			break;
 
 		case "l33t truckride combat":
 		case "aim":
-			self.var_1491.state = "combat";
+			self.a.state = "combat";
 			break;
 	}
 }

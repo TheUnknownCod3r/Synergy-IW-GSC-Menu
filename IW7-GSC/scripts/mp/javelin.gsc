@@ -1,8 +1,8 @@
-/******************************************
+/**********************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\javelin.gsc
-******************************************/
+ * Script: scripts\mp\javelin.gsc
+**********************************/
 
 func_9887() {
 	self.var_A444 = undefined;

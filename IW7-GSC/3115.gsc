@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3115.gsc
-****************************/
+ * Script: 3115.gsc
+************************/
 
 func_98E5(param_00) {
 	if(isdefined(self.spawner) && self.spawner func_10863()) {
@@ -104,11 +104,11 @@ func_3E48(param_00) {
 
 func_3E29(param_00) {
 	if(self.precacheleaderboards) {
-		scripts/asm/asm_bb::bb_clearmeleerequest();
+		scripts\asm\asm_bb::bb_clearmeleerequest();
 		return level.failure;
 	}
 
-	scripts/asm/asm_bb::bb_clearmeleerequest();
+	scripts\asm\asm_bb::bb_clearmeleerequest();
 	if(!isdefined(self.curmeleetarget)) {
 		return level.failure;
 	}
@@ -125,30 +125,30 @@ func_3E29(param_00) {
 		return level.failure;
 	}
 
-	if(!scripts/mp/agents/zombie/zombie_util::func_8B76()) {
+	if(!scripts\mp\agents\zombie\zombie_util::func_8B76()) {
 		return level.failure;
 	}
 
-	if(scripts/mp/agents/zombie/zombie_util::func_138E7()) {
+	if(scripts\mp\agents\zombie\zombie_util::func_138E7()) {
 		return level.failure;
 	}
 
-	if(scripts/mp/agents/zombie/zombie_util::func_54BF()) {
+	if(scripts\mp\agents\zombie\zombie_util::func_54BF()) {
 		return level.failure;
 	}
 
 	var_01 = scripts\engine\utility::istrue(self.var_B104) && isdefined(self.var_B100) && gettime() - self.var_B100 <= self.var_B0FE;
-	if(!ispointonnavmesh(self.curmeleetarget.origin,self) && !scripts/asm/asm_bb::bb_moverequested()) {
-		if(!scripts/mp/agents/zombie/zombie_util::func_DD7C("offmesh")) {
+	if(!ispointonnavmesh(self.curmeleetarget.origin,self) && !scripts\asm\asm_bb::bb_moverequested()) {
+		if(!scripts\mp\agents\zombie\zombie_util::func_DD7C("offmesh")) {
 			return level.failure;
 		}
 	}
-	else if(scripts/mp/agents/zombie/zombie_util::func_54BE() || var_01) {
-		if(!scripts/mp/agents/zombie/zombie_util::func_DD7C("base")) {
+	else if(scripts\mp\agents\zombie\zombie_util::func_54BE() || var_01) {
+		if(!scripts\mp\agents\zombie\zombie_util::func_DD7C("base")) {
 			return level.failure;
 		}
 	}
-	else if(!scripts/mp/agents/zombie/zombie_util::func_DD7C("normal")) {
+	else if(!scripts\mp\agents\zombie\zombie_util::func_DD7C("normal")) {
 		return level.failure;
 	}
 
@@ -171,7 +171,7 @@ func_3E29(param_00) {
 		self.var_B629 = var_03;
 	}
 
-	scripts/asm/asm_bb::bb_requestmelee(self.curmeleetarget);
+	scripts\asm\asm_bb::bb_requestmelee(self.curmeleetarget);
 	return level.failure;
 }
 
@@ -180,7 +180,7 @@ func_3E4F(param_00) {
 		return level.failure;
 	}
 
-	scripts/asm/asm_bb::bb_clearmeleerequest();
+	scripts\asm\asm_bb::bb_clearmeleerequest();
 	if(self.precacheleaderboards) {
 		return level.failure;
 	}
@@ -197,7 +197,7 @@ func_3E4F(param_00) {
 		return level.failure;
 	}
 
-	if(!scripts/mp/agents/zombie/zombie_util::func_8B76()) {
+	if(!scripts\mp\agents\zombie\zombie_util::func_8B76()) {
 		return level.failure;
 	}
 
@@ -210,7 +210,7 @@ func_3E4F(param_00) {
 }
 
 bb_requeststance(param_00) {
-	self._blackboard.var_3134 = 1;
+	self.var_1198.var_3134 = 1;
 }
 
 func_13D9D(param_00) {
@@ -218,7 +218,7 @@ func_13D9D(param_00) {
 }
 
 chaseenemy(param_00) {
-	scripts/asm/asm_bb::bb_setisincombat(1);
+	scripts\asm\asm_bb::bb_setisincombat(1);
 	if(self.precacheleaderboards) {
 		self.curmeleetarget = undefined;
 		return level.failure;
@@ -243,13 +243,13 @@ chaseenemy(param_00) {
 	}
 
 	var_01 = undefined;
-	if(isdefined(self.var_571B) && scripts/mp/agents/zombie/zombie_util::func_100AB()) {
+	if(isdefined(self.var_571B) && scripts\mp\agents\zombie\zombie_util::func_100AB()) {
 		var_01 = self.var_571B;
 	}
 	else if(isdefined(self.attackent)) {
 		var_01 = self.attackent;
 	}
-	else if(isdefined(self.isnodeoccupied) && !scripts/mp/agents/zombie/zombie_util::shouldignoreent(self.isnodeoccupied)) {
+	else if(isdefined(self.isnodeoccupied) && !scripts\mp\agents\zombie\zombie_util::shouldignoreent(self.isnodeoccupied)) {
 		var_01 = self.isnodeoccupied;
 	}
 
@@ -267,7 +267,7 @@ chaseenemy(param_00) {
 	var_05 = self.var_252B;
 	var_06 = var_05 * var_05;
 	self.curmeleetarget = var_01;
-	var_07 = scripts/mp/agents/zombie/zombie_util::func_7FAA(var_01);
+	var_07 = scripts\mp\agents\zombie\zombie_util::func_7FAA(var_01);
 	var_08 = var_07.var_656D;
 	var_09 = distancesquared(var_07.origin,self.origin);
 	var_0A = distancesquared(var_08,self.origin);
@@ -288,7 +288,7 @@ chaseenemy(param_00) {
 
 		self ghostskulls_total_waves(self.defaultgoalradius);
 	}
-	else if(!scripts/mp/agents/zombie/zombie_util::func_8C39(var_01,self.var_B640)) {
+	else if(!scripts\mp\agents\zombie\zombie_util::func_8C39(var_01,self.var_B640)) {
 		self ghostskulls_total_waves(self.defaultgoalradius);
 		var_0B = 1;
 	}
@@ -324,7 +324,7 @@ seekenemy(param_00) {
 			continue;
 		}
 
-		if(scripts/mp/agents/zombie/zombie_util::shouldignoreent(var_03)) {
+		if(scripts\mp\agents\zombie\zombie_util::shouldignoreent(var_03)) {
 			continue;
 		}
 
@@ -359,7 +359,7 @@ seekenemy(param_00) {
 			self.var_2AB8 = 0;
 		}
 
-		scripts/asm/asm_bb::bb_setisincombat(1);
+		scripts\asm\asm_bb::bb_setisincombat(1);
 		return level.success;
 	}
 
@@ -367,7 +367,7 @@ seekenemy(param_00) {
 }
 
 notargetfound(param_00) {
-	scripts/asm/asm_bb::bb_setisincombat(0);
+	scripts\asm\asm_bb::bb_setisincombat(0);
 	if(isdefined(level.var_71A7)) {
 		var_01 = 200;
 		if(!isdefined(self.vehicle_getspawnerarray) || distancesquared(self.vehicle_getspawnerarray,self.origin) < var_01 * var_01) {

@@ -1,8 +1,8 @@
-/**********************************************************
+/**************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\zombies\zombies_pillage.gsc
-**********************************************************/
+ * Script: scripts\cp\zombies\zombies_pillage.gsc
+**************************************************/
 
 init_pillage_drops() {
 	scripts\engine\utility::flag_init("can_drop_coins");
@@ -56,7 +56,7 @@ func_668F(param_00,param_01) {
 }
 
 func_381B(param_00) {
-	if(param_00 scripts/asm/zombie/zombie::func_9E0F()) {
+	if(param_00 scripts\asm\zombie\zombie::func_9E0F()) {
 		return 0;
 	}
 
@@ -862,7 +862,7 @@ func_1287B(param_00) {
 	self playlocalsound("grenade_pickup");
 	thread scripts\cp\cp_vo::try_to_play_vo("pillage_grenade","zmb_comment_vo","low",10,0,1,0,50);
 	scripts\cp\zombies\zombie_analytics::func_AF82(1,self,param_00.type,self.itempicked," None ",level.transactionid);
-	param_00.var_CB63 setmodel(function_00EA(var_05));
+	param_00.var_CB63 setmodel(getweaponmodel(var_05));
 	var_06 = func_7A06(var_05);
 	param_00.var_CB63 sethintstring(var_06);
 	param_00.var_CB63 makeusable();
@@ -911,7 +911,7 @@ func_38B7() {
 	}
 
 	var_01 = self getcurrentweapon();
-	var_02 = function_0249(var_01);
+	var_02 = weaponmaxammo(var_01);
 	var_03 = weaponclipsize(var_01);
 	var_04 = scripts\cp\utility::getrawbaseweaponname(var_01);
 	if(var_01 == "iw7_axe_zm" || var_01 == "iw7_axe_zm_pap1" || var_01 == "iw7_axe_zm_pap2" || var_01 == "none" || scripts\cp\utility::weapon_is_dlc_melee(var_01) || var_01 == "iw7_katana_zm" || issubstr(var_01,"iw7_entangler")) {
@@ -930,14 +930,14 @@ func_38B7() {
 		return 1;
 	}
 
-	if(function_024C(var_01) == "riotshield" || scripts\cp\cp_weapon::is_incompatible_weapon(var_01)) {
+	if(weapontype(var_01) == "riotshield" || scripts\cp\cp_weapon::is_incompatible_weapon(var_01)) {
 		var_05 = self getweaponslistprimaries();
 		foreach(var_07 in var_05) {
 			if(var_07 == var_01) {
 				continue;
 			}
 
-			var_02 = function_0249(var_07);
+			var_02 = weaponmaxammo(var_07);
 			var_03 = weaponclipsize(var_07);
 			var_04 = scripts\cp\utility::getrawbaseweaponname(var_07);
 			if(self getweaponammostock(var_07) < var_02) {
@@ -953,7 +953,7 @@ setaimspreadmovementscale() {
 	var_00 = self getcurrentweapon();
 	var_01 = scripts\cp\utility::getrawbaseweaponname(var_00);
 	var_02 = weaponclipsize(var_00);
-	if(function_024C(var_00) == "riotshield" || scripts\cp\cp_weapon::is_incompatible_weapon(var_00)) {
+	if(weapontype(var_00) == "riotshield" || scripts\cp\cp_weapon::is_incompatible_weapon(var_00)) {
 		var_03 = self getweaponslistprimaries();
 		foreach(var_05 in var_03) {
 			if(var_05 == var_00) {
@@ -966,7 +966,7 @@ setaimspreadmovementscale() {
 
 			var_02 = weaponclipsize(var_05);
 			var_01 = scripts\cp\utility::getrawbaseweaponname(var_05);
-			if(self getweaponammostock(var_05) < function_0249(var_05)) {
+			if(self getweaponammostock(var_05) < weaponmaxammo(var_05)) {
 				var_06 = self getweaponammostock(var_05);
 				self setweaponammostock(var_05,var_02 + var_06);
 				self.itempicked = var_05;
@@ -988,7 +988,7 @@ setaimspreadmovementscale() {
 _meth_82E8() {
 	var_00 = self getweaponslistprimaries();
 	foreach(var_02 in var_00) {
-		if(function_024C(var_02) == "riotshield") {
+		if(weapontype(var_02) == "riotshield") {
 			continue;
 		}
 
@@ -998,8 +998,8 @@ _meth_82E8() {
 
 		var_03 = scripts\cp\utility::getrawbaseweaponname(var_02);
 		self.itempicked = var_03;
-		var_04 = function_0249(var_02);
-		var_05 = int(var_04 * scripts/cp/perks/prestige::prestige_getminammo());
+		var_04 = weaponmaxammo(var_02);
+		var_05 = int(var_04 * scripts\cp\perks\prestige::prestige_getminammo());
 		self setweaponammostock(var_02,var_05);
 	}
 
@@ -1009,7 +1009,7 @@ _meth_82E8() {
 func_38BA() {
 	var_00 = self getweaponslistprimaries();
 	foreach(var_02 in var_00) {
-		if(function_024C(var_02) == "riotshield") {
+		if(weapontype(var_02) == "riotshield") {
 			continue;
 		}
 
@@ -1018,7 +1018,7 @@ func_38BA() {
 		}
 
 		var_03 = scripts\cp\utility::getrawbaseweaponname(var_02);
-		var_04 = function_0249(var_02);
+		var_04 = weaponmaxammo(var_02);
 		var_05 = var_04;
 		var_06 = self getweaponammostock(var_02);
 		if(var_06 < var_05) {
@@ -1069,7 +1069,7 @@ is_in_active_volume(param_00) {
 	}
 
 	foreach(var_02 in level.active_spawn_volumes) {
-		if(function_010F(param_00,var_02)) {
+		if(ispointinvolume(param_00,var_02)) {
 			return 1;
 		}
 	}

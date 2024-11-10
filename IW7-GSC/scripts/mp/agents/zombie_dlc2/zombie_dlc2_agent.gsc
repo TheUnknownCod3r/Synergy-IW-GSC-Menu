@@ -1,11 +1,11 @@
-/***********************************************************************
+/***************************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\agents\zombie_dlc2\zombie_dlc2_agent.gsc
-***********************************************************************/
+ * Script: scripts\mp\agents\zombie_dlc2\zombie_dlc2_agent.gsc
+***************************************************************/
 
 registerscriptedagent() {
-	scripts/aitypes/bt_util::init();
+	scripts\aitypes\bt_util::init();
 	behaviortree\zombie_dlc2::func_DEE8();
 	scripts\asm\zombie_dlc2\mp\states::func_2371();
 	level.agent_definition["generic_zombie"]["asm"] = "zombie_dlc2";
@@ -30,7 +30,7 @@ registerscriptedagent() {
 }
 
 zombieinit_dlc2() {
-	scripts/asm/zombie/zombie::func_13F9A();
+	scripts\asm\zombie\zombie::func_13F9A();
 }
 
 func_FAB0() {
@@ -42,7 +42,7 @@ func_FAB0() {
 	level.agent_definition["generic_zombie"]["setup_func"] = ::setupagent;
 	level.agent_definition["generic_zombie"]["setup_model_func"] = ::func_FACE;
 	level.agent_funcs["generic_zombie"]["gametype_on_killed"] = ::scripts\cp\maps\cp_disco\cp_disco_damage::cp_disco_onzombiekilled;
-	level.movemodefunc["generic_zombie"] = ::scripts/cp/agents/gametype_zombie::run_if_last_zombie;
+	level.movemodefunc["generic_zombie"] = ::scripts\cp\agents\gametype_zombie::run_if_last_zombie;
 	level.agent_funcs["generic_zombie"]["on_damaged"] = ::scripts\cp\maps\cp_disco\cp_disco_damage::cp_disco_onzombiedamaged;
 	level.agent_funcs["generic_zombie"]["on_damaged_finished"] = ::scripts\mp\agents\zombie\zmb_zombie_agent::onzombiedamagefinished;
 	level.agent_funcs["generic_zombie"]["on_killed"] = ::onzombiekilled;
@@ -59,7 +59,7 @@ func_FACE(param_00) {
 }
 
 dopiranhatrapdeath() {
-	scripts/asm/asm::asm_setstate("piranha_trap");
+	scripts\asm\asm::asm_setstate("piranha_trap");
 }
 
 onzombiedamagefinished(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08,param_09,param_0A,param_0B,param_0C) {

@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2609.gsc
+ * Script: 2609.gsc
 ***************************************/
 
 bcs_location_trigs_init() {

@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2919.gsc
+ * Script: 2919.gsc
 ***************************************/
 
 func_DBCA() {
@@ -26,8 +26,8 @@ func_DBCC() {
   level.func_DBD5 = 1;
 
   if (!isdefined(self.func_DBC1)) {
-  self.func_DBC1 = scripts/sp/hud_util::func_499B("hud_radar_background", 100, 100);
-  self.func_DBC1 scripts/sp/hud_util::setpoint("BOTTOMRIGHT", "BOTTOMRIGHT", -10, -10, 0);
+  self.func_DBC1 = scripts\sp\hud_util::func_499B("hud_radar_background", 100, 100);
+  self.func_DBC1 scripts\sp\hud_util::setpoint("BOTTOMRIGHT", "BOTTOMRIGHT", -10, -10, 0);
   self.func_DBC1.sort = -10;
   self.func_DBC1.shader = "hud_radar_background";
   } else {
@@ -45,7 +45,7 @@ func_DBCD() {
 
   for (;;) {
   if (scripts\engine\utility::is_true(self.func_DBC5.func_26F0) || scripts\engine\utility::is_true(self.func_DBC5.func_1D2C)) {
-  foreach (var_01 in scripts/sp/utility::maymovefrompointtopoint()) {
+  foreach (var_01 in scripts\sp\utility::maymovefrompointtopoint()) {
   var_02 = var_01 func_DBC7();
 
   if (isdefined(var_02) && (var_02 == "axis" && scripts\engine\utility::is_true(self.func_DBC5.func_26F0) || var_02 == "allies" && scripts\engine\utility::is_true(self.func_DBC5.func_1D2C)))
@@ -106,7 +106,7 @@ func_DBC3(var_00, var_01, var_02, var_03, var_04) {
   var_11 = var_09 * var_10[1] * (self.func_DBC1.width - var_0.func_DBC2.width * 2.0) / 2.0;
   var_12 = var_09 * var_10[0] * -1.0 * (self.func_DBC1.height - var_0.func_DBC2.height * 2.0) / 2.0;
   var_13 = clamp(scripts\engine\utility::sign(var_07) * abs(var_07) / 63360, -1.0, 1.0);
-  var_0.func_DBC2 scripts/sp/hud_util::setpoint("", undefined, var_11, var_12, 0.05);
+  var_0.func_DBC2 scripts\sp\hud_util::setpoint("", undefined, var_11, var_12, 0.05);
 
   if (getdvarint("radar_color_dist_scaled") >= 1)
   var_0.func_DBC2.color = (scripts\engine\utility::ter_op(var_13 >= 0, 1.0, _pow(1.0 + var_13, 4)), _pow(1.0 - abs(var_13), 1), scripts\engine\utility::ter_op(var_13 <= 0, 1.0, _pow(1.0 - var_13, 4))) * var_0.func_DBC2.func_439E;
@@ -151,7 +151,7 @@ func_DBC4(var_00, var_01, var_02, var_03, var_04) {
   var_10 = var_9[0] * (self.func_DBC1.width - var_0.func_DBC2.width * 2.0) / 2.0;
   var_11 = var_9[1] * -1.0 * (self.func_DBC1.height - var_0.func_DBC2.height * 2.0) / 2.0;
   var_12 = clamp(var_05 / 63360, 0.0, 1.0);
-  var_0.func_DBC2 scripts/sp/hud_util::setpoint("", undefined, var_10, var_11, 0.05);
+  var_0.func_DBC2 scripts\sp\hud_util::setpoint("", undefined, var_10, var_11, 0.05);
 
   if (getdvarint("radar_color_dist_scaled") >= 1)
   var_0.func_DBC2.color = (0.5 * (1.0 - _pow(var_12, 0.5)) + 0.5, 0.0, 0.0) * var_0.func_DBC2.func_439E;
@@ -247,9 +247,9 @@ func_DBC0(var_00, var_01, var_02, var_03, var_04, var_05, var_06) {
   func_DBCC();
 
   self.func_DBC6[self.func_DBC6.size] = var_00;
-  var_0.func_DBC2 = scripts/sp/hud_util::createicon(var_07, var_08, var_09);
-  var_0.func_DBC2 scripts/sp/hud_util::setpoint("", undefined, 0, 0);
-  var_0.func_DBC2 scripts/sp/hud_util::setparent(self.func_DBC1);
+  var_0.func_DBC2 = scripts\sp\hud_util::createicon(var_07, var_08, var_09);
+  var_0.func_DBC2 scripts\sp\hud_util::setpoint("", undefined, 0, 0);
+  var_0.func_DBC2 scripts\sp\hud_util::setparent(self.func_DBC1);
   var_0.func_DBC2.color = (1, 1, 1);
   var_0.func_DBC2.sort = 10;
   var_0.func_DBC2.shader = var_07;

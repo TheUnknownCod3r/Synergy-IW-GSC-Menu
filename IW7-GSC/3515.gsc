@@ -1,12 +1,12 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\3515.gsc
+ * Script: 3515.gsc
 ***************************************/
 
 init() {
-  level.reminder_vo_init["laserTarget"] = loadfx("vfx/misc/laser_glow");
-  level.reminder_vo_init["missileExplode"] = loadfx("vfx/core/expl/bouncing_betty_explosion");
-  level.reminder_vo_init["deathExplode"] = loadfx("vfx/core/expl/uav_advanced_death");
+  level.reminder_vo_init["laserTarget"] = loadfx("vfx\misc\laser_glow");
+  level.reminder_vo_init["missileExplode"] = loadfx("vfx\core\expl\bouncing_betty_explosion");
+  level.reminder_vo_init["deathExplode"] = loadfx("vfx\core\expl\uav_advanced_death");
   scripts\mp\killstreaks\killstreaks::registerkillstreak("remote_mortar", ::func_128FD);
   level.reminder_reaction_pointat = undefined;
 }
@@ -493,8 +493,8 @@ func_10FA8(var_00, var_01) {
 
   if (var_05 < 3000 && var_0.numflares > 0) {
   var_0.numflares--;
-  var_00 thread scripts/mp/killstreaks/flares::func_6EAE();
-  var_06 = var_00 scripts/mp/killstreaks/flares::func_6EA0();
+  var_00 thread scripts\mp\killstreaks\flares::func_6EAE();
+  var_06 = var_00 scripts\mp\killstreaks\flares::func_6EA0();
   self missile_settargetent(var_06);
   var_00 = var_06;
 
@@ -578,8 +578,8 @@ func_EB18(var_00, var_01, var_02) {
   if (isdefined(var_8[var_06])) {
   if (var_8[var_06] < 3000 && var_0.numflares > 0) {
   var_0.numflares--;
-  var_00 thread scripts/mp/killstreaks/flares::func_6EAE();
-  var_09 = var_00 scripts/mp/killstreaks/flares::func_6EA0();
+  var_00 thread scripts\mp\killstreaks\flares::func_6EAE();
+  var_09 = var_00 scripts\mp\killstreaks\flares::func_6EA0();
 
   for (var_10 = 0; var_10 < var_2.size; var_10++) {
   if (isdefined(var_2[var_10]))

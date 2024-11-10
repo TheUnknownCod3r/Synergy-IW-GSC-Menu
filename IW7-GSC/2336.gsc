@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\2336.gsc
-****************************/
+ * Script: 2336.gsc
+************************/
 
 main() {
 	self setmodel("seeker_grenade_wm");
@@ -11,7 +11,7 @@ main() {
 	self.voice = "unitednations";
 	self give_explosive_touch_on_revived("none");
 	if(issentient(self)) {
-		self sethitlocdamagetable("locdmgtable/ai_lochit_dmgtable");
+		self sethitlocdamagetable("locdmgtable\ai_lochit_dmgtable");
 	}
 
 	self glinton(#animtree);

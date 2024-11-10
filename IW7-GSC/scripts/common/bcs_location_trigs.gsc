@@ -1,8 +1,8 @@
-/*********************************************************
+/*************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\common\bcs_location_trigs.gsc
-*********************************************************/
+ * Script: scripts\common\bcs_location_trigs.gsc
+*************************************************/
 
 bcs_location_trigs_init() {
 	level.bcs_location_mappings = [];

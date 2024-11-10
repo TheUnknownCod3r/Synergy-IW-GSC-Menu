@@ -1,15 +1,15 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\3526.gsc
+ * Script: 3526.gsc
 ***************************************/
 
 init() {
   scripts\mp\killstreaks\killstreaks::registerkillstreak("thor", ::func_12909, undefined, undefined, undefined, ::func_13C8E, undefined, ::func_13099, ::weaponswitchendedairstrike);
-  level._effect["thor_clouds"] = loadfx("vfx/core/mp/killstreaks/odin/odin_parallax_clouds");
-  level._effect["thor_fisheye"] = loadfx("vfx/iw7/_requests/mp/vfx_scrnfx_thor_fisheye.vfx");
-  level._effect["thor_targeting"] = loadfx("vfx/core/mp/killstreaks/odin/vfx_marker_odin_cyan");
-  level._effect["thor_target_mark"] = loadfx("vfx/iw7/_requests/mp/vfx_marker_map_target");
-  level._effect["thor_explode"] = loadfx("vfx/iw7/core/mp/killstreaks/vfx_veh_exp_thor.vfx");
+  level._effect["thor_clouds"] = loadfx("vfx\core\mp\killstreaks\odin\odin_parallax_clouds");
+  level._effect["thor_fisheye"] = loadfx("vfx\iw7\_requests\mp\vfx_scrnfx_thor_fisheye.vfx");
+  level._effect["thor_targeting"] = loadfx("vfx\core\mp\killstreaks\odin\vfx_marker_odin_cyan");
+  level._effect["thor_target_mark"] = loadfx("vfx\iw7\_requests\mp\vfx_marker_map_target");
+  level._effect["thor_explode"] = loadfx("vfx\iw7\core\mp\killstreaks\vfx_veh_exp_thor.vfx");
   level.func_117B0 = [];
   level.func_117B0["thor"] = spawnstruct();
   level.func_117B0["thor"].timeout = 60;
@@ -37,7 +37,7 @@ init() {
   level.func_117B0["thor"].weapon["missile"].func_C195 = "null";
   level.func_C20D = 0;
   var_00 = ["passive_increased_armor", "passive_decreased_duration", "passive_seek_cluster", "passive_no_cursor", "passive_switch_thruster", "passive_armor_duration"];
-  scripts/mp/killstreak_loot::func_DF07("thor", var_00);
+  scripts\mp\killstreak_loot::func_DF07("thor", var_00);
 }
 
 func_13C8E(var_00) {
@@ -161,7 +161,7 @@ func_4A26(var_00, var_01) {
   var_09 = self.func_117AF.origin + var_08 + (0, 0, 1000);
   var_10 = self.func_117AF.origin + var_08;
   var_11 = var_2.modelbase;
-  var_12 = scripts/mp/killstreak_loot::getrarityforlootitem(var_1.variantid);
+  var_12 = scripts\mp\killstreak_loot::getrarityforlootitem(var_1.variantid);
 
   if (var_12 != "")
   var_11 = var_11 + "_" + var_12;
@@ -232,7 +232,7 @@ func_117AE(var_00, var_01) {
 
   var_0.owner _meth_82C0("thor_killstreak", 1);
   var_06 = var_2.teamsplash;
-  var_07 = scripts/mp/killstreak_loot::getrarityforlootitem(var_0.streakinfo.variantid);
+  var_07 = scripts\mp\killstreak_loot::getrarityforlootitem(var_0.streakinfo.variantid);
 
   if (var_07 != "")
   var_06 = var_06 + "_" + var_07;
@@ -250,12 +250,12 @@ func_117AE(var_00, var_01) {
   var_00 setscriptablepartstate("thrusters", "idle", 0);
   scripts\mp\shellshock::_earthquake(0.2, 0.76, var_0.origin, 1000);
   var_00 linkto(self.func_117AF, "tag_origin");
-  var_00 scripts/mp/killstreaks/utility::func_1843(var_0.streakname, undefined, var_0.owner, 1);
+  var_00 scripts\mp\killstreaks\utility::func_1843(var_0.streakname, undefined, var_0.owner, 1);
   var_08 = "icon_minimap_thor_friendly";
   var_0.minimapid = var_00 scripts\mp\killstreaks\airdrop::createobjective(var_08, undefined, 1, 1, 1);
   var_09 = var_2.timeout;
 
-  if (scripts/mp/killstreaks/utility::func_A69F(var_0.streakinfo, "passive_armor_duration"))
+  if (scripts\mp\killstreaks\utility::func_A69F(var_0.streakinfo, "passive_armor_duration"))
   var_09 = var_09 - 5;
 
   var_00 thread func_1179D(var_0.owner);
@@ -266,7 +266,7 @@ func_117AE(var_00, var_01) {
   var_00 thread func_117AB();
   var_00 thread func_117A2();
 
-  if (scripts/mp/killstreaks/utility::func_A69F(var_0.streakinfo, "passive_switch_thruster"))
+  if (scripts\mp\killstreaks\utility::func_A69F(var_0.streakinfo, "passive_switch_thruster"))
   var_00 thread thor_watchswitchthrust(var_0.owner);
 
   var_00 thread func_117A3();
@@ -431,7 +431,7 @@ func_117AC(var_00) {
   self.owner endon("disconnect");
   self.owner endon("joined_team");
   self.owner endon("joined_spectators");
-  thread scripts/mp/killstreaks/utility::watchhostmigrationlifetime("leaving", var_00, ::func_117AC);
+  thread scripts\mp\killstreaks\utility::watchhostmigrationlifetime("leaving", var_00, ::func_117AC);
   scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(var_00);
   func_1179C(3);
   var_01 = ["thor_end", "thor_timeout"];
@@ -596,7 +596,7 @@ func_1179F() {
   var_05 = 4;
   var_06 = 5;
 
-  if (scripts/mp/killstreaks/utility::func_A69F(self.streakinfo, "passive_armor_duration")) {
+  if (scripts\mp\killstreaks\utility::func_A69F(self.streakinfo, "passive_armor_duration")) {
   var_4++;
   var_5++;
   var_6++;
@@ -621,10 +621,10 @@ func_1179F() {
   var_00 func_4CF1(self, var_11);
 
   if (isdefined(var_16)) {
-  var_07 = scripts/mp/killstreaks/utility::getmodifiedantikillstreakdamage(var_08, var_16, var_11, var_07, var_1.maxhealth, var_04, var_05, var_06);
+  var_07 = scripts\mp\killstreaks\utility::getmodifiedantikillstreakdamage(var_08, var_16, var_11, var_07, var_1.maxhealth, var_04, var_05, var_06);
 
-  if (scripts/mp/killstreaks/utility::func_A69F(self.streakinfo, "passive_armor_duration")) {
-  if (scripts/mp/killstreaks/utility::isexplosiveantikillstreakweapon(var_16))
+  if (scripts\mp\killstreaks\utility::func_A69F(self.streakinfo, "passive_armor_duration")) {
+  if (scripts\mp\killstreaks\utility::isexplosiveantikillstreakweapon(var_16))
   var_08 scripts\mp\damagefeedback::updatedamagefeedback("hitblastshield");
   }
   }
@@ -640,7 +640,7 @@ func_1179F() {
   if (var_02 <= 0) {
   var_08 notify("destroyed_killstreak", var_16);
   var_21 = "callout_destroyed_thor";
-  var_22 = scripts/mp/killstreak_loot::getrarityforlootitem(self.streakinfo.variantid);
+  var_22 = scripts\mp\killstreak_loot::getrarityforlootitem(self.streakinfo.variantid);
 
   if (var_22 != "")
   var_21 = var_21 + "_" + var_22;
@@ -965,11 +965,11 @@ func_139D1(var_00, var_01, var_02) {
   var_2.func_9BE2 = 1;
   var_02 notify("start_fire");
   var_07 = var_3.origin;
-  var_08 = scripts/mp/killstreaks/utility::func_7E92(var_00);
+  var_08 = scripts\mp\killstreaks\utility::func_7E92(var_00);
   var_09 = [];
 
   foreach (var_11 in var_08) {
-  if (!scripts/mp/killstreaks/utility::manualmissilecantracktarget(var_11))
+  if (!scripts\mp\killstreaks\utility::manualmissilecantracktarget(var_11))
   continue;
 
   if (var_00 worldpointinreticle_circle(var_11.origin, 65, 55))
@@ -999,14 +999,14 @@ func_139D1(var_00, var_01, var_02) {
   var_22.owner setclientomnvar(var_22.id.omnvar, var_22);
   var_22.owner setclientomnvar(var_22.func_5716.omnvar, int(var_22.zoffset));
 
-  if (scripts/mp/killstreaks/utility::func_A69F(var_2.streakinfo, "passive_seek_cluster"))
+  if (scripts\mp\killstreaks\utility::func_A69F(var_2.streakinfo, "passive_seek_cluster"))
   var_22 thread delayseekopentargetinview(0.3, var_22.owner, var_07, var_09);
   else
   var_22 thread func_50E6(0.3, var_03);
 
   var_22 thread func_139F6(var_22.owner, var_02);
   var_22 thread func_13A22(var_22.owner, var_02);
-  var_22 thread scripts/mp/killstreaks/utility::watchsupertrophynotify(var_22.owner);
+  var_22 thread scripts\mp\killstreaks\utility::watchsupertrophynotify(var_22.owner);
   var_2.func_C239--;
   var_00 setclientomnvar("ui_thor_missiles_loaded", var_2.func_C239);
   scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(0.1);
@@ -1023,7 +1023,7 @@ delayseekopentargetinview(var_00, var_01, var_02, var_03) {
   wait(var_00);
 
   foreach (var_06 in var_03) {
-  if (!scripts/mp/killstreaks/utility::manualmissilecantracktarget(var_06))
+  if (!scripts\mp\killstreaks\utility::manualmissilecantracktarget(var_06))
   continue;
 
   if (scripts\mp\utility\game::istrue(var_6.thortargetted))
@@ -1048,7 +1048,7 @@ watchtarget(var_00) {
   self endon("disconnect");
 
   for (;;) {
-  if (!scripts/mp/killstreaks/utility::manualmissilecantracktarget(self))
+  if (!scripts\mp\killstreaks\utility::manualmissilecantracktarget(self))
   break;
 
   if (!isdefined(var_00))
@@ -1134,7 +1134,7 @@ func_13B42(var_00, var_01) {
   var_00 setclientomnvar(self.func_5716.omnvar, int(self.zoffset));
   thread func_139F6(var_00, var_01);
   thread func_13A22(var_00, var_01);
-  thread scripts/mp/killstreaks/utility::watchsupertrophynotify(var_00);
+  thread scripts\mp\killstreaks\utility::watchsupertrophynotify(var_00);
   var_1.func_C239--;
   var_00 setclientomnvar("ui_thor_missiles_loaded", var_1.func_C239);
   scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(0.1);

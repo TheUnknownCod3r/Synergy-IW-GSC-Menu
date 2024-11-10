@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2666.gsc
+ * Script: 2666.gsc
 ***************************************/
 
 initcpvosystem() {
@@ -9,7 +9,7 @@ initcpvosystem() {
   level.func_134BF = [];
   level.func_134C0 = [];
   level.vo_dialogue_prefix = [];
-  level.func_13519 = "cp/" + getdvar("ui_mapname") + "_vo_table.csv";
+  level.func_13519 = "cp\" + getdvar("ui_mapname") + "_vo_table.csv";
   level thread func_C904();
   level thread func_BE3E();
 }
@@ -368,8 +368,8 @@ play_vo(var_00, var_01) {
 
   self.vo_system_playing_vo = 1;
 
-  if (scripts/cp/utility::is_playing_pain_breathing_sfx(self)) {
-  var_03 = scripts/cp/utility::get_pain_breathing_sfx_alias(self);
+  if (scripts\cp\utility::is_playing_pain_breathing_sfx(self)) {
+  var_03 = scripts\cp\utility::get_pain_breathing_sfx_alias(self);
 
   if (isdefined(var_03))
   self stopolcalsound(var_03);
@@ -538,7 +538,7 @@ func_FF79(var_00, var_01, var_02, var_03, var_04, var_05, var_06) {
   if (!isdefined(level.vo_alias_data[var_00]))
   return 1;
 
-  if (scripts/cp/zombies/zombie_afterlife_arcade::is_in_afterlife_arcade(self)) {
+  if (scripts\cp\zombies\zombie_afterlife_arcade::is_in_afterlife_arcade(self)) {
   if (isdefined(level.func_18E8)) {
   if (![[level.func_18E8]](var_00))
   return 0;
@@ -882,7 +882,7 @@ add_to_nag_vo(var_00, var_01, var_02, var_03, var_04, var_05) {
 }
 
 remove_from_nag_vo(var_00, var_01) {
-  level.func_BE3D = scripts/cp/utility::array_remove_index(level.func_BE3D, var_00, 1);
+  level.func_BE3D = scripts\cp\utility::array_remove_index(level.func_BE3D, var_00, 1);
 
   if (scripts\engine\utility::is_true(var_01))
   level.func_BE3F[var_00] = 1;

@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2619.gsc
+ * Script: 2619.gsc
 ***************************************/
 
 init_flags() {

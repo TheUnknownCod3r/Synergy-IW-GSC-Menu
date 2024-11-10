@@ -1,15 +1,15 @@
-/*******************************************************
+/***********************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\maps\mp_neon\mp_neon.gsc
-*******************************************************/
+ * Script: scripts\mp\maps\mp_neon\mp_neon.gsc
+***********************************************/
 
 main() {
 	scripts\mp\maps\mp_neon\mp_neon_precache::main();
 	scripts\mp\maps\mp_neon\gen\mp_neon_art::main();
 	scripts\mp\maps\mp_neon\mp_neon_fx::main();
-	scripts\mp\_load::main();
-	scripts\mp\_compass::func_FACD("compass_map_mp_neon");
+	scripts\mp\load::main();
+	scripts\mp\compass::setupminimap("compass_map_mp_neon");
 	level.var_C7B3 = getentarray("OutOfBounds","targetname");
 	setdvar("r_lightGridEnableTweaks",1);
 	setdvar("r_lightGridIntensity",1.33);
@@ -21,7 +21,7 @@ main() {
 	game["axis_outfit"] = "woodland";
 	thread func_CDA4("mp_neontest_1");
 	thread fix_collision();
-	level.var_3763 = ::callback_vr_playerkilled;
+	level.callbackplayerkilled = ::callback_vr_playerkilled;
 	level thread handleholograms();
 	level thread handlelightinggeo();
 	level thread runholodome();
@@ -80,16 +80,16 @@ callback_vr_playerkilled(param_00,param_01,param_02,param_03,param_04,param_05,p
 	}
 
 	thread vrdeatheffects();
-	scripts\mp\_damage::func_D3C4(param_00,param_01,self,param_02,param_03,param_04,param_05,param_06,param_07,param_08,param_09,0);
+	scripts\mp\damage::playerkilled_internal(param_00,param_01,self,param_02,param_03,param_04,param_05,param_06,param_07,param_08,param_09,0);
 }
 
 vrdeatheffects() {
 	var_00 = ["j_head","j_chest","j_shoulder_ri","j_shoulder_le","j_elbow_ri","j_elbow_le","j_hip_ri","j_hip_le","j_knee_ri","j_knee_le"];
 	var_01 = var_00.size;
-	thread func_CEF1(0);
+	thread playbodyfx(0);
 }
 
-func_CEF1(param_00) {
+playbodyfx(param_00) {
 	var_01[0][1]["org"] = self gettagorigin("j_spinelower");
 	var_01[0][1]["angles"] = self gettagangles("j_spinelower");
 	var_01[0][1]["effect"] = "vfx_vr_death_player_vol_chest";
@@ -110,7 +110,7 @@ func_CEF1(param_00) {
 	var_01[1][3]["effect"] = "vfx_vr_enemy_death";
 	foreach(var_03 in var_01) {
 		foreach(var_05 in var_03) {
-			playfx(scripts\common\utility::getfx(var_05["effect"]),var_05["org"]);
+			playfx(scripts\engine\utility::getfx(var_05["effect"]),var_05["org"]);
 		}
 
 		wait(0.01);
@@ -128,7 +128,7 @@ runholodome() {
 executeholodome() {
 	self waittill("mapCamera_start");
 	wait(2.5);
-	scripts\common\utility::exploder(10,self);
+	scripts\engine\utility::exploder(10,self);
 }
 
 handleholograms() {
@@ -159,14 +159,14 @@ runholograminitialization() {
 
 func_CDA4(param_00) {
 	wait(30);
-	function_030E(param_00);
+	playcinematicforalllooping(param_00);
 }
 
 handlelightinggeo() {
 	wait(5);
 	var_00 = getentarray("big_screen","targetname");
 	foreach(var_02 in var_00) {
-		if(isdefined(var_02.var_EE79)) {
+		if(isdefined(var_02.script_parameters)) {
 			var_02 moveto((-2444,1279.5,95),0.1);
 		}
 	}
@@ -174,7 +174,7 @@ handlelightinggeo() {
 
 sfx_club_music() {
 	var_00 = spawn("script_origin",(1200,703,238));
-	scripts\common\utility::func_136F7();
+	scripts\engine\utility::waitframe();
 	var_00 playloopsound("emt_mus_neon_club");
 }
 

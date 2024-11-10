@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2717.gsc
+ * Script: 2717.gsc
 ***************************************/
 
 init() {

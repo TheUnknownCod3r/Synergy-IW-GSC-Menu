@@ -1,15 +1,15 @@
-/*********************************************************
+/*************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\maps\mp_rally\mp_rally.gsc
-*********************************************************/
+ * Script: scripts\mp\maps\mp_rally\mp_rally.gsc
+*************************************************/
 
 main() {
 	scripts\mp\maps\mp_rally\mp_rally_precache::main();
 	scripts\mp\maps\mp_rally\gen\mp_rally_art::main();
 	scripts\mp\maps\mp_rally\mp_rally_fx::main();
-	scripts\mp\_load::main();
-	scripts\mp\_compass::func_FACD("compass_map_mp_rally");
+	scripts\mp\load::main();
+	scripts\mp\compass::setupminimap("compass_map_mp_rally");
 	setdvar("r_lightGridEnableTweaks",1);
 	setdvar("r_lightGridIntensity",1.33);
 	setdvar("r_umbraMinObjectContribution",8);
@@ -24,10 +24,10 @@ main() {
 	thread barreldroppersetup("gas_barrel_activator_trigger","gas_barrel_activator","gas_barrel_lever","gas_damage_trigger");
 	thread setuppowerlines();
 	thread wiggletheballoon("balloon");
-	thread scripts\mp\_animation_suite::func_1FAA();
-	level._effect["burn_kill"] = loadfx("vfx/iw7/levels/mp_rally/vfx_burninator_death.vfx");
-	level._effect["blade_kill"] = loadfx("vfx/iw7/levels/mp_rally/vfx_body_exp.vfx");
-	level._effect["shock_kill"] = loadfx("vfx/iw7/levels/mp_rally/vfx_shock_death.vfx");
+	thread scripts\mp\animation_suite::animationsuite();
+	level._effect["burn_kill"] = loadfx("vfx\iw7\levels\mp_rally\vfx_burninator_death.vfx");
+	level._effect["blade_kill"] = loadfx("vfx\iw7\levels\mp_rally\vfx_body_exp.vfx");
+	level._effect["shock_kill"] = loadfx("vfx\iw7\levels\mp_rally\vfx_shock_death.vfx");
 	level.var_C7B3 = getentarray("OutOfBounds","targetname");
 	thread apex_not_outofbounds();
 	level.modifiedspawnpoints["-560 -1344 131"]["mp_tdm_spawn"]["remove"] = 1;
@@ -71,18 +71,18 @@ setupspinningblades() {
 	for(;;) {
 		var_04 waittill("trigger",var_05);
 		if(isdefined(var_05)) {
-			if(isdefined(var_05.var_110EA) && var_05.var_110EA == "remote_c8") {
-				var_05 scripts\mp\killstreaks\_utility::dodamagetokillstreak(100000,var_05.var_222,var_04,var_05.var_222.team,var_04.origin,"MOD_MELEE","bombproj_mp");
+			if(isdefined(var_05.streakname) && var_05.streakname == "remote_c8") {
+				var_05 scripts\mp\killstreaks\_utility::dodamagetokillstreak(100000,var_05.triggerportableradarping,var_04,var_05.triggerportableradarping.team,var_04.origin,"MOD_MELEE","bombproj_mp");
 				continue;
 			}
 
 			if(isplayer(var_05)) {
-				if(var_05 method_84D9()) {
+				if(var_05 isinphase()) {
 					continue;
 				}
 
 				var_05 suicide();
-				if(var_05.var_AE62 == "archetype_scout") {
+				if(var_05.loadoutarchetype == "archetype_scout") {
 					playfx(level._effect["reaper_kill_robot"],var_05.origin + (0,0,0));
 				}
 				else
@@ -94,13 +94,13 @@ setupspinningblades() {
 			}
 
 			if(isdefined(var_05.classname) && var_05.classname == "script_vehicle") {
-				if(isdefined(var_05.var_110EA)) {
-					if(var_05.var_110EA == "minijackal") {
+				if(isdefined(var_05.streakname)) {
+					if(var_05.streakname == "minijackal") {
 						var_05 notify("minijackal_end");
 						continue;
 					}
 
-					if(var_05.var_110EA == "venom") {
+					if(var_05.streakname == "venom") {
 						var_05 notify("venom_end",var_05.origin);
 					}
 				}
@@ -124,7 +124,7 @@ setuppowerlines() {
 		var_00 waittill("trigger",var_01);
 		if(isdefined(var_01)) {
 			if(isplayer(var_01)) {
-				if(var_01 method_84D9()) {
+				if(var_01 isinphase()) {
 					continue;
 				}
 
@@ -134,13 +134,13 @@ setuppowerlines() {
 			}
 
 			if(isdefined(var_01.classname) && var_01.classname == "script_vehicle") {
-				if(isdefined(var_01.var_110EA)) {
-					if(var_01.var_110EA == "minijackal") {
+				if(isdefined(var_01.streakname)) {
+					if(var_01.streakname == "minijackal") {
 						var_01 notify("minijackal_end");
 						continue;
 					}
 
-					if(var_01.var_110EA == "venom") {
+					if(var_01.streakname == "venom") {
 						var_01 notify("venom_end",var_01.origin);
 					}
 				}
@@ -153,17 +153,17 @@ barreldroppersetup(param_00,param_01,param_02,param_03) {
 	var_04 = getent(param_00,"targetname");
 	var_04 makeusable();
 	var_04 sethintstring(&"MP_RALLY_ACTIVATE_BARREL");
-	var_04 method_84A4(64);
-	var_04 method_84A6(60);
-	var_04 method_84A2(64);
-	var_04 method_84A5(60);
+	var_04 _meth_84A4(64);
+	var_04 _meth_84A6(60);
+	var_04 setuserange(64);
+	var_04 setusefov(60);
 	var_05 = getent(param_03,"targetname");
-	var_05.var_A63A = spawn("script_model",(-544,-1312,352));
-	var_05.var_A63A setmodel("tag_origin");
+	var_05.killcament = spawn("script_model",(-544,-1312,352));
+	var_05.killcament setmodel("tag_origin");
 	var_05.israllytrap = 1;
-	var_06 = scripts\common\utility::getstruct("gas_barrel_explosion_loc","targetname");
+	var_06 = scripts\engine\utility::getstruct("gas_barrel_explosion_loc","targetname");
 	var_05.explosionloc = var_06.origin;
-	var_05 scripts\common\utility::trigger_off(var_05.var_336,"targetname");
+	var_05 scripts\engine\utility::trigger_off(var_05.var_336,"targetname");
 	var_07 = getent(param_01,"targetname");
 	var_07.initialpos = var_07.origin;
 	var_07.activepos = var_07.origin + (0,0,-16);
@@ -192,7 +192,7 @@ barreldropperloop(param_00,param_01,param_02,param_03) {
 		param_00 makeunusable();
 		var_05 = var_04.team;
 		var_04 playlocalsound("barrel_lever");
-		scripts\common\utility::exploder(30);
+		scripts\engine\utility::exploder(30);
 		param_01 moveto(param_01.activepos,1,0.5,0.5);
 		param_02 moveto(param_02.activepos,1,0.5,0.5);
 		playsoundatpos((-803,-1234,526),"barrel_tumble");
@@ -202,10 +202,10 @@ barreldropperloop(param_00,param_01,param_02,param_03) {
 		wait(1);
 		var_06 = level.players;
 		var_07 = level.var_1655;
-		param_03 scripts\common\utility::trigger_on(param_03.var_336,"targetname");
-		var_08 = scripts\common\utility::array_combine(var_06,var_07);
+		param_03 scripts\engine\utility::trigger_on(param_03.var_336,"targetname");
+		var_08 = scripts\engine\utility::array_combine(var_06,var_07);
 		foreach(var_0A in var_06) {
-			if(!var_0A method_84D9() && !isdefined(var_0A.isrewinding) && var_0A.isrewinding == 1) {
+			if(!var_0A isinphase() && !isdefined(var_0A.isrewinding) && var_0A.isrewinding == 1) {
 				if(var_0A.team == var_05 && var_0A istouching(param_03)) {
 					var_0A suicide();
 					continue;
@@ -225,29 +225,29 @@ barreldropperloop(param_00,param_01,param_02,param_03) {
 		if(isdefined(var_07)) {
 			foreach(var_0D in var_07) {
 				if(var_0D istouching(param_03)) {
-					if(var_0D.var_110EA == "minijackal") {
+					if(var_0D.streakname == "minijackal") {
 						var_0D scripts\mp\killstreaks\_utility::dodamagetokillstreak(100000,var_04,param_03,var_0D.team,param_03.origin,"MOD_EXPLOSIVE","bombproj_mp");
 						continue;
 					}
 
-					if(var_0D.var_110EA == "venom") {
+					if(var_0D.streakname == "venom") {
 						var_0D scripts\mp\killstreaks\_utility::dodamagetokillstreak(100000,var_04,param_03,var_0D.team,param_03.origin,"MOD_EXPLOSIVE","bombproj_mp");
 						continue;
 					}
 
-					if(var_0D.var_110EA == "sentry_shock") {
+					if(var_0D.streakname == "sentry_shock") {
 						var_0D scripts\mp\killstreaks\_utility::dodamagetokillstreak(100000,var_04,param_03,var_0D.team,param_03.origin,"MOD_MELEE","bombproj_mp");
-						scripts\common\utility::func_136F7();
+						scripts\engine\utility::waitframe();
 						var_0D scripts\mp\killstreaks\_utility::dodamagetokillstreak(100000,var_04,param_03,var_0D.team,param_03.origin,"MOD_MELEE","bombproj_mp");
-						scripts\common\utility::func_136F7();
+						scripts\engine\utility::waitframe();
 						var_0D scripts\mp\killstreaks\_utility::dodamagetokillstreak(100000,var_04,param_03,var_0D.team,param_03.origin,"MOD_MELEE","bombproj_mp");
-						scripts\common\utility::func_136F7();
+						scripts\engine\utility::waitframe();
 						var_0D scripts\mp\killstreaks\_utility::dodamagetokillstreak(100000,var_04,param_03,var_0D.team,param_03.origin,"MOD_MELEE","bombproj_mp");
-						scripts\common\utility::func_136F7();
+						scripts\engine\utility::waitframe();
 						var_0D scripts\mp\killstreaks\_utility::dodamagetokillstreak(100000,var_04,param_03,var_0D.team,param_03.origin,"MOD_MELEE","bombproj_mp");
-						scripts\common\utility::func_136F7();
+						scripts\engine\utility::waitframe();
 						var_0D scripts\mp\killstreaks\_utility::dodamagetokillstreak(100000,var_04,param_03,var_0D.team,param_03.origin,"MOD_MELEE","bombproj_mp");
-						scripts\common\utility::func_136F7();
+						scripts\engine\utility::waitframe();
 						var_0D scripts\mp\killstreaks\_utility::dodamagetokillstreak(100000,var_04,param_03,var_0D.team,param_03.origin,"MOD_MELEE","bombproj_mp");
 					}
 				}
@@ -265,12 +265,12 @@ barreldropperloop(param_00,param_01,param_02,param_03) {
 
 		playsoundatpos(param_03.explosionloc,"barrel_impact");
 		physicsexplosionsphere(param_03.explosionloc,160,80,150);
-		scripts\common\utility::func_136F7();
+		scripts\engine\utility::waitframe();
 		var_13 = 1;
 		thread lingeringgascloudwatch(var_13,param_03,var_04,var_05);
 		wait(10);
 		var_13 = 0;
-		param_03 scripts\common\utility::trigger_off(param_03.var_336,"targetname");
+		param_03 scripts\engine\utility::trigger_off(param_03.var_336,"targetname");
 		param_00 makeusable();
 	}
 }
@@ -298,7 +298,7 @@ lingeringgascloudwatch(param_00,param_01,param_02,param_03) {
 playeringaswatcher(param_00,param_01,param_02,param_03,param_04) {
 	param_00.isindoomjuice = 1;
 	while(param_01 && param_00.isindoomjuice) {
-		if(scripts\mp\_utility::func_9EF0(param_00)) {
+		if(scripts\mp\utility::func_9EF0(param_00)) {
 			break;
 		}
 
@@ -336,12 +336,12 @@ burninatorsetup(param_00,param_01) {
 	var_02.bigredbutton = getent(param_01,"targetname");
 	var_02.bigredbutton makeusable();
 	var_02.bigredbutton sethintstring(&"MP_RALLY_ACTIVATE_FIRE");
-	var_02.bigredbutton method_84A4(64);
-	var_02.bigredbutton method_84A6(60);
-	var_02.bigredbutton method_84A2(64);
-	var_02.bigredbutton method_84A5(60);
-	var_02.var_A63A = spawn("script_model",(956,996,268));
-	var_02.var_A63A setmodel("tag_origin");
+	var_02.bigredbutton _meth_84A4(64);
+	var_02.bigredbutton _meth_84A6(60);
+	var_02.bigredbutton setuserange(64);
+	var_02.bigredbutton setusefov(60);
+	var_02.killcament = spawn("script_model",(956,996,268));
+	var_02.killcament setmodel("tag_origin");
 	var_02.israllytrap = 1;
 	thread burninatortriggerwatch(var_02);
 	var_02.flameon = 0;
@@ -352,7 +352,7 @@ burninatortriggerwatch(param_00) {
 	for(;;) {
 		param_00.bigredbutton waittill("trigger",var_01);
 		param_00.bigredbutton makeunusable();
-		scripts\common\utility::exploder(22);
+		scripts\engine\utility::exploder(22);
 		wait(2);
 		param_00.flameon = 1;
 		thread watchforvictims(param_00,var_01);
@@ -377,7 +377,7 @@ burninantordestroyequipment(param_00,param_01) {
 
 		if(isdefined(var_02)) {
 			foreach(var_05 in var_02) {
-				if(var_05.var_110EA == "sentry_shock" && var_05 istouching(param_00)) {
+				if(var_05.streakname == "sentry_shock" && var_05 istouching(param_00)) {
 					var_05 scripts\mp\killstreaks\_utility::dodamagetokillstreak(100000,param_01,param_00,var_05.team,param_00.origin,"MOD_MELEE","bombproj_mp");
 				}
 			}
@@ -397,7 +397,7 @@ watchforvictims(param_00,param_01) {
 
 		if(isdefined(var_02)) {
 			if(isplayer(var_02)) {
-				if(var_02 method_84D9()) {
+				if(var_02 isinphase()) {
 					continue;
 				}
 
@@ -406,19 +406,19 @@ watchforvictims(param_00,param_01) {
 				}
 
 				burninatorplaydeathfx(param_00,var_02,param_01);
-				scripts\common\utility::func_136F7();
-				scripts\common\utility::func_136F7();
+				scripts\engine\utility::waitframe();
+				scripts\engine\utility::waitframe();
 				continue;
 			}
 
 			if(isdefined(var_02.classname) && var_02.classname == "script_vehicle") {
-				if(isdefined(var_02.var_110EA)) {
-					if(var_02.var_110EA == "minijackal") {
+				if(isdefined(var_02.streakname)) {
+					if(var_02.streakname == "minijackal") {
 						var_02 scripts\mp\killstreaks\_utility::dodamagetokillstreak(10000,param_01,param_00,var_02.team,param_00.origin,"MOD_EXPLOSIVE","bombproj_mp");
 						continue;
 					}
 
-					if(var_02.var_110EA == "venom") {
+					if(var_02.streakname == "venom") {
 						var_02 scripts\mp\killstreaks\_utility::dodamagetokillstreak(10000,param_01,param_00,var_02.team,param_00.origin,"MOD_EXPLOSIVE","bombproj_mp");
 					}
 				}
@@ -436,14 +436,14 @@ burninatorplaydeathfx(param_00,param_01,param_02) {
 		param_01 suicide();
 	}
 
-	scripts\common\utility::func_136F7();
-	scripts\common\utility::func_136F7();
+	scripts\engine\utility::waitframe();
+	scripts\engine\utility::waitframe();
 	var_03 = anglestoforward(param_01.angles);
-	var_04 = param_01 method_8113();
+	var_04 = param_01 _meth_8113();
 	if(isdefined(var_04)) {
 		var_04 hide(1);
-		var_04.var_CA6C = 1;
-		if(param_01.var_AE62 == "archetype_scout") {
+		var_04.permanentcustommovetransition = 1;
+		if(param_01.loadoutarchetype == "archetype_scout") {
 			playfx(level._effect["reaper_kill_robot"],param_01.origin + (0,0,0));
 			return;
 		}
@@ -464,16 +464,16 @@ setupintroexploders() {
 fireintroexploders() {
 	self waittill("mapCamera_start");
 	wait(0.5);
-	scripts\common\utility::exploder(10,self);
+	scripts\engine\utility::exploder(10,self);
 	wait(1);
-	scripts\common\utility::exploder(15,self);
+	scripts\engine\utility::exploder(15,self);
 }
 
 watchforkillstreakuse() {
 	self endon("disconnect");
 	for(;;) {
 		self waittill("killstreak_use_finished",var_00,var_01);
-		if(!scripts\common\utility::istrue(var_01)) {
+		if(!scripts\engine\utility::istrue(var_01)) {
 			continue;
 		}
 
@@ -481,7 +481,7 @@ watchforkillstreakuse() {
 			continue;
 		}
 
-		scripts\common\utility::exploder(15);
+		scripts\engine\utility::exploder(15);
 	}
 }
 
@@ -506,7 +506,7 @@ killstreakactivateflares(param_00) {
 firebroshotexploders() {
 	self waittill("bro_shot_start");
 	wait(0.5);
-	scripts\common\utility::exploder(15,self);
+	scripts\engine\utility::exploder(15,self);
 }
 
 apex_not_outofbounds() {

@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2700.gsc
+ * Script: 2700.gsc
 ***************************************/
 
 init() {
@@ -197,7 +197,7 @@ checkbuddyspawn() {
 }
 
 cleanupbuddyspawn() {
-  thread scripts/mp/spectating::setspectatepermissions();
+  thread scripts\mp\spectating::setspectatepermissions();
   self.forcespectatorclient = -1;
   scripts\mp\utility\game::updatesessionstate("dead");
   self disableforcethirdpersonwhenfollowing();

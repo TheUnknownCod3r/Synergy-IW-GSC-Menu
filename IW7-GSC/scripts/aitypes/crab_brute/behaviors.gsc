@@ -1,8 +1,8 @@
-/************************************************************
+/****************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\aitypes\crab_brute\behaviors.gsc
-************************************************************/
+ * Script: scripts\aitypes\crab_brute\behaviors.gsc
+****************************************************/
 
 initbehaviors(param_00) {
 	setupbehaviorstates();
@@ -56,7 +56,7 @@ updateenemy() {
 			continue;
 		}
 
-		if(scripts\common\utility::istrue(var_02.isfasttravelling)) {
+		if(scripts\engine\utility::istrue(var_02.isfasttravelling)) {
 			continue;
 		}
 
@@ -129,7 +129,7 @@ burrow_begin(param_00) {
 			var_03 = self getposonpath(32);
 		}
 
-		var_04 = scripts\common\utility::getyawtospot(var_03);
+		var_04 = scripts\engine\utility::getyawtospot(var_03);
 		if(abs(var_04) > 45) {
 			self.desiredyaw = var_04;
 		}
@@ -147,7 +147,7 @@ burrow_tick(param_00) {
 		return level.running;
 	}
 
-	if(scripts\common\utility::istrue(var_02.bburrowisdone)) {
+	if(scripts\engine\utility::istrue(var_02.bburrowisdone)) {
 		return level.success;
 	}
 
@@ -343,7 +343,7 @@ charge_begin(param_00) {
 	var_02 = scripts\mp\agents\crab_brute\crab_brute_agent::getenemy();
 	self.curmeleetarget = var_02;
 	if(isdefined(var_02)) {
-		var_03 = scripts\common\utility::getyawtospot(var_02.origin);
+		var_03 = scripts\engine\utility::getyawtospot(var_02.origin);
 		if(abs(var_03) > 45) {
 			self.desiredyaw = var_03;
 		}
@@ -358,7 +358,7 @@ charge_tick(param_00) {
 		return level.failure;
 	}
 
-	self ghostskulls_complete_status(self.var_4B26.origin);
+	self ghostskulls_complete_status(self.curmeleetarget.origin);
 	if(scripts\aitypes\dlc3\bt_state_api::btstate_tickstates(param_00)) {
 		return level.running;
 	}
@@ -406,7 +406,7 @@ charge_enddone(param_00,param_01) {
 }
 
 trycharge(param_00,param_01,param_02) {
-	if(!scripts\common\utility::istrue(param_02)) {
+	if(!scripts\engine\utility::istrue(param_02)) {
 		if(isdefined(self.nextchargeattacktesttime) && gettime() < self.nextchargeattacktesttime) {
 			return 0;
 		}
@@ -508,7 +508,7 @@ is_near_any_player(param_00) {
 			continue;
 		}
 
-		if(var_03.ignoreme || isdefined(var_03.triggerportableradarping) && var_03.var_222.ignoreme) {
+		if(var_03.ignoreme || isdefined(var_03.triggerportableradarping) && var_03.triggerportableradarping.ignoreme) {
 			continue;
 		}
 
@@ -562,7 +562,7 @@ calcsummonspawnpoints(param_00,param_01) {
 		return undefined;
 	}
 
-	var_04 = scripts\common\utility::array_randomize(var_04);
+	var_04 = scripts\engine\utility::array_randomize(var_04);
 	var_05 = var_02.summon_min_radius * var_02.summon_min_radius;
 	var_06 = [];
 	foreach(var_08 in var_04) {
@@ -599,7 +599,7 @@ calcsummoncount(param_00) {
 			continue;
 		}
 
-		if(scripts\common\utility::istrue(var_03.isfasttravelling)) {
+		if(scripts\engine\utility::istrue(var_03.isfasttravelling)) {
 			continue;
 		}
 
@@ -623,7 +623,7 @@ trysummon(param_00,param_01,param_02) {
 		}
 	}
 
-	if(!scripts\common\utility::istrue(param_02)) {
+	if(!scripts\engine\utility::istrue(param_02)) {
 		if(isdefined(self.nextsummontesttime) && gettime() < self.nextsummontesttime) {
 			return 0;
 		}
@@ -639,7 +639,7 @@ trysummon(param_00,param_01,param_02) {
 		}
 	}
 
-	var_04 = scripts\mp\_mp_agent::getactiveagentsoftype("crab_mini");
+	var_04 = scripts\mp\mp_agent::getactiveagentsoftype("crab_mini");
 	if(var_04.size > var_03.max_allowed_minis_to_allow_new_summon) {
 		self.nextsummontesttime = gettime() + randomintrange(var_03.min_initial_summon_wait_time_ms,var_03.max_initial_summon_wait_time_ms);
 		return 0;
@@ -727,7 +727,7 @@ tryflash(param_00,param_01,param_02,param_03) {
 		}
 	}
 
-	if(!scripts\common\utility::istrue(param_02)) {
+	if(!scripts\engine\utility::istrue(param_02)) {
 		if(isdefined(self.nextflashtesttime) && gettime() < self.nextflashtesttime) {
 			return 0;
 		}
@@ -743,7 +743,7 @@ tryflash(param_00,param_01,param_02,param_03) {
 		}
 	}
 
-	if(!scripts\common\utility::istrue(param_03)) {
+	if(!scripts\engine\utility::istrue(param_03)) {
 		var_06 = var_05 getplayerangles();
 		var_07 = anglestoforward(var_06);
 		var_08 = vectornormalize(self.origin - var_05.origin);

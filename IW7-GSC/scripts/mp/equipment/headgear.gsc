@@ -1,14 +1,14 @@
-/*****************************************************
+/*********************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\equipment\headgear.gsc
-*****************************************************/
+ * Script: scripts\mp\equipment\headgear.gsc
+*********************************************/
 
 init() {
 	level.var_8C71 = [];
-	level.var_8C71["wave"] = loadfx("vfx/iw7/_requests/mp/trail_kinetic_wave");
-	level.var_8C71["wedge"] = loadfx("vfx/iw7/_requests/mp/vfx_kinetic_wave_wedge");
-	level.var_8C71["halo"] = loadfx("vfx/iw7/_requests/mp/vfx_light_headgear_halo");
+	level.var_8C71["wave"] = loadfx("vfx\iw7\_requests\mp\trail_kinetic_wave");
+	level.var_8C71["wedge"] = loadfx("vfx\iw7\_requests\mp\vfx_kinetic_wave_wedge");
+	level.var_8C71["halo"] = loadfx("vfx\iw7\_requests\mp\vfx_light_headgear_halo");
 }
 
 func_E129() {
@@ -34,7 +34,7 @@ func_E856() {
 func_8C6F(param_00,param_01) {
 	self.var_8BF8 = 1;
 	var_02 = level.powers["power_headgear"].var_5FF3;
-	scripts\mp\_gamescore::trackbuffassist(param_00,self,"power_headgear");
+	scripts\mp\gamescore::trackbuffassist(param_00,self,"power_headgear");
 	thread scripts\mp\killstreaks\_emp_common::func_5AA9();
 	var_03 = "j_spinelower";
 	if(param_01) {
@@ -57,7 +57,7 @@ func_8C72(param_00,param_01) {
 	self endon("removeArchetype");
 	stopfxontag(level.var_8C71["halo"],self,param_01);
 	self.var_8BF8 = undefined;
-	scripts\mp\_gamescore::untrackbuffassist(param_00,self,"power_headgear");
+	scripts\mp\gamescore::untrackbuffassist(param_00,self,"power_headgear");
 }
 
 func_8C73(param_00,param_01,param_02) {

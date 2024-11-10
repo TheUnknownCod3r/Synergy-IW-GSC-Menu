@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\2909.gsc
-****************************/
+ * Script: 2909.gsc
+************************/
 
 main() {
 	thread pausemenu_think();

@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\3510.gsc
+ * Script: 3510.gsc
 ***************************************/
 
 init() {
@@ -10,11 +10,11 @@ init() {
   if (!isdefined(level.planeconfigs))
   level.planeconfigs = [];
 
-  level.fighter_deathfx = loadfx("vfx/iw7/_requests/mp/vfx_debug_warning.vfx");
-  level.fx_airstrike_afterburner = loadfx("vfx/iw7/_requests/mp/vfx_debug_warning.vfx");
-  level.fx_airstrike_contrail = loadfx("vfx/iw7/_requests/mp/vfx_debug_warning.vfx");
-  level.fx_airstrike_wingtip_light_green = loadfx("vfx/iw7/_requests/mp/vfx_debug_warning.vfx");
-  level.fx_airstrike_wingtip_light_red = loadfx("vfx/iw7/_requests/mp/vfx_debug_warning.vfx");
+  level.fighter_deathfx = loadfx("vfx\iw7\_requests\mp\vfx_debug_warning.vfx");
+  level.fx_airstrike_afterburner = loadfx("vfx\iw7\_requests\mp\vfx_debug_warning.vfx");
+  level.fx_airstrike_contrail = loadfx("vfx\iw7\_requests\mp\vfx_debug_warning.vfx");
+  level.fx_airstrike_wingtip_light_green = loadfx("vfx\iw7\_requests\mp\vfx_debug_warning.vfx");
+  level.fx_airstrike_wingtip_light_red = loadfx("vfx\iw7\_requests\mp\vfx_debug_warning.vfx");
 }
 
 getflightpath(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07) {

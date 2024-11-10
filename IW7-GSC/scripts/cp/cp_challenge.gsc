@@ -1,8 +1,8 @@
-/***********************************************
+/***************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\cp_challenge.gsc
-***********************************************/
+ * Script: scripts\cp\cp_challenge.gsc
+***************************************/
 
 init_coop_challenge() {
 	func_956D();
@@ -20,7 +20,7 @@ func_C9B9() {
 func_956D() {
 	scripts\engine\utility::flag_init("pause_challenges");
 	var_00 = getdvar("ui_mapname");
-	level.zombie_challenge_table = "cp/zombies/" + var_00 + "_challenges.csv";
+	level.zombie_challenge_table = "cp\zombies\" + var_00 + "_challenges.csv";
 	if(!tableexists(level.zombie_challenge_table)) {
 		level.zombie_challenge_table = undefined;
 	}
@@ -79,7 +79,7 @@ deactivate_current_challenge() {
 			var_01 = level.var_3C24;
 		}
 
-		scripts/cp/cp_gamescore::update_players_encounter_performance(var_01,"challenge_complete");
+		scripts\cp\cp_gamescore::update_players_encounter_performance(var_01,"challenge_complete");
 		scripts\cp\cp_persistence::update_lb_aliensession_challenge(1);
 		scripts\cp\cp_analytics::update_challenges_status(var_00.ref,1);
 		if(func_9F17(var_00)) {

@@ -1,8 +1,8 @@
-/******************************************************************
+/**********************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\killstreaks\_deployablebox_vest.gsc
-******************************************************************/
+ * Script: scripts\mp\killstreaks\_deployablebox_vest.gsc
+**********************************************************/
 
 init() {
 	var_00 = spawnstruct();
@@ -28,7 +28,7 @@ init() {
 	var_00.usetime = 1000;
 	var_00.maxhealth = 220;
 	var_00.damagefeedback = "deployable_bag";
-	var_00.deathvfx = loadfx("vfx/core/mp/killstreaks/vfx_ballistic_vest_death");
+	var_00.deathvfx = loadfx("vfx\core\mp\killstreaks\vfx_ballistic_vest_death");
 	var_00.allowmeleedamage = 1;
 	var_00.allowhvtspawn = 0;
 	var_00.maxuses = 4;
@@ -44,17 +44,17 @@ func_128E1(param_00,param_01) {
 		return 0;
 	}
 
-	scripts\mp\_matchdata::logkillstreakevent("deployable_vest",self.origin);
+	scripts\mp\matchdata::logkillstreakevent("deployable_vest",self.origin);
 	return 1;
 }
 
 func_3937(param_00) {
-	return !scripts\mp\_lightarmor::haslightarmor(self) && !scripts\mp\_utility::isjuggernaut();
+	return !scripts\mp\lightarmor::haslightarmor(self) && !scripts\mp\utility::isjuggernaut();
 	if(isdefined(param_00) && param_00.triggerportableradarping == self && !isdefined(param_00.var_1A64)) {
 		return 0;
 	}
 
-	return !scripts\mp\_utility::isjuggernaut();
+	return !scripts\mp\utility::isjuggernaut();
 }
 
 onusedeployable(param_00) {

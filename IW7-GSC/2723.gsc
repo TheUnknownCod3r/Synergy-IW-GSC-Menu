@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2723.gsc
+ * Script: 2723.gsc
 ***************************************/
 
 init() {
@@ -67,7 +67,7 @@ func_10612() {
   var_00 = scripts\engine\utility::getlastweapon();
 
   if (!self hasweapon(var_00))
-  var_00 = scripts/mp/killstreaks/utility::getfirstprimaryweapon();
+  var_00 = scripts\mp\killstreaks\utility::getfirstprimaryweapon();
 
   scripts\mp\utility\game::_takeweapon(var_00);
   scripts\mp\utility\game::_giveweapon("iw7_knife_mp", 0);
@@ -82,7 +82,7 @@ func_10613() {
   var_00 = scripts\engine\utility::getlastweapon();
 
   if (!self hasweapon(var_00))
-  var_00 = scripts/mp/killstreaks/utility::getfirstprimaryweapon();
+  var_00 = scripts\mp\killstreaks\utility::getfirstprimaryweapon();
 
   scripts\mp\utility\game::_takeweapon(var_00);
   scripts\mp\utility\game::_giveweapon("iw7_knife_mp", 0);

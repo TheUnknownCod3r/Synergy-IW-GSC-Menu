@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\3425.gsc
+ * Script: 3425.gsc
 ***************************************/
 
 enemy_spawner_init() {
@@ -75,11 +75,11 @@ func_97B9() {
 }
 
 func_97B8() {
-  level._effect["drone_ground_spawn"] = loadfx("vfx/old/_requests/cp_titan/vfx_alien_drone_ground_spawn_titan.vfx");
+  level._effect["drone_ground_spawn"] = loadfx("vfx\old\_requests\cp_titan\vfx_alien_drone_ground_spawn_titan.vfx");
 }
 
 func_97AE() {
-  scripts/cp/zombies/zombie_armor::func_97AF();
+  scripts\cp\zombies\zombie_armor::func_97AF();
 }
 
 func_975C() {
@@ -92,7 +92,7 @@ func_975C() {
   var_2.basename = func_7859(var_02);
   level.func_10817[var_2.basename] = var_02;
 
-  if (!scripts/cp/utility::is_escape_gametype()) {
+  if (!scripts\cp\utility::is_escape_gametype()) {
   var_02 func_7C8E();
   var_02 func_7999();
   }
@@ -212,14 +212,14 @@ goon_spawn_event_func() {
 
 func_5CF7(var_00, var_01, var_02) {
   if (isdefined(level.force_drop_loot_item)) {
-  level thread scripts/cp/loot::drop_loot(var_01, var_02, level.force_drop_loot_item);
+  level thread scripts\cp\loot::drop_loot(var_01, var_02, level.force_drop_loot_item);
   level.force_drop_loot_item = undefined;
   return 1;
   }
 
   if (level.spawn_event_running == 1) {
   if (level.desired_enemy_deaths_this_wave == level.current_enemy_deaths) {
-  level thread scripts/cp/loot::drop_loot(var_01, var_02, "ammo_max");
+  level thread scripts\cp\loot::drop_loot(var_01, var_02, "ammo_max");
   return 1;
   }
   else
@@ -399,7 +399,7 @@ func_1071C(var_00) {
   var_07 = get_scored_goon_spawn_location();
   var_7.in_use = 1;
   var_7.lastspawntime = gettime();
-  thread scripts/cp/utility::playsoundinspace("zombie_spawn_lightning", var_7.origin);
+  thread scripts\cp\utility::playsoundinspace("zombie_spawn_lightning", var_7.origin);
 
   for (var_08 = 0; var_08 < var_3.size; var_8++) {
   var_06 = var_3[var_08];
@@ -478,7 +478,7 @@ func_10719(var_00) {
 
   if (isdefined(var_02)) {
   var_2.voprefix = level.func_13F18;
-  level thread scripts/cp/zombies/zombies_vo::play_zombie_vo(var_02, "spawn", 1);
+  level thread scripts\cp\zombies\zombies_vo::play_zombie_vo(var_02, "spawn", 1);
   var_02 setavoidanceradius(4);
   var_0.lastspawntime = gettime();
   }
@@ -529,7 +529,7 @@ func_3115(var_00) {
   else
   var_01 = level._effect["brute_spawn_bolt"];
 
-  thread scripts/cp/utility::playsoundinspace("brute_spawn_lightning", var_0.origin);
+  thread scripts\cp\utility::playsoundinspace("brute_spawn_lightning", var_0.origin);
   playfx(var_01, var_0.origin);
   playfx(level._effect["drone_ground_spawn"], var_0.origin, (0, 0, 1));
   playrumbleonentity("grenade_rumble", var_0.origin);
@@ -581,7 +581,7 @@ _meth_8456(var_00) {
   var_04 = 5000;
 
   foreach (var_06 in var_00) {
-  if (scripts/cp/zombies/func_0D60::allowedstances(var_6.volume)) {
+  if (scripts\cp\zombies\func_0D60::allowedstances(var_6.volume)) {
   var_1[var_1.size] = var_06;
   var_6.modifiedspawnpoints = var_02;
   continue;
@@ -589,7 +589,7 @@ _meth_8456(var_00) {
 
   if (isdefined(var_6.volume.func_186E)) {
   foreach (var_08 in var_6.volume.func_186E) {
-  if (scripts/cp/zombies/func_0D60::allowedstances(var_08)) {
+  if (scripts\cp\zombies\func_0D60::allowedstances(var_08)) {
   var_1[var_1.size] = var_06;
   var_6.modifiedspawnpoints = var_03;
   break;
@@ -776,7 +776,7 @@ func_9605() {
 }
 
 func_1B98(var_00, var_01, var_02, var_03) {
-  var_04 = scripts/cp/cp_agent_utils::func_179E("axis", var_01, var_02, "wave " + var_00);
+  var_04 = scripts\cp\cp_agent_utils::func_179E("axis", var_01, var_02, "wave " + var_00);
 
   if (!isdefined(var_04))
   return undefined;
@@ -933,12 +933,12 @@ enemy_spawning_run() {
   while (!scripts\engine\utility::is_true(level.introscreen_done))
   wait 1;
 
-  if (!scripts/cp/utility::is_escape_gametype())
+  if (!scripts\cp\utility::is_escape_gametype())
   wait 15;
   else
   wait 1;
 
-  if (!scripts/cp/utility::is_escape_gametype())
+  if (!scripts\cp\utility::is_escape_gametype())
   func_15BA();
 
   level thread func_10D2E();
@@ -1297,8 +1297,8 @@ spawn_zombie() {
   var_03 = var_00 spawn_wave_enemy(var_02, 1);
 
   if (isdefined(var_03)) {
-  var_03 scripts/cp/zombies/zombie_armor::func_668D(var_03);
-  var_03 scripts/cp/zombies/zombies_pillage::func_6690(var_03);
+  var_03 scripts\cp\zombies\zombie_armor::func_668D(var_03);
+  var_03 scripts\cp\zombies\zombies_pillage::func_6690(var_03);
   var_0.lastspawntime = gettime();
   var_00 thread func_1296E(0.25);
   }
@@ -1368,18 +1368,18 @@ killplayersifonhead(var_00) {
 func_CCBB() {
   if (level.func_311A == 1) {
   foreach (var_01 in level.players)
-  var_01 thread scripts/cp/cp_vo::try_to_play_vo("brute_generic", "zmb_comment_vo", "highest", 20, 0, 0, 1);
+  var_01 thread scripts\cp\cp_vo::try_to_play_vo("brute_generic", "zmb_comment_vo", "highest", 20, 0, 0, 1);
 
   wait 6;
-  level thread scripts/cp/cp_vo::try_to_play_vo("ww_brute_spawn", "zmb_ww_vo", "highest", 20, 0, 0, 1);
+  level thread scripts\cp\cp_vo::try_to_play_vo("ww_brute_spawn", "zmb_ww_vo", "highest", 20, 0, 0, 1);
   } else {
   level.func_311A = 1;
 
   foreach (var_01 in level.players)
-  var_01 thread scripts/cp/cp_vo::try_to_play_vo("brute_first", "zmb_comment_vo", "highest", 20, 0, 0, 1);
+  var_01 thread scripts\cp\cp_vo::try_to_play_vo("brute_first", "zmb_comment_vo", "highest", 20, 0, 0, 1);
 
   wait 6;
-  level thread scripts/cp/cp_vo::try_to_play_vo("ww_brute_firstspawn", "zmb_ww_vo", "highest", 20, 0, 0, 1);
+  level thread scripts\cp\cp_vo::try_to_play_vo("ww_brute_firstspawn", "zmb_ww_vo", "highest", 20, 0, 0, 1);
   }
 }
 
@@ -1543,7 +1543,7 @@ num_zombies_available_to_spawn() {
   if (var_01 < var_00)
   var_00 = var_01;
 
-  if (scripts/cp/utility::is_escape_gametype())
+  if (scripts\cp\utility::is_escape_gametype())
   return var_00;
 
   var_01 = level.desired_enemy_deaths_this_wave - level.current_num_spawned_enemies - level.current_enemy_deaths - level.func_50F8;
@@ -1562,7 +1562,7 @@ func_1296E(var_00) {
 }
 
 func_7C79() {
-  if (scripts/cp/utility::is_escape_gametype()) {
+  if (scripts\cp\utility::is_escape_gametype()) {
   var_00 = level.players.size;
   return 1 / var_00;
   }
@@ -1630,7 +1630,7 @@ spawn_wave_enemy(var_00, var_01, var_02, var_03) {
 
   if (level.agent_definition[var_00]["species"] == "alien") {
   var_06 = func_1B98(var_00, var_04, var_05, self);
-  level thread scripts/cp/zombies/zombies_vo::play_zombie_vo(var_06, "spawn", 1);
+  level thread scripts\cp\zombies\zombies_vo::play_zombie_vo(var_06, "spawn", 1);
   }
   else if (level.agent_definition[var_00]["species"] == "c6")
   var_06 = func_33B1(var_00, var_04, var_05, "axis", self);
@@ -1638,7 +1638,7 @@ spawn_wave_enemy(var_00, var_01, var_02, var_03) {
   var_06 = func_13F13("zombie_brute", "axis", var_04, var_05);
 
   if (isdefined(var_06))
-  level thread scripts/cp/zombies/zombies_vo::play_zombie_vo(var_06, "spawn", 1);
+  level thread scripts\cp\zombies\zombies_vo::play_zombie_vo(var_06, "spawn", 1);
   }
   else
   var_06 = func_13F53(var_00, var_04, var_05, "axis", self);
@@ -1663,7 +1663,7 @@ spawn_wave_enemy(var_00, var_01, var_02, var_03) {
   var_04 = var_8.origin;
   }
 
-  var_6.closest_entrance = scripts/cp/utility::get_closest_entrance(var_04);
+  var_6.closest_entrance = scripts\cp\utility::get_closest_entrance(var_04);
 
   if (scripts\engine\utility::is_true(self.is_coaster_spawner))
   var_06 thread func_42EC(var_00);
@@ -1705,7 +1705,7 @@ func_13F53(var_00, var_01, var_02, var_03, var_04) {
   if (isdefined(level.respawn_data.health))
   var_5.health = level.respawn_data.health;
 
-  level.respawn_enemy_list = scripts/cp/utility::array_remove_index(level.respawn_enemy_list, var_06);
+  level.respawn_enemy_list = scripts\cp\utility::array_remove_index(level.respawn_enemy_list, var_06);
   }
 
   level.respawn_data = undefined;
@@ -1726,7 +1726,7 @@ func_13F53(var_00, var_01, var_02, var_03, var_04) {
   else
   var_5.voprefix = level.func_13F3A;
 
-  var_05 thread scripts/cp/zombies/zombies_vo::func_13F10();
+  var_05 thread scripts\cp\zombies\zombies_vo::func_13F10();
   return var_05;
 }
 
@@ -1978,7 +1978,7 @@ get_spawn_volumes_players_are_in(var_00, var_01) {
   var_06 = 0;
 
   foreach (var_08 in level.players) {
-  if (isdefined(var_01) && !var_08 scripts/cp/utility::is_valid_player())
+  if (isdefined(var_01) && !var_08 scripts\cp\utility::is_valid_player())
   continue;
 
   if (var_08 istouching(var_05)) {
@@ -2010,7 +2010,7 @@ get_spawn_volumes_player_is_in(var_00, var_01, var_02) {
 
   var_07 = 0;
 
-  if (isdefined(var_01) && !var_02 scripts/cp/utility::is_valid_player())
+  if (isdefined(var_01) && !var_02 scripts\cp\utility::is_valid_player())
   continue;
 
   if (var_02 istouching(var_06))
@@ -2142,7 +2142,7 @@ activate_volume_by_name(var_00) {
 make_volume_active() {
   var_00 = 1;
 
-  if (scripts/cp/utility::is_escape_gametype()) {
+  if (scripts\cp\utility::is_escape_gametype()) {
   if (!scripts\engine\utility::is_true(self.active))
   level.active_spawners = [];
   else
@@ -2233,7 +2233,7 @@ func_D1F7() {
   wait 0.1;
 
   for (;;) {
-  if (scripts/cp/utility::isignoremeenabled()) {
+  if (scripts\cp\utility::isignoremeenabled()) {
   scripts\engine\utility::waitframe();
   continue;
   }
@@ -2263,7 +2263,7 @@ func_D1F7() {
   if (isdefined(var_5.func_A9B8)) {
   if (var_5.func_A9B8 + 1000 < var_06) {
   if (!func_CFB2(var_05))
-    continue;
+  continue;
 
   func_576B(var_05);
   break;
@@ -2272,7 +2272,7 @@ func_D1F7() {
   else if (!isdefined(var_5.hasplayedvignetteanim) || var_5.hasplayedvignetteanim) {
   if (!scripts\engine\utility::is_true(var_5.bneedtoenterplayspace)) {
   if (!func_CFB2(var_05))
-    continue;
+  continue;
 
   func_576B(var_05);
   }
@@ -2313,7 +2313,7 @@ func_3828() {
   if (scripts\engine\utility::is_true(self.isfrozen))
   return 0;
 
-  if (scripts/mp/agents/zombie/zombie_agent::dying_zapper_death())
+  if (scripts\mp\agents\zombie\zombie_agent::dying_zapper_death())
   return 0;
 
   if (scripts\engine\utility::is_true(self.is_traversing))
@@ -2344,7 +2344,7 @@ func_64E7(var_00) {
   level endon("game_ended");
   func_12E2A();
 
-  if (var_00 != "zombie_brute" && !scripts/cp/utility::is_escape_gametype())
+  if (var_00 != "zombie_brute" && !scripts\cp\utility::is_escape_gametype())
   thread func_A5B4();
 
   thread func_135A3();
@@ -2385,7 +2385,7 @@ func_12E29(var_00, var_01) {
 
   if (isdefined(self.attack_spot)) {
   var_03 = self.attack_spot;
-  scripts/cp/zombies/zombie_entrances::release_attack_spot(self.attack_spot);
+  scripts\cp\zombies\zombie_entrances::release_attack_spot(self.attack_spot);
   self.attack_spot = undefined;
   }
 
@@ -2485,7 +2485,7 @@ func_A5B4() {
   var_02 = 0;
   }
   else if (isdefined(self.func_6658)) {
-  if (!scripts/cp/zombies/zombie_entrances::entrance_has_barriers(self.func_6658))
+  if (!scripts\cp\zombies\zombie_entrances::entrance_has_barriers(self.func_6658))
   var_2++;
   else
   var_02 = 0;
@@ -2547,37 +2547,37 @@ func_E81B() {
 
   for (;;) {
   func_13BCB();
-  scripts/cp/cp_persistence::update_lb_aliensession_wave(level.wave_num);
+  scripts\cp\cp_persistence::update_lb_aliensession_wave(level.wave_num);
 
   if (level.wave_num > 0) {
   if (level.wave_num / 10 == var_02) {
   level notify("prize_restock");
 
-  if (scripts/cp/utility::map_check(0))
-  level thread scripts/cp/cp_vo::try_to_play_vo("dj_nag_ticket_restock", "zmb_dj_vo", "highest", 20, 0, 0, 1, 100);
+  if (scripts\cp\utility::map_check(0))
+  level thread scripts\cp\cp_vo::try_to_play_vo("dj_nag_ticket_restock", "zmb_dj_vo", "highest", 20, 0, 0, 1, 100);
 
   var_2++;
   }
 
-  if (getdvar("ui_gametype") == "zombie" && (scripts/cp/utility::isplayingsolo() || level.only_one_player)) {
+  if (getdvar("ui_gametype") == "zombie" && (scripts\cp\utility::isplayingsolo() || level.only_one_player)) {
   if (isdefined(level.players[0])) {
   if (level.wave_num == 2)
-  level.players[0] thread scripts/cp/cp_hud_message::wait_and_play_tutorial_message("zombiehealth", 7);
+  level.players[0] thread scripts\cp\cp_hud_message::wait_and_play_tutorial_message("zombiehealth", 7);
   else if (level.wave_num == 3)
-  level.players[0] thread scripts/cp/cp_hud_message::wait_and_play_tutorial_message("scenes", 7);
-  else if (level.wave_num == 4 && !level.players[0] scripts/cp/cp_hud_message::get_has_seen_tutorial("magic_wheel")) {
-  level.players[0] thread scripts/cp/cp_hud_message::wait_and_play_tutorial_message("magic_wheel", 7);
+  level.players[0] thread scripts\cp\cp_hud_message::wait_and_play_tutorial_message("scenes", 7);
+  else if (level.wave_num == 4 && !level.players[0] scripts\cp\cp_hud_message::get_has_seen_tutorial("magic_wheel")) {
+  level.players[0] thread scripts\cp\cp_hud_message::wait_and_play_tutorial_message("magic_wheel", 7);
   level.players[0] notify("saw_wheel_tutorial");
   }
-  else if (level.wave_num == 9 && !level.players[0] scripts/cp/cp_hud_message::get_has_seen_tutorial("pap"))
-  level.players[0] thread scripts/cp/cp_hud_message::wait_and_play_tutorial_message("pap", 7);
+  else if (level.wave_num == 9 && !level.players[0] scripts\cp\cp_hud_message::get_has_seen_tutorial("pap"))
+  level.players[0] thread scripts\cp\cp_hud_message::wait_and_play_tutorial_message("pap", 7);
   }
   }
 
   if (getdvar("ui_gametype") == "zombie") {
   foreach (var_04 in level.players) {
   var_04 setclientomnvar("zombie_wave_number", level.wave_num);
-  var_04 scripts/cp/cp_merits::processmerit("mt_highest_round");
+  var_04 scripts\cp\cp_merits::processmerit("mt_highest_round");
   }
   }
   }
@@ -2589,7 +2589,7 @@ func_E81B() {
   level notify("regular_wave_starting");
 
   if (level.power_on == 1 && level.wave_num > 5)
-  level thread scripts/cp/cp_vo::try_to_play_vo("dj_interup_wave_start", "zmb_dj_vo", "high", 4, 0, 0, 1, 40);
+  level thread scripts\cp\cp_vo::try_to_play_vo("dj_interup_wave_start", "zmb_dj_vo", "high", 4, 0, 0, 1, 40);
 
   if (soundexists("mus_zombies_newwave") && level.wave_num > 0)
   level thread func_BDD4();
@@ -2609,8 +2609,8 @@ func_E81B() {
   var_06 = int(level.wave_num * 50);
 
   foreach (var_04 in level.players) {
-  var_04 scripts/cp/cp_persistence::give_player_xp(var_06, 1);
-  var_04 scripts/cp/cp_merits::processmerit("mt_total_rounds");
+  var_04 scripts\cp\cp_persistence::give_player_xp(var_06, 1);
+  var_04 scripts\cp\cp_merits::processmerit("mt_total_rounds");
 
   if (level.wave_num > 0)
   var_04 notify("next_wave_notify");
@@ -2620,7 +2620,7 @@ func_E81B() {
   }
 
   if (level.power_on == 1 && level.wave_num > 5)
-  level thread scripts/cp/cp_vo::try_to_play_vo("dj_interup_wave_end", "zmb_dj_vo", "high", 4, 0, 0, 1, 40);
+  level thread scripts\cp\cp_vo::try_to_play_vo("dj_interup_wave_end", "zmb_dj_vo", "high", 4, 0, 0, 1, 40);
 
   wait(var_00);
   level thread scripts\cp\gametypes\zombie::replace_grenades_between_waves();
@@ -2629,20 +2629,20 @@ func_E81B() {
   [[level.wave_complete_dialogues_func]](level.wave_num);
 
   var_09 = (gettime() - level.func_13BDA) / 1000;
-  scripts/cp/zombies/zombie_analytics::func_AF90(level.wave_num, var_09, level.laststandnumber, level.timesinafterlife);
+  scripts\cp\zombies\zombie_analytics::func_AF90(level.wave_num, var_09, level.laststandnumber, level.timesinafterlife);
 
   if (level.wave_num > 1)
   func_13BDB();
 
   level.wave_num = func_7B1C();
-  scripts/cp/cp_persistence::update_players_career_highest_wave(level.wave_num, level.script);
+  scripts\cp\cp_persistence::update_players_career_highest_wave(level.wave_num, level.script);
   var_00 = func_7D00(var_00, level.wave_num);
   }
 }
 
 clown_wave_music() {
   wait 0.5;
-  level thread scripts/cp/cp_vo::try_to_play_vo("ww_clownwave_wavestart", "zmb_announcer_vo", "highest", 70, 0, 0, 1);
+  level thread scripts\cp\cp_vo::try_to_play_vo("ww_clownwave_wavestart", "zmb_announcer_vo", "highest", 70, 0, 0, 1);
   wait 3;
 
   if (soundexists("mus_zombies_eventwave_start"))
@@ -2657,30 +2657,30 @@ wave_complete_dialogues(var_00) {
 
   if (var_00 >= 17 && !isdefined(level.completed_dialogues["flavour_1"])) {
   if (randomint(100) > 60)
-  level thread scripts/cp/cp_vo::try_to_play_vo("flavour_1", "zmb_dialogue_vo", "highest", 666, 0, 0, 0, 100);
+  level thread scripts\cp\cp_vo::try_to_play_vo("flavour_1", "zmb_dialogue_vo", "highest", 666, 0, 0, 0, 100);
   }
 
   if (var_00 >= 3 && var_00 <= 5 && !isdefined(level.completed_dialogues["round_end_3thru5_1"])) {
   if (randomint(100) > 50) {
-  level thread scripts/cp/cp_vo::try_to_play_vo("round_end_3thru5_1", "zmb_dialogue_vo", "highest", 666, 0, 0, 0, 100);
+  level thread scripts\cp\cp_vo::try_to_play_vo("round_end_3thru5_1", "zmb_dialogue_vo", "highest", 666, 0, 0, 0, 100);
   level.completed_dialogues["round_end_3thru5_1"] = 1;
   }
   }
   else if (var_00 >= 6 && var_00 <= 8 && !isdefined(level.completed_dialogues["round_end_6thru8_1"])) {
   if (randomint(100) > 50) {
-  level thread scripts/cp/cp_vo::try_to_play_vo("round_end_6thru8_1", "zmb_dialogue_vo", "highest", 666, 0, 0, 0, 100);
+  level thread scripts\cp\cp_vo::try_to_play_vo("round_end_6thru8_1", "zmb_dialogue_vo", "highest", 666, 0, 0, 0, 100);
   level.completed_dialogues["round_end_6thru8_1"] = 1;
   }
   }
   else if (var_00 >= 9 && var_00 <= 12 && !isdefined(level.completed_dialogues["round_end_9thru12_1"])) {
   if (randomint(100) > 50) {
-  level thread scripts/cp/cp_vo::try_to_play_vo("round_end_9thru12_1", "zmb_dialogue_vo", "highest", 666, 0, 0, 0, 100);
+  level thread scripts\cp\cp_vo::try_to_play_vo("round_end_9thru12_1", "zmb_dialogue_vo", "highest", 666, 0, 0, 0, 100);
   level.completed_dialogues["round_end_9thru12_1"] = 1;
   }
   }
   else if (var_00 >= 13 && var_00 <= 16 && !isdefined(level.completed_dialogues["round_end_13thru16_1"])) {
   if (randomint(100) > 50) {
-  level thread scripts/cp/cp_vo::try_to_play_vo("round_end_13thru16_1", "zmb_dialogue_vo", "highest", 666, 0, 0, 0, 100);
+  level thread scripts\cp\cp_vo::try_to_play_vo("round_end_13thru16_1", "zmb_dialogue_vo", "highest", 666, 0, 0, 0, 100);
   level.completed_dialogues["round_end_13thru16_1"] = 1;
   }
   }
@@ -2773,7 +2773,7 @@ func_FF9D(var_00) {
   if (isdefined(level.should_run_event_func))
   return [[level.should_run_event_func]](var_00);
 
-  if (scripts/cp/utility::is_escape_gametype())
+  if (scripts\cp\utility::is_escape_gametype())
   return 0;
 
   if (getdvar("ui_mapname") == "cp_disco")
@@ -2873,7 +2873,7 @@ func_7B1C() {
 }
 
 func_7D00(var_00, var_01) {
-  if (scripts/cp/utility::is_escape_gametype())
+  if (scripts\cp\utility::is_escape_gametype())
   return 1;
 
   return 10;
@@ -2885,7 +2885,7 @@ func_7CA9(var_00) {
 }
 
 get_max_static_enemies(var_00) {
-  if (scripts/cp/utility::is_escape_gametype() && var_00 < 5) {
+  if (scripts\cp\utility::is_escape_gametype() && var_00 < 5) {
   var_01 = level.players.size * 6;
   var_02 = [0, 0.25, 0.3, 0.5, 0.7, 0.9];
   var_03 = 1;
@@ -2904,7 +2904,7 @@ get_max_static_enemies(var_00) {
 }
 
 get_total_spawned_enemies(var_00) {
-  if (scripts/cp/utility::is_escape_gametype())
+  if (scripts\cp\utility::is_escape_gametype())
   return 9000;
 
   var_01 = [0, 0.25, 0.3, 0.5, 0.7, 0.9];
@@ -2981,7 +2981,7 @@ func_13FA2() {
 func_310F() {
   level endon("game_ended");
   self endon("death");
-  thread scripts/cp/zombies/zombies_vo::play_zombie_death_vo(self.voprefix);
+  thread scripts\cp\zombies\zombies_vo::play_zombie_death_vo(self.voprefix);
   self.playing_stumble = 0;
 
   for (;;) {
@@ -2989,13 +2989,13 @@ func_310F() {
 
   switch (var_00) {
   case "attack_hit":
-  level thread scripts/cp/zombies/zombies_vo::play_zombie_vo(self, "attack_swipe", 0);
+  level thread scripts\cp\zombies\zombies_vo::play_zombie_vo(self, "attack_swipe", 0);
   break;
   case "attack_miss":
-  level thread scripts/cp/zombies/zombies_vo::play_zombie_vo(self, "attack_swipe", 0);
+  level thread scripts\cp\zombies\zombies_vo::play_zombie_vo(self, "attack_swipe", 0);
   break;
   case "timeout":
-  level thread scripts/cp/zombies/zombies_vo::play_zombie_vo(self, "run_grunt", 0);
+  level thread scripts\cp\zombies\zombies_vo::play_zombie_vo(self, "run_grunt", 0);
   break;
   }
   }
@@ -3010,7 +3010,7 @@ func_135A3() {
 
   if (isdefined(self.attack_spot)) {
   if (isdefined(self.attack_spot.func_C2D0) && self.attack_spot.func_C2D0 == self)
-  scripts/cp/zombies/zombie_entrances::release_attack_spot(self.attack_spot);
+  scripts\cp\zombies\zombie_entrances::release_attack_spot(self.attack_spot);
   }
 
   return;
@@ -3059,7 +3059,7 @@ func_4094() {
   var_05 = 2250000;
 
   var_00 = var_00 + 3000;
-  var_06 = scripts/cp/cp_agent_utils::getaliveagentsofteam("axis");
+  var_06 = scripts\cp\cp_agent_utils::getaliveagentsofteam("axis");
 
   foreach (var_08 in var_06) {
   if (level.func_BE23 >= 1) {
@@ -3266,11 +3266,11 @@ animmode(var_00, var_01) {
   if (scripts\engine\utility::is_true(var_01))
   var_06 = var_06 + func_C1EB(var_02, 1);
   else
-  var_06 = scripts/cp/zombies/func_0D60::allowedstances(var_02);
+  var_06 = scripts\cp\zombies\func_0D60::allowedstances(var_02);
 
   if (scripts\engine\utility::is_true(var_00) && var_06 == 0 && isdefined(var_2.func_186E)) {
   foreach (var_04 in var_2.func_186E)
-  var_06 = var_06 + scripts/cp/zombies/func_0D60::allowedstances(var_04);
+  var_06 = var_06 + scripts\cp\zombies\func_0D60::allowedstances(var_04);
   }
 
   return var_06;
@@ -3341,11 +3341,11 @@ func_C1EB(var_00, var_01) {
   }
 
   if (isdefined(var_03)) {
-  var_05 = scripts/cp/zombies/func_0D60::allowedstances(var_03);
+  var_05 = scripts\cp\zombies\func_0D60::allowedstances(var_03);
 
   if (scripts\engine\utility::is_true(var_01) && var_05 == 0 && isdefined(var_3.func_186E)) {
   foreach (var_08 in var_3.func_186E)
-  var_05 = var_05 + scripts/cp/zombies/func_0D60::allowedstances(var_08);
+  var_05 = var_05 + scripts\cp\zombies\func_0D60::allowedstances(var_08);
   }
   }
 
@@ -3386,7 +3386,7 @@ func_7D87() {
 
 func_FF55(var_00) {
   if (getdvarint("scr_active_volume_check") == 1) {
-  if (isplayer(var_00) && !scripts/cp/loot::is_in_active_volume(var_0.origin))
+  if (isplayer(var_00) && !scripts\cp\loot::is_in_active_volume(var_0.origin))
   return 1;
   }
 
@@ -3443,7 +3443,7 @@ debug_idle_spots(var_00, var_01) {
   wait 15;
 
   foreach (var_03 in var_00)
-  thread scripts/cp/utility::drawsphere(var_3.origin, 5, 1800, var_01);
+  thread scripts\cp\utility::drawsphere(var_3.origin, 5, 1800, var_01);
 }
 
 add_idle_spot(var_00) {
@@ -3567,30 +3567,30 @@ func_F546(var_00) {
 }
 
 func_BDD4() {
-  scripts/cp/utility::playsoundinspace("mus_zombies_newwave", (0, 0, 0), 1);
+  scripts\cp\utility::playsoundinspace("mus_zombies_newwave", (0, 0, 0), 1);
   level notify("wave_start_sound_done");
 }
 
 func_BDD1() {
   wait 0.3;
-  scripts/cp/utility::playsoundinspace("mus_zombies_endwave", (0, 0, 0));
+  scripts\cp\utility::playsoundinspace("mus_zombies_endwave", (0, 0, 0));
 }
 
 func_BDD3() {
-  scripts/cp/utility::playsoundinspace("mus_zombies_eventwave_start", (0, 0, 0));
+  scripts\cp\utility::playsoundinspace("mus_zombies_eventwave_start", (0, 0, 0));
   level notify("wave_start_sound_done");
 }
 
 func_BDD2() {
-  scripts/cp/utility::playsoundinspace("mus_zombies_eventwave_end", (0, 0, 0));
+  scripts\cp\utility::playsoundinspace("mus_zombies_eventwave_end", (0, 0, 0));
 }
 
 func_BDD0() {
-  scripts/cp/utility::playsoundinspace("mus_zombies_boss_start", (0, 0, 0));
+  scripts\cp\utility::playsoundinspace("mus_zombies_boss_start", (0, 0, 0));
 }
 
 func_BDCF() {
-  scripts/cp/utility::playsoundinspace("mus_zombies_boss_end", (0, 0, 0));
+  scripts\cp\utility::playsoundinspace("mus_zombies_boss_end", (0, 0, 0));
 }
 
 increase_reserved_spawn_slots(var_00) {

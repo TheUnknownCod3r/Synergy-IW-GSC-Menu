@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3006.gsc
-****************************/
+ * Script: 3006.gsc
+************************/
 
 func_5DFB(param_00) {
 	var_01 = self.var_7724;
@@ -59,7 +59,7 @@ func_5EC8(param_00,param_01,param_02) {
 			}
 			else
 			{
-				var_0A = scripts/sp/math::func_C097(0,var_03,self.var_BCC9);
+				var_0A = scripts\sp\math::func_C097(0,var_03,self.var_BCC9);
 			}
 
 			var_06 = var_06 + var_0A - var_06 * var_05;
@@ -84,21 +84,21 @@ func_774E(param_00) {
 	}
 
 	if(issubstr(param_00,"_space")) {
-		level._effect[var_01 + "_dropship_thrust_low"] = loadfx("vfx/iw7/core/vehicle/dropship_" + var_02 + "/vfx_vehicle_dropship_" + var_01 + "_thruster_slow_moon.vfx");
-		level._effect[var_01 + "_dropship_thrust_high"] = loadfx("vfx/iw7/core/vehicle/dropship_" + var_02 + "/vfx_vehicle_dropship_" + var_01 + "_thruster_fast_moon.vfx");
-		level._effect[var_01 + "_dropship_thrust_landed"] = loadfx("vfx/iw7/core/vehicle/dropship_" + var_02 + "/vfx_vehicle_dropship_" + var_01 + "_thruster_idle.vfx");
-		level._effect["dropship_thruster_tread_close"] = loadfx("vfx/no_effect.vfx");
-		level._effect["dropship_thruster_tread_mid"] = loadfx("vfx/no_effect.vfx");
-		level._effect["dropship_thruster_tread_high"] = loadfx("vfx/no_effect.vfx");
+		level._effect[var_01 + "_dropship_thrust_low"] = loadfx("vfx\iw7\core\vehicle\dropship_" + var_02 + "\vfx_vehicle_dropship_" + var_01 + "_thruster_slow_moon.vfx");
+		level._effect[var_01 + "_dropship_thrust_high"] = loadfx("vfx\iw7\core\vehicle\dropship_" + var_02 + "\vfx_vehicle_dropship_" + var_01 + "_thruster_fast_moon.vfx");
+		level._effect[var_01 + "_dropship_thrust_landed"] = loadfx("vfx\iw7\core\vehicle\dropship_" + var_02 + "\vfx_vehicle_dropship_" + var_01 + "_thruster_idle.vfx");
+		level._effect["dropship_thruster_tread_close"] = loadfx("vfx\no_effect.vfx");
+		level._effect["dropship_thruster_tread_mid"] = loadfx("vfx\no_effect.vfx");
+		level._effect["dropship_thruster_tread_high"] = loadfx("vfx\no_effect.vfx");
 		return;
 	}
 
-	level._effect[var_01 + "_dropship_thrust_low"] = loadfx("vfx/iw7/core/vehicle/dropship_" + var_02 + "/vfx_vehicle_dropship_" + var_01 + "_thruster_slow.vfx");
-	level._effect[var_01 + "_dropship_thrust_high"] = loadfx("vfx/iw7/core/vehicle/dropship_" + var_02 + "/vfx_vehicle_dropship_" + var_01 + "_thruster_fast.vfx");
-	level._effect[var_01 + "_dropship_thrust_landed"] = loadfx("vfx/iw7/core/vehicle/dropship_" + var_02 + "/vfx_vehicle_dropship_" + var_01 + "_thruster_idle.vfx");
-	level._effect["dropship_thruster_tread_close"] = loadfx("vfx/no_effect.vfx");
-	level._effect["dropship_thruster_tread_mid"] = loadfx("vfx/no_effect.vfx");
-	level._effect["dropship_thruster_tread_high"] = loadfx("vfx/no_effect.vfx");
+	level._effect[var_01 + "_dropship_thrust_low"] = loadfx("vfx\iw7\core\vehicle\dropship_" + var_02 + "\vfx_vehicle_dropship_" + var_01 + "_thruster_slow.vfx");
+	level._effect[var_01 + "_dropship_thrust_high"] = loadfx("vfx\iw7\core\vehicle\dropship_" + var_02 + "\vfx_vehicle_dropship_" + var_01 + "_thruster_fast.vfx");
+	level._effect[var_01 + "_dropship_thrust_landed"] = loadfx("vfx\iw7\core\vehicle\dropship_" + var_02 + "\vfx_vehicle_dropship_" + var_01 + "_thruster_idle.vfx");
+	level._effect["dropship_thruster_tread_close"] = loadfx("vfx\no_effect.vfx");
+	level._effect["dropship_thruster_tread_mid"] = loadfx("vfx\no_effect.vfx");
+	level._effect["dropship_thruster_tread_high"] = loadfx("vfx\no_effect.vfx");
 }
 
 func_774D() {
@@ -577,7 +577,7 @@ func_5DEC(param_00,param_01,param_02) {
 	if(var_05 > 15) {
 		if(isarray(param_02)) {
 			if(scripts\engine\utility::player_is_in_jackal()) {
-				var_06 = level.var_D127.__func_2AC * 17.6;
+				var_06 = level.var_D127._func_2AC * 17.6;
 			}
 			else
 			{

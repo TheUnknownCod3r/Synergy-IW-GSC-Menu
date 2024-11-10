@@ -1,14 +1,14 @@
-/*********************************************************
+/*************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\killstreaks\_remoteuav.gsc
-*********************************************************/
+ * Script: scripts\mp\killstreaks\_remoteuav.gsc
+*************************************************/
 
 init() {
-	level.remoteuav_fx["hit"] = loadfx("vfx/core/impacts/large_metal_painted_hit");
-	level.remoteuav_fx["smoke"] = loadfx("vfx/core/smktrail/remote_heli_damage_smoke_runner");
-	level.remoteuav_fx["explode"] = loadfx("vfx/core/expl/bouncing_betty_explosion");
-	level.remoteuav_fx["missile_explode"] = loadfx("vfx/core/expl/stinger_explosion");
+	level.remoteuav_fx["hit"] = loadfx("vfx\core\impacts\large_metal_painted_hit");
+	level.remoteuav_fx["smoke"] = loadfx("vfx\core\smktrail\remote_heli_damage_smoke_runner");
+	level.remoteuav_fx["explode"] = loadfx("vfx\core\expl\bouncing_betty_explosion");
+	level.remoteuav_fx["missile_explode"] = loadfx("vfx\core\expl\stinger_explosion");
 	level.remoteuav_dialog["launch"][0] = "ac130_plt_yeahcleared";
 	level.remoteuav_dialog["launch"][1] = "ac130_plt_rollinin";
 	level.remoteuav_dialog["launch"][2] = "ac130_plt_scanrange";
@@ -61,7 +61,7 @@ exceededmaxremoteuavs(param_00) {
 
 tryuseremoteuav(param_00,param_01) {
 	scripts\engine\utility::allow_usability(0);
-	if(scripts\mp\_utility::isusingremote() || self isusingturret() || isdefined(level.nukeincoming)) {
+	if(scripts\mp\utility::isusingremote() || self isusingturret() || isdefined(level.nukeincoming)) {
 		scripts\engine\utility::allow_usability(1);
 		return 0;
 	}
@@ -72,7 +72,7 @@ tryuseremoteuav(param_00,param_01) {
 		scripts\engine\utility::allow_usability(1);
 		return 0;
 	}
-	else if(scripts\mp\_utility::currentactivevehiclecount() >= scripts\mp\_utility::maxvehiclesallowed() || level.fauxvehiclecount + var_02 >= scripts\mp\_utility::maxvehiclesallowed()) {
+	else if(scripts\mp\utility::currentactivevehiclecount() >= scripts\mp\utility::maxvehiclesallowed() || level.fauxvehiclecount + var_02 >= scripts\mp\utility::maxvehiclesallowed()) {
 		self iprintlnbold(&"KILLSTREAKS_TOO_MANY_VEHICLES");
 		scripts\engine\utility::allow_usability(1);
 		return 0;
@@ -80,15 +80,15 @@ tryuseremoteuav(param_00,param_01) {
 
 	self setplayerdata("reconDroneState","staticAlpha",0);
 	self setplayerdata("reconDroneState","incomingMissile",0);
-	scripts\mp\_utility::incrementfauxvehiclecount();
+	scripts\mp\utility::incrementfauxvehiclecount();
 	var_03 = _meth_8355(param_00,param_01);
 	if(var_03) {
-		scripts\mp\_matchdata::logkillstreakevent(param_01,self.origin);
-		thread scripts\mp\_utility::teamplayercardsplash("used_remote_uav",self);
+		scripts\mp\matchdata::logkillstreakevent(param_01,self.origin);
+		thread scripts\mp\utility::teamplayercardsplash("used_remote_uav",self);
 	}
 	else
 	{
-		scripts\mp\_utility::decrementfauxvehiclecount();
+		scripts\mp\utility::decrementfauxvehiclecount();
 	}
 
 	self.iscarrying = 0;
@@ -97,9 +97,9 @@ tryuseremoteuav(param_00,param_01) {
 
 _meth_8355(param_00,param_01) {
 	var_02 = func_4994(param_01,self);
-	scripts\mp\_utility::_takeweapon("killstreak_uav_mp");
-	scripts\mp\_utility::_giveweapon("killstreak_remote_uav_mp");
-	scripts\mp\_utility::_switchtoweaponimmediate("killstreak_remote_uav_mp");
+	scripts\mp\utility::_takeweapon("killstreak_uav_mp");
+	scripts\mp\utility::_giveweapon("killstreak_remote_uav_mp");
+	scripts\mp\utility::_switchtoweaponimmediate("killstreak_remote_uav_mp");
 	func_F686(var_02);
 	if(isalive(self) && isdefined(var_02)) {
 		var_03 = var_02.origin;
@@ -112,8 +112,8 @@ _meth_8355(param_00,param_01) {
 	{
 		var_05 = 0;
 		if(isalive(self)) {
-			scripts\mp\_utility::_takeweapon("killstreak_remote_uav_mp");
-			scripts\mp\_utility::_giveweapon("killstreak_uav_mp");
+			scripts\mp\utility::_takeweapon("killstreak_remote_uav_mp");
+			scripts\mp\utility::_giveweapon("killstreak_uav_mp");
 		}
 	}
 
@@ -178,7 +178,7 @@ func_F686(param_00) {
 			continue;
 		}
 
-		if(exceededmaxremoteuavs(self.team) || scripts\mp\_utility::currentactivevehiclecount() >= scripts\mp\_utility::maxvehiclesallowed() || level.fauxvehiclecount >= scripts\mp\_utility::maxvehiclesallowed()) {
+		if(exceededmaxremoteuavs(self.team) || scripts\mp\utility::currentactivevehiclecount() >= scripts\mp\utility::maxvehiclesallowed() || level.fauxvehiclecount >= scripts\mp\utility::maxvehiclesallowed()) {
 			self iprintlnbold(&"KILLSTREAKS_TOO_MANY_VEHICLES");
 			carryremoteuav_delete(param_00);
 			break;
@@ -331,26 +331,26 @@ removeremoteweapon() {
 
 func_10DEA(param_00,param_01,param_02,param_03) {
 	lockplayerforremoteuavlaunch();
-	scripts\mp\_utility::setusingremote(param_01);
-	scripts\mp\_utility::_giveweapon("uav_remote_mp");
-	scripts\mp\_utility::_switchtoweaponimmediate("uav_remote_mp");
+	scripts\mp\utility::setusingremote(param_01);
+	scripts\mp\utility::_giveweapon("uav_remote_mp");
+	scripts\mp\utility::_switchtoweaponimmediate("uav_remote_mp");
 	self visionsetnakedforplayer("black_bw",0);
 	var_04 = scripts\mp\killstreaks\_killstreaks::initridekillstreak("remote_uav");
 	if(var_04 != "success") {
 		if(var_04 != "disconnect") {
 			self notify("remoteuav_unlock");
-			scripts\mp\_utility::_takeweapon("uav_remote_mp");
-			scripts\mp\_utility::clearusingremote();
+			scripts\mp\utility::_takeweapon("uav_remote_mp");
+			scripts\mp\utility::clearusingremote();
 		}
 
 		return 0;
 	}
 
-	if(exceededmaxremoteuavs(self.team) || scripts\mp\_utility::currentactivevehiclecount() >= scripts\mp\_utility::maxvehiclesallowed() || level.fauxvehiclecount >= scripts\mp\_utility::maxvehiclesallowed()) {
+	if(exceededmaxremoteuavs(self.team) || scripts\mp\utility::currentactivevehiclecount() >= scripts\mp\utility::maxvehiclesallowed() || level.fauxvehiclecount >= scripts\mp\utility::maxvehiclesallowed()) {
 		self iprintlnbold(&"KILLSTREAKS_TOO_MANY_VEHICLES");
 		self notify("remoteuav_unlock");
-		scripts\mp\_utility::_takeweapon("uav_remote_mp");
-		scripts\mp\_utility::clearusingremote();
+		scripts\mp\utility::_takeweapon("uav_remote_mp");
+		scripts\mp\utility::clearusingremote();
 		return 0;
 	}
 
@@ -362,8 +362,8 @@ func_10DEA(param_00,param_01,param_02,param_03) {
 	}
 
 	self iprintlnbold(&"KILLSTREAKS_TOO_MANY_VEHICLES");
-	scripts\mp\_utility::_takeweapon("uav_remote_mp");
-	scripts\mp\_utility::clearusingremote();
+	scripts\mp\utility::_takeweapon("uav_remote_mp");
+	scripts\mp\utility::clearusingremote();
 	return 0;
 }
 
@@ -437,7 +437,7 @@ remoteuav_ride(param_00,param_01,param_02) {
 	param_01.playerlinked = 1;
 	self.restoreangles = self.angles;
 	if(getdvarint("camera_thirdPerson")) {
-		scripts\mp\_utility::setthirdpersondof(0);
+		scripts\mp\utility::setthirdpersondof(0);
 	}
 
 	self cameralinkto(param_01,"tag_origin");
@@ -449,7 +449,7 @@ remoteuav_ride(param_00,param_01,param_02) {
 	self.remoteuav = param_01;
 	thread remoteuav_delaylaunchdialog(param_01);
 	self visionsetnakedforplayer("black_bw",0);
-	scripts\mp\_utility::restorebasevisionset(1);
+	scripts\mp\utility::restorebasevisionset(1);
 }
 
 remoteuav_delaylaunchdialog(param_00) {
@@ -466,9 +466,9 @@ remoteuav_endride(param_00) {
 	if(isdefined(param_00)) {
 		param_00.playerlinked = 0;
 		param_00 notify("end_remote");
-		scripts\mp\_utility::clearusingremote();
+		scripts\mp\utility::clearusingremote();
 		if(getdvarint("camera_thirdPerson")) {
-			scripts\mp\_utility::setthirdpersondof(1);
+			scripts\mp\utility::setthirdpersondof(1);
 		}
 
 		self cameraunlink(param_00);
@@ -480,8 +480,8 @@ remoteuav_endride(param_00) {
 			var_01 = scripts\mp\killstreaks\_utility::getfirstprimaryweapon();
 		}
 
-		scripts\mp\_utility::_switchtoweapon(var_01);
-		scripts\mp\_utility::_takeweapon("uav_remote_mp");
+		scripts\mp\utility::_switchtoweapon(var_01);
+		scripts\mp\utility::_takeweapon("uav_remote_mp");
 		thread remoteuav_freezebuffer();
 	}
 
@@ -492,9 +492,9 @@ remoteuav_freezebuffer() {
 	self endon("disconnect");
 	self endon("death");
 	level endon("game_ended");
-	scripts\mp\_utility::freezecontrolswrapper(1);
+	scripts\mp\utility::freezecontrolswrapper(1);
 	wait(0.5);
-	scripts\mp\_utility::freezecontrolswrapper(0);
+	scripts\mp\utility::freezecontrolswrapper(0);
 }
 
 remoteuav_playerexit(param_00) {
@@ -606,7 +606,7 @@ func_DFAB(param_00,param_01,param_02) {
 		}
 
 		if(isplayer(var_05)) {
-			if(!scripts\mp\_utility::isreallyalive(var_05)) {
+			if(!scripts\mp\utility::isreallyalive(var_05)) {
 				continue;
 			}
 
@@ -639,7 +639,7 @@ func_DFAB(param_00,param_01,param_02) {
 			if(!isdefined(param_00.markedplayers[var_06])) {
 				param_00.markedplayers[var_06] = [];
 				param_00.markedplayers[var_06]["player"] = var_05;
-				param_00.markedplayers[var_06]["icon"] = var_05 scripts\mp\_entityheadicons::setheadicon(self,"veh_hud_target_marked",var_07,10,10,0,0.05,0,0,0,0);
+				param_00.markedplayers[var_06]["icon"] = var_05 scripts\mp\entityheadicons::setheadicon(self,"veh_hud_target_marked",var_07,10,10,0,0.05,0,0,0,0);
 				param_00.markedplayers[var_06]["icon"].shader = "veh_hud_target_marked";
 				if(!isdefined(var_05.sentrytype) || !isdefined(var_05.var_12A9A)) {
 					param_00.markedplayers[var_06]["icon"] settargetent(var_05);
@@ -656,7 +656,7 @@ func_DFAB(param_00,param_01,param_02) {
 
 		if(isplayer(var_05)) {
 			var_09 = isdefined(var_05.spawntime) && gettime() - var_05.spawntime / 1000 <= 5;
-			var_0A = var_05 scripts\mp\_utility::_hasperk("specialty_blindeye");
+			var_0A = var_05 scripts\mp\utility::_hasperk("specialty_blindeye");
 			var_0B = 0;
 			var_0C = 0;
 		}
@@ -671,7 +671,7 @@ func_DFAB(param_00,param_01,param_02) {
 		if(!isdefined(param_00.markedplayers[var_06]) && !var_09 && !var_0A && !var_0B && !var_0C) {
 			param_00.markedplayers[var_06] = [];
 			param_00.markedplayers[var_06]["player"] = var_05;
-			param_00.markedplayers[var_06]["icon"] = var_05 scripts\mp\_entityheadicons::setheadicon(self,var_08,var_07,10,10,0,0.05,0,0,0,0);
+			param_00.markedplayers[var_06]["icon"] = var_05 scripts\mp\entityheadicons::setheadicon(self,var_08,var_07,10,10,0,0.05,0,0,0,0);
 			param_00.markedplayers[var_06]["icon"].shader = var_08;
 			if(!isdefined(var_05.sentrytype) || !isdefined(var_05.var_12A9A)) {
 				param_00.markedplayers[var_06]["icon"] settargetent(var_05);
@@ -715,7 +715,7 @@ remoteuav_fire(param_00) {
 		self waittill("remoteUAV_tag");
 		if(isdefined(self.var_AEFB)) {
 			self playlocalsound("recondrone_tag");
-			scripts\mp\_damagefeedback::updatedamagefeedback("");
+			scripts\mp\damagefeedback::updatedamagefeedback("");
 			thread remoteuav_markplayer(self.var_AEFB);
 			thread remoteuav_rumble(param_00,3);
 			wait(0.25);
@@ -742,22 +742,22 @@ remoteuav_rumble(param_00,param_01) {
 remoteuav_markplayer(param_00) {
 	level endon("game_ended");
 	param_00.var_12AF4 = self;
-	if(isplayer(param_00) && !param_00 scripts\mp\_utility::isusingremote()) {
+	if(isplayer(param_00) && !param_00 scripts\mp\utility::isusingremote()) {
 		param_00 playlocalsound("player_hit_while_ads_hurt");
-		param_00 thread scripts\mp\_flashgrenades::func_20CA(2,1);
-		param_00 thread scripts\mp\_rank::scoreeventpopup("marked_by_remote_uav");
+		param_00 thread scripts\mp\flashgrenades::func_20CA(2,1);
+		param_00 thread scripts\mp\rank::scoreeventpopup("marked_by_remote_uav");
 	}
 	else if(isdefined(param_00.uavtype)) {
 		param_00.var_2B0C = param_00.var_64;
 	}
 	else if(isdefined(param_00.triggerportableradarping) && isalive(param_00.triggerportableradarping)) {
-		param_00.triggerportableradarping thread scripts\mp\_rank::scoreeventpopup("turret_marked_by_remote_uav");
+		param_00.triggerportableradarping thread scripts\mp\rank::scoreeventpopup("turret_marked_by_remote_uav");
 	}
 
 	remoteuav_dialog("tag");
 	if(level.gametype != "dm") {
 		if(isplayer(param_00)) {
-			thread scripts\mp\_utility::giveunifiedpoints("kill");
+			thread scripts\mp\utility::giveunifiedpoints("kill");
 		}
 	}
 
@@ -819,11 +819,11 @@ remoteuav_processtaggedassist(param_00) {
 	if(level.gametype != "dm") {
 		self.var_113FF = 1;
 		if(isdefined(param_00)) {
-			thread scripts\mp\_gamescore::processassist(param_00);
+			thread scripts\mp\gamescore::processassist(param_00);
 			return;
 		}
 
-		thread scripts\mp\_utility::giveunifiedpoints("assist");
+		thread scripts\mp\utility::giveunifiedpoints("assist");
 	}
 }
 
@@ -981,7 +981,7 @@ remoteuav_rangecountdown() {
 		var_00 = 6;
 	}
 
-	scripts\mp\_hostmigration::waitlongdurationwithhostmigrationpause(var_00);
+	scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(var_00);
 	self notify("death");
 }
 
@@ -1006,7 +1006,7 @@ remoteuav_clear_marked_on_gameended() {
 remoteuav_leave_on_timeout() {
 	self endon("death");
 	var_00 = 60;
-	scripts\mp\_hostmigration::waitlongdurationwithhostmigrationpause(var_00);
+	scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(var_00);
 	thread remoteuav_leave();
 }
 
@@ -1042,7 +1042,7 @@ remoteuav_cleanup() {
 	remoteuav_clearmarkedforowner();
 	stopfxontag(level.remoteuav_fx["smoke"],self,"tag_origin");
 	level.remote_uav[self.team] = undefined;
-	scripts\mp\_utility::decrementfauxvehiclecount();
+	scripts\mp\utility::decrementfauxvehiclecount();
 	self delete();
 }
 
@@ -1068,7 +1068,7 @@ remoteuav_dialog(param_00) {
 	level.remoteuav_lastdialogtime = gettime();
 	var_02 = randomint(level.remoteuav_dialog[param_00].size);
 	var_03 = level.remoteuav_dialog[param_00][var_02];
-	var_04 = scripts\mp\_teams::getteamvoiceprefix(self.team) + var_03;
+	var_04 = scripts\mp\teams::getteamvoiceprefix(self.team) + var_03;
 	self playlocalsound(var_04);
 }
 
@@ -1222,7 +1222,7 @@ watchsamproximity(param_00,param_01) {
 }
 
 deployflares() {
-	self.var_C22B--;
+	self.numflares--;
 	self.triggerportableradarping thread remoteuav_rumble(self,6);
 	self playsound("WEAP_SHOTGUNATTACH_FIRE_NPC");
 	thread playflarefx();
@@ -1312,14 +1312,14 @@ func_DFAE() {
 
 remoteuav_handledamage() {
 	self endon("end_remote");
-	scripts\mp\_damage::monitordamage(self.maxhealth,"remote_uav",::handledeathdamage,::modifydamage,1);
+	scripts\mp\damage::monitordamage(self.maxhealth,"remote_uav",::handledeathdamage,::modifydamage,1);
 }
 
 modifydamage(param_00,param_01,param_02,param_03,param_04) {
 	var_05 = param_03;
-	var_05 = scripts\mp\_damage::handleempdamage(param_01,param_02,var_05);
-	var_05 = scripts\mp\_damage::handlemissiledamage(param_01,param_02,var_05);
-	var_05 = scripts\mp\_damage::handleapdamage(param_01,param_02,var_05);
+	var_05 = scripts\mp\damage::handleempdamage(param_01,param_02,var_05);
+	var_05 = scripts\mp\damage::handlemissiledamage(param_01,param_02,var_05);
+	var_05 = scripts\mp\damage::handleapdamage(param_01,param_02,var_05);
 	playfxontagforclients(level.remoteuav_fx["hit"],self,"tag_origin",self.triggerportableradarping);
 	self playsound("recondrone_damaged");
 	if(self.var_1037E == 0 && self.var_E1 >= self.maxhealth / 2) {
@@ -1331,5 +1331,5 @@ modifydamage(param_00,param_01,param_02,param_03,param_04) {
 }
 
 handledeathdamage(param_00,param_01,param_02,param_03) {
-	scripts\mp\_damage::onkillstreakkilled("remote_uav",param_00,param_01,param_02,param_03,"destroyed_remote_uav",undefined,"callout_destroyed_remote_uav");
+	scripts\mp\damage::onkillstreakkilled("remote_uav",param_00,param_01,param_02,param_03,"destroyed_remote_uav",undefined,"callout_destroyed_remote_uav");
 }

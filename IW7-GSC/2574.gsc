@@ -1,13 +1,13 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\2574.gsc
-****************************/
+ * Script: 2574.gsc
+************************/
 
 meleedeathhandler(param_00) {
 	self endon("melee_finished");
 	self waittill("terminate_ai_threads");
-	scripts/asm/asm_bb::bb_clearmeleetarget();
+	scripts\asm\asm_bb::bb_clearmeleetarget();
 }
 
 melee_init(param_00,param_01) {
@@ -19,7 +19,7 @@ melee_init(param_00,param_01) {
 		melee_destroy();
 	}
 
-	scripts/asm/asm_bb::bb_setmeleetarget(param_01);
+	scripts\asm\asm_bb::bb_setmeleetarget(param_01);
 	self.melee.taskid = param_00;
 	param_01.melee.taskid = param_00;
 	return level.success;
@@ -77,7 +77,7 @@ func_9E96(param_00) {
 		return 0;
 	}
 
-	if(isdefined(self.bt.cannotmelee)) {
+	if(isdefined(self.var_3135.cannotmelee)) {
 		return 0;
 	}
 
@@ -123,15 +123,15 @@ shouldmelee(param_00,param_01) {
 }
 
 func_9896(param_00) {
-	self.bt.instancedata[param_00] = spawnstruct();
-	self.bt.instancedata[param_00].timeout = gettime();
-	self.bt.instancedata[param_00].var_312F = 0;
+	self.var_3135.instancedata[param_00] = spawnstruct();
+	self.var_3135.instancedata[param_00].timeout = gettime();
+	self.var_3135.instancedata[param_00].var_312F = 0;
 	if(isplayer(self.melee.target)) {
-		self.bt.instancedata[param_00].objective_state_nomessage = self.objective_state_nomessage;
+		self.var_3135.instancedata[param_00].objective_state_nomessage = self.objective_state_nomessage;
 		self.objective_state_nomessage = 0;
 	}
 
-	scripts/asm/asm_bb::bb_requestmelee(self.melee.target);
+	scripts\asm\asm_bb::bb_requestmelee(self.melee.target);
 	if(isdefined(self.var_71BF)) {
 		self [[self.var_71BF]]();
 	}
@@ -155,27 +155,27 @@ func_5903(param_00) {
 		return level.failure;
 	}
 
-	if(scripts/asm/asm::asm_ephemeraleventfired("melee_attack","end")) {
+	if(scripts\asm\asm::asm_ephemeraleventfired("melee_attack","end")) {
 		return level.success;
 	}
 
-	if(scripts/asm/asm::asm_ephemeraleventfired("melee_attack","begin",0)) {
-		self.bt.instancedata[param_00].var_312F = 1;
-		self.bt.instancedata[param_00].timeout = gettime() + 10000;
+	if(scripts\asm\asm::asm_ephemeraleventfired("melee_attack","begin",0)) {
+		self.var_3135.instancedata[param_00].var_312F = 1;
+		self.var_3135.instancedata[param_00].timeout = gettime() + 10000;
 	}
 
-	if(!self.bt.instancedata[param_00].var_312F) {
+	if(!self.var_3135.instancedata[param_00].var_312F) {
 		if(!isdefined(self.melee.target) || !isalive(self.melee.target)) {
 			return level.failure;
 		}
 	}
 
-	if(gettime() > self.bt.instancedata[param_00].timeout + 2000) {
+	if(gettime() > self.var_3135.instancedata[param_00].timeout + 2000) {
 		self.melee.var_2720 = 1;
 		return level.failure;
 	}
 
-	if(isdefined(self.melee.target) && !isplayer(self.melee.target) && self.melee.target scripts/asm/asm_bb::bb_isanimscripted()) {
+	if(isdefined(self.melee.target) && !isplayer(self.melee.target) && self.melee.target scripts\asm\asm_bb::bb_isanimscripted()) {
 		return level.failure;
 	}
 
@@ -183,7 +183,7 @@ func_5903(param_00) {
 }
 
 func_41C6(param_00) {
-	scripts/asm/asm_bb::bb_clearmeleerequest();
+	scripts\asm\asm_bb::bb_clearmeleerequest();
 	if(isdefined(self.melee) && !isdefined(self.melee.var_312F)) {
 		if(isdefined(self.melee.target)) {
 			self.melee.target.melee = undefined;
@@ -192,11 +192,11 @@ func_41C6(param_00) {
 		self.melee = undefined;
 	}
 
-	if(isdefined(self.bt.instancedata[param_00].objective_state_nomessage)) {
-		self.objective_state_nomessage = self.bt.instancedata[param_00].objective_state_nomessage;
+	if(isdefined(self.var_3135.instancedata[param_00].objective_state_nomessage)) {
+		self.objective_state_nomessage = self.var_3135.instancedata[param_00].objective_state_nomessage;
 	}
 
-	self.bt.instancedata[param_00] = undefined;
+	self.var_3135.instancedata[param_00] = undefined;
 }
 
 func_B5C3(param_00) {
@@ -223,7 +223,7 @@ func_B653(param_00) {
 }
 
 meleevsplayer_terminate(param_00) {
-	scripts/asm/asm_bb::bb_clearmeleerequest();
+	scripts\asm\asm_bb::bb_clearmeleerequest();
 	melee_destroy();
 	if(isdefined(self.fnmeleevsplayer_terminate)) {
 		self [[self.fnmeleevsplayer_terminate]](param_00);
@@ -235,11 +235,11 @@ meleevsplayer_update(param_00) {
 		return level.failure;
 	}
 
-	if(scripts/asm/asm::asm_ephemeraleventfired("melee_attack","end")) {
+	if(scripts\asm\asm::asm_ephemeraleventfired("melee_attack","end")) {
 		return level.success;
 	}
 
-	scripts/asm/asm_bb::bb_requestmelee(self.melee.target);
+	scripts\asm\asm_bb::bb_requestmelee(self.melee.target);
 	return level.running;
 }
 
@@ -277,12 +277,12 @@ func_B5E8(param_00) {
 	}
 
 	func_B5B4(self.unittype,3);
-	self.bt.instancedata[param_00] = spawnstruct();
-	self.bt.instancedata[param_00].var_3E30 = gettime() + 100;
-	self.bt.instancedata[param_00].timeout = gettime() + 4000;
-	self.bt.instancedata[param_00].var_6572 = self.isnodeoccupied.origin;
+	self.var_3135.instancedata[param_00] = spawnstruct();
+	self.var_3135.instancedata[param_00].var_3E30 = gettime() + 100;
+	self.var_3135.instancedata[param_00].timeout = gettime() + 4000;
+	self.var_3135.instancedata[param_00].var_6572 = self.isnodeoccupied.origin;
 	if(isplayer(self.melee.target)) {
-		self.bt.instancedata[param_00].objective_state_nomessage = self.objective_state_nomessage;
+		self.var_3135.instancedata[param_00].objective_state_nomessage = self.objective_state_nomessage;
 		self.objective_state_nomessage = 0;
 	}
 
@@ -300,16 +300,16 @@ func_B5EE(param_00) {
 
 	self _meth_8484();
 	self.setumbraportalstate = 0;
-	if(isdefined(self.bt.instancedata[param_00].objective_state_nomessage)) {
-		self.objective_state_nomessage = self.bt.instancedata[param_00].objective_state_nomessage;
+	if(isdefined(self.var_3135.instancedata[param_00].objective_state_nomessage)) {
+		self.objective_state_nomessage = self.var_3135.instancedata[param_00].objective_state_nomessage;
 	}
 
-	scripts/asm/asm_bb::bb_clearmeleechargerequest();
+	scripts\asm\asm_bb::bb_clearmeleechargerequest();
 	if(isdefined(self.fnmeleecharge_terminate)) {
 		self [[self.fnmeleecharge_terminate]](param_00);
 	}
 
-	self.bt.instancedata[param_00] = undefined;
+	self.var_3135.instancedata[param_00] = undefined;
 }
 
 func_7FAB(param_00) {
@@ -321,7 +321,7 @@ func_7FAB(param_00) {
 		var_01 = self.meleechargedist;
 	}
 
-	if(!scripts/aitypes/combat::hasammoinclip()) {
+	if(!scripts\aitypes\combat::hasammoinclip()) {
 		var_01 = var_01 * self.meleechargedistreloadmultiplier;
 	}
 
@@ -342,7 +342,7 @@ melee_shouldabort() {
 		return 1;
 	}
 
-	if(!isplayer(var_00) && var_00 scripts/asm/asm_bb::bb_isanimscripted()) {
+	if(!isplayer(var_00) && var_00 scripts\asm\asm_bb::bb_isanimscripted()) {
 		return 1;
 	}
 
@@ -354,7 +354,7 @@ func_B5EB() {
 		return 1;
 	}
 
-	if(isdefined(self.bt.cannotmelee)) {
+	if(isdefined(self.var_3135.cannotmelee)) {
 		return 1;
 	}
 
@@ -373,7 +373,7 @@ func_B5EB() {
 		return 1;
 	}
 
-	if(scripts/asm/asm::asm_ephemeraleventfired("melee_charge_state","end")) {
+	if(scripts\asm\asm::asm_ephemeraleventfired("melee_charge_state","end")) {
 		return 1;
 	}
 
@@ -386,7 +386,7 @@ func_B5E7(param_00) {
 }
 
 func_B5EA(param_00,param_01) {
-	var_02 = self.bt.instancedata[param_00].targetpos;
+	var_02 = self.var_3135.instancedata[param_00].targetpos;
 	if(!isdefined(var_02)) {
 		return 0;
 	}
@@ -463,14 +463,14 @@ func_B5F0(param_00) {
 		}
 	}
 
-	if(self.badpath || gettime() > self.bt.instancedata[param_00].var_3E30 && !isdefined(self.vehicle_getspawnerarray)) {
+	if(self.badpath || gettime() > self.var_3135.instancedata[param_00].var_3E30 && !isdefined(self.vehicle_getspawnerarray)) {
 		func_B5E7(var_02);
 		self.melee.var_2720 = 1;
 		return level.failure;
 	}
 
 	if(!isdefined(self.melee.var_2AC7) || !self.melee.var_2AC7) {
-		if(gettime() >= self.bt.instancedata[param_00].timeout) {
+		if(gettime() >= self.var_3135.instancedata[param_00].timeout) {
 			func_B5E7(var_02);
 			self.melee.var_2720 = 1;
 			return level.failure;
@@ -479,11 +479,11 @@ func_B5F0(param_00) {
 
 	if(!isdefined(self.melee.var_2AC6) || !self.melee.var_2AC6) {
 		if(isdefined(self.var_B5DA)) {
-			var_0B = distance2dsquared(var_02.origin,self.bt.instancedata[param_00].var_6572);
+			var_0B = distance2dsquared(var_02.origin,self.var_3135.instancedata[param_00].var_6572);
 		}
 		else
 		{
-			var_0B = distancesquared(var_03.origin,self.bt.instancedata[var_01].var_6572);
+			var_0B = distancesquared(var_03.origin,self.var_3135.instancedata[var_01].var_6572);
 		}
 
 		if(var_0B > 16384) {
@@ -554,8 +554,8 @@ func_B5F0(param_00) {
 
 	self _meth_8481(var_0E);
 	self.var_6D = 6;
-	self.bt.instancedata[param_00].targetpos = var_0E;
-	scripts/asm/asm_bb::bb_requestmeleecharge(var_02,var_0E);
+	self.var_3135.instancedata[param_00].targetpos = var_0E;
+	scripts\asm\asm_bb::bb_requestmeleecharge(var_02,var_0E);
 	return level.running;
 }
 

@@ -1,8 +1,8 @@
-/*********************************************************
+/*************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\killstreaks\_dronehive.gsc
-*********************************************************/
+ * Script: scripts\mp\killstreaks\_dronehive.gsc
+*************************************************/
 
 init() {
 	scripts\mp\killstreaks\_killstreaks::registerkillstreak("drone_hive",::tryusedronehive,undefined,undefined,undefined,::func_13C8C);
@@ -12,7 +12,7 @@ init() {
 	}
 
 	var_03 = ["passive_predator","passive_no_missiles","passive_implosion","passive_rapid_missiles"];
-	scripts\mp\_killstreak_loot::func_DF07("drone_hive",var_03);
+	scripts\mp\killstreak_loot::func_DF07("drone_hive",var_03);
 }
 
 func_13C8C(param_00) {
@@ -98,7 +98,7 @@ func_E846(param_00,param_01,param_02,param_03) {
 	var_04 = "used_drone_hive";
 	var_05 = "drone_hive_projectile_mp";
 	var_06 = "switch_blade_child_mp";
-	var_07 = scripts\mp\_killstreak_loot::getrarityforlootitem(param_03.variantid);
+	var_07 = scripts\mp\killstreak_loot::getrarityforlootitem(param_03.variantid);
 	if(var_07 != "") {
 		var_04 = var_04 + "_" + var_07;
 	}
@@ -108,13 +108,13 @@ func_E846(param_00,param_01,param_02,param_03) {
 		var_06 = "switch_blade_impulse_mp";
 	}
 
-	level thread scripts\mp\_utility::teamplayercardsplash(var_04,param_00);
+	level thread scripts\mp\utility::teamplayercardsplash(var_04,param_00);
 	param_00 notifyonplayercommand("missileTargetSet","+attack");
 	param_00 notifyonplayercommand("missileTargetSet","+attack_akimbo_accessible");
 	var_08 = func_7DFE(param_00,level.dronemissilespawnarray);
 	var_09 = var_08.origin * (1,1,0) + (0,0,level.mapcenter[2] + 10000);
 	var_0A = var_08.var_1155F.origin;
-	var_0B = scripts\mp\_utility::_magicbullet(var_05,var_09,var_0A,param_00);
+	var_0B = scripts\mp\utility::_magicbullet(var_05,var_09,var_0A,param_00);
 	var_0B setcandamage(1);
 	var_0B _meth_80A2();
 	var_0B give_player_next_weapon(1);
@@ -140,7 +140,7 @@ func_E846(param_00,param_01,param_02,param_03) {
 	var_0B thread func_13AA4(param_00);
 	var_0B thread watchhostmigrationfinishedinit(param_00);
 	var_0B thread scripts\mp\killstreaks\_utility::watchsupertrophynotify(param_00);
-	param_00 scripts\mp\_matchdata::logkillstreakevent(param_02,var_0B.origin);
+	param_00 scripts\mp\matchdata::logkillstreakevent(param_02,var_0B.origin);
 	var_0C = 0;
 	var_0B.missilesleft = 2;
 	if(scripts\mp\killstreaks\_utility::func_A69F(param_03,"passive_predator")) {
@@ -157,7 +157,7 @@ func_E846(param_00,param_01,param_02,param_03) {
 	param_00 setclientomnvar("ui_predator_missiles_left",var_0B.missilesleft);
 	for(;;) {
 		var_0E = var_0B scripts\engine\utility::waittill_any_return("death","missileTargetSet");
-		scripts\mp\_hostmigration::waittillhostmigrationdone();
+		scripts\mp\hostmigration::waittillhostmigrationdone();
 		if(var_0E == "death") {
 			break;
 		}
@@ -166,8 +166,8 @@ func_E846(param_00,param_01,param_02,param_03) {
 			break;
 		}
 
-		if(scripts\mp\_utility::istrue(var_0B.var_12BA7)) {
-			if(scripts\mp\_utility::istrue(var_0B.lasttimefired)) {
+		if(scripts\mp\utility::istrue(var_0B.var_12BA7)) {
+			if(scripts\mp\utility::istrue(var_0B.lasttimefired)) {
 				if(gettime() < var_0B.lasttimefired + var_0D * 1000 && var_0C == 0) {
 					continue;
 				}
@@ -193,7 +193,7 @@ func_E846(param_00,param_01,param_02,param_03) {
 		}
 
 		if(var_0C < 2) {
-			if(!scripts\mp\_utility::istrue(var_0B.singlefire)) {
+			if(!scripts\mp\utility::istrue(var_0B.singlefire)) {
 				level thread spawnswitchblade(var_0B,var_0C,param_03,var_06);
 				var_0C++;
 				var_0B.missilesleft = 2 - var_0C;
@@ -206,7 +206,7 @@ func_E846(param_00,param_01,param_02,param_03) {
 	}
 
 	level thread func_E474(param_00);
-	scripts\mp\_utility::printgameaction("killstreak ended - drone_hive",param_00);
+	scripts\mp\utility::printgameaction("killstreak ended - drone_hive",param_00);
 }
 
 firerapidmissiles(param_00,param_01,param_02,param_03) {
@@ -240,7 +240,7 @@ func_B9EE() {
 		foreach(var_04 in var_00) {
 			var_05 = self.triggerportableradarping worldpointinreticle_circle(var_04.origin,65,90);
 			if(var_05) {
-				self.triggerportableradarping thread scripts\mp\_utility::drawline(self.origin,var_04.origin,10,(0,0,1));
+				self.triggerportableradarping thread scripts\mp\utility::drawline(self.origin,var_04.origin,10,(0,0,1));
 				var_02[var_02.size] = var_04;
 			}
 		}
@@ -248,11 +248,11 @@ func_B9EE() {
 		if(var_02.size) {
 			var_01 = sortbydistance(var_02,self.origin);
 			self.var_AA25 = var_01[0];
-			scripts\mp\_hostmigration::waitlongdurationwithhostmigrationpause(0.25);
+			scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(0.25);
 		}
 
 		wait(0.05);
-		scripts\mp\_hostmigration::waittillhostmigrationdone();
+		scripts\mp\hostmigration::waittillhostmigrationdone();
 	}
 }
 
@@ -271,7 +271,7 @@ spawnswitchblade(param_00,param_01,param_02,param_03) {
 	var_08 = var_08 * var_09["fraction"];
 	var_0A = param_00.origin + var_06 * var_07;
 	var_0B = param_00.origin + var_05 * var_08;
-	var_0C = scripts\mp\_utility::_magicbullet(param_03,var_0A,var_0B,param_00.triggerportableradarping);
+	var_0C = scripts\mp\utility::_magicbullet(param_03,var_0A,var_0B,param_00.triggerportableradarping);
 	var_0D = param_00 getclosesttargetinview(param_00.triggerportableradarping,var_0B);
 	if(isdefined(var_0D) && !scripts\mp\killstreaks\_utility::func_A69F(param_02,"passive_rapid_missiles")) {
 		var_0C missile_settargetent(var_0D);
@@ -300,12 +300,12 @@ getclosesttargetinview(param_00,param_01) {
 			continue;
 		}
 
-		if(scripts\mp\_utility::istrue(var_06.trinityrocketlocked)) {
+		if(scripts\mp\utility::istrue(var_06.trinityrocketlocked)) {
 			continue;
 		}
 
 		var_07 = distance2dsquared(var_06.origin,param_01);
-		if(var_07 < 262144 && scripts\mp\_utility::istrue(canseetarget(var_06))) {
+		if(var_07 < 262144 && scripts\mp\utility::istrue(canseetarget(var_06))) {
 			if(!isdefined(var_04) || var_07 < var_04) {
 				var_03 = var_06;
 				var_04 = var_07;
@@ -387,7 +387,7 @@ monitorboost(param_00) {
 func_7DFE(param_00,param_01) {
 	var_02 = [];
 	foreach(var_04 in level.players) {
-		if(!scripts\mp\_utility::isreallyalive(var_04)) {
+		if(!scripts\mp\utility::isreallyalive(var_04)) {
 			continue;
 		}
 
@@ -412,7 +412,7 @@ func_7DFE(param_00,param_01) {
 		var_09.var_101E4 = 0;
 		for(var_0A = 0;var_0A < var_02.size;var_0A++) {
 			var_0B = var_02[var_0A];
-			if(!scripts\mp\_utility::isreallyalive(var_0B)) {
+			if(!scripts\mp\utility::isreallyalive(var_0B)) {
 				var_02[var_0A] = var_02[var_02.size - 1];
 				var_02[var_02.size - 1] = undefined;
 				var_0A--;
@@ -425,7 +425,7 @@ func_7DFE(param_00,param_01) {
 			}
 
 			wait(0.05);
-			scripts\mp\_hostmigration::waittillhostmigrationdone();
+			scripts\mp\hostmigration::waittillhostmigrationdone();
 		}
 
 		if(var_09.var_101E4 == var_02.size) {
@@ -442,7 +442,7 @@ func_7DFE(param_00,param_01) {
 
 missileeyes(param_00,param_01) {
 	var_02 = 0.5;
-	param_00 scripts\mp\_utility::freezecontrolswrapper(1);
+	param_00 scripts\mp\utility::freezecontrolswrapper(1);
 	param_00 cameralinkto(param_01,"tag_origin");
 	param_00 controlslinkto(param_01);
 	param_00 thermalvisionon();
@@ -455,8 +455,8 @@ missileeyes(param_00,param_01) {
 
 unfreezecontrols(param_00,param_01,param_02) {
 	param_00 endon("disconnect");
-	scripts\mp\_hostmigration::waitlongdurationwithhostmigrationpause(param_01 - 0.35);
-	param_00 scripts\mp\_utility::freezecontrolswrapper(0);
+	scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(param_01 - 0.35);
+	param_00 scripts\mp\utility::freezecontrolswrapper(0);
 }
 
 func_B9CB(param_00) {
@@ -484,7 +484,7 @@ monitorobjectivecamera(param_00) {
 monitordeath(param_00,param_01) {
 	var_02 = param_00.triggerportableradarping;
 	param_00 waittill("death");
-	scripts\mp\_hostmigration::waittillhostmigrationdone();
+	scripts\mp\hostmigration::waittillhostmigrationdone();
 	if(isdefined(param_00.var_114F1)) {
 		param_00.var_114F1 delete();
 	}
@@ -497,7 +497,7 @@ monitordeath(param_00,param_01) {
 		level.remotemissileinprogress = undefined;
 	}
 
-	if(isdefined(var_02) && !scripts\mp\_utility::isreallyalive(var_02) && scripts\mp\_utility::istrue(param_01)) {
+	if(isdefined(var_02) && !scripts\mp\utility::isreallyalive(var_02) && scripts\mp\utility::istrue(param_01)) {
 		var_02 thread stopmissilesoundonspawn();
 	}
 }
@@ -516,7 +516,7 @@ func_E474(param_00,param_01,param_02) {
 	}
 
 	param_00 playlocalsound("trinity_rocket_exp_plr");
-	if(!scripts\mp\_utility::istrue(param_02)) {
+	if(!scripts\mp\utility::istrue(param_02)) {
 		param_00 thread scripts\mp\killstreaks\_killstreaks::func_11086();
 	}
 
@@ -541,7 +541,7 @@ watchmissileextraeffect(param_00,param_01) {
 		return;
 	}
 
-	if(var_02 && !scripts\mp\_utility::istrue(param_01)) {
+	if(var_02 && !scripts\mp\utility::istrue(param_01)) {
 		return;
 	}
 
@@ -573,11 +573,11 @@ watchmissileextraeffect(param_00,param_01) {
 	else if(var_03) {
 		var_07 setscriptablepartstate("impulse_explode","active",0);
 		wait(0.5);
-		var_08 = function_02AF(var_04,"drone_hive_implosion_mp",var_07.origin);
+		var_08 = spawnimpulsefield(var_04,"drone_hive_implosion_mp",var_07.origin);
 		wait(0.1);
 		var_08 delete();
 		var_07 radiusdamage(var_07.origin,325,1000,1000,var_04,"MOD_EXPLOSIVE",var_05);
-		scripts\mp\_shellshock::grenade_earthquakeatposition(var_07.origin);
+		scripts\mp\shellshock::grenade_earthquakeatposition(var_07.origin);
 		physicsexplosionsphere(var_07.origin,300,0,200);
 		wait(1);
 	}
@@ -603,7 +603,7 @@ watchgastrigger(param_00,param_01) {
 			continue;
 		}
 
-		if(scripts\mp\_utility::istrue(var_02.gettinggassed)) {
+		if(scripts\mp\utility::istrue(var_02.gettinggassed)) {
 			continue;
 		}
 
@@ -622,7 +622,7 @@ applygasdamageovertime(param_00,param_01,param_02) {
 		}
 	}
 
-	if(scripts\mp\_utility::istrue(param_02.gettinggassed)) {
+	if(scripts\mp\utility::istrue(param_02.gettinggassed)) {
 		param_02.gettinggassed = undefined;
 	}
 }

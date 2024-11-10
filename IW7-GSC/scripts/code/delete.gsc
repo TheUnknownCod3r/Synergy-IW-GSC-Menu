@@ -1,8 +1,8 @@
-/*******************************************
+/***********************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\code\delete.gsc
-*******************************************/
+ * Script: scripts\code\delete.gsc
+***********************************/
 
 main() {
 	wait(0);

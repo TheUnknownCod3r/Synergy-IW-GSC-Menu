@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3398.gsc
-****************************/
+ * Script: 3398.gsc
+************************/
 
 func_211C() {
 	wait(10);
@@ -72,7 +72,7 @@ use_arcade_game(param_00,param_01) {
 	param_01 lerpfovbypreset("zombiearcade");
 	param_01 setclientomnvar("zombie_arcade_game_time",1);
 	param_01 setclientomnvar("zombie_arcade_widget",1);
-	param_01 scripts/cp/zombies/achievement::update_achievement_arcade(param_01,param_00.script_noteworthy,level.wave_num);
+	param_01 scripts\cp\zombies\achievement::update_achievement_arcade(param_01,param_00.script_noteworthy,level.wave_num);
 	wait(0.25);
 	if(isdefined(param_00.script_index)) {
 		var_03 = getent(param_00.name,"targetname");

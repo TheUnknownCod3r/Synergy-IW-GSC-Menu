@@ -1,12 +1,12 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3341.gsc
-****************************/
+ * Script: 3341.gsc
+************************/
 
 init() {
-	level._effect["slam_sml"] = loadfx("vfx/old/_requests/archetypes/vfx_heavy_slam_s");
-	level._effect["slam_lrg"] = loadfx("vfx/old/_requests/archetypes/vfx_heavy_slam_l");
+	level._effect["slam_sml"] = loadfx("vfx\old\_requests\archetypes\vfx_heavy_slam_s");
+	level._effect["slam_lrg"] = loadfx("vfx\old\_requests\archetypes\vfx_heavy_slam_l");
 }
 
 stoplocalsound(param_00) {

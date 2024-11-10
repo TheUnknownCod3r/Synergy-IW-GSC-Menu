@@ -1,8 +1,8 @@
-/**************************************************************
+/******************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\anim\traverse\double_jump_temp.gsc
-**************************************************************/
+ * Script: scripts\anim\traverse\double_jump_temp.gsc
+******************************************************/
 
 main() {
 	if(isdefined(self.unittype) && self.unittype == "c12") {
@@ -44,7 +44,7 @@ func_5AD2() {
 	childthread func_11629(var_05);
 	thread scripts\anim\shared::donotetracks("traverseAnim",::scripts\anim\traverse\shared::func_89F8);
 	foreach(var_08 in var_02) {
-		var_09 = var_06 \ var_02.size;
+		var_09 = var_06 / var_02.size;
 		var_05 moveto(var_08,var_09);
 		var_05 waittill("movedone");
 	}

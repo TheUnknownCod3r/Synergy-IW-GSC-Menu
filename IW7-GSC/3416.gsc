@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3416.gsc
-****************************/
+ * Script: 3416.gsc
+************************/
 
 init_jaroslav() {
 	var_00 = scripts\engine\utility::getstructarray("jaroslav_machine","script_noteworthy");
@@ -87,10 +87,10 @@ interaction_jaroslav(param_00,param_01) {
 	}
 
 	wait(0.5);
-	param_01 scripts/cp/zombies/zombies_consumables::reset_meter();
+	param_01 scripts\cp\zombies\zombies_consumables::reset_meter();
 	param_01.card_refills = param_01.card_refills + 1;
-	param_01 thread scripts/cp/zombies/zombies_consumables::turn_on_cards();
-	param_01 thread scripts/cp/zombies/zombies_consumables::meter_fill_up();
+	param_01 thread scripts\cp\zombies\zombies_consumables::turn_on_cards();
+	param_01 thread scripts\cp\zombies\zombies_consumables::meter_fill_up();
 	param_01 scripts\cp\cp_merits::processmerit("mt_faf_refill_deck");
 	playsoundatpos(param_00.origin,"jaroslav_anc_activate_use");
 	level thread jaroslav_interaction_vo(param_01);

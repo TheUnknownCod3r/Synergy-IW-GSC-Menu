@@ -1,8 +1,8 @@
-/***********************************************
+/***************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\sp\intelligence.gsc
-***********************************************/
+ * Script: scripts\sp\intelligence.gsc
+***************************************/
 
 main() {
 	precachestring(&"SCRIPT_INTELLIGENCE_OF_EIGHTEEN");
@@ -99,7 +99,7 @@ func_48A1() {
 	var_00 = 20;
 	var_01 = [];
 	for(var_02 = 1;var_02 <= var_00;var_02++) {
-		var_03 = tablelookup("sp/intel_items.csv",0,var_02,4);
+		var_03 = tablelookup("sp\intel_items.csv",0,var_02,4);
 		if(isdefined(var_03) && var_03 != "undefined") {
 			var_04 = strtok(var_03,",");
 			for(var_05 = 0;var_05 < var_04.size;var_05++) {
@@ -118,7 +118,7 @@ func_48A1() {
 
 func_26CA() {
 	func_EB60();
-	function_022A();
+	updategamerprofileall();
 	waittillframeend;
 	func_E041();
 }
@@ -227,7 +227,7 @@ func_EB60() {
 		var_01 _meth_8324(self.var_C1D5);
 	}
 
-	function_0132("found intel item " + self.var_C1D5);
+	logstring("found intel item " + self.var_C1D5);
 	scripts\sp\_endmission::func_12F24();
 }
 
@@ -239,7 +239,7 @@ setplayerangles() {
 func_9952(param_00) {
 	self.randomintrange hide();
 	self.randomintrange notsolid();
-	function_0178("intelligence_pickup",self.randomintrange.origin);
+	playworldsound("intelligence_pickup",self.randomintrange.origin);
 	var_01 = 3000;
 	var_02 = 700;
 	var_03 = var_01 + var_02 / 1000;
@@ -288,7 +288,7 @@ func_F99F() {
 func_23AF() {
 	var_00 = [];
 	for(var_01 = 1;var_01 < 65;var_01++) {
-		var_02 = tablelookup("sp/intel_items.csv",0,var_01,4);
+		var_02 = tablelookup("sp\intel_items.csv",0,var_01,4);
 		var_03 = strtok(var_02,",");
 		for(var_01 = 0;var_01 < var_03.size;var_01++) {
 			var_03[var_01] = int(var_03[var_01]);

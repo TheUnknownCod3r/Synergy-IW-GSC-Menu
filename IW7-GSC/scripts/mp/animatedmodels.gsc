@@ -1,8 +1,8 @@
-/*************************************************
+/*****************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\animatedmodels.gsc
-*************************************************/
+ * Script: scripts\mp\animatedmodels.gsc
+*****************************************/
 
 main() {
 	if(!isdefined(level.anim_prop_models)) {

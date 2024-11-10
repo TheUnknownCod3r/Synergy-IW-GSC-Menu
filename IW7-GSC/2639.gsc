@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2639.gsc
+ * Script: 2639.gsc
 ***************************************/
 
 updatedamagefeedback(var_00, var_01, var_02, var_03, var_04, var_05, var_06) {
@@ -86,7 +86,7 @@ onplayertouchkilltrigger(var_00, var_01, var_02, var_03, var_04, var_05, var_06,
   return;
 
   set_kill_trigger_event_processed(self, 1);
-  scripts/cp/cp_laststand::callback_defaultplayerlaststand(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08, scripts/cp/cp_globallogic::func_7F56());
+  scripts\cp\cp_laststand::callback_defaultplayerlaststand(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08, scripts\cp\cp_globallogic::func_7F56());
 }
 
 kill_trigger_event_was_processed() {
@@ -140,9 +140,9 @@ func_1118C(var_00, var_01, var_02) {
   playfxontag(level._effect["stun_shock"], var_0.stun_struct.attack_bolt, "TAG_ORIGIN");
   var_03 = undefined;
 
-  if (isdefined(self.agent_type) && scripts/cp/cp_agent_utils::get_agent_type(self) == "seeder_spore")
+  if (isdefined(self.agent_type) && scripts\cp\cp_agent_utils::get_agent_type(self) == "seeder_spore")
   var_03 = self gettagorigin("J_Spore_46");
-  else if (isdefined(self) && isalive(self) && scripts/cp/utility::has_tag(self.model, "J_SpineUpper"))
+  else if (isdefined(self) && isalive(self) && scripts\cp\utility::has_tag(self.model, "J_SpineUpper"))
   var_03 = self gettagorigin("J_SpineUpper");
 
   if (isdefined(var_03)) {
@@ -158,7 +158,7 @@ func_1118C(var_00, var_01, var_02) {
   if (isdefined(self)) {
   var_05 = self;
 
-  if (isdefined(self.agent_type) && scripts/cp/cp_agent_utils::get_agent_type(self) == "seeder_spore")
+  if (isdefined(self.agent_type) && scripts\cp\cp_agent_utils::get_agent_type(self) == "seeder_spore")
   var_05 = self.func_4353;
 
   if (isdefined(var_05))
@@ -180,7 +180,7 @@ func_F29B(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08
   if (var_01 == "alienthrowingknife_mp" && var_00 == "MOD_IMPACT") {
   if (can_hypno(var_03, 0, var_04, var_00, var_01, var_05, var_06, var_07, var_08, var_09))
   var_02 = 20000;
-  else if (scripts/cp/cp_agent_utils::get_agent_type(self) != "elite")
+  else if (scripts\cp\cp_agent_utils::get_agent_type(self) != "elite")
   var_02 = 500;
   }
   }
@@ -203,7 +203,7 @@ can_hypno(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08
   case "goon":
   return 1;
   case "elite":
-  if (var_00 scripts/cp/utility::is_upgrade_enabled("hypno_rhino_upgrade") || var_01)
+  if (var_00 scripts\cp\utility::is_upgrade_enabled("hypno_rhino_upgrade") || var_01)
   return 1;
   default:
   return 0;
@@ -215,28 +215,28 @@ scale_alien_damage_by_perks(var_00, var_01, var_02, var_03) {
 
   if (scripts\engine\utility::isbulletdamage(var_02) && !func_9D39(var_03) && !func_9DB8(var_03)) {
   if (!func_9D39(var_03))
-  var_01 = int(var_01 * var_00 scripts/cp/perks/perk_utility::perk_getbulletdamagescalar());
+  var_01 = int(var_01 * var_00 scripts\cp\perks\perk_utility::perk_getbulletdamagescalar());
   else if (func_9D38(var_03))
-  var_01 = int(var_01 * var_00 scripts/cp/perks/perk_utility::func_CA43());
+  var_01 = int(var_01 * var_00 scripts\cp\perks\perk_utility::func_CA43());
 
   if (isdefined(var_0.func_1517))
   var_01 = int(var_01 * var_0.func_1517);
   }
 
   if (var_02 == "MOD_EXPLOSIVE")
-  var_01 = int(var_01 * var_00 scripts/cp/perks/perk_utility::perk_getexplosivedamagescalar());
+  var_01 = int(var_01 * var_00 scripts\cp\perks\perk_utility::perk_getexplosivedamagescalar());
 
   if (var_02 == "MOD_MELEE") {
   if (should_play_melee_blood_vfx(var_00))
   playfxontag(level._effect["melee_blood"], var_00, "tag_weapon_right");
 
-  var_01 = int(var_01 * var_00 scripts/cp/perks/perk_utility::perk_getmeleescalar());
+  var_01 = int(var_01 * var_00 scripts\cp\perks\perk_utility::perk_getmeleescalar());
 
   if (isdefined(var_0.func_1518))
   var_01 = int(var_01 * var_0.func_1518);
   }
 
-  if (var_00 scripts/cp/utility::is_upgrade_enabled("damage_booster_upgrade"))
+  if (var_00 scripts\cp\utility::is_upgrade_enabled("damage_booster_upgrade"))
   var_01 = int(var_01 * var_04);
 
   return var_01;
@@ -331,7 +331,7 @@ scale_alien_damage_by_weapon_type(var_00, var_01, var_02, var_03, var_04) {
   var_01 = func_3D84(self, var_01, var_00, var_03, var_02);
 
   if (isdefined(var_02) && var_02 == "MOD_EXPLOSIVE_BULLET" && var_04 != "none") {
-  if (scripts/cp/utility::coop_getweaponclass(var_03) == "weapon_shotgun")
+  if (scripts\cp\utility::coop_getweaponclass(var_03) == "weapon_shotgun")
   var_01 = var_01 + int(var_01 * level.shotgundamagemod);
   else
   var_01 = var_01 + int(var_01 * level.exploimpactmod);
@@ -342,7 +342,7 @@ scale_alien_damage_by_weapon_type(var_00, var_01, var_02, var_03, var_04) {
 
 scale_alien_damage_by_prestige(var_00, var_01) {
   if (isplayer(var_00)) {
-  var_02 = var_00 scripts/cp/perks/prestige::prestige_getweapondamagescalar();
+  var_02 = var_00 scripts\cp\perks\prestige::prestige_getweapondamagescalar();
   var_01 = var_01 * var_02;
   var_01 = int(var_01);
   }
@@ -353,13 +353,13 @@ scale_alien_damage_by_prestige(var_00, var_01) {
 func_3D84(var_00, var_01, var_02, var_03, var_04) {
   var_05 = 500;
 
-  if (!isdefined(var_00) || !scripts/cp/utility::isreallyalive(var_00))
+  if (!isdefined(var_00) || !scripts\cp\utility::isreallyalive(var_00))
   return var_01;
 
   if (!isdefined(var_02) || !isplayer(var_02) || var_04 != "MOD_EXPLOSIVE_BULLET")
   return var_01;
 
-  if (scripts/cp/utility::coop_getweaponclass(var_03) == "weapon_shotgun") {
+  if (scripts\cp\utility::coop_getweaponclass(var_03) == "weapon_shotgun") {
   var_06 = distance(var_2.origin, var_0.origin);
   var_07 = max(1, var_06 / var_05);
   var_08 = var_01 * 8;
@@ -382,7 +382,7 @@ check_for_special_damage(var_00, var_01, var_02) {
   return;
 
   if (!isdefined(var_0.is_burning) && isalive(var_00)) {
-  if ((scripts/cp/utility::player_has_special_ammo(self, "incendiary_ammo") || scripts/cp/utility::player_has_special_ammo(self, "combined_ammo")) && var_02 != "MOD_UNKNOWN")
+  if ((scripts\cp\utility::player_has_special_ammo(self, "incendiary_ammo") || scripts\cp\utility::player_has_special_ammo(self, "combined_ammo")) && var_02 != "MOD_UNKNOWN")
   var_00 thread catch_alien_on_fire(self, undefined, undefined, 1);
   else if (var_01 == "iw5_alienriotshield4_mp" && self.fireshield == 1.0)
   var_00 thread catch_alien_on_fire(self);
@@ -400,7 +400,7 @@ check_for_special_damage(var_00, var_01, var_02) {
   break;
   }
   } else {
-  var_03 = scripts/cp/utility::getrawbaseweaponname(var_01);
+  var_03 = scripts\cp\utility::getrawbaseweaponname(var_01);
 
   if (isdefined(self.special_ammocount) && isdefined(self.special_ammocount[var_03]) && self.special_ammocount[var_03] > 0)
   return;
@@ -418,7 +418,7 @@ damage_alien_over_time(var_00, var_01, var_02, var_03) {
   self endon("death");
 
   if (!isdefined(var_01) && !isdefined(var_02)) {
-  var_04 = scripts/cp/cp_agent_utils::get_agent_type(self);
+  var_04 = scripts\cp\cp_agent_utils::get_agent_type(self);
 
   switch (var_04) {
   case "goon4":
@@ -455,7 +455,7 @@ damage_alien_over_time(var_00, var_01, var_02, var_03) {
   var_01 = 3;
   }
 
-  if (isdefined(var_00) && isdefined(var_03) && var_00 scripts/cp/utility::is_upgrade_enabled("incendiary_ammo_upgrade") && isdefined(var_03))
+  if (isdefined(var_00) && isdefined(var_03) && var_00 scripts\cp\utility::is_upgrade_enabled("incendiary_ammo_upgrade") && isdefined(var_03))
   var_02 = var_02 * 1.2;
 
   var_02 = var_02 * level.alien_health_per_player_scalar[level.players.size];
@@ -500,11 +500,11 @@ alien_fire_off() {
 update_damage_score(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08, var_09) {
   if (!isdefined(level.func_24B8) || var_01 != level.func_24B8) {
   if (isdefined(var_01) && isdefined(var_1.owner))
-  scripts/cp/cp_agent_utils::store_attacker_info(var_1.owner, var_02 * 0.75);
+  scripts\cp\cp_agent_utils::store_attacker_info(var_1.owner, var_02 * 0.75);
   else if (isdefined(var_01) && isdefined(var_1.pet) && var_1.pet == 1)
-  scripts/cp/cp_agent_utils::store_attacker_info(var_1.owner, var_02);
+  scripts\cp\cp_agent_utils::store_attacker_info(var_1.owner, var_02);
   else
-  scripts/cp/cp_agent_utils::store_attacker_info(var_01, var_02);
+  scripts\cp\cp_agent_utils::store_attacker_info(var_01, var_02);
 
   if (isdefined(var_01) && isdefined(var_05)) {
   if (isdefined(level.func_12D86))
@@ -574,7 +574,7 @@ handlegrenadedamage(var_00, var_01, var_02) {
   var_02 = var_02 * 4;
   break;
   default:
-  if (scripts/cp/utility::isstrstart(var_00, "alt_"))
+  if (scripts\cp\utility::isstrstart(var_00, "alt_"))
   var_02 = var_02 * 3;
 
   break;
@@ -586,7 +586,7 @@ handlegrenadedamage(var_00, var_01, var_02) {
 
 handleapdamage(var_00, var_01, var_02, var_03) {
   if (var_01 == "MOD_RIFLE_BULLET" || var_01 == "MOD_PISTOL_BULLET") {
-  if (var_03 scripts/cp/utility::_hasperk("specialty_armorpiercing") || scripts/cp/utility::isfmjdamage(var_00, var_01, var_03))
+  if (var_03 scripts\cp\utility::_hasperk("specialty_armorpiercing") || scripts\cp\utility::isfmjdamage(var_00, var_01, var_03))
   return var_02 * level.armorpiercingmod;
   }
 
@@ -601,7 +601,7 @@ onkillstreakkilled(var_00, var_01, var_02, var_03, var_04, var_05, var_06) {
   if (isdefined(var_0.owner) && isplayer(var_0.owner))
   var_00 = var_0.owner;
 
-  if (self.owner scripts/cp/utility::isenemy(var_00))
+  if (self.owner scripts\cp\utility::isenemy(var_00))
   var_08 = var_00;
   }
 
@@ -612,7 +612,7 @@ onkillstreakkilled(var_00, var_01, var_02, var_03, var_04, var_05, var_06) {
   }
 
   if (isdefined(self.owner) && isdefined(var_05))
-  self.owner thread scripts/cp/utility::leaderdialogonplayer(var_05, undefined, undefined, self.origin);
+  self.owner thread scripts\cp\utility::leaderdialogonplayer(var_05, undefined, undefined, self.origin);
 
   self notify("death");
   return var_07;
@@ -753,15 +753,15 @@ func_20BA() {
   self.func_1BD8++;
   self.func_1BD9 = _pow(0.68, (self.func_1BD8 + 1) * 0.35);
   self.func_1BD9 = max(0.58, self.func_1BD9);
-  scripts/cp/perks/perkfunctions::func_12E78();
+  scripts\cp\perks\perkfunctions::func_12E78();
   wait 0.8;
   self.func_1BD8 = 0;
   self.func_1BD9 = 1.0;
-  scripts/cp/perks/perkfunctions::func_12E78();
+  scripts\cp\perks\perkfunctions::func_12E78();
 }
 
 func_9BE5(var_00, var_01, var_02) {
-  if (isdefined(var_02) && scripts/cp/utility::is_trap(var_02))
+  if (isdefined(var_02) && scripts\cp\utility::is_trap(var_02))
   return 0;
 
   if (var_00 == "MOD_UNKNOWN" && var_01 != "none")

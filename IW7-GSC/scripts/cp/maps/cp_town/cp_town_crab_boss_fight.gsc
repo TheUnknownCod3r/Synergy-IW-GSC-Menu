@@ -1,15 +1,15 @@
-/***********************************************************************
+/***************************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\maps\cp_town\cp_town_crab_boss_fight.gsc
-***********************************************************************/
+ * Script: scripts\cp\maps\cp_town\cp_town_crab_boss_fight.gsc
+***************************************************************/
 
 init_crab_boss_stage() {
-	scripts/cp/zombies/zombie_quest::register_quest_step("crabBoss",0,::init_crab_boss_quest,::crab_boss_quest,::end_crab_boss_quest,::debug_beat_crab_boss_quest,4,"Quest Step");
-	scripts/cp/zombies/zombie_quest::register_quest_step("crabBoss",1,::init_escort_bomb,::escort_bomb,::end_escort_bomb,::debug_beat_escort_bomb,4,"Escort the Bomb");
-	scripts/cp/zombies/zombie_quest::register_quest_step("crabBoss",2,::blank,::death_ray_cannon,::end_death_ray_cannon,::debug_beat_death_ray_cannon,4,"Death Ray Cannon");
-	scripts/cp/zombies/zombie_quest::register_quest_step("crabBoss",3,::blank,::death_wall,::end_death_wall,::debug_beat_death_wall,4,"Wall of Death");
-	scripts/cp/zombies/zombie_quest::register_quest_step("crabBoss",4,::blank,::sonic_ring,::end_sonic_ring,::debug_sonic_ring,4,"Sonic Beam");
+	scripts\cp\zombies\zombie_quest::register_quest_step("crabBoss",0,::init_crab_boss_quest,::crab_boss_quest,::end_crab_boss_quest,::debug_beat_crab_boss_quest,4,"Quest Step");
+	scripts\cp\zombies\zombie_quest::register_quest_step("crabBoss",1,::init_escort_bomb,::escort_bomb,::end_escort_bomb,::debug_beat_escort_bomb,4,"Escort the Bomb");
+	scripts\cp\zombies\zombie_quest::register_quest_step("crabBoss",2,::blank,::death_ray_cannon,::end_death_ray_cannon,::debug_beat_death_ray_cannon,4,"Death Ray Cannon");
+	scripts\cp\zombies\zombie_quest::register_quest_step("crabBoss",3,::blank,::death_wall,::end_death_wall,::debug_beat_death_wall,4,"Wall of Death");
+	scripts\cp\zombies\zombie_quest::register_quest_step("crabBoss",4,::blank,::sonic_ring,::end_sonic_ring,::debug_sonic_ring,4,"Sonic Beam");
 }
 
 blank() {}
@@ -79,7 +79,7 @@ wait_door_open_to_beach() {
 move_to_taunt_loc(param_00) {
 	param_00.shouldabortentranceanim = 1;
 	for(;;) {
-		var_01 = param_00 scripts/asm/asm::asm_getcurrentstate("crab_boss");
+		var_01 = param_00 scripts\asm\asm::asm_getcurrentstate("crab_boss");
 		if(var_01 == "idle") {
 			break;
 		}
@@ -147,7 +147,7 @@ debug_beat_crab_boss_quest() {}
 gets_to_combat_pos() {
 	var_00 = 10;
 	for(;;) {
-		var_01 = level.crab_boss scripts/asm/asm::asm_getcurrentstate("crab_boss");
+		var_01 = level.crab_boss scripts\asm\asm::asm_getcurrentstate("crab_boss");
 		if(var_01 == "idle") {
 			break;
 		}
@@ -660,12 +660,12 @@ end_sonic_ring() {
 debug_sonic_ring() {}
 
 replay_final_sequence() {
-	if(!scripts/cp/zombies/zombie_quest::quest_line_exist("replayCrabBossFinalSequence")) {
-		scripts/cp/zombies/zombie_quest::register_quest_step("replayCrabBossFinalSequence",0,::blank,::death_wall,::end_death_wall,::debug_beat_death_wall,5,"Wall of Death");
-		scripts/cp/zombies/zombie_quest::register_quest_step("replayCrabBossFinalSequence",1,::blank,::sonic_ring,::end_sonic_ring,::debug_sonic_ring,5,"Sonic Beam");
+	if(!scripts\cp\zombies\zombie_quest::quest_line_exist("replayCrabBossFinalSequence")) {
+		scripts\cp\zombies\zombie_quest::register_quest_step("replayCrabBossFinalSequence",0,::blank,::death_wall,::end_death_wall,::debug_beat_death_wall,5,"Wall of Death");
+		scripts\cp\zombies\zombie_quest::register_quest_step("replayCrabBossFinalSequence",1,::blank,::sonic_ring,::end_sonic_ring,::debug_sonic_ring,5,"Sonic Beam");
 	}
 
-	level thread scripts/cp/zombies/zombie_quest::start_quest_line("replayCrabBossFinalSequence");
+	level thread scripts\cp\zombies\zombie_quest::start_quest_line("replayCrabBossFinalSequence");
 }
 
 activate_crab_boss_fight_blocker() {
@@ -726,7 +726,7 @@ setupplayerloadouts() {
 	var_02 = ["perk_machine_revive","perk_machine_flash","perk_machine_tough","perk_machine_run","perk_machine_rat_a_tat"];
 	foreach(var_04 in level.players) {
 		foreach(var_06 in var_02) {
-			var_04 thread scripts/cp/zombies/zombies_perk_machines::give_zombies_perk_immediate(var_06,1);
+			var_04 thread scripts\cp\zombies\zombies_perk_machines::give_zombies_perk_immediate(var_06,1);
 		}
 
 		var_08 = randomint(var_01.size);
@@ -734,20 +734,20 @@ setupplayerloadouts() {
 		var_04 takeweapon(var_04 scripts\cp\utility::getvalidtakeweapon());
 		var_0A = scripts\cp\utility::getrawbaseweaponname(var_01[var_08]);
 		if(isdefined(var_04.weapon_build_models[var_0A])) {
-			scripts/cp/zombies/coop_wall_buys::givevalidweapon(var_04,var_04.weapon_build_models[var_0A]);
+			scripts\cp\zombies\coop_wall_buys::givevalidweapon(var_04,var_04.weapon_build_models[var_0A]);
 		}
 		else
 		{
-			scripts/cp/zombies/coop_wall_buys::givevalidweapon(var_04,var_01[var_08]);
+			scripts\cp\zombies\coop_wall_buys::givevalidweapon(var_04,var_01[var_08]);
 		}
 
 		var_0B = scripts\cp\utility::getrawbaseweaponname(var_00[var_09]);
 		if(isdefined(var_04.weapon_build_models[var_0B])) {
-			scripts/cp/zombies/coop_wall_buys::givevalidweapon(var_04,var_04.weapon_build_models[var_0B]);
+			scripts\cp\zombies\coop_wall_buys::givevalidweapon(var_04,var_04.weapon_build_models[var_0B]);
 		}
 		else
 		{
-			scripts/cp/zombies/coop_wall_buys::givevalidweapon(var_04,var_01[var_08]);
+			scripts\cp\zombies\coop_wall_buys::givevalidweapon(var_04,var_01[var_08]);
 		}
 
 		var_04.total_currency_earned = min(10000,var_04 scripts\cp\cp_persistence::get_player_max_currency());
@@ -756,7 +756,7 @@ setupplayerloadouts() {
 	}
 
 	if(isdefined(level.pap_max) && level.pap_max < 3) {
-		level.var_C8A4++;
+		level.pap_max++;
 	}
 
 	level [[level.upgrade_weapons_func]]();
@@ -777,7 +777,7 @@ open_sesame(param_00) {
 	}
 
 	foreach(var_02 in level.generators) {
-		thread scripts/cp/zombies/zombie_power::generic_generator(var_02);
+		thread scripts\cp\zombies\zombie_power::generic_generator(var_02);
 		wait(0.1);
 	}
 
@@ -804,7 +804,7 @@ open_sesame(param_00) {
 	level.triton_donations = 3;
 	if(isdefined(level.team_killdoors)) {
 		foreach(var_0F in level.team_killdoors) {
-			var_0F scripts/cp/zombies/zombie_doors::open_team_killdoor(level.players[0]);
+			var_0F scripts\cp\zombies\zombie_doors::open_team_killdoor(level.players[0]);
 		}
 	}
 

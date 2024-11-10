@@ -1,8 +1,8 @@
-/***************************************************
+/*******************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\aitypes\dlc4\wander.gsc
-***************************************************/
+ * Script: scripts\aitypes\dlc4\wander.gsc
+*******************************************/
 
 findrandomnavpoint(param_00,param_01) {
 	if(!isdefined(param_00) || !isdefined(param_01)) {
@@ -19,7 +19,7 @@ findrandomnavpoint(param_00,param_01) {
 	var_06[1] = var_03;
 	var_06[2] = var_04;
 	var_06[3] = var_05;
-	var_06 = scripts\common\utility::array_randomize(var_06);
+	var_06 = scripts\engine\utility::array_randomize(var_06);
 	var_07 = param_00 * 2;
 	foreach(var_09 in var_06) {
 		var_0A = self.origin + var_09 * var_07;

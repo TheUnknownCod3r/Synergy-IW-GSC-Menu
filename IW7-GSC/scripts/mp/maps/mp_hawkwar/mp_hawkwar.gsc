@@ -1,16 +1,16 @@
-/*************************************************************
+/*****************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\maps\mp_hawkwar\mp_hawkwar.gsc
-*************************************************************/
+ * Script: scripts\mp\maps\mp_hawkwar\mp_hawkwar.gsc
+*****************************************************/
 
 main() {
 	scripts\mp\maps\mp_hawkwar\mp_hawkwar_precache::main();
 	scripts\mp\maps\mp_hawkwar\gen\mp_hawkwar_art::main();
 	scripts\mp\maps\mp_hawkwar\mp_hawkwar_fx::main();
-	scripts\mp\_load::main();
+	scripts\mp\load::main();
 	level.var_C7B3 = getentarray("OutOfBounds","targetname");
-	scripts\mp\_compass::func_FACD("compass_map_mp_hawkwar");
+	scripts\mp\compass::setupminimap("compass_map_mp_hawkwar");
 	setdvar("r_lightGridEnableTweaks",1);
 	setdvar("r_lightGridIntensity",1.33);
 	setdvar("r_umbraMinObjectContribution",8);
@@ -20,7 +20,7 @@ main() {
 	game["defenders"] = "axis";
 	game["allies_outfit"] = "urban";
 	game["axis_outfit"] = "woodland";
-	thread scripts\mp\_animation_suite::func_1FAA();
+	thread scripts\mp\animation_suite::animationsuite();
 	thread fix_collision();
 }
 

@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\2890.gsc
-****************************/
+ * Script: 2890.gsc
+************************/
 
 func_12867() {
 	level.player scripts\sp\_loadout_code::func_F6B5();
@@ -94,14 +94,14 @@ func_7AA7(param_00) {
 
 func_F56D(param_00,param_01,param_02,param_03) {
 	param_00 = func_7AA7(param_00);
-	var_04 = tablelookup("sp/recommended_loadouts.csv",0,param_00,1);
-	var_05 = tablelookup("sp/recommended_loadouts.csv",0,param_00,2);
-	var_06 = strtok(tablelookup("sp/recommended_loadouts.csv",0,param_00,4),", ");
-	var_07 = strtok(tablelookup("sp/recommended_loadouts.csv",0,param_00,5),", ");
-	var_08 = tablelookup("sp/recommended_loadouts.csv",0,param_00,6);
-	var_09 = tablelookup("sp/recommended_loadouts.csv",0,param_00,7);
-	var_0A = tablelookup("sp/recommended_loadouts.csv",0,param_00,8);
-	if(scripts\sp\_utility::func_93A6() && !scripts/sp/specialist_MAYBE::func_2C91()) {
+	var_04 = tablelookup("sp\recommended_loadouts.csv",0,param_00,1);
+	var_05 = tablelookup("sp\recommended_loadouts.csv",0,param_00,2);
+	var_06 = strtok(tablelookup("sp\recommended_loadouts.csv",0,param_00,4),", ");
+	var_07 = strtok(tablelookup("sp\recommended_loadouts.csv",0,param_00,5),", ");
+	var_08 = tablelookup("sp\recommended_loadouts.csv",0,param_00,6);
+	var_09 = tablelookup("sp\recommended_loadouts.csv",0,param_00,7);
+	var_0A = tablelookup("sp\recommended_loadouts.csv",0,param_00,8);
+	if(scripts\sp\_utility::func_93A6() && !scripts\sp\specialist_MAYBE::func_2C91()) {
 		var_06[1] = var_06[0];
 		var_07[1] = var_07[0];
 		var_06[0] = "helmet";
@@ -133,7 +133,7 @@ func_F56D(param_00,param_01,param_02,param_03) {
 	}
 
 	func_F467(param_02,var_04,var_05,var_07[0],var_06[0],var_07[1],var_06[1],var_08,var_09,var_0A);
-	var_0B = int(tablelookup("sp/recommended_loadouts.csv",0,param_00,9));
+	var_0B = int(tablelookup("sp\recommended_loadouts.csv",0,param_00,9));
 	if(var_0B == 1) {
 		setomnvar("ui_loadouts_disabled",1);
 		return;
@@ -144,7 +144,7 @@ func_F56D(param_00,param_01,param_02,param_03) {
 
 func_F3BA(param_00) {
 	param_00 = func_7AA7(param_00);
-	var_01 = tablelookup("sp/recommended_loadouts.csv",0,param_00,3);
+	var_01 = tablelookup("sp\recommended_loadouts.csv",0,param_00,3);
 	if(var_01 != "") {
 		level.var_72A6 = var_01;
 	}

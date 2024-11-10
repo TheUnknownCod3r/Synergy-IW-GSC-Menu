@@ -1,8 +1,8 @@
-/*****************************************************
+/*********************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\maps\cp_zmb\cp_zmb.gsc
-*****************************************************/
+ * Script: scripts\cp\maps\cp_zmb\cp_zmb.gsc
+*********************************************/
 
 main() {
 	registerscriptedagents();
@@ -23,13 +23,13 @@ main() {
 	level.idle_spot_patch_func = ::cp_zmb_idle_spot_patch_func;
 	level.goon_spawner_patch_func = ::cp_zmb_goon_spawner_patch_func;
 	scripts\mp\agents\c6\c6_agent::registerscriptedagent();
-	scripts/mp/agents/zombie_cop/zombie_cop::zombie_cop_init();
-	scripts/mp/agents/zombie_clown/zombie_clown::zombie_clown_init();
+	scripts\mp\agents\zombie_cop\zombie_cop::zombie_cop_init();
+	scripts\mp\agents\zombie_clown\zombie_clown::zombie_clown_init();
 	level.disable_zombie_exo_abilities = 1;
 	level.toy_damage_monitor = ::waitfordamage;
 	level.toy_picture_damage_monitor = ::picturewaitfordamage;
-	level.tutorial_message_table = "cp/zombies/cp_zmb_tutorial.csv";
-	level.coop_weapontable = "cp/cp_weapontable.csv";
+	level.tutorial_message_table = "cp\zombies\cp_zmb_tutorial.csv";
+	level.coop_weapontable = "cp\cp_weapontable.csv";
 	level.custom_onplayerconnect_func = ::cp_zmb_onplayerconnect;
 	level.respawn_loc_override_func = ::cp_zmb_respawn_loc_func;
 	level.should_show_tutorial_func = ::setup_tutorial_requirements;
@@ -95,8 +95,8 @@ main() {
 	level thread scripts\cp\maps\cp_zmb\cp_zmb_vo::zmb_vo_init();
 	level thread setupinvalidvolumes();
 	scripts\cp\cp_challenge::init_coop_challenge();
-	level.crafting_table = "scripts/cp/maps/cp_zmb/cp_zmb_crafting.csv";
-	level.weapon_rank_event_table = "scripts/cp/maps/cp_zmb/cp_zmb_weaponrank_event.csv";
+	level.crafting_table = "scripts\cp\maps\cp_zmb\cp_zmb_crafting.csv";
+	level.weapon_rank_event_table = "scripts\cp\maps\cp_zmb\cp_zmb_weaponrank_event.csv";
 	scripts\cp\maps\cp_zmb\cp_zmb_crafting::init_crafting();
 	scripts\cp\maps\cp_zmb\cp_zmb_environment_scriptable::init();
 	level thread wait_for_pre_game_period();
@@ -133,7 +133,7 @@ main() {
 	scripts\engine\utility::flag_init("team_doors_initialized");
 	level thread player_standing_on_nothing_check();
 	level thread adjust_interaction_structs();
-	function_026C("MatchStarted: Completed");
+	sysprint("MatchStarted: Completed");
 }
 
 willard_loadout_func(param_00) {
@@ -160,7 +160,7 @@ cp_zmb_onplayerspawned() {
 }
 
 registerscriptedagents() {
-	scripts\mp\mp_agent::init_agent("mp/default_agent_definition.csv");
+	scripts\mp\mp_agent::init_agent("mp\default_agent_definition.csv");
 	scripts\mp\agents\zombie\zmb_zombie_agent::registerscriptedagent();
 	scripts\mp\agents\zombie_brute\zombie_brute_agent::registerscriptedagent();
 	scripts\mp\agents\the_hoff\the_hoff_agent::registerscriptedagent();
@@ -331,7 +331,7 @@ picturewaitfordamage(param_00) {
 		level.hidden_song_2 = 1;
 		scripts\cp\zombies\zombie_analytics::log_hidden_song_two_found(level.wave_num);
 		scripts\cp\cp_vo::try_to_play_vo_on_all_players("quest_song_start");
-		scripts/cp/zombies/achievement::update_achievement_all_players("I_LOVE_THE_80_S", 1);
+		scripts\cp\zombies\achievement::update_achievement_all_players("I_LOVE_THE_80_S", 1);
 		level thread play_hidden_song((649, 683, 254), "mus_pa_mw1_80s_cover");
 	}
 
@@ -363,7 +363,7 @@ waitfordamage(param_00) {
 		level.hidden_song = 1;
 		scripts\cp\zombies\zombie_analytics::log_hidden_song_one_found(level.wave_num);
 		scripts\cp\cp_vo::try_to_play_vo_on_all_players("quest_song_start");
-		scripts/cp/zombies/achievement::update_achievement_all_players("I_LOVE_THE_80_S", 1);
+		scripts\cp\zombies\achievement::update_achievement_all_players("I_LOVE_THE_80_S", 1);
 		level thread play_hidden_song((649, 683, 254), "mus_pa_mw2_80s_cover");
 	}
 
@@ -465,12 +465,12 @@ cp_zmb_pillage_init() {
 	level.pillageinfo.explosive = 33;
 	level.pillageinfo.money = 20;
 	level.pillageinfo.tickets = 10;
-	scripts/cp/zombies/zombies_pillage::register_zombie_pillageable("backpack_1", "backpack", "zombies_backpack_dropped", "zombies_backpack", "j_spine4");
-	scripts/cp/zombies/zombies_pillage::register_zombie_pillageable("backpack_2", "backpack", "zombies_backpack_dropped_red", "zombies_backpack_red", "j_spine4");
-	scripts/cp/zombies/zombies_pillage::register_zombie_pillageable("backpack_3", "backpack", "zombies_backpack_dropped_purple", "zombies_backpack_purple", "j_spine4");
-	scripts/cp/zombies/zombies_pillage::register_zombie_pillageable("backpack_4", "backpack", "zombies_backpack_dropped_green", "zombies_backpack_green", "j_spine4");
-	scripts/cp/zombies/zombies_pillage::register_zombie_pillageable("fanny_pack_1", "backpack", "zombies_fanny_pack_dropped", "zombies_fanny_pack", "J_HipTwist_LE");
-	scripts/cp/zombies/zombies_pillage::register_zombie_pillageable("fanny_pack_3", "backpack", "zombies_fanny_pack_dropped_purple", "zombies_fanny_pack_purple", "J_HipTwist_LE");
+	scripts\cp\zombies\zombies_pillage::register_zombie_pillageable("backpack_1", "backpack", "zombies_backpack_dropped", "zombies_backpack", "j_spine4");
+	scripts\cp\zombies\zombies_pillage::register_zombie_pillageable("backpack_2", "backpack", "zombies_backpack_dropped_red", "zombies_backpack_red", "j_spine4");
+	scripts\cp\zombies\zombies_pillage::register_zombie_pillageable("backpack_3", "backpack", "zombies_backpack_dropped_purple", "zombies_backpack_purple", "j_spine4");
+	scripts\cp\zombies\zombies_pillage::register_zombie_pillageable("backpack_4", "backpack", "zombies_backpack_dropped_green", "zombies_backpack_green", "j_spine4");
+	scripts\cp\zombies\zombies_pillage::register_zombie_pillageable("fanny_pack_1", "backpack", "zombies_fanny_pack_dropped", "zombies_fanny_pack", "J_HipTwist_LE");
+	scripts\cp\zombies\zombies_pillage::register_zombie_pillageable("fanny_pack_3", "backpack", "zombies_fanny_pack_dropped_purple", "zombies_fanny_pack_purple", "J_HipTwist_LE");
 }
 
 wait_for_pre_game_period() {
@@ -479,13 +479,13 @@ wait_for_pre_game_period() {
 	}
 
 	wait(0.2);
-	scripts/cp/zombies/zombie_entrances::enable_windows_in_area("front_gate");
-	level thread scripts/cp/zombies/interaction_neil::init_neil_quest();
-	level thread scripts/cp/zombies/zombies_wor::init();
+	scripts\cp\zombies\zombie_entrances::enable_windows_in_area("front_gate");
+	level thread scripts\cp\zombies\interaction_neil::init_neil_quest();
+	level thread scripts\cp\zombies\zombies_wor::init();
 	scripts\engine\utility::flag_set("zombie_drop_powerups");
 	scripts\engine\utility::flag_set("pillage_enabled");
 	init_magic_wheel();
-	thread scripts/cp/zombies/zombies_mini_ufo_quest::init();
+	thread scripts\cp\zombies\zombies_mini_ufo_quest::init();
 	if(!scripts\cp\utility::is_escape_gametype()) {
 		level thread zmb_power_gate_handler();
 	}
@@ -968,7 +968,7 @@ listen_for_old_spawning_dvar() {
 
 cp_zmb_onplayerconnect(param_00) {
 	param_00.num_tickets = 0;
-	param_00 scripts/cp/zombies/zombies_wor::wor_init();
+	param_00 scripts\cp\zombies\zombies_wor::wor_init();
 	if(param_00 scripts\cp\utility::isplayingsolo() || level.only_one_player) {
 		param_00 setclientomnvar("zombie_afterlife_self_revive_count", 3);
 	}
@@ -2384,7 +2384,7 @@ cp_zmb_should_drop_pillage(param_00, param_01) {
 		return 0;
 	}
 
-	if(!scripts/cp/zombies/zombies_pillage::is_in_active_volume(param_01)) {
+	if(!scripts\cp\zombies\zombies_pillage::is_in_active_volume(param_01)) {
 		return 0;
 	}
 

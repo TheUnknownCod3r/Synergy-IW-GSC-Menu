@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3629.gsc
-****************************/
+ * Script: 3629.gsc
+************************/
 
 func_112B5() {
 	precachemodel("veh_mil_air_un_pocketdrone");
@@ -19,12 +19,12 @@ func_112B5() {
 	precacheshader("cb_remotemissile_target_hostile");
 	setdvarifuninitialized("support_drone_debug",0);
 	setdvarifuninitialized("scan_ability",1);
-	level._effect["drone_thruster"] = loadfx("vfx/iw7/core/equipment/drone/vfx_drone_down_thrust_child.vfx");
-	level._effect["drone_damaged_loop"] = loadfx("vfx/iw7/core/equipment/drone/vfx_drone_damage_malfunction_loop.vfx");
-	level._effect["drone_trophy_laser"] = loadfx("vfx/iw7/core/equipment/drone/vfx_drone_muzzle_flash_trophy_r.vfx");
-	level._effect["drone_trophy_pop"] = loadfx("vfx/iw7/core/equipment/drone/vfx_drone_trophy_pop.vfx");
-	level._effect["drone_shotdown_air_damage"] = loadfx("vfx/iw7/core/equipment/drone/vfx_drone_death_shotdown.vfx");
-	level._effect["drone_death_hit_ground"] = loadfx("vfx/iw7/core/equipment/drone/vfx_drone_death.vfx");
+	level._effect["drone_thruster"] = loadfx("vfx\iw7\core\equipment\drone\vfx_drone_down_thrust_child.vfx");
+	level._effect["drone_damaged_loop"] = loadfx("vfx\iw7\core\equipment\drone\vfx_drone_damage_malfunction_loop.vfx");
+	level._effect["drone_trophy_laser"] = loadfx("vfx\iw7\core\equipment\drone\vfx_drone_muzzle_flash_trophy_r.vfx");
+	level._effect["drone_trophy_pop"] = loadfx("vfx\iw7\core\equipment\drone\vfx_drone_trophy_pop.vfx");
+	level._effect["drone_shotdown_air_damage"] = loadfx("vfx\iw7\core\equipment\drone\vfx_drone_death_shotdown.vfx");
+	level._effect["drone_death_hit_ground"] = loadfx("vfx\iw7\core\equipment\drone\vfx_drone_death.vfx");
 	level.player scripts\sp\_utility::func_65E0("player_support_drone_active");
 	level.player scripts\sp\_utility::func_65E0("support_drone_spawning");
 	level.var_5C19 = [91,83,108,72];

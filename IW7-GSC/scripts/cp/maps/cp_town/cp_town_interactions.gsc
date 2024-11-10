@@ -1,8 +1,8 @@
-/********************************************************************
+/************************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\maps\cp_town\cp_town_interactions.gsc
-********************************************************************/
+ * Script: scripts\cp\maps\cp_town\cp_town_interactions.gsc
+************************************************************/
 
 register_interactions() {
 	registerweaponinteractions();
@@ -44,7 +44,7 @@ register_interactions() {
 	town_register_interaction(0,"technicolor_machine",undefined,undefined,::tcs_hint,::usetcs,0,0,::init_tcs);
 	town_register_interaction(1,"missing_handle",undefined,undefined,::missinghandlehint,::usemissinghandle,0,0,::missinghandleinit);
 	town_register_interaction(0,"generator_broken",undefined,undefined,::brokengeneratorhint,::usebrokengenerator,0,0);
-	town_register_interaction(1,"pillage_item",undefined,undefined,::scripts/cp/zombies/zombies_pillage::pillage_hint_func,::scripts/cp/zombies/zombies_pillage::player_used_pillage_spot,0,0);
+	town_register_interaction(1,"pillage_item",undefined,undefined,::scripts\cp\zombies\zombies_pillage::pillage_hint_func,::scripts\cp\zombies\zombies_pillage::player_used_pillage_spot,0,0);
 	town_register_interaction(1,"town_fast_travel",undefined,undefined,::fast_travel_hint,::fast_travel_use,0,0,::fast_travel_init);
 	town_register_interaction(1,"hidden_song_record",undefined,undefined,::blankhintfunc,::record_use_logic,0,0,::show_record_debug);
 	town_register_interaction(1,"hidden_song_jukebox",undefined,undefined,::jukebox_interaction_hint,::jukebox_use_func,0,0);
@@ -132,7 +132,7 @@ backstory_activation(param_00,param_01) {
 	}
 
 	if(param_01.completed_aliases_for_backstory_achievement.size >= 9) {
-		param_01 scripts/cp/zombies/achievement::update_achievement("DEAR_DIARY",1);
+		param_01 scripts\cp\zombies\achievement::update_achievement("DEAR_DIARY",1);
 	}
 
 	scripts\cp\cp_vo::func_12BE3([param_01]);
@@ -278,23 +278,23 @@ register_afterlife_games() {
 	level.interaction_hintstrings["arcade_plaque"] = &"COOP_INTERACTIONS_PLAY_GAME";
 	level.interaction_hintstrings["arcade_crackpo"] = &"COOP_INTERACTIONS_PLAY_GAME";
 	level.interaction_hintstrings["arcade_hero"] = &"COOP_INTERACTIONS_PLAY_GAME";
-	scripts\cp\cp_interaction::register_interaction("arcade_hero","arcade_game",undefined,undefined,::scripts/cp/zombies/zombie_arcade_games::use_arcade_game,0,1);
-	scripts\cp\cp_interaction::register_interaction("arcade_icehock","arcade_game",undefined,undefined,::scripts/cp/zombies/zombie_arcade_games::use_arcade_game,0,1);
-	scripts\cp\cp_interaction::register_interaction("arcade_seaques","arcade_game",undefined,undefined,::scripts/cp/zombies/zombie_arcade_games::use_arcade_game,0,1);
-	scripts\cp\cp_interaction::register_interaction("arcade_boxing","arcade_game",undefined,undefined,::scripts/cp/zombies/zombie_arcade_games::use_arcade_game,0,1);
-	scripts\cp\cp_interaction::register_interaction("arcade_oink","arcade_game",undefined,undefined,::scripts/cp/zombies/zombie_arcade_games::use_arcade_game,0,1);
-	scripts\cp\cp_interaction::register_interaction("arcade_keyston","arcade_game",undefined,undefined,::scripts/cp/zombies/zombie_arcade_games::use_arcade_game,0,1);
-	scripts\cp\cp_interaction::register_interaction("arcade_plaque","arcade_game",undefined,undefined,::scripts/cp/zombies/zombie_arcade_games::use_arcade_game,0,1);
-	scripts\cp\cp_interaction::register_interaction("arcade_crackpo","arcade_game",undefined,undefined,::scripts/cp/zombies/zombie_arcade_games::use_arcade_game,0,1);
-	scripts\cp\cp_interaction::register_interaction("basketball_game_afterlife","afterlife_game",undefined,undefined,::scripts/cp/zombies/interaction_basketball::use_basketball_game,0,0,::scripts/cp/zombies/interaction_basketball::init_afterlife_basketball_game);
-	scripts\cp\cp_interaction::register_interaction("clown_tooth_game_afterlife","afterlife_game",undefined,undefined,::scripts/cp/zombies/interaction_clowntooth::use_clowntooth_game,0,0,::scripts/cp/zombies/interaction_clowntooth::init_afterlife_clowntooth_game);
-	scripts\cp\cp_interaction::register_interaction("laughingclown_afterlife","afterlife_game",undefined,undefined,::scripts/cp/zombies/interaction_laughingclown::laughing_clown,0,0,::scripts/cp/zombies/interaction_laughingclown::init_all_afterlife_laughing_clowns);
-	scripts\cp\cp_interaction::register_interaction("bowling_for_planets_afterlife","afterlife_game",undefined,undefined,::scripts/cp/zombies/interaction_bowling_for_planets::use_bfp_game,0,0,::scripts/cp/zombies/interaction_bowling_for_planets::init_bfp_afterlife_game);
-	scripts\cp\cp_interaction::register_interaction("game_race","arcade_game",undefined,::scripts/cp/zombies/interaction_racing::race_game_hint_logic,::scripts/cp/zombies/interaction_racing::use_race_game,0,1,::scripts/cp/zombies/interaction_racing::init_all_race_games);
+	scripts\cp\cp_interaction::register_interaction("arcade_hero","arcade_game",undefined,undefined,::scripts\cp\zombies\zombie_arcade_games::use_arcade_game,0,1);
+	scripts\cp\cp_interaction::register_interaction("arcade_icehock","arcade_game",undefined,undefined,::scripts\cp\zombies\zombie_arcade_games::use_arcade_game,0,1);
+	scripts\cp\cp_interaction::register_interaction("arcade_seaques","arcade_game",undefined,undefined,::scripts\cp\zombies\zombie_arcade_games::use_arcade_game,0,1);
+	scripts\cp\cp_interaction::register_interaction("arcade_boxing","arcade_game",undefined,undefined,::scripts\cp\zombies\zombie_arcade_games::use_arcade_game,0,1);
+	scripts\cp\cp_interaction::register_interaction("arcade_oink","arcade_game",undefined,undefined,::scripts\cp\zombies\zombie_arcade_games::use_arcade_game,0,1);
+	scripts\cp\cp_interaction::register_interaction("arcade_keyston","arcade_game",undefined,undefined,::scripts\cp\zombies\zombie_arcade_games::use_arcade_game,0,1);
+	scripts\cp\cp_interaction::register_interaction("arcade_plaque","arcade_game",undefined,undefined,::scripts\cp\zombies\zombie_arcade_games::use_arcade_game,0,1);
+	scripts\cp\cp_interaction::register_interaction("arcade_crackpo","arcade_game",undefined,undefined,::scripts\cp\zombies\zombie_arcade_games::use_arcade_game,0,1);
+	scripts\cp\cp_interaction::register_interaction("basketball_game_afterlife","afterlife_game",undefined,undefined,::scripts\cp\zombies\interaction_basketball::use_basketball_game,0,0,::scripts\cp\zombies\interaction_basketball::init_afterlife_basketball_game);
+	scripts\cp\cp_interaction::register_interaction("clown_tooth_game_afterlife","afterlife_game",undefined,undefined,::scripts\cp\zombies\interaction_clowntooth::use_clowntooth_game,0,0,::scripts\cp\zombies\interaction_clowntooth::init_afterlife_clowntooth_game);
+	scripts\cp\cp_interaction::register_interaction("laughingclown_afterlife","afterlife_game",undefined,undefined,::scripts\cp\zombies\interaction_laughingclown::laughing_clown,0,0,::scripts\cp\zombies\interaction_laughingclown::init_all_afterlife_laughing_clowns);
+	scripts\cp\cp_interaction::register_interaction("bowling_for_planets_afterlife","afterlife_game",undefined,undefined,::scripts\cp\zombies\interaction_bowling_for_planets::use_bfp_game,0,0,::scripts\cp\zombies\interaction_bowling_for_planets::init_bfp_afterlife_game);
+	scripts\cp\cp_interaction::register_interaction("game_race","arcade_game",undefined,::scripts\cp\zombies\interaction_racing::race_game_hint_logic,::scripts\cp\zombies\interaction_racing::use_race_game,0,1,::scripts\cp\zombies\interaction_racing::init_all_race_games);
 }
 
 register_crafting_interactions() {
-	scripts\cp\cp_interaction::register_interaction("pillage_item",undefined,undefined,::scripts/cp/zombies/zombies_pillage::pillage_hint_func,::scripts/cp/zombies/zombies_pillage::player_used_pillage_spot,0,0);
+	scripts\cp\cp_interaction::register_interaction("pillage_item",undefined,undefined,::scripts\cp\zombies\zombies_pillage::pillage_hint_func,::scripts\cp\zombies\zombies_pillage::player_used_pillage_spot,0,0);
 }
 
 town_register_interaction(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08,param_09) {
@@ -349,23 +349,23 @@ registerweaponinteractions() {
 	level.interaction_hintstrings["iw7_udm45_zm"] = &"CP_TOWN_INTERACTIONS_BUY_WEAPON";
 	level.interaction_hintstrings["iw7_crb_zml"] = &"CP_TOWN_INTERACTIONS_BUY_WEAPON";
 	var_00 = 500;
-	scripts\cp\cp_interaction::register_interaction("iw7_revolver_zm","wall_buy",undefined,::scripts/cp/zombies/coop_wall_buys::get_wall_buy_hint_func,::scripts/cp/zombies/coop_wall_buys::interaction_purchase_weapon,var_00);
+	scripts\cp\cp_interaction::register_interaction("iw7_revolver_zm","wall_buy",undefined,::scripts\cp\zombies\coop_wall_buys::get_wall_buy_hint_func,::scripts\cp\zombies\coop_wall_buys::interaction_purchase_weapon,var_00);
 	var_00 = 750;
-	scripts\cp\cp_interaction::register_interaction("iw7_udm45_zm","wall_buy",undefined,::scripts/cp/zombies/coop_wall_buys::get_wall_buy_hint_func,::scripts/cp/zombies/coop_wall_buys::interaction_purchase_weapon,var_00);
-	scripts\cp\cp_interaction::register_interaction("iw7_g18c_zm","wall_buy",undefined,::scripts/cp/zombies/coop_wall_buys::get_wall_buy_hint_func,::scripts/cp/zombies/coop_wall_buys::interaction_purchase_weapon,var_00);
+	scripts\cp\cp_interaction::register_interaction("iw7_udm45_zm","wall_buy",undefined,::scripts\cp\zombies\coop_wall_buys::get_wall_buy_hint_func,::scripts\cp\zombies\coop_wall_buys::interaction_purchase_weapon,var_00);
+	scripts\cp\cp_interaction::register_interaction("iw7_g18c_zm","wall_buy",undefined,::scripts\cp\zombies\coop_wall_buys::get_wall_buy_hint_func,::scripts\cp\zombies\coop_wall_buys::interaction_purchase_weapon,var_00);
 	var_00 = 1000;
-	scripts\cp\cp_interaction::register_interaction("iw7_lockon_zm","wall_buy",undefined,::scripts/cp/zombies/coop_wall_buys::get_wall_buy_hint_func,::scripts/cp/zombies/coop_wall_buys::interaction_purchase_weapon,var_00);
-	scripts\cp\cp_interaction::register_interaction("iw7_cheytacc_zm","wall_buy",undefined,::scripts/cp/zombies/coop_wall_buys::get_wall_buy_hint_func,::scripts/cp/zombies/coop_wall_buys::interaction_purchase_weapon,var_00);
-	scripts\cp\cp_interaction::register_interaction("iw7_mp28_zm","wall_buy",undefined,::scripts/cp/zombies/coop_wall_buys::get_wall_buy_hint_func,::scripts/cp/zombies/coop_wall_buys::interaction_purchase_weapon,var_00);
-	scripts\cp\cp_interaction::register_interaction("iw7_ump45c_zm","wall_buy",undefined,::scripts/cp/zombies/coop_wall_buys::get_wall_buy_hint_func,::scripts/cp/zombies/coop_wall_buys::interaction_purchase_weapon,var_00);
+	scripts\cp\cp_interaction::register_interaction("iw7_lockon_zm","wall_buy",undefined,::scripts\cp\zombies\coop_wall_buys::get_wall_buy_hint_func,::scripts\cp\zombies\coop_wall_buys::interaction_purchase_weapon,var_00);
+	scripts\cp\cp_interaction::register_interaction("iw7_cheytacc_zm","wall_buy",undefined,::scripts\cp\zombies\coop_wall_buys::get_wall_buy_hint_func,::scripts\cp\zombies\coop_wall_buys::interaction_purchase_weapon,var_00);
+	scripts\cp\cp_interaction::register_interaction("iw7_mp28_zm","wall_buy",undefined,::scripts\cp\zombies\coop_wall_buys::get_wall_buy_hint_func,::scripts\cp\zombies\coop_wall_buys::interaction_purchase_weapon,var_00);
+	scripts\cp\cp_interaction::register_interaction("iw7_ump45c_zm","wall_buy",undefined,::scripts\cp\zombies\coop_wall_buys::get_wall_buy_hint_func,::scripts\cp\zombies\coop_wall_buys::interaction_purchase_weapon,var_00);
 	var_00 = 1250;
-	scripts\cp\cp_interaction::register_interaction("iw7_erad_zm","wall_buy",undefined,::scripts/cp/zombies/coop_wall_buys::get_wall_buy_hint_func,::scripts/cp/zombies/coop_wall_buys::interaction_purchase_weapon,var_00);
-	scripts\cp\cp_interaction::register_interaction("iw7_crb_zml","wall_buy",undefined,::scripts/cp/zombies/coop_wall_buys::get_wall_buy_hint_func,::scripts/cp/zombies/coop_wall_buys::interaction_purchase_weapon,var_00);
-	scripts\cp\cp_interaction::register_interaction("iw7_spasc_zm","wall_buy",undefined,::scripts/cp/zombies/coop_wall_buys::get_wall_buy_hint_func,::scripts/cp/zombies/coop_wall_buys::interaction_purchase_weapon,var_00);
+	scripts\cp\cp_interaction::register_interaction("iw7_erad_zm","wall_buy",undefined,::scripts\cp\zombies\coop_wall_buys::get_wall_buy_hint_func,::scripts\cp\zombies\coop_wall_buys::interaction_purchase_weapon,var_00);
+	scripts\cp\cp_interaction::register_interaction("iw7_crb_zml","wall_buy",undefined,::scripts\cp\zombies\coop_wall_buys::get_wall_buy_hint_func,::scripts\cp\zombies\coop_wall_buys::interaction_purchase_weapon,var_00);
+	scripts\cp\cp_interaction::register_interaction("iw7_spasc_zm","wall_buy",undefined,::scripts\cp\zombies\coop_wall_buys::get_wall_buy_hint_func,::scripts\cp\zombies\coop_wall_buys::interaction_purchase_weapon,var_00);
 	var_00 = 1500;
-	scripts\cp\cp_interaction::register_interaction("iw7_ake_zml","wall_buy",undefined,::scripts/cp/zombies/coop_wall_buys::get_wall_buy_hint_func,::scripts/cp/zombies/coop_wall_buys::interaction_purchase_weapon,var_00);
-	scripts\cp\cp_interaction::register_interaction("iw7_arclassic_zm","wall_buy",undefined,::scripts/cp/zombies/coop_wall_buys::get_wall_buy_hint_func,::scripts/cp/zombies/coop_wall_buys::interaction_purchase_weapon,var_00);
-	scripts\cp\cp_interaction::register_interaction("iw7_rvn_zm","wall_buy",undefined,::scripts/cp/zombies/coop_wall_buys::get_wall_buy_hint_func,::scripts/cp/zombies/coop_wall_buys::interaction_purchase_weapon,var_00);
+	scripts\cp\cp_interaction::register_interaction("iw7_ake_zml","wall_buy",undefined,::scripts\cp\zombies\coop_wall_buys::get_wall_buy_hint_func,::scripts\cp\zombies\coop_wall_buys::interaction_purchase_weapon,var_00);
+	scripts\cp\cp_interaction::register_interaction("iw7_arclassic_zm","wall_buy",undefined,::scripts\cp\zombies\coop_wall_buys::get_wall_buy_hint_func,::scripts\cp\zombies\coop_wall_buys::interaction_purchase_weapon,var_00);
+	scripts\cp\cp_interaction::register_interaction("iw7_rvn_zm","wall_buy",undefined,::scripts\cp\zombies\coop_wall_buys::get_wall_buy_hint_func,::scripts\cp\zombies\coop_wall_buys::interaction_purchase_weapon,var_00);
 	var_00 = 2000;
 	town_register_interaction(1,"iw7_knife_zm_cleaver",undefined,undefined,::blankhintfunc,::meleeweaponuse,0,0);
 	town_register_interaction(1,"iw7_knife_zm_crowbar",undefined,undefined,::blankhintfunc,::meleeweaponuse,0,0);
@@ -1124,10 +1124,10 @@ chargefuses(param_00,param_01) {
 	var_03 = scripts\engine\utility::getclosest(param_01.origin,var_02);
 	var_04 = var_03.origin + (0,0,randomintrange(100,170));
 	var_05 = param_01.origin;
-	function_02E0(level._effect["electric_trap_attack"],var_04,vectortoangles(var_05 - var_04),var_05);
+	playfxbetweenpoints(level._effect["electric_trap_attack"],var_04,vectortoangles(var_05 - var_04),var_05);
 	playsoundatpos(var_04,"town_pap_electric_bolt");
 	wait(2);
-	function_02E0(level._effect["electric_trap_attack"],var_04,vectortoangles(var_05 - var_04),var_05);
+	playfxbetweenpoints(level._effect["electric_trap_attack"],var_04,vectortoangles(var_05 - var_04),var_05);
 	playsoundatpos(var_04,"town_pap_electric_bolt");
 	wait(0.05);
 	playfx(level._effect["vfx_bomb_portal_in"],param_01.origin);
@@ -1470,7 +1470,7 @@ cutie_hint_func(param_00,param_01) {
 		}
 
 		if(isdefined(var_03)) {
-			var_08 = function_00E3(var_03);
+			var_08 = getweaponattachments(var_03);
 			var_09 = [];
 			var_0A = getcutieattachmentname(param_00);
 			if(var_08.size > 0) {
@@ -1499,7 +1499,7 @@ addcutieattachment(param_00,param_01) {
 		}
 
 		if(isdefined(var_03)) {
-			var_08 = function_00E3(var_03);
+			var_08 = getweaponattachments(var_03);
 			var_09 = [];
 			var_0A = getcutieattachmentname(param_00);
 			if(var_08.size > 0) {
@@ -1530,7 +1530,7 @@ addcutieattachment(param_00,param_01) {
 			}
 
 			if(var_04 == "iw7_cutie_zm+cutiecrank+cutiegrip+cutieplunger") {
-				param_01 scripts/cp/zombies/achievement::update_achievement("MAD_PROTO",1);
+				param_01 scripts\cp\zombies\achievement::update_achievement("MAD_PROTO",1);
 				return;
 			}
 
@@ -1575,7 +1575,7 @@ getcutieattachmentname(param_00) {
 
 usecutiepickup(param_00,param_01) {
 	if(!param_01 scripts\cp\cp_weapon::has_weapon_variation("iw7_cutie_zm")) {
-		param_01 thread scripts/cp/zombies/coop_wall_buys::givevalidweapon(param_01,"iw7_cutie_zm");
+		param_01 thread scripts\cp\zombies\coop_wall_buys::givevalidweapon(param_01,"iw7_cutie_zm");
 	}
 }
 
@@ -1639,7 +1639,7 @@ usetcs(param_00,param_01) {
 		param_00.state = 0;
 	}
 
-	param_00.var_10E19++;
+	param_00.state++;
 	if(param_00.state > 3) {
 		param_00.state = 0;
 	}
@@ -1846,7 +1846,7 @@ usebrokengenerator(param_00,param_01) {
 		scripts\engine\utility::flag_set("placed_missing_handle");
 		wait(1);
 		level notify("found_power");
-		level thread scripts/cp/zombies/zombie_power::generic_generator(param_00,param_01);
+		level thread scripts\cp\zombies\zombie_power::generic_generator(param_00,param_01);
 		if(isdefined(level.town_power_vo_func)) {
 			var_04 = scripts\engine\utility::random(level.players);
 			level thread [[level.town_power_vo_func]](var_04);

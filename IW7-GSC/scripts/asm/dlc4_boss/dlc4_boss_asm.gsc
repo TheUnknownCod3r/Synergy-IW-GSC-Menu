@@ -1,8 +1,8 @@
-/***********************************************************
+/***************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\asm\dlc4_boss\dlc4_boss_asm.gsc
-***********************************************************/
+ * Script: scripts\asm\dlc4_boss\dlc4_boss_asm.gsc
+***************************************************/
 
 asminit(param_00,param_01,param_02,param_03) {
 	scripts\asm\zombie\zombie::func_13F9A(param_00,param_01,param_02,param_03);
@@ -89,24 +89,24 @@ introfx() {
 	var_01 = gettime() + 4400;
 	while(gettime() < var_01) {
 		earthquake(0.35,3,self.arenacenter,750);
-		scripts\common\utility::waitframe();
+		scripts\engine\utility::waitframe();
 		playrumbleonposition("artillery_rumble",self.arenacenter);
 		wait(0.2);
 	}
 
 	wait(2.1);
 	earthquake(0.4,1,self.arenacenter,750);
-	scripts\common\utility::waitframe();
+	scripts\engine\utility::waitframe();
 	playrumbleonposition("artillery_rumble",self.arenacenter);
 	wait(1.1);
 	earthquake(0.4,1,self.arenacenter,750);
-	scripts\common\utility::waitframe();
+	scripts\engine\utility::waitframe();
 	playrumbleonposition("artillery_rumble",self.arenacenter);
 }
 
 playmoveexit(param_00,param_01,param_02,param_03) {
 	self orientmode("face angle abs",self.angles);
-	var_04 = self._blackboard;
+	var_04 = self.var_1198;
 	var_04.desireddir = vectornormalize(var_04.nodes[var_04.desirednode].origin - self.origin);
 	var_05 = scripts\asm\asm_mp::asm_getanim(param_00,param_01);
 	var_06 = self getsafecircleorigin(param_01,var_05);
@@ -169,10 +169,10 @@ applyallmotiontowardsdesireddir(param_00,param_01,param_02,param_03) {
 	var_04 = 0;
 	var_05 = getanimlength(param_01);
 	while(var_04 < var_05) {
-		var_06 = self._blackboard;
+		var_06 = self.var_1198;
 		var_07 = var_06.nodes[var_06.desirednode].origin;
-		var_08 = var_04 \ var_05;
-		var_09 = var_04 + 0.05 \ var_05;
+		var_08 = var_04 / var_05;
+		var_09 = var_04 + 0.05 / var_05;
 		var_0A = 0;
 		if(var_09 > 1) {
 			if(param_03) {
@@ -198,10 +198,10 @@ applyallmotiontowardsdesireddir(param_00,param_01,param_02,param_03) {
 
 adjustlookahead(param_00) {
 	self endon(param_00 + "_finished");
-	var_01 = self._blackboard;
+	var_01 = self.var_1198;
 	var_02 = scripts\asm\dlc4\dlc4_asm::gettunedata().look_ahead_radius;
 	var_03 = scripts\asm\dlc4\dlc4_asm::gettunedata().look_ahead_speed;
-	var_04 = var_01.var_C053.size;
+	var_04 = var_01.nodes.size;
 	var_05 = var_01.lookaheadnextnode - var_01.lookaheadcurrnode;
 	for(;;) {
 		var_06 = distance2dsquared(self.origin,var_01.lookaheadorigin);
@@ -367,7 +367,7 @@ doclapdamage() {
 	var_00 = getent("rockwall_trig","targetname");
 	for(;;) {
 		var_00 waittill("trigger",var_01);
-		if(!var_01 scripts\cp\_utility::is_valid_player()) {
+		if(!var_01 scripts\cp\utility::is_valid_player()) {
 			continue;
 		}
 
@@ -385,9 +385,9 @@ handleclapprojectile() {
 	self.claponarena = 1;
 	var_00 = scripts\asm\dlc4\dlc4_asm::gettunedata();
 	var_01 = anglestoforward(self.angles);
-	var_02 = var_00.staff_projectile_range \ var_00.staff_projectile_speed;
+	var_02 = var_00.staff_projectile_range / var_00.staff_projectile_speed;
 	var_03 = var_00.staff_projectile_speed * var_00.staff_projectile_interval;
-	var_04 = var_03 \ 2;
+	var_04 = var_03 / 2;
 	var_05 = self.origin + var_01 * var_04;
 	var_06 = gettime() + var_02 * 1650;
 	var_07 = spawn("script_model",var_05);
@@ -414,7 +414,7 @@ handleclapprojectile() {
 	}
 
 	level.rockwall_forming = undefined;
-	var_0A = function_027A(var_08.origin,(2000,64,200),var_07.angles);
+	var_0A = createnavobstaclebybounds(var_08.origin,(2000,64,200),var_07.angles);
 	wait(0.15);
 	var_07 delete();
 	wait(10);
@@ -445,7 +445,7 @@ doclaplethaldamage(param_00,param_01,param_02,param_03) {
 			continue;
 		}
 
-		if(!scripts\cp\_laststand::player_in_laststand(var_08) && scripts\mp\agents\zombie\zombie_util::shouldignoreent(var_08)) {
+		if(!scripts\cp\cp_laststand::player_in_laststand(var_08) && scripts\mp\agents\zombie\zombie_util::shouldignoreent(var_08)) {
 			continue;
 		}
 
@@ -456,7 +456,7 @@ doclaplethaldamage(param_00,param_01,param_02,param_03) {
 
 warp_to_closest() {
 	self endon("disconnect");
-	while(scripts\common\utility::istrue(level.rockwall_forming)) {
+	while(scripts\engine\utility::istrue(level.rockwall_forming)) {
 		wait(0.05);
 	}
 
@@ -521,14 +521,14 @@ firetornado(param_00) {
 	var_02 thread firetornadodamage();
 	playsoundatpos(param_00.arenacenter + (0,0,5),"cp_final_meph_tornado_big_spawn");
 	wait(3);
-	var_03 = scripts\common\utility::getstructarray("tornado_start","targetname");
+	var_03 = scripts\engine\utility::getstructarray("tornado_start","targetname");
 	foreach(var_05 in var_03) {
 		level thread createfiretornado(var_05);
 		wait(0.05);
 	}
 
-	var_07 = scripts\common\utility::random(var_03);
-	var_08 = scripts\common\utility::random(var_03);
+	var_07 = scripts\engine\utility::random(var_03);
+	var_08 = scripts\engine\utility::random(var_03);
 	wait(1);
 	level thread createfiretornado(var_07);
 	level thread createfiretornado(var_08);
@@ -548,7 +548,7 @@ createfiretornado(param_00) {
 	var_01 thread firetornadodamage();
 	wait(0.05);
 	var_02 playloopsound("cp_final_meph_tornado_small_lp");
-	var_02 moveto(scripts\common\utility::random(scripts\common\utility::getstructarray(param_00.target,"targetname")).origin,3);
+	var_02 moveto(scripts\engine\utility::random(scripts\engine\utility::getstructarray(param_00.target,"targetname")).origin,3);
 	var_02 waittill("movedone");
 	var_02 stoploopsound();
 	playsoundatpos(var_02.origin,"cp_final_meph_tornado_small_end");
@@ -561,7 +561,7 @@ firetornadodamage() {
 	self endon("death");
 	for(;;) {
 		self waittill("trigger",var_00);
-		if(!var_00 scripts\cp\_utility::is_valid_player()) {
+		if(!var_00 scripts\cp\utility::is_valid_player()) {
 			continue;
 		}
 
@@ -640,7 +640,7 @@ throwmeteor(param_00,param_01,param_02) {
 
 	var_06 = scripts\common\trace::create_contents(1,0,0,0,1,0,0);
 	var_07 = [];
-	foreach(var_09 in scripts\mp\_mp_agent::getactiveagentsofspecies("zombie")) {
+	foreach(var_09 in scripts\mp\mp_agent::getactiveagentsofspecies("zombie")) {
 		if(var_09.agent_type != "dlc4_boss") {
 			var_07[var_07.size] = var_09;
 		}
@@ -686,8 +686,8 @@ choosethrowanim(param_00,param_01,param_02) {
 }
 
 air_pound_rise_play(param_00,param_01,param_02,param_03) {
-	function_0277("dlc4_boss_repulsor",-1,self.arenacenter,150,1);
-	self.var_BE6F = function_027A(self.arenacenter,(100,100,100),(0,0,0));
+	createnavrepulsor("dlc4_boss_repulsor",-1,self.arenacenter,150,1);
+	self.var_BE6F = createnavobstaclebybounds(self.arenacenter,(100,100,100),(0,0,0));
 	self playsound("final_meph_intro");
 	thread airpoundrisefx();
 	lib_0F3C::func_CEA8(param_00,param_01,param_02,param_03);
@@ -711,7 +711,7 @@ airpoundrisefx() {
 	playsoundatpos(self.arenacenter,"zmb_ground_spawn_dirt");
 	while(gettime() < var_01) {
 		earthquake(var_00.air_pound_rise_rumble_scale,var_00.air_pound_rise_rumble_duration,self.arenacenter,var_00.air_pound_rise_rumble_radius);
-		scripts\common\utility::waitframe();
+		scripts\engine\utility::waitframe();
 		playrumbleonposition("artillery_rumble",self.arenacenter);
 		wait(0.2);
 	}
@@ -741,19 +741,19 @@ groundvulteleportintransition(param_00,param_01,param_02,param_03) {
 
 playgroundvulland(param_00,param_01,param_02,param_03) {
 	var_04 = scripts\asm\dlc4\dlc4_asm::gettunedata();
-	function_0277("dlc4_boss_repulsor",-1,self.arenacenter,150,1);
-	self.var_BE6F = function_027A(self.arenacenter,(100,100,100),(0,0,0));
+	createnavrepulsor("dlc4_boss_repulsor",-1,self.arenacenter,150,1);
+	self.var_BE6F = createnavobstaclebybounds(self.arenacenter,(100,100,100),(0,0,0));
 	if(level.fbd.bossstate == "LAST_STAND") {
 		lib_0F3C::func_CEA8(param_00,param_01,param_02,param_03);
 		self.cantakedamage = 1;
 		return;
 	}
 
-	var_05 = scripts\mp\_mp_agent::getactiveagentsoftype(var_04.summon_agent_type);
+	var_05 = scripts\mp\mp_agent::getactiveagentsoftype(var_04.summon_agent_type);
 	var_06 = var_04.summon_max_total["" + level.players.size];
 	var_07 = min(level.players.size * var_04.zombies_per_person,var_06 - var_05.size);
 	for(var_08 = 0;var_08 < var_07;var_08++) {
-		var_09 = 1 * var_08 * 360 \ var_07;
+		var_09 = 1 * var_08 * 360 / var_07;
 		var_0A = self.arenacenter[0] + cos(var_09) * var_04.zombies_summon_radius;
 		var_0B = self.arenacenter[1] + sin(var_09) * var_04.zombies_summon_radius;
 		var_0C = (var_0A,var_0B,self.arenacenter[2]);
@@ -815,7 +815,7 @@ groundvulhurtnotehandler(param_00,param_01,param_02,param_03) {
 		playrumbleonposition("artillery_rumble",self.arenacenter);
 		playsoundatpos(self.arenacenter,var_04.air_pound_pound_sfx);
 		self radiusdamage(self.origin,var_04.ground_pound_radius,var_04.ground_pound_max_damage,var_04.ground_pound_min_damage,self,"MOD_IMPACT");
-		var_05 = scripts\mp\_mp_agent::getactiveagentsofspecies("zombie");
+		var_05 = scripts\mp\mp_agent::getactiveagentsofspecies("zombie");
 		foreach(var_07 in var_05) {
 			if(var_07.agent_type != "dlc4_boss") {
 				var_07 dodamage(var_07.health * 10,self.arenacenter);
@@ -868,7 +868,7 @@ playflyoverexit(param_00,param_01,param_02,param_03) {
 }
 
 flyoverlooptransition(param_00,param_01,param_02,param_03) {
-	var_04 = self._blackboard;
+	var_04 = self.var_1198;
 	var_05 = var_04.nodes[var_04.desirednode].origin;
 	var_06 = distance2dsquared(var_05,self.origin);
 	var_07 = var_04.flyoverarrivaldist * var_04.flyoverarrivaldist;
@@ -956,13 +956,13 @@ doeclipsespecialwave() {
 		var_06[var_06.size] = "alien_phantom";
 	}
 
-	var_06 = scripts\common\utility::array_randomize(var_06);
+	var_06 = scripts\engine\utility::array_randomize(var_06);
 	for(var_07 = 0;var_07 < var_05;var_07++) {
-		while(scripts\mp\_mp_agent::getactiveagentsoftype("all").size >= 24) {
-			scripts\common\utility::waitframe();
+		while(scripts\mp\mp_agent::getactiveagentsoftype("all").size >= 24) {
+			scripts\engine\utility::waitframe();
 		}
 
-		scripts\aitypes\dlc4_boss\behaviors::computespawnpoints(1,scripts\mp\_mp_agent::getactiveagentsofspecies("zombie"));
+		scripts\aitypes\dlc4_boss\behaviors::computespawnpoints(1,scripts\mp\mp_agent::getactiveagentsofspecies("zombie"));
 		if(isdefined(var_00.spawnpoints[0])) {
 			spawnzombie(var_06[var_07],var_00.spawnpoints[0]);
 		}
@@ -972,18 +972,18 @@ doeclipsespecialwave() {
 	}
 
 	var_08 = var_00.specialwavesdata["SPECIAL_" + var_01];
-	while(scripts\mp\_mp_agent::getactiveagentsofspecies("zombie").size + var_08.size > 24) {
+	while(scripts\mp\mp_agent::getactiveagentsofspecies("zombie").size + var_08.size > 24) {
 		wait(1);
 	}
 
-	scripts\aitypes\dlc4_boss\behaviors::computespawnpoints(var_08.size,scripts\mp\_mp_agent::getactiveagentsofspecies("zombie"));
+	scripts\aitypes\dlc4_boss\behaviors::computespawnpoints(var_08.size,scripts\mp\mp_agent::getactiveagentsofspecies("zombie"));
 	for(var_07 = 0;var_07 < var_08.size;var_07++) {
 		if(isdefined(var_00.spawnpoints[var_07])) {
 			spawnzombie(var_08[var_07],var_00.spawnpoints[var_07]);
 		}
 	}
 
-	while(scripts\mp\_mp_agent::getactiveagentsofspecies("zombie").size > 1) {
+	while(scripts\mp\mp_agent::getactiveagentsofspecies("zombie").size > 1) {
 		wait(1);
 	}
 
@@ -1014,12 +1014,12 @@ create_eclipse() {
 	wait(1);
 	var_00 moveto((-17391.3,400,3900),1.25);
 	level.current_vision_set = "cp_final_meph_eclipse";
-	function_0237("cp_final_meph_eclipse",1);
+	visionsetnaked("cp_final_meph_eclipse",1);
 	level waittill("ECLIPSE_SPAWN_COMPLETE");
 	var_02 = spawnfx(level._effect["vfx_sun_blocker_end"],(-17910.3,966.038,5116),anglestoforward((43.4021,347.643,-7.50797)),anglestoup((43.4021,347.643,-7.50797)));
 	triggerfx(var_02);
 	var_01 delete();
-	function_0237("cp_final_meph",1);
+	visionsetnaked("cp_final_meph",1);
 	level.current_vision_set = "cp_final_meph";
 	var_00 moveto(var_00.og_origin,1.25);
 	thread createarmageddon();
@@ -1049,7 +1049,7 @@ createarmageddon() {
 		wait(randomfloatrange(var_05,var_06));
 	}
 
-	foreach(var_0F in scripts\mp\_mp_agent::getactiveagentsofspecies("zombie")) {
+	foreach(var_0F in scripts\mp\mp_agent::getactiveagentsofspecies("zombie")) {
 		if(var_0F.agent_type != "dlc4_boss") {
 			var_0F dodamage(var_0F.health * 10,self.arenacenter);
 		}
@@ -1081,7 +1081,7 @@ death_ground_idle_note_handler(param_00,param_01,param_02,param_03) {
 
 meph_victory() {
 	scripts\cp\maps\cp_final\cp_final::disablepas();
-	scripts\cp\_vo::set_vo_system_busy(1);
+	scripts\cp\cp_vo::set_vo_system_busy(1);
 	foreach(var_01 in level.players) {
 		scripts\cp\maps\cp_final\cp_final_vo::clear_up_all_vo(var_01);
 		var_01 _meth_82C0("bink_fadeout_amb",0.66);
@@ -1090,7 +1090,7 @@ meph_victory() {
 	level notify("FINAL_BOSS_VICTORY");
 	if(scripts\cp\zombies\direct_boss_fight::should_directly_go_to_boss_fight()) {
 		foreach(var_01 in level.players) {
-			var_01 thread scripts\cp\_utility::player_black_screen(0.25,20,0.25,0,1);
+			var_01 thread scripts\cp\utility::player_black_screen(0.25,20,0.25,0,1);
 		}
 
 		level thread scripts\cp\zombies\direct_boss_fight::success_sequence(undefined,6);
@@ -1098,14 +1098,14 @@ meph_victory() {
 	}
 
 	foreach(var_03 in level.players) {
-		var_03 thread scripts\cp\_utility::player_black_screen(0.25,1,0.25,0,1);
-		var_03 scripts\cp\_merits::processmerit("mt_dlc4_troll2");
+		var_03 thread scripts\cp\utility::player_black_screen(0.25,1,0.25,0,1);
+		var_03 scripts\cp\cp_merits::processmerit("mt_dlc4_troll2");
 		var_03 setplayerdata("cp","meritState","mt_dc_camo",1);
 	}
 
 	setomnvar("zm_boss_splash",7);
 	wait(0.55);
-	scripts\cp\_utility::play_bink_video("sysload_o3",32,0);
+	scripts\cp\utility::play_bink_video("sysload_o3",32,0);
 	wait(33);
 	foreach(var_03 in level.players) {
 		var_03 clearclienttriggeraudiozone(0.3);
@@ -1174,12 +1174,12 @@ laststandmonitor() {
 	level endon("FINAL_BOSS_VICTORY");
 	if(!isdefined(level.laststand_vo)) {
 		level.laststand_vo = 1;
-		level thread scripts\cp\maps\cp_final\cp_final_final_boss::play_meph_vo(level.dlc4_boss scripts\cp\_utility::get_closest_living_player(),"nag_meph_damage",1);
+		level thread scripts\cp\maps\cp_final\cp_final_final_boss::play_meph_vo(level.dlc4_boss scripts\cp\utility::get_closest_living_player(),"nag_meph_damage",1);
 	}
 
 	var_00 = scripts\asm\dlc4\dlc4_asm::gettunedata().last_stand_time;
 	for(var_01 = scripts\asm\dlc4\dlc4_asm::gettunedata().last_stand_victory_min_time;var_00 > 0;var_01 = var_01 - 50) {
-		scripts\common\utility::waitframe();
+		scripts\engine\utility::waitframe();
 		if(var_01 <= 0) {
 			if(self.laststandhealth <= 0 && !level.fbd.victory) {
 				scripts\cp\maps\cp_final\cp_final_final_boss::victory();
@@ -1216,7 +1216,7 @@ teleportnotehandler(param_00,param_01,param_02,param_03) {
 		var_04 = self gettagorigin("tag_fx_clavicle_4_ri");
 		var_05 = self gettagangles("tag_fx_clavicle_4_ri");
 		playfx(level._effect["boss_teleport_start_left"],var_04,anglestoforward(var_05),(0,0,1));
-		function_0278("dlc4_boss_repulsor");
+		destroynavrepulsor("dlc4_boss_repulsor");
 		if(isdefined(self.var_BE6F)) {
 			destroynavobstacle(self.var_BE6F);
 		}
@@ -1263,7 +1263,7 @@ doteleporttocenter(param_00) {
 	self setethereal(1);
 	wait(0.5);
 	while(isdefined(self.doinggroundvul) && self.doinggroundvul && isdefined(self.claponarena) && self.claponarena) {
-		scripts\common\utility::waitframe();
+		scripts\engine\utility::waitframe();
 	}
 
 	func_11663(self.arenacenter);
@@ -1334,7 +1334,7 @@ createmephblackhole() {
 		level.blackhole_scriptable setmodel("tag_origin_demon_blackhole");
 	}
 
-	var_01 = function_02AF(self,"demon_blackhole_zm",var_00);
+	var_01 = spawnimpulsefield(self,"demon_blackhole_zm",var_00);
 	level.blackhole_physics_vol physics_volumeenable(1);
 	level.blackhole_physics_vol physics_volumesetactivator(1);
 	level.blackhole_scriptable setscriptablepartstate("vortexEnd","neutral");
@@ -1358,7 +1358,7 @@ mephbhquake(param_00,param_01) {
 		playrumbleonposition("grenade_rumble",param_00);
 		wait(0.25);
 		foreach(var_03 in level.players) {
-			if(!var_03 scripts\cp\_utility::is_valid_player()) {
+			if(!var_03 scripts\cp\utility::is_valid_player()) {
 				continue;
 			}
 
@@ -1411,8 +1411,8 @@ spawnzombie(param_00,param_01) {
 	if(param_00 == "alien_goon" || param_00 == "alien_phantom" || param_00 == "alien_rhino") {
 		var_04 getrandomhovernodesaroundtargetpos(1,1);
 		if(param_00 == "alien_goon") {
-			var_04.maxhealth = int(var_02.skeleton_health \ 2);
-			var_04.health = int(var_02.skeleton_health \ 2);
+			var_04.maxhealth = int(var_02.skeleton_health / 2);
+			var_04.health = int(var_02.skeleton_health / 2);
 		}
 	}
 

@@ -1,8 +1,8 @@
-/*******************************************
+/***********************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\teleport.gsc
-*******************************************/
+ * Script: scripts\mp\teleport.gsc
+***********************************/
 
 init() {}
 

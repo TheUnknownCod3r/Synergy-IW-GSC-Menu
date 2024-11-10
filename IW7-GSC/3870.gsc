@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3870.gsc
-****************************/
+ * Script: 3870.gsc
+************************/
 
 main() {
 	level.var_92DE["guy1_convo"] = ::func_8728;

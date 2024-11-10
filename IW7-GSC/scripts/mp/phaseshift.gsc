@@ -1,12 +1,12 @@
-/*********************************************
+/*************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\phaseshift.gsc
-*********************************************/
+ * Script: scripts\mp\phaseshift.gsc
+*************************************/
 
 func_D41B() {
-	level._effect["shoulder_cannon_charge"] = loadfx("vfx/old/misc/shoulder_cannon_charge");
-	level._effect["shoulder_cannon_view_flash"] = loadfx("vfx/core/muzflash/minigun_flash_view");
+	level._effect["shoulder_cannon_charge"] = loadfx("vfx\old\misc\shoulder_cannon_charge");
+	level._effect["shoulder_cannon_view_flash"] = loadfx("vfx\core\muzflash\minigun_flash_view");
 }
 
 func_E89C() {
@@ -199,7 +199,7 @@ balldrone_burstfirestart(param_00) {
 	var_01 = self;
 	var_02 = level._effect["shoulder_cannon_view_flash"];
 	var_03 = level._effect["shoulder_cannon_charge"];
-	var_04 = function_0240("ball_drone_gun_mp");
+	var_04 = weaponfiretime("ball_drone_gun_mp");
 	var_05 = 0.01;
 	self.triggerportableradarping waittill("begin_firing");
 	while(self.var_1E2D > 0) {
@@ -221,7 +221,7 @@ balldrone_burstfirestart(param_00) {
 				param_00 setclientomnvar("ui_shoulder_cannon_target_ent",var_08 getentitynumber());
 				param_00 setclientomnvar("ui_shoulder_cannon_hud_reticle",2);
 				self shootturret();
-				param_00.var_38D8 = function_01E1(var_02,param_00 geteye(),param_00);
+				param_00.var_38D8 = spawnfxforclient(var_02,param_00 geteye(),param_00);
 				triggerfx(param_00.var_38D8);
 				self.triggerportableradarping playrumbleonentity("shoulder_turret_fire");
 				wait(var_04);
@@ -313,7 +313,7 @@ canbetargeted(param_00) {
 		return 0;
 	}
 
-	if(scripts/mp/equipment/phase_shift::isentityphaseshifted(param_00)) {
+	if(scripts\mp\equipment\phase_shift::isentityphaseshifted(param_00)) {
 		return 0;
 	}
 

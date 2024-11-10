@@ -1,8 +1,8 @@
-/*****************************************
+/*********************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\sp\colors.gsc
-*****************************************/
+ * Script: scripts\sp\colors.gsc
+*********************************/
 
 init_colors() {
 	if(!scripts\engine\utility::add_init_script("colors",::init_colors)) {
@@ -13,7 +13,7 @@ init_colors() {
 }
 
 func_957E() {
-	var_00 = function_0076();
+	var_00 = getallnodes();
 	scripts\engine\utility::flag_init("player_looks_away_from_spawner");
 	scripts\engine\utility::flag_init("friendly_spawner_locked");
 	level.var_22DD = [];
@@ -127,7 +127,7 @@ func_957E() {
 	}
 
 	thread func_CFD2();
-	var_0F = function_00C9("allies");
+	var_0F = getspawnerteamarray("allies");
 	level.var_11AE = [];
 	foreach(var_11 in var_0F) {
 		level.var_11AE[var_11.classname] = var_11;
@@ -478,7 +478,7 @@ func_F21B(param_00,param_01) {
 	self notify("stop_color_move");
 	self.var_4BDF = param_01;
 	if(isdefined(param_00.target)) {
-		var_02 = function_00B3(param_00.target,"targetname");
+		var_02 = getnode(param_00.target,"targetname");
 		if(isdefined(var_02)) {
 			self give_more_perk(var_02);
 		}
@@ -625,7 +625,7 @@ func_F3D2(param_00) {
 	}
 
 	if(isdefined(self.var_11B0)) {
-		thread scripts/sp/anim::func_1F32(self,self.var_11B0);
+		thread scripts\sp\anim::func_1F32(self,self.var_11B0);
 		self.var_11B0 = undefined;
 	}
 
@@ -748,7 +748,7 @@ func_12FAD(param_00,param_01) {
 }
 
 func_9E6E(param_00,param_01) {
-	var_02 = function_0072("axis");
+	var_02 = getaiarray("axis");
 	for(var_03 = 0;var_03 < var_02.size;var_03++) {
 		if(distance2d(var_02[var_03].origin,param_00) < param_01) {
 			return 1;
@@ -882,7 +882,7 @@ func_135E3(param_00) {
 }
 
 func_DD19(param_00) {
-	var_01 = function_0072();
+	var_01 = getaiarray();
 	var_02 = undefined;
 	for(var_03 = 0;var_03 < var_01.size;var_03++) {
 		if(!isdefined(var_01[var_03].target_getindexoftarget)) {
@@ -1136,7 +1136,7 @@ func_73E7() {
 func_78D4(param_00) {
 	if(isdefined(param_00)) {
 		if(!isdefined(level.var_11AE[param_00])) {
-			var_01 = function_00C9("allies");
+			var_01 = getspawnerteamarray("allies");
 			foreach(var_03 in var_01) {
 				if(var_03.classname != param_00) {
 					continue;
@@ -1269,7 +1269,7 @@ func_D286() {
 func_A5C7() {
 	scripts\engine\utility::flag_clear("friendly_spawner_locked");
 	level notify("kill_color_replacements");
-	var_00 = function_0072();
+	var_00 = getaiarray();
 	scripts\engine\utility::array_thread(var_00,::func_E07E);
 }
 

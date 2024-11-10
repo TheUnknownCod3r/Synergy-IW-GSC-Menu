@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2573.gsc
+ * Script: 2573.gsc
 ***************************************/
 
 func_A00E(var_00, var_01) {
@@ -28,7 +28,7 @@ func_BCA7(var_00) {
 }
 
 func_FFBE(var_00) {
-  self._blackboard.func_2521 = 0;
+  self.var_1198.func_2521 = 0;
   var_01 = self.enemy.origin - self.origin;
   var_02 = anglestoforward(self.angles);
   var_03 = vectordot(var_01, var_02);
@@ -123,7 +123,7 @@ func_F706(var_00, var_01) {
 }
 
 func_F711(var_00, var_01) {
-  if (self._blackboard.func_E1AC == "none" || self._blackboard.func_E1AC == var_01) {
+  if (self.var_1198.func_E1AC == "none" || self.var_1198.func_E1AC == var_01) {
   self _meth_8491(var_01);
   func_0C21::func_20DD(var_01);
   }
@@ -147,8 +147,8 @@ func_7E02(var_00, var_01) {
 
   var_02 = undefined;
 
-  if (isdefined(self._blackboard.func_10A4D) && isdefined(self._blackboard.func_10A4A))
-  var_02 = self _meth_8486(var_00, var_01, self._blackboard.func_10A4D[self._blackboard.func_10A4A]);
+  if (isdefined(self.var_1198.func_10A4D) && isdefined(self.var_1198.func_10A4A))
+  var_02 = self _meth_8486(var_00, var_01, self.var_1198.func_10A4D[self.var_1198.func_10A4A]);
   else
   var_02 = self _meth_8486(var_00, var_01);
 
@@ -163,8 +163,8 @@ func_7E02(var_00, var_01) {
 func_3713(var_00) {
   var_01 = undefined;
 
-  if (isdefined(self._blackboard.func_90D9)) {
-  var_02 = _getclosestpointonnavmesh3d(self._blackboard.func_90D9);
+  if (isdefined(self.var_1198.func_90D9)) {
+  var_02 = _getclosestpointonnavmesh3d(self.var_1198.func_90D9);
   return var_02;
   } else {
   var_03 = func_0C21::_meth_814A();
@@ -283,7 +283,7 @@ func_13D95(var_00) {
 }
 
 func_10E63(var_00) {
-  if (self._blackboard.func_2CCD)
+  if (self.var_1198.func_2CCD)
   return;
 
   var_01 = vectornormalize(var_0.spaceship_vel);
@@ -309,7 +309,7 @@ func_E7B7(var_00) {
   var_01 = level.func_D127.origin - self.origin;
   var_02 = length(var_01);
 
-  if (self.bt.func_5870) {
+  if (self.var_3135.func_5870) {
   var_00 = 1.0;
   func_0C21::func_20DE(var_00);
   return;
@@ -325,24 +325,24 @@ func_E7B7(var_00) {
   var_05 = vectordot(var_03, var_04);
 
   if (var_05 > 0)
-  var_06 = scripts/sp/math::func_6A8E(1.9, 0.7, var_05);
+  var_06 = scripts\sp\math::func_6A8E(1.9, 0.7, var_05);
   else
   {
   var_05 = var_05 * -1;
 
   if (var_02 < 9000) {
-  var_07 = scripts/sp/math::func_C097(3500, 9000, var_02);
-  var_08 = scripts/sp/math::func_6A8E(2.5, 1, var_07);
+  var_07 = scripts\sp\math::func_C097(3500, 9000, var_02);
+  var_08 = scripts\sp\math::func_6A8E(2.5, 1, var_07);
   } else {
-  var_07 = scripts/sp/math::func_C097(9000, 13000, var_02);
-  var_08 = scripts/sp/math::func_6A8E(1, 0.3, var_07);
+  var_07 = scripts\sp\math::func_C097(9000, 13000, var_02);
+  var_08 = scripts\sp\math::func_6A8E(1, 0.3, var_07);
   }
 
-  var_06 = scripts/sp/math::func_6A8E(1.9, var_08, var_05);
+  var_06 = scripts\sp\math::func_6A8E(1.9, var_08, var_05);
   }
 
-  var_07 = scripts/sp/math::func_C097(20000, 25000, var_02);
-  var_06 = scripts/sp/math::func_6A8E(var_06, 1, var_07);
+  var_07 = scripts\sp\math::func_C097(20000, 25000, var_02);
+  var_06 = scripts\sp\math::func_6A8E(var_06, 1, var_07);
   func_0C21::func_20DE(var_06 * var_00);
 }
 
@@ -366,17 +366,17 @@ func_FFD6(var_00, var_01) {
   if (func_10027(var_00) == anim.success || func_10015(var_00) == anim.success || func_8C2C(var_00) == anim.success)
   return anim.failure;
 
-  if (!self._blackboard.func_2521) {
+  if (!self.var_1198.func_2521) {
   var_02 = distancesquared(self.origin, self.enemy.origin);
 
   if (var_02 < 144000000) {
-  self._blackboard.func_2521 = 1;
-  self._blackboard.func_2531 = gettime();
+  self.var_1198.func_2521 = 1;
+  self.var_1198.func_2531 = gettime();
   }
   }
 
-  if (self._blackboard.func_2521) {
-  if (self._blackboard.func_2531 + 4000 < gettime())
+  if (self.var_1198.func_2521) {
+  if (self.var_1198.func_2531 + 4000 < gettime())
   return anim.failure;
 
   if (!func_13D94(self.enemy))
@@ -427,7 +427,7 @@ func_E7B8(var_00, var_01) {
 }
 
 func_419A(var_00, var_01) {
-  self._blackboard.func_2521 = 0;
+  self.var_1198.func_2521 = 0;
   return anim.success;
 }
 
@@ -435,7 +435,7 @@ func_C936(var_00, var_01) {
   if (!isalive(self.enemy))
   return anim.success;
 
-  self._blackboard.func_2CCF = 1;
+  self.var_1198.func_2CCF = 1;
   return anim.success;
 }
 
@@ -444,36 +444,36 @@ func_6CAB(var_00, var_01) {
 
   switch (var_01) {
   case "attack":
-  if (self.bt.func_BFA2 > gettime())
+  if (self.var_3135.func_BFA2 > gettime())
   return anim.success;
 
   self.enemy.func_A941 = gettime();
-  self.bt.func_BFA2 = gettime() + 400;
+  self.var_3135.func_BFA2 = gettime() + 400;
   var_02 = func_370C(self.enemy);
   break;
   case "retreat":
-  if (self.bt.func_BFA2 > gettime())
+  if (self.var_3135.func_BFA2 > gettime())
   return anim.success;
 
-  self.bt.func_BFA2 = gettime() + 400;
+  self.var_3135.func_BFA2 = gettime() + 400;
   var_02 = func_371B(self.enemy);
   break;
   case "hover_approach":
-  if (self.bt.func_BFA2 > gettime())
+  if (self.var_3135.func_BFA2 > gettime())
   return anim.success;
 
-  self.bt.func_BFA2 = gettime() + 400;
+  self.var_3135.func_BFA2 = gettime() + 400;
   var_02 = func_3713(self.enemy);
   break;
   case "escape":
-  self.bt.func_3F28 = func_7E02();
+  self.var_3135.func_3F28 = func_7E02();
 
-  if (!isdefined(self.bt.func_3F28))
+  if (!isdefined(self.var_3135.func_3F28))
   return anim.failure;
   case "spline":
-  var_02 = getcsplinepointposition(self.bt.func_3F28["spline"], self.bt.func_3F28["node"]);
+  var_02 = getcsplinepointposition(self.var_3135.func_3F28["spline"], self.var_3135.func_3F28["node"]);
   self setneargoalnotifydist(2048);
-  self _meth_8479(self.bt.func_3F28["spline"]);
+  self _meth_8479(self.var_3135.func_3F28["spline"]);
   self _meth_8455(var_02, 0);
   return anim.success;
   }
@@ -483,26 +483,26 @@ func_6CAB(var_00, var_01) {
 }
 
 func_9D44(var_00) {
-  if (self._blackboard.func_EF72)
+  if (self.var_1198.func_EF72)
   return anim.success;
 
   return anim.failure;
 }
 
 func_98E0(var_00) {
-  self.bt.instancedata[var_00] = [];
-  self.bt.instancedata[var_00]["wait_finished"] = 0;
+  self.var_3135.instancedata[var_00] = [];
+  self.var_3135.instancedata[var_00]["wait_finished"] = 0;
   thread func_136C1(var_00);
 }
 
 func_136C1(var_00) {
   self endon("Task Terminate " + var_00);
   scripts\engine\utility::waittill_any("near_goal", "bt_state_changed");
-  self.bt.instancedata[var_00]["wait_finished"] = 1;
+  self.var_3135.instancedata[var_00]["wait_finished"] = 1;
 }
 
 func_136C0(var_00) {
-  if (self.bt.instancedata[var_00]["wait_finished"] == 1)
+  if (self.var_3135.instancedata[var_00]["wait_finished"] == 1)
   return anim.success;
 
   return anim.running;
@@ -510,21 +510,21 @@ func_136C0(var_00) {
 
 func_11704(var_00) {
   self notify("Task Terminate " + var_00);
-  self.bt.instancedata[var_00] = undefined;
+  self.var_3135.instancedata[var_00] = undefined;
 }
 
 func_98DF(var_00) {
-  self._blackboard.func_2534 = self.enemy;
+  self.var_1198.func_2534 = self.enemy;
   func_98E0(var_00);
 }
 
 func_11703(var_00) {
-  self._blackboard.func_2534 = undefined;
+  self.var_1198.func_2534 = undefined;
   func_11704(var_00);
 }
 
 func_9D6A(var_00) {
-  if (isalive(self.bt.func_DB05) && !isdefined(self.func_932F))
+  if (isalive(self.var_3135.func_DB05) && !isdefined(self.func_932F))
   return anim.success;
 
   if (isdefined(self.func_DB08) && self.func_DB08 > 20.0)
@@ -536,8 +536,8 @@ func_9D6A(var_00) {
 func_F85B(var_00, var_01) {
   var_02 = var_01;
 
-  if (isdefined(self._blackboard.func_10A4D[var_02]))
-  self._blackboard.func_10A4A = var_02;
+  if (isdefined(self.var_1198.func_10A4D[var_02]))
+  self.var_1198.func_10A4A = var_02;
 
   return anim.success;
 }
@@ -555,7 +555,7 @@ func_B4DB(var_00) {
   if (!isalive(self.enemy))
   return anim.failure;
 
-  if (self._blackboard.func_C97C)
+  if (self.var_1198.func_C97C)
   return anim.failure;
 
   var_01 = _ispointonnavmesh3d(self.origin, self);
@@ -572,13 +572,13 @@ func_B4DB(var_00) {
 
   if (var_02) {
   if (vectordot(anglestoforward(self.enemy.angles), self.origin - self.enemy.origin) < 0.34202) {
-  self.bt.func_3F28 = undefined;
+  self.var_3135.func_3F28 = undefined;
   return anim.success;
   }
   }
 
   if (vectordot(anglestoforward(self.angles), var_05 * -1.0) > 0.6) {
-  self.bt.func_3F28 = undefined;
+  self.var_3135.func_3F28 = undefined;
   return anim.success;
   }
   }
@@ -587,32 +587,32 @@ func_B4DB(var_00) {
 }
 
 func_724A(var_00) {
-  if (isdefined(self.bt.func_3F28)) {
-  self _meth_8479(self.bt.func_3F28["spline"]);
-  self _meth_847B(1.0, getcsplinepointposition(self.bt.func_3F28["spline"], self.bt.func_3F28["node"]));
+  if (isdefined(self.var_3135.func_3F28)) {
+  self _meth_8479(self.var_3135.func_3F28["spline"]);
+  self _meth_847B(1.0, getcsplinepointposition(self.var_3135.func_3F28["spline"], self.var_3135.func_3F28["node"]));
 
-  if (!self._blackboard.func_2CCD) {
-  if (isdefined(self.bt.func_DB05))
+  if (!self.var_1198.func_2CCD) {
+  if (isdefined(self.var_3135.func_DB05))
   func_0C21::func_20DE(1.25);
   else
   func_0C21::func_20DE(1.0);
   }
 
-  self.bt.instancedata[var_00] = [];
-  self.bt.instancedata[var_00]["new_spline"] = 0;
+  self.var_3135.instancedata[var_00] = [];
+  self.var_3135.instancedata[var_00]["new_spline"] = 0;
   }
 }
 
 func_7248(var_00) {
-  if (!isdefined(self.bt.func_3F28) || self.bt.instancedata[var_00]["new_spline"])
+  if (!isdefined(self.var_3135.func_3F28) || self.var_3135.instancedata[var_00]["new_spline"])
   return anim.success;
 
-  var_01 = _getcsplinepointcount(self.bt.func_3F28["spline"]);
-  var_02 = distancesquared(self.origin, getcsplinepointposition(self.bt.func_3F28["spline"], var_01 - 1));
+  var_01 = _getcsplinepointcount(self.var_3135.func_3F28["spline"]);
+  var_02 = distancesquared(self.origin, getcsplinepointposition(self.var_3135.func_3F28["spline"], var_01 - 1));
 
   if (var_02 < 4194304) {
-  func_0C24::func_10A44(self.bt.func_3F28["spline"]);
-  self.bt.func_3F28 = undefined;
+  func_0C24::func_10A44(self.var_3135.func_3F28["spline"]);
+  self.var_3135.func_3F28 = undefined;
   return anim.success;
   }
 
@@ -620,7 +620,7 @@ func_7248(var_00) {
 }
 
 func_D3B2(var_00) {
-  if (!scripts/sp/utility::func_D123())
+  if (!scripts\sp\utility::func_D123())
   return anim.failure;
 
   var_01 = level.player _meth_848A();
@@ -640,7 +640,7 @@ func_D3B2(var_00) {
 }
 
 func_D3B5(var_00) {
-  if (!scripts/sp/utility::func_D123())
+  if (!scripts\sp\utility::func_D123())
   return anim.failure;
 
   var_01 = level.player _meth_848A();
@@ -679,24 +679,24 @@ func_1289A(var_00) {
 
 func_724B(var_00) {
   self notify("Task Terminate " + var_00);
-  self.bt.func_3F28 = undefined;
+  self.var_3135.func_3F28 = undefined;
 }
 
 func_8C2C(var_00) {
-  if (isdefined(self.bt.func_3F28))
+  if (isdefined(self.var_3135.func_3F28))
   return anim.success;
 
   return anim.failure;
 }
 
 func_10017(var_00) {
-  if (!isdefined(self.bt.func_3F28))
+  if (!isdefined(self.var_3135.func_3F28))
   return anim.failure;
 
   var_01 = func_0BDC::func_1996();
   var_02 = var_1.speed;
   var_03 = 1.0 * scripts\engine\utility::mph_to_ips(var_02);
-  var_04 = distancesquared(self.origin, getcsplinepointposition(self.bt.func_3F28["spline"], self.bt.func_3F28["node"]));
+  var_04 = distancesquared(self.origin, getcsplinepointposition(self.var_3135.func_3F28["spline"], self.var_3135.func_3F28["node"]));
 
   if (var_04 < var_03 * var_03)
   return anim.success;
@@ -705,7 +705,7 @@ func_10017(var_00) {
 }
 
 func_10015(var_00) {
-  var_01 = self._blackboard.func_7235.target;
+  var_01 = self.var_1198.func_7235.target;
 
   if (!isdefined(var_01))
   return anim.failure;
@@ -717,28 +717,28 @@ func_10015(var_00) {
 }
 
 func_7221(var_00) {
-  if (!self._blackboard.func_7235.func_7237) {
+  if (!self.var_1198.func_7235.func_7237) {
   self notify("in_follow_position");
 
-  if (isdefined(self._blackboard.func_7235.func_98F9))
-  self _meth_848D(self._blackboard.func_7235.target, self._blackboard.func_7235.offset, 1.0, self._blackboard.func_7235.func_98F9, self._blackboard.func_7235.func_98FE, self._blackboard.func_7235.func_C760, self._blackboard.func_7235.func_C765);
+  if (isdefined(self.var_1198.func_7235.func_98F9))
+  self _meth_848D(self.var_1198.func_7235.target, self.var_1198.func_7235.offset, 1.0, self.var_1198.func_7235.func_98F9, self.var_1198.func_7235.func_98FE, self.var_1198.func_7235.func_C760, self.var_1198.func_7235.func_C765);
   else
-  self _meth_848D(self._blackboard.func_7235.target, self._blackboard.func_7235.offset, 1.0);
+  self _meth_848D(self.var_1198.func_7235.target, self.var_1198.func_7235.offset, 1.0);
 
-  self._blackboard.func_7235.func_7237 = 1;
+  self.var_1198.func_7235.func_7237 = 1;
   }
 }
 
 func_7231(var_00) {
-  if (!isalive(self._blackboard.func_7235.target) && !self._blackboard.animscriptedactive)
+  if (!isalive(self.var_1198.func_7235.target) && !self.var_1198.animscriptedactive)
   self _meth_8455(self.origin, 1);
 
-  self._blackboard.func_7235.func_7237 = 0;
+  self.var_1198.func_7235.func_7237 = 0;
 }
 
 follow(var_00) {
-  if (isalive(self._blackboard.func_7235.target) && self._blackboard.func_7235.func_7237) {
-  if (isdefined(self._blackboard.func_7235.target.bt) && self._blackboard.func_7235.target.bt.func_673F)
+  if (isalive(self.var_1198.func_7235.target) && self.var_1198.func_7235.func_7237) {
+  if (isdefined(self.var_1198.func_7235.target.bt) && self.var_1198.func_7235.target.var_3135.func_673F)
   return anim.success;
 
   var_01 = self _meth_8493();
@@ -749,8 +749,8 @@ follow(var_00) {
 }
 
 func_7EC1() {
-  var_00 = self._blackboard.func_7235.target;
-  var_01 = self._blackboard.func_7235.offset;
+  var_00 = self.var_1198.func_7235.target;
+  var_01 = self.var_1198.func_7235.offset;
   var_02 = rotatevector(var_01, var_0.angles);
   var_03 = var_0.origin + var_02;
   return var_03;
@@ -758,7 +758,7 @@ func_7EC1() {
 
 func_10016(var_00) {
   var_01 = func_7EC1();
-  var_02 = self._blackboard.func_7235.target;
+  var_02 = self.var_1198.func_7235.target;
   var_03 = length(var_2.spaceship_vel);
   var_04 = var_03 * 1.0;
   var_04 = max(16000000, var_04);
@@ -770,11 +770,11 @@ func_10016(var_00) {
 }
 
 func_A299(var_00, var_01) {
-  if (isdefined(self._blackboard.func_C705)) {
-  var_00 = self._blackboard.func_C705;
+  if (isdefined(self.var_1198.func_C705)) {
+  var_00 = self.var_1198.func_C705;
 
-  if (isdefined(self._blackboard.func_C702))
-  var_01 = self._blackboard.func_C702;
+  if (isdefined(self.var_1198.func_C702))
+  var_01 = self.var_1198.func_C702;
   }
 
   self goon_spawners(var_00, var_01);
@@ -786,8 +786,8 @@ func_7233(var_00) {
 }
 
 func_7232(var_00) {
-  var_01 = self._blackboard.func_7235.target;
-  var_02 = self._blackboard.func_7235.offset;
+  var_01 = self.var_1198.func_7235.target;
+  var_02 = self.var_1198.func_7235.offset;
   var_03 = rotatevector(var_02, var_1.angles);
   var_04 = func_7EC1();
   self _meth_8455(var_04, 0);
@@ -827,13 +827,13 @@ func_7E67(var_00) {
 }
 
 func_10027(var_00) {
-  if (self._blackboard.func_90F3)
+  if (self.var_1198.func_90F3)
   return anim.success;
 
   if (func_D3B5())
   return anim.failure;
 
-  if (isalive(self._blackboard.func_90EE) && isalive(self.enemy) && self._blackboard.func_90EE == self.enemy)
+  if (isalive(self.var_1198.func_90EE) && isalive(self.enemy) && self.var_1198.func_90EE == self.enemy)
   return anim.success;
 
   return anim.failure;
@@ -843,41 +843,41 @@ func_10075(var_00) {
   if (!isalive(self.enemy))
   return anim.failure;
 
-  if (!isdefined(self._blackboard.func_90DC))
+  if (!isdefined(self.var_1198.func_90DC))
   return anim.success;
 
-  if (!isalive(self._blackboard.func_90DA) || self.enemy != self._blackboard.func_90DA)
+  if (!isalive(self.var_1198.func_90DA) || self.enemy != self.var_1198.func_90DA)
   return anim.success;
 
-  if (distancesquared(self._blackboard.func_90DB, self._blackboard.func_90DA.origin) > 1000000)
+  if (distancesquared(self.var_1198.func_90DB, self.var_1198.func_90DA.origin) > 1000000)
   return anim.success;
 
   return anim.failure;
 }
 
 func_F748(var_00) {
-  if (self.bt.func_BFA2 > gettime())
+  if (self.var_3135.func_BFA2 > gettime())
   return anim.success;
 
-  self.bt.func_BFA2 = gettime() + 400;
-  self._blackboard.func_90DB = self.enemy.origin;
-  self._blackboard.func_90DA = self.enemy;
+  self.var_3135.func_BFA2 = gettime() + 400;
+  self.var_1198.func_90DB = self.enemy.origin;
+  self.var_1198.func_90DA = self.enemy;
   var_01 = func_3713(self.enemy);
 
   if (distancesquared(self.origin, var_01) <= 9000000)
   return anim.failure;
 
-  self._blackboard.func_90DC = var_01;
+  self.var_1198.func_90DC = var_01;
   self setneargoalnotifydist(3000);
   self _meth_8455(var_01, 1);
-  self.bt.func_3F28 = undefined;
+  self.var_3135.func_3F28 = undefined;
   return anim.success;
 }
 
 func_41B6(var_00) {
-  self._blackboard.func_90DB = undefined;
-  self._blackboard.func_90DA = undefined;
-  self._blackboard.func_90DC = undefined;
+  self.var_1198.func_90DB = undefined;
+  self.var_1198.func_90DA = undefined;
+  self.var_1198.func_90DC = undefined;
   return anim.success;
 }
 
@@ -912,14 +912,14 @@ func_1002B(var_00) {
   }
   }
 
-  if (!isdefined(self.bt.instancedata[var_00])) {
-  self.bt.instancedata[var_00] = [];
-  self.bt.instancedata[var_00]["nextRepositionTime"] = gettime() + randomintrange(2000, 4000);
+  if (!isdefined(self.var_3135.instancedata[var_00])) {
+  self.var_3135.instancedata[var_00] = [];
+  self.var_3135.instancedata[var_00]["nextRepositionTime"] = gettime() + randomintrange(2000, 4000);
   return anim.failure;
   }
 
-  if (gettime() >= self.bt.instancedata[var_00]["nextRepositionTime"]) {
-  self.bt.instancedata[var_00]["nextRepositionTime"] = gettime() + randomintrange(2000, 4000);
+  if (gettime() >= self.var_3135.instancedata[var_00]["nextRepositionTime"]) {
+  self.var_3135.instancedata[var_00]["nextRepositionTime"] = gettime() + randomintrange(2000, 4000);
   return anim.success;
   }
 
@@ -938,7 +938,7 @@ func_90F2(var_00) {
   func_0C21::func_20DD("hover");
   }
 
-  self._blackboard.func_90DC = var_01;
+  self.var_1198.func_90DC = var_01;
   self setneargoalnotifydist(512);
   self _meth_8455(var_01, 1);
   }
@@ -948,7 +948,7 @@ func_90F2(var_00) {
 
 func_9E00(var_00) {
   var_01 = self _meth_8493();
-  var_02 = var_01 == "follow" && self._blackboard.func_7235.func_7237;
+  var_02 = var_01 == "follow" && self.var_1198.func_7235.func_7237;
 
   if (var_02)
   return anim.success;
@@ -961,21 +961,21 @@ func_61C4(var_00) {
 }
 
 func_9E77(var_00) {
-  if (_isaircraft(self._blackboard.func_7235.target) && self._blackboard.func_7235.target.spaceship_mode == "hover")
+  if (_isaircraft(self.var_1198.func_7235.target) && self.var_1198.func_7235.target.spaceship_mode == "hover")
   return anim.success;
 
   return anim.failure;
 }
 
 func_9DE3(var_00) {
-  if (self.bt.func_673F)
+  if (self.var_3135.func_673F)
   return anim.success;
   else
   return anim.failure;
 }
 
 func_9F39() {
-  if (self.bt.func_EF78)
+  if (self.var_3135.func_EF78)
   return anim.success;
   else
   return anim.failure;
@@ -994,28 +994,28 @@ func_9F74(var_00) {
 }
 
 func_9FBB(var_00) {
-  if (self.bt.attackerdata.func_24D3 && func_9FD0() == anim.success)
+  if (self.var_3135.attackerdata.func_24D3 && func_9FD0() == anim.success)
   return anim.success;
 
   return anim.failure;
 }
 
 func_9EE9(var_00) {
-  if (self.bt.func_5870)
+  if (self.var_3135.func_5870)
   return anim.success;
 
   return anim.failure;
 }
 
 func_A533(var_00) {
-  if (self.bt.func_A533)
+  if (self.var_3135.func_A533)
   return anim.success;
 
   return anim.failure;
 }
 
 func_9E76(var_00) {
-  if (_isaircraft(self._blackboard.func_7235.target) && isdefined(self._blackboard.func_7235.target.bt) && self._blackboard.func_7235.target.bt.func_673F)
+  if (_isaircraft(self.var_1198.func_7235.target) && isdefined(self.var_1198.func_7235.target.bt) && self.var_1198.func_7235.target.var_3135.func_673F)
   return anim.success;
 
   return anim.failure;
@@ -1045,37 +1045,37 @@ func_1000C(var_00) {
 }
 
 func_673D(var_00) {
-  if (func_118CD(self.bt.func_673E) < 4)
+  if (func_118CD(self.var_3135.func_673E) < 4)
   return anim.success;
 
   return anim.failure;
 }
 
 func_9FD0(var_00) {
-  if (!isdefined(self.bt.attackerdata.attacker))
+  if (!isdefined(self.var_3135.attackerdata.attacker))
   return anim.failure;
 
-  if (isdefined(level.func_D127) && self.bt.attackerdata.attacker == level.func_D127)
+  if (isdefined(level.func_D127) && self.var_3135.attackerdata.attacker == level.func_D127)
   return anim.success;
 
   return anim.failure;
 }
 
 func_1106C(var_00) {
-  if (self.bt.func_673F)
-  self.bt.func_673F = 0;
+  if (self.var_3135.func_673F)
+  self.var_3135.func_673F = 0;
 
   return anim.success;
 }
 
 func_F6EC(var_00) {
-  self.bt.func_673F = 1;
-  self.bt.func_673E = gettime();
+  self.var_3135.func_673F = 1;
+  self.var_3135.func_673E = gettime();
   return anim.success;
 }
 
 validatehighpriorityflag(var_00) {
-  self.bt.func_673E = gettime();
+  self.var_3135.func_673E = gettime();
   return anim.success;
 }
 
@@ -1083,10 +1083,10 @@ func_1003F(var_00) {
   if (!isalive(self.enemy))
   return anim.success;
 
-  if (isdefined(self._blackboard.func_7002))
+  if (isdefined(self.var_1198.func_7002))
   return anim.failure;
 
-  if (self._blackboard.func_C97C)
+  if (self.var_1198.func_C97C)
   return anim.success;
 
   return anim.failure;
@@ -1098,7 +1098,7 @@ func_118CD(var_00) {
 }
 
 func_24D5(var_00) {
-  if (func_118CD(self.bt.attackerdata.func_2535) < 6)
+  if (func_118CD(self.var_3135.attackerdata.func_2535) < 6)
   return anim.success;
 
   return anim.failure;
@@ -1119,20 +1119,20 @@ func_FFD8(var_00) {
   if (!isalive(self.enemy))
   return anim.success;
 
-  if (isdefined(self._blackboard.func_7002))
+  if (isdefined(self.var_1198.func_7002))
   return anim.failure;
 
-  if (self._blackboard.func_C97C)
+  if (self.var_1198.func_C97C)
   return anim.success;
 
   return anim.failure;
 }
 
 func_41E4(var_00) {
-  if (isdefined(self._blackboard.func_10A4B))
-  self._blackboard.func_10A4A = self._blackboard.func_10A4B;
+  if (isdefined(self.var_1198.func_10A4B))
+  self.var_1198.func_10A4A = self.var_1198.func_10A4B;
   else
-  self._blackboard.func_10A4A = undefined;
+  self.var_1198.func_10A4A = undefined;
 
   return anim.success;
 }

@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2760.gsc
+ * Script: 2760.gsc
 ***************************************/
 
 func_AC0B(var_00, var_01) {}

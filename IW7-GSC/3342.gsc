@@ -1,13 +1,13 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3342.gsc
-****************************/
+ * Script: 3342.gsc
+************************/
 
 init() {
 	level.kinetic_pulse_fx = [];
-	level.kinetic_pulse_fx["spark"] = loadfx("vfx/iw7/_requests/mp/vfx_kinetic_pulse_shock");
-	level.kinetic_pulse_fx["blast"] = loadfx("vfx/iw7/_requests/mp/vfx_kinetic_pulse_blast");
+	level.kinetic_pulse_fx["spark"] = loadfx("vfx\iw7\_requests\mp\vfx_kinetic_pulse_shock");
+	level.kinetic_pulse_fx["blast"] = loadfx("vfx\iw7\_requests\mp\vfx_kinetic_pulse_blast");
 }
 
 func_E133() {

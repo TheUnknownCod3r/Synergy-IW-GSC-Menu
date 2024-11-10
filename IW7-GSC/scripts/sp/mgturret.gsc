@@ -1,8 +1,8 @@
-/*******************************************
+/***********************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\sp\mgturret.gsc
-*******************************************/
+ * Script: scripts\sp\mgturret.gsc
+***********************************/
 
 func_967C() {
 	level.var_B6C2["easy"]["convergenceTime"] = 2.5;
@@ -47,7 +47,7 @@ func_D66E() {
 	self endon("death");
 	self.objective_playermask_showto = level.var_4FF6;
 	if(isdefined(self.target)) {
-		var_00 = function_00B3(self.target,"targetname");
+		var_00 = getnode(self.target,"targetname");
 		if(isdefined(var_00)) {
 			if(isdefined(var_00.fgetarg)) {
 				self.objective_playermask_showto = var_00.fgetarg;
@@ -63,7 +63,7 @@ func_D66E() {
 
 	var_01 = undefined;
 	if(isdefined(self.target)) {
-		var_00 = function_00B3(self.target,"targetname");
+		var_00 = getnode(self.target,"targetname");
 		var_01 = var_00;
 	}
 
@@ -111,14 +111,14 @@ func_B6AB() {
 
 func_B6BE(param_00) {
 	param_00 waittill("trigger");
-	var_01 = function_0072("bad_guys");
+	var_01 = getaiarray("bad_guys");
 	for(var_02 = 0;var_02 < var_01.size;var_02++) {
 		if(isdefined(var_01[var_02].var_EE13) && param_00.var_EE13 == var_01[var_02].var_EE13) {
 			var_01[var_02] notify("auto_ai");
 		}
 	}
 
-	var_03 = function_00C8();
+	var_03 = getspawnerarray();
 	for(var_02 = 0;var_02 < var_03.size;var_02++) {
 		if(isdefined(var_03[var_02].var_EE13) && param_00.var_EE13 == var_03[var_02].var_EE13) {
 			var_03[var_02].var_19C1 = "auto_ai";
@@ -288,7 +288,7 @@ func_12A30() {
 	var_02 = var_00[2] - var_01[2];
 	var_03 = var_02 / 300;
 	wait(var_03);
-	function_0178(self.var_FC65,var_01);
+	playworldsound(self.var_FC65,var_01);
 	wait(1);
 	self.var_FC66 = 1;
 }
@@ -395,7 +395,7 @@ func_140E() {
 		return;
 	}
 
-	var_00 = function_00B3(self.var_336,"target");
+	var_00 = getnode(self.var_336,"target");
 	if(!isdefined(var_00)) {
 		return;
 	}
@@ -424,7 +424,7 @@ func_140E() {
 		}
 
 		var_02 = [];
-		var_03 = function_0072();
+		var_03 = getaiarray();
 		for(var_04 = 0;var_04 < var_03.size;var_04++) {
 			var_05 = 1;
 			if(isdefined(var_03[var_04].var_EE12) && var_03[var_04].var_EE12 == self.var_EE12) {
@@ -465,7 +465,7 @@ func_B6AA() {
 		self.var_19C1 = "manual_ai";
 	}
 
-	var_00 = function_00B3(self.target,"targetname");
+	var_00 = getnode(self.target,"targetname");
 	if(!isdefined(var_00)) {
 		return;
 	}
@@ -797,7 +797,7 @@ func_12A42(param_00) {
 	for(;;) {
 		var_01 waittill("turret_deactivate");
 		wait(var_02 + randomfloat(var_03 - var_02));
-		while(!function_011B(var_01)) {
+		while(!isturretactive(var_01)) {
 			func_129EA(param_00,var_01);
 			wait(1);
 		}
@@ -805,7 +805,7 @@ func_12A42(param_00) {
 }
 
 func_129EA(param_00,param_01) {
-	var_02 = function_0072();
+	var_02 = getaiarray();
 	for(var_03 = 0;var_03 < var_02.size;var_03++) {
 		if(var_02[var_03] _meth_81A5(param_00.origin) && var_02[var_03] _meth_8063(param_01)) {
 			var_04 = var_02[var_03].sendmatchdata;
@@ -1361,7 +1361,7 @@ func_AB14(param_00) {
 	self _meth_83AF();
 	scripts\anim\shared::placeweaponon(self.primaryweapon,"none");
 	var_01 = func_7D25(param_00);
-	var_02 = function_00CE(param_00.origin,param_00.angles,var_01);
+	var_02 = getstartorigin(param_00.origin,param_00.angles,var_01);
 	self give_smack_perk(var_02);
 	self waittill("runto_arrived");
 	func_13030(param_00);
@@ -1396,7 +1396,7 @@ func_E826(param_00) {
 
 	self attach(self.var_12A78,level.var_D66F);
 	thread func_12A60();
-	var_03 = function_00CE(param_00.origin,param_00.angles,var_02);
+	var_03 = getstartorigin(param_00.origin,param_00.angles,var_02);
 	self give_smack_perk(var_03);
 	wait(0.05);
 	scripts\sp\_utility::func_F2A4(::scripts\anim\combat::func_68C7);
@@ -1413,7 +1413,7 @@ func_E826(param_00) {
 	}
 
 	if(soundexists("weapon_setup")) {
-		function_0178("weapon_setup",self.origin);
+		playworldsound("weapon_setup",self.origin);
 	}
 
 	self _meth_8018("setup_done",param_00.origin,param_00.angles,var_02);
@@ -1521,7 +1521,7 @@ func_7BC7(param_00) {
 
 _meth_8194() {
 	var_00 = [];
-	var_01 = function_0072();
+	var_01 = getaiarray();
 	for(var_02 = 0;var_02 < var_01.size;var_02++) {
 		if(!isdefined(var_01[var_02].target_getindexoftarget)) {
 			continue;

@@ -1,8 +1,8 @@
-/****************************************************************
+/********************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\killstreaks\_helicopter_flock.gsc
-****************************************************************/
+ * Script: scripts\mp\killstreaks\_helicopter_flock.gsc
+********************************************************/
 
 init() {
 	precachevehicle("attack_littlebird_mp");
@@ -16,27 +16,27 @@ init() {
 
 func_128ED(param_00,param_01) {
 	var_02 = 5;
-	if(func_8DB7() || scripts\mp\_utility::currentactivevehiclecount() >= scripts\mp\_utility::maxvehiclesallowed() || level.fauxvehiclecount + var_02 >= scripts\mp\_utility::maxvehiclesallowed()) {
+	if(func_8DB7() || scripts\mp\utility::currentactivevehiclecount() >= scripts\mp\utility::maxvehiclesallowed() || level.fauxvehiclecount + var_02 >= scripts\mp\utility::maxvehiclesallowed()) {
 		self iprintlnbold(&"KILLSTREAKS_TOO_MANY_VEHICLES");
 		return 0;
 	}
 
-	scripts\mp\_utility::incrementfauxvehiclecount();
-	scripts\mp\_utility::incrementfauxvehiclecount();
-	scripts\mp\_utility::incrementfauxvehiclecount();
-	scripts\mp\_utility::incrementfauxvehiclecount();
-	scripts\mp\_utility::incrementfauxvehiclecount();
+	scripts\mp\utility::incrementfauxvehiclecount();
+	scripts\mp\utility::incrementfauxvehiclecount();
+	scripts\mp\utility::incrementfauxvehiclecount();
+	scripts\mp\utility::incrementfauxvehiclecount();
+	scripts\mp\utility::incrementfauxvehiclecount();
 	var_03 = func_F1C9(param_00,"littlebird_flock");
 	if(!isdefined(var_03) || !var_03) {
-		scripts\mp\_utility::decrementfauxvehiclecount();
-		scripts\mp\_utility::decrementfauxvehiclecount();
-		scripts\mp\_utility::decrementfauxvehiclecount();
-		scripts\mp\_utility::decrementfauxvehiclecount();
-		scripts\mp\_utility::decrementfauxvehiclecount();
+		scripts\mp\utility::decrementfauxvehiclecount();
+		scripts\mp\utility::decrementfauxvehiclecount();
+		scripts\mp\utility::decrementfauxvehiclecount();
+		scripts\mp\utility::decrementfauxvehiclecount();
+		scripts\mp\utility::decrementfauxvehiclecount();
 		return 0;
 	}
 
-	level thread scripts\mp\_utility::teamplayercardsplash("used_littlebird_flock",self,self.team);
+	level thread scripts\mp\utility::teamplayercardsplash("used_littlebird_flock",self,self.team);
 	return 1;
 }
 
@@ -54,10 +54,10 @@ func_8DB7() {
 
 func_F1C9(param_00,param_01) {
 	self playlocalsound(game["voice"][self.team] + "KS_lbd_inposition");
-	scripts\mp\_utility::_beginlocationselection(param_01,"map_artillery_selector",1,500);
+	scripts\mp\utility::_beginlocationselection(param_01,"map_artillery_selector",1,500);
 	self endon("stop_location_selection");
 	self waittill("confirm_location",var_02,var_03);
-	if(func_8DB7() || scripts\mp\_utility::currentactivevehiclecount() >= scripts\mp\_utility::maxvehiclesallowed() || level.fauxvehiclecount >= scripts\mp\_utility::maxvehiclesallowed()) {
+	if(func_8DB7() || scripts\mp\utility::currentactivevehiclecount() >= scripts\mp\utility::maxvehiclesallowed() || level.fauxvehiclecount >= scripts\mp\utility::maxvehiclesallowed()) {
 		self iprintlnbold(&"KILLSTREAKS_TOO_MANY_VEHICLES");
 		self notify("cancel_location");
 		return 0;
@@ -82,7 +82,7 @@ func_AD8A() {
 func_6CDC(param_00,param_01,param_02,param_03) {
 	self notify("used");
 	wait(0.05);
-	thread scripts\mp\_utility::stoplocationselection(0);
+	thread scripts\mp\utility::stoplocationselection(0);
 	if(isdefined(self)) {
 		self thread [[param_02]](param_00,param_01,param_03);
 	}
@@ -104,7 +104,7 @@ callstrike(param_00,param_01,param_02) {
 	wait(0.3);
 	level thread func_58E8(param_00,self,var_06,3);
 	level thread func_58E8(param_00,self,var_07,4);
-	scripts\mp\_matchdata::logkillstreakevent("littlebird_flock",param_01);
+	scripts\mp\matchdata::logkillstreakevent("littlebird_flock",param_01);
 }
 
 getflightpath(param_00,param_01,param_02) {
@@ -201,7 +201,7 @@ watchtimeout() {
 	level endon("game_ended");
 	self endon("gone");
 	self endon("death");
-	scripts\mp\_hostmigration::waitlongdurationwithhostmigrationpause(60);
+	scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(60);
 	self notify("death");
 }
 
@@ -261,7 +261,7 @@ func_89D0() {
 func_C169() {
 	level endon("game_ended");
 	self endon("disconnect");
-	if(!scripts\mp\_utility::bot_is_fireteam_mode()) {
+	if(!scripts\mp\utility::bot_is_fireteam_mode()) {
 		self endon("joined_team");
 		self endon("joined_spectators");
 	}
@@ -293,7 +293,7 @@ func_3758(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_0
 		return;
 	}
 
-	if(!scripts\mp\_weapons::friendlyfirecheck(self.triggerportableradarping,param_01)) {
+	if(!scripts\mp\weapons::friendlyfirecheck(self.triggerportableradarping,param_01)) {
 		return;
 	}
 
@@ -308,16 +308,16 @@ func_3758(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_0
 	self.wasdamaged = 1;
 	var_0C = param_02;
 	if(isplayer(param_01)) {
-		param_01 scripts\mp\_damagefeedback::updatedamagefeedback("helicopter");
+		param_01 scripts\mp\damagefeedback::updatedamagefeedback("helicopter");
 		if(param_04 == "MOD_RIFLE_BULLET" || param_04 == "MOD_PISTOL_BULLET") {
-			if(param_01 scripts\mp\_utility::_hasperk("specialty_armorpiercing")) {
+			if(param_01 scripts\mp\utility::_hasperk("specialty_armorpiercing")) {
 				var_0C = var_0C + param_02 * level.armorpiercingmod;
 			}
 		}
 	}
 
 	if(isdefined(param_01.triggerportableradarping) && isplayer(param_01.triggerportableradarping)) {
-		param_01.triggerportableradarping scripts\mp\_damagefeedback::updatedamagefeedback("helicopter");
+		param_01.triggerportableradarping scripts\mp\damagefeedback::updatedamagefeedback("helicopter");
 	}
 
 	if(isdefined(param_05)) {
@@ -352,8 +352,8 @@ func_3758(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_0
 			self.var_1D41 = 1;
 			param_01 notify("destroyed_helicopter");
 			param_01 notify("destroyed_killstreak",param_05);
-			thread scripts\mp\_utility::teamplayercardsplash("callout_destroyed_helicopter",param_01);
-			param_01 thread scripts\mp\_utility::giveunifiedpoints("kill",param_05,300);
+			thread scripts\mp\utility::teamplayercardsplash("callout_destroyed_helicopter",param_01);
+			param_01 thread scripts\mp\utility::giveunifiedpoints("kill",param_05,300);
 		}
 
 		self notify("death");

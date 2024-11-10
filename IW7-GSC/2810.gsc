@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2810.gsc
+ * Script: 2810.gsc
 ***************************************/
 
 validationerror(var_00, var_01, var_02) {
@@ -73,7 +73,7 @@ func_1314B(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07) {
   validationerror("unknownWeapon", var_10, var_01);
   var_0.invaliditems[var_11] = 1;
   } else {
-  var_13 = tablelookup("mp/statstable.csv", 0, var_12, 41);
+  var_13 = tablelookup("mp\statstable.csv", 0, var_12, 41);
 
   if (int(var_13) < 0) {
   validationerror("unreleasedWeapon", var_10, var_01);
@@ -469,7 +469,7 @@ fixinvaliditems(var_00, var_01) {
 }
 
 lookuppowerslot(var_00) {
-  var_01 = tablelookup("mp/menuPowers.csv", 3, var_00, 2);
+  var_01 = tablelookup("mp\menuPowers.csv", 3, var_00, 2);
 
   if (!isdefined(var_01) || var_01 != "1" && var_01 != "2")
   return undefined;

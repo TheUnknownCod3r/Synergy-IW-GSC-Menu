@@ -1,8 +1,8 @@
-/***************************************
+/*******************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\rank.gsc
-***************************************/
+ * Script: scripts\mp\rank.gsc
+*******************************/
 
 init() {
 	level.scoreinfo = [];
@@ -14,12 +14,12 @@ init() {
 	addglobalrankxpmultiplier(var_00,"online_mp_xpscale");
 	level.ranktable = [];
 	level.weaponranktable = [];
-	level.maxrank = int(tablelookup("mp/rankTable.csv",0,"maxrank",1));
+	level.maxrank = int(tablelookup("mp\rankTable.csv",0,"maxrank",1));
 	for(var_01 = 0;var_01 <= level.maxrank;var_01++) {
-		level.ranktable[var_01]["minXP"] = tablelookup("mp/rankTable.csv",0,var_01,2);
-		level.ranktable[var_01]["xpToNext"] = tablelookup("mp/rankTable.csv",0,var_01,3);
-		level.ranktable[var_01]["maxXP"] = tablelookup("mp/rankTable.csv",0,var_01,7);
-		level.ranktable[var_01]["splash"] = tablelookup("mp/rankTable.csv",0,var_01,15);
+		level.ranktable[var_01]["minXP"] = tablelookup("mp\rankTable.csv",0,var_01,2);
+		level.ranktable[var_01]["xpToNext"] = tablelookup("mp\rankTable.csv",0,var_01,3);
+		level.ranktable[var_01]["maxXP"] = tablelookup("mp\rankTable.csv",0,var_01,7);
+		level.ranktable[var_01]["splash"] = tablelookup("mp\rankTable.csv",0,var_01,15);
 	}
 
 	scripts\mp\weaponrank::init();
@@ -27,7 +27,7 @@ init() {
 	level.prestigeextras = [];
 	var_02 = 0;
 	for(;;) {
-		var_03 = tablelookupbyrow("mp/unlocks/prestigeExtrasUnlocks.csv",var_02,0);
+		var_03 = tablelookupbyrow("mp\unlocks\prestigeExtrasUnlocks.csv",var_02,0);
 		if(!isdefined(var_03) || var_03 == "") {
 			break;
 		}
@@ -104,15 +104,15 @@ _meth_80D0(param_00) {
 }
 
 getrankinfofull(param_00) {
-	return tablelookupistring("mp/rankTable.csv",0,param_00,16);
+	return tablelookupistring("mp\rankTable.csv",0,param_00,16);
 }
 
 getrankinfoicon(param_00,param_01) {
-	return tablelookup("mp/rankIconTable.csv",0,param_00,param_01 + 1);
+	return tablelookup("mp\rankIconTable.csv",0,param_00,param_01 + 1);
 }
 
 getrankinfolevel(param_00) {
-	return int(tablelookup("mp/rankTable.csv",0,param_00,13));
+	return int(tablelookup("mp\rankTable.csv",0,param_00,13));
 }
 
 onplayerconnect() {
@@ -498,7 +498,7 @@ scoreeventpopup(param_00) {
 	}
 	else
 	{
-		self.var_EC2C++;
+		self.scoreeventlistsize++;
 		if(self.scoreeventlistsize > 8) {
 			self.scoreeventlistsize = 8;
 			return;
@@ -507,9 +507,9 @@ scoreeventpopup(param_00) {
 
 	self setclientomnvar("ui_score_event_list_" + self.scoreeventlistindex,var_01);
 	self setclientomnvar("ui_score_event_control",self.scoreeventcount % 16);
-	self.var_EC2B++;
+	self.scoreeventlistindex++;
 	self.scoreeventlistindex = self.scoreeventlistindex % 8;
-	self.var_EC29++;
+	self.scoreeventcount++;
 }
 
 clearscoreeventlistafterwait() {

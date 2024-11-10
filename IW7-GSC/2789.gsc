@@ -1,12 +1,12 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2789.gsc
+ * Script: 2789.gsc
 ***************************************/
 
 func_E4E3() {
   level.func_E4DF = [];
-  level._effect["proto_ricochet_temp"] = loadfx("vfx/old/misc/proto_ricochet_temp");
-  level._effect["proto_ricochet_shot_temp"] = loadfx("vfx/old/misc/proto_ricochet_shot_temp");
+  level._effect["proto_ricochet_temp"] = loadfx("vfx\old\misc\proto_ricochet_temp");
+  level._effect["proto_ricochet_shot_temp"] = loadfx("vfx\old\misc\proto_ricochet_shot_temp");
   level.func_E4DF["proto_ricochet_device_mp"] = spawnstruct();
   level.func_E4DF["proto_ricochet_device_mp"].func_C739 = 60;
   level.func_E4DF["proto_ricochet_device_mp"].func_B9DC = ::func_E4E5;

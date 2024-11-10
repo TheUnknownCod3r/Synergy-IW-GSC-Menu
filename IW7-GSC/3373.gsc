@@ -1,12 +1,12 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3373.gsc
-****************************/
+ * Script: 3373.gsc
+************************/
 
 score_multiplier_init(param_00) {
 	level.combo_multiplier = 1;
-	level.var_66D0 = "cp/zombies/cp_zmb_escape_combos.csv";
+	level.var_66D0 = "cp\zombies\cp_zmb_escape_combos.csv";
 	param_00 thread func_11AB4(param_00);
 	param_00 thread func_135FF(param_00);
 	param_00 thread func_135FC(param_00);

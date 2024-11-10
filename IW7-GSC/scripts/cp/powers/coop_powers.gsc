@@ -1,8 +1,8 @@
-/*****************************************************
+/*********************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\powers\coop_powers.gsc
-*****************************************************/
+ * Script: scripts\cp\powers\coop_powers.gsc
+*********************************************/
 
 init() {
 	level.powers = [];
@@ -28,13 +28,13 @@ init() {
 		powersetupfunctions("power_portalGenerator",undefined,undefined,undefined,undefined,"powers_portalGenerator_used",undefined);
 		powersetupfunctions("power_c4",undefined,undefined,undefined,"c4_update",undefined,undefined);
 		powersetupfunctions("power_holyWater",::giveholywater,::takeholywater,undefined,undefined,undefined,undefined);
-		thread scripts/cp/powers/coop_phaseshift::init();
-		thread scripts/cp/powers/coop_kinetic_pulse::init();
-		thread scripts/cp/powers/coop_repulsor::init();
-		thread scripts/cp/powers/coop_transponder::init();
-		thread scripts/cp/powers/coop_microturret::init();
-		thread scripts/cp/powers/coop_trip_mine::tripmine_init();
-		thread scripts/cp/powers/coop_blackholegrenade::blackholegrenadeinit();
+		thread scripts\cp\powers\coop_phaseshift::init();
+		thread scripts\cp\powers\coop_kinetic_pulse::init();
+		thread scripts\cp\powers\coop_repulsor::init();
+		thread scripts\cp\powers\coop_transponder::init();
+		thread scripts\cp\powers\coop_microturret::init();
+		thread scripts\cp\powers\coop_trip_mine::tripmine_init();
+		thread scripts\cp\powers\coop_blackholegrenade::blackholegrenadeinit();
 		thread scripts\cp\powers\coop_holywater::init();
 	}
 
@@ -175,7 +175,7 @@ func_D77D() {
 	}
 	else
 	{
-		var_01 = "cp/cp_powertable.csv";
+		var_01 = "cp\cp_powertable.csv";
 	}
 
 	for(;;) {
@@ -220,14 +220,14 @@ func_D780() {
 
 	var_00 = 0;
 	for(;;) {
-		var_01 = tablelookupbyrow("mp/powerpassivetable.csv",var_00,0);
+		var_01 = tablelookupbyrow("mp\powerpassivetable.csv",var_00,0);
 		if(var_01 == "") {
 			break;
 		}
 
-		var_02 = tablelookupbyrow("mp/powerpassivetable.csv",var_00,1);
-		var_03 = tablelookupbyrow("mp/powerpassivetable.csv",var_00,2);
-		var_04 = tablelookupbyrow("mp/powerpassivetable.csv",var_00,3);
+		var_02 = tablelookupbyrow("mp\powerpassivetable.csv",var_00,1);
+		var_03 = tablelookupbyrow("mp\powerpassivetable.csv",var_00,2);
+		var_04 = tablelookupbyrow("mp\powerpassivetable.csv",var_00,3);
 		var_05 = spawnstruct();
 		if(var_04 != "") {
 			var_05.var_23B1 = var_04;
@@ -653,7 +653,7 @@ func_D725(param_00,param_01,param_02,param_03,param_04) {
 	var_06.slot = param_01;
 	var_06.charges = var_05.maxcharges;
 	if(scripts\engine\utility::istrue(param_02)) {
-		var_06.var_3D23++;
+		var_06.charges++;
 	}
 
 	var_06.maxcharges = var_06.charges;
@@ -1019,11 +1019,11 @@ func_130DA() {}
 func_F7E2(param_00) {}
 
 func_12D07() {
-	scripts/cp/powers/coop_phaseshift::func_E154();
+	scripts\cp\powers\coop_phaseshift::func_E154();
 }
 
 usephaseshift() {
-	scripts/cp/powers/coop_phaseshift::func_E88D();
+	scripts\cp\powers\coop_phaseshift::func_E88D();
 }
 
 func_12D2C() {}
@@ -1049,7 +1049,7 @@ func_F776(param_00) {
 unsetkillstreaktoscorestreak() {}
 
 func_1309C() {
-	scripts/cp/powers/coop_kinetic_pulse::func_E85E();
+	scripts\cp\powers\coop_kinetic_pulse::func_E85E();
 }
 
 func_F6B1(param_00) {
@@ -1150,17 +1150,17 @@ usearmageddon() {
 }
 
 setrewind(param_00) {
-	scripts/cp/powers/coop_rewind::setrewind();
+	scripts\cp\powers\coop_rewind::setrewind();
 }
 
 unsetrewind() {
-	scripts/cp/powers/coop_rewind::unsetrewind();
+	scripts\cp\powers\coop_rewind::unsetrewind();
 }
 
 userewind() {}
 
 userepulsor() {
-	scripts/cp/powers/coop_repulsor::userepulsor();
+	scripts\cp\powers\coop_repulsor::userepulsor();
 }
 
 hasequipment(param_00) {

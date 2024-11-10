@@ -1,13 +1,13 @@
-/********************************************
+/************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\common\trace.gsc
-********************************************/
+ * Script: scripts\common\trace.gsc
+************************************/
 
 ray_trace(param_00,param_01,param_02,param_03,param_04,param_05) {
 	var_06 = scripts\engine\utility::ter_op(isdefined(param_03),param_03,create_default_contents());
 	var_07 = scripts\engine\utility::ter_op(isdefined(param_05),param_05,0);
-	var_08 = function_0287(param_00,param_01,var_06,param_02,0,"physicsquery_closest",var_07);
+	var_08 = physics_raycast(param_00,param_01,var_06,param_02,0,"physicsquery_closest",var_07);
 	if(var_08.size) {
 		var_08 = var_08[0];
 	}
@@ -26,7 +26,7 @@ ray_trace(param_00,param_01,param_02,param_03,param_04,param_05) {
 ray_trace_detail(param_00,param_01,param_02,param_03,param_04,param_05) {
 	var_06 = scripts\engine\utility::ter_op(isdefined(param_03),param_03,create_default_contents());
 	var_07 = scripts\engine\utility::ter_op(isdefined(param_05),param_05,0);
-	var_08 = function_0287(param_00,param_01,var_06,param_02,1,"physicsquery_closest",var_07);
+	var_08 = physics_raycast(param_00,param_01,var_06,param_02,1,"physicsquery_closest",var_07);
 	if(var_08.size) {
 		var_08 = var_08[0];
 	}
@@ -44,7 +44,7 @@ ray_trace_detail(param_00,param_01,param_02,param_03,param_04,param_05) {
 
 ray_trace_get_all_results(param_00,param_01,param_02,param_03,param_04) {
 	var_05 = scripts\engine\utility::ter_op(isdefined(param_03),param_03,create_default_contents());
-	var_06 = function_0287(param_00,param_01,var_05,param_02,0,"physicsquery_all");
+	var_06 = physics_raycast(param_00,param_01,var_05,param_02,0,"physicsquery_all");
 	if(isdefined(param_04) && param_04) {
 		foreach(var_08 in var_06) {
 			var_08 = convert_surface_flag(var_08);
@@ -56,17 +56,17 @@ ray_trace_get_all_results(param_00,param_01,param_02,param_03,param_04) {
 
 ray_trace_passed(param_00,param_01,param_02,param_03) {
 	var_04 = scripts\engine\utility::ter_op(isdefined(param_03),param_03,create_default_contents());
-	return !function_0287(param_00,param_01,var_04,param_02,0,"physicsquery_any");
+	return !physics_raycast(param_00,param_01,var_04,param_02,0,"physicsquery_any");
 }
 
 ray_trace_detail_passed(param_00,param_01,param_02,param_03) {
 	var_04 = scripts\engine\utility::ter_op(isdefined(param_03),param_03,create_default_contents());
-	return !function_0287(param_00,param_01,var_04,param_02,1,"physicsquery_any");
+	return !physics_raycast(param_00,param_01,var_04,param_02,1,"physicsquery_any");
 }
 
 sphere_trace(param_00,param_01,param_02,param_03,param_04,param_05) {
 	var_06 = scripts\engine\utility::ter_op(isdefined(param_04),param_04,create_default_contents());
-	var_07 = function_0288(param_00,param_01,param_02,var_06,param_03,"physicsquery_closest");
+	var_07 = physics_spherecast(param_00,param_01,param_02,var_06,param_03,"physicsquery_closest");
 	if(var_07.size) {
 		var_07 = var_07[0];
 	}
@@ -84,7 +84,7 @@ sphere_trace(param_00,param_01,param_02,param_03,param_04,param_05) {
 
 sphere_trace_get_all_results(param_00,param_01,param_02,param_03,param_04,param_05) {
 	var_06 = scripts\engine\utility::ter_op(isdefined(param_04),param_04,create_default_contents());
-	var_07 = function_0288(param_00,param_01,param_02,var_06,param_03,"physicsquery_all");
+	var_07 = physics_spherecast(param_00,param_01,param_02,var_06,param_03,"physicsquery_all");
 	if(isdefined(param_05) && param_05) {
 		foreach(var_09 in var_07) {
 			var_09 = convert_surface_flag(var_09);
@@ -96,12 +96,12 @@ sphere_trace_get_all_results(param_00,param_01,param_02,param_03,param_04,param_
 
 sphere_trace_passed(param_00,param_01,param_02,param_03,param_04) {
 	var_05 = scripts\engine\utility::ter_op(isdefined(param_04),param_04,create_default_contents());
-	return !function_0288(param_00,param_01,param_02,var_05,param_03,"physicsquery_any");
+	return !physics_spherecast(param_00,param_01,param_02,var_05,param_03,"physicsquery_any");
 }
 
 sphere_get_closest_point(param_00,param_01,param_02,param_03,param_04,param_05) {
 	var_06 = scripts\engine\utility::ter_op(isdefined(param_04),param_04,create_default_contents());
-	var_07 = function_028C(param_00,param_01,param_02,var_06,param_03,"physicsquery_closest");
+	var_07 = physics_getclosestpointtosphere(param_00,param_01,param_02,var_06,param_03,"physicsquery_closest");
 	if(var_07.size) {
 		var_07 = var_07[0];
 	}
@@ -124,7 +124,7 @@ capsule_trace(param_00,param_01,param_02,param_03,param_04,param_05,param_06,par
 
 	var_08 = scripts\engine\utility::ter_op(isdefined(param_06),param_06,create_default_contents());
 	var_09 = convert_capsule_data(param_00,param_01,param_02,param_03,param_04);
-	var_0A = function_0289(var_09["trace_start"],var_09["trace_end"],param_02,var_09["half_height"],param_04,var_08,param_05,"physicsquery_closest");
+	var_0A = physics_capsulecast(var_09["trace_start"],var_09["trace_end"],param_02,var_09["half_height"],param_04,var_08,param_05,"physicsquery_closest");
 	if(var_0A.size) {
 		var_0A = var_0A[0];
 	}
@@ -147,7 +147,7 @@ capsule_trace_get_all_results(param_00,param_01,param_02,param_03,param_04,param
 
 	var_08 = scripts\engine\utility::ter_op(isdefined(param_06),param_06,create_default_contents());
 	var_09 = convert_capsule_data(param_00,param_01,param_02,param_03,param_04);
-	var_0A = function_0289(var_09["trace_start"],var_09["trace_end"],param_02,var_09["half_height"],param_04,var_08,param_05,"physicsquery_all");
+	var_0A = physics_capsulecast(var_09["trace_start"],var_09["trace_end"],param_02,var_09["half_height"],param_04,var_08,param_05,"physicsquery_all");
 	if(isdefined(param_07) && param_07) {
 		foreach(var_0C in var_0A) {
 			var_0C = convert_surface_flag(var_0C);
@@ -164,7 +164,7 @@ capsule_trace_passed(param_00,param_01,param_02,param_03,param_04,param_05,param
 
 	var_07 = scripts\engine\utility::ter_op(isdefined(param_06),param_06,create_default_contents());
 	var_08 = convert_capsule_data(param_00,param_01,param_02,param_03,param_04);
-	return !function_0289(var_08["trace_start"],var_08["trace_end"],param_02,var_08["half_height"],param_04,var_07,param_05,"physicsquery_any");
+	return !physics_capsulecast(var_08["trace_start"],var_08["trace_end"],param_02,var_08["half_height"],param_04,var_07,param_05,"physicsquery_any");
 }
 
 capsule_get_closest_point(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07) {
@@ -174,7 +174,7 @@ capsule_get_closest_point(param_00,param_01,param_02,param_03,param_04,param_05,
 
 	var_08 = scripts\engine\utility::ter_op(isdefined(param_06),param_06,create_default_contents());
 	var_09 = convert_capsule_data(param_00,undefined,param_01,param_02,param_03);
-	var_0A = function_028D(var_09["trace_start"],param_01,var_09["half_height"],param_03,param_04,var_08,param_05,"physicsquery_closest");
+	var_0A = physics_getclosestpointtocapsule(var_09["trace_start"],param_01,var_09["half_height"],param_03,param_04,var_08,param_05,"physicsquery_closest");
 	if(var_0A.size) {
 		var_0A = var_0A[0];
 	}
@@ -204,7 +204,7 @@ player_trace(param_00,param_01,param_02,param_03,param_04,param_05,param_06) {
 		param_06 = 0;
 	}
 
-	var_08 = function_0298(param_00,param_01,self,param_06,param_02,var_07,param_03,"physicsquery_closest");
+	var_08 = physics_charactercast(param_00,param_01,self,param_06,param_02,var_07,param_03,"physicsquery_closest");
 	if(var_08.size) {
 		var_08 = var_08[0];
 	}
@@ -234,7 +234,7 @@ player_trace_get_all_results(param_00,param_01,param_02,param_03,param_04,param_
 		param_06 = 0;
 	}
 
-	var_08 = function_0298(param_00,param_01,self,param_06,param_02,var_07,param_03,"physicsquery_all");
+	var_08 = physics_charactercast(param_00,param_01,self,param_06,param_02,var_07,param_03,"physicsquery_all");
 	if(isdefined(param_05) && param_05) {
 		foreach(var_0A in var_08) {
 			var_0A = convert_surface_flag(var_0A);
@@ -258,7 +258,7 @@ player_trace_passed(param_00,param_01,param_02,param_03,param_04,param_05) {
 		param_05 = 0;
 	}
 
-	return !function_0298(param_00,param_01,self,param_05,param_02,var_06,param_03,"physicsquery_any");
+	return !physics_charactercast(param_00,param_01,self,param_05,param_02,var_06,param_03,"physicsquery_any");
 }
 
 player_get_closest_point_static(param_00,param_01,param_02,param_03) {
@@ -287,7 +287,7 @@ player_get_closest_point(param_00,param_01,param_02,param_03,param_04,param_05) 
 	}
 
 	var_06 = scripts\engine\utility::ter_op(isdefined(param_04),param_04,create_default_contents());
-	var_07 = function_0299(param_00,self,0,param_01,param_02,var_06,param_03,"physicsquery_closest");
+	var_07 = physics_getclosestpointtocharacter(param_00,self,0,param_01,param_02,var_06,param_03,"physicsquery_closest");
 	if(var_07.size) {
 		var_07 = var_07[0];
 	}
@@ -317,7 +317,7 @@ ai_trace(param_00,param_01,param_02,param_03,param_04,param_05,param_06) {
 		param_06 = 0;
 	}
 
-	var_08 = function_0298(param_00,param_01,self,param_06,param_02,var_07,param_03,"physicsquery_closest");
+	var_08 = physics_charactercast(param_00,param_01,self,param_06,param_02,var_07,param_03,"physicsquery_closest");
 	if(var_08.size) {
 		var_08 = var_08[0];
 	}
@@ -347,7 +347,7 @@ ai_trace_get_all_results(param_00,param_01,param_02,param_03,param_04,param_05,p
 		param_06 = 0;
 	}
 
-	var_08 = function_0298(param_00,param_01,self,param_06,param_02,var_07,param_03,"physicsquery_all");
+	var_08 = physics_charactercast(param_00,param_01,self,param_06,param_02,var_07,param_03,"physicsquery_all");
 	if(isdefined(param_05) && param_05) {
 		foreach(var_0A in var_08) {
 			var_0A = convert_surface_flag(var_0A);
@@ -371,7 +371,7 @@ ai_trace_passed(param_00,param_01,param_02,param_03,param_04,param_05) {
 		param_05 = 0;
 	}
 
-	return !function_0298(param_00,param_01,self,param_05,param_02,var_06,param_03,"physicsquery_any");
+	return !physics_charactercast(param_00,param_01,self,param_05,param_02,var_06,param_03,"physicsquery_any");
 }
 
 ai_get_closest_point(param_00,param_01,param_02,param_03,param_04,param_05) {
@@ -388,7 +388,7 @@ ai_get_closest_point(param_00,param_01,param_02,param_03,param_04,param_05) {
 	}
 
 	var_06 = scripts\engine\utility::ter_op(isdefined(param_04),param_04,create_default_contents());
-	var_07 = function_0299(param_00,self,param_01,param_02,var_06,param_03,"physicsquery_closest");
+	var_07 = physics_getclosestpointtocharacter(param_00,self,param_01,param_02,var_06,param_03,"physicsquery_closest");
 	if(var_07.size) {
 		var_07 = var_07[0];
 	}

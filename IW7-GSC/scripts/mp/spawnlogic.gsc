@@ -1,8 +1,8 @@
-/*********************************************
+/*************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\spawnlogic.gsc
-*********************************************/
+ * Script: scripts\mp\spawnlogic.gsc
+*************************************/
 
 init() {
 	level.spawnglobals = spawnstruct();
@@ -182,7 +182,7 @@ func_AEAE() {
 	var_00 = -1;
 	for(;;) {
 		var_00++;
-		var_01 = tablelookupbyrow("mp/spawnweights.csv",var_00,0);
+		var_01 = tablelookupbyrow("mp\spawnweights.csv",var_00,0);
 		if(!isdefined(var_01) || var_01 == "") {
 			break;
 		}
@@ -192,8 +192,8 @@ func_AEAE() {
 			level.spawnglobals.var_AFBF[level.spawnglobals.var_AFBF.size] = var_01;
 		}
 
-		var_02 = tablelookupbyrow("mp/spawnweights.csv",var_00,1);
-		var_03 = tablelookupbyrow("mp/spawnweights.csv",var_00,2);
+		var_02 = tablelookupbyrow("mp\spawnweights.csv",var_00,1);
+		var_03 = tablelookupbyrow("mp\spawnweights.csv",var_00,2);
 		var_03 = float(var_03);
 		level.spawnglobals.var_10882[var_01][var_02] = var_03;
 	}
@@ -462,7 +462,7 @@ getteamfallbackspawnpoints(param_00) {
 
 ispathdataavailable() {
 	if(!isdefined(level.var_C96A)) {
-		var_00 = function_0076();
+		var_00 = getallnodes();
 		level.var_C96A = isdefined(var_00) && var_00.size > 150;
 	}
 
@@ -528,7 +528,7 @@ func_108FE() {
 		}
 
 		if(var_00.size > 0) {
-			function_029F(var_00);
+			cachespawnpathnodesincode(var_00);
 		}
 		else
 		{
@@ -655,7 +655,7 @@ func_108FC() {
 					continue;
 				}
 
-				var_09 = function_01E7(var_06,var_06.var_101E9,var_08.var_10917);
+				var_09 = spawnsighttrace(var_06,var_06.var_101E9,var_08.var_10917);
 				var_01++;
 				if(!var_09) {
 					continue;
@@ -830,7 +830,7 @@ func_17DC(param_00,param_01) {
 		var_05 = var_03.origin + (0,0,50);
 		var_06 = 0;
 		if(!var_06) {
-			var_06 = function_01E7(param_00,param_00.var_101E9,var_05);
+			var_06 = spawnsighttrace(param_00,param_00.var_101E9,var_05);
 		}
 
 		if(!var_06) {
@@ -912,7 +912,7 @@ setmapcenterfordev() {
 	expandspawnpointbounds("mp_tdm_spawn_allies_start");
 	expandspawnpointbounds("mp_tdm_spawn_axis_start");
 	level.mapcenter = findboxcenter(level.spawnmins,level.spawnmaxs);
-	function_01B4(level.mapcenter);
+	setmapcenter(level.mapcenter);
 }
 
 shoulduseteamstartspawn() {
@@ -1044,7 +1044,7 @@ func_67D3(param_00,param_01) {
 _precomputedlosdatatest(param_00,param_01) {
 	var_02 = checkttlosoverrides(param_00,param_01);
 	if(!isdefined(var_02)) {
-		var_02 = function_0295(param_00.spawnviewpathnodes,param_01.radiuspathnodes);
+		var_02 = precomputedlosdatatest(param_00.spawnviewpathnodes,param_01.radiuspathnodes);
 	}
 
 	return var_02;
@@ -1106,7 +1106,7 @@ func_54EC(param_00,param_01,param_02) {
 	var_03 = param_00.var_101E9;
 	var_04 = param_02;
 	var_05 = physics_createcontents(["physicscontents_aiavoid","physicscontents_solid","physicscontents_structural"]);
-	var_06 = function_0287(var_03,var_04,var_05,param_01,0,"physicsquery_any");
+	var_06 = physics_raycast(var_03,var_04,var_05,param_01,0,"physicsquery_any");
 	return scripts\engine\utility::ter_op(var_06,0,1);
 }
 
@@ -1119,7 +1119,7 @@ shoulduseprecomputedlos() {
 }
 
 isttlosdataavailable() {
-	return function_0296();
+	return getislosdatafileloaded();
 }
 
 func_D91D() {

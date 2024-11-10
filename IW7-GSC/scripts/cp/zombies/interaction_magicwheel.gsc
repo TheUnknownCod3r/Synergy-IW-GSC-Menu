@@ -1,8 +1,8 @@
-/*****************************************************************
+/*********************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\zombies\interaction_magicwheel.gsc
-*****************************************************************/
+ * Script: scripts\cp\zombies\interaction_magicwheel.gsc
+*********************************************************/
 
 set_magic_wheel_starting_location(param_00) {
 	level.var_B161 = param_00;
@@ -273,7 +273,7 @@ should_play_upgraded_magic_wheel_vfx() {
 get_area(param_00) {
 	var_01 = getentarray("spawn_volume","targetname");
 	foreach(var_03 in var_01) {
-		if(function_010F(param_00.origin + (0,0,50),var_03)) {
+		if(ispointinvolume(param_00.origin + (0,0,50),var_03)) {
 			if(isdefined(var_03.basename)) {
 				return var_03.basename;
 			}
@@ -424,7 +424,7 @@ can_have_nunchucks(param_00) {
 
 get_weapon_with_new_camo(param_00,param_01,param_02) {
 	var_03 = getweaponbasename(param_01);
-	var_04 = function_00E3(param_01);
+	var_04 = getweaponattachments(param_01);
 	if(issubstr(var_03,"nunchucks") || issubstr(var_03,"venomx")) {
 	}
 
@@ -625,11 +625,11 @@ func_1010C(param_00,param_01) {
 	}
 
 	if(!level.activewheels) {
-		function_02EB();
+		clearworldweapons();
 		level.currentweaponlist = [];
 	}
 
-	var_0E = scripts/cp/zombies/interaction_weapon_upgrade::getoffsetfrombaseweaponname(param_00.var_13C25[var_04]);
+	var_0E = scripts\cp\zombies\interaction_weapon_upgrade::getoffsetfrombaseweaponname(param_00.var_13C25[var_04]);
 	param_00.var_394.origin = var_0B.origin + var_0E;
 	playsoundatpos(param_00.origin,"zmb_wheel_spin_end");
 	if(!isdefined(param_00.fire_sale_spin) && !scripts\engine\utility::flag_exist("fire_sale") || !scripts\engine\utility::flag("fire_sale")) {
@@ -810,7 +810,7 @@ func_7D60(param_00) {
 	}
 	else
 	{
-		var_01 = "cp/cp_weapontable.csv";
+		var_01 = "cp\cp_weapontable.csv";
 	}
 
 	return tablelookup(var_01,2,param_00,1);
@@ -921,7 +921,7 @@ func_B16A(param_00,param_01) {
 
 	if(param_00 scripts\cp\cp_weapon::can_upgrade(param_01) && is_magic_wheel_upgrades(param_00)) {
 		var_02 = get_camo_for_upgraded_weapon(var_05,param_00);
-		var_06 = scripts\engine\utility::array_combine(function_00E3(param_01),[get_attachment_for_upgraded_weapon(param_01,param_00)]);
+		var_06 = scripts\engine\utility::array_combine(getweaponattachments(param_01),[get_attachment_for_upgraded_weapon(param_01,param_00)]);
 		param_01 = param_00 scripts\cp\cp_weapon::return_weapon_name_with_like_attachments(param_01,undefined,var_06,undefined,var_02);
 		param_01 = param_00 scripts\cp\utility::_giveweapon(param_01,undefined,undefined,1);
 		var_07 = scripts\cp\utility::getrawbaseweaponname(param_01);
@@ -940,7 +940,7 @@ func_B16A(param_00,param_01) {
 	}
 	else
 	{
-		var_06 = function_00E3(var_05);
+		var_06 = getweaponattachments(var_05);
 		var_02 = param_01 scripts\cp\cp_weapon::return_weapon_name_with_like_attachments(var_02,undefined,var_08,undefined,undefined);
 		var_02 = param_01 scripts\cp\utility::_giveweapon(var_02,undefined,undefined,0);
 		var_08 = spawnstruct();

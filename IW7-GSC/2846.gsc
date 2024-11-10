@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2846.gsc
+ * Script: 2846.gsc
 ***************************************/
 
 func_11620(var_00, var_01, var_02, var_03) {
@@ -23,16 +23,16 @@ func_59CB() {
   func_11FB();
   func_120C();
   level.func_5A23 = [];
-  scripts/sp/utility::func_D6D9(::func_59CC);
+  scripts\sp\utility::func_D6D9(::func_59CC);
   scripts\engine\utility::flag_init("show_peek_hint");
   scripts\engine\utility::flag_init("stopping_doorpeek_gesture");
   scripts\engine\utility::flag_init("doorpeek_hand_on_door");
-  scripts/sp/utility::func_16EB("peek_hint", &"SCRIPT_DOORPEEK_HINT", ::func_C9F7);
-  scripts/sp/utility::func_16EB("peek_hint_pc", &"SCRIPT_DOORPEEK_HINT_PC", ::func_C9F7);
-  scripts/sp/utility::func_16EB("peek_hint_shove", &"SCRIPT_DOORPEEK_HINT_SHOVE", ::func_C9F7);
-  scripts/sp/utility::func_16EB("peek_hint_shove_pc", &"SCRIPT_DOORPEEK_HINT_SHOVE_PC", ::func_C9F7);
-  scripts/sp/utility::func_16EB("peek_only_hint", &"SCRIPT_DOORPEEK_HINT_PEEK_ONLY", ::func_C9F7);
-  scripts/sp/utility::func_16EB("peek_only_hint_pc", &"SCRIPT_DOORPEEK_HINT_PEEK_ONLY_PC", ::func_C9F7);
+  scripts\sp\utility::func_16EB("peek_hint", &"SCRIPT_DOORPEEK_HINT", ::func_C9F7);
+  scripts\sp\utility::func_16EB("peek_hint_pc", &"SCRIPT_DOORPEEK_HINT_PC", ::func_C9F7);
+  scripts\sp\utility::func_16EB("peek_hint_shove", &"SCRIPT_DOORPEEK_HINT_SHOVE", ::func_C9F7);
+  scripts\sp\utility::func_16EB("peek_hint_shove_pc", &"SCRIPT_DOORPEEK_HINT_SHOVE_PC", ::func_C9F7);
+  scripts\sp\utility::func_16EB("peek_only_hint", &"SCRIPT_DOORPEEK_HINT_PEEK_ONLY", ::func_C9F7);
+  scripts\sp\utility::func_16EB("peek_only_hint_pc", &"SCRIPT_DOORPEEK_HINT_PEEK_ONLY_PC", ::func_C9F7);
 }
 
 func_C9F7() {
@@ -92,8 +92,8 @@ func_118E() {
 
 func_11FA() {
   self give_mp_super_weapon(self.origin);
-  scripts/sp/utility::func_F3E0(1);
-  scripts/sp/utility::func_F415(1);
+  scripts\sp\utility::func_F3E0(1);
+  scripts\sp\utility::func_F415(1);
 }
 
 func_13B2(var_00, var_01) {
@@ -163,7 +163,7 @@ func_1211(var_00, var_01, var_02, var_03) {
   var_04 = scripts\engine\utility::array_combine(var_04, scripts\engine\utility::getstructarray(var_00, "targetname"));
   level.func_5A23[var_00].func_5978 = func_12A6(var_04, "door_peek_door");
   level.func_5A23[var_00].func_5A57 = level.func_5A23[var_00].func_5978.func_EE52;
-  level.func_5A23[var_00].func_5978 scripts/sp/utility::func_23B7("doorpeek_door");
+  level.func_5A23[var_00].func_5978 scripts\sp\utility::func_23B7("doorpeek_door");
   var_05 = func_12A6(var_04, "door_peek_struct");
 
   if (!var_01) {
@@ -352,7 +352,7 @@ func_1202(var_00, var_01) {
 
   if (!scripts\engine\utility::flag(var_00 + "door_peek_handle_down")) {
   var_07 = 0.4;
-  level.func_5A23[var_00].func_C9FD = scripts/sp/utility::func_10639("player_rig");
+  level.func_5A23[var_00].func_C9FD = scripts\sp\utility::func_10639("player_rig");
   var_08 = level.player _meth_84C6("currentViewModel");
 
   if (isdefined(var_08))
@@ -360,7 +360,7 @@ func_1202(var_00, var_01) {
 
   level.func_5A23[var_00].func_C9FD hide();
   childthread func_11CE(0.2, level.func_5A23[var_00].func_C9FD);
-  var_04 thread scripts/sp/anim::func_1EC3(level.func_5A23[var_00].func_C9FD, var_05);
+  var_04 thread scripts\sp\anim::func_1EC3(level.func_5A23[var_00].func_C9FD, var_05);
   var_09 = level.func_5A23[var_00].func_C9FD gettagorigin("tag_player");
   var_10 = level.player getplayerangles(1);
   var_11 = var_4.origin - var_09;
@@ -398,17 +398,17 @@ func_1202(var_00, var_01) {
 
   if (var_27 > 0.0) {
   level.player scripts\engine\utility::delaycall(var_27, ::forceplaygestureviewmodel, var_03);
-  var_04 thread scripts/sp/anim::func_1EC3(level.func_5A23[var_00].func_C9FD, var_05);
-  var_04 scripts\engine\utility::delaythread(var_27, scripts/sp/anim::func_1F35, level.func_5A23[var_00].func_C9FD, var_05);
+  var_04 thread scripts\sp\anim::func_1EC3(level.func_5A23[var_00].func_C9FD, var_05);
+  var_04 scripts\engine\utility::delaythread(var_27, scripts\sp\anim::func_1F35, level.func_5A23[var_00].func_C9FD, var_05);
 
   if (level.func_5A23[var_00].func_5A57 != "civlever" && level.func_5A23[var_00].func_5A57 != "armoryajar")
-  level.func_5A23[var_00].func_5978 scripts\engine\utility::delaythread(var_27, scripts/sp/anim::func_1F35, level.func_5A23[var_00].func_5978, "doorpeek_" + func_1297(level.func_5A23[var_00].func_5A57) + "_in");
+  level.func_5A23[var_00].func_5978 scripts\engine\utility::delaythread(var_27, scripts\sp\anim::func_1F35, level.func_5A23[var_00].func_5978, "doorpeek_" + func_1297(level.func_5A23[var_00].func_5A57) + "_in");
   } else {
   level.player forceplaygestureviewmodel(var_03);
-  var_04 thread scripts/sp/anim::func_1F35(level.func_5A23[var_00].func_C9FD, var_05);
+  var_04 thread scripts\sp\anim::func_1F35(level.func_5A23[var_00].func_C9FD, var_05);
 
   if (level.func_5A23[var_00].func_5A57 != "civlever" && level.func_5A23[var_00].func_5A57 != "armoryajar")
-  level.func_5A23[var_00].func_5978 thread scripts/sp/anim::func_1F35(level.func_5A23[var_00].func_5978, "doorpeek_" + func_1297(level.func_5A23[var_00].func_5A57) + "_in");
+  level.func_5A23[var_00].func_5978 thread scripts\sp\anim::func_1F35(level.func_5A23[var_00].func_5978, "doorpeek_" + func_1297(level.func_5A23[var_00].func_5A57) + "_in");
   }
 
   level.player getweaponweight(level.func_5A23[var_00].func_C9FD, "tag_player", 0.2, 0.0, 0.0);
@@ -416,8 +416,8 @@ func_1202(var_00, var_01) {
   level.func_5A23[var_00].func_C9FD linkto(var_04);
   var_04 moveto(var_14, var_28);
   var_04 rotateto(var_15, var_28);
-  level thread scripts/sp/utility::func_C12D(var_00 + "door_peek_blend_complete", var_28 + 0.1);
-  level thread scripts/sp/utility::func_C12D("door_peek_blend_complete", var_28 + 0.1);
+  level thread scripts\sp\utility::func_C12D(var_00 + "door_peek_blend_complete", var_28 + 0.1);
+  level thread scripts\sp\utility::func_C12D("door_peek_blend_complete", var_28 + 0.1);
   var_04 scripts\engine\utility::delaycall(var_28 + 0.05, ::linkto, level.func_5A23[var_00].func_5978);
 
   if (var_27 > 0.0)
@@ -501,7 +501,7 @@ func_11F5(var_00, var_01, var_02) {
   var_16 = var_15 * 1.2 * var_03;
 
   if (var_08 == 1.0 && var_15 == 1.0) {
-  var_16 = var_16 * 1.01 * scripts/sp/utility::func_E753(var_09, 0, 1);
+  var_16 = var_16 * 1.01 * scripts\sp\utility::func_E753(var_09, 0, 1);
   var_09 = var_09 + 0.5;
   }
   else
@@ -520,7 +520,7 @@ func_11F5(var_00, var_01, var_02) {
   else
   level.func_5A23[var_00].func_5A21 = min(level.func_5A23[var_00].func_5A21 + var_16, 0.0 - var_17);
 
-  level.func_5A23[var_00].func_5A21 = scripts/sp/utility::func_E753(level.func_5A23[var_00].func_5A21, 1);
+  level.func_5A23[var_00].func_5A21 = scripts\sp\utility::func_E753(level.func_5A23[var_00].func_5A21, 1);
 
   if (isdefined(var_02))
   level.func_5A23[var_00].func_5A21 = min(level.func_5A23[var_00].func_5A21 + var_16, var_02);
@@ -584,8 +584,8 @@ func_1210(var_00, var_01) {
   level.func_5A23[var_00].func_5A03 scripts\engine\utility::delaycall(var_03 + 0.05, ::disconnectpaths);
   level.func_5A23[var_00].func_5978 playsound("doorpeek_" + func_1299(level.func_5A23[var_00].func_5A57) + "_swing_open");
   level.func_5A23[var_00].func_5978 scripts\engine\utility::delaycall(var_03, ::playsound, "doorpeek_" + func_1299(level.func_5A23[var_00].func_5A57) + "_hit_wall");
-  level thread scripts/sp/utility::func_C12D(var_00 + "door_peek_finished", var_03 + 0.05);
-  level thread scripts/sp/utility::func_C12D("door_peek_finished", var_03 + 0.05);
+  level thread scripts\sp\utility::func_C12D(var_00 + "door_peek_finished", var_03 + 0.05);
+  level thread scripts\sp\utility::func_C12D("door_peek_finished", var_03 + 0.05);
   level notify(var_00 + "door_peek_opened_fully");
 
   if (isdefined(level.func_5A1C)) {
@@ -636,7 +636,7 @@ func_11F7(var_00, var_01, var_02, var_03) {
   if (vectordot(var_14, var_06) < 0)
   continue;
 
-  var_15 = scripts/sp/math::func_ACE9(var_12, var_12 + var_14 * 64, self.ogorigin, var_06);
+  var_15 = scripts\sp\math::func_ACE9(var_12, var_12 + var_14 * 64, self.ogorigin, var_06);
   var_16 = vectornormalize(var_15 - self.ogorigin);
   var_15 = self.ogorigin + var_16 * distance(var_15, self.ogorigin) * 0.75 * var_11;
 
@@ -760,7 +760,7 @@ func_136C(var_00, var_01, var_02) {
   wait 0.3;
   scripts\engine\utility::flag_set("doorpeek_hand_on_door");
   level.func_5A23[var_01].func_C9FD show();
-  var_00 scripts/sp/anim::func_1F35(level.func_5A23[var_01].func_C9FD, var_02);
+  var_00 scripts\sp\anim::func_1F35(level.func_5A23[var_01].func_C9FD, var_02);
 }
 
 func_1415() {
@@ -1064,7 +1064,7 @@ func_11F9(var_00, var_01, var_02, var_03, var_04, var_05) {
   if (!var_03) {
   if (scripts\engine\utility::flag("doorpeek_hand_on_door")) {
   var_11 = level.player getplayerangles(1);
-  var_12 = scripts/sp/utility::func_10639("player_rig", level.player.origin, var_11);
+  var_12 = scripts\sp\utility::func_10639("player_rig", level.player.origin, var_11);
   var_13 = level.player _meth_84C6("currentViewModel");
 
   if (isdefined(var_13))
@@ -1075,9 +1075,9 @@ func_11F9(var_00, var_01, var_02, var_03, var_04, var_05) {
   var_12 _meth_81E2(level.player, "tag_origin", (0, 0, 0) + var_14, var_15, 0);
 
   if (!var_02)
-  var_12 thread scripts/sp/anim::func_1F35(var_12, "doorpeek_" + func_1297(var_06) + "_out");
+  var_12 thread scripts\sp\anim::func_1F35(var_12, "doorpeek_" + func_1297(var_06) + "_out");
   else
-  var_12 thread scripts/sp/anim::func_1F35(var_12, "doorpeek_" + func_1297(var_06) + "_r_out");
+  var_12 thread scripts\sp\anim::func_1F35(var_12, "doorpeek_" + func_1297(var_06) + "_r_out");
 
   var_12 scripts\engine\utility::delaycall(0.2, ::delete);
   }
@@ -1087,7 +1087,7 @@ func_11F9(var_00, var_01, var_02, var_03, var_04, var_05) {
   var_08 moveto(var_16, var_17, var_17 / 2.0, 0.0);
 
   if (var_1.func_EE52 == "airlock")
-  level.player scripts/sp/utility::func_2B76(0);
+  level.player scripts\sp\utility::func_2B76(0);
 
   level.player getrawbaseweaponname(0.4, 0.4);
   wait(var_17);
@@ -1095,8 +1095,8 @@ func_11F9(var_00, var_01, var_02, var_03, var_04, var_05) {
   level.player unlink();
 
   if (var_1.func_EE52 == "airlock") {
-  level.player scripts/sp/utility::func_2B76(0.25, 0.5);
-  level.player scripts\engine\utility::delaythread(0.5, scripts/sp/utility::func_2B76, 1, 0.7);
+  level.player scripts\sp\utility::func_2B76(0.25, 0.5);
+  level.player scripts\engine\utility::delaythread(0.5, scripts\sp\utility::func_2B76, 1, 0.7);
   }
 
   level.player getrawbaseweaponname(0.6, 0.6);
@@ -1502,34 +1502,34 @@ func_59D5(var_00, var_01) {
   var_03 = var_2.model;
 
   if (var_01) {
-  if (scripts/sp/utility::hastag(var_03, "tag_locked"))
+  if (scripts\sp\utility::hastag(var_03, "tag_locked"))
   var_02 hidepart("tag_locked", var_03);
 
-  if (scripts/sp/utility::hastag(var_03, "tag_unlocked"))
+  if (scripts\sp\utility::hastag(var_03, "tag_unlocked"))
   var_02 giveperk("tag_unlocked", var_03);
 
-  if (scripts/sp/utility::hastag(var_03, "door_locked"))
+  if (scripts\sp\utility::hastag(var_03, "door_locked"))
   var_02 hidepart("door_locked", var_03);
 
-  if (scripts/sp/utility::hastag(var_03, "door_unlocked"))
+  if (scripts\sp\utility::hastag(var_03, "door_unlocked"))
   var_02 giveperk("door_unlocked", var_03);
 
-  if (scripts/sp/utility::hastag(var_03, "door_inactive"))
+  if (scripts\sp\utility::hastag(var_03, "door_inactive"))
   var_02 hidepart("door_inactive", var_03);
   } else {
-  if (scripts/sp/utility::hastag(var_03, "tag_locked"))
+  if (scripts\sp\utility::hastag(var_03, "tag_locked"))
   var_02 giveperk("tag_locked", var_03);
 
-  if (scripts/sp/utility::hastag(var_03, "tag_unlocked"))
+  if (scripts\sp\utility::hastag(var_03, "tag_unlocked"))
   var_02 hidepart("tag_unlocked", var_03);
 
-  if (scripts/sp/utility::hastag(var_03, "door_locked"))
+  if (scripts\sp\utility::hastag(var_03, "door_locked"))
   var_02 giveperk("door_locked", var_03);
 
-  if (scripts/sp/utility::hastag(var_03, "door_unlocked"))
+  if (scripts\sp\utility::hastag(var_03, "door_unlocked"))
   var_02 hidepart("door_unlocked", var_03);
 
-  if (scripts/sp/utility::hastag(var_03, "door_inactive"))
+  if (scripts\sp\utility::hastag(var_03, "door_inactive"))
   var_02 hidepart("door_inactive", var_03);
   }
 }
@@ -1549,20 +1549,20 @@ func_1159(var_00, var_01) {
 
   if (isdefined(level.func_5A23[var_01].func_C9F9)) {
   if (level.console || level.player global_fx())
-  scripts/sp/utility::func_56BA("peek_only_hint");
+  scripts\sp\utility::func_56BA("peek_only_hint");
   else
-  scripts/sp/utility::func_56BA("peek_only_hint_pc");
+  scripts\sp\utility::func_56BA("peek_only_hint_pc");
   }
   else if (!isdefined(var_00) || var_00 == 0) {
   if (level.console || level.player global_fx())
-  scripts/sp/utility::func_56BA("peek_hint");
+  scripts\sp\utility::func_56BA("peek_hint");
   else
-  scripts/sp/utility::func_56BA("peek_hint_pc");
+  scripts\sp\utility::func_56BA("peek_hint_pc");
   }
   else if (level.console || level.player global_fx())
-  scripts/sp/utility::func_56BA("peek_hint_shove");
+  scripts\sp\utility::func_56BA("peek_hint_shove");
   else
-  scripts/sp/utility::func_56BA("peek_hint_shove_pc");
+  scripts\sp\utility::func_56BA("peek_hint_shove_pc");
 }
 
 func_1414(var_00) {
@@ -1614,26 +1614,26 @@ func_11F1(var_00) {
 }
 
 func_1201() {
-  level.player scripts/sp/utility::func_1C49(0);
+  level.player scripts\sp\utility::func_1C49(0);
   level.player scripts\engine\utility::allow_crouch(0);
   level.player scripts\engine\utility::allow_prone(0);
   level.player scripts\engine\utility::allow_melee(0);
   level.player scripts\engine\utility::allow_jump(0);
   level.player scripts\engine\utility::allow_usability(0);
   level.player disableweaponpickup();
-  level.player scripts/sp/utility::func_1C72(0);
+  level.player scripts\sp\utility::func_1C72(0);
   level.player scripts\engine\utility::allow_offhand_secondary_weapons(0);
 }
 
 func_1200() {
-  level.player scripts/sp/utility::func_1C49(1);
+  level.player scripts\sp\utility::func_1C49(1);
   level.player scripts\engine\utility::allow_crouch(1);
   level.player scripts\engine\utility::allow_prone(1);
   level.player scripts\engine\utility::allow_melee(1);
   level.player scripts\engine\utility::allow_jump(1);
   level.player scripts\engine\utility::allow_usability(1);
   level.player _meth_80DB();
-  level.player scripts/sp/utility::func_1C72(1);
+  level.player scripts\sp\utility::func_1C72(1);
   level.player scripts\engine\utility::allow_offhand_secondary_weapons(1);
 }
 
@@ -1688,7 +1688,7 @@ func_11EC(var_00) {
   var_13 = level.func_5A23[var_00].func_5A24 + (0, 0 - var_11.func_47A3, 0);
   level notify(var_00 + "door_kick_start");
   func_11EF();
-  level.func_5A23[var_00].func_59FF thread scripts/sp/anim::func_1F35(level.func_5A23[var_00].func_C9FD, "doorpeek_airlock_bash");
+  level.func_5A23[var_00].func_59FF thread scripts\sp\anim::func_1F35(level.func_5A23[var_00].func_C9FD, "doorpeek_airlock_bash");
   var_14 = 0.2;
   var_15 = 2.4;
   var_16 = 1.1;
@@ -1705,7 +1705,7 @@ func_11EC(var_00) {
   var_02 thread scripts\engine\utility::play_sound_in_space("doorpeek_" + func_1299(var_04) + "_kick", var_2.origin);
   thread func_1351(var_00);
   wait(var_16);
-  level thread scripts/sp/utility::func_C12D(var_00 + "door_kick_multi_kick_ready", 0.5);
+  level thread scripts\sp\utility::func_C12D(var_00 + "door_kick_multi_kick_ready", 0.5);
   func_11F9(var_00, var_02, 0, 1, 1);
   func_1201();
   level notify(var_00 + "door_kick_open");
@@ -1747,7 +1747,7 @@ func_11ED(var_00) {
   var_13 = level.func_5A23[var_00].func_5A24 + (0, 0 - var_11.func_47A3, 0);
   level notify(var_00 + "door_kick_start");
   func_11EF();
-  level.func_5A23[var_00].func_59FF thread scripts/sp/anim::func_1F35(level.func_5A23[var_00].func_C9FD, "doorpeek_airlock_bash");
+  level.func_5A23[var_00].func_59FF thread scripts\sp\anim::func_1F35(level.func_5A23[var_00].func_C9FD, "doorpeek_airlock_bash");
   level.player playgestureviewmodel("ges_doorpeek_airlock_bash", undefined, 1);
   var_14 = 0.2;
   var_15 = 1.75;
@@ -1775,7 +1775,7 @@ func_11ED(var_00) {
   level.func_5A23[var_00].func_C9D4 = 0;
   level notify(var_00 + "door_kick_finished");
   level notify("door_kick_finished");
-  level thread scripts/sp/utility::func_C12D(var_00 + "door_kick_multi_kick_ready", 0.5);
+  level thread scripts\sp\utility::func_C12D(var_00 + "door_kick_multi_kick_ready", 0.5);
 }
 
 func_1351(var_00) {
@@ -1879,8 +1879,8 @@ func_11F0(var_00, var_01, var_02) {
   var_05 scripts\engine\utility::delaycall(var_09, ::connectpaths);
   var_05 scripts\engine\utility::delaycall(var_09 + var_10 + 0.05, ::disconnectpaths);
   var_04 scripts\engine\utility::delaythread(var_09, scripts\engine\utility::play_sound_in_space, "doorpeek_" + func_1299(var_06) + "_kick", var_4.origin);
-  level thread scripts/sp/utility::func_C12D(var_00 + "door_kick_open", var_09);
-  level thread scripts/sp/utility::func_C12D("door_kick_open", var_09);
+  level thread scripts\sp\utility::func_C12D(var_00 + "door_kick_open", var_09);
+  level thread scripts\sp\utility::func_C12D("door_kick_open", var_09);
   var_21 = "doorpeek_kick";
   var_22 = "ges_doorpeek_kick";
   var_23 = func_12AD(var_00, var_01);
@@ -1891,13 +1891,13 @@ func_11F0(var_00, var_01, var_02) {
   func_11EF();
   scripts\engine\utility::delaythread(var_14, ::func_11EE);
   var_24 = level.player getplayerangles(1);
-  level.func_5A23[var_4.targetname].func_A5AE = scripts/sp/utility::func_10639("player_rig", level.player.origin, var_24);
+  level.func_5A23[var_4.targetname].func_A5AE = scripts\sp\utility::func_10639("player_rig", level.player.origin, var_24);
   var_25 = level.player _meth_84C6("currentViewModel");
 
   if (isdefined(var_25))
   level.func_5A23[var_4.targetname].func_A5AE setmodel(var_25);
 
-  var_07 thread scripts/sp/anim::func_1EC3(level.func_5A23[var_4.targetname].func_A5AE, var_21);
+  var_07 thread scripts\sp\anim::func_1EC3(level.func_5A23[var_4.targetname].func_A5AE, var_21);
   var_26 = level.func_5A23[var_4.targetname].func_A5AE gettagorigin("tag_player");
   var_27 = var_7.origin - var_26;
   var_28 = level.player.origin - var_26;
@@ -1912,8 +1912,8 @@ func_11F0(var_00, var_01, var_02) {
   var_7.origin = level.player.origin + var_32 * var_33;
   var_7.angles = var_7.angles + var_29;
   level.player playgestureviewmodel(var_22, undefined, 1, 0.2);
-  var_07 thread scripts/sp/anim::func_1F35(level.func_5A23[var_4.targetname].func_A5AE, var_21);
-  var_34 = getanimlength(level.func_5A23[var_4.targetname].func_A5AE scripts/sp/utility::func_7DC1(var_21));
+  var_07 thread scripts\sp\anim::func_1F35(level.func_5A23[var_4.targetname].func_A5AE, var_21);
+  var_34 = getanimlength(level.func_5A23[var_4.targetname].func_A5AE scripts\sp\utility::func_7DC1(var_21));
   var_35 = 0.4;
   var_36 = 1.1;
   var_37 = 0.3;
@@ -1931,7 +1931,7 @@ func_11F0(var_00, var_01, var_02) {
   var_07 moveto(var_30, var_35);
   var_07 rotateto(var_31, var_35);
   wait(var_35);
-  level.player scripts/sp/utility::func_2B76(0.2, 0.05);
+  level.player scripts\sp\utility::func_2B76(0.2, 0.05);
 
   if (isdefined(var_02)) {
   var_41 = 0.7;
@@ -1944,7 +1944,7 @@ func_11F0(var_00, var_01, var_02) {
   if (level.func_5A1C > 0)
   wait(var_36 * level.func_5A1C);
 
-  var_07 scripts/sp/utility::anim_stopanimscripted();
+  var_07 scripts\sp\utility::anim_stopanimscripted();
   }
   else
   wait(var_36 - var_35);
@@ -1958,7 +1958,7 @@ func_11F0(var_00, var_01, var_02) {
   var_07 delete();
   level.func_5A23[var_4.targetname].func_A5AE delete();
   level.func_5A23[var_4.targetname].func_59FF delete();
-  level.player scripts/sp/utility::func_2B76(1.0, var_40);
+  level.player scripts\sp\utility::func_2B76(1.0, var_40);
   func_1200();
   level.player.dontmelee = undefined;
   level notify(var_00 + "door_kick_newdoor_think");
@@ -2303,32 +2303,32 @@ func_1206() {
   level.func_EC85["player_rig"]["doorpeek_kick"] = %vm_doorpeek_kick;
   level.func_EC85["player_rig"]["doorpeek_airlock_kick"] = %wm_doorpeek_airlock_kick;
   level.func_EC85["player_rig"]["doorpeek_civlever_in"] = %wm_doorpeek_civlever_in;
-  scripts/sp/anim::func_17F6("player_rig", "doorpeek_handle", ::func_5A1B, "doorpeek_civlever_in");
+  scripts\sp\anim::func_17F6("player_rig", "doorpeek_handle", ::func_5A1B, "doorpeek_civlever_in");
   level.func_EC85["player_rig"]["doorpeek_civlever_loop"][0] = %wm_doorpeek_civlever_loop;
   level.func_EC85["player_rig"]["doorpeek_civlever_out"] = %wm_doorpeek_civlever_out;
   level.func_EC85["player_rig"]["doorpeek_civlever_backon"] = %wm_doorpeek_civlever_backon;
   level.func_EC89["player_rig"]["doorpeek_civlever_backon"] = 0.0;
   level.func_EC85["player_rig"]["doorpeek_civlever_r_in"] = %wm_doorpeek_civlever_r_in;
-  scripts/sp/anim::func_17F6("player_rig", "doorpeek_handle", ::func_5A1B, "doorpeek_civlever_r_in");
+  scripts\sp\anim::func_17F6("player_rig", "doorpeek_handle", ::func_5A1B, "doorpeek_civlever_r_in");
   level.func_EC85["player_rig"]["doorpeek_civlever_r_loop"][0] = %wm_doorpeek_civlever_r_loop;
   level.func_EC85["player_rig"]["doorpeek_civlever_r_out"] = %wm_doorpeek_civlever_r_out;
   level.func_EC85["player_rig"]["doorpeek_civlever_r_backon"] = %wm_doorpeek_civlever_r_backon;
   level.func_EC89["player_rig"]["doorpeek_civlever_r_backon"] = 0.0;
   level.func_EC85["player_rig"]["doorpeek_bulkhead_in"] = %wm_doorpeek_bulkhead_in;
-  scripts/sp/anim::func_17F6("player_rig", "doorpeek_handle", ::func_5A1B, "doorpeek_bulkhead_in");
+  scripts\sp\anim::func_17F6("player_rig", "doorpeek_handle", ::func_5A1B, "doorpeek_bulkhead_in");
   level.func_EC85["player_rig"]["doorpeek_bulkhead_loop"][0] = %wm_doorpeek_bulkhead_loop;
   level.func_EC85["player_rig"]["doorpeek_bulkhead_out"] = %wm_doorpeek_bulkhead_out_b;
   level.func_EC85["player_rig"]["doorpeek_bulkhead_backon"] = %wm_doorpeek_bulkhead_backon;
   level.func_EC89["player_rig"]["doorpeek_bulkhead_backon"] = 0.0;
   level.func_EC85["player_rig"]["doorpeek_airlock_in"] = %wm_doorpeek_airlock_in;
-  scripts/sp/anim::func_17F6("player_rig", "doorpeek_handle", ::func_5A1B, "doorpeek_airlock_in");
+  scripts\sp\anim::func_17F6("player_rig", "doorpeek_handle", ::func_5A1B, "doorpeek_airlock_in");
   level.func_EC85["player_rig"]["doorpeek_airlock_loop"][0] = %wm_doorpeek_airlock_loop;
   level.func_EC85["player_rig"]["doorpeek_airlock_out"] = %wm_doorpeek_airlock_out;
   level.func_EC85["player_rig"]["doorpeek_airlock_bash"] = %wm_doorpeek_airlock_bash;
   level.func_EC85["player_rig"]["doorpeek_airlock_backon"] = %wm_doorpeek_airlock_backon;
   level.func_EC89["player_rig"]["doorpeek_airlock_backon"] = 0.0;
   level.func_EC85["player_rig"]["doorpeek_armory_in"] = %wm_doorpeek_armory_in;
-  scripts/sp/anim::func_17F6("player_rig", "doorpeek_handle", ::func_5A1B, "doorpeek_armory_in");
+  scripts\sp\anim::func_17F6("player_rig", "doorpeek_handle", ::func_5A1B, "doorpeek_armory_in");
   level.func_EC85["player_rig"]["doorpeek_armory_loop"][0] = %wm_doorpeek_armory_loop;
   level.func_EC85["player_rig"]["doorpeek_armory_out"] = %wm_doorpeek_armory_out;
   level.func_EC85["player_rig"]["doorpeek_armory_backon"] = %wm_doorpeek_armory_backon;

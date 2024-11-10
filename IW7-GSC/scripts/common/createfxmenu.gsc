@@ -1,13 +1,13 @@
-/***************************************************
+/*******************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\common\createfxmenu.gsc
-***************************************************/
+ * Script: scripts\common\createfxmenu.gsc
+*******************************************/
 
 init_menu() {
 	level._createfx.options = [];
 	addoption("string","fxid","FX id","nil","fx");
-	addoption("float","delay","Repeat rate/start delay",0.5,"fx");
+	addoption("float","delay","Repeat rate\start delay",0.5,"fx");
 	addoption("string","flag","Flag","nil","exploder");
 	if(!level.mp_createfx) {
 		addoption("string","firefx","2nd FX id","nil","exploder");
@@ -286,7 +286,7 @@ menu_fx_creation() {
 
 finish_creating_entity(param_00) {
 	param_00.v["angles"] = vectortoangles(param_00.v["origin"] + (0,0,100) - param_00.v["origin"]);
-	if(isdefined(level._effect) && isdefined(level._effect[param_00.v["fxid"]]) && function_02A2(level._effect[param_00.v["fxid"]])) {
+	if(isdefined(level._effect) && isdefined(level._effect[param_00.v["fxid"]]) && isvfxfile(level._effect[param_00.v["fxid"]])) {
 		param_00.v["angles"] = (0,0,0);
 	}
 
@@ -353,7 +353,7 @@ prepare_option_for_change(param_00,param_01) {
 	}
 	else
 	{
-		scripts\common\createfx::createfx_centerprint("To change " + param_00["description"] + " on selected entities, type /fx newvalue");
+		scripts\common\createfx::createfx_centerprint("To change " + param_00["description"] + " on selected entities, type \fx newvalue");
 	}
 
 	set_option_index(param_00["name"]);

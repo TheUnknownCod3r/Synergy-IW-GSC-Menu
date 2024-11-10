@@ -1,8 +1,8 @@
-/*************************************************************
+/*****************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\zombies\zombies_rave_meter.gsc
-*************************************************************/
+ * Script: scripts\cp\zombies\zombies_rave_meter.gsc
+*****************************************************/
 
 init_rave_meter(param_00) {
 	param_00.rave_meter_adustment = 0;

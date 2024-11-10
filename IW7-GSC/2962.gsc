@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2962.gsc
+ * Script: 2962.gsc
 ***************************************/
 
 func_11166(var_00, var_01) {
@@ -65,19 +65,19 @@ func_9938() {}
 func_BF01(var_00) {
   self notify("new_color_being_set");
   self.func_BF06 = 1;
-  scripts/sp/colors::func_AB3A();
+  scripts\sp\colors::func_AB3A();
   self endon("new_color_being_set");
   self endon("death");
   waittillframeend;
   waittillframeend;
 
   if (isdefined(self.func_EDAD)) {
-  self.func_4BDF = level.func_4BE0[scripts/sp/colors::func_7CE4()][self.func_EDAD];
+  self.func_4BDF = level.func_4BE0[scripts\sp\colors::func_7CE4()][self.func_EDAD];
 
   if (isdefined(self.func_5955))
   self.func_5955 = undefined;
   else
-  thread scripts/sp/colors::_meth_8467();
+  thread scripts\sp\colors::_meth_8467();
   }
 
   self.func_BF06 = undefined;
@@ -148,7 +148,7 @@ func_12DC(var_00, var_01) {
 func_12DD(var_00, var_01) {
   var_02 = var_01 + var_00;
   var_03 = level.func_12750[var_02];
-  var_04 = scripts/sp/utility::func_7B92();
+  var_04 = scripts\sp\utility::func_7B92();
   var_04 _meth_8496(var_03);
 }
 
@@ -180,7 +180,7 @@ func_9021(var_00, var_01, var_02, var_03, var_04, var_05, var_06) {
   if (!isalive(self))
   return;
 
-  scripts/sp/utility::func_65E8("global_hint_in_use");
+  scripts\sp\utility::func_65E8("global_hint_in_use");
 
   if (isdefined(self.func_4B7A)) {
   if (self.func_4B7A == var_00)
@@ -188,13 +188,13 @@ func_9021(var_00, var_01, var_02, var_03, var_04, var_05, var_06) {
   else
   {
   self.func_4B7A = var_00;
-  scripts/sp/utility::func_65E1("global_hint_in_use");
+  scripts\sp\utility::func_65E1("global_hint_in_use");
   wait 0.05;
   }
   }
 
   self.func_4B7A = var_00;
-  scripts/sp/utility::func_65E1("global_hint_in_use");
+  scripts\sp\utility::func_65E1("global_hint_in_use");
   level.func_4B80 = 1;
   level.func_8FE4 = var_01;
   level endon("friendlyfire_mission_fail");
@@ -213,7 +213,7 @@ func_9021(var_00, var_01, var_02, var_03, var_04, var_05, var_06) {
   if (!scripts\engine\utility::is_true(var_8.func_6AB8))
   self _meth_8497(1);
 
-  scripts/sp/utility::func_135AF(var_07, var_06);
+  scripts\sp\utility::func_135AF(var_07, var_06);
   var_08 notify("removing_hint");
   self.func_4B7A = undefined;
 
@@ -221,7 +221,7 @@ func_9021(var_00, var_01, var_02, var_03, var_04, var_05, var_06) {
   self _meth_8497();
 
   level.func_4B80 = 0;
-  scripts/sp/utility::func_65DD("global_hint_in_use");
+  scripts\sp\utility::func_65DD("global_hint_in_use");
 }
 
 func_52AB(var_00) {
@@ -501,15 +501,15 @@ func_5F8E(var_00, var_01, var_02, var_03, var_04) {
   self endon("start_dynamic_run_speed");
   level endon("_stealth_spotted");
 
-  if (scripts/sp/utility::func_65DF("_stealth_custom_anim"))
-  scripts/sp/utility::func_65E8("_stealth_custom_anim");
+  if (scripts\sp\utility::func_65DF("_stealth_custom_anim"))
+  scripts\sp\utility::func_65E8("_stealth_custom_anim");
 
-  if (!scripts/sp/utility::func_65DF("dynamic_run_speed_stopped")) {
-  scripts/sp/utility::func_65E0("dynamic_run_speed_stopped");
-  scripts/sp/utility::func_65E0("dynamic_run_speed_stopping");
+  if (!scripts\sp\utility::func_65DF("dynamic_run_speed_stopped")) {
+  scripts\sp\utility::func_65E0("dynamic_run_speed_stopped");
+  scripts\sp\utility::func_65E0("dynamic_run_speed_stopping");
   } else {
-  scripts/sp/utility::func_65DD("dynamic_run_speed_stopping");
-  scripts/sp/utility::func_65DD("dynamic_run_speed_stopped");
+  scripts\sp\utility::func_65DD("dynamic_run_speed_stopping");
+  scripts\sp\utility::func_65DD("dynamic_run_speed_stopped");
   }
 
   self.func_E81D = "";
@@ -586,16 +586,16 @@ func_10FE6() {
 
   if (isdefined(level.func_EC85["generic"]["DRS_run"])) {
   if (isarray(level.func_EC85["generic"]["DRS_run"]))
-  scripts/sp/utility::func_F3CC("DRS_run");
+  scripts\sp\utility::func_F3CC("DRS_run");
   else
-  scripts/sp/utility::func_F3CB("DRS_run");
+  scripts\sp\utility::func_F3CB("DRS_run");
   }
   else
-  scripts/sp/utility::func_417A();
+  scripts\sp\utility::func_417A();
 
   self notify("stop_loop");
-  scripts/sp/utility::func_65DD("dynamic_run_speed_stopping");
-  scripts/sp/utility::func_65DD("dynamic_run_speed_stopped");
+  scripts\sp\utility::func_65DD("dynamic_run_speed_stopping");
+  scripts\sp\utility::func_65DD("dynamic_run_speed_stopped");
 }
 
 func_10FE7() {
@@ -617,13 +617,13 @@ func_5F8C(var_00) {
   self.moveplaybackrate = 1.15;
 
   if (isarray(level.func_EC85["generic"]["DRS_sprint"]))
-  scripts/sp/utility::func_F3CC("DRS_sprint");
+  scripts\sp\utility::func_F3CC("DRS_sprint");
   else
-  scripts/sp/utility::func_F3CB("DRS_sprint");
+  scripts\sp\utility::func_F3CB("DRS_sprint");
 
   self notify("stop_loop");
-  scripts/sp/utility::anim_stopanimscripted();
-  scripts/sp/utility::func_65DD("dynamic_run_speed_stopped");
+  scripts\sp\utility::anim_stopanimscripted();
+  scripts\sp\utility::func_65DD("dynamic_run_speed_stopped");
   break;
   case "run":
   if (!self.func_5953)
@@ -631,16 +631,16 @@ func_5F8C(var_00) {
 
   if (isdefined(level.func_EC85["generic"]["DRS_run"])) {
   if (isarray(level.func_EC85["generic"]["DRS_run"]))
-  scripts/sp/utility::func_F3CC("DRS_run");
+  scripts\sp\utility::func_F3CC("DRS_run");
   else
-  scripts/sp/utility::func_F3CB("DRS_run");
+  scripts\sp\utility::func_F3CB("DRS_run");
   }
   else
-  scripts/sp/utility::func_417A();
+  scripts\sp\utility::func_417A();
 
   self notify("stop_loop");
-  scripts/sp/utility::anim_stopanimscripted();
-  scripts/sp/utility::func_65DD("dynamic_run_speed_stopped");
+  scripts\sp\utility::anim_stopanimscripted();
+  scripts\sp\utility::func_65DD("dynamic_run_speed_stopped");
   break;
   case "stop":
   thread func_5F8F();
@@ -651,16 +651,16 @@ func_5F8C(var_00) {
 
   if (isdefined(level.func_EC85["generic"]["DRS_combat_jog"])) {
   if (isarray(level.func_EC85["generic"]["DRS_combat_jog"]))
-  scripts/sp/utility::func_F3CC("DRS_combat_jog");
+  scripts\sp\utility::func_F3CC("DRS_combat_jog");
   else
-  scripts/sp/utility::func_F3CB("DRS_combat_jog");
+  scripts\sp\utility::func_F3CB("DRS_combat_jog");
   }
   else
-  scripts/sp/utility::func_417A();
+  scripts\sp\utility::func_417A();
 
   self notify("stop_loop");
-  scripts/sp/utility::anim_stopanimscripted();
-  scripts/sp/utility::func_65DD("dynamic_run_speed_stopped");
+  scripts\sp\utility::anim_stopanimscripted();
+  scripts\sp\utility::func_65DD("dynamic_run_speed_stopped");
   break;
   case "crouch":
   break;
@@ -670,40 +670,40 @@ func_5F8C(var_00) {
 func_5F8F() {
   self endon("death");
 
-  if (scripts/sp/utility::func_65DB("dynamic_run_speed_stopped"))
+  if (scripts\sp\utility::func_65DB("dynamic_run_speed_stopped"))
   return;
 
-  if (scripts/sp/utility::func_65DB("dynamic_run_speed_stopping"))
+  if (scripts\sp\utility::func_65DB("dynamic_run_speed_stopping"))
   return;
 
   self endon("stop_dynamic_run_speed");
-  scripts/sp/utility::func_65E1("dynamic_run_speed_stopping");
-  scripts/sp/utility::func_65E1("dynamic_run_speed_stopped");
+  scripts\sp\utility::func_65E1("dynamic_run_speed_stopping");
+  scripts\sp\utility::func_65E1("dynamic_run_speed_stopped");
   self endon("dynamic_run_speed_stopped");
   var_00 = "DRS_run_2_stop";
-  scripts/sp/anim::func_1EC8(self, "gravity", var_00);
-  scripts/sp/utility::func_65DD("dynamic_run_speed_stopping");
+  scripts\sp\anim::func_1EC8(self, "gravity", var_00);
+  scripts\sp\utility::func_65DD("dynamic_run_speed_stopping");
 
-  while (scripts/sp/utility::func_65DB("dynamic_run_speed_stopped")) {
+  while (scripts\sp\utility::func_65DB("dynamic_run_speed_stopped")) {
   var_01 = "DRS_stop_idle";
-  thread scripts/sp/anim::func_1ECC(self, var_01);
+  thread scripts\sp\anim::func_1ECC(self, var_01);
 
   if (isdefined(level.func_EC85["generic"]["signal_go"]))
   func_8A0B("go");
 
   wait(randomfloatrange(12, 20));
 
-  if (scripts/sp/utility::func_65DF("_stealth_stance_handler"))
-  scripts/sp/utility::func_65E8("_stealth_stance_handler");
+  if (scripts\sp\utility::func_65DF("_stealth_stance_handler"))
+  scripts\sp\utility::func_65E8("_stealth_stance_handler");
 
   self notify("stop_loop");
 
-  if (!scripts/sp/utility::func_65DB("dynamic_run_speed_stopped"))
+  if (!scripts\sp\utility::func_65DB("dynamic_run_speed_stopped"))
   return;
 
   if (isdefined(level.func_5F8D)) {
   var_02 = scripts\engine\utility::random(level.func_5F8D);
-  level thread scripts/sp/utility::func_DBF3(var_02);
+  level thread scripts\sp\utility::func_DBF3(var_02);
   }
 
   if (isdefined(level.func_EC85["generic"]["signal_go"]))
@@ -733,9 +733,9 @@ func_8A0B(var_00, var_01, var_02, var_03) {
   var_05 = var_05 + "_cqb";
 
   if (var_04)
-  self give_capture_credit(scripts/sp/utility::func_7ECF(var_05), 1, 0, 1.1);
+  self give_capture_credit(scripts\sp\utility::func_7ECF(var_05), 1, 0, 1.1);
   else
-  scripts/sp/anim::func_1EC7(self, var_05);
+  scripts\sp\anim::func_1EC7(self, var_05);
 }
 
 func_764E() {
@@ -810,7 +810,7 @@ func_267B(var_00) {
 func_267F() {
   level notify("autosave_tactical_proc");
   level endon("autosave_tactical_proc");
-  level thread scripts/sp/utility::func_C12D("kill_save", 5);
+  level thread scripts\sp\utility::func_C12D("kill_save", 5);
   level endon("kill_save");
   level endon("autosave_tactical_player_nade");
 
@@ -829,18 +829,18 @@ func_267F() {
   }
 
   waittillframeend;
-  scripts/sp/utility::func_2669();
+  scripts\sp\utility::func_2669();
 }
 
 func_BDE6(var_00, var_01, var_02, var_03) {
-  scripts/sp/utility::func_BDEC(var_01);
+  scripts\sp\utility::func_BDEC(var_01);
   level endon("stop_music");
   wait(var_01);
-  thread scripts/sp/utility::func_BDE5(var_00, undefined, var_02, var_03);
+  thread scripts\sp\utility::func_BDE5(var_00, undefined, var_02, var_03);
 }
 
 func_BDE2(var_00, var_01, var_02, var_03, var_04, var_05) {
-  scripts/sp/utility::func_BDEC(var_02);
+  scripts\sp\utility::func_BDEC(var_02);
   level endon("stop_music");
   wait(var_02);
   thread func_BDE1(var_00, var_01, undefined, var_03, var_04, var_05);
@@ -852,16 +852,16 @@ func_BDE1(var_00, var_01, var_02, var_03, var_04, var_05) {
   return;
   }
 
-  scripts/sp/utility::func_BDEC();
+  scripts\sp\utility::func_BDEC();
   level endon("stop_music");
-  scripts/sp/utility::func_BDF2(var_00, var_03, var_04);
+  scripts\sp\utility::func_BDF2(var_00, var_03, var_04);
 
   if (isdefined(var_05) && var_05 == 1 && scripts\engine\utility::flag_exist("_stealth_spotted")) {
   level endon("_stealth_spotted");
   thread func_BDE4(var_00, var_01, var_02);
   }
 
-  var_06 = scripts/sp/utility::func_BDF1(var_00);
+  var_06 = scripts\sp\utility::func_BDF1(var_00);
 
   if (!isdefined(var_01))
   var_01 = 1;
@@ -870,7 +870,7 @@ func_BDE1(var_00, var_01, var_02, var_03, var_04, var_05) {
   var_06 = var_06 + var_01;
 
   wait(var_06);
-  scripts/sp/utility::func_BDDF(var_00, var_01, var_02, var_03, var_04);
+  scripts\sp\utility::func_BDDF(var_00, var_01, var_02, var_03, var_04);
 }
 
 func_BDE4(var_00, var_01, var_02) {
@@ -883,7 +883,7 @@ func_BDE4(var_00, var_01, var_02) {
   wait 1;
   }
 
-  thread scripts/sp/utility::func_BDDF(var_00, var_01, var_02);
+  thread scripts\sp\utility::func_BDDF(var_00, var_01, var_02);
 }
 
 func_5AAD(var_00, var_01, var_02) {
@@ -991,14 +991,14 @@ func_78D1() {
   if (isdefined(self.func_ED34))
   var_00 = "axis";
 
-  var_00 = scripts/sp/colors::func_7CE4(var_00);
+  var_00 = scripts\sp\colors::func_7CE4(var_00);
   var_01 = [];
 
   if (var_00 == "allies") {
-  var_02 = scripts/sp/colors::func_78D9(self.func_ED33, "allies");
+  var_02 = scripts\sp\colors::func_78D9(self.func_ED33, "allies");
   var_01 = var_2["colorCodes"];
   } else {
-  var_02 = scripts/sp/colors::func_78D9(self.func_ED34, "axis");
+  var_02 = scripts\sp\colors::func_78D9(self.func_ED34, "axis");
   var_01 = var_2["colorCodes"];
   }
 
@@ -1199,11 +1199,11 @@ func_28D9(var_00) {
   wait 1.5;
 
   if (isdefined(var_00)) {
-  scripts/sp/utility::func_F2DC(var_00, 1);
+  scripts\sp\utility::func_F2DC(var_00, 1);
   var_01 = _getaiarray(var_00);
   } else {
   foreach (var_00 in anim.func_115E7)
-  scripts/sp/utility::func_F2DC(var_00, 1);
+  scripts\sp\utility::func_F2DC(var_00, 1);
 
   var_01 = _getaiarray();
   }
@@ -1212,7 +1212,7 @@ func_28D9(var_00) {
   var_01 = scripts\engine\utility::array_combine(var_01, level.func_A056.func_1630);
 
   for (var_04 = 0; var_04 < var_1.size; var_4++)
-  var_1[var_04] scripts/sp/utility::func_F2DA(1);
+  var_1[var_04] scripts\sp\utility::func_F2DA(1);
 }
 
 func_517B(var_00, var_01) {
@@ -1228,7 +1228,7 @@ func_517B(var_00, var_01) {
 }
 
 func_F3A7(var_00, var_01) {
-  thread scripts/sp/utility::func_F3A5(var_00, var_01, scripts/sp/utility::empty_func, "set_flag_on_spawned");
+  thread scripts\sp\utility::func_F3A5(var_00, var_01, scripts\sp\utility::empty_func, "set_flag_on_spawned");
 }
 
 endondeath() {
@@ -1338,7 +1338,7 @@ dyndof_getplayerorigin() {
   return var_00 gettagorigin("tag_camera");
   }
   else if (isdefined(var_0.model)) {
-  if (scripts/sp/utility::hastag(var_0.model, "tag_camera"))
+  if (scripts\sp\utility::hastag(var_0.model, "tag_camera"))
   var_0.dyndof_hastag = 1;
   else
   var_0.dyndof_hastag = 0;

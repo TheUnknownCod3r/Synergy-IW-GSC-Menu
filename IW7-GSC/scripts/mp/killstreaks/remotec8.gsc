@@ -1,15 +1,15 @@
-/*******************************************************
+/***********************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\killstreaks\remotec8.gsc
-*******************************************************/
+ * Script: scripts\mp\killstreaks\remotec8.gsc
+***********************************************/
 
 init() {
-	level._effect["rc8_malfunction"] = loadfx("vfx/iw7/core/mp/killstreaks/vfx_rc8_glitch_out.vfx");
-	level._effect["rc8_explode"] = loadfx("vfx/iw7/core/mp/killstreaks/vfx_rc8_dest_exp.vfx");
+	level._effect["rc8_malfunction"] = loadfx("vfx\iw7\core\mp\killstreaks\vfx_rc8_glitch_out.vfx");
+	level._effect["rc8_explode"] = loadfx("vfx\iw7\core\mp\killstreaks\vfx_rc8_dest_exp.vfx");
 	scripts\mp\killstreaks\_killstreaks::registerkillstreak("remote_c8",::func_128F7);
 	var_00 = ["passive_increased_speed","passive_decreased_duration","passive_energy_machgun","passive_boosters","passive_speed_duration"];
-	scripts\mp\_killstreak_loot::func_DF07("remote_c8",var_00);
+	scripts\mp\killstreak_loot::func_DF07("remote_c8",var_00);
 }
 
 setup_callbacks() {
@@ -60,22 +60,22 @@ func_DCFB() {
 	var_02 = undefined;
 	for(;;) {
 		if(!self isonground()) {
-			if(scripts\mp\_utility::istrue(self.booston)) {
-				while(scripts\mp\_utility::istrue(self.booston)) {
+			if(scripts\mp\utility::istrue(self.booston)) {
+				while(scripts\mp\utility::istrue(self.booston)) {
 					scripts\engine\utility::waitframe();
 				}
 			}
 
 			var_03 = self.origin[2];
-			if(scripts\mp\_utility::istrue(var_01)) {
+			if(scripts\mp\utility::istrue(var_01)) {
 				var_01 = undefined;
 				var_02 = "heavy_damage";
 				thread startmidairdamage(var_02);
 			}
 
 			while(!self isonground()) {
-				if(scripts\mp\_utility::istrue(self.booston)) {
-					while(scripts\mp\_utility::istrue(self.booston)) {
+				if(scripts\mp\utility::istrue(self.booston)) {
+					while(scripts\mp\utility::istrue(self.booston)) {
 						scripts\engine\utility::waitframe();
 					}
 
@@ -208,7 +208,7 @@ rc8_updateteamuavstatus(param_00,param_01) {
 		var_08 = level.alliesactiveuavs;
 	}
 
-	if(scripts\mp\_utility::_hasperk("specialty_empimmune") && var_07 <= var_05) {
+	if(scripts\mp\utility::_hasperk("specialty_empimmune") && var_07 <= var_05) {
 		var_07 = int(clamp(var_08 + var_05,var_05,var_03));
 	}
 
@@ -257,7 +257,7 @@ rc8_updateplayersuavstatus(param_00) {
 		}
 
 		var_08 = level.var_164F[var_07.guid];
-		if(var_08 > 0 && !self.triggerportableradarping scripts\mp\_utility::_hasperk("specialty_empimmune")) {
+		if(var_08 > 0 && !self.triggerportableradarping scripts\mp\utility::_hasperk("specialty_empimmune")) {
 			var_05 = var_01;
 			break;
 		}
@@ -364,10 +364,10 @@ func_DCF7() {
 	for(;;) {
 		self waittill("weapon_fired",var_01);
 		if(isdefined(self.isnodeoccupied) && isplayer(self.isnodeoccupied)) {
-			level thread scripts\mp\_battlechatter_mp::saytoself(self.isnodeoccupied,"plr_killstreak_target");
+			level thread scripts\mp\battlechatter_mp::saytoself(self.isnodeoccupied,"plr_killstreak_target");
 		}
 
-		if(scripts\mp\_utility::istrue(self.var_19)) {
+		if(scripts\mp\utility::istrue(self.var_19)) {
 			thread playvoice(1,"vox_c8_engaging");
 		}
 
@@ -392,7 +392,7 @@ func_DCF8(param_00) {
 		}
 
 		var_01 = getclosestpointonnavmesh(param_00.origin,self);
-		if(param_00 scripts\mp\_utility::isinarbitraryup()) {
+		if(param_00 scripts\mp\utility::isinarbitraryup()) {
 			var_02 = scripts\common\trace::create_default_contents(1);
 			if(scripts\common\trace::ray_trace_passed(self geteye(),param_00 geteye(),undefined,var_02)) {
 				var_03 = vectornormalize(param_00.origin - self geteye());
@@ -458,7 +458,7 @@ func_DCF9() {
 	self.triggerportableradarping endon("destroyed_rc8");
 	level endon("game_ended");
 	for(;;) {
-		if(scripts\mp\_utility::istrue(self.var_19)) {
+		if(scripts\mp\utility::istrue(self.var_19)) {
 			thread playvoice(1,"vox_c8_seeking");
 		}
 
@@ -475,7 +475,7 @@ func_DCF9() {
 			}
 		}
 
-		scripts\mp\_hostmigration::waitlongdurationwithhostmigrationpause(0.5);
+		scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(0.5);
 	}
 }
 
@@ -496,18 +496,18 @@ func_DCF2(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_0
 		var_0D = self.triggerportableradarping.var_FC96;
 	}
 
-	if(!scripts\mp\_utility::istrue(self.var_19)) {
+	if(!scripts\mp\utility::istrue(self.var_19)) {
 		param_02 = param_02 / 2;
 	}
 
-	scripts\mp\_damage::callback_playerdamage(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08,param_09,param_0A,param_0B);
+	scripts\mp\damage::callback_playerdamage(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08,param_09,param_0A,param_0B);
 	var_0E = self.triggerportableradarping.var_FC96 - var_0D;
 	if(var_0E > 0) {
-		self.triggerportableradarping thread scripts\mp\_missions::func_D991("ch_rc8_shield",var_0E);
+		self.triggerportableradarping thread scripts\mp\missions::func_D991("ch_rc8_shield",var_0E);
 	}
 
-	scripts\mp\_damage::logattackerkillstreak(self,param_02,param_01,param_07,param_06,param_04,param_0A,undefined,param_0B,param_03,param_05);
-	scripts\mp\_damage::onkillstreakdamaged("remote_c8",param_01,param_05,param_02);
+	scripts\mp\damage::logattackerkillstreak(self,param_02,param_01,param_07,param_06,param_04,param_0A,undefined,param_0B,param_03,param_05);
+	scripts\mp\damage::onkillstreakdamaged("remote_c8",param_01,param_05,param_02);
 	scripts\mp\killstreaks\_killstreaks::killstreakhit(param_01,param_05,self,param_04);
 }
 
@@ -551,19 +551,19 @@ func_128F7(param_00) {
 
 	var_02 = scripts\mp\killstreaks\_target_marker::_meth_819B(param_00,::checkrc8availablevalidationfunc);
 	if(!isdefined(var_02.location)) {
-		scripts\mp\_utility::decrementfauxvehiclecount();
+		scripts\mp\utility::decrementfauxvehiclecount();
 		return 0;
 	}
 
-	scripts\mp\_matchdata::logkillstreakevent(param_00.streakname,self.origin);
+	scripts\mp\matchdata::logkillstreakevent(param_00.streakname,self.origin);
 	thread func_10D8D(param_00,var_02);
 	var_03 = "used_remote_c8";
-	var_04 = scripts\mp\_killstreak_loot::getrarityforlootitem(param_00.variantid);
+	var_04 = scripts\mp\killstreak_loot::getrarityforlootitem(param_00.variantid);
 	if(var_04 != "") {
 		var_03 = var_03 + "_" + var_04;
 	}
 
-	level thread scripts\mp\_utility::teamplayercardsplash(var_03,self);
+	level thread scripts\mp\utility::teamplayercardsplash(var_03,self);
 	return 1;
 }
 
@@ -572,25 +572,25 @@ checkrc8available(param_00) {
 		param_00 = 0;
 	}
 
-	if(scripts/mp/agents/agent_utility::getnumactiveagents("remote_c8") >= 2) {
+	if(scripts\mp\agents\agent_utility::getnumactiveagents("remote_c8") >= 2) {
 		if(param_00) {
-			scripts\mp\_hud_message::showerrormessage("KILLSTREAKS_RC8_MAX");
+			scripts\mp\hud_message::showerrormessage("KILLSTREAKS_RC8_MAX");
 		}
 
 		return 0;
 	}
 
-	if(scripts/mp/agents/agent_utility::getnumownedactiveagentsbytype(self,"remote_c8") >= 1) {
+	if(scripts\mp\agents\agent_utility::getnumownedactiveagentsbytype(self,"remote_c8") >= 1) {
 		if(param_00) {
-			scripts\mp\_hud_message::showerrormessage("KILLSTREAKS_RC8_MAX");
+			scripts\mp\hud_message::showerrormessage("KILLSTREAKS_RC8_MAX");
 		}
 
 		return 0;
 	}
 
-	if(level.teambased && scripts/mp/agents/agent_utility::getnumownedagentsonteambytype(self.team,"remote_c8") >= 1) {
+	if(level.teambased && scripts\mp\agents\agent_utility::getnumownedagentsonteambytype(self.team,"remote_c8") >= 1) {
 		if(param_00) {
-			scripts\mp\_hud_message::showerrormessage("KILLSTREAKS_RC8_MAX");
+			scripts\mp\hud_message::showerrormessage("KILLSTREAKS_RC8_MAX");
 		}
 
 		return 0;
@@ -604,8 +604,8 @@ checkrc8availablevalidationfunc() {
 }
 
 func_3772(param_00) {
-	scripts\mp\_utility::incrementfauxvehiclecount();
-	if(scripts\mp\_utility::currentactivevehiclecount(level.fauxvehiclecount) >= scripts\mp\_utility::maxvehiclesallowed()) {
+	scripts\mp\utility::incrementfauxvehiclecount();
+	if(scripts\mp\utility::currentactivevehiclecount(level.fauxvehiclecount) >= scripts\mp\utility::maxvehiclesallowed()) {
 		return;
 	}
 
@@ -650,7 +650,7 @@ func_10D8D(param_00,param_01) {
 	var_06 setscriptablepartstate("laser_target","start");
 	thread func_FBF0(var_06.origin);
 	var_07 = "mp_robot_c8";
-	var_08 = scripts\mp\_killstreak_loot::getrarityforlootitem(param_00.variantid);
+	var_08 = scripts\mp\killstreak_loot::getrarityforlootitem(param_00.variantid);
 	if(var_08 != "") {
 		var_07 = var_07 + "_" + var_08;
 	}
@@ -675,7 +675,7 @@ func_10D8D(param_00,param_01) {
 	thread func_13AE2(var_09);
 	thread func_13998(var_09,param_01,var_06);
 	thread watchgameover(var_09);
-	scripts\mp\_hostmigration::waitlongdurationwithhostmigrationpause(3.5);
+	scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(3.5);
 	var_0A = spawn("script_model",var_02);
 	var_0A setmodel("veh_mil_lnd_ca_droppod_c8_mp");
 	var_0A moveto(var_03,2.65,0,0);
@@ -701,16 +701,16 @@ func_10D8D(param_00,param_01) {
 		var_09.mainweapon = "iw7_minigun_c8_mp";
 	}
 
-	var_09 scripts\mp\_utility::_giveweapon(var_09.mainweapon);
-	var_09 scripts\mp\_utility::_giveweapon("iw7_c8landing_mp");
-	var_09 scripts\mp\_utility::_giveweapon("iw7_c8shutdown_mp");
-	var_09 scripts\mp\_utility::_giveweapon("iw7_c8destruct_mp");
-	var_09 scripts\mp\_utility::_giveweapon("iw7_c8offhandshield_mp",0);
+	var_09 scripts\mp\utility::_giveweapon(var_09.mainweapon);
+	var_09 scripts\mp\utility::_giveweapon("iw7_c8landing_mp");
+	var_09 scripts\mp\utility::_giveweapon("iw7_c8shutdown_mp");
+	var_09 scripts\mp\utility::_giveweapon("iw7_c8destruct_mp");
+	var_09 scripts\mp\utility::_giveweapon("iw7_c8offhandshield_mp",0);
 	var_09 gold_tooth_3_pickup("iw7_c8offhandshield_mp");
 	var_09 goodshootpos(var_09.mainweapon);
 	var_09 scripts\engine\utility::allow_usability(0);
-	var_09 scripts\mp\_utility::giveperk("specialty_viewkickoverride");
-	var_09 scripts\mp\_utility::giveperk("specialty_block_health_regen");
+	var_09 scripts\mp\utility::giveperk("specialty_viewkickoverride");
+	var_09 scripts\mp\utility::giveperk("specialty_block_health_regen");
 	var_09 allowdoublejump(0);
 	var_09 allowwallrun(0);
 	var_09 allowslide(0);
@@ -735,10 +735,10 @@ func_10D8D(param_00,param_01) {
 	}
 
 	var_09 setscriptablepartstate("CompassIcon","remote_c8");
-	var_09 scripts\mp\_utility::func_F751();
+	var_09 scripts\mp\utility::func_F751();
 	var_09 scripts\mp\killstreaks\_utility::func_FAE4("destroyed_rc8","rc8_mp");
-	var_09 scripts\mp\_utility::giveperk("specialty_blindeye");
-	var_09 scripts\mp\_damage::resetattackerlist();
+	var_09 scripts\mp\utility::giveperk("specialty_blindeye");
+	var_09 scripts\mp\damage::resetattackerlist();
 	var_09 notify("rc8_launched");
 	var_0A waittill("explode",var_0C);
 	if(isdefined(var_06)) {
@@ -812,22 +812,22 @@ watchgameover(param_00) {
 func_FBF0(param_00) {
 	self endon("destroyed_rc8");
 	playsoundatpos(param_00,"rc8_laser_on");
-	scripts\mp\_hostmigration::waitlongdurationwithhostmigrationpause(0.5);
+	scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(0.5);
 	var_01 = spawn("script_origin",param_00);
 	var_01 playloopsound("rc8_laser_lp");
 	var_01 thread func_FB68(self,1.5,"rc8_pod_incoming");
 	var_01 thread func_FB69(self,"destroyed_rc8");
-	scripts\mp\_hostmigration::waitlongdurationwithhostmigrationpause(5.3);
+	scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(5.3);
 	playsoundatpos(param_00,"rc8_land");
-	scripts\mp\_hostmigration::waitlongdurationwithhostmigrationpause(0.5);
+	scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(0.5);
 	playsoundatpos(param_00,"rc8_intro_pod_break");
-	scripts\mp\_hostmigration::waitlongdurationwithhostmigrationpause(0.2);
+	scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(0.2);
 	var_01 delete();
 }
 
 func_FB68(param_00,param_01,param_02) {
 	param_00 endon("destroyed_rc8");
-	scripts\mp\_hostmigration::waitlongdurationwithhostmigrationpause(param_01);
+	scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(param_01);
 	if(isdefined(self)) {
 		self playsound(param_02);
 	}
@@ -845,8 +845,8 @@ func_13A0B(param_00) {
 	param_00 endon("death");
 	level endon("game_ended");
 	self waittill("destroyed_rc8",var_01);
-	if(scripts\mp\_utility::istrue(var_01)) {
-		scripts\mp\_shellshock::func_22FF(1,0.7,800);
+	if(scripts\mp\utility::istrue(var_01)) {
+		scripts\mp\shellshock::func_22FF(1,0.7,800);
 		if(isdefined(param_00)) {
 			param_00 delete();
 		}
@@ -864,7 +864,7 @@ func_560D(param_00,param_01) {
 	level endon("game_ended");
 	self.var_DCFC.useobj makeunusable();
 	self.var_4BE1 = param_00;
-	if(!scripts\mp\_utility::istrue(param_01) && param_00 == "AI") {
+	if(!scripts\mp\utility::istrue(param_01) && param_00 == "AI") {
 		self notify("stop_manual_rc8");
 		scripts\engine\utility::waitframe();
 		self.var_DCFC thermalvisionfofoverlayoff();
@@ -882,22 +882,22 @@ func_560D(param_00,param_01) {
 	self.var_DCFC rc8_disable_movement(1);
 	self.var_DCFC rc8_disable_rotation(1);
 	self.var_DCFC rc8_disable_attack(1);
-	if(scripts\mp\_utility::istrue(param_01)) {
-		self.var_DCFC scripts\mp\_utility::_switchtoweapon("iw7_c8landing_mp");
+	if(scripts\mp\utility::istrue(param_01)) {
+		self.var_DCFC scripts\mp\utility::_switchtoweapon("iw7_c8landing_mp");
 	}
 	else
 	{
-		self.var_DCFC scripts\mp\_utility::_switchtoweapon("iw7_c8shutdown_mp");
+		self.var_DCFC scripts\mp\utility::_switchtoweapon("iw7_c8shutdown_mp");
 	}
 
 	self.var_DCFC.var_19 = undefined;
-	if(scripts\mp\_utility::istrue(param_01)) {
-		scripts\mp\_hostmigration::waitlongdurationwithhostmigrationpause(0.5);
+	if(scripts\mp\utility::istrue(param_01)) {
+		scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(0.5);
 		self.var_DCFC.var_FC99 = undefined;
 	}
 	else
 	{
-		scripts\mp\_hostmigration::waitlongdurationwithhostmigrationpause(1.2);
+		scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(1.2);
 	}
 
 	self notify("finished_disable");
@@ -908,7 +908,7 @@ func_10D87() {
 	level endon("game_ended");
 	var_00 = scripts\mp\killstreaks\_proxyagent::func_45D0(self.var_DCFC,self.var_DCFC.streakinfo,"stop_manual_rc8",self.var_DCFC.var_ED75,1,"rc8_mp");
 	if(!var_00) {
-		if(!isalive(self.var_DCFC) || scripts\mp\_utility::istrue(self.var_DCFC.var_5F6F)) {
+		if(!isalive(self.var_DCFC) || scripts\mp\utility::istrue(self.var_DCFC.var_5F6F)) {
 			return;
 		}
 
@@ -931,29 +931,29 @@ func_627B(param_00) {
 	waitforswitchtoweapon(self.var_DCFC,self.var_DCFC.mainweapon);
 	var_01 = self.var_4BE1;
 	if(var_01 == "AI") {
-		scripts\mp\_utility::func_C638("remote_c8_ai");
+		scripts\mp\utility::func_C638("remote_c8_ai");
 	}
 	else
 	{
 		scripts\engine\utility::waitframe();
-		self.var_DCFC scripts\mp\_utility::freezecontrolswrapper(1);
-		scripts\mp\_utility::func_C638("remote_c8_user");
+		self.var_DCFC scripts\mp\utility::freezecontrolswrapper(1);
+		scripts\mp\utility::func_C638("remote_c8_user");
 	}
 
-	if(scripts\mp\_utility::istrue(param_00)) {
-		scripts\mp\_hostmigration::waitlongdurationwithhostmigrationpause(1.6);
+	if(scripts\mp\utility::istrue(param_00)) {
+		scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(1.6);
 	}
 	else
 	{
-		scripts\mp\_hostmigration::waitlongdurationwithhostmigrationpause(1.2);
+		scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(1.2);
 	}
 
-	if(!isalive(self.var_DCFC) || scripts\mp\_utility::istrue(self.var_DCFC.var_5F6F)) {
+	if(!isalive(self.var_DCFC) || scripts\mp\utility::istrue(self.var_DCFC.var_5F6F)) {
 		return;
 	}
 
 	if(var_01 == "MANUAL") {
-		self.var_DCFC scripts\mp\_utility::freezecontrolswrapper(0);
+		self.var_DCFC scripts\mp\utility::freezecontrolswrapper(0);
 		self.var_DCFC rc8_setuavstrength();
 	}
 
@@ -972,10 +972,10 @@ waitforswitchtoweapon(param_00,param_01) {
 	level endon("game_ended");
 	var_02 = 0;
 	while(!var_02) {
-		param_00 scripts\mp\_utility::_switchtoweapon(param_01);
+		param_00 scripts\mp\utility::_switchtoweapon(param_01);
 		var_03 = 0.5;
 		while(var_03 > 0) {
-			if(param_00 scripts\mp\_utility::iscurrentweapon(param_01)) {
+			if(param_00 scripts\mp\utility::iscurrentweapon(param_01)) {
 				var_02 = 1;
 				break;
 			}
@@ -1010,7 +1010,7 @@ func_13AD7(param_00) {
 				continue;
 			}
 
-			if(scripts\mp\_utility::isusingremote()) {
+			if(scripts\mp\utility::isusingremote()) {
 				continue;
 			}
 
@@ -1018,7 +1018,7 @@ func_13AD7(param_00) {
 				continue;
 			}
 
-			if(scripts\mp\_utility::func_9FAE(self)) {
+			if(scripts\mp\utility::func_9FAE(self)) {
 				continue;
 			}
 
@@ -1077,7 +1077,7 @@ watchtimeout(param_00) {
 	var_01 = ["remote_c8_end","remote_c8_timeout"];
 	var_02 = randomint(var_01.size);
 	var_03 = var_01[var_02];
-	scripts\mp\_utility::playkillstreakdialogonplayer(var_03,undefined,undefined,self.origin);
+	scripts\mp\utility::playkillstreakdialogonplayer(var_03,undefined,undefined,self.origin);
 	self notify("destroyed_rc8",0);
 }
 
@@ -1111,27 +1111,27 @@ func_13996() {
 			continue;
 		}
 
-		if(scripts\mp\_utility::istrue(self.var_DCFC.var_5F6F)) {
+		if(scripts\mp\utility::istrue(self.var_DCFC.var_5F6F)) {
 			continue;
 		}
 
 		if(isdefined(var_06) && var_06 == "concussion_grenade_mp") {
-			if(scripts\mp\_utility::istrue(scripts\mp\_utility::playersareenemies(self.triggerportableradarping,var_02))) {
-				var_02 scripts\mp\_missions::func_D991("ch_tactical_emp_eqp");
+			if(scripts\mp\utility::istrue(scripts\mp\utility::playersareenemies(self.triggerportableradarping,var_02))) {
+				var_02 scripts\mp\missions::func_D991("ch_tactical_emp_eqp");
 			}
 		}
 
 		if(isplayer(var_02) && var_02 != self) {
 			var_07 = "callout_destroyed_remote_c8";
-			var_08 = scripts\mp\_killstreak_loot::getrarityforlootitem(self.var_DCFC.streakinfo.variantid);
+			var_08 = scripts\mp\killstreak_loot::getrarityforlootitem(self.var_DCFC.streakinfo.variantid);
 			if(var_08 != "") {
 				var_07 = var_07 + "_" + var_08;
 			}
 
-			self.var_DCFC scripts\mp\_damage::onkillstreakkilled("remote_c8",var_02,var_06,var_05,var_03,"destroyed_remote_c8","remote_c8_destroy",var_07);
+			self.var_DCFC scripts\mp\damage::onkillstreakkilled("remote_c8",var_02,var_06,var_05,var_03,"destroyed_remote_c8","remote_c8_destroy",var_07);
 		}
 
-		if(scripts\mp\_utility::istrue(level.nukegameover)) {
+		if(scripts\mp\utility::istrue(level.nukegameover)) {
 			self notify("destroyed_rc8",1);
 			continue;
 		}
@@ -1185,7 +1185,7 @@ func_D51B(param_00,param_01,param_02) {
 	rc8_disable_rotation(1);
 	rc8_disable_attack(1);
 	self botsetflag("ads_shield",0);
-	if(scripts\mp\_utility::istrue(param_00)) {
+	if(scripts\mp\utility::istrue(param_00)) {
 		if(isdefined(self.triggerportableradarping)) {
 			if(isdefined(self.triggerportableradarping.var_4BE1) && self.triggerportableradarping.var_4BE1 == "MANUAL") {
 				self.triggerportableradarping notify("stop_manual_rc8");
@@ -1203,7 +1203,7 @@ func_D51B(param_00,param_01,param_02) {
 			}
 
 			self.triggerportableradarping.var_4BE1 = undefined;
-			var_04 = self.triggerportableradarping scripts\mp\_utility::_launchgrenade("dummy_spike_mp",self.origin,self.origin,var_03);
+			var_04 = self.triggerportableradarping scripts\mp\utility::_launchgrenade("dummy_spike_mp",self.origin,self.origin,var_03);
 			if(!isdefined(var_04.weapon_name)) {
 				var_04.weapon_name = "dummy_spike_mp";
 			}
@@ -1212,20 +1212,20 @@ func_D51B(param_00,param_01,param_02) {
 		}
 
 		playfxontag(scripts\engine\utility::getfx("rc8_malfunction"),self,"j_mainroot");
-		scripts\mp\_utility::_switchtoweapon("iw7_c8destruct_mp");
+		scripts\mp\utility::_switchtoweapon("iw7_c8destruct_mp");
 		thread func_FBF1(var_03);
-		scripts\mp\_hostmigration::waitlongdurationwithhostmigrationpause(var_03);
+		scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(var_03);
 	}
 
 	playfx(scripts\engine\utility::getfx("rc8_explode"),self.origin);
 	playsoundatpos(self.origin,"c8_destruct");
 	playsoundatpos(self.origin,"frag_grenade_explode");
-	scripts\mp\_shellshock::func_22FF(1,0.7,800);
-	scripts\mp\_utility::func_41BA();
+	scripts\mp\shellshock::func_22FF(1,0.7,800);
+	scripts\mp\utility::func_41BA();
 	self hide();
 	self.loadoutarchetype = undefined;
 	self.nocorpse = 1;
-	if(!scripts\mp\_utility::istrue(param_00)) {
+	if(!scripts\mp\utility::istrue(param_00)) {
 		if(isdefined(self.triggerportableradarping)) {
 			self radiusdamage(self.origin,256,200,100,self.triggerportableradarping,"MOD_EXPLOSIVE",self.mainweapon);
 		}
@@ -1234,14 +1234,14 @@ func_D51B(param_00,param_01,param_02) {
 	}
 
 	reset_rc8_functionality();
-	scripts/mp/agents/agent_utility::deactivateagent();
-	scripts\mp\_utility::printgameaction("killstreak ended - remote_c8",self.triggerportableradarping);
+	scripts\mp\agents\agent_utility::deactivateagent();
+	scripts\mp\utility::printgameaction("killstreak ended - remote_c8",self.triggerportableradarping);
 }
 
 func_FBF1(param_00) {
 	self playsound("c8_destruct_initiate");
 	scripts\engine\utility::delaycall(0.4,::playsound,"c8_destruct_build_up");
-	scripts\mp\_hostmigration::waitlongdurationwithhostmigrationpause(param_00 - 0.5);
+	scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(param_00 - 0.5);
 	self playsound("c8_destruct_warning");
 }
 
@@ -1268,7 +1268,7 @@ func_13ACD(param_00) {
 			}
 
 			var_02 dodamage(var_01,var_02.origin,self,param_00,"MOD_EXPLOSIVE",var_07);
-			scripts\mp\_shellshock::_earthquake(0.1,0.08,var_08,100);
+			scripts\mp\shellshock::_earthquake(0.1,0.08,var_08,100);
 		}
 	}
 }

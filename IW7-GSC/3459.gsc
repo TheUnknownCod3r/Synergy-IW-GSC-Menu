@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\3459.gsc
+ * Script: 3459.gsc
 ***************************************/
 
 init() {

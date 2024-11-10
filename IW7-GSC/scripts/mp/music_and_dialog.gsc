@@ -1,8 +1,8 @@
-/***************************************************
+/*******************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\music_and_dialog.gsc
-***************************************************/
+ * Script: scripts\mp\music_and_dialog.gsc
+*******************************************/
 
 init() {
 	if(!isdefined(game["music"])) {
@@ -912,12 +912,12 @@ func_6274() {
 		thread suspensemusic();
 	}
 
-	level.var_BDF0++;
+	level.musicenabled++;
 }
 
 disablemusic() {
 	if(level.musicenabled > 0) {
-		level.var_BDF0--;
+		level.musicenabled--;
 		if(level.musicenabled == 0) {
 			stopsuspensemusic();
 			return;

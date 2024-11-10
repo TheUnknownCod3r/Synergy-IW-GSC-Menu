@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2613.gsc
+ * Script: 2613.gsc
 ***************************************/
 
 func_960D(var_00) {

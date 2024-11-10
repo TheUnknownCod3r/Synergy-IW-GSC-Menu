@@ -1,7 +1,7 @@
-/******************************************************************
+/**********************************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\aitype\ally_hero_salter_noh_noj_dirty_dust.gsc
-******************************************************************/
+ * Script: aitype\ally_hero_salter_noh_noj_dirty_dust.gsc
+**********************************************************/
 
 main() {
   self.func_17DB = "";

@@ -1,8 +1,8 @@
-/*********************************************************
+/*************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\equipment\ground_pound.gsc
-*********************************************************/
+ * Script: scripts\mp\equipment\ground_pound.gsc
+*************************************************/
 
 init() {
 	groundpound_initimpactstructs();
@@ -30,7 +30,7 @@ func_8654() {
 	for(;;) {
 		self waittill("groundPoundLand",var_00);
 		thread groundpound_impact(self,var_00);
-		scripts\mp\_utility::printgameaction("ground pound land",self);
+		scripts\mp\utility::printgameaction("ground pound land",self);
 	}
 }
 
@@ -110,7 +110,7 @@ groundpound_victimimpacteffects(param_00,param_01,param_02,param_03) {
 		return;
 	}
 
-	if(param_01 scripts\mp\_utility::isusingremote()) {
+	if(param_01 scripts\mp\utility::isusingremote()) {
 		return;
 	}
 
@@ -163,7 +163,7 @@ func_8653(param_00,param_01,param_02,param_03,param_04) {
 	var_06 = scripts\engine\utility::ter_op(level.hardcoremode,var_05.innerradsqrhc,var_05.innerradsqr);
 	var_07 = scripts\engine\utility::ter_op(level.hardcoremode,var_05.innerdamagehc,var_05.innerdamage);
 	var_08 = scripts\engine\utility::ter_op(level.hardcoremode,var_05.outerdamagehc,var_05.outerdamage);
-	var_09 = param_01 scripts\mp\_utility::isinarbitraryup();
+	var_09 = param_01 scripts\mp\utility::isinarbitraryup();
 	var_0A = scripts\engine\utility::ter_op(var_09,self gettagorigin("TAG_EYE",1,1),self gettagorigin("TAG_EYE"));
 	var_0B = abs(vectordot(var_0A - param_03.origin,(0,0,1)));
 	var_0C = scripts\engine\utility::ter_op(var_09,self gettagorigin("TAG_ORIGIN",1,1),self gettagorigin("TAG_ORIGIN"));
@@ -218,7 +218,7 @@ func_8653(param_00,param_01,param_02,param_03,param_04) {
 
 groundpound_modifiedblastshieldconst(param_00,param_01) {
 	if(level.hardcoremode) {
-		if(scripts\mp\_utility::getweaponbasedsmokegrenadecount(param_01) == "groundpound_mp") {
+		if(scripts\mp\utility::getweaponbasedsmokegrenadecount(param_01) == "groundpound_mp") {
 			param_00 = 0.65;
 		}
 	}

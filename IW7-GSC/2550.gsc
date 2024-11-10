@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\2550.gsc
-****************************/
+ * Script: 2550.gsc
+************************/
 
 main() {
 	var_00[0] = "head_bg_var_head_sc_ling_head_hero_mco";

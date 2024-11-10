@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\3516.gsc
+ * Script: 3516.gsc
 ***************************************/
 
 init() {
@@ -24,11 +24,11 @@ init() {
   level.tanksettings["remote_tank"].func_1114C = &"KILLSTREAKS_REMOTE_TANK_CANNOT_PLACE";
   level.tanksettings["remote_tank"].func_A84D = "killstreak_remote_tank_laptop_mp";
   level.tanksettings["remote_tank"].remotedetonatethink = "killstreak_remote_tank_remote_mp";
-  level._effect["remote_tank_dying"] = loadfx("vfx/core/expl/killstreak_explosion_quick");
-  level._effect["remote_tank_explode"] = loadfx("vfx/core/expl/bouncing_betty_explosion");
-  level._effect["remote_tank_spark"] = loadfx("vfx/core/impacts/large_metal_painted_hit");
-  level._effect["remote_tank_antenna_light_mp"] = loadfx("vfx/core/vehicles/aircraft_light_red_blink");
-  level._effect["remote_tank_camera_light_mp"] = loadfx("vfx/core/vehicles/aircraft_light_wingtip_green");
+  level._effect["remote_tank_dying"] = loadfx("vfx\core\expl\killstreak_explosion_quick");
+  level._effect["remote_tank_explode"] = loadfx("vfx\core\expl\bouncing_betty_explosion");
+  level._effect["remote_tank_spark"] = loadfx("vfx\core\impacts\large_metal_painted_hit");
+  level._effect["remote_tank_antenna_light_mp"] = loadfx("vfx\core\vehicles\aircraft_light_red_blink");
+  level._effect["remote_tank_camera_light_mp"] = loadfx("vfx\core\vehicles\aircraft_light_wingtip_green");
   level.remote_tank_armor_bulletdamage = 0.5;
 }
 

@@ -1,36 +1,36 @@
-/*****************************************************
+/*********************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\gametypes\sotf_ffa.gsc
-*****************************************************/
+ * Script: scripts\mp\gametypes\sotf_ffa.gsc
+*********************************************/
 
 main() {
 	if(getdvar("mapname") == "mp_background") {
 		return;
 	}
 
-	scripts\mp\_globallogic::init();
-	scripts\mp\_globallogic::setupcallbacks();
-	if(function_011C()) {
+	scripts\mp\globallogic::init();
+	scripts\mp\globallogic::setupcallbacks();
+	if(isusingmatchrulesdata()) {
 		level.initializematchrules = ::initializematchrules;
 		[[level.initializematchrules]]();
-		level thread scripts\mp\_utility::reinitializematchrulesonmigration();
+		level thread scripts\mp\utility::reinitializematchrulesonmigration();
 	}
 	else
 	{
-		scripts\mp\_utility::registerscorelimitdvar(level.gametype,65);
-		scripts\mp\_utility::registertimelimitdvar(level.gametype,10);
-		scripts\mp\_utility::registerroundlimitdvar(level.gametype,1);
-		scripts\mp\_utility::registerwinlimitdvar(level.gametype,1);
-		scripts\mp\_utility::registernumlivesdvar(level.gametype,0);
-		scripts\mp\_utility::registerhalftimedvar(level.gametype,0);
+		scripts\mp\utility::registerscorelimitdvar(level.gametype,65);
+		scripts\mp\utility::registertimelimitdvar(level.gametype,10);
+		scripts\mp\utility::registerroundlimitdvar(level.gametype,1);
+		scripts\mp\utility::registerwinlimitdvar(level.gametype,1);
+		scripts\mp\utility::registernumlivesdvar(level.gametype,0);
+		scripts\mp\utility::registerhalftimedvar(level.gametype,0);
 		level.matchrules_randomize = 0;
 		level.matchrules_damagemultiplier = 0;
 		level.matchrules_vampirism = 0;
 	}
 
 	setplayerloadout();
-	function_01CC("ffa");
+	setteammode("ffa");
 	level.teambased = 0;
 	level.overridecrateusetime = 500;
 	level.onplayerscore = ::onplayerscore;
@@ -51,7 +51,7 @@ main() {
 	level.emptylocations = 1;
 	level.assists_disabled = 1;
 	if(level.matchrules_damagemultiplier || level.matchrules_vampirism) {
-		level.modifyplayerdamage = ::scripts\mp\_damage::gamemodemodifyplayerdamage;
+		level.modifyplayerdamage = ::scripts\mp\damage::gamemodemodifyplayerdamage;
 	}
 
 	game["dialog"]["gametype"] = "hunted";
@@ -64,22 +64,22 @@ main() {
 }
 
 initializematchrules() {
-	scripts\mp\_utility::setcommonrulesfrommatchdata();
+	scripts\mp\utility::setcommonrulesfrommatchdata();
 	setdynamicdvar("scr_sotf_ffa_crateamount",getmatchrulesdata("sotfFFAData","crateAmount"));
 	setdynamicdvar("scr_sotf_ffa_crategunamount",getmatchrulesdata("sotfFFAData","crateGunAmount"));
 	setdynamicdvar("scr_sotf_ffa_cratetimer",getmatchrulesdata("sotfFFAData","crateDropTimer"));
 	setdynamicdvar("scr_sotf_ffa_roundlimit",1);
-	scripts\mp\_utility::registerroundlimitdvar("sotf_ffa",1);
+	scripts\mp\utility::registerroundlimitdvar("sotf_ffa",1);
 	setdynamicdvar("scr_sotf_ffa_winlimit",1);
-	scripts\mp\_utility::registerwinlimitdvar("sotf_ffa",1);
+	scripts\mp\utility::registerwinlimitdvar("sotf_ffa",1);
 	setdynamicdvar("scr_sotf_ffa_halftime",0);
-	scripts\mp\_utility::registerhalftimedvar("sotf_ffa",0);
+	scripts\mp\utility::registerhalftimedvar("sotf_ffa",0);
 	setdynamicdvar("scr_sotf_ffa_promode",0);
 }
 
 onprecachegametype() {
-	level._effect["signal_chest_drop"] = loadfx("vfx/iw7/_requests/mp/vfx_debug_warning.vfx");
-	level._effect["signal_chest_drop_mover"] = loadfx("vfx/iw7/_requests/mp/vfx_debug_warning.vfx");
+	level._effect["signal_chest_drop"] = loadfx("vfx\iw7\_requests\mp\vfx_debug_warning.vfx");
+	level._effect["signal_chest_drop_mover"] = loadfx("vfx\iw7\_requests\mp\vfx_debug_warning.vfx");
 }
 
 onstartgametype() {
@@ -87,41 +87,41 @@ onstartgametype() {
 	var_00 = &"OBJECTIVES_DM";
 	var_01 = &"OBJECTIVES_DM_SCORE";
 	var_02 = &"OBJECTIVES_DM_HINT";
-	scripts\mp\_utility::setobjectivetext("allies",var_00);
-	scripts\mp\_utility::setobjectivetext("axis",var_00);
+	scripts\mp\utility::setobjectivetext("allies",var_00);
+	scripts\mp\utility::setobjectivetext("axis",var_00);
 	if(level.splitscreen) {
-		scripts\mp\_utility::setobjectivescoretext("allies",var_00);
-		scripts\mp\_utility::setobjectivescoretext("axis",var_00);
+		scripts\mp\utility::setobjectivescoretext("allies",var_00);
+		scripts\mp\utility::setobjectivescoretext("axis",var_00);
 	}
 	else
 	{
-		scripts\mp\_utility::setobjectivescoretext("allies",var_01);
-		scripts\mp\_utility::setobjectivescoretext("axis",var_01);
+		scripts\mp\utility::setobjectivescoretext("allies",var_01);
+		scripts\mp\utility::setobjectivescoretext("axis",var_01);
 	}
 
-	scripts\mp\_utility::setobjectivehinttext("allies",var_02);
-	scripts\mp\_utility::setobjectivehinttext("axis",var_02);
+	scripts\mp\utility::setobjectivehinttext("allies",var_02);
+	scripts\mp\utility::setobjectivehinttext("axis",var_02);
 	initspawns();
 	var_03 = [];
-	scripts\mp\_gameobjects::main(var_03);
+	scripts\mp\gameobjects::main(var_03);
 	level thread sotf();
 }
 
 initspawns() {
-	scripts\mp\_spawnlogic::setactivespawnlogic("FreeForAll");
+	scripts\mp\spawnlogic::setactivespawnlogic("FreeForAll");
 	level.spawnmins = (0,0,0);
 	level.spawnmaxs = (0,0,0);
-	scripts\mp\_spawnlogic::addspawnpoints("allies","mp_dm_spawn");
-	scripts\mp\_spawnlogic::addspawnpoints("axis","mp_dm_spawn");
-	level.mapcenter = scripts\mp\_spawnlogic::findboxcenter(level.spawnmins,level.spawnmaxs);
-	function_01B4(level.mapcenter);
+	scripts\mp\spawnlogic::addspawnpoints("allies","mp_dm_spawn");
+	scripts\mp\spawnlogic::addspawnpoints("axis","mp_dm_spawn");
+	level.mapcenter = scripts\mp\spawnlogic::findboxcenter(level.spawnmins,level.spawnmaxs);
+	setmapcenter(level.mapcenter);
 }
 
 setplayerloadout() {
 	definechestweapons();
 	var_00 = getrandomweapon(level.pistolarray);
-	var_01 = scripts\mp\_utility::getweaponrootname(var_00["name"]);
-	var_02 = tablelookup("mp/sotfWeapons.csv",2,var_01,0);
+	var_01 = scripts\mp\utility::getweaponrootname(var_00["name"]);
+	var_02 = tablelookup("mp\sotfWeapons.csv",2,var_01,0);
 	setomnvar("ui_sotf_pistol",int(var_02));
 	level.sotf_loadouts["axis"]["loadoutPrimary"] = "none";
 	level.sotf_loadouts["axis"]["loadoutPrimaryAttachment"] = "none";
@@ -145,13 +145,13 @@ setplayerloadout() {
 }
 
 getspawnpoint() {
-	var_00 = scripts\mp\_spawnlogic::getteamspawnpoints(self.team);
+	var_00 = scripts\mp\spawnlogic::getteamspawnpoints(self.team);
 	if(level.ingraceperiod) {
-		var_01 = scripts\mp\_spawnlogic::getspawnpoint_random(var_00);
+		var_01 = scripts\mp\spawnlogic::getspawnpoint_random(var_00);
 	}
 	else
 	{
-		var_01 = scripts\mp\_spawnscoring::getspawnpoint(var_01);
+		var_01 = scripts\mp\spawnscoring::getspawnpoint(var_01);
 	}
 
 	return var_01;
@@ -165,8 +165,8 @@ onspawnplayer() {
 	self.pers["gamemodeLoadout"] = level.sotf_loadouts[self.pers["team"]];
 	level notify("sotf_player_spawned",self);
 	if(!isdefined(self.eventvalue)) {
-		self.eventvalue = scripts\mp\_rank::getscoreinfovalue("kill");
-		scripts\mp\_utility::setextrascore0(self.eventvalue);
+		self.eventvalue = scripts\mp\rank::getscoreinfovalue("kill");
+		scripts\mp\utility::setextrascore0(self.eventvalue);
 	}
 
 	self.oldprimarygun = undefined;
@@ -185,9 +185,9 @@ waitloadoutdone() {
 }
 
 onplayerscore(param_00,param_01) {
-	param_01.var_4D = param_01 scripts\mp\_utility::getpersstat("longestStreak");
+	param_01.var_4D = param_01 scripts\mp\utility::getpersstat("longestStreak");
 	if(param_00 != "super_kill" && issubstr(param_00,"kill")) {
-		var_02 = scripts\mp\_rank::getscoreinfovalue("score_increment");
+		var_02 = scripts\mp\rank::getscoreinfovalue("score_increment");
 		return var_02;
 	}
 
@@ -243,7 +243,7 @@ startspawnchest() {
 
 showcratesplash(param_00) {
 	foreach(var_02 in level.players) {
-		var_02 thread scripts\mp\_hud_message::showsplash(param_00);
+		var_02 thread scripts\mp\hud_message::showsplash(param_00);
 	}
 }
 
@@ -353,9 +353,9 @@ getrandompoint(param_00) {
 definechestweapons() {
 	var_00 = [];
 	var_01 = [];
-	for(var_02 = 0;tablelookupbyrow("mp/sotfWeapons.csv",var_02,0) != "";var_02++) {
-		var_03 = tablelookupbyrow("mp/sotfWeapons.csv",var_02,2);
-		var_04 = tablelookupbyrow("mp/sotfWeapons.csv",var_02,1);
+	for(var_02 = 0;tablelookupbyrow("mp\sotfWeapons.csv",var_02,0) != "";var_02++) {
+		var_03 = tablelookupbyrow("mp\sotfWeapons.csv",var_02,2);
+		var_04 = tablelookupbyrow("mp\sotfWeapons.csv",var_02,1);
 		var_05 = isselectableweapon(var_03);
 		if(isdefined(var_04) && var_05 && var_04 == "weapon_pistol") {
 			var_06 = 30;
@@ -449,7 +449,7 @@ sotfcratethink(param_00) {
 
 			var_05 giveweapon(var_06,0,0,0,1);
 			var_05 setweaponammostock(var_06,0);
-			var_05 scripts\mp\_utility::_switchtoweaponimmediate(var_06);
+			var_05 scripts\mp\utility::_switchtoweaponimmediate(var_06);
 			if(var_05 getweaponammoclip(var_06) == 1) {
 				var_05 setweaponammostock(var_06,1);
 			}
@@ -461,7 +461,7 @@ sotfcratethink(param_00) {
 		var_04 = var_04 - 1;
 		if(var_04 > 0) {
 			foreach(var_05 in level.players) {
-				scripts\mp\_entityheadicons::setheadicon(var_05,"blitz_time_0" + var_04 + "_blue",(0,0,24),14,14,undefined,undefined,undefined,undefined,undefined,0);
+				scripts\mp\entityheadicons::setheadicon(var_05,"blitz_time_0" + var_04 + "_blue",(0,0,24),14,14,undefined,undefined,undefined,undefined,undefined,0);
 				self.crateheadicon = "blitz_time_0" + var_04 + "_blue";
 			}
 		}
@@ -488,7 +488,7 @@ playerjoinwatcher() {
 			continue;
 		}
 
-		scripts\mp\_entityheadicons::setheadicon(var_00,self.crateheadicon,(0,0,24),14,14,undefined,undefined,undefined,undefined,undefined,0);
+		scripts\mp\entityheadicons::setheadicon(var_00,self.crateheadicon,(0,0,24),14,14,undefined,undefined,undefined,undefined,undefined,0);
 	}
 }
 
@@ -505,8 +505,8 @@ cratekill(param_00) {
 }
 
 isselectableweapon(param_00) {
-	var_01 = tablelookup("mp/sotfWeapons.csv",2,param_00,3);
-	var_02 = tablelookup("mp/sotfWeapons.csv",2,param_00,4);
+	var_01 = tablelookup("mp\sotfWeapons.csv",2,param_00,3);
+	var_02 = tablelookup("mp\sotfWeapons.csv",2,param_00,4);
 	if(var_01 == "TRUE" && var_02 == "" || getdvarint(var_02,0) == 1) {
 		return 1;
 	}
@@ -536,8 +536,8 @@ getrandomattachments(param_00) {
 	var_01 = [];
 	var_02 = [];
 	var_03 = [];
-	var_04 = scripts\mp\_utility::getweaponrootname(param_00["name"]);
-	var_05 = scripts\mp\_utility::getweaponattachmentarrayfromstats(var_04);
+	var_04 = scripts\mp\utility::getweaponrootname(param_00["name"]);
+	var_05 = scripts\mp\utility::getweaponattachmentarrayfromstats(var_04);
 	if(var_05.size > 0) {
 		var_06 = randomint(5);
 		for(var_07 = 0;var_07 < var_06;var_07++) {
@@ -548,15 +548,15 @@ getrandomattachments(param_00) {
 
 			var_08 = randomint(var_01.size);
 			var_02[var_02.size] = var_01[var_08];
-			var_09 = scripts\mp\_utility::attachmentmap_tounique(var_01[var_08],var_04);
+			var_09 = scripts\mp\utility::attachmentmap_tounique(var_01[var_08],var_04);
 			var_03[var_03.size] = var_09;
 		}
 
-		var_0A = scripts\mp\_utility::getweapongroup(param_00["name"]);
+		var_0A = scripts\mp\utility::getweapongroup(param_00["name"]);
 		if(var_0A == "weapon_dmr" || var_0A == "weapon_sniper" || var_04 == "iw6_dlcweap02") {
 			var_0B = 0;
 			foreach(var_0D in var_02) {
-				if(scripts\mp\_utility::getattachmenttype(var_0D) == "rail") {
+				if(scripts\mp\utility::getattachmenttype(var_0D) == "rail") {
 					var_0B = 1;
 					break;
 				}
@@ -599,7 +599,7 @@ getvalidattachments(param_00,param_01,param_02) {
 
 attachmentcheck(param_00,param_01) {
 	for(var_02 = 0;var_02 < param_01.size;var_02++) {
-		if(param_00 == param_01[var_02] || !scripts\mp\_utility::attachmentscompatible(param_00,param_01[var_02])) {
+		if(param_00 == param_01[var_02] || !scripts\mp\utility::attachmentscompatible(param_00,param_01[var_02])) {
 			return 0;
 		}
 	}
@@ -645,39 +645,39 @@ pickupweaponhandler() {
 
 loginckillchain() {
 	self.pers["killChains"]++;
-	scripts\mp\_persistence::statsetchild("round","killChains",self.pers["killChains"]);
+	scripts\mp\persistence::statsetchild("round","killChains",self.pers["killChains"]);
 }
 
 perkwatcher() {
 	if(level.allowperks) {
 		switch(self.streakpoints) {
 			case 2:
-				scripts\mp\_utility::giveperk("specialty_fastsprintrecovery");
-				thread scripts\mp\_hud_message::showsplash("specialty_fastsprintrecovery_sotf",self.streakpoints);
+				scripts\mp\utility::giveperk("specialty_fastsprintrecovery");
+				thread scripts\mp\hud_message::showsplash("specialty_fastsprintrecovery_sotf",self.streakpoints);
 				thread loginckillchain();
 				break;
 
 			case 3:
-				scripts\mp\_utility::giveperk("specialty_lightweight");
-				thread scripts\mp\_hud_message::showsplash("specialty_lightweight_sotf",self.streakpoints);
+				scripts\mp\utility::giveperk("specialty_lightweight");
+				thread scripts\mp\hud_message::showsplash("specialty_lightweight_sotf",self.streakpoints);
 				thread loginckillchain();
 				break;
 
 			case 4:
-				scripts\mp\_utility::giveperk("specialty_stalker");
-				thread scripts\mp\_hud_message::showsplash("specialty_stalker_sotf",self.streakpoints);
+				scripts\mp\utility::giveperk("specialty_stalker");
+				thread scripts\mp\hud_message::showsplash("specialty_stalker_sotf",self.streakpoints);
 				thread loginckillchain();
 				break;
 
 			case 5:
-				scripts\mp\_utility::giveperk("specialty_regenfaster");
-				thread scripts\mp\_hud_message::showsplash("specialty_regenfaster_sotf",self.streakpoints);
+				scripts\mp\utility::giveperk("specialty_regenfaster");
+				thread scripts\mp\hud_message::showsplash("specialty_regenfaster_sotf",self.streakpoints);
 				thread loginckillchain();
 				break;
 
 			case 6:
-				scripts\mp\_utility::giveperk("specialty_deadeye");
-				thread scripts\mp\_hud_message::showsplash("specialty_deadeye_sotf",self.streakpoints);
+				scripts\mp\utility::giveperk("specialty_deadeye");
+				thread scripts\mp\hud_message::showsplash("specialty_deadeye_sotf",self.streakpoints);
 				thread loginckillchain();
 				break;
 		}
@@ -686,7 +686,7 @@ perkwatcher() {
 
 iconvisall(param_00,param_01) {
 	foreach(var_03 in level.players) {
-		param_00 scripts\mp\_entityheadicons::setheadicon(var_03,param_01,(0,0,24),14,14,undefined,undefined,undefined,undefined,undefined,0);
+		param_00 scripts\mp\entityheadicons::setheadicon(var_03,param_01,(0,0,24),14,14,undefined,undefined,undefined,undefined,undefined,0);
 		self.crateheadicon = param_01;
 	}
 }

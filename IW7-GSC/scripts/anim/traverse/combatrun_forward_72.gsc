@@ -1,8 +1,8 @@
-/******************************************************************
+/**********************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\anim\traverse\combatrun_forward_72.gsc
-******************************************************************/
+ * Script: scripts\anim\traverse\combatrun_forward_72.gsc
+**********************************************************/
 
 main() {
 	if(getdvarint("ai_iw7",0) == 1) {

@@ -1,8 +1,8 @@
-/*********************************************************
+/*************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\aitype\enemy_villain_kotch_helmet.gsc
-*********************************************************/
+ * Script: aitype\enemy_villain_kotch_helmet.gsc
+*************************************************/
 
 main() {
 	self.var_17DB = "";

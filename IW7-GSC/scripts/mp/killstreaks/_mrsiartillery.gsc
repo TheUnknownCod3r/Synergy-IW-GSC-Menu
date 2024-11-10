@@ -1,8 +1,8 @@
-/*************************************************************
+/*****************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\killstreaks\_mrsiartillery.gsc
-*************************************************************/
+ * Script: scripts\mp\killstreaks\_mrsiartillery.gsc
+*****************************************************/
 
 init() {
 	scripts\mp\killstreaks\_killstreaks::registerkillstreak("mrsiartillery",::func_12906);
@@ -50,11 +50,11 @@ dostrike(param_00,param_01,param_02,param_03) {
 		iprintln("Firing Motar!");
 		wait(var_04.var_9831);
 		wait(randomfloatrange(var_04.var_B782,var_04.var_B49A));
-		var_09 = scripts\mp\_utility::_magicbullet(var_04.var_DA62,var_08,var_07,param_00);
+		var_09 = scripts\mp\utility::_magicbullet(var_04.var_DA62,var_08,var_07,param_00);
 		for(var_0A = 1;var_0A < var_04.var_C244;var_0A++) {
 			wait(randomfloatrange(var_04.var_B782,var_04.var_B49A));
 			var_0B = func_CB2F(var_07,var_04.var_11141);
-			var_09 = scripts\mp\_utility::_magicbullet(var_04.var_DA62,var_08,var_0B,param_00);
+			var_09 = scripts\mp\utility::_magicbullet(var_04.var_DA62,var_08,var_0B,param_00);
 		}
 
 		return;

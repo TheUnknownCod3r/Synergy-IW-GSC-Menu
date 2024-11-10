@@ -1,8 +1,8 @@
-/************************************************************
+/****************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\maps\cp_rave\cp_rave_boat.gsc
-************************************************************/
+ * Script: scripts\cp\maps\cp_rave\cp_rave_boat.gsc
+****************************************************/
 
 init_pap_boat() {
 	level.meleevignetteanimfunc = ::zombie_boat_melee_func;
@@ -183,7 +183,7 @@ hidden_room_exit_tube(param_00) {
 	wait(0.1);
 	var_01 delete();
 	if(scripts\engine\utility::istrue(param_00.wor_phase_shift)) {
-		param_00 scripts/cp/powers/coop_phaseshift::exitphaseshift(1);
+		param_00 scripts\cp\powers\coop_phaseshift::exitphaseshift(1);
 		param_00.wor_phase_shift = 0;
 	}
 

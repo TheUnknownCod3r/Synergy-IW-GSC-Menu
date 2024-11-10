@@ -1,8 +1,8 @@
-/****************************************
+/********************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\anim\run.gsc
-****************************************/
+ * Script: scripts\anim\run.gsc
+********************************/
 
 func_BCEB() {
 	var_00 = [[self.var_3EF3]]("stand");
@@ -60,7 +60,7 @@ func_BCEB() {
 }
 
 getrunningforwardpainanim() {
-	if(!isdefined(self.var_1491.var_BCA5)) {
+	if(!isdefined(self.a.var_BCA5)) {
 		return scripts\anim\utility::func_B027("run","straight");
 	}
 
@@ -77,7 +77,7 @@ getrunningforwardpainanim() {
 		return scripts\anim\utility::func_7FCC("stairs_down");
 	}
 
-	if(scripts\anim\utility::func_9E40() || isdefined(self.var_1491.var_29CE) && self.var_1491.var_29CE) {
+	if(scripts\anim\utility::func_9E40() || isdefined(self.a.var_29CE) && self.a.var_29CE) {
 		return scripts\anim\utility::func_7FCC("straight");
 	}
 
@@ -86,9 +86,9 @@ getrunningforwardpainanim() {
 		return scripts\anim\utility::func_7FCC("straight");
 	}
 
-	var_01 = scripts\anim\utility::setclientextrasuper(self.var_1491.var_E860,4);
+	var_01 = scripts\anim\utility::setclientextrasuper(self.a.var_E860,4);
 	if(var_01 == 0) {
-		var_01 = scripts\anim\utility::setclientextrasuper(self.var_1491.var_E860,var_00.size);
+		var_01 = scripts\anim\utility::setclientextrasuper(self.a.var_E860,var_00.size);
 		return var_00[var_01];
 	}
 
@@ -96,7 +96,7 @@ getrunningforwardpainanim() {
 }
 
 func_7E47() {
-	if(!isdefined(self.var_1491.var_BCA5)) {
+	if(!isdefined(self.a.var_BCA5)) {
 		return scripts\anim\utility::func_B027("run","crouch");
 	}
 
@@ -104,7 +104,7 @@ func_7E47() {
 }
 
 func_DA7F() {
-	self.var_1491.movement = "run";
+	self.a.movement = "run";
 	self give_left_powers("runanim",scripts\anim\utility::func_7FCC("prone"),1,0.3,self.moveplaybackrate);
 	func_E7E5();
 	scripts\anim\notetracks::donotetracksfortime(0.25,"runanim");
@@ -166,7 +166,7 @@ func_E873(param_00) {
 	}
 	else
 	{
-		var_07 = var_01 \ var_04;
+		var_07 = var_01 / var_04;
 		var_08 = var_07 - self.var_E879;
 		if(abs(var_08) < var_05 * 0.7) {
 			self.var_E879 = var_07;
@@ -184,7 +184,7 @@ func_E873(param_00) {
 	var_09 = abs(self.var_E879);
 	var_0A = scripts\anim\utility::func_B028("run_n_gun");
 	if(var_09 > var_05) {
-		var_0B = var_09 - var_05 \ var_05;
+		var_0B = var_09 - var_05 / var_05;
 		var_0B = clamp(var_0B,0,1);
 		self aiclearanim(var_0A["F"],0.2);
 		self _meth_82AC(var_0A["L"],1 - var_0B * var_02,0.2);
@@ -194,7 +194,7 @@ func_E873(param_00) {
 	}
 	else
 	{
-		var_0B = clamp(var_0A \ var_06,0,1);
+		var_0B = clamp(var_0A / var_06,0,1);
 		self _meth_82AC(var_0A["F"],1 - var_0B,0.2);
 		self _meth_82AC(var_0A["L"],var_0B * var_02,0.2);
 		self _meth_82AC(var_0A["R"],var_0B * var_03,0.2);
@@ -206,7 +206,7 @@ func_E873(param_00) {
 
 	self give_left_powers("runanim",%run_n_gun,1,0.3,0.8);
 	func_E80F(undefined);
-	self.var_1491.var_1C8D = gettime() + 500;
+	self.a.var_1C8D = gettime() + 500;
 	if(param_00 && isplayer(self.isnodeoccupied)) {
 		self _meth_83CE();
 	}
@@ -301,7 +301,7 @@ func_10086() {
 	}
 
 	if(isdefined(self.objective_position) && isdefined(self.isnodeoccupied) && self.objective_additionalcurrent == 1) {
-		return distancesquared(self.origin,self.var_10C.origin) > 90000;
+		return distancesquared(self.origin,self.isnodeoccupied.origin) > 90000;
 	}
 
 	return 0;
@@ -353,7 +353,7 @@ func_10B79() {
 	self setanimknob(%combatrun,1,0.5,var_00);
 	var_01 = 0;
 	var_02 = isdefined(self.var_E1B0) && gettime() - self.var_E1B0 < 100;
-	if(var_02 && randomfloat(1) < self.var_1491.reacttobulletchance) {
+	if(var_02 && randomfloat(1) < self.a.reacttobulletchance) {
 		func_11088();
 		func_F843(0);
 		func_E87E();
@@ -397,7 +397,7 @@ func_10B79() {
 
 	if(!var_01) {
 		func_11088();
-		if(var_02 && self.var_1491.reacttobulletchance != 0) {
+		if(var_02 && self.a.reacttobulletchance != 0) {
 			func_E87E();
 			return;
 		}
@@ -530,11 +530,11 @@ func_E89B() {
 func_1A3C() {
 	var_00 = self getspawnpointdist();
 	var_01 = vectortoangles(self.isnodeoccupied getshootatpos() - self getmuzzlepos());
-	if(scripts\common\utility::absangleclamp180(var_00[1] - var_01[1]) > 15) {
+	if(scripts\engine\utility::absangleclamp180(var_00[1] - var_01[1]) > 15) {
 		return 0;
 	}
 
-	return scripts\common\utility::absangleclamp180(var_00[0] - var_01[0]) <= 20;
+	return scripts\engine\utility::absangleclamp180(var_00[0] - var_01[0]) <= 20;
 }
 
 canshoottargetfrompos() {
@@ -566,7 +566,7 @@ detach(param_00) {
 	var_01 = self.origin;
 	var_02 = self.angles[1] + self getspawnpoint_searchandrescue();
 	var_01 = var_01 + (cos(var_02),sin(var_02),0) * length(self.var_381) * param_00;
-	var_03 = self.angles[1] - vectortoyaw(self.var_10C.origin - var_01);
+	var_03 = self.angles[1] - vectortoyaw(self.isnodeoccupied.origin - var_01);
 	var_03 = angleclamp180(var_03);
 	return var_03;
 }
@@ -718,8 +718,8 @@ func_4AA0() {
 }
 
 func_10B78() {
-	var_00 = isdefined(self.var_1491.var_1C8D) && self.var_1491.var_1C8D > gettime();
-	var_00 = var_00 || isdefined(self.isnodeoccupied) && distancesquared(self.origin,self.var_10C.origin) < 65536;
+	var_00 = isdefined(self.a.var_1C8D) && self.a.var_1C8D > gettime();
+	var_00 = var_00 || isdefined(self.isnodeoccupied) && distancesquared(self.origin,self.isnodeoccupied.origin) < 65536;
 	if(var_00) {
 		if(!scripts\anim\utility_common::needtoreload(0)) {
 			return 0;
@@ -795,7 +795,7 @@ func_10B7B() {
 
 func_E861() {
 	var_00 = self getscoreinfocategory(%walk_and_run_loops);
-	var_01 = getanimlength(scripts\anim\utility::func_B027("run","straight")) \ 3;
+	var_01 = getanimlength(scripts\anim\utility::func_B027("run","straight")) / 3;
 	var_00 = var_00 * 3;
 	if(var_00 > 3) {
 		var_00 = var_00 - 2;
@@ -804,11 +804,11 @@ func_E861() {
 		var_00 = var_00 - 1;
 	}
 
-	if(var_00 < 0.15 \ var_01) {
+	if(var_00 < 0.15 / var_01) {
 		return 1;
 	}
 
-	if(var_00 > 1 - 0.3 \ var_01) {
+	if(var_00 > 1 - 0.3 / var_01) {
 		return 1;
 	}
 
@@ -963,7 +963,7 @@ func_13B40(param_00,param_01,param_02,param_03,param_04) {
 
 func_FF01(param_00) {
 	self endon("death");
-	scripts\common\utility::waittill_any_3("killanimscript","movemode","switchEnded","complete_weapon_switch");
+	scripts\engine\utility::waittill_any_3("killanimscript","movemode","switchEnded","complete_weapon_switch");
 	self.lastweapon = self.var_394;
 	scripts\anim\shared::placeweaponon(param_00,"right");
 	self.bulletsinclip = weaponclipsize(self.var_394);

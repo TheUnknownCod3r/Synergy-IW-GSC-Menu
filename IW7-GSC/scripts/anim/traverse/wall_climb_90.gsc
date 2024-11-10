@@ -1,8 +1,8 @@
-/***********************************************************
+/***************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\anim\traverse\wall_climb_90.gsc
-***********************************************************/
+ * Script: scripts\anim\traverse\wall_climb_90.gsc
+***************************************************/
 
 main() {
 	if(getdvarint("ai_iw7",0) == 0) {
@@ -53,7 +53,7 @@ func_88CE(param_00) {
 
 	self endon("killanimscript");
 	if(self.health == 1) {
-		self.var_1491.nodeath = 1;
+		self.a.nodeath = 1;
 		if(self.var_126E1 > 1) {
 			self _meth_82E3("deathanim",%traverse90_end_death,%body,1,0.2,1);
 		}

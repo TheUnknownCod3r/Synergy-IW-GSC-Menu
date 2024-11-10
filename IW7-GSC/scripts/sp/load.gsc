@@ -1,8 +1,8 @@
-/***************************************
+/*******************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\sp\load.gsc
-***************************************/
+ * Script: scripts\sp\load.gsc
+*******************************/
 
 main() {
 	lib_0A2F::func_9789();
@@ -12,23 +12,23 @@ main() {
 	scripts\sp\_gameskill::func_95F9();
 	lib_0F18::func_956A();
 	scripts\sp\_introscreen::func_9631();
-	scripts/sp/starts::func_9766();
+	scripts\sp\starts::func_9766();
 	if(scripts\sp\_utility::func_93A6()) {
-		scripts/sp/specialist_MAYBE::init();
+		scripts\sp\specialist_MAYBE::init();
 	}
 
-	scripts/sp/load_code::vehicle_getspeed();
-	scripts/sp/load_code::vehicle_finishdamage();
-	scripts/sp/load_code::_meth_83D5();
+	scripts\sp\load_code::vehicle_getspeed();
+	scripts\sp\load_code::vehicle_finishdamage();
+	scripts\sp\load_code::_meth_83D5();
 	scripts\engine\utility::init_trigger_flags();
 	scripts\engine\utility::struct_class_init();
 	scripts\sp\_colors::init_colors();
 	lib_0B5F::func_96D7();
 	scripts\sp\_mgturret::main();
 	scripts\common\exploder::setupexploders();
-	scripts/sp/pausemenu::main();
+	scripts\sp\pausemenu::main();
 	scripts\sp\_art::main();
-	scripts/sp/anim::init();
+	scripts\sp\anim::init();
 	scripts\common\fx::initfx();
 	scripts\sp\_createfx::createfx();
 	scripts\sp\_global_fx::main();
@@ -39,9 +39,9 @@ main() {
 	scripts\sp\_names::func_F9E6();
 	scripts\sp\_audio::init_audio();
 	scripts\sp\_trigger::func_9726();
-	function_01C5("ufoHitsTriggers","0");
+	setsaveddvar("ufoHitsTriggers","0");
 	scripts\sp\_hud::init();
-	scripts/sp/vision::func_979C();
+	scripts\sp\vision::func_979C();
 	scripts\sp\_endmission::main();
 	lib_0E2B::func_C32F();
 	lib_0E2D::func_112B5();
@@ -56,21 +56,21 @@ main() {
 	precacheitem("frag_up1");
 	precacheitem("frag_c6hug");
 	lib_0E4B::func_D5E3();
-	scripts/sp/starts::func_57C6();
+	scripts\sp\starts::func_57C6();
 	scripts\engine\utility::func_C953();
 	scripts\sp\_autosave::main();
 	anim.var_13086 = 0;
-	scripts/sp/load_code::func_F7C2();
+	scripts\sp\load_code::func_F7C2();
 	scripts\sp\_introscreen::main();
 	scripts\sp\_damagefeedback::init();
 	scripts\sp\_friendlyfire::main();
 	if(getdvarint("ai_iw7",0) == 1) {
-		scripts/asm/asm::asm_globalinit();
-		scripts/aitypes/bt_util::init();
+		scripts\asm\asm::asm_globalinit();
+		scripts\aitypes\bt_util::init();
 	}
 
-	scripts/sp/fakeactor_node_MAYBE::func_F97C();
-	scripts/sp/load_code::func_51C4();
+	scripts\sp\fakeactor_node_MAYBE::func_F97C();
+	scripts\sp\load_code::func_51C4();
 	scripts\anim\traverse\shared::func_F9C6();
 	lib_0B04::func_94F9();
 	scripts\sp\_intelligence::main();
@@ -86,24 +86,24 @@ main() {
 		[[level._meth_83DF]]();
 	}
 
-	scripts/sp/load_code::func_B3CD();
+	scripts\sp\load_code::func_B3CD();
 	lib_0B77::main();
 	scripts\sp\_utility::func_48C1();
 	lib_0B34::func_95F7();
-	scripts/sp/interaction_manager::func_9A2F();
-	thread scripts/sp/geo_mover::func_409C();
+	scripts\sp\interaction_manager::func_9A2F();
+	thread scripts\sp\geo_mover::func_409C();
 	if(scripts\sp\_utility::func_93A6()) {
-		if(scripts/sp/specialist_MAYBE::func_2C8F()) {
-			scripts/sp/specialist_MAYBE::func_F2D2(1);
+		if(scripts\sp\specialist_MAYBE::func_2C8F()) {
+			scripts\sp\specialist_MAYBE::func_F2D2(1);
 		}
 		else
 		{
-			level.var_10964 thread scripts/sp/specialist_MAYBE::main();
+			level.var_10964 thread scripts\sp\specialist_MAYBE::main();
 		}
 	}
 
-	scripts/sp/load_code::func_E810();
-	function_0305(scripts\sp\_utility::func_7F6E(level.script));
+	scripts\sp\load_code::func_E810();
+	setsettletime(scripts\sp\_utility::func_7F6E(level.script));
 	var_00 = scripts\sp\_utility::func_7E2C(level.script);
 	setomnvar("ui_client_settle_time",var_00);
 	var_01 = scripts\sp\_utility::func_7F70(level.script);
@@ -115,5 +115,5 @@ main() {
 		setomnvar("ui_transition_movie","none");
 	}
 
-	scripts/sp/analytics::main();
+	scripts\sp\analytics::main();
 }

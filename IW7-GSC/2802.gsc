@@ -1,16 +1,16 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2802.gsc
+ * Script: 2802.gsc
 ***************************************/
 
 splashgrenadeinit() {
-  level._effect["base_plasma_smoke"] = loadfx("vfx/iw7/_requests/mp/vfx_plasma_smoke");
-  scripts/mp/powerloot::func_DF06("power_splashGrenade", ["passive_smoke", "passive_increased_duration", "passive_increased_spread", "passive_increased_radius", "passive_increased_entities"]);
+  level._effect["base_plasma_smoke"] = loadfx("vfx\iw7\_requests\mp\vfx_plasma_smoke");
+  scripts\mp\powerloot::func_DF06("power_splashGrenade", ["passive_smoke", "passive_increased_duration", "passive_increased_spread", "passive_increased_radius", "passive_increased_entities"]);
 }
 
 splashgrenadeused(var_00) {
   var_0.grenades = [];
-  var_01 = scripts/mp/powerloot::func_7FC2("power_splashGrenade", 6);
+  var_01 = scripts\mp\powerloot::func_7FC2("power_splashGrenade", 6);
 
   for (var_02 = 0; var_02 < var_01; var_2++) {
   var_03 = scripts\mp\utility\game::_launchgrenade("globproj_mp", (0, 0, 0), (0, 0, 0));
@@ -107,7 +107,7 @@ setinteractwithethereal(var_00, var_01, var_02, var_03) {
 
   var_17 = 0;
   var_18 = 0;
-  var_19 = scripts/mp/powerloot::func_7FC1("power_splashGrenade", 1.5);
+  var_19 = scripts\mp\powerloot::func_7FC1("power_splashGrenade", 1.5);
   var_20 = (0, 0, 0);
   var_21 = (0, 0, 0);
 
@@ -146,7 +146,7 @@ setinteractwithethereal(var_00, var_01, var_02, var_03) {
   if (!var_05)
   var_27 = var_27 + (0, 0, 200 + randomint(200));
 
-  var_27 = scripts/mp/powerloot::func_7FC7("power_splashGrenade", var_27);
+  var_27 = scripts\mp\powerloot::func_7FC7("power_splashGrenade", var_27);
   var_32 = var_00 + var_21;
   var_33 = var_2[var_24];
   var_33 show();
@@ -171,7 +171,7 @@ func_B79A(var_00, var_01) {
   var_00 thread istrialversion(var_01 + var_03);
   var_00 setscriptablepartstate("trail", "neutral");
   var_00 setscriptablepartstate("explosion", "active");
-  var_04 = scripts/mp/powerloot::func_7FC4("power_splashGrenade", 60);
+  var_04 = scripts\mp\powerloot::func_7FC4("power_splashGrenade", 60);
   var_05 = spawn("trigger_rotatable_radius", var_0.origin, 0, var_04, 60);
   var_5.angles = var_0.angles;
   var_5.owner = self;

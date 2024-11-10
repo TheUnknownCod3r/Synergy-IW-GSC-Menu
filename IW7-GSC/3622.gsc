@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3622.gsc
-****************************/
+ * Script: 3622.gsc
+************************/
 
 func_972B() {
 	setdvarifuninitialized("debug_seeker",0);
@@ -512,7 +512,7 @@ func_F14C() {
 	childthread func_F16B();
 	for(;;) {
 		scripts\engine\utility::waitframe();
-		if(isdefined(self.bt.var_F15D) && self.bt.var_F15D != self.triggerportableradarping) {
+		if(isdefined(self.var_3135.var_F15D) && self.var_3135.var_F15D != self.triggerportableradarping) {
 			continue;
 		}
 
@@ -604,8 +604,8 @@ func_F169() {
 			return;
 		}
 
-		if(isdefined(self.bt) && isdefined(self.bt.var_F15D)) {
-			if(self.bt.var_F15D == level.player) {
+		if(isdefined(self.bt) && isdefined(self.var_3135.var_F15D)) {
+			if(self.var_3135.var_F15D == level.player) {
 				if(distance2dsquared(self.origin,level.player getorigin()) < squared(800)) {
 					self.var_138F2 = newhudelem();
 					var_00 = scripts\engine\utility::spawn_tag_origin(self.origin + (0,0,30));
@@ -853,8 +853,8 @@ func_F129(param_00) {
 
 func_57BB(param_00,param_01) {
 	var_02 = distance2d(param_01.origin,param_00);
-	var_03 = scripts/sp/math::func_C097(0,level.var_F10A.var_4D19,var_02);
-	var_04 = scripts/sp/math::func_6A8E(level.var_F10A.var_4D0C,level.var_F10A.var_4D02,var_03);
+	var_03 = scripts\sp\math::func_C097(0,level.var_F10A.var_4D19,var_02);
+	var_04 = scripts\sp\math::func_6A8E(level.var_F10A.var_4D0C,level.var_F10A.var_4D02,var_03);
 	if(isdefined(param_01.unittype)) {
 		var_05 = tolower(param_01.unittype);
 		if(var_05 == "c6") {
@@ -959,12 +959,12 @@ func_F14E() {
 			setomnvar("ui_pip_message_text_bottom","equipment_seeker_blownup");
 			setomnvar("ui_pip_message_type",3);
 		}
-		else if(self.bt.var_1152B) {
+		else if(self.var_3135.var_1152B) {
 			setomnvar("ui_pip_message_text_top","equipment_seeker_top");
 			setomnvar("ui_pip_message_text_bottom","equipment_seeker_locked");
 			setomnvar("ui_pip_message_type",3);
 		}
-		else if(isdefined(self.bt.var_F15D) && self.bt.var_F15D == self.triggerportableradarping) {
+		else if(isdefined(self.var_3135.var_F15D) && self.var_3135.var_F15D == self.triggerportableradarping) {
 			setomnvar("ui_pip_message_text_top","equipment_seeker_top");
 			setomnvar("ui_pip_message_text_bottom","equipment_seeker_idle");
 			setomnvar("ui_pip_message_type",1);
@@ -1018,8 +1018,8 @@ func_CBA1() {
 			continue;
 		}
 
-		if(isalive(self.bt.var_F15D) && self getpersstat(self.bt.var_F15D) || self.bt.var_1152B) {
-			var_03 linkto(self.bt.var_F15D,"tag_eye",(0,0,0),(0,0,0));
+		if(isalive(self.var_3135.var_F15D) && self getpersstat(self.var_3135.var_F15D) || self.var_3135.var_1152B) {
+			var_03 linkto(self.var_3135.var_F15D,"tag_eye",(0,0,0),(0,0,0));
 			continue;
 		}
 
@@ -1033,14 +1033,14 @@ func_CBA1() {
 }
 
 func_CBA2(param_00,param_01) {
-	var_02 = scripts/sp/math::func_10AAE(10,param_00.origin,(0,0,0));
+	var_02 = scripts\sp\math::func_10AAE(10,param_00.origin,(0,0,0));
 	while(isalive(self) && isdefined(param_01)) {
-		var_03 = scripts/sp/math::func_10AB4(var_02,param_01.origin,param_00.origin);
+		var_03 = scripts\sp\math::func_10AB4(var_02,param_01.origin,param_00.origin);
 		param_00.origin = var_03;
 		scripts\engine\utility::waitframe();
 	}
 
-	scripts/sp/math::func_10AAA(var_02);
+	scripts\sp\math::func_10AAA(var_02);
 }
 
 func_F11B(param_00) {}
@@ -1066,15 +1066,15 @@ func_7C41(param_00) {
 	}
 
 	var_01 = gettime();
-	if(self.bt.var_1152B || self.bt.var_1154B > 0 && self.bt.var_1154B + 700 > var_01) {
-		return self.bt.var_F15D;
+	if(self.var_3135.var_1152B || self.var_3135.var_1154B > 0 && self.var_3135.var_1154B + 700 > var_01) {
+		return self.var_3135.var_F15D;
 	}
 
-	if(isdefined(self.var_EA0E) || isdefined(self.var_C93D) || isdefined(self.var_50EB) || isdefined(self.var_9BB9) || !isdefined(self.bt.var_652A)) {
+	if(isdefined(self.var_EA0E) || isdefined(self.var_C93D) || isdefined(self.var_50EB) || isdefined(self.var_9BB9) || !isdefined(self.var_3135.var_652A)) {
 		return undefined;
 	}
 
-	if(!isdefined(self.bt.var_9882)) {
+	if(!isdefined(self.var_3135.var_9882)) {
 		return undefined;
 	}
 
@@ -1092,8 +1092,8 @@ func_7C41(param_00) {
 		return self.var_728A;
 	}
 
-	var_02 = getaiunittypearray(self.bt.var_652A,"all");
-	if(self.bt.var_652A == "allies") {
+	var_02 = getaiunittypearray(self.var_3135.var_652A,"all");
+	if(self.var_3135.var_652A == "allies") {
 		if(lib_0F3D::func_B575(self.unittype)) {
 			var_02 = scripts\engine\utility::array_add(var_02,level.player);
 		}
@@ -1175,9 +1175,9 @@ func_7C41(param_00) {
 
 		if(param_00) {
 			var_08 = distancesquared(self.origin,var_11.origin);
-			if(isdefined(self.bt.var_F15D) && self.bt.var_F15D == var_11) {
+			if(isdefined(self.var_3135.var_F15D) && self.var_3135.var_F15D == var_11) {
 				var_12 = var_12 * 2;
-				var_13 = 1 - scripts/sp/math::func_C097(0,squared(var_0C),var_08);
+				var_13 = 1 - scripts\sp\math::func_C097(0,squared(var_0C),var_08);
 				var_12 = var_12 * var_13 + 0.5;
 			}
 			else if(var_08 > squared(var_0C)) {
@@ -1185,7 +1185,7 @@ func_7C41(param_00) {
 			}
 			else
 			{
-				var_13 = 1 - scripts/sp/math::func_C097(0,squared(var_0C),var_08);
+				var_13 = 1 - scripts\sp\math::func_C097(0,squared(var_0C),var_08);
 				var_12 = var_12 * var_13 + 0.5;
 			}
 		}
@@ -1197,10 +1197,10 @@ func_7C41(param_00) {
 				}
 
 				var_14 = scripts\sp\_utility::func_7951(level.player geteye(),level.player getplayerangles(),var_11.origin);
-				var_15 = scripts/sp/math::func_DF68(var_14,var_0B,1,0,1);
+				var_15 = scripts\sp\math::func_DF68(var_14,var_0B,1,0,1);
 				var_12 = var_12 * var_15;
 			}
-			else if(self.bt.var_652A == "axis") {
+			else if(self.var_3135.var_652A == "axis") {
 				if(isdefined(level.player.damageattacker) && issentient(level.player.damageattacker) && isalive(level.player.damageattacker)) {
 					var_12 = var_12 * 2;
 				}
@@ -1210,7 +1210,7 @@ func_7C41(param_00) {
 			}
 
 			var_08 = distancesquared(self.origin,var_11.origin);
-			var_13 = 1 - scripts/sp/math::func_C097(squared(var_04),squared(var_03),var_08);
+			var_13 = 1 - scripts\sp\math::func_C097(squared(var_04),squared(var_03),var_08);
 			var_12 = var_12 * var_13 + 0.5;
 		}
 
@@ -1268,10 +1268,10 @@ func_F07D() {
 		}
 
 		var_11 = scripts\sp\_utility::func_7951(level.player geteye(),level.player getplayerangles(),var_0F.origin);
-		var_12 = scripts/sp/math::func_DF68(var_11,var_08,1,0,1);
+		var_12 = scripts\sp\math::func_DF68(var_11,var_08,1,0,1);
 		var_10 = var_10 * var_12;
 		var_05 = distancesquared(self.origin,var_0F.origin);
-		var_13 = 1 - scripts/sp/math::func_C097(squared(var_01),squared(var_09),var_05);
+		var_13 = 1 - scripts\sp\math::func_C097(squared(var_01),squared(var_09),var_05);
 		var_10 = var_10 * var_13 + 0.5;
 		if(!isdefined(var_0C) || var_10 > var_0B) {
 			var_0C = var_0F;

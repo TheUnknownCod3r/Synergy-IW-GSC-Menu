@@ -1,8 +1,8 @@
-/*******************************************
+/***********************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\anim\combat.gsc
-*******************************************/
+ * Script: scripts\anim\combat.gsc
+***********************************/
 
 func_9504() {}
 
@@ -25,8 +25,8 @@ main() {
 
 	[[self.exception["exposed"]]]();
 	scripts\anim\utility::func_9832("combat");
-	self.var_1491.var_22F5 = undefined;
-	if(isdefined(self.target_getindexoftarget) && self.var_205.type == "Ambush" && self getweaponassetfromrootweapon(self.target_getindexoftarget)) {
+	self.a.var_22F5 = undefined;
+	if(isdefined(self.target_getindexoftarget) && self.target_getindexoftarget.type == "Ambush" && self getweaponassetfromrootweapon(self.target_getindexoftarget)) {
 		self.var_1E2C = self.target_getindexoftarget;
 	}
 
@@ -55,16 +55,16 @@ func_5859() {
 		return;
 	}
 
-	if(self _meth_81B1() && self.weaponstartammo == "move" && self.var_1491.pose == "stand" && !isdefined(self.var_55EF)) {
-		if(isdefined(self.isnodeoccupied) && distancesquared(self.origin,self.var_10C.origin) < squared(128)) {
+	if(self _meth_81B1() && self.weaponstartammo == "move" && self.a.pose == "stand" && !isdefined(self.var_55EF)) {
+		if(isdefined(self.isnodeoccupied) && distancesquared(self.origin,self.isnodeoccupied.origin) < squared(128)) {
 			return;
 		}
 
-		if(!isdefined(self.var_1491.var_2274)) {
+		if(!isdefined(self.a.var_2274)) {
 			return;
 		}
 
-		if(isdefined(self.var_1491.var_2274["surprise_stop"])) {
+		if(isdefined(self.a.var_2274["surprise_stop"])) {
 			var_00 = scripts\anim\utility::func_1F64("surprise_stop");
 		}
 		else
@@ -84,11 +84,11 @@ transitiontocombat() {
 		return;
 	}
 
-	if(isdefined(self.isnodeoccupied) && distancesquared(self.origin,self.var_10C.origin) < 262144) {
+	if(isdefined(self.isnodeoccupied) && distancesquared(self.origin,self.isnodeoccupied.origin) < 262144) {
 		return;
 	}
 
-	if(self.weaponstartammo == "stop" && !scripts\anim\utility::func_9D9B() && self.var_1491.pose == "stand") {
+	if(self.weaponstartammo == "stop" && !scripts\anim\utility::func_9D9B() && self.a.pose == "stand") {
 		func_E246();
 		var_00 = scripts\anim\utility::func_B027("combat","trans_to_combat");
 		self _meth_82E4("transition",var_00,%root,1,0.2,1.2 * self.animplaybackrate);
@@ -98,17 +98,17 @@ transitiontocombat() {
 }
 
 func_F8BD() {
-	if(self.var_1491.pose == "stand") {
+	if(self.a.pose == "stand") {
 		scripts\anim\animset::func_F2BE();
 		return;
 	}
 
-	if(self.var_1491.pose == "crouch") {
+	if(self.a.pose == "crouch") {
 		scripts\anim\animset::func_F2B6();
 		return;
 	}
 
-	if(self.var_1491.pose == "prone") {
+	if(self.a.pose == "prone") {
 		scripts\anim\animset::func_F2BC();
 		return;
 	}
@@ -131,7 +131,7 @@ func_F8A3() {
 func_1108A() {
 	self endon("killanimscript");
 	wait(0.2);
-	self.var_1491.movement = "stop";
+	self.a.movement = "stop";
 }
 
 func_F337(param_00) {
@@ -143,7 +143,7 @@ func_F337(param_00) {
 		self _meth_82D0();
 	}
 
-	if(scripts\common\utility::actor_is3d()) {
+	if(scripts\engine\utility::actor_is3d()) {
 		self.var_368 = -65;
 		self.isbot = 65;
 		self.setdevdvar = -56;
@@ -153,7 +153,7 @@ func_F337(param_00) {
 
 func_F296() {
 	func_F337();
-	if(self.var_1491.pose == "stand" && !scripts\common\utility::actor_is3d()) {
+	if(self.a.pose == "stand" && !scripts\engine\utility::actor_is3d()) {
 		self.var_368 = -45;
 		self.isbot = 45;
 	}
@@ -168,12 +168,12 @@ func_FAAC() {
 	thread scripts\anim\shoot_behavior::func_4F69("normal");
 	thread func_13B3F();
 	func_E251();
-	if(isdefined(self.var_1491.var_B168)) {
+	if(isdefined(self.a.var_B168)) {
 		scripts\anim\weaponlist::refillclip();
-		self.var_1491.var_B168 = undefined;
+		self.a.var_B168 = undefined;
 	}
 
-	self.var_1491.var_5956 = gettime() + randomintrange(500,1500);
+	self.a.var_5956 = gettime() + randomintrange(500,1500);
 }
 
 func_100A1(param_00) {
@@ -185,11 +185,11 @@ func_100A1(param_00) {
 }
 
 func_1109D() {
-	if(self.var_1491.pose != "stand" && self.var_1491.pose != "crouch") {
+	if(self.a.pose != "stand" && self.a.pose != "crouch") {
 		transitionto("crouch");
 	}
 
-	if(self.var_1491.pose == "stand") {
+	if(self.a.pose == "stand") {
 		scripts\anim\shared::func_1180E(scripts\anim\utility::func_B027("combat","drop_rpg_stand"));
 	}
 	else
@@ -204,18 +204,18 @@ func_1109D() {
 }
 
 func_7E71(param_00) {
-	if(self.var_1491.pose != "stand" && self getteleportlonertargetplayer("stand")) {
+	if(self.a.pose != "stand" && self getteleportlonertargetplayer("stand")) {
 		if(param_00 < 81225) {
 			return "stand";
 		}
 
 		if(isdefined(self.isnodeoccupied) && !self getpersstat(self.isnodeoccupied) || !self canshootenemy() && sighttracepassed(self.origin + (0,0,64),self.isnodeoccupied getshootatpos(),0,undefined)) {
-			self.var_1491.var_5956 = gettime() + 3000;
+			self.a.var_5956 = gettime() + 3000;
 			return "stand";
 		}
 	}
 
-	if(param_00 > 262144 && self.var_1491.pose != "crouch" && self getteleportlonertargetplayer("crouch") && !scripts\common\utility::actor_is3d() && !scripts\anim\utility_common::isusingsidearm() && !isdefined(self.heat) && gettime() >= self.var_1491.var_5956 && lengthsquared(self.var_FE9F) < 10000) {
+	if(param_00 > 262144 && self.a.pose != "crouch" && self getteleportlonertargetplayer("crouch") && !scripts\engine\utility::actor_is3d() && !scripts\anim\utility_common::isusingsidearm() && !isdefined(self.heat) && gettime() >= self.a.var_5956 && lengthsquared(self.var_FE9F) < 10000) {
 		if(!isdefined(self.var_FECF) || sighttracepassed(self.origin + (0,0,36),self.var_FECF,0,undefined)) {
 			return "crouch";
 		}
@@ -227,15 +227,15 @@ func_7E71(param_00) {
 func_6A11(param_00) {
 	var_01 = scripts\anim\utility_common::isusingsidearm();
 	if(!var_01 && func_391A()) {
-		if((isdefined(self.var_72DE) && self.var_1491.pose == "stand") || scripts\anim\utility_common::isasniper(0) && param_00 < 167772.2) {
+		if((isdefined(self.var_72DE) && self.a.pose == "stand") || scripts\anim\utility_common::isasniper(0) && param_00 < 167772.2) {
 			func_5AB9();
 			return 1;
 		}
 	}
 
 	if(scripts\anim\utility_common::needtoreload(0)) {
-		if(!var_01 && scripts\common\utility::cointoss() && !scripts\anim\utility_common::usingrocketlauncher() && scripts\anim\utility_common::isusingprimary() && param_00 < 167772.2 && self getteleportlonertargetplayer("stand")) {
-			if(self.var_1491.pose != "stand") {
+		if(!var_01 && scripts\engine\utility::cointoss() && !scripts\anim\utility_common::usingrocketlauncher() && scripts\anim\utility_common::isusingprimary() && param_00 < 167772.2 && self getteleportlonertargetplayer("stand")) {
+			if(self.a.pose != "stand") {
 				transitionto("stand");
 				return 1;
 			}
@@ -266,12 +266,12 @@ func_391A() {
 }
 
 func_5AB9() {
-	self.var_1491.pose = "stand";
+	self.a.pose = "stand";
 	func_11381(scripts\anim\utility::func_B027("combat","primary_to_pistol"));
 }
 
 func_10062(param_00) {
-	if(scripts\anim\utility_common::isusingsidearm() && self.var_1491.pose == "stand" && !isdefined(self.var_72DE)) {
+	if(scripts\anim\utility_common::isusingsidearm() && self.a.pose == "stand" && !isdefined(self.var_72DE)) {
 		if(param_00 > 262144) {
 			return 1;
 		}
@@ -290,7 +290,7 @@ func_DB34() {
 
 func_6A15() {
 	if(isdefined(self.heat) && self getwatcheddvar()) {
-		self ghost_target_position(self.target_remove,self.var_205.angles);
+		self ghost_target_position(self.target_remove,self.target_getindexoftarget.angles);
 	}
 }
 
@@ -301,7 +301,7 @@ func_6A14() {
 			var_00 = 1.5;
 		}
 
-		var_01 = scripts\common\utility::getpredictedaimyawtoshootentorpos(var_00);
+		var_01 = scripts\engine\utility::getpredictedaimyawtoshootentorpos(var_00);
 		if(func_129B2(var_01)) {
 			return 1;
 		}
@@ -314,7 +314,7 @@ func_6A13() {
 	self endon("killanimscript");
 	func_FAAC();
 	func_E246(0);
-	if(scripts\common\utility::actor_is3d()) {
+	if(scripts\engine\utility::actor_is3d()) {
 		var_00 = (0,self.angles[1],0);
 		self orientmode("face angle 3d",var_00);
 	}
@@ -362,7 +362,7 @@ func_6A13() {
 			continue;
 		}
 
-		if(scripts\anim\utility_common::usingrocketlauncher() && self.var_1491.pose != "crouch" && randomfloat(1) > 0.65) {
+		if(scripts\anim\utility_common::usingrocketlauncher() && self.a.pose != "crouch" && randomfloat(1) > 0.65) {
 			self.var_4E46 = ::func_E774;
 		}
 
@@ -371,7 +371,7 @@ func_6A13() {
 		}
 
 		var_02 = func_7E71(var_01);
-		if(isdefined(var_02) && var_02 != self.var_1491.pose) {
+		if(isdefined(var_02) && var_02 != self.a.pose) {
 			transitionto(var_02);
 			continue;
 		}
@@ -400,7 +400,7 @@ func_6A1C() {
 
 func_10B70() {
 	if(isdefined(self.isnodeoccupied) && !self getpersstat(self.isnodeoccupied) || !self canshootenemy() && sighttracepassed(self.origin + (0,0,64),self.isnodeoccupied getshootatpos(),0,undefined)) {
-		self.var_1491.var_5956 = gettime() + 3000;
+		self.a.var_5956 = gettime() + 3000;
 		transitionto("stand");
 		return 1;
 	}
@@ -419,16 +419,16 @@ func_BEA0() {
 	if(var_02 < 65536) {
 		var_03 = sqrt(var_02);
 		if(var_03 > 3) {
-			var_01 = var_01 + asin(-3 \ var_03);
+			var_01 = var_01 + asin(-3 / var_03);
 		}
 	}
 
-	return scripts\common\utility::absangleclamp180(var_01) > self.var_129AF;
+	return scripts\engine\utility::absangleclamp180(var_01) > self.var_129AF;
 }
 
 func_136EA() {
-	var_00 = self.var_1491.pose;
-	if(isdefined(self.var_1491.onback)) {
+	var_00 = self.a.pose;
+	if(isdefined(self.a.onback)) {
 		wait(0.1);
 		return 1;
 	}
@@ -474,33 +474,33 @@ func_136EA() {
 }
 
 func_392C() {
-	if(self.var_1491.pose != "stand" && self getteleportlonertargetplayer("stand") && func_10B70()) {
+	if(self.a.pose != "stand" && self getteleportlonertargetplayer("stand") && func_10B70()) {
 		return 1;
 	}
 
 	var_00 = gettime();
-	self.var_1491.var_5956 = var_00 + 1500;
-	if(isdefined(self.group) && isdefined(self.var_8677.missionfailed)) {
-		var_01 = angleclamp180(self.angles[1] - vectortoyaw(self.var_8677.missionfailed));
+	self.a.var_5956 = var_00 + 1500;
+	if(isdefined(self.group) && isdefined(self.group.missionfailed)) {
+		var_01 = angleclamp180(self.angles[1] - vectortoyaw(self.group.missionfailed));
 		if(func_129B2(var_01)) {
 			return 1;
 		}
 	}
 
-	if(isdefined(self.target_getindexoftarget) && isdefined(level.var_9D8E[self.var_205.type])) {
-		var_01 = angleclamp180(self.angles[1] - self.var_205.angles[1]);
+	if(isdefined(self.target_getindexoftarget) && isdefined(level.var_9D8E[self.target_getindexoftarget.type])) {
+		var_01 = angleclamp180(self.angles[1] - self.target_getindexoftarget.angles[1]);
 		if(func_129B2(var_01)) {
 			return 1;
 		}
 	}
-	else if((isdefined(self.isnodeoccupied) && self seerecently(self.isnodeoccupied,2)) || var_00 > self.var_1491.var_EF87 + 1200) {
+	else if((isdefined(self.isnodeoccupied) && self seerecently(self.isnodeoccupied,2)) || var_00 > self.a.var_EF87 + 1200) {
 		var_01 = undefined;
 		var_02 = self getsafeanimmovedeltapercentage();
 		if(isdefined(var_02)) {
 			var_01 = angleclamp180(self.angles[1] - var_02[1]);
 		}
 		else if(isdefined(self.target_getindexoftarget)) {
-			var_01 = angleclamp180(self.angles[1] - self.var_205.angles[1]);
+			var_01 = angleclamp180(self.angles[1] - self.target_getindexoftarget.angles[1]);
 		}
 		else if(isdefined(self.isnodeoccupied)) {
 			var_02 = vectortoangles(self lastknownpos(self.isnodeoccupied) - self.origin);
@@ -512,7 +512,7 @@ func_392C() {
 		}
 	}
 	else if(isdefined(self.heat) && self _meth_8213()) {
-		var_01 = angleclamp180(self.angles[1] - self.var_205.angles[1]);
+		var_01 = angleclamp180(self.angles[1] - self.target_getindexoftarget.angles[1]);
 		if(func_129B2(var_01)) {
 			return 1;
 		}
@@ -522,7 +522,7 @@ func_392C() {
 		return 1;
 	}
 
-	var_03 = self.var_1491.var_BF82 < var_00;
+	var_03 = self.a.var_BF82 < var_00;
 	var_04 = 0;
 	if(var_03) {
 		var_04 = 0.99999;
@@ -550,12 +550,12 @@ func_392D() {
 }
 
 func_E251() {
-	self.var_1491.var_BF82 = gettime() + randomintrange(2000,4000);
+	self.a.var_BF82 = gettime() + randomintrange(2000,4000);
 }
 
 func_129B2(param_00) {
 	if(param_00 < 0 - self.var_129AF) {
-		if(self.var_1491.pose == "prone") {
+		if(self.a.pose == "prone") {
 			scripts\anim\cover_prone::func_DA87("crouch");
 			scripts\anim\animset::func_F2B6();
 		}
@@ -566,7 +566,7 @@ func_129B2(param_00) {
 	}
 
 	if(param_00 > self.var_129AF) {
-		if(self.var_1491.pose == "prone") {
+		if(self.a.pose == "prone") {
 			scripts\anim\cover_prone::func_DA87("crouch");
 			scripts\anim\animset::func_F2B6();
 		}
@@ -588,7 +588,7 @@ func_13B3F() {
 	for(;;) {
 		if(isdefined(self.var_FE9E) && isdefined(var_00) && self.var_FE9E == var_00) {
 			var_03 = self.var_FE9E.origin;
-			self.var_FE9F = var_03 - var_01 * 1 \ var_02;
+			self.var_FE9F = var_03 - var_01 * 1 / var_02;
 			var_01 = var_03;
 		}
 		else
@@ -630,7 +630,7 @@ func_6A6F() {
 		}
 
 		if(abs(var_01) > var_00) {
-			var_01 = var_00 * scripts\common\utility::sign(var_01);
+			var_01 = var_00 * scripts\engine\utility::sign(var_01);
 		}
 
 		self orientmode("face angle",self.angles[1] + var_01);
@@ -657,15 +657,15 @@ func_5AC8(param_00,param_01) {
 	var_02 = isdefined(self.var_FECF);
 	var_03 = 1;
 	var_04 = 0.2;
-	var_05 = isdefined(self.isnodeoccupied) && !isdefined(self.var_129B3) && self seerecently(self.isnodeoccupied,2) && distancesquared(self.var_10C.origin,self.origin) < 262144;
-	if(self.var_1491.var_EF87 + 500 > gettime()) {
+	var_05 = isdefined(self.isnodeoccupied) && !isdefined(self.var_129B3) && self seerecently(self.isnodeoccupied,2) && distancesquared(self.isnodeoccupied.origin,self.origin) < 262144;
+	if(self.a.var_EF87 + 500 > gettime()) {
 		var_04 = 0.25;
 		if(var_05) {
 			thread func_6A6F();
 		}
 	}
 	else if(var_05) {
-		var_06 = 1 - distance(self.var_10C.origin,self.origin) \ 512;
+		var_06 = 1 - distance(self.isnodeoccupied.origin,self.origin) / 512;
 		var_03 = 1 + var_06 * 1;
 		if(var_03 > 2) {
 			var_04 = 0.05;
@@ -699,7 +699,7 @@ func_5AC8(param_00,param_01) {
 	if(isdefined(self.var_129B3)) {
 		self animmode("angle deltas",0);
 	}
-	else if(isdefined(self.target_getindexoftarget) && isdefined(level.var_9D8D[self.var_205.type]) && distancesquared(self.origin,self.var_205.origin) < 256) {
+	else if(isdefined(self.target_getindexoftarget) && isdefined(level.var_9D8D[self.target_getindexoftarget.type]) && distancesquared(self.origin,self.target_getindexoftarget.origin) < 256) {
 		self animmode("angle deltas",0);
 	}
 	else if(func_9D43(var_09)) {
@@ -832,7 +832,7 @@ func_453F() {
 		return 1;
 	}
 
-	self.var_1491.nextgrenadetrytime = gettime() + 500;
+	self.a.nextgrenadetrytime = gettime() + 500;
 	return 0;
 }
 
@@ -842,7 +842,7 @@ func_1289C(param_00,param_01) {
 		return 0;
 	}
 
-	if(!isdefined(self.var_1491.var_2274["exposed_grenade"])) {
+	if(!isdefined(self.a.var_2274["exposed_grenade"])) {
 		return 0;
 	}
 
@@ -857,16 +857,16 @@ func_1289C(param_00,param_01) {
 		param_01 = 100;
 	}
 
-	if(distancesquared(self.origin,var_03) > param_01 * param_01 && self.var_1491.pose == self.var_1491.var_85E2) {
+	if(distancesquared(self.origin,var_03) > param_01 * param_01 && self.a.pose == self.a.var_85E2) {
 		scripts\anim\combat_utility::func_F62B(param_00);
 		if(!scripts\anim\combat_utility::_meth_85B5(param_00)) {
 			return 0;
 		}
 
-		var_04 = scripts\common\utility::getyawtospot(var_03);
+		var_04 = scripts\engine\utility::getyawtospot(var_03);
 		if(abs(var_04) < 60) {
 			var_05 = [];
-			foreach(var_07 in self.var_1491.var_2274["exposed_grenade"]) {
+			foreach(var_07 in self.a.var_2274["exposed_grenade"]) {
 				if(isdeploying(var_07)) {
 					var_05[var_05.size] = var_07;
 				}
@@ -899,16 +899,16 @@ func_1289C(param_00,param_01) {
 }
 
 transitionto(param_00) {
-	if(param_00 == self.var_1491.pose) {
+	if(param_00 == self.a.pose) {
 		return;
 	}
 
-	var_01 = self.var_1491.pose + "_2_" + param_00;
-	if(!isdefined(self.var_1491.var_2274)) {
+	var_01 = self.a.pose + "_2_" + param_00;
+	if(!isdefined(self.a.var_2274)) {
 		return;
 	}
 
-	var_02 = self.var_1491.var_2274[var_01];
+	var_02 = self.a.var_2274[var_01];
 	if(!isdefined(var_02)) {
 		return;
 	}
@@ -928,14 +928,14 @@ transitionto(param_00) {
 
 	self _meth_82E4("trans",var_02,%body,1,0.2,var_03);
 	func_43E3(var_02,"run");
-	var_04 = getanimlength(var_02) \ var_03;
+	var_04 = getanimlength(var_02) / var_03;
 	var_05 = var_04 - 0.3;
 	if(var_05 < 0.2) {
 		var_05 = 0.2;
 	}
 
 	scripts\anim\notetracks::donotetracksfortime(var_05,"trans");
-	self.var_1491.pose = param_00;
+	self.a.pose = param_00;
 	func_F8BD();
 	scripts\anim\combat_utility::func_10D9A();
 	scripts\sp\_gameskill::func_54C4();
@@ -958,7 +958,7 @@ func_A57F() {
 				var_00 = 10000;
 			}
 
-			if(distancesquared(self.var_10C.origin,self.origin) < var_00) {
+			if(distancesquared(self.isnodeoccupied.origin,self.origin) < var_00) {
 				if(shouldmelee()) {
 					domelee();
 				}
@@ -981,7 +981,7 @@ func_5123() {
 }
 
 func_6A19(param_00) {
-	self.var_1491.var_6A1A = 1;
+	self.a.var_6A1A = 1;
 	scripts\anim\combat_utility::func_631A();
 	var_01 = undefined;
 	if(isdefined(self.var_1096A)) {
@@ -991,7 +991,7 @@ func_6A19(param_00) {
 	else
 	{
 		var_01 = scripts\anim\utility::func_1F67("reload");
-		if(self.var_1491.pose == "stand" && scripts\anim\utility::func_1F65("reload_crouchhide") && scripts\common\utility::cointoss()) {
+		if(self.a.pose == "stand" && scripts\anim\utility::func_1F65("reload_crouchhide") && scripts\engine\utility::cointoss()) {
 			var_01 = scripts\anim\utility::func_1F67("reload_crouchhide");
 		}
 	}
@@ -1012,7 +1012,7 @@ func_6A19(param_00) {
 	self aiclearanim(%reload,0.2);
 	self.sendclientmatchdata = 0;
 	self notify("stop_trying_to_melee");
-	self.var_1491.var_6A1A = 0;
+	self.a.var_6A1A = 0;
 	self.var_6CDB = undefined;
 	scripts\sp\_gameskill::func_54C4();
 	scripts\anim\combat_utility::func_10D9A();
@@ -1025,7 +1025,7 @@ func_5A66(param_00,param_01) {
 	}
 
 	var_02 = 1;
-	if(!scripts\anim\utility_common::isusingsidearm() && !scripts\anim\utility_common::isshotgun(self.var_394) && isdefined(self.isnodeoccupied) && self getpersstat(self.isnodeoccupied) && distancesquared(self.var_10C.origin,self.origin) < 1048576) {
+	if(!scripts\anim\utility_common::isusingsidearm() && !scripts\anim\utility_common::isshotgun(self.var_394) && isdefined(self.isnodeoccupied) && self getpersstat(self.isnodeoccupied) && distancesquared(self.isnodeoccupied.origin,self.origin) < 1048576) {
 		var_02 = 1.2;
 	}
 
@@ -1068,7 +1068,7 @@ func_6CDE(param_00) {
 func_5D15() {
 	scripts\sp\_mgturret::func_5EEF();
 	scripts\anim\weaponlist::refillclip();
-	self.var_1491.needstorechamber = 0;
+	self.a.needstorechamber = 0;
 	self notify("dropped_gun");
 	scripts\sp\_mgturret::func_E2DB();
 }
@@ -1196,7 +1196,7 @@ func_E774() {
 
 func_DD26() {
 	self endon("killanimscript");
-	self.var_1491.var_6A1A = 0;
+	self.a.var_6A1A = 0;
 	for(;;) {
 		wait(0.2);
 		if(isdefined(self.isnodeoccupied) && !self seerecently(self.isnodeoccupied,2)) {
@@ -1242,7 +1242,7 @@ func_1289B() {
 	}
 
 	if(!isdefined(self.var_DD24) || !self.var_DD24) {
-		var_00 = vectornormalize(self.var_10C.origin - self.origin);
+		var_00 = vectornormalize(self.isnodeoccupied.origin - self.origin);
 		var_01 = anglestoforward(self.angles);
 		if(vectordot(var_00,var_01) < 0.5) {
 			self.var_DD23 = 0;
@@ -1250,7 +1250,7 @@ func_1289B() {
 		}
 	}
 
-	if(self.var_1491.var_6A1A && scripts\anim\utility_common::needtoreload(0.25) && self.var_10C.health > self.var_10C.maxhealth * 0.5) {
+	if(self.a.var_6A1A && scripts\anim\utility_common::needtoreload(0.25) && self.isnodeoccupied.health > self.isnodeoccupied.maxhealth * 0.5) {
 		self.var_DD23 = 0;
 		return;
 	}
@@ -1310,7 +1310,7 @@ func_E246(param_00) {
 		var_01 = 1;
 	}
 
-	if(scripts\common\utility::actor_is3d()) {
+	if(scripts\engine\utility::actor_is3d()) {
 		self animmode("nogravity",var_01);
 		return;
 	}

@@ -1,8 +1,8 @@
-/*******************************************
+/***********************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\lightbar.gsc
-*******************************************/
+ * Script: scripts\mp\lightbar.gsc
+***********************************/
 
 init() {}
 

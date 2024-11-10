@@ -1,11 +1,11 @@
-/****************************************************************
+/********************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\maps\cp_rave\cp_rave_crafting.gsc
-****************************************************************/
+ * Script: scripts\cp\maps\cp_rave\cp_rave_crafting.gsc
+********************************************************/
 
 init_crafting() {
-	level.crafting_table = "scripts/cp/maps/cp_rave/cp_rave_crafting.csv";
+	level.crafting_table = "scripts\cp\maps\cp_rave\cp_rave_crafting.csv";
 	level.max_crafting_drops = 1;
 	level.num_crafting_drops = 0;
 	level.last_crafting_item_drop_time = gettime();
@@ -78,7 +78,7 @@ init_crafting_station() {
 get_area(param_00) {
 	var_01 = getentarray("spawn_volume","targetname");
 	foreach(var_03 in var_01) {
-		if(function_010F(param_00.origin + (0,0,50),var_03)) {
+		if(ispointinvolume(param_00.origin + (0,0,50),var_03)) {
 			if(isdefined(var_03.basename)) {
 				return var_03.basename;
 			}
@@ -162,7 +162,7 @@ use_crafting_station(param_00,param_01) {
 		param_01 setclientomnvar("zombie_souvenir_piece_index",0);
 		param_01.last_interaction_point = undefined;
 		param_01.current_crafting_struct = undefined;
-		param_00.var_269F--;
+		param_00.available_ingredient_slots--;
 		param_01 scripts\cp\cp_merits::processmerit("mt_used_crafting");
 		if(param_00.available_ingredient_slots > 0) {
 			return;
@@ -233,7 +233,7 @@ zmb_crafting_item_debug_drop(param_00,param_01) {
 }
 
 spawn_crafting_item(param_00,param_01) {
-	level.var_C1E2++;
+	level.num_crafting_drops++;
 	level.last_crafting_item_drop_time = gettime();
 	level.next_crafting_item_drop_time = level.last_crafting_item_drop_time + 30000 + randomintrange(level.crafting_item_min_drop_time,level.crafting_item_max_drop_time);
 	var_02 = spawn("script_model",param_00 + (0,0,45));
@@ -332,7 +332,7 @@ crafting_item_pickup(param_00,param_01) {
 	else
 	{
 		param_01 playlocalsound("zmb_crystal_pickup");
-		level.var_C1E2--;
+		level.num_crafting_drops--;
 		param_01.current_crafting_struct = param_00;
 		param_01 thread scripts\cp\cp_vo::try_to_play_vo("pillage_craft","zmb_comment_vo","low",10,0,1,0,40);
 		param_01 create_player_crafting_item_icon(param_00);
@@ -354,7 +354,7 @@ create_player_crafting_item_icon(param_00) {
 }
 
 get_icon_index_based_on_model(param_00) {
-	return tablelookup("scripts/cp/maps/cp_rave/cp_rave_crafting.csv",1,param_00,0);
+	return tablelookup("scripts\cp\maps\cp_rave\cp_rave_crafting.csv",1,param_00,0);
 }
 
 crafting_item_timeout(param_00) {
@@ -393,7 +393,7 @@ crafting_item_timeout(param_00) {
 
 	playsoundatpos(self.origin,"zmb_crystal_disappear");
 	param_00.randomintrange setscriptablepartstate("fx","pickup_" + param_00.randomintrange.glow_type);
-	level.var_C1E2--;
+	level.num_crafting_drops--;
 	if(level.num_crafting_drops < 0) {
 		level.num_crafting_drops = 0;
 	}
@@ -417,7 +417,7 @@ should_drop_crafting_item(param_00) {
 			continue;
 		}
 
-		if(function_010F(param_00,var_02)) {
+		if(ispointinvolume(param_00,var_02)) {
 			return 0;
 		}
 	}

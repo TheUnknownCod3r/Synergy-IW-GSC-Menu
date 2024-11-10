@@ -1,11 +1,11 @@
-/***********************************************************
+/***************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\zombies\zombie_analytics.gsc
-***********************************************************/
+ * Script: scripts\cp\zombies\zombie_analytics.gsc
+***************************************************/
 
 init() {
-	scripts\cp\cp_analytics::start_game_type("mp/zombieMatchdata.ddl","mp/zombieclientmatchdata.ddl","cp/zombies/zombie_analytics.csv");
+	scripts\cp\cp_analytics::start_game_type("mp\zombieMatchdata.ddl","mp\zombieclientmatchdata.ddl","cp\zombies\zombie_analytics.csv");
 	level.timesitemspicked = 0;
 	level.timesitemstimedout = 0;
 	level.timeslfused = 0;
@@ -49,8 +49,8 @@ func_13F51(param_00) {
 
 func_97A4(param_00) {
 	param_00 endon("disconnect");
-	param_00.achievement_registration_func = ::scripts/cp/zombies/achievement::register_default_achievements;
-	scripts/cp/zombies/achievement::init_player_achievement(param_00);
+	param_00.achievement_registration_func = ::scripts\cp\zombies\achievement::register_default_achievements;
+	scripts\cp\zombies\achievement::init_player_achievement(param_00);
 	while(!isdefined(param_00.pers)) {
 		wait(1);
 	}
@@ -355,7 +355,7 @@ log_perk_returned(param_00,param_01) {
 }
 
 log_finished_mini_game(param_00,param_01,param_02,param_03,param_04,param_05,param_06) {
-	param_01 scripts/cp/zombies/achievement::update_achievement_arcade(param_01,param_03,param_02);
+	param_01 scripts\cp\zombies\achievement::update_achievement_arcade(param_01,param_03,param_02);
 	if(param_05 > 0 && param_03 != "coaster") {
 		param_01 thread scripts\cp\cp_vo::try_to_play_vo("arcade_complete","zmb_comment_vo","low",10,0,0,0,45);
 	}

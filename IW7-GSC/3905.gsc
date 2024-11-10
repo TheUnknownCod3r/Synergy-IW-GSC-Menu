@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3905.gsc
-****************************/
+ * Script: 3905.gsc
+************************/
 
 func_CEE2(param_00,param_01,param_02,param_03) {
 	self endon(param_01 + "_finished");
@@ -26,7 +26,7 @@ func_CEE2(param_00,param_01,param_02,param_03) {
 
 func_3EB1(param_00,param_01,param_02) {
 	var_03 = "rise_" + self.var_201C;
-	return scripts/asm/asm::asm_lookupanimfromalias(param_01,var_03);
+	return scripts\asm\asm::asm_lookupanimfromalias(param_01,var_03);
 }
 
 func_197A(param_00) {
@@ -75,7 +75,7 @@ func_3EB0(param_00,param_01,param_02) {
 		var_03 = "float_" + self.var_201C;
 	}
 
-	return scripts/asm/asm::asm_lookupanimfromalias(param_01,var_03);
+	return scripts\asm\asm::asm_lookupanimfromalias(param_01,var_03);
 }
 
 func_CEDC(param_00,param_01,param_02,param_03) {
@@ -87,7 +87,7 @@ func_CEDC(param_00,param_01,param_02,param_03) {
 
 func_3EAD(param_00,param_01,param_02) {
 	var_03 = "fall_" + self.var_201C;
-	return scripts/asm/asm::asm_lookupanimfromalias(param_01,var_03);
+	return scripts\asm\asm::asm_lookupanimfromalias(param_01,var_03);
 }
 
 func_1976(param_00) {

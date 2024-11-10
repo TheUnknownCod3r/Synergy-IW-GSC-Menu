@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\2586.gsc
-****************************/
+ * Script: 2586.gsc
+************************/
 
 asm_globalinit() {
 	if(isdefined(level.asm)) {
@@ -77,14 +77,14 @@ asm_fireephemeralevent(param_00,param_01,param_02) {
 	var_03.var_7686 = gettime();
 	var_03.name = param_01;
 	var_03.params = param_02;
-	if(!isdefined(self._blackboard.var_2329[param_00])) {
-		self._blackboard.var_2329[param_00] = [];
+	if(!isdefined(self.var_1198.var_2329[param_00])) {
+		self.var_1198.var_2329[param_00] = [];
 	}
 
-	self._blackboard.var_2329[param_00][self._blackboard.var_2329[param_00].size] = var_03;
-	if(isdefined(self._blackboard.asm_ephemeral_event_watchlist[param_00]) && self._blackboard.asm_ephemeral_event_watchlist[param_00] == param_01) {
-		self.bt.var_72EB = 1;
-		self._blackboard.asm_ephemeral_event_watchlist[param_00] = undefined;
+	self.var_1198.var_2329[param_00][self.var_1198.var_2329[param_00].size] = var_03;
+	if(isdefined(self.var_1198.asm_ephemeral_event_watchlist[param_00]) && self.var_1198.asm_ephemeral_event_watchlist[param_00] == param_01) {
+		self.var_3135.var_72EB = 1;
+		self.var_1198.asm_ephemeral_event_watchlist[param_00] = undefined;
 	}
 }
 
@@ -104,22 +104,22 @@ func_2351(param_00,param_01) {
 }
 
 func_234E() {
-	self._blackboard = spawnstruct();
-	self._blackboard.var_527D = "stand";
-	self._blackboard.asm_events = [];
-	self._blackboard.var_2329 = [];
-	self._blackboard.asm_ephemeral_event_watchlist = [];
-	self._blackboard.breload = 0;
-	self._blackboard.var_2AA6 = 0;
-	self._blackboard.movetype = "combat";
-	self._blackboard.animscriptedactive = 0;
-	self._blackboard.alwaysrunforward = 0;
-	self._blackboard.var_444A = 0;
+	self.var_1198 = spawnstruct();
+	self.var_1198.var_527D = "stand";
+	self.var_1198.asm_events = [];
+	self.var_1198.var_2329 = [];
+	self.var_1198.asm_ephemeral_event_watchlist = [];
+	self.var_1198.breload = 0;
+	self.var_1198.var_2AA6 = 0;
+	self.var_1198.movetype = "combat";
+	self.var_1198.animscriptedactive = 0;
+	self.var_1198.alwaysrunforward = 0;
+	self.var_1198.var_444A = 0;
 }
 
 asm_clearevents(param_00) {
-	if(isdefined(self._blackboard.asm_events[param_00])) {
-		self._blackboard.asm_events[param_00] = undefined;
+	if(isdefined(self.var_1198.asm_events[param_00])) {
+		self.var_1198.asm_events[param_00] = undefined;
 	}
 }
 
@@ -254,8 +254,8 @@ func_2384(param_00,param_01,param_02) {
 }
 
 asm_fireevent_internal(param_00,param_01,param_02) {
-	if(!isdefined(self._blackboard.asm_events[param_00])) {
-		self._blackboard.asm_events[param_00] = [];
+	if(!isdefined(self.var_1198.asm_events[param_00])) {
+		self.var_1198.asm_events[param_00] = [];
 	}
 
 	var_03 = func_233F(param_00,param_01);
@@ -265,7 +265,7 @@ asm_fireevent_internal(param_00,param_01,param_02) {
 
 	var_03.var_7686 = gettime();
 	var_03.params = param_02;
-	self._blackboard.asm_events[param_00][param_01] = var_03;
+	self.var_1198.asm_events[param_00][param_01] = var_03;
 	asm_fireephemeralevent(param_00,param_01,param_02);
 }
 
@@ -278,12 +278,12 @@ asm_fireevent(param_00,param_01,param_02) {
 }
 
 asm_addephemeraleventtowatchlist(param_00,param_01) {
-	self._blackboard.asm_ephemeral_event_watchlist[param_00] = param_01;
+	self.var_1198.asm_ephemeral_event_watchlist[param_00] = param_01;
 }
 
 asm_ephemeraleventfired(param_00,param_01,param_02) {
-	if(isdefined(self._blackboard.var_2329[param_00])) {
-		foreach(var_04 in self._blackboard.var_2329[param_00]) {
+	if(isdefined(self.var_1198.var_2329[param_00])) {
+		foreach(var_04 in self.var_1198.var_2329[param_00]) {
 			if(var_04.name == param_01) {
 				return 1;
 			}
@@ -309,11 +309,11 @@ func_232C(param_00,param_01) {
 }
 
 func_233F(param_00,param_01) {
-	if(!isdefined(self._blackboard.asm_events[param_00])) {
+	if(!isdefined(self.var_1198.asm_events[param_00])) {
 		return undefined;
 	}
 
-	foreach(var_04, var_03 in self._blackboard.asm_events[param_00]) {
+	foreach(var_04, var_03 in self.var_1198.asm_events[param_00]) {
 		if(var_04 == param_01) {
 			return var_03;
 		}
@@ -323,11 +323,11 @@ func_233F(param_00,param_01) {
 }
 
 func_233E(param_00,param_01) {
-	if(!isdefined(self._blackboard.var_2329[param_00]) || self._blackboard.var_2329[param_00].size == 0) {
+	if(!isdefined(self.var_1198.var_2329[param_00]) || self.var_1198.var_2329[param_00].size == 0) {
 		return undefined;
 	}
 
-	foreach(var_03 in self._blackboard.var_2329[param_00]) {
+	foreach(var_03 in self.var_1198.var_2329[param_00]) {
 		if(var_03.name == param_01) {
 			return var_03;
 		}
@@ -337,7 +337,7 @@ func_233E(param_00,param_01) {
 }
 
 func_2314() {
-	self._blackboard.var_2329 = [];
+	self.var_1198.var_2329 = [];
 }
 
 asm_shouldpowerdown(param_00,param_01) {
@@ -353,11 +353,11 @@ asm_shouldpowerdown(param_00,param_01) {
 		return 0;
 	}
 
-	if(scripts/asm/asm_bb::bb_isanimscripted()) {
+	if(scripts\asm\asm_bb::bb_isanimscripted()) {
 		return 0;
 	}
 
-	if(isdefined(self._blackboard.btraversing)) {
+	if(isdefined(self.var_1198.btraversing)) {
 		return 0;
 	}
 
@@ -390,11 +390,11 @@ asm_isinstate(param_00) {
 }
 
 func_232B(param_00,param_01) {
-	if(!isdefined(self._blackboard.asm_events[param_00]) || self._blackboard.asm_events[param_00].size == 0) {
+	if(!isdefined(self.var_1198.asm_events[param_00]) || self.var_1198.asm_events[param_00].size == 0) {
 		return 0;
 	}
 
-	foreach(var_04, var_03 in self._blackboard.asm_events[param_00]) {
+	foreach(var_04, var_03 in self.var_1198.asm_events[param_00]) {
 		if(var_04 == param_01) {
 			return 1;
 		}
@@ -514,7 +514,7 @@ func_BCE7(param_00,param_01,param_02,param_03) {
 		return 0;
 	}
 
-	return scripts/asm/asm_bb::bb_moverequested() && distancesquared(self.vehicle_getspawnerarray,self.origin) > 4;
+	return scripts\asm\asm_bb::bb_moverequested() && distancesquared(self.vehicle_getspawnerarray,self.origin) > 4;
 }
 
 func_C17F(param_00,param_01,param_02,param_03) {
@@ -542,7 +542,7 @@ func_9E41(param_00,param_01,param_02,param_03) {
 		var_04 = param_03;
 	}
 
-	if(scripts/asm/asm_bb::bb_isincombat() != var_04) {
+	if(scripts\asm\asm_bb::bb_isincombat() != var_04) {
 		return 0;
 	}
 
@@ -558,19 +558,19 @@ asm_getdemeanor() {
 	if(asm_getdemeanor()) {
 		return "frantic";
 	}
-	else if(scripts/asm/asm_bb::bb_isfrantic()) {
+	else if(scripts\asm\asm_bb::bb_isfrantic()) {
 		return "combat";
 	}
 	else if(isdefined(self.demeanoroverride) && self.demeanoroverride == "cqb" && !isdefined(self.objective_position)) {
 		return "cqb";
 	}
 
-	return self._blackboard.movetype;
+	return self.var_1198.movetype;
 }
 
 asm_updatefrantic() {
 	if(!isdefined(self.vehicle_getspawnerarray) || distancesquared(self.origin,self.vehicle_getspawnerarray) > 4096) {
-		self.asm.var_7360 = scripts/asm/asm_bb::bb_isfrantic();
+		self.asm.var_7360 = scripts\asm\asm_bb::bb_isfrantic();
 	}
 }
 

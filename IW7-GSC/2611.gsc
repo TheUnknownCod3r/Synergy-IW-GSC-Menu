@@ -1,12 +1,12 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2611.gsc
+ * Script: 2611.gsc
 ***************************************/
 
 init_menu() {
   level._createfx.options = [];
   addoption("string", "fxid", "FX id", "nil", "fx");
-  addoption("float", "delay", "Repeat rate/start delay", 0.5, "fx");
+  addoption("float", "delay", "Repeat rate\start delay", 0.5, "fx");
   addoption("string", "flag", "Flag", "nil", "exploder");
 
   if (!level.mp_createfx) {
@@ -348,7 +348,7 @@ prepare_option_for_change(var_00, var_01) {
   if (isdefined(var_0["input_func"]))
   thread [[var_0["input_func"]]](var_01 + 3);
   else
-  scripts\common\createfx::createfx_centerprint("To change " + var_0["description"] + " on selected entities, type /fx newvalue");
+  scripts\common\createfx::createfx_centerprint("To change " + var_0["description"] + " on selected entities, type \fx newvalue");
 
   set_option_index(var_0["name"]);
   setdvar("fx", "nil");

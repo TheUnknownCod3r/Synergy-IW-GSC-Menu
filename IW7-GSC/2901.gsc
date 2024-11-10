@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2901.gsc
+ * Script: 2901.gsc
 ***************************************/
 
 main() {}
@@ -40,7 +40,7 @@ func_F9E6() {
 }
 
 func_113B2(var_00, var_01) {
-  var_02 = tablelookuprownum("sp/names.csv", var_01, "__END__");
+  var_02 = tablelookuprownum("sp\names.csv", var_01, "__END__");
   var_03 = [];
 
   for (var_04 = 0; var_04 < var_02; var_4++)
@@ -56,7 +56,7 @@ func_113B2(var_00, var_01) {
 }
 
 func_1719(var_00, var_01, var_02) {
-  var_03 = tablelookupbyrow("sp/names.csv", var_01, var_02);
+  var_03 = tablelookupbyrow("sp\names.csv", var_01, var_02);
   func_1718(var_00, var_03);
 }
 

@@ -1,15 +1,15 @@
-/*********************************************************
+/*************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\maps\mp_prime\mp_prime.gsc
-*********************************************************/
+ * Script: scripts\mp\maps\mp_prime\mp_prime.gsc
+*************************************************/
 
 main() {
-	lib_0FD9::main();
+	scripts\mp\maps\mp_prime\mp_prime_precache::main();
 	scripts\mp\maps\mp_prime\gen\mp_prime_art::main();
-	lib_0FD8::main();
-	scripts\mp\_load::main();
-	scripts\mp\_compass::func_FACD("compass_map_mp_prime");
+	scripts\mp\maps\mp_prime\mp_prime_fx::main();
+	scripts\mp\load::main();
+	scripts\mp\compass::setupminimap("compass_map_mp_prime");
 	level.var_C7B3 = getentarray("OutOfBounds","targetname");
 	setdvar("r_lightGridEnableTweaks",1);
 	setdvar("r_lightGridIntensity",1.33);
@@ -18,7 +18,7 @@ main() {
 	game["defenders"] = "axis";
 	game["allies_outfit"] = "urban";
 	game["axis_outfit"] = "woodland";
-	thread scripts\mp\_animation_suite::func_1FAA();
+	thread scripts\mp\animation_suite::animationsuite();
 	thread sfx_club_music();
 	thread fix_collision();
 }
@@ -151,22 +151,22 @@ func_5CC7(param_00,param_01,param_02,param_03,param_04) {
 	}
 
 	var_06 = 1 / param_02;
-	var_05.var_C72D = scripts\common\utility::getstruct(param_01,"targetname");
+	var_05.var_C72D = scripts\engine\utility::getstruct(param_01,"targetname");
 	var_05 moveto(var_05.var_C72D.origin,0.1,0,0);
 	var_05 rotateto(var_05.var_C72D.angles,0.1,0,0);
-	var_05.var_2B3 = 0;
+	var_05.getclosestpointonnavmesh3d = 0;
 	wait(0.5);
 	if(isdefined(param_04)) {
 		var_05 playloopsound(param_04);
 	}
 
-	var_05.var_5293 = var_05.var_C72D;
-	var_05.var_5293 = func_5CBC(var_05,var_05.var_5293,var_06);
+	var_05.destination = var_05.var_C72D;
+	var_05.destination = func_5CBC(var_05,var_05.destination,var_06);
 }
 
 func_5CBC(param_00,param_01,param_02) {
 	param_00 endon("death");
-	var_03 = scripts\common\utility::getstruct(param_01.target,"targetname");
+	var_03 = scripts\engine\utility::getstruct(param_01.target,"targetname");
 	if(isdefined(var_03.target)) {
 		var_04 = abs(distance(param_00.origin,var_03.origin) * param_02);
 		param_00 moveto(var_03.origin,var_04,0,0);
@@ -194,6 +194,6 @@ func_5CBC(param_00,param_01,param_02) {
 
 sfx_club_music() {
 	var_00 = spawn("script_origin",(1200,703,238));
-	scripts\common\utility::func_136F7();
+	scripts\engine\utility::waitframe();
 	var_00 playloopsound("emt_mus_prime_club");
 }

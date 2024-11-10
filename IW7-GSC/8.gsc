@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\8.gsc
+ * Script: 8.gsc
 ***************************************/
 
 codecallback_agentadded() {
@@ -11,7 +11,7 @@ codecallback_agentadded() {
   var_00 = "allies";
 
   level.numagents++;
-  self sethitlocdamagetable("locdmgtable/mp_lochit_dmgtable");
+  self sethitlocdamagetable("locdmgtable\mp_lochit_dmgtable");
   self [[level.setagentteam]](var_00);
   level.agentarray[level.agentarray.size] = self;
 }

@@ -1,16 +1,16 @@
-/*******************************************************************
+/***********************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\maps\mp_metropolis\mp_metropolis.gsc
-*******************************************************************/
+ * Script: scripts\mp\maps\mp_metropolis\mp_metropolis.gsc
+***********************************************************/
 
 main() {
-	lib_0FCD::main();
+	scripts\mp\maps\mp_metropolis\mp_metropolis_precache::main();
 	scripts\mp\maps\mp_metropolis\gen\mp_metropolis_art::main();
-	lib_0FCC::main();
-	scripts\mp\_load::main();
+	scripts\mp\maps\mp_metropolis\mp_metropolis_fx::main();
+	scripts\mp\load::main();
 	level.var_C7B3 = getentarray("OutOfBounds","targetname");
-	scripts\mp\_compass::func_FACD("compass_map_mp_metropolis");
+	scripts\mp\compass::setupminimap("compass_map_mp_metropolis");
 	setdvar("r_lightGridEnableTweaks",1);
 	setdvar("r_lightGridIntensity",1.33);
 	setdvar("r_umbraMinObjectContribution",5);
@@ -21,7 +21,7 @@ main() {
 	game["allies_outfit"] = "urban";
 	game["axis_outfit"] = "woodland";
 	level thread func_CDA4("mp_metropolis_news_v2");
-	thread scripts\mp\_animation_suite::func_1FAA();
+	thread scripts\mp\animation_suite::animationsuite();
 	thread trainanims();
 	thread fix_collision();
 	thread move_hardpoint_startspawns();
@@ -129,7 +129,7 @@ fix_collision() {
 
 func_CDA4(param_00) {
 	wait(30);
-	function_030E(param_00);
+	playcinematicforalllooping(param_00);
 }
 
 trainanims() {
@@ -216,8 +216,8 @@ traininit() {
 move_hardpoint_startspawns() {
 	if(level.gametype == "koth" || level.gametype == "grnd") {
 		wait(1);
-		var_00 = scripts\mp\_spawnlogic::func_8140("mp_koth_spawn_allies_start");
-		var_01 = scripts\mp\_spawnlogic::func_8140("mp_koth_spawn_axis_start");
+		var_00 = scripts\mp\spawnlogic::getspawnpointarray("mp_koth_spawn_allies_start");
+		var_01 = scripts\mp\spawnlogic::getspawnpointarray("mp_koth_spawn_axis_start");
 		foreach(var_03 in var_00) {
 			if(distance(var_03.origin,(-584,-2112,0.121567)) < 10) {
 				var_03.origin = (-1728,-1552,-72);
@@ -349,7 +349,7 @@ move_hardpoint_startspawns() {
 move_ball_startspawns() {
 	if(level.gametype == "ball") {
 		wait(1);
-		var_00 = scripts\mp\_spawnlogic::func_8140("mp_ball_spawn_axis_start");
+		var_00 = scripts\mp\spawnlogic::getspawnpointarray("mp_ball_spawn_axis_start");
 		foreach(var_02 in var_00) {
 			if(distance(var_02.origin,(-2418.9,-457.3,-73.8721)) < 10) {
 				var_02.origin = (-2528,-1072,68);
@@ -410,15 +410,15 @@ filterstartspawns() {
 	var_00 = level.var_10DF1;
 	level.var_10DF1 = [];
 	for(var_01 = 0;var_01 < var_00.size;var_01++) {
-		var_00[var_01] scripts\mp\_spawnlogic::func_108FA();
-		var_00[var_01].var_F1AE = 0;
-		var_00[var_01].var_94C6 = 0;
+		var_00[var_01] scripts\mp\spawnlogic::func_108FA();
+		var_00[var_01].selected = 0;
+		var_00[var_01].infront = 0;
 		level.var_10DF1[level.var_10DF1.size] = var_00[var_01];
 	}
 
 	if(level.teambased) {
 		foreach(var_03 in var_00) {
-			var_03.var_94C6 = 1;
+			var_03.infront = 1;
 			var_04 = anglestoforward(var_03.angles);
 			foreach(var_06 in var_00) {
 				if(var_03 == var_06) {
@@ -428,7 +428,7 @@ filterstartspawns() {
 				var_07 = vectornormalize(var_06.origin - var_03.origin);
 				var_08 = vectordot(var_04,var_07);
 				if(var_08 > 0.86) {
-					var_03.var_94C6 = 0;
+					var_03.infront = 0;
 					break;
 				}
 			}

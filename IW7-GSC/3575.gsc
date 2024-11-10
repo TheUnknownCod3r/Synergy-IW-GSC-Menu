@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3575.gsc
-****************************/
+ * Script: 3575.gsc
+************************/
 
 func_CA2B() {
 	func_CA29(1);
@@ -14,10 +14,10 @@ func_CA2C() {
 	self endon("periphVis_end");
 	self.personalradaractive = 1;
 	self setclientomnvar("ui_ringradar_enabled",1);
-	scripts\mp\_utility::printgameaction("ring radar on",self);
+	scripts\mp\utility::printgameaction("ring radar on",self);
 	self setscriptablepartstate("periphVis","activeOn",0);
 	thread func_CA2D();
-	scripts\mp\_powers::func_4575(4.5,"periphVis_update");
+	scripts\mp\powers::func_4575(4.5,"periphVis_update");
 	thread func_CA29();
 }
 
@@ -25,7 +25,7 @@ func_CA29(param_00) {
 	self endon("disconnect");
 	self notify("periphVis_end");
 	self notify("periphVis_update",0);
-	if(scripts\mp\_utility::istrue(param_00)) {
+	if(scripts\mp\utility::istrue(param_00)) {
 		self setclientomnvar("ui_ringradar_enabled",0);
 		self setscriptablepartstate("periphVis","neutral",0);
 	}
@@ -37,11 +37,11 @@ func_CA29(param_00) {
 	}
 
 	self.personalradaractive = undefined;
-	scripts\mp\_utility::printgameaction("ring radar off",self);
+	scripts\mp\utility::printgameaction("ring radar off",self);
 }
 
 func_CA2A() {
-	if(scripts\mp\_utility::istrue(self.personalradaractive)) {
+	if(scripts\mp\utility::istrue(self.personalradaractive)) {
 		thread func_CA29(1);
 	}
 }

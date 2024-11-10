@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2661.gsc
+ * Script: 2661.gsc
 ***************************************/
 
 give_attacker_kill_rewards(var_00, var_01) {
@@ -10,7 +10,7 @@ give_attacker_kill_rewards(var_00, var_01) {
   if (scripts\engine\utility::is_true(self.died_poorly))
   return;
 
-  if (scripts/cp/cp_agent_utils::get_agent_type(self) == "elite" || scripts/cp/cp_agent_utils::get_agent_type(self) == "mammoth") {
+  if (scripts\cp\cp_agent_utils::get_agent_type(self) == "elite" || scripts\cp\cp_agent_utils::get_agent_type(self) == "mammoth") {
   var_02 = get_reward_point_for_kill();
 
   foreach (var_04 in level.players)
@@ -29,7 +29,7 @@ give_attacker_kill_rewards(var_00, var_01) {
   var_07 = var_07 * level.cash_scalar;
 
   givekillreward(var_04, var_07 * 2);
-  var_04 scripts/cp/cp_persistence::eog_player_update_stat("assists", 1);
+  var_04 scripts\cp\cp_persistence::eog_player_update_stat("assists", 1);
   self.hybrid_assist = 1;
   }
   }
@@ -49,7 +49,7 @@ give_attacker_kill_rewards(var_00, var_01) {
 
   if (var_12.damage >= var_10) {
   if (isdefined(var_12.player) && var_12.player != var_00) {
-  var_12.player scripts/cp/cp_persistence::eog_player_update_stat("assists", 1);
+  var_12.player scripts\cp\cp_persistence::eog_player_update_stat("assists", 1);
   givekillreward(var_12.player, var_07);
   }
   }
@@ -79,11 +79,11 @@ give_attacker_kill_rewards(var_00, var_01) {
 }
 
 getassistbonusamount() {
-  return level.agent_definition[scripts/cp/cp_agent_utils::get_agent_type(self)]["reward"] * 0.5;
+  return level.agent_definition[scripts\cp\cp_agent_utils::get_agent_type(self)]["reward"] * 0.5;
 }
 
 get_reward_point_for_kill() {
-  return level.agent_definition[scripts/cp/cp_agent_utils::get_agent_type(self)]["reward"];
+  return level.agent_definition[scripts\cp\cp_agent_utils::get_agent_type(self)]["reward"];
 }
 
 givekillreward(var_00, var_01, var_02, var_03) {
@@ -92,10 +92,10 @@ givekillreward(var_00, var_01, var_02, var_03) {
   if (isdefined(level.cash_scalar))
   var_04 = var_04 * level.cash_scalar;
 
-  var_00 scripts/cp/cp_persistence::give_player_currency(var_04, var_02, var_03);
+  var_00 scripts\cp\cp_persistence::give_player_currency(var_04, var_02, var_03);
 
   if (isdefined(level.zombie_xp))
-  var_00 scripts/cp/cp_persistence::give_player_xp(int(var_04));
+  var_00 scripts\cp\cp_persistence::give_player_xp(int(var_04));
 
   if (scripts\engine\utility::flag_exist("cortex_started") && scripts\engine\utility::flag("cortex_started")) {
   if (isdefined(level.add_cortex_charge_func))

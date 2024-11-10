@@ -1,30 +1,30 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3158.gsc
-****************************/
+ * Script: 3158.gsc
+************************/
 
 func_98CC(param_00,param_01,param_02,param_03) {
-	self._blackboard.shootstate = scripts/asm/asm::asm_getcurrentstate(self.asmname);
+	self.var_1198.shootstate = scripts\asm\asm::asm_getcurrentstate(self.asmname);
 }
 
 func_FFC9(param_00,param_01,param_02,param_03) {
-	if(!scripts/asm/asm_bb::func_291C()) {
+	if(!scripts\asm\asm_bb::func_291C()) {
 		return 0;
 	}
 
-	return scripts/asm/asm::func_232B(param_01,"burst_delay_finished");
+	return scripts\asm\asm::func_232B(param_01,"burst_delay_finished");
 }
 
 func_8981(param_00) {
 	self endon(param_00 + "_finished");
 	func_32BE();
-	scripts/asm/asm::asm_fireevent(param_00,"burst_delay_finished");
+	scripts\asm\asm::asm_fireevent(param_00,"burst_delay_finished");
 }
 
 func_FE76(param_00,param_01,param_02,param_03) {
 	thread func_8981(param_01);
-	if(scripts/asm/asm_bb::bb_moverequested()) {
+	if(scripts\asm\asm_bb::bb_moverequested()) {
 		return;
 	}
 
@@ -73,7 +73,7 @@ func_FE75(param_00,param_01,param_02,param_03) {
 		return;
 	}
 
-	if(scripts/asm/asm_bb::bb_moverequested()) {
+	if(scripts\asm\asm_bb::bb_moverequested()) {
 		return;
 	}
 
@@ -86,7 +86,7 @@ func_FE58(param_00,param_01,param_02,param_03) {
 
 func_FECE(param_00,param_01,param_02,param_03) {
 	var_04 = self.asm.shootparams;
-	var_05 = self._blackboard.shootparams;
+	var_05 = self.var_1198.shootparams;
 	if(!isdefined(var_05)) {
 		return 1;
 	}
@@ -107,11 +107,11 @@ func_FEDC(param_00,param_01,param_02,param_03) {
 		return self.asm.shootparams.var_FF0B == 1;
 	}
 
-	return self._blackboard.shootparams.var_FF0B == 1;
+	return self.var_1198.shootparams.var_FF0B == 1;
 }
 
 func_FED9(param_00,param_01,param_02,param_03) {
-	if(self._blackboard.shootparams.var_1119D == "full" || self._blackboard.shootparams.var_1119D == "burst") {
+	if(self.var_1198.shootparams.var_1119D == "full" || self.var_1198.shootparams.var_1119D == "burst") {
 		return 1;
 	}
 
@@ -127,7 +127,7 @@ func_10078(param_00,param_01,param_02,param_03) {
 }
 
 func_FEDA(param_00,param_01,param_02,param_03) {
-	return self._blackboard.shootparams.var_1119D == "mg";
+	return self.var_1198.shootparams.var_1119D == "mg";
 }
 
 func_3DFB(param_00,param_01) {
@@ -188,8 +188,8 @@ func_FE70(param_00,param_01,param_02,param_03) {
 	}
 
 	self.asm.shootparams.var_C21C--;
-	scripts/asm/asm::asm_fireevent("shoot","shoot_finished");
-	scripts/asm/asm::asm_fireevent(param_01,"shoot_finished");
+	scripts\asm\asm::asm_fireevent("shoot","shoot_finished");
+	scripts\asm\asm::asm_fireevent(param_01,"shoot_finished");
 }
 
 func_FE71(param_00,param_01,param_02) {
@@ -216,8 +216,8 @@ func_FE61(param_00,param_01,param_02,param_03) {
 		func_FE82(0.05);
 	}
 
-	scripts/asm/asm::asm_fireevent("shoot","shoot_finished");
-	scripts/asm/asm::asm_fireevent(param_01,"shoot_finished");
+	scripts\asm\asm::asm_fireevent("shoot","shoot_finished");
+	scripts\asm\asm::asm_fireevent(param_01,"shoot_finished");
 	if(scripts\anim\utility_common::isasniper(1)) {
 		lib_0A2B::func_C59A();
 	}
@@ -344,7 +344,7 @@ func_FE64() {
 }
 
 func_FE89(param_00,param_01,param_02,param_03) {
-	var_04 = self._blackboard.shootparams;
+	var_04 = self.var_1198.shootparams;
 	if(!isdefined(self.asm.shootparams)) {
 		self.asm.shootparams = spawnstruct();
 		self.asm.shootparams.var_C21C = var_04.var_32BD;
@@ -358,15 +358,15 @@ func_FE89(param_00,param_01,param_02,param_03) {
 	switch(var_04.var_1119D) {
 		case "semi":
 		case "burst":
-			self.asm.shootparams.var_FF0B = scripts/aitypes/combat::func_4F65(var_04);
+			self.asm.shootparams.var_FF0B = scripts\aitypes\combat::func_4F65(var_04);
 			break;
 
 		case "full":
-			self.asm.shootparams.var_FF0B = scripts/aitypes/combat::func_4F66();
+			self.asm.shootparams.var_FF0B = scripts\aitypes\combat::func_4F66();
 			break;
 
 		case "mg":
-			self.asm.shootparams.var_FF0B = scripts/aitypes/combat::func_4F68();
+			self.asm.shootparams.var_FF0B = scripts\aitypes\combat::func_4F68();
 			break;
 	}
 

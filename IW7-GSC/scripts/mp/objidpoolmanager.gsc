@@ -1,8 +1,8 @@
-/***************************************************
+/*******************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\objidpoolmanager.gsc
-***************************************************/
+ * Script: scripts\mp\objidpoolmanager.gsc
+*******************************************/
 
 init() {
 	var_00 = spawnstruct();
@@ -78,7 +78,7 @@ returnminimapid(param_00) {
 	}
 
 	level.objidpool.var_19[param_00] = undefined;
-	function_0154(param_00);
+	objective_delete(param_00);
 	level.objidpool.reclaimed[level.objidpool.reclaimed.size] = param_00;
 	return 1;
 }
@@ -91,19 +91,19 @@ minimap_objective_add(param_00,param_01,param_02,param_03,param_04) {
 	if(isdefined(param_02)) {
 		if(isdefined(param_03)) {
 			if(isdefined(param_04)) {
-				function_014E(param_00,param_01,param_02,param_03,param_04);
+				objective_add(param_00,param_01,param_02,param_03,param_04);
 				return;
 			}
 
-			function_014E(param_00,param_01,param_02,param_03);
+			objective_add(param_00,param_01,param_02,param_03);
 			return;
 		}
 
-		function_014E(param_00,param_01,param_02);
+		objective_add(param_00,param_01,param_02);
 		return;
 	}
 
-	function_014E(param_00,param_01);
+	objective_add(param_00,param_01);
 }
 
 minimap_objective_state(param_00,param_01) {
@@ -111,7 +111,7 @@ minimap_objective_state(param_00,param_01) {
 		return;
 	}
 
-	function_0162(param_00,param_01);
+	objective_state(param_00,param_01);
 }
 
 minimap_objective_position(param_00,param_01) {
@@ -119,7 +119,7 @@ minimap_objective_position(param_00,param_01) {
 		return;
 	}
 
-	function_015F(param_00,param_01);
+	objective_position(param_00,param_01);
 }
 
 minimap_objective_icon(param_00,param_01) {
@@ -127,7 +127,7 @@ minimap_objective_icon(param_00,param_01) {
 		return;
 	}
 
-	function_0155(param_00,param_01);
+	objective_icon(param_00,param_01);
 }
 
 minimap_objective_icon_colortype(param_00,param_01) {
@@ -135,7 +135,7 @@ minimap_objective_icon_colortype(param_00,param_01) {
 		return;
 	}
 
-	function_0320(param_00,param_01);
+	objective_icon_colortype(param_00,param_01);
 }
 
 minimap_objective_icon_backgroundtype(param_00,param_01) {
@@ -143,7 +143,7 @@ minimap_objective_icon_backgroundtype(param_00,param_01) {
 		return;
 	}
 
-	function_031F(param_00,param_01);
+	objective_icon_backgroundtype(param_00,param_01);
 }
 
 minimap_objective_onentity(param_00,param_01) {
@@ -151,7 +151,7 @@ minimap_objective_onentity(param_00,param_01) {
 		return;
 	}
 
-	function_0156(param_00,param_01);
+	objective_onentity(param_00,param_01);
 }
 
 minimap_objective_onentitywithrotation(param_00,param_01) {
@@ -159,7 +159,7 @@ minimap_objective_onentitywithrotation(param_00,param_01) {
 		return;
 	}
 
-	function_0157(param_00,param_01);
+	objective_onentitywithrotation(param_00,param_01);
 }
 
 minimap_objective_player(param_00,param_01) {
@@ -167,7 +167,7 @@ minimap_objective_player(param_00,param_01) {
 		return;
 	}
 
-	function_0158(param_00,param_01);
+	objective_player(param_00,param_01);
 }
 
 minimap_objective_team(param_00,param_01) {
@@ -175,7 +175,7 @@ minimap_objective_team(param_00,param_01) {
 		return;
 	}
 
-	function_0166(param_00,param_01);
+	objective_team(param_00,param_01);
 }
 
 minimap_objective_playermask_hidefromall(param_00) {
@@ -183,7 +183,7 @@ minimap_objective_playermask_hidefromall(param_00) {
 		return;
 	}
 
-	function_015B(param_00);
+	objective_playermask_hidefromall(param_00);
 }
 
 minimap_objective_playermask_hidefrom(param_00,param_01) {
@@ -191,7 +191,7 @@ minimap_objective_playermask_hidefrom(param_00,param_01) {
 		return;
 	}
 
-	function_015A(param_00,param_01);
+	objective_playermask_hidefrom(param_00,param_01);
 }
 
 minimap_objective_playermask_showto(param_00,param_01) {
@@ -199,7 +199,7 @@ minimap_objective_playermask_showto(param_00,param_01) {
 		return;
 	}
 
-	function_015C(param_00,param_01);
+	objective_playermask_showto(param_00,param_01);
 }
 
 minimap_objective_playermask_showtoall(param_00) {
@@ -207,7 +207,7 @@ minimap_objective_playermask_showtoall(param_00) {
 		return;
 	}
 
-	function_015D(param_00);
+	objective_playermask_showtoall(param_00);
 }
 
 minimap_objective_playerteam(param_00,param_01) {
@@ -215,7 +215,7 @@ minimap_objective_playerteam(param_00,param_01) {
 		return;
 	}
 
-	function_015E(param_00,param_01);
+	objective_playerteam(param_00,param_01);
 }
 
 minimap_objective_playerenemyteam(param_00,param_01) {
@@ -223,5 +223,5 @@ minimap_objective_playerenemyteam(param_00,param_01) {
 		return;
 	}
 
-	function_0159(param_00,param_01);
+	objective_playerenemyteam(param_00,param_01);
 }

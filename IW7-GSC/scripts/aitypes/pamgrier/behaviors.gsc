@@ -1,8 +1,8 @@
-/**********************************************************
+/**************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\aitypes\pamgrier\behaviors.gsc
-**********************************************************/
+ * Script: scripts\aitypes\pamgrier\behaviors.gsc
+**************************************************/
 
 init(param_00) {
 	setupbtstates();
@@ -78,8 +78,8 @@ findnearbypamtarget() {
 	var_00 = scripts\mp\agents\pamgrier\pamgrier_tunedata::gettunedata();
 	var_01 = [];
 	foreach(var_03 in var_00.target_agent_types) {
-		var_04 = scripts\mp\_mp_agent::getactiveagentsoftype(var_03);
-		var_01 = scripts\common\utility::array_combine(var_01,var_04);
+		var_04 = scripts\mp\mp_agent::getactiveagentsoftype(var_03);
+		var_01 = scripts\engine\utility::array_combine(var_01,var_04);
 	}
 
 	if(!isdefined(var_01) || var_01.size == 0) {
@@ -131,20 +131,20 @@ findpamteleporttarget(param_00) {
 	var_01 = scripts\mp\agents\pamgrier\pamgrier_tunedata::gettunedata();
 	var_02 = [];
 	foreach(var_04 in var_01.target_agent_types) {
-		var_05 = scripts\mp\_mp_agent::getactiveagentsoftype(var_04);
-		var_02 = scripts\common\utility::array_combine(var_02,var_05);
+		var_05 = scripts\mp\mp_agent::getactiveagentsoftype(var_04);
+		var_02 = scripts\engine\utility::array_combine(var_02,var_05);
 	}
 
 	if(!isdefined(var_02) || var_02.size == 0) {
 		return 0;
 	}
 
-	if(scripts\common\utility::istrue(param_00)) {
-		var_02 = scripts\common\utility::array_randomize(var_02);
+	if(scripts\engine\utility::istrue(param_00)) {
+		var_02 = scripts\engine\utility::array_randomize(var_02);
 	}
 	else
 	{
-		var_02 = scripts\common\utility::array_sort_with_func(var_02,::teleporttargetcompare);
+		var_02 = scripts\engine\utility::array_sort_with_func(var_02,::teleporttargetcompare);
 	}
 
 	foreach(var_08 in var_02) {
@@ -152,8 +152,8 @@ findpamteleporttarget(param_00) {
 			continue;
 		}
 
-		if(scripts\common\utility::istrue(param_00) && isdefined(var_08.vehicle_getspawnerarray)) {
-			if(scripts\common\utility::istrue(var_08.bneedtoenterplayspace)) {
+		if(scripts\engine\utility::istrue(param_00) && isdefined(var_08.vehicle_getspawnerarray)) {
+			if(scripts\engine\utility::istrue(var_08.bneedtoenterplayspace)) {
 				continue;
 			}
 
@@ -174,7 +174,7 @@ findpamteleporttarget(param_00) {
 		self.pamenemy = var_08;
 		self.teleportpos = var_0A;
 		self.teleportangles = vectortoangles(var_08.origin - var_0A);
-		self.teleportfromchillin = scripts\common\utility::istrue(param_00);
+		self.teleportfromchillin = scripts\engine\utility::istrue(param_00);
 		return 1;
 	}
 
@@ -206,7 +206,7 @@ findplayertorevive() {
 			continue;
 		}
 
-		if(scripts\common\utility::istrue(var_03.inlaststand) && !scripts\common\utility::istrue(var_03.is_being_revived) && !scripts\common\utility::istrue(var_03.in_afterlife_arcade)) {
+		if(scripts\engine\utility::istrue(var_03.inlaststand) && !scripts\engine\utility::istrue(var_03.is_being_revived) && !scripts\engine\utility::istrue(var_03.in_afterlife_arcade)) {
 			var_04 = anglestoforward(var_03.angles);
 			var_05 = anglestoright(var_03.angles);
 			var_06 = var_03.origin + var_04 * var_00.revive_forward_offset + var_05 * var_00.revive_right_offset;
@@ -260,7 +260,7 @@ wait_tick(param_00) {
 		var_03 = 1;
 	}
 
-	if(scripts\common\utility::istrue(var_03) || var_02 > self.nextrevivetime) {
+	if(scripts\engine\utility::istrue(var_03) || var_02 > self.nextrevivetime) {
 		if(shouldtryplayerrevive() && findplayertorevive()) {
 			self.desiredaction = "revive_player";
 			return level.failure;
@@ -437,8 +437,8 @@ reviveplayer_end(param_00) {
 	self.disablearrivals = 0;
 	self.forcenextrevivetime = undefined;
 	if(isdefined(self.reviveplayer)) {
-		if(!scripts\common\utility::istrue(self.reviveplayer.inlaststand)) {
-			if(scripts\cp\_utility::isplayingsolo() || scripts\common\utility::istrue(level.only_one_player)) {
+		if(!scripts\engine\utility::istrue(self.reviveplayer.inlaststand)) {
+			if(scripts\cp\utility::isplayingsolo() || scripts\engine\utility::istrue(level.only_one_player)) {
 				self.nextrevivetime = gettime() + var_01.min_time_between_revivals_solo;
 			}
 			else

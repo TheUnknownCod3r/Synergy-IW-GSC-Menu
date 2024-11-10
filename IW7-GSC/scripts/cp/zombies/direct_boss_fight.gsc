@@ -1,8 +1,8 @@
-/************************************************************
+/****************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\zombies\direct_boss_fight.gsc
-************************************************************/
+ * Script: scripts\cp\zombies\direct_boss_fight.gsc
+****************************************************/
 
 init() {
 	check_direct_boss_fight();
@@ -20,8 +20,8 @@ init() {
 		level thread disable_things_in_afterlife_arcade();
 		level thread level_specific_setup();
 		level thread run_pre_match_timer();
-		function_01BD(1);
-		function_01BC(1);
+		setnojiptime(1);
+		setnojipscore(1);
 	}
 }
 
@@ -442,7 +442,7 @@ perk_purchase_internal(param_00) {
 		}
 
 		self.current_perk_list = scripts\engine\utility::array_remove(self.current_perk_list,var_01);
-		param_00 scripts/cp/zombies/zombies_perk_machines::take_zombies_perk(var_01);
+		param_00 scripts\cp\zombies\zombies_perk_machines::take_zombies_perk(var_01);
 		param_00 scripts\cp\cp_persistence::give_player_currency(var_02);
 		param_00 scripts\cp\cp_interaction::refresh_interaction();
 		return;
@@ -464,7 +464,7 @@ perk_purchase_internal(param_00) {
 	}
 
 	self.current_perk_list = scripts\engine\utility::array_add_safe(self.current_perk_list,var_01);
-	param_00 scripts/cp/zombies/zombies_perk_machines::give_zombies_perk(var_01,0);
+	param_00 scripts\cp\zombies\zombies_perk_machines::give_zombies_perk(var_01,0);
 }
 
 get_board_forward_dist() {
@@ -1003,7 +1003,7 @@ create_weapon_purchase_model(param_00,param_01,param_02) {
 			var_06 = undefined;
 		}
 
-		var_0E = function_00E3(param_00);
+		var_0E = getweaponattachments(param_00);
 		if(issubstr(param_00,"g18_z")) {
 			foreach(var_10 in var_0E) {
 				if(issubstr(var_10,"akimbo")) {
@@ -1357,7 +1357,7 @@ apply_weapon_build_kit_options(param_00,param_01,param_02) {
 	var_03 = scripts\cp\utility::getrawbaseweaponname(param_00);
 	if(isdefined(param_02.weapon_build_models[var_03])) {
 		var_04 = param_02.weapon_build_models[var_03];
-		var_05 = function_00E3(var_04);
+		var_05 = getweaponattachments(var_04);
 		var_06 = scripts\engine\utility::array_combine(["pap2"],var_05);
 		param_00 = param_02 scripts\cp\cp_weapon::return_weapon_name_with_like_attachments(getweaponbasename(param_00),undefined,var_06,1,param_01);
 	}
@@ -1759,7 +1759,7 @@ open_sesame() {
 		level.triton_donations = 3;
 		if(isdefined(level.team_killdoors)) {
 			foreach(var_08 in level.team_killdoors) {
-				var_08 scripts/cp/zombies/zombie_doors::open_team_killdoor(level.players[0]);
+				var_08 scripts\cp\zombies\zombie_doors::open_team_killdoor(level.players[0]);
 			}
 		}
 
@@ -1795,7 +1795,7 @@ open_sesame() {
 
 start_all_generators() {
 	foreach(var_01 in level.generators) {
-		thread scripts/cp/zombies/zombie_power::generic_generator(var_01);
+		thread scripts\cp\zombies\zombie_power::generic_generator(var_01);
 		wait(0.1);
 	}
 }

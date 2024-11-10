@@ -1,8 +1,8 @@
-/***********************************************
+/***************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\sp\vehicle_code.gsc
-***********************************************/
+ * Script: scripts\sp\vehicle_code.gsc
+***************************************/
 
 func_FA79() {
 	var_00 = func_12B8();
@@ -57,7 +57,7 @@ func_1063F(param_00) {
 		else if(isdefined(var_04.var_ED8A) || isdefined(var_04.var_ED1B)) {
 			var_05 = 1;
 			var_07 = scripts\sp\_utility::func_2C17(var_04);
-			var_07 scripts/sp/fakeactor::func_6B15();
+			var_07 scripts\sp\fakeactor::func_6B15();
 		}
 		else if(isdefined(var_04.var_9F) && var_04.var_9F == "script_vehicle") {
 			var_06 = 1;
@@ -229,7 +229,7 @@ func_131F6(param_00) {
 	}
 
 	if(param_00.var_380 == "empty" || param_00.var_380 == "empty_heli") {
-		param_00 thread scripts/sp/vehicle_paths::beginlocationselection();
+		param_00 thread scripts\sp\vehicle_paths::beginlocationselection();
 		return;
 	}
 
@@ -275,7 +275,7 @@ func_131F6(param_00) {
 
 	param_00 thread vehicle_builds();
 	if(isdefined(param_00.var_EF04)) {
-		param_00 thread scripts/sp/vehicle_lights::lights_on(param_00.var_EF04);
+		param_00 thread scripts\sp\vehicle_lights::lights_on(param_00.var_EF04);
 	}
 
 	if(isdefined(param_00.var_EDD1)) {
@@ -295,7 +295,7 @@ func_131F6(param_00) {
 	}
 
 	param_00 thread func_1322A();
-	param_00 thread scripts/sp/vehicle_treads::func_1324B();
+	param_00 thread scripts\sp\vehicle_treads::func_1324B();
 	param_00 thread func_92D3();
 	param_00 thread func_1F6E();
 	if(isdefined(param_00.var_ED48)) {
@@ -312,7 +312,7 @@ func_131F6(param_00) {
 	}
 
 	param_00 thread func_5636();
-	param_00 thread scripts/sp/vehicle_paths::beginlocationselection();
+	param_00 thread scripts\sp\vehicle_paths::beginlocationselection();
 	if(isdefined(level.var_9334)) {
 		var_0B = level.var_9334;
 	}
@@ -441,7 +441,7 @@ func_131FA() {
 		scripts\engine\utility::array_levelthread(self.var_E4FB,::scripts\sp\_vehicle_aianim::func_876B,var_01,self.var_380);
 		thread func_A5CB(self.classname);
 		thread func_A5BF(self.classname);
-		thread scripts/sp/vehicle_lights::func_A5F2(self.classname);
+		thread scripts\sp\vehicle_lights::func_A5F2(self.classname);
 		func_5144();
 		if(isdefined(level.vehicle.var_116CE.var_4E4E[self.classname])) {
 			thread func_F331(level.vehicle.var_116CE.var_4E4E[self.classname],level.vehicle.var_131C3[self.classname]);
@@ -913,7 +913,7 @@ func_10809(param_00) {
 	var_01 thread vehicle_caps();
 	var_01 endon("death");
 	var_01.var_5971 = 1;
-	var_01 scripts/sp/vehicle_paths::setsuit(var_01);
+	var_01 scripts\sp\vehicle_paths::setsuit(var_01);
 	var_01 func_AB23();
 }
 
@@ -965,7 +965,7 @@ func_143C() {
 		return;
 	}
 
-	function_0277(self.unique_id + "vehicle_badplace",-1,self,"allies","axis");
+	createnavrepulsor(self.unique_id + "vehicle_badplace",-1,self,"allies","axis");
 }
 
 func_1446(param_00) {
@@ -2583,7 +2583,7 @@ func_134D() {
 func_7D47() {
 	var_00 = [];
 	if(isdefined(self.target)) {
-		var_01 = function_00C8(self.target);
+		var_01 = getspawnerarray(self.target);
 		foreach(var_03 in var_01) {
 			if(!issubstr(var_03.var_9F,"actor") && !issubstr(var_03.var_9F,"vehicle")) {
 				continue;
@@ -2818,7 +2818,7 @@ func_A5CD(param_00) {
 	self notify("kill_death_anim",param_00);
 	if(isstring(param_00)) {
 		self setcandamage(0);
-		var_01 scripts/sp/anim::func_1F35(self,param_00);
+		var_01 scripts\sp\anim::func_1F35(self,param_00);
 	}
 	else
 	{
@@ -2845,7 +2845,7 @@ func_5144() {
 	var_00 = self getsecondspassed();
 	var_01 = self getpointinbounds(1,0,0);
 	var_02 = distance(var_01,var_00);
-	var_03 = function_0083();
+	var_03 = getcorpsearrayinradius();
 	foreach(var_05 in var_03) {
 		if(distance(var_05.origin,var_00) < var_02) {
 			var_05 delete();

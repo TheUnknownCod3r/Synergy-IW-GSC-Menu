@@ -1,8 +1,8 @@
-/*************************************************************
+/*****************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\maps\cp_town\cp_town_traps.gsc
-*************************************************************/
+ * Script: scripts\cp\maps\cp_town\cp_town_traps.gsc
+*****************************************************/
 
 register_traps() {
 	level.interaction_hintstrings["fix_electric_trap"] = &"CP_TOWN_INTERACTIONS_MISSING_COMPONENTS";
@@ -58,7 +58,7 @@ check_for_trap_master_achievement(param_00) {
 	self.used_traps = scripts\engine\utility::array_add_safe(self.used_traps,param_00);
 	self.used_traps = scripts\engine\utility::array_remove_duplicates(self.used_traps);
 	if(self.used_traps.size > 4) {
-		scripts/cp/zombies/achievement::update_achievement("BAIT_AND_SWITCH",1);
+		scripts\cp\zombies\achievement::update_achievement("BAIT_AND_SWITCH",1);
 	}
 }
 
@@ -292,7 +292,7 @@ electrocute_zombie(param_00,param_01) {
 	var_03 = scripts\engine\utility::getclosest(param_00.origin,var_02);
 	var_04 = var_03.origin + (0,0,randomintrange(100,170));
 	var_05 = param_00.origin + (0,0,randomintrange(20,60));
-	function_02E0(level._effect["electric_trap_attack"],var_04,vectortoangles(var_05 - var_04),var_05);
+	playfxbetweenpoints(level._effect["electric_trap_attack"],var_04,vectortoangles(var_05 - var_04),var_05);
 	playfx(level._effect["electric_trap_shock"],var_05);
 	param_00.dontmutilate = 1;
 	param_00.electrocuted = 1;
@@ -547,7 +547,7 @@ kill_frozen_guys_after_time() {
 
 chill_scrnfx() {
 	self endon("disconnect");
-	self.scrnfx = function_01E1(level._effect["vfx_freezer_frost_scrn"],self geteye(),self);
+	self.scrnfx = spawnfxforclient(level._effect["vfx_freezer_frost_scrn"],self geteye(),self);
 	wait(0.1);
 	triggerfx(self.scrnfx);
 	scripts\engine\utility::waittill_any_timeout_1(5,"last_stand");

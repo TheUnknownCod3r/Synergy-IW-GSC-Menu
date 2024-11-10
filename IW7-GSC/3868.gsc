@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3868.gsc
-****************************/
+ * Script: 3868.gsc
+************************/
 
 func_6854() {
 	thread func_6860();

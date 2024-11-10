@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2738.gsc
+ * Script: 2738.gsc
 ***************************************/
 
 init() {
@@ -8,12 +8,12 @@ init() {
   var_00 = 0;
 
   for (;;) {
-  var_01 = tablelookupbyrow("mp/gesturetable.csv", var_00, 0);
+  var_01 = tablelookupbyrow("mp\gesturetable.csv", var_00, 0);
 
   if (!isdefined(var_01) || var_01 == "")
   break;
 
-  var_02 = tablelookupbyrow("mp/gesturetable.csv", var_00, 1);
+  var_02 = tablelookupbyrow("mp\gesturetable.csv", var_00, 1);
 
   if (!isdefined(var_02) || var_02 == "")
   break;
@@ -302,7 +302,7 @@ getbodymodel() {
   else
   var_00 = self getrankedplayerdata("privateloadouts", "squadMembers", "body");
 
-  return tablelookupbyrow("mp/cac/bodies.csv", var_00, 1);
+  return tablelookupbyrow("mp\cac\bodies.csv", var_00, 1);
 }
 
 haschangedarchetype() {

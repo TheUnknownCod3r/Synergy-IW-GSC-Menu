@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3335.gsc
-****************************/
+ * Script: 3335.gsc
+************************/
 
 c4_used(param_00) {
 	self endon("disconnect");
@@ -125,7 +125,7 @@ c4_watchforaltdetonation() {
 				continue;
 			}
 
-			if(!scripts/cp/powers/coop_phaseshift::isentityphaseshifted(self) && !scripts\cp\utility::isusingremote() && scripts\cp\utility::isreallyalive(self)) {
+			if(!scripts\cp\powers\coop_phaseshift::isentityphaseshifted(self) && !scripts\cp\utility::isusingremote() && scripts\cp\utility::isreallyalive(self)) {
 				thread c4_detonateall();
 			}
 		}

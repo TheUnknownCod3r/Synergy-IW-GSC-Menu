@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\3150.gsc
+ * Script: 3150.gsc
 ***************************************/
 
 func_A22E(var_00, var_01, var_02, var_03) {
@@ -242,11 +242,11 @@ func_A41C(var_00, var_01, var_02, var_03) {
 }
 
 func_9E75(var_00, var_01, var_02, var_03) {
-  return self._blackboard.func_AAB2 == 1;
+  return self.var_1198.func_AAB2 == 1;
 }
 
 func_9D70(var_00, var_01, var_02, var_03) {
-  return self._blackboard.func_2CCD == 1;
+  return self.var_1198.func_2CCD == 1;
 }
 
 func_C17C(var_00, var_01, var_02, var_03) {
@@ -260,15 +260,15 @@ func_C17B(var_00, var_01, var_02, var_03) {
 func_67C5(var_00) {
   self endon("death");
 
-  while (!isdefined(self._blackboard) || !isdefined(self._blackboard.func_1000D))
+  while (!isdefined(self.var_1198) || !isdefined(self.var_1198.func_1000D))
   wait 0.05;
 
   for (;;) {
-  if (self._blackboard.func_1000D) {
+  if (self.var_1198.func_1000D) {
   var_1["evade"] = func_0A1E::func_2356("Fly_Evade", "Evade");
   var_02 = randomint(var_1["evade"].size - 1);
   var_03 = var_1["evade"][var_02];
-  self._blackboard.func_9DE4 = 1;
+  self.var_1198.func_9DE4 = 1;
   self _meth_82AB(var_03, 1.0, 0.0);
 
   if (var_02 == 0 || var_02 == 1 || var_02 == 6)
@@ -277,7 +277,7 @@ func_67C5(var_00) {
   self playsound("jackal_evade_short");
 
   wait(getanimlength(var_03) * 0.8);
-  self._blackboard.func_9DE4 = 0;
+  self.var_1198.func_9DE4 = 0;
   }
 
   wait 0.05;
@@ -298,21 +298,21 @@ func_1EA6(var_00) {
   if (self.func_1FA8 == "jackal_enemy")
   return;
 
-  var_01 = __func_2EE(var_00, "cannon_state", "up", 0);
-  var_02 = __func_2EE(var_00, "cannon_state", "down", 0);
+  var_01 = _func_2EE(var_00, "cannon_state", "up", 0);
+  var_02 = _func_2EE(var_00, "cannon_state", "down", 0);
   wait 0.1;
 
   for (;;) {
-  if (self._blackboard.animscriptedactive) {
+  if (self.var_1198.animscriptedactive) {
   wait 0.05;
   continue;
   }
 
-  if (self._blackboard.func_E1AB != self._blackboard.func_38DC) {
-  self._blackboard.func_38DC = self._blackboard.func_E1AB;
+  if (self.var_1198.func_E1AB != self.var_1198.func_38DC) {
+  self.var_1198.func_38DC = self.var_1198.func_E1AB;
   var_03 = var_02;
 
-  if (self._blackboard.func_38DC == "up")
+  if (self.var_1198.func_38DC == "up")
   var_03 = var_01;
 
   self give_left_powers("cannon", var_3.anims, 1.0, 0.0, 1.0);

@@ -1,8 +1,8 @@
-/***********************************************************
+/***************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\aitypes\dlc4_boss\behaviors.gsc
-***********************************************************/
+ * Script: scripts\aitypes\dlc4_boss\behaviors.gsc
+***************************************************/
 
 initbehaviors(param_00) {
 	setupbehaviorstates();
@@ -19,7 +19,7 @@ initbehaviors(param_00) {
 	self.var_71D0 = ::shouldplaydlc4bosspainanim;
 	self.unlockedactions = [];
 	self.forcingaction = 0;
-	self.specialactionnames = scripts\common\utility::array_randomize(["clap","throw","air_pound","tornado"]);
+	self.specialactionnames = scripts\engine\utility::array_randomize(["clap","throw","air_pound","tornado"]);
 	self.passivetimer = 0;
 	self.specialactiontimer = 0;
 	self.automaticspawntimer = 0;
@@ -75,14 +75,14 @@ setupblackboard() {
 }
 
 setupnodes() {
-	self.arenacenter = scripts\common\utility::getstruct("arena_center","targetname").origin;
+	self.arenacenter = scripts\engine\utility::getstruct("arena_center","targetname").origin;
 	var_00 = [];
-	var_01 = scripts\common\utility::getstruct("boss_path","script_noteworthy");
+	var_01 = scripts\engine\utility::getstruct("boss_path","script_noteworthy");
 	var_02 = var_01.var_336;
 	for(;;) {
 		var_01.var_1E75 = vectornormalize(self.arenacenter - var_01.origin * (1,1,0));
 		var_00[var_00.size] = var_01;
-		var_01 = scripts\common\utility::getstruct(var_01.target,"targetname");
+		var_01 = scripts\engine\utility::getstruct(var_01.target,"targetname");
 		if(var_01.var_336 == var_02) {
 			break;
 		}
@@ -265,7 +265,7 @@ entrance_begin(param_00) {
 }
 
 entrance_tick(param_00) {
-	var_01 = self._blackboard;
+	var_01 = self.var_1198;
 	var_02 = distance(self.origin,var_01.previousposition);
 	var_03 = self.traversallength;
 	if(!var_01.movereadyforarrival) {
@@ -317,7 +317,7 @@ updatetimers(param_00) {
 	self.automaticspawntimer = max(self.automaticspawntimer - 50,0);
 	if(self.automaticspawntimer == 0 && self.automaticspawn) {
 		self.automaticspawntimer = var_01.automatic_spawn_time;
-		var_06 = scripts\mp\_mp_agent::getactiveagentsoftype("skeleton");
+		var_06 = scripts\mp\mp_agent::getactiveagentsoftype("skeleton");
 		if(var_06.size < int(max(var_01.automatic_spawn_cap,level.players.size))) {
 			computespawnpoints(1,var_06);
 			scripts\asm\dlc4_boss\dlc4_boss_asm::summonskeletons();
@@ -362,7 +362,7 @@ tornado(param_00) {
 }
 
 teleporttonode(param_00) {
-	var_01 = self.var_1198.var_C053.size;
+	var_01 = self.var_1198.nodes.size;
 	self.var_1198.desirednode = self.var_1198.var_4BF7 + randomint(var_01 - 1) + 1 % var_01;
 	scripts\aitypes\dlc4\simple_action::dosimpleaction_immediate(param_00,"teleport");
 }
@@ -373,7 +373,7 @@ groundpound(param_00) {
 
 summon(param_00) {
 	var_01 = scripts\asm\dlc4\dlc4_asm::gettunedata();
-	var_02 = scripts\mp\_mp_agent::getactiveagentsoftype(var_01.summon_agent_type);
+	var_02 = scripts\mp\mp_agent::getactiveagentsoftype(var_01.summon_agent_type);
 	var_03 = var_01.summon_min_spawn_num["" + level.players.size];
 	var_04 = var_01.summon_max_spawn_num["" + level.players.size];
 	var_05 = var_01.summon_max_total["" + level.players.size];
@@ -387,7 +387,7 @@ moveleft(param_00) {
 	self.var_1198.nodestomove = randomintrange(var_01.min_move_nodes,var_01.max_move_nodes + 1);
 	self.passivetimer = var_01.passive_cooldown;
 	self.var_1198.currentmovedirindex = 4;
-	self.var_1198.desirednode = self.var_1198.var_4BF7 + 1 % self.var_1198.var_C053.size;
+	self.var_1198.desirednode = self.var_1198.var_4BF7 + 1 % self.var_1198.nodes.size;
 	self.var_1198.strafeaction = "none";
 	self.var_1198.smoothmotion = 1;
 	self.var_1198.facecenter = 1;
@@ -399,7 +399,7 @@ moveright(param_00) {
 	self.var_1198.nodestomove = randomintrange(var_01.min_move_nodes,var_01.max_move_nodes + 1);
 	self.passivetimer = var_01.passive_cooldown;
 	self.var_1198.currentmovedirindex = 6;
-	self.var_1198.desirednode = self.var_1198.var_4BF7 - 1 + self.var_1198.var_C053.size % self.var_1198.var_C053.size;
+	self.var_1198.desirednode = self.var_1198.var_4BF7 - 1 + self.var_1198.nodes.size % self.var_1198.nodes.size;
 	self.var_1198.strafeaction = "none";
 	self.var_1198.smoothmotion = 1;
 	self.var_1198.facecenter = 1;
@@ -417,7 +417,7 @@ movefireballleft(param_00) {
 	var_01 = scripts\asm\dlc4\dlc4_asm::gettunedata();
 	self.var_1198.nodestomove = var_01.strafe_move_nodes;
 	self.var_1198.currentmovedirindex = 4;
-	self.var_1198.desirednode = self.var_1198.var_4BF7 + 1 % self.var_1198.var_C053.size;
+	self.var_1198.desirednode = self.var_1198.var_4BF7 + 1 % self.var_1198.nodes.size;
 	self.var_1198.strafeaction = "fireball";
 	self.var_1198.smoothmotion = 1;
 	self.var_1198.facecenter = 1;
@@ -428,7 +428,7 @@ movefireballright(param_00) {
 	var_01 = scripts\asm\dlc4\dlc4_asm::gettunedata();
 	self.var_1198.nodestomove = var_01.strafe_move_nodes;
 	self.var_1198.currentmovedirindex = 6;
-	self.var_1198.desirednode = self.var_1198.var_4BF7 - 1 + self.var_1198.var_C053.size % self.var_1198.var_C053.size;
+	self.var_1198.desirednode = self.var_1198.var_4BF7 - 1 + self.var_1198.nodes.size % self.var_1198.nodes.size;
 	self.var_1198.strafeaction = "fireball";
 	self.var_1198.smoothmotion = 1;
 	self.var_1198.facecenter = 1;
@@ -439,7 +439,7 @@ moveclapleft(param_00) {
 	var_01 = scripts\asm\dlc4\dlc4_asm::gettunedata();
 	self.var_1198.nodestomove = var_01.strafe_move_nodes;
 	self.var_1198.currentmovedirindex = 4;
-	self.var_1198.desirednode = self.var_1198.var_4BF7 + 1 % self.var_1198.var_C053.size;
+	self.var_1198.desirednode = self.var_1198.var_4BF7 + 1 % self.var_1198.nodes.size;
 	self.var_1198.strafeaction = "clap";
 	self.var_1198.facecenter = 1;
 	scripts\aitypes\dlc4\bt_action_api::setdesiredbtaction(param_00,"move_action");
@@ -449,7 +449,7 @@ moveclapright(param_00) {
 	var_01 = scripts\asm\dlc4\dlc4_asm::gettunedata();
 	self.var_1198.nodestomove = var_01.strafe_move_nodes;
 	self.var_1198.currentmovedirindex = 6;
-	self.var_1198.desirednode = self.var_1198.var_4BF7 - 1 + self.var_1198.var_C053.size % self.var_1198.var_C053.size;
+	self.var_1198.desirednode = self.var_1198.var_4BF7 - 1 + self.var_1198.nodes.size % self.var_1198.nodes.size;
 	self.var_1198.strafeaction = "clap";
 	self.var_1198.facecenter = 1;
 	scripts\aitypes\dlc4\bt_action_api::setdesiredbtaction(param_00,"move_action");
@@ -470,7 +470,7 @@ groundvul(param_00) {
 }
 
 dropmove(param_00) {
-	var_01 = self.var_1198.var_C053.size;
+	var_01 = self.var_1198.nodes.size;
 	self.var_1198.desirednode = self.var_1198.var_4BF7 + randomint(var_01 - 5) + 3 % var_01;
 	self.passivetimer = scripts\asm\dlc4\dlc4_asm::gettunedata().passive_cooldown;
 	scripts\aitypes\dlc4\bt_action_api::setdesiredbtaction(param_00,"drop_move");
@@ -482,8 +482,8 @@ flyover(param_00) {
 	}
 
 	self.specialactiontimer = scripts\asm\dlc4\dlc4_asm::gettunedata().special_cooldown;
-	var_01 = self._blackboard;
-	var_01.desirednode = var_01.var_4BF7 + scripts\asm\dlc4\dlc4_asm::gettunedata().fly_over_nodes_travelled % var_01.var_C053.size;
+	var_01 = self.var_1198;
+	var_01.desirednode = var_01.var_4BF7 + scripts\asm\dlc4\dlc4_asm::gettunedata().fly_over_nodes_travelled % var_01.nodes.size;
 	scripts\asm\dlc4_boss\dlc4_boss_asm::facedesirednode();
 	scripts\aitypes\dlc4\bt_action_api::setdesiredbtaction(param_00,"fly_over");
 }
@@ -552,7 +552,7 @@ canclap() {
 	var_00 = scripts\asm\dlc4\dlc4_asm::gettunedata();
 	var_01 = anglestoforward(self.angles);
 	var_02 = var_00.staff_projectile_speed * var_00.staff_projectile_interval;
-	var_03 = var_02 \ 2;
+	var_03 = var_02 / 2;
 	var_04 = self.origin + var_01 * var_03;
 	var_05 = var_04 + var_01 * var_00.staff_projectile_range;
 	var_06 = scripts\common\trace::create_default_contents(1);
@@ -586,7 +586,7 @@ cangroundpound() {
 
 cansummon() {
 	var_00 = scripts\asm\dlc4\dlc4_asm::gettunedata();
-	var_01 = scripts\mp\_mp_agent::getactiveagentsoftype(var_00.summon_agent_type);
+	var_01 = scripts\mp\mp_agent::getactiveagentsoftype(var_00.summon_agent_type);
 	return var_01.size <= var_00.summon_min_zombies_before_active;
 }
 
@@ -667,8 +667,8 @@ canflyover() {
 		return 0;
 	}
 
-	var_00 = self._blackboard;
-	var_01 = var_00.var_4BF7 + scripts\asm\dlc4\dlc4_asm::gettunedata().fly_over_nodes_travelled % var_00.var_C053.size;
+	var_00 = self.var_1198;
+	var_01 = var_00.var_4BF7 + scripts\asm\dlc4\dlc4_asm::gettunedata().fly_over_nodes_travelled % var_00.nodes.size;
 	var_02 = var_00.nodes[var_01].origin;
 	var_03 = scripts\common\trace::create_default_contents(1);
 	var_04 = scripts\common\trace::ray_trace_passed(self.origin + (0,0,250),var_02 + (0,0,250),undefined,var_03);
@@ -705,7 +705,7 @@ decideaction(param_00) {
 	}
 
 	var_01 = pickrandomvalidaction(param_00);
-	return scripts\common\utility::ter_op(var_01,level.success,level.failure);
+	return scripts\engine\utility::ter_op(var_01,level.success,level.failure);
 }
 
 pickrandomvalidaction(param_00) {
@@ -741,7 +741,7 @@ moveaction_begin(param_00) {
 	self clearpath();
 	scripts\asm\dlc4\dlc4_asm::clearasmaction();
 	self setscriptablepartstate("flame_trail","on");
-	var_01 = self._blackboard;
+	var_01 = self.var_1198;
 	var_01.lookaheadorigin = var_01.nodes[var_01.desirednode].origin;
 	var_01.lookaheadcurrnode = var_01.var_4BF7;
 	var_01.lookaheadnextnode = var_01.desirednode;
@@ -750,14 +750,14 @@ moveaction_begin(param_00) {
 }
 
 moveaction_internalsetup(param_00) {
-	var_01 = self._blackboard;
+	var_01 = self.var_1198;
 	var_01.previousposition = self.origin;
 	var_01.movereadyforarrival = 0;
 	self.traversallength = distance(var_01.previousposition,var_01.nodes[var_01.desirednode].origin);
 }
 
 moveaction_tick(param_00) {
-	var_01 = self._blackboard;
+	var_01 = self.var_1198;
 	var_02 = distance(self.origin,var_01.previousposition);
 	var_03 = self.traversallength;
 	if(scripts\asm\dlc4_boss\dlc4_boss_asm::shouldterminateaction()) {
@@ -769,11 +769,11 @@ moveaction_tick(param_00) {
 			var_01.var_4BF7 = var_01.desirednode;
 			var_01.nodestomove--;
 			if(var_01.currentmovedirindex == 4) {
-				var_01.desirednode = var_01.var_4BF7 + 1 % var_01.var_C053.size;
+				var_01.desirednode = var_01.var_4BF7 + 1 % var_01.nodes.size;
 			}
 			else
 			{
-				var_01.desirednode = var_01.var_4BF7 - 1 + var_01.var_C053.size % var_01.var_C053.size;
+				var_01.desirednode = var_01.var_4BF7 - 1 + var_01.nodes.size % var_01.nodes.size;
 			}
 
 			moveaction_internalsetup(param_00);
@@ -798,7 +798,7 @@ moveaction_end(param_00) {
 	self setscriptablepartstate("flame_trail","off");
 	cleanup("move");
 	self.traversallength = undefined;
-	var_01 = self._blackboard;
+	var_01 = self.var_1198;
 	var_01.var_4BF7 = var_01.desirednode;
 }
 
@@ -948,8 +948,8 @@ frenzyspawnmonitor() {
 	}
 
 	for(;;) {
-		var_09 = scripts\mp\_mp_agent::getaliveagentsofteam("axis");
-		var_09 = scripts\common\utility::array_remove(var_09,level.dlc4_boss);
+		var_09 = scripts\mp\mp_agent::getaliveagentsofteam("axis");
+		var_09 = scripts\engine\utility::array_remove(var_09,level.dlc4_boss);
 		if(var_09.size < var_04 || var_09.size < level.players.size) {
 			var_0A = [];
 			var_0B = [];
@@ -964,7 +964,7 @@ frenzyspawnmonitor() {
 				}
 			}
 
-			var_07 = scripts\common\utility::choose_from_weighted_array(var_0A,var_0B);
+			var_07 = scripts\engine\utility::choose_from_weighted_array(var_0A,var_0B);
 			if(!computespawnpoints(1,var_09)) {
 				wait(0.05);
 				continue;
@@ -1001,7 +1001,7 @@ frenzyarmageddonmonitor() {
 			break;
 		}
 
-		var_01 = pow(1 * var_00.frenzied_meteor_target_min_radius \ var_00.frenzied_meteor_target_radius,2);
+		var_01 = pow(1 * var_00.frenzied_meteor_target_min_radius / var_00.frenzied_meteor_target_radius,2);
 		var_02 = sqrt(randomfloat(1 - var_01) + var_01) * var_00.frenzied_meteor_target_radius;
 		var_03 = randomfloat(360);
 		var_04 = self.arenacenter[0] + var_02 * cos(var_03);
@@ -1062,14 +1062,14 @@ computespawnpoints(param_00,param_01) {
 				continue;
 			}
 
-			var_02.spawnpoints[var_02.var_108FB.size] = var_06;
-			if(var_02.var_108FB.size >= param_00) {
+			var_02.spawnpoints[var_02.spawnpoints.size] = var_06;
+			if(var_02.spawnpoints.size >= param_00) {
 				return 1;
 			}
 		}
 	}
 
-	return var_02.var_108FB.size > 0;
+	return var_02.spawnpoints.size > 0;
 }
 
 flyover_begin(param_00) {
@@ -1090,7 +1090,7 @@ stop_flame_trail(param_00) {
 }
 
 flyover_tick(param_00) {
-	return scripts\common\utility::ter_op(scripts\aitypes\dlc4\bt_state_api::btstate_tickstates(param_00),level.running,level.success);
+	return scripts\engine\utility::ter_op(scripts\aitypes\dlc4\bt_state_api::btstate_tickstates(param_00),level.running,level.success);
 }
 
 flyover_end(param_00) {
@@ -1106,7 +1106,7 @@ teleport_begin(param_00) {
 }
 
 teleport_tick(param_00) {
-	return scripts\common\utility::ter_op(scripts\aitypes\dlc4\bt_state_api::btstate_tickstates(param_00),level.running,level.success);
+	return scripts\engine\utility::ter_op(scripts\aitypes\dlc4\bt_state_api::btstate_tickstates(param_00),level.running,level.success);
 }
 
 teleport_end(param_00) {
@@ -1120,7 +1120,7 @@ death_begin(param_00) {
 }
 
 death_tick(param_00) {
-	return scripts\common\utility::ter_op(scripts\aitypes\dlc4\bt_state_api::btstate_tickstates(param_00),level.running,level.success);
+	return scripts\engine\utility::ter_op(scripts\aitypes\dlc4\bt_state_api::btstate_tickstates(param_00),level.running,level.success);
 }
 
 death_end(param_00) {
@@ -1144,7 +1144,7 @@ eclipse_tick(param_00) {
 		self.eclipseanimfinished = 1;
 	}
 
-	return scripts\common\utility::ter_op(self.eclipseanimfinished && !self.eclipseactive,level.success,level.running);
+	return scripts\engine\utility::ter_op(self.eclipseanimfinished && !self.eclipseactive,level.success,level.running);
 }
 
 eclipse_end(param_00) {
@@ -1182,12 +1182,12 @@ updateweights() {
 	var_00 = scripts\asm\dlc4\dlc4_asm::gettunedata();
 	var_01 = self.unlockedactions.size;
 	var_02 = self.bossactionsstruct;
-	var_02["move_left"].weight = var_00.move_base_weight \ 2 + var_01 * var_00.move_stage_multiplier;
+	var_02["move_left"].weight = var_00.move_base_weight / 2 + var_01 * var_00.move_stage_multiplier;
 	var_02["move_right"].weight = var_02["move_left"].weight;
 	var_02["temp_idle"].weight = var_00.idle_base_weight + var_01 * var_00.idle_stage_multiplier;
 	var_02["drop_move"].weight = var_00.drop_move_base_weight + var_01 * var_00.drop_move_stage_multiplier;
 	var_02["fireball"].weight = var_00.fireball_base_weight + var_01 * var_00.fireball_stage_multiplier;
-	var_02["move_fireball_left"].weight = var_00.move_fireball_base_weight \ 2 + var_01 * var_00.move_fireball_stage_multiplier;
+	var_02["move_fireball_left"].weight = var_00.move_fireball_base_weight / 2 + var_01 * var_00.move_fireball_stage_multiplier;
 	var_02["move_fireball_right"].weight = var_02["move_fireball_left"].weight;
 	var_02["summon"].weight = var_00.summon_base_weight + var_01 * var_00.summon_stage_multiplier;
 	var_03 = var_00.black_hole_base_weight;
@@ -1241,7 +1241,7 @@ pointnearanyplayer(param_00,param_01) {
 			continue;
 		}
 
-		if(var_04.ignoreme || isdefined(var_04.triggerportableradarping) && var_04.var_222.ignoreme) {
+		if(var_04.ignoreme || isdefined(var_04.triggerportableradarping) && var_04.triggerportableradarping.ignoreme) {
 			continue;
 		}
 
@@ -1305,7 +1305,7 @@ simplesetup_tick(param_00) {
 		return level.success;
 	}
 
-	return scripts\common\utility::ter_op(scripts\aitypes\dlc4\bt_state_api::btstate_tickstates(param_00),level.running,level.success);
+	return scripts\engine\utility::ter_op(scripts\aitypes\dlc4\bt_state_api::btstate_tickstates(param_00),level.running,level.success);
 }
 
 simplesetup_end(param_00) {

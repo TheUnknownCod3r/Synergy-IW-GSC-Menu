@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3625.gsc
-****************************/
+ * Script: 3625.gsc
+************************/
 
 func_87ED(param_00) {
 	level.player.var_885C = 1;
@@ -244,7 +244,7 @@ func_8829() {
 	precacheshader("hack_tool_pip_frame");
 	precacheshader("robot_control_dot_overlay");
 	precacheshader("apache_zoom_overlay");
-	level._effect["drone_suicide"] = loadfx("vfx/iw7/core/expl/weap/hydra_grenade/vfx_exp_gre_hydra_aerial.vfx");
+	level._effect["drone_suicide"] = loadfx("vfx\iw7\core\expl\weap\hydra_grenade\vfx_exp_gre_hydra_aerial.vfx");
 	precacheshader("reticle_center_shard_ball");
 	precacheshader("apache_target_lock");
 	level.player scripts\sp\_utility::func_65E0("is_controlling_robot");
@@ -258,7 +258,7 @@ func_8829() {
 	setomnvar("ui_hack_control_selfdestruct",0);
 	setomnvar("ui_hack_control_selfdestruct_timer",0);
 	setomnvar("ui_hack_control_selfdestruct_show_timer",0);
-	level._effect["robot_explosion"] = loadfx("vfx/iw7/_requests/europa/vfx_beam_rifle_robot_explode.vfx");
+	level._effect["robot_explosion"] = loadfx("vfx\iw7\_requests\europa\vfx_beam_rifle_robot_explode.vfx");
 	func_1EE6();
 	func_5C25();
 	scripts\engine\utility::flag_init("hack_device_target_locked");
@@ -2669,7 +2669,7 @@ func_8793(param_00) {
 	self getradiuspathsighttestnodes();
 	if(isdefined(level.var_D365)) {
 		level.var_D365 show();
-		scripts/sp/anim::func_1EC7(level.var_D365,"hack_control_end");
+		scripts\sp\anim::func_1EC7(level.var_D365,"hack_control_end");
 		if(isdefined(level.var_D365)) {
 			level.var_D365 delete();
 		}
@@ -2709,7 +2709,7 @@ func_6AFD() {
 	level.player.var_6AF9 = var_00;
 	var_00 glinton(#animtree);
 	var_00.var_1FBB = "fake_player";
-	var_00 thread scripts/sp/anim::func_1EEA(var_00,"drone_use_idle","stop_loop");
+	var_00 thread scripts\sp\anim::func_1EEA(var_00,"drone_use_idle","stop_loop");
 	level.player waittill("faded_out");
 	var_00 givescorefortrophyblocks();
 	var_00 _meth_81D0();

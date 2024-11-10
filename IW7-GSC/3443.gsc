@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\3443.gsc
+ * Script: 3443.gsc
 ***************************************/
 
 bot_killstreak_setup() {
@@ -180,7 +180,7 @@ bot_think_killstreak() {
 
   if (!isdefined(var_06) || var_06 == 0) {
   if (!isdefined(self.bot_killstreak_wait))
-    self.bot_killstreak_wait = [];
+  self.bot_killstreak_wait = [];
 
   self.bot_killstreak_wait[var_2.streakname] = gettime() + 5000;
   }
@@ -226,7 +226,7 @@ bot_can_use_air_superiority() {
   if (!aerial_vehicle_allowed())
   return 0;
 
-  var_00 = scripts/mp/killstreaks/airdrone::func_6CAA(self, self.team);
+  var_00 = scripts\mp\killstreaks\airdrone::func_6CAA(self, self.team);
   var_01 = gettime();
 
   foreach (var_03 in var_00) {

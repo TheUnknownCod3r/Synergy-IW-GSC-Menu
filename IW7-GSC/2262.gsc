@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\2262.gsc
-****************************/
+ * Script: 2262.gsc
+************************/
 
 main() {
 	self setmodel("body_sdf_army_light_2_kotch");
@@ -17,7 +17,7 @@ main() {
 	self.voice = "setdef";
 	self give_explosive_touch_on_revived("vestheavy");
 	if(issentient(self)) {
-		self sethitlocdamagetable("locdmgtable/ai_lochit_dmgtable");
+		self sethitlocdamagetable("locdmgtable\ai_lochit_dmgtable");
 	}
 
 	self glinton(#animtree);

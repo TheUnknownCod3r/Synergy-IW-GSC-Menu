@@ -1,12 +1,12 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2767.gsc
+ * Script: 2767.gsc
 ***************************************/
 
 init() {
-  level.func_B3DA["smoke"] = loadfx("vfx/iw7/_requests/mp/vfx_debug_warning.vfx");
-  level.func_B3DA["tracer"] = loadfx("vfx/iw7/_requests/mp/vfx_debug_warning.vfx");
-  level.func_B3DA["explosion"] = loadfx("vfx/iw7/_requests/mp/vfx_debug_warning.vfx");
+  level.func_B3DA["smoke"] = loadfx("vfx\iw7\_requests\mp\vfx_debug_warning.vfx");
+  level.func_B3DA["tracer"] = loadfx("vfx\iw7\_requests\mp\vfx_debug_warning.vfx");
+  level.func_B3DA["explosion"] = loadfx("vfx\iw7\_requests\mp\vfx_debug_warning.vfx");
   level.func_B3E6["mortar"] = ::func_5915;
   level.func_B3E6["smoke"] = ::func_5AAF;
   level.func_B3E6["airstrike"] = ::func_57DD;

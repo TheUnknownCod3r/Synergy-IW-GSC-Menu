@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3410.gsc
-****************************/
+ * Script: 3410.gsc
+************************/
 
 func_9700() {
 	level.var_13F4D = [];
@@ -65,14 +65,14 @@ add_devgui_entries(param_00,param_01,param_02,param_03) {
 
 	if(level.script == "cp_town") {
 		if(param_01 == 0) {
-			var_04 = "devgui_cmd \"Town:5/Quests/" + param_02 + "-" + param_00 + "/Step" + param_01 + 1 + "-" + param_03 + "/ 0 - Complete This Step\" \"set scr_complete_quest_step " + param_00 + "_" + param_01 + "\" \n";
+			var_04 = "devgui_cmd \"Town:5\Quests\" + param_02 + "-" + param_00 + "\Step" + param_01 + 1 + "-" + param_03 + "\ 0 - Complete This Step\" \"set scr_complete_quest_step " + param_00 + "_" + param_01 + "\" \n";
 			addentrytodevgui(var_04);
 			return;
 		}
 
-		var_04 = "devgui_cmd \"Town:5/Quests/" + param_03 + "-" + param_01 + "/Step" + param_02 + 1 + "-" + var_04 + "/ 0 - Jump To This Step\" \"set scr_complete_quest_step " + param_01 + "_" + param_02 - 1 + "\" \n";
+		var_04 = "devgui_cmd \"Town:5\Quests\" + param_03 + "-" + param_01 + "\Step" + param_02 + 1 + "-" + var_04 + "\ 0 - Jump To This Step\" \"set scr_complete_quest_step " + param_01 + "_" + param_02 - 1 + "\" \n";
 		addentrytodevgui(var_04);
-		var_04 = "devgui_cmd \"Town:5/Quests/" + param_02 + "-" + param_00 + "/Step" + param_01 + 1 + "-" + param_03 + "/ 1 - Complete This Step\" \"set scr_complete_quest_step " + param_00 + "_" + param_01 + "\" \n";
+		var_04 = "devgui_cmd \"Town:5\Quests\" + param_02 + "-" + param_00 + "\Step" + param_01 + 1 + "-" + param_03 + "\ 1 - Complete This Step\" \"set scr_complete_quest_step " + param_00 + "_" + param_01 + "\" \n";
 		addentrytodevgui(var_04);
 	}
 }

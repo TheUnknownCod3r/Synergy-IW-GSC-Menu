@@ -1,11 +1,11 @@
-/*********************************************************
+/*************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\killstreaks\_spiderbot.gsc
-*********************************************************/
+ * Script: scripts\mp\killstreaks\_spiderbot.gsc
+*************************************************/
 
 init() {
-	level._effect["spider_explode"] = loadfx("vfx/core/expl/grenadeexp_default");
+	level._effect["spider_explode"] = loadfx("vfx\core\expl\grenadeexp_default");
 	scripts\mp\killstreaks\_killstreaks::registerkillstreak("spiderbot",::func_1288A);
 }
 
@@ -60,7 +60,7 @@ func_13B57() {
 			var_00 = anglestoforward(self getplayerangles());
 			var_01 = self geteye() + var_00 * 20 + (0,0,20);
 			var_02 = var_01 + var_00;
-			var_03 = scripts\mp\_utility::_magicbullet("iw7_webhook_mp",var_01,var_02,self);
+			var_03 = scripts\mp\utility::_magicbullet("iw7_webhook_mp",var_01,var_02,self);
 			thread func_13BB0(var_03,var_01);
 			thread func_13BB1(2,var_03);
 		}
@@ -152,7 +152,7 @@ func_13B55() {
 	playrumbleonposition("grenade_rumble",var_01);
 	earthquake(0.5,0.75,var_01,800);
 	foreach(var_05 in level.players) {
-		if(var_05 scripts\mp\_utility::isusingremote()) {
+		if(var_05 scripts\mp\utility::isusingremote()) {
 			continue;
 		}
 
@@ -227,7 +227,7 @@ func_7F05(param_00,param_01,param_02,param_03) {
 func_38C1(param_00,param_01,param_02,param_03,param_04) {
 	var_05 = param_00.origin;
 	var_06 = distance2dsquared(param_01,var_05);
-	return var_06 < param_02 && !param_03 || scripts\mp\_weapons::func_13C7E(param_01,var_05,param_04,param_00);
+	return var_06 < param_02 && !param_03 || scripts\mp\weapons::func_13C7E(param_01,var_05,param_04,param_00);
 }
 
 func_511C(param_00,param_01) {

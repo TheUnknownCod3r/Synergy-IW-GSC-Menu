@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2755.gsc
+ * Script: 2755.gsc
 ***************************************/
 
 init() {
@@ -110,7 +110,7 @@ func_AE1D(var_00) {
 }
 
 func_B02D(var_00) {
-  var_01 = tablelookup("mp/intelChallenges.csv", 0, var_00, 1);
+  var_01 = tablelookup("mp\intelChallenges.csv", 0, var_00, 1);
 
   if (!isdefined(var_01) || var_01 == "")
   return undefined;
@@ -119,7 +119,7 @@ func_B02D(var_00) {
 }
 
 func_B02E(var_00, var_01) {
-  var_02 = tablelookup("mp/intelChallenges.csv", 0, var_00, 5 + var_01 * 2);
+  var_02 = tablelookup("mp\intelChallenges.csv", 0, var_00, 5 + var_01 * 2);
 
   if (!isdefined(var_02) || var_02 == "")
   return undefined;

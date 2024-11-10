@@ -1,8 +1,8 @@
-/******************************************************************
+/**********************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\maps\cp_disco\cp_disco_crafting.gsc
-******************************************************************/
+ * Script: scripts\cp\maps\cp_disco\cp_disco_crafting.gsc
+**********************************************************/
 
 init_crafting() {
 	level.placed_crafted_traps = [];
@@ -243,7 +243,7 @@ table_look_up(param_00,param_01,param_02) {
 }
 
 get_icon_index_based_on_model(param_00) {
-	return tablelookup("scripts/cp/maps/cp_zmb/cp_zmb_crafting.csv",1,param_00,0);
+	return tablelookup("scripts\cp\maps\cp_zmb\cp_zmb_crafting.csv",1,param_00,0);
 }
 
 get_puzzle_piece_location(param_00) {

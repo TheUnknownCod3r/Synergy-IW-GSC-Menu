@@ -1,8 +1,8 @@
-/***********************************************************
+/***************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\asm\zombie_dlc1\zombie_dlc1.gsc
-***********************************************************/
+ * Script: scripts\asm\zombie_dlc1\zombie_dlc1.gsc
+***************************************************/
 
 playtraverseanimz_dlc1(param_00,param_01,param_02,param_03) {
 	scripts\mp\agents\_scriptedagents::setstatelocked(1,"DoTraverse");
@@ -113,10 +113,10 @@ dotraverseanim_dlc1(param_00,param_01,param_02,param_03) {
 	opcode::OP_CallBuiltin4 = self _meth_8145();
 	if(isdefined(opcode::OP_CallBuiltin4) && isdefined(var_1E.target)) {
 		self.endnode = opcode::OP_CallBuiltin4;
-		opcode::OP_CallBuiltin5 = scripts\common\utility::getstruct(self.var_6366.target,"targetname");
+		opcode::OP_CallBuiltin5 = scripts\engine\utility::getstruct(self.endnode.target,"targetname");
 		if(var_13.size > 0) {
 			scripts\mp\agents\_scriptedagents::func_5AC1(var_06,var_07,var_0D,"traverse",var_0E,var_12,0,::zombietraversenotetrackhandler_dlc1);
-			opcode::OP_CallBuiltin5 = scripts\common\utility::getstruct(self.var_6366.target,"targetname");
+			opcode::OP_CallBuiltin5 = scripts\engine\utility::getstruct(self.endnode.target,"targetname");
 			if(isdefined(var_1F.script_noteworthy) && var_1F.script_noteworthy == "continue_flex_height") {
 				scripts\mp\agents\_scriptedagents::func_5AC1(var_06,var_07,var_0D,"traverse",var_12,var_10,1,::zombietraversenotetrackhandler_dlc1);
 			}
@@ -137,21 +137,21 @@ dotraverseanim_dlc1(param_00,param_01,param_02,param_03) {
 		}
 		else
 		{
-			opcode::OP_CallBuiltin = scripts\common\utility::getstruct(self.var_6366.target,"targetname");
+			opcode::OP_CallBuiltin = scripts\engine\utility::getstruct(self.endnode.target,"targetname");
 			opcode::OP_CallBuiltin5 = var_20.origin;
 			opcode::OP_BoolNot = var_11[0];
 			scripts\mp\agents\_scriptedagents::func_5AC2(var_06,var_07,"traverse",var_0D,var_0E,var_10,opcode::OP_CallBuiltin5,opcode::OP_BoolNot,::zombietraversenotetrackhandler_dlc1);
 			opcode::OP_ScriptFarMethodThreadCall = getanimlength(var_0D);
-			if(var_15[0] - var_11[0] >= 0.05 \ opcode::OP_ScriptFarMethodThreadCall) {
+			if(var_15[0] - var_11[0] >= 0.05 / opcode::OP_ScriptFarMethodThreadCall) {
 				self scragentsetanimscale(1,1);
 				scripts\mp\agents\_scriptedagents::func_CED5(var_06,var_07,"traverse",var_14,::zombietraversenotetrackhandler_dlc1);
 			}
 
-			opcode::OP_CallBuiltin5 = self.var_6366.origin;
+			opcode::OP_CallBuiltin5 = self.endnode.origin;
 			opcode::OP_BoolNot = opcode::OP_SetNewLocalVariableFieldCached0[0];
 			scripts\mp\agents\_scriptedagents::func_5AC2(var_06,var_07,"traverse",var_0D,var_14,var_16,opcode::OP_CallBuiltin5,opcode::OP_BoolNot,::zombietraversenotetrackhandler_dlc1);
 			self scragentsetanimscale(1,1);
-			if(var_19.size == 0 || !scripts\common\utility::istrue(self.dismember_crawl)) {
+			if(var_19.size == 0 || !scripts\engine\utility::istrue(self.dismember_crawl)) {
 				scripts\mp\agents\_scriptedagents::func_CED5(var_06,var_07,"traverse","end",::zombietraversenotetrackhandler_dlc1);
 			}
 		}
@@ -171,7 +171,7 @@ dotraverseanim_dlc1(param_00,param_01,param_02,param_03) {
 		}
 
 		scripts\mp\agents\_scriptedagents::func_5AC2(var_06,var_07,"traverse",var_0D,var_14,var_16,opcode::OP_CallBuiltin5,opcode::OP_BoolNot,::zombietraversenotetrackhandler_dlc1);
-		if(var_19.size == 0 || !scripts\common\utility::istrue(self.dismember_crawl)) {
+		if(var_19.size == 0 || !scripts\engine\utility::istrue(self.dismember_crawl)) {
 			scripts\mp\agents\_scriptedagents::func_CED5(var_06,var_07,"traverse","end",::zombietraversenotetrackhandler_dlc1);
 		}
 	}
@@ -199,9 +199,9 @@ dotraverseanim_dlc1(param_00,param_01,param_02,param_03) {
 			opcode::OP_ClearFieldVariable = 1;
 		}
 
-		opcode::OP_GetFloat = opcode::OP_GetThisthread + opcode::OP_ClearFieldVariable \ opcode::OP_ClearFieldVariable;
+		opcode::OP_GetFloat = opcode::OP_GetThisthread + opcode::OP_ClearFieldVariable / opcode::OP_ClearFieldVariable;
 		self scragentsetanimscale(opcode::OP_GetFloat,0);
-		childthread traverse_lerp_z_over_time_dlc1(var_04.origin[2],var_05[2],opcode::OP_SetLevelFieldVariableField - opcode::OP_JumpOnTrueExpr \ self.traverseratescale);
+		childthread traverse_lerp_z_over_time_dlc1(var_04.origin[2],var_05[2],opcode::OP_SetLevelFieldVariableField - opcode::OP_JumpOnTrueExpr / self.traverseratescale);
 		scripts\mp\agents\_scriptedagents::func_CED3(var_06,var_07,self.traverseratescale,"traverse","flex_across_end");
 		self scragentsetanimscale(1,1);
 		scripts\mp\agents\_scriptedagents::func_CED3(var_06,var_07,self.traverseratescale,"traverse");
@@ -210,7 +210,7 @@ dotraverseanim_dlc1(param_00,param_01,param_02,param_03) {
 		if(opcode::OP_CallBuiltin1[2] > 0) {
 			if(var_0C) {
 				self scragentsetanimscale(var_1C.var_13E2B,var_1C.var_3A6);
-				opcode::OP_SafeCreateVariableFieldCached = clamp(2 \ var_1C.var_3A6,0.5,1);
+				opcode::OP_SafeCreateVariableFieldCached = clamp(2 / var_1C.var_3A6,0.5,1);
 				if(var_11.size > 0) {
 					scripts\mp\agents\_scriptedagents::func_CED3(var_06,var_07,opcode::OP_SafeCreateVariableFieldCached * self.traverseratescale,"traverse",var_10);
 					scripts\mp\agents\_scriptedagents::setstatelocked(0,"DoTraverse");
@@ -280,7 +280,7 @@ dotraverseanim_dlc1(param_00,param_01,param_02,param_03) {
 	}
 	else if(abs(var_08[2]) < 16 || opcode::OP_CallBuiltin1[2] == 0) {
 		self scragentsetanimscale(var_1C.var_13E2B,var_1C.var_3A6);
-		opcode::OP_SafeCreateVariableFieldCached = clamp(2 \ var_1C.var_3A6,0.5,1);
+		opcode::OP_SafeCreateVariableFieldCached = clamp(2 / var_1C.var_3A6,0.5,1);
 		if(var_11.size > 0) {
 			scripts\mp\agents\_scriptedagents::func_CED3(var_06,var_07,opcode::OP_SafeCreateVariableFieldCached * self.traverseratescale,"traverse",var_10);
 			scripts\mp\agents\_scriptedagents::setstatelocked(0,"DoTraverse");
@@ -296,7 +296,7 @@ dotraverseanim_dlc1(param_00,param_01,param_02,param_03) {
 	}
 	else if(opcode::OP_CallBuiltin1[2] < 0) {
 		self scragentsetanimscale(var_1C.var_13E2B,var_1C.var_3A6);
-		opcode::OP_SafeCreateVariableFieldCached = clamp(2 \ var_1C.var_3A6,0.5,1);
+		opcode::OP_SafeCreateVariableFieldCached = clamp(2 / var_1C.var_3A6,0.5,1);
 		if(var_0F.size > 0) {
 			scripts\mp\agents\_scriptedagents::func_CED3(var_06,var_07,self.traverseratescale,"traverse",var_0E);
 		}
@@ -362,8 +362,8 @@ traverse_lerp_z_over_time_dlc1(param_00,param_01,param_02) {
 	self endon("terminate_ai_threads");
 	var_03 = gettime();
 	for(;;) {
-		var_04 = gettime() - var_03 \ 1000;
-		var_05 = var_04 \ param_02;
+		var_04 = gettime() - var_03 / 1000;
+		var_05 = var_04 / param_02;
 		if(var_05 > 1) {
 			break;
 		}
@@ -427,7 +427,7 @@ balloongrabnotehandler(param_00,param_01,param_02,param_03) {
 		var_04 = ["decor_balloon_a_blue","decor_balloon_a_blue_light","decor_balloon_a_cyan","decor_balloon_a_green","decor_balloon_a_green_light","decor_balloon_a_orange","decor_balloon_a_pink","decor_balloon_a_purple","decor_balloon_a_purple_deep","decor_balloon_a_red","decor_balloon_a_yellow"];
 		var_05 = self gettagorigin("j_shoulder_ri");
 		self.balloon_in_hand = spawn("script_model",var_05);
-		self.balloon_model = scripts\common\utility::random(var_04);
+		self.balloon_model = scripts\engine\utility::random(var_04);
 		if(self.bholdingballooninleft) {
 			self attach(self.balloon_model,"tag_accessory_left");
 		}
@@ -448,7 +448,7 @@ balloongrabnotehandler(param_00,param_01,param_02,param_03) {
 }
 
 chooseballoonfloatanim(param_00,param_01,param_02) {
-	if(scripts\common\utility::istrue(self.bholdingballooninleft)) {
+	if(scripts\engine\utility::istrue(self.bholdingballooninleft)) {
 		return scripts\asm\asm::asm_lookupanimfromalias(param_01,"left");
 	}
 
@@ -472,7 +472,7 @@ shouldballoongrableft(param_00,param_01,param_02,param_03) {
 }
 
 isdismembermentdisabled(param_00,param_01,param_02,param_03) {
-	if(scripts\common\utility::istrue(self.var_55CF)) {
+	if(scripts\engine\utility::istrue(self.var_55CF)) {
 		return 1;
 	}
 

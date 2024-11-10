@@ -1,8 +1,8 @@
-/***************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\942.gsc
-***************************/
+ * Script: 942.gsc
+************************/
 
 func_63EC(param_00) {
 	return lib_0A0A::shouldrefundsuper(param_00,0.3);
@@ -70,17 +70,17 @@ func_2AD0() {
 	var_00.var_1581[0] = ::lib_0A08::func_103F5;
 	var_00.var_1581[1] = ::lib_0A10::func_9898;
 	var_00.var_1581[2] = ::lib_0A08::func_97EC;
-	var_00.var_1581[3] = ::scripts/aitypes/combat::func_12E90;
+	var_00.var_1581[3] = ::scripts\aitypes\combat::func_12E90;
 	var_00.var_1581[4] = ::lib_0A09::func_9307;
-	var_00.var_1581[5] = ::scripts/aitypes/combat::func_93B6;
-	var_00.var_1581[6] = ::scripts/aitypes/combat::func_2753;
-	var_00.var_1581[7] = ::scripts/aitypes/combat::func_1384E;
-	var_00.var_1581[8] = ::scripts/aitypes/combat::func_275A;
-	var_00.var_1581[9] = ::scripts/aitypes/combat::func_24D4;
+	var_00.var_1581[5] = ::scripts\aitypes\combat::func_93B6;
+	var_00.var_1581[6] = ::scripts\aitypes\combat::func_2753;
+	var_00.var_1581[7] = ::scripts\aitypes\combat::func_1384E;
+	var_00.var_1581[8] = ::scripts\aitypes\combat::func_275A;
+	var_00.var_1581[9] = ::scripts\aitypes\combat::func_24D4;
 	var_00.var_1581[10] = ::lib_0A0A::func_41A3;
-	var_00.var_1581[11] = ::scripts/aitypes/combat::func_E84D;
-	var_00.var_1581[12] = ::scripts/aitypes/combat::func_E84E;
-	var_00.var_1581[13] = ::scripts/aitypes/combat::func_E84F;
+	var_00.var_1581[11] = ::scripts\aitypes\combat::func_E84D;
+	var_00.var_1581[12] = ::scripts\aitypes\combat::func_E84E;
+	var_00.var_1581[13] = ::scripts\aitypes\combat::func_E84F;
 	var_00.var_1581[14] = ::lib_0A0C::func_10020;
 	var_00.var_1581[15] = ::lib_0A0C::func_85D3;
 	var_00.var_1581[16] = ::lib_0A0C::func_85D4;
@@ -90,20 +90,20 @@ func_2AD0() {
 	var_00.var_1581[20] = ::lib_0A0C::_meth_85B1;
 	var_00.var_1581[21] = ::lib_0A17::func_9308;
 	var_00.var_1581[22] = ::lib_0A17::func_12F2D;
-	var_00.var_1581[23] = ::scripts/aitypes/combat::func_9E40;
-	var_00.var_1581[24] = ::scripts/aitypes/combat::func_12F64;
-	var_00.var_1581[25] = ::scripts/aitypes/combat::func_12F1D;
-	var_00.var_1581[26] = ::scripts/aitypes/combat::func_12E93;
+	var_00.var_1581[23] = ::scripts\aitypes\combat::func_9E40;
+	var_00.var_1581[24] = ::scripts\aitypes\combat::func_12F64;
+	var_00.var_1581[25] = ::scripts\aitypes\combat::func_12F1D;
+	var_00.var_1581[26] = ::scripts\aitypes\combat::func_12E93;
 	var_00.var_1581[27] = ::lib_0A19::func_12F5C;
 	var_00.var_1581[28] = ::lib_0A0A::func_12E92;
 	var_00.var_1581[29] = ::lib_0A0A::func_9E43;
 	var_00.var_1581[30] = ::lib_0A0A::func_97EF;
 	var_00.var_1581[31] = ::lib_0A0A::func_FFE1;
 	var_00.var_1581[32] = ::lib_0A0A::func_12DDF;
-	var_00.var_1581[33] = ::scripts/aitypes/combat::func_B4EB;
-	var_00.var_1581[34] = ::scripts/aitypes/combat::func_FE88;
-	var_00.var_1581[35] = ::scripts/aitypes/combat::func_FE6E;
-	var_00.var_1581[36] = ::scripts/aitypes/combat::func_FE83;
+	var_00.var_1581[33] = ::scripts\aitypes\combat::func_B4EB;
+	var_00.var_1581[34] = ::scripts\aitypes\combat::func_FE88;
+	var_00.var_1581[35] = ::scripts\aitypes\combat::func_FE6E;
+	var_00.var_1581[36] = ::scripts\aitypes\combat::func_FE83;
 	var_00.var_1581[37] = ::func_63EC;
 	var_00.var_1581[38] = ::lib_0A0A::func_4742;
 	var_00.var_1581[39] = ::lib_0A0A::func_98C1;
@@ -154,34 +154,34 @@ func_2AD0() {
 	var_00.var_1581[84] = ::lib_0A0A::func_473E;
 	var_00.var_1581[85] = ::lib_0A0A::func_116FC;
 	var_00.var_1581[86] = ::lib_0A0A::func_453E;
-	var_00.var_1581[87] = ::scripts/aitypes/combat::func_12F28;
-	var_00.var_1581[88] = ::scripts/aitypes/melee::shouldmelee;
-	var_00.var_1581[89] = ::scripts/aitypes/melee::melee_init;
-	var_00.var_1581[90] = ::scripts/aitypes/melee::func_B5F0;
-	var_00.var_1581[91] = ::scripts/aitypes/melee::func_B5E8;
-	var_00.var_1581[92] = ::scripts/aitypes/melee::func_B5EE;
-	var_00.var_1581[93] = ::scripts/aitypes/melee::func_5903;
-	var_00.var_1581[94] = ::scripts/aitypes/melee::func_9896;
-	var_00.var_1581[95] = ::scripts/aitypes/melee::func_41C6;
-	var_00.var_1581[96] = ::scripts/aitypes/combat::func_8C24;
+	var_00.var_1581[87] = ::scripts\aitypes\combat::func_12F28;
+	var_00.var_1581[88] = ::scripts\aitypes\melee::shouldmelee;
+	var_00.var_1581[89] = ::scripts\aitypes\melee::melee_init;
+	var_00.var_1581[90] = ::scripts\aitypes\melee::func_B5F0;
+	var_00.var_1581[91] = ::scripts\aitypes\melee::func_B5E8;
+	var_00.var_1581[92] = ::scripts\aitypes\melee::func_B5EE;
+	var_00.var_1581[93] = ::scripts\aitypes\melee::func_5903;
+	var_00.var_1581[94] = ::scripts\aitypes\melee::func_9896;
+	var_00.var_1581[95] = ::scripts\aitypes\melee::func_41C6;
+	var_00.var_1581[96] = ::scripts\aitypes\combat::func_8C24;
 	var_00.var_1581[97] = ::lib_0A18::func_3929;
 	var_00.var_1581[98] = ::lib_0A18::func_1182E;
 	var_00.var_1581[99] = ::lib_0A18::func_1182C;
 	var_00.var_1581[100] = ::lib_0A18::func_1182D;
-	var_00.var_1581[101] = ::scripts/aitypes/combat::func_8BF6;
+	var_00.var_1581[101] = ::scripts\aitypes\combat::func_8BF6;
 	var_00.var_1581[102] = ::lib_0A18::func_3928;
 	var_00.var_1581[103] = ::lib_0A18::func_11812;
 	var_00.var_1581[104] = ::lib_0A18::func_1180F;
 	var_00.var_1581[105] = ::lib_0A18::func_11811;
-	var_00.var_1581[106] = ::scripts/aitypes/combat::func_43EB;
-	var_00.var_1581[107] = ::scripts/aitypes/combat::func_DF56;
-	var_00.var_1581[108] = ::scripts/aitypes/combat::func_DF53;
-	var_00.var_1581[109] = ::scripts/aitypes/combat::func_DF55;
-	var_00.var_1581[110] = ::scripts/aitypes/combat::func_8BC6;
-	var_00.var_1581[111] = ::scripts/aitypes/combat::func_2542;
-	var_00.var_1581[112] = ::scripts/aitypes/combat::func_2544;
-	var_00.var_1581[113] = ::scripts/aitypes/combat::func_2545;
-	var_00.var_1581[114] = ::scripts/aitypes/combat::func_12E91;
+	var_00.var_1581[106] = ::scripts\aitypes\combat::func_43EB;
+	var_00.var_1581[107] = ::scripts\aitypes\combat::func_DF56;
+	var_00.var_1581[108] = ::scripts\aitypes\combat::func_DF53;
+	var_00.var_1581[109] = ::scripts\aitypes\combat::func_DF55;
+	var_00.var_1581[110] = ::scripts\aitypes\combat::func_8BC6;
+	var_00.var_1581[111] = ::scripts\aitypes\combat::func_2542;
+	var_00.var_1581[112] = ::scripts\aitypes\combat::func_2544;
+	var_00.var_1581[113] = ::scripts\aitypes\combat::func_2545;
+	var_00.var_1581[114] = ::scripts\aitypes\combat::func_12E91;
 	var_00.var_1581[115] = ::lib_0A12::func_C565;
 	var_00.var_1581[116] = ::lib_0A12::func_F7B2;
 	var_00.var_1581[117] = ::func_63F6;

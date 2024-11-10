@@ -1,13 +1,13 @@
-/**************************************************
+/******************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\_adrenalinemist.gsc
-**************************************************/
+ * Script: scripts\mp\_adrenalinemist.gsc
+******************************************/
 
 func_18A0() {
-	level._effect["adrenaline_mist_friendly"] = loadfx("vfx/core/mp/equipment/vfx_adrenaline_device_mist_friend");
-	level._effect["adrenaline_mist_enemy"] = loadfx("vfx/core/mp/equipment/vfx_adrenaline_device_mist_enemy");
-	level._effect["adrenaline_mist_screen"] = loadfx("vfx/iw7/_requests/mp/vfx_adreno_fp_scrn");
+	level._effect["adrenaline_mist_friendly"] = loadfx("vfx\core\mp\equipment\vfx_adrenaline_device_mist_friend");
+	level._effect["adrenaline_mist_enemy"] = loadfx("vfx\core\mp\equipment\vfx_adrenaline_device_mist_enemy");
+	level._effect["adrenaline_mist_screen"] = loadfx("vfx\iw7\_requests\mp\vfx_adreno_fp_scrn");
 }
 
 func_18A5(param_00) {
@@ -46,28 +46,28 @@ func_18A5(param_00) {
 	var_02 thread func_18A7();
 	var_02 thread func_189D(self);
 	var_02 thread func_18A3(self);
-	var_02 thread scripts\mp\_weapons::func_66B4();
+	var_02 thread scripts\mp\weapons::func_66B4();
 	if(isdefined(param_00)) {
 		param_00 delete();
 	}
 
-	var_02 thread scripts\mp\_weapons::createbombsquadmodel("mp_trophy_system_iw6_bombsquad","tag_origin",self);
+	var_02 thread scripts\mp\weapons::createbombsquadmodel("mp_trophy_system_iw6_bombsquad","tag_origin",self);
 	var_02 thread func_189B(self);
 	var_02 thread func_18A1(45);
 	if(level.teambased) {
-		var_02 scripts\mp\_entityheadicons::setteamheadicon(self.team,(0,0,65));
+		var_02 scripts\mp\entityheadicons::setteamheadicon(self.team,(0,0,65));
 	}
 	else
 	{
-		var_02 scripts\mp\_entityheadicons::setplayerheadicon(self,(0,0,65));
+		var_02 scripts\mp\entityheadicons::setplayerheadicon(self,(0,0,65));
 	}
 
-	scripts\mp\_weapons::ontacticalequipmentplanted(var_02,"power_adrenalineMist");
+	scripts\mp\weapons::ontacticalequipmentplanted(var_02,"power_adrenalineMist");
 	var_02 thread func_CEA3();
 }
 
 func_189C(param_00) {
-	scripts\mp\_damage::monitordamage(100,"trophy",::func_189F,::func_18A2,0);
+	scripts\mp\damage::monitordamage(100,"trophy",::func_189F,::func_18A2,0);
 }
 
 func_189F(param_00,param_01,param_02,param_03) {
@@ -81,9 +81,9 @@ func_189F(param_00,param_01,param_02,param_03) {
 
 func_18A2(param_00,param_01,param_02,param_03,param_04) {
 	var_05 = param_03;
-	var_05 = scripts\mp\_damage::handlemeleedamage(param_01,param_02,var_05);
-	var_05 = scripts\mp\_damage::handleempdamage(param_01,param_02,var_05);
-	var_05 = scripts\mp\_damage::handleapdamage(param_01,param_02,var_05);
+	var_05 = scripts\mp\damage::handlemeleedamage(param_01,param_02,var_05);
+	var_05 = scripts\mp\damage::handleempdamage(param_01,param_02,var_05);
+	var_05 = scripts\mp\damage::handleapdamage(param_01,param_02,var_05);
 	return var_05;
 }
 
@@ -92,7 +92,7 @@ func_18A7() {
 	self waittill("detonateExplosive");
 	self scriptmodelclearanim();
 	self stoploopsound();
-	scripts\mp\_weapons::equipmentdeathvfx();
+	scripts\mp\weapons::equipmentdeathvfx();
 	self notify("death");
 	var_00 = self.origin;
 	wait(3);
@@ -101,8 +101,8 @@ func_18A7() {
 			self.killcament delete();
 		}
 
-		scripts\mp\_weapons::equipmentdeletevfx();
-		scripts\mp\_weapons::deleteexplosive();
+		scripts\mp\weapons::equipmentdeletevfx();
+		scripts\mp\weapons::deleteexplosive();
 	}
 }
 
@@ -126,14 +126,14 @@ func_18A6(param_00) {
 	param_00 endon("death");
 	self.trigger setcursorhint("HINT_NOICON");
 	self.trigger sethintstring(&"MP_PICKUP_ADRENALINE_MIST");
-	self.trigger scripts\mp\_utility::setselfusable(param_00);
-	self.trigger thread scripts\mp\_utility::notusableforjoiningplayers(param_00);
+	self.trigger scripts\mp\utility::setselfusable(param_00);
+	self.trigger thread scripts\mp\utility::notusableforjoiningplayers(param_00);
 	for(;;) {
 		self.trigger waittill("trigger",param_00);
 		self stoploopsound();
 		self scriptmodelclearanim();
 		param_00 setweaponammoclip("adrenaline_mist_mp",1);
-		scripts\mp\_weapons::deleteexplosive();
+		scripts\mp\weapons::deleteexplosive();
 		self notify("death");
 	}
 }
@@ -153,7 +153,7 @@ func_189B(param_00) {
 	self.var_72F5 = ::func_189E;
 	self.var_FCA3 = 40;
 	foreach(var_03 in level.players) {
-		if(!isdefined(var_03) || !scripts\mp\_utility::isreallyalive(var_03)) {
+		if(!isdefined(var_03) || !scripts\mp\utility::isreallyalive(var_03)) {
 			continue;
 		}
 
@@ -177,12 +177,12 @@ func_13992(param_00,param_01) {
 			}
 
 			var_03.var_189A = 1;
-			var_03 scripts\mp\_utility::func_F741(param_01.var_FCA3);
+			var_03 scripts\mp\utility::func_F741(param_01.var_FCA3);
 			var_02 = param_01.var_FCA3;
 			if(isplayer(var_03)) {
-				var_03.var_1894 = function_01E1(scripts\engine\utility::getfx("adrenaline_mist_screen"),var_03 geteye(),var_03);
+				var_03.var_1894 = spawnfxforclient(scripts\engine\utility::getfx("adrenaline_mist_screen"),var_03 geteye(),var_03);
 				triggerfx(var_03.var_1894);
-				scripts\mp\_gamescore::trackbuffassist(param_00,var_03,"adrenaline_mist_mp");
+				scripts\mp\gamescore::trackbuffassist(param_00,var_03,"adrenaline_mist_mp");
 			}
 
 			var_03 notify("enter_adrenaline_mist");
@@ -202,7 +202,7 @@ func_13B83(param_00,param_01) {
 			if(!self istouching(param_00)) {
 				func_4193();
 				self notify("exit_adrenaline_mist");
-				scripts\mp\_gamescore::untrackbuffassist(param_01,self,"adrenaline_mist_mp");
+				scripts\mp\gamescore::untrackbuffassist(param_01,self,"adrenaline_mist_mp");
 				break;
 			}
 		}
@@ -231,7 +231,7 @@ func_13A09(param_00) {
 func_4193() {
 	if(isdefined(self.var_189A)) {
 		self.var_189A = undefined;
-		scripts\mp\_utility::clearhealthshield();
+		scripts\mp\utility::clearhealthshield();
 		if(isdefined(self.var_1894)) {
 			self.var_1894 delete();
 		}
@@ -267,11 +267,11 @@ func_CEA4(param_00,param_01) {
 	for(;;) {
 		if(isdefined(param_00) && var_04) {
 			if(self.team == param_00.team) {
-				var_02 = function_01E1(scripts\engine\utility::getfx("adrenaline_mist_friendly"),var_03,self);
+				var_02 = spawnfxforclient(scripts\engine\utility::getfx("adrenaline_mist_friendly"),var_03,self);
 			}
 			else
 			{
-				var_02 = function_01E1(scripts\engine\utility::getfx("adrenaline_mist_enemy"),var_03,self);
+				var_02 = spawnfxforclient(scripts\engine\utility::getfx("adrenaline_mist_enemy"),var_03,self);
 			}
 
 			if(isdefined(var_02)) {

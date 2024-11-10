@@ -1,15 +1,15 @@
-/***********************************************************
+/***************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\maps\mp_divide\mp_divide.gsc
-***********************************************************/
+ * Script: scripts\mp\maps\mp_divide\mp_divide.gsc
+***************************************************/
 
 main() {
-	lib_0F94::main();
+	scripts\mp\maps\mp_divide\mp_divide_precache::main();
 	scripts\mp\maps\mp_divide\gen\mp_divide_art::main();
-	lib_0F93::main();
-	scripts\mp\_load::main();
-	scripts\mp\_compass::func_FACD("compass_map_mp_divide");
+	scripts\mp\maps\mp_divide\mp_divide_fx::main();
+	scripts\mp\load::main();
+	scripts\mp\compass::setupminimap("compass_map_mp_divide");
 	setdvar("r_lightGridEnableTweaks",1);
 	setdvar("r_lightGridIntensity",1.33);
 	setdvar("r_umbraMinObjectContribution",8);
@@ -21,7 +21,7 @@ main() {
 	game["allies_outfit"] = "urban";
 	game["axis_outfit"] = "woodland";
 	level.var_C7B3 = getentarray("OutOfBounds","targetname");
-	thread scripts\mp\_animation_suite::func_1FAA();
+	thread scripts\mp\animation_suite::animationsuite();
 	thread func_E838();
 	thread func_CDA4("mp_divide_screens");
 	thread fix_collision();
@@ -85,11 +85,11 @@ fix_collision() {
 
 kill_triggers() {
 	var_00 = spawn("trigger_radius",(2588,732,438),0,256,128);
-	var_00.var_257 = 256;
+	var_00.fgetarg = 256;
 	var_00.height = 128;
 	var_00 thread kill_trigger_loop("script_vehicle");
 	var_01 = spawn("trigger_radius",(-268,884,388),0,550,128);
-	var_01.var_257 = 550;
+	var_01.fgetarg = 550;
 	var_01.height = 128;
 	var_01 thread kill_trigger_loop("script_vehicle");
 }
@@ -98,13 +98,13 @@ kill_trigger_loop(param_00) {
 	for(;;) {
 		self waittill("trigger",var_01);
 		if(isdefined(var_01) && isdefined(var_01.classname) && var_01.classname == param_00) {
-			if(isdefined(var_01.var_110EA)) {
-				if(var_01.var_110EA == "minijackal") {
+			if(isdefined(var_01.streakname)) {
+				if(var_01.streakname == "minijackal") {
 					var_01 notify("minijackal_end");
 					continue;
 				}
 
-				if(var_01.var_110EA == "venom") {
+				if(var_01.streakname == "venom") {
 					var_01 notify("venom_end",var_01.origin);
 				}
 			}
@@ -137,11 +137,11 @@ func_E838() {}
 
 mpdividecollisionfunc(param_00) {
 	if(param_00.origin[2] - self.origin[2] > 30) {
-		param_00 method_84DC((0,-40,10),200);
+		param_00 _meth_84DC((0,-40,10),200);
 		return;
 	}
 
-	param_00 scripts\mp\_movers::func_BCDE();
+	param_00 scripts\mp\movers::mover_suicide();
 }
 
 func_1F87() {
@@ -153,13 +153,13 @@ func_1F87() {
 	var_04 = getentarray("door_exterior_raising","targetname");
 	foreach(var_06 in var_00) {
 		if(var_06.classname == "script_brushmodel") {
-			var_06.var_12BEC = 10;
-			var_06.var_12BE8 = 1;
-			var_06.var_12BE7 = ::mpdividecollisionfunc;
+			var_06.unresolved_collision_notify_min = 10;
+			var_06.unresolved_collision_kill = 1;
+			var_06.unresolved_collision_func = ::mpdividecollisionfunc;
 		}
 
-		var_06 method_8318(1);
-		var_06 method_8317(1);
+		var_06 setnonstick(1);
+		var_06 give_player_tickets(1);
 	}
 
 	var_00 func_110C1();
@@ -187,7 +187,7 @@ func_1F87() {
 
 func_110C1() {
 	foreach(var_01 in self) {
-		var_01.var_10B89 = var_01.origin;
+		var_01.start = var_01.origin;
 	}
 }
 
@@ -198,7 +198,7 @@ func_E268(param_00) {
 
 	wait(0.1);
 	foreach(var_02 in param_00) {
-		var_02 moveto((var_02.var_10B89[0],var_02.var_10B89[1],var_02.var_10B89[2]),0.01);
+		var_02 moveto((var_02.start[0],var_02.start[1],var_02.start[2]),0.01);
 	}
 }
 
@@ -272,7 +272,7 @@ func_1F6B(param_00) {
 
 func_CDA4(param_00) {
 	wait(30);
-	function_030E(param_00);
+	playcinematicforalllooping(param_00);
 }
 
 spawn_oob_trigger() {

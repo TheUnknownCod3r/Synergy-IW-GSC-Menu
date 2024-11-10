@@ -1,8 +1,8 @@
-/*********************************************
+/*************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\validation.gsc
-*********************************************/
+ * Script: scripts\mp\validation.gsc
+*************************************/
 
 validationerror(param_00,param_01,param_02) {
 	var_03 = param_00;
@@ -76,7 +76,7 @@ func_1314B(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_
 		}
 		else
 		{
-			var_0D = tablelookup("mp/statstable.csv",0,var_0C,41);
+			var_0D = tablelookup("mp\statstable.csv",0,var_0C,41);
 			if(int(var_0D) < 0) {
 				validationerror("unreleasedWeapon",var_0A,param_01);
 				param_00.invaliditems[var_0B] = 1;
@@ -493,7 +493,7 @@ fixinvaliditems(param_00,param_01) {
 }
 
 lookuppowerslot(param_00) {
-	var_01 = tablelookup("mp/menuPowers.csv",3,param_00,2);
+	var_01 = tablelookup("mp\menuPowers.csv",3,param_00,2);
 	if(!isdefined(var_01) || var_01 != "1" && var_01 != "2") {
 		return undefined;
 	}

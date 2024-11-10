@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\2581.gsc
-****************************/
+ * Script: 2581.gsc
+************************/
 
 setupdestructibledoors() {
 	if(isdefined(self.var_4D5D)) {
@@ -51,7 +51,7 @@ func_4D5E() {
 }
 
 func_9F3E(param_00) {
-	if(scripts/asm/asm_bb::bb_isselfdestruct()) {
+	if(scripts\asm\asm_bb::bb_isselfdestruct()) {
 		return level.success;
 	}
 
@@ -59,7 +59,7 @@ func_9F3E(param_00) {
 }
 
 isheadless(param_00) {
-	if(scripts/asm/asm_bb::bb_isheadless()) {
+	if(scripts\asm\asm_bb::bb_isheadless()) {
 		return level.success;
 	}
 

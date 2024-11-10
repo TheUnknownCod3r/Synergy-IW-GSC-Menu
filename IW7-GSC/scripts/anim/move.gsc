@@ -1,8 +1,8 @@
-/*****************************************
+/*********************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\anim\move.gsc
-*****************************************/
+ * Script: scripts\anim\move.gsc
+*********************************/
 
 func_951A() {}
 
@@ -94,7 +94,7 @@ func_BCBE() {
 }
 
 makeportableradar() {
-	if(self.var_1491.pose == "prone") {
+	if(self.a.pose == "prone") {
 		var_00 = scripts\anim\utility::func_3EF2("stand");
 		if(var_00 != "prone") {
 			self orientmode("face current");
@@ -156,11 +156,11 @@ func_2125() {
 func_12ED4(param_00) {
 	if(param_00 != self.var_D8B7 || func_2125()) {
 		if(isdefined(self.custommoveanimset) && isdefined(self.custommoveanimset[param_00])) {
-			self.var_1491.var_BCA5 = self.custommoveanimset[param_00];
+			self.a.var_BCA5 = self.custommoveanimset[param_00];
 		}
 		else
 		{
-			self.var_1491.var_BCA5 = scripts\anim\utility::func_B028(param_00);
+			self.a.var_BCA5 = scripts\anim\utility::func_B028(param_00);
 			if((self.var_BC == "ambush" || self.var_BC == "ambush_nodes_only") && isdefined(self.vehicle_getspawnerarray) && distancesquared(self.origin,self.vehicle_getspawnerarray) > squared(100)) {
 				self.var_101BB = 1;
 				scripts\anim\animset::func_F2AC();
@@ -182,14 +182,14 @@ func_BCC5(param_00) {
 	self endon("killanimscript");
 	self endon("move_interrupt");
 	var_01 = self getscoreinfocategory(%walk_and_run_loops);
-	self.var_1491.var_E860 = randomint(10000);
+	self.a.var_E860 = randomint(10000);
 	self.var_D8B7 = "none";
 	self.var_D8B6 = "none";
 	self.var_BCC2 = undefined;
 	for(;;) {
 		var_02 = self getscoreinfocategory(%walk_and_run_loops);
 		if(var_02 < var_01) {
-			self.var_1491.var_E860++;
+			self.a.var_E860++;
 		}
 
 		var_01 = var_02;
@@ -259,15 +259,15 @@ func_FEEB() {
 	self endon("doing_shootWhileMoving");
 	var_00 = scripts\anim\utility::func_B028("shoot_while_moving");
 	foreach(var_03, var_02 in var_00) {
-		self.var_1491.var_2274[var_03] = var_02;
+		self.a.var_2274[var_03] = var_02;
 	}
 
 	if(isdefined(self.var_440C) && isdefined(self.var_440C["fire"])) {
-		self.var_1491.var_2274["fire"] = self.var_440C["fire"];
+		self.a.var_2274["fire"] = self.var_440C["fire"];
 	}
 
 	if(isdefined(self.var_394) && scripts\anim\utility_common::weapon_pump_action_shotgun()) {
-		self.var_1491.var_2274["single"] = scripts\anim\utility::func_B027("shotgun_stand","single");
+		self.a.var_2274["single"] = scripts\anim\utility::func_B027("shotgun_stand","single");
 	}
 
 	for(;;) {
@@ -342,7 +342,7 @@ func_C968() {
 			}
 		}
 
-		if(self.var_1491.pose != "stand") {
+		if(self.a.pose != "stand") {
 			continue;
 		}
 
@@ -386,7 +386,7 @@ func_C966(param_00,param_01) {
 		}
 		else
 		{
-			var_05 = int(ceil(param_01 + 180 - 10 \ 45));
+			var_05 = int(ceil(param_01 + 180 - 10 / 45));
 		}
 	}
 	else if(param_01 < 45) {
@@ -394,7 +394,7 @@ func_C966(param_00,param_01) {
 	}
 	else
 	{
-		var_05 = int(floor(param_01 + 180 + 10 \ 45));
+		var_05 = int(floor(param_01 + 180 + 10 / 45));
 	}
 
 	var_02 = var_04[var_05];
@@ -417,13 +417,13 @@ func_C966(param_00,param_01) {
 
 	var_07 = -1;
 	if(param_00 < -60) {
-		var_07 = int(ceil(param_00 + 180 \ 45));
+		var_07 = int(ceil(param_00 + 180 / 45));
 		if(var_07 == var_05) {
 			var_07 = var_05 - 1;
 		}
 	}
 	else if(param_00 > 60) {
-		var_07 = int(floor(param_00 + 180 \ 45));
+		var_07 = int(floor(param_00 + 180 / 45));
 		if(var_07 == var_05) {
 			var_07 = var_05 + 1;
 		}
@@ -462,7 +462,7 @@ func_C963(param_00) {
 	var_03 = getmovedelta(param_00,0,1);
 	var_05 = self gettweakablevalue(var_03);
 	var_05 = var_04 + vectornormalize(var_05 - var_04) * 20;
-	var_06 = !scripts\common\utility::actor_is3d();
+	var_06 = !scripts\engine\utility::actor_is3d();
 	return self maymovefrompointtopoint(var_04,var_05,var_06,1);
 }
 
@@ -474,7 +474,7 @@ func_C965() {
 		return;
 	}
 
-	if(scripts\common\utility::actor_is3d()) {
+	if(scripts\engine\utility::actor_is3d()) {
 		self animmode("nogravity",0);
 	}
 	else
@@ -496,7 +496,7 @@ func_C965() {
 	}
 
 	self _meth_82EA("turnAnim",var_00,1,var_01,self.moveplaybackrate);
-	if(scripts\common\utility::actor_is3d()) {
+	if(scripts\engine\utility::actor_is3d()) {
 		self orientmode("face angle 3d",self.angles);
 	}
 	else
@@ -629,7 +629,7 @@ func_325C() {
 
 	for(;;) {
 		self waittill("bulletwhizby",var_00);
-		if(self.synctransients != "run" || !self.livestreamingenable || self.var_1491.pose != "stand" || isdefined(self.var_DD39)) {
+		if(self.synctransients != "run" || !self.livestreamingenable || self.a.pose != "stand" || isdefined(self.var_DD39)) {
 			continue;
 		}
 
@@ -637,7 +637,7 @@ func_325C() {
 			continue;
 		}
 
-		if(!isdefined(self.isnodeoccupied) && !self.precacheleaderboards && isdefined(var_00.team) && function_0106(self.team,var_00.team)) {
+		if(!isdefined(self.isnodeoccupied) && !self.precacheleaderboards && isdefined(var_00.team) && isenemyteam(self.team,var_00.team)) {
 			self.var_13D13 = var_00;
 			self _meth_8015(::scripts\anim\reactions::func_325E);
 			continue;
@@ -725,12 +725,12 @@ func_FA42(param_00,param_01,param_02) {
 		}
 	}
 
-	self.var_1491.var_2274 = var_03;
+	self.a.var_2274 = var_03;
 }
 
 func_BCAF(param_00,param_01) {
-	if(self.var_1491.pose == "stand" && param_01.type != "Cover Stand" || param_00.type != "Cover Stand") {
-		self.var_1491.pose = "crouch";
+	if(self.a.pose == "stand" && param_01.type != "Cover Stand" || param_00.type != "Cover Stand") {
+		self.a.pose = "crouch";
 		return 0;
 	}
 
@@ -738,8 +738,8 @@ func_BCAF(param_00,param_01) {
 }
 
 func_BCAE(param_00) {
-	if(self.var_1491.pose == "crouch" && param_00.type == "Cover Stand") {
-		self.var_1491.pose = "stand";
+	if(self.a.pose == "crouch" && param_00.type == "Cover Stand") {
+		self.a.pose = "stand";
 		return 0;
 	}
 
@@ -821,7 +821,7 @@ func_BCAD() {
 	}
 
 	var_10 = getanimlength(var_08);
-	var_11 = var_10 * var_0E \ var_0C * 0.9;
+	var_11 = var_10 * var_0E / var_0C * 0.9;
 	var_11 = floor(var_11 * 20) * 0.05;
 	self _meth_82E1("shuffle",var_08,1,var_06);
 	scripts\anim\notetracks::donotetracksfortime(var_11,"shuffle");
@@ -835,7 +835,7 @@ func_BCAD() {
 			break;
 		}
 
-		var_11 = var_10 * var_0E \ var_0C * 0.9;
+		var_11 = var_10 * var_0E / var_0C * 0.9;
 		var_11 = floor(var_11 * 20) * 0.05;
 		if(var_11 < 0.05) {
 			break;
@@ -896,8 +896,8 @@ func_BCB5(param_00,param_01,param_02) {
 	if(var_08 > 2) {
 		var_09 = getnotetracktimes(var_03,"slide_end")[0];
 		var_0A = var_09 - var_04 * getanimlength(var_03);
-		var_0B = int(ceil(var_0A \ 0.05));
-		var_0C = var_05 * var_08 \ var_0B;
+		var_0B = int(ceil(var_0A / 0.05));
+		var_0C = var_05 * var_08 / var_0B;
 		thread func_102E9(var_0C,var_0B);
 	}
 
@@ -930,14 +930,14 @@ func_BCF8(param_00,param_01) {
 	self endon("movemode");
 	self aiclearanim(%combatrun,0.6);
 	self _meth_82A5(%combatrun,%body,1,0.5,self.moveplaybackrate);
-	if(isdefined(self.var_E1B0) && gettime() - self.var_E1B0 < 100 && isdefined(self.var_E80D) && randomfloat(1) < self.var_1491.reacttobulletchance) {
+	if(isdefined(self.var_E1B0) && gettime() - self.var_E1B0 < 100 && isdefined(self.var_E80D) && randomfloat(1) < self.a.reacttobulletchance) {
 		scripts\anim\run::func_4C9A();
 		return;
 	}
 
 	if(isarray(param_00)) {
 		if(isdefined(self.var_E80B)) {
-			var_02 = scripts\common\utility::choose_from_weighted_array(param_00,param_01);
+			var_02 = scripts\engine\utility::choose_from_weighted_array(param_00,param_01);
 		}
 		else
 		{

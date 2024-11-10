@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2957.gsc
+ * Script: 2957.gsc
 ***************************************/
 
 init() {
@@ -184,7 +184,7 @@ stinger_get_closest_to_player_view(var_00, var_01, var_02, var_03) {
   var_12 = anglestoforward(var_11);
   var_13 = vectordot(var_07, var_12);
   var_14 = distancesquared(var_04, var_10.origin);
-  var_15 = 1 - scripts/sp/math::func_C097(squared(250), squared(5000), var_14);
+  var_15 = 1 - scripts\sp\math::func_C097(squared(250), squared(5000), var_14);
   var_13 = var_13 * var_15;
 
   if (var_13 < var_08)
@@ -274,9 +274,9 @@ func_7E4B() {
   var_03 = var_2.func_C925;
 
   if (isdefined(var_3["right_leg"]) && !isdefined(var_3["left_leg"]))
-  var_03 = scripts/sp/utility::func_22B2(var_03, "right_leg");
+  var_03 = scripts\sp\utility::func_22B2(var_03, "right_leg");
   else if (isdefined(var_3["left_leg"]) && !isdefined(var_3["right_leg"]))
-  var_03 = scripts/sp/utility::func_22B2(var_03, "left_leg");
+  var_03 = scripts\sp\utility::func_22B2(var_03, "left_leg");
 
   var_00 = scripts\engine\utility::array_combine(var_00, var_03);
   }

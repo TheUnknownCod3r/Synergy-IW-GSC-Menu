@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\3514.gsc
+ * Script: 3514.gsc
 ***************************************/
 
 init() {
@@ -9,7 +9,7 @@ init() {
   level.func_B896 = 1500;
   level.rockets = [];
   scripts\mp\killstreaks\killstreaks::registerkillstreak("predator_missile", ::tryusepredatormissile);
-  level.remotekillstreaks["explode"] = loadfx("vfx/core/expl/aerial_explosion");
+  level.remotekillstreaks["explode"] = loadfx("vfx\core\expl\aerial_explosion");
 }
 
 tryusepredatormissile(var_00, var_01) {

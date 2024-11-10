@@ -1,11 +1,11 @@
-/*************************************************************
+/*****************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\agents\skater\skater_agent.gsc
-*************************************************************/
+ * Script: scripts\mp\agents\skater\skater_agent.gsc
+*****************************************************/
 
 registerscriptedagent() {
-	scripts/aitypes/bt_util::init();
+	scripts\aitypes\bt_util::init();
 	behaviortree\zombie_dlc2::func_DEE8();
 	scripts\asm\zombie_dlc2\mp\states::func_2371();
 	func_AEB0();
@@ -19,9 +19,9 @@ func_FAB0() {
 	}
 
 	level.agent_funcs["skater"]["on_damaged"] = ::scripts\cp\maps\cp_disco\cp_disco_damage::cp_disco_onzombiedamaged;
-	level.agent_funcs["skater"]["gametype_on_damage_finished"] = ::scripts/cp/agents/gametype_zombie::onzombiedamagefinished;
-	level.agent_funcs["skater"]["gametype_on_killed"] = ::scripts/cp/agents/gametype_zombie::onzombiekilled;
-	level.movemodefunc["skater"] = ::scripts/cp/agents/gametype_zombie::run_if_last_zombie;
+	level.agent_funcs["skater"]["gametype_on_damage_finished"] = ::scripts\cp\agents\gametype_zombie::onzombiedamagefinished;
+	level.agent_funcs["skater"]["gametype_on_killed"] = ::scripts\cp\agents\gametype_zombie::onzombiekilled;
+	level.movemodefunc["skater"] = ::scripts\cp\agents\gametype_zombie::run_if_last_zombie;
 	level.agent_definition["skater"]["setup_func"] = ::setupagent;
 	level.agent_definition["skater"]["setup_model_func"] = ::func_FACE;
 	level.agent_funcs["skater"]["on_damaged_finished"] = ::scripts\mp\agents\zombie\zmb_zombie_agent::onzombiedamagefinished;
@@ -53,8 +53,8 @@ func_899C() {
 	foreach(var_04, var_01 in self.var_164D) {
 		var_02 = var_01.var_4BC0;
 		var_03 = level.asm[var_04].states[var_02];
-		scripts/asm/asm::func_2388(var_04,var_02,var_03,var_03.var_116FB);
-		scripts/asm/asm::func_238A(var_04,"idle",0.2,undefined,undefined,undefined);
+		scripts\asm\asm::func_2388(var_04,var_02,var_03,var_03.var_116FB);
+		scripts\asm\asm::func_238A(var_04,"idle",0.2,undefined,undefined,undefined);
 	}
 }
 
@@ -64,8 +64,8 @@ func_FACE(param_00) {
 }
 
 func_AEB0() {
-	level._effect["suicide_zmb_death"] = loadfx("vfx/iw7/_requests/coop/vfx_zmb_blackhole_death");
-	level._effect["suicide_zmb_explode"] = loadfx("vfx/iw7/levels/cp_disco/vfx_disco_rollerskate_exp.vfx");
+	level._effect["suicide_zmb_death"] = loadfx("vfx\iw7\_requests\coop\vfx_zmb_blackhole_death");
+	level._effect["suicide_zmb_explode"] = loadfx("vfx\iw7\levels\cp_disco\vfx_disco_rollerskate_exp.vfx");
 }
 
 func_3725() {

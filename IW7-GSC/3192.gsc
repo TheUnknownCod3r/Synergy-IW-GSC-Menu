@@ -1,29 +1,29 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3192.gsc
-****************************/
+ * Script: 3192.gsc
+************************/
 
 func_FE6A(param_00,param_01,param_02,param_03) {
 	self endon(param_01 + "_finished");
 	lib_0F3E::func_FE89();
 	var_04 = lib_0F3E::func_FE64();
 	self _meth_83CE();
-	var_05 = scripts/asm/asm_mp::asm_getanim(param_00,param_01);
+	var_05 = scripts\asm\asm_mp::asm_getanim(param_00,param_01);
 	self.is_shooting = 1;
 	lib_0F3E::shootblankorrpg(param_01,0.7,2);
 	self.asm.shootparams.var_C21C--;
 	self.is_shooting = 0;
 	func_85F5();
-	scripts/asm/asm::asm_fireevent(param_01,"shoot_finished");
+	scripts\asm\asm::asm_fireevent(param_01,"shoot_finished");
 }
 
 func_8602() {
-	if(scripts/asm/asm_bb::bb_moverequested()) {
+	if(scripts\asm\asm_bb::bb_moverequested()) {
 		return 0;
 	}
 
-	if(!scripts/asm/asm_bb::func_291C()) {
+	if(!scripts\asm\asm_bb::func_291C()) {
 		return 0;
 	}
 
@@ -73,10 +73,10 @@ func_13F8E(param_00,param_01,param_02,param_03) {
 
 func_13F6F(param_00,param_01,param_02) {
 	if(scripts\engine\utility::istrue(self.i_am_clone)) {
-		return scripts/asm/asm::asm_lookupanimfromalias(param_01,"cloneGreyIdle");
+		return scripts\asm\asm::asm_lookupanimfromalias(param_01,"cloneGreyIdle");
 	}
 
-	return scripts/asm/asm::asm_lookupanimfromalias(param_01,"masterGreyIdle");
+	return scripts\asm\asm::asm_lookupanimfromalias(param_01,"masterGreyIdle");
 }
 
 func_13F71(param_00,param_01,param_02,param_03) {
@@ -95,7 +95,7 @@ func_13F71(param_00,param_01,param_02,param_03) {
 }
 
 func_CD46() {
-	var_00 = scripts/asm/asm::asm_lookupanimfromalias("duplicating_attack","idle");
+	var_00 = scripts\asm\asm::asm_lookupanimfromalias("duplicating_attack","idle");
 	self setanimstate("duplicating_attack",var_00,1);
 }
 
@@ -306,7 +306,7 @@ func_424F() {
 func_CE3B(param_00,param_01) {
 	param_00 endon("death");
 	var_02 = "duplicating_attack";
-	var_03 = scripts/asm/asm::asm_lookupanimfromalias(var_02,param_01);
+	var_03 = scripts\asm\asm::asm_lookupanimfromalias(var_02,param_01);
 	param_00 scripts\mp\agents\_scriptedagents::func_CED5(var_02,var_03,var_02,"end");
 	param_00 func_CD46();
 }
@@ -316,7 +316,7 @@ func_13F72(param_00,param_01,param_02,param_03) {
 	self setscriptablepartstate("backpack_dome_shield","off");
 	self setscriptablepartstate("regen_beam","on");
 	self.actually_doing_regen = 1;
-	scripts/asm/asm_mp::func_235F(param_00,param_01,param_02,1,0);
+	scripts\asm\asm_mp::func_235F(param_00,param_01,param_02,1,0);
 }
 
 func_13F70(param_00,param_01,param_02,param_03) {
@@ -326,17 +326,17 @@ func_13F70(param_00,param_01,param_02,param_03) {
 
 func_13F73(param_00,param_01,param_02,param_03) {
 	thread func_CE0A(self);
-	scripts/asm/asm_mp::func_2367(param_00,param_01,param_02,"end");
+	scripts\asm\asm_mp::func_2367(param_00,param_01,param_02,"end");
 }
 
 func_13F74(param_00,param_01,param_02,param_03) {
-	scripts/asm/asm_mp::func_2367(param_00,param_01,param_02,"early_end");
-	scripts/asm/asm::asm_fireevent(param_01,"early_end");
+	scripts\asm\asm_mp::func_2367(param_00,param_01,param_02,"early_end");
+	scripts\asm\asm::asm_fireevent(param_01,"early_end");
 }
 
 func_13F76(param_00,param_01,param_02,param_03) {
 	self playsound("grey_shockwave_build");
-	scripts/asm/asm_mp::func_2367(param_00,param_01,param_02,"shock_wave_damage");
+	scripts\asm\asm_mp::func_2367(param_00,param_01,param_02,"shock_wave_damage");
 	self notify("shockwave_deploy");
 	self notify("update_mobile_shield_visibility",1);
 	self playsound("grey_shockwave");
@@ -345,17 +345,17 @@ func_13F76(param_00,param_01,param_02,param_03) {
 
 func_3EDC(param_00,param_01,param_02) {
 	if(scripts\engine\utility::istrue(self.i_am_clone)) {
-		return scripts/asm/asm::asm_lookupanimfromalias(param_01,"mini_grey_melee");
+		return scripts\asm\asm::asm_lookupanimfromalias(param_01,"mini_grey_melee");
 	}
 
-	return scripts/asm/asm::asm_lookupanimfromalias(param_01,"master_grey_melee");
+	return scripts\asm\asm::asm_lookupanimfromalias(param_01,"master_grey_melee");
 }
 
 func_13F75(param_00,param_01,param_02,param_03) {
 	func_15A8(self,undefined,"prop_mp_dome_shield_scr");
-	scripts/asm/asm_mp::func_2367(param_00,param_01,param_02,"start_summon_zombies");
+	scripts\asm\asm_mp::func_2367(param_00,param_01,param_02,"start_summon_zombies");
 	thread func_111C2(self);
-	scripts/asm/asm_mp::func_2367(param_00,param_01,param_02,"early_end");
+	scripts\asm\asm_mp::func_2367(param_00,param_01,param_02,"early_end");
 	func_4DB1(self);
 }
 
@@ -467,9 +467,9 @@ func_13F79(param_00,param_01,param_02,param_03) {
 		if(isdefined(var_06)) {
 			func_57CD(self,var_06,var_05);
 			func_1164C(self,get_teleport_end_pos(var_04),"teleport_summon");
-			scripts/aitypes/zombie_grey/behaviors::set_next_teleport_summon_time(self);
-			scripts/aitypes/zombie_grey/behaviors::set_next_melee_time(self);
-			scripts/asm/asm_bb::bb_clearmeleerequest();
+			scripts\aitypes\zombie_grey\behaviors::set_next_teleport_summon_time(self);
+			scripts\aitypes\zombie_grey\behaviors::set_next_melee_time(self);
+			scripts\asm\asm_bb::bb_clearmeleerequest();
 		}
 	}
 
@@ -482,9 +482,9 @@ func_13F78(param_00,param_01,param_02,param_03) {
 		var_05 = func_7CEB(var_04);
 		if(isdefined(var_05)) {
 			func_1164C(self,var_05,"teleport_dash");
-			scripts/aitypes/zombie_grey/behaviors::set_next_teleport_dash_time(self);
-			scripts/aitypes/zombie_grey/behaviors::set_next_melee_time(self);
-			scripts/asm/asm_bb::bb_clearmeleerequest();
+			scripts\aitypes\zombie_grey\behaviors::set_next_teleport_dash_time(self);
+			scripts\aitypes\zombie_grey\behaviors::set_next_melee_time(self);
+			scripts\asm\asm_bb::bb_clearmeleerequest();
 		}
 	}
 
@@ -509,9 +509,9 @@ func_13F77(param_00,param_01,param_02,param_03) {
 
 	if(self.var_8B73) {
 		func_1164C(self,get_teleport_end_pos(var_04),"teleport_attack");
-		scripts/aitypes/zombie_grey/behaviors::set_next_teleport_attack_time(self);
-		scripts/aitypes/zombie_grey/behaviors::set_next_melee_time(self);
-		scripts/asm/asm_bb::bb_clearmeleerequest();
+		scripts\aitypes\zombie_grey\behaviors::set_next_teleport_attack_time(self);
+		scripts\aitypes\zombie_grey\behaviors::set_next_melee_time(self);
+		scripts\asm\asm_bb::bb_clearmeleerequest();
 	}
 
 	self notify("update_mobile_shield_visibility",1);
@@ -595,7 +595,7 @@ func_4104(param_00,param_01) {
 }
 
 func_CECC(param_00,param_01,param_02) {
-	var_03 = scripts/asm/asm::asm_lookupanimfromalias(param_00,param_01);
+	var_03 = scripts\asm\asm::asm_lookupanimfromalias(param_00,param_01);
 	scripts\mp\agents\_scriptedagents::func_CED5(param_00,var_03,param_00,"end",param_02);
 }
 
@@ -848,7 +848,7 @@ func_85FE(param_00,param_01,param_02,param_03) {
 
 func_85FD(param_00,param_01,param_02,param_03) {
 	self setscriptablepartstate("spawn_beam","on");
-	scripts/asm/asm_mp::func_235F(param_00,param_01,param_02,1,0);
+	scripts\asm\asm_mp::func_235F(param_00,param_01,param_02,1,0);
 }
 
 func_85F7(param_00,param_01,param_02,param_03) {
@@ -860,7 +860,7 @@ func_8601(param_00,param_01,param_02,param_03) {
 }
 
 func_85FF(param_00,param_01,param_02,param_03) {
-	var_04 = scripts/asm/asm_bb::bb_getmeleetarget();
+	var_04 = scripts\asm\asm_bb::bb_getmeleetarget();
 	if(!isdefined(var_04)) {
 		self orientmode("face angle abs",self.angles);
 	}
@@ -880,8 +880,8 @@ func_85FF(param_00,param_01,param_02,param_03) {
 	self setanimstate(param_01,var_09,var_08);
 	self endon(param_01 + "_finished");
 	func_58BB(param_00,param_01);
-	scripts/asm/asm_bb::bb_clearmeleerequest();
-	scripts/asm/asm::asm_fireevent(param_01,"end");
+	scripts\asm\asm_bb::bb_clearmeleerequest();
+	scripts\asm\asm::asm_fireevent(param_01,"end");
 }
 
 func_58BB(param_00,param_01) {
@@ -898,7 +898,7 @@ func_58BB(param_00,param_01) {
 					break;
 	
 				case "stop":
-					var_05 = scripts/asm/asm_bb::bb_getmeleetarget();
+					var_05 = scripts\asm\asm_bb::bb_getmeleetarget();
 					if(!isdefined(var_05)) {
 						return;
 					}
@@ -915,7 +915,7 @@ func_58BB(param_00,param_01) {
 	
 				case "start_melee":
 				case "fire":
-					var_05 = scripts/asm/asm_bb::bb_getmeleetarget();
+					var_05 = scripts\asm\asm_bb::bb_getmeleetarget();
 					if(!isdefined(var_05)) {
 						return;
 					}
@@ -932,7 +932,7 @@ func_58BB(param_00,param_01) {
 					break;
 	
 				default:
-					scripts/asm/asm_mp::func_2345(var_04,param_01);
+					scripts\asm\asm_mp::func_2345(var_04,param_01);
 					break;
 			}
 		}

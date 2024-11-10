@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3436.gsc
-****************************/
+ * Script: 3436.gsc
+************************/
 
 func_97D0() {}
 
@@ -13,7 +13,7 @@ removearchetype() {
 }
 
 func_98AD() {
-	level._effect["adrenaline_worldFX"] = loadfx("vfx/iw7/_requests/mp/vfx_adrenaline_world_view");
+	level._effect["adrenaline_worldFX"] = loadfx("vfx\iw7\_requests\mp\vfx_adrenaline_world_view");
 }
 
 func_261D() {
@@ -48,7 +48,7 @@ func_2617(param_00) {
 	self endon("disconnect");
 	level endon("game_ended");
 	if(self != param_00) {
-		param_00 thread scripts\mp\_utility::giveunifiedpoints("buff_teammate");
+		param_00 thread scripts\mp\utility::giveunifiedpoints("buff_teammate");
 	}
 
 	self playlocalsound("mp_overcharge_on");
@@ -66,7 +66,7 @@ func_261B(param_00,param_01) {
 	self endon("disconnect");
 	level endon("game_ended");
 	self notify("force_regeneration");
-	scripts\mp\_utility::giveperk("specialty_adrenaline");
+	scripts\mp\utility::giveperk("specialty_adrenaline");
 	var_02 = anglestoup(self.angles);
 	var_03 = anglestoforward(self.angles);
 	var_04 = param_00 + param_01 * 1000;
@@ -75,7 +75,7 @@ func_261B(param_00,param_01) {
 		wait(0.1);
 	}
 
-	scripts\mp\_utility::removeperk("specialty_adrenaline");
+	scripts\mp\utility::removeperk("specialty_adrenaline");
 }
 
 func_261C(param_00,param_01) {
@@ -83,7 +83,7 @@ func_261C(param_00,param_01) {
 	self endon("damage");
 	self endon("disconnect");
 	level endon("game_ended");
-	scripts\mp\_utility::giveperk("specialty_adrenaline_lite");
+	scripts\mp\utility::giveperk("specialty_adrenaline_lite");
 	thread func_2618(param_01);
 	thread func_2619(param_01);
 	var_02 = anglestoup(self.angles);
@@ -95,7 +95,7 @@ func_261C(param_00,param_01) {
 		wait(0.1);
 	}
 
-	scripts\mp\_utility::removeperk("specialty_adrenaline_lite");
+	scripts\mp\utility::removeperk("specialty_adrenaline_lite");
 }
 
 func_2618(param_00) {
@@ -104,7 +104,7 @@ func_2618(param_00) {
 	level endon("game_ended");
 	var_01 = scripts\engine\utility::waittill_any_timeout_1(param_00,"damage");
 	if(isdefined(var_01) && var_01 == "damage") {
-		scripts\mp\_utility::removeperk("specialty_adrenaline_lite");
+		scripts\mp\utility::removeperk("specialty_adrenaline_lite");
 	}
 }
 
@@ -140,9 +140,9 @@ func_56E7() {
 		self playlocalsound("kinetic_pulse");
 		foreach(var_02 in level.players) {
 			if(var_02.team != self.team && distance2d(self.origin,var_02.origin) < 512 && istargetingoff(var_02) && scripts\common\trace::ray_trace_passed(self geteye(),var_02 geteye(),undefined,scripts\common\trace::create_contents(0,1,1,1,0,1,0))) {
-				if(scripts/mp/equipment/phase_shift::isentityphaseshifted(var_02)) {
+				if(scripts\mp\equipment\phase_shift::isentityphaseshifted(var_02)) {
 					var_02 notify("phaseshift_interrupted");
-					var_02 scripts\mp\_powers::func_C170("powers_phase_shift_update",0);
+					var_02 scripts\mp\powers::func_C170("powers_phase_shift_update",0);
 				}
 
 				var_03 = anglestoright(self getplayerangles());
@@ -162,9 +162,9 @@ istargetingoff(param_00) {
 	var_03 = anglestoup(var_01);
 	var_04 = anglestoright(var_01);
 	var_05 = self geteye() - var_02 * 128;
-	if(!scripts\mp\_utility::pointvscone(param_00 gettagorigin("tag_eye"),var_05,var_02,var_03,512,128,20)) {
-		if(!scripts\mp\_utility::pointvscone(param_00 gettagorigin("tag_origin"),var_05,var_02,var_03,512,128,20)) {
-			if(!scripts\mp\_utility::pointvscone(param_00 gettagorigin("j_mainroot"),var_05,var_02,var_03,512,128,20)) {
+	if(!scripts\mp\utility::pointvscone(param_00 gettagorigin("tag_eye"),var_05,var_02,var_03,512,128,20)) {
+		if(!scripts\mp\utility::pointvscone(param_00 gettagorigin("tag_origin"),var_05,var_02,var_03,512,128,20)) {
+			if(!scripts\mp\utility::pointvscone(param_00 gettagorigin("j_mainroot"),var_05,var_02,var_03,512,128,20)) {
 				return 0;
 			}
 		}

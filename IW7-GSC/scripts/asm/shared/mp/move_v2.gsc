@@ -1,8 +1,8 @@
-/*****************************************************
+/*********************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\asm\shared\mp\move_v2.gsc
-*****************************************************/
+ * Script: scripts\asm\shared\mp\move_v2.gsc
+*********************************************/
 
 waitforsharpturnv2(param_00,param_01,param_02) {
 	self endon(param_01 + "_finished");
@@ -17,8 +17,8 @@ playmoveloopv2(param_00,param_01,param_02,param_03) {
 	thread waitforsharpturnv2(param_00,param_01,param_03);
 	thread lib_0F3C::func_136CC(param_00,param_01,param_03);
 	var_04 = 1;
-	if(isdefined(self.var_2303.moveplaybackrate)) {
-		var_04 = self.var_2303.moveplaybackrate;
+	if(isdefined(self.asm.moveplaybackrate)) {
+		var_04 = self.asm.moveplaybackrate;
 	}
 	else if(isdefined(self.moveplaybackrate)) {
 		var_04 = self.moveplaybackrate;

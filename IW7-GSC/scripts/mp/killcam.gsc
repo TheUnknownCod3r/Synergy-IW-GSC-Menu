@@ -1,21 +1,21 @@
-/******************************************
+/**********************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\killcam.gsc
-******************************************/
+ * Script: scripts\mp\killcam.gsc
+**********************************/
 
 init() {
 	level.killcam = scripts\mp\tweakables::gettweakablevalue("game","allowkillcam");
 	level.killcammiscitems = [];
 	var_00 = 0;
 	for(;;) {
-		var_01 = tablelookupbyrow("mp/miscKillcamItems.csv",var_00,0);
+		var_01 = tablelookupbyrow("mp\miscKillcamItems.csv",var_00,0);
 		if(!isdefined(var_01) || var_01 == "") {
 			break;
 		}
 
 		var_01 = int(var_01);
-		var_02 = tablelookupbyrow("mp/miscKillcamItems.csv",var_00,1);
+		var_02 = tablelookupbyrow("mp\miscKillcamItems.csv",var_00,1);
 		if(!isdefined(var_02) || var_02 == "") {
 			break;
 		}
@@ -245,7 +245,7 @@ killcam(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,
 	self endon("spawned");
 	level endon("game_ended");
 	if(level.showingfinalkillcam) {
-		function_02A9("atmosphere","killcam",0.1);
+		setglobalsoundcontext("atmosphere","killcam",0.1);
 		foreach(var_12 in level.players) {
 			self playlocalsound("final_killcam_in");
 			self _meth_82C2("killcam","mix");
@@ -493,7 +493,7 @@ waittillkillcamover() {
 
 	wait(self.var_A63E - 0.05);
 	if(level.showingfinalkillcam) {
-		function_02A9("atmosphere","",0.5);
+		setglobalsoundcontext("atmosphere","",0.5);
 		self playlocalsound("final_killcam_out");
 		self clearclienttriggeraudiozone(4);
 	}
@@ -653,7 +653,7 @@ setkillcamkilledbyitemomnvars(param_00,param_01) {
 func_F773(param_00,param_01) {
 	param_00 = scripts\mp\utility::func_13CA1(param_00,param_01);
 	var_02 = scripts\mp\utility::getweaponrootname(param_00);
-	var_03 = tablelookuprownum("mp/statsTable.csv",4,var_02);
+	var_03 = tablelookuprownum("mp\statsTable.csv",4,var_02);
 	if(!isdefined(var_03) || var_03 < 0) {
 		setkillcamkilledbyitemomnvars(-1,-1);
 		return;
@@ -673,7 +673,7 @@ func_F773(param_00,param_01) {
 	self setclientomnvar("ui_killcam_killedby_weapon_rarity_notify",gettime());
 	setkillcamkilledbyitemomnvars(0,var_03);
 	if(var_02 != "iw7_knife") {
-		var_05 = function_00E3(param_00);
+		var_05 = getweaponattachments(param_00);
 		if(!isdefined(var_05)) {
 			var_05 = [];
 		}
@@ -687,7 +687,7 @@ func_F773(param_00,param_01) {
 					break;
 				}
 
-				var_0A = tablelookuprownum("mp/attachmentTable.csv",4,var_08);
+				var_0A = tablelookuprownum("mp\attachmentTable.csv",4,var_08);
 				self setclientomnvar("ui_killcam_killedby_attachment" + var_06 + 1,var_0A);
 				var_06++;
 			}

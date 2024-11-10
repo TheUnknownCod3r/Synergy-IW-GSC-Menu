@@ -1,8 +1,8 @@
-/*************************************************************
+/*****************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\killstreaks\_gas_airstrike.gsc
-*************************************************************/
+ * Script: scripts\mp\killstreaks\_gas_airstrike.gsc
+*****************************************************/
 
 init() {
 	var_00 = spawnstruct();
@@ -26,7 +26,7 @@ init() {
 	var_00.var_5703 = 350;
 	var_00.var_5FEF = 200;
 	var_00.var_5FEA = 120;
-	var_00.var_5FF4 = loadfx("vfx/core/smktrail/poisonous_gas_linger_medium_thick_killer_instant");
+	var_00.var_5FF4 = loadfx("vfx\core\smktrail\poisonous_gas_linger_medium_thick_killer_instant");
 	var_00.var_5FEE = 0.25;
 	var_00.var_5FED = 0.5;
 	var_00.var_5FEC = 13;
@@ -39,7 +39,7 @@ init() {
 }
 
 onuse(param_00,param_01) {
-	var_02 = scripts\mp\_utility::getotherteam(self.team);
+	var_02 = scripts\mp\utility::getotherteam(self.team);
 	if(isdefined(level.var_C22F)) {
 		self iprintlnbold(&"KILLSTREAKS_AIR_SPACE_TOO_CROWDED");
 		return 0;
@@ -150,9 +150,9 @@ func_C4CD(param_00,param_01,param_02) {
 }
 
 applygaseffect(param_00,param_01,param_02,param_03,param_04) {
-	if(param_00 scripts\mp\_utility::isenemy(self) && isalive(self) && self istouching(param_02)) {
+	if(param_00 scripts\mp\utility::isenemy(self) && isalive(self) && self istouching(param_02)) {
 		param_03 radiusdamage(self.origin,1,param_04,param_04,param_00,"MOD_RIFLE_BULLET","gas_strike_mp");
-		if(!scripts\mp\_utility::isusingremote()) {
+		if(!scripts\mp\utility::isusingremote()) {
 			var_05 = scripts\mp\perks\_perkfunctions::applystunresistence(param_00,self,2);
 			self shellshock("default",var_05);
 		}

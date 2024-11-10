@@ -1,8 +1,8 @@
-/********************************************************
+/************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\zombies\zombie_damage.gsc
-********************************************************/
+ * Script: scripts\cp\zombies\zombie_damage.gsc
+************************************************/
 
 callback_zombieplayerdamage(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08,param_09,param_0A,param_0B) {
 	var_0C = self;
@@ -220,7 +220,7 @@ callback_zombieplayerdamage(param_00,param_01,param_02,param_03,param_04,param_0
 		self notify("player_damaged");
 	}
 
-	scripts/cp/cp_gamescore::update_personal_encounter_performance("personal","damage_taken",param_02);
+	scripts\cp\cp_gamescore::update_personal_encounter_performance("personal","damage_taken",param_02);
 	if(param_02 <= 0) {
 		return;
 	}
@@ -269,9 +269,9 @@ play_pain_photo(param_00) {
 		return;
 	}
 
-	scripts/cp/zombies/zombies_loadout::set_player_photo_status(param_00,"damaged");
+	scripts\cp\zombies\zombies_loadout::set_player_photo_status(param_00,"damaged");
 	wait(4);
-	scripts/cp/zombies/zombies_loadout::set_player_photo_status(param_00,"healthy");
+	scripts\cp\zombies\zombies_loadout::set_player_photo_status(param_00,"healthy");
 }
 
 func_50F9(param_00) {
@@ -543,14 +543,14 @@ update_performance_zombie_damage(param_00,param_01,param_02) {
 		return;
 	}
 
-	scripts/cp/cp_gamescore::update_team_encounter_performance(scripts/cp/cp_gamescore::get_team_score_component_name(),"damage_done_on_alien",param_01);
+	scripts\cp\cp_gamescore::update_team_encounter_performance(scripts\cp\cp_gamescore::get_team_score_component_name(),"damage_done_on_alien",param_01);
 	if(isplayer(param_00)) {
-		param_00 scripts/cp/cp_gamescore::update_personal_encounter_performance("personal","damage_done_on_alien",param_01);
+		param_00 scripts\cp\cp_gamescore::update_personal_encounter_performance("personal","damage_done_on_alien",param_01);
 		return;
 	}
 
 	if(isdefined(param_00.triggerportableradarping)) {
-		param_00.triggerportableradarping scripts/cp/cp_gamescore::update_personal_encounter_performance("personal","damage_done_on_alien",param_01);
+		param_00.triggerportableradarping scripts\cp\cp_gamescore::update_personal_encounter_performance("personal","damage_done_on_alien",param_01);
 	}
 }
 
@@ -655,7 +655,7 @@ func_1118C(param_00,param_01,param_02,param_03) {
 	}
 
 	if(isdefined(var_04)) {
-		function_02E0(level._effect["blue_ark_beam"],param_03,vectortoangles(param_03 - var_04),var_04);
+		playfxbetweenpoints(level._effect["blue_ark_beam"],param_03,vectortoangles(param_03 - var_04),var_04);
 		wait(0.05);
 		if(isdefined(self) && param_02 == "MOD_MELEE") {
 			self playsound("zombie_fence_shock");
@@ -688,7 +688,7 @@ func_1118E(param_00,param_01,param_02,param_03) {
 		var_05 = "iw7_stunbolt_zm";
 	}
 
-	if(!scripts/asm/zombie/zombie::func_9F87()) {
+	if(!scripts\asm\zombie\zombie::func_9F87()) {
 		self.stunned = 1;
 		thread scripts\cp\zombies\zombie_scriptable_states::applyzombiescriptablestate(self);
 		self.stun_hit_time = gettime() + 1500;

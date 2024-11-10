@@ -1,8 +1,8 @@
-/********************************************************
+/************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\killstreaks\aamissile.gsc
-********************************************************/
+ * Script: scripts\mp\killstreaks\aamissile.gsc
+************************************************/
 
 init() {
 	precacheitem("aamissile_projectile_mp");
@@ -15,11 +15,11 @@ init() {
 }
 
 tryuseaamissile(param_00,param_01) {
-	scripts\mp\_utility::setusingremote("aamissile");
+	scripts\mp\utility::setusingremote("aamissile");
 	var_02 = scripts\mp\killstreaks\_killstreaks::initridekillstreak();
 	if(var_02 != "success") {
 		if(var_02 != "disconnect") {
-			scripts\mp\_utility::clearusingremote();
+			scripts\mp\utility::clearusingremote();
 		}
 
 		return 0;
@@ -74,9 +74,9 @@ aa_missile_fire(param_00,param_01) {
 
 	var_08 = anglestoforward(param_01.angles);
 	var_09 = param_01.origin + var_03 + var_08 * var_04 * -1;
-	var_0A = scripts\mp\_utility::_magicbullet("aamissile_projectile_mp",var_09,var_07,param_01);
+	var_0A = scripts\mp\utility::_magicbullet("aamissile_projectile_mp",var_09,var_07,param_01);
 	if(!isdefined(var_0A)) {
-		param_01 scripts\mp\_utility::clearusingremote();
+		param_01 scripts\mp\utility::clearusingremote();
 		return;
 	}
 
@@ -99,16 +99,16 @@ missileeyes(param_00,param_01) {
 		param_00 cameralinkto(param_01,"tag_origin");
 		param_00 controlslinkto(param_01);
 		if(getdvarint("camera_thirdPerson")) {
-			param_00 scripts\mp\_utility::setthirdpersondof(0);
+			param_00 scripts\mp\utility::setthirdpersondof(0);
 		}
 
 		param_01 waittill("death");
 		if(isdefined(param_01)) {
-			param_00 scripts\mp\_matchdata::logkillstreakevent("predator_missile",param_01.origin);
+			param_00 scripts\mp\matchdata::logkillstreakevent("predator_missile",param_01.origin);
 		}
 
 		param_00 controlsunlink();
-		param_00 scripts\mp\_utility::freezecontrolswrapper(1);
+		param_00 scripts\mp\utility::freezecontrolswrapper(1);
 		if(!level.gameended) {
 			param_00 thread staticeffect(0.5);
 		}
@@ -117,11 +117,11 @@ missileeyes(param_00,param_01) {
 		param_00 thermalvisionfofoverlayoff();
 		param_00 cameraunlink();
 		if(getdvarint("camera_thirdPerson")) {
-			param_00 scripts\mp\_utility::setthirdpersondof(1);
+			param_00 scripts\mp\utility::setthirdpersondof(1);
 		}
 	}
 
-	param_00 scripts\mp\_utility::clearusingremote();
+	param_00 scripts\mp\utility::clearusingremote();
 }
 
 delayedfofoverlay() {
@@ -160,11 +160,11 @@ player_cleanuponteamchange(param_00) {
 		self controlsunlink();
 		self cameraunlink();
 		if(getdvarint("camera_thirdPerson")) {
-			scripts\mp\_utility::setthirdpersondof(1);
+			scripts\mp\utility::setthirdpersondof(1);
 		}
 	}
 
-	scripts\mp\_utility::clearusingremote();
+	scripts\mp\utility::clearusingremote();
 	level.remotemissileinprogress = undefined;
 }
 
@@ -183,6 +183,6 @@ player_cleanupongameended(param_00) {
 	self controlsunlink();
 	self cameraunlink();
 	if(getdvarint("camera_thirdPerson")) {
-		scripts\mp\_utility::setthirdpersondof(1);
+		scripts\mp\utility::setthirdpersondof(1);
 	}
 }

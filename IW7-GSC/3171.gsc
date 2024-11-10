@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3171.gsc
-****************************/
+ * Script: 3171.gsc
+************************/
 
 func_D899() {
 	self endon("kill_long_death");
@@ -210,7 +210,7 @@ func_8977(param_00,param_01,param_02) {
 func_3EC8(param_00,param_01,param_02) {
 	if(!isdefined(self.a.var_4876)) {
 		var_03 = self.a.pose;
-		if(!scripts/asm/asm::asm_hasalias(param_01,var_03)) {
+		if(!scripts\asm\asm::asm_hasalias(param_01,var_03)) {
 			self.a.var_4876 = undefined;
 			return self.a.var_4876;
 		}
@@ -283,14 +283,14 @@ func_CF2A(param_00,param_01,param_02,param_03) {
 		}
 
 		for(;;) {
-			var_07 = lib_0A1E::func_231F(param_00,param_01,scripts/asm/asm::func_2341(param_00,param_01));
+			var_07 = lib_0A1E::func_231F(param_00,param_01,scripts\asm\asm::func_2341(param_00,param_01));
 			if(var_07 == "code_move") {
 				break;
 			}
 		}
 	}
 
-	scripts/asm/asm::asm_fireevent(param_01,"dying_crawl_done");
+	scripts\asm\asm::asm_fireevent(param_01,"dying_crawl_done");
 }
 
 func_CF2B(param_00,param_01,param_02,param_03) {
@@ -325,7 +325,7 @@ func_CF2B(param_00,param_01,param_02,param_03) {
 	}
 
 	self.var_527E = gettime() + randomintrange(4000,20000);
-	scripts/asm/asm::asm_fireevent(param_01,"dying_back_crawl_done");
+	scripts\asm\asm::asm_fireevent(param_01,"dying_back_crawl_done");
 }
 
 func_CF06(param_00,param_01,param_02,param_03) {
@@ -349,11 +349,11 @@ func_CF29(param_00,param_01,param_02,param_03) {
 		var_05 = var_04;
 		var_06 = lib_0A1E::func_2322(param_00,param_01,::func_8977);
 		if(var_06 == "end") {
-			if(!scripts/asm/asm::func_232B(param_01,"end")) {
-				scripts/asm/asm::asm_fireevent(param_01,"end");
+			if(!scripts\asm\asm::func_232B(param_01,"end")) {
+				scripts\asm\asm::asm_fireevent(param_01,"end");
 			}
 
-			thread scripts/asm/asm::func_2310(param_00,param_01,0);
+			thread scripts\asm\asm::func_2310(param_00,param_01,0);
 		}
 	}
 }
@@ -372,7 +372,7 @@ func_CF28(param_00,param_01,param_02,param_03) {
 
 		lib_0A1E::func_2369(param_00,param_01,var_05);
 		var_04 = var_05;
-		lib_0A1E::func_2320(param_00,param_01,var_05,scripts/asm/asm::func_2341(param_00,param_01));
+		lib_0A1E::func_2320(param_00,param_01,var_05,scripts\asm\asm::func_2341(param_00,param_01));
 	}
 }
 
@@ -403,7 +403,7 @@ func_D541(param_00,param_01,param_02,param_03) {
 		}
 
 		for(;;) {
-			var_0A = lib_0A1E::func_231F(param_00,param_01,scripts/asm/asm::func_2341(param_00,param_01));
+			var_0A = lib_0A1E::func_231F(param_00,param_01,scripts\asm\asm::func_2341(param_00,param_01));
 			if(var_0A == "code_move") {
 				break;
 			}
@@ -412,7 +412,7 @@ func_D541(param_00,param_01,param_02,param_03) {
 		var_08--;
 	}
 
-	scripts/asm/asm::asm_fireevent(param_01,"pain_wander_done");
+	scripts\asm\asm::asm_fireevent(param_01,"pain_wander_done");
 }
 
 func_8BD5(param_00,param_01,param_02,param_03) {
@@ -709,7 +709,7 @@ func_AFE6(param_00,param_01,param_02,param_03) {
 }
 
 func_582C(param_00,param_01,param_02,param_03) {
-	if(!scripts/asm/asm::asm_hasalias(param_02,self.a.var_11186)) {
+	if(!scripts\asm\asm::asm_hasalias(param_02,self.a.var_11186)) {
 		return 0;
 	}
 

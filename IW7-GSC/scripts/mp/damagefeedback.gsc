@@ -1,8 +1,8 @@
-/*************************************************
+/*****************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\damagefeedback.gsc
-*************************************************/
+ * Script: scripts\mp\damagefeedback.gsc
+*****************************************/
 
 init() {
 	level.hitmarkerpriorities = [];

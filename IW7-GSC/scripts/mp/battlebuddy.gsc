@@ -1,8 +1,8 @@
-/**********************************************
+/**************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\battlebuddy.gsc
-**********************************************/
+ * Script: scripts\mp\battlebuddy.gsc
+**************************************/
 
 init() {
 	if(level.teambased && !isdefined(level.nobuddyspawns)) {

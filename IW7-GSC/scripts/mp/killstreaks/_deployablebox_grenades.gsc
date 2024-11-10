@@ -1,8 +1,8 @@
-/**********************************************************************
+/**************************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\killstreaks\_deployablebox_grenades.gsc
-**********************************************************************/
+ * Script: scripts\mp\killstreaks\_deployablebox_grenades.gsc
+**************************************************************/
 
 init() {
 	var_00 = spawnstruct();
@@ -27,7 +27,7 @@ init() {
 	var_00.maxhealth = 150;
 	var_00.damagefeedback = "deployable_bag";
 	var_00.deathweaponinfo = "deployable_grenades_mp";
-	var_00.deathvfx = loadfx("vfx/core/expl/grenadeexp_default");
+	var_00.deathvfx = loadfx("vfx\core\expl\grenadeexp_default");
 	var_00.deathdamageradius = 256;
 	var_00.deathdamagemax = 150;
 	var_00.deathdamagemin = 50;
@@ -45,7 +45,7 @@ func_128DF(param_00,param_01) {
 		return 0;
 	}
 
-	scripts\mp\_matchdata::logkillstreakevent("deployable_grenades",self.origin);
+	scripts\mp\matchdata::logkillstreakevent("deployable_grenades",self.origin);
 	return 1;
 }
 
@@ -57,7 +57,7 @@ func_DE4E() {
 	var_00 = self getweaponslistall();
 	if(isdefined(var_00)) {
 		foreach(var_02 in var_00) {
-			if(scripts\mp\_weapons::func_9E18(var_02) || scripts\mp\_weapons::func_9EC0(var_02)) {
+			if(scripts\mp\weapons::func_9E18(var_02) || scripts\mp\weapons::func_9EC0(var_02)) {
 				self givestartammo(var_02);
 			}
 		}
@@ -65,5 +65,5 @@ func_DE4E() {
 }
 
 func_3937(param_00) {
-	return !scripts\mp\_utility::isjuggernaut();
+	return !scripts\mp\utility::isjuggernaut();
 }

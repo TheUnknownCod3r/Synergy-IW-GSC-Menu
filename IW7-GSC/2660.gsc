@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\2660.gsc
-****************************/
+ * Script: 2660.gsc
+************************/
 
 func_4941(param_00,param_01,param_02,param_03,param_04,param_05) {
 	if(!isdefined(level.var_D928)) {

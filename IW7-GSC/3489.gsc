@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\3489.gsc
+ * Script: 3489.gsc
 ***************************************/
 
 init() {
@@ -171,8 +171,8 @@ func_10DBE(var_00) {
   var_00 setvehgoalpos(var_0.func_4BF7.origin, 1);
   var_00 waittill("goal");
   var_00 thread func_AACF();
-  var_00 thread scripts/mp/killstreaks/flares::func_6EAA(::func_AADF);
-  var_00 thread scripts/mp/killstreaks/flares::func_6EAB(::func_AAE0);
+  var_00 thread scripts\mp\killstreaks\flares::func_6EAA(::func_AADF);
+  var_00 thread scripts\mp\killstreaks\flares::func_6EAB(::func_AAE0);
 }
 
 func_AACF() {
@@ -448,7 +448,7 @@ func_AADF(var_00, var_01, var_02, var_03) {
   var_05 = spawn("script_origin", var_2.origin);
   var_5.angles = var_2.angles;
   var_05 movegravity(anglestoright(var_3[var_04].angles) * -1000, 0.05);
-  var_05 thread scripts/mp/killstreaks/flares::func_6E9F(5.0);
+  var_05 thread scripts\mp\killstreaks\flares::func_6E9F(5.0);
 
   for (var_06 = 0; var_06 < var_3.size; var_6++) {
   if (isdefined(var_3[var_06]))
@@ -474,7 +474,7 @@ func_AAE0(var_00, var_01, var_02) {
   var_03 = spawn("script_origin", var_2.origin);
   var_3.angles = var_2.angles;
   var_03 movegravity(anglestoright(self.angles) * -1000, 0.05);
-  var_03 thread scripts/mp/killstreaks/flares::func_6E9F(5.0);
+  var_03 thread scripts\mp\killstreaks\flares::func_6E9F(5.0);
   self missile_settargetent(var_03);
   var_04 = var_2.origin + anglestoright(self.angles) * 200;
   var_02 vehicle_setspeed(var_2.speed, 100, 40);

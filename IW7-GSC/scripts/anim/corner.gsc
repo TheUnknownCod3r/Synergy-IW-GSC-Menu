@@ -1,8 +1,8 @@
-/*******************************************
+/***********************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\anim\corner.gsc
-*******************************************/
+ * Script: scripts\anim\corner.gsc
+***********************************/
 
 func_4661(param_00,param_01) {
 	self endon("killanimscript");
@@ -10,8 +10,8 @@ func_4661(param_00,param_01) {
 	self.var_1F66["exposed"]["crouch"] = ::func_F317;
 	self.covernode = self.target_getindexoftarget;
 	self.var_4664 = param_00;
-	self.var_1491.var_4667 = "unknown";
-	self.var_1491.var_1A3E = undefined;
+	self.a.var_4667 = "unknown";
+	self.a.var_1A3E = undefined;
 	scripts\anim\cover_behavior::func_129B4(param_01);
 	func_F30C();
 	self.var_9F4D = 0;
@@ -38,22 +38,22 @@ func_4661(param_00,param_01) {
 
 func_62F3() {
 	self.var_10F8C = undefined;
-	self.var_1491.var_AAF2 = undefined;
+	self.a.var_AAF2 = undefined;
 }
 
 func_F30C() {
-	if(self.var_1491.pose == "crouch") {
+	if(self.a.pose == "crouch") {
 		func_F2AE("crouch");
 		return;
 	}
 
-	if(self.var_1491.pose == "stand") {
+	if(self.a.pose == "stand") {
 		func_F2AE("stand");
 		return;
 	}
 
 	scripts\anim\utility::exitpronewrapper(1);
-	self.var_1491.pose = "crouch";
+	self.a.pose = "crouch";
 	func_F2AE("crouch");
 }
 
@@ -68,11 +68,11 @@ func_FFD1() {
 
 	if(gettime() > self.var_3C5B) {
 		self.var_3C5B = gettime() + randomintrange(5000,20000);
-		if(isdefined(self.var_DC5C) && self.var_1491.pose == "stand") {
+		if(isdefined(self.var_DC5C) && self.a.pose == "stand") {
 			return 0;
 		}
 
-		self.var_1491.var_D892 = undefined;
+		self.a.var_D892 = undefined;
 		return 1;
 	}
 
@@ -81,7 +81,7 @@ func_FFD1() {
 
 func_B24A() {
 	var_00 = "stand";
-	if(self.var_1491.pose == "crouch") {
+	if(self.a.pose == "crouch") {
 		var_00 = "crouch";
 		if(self.covernode getrandomattachments("stand")) {
 			if(!self.covernode getrandomattachments("crouch") || func_FFD1()) {
@@ -100,7 +100,7 @@ func_B24A() {
 		return;
 	}
 
-	if(self.var_1491.pose == var_00) {
+	if(self.a.pose == var_00) {
 		if(isdefined(self.var_C2) && isdefined(self.var_C2.var_8ED9) && self.var_C2.var_8ED9 == "back") {
 			var_01 = scripts\anim\utility::func_1F64("alert_idle_back");
 		}
@@ -135,7 +135,7 @@ shootposwrapper_func() {
 	}
 
 	var_00 = self.covernode scripts\anim\utility_common::getyawtoorigin(self.var_FECF);
-	if(self.var_1491.var_4667 == "over") {
+	if(self.a.var_4667 == "over") {
 		return var_00 > self.setmatchdatadef || self.setdevdvar > var_00;
 	}
 
@@ -144,22 +144,22 @@ shootposwrapper_func() {
 	}
 
 	if(self.var_4664 == "left") {
-		if(self.var_1491.var_4667 == "B") {
+		if(self.a.var_4667 == "B") {
 			return var_00 > self.var_1513 || var_00 < -14;
 		}
 
-		if(self.var_1491.var_4667 == "A") {
+		if(self.a.var_4667 == "A") {
 			return var_00 < self.var_1513;
 		}
 
 		return var_00 > 50 || var_00 < -8;
 	}
 
-	if(self.var_1491.var_4667 == "B") {
+	if(self.a.var_4667 == "B") {
 		return var_00 < -1 * self.var_1513 || var_00 > 12;
 	}
 
-	if(self.var_1491.var_4667 == "A") {
+	if(self.a.var_4667 == "A") {
 		return var_00 > -1 * self.var_1513;
 	}
 
@@ -174,12 +174,12 @@ func_7E3C(param_00,param_01) {
 	}
 
 	var_04 = [];
-	if(isdefined(param_00) && self.var_1491.pose == "crouch" && var_03 < self.setmatchdatadef && self.setdevdvar < var_03) {
+	if(isdefined(param_00) && self.a.pose == "crouch" && var_03 < self.setmatchdatadef && self.setdevdvar < var_03) {
 		var_04 = param_00 _meth_8169();
 	}
 
 	if(self.var_4664 == "up") {
-		if(scripts\common\utility::actor_is3d()) {
+		if(scripts\engine\utility::actor_is3d()) {
 			var_05 = 0;
 			if(isdefined(param_01)) {
 				var_06 = anglestoup(self.angles);
@@ -247,15 +247,15 @@ func_7E03() {
 		var_00 = self.covernode scripts\anim\utility_common::getyawtoorigin(self.var_FECF);
 	}
 
-	if(self.var_1491.var_4667 == "lean") {
+	if(self.a.var_4667 == "lean") {
 		return "lean";
 	}
 
-	if(self.var_1491.var_4667 == "over") {
+	if(self.a.var_4667 == "over") {
 		return "over";
 	}
 
-	if(self.var_1491.var_4667 == "B") {
+	if(self.a.var_4667 == "B") {
 		if(self.var_4664 == "left") {
 			if(var_00 > self.var_1513) {
 				return "A";
@@ -270,7 +270,7 @@ func_7E03() {
 		return "B";
 	}
 
-	if(self.var_1491.var_4667 == "A") {
+	if(self.a.var_4667 == "A") {
 		if(self.var_4664 == "up") {
 			return "A";
 		}
@@ -292,19 +292,19 @@ func_7E03() {
 func_3C5D() {
 	self endon("killanimscript");
 	var_00 = func_7E03();
-	if(var_00 == self.var_1491.var_4667) {
+	if(var_00 == self.a.var_4667) {
 		return 0;
 	}
 
 	self.var_3C60 = 1;
 	self notify("done_changing_cover_pos");
-	var_01 = self.var_1491.var_4667 + "_to_" + var_00;
+	var_01 = self.a.var_4667 + "_to_" + var_00;
 	var_02 = scripts\anim\utility::func_1F67(var_01);
-	if(scripts\common\utility::actor_is3d() && var_01 == "A_to_B" || var_01 == "B_to_A") {
+	if(scripts\engine\utility::actor_is3d() && var_01 == "A_to_B" || var_01 == "B_to_A") {
 		return 0;
 	}
 
-	var_03 = !scripts\common\utility::actor_is3d();
+	var_03 = !scripts\engine\utility::actor_is3d();
 	var_04 = destroy();
 	if(!self maymovetopoint(var_04,var_03)) {
 		return 0;
@@ -316,7 +316,7 @@ func_3C5D() {
 
 	scripts\anim\combat_utility::func_6309();
 	func_1105C(0.3);
-	var_05 = self.var_1491.pose;
+	var_05 = self.a.pose;
 	self _meth_82AC(scripts\anim\utility::func_1F64("straight_level"),0,0.2);
 	self give_left_powers("changeStepOutPos",var_02,1,0.2,1.2);
 	func_465E(var_02);
@@ -336,11 +336,11 @@ func_3C5D() {
 	}
 
 	self aiclearanim(var_02,0.1);
-	self.var_1491.var_4667 = var_00;
+	self.a.var_4667 = var_00;
 	self.var_3C60 = 0;
 	self.var_4740 = gettime();
-	if(self.var_1491.pose != var_05) {
-		func_F2AE(self.var_1491.pose);
+	if(self.a.pose != var_05) {
+		func_F2AE(self.a.pose);
 	}
 
 	thread func_3C50(undefined,1,0.3);
@@ -348,7 +348,7 @@ func_3C5D() {
 }
 
 func_38C5(param_00,param_01,param_02) {
-	if(self.var_1491.var_BEF9) {
+	if(self.a.var_BEF9) {
 		return 0;
 	}
 
@@ -374,24 +374,24 @@ donotetrackswithendon(param_00) {
 
 func_10D6A(param_00,param_01,param_02) {
 	self.var_4662 = 1;
-	if(self.var_1491.var_4667 == "lean") {
-		self.var_1491.var_AAF2 = 1;
+	if(self.a.var_4667 == "lean") {
+		self.a.var_AAF2 = 1;
 	}
 	else
 	{
-		self.var_1491.var_AAF2 = undefined;
+		self.a.var_AAF2 = undefined;
 	}
 
 	func_F637(param_00,param_01,param_02);
 }
 
 func_3C50(param_00,param_01,param_02) {
-	if(self.var_1491.var_4667 == "lean") {
-		self.var_1491.var_AAF2 = 1;
+	if(self.a.var_4667 == "lean") {
+		self.a.var_AAF2 = 1;
 	}
 	else
 	{
-		self.var_1491.var_AAF2 = undefined;
+		self.a.var_AAF2 = undefined;
 	}
 
 	func_F637(param_00,param_01,param_02);
@@ -413,12 +413,12 @@ func_F637(param_00,param_01,param_02) {
 	scripts\anim\track::func_F641(1,param_02);
 	func_465D(undefined);
 	var_03 = undefined;
-	if(isdefined(self.var_1491.var_2274["lean_aim_straight"])) {
-		var_03 = self.var_1491.var_2274["lean_aim_straight"];
+	if(isdefined(self.a.var_2274["lean_aim_straight"])) {
+		var_03 = self.a.var_2274["lean_aim_straight"];
 	}
 
 	thread scripts\anim\combat_utility::func_1A3E();
-	if(isdefined(self.var_1491.var_AAF2)) {
+	if(isdefined(self.a.var_AAF2)) {
 		self _meth_82AC(var_03,1,param_02);
 		self _meth_82AC(scripts\anim\utility::func_1F64("straight_level"),0,0);
 		self _meth_82A9(scripts\anim\utility::func_1F64("lean_aim_left"),1,param_02);
@@ -453,7 +453,7 @@ func_F637(param_00,param_01,param_02) {
 }
 
 func_10F8A() {
-	if(self.var_1491.var_4667 == "over") {
+	if(self.a.var_4667 == "over") {
 		return 1;
 	}
 
@@ -461,13 +461,13 @@ func_10F8A() {
 }
 
 func_10F89() {
-	self.var_1491.var_4667 = "alert";
+	self.a.var_4667 = "alert";
 	if(self.objective_playermask_showto < 64) {
 		self.objective_playermask_showto = 64;
 	}
 
 	func_F6B9();
-	if(self.var_1491.pose == "stand") {
+	if(self.a.pose == "stand") {
 		self.var_1513 = 38;
 	}
 	else
@@ -475,7 +475,7 @@ func_10F89() {
 		self.var_1513 = 31;
 	}
 
-	var_00 = self.var_1491.pose;
+	var_00 = self.a.pose;
 	func_F2AE(var_00);
 	scripts\anim\combat::func_F337();
 	var_01 = "none";
@@ -505,21 +505,21 @@ func_10F89() {
 		return 0;
 	}
 
-	self.var_1491.var_4667 = var_01;
-	self.var_1491.var_D892 = var_01;
-	if(self.var_1491.var_4667 == "lean") {
+	self.a.var_4667 = var_01;
+	self.a.var_D892 = var_01;
+	if(self.a.var_4667 == "lean") {
 		scripts\anim\combat::func_F337(self.covernode);
 	}
 
 	if(var_01 == "A" || var_01 == "B") {
-		self.var_1491.var_10930 = "cover_" + self.var_4664 + "_" + self.var_1491.pose + "_" + var_01;
+		self.a.var_10930 = "cover_" + self.var_4664 + "_" + self.a.pose + "_" + var_01;
 	}
 	else if(var_01 == "over") {
-		self.var_1491.var_10930 = "cover_crouch_aim";
+		self.a.var_10930 = "cover_crouch_aim";
 	}
 	else
 	{
-		self.var_1491.var_10930 = "none";
+		self.a.var_10930 = "none";
 	}
 
 	self.sendmatchdata = 1;
@@ -541,12 +541,12 @@ func_10F89() {
 		self waittillmatch("end","stepout");
 	}
 
-	if(var_01 == "B" && scripts\common\utility::cointoss() && self.var_4664 == "right") {
-		self.var_1491.var_10930 = "corner_right_martyrdom";
+	if(var_01 == "B" && scripts\engine\utility::cointoss() && self.var_4664 == "right") {
+		self.a.var_10930 = "corner_right_martyrdom";
 	}
 
 	func_F2AF(var_00);
-	var_06 = var_01 == "over" || scripts\common\utility::actor_is3d();
+	var_06 = var_01 == "over" || scripts\engine\utility::actor_is3d();
 	func_10D6A(undefined,var_06,0.3);
 	thread scripts\anim\track::func_11B07();
 	if(var_04) {
@@ -579,7 +579,7 @@ func_10F8B() {
 	if(isdefined(self.var_FECF)) {
 		var_00 = lengthsquared(self.origin - self.var_FECF);
 		if(scripts\anim\utility_common::usingrocketlauncher() && scripts\anim\utility::func_10000(var_00)) {
-			if(self.var_1491.pose == "stand") {
+			if(self.a.pose == "stand") {
 				scripts\anim\shared::func_1180E(scripts\anim\utility::func_B027("combat","drop_rpg_stand"));
 			}
 			else
@@ -635,7 +635,7 @@ func_DC57() {
 
 	var_04 = scripts\anim\utility::func_1F67(var_03);
 	var_05 = destroy(48);
-	if(!self maymovetopoint(var_05,!scripts\common\utility::actor_is3d())) {
+	if(!self maymovetopoint(var_05,!scripts\engine\utility::actor_is3d())) {
 		return 0;
 	}
 
@@ -643,7 +643,7 @@ func_DC57() {
 	func_F6B9();
 	self.sendmatchdata = 1;
 	self.var_9F15 = 1;
-	self.var_1491.var_D892 = "rambo";
+	self.a.var_D892 = "rambo";
 	self.var_3C60 = 1;
 	thread scripts\anim\shared::func_DC59(var_00);
 	self _meth_82E4("rambo",var_04,%body,1,0,1);
@@ -682,7 +682,7 @@ shootastold() {
 
 			if(shootposwrapper_func()) {
 				if(!func_3C5D()) {
-					if(func_7E03() == self.var_1491.var_4667) {
+					if(func_7E03() == self.a.var_4667) {
 						break;
 					}
 
@@ -701,7 +701,7 @@ shootastold() {
 			self aiclearanim(%add_fire,0.2);
 		}
 
-		if(canreturntocover(self.var_1491.var_4667 != "lean")) {
+		if(canreturntocover(self.a.var_4667 != "lean")) {
 			break;
 		}
 
@@ -718,7 +718,7 @@ func_FEE2(param_00) {
 	var_01 = gettime();
 	func_FEE0(0);
 	self notify("stopNotifyStopShootingAfterTime");
-	var_02 = gettime() - var_01 \ 1000;
+	var_02 = gettime() - var_01 / 1000;
 	if(var_02 < param_00) {
 		wait(param_00 - var_02);
 	}
@@ -765,17 +765,17 @@ func_10154() {
 }
 
 canreturntocover(param_00) {
-	var_01 = !scripts\common\utility::actor_is3d();
+	var_01 = !scripts\engine\utility::actor_is3d();
 	if(param_00) {
 		var_02 = destroy();
 		if(!self maymovetopoint(var_02,var_01)) {
 			return 0;
 		}
 
-		return self maymovefrompointtopoint(var_02,self.var_473C.origin,var_01);
+		return self maymovefrompointtopoint(var_02,self.covernode.origin,var_01);
 	}
 
-	return self maymovetopoint(self.var_473C.origin,var_02);
+	return self maymovetopoint(self.covernode.origin,var_02);
 }
 
 func_E47A() {
@@ -784,17 +784,17 @@ func_E47A() {
 	self notify("take_cover_at_corner");
 	self.var_3C60 = 1;
 	self notify("done_changing_cover_pos");
-	var_01 = self.var_1491.var_4667 + "_to_alert";
+	var_01 = self.a.var_4667 + "_to_alert";
 	var_02 = scripts\anim\utility::func_1F67(var_01);
 	func_1105C(0.3);
 	var_03 = 0;
-	if(self.var_1491.var_4667 != "lean" && var_00 && scripts\anim\utility::func_1F65(var_01 + "_reload") && randomfloat(100) < 75) {
+	if(self.a.var_4667 != "lean" && var_00 && scripts\anim\utility::func_1F65(var_01 + "_reload") && randomfloat(100) < 75) {
 		var_02 = scripts\anim\utility::func_1F67(var_01 + "_reload");
 		var_03 = 1;
 	}
 
 	var_04 = func_10F8A();
-	if(scripts\common\utility::actor_is3d()) {
+	if(scripts\engine\utility::actor_is3d()) {
 		self aiclearanim(%exposed_modern,0.2);
 	}
 	else
@@ -811,14 +811,14 @@ func_E47A() {
 
 	self.var_3C60 = 0;
 	if(self.var_4664 == "up") {
-		self.var_1491.var_10930 = "cover_up";
+		self.a.var_10930 = "cover_up";
 	}
 	else if(self.var_4664 == "left") {
-		self.var_1491.var_10930 = "cover_left";
+		self.a.var_10930 = "cover_left";
 	}
 	else
 	{
-		self.var_1491.var_10930 = "cover_right";
+		self.a.var_10930 = "cover_right";
 	}
 
 	self.sendmatchdata = 0;
@@ -865,14 +865,14 @@ func_128AF(param_00,param_01) {
 
 	var_02 = undefined;
 	if(isdefined(self.var_DC5C) && randomfloat(1) < self.var_DC5C) {
-		if(isdefined(self.var_1491.var_2274["grenade_rambo"])) {
+		if(isdefined(self.a.var_2274["grenade_rambo"])) {
 			var_02 = scripts\anim\utility::func_1F64("grenade_rambo");
 		}
 	}
 
 	if(!isdefined(var_02)) {
 		if(isdefined(param_01) && param_01) {
-			if(!isdefined(self.var_1491.var_2274["grenade_safe"])) {
+			if(!isdefined(self.a.var_2274["grenade_safe"])) {
 				return 0;
 			}
 
@@ -880,7 +880,7 @@ func_128AF(param_00,param_01) {
 		}
 		else
 		{
-			if(!isdefined(self.var_1491.var_2274["grenade_exposed"])) {
+			if(!isdefined(self.a.var_2274["grenade_exposed"])) {
 				return 0;
 			}
 
@@ -898,7 +898,7 @@ func_128AF(param_00,param_01) {
 func_D922() {}
 
 func_B01C(param_00) {
-	if(!isdefined(self.var_1491.var_2274["alert_to_look"])) {
+	if(!isdefined(self.a.var_2274["alert_to_look"])) {
 		return 0;
 	}
 
@@ -927,8 +927,8 @@ func_B01C(param_00) {
 }
 
 func_9EDA() {
-	var_00 = self.var_473C.angles;
-	if(scripts\common\utility::actor_is3d()) {
+	var_00 = self.covernode.angles;
+	if(scripts\engine\utility::actor_is3d()) {
 		var_00 = scripts\anim\utility_common::gettruenodeangles(self.covernode);
 	}
 
@@ -951,7 +951,7 @@ func_9EDA() {
 }
 
 func_C9FC() {
-	if(isdefined(self.var_473C.var_ED6A)) {
+	if(isdefined(self.covernode.var_ED6A)) {
 		return 0;
 	}
 
@@ -972,7 +972,7 @@ func_C9FC() {
 }
 
 func_3915() {
-	return self maymovetopoint(self.var_473C.origin,!scripts\common\utility::actor_is3d());
+	return self maymovetopoint(self.covernode.origin,!scripts\engine\utility::actor_is3d());
 }
 
 func_6B9B() {
@@ -992,21 +992,21 @@ func_4668() {
 }
 
 func_9ED6(param_00,param_01) {
-	var_02 = !scripts\common\utility::actor_is3d();
+	var_02 = !scripts\engine\utility::actor_is3d();
 	if(param_01) {
 		var_03 = destroy();
 		if(!self maymovetopoint(var_03,var_02)) {
 			return 0;
 		}
 
-		if(scripts\common\utility::actor_is3d()) {
+		if(scripts\engine\utility::actor_is3d()) {
 			return 1;
 		}
 
 		return self maymovefrompointtopoint(var_03,scripts\anim\utility::func_7DC6(param_00),var_02);
 	}
 
-	if(scripts\common\utility::actor_is3d()) {
+	if(scripts\engine\utility::actor_is3d()) {
 		return 1;
 	}
 
@@ -1014,7 +1014,7 @@ func_9ED6(param_00,param_01) {
 }
 
 destroy(param_00) {
-	var_01 = self.var_473C.angles;
+	var_01 = self.covernode.angles;
 	var_02 = anglestoright(var_01);
 	if(!isdefined(param_00)) {
 		param_00 = 36;
@@ -1034,13 +1034,13 @@ destroy(param_00) {
 			break;
 	}
 
-	return self.var_473C.origin + (var_02[0],var_02[1],0);
+	return self.covernode.origin + (var_02[0],var_02[1],0);
 }
 
 func_92CC() {
 	self endon("end_idle");
 	for(;;) {
-		var_00 = randomint(2) == 0 && isdefined(self.var_1491.var_2274["alert_idle_twitch"]) && scripts\anim\utility::func_1F65("alert_idle_twitch");
+		var_00 = randomint(2) == 0 && isdefined(self.a.var_2274["alert_idle_twitch"]) && scripts\anim\utility::func_1F65("alert_idle_twitch");
 		if(var_00) {
 			var_01 = scripts\anim\utility::func_1F67("alert_idle_twitch");
 		}
@@ -1085,7 +1085,7 @@ func_F2AF(param_00) {
 }
 
 transitiontostance(param_00) {
-	if(self.var_1491.pose == param_00) {
+	if(self.a.pose == param_00) {
 		func_F2AE(param_00);
 		return;
 	}
@@ -1102,7 +1102,7 @@ _meth_846D(param_00,param_01,param_02) {
 	var_03 = scripts\anim\utility_common::getnodedirection();
 	var_04 = scripts\anim\utility_common::func_7E28();
 	var_05 = var_03 + self.var_8EDF;
-	if(scripts\common\utility::actor_is3d()) {
+	if(scripts\engine\utility::actor_is3d()) {
 		self notify("force_space_rotation_update",0,0);
 	}
 	else
@@ -1118,7 +1118,7 @@ _meth_846D(param_00,param_01,param_02) {
 	self _meth_82E4("coveranim",param_00,%body,1,param_01);
 	func_465E(param_00);
 	scripts\anim\notetracks::donotetracksfortime(param_02,"coveranim");
-	while(scripts\common\utility::absangleclamp180(self.angles[1] - var_05) > 1) {
+	while(scripts\engine\utility::absangleclamp180(self.angles[1] - var_05) > 1) {
 		scripts\anim\notetracks::donotetracksfortime(0.1,"coveranim");
 		var_03 = scripts\anim\utility_common::getnodedirection();
 		var_05 = var_03 + self.var_8EDF;
@@ -1126,16 +1126,16 @@ _meth_846D(param_00,param_01,param_02) {
 
 	func_F6B9();
 	if(self.var_4664 == "left") {
-		self.var_1491.var_10930 = "cover_left";
+		self.a.var_10930 = "cover_left";
 		return;
 	}
 
 	if(self.var_4664 == "right") {
-		self.var_1491.var_10930 = "cover_right";
+		self.a.var_10930 = "cover_right";
 		return;
 	}
 
-	self.var_1491.var_10930 = "cover_up";
+	self.a.var_10930 = "cover_up";
 }
 
 drawoffset() {
@@ -1144,124 +1144,124 @@ drawoffset() {
 }
 
 func_F5AD() {
-	if(!isdefined(self.var_1491.var_2274)) {
+	if(!isdefined(self.a.var_2274)) {
 	}
 
 	var_00 = scripts\anim\utility::func_B028("default_stand");
-	self.var_1491.var_2274["add_aim_up"] = var_00["add_aim_up"];
-	self.var_1491.var_2274["add_aim_down"] = var_00["add_aim_down"];
-	self.var_1491.var_2274["add_aim_left"] = var_00["add_aim_left"];
-	self.var_1491.var_2274["add_aim_right"] = var_00["add_aim_right"];
-	self.var_1491.var_2274["add_turn_aim_up"] = var_00["add_turn_aim_up"];
-	self.var_1491.var_2274["add_turn_aim_down"] = var_00["add_turn_aim_down"];
-	self.var_1491.var_2274["add_turn_aim_left"] = var_00["add_turn_aim_left"];
-	self.var_1491.var_2274["add_turn_aim_right"] = var_00["add_turn_aim_right"];
-	self.var_1491.var_2274["straight_level"] = var_00["straight_level"];
-	if(self.var_1491.var_4667 == "lean") {
-		var_01 = self.var_1491.var_2274["lean_fire"];
-		var_02 = self.var_1491.var_2274["lean_single"];
-		self.var_1491.var_2274["fire"] = var_01;
-		self.var_1491.var_2274["single"] = scripts\anim\utility::func_2274(var_02);
-		self.var_1491.var_2274["semi2"] = var_02;
-		self.var_1491.var_2274["semi3"] = var_02;
-		self.var_1491.var_2274["semi4"] = var_02;
-		self.var_1491.var_2274["semi5"] = var_02;
-		self.var_1491.var_2274["burst2"] = var_01;
-		self.var_1491.var_2274["burst3"] = var_01;
-		self.var_1491.var_2274["burst4"] = var_01;
-		self.var_1491.var_2274["burst5"] = var_01;
-		self.var_1491.var_2274["burst6"] = var_01;
+	self.a.var_2274["add_aim_up"] = var_00["add_aim_up"];
+	self.a.var_2274["add_aim_down"] = var_00["add_aim_down"];
+	self.a.var_2274["add_aim_left"] = var_00["add_aim_left"];
+	self.a.var_2274["add_aim_right"] = var_00["add_aim_right"];
+	self.a.var_2274["add_turn_aim_up"] = var_00["add_turn_aim_up"];
+	self.a.var_2274["add_turn_aim_down"] = var_00["add_turn_aim_down"];
+	self.a.var_2274["add_turn_aim_left"] = var_00["add_turn_aim_left"];
+	self.a.var_2274["add_turn_aim_right"] = var_00["add_turn_aim_right"];
+	self.a.var_2274["straight_level"] = var_00["straight_level"];
+	if(self.a.var_4667 == "lean") {
+		var_01 = self.a.var_2274["lean_fire"];
+		var_02 = self.a.var_2274["lean_single"];
+		self.a.var_2274["fire"] = var_01;
+		self.a.var_2274["single"] = scripts\anim\utility::func_2274(var_02);
+		self.a.var_2274["semi2"] = var_02;
+		self.a.var_2274["semi3"] = var_02;
+		self.a.var_2274["semi4"] = var_02;
+		self.a.var_2274["semi5"] = var_02;
+		self.a.var_2274["burst2"] = var_01;
+		self.a.var_2274["burst3"] = var_01;
+		self.a.var_2274["burst4"] = var_01;
+		self.a.var_2274["burst5"] = var_01;
+		self.a.var_2274["burst6"] = var_01;
 	}
 	else
 	{
-		self.var_1491.var_2274["fire"] = var_00["fire_corner"];
-		self.var_1491.var_2274["semi2"] = var_00["semi2"];
-		self.var_1491.var_2274["semi3"] = var_00["semi3"];
-		self.var_1491.var_2274["semi4"] = var_00["semi4"];
-		self.var_1491.var_2274["semi5"] = var_00["semi5"];
+		self.a.var_2274["fire"] = var_00["fire_corner"];
+		self.a.var_2274["semi2"] = var_00["semi2"];
+		self.a.var_2274["semi3"] = var_00["semi3"];
+		self.a.var_2274["semi4"] = var_00["semi4"];
+		self.a.var_2274["semi5"] = var_00["semi5"];
 		if(scripts\anim\utility_common::weapon_pump_action_shotgun()) {
-			self.var_1491.var_2274["single"] = scripts\anim\utility::func_B027("shotgun_stand","single");
+			self.a.var_2274["single"] = scripts\anim\utility::func_B027("shotgun_stand","single");
 		}
 		else
 		{
-			self.var_1491.var_2274["single"] = var_00["single"];
+			self.a.var_2274["single"] = var_00["single"];
 		}
 
-		self.var_1491.var_2274["burst2"] = var_00["burst2"];
-		self.var_1491.var_2274["burst3"] = var_00["burst3"];
-		self.var_1491.var_2274["burst4"] = var_00["burst4"];
-		self.var_1491.var_2274["burst5"] = var_00["burst5"];
-		self.var_1491.var_2274["burst6"] = var_00["burst6"];
+		self.a.var_2274["burst2"] = var_00["burst2"];
+		self.a.var_2274["burst3"] = var_00["burst3"];
+		self.a.var_2274["burst4"] = var_00["burst4"];
+		self.a.var_2274["burst5"] = var_00["burst5"];
+		self.a.var_2274["burst6"] = var_00["burst6"];
 	}
 
-	self.var_1491.var_2274["exposed_idle"] = var_00["exposed_idle"];
+	self.a.var_2274["exposed_idle"] = var_00["exposed_idle"];
 }
 
 func_F317() {
-	if(!isdefined(self.var_1491.var_2274)) {
+	if(!isdefined(self.a.var_2274)) {
 	}
 
 	var_00 = scripts\anim\utility::func_B028("default_crouch");
 	var_01["add_aim_up"] = scripts\anim\utility::func_B027("cover_crouch","add_aim_up");
 	var_02["add_aim_up"] = scripts\anim\utility::func_B027("cover_crouch","add_aim_up");
 	var_03[0] = scripts\anim\utility::func_B027("cover_crouch","add_aim_up");
-	if(self.var_1491.var_4667 == "over") {
-		self.var_1491.var_2274["add_aim_up"] = scripts\anim\utility::func_B027("cover_crouch","add_aim_up");
-		self.var_1491.var_2274["add_aim_down"] = scripts\anim\utility::func_B027("cover_crouch","add_aim_down");
-		self.var_1491.var_2274["add_aim_left"] = scripts\anim\utility::func_B027("cover_crouch","add_aim_left");
-		self.var_1491.var_2274["add_aim_right"] = scripts\anim\utility::func_B027("cover_crouch","add_aim_right");
-		self.var_1491.var_2274["straight_level"] = scripts\anim\utility::func_B027("cover_crouch","straight_level");
-		self.var_1491.var_2274["exposed_idle"] = scripts\anim\utility::func_B027("default_stand","exposed_idle");
+	if(self.a.var_4667 == "over") {
+		self.a.var_2274["add_aim_up"] = scripts\anim\utility::func_B027("cover_crouch","add_aim_up");
+		self.a.var_2274["add_aim_down"] = scripts\anim\utility::func_B027("cover_crouch","add_aim_down");
+		self.a.var_2274["add_aim_left"] = scripts\anim\utility::func_B027("cover_crouch","add_aim_left");
+		self.a.var_2274["add_aim_right"] = scripts\anim\utility::func_B027("cover_crouch","add_aim_right");
+		self.a.var_2274["straight_level"] = scripts\anim\utility::func_B027("cover_crouch","straight_level");
+		self.a.var_2274["exposed_idle"] = scripts\anim\utility::func_B027("default_stand","exposed_idle");
 		return;
 	}
 
-	if(self.var_1491.var_4667 == "lean") {
-		var_04 = self.var_1491.var_2274["lean_fire"];
-		var_05 = self.var_1491.var_2274["lean_single"];
-		self.var_1491.var_2274["fire"] = var_04;
-		self.var_1491.var_2274["single"] = scripts\anim\utility::func_2274(var_05);
-		self.var_1491.var_2274["semi2"] = var_05;
-		self.var_1491.var_2274["semi3"] = var_05;
-		self.var_1491.var_2274["semi4"] = var_05;
-		self.var_1491.var_2274["semi5"] = var_05;
-		self.var_1491.var_2274["burst2"] = var_04;
-		self.var_1491.var_2274["burst3"] = var_04;
-		self.var_1491.var_2274["burst4"] = var_04;
-		self.var_1491.var_2274["burst5"] = var_04;
-		self.var_1491.var_2274["burst6"] = var_04;
+	if(self.a.var_4667 == "lean") {
+		var_04 = self.a.var_2274["lean_fire"];
+		var_05 = self.a.var_2274["lean_single"];
+		self.a.var_2274["fire"] = var_04;
+		self.a.var_2274["single"] = scripts\anim\utility::func_2274(var_05);
+		self.a.var_2274["semi2"] = var_05;
+		self.a.var_2274["semi3"] = var_05;
+		self.a.var_2274["semi4"] = var_05;
+		self.a.var_2274["semi5"] = var_05;
+		self.a.var_2274["burst2"] = var_04;
+		self.a.var_2274["burst3"] = var_04;
+		self.a.var_2274["burst4"] = var_04;
+		self.a.var_2274["burst5"] = var_04;
+		self.a.var_2274["burst6"] = var_04;
 	}
 	else
 	{
-		self.var_1491.var_2274["fire"] = var_00["fire"];
-		self.var_1491.var_2274["semi2"] = var_00["semi2"];
-		self.var_1491.var_2274["semi3"] = var_00["semi3"];
-		self.var_1491.var_2274["semi4"] = var_00["semi4"];
-		self.var_1491.var_2274["semi5"] = var_00["semi5"];
+		self.a.var_2274["fire"] = var_00["fire"];
+		self.a.var_2274["semi2"] = var_00["semi2"];
+		self.a.var_2274["semi3"] = var_00["semi3"];
+		self.a.var_2274["semi4"] = var_00["semi4"];
+		self.a.var_2274["semi5"] = var_00["semi5"];
 		if(scripts\anim\utility_common::weapon_pump_action_shotgun()) {
-			self.var_1491.var_2274["single"] = scripts\anim\utility::func_B027("shotgun_crouch","single");
+			self.a.var_2274["single"] = scripts\anim\utility::func_B027("shotgun_crouch","single");
 		}
 		else
 		{
-			self.var_1491.var_2274["single"] = var_00["single"];
+			self.a.var_2274["single"] = var_00["single"];
 		}
 
-		self.var_1491.var_2274["burst2"] = var_00["burst2"];
-		self.var_1491.var_2274["burst3"] = var_00["burst3"];
-		self.var_1491.var_2274["burst4"] = var_00["burst4"];
-		self.var_1491.var_2274["burst5"] = var_00["burst5"];
-		self.var_1491.var_2274["burst6"] = var_00["burst6"];
+		self.a.var_2274["burst2"] = var_00["burst2"];
+		self.a.var_2274["burst3"] = var_00["burst3"];
+		self.a.var_2274["burst4"] = var_00["burst4"];
+		self.a.var_2274["burst5"] = var_00["burst5"];
+		self.a.var_2274["burst6"] = var_00["burst6"];
 	}
 
-	self.var_1491.var_2274["add_aim_up"] = var_00["add_aim_up"];
-	self.var_1491.var_2274["add_aim_down"] = var_00["add_aim_down"];
-	self.var_1491.var_2274["add_aim_left"] = var_00["add_aim_left"];
-	self.var_1491.var_2274["add_aim_right"] = var_00["add_aim_right"];
-	self.var_1491.var_2274["add_turn_aim_up"] = var_00["add_turn_aim_up"];
-	self.var_1491.var_2274["add_turn_aim_down"] = var_00["add_turn_aim_down"];
-	self.var_1491.var_2274["add_turn_aim_left"] = var_00["add_turn_aim_left"];
-	self.var_1491.var_2274["add_turn_aim_right"] = var_00["add_turn_aim_right"];
-	self.var_1491.var_2274["straight_level"] = var_00["straight_level"];
-	self.var_1491.var_2274["exposed_idle"] = var_00["exposed_idle"];
+	self.a.var_2274["add_aim_up"] = var_00["add_aim_up"];
+	self.a.var_2274["add_aim_down"] = var_00["add_aim_down"];
+	self.a.var_2274["add_aim_left"] = var_00["add_aim_left"];
+	self.a.var_2274["add_aim_right"] = var_00["add_aim_right"];
+	self.a.var_2274["add_turn_aim_up"] = var_00["add_turn_aim_up"];
+	self.a.var_2274["add_turn_aim_down"] = var_00["add_turn_aim_down"];
+	self.a.var_2274["add_turn_aim_left"] = var_00["add_turn_aim_left"];
+	self.a.var_2274["add_turn_aim_right"] = var_00["add_turn_aim_right"];
+	self.a.var_2274["straight_level"] = var_00["straight_level"];
+	self.a.var_2274["exposed_idle"] = var_00["exposed_idle"];
 }
 
 func_E841() {
@@ -1270,7 +1270,7 @@ func_E841() {
 }
 
 func_F6B9() {
-	if(scripts\common\utility::actor_is3d()) {
+	if(scripts\engine\utility::actor_is3d()) {
 		self animmode("nogravity");
 		return;
 	}

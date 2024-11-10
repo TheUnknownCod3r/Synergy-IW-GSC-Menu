@@ -1,11 +1,11 @@
-/*********************************************************
+/*************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\equipment\battle_slide.gsc
-*********************************************************/
+ * Script: scripts\mp\equipment\battle_slide.gsc
+*************************************************/
 
 func_28F2() {
-	level.var_28C9 = loadfx("vfx/core/mp/core/vfx_battle_slide_camera");
+	level.var_28C9 = loadfx("vfx\core\mp\core\vfx_battle_slide_camera");
 	thread func_28EC();
 }
 
@@ -61,7 +61,7 @@ func_28ED() {
 			var_05 = var_02 * -20;
 			var_06 = var_04;
 			var_07 = var_05 + var_02 * 38;
-			var_0A = function_0287(self geteye(),self.origin + var_04 + var_07,var_08,undefined,0,"physicsquery_closest");
+			var_0A = physics_raycast(self geteye(),self.origin + var_04 + var_07,var_08,undefined,0,"physicsquery_closest");
 			if(isdefined(var_0A) && var_0A.size > 0) {
 				var_04 = var_03 * vectordot(var_0A[0]["position"] - self.origin,var_03);
 				var_04 = var_04 - var_03 * 3;
@@ -71,7 +71,7 @@ func_28ED() {
 
 		var_0B = undefined;
 		if(level.teambased) {
-			var_0B = scripts\mp\_utility::getteamarray(scripts\mp\_utility::getotherteam(self.team));
+			var_0B = scripts\mp\utility::getteamarray(scripts\mp\utility::getotherteam(self.team));
 		}
 		else
 		{
@@ -79,7 +79,7 @@ func_28ED() {
 		}
 
 		foreach(var_0D in var_0B) {
-			if(!isdefined(var_0D) || var_0D == self || !scripts\mp\_utility::isreallyalive(var_0D)) {
+			if(!isdefined(var_0D) || var_0D == self || !scripts\mp\utility::isreallyalive(var_0D)) {
 				continue;
 			}
 
@@ -87,7 +87,7 @@ func_28ED() {
 				continue;
 			}
 
-			if(!scripts\mp\_utility::func_D64A(5184,76,self.origin + var_04 + var_05,var_02,var_0D gettagorigin("j_mainroot"))) {
+			if(!scripts\mp\utility::func_D64A(5184,76,self.origin + var_04 + var_05,var_02,var_0D gettagorigin("j_mainroot"))) {
 				continue;
 			}
 
@@ -105,7 +105,7 @@ func_28ED() {
 
 			func_28F5(var_0D);
 			func_28E3(var_0D);
-			if(scripts\mp\_utility::isreallyalive(var_0D)) {
+			if(scripts\mp\utility::isreallyalive(var_0D)) {
 				func_28EB(var_0D,var_03);
 			}
 		}
@@ -119,7 +119,7 @@ func_28EE(param_00) {
 	self endon("death");
 	self endon("disconnect");
 	self endon("battleSlide_monitorKnockbackEnded_" + var_01);
-	scripts\mp\_utility::_enablecollisionnotifies(1);
+	scripts\mp\utility::_enablecollisionnotifies(1);
 	scripts\engine\utility::allow_doublejump(0);
 	thread func_28EF(param_00);
 	for(;;) {
@@ -142,7 +142,7 @@ func_28EE(param_00) {
 	}
 
 	scripts\engine\utility::allow_doublejump(1);
-	scripts\mp\_utility::_enablecollisionnotifies(0);
+	scripts\mp\utility::_enablecollisionnotifies(0);
 	self notify("battleSlide_monitorKnockbackEnded_" + param_00 getentitynumber());
 }
 
@@ -153,7 +153,7 @@ func_28EF(param_00) {
 	self endon("battleSlide_monitorKnockbackEnded_" + var_01);
 	wait(0.35);
 	scripts\engine\utility::allow_doublejump(1);
-	scripts\mp\_utility::_enablecollisionnotifies(0);
+	scripts\mp\utility::_enablecollisionnotifies(0);
 	self notify("battleSlide_monitorKnockbackEnded_" + var_01);
 }
 
@@ -172,7 +172,7 @@ func_28F5(param_00) {
 
 func_28E3(param_00) {
 	var_01 = 65;
-	if(scripts\mp\_utility::_hasperk("specialty_battleslide_offense")) {
+	if(scripts\mp\utility::_hasperk("specialty_battleslide_offense")) {
 		var_01 = scripts\mp\perks\_perkfunctions::getbattleslideoffensedamage();
 	}
 
@@ -206,7 +206,7 @@ func_28E8(param_00,param_01) {
 }
 
 func_28E7(param_00,param_01,param_02) {
-	var_03 = function_0287(param_01,param_00 gettagorigin("j_mainroot"),param_02,undefined,0,"physicsquery_closest");
+	var_03 = physics_raycast(param_01,param_00 gettagorigin("j_mainroot"),param_02,undefined,0,"physicsquery_closest");
 	if(isdefined(var_03) && var_03.size > 0) {
 		return 1;
 	}
@@ -253,7 +253,7 @@ func_28E4(param_00) {
 	earthquake(0.5,0.5,self.origin,144);
 	playsoundatpos(self.origin,"slide_impact");
 	self setclientomnvar("ui_hud_shake",1);
-	scripts\mp\_damagefeedback::updatedamagefeedback("hitcritical");
+	scripts\mp\damagefeedback::updatedamagefeedback("hitcritical");
 }
 
 func_28F3() {
@@ -266,7 +266,7 @@ func_28F3() {
 	var_01 = 5;
 	while(var_01 > var_00) {
 		if(isplayer(self)) {
-			var_02 = function_01E1(level.var_28C9,self geteye(),self);
+			var_02 = spawnfxforclient(level.var_28C9,self geteye(),self);
 			thread func_28F4(var_02,0.1);
 			triggerfx(var_02);
 		}

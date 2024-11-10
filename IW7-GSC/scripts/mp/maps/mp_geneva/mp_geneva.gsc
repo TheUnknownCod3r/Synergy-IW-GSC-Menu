@@ -1,15 +1,15 @@
-/***********************************************************
+/***************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\maps\mp_geneva\mp_geneva.gsc
-***********************************************************/
+ * Script: scripts\mp\maps\mp_geneva\mp_geneva.gsc
+***************************************************/
 
 main() {
-	lib_0FB1::main();
+	scripts\mp\maps\mp_geneva\mp_geneva_precache::main();
 	scripts\mp\maps\mp_geneva\gen\mp_geneva_art::main();
-	lib_0FB0::main();
-	scripts\mp\_load::main();
-	scripts\mp\_compass::func_FACD("compass_map_mp_geneva");
+	scripts\mp\maps\mp_geneva\mp_geneva_fx::main();
+	scripts\mp\load::main();
+	scripts\mp\compass::setupminimap("compass_map_mp_geneva");
 	setdvar("r_lightGridEnableTweaks",1);
 	setdvar("r_lightGridIntensity",1.33);
 	setdvar("r_umbraMinObjectContribution",8);
@@ -73,7 +73,7 @@ oceaninmotion() {
 }
 
 bobbingboat(param_00) {
-	param_00.var_2C5 = param_00.origin;
+	param_00.areanynavvolumesloaded = param_00.origin;
 	param_00.var_10D6C = param_00.angles;
 	if(isdefined(param_00.target)) {
 		param_00.var_BE10 = getentarray(param_00.target,"targetname");
@@ -89,12 +89,12 @@ boatbob(param_00) {
 	level endon("game_ended");
 	for(;;) {
 		var_01 = randomfloatrange(4,7);
-		param_00.var_15B = param_00.var_2C5 + (randomintrange(-2,2),randomintrange(-2,2),randomintrange(-3,3));
-		param_00 moveto(param_00.var_15B,var_01,var_01 * 0.25,var_01 * 0.25);
+		param_00.objective_playermask_hidefromall = param_00.areanynavvolumesloaded + (randomintrange(-2,2),randomintrange(-2,2),randomintrange(-3,3));
+		param_00 moveto(param_00.objective_playermask_hidefromall,var_01,var_01 * 0.25,var_01 * 0.25);
 		if(isdefined(param_00.target)) {
 			foreach(var_03 in param_00.var_BE10) {
-				var_03.var_15B = param_00.var_15B + var_03.deltapos;
-				var_03 moveto(var_03.var_15B,var_01,var_01 * 0.25,var_01 * 0.25);
+				var_03.objective_playermask_hidefromall = param_00.objective_playermask_hidefromall + var_03.deltapos;
+				var_03 moveto(var_03.objective_playermask_hidefromall,var_01,var_01 * 0.25,var_01 * 0.25);
 			}
 		}
 
@@ -110,23 +110,23 @@ setup_vista_driving_boats() {
 	foreach(var_04 in var_00) {
 		if(isdefined(var_04.script_label)) {
 			thread vista_boat_drive(var_04,var_02);
-			playfxontag(scripts\common\utility::getfx("vfx_gn_bg_sail_boat_wake"),var_04,"tag_origin");
+			playfxontag(scripts\engine\utility::getfx("vfx_gn_bg_sail_boat_wake"),var_04,"tag_origin");
 			continue;
 		}
 
 		thread vista_boat_drive(var_04,var_01);
-		playfxontag(scripts\common\utility::getfx("vfx_gn_bg_boat_wake_rear"),var_04,"tag_origin");
+		playfxontag(scripts\engine\utility::getfx("vfx_gn_bg_boat_wake_rear"),var_04,"tag_origin");
 	}
 }
 
 vista_boat_drive(param_00,param_01) {
 	level endon("game_ended");
-	var_02 = scripts\common\utility::getstruct(param_00.target,"targetname");
+	var_02 = scripts\engine\utility::getstruct(param_00.target,"targetname");
 	for(;;) {
 		var_03 = abs(distance(param_00.origin,var_02.origin) * param_01);
 		param_00 moveto(var_02.origin,var_03,0,0);
 		param_00 rotateto(var_02.angles,var_03,0,0);
-		var_02 = scripts\common\utility::getstruct(var_02.target,"targetname");
+		var_02 = scripts\engine\utility::getstruct(var_02.target,"targetname");
 		wait(var_03);
 	}
 }

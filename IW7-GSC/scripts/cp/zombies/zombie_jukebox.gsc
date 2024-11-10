@@ -1,8 +1,8 @@
-/*********************************************************
+/*************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\zombies\zombie_jukebox.gsc
-*********************************************************/
+ * Script: scripts\cp\zombies\zombie_jukebox.gsc
+*************************************************/
 
 parse_music_genre_table() {
 	scripts\engine\utility::flag_init("jukebox_paused");
@@ -17,7 +17,7 @@ parse_music_genre_table() {
 	}
 	else
 	{
-		var_00 = "cp/zombies/cp_zmb_music_genre.csv";
+		var_00 = "cp\zombies\cp_zmb_music_genre.csv";
 	}
 
 	var_01 = 0;
@@ -70,7 +70,7 @@ jukebox_start(param_00,param_01,param_02) {
 	}
 	else
 	{
-		var_04 = "cp/zombies/cp_zmb_music_genre.csv";
+		var_04 = "cp\zombies\cp_zmb_music_genre.csv";
 	}
 
 	if(!scripts\engine\utility::istrue(param_02)) {

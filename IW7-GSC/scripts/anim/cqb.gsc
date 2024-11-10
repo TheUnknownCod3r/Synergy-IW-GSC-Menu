@@ -1,21 +1,21 @@
-/****************************************
+/********************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\anim\cqb.gsc
-****************************************/
+ * Script: scripts\anim\cqb.gsc
+********************************/
 
 func_BCB1() {
 	scripts\anim\run::func_10B77();
-	if(self.var_1491.pose != "stand") {
+	if(self.a.pose != "stand") {
 		self aiclearanim(%root,0.2);
-		if(self.var_1491.pose == "prone") {
+		if(self.a.pose == "prone") {
 			scripts\anim\utility::exitpronewrapper(1);
 		}
 
-		self.var_1491.pose = "stand";
+		self.a.pose = "stand";
 	}
 
-	self.var_1491.movement = self.synctransients;
+	self.a.movement = self.synctransients;
 	func_479B();
 	if(scripts\anim\run::func_BC1D()) {
 		return;
@@ -74,7 +74,7 @@ func_53C3() {
 		return scripts\anim\utility::func_B027("cqb","move_f");
 	}
 
-	if(isdefined(self.var_1491.var_29CE) && self.var_1491.var_29CE) {
+	if(isdefined(self.a.var_29CE) && self.a.var_29CE) {
 		return scripts\anim\utility::func_B027("cqb","straight");
 	}
 
@@ -83,9 +83,9 @@ func_53C3() {
 		return scripts\anim\utility::func_B027("cqb","straight");
 	}
 
-	var_01 = scripts\anim\utility::setclientextrasuper(self.var_1491.var_E860,4);
+	var_01 = scripts\anim\utility::setclientextrasuper(self.a.var_E860,4);
 	if(var_01 == 0) {
-		var_02 = scripts\anim\utility::setclientextrasuper(self.var_1491.var_E860,var_00.size);
+		var_02 = scripts\anim\utility::setclientextrasuper(self.a.var_E860,var_00.size);
 		return var_00[var_02];
 	}
 
@@ -134,7 +134,7 @@ func_FA9F() {
 
 func_FAA0(param_00) {
 	waittillframeend;
-	var_01 = scripts\common\utility::getstructarray(param_00,"targetname");
+	var_01 = scripts\engine\utility::getstructarray(param_00,"targetname");
 	foreach(var_03 in var_01) {
 		level.var_479A[level.var_479A.size] = var_03.origin;
 		scripts\sp\_utility::func_51D4(var_03);
@@ -153,11 +153,11 @@ func_6CB4() {
 	}
 
 	for(;;) {
-		var_00 = function_0072();
+		var_00 = getaiarray();
 		var_01 = 0;
 		foreach(var_03 in var_00) {
 			if(isalive(var_03) && var_03 scripts\anim\utility::func_9D9B() && !isdefined(var_03.var_5512)) {
-				var_04 = var_03.var_1491.movement != "stop";
+				var_04 = var_03.a.movement != "stop";
 				var_05 = (var_03.origin[0],var_03.origin[1],var_03 getshootatpos()[2]);
 				var_06 = var_05;
 				var_07 = anglestoforward(var_03.angles);

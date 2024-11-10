@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3551.gsc
-****************************/
+ * Script: 3551.gsc
+************************/
 
 set() {}
 
@@ -19,16 +19,16 @@ func_12F9B() {
 
 	self.var_9D8B = 1;
 	self.var_5583 = 1;
-	scripts\mp\_utility::giveperk("specialty_noscopeoutline");
-	scripts\mp\_utility::giveperk("specialty_spygame");
-	scripts\mp\_utility::giveperk("specialty_blindeye");
-	scripts\mp\_utility::giveperk("specialty_no_target");
+	scripts\mp\utility::giveperk("specialty_noscopeoutline");
+	scripts\mp\utility::giveperk("specialty_spygame");
+	scripts\mp\utility::giveperk("specialty_blindeye");
+	scripts\mp\utility::giveperk("specialty_no_target");
 	self.var_423A = 1;
 	self setscriptablepartstate("cloak","on",0);
 	self setscriptablepartstate("jet_pack","off",0);
 	self setscriptablepartstate("teamColorPins","off",0);
-	if(!scripts\mp\_utility::isanymlgmatch()) {
-		thread scripts\mp\_supers::watchobjuse(75,1);
+	if(!scripts\mp\utility::isanymlgmatch()) {
+		thread scripts\mp\supers::watchobjuse(75,1);
 	}
 
 	thread func_13A14();
@@ -40,7 +40,7 @@ func_13A14() {
 	self endon("disconnect");
 	self endon("cloak_end");
 	scripts\engine\utility::waittill_any_3("grenade_throw","weapon_fired","melee_fired");
-	scripts\mp\_supers::func_DE3B(9999);
+	scripts\mp\supers::func_DE3B(9999);
 }
 
 end(param_00,param_01) {
@@ -72,14 +72,14 @@ enddelayed() {
 	self endon("disconnect");
 	self endon("cloak_end");
 	enddelayedinternal();
-	if(scripts\mp\_utility::istrue(self.var_423A)) {
-		scripts\mp\_utility::removeperk("specialty_noscopeoutline");
-		scripts\mp\_utility::removeperk("specialty_spygame");
-		scripts\mp\_utility::removeperk("specialty_blindeye");
-		scripts\mp\_utility::removeperk("specialty_no_target");
+	if(scripts\mp\utility::istrue(self.var_423A)) {
+		scripts\mp\utility::removeperk("specialty_noscopeoutline");
+		scripts\mp\utility::removeperk("specialty_spygame");
+		scripts\mp\utility::removeperk("specialty_blindeye");
+		scripts\mp\utility::removeperk("specialty_no_target");
 	}
 
-	if(!scripts\mp\_utility::istrue(level.broshotrunning)) {
+	if(!scripts\mp\utility::istrue(level.broshotrunning)) {
 		self setscriptablepartstate("jet_pack","neutral",0);
 		self setscriptablepartstate("teamColorPins","teamColorPins",0);
 	}
@@ -92,7 +92,7 @@ enddelayed() {
 enddelayedinternal() {
 	self endon("death");
 	wait(0.05000001);
-	if(!scripts\mp\_utility::istrue(level.broshotrunning)) {
+	if(!scripts\mp\utility::istrue(level.broshotrunning)) {
 		self setscriptablepartstate("cloak","off",0);
 	}
 
@@ -100,14 +100,14 @@ enddelayedinternal() {
 }
 
 endimmediate() {
-	if(scripts\mp\_utility::istrue(self.var_423A)) {
-		scripts\mp\_utility::removeperk("specialty_noscopeoutline");
-		scripts\mp\_utility::removeperk("specialty_spygame");
-		scripts\mp\_utility::removeperk("specialty_blindeye");
-		scripts\mp\_utility::removeperk("specialty_no_target");
+	if(scripts\mp\utility::istrue(self.var_423A)) {
+		scripts\mp\utility::removeperk("specialty_noscopeoutline");
+		scripts\mp\utility::removeperk("specialty_spygame");
+		scripts\mp\utility::removeperk("specialty_blindeye");
+		scripts\mp\utility::removeperk("specialty_no_target");
 	}
 
-	if(!scripts\mp\_utility::istrue(level.broshotrunning)) {
+	if(!scripts\mp\utility::istrue(level.broshotrunning)) {
 		self setscriptablepartstate("jet_pack","neutral",0);
 		self setscriptablepartstate("teamColorPins","teamColorPins",0);
 	}
@@ -122,5 +122,5 @@ func_E26A() {
 }
 
 func_9FC1() {
-	return scripts\mp\_utility::istrue(self.var_9D8B);
+	return scripts\mp\utility::istrue(self.var_9D8B);
 }

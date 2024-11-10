@@ -1,8 +1,8 @@
-/************************************************
+/****************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\behaviortree\zombie_dlc1.gsc
-************************************************/
+ * Script: behaviortree\zombie_dlc1.gsc
+****************************************/
 
 zombie_dlc1fn0(param_00) {
 	return lib_0A09::func_5AEA(param_00,200);

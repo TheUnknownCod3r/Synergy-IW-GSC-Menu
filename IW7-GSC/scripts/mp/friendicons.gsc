@@ -1,8 +1,8 @@
-/**********************************************
+/**************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\friendicons.gsc
-**********************************************/
+ * Script: scripts\mp\friendicons.gsc
+**************************************/
 
 init() {
 	level.drawfriend = 0;

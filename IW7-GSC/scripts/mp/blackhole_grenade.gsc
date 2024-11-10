@@ -1,8 +1,8 @@
-/****************************************************
+/********************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\blackhole_grenade.gsc
-****************************************************/
+ * Script: scripts\mp\blackhole_grenade.gsc
+********************************************/
 
 blackholegrenadeinit() {
 	level.var_2ABD = [];
@@ -150,7 +150,7 @@ func_13A58(param_00,param_01) {
 			continue;
 		}
 
-		if(scripts/mp/equipment/phase_shift::isentityphaseshifted(var_05)) {
+		if(scripts\mp\equipment\phase_shift::isentityphaseshifted(var_05)) {
 			continue;
 		}
 
@@ -173,11 +173,11 @@ func_13A58(param_00,param_01) {
 		var_06 = "tag_eye";
 		var_07 = getblackholecenter(param_00);
 		var_08 = var_05 gettagorigin(var_06);
-		var_09 = function_0287(var_07,var_08,var_04,[param_00,var_05],0,"physicsquery_closest",1);
+		var_09 = physics_raycast(var_07,var_08,var_04,[param_00,var_05],0,"physicsquery_closest",1);
 		if(isdefined(var_09) && var_09.size > 0) {
 			var_06 = "tag_origin";
 			var_08 = var_05 gettagorigin(var_06);
-			var_09 = function_0287(var_07,var_08,var_04,[param_00,var_05],0,"physicsquery_closest",1);
+			var_09 = physics_raycast(var_07,var_08,var_04,[param_00,var_05],0,"physicsquery_closest",1);
 			if(isdefined(var_09) && var_09.size > 0) {
 				continue;
 			}
@@ -201,7 +201,7 @@ watchforempents(param_00,param_01) {
 			}
 
 			var_07 = var_06 gettagorigin("tag_origin");
-			var_08 = function_0287(var_03,var_07,var_02,[param_00,var_06],0,"physicsquery_closest",1);
+			var_08 = physics_raycast(var_03,var_07,var_02,[param_00,var_06],0,"physicsquery_closest",1);
 			if(isdefined(var_08) && var_08.size > 0) {
 				continue;
 			}
@@ -231,7 +231,7 @@ bhg_handlefataldamage(param_00,param_01,param_02,param_03,param_04) {
 }
 
 bhg_handledamage(param_00,param_01,param_02,param_03,param_04) {
-	if(!scripts/mp/equipment/phase_shift::areentitiesinphase(param_00,self)) {
+	if(!scripts\mp\equipment\phase_shift::areentitiesinphase(param_00,self)) {
 		return 0;
 	}
 
@@ -308,7 +308,7 @@ func_139AD() {
 }
 
 func_10831(param_00,param_01,param_02,param_03,param_04) {
-	var_05 = function_02AF(param_03,param_04,param_01);
+	var_05 = spawnimpulsefield(param_03,param_04,param_01);
 	var_05.angles = param_02;
 	var_05 linkto(param_00);
 	thread bhg_trackimpulsefielddebuff(var_05,param_03);
@@ -510,7 +510,7 @@ getblackholecenter(param_00) {
 		var_02 = param_00.origin;
 		var_03 = var_02 + var_01 * 55;
 		var_04 = physics_createcontents(["physicscontents_solid","physicscontents_glass","physicscontents_sky","physicscontents_water","physicscontents_item"]);
-		var_05 = function_0287(var_02,var_03,var_04,[self],0,"physicsquery_closest");
+		var_05 = physics_raycast(var_02,var_03,var_04,[self],0,"physicsquery_closest");
 		if(isdefined(var_05) && var_05.size > 0) {
 			var_03 = var_05[0]["position"];
 			param_00.centeroffset = max(3,vectordot(var_01,var_03 - var_02) - 2);

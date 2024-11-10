@@ -1,8 +1,8 @@
-/******************************************************
+/**********************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\laserguidedlauncher.gsc
-******************************************************/
+ * Script: scripts\mp\laserguidedlauncher.gsc
+**********************************************/
 
 func_AC0B(param_00,param_01) {}
 

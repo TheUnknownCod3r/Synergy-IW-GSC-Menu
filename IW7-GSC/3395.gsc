@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3395.gsc
-****************************/
+ * Script: 3395.gsc
+************************/
 
 purchase_laser_trap(param_00,param_01) {
 	param_01.var_8B8B = 1;

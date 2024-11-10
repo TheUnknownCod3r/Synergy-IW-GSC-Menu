@@ -1,38 +1,38 @@
-/******************************************************
+/**********************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\equipment\cryo_mine.gsc
-******************************************************/
+ * Script: scripts\mp\equipment\cryo_mine.gsc
+**********************************************/
 
 func_4ADA(param_00) {
 	self endon("disconnect");
 	param_00 endon("death");
-	scripts\mp\_utility::printgameaction("cryo mine spawn",param_00.triggerportableradarping);
+	scripts\mp\utility::printgameaction("cryo mine spawn",param_00.triggerportableradarping);
 	param_00 thread func_4AD5();
-	thread scripts\mp\_weapons::monitordisownedgrenade(self,param_00);
+	thread scripts\mp\weapons::monitordisownedgrenade(self,param_00);
 	param_00 waittill("missile_stuck",var_01);
 	param_00 give_player_tickets(1);
-	if(scripts\mp\_utility::_hasperk("specialty_rugged_eqp")) {
+	if(scripts\mp\utility::_hasperk("specialty_rugged_eqp")) {
 		param_00.hasruggedeqp = 1;
 	}
 
-	scripts\mp\_weapons::ontacticalequipmentplanted(param_00,"power_cryoMine");
-	thread scripts\mp\_weapons::monitordisownedequipment(self,param_00);
-	param_00 thread scripts\mp\_weapons::minedamagemonitor();
+	scripts\mp\weapons::ontacticalequipmentplanted(param_00,"power_cryoMine");
+	thread scripts\mp\weapons::monitordisownedequipment(self,param_00);
+	param_00 thread scripts\mp\weapons::minedamagemonitor();
 	param_00.var_ABC6 = func_4AD1(param_00);
-	param_00 thread scripts\mp\_weapons::minedeletetrigger(param_00.var_ABC6);
+	param_00 thread scripts\mp\weapons::minedeletetrigger(param_00.var_ABC6);
 	param_00 thread func_4ACE();
 	param_00 missilethermal();
 	param_00 missileoutline();
 	param_00 scripts\mp\sentientpoolmanager::registersentient("Tactical_Static",param_00.triggerportableradarping);
-	param_00 thread scripts\mp\_weapons::makeexplosiveusabletag("tag_use",1);
+	param_00 thread scripts\mp\weapons::makeexplosiveusabletag("tag_use",1);
 	param_00 thread func_4AD7();
 	param_00 thread func_4AD4();
 	param_00 thread scripts\mp\perks\_perk_equipmentping::runequipmentping();
 	param_00 setscriptablepartstate("plant","active",0);
 	param_00.shouldnotblockspawns = 1;
-	thread scripts\mp\_weapons::outlineequipmentforowner(param_00,self);
-	param_00 thread scripts\mp\_entityheadicons::setheadicon_factionimage(self,(0,0,20),0.1);
+	thread scripts\mp\weapons::outlineequipmentforowner(param_00,self);
+	param_00 thread scripts\mp\entityheadicons::setheadicon_factionimage(self,(0,0,20),0.1);
 }
 
 func_4ACE() {
@@ -51,10 +51,10 @@ func_4AD9(param_00) {
 	self endon("death");
 	self.triggerportableradarping endon("disconnect");
 	self notify("mine_triggered");
-	scripts\mp\_utility::printgameaction("cryo mine triggered",self.triggerportableradarping);
+	scripts\mp\utility::printgameaction("cryo mine triggered",self.triggerportableradarping);
 	self setscriptablepartstate("plant","neutral",0);
 	self setscriptablepartstate("trigger","active",0);
-	scripts\mp\_weapons::explosivetrigger(param_00,0.3,"cryoMine");
+	scripts\mp\weapons::explosivetrigger(param_00,0.3,"cryoMine");
 	thread func_4AD6(self.triggerportableradarping);
 }
 
@@ -83,7 +83,7 @@ func_4AD2(param_00) {
 	self notify("death");
 	level.mines[self getentitynumber()] = undefined;
 	self setcandamage(0);
-	scripts\mp\_weapons::makeexplosiveunusuabletag();
+	scripts\mp\weapons::makeexplosiveunusuabletag();
 	self.exploding = 1;
 	var_01 = self.triggerportableradarping;
 	if(isdefined(self.triggerportableradarping)) {
@@ -103,7 +103,7 @@ func_4AD7() {
 	self waittill("detonateExplosive",var_01);
 	if(isdefined(var_01)) {
 		if(var_01 != var_00) {
-			var_00 thread scripts\mp\_utility::leaderdialogonplayer("mine_destroyed",undefined,undefined,self.origin);
+			var_00 thread scripts\mp\utility::leaderdialogonplayer("mine_destroyed",undefined,undefined,self.origin);
 		}
 
 		thread func_4AD6(var_01);
@@ -117,21 +117,21 @@ func_4AD4() {
 	self endon("death");
 	self.triggerportableradarping endon("disconnect");
 	self waittill("emp_damage",var_00,var_01,var_02,var_03,var_04);
-	if(scripts\mp\_utility::istrue(scripts\mp\_utility::playersareenemies(self.triggerportableradarping,var_00))) {
+	if(scripts\mp\utility::istrue(scripts\mp\utility::playersareenemies(self.triggerportableradarping,var_00))) {
 		var_00 notify("destroyed_equipment");
 		var_00 scripts\mp\killstreaks\_killstreaks::_meth_83A0();
 		if(isdefined(var_03) && var_03 == "emp_grenade_mp") {
-			var_00 scripts\mp\_missions::func_D991("ch_tactical_emp_eqp");
+			var_00 scripts\mp\missions::func_D991("ch_tactical_emp_eqp");
 		}
 	}
 
 	var_05 = "";
-	if(scripts\mp\_utility::istrue(self.hasruggedeqp)) {
+	if(scripts\mp\utility::istrue(self.hasruggedeqp)) {
 		var_05 = "hitequip";
 	}
 
 	if(isplayer(var_00)) {
-		var_00 scripts\mp\_damagefeedback::updatedamagefeedback(var_05);
+		var_00 scripts\mp\damagefeedback::updatedamagefeedback(var_05);
 	}
 
 	thread func_4AD3();
@@ -173,8 +173,8 @@ func_4ACF(param_00,param_01) {
 		return;
 	}
 
-	var_02 = param_00 scripts\mp\_powerloot::func_7FC1("power_cryoMine",4.5);
-	if(scripts\mp\_utility::_hasperk("specialty_stun_resistance")) {
+	var_02 = param_00 scripts\mp\powerloot::func_7FC1("power_cryoMine",4.5);
+	if(scripts\mp\utility::_hasperk("specialty_stun_resistance")) {
 		scripts\mp\perks\_perkfunctions::applystunresistence(param_00,self);
 		var_02 = 0.5;
 	}
@@ -185,7 +185,7 @@ func_4ACF(param_00,param_01) {
 
 	thread func_4AD8(param_00,var_02);
 	scripts\mp\killstreaks\_chill_common::chill(param_00 getentitynumber(),var_02);
-	param_00 scripts\mp\_damage::combatrecordtacticalstat("power_cryoMine");
+	param_00 scripts\mp\damage::combatrecordtacticalstat("power_cryoMine");
 }
 
 func_4ADB(param_00) {
@@ -194,24 +194,24 @@ func_4ADB(param_00) {
 		return 0;
 	}
 
-	if(scripts/mp/equipment/phase_shift::isentityphaseshifted(param_00)) {
+	if(scripts\mp\equipment\phase_shift::isentityphaseshifted(param_00)) {
 		return 0;
 	}
 
 	if(isplayer(param_00) || isagent(param_00)) {
-		if(scripts\mp\_utility::func_9F72(param_00)) {
+		if(scripts\mp\utility::func_9F72(param_00)) {
 			return 0;
 		}
 
-		if(scripts\mp\_utility::func_9F22(param_00)) {
+		if(scripts\mp\utility::func_9F22(param_00)) {
 			var_01 = param_00.triggerportableradarping;
 		}
 
-		if(!scripts\mp\_utility::isreallyalive(param_00)) {
+		if(!scripts\mp\utility::isreallyalive(param_00)) {
 			return 0;
 		}
 
-		if(!scripts\mp\_utility::istrue(scripts\mp\_utility::playersareenemies(self.triggerportableradarping,var_01))) {
+		if(!scripts\mp\utility::istrue(scripts\mp\utility::playersareenemies(self.triggerportableradarping,var_01))) {
 			return 0;
 		}
 
@@ -220,9 +220,9 @@ func_4ADB(param_00) {
 		}
 
 		var_02 = scripts\common\trace::create_contents(0,1,0,0,1,0,0);
-		var_03 = function_0287(self.origin,param_00 geteye(),var_02,self,0,"physicsquery_closest");
+		var_03 = physics_raycast(self.origin,param_00 geteye(),var_02,self,0,"physicsquery_closest");
 		if(isdefined(var_03) && var_03.size > 0) {
-			var_03 = function_0287(self.origin,param_00.origin,var_02,self,0,"physicsquery_closest");
+			var_03 = physics_raycast(self.origin,param_00.origin,var_02,self,0,"physicsquery_closest");
 			if(isdefined(var_03) && var_03.size > 0) {
 				return 0;
 			}
@@ -241,9 +241,9 @@ func_4AD8(param_00,param_01) {
 	var_02 = param_00 getentitynumber();
 	self notify("cryoGrenade_trackDebuff_" + var_02);
 	self endon("cryoGrenade_trackDebuff_" + var_02);
-	scripts\mp\_weapons::func_F7FC();
-	scripts\mp\_gamescore::func_11ACE(param_00,self,"cryo_mine_mp");
+	scripts\mp\weapons::func_F7FC();
+	scripts\mp\gamescore::func_11ACE(param_00,self,"cryo_mine_mp");
 	scripts\engine\utility::waittill_any_timeout_1(param_01,"chillEnd");
-	scripts\mp\_weapons::func_F800();
-	scripts\mp\_gamescore::untrackdebuffassist(param_00,self,"cryo_mine_mp");
+	scripts\mp\weapons::func_F800();
+	scripts\mp\gamescore::untrackdebuffassist(param_00,self,"cryo_mine_mp");
 }

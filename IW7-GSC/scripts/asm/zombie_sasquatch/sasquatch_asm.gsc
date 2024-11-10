@@ -1,13 +1,13 @@
-/******************************************************************
+/**********************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\asm\zombie_sasquatch\sasquatch_asm.gsc
-******************************************************************/
+ * Script: scripts\asm\zombie_sasquatch\sasquatch_asm.gsc
+**********************************************************/
 
 sasquatch_init(param_00,param_01,param_02,param_03) {
-	self.var_2303.footsteps = spawnstruct();
-	self.var_2303.var_7257.foot = "left";
-	self.var_2303.var_4C86 = spawnstruct();
+	self.asm.footsteps = spawnstruct();
+	self.asm.footsteps.foot = "left";
+	self.asm.var_4C86 = spawnstruct();
 	self.sharpturnnotifydist = 24;
 	self.var_1198.btreespawn = 0;
 	self.var_1198.movetype = "run";

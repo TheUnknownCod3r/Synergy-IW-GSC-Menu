@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\2912.gsc
-****************************/
+ * Script: 2912.gsc
+************************/
 
 func_96DC() {
 	precacheshader("hud_icon_grenade_incoming_frag_sp");
@@ -100,8 +100,8 @@ main() {
 		scripts\sp\_endmission::func_41ED();
 	}
 
-	if(scripts\sp\_utility::func_93A6() && scripts/sp/specialist_MAYBE::func_2C8D()) {
-		scripts/sp/analytics::func_D37D();
+	if(scripts\sp\_utility::func_93A6() && scripts\sp\specialist_MAYBE::func_2C8D()) {
+		scripts\sp\analytics::func_D37D();
 		finishplayerdeath(scripts\sp\_utility::func_93AB());
 		return;
 	}
@@ -168,7 +168,7 @@ main() {
 
 	setomnvar("ui_player_dead",0);
 	setdvar("player_death_animated",1);
-	scripts/sp/analytics::func_D37D();
+	scripts\sp\analytics::func_D37D();
 	finishplayerdeath(scripts\sp\_utility::func_93AB());
 }
 
@@ -566,7 +566,7 @@ func_FF31() {
 		return 0;
 	}
 
-	if(!isdefined(level.player.helmet) || scripts\sp\_utility::func_93A6() && !::scripts/sp/specialist_MAYBE::func_2C95) {
+	if(!isdefined(level.player.helmet) || scripts\sp\_utility::func_93A6() && !::scripts\sp\specialist_MAYBE::func_2C95) {
 		return 0;
 	}
 
@@ -842,7 +842,7 @@ func_F322(param_00) {
 func_F32E() {
 	if(isdefined(level.var_4C48)) {
 		var_00 = level.var_4C48;
-		var_01 = int(tablelookup("sp/death_hints.csv",1,var_00,0));
+		var_01 = int(tablelookup("sp\death_hints.csv",1,var_00,0));
 		if(var_01 > 0) {
 			setomnvar("ui_death_hint",var_01);
 			return;
@@ -858,10 +858,10 @@ func_F32E() {
 func_F32F() {
 	var_00 = 100;
 	var_01 = undefined;
-	var_02 = int(tablelookup("sp/death_hints.csv",0,var_00,0));
+	var_02 = int(tablelookup("sp\death_hints.csv",0,var_00,0));
 	while(isdefined(var_02) && var_02 > 0) {
 		var_01 = var_02;
-		var_02 = int(tablelookup("sp/death_hints.csv",0,var_00,0));
+		var_02 = int(tablelookup("sp\death_hints.csv",0,var_00,0));
 		var_00++;
 	}
 
@@ -891,7 +891,7 @@ func_F32D(param_00,param_01,param_02,param_03,param_04) {
 	}
 
 	if(isdefined(param_00)) {
-		var_05 = int(tablelookup("sp/death_hints.csv",1,param_00,0));
+		var_05 = int(tablelookup("sp\death_hints.csv",1,param_00,0));
 		if(var_05 > 0) {
 			setomnvar("ui_death_hint",var_05);
 			return;
@@ -989,7 +989,7 @@ func_4DF6(param_00) {
 }
 
 func_B02A(param_00) {
-	var_01 = tablelookup("sp/deathQuoteTable.csv",0,param_00,1);
+	var_01 = tablelookup("sp\deathQuoteTable.csv",0,param_00,1);
 	if(tolower(var_01[0]) != tolower("@")) {
 		var_01 = "@" + var_01;
 	}

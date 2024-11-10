@@ -1,20 +1,20 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3343.gsc
-****************************/
+ * Script: 3343.gsc
+************************/
 
 init() {
 	if(!isdefined(level.sentrysettings)) {
 		level.sentrysettings = [];
 	}
 
-	level._effect["microturret_lockon"] = loadfx("vfx/iw7/_requests/mp/super/vfx_microturret_lockon.vfx");
+	level._effect["microturret_lockon"] = loadfx("vfx\iw7\_requests\mp\super\vfx_microturret_lockon.vfx");
 	if(!isdefined(level.microturrets)) {
 		level.microturrets = [];
 	}
 
-	level._effect["shoulder_cannon_charge"] = loadfx("vfx/old/misc/shoulder_cannon_charge");
+	level._effect["shoulder_cannon_charge"] = loadfx("vfx\old\misc\shoulder_cannon_charge");
 	level.sentrysettings["sentry_microturret"] = spawnstruct();
 	level.sentrysettings["sentry_microturret"].health = 999999;
 	level.sentrysettings["sentry_microturret"].maxhealth = 300;

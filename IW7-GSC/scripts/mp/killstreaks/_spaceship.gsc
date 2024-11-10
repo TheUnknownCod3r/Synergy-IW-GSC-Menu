@@ -1,8 +1,8 @@
-/*********************************************************
+/*************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\killstreaks\_spaceship.gsc
-*********************************************************/
+ * Script: scripts\mp\killstreaks\_spaceship.gsc
+*************************************************/
 
 func_105BC() {
 	func_105E0();
@@ -11,20 +11,20 @@ func_105BC() {
 }
 
 func_105BD() {
-	level._effect["spaceship_death"] = loadfx("vfx/iw7/core/vehicle/jackal/vfx_jackal_death_01_cheap.vfx");
-	level._effect["spaceship_dmg"] = loadfx("vfx/iw7/core/vehicle/jackal/vfx_jackal_hit_damage");
-	level._effect["spaceship_dmg_trail"] = loadfx("vfx/iw7/core/vehicle/jackal/vfx_jackal_hit_damage_linger");
-	level._effect["spaceship_engine_idle"] = loadfx("vfx/iw7/core/vehicle/jackal/vfx_jackal_thrust_idle");
-	level._effect["spaceship_engine_max"] = loadfx("vfx/iw7/core/vehicle/jackal/vfx_jackal_thrust_max");
-	level._effect["spaceship_hover"] = loadfx("vfx/iw7/core/vehicle/jackal/vfx_jackal_hover");
-	level._effect["spaceship_remove"] = loadfx("vfx/iw7/_requests/equipment/retractable_shield/vfx_iw7_equip_retractable_shield_melee_energy_burst.vfx");
-	level._effect["cockpit_sparks"] = loadfx("vfx/core/mp/killstreaks/vfx_ims_sparks");
-	level._effect["cockpit_smoke"] = loadfx("vfx/core/mp/killstreaks/vfx_helo_damage.vfx");
-	level._effect["cockpit_fire"] = loadfx("vfx/iw7/_requests/mp/vfx_debug_warning.vfx");
-	level._effect["cockpit_expl"] = loadfx("vfx/iw7/_requests/mp/vfx_generic_equipment_exp_lg.vfx");
-	level._effect["space_particles"] = loadfx("vfx/old/space_fighter/space_particulate_player_oneshot.vfx");
-	level._effect["spaceship_trail_f"] = loadfx("vfx/core/vehicles/vfx_jackal_wingtip_trail_b");
-	level._effect["spaceship_trail_e"] = loadfx("vfx/core/vehicles/vfx_jackal_wingtip_trail_o");
+	level._effect["spaceship_death"] = loadfx("vfx\iw7\core\vehicle\jackal\vfx_jackal_death_01_cheap.vfx");
+	level._effect["spaceship_dmg"] = loadfx("vfx\iw7\core\vehicle\jackal\vfx_jackal_hit_damage");
+	level._effect["spaceship_dmg_trail"] = loadfx("vfx\iw7\core\vehicle\jackal\vfx_jackal_hit_damage_linger");
+	level._effect["spaceship_engine_idle"] = loadfx("vfx\iw7\core\vehicle\jackal\vfx_jackal_thrust_idle");
+	level._effect["spaceship_engine_max"] = loadfx("vfx\iw7\core\vehicle\jackal\vfx_jackal_thrust_max");
+	level._effect["spaceship_hover"] = loadfx("vfx\iw7\core\vehicle\jackal\vfx_jackal_hover");
+	level._effect["spaceship_remove"] = loadfx("vfx\iw7\_requests\equipment\retractable_shield\vfx_iw7_equip_retractable_shield_melee_energy_burst.vfx");
+	level._effect["cockpit_sparks"] = loadfx("vfx\core\mp\killstreaks\vfx_ims_sparks");
+	level._effect["cockpit_smoke"] = loadfx("vfx\core\mp\killstreaks\vfx_helo_damage.vfx");
+	level._effect["cockpit_fire"] = loadfx("vfx\iw7\_requests\mp\vfx_debug_warning.vfx");
+	level._effect["cockpit_expl"] = loadfx("vfx\iw7\_requests\mp\vfx_generic_equipment_exp_lg.vfx");
+	level._effect["space_particles"] = loadfx("vfx\old\space_fighter\space_particulate_player_oneshot.vfx");
+	level._effect["spaceship_trail_f"] = loadfx("vfx\core\vehicles\vfx_jackal_wingtip_trail_b");
+	level._effect["spaceship_trail_e"] = loadfx("vfx\core\vehicles\vfx_jackal_wingtip_trail_o");
 }
 
 func_105BE() {
@@ -97,7 +97,7 @@ func_105E0() {
 func_105B5(param_00,param_01,param_02) {
 	func_1057D(param_01);
 	param_01.var_10574 = param_00;
-	param_01 scripts\mp\_powers::func_D729();
+	param_01 scripts\mp\powers::func_D729();
 	func_10580(param_00);
 	if(!isdefined(param_02)) {
 		param_02 = 0;
@@ -113,7 +113,7 @@ func_105B5(param_00,param_01,param_02) {
 }
 
 func_105B6(param_00,param_01) {
-	param_01 scripts\mp\_powers::func_D72F();
+	param_01 scripts\mp\powers::func_D72F();
 	param_01 lib_0BD3::func_D05B();
 	param_01 getrigindexfromarchetyperef();
 	func_105CD(param_00);
@@ -140,7 +140,7 @@ func_1057E(param_00) {
 func_1057C(param_00) {
 	if(isdefined(param_00.var_130F2)) {
 		param_00.var_130F2 delete();
-		param_00.useobject scripts\mp\_gameobjects::deleteuseobject();
+		param_00.useobject scripts\mp\gameobjects::deleteuseobject();
 	}
 
 	func_105C0(param_00);
@@ -195,7 +195,7 @@ func_1059E(param_00,param_01) {
 func_105CE(param_00) {
 	if(isdefined(param_00) && isdefined(param_00.outlineids)) {
 		foreach(var_02 in param_00.outlineids) {
-			scripts\mp\_utility::outlinedisable(var_02,param_00);
+			scripts\mp\utility::outlinedisable(var_02,param_00);
 		}
 
 		param_00.outlineids = undefined;
@@ -213,12 +213,12 @@ func_105A3(param_00,param_01) {
 	func_10575(param_00,param_01);
 	param_00.outlineids = [];
 	if(level.teambased) {
-		param_00.outlineids[0] = scripts\mp\_utility::outlineenableforteam(param_00,"cyan",param_01.team,1,0,"equipment");
-		param_00.outlineids[1] = scripts\mp\_utility::outlineenableforteam(param_00,"orange",scripts\mp\_utility::getotherteam(param_01.team),1,0,"equipment");
+		param_00.outlineids[0] = scripts\mp\utility::outlineenableforteam(param_00,"cyan",param_01.team,1,0,"equipment");
+		param_00.outlineids[1] = scripts\mp\utility::outlineenableforteam(param_00,"orange",scripts\mp\utility::getotherteam(param_01.team),1,0,"equipment");
 	}
 	else
 	{
-		param_00.outlineids[0] = scripts\mp\_utility::func_C793(param_00,"orange",1,0,"equipment");
+		param_00.outlineids[0] = scripts\mp\utility::func_C793(param_00,"orange",1,0,"equipment");
 	}
 
 	param_00 hudoutlinedisableforclient(param_01);
@@ -351,12 +351,12 @@ func_105A0(param_00) {
 	level endon("game_ended");
 	param_00.var_10586 = 1500;
 	param_00.lastdamagetime = 0;
-	param_00 scripts\mp\_damage::monitordamage(1500,"",::func_105AA,::func_105A9,0,1);
+	param_00 scripts\mp\damage::monitordamage(1500,"",::func_105AA,::func_105A9,0,1);
 }
 
 func_105A9(param_00,param_01,param_02,param_03,param_04) {
 	var_05 = self;
-	if(scripts\mp\_utility::isstrstart(param_01,"spaceship")) {
+	if(scripts\mp\utility::isstrstart(param_01,"spaceship")) {
 		playfxontag(scripts\engine\utility::getfx("spaceship_dmg"),var_05,"tag_origin");
 	}
 
@@ -612,7 +612,7 @@ func_105CB(param_00,param_01) {
 
 func_105C4(param_00) {
 	var_01 = level.var_FE33[param_00];
-	var_01 = scripts\engine\utility::array_combine(var_01,level.var_FE33[scripts\mp\_utility::getotherteam(param_00)]);
+	var_01 = scripts\engine\utility::array_combine(var_01,level.var_FE33[scripts\mp\utility::getotherteam(param_00)]);
 	var_02 = undefined;
 	var_03 = 0;
 	foreach(var_05 in var_01) {
@@ -659,12 +659,12 @@ func_10595(param_00) {
 	}
 
 	var_04 = physics_createcontents(["physicscontents_aiavoid","physicscontents_solid","physicscontents_structural"]);
-	var_05 = function_028C(param_00.origin,300,0,var_04,undefined,"physicsquery_any");
+	var_05 = physics_getclosestpointtosphere(param_00.origin,300,0,var_04,undefined,"physicsquery_any");
 	return var_05 == 0;
 }
 
 func_105CA(param_00,param_01,param_02) {
-	var_03 = function_026D(param_00,param_01,param_02,"veh_spaceship_mp","veh_mil_air_ca_jackal_drone_atmos_periph_mp");
+	var_03 = _func_26D(param_00,param_01,param_02,"veh_spaceship_mp","veh_mil_air_ca_jackal_drone_atmos_periph_mp");
 	return func_1058D(var_03,param_00.team);
 }
 
@@ -688,15 +688,15 @@ func_105C5(param_00,param_01) {
 	var_02 = undefined;
 	var_02 = spawn("trigger_radius",func_10578(param_00),0,150,200);
 	param_00.var_130F2 = var_02;
-	var_03 = scripts\mp\_gameobjects::createuseobject(param_01,var_02,[]);
-	var_03 scripts\mp\_gameobjects::setusetime(2);
-	var_03 scripts\mp\_gameobjects::setusetext(&"MP_JACKAL_BOARDING");
+	var_03 = scripts\mp\gameobjects::createuseobject(param_01,var_02,[]);
+	var_03 scripts\mp\gameobjects::setusetime(2);
+	var_03 scripts\mp\gameobjects::setusetext(&"MP_JACKAL_BOARDING");
 	if(var_02.classname == "trigger_use") {
-		var_03 scripts\mp\_gameobjects::setusehinttext(&"MP_JACKAL_BOARD");
+		var_03 scripts\mp\gameobjects::setusehinttext(&"MP_JACKAL_BOARD");
 	}
 
-	var_03 scripts\mp\_gameobjects::allowuse("friendly");
-	var_03 scripts\mp\_gameobjects::setvisibleteam("friendly");
+	var_03 scripts\mp\gameobjects::allowuse("friendly");
+	var_03 scripts\mp\gameobjects::setvisibleteam("friendly");
 	var_03.onuse = ::func_105B3;
 	var_03.var_10574 = param_00;
 	param_00.useobject = var_03;
@@ -713,15 +713,15 @@ func_105B3(param_00) {
 
 func_10580(param_00) {
 	if(isdefined(param_00.useobject)) {
-		param_00.useobject scripts\mp\_gameobjects::setvisibleteam("none");
-		param_00.useobject scripts\mp\_gameobjects::allowuse("none");
+		param_00.useobject scripts\mp\gameobjects::setvisibleteam("none");
+		param_00.useobject scripts\mp\gameobjects::allowuse("none");
 	}
 }
 
 func_10583(param_00) {
 	if(isdefined(param_00.useobject)) {
-		param_00.useobject scripts\mp\_gameobjects::setvisibleteam("friendly");
-		param_00.useobject scripts\mp\_gameobjects::allowuse("friendly");
+		param_00.useobject scripts\mp\gameobjects::setvisibleteam("friendly");
+		param_00.useobject scripts\mp\gameobjects::allowuse("friendly");
 		param_00.useobject.trigger.origin = func_10578(param_00);
 	}
 }
@@ -788,20 +788,20 @@ func_10584(param_00,param_01) {
 	var_03 = scripts\common\trace::create_default_contents(1);
 	var_04 = param_00 gettagorigin("j_cockpit");
 	var_05 = var_04 - 64 * var_02;
-	var_06 = function_0299(var_05,param_01,0,param_00.angles,0,var_03,param_00,"physicsquery_any");
+	var_06 = physics_getclosestpointtocharacter(var_05,param_01,0,param_00.angles,0,var_03,param_00,"physicsquery_any");
 	if(var_06 == 0) {
 		return var_05;
 	}
 
 	var_05 = var_04 + 64 * var_02;
-	var_06 = function_0299(var_05,param_01,0,param_00.angles,0,var_03,param_00,"physicsquery_any");
+	var_06 = physics_getclosestpointtocharacter(var_05,param_01,0,param_00.angles,0,var_03,param_00,"physicsquery_any");
 	if(var_06 == 0) {
 		return var_05;
 	}
 
 	var_07 = anglestoforward(param_00.angles);
 	var_05 = var_04 + 100 * var_07;
-	var_06 = function_0299(var_05,param_01,0,param_00.angles,0,var_03,param_00,"physicsquery_any");
+	var_06 = physics_getclosestpointtocharacter(var_05,param_01,0,param_00.angles,0,var_03,param_00,"physicsquery_any");
 	if(var_06 == 0) {
 		return var_05;
 	}
@@ -813,7 +813,7 @@ func_105B8(param_00) {
 	level endon("game_ended");
 	param_00 endon("death");
 	param_00 endon("disconnect");
-	if(!scripts\mp\_utility::gameflag("prematch_done")) {
+	if(!scripts\mp\utility::gameflag("prematch_done")) {
 		level waittill("prematch_done");
 	}
 
@@ -885,7 +885,7 @@ func_10593(param_00) {
 	var_01 = param_00 geteye();
 	var_02 = param_00 getplayerangles();
 	var_03 = var_01 + 750 * anglestoforward(var_02);
-	var_04 = function_0288(var_01,var_03,15,scripts\common\trace::create_vehicle_contents(),undefined,"physicsquery_closest");
+	var_04 = physics_spherecast(var_01,var_03,15,scripts\common\trace::create_vehicle_contents(),undefined,"physicsquery_closest");
 	if(var_04.size == 0) {
 		return undefined;
 	}
@@ -1056,7 +1056,7 @@ func_105CF(param_00) {
 	var_02 = anglestoforward(param_00 getplayerangles());
 	var_03 = var_01 + 500 * var_02;
 	var_04 = physics_createcontents(["physicscontents_aiavoid","physicscontents_solid","physicscontents_structural"]);
-	var_05 = function_0298(var_01,var_03,param_00,0,param_00.angles,var_04,param_00,"physicsquery_any");
+	var_05 = physics_charactercast(var_01,var_03,param_00,0,param_00.angles,var_04,param_00,"physicsquery_any");
 	if(var_05) {
 		param_00 iprintlnbold(&"MP_JACKAL_CANT_SUMMON");
 		return;
@@ -1065,10 +1065,10 @@ func_105CF(param_00) {
 	var_06 = 332 * anglestoright(param_00.angles);
 	var_07 = var_03 + var_06;
 	var_08 = 350;
-	var_05 = function_028C(var_07,var_08,0,var_04,undefined,"physicsquery_any");
+	var_05 = physics_getclosestpointtosphere(var_07,var_08,0,var_04,undefined,"physicsquery_any");
 	if(var_05) {
 		var_07 = var_07 + (0,0,var_08 + 1);
-		var_05 = function_028C(var_07,var_08,0,var_04,undefined,"physicsquery_any");
+		var_05 = physics_getclosestpointtosphere(var_07,var_08,0,var_04,undefined,"physicsquery_any");
 		if(var_05) {
 			param_00 iprintlnbold(&"MP_JACKAL_CANT_SUMMON");
 			return;
@@ -1266,7 +1266,7 @@ func_10594(param_00,param_01) {
 }
 
 func_105B9(param_00,param_01,param_02,param_03,param_04) {
-	var_05 = function_01E1(scripts\engine\utility::getfx(param_02),param_01 geteye() + param_03,param_01);
+	var_05 = spawnfxforclient(scripts\engine\utility::getfx(param_02),param_01 geteye() + param_03,param_01);
 	triggerfx(var_05);
 	param_01 scripts\engine\utility::waittill_any_timeout_1(param_04,"death","disconnect");
 	var_05 delete();
@@ -1298,11 +1298,11 @@ func_10592(param_00) {
 }
 
 func_105C1(param_00) {
-	param_00 scripts\mp\_powers::removepower(param_00.var_AE7B);
-	param_00 scripts\mp\_powers::removepower(param_00.var_AE7D);
+	param_00 scripts\mp\powers::removepower(param_00.var_AE7B);
+	param_00 scripts\mp\powers::removepower(param_00.var_AE7D);
 }
 
 func_105C2(param_00) {
-	param_00 scripts\mp\_powers::givepower(param_00.var_AE7B,"primary");
-	param_00 scripts\mp\_powers::givepower(param_00.var_AE7D,"secondary");
+	param_00 scripts\mp\powers::givepower(param_00.var_AE7B,"primary");
+	param_00 scripts\mp\powers::givepower(param_00.var_AE7D,"secondary");
 }

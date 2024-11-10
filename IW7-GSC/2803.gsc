@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2803.gsc
+ * Script: 2803.gsc
 ***************************************/
 
 func_98D5() {

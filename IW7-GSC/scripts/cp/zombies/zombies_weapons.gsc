@@ -1,8 +1,8 @@
-/**********************************************************
+/**************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\zombies\zombies_weapons.gsc
-**********************************************************/
+ * Script: scripts\cp\zombies\zombies_weapons.gsc
+**************************************************/
 
 init() {
 	scripts\cp\cp_spawn_plasma_projectile::splashgrenadeinit();
@@ -354,13 +354,13 @@ should_take_players_current_weapon(param_00) {
 }
 
 facemelter_fx_init() {
-	level._effect["base_plasma_explosion_enemy"] = loadfx("vfx/iw7/_requests/mp/vfx_plasma_large_explosion_enemy.vfx");
-	level._effect["glob_plasma_pool_enemy"] = loadfx("vfx/iw7/_requests/mp/vfx_plasma_med_flames_enemy.vfx");
-	level._effect["glob_plasma_impact_enemy"] = loadfx("vfx/iw7/_requests/mp/vfx_plasma_small_explosion_enemy.vfx");
-	level._effect["glob_plasma_trail_enemy"] = loadfx("vfx/iw7/_requests/mp/vfx_plasma_trail_enemy.vfx");
-	level._effect["dischord_tornado"] = loadfx("vfx/iw7/core/zombie/weapon/dischord/vfx_zmb_dischord_energy_tornado.vfx");
-	level._effect["player_plasma_enemy"] = loadfx("vfx/iw7/_requests/mp/power/vfx_splash_grenade_light_en.vfx");
-	level._effect["player_plasma_friendly"] = loadfx("vfx/iw7/_requests/mp/power/vfx_splash_grenade_light_fr.vfx");
+	level._effect["base_plasma_explosion_enemy"] = loadfx("vfx\iw7\_requests\mp\vfx_plasma_large_explosion_enemy.vfx");
+	level._effect["glob_plasma_pool_enemy"] = loadfx("vfx\iw7\_requests\mp\vfx_plasma_med_flames_enemy.vfx");
+	level._effect["glob_plasma_impact_enemy"] = loadfx("vfx\iw7\_requests\mp\vfx_plasma_small_explosion_enemy.vfx");
+	level._effect["glob_plasma_trail_enemy"] = loadfx("vfx\iw7\_requests\mp\vfx_plasma_trail_enemy.vfx");
+	level._effect["dischord_tornado"] = loadfx("vfx\iw7\core\zombie\weapon\dischord\vfx_zmb_dischord_energy_tornado.vfx");
+	level._effect["player_plasma_enemy"] = loadfx("vfx\iw7\_requests\mp\power\vfx_splash_grenade_light_en.vfx");
+	level._effect["player_plasma_friendly"] = loadfx("vfx\iw7\_requests\mp\power\vfx_splash_grenade_light_fr.vfx");
 }
 
 facemelter_death_logic(param_00,param_01,param_02,param_03,param_04) {
@@ -672,9 +672,9 @@ showonscreenbloodeffects() {
 }
 
 head_shard_init() {
-	level._effect["head_exploder"] = loadfx("vfx/iw7/_requests/coop/zmb_head_exploder.vfx");
-	level._effect["head_expander"] = loadfx("vfx/iw7/_requests/coop/zmb_head_expander.vfx");
-	level._effect["head_blood_explosion"] = loadfx("vfx/iw7/_requests/coop/zmb_head_blood_explosion.vfx");
+	level._effect["head_exploder"] = loadfx("vfx\iw7\_requests\coop\zmb_head_exploder.vfx");
+	level._effect["head_expander"] = loadfx("vfx\iw7\_requests\coop\zmb_head_expander.vfx");
+	level._effect["head_blood_explosion"] = loadfx("vfx\iw7\_requests\coop\zmb_head_blood_explosion.vfx");
 }
 
 head_exploder(param_00,param_01,param_02,param_03,param_04) {
@@ -795,7 +795,7 @@ weapon_watch_hint() {
 
 updatecamoscripts(param_00,param_01) {
 	if(isdefined(param_00)) {
-		var_02 = function_00E5(param_00);
+		var_02 = getweaponcamoname(param_00);
 	}
 	else
 	{
@@ -803,7 +803,7 @@ updatecamoscripts(param_00,param_01) {
 	}
 
 	if(isdefined(param_01)) {
-		var_03 = function_00E5(param_01);
+		var_03 = getweaponcamoname(param_01);
 	}
 	else
 	{
@@ -1089,7 +1089,7 @@ create_explosion_sphere(param_00) {
 }
 
 playredrepulsorfx() {
-	var_00 = function_01E1(level._effect["repulsor_view_red"],self gettagorigin("tag_eye"),self);
+	var_00 = spawnfxforclient(level._effect["repulsor_view_red"],self gettagorigin("tag_eye"),self);
 	triggerfx(var_00);
 	var_00 thread scripts\cp\utility::delayentdelete(1);
 	playrumbleonposition("slide_collision",self.origin);
@@ -1134,7 +1134,7 @@ checkenemiesinfov(param_00,param_01,param_02) {
 
 axe_damage(param_00,param_01,param_02,param_03,param_04,param_05,param_06) {
 	param_00 endon("death");
-	if(param_00 scripts/cp/agents/gametype_zombie::is_non_standard_zombie()) {
+	if(param_00 scripts\cp\agents\gametype_zombie::is_non_standard_zombie()) {
 		param_00.allowpain = 1;
 	}
 
@@ -1586,7 +1586,7 @@ watchstartlingerdamage(param_00,param_01) {
 	var_04 = 1;
 	self.startedplasmastand = undefined;
 	self.startedplasmalinger = 1;
-	var_05 = function_01E1(scripts\engine\utility::getfx("player_plasma_screen_linger"),self geteye(),self);
+	var_05 = spawnfxforclient(scripts\engine\utility::getfx("player_plasma_screen_linger"),self geteye(),self);
 	triggerfx(var_05);
 	var_05 thread scripts\cp\utility::delayentdelete(1);
 	var_05 thread scripts\cp\utility::deleteonplayerdeathdisconnect(self);

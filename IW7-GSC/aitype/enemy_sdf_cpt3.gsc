@@ -1,8 +1,8 @@
-/*********************************************
+/*************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\aitype\enemy_sdf_cpt3.gsc
-*********************************************/
+ * Script: aitype\enemy_sdf_cpt3.gsc
+*************************************/
 
 main() {
 	self.var_17DB = "";

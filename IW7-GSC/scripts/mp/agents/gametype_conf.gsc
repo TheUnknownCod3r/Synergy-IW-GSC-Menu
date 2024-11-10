@@ -1,8 +1,8 @@
-/*******************************************************
+/***********************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\agents\gametype_conf.gsc
-*******************************************************/
+ * Script: scripts\mp\agents\gametype_conf.gsc
+***********************************************/
 
 main() {
 	setup_callbacks();

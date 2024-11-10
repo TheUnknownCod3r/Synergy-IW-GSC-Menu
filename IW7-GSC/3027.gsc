@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3027.gsc
-****************************/
+ * Script: 3027.gsc
+************************/
 
 main(param_00,param_01,param_02) {
 	var_03 = spawnstruct();

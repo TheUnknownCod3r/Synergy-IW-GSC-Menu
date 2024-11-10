@@ -1,8 +1,8 @@
-/*********************************************
+/*************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\concussion.gsc
-*********************************************/
+ * Script: scripts\mp\concussion.gsc
+*************************************/
 
 func_44EE(param_00) {
 	param_00 thread func_13A20();

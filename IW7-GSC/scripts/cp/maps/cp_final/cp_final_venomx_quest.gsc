@@ -1,8 +1,8 @@
-/**********************************************************************
+/**************************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\maps\cp_final\cp_final_venomx_quest.gsc
-**********************************************************************/
+ * Script: scripts\cp\maps\cp_final\cp_final_venomx_quest.gsc
+**************************************************************/
 
 venomx_init() {
 	venomxquestregistration();
@@ -1433,7 +1433,7 @@ start_timing_sequence(param_00,param_01,param_02) {
 		}
 
 		if(!scripts\engine\utility::istrue(var_03)) {
-			if(function_010F(param_01.origin,level.hidden_figures_volume)) {
+			if(ispointinvolume(param_01.origin,level.hidden_figures_volume)) {
 				var_03 = 1;
 				param_01 thread scripts\cp\maps\cp_final\cp_final::update_special_mode_for_player(param_01);
 			}
@@ -2439,7 +2439,7 @@ cangive_ammo(param_00) {
 	var_01 = param_00;
 	var_02 = self getweaponammoclip(var_01);
 	var_03 = weaponclipsize(var_01);
-	var_04 = function_0249(var_01);
+	var_04 = weaponmaxammo(var_01);
 	var_05 = self getweaponammostock(var_01);
 	if(var_05 < var_04 || var_02 < var_03) {
 		return 1;
@@ -2476,7 +2476,7 @@ give_ammo_to_player_through_egg(param_00) {
 
 adjust_clip_ammo_from_stock(param_00,param_01,param_02,param_03,param_04) {
 	if(!scripts\engine\utility::istrue(param_04)) {
-		var_05 = function_0249(param_01);
+		var_05 = weaponmaxammo(param_01);
 		var_06 = param_00 getweaponammostock(param_01);
 		var_07 = var_05 - var_06;
 		var_08 = scripts\engine\utility::ter_op(var_07 >= param_03,var_06 + param_03,var_05);
@@ -4095,7 +4095,7 @@ activatefiguredamage(param_00,param_01,param_02) {
 			continue;
 		}
 
-		if(!function_010F(var_04.origin,level.hidden_figures_volume)) {
+		if(!ispointinvolume(var_04.origin,level.hidden_figures_volume)) {
 			var_04 playlocalsound("perk_machine_deny");
 			continue;
 		}

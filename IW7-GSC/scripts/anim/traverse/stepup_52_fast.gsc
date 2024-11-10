@@ -1,8 +1,8 @@
-/************************************************************
+/****************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\anim\traverse\stepup_52_fast.gsc
-************************************************************/
+ * Script: scripts\anim\traverse\stepup_52_fast.gsc
+****************************************************/
 
 main() {
 	if(self.type == "dog") {

@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\4139.gsc
-****************************/
+ * Script: 4139.gsc
+************************/
 
 main() {
 	scripts\sp\_doorpeek::func_59CB();

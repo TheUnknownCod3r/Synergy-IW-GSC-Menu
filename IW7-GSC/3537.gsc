@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\3537.gsc
+ * Script: 3537.gsc
 ***************************************/
 
 func_E814() {

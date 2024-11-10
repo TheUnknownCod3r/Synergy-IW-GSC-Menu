@@ -1,8 +1,8 @@
-/**********************************************************
+/**************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\maps\cp_disco\disco_mpq.gsc
-**********************************************************/
+ * Script: scripts\cp\maps\cp_disco\disco_mpq.gsc
+**************************************************/
 
 skq() {
 	init_skq_flags();
@@ -1016,7 +1016,7 @@ determine_symbol_visibility() {
 			return;
 		}
 
-		var_01 = function_01E1(level._effect["test_glyph_mpq"],var_00.origin,self,anglestoforward(var_00.angles),anglestoup(var_00.angles));
+		var_01 = spawnfxforclient(level._effect["test_glyph_mpq"],var_00.origin,self,anglestoforward(var_00.angles),anglestoup(var_00.angles));
 		self.symbol_hunt_fx = var_01;
 		wait(0.05);
 		triggerfx(var_01);
@@ -1603,7 +1603,7 @@ isinactivevolume(param_00) {
 
 	var_01 = sortbydistance(level.active_spawn_volumes,param_00);
 	foreach(var_03 in var_01) {
-		if(function_010F(param_00,var_03)) {
+		if(ispointinvolume(param_00,var_03)) {
 			return 1;
 		}
 	}
@@ -1884,7 +1884,7 @@ missing_reel_pickup_players(param_00,param_01) {
 
 		wait(6);
 		if(isdefined(param_01.lost_and_found_ent)) {
-			scripts/cp/zombies/zombie_lost_and_found::restore_player_status(param_01);
+			scripts\cp\zombies\zombie_lost_and_found::restore_player_status(param_01);
 		}
 	}
 
@@ -2065,7 +2065,7 @@ use_turnstile(param_00,param_01) {
 		var_02 scriptmodelplayanim("IW7_cp_turnstyle_rotate");
 		scripts\engine\utility::flag_set("turnstile_done");
 		foreach(param_01 in level.players) {
-			param_01 scripts/cp/zombies/achievement::update_achievement("MESSAGE_RECEIVED",1);
+			param_01 scripts\cp\zombies\achievement::update_achievement("MESSAGE_RECEIVED",1);
 		}
 
 		wait(2);
@@ -2696,7 +2696,7 @@ determine_effect_visibility(param_00,param_01) {
 
 	var_02 = param_01;
 	if(scripts\engine\utility::istrue(self.wearing_rat_king_eye)) {
-		var_03 = function_01E1(level._effect[param_00],var_02.origin,self,anglestoforward(var_02.angles),anglestoup(var_02.angles));
+		var_03 = spawnfxforclient(level._effect[param_00],var_02.origin,self,anglestoforward(var_02.angles),anglestoup(var_02.angles));
 		self.active_effect = var_03;
 		wait(1);
 		triggerfx(var_03);

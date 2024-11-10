@@ -1,11 +1,11 @@
-/*********************************************************
+/*************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\killstreaks\_mapselect.gsc
-*********************************************************/
+ * Script: scripts\mp\killstreaks\_mapselect.gsc
+*************************************************/
 
 func_B337() {
-	level._effect["map_target_mark"] = loadfx("vfx/iw7/_requests/mp/vfx_marker_map_target");
+	level._effect["map_target_mark"] = loadfx("vfx\iw7\_requests\mp\vfx_marker_map_target");
 }
 
 _meth_8112(param_00,param_01,param_02) {
@@ -14,7 +14,7 @@ _meth_8112(param_00,param_01,param_02) {
 	}
 
 	var_03 = 0;
-	if(scripts\mp\_utility::func_9EAF(param_00)) {
+	if(scripts\mp\utility::func_9EAF(param_00)) {
 		var_03 = 1;
 	}
 
@@ -42,7 +42,7 @@ func_76F7(param_00,param_01) {
 	self.var_D8AD = undefined;
 	var_03 = [];
 	thread func_13AC5();
-	if(scripts\mp\_utility::istrue(var_02)) {
+	if(scripts\mp\utility::istrue(var_02)) {
 		self setclientomnvar("ui_map_select_uses",param_00);
 		self setclientomnvar("ui_map_select_count",param_00);
 	}
@@ -56,7 +56,7 @@ func_76F7(param_00,param_01) {
 
 		var_03[var_03.size] = var_04;
 		self.var_B338++;
-		if(scripts\mp\_utility::istrue(var_02)) {
+		if(scripts\mp\utility::istrue(var_02)) {
 			self setclientomnvar("ui_map_select_uses",param_00 - self.var_B338);
 		}
 
@@ -66,7 +66,7 @@ func_76F7(param_00,param_01) {
 	self setclientomnvar("ui_map_select_count",-1);
 	self notify("map_select_exit");
 	self visionsetnakedforplayer("",0);
-	if(scripts\mp\_utility::istrue(level.nukedetonated) && !scripts\mp\_utility::istrue(level.var_C1B2)) {
+	if(scripts\mp\utility::istrue(level.nukedetonated) && !scripts\mp\utility::istrue(level.var_C1B2)) {
 		thread scripts\mp\killstreaks\_nuke::func_FB0F(0.05);
 	}
 
@@ -108,7 +108,7 @@ func_13AE7() {
 
 func_10DC2(param_00,param_01,param_02) {
 	if(!self.pers["startedMapSelect"]) {
-		function_0223(self);
+		triggeroneoffradarsweep(self);
 		self.pers["startedMapSelect"] = 1;
 	}
 
@@ -128,7 +128,7 @@ func_1107B() {
 	self.var_B338 = undefined;
 	self.var_B336 = undefined;
 	self.var_D8AD = undefined;
-	if(scripts\mp\_utility::isreallyalive(self)) {
+	if(scripts\mp\utility::isreallyalive(self)) {
 		self notify("killstreak_finished_with_weapon_ks_remote_map_mp");
 		return;
 	}

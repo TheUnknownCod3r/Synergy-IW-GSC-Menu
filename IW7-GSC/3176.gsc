@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3176.gsc
-****************************/
+ * Script: 3176.gsc
+************************/
 
 func_51E8(param_00,param_01,param_02,param_03) {
 	if(isdefined(self.asm.var_51E8)) {
@@ -272,7 +272,7 @@ func_9810() {
 }
 
 func_100A9(param_00,param_01,param_02,param_03) {
-	var_04 = scripts/asm/asm_bb::bb_getrequestedweapon();
+	var_04 = scripts\asm\asm_bb::bb_getrequestedweapon();
 	if(!isdefined(var_04)) {
 		return 0;
 	}
@@ -286,12 +286,12 @@ func_100A9(param_00,param_01,param_02,param_03) {
 
 func_BEA0(param_00,param_01,param_02,param_03) {
 	var_04 = undefined;
-	if(scripts/asm/asm_bb::func_2985()) {
-		if(isdefined(self._blackboard.shootparams.pos)) {
-			var_04 = self._blackboard.shootparams.pos;
+	if(scripts\asm\asm_bb::func_2985()) {
+		if(isdefined(self.var_1198.shootparams.pos)) {
+			var_04 = self.var_1198.shootparams.pos;
 		}
-		else if(isdefined(self._blackboard.shootparams.ent)) {
-			var_04 = self._blackboard.shootparams.ent.origin;
+		else if(isdefined(self.var_1198.shootparams.ent)) {
+			var_04 = self.var_1198.shootparams.ent.origin;
 		}
 	}
 
@@ -341,12 +341,12 @@ _meth_81DE() {
 	var_00 = 0.25;
 	var_01 = undefined;
 	var_02 = undefined;
-	if(scripts/asm/asm_bb::func_2985()) {
-		if(isdefined(self._blackboard.shootparams.ent)) {
-			var_01 = self._blackboard.shootparams.ent;
+	if(scripts\asm\asm_bb::func_2985()) {
+		if(isdefined(self.var_1198.shootparams.ent)) {
+			var_01 = self.var_1198.shootparams.ent;
 		}
-		else if(isdefined(self._blackboard.shootparams.pos)) {
-			var_02 = self._blackboard.shootparams.pos;
+		else if(isdefined(self.var_1198.shootparams.pos)) {
+			var_02 = self.var_1198.shootparams.pos;
 		}
 	}
 	else if(isdefined(self.isnodeoccupied) && scripts\engine\utility::func_9DA3()) {
@@ -365,12 +365,12 @@ _meth_81DD() {
 	var_00 = 0.25;
 	var_01 = undefined;
 	var_02 = undefined;
-	if(scripts/asm/asm_bb::func_2985()) {
-		if(isdefined(self._blackboard.shootparams.ent)) {
-			var_01 = self._blackboard.shootparams.ent;
+	if(scripts\asm\asm_bb::func_2985()) {
+		if(isdefined(self.var_1198.shootparams.ent)) {
+			var_01 = self.var_1198.shootparams.ent;
 		}
-		else if(isdefined(self._blackboard.shootparams.pos)) {
-			var_02 = self._blackboard.shootparams.pos;
+		else if(isdefined(self.var_1198.shootparams.pos)) {
+			var_02 = self.var_1198.shootparams.pos;
 		}
 	}
 	else if(isdefined(self.isnodeoccupied)) {
@@ -389,12 +389,12 @@ laststandrevive() {
 	var_00 = 0.25;
 	var_01 = undefined;
 	var_02 = undefined;
-	if(scripts/asm/asm_bb::func_2985()) {
-		if(isdefined(self._blackboard.shootparams.ent)) {
-			var_01 = self._blackboard.shootparams.ent;
+	if(scripts\asm\asm_bb::func_2985()) {
+		if(isdefined(self.var_1198.shootparams.ent)) {
+			var_01 = self.var_1198.shootparams.ent;
 		}
-		else if(isdefined(self._blackboard.shootparams.pos)) {
-			var_02 = self._blackboard.shootparams.pos;
+		else if(isdefined(self.var_1198.shootparams.pos)) {
+			var_02 = self.var_1198.shootparams.pos;
 		}
 	}
 	else if(isdefined(self.isnodeoccupied)) {
@@ -436,7 +436,7 @@ func_3F0A(param_00,param_01,param_02) {
 	}
 
 	var_06 = var_04 + "_" + var_05;
-	var_07 = scripts/asm/asm::asm_lookupanimfromalias(param_01,var_06);
+	var_07 = scripts\asm\asm::asm_lookupanimfromalias(param_01,var_06);
 	return var_07;
 }
 
@@ -469,7 +469,7 @@ func_3F09(param_00,param_01,param_02) {
 		}
 
 		var_07 = var_05 + "_" + var_06;
-		var_08 = scripts/asm/asm::asm_lookupanimfromalias(param_01,var_07);
+		var_08 = scripts\asm\asm::asm_lookupanimfromalias(param_01,var_07);
 		return var_08;
 	}
 
@@ -498,16 +498,16 @@ func_3F09(param_00,param_01,param_02) {
 	}
 
 	var_07 = var_07 + "_" + var_08;
-	var_08 = scripts/asm/asm::asm_lookupanimfromalias(param_02,var_08);
+	var_08 = scripts\asm\asm::asm_lookupanimfromalias(param_02,var_08);
 	return var_08;
 }
 
 func_DF5B(param_00,param_01,param_02,param_03) {
-	return scripts/asm/asm_bb::bb_reloadrequested();
+	return scripts\asm\asm_bb::bb_reloadrequested();
 }
 
 func_2B9A(param_00,param_01,param_02,param_03) {
-	return scripts/asm/asm_bb::func_291A();
+	return scripts\asm\asm_bb::func_291A();
 }
 
 func_3ECC(param_00,param_01,param_02) {
@@ -526,7 +526,7 @@ func_3ECC(param_00,param_01,param_02) {
 		var_04 = "4";
 	}
 
-	var_05 = scripts/asm/asm::asm_lookupanimfromalias(param_01,var_04);
+	var_05 = scripts\asm\asm::asm_lookupanimfromalias(param_01,var_04);
 	return var_05;
 }
 
@@ -535,22 +535,22 @@ func_DF4F(param_00,param_01,param_02) {
 		return;
 	}
 
-	if(!scripts/asm/asm::func_232B(param_01,"drop clip")) {
+	if(!scripts\asm\asm::func_232B(param_01,"drop clip")) {
 		return;
 	}
 
 	if(self.var_39B[self.var_394].var_13053) {
 		var_03 = getweaponclipmodel(self.var_394);
 		if(isdefined(var_03)) {
-			var_04 = scripts/asm/asm::func_232B(param_01,"attach clip left") || scripts/asm/asm::func_232B(param_01,"attach clip right");
-			var_05 = scripts/asm/asm::func_232B(param_01,"detach clip left") || scripts/asm/asm::func_232B(param_01,"detach clip right") || scripts/asm/asm::func_232B(param_01,"detach clip nohand");
+			var_04 = scripts\asm\asm::func_232B(param_01,"attach clip left") || scripts\asm\asm::func_232B(param_01,"attach clip right");
+			var_05 = scripts\asm\asm::func_232B(param_01,"detach clip left") || scripts\asm\asm::func_232B(param_01,"detach clip right") || scripts\asm\asm::func_232B(param_01,"detach clip nohand");
 			if(!var_04) {
 				self notify("abort_reload");
 				return;
 			}
 
 			if(var_04 && !var_05) {
-				if(scripts/asm/asm::func_232B(param_01,"attach clip left")) {
+				if(scripts\asm\asm::func_232B(param_01,"attach clip left")) {
 					var_06 = "tag_accessory_left";
 				}
 				else

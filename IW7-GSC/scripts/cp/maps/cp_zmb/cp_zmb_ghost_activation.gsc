@@ -1,17 +1,17 @@
-/**********************************************************************
+/**************************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\maps\cp_zmb\cp_zmb_ghost_activation.gsc
-**********************************************************************/
+ * Script: scripts\cp\maps\cp_zmb\cp_zmb_ghost_activation.gsc
+**************************************************************/
 
 init_ghost_n_skull_quest() {
-	scripts/cp/zombies/zombie_quest::register_quest_step("ghost",0,::blank,::pop_all_balloons_in_beginning_area,::complete_pop_all_balloons_in_beginning_area,::debug_pop_all_balloons_in_beginning_area);
-	scripts/cp/zombies/zombie_quest::register_quest_step("ghost",1,::blank,::spell_the_word_ghost,::complete_spell_the_word_ghost,::debug_spell_the_word_ghost);
-	scripts/cp/zombies/zombie_quest::register_quest_step("ghost",2,::blank,::get_1_9_8_4_kills_on_dance_floor,::complete_get_1_9_8_4_kills_on_dance_floor,::debug_get_1_9_8_4_kills_on_dance_floor);
-	scripts/cp/zombies/zombie_quest::register_quest_step("ghost",3,::blank,::play_arcade_games_and_make_critical_shot,::complete_play_arcade_games_and_make_critical_shot,::debug_play_arcade_games_and_make_critical_shot);
-	scripts/cp/zombies/zombie_quest::register_quest_step("ghost",4,::blank,::hit_the_floating_skull_with_spaceland_laser,::complete_hit_the_floating_skull_with_spaceland_laser,::debug_hit_the_floating_skull_with_spaceland_laser);
-	scripts/cp/zombies/zombie_quest::register_quest_step("ghost",5,::blank,::brute_hit_arcade_cabinet_with_laser,::complete_brute_hit_arcade_cabinet_with_laser,::debug_brute_hit_arcade_cabinet_with_laser);
-	scripts/cp/zombies/zombie_quest::register_quest_step("ghost",6,::blank,::wait_for_player_activation,::complete_clean_arcade_cabinet,::debug_wait_for_player_activation);
+	scripts\cp\zombies\zombie_quest::register_quest_step("ghost",0,::blank,::pop_all_balloons_in_beginning_area,::complete_pop_all_balloons_in_beginning_area,::debug_pop_all_balloons_in_beginning_area);
+	scripts\cp\zombies\zombie_quest::register_quest_step("ghost",1,::blank,::spell_the_word_ghost,::complete_spell_the_word_ghost,::debug_spell_the_word_ghost);
+	scripts\cp\zombies\zombie_quest::register_quest_step("ghost",2,::blank,::get_1_9_8_4_kills_on_dance_floor,::complete_get_1_9_8_4_kills_on_dance_floor,::debug_get_1_9_8_4_kills_on_dance_floor);
+	scripts\cp\zombies\zombie_quest::register_quest_step("ghost",3,::blank,::play_arcade_games_and_make_critical_shot,::complete_play_arcade_games_and_make_critical_shot,::debug_play_arcade_games_and_make_critical_shot);
+	scripts\cp\zombies\zombie_quest::register_quest_step("ghost",4,::blank,::hit_the_floating_skull_with_spaceland_laser,::complete_hit_the_floating_skull_with_spaceland_laser,::debug_hit_the_floating_skull_with_spaceland_laser);
+	scripts\cp\zombies\zombie_quest::register_quest_step("ghost",5,::blank,::brute_hit_arcade_cabinet_with_laser,::complete_brute_hit_arcade_cabinet_with_laser,::debug_brute_hit_arcade_cabinet_with_laser);
+	scripts\cp\zombies\zombie_quest::register_quest_step("ghost",6,::blank,::wait_for_player_activation,::complete_clean_arcade_cabinet,::debug_wait_for_player_activation);
 }
 
 blank() {}
@@ -240,7 +240,7 @@ get_dance_floor_tile_color(param_00) {
 	foreach(var_03 in var_01) {
 		var_04 = getentarray("astrocade_" + var_03 + "_tile","targetname");
 		foreach(var_06 in var_04) {
-			if(function_010F(param_00,var_06)) {
+			if(ispointinvolume(param_00,var_06)) {
 				return var_03;
 			}
 		}
@@ -819,10 +819,10 @@ get_arcade_interaction_next_to_ghost_n_skull() {
 }
 
 reactive_ghost_n_skull_cabinet() {
-	if(!scripts/cp/zombies/zombie_quest::quest_line_exist("reactivateghost")) {
-		scripts/cp/zombies/zombie_quest::register_quest_step("reactivateghost",0,::scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::reactivate_cabinet,::brute_hit_arcade_cabinet_with_laser,::complete_brute_hit_arcade_cabinet_with_laser,::debug_brute_hit_arcade_cabinet_with_laser);
-		scripts/cp/zombies/zombie_quest::register_quest_step("reactivateghost",1,::blank,::wait_for_player_activation,::complete_clean_arcade_cabinet,::debug_wait_for_player_activation);
+	if(!scripts\cp\zombies\zombie_quest::quest_line_exist("reactivateghost")) {
+		scripts\cp\zombies\zombie_quest::register_quest_step("reactivateghost",0,::scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave::reactivate_cabinet,::brute_hit_arcade_cabinet_with_laser,::complete_brute_hit_arcade_cabinet_with_laser,::debug_brute_hit_arcade_cabinet_with_laser);
+		scripts\cp\zombies\zombie_quest::register_quest_step("reactivateghost",1,::blank,::wait_for_player_activation,::complete_clean_arcade_cabinet,::debug_wait_for_player_activation);
 	}
 
-	level thread scripts/cp/zombies/zombie_quest::start_quest_line("reactivateghost");
+	level thread scripts\cp\zombies\zombie_quest::start_quest_line("reactivateghost");
 }

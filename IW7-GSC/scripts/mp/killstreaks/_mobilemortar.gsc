@@ -1,15 +1,15 @@
-/************************************************************
+/****************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\killstreaks\_mobilemortar.gsc
-************************************************************/
+ * Script: scripts\mp\killstreaks\_mobilemortar.gsc
+****************************************************/
 
 init() {
-	level.var_114DD = loadfx("vfx/props/barrelexp.vfx");
-	level.var_114DC = loadfx("vfx/core/expl/large_vehicle_explosion.vfx");
-	level.var_114DE = loadfx("vfx/core/muzflash/ac130_105mm");
-	level.var_114DA = loadfx("vfx/core/smktrail/ground_smoke_launch_a");
-	level.var_114DB = loadfx("vfx/core/smktrail/ground_smoke_launch_a");
+	level.var_114DD = loadfx("vfx\props\barrelexp.vfx");
+	level.var_114DC = loadfx("vfx\core\expl\large_vehicle_explosion.vfx");
+	level.var_114DE = loadfx("vfx\core\muzflash\ac130_105mm");
+	level.var_114DA = loadfx("vfx\core\smktrail\ground_smoke_launch_a");
+	level.var_114DB = loadfx("vfx\core\smktrail\ground_smoke_launch_a");
 	level.var_8638 = [];
 	level.var_8638["mp_alpha"][0]["origin"] = (-2748.91,2921.33,125.394);
 	level.var_8638["mp_alpha"][0]["angles"] = (0,16,0);
@@ -98,7 +98,7 @@ func_128EF(param_00,param_01) {
 		return 0;
 	}
 
-	if(isdefined(self.setlasermaterial) && !scripts\mp\_utility::_hasperk("specialty_finalstand")) {
+	if(isdefined(self.setlasermaterial) && !scripts\mp\utility::_hasperk("specialty_finalstand")) {
 		self iprintlnbold(&"KILLSTREAKS_UNAVAILABLE_IN_LASTSTAND");
 		return 0;
 	}
@@ -106,7 +106,7 @@ func_128EF(param_00,param_01) {
 		self iprintlnbold(&"KILLSTREAKS_GROUND_APPROACHES_TOO_CROWDED");
 		return 0;
 	}
-	else if(scripts\mp\_utility::isusingremote()) {
+	else if(scripts\mp\utility::isusingremote()) {
 		return 0;
 	}
 
@@ -116,7 +116,7 @@ func_128EF(param_00,param_01) {
 	}
 	else
 	{
-		thread scripts\mp\_utility::stoplocationselection(0);
+		thread scripts\mp\utility::stoplocationselection(0);
 	}
 
 	var_03 = func_49F1(self,var_02);
@@ -132,7 +132,7 @@ func_F1C4() {
 	var_00 = undefined;
 	for(;;) {
 		thread func_1012E();
-		scripts\mp\_utility::_beginlocationselection("mobile_mortar","map_artillery_selector",0,500);
+		scripts\mp\utility::_beginlocationselection("mobile_mortar","map_artillery_selector",0,500);
 		self endon("stop_location_selection");
 		self waittill("confirm_location",var_01);
 		for(var_02 = 0;var_02 < 3;var_02++) {
@@ -177,8 +177,8 @@ func_F1C4() {
 }
 
 func_1012E() {
-	var_00 = scripts\mp\_hud_util::createfontstring("bigfixed",0.5);
-	var_00 scripts\mp\_hud_util::setpoint("CENTER","CENTER",0,-150);
+	var_00 = scripts\mp\hud_util::createfontstring("bigfixed",0.5);
+	var_00 scripts\mp\hud_util::setpoint("CENTER","CENTER",0,-150);
 	var_00 settext(&"KILLSTREAKS_SELECT_MOBILE_MORTAR_LOCATION");
 	self.locationobjectives = [];
 	for(var_01 = 0;var_01 < 3;var_01++) {
@@ -193,7 +193,7 @@ func_1012E() {
 	}
 
 	scripts\engine\utility::waittill_any_3("cancel_location","picked_location","stop_location_selection");
-	var_00 scripts\mp\_hud_util::destroyelem();
+	var_00 scripts\mp\hud_util::destroyelem();
 	for(var_01 = 0;var_01 < 3;var_01++) {
 		scripts\mp\objidpoolmanager::returnminimapid(self.locationobjectives[var_01]);
 	}
@@ -320,7 +320,7 @@ func_6CC6() {
 			continue;
 		}
 
-		if(var_02 scripts\mp\_utility::_hasperk("specialty_blindeye")) {
+		if(var_02 scripts\mp\utility::_hasperk("specialty_blindeye")) {
 			continue;
 		}
 
@@ -448,7 +448,7 @@ func_BB64() {
 firemortar(param_00,param_01,param_02) {
 	level endon("game_ended");
 	var_03 = param_00.triggerportableradarping;
-	var_04 = scripts\mp\_utility::_magicbullet("javelin_mp",param_00.origin + (0,0,150),param_01,var_03);
+	var_04 = scripts\mp\utility::_magicbullet("javelin_mp",param_00.origin + (0,0,150),param_01,var_03);
 	var_05 = scripts\mp\objidpoolmanager::requestminimapid(1);
 	if(var_05 != -1) {
 		scripts\mp\objidpoolmanager::minimap_objective_add(var_05,"invisible",(0,0,0));
@@ -487,11 +487,11 @@ firemortar(param_00,param_01,param_02) {
 	}
 
 	if(isdefined(var_03)) {
-		var_08 = scripts\mp\_utility::_magicbullet("javelin_mp",param_01 + (0,0,200),param_02,var_03);
+		var_08 = scripts\mp\utility::_magicbullet("javelin_mp",param_01 + (0,0,200),param_02,var_03);
 	}
 	else
 	{
-		var_08 = scripts\mp\_utility::_magicbullet("javelin_mp",param_02 + (0,0,200),var_03);
+		var_08 = scripts\mp\utility::_magicbullet("javelin_mp",param_02 + (0,0,200),var_03);
 	}
 
 	var_08.objidfriendly = var_05;
@@ -527,7 +527,7 @@ func_BB98() {
 watchtimeout() {
 	level endon("game_ended");
 	self endon("death");
-	scripts\mp\_hostmigration::waitlongdurationwithhostmigrationpause(90);
+	scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(90);
 	self setcandamage(0);
 	thread func_BD1E("exit");
 }

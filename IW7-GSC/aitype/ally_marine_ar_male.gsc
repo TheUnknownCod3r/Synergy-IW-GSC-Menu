@@ -1,7 +1,7 @@
-/**************************************************
+/******************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\aitype\ally_marine_ar_male.gsc
-**************************************************/
+ * Script: aitype\ally_marine_ar_male.gsc
+******************************************/
 
 main() {
   self.func_17DB = "";

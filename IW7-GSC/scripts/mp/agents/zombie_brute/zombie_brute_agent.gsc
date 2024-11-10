@@ -1,11 +1,11 @@
-/*************************************************************************
+/*****************************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\agents\zombie_brute\zombie_brute_agent.gsc
-*************************************************************************/
+ * Script: scripts\mp\agents\zombie_brute\zombie_brute_agent.gsc
+*****************************************************************/
 
 registerscriptedagent() {
-	scripts/aitypes/bt_util::init();
+	scripts\aitypes\bt_util::init();
 	lib_03B3::func_DEE8();
 	lib_0F45::func_2371();
 	func_AEB0();
@@ -90,7 +90,7 @@ setupagent() {
 	self.dismember_crawl = 0;
 	self.var_B0FC = 1;
 	self.full_gib = 0;
-	scripts/mp/agents/zombie/zombie_util::func_F794(self.var_B62E);
+	scripts\mp\agents\zombie\zombie_util::func_F794(self.var_B62E);
 	self.meleeradiuswhentargetnotonnavmesh = 100;
 	self.croc_chomp = 0;
 	self.spawn_round_num = level.wave_num;
@@ -120,8 +120,8 @@ setupagent() {
 
 func_89C9() {
 	scripts\engine\utility::waitframe();
-	scripts/asm/asm_bb::bb_requestmovetype("run");
-	level thread scripts/cp/zombies/zombies_vo::play_zombie_vo(self,"run_grunt",1);
+	scripts\asm\asm_bb::bb_requestmovetype("run");
+	level thread scripts\cp\zombies\zombies_vo::play_zombie_vo(self,"run_grunt",1);
 }
 
 func_899C() {
@@ -131,8 +131,8 @@ func_899C() {
 	foreach(var_04, var_01 in self.var_164D) {
 		var_02 = var_01.var_4BC0;
 		var_03 = level.asm[var_04].states[var_02];
-		scripts/asm/asm::func_2388(var_04,var_02,var_03,var_03.var_116FB);
-		scripts/asm/asm::func_238A(var_04,"idle",0.2,undefined,undefined,undefined);
+		scripts\asm\asm::func_2388(var_04,var_02,var_03,var_03.var_116FB);
+		scripts\asm\asm::func_238A(var_04,"idle",0.2,undefined,undefined,undefined);
 	}
 }
 
@@ -157,7 +157,7 @@ func_50EF() {
 }
 
 func_AEB0() {
-	level._effect["laser_muzzle_flash"] = loadfx("vfx/iw7/core/zombie/vfx_zmb_brute_lensf.vfx");
+	level._effect["laser_muzzle_flash"] = loadfx("vfx\iw7\core\zombie\vfx_zmb_brute_lensf.vfx");
 }
 
 func_3110(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08,param_09,param_0A,param_0B) {
@@ -229,14 +229,14 @@ func_BCBC() {
 	self.helmetlocation = "hand";
 	self setscriptablepartstate("eyes","yellow_eyes");
 	self.moveratescale = 1;
-	scripts/asm/asm_bb::bb_requestmovetype("sprint");
+	scripts\asm\asm_bb::bb_requestmovetype("sprint");
 }
 
 func_BCBD() {
 	self setscriptablepartstate("eyes","eye_glow_off");
 	self.helmetlocation = "head";
 	self.moveratescale = 1;
-	scripts/asm/asm_bb::bb_requestmovetype("run");
+	scripts\asm\asm_bb::bb_requestmovetype("run");
 }
 
 func_DB25(param_00) {
@@ -361,7 +361,7 @@ func_C4D1(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_0
 	var_0A = 400;
 	foreach(var_0C in level.players) {
 		var_0C scripts\cp\cp_persistence::give_player_currency(var_0A);
-		var_0C scripts/cp/zombies/achievement::update_achievement("THE_BIGGER_THEY_ARE",1);
+		var_0C scripts\cp\zombies\achievement::update_achievement("THE_BIGGER_THEY_ARE",1);
 	}
 }
 
@@ -530,13 +530,13 @@ func_3116() {
 		}
 		else
 		{
-			var_06 = scripts/cp/zombies/func_0D60::allowedstances(var_01);
+			var_06 = scripts\cp\zombies\func_0D60::allowedstances(var_01);
 			if(var_06 == 0) {
 				var_07 = 0;
 				var_02 = var_01.var_186E;
 				if(isdefined(var_02)) {
 					foreach(var_04 in var_02) {
-						var_06 = scripts/cp/zombies/func_0D60::allowedstances(var_04);
+						var_06 = scripts\cp\zombies\func_0D60::allowedstances(var_04);
 						if(var_06 > 0) {
 							var_07 = 1;
 							break;

@@ -1,13 +1,13 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\3036.gsc
+ * Script: 3036.gsc
 ***************************************/
 
 func_A2A8(var_00, var_01, var_02, var_03) {
   func_490C(var_00, var_01);
   var_04 = scripts\engine\utility::ter_op(isdefined(var_03), "tag_pip_copilot", "tag_pip");
   thread func_19CF(var_04);
-  scripts/sp/pip_util::func_CBB5(self, var_04, 42);
+  scripts\sp\pip_util::func_CBB5(self, var_04, 42);
   level.func_CB9C.clipdistance = 2500;
   thread func_A2AA();
   setomnvar("ui_pip_message_text_bottom", "script_empty_string");
@@ -16,7 +16,7 @@ func_A2A8(var_00, var_01, var_02, var_03) {
 
   if (isdefined(var_02)) {
   wait 0.65;
-  var_00 scripts/sp/utility::func_10347(var_02);
+  var_00 scripts\sp\utility::func_10347(var_02);
   }
 }
 
@@ -61,7 +61,7 @@ func_A31E(var_00) {
 }
 
 func_A2A9(var_00) {
-  scripts/sp/pip_util::func_CBA3();
+  scripts\sp\pip_util::func_CBA3();
 
   if (isdefined(self) && isdefined(self.func_CB89) && !isdefined(var_00))
   self.func_CB89 delete();
@@ -94,10 +94,10 @@ func_D8FE(var_00) {
 }
 
 func_19CF(var_00) {
-  scripts/sp/utility::func_75C4("cockpit_pip_light", var_00);
-  level scripts/sp/utility::func_178D(scripts/sp/utility::func_137AA, "pip_closed");
-  scripts/sp/utility::func_178D(scripts/sp/utility::func_137AA, "death");
-  scripts/sp/utility::func_57D6();
+  scripts\sp\utility::func_75C4("cockpit_pip_light", var_00);
+  level scripts\sp\utility::func_178D(scripts\sp\utility::func_137AA, "pip_closed");
+  scripts\sp\utility::func_178D(scripts\sp\utility::func_137AA, "death");
+  scripts\sp\utility::func_57D6();
   stopfxontag(level._effect["cockpit_pip_light"], self, var_00);
 }
 
@@ -127,7 +127,7 @@ func_B156(var_00, var_01, var_02, var_03) {
   level.func_1656 = [];
 
   for (var_05 = 0; var_05 < var_00; var_5++) {
-  thread scripts/sp/utility::play_sound_on_entity("jackal_missile_launch_space_npc");
+  thread scripts\sp\utility::play_sound_on_entity("jackal_missile_launch_space_npc");
   var_06 = anglestoforward(self gettagangles(var_04)) * 250;
   var_07 = self gettagorigin(var_04) + (var_06 - (0, 0, 90));
   var_08 = var_07 + anglestoforward(self.angles) * 10000;
@@ -159,8 +159,8 @@ func_B156(var_00, var_01, var_02, var_03) {
 func_B158(var_00, var_01) {
   self endon("entitydeleted");
   var_02 = distance(self.origin, var_0.origin);
-  var_03 = scripts/sp/math::func_C097(5000, 12000, var_02);
-  var_04 = scripts/sp/math::func_6A8E(0, 0.5, var_03);
+  var_03 = scripts\sp\math::func_C097(5000, 12000, var_02);
+  var_04 = scripts\sp\math::func_6A8E(0, 0.5, var_03);
 
   if (isdefined(var_01) && var_01) {}
   else
@@ -220,7 +220,7 @@ func_C3DB(var_00, var_01, var_02) {
   continue;
   }
 
-  if (scripts/sp/utility::hastag(self.model, var_06)) {
+  if (scripts\sp\utility::hastag(self.model, var_06)) {
   var_09 = self gettagorigin(var_06) + anglestoforward(self.angles) * 240;
   var_10 = func_7D3F(var_8.origin, var_01, var_02);
   magicbullet(var_03, var_09, var_10, undefined, self);
@@ -315,7 +315,7 @@ func_B155(var_00, var_01, var_02, var_03) {
   var_12 = var_11 + anglestoforward(self.angles) * 10000;
 
   if (isdefined(var_01)) {
-  if (isdefined(var_1.model) && scripts/sp/utility::hastag(var_1.model, "tag_eye"))
+  if (isdefined(var_1.model) && scripts\sp\utility::hastag(var_1.model, "tag_eye"))
   var_12 = var_01 gettagorigin("tag_eye");
   else
   var_12 = var_1.origin;
@@ -640,11 +640,11 @@ func_A19F() {
   var_00 = self.script_team + "_winglight";
   var_01 = self.script_team + "_taillight";
   var_02 = self.script_team + "_bellylight";
-  scripts/sp/utility::func_75C4(var_00, "tag_wing_front_left", 0, "dont_start_winglights");
-  scripts/sp/utility::func_75C4(var_00, "tag_wing_front_right", 0, "dont_start_winglights");
-  scripts/sp/utility::func_75C4(var_01, "tag_wing_rear_left", 0, "dont_start_winglights");
-  scripts/sp/utility::func_75C4(var_01, "tag_wing_rear_right", 0, "dont_start_winglights");
-  scripts/sp/utility::func_75C4(var_02, "tag_bottom_light", 0, "dont_start_winglights");
+  scripts\sp\utility::func_75C4(var_00, "tag_wing_front_left", 0, "dont_start_winglights");
+  scripts\sp\utility::func_75C4(var_00, "tag_wing_front_right", 0, "dont_start_winglights");
+  scripts\sp\utility::func_75C4(var_01, "tag_wing_rear_left", 0, "dont_start_winglights");
+  scripts\sp\utility::func_75C4(var_01, "tag_wing_rear_right", 0, "dont_start_winglights");
+  scripts\sp\utility::func_75C4(var_02, "tag_bottom_light", 0, "dont_start_winglights");
   self.fx.func_13D7E = 1;
 }
 
@@ -658,11 +658,11 @@ func_A167() {
   var_00 = self.script_team + "_winglight";
   var_01 = self.script_team + "_taillight";
   var_02 = self.script_team + "_bellylight";
-  scripts/sp/utility::func_75F8(var_00, "tag_wing_front_left", 0, "dont_stop_winglights");
-  scripts/sp/utility::func_75F8(var_00, "tag_wing_front_right", 0, "dont_stop_winglights");
-  scripts/sp/utility::func_75F8(var_01, "tag_wing_rear_left", 0, "dont_stop_winglights");
-  scripts/sp/utility::func_75F8(var_01, "tag_wing_rear_right", 0, "dont_stop_winglights");
-  scripts/sp/utility::func_75F8(var_02, "tag_bottom_light", 0, "dont_stop_winglights");
+  scripts\sp\utility::func_75F8(var_00, "tag_wing_front_left", 0, "dont_stop_winglights");
+  scripts\sp\utility::func_75F8(var_00, "tag_wing_front_right", 0, "dont_stop_winglights");
+  scripts\sp\utility::func_75F8(var_01, "tag_wing_rear_left", 0, "dont_stop_winglights");
+  scripts\sp\utility::func_75F8(var_01, "tag_wing_rear_right", 0, "dont_stop_winglights");
+  scripts\sp\utility::func_75F8(var_02, "tag_bottom_light", 0, "dont_stop_winglights");
   self.fx.func_13D7E = 0;
 }
 
@@ -679,7 +679,7 @@ func_77D8() {
 }
 
 func_19A4(var_00) {
-  self._blackboard.func_90F3 = var_00;
+  self.var_1198.func_90F3 = var_00;
 }
 
 func_19B8(var_00) {
@@ -700,15 +700,15 @@ func_19AA(var_00) {
 }
 
 func_19A8(var_00) {
-  self._blackboard.func_D9BA = var_00;
+  self.var_1198.func_D9BA = var_00;
 }
 
 func_19A6(var_00) {
   if (isdefined(var_00) && var_00) {
   func_19B0("fly");
-  self._blackboard.func_AAB2 = var_00;
+  self.var_1198.func_AAB2 = var_00;
   } else {
-  self._blackboard.func_AAB2 = 0;
+  self.var_1198.func_AAB2 = 0;
   func_19B0("none");
   }
 }
@@ -721,18 +721,18 @@ func_198F(var_00) {
 }
 
 func_1983() {
-  if (!isdefined(self._blackboard))
+  if (!isdefined(self.var_1198))
   return;
 
-  if (isdefined(self._blackboard.func_A421)) {
-  self._blackboard.func_A421 func_1983();
+  if (isdefined(self.var_1198.func_A421)) {
+  self.var_1198.func_A421 func_1983();
   return;
   }
 
   if (isdefined(self.func_A420)) {
   foreach (var_01 in self.func_A420) {
   if (isalive(var_01)) {
-  var_1._blackboard.func_A421 = undefined;
+  var_1.var_1198.func_A421 = undefined;
   var_01 func_19B7();
   }
   }
@@ -742,10 +742,10 @@ func_1983() {
 }
 
 func_199F() {
-  if (isdefined(self._blackboard.func_A421))
-  self._blackboard.func_A421.func_A420 = scripts\engine\utility::array_remove(self._blackboard.func_A421.func_A420, self);
+  if (isdefined(self.var_1198.func_A421))
+  self.var_1198.func_A421.func_A420 = scripts\engine\utility::array_remove(self.var_1198.func_A421.func_A420, self);
 
-  self._blackboard.func_A421 = undefined;
+  self.var_1198.func_A421 = undefined;
   func_19B7();
 }
 
@@ -792,7 +792,7 @@ func_1991(var_00) {
 }
 
 func_199E(var_00, var_01) {
-  self._blackboard.func_A421 = var_00;
+  self.var_1198.func_A421 = var_00;
   var_00 func_A253(self);
 
   if (!isdefined(var_01)) {
@@ -804,11 +804,11 @@ func_199E(var_00, var_01) {
 }
 
 func_19B3(var_00, var_01) {
-  self._blackboard.func_10A4D[var_00] = var_01;
+  self.var_1198.func_10A4D[var_00] = var_01;
 }
 
 func_19B4(var_00) {
-  self._blackboard.func_10A4B = var_00;
+  self.var_1198.func_10A4B = var_00;
 }
 
 func_A202(var_00) {
@@ -831,11 +831,11 @@ func_A288(var_00) {
 }
 
 func_A0B3(var_00) {
-  self._blackboard.func_2520 = var_00;
+  self.var_1198.func_2520 = var_00;
 }
 
 func_A342(var_00, var_01, var_02) {
-  if (isdefined(self._blackboard))
+  if (isdefined(self.var_1198))
   func_1981();
 
   if (!isdefined(var_00)) {}
@@ -1128,17 +1128,17 @@ func_A16F() {
   var_5.func_A493 = var_5.origin;
 
   var_11 = distance(var_5.func_A493, level.func_D127.origin);
-  var_12 = scripts/sp/math::func_C097(var_5.func_A492, var_5.func_A490, var_11);
-  var_13 = scripts/sp/math::func_6A8E(var_5.func_A494, 1, var_12);
+  var_12 = scripts\sp\math::func_C097(var_5.func_A492, var_5.func_A490, var_11);
+  var_13 = scripts\sp\math::func_6A8E(var_5.func_A494, 1, var_12);
 
   if (isdefined(var_5.func_A491)) {
   var_14 = vectordot(vectornormalize(var_5.func_A493 - var_03), var_02);
-  var_12 = scripts/sp/math::func_C097(-0.5, 0.2, var_14);
-  var_13 = scripts/sp/math::func_6A8E(1, var_13, var_12);
+  var_12 = scripts\sp\math::func_C097(-0.5, 0.2, var_14);
+  var_13 = scripts\sp\math::func_6A8E(1, var_13, var_12);
   }
 
   if (isdefined(var_5.func_A494))
-  var_15 = scripts/sp/math::func_6A8E(var_5.func_A48F, 1, var_12);
+  var_15 = scripts\sp\math::func_6A8E(var_5.func_A48F, 1, var_12);
 
   if (var_13 < var_00)
   var_00 = var_13;
@@ -1171,7 +1171,7 @@ func_A2DF() {
 }
 
 func_A2E0() {
-  if (!scripts/sp/utility::func_B324())
+  if (!scripts\sp\utility::func_B324())
   return;
 
   level.func_A056.func_E1A6 = scripts\engine\utility::array_removeundefined(level.func_A056.func_E1A6);
@@ -1197,18 +1197,18 @@ func_A2E0() {
   var_01 = level.func_D127.spaceship_vel;
   var_02 = self.func_A493 - level.func_D127.origin;
   var_03 = length(var_02);
-  var_04 = scripts/sp/math::func_C097(-200, 750, var_03);
-  var_05 = scripts/sp/math::func_6A8E(self.origin, self.func_A493, var_04);
+  var_04 = scripts\sp\math::func_C097(-200, 750, var_03);
+  var_05 = scripts\sp\math::func_6A8E(self.origin, self.func_A493, var_04);
   var_06 = var_05 - level.func_D127.origin;
   var_07 = vectornormalize(var_06);
   var_08 = vectordot(var_01, var_07);
   var_08 = max(0, var_08);
   var_03 = length(var_02);
-  var_04 = scripts/sp/math::func_C097(2000, 8000, var_03);
-  var_09 = scripts/sp/math::func_6A8E(-0.5 * var_08, 0, var_04);
-  var_10 = scripts/sp/math::func_6A8E(var_08, 0, var_04);
+  var_04 = scripts\sp\math::func_C097(2000, 8000, var_03);
+  var_09 = scripts\sp\math::func_6A8E(-0.5 * var_08, 0, var_04);
+  var_10 = scripts\sp\math::func_6A8E(var_08, 0, var_04);
   var_11 = var_09 * var_07;
-  var_12 = 1 - scripts/sp/math::func_C097(20, 100, var_10);
+  var_12 = 1 - scripts\sp\math::func_C097(20, 100, var_10);
   func_A301(var_12, 0, var_00);
   func_A2FC(var_12, 0, var_00);
   func_A078(var_11, 0, var_00);
@@ -1268,7 +1268,7 @@ func_A16C(var_00) {
 
   if (isdefined(var_00)) {
   for (var_01 = var_00; var_01 > 0; var_01 = var_01 - 0.05) {
-  self.func_A495 = scripts/sp/math::func_C097(0, var_00, var_01);
+  self.func_A495 = scripts\sp\math::func_C097(0, var_00, var_01);
   wait 0.05;
   }
   }
@@ -1325,10 +1325,10 @@ func_A160(var_00, var_01) {
   var_01 = 0.0;
 
   if (var_00) {
-  level.player scripts/sp/utility::func_65E1("disable_jackal_quickturn");
+  level.player scripts\sp\utility::func_65E1("disable_jackal_quickturn");
   var_02 = 0;
   } else {
-  level.player scripts/sp/utility::func_65DD("disable_jackal_quickturn");
+  level.player scripts\sp\utility::func_65DD("disable_jackal_quickturn");
   var_02 = 1;
   }
 
@@ -1403,7 +1403,7 @@ func_12DCE(var_00) {
 }
 
 func_A07D() {
-  if (!scripts/sp/utility::func_B324())
+  if (!scripts\sp\utility::func_B324())
   return;
 
   if (isdefined(self.func_4F5E))
@@ -1435,7 +1435,7 @@ func_A077(var_00) {
   var_03 = "livery_" + var_1[var_02 - 1] + "_" + var_1[var_02] + "_tr";
 
   if (!scripts\engine\utility::flag(var_03 + "_loaded"))
-  scripts/sp/utility::func_12641(var_03);
+  scripts\sp\utility::func_12641(var_03);
 
   self.func_4F5E = spawn("script_model", self.origin);
   self.func_4F5E setmodel(var_00);
@@ -1522,13 +1522,13 @@ func_A149(var_00) {
 
   if (var_00) {
   var_00 = 0;
-  level.player scripts/sp/utility::func_65E1("disable_jackal_ads");
+  level.player scripts\sp\utility::func_65E1("disable_jackal_ads");
   level.player _meth_8490("disable_lockon", 1);
   } else {
   var_00 = 1;
-  level.player scripts/sp/utility::func_65DD("disable_jackal_ads");
+  level.player scripts\sp\utility::func_65DD("disable_jackal_ads");
 
-  if (!level.player scripts/sp/utility::func_65DB("disable_jackal_lockon"))
+  if (!level.player scripts\sp\utility::func_65DB("disable_jackal_lockon"))
   level.player _meth_8490("disable_lockon", 0);
   }
 
@@ -1559,9 +1559,9 @@ func_A162(var_00) {
   var_00 = 1;
 
   if (var_00)
-  level.player scripts/sp/utility::func_65E1("disable_jackal_targetAid");
+  level.player scripts\sp\utility::func_65E1("disable_jackal_targetAid");
   else
-  level.player scripts/sp/utility::func_65DD("disable_jackal_targetAid");
+  level.player scripts\sp\utility::func_65DD("disable_jackal_targetAid");
 }
 
 func_A35D(var_00, var_01) {
@@ -1588,9 +1588,9 @@ func_A163(var_00) {
   var_00 = 1;
 
   if (var_00)
-  level.player scripts/sp/utility::func_65E1("disable_jackal_targetAid_update");
+  level.player scripts\sp\utility::func_65E1("disable_jackal_targetAid_update");
   else
-  level.player scripts/sp/utility::func_65DD("disable_jackal_targetAid_update");
+  level.player scripts\sp\utility::func_65DD("disable_jackal_targetAid_update");
 }
 
 jackal_disable_damage_vision_distortion(var_00) {
@@ -1598,9 +1598,9 @@ jackal_disable_damage_vision_distortion(var_00) {
   var_00 = 1;
 
   if (var_00)
-  level.player scripts/sp/utility::func_65E1("disable_jackal_damage_vision_distortion");
+  level.player scripts\sp\utility::func_65E1("disable_jackal_damage_vision_distortion");
   else
-  level.player scripts/sp/utility::func_65DD("disable_jackal_damage_vision_distortion");
+  level.player scripts\sp\utility::func_65DD("disable_jackal_damage_vision_distortion");
 }
 
 jackal_engine_throttle_sfx_volume(var_00, var_01) {
@@ -1623,8 +1623,8 @@ jackal_engine_throttle_sfx_volume_internal(var_00, var_01) {
   var_02 = self.engine_master_volume;
 
   for (var_03 = var_01; var_03 > 0; var_03 = var_03 - 0.05) {
-  var_04 = scripts/sp/math::func_C097(0, var_01, var_03);
-  self.engine_master_volume = scripts/sp/math::func_6A8E(var_00, var_02, var_04);
+  var_04 = scripts\sp\math::func_C097(0, var_01, var_03);
+  self.engine_master_volume = scripts\sp\math::func_6A8E(var_00, var_02, var_04);
   wait 0.05;
   }
 
@@ -1643,9 +1643,9 @@ func_A15C(var_00) {
   var_00 = 1;
 
   if (var_00)
-  level.player scripts/sp/utility::func_65E1("disable_jackal_mode_switch");
+  level.player scripts\sp\utility::func_65E1("disable_jackal_mode_switch");
   else
-  level.player scripts/sp/utility::func_65DD("disable_jackal_mode_switch");
+  level.player scripts\sp\utility::func_65DD("disable_jackal_mode_switch");
 }
 
 func_A154(var_00) {
@@ -1653,9 +1653,9 @@ func_A154(var_00) {
   var_00 = 1;
 
   if (var_00)
-  level.player scripts/sp/utility::func_65E1("disable_jackal_cockpit_VO");
+  level.player scripts\sp\utility::func_65E1("disable_jackal_cockpit_VO");
   else
-  level.player scripts/sp/utility::func_65DD("disable_jackal_cockpit_VO");
+  level.player scripts\sp\utility::func_65DD("disable_jackal_cockpit_VO");
 }
 
 func_A15B(var_00) {
@@ -1663,9 +1663,9 @@ func_A15B(var_00) {
   var_00 = 1;
 
   if (var_00)
-  level.player scripts/sp/utility::func_65E1("disable_jackal_missiles");
+  level.player scripts\sp\utility::func_65E1("disable_jackal_missiles");
   else
-  level.player scripts/sp/utility::func_65DD("disable_jackal_missiles");
+  level.player scripts\sp\utility::func_65DD("disable_jackal_missiles");
 }
 
 func_A14F(var_00) {
@@ -1673,9 +1673,9 @@ func_A14F(var_00) {
   var_00 = 1;
 
   if (var_00)
-  level.player scripts/sp/utility::func_65E1("disable_jackal_emp");
+  level.player scripts\sp\utility::func_65E1("disable_jackal_emp");
   else
-  level.player scripts/sp/utility::func_65DD("disable_jackal_emp");
+  level.player scripts\sp\utility::func_65DD("disable_jackal_emp");
 }
 
 func_A158(var_00) {
@@ -1683,9 +1683,9 @@ func_A158(var_00) {
   var_00 = 1;
 
   if (var_00)
-  level.player scripts/sp/utility::func_65E1("disable_jackal_map_boundary_autoturn");
+  level.player scripts\sp\utility::func_65E1("disable_jackal_map_boundary_autoturn");
   else
-  level.player scripts/sp/utility::func_65DD("disable_jackal_map_boundary_autoturn");
+  level.player scripts\sp\utility::func_65DD("disable_jackal_map_boundary_autoturn");
 }
 
 func_A159(var_00) {
@@ -1693,9 +1693,9 @@ func_A159(var_00) {
   var_00 = 1;
 
   if (var_00)
-  level.player scripts/sp/utility::func_65E1("disable_jackal_map_boundary_push");
+  level.player scripts\sp\utility::func_65E1("disable_jackal_map_boundary_push");
   else
-  level.player scripts/sp/utility::func_65DD("disable_jackal_map_boundary_push");
+  level.player scripts\sp\utility::func_65DD("disable_jackal_map_boundary_push");
 }
 
 func_A15A(var_00) {
@@ -1703,9 +1703,9 @@ func_A15A(var_00) {
   var_00 = 1;
 
   if (var_00)
-  level.player scripts/sp/utility::func_65E1("disable_jackal_map_boundary_warning");
+  level.player scripts\sp\utility::func_65E1("disable_jackal_map_boundary_warning");
   else
-  level.player scripts/sp/utility::func_65DD("disable_jackal_map_boundary_warning");
+  level.player scripts\sp\utility::func_65DD("disable_jackal_map_boundary_warning");
 }
 
 func_A155(var_00) {
@@ -1713,9 +1713,9 @@ func_A155(var_00) {
   var_00 = 1;
 
   if (var_00)
-  level.player scripts/sp/utility::func_65E1("disable_jackal_juke");
+  level.player scripts\sp\utility::func_65E1("disable_jackal_juke");
   else
-  level.player scripts/sp/utility::func_65DD("disable_jackal_juke");
+  level.player scripts\sp\utility::func_65DD("disable_jackal_juke");
 
   level.player _meth_8490("disable_juke", var_00);
 }
@@ -1725,11 +1725,11 @@ func_A161(var_00) {
   var_00 = 1;
 
   if (var_00)
-  level.player scripts/sp/utility::func_65E1("disable_jackal_roll");
+  level.player scripts\sp\utility::func_65E1("disable_jackal_roll");
   else
-  level.player scripts/sp/utility::func_65DD("disable_jackal_roll");
+  level.player scripts\sp\utility::func_65DD("disable_jackal_roll");
 
-  if (scripts/sp/utility::func_D123())
+  if (scripts\sp\utility::func_D123())
   func_0BD9::func_F380();
 }
 
@@ -1738,9 +1738,9 @@ func_A15E(var_00) {
   var_00 = 1;
 
   if (var_00)
-  level.player scripts/sp/utility::func_65E1("disable_jackal_overheat");
+  level.player scripts\sp\utility::func_65E1("disable_jackal_overheat");
   else
-  level.player scripts/sp/utility::func_65DD("disable_jackal_overheat");
+  level.player scripts\sp\utility::func_65DD("disable_jackal_overheat");
 }
 
 func_A14E(var_00) {
@@ -1748,9 +1748,9 @@ func_A14E(var_00) {
   var_00 = 1;
 
   if (var_00)
-  level.player scripts/sp/utility::func_65E1("disable_jackal_dogfight");
+  level.player scripts\sp\utility::func_65E1("disable_jackal_dogfight");
   else
-  level.player scripts/sp/utility::func_65DD("disable_jackal_dogfight");
+  level.player scripts\sp\utility::func_65DD("disable_jackal_dogfight");
 }
 
 func_A151(var_00) {
@@ -1758,9 +1758,9 @@ func_A151(var_00) {
   var_00 = 1;
 
   if (var_00)
-  level.player scripts/sp/utility::func_65E1("disable_jackal_flares");
+  level.player scripts\sp\utility::func_65E1("disable_jackal_flares");
   else
-  level.player scripts/sp/utility::func_65DD("disable_jackal_flares");
+  level.player scripts\sp\utility::func_65DD("disable_jackal_flares");
 }
 
 func_A153(var_00, var_01) {
@@ -1770,12 +1770,12 @@ func_A153(var_00, var_01) {
   if (!isdefined(var_01))
   var_01 = 0;
 
-  if (var_00 && !level.player scripts/sp/utility::func_65DB("disable_jackal_guns")) {
-  level.player scripts/sp/utility::func_65E1("disable_jackal_guns");
+  if (var_00 && !level.player scripts\sp\utility::func_65DB("disable_jackal_guns")) {
+  level.player scripts\sp\utility::func_65E1("disable_jackal_guns");
   func_A152(var_01);
   }
-  else if (!var_00 && level.player scripts/sp/utility::func_65DB("disable_jackal_guns")) {
-  level.player scripts/sp/utility::func_65DD("disable_jackal_guns");
+  else if (!var_00 && level.player scripts\sp\utility::func_65DB("disable_jackal_guns")) {
+  level.player scripts\sp\utility::func_65DD("disable_jackal_guns");
   func_A19E(var_01);
   }
 }
@@ -1797,13 +1797,13 @@ func_A19E(var_00) {
 
   level.func_D127 func_0BD9::func_D17E();
 
-  if (!level.player scripts/sp/utility::func_65DB("disable_jackal_lockon"))
+  if (!level.player scripts\sp\utility::func_65DB("disable_jackal_lockon"))
   level.player _meth_8490("disable_lockon", 0);
 
   level.func_D127 _meth_849F(1);
   level.player allowads(1);
 
-  if (!level.player scripts/sp/utility::func_65DB("disable_jackal_overheat"))
+  if (!level.player scripts\sp\utility::func_65DB("disable_jackal_overheat"))
   setomnvar("ui_jackal_weapon_display_temp", 1);
 }
 
@@ -1812,9 +1812,9 @@ func_A166(var_00) {
   var_00 = 1;
 
   if (var_00)
-  level.player scripts/sp/utility::func_65E1("disable_jackal_weapon_switch");
+  level.player scripts\sp\utility::func_65E1("disable_jackal_weapon_switch");
   else
-  level.player scripts/sp/utility::func_65DD("disable_jackal_weapon_switch");
+  level.player scripts\sp\utility::func_65DD("disable_jackal_weapon_switch");
 }
 
 setentityowner(var_00) {
@@ -1861,9 +1861,9 @@ func_A15F(var_00) {
   var_00 = 1;
 
   if (var_00)
-  level.player scripts/sp/utility::func_65E1("disable_jackal_pilot_assist");
+  level.player scripts\sp\utility::func_65E1("disable_jackal_pilot_assist");
   else
-  level.player scripts/sp/utility::func_65DD("disable_jackal_pilot_assist");
+  level.player scripts\sp\utility::func_65DD("disable_jackal_pilot_assist");
 
   level.player _meth_8490("disable_pilot_aim_assist", var_00);
   level.player _meth_8490("disable_pilot_move_assist", var_00);
@@ -1912,7 +1912,7 @@ func_A1AA(var_00, var_01, var_02, var_03, var_04) {
 }
 
 func_A1AD(var_00) {
-  level.func_A056.func_68B3.func_68B6 = scripts/sp/utility::func_22B2(level.func_A056.func_68B3.func_68B6, var_00);
+  level.func_A056.func_68B3.func_68B6 = scripts\sp\utility::func_22B2(level.func_A056.func_68B3.func_68B6, var_00);
 }
 
 func_A1AB(var_00, var_01) {
@@ -1953,10 +1953,10 @@ func_A1DD(var_00) {
   var_00 = 0;
 
   if (!isstring(var_00) && var_00 == 0) {
-  level.player scripts/sp/utility::func_65DD("jackal_force_mode");
+  level.player scripts\sp\utility::func_65DD("jackal_force_mode");
   level.func_D127.func_72A8 = undefined;
   } else {
-  level.player scripts/sp/utility::func_65E1("jackal_force_mode");
+  level.player scripts\sp\utility::func_65E1("jackal_force_mode");
   level.func_D127.func_72A8 = var_00;
   level.func_D127 _meth_8491(var_00);
   }
@@ -1982,7 +1982,7 @@ func_A164(var_00) {
 }
 
 func_A156(var_00) {
-  if (scripts/sp/utility::func_93A6())
+  if (scripts\sp\utility::func_93A6())
   return;
 
   if (!isdefined(var_00))
@@ -1991,14 +1991,14 @@ func_A156(var_00) {
   level.func_A056.targets = scripts\engine\utility::array_removeundefined(level.func_A056.targets);
 
   if (var_00) {
-  level.player scripts/sp/utility::func_65E1("disable_jackal_lockon");
+  level.player scripts\sp\utility::func_65E1("disable_jackal_lockon");
 
   foreach (var_02 in level.func_A056.targets)
   var_02 func_105D9();
 
   setomnvar("ui_jackal_callouts_enabled", 0);
   } else {
-  level.player scripts/sp/utility::func_65DD("disable_jackal_lockon");
+  level.player scripts\sp\utility::func_65DD("disable_jackal_lockon");
 
   foreach (var_02 in level.func_A056.targets) {
   if (var_2.func_AEDF.func_AEEA)
@@ -2078,8 +2078,8 @@ func_D29C(var_00, var_01) {
   var_03 = self.func_CFD9.func_B3D1;
 
   while (var_02 > 0) {
-  var_04 = scripts/sp/math::func_C097(0, var_01, var_02);
-  self.func_CFD9.func_B3D1 = scripts/sp/math::func_6A8E(var_00, var_03, var_04);
+  var_04 = scripts\sp\math::func_C097(0, var_01, var_02);
+  self.func_CFD9.func_B3D1 = scripts\sp\math::func_6A8E(var_00, var_03, var_04);
   var_02 = var_02 - 0.05;
   wait 0.05;
   }
@@ -2100,13 +2100,13 @@ func_D2A7() {
   var_03 = anglestoforward(self.angles);
   var_04 = anglestoright(self.angles);
   var_05 = anglestoup(self.angles);
-  var_06 = scripts/sp/math::func_AB6F(var_03, var_00, self.func_AB72);
-  var_07 = scripts/sp/math::func_AB6F(var_04, var_01, self.func_AB72);
-  var_08 = scripts/sp/math::func_AB6F(var_05, var_02, self.func_AB72);
+  var_06 = scripts\sp\math::func_AB6F(var_03, var_00, self.func_AB72);
+  var_07 = scripts\sp\math::func_AB6F(var_04, var_01, self.func_AB72);
+  var_08 = scripts\sp\math::func_AB6F(var_05, var_02, self.func_AB72);
   var_09 = distance(self.origin, self.func_1153B);
-  var_10 = scripts/sp/math::func_C097(0, self.func_AB78, var_09);
-  var_11 = scripts/sp/math::func_6A8E(self.func_AB82, self.func_AB8D, var_10);
-  self.origin = scripts/sp/math::func_AB6F(self.origin, self.func_1153B, var_11);
+  var_10 = scripts\sp\math::func_C097(0, self.func_AB78, var_09);
+  var_11 = scripts\sp\math::func_6A8E(self.func_AB82, self.func_AB8D, var_10);
+  self.origin = scripts\sp\math::func_AB6F(self.origin, self.func_1153B, var_11);
   self.angles = _axistoangles(var_06, var_07, var_08);
   self.func_CFD9 func_D2A2(var_06, var_07, var_08);
   self.func_BCDA unlink();
@@ -2215,7 +2215,7 @@ func_D29A(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08
   var_25 = self.func_AFF9;
 
   for (;;) {
-  var_26 = scripts/sp/math::func_C097(0, var_01, var_09);
+  var_26 = scripts\sp\math::func_C097(0, var_01, var_09);
 
   if (isdefined(var_11)) {
   self.func_11512 unlink();
@@ -2225,20 +2225,20 @@ func_D29A(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08
   var_30 = anglestoforward(var_0.angles);
   var_31 = anglestoright(var_0.angles);
   var_32 = anglestoup(var_0.angles);
-  var_33 = scripts/sp/math::func_6A8E(var_30, var_27, var_26);
-  var_34 = scripts/sp/math::func_6A8E(var_31, var_28, var_26);
-  var_35 = scripts/sp/math::func_6A8E(var_32, var_29, var_26);
-  self.func_11512.origin = scripts/sp/math::func_6A8E(var_0.origin, var_10.origin, var_26);
+  var_33 = scripts\sp\math::func_6A8E(var_30, var_27, var_26);
+  var_34 = scripts\sp\math::func_6A8E(var_31, var_28, var_26);
+  var_35 = scripts\sp\math::func_6A8E(var_32, var_29, var_26);
+  self.func_11512.origin = scripts\sp\math::func_6A8E(var_0.origin, var_10.origin, var_26);
   self.func_11512.angles = _axistoangles(var_33, var_34, var_35);
   }
 
-  self.func_11514 = scripts/sp/math::func_6A8E(var_12, var_19, var_26);
-  self.func_AB78 = scripts/sp/math::func_6A8E(var_13, var_20, var_26);
-  self.func_AB82 = scripts/sp/math::func_6A8E(var_14, var_21, var_26);
-  self.func_AB8D = scripts/sp/math::func_6A8E(var_15, var_22, var_26);
-  self.func_AB72 = scripts/sp/math::func_6A8E(var_16, var_23, var_26);
-  self.func_BC68 = scripts/sp/math::func_6A8E(var_17, var_24, var_26);
-  self.func_AFF9 = scripts/sp/math::func_6A8E(var_18, var_25, var_26);
+  self.func_11514 = scripts\sp\math::func_6A8E(var_12, var_19, var_26);
+  self.func_AB78 = scripts\sp\math::func_6A8E(var_13, var_20, var_26);
+  self.func_AB82 = scripts\sp\math::func_6A8E(var_14, var_21, var_26);
+  self.func_AB8D = scripts\sp\math::func_6A8E(var_15, var_22, var_26);
+  self.func_AB72 = scripts\sp\math::func_6A8E(var_16, var_23, var_26);
+  self.func_BC68 = scripts\sp\math::func_6A8E(var_17, var_24, var_26);
+  self.func_AFF9 = scripts\sp\math::func_6A8E(var_18, var_25, var_26);
 
   if (isdefined(var_11))
   self.func_11512 linkto(var_00);
@@ -2321,10 +2321,10 @@ func_D2A2(var_00, var_01, var_02) {
   self.func_11535 = self.func_11535 * var_09;
   self.func_11533 = self.func_11533 * var_09;
   var_17 = self.func_11535 * var_02 + self.func_11533 * var_01;
-  self.func_BC49 = scripts/sp/math::func_AB6F(self.func_BC49, var_17, var_05);
-  self.func_AFF8 = scripts/sp/math::func_AB6F(self.func_BC49, var_17, var_06);
+  self.func_BC49 = scripts\sp\math::func_AB6F(self.func_BC49, var_17, var_05);
+  self.func_AFF8 = scripts\sp\math::func_AB6F(self.func_BC49, var_17, var_06);
   var_18 = (self.func_AFF8[1] - self.func_BC49[1]) * var_08;
-  self.func_E67D = scripts/sp/math::func_AB6F(self.func_E67D, var_18, var_07);
+  self.func_E67D = scripts\sp\math::func_AB6F(self.func_E67D, var_18, var_07);
   self.func_E67D = self.func_E67D * var_10;
 }
 
@@ -2348,9 +2348,9 @@ func_430E() {
 func_430F() {
   self notify("cockpit_light_change");
   self endon("cockpit_light_change");
-  scripts/sp/utility::func_75F8("cockpit_light_side", "tag_cockpit_light_left");
+  scripts\sp\utility::func_75F8("cockpit_light_side", "tag_cockpit_light_left");
   wait 0.1;
-  scripts/sp/utility::func_75F8("cockpit_light_side", "tag_cockpit_light_right");
+  scripts\sp\utility::func_75F8("cockpit_light_side", "tag_cockpit_light_right");
 }
 
 func_A106() {
@@ -2396,16 +2396,16 @@ func_A108(var_00) {
 
   func_A109();
   self.func_430D = var_00;
-  scripts/sp/utility::func_75C4(self.func_430D + "_l", "tag_cockpit_light_monitor1", undefined, "player_exit_jackal");
-  scripts/sp/utility::func_75C4(self.func_430D + "_mid", "tag_cockpit_light_monitor2", undefined, "player_exit_jackal");
-  scripts/sp/utility::func_75C4(self.func_430D + "_r", "tag_cockpit_light_monitor3", undefined, "player_exit_jackal");
+  scripts\sp\utility::func_75C4(self.func_430D + "_l", "tag_cockpit_light_monitor1", undefined, "player_exit_jackal");
+  scripts\sp\utility::func_75C4(self.func_430D + "_mid", "tag_cockpit_light_monitor2", undefined, "player_exit_jackal");
+  scripts\sp\utility::func_75C4(self.func_430D + "_r", "tag_cockpit_light_monitor3", undefined, "player_exit_jackal");
 }
 
 func_A109() {
   if (isdefined(self.func_430D)) {
-  scripts/sp/utility::func_75A0(self.func_430D + "_l", "tag_cockpit_light_monitor1", undefined, "player_exit_jackal");
-  scripts/sp/utility::func_75A0(self.func_430D + "_mid", "tag_cockpit_light_monitor2", undefined, "player_exit_jackal");
-  scripts/sp/utility::func_75A0(self.func_430D + "_r", "tag_cockpit_light_monitor3", undefined, "player_exit_jackal");
+  scripts\sp\utility::func_75A0(self.func_430D + "_l", "tag_cockpit_light_monitor1", undefined, "player_exit_jackal");
+  scripts\sp\utility::func_75A0(self.func_430D + "_mid", "tag_cockpit_light_monitor2", undefined, "player_exit_jackal");
+  scripts\sp\utility::func_75A0(self.func_430D + "_r", "tag_cockpit_light_monitor3", undefined, "player_exit_jackal");
   }
 
   self.func_430D = undefined;
@@ -2557,13 +2557,13 @@ func_A228() {
 func_A229() {
   level.player endon("jackal_note_hud_on");
   level.player endon("jackal_note_hud_off");
-  level.player scripts/sp/utility::func_65E1("jackal_hud_on");
+  level.player scripts\sp\utility::func_65E1("jackal_hud_on");
   setomnvar("ui_hide_hud", 0);
   setomnvar("ui_jackal_bootup", 1);
   setomnvar("ui_jackal_hud_shutdown", 0);
   setomnvar("ui_active_hud", "jackal");
 
-  if (!level.player scripts/sp/utility::func_65DB("disable_jackal_lockon"))
+  if (!level.player scripts\sp\utility::func_65DB("disable_jackal_lockon"))
   setomnvar("ui_jackal_callouts_enabled", 1);
 
   level.func_A056.targets = scripts\engine\utility::array_removeundefined(level.func_A056.targets);
@@ -2590,7 +2590,7 @@ func_A22B(var_00) {
 }
 
 func_A227(var_00) {
-  level.player scripts/sp/utility::func_65DD("jackal_hud_on");
+  level.player scripts\sp\utility::func_65DD("jackal_hud_on");
   setomnvar("ui_jackal_bootup", 0);
   setomnvar("ui_jackal_callouts_enabled", 0);
 
@@ -2667,7 +2667,7 @@ func_11544(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07) {
   if (isdefined(self.func_EDB8))
   self.name = self.func_EDB8;
   else
-  scripts/sp/names::func_7B07("unitednations");
+  scripts\sp\names::func_7B07("unitednations");
 
   var_01 = self.name;
   var_09 = 1;
@@ -2717,7 +2717,7 @@ func_105D4() {
   while (!isdefined(level.func_D127) || !isdefined(level.func_D127.func_4BC7) || level.func_D127.func_4BC7 != self)
   wait 0.05;
 
-  scripts/sp/utility::func_F40A("enemy", 0, 1);
+  scripts\sp\utility::func_F40A("enemy", 0, 1);
 
   while (isdefined(level.func_D127) && isdefined(level.func_D127.func_4BC7) && level.func_D127.func_4BC7 == self)
   wait 0.05;
@@ -2748,13 +2748,13 @@ func_105D3() {
   if (isdefined(self.func_8EF0)) {
   foreach (var_02 in self.func_8EF0) {
   if (isdefined(var_02)) {
-  var_02 scripts/sp/utility::func_F40A("enemy", 0, 1);
+  var_02 scripts\sp\utility::func_F40A("enemy", 0, 1);
   var_2.func_A8CB = gettime();
   }
   }
   }
   else
-  scripts/sp/utility::func_F40A("enemy", 0, 1);
+  scripts\sp\utility::func_F40A("enemy", 0, 1);
 
   wait 0.3;
 
@@ -2956,7 +2956,7 @@ func_105D5() {
 }
 
 func_105D6() {
-  if (level.player scripts/sp/utility::func_65DF("disable_jackal_lockon") && level.player scripts/sp/utility::func_65DB("disable_jackal_lockon"))
+  if (level.player scripts\sp\utility::func_65DF("disable_jackal_lockon") && level.player scripts\sp\utility::func_65DB("disable_jackal_lockon"))
   return;
 
   if (self.func_AEDF.callout)
@@ -2998,7 +2998,7 @@ func_10CD1(var_00, var_01, var_02, var_03) {
   var_00 scripts\engine\utility::delaythread(1, ::func_A388, 1);
   func_137D6();
 
-  if (scripts/sp/utility::func_93A6())
+  if (scripts\sp\utility::func_93A6())
   func_0BD9::func_FA4F();
 }
 
@@ -3107,9 +3107,9 @@ func_A38E(var_00, var_01, var_02, var_03) {
   if (!isdefined(var_03))
   var_03 = 0;
 
-  thread scripts/sp/utility::func_AB9A("spaceshipSpringCameraMaxAngle", var_00, var_03);
-  thread scripts/sp/utility::func_AB9A("spaceshipSpringCameraSpringStrength", var_01, var_03);
-  thread scripts/sp/utility::func_AB9A("spaceshipSpringCameraSpringStrengthOut", var_02, var_03);
+  thread scripts\sp\utility::func_AB9A("spaceshipSpringCameraMaxAngle", var_00, var_03);
+  thread scripts\sp\utility::func_AB9A("spaceshipSpringCameraSpringStrength", var_01, var_03);
+  thread scripts\sp\utility::func_AB9A("spaceshipSpringCameraSpringStrengthOut", var_02, var_03);
 }
 
 func_A2FC(var_00, var_01, var_02) {
@@ -3281,7 +3281,7 @@ func_A0CF(var_00, var_01, var_02, var_03) {
   self.func_BBB9[var_00].func_3C66[var_01] = var_02;
 
   if (self.func_BBB9[var_00].func_3C66[var_01] == 1)
-  self.func_BBB9[var_00].func_3C66 = scripts/sp/utility::func_22B2(self.func_BBB9[var_00].func_3C66, var_01);
+  self.func_BBB9[var_00].func_3C66 = scripts\sp\utility::func_22B2(self.func_BBB9[var_00].func_3C66, var_01);
 }
 
 func_7CF7() {
@@ -3323,30 +3323,30 @@ func_A0D0(var_00, var_01, var_02, var_03) {
 
 func_A325(var_00, var_01, var_02) {
   if (length(var_02) == 0)
-  self.func_BBB9[var_00].func_3C66 = scripts/sp/utility::func_22B3(self.func_BBB9[var_00].func_3C66, [var_01]);
+  self.func_BBB9[var_00].func_3C66 = scripts\sp\utility::func_22B3(self.func_BBB9[var_00].func_3C66, [var_01]);
   else
   self.func_BBB9[var_00].func_3C66[var_01] = var_02;
 }
 
 func_E0A1() {
-  level.func_A056.func_12F96 = scripts/sp/utility::func_22B9(level.func_A056.func_12F96);
+  level.func_A056.func_12F96 = scripts\sp\utility::func_22B9(level.func_A056.func_12F96);
   level.func_A056.func_12F96 = scripts\engine\utility::array_removeundefined(level.func_A056.func_12F96);
 }
 
 func_137D6() {
-  level.player scripts/sp/utility::func_65E3("flag_player_is_flying");
+  level.player scripts\sp\utility::func_65E3("flag_player_is_flying");
 }
 
 func_137CF() {
   level.player endon("death");
 
-  if (isalive(level.player) && level.player scripts/sp/utility::func_65DF("flag_player_has_jackal"))
-  level.player scripts/sp/utility::func_65E3("flag_player_has_jackal");
+  if (isalive(level.player) && level.player scripts\sp\utility::func_65DF("flag_player_has_jackal"))
+  level.player scripts\sp\utility::func_65E3("flag_player_has_jackal");
 }
 
 func_137DA() {
   for (;;) {
-  if (scripts/sp/utility::func_D123())
+  if (scripts\sp\utility::func_D123())
   break;
 
   wait 0.05;
@@ -3500,9 +3500,9 @@ func_A06A(var_00) {
   var_00 = 1;
 
   if (var_00)
-  level.player scripts/sp/utility::func_65E1("flag_player_landing_enabled");
+  level.player scripts\sp\utility::func_65E1("flag_player_landing_enabled");
   else
-  level.player scripts/sp/utility::func_65DD("flag_player_landing_enabled");
+  level.player scripts\sp\utility::func_65DD("flag_player_landing_enabled");
 
   foreach (var_02 in level.func_A056.func_1632) {
   foreach (var_04 in var_2.lights) {
@@ -3564,17 +3564,17 @@ func_6211(var_00, var_01) {
 
   if (var_01) {
   level.func_A056.func_1632 = scripts\engine\utility::array_add(level.func_A056.func_1632, var_00);
-  _objective_add(scripts/sp/utility::func_C264("OBJ_VTOL_LAND"), "invisible");
-  objective_onentity(scripts/sp/utility::func_C264("OBJ_VTOL_LAND"), var_0.tag_origin);
-  objective_state(scripts/sp/utility::func_C264("OBJ_VTOL_LAND"), "current");
+  _objective_add(scripts\sp\utility::func_C264("OBJ_VTOL_LAND"), "invisible");
+  objective_onentity(scripts\sp\utility::func_C264("OBJ_VTOL_LAND"), var_0.tag_origin);
+  objective_state(scripts\sp\utility::func_C264("OBJ_VTOL_LAND"), "current");
   } else {
   level.func_A056.func_1632 = scripts\engine\utility::array_remove(level.func_A056.func_1632, var_00);
   var_00 func_0BDB::func_4130();
-  objective_delete(scripts/sp/utility::func_C264("OBJ_VTOL_LAND"));
+  objective_delete(scripts\sp\utility::func_C264("OBJ_VTOL_LAND"));
   }
 
   foreach (var_03 in var_0.lights) {
-  if (var_01 && level.player scripts/sp/utility::func_65DB("flag_player_landing_enabled")) {
+  if (var_01 && level.player scripts\sp\utility::func_65DB("flag_player_landing_enabled")) {
   playfxontag(scripts\engine\utility::getfx("landing_pad_lights"), var_03, "tag_origin");
   continue;
   }
@@ -3647,7 +3647,7 @@ func_1079F(var_00, var_01) {
 
   if (!isdefined(var_00)) {}
 
-  var_02 = var_00 scripts/sp/utility::func_10808();
+  var_02 = var_00 scripts\sp\utility::func_10808();
 
   if (isdefined(var_01))
   var_02 func_1162F(var_01);
@@ -3919,27 +3919,27 @@ func_1E83(var_00, var_01, var_02) {
 }
 
 func_1994(var_00, var_01, var_02, var_03, var_04, var_05) {
-  self._blackboard.func_7235.target = var_00;
-  self._blackboard.func_7235.offset = var_01;
-  self._blackboard.func_7235.func_7237 = 0;
+  self.var_1198.func_7235.target = var_00;
+  self.var_1198.func_7235.offset = var_01;
+  self.var_1198.func_7235.func_7237 = 0;
   self notify("bt_state_changed");
 
   if (isdefined(var_02)) {
-  self._blackboard.func_7235.func_98F9 = var_02;
-  self._blackboard.func_7235.func_98FE = var_03;
-  self._blackboard.func_7235.func_C760 = var_04;
-  self._blackboard.func_7235.func_C765 = var_05;
+  self.var_1198.func_7235.func_98F9 = var_02;
+  self.var_1198.func_7235.func_98FE = var_03;
+  self.var_1198.func_7235.func_C760 = var_04;
+  self.var_1198.func_7235.func_C765 = var_05;
   } else {
-  self._blackboard.func_7235.func_98F9 = undefined;
-  self._blackboard.func_7235.func_98FE = undefined;
-  self._blackboard.func_7235.func_C760 = undefined;
-  self._blackboard.func_7235.func_C765 = undefined;
+  self.var_1198.func_7235.func_98F9 = undefined;
+  self.var_1198.func_7235.func_98FE = undefined;
+  self.var_1198.func_7235.func_C760 = undefined;
+  self.var_1198.func_7235.func_C765 = undefined;
   }
 }
 
 func_19B7() {
-  self._blackboard.func_7235.target = undefined;
-  self._blackboard.func_7235.offset = undefined;
+  self.var_1198.func_7235.target = undefined;
+  self.var_1198.func_7235.offset = undefined;
 }
 
 func_199D(var_00, var_01, var_02, var_03, var_04, var_05) {
@@ -3951,19 +3951,19 @@ func_A254(var_00, var_01, var_02, var_03, var_04, var_05) {
   self endon("death");
   self endon("entitydeleted");
   self endon("new_follow_offset");
-  var_06 = self._blackboard.func_7235.offset;
-  var_07 = self._blackboard.func_7235.func_98F9;
-  var_08 = self._blackboard.func_7235.func_98FE;
-  var_09 = self._blackboard.func_7235.func_C760;
-  var_10 = self._blackboard.func_7235.func_C765;
+  var_06 = self.var_1198.func_7235.offset;
+  var_07 = self.var_1198.func_7235.func_98F9;
+  var_08 = self.var_1198.func_7235.func_98FE;
+  var_09 = self.var_1198.func_7235.func_C760;
+  var_10 = self.var_1198.func_7235.func_C765;
 
   for (var_11 = var_00; var_11 > 0; var_11 = var_11 - 0.05) {
   var_12 = var_11 / var_00;
-  var_13 = scripts/sp/math::func_6A8E(var_01, var_06, var_12);
-  var_14 = scripts/sp/math::func_6A8E(var_02, var_07, var_12);
-  var_15 = scripts/sp/math::func_6A8E(var_03, var_08, var_12);
-  var_16 = scripts/sp/math::func_6A8E(var_04, var_09, var_12);
-  var_17 = scripts/sp/math::func_6A8E(var_05, var_10, var_12);
+  var_13 = scripts\sp\math::func_6A8E(var_01, var_06, var_12);
+  var_14 = scripts\sp\math::func_6A8E(var_02, var_07, var_12);
+  var_15 = scripts\sp\math::func_6A8E(var_03, var_08, var_12);
+  var_16 = scripts\sp\math::func_6A8E(var_04, var_09, var_12);
+  var_17 = scripts\sp\math::func_6A8E(var_05, var_10, var_12);
   func_A255(var_13, var_14, var_15, var_16, var_17);
   wait 0.05;
   }
@@ -3972,12 +3972,12 @@ func_A254(var_00, var_01, var_02, var_03, var_04, var_05) {
 }
 
 func_A255(var_00, var_01, var_02, var_03, var_04) {
-  self._blackboard.func_7235.offset = var_00;
-  self._blackboard.func_7235.func_7237 = 0;
-  self._blackboard.func_7235.func_98F9 = var_01;
-  self._blackboard.func_7235.func_98FE = var_02;
-  self._blackboard.func_7235.func_C760 = var_03;
-  self._blackboard.func_7235.func_C765 = var_04;
+  self.var_1198.func_7235.offset = var_00;
+  self.var_1198.func_7235.func_7237 = 0;
+  self.var_1198.func_7235.func_98F9 = var_01;
+  self.var_1198.func_7235.func_98FE = var_02;
+  self.var_1198.func_7235.func_C760 = var_03;
+  self.var_1198.func_7235.func_C765 = var_04;
 }
 
 func_A372(var_00) {
@@ -4050,7 +4050,7 @@ func_A1F0(var_00, var_01, var_02, var_03, var_04) {
 }
 
 func_A1ED(var_00, var_01, var_02, var_03) {
-  if (isdefined(self._blackboard))
+  if (isdefined(self.var_1198))
   func_1981();
 
   if (isdefined(var_03) && var_03)
@@ -4072,7 +4072,7 @@ func_A1ED(var_00, var_01, var_02, var_03) {
 }
 
 func_A1F2(var_00, var_01, var_02, var_03) {
-  if (isdefined(self._blackboard))
+  if (isdefined(self.var_1198))
   func_1981();
 
   var_04 = getcsplinepointposition(var_00, var_01);
@@ -4119,16 +4119,16 @@ func_A115() {
 
   while (level.func_A056.func_432C.size > 0) {
   var_00 = level.func_A056.func_432C[0];
-  level.func_A056.func_432C = scripts/sp/utility::array_remove_index(level.func_A056.func_432C, 0);
-  level.player scripts/sp/utility::func_65E8("disable_jackal_cockpit_VO");
+  level.func_A056.func_432C = scripts\sp\utility::array_remove_index(level.func_A056.func_432C, 0);
+  level.player scripts\sp\utility::func_65E8("disable_jackal_cockpit_VO");
 
   if (gettime() - var_0[3] > var_0[2] * 1000)
   continue;
 
-  level.player scripts/sp/utility::func_65E1("jackal_cockpit_VO");
+  level.player scripts\sp\utility::func_65E1("jackal_cockpit_VO");
   level.func_A056.func_4B57 = var_0[0];
   level.func_D127.func_432D func_A114(var_0[1]);
-  level.player scripts/sp/utility::func_65DD("jackal_cockpit_VO");
+  level.player scripts\sp\utility::func_65DD("jackal_cockpit_VO");
   level.func_A056.func_4B57 = -999999;
 
   if (level.func_A056.func_432C.size > 0)
@@ -4210,16 +4210,16 @@ func_A1EC(var_00, var_01, var_02, var_03) {
 }
 
 func_1981() {
-  if (!isdefined(self._blackboard))
+  if (!isdefined(self.var_1198))
   return;
 
-  if (self._blackboard.func_EF72 && !isdefined(self.func_1FCE))
+  if (self.var_1198.func_EF72 && !isdefined(self.func_1FCE))
   return;
 
-  if (!self._blackboard.func_EF72)
+  if (!self.var_1198.func_EF72)
   self.func_1FCE = 1;
 
-  self._blackboard.func_3F28 = undefined;
+  self.var_1198.func_3F28 = undefined;
   self notify("jackal_animscripteduntilgoal");
   func_19A9();
   thread func_1982();
@@ -4233,12 +4233,12 @@ func_1982() {
 }
 
 func_19A9() {
-  self._blackboard.func_EF72 = 1;
-  self.bt.func_3F28 = undefined;
+  self.var_1198.func_EF72 = 1;
+  self.var_3135.func_3F28 = undefined;
 }
 
 func_1988() {
-  self._blackboard.func_EF72 = 0;
+  self.var_1198.func_EF72 = 0;
 }
 
 func_19A2() {
@@ -4252,11 +4252,11 @@ func_1986() {
 }
 
 func_19B1(var_00) {
-  self._blackboard.func_90EA = var_00;
+  self.var_1198.func_90EA = var_00;
 }
 
 func_19B0(var_00) {
-  self._blackboard.func_E1AC = var_00;
+  self.var_1198.func_E1AC = var_00;
 
   if (var_00 == "hover" || var_00 == "fly") {
   self _meth_8491(var_00);
@@ -4317,42 +4317,42 @@ func_19AF(var_00, var_01, var_02) {
 }
 
 func_19AE(var_00) {
-  if (self._blackboard.func_6D77 == var_00)
+  if (self.var_1198.func_6D77 == var_00)
   return;
 
-  self._blackboard.func_6D77 = var_00;
-  self notify("stop sound" + self._blackboard.func_6D83);
+  self.var_1198.func_6D77 = var_00;
+  self notify("stop sound" + self.var_1198.func_6D83);
   self notify("firemode changed");
 
-  if (scripts/sp/utility::func_65DF("jackal_firing"))
-  scripts/sp/utility::func_65DD("jackal_firing");
+  if (scripts\sp\utility::func_65DF("jackal_firing"))
+  scripts\sp\utility::func_65DD("jackal_firing");
 }
 
 func_1989() {
-  self._blackboard.func_C705 = undefined;
-  self._blackboard.func_C702 = undefined;
+  self.var_1198.func_C705 = undefined;
+  self.var_1198.func_C702 = undefined;
 }
 
 func_19B2(var_00, var_01) {
-  self._blackboard.func_C705 = var_00;
+  self.var_1198.func_C705 = var_00;
 
   if (var_00 == "face angle") {
-  self._blackboard.func_C702 = var_01;
+  self.var_1198.func_C702 = var_01;
   self goon_spawners(var_00, var_01);
   return;
   }
 
-  self._blackboard.func_C702 = undefined;
+  self.var_1198.func_C702 = undefined;
   self goon_spawners(var_00);
 }
 
 func_19B5(var_00) {
-  self._blackboard.func_11577 = var_00;
+  self.var_1198.func_11577 = var_00;
   func_0C1B::func_12E3A();
 }
 
 func_198A() {
-  self._blackboard.func_11577 = undefined;
+  self.var_1198.func_11577 = undefined;
 }
 
 func_19A0(var_00) {
@@ -4366,7 +4366,7 @@ func_19A0(var_00) {
 }
 
 func_19AB(var_00, var_01, var_02, var_03) {
-  if (isdefined(self._blackboard)) {
+  if (isdefined(self.var_1198)) {
   func_19AD(var_00, var_01, var_02, var_03);
   func_19AC(var_00, var_01, var_02, var_03);
   }
@@ -4376,19 +4376,19 @@ func_19AB(var_00, var_01, var_02, var_03) {
 
 func_19AC(var_00, var_01, var_02, var_03) {
   if (!isdefined(var_00))
-  self._blackboard.func_23A4 = func_0C21::func_9536();
+  self.var_1198.func_23A4 = func_0C21::func_9536();
   else
   {
-  self._blackboard.func_23A4.speed = var_00;
+  self.var_1198.func_23A4.speed = var_00;
 
   if (isdefined(var_01))
-  self._blackboard.func_23A4.func_1545 = var_01;
+  self.var_1198.func_23A4.func_1545 = var_01;
 
   if (isdefined(var_02))
-  self._blackboard.func_23A4.func_1E91 = var_02;
+  self.var_1198.func_23A4.func_1E91 = var_02;
 
   if (isdefined(var_03))
-  self._blackboard.func_23A4.func_1E71 = var_03;
+  self.var_1198.func_23A4.func_1E71 = var_03;
   }
 
   func_0C21::func_20DD();
@@ -4396,19 +4396,19 @@ func_19AC(var_00, var_01, var_02, var_03) {
 
 func_19AD(var_00, var_01, var_02, var_03) {
   if (!isdefined(var_00))
-  self._blackboard.func_1113B = func_0C21::func_976D();
+  self.var_1198.func_1113B = func_0C21::func_976D();
   else
   {
-  self._blackboard.func_1113B.speed = var_00;
+  self.var_1198.func_1113B.speed = var_00;
 
   if (isdefined(var_01))
-  self._blackboard.func_1113B.func_1545 = var_01;
+  self.var_1198.func_1113B.func_1545 = var_01;
 
   if (isdefined(var_02))
-  self._blackboard.func_1113B.func_1E91 = var_02;
+  self.var_1198.func_1113B.func_1E91 = var_02;
 
   if (isdefined(var_03))
-  self._blackboard.func_1113B.func_1E71 = var_03;
+  self.var_1198.func_1113B.func_1E71 = var_03;
   }
 
   func_0C21::func_20DD();
@@ -4458,18 +4458,18 @@ func_1987() {
 }
 
 func_19A3(var_00) {
-  self._blackboard.func_E1AB = var_00;
+  self.var_1198.func_E1AB = var_00;
 }
 
 func_1995(var_00) {
-  self._blackboard.func_E1AB = var_00;
-  self._blackboard.func_38DC = var_00;
+  self.var_1198.func_E1AB = var_00;
+  self.var_1198.func_38DC = var_00;
   var_01 = undefined;
 
   if (var_00 == "up")
-  var_01 = __func_2EE(self.asmname, "cannon_state", "up", 0);
+  var_01 = _func_2EE(self.asmname, "cannon_state", "up", 0);
   else
-  var_01 = __func_2EE(self.asmname, "cannon_state", "down", 0);
+  var_01 = _func_2EE(self.asmname, "cannon_state", "down", 0);
 
   self give_left_powers("cannon", var_1.anims, 1.0, 0.0, 1.0);
   self _meth_82B0(var_1.anims, 1.0);
@@ -4501,8 +4501,8 @@ func_DBDC(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07) {
   var_05 = scripts\engine\utility::ter_op(isdefined(var_05), var_05, 0.05);
   var_06 = scripts\engine\utility::ter_op(isdefined(var_06), var_06, 0.5);
   var_09 = distance(level.player.origin, var_00);
-  var_13 = scripts/sp/math::func_C097(var_08, var_11, var_09);
-  var_14 = scripts/sp/math::func_6A8E(var_01, var_12, var_13);
+  var_13 = scripts\sp\math::func_C097(var_08, var_11, var_09);
+  var_14 = scripts\sp\math::func_6A8E(var_01, var_12, var_13);
   var_14 = clamp(var_14, 0, 1);
 
   if (!isdefined(var_07)) {
@@ -4515,8 +4515,8 @@ func_DBDC(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07) {
   _setsaveddvar("r_mbradialoverridestrength", var_14);
   _setsaveddvar("r_mbradialoverrideradius", var_04);
   wait(var_05);
-  thread scripts/sp/utility::func_AB9A("r_mbradialoverridestrength", var_10["r_mbradialoverridestrength"], var_06);
-  thread scripts/sp/utility::func_AB9A("r_mbradialoverrideradius", var_10["r_mbradialoverrideradius"], var_06);
+  thread scripts\sp\utility::func_AB9A("r_mbradialoverridestrength", var_10["r_mbradialoverridestrength"], var_06);
+  thread scripts\sp\utility::func_AB9A("r_mbradialoverrideradius", var_10["r_mbradialoverrideradius"], var_06);
   scripts\engine\utility::flag_wait_or_timeout("frag_force_delete", var_06);
   _setsaveddvar("r_mbenable", var_10["r_mbenable"]);
   _setsaveddvar("r_mbRadialOverridePosition", var_10["r_mbRadialOverridePosition"]);
@@ -4621,15 +4621,15 @@ func_A388(var_00) {
 }
 
 func_1990(var_00) {
-  self._blackboard.func_C97C = var_00;
+  self.var_1198.func_C97C = var_00;
 }
 
 func_198E(var_00) {
-  self._blackboard.func_0039 = var_00;
+  self.var_1198.func_0039 = var_00;
 }
 
 func_19A1() {
-  self.bt.func_EF78 = 1;
+  self.var_3135.func_EF78 = 1;
 }
 
 func_198B(var_00) {
@@ -4662,7 +4662,7 @@ func_3819() {
 }
 
 func_9BCF() {
-  if (isdefined(self._blackboard) && isdefined(self._blackboard.func_A421))
+  if (isdefined(self.var_1198) && isdefined(self.var_1198.func_A421))
   return 1;
 
   if (isdefined(self.func_A420) && self.func_A420.size > 0)
@@ -4672,21 +4672,21 @@ func_9BCF() {
 }
 
 func_9CB2() {
-  if (isdefined(self._blackboard) && self._blackboard.func_EF72)
+  if (isdefined(self.var_1198) && self.var_1198.func_EF72)
   return 1;
   else
   return 0;
 }
 
 func_9B67() {
-  if (isdefined(self._blackboard) && self._blackboard.animscriptedactive)
+  if (isdefined(self.var_1198) && self.var_1198.animscriptedactive)
   return 1;
   else
   return 0;
 }
 
 func_9C06() {
-  if (isdefined(self._blackboard) && isdefined(self._blackboard.func_90EE))
+  if (isdefined(self.var_1198) && isdefined(self.var_1198.func_90EE))
   return 1;
   else
   return 0;
@@ -4755,11 +4755,11 @@ func_A0E1(var_00, var_01, var_02, var_03) {
   var_11 = vectornormalize(self.origin - level.func_D127.origin);
   var_04 = vectordot(var_10, var_11);
   var_12 = length(level.func_D127.spaceship_vel);
-  var_13 = scripts/sp/math::func_C097(-1, 1, var_04);
-  var_14 = scripts/sp/math::func_6A8E(var_06, var_07, var_13);
+  var_13 = scripts\sp\math::func_C097(-1, 1, var_04);
+  var_14 = scripts\sp\math::func_6A8E(var_06, var_07, var_13);
   var_15 = var_14 - var_12;
-  var_16 = scripts/sp/math::func_C097(-1 * var_08, var_08, var_15);
-  var_17 = scripts/sp/math::func_6A8E(1 - var_09, 1 + var_09, var_16);
+  var_16 = scripts\sp\math::func_C097(-1 * var_08, var_08, var_15);
+  var_17 = scripts\sp\math::func_6A8E(1 - var_09, 1 + var_09, var_16);
   func_A301(var_17, 0.05, "boundary_autoturn");
 
   if (var_04 > 0.4 && !var_05) {
@@ -4807,7 +4807,7 @@ func_A0E2() {
   for (;;) {
   func_A14E(1);
 
-  if (!scripts\engine\utility::player_is_in_jackal() || level.player scripts/sp/utility::func_65DB("disable_jackal_map_boundary_push")) {
+  if (!scripts\engine\utility::player_is_in_jackal() || level.player scripts\sp\utility::func_65DB("disable_jackal_map_boundary_push")) {
   func_A078((0, 0, 0), 0.05, "boundary_push" + self.func_12751);
   wait 0.05;
   continue;
@@ -4821,8 +4821,8 @@ func_A0E2() {
   var_05 = vectordot(var_03, var_00);
   var_04 = clamp(var_04, 0, 1);
   var_05 = clamp(var_05, 0, 1);
-  var_06 = 1 - scripts/sp/math::func_C097(0, var_04 + var_05, var_05);
-  var_07 = scripts/sp/math::func_6A8E(0, self.func_EEBF, var_06);
+  var_06 = 1 - scripts\sp\math::func_C097(0, var_04 + var_05, var_05);
+  var_07 = scripts\sp\math::func_6A8E(0, self.func_EEBF, var_06);
   var_07 = var_07 * var_00;
   func_A078(var_07, 0.05, "boundary_push" + self.func_12751);
   wait 0.05;
@@ -4897,13 +4897,13 @@ func_A064(var_00) {
   var_01 = 0;
 
   for (;;) {
-  var_02 = tablelookupbyrow("sp/mostwanted.csv", var_01, 10);
+  var_02 = tablelookupbyrow("sp\mostwanted.csv", var_01, 10);
 
   if (!isdefined(var_02) || var_02 == "")
   break;
 
   if (var_02 == var_00) {
-  var_03 = tablelookupbyrow("sp/mostwanted.csv", var_01, 2);
+  var_03 = tablelookupbyrow("sp\mostwanted.csv", var_01, 2);
   return var_03;
   }
 
@@ -4942,8 +4942,8 @@ func_116A8(var_00, var_01, var_02) {
   if (!isdefined(var_02))
   var_02 = 0;
 
-  var_03 = scripts/sp/hud_util::func_48B7("black", 0, level.player);
-  var_04 = scripts/sp/hud_util::createfontstring("default", 1.5);
+  var_03 = scripts\sp\hud_util::func_48B7("black", 0, level.player);
+  var_04 = scripts\sp\hud_util::createfontstring("default", 1.5);
   var_4.location = 0;
   var_4.alignx = "left";
   var_4.aligny = "top";

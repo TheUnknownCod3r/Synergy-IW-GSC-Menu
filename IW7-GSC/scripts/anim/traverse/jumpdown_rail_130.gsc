@@ -1,8 +1,8 @@
-/***************************************************************
+/*******************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\anim\traverse\jumpdown_rail_130.gsc
-***************************************************************/
+ * Script: scripts\anim\traverse\jumpdown_rail_130.gsc
+*******************************************************/
 
 main() {
 	if(self.type == "dog") {

@@ -1,8 +1,8 @@
-/***************************************************************
+/*******************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\maps\cp_final\cp_final_traps.gsc
-***************************************************************/
+ * Script: scripts\cp\maps\cp_final\cp_final_traps.gsc
+*******************************************************/
 
 register_traps() {
 	level.trapcooldownarray = [];
@@ -29,7 +29,7 @@ watch_for_trap_kills_obtained() {
 	for(;;) {
 		if(scripts\engine\utility::istrue(level.trap_kills_laser) && scripts\engine\utility::istrue(level.trap_kills_blackhole) && scripts\engine\utility::istrue(level.trap_kills_fridge) && scripts\engine\utility::istrue(level.trap_kills_electric) && scripts\engine\utility::istrue(level.trap_kills_acidrain)) {
 			foreach(var_01 in level.players) {
-				var_01 scripts/cp/zombies/achievement::update_achievement("FAILED_MAINTENANCE",1);
+				var_01 scripts\cp\zombies\achievement::update_achievement("FAILED_MAINTENANCE",1);
 			}
 
 			level notify("achievement_given");
@@ -155,11 +155,11 @@ create_laser_beam_fx(param_00,param_01,param_02) {
 	var_05 = randomfloat(1);
 	thread laser_sound_individual();
 	if(var_05 > 0.5) {
-		var_06 = function_02DF(scripts\engine\utility::getfx("trap_ww_beam"),var_03,"tag_origin",var_04,"tag_origin");
+		var_06 = playfxontagsbetweenclients(scripts\engine\utility::getfx("trap_ww_beam"),var_03,"tag_origin",var_04,"tag_origin");
 	}
 	else
 	{
-		var_06 = function_02DF(scripts\engine\utility::getfx("trap_ww_beam"),var_05,"tag_origin",var_04,"tag_origin");
+		var_06 = playfxontagsbetweenclients(scripts\engine\utility::getfx("trap_ww_beam"),var_05,"tag_origin",var_04,"tag_origin");
 	}
 
 	var_06.var_336 = "laser_beam_effect";
@@ -226,7 +226,7 @@ func_403A(param_00) {
 
 laser_eye_fx() {
 	self endon("disconnect");
-	var_00 = function_01E1(level._effect["vfx_zb_laser_screen"],self geteye(),self);
+	var_00 = spawnfxforclient(level._effect["vfx_zb_laser_screen"],self geteye(),self);
 	wait(0.1);
 	triggerfx(var_00);
 	scripts\engine\utility::waittill_any_timeout_1(2,"last_stand");
@@ -297,7 +297,7 @@ remove_padding_damage() {
 
 kill_fx_on_death(param_00,param_01) {
 	level endon("game_ended");
-	var_02 = function_02DF(scripts\engine\utility::getfx("trap_ww_beam_death"),param_00,"tag_origin",param_01,"tag_origin");
+	var_02 = playfxontagsbetweenclients(scripts\engine\utility::getfx("trap_ww_beam_death"),param_00,"tag_origin",param_01,"tag_origin");
 	var_02.var_336 = "laser_beam_kill_effect";
 	thread func_403A(var_02);
 }
@@ -554,7 +554,7 @@ kill_zombies(param_00) {
 
 		var_01.flung = 1;
 		var_01 thread suck_zombie(param_00,self);
-		level thread scripts/cp/zombies/zombies_vo::play_zombie_vo(var_01,"death_blackhole",0);
+		level thread scripts\cp\zombies\zombies_vo::play_zombie_vo(var_01,"death_blackhole",0);
 	}
 }
 
@@ -645,7 +645,7 @@ check_players_fridge_damage_explosion() {
 
 chill_scrnfx(param_00) {
 	self endon("disconnect");
-	var_01 = function_01E1(level._effect["vfx_freezer_frost_scrn"],self geteye(),self);
+	var_01 = spawnfxforclient(level._effect["vfx_freezer_frost_scrn"],self geteye(),self);
 	wait(0.1);
 	triggerfx(var_01);
 	self dodamage(15,param_00.origin,param_00,param_00,"MOD_EXPLOSIVE","iw7_fridgetrap_zm");
@@ -1078,7 +1078,7 @@ electrocute_zombie(param_00,param_01) {
 	var_03 = scripts\engine\utility::getclosest(param_00.origin,var_02);
 	var_04 = var_03.origin + (0,0,randomintrange(-17,17));
 	var_05 = param_00.origin + (0,0,randomintrange(20,60));
-	function_02E0(level._effect["electric_trap_attack"],var_04,vectortoangles(var_05 - var_04),var_05);
+	playfxbetweenpoints(level._effect["electric_trap_attack"],var_04,vectortoangles(var_05 - var_04),var_05);
 	playfx(level._effect["electric_trap_shock"],var_05);
 	if(scripts\cp\utility::should_be_affected_by_trap(param_00,1,0)) {
 		param_00 setscriptablepartstate("electrocuted","on");
@@ -1199,7 +1199,7 @@ use_rain_trap(param_00,param_01) {
 remove_padding_damage_and_rain() {
 	remove_padding_damage();
 	if(isdefined(self)) {
-		function_0297(level._effect["sasquatch_rock_hit"],self,"tag_eye",self);
+		stopfxontagforclients(level._effect["sasquatch_rock_hit"],self,"tag_eye",self);
 	}
 }
 

@@ -1,13 +1,13 @@
-/*******************************************************************
+/***********************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\maps\cp_disco\kung_fu_mode_tiger.gsc
-*******************************************************************/
+ * Script: scripts\cp\maps\cp_disco\kung_fu_mode_tiger.gsc
+***********************************************************/
 
 tiger_kung_fu_init() {
-	thread scripts/cp/powers/coop_groundpound::init();
-	level._effect["blackhole_trap"] = loadfx("vfx/iw7/core/zombie/traps/vfx_zmb_blackhole_trap.vfx");
-	level._effect["blackhole_trap_death"] = loadfx("vfx/iw7/_requests/coop/vfx_zmb_blackhole_death");
+	thread scripts\cp\powers\coop_groundpound::init();
+	level._effect["blackhole_trap"] = loadfx("vfx\iw7\core\zombie\traps\vfx_zmb_blackhole_trap.vfx");
+	level._effect["blackhole_trap_death"] = loadfx("vfx\iw7\_requests\coop\vfx_zmb_blackhole_death");
 	scripts\engine\utility::flag_wait("interactions_initialized");
 	scripts\cp\powers\coop_powers::powersetupfunctions("power_shuriken_tiger",::scripts\cp\maps\cp_disco\kung_fu_mode_dragon::set_dragon_shuriken_power,::scripts\cp\maps\cp_disco\kung_fu_mode_dragon::unset_dragon_shuriken_power,::scripts\cp\maps\cp_disco\kung_fu_mode_dragon::use_dragon_shuriken,undefined,undefined,undefined);
 	scripts\cp\powers\coop_powers::powersetupfunctions("power_black_hole_tiger",::tiger_black_hole_set,::tiger_black_hole_unset,::tiger_black_hole_use,undefined,"power_tiger_black_hole_used",undefined);
@@ -70,11 +70,11 @@ grabclosestzombies(param_00,param_01) {
 	param_00 endon("death");
 	param_00.grabbedents = [];
 	var_02 = anglestoup(param_00.angles);
-	var_03 = spawn("trigger_rotatable_radius",scripts/cp/powers/coop_blackholegrenade::getblackholecenter(param_00) - var_02 * 64 * 0.5,0,200,64);
+	var_03 = spawn("trigger_rotatable_radius",scripts\cp\powers\coop_blackholegrenade::getblackholecenter(param_00) - var_02 * 64 * 0.5,0,200,64);
 	var_03.angles = param_00.angles;
 	var_03 enablelinkto();
 	var_03 linkto(param_00);
-	var_03 thread scripts/cp/powers/coop_blackholegrenade::cleanuponparentdeath(param_00);
+	var_03 thread scripts\cp\powers\coop_blackholegrenade::cleanuponparentdeath(param_00);
 	while(isdefined(var_03)) {
 		var_04 = scripts\engine\utility::get_array_of_closest(param_00.origin,level.spawned_enemies,undefined,undefined,200);
 		foreach(var_06 in var_04) {
@@ -94,7 +94,7 @@ grabclosestzombies(param_00,param_01) {
 				continue;
 			}
 
-			if(!scripts/cp/powers/coop_phaseshift::areentitiesinphase(param_00,var_06)) {
+			if(!scripts\cp\powers\coop_phaseshift::areentitiesinphase(param_00,var_06)) {
 				continue;
 			}
 
@@ -110,10 +110,10 @@ grabclosestzombies(param_00,param_01) {
 				continue;
 			}
 
-			if(!var_06 scripts/cp/powers/coop_blackholegrenade::isgrabbedent(param_00)) {
-				var_06 thread scripts/cp/powers/coop_blackholegrenade::grabent(param_00);
+			if(!var_06 scripts\cp\powers\coop_blackholegrenade::isgrabbedent(param_00)) {
+				var_06 thread scripts\cp\powers\coop_blackholegrenade::grabent(param_00);
 				var_06.flung = 1;
-				var_06 thread scripts/cp/powers/coop_blackholegrenade::suck_zombie(var_06,param_00,param_01);
+				var_06 thread scripts\cp\powers\coop_blackholegrenade::suck_zombie(var_06,param_00,param_01);
 				wait(0.2);
 			}
 		}
@@ -239,7 +239,7 @@ slam_execute(param_00,param_01,param_02) {
 	}
 
 	var_04 = param_00 scripts\engine\utility::spawn_tag_origin();
-	thread scripts/cp/powers/coop_groundpound::slam_delent(param_00,var_04);
+	thread scripts\cp\powers\coop_groundpound::slam_delent(param_00,var_04);
 	slam_executeinternal(param_00,param_01,var_04,param_02);
 	param_00 notify("slam_finished");
 }
@@ -274,7 +274,7 @@ slam_executeinternal(param_00,param_01,param_02,param_03) {
 	{
 	}
 
-	thread scripts/cp/powers/coop_groundpound::slam_physicspulse(param_01);
+	thread scripts\cp\powers\coop_groundpound::slam_physicspulse(param_01);
 	var_09 = scripts\cp\cp_agent_utils::getaliveagentsofteam("axis");
 	foreach(var_0B in var_09) {
 		if(!isdefined(var_0B) || var_0B == param_00 || !scripts\cp\utility::isreallyalive(var_0B)) {

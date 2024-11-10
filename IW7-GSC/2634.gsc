@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2634.gsc
+ * Script: 2634.gsc
 ***************************************/
 
 spawnnewagent(var_00, var_01, var_02, var_03, var_04) {
@@ -274,15 +274,15 @@ default_on_damage(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07
   if (is_friendly_damage(var_12, var_00))
   return;
 
-  var_02 = scripts/cp/cp_damage::func_F29B(var_04, var_05, var_02, var_01, var_03, var_06, var_07, var_08, var_09, var_00);
+  var_02 = scripts\cp\cp_damage::func_F29B(var_04, var_05, var_02, var_01, var_03, var_06, var_07, var_08, var_09, var_00);
 
-  if (isplayer(var_01) && !scripts/cp/utility::is_trap(var_00, var_05)) {
-  var_02 = scripts/cp/cp_damage::scale_alien_damage_by_perks(var_01, var_02, var_04, var_05);
-  var_02 = scripts/cp/cp_damage::scale_alien_damage_by_weapon_type(var_01, var_02, var_04, var_05, var_08);
+  if (isplayer(var_01) && !scripts\cp\utility::is_trap(var_00, var_05)) {
+  var_02 = scripts\cp\cp_damage::scale_alien_damage_by_perks(var_01, var_02, var_04, var_05);
+  var_02 = scripts\cp\cp_damage::scale_alien_damage_by_weapon_type(var_01, var_02, var_04, var_05, var_08);
   }
 
   var_02 = riot_shield_damage_adjustment(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08, var_09, var_12);
-  var_02 = scripts/cp/cp_damage::scale_alien_damage_by_prestige(var_01, var_02);
+  var_02 = scripts\cp\cp_damage::scale_alien_damage_by_prestige(var_01, var_02);
   var_02 = int(var_02);
   process_damage_score(var_01, var_02, var_04);
   process_damage_rewards(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08, var_09, var_12);
@@ -308,12 +308,12 @@ process_damage_score(var_00, var_01, var_02) {
 
 default_on_damage_finished(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08, var_09, var_10, var_11, var_12) {
   self finishagentdamage(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08, var_09, var_10, var_11, var_12);
-  var_13 = scripts/cp/utility::is_trap(var_00, var_05);
+  var_13 = scripts\cp\utility::is_trap(var_00, var_05);
 
   if (isdefined(var_01)) {
   if (isplayer(var_01) || isdefined(var_1.owner) && isplayer(var_1.owner)) {
   if (!var_13)
-  var_01 scripts/cp/cp_damage::check_for_special_damage(self, var_05, var_04);
+  var_01 scripts\cp\cp_damage::check_for_special_damage(self, var_05, var_04);
   }
   }
 
@@ -405,7 +405,7 @@ activateagent() {
 
 on_humanoid_agent_killed_common(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08, var_09) {
   if (scripts\engine\utility::is_true(self.hasriotshieldequipped)) {
-  scripts/cp/utility::launchshield(var_02, var_03);
+  scripts\cp\utility::launchshield(var_02, var_03);
 
   if (!var_09) {
   var_10 = self dropitem(self getcurrentweapon());
@@ -515,12 +515,12 @@ func_E08D(var_00) {
 }
 
 process_damage_rewards(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08, var_09, var_10) {
-  scripts/cp/cp_damage::update_damage_score(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08, var_09);
+  scripts\cp\cp_damage::update_damage_score(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08, var_09);
 }
 
 process_damage_feedback(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08, var_09, var_10) {
   if (!scripts\engine\utility::isbulletdamage(var_04)) {
-  if (scripts/cp/utility::is_trap(var_00, var_05))
+  if (scripts\cp\utility::is_trap(var_00, var_05))
   return;
 
   var_11 = gettime();
@@ -537,32 +537,32 @@ process_damage_feedback(var_00, var_01, var_02, var_03, var_04, var_05, var_06, 
   if (var_10.health <= var_02)
   var_13 = 1;
 
-  var_14 = scripts/cp/utility::isheadshot(var_05, var_08, var_04, var_01);
+  var_14 = scripts\cp\utility::isheadshot(var_05, var_08, var_04, var_01);
 
   if (var_14)
   var_12 = "hitcritical";
 
   var_15 = scripts\engine\utility::isbulletdamage(var_04);
-  var_16 = var_14 && var_01 scripts/cp/utility::is_consumable_active("sharp_shooter_upgrade");
-  var_17 = var_15 && var_01 scripts/cp/utility::is_consumable_active("bonus_damage_on_last_bullets");
-  var_18 = var_15 && var_01 scripts/cp/utility::is_consumable_active("damage_booster_upgrade");
+  var_16 = var_14 && var_01 scripts\cp\utility::is_consumable_active("sharp_shooter_upgrade");
+  var_17 = var_15 && var_01 scripts\cp\utility::is_consumable_active("bonus_damage_on_last_bullets");
+  var_18 = var_15 && var_01 scripts\cp\utility::is_consumable_active("damage_booster_upgrade");
   var_19 = scripts\engine\utility::is_true(var_1.inlaststand);
-  var_20 = !var_19 && var_14 && var_15 && var_01 scripts/cp/utility::is_consumable_active("headshot_explosion");
-  var_21 = !scripts/cp/utility::isreallyalive(var_10) || isagent(var_10) && var_02 >= var_10.health;
+  var_20 = !var_19 && var_14 && var_15 && var_01 scripts\cp\utility::is_consumable_active("headshot_explosion");
+  var_21 = !scripts\cp\utility::isreallyalive(var_10) || isagent(var_10) && var_02 >= var_10.health;
   var_22 = var_04 == "MOD_EXPLOSIVE_BULLET" || var_04 == "MOD_EXPLOSIVE" || var_04 == "MOD_GRENADE_SPLASH" || var_04 == "MOD_PROJECTILE" || var_04 == "MOD_PROJECTILE_SPLASH";
   var_23 = var_04 == "MOD_MELEE";
 
-  if (scripts/cp/cp_damage::func_A010(var_05))
+  if (scripts\cp\cp_damage::func_A010(var_05))
   var_12 = "special_weapon";
   else if (var_16 || var_17 || var_18 || var_20)
   var_12 = "card_boosted";
   else if (issubstr(var_05, "arkyellow") && var_04 == "MOD_EXPLOSIVE_BULLET" && var_08 == "none")
   var_12 = "yellow_arcane_cp";
-  else if (isplayer(var_01) && var_01 scripts/cp/utility::has_zombie_perk("perk_machine_boom") && var_22)
+  else if (isplayer(var_01) && var_01 scripts\cp\utility::has_zombie_perk("perk_machine_boom") && var_22)
   var_12 = "high_damage";
-  else if (isplayer(var_01) && var_01 scripts/cp/utility::has_zombie_perk("perk_machine_smack") && var_23)
+  else if (isplayer(var_01) && var_01 scripts\cp\utility::has_zombie_perk("perk_machine_smack") && var_23)
   var_12 = "high_damage";
-  else if (isplayer(var_01) && var_01 scripts/cp/utility::has_zombie_perk("perk_machine_rat_a_tat") && var_15)
+  else if (isplayer(var_01) && var_01 scripts\cp\utility::has_zombie_perk("perk_machine_rat_a_tat") && var_15)
   var_12 = "high_damage";
   else if (isplayer(var_01) && scripts\engine\utility::is_true(var_1.deadeye_charge) && var_15)
   var_12 = "dewdrops_cp";
@@ -577,19 +577,19 @@ process_damage_feedback(var_00, var_01, var_02, var_03, var_04, var_05, var_06, 
 
   if (isdefined(var_01)) {
   if (isdefined(var_1.owner))
-  var_1.owner thread scripts/cp/cp_damage::updatedamagefeedback(var_12, var_13, var_02, var_10.riotblock);
+  var_1.owner thread scripts\cp\cp_damage::updatedamagefeedback(var_12, var_13, var_02, var_10.riotblock);
   else
-  var_01 thread scripts/cp/cp_damage::updatedamagefeedback(var_12, var_13, var_02, var_10.riotblock);
+  var_01 thread scripts\cp\cp_damage::updatedamagefeedback(var_12, var_13, var_02, var_10.riotblock);
   }
 }
 
 process_kill_rewards(var_00, var_01, var_02, var_03, var_04) {
-  scripts/cp/cp_reward::give_attacker_kill_rewards(var_00, var_02);
+  scripts\cp\cp_reward::give_attacker_kill_rewards(var_00, var_02);
   var_05 = get_agent_type(var_01);
-  var_06 = scripts/cp/utility::get_attacker_as_player(var_00);
+  var_06 = scripts\cp\utility::get_attacker_as_player(var_00);
 
   if (isdefined(var_06)) {
-  scripts/cp/cp_persistence::record_player_kills(var_03, var_02, var_04, var_06);
+  scripts\cp\cp_persistence::record_player_kills(var_03, var_02, var_04, var_06);
 
   if (isdefined(level.loot_func) && isdefined(var_05))
   [[level.loot_func]](var_05, self.origin, var_00);
@@ -612,7 +612,7 @@ get_agent_type(var_00) {
 }
 
 store_attacker_info(var_00, var_01) {
-  var_00 = scripts/cp/utility::get_attacker_as_player(var_00);
+  var_00 = scripts\cp\utility::get_attacker_as_player(var_00);
 
   if (!isdefined(var_00))
   return;
@@ -634,11 +634,11 @@ store_attacker_info(var_00, var_01) {
 }
 
 deactivateagent() {
-  if (scripts/cp/utility::isgameparticipant(self))
-  scripts/cp/utility::removefromparticipantsarray();
+  if (scripts\cp\utility::isgameparticipant(self))
+  scripts\cp\utility::removefromparticipantsarray();
 
-  scripts/cp/utility::removefromcharactersarray();
-  scripts/cp/utility::removefromspawnedgrouparray();
+  scripts\cp\utility::removefromcharactersarray();
+  scripts\cp\utility::removefromspawnedgrouparray();
   self.isactive = 0;
   self.hasdied = 0;
   self.marked_by_hybrid = undefined;

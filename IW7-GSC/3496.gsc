@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\3496.gsc
+ * Script: 3496.gsc
 ***************************************/
 
 init() {
@@ -21,11 +21,11 @@ init() {
   level.func_A434["air_patrol"].func_A84D = "killstreak_remote_tank_laptop_mp";
   level.func_A434["air_patrol"].remotedetonatethink = "killstreak_remote_tank_remote_mp";
   level.func_A434["air_patrol"].func_12A72 = "sentry_shock_mp";
-  level._effect["jammer_drone_explode"] = loadfx("vfx/iw7/_requests/mp/vfx_jammer_drone_explosion");
-  level._effect["jammer_drone_spark"] = loadfx("vfx/core/impacts/large_metal_painted_hit");
-  level._effect["jammer_drone_pulse"] = loadfx("vfx/iw7/_requests/mp/vfx_jammer_drone_emp_pulse");
-  level._effect["jammer_drone_charge"] = loadfx("vfx/iw7/_requests/mp/vfx_jammer_drone_emp_charge");
-  level._effect["jammer_drone_shockwave"] = loadfx("vfx/iw7/_requests/mp/vfx_jammer_drone_emp_shockwave");
+  level._effect["jammer_drone_explode"] = loadfx("vfx\iw7\_requests\mp\vfx_jammer_drone_explosion");
+  level._effect["jammer_drone_spark"] = loadfx("vfx\core\impacts\large_metal_painted_hit");
+  level._effect["jammer_drone_pulse"] = loadfx("vfx\iw7\_requests\mp\vfx_jammer_drone_emp_pulse");
+  level._effect["jammer_drone_charge"] = loadfx("vfx\iw7\_requests\mp\vfx_jammer_drone_emp_charge");
+  level._effect["jammer_drone_shockwave"] = loadfx("vfx\iw7\_requests\mp\vfx_jammer_drone_emp_shockwave");
   func_F764();
   func_F765();
 }
@@ -93,7 +93,7 @@ func_49DE(var_00, var_01, var_02, var_03, var_04, var_05, var_06) {
   var_11.func_C96C = var_08;
   var_11.func_4BF7 = var_02;
   var_11.func_A435 = 0;
-  var_11 scripts/mp/killstreaks/utility::func_1843(var_05, "Killstreak_Air", var_00, 1);
+  var_11 scripts\mp\killstreaks\utility::func_1843(var_05, "Killstreak_Air", var_00, 1);
   var_11 vehicle_setspeed(var_11.speed, 70, 50);
   var_11 setyawspeed(120, 90);
   var_11 setneargoalnotifydist(150);

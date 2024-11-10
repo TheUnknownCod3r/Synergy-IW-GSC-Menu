@@ -1,11 +1,11 @@
-/*************************************************
+/*****************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\serversettings.gsc
-*************************************************/
+ * Script: scripts\mp\serversettings.gsc
+*****************************************/
 
 init() {
-	level.var_90AE = function_02D2();
+	level.var_90AE = getserverhostname();
 	setfriendlyfire(scripts\mp\tweakables::gettweakablevalue("team","fftype"));
 	constraingametype(getdvar("g_gametype"));
 	for(;;) {

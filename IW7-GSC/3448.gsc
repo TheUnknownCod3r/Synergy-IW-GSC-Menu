@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3448.gsc
-****************************/
+ * Script: 3448.gsc
+************************/
 
 _meth_80F1() {
 	foreach(var_01 in self.rewindorigins) {

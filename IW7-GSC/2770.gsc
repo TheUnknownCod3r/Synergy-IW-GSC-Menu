@@ -1,13 +1,13 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2770.gsc
+ * Script: 2770.gsc
 ***************************************/
 
 minefields() {
   var_00 = getentarray("minefield", "targetname");
 
   if (var_0.size > 0)
-  level._effect["mine_explosion"] = loadfx("vfx/core/expl/weap/gre/vfx_exp_gre_dirt_cg");
+  level._effect["mine_explosion"] = loadfx("vfx\core\expl\weap\gre\vfx_exp_gre_dirt_cg");
 
   for (var_01 = 0; var_01 < var_0.size; var_1++)
   var_0[var_01] thread minefield_think();

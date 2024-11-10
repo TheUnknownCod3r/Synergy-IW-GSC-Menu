@@ -1,8 +1,8 @@
-/**************************************************
+/******************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\asm\shared_utility.gsc
-**************************************************/
+ * Script: scripts\asm\shared_utility.gsc
+******************************************/
 
 chooseanimshoot(param_00,param_01,param_02) {
 	var_03 = param_02;
@@ -66,12 +66,12 @@ func_3EAA(param_00,param_01,param_02) {
 
 func_3E9A(param_00,param_01,param_02) {
 	var_03 = param_02;
-	if(self.var_2303.var_FECD.var_FF0B == 1) {
+	if(self.asm.shootparams.var_FF0B == 1) {
 		var_04 = "single";
 	}
 	else
 	{
-		var_04 = var_04 + self.var_2303.var_FECD.var_FF0B;
+		var_04 = var_04 + self.asm.shootparams.var_FF0B;
 	}
 
 	if(scripts\asm\asm::asm_hasalias(param_01,var_04)) {
@@ -158,11 +158,11 @@ getnodeforwardyawnodetypelookupoverride(param_00,param_01) {
 }
 
 getnodeyawfromoffsettable(param_00,param_01,param_02) {
-	var_03 = self.var_1491.pose;
+	var_03 = self.a.pose;
 	if(isdefined(param_02)) {
 		var_03 = param_02;
 	}
-	else if(function_02A7(param_01) && !param_01 getrandomattachments(var_03)) {
+	else if(isnode(param_01) && !param_01 getrandomattachments(var_03)) {
 		var_03 = param_01 gethighestnodestance();
 	}
 
@@ -179,21 +179,21 @@ getnodeyawfromoffsettable(param_00,param_01,param_02) {
 }
 
 func_1C9C() {
-	var_00 = scripts\common\utility::weaponclass(self.var_394) == "mg";
+	var_00 = scripts\engine\utility::weaponclass(self.var_394) == "mg";
 	return var_00 || isdefined(self.var_1198.var_522F) && isdefined(self.target_getindexoftarget) && self.target_getindexoftarget == self.var_1198.var_522F;
 }
 
 getnodeyawoffset(param_00,param_01) {
-	if(function_02A4(param_00) || !isdefined(param_00.type)) {
+	if(isstruct(param_00) || !isdefined(param_00.type)) {
 		return 0;
 	}
 
 	if(getdvarint("ai_iw7",0) == 1) {
-		if((isdefined(self.var_1198.var_98F4) && self.var_1198.var_98F4) || isdefined(self.var_2303.var_1310E) && self.var_2303.var_1310E) {
+		if((isdefined(self.var_1198.var_98F4) && self.var_1198.var_98F4) || isdefined(self.asm.var_1310E) && self.asm.var_1310E) {
 			return 0;
 		}
 
-		if(self.var_2303.var_7360 && isdefined(level.var_7365) && isdefined(level.var_7365[self.asmname])) {
+		if(self.asm.var_7360 && isdefined(level.var_7365) && isdefined(level.var_7365[self.asmname])) {
 			var_02 = getnodeyawfromoffsettable(level.var_7365[self.asmname],param_00,param_01);
 			if(isdefined(var_02)) {
 				return var_02;
@@ -212,10 +212,10 @@ getnodeyawoffset(param_00,param_01) {
 	}
 
 	if(!isdefined(self.heat)) {
-		if(scripts\common\utility::isnodecoverleft(param_01)) {
+		if(scripts\engine\utility::isnodecoverleft(param_01)) {
 			return 90;
 		}
-		else if(scripts\common\utility::isnodecoverright(param_01)) {
+		else if(scripts\engine\utility::isnodecoverright(param_01)) {
 			return -90;
 		}
 	}
@@ -229,7 +229,7 @@ _meth_812E(param_00,param_01) {
 	}
 
 	var_02 = param_00.type;
-	if(function_02A7(param_00) && !param_00 getrandomattachments("stand") && !isdefined(param_01)) {
+	if(isnode(param_00) && !param_00 getrandomattachments("stand") && !isdefined(param_01)) {
 		switch(var_02) {
 			case "Cover Left":
 				param_01 = "crouch";
@@ -287,7 +287,7 @@ func_7FF1(param_00,param_01,param_02) {
 
 func_7FF2(param_00,param_01,param_02) {
 	var_03 = undefined;
-	if(self.var_2303.var_7360) {
+	if(self.asm.var_7360) {
 		if(param_02 == "lean") {
 			var_03 = level.var_7364[param_00];
 		}
@@ -344,7 +344,7 @@ getnodetypename(param_00) {
 choosestrongdamagedeath(param_00,param_01,param_02) {
 	var_03 = undefined;
 	if(abs(self.var_E3) > 150) {
-		if(scripts\common\utility::damagelocationisany("left_leg_upper","left_leg_lower","right_leg_upper","right_leg_lower","left_foot","right_foot")) {
+		if(scripts\engine\utility::damagelocationisany("left_leg_upper","left_leg_lower","right_leg_upper","right_leg_lower","left_foot","right_foot")) {
 			var_03 = "legs";
 		}
 		else if(self.var_DD == "torso_lower") {
@@ -402,8 +402,8 @@ setuseanimgoalweight_wait(param_00) {
 randomizepassthroughchildren(param_00,param_01,param_02,param_03) {
 	var_04 = level.asm[param_00].states[param_02];
 	if(isdefined(var_04.transitions)) {
-		if(var_04.var_1267B.size == 2) {
-			if(scripts\common\utility::cointoss()) {
+		if(var_04.transitions.size == 2) {
+			if(scripts\engine\utility::cointoss()) {
 				var_05 = var_04.transitions[0];
 				var_04.transitions[0] = var_04.transitions[1];
 				var_04.transitions[1] = var_05;
@@ -411,7 +411,7 @@ randomizepassthroughchildren(param_00,param_01,param_02,param_03) {
 		}
 		else
 		{
-			var_04.transitions = scripts\common\utility::array_randomize(var_04.transitions);
+			var_04.transitions = scripts\engine\utility::array_randomize(var_04.transitions);
 		}
 	}
 

@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3906.gsc
-****************************/
+ * Script: 3906.gsc
+************************/
 
 func_D4DA() {
 	if(!isdefined(self.a.var_BF8C)) {
@@ -47,7 +47,7 @@ func_D4CC(param_00,param_01,param_02,param_03) {
 
 func_D4D7(param_00,param_01,param_02,param_03) {
 	func_D4D8();
-	var_04 = scripts/asm/asm_bb::bb_getmeleetarget();
+	var_04 = scripts\asm\asm_bb::bb_getmeleetarget();
 	if(!isdefined(var_04)) {
 		self orientmode("face current");
 	}
@@ -60,7 +60,7 @@ func_D4D7(param_00,param_01,param_02,param_03) {
 	}
 
 	var_05 = lib_0A1E::asm_getallanimsforstate(param_00,param_01);
-	scripts/asm/asm::asm_fireephemeralevent("melee_attack","begin");
+	scripts\asm\asm::asm_fireephemeralevent("melee_attack","begin");
 	self aiclearanim(lib_0A1E::asm_getbodyknob(),param_02);
 	if(isdefined(param_03)) {
 		self playsound(param_03);
@@ -69,7 +69,7 @@ func_D4D7(param_00,param_01,param_02,param_03) {
 	self _meth_82EA(param_01,var_05,1,param_02,1);
 	self endon(param_01 + "_finished");
 	lib_0C64::donotetracks_vsplayer(param_00,param_01);
-	scripts/asm/asm::asm_fireevent(param_01,"end");
+	scripts\asm\asm::asm_fireevent(param_01,"end");
 }
 
 func_B5CB(param_00,param_01) {
@@ -79,7 +79,7 @@ func_B5CB(param_00,param_01) {
 	self.melee.var_13CCC = scripts\anim\utility::func_7E52();
 	self.melee.var_71D3 = ::func_B5D2;
 	if(param_01) {
-		scripts/aitypes/melee::func_B5B4(self.unittype);
+		scripts\aitypes\melee::func_B5B4(self.unittype);
 		self.physics_setgravityragdollscalar = self.melee.target;
 	}
 	else
@@ -97,7 +97,7 @@ func_D4D1(param_00,param_01,param_02,param_03) {
 	self.melee.var_312F = 1;
 	var_04 = self.melee.target;
 	var_05 = self [[self.var_7191]](param_00,param_01);
-	scripts/asm/asm::asm_fireephemeralevent("melee_attack","begin");
+	scripts\asm\asm::asm_fireephemeralevent("melee_attack","begin");
 	func_B5CB(param_01,1);
 	var_06 = getnotetracktimes(var_05,"melee_stop");
 	if(var_06.size > 0) {
@@ -106,7 +106,7 @@ func_D4D1(param_00,param_01,param_02,param_03) {
 
 	thread lib_0C64::func_B5D7(param_01);
 	var_07 = [self];
-	var_04 scripts/asm/asm::asm_setstate(param_01 + "_victim",var_07);
+	var_04 scripts\asm\asm::asm_setstate(param_01 + "_victim",var_07);
 	self animmode("zonly_physics");
 	self orientmode("face angle",self.melee.var_10D6D[1]);
 	self aiclearanim(lib_0A1E::asm_getbodyknob(),param_02);

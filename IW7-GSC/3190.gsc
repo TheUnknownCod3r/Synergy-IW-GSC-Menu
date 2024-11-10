@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3190.gsc
-****************************/
+ * Script: 3190.gsc
+************************/
 
 func_8E15(param_00,param_01,param_02,param_03) {
 	if(param_00 == "remove_helmet") {
@@ -63,8 +63,8 @@ func_116EF(param_00,param_01,param_02) {
 func_D54C(param_00,param_01,param_02,param_03) {
 	self endon(param_01 + "_finished");
 	self.bdoingrangeattack = 1;
-	level thread scripts/cp/zombies/zombies_vo::play_zombie_vo(self,"attack_toss",1);
-	scripts/asm/asm_mp::func_2364(param_00,param_01,param_02,param_03);
+	level thread scripts\cp\zombies\zombies_vo::play_zombie_vo(self,"attack_toss",1);
+	scripts\asm\asm_mp::func_2364(param_00,param_01,param_02,param_03);
 }
 
 func_116EB(param_00,param_01,param_02) {
@@ -76,7 +76,7 @@ func_116EB(param_00,param_01,param_02) {
 func_D48E(param_00,param_01,param_02,param_03) {
 	self endon(param_01 + "_finished");
 	self.zombietograb = self.zombiepiecetarget;
-	scripts/asm/asm_mp::func_2364(param_00,param_01,param_02,param_03);
+	scripts\asm\asm_mp::func_2364(param_00,param_01,param_02,param_03);
 }
 
 func_D48D(param_00,param_01,param_02,param_03) {
@@ -86,7 +86,7 @@ func_D48D(param_00,param_01,param_02,param_03) {
 	var_05 = vectornormalize(var_04);
 	var_06 = vectortoangles(var_05);
 	self orientmode("face angle abs",var_06);
-	scripts/asm/asm_mp::func_2364(param_00,param_01,param_02,param_03);
+	scripts\asm\asm_mp::func_2364(param_00,param_01,param_02,param_03);
 }
 
 func_1001D(param_00,param_01,param_02,param_03) {
@@ -150,21 +150,21 @@ func_10055(param_00,param_01,param_02,param_03) {
 
 func_3EFA(param_00,param_01,param_02) {
 	if(self.helmetlocation == "hand") {
-		return scripts/asm/asm::asm_lookupanimfromalias(param_01,"attack_slam_helmet");
+		return scripts\asm\asm::asm_lookupanimfromalias(param_01,"attack_slam_helmet");
 	}
 
-	return scripts/asm/asm::asm_lookupanimfromalias(param_01,"attack_slam");
+	return scripts\asm\asm::asm_lookupanimfromalias(param_01,"attack_slam");
 }
 
 func_D51C(param_00,param_01,param_02,param_03) {
 	self endon(param_01 + "_finished");
-	var_04 = scripts/asm/asm_mp::asm_getanim(param_00,param_01);
+	var_04 = scripts\asm\asm_mp::asm_getanim(param_00,param_01);
 	var_05 = self getsafecircleorigin(param_01,var_04);
 	var_06 = getanimlength(var_05);
 	var_07 = var_06 * 0.33;
-	level thread scripts/cp/zombies/zombies_vo::play_zombie_vo(self,"attack_ground_pound",1);
+	level thread scripts\cp\zombies\zombies_vo::play_zombie_vo(self,"attack_ground_pound",1);
 	thread func_895D(var_07);
-	scripts/asm/asm_mp::func_2364(param_00,param_01,param_02,param_03);
+	scripts\asm\asm_mp::func_2364(param_00,param_01,param_02,param_03);
 }
 
 func_FFE2(param_00,param_01,param_02,param_03) {
@@ -178,12 +178,12 @@ func_FFE2(param_00,param_01,param_02,param_03) {
 func_895D(param_00) {
 	self endon("death");
 	wait(param_00);
-	var_01 = scripts/asm/zombie/melee::get_melee_damage_dealt();
+	var_01 = scripts\asm\zombie\melee::get_melee_damage_dealt();
 	self setscriptablepartstate("slam_blast","active");
 	foreach(var_03 in level.players) {
 		if(isalive(var_03)) {
 			if(distancesquared(self.origin,var_03.origin) < -25536) {
-				scripts/asm/zombie/melee::domeleedamage(var_03,var_01,"MOD_IMPACT");
+				scripts\asm\zombie\melee::domeleedamage(var_03,var_01,"MOD_IMPACT");
 			}
 		}
 	}
@@ -259,19 +259,19 @@ func_9E70(param_00,param_01,param_02,param_03) {
 func_D4BB(param_00,param_01,param_02,param_03) {
 	self.blaserattackstarted = 1;
 	thread func_CD6C();
-	scripts/asm/asm_mp::func_2364(param_00,param_01,param_02,param_03);
+	scripts\asm\asm_mp::func_2364(param_00,param_01,param_02,param_03);
 }
 
 func_CD6C() {
 	playfxontag(level._effect["vfx_zmb_brute_warn_01"],self,"tag_eye");
-	level thread scripts/cp/zombies/zombies_vo::play_zombie_vo(self,"attack_laser",1);
+	level thread scripts\cp\zombies\zombies_vo::play_zombie_vo(self,"attack_laser",1);
 }
 
 func_58E5(param_00,param_01,param_02,param_03) {
 	self.setplayerignoreradiusdamage = self.isnodeoccupied.origin + (0,0,40);
 	self.doentitiessharehierarchy = undefined;
 	thread func_8979(param_01);
-	scripts/asm/asm_mp::func_2364(param_00,param_01,param_02,param_03);
+	scripts\asm\asm_mp::func_2364(param_00,param_01,param_02,param_03);
 }
 
 func_116F8(param_00,param_01,param_02) {
@@ -413,7 +413,7 @@ func_A869(param_00) {
 }
 
 func_1FB4(param_00,param_01,param_02,param_03) {
-	return scripts/asm/asm::func_232B(param_01,"end");
+	return scripts\asm\asm::func_232B(param_01,"end");
 }
 
 func_CC1A(param_00,param_01) {
@@ -432,14 +432,14 @@ func_E12C(param_00,param_01) {
 
 func_D498(param_00,param_01,param_02,param_03) {
 	self endon("death");
-	scripts/asm/asm_mp::func_2364(param_00,param_01,param_02,param_03);
+	scripts\asm\asm_mp::func_2364(param_00,param_01,param_02,param_03);
 	func_8E15("put_on_helmet");
 }
 
 func_D499(param_00,param_01,param_02,param_03) {
 	self endon("death");
 	self setscriptablepartstate("eyes","yellow_eyes");
-	scripts/asm/asm_mp::func_2364(param_00,param_01,param_02,param_03);
+	scripts\asm\asm_mp::func_2364(param_00,param_01,param_02,param_03);
 	func_8E15("remove_helmet");
 }
 
@@ -490,7 +490,7 @@ func_1003B(param_00,param_01,param_02,param_03) {
 
 func_D4E7(param_00,param_01,param_02,param_03) {
 	self endon(param_01 + "_finished");
-	scripts/asm/asm_mp::func_2364(param_00,param_01,param_02,param_03);
+	scripts\asm\asm_mp::func_2364(param_00,param_01,param_02,param_03);
 }
 
 func_3EC0(param_00,param_01,param_02) {
@@ -524,5 +524,5 @@ func_3EC9(param_00,param_01,param_02) {
 		param_02 = param_02 + "_no_helmet";
 	}
 
-	return scripts/asm/asm::asm_lookupanimfromalias(param_01,param_02);
+	return scripts\asm\asm::asm_lookupanimfromalias(param_01,param_02);
 }

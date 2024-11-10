@@ -1,8 +1,8 @@
-/*********************************************
+/*************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\anim\animmode.gsc
-*********************************************/
+ * Script: scripts\anim\animmode.gsc
+*************************************/
 
 main() {
 	self endon("death");
@@ -36,8 +36,8 @@ main() {
 		var_03 = level.var_EC85[self.var_1180][var_02];
 	}
 
-	var_04 = function_00CE(self.var_141C.origin,self.var_141C.angles,var_03);
-	var_05 = function_00CD(self.var_141C.origin,self.var_141C.angles,var_03);
+	var_04 = getstartorigin(self.var_141C.origin,self.var_141C.angles,var_03);
+	var_05 = getstartangles(self.var_141C.origin,self.var_141C.angles,var_03);
 	var_06 = self _meth_811F(var_04);
 	if(isdefined(var_06)) {
 		var_04 = var_06;

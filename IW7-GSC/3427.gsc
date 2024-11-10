@@ -1,10 +1,10 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\3427.gsc
+ * Script: 3427.gsc
 ***************************************/
 
 init() {
-  scripts/cp/cp_splash_grenade::splashgrenadeinit();
+  scripts\cp\cp_splash_grenade::splashgrenadeinit();
   head_shard_init();
   facemelter_fx_init();
   level.facemelter_globs = [];
@@ -32,7 +32,7 @@ agent_float_in_air(var_00) {
   var_0.do_immediate_ragdoll = 1;
   var_00 linkto(var_06);
   var_06 moveto(var_0.origin + (0, 0, var_05), var_01);
-  var_07 = var_06 scripts/cp/utility::waittill_any_ents_return(level, "deactivate zero g", var_00, "death");
+  var_07 = var_06 scripts\cp\utility::waittill_any_ents_return(level, "deactivate zero g", var_00, "death");
 
   if (isdefined(var_00))
   var_0.do_immediate_ragdoll = 0;
@@ -43,7 +43,7 @@ agent_float_in_air(var_00) {
 fx_stun_damage() {
   self endon("death");
   self.stunned = 1;
-  thread scripts/cp/zombies/zombie_scriptable_states::applyzombiescriptablestate(self);
+  thread scripts\cp\zombies\zombie_scriptable_states::applyzombiescriptablestate(self);
   wait 0.5;
   self.stunned = undefined;
 }
@@ -144,9 +144,9 @@ special_weapon_logic(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var
   [[level.lethaldamage_func]](var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08, var_09, var_10, var_11);
 
   if (!var_12 && !var_15) {
-  if (var_01 scripts/cp/utility::is_consumable_active("headshot_explosion"))
+  if (var_01 scripts\cp\utility::is_consumable_active("headshot_explosion"))
   check_to_use_headshot_explosion(var_01, var_06, var_02, var_04, var_05, var_08, var_13);
-  else if (var_01 scripts/cp/utility::has_zombie_perk("perk_machine_change"))
+  else if (var_01 scripts\cp\utility::has_zombie_perk("perk_machine_change"))
   [[level.change_chew_explosion_func]](var_01, var_06, var_02, var_04, var_05, var_08);
   }
   }
@@ -165,7 +165,7 @@ dischord_death_logic(var_00, var_01, var_02, var_03, var_04) {
 
   self.scripted_mode = 1;
   var_05 = 0;
-  var_06 = scripts/cp/utility::weaponhasattachment(var_04, "pap1");
+  var_06 = scripts\cp\utility::weaponhasattachment(var_04, "pap1");
   var_07 = 50;
 
   if (var_06) {
@@ -274,7 +274,7 @@ dischord_spin_attack(var_00, var_01, var_02, var_03, var_04, var_05) {
   if (var_12.agent_type == "zombie_brute" || var_12.agent_type == "zombie_grey")
   continue;
 
-  if (var_12 scripts/mp/agents/zombie/zombie_agent::dying_zapper_death())
+  if (var_12 scripts\mp\agents\zombie\zombie_agent::dying_zapper_death())
   continue;
 
   var_13 = undefined;
@@ -327,7 +327,7 @@ fling_zombie(var_00, var_01, var_02, var_03) {
 should_take_players_current_weapon(var_00) {
   var_01 = 3;
 
-  if (var_00 scripts/cp/utility::has_zombie_perk("perk_machine_more"))
+  if (var_00 scripts\cp\utility::has_zombie_perk("perk_machine_more"))
   var_01 = 4;
 
   var_02 = var_00 getweaponslist("primary");
@@ -335,13 +335,13 @@ should_take_players_current_weapon(var_00) {
 }
 
 facemelter_fx_init() {
-  level._effect["base_plasma_explosion_enemy"] = loadfx("vfx/iw7/_requests/mp/vfx_plasma_large_explosion_enemy.vfx");
-  level._effect["glob_plasma_pool_enemy"] = loadfx("vfx/iw7/_requests/mp/vfx_plasma_med_flames_enemy.vfx");
-  level._effect["glob_plasma_impact_enemy"] = loadfx("vfx/iw7/_requests/mp/vfx_plasma_small_explosion_enemy.vfx");
-  level._effect["glob_plasma_trail_enemy"] = loadfx("vfx/iw7/_requests/mp/vfx_plasma_trail_enemy.vfx");
-  level._effect["dischord_tornado"] = loadfx("vfx/iw7/core/zombie/weapon/dischord/vfx_zmb_dischord_energy_tornado.vfx");
-  level._effect["player_plasma_enemy"] = loadfx("vfx/iw7/_requests/mp/power/vfx_splash_grenade_light_en.vfx");
-  level._effect["player_plasma_friendly"] = loadfx("vfx/iw7/_requests/mp/power/vfx_splash_grenade_light_fr.vfx");
+  level._effect["base_plasma_explosion_enemy"] = loadfx("vfx\iw7\_requests\mp\vfx_plasma_large_explosion_enemy.vfx");
+  level._effect["glob_plasma_pool_enemy"] = loadfx("vfx\iw7\_requests\mp\vfx_plasma_med_flames_enemy.vfx");
+  level._effect["glob_plasma_impact_enemy"] = loadfx("vfx\iw7\_requests\mp\vfx_plasma_small_explosion_enemy.vfx");
+  level._effect["glob_plasma_trail_enemy"] = loadfx("vfx\iw7\_requests\mp\vfx_plasma_trail_enemy.vfx");
+  level._effect["dischord_tornado"] = loadfx("vfx\iw7\core\zombie\weapon\dischord\vfx_zmb_dischord_energy_tornado.vfx");
+  level._effect["player_plasma_enemy"] = loadfx("vfx\iw7\_requests\mp\power\vfx_splash_grenade_light_en.vfx");
+  level._effect["player_plasma_friendly"] = loadfx("vfx\iw7\_requests\mp\power\vfx_splash_grenade_light_fr.vfx");
 }
 
 facemelter_death_logic(var_00, var_01, var_02, var_03, var_04) {
@@ -352,7 +352,7 @@ facemelter_death_logic(var_00, var_01, var_02, var_03, var_04) {
 
   self.scripted_mode = 1;
   self.ignoreall = 1;
-  var_05 = scripts/cp/utility::weaponhasattachment(var_04, "pap1");
+  var_05 = scripts\cp\utility::weaponhasattachment(var_04, "pap1");
 
   if (isdefined(self.hasplayedvignetteanim) && !self.hasplayedvignetteanim) {
   level thread facemelter_fire_pool(self, 5, var_00);
@@ -526,7 +526,7 @@ run_fire_pool(var_00, var_01, var_02, var_03) {
   continue;
   }
   else if (isalive(var_05))
-  level thread scripts/cp/utility::damage_over_time(var_05, var_02, 5, var_5.health + 1000, undefined, "iw7_facemelterdummy_zm", 0, "burning");
+  level thread scripts\cp\utility::damage_over_time(var_05, var_02, 5, var_5.health + 1000, undefined, "iw7_facemelterdummy_zm", 0, "burning");
 
   wait 0.1;
   }
@@ -553,7 +553,7 @@ fire_pool_timeout(var_00) {
 shredder_death_logic(var_00, var_01, var_02, var_03) {
   self endon("death");
 
-  if (scripts/mp/agents/zombie/zombie_agent::dying_zapper_death())
+  if (scripts\mp\agents\zombie\zombie_agent::dying_zapper_death())
   return;
 
   self.shredder_death = 1;
@@ -610,18 +610,18 @@ check_to_use_headshot_explosion(var_00, var_01, var_02, var_03, var_04, var_05, 
   if (!var_07)
   return;
 
-  if (!scripts/cp/utility::isheadshot(var_04, var_05, var_03, var_00))
+  if (!scripts\cp\utility::isheadshot(var_04, var_05, var_03, var_00))
   return;
 
-  var_00 scripts/cp/utility::notify_used_consumable("headshot_explosion");
+  var_00 scripts\cp\utility::notify_used_consumable("headshot_explosion");
   thread explode_head_with_fx(var_00, var_05, var_02, "bloody_death", undefined, var_06);
 }
 
 explode_head_with_fx(var_00, var_01, var_02, var_03, var_04, var_05) {
-  if (scripts/mp/agents/zombie/zombie_agent::dying_zapper_death())
+  if (scripts\mp\agents\zombie\zombie_agent::dying_zapper_death())
   return;
 
-  if (scripts/cp/utility::agentisfnfimmune())
+  if (scripts\cp\utility::agentisfnfimmune())
   return;
 
   self.head_is_exploding = 1;
@@ -650,15 +650,15 @@ showonscreenbloodeffects() {
 }
 
 head_shard_init() {
-  level._effect["head_exploder"] = loadfx("vfx/iw7/_requests/coop/zmb_head_exploder.vfx");
-  level._effect["head_expander"] = loadfx("vfx/iw7/_requests/coop/zmb_head_expander.vfx");
-  level._effect["head_blood_explosion"] = loadfx("vfx/iw7/_requests/coop/zmb_head_blood_explosion.vfx");
+  level._effect["head_exploder"] = loadfx("vfx\iw7\_requests\coop\zmb_head_exploder.vfx");
+  level._effect["head_expander"] = loadfx("vfx\iw7\_requests\coop\zmb_head_expander.vfx");
+  level._effect["head_blood_explosion"] = loadfx("vfx\iw7\_requests\coop\zmb_head_blood_explosion.vfx");
 }
 
 head_exploder(var_00, var_01, var_02, var_03, var_04) {
   self endon("death");
 
-  if (scripts/mp/agents/zombie/zombie_agent::dying_zapper_death())
+  if (scripts\mp\agents\zombie\zombie_agent::dying_zapper_death())
   return;
 
   self.head_is_exploding = 1;
@@ -688,7 +688,7 @@ head_exploder(var_00, var_01, var_02, var_03, var_04) {
 }
 
 explode_head_shards(var_00, var_01, var_02, var_03) {
-  var_04 = scripts/cp/utility::weaponhasattachment(var_03, "pap1");
+  var_04 = scripts\cp\utility::weaponhasattachment(var_03, "pap1");
   var_05 = getweaponbasename(var_03);
   var_06 = "iw7_headcutterdummy_zm";
   var_07 = 15000;
@@ -750,11 +750,11 @@ weapon_watch_hint() {
 
   for (;;) {
   if (isdefined(var_00) && var_00 == "iw7_axe_zm" && self.axe_hint_display < 3) {
-  scripts/cp/utility::setlowermessage("msg_axe_hint", &"CP_ZOMBIE_AXE_HINT", 4);
+  scripts\cp\utility::setlowermessage("msg_axe_hint", &"CP_ZOMBIE_AXE_HINT", 4);
   self.axe_hint_display = self.axe_hint_display + 1;
   }
   else if (isdefined(var_00) && var_00 == "iw7_forgefreeze_zm" && self.forgefreeze_hint_display < 5) {
-  scripts/cp/utility::setlowermessage("msg_axe_hint", &"CP_ZOMBIE_FORGEFREEZE_HINT", 4);
+  scripts\cp\utility::setlowermessage("msg_axe_hint", &"CP_ZOMBIE_FORGEFREEZE_HINT", 4);
   self.forgefreeze_hint_display = self.forgefreeze_hint_display + 1;
   }
 
@@ -898,7 +898,7 @@ axe_damage_cone() {
   for (;;) {
   self waittill("axe_melee_hit", var_00, var_01, var_02);
   var_03 = getweaponbasename(var_00);
-  var_04 = scripts/cp/cp_weapon::get_weapon_level(var_03);
+  var_04 = scripts\cp\cp_weapon::get_weapon_level(var_03);
   var_05 = get_melee_weapon_fov(var_03, var_04);
   var_06 = get_melee_weapon_hit_distance(var_03, var_04);
   var_07 = get_melee_weapon_max_enemies(var_03, var_04);
@@ -997,7 +997,7 @@ create_explosion_sphere(var_00) {
 playredrepulsorfx() {
   var_00 = spawnfxforclient(level._effect["repulsor_view_red"], self gettagorigin("tag_eye"), self);
   triggerfx(var_00);
-  var_00 thread scripts/cp/utility::delayentdelete(1);
+  var_00 thread scripts\cp\utility::delayentdelete(1);
   playrumbleonentity("slide_collision", self.origin);
   self earthquakeforplayer(0.5, 0.5, self.origin, 62.5);
 }
@@ -1008,7 +1008,7 @@ checkenemiesinfov(var_00, var_01, var_02) {
 
   var_03 = cos(var_00);
   var_04 = [];
-  var_05 = scripts/cp/cp_agent_utils::getaliveagentsofteam("axis");
+  var_05 = scripts\cp\cp_agent_utils::getaliveagentsofteam("axis");
   var_06 = scripts\engine\utility::get_array_of_closest(self.origin, var_05, undefined, 24, var_01, 1);
 
   foreach (var_08 in var_06) {
@@ -1039,7 +1039,7 @@ checkenemiesinfov(var_00, var_01, var_02) {
 axe_damage(var_00, var_01, var_02, var_03, var_04, var_05, var_06) {
   var_00 endon("death");
 
-  if (var_00 scripts/cp/agents/gametype_zombie::is_non_standard_zombie())
+  if (var_00 scripts\cp\agents\gametype_zombie::is_non_standard_zombie())
   var_0.allowpain = 1;
 
   var_00 getrandomarmkillstreak(var_02, var_03, var_01, var_01, "MOD_MELEE", var_05);
@@ -1058,7 +1058,7 @@ reload_watcher() {
   self waittill("reload_start");
   self waittill("reload");
 
-  if (scripts/cp/utility::is_escape_gametype()) {
+  if (scripts\cp\utility::is_escape_gametype()) {
   var_00 = self getcurrentweapon();
   var_01 = self getweaponammostock(var_00);
   var_02 = weaponclipsize(var_00);
@@ -1109,7 +1109,7 @@ unsetstatewhenadswithsniper(var_00) {
   for (;;) {
   var_01 = var_00 scripts\engine\utility::waittill_any_return("ads_in", "ads_out");
 
-  if (var_00 scripts/cp/utility::coop_getweaponclass(var_00 getcurrentweapon()) == "weapon_sniper") {
+  if (var_00 scripts\cp\utility::coop_getweaponclass(var_00 getcurrentweapon()) == "weapon_sniper") {
   if (var_01 == "ads_in") {
   var_00 clear_arcane_scriptable_effects(var_00);
   var_0.pause_arcane_logic = 1;
@@ -1130,14 +1130,14 @@ clear_arcane_effects(var_00) {
   var_0.special_ammo_type = undefined;
   var_00 setscriptablepartstate("arcane", "neutral", 1);
 
-  if (var_00 scripts/cp/utility::_hasperk("specialty_explosivebullets"))
-  var_00 scripts/cp/utility::_unsetperk("specialty_explosivebullets");
+  if (var_00 scripts\cp\utility::_hasperk("specialty_explosivebullets"))
+  var_00 scripts\cp\utility::_unsetperk("specialty_explosivebullets");
 
-  if (var_00 scripts/cp/utility::_hasperk("specialty_armorpiercing"))
-  var_00 scripts/cp/utility::_unsetperk("specialty_armorpiercing");
+  if (var_00 scripts\cp\utility::_hasperk("specialty_armorpiercing"))
+  var_00 scripts\cp\utility::_unsetperk("specialty_armorpiercing");
 
-  if (var_00 scripts/cp/utility::_hasperk("specialty_bulletdamage"))
-  var_00 scripts/cp/utility::_unsetperk("specialty_bulletdamage");
+  if (var_00 scripts\cp\utility::_hasperk("specialty_bulletdamage"))
+  var_00 scripts\cp\utility::_unsetperk("specialty_bulletdamage");
 }
 
 wait_for_weapon_switch_done(var_00, var_01) {
@@ -1189,11 +1189,11 @@ assign_ark_attachment_properties(var_00, var_01, var_02) {
   self.special_ammo_type = "stun_ammo";
   self.special_ammo_weapon = var_02;
 
-  if (!scripts/cp/utility::_hasperk("specialty_bulletdamage"))
-  scripts/cp/utility::giveperk("specialty_bulletdamage");
+  if (!scripts\cp\utility::_hasperk("specialty_bulletdamage"))
+  scripts\cp\utility::giveperk("specialty_bulletdamage");
 
-  scripts/cp/utility::_unsetperk("specialty_explosivebullets");
-  scripts/cp/utility::_unsetperk("specialty_armorpiercing");
+  scripts\cp\utility::_unsetperk("specialty_explosivebullets");
+  scripts\cp\utility::_unsetperk("specialty_armorpiercing");
   self setscriptablepartstate("arcane", "blue_on", 0);
   break;
   case "arkgreen_sm":
@@ -1202,9 +1202,9 @@ assign_ark_attachment_properties(var_00, var_01, var_02) {
   case "green":
   self.special_ammo_type = "poison_ammo";
   self setclientomnvar("zm_ui_specialammo", 0);
-  scripts/cp/utility::_unsetperk("specialty_explosivebullets");
-  scripts/cp/utility::_unsetperk("specialty_armorpiercing");
-  scripts/cp/utility::_unsetperk("specialty_bulletdamage");
+  scripts\cp\utility::_unsetperk("specialty_explosivebullets");
+  scripts\cp\utility::_unsetperk("specialty_armorpiercing");
+  scripts\cp\utility::_unsetperk("specialty_bulletdamage");
   self setscriptablepartstate("arcane", "green_on", 0);
   break;
   case "arkyellow_sm":
@@ -1214,11 +1214,11 @@ assign_ark_attachment_properties(var_00, var_01, var_02) {
   self setclientomnvar("zm_ui_specialammo", 3);
   self.special_ammo_type = "explosive_ammo";
 
-  if (!scripts/cp/utility::_hasperk("specialty_explosivebullets"))
-  scripts/cp/utility::giveperk("specialty_explosivebullets");
+  if (!scripts\cp\utility::_hasperk("specialty_explosivebullets"))
+  scripts\cp\utility::giveperk("specialty_explosivebullets");
 
-  scripts/cp/utility::_unsetperk("specialty_armorpiercing");
-  scripts/cp/utility::_unsetperk("specialty_bulletdamage");
+  scripts\cp\utility::_unsetperk("specialty_armorpiercing");
+  scripts\cp\utility::_unsetperk("specialty_bulletdamage");
   self setscriptablepartstate("arcane", "yellow_on", 0);
   break;
   case "arkred_sm":
@@ -1227,9 +1227,9 @@ assign_ark_attachment_properties(var_00, var_01, var_02) {
   case "red":
   self setclientomnvar("zm_ui_specialammo", 2);
   self.special_ammo_type = "incendiary_ammo";
-  scripts/cp/utility::_unsetperk("specialty_explosivebullets");
-  scripts/cp/utility::_unsetperk("specialty_armorpiercing");
-  scripts/cp/utility::_unsetperk("specialty_bulletdamage");
+  scripts\cp\utility::_unsetperk("specialty_explosivebullets");
+  scripts\cp\utility::_unsetperk("specialty_armorpiercing");
+  scripts\cp\utility::_unsetperk("specialty_bulletdamage");
   self setscriptablepartstate("arcane", "red_on", 0);
   break;
   case "arkpink_sm":
@@ -1240,20 +1240,20 @@ assign_ark_attachment_properties(var_00, var_01, var_02) {
   self setclientomnvar("zm_ui_specialammo", 5);
   self.special_ammo_type = "combined_ammo";
 
-  if (!scripts/cp/utility::_hasperk("specialty_bulletdamage"))
-  scripts/cp/utility::giveperk("specialty_bulletdamage");
+  if (!scripts\cp\utility::_hasperk("specialty_bulletdamage"))
+  scripts\cp\utility::giveperk("specialty_bulletdamage");
 
-  if (!scripts/cp/utility::_hasperk("specialty_armorpiercing"))
-  scripts/cp/utility::giveperk("specialty_armorpiercing");
+  if (!scripts\cp\utility::_hasperk("specialty_armorpiercing"))
+  scripts\cp\utility::giveperk("specialty_armorpiercing");
 
   self setscriptablepartstate("arcane", "pink_on", 0);
   break;
   default:
   self setclientomnvar("zm_ui_specialammo", 0);
   self.special_ammo_type = undefined;
-  scripts/cp/utility::_unsetperk("specialty_explosivebullets");
-  scripts/cp/utility::_unsetperk("specialty_armorpiercing");
-  scripts/cp/utility::_unsetperk("specialty_bulletdamage");
+  scripts\cp\utility::_unsetperk("specialty_explosivebullets");
+  scripts\cp\utility::_unsetperk("specialty_armorpiercing");
+  scripts\cp\utility::_unsetperk("specialty_bulletdamage");
   self setscriptablepartstate("arcane", "neutral", 0);
   break;
   }
@@ -1380,7 +1380,7 @@ watchglobstick(var_00, var_01) {
   var_3.owner = self.owner;
   var_3.team = self.owner.team;
   var_03 thread watchplayerstouchingpool(var_00, var_01);
-  var_03 thread scripts/cp/utility::delayentdelete(8);
+  var_03 thread scripts\cp\utility::delayentdelete(8);
   var_03 thread delayplaysound(0.1, "plasma_grenade_fire_glob");
   self.poolscriptablepart = "poolGround";
   self setscriptablepartstate("poolGround", "active");
@@ -1419,7 +1419,7 @@ play_fx_for_time(var_00, var_01, var_02) {
   if (isdefined(var_03))
   triggerfx(var_03);
 
-  var_03 thread scripts/cp/utility::delayentdelete(var_02);
+  var_03 thread scripts\cp\utility::delayentdelete(var_02);
   return var_03;
 }
 
@@ -1430,7 +1430,7 @@ watchplayerstouchingpool(var_00, var_01) {
   for (;;) {
   self waittill("trigger", var_02);
 
-  if (scripts/cp/utility::isreallyalive(var_02) && !isdefined(var_2.startedplasmastand) && (var_2.team != self.owner.team || var_02 == self.owner)) {
+  if (scripts\cp\utility::isreallyalive(var_02) && !isdefined(var_2.startedplasmastand) && (var_2.team != self.owner.team || var_02 == self.owner)) {
   if (var_01) {
   if (var_02 == self.owner)
   continue;
@@ -1483,8 +1483,8 @@ watchstartlingerdamage(var_00, var_01) {
   self.startedplasmalinger = 1;
   var_05 = spawnfxforclient(scripts\engine\utility::getfx("player_plasma_screen_linger"), self geteye(), self);
   triggerfx(var_05);
-  var_05 thread scripts/cp/utility::delayentdelete(1);
-  var_05 thread scripts/cp/utility::deleteonplayerdeathdisconnect(self);
+  var_05 thread scripts\cp\utility::delayentdelete(1);
+  var_05 thread scripts\cp\utility::deleteonplayerdeathdisconnect(self);
   var_05 thread deletepentsondisconnect(self);
   thread damageplayerovertime(var_00, var_01, var_03, var_04, var_02, "start_plasma_stand", "plasma_dot_end");
 }

@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2998.gsc
+ * Script: 2998.gsc
 ***************************************/
 
 func_12A89() {
@@ -68,51 +68,51 @@ func_12A89() {
 }
 
 func_12A87() {
-  level._effect["jet_missile_imp_water"] = loadfx("vfx/old/space_fighter/vfx_jet_missile_imp_water.vfx");
-  level._effect["jet_missile_imp_generic"] = loadfx("vfx/iw7/levels/moon/vfx_jet_missile_imp_generic_moon.vfx");
-  level._effect["jet_missile_imp_airburst"] = loadfx("vfx/iw7/levels/moon/vfx_jet_missile_imp_generic_moon_premature.vfx");
-  level._effect["capital_turret_death_sm"] = loadfx("vfx/iw7/core/vehicle/turret/vfx_cap_turret_death_sm.vfx");
-  level._effect["capital_turret_damage1_sm"] = loadfx("vfx/iw7/core/vehicle/turret/vfx_cap_turret_dmg1.vfx");
-  level._effect["capital_turret_damage2_sm"] = loadfx("vfx/iw7/core/vehicle/turret/vfx_cap_turret_dmg2.vfx");
-  level._effect["capital_turret_smolder_sm"] = loadfx("vfx/iw7/core/vehicle/turret/vfx_cap_turret_smolder_sm.vfx");
-  level._effect["capital_turret_muzzle_sm"] = loadfx("vfx/iw7/core/muzflash/cannon/vfx_muzflash_capital_30mm_looping.vfx");
-  level._effect["capital_turret_muzzle_sm_noloop"] = loadfx("vfx/iw7/core/muzflash/cannon/vfx_muzflash_capital_30mm.vfx");
-  level._effect["capital_turret_death_md"] = loadfx("vfx/iw7/core/vehicle/turret/vfx_cap_turret_death_md.vfx");
-  level._effect["capital_turret_damage1_md"] = loadfx("vfx/iw7/core/vehicle/turret/vfx_cap_turret_dmg1.vfx");
-  level._effect["capital_turret_damage2_md"] = loadfx("vfx/iw7/core/vehicle/turret/vfx_cap_turret_dmg2.vfx");
-  level._effect["capital_turret_smolder_md"] = loadfx("vfx/iw7/core/vehicle/turret/vfx_cap_turret_smolder_md.vfx");
-  level._effect["capital_turret_muzzle_md"] = loadfx("vfx/iw7/core/muzflash/cannon/vfx_muzflash_capital_40mm_flak.vfx");
-  level._effect["capital_turret_explosion_md"] = loadfx("vfx/iw7/core/expl/weap/flak/vfx_flak_blast_a_runner.vfx");
-  level._effect["capital_turret_death_lg"] = loadfx("vfx/iw7/core/vehicle/turret/vfx_cap_turret_death_lrg.vfx");
-  level._effect["capital_turret_damage1_lg"] = loadfx("vfx/iw7/core/vehicle/turret/vfx_cap_turret_dmg1.vfx");
-  level._effect["capital_turret_damage2_lg"] = loadfx("vfx/iw7/core/vehicle/turret/vfx_cap_turret_dmg2.vfx");
-  level._effect["capital_turret_smolder_lg"] = loadfx("vfx/iw7/core/vehicle/turret/vfx_cap_turret_smolder_lrg.vfx");
-  level._effect["capital_turret_muzzle_lg"] = loadfx("vfx/iw7/core/muzflash/cannon/vfx_mega_cannon_muzflash.vfx");
-  level._effect["capital_turret_laser_lg"] = loadfx("vfx/old/_requests/prisoner/pnr_sniper_laser_scan.vfx");
-  level._effect["capital_turret_fire_laser_lg"] = loadfx("vfx/iw7/_requests/mp/vfx_disruptor_laser");
-  level._effect["capital_turret_death_smt"] = loadfx("vfx/iw7/core/vehicle/turret/vfx_cap_turret_death_smt.vfx");
-  level._effect["capital_turret_damage1_smt"] = loadfx("vfx/iw7/core/vehicle/turret/vfx_cap_turret_dmg1.vfx");
-  level._effect["capital_turret_damage2_smt"] = loadfx("vfx/iw7/core/vehicle/turret/vfx_cap_turret_dmg2.vfx");
-  level._effect["capital_turret_smolder_smt"] = loadfx("vfx/iw7/core/vehicle/turret/vfx_cap_turret_smolder_smt.vfx");
-  level._effect["capital_turret_muzzle_smt"] = loadfx("vfx/old/core/muzflash/vfx_flash_missile_tube_launch");
-  level._effect["capital_missile_flare_smt"] = loadfx("vfx/iw7/core/smktrail/vfx_seeking_missile_trail.vfx");
-  level._effect["capital_missile_imp_airburst_smt"] = loadfx("vfx/iw7/core/expl/weap/missile/vfx_missile_shotdown.vfx");
-  level._effect["capital_missile_imp_capship_gen"] = loadfx("vfx/iw7/core/expl/weap/missile/vfx_missile_imp_capship_generic.vfx");
-  level._effect["capital_dead_turret_ship_predeath"] = loadfx("vfx/iw7/core/vehicle/turret/vfx_cap_ship_explo_dead_turret.vfx");
-  level._effect["capital_turret_death_emp"] = loadfx("vfx/iw7/core/vehicle/turret/vfx_cap_turret_death.vfx");
-  level._effect["capital_turret_damage1_emp"] = loadfx("vfx/iw7/core/vehicle/turret/vfx_cap_turret_dmg1.vfx");
-  level._effect["capital_turret_damage2_emp"] = loadfx("vfx/iw7/core/vehicle/turret/vfx_cap_turret_dmg2.vfx");
-  level._effect["capital_turret_smolder_emp"] = loadfx("vfx/iw7/core/vehicle/turret/vfx_cap_turret_smolder_sm.vfx");
-  level._effect["capital_turret_muzzle_emp"] = loadfx("vfx/level/moon/vfx_turret_muzz_tracer_ground");
-  level._effect["capital_turret_death_wh"] = loadfx("vfx/iw7/core/vehicle/turret/vfx_cap_turret_death.vfx");
-  level._effect["capital_turret_damage1_wh"] = loadfx("vfx/iw7/core/vehicle/turret/vfx_cap_turret_dmg1.vfx");
-  level._effect["capital_turret_damage2_wh"] = loadfx("vfx/iw7/core/vehicle/turret/vfx_cap_turret_dmg2.vfx");
-  level._effect["capital_missile_imp_airburst_wh"] = loadfx("vfx/iw7/core/expl/weap/missile/vfx_missile_shotdown.vfx");
-  level._effect["capital_turret_smoke_trail"] = loadfx("vfx/iw7/core/vehicle/turret/vfx_cap_turret_smk_trail.vfx");
-  level._effect["capital_turret_smoke_trail"] = loadfx("vfx/iw7/core/vehicle/turret/vfx_cap_turret_smk_trail.vfx");
-  level._effect["capital_turret_sml_cheap"] = loadfx("vfx/iw7/core/muzflash/cannon/vfx_turret_small_cheap.vfx");
-  level._effect["capital_un_turret_sml_cheap"] = loadfx("vfx/iw7/core/muzflash/cannon/vfx_un_turret_small_cheap.vfx");
-  level._effect["capital_turret_flak_cheap"] = loadfx("vfx/iw7/core/muzflash/cannon/vfx_flack_cannon_cheap.vfx");
+  level._effect["jet_missile_imp_water"] = loadfx("vfx\old\space_fighter\vfx_jet_missile_imp_water.vfx");
+  level._effect["jet_missile_imp_generic"] = loadfx("vfx\iw7\levels\moon\vfx_jet_missile_imp_generic_moon.vfx");
+  level._effect["jet_missile_imp_airburst"] = loadfx("vfx\iw7\levels\moon\vfx_jet_missile_imp_generic_moon_premature.vfx");
+  level._effect["capital_turret_death_sm"] = loadfx("vfx\iw7\core\vehicle\turret\vfx_cap_turret_death_sm.vfx");
+  level._effect["capital_turret_damage1_sm"] = loadfx("vfx\iw7\core\vehicle\turret\vfx_cap_turret_dmg1.vfx");
+  level._effect["capital_turret_damage2_sm"] = loadfx("vfx\iw7\core\vehicle\turret\vfx_cap_turret_dmg2.vfx");
+  level._effect["capital_turret_smolder_sm"] = loadfx("vfx\iw7\core\vehicle\turret\vfx_cap_turret_smolder_sm.vfx");
+  level._effect["capital_turret_muzzle_sm"] = loadfx("vfx\iw7\core\muzflash\cannon\vfx_muzflash_capital_30mm_looping.vfx");
+  level._effect["capital_turret_muzzle_sm_noloop"] = loadfx("vfx\iw7\core\muzflash\cannon\vfx_muzflash_capital_30mm.vfx");
+  level._effect["capital_turret_death_md"] = loadfx("vfx\iw7\core\vehicle\turret\vfx_cap_turret_death_md.vfx");
+  level._effect["capital_turret_damage1_md"] = loadfx("vfx\iw7\core\vehicle\turret\vfx_cap_turret_dmg1.vfx");
+  level._effect["capital_turret_damage2_md"] = loadfx("vfx\iw7\core\vehicle\turret\vfx_cap_turret_dmg2.vfx");
+  level._effect["capital_turret_smolder_md"] = loadfx("vfx\iw7\core\vehicle\turret\vfx_cap_turret_smolder_md.vfx");
+  level._effect["capital_turret_muzzle_md"] = loadfx("vfx\iw7\core\muzflash\cannon\vfx_muzflash_capital_40mm_flak.vfx");
+  level._effect["capital_turret_explosion_md"] = loadfx("vfx\iw7\core\expl\weap\flak\vfx_flak_blast_a_runner.vfx");
+  level._effect["capital_turret_death_lg"] = loadfx("vfx\iw7\core\vehicle\turret\vfx_cap_turret_death_lrg.vfx");
+  level._effect["capital_turret_damage1_lg"] = loadfx("vfx\iw7\core\vehicle\turret\vfx_cap_turret_dmg1.vfx");
+  level._effect["capital_turret_damage2_lg"] = loadfx("vfx\iw7\core\vehicle\turret\vfx_cap_turret_dmg2.vfx");
+  level._effect["capital_turret_smolder_lg"] = loadfx("vfx\iw7\core\vehicle\turret\vfx_cap_turret_smolder_lrg.vfx");
+  level._effect["capital_turret_muzzle_lg"] = loadfx("vfx\iw7\core\muzflash\cannon\vfx_mega_cannon_muzflash.vfx");
+  level._effect["capital_turret_laser_lg"] = loadfx("vfx\old\_requests\prisoner\pnr_sniper_laser_scan.vfx");
+  level._effect["capital_turret_fire_laser_lg"] = loadfx("vfx\iw7\_requests\mp\vfx_disruptor_laser");
+  level._effect["capital_turret_death_smt"] = loadfx("vfx\iw7\core\vehicle\turret\vfx_cap_turret_death_smt.vfx");
+  level._effect["capital_turret_damage1_smt"] = loadfx("vfx\iw7\core\vehicle\turret\vfx_cap_turret_dmg1.vfx");
+  level._effect["capital_turret_damage2_smt"] = loadfx("vfx\iw7\core\vehicle\turret\vfx_cap_turret_dmg2.vfx");
+  level._effect["capital_turret_smolder_smt"] = loadfx("vfx\iw7\core\vehicle\turret\vfx_cap_turret_smolder_smt.vfx");
+  level._effect["capital_turret_muzzle_smt"] = loadfx("vfx\old\core\muzflash\vfx_flash_missile_tube_launch");
+  level._effect["capital_missile_flare_smt"] = loadfx("vfx\iw7\core\smktrail\vfx_seeking_missile_trail.vfx");
+  level._effect["capital_missile_imp_airburst_smt"] = loadfx("vfx\iw7\core\expl\weap\missile\vfx_missile_shotdown.vfx");
+  level._effect["capital_missile_imp_capship_gen"] = loadfx("vfx\iw7\core\expl\weap\missile\vfx_missile_imp_capship_generic.vfx");
+  level._effect["capital_dead_turret_ship_predeath"] = loadfx("vfx\iw7\core\vehicle\turret\vfx_cap_ship_explo_dead_turret.vfx");
+  level._effect["capital_turret_death_emp"] = loadfx("vfx\iw7\core\vehicle\turret\vfx_cap_turret_death.vfx");
+  level._effect["capital_turret_damage1_emp"] = loadfx("vfx\iw7\core\vehicle\turret\vfx_cap_turret_dmg1.vfx");
+  level._effect["capital_turret_damage2_emp"] = loadfx("vfx\iw7\core\vehicle\turret\vfx_cap_turret_dmg2.vfx");
+  level._effect["capital_turret_smolder_emp"] = loadfx("vfx\iw7\core\vehicle\turret\vfx_cap_turret_smolder_sm.vfx");
+  level._effect["capital_turret_muzzle_emp"] = loadfx("vfx\level\moon\vfx_turret_muzz_tracer_ground");
+  level._effect["capital_turret_death_wh"] = loadfx("vfx\iw7\core\vehicle\turret\vfx_cap_turret_death.vfx");
+  level._effect["capital_turret_damage1_wh"] = loadfx("vfx\iw7\core\vehicle\turret\vfx_cap_turret_dmg1.vfx");
+  level._effect["capital_turret_damage2_wh"] = loadfx("vfx\iw7\core\vehicle\turret\vfx_cap_turret_dmg2.vfx");
+  level._effect["capital_missile_imp_airburst_wh"] = loadfx("vfx\iw7\core\expl\weap\missile\vfx_missile_shotdown.vfx");
+  level._effect["capital_turret_smoke_trail"] = loadfx("vfx\iw7\core\vehicle\turret\vfx_cap_turret_smk_trail.vfx");
+  level._effect["capital_turret_smoke_trail"] = loadfx("vfx\iw7\core\vehicle\turret\vfx_cap_turret_smk_trail.vfx");
+  level._effect["capital_turret_sml_cheap"] = loadfx("vfx\iw7\core\muzflash\cannon\vfx_turret_small_cheap.vfx");
+  level._effect["capital_un_turret_sml_cheap"] = loadfx("vfx\iw7\core\muzflash\cannon\vfx_un_turret_small_cheap.vfx");
+  level._effect["capital_turret_flak_cheap"] = loadfx("vfx\iw7\core\muzflash\cannon\vfx_flack_cannon_cheap.vfx");
 }
 
 func_39E8(var_00) {
@@ -147,8 +147,8 @@ func_39E8(var_00) {
   if (var_1.size == 0)
   return;
 
-  if (!scripts/sp/utility::func_65DF("hold_fire"))
-  scripts/sp/utility::func_65E0("hold_fire");
+  if (!scripts\sp\utility::func_65DF("hold_fire"))
+  scripts\sp\utility::func_65E0("hold_fire");
 
   if (isdefined(self.func_EEF9)) {
   self.func_12A09 = 0;
@@ -263,7 +263,7 @@ func_39EA(var_00, var_01) {
   if (var_8.size == 5)
   var_10 = [int(var_8[1]), int(var_8[2]), int(var_8[3]), int(var_8[4])];
 
-  if (self.func_12A09 == 0 && scripts/sp/utility::hastag(self.model, var_09))
+  if (self.func_12A09 == 0 && scripts\sp\utility::hastag(self.model, var_09))
   func_107FC(var_06, var_05, var_09, undefined, var_10);
   }
 
@@ -278,7 +278,7 @@ func_39EA(var_00, var_01) {
   for (;;) {
   var_09 = var_13 + "_" + var_07;
 
-  if (scripts/sp/utility::hastag(self.model, var_09)) {
+  if (scripts\sp\utility::hastag(self.model, var_09)) {
   if (isdefined(var_6.func_8B3B) && var_6.func_8B3B)
   func_1072D(var_06, var_05, var_09);
   else if (self.func_12A09 == 0) {
@@ -374,7 +374,7 @@ func_39CF(var_00, var_01, var_02) {
   else
   var_07 = "medium_target";
 
-  if (scripts/sp/utility::func_B324())
+  if (scripts\sp\utility::func_B324())
   var_05 [[level.func_A056.func_11543]](var_03, var_06, var_07, "enemy_jackal");
 
   if (var_01)
@@ -417,7 +417,7 @@ func_39C2(var_00) {
 
   foreach (var_02 in var_00) {
   if (isdefined(var_02) && isdefined(var_2.func_AEDF) && var_2.func_AEDF.func_AEEA) {
-  if (scripts/sp/utility::func_B324())
+  if (scripts\sp\utility::func_B324())
   var_02 [[level.func_A056.func_11540]]();
   }
 
@@ -438,7 +438,7 @@ func_39E6(var_00, var_01, var_02, var_03, var_04) {
   var_07 = var_03 + var_06;
   var_08 = var_02 + "_" + var_07;
 
-  if (scripts/sp/utility::hastag(self.model, var_08))
+  if (scripts\sp\utility::hastag(self.model, var_08))
   var_5[var_5.size] = func_107FC(var_00, var_01, var_08);
   }
 
@@ -836,7 +836,7 @@ func_39ED(var_00, var_01) {
   if (isdefined(var_0.func_24C4) && var_0.classname != "script_vehicle_corpse") {
   var_03 = scripts\engine\utility::random(var_0.func_24C4);
 
-  if (!scripts/sp/utility::hastag(var_0.model, var_03))
+  if (!scripts\sp\utility::hastag(var_0.model, var_03))
   return;
 
   var_04 = var_00 gettagorigin(var_03);
@@ -868,17 +868,17 @@ func_39EC() {
 func_39DC(var_00) {
   var_01 = [];
 
-  if (!scripts/sp/utility::hastag(var_00, "tag_flash_3")) {
-  for (var_02 = 1; scripts/sp/utility::hastag(var_00, "tag_flash_" + var_02); var_2++)
+  if (!scripts\sp\utility::hastag(var_00, "tag_flash_3")) {
+  for (var_02 = 1; scripts\sp\utility::hastag(var_00, "tag_flash_" + var_02); var_2++)
   var_1[var_1.size] = "tag_flash_" + var_02;
   }
 
   if (var_1.size == 0) {
-  if (scripts/sp/utility::hastag(var_00, "tag_flash"))
+  if (scripts\sp\utility::hastag(var_00, "tag_flash"))
   var_1[var_1.size] = "tag_flash";
-  else if (scripts/sp/utility::hastag(var_00, "jackal_arena_aa_turret_01_guns_part"))
+  else if (scripts\sp\utility::hastag(var_00, "jackal_arena_aa_turret_01_guns_part"))
   var_1[var_1.size] = "jackal_arena_aa_turret_01_guns_part";
-  else if (scripts/sp/utility::hastag(var_00, "tag_origin"))
+  else if (scripts\sp\utility::hastag(var_00, "tag_origin"))
   var_1[var_1.size] = "tag_origin";
   else
   {}
@@ -982,7 +982,7 @@ func_6D4D(var_00, var_01, var_02, var_03) {
   var_04 = level.func_39DD[self.class];
   var_05 = var_4.func_4D1E.fx;
 
-  if (scripts/sp/utility::hastag(self.model, "tag_flash_1") && scripts/sp/utility::hastag(self.model, "tag_flash_2")) {
+  if (scripts\sp\utility::hastag(self.model, "tag_flash_1") && scripts\sp\utility::hastag(self.model, "tag_flash_2")) {
   var_02 = "tag_flash_1";
 
   if (scripts\engine\utility::is_true(self.func_6D40)) {
@@ -994,7 +994,7 @@ func_6D4D(var_00, var_01, var_02, var_03) {
 
   playfxontag(scripts\engine\utility::getfx(var_5.func_BDFF), self, var_02);
   }
-  else if (scripts/sp/utility::hastag(self.model, "TAG_FLASH"))
+  else if (scripts\sp\utility::hastag(self.model, "TAG_FLASH"))
   playfxontag(scripts\engine\utility::getfx(var_5.func_BDFF), self, "TAG_FLASH");
   else
   playfx(scripts\engine\utility::getfx(var_5.func_BDFF), var_00, var_01);
@@ -1049,7 +1049,7 @@ func_39A5() {
   var_00 = 0;
 
   for (;;) {
-  if (!scripts/sp/utility::func_D123()) {
+  if (!scripts\sp\utility::func_D123()) {
   wait 1;
   continue;
   }
@@ -1170,9 +1170,9 @@ func_399E(var_00, var_01, var_02, var_03) {
   var_03 = 1;
 
   if (isdefined(var_02) && var_02)
-  var_04 = scripts/sp/math::func_C097(level.func_A48E.func_3A04, level.func_A48E.func_3A03, level.func_A056.func_67D9);
+  var_04 = scripts\sp\math::func_C097(level.func_A48E.func_3A04, level.func_A48E.func_3A03, level.func_A056.func_67D9);
   else
-  var_04 = scripts/sp/math::func_C097(level.func_A48E.func_3A06, level.func_A48E.func_3A05, level.func_A056.func_67D9);
+  var_04 = scripts\sp\math::func_C097(level.func_A48E.func_3A06, level.func_A48E.func_3A05, level.func_A056.func_67D9);
 
   var_05 = self.origin - level.func_D127.origin;
   var_06 = length(var_05);
@@ -1185,9 +1185,9 @@ func_399E(var_00, var_01, var_02, var_03) {
   if (var_08 > 5000)
   var_08 = 5000;
 
-  var_09 = scripts/sp/math::func_6A8E(350, 900, var_04);
-  var_07 = scripts/sp/math::func_6A8E(800, var_07, var_04);
-  var_08 = scripts/sp/math::func_6A8E(1500, var_08, var_04);
+  var_09 = scripts\sp\math::func_6A8E(350, 900, var_04);
+  var_07 = scripts\sp\math::func_6A8E(800, var_07, var_04);
+  var_08 = scripts\sp\math::func_6A8E(1500, var_08, var_04);
   var_10 = vectortoangles(var_05);
   var_11 = vectornormalize(var_05);
   var_12 = -1 * var_05;
@@ -1196,8 +1196,8 @@ func_399E(var_00, var_01, var_02, var_03) {
   var_15 = anglestoright(var_10) * randomfloatrange(-1 * var_09, var_09) * var_01;
   var_16 = anglestoup(var_10) * randomfloatrange(-1 * var_09, var_09) * var_01;
   var_17 = self.origin;
-  var_18 = scripts/sp/math::func_C097(4000, 30000, var_06);
-  var_19 = scripts/sp/math::func_6A8E(7, 20, var_18);
+  var_18 = scripts\sp\math::func_C097(4000, 30000, var_06);
+  var_19 = scripts\sp\math::func_6A8E(7, 20, var_18);
   var_20 = level.func_D127.spaceship_vel * var_19;
   var_21 = level.func_D127.origin + var_14 + var_15 + var_16 + var_20;
   playfxontag(scripts\engine\utility::getfx("miniflak_muzzle"), self, var_00);
@@ -1209,8 +1209,8 @@ func_399E(var_00, var_01, var_02, var_03) {
 
   var_23.angles = vectortoangles(var_22);
   playfxontag(scripts\engine\utility::getfx("miniflak_trace"), var_23, "tag_origin");
-  var_24 = scripts/sp/math::func_C097(1000, 35000, var_06);
-  var_24 = scripts/sp/math::func_6A8E(0.1, 0.75, var_24);
+  var_24 = scripts\sp\math::func_C097(1000, 35000, var_06);
+  var_24 = scripts\sp\math::func_6A8E(0.1, 0.75, var_24);
   var_23 moveto(var_21, var_24);
   wait(var_24);
   wait 0.05;
@@ -1224,14 +1224,14 @@ func_399E(var_00, var_01, var_02, var_03) {
   var_25 = undefined;
 
   var_06 = distance(var_21, level.func_D127.origin);
-  var_26 = scripts/sp/math::func_C097(500, 8000, var_06);
-  var_27 = scripts/sp/math::func_6A8E(0.2, 0, var_26);
+  var_26 = scripts\sp\math::func_C097(500, 8000, var_06);
+  var_27 = scripts\sp\math::func_6A8E(0.2, 0, var_26);
 
   if (var_27 > 0.01)
   earthquake(var_27, 0.5, level.func_D127.origin, 20000);
 
-  var_26 = scripts/sp/math::func_C097(200, 2000, var_06);
-  var_28 = scripts/sp/math::func_6A8E(100, 0, var_26);
+  var_26 = scripts\sp\math::func_C097(200, 2000, var_06);
+  var_28 = scripts\sp\math::func_6A8E(100, 0, var_26);
 
   if (var_28 <= 0)
   return;
@@ -1254,9 +1254,9 @@ func_39A4() {
 
 func_398A(var_00) {
   if (var_00)
-  thread scripts/sp/utility::func_75C4("flak_omni_space", "TAG_ORIGIN");
+  thread scripts\sp\utility::func_75C4("flak_omni_space", "TAG_ORIGIN");
   else
-  thread scripts/sp/utility::func_75F8("flak_omni_space", "TAG_ORIGIN");
+  thread scripts\sp\utility::func_75F8("flak_omni_space", "TAG_ORIGIN");
 }
 
 func_3966(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07) {
@@ -1799,7 +1799,7 @@ func_39E3(var_00, var_01) {
   wait(randomfloat(2));
 
   for (;;) {
-  if (self.func_C841 scripts/sp/utility::func_65DF("player_inside_ship") && self.func_C841 scripts/sp/utility::func_65DB("player_inside_ship")) {
+  if (self.func_C841 scripts\sp\utility::func_65DF("player_inside_ship") && self.func_C841 scripts\sp\utility::func_65DB("player_inside_ship")) {
   wait 1;
   continue;
   }
@@ -1845,7 +1845,7 @@ func_39E3(var_00, var_01) {
   }
   }
 
-  if (scripts/sp/utility::func_D123() && self.func_114FB == level.func_D127) {
+  if (scripts\sp\utility::func_D123() && self.func_114FB == level.func_D127) {
   if (isdefined(self.func_10241.func_6D35)) {
   if (!isdefined(self.func_B04A)) {
   self.func_B04A = spawn("script_origin", self.origin);
@@ -2050,7 +2050,7 @@ func_12A46(var_00) {
 
   var_03 = (0, 0, 0);
 
-  if (isdefined(level.func_D127) && var_00 == level.func_D127 && scripts/sp/utility::func_D123())
+  if (isdefined(level.func_D127) && var_00 == level.func_D127 && scripts\sp\utility::func_D123())
   var_03 = level.func_D127 getentityvelocity();
 
   if (isdefined(level.func_4BA1))
@@ -2306,8 +2306,8 @@ func_1A8A(var_00, var_01, var_02, var_03, var_04, var_05, var_06) {
   return;
 
   var_09 = 0.2;
-  var_10 = scripts/sp/math::func_C097(400, 10000, sqrt(var_08));
-  var_11 = scripts/sp/math::func_6A8E(0.01, var_09, var_10);
+  var_10 = scripts\sp\math::func_C097(400, 10000, sqrt(var_08));
+  var_11 = scripts\sp\math::func_6A8E(0.01, var_09, var_10);
   thread func_1A8B(var_11);
 }
 
@@ -2388,9 +2388,9 @@ func_88BC(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07) {
   }
 
   thread func_4C7C(var_14, var_15, var_01, var_03, var_06);
-  var_18 = scripts/sp/math::func_C097(0, var_13, var_10);
-  var_19 = scripts/sp/math::func_6A8E(var_4.func_B428, var_4.func_B73D, var_18);
-  var_20 = scripts/sp/math::func_6A8E(var_4.func_B465, var_4.func_B753, var_18);
+  var_18 = scripts\sp\math::func_C097(0, var_13, var_10);
+  var_19 = scripts\sp\math::func_6A8E(var_4.func_B428, var_4.func_B73D, var_18);
+  var_20 = scripts\sp\math::func_6A8E(var_4.func_B465, var_4.func_B753, var_18);
 
   if (!isdefined(var_05))
   var_05 = level.player;
@@ -2687,7 +2687,7 @@ func_39B7(var_00, var_01, var_02) {
   wait(randomfloat(2));
 
   for (;;) {
-  if (scripts/sp/utility::func_65DF("player_inside_ship") && scripts/sp/utility::func_65DB("player_inside_ship")) {
+  if (scripts\sp\utility::func_65DF("player_inside_ship") && scripts\sp\utility::func_65DB("player_inside_ship")) {
   wait 1;
   continue;
   }
@@ -2820,7 +2820,7 @@ func_39B8(var_00, var_01, var_02, var_03, var_04) {
   wait(randomfloat(2));
 
   for (;;) {
-  if (scripts/sp/utility::func_65DF("player_inside_ship") && scripts/sp/utility::func_65DB("player_inside_ship")) {
+  if (scripts\sp\utility::func_65DF("player_inside_ship") && scripts\sp\utility::func_65DB("player_inside_ship")) {
   wait 1;
   continue;
   }
@@ -3349,7 +3349,7 @@ func_8935(var_00) {
   foreach (var_03 in self.turrets) {
   foreach (var_05 in var_03) {
   if (ispointinvolume(var_5.origin, var_01)) {
-  var_05 scripts/sp/utility::func_F40A("enemy", 0, 0);
+  var_05 scripts\sp\utility::func_F40A("enemy", 0, 0);
   level.func_12A90[level.func_12A90.size] = var_05;
   }
 
@@ -3366,7 +3366,7 @@ func_13819(var_00, var_01, var_02) {
 
   if (isdefined(var_02)) {
   var_10 endon("thread_timed_out");
-  var_10 thread scripts/sp/utility_code::func_13758(var_02);
+  var_10 thread scripts\sp\utility_code::func_13758(var_02);
   }
 
   var_10.count = var_0.size;
@@ -3374,7 +3374,7 @@ func_13819(var_00, var_01, var_02) {
   if (isdefined(var_01) && var_01 < var_10.count)
   var_10.count = var_01;
 
-  scripts\engine\utility::array_thread(var_00, scripts/sp/utility_code::func_13757, var_10);
+  scripts\engine\utility::array_thread(var_00, scripts\sp\utility_code::func_13757, var_10);
 
   while (var_10.count > 0)
   var_10 waittill("waittill_dead guy died");
@@ -3386,7 +3386,7 @@ func_8933(var_00) {
   else
   level.func_FD6C = spawnstruct();
 
-  level.func_FD6C.func_4C11 = level.player scripts/sp/hud_util::func_4999("default", 2);
+  level.func_FD6C.func_4C11 = level.player scripts\sp\hud_util::func_4999("default", 2);
   level.func_FD6C.func_4C11.hidewheninmenu = 1;
   level.func_FD6C.func_4C11.hidewhendead = 1;
   level.func_FD6C.func_4C11.alignx = "left";
@@ -3403,7 +3403,7 @@ func_8933(var_00) {
   level.func_B4D0 = var_00;
   }
 
-  level.func_FD6C.func_4C11 give_zap_perk(scripts/sp/utility::string(level.func_12A91) + " / " + scripts/sp/utility::string(level.func_B4D0) + " Turrets");
+  level.func_FD6C.func_4C11 give_zap_perk(scripts\sp\utility::string(level.func_12A91) + " / " + scripts\sp\utility::string(level.func_B4D0) + " Turrets");
 }
 
 func_12DFA(var_00) {
@@ -3414,7 +3414,7 @@ func_12DFA(var_00) {
   return;
 
   level.func_12A91--;
-  level.func_FD6C.func_4C11 give_zap_perk(scripts/sp/utility::string(level.func_12A91) + " / " + scripts/sp/utility::string(level.func_B4D0) + " Turrets");
+  level.func_FD6C.func_4C11 give_zap_perk(scripts\sp\utility::string(level.func_12A91) + " / " + scripts\sp\utility::string(level.func_B4D0) + " Turrets");
 
   if (level.func_12A91 == 0)
   thread func_409E();
@@ -3442,7 +3442,7 @@ func_B7EA() {
   return;
 
   self.func_912F = [];
-  self.func_912F["lock_on"] = scripts/sp/hud_util::func_499B("hud_iw7_warning", 256, 64);
+  self.func_912F["lock_on"] = scripts\sp\hud_util::func_499B("hud_iw7_warning", 256, 64);
   self.func_912F["lock_on"].alignx = "center";
   self.func_912F["lock_on"].aligny = "top";
   self.func_912F["lock_on"].horzalign = "center";
@@ -3696,12 +3696,12 @@ func_4335(var_00, var_01, var_02, var_03) {
   var_06 = 0;
 
   if (isdefined(var_03)) {
-  if (scripts/sp/utility::hastag(self.model, var_03 + "_1"))
+  if (scripts\sp\utility::hastag(self.model, var_03 + "_1"))
   var_06 = 1;
   }
 
   if (isdefined(var_1.script_linkto))
-  var_05 = var_01 scripts/sp/utility::func_7A97();
+  var_05 = var_01 scripts\sp\utility::func_7A97();
 
   for (var_07 = 1; var_07 < var_00; var_7++) {
   if (isdefined(var_05))

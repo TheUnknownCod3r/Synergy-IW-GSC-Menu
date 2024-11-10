@@ -1,8 +1,8 @@
-/****************************************************************
+/********************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\anim\traverse\double_jump_mantle.gsc
-****************************************************************/
+ * Script: scripts\anim\traverse\double_jump_mantle.gsc
+********************************************************/
 
 main() {
 	func_5ADF();

@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\3452.gsc
+ * Script: 3452.gsc
 ***************************************/
 
 func_2EA3() {
@@ -111,7 +111,7 @@ func_89EF() {
 
   var_01 = distance(self.enemy.origin, self.origin);
 
-  if (var_01 < 800 && scripts/mp/bots/bots_powers::func_8BEE()) {
+  if (var_01 < 800 && scripts\mp\bots\bots_powers::func_8BEE()) {
   if (var_01 < 550)
   continue;
   }
@@ -140,7 +140,7 @@ func_89EE() {
   if (!isalive(self))
   continue;
 
-  if (scripts/mp/bots/bots_powers::func_8BEE()) {
+  if (scripts\mp\bots\bots_powers::func_8BEE()) {
   var_00 = distance(self.enemy.origin, self.origin);
 
   if (var_00 < 600)

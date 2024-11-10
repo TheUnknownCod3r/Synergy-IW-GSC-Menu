@@ -1,8 +1,8 @@
-/*******************************************************************
+/***********************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\maps\cp_final\cp_final_turnstile.gsc
-*******************************************************************/
+ * Script: scripts\cp\maps\cp_final\cp_final_turnstile.gsc
+***********************************************************/
 
 turnstile_init() {
 	level.turnstile = getent("turnstile","targetname");
@@ -15,8 +15,8 @@ turnstile_init() {
 	}
 
 	level.turnstile_portal.var_C5D9 = 0;
-	level._effect["turnstile_teleport"] = loadfx("vfx/iw7/levels/cp_town/vfx_town_telep_diss.vfx");
-	level._effect["turnstile_teleport_loop"] = loadfx("vfx/iw7/levels/cp_final/turnstile/vfx_loop_telep.vfx");
+	level._effect["turnstile_teleport"] = loadfx("vfx\iw7\levels\cp_town\vfx_town_telep_diss.vfx");
+	level._effect["turnstile_teleport_loop"] = loadfx("vfx\iw7\levels\cp_final\turnstile\vfx_loop_telep.vfx");
 }
 
 turnstile_damage_listener() {
@@ -66,7 +66,7 @@ shoot_piece_into_machine() {
 		var_00 setscriptablepartstate("portal","portal_end");
 		if(var_01 == "turnstile_success") {
 			foreach(var_03 in level.players) {
-				var_03 scripts/cp/zombies/achievement::update_achievement("MESSAGE_SENT",1);
+				var_03 scripts\cp\zombies\achievement::update_achievement("MESSAGE_SENT",1);
 			}
 
 			level.turnstile_piece delete();

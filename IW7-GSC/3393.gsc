@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3393.gsc
-****************************/
+ * Script: 3393.gsc
+************************/
 
 init_all_weapon_upgrades() {
 	var_00 = scripts\engine\utility::getstructarray("weapon_upgrade","script_noteworthy");
@@ -197,7 +197,7 @@ weapon_upgrade(param_00,param_01) {
 
 		level.timespapused++;
 		scripts\cp\zombies\zombie_analytics::log_papused(level.wave_num,var_03,level.timespapused);
-		param_01 scripts/cp/zombies/achievement::update_achievement("GET_PACKED",1);
+		param_01 scripts\cp\zombies\achievement::update_achievement("GET_PACKED",1);
 		param_01 thread scripts\cp\cp_vo::try_to_play_vo("weapon_pap","zmb_pap_vo","high",undefined,undefined,undefined,1);
 		var_07 = return_pap_attachment(param_01,var_04,var_03,var_02);
 		if(isdefined(var_07) && var_07 == "replace_me") {

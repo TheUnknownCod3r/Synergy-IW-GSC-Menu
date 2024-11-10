@@ -1,14 +1,14 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3578.gsc
-****************************/
+ * Script: 3578.gsc
+************************/
 
 init() {
-	level._effect["plasmaSpear_trail"] = loadfx("vfx/old/_requests/mp_weapons/vfx_trail_life_link");
-	level._effect["plasmaSpear_death"] = loadfx("vfx/old/_requests/mp_weapons/vfx_muz_plasma_blast_w");
-	level._effect["plasmaSpear_trail2"] = loadfx("vfx/old/_requests/mp_weapons/vfx_trail_knife_tele");
-	level._effect["plasmaSpear_trail2_enemy"] = loadfx("vfx/old/_requests/mp_weapons/vfx_trail_knife_tele_red");
+	level._effect["plasmaSpear_trail"] = loadfx("vfx\old\_requests\mp_weapons\vfx_trail_life_link");
+	level._effect["plasmaSpear_death"] = loadfx("vfx\old\_requests\mp_weapons\vfx_muz_plasma_blast_w");
+	level._effect["plasmaSpear_trail2"] = loadfx("vfx\old\_requests\mp_weapons\vfx_trail_knife_tele");
+	level._effect["plasmaSpear_trail2_enemy"] = loadfx("vfx\old\_requests\mp_weapons\vfx_trail_knife_tele_red");
 }
 
 giveplayeraccessory() {
@@ -129,7 +129,7 @@ func_CF18(param_00) {
 		if(level.teambased) {
 			playfxontagforteam(level._effect["plasmaSpear_trail2"],param_00,"tag_origin",self.team);
 			wait(0.05);
-			playfxontagforteam(level._effect["plasmaSpear_trail2_enemy"],param_00,"tag_origin",scripts\mp\_utility::getotherteam(self.team));
+			playfxontagforteam(level._effect["plasmaSpear_trail2_enemy"],param_00,"tag_origin",scripts\mp\utility::getotherteam(self.team));
 			return;
 		}
 
@@ -224,11 +224,11 @@ _meth_808B(param_00,param_01) {
 			continue;
 		}
 
-		if(var_04.team != scripts\mp\_utility::getotherteam(self.team)) {
+		if(var_04.team != scripts\mp\utility::getotherteam(self.team)) {
 			continue;
 		}
 
-		if(!scripts\mp\_utility::isreallyalive(var_04)) {
+		if(!scripts\mp\utility::isreallyalive(var_04)) {
 			continue;
 		}
 

@@ -1,8 +1,8 @@
-/*************************************************
+/*****************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\cp_hud_message.gsc
-*************************************************/
+ * Script: scripts\cp\cp_hud_message.gsc
+*****************************************/
 
 init() {
 	level thread onplayerconnect();
@@ -194,7 +194,7 @@ isdoingsplash() {
 }
 
 getsplashtablename() {
-	return "cp/zombies/zombie_splashtable.csv";
+	return "cp\zombies\zombie_splashtable.csv";
 }
 
 cleanuplocalplayersplashlist() {
@@ -226,7 +226,7 @@ splashshownthink() {
 onkillstreaksplashshown(param_00) {}
 
 showerrormessage(param_00,param_01) {
-	var_02 = tablelookuprownum("mp/errorMessages.csv",0,param_00);
+	var_02 = tablelookuprownum("mp\errorMessages.csv",0,param_00);
 	if(isdefined(param_01)) {
 		self setclientomnvar("ui_mp_error_message_param",param_01);
 	}
@@ -251,8 +251,8 @@ showerrormessagetoallplayers(param_00,param_01) {
 }
 
 showmiscmessage(param_00) {
-	var_01 = tablelookuprownum("mp/miscMessages.csv",0,param_00);
-	var_02 = tablelookupbyrow("mp/miscMessages.csv",var_01,3);
+	var_01 = tablelookuprownum("mp\miscMessages.csv",0,param_00);
+	var_02 = tablelookupbyrow("mp\miscMessages.csv",var_01,3);
 	if(isdefined(var_02) && var_02 != "") {
 		self playlocalsound(var_02);
 	}

@@ -1,16 +1,16 @@
-/*************************************************************
+/*****************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\maps\mp_parkour\mp_parkour.gsc
-*************************************************************/
+ * Script: scripts\mp\maps\mp_parkour\mp_parkour.gsc
+*****************************************************/
 
 main() {
-	lib_0FD3::main();
+	scripts\mp\maps\mp_parkour\mp_parkour_precache::main();
 	scripts\mp\maps\mp_parkour\gen\mp_parkour_art::main();
-	lib_0FD2::main();
-	scripts\mp\_load::main();
+	scripts\mp\maps\mp_parkour\mp_parkour_fx::main();
+	scripts\mp\load::main();
 	level.var_C7B3 = getentarray("OutOfBounds","targetname");
-	scripts\mp\_compass::func_FACD("compass_map_mp_parkour");
+	scripts\mp\compass::setupminimap("compass_map_mp_parkour");
 	setdvar("r_lightGridEnableTweaks",1);
 	setdvar("r_lightGridIntensity",1.33);
 	setdvar("r_tessellationCutoffFalloffBase",600);
@@ -24,7 +24,7 @@ main() {
 	game["allies_outfit"] = "urban";
 	game["axis_outfit"] = "woodland";
 	thread func_90EF("dropship","dropThrust");
-	thread scripts\mp\_animation_suite::func_1FAA();
+	thread scripts\mp\animation_suite::animationsuite();
 	thread func_CDA4("mp_parkour_rules");
 	thread fix_collision();
 	thread spawn_ball_allowed_trigger();
@@ -82,7 +82,7 @@ fix_collision() {
 	var_13 = spawn("script_model",(984,-1504,240));
 	var_13.angles = (350,30,0);
 	var_13 setmodel("mp_desert_uplink_col_01");
-	if(scripts\mp\_utility::func_9D46()) {
+	if(scripts\mp\utility::isanymlgmatch()) {
 		var_14 = getent("player128x128x8","targetname");
 		var_15 = spawn("script_model",(-1596,3,320));
 		var_15.angles = (0,0,0);
@@ -92,11 +92,11 @@ fix_collision() {
 
 func_90EF(param_00,param_01) {
 	var_02 = getent(param_00,"targetname");
-	var_02.var_2C5 = var_02.origin;
+	var_02.areanynavvolumesloaded = var_02.origin;
 	var_02.var_10D6C = var_02.angles;
 	var_02.var_BE10 = getentarray(param_01,"targetname");
 	var_02.var_BE1E = getentarray("vfx_drop_ship_thrusters","script_noteworthy");
-	var_02.var_BE10 = scripts\common\utility::array_combine(var_02.var_BE10,var_02.var_BE1E);
+	var_02.var_BE10 = scripts\engine\utility::array_combine(var_02.var_BE10,var_02.var_BE1E);
 	foreach(var_04 in var_02.var_BE10) {
 		var_04 linkto(var_02);
 	}
@@ -109,8 +109,8 @@ func_90EF(param_00,param_01) {
 func_5EE1(param_00) {
 	for(;;) {
 		var_01 = randomintrange(4,10);
-		param_00.var_15B = param_00.var_2C5 + (randomintrange(-16,16),randomintrange(-16,16),randomintrange(-8,32));
-		param_00 moveto(param_00.var_15B,var_01,var_01 * 0.25,var_01 * 0.25);
+		param_00.objective_playermask_hidefromall = param_00.areanynavvolumesloaded + (randomintrange(-16,16),randomintrange(-16,16),randomintrange(-8,32));
+		param_00 moveto(param_00.objective_playermask_hidefromall,var_01,var_01 * 0.25,var_01 * 0.25);
 		wait(var_01);
 	}
 }
@@ -118,8 +118,8 @@ func_5EE1(param_00) {
 func_5EE9(param_00) {
 	for(;;) {
 		var_01 = randomintrange(5,8);
-		param_00.var_8433 = param_00.var_10D6C + (randomintrange(-5,0),randomintrange(-3,3),randomintrange(-4,4));
-		param_00 rotateto(param_00.var_8433,var_01,var_01 * 0.25,var_01 * 0.25);
+		param_00.energy_getrestorerate = param_00.var_10D6C + (randomintrange(-5,0),randomintrange(-3,3),randomintrange(-4,4));
+		param_00 rotateto(param_00.energy_getrestorerate,var_01,var_01 * 0.25,var_01 * 0.25);
 		wait(var_01);
 	}
 }
@@ -132,18 +132,18 @@ func_5EE7(param_00) {
 
 func_5EE8() {
 	wait(5);
-	var_00 = scripts\common\utility::spawn_tag_origin();
+	var_00 = scripts\engine\utility::spawn_tag_origin();
 	var_00 show();
 	var_00 linkto(self);
-	scripts\common\utility::func_136F7();
+	scripts\engine\utility::waitframe();
 	if(isdefined(self.var_336)) {
-		playfxontag(scripts\common\utility::getfx(self.var_336),var_00,"tag_origin");
+		playfxontag(scripts\engine\utility::getfx(self.var_336),var_00,"tag_origin");
 	}
 }
 
 func_CDA4(param_00) {
 	wait(30);
-	function_030E(param_00);
+	playcinematicforalllooping(param_00);
 }
 
 spawn_ball_allowed_trigger() {
@@ -166,15 +166,15 @@ spawn_ball_allowed_trigger() {
 move_sd_startspawns() {
 	if(level.gametype == "sd" || level.gametype == "sr") {
 		wait(0.1);
-		var_00 = scripts\mp\_spawnlogic::func_8140("mp_sd_spawn_attacker");
+		var_00 = scripts\mp\spawnlogic::getspawnpointarray("mp_sd_spawn_attacker");
 		foreach(var_02 in var_00) {
 			if(distance(var_02.origin,(128,3136,166.275)) < 10) {
 				var_02.origin = (295,3625,160);
 				var_02.angles = (0,-100,0);
 				var_03 = anglestoright(var_02.angles);
-				var_02.var_1D53 = [];
-				scripts\mp\_spawnlogic::func_17A7(var_02,var_02.origin + var_03 * 45);
-				scripts\mp\_spawnlogic::func_17A7(var_02,var_02.origin - var_03 * 45);
+				var_02.alternates = [];
+				scripts\mp\spawnlogic::func_17A7(var_02,var_02.origin + var_03 * 45);
+				scripts\mp\spawnlogic::func_17A7(var_02,var_02.origin - var_03 * 45);
 				continue;
 			}
 
@@ -182,9 +182,9 @@ move_sd_startspawns() {
 				var_02.origin = (219,3655,160);
 				var_02.angles = (0,-100,0);
 				var_03 = anglestoright(var_02.angles);
-				var_02.var_1D53 = [];
-				scripts\mp\_spawnlogic::func_17A7(var_02,var_02.origin + var_03 * 45);
-				scripts\mp\_spawnlogic::func_17A7(var_02,var_02.origin - var_03 * 45);
+				var_02.alternates = [];
+				scripts\mp\spawnlogic::func_17A7(var_02,var_02.origin + var_03 * 45);
+				scripts\mp\spawnlogic::func_17A7(var_02,var_02.origin - var_03 * 45);
 				continue;
 			}
 
@@ -192,9 +192,9 @@ move_sd_startspawns() {
 				var_02.origin = (135,3685,160);
 				var_02.angles = (0,-100,0);
 				var_03 = anglestoright(var_02.angles);
-				var_02.var_1D53 = [];
-				scripts\mp\_spawnlogic::func_17A7(var_02,var_02.origin + var_03 * 45);
-				scripts\mp\_spawnlogic::func_17A7(var_02,var_02.origin - var_03 * 45);
+				var_02.alternates = [];
+				scripts\mp\spawnlogic::func_17A7(var_02,var_02.origin + var_03 * 45);
+				scripts\mp\spawnlogic::func_17A7(var_02,var_02.origin - var_03 * 45);
 				continue;
 			}
 
@@ -202,9 +202,9 @@ move_sd_startspawns() {
 				var_02.origin = (295,3711,160);
 				var_02.angles = (0,-100,0);
 				var_03 = anglestoright(var_02.angles);
-				var_02.var_1D53 = [];
-				scripts\mp\_spawnlogic::func_17A7(var_02,var_02.origin + var_03 * 45);
-				scripts\mp\_spawnlogic::func_17A7(var_02,var_02.origin - var_03 * 45);
+				var_02.alternates = [];
+				scripts\mp\spawnlogic::func_17A7(var_02,var_02.origin + var_03 * 45);
+				scripts\mp\spawnlogic::func_17A7(var_02,var_02.origin - var_03 * 45);
 				continue;
 			}
 
@@ -212,9 +212,9 @@ move_sd_startspawns() {
 				var_02.origin = (219,3741,160);
 				var_02.angles = (0,-100,0);
 				var_03 = anglestoright(var_02.angles);
-				var_02.var_1D53 = [];
-				scripts\mp\_spawnlogic::func_17A7(var_02,var_02.origin + var_03 * 45);
-				scripts\mp\_spawnlogic::func_17A7(var_02,var_02.origin - var_03 * 45);
+				var_02.alternates = [];
+				scripts\mp\spawnlogic::func_17A7(var_02,var_02.origin + var_03 * 45);
+				scripts\mp\spawnlogic::func_17A7(var_02,var_02.origin - var_03 * 45);
 				continue;
 			}
 
@@ -222,8 +222,8 @@ move_sd_startspawns() {
 				var_02.origin = (135,3771,160);
 				var_02.angles = (0,-100,0);
 				var_03 = anglestoright(var_02.angles);
-				var_02.var_1D53 = [];
-				scripts\mp\_spawnlogic::func_17A7(var_02,var_02.origin - var_03 * 45);
+				var_02.alternates = [];
+				scripts\mp\spawnlogic::func_17A7(var_02,var_02.origin - var_03 * 45);
 				continue;
 			}
 
@@ -231,8 +231,8 @@ move_sd_startspawns() {
 				var_02.origin = (295,3797,160);
 				var_02.angles = (0,-100,0);
 				var_03 = anglestoright(var_02.angles);
-				var_02.var_1D53 = [];
-				scripts\mp\_spawnlogic::func_17A7(var_02,var_02.origin + var_03 * 45);
+				var_02.alternates = [];
+				scripts\mp\spawnlogic::func_17A7(var_02,var_02.origin + var_03 * 45);
 				continue;
 			}
 
@@ -240,9 +240,9 @@ move_sd_startspawns() {
 				var_02.origin = (219,3827,160);
 				var_02.angles = (0,-100,0);
 				var_03 = anglestoright(var_02.angles);
-				var_02.var_1D53 = [];
-				scripts\mp\_spawnlogic::func_17A7(var_02,var_02.origin + var_03 * 45);
-				scripts\mp\_spawnlogic::func_17A7(var_02,var_02.origin - var_03 * 45);
+				var_02.alternates = [];
+				scripts\mp\spawnlogic::func_17A7(var_02,var_02.origin + var_03 * 45);
+				scripts\mp\spawnlogic::func_17A7(var_02,var_02.origin - var_03 * 45);
 				continue;
 			}
 
@@ -250,8 +250,8 @@ move_sd_startspawns() {
 				var_02.origin = (135,3857,160);
 				var_02.angles = (0,-100,0);
 				var_03 = anglestoright(var_02.angles);
-				var_02.var_1D53 = [];
-				scripts\mp\_spawnlogic::func_17A7(var_02,var_02.origin - var_03 * 45);
+				var_02.alternates = [];
+				scripts\mp\spawnlogic::func_17A7(var_02,var_02.origin - var_03 * 45);
 			}
 		}
 	}

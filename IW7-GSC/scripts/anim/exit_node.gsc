@@ -1,8 +1,8 @@
-/**********************************************
+/**************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\anim\exit_node.gsc
-**********************************************/
+ * Script: scripts\anim\exit_node.gsc
+**************************************/
 
 func_10DCA() {
 	if(isdefined(self.custommovetransition)) {
@@ -30,7 +30,7 @@ func_10DCA() {
 			}
 
 			if(!isdefined(level.var_6A1B[var_02]) && var_02 != "stand_saw" && var_02 != "crouch_saw") {
-				var_06 = scripts\common\utility::absangleclamp180(self.angles[1] - scripts\asm\shared_utility::getnodeforwardyaw(var_04));
+				var_06 = scripts\engine\utility::absangleclamp180(self.angles[1] - scripts\asm\shared_utility::getnodeforwardyaw(var_04));
 				if(var_06 < 5) {
 					if(!isdefined(self.heat)) {
 						var_00 = var_04.origin;
@@ -101,11 +101,11 @@ func_53C7(param_00) {
 		return;
 	}
 
-	if(isdefined(level.var_E1B7[param_00.type]) && level.var_E1B7[param_00.type] != self.var_1491.pose) {
+	if(isdefined(level.var_E1B7[param_00.type]) && level.var_E1B7[param_00.type] != self.a.pose) {
 		return;
 	}
 
-	var_01 = self.var_1491.pose;
+	var_01 = self.a.pose;
 	if(var_01 == "prone") {
 		var_01 = "crouch";
 	}
@@ -134,7 +134,7 @@ func_3E57() {
 		return 0;
 	}
 
-	if(self.var_1491.pose == "prone") {
+	if(self.a.pose == "prone") {
 		return 0;
 	}
 
@@ -163,17 +163,17 @@ func_3E56(param_00,param_01) {
 	}
 
 	if(param_00 == "exposed" || isdefined(self.heat)) {
-		if(self.var_1491.pose != "stand" && self.var_1491.pose != "crouch") {
+		if(self.a.pose != "stand" && self.a.pose != "crouch") {
 			return 0;
 		}
 
-		if(self.var_1491.movement != "stop") {
+		if(self.a.movement != "stop") {
 			return 0;
 		}
 	}
 
-	if(!isdefined(self.heat) && isdefined(self.isnodeoccupied) && vectordot(self.setocclusionpreset,self.var_10C.origin - self.origin) < 0) {
-		if(scripts\anim\utility_common::canseeenemyfromexposed() && distancesquared(self.origin,self.var_10C.origin) < 90000) {
+	if(!isdefined(self.heat) && isdefined(self.isnodeoccupied) && vectordot(self.setocclusionpreset,self.isnodeoccupied.origin - self.origin) < 0) {
+		if(scripts\anim\utility_common::canseeenemyfromexposed() && distancesquared(self.origin,self.isnodeoccupied.origin) < 90000) {
 			return 0;
 		}
 	}
@@ -182,7 +182,7 @@ func_3E56(param_00,param_01) {
 }
 
 func_53C8(param_00) {
-	if(self.var_1491.pose == "stand") {
+	if(self.a.pose == "stand") {
 		param_00 = "exposed";
 	}
 	else
@@ -298,12 +298,12 @@ func_3E2C(param_00,param_01,param_02,param_03,param_04) {
 func_5926(param_00,param_01) {
 	var_02 = scripts\anim\utility::func_B031("cover_exit",param_00,param_01);
 	var_03 = vectortoangles(self.setocclusionpreset);
-	if(self.var_1491.pose == "prone") {
+	if(self.a.pose == "prone") {
 		return;
 	}
 
 	var_05 = 0.2;
-	if(scripts\common\utility::actor_is3d()) {
+	if(scripts\engine\utility::actor_is3d()) {
 		self animmode("nogravity",0);
 	}
 	else
@@ -314,8 +314,8 @@ func_5926(param_00,param_01) {
 	self orientmode("face angle",self.angles[1]);
 	self _meth_82E4("coverexit",var_02,%body,1,var_05,self.var_BD22);
 	scripts\anim\shared::donotetracks("coverexit");
-	self.var_1491.pose = "stand";
-	self.var_1491.movement = "run";
+	self.a.pose = "stand";
+	self.a.movement = "run";
 	self.var_932E = undefined;
 	self orientmode("face motion");
 	self animmode("none",0);
@@ -344,22 +344,22 @@ func_53C5(param_00,param_01) {
 func_7EA3() {
 	var_00 = undefined;
 	var_01 = 400;
-	if(scripts\common\utility::actor_is3d()) {
+	if(scripts\engine\utility::actor_is3d()) {
 		var_01 = 1024;
 	}
 	else if(isdefined(self.heat)) {
 		var_01 = 4096;
 	}
 
-	if(isdefined(self.target_getindexoftarget) && distancesquared(self.origin,self.var_205.origin) < var_01) {
+	if(isdefined(self.target_getindexoftarget) && distancesquared(self.origin,self.target_getindexoftarget.origin) < var_01) {
 		var_00 = self.target_getindexoftarget;
 	}
-	else if(isdefined(self.weaponmaxdist) && distancesquared(self.origin,self.var_24A.origin) < var_01) {
+	else if(isdefined(self.weaponmaxdist) && distancesquared(self.origin,self.weaponmaxdist.origin) < var_01) {
 		var_00 = self.weaponmaxdist;
 	}
 
-	if(isdefined(self.heat) && !scripts\common\utility::actor_is3d()) {
-		if(isdefined(var_00) && scripts\common\utility::absangleclamp180(self.angles[1] - var_00.angles[1]) > 30) {
+	if(isdefined(self.heat) && !scripts\engine\utility::actor_is3d()) {
+		if(isdefined(var_00) && scripts\engine\utility::absangleclamp180(self.angles[1] - var_00.angles[1]) > 30) {
 			return undefined;
 		}
 	}

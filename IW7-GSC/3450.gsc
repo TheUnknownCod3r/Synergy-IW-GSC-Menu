@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\3450.gsc
+ * Script: 3450.gsc
 ***************************************/
 
 bot_killstreak_sentry(var_00, var_01, var_02, var_03) {

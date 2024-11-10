@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2785.gsc
+ * Script: 2785.gsc
 ***************************************/
 
 init() {
@@ -21,7 +21,7 @@ getpassiveperk(var_00) {
   var_01 = level.func_D77E.passivestringref[var_00];
 
   if (!isdefined(var_01)) {
-  var_02 = tablelookuprownum("mp/loot/iw7_power_loot_master.csv", 0, var_00);
+  var_02 = tablelookuprownum("mp\loot\iw7_power_loot_master.csv", 0, var_00);
   var_03 = [8, 9, 10];
   var_01 = [];
 
@@ -41,7 +41,7 @@ getpassiveperk(var_00) {
 }
 
 func_B030(var_00, var_01) {
-  var_02 = tablelookupbyrow("mp/loot/iw7_power_loot_master.csv", var_00, var_01);
+  var_02 = tablelookupbyrow("mp\loot\iw7_power_loot_master.csv", var_00, var_01);
   return scripts\engine\utility::ter_op(isdefined(var_02) && var_02 != "", var_02, undefined);
 }
 

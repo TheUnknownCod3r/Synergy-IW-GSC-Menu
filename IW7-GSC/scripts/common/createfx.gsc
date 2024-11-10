@@ -1,8 +1,8 @@
-/***********************************************
+/***************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\common\createfx.gsc
-***********************************************/
+ * Script: scripts\common\createfx.gsc
+***************************************/
 
 createeffect(param_00,param_01) {
 	var_02 = spawnstruct();
@@ -168,7 +168,7 @@ createfx_common() {
 	precacheshader("black");
 	level._createfx = spawnstruct();
 	level._createfx.objective_position = spawn("script_origin",(0,0,0));
-	level._createfx.objective_position.fx = loadfx("vfx/core/expl/grenadeexp_default");
+	level._createfx.objective_position.fx = loadfx("vfx\core\expl\grenadeexp_default");
 	level._createfx.objective_position.sound = "frag_grenade_explode";
 	level._createfx.objective_position.fgetarg = 256;
 	precachemodel("axis_guide_createfx_rot");
@@ -1245,7 +1245,7 @@ print_fx_options(param_00,param_01,param_02) {
 				continue;
 			}
 
-			var_06 = param_00.v["type"] + "/" + var_05;
+			var_06 = param_00.v["type"] + "\" + var_05;
 			if(isdefined(level._createfx.defaults[var_06]) && level._createfx.defaults[var_06] == param_00.v[var_05]) {
 				continue;
 			}
@@ -1409,7 +1409,7 @@ remove_axis_model() {
 draw_cross() {}
 
 toggle_createfx_axis() {
-	level._createfx.var_5B6F++;
+	level._createfx.drawaxis++;
 	if(level._createfx.drawaxis > 2) {
 		level._createfx.drawaxis = 0;
 	}
@@ -1705,18 +1705,18 @@ spawn_grenade() {
 show_help() {
 	clear_fx_hudelements();
 	set_fx_hudelement("Help:");
-	set_fx_hudelement("Insert    Insert entity");
-	set_fx_hudelement("L     Drop selected entities to the ground");
-	set_fx_hudelement("A     Add option to the selected entities");
-	set_fx_hudelement("P     Reset the rotation of the selected entities");
-	set_fx_hudelement("V     Copy the angles from the most recently selected fx onto all selected fx.");
-	set_fx_hudelement("Delete    Kill the selected entities");
-	set_fx_hudelement("ESCAPE    Cancel out of option-modify-mode, must have console open");
-	set_fx_hudelement("Ctrl-C    Copy");
-	set_fx_hudelement("Ctrl-V    Paste");
-	set_fx_hudelement("F2    Toggle createfx dot and text drawing");
-	set_fx_hudelement("F5    SAVES your work");
-	set_fx_hudelement("Dpad    Move selected entitise on X/Y or rotate pitch/yaw");
+	set_fx_hudelement("Insert  Insert entity");
+	set_fx_hudelement("L   Drop selected entities to the ground");
+	set_fx_hudelement("A   Add option to the selected entities");
+	set_fx_hudelement("P   Reset the rotation of the selected entities");
+	set_fx_hudelement("V   Copy the angles from the most recently selected fx onto all selected fx.");
+	set_fx_hudelement("Delete  Kill the selected entities");
+	set_fx_hudelement("ESCAPE  Cancel out of option-modify-mode, must have console open");
+	set_fx_hudelement("Ctrl-C  Copy");
+	set_fx_hudelement("Ctrl-V  Paste");
+	set_fx_hudelement("F2  Toggle createfx dot and text drawing");
+	set_fx_hudelement("F5  SAVES your work");
+	set_fx_hudelement("Dpad  Move selected entitise on X\Y or rotate pitch\yaw");
 	set_fx_hudelement("A button  Toggle the selection of the current entity");
 	set_fx_hudelement("X button  Toggle entity rotation mode");
 	set_fx_hudelement("Y button  Move selected entites up or rotate roll");
@@ -1725,12 +1725,12 @@ show_help() {
 	set_fx_hudelement("L Shoulder  Hold to select multiple entites");
 	set_fx_hudelement("L JoyClick  Copy");
 	set_fx_hudelement("R JoyClick  Paste");
-	set_fx_hudelement("N     UFO");
-	set_fx_hudelement("T     Toggle Timescale FAST");
-	set_fx_hudelement("Y     Toggle Timescale SLOW");
-	set_fx_hudelement("[     Toggle FX Visibility");
-	set_fx_hudelement("]     Toggle ShowTris");
-	set_fx_hudelement("F11     Toggle FX Profile");
+	set_fx_hudelement("N   UFO");
+	set_fx_hudelement("T   Toggle Timescale FAST");
+	set_fx_hudelement("Y   Toggle Timescale SLOW");
+	set_fx_hudelement("[Toggle FX Visibility");
+	set_fx_hudelement("]   Toggle ShowTris");
+	set_fx_hudelement("F11   Toggle FX Profile");
 }
 
 generate_fx_log(param_00) {}
@@ -1738,20 +1738,20 @@ generate_fx_log(param_00) {}
 write_log(param_00,param_01,param_02,param_03) {
 	var_04 = "\t";
 	cfxprintlnstart();
-	cfxprintln("//_createfx generated. Do not touch!!");
-	cfxprintln("#include scripts//common//utility;");
-	cfxprintln("#include scripts//common//createfx;\n");
+	cfxprintln("\\_createfx generated. Do not touch!!");
+	cfxprintln("#include scripts\\common\\utility;");
+	cfxprintln("#include scripts\\common\\createfx;\n");
 	cfxprintln("");
 	cfxprintln("main()");
 	cfxprintln("{");
-	cfxprintln(var_04 + "// CreateFX " + param_01 + " entities placed: " + param_00.size);
+	cfxprintln(var_04 + "\\ CreateFX " + param_01 + " entities placed: " + param_00.size);
 	foreach(var_06 in param_00) {
 		if(level.createfx_loopcounter > 16) {
 			level.createfx_loopcounter = 0;
 			wait(0.1);
 		}
 
-		level.var_49C1++;
+		level.createfx_loopcounter++;
 		if(getdvarint("scr_map_exploder_dump")) {
 			if(!isdefined(var_06.model)) {
 				continue;
@@ -1983,7 +1983,7 @@ cfxprintlnend(param_00,param_01,param_02) {
 	var_05 = scripts\engine\utility::get_template_script_MAYBE();
 	var_06 = get_raw_or_devraw_subdir();
 	var_07 = get_gamemode_subdir();
-	scripts\engine\utility::fileprint_launcher_end_file("/share/" + var_06 + "/scripts/" + var_07 + "/maps/" + var_05 + "/gen/" + var_04,var_03);
+	scripts\engine\utility::fileprint_launcher_end_file("\share\" + var_06 + "\scripts\" + var_07 + "\maps\" + var_05 + "\gen\" + var_04,var_03);
 }
 
 get_raw_or_devraw_subdir() {
@@ -2231,7 +2231,7 @@ set_fx_hudelement(param_00) {
 	for(var_01 = 0;var_01 < 1;var_01++) {
 	}
 
-	level.var_762B++;
+	level.fxhudelements++;
 }
 
 init_tool_hud() {

@@ -1,8 +1,8 @@
-/***************************************************
+/*******************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\killstreaks\_emp.gsc
-***************************************************/
+ * Script: scripts\mp\killstreaks\_emp.gsc
+*******************************************/
 
 init() {}
 
@@ -37,14 +37,14 @@ func_618B(param_00,param_01) {
 		thread func_6164(self);
 	}
 
-	scripts\mp\_matchdata::logkillstreakevent("emp",self.origin);
+	scripts\mp\matchdata::logkillstreakevent("emp",self.origin);
 	self notify("used_emp");
 	return 1;
 }
 
 func_6166(param_00) {
 	level endon("game_ended");
-	thread scripts\mp\_utility::teamplayercardsplash("used_emp",self);
+	thread scripts\mp\utility::teamplayercardsplash("used_emp",self);
 	level notify("EMP_JamTeam" + param_00);
 	level endon("EMP_JamTeam" + param_00);
 	foreach(var_02 in level.players) {
@@ -53,16 +53,16 @@ func_6166(param_00) {
 			continue;
 		}
 
-		if(var_02 scripts\mp\_utility::_hasperk("specialty_localjammer")) {
+		if(var_02 scripts\mp\utility::_hasperk("specialty_localjammer")) {
 			var_02 clearscrambler();
 		}
 	}
 
-	function_0237("coup_sunblind",0.1);
+	visionsetnaked("coup_sunblind",0.1);
 	thread func_619F();
 	wait(0.1);
-	function_0237("coup_sunblind",0);
-	function_0237("",3);
+	visionsetnaked("coup_sunblind",0);
+	visionsetnaked("",3);
 	for(var_04 = 0;var_04 < level.teamnamelist.size;var_04++) {
 		if(param_00 != level.teamnamelist[var_04]) {
 			level.teamemped[level.teamnamelist[var_04]] = 1;
@@ -77,7 +77,7 @@ func_6166(param_00) {
 	}
 
 	level thread func_A577();
-	scripts\mp\_hostmigration::waitlongdurationwithhostmigrationpause(level.empstuntime);
+	scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(level.empstuntime);
 	for(var_04 = 0;var_04 < level.teamnamelist.size;var_04++) {
 		if(param_00 != level.teamnamelist[var_04]) {
 			level.teamemped[level.teamnamelist[var_04]] = 0;
@@ -89,7 +89,7 @@ func_6166(param_00) {
 			continue;
 		}
 
-		if(var_02 scripts\mp\_utility::_hasperk("specialty_localjammer")) {
+		if(var_02 scripts\mp\utility::_hasperk("specialty_localjammer")) {
 			var_02 makescrambler();
 		}
 	}
@@ -99,7 +99,7 @@ func_6166(param_00) {
 
 func_6165(param_00) {
 	level endon("game_ended");
-	thread scripts\mp\_utility::teamplayercardsplash("used_emp",self);
+	thread scripts\mp\utility::teamplayercardsplash("used_emp",self);
 	level notify("EMP_JamTeam" + param_00);
 	level endon("EMP_JamTeam" + param_00);
 	foreach(var_02 in level.players) {
@@ -108,7 +108,7 @@ func_6165(param_00) {
 			continue;
 		}
 
-		if(var_02 scripts\mp\_utility::_hasperk("specialty_localjammer")) {
+		if(var_02 scripts\mp\utility::_hasperk("specialty_localjammer")) {
 			var_02 clearscrambler();
 		}
 
@@ -117,20 +117,20 @@ func_6165(param_00) {
 
 	thread func_619F();
 	wait(0.1);
-	function_0237("coup_sunblind",0);
-	function_0237("",3);
+	visionsetnaked("coup_sunblind",0);
+	visionsetnaked("",3);
 	level.teamemped[param_00] = 1;
 	level notify("emp_update");
 	level func_52CA(self,param_00);
 	level thread func_A577();
-	scripts\mp\_hostmigration::waitlongdurationwithhostmigrationpause(level.empstuntime);
+	scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(level.empstuntime);
 	level.teamemped[param_00] = 0;
 	foreach(var_02 in level.players) {
 		if(var_02.team != param_00) {
 			continue;
 		}
 
-		if(var_02 scripts\mp\_utility::_hasperk("specialty_localjammer")) {
+		if(var_02 scripts\mp\utility::_hasperk("specialty_localjammer")) {
 			var_02 makescrambler();
 		}
 	}
@@ -147,29 +147,29 @@ func_6164(param_00) {
 			continue;
 		}
 
-		if(var_02 scripts\mp\_utility::_hasperk("specialty_localjammer")) {
+		if(var_02 scripts\mp\utility::_hasperk("specialty_localjammer")) {
 			var_02 clearscrambler();
 		}
 	}
 
-	function_0237("coup_sunblind",0.1);
+	visionsetnaked("coup_sunblind",0.1);
 	thread func_619F();
 	wait(0.1);
-	function_0237("coup_sunblind",0);
-	function_0237("",3);
+	visionsetnaked("coup_sunblind",0);
+	visionsetnaked("",3);
 	level notify("emp_update");
 	level.empplayer = param_00;
 	level.empplayer thread empradarwatcher();
 	level func_52CA(param_00);
 	level notify("emp_update");
 	level thread func_A577();
-	scripts\mp\_hostmigration::waitlongdurationwithhostmigrationpause(level.empstuntime);
+	scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(level.empstuntime);
 	foreach(var_02 in level.players) {
 		if(var_02 == param_00) {
 			continue;
 		}
 
-		if(var_02 scripts\mp\_utility::_hasperk("specialty_localjammer")) {
+		if(var_02 scripts\mp\utility::_hasperk("specialty_localjammer")) {
 			var_02 makescrambler();
 		}
 	}
@@ -186,7 +186,7 @@ func_A577() {
 	level.emptriggerholdonuse = int(level.empstuntime);
 	while(level.emptriggerholdonuse) {
 		wait(1);
-		level.var_61B6--;
+		level.emptriggerholdonuse--;
 	}
 }
 

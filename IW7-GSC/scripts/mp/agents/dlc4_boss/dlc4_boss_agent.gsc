@@ -1,11 +1,11 @@
-/*******************************************************************
+/***********************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\agents\dlc4_boss\dlc4_boss_agent.gsc
-*******************************************************************/
+ * Script: scripts\mp\agents\dlc4_boss\dlc4_boss_agent.gsc
+***********************************************************/
 
 registerscriptedagent() {
-	scripts/aitypes/bt_util::init();
+	scripts\aitypes\bt_util::init();
 	behaviortree\dlc4_boss::func_DEE8();
 	scripts\asm\dlc4_boss\mp\states::func_2371();
 	scripts\mp\agents\dlc4_boss\dlc4_boss_tunedata::setuptunedata();

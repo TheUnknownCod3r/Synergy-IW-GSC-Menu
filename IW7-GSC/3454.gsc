@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\3454.gsc
+ * Script: 3454.gsc
 ***************************************/
 
 init() {
@@ -16,7 +16,7 @@ init() {
   var_0.choosedirection = 1;
   var_0.selectlocationvo = "KS_hqr_airstrike";
   var_0.inboundvo = "KS_ast_inbound";
-  var_0.cannonfirevfx = loadfx("vfx/core/smktrail/smoke_trail_white_heli");
+  var_0.cannonfirevfx = loadfx("vfx\core\smktrail\smoke_trail_white_heli");
   var_0.cannonrumble = "ac130_25mm_fire";
   var_0.turretname = "a10_30mm_turret_mp";
   var_0.turretattachpoint = "tag_barrel";
@@ -29,7 +29,7 @@ init() {
   var_0.scorepopup = "destroyed_a10_strafe";
   var_0.callout = "callout_destroyed_a10";
   var_0.vodestroyed = undefined;
-  var_0.explodevfx = loadfx("vfx/core/expl/aerial_explosion");
+  var_0.explodevfx = loadfx("vfx\core\expl\aerial_explosion");
   var_0.sfxcannonfireloop_1p = "veh_a10_plr_fire_gatling_lp";
   var_0.sfxcannonfirestop_1p = "veh_a10_plr_fire_gatling_cooldown";
   var_0.sfxcannonfireloop_3p = "veh_a10_npc_fire_gatling_lp";

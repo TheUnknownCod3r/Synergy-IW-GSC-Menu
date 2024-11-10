@@ -1,8 +1,8 @@
-/*******************************************
+/***********************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\mp_agent.gsc
-*******************************************/
+ * Script: scripts\mp\mp_agent.gsc
+***********************************/
 
 init_agent(param_00) {
 	level.agent_definition = [];
@@ -560,8 +560,8 @@ activateagent() {
 on_humanoid_agent_killed_common(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08,param_09) {
 	var_0A = self.var_164D[self.asmname].var_4BC0;
 	var_0B = level.asm[self.asmname].states[var_0A];
-	if(scripts/asm/asm_mp::func_2382(self.asmname,var_0B)) {
-		scripts/asm/asm::func_231E(self.asmname,var_0B,var_0A);
+	if(scripts\asm\asm_mp::func_2382(self.asmname,var_0B)) {
+		scripts\asm\asm::func_231E(self.asmname,var_0B,var_0A);
 	}
 
 	if(isdefined(self.nocorpse)) {

@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\3451.gsc
+ * Script: 3451.gsc
 ***************************************/
 
 bot_defend_get_random_entrance_point_for_current_area() {

@@ -1,19 +1,19 @@
-/******************************************************
+/**********************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\sentientpoolmanager.gsc
-******************************************************/
+ * Script: scripts\mp\sentientpoolmanager.gsc
+**********************************************/
 
 init() {
-	function_004E("Tactical_Static");
-	function_004E("Lethal_Static");
-	function_004E("Lethal_Moving");
-	function_004E("Killstreak_Air");
-	function_004E("Killstreak_Ground");
-	function_01B2("Killstreak_Ground","Killstreak_Ground");
-	function_01B2("Killstreak_Air","Killstreak_Ground");
-	function_01B2("Killstreak_Air","Killstreak_Air");
-	function_01B2("Killstreak_Ground","Killstreak_Air");
+	createthreatbiasgroup("Tactical_Static");
+	createthreatbiasgroup("Lethal_Static");
+	createthreatbiasgroup("Lethal_Moving");
+	createthreatbiasgroup("Killstreak_Air");
+	createthreatbiasgroup("Killstreak_Ground");
+	setignoremegroup("Killstreak_Ground","Killstreak_Ground");
+	setignoremegroup("Killstreak_Air","Killstreak_Ground");
+	setignoremegroup("Killstreak_Air","Killstreak_Air");
+	setignoremegroup("Killstreak_Ground","Killstreak_Air");
 	level.sentientpools = [];
 	level.sentientpools[level.sentientpools.size] = "Tactical_Static";
 	level.sentientpools[level.sentientpools.size] = "Lethal_Static";

@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\2868.gsc
-****************************/
+ * Script: 2868.gsc
+************************/
 
 func_95F7() {
 	if(level.script == level.var_B8D2.var_ABFA[0].name && !level.player _meth_8139("hasEverPlayed_SP")) {

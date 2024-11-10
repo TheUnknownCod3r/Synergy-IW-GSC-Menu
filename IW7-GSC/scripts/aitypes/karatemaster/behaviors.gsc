@@ -1,8 +1,8 @@
-/**************************************************************
+/******************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\aitypes\karatemaster\behaviors.gsc
-**************************************************************/
+ * Script: scripts\aitypes\karatemaster\behaviors.gsc
+******************************************************/
 
 init(param_00) {
 	var_01 = gettime();
@@ -69,7 +69,7 @@ shouldignoreenemy(param_00) {
 		return 1;
 	}
 
-	if(param_00.ignoreme || isdefined(param_00.triggerportableradarping) && param_00.var_222.ignoreme) {
+	if(param_00.ignoreme || isdefined(param_00.triggerportableradarping) && param_00.triggerportableradarping.ignoreme) {
 		return 1;
 	}
 
@@ -93,7 +93,7 @@ updateenemy() {
 			continue;
 		}
 
-		if(scripts\common\utility::istrue(var_02.isfasttravelling)) {
+		if(scripts\engine\utility::istrue(var_02.isfasttravelling)) {
 			continue;
 		}
 
@@ -385,7 +385,7 @@ findbunchedupteleportspot(param_00,param_01) {
 }
 
 iscrowded(param_00,param_01) {
-	var_02 = scripts\mp\_mp_agent::getactiveagentsoftype(self.agent_type);
+	var_02 = scripts\mp\mp_agent::getactiveagentsoftype(self.agent_type);
 	var_03 = [];
 	var_04 = 0;
 	foreach(var_06 in var_02) {
@@ -432,7 +432,7 @@ getfastteleportdest(param_00,param_01) {
 	var_04 = scripts\mp\agents\karatemaster\karatemaster_agent::getdamageaccumulator();
 	if(isdefined(var_04)) {
 		if(param_01.cfastteleportduetodamagechance > 0 && var_04.accumulateddamage > 0) {
-			var_05 = var_04.accumulateddamage \ self.maxhealth;
+			var_05 = var_04.accumulateddamage / self.maxhealth;
 			if(var_05 >= param_01.cfastteleportdamagepct) {
 				scripts\mp\agents\karatemaster\karatemaster_agent::cleardamageaccumulator();
 				var_06 = randomint(100);
@@ -485,7 +485,7 @@ getfastteleportdest(param_00,param_01) {
 }
 
 shouldteleport(param_00) {
-	if(scripts\common\utility::istrue(self.bdisableteleport)) {
+	if(scripts\engine\utility::istrue(self.bdisableteleport)) {
 		return level.failure;
 	}
 
@@ -531,7 +531,7 @@ shouldteleport(param_00) {
 		}
 	}
 
-	if(scripts\common\utility::istrue(self.is_traversing)) {
+	if(scripts\engine\utility::istrue(self.is_traversing)) {
 		return level.failure;
 	}
 
@@ -547,7 +547,7 @@ shouldteleport(param_00) {
 teleport_init(param_00) {
 	self.var_3135.instancedata[param_00] = spawnstruct();
 	self.var_3135.instancedata[param_00].starttime = gettime();
-	if(scripts\common\utility::istrue(self.var_1198.bfastteleport) || scripts\common\utility::istrue(self.btraversalteleport)) {
+	if(scripts\engine\utility::istrue(self.var_1198.bfastteleport) || scripts\engine\utility::istrue(self.btraversalteleport)) {
 		var_01 = self.initialteleportpos;
 	}
 	else
@@ -600,7 +600,7 @@ findclosestenemy() {
 			continue;
 		}
 
-		if(var_03.ignoreme || isdefined(var_03.triggerportableradarping) && var_03.var_222.ignoreme) {
+		if(var_03.ignoreme || isdefined(var_03.triggerportableradarping) && var_03.triggerportableradarping.ignoreme) {
 			continue;
 		}
 

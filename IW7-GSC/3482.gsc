@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\3482.gsc
+ * Script: 3482.gsc
 ***************************************/
 
 init() {
@@ -35,20 +35,20 @@ init() {
   level.func_C73F["osprey_gunner"].timeout = 75.0;
 
   foreach (var_01 in level.func_C73F) {
-  level.chopper_fx["explode"]["death"][var_1.modelbase] = loadfx("vfx/core/expl/helicopter_explosion_osprey");
-  level.chopper_fx["explode"]["air_death"][var_1.modelbase] = loadfx("vfx/core/expl/helicopter_explosion_osprey_air_mp");
-  level.chopper_fx["anim"]["blades_anim_up"][var_1.modelbase] = loadfx("vfx/props/osprey_blades_anim_up");
-  level.chopper_fx["anim"]["blades_anim_down"][var_1.modelbase] = loadfx("vfx/props/osprey_blades_anim_down");
-  level.chopper_fx["anim"]["blades_static_up"][var_1.modelbase] = loadfx("vfx/props/osprey_blades_up");
-  level.chopper_fx["anim"]["blades_static_down"][var_1.modelbase] = loadfx("vfx/props/osprey_blades_default");
-  level.chopper_fx["anim"]["hatch_left_static_up"][var_1.modelbase] = loadfx("vfx/props/osprey_bottom_door_left_default");
-  level.chopper_fx["anim"]["hatch_left_anim_down"][var_1.modelbase] = loadfx("vfx/props/osprey_bottom_door_left_anim_open");
-  level.chopper_fx["anim"]["hatch_left_static_down"][var_1.modelbase] = loadfx("vfx/props/osprey_bottom_door_left_up");
-  level.chopper_fx["anim"]["hatch_left_anim_up"][var_1.modelbase] = loadfx("vfx/props/osprey_bottom_door_left_anim_close");
-  level.chopper_fx["anim"]["hatch_right_static_up"][var_1.modelbase] = loadfx("vfx/props/osprey_bottom_door_right_default");
-  level.chopper_fx["anim"]["hatch_right_anim_down"][var_1.modelbase] = loadfx("vfx/props/osprey_bottom_door_right_anim_open");
-  level.chopper_fx["anim"]["hatch_right_static_down"][var_1.modelbase] = loadfx("vfx/props/osprey_bottom_door_right_up");
-  level.chopper_fx["anim"]["hatch_right_anim_up"][var_1.modelbase] = loadfx("vfx/props/osprey_bottom_door_right_anim_close");
+  level.chopper_fx["explode"]["death"][var_1.modelbase] = loadfx("vfx\core\expl\helicopter_explosion_osprey");
+  level.chopper_fx["explode"]["air_death"][var_1.modelbase] = loadfx("vfx\core\expl\helicopter_explosion_osprey_air_mp");
+  level.chopper_fx["anim"]["blades_anim_up"][var_1.modelbase] = loadfx("vfx\props\osprey_blades_anim_up");
+  level.chopper_fx["anim"]["blades_anim_down"][var_1.modelbase] = loadfx("vfx\props\osprey_blades_anim_down");
+  level.chopper_fx["anim"]["blades_static_up"][var_1.modelbase] = loadfx("vfx\props\osprey_blades_up");
+  level.chopper_fx["anim"]["blades_static_down"][var_1.modelbase] = loadfx("vfx\props\osprey_blades_default");
+  level.chopper_fx["anim"]["hatch_left_static_up"][var_1.modelbase] = loadfx("vfx\props\osprey_bottom_door_left_default");
+  level.chopper_fx["anim"]["hatch_left_anim_down"][var_1.modelbase] = loadfx("vfx\props\osprey_bottom_door_left_anim_open");
+  level.chopper_fx["anim"]["hatch_left_static_down"][var_1.modelbase] = loadfx("vfx\props\osprey_bottom_door_left_up");
+  level.chopper_fx["anim"]["hatch_left_anim_up"][var_1.modelbase] = loadfx("vfx\props\osprey_bottom_door_left_anim_close");
+  level.chopper_fx["anim"]["hatch_right_static_up"][var_1.modelbase] = loadfx("vfx\props\osprey_bottom_door_right_default");
+  level.chopper_fx["anim"]["hatch_right_anim_down"][var_1.modelbase] = loadfx("vfx\props\osprey_bottom_door_right_anim_open");
+  level.chopper_fx["anim"]["hatch_right_static_down"][var_1.modelbase] = loadfx("vfx\props\osprey_bottom_door_right_up");
+  level.chopper_fx["anim"]["hatch_right_anim_up"][var_1.modelbase] = loadfx("vfx\props\osprey_bottom_door_right_anim_close");
   }
 
   level.func_1A6F = [];
@@ -244,7 +244,7 @@ func_4983(var_00, var_01, var_02, var_03, var_04, var_05) {
   var_06 scripts\mp\sentientpoolmanager::registersentient("Killstreak_Air", var_00);
   level.chopper = var_06;
   var_06 scripts\mp\killstreaks\helicopter::func_184E();
-  var_06 thread scripts/mp/killstreaks/flares::flares_monitor(2);
+  var_06 thread scripts\mp\killstreaks\flares::flares_monitor(2);
   var_06 thread scripts\mp\killstreaks\helicopter::heli_leave_on_disconnect(var_00);
   var_06 thread scripts\mp\killstreaks\helicopter::heli_leave_on_changeteams(var_00);
   var_06 thread scripts\mp\killstreaks\helicopter::heli_leave_on_gameended(var_00);

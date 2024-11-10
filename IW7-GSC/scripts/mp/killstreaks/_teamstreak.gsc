@@ -1,8 +1,8 @@
-/**********************************************************
+/**************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\killstreaks\_teamstreak.gsc
-**********************************************************/
+ * Script: scripts\mp\killstreaks\_teamstreak.gsc
+**************************************************/
 
 func_98D7() {
 	level.var_115ED["ammo_regen"] = spawnstruct();
@@ -17,7 +17,7 @@ func_98D7() {
 	level.var_115ED["jugg_squad"].var_118A3 = 3;
 	level.var_115ED["jugg_squad"].var_5F36 = 15;
 	level.var_115ED["jugg_squad"].var_6369 = "jugg_squad_complete";
-	var_00 = scripts\mp\_utility::getscorelimit();
+	var_00 = scripts\mp\utility::getscorelimit();
 	level.var_D410 = [];
 	level.var_D410["axis"] = 0;
 	level.var_D410["allies"] = 0;
@@ -93,12 +93,12 @@ func_11B02() {
 				var_04 = level.var_115ED[var_02].var_6369;
 				foreach(var_06 in level.players) {
 					if(var_06.team != var_00.team) {
-						var_06 scripts\mp\_utility::leaderdialogonplayer("enemy_jugg");
+						var_06 scripts\mp\utility::leaderdialogonplayer("enemy_jugg");
 						continue;
 					}
 
 					var_06 func_10DF9(var_02,var_03,var_04);
-					var_06 scripts\mp\_utility::leaderdialogonplayer("friendly_jugg");
+					var_06 scripts\mp\utility::leaderdialogonplayer("friendly_jugg");
 				}
 
 				level.var_115EC[var_00.team] = 1;
@@ -173,15 +173,15 @@ func_1E4A(param_00) {
 
 func_11266(param_00) {
 	thread func_13B70(param_00);
-	scripts\mp\_utility::giveperk("specialty_fastreload");
-	scripts\mp\_utility::giveperk("specialty_quickdraw");
-	scripts\mp\_utility::giveperk("specialty_fastoffhand");
-	scripts\mp\_utility::giveperk("specialty_fastsprintrecovery");
-	scripts\mp\_utility::giveperk("specialty_marathon");
-	scripts\mp\_utility::giveperk("specialty_quickswap");
-	scripts\mp\_utility::giveperk("specialty_stalker");
+	scripts\mp\utility::giveperk("specialty_fastreload");
+	scripts\mp\utility::giveperk("specialty_quickdraw");
+	scripts\mp\utility::giveperk("specialty_fastoffhand");
+	scripts\mp\utility::giveperk("specialty_fastsprintrecovery");
+	scripts\mp\utility::giveperk("specialty_marathon");
+	scripts\mp\utility::giveperk("specialty_quickswap");
+	scripts\mp\utility::giveperk("specialty_stalker");
 	self.movespeedscaler = 1.2;
-	scripts\mp\_weapons::updatemovespeedscale();
+	scripts\mp\weapons::updatemovespeedscale();
 }
 
 func_13B70(param_00) {

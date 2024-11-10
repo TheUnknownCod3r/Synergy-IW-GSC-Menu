@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\4331.gsc
-****************************/
+ * Script: 4331.gsc
+************************/
 
 main() {
 	var_00 = scripts\engine\utility::createoneshoteffect("vfx_proto_cloud_horizon_01");

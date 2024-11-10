@@ -1,8 +1,8 @@
-/************************************************************************
+/****************************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\maps\cp_final\cp_final_weapon_upgrade.gsc
-************************************************************************/
+ * Script: scripts\cp\maps\cp_final\cp_final_weapon_upgrade.gsc
+****************************************************************/
 
 init_weapon_upgrade() {
 	level.pap_room_func = ::cp_town_pap_machine_func;
@@ -131,7 +131,7 @@ weapon_upgrade(param_00,param_01) {
 			var_17 = getangleoffset(var_15,var_0E);
 		}
 
-		var_18 = scripts/cp/zombies/interaction_weapon_upgrade::getpos1offset(var_06);
+		var_18 = scripts\cp\zombies\interaction_weapon_upgrade::getpos1offset(var_06);
 		var_15 moveto(var_0D.origin + var_18,0.75);
 		var_15 rotateto(var_17,0.75);
 		var_15 waittill("movedone");
@@ -164,7 +164,7 @@ weapon_upgrade(param_00,param_01) {
 			}
 
 			if(var_0F == "iw7_venomx_zm_pap2") {
-				var_03 scripts/cp/zombies/achievement::update_achievement("ENCRYPT_DECRYPT",1);
+				var_03 scripts\cp\zombies\achievement::update_achievement("ENCRYPT_DECRYPT",1);
 			}
 
 			var_03 scripts\cp\cp_merits::processmerit("mt_upgrade_weapons");
@@ -216,7 +216,7 @@ wait_for_player_to_take_weapon(param_00,param_01,param_02) {
 		}
 	}
 
-	if(scripts/cp/zombies/interaction_weapon_upgrade::should_take_players_current_weapon(var_03)) {
+	if(scripts\cp\zombies\interaction_weapon_upgrade::should_take_players_current_weapon(var_03)) {
 		var_09 = var_03 getcurrentweapon();
 		var_0A = scripts\cp\utility::getrawbaseweaponname(var_09);
 		var_03 takeweapon(var_09);
@@ -247,7 +247,7 @@ wait_for_player_to_take_weapon(param_00,param_01,param_02) {
 
 	var_03 switchtoweapon(param_00);
 	var_04 = scripts\cp\utility::getrawbaseweaponname(param_00);
-	var_03.pap[var_04].var_B111++;
+	var_03.pap[var_04].lvl++;
 	var_03 scripts\cp\cp_persistence::give_player_xp(500,1);
 	var_03 notify("weapon_level_changed");
 }
@@ -315,7 +315,7 @@ getangleoffset(param_00,param_01) {
 
 disco_getoffsetfrombaseweaponname(param_00) {
 	var_01 = scripts\cp\utility::getbaseweaponname(param_00);
-	var_02 = scripts/cp/zombies/interaction_weapon_upgrade::getoffsetfrombaseweaponname(param_00);
+	var_02 = scripts\cp\zombies\interaction_weapon_upgrade::getoffsetfrombaseweaponname(param_00);
 	switch(var_01) {
 		case "iw7_machete":
 			return (0,-6,2);
@@ -614,12 +614,12 @@ play_pap_vo(param_00) {
 }
 
 process_pap_stat_logging(param_00,param_01) {
-	level.var_1192E++;
+	level.timespapused++;
 	scripts\cp\zombies\zombie_analytics::log_papused(level.wave_num,param_00,level.timespapused);
 }
 
 filter_current_weapon_attachments(param_00) {
-	var_01 = function_00E3(param_00);
+	var_01 = getweaponattachments(param_00);
 	if(issubstr(param_00,"g18_z")) {
 		foreach(var_03 in var_01) {
 			if(issubstr(var_03,"akimbo")) {

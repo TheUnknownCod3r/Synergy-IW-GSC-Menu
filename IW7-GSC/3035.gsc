@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\3035.gsc
+ * Script: 3035.gsc
 ***************************************/
 
 func_D18D() {
@@ -42,8 +42,8 @@ func_D1F6() {
   var_12 = 0.5;
   func_0BDC::func_A301(1, var_00, "land_speed");
   } else {
-  var_13 = scripts/sp/math::func_C097(700, 4000, var_08);
-  var_14 = scripts/sp/math::func_6A8E(0.25, 1, var_13);
+  var_13 = scripts\sp\math::func_C097(700, 4000, var_08);
+  var_14 = scripts\sp\math::func_6A8E(0.25, 1, var_13);
 
   if (isdefined(var_6.func_EE10))
   var_11 = var_6.func_EE10;
@@ -76,7 +76,7 @@ func_D1F6() {
 
   if (level.player usebuttonpressed()) {
   level notify("stop_landingpad_pulse");
-  level.player scripts/sp/utility::func_65E1("flag_player_is_landing");
+  level.player scripts\sp\utility::func_65E1("flag_player_is_landing");
   func_412F();
   var_06 func_4130();
   func_0BDC::func_A301(1, 0, "land_speed");
@@ -118,7 +118,7 @@ func_A83E(var_00) {
 func_DA72() {
   if (!scripts\engine\utility::flag("jackal_land_hint")) {
   scripts\engine\utility::flag_set("jackal_land_hint");
-  scripts/sp/utility::func_56BA("jackal_land");
+  scripts\sp\utility::func_56BA("jackal_land");
   }
 }
 
@@ -164,7 +164,7 @@ func_2658(var_00) {
   thread func_2657(var_00);
   func_0BDC::func_A1DD("hover");
   func_0BDC::func_A224(1);
-  objective_delete(scripts/sp/utility::func_C264("OBJ_VTOL_LAND"));
+  objective_delete(scripts\sp\utility::func_C264("OBJ_VTOL_LAND"));
   var_01 = 250;
   var_02 = 500;
   var_03 = 5000;
@@ -184,7 +184,7 @@ func_2658(var_00) {
   for (;;) {
   var_10 = distance(level.func_D127.origin, var_7.origin);
   var_11 = vectordot(anglestoforward(level.func_D127.angles), vectornormalize(var_8.origin - level.func_D127.origin));
-  var_12 = scripts/sp/math::func_C097(var_09, 2000, var_10);
+  var_12 = scripts\sp\math::func_C097(var_09, 2000, var_10);
   var_04 = level.func_D127.origin[2] - var_0.origin[2];
 
   if (var_10 < var_09 && var_11 > 0.5 && var_04 > 10)
@@ -250,7 +250,7 @@ func_2659() {
 
 func_151F() {
   level notify("abort_vtol");
-  level.player scripts/sp/utility::func_65DD("flag_player_is_landing");
+  level.player scripts\sp\utility::func_65DD("flag_player_is_landing");
   _setsaveddvar("spaceshipcollisionEventThreshold", level.func_A056.func_105E7);
   func_2659();
   thread func_D1F6();
@@ -276,8 +276,8 @@ func_2657(var_00) {
 
   for (;;) {
   var_01 = level.func_D127.origin[2] - var_0.origin[2];
-  var_02 = scripts/sp/math::func_C097(-60, 30, var_01);
-  var_03 = scripts/sp/math::func_6A8E(80, 0, var_02);
+  var_02 = scripts\sp\math::func_C097(-60, 30, var_01);
+  var_03 = scripts\sp\math::func_6A8E(80, 0, var_02);
   func_0BDC::func_A078((0, 0, var_03), 0.05, "vtol_pushup");
   wait 0.05;
   }
@@ -289,7 +289,7 @@ func_10FC9() {
 }
 
 func_A7D7(var_00) {
-  if (level.func_A056.func_1632.size == 0 || !level.player scripts/sp/utility::func_65DB("flag_player_landing_enabled") || !level.player scripts/sp/utility::func_65DB("flag_takeoff_cooldown") || func_0BDC::func_7B9C() > 200 || !var_00 func_0BDC::func_9C1B(0.9))
+  if (level.func_A056.func_1632.size == 0 || !level.player scripts\sp\utility::func_65DB("flag_player_landing_enabled") || !level.player scripts\sp\utility::func_65DB("flag_takeoff_cooldown") || func_0BDC::func_7B9C() > 200 || !var_00 func_0BDC::func_9C1B(0.9))
   return 0;
   else
   return 1;
@@ -314,7 +314,7 @@ func_F51F() {
   level.player enableweapons();
   level.player getquadrant();
   self thread [[self.func_11474]]();
-  level.player scripts/sp/utility::func_65E1("flag_player_is_flying");
+  level.player scripts\sp\utility::func_65E1("flag_player_is_flying");
 }
 
 func_E073(var_00) {
@@ -322,7 +322,7 @@ func_E073(var_00) {
   var_00 = 0;
 
   if (!var_00) {
-  level.player scripts/sp/utility::func_65E1("flag_player_dismounting");
+  level.player scripts\sp\utility::func_65E1("flag_player_dismounting");
   self [[self.func_A7B9]]();
   func_5686();
   func_DF4D();
@@ -488,10 +488,10 @@ func_5698() {
 }
 
 func_569B() {
-  level.player scripts/sp/utility::func_65DD("flag_player_is_flying");
-  level.player scripts/sp/utility::func_65DD("flag_takeoff_cooldown");
-  level.player scripts/sp/utility::func_65DD("flag_player_has_jackal");
-  level.player scripts/sp/utility::func_65DD("flag_player_dismounting");
+  level.player scripts\sp\utility::func_65DD("flag_player_is_flying");
+  level.player scripts\sp\utility::func_65DD("flag_takeoff_cooldown");
+  level.player scripts\sp\utility::func_65DD("flag_player_has_jackal");
+  level.player scripts\sp\utility::func_65DD("flag_player_dismounting");
 }
 
 func_569C() {
@@ -523,7 +523,7 @@ func_569A() {
 }
 
 func_11478() {
-  level.player scripts/sp/utility::func_65E1("flag_takeoff_cooldown");
+  level.player scripts\sp\utility::func_65E1("flag_takeoff_cooldown");
   func_0BDC::jackal_engine_throttle_sfx_volume(1, 0);
   func_0BDC::func_A153(0);
 }
@@ -539,7 +539,7 @@ func_1148A() {
   func_0BDC::func_A15B();
   func_0BDC::func_A151();
   func_0BDC::func_A152(0);
-  scripts/sp/utility::func_56BA("jackal_takeoff");
+  scripts\sp\utility::func_56BA("jackal_takeoff");
 
   while (!isdefined(level.func_D127.func_7294)) {
   wait 0.05;
@@ -565,11 +565,11 @@ func_1148A() {
 
   wait 1.2;
 
-  if (!level.player scripts/sp/utility::func_65DB("disable_jackal_guns"))
+  if (!level.player scripts\sp\utility::func_65DB("disable_jackal_guns"))
   func_0BDC::func_A19E(0);
 
   wait 1.8;
-  level.player scripts/sp/utility::func_65E1("flag_takeoff_cooldown");
+  level.player scripts\sp\utility::func_65E1("flag_takeoff_cooldown");
   func_0BDC::func_A155(0);
   func_0BDC::func_A15C(0);
   func_0BDC::func_A15B(0);
@@ -594,7 +594,7 @@ func_1147C() {
   func_0BDC::func_A15C();
   func_0BDC::func_A2FC(0.7, 0.0);
   scripts\engine\utility::flag_set("jackal_hint_ret_launch");
-  scripts\engine\utility::delaythread(1, scripts/sp/utility::func_56BA, "jackal_launch_retribution");
+  scripts\engine\utility::delaythread(1, scripts\sp\utility::func_56BA, "jackal_launch_retribution");
   level.player notifyonplayercommand("jackal_ret_launch", "+breath_sprint");
   level.player waittill("jackal_ret_launch");
   scripts\engine\utility::flag_clear("jackal_hint_ret_launch");
@@ -677,11 +677,11 @@ func_1147D() {
   thread func_0BDC::func_D527("jackal_vtol_takeoff_plr", self.origin, undefined, 1.5);
   wait 1.2;
 
-  if (!level.player scripts/sp/utility::func_65DB("disable_jackal_guns"))
+  if (!level.player scripts\sp\utility::func_65DB("disable_jackal_guns"))
   func_0BDC::func_A19E(0);
 
   wait 1.8;
-  level.player scripts/sp/utility::func_65E1("flag_takeoff_cooldown");
+  level.player scripts\sp\utility::func_65E1("flag_takeoff_cooldown");
   func_0BDC::func_A15B(0);
   func_0BDC::func_A151(0);
   func_0BDC::func_A156(0);
@@ -718,7 +718,7 @@ func_11479() {
   func_0BDC::func_A152(0);
   self waittill("notify_player_can_launch");
   func_1147A();
-  level.player scripts/sp/utility::func_65E1("flag_player_is_flying");
+  level.player scripts\sp\utility::func_65E1("flag_player_is_flying");
   self notify("notify_player_launch");
   earthquake(0.29, 1.8, self.origin, 10000);
   level.player playrumbleonentity("damage_heavy");
@@ -729,7 +729,7 @@ func_11479() {
   func_0BDC::func_A151(0);
   func_0BDC::func_A15C(0);
 
-  if (!level.player scripts/sp/utility::func_65DB("disable_jackal_guns"))
+  if (!level.player scripts\sp\utility::func_65DB("disable_jackal_guns"))
   func_0BDC::func_A19E(0);
 
   scripts\engine\utility::flag_clear("jackal_taking_off");
@@ -740,7 +740,7 @@ func_1147B(var_00) {
   scripts\engine\utility::flag_init("flag_can_launch");
 
   for (var_01 = 0; var_01 < var_00; var_01 = var_01 + 0.05) {
-  level.func_B41D = scripts/sp/math::func_C097(0, var_00, var_01);
+  level.func_B41D = scripts\sp\math::func_C097(0, var_00, var_01);
   wait 0.05;
   }
 
@@ -794,8 +794,8 @@ func_11482() {
   var_11 = 0.05;
   var_12 = 0.24;
   var_13 = 0.4;
-  var_14 = scripts/sp/utility::func_7C23();
-  var_14 scripts/sp/utility::func_E7C9(0, 0.05);
+  var_14 = scripts\sp\utility::func_7C23();
+  var_14 scripts\sp\utility::func_E7C9(0, 0.05);
   var_15 = scripts\engine\utility::spawn_tag_origin();
   var_15.origin = level.func_D127.origin;
   var_16 = scripts\engine\utility::spawn_tag_origin();
@@ -855,7 +855,7 @@ func_11482() {
 
   if (var_17 && !var_19) {
   scripts\engine\utility::flag_set("jackal_launching_hint");
-  thread scripts/sp/utility::func_56BA("jackal_launch_start");
+  thread scripts\sp\utility::func_56BA("jackal_launch_start");
   var_19 = 1;
   }
 
@@ -882,17 +882,17 @@ func_11482() {
   else
   var_02 = 0;
 
-  var_24 = scripts/sp/math::func_6A8E(var_06, var_05, var_03);
+  var_24 = scripts\sp\math::func_6A8E(var_06, var_05, var_03);
   var_07 = var_07 + (var_24 - var_07) * var_08;
-  var_25 = scripts/sp/math::func_6A8E(var_09, var_10, var_03);
-  var_26 = scripts/sp/math::func_6A8E(var_11, var_12, var_03);
-  var_27 = scripts/sp/math::func_6A8E(0, var_13, var_03);
-  var_28 = scripts/sp/math::func_C097(0, var_04, var_03);
+  var_25 = scripts\sp\math::func_6A8E(var_09, var_10, var_03);
+  var_26 = scripts\sp\math::func_6A8E(var_11, var_12, var_03);
+  var_27 = scripts\sp\math::func_6A8E(0, var_13, var_03);
+  var_28 = scripts\sp\math::func_C097(0, var_04, var_03);
   setomnvar("ui_jackal_booster_charge", var_28);
   var_15 ghostattack(var_25, 0.05);
   var_15 _meth_8277(var_07, 0.05);
   earthquake(var_26, 0.3, level.func_D127.origin, 3000);
-  var_14 scripts/sp/utility::func_E7C9(var_27, 0.05);
+  var_14 scripts\sp\utility::func_E7C9(var_27, 0.05);
   wait 0.05;
   }
 
@@ -943,8 +943,8 @@ func_1147A() {
   if (!scripts\engine\utility::flag_exist("flag_launch_fail"))
   scripts\engine\utility::flag_init("flag_launch_fail");
 
-  var_14 = scripts/sp/utility::func_7C23();
-  var_14 scripts/sp/utility::func_E7C9(0, 0.05);
+  var_14 = scripts\sp\utility::func_7C23();
+  var_14 scripts\sp\utility::func_E7C9(0, 0.05);
   var_15 = scripts\engine\utility::spawn_tag_origin();
   var_15.origin = level.func_D127.origin;
   var_16 = scripts\engine\utility::spawn_tag_origin();
@@ -989,7 +989,7 @@ func_1147A() {
   var_25 = var_01;
 
   var_03 = var_03 + (var_24 - var_03) * var_25;
-  var_22 = scripts/sp/math::func_C097(0, var_04, var_03);
+  var_22 = scripts\sp\math::func_C097(0, var_04, var_03);
   setomnvar("ui_jackal_booster_charge", var_22);
 
   if (var_03 > var_04 && scripts\engine\utility::flag("flag_can_launch")) {
@@ -1012,7 +1012,7 @@ func_1147A() {
 
   if (var_17 && !var_19) {
   scripts\engine\utility::flag_set("jackal_launching_hint");
-  thread scripts/sp/utility::func_56BA("jackal_launch_start");
+  thread scripts\sp\utility::func_56BA("jackal_launch_start");
   var_19 = 1;
   }
 
@@ -1038,15 +1038,15 @@ func_1147A() {
   if (scripts\engine\utility::flag("flag_launch_fail"))
   break;
 
-  var_26 = scripts/sp/math::func_6A8E(var_06, var_05, var_03);
+  var_26 = scripts\sp\math::func_6A8E(var_06, var_05, var_03);
   var_07 = var_07 + (var_26 - var_07) * var_08;
-  var_27 = scripts/sp/math::func_6A8E(var_09, var_10, var_03);
-  var_28 = scripts/sp/math::func_6A8E(var_11, var_12, var_03);
-  var_29 = scripts/sp/math::func_6A8E(0, var_13, var_03);
+  var_27 = scripts\sp\math::func_6A8E(var_09, var_10, var_03);
+  var_28 = scripts\sp\math::func_6A8E(var_11, var_12, var_03);
+  var_29 = scripts\sp\math::func_6A8E(0, var_13, var_03);
   var_15 ghostattack(var_27, 0.05);
   var_15 _meth_8277(var_07, 0.05);
   earthquake(var_28, 0.3, level.func_D127.origin, 3000);
-  var_14 scripts/sp/utility::func_E7C9(var_29, 0.05);
+  var_14 scripts\sp\utility::func_E7C9(var_29, 0.05);
   wait 0.05;
   }
 
@@ -1122,7 +1122,7 @@ func_11477() {
   wait 1.2;
   func_0BDC::func_A153(0);
   wait 1.8;
-  level.player scripts/sp/utility::func_65E1("flag_takeoff_cooldown");
+  level.player scripts\sp\utility::func_65E1("flag_takeoff_cooldown");
   func_0BDC::func_A15C(0);
   func_0BDC::func_A15B(0);
   func_0BDC::func_A151(0);
@@ -1148,7 +1148,7 @@ func_11484() {
   var_03 = var_2.angles[2];
   thread func_11485(var_02, var_03);
   scripts\engine\utility::flag_wait("flag_jackal_can_takeoff");
-  scripts/sp/utility::func_56BA("jackal_takeoff");
+  scripts\sp\utility::func_56BA("jackal_takeoff");
 
   while (!level.player gettimeremainingpercentage())
   wait 0.05;
@@ -1169,7 +1169,7 @@ func_11484() {
   earthquake(0.18, 0.6, level.func_D127.origin, 3000);
   wait 2.0;
   level.player notify("jackal_done_taking_off");
-  level.player scripts/sp/utility::func_65E1("flag_takeoff_cooldown");
+  level.player scripts\sp\utility::func_65E1("flag_takeoff_cooldown");
   func_0BDC::func_D165(var_1.origin, 0, 1, 0.2, 1);
   func_0BDC::func_A14D(0);
   func_0BDC::func_A155(0);
@@ -1424,7 +1424,7 @@ func_BBE9() {
   level waittill("briefing_complete");
 
   if (soundexists("titan_plr_letsdoit"))
-  level.player scripts/sp/utility::func_10347("titan_plr_letsdoit");
+  level.player scripts\sp\utility::func_10347("titan_plr_letsdoit");
 
   func_BBE3();
   return "hover";
@@ -1439,7 +1439,7 @@ func_BBEA(var_00) {
   wait(var_00);
 
   if (getdvarint("jackal_video_capture")) {
-  level thread scripts/sp/utility::func_C12D("briefing_nearly_complete", 14);
+  level thread scripts\sp\utility::func_C12D("briefing_nearly_complete", 14);
   wait 16;
   } else {
   setomnvar("ui_show_bink", 1);
@@ -2015,7 +2015,7 @@ func_568B() {
   thread func_A0F9();
   level.player getweightedchanceroll(level.func_D267, "tag_player", 1, 0, 0, 0, 0, 1);
   level.func_D267 scripts\engine\utility::delaycall(var_00, ::show);
-  level.player thread scripts/sp/utility::func_65E2("eject_complete", 0.05);
+  level.player thread scripts\sp\utility::func_65E2("eject_complete", 0.05);
   level.player scripts\engine\utility::delaycall(var_00 + 0.05, ::lerpviewangleclamp, 2, 0.1, 1, 10, 10, 10, 10);
   level notify("dismount_anim_ended");
   return "fly";
@@ -2237,7 +2237,7 @@ func_A7EB() {
 func_A7ED() {
   if (!scripts\engine\utility::flag("jackal_hint_ret_return")) {
   scripts\engine\utility::flag_set("jackal_hint_ret_return");
-  scripts/sp/utility::func_56BA("jackal_return_to_ret");
+  scripts\sp\utility::func_56BA("jackal_return_to_ret");
   }
 }
 
@@ -2271,9 +2271,9 @@ func_DDA6() {
   scripts\engine\utility::flag_set("jackal_hint_ret_reapproach");
 
   if (scripts\engine\utility::flag("jackal_runway_first_attempt"))
-  scripts/sp/utility::func_56BA("jackal_hint_ret_approach");
+  scripts\sp\utility::func_56BA("jackal_hint_ret_approach");
   else
-  scripts/sp/utility::func_56BA("jackal_hint_ret_reapproach");
+  scripts\sp\utility::func_56BA("jackal_hint_ret_reapproach");
   }
 }
 
@@ -2365,18 +2365,18 @@ func_E3ED(var_00) {
   var_21 = level.func_D127.origin[2] - self.origin[2];
 
   if (var_21 > 0) {
-  var_22 = scripts/sp/math::func_C097(0, var_10, var_21);
+  var_22 = scripts\sp\math::func_C097(0, var_10, var_21);
   var_23 = var_06;
   var_24 = var_07;
   } else {
-  var_22 = 1 - scripts/sp/math::func_C097(var_11, 0, var_21);
+  var_22 = 1 - scripts\sp\math::func_C097(var_11, 0, var_21);
   var_23 = var_08;
   var_24 = var_09;
   }
 
-  var_22 = scripts/sp/math::func_C09B(var_22);
-  var_25 = scripts/sp/math::func_6A8E(var_04, var_23, var_22);
-  var_26 = scripts/sp/math::func_6A8E(var_05, var_24, var_22);
+  var_22 = scripts\sp\math::func_C09B(var_22);
+  var_25 = scripts\sp\math::func_6A8E(var_04, var_23, var_22);
+  var_26 = scripts\sp\math::func_6A8E(var_05, var_24, var_22);
 
   if (isdefined(self.func_B74F))
   var_27 = clamp(var_20[1], self.func_B74F, self.func_B455);
@@ -2390,11 +2390,11 @@ func_E3ED(var_00) {
   var_31 = anglestoforward(var_20);
   var_26 = anglestoright(var_20);
   var_32 = anglestoup(var_20);
-  var_33 = scripts/sp/math::func_C097(var_01, var_02, var_13);
-  var_34 = scripts/sp/math::func_6A8E(0, var_03, var_33);
-  var_16 = vectornormalize(scripts/sp/math::func_AB6F(var_28, var_31, var_34 * self.func_B3D5 * self.func_E708));
-  var_17 = vectornormalize(scripts/sp/math::func_AB6F(var_29, var_26, var_34 * self.func_B3D5 * self.func_E708));
-  var_18 = vectornormalize(scripts/sp/math::func_AB6F(var_30, var_32, var_34 * self.func_B3D5 * self.func_E708));
+  var_33 = scripts\sp\math::func_C097(var_01, var_02, var_13);
+  var_34 = scripts\sp\math::func_6A8E(0, var_03, var_33);
+  var_16 = vectornormalize(scripts\sp\math::func_AB6F(var_28, var_31, var_34 * self.func_B3D5 * self.func_E708));
+  var_17 = vectornormalize(scripts\sp\math::func_AB6F(var_29, var_26, var_34 * self.func_B3D5 * self.func_E708));
+  var_18 = vectornormalize(scripts\sp\math::func_AB6F(var_30, var_32, var_34 * self.func_B3D5 * self.func_E708));
   var_20 = _axistoangles(var_16, var_17, var_18);
   var_23 = 30;
   var_24 = 20;
@@ -2534,10 +2534,10 @@ func_3AE8(var_00) {
   var_16 = anglestoforward(var_15);
   var_17 = anglestoright(var_15);
   var_18 = anglestoup(var_15);
-  var_19 = scripts/sp/math::func_6A8E(var_11, var_16, var_07);
-  var_20 = scripts/sp/math::func_6A8E(var_12, var_17, var_07);
-  var_21 = scripts/sp/math::func_6A8E(var_13, var_18, var_07);
-  var_22 = scripts/sp/math::func_6A8E(var_09, var_14, var_07);
+  var_19 = scripts\sp\math::func_6A8E(var_11, var_16, var_07);
+  var_20 = scripts\sp\math::func_6A8E(var_12, var_17, var_07);
+  var_21 = scripts\sp\math::func_6A8E(var_13, var_18, var_07);
+  var_22 = scripts\sp\math::func_6A8E(var_09, var_14, var_07);
   var_23 = _axistoangles(var_19, var_20, var_21);
 
   if (!var_03) {
@@ -2566,8 +2566,8 @@ func_3AE8(var_00) {
 
   var_30 = var_5.origin + rotatevector(var_29, var_5.angles);
   var_5.func_20E7 = vectordot(anglestoforward(var_5.angles), -1 * anglestoforward(var_23));
-  var_31 = scripts/sp/math::func_C097(-1.0, 0.0, var_5.func_20E7);
-  var_31 = scripts/sp/math::func_6A8E(0.2, 1, var_31);
+  var_31 = scripts\sp\math::func_C097(-1.0, 0.0, var_5.func_20E7);
+  var_31 = scripts\sp\math::func_6A8E(0.2, 1, var_31);
 
   for (var_32 = self.func_A70D; var_32 < self.func_11A2A; var_32++) {
   self.segments[var_32] unlink();
@@ -2592,9 +2592,9 @@ func_3AE6(var_00) {
   var_02 = pointonsegmentnearesttopoint(self.origin, self.origin + anglestoforward(self.angles) * 3000, level.func_D127.origin);
   var_03 = distance(level.func_D127.origin, var_02);
   var_04 = "runway_landing";
-  var_05 = scripts/sp/math::func_C097(0, 25000, var_03);
-  var_05 = scripts/sp/math::func_C09A(var_05);
-  var_06 = scripts/sp/math::func_6A8E(0.17, 1, var_05);
+  var_05 = scripts\sp\math::func_C097(0, 25000, var_03);
+  var_05 = scripts\sp\math::func_C09A(var_05);
+  var_06 = scripts\sp\math::func_6A8E(0.17, 1, var_05);
   var_07 = 1;
 
   foreach (var_10, var_09 in level.func_A056.func_BBB9["speed"].func_3C66) {
@@ -2629,8 +2629,8 @@ func_3AE5() {
   if (self.func_102D1.active && !func_3AE1()) {
   var_03 = distance(self.origin, level.func_D127.origin);
   var_04 = 2900;
-  var_05 = scripts/sp/math::func_C097(self.func_102D1.func_B740, self.func_102D1.func_B42D + var_04, var_03);
-  var_06 = scripts/sp/math::func_6A8E(self.func_102D1.func_B740, self.func_102D1.func_B42D, var_05);
+  var_05 = scripts\sp\math::func_C097(self.func_102D1.func_B740, self.func_102D1.func_B42D + var_04, var_03);
+  var_06 = scripts\sp\math::func_6A8E(self.func_102D1.func_B740, self.func_102D1.func_B42D, var_05);
   var_07 = self.origin + anglestoforward(self.angles) * var_06;
   var_04 = (var_07 - self.func_102D1.origin) * self.func_102D1.func_AB99;
   var_08 = length(var_04);
@@ -2646,9 +2646,9 @@ func_3AE5() {
   var_02 = 1;
   }
 
-  var_09 = scripts/sp/math::func_C097(0, 30, var_08);
-  var_10 = scripts/sp/math::func_6A8E(0.5, 1.8, var_09);
-  var_11 = scripts/sp/math::func_6A8E(0.2, 0.4, var_09);
+  var_09 = scripts\sp\math::func_C097(0, 30, var_08);
+  var_10 = scripts\sp\math::func_6A8E(0.5, 1.8, var_09);
+  var_11 = scripts\sp\math::func_6A8E(0.2, 0.4, var_09);
   self.func_102D1 ghostattack(var_10, 0.05);
   self.func_102D1 _meth_8277(var_11, 0.05);
   }
@@ -2967,18 +2967,18 @@ func_3ACB() {
 
   foreach (var_01 in self.func_2AD8) {
   var_1.func_C385 = var_01 _meth_8134();
-  var_01 thread scripts/sp/lights::func_AB83(0.2, 0.2);
-  var_01 scripts\engine\utility::delaythread(1, scripts/sp/lights::func_AB83, var_1.func_C385, 7);
+  var_01 thread scripts\sp\lights::func_AB83(0.2, 0.2);
+  var_01 scripts\engine\utility::delaythread(1, scripts\sp\lights::func_AB83, var_1.func_C385, 7);
   }
 
   foreach (var_01 in self.func_2ADA) {
-  var_01 scripts/sp/utility::func_65E0("light_pulsing");
-  var_01 scripts/sp/utility::func_65E1("light_pulsing");
+  var_01 scripts\sp\utility::func_65E0("light_pulsing");
+  var_01 scripts\sp\utility::func_65E1("light_pulsing");
   var_01 thread func_3AC1();
   }
 
   foreach (var_01 in self.func_2ADA)
-  var_01 scripts/sp/utility::func_65E8("light_pulsing");
+  var_01 scripts\sp\utility::func_65E8("light_pulsing");
 
   foreach (var_08 in self.func_2ADB) {
   var_08 show();
@@ -2986,7 +2986,7 @@ func_3ACB() {
 
   foreach (var_01 in var_8.lights) {
   var_01 _meth_82FC((1, 0.085294, 0.03137));
-  var_01 thread scripts/sp/lights::func_AB83(var_1.script_intensity_01, 1);
+  var_01 thread scripts\sp\lights::func_AB83(var_1.script_intensity_01, 1);
   }
 
   var_08 give_attacker_kill_rewards(%claxon_spin_loop);
@@ -3009,7 +3009,7 @@ func_3AC1() {
   func_3AB1(var_01, var_03, var_04);
   wait(var_06);
   func_3AB1(var_00, var_02, var_05);
-  scripts/sp/utility::func_65DD("light_pulsing");
+  scripts\sp\utility::func_65DD("light_pulsing");
 }
 
 func_3AB1(var_00, var_01, var_02) {
@@ -3071,7 +3071,7 @@ func_AB9F(var_00) {
 
 func_AB80(var_00) {
   foreach (var_02 in level.func_A056.func_A7E8)
-  var_02 thread scripts/sp/lights::func_AB83(0, var_00);
+  var_02 thread scripts\sp\lights::func_AB83(0, var_00);
 }
 
 func_3AD9(var_00) {
@@ -3123,8 +3123,8 @@ func_3AE4() {
   if (scripts\engine\utility::flag("flag_player_on_runway") && !var_00)
   var_00 = 1;
 
-  var_04 = scripts/sp/math::func_C097(5000, 9500, var_02);
-  var_05 = scripts/sp/math::func_6A8E(0.97, 0.82, var_04);
+  var_04 = scripts\sp\math::func_C097(5000, 9500, var_02);
+  var_05 = scripts\sp\math::func_6A8E(0.97, 0.82, var_04);
 
   if (var_03 < var_05) {
   func_3AD9("dot");
@@ -3278,10 +3278,10 @@ func_3AE7(var_00, var_01, var_01, var_02, var_03, var_04, var_05, var_06, var_07
   var_13 = anglestoright(self.parent.angles);
   self.func_56EA = distance(self.origin, var_01);
   self.func_5ABB = vectordot(vectornormalize(self.origin - var_01), anglestoforward(var_01));
-  var_14 = scripts/sp/math::func_C097(0, 0.1, self.func_5ABB);
-  var_06 = scripts/sp/math::func_6A8E(0.1, 1, var_06);
-  var_15 = scripts/sp/math::func_C097(var_05, var_04, var_03);
-  var_16 = scripts/sp/math::func_C09B(var_15);
+  var_14 = scripts\sp\math::func_C097(0, 0.1, self.func_5ABB);
+  var_06 = scripts\sp\math::func_6A8E(0.1, 1, var_06);
+  var_15 = scripts\sp\math::func_C097(var_05, var_04, var_03);
+  var_16 = scripts\sp\math::func_C09B(var_15);
   var_17 = vectornormalize(var_11 * (1 - var_16) + var_08 * var_16);
   var_18 = vectornormalize(var_13 * (1 - var_15) + var_10 * var_15);
   var_19 = vectornormalize(var_12 * (1 - var_15) + var_09 * var_15);
@@ -3456,8 +3456,8 @@ func_EA01() {
 
 func_3ADC(var_00) {
   var_01 = length(self.func_11593.origin - level.func_D127.origin);
-  var_02 = scripts/sp/math::func_C097(50, 300, var_01);
-  var_03 = scripts/sp/math::func_6A8E(0.3, 2.7, var_02);
+  var_02 = scripts\sp\math::func_C097(50, 300, var_01);
+  var_03 = scripts\sp\math::func_6A8E(0.3, 2.7, var_02);
 
   if (!isdefined(var_00)) {
   func_0BDC::func_D164(self.func_11593, var_03);
@@ -3530,12 +3530,12 @@ func_3ACF(var_00) {
   var_08 = distance(level.func_D127.origin, var_06);
   }
 
-  var_09 = scripts/sp/math::func_C097(20, 3000, var_08);
-  var_09 = scripts/sp/math::func_C09B(var_09);
-  var_10 = scripts/sp/math::func_6A8E(0.7, var_05, var_09);
-  var_11 = scripts/sp/math::func_6A8E(0.2, 1, var_09);
-  var_12 = scripts/sp/math::func_6A8E(0.2, 1.2, var_09);
-  var_13 = scripts/sp/math::func_6A8E(0.3, 1, var_09);
+  var_09 = scripts\sp\math::func_C097(20, 3000, var_08);
+  var_09 = scripts\sp\math::func_C09B(var_09);
+  var_10 = scripts\sp\math::func_6A8E(0.7, var_05, var_09);
+  var_11 = scripts\sp\math::func_6A8E(0.2, 1, var_09);
+  var_12 = scripts\sp\math::func_6A8E(0.2, 1.2, var_09);
+  var_13 = scripts\sp\math::func_6A8E(0.3, 1, var_09);
   self.func_11593 unlink();
   self.func_11593.origin = self.func_11593.origin + var_07 * var_10;
   self.func_11593.angles = self.func_6C1E.angles;
@@ -3557,7 +3557,7 @@ func_3ACF(var_00) {
 
 func_C139() {
   if (isdefined(level.func_A056.func_A7E9)) {
-  scripts/sp/hud_util::func_6AA3(level.func_A056.func_A7E9, "black");
+  scripts\sp\hud_util::func_6AA3(level.func_A056.func_A7E9, "black");
   wait(level.func_A056.func_A7E9);
   }
 
@@ -3612,7 +3612,7 @@ func_D17B() {
 
 func_A2CE() {
   if (level.console || level.player global_fx())
-  scripts/sp/utility::func_56BA("jackal_launch_rev");
+  scripts\sp\utility::func_56BA("jackal_launch_rev");
   else
-  scripts/sp/utility::func_56BA("jackal_launch_rev_pc");
+  scripts\sp\utility::func_56BA("jackal_launch_rev_pc");
 }

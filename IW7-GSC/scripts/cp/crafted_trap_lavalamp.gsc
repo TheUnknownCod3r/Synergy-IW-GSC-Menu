@@ -1,8 +1,8 @@
-/********************************************************
+/************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\crafted_trap_lavalamp.gsc
-********************************************************/
+ * Script: scripts\cp\crafted_trap_lavalamp.gsc
+************************************************/
 
 init() {
 	level.lavalamp_trap_settings = [];

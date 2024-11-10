@@ -1,8 +1,8 @@
-/*******************************************************************
+/***********************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\maps\cp_town\cp_town_fast_travel.gsc
-*******************************************************************/
+ * Script: scripts\cp\maps\cp_town\cp_town_fast_travel.gsc
+***********************************************************/
 
 init_teleport_portals() {
 	scripts\engine\utility::flag_wait("interactions_initialized");

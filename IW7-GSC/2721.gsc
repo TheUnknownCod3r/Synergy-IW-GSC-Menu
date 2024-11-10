@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2721.gsc
+ * Script: 2721.gsc
 ***************************************/
 
 domeshield_init() {
@@ -25,7 +25,7 @@ func_5910(var_00) {
   else
   {
   scripts\mp\hud_message::showerrormessage("MP_CANNOT_PLACE_DOMESHIELD");
-  scripts/mp/powers::func_D74C("power_domeshield");
+  scripts\mp\powers::func_D74C("power_domeshield");
   var_00 delete();
   }
 }
@@ -116,7 +116,7 @@ domeshield_handledamage(var_00, var_01, var_02, var_03, var_04) {
   var_05 = var_03;
   var_05 = scripts\mp\damage::handlemeleedamage(var_01, var_02, var_05);
   var_05 = scripts\mp\damage::handleapdamage(var_01, var_02, var_05);
-  scripts/mp/powers::equipmenthit(self.owner, var_00, var_01, var_02);
+  scripts\mp\powers::equipmenthit(self.owner, var_00, var_01, var_02);
   return var_05;
 }
 
@@ -144,7 +144,7 @@ domeshield_domehandledamage(var_00, var_01, var_02, var_03, var_04) {
 
   self.owner scripts\mp\missions::func_D998(var_00, var_01, self);
   self.owner scripts\mp\damage::combatrecordtacticalstat("power_domeshield", var_03);
-  scripts/mp/powers::equipmenthit(self.owner, var_00, var_01, var_02);
+  scripts\mp\powers::equipmenthit(self.owner, var_00, var_01, var_02);
   return var_03;
 }
 

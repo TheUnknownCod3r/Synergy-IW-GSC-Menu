@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3138.gsc
-****************************/
+ * Script: 3138.gsc
+************************/
 
 func_35A6(param_00,param_01,param_02,param_03) {
 	if(!isdefined(level.var_362A)) {
@@ -19,11 +19,11 @@ func_35A6(param_00,param_01,param_02,param_03) {
 	self.objective_state_nomessage = 0;
 	self.setthermalbodymaterial = 1024;
 	self.nodetoentitysighttest = 164;
-	scripts/asm/asm::func_237B(1);
+	scripts\asm\asm::func_237B(1);
 	self.var_1A48 = 1;
-	self._blackboard.movetype = "combat";
-	self._blackboard.var_A983 = 0;
-	self._blackboard.timeoff = -99999;
+	self.var_1198.movetype = "combat";
+	self.var_1198.var_A983 = 0;
+	self.var_1198.timeoff = -99999;
 	self.var_358 = 0.1;
 	self.iscinematicplaying = 0;
 	self.var_27F7 = 1;
@@ -31,7 +31,7 @@ func_35A6(param_00,param_01,param_02,param_03) {
 		self.var_13C83 = [];
 		foreach(var_06, var_05 in self.var_13CC3) {
 			self.var_13C83[var_06] = 1;
-			self.bt.var_13C83[var_06] = 1;
+			self.var_3135.var_13C83[var_06] = 1;
 		}
 	}
 
@@ -121,7 +121,7 @@ func_3514(param_00,param_01,param_02,param_03) {
 }
 
 func_3518(param_00) {
-	var_01 = self._blackboard.shootparams;
+	var_01 = self.var_1198.shootparams;
 	if(!isdefined(var_01)) {
 		return 0;
 	}
@@ -140,7 +140,7 @@ func_3519(param_00,param_01,param_02,param_03) {
 }
 
 func_351A(param_00,param_01,param_02,param_03) {
-	var_04 = self._blackboard.shootparams;
+	var_04 = self.var_1198.shootparams;
 	if(!isdefined(var_04)) {
 		return 0;
 	}
@@ -154,7 +154,7 @@ func_351A(param_00,param_01,param_02,param_03) {
 		var_06 = "right_arm";
 	}
 
-	if(scripts/asm/asm_bb::ispartdismembered(var_06)) {
+	if(scripts\asm\asm_bb::ispartdismembered(var_06)) {
 		return 0;
 	}
 
@@ -170,7 +170,7 @@ func_3515(param_00,param_01,param_02,param_03) {
 }
 
 func_3516(param_00,param_01,param_02,param_03) {
-	var_04 = self._blackboard.shootparams;
+	var_04 = self.var_1198.shootparams;
 	if(!isdefined(var_04)) {
 		return 0;
 	}
@@ -184,7 +184,7 @@ func_3516(param_00,param_01,param_02,param_03) {
 		var_06 = "right_arm";
 	}
 
-	if(scripts/asm/asm_bb::ispartdismembered(var_06)) {
+	if(scripts\asm\asm_bb::ispartdismembered(var_06)) {
 		return 0;
 	}
 
@@ -201,5 +201,5 @@ func_3517(param_00,param_01,param_02,param_03) {
 }
 
 func_35AE(param_00,param_01,param_02,param_03) {
-	return scripts/asm/asm_bb::ispartdismembered(param_03);
+	return scripts\asm\asm_bb::ispartdismembered(param_03);
 }

@@ -1,21 +1,21 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\2584.gsc
-****************************/
+ * Script: 2584.gsc
+************************/
 
 func_1180F(param_00) {
-	scripts/asm/asm_bb::bb_requestthrowgrenade(1,self.isnodeoccupied);
-	self.bt.instancedata[param_00] = gettime() + 4000;
+	scripts\asm\asm_bb::bb_requestthrowgrenade(1,self.isnodeoccupied);
+	self.var_3135.instancedata[param_00] = gettime() + 4000;
 }
 
 func_11811(param_00) {
-	scripts/asm/asm_bb::bb_requestthrowgrenade(0);
-	self.bt.instancedata[param_00] = undefined;
+	scripts\asm\asm_bb::bb_requestthrowgrenade(0);
+	self.var_3135.instancedata[param_00] = undefined;
 }
 
 func_11812(param_00) {
-	var_01 = scripts/asm/asm_bb::bb_getthrowgrenadetarget();
+	var_01 = scripts\asm\asm_bb::bb_getthrowgrenadetarget();
 	if(!isdefined(var_01)) {
 		return level.failure;
 	}
@@ -24,15 +24,15 @@ func_11812(param_00) {
 		return level.failure;
 	}
 
-	if(scripts/asm/asm::asm_ephemeraleventfired("throwgrenade","start",0)) {
-		self.bt.instancedata[param_00] = self.bt.instancedata[param_00] + 10000;
+	if(scripts\asm\asm::asm_ephemeraleventfired("throwgrenade","start",0)) {
+		self.var_3135.instancedata[param_00] = self.var_3135.instancedata[param_00] + 10000;
 	}
 
-	if(scripts/asm/asm::asm_ephemeraleventfired("throwgrenade","end")) {
+	if(scripts\asm\asm::asm_ephemeraleventfired("throwgrenade","end")) {
 		return level.success;
 	}
 
-	if(gettime() > self.bt.instancedata[param_00]) {
+	if(gettime() > self.var_3135.instancedata[param_00]) {
 		return level.failure;
 	}
 
@@ -235,30 +235,30 @@ func_7EE9(param_00) {
 }
 
 func_1182C(param_00) {
-	scripts/asm/asm_bb::bb_requestfire(1,self.isnodeoccupied);
-	self.bt.instancedata[param_00] = gettime() + 4000;
+	scripts\asm\asm_bb::bb_requestfire(1,self.isnodeoccupied);
+	self.var_3135.instancedata[param_00] = gettime() + 4000;
 }
 
 func_1182D(param_00) {
-	scripts/asm/asm_bb::bb_requestfire(0);
-	self.bt.instancedata[param_00] = undefined;
+	scripts\asm\asm_bb::bb_requestfire(0);
+	self.var_3135.instancedata[param_00] = undefined;
 }
 
 func_1182E(param_00) {
-	var_01 = scripts/asm/asm_bb::func_2931();
+	var_01 = scripts\asm\asm_bb::func_2931();
 	if(!isdefined(var_01)) {
 		return level.failure;
 	}
 
-	if(scripts/asm/asm::asm_ephemeraleventfired("throwSeeker","start",0)) {
-		self.bt.instancedata[param_00] = self.bt.instancedata[param_00] + 10000;
+	if(scripts\asm\asm::asm_ephemeraleventfired("throwSeeker","start",0)) {
+		self.var_3135.instancedata[param_00] = self.var_3135.instancedata[param_00] + 10000;
 	}
 
-	if(scripts/asm/asm::asm_ephemeraleventfired("throwSeeker","end")) {
+	if(scripts\asm\asm::asm_ephemeraleventfired("throwSeeker","end")) {
 		return level.success;
 	}
 
-	if(gettime() > self.bt.instancedata[param_00]) {
+	if(gettime() > self.var_3135.instancedata[param_00]) {
 		return level.failure;
 	}
 

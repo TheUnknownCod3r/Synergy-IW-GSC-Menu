@@ -1,15 +1,15 @@
-/*******************************************************
+/***********************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\maps\mp_riot\mp_riot.gsc
-*******************************************************/
+ * Script: scripts\mp\maps\mp_riot\mp_riot.gsc
+***********************************************/
 
 main() {
-	lib_0FE9::main();
+	scripts\mp\maps\mp_riot\mp_riot_precache::main();
 	scripts\mp\maps\mp_riot\gen\mp_riot_art::main();
-	lib_0FE8::main();
-	scripts\mp\_load::main();
-	scripts\mp\_compass::func_FACD("compass_map_mp_riot");
+	scripts\mp\maps\mp_riot\mp_riot_fx::main();
+	scripts\mp\load::main();
+	scripts\mp\compass::setupminimap("compass_map_mp_riot");
 	setdvar("r_lightGridEnableTweaks",1);
 	setdvar("r_lightGridIntensity",1.33);
 	setdvar("sm_sunCascadeSizeMultiplier1",2);
@@ -157,7 +157,7 @@ func_1C33() {
 
 func_CDA4(param_00) {
 	wait(30);
-	function_030E(param_00);
+	playcinematicforalllooping(param_00);
 }
 
 managephysicsprops() {
@@ -175,12 +175,12 @@ triggerphysicsbump() {
 	var_01 = 200;
 	wait(5);
 	var_02 = physics_volumecreate(var_00,1000);
-	var_02 method_852C(1,var_00,var_01);
-	var_02 method_8526(1);
-	var_02 method_8529(1);
+	var_02 physics_volumesetasfocalforce(1,var_00,var_01);
+	var_02 physics_volumeenable(1);
+	var_02 physics_volumesetactivator(1);
 	var_02.time = gettime();
 	var_02.var_720E = var_01;
-	var_02 method_852C(1,var_00,var_01);
+	var_02 physics_volumesetasfocalforce(1,var_00,var_01);
 	wait(0.1);
 	var_02 delete();
 }
@@ -188,77 +188,77 @@ triggerphysicsbump() {
 move_sd_startspawns() {
 	if(level.gametype == "sd") {
 		wait(0.1);
-		var_00 = scripts\mp\_spawnlogic::func_8140("mp_sd_spawn_defender");
+		var_00 = scripts\mp\spawnlogic::getspawnpointarray("mp_sd_spawn_defender");
 		foreach(var_02 in var_00) {
 			var_03 = anglestoright(var_02.angles);
 			if(distance(var_02.origin,(-500,3060,176.124)) < 10) {
 				var_02.origin = (-600,2564,176);
-				var_02.var_1D53 = [];
-				scripts\mp\_spawnlogic::func_17A7(var_02,var_02.origin + var_03 * 45);
+				var_02.alternates = [];
+				scripts\mp\spawnlogic::func_17A7(var_02,var_02.origin + var_03 * 45);
 				continue;
 			}
 
 			if(distance(var_02.origin,(-596,3064,172.002)) < 10) {
 				var_02.origin = (-686,2564,176);
-				var_02.var_1D53 = [];
-				scripts\mp\_spawnlogic::func_17A7(var_02,var_02.origin + var_03 * 45);
-				scripts\mp\_spawnlogic::func_17A7(var_02,var_02.origin - var_03 * 45);
+				var_02.alternates = [];
+				scripts\mp\spawnlogic::func_17A7(var_02,var_02.origin + var_03 * 45);
+				scripts\mp\spawnlogic::func_17A7(var_02,var_02.origin - var_03 * 45);
 				continue;
 			}
 
 			if(distance(var_02.origin,(-700,3064,176.124)) < 10) {
 				var_02.origin = (-790,2564,180);
-				var_02.var_1D53 = [];
-				scripts\mp\_spawnlogic::func_17A7(var_02,var_02.origin + var_03 * 45);
-				scripts\mp\_spawnlogic::func_17A7(var_02,var_02.origin - var_03 * 45);
+				var_02.alternates = [];
+				scripts\mp\spawnlogic::func_17A7(var_02,var_02.origin + var_03 * 45);
+				scripts\mp\spawnlogic::func_17A7(var_02,var_02.origin - var_03 * 45);
 				continue;
 			}
 
 			if(distance(var_02.origin,(-500,3140,176.124)) < 10) {
 				var_02.origin = (-600,2644,176);
-				var_02.var_1D53 = [];
-				scripts\mp\_spawnlogic::func_17A7(var_02,var_02.origin + var_03 * 45);
-				scripts\mp\_spawnlogic::func_17A7(var_02,var_02.origin - var_03 * 45);
+				var_02.alternates = [];
+				scripts\mp\spawnlogic::func_17A7(var_02,var_02.origin + var_03 * 45);
+				scripts\mp\spawnlogic::func_17A7(var_02,var_02.origin - var_03 * 45);
 				continue;
 			}
 
 			if(distance(var_02.origin,(-596,3144,172.002)) < 10) {
 				var_02.origin = (-686,2644,176);
-				var_02.var_1D53 = [];
-				scripts\mp\_spawnlogic::func_17A7(var_02,var_02.origin + var_03 * 45);
-				scripts\mp\_spawnlogic::func_17A7(var_02,var_02.origin - var_03 * 45);
+				var_02.alternates = [];
+				scripts\mp\spawnlogic::func_17A7(var_02,var_02.origin + var_03 * 45);
+				scripts\mp\spawnlogic::func_17A7(var_02,var_02.origin - var_03 * 45);
 				continue;
 			}
 
 			if(distance(var_02.origin,(-700,3144,176.124)) < 10) {
 				var_02.origin = (-790,2644,180);
-				var_02.var_1D53 = [];
-				scripts\mp\_spawnlogic::func_17A7(var_02,var_02.origin + var_03 * 45);
-				scripts\mp\_spawnlogic::func_17A7(var_02,var_02.origin - var_03 * 45);
+				var_02.alternates = [];
+				scripts\mp\spawnlogic::func_17A7(var_02,var_02.origin + var_03 * 45);
+				scripts\mp\spawnlogic::func_17A7(var_02,var_02.origin - var_03 * 45);
 				continue;
 			}
 
 			if(distance(var_02.origin,(-500,3220,176.124)) < 10) {
 				var_02.origin = (-600,2724,176);
-				var_02.var_1D53 = [];
-				scripts\mp\_spawnlogic::func_17A7(var_02,var_02.origin + var_03 * 45);
-				scripts\mp\_spawnlogic::func_17A7(var_02,var_02.origin - var_03 * 45);
+				var_02.alternates = [];
+				scripts\mp\spawnlogic::func_17A7(var_02,var_02.origin + var_03 * 45);
+				scripts\mp\spawnlogic::func_17A7(var_02,var_02.origin - var_03 * 45);
 				continue;
 			}
 
 			if(distance(var_02.origin,(-596,3224,172.002)) < 10) {
 				var_02.origin = (-686,2724,176);
-				var_02.var_1D53 = [];
-				scripts\mp\_spawnlogic::func_17A7(var_02,var_02.origin + var_03 * 45);
-				scripts\mp\_spawnlogic::func_17A7(var_02,var_02.origin - var_03 * 45);
+				var_02.alternates = [];
+				scripts\mp\spawnlogic::func_17A7(var_02,var_02.origin + var_03 * 45);
+				scripts\mp\spawnlogic::func_17A7(var_02,var_02.origin - var_03 * 45);
 				continue;
 			}
 
 			if(distance(var_02.origin,(-700,3224,176.124)) < 10) {
 				var_02.origin = (-790,2724,180);
-				var_02.var_1D53 = [];
-				scripts\mp\_spawnlogic::func_17A7(var_02,var_02.origin + var_03 * 45);
-				scripts\mp\_spawnlogic::func_17A7(var_02,var_02.origin - var_03 * 45);
+				var_02.alternates = [];
+				scripts\mp\spawnlogic::func_17A7(var_02,var_02.origin + var_03 * 45);
+				scripts\mp\spawnlogic::func_17A7(var_02,var_02.origin - var_03 * 45);
 			}
 		}
 	}

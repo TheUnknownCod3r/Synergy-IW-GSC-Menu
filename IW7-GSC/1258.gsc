@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\1258.gsc
-****************************/
+ * Script: 1258.gsc
+************************/
 
 main() {
 	self setmodel("body_sdf_army_heavy_3");
@@ -17,10 +17,10 @@ main() {
 	self.voice = "setdef";
 	self give_explosive_touch_on_revived("vestheavy");
 	if(issentient(self)) {
-		self sethitlocdamagetable("locdmgtable/ai_lochit_dmgtable");
+		self sethitlocdamagetable("locdmgtable\ai_lochit_dmgtable");
 	}
 
-	self.var_8E1A = level.var_7649["iw7/core/human/helmet_sdf_army_broken"];
+	self.var_8E1A = level.var_7649["iw7\core\human\helmet_sdf_army_broken"];
 	if(issentient(self)) {
 		self _meth_849A();
 		var_00 = [];
@@ -43,5 +43,5 @@ precache() {
 	precachemodel("head_bg_var_head_sc_kloos_blast_damage");
 	precachemodel("helmet_sdf_army_heavy_3");
 	precachemodel("sdf_army_boost_pack_zerog");
-	level.var_7649["iw7/core/human/helmet_sdf_army_broken"] = loadfx("vfx/iw7/core/human/helmet_sdf_army_broken.vfx");
+	level.var_7649["iw7\core\human\helmet_sdf_army_broken"] = loadfx("vfx\iw7\core\human\helmet_sdf_army_broken.vfx");
 }

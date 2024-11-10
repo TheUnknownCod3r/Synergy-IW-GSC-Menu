@@ -1,8 +1,8 @@
-/************************************************
+/****************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\anim\cover_prone.gsc
-************************************************/
+ * Script: scripts\anim\cover_prone.gsc
+****************************************/
 
 func_9509() {}
 
@@ -14,21 +14,21 @@ main() {
 		return;
 	}
 
-	if(isdefined(self.var_205.turret)) {
+	if(isdefined(self.target_getindexoftarget.turret)) {
 		scripts\anim\cover_wall::func_130DF();
 	}
 
-	if(isdefined(self.isnodeoccupied) && lengthsquared(self.origin - self.var_10C.origin) < squared(512)) {
+	if(isdefined(self.isnodeoccupied) && lengthsquared(self.origin - self.isnodeoccupied.origin) < squared(512)) {
 		thread scripts\anim\combat::main();
 		return;
 	}
 
 	func_F924();
 	self.covernode = self.target_getindexoftarget;
-	self orientmode("face angle",self.var_473C.angles[1]);
-	self.var_1491._meth_8445 = 1;
+	self orientmode("face angle",self.covernode.angles[1]);
+	self.a._meth_8445 = 1;
 	self give_run_perk(-45,45,%prone_legs_down,%exposed_modern,%prone_legs_up);
-	if(self.var_1491.pose != "prone") {
+	if(self.a.pose != "prone") {
 		prone_transitionto("prone");
 	}
 	else
@@ -39,14 +39,14 @@ main() {
 	thread scripts\anim\combat_utility::func_1A3E();
 	func_FADE(0.2);
 	self give_attacker_kill_rewards(%prone_aim_5,1,0.1);
-	self orientmode("face angle",self.var_473C.angles[1]);
+	self orientmode("face angle",self.covernode.angles[1]);
 	self animmode("zonly_physics");
 	func_DA7E();
 	self notify("stop_deciding_how_to_shoot");
 }
 
 end_script() {
-	self.var_1491._meth_8445 = undefined;
+	self.a._meth_8445 = undefined;
 }
 
 func_92FF() {
@@ -89,7 +89,7 @@ func_DA7E() {
 		}
 
 		var_01 = lengthsquared(self.origin - self.var_FECF);
-		if(self.var_1491.pose != "crouch" && self getteleportlonertargetplayer("crouch") && var_01 < squared(400)) {
+		if(self.a.pose != "crouch" && self getteleportlonertargetplayer("crouch") && var_01 < squared(400)) {
 			if(var_01 < squared(285)) {
 				prone_transitionto("crouch");
 				thread scripts\anim\combat::main();
@@ -121,7 +121,7 @@ func_DA83(param_00) {
 
 func_F924() {
 	self _meth_82D0(self.target_getindexoftarget);
-	self.var_1491.var_2274 = scripts\anim\utility::func_B028("cover_prone");
+	self.a.var_2274 = scripts\anim\utility::func_B028("cover_prone");
 }
 
 func_128AF(param_00,param_01) {
@@ -157,11 +157,11 @@ func_453F() {
 }
 
 func_10012() {
-	if(!isdefined(self.var_394) || !function_0245(self.var_394) || !function_02BE(self.var_394)) {
+	if(!isdefined(self.var_394) || !weaponisauto(self.var_394) || !weaponisbeam(self.var_394)) {
 		return 0;
 	}
 
-	if(isdefined(self.target_getindexoftarget) && distancesquared(self.origin,self.var_205.origin) < 256) {
+	if(isdefined(self.target_getindexoftarget) && distancesquared(self.origin,self.target_getindexoftarget.origin) < 256) {
 		return 0;
 	}
 
@@ -173,18 +173,18 @@ func_10012() {
 }
 
 prone_transitionto(param_00) {
-	if(param_00 == self.var_1491.pose) {
+	if(param_00 == self.a.pose) {
 		return;
 	}
 
 	self aiclearanim(%root,0.3);
 	scripts\anim\combat_utility::func_631A();
 	if(func_10012()) {
-		var_01 = scripts\anim\utility::func_1F64(self.var_1491.pose + "_2_" + param_00 + "_firing");
+		var_01 = scripts\anim\utility::func_1F64(self.a.pose + "_2_" + param_00 + "_firing");
 	}
 	else
 	{
-		var_01 = scripts\anim\utility::func_1F64(self.var_1491.pose + "_2_" + var_01);
+		var_01 = scripts\anim\utility::func_1F64(self.a.pose + "_2_" + var_01);
 	}
 
 	if(param_00 == "prone") {
@@ -224,7 +224,7 @@ func_DA87(param_00,param_01) {
 		param_01 = 1;
 	}
 
-	scripts\anim\utility::exitpronewrapper(getanimlength(var_02) \ 2);
+	scripts\anim\utility::exitpronewrapper(getanimlength(var_02) / 2);
 	self _meth_82E4("trans",var_02,%body,1,0.2,param_01);
 	scripts\anim\shared::donotetracks("trans");
 	self aiclearanim(var_02,0.1);

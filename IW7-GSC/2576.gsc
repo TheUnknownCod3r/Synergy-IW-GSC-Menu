@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\2576.gsc
-****************************/
+ * Script: 2576.gsc
+************************/
 
 func_9898(param_00) {
 	self.meleerangesq = 12100;
@@ -58,7 +58,7 @@ func_3381(param_00,param_01) {
 }
 
 ismeleevalid(param_00,param_01) {
-	if(!scripts/aitypes/melee::ismeleevalid_common(param_00,param_01)) {
+	if(!scripts\aitypes\melee::ismeleevalid_common(param_00,param_01)) {
 		return 0;
 	}
 

@@ -1,13 +1,13 @@
-/*********************************************************
+/*************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\agents\_scriptedagents.gsc
-*********************************************************/
+ * Script: scripts\mp\agents\_scriptedagents.gsc
+*************************************************/
 
 func_197F(param_00,param_01) {
 	self.behaviortreeasset = param_00;
-	scripts/aitypes/bt_util::func_77();
-	scripts/asm/asm_mp::func_234D(param_01);
+	scripts\aitypes\bt_util::func_77();
+	scripts\asm\asm_mp::func_234D(param_01);
 	thread func_19F7();
 }
 
@@ -55,21 +55,21 @@ func_0218() {
 
 func_19F7() {
 	self endon("terminate_ai_threads");
-	thread scripts/asm/asm_mp::func_C878();
-	thread scripts/asm/asm_mp::traversehandler();
+	thread scripts\asm\asm_mp::func_C878();
+	thread scripts\asm\asm_mp::traversehandler();
 	for(;;) {
 		if(!isdefined(self)) {
 			break;
 		}
 
-		scripts/aitypes/bt_util::func_90();
-		scripts/asm/asm::func_2314();
+		scripts\aitypes\bt_util::func_90();
+		scripts\asm\asm::func_2314();
 		if(isdefined(self.asm.var_10E23)) {
-			scripts/asm/asm::asm_clearevents(self.asm.var_10E23);
+			scripts\asm\asm::asm_clearevents(self.asm.var_10E23);
 			self.asm.var_10E23 = undefined;
 		}
 
-		scripts/asm/asm::func_2389();
+		scripts\asm\asm::func_2389();
 		wait(0.05);
 	}
 }
@@ -104,7 +104,7 @@ func_1384A(param_00,param_01,param_02,param_03,param_04,param_05,param_06) {
 
 	func_89A9(param_00,param_02,param_04);
 	if(isdefined(param_02) && isdefined(self.asm)) {
-		scripts/asm/asm_mp::func_2345(param_00,param_02,param_03,var_07);
+		scripts\asm\asm_mp::func_2345(param_00,param_02,param_03,var_07);
 	}
 
 	if(!isdefined(param_05) || var_07 > 0) {
@@ -309,7 +309,7 @@ getrandomanimentry(param_00) {
 func_7DBD(param_00) {
 	var_01 = vectortoangles(param_00);
 	var_02 = angleclamp180(var_01[1] - self.angles[1]);
-	return function_02F9(var_02);
+	return getangleindex(var_02);
 }
 
 func_F2B1(param_00,param_01,param_02) {

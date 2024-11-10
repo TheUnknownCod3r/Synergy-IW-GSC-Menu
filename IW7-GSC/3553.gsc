@@ -1,14 +1,14 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3553.gsc
-****************************/
+ * Script: 3553.gsc
+************************/
 
 func_44F9() {
-	level._effect["coneFlash_wave"] = loadfx("vfx/iw7/_requests/mp/trail_kinetic_wave");
-	level._effect["coneFlash_wedge"] = loadfx("vfx/iw7/_requests/mp/vfx_kinetic_wave_wedge");
-	level._effect["coneFlash_explosion"] = loadfx("vfx/old/_requests/archetypes/vfx_cone_flash_exp");
-	level._effect["coneFlash_explosionScreen"] = loadfx("vfx/old/_requests/archetypes/vfx_cone_flash_exp_scr");
+	level._effect["coneFlash_wave"] = loadfx("vfx\iw7\_requests\mp\trail_kinetic_wave");
+	level._effect["coneFlash_wedge"] = loadfx("vfx\iw7\_requests\mp\vfx_kinetic_wave_wedge");
+	level._effect["coneFlash_explosion"] = loadfx("vfx\old\_requests\archetypes\vfx_cone_flash_exp");
+	level._effect["coneFlash_explosionScreen"] = loadfx("vfx\old\_requests\archetypes\vfx_cone_flash_exp_scr");
 }
 
 func_44FB() {
@@ -38,7 +38,7 @@ func_4500() {
 func_44F5() {
 	var_00 = undefined;
 	if(level.teambased) {
-		var_00 = scripts\mp\_utility::getteamarray(scripts\mp\_utility::getotherteam(self.team));
+		var_00 = scripts\mp\utility::getteamarray(scripts\mp\utility::getotherteam(self.team));
 	}
 	else
 	{
@@ -65,7 +65,7 @@ func_44F5() {
 			continue;
 		}
 
-		if(!scripts\mp\_utility::pointvscone(var_0C gettagorigin("j_spineupper"),var_09,var_06,var_07,550,96,22,72)) {
+		if(!scripts\mp\utility::pointvscone(var_0C gettagorigin("j_spineupper"),var_09,var_06,var_07,550,96,22,72)) {
 			continue;
 		}
 
@@ -99,17 +99,17 @@ func_44F5() {
 func_44F0(param_00,param_01,param_02,param_03) {
 	param_00 endon("disconnect");
 	param_00 notify("flashbang",param_01,param_02,param_03,self,self.team,1.33);
-	scripts\mp\_gamescore::func_11ACE(self,param_00,"power_coneFlash");
+	scripts\mp\gamescore::func_11ACE(self,param_00,"power_coneFlash");
 	param_00 scripts\engine\utility::waittill_any_timeout_1(1.33,"death");
 	if(isdefined(self)) {
-		scripts\mp\_gamescore::untrackdebuffassist(self,param_00,"power_coneFlash");
+		scripts\mp\gamescore::untrackdebuffassist(self,param_00,"power_coneFlash");
 	}
 }
 
 func_44F8(param_00) {
-	var_01 = scripts\mp\_lightarmor::getlightarmorvalue(self);
+	var_01 = scripts\mp\lightarmor::getlightarmorvalue(self);
 	var_01 = min(self.maxhealth,var_01 + param_00 * 45);
-	scripts\mp\_lightarmor::setlightarmorvalue(self,var_01);
+	scripts\mp\lightarmor::setlightarmorvalue(self,var_01);
 }
 
 func_44FC(param_00) {
@@ -117,7 +117,7 @@ func_44FC(param_00) {
 		return 0;
 	}
 
-	if(!scripts\mp\_utility::isreallyalive(param_00)) {
+	if(!scripts\mp\utility::isreallyalive(param_00)) {
 		return 0;
 	}
 
@@ -129,7 +129,7 @@ func_44FC(param_00) {
 		return 0;
 	}
 
-	if(!scripts/mp/equipment/phase_shift::areentitiesinphase(self,param_00)) {
+	if(!scripts\mp\equipment\phase_shift::areentitiesinphase(self,param_00)) {
 		return 0;
 	}
 

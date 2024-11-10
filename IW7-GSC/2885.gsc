@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2885.gsc
+ * Script: 2885.gsc
 ***************************************/
 
 func_9631() {
@@ -18,7 +18,7 @@ func_B23E() {
   scripts\engine\utility::flag_wait("start_is_set");
   var_00 = 0;
 
-  if (!isdefined(level.func_9AF3) || !scripts/sp/utility::func_9BB5() || var_00)
+  if (!isdefined(level.func_9AF3) || !scripts\sp\utility::func_9BB5() || var_00)
   scripts\engine\utility::delaythread(0.05, scripts\engine\utility::flag_set, "introscreen_complete");
   else
   {
@@ -57,12 +57,12 @@ func_9AF9(var_00, var_01, var_02, var_03) {
   var_02 = 1.5;
 
   if (!isdefined(var_03))
-  scripts/sp/hud_util::func_10CCC();
+  scripts\sp\hud_util::func_10CCC();
   else
-  scripts/sp/hud_util::func_6AA3(var_03);
+  scripts\sp\hud_util::func_6AA3(var_03);
 
   wait(var_01);
-  scripts/sp/hud_util::func_6A99(var_02);
+  scripts\sp\hud_util::func_6A99(var_02);
   wait(var_02);
   _setsaveddvar("com_cinematicEndInWhite", 0);
 }
@@ -136,10 +136,10 @@ func_9AF3(var_00, var_01) {
 
   if (isdefined(var_01)) {
   var_00 = 1;
-  scripts/sp/hud_util::func_10CCC();
+  scripts\sp\hud_util::func_10CCC();
   level.player getroundswon(1);
   level.player scripts\engine\utility::delaycall(var_01, ::getroundswon, 0);
-  scripts\engine\utility::delaythread(var_01, scripts/sp/hud_util::func_6A99, 2);
+  scripts\engine\utility::delaythread(var_01, scripts\sp\hud_util::func_6A99, 2);
   }
 
   level.func_3F69 = spawnstruct();
@@ -157,7 +157,7 @@ func_9AF3(var_00, var_01) {
 
   if (!var_00) {
   level.player getroundswon(1);
-  scripts/sp/hud_util::func_10CCC();
+  scripts\sp\hud_util::func_10CCC();
   thread func_22FD(0);
   }
 
@@ -193,7 +193,7 @@ func_9AF3(var_00, var_01) {
 
   if (!var_00) {
   func_3F6A(0, "ui_chyron_off");
-  thread scripts/sp/hud_util::func_6A99(2);
+  thread scripts\sp\hud_util::func_6A99(2);
   level.player getroundswon(0);
   }
 
@@ -908,7 +908,7 @@ func_7662() {
   thread func_DB9A(1, var_00);
   wait(var_00);
 
-  for (var_01 = 0; level.func_7661.func_11760.size; level.func_7661.func_11760 = scripts/sp/utility::array_remove_index(level.func_7661.func_11760, 0)) {
+  for (var_01 = 0; level.func_7661.func_11760.size; level.func_7661.func_11760 = scripts\sp\utility::array_remove_index(level.func_7661.func_11760, 0)) {
   level thread func_765F(level.func_7661.func_11760[0], var_01);
   var_1++;
   wait 0.5;
@@ -1064,7 +1064,7 @@ func_1119F(var_00, var_01, var_02, var_03) {
 
 func_A03D(var_00) {
   level.player getroundswon(1);
-  scripts/sp/hud_util::func_10CCC();
+  scripts\sp\hud_util::func_10CCC();
   var_01 = newhudelem();
   level.func_3F2B = spawnstruct();
   wait 1;

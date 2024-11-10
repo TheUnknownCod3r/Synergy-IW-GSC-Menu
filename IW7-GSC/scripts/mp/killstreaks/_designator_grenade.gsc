@@ -1,8 +1,8 @@
-/******************************************************************
+/**********************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\killstreaks\_designator_grenade.gsc
-******************************************************************/
+ * Script: scripts\mp\killstreaks\_designator_grenade.gsc
+**********************************************************/
 
 func_526C(param_00,param_01,param_02) {
 	self endon("death");
@@ -77,7 +77,7 @@ func_526E(param_00) {
 
 func_526B(param_00) {
 	if(self hasweapon(param_00)) {
-		scripts\mp\_utility::_takeweapon(param_00);
+		scripts\mp\utility::_takeweapon(param_00);
 	}
 }
 

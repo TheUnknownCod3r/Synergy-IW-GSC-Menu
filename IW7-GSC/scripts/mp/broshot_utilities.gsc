@@ -1,8 +1,8 @@
-/****************************************************
+/********************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\broshot_utilities.gsc
-****************************************************/
+ * Script: scripts\mp\broshot_utilities.gsc
+********************************************/
 
 processepictaunt(param_00,param_01,param_02) {
 	if(param_01 >= 0 && isdefined(level.camera_bro_shot.char_loc)) {
@@ -568,7 +568,7 @@ dodisintegrate(param_00,param_01) {
 playbeamfx(param_00,param_01,param_02,param_03,param_04,param_05) {
 	self endon("cancel_taunt_cleanup");
 	wait(param_00);
-	var_06 = function_02DF(level._effect[param_02],param_05,param_03,param_05,param_04);
+	var_06 = playfxontagsbetweenclients(level._effect[param_02],param_05,param_03,param_05,param_04);
 	thread cleanupbeamfx(var_06,param_01);
 }
 

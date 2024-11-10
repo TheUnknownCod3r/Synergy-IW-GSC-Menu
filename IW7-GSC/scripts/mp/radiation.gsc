@@ -1,8 +1,8 @@
-/********************************************
+/************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\radiation.gsc
-********************************************/
+ * Script: scripts\mp\radiation.gsc
+************************************/
 
 onplayerconnect() {
 	for(;;) {
@@ -12,14 +12,14 @@ onplayerconnect() {
 }
 
 playerenterarea(param_00) {
-	self.var_C210++;
+	self.numareas++;
 	if(self.numareas == 1) {
 		radiationeffect();
 	}
 }
 
 playerleavearea(param_00) {
-	self.var_C210--;
+	self.numareas--;
 	if(self.numareas != 0) {
 		return;
 	}
@@ -44,7 +44,7 @@ radiationeffect() {
 	self.poison = 0;
 	thread soundwatcher(self);
 	for(;;) {
-		self.var_D64C++;
+		self.poison++;
 		switch(self.poison) {
 			case 1:
 				self.var_DBEA = "item_geigercouner_level2";

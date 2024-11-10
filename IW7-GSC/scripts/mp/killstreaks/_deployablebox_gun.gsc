@@ -1,8 +1,8 @@
-/*****************************************************************
+/*********************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\killstreaks\_deployablebox_gun.gsc
-*****************************************************************/
+ * Script: scripts\mp\killstreaks\_deployablebox_gun.gsc
+*********************************************************/
 
 init() {
 	var_00 = spawnstruct();
@@ -30,7 +30,7 @@ init() {
 	var_00.usetime = 1000;
 	var_00.maxhealth = 128;
 	var_00.damagefeedback = "deployable_bag";
-	var_00.deathvfx = loadfx("vfx/core/mp/killstreaks/vfx_ballistic_vest_death");
+	var_00.deathvfx = loadfx("vfx\core\mp\killstreaks\vfx_ballistic_vest_death");
 	var_00.allowmeleedamage = 1;
 	var_00.allowhvtspawn = 0;
 	var_00.maxuses = 4;
@@ -67,7 +67,7 @@ func_128DD(param_00,param_01) {
 		return 0;
 	}
 
-	scripts\mp\_matchdata::logkillstreakevent("deployable_ammo",self.origin);
+	scripts\mp\matchdata::logkillstreakevent("deployable_ammo",self.origin);
 	return 1;
 }
 
@@ -83,7 +83,7 @@ onusedeployable(param_00) {
 			_meth_836B(self,var_01.minigunweapon);
 		}
 
-		scripts\mp\_missions::processchallenge("ch_guninabox");
+		scripts\mp\missions::processchallenge("ch_guninabox");
 		level.var_5226 = randomintrange(var_01.var_B7A5,var_01.var_B7A5 + 1);
 		return;
 	}
@@ -118,7 +118,7 @@ _meth_836B(param_00,param_01) {
 	var_02 = param_00 getweaponslistprimaries();
 	var_03 = 0;
 	foreach(var_05 in var_02) {
-		if(!scripts\mp\_weapons::isaltmodeweapon(var_05)) {
+		if(!scripts\mp\weapons::isaltmodeweapon(var_05)) {
 			var_03++;
 		}
 	}
@@ -130,8 +130,8 @@ _meth_836B(param_00,param_01) {
 		}
 	}
 
-	param_00 scripts\mp\_utility::_giveweapon(param_01);
-	param_00 scripts\mp\_utility::_switchtoweapon(param_01);
+	param_00 scripts\mp\utility::_giveweapon(param_01);
+	param_00 scripts\mp\utility::_switchtoweapon(param_01);
 	param_00 givestartammo(param_01);
 }
 
@@ -140,7 +140,7 @@ func_E2B7(param_00) {
 	level endon("game_eneded");
 	var_01 = spawn("trigger_radius",self.origin,0,param_00.var_127C8,param_00.var_127C5);
 	var_01.triggerportableradarping = self;
-	thread scripts\mp\_weapons::deleteondeath(var_01);
+	thread scripts\mp\weapons::deleteondeath(var_01);
 	if(isdefined(self.moving_platform)) {
 		var_01 enablelinkto();
 		var_01 linkto(self.moving_platform);
@@ -151,7 +151,7 @@ func_E2B7(param_00) {
 	for(;;) {
 		var_04 = var_01 getistouchingentities(level.players);
 		foreach(var_03 in var_04) {
-			if(isdefined(var_03) && !self.triggerportableradarping scripts\mp\_utility::isenemy(var_03)) {
+			if(isdefined(var_03) && !self.triggerportableradarping scripts\mp\utility::isenemy(var_03)) {
 				if(!isdefined(var_03.var_116D0) || !var_03.var_116D0) {
 					var_03 thread func_93EF();
 				}
@@ -169,11 +169,11 @@ func_E2B7(param_00) {
 func_93EF() {
 	self endon("death");
 	self endon("disconnect");
-	thread scripts\mp\_utility::func_F5C6(0,6000,2,0);
-	thread scripts\mp\_utility::func_F5C5(0,1,2,0);
-	scripts\mp\_powers::power_modifycooldownrate(1.1);
+	thread scripts\mp\utility::func_F5C6(0,6000,2,0);
+	thread scripts\mp\utility::func_F5C5(0,1,2,0);
+	scripts\mp\powers::power_modifycooldownrate(1.1);
 	wait(2);
-	scripts\mp\_powers::func_D74E();
+	scripts\mp\powers::func_D74E();
 }
 
 func_FFB8(param_00) {
@@ -182,7 +182,7 @@ func_FFB8(param_00) {
 
 func_17A8(param_00,param_01) {
 	param_00.var_5227 = gettime() + param_01 * 1000;
-	scripts\mp\_weapons::func_EBD2(param_00);
+	scripts\mp\weapons::func_EBD2(param_00);
 }
 
 func_17A9(param_00,param_01,param_02) {
@@ -200,5 +200,5 @@ func_17A9(param_00,param_01,param_02) {
 }
 
 func_3937(param_00) {
-	return !scripts\mp\_utility::isjuggernaut();
+	return !scripts\mp\utility::isjuggernaut();
 }

@@ -1,8 +1,8 @@
-/******************************************************
+/**********************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\killstreaks\_jackal.gsc
-******************************************************/
+ * Script: scripts\mp\killstreaks\_jackal.gsc
+**********************************************/
 
 func_2A6B(param_00,param_01,param_02,param_03) {
 	var_04 = undefined;
@@ -17,7 +17,7 @@ func_2A6B(param_00,param_01,param_02,param_03) {
 				var_04.var_1349C delete();
 			}
 
-			scripts\mp\_hud_message::showerrormessage("KILLSTREAKS_AIR_SPACE_TOO_CROWDED");
+			scripts\mp\hud_message::showerrormessage("KILLSTREAKS_AIR_SPACE_TOO_CROWDED");
 			if(isdefined(param_03.var_394) && param_03.var_394 != "none") {
 				self notify("killstreak_finished_with_weapon_" + param_03.var_394);
 			}
@@ -65,7 +65,7 @@ func_2A6B(param_00,param_01,param_02,param_03) {
 	thread func_5088(var_08,var_04);
 	self.pers["wardenKSCount"]++;
 	if(self.pers["wardenKSCount"] % 2 == 0) {
-		scripts\mp\_missions::func_D991("ch_warden_double");
+		scripts\mp\missions::func_D991("ch_warden_double");
 	}
 }
 
@@ -84,7 +84,7 @@ func_108DE(param_00,param_01,param_02,param_03,param_04) {
 	var_10 = 3000;
 	var_11 = &"KILLSTREAKS_HINTS_JACKAL_GUARD";
 	var_12 = "follow_player";
-	var_13 = scripts\mp\_killstreak_loot::getrarityforlootitem(param_04.variantid);
+	var_13 = scripts\mp\killstreak_loot::getrarityforlootitem(param_04.variantid);
 	if(var_13 != "") {
 		var_06 = var_06 + "_" + var_13;
 	}
@@ -225,13 +225,13 @@ getnumownedjackals(param_00) {
 
 func_50BE() {
 	self endon("death");
-	scripts\mp\_hostmigration::waitlongdurationwithhostmigrationpause(6);
+	scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(6);
 	self playsoundonmovingent("dropship_killstreak_flyby");
 }
 
 delayjackalloopsfx(param_00,param_01) {
 	self endon("death");
-	scripts\mp\_hostmigration::waitlongdurationwithhostmigrationpause(param_00);
+	scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(param_00);
 	self playloopsound(param_01);
 }
 
@@ -279,7 +279,7 @@ func_658F() {
 	self endon("leaving");
 	self endon("death");
 	self.lastaction = undefined;
-	if(scripts\mp\_utility::istrue(self.turreton)) {
+	if(scripts\mp\utility::istrue(self.turreton)) {
 		for(;;) {
 			var_00 = jackalgettargets();
 			if(isdefined(var_00) && var_00.size > 0) {
@@ -303,8 +303,8 @@ func_6590() {
 	self endon("engageSecondary");
 	self endon("leaving");
 	self endon("death");
-	var_00 = function_0240(self.cannonweapon);
-	if(scripts\mp\_utility::istrue(self.cannonon)) {
+	var_00 = weaponfiretime(self.cannonweapon);
+	if(scripts\mp\utility::istrue(self.cannonon)) {
 		for(;;) {
 			var_01 = jackalgettargets();
 			if(scripts\mp\killstreaks\_utility::func_A69F(self.streakinfo,"passive_moving_fortress")) {
@@ -325,7 +325,7 @@ func_6590() {
 			}
 
 			acquirecannontarget(var_01);
-			scripts\mp\_hostmigration::waitlongdurationwithhostmigrationpause(var_00);
+			scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(var_00);
 		}
 	}
 }
@@ -342,7 +342,7 @@ func_7246() {
 	self setscriptablepartstate("thrusters","slow",0);
 	for(;;) {
 		var_00 = undefined;
-		if(scripts\mp\_utility::istrue(self.evasivemaneuvers)) {
+		if(scripts\mp\utility::istrue(self.evasivemaneuvers)) {
 			var_01 = self.triggerportableradarping.origin[0];
 			var_02 = self.triggerportableradarping.origin[1];
 			var_03 = var_01 + randomintrange(-500,500);
@@ -363,7 +363,7 @@ func_7246() {
 		self.lastaction = "following_player";
 		scripts\engine\utility::waittill_any_3("goal","begin_evasive_maneuvers");
 		self getplayerkillstreakcombatmode();
-		scripts\mp\_hostmigration::waitlongdurationwithhostmigrationpause(0.1);
+		scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(0.1);
 	}
 }
 
@@ -376,7 +376,7 @@ guardposition(param_00) {
 	self vehicle_setspeed(self.getclosestpointonnavmesh3d - 215,self.var_1545 - 160);
 	self setscriptablepartstate("thrusters","slow",0);
 	var_01 = undefined;
-	if(scripts\mp\_utility::istrue(self.evasivemaneuvers)) {
+	if(scripts\mp\utility::istrue(self.evasivemaneuvers)) {
 		var_02 = self.triggerportableradarping.origin[0];
 		var_03 = self.triggerportableradarping.origin[1];
 		var_04 = var_02 + randomintrange(-500,500);
@@ -433,7 +433,7 @@ patrolfield() {
 			}
 		}
 
-		scripts\mp\_hostmigration::waitlongdurationwithhostmigrationpause(0.1);
+		scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(0.1);
 	}
 }
 
@@ -510,7 +510,7 @@ jackalmovetoenemy(param_00) {
 	}
 
 	var_01 = undefined;
-	if(scripts\mp\_utility::istrue(self.evasivemaneuvers)) {
+	if(scripts\mp\utility::istrue(self.evasivemaneuvers)) {
 		var_02 = param_00.origin[0];
 		var_03 = param_00.origin[1];
 		var_04 = var_02 + randomintrange(-500,500);
@@ -599,7 +599,7 @@ watchpatroltarget() {
 
 jackalmovetolocation(param_00) {
 	var_01 = undefined;
-	if(scripts\mp\_utility::istrue(self.evasivemaneuvers)) {
+	if(scripts\mp\utility::istrue(self.evasivemaneuvers)) {
 		var_02 = param_00[0];
 		var_03 = param_00[1];
 		var_04 = var_02 + randomintrange(-500,500);
@@ -627,14 +627,14 @@ jackalleave() {
 	self getplayerkillstreakcombatmode();
 	self.turret setsentryowner(undefined);
 	if(isdefined(self.turrettarget) && isdefined(self.var_11576)) {
-		scripts\mp\_utility::outlinedisable(self.var_11576,self.turrettarget);
+		scripts\mp\utility::outlinedisable(self.var_11576,self.turrettarget);
 	}
 
 	self vehicle_setspeed(self.getclosestpointonnavmesh3d - 215,self.var_1545 - 150);
 	var_00 = self.origin + anglestoforward((0,randomint(360),0)) * 500;
 	var_00 = var_00 + (0,0,1000);
 	self setscriptablepartstate("thrusters","fast",0);
-	if(!scripts\mp\_utility::istrue(level.gameended)) {
+	if(!scripts\mp\utility::istrue(level.gameended)) {
 		self playsoundonmovingent("dropship_killstreak_flyby");
 	}
 
@@ -648,7 +648,7 @@ jackalleave() {
 	var_01 = getpathend();
 	self vehicle_setspeed(250,75);
 	self setvehgoalpos(var_01,1);
-	if(!scripts\mp\_utility::istrue(level.gameended)) {
+	if(!scripts\mp\utility::istrue(level.gameended)) {
 		self playsoundonmovingent("dropship_killstreak_flyby");
 	}
 
@@ -660,7 +660,7 @@ jackalleave() {
 }
 
 jackaldelete() {
-	scripts\mp\_utility::printgameaction("killstreak ended - jackal",self.triggerportableradarping);
+	scripts\mp\utility::printgameaction("killstreak ended - jackal",self.triggerportableradarping);
 	if(isdefined(self.turret)) {
 		self.turret delete();
 	}
@@ -688,9 +688,9 @@ func_A426() {
 		var_00 = var_00 - 10;
 	}
 
-	scripts\mp\_hostmigration::waitlongdurationwithhostmigrationpause(var_00);
+	scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(var_00);
 	if(isdefined(self.triggerportableradarping)) {
-		self.triggerportableradarping scripts\mp\_utility::playkillstreakdialogonplayer("jackal_end",undefined,undefined,self.triggerportableradarping.origin);
+		self.triggerportableradarping scripts\mp\utility::playkillstreakdialogonplayer("jackal_end",undefined,undefined,self.triggerportableradarping.origin);
 	}
 
 	thread jackalleave();
@@ -713,7 +713,7 @@ randomjackalmovement() {
 	var_00 = self.defendloc;
 	var_01 = getrandompoint(self.origin);
 	self setvehgoalpos(var_01,1);
-	thread scripts\mp\_utility::drawline(self.origin,var_01,5,(1,0,1));
+	thread scripts\mp\utility::drawline(self.origin,var_01,5,(1,0,1));
 	self waittill("goal");
 }
 
@@ -817,26 +817,26 @@ fireonturrettarget(param_00) {
 	self endon("explode");
 	self endon("death");
 	self endon("target_timeout");
-	if(scripts\mp\_utility::istrue(param_00) && scripts\mp\_utility::isreallyalive(self.triggerportableradarping) && !isdefined(self.var_A987) || self.var_A987 + 10000 <= gettime()) {
-		self.triggerportableradarping scripts\mp\_utility::func_C638("jackal_fire");
+	if(scripts\mp\utility::istrue(param_00) && scripts\mp\utility::isreallyalive(self.triggerportableradarping) && !isdefined(self.var_A987) || self.var_A987 + 10000 <= gettime()) {
+		self.triggerportableradarping scripts\mp\utility::func_C638("jackal_fire");
 		self.var_A987 = gettime();
 	}
 
-	var_01 = scripts\mp\_utility::outlineenableforplayer(self.turrettarget,"orange",self.triggerportableradarping,1,0,"killstreak_personal");
+	var_01 = scripts\mp\utility::outlineenableforplayer(self.turrettarget,"orange",self.triggerportableradarping,1,0,"killstreak_personal");
 	self.var_11576 = var_01;
 	var_02 = 3;
 	thread func_13A4B(self.turret,self.turrettarget,"target_timeout",var_02);
 	self.turret waittill("turret_on_target");
-	level thread scripts\mp\_battlechatter_mp::saytoself(self.turrettarget,"plr_killstreak_target");
+	level thread scripts\mp\battlechatter_mp::saytoself(self.turrettarget,"plr_killstreak_target");
 	self.turret notify("start_firing");
-	var_03 = function_0240(self.turretweapon);
+	var_03 = weaponfiretime(self.turretweapon);
 	if(scripts\mp\killstreaks\_utility::func_A69F(self.streakinfo,"passive_moving_fortress")) {
 		var_03 = var_03 + 0.13;
 	}
 
-	while(isdefined(self.turrettarget) && scripts\mp\_utility::isreallyalive(self.turrettarget) && isdefined(self.turret getturrettarget(1)) && self.turret getturrettarget(1) == self.turrettarget) {
+	while(isdefined(self.turrettarget) && scripts\mp\utility::isreallyalive(self.turrettarget) && isdefined(self.turret getturrettarget(1)) && self.turret getturrettarget(1) == self.turrettarget) {
 		self.turret shootturret();
-		scripts\mp\_hostmigration::waitlongdurationwithhostmigrationpause(var_03);
+		scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(var_03);
 	}
 }
 
@@ -848,24 +848,24 @@ fireoncannontarget(param_00) {
 	var_01 = 3;
 	thread func_13A4B(self.cannon,self.cannontarget,"target_cannon_timeout",var_01);
 	self.cannon waittill("turret_on_target");
-	level thread scripts\mp\_battlechatter_mp::saytoself(self.cannontarget,"plr_killstreak_target");
+	level thread scripts\mp\battlechatter_mp::saytoself(self.cannontarget,"plr_killstreak_target");
 	if(!scripts\mp\killstreaks\_utility::func_A69F(self.streakinfo,"passive_moving_fortress")) {
 		thread setmissilekillcament();
 	}
 
 	self.cannon notify("start_firing");
-	var_02 = function_0240(self.cannonweapon);
+	var_02 = weaponfiretime(self.cannonweapon);
 	if(scripts\mp\killstreaks\_utility::func_A69F(self.streakinfo,"passive_moving_fortress")) {
 		var_02 = var_02 + 0.13;
-		while(isdefined(self.cannontarget) && scripts\mp\_utility::isreallyalive(self.cannontarget) && isdefined(self.cannon getturrettarget(1)) && self.cannon getturrettarget(1) == self.cannontarget) {
+		while(isdefined(self.cannontarget) && scripts\mp\utility::isreallyalive(self.cannontarget) && isdefined(self.cannon getturrettarget(1)) && self.cannon getturrettarget(1) == self.cannontarget) {
 			self.cannon shootturret();
-			scripts\mp\_hostmigration::waitlongdurationwithhostmigrationpause(var_02);
+			scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(var_02);
 		}
 
 		return;
 	}
 
-	if(isdefined(self.cannontarget) && scripts\mp\_utility::isreallyalive(self.cannontarget) && isdefined(self.cannon getturrettarget(1)) && self.cannon getturrettarget(1) == self.cannontarget) {
+	if(isdefined(self.cannontarget) && scripts\mp\utility::isreallyalive(self.cannontarget) && isdefined(self.cannon getturrettarget(1)) && self.cannon getturrettarget(1) == self.cannontarget) {
 		self.cannon thread watchmissilelaunch();
 		self.cannon shootturret();
 	}
@@ -899,7 +899,7 @@ func_13A4B(param_00,param_01,param_02,param_03) {
 
 	if(param_00.type == "Machine_Gun") {
 		if(isdefined(var_04) && isdefined(param_01)) {
-			scripts\mp\_utility::outlinedisable(var_04,param_01);
+			scripts\mp\utility::outlinedisable(var_04,param_01);
 		}
 
 		self getplayerkillstreakcombatmode();
@@ -936,7 +936,7 @@ acquireturrettarget(param_00) {
 	self endon("leaving");
 	self notify("priority_target");
 	if(isdefined(self.outlinedent) && isdefined(self.turrettarget)) {
-		scripts\mp\_utility::outlinedisable(self.outlinedent,self.turrettarget);
+		scripts\mp\utility::outlinedisable(self.outlinedent,self.turrettarget);
 	}
 
 	if(param_00.size == 1) {
@@ -1015,7 +1015,7 @@ istarget(param_00) {
 		return 0;
 	}
 
-	if(param_00 scripts\mp\_utility::_hasperk("specialty_blindeye")) {
+	if(param_00 scripts\mp\utility::_hasperk("specialty_blindeye")) {
 		return 0;
 	}
 
@@ -1082,7 +1082,7 @@ func_8992() {
 	self endon("death");
 	for(;;) {
 		self waittill("damage",var_00,var_01,var_02,var_03,var_04,var_05,var_06,var_07,var_08,var_09,var_0A,var_0B,var_0C,var_0D);
-		var_09 = scripts\mp\_utility::func_13CA1(var_09,var_0D);
+		var_09 = scripts\mp\utility::func_13CA1(var_09,var_0D);
 		if((var_09 == "aamissile_projectile_mp" || var_09 == "nuke_mp") && var_04 == "MOD_EXPLOSIVE" && var_00 >= self.health) {
 			func_3758(var_01,var_01,9001,0,var_04,var_09,var_03,var_02,var_03,0,0,var_07);
 		}
@@ -1100,7 +1100,7 @@ func_3758(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_0
 		return;
 	}
 
-	if(scripts/mp/equipment/phase_shift::isentityphaseshifted(param_01)) {
+	if(scripts\mp\equipment\phase_shift::isentityphaseshifted(param_01)) {
 		return;
 	}
 
@@ -1110,17 +1110,17 @@ func_3758(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_0
 
 	param_02 = scripts\mp\killstreaks\_utility::getmodifiedantikillstreakdamage(param_01,param_05,param_04,param_02,self.maxhealth,3,4,5);
 	scripts\mp\killstreaks\_killstreaks::killstreakhit(param_01,param_05,self,param_04);
-	param_01 scripts\mp\_damagefeedback::updatedamagefeedback("");
-	scripts\mp\_damage::logattackerkillstreak(self,param_02,param_01,param_07,param_06,param_04,param_0A,undefined,param_0B,param_03,param_05);
+	param_01 scripts\mp\damagefeedback::updatedamagefeedback("");
+	scripts\mp\damage::logattackerkillstreak(self,param_02,param_01,param_07,param_06,param_04,param_0A,undefined,param_0B,param_03,param_05);
 	if(self.health <= param_02) {
 		if(isplayer(param_01) && !isdefined(self.triggerportableradarping) || param_01 != self.triggerportableradarping) {
-			var_0C = scripts\mp\_killstreak_loot::getrarityforlootitem(self.streakinfo.variantid);
+			var_0C = scripts\mp\killstreak_loot::getrarityforlootitem(self.streakinfo.variantid);
 			var_0D = "callout_destroyed_harrier";
 			if(var_0C != "") {
 				var_0D = var_0D + "_" + var_0C;
 			}
 
-			scripts\mp\_damage::onkillstreakkilled("jackal",param_01,param_05,param_04,param_02,"destroyed_jackal","jackal_destroyed",var_0D);
+			scripts\mp\damage::onkillstreakkilled("jackal",param_01,param_05,param_04,param_02,"destroyed_jackal","jackal_destroyed",var_0D);
 		}
 	}
 
@@ -1145,7 +1145,7 @@ playdamageefx() {
 	playfxontag(level.harrier_smoke,self,"tag_engine_left");
 	stopfxontag(level.harrier_afterburnerfx,self,"tag_engine_right");
 	playfxontag(level.harrier_smoke,self,"tag_engine_right");
-	scripts\mp\_hostmigration::waitlongdurationwithhostmigrationpause(0.15);
+	scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(0.15);
 	stopfxontag(level.harrier_afterburnerfx,self,"tag_engine_left2");
 	playfxontag(level.harrier_smoke,self,"tag_engine_left2");
 	stopfxontag(level.harrier_afterburnerfx,self,"tag_engine_right2");
@@ -1158,18 +1158,18 @@ func_A3BD() {
 	var_00 = self.triggerportableradarping;
 	self waittill("death");
 	if(isdefined(self.turrettarget) && isdefined(self.var_11576)) {
-		scripts\mp\_utility::outlinedisable(self.var_11576,self.turrettarget);
+		scripts\mp\utility::outlinedisable(self.var_11576,self.turrettarget);
 	}
 
 	if(!isdefined(self)) {
 		return;
 	}
 
-	self.triggerportableradarping scripts\mp\_utility::clearlowermessage(getothermode(self.var_BC));
+	self.triggerportableradarping scripts\mp\utility::clearlowermessage(getothermode(self.var_BC));
 	if(!isdefined(self.largeprojectiledamage)) {
 		self vehicle_setspeed(25,5);
 		thread func_A3B8(75);
-		scripts\mp\_hostmigration::waitlongdurationwithhostmigrationpause(2.7);
+		scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(2.7);
 	}
 
 	jackalexplode();
@@ -1190,7 +1190,7 @@ func_A3B8(param_00) {
 	self notify("jackal_crashing");
 	self setvehgoalpos(self.origin + (0,0,100),1);
 	self setscriptablepartstate("engine","explode",0);
-	scripts\mp\_hostmigration::waitlongdurationwithhostmigrationpause(1.5);
+	scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(1.5);
 	self givelastonteamwarning(param_00,param_00,param_00);
 	self settargetyaw(self.angles[1] + param_00 * 2.5);
 }
@@ -1271,7 +1271,7 @@ func_13AD6(param_00,param_01) {
 			continue;
 		}
 
-		if(self.triggerportableradarping scripts\mp\_utility::isusingremote()) {
+		if(self.triggerportableradarping scripts\mp\utility::isusingremote()) {
 			continue;
 		}
 
@@ -1279,7 +1279,7 @@ func_13AD6(param_00,param_01) {
 			continue;
 		}
 
-		if(scripts\mp\_utility::func_9FAE(self.triggerportableradarping)) {
+		if(scripts\mp\utility::func_9FAE(self.triggerportableradarping)) {
 			continue;
 		}
 
@@ -1295,7 +1295,7 @@ func_13AD6(param_00,param_01) {
 					var_08 = (var_05,var_06,var_07);
 					var_09 = scripts\common\trace::create_contents(0,1,1,1,1,1,0);
 					if(!scripts\common\trace::ray_trace_passed(self.origin,var_08,self,var_09)) {
-						self.triggerportableradarping scripts\mp\_hud_message::showerrormessage("KILLSTREAKS_CANNOT_BE_CALLED");
+						self.triggerportableradarping scripts\mp\hud_message::showerrormessage("KILLSTREAKS_CANNOT_BE_CALLED");
 						break;
 					}
 				}
@@ -1305,7 +1305,7 @@ func_13AD6(param_00,param_01) {
 				if(self.var_BC == "guard_location") {
 					param_00 = "follow_player";
 					param_01 = &"KILLSTREAKS_HINTS_JACKAL_FOLLOW";
-					self.triggerportableradarping scripts\mp\_utility::func_C638("jackal_guard");
+					self.triggerportableradarping scripts\mp\utility::func_C638("jackal_guard");
 					self.triggerportableradarping playlocalsound("mp_killstreak_warden_switch_mode");
 					thread dropship_change_thrust_sfx();
 					thread guardposition(self.triggerportableradarping.origin);
@@ -1320,7 +1320,7 @@ func_13AD6(param_00,param_01) {
 				}
 
 				self.useobj makeunusable();
-				scripts\mp\_hostmigration::waitlongdurationwithhostmigrationpause(1);
+				scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(1);
 				self.var_4C08 = param_01;
 				self.useobj scripts\mp\killstreaks\_utility::func_F774(self.triggerportableradarping,self.var_4C08,360,360,30000,30000,2);
 				break;
@@ -1334,7 +1334,7 @@ func_13AD6(param_00,param_01) {
 }
 
 dropship_change_thrust_sfx() {
-	scripts\mp\_hostmigration::waitlongdurationwithhostmigrationpause(0.3);
+	scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(0.3);
 	self playsoundonmovingent("dropship_killstreak_thrust_change");
 }
 
@@ -1476,7 +1476,7 @@ playlocksound() {
 
 	scripts\engine\utility::play_loopsound_in_space("javelin_clu_lock",self.origin);
 	self.playinglocksound = 1;
-	scripts\mp\_hostmigration::waitlongdurationwithhostmigrationpause(0.75);
+	scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(0.75);
 	self stoploopsound("javelin_clu_lock");
 	self.playinglocksound = 0;
 }
@@ -1488,7 +1488,7 @@ playlockerrorsound() {
 
 	self playlocalsound("javelin_clu_aquiring_lock");
 	self.playinglocksound = 1;
-	scripts\mp\_hostmigration::waitlongdurationwithhostmigrationpause(0.75);
+	scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(0.75);
 	self stoplocalsound("javelin_clu_aquiring_lock");
 	self.playinglocksound = 0;
 }
@@ -1510,7 +1510,7 @@ func_13A9C() {
 	self endon("following_player");
 	for(;;) {
 		var_00 = undefined;
-		if(scripts\mp\_utility::istrue(self.evasivemaneuvers)) {
+		if(scripts\mp\utility::istrue(self.evasivemaneuvers)) {
 			var_01 = self.triggerportableradarping.origin[0];
 			var_02 = self.triggerportableradarping.origin[1];
 			var_03 = var_01 + randomintrange(-500,500);
@@ -1523,7 +1523,7 @@ func_13A9C() {
 			self setvehgoalpos(var_00,1);
 		}
 
-		scripts\mp\_hostmigration::waitlongdurationwithhostmigrationpause(0.1);
+		scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(0.1);
 	}
 }
 

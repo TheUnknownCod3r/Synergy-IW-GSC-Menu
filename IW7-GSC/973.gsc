@@ -1,8 +1,8 @@
-/***************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\973.gsc
-***************************/
+ * Script: 973.gsc
+************************/
 
 main() {
 	self setmodel("body_civ_facility_worker_lt");
@@ -15,7 +15,7 @@ main() {
 	self.voice = "unitednations";
 	self give_explosive_touch_on_revived("cloth");
 	if(issentient(self)) {
-		self sethitlocdamagetable("locdmgtable/ai_lochit_dmgtable");
+		self sethitlocdamagetable("locdmgtable\ai_lochit_dmgtable");
 	}
 
 	self glinton(#animtree);

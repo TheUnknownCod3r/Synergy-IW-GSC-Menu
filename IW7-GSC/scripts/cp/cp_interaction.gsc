@@ -1,8 +1,8 @@
-/*************************************************
+/*****************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\cp_interaction.gsc
-*************************************************/
+ * Script: scripts\cp\cp_interaction.gsc
+*****************************************/
 
 coop_interaction_pregame() {
 	func_96E3();
@@ -133,7 +133,7 @@ func_23CB() {
 				var_02 setclientomnvar("zm_interaction_ent",var_03);
 				if(scripts\cp\utility::isplayingsolo() || level.only_one_player) {
 					var_02 thread scripts\cp\zombies\interaction_magicwheel::magic_wheel_tutorial();
-					var_02 thread scripts/cp/zombies/zombie_doors::func_59FA();
+					var_02 thread scripts\cp\zombies\zombie_doors::func_59FA();
 				}
 			}
 		}
@@ -1467,7 +1467,7 @@ can_purchase_ammo(param_00) {
 	if(isdefined(var_02)) {
 		var_08 = self getweaponammostock(var_02);
 		var_09 = weaponmaxammo(var_02);
-		var_0A = scripts/cp/perks/prestige::prestige_getminammo();
+		var_0A = scripts\cp\perks\prestige::prestige_getminammo();
 		var_0B = int(var_0A * var_09);
 		if(var_08 < var_0B) {
 			return 1;
@@ -1537,7 +1537,7 @@ can_purchase_interaction(param_00,param_01,param_02,param_03) {
 		return 1;
 	}
 
-	if(scripts/cp/powers/coop_phaseshift::isentityphaseshifted(self)) {
+	if(scripts\cp\powers\coop_phaseshift::isentityphaseshifted(self)) {
 		return 0;
 	}
 
@@ -1651,7 +1651,7 @@ can_purchase_interaction(param_00,param_01,param_02,param_03) {
 		}
 
 		var_07 = weaponmaxammo(param_00.script_noteworthy);
-		var_08 = scripts/cp/perks/prestige::prestige_getminammo();
+		var_08 = scripts\cp\perks\prestige::prestige_getminammo();
 		var_09 = int(var_08 * var_07);
 		var_0A = self getweaponammostock(var_06);
 		if(var_0A >= var_09) {
@@ -1701,7 +1701,7 @@ func_7DBA(param_00,param_01) {
 	var_04 = param_01 getcurrentweapon();
 	var_05 = scripts\cp\utility::getbaseweaponname(var_04);
 	var_06 = weaponmaxammo(var_04);
-	var_07 = param_01 scripts/cp/perks/prestige::prestige_getminammo();
+	var_07 = param_01 scripts\cp\perks\prestige::prestige_getminammo();
 	var_08 = int(var_07 * var_06);
 	var_09 = param_01 getweaponammostock(var_04);
 	var_0A = self getweaponslistall();

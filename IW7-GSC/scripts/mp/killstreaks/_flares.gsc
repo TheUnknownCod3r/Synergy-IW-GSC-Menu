@@ -1,8 +1,8 @@
-/******************************************************
+/**********************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\killstreaks\_flares.gsc
-******************************************************/
+ * Script: scripts\mp\killstreaks\_flares.gsc
+**********************************************/
 
 flares_monitor(param_00) {
 	self.flaresreservecount = param_00;
@@ -60,7 +60,7 @@ flares_areavailable(param_00) {
 }
 
 flares_getflarereserve(param_00) {
-	param_00.var_6EB4--;
+	param_00.flaresreservecount--;
 	param_00 thread func_6EAE();
 	var_01 = param_00 func_6EA0();
 	return var_01;
@@ -166,7 +166,7 @@ func_6EB1(param_00,param_01,param_02,param_03) {
 		while(var_06 < var_05.size) {
 			if(isdefined(var_05[var_06])) {
 				if(var_05[var_06] < 4000 && param_02.flaresreservecount > 0) {
-					param_02.var_6EB4--;
+					param_02.flaresreservecount--;
 					param_02 thread func_6EAE();
 					var_07 = param_02 func_6EA0();
 					for(var_08 = 0;var_08 < param_03.size;var_08++) {
@@ -218,7 +218,7 @@ func_6EB2(param_00,param_01,param_02,param_03) {
 		var_04 = param_02 getpointinbounds(0,0,0);
 		var_05 = distance(self.origin,var_04);
 		if(var_05 < 4000 && param_02.flaresreservecount > 0) {
-			param_02.var_6EB4--;
+			param_02.flaresreservecount--;
 			param_02 thread func_6EAE(param_03);
 			var_06 = param_02 func_6EA0();
 			self missile_settargetent(var_06);

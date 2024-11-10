@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\3105.gsc
+ * Script: 3105.gsc
 ***************************************/
 
 func_10746(var_00) {}
@@ -27,7 +27,7 @@ func_61CA() {
 
   func_0BDC::func_A0AF();
   self _meth_8459("face motion");
-  self.behavior = "jackal/jackal";
+  self.behavior = "jackal\jackal";
   self.behaviortreeasset = "jackal";
   self.func_1FA9 = "jackal";
 
@@ -98,7 +98,7 @@ func_61CA() {
   func_D97E();
   self.func_38A2 = 0;
   func_0BDC::func_198B(7.0);
-  self _meth_8491(self._blackboard.func_E1AC);
+  self _meth_8491(self.var_1198.func_E1AC);
   thread func_A067();
   thread func_A068();
   func_0C1B::func_13CC4();
@@ -147,19 +147,19 @@ func_54F8() {
 }
 
 func_A231() {
-  self.bt.func_6577 = gettime();
-  self.bt.func_673E = gettime();
-  self.bt.func_DB05 = undefined;
-  self.bt.func_673F = 0;
-  self.bt.func_EF78 = 0;
-  self.bt.func_5870 = 0;
-  self.bt.func_A533 = 0;
-  self.bt.func_DB06 = 0;
-  self.bt.func_BFA2 = gettime();
-  self.bt.attackerdata = spawnstruct();
-  self.bt.attackerdata.func_24D3 = 0;
-  self.bt.attackerdata.attacker = undefined;
-  self.bt.attackerdata.func_2535 = gettime();
+  self.var_3135.func_6577 = gettime();
+  self.var_3135.func_673E = gettime();
+  self.var_3135.func_DB05 = undefined;
+  self.var_3135.func_673F = 0;
+  self.var_3135.func_EF78 = 0;
+  self.var_3135.func_5870 = 0;
+  self.var_3135.func_A533 = 0;
+  self.var_3135.func_DB06 = 0;
+  self.var_3135.func_BFA2 = gettime();
+  self.var_3135.attackerdata = spawnstruct();
+  self.var_3135.attackerdata.func_24D3 = 0;
+  self.var_3135.attackerdata.attacker = undefined;
+  self.var_3135.attackerdata.func_2535 = gettime();
 }
 
 func_7C99(var_00) {
@@ -167,60 +167,60 @@ func_7C99(var_00) {
 }
 
 func_A230() {
-  self._blackboard.func_EF72 = 0;
-  self._blackboard.func_6D77 = "dont_shoot";
-  self._blackboard.func_6D83 = "jackal_gatling_fire";
-  self._blackboard.animscriptedactive = 0;
-  self._blackboard.func_7235 = spawnstruct();
-  self._blackboard.func_7235.target = undefined;
-  self._blackboard.func_7235.offset = (0, 0, 0);
-  self._blackboard.func_7235.func_7237 = 0;
-  self._blackboard.func_90F3 = 0;
-  self._blackboard.func_2520 = 0;
-  self._blackboard.func_D9BA = undefined;
-  self._blackboard.accuracy = 0.3;
-  self._blackboard.func_2894 = 1.0;
-  self._blackboard.func_AAB2 = 0;
-  self._blackboard.func_A421 = undefined;
-  self._blackboard.func_A420 = undefined;
-  self._blackboard.func_23A4 = func_9536();
-  self._blackboard.func_1113B = func_976D();
-  self._blackboard.func_C97C = 0;
-  self._blackboard.func_90EE = undefined;
-  self._blackboard.func_7002 = undefined;
-  self._blackboard.func_9DC2 = 0;
-  self._blackboard.func_90EC = "";
-  self._blackboard.func_90ED = -999999999;
-  self._blackboard.shootparams = spawnstruct();
-  self._blackboard.shootparams.func_C36B = (0, 0, 0);
-  self._blackboard.shootparams.func_C36C = (0, 0, 0);
-  self._blackboard.shootparams.time = 0;
-  self._blackboard.shootparams.starttime = 0;
-  self._blackboard.shootparams.func_0148 = 0;
-  self._blackboard.func_90DC = undefined;
-  self._blackboard.func_90DA = undefined;
-  self._blackboard.func_90DB = undefined;
-  self._blackboard.func_90D9 = undefined;
-  self._blackboard.func_1000D = 0;
-  self._blackboard.func_9DE4 = 0;
-  self._blackboard.func_2CCD = 0;
-  self._blackboard.func_2CD1 = gettime();
-  self._blackboard.func_2CD2 = 0;
-  self._blackboard.func_BFA6 = gettime() + randomintrange(5000, 10000);
-  self._blackboard.func_2CCF = 0;
-  self._blackboard.func_2CB8 = 0;
-  self._blackboard.func_C702 = undefined;
-  self._blackboard.func_C705 = undefined;
-  self._blackboard.func_11577 = undefined;
-  self._blackboard.func_E1AC = "none";
-  self._blackboard.func_90EA = 1;
-  self._blackboard.func_2521 = 0;
-  self._blackboard.func_2531 = 0;
-  self._blackboard.func_10A4A = undefined;
-  self._blackboard.func_10A4B = undefined;
-  self._blackboard.func_10A4D = func_7C99(self.team);
-  self._blackboard.func_38DC = "down";
-  self._blackboard.func_E1AB = "up";
+  self.var_1198.func_EF72 = 0;
+  self.var_1198.func_6D77 = "dont_shoot";
+  self.var_1198.func_6D83 = "jackal_gatling_fire";
+  self.var_1198.animscriptedactive = 0;
+  self.var_1198.func_7235 = spawnstruct();
+  self.var_1198.func_7235.target = undefined;
+  self.var_1198.func_7235.offset = (0, 0, 0);
+  self.var_1198.func_7235.func_7237 = 0;
+  self.var_1198.func_90F3 = 0;
+  self.var_1198.func_2520 = 0;
+  self.var_1198.func_D9BA = undefined;
+  self.var_1198.accuracy = 0.3;
+  self.var_1198.func_2894 = 1.0;
+  self.var_1198.func_AAB2 = 0;
+  self.var_1198.func_A421 = undefined;
+  self.var_1198.func_A420 = undefined;
+  self.var_1198.func_23A4 = func_9536();
+  self.var_1198.func_1113B = func_976D();
+  self.var_1198.func_C97C = 0;
+  self.var_1198.func_90EE = undefined;
+  self.var_1198.func_7002 = undefined;
+  self.var_1198.func_9DC2 = 0;
+  self.var_1198.func_90EC = "";
+  self.var_1198.func_90ED = -999999999;
+  self.var_1198.shootparams = spawnstruct();
+  self.var_1198.shootparams.func_C36B = (0, 0, 0);
+  self.var_1198.shootparams.func_C36C = (0, 0, 0);
+  self.var_1198.shootparams.time = 0;
+  self.var_1198.shootparams.starttime = 0;
+  self.var_1198.shootparams.func_0148 = 0;
+  self.var_1198.func_90DC = undefined;
+  self.var_1198.func_90DA = undefined;
+  self.var_1198.func_90DB = undefined;
+  self.var_1198.func_90D9 = undefined;
+  self.var_1198.func_1000D = 0;
+  self.var_1198.func_9DE4 = 0;
+  self.var_1198.func_2CCD = 0;
+  self.var_1198.func_2CD1 = gettime();
+  self.var_1198.func_2CD2 = 0;
+  self.var_1198.func_BFA6 = gettime() + randomintrange(5000, 10000);
+  self.var_1198.func_2CCF = 0;
+  self.var_1198.func_2CB8 = 0;
+  self.var_1198.func_C702 = undefined;
+  self.var_1198.func_C705 = undefined;
+  self.var_1198.func_11577 = undefined;
+  self.var_1198.func_E1AC = "none";
+  self.var_1198.func_90EA = 1;
+  self.var_1198.func_2521 = 0;
+  self.var_1198.func_2531 = 0;
+  self.var_1198.func_10A4A = undefined;
+  self.var_1198.func_10A4B = undefined;
+  self.var_1198.func_10A4D = func_7C99(self.team);
+  self.var_1198.func_38DC = "down";
+  self.var_1198.func_E1AB = "up";
 }
 
 func_A067() {
@@ -250,7 +250,7 @@ func_A068() {
   if (!issentient(self))
   return;
 
-  if (self._blackboard.animscriptedactive) {
+  if (self.var_1198.animscriptedactive) {
   wait 0.05;
   continue;
   }
@@ -281,7 +281,7 @@ func_107E2() {
 func_B28A(var_00, var_01) {
   var_02 = var_0.origin - var_1.origin;
   wait 0.05;
-  var_03 = scripts/sp/vehicle::func_13237(var_00);
+  var_03 = scripts\sp\vehicle::func_13237(var_00);
   var_03 func_0BDC::func_199E(var_01, var_02);
 }
 
@@ -306,25 +306,25 @@ func_976D() {
 _meth_814A(var_00) {
   var_01 = undefined;
 
-  if (!isdefined(self._blackboard))
+  if (!isdefined(self.var_1198))
   return func_976D();
 
   if (!isdefined(var_00)) {
-  if (self._blackboard.func_E1AC != "none")
-  var_00 = self._blackboard.func_E1AC;
+  if (self.var_1198.func_E1AC != "none")
+  var_00 = self.var_1198.func_E1AC;
   else
   var_00 = "fly";
   }
 
   switch (var_00) {
   case "hover":
-  var_01 = self._blackboard.func_23A4;
+  var_01 = self.var_1198.func_23A4;
   break;
   case "fly":
-  var_01 = self._blackboard.func_1113B;
+  var_01 = self.var_1198.func_1113B;
   break;
   default:
-  var_01 = self._blackboard.func_1113B;
+  var_01 = self.var_1198.func_1113B;
   break;
   }
 
@@ -349,7 +349,7 @@ func_B2E0() {
   var_2.func_C1DB = 0;
 
   foreach (var_02 in var_00) {
-  if (isalive(var_2.enemy) && var_2.enemy scripts/sp/vehicle::func_9FEF() && _isaircraft(var_2.enemy))
+  if (isalive(var_2.enemy) && var_2.enemy scripts\sp\vehicle::func_9FEF() && _isaircraft(var_2.enemy))
   var_2.enemy.func_C1DB++;
   }
 

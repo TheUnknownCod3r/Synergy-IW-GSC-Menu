@@ -1,8 +1,8 @@
-/************************************************************
+/****************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\killstreaks\_chill_common.gsc
-************************************************************/
+ * Script: scripts\mp\killstreaks\_chill_common.gsc
+****************************************************/
 
 chill_init() {
 	var_00 = spawnstruct();
@@ -59,7 +59,7 @@ chillend(param_00) {
 		chill_impairend();
 		self setscriptablepartstate("chilled","neutral",0);
 		self.chill_data = undefined;
-		scripts\mp\_weapons::updatemovespeedscale();
+		scripts\mp\weapons::updatemovespeedscale();
 	}
 }
 
@@ -108,7 +108,7 @@ chill_blind() {
 	var_00 = self.chill_data;
 	var_01 = level.chill_data;
 	var_02 = var_00.var_2B9B;
-	var_03 = scripts\engine\utility::ter_op(scripts\mp\_utility::_hasperk("specialty_stun_resistance"),0,1);
+	var_03 = scripts\engine\utility::ter_op(scripts\mp\utility::_hasperk("specialty_stun_resistance"),0,1);
 	var_04 = var_01.blindparts[var_03];
 	var_05 = var_01.blindstates[var_03];
 	var_06 = var_01.blinddurations[var_03];
@@ -164,7 +164,7 @@ chill_update() {
 		}
 
 		var_00.speedmod = var_02 * -0.55;
-		scripts\mp\_weapons::updatemovespeedscale();
+		scripts\mp\weapons::updatemovespeedscale();
 		wait(0.1);
 	}
 }

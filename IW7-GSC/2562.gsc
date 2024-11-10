@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\2562.gsc
-****************************/
+ * Script: 2562.gsc
+************************/
 
 init() {
 	if(isdefined(level._btactions)) {
@@ -25,14 +25,14 @@ bt_init() {
 	}
 	else
 	{
-		self.bt.var_E87F = [];
-		self.bt.var_D8BE = [];
-		self.bt.var_BE5D = 0;
+		self.var_3135.var_E87F = [];
+		self.var_3135.var_D8BE = [];
+		self.var_3135.var_BE5D = 0;
 		self.var_C9D9 = level._btactions[self.behavior];
 		self [[self.var_C9D9.var_71AD]]();
 	}
 
-	self.bt.instancedata = [];
+	self.var_3135.instancedata = [];
 	thread bt_eventlistener();
 }
 
@@ -41,27 +41,27 @@ bt_eventlistener() {
 	self endon("terminate_ai_threads");
 	for(;;) {
 		self waittill("ai_notify",var_00,var_01);
-		scripts/asm/asm::asm_fireephemeralevent("ai_notify",var_00,var_01);
+		scripts\asm\asm::asm_fireephemeralevent("ai_notify",var_00,var_01);
 	}
 }
 
 bt_registertree(param_00,param_01) {
 	level._btactions[param_00] = param_01;
 	switch(param_00) {
-		case "human/ally_combatant":
-		case "human/enemy_combatant":
+		case "human\ally_combatant":
+		case "human\enemy_combatant":
 			lib_09FD::soldier();
 			break;
 
-		case "c6/base":
+		case "c6\base":
 			lib_09FD::func_3353();
 			break;
 
-		case "c12/c12":
+		case "c12\c12":
 			lib_09FD::func_3508();
 			break;
 
-		case "seeker/seeker":
+		case "seeker\seeker":
 			lib_09FD::func_F10A();
 			break;
 	}
@@ -122,8 +122,8 @@ bt_getdemeanor() {
 		return self.demeanoroverride;
 	}
 
-	if(isdefined(self._blackboard.var_7366)) {
-		return self._blackboard.var_7366;
+	if(isdefined(self.var_1198.var_7366)) {
+		return self.var_1198.var_7366;
 	}
 
 	return "combat";

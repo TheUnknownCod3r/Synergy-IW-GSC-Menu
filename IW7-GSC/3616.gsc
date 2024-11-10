@@ -1,19 +1,19 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3616.gsc
-****************************/
+ * Script: 3616.gsc
+************************/
 
 func_DE0F() {
 	precachemodel("misc_exterior_oxygen_barrel_large");
 	precachemodel("misc_exterior_oxygen_barrel_large_zerog");
 	precachemodel("vfx_debris_oxygen_barrel_large_top");
 	precachemodel("vfx_debris_oxygen_barrel_large_bottom");
-	level._effect["barrel_flame_top"] = loadfx("vfx/iw7/levels/moon/scripted/scriptables/oxygen_tank/vfx_oxygen_tank_spewing_flames.vfx");
-	level._effect["barrel_flame_small"] = loadfx("vfx/iw7/prop/vfx_dest_barrel_fire_sm.vfx");
-	level._effect["barrel_explosion"] = loadfx("vfx/iw7/core/expl/vfx_red_barrel_oxygen_01.vfx");
-	level._effect["barrel_explosion_zerog"] = loadfx("vfx/iw7/prop/vfx_misc_exterior_oxygenbarrel_large_zerog.vfx");
-	level._effect["barrel_fire"] = loadfx("vfx/iw7/prop/vfx_dest_barrel_fire.vfx");
+	level._effect["barrel_flame_top"] = loadfx("vfx\iw7\levels\moon\scripted\scriptables\oxygen_tank\vfx_oxygen_tank_spewing_flames.vfx");
+	level._effect["barrel_flame_small"] = loadfx("vfx\iw7\prop\vfx_dest_barrel_fire_sm.vfx");
+	level._effect["barrel_explosion"] = loadfx("vfx\iw7\core\expl\vfx_red_barrel_oxygen_01.vfx");
+	level._effect["barrel_explosion_zerog"] = loadfx("vfx\iw7\prop\vfx_misc_exterior_oxygenbarrel_large_zerog.vfx");
+	level._effect["barrel_fire"] = loadfx("vfx\iw7\prop\vfx_dest_barrel_fire.vfx");
 	var_00 = getentarray("phys_barrel_destructible","targetname");
 	foreach(var_02 in var_00) {
 		var_02 thread func_DE0C();

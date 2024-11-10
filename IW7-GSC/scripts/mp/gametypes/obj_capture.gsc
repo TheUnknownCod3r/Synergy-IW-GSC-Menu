@@ -1,8 +1,8 @@
-/********************************************************
+/************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\gametypes\obj_capture.gsc
-********************************************************/
+ * Script: scripts\mp\gametypes\obj_capture.gsc
+************************************************/
 
 init() {
 	var_00 = spawnstruct();
@@ -36,15 +36,15 @@ createcarryobject(param_00,param_01,param_02) {
 	}
 
 	var_04 = spawn("trigger_radius",var_03.origin,0,96,120);
-	var_05 = scripts\mp\_gameobjects::createcarryobject(param_01,var_04,[var_03],(0,0,85));
-	var_05 scripts\mp\_gameobjects::setteamusetime("friendly",param_02.pickuptime);
-	var_05 scripts\mp\_gameobjects::setteamusetime("enemy",param_02.pickuptime);
-	var_05 scripts\mp\_gameobjects::setteamusetext("enemy",param_02.usetextfriendly);
-	var_05 scripts\mp\_gameobjects::setteamusetext("friendly",param_02.usetextenemy);
-	var_05 scripts\mp\_gameobjects::allowcarry("enemy");
-	var_05 scripts\mp\_gameobjects::set2dicon("enemy",param_02.pickupicon);
-	var_05 scripts\mp\_gameobjects::set3dicon("enemy",param_02.pickupicon);
-	var_05 scripts\mp\_gameobjects::setvisibleteam("enemy");
+	var_05 = scripts\mp\gameobjects::createcarryobject(param_01,var_04,[var_03],(0,0,85));
+	var_05 scripts\mp\gameobjects::setteamusetime("friendly",param_02.pickuptime);
+	var_05 scripts\mp\gameobjects::setteamusetime("enemy",param_02.pickuptime);
+	var_05 scripts\mp\gameobjects::setteamusetext("enemy",param_02.usetextfriendly);
+	var_05 scripts\mp\gameobjects::setteamusetext("friendly",param_02.usetextenemy);
+	var_05 scripts\mp\gameobjects::allowcarry("enemy");
+	var_05 scripts\mp\gameobjects::set2dicon("enemy",param_02.pickupicon);
+	var_05 scripts\mp\gameobjects::set3dicon("enemy",param_02.pickupicon);
+	var_05 scripts\mp\gameobjects::setvisibleteam("enemy");
 	var_05.objidpingenemy = 1;
 	var_05.allowweapons = 1;
 	var_05.onpickup = param_02.onpickupfn;
@@ -68,41 +68,41 @@ creategoal(param_00,param_01,param_02,param_03) {
 		return;
 	}
 
-	var_05 = scripts\mp\_gameobjects::createuseobject(param_02,var_04,[],(0,0,85));
-	var_05 scripts\mp\_gameobjects::allowuse("enemy");
-	var_05 scripts\mp\_gameobjects::setvisibleteam("any");
-	var_05 scripts\mp\_gameobjects::set2dicon("friendly","waypoint_blitz_defend");
-	var_05 scripts\mp\_gameobjects::set3dicon("friendly","waypoint_blitz_defend");
-	var_05 scripts\mp\_gameobjects::set2dicon("enemy","waypoint_blitz_goal");
-	var_05 scripts\mp\_gameobjects::set3dicon("enemy","waypoint_blitz_goal");
-	var_05 scripts\mp\_gameobjects::setusetime(param_03.delivertime);
-	var_05 scripts\mp\_gameobjects::setkeyobject(param_01);
+	var_05 = scripts\mp\gameobjects::createuseobject(param_02,var_04,[],(0,0,85));
+	var_05 scripts\mp\gameobjects::allowuse("enemy");
+	var_05 scripts\mp\gameobjects::setvisibleteam("any");
+	var_05 scripts\mp\gameobjects::set2dicon("friendly","waypoint_blitz_defend");
+	var_05 scripts\mp\gameobjects::set3dicon("friendly","waypoint_blitz_defend");
+	var_05 scripts\mp\gameobjects::set2dicon("enemy","waypoint_blitz_goal");
+	var_05 scripts\mp\gameobjects::set3dicon("enemy","waypoint_blitz_goal");
+	var_05 scripts\mp\gameobjects::setusetime(param_03.delivertime);
+	var_05 scripts\mp\gameobjects::setkeyobject(param_01);
 	var_05.onuse = param_03.ondelivered;
 	var_05.settings = param_03;
 	return var_05;
 }
 
 onobjectpickup(param_00) {
-	if(param_00.team == scripts\mp\_gameobjects::getownerteam()) {
-		scripts\mp\_gameobjects::returnobjectiveid();
+	if(param_00.team == scripts\mp\gameobjects::getownerteam()) {
+		scripts\mp\gameobjects::returnobjectiveid();
 		return;
 	}
 
 	param_00 attachobjecttocarrier(self.settings.carrymodel);
-	scripts\mp\_gameobjects::setvisibleteam("any");
-	scripts\mp\_gameobjects::set2dicon("friendly","waypoint_capture_kill");
-	scripts\mp\_gameobjects::set3dicon("friendly","waypoint_capture_kill");
-	scripts\mp\_gameobjects::set2dicon("enemy","waypoint_escort");
-	scripts\mp\_gameobjects::set3dicon("enemy","waypoint_escort");
+	scripts\mp\gameobjects::setvisibleteam("any");
+	scripts\mp\gameobjects::set2dicon("friendly","waypoint_capture_kill");
+	scripts\mp\gameobjects::set3dicon("friendly","waypoint_capture_kill");
+	scripts\mp\gameobjects::set2dicon("enemy","waypoint_escort");
+	scripts\mp\gameobjects::set3dicon("enemy","waypoint_escort");
 }
 
 onobjectdrop(param_00) {
-	scripts\mp\_gameobjects::allowcarry("any");
-	scripts\mp\_gameobjects::setvisibleteam("any");
-	scripts\mp\_gameobjects::set2dicon("friendly","waypoint_capture_recover");
-	scripts\mp\_gameobjects::set3dicon("friendly","waypoint_capture_recover");
-	scripts\mp\_gameobjects::set2dicon("enemy","waypoint_capture_take");
-	scripts\mp\_gameobjects::set3dicon("enemy","waypoint_capture_take");
+	scripts\mp\gameobjects::allowcarry("any");
+	scripts\mp\gameobjects::setvisibleteam("any");
+	scripts\mp\gameobjects::set2dicon("friendly","waypoint_capture_recover");
+	scripts\mp\gameobjects::set3dicon("friendly","waypoint_capture_recover");
+	scripts\mp\gameobjects::set2dicon("enemy","waypoint_capture_take");
+	scripts\mp\gameobjects::set3dicon("enemy","waypoint_capture_take");
 }
 
 returnaftertime() {
@@ -112,16 +112,16 @@ returnaftertime() {
 
 	self endon("picked_up");
 	wait(self.settings.returntime);
-	scripts\mp\_gameobjects::returnobjectiveid();
+	scripts\mp\gameobjects::returnobjectiveid();
 }
 
 onobjectreset() {}
 
 onobjectdelivered(param_00) {
-	self.keyobject scripts\mp\_gameobjects::allowcarry("none");
-	self.keyobject scripts\mp\_gameobjects::setvisibleteam("none");
+	self.keyobject scripts\mp\gameobjects::allowcarry("none");
+	self.keyobject scripts\mp\gameobjects::setvisibleteam("none");
 	param_00 detachobjectifcarried();
-	scripts\mp\_gameobjects::deleteuseobject();
+	scripts\mp\gameobjects::deleteuseobject();
 }
 
 attachobjecttocarrier(param_00) {

@@ -1,11 +1,11 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2708.gsc
+ * Script: 2708.gsc
 ***************************************/
 
 init() {
   if (!isdefined(game["clientMatchDataDef"])) {
-  game["clientMatchDataDef"] = "mp/clientmatchdata.ddl";
+  game["clientMatchDataDef"] = "mp\clientmatchdata.ddl";
   setclientmatchdatadef(game["clientMatchDataDef"]);
   setclientmatchdata("map", level.script);
   }

@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3533.gsc
-****************************/
+ * Script: 3533.gsc
+************************/
 
 func_1664() {
 	if(!isdefined(level.var_1668)) {
@@ -39,7 +39,7 @@ func_1672() {
 			continue;
 		}
 
-		var_01 = scripts\mp\_utility::getweapongroup(var_00);
+		var_01 = scripts\mp\utility::getweapongroup(var_00);
 		if(func_165E(var_00,var_01)) {
 			thread func_1671();
 			thread func_1670();
@@ -130,14 +130,14 @@ func_166B(param_00,param_01) {
 
 func_165C() {
 	if(!isdefined(self.var_1666) || self.var_1666 == 0) {
-		scripts\mp\_utility::giveperk("specialty_regenfaster");
+		scripts\mp\utility::giveperk("specialty_regenfaster");
 		self.var_1666 = 1;
 	}
 }
 
 func_165D() {
 	if(isdefined(self.var_1666) && self.var_1666) {
-		scripts\mp\_utility::removeperk("specialty_regenfaster");
+		scripts\mp\utility::removeperk("specialty_regenfaster");
 		self.var_1666 = undefined;
 	}
 }
@@ -150,12 +150,12 @@ func_165B() {
 	self endon("activeReloadGivePerk");
 	self playlocalsound("scavenger_pack_pickup");
 	func_165C();
-	scripts\mp\_powers::power_modifycooldownrate(2);
+	scripts\mp\powers::power_modifycooldownrate(2);
 	self setclientomnvar("ui_activereload_result",1);
 	self setclientomnvar("ui_activereload_result_notify",gettime());
 	wait(5);
 	func_165D();
-	scripts\mp\_powers::power_modifycooldownrate(1);
+	scripts\mp\powers::power_modifycooldownrate(1);
 }
 
 func_1661() {
@@ -187,19 +187,19 @@ func_1660(param_00,param_01,param_02,param_03) {
 
 func_165E(param_00,param_01) {
 	if(param_01 == "weapon_shotgun") {
-		var_02 = scripts\mp\_utility::getweaponrootname(param_00);
+		var_02 = scripts\mp\utility::getweaponrootname(param_00);
 		return var_02 != "iw6_fp6" && var_02 != "iw6_uts15" && var_02 != "iw7_spas";
 	}
 
-	if(scripts\mp\_utility::weaponhasattachment(param_01,"akimbo")) {
+	if(scripts\mp\utility::weaponhasattachment(param_01,"akimbo")) {
 		return 0;
 	}
 
-	if(scripts\mp\_utility::isstrstart(param_01,"alt_")) {
+	if(scripts\mp\utility::isstrstart(param_01,"alt_")) {
 		return 0;
 	}
 
-	if(scripts\mp\_weapons::isknifeonly(param_01) || scripts\mp\_weapons::isriotshield(param_01)) {
+	if(scripts\mp\weapons::isknifeonly(param_01) || scripts\mp\weapons::isriotshield(param_01)) {
 		return 0;
 	}
 
@@ -208,16 +208,16 @@ func_165E(param_00,param_01) {
 
 func_1662(param_00,param_01) {
 	var_02 = 1;
-	if(scripts\mp\_utility::_hasperk("specialty_fastreload")) {
+	if(scripts\mp\utility::_hasperk("specialty_fastreload")) {
 		var_02 = 0.5;
 	}
 
 	var_03 = undefined;
-	if(scripts\mp\_utility::isstrstart(param_00,"alt_")) {
-		if(scripts\mp\_utility::weaponhasattachment(param_00,"gl")) {
+	if(scripts\mp\utility::isstrstart(param_00,"alt_")) {
+		if(scripts\mp\utility::weaponhasattachment(param_00,"gl")) {
 			var_03 = func_1665("gl",1);
 		}
-		else if(scripts\mp\_utility::weaponhasattachment(param_00,"shotgun")) {
+		else if(scripts\mp\utility::weaponhasattachment(param_00,"shotgun")) {
 			var_03 = func_1665("shotgun",1);
 		}
 	}
@@ -265,17 +265,17 @@ func_1665(param_00) {
 		return level.var_1668[var_01];
 	}
 
-	if(!scripts\mp\_weapons::isknifeonly(var_01) && !scripts\mp\_weapons::isriotshield(var_01)) {
+	if(!scripts\mp\weapons::isknifeonly(var_01) && !scripts\mp\weapons::isriotshield(var_01)) {
 		var_02 = [];
-		var_03 = tablelookuprownum("mp/weaponReloadStats.csv",0,var_01);
+		var_03 = tablelookuprownum("mp\weaponReloadStats.csv",0,var_01);
 		var_04 = 4;
-		var_05 = scripts\mp\_utility::getweapongroup(var_01);
+		var_05 = scripts\mp\utility::getweapongroup(var_01);
 		if(var_05 == "weapon_pistol") {
 			var_04 = 8;
 		}
 
 		for(var_06 = 1;var_06 <= var_04;var_06++) {
-			var_02[var_06] = int(float(tablelookupbyrow("mp/weaponReloadStats.csv",var_03,var_06)) * 1000);
+			var_02[var_06] = int(float(tablelookupbyrow("mp\weaponReloadStats.csv",var_03,var_06)) * 1000);
 		}
 
 		level.var_1668[var_01] = var_02;

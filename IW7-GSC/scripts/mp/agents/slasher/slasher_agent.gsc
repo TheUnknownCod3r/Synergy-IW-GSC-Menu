@@ -1,11 +1,11 @@
-/***************************************************************
+/*******************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\agents\slasher\slasher_agent.gsc
-***************************************************************/
+ * Script: scripts\mp\agents\slasher\slasher_agent.gsc
+*******************************************************/
 
 registerscriptedagent() {
-	scripts/aitypes/bt_util::init();
+	scripts\aitypes\bt_util::init();
 	behaviortree\slasher::func_DEE8();
 	scripts\asm\slasher\mp\states::func_2371();
 	scripts\mp\agents\slasher\slasher_tunedata::setuptunedata();
@@ -258,7 +258,7 @@ onslasherdamagefinished(param_00,param_01,param_02,param_03,param_04,param_05,pa
 			param_02 = 0;
 		}
 
-		if(scripts/asm/asm::asm_isinstate("block")) {
+		if(scripts\asm\asm::asm_isinstate("block")) {
 			param_02 = param_02 * 0.1;
 			param_02 = int(param_02);
 		}

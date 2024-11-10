@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\2583.gsc
-****************************/
+ * Script: 2583.gsc
+************************/
 
 func_9308(param_00) {
 	if(!isdefined(self.var_10E6D)) {

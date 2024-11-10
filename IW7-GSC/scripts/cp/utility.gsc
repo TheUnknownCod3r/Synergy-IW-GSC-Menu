@@ -1,8 +1,8 @@
-/******************************************
+/**********************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\utility.gsc
-******************************************/
+ * Script: scripts\cp\utility.gsc
+**********************************/
 
 _giveweapon(param_00,param_01,param_02,param_03) {
 	if(!isdefined(param_01)) {
@@ -696,7 +696,7 @@ entrance_is_fully_repaired(param_00) {
 		return 1;
 	}
 
-	var_01 = scripts/cp/zombies/zombie_entrances::func_7B13(param_00);
+	var_01 = scripts\cp\zombies\zombie_entrances::func_7B13(param_00);
 	if(!isdefined(var_01)) {
 		return 1;
 	}
@@ -895,11 +895,11 @@ getattachmenttype(param_00) {
 		return "none";
 	}
 
-	var_01 = tablelookup("mp/attachmentTable.csv",4,param_00,2);
+	var_01 = tablelookup("mp\attachmentTable.csv",4,param_00,2);
 	if(!isdefined(var_01) || isdefined(var_01) && var_01 == "") {
 		var_02 = getdvar("g_gametype");
 		if(var_02 == "zombie") {
-			var_01 = tablelookup("cp/zombies/zombie_attachmentTable.csv",4,param_00,2);
+			var_01 = tablelookup("cp\zombies\zombie_attachmentTable.csv",4,param_00,2);
 		}
 	}
 
@@ -3747,7 +3747,7 @@ getweaponattachmentarrayfromstats(param_00) {
 	if(!isdefined(level.weaponattachments[param_00])) {
 		var_01 = [];
 		for(var_02 = 0;var_02 <= 19;var_02++) {
-			var_03 = tablelookup("mp/statsTable.csv",4,param_00,10 + var_02);
+			var_03 = tablelookup("mp\statsTable.csv",4,param_00,10 + var_02);
 			if(var_03 == "") {
 				break;
 			}
@@ -4200,7 +4200,7 @@ buildweaponassetname(param_00,param_01) {
 }
 
 getweaponassetfromrootweapon(param_00,param_01) {
-	var_02 = "mp/loot/weapon/" + param_00 + ".csv";
+	var_02 = "mp\loot\weapon\" + param_00 + ".csv";
 	var_03 = tablelookup(var_02,0,param_01,20);
 	return var_03;
 }
@@ -4364,8 +4364,8 @@ attachmentscompatible(param_00,param_01) {
 		var_02 = !isdefined(level.attachmentmap_conflicts[var_03[0] + "_" + var_03[1]]);
 	}
 	else if(param_00 != "none" && param_01 != "none") {
-		var_04 = tablelookuprownum("mp/attachmentcombos.csv",0,param_01);
-		if(tablelookup("mp/attachmentcombos.csv",0,param_00,var_04) == "no") {
+		var_04 = tablelookuprownum("mp\attachmentcombos.csv",0,param_01);
+		if(tablelookup("mp\attachmentcombos.csv",0,param_00,var_04) == "no") {
 			var_02 = 0;
 		}
 	}
@@ -4619,15 +4619,15 @@ buildweaponnamecamo(param_00,param_01,param_02) {
 
 	if(!var_04) {
 		if(isholidayweapon(param_00,param_02)) {
-			var_03 = int(tablelookup("mp/camoTable.csv",1,"camo89",scripts\engine\utility::getcamotablecolumnindex("weapon_index")));
+			var_03 = int(tablelookup("mp\camoTable.csv",1,"camo89",scripts\engine\utility::getcamotablecolumnindex("weapon_index")));
 			return param_00 + "+camo" + var_03;
 		}
 		else if(issummerholidayweapon(param_00,param_02)) {
-			var_03 = int(tablelookup("mp/camoTable.csv",1,"camo230",scripts\engine\utility::getcamotablecolumnindex("weapon_index")));
+			var_03 = int(tablelookup("mp\camoTable.csv",1,"camo230",scripts\engine\utility::getcamotablecolumnindex("weapon_index")));
 			return param_00 + "+camo" + var_03;
 		}
 		else if(ishalloweenholidayweapon(param_00,param_02)) {
-			var_03 = int(tablelookup("mp/camoTable.csv",1,"camo242",scripts\engine\utility::getcamotablecolumnindex("weapon_index")));
+			var_03 = int(tablelookup("mp\camoTable.csv",1,"camo242",scripts\engine\utility::getcamotablecolumnindex("weapon_index")));
 			return param_00 + "+camo" + var_03;
 		}
 		else if((!isdefined(param_01) || param_01 == "none") && ismark2weapon(param_02)) {
@@ -4654,7 +4654,7 @@ buildweaponnamecamo(param_00,param_01,param_02) {
 							break;
 			}
 
-			var_03 = int(tablelookup("mp/camoTable.csv",1,var_06,scripts\engine\utility::getcamotablecolumnindex("weapon_index")));
+			var_03 = int(tablelookup("mp\camoTable.csv",1,var_06,scripts\engine\utility::getcamotablecolumnindex("weapon_index")));
 			return param_00 + "+camo" + var_03;
 		}
 	}
@@ -4664,7 +4664,7 @@ buildweaponnamecamo(param_00,param_01,param_02) {
 	}
 	else
 	{
-		var_05 = int(tablelookup("mp/camoTable.csv",1,var_03,scripts\engine\utility::getcamotablecolumnindex("weapon_index")));
+		var_05 = int(tablelookup("mp\camoTable.csv",1,var_03,scripts\engine\utility::getcamotablecolumnindex("weapon_index")));
 	}
 
 	if(var_05 <= 0) {
@@ -4688,7 +4688,7 @@ buildweaponnamecamo(param_00,param_01,param_02) {
 		}
 
 		if(isdefined(var_06)) {
-			var_03 = int(tablelookup("mp/camoTable.csv",1,var_06,scripts\engine\utility::getcamotablecolumnindex("weapon_index")));
+			var_03 = int(tablelookup("mp\camoTable.csv",1,var_06,scripts\engine\utility::getcamotablecolumnindex("weapon_index")));
 		}
 		else
 		{
@@ -4718,7 +4718,7 @@ buildweaponnamereticle(param_00,param_01) {
 		return param_00;
 	}
 
-	var_02 = int(tablelookup("mp/reticleTable.csv",1,param_01,5));
+	var_02 = int(tablelookup("mp\reticleTable.csv",1,param_01,5));
 	if(!isdefined(var_02) || var_02 == 0) {
 		return param_00;
 	}
@@ -5185,7 +5185,7 @@ healthregen(param_00,param_01) {
 		var_03 = scripts\cp\cp_laststand::gethealthcap();
 		var_02 = spawnstruct();
 		getregendata(var_02);
-		if(!scripts/cp/perks/perkfunctions::has_fragile_relic_and_is_sprinting()) {
+		if(!scripts\cp\perks\perkfunctions::has_fragile_relic_and_is_sprinting()) {
 			param_01 = self.health / self.maxhealth;
 			if(self.health < int(var_03)) {
 				if(param_01 + var_02.regenamount > int(1)) {
@@ -5300,7 +5300,7 @@ getregendata(param_00) {
 	level.invultime_postshield = 0.3;
 	level.playerhealth_regularregendelay = 2400;
 	level.worthydamageratio = 0.1;
-	self.prestigehealthregennerfscalar = scripts/cp/perks/prestige::prestige_getslowhealthregenscalar();
+	self.prestigehealthregennerfscalar = scripts\cp\perks\prestige::prestige_getslowhealthregenscalar();
 	if(self.prestigehealthregennerfscalar == 1) {
 		if(is_consumable_active("faster_health_regen_upgrade") || isdefined(level.purify_active) && level.purify_active >= 1) {
 			param_00.activatetime = 0.45;
@@ -5731,7 +5731,7 @@ increment_num_of_quest_piece_completed() {
 	if(level.script == "cp_zmb") {
 		if(level.num_of_quest_pieces_completed == level.cp_zmb_number_of_quest_pieces) {
 			foreach(var_01 in level.players) {
-				var_01 scripts/cp/zombies/achievement::update_achievement("STICKER_COLLECTOR",24);
+				var_01 scripts\cp\zombies\achievement::update_achievement("STICKER_COLLECTOR",24);
 			}
 		}
 	}

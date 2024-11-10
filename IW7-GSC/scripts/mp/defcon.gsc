@@ -1,8 +1,8 @@
-/*****************************************
+/*********************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\defcon.gsc
-*****************************************/
+ * Script: scripts\mp\defcon.gsc
+*********************************/
 
 init() {
 	if(!isdefined(level.var_5056) || level.var_5056 == 0) {

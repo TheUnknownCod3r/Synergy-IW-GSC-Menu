@@ -1,8 +1,8 @@
-/*************************************************************
+/*****************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\aitypes\zombie_dlc4\behaviors.gsc
-*************************************************************/
+ * Script: scripts\aitypes\zombie_dlc4\behaviors.gsc
+*****************************************************/
 
 checkscripteddlc(param_00) {
 	return lib_0C2B::func_3E48(param_00);
@@ -23,12 +23,12 @@ chaseenemydlc(param_00) {
 		return level.failure;
 	}
 
-	if(isdefined(self.var_10C.is_fast_traveling) || isdefined(self.var_10C.is_off_grid)) {
+	if(isdefined(self.isnodeoccupied.is_fast_traveling) || isdefined(self.isnodeoccupied.is_off_grid)) {
 		self.curmeleetarget = undefined;
 		return level.failure;
 	}
 
-	if(isdefined(self.var_10C.killing_time)) {
+	if(isdefined(self.isnodeoccupied.killing_time)) {
 		self.curmeleetarget = undefined;
 		return level.failure;
 	}
@@ -111,7 +111,7 @@ seekenemydlc(param_00) {
 
 	var_01 = [];
 	foreach(var_03 in level.players) {
-		if(var_03.ignoreme || isdefined(var_03.triggerportableradarping) && var_03.var_222.ignoreme) {
+		if(var_03.ignoreme || isdefined(var_03.triggerportableradarping) && var_03.triggerportableradarping.ignoreme) {
 			continue;
 		}
 

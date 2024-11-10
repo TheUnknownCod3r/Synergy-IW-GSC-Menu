@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2266.gsc
+ * Script: 2266.gsc
 ***************************************/
 
 #using_animtree("generic_human");
@@ -15,7 +15,7 @@ main() {
   self give_explosive_touch_on_revived("vestlight");
 
   if (issentient(self))
-  self sethitlocdamagetable("locdmgtable/ai_lochit_dmgtable");
+  self sethitlocdamagetable("locdmgtable\ai_lochit_dmgtable");
 
   self glinton(#animtree);
 }

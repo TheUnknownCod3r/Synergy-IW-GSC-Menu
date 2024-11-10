@@ -1,8 +1,8 @@
-/**************************************
+/******************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\hud.gsc
-**************************************/
+ * Script: scripts\mp\hud.gsc
+******************************/
 
 init() {
 	level.uiparent = spawnstruct();

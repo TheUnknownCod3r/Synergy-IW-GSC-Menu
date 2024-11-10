@@ -1,8 +1,8 @@
-/*****************************************
+/*********************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\sp\_audio.gsc
-*****************************************/
+ * Script: scripts\sp\_audio.gsc
+*********************************/
 
 init_audio() {
 	if(isdefined(level.var_1188)) {
@@ -99,7 +99,7 @@ func_ABD5() {
 	}
 
 	wait(0.05);
-	function_0129(1,level.var_1188.var_ABD4);
+	levelsoundfade(1,level.var_1188.var_ABD4);
 }
 
 func_257D(param_00,param_01,param_02,param_03,param_04,param_05,param_06) {
@@ -129,13 +129,13 @@ func_257D(param_00,param_01,param_02,param_03,param_04,param_05,param_06) {
 		level.player _meth_82C0(param_01);
 	}
 
-	while(!function_0102()) {
+	while(!iscinematicplaying()) {
 		wait(0.05);
 	}
 
 	level.player _meth_82C0("fade_to_black_minus_music",param_02);
-	while(1 && function_0102()) {
-		var_09 = function_003C() / 1000;
+	while(1 && iscinematicplaying()) {
+		var_09 = cinematicgettimeinmsec() / 1000;
 		var_0A = param_00 - var_09;
 		if(var_0A <= var_07) {
 			var_08 = 0;
@@ -163,12 +163,12 @@ func_257D(param_00,param_01,param_02,param_03,param_04,param_05,param_06) {
 func_2AE8(param_00,param_01,param_02) {
 	var_03 = 1;
 	var_04 = param_02 + 0.05;
-	while(!function_0102()) {
+	while(!iscinematicplaying()) {
 		wait(0.05);
 	}
 
-	while(1 && function_0102()) {
-		var_05 = function_003C() / 1000;
+	while(1 && iscinematicplaying()) {
+		var_05 = cinematicgettimeinmsec() / 1000;
 		var_06 = param_00 - var_05;
 		if(var_06 <= var_04) {
 			var_03 = 0;
@@ -179,7 +179,7 @@ func_2AE8(param_00,param_01,param_02) {
 	}
 
 	if(var_03 == 0) {
-		function_01BA(param_01);
+		setmusicstate(param_01);
 	}
 }
 
@@ -192,7 +192,7 @@ func_257C(param_00,param_01) {
 		level.player _meth_82C0(param_00);
 	}
 
-	while(!function_0102()) {
+	while(!iscinematicplaying()) {
 		wait(0.05);
 	}
 
@@ -218,12 +218,12 @@ func_257B(param_00,param_01,param_02,param_03,param_04) {
 	}
 
 	var_06 = 1;
-	while(!function_0102()) {
+	while(!iscinematicplaying()) {
 		wait(0.05);
 	}
 
-	while(1 && function_0102()) {
-		var_07 = function_003C() / 1000;
+	while(1 && iscinematicplaying()) {
+		var_07 = cinematicgettimeinmsec() / 1000;
 		var_08 = param_00 - var_07;
 		if(var_08 <= var_05) {
 			var_06 = 0;

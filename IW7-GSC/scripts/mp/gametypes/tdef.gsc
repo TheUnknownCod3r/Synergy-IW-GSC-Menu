@@ -1,30 +1,30 @@
-/*************************************************
+/*****************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\gametypes\tdef.gsc
-*************************************************/
+ * Script: scripts\mp\gametypes\tdef.gsc
+*****************************************/
 
 main() {
 	if(getdvar("mapname") == "mp_background") {
 		return;
 	}
 
-	scripts\mp\_globallogic::init();
-	scripts\mp\_globallogic::setupcallbacks();
-	if(function_011C()) {
+	scripts\mp\globallogic::init();
+	scripts\mp\globallogic::setupcallbacks();
+	if(isusingmatchrulesdata()) {
 		level.initializematchrules = ::initializematchrules;
 		[[level.initializematchrules]]();
-		level thread scripts\mp\_utility::reinitializematchrulesonmigration();
+		level thread scripts\mp\utility::reinitializematchrulesonmigration();
 	}
 	else
 	{
-		scripts\mp\_utility::registerroundswitchdvar(level.gametype,0,0,9);
-		scripts\mp\_utility::registertimelimitdvar(level.gametype,10);
-		scripts\mp\_utility::registerscorelimitdvar(level.gametype,7500);
-		scripts\mp\_utility::registerroundlimitdvar(level.gametype,1);
-		scripts\mp\_utility::registerwinlimitdvar(level.gametype,1);
-		scripts\mp\_utility::registernumlivesdvar(level.gametype,0);
-		scripts\mp\_utility::registerhalftimedvar(level.gametype,0);
+		scripts\mp\utility::registerroundswitchdvar(level.gametype,0,0,9);
+		scripts\mp\utility::registertimelimitdvar(level.gametype,10);
+		scripts\mp\utility::registerscorelimitdvar(level.gametype,7500);
+		scripts\mp\utility::registerroundlimitdvar(level.gametype,1);
+		scripts\mp\utility::registerwinlimitdvar(level.gametype,1);
+		scripts\mp\utility::registernumlivesdvar(level.gametype,0);
+		scripts\mp\utility::registerhalftimedvar(level.gametype,0);
 		setdynamicdvar("scr_tdef_possessionResetCondition",1);
 		setdynamicdvar("scr_tdef_possessionResetTime",60);
 		level.matchrules_enemyflagradar = 1;
@@ -47,7 +47,7 @@ main() {
 	level.scorefrozenuntil = 0;
 	level.ballpickupscorefrozen = 0;
 	if(level.matchrules_damagemultiplier || level.matchrules_vampirism) {
-		level.modifyplayerdamage = ::scripts\mp\_damage::gamemodemodifyplayerdamage;
+		level.modifyplayerdamage = ::scripts\mp\damage::gamemodemodifyplayerdamage;
 	}
 
 	game["dialog"]["gametype"] = "team_defender";
@@ -76,7 +76,7 @@ main() {
 }
 
 initializematchrules() {
-	scripts\mp\_utility::setcommonrulesfrommatchdata();
+	scripts\mp\utility::setcommonrulesfrommatchdata();
 	setdynamicdvar("scr_tdef_scoringTime",getmatchrulesdata("tdefData","scoringTime"));
 	setdynamicdvar("scr_tdef_scorePerTick",getmatchrulesdata("tdefData","scorePerTick"));
 	setdynamicdvar("scr_tdef_carrierBonusTime",getmatchrulesdata("tdefData","carrierBonusTime"));
@@ -91,7 +91,7 @@ initializematchrules() {
 	setdynamicdvar("scr_tdef_armorMod",getmatchrulesdata("ballCommonData","armorMod"));
 	setdynamicdvar("scr_tdef_showEnemyCarrier",getmatchrulesdata("ballCommonData","showEnemyCarrier"));
 	setdynamicdvar("scr_tdef_halftime",0);
-	scripts\mp\_utility::registerhalftimedvar("tdef",0);
+	scripts\mp\utility::registerhalftimedvar("tdef",0);
 	setdynamicdvar("scr_tdef_promode",0);
 }
 
@@ -108,20 +108,20 @@ onstartgametype() {
 		game["defenders"] = var_00;
 	}
 
-	scripts\mp\_utility::setobjectivetext("allies",&"OBJECTIVES_TDEF");
-	scripts\mp\_utility::setobjectivetext("axis",&"OBJECTIVES_TDEF");
+	scripts\mp\utility::setobjectivetext("allies",&"OBJECTIVES_TDEF");
+	scripts\mp\utility::setobjectivetext("axis",&"OBJECTIVES_TDEF");
 	if(level.splitscreen) {
-		scripts\mp\_utility::setobjectivescoretext("allies",&"OBJECTIVES_TDEF");
-		scripts\mp\_utility::setobjectivescoretext("axis",&"OBJECTIVES_TDEF");
+		scripts\mp\utility::setobjectivescoretext("allies",&"OBJECTIVES_TDEF");
+		scripts\mp\utility::setobjectivescoretext("axis",&"OBJECTIVES_TDEF");
 	}
 	else
 	{
-		scripts\mp\_utility::setobjectivescoretext("allies",&"OBJECTIVES_TDEF_SCORE");
-		scripts\mp\_utility::setobjectivescoretext("axis",&"OBJECTIVES_TDEF_SCORE");
+		scripts\mp\utility::setobjectivescoretext("allies",&"OBJECTIVES_TDEF_SCORE");
+		scripts\mp\utility::setobjectivescoretext("axis",&"OBJECTIVES_TDEF_SCORE");
 	}
 
-	scripts\mp\_utility::setobjectivehinttext("allies",&"OBJECTIVES_TDEF_ATTACKER_HINT");
-	scripts\mp\_utility::setobjectivehinttext("axis",&"OBJECTIVES_TDEF_ATTACKER_HINT");
+	scripts\mp\utility::setobjectivehinttext("allies",&"OBJECTIVES_TDEF_ATTACKER_HINT");
+	scripts\mp\utility::setobjectivehinttext("axis",&"OBJECTIVES_TDEF_ATTACKER_HINT");
 	createfx();
 	scripts\mp\gametypes\obj_ball::ball_default_origins();
 	scripts\mp\gametypes\obj_ball::ball_init_map_min_max();
@@ -133,7 +133,7 @@ onstartgametype() {
 	var_02[0] = level.gametype;
 	var_02[1] = "tdm";
 	var_02[2] = "ball";
-	scripts\mp\_gameobjects::main(var_02);
+	scripts\mp\gameobjects::main(var_02);
 	tdef();
 	if(level.possessionresetcondition != 0) {
 		scripts\mp\gametypes\obj_ball::initballtimer();
@@ -142,34 +142,34 @@ onstartgametype() {
 
 updategametypedvars() {
 	scripts\mp\gametypes\common::updategametypedvars();
-	level.scoringtime = scripts\mp\_utility::dvarfloatvalue("scoringTime",1,1,10);
-	level.scorepertick = scripts\mp\_utility::dvarintvalue("scorePerTick",1,1,25);
-	level.carrierbonustime = scripts\mp\_utility::dvarfloatvalue("carrierBonusTime",4,0,10);
-	level.carrierbonusscore = scripts\mp\_utility::dvarintvalue("carrierBonusScore",25,0,250);
-	level.delayplayer = scripts\mp\_utility::dvarintvalue("delayPlayer",1,0,1);
-	level.spawndelay = scripts\mp\_utility::dvarfloatvalue("spawnDelay",2.5,0,30);
-	level.ballactivationdelay = scripts\mp\_utility::dvarfloatvalue("ballActivationDelay",10,0,30);
-	level.possessionresetcondition = scripts\mp\_utility::dvarintvalue("possessionResetCondition",0,0,2);
-	level.possessionresettime = scripts\mp\_utility::dvarfloatvalue("possessionResetTime",0,0,150);
-	level.explodeonexpire = scripts\mp\_utility::dvarintvalue("explodeOnExpire",0,0,1);
-	level.idleresettime = scripts\mp\_utility::dvarfloatvalue("idleResetTime",15,0,60);
-	level.armormod = scripts\mp\_utility::dvarfloatvalue("armorMod",1,0,2);
-	level.showenemycarrier = scripts\mp\_utility::dvarintvalue("showEnemyCarrier",5,0,6);
+	level.scoringtime = scripts\mp\utility::dvarfloatvalue("scoringTime",1,1,10);
+	level.scorepertick = scripts\mp\utility::dvarintvalue("scorePerTick",1,1,25);
+	level.carrierbonustime = scripts\mp\utility::dvarfloatvalue("carrierBonusTime",4,0,10);
+	level.carrierbonusscore = scripts\mp\utility::dvarintvalue("carrierBonusScore",25,0,250);
+	level.delayplayer = scripts\mp\utility::dvarintvalue("delayPlayer",1,0,1);
+	level.spawndelay = scripts\mp\utility::dvarfloatvalue("spawnDelay",2.5,0,30);
+	level.ballactivationdelay = scripts\mp\utility::dvarfloatvalue("ballActivationDelay",10,0,30);
+	level.possessionresetcondition = scripts\mp\utility::dvarintvalue("possessionResetCondition",0,0,2);
+	level.possessionresettime = scripts\mp\utility::dvarfloatvalue("possessionResetTime",0,0,150);
+	level.explodeonexpire = scripts\mp\utility::dvarintvalue("explodeOnExpire",0,0,1);
+	level.idleresettime = scripts\mp\utility::dvarfloatvalue("idleResetTime",15,0,60);
+	level.armormod = scripts\mp\utility::dvarfloatvalue("armorMod",1,0,2);
+	level.showenemycarrier = scripts\mp\utility::dvarintvalue("showEnemyCarrier",5,0,6);
 	level.carrierarmor = int(level.carrierarmor * level.armormod);
 }
 
 initspawns() {
 	level.spawnmins = (0,0,0);
 	level.spawnmaxs = (0,0,0);
-	scripts\mp\_spawnlogic::setactivespawnlogic("TDef");
-	scripts\mp\_spawnlogic::addstartspawnpoints("mp_ball_spawn_allies_start");
-	scripts\mp\_spawnlogic::addstartspawnpoints("mp_ball_spawn_axis_start");
-	scripts\mp\_spawnlogic::addspawnpoints("allies","mp_tdm_spawn");
-	scripts\mp\_spawnlogic::addspawnpoints("allies","mp_tdm_spawn_secondary",1,1);
-	scripts\mp\_spawnlogic::addspawnpoints("axis","mp_tdm_spawn");
-	scripts\mp\_spawnlogic::addspawnpoints("axis","mp_tdm_spawn_secondary",1,1);
-	level.mapcenter = scripts\mp\_spawnlogic::findboxcenter(level.spawnmins,level.spawnmaxs);
-	function_01B4(level.mapcenter);
+	scripts\mp\spawnlogic::setactivespawnlogic("TDef");
+	scripts\mp\spawnlogic::addstartspawnpoints("mp_ball_spawn_allies_start");
+	scripts\mp\spawnlogic::addstartspawnpoints("mp_ball_spawn_axis_start");
+	scripts\mp\spawnlogic::addspawnpoints("allies","mp_tdm_spawn");
+	scripts\mp\spawnlogic::addspawnpoints("allies","mp_tdm_spawn_secondary",1,1);
+	scripts\mp\spawnlogic::addspawnpoints("axis","mp_tdm_spawn");
+	scripts\mp\spawnlogic::addspawnpoints("axis","mp_tdm_spawn_secondary",1,1);
+	level.mapcenter = scripts\mp\spawnlogic::findboxcenter(level.spawnmins,level.spawnmaxs);
+	setmapcenter(level.mapcenter);
 	foreach(var_01 in level.spawnpoints) {
 		calculatespawndisttoballstart(var_01);
 	}
@@ -177,7 +177,7 @@ initspawns() {
 
 calculatespawndisttoballstart(param_00) {
 	param_00.distsqtoballstart = undefined;
-	var_01 = function_00C0(param_00.origin,level.ball_starts[0].ground_origin,1000);
+	var_01 = getpathdist(param_00.origin,level.ball_starts[0].ground_origin,1000);
 	if(var_01 < 0) {
 		var_01 = scripts\engine\utility::distance_2d_squared(param_00.origin,level.ball_starts[0].ground_origin);
 	}
@@ -192,12 +192,12 @@ calculatespawndisttoballstart(param_00) {
 getspawnpoint() {
 	var_00 = self.pers["team"];
 	if(game["switchedsides"]) {
-		var_00 = scripts\mp\_utility::getotherteam(var_00);
+		var_00 = scripts\mp\utility::getotherteam(var_00);
 	}
 
-	if(scripts\mp\_spawnlogic::shoulduseteamstartspawn()) {
-		var_01 = scripts\mp\_spawnlogic::getspawnpointarray("mp_ball_spawn_" + var_00 + "_start");
-		var_02 = scripts\mp\_spawnlogic::getspawnpoint_startspawn(var_01);
+	if(scripts\mp\spawnlogic::shoulduseteamstartspawn()) {
+		var_01 = scripts\mp\spawnlogic::getspawnpointarray("mp_ball_spawn_" + var_00 + "_start");
+		var_02 = scripts\mp\spawnlogic::getspawnpoint_startspawn(var_01);
 	}
 	else
 	{
@@ -214,19 +214,19 @@ getspawnpoint() {
 		}
 
 		var_04["avoidBallDeadZoneDistSq"] = 1000000;
-		var_02 = scripts\mp\_spawnscoring::getspawnpoint(var_01,var_03,var_04);
+		var_02 = scripts\mp\spawnscoring::getspawnpoint(var_01,var_03,var_04);
 	}
 
 	return var_02;
 }
 
 createfx() {
-	level._effect["ball_trail"] = loadfx("vfx/core/mp/core/vfx_uplink_ball_trail.vfx");
-	level._effect["ball_idle"] = loadfx("vfx/core/mp/core/vfx_uplink_ball_idle_tdef.vfx");
-	level._effect["ball_download"] = loadfx("vfx/core/mp/core/vfx_uplink_ball_download.vfx");
-	level._effect["ball_download_end"] = loadfx("vfx/core/mp/core/vfx_uplink_ball_download_end_tdef.vfx");
-	level._effect["ball_teleport"] = loadfx("vfx/core/mp/core/vfx_uplink_ball_teleport.vfx");
-	level._effect["ball_base_glow"] = loadfx("vfx/core/mp/core/vfx_uplink_base_glow.vfx");
+	level._effect["ball_trail"] = loadfx("vfx\core\mp\core\vfx_uplink_ball_trail.vfx");
+	level._effect["ball_idle"] = loadfx("vfx\core\mp\core\vfx_uplink_ball_idle_tdef.vfx");
+	level._effect["ball_download"] = loadfx("vfx\core\mp\core\vfx_uplink_ball_download.vfx");
+	level._effect["ball_download_end"] = loadfx("vfx\core\mp\core\vfx_uplink_ball_download_end_tdef.vfx");
+	level._effect["ball_teleport"] = loadfx("vfx\core\mp\core\vfx_uplink_ball_teleport.vfx");
+	level._effect["ball_base_glow"] = loadfx("vfx\core\mp\core\vfx_uplink_base_glow.vfx");
 }
 
 tdef() {
@@ -236,7 +236,7 @@ tdef() {
 	level.iconkill2d = "waypoint_capture_kill_round";
 	level.iconcaptureflag3d = "waypoint_capture_take";
 	level.iconcaptureflag2d = "waypoint_capture_take";
-	scripts\mp\_utility::func_98D3();
+	scripts\mp\utility::func_98D3();
 	level.ball = level.balls[0];
 }
 
@@ -250,13 +250,13 @@ onplayerkilled(param_00,param_01,param_02,param_03,param_04,param_05,param_06,pa
 	}
 
 	if(isdefined(self.carryobject) && isdefined(self.carryobject.passtargetoutlineid) && isdefined(self.carryobject.passtargetent)) {
-		scripts\mp\_utility::outlinedisable(self.carryobject.passtargetoutlineid,self.carryobject.passtargetent);
+		scripts\mp\utility::outlinedisable(self.carryobject.passtargetoutlineid,self.carryobject.passtargetent);
 		self.carryobject.passtargetoutlineid = undefined;
 		self.carryobject.passtargetent = undefined;
 	}
 
 	if(isdefined(self.carryobject) && isdefined(self.carryobject.playeroutlineid) && isdefined(self.carryobject.playeroutlined)) {
-		scripts\mp\_utility::outlinedisable(self.carryobject.playeroutlineid,self.carryobject.playeroutlined);
+		scripts\mp\utility::outlinedisable(self.carryobject.playeroutlineid,self.carryobject.playeroutlined);
 		self.carryobject.playeroutlineid = undefined;
 		self.carryobject.playeroutlined = undefined;
 	}
@@ -264,22 +264,22 @@ onplayerkilled(param_00,param_01,param_02,param_03,param_04,param_05,param_06,pa
 	if(isdefined(level.ball.carrier)) {
 		if(isdefined(param_01) && isplayer(param_01) && param_01.pers["team"] != var_0A.pers["team"]) {
 			if(isdefined(param_01.ball_carried) && var_0C) {
-				param_01 thread scripts\mp\_awards::givemidmatchaward("mode_uplink_kill_with_ball");
+				param_01 thread scripts\mp\awards::givemidmatchaward("mode_uplink_kill_with_ball");
 			}
 			else if(isdefined(var_0A.ball_carried)) {
-				param_01 thread scripts\mp\_awards::givemidmatchaward("mode_uplink_kill_carrier");
-				thread scripts\mp\_matchdata::loginitialstats(param_09,"carrying");
+				param_01 thread scripts\mp\awards::givemidmatchaward("mode_uplink_kill_carrier");
+				thread scripts\mp\matchdata::loginitialstats(param_09,"carrying");
 				scripts\mp\gametypes\obj_ball::updatetimers("neutral",1,0);
 			}
 
 			if(param_01.pers["team"] == level.ball.ownerteam && param_01 != level.ball.carrier) {
 				var_0D = distancesquared(level.ball.carrier.origin,var_0B);
 				if(var_0D < 90000) {
-					param_01 thread scripts\mp\_awards::givemidmatchaward("mode_x_defend");
-					param_01 scripts\mp\_utility::incperstat("defends",1);
-					param_01 scripts\mp\_persistence::statsetchild("round","defends",param_01.pers["defends"]);
-					param_01 scripts\mp\_utility::setextrascore1(param_01.pers["defends"]);
-					thread scripts\mp\_matchdata::loginitialstats(param_09,"defending");
+					param_01 thread scripts\mp\awards::givemidmatchaward("mode_x_defend");
+					param_01 scripts\mp\utility::incperstat("defends",1);
+					param_01 scripts\mp\persistence::statsetchild("round","defends",param_01.pers["defends"]);
+					param_01 scripts\mp\utility::setextrascore1(param_01.pers["defends"]);
+					thread scripts\mp\matchdata::loginitialstats(param_09,"defending");
 					return;
 				}
 
@@ -303,13 +303,13 @@ awardcapturepoints(param_00) {
 	var_02 = level.scorepertick;
 	while(!level.gameended) {
 		wait(var_01);
-		scripts\mp\_hostmigration::waittillhostmigrationdone();
+		scripts\mp\hostmigration::waittillhostmigrationdone();
 		if(!level.gameended) {
-			scripts\mp\_gamescore::giveteamscoreforobjective(param_00,var_02,0);
-			level.ball.carrier scripts\mp\_utility::incperstat("objTime",1);
-			level.ball.carrier scripts\mp\_persistence::statsetchild("round","objTime",level.ball.carrier.pers["objTime"]);
-			level.ball.carrier scripts\mp\_utility::setextrascore0(level.ball.carrier.pers["objTime"]);
-			level.ball.carrier scripts\mp\_gamescore::giveplayerscore("tdef_hold_obj",10);
+			scripts\mp\gamescore::giveteamscoreforobjective(param_00,var_02,0);
+			level.ball.carrier scripts\mp\utility::incperstat("objTime",1);
+			level.ball.carrier scripts\mp\persistence::statsetchild("round","objTime",level.ball.carrier.pers["objTime"]);
+			level.ball.carrier scripts\mp\utility::setextrascore0(level.ball.carrier.pers["objTime"]);
+			level.ball.carrier scripts\mp\gamescore::giveplayerscore("tdef_hold_obj",10);
 		}
 	}
 }
@@ -321,7 +321,7 @@ carriergivescore() {
 	level.ball endon("reset");
 	for(;;) {
 		wait(level.carrierbonustime);
-		thread scripts\mp\_utility::giveunifiedpoints("ball_carry",undefined,level.carrierbonusscore);
+		thread scripts\mp\utility::giveunifiedpoints("ball_carry",undefined,level.carrierbonusscore);
 	}
 }
 
@@ -340,14 +340,14 @@ watchforendgame() {
 				var_01 = int(var_01 / 100 / 60);
 			}
 
-			scripts\mp\_utility::incperstat("destructions",var_01);
-			scripts\mp\_persistence::statsetchild("round","destructions",self.pers["destructions"]);
+			scripts\mp\utility::incperstat("destructions",var_01);
+			scripts\mp\persistence::statsetchild("round","destructions",self.pers["destructions"]);
 		}
 	}
 }
 
 getrespawndelay() {
-	var_00 = level.ball scripts\mp\_gameobjects::getownerteam();
+	var_00 = level.ball scripts\mp\gameobjects::getownerteam();
 	if(isdefined(var_00)) {
 		if(self.pers["team"] == var_00) {
 			if(!level.spawndelay) {
@@ -377,23 +377,23 @@ onplayerspawned(param_00) {
 			param_00 setclientomnvar("ui_uplink_timer_hud",0);
 		}
 
-		param_00 scripts\mp\_utility::setextrascore0(0);
+		param_00 scripts\mp\utility::setextrascore0(0);
 		if(isdefined(param_00.pers["objTime"])) {
-			param_00 scripts\mp\_utility::setextrascore0(param_00.pers["objTime"]);
+			param_00 scripts\mp\utility::setextrascore0(param_00.pers["objTime"]);
 		}
 
-		param_00 scripts\mp\_utility::setextrascore1(0);
+		param_00 scripts\mp\utility::setextrascore1(0);
 		if(isdefined(param_00.pers["defends"])) {
-			param_00 scripts\mp\_utility::setextrascore1(param_00.pers["defends"]);
+			param_00 scripts\mp\utility::setextrascore1(param_00.pers["defends"]);
 		}
 	}
 }
 
 getsettdefsuit() {
-	if(scripts\mp\_utility::istrue(self.tdefsuit)) {
-		if(scripts\mp\_utility::_hasperk("specialty_afterburner")) {
-			self goalflag(0,scripts\engine\utility::ter_op(scripts\mp\_utility::isanymlgmatch(),600,2000));
-			self goal_type(0,scripts\engine\utility::ter_op(scripts\mp\_utility::isanymlgmatch(),750,650));
+	if(scripts\mp\utility::istrue(self.tdefsuit)) {
+		if(scripts\mp\utility::_hasperk("specialty_afterburner")) {
+			self goalflag(0,scripts\engine\utility::ter_op(scripts\mp\utility::isanymlgmatch(),600,2000));
+			self goal_type(0,scripts\engine\utility::ter_op(scripts\mp\utility::isanymlgmatch(),750,650));
 		}
 		else
 		{
@@ -405,7 +405,7 @@ getsettdefsuit() {
 		return;
 	}
 
-	if(scripts\mp\_utility::_hasperk("specialty_afterburner")) {
+	if(scripts\mp\utility::_hasperk("specialty_afterburner")) {
 		self goalflag(0,250);
 		self goal_type(0,1350);
 	}

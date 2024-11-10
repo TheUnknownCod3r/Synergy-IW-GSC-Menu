@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2827.gsc
+ * Script: 2827.gsc
 ***************************************/
 
 init_audio() {
@@ -74,7 +74,7 @@ func_D0D0() {
   wait 0.2;
 
   for (;;) {
-  if (scripts/sp/utility::func_65DB("player_has_red_flashing_overlay"))
+  if (scripts\sp\utility::func_65DB("player_has_red_flashing_overlay"))
   self playlocalsound("breathing_heartbeat");
   else
   break;

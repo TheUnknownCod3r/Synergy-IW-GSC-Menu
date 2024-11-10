@@ -1,21 +1,21 @@
-/***************************************
+/*******************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\loot.gsc
-***************************************/
+ * Script: scripts\mp\loot.gsc
+*******************************/
 
 init() {
 	level.lootweaponcache = [];
 	level.lootweaponrefs = [];
 	var_00 = 0;
 	for(;;) {
-		var_01 = tablelookupbyrow("mp/loot/iw7_weapon_loot_master.csv",var_00,0);
+		var_01 = tablelookupbyrow("mp\loot\iw7_weapon_loot_master.csv",var_00,0);
 		if(!isdefined(var_01) || var_01 == "") {
 			break;
 		}
 
 		var_01 = int(var_01);
-		var_02 = tablelookupbyrow("mp/loot/iw7_weapon_loot_master.csv",var_00,1);
+		var_02 = tablelookupbyrow("mp\loot\iw7_weapon_loot_master.csv",var_00,1);
 		level.lootweaponrefs[var_01] = var_02;
 		var_00++;
 	}
@@ -35,7 +35,7 @@ getpassivesforweapon(param_00) {
 }
 
 getlootinfoforweapon(param_00) {
-	var_01 = function_02C4(param_00);
+	var_01 = getweaponvariantindex(param_00);
 	if(!isdefined(var_01)) {
 		return undefined;
 	}
@@ -55,13 +55,13 @@ getlootinfoforweapon(param_00) {
 }
 
 getweaponassetfromrootweapon(param_00,param_01) {
-	var_02 = "mp/loot/weapon/" + param_00 + ".csv";
+	var_02 = "mp\loot\weapon\" + param_00 + ".csv";
 	var_03 = tablelookup(var_02,0,param_01,3);
 	return var_03;
 }
 
 lookupvariantref(param_00,param_01) {
-	var_02 = "mp/loot/weapon/" + param_00 + ".csv";
+	var_02 = "mp\loot\weapon\" + param_00 + ".csv";
 	var_03 = tablelookup(var_02,0,param_01,1);
 	return var_03;
 }
@@ -91,7 +91,7 @@ cachelootweaponweaponinfo(param_00,param_01,param_02) {
 		level.lootweaponcache[param_01] = [];
 	}
 
-	var_03 = function_02C3(param_00);
+	var_03 = getweaponloottable(param_00);
 	var_04 = readweaponinfofromtable(var_03,param_02);
 	level.lootweaponcache[param_01][param_02] = var_04;
 	return var_04;
@@ -120,7 +120,7 @@ getweaponqualitybyid(param_00,param_01) {
 		return 0;
 	}
 
-	var_02 = function_02C3(param_00);
+	var_02 = getweaponloottable(param_00);
 	var_03 = int(tablelookup(var_02,0,param_01,4));
 	return var_03;
 }

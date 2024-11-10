@@ -1,8 +1,8 @@
-/*********************************************************
+/*************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\aitypes\ratking\behaviors.gsc
-*********************************************************/
+ * Script: scripts\aitypes\ratking\behaviors.gsc
+*************************************************/
 
 init(param_00) {
 	setupbehaviorstates();
@@ -75,12 +75,12 @@ pickbetterenemy(param_00,param_01) {
 }
 
 updateenemy() {
-	if(scripts\common\utility::istrue(self.outofplayspace)) {
+	if(scripts\engine\utility::istrue(self.outofplayspace)) {
 		self.ratkingenemy = undefined;
 		return undefined;
 	}
 
-	if(scripts\common\utility::istrue(self.battackzombies) && isdefined(self.zombietarget)) {
+	if(scripts\engine\utility::istrue(self.battackzombies) && isdefined(self.zombietarget)) {
 		if(isalive(self.zombietarget) && self.zombietarget.health >= 1) {
 			if(isdefined(self.ratkingenemy) && self.zombietarget == self.ratkingenemy) {
 				return self.ratkingenemy;
@@ -191,7 +191,7 @@ melee_begin(param_00) {
 }
 
 melee_tick(param_00) {
-	if(scripts\common\utility::istrue(self.force_teleport)) {
+	if(scripts\engine\utility::istrue(self.force_teleport)) {
 		self.remove_shield = undefined;
 		self.remove_staff = undefined;
 		return level.failure;
@@ -222,7 +222,7 @@ block_begin(param_00) {
 }
 
 block_tick(param_00) {
-	if(scripts\common\utility::istrue(self.force_teleport)) {
+	if(scripts\engine\utility::istrue(self.force_teleport)) {
 		self.remove_shield = undefined;
 		self.remove_staff = undefined;
 		return level.failure;
@@ -235,7 +235,7 @@ block_tick(param_00) {
 		return level.failure;
 	}
 
-	if(scripts\common\utility::istrue(self.remove_shield)) {
+	if(scripts\engine\utility::istrue(self.remove_shield)) {
 		self.remove_shield = undefined;
 		return level.failure;
 	}
@@ -269,13 +269,13 @@ summon_begin(param_00) {
 }
 
 summon_tick(param_00) {
-	if(scripts\common\utility::istrue(self.force_teleport)) {
+	if(scripts\engine\utility::istrue(self.force_teleport)) {
 		self.remove_shield = undefined;
 		self.remove_staff = undefined;
 		return level.failure;
 	}
 
-	if(scripts\common\utility::istrue(self.remove_staff)) {
+	if(scripts\engine\utility::istrue(self.remove_staff)) {
 		self.remove_staff = undefined;
 		return level.failure;
 	}
@@ -331,13 +331,13 @@ shieldattack_begin(param_00) {
 }
 
 shieldattackspot_tick(param_00) {
-	if(scripts\common\utility::istrue(self.force_teleport)) {
+	if(scripts\engine\utility::istrue(self.force_teleport)) {
 		self.remove_shield = undefined;
 		self.remove_staff = undefined;
 		return level.failure;
 	}
 
-	if(scripts\common\utility::istrue(self.remove_shield)) {
+	if(scripts\engine\utility::istrue(self.remove_shield)) {
 		self.remove_shield = undefined;
 		return level.failure;
 	}
@@ -356,13 +356,13 @@ shieldattackspot_tick(param_00) {
 }
 
 shieldattack_tick(param_00) {
-	if(scripts\common\utility::istrue(self.force_teleport)) {
+	if(scripts\engine\utility::istrue(self.force_teleport)) {
 		self.remove_shield = undefined;
 		self.remove_staff = undefined;
 		return level.failure;
 	}
 
-	if(scripts\common\utility::istrue(self.remove_shield)) {
+	if(scripts\engine\utility::istrue(self.remove_shield)) {
 		self.remove_shield = undefined;
 		return level.failure;
 	}
@@ -405,13 +405,13 @@ staffprojectile_begin(param_00) {
 }
 
 staffprojectile_tick(param_00) {
-	if(scripts\common\utility::istrue(self.force_teleport)) {
+	if(scripts\engine\utility::istrue(self.force_teleport)) {
 		self.remove_shield = undefined;
 		self.remove_staff = undefined;
 		return level.failure;
 	}
 
-	if(scripts\common\utility::istrue(self.remove_staff)) {
+	if(scripts\engine\utility::istrue(self.remove_staff)) {
 		self.remove_staff = undefined;
 		return level.failure;
 	}
@@ -447,13 +447,13 @@ staffstompattack_begin(param_00) {
 }
 
 staffstompattack_tick(param_00) {
-	if(scripts\common\utility::istrue(self.force_teleport)) {
+	if(scripts\engine\utility::istrue(self.force_teleport)) {
 		self.remove_shield = undefined;
 		self.remove_staff = undefined;
 		return level.failure;
 	}
 
-	if(scripts\common\utility::istrue(self.remove_staff)) {
+	if(scripts\engine\utility::istrue(self.remove_staff)) {
 		self.remove_staff = undefined;
 		return level.failure;
 	}
@@ -506,7 +506,7 @@ teleport_end(param_00) {
 	self.nexttraversalteleporttesttime = gettime() + var_01.min_time_between_traversal_teleports;
 	self.brecentlyteleported = 1;
 	self.teleporttospot = undefined;
-	if(scripts\common\utility::istrue(level.rat_king.force_teleport)) {
+	if(scripts\engine\utility::istrue(level.rat_king.force_teleport)) {
 		thread scripts\cp\maps\cp_disco\rat_king_fight::restorerktuning();
 		thread scripts\cp\maps\cp_disco\rat_king_fight::restorerkstagetoggles();
 		level.rat_king.force_teleport = undefined;
@@ -541,7 +541,7 @@ isnearagents(param_00,param_01,param_02) {
 calcsummonspawnpoints(param_00,param_01) {
 	var_02 = scripts\mp\agents\ratking\ratking_tunedata::gettunedata();
 	var_03 = scripts\mp\agents\ratking\ratking_agent::getenemy();
-	if(scripts\common\utility::flag("rk_fight_started")) {
+	if(scripts\engine\utility::flag("rk_fight_started")) {
 		var_04 = getrandomnavpoints(level.rk_center_arena_struct.origin,var_02.summon_max_radius,64,self);
 	}
 	else if(isdefined(var_04)) {
@@ -552,7 +552,7 @@ calcsummonspawnpoints(param_00,param_01) {
 		var_04 = getrandomnavpoints(self.origin,var_03.summon_max_radius,64,self);
 	}
 
-	scripts\common\utility::array_randomize(var_04);
+	scripts\engine\utility::array_randomize(var_04);
 	var_05 = var_02.summon_min_radius * var_02.summon_min_radius;
 	self.spawnpoints = [];
 	foreach(var_07 in var_04) {
@@ -580,13 +580,13 @@ calcsummonspawnpoints(param_00,param_01) {
 			continue;
 		}
 
-		self.spawnpoints[self.var_108FB.size] = var_07;
-		if(self.var_108FB.size >= param_00) {
+		self.spawnpoints[self.spawnpoints.size] = var_07;
+		if(self.spawnpoints.size >= param_00) {
 			break;
 		}
 	}
 
-	if(self.var_108FB.size > 0) {
+	if(self.spawnpoints.size > 0) {
 		return 1;
 	}
 
@@ -603,7 +603,7 @@ trysummon(param_00) {
 		return 0;
 	}
 
-	var_02 = scripts\mp\_mp_agent::getactiveagentsoftype(var_01.summon_agent_type);
+	var_02 = scripts\mp\mp_agent::getactiveagentsoftype(var_01.summon_agent_type);
 	if(var_02.size > var_01.max_num_agents_to_allow_summon) {
 		self.nextsummontime = gettime() + 1000;
 		return 0;
@@ -655,7 +655,7 @@ tryblock() {
 		}
 		else
 		{
-			self.damageaccumulator.accumulateddamage = self.damageaccumulator.accumulateddamage - var_00.need_to_block_damage_threshold \ 2;
+			self.damageaccumulator.accumulateddamage = self.damageaccumulator.accumulateddamage - var_00.need_to_block_damage_threshold / 2;
 		}
 	}
 
@@ -692,7 +692,7 @@ tryshieldattackatpos(param_00) {
 		return 0;
 	}
 
-	var_01 = scripts\common\utility::array_randomize_objects(var_01);
+	var_01 = scripts\engine\utility::array_randomize_objects(var_01);
 	foreach(var_05 in var_01) {
 		var_06 = anglestoforward(self.angles);
 		var_07 = var_05.origin - self.origin;
@@ -708,7 +708,7 @@ tryshieldattackatpos(param_00) {
 		var_0A = [];
 		var_0B = var_05.origin;
 		var_0C = self.origin + (0,0,30);
-		var_0D = function_0288(var_0C,var_0B,10,var_09,var_0A,"physicsquery_closest");
+		var_0D = physics_spherecast(var_0C,var_0B,10,var_09,var_0A,"physicsquery_closest");
 		if(isdefined(var_0D) && var_0D.size > 0) {
 			if(var_0D[0]["fraction"] < 0.95) {
 				continue;
@@ -765,7 +765,7 @@ tryshieldattack(param_00) {
 	var_08 = [];
 	var_09 = var_01 geteye() - (0,0,12);
 	var_0A = self geteye() - (0,0,12);
-	var_0B = function_0288(var_0A,var_09,10,var_07,var_08,"physicsquery_closest");
+	var_0B = physics_spherecast(var_0A,var_09,10,var_07,var_08,"physicsquery_closest");
 	if(isdefined(var_0B) && var_0B.size > 0) {
 		if(var_0B[0]["fraction"] < 0.8) {
 			self.nextshieldattacktime = var_02 + 500;
@@ -909,7 +909,7 @@ tryattackzombies() {
 	}
 
 	var_01 = scripts\cp\maps\cp_disco\rat_king_fight::getbrainattractorzombies();
-	var_02 = scripts\common\utility::array_sort_with_func(var_01,::distancecompare);
+	var_02 = scripts\engine\utility::array_sort_with_func(var_01,::distancecompare);
 	self.zombietarget = undefined;
 	foreach(var_04 in var_02) {
 		if(var_04 == self) {
@@ -959,7 +959,7 @@ tryattackzombies() {
 }
 
 tryteleport(param_00) {
-	if(!scripts\common\utility::istrue(self.force_teleport)) {
+	if(!scripts\engine\utility::istrue(self.force_teleport)) {
 		if(isdefined(self.nextteleporttesttime) && gettime() < self.nextteleporttesttime) {
 			return 0;
 		}
@@ -1026,11 +1026,11 @@ tryteleport(param_00) {
 		}
 	}
 
-	if(scripts\common\utility::istrue(self.bshouldfastteleport)) {
+	if(scripts\engine\utility::istrue(self.bshouldfastteleport)) {
 		var_0D = getdamageaccumulator();
 		if(isdefined(var_0D)) {
 			if(var_01.cfastteleportduetodamagechance > 0 && var_0D.accumulateddamage > 0) {
-				var_0E = var_0D.accumulateddamage \ self.maxhealth;
+				var_0E = var_0D.accumulateddamage / self.maxhealth;
 				if(var_0E >= var_01.cfastteleportdamagepct) {
 					cleardamageaccumulator();
 					var_0F = randomint(100);
@@ -1050,7 +1050,7 @@ tryteleport(param_00) {
 		return 0;
 	}
 
-	if(!scripts\common\utility::flag("rk_fight_started")) {
+	if(!scripts\engine\utility::flag("rk_fight_started")) {
 		self.findteleportposstatus = "invalid";
 	}
 
@@ -1159,7 +1159,7 @@ findteleportpos(param_00,param_01,param_02,param_03,param_04) {
 	var_05 = getvalidteleportpoints();
 	if(!isdefined(var_05)) {
 		var_05 = [];
-		foreach(var_07 in function_00B4("ratking_teleport","targetname")) {
+		foreach(var_07 in getnodearray("ratking_teleport","targetname")) {
 			var_05[var_05.size] = var_07.origin;
 		}
 	}
@@ -1194,7 +1194,7 @@ findteleportpos(param_00,param_01,param_02,param_03,param_04) {
 	}
 
 	if(var_0D.size == 0) {
-		if(scripts\common\utility::istrue(self.force_teleport)) {
+		if(scripts\engine\utility::istrue(self.force_teleport)) {
 			var_0D = var_0E;
 		}
 		else if(var_0E.size <= 0) {
@@ -1207,7 +1207,7 @@ findteleportpos(param_00,param_01,param_02,param_03,param_04) {
 		}
 	}
 
-	var_0D = scripts\common\utility::array_randomize_objects(var_0D);
+	var_0D = scripts\engine\utility::array_randomize_objects(var_0D);
 	foreach(var_10 in var_0D) {
 		if(isdefined(level.pam_grier)) {
 			var_11 = distancesquared(var_10,level.pam_grier.origin);
@@ -1225,14 +1225,14 @@ findteleportpos(param_00,param_01,param_02,param_03,param_04) {
 		var_16 = self findpath(var_0C,var_14);
 		if(!var_09) {
 			if(!isdefined(var_16) || var_16.size < 2) {
-				scripts\common\utility::waitframe();
+				scripts\engine\utility::waitframe();
 				continue;
 			}
 
 			opcode::OP_SetNewLocalVariableFieldCached0 = vectornormalize(var_16[1] - var_0C);
 			opcode::OP_EvalSelfFieldVariable = vectordot(opcode::OP_SetNewLocalVariableFieldCached0,var_0B);
 			if(opcode::OP_EvalSelfFieldVariable < 0.707) {
-				scripts\common\utility::waitframe();
+				scripts\engine\utility::waitframe();
 				continue;
 			}
 		}
@@ -1240,7 +1240,7 @@ findteleportpos(param_00,param_01,param_02,param_03,param_04) {
 		opcode::OP_Return = calcpathdist(var_16);
 		opcode::OP_CallBuiltin0 = distance(var_16[0],var_16[var_16.size - 1]);
 		if(opcode::OP_Return > opcode::OP_CallBuiltin0 * 3) {
-			scripts\common\utility::waitframe();
+			scripts\engine\utility::waitframe();
 			continue;
 		}
 
@@ -1256,7 +1256,7 @@ findteleportpos(param_00,param_01,param_02,param_03,param_04) {
 getvalidteleportpoints() {
 	var_00 = undefined;
 	var_01 = rk_isonplatform();
-	var_02 = scripts\common\utility::istrue(self.shouldbeonplatform);
+	var_02 = scripts\engine\utility::istrue(self.shouldbeonplatform);
 	if(var_02) {
 		self.teleporttospot = 1;
 		var_00 = level.ratkingplatformteleportpoints;
@@ -1292,7 +1292,7 @@ calcpathdist(param_00) {
 
 is_near_any_targets(param_00) {
 	if(isdefined(level.active_eye_targets)) {
-		var_01 = scripts\common\utility::array_combine(level.players,level.active_eye_targets);
+		var_01 = scripts\engine\utility::array_combine(level.players,level.active_eye_targets);
 	}
 	else
 	{
@@ -1306,7 +1306,7 @@ is_near_any_targets(param_00) {
 				continue;
 			}
 
-			if(var_04.ignoreme || isdefined(var_04.triggerportableradarping) && var_04.var_222.ignoreme) {
+			if(var_04.ignoreme || isdefined(var_04.triggerportableradarping) && var_04.triggerportableradarping.ignoreme) {
 				continue;
 			}
 
@@ -1330,7 +1330,7 @@ is_near_any_player(param_00) {
 			continue;
 		}
 
-		if(var_03.ignoreme || isdefined(var_03.triggerportableradarping) && var_03.var_222.ignoreme) {
+		if(var_03.ignoreme || isdefined(var_03.triggerportableradarping) && var_03.triggerportableradarping.ignoreme) {
 			continue;
 		}
 
@@ -1367,7 +1367,7 @@ findteleportposinfrontofenemy() {
 	var_08 = var_00.origin + var_06 * var_01.max_teleport_dist_to_player;
 	var_09 = 0;
 	var_0A = getrandomnavpoints(var_08,var_01.max_teleport_dist_to_player,64,self);
-	scripts\common\utility::array_randomize(var_0A);
+	scripts\engine\utility::array_randomize(var_0A);
 	foreach(var_0C in var_0A) {
 		if(distance(self.origin,var_0C) < var_01.min_travel_dist_for_teleport) {
 			continue;
@@ -1468,19 +1468,19 @@ shouldtryteleport() {
 }
 
 tryforcedteleport() {
-	if(!scripts\common\utility::istrue(self.force_teleport)) {
+	if(!scripts\engine\utility::istrue(self.force_teleport)) {
 		return 0;
 	}
 
 	var_00 = getvalidteleportpoints();
-	var_01 = scripts\common\utility::array_randomize_objects(var_00);
+	var_01 = scripts\engine\utility::array_randomize_objects(var_00);
 	self.teleportpos = var_01[0];
 	self.desiredaction = "teleport";
 	return 1;
 }
 
 shouldtrytraversalteleport() {
-	if(scripts\common\utility::flag_exist("rk_fight_started") && scripts\common\utility::flag("rk_fight_started")) {
+	if(scripts\engine\utility::flag_exist("rk_fight_started") && scripts\engine\utility::flag("rk_fight_started")) {
 		return 0;
 	}
 
@@ -1733,7 +1733,7 @@ followenemy_end(param_00) {
 }
 
 rk_isonplatform() {
-	if(scripts\common\utility::istrue(self.isonplatform)) {
+	if(scripts\engine\utility::istrue(self.isonplatform)) {
 		return 1;
 	}
 
@@ -1745,7 +1745,7 @@ rk_setonplatform(param_00) {
 }
 
 rk_shouldbeonplatform() {
-	if(scripts\common\utility::istrue(self.shouldbeonplatform)) {
+	if(scripts\engine\utility::istrue(self.shouldbeonplatform)) {
 		return 1;
 	}
 
@@ -1757,7 +1757,7 @@ getrkstage() {
 }
 
 bt_rk_isonplatform(param_00) {
-	if(scripts\common\utility::istrue(self.isonplatform)) {
+	if(scripts\engine\utility::istrue(self.isonplatform)) {
 		return level.success;
 	}
 
@@ -1765,7 +1765,7 @@ bt_rk_isonplatform(param_00) {
 }
 
 setplatformstate() {
-	if(scripts\common\utility::istrue(self.teleporttospot)) {
+	if(scripts\engine\utility::istrue(self.teleporttospot)) {
 		rk_setonplatform(1);
 		self notify("teleport_to_platform");
 		return;
@@ -1897,11 +1897,11 @@ shouldignoreenemy(param_00) {
 		return 1;
 	}
 
-	if(param_00.ignoreme || isdefined(param_00.triggerportableradarping) && param_00.var_222.ignoreme) {
+	if(param_00.ignoreme || isdefined(param_00.triggerportableradarping) && param_00.triggerportableradarping.ignoreme) {
 		return 1;
 	}
 
-	if(scripts\common\utility::istrue(param_00.isfasttravelling)) {
+	if(scripts\engine\utility::istrue(param_00.isfasttravelling)) {
 		return 1;
 	}
 

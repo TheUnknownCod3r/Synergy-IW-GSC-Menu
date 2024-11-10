@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\2913.gsc
-****************************/
+ * Script: 2913.gsc
+************************/
 
 func_95A4() {
 	level.var_D1D4 = [];

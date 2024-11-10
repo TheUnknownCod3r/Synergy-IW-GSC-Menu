@@ -1,15 +1,15 @@
-/*****************************************************
+/*********************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\crafted_trap_mower.gsc
-*****************************************************/
+ * Script: scripts\cp\crafted_trap_mower.gsc
+*********************************************/
 
 init() {
-	level._effect["electric_trap_idle"] = loadfx("vfx/iw7/_requests/coop/generator_idle.vfx");
-	level._effect["electric_trap_attack"] = loadfx("vfx/iw7/core/zombie/vfx_electrap_shock_beam.vfx");
-	level._effect["electric_trap_shock"] = loadfx("vfx/iw7/core/zombie/traps/electric_trap/vfx_zmb_hit_shock.vfx");
-	level._effect["mower_spray"] = loadfx("vfx/iw7/core/zombie/rave/mower_spray.vfx");
-	level._effect["mower_blade"] = loadfx("vfx/iw7/core/zombie/rave/mower_blade.vfx");
+	level._effect["electric_trap_idle"] = loadfx("vfx\iw7\_requests\coop\generator_idle.vfx");
+	level._effect["electric_trap_attack"] = loadfx("vfx\iw7\core\zombie\vfx_electrap_shock_beam.vfx");
+	level._effect["electric_trap_shock"] = loadfx("vfx\iw7\core\zombie\traps\electric_trap\vfx_zmb_hit_shock.vfx");
+	level._effect["mower_spray"] = loadfx("vfx\iw7\core\zombie\rave\mower_spray.vfx");
+	level._effect["mower_blade"] = loadfx("vfx\iw7\core\zombie\rave\mower_blade.vfx");
 	var_00 = spawnstruct();
 	var_00.timeout = 90;
 	var_00.modelbase = "cp_rave_equipment_lawnmower_01";

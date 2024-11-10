@@ -1,12 +1,12 @@
-/***********************************************************
+/***************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\equipment\portal_grenade.gsc
-***********************************************************/
+ * Script: scripts\mp\equipment\portal_grenade.gsc
+***************************************************/
 
 init() {
-	level.var_D690 = loadfx("vfx/iw7/_requests/mp/vfx_impulse_grenade_start");
-	level.var_D68D = loadfx("vfx/iw7/_requests/mp/vfx_impulse_gren_exp");
+	level.var_D690 = loadfx("vfx\iw7\_requests\mp\vfx_impulse_grenade_start");
+	level.var_D68D = loadfx("vfx\iw7\_requests\mp\vfx_impulse_gren_exp");
 }
 
 func_D691(param_00) {
@@ -25,7 +25,7 @@ func_D691(param_00) {
 
 func_D68E(param_00,param_01) {
 	self endon("disconnect");
-	if(scripts\mp\_utility::func_9EF0(self) || !isplayer(self)) {
+	if(scripts\mp\utility::func_9EF0(self) || !isplayer(self)) {
 		return;
 	}
 
@@ -53,7 +53,7 @@ func_D68E(param_00,param_01) {
 	self setplayerangles(var_03);
 	self setvelocity(var_07);
 	scripts\engine\utility::allow_doublejump(0);
-	scripts\mp\_utility::_enablecollisionnotifies(1);
+	scripts\mp\utility::_enablecollisionnotifies(1);
 	self setmovespeedscale(0);
 	thread func_13EF3();
 	thread func_13B31();
@@ -79,7 +79,7 @@ func_4E75() {
 	self endon("disconnect");
 	level endon("game_ended");
 	self waittill("death");
-	scripts\mp\_utility::_enablecollisionnotifies(0);
+	scripts\mp\utility::_enablecollisionnotifies(0);
 	scripts\engine\utility::allow_doublejump(1);
 	self.var_115FC = 0;
 	self.var_115FD = undefined;
@@ -96,8 +96,8 @@ func_13B31() {
 	}
 
 	self notify("portalGrenadeSave");
-	scripts\mp\_weapons::updatemovespeedscale();
-	scripts\mp\_utility::_enablecollisionnotifies(0);
+	scripts\mp\weapons::updatemovespeedscale();
+	scripts\mp\utility::_enablecollisionnotifies(0);
 	scripts\engine\utility::allow_doublejump(1);
 	self.var_115FC = 0;
 	self.var_115FD = undefined;
@@ -129,8 +129,8 @@ func_468B(param_00,param_01) {
 
 	var_03 = var_02.origin;
 	earthquake(0.5,1.5,var_03,120);
-	thread scripts\mp\_utility::func_13AF(var_03,64,400,400,self,"MOD_EXPLOSIVE","portal_grenade_mp",0);
-	param_00 thread scripts\mp\_utility::func_13AF(var_03,64,400,400,param_00,"MOD_EXPLOSIVE","portal_grenade_mp",0);
+	thread scripts\mp\utility::func_13AF(var_03,64,400,400,self,"MOD_EXPLOSIVE","portal_grenade_mp",0);
+	param_00 thread scripts\mp\utility::func_13AF(var_03,64,400,400,param_00,"MOD_EXPLOSIVE","portal_grenade_mp",0);
 	wait(0.1);
 	playfx(level._effect["corpse_pop"],var_03 + (0,0,12));
 	if(isdefined(var_02)) {
@@ -171,13 +171,13 @@ func_11663(param_00) {
 	self setclientdvar("cg_fovScale",1.7);
 	var_05 moveto(param_00,0.15,0,0);
 	self playanimscriptevent("power_active","teleport");
-	scripts\mp\_utility::adddamagemodifier("teleport",0,0);
+	scripts\mp\utility::adddamagemodifier("teleport",0,0);
 	self motionblurhqenable();
 	self setblurforplayer(3,0);
 	wait(0.15);
 	self setblurforplayer(0,0.25);
 	self motionblurhqdisable();
-	scripts\mp\_utility::removedamagemodifier("teleport",0);
+	scripts\mp\utility::removedamagemodifier("teleport",0);
 	self unlink();
 	self setorigin(param_00,1);
 	self setclientdvar("cg_fovScale",1);

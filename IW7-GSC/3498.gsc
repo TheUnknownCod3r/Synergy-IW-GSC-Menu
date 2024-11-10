@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\3498.gsc
+ * Script: 3498.gsc
 ***************************************/
 
 func_9888() {
@@ -380,10 +380,10 @@ func_A6BA() {
   thread func_A69A(var_02);
   }
 
-  var_06 = int(tablelookup("mp/killstreaktable.csv", 1, var_2.streakname, 4));
+  var_06 = int(tablelookup("mp\killstreaktable.csv", 1, var_2.streakname, 4));
 
   if (var_06 >= 1000) {
-  var_07 = tablelookup("mp/killstreaktable.csv", 1, var_2.streakname, 0);
+  var_07 = tablelookup("mp\killstreaktable.csv", 1, var_2.streakname, 0);
 
   if (var_07 != "") {
   var_08 = int(var_07);
@@ -710,7 +710,7 @@ func_C5A9(var_00) {
   func_F1CB();
   } else {}
 
-  thread scripts/mp/killstreak_loot::func_89BC(var_00);
+  thread scripts\mp\killstreak_loot::func_89BC(var_00);
   thread scripts\mp\missions::func_13079(var_01);
   scripts\mp\utility\game::printgameaction("killstreak started - " + var_01, self);
   self notify("killstreak_used", var_01);
@@ -769,7 +769,7 @@ func_26D5(var_00, var_01) {
   var_0.isgimme = 1;
 
   if (isdefined(var_01) && var_1.size > 0)
-  scripts/mp/killstreak_loot::func_988A(var_00, var_01);
+  scripts\mp\killstreak_loot::func_988A(var_00, var_01);
 
   func_1030D(var_00, 0);
   func_F837(0);
@@ -785,7 +785,7 @@ func_6693(var_00, var_01, var_02, var_03) {
   var_4.func_FFC4 = 1;
 
   if (isdefined(var_02) && var_2.size > 0)
-  scripts/mp/killstreak_loot::func_988A(var_04, var_02);
+  scripts\mp\killstreak_loot::func_988A(var_04, var_02);
 
   func_1030D(var_04, var_01);
 }
@@ -906,7 +906,7 @@ func_5FBF(var_00, var_01) {
 
   if (!level.gameended) {
   var_04 = var_03;
-  var_05 = scripts/mp/killstreak_loot::getrarityforlootitem(var_2.variantid);
+  var_05 = scripts\mp\killstreak_loot::getrarityforlootitem(var_2.variantid);
 
   if (var_05 != "")
   var_04 = var_04 + "_" + var_05;
@@ -961,7 +961,7 @@ getstreakcost(var_00) {
   var_01 = int(scripts\mp\utility\game::func_7F46(var_00));
 
   if (isdefined(self) && isplayer(self)) {
-  var_01 = scripts/mp/killstreak_loot::modifycostforlootitem(self.streakvariantids[var_00], var_01);
+  var_01 = scripts\mp\killstreak_loot::modifycostforlootitem(self.streakvariantids[var_00], var_01);
 
   if (scripts\mp\utility\game::isspecialistkillstreak(var_00)) {
   if (isdefined(self.pers["gamemodeLoadout"])) {

@@ -1,8 +1,8 @@
-/***********************************************************
+/***************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\aitypes\crab_mini\behaviors.gsc
-***********************************************************/
+ * Script: scripts\aitypes\crab_mini\behaviors.gsc
+***************************************************/
 
 initbehaviors(param_00) {
 	setupbehaviorstates();
@@ -44,7 +44,7 @@ shouldignoreenemy(param_00) {
 		return 1;
 	}
 
-	if(param_00.ignoreme || isdefined(param_00.triggerportableradarping) && param_00.var_222.ignoreme) {
+	if(param_00.ignoreme || isdefined(param_00.triggerportableradarping) && param_00.triggerportableradarping.ignoreme) {
 		return 1;
 	}
 
@@ -68,7 +68,7 @@ updateenemy() {
 			continue;
 		}
 
-		if(scripts\common\utility::istrue(var_02.isfasttravelling)) {
+		if(scripts\engine\utility::istrue(var_02.isfasttravelling)) {
 			continue;
 		}
 
@@ -124,7 +124,7 @@ stuck_stopbeingstuck(param_00,param_01) {
 }
 
 facepoint(param_00,param_01) {
-	var_02 = scripts\common\utility::getyawtospot(param_01);
+	var_02 = scripts\engine\utility::getyawtospot(param_01);
 	if(abs(var_02) < 22.5) {
 		return;
 	}
@@ -152,7 +152,7 @@ stuck_decideturn(param_00,param_01) {
 		return 0;
 	}
 
-	var_05 = scripts\common\utility::getyawtospot(var_02.origin);
+	var_05 = scripts\engine\utility::getyawtospot(var_02.origin);
 	if(abs(var_05) < 45) {
 		return 0;
 	}

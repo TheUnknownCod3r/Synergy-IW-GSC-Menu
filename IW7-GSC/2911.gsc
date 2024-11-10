@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\2911.gsc
-****************************/
+ * Script: 2911.gsc
+************************/
 
 func_96D7() {
 	func_965A();
@@ -11,12 +11,12 @@ func_96D7() {
 	precachemodel("vm_hero_protagonist_helmet");
 	precachemodel("hero_jackal_helmet_a");
 	func_F5FF();
-	scripts/sp/thermal::func_977D();
+	scripts\sp\thermal::func_977D();
 	scripts\sp\_gameskill::func_95F9();
 	scripts\sp\_gameskill::func_D3A6();
-	scripts/sp/footsteps::func_4FF0();
+	scripts\sp\footsteps::func_4FF0();
 	lib_0B60::func_96DC();
-	scripts/sp/slowmo_init::func_1032A();
+	scripts\sp\slowmo_init::func_1032A();
 	setsaveddvar("cg_useplayerbreathsys",1);
 	foreach(var_01 in level.players) {
 		var_01.maxhealth = level.player.health;

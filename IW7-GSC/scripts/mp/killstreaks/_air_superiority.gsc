@@ -1,8 +1,8 @@
-/***************************************************************
+/*******************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\killstreaks\_air_superiority.gsc
-***************************************************************/
+ * Script: scripts\mp\killstreaks\_air_superiority.gsc
+*******************************************************/
 
 init() {
 	var_00 = spawnstruct();
@@ -32,15 +32,15 @@ init() {
 }
 
 onuse(param_00) {
-	var_01 = scripts\mp\_utility::getotherteam(self.team);
+	var_01 = scripts\mp\utility::getotherteam(self.team);
 	if((level.teambased && level.teamairdenied[var_01]) || !level.teambased && isdefined(level.airdeniedplayer) && level.airdeniedplayer == self) {
-		scripts\mp\_hud_message::showerrormessage("KILLSTREAKS_AIR_SPACE_TOO_CROWDED");
+		scripts\mp\hud_message::showerrormessage("KILLSTREAKS_AIR_SPACE_TOO_CROWDED");
 		return 0;
 	}
 
 	thread dostrike(param_00.lifeid,"air_superiority");
-	scripts\mp\_matchdata::logkillstreakevent("air_superiority",self.origin);
-	thread scripts\mp\_utility::teamplayercardsplash("used_air_superiority",self);
+	scripts\mp\matchdata::logkillstreakevent("air_superiority",self.origin);
+	thread scripts\mp\utility::teamplayercardsplash("used_air_superiority",self);
 	return 1;
 }
 
@@ -48,13 +48,13 @@ dostrike(param_00,param_01) {
 	var_02 = level.planeconfigs[param_01];
 	var_03 = scripts\mp\killstreaks\_plane::_meth_8069(var_02.var_5715);
 	wait(1);
-	var_04 = scripts\mp\_utility::getotherteam(self.team);
+	var_04 = scripts\mp\utility::getotherteam(self.team);
 	level.teamairdenied[var_04] = 1;
 	level.airdeniedplayer = self;
 	dooneflyby(param_01,param_00,var_03.targetpos,var_03.var_6F25,var_03.height);
 	self waittill("aa_flyby_complete");
 	wait(2);
-	scripts\mp\_hostmigration::waittillhostmigrationdone();
+	scripts\mp\hostmigration::waittillhostmigrationdone();
 	if(isdefined(self)) {
 		dooneflyby(param_01,param_00,var_03.targetpos,-1 * var_03.var_6F25,var_03.height);
 		self waittill("aa_flyby_complete");
@@ -109,16 +109,16 @@ func_6CAA(param_00,param_01) {
 	var_02.targets = [];
 	var_03 = undefined;
 	if(level.teambased) {
-		var_03 = ::scripts\mp\_utility::func_9FE7;
+		var_03 = ::scripts\mp\utility::func_9FE7;
 	}
 	else
 	{
-		var_03 = ::scripts\mp\_utility::func_9FD8;
+		var_03 = ::scripts\mp\utility::func_9FD8;
 	}
 
 	var_04 = undefined;
 	if(isdefined(param_01)) {
-		var_04 = scripts\mp\_utility::getotherteam(param_01);
+		var_04 = scripts\mp\utility::getotherteam(param_01);
 	}
 
 	func_6CC8(param_00,var_04,var_03,level.heli_pilot,var_02);
@@ -146,10 +146,10 @@ fireattarget(param_00) {
 
 	var_02 = 384 * anglestoforward(self.angles);
 	var_03 = self gettagorigin("tag_missile_1") + var_02;
-	var_04 = scripts\mp\_utility::_magicbullet("aamissile_projectile_mp",var_03,var_03 + var_02,var_01);
+	var_04 = scripts\mp\utility::_magicbullet("aamissile_projectile_mp",var_03,var_03 + var_02,var_01);
 	var_04.vehicle_fired_from = self;
 	var_03 = self gettagorigin("tag_missile_2") + var_02;
-	var_05 = scripts\mp\_utility::_magicbullet("aamissile_projectile_mp",var_03,var_03 + var_02,var_01);
+	var_05 = scripts\mp\utility::_magicbullet("aamissile_projectile_mp",var_03,var_03 + var_02,var_01);
 	var_05.vehicle_fired_from = self;
 	var_06 = [var_04,var_05];
 	param_00 notify("targeted_by_incoming_missile",var_06);

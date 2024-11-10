@@ -1,12 +1,12 @@
-/*******************************************************
+/***********************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\crafted_trap_boombox.gsc
-*******************************************************/
+ * Script: scripts\cp\crafted_trap_boombox.gsc
+***********************************************/
 
 init() {
-	level._effect["boombox_c4light"] = loadfx("vfx/iw7/_requests/coop/vfx_boombox_blink");
-	level._effect["boombox_explode"] = loadfx("vfx/iw7/_requests/coop/vfx_ghetto_blast.vfx");
+	level._effect["boombox_c4light"] = loadfx("vfx\iw7\_requests\coop\vfx_boombox_blink");
+	level._effect["boombox_explode"] = loadfx("vfx\iw7\_requests\coop\vfx_ghetto_blast.vfx");
 	var_00 = spawnstruct();
 	var_00.timeout = 18;
 	var_00.modelbase = "boom_box_c4_wm";

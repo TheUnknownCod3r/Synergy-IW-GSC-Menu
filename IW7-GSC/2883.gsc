@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\2883.gsc
-****************************/
+ * Script: 2883.gsc
+************************/
 
 register_interaction(param_00,param_01) {
 	level.interactions[param_00] = param_01;
@@ -23,7 +23,7 @@ func_7A45(param_00) {
 func_7CA7(param_00) {
 	if(!issubstr(param_00,"casual") && !issubstr(param_00,"alert")) {
 		if(isdefined(self.asm)) {
-			var_01 = scripts/asm/asm::asm_getdemeanor();
+			var_01 = scripts\asm\asm::asm_getdemeanor();
 			if(var_01 == "casual") {
 				param_00 = param_00 + "_" + var_01;
 			}
@@ -84,7 +84,7 @@ func_9C25(param_00) {
 }
 
 func_7837(param_00) {
-	var_01 = scripts/asm/asm::asm_getdemeanor();
+	var_01 = scripts\asm\asm::asm_getdemeanor();
 	if(isdefined(param_00.var_22F2)) {
 		return param_00.var_22F2[var_01];
 	}
@@ -93,7 +93,7 @@ func_7837(param_00) {
 }
 
 func_79A5(param_00) {
-	var_01 = scripts/asm/asm::asm_getdemeanor();
+	var_01 = scripts\asm\asm::asm_getdemeanor();
 	if(isdefined(param_00.var_6980)) {
 		return param_00.var_6980[var_01];
 	}
@@ -102,7 +102,7 @@ func_79A5(param_00) {
 }
 
 func_7A30(param_00) {
-	var_01 = scripts/asm/asm::asm_getdemeanor();
+	var_01 = scripts\asm\asm::asm_getdemeanor();
 	return param_00.var_92FA;
 }
 
@@ -202,7 +202,7 @@ func_CD4B(param_00,param_01,param_02) {
 	}
 
 	if(isdefined(level.var_9A2E)) {
-		scripts/sp/interaction_manager::func_168F();
+		scripts\sp\interaction_manager::func_168F();
 		level.var_9A2E.var_4D94["registered_interactions"][param_00] = [];
 		if(isdefined(var_03.var_EBEA["vo_lines_male"])) {
 			level.var_9A2E.var_4D94["registered_interactions"][param_00]["vo_lines_male"] = var_03.var_EBEA["vo_lines_male"];
@@ -293,7 +293,7 @@ func_CE18(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_0
 	self endon("stop_smart_reaction");
 	setup_interaction_head();
 	var_08 = func_7A45(param_00).var_EBEA["trigger_radius"] * 2;
-	thread scripts/sp/interaction_manager::func_DD45(var_08);
+	thread scripts\sp\interaction_manager::func_DD45(var_08);
 	func_CD51(param_00,param_05,param_01,param_07);
 	self waittill("interaction_done");
 	thread scripts\sp\_utility::func_77B9(0.7);
@@ -327,7 +327,7 @@ func_DB73(param_00,param_01) {
 	}
 
 	self waittill("playing_interaction_scene");
-	scripts\engine\utility::delaythread(param_01,::scripts/sp/interaction_manager::func_CE17,param_00);
+	scripts\engine\utility::delaythread(param_01,::scripts\sp\interaction_manager::func_CE17,param_00);
 }
 
 func_CE1A(param_00,param_01,param_02,param_03,param_04,param_05,param_06) {
@@ -337,13 +337,13 @@ func_CE1A(param_00,param_01,param_02,param_03,param_04,param_05,param_06) {
 	self.var_EF82 = %scripted_talking;
 	self.var_504D = %generic_talker_allies;
 	thread func_CD50(param_00,param_05);
-	scripts/sp/interaction_manager::func_CD24(85,50,param_01,param_03,param_04);
+	scripts\sp\interaction_manager::func_CD24(85,50,param_01,param_03,param_04);
 	self notify("first_acknowledgement_done");
 	func_137F5(param_06);
 	var_07 = func_4906(param_02);
 	for(;;) {
 		var_08 = var_07 func_7A4D();
-		scripts/sp/interaction_manager::func_CD24(85,50,var_08,param_03,param_04);
+		scripts\sp\interaction_manager::func_CD24(85,50,var_08,param_03,param_04);
 		func_137F5(param_06);
 	}
 }
@@ -378,7 +378,7 @@ func_CE1B(param_00,param_01,param_02) {
 	self.var_EF82 = %scripted_talking;
 	self.var_504D = %generic_talker_allies;
 	thread func_CD50(param_00,param_01);
-	scripts/sp/interaction_manager::func_CD24(85,50);
+	scripts\sp\interaction_manager::func_CD24(85,50);
 	self notify("first_acknowledgement_done");
 	func_137F5(param_02);
 	play_looping_acknowlegdements(undefined,param_02);
@@ -388,7 +388,7 @@ func_CE0D(param_00) {
 	self endon("stop_smart_reaction");
 	var_01 = 110;
 	var_02 = 85;
-	scripts/sp/interaction_manager::func_CD24(var_01,var_02,param_00);
+	scripts\sp\interaction_manager::func_CD24(var_01,var_02,param_00);
 }
 
 play_looping_acknowlegdements(param_00,param_01) {
@@ -418,7 +418,7 @@ play_looping_acknowlegdements(param_00,param_01) {
 func_CE0C() {
 	var_00 = 110;
 	var_01 = 85;
-	scripts/sp/interaction_manager::func_CD24(var_00,var_01);
+	scripts\sp\interaction_manager::func_CD24(var_00,var_01);
 }
 
 func_137F5(param_00) {
@@ -480,7 +480,7 @@ func_CE15(param_00,param_01,param_02,param_03) {
 	}
 
 	func_CD35(param_00,param_01);
-	var_07 = scripts/sp/interaction_manager::func_491D(param_00);
+	var_07 = scripts\sp\interaction_manager::func_491D(param_00);
 	var_07 func_137F5(param_03);
 	func_CD38(param_00,param_02,param_03);
 }
@@ -488,7 +488,7 @@ func_CE15(param_00,param_01,param_02,param_03) {
 func_CD35(param_00,param_01) {
 	var_02 = 110;
 	var_03 = 85;
-	scripts/sp/interaction_manager::func_CD37(param_00,var_02,var_03,param_01);
+	scripts\sp\interaction_manager::func_CD37(param_00,var_02,var_03,param_01);
 }
 
 func_CD38(param_00,param_01,param_02) {
@@ -498,7 +498,7 @@ func_CD38(param_00,param_01,param_02) {
 	}
 
 	var_06 = func_48F8(param_01);
-	var_07 = scripts/sp/interaction_manager::func_491D(param_00);
+	var_07 = scripts\sp\interaction_manager::func_491D(param_00);
 	for(;;) {
 		var_08 = func_7A4E(var_06);
 		func_CD35(param_00,var_08);
@@ -546,7 +546,7 @@ func_CD53(param_00,param_01,param_02) {
 	}
 
 	if(isdefined(level.var_9A2E)) {
-		scripts/sp/interaction_manager::func_168F();
+		scripts\sp\interaction_manager::func_168F();
 	}
 
 	if(isdefined(param_01)) {
@@ -608,7 +608,7 @@ func_CD53(param_00,param_01,param_02) {
 	}
 	else
 	{
-		lib_0A1E::func_2307(::func_9A37,::scripts/sp/interaction_manager::func_11048);
+		lib_0A1E::func_2307(::func_9A37,::scripts\sp\interaction_manager::func_11048);
 	}
 
 	self waittill("reaction_end");
@@ -915,7 +915,7 @@ func_9A13() {
 	var_02 = 0.25;
 	var_03 = 0.25;
 	if(isdefined(self.var_B004["common_name"])) {
-		thread scripts/sp/interaction_manager::func_12754();
+		thread scripts\sp\interaction_manager::func_12754();
 	}
 
 	if(!self.var_BE79) {
@@ -931,7 +931,7 @@ func_9A13() {
 		}
 
 		var_05 = abs(angleclamp(var_04 - self.angles[1]) - 360);
-		var_06 = scripts/sp/math::func_C097(0,360,var_05);
+		var_06 = scripts\sp\math::func_C097(0,360,var_05);
 		var_07 = self.var_B004["lastanim"];
 		if(isdefined(self.var_B004["angles"])) {
 			foreach(var_09 in self.var_B004["angles"]) {
@@ -1031,7 +1031,7 @@ func_9A11() {
 				break;
 			}
 
-			if(scripts/sp/interaction_manager::func_3839(self.var_B004["trigger_radius"] * 2)) {
+			if(scripts\sp\interaction_manager::func_3839(self.var_B004["trigger_radius"] * 2)) {
 				if(isdefined(self.var_B004["interaction_position"])) {
 					var_0A = lengthsquared(self.var_B004["interaction_position"] - self.origin);
 				}
@@ -1057,7 +1057,7 @@ func_9A11() {
 		}
 
 		if(isdefined(self.var_B004["common_name"])) {
-			thread scripts/sp/interaction_manager::func_12754();
+			thread scripts\sp\interaction_manager::func_12754();
 		}
 
 		self.var_9C84 = 1;
@@ -1073,7 +1073,7 @@ func_9A11() {
 		}
 
 		var_10 = abs(angleclamp(var_0F - self.angles[1]) - 360);
-		var_11 = scripts/sp/math::func_C097(0,360,var_10);
+		var_11 = scripts\sp\math::func_C097(0,360,var_10);
 		if(isdefined(self.var_B004["backseam"])) {
 			if(var_11 >= 0 && var_11 <= 0.5) {
 				var_11 = var_11 + 0.5;
@@ -1331,7 +1331,7 @@ func_9A11() {
 			}
 
 			var_10 = abs(angleclamp(var_0F - self.angles[1]) - 360);
-			var_11 = scripts/sp/math::func_C097(0,360,var_10);
+			var_11 = scripts\sp\math::func_C097(0,360,var_10);
 			if(self.var_7245) {
 				var_11 = 0;
 			}
@@ -1395,7 +1395,7 @@ func_9A11() {
 					}
 
 					var_10 = abs(angleclamp(var_0F - self.angles[1]) - 360);
-					var_11 = scripts/sp/math::func_C097(0,360,var_10);
+					var_11 = scripts\sp\math::func_C097(0,360,var_10);
 					func_10C47(self.var_B004["follow"]);
 					self _meth_82E8(var_01,self.var_B004["follow"],1,0.25,1);
 					self _meth_82B0(self.var_B004["follow"],0.5);
@@ -1502,7 +1502,7 @@ func_9A35() {
 				break;
 			}
 
-			if(scripts/sp/interaction_manager::func_3839(self.var_B004["trigger_radius"] * 2)) {
+			if(scripts\sp\interaction_manager::func_3839(self.var_B004["trigger_radius"] * 2)) {
 				if(isdefined(self.var_B004["interaction_position"])) {
 					var_07 = lengthsquared(self.var_B004["interaction_position"] - self.origin);
 				}
@@ -1528,7 +1528,7 @@ func_9A35() {
 		}
 
 		if(isdefined(self.var_B004["common_name"])) {
-			thread scripts/sp/interaction_manager::func_12754();
+			thread scripts\sp\interaction_manager::func_12754();
 		}
 
 		self.var_9C84 = 1;
@@ -1575,7 +1575,7 @@ func_9A35() {
 			self.var_9C84 = 1;
 		}
 
-		level thread scripts/sp/interaction_manager::func_9A0E(self);
+		level thread scripts\sp\interaction_manager::func_9A0E(self);
 		if(isdefined(self.var_B004["scene"])) {
 			if(isdefined(self.var_B004["interaction_position"])) {
 				var_0C = vectortoangles(self.var_B004["interaction_position"] - self.origin);
@@ -1810,7 +1810,7 @@ func_9A37() {
 		var_0C = undefined;
 		for(;;) {
 			if(!isdefined(self.var_DD49) || isdefined(self.var_DD49) && self.var_DD49 != "busy" && self.var_DD49 != "nag") {
-				if(scripts/sp/interaction_manager::func_3839(var_01["trigger_radius"] * 2)) {
+				if(scripts\sp\interaction_manager::func_3839(var_01["trigger_radius"] * 2)) {
 					if(isdefined(var_01["interaction_position"])) {
 						var_09 = lengthsquared(var_01["interaction_position"] - self.origin);
 					}
@@ -1869,7 +1869,7 @@ func_9A37() {
 		func_10C47(var_15);
 		self give_left_powers(var_03,var_15,1,var_05,1);
 		self.var_9C84 = 1;
-		thread scripts/sp/interaction_manager::func_9A39();
+		thread scripts\sp\interaction_manager::func_9A39();
 		wait(getanimlength(var_15));
 		level.var_10E1C[self.var_9A30].var_EBEA["angle_" + var_10 + "_spent"] = scripts\engine\utility::array_add(level.var_10E1C[self.var_9A30].var_EBEA["angle_" + var_10 + "_spent"],var_15);
 		level.var_10E1C[self.var_9A30].var_EBEA[var_10] = scripts\engine\utility::array_remove(level.var_10E1C[self.var_9A30].var_EBEA[var_10],var_15);
@@ -1912,7 +1912,7 @@ func_9A37() {
 		}
 
 		level notify("interaction_done");
-		thread scripts/sp/interaction_manager::func_F566("busy");
+		thread scripts\sp\interaction_manager::func_F566("busy");
 		scripts\engine\utility::waitframe();
 		level waittill("forever");
 	}
@@ -1935,7 +1935,7 @@ func_9A36() {
 		self notify("playing_interaction_scene");
 		level notify("playing_interaction");
 		if(isdefined(self.var_B004["common_name"])) {
-			thread scripts/sp/interaction_manager::func_12754();
+			thread scripts\sp\interaction_manager::func_12754();
 		}
 
 		func_CCA9();
@@ -2006,7 +2006,7 @@ func_2B88() {
 	var_02 = scripts\common\trace::create_contents(1,1,0,1,1,1);
 	var_03 = undefined;
 	for(;;) {
-		var_04 = scripts/sp/interaction_manager::func_3839(self.var_B004["trigger_radius"] * 2);
+		var_04 = scripts\sp\interaction_manager::func_3839(self.var_B004["trigger_radius"] * 2);
 		if(var_04) {
 			if(isdefined(self.var_B004["interaction_position"])) {
 				var_00 = lengthsquared(self.var_B004["interaction_position"] - self.origin);
@@ -2059,13 +2059,13 @@ func_CCA9() {
 		}
 
 		if(var_0E) {
-			var_01 = scripts/sp/math::func_AB6F(var_01,var_0D,0.1);
-			var_00 = scripts/sp/math::func_AB6F(var_00,0.005,0.1);
+			var_01 = scripts\sp\math::func_AB6F(var_01,var_0D,0.1);
+			var_00 = scripts\sp\math::func_AB6F(var_00,0.005,0.1);
 		}
 		else
 		{
-			var_01 = scripts/sp/math::func_AB6F(var_01,0.005,0.1);
-			var_00 = scripts/sp/math::func_AB6F(var_00,var_0D,0.1);
+			var_01 = scripts\sp\math::func_AB6F(var_01,0.005,0.1);
+			var_00 = scripts\sp\math::func_AB6F(var_00,var_0D,0.1);
 		}
 
 		self _meth_82AC(self.var_B004["back_right_anim"],var_01,0.2);
@@ -2082,7 +2082,7 @@ func_9842() {
 	var_00 = undefined;
 	var_00 = vectortoangles(level.player.origin - self.origin);
 	self.var_9C84 = 1;
-	level thread scripts/sp/interaction_manager::func_9A0E(self);
+	level thread scripts\sp\interaction_manager::func_9A0E(self);
 	self _meth_82AC(self.var_B004["interaction_blend_parent"],1,0.2);
 	var_01 = func_7A4C();
 	self aiclearanim(var_01,0.2);
@@ -2342,7 +2342,7 @@ func_CDB1(param_00) {
 	}
 
 	self notify("reaction_vo_fired");
-	scripts/sp/interaction_manager::func_CE17(param_00);
+	scripts\sp\interaction_manager::func_CE17(param_00);
 }
 
 func_CC88() {
@@ -2834,16 +2834,16 @@ func_9A0F() {
 		func_9A3B("stop");
 	}
 
-	scripts/sp/interaction_manager::func_DFB5();
+	scripts\sp\interaction_manager::func_DFB5();
 	self notify("reaction_end");
-	thread scripts/sp/interaction_manager::func_10FF9();
+	thread scripts\sp\interaction_manager::func_10FF9();
 	self notify("stop_smart_reaction");
 	self.var_9CE2 = undefined;
 }
 
 func_9A10() {
 	self waittill("reaction_end");
-	scripts/sp/interaction_manager::func_DFB5();
+	scripts\sp\interaction_manager::func_DFB5();
 	self notify("interaction_done");
 	self notify("stop_reaction");
 	self.var_9CE2 = undefined;
@@ -2971,7 +2971,7 @@ func_43DA(param_00,param_01) {
 	self endon("death");
 	self endon("interaction_done");
 	var_02 = func_7A45(param_00);
-	thread scripts/sp/anim::func_10CBF(self,"vo");
+	thread scripts\sp\anim::func_10CBF(self,"vo");
 	thread func_1368();
 	if(!isdefined(var_02)) {
 		return;
@@ -3121,6 +3121,6 @@ func_10C47(param_00) {
 		var_01 = self.var_9A30;
 	}
 
-	thread scripts/sp/anim::func_10CBF(self,"single anim",var_01,undefined,param_00);
-	thread scripts/sp/anim::func_1FCA(self,"single anim",var_01);
+	thread scripts\sp\anim::func_10CBF(self,"single anim",var_01,undefined,param_00);
+	thread scripts\sp\anim::func_1FCA(self,"single anim",var_01);
 }

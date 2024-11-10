@@ -1,12 +1,12 @@
-/********************************************
+/************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\matchdata.gsc
-********************************************/
+ * Script: scripts\mp\matchdata.gsc
+************************************/
 
 init() {
 	if(!isdefined(game["gamestarted"])) {
-		setmatchdatadef("mp/matchdata.ddl");
+		setmatchdatadef("mp\matchdata.ddl");
 		setmatchdata("commonMatchData","map",level.script);
 		if(level.hardcoremode) {
 			var_00 = level.gametype + " hc";
@@ -17,8 +17,8 @@ init() {
 			setmatchdata("commonMatchData","gametype",level.gametype);
 		}
 
-		setmatchdata("commonMatchData","buildVersion",function_007F());
-		setmatchdata("commonMatchData","buildNumber",function_007E());
+		setmatchdata("commonMatchData","buildVersion",getbuildversion());
+		setmatchdata("commonMatchData","buildNumber",getbuildnumber());
 		setmatchdataid();
 		setmatchdata("commonMatchData","isPrivateMatch",scripts\mp\utility::func_D957());
 		setmatchdata("firstOvertimeRoundIndex",-1);
@@ -43,12 +43,12 @@ init() {
 }
 
 func_C558() {
-	setmatchdata("commonMatchData","utcStartTimeSeconds",function_00D2());
+	setmatchdata("commonMatchData","utcStartTimeSeconds",getsystemtime());
 	setmatchdata("commonMatchData","playerCountStart",level.players.size);
 }
 
 func_C557() {
-	setmatchdata("commonMatchData","utcEndTimeSeconds",function_00D2());
+	setmatchdata("commonMatchData","utcEndTimeSeconds",getsystemtime());
 	setmatchdata("commonMatchData","playerCountEnd",level.players.size);
 	setmatchdata("globalPlayerXpModifier",int(scripts\mp\rank::func_7ED9()));
 	setmatchdata("globalWeaponXpModifier",int(scripts\mp\weaponrank::getglobalweaponrankxpmultiplier()));
@@ -627,12 +627,12 @@ func_322A() {
 	var_00 = [];
 	var_01 = 149;
 	for(var_02 = 0;var_02 <= var_01;var_02++) {
-		var_03 = tablelookup("mp/statstable.csv",0,var_02,4);
-		if(!issubstr(tablelookup("mp/statsTable.csv",0,var_02,2),"weapon_")) {
+		var_03 = tablelookup("mp\statstable.csv",0,var_02,4);
+		if(!issubstr(tablelookup("mp\statsTable.csv",0,var_02,2),"weapon_")) {
 			continue;
 		}
 
-		if(tablelookup("mp/statsTable.csv",0,var_02,2) == "weapon_other") {
+		if(tablelookup("mp\statsTable.csv",0,var_02,2) == "weapon_other") {
 			continue;
 		}
 

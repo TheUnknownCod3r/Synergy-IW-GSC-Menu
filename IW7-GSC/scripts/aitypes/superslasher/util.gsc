@@ -1,8 +1,8 @@
-/*********************************************************
+/*************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\aitypes\superslasher\util.gsc
-*********************************************************/
+ * Script: scripts\aitypes\superslasher\util.gsc
+*************************************************/
 
 isonroof() {
 	return scripts\aitypes\superslasher\behaviors::superslasher_isonroof();
@@ -79,5 +79,5 @@ ongotoground_init() {}
 onground_init() {}
 
 drop_max_ammo() {
-	scripts\common\utility::flag_set("force_drop_max_ammo");
+	scripts\engine\utility::flag_set("force_drop_max_ammo");
 }

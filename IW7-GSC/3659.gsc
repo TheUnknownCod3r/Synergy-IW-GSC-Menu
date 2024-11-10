@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3659.gsc
-****************************/
+ * Script: 3659.gsc
+************************/
 
 func_10730(param_00,param_01,param_02) {
 	var_03 = spawn("script_model",level.player.origin);
@@ -324,7 +324,7 @@ func_8DEA(param_00) {
 	}
 
 	if(scripts\sp\_utility::func_93A6()) {
-		scripts/sp/specialist_MAYBE::func_F52F(0);
+		scripts\sp\specialist_MAYBE::func_F52F(0);
 		return;
 	}
 
@@ -340,7 +340,7 @@ func_8E0A(param_00) {
 
 	if(!scripts\engine\utility::flag("helmet_FOV_disallow")) {
 		if(scripts\sp\_utility::func_93A6()) {
-			scripts/sp/specialist_MAYBE::func_F52F(1);
+			scripts\sp\specialist_MAYBE::func_F52F(1);
 			return;
 		}
 

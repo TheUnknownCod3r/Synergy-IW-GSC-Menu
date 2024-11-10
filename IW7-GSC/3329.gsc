@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\3329.gsc
+ * Script: 3329.gsc
 ***************************************/
 
 init_armageddon() {

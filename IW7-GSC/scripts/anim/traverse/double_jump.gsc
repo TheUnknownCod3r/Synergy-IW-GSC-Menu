@@ -1,8 +1,8 @@
-/*********************************************************
+/*************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\anim\traverse\double_jump.gsc
-*********************************************************/
+ * Script: scripts\anim\traverse\double_jump.gsc
+*************************************************/
 
 main() {
 	func_5ADF();

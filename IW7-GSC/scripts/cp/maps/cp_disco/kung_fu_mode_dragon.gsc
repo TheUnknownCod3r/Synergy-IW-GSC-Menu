@@ -1,13 +1,13 @@
-/********************************************************************
+/************************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\maps\cp_disco\kung_fu_mode_dragon.gsc
-********************************************************************/
+ * Script: scripts\cp\maps\cp_disco\kung_fu_mode_dragon.gsc
+************************************************************/
 
 setup_kung_fu_dragon_powers() {
 	scripts\engine\utility::flag_wait("interactions_initialized");
 	scripts\cp\powers\coop_powers::powersetupfunctions("power_shuriken_dragon",::set_dragon_shuriken_power,::unset_dragon_shuriken_power,::use_dragon_shuriken,undefined,undefined,undefined);
-	level._effect["dragon_symbol"] = loadfx("vfx/iw7/levels/cp_disco/vfx_kungfu_seal_dragon_ground.vfx");
+	level._effect["dragon_symbol"] = loadfx("vfx\iw7\levels\cp_disco\vfx_kungfu_seal_dragon_ground.vfx");
 }
 
 set_dragon_shuriken_power(param_00) {

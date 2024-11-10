@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3635.gsc
-****************************/
+ * Script: 3635.gsc
+************************/
 
 func_8CFA() {
 	precacheshader("hud_ar57");

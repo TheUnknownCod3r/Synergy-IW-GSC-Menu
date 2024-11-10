@@ -1,8 +1,8 @@
-/************************************************
+/****************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\trophy_system.gsc
-************************************************/
+ * Script: scripts\mp\trophy_system.gsc
+****************************************/
 
 func_12813() {
 	var_00 = spawnstruct();
@@ -139,7 +139,7 @@ func_1282B() {
 				continue;
 			}
 
-			var_07 = function_0287(var_01,var_05.origin,var_00,[self,var_05],0,"physicsquery_closest");
+			var_07 = physics_raycast(var_01,var_05.origin,var_00,[self,var_05],0,"physicsquery_closest");
 			if(isdefined(var_07) && var_07.size > 0) {
 				continue;
 			}

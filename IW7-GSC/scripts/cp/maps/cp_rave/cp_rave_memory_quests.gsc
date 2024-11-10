@@ -1,8 +1,8 @@
-/*********************************************************************
+/*************************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\maps\cp_rave\cp_rave_memory_quests.gsc
-*********************************************************************/
+ * Script: scripts\cp\maps\cp_rave\cp_rave_memory_quests.gsc
+*************************************************************/
 
 init_memory_quests() {
 	rave_charm_mapping();
@@ -1391,7 +1391,7 @@ watch_for_totem_death(param_00) {
 			continue;
 		}
 
-		if(function_010F(var_02.origin,param_00)) {
+		if(ispointinvolume(var_02.origin,param_00)) {
 			level.totems_killed++;
 			playfx(level._effect["zombie_freeze_shatter"],var_04);
 			var_02 playlocalsound("part_pickup");
@@ -1450,7 +1450,7 @@ sniper_kills_watcher(param_00,param_01,param_02,param_03) {
 
 		if(level.sniper_kills_for_quest < param_03) {
 			level waittill("kill_near_bino_with_sniper",var_04,var_05,var_06);
-			if(function_010F(var_04.origin,param_02)) {
+			if(ispointinvolume(var_04.origin,param_02)) {
 				if(var_04 == param_01) {
 					if(!isdefined(level.sniper_kills_for_quest)) {
 						level.sniper_kills_for_quest = 1;

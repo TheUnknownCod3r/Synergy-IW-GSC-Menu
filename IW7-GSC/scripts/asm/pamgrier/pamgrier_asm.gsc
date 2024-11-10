@@ -1,8 +1,8 @@
-/*********************************************************
+/*************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\asm\pamgrier\pamgrier_asm.gsc
-*********************************************************/
+ * Script: scripts\asm\pamgrier\pamgrier_asm.gsc
+*************************************************/
 
 pamgrierinit(param_00,param_01,param_02,param_03) {
 	scripts\asm\zombie\zombie::func_13F9A(param_00,param_01,param_02,param_03);
@@ -29,7 +29,7 @@ clearaction() {
 }
 
 ispamchillin(param_00,param_01,param_02,param_03) {
-	return scripts\common\utility::istrue(self.bchillin);
+	return scripts\engine\utility::istrue(self.bchillin);
 }
 
 ispamdonechillin(param_00,param_01,param_02,param_03) {
@@ -71,7 +71,7 @@ isrevivedone(param_00,param_01,param_02,param_03) {
 		return 1;
 	}
 
-	if(!scripts\common\utility::istrue(self.reviveplayer.inlaststand)) {
+	if(!scripts\engine\utility::istrue(self.reviveplayer.inlaststand)) {
 		return 1;
 	}
 
@@ -120,14 +120,14 @@ meleenotehandler(param_00,param_01,param_02,param_03) {
 			}
 		}
 
-		if(!scripts\common\utility::istrue(self.bmovingmelee)) {
+		if(!scripts\engine\utility::istrue(self.bmovingmelee)) {
 			self notify("stop_melee_face_enemy");
 		}
 	}
 }
 
 shouldabortaction(param_00,param_01,param_02,param_03) {
-	if(scripts\common\utility::istrue(self.btraversalteleport)) {
+	if(scripts\engine\utility::istrue(self.btraversalteleport)) {
 		return 0;
 	}
 
@@ -189,7 +189,7 @@ _meth_81DE(param_00) {
 	}
 
 	if(isdefined(param_00)) {
-		var_03 = scripts\common\utility::getpredictedaimyawtoshootentorpos(0.5,param_00);
+		var_03 = scripts\engine\utility::getpredictedaimyawtoshootentorpos(0.5,param_00);
 	}
 
 	return var_03;
@@ -316,7 +316,7 @@ chooseteleportoutanim(param_00,param_01,param_02) {
 }
 
 needschilltransition(param_00,param_01,param_02,param_03) {
-	if(scripts\common\utility::istrue(self.bneedschilltransition)) {
+	if(scripts\engine\utility::istrue(self.bneedschilltransition)) {
 		return 1;
 	}
 
@@ -329,7 +329,7 @@ playchillpassivetransition(param_00,param_01,param_02,param_03) {
 }
 
 choosechillinidle(param_00,param_01,param_02) {
-	if(scripts\common\utility::istrue(self.bpassive)) {
+	if(scripts\engine\utility::istrue(self.bpassive)) {
 		var_03 = scripts\asm\asm::asm_lookupanimfromalias(param_01,"passive");
 	}
 	else
@@ -347,11 +347,11 @@ gopassivesoon(param_00,param_01) {
 }
 
 shouldplaychilltwitch(param_00,param_01,param_02,param_03) {
-	if(!scripts\common\utility::istrue(self.bpassive)) {
+	if(!scripts\engine\utility::istrue(self.bpassive)) {
 		return 0;
 	}
 
-	if(!scripts\common\utility::istrue(self.btimefortwitch)) {
+	if(!scripts\engine\utility::istrue(self.btimefortwitch)) {
 		return 0;
 	}
 
@@ -367,7 +367,7 @@ handletwitch(param_00) {
 }
 
 playchillinanim(param_00,param_01,param_02,param_03) {
-	if(scripts\common\utility::istrue(self.bpassive)) {
+	if(scripts\engine\utility::istrue(self.bpassive)) {
 		thread handletwitch(param_01);
 	}
 	else
@@ -391,7 +391,7 @@ choosereviveanim(param_00,param_01,param_02) {
 }
 
 chooseteleportinanim(param_00,param_01,param_02) {
-	if(scripts\common\utility::istrue(self.bpassive)) {
+	if(scripts\engine\utility::istrue(self.bpassive)) {
 		return scripts\asm\asm::asm_lookupanimfromalias(param_01,"passive_teleport");
 	}
 
@@ -414,7 +414,7 @@ isplayerintheway(param_00) {
 			continue;
 		}
 
-		if(scripts\common\utility::istrue(var_03.inlaststand)) {
+		if(scripts\engine\utility::istrue(var_03.inlaststand)) {
 			continue;
 		}
 
@@ -460,7 +460,7 @@ faceplayer(param_00,param_01) {
 			break;
 		}
 
-		scripts\common\utility::waitframe();
+		scripts\engine\utility::waitframe();
 	}
 }
 
@@ -532,7 +532,7 @@ playteleportout(param_00,param_01,param_02,param_03) {
 	thread showmelater();
 	thread gibnearbyenemies(0.1);
 	scripts\asm\asm_mp::func_2365(param_00,param_01,param_02,var_05,var_04);
-	if(scripts\common\utility::istrue(self.btraversalteleport)) {
+	if(scripts\engine\utility::istrue(self.btraversalteleport)) {
 		self.is_traversing = undefined;
 		self.btraversalteleport = undefined;
 		self notify("traverse_end");
@@ -555,7 +555,7 @@ gibnearbyenemies(param_00) {
 		wait(param_00);
 	}
 
-	var_01 = scripts\mp\_mp_agent::getaliveagents();
+	var_01 = scripts\mp\mp_agent::getaliveagents();
 	var_02 = scripts\mp\agents\pamgrier\pamgrier_agent::getenemy();
 	var_03 = scripts\mp\agents\pamgrier\pamgrier_tunedata::gettunedata();
 	foreach(var_05 in var_01) {

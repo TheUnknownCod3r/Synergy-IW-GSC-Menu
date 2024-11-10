@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\3520.gsc
+ * Script: 3520.gsc
 ***************************************/
 
 func_105BC() {
@@ -10,20 +10,20 @@ func_105BC() {
 }
 
 func_105BD() {
-  level._effect["spaceship_death"] = loadfx("vfx/iw7/core/vehicle/jackal/vfx_jackal_death_01_cheap.vfx");
-  level._effect["spaceship_dmg"] = loadfx("vfx/iw7/core/vehicle/jackal/vfx_jackal_hit_damage");
-  level._effect["spaceship_dmg_trail"] = loadfx("vfx/iw7/core/vehicle/jackal/vfx_jackal_hit_damage_linger");
-  level._effect["spaceship_engine_idle"] = loadfx("vfx/iw7/core/vehicle/jackal/vfx_jackal_thrust_idle");
-  level._effect["spaceship_engine_max"] = loadfx("vfx/iw7/core/vehicle/jackal/vfx_jackal_thrust_max");
-  level._effect["spaceship_hover"] = loadfx("vfx/iw7/core/vehicle/jackal/vfx_jackal_hover");
-  level._effect["spaceship_remove"] = loadfx("vfx/iw7/_requests/equipment/retractable_shield/vfx_iw7_equip_retractable_shield_melee_energy_burst.vfx");
-  level._effect["cockpit_sparks"] = loadfx("vfx/core/mp/killstreaks/vfx_ims_sparks");
-  level._effect["cockpit_smoke"] = loadfx("vfx/core/mp/killstreaks/vfx_helo_damage.vfx");
-  level._effect["cockpit_fire"] = loadfx("vfx/iw7/_requests/mp/vfx_debug_warning.vfx");
-  level._effect["cockpit_expl"] = loadfx("vfx/iw7/_requests/mp/vfx_generic_equipment_exp_lg.vfx");
-  level._effect["space_particles"] = loadfx("vfx/old/space_fighter/space_particulate_player_oneshot.vfx");
-  level._effect["spaceship_trail_f"] = loadfx("vfx/core/vehicles/vfx_jackal_wingtip_trail_b");
-  level._effect["spaceship_trail_e"] = loadfx("vfx/core/vehicles/vfx_jackal_wingtip_trail_o");
+  level._effect["spaceship_death"] = loadfx("vfx\iw7\core\vehicle\jackal\vfx_jackal_death_01_cheap.vfx");
+  level._effect["spaceship_dmg"] = loadfx("vfx\iw7\core\vehicle\jackal\vfx_jackal_hit_damage");
+  level._effect["spaceship_dmg_trail"] = loadfx("vfx\iw7\core\vehicle\jackal\vfx_jackal_hit_damage_linger");
+  level._effect["spaceship_engine_idle"] = loadfx("vfx\iw7\core\vehicle\jackal\vfx_jackal_thrust_idle");
+  level._effect["spaceship_engine_max"] = loadfx("vfx\iw7\core\vehicle\jackal\vfx_jackal_thrust_max");
+  level._effect["spaceship_hover"] = loadfx("vfx\iw7\core\vehicle\jackal\vfx_jackal_hover");
+  level._effect["spaceship_remove"] = loadfx("vfx\iw7\_requests\equipment\retractable_shield\vfx_iw7_equip_retractable_shield_melee_energy_burst.vfx");
+  level._effect["cockpit_sparks"] = loadfx("vfx\core\mp\killstreaks\vfx_ims_sparks");
+  level._effect["cockpit_smoke"] = loadfx("vfx\core\mp\killstreaks\vfx_helo_damage.vfx");
+  level._effect["cockpit_fire"] = loadfx("vfx\iw7\_requests\mp\vfx_debug_warning.vfx");
+  level._effect["cockpit_expl"] = loadfx("vfx\iw7\_requests\mp\vfx_generic_equipment_exp_lg.vfx");
+  level._effect["space_particles"] = loadfx("vfx\old\space_fighter\space_particulate_player_oneshot.vfx");
+  level._effect["spaceship_trail_f"] = loadfx("vfx\core\vehicles\vfx_jackal_wingtip_trail_b");
+  level._effect["spaceship_trail_e"] = loadfx("vfx\core\vehicles\vfx_jackal_wingtip_trail_o");
 }
 
 func_105BE() {
@@ -88,7 +88,7 @@ func_105E0() {
 func_105B5(var_00, var_01, var_02) {
   func_1057D(var_01);
   var_1.func_10574 = var_00;
-  var_01 scripts/mp/powers::func_D729();
+  var_01 scripts\mp\powers::func_D729();
   func_10580(var_00);
 
   if (!isdefined(var_02))
@@ -104,7 +104,7 @@ func_105B5(var_00, var_01, var_02) {
 }
 
 func_105B6(var_00, var_01) {
-  var_01 scripts/mp/powers::func_D72F();
+  var_01 scripts\mp\powers::func_D72F();
   var_01 func_0BD3::func_D05B();
   var_01 getrigindexfromarchetyperef();
   func_105CD(var_00);
@@ -639,7 +639,7 @@ func_10595(var_00) {
 }
 
 func_105CA(var_00, var_01, var_02) {
-  var_03 = __func_26D(var_00, var_01, var_02, "veh_spaceship_mp", "veh_mil_air_ca_jackal_drone_atmos_periph_mp");
+  var_03 = _func_26D(var_00, var_01, var_02, "veh_spaceship_mp", "veh_mil_air_ca_jackal_drone_atmos_periph_mp");
   return func_1058D(var_03, var_0.team);
 }
 
@@ -1274,11 +1274,11 @@ func_10592(var_00) {
 }
 
 func_105C1(var_00) {
-  var_00 scripts/mp/powers::removepower(var_0.func_AE7B);
-  var_00 scripts/mp/powers::removepower(var_0.func_AE7D);
+  var_00 scripts\mp\powers::removepower(var_0.func_AE7B);
+  var_00 scripts\mp\powers::removepower(var_0.func_AE7D);
 }
 
 func_105C2(var_00) {
-  var_00 scripts/mp/powers::givepower(var_0.func_AE7B, "primary");
-  var_00 scripts/mp/powers::givepower(var_0.func_AE7D, "secondary");
+  var_00 scripts\mp\powers::givepower(var_0.func_AE7B, "primary");
+  var_00 scripts\mp\powers::givepower(var_0.func_AE7D, "secondary");
 }

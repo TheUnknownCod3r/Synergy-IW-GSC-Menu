@@ -1,8 +1,8 @@
-/*************************************************
+/*****************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\anim\cover_crouch.gsc
-*************************************************/
+ * Script: scripts\anim\cover_crouch.gsc
+*****************************************/
 
 main() {
 	self endon("killanimscript");

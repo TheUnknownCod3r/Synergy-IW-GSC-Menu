@@ -1,13 +1,13 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3607.gsc
-****************************/
+ * Script: 3607.gsc
+************************/
 
 func_DD9E() {
-	level._effect["reaper_kill"] = loadfx("vfx/iw7/_requests/mp/vfx_meatbag_large.vfx");
-	level._effect["reaper_kill_robot"] = loadfx("vfx/iw7/core/impact/robot/vfx_mp_c6_melee.vfx");
-	level._effect["screen_blood"] = loadfx("vfx/iw7/core/zombie/weapon/axe/vfx_zmb_axe_screen_blood.vfx");
+	level._effect["reaper_kill"] = loadfx("vfx\iw7\_requests\mp\vfx_meatbag_large.vfx");
+	level._effect["reaper_kill_robot"] = loadfx("vfx\iw7\core\impact\robot\vfx_mp_c6_melee.vfx");
+	level._effect["screen_blood"] = loadfx("vfx\iw7\core\zombie\weapon\axe\vfx_zmb_axe_screen_blood.vfx");
 }
 
 func_DD9D() {
@@ -26,7 +26,7 @@ func_DD9D() {
 	self.var_B62A setmodel("tag_origin");
 	thread func_13ACC();
 	thread func_13A9F();
-	thread scripts\mp\_supers::watchobjuse(125);
+	thread scripts\mp\supers::watchobjuse(125);
 	return 1;
 }
 
@@ -41,7 +41,7 @@ func_DD97() {
 	self thermalvisionoff();
 	self give_explosive_touch_on_revived(self.var_42B0);
 	self playlocalsound("reaper_shutdown");
-	if(scripts\mp\_utility::istrue(level.tactical)) {
+	if(scripts\mp\utility::istrue(level.tactical)) {
 		self setsuit("scout_mp_tactical");
 	}
 	else
@@ -105,21 +105,21 @@ func_13ACC() {
 }
 
 func_DD99() {
-	if(scripts\mp\_utility::_hasperk("specialty_dodge")) {
+	if(scripts\mp\utility::_hasperk("specialty_dodge")) {
 		self.restoredodge = "specialty_dodge";
 		self setclientomnvar("ui_dodge_charges",0);
 		self notify("setDodge");
-		scripts\mp\_utility::removeperk("specialty_dodge");
+		scripts\mp\utility::removeperk("specialty_dodge");
 	}
 
-	if(scripts\mp\_utility::_hasperk("specialty_afterburner")) {
+	if(scripts\mp\utility::_hasperk("specialty_afterburner")) {
 		self.restoreafterburner = "specialty_afterburner";
-		scripts\mp\_utility::removeperk("specialty_afterburner");
+		scripts\mp\utility::removeperk("specialty_afterburner");
 	}
 
-	if(scripts\mp\_utility::_hasperk("specialty_rush")) {
+	if(scripts\mp\utility::_hasperk("specialty_rush")) {
 		self.restorerush = "specialty_rush";
-		scripts\mp\_utility::removeperk("specialty_rush");
+		scripts\mp\utility::removeperk("specialty_rush");
 	}
 
 	self goal_radius(0,400);
@@ -127,17 +127,17 @@ func_DD99() {
 
 reaper_restorerigperks() {
 	if(isdefined(self.restoredodge)) {
-		scripts\mp\_utility::giveperk(self.restoredodge);
+		scripts\mp\utility::giveperk(self.restoredodge);
 		self.restoredodge = undefined;
 	}
 
 	if(isdefined(self.restoreafterburner)) {
-		scripts\mp\_utility::giveperk(self.restoreafterburner);
+		scripts\mp\utility::giveperk(self.restoreafterburner);
 		self.restoreafterburner = undefined;
 	}
 
 	if(isdefined(self.restorerush)) {
-		scripts\mp\_utility::giveperk(self.restorerush);
+		scripts\mp\utility::giveperk(self.restorerush);
 		self.restorerush = undefined;
 	}
 
@@ -145,25 +145,25 @@ reaper_restorerigperks() {
 }
 
 func_DD94() {
-	scripts\mp\_utility::giveperk("specialty_extendedmelee");
-	scripts\mp\_utility::giveperk("specialty_fastermelee");
-	scripts\mp\_utility::giveperk("specialty_sprintmelee");
-	scripts\mp\_utility::giveperk("specialty_commando");
-	scripts\mp\_utility::giveperk("specialty_selectivehearing");
-	scripts\mp\_utility::giveperk("specialty_heartbreaker");
-	scripts\mp\_utility::giveperk("specialty_stun_resistance");
-	scripts\mp\_utility::giveperk("specialty_ghost");
+	scripts\mp\utility::giveperk("specialty_extendedmelee");
+	scripts\mp\utility::giveperk("specialty_fastermelee");
+	scripts\mp\utility::giveperk("specialty_sprintmelee");
+	scripts\mp\utility::giveperk("specialty_commando");
+	scripts\mp\utility::giveperk("specialty_selectivehearing");
+	scripts\mp\utility::giveperk("specialty_heartbreaker");
+	scripts\mp\utility::giveperk("specialty_stun_resistance");
+	scripts\mp\utility::giveperk("specialty_ghost");
 }
 
 func_DD98() {
-	scripts\mp\_utility::removeperk("specialty_extendedmelee");
-	scripts\mp\_utility::removeperk("specialty_fastermelee");
-	scripts\mp\_utility::removeperk("specialty_sprintmelee");
-	scripts\mp\_utility::removeperk("specialty_commando");
-	scripts\mp\_utility::removeperk("specialty_selectivehearing");
-	scripts\mp\_utility::removeperk("specialty_heartbreaker");
-	scripts\mp\_utility::removeperk("specialty_stun_resistance");
-	scripts\mp\_utility::removeperk("specialty_ghost");
+	scripts\mp\utility::removeperk("specialty_extendedmelee");
+	scripts\mp\utility::removeperk("specialty_fastermelee");
+	scripts\mp\utility::removeperk("specialty_sprintmelee");
+	scripts\mp\utility::removeperk("specialty_commando");
+	scripts\mp\utility::removeperk("specialty_selectivehearing");
+	scripts\mp\utility::removeperk("specialty_heartbreaker");
+	scripts\mp\utility::removeperk("specialty_stun_resistance");
+	scripts\mp\utility::removeperk("specialty_ghost");
 }
 
 func_DD9B() {
@@ -171,8 +171,8 @@ func_DD9B() {
 	scripts\engine\utility::allow_slide(0);
 	scripts\engine\utility::allow_prone(0);
 	scripts\engine\utility::allow_usability(0);
-	scripts\mp\_utility::func_1C47(0);
-	scripts\mp\_powers::func_D729();
+	scripts\mp\utility::func_1C47(0);
+	scripts\mp\powers::func_D729();
 }
 
 func_DD9A() {
@@ -180,12 +180,12 @@ func_DD9A() {
 	scripts\engine\utility::allow_slide(1);
 	scripts\engine\utility::allow_prone(1);
 	scripts\engine\utility::allow_usability(1);
-	scripts\mp\_utility::func_1C47(1);
-	scripts\mp\_powers::func_D72F();
+	scripts\mp\utility::func_1C47(1);
+	scripts\mp\powers::func_D72F();
 }
 
 func_93D9() {
-	return scripts\engine\utility::ter_op(scripts\mp\_utility::istrue(level.hardcoremode),19,50);
+	return scripts\engine\utility::ter_op(scripts\mp\utility::istrue(level.hardcoremode),19,50);
 }
 
 func_A668() {
@@ -217,14 +217,14 @@ isusingreaper() {
 		return 0;
 	}
 
-	if(!scripts\mp\_utility::isreallyalive(self)) {
+	if(!scripts\mp\utility::isreallyalive(self)) {
 		return 0;
 	}
 
-	var_00 = scripts\mp\_supers::getcurrentsuperref();
+	var_00 = scripts\mp\supers::getcurrentsuperref();
 	if(!isdefined(var_00) || var_00 != "super_reaper") {
 		return 0;
 	}
 
-	return scripts\mp\_supers::issuperinuse();
+	return scripts\mp\supers::issuperinuse();
 }

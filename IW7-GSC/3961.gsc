@@ -1,13 +1,13 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3961.gsc
-****************************/
+ * Script: 3961.gsc
+************************/
 
 registerscriptedagent() {
 	level.zombie_ghost_hide_nodes = scripts\engine\utility::getstructarray("zombie_ghost_hide_node","script_noteworthy");
 	level.zombie_ghost_hover_nodes = scripts\engine\utility::getstructarray("zombie_ghost_hover_node","targetname");
-	scripts/aitypes/bt_util::init();
+	scripts\aitypes\bt_util::init();
 	lib_03B4::func_DEE8();
 	lib_0F46::func_2371();
 	func_AEB0();
@@ -89,7 +89,7 @@ setupagent() {
 	self.var_B0FC = 1;
 	self.full_gib = 0;
 	self.var_C1F7 = 0;
-	scripts/mp/agents/zombie/zombie_util::func_F794(self.var_B62E);
+	scripts\mp\agents\zombie\zombie_util::func_F794(self.var_B62E);
 	self setsolid(0);
 	thread func_899C();
 }
@@ -101,8 +101,8 @@ func_899C() {
 	foreach(var_04, var_01 in self.var_164D) {
 		var_02 = var_01.var_4BC0;
 		var_03 = level.asm[var_04].states[var_02];
-		scripts/asm/asm::func_2388(var_04,var_02,var_03,var_03.var_116FB);
-		scripts/asm/asm::func_238A(var_04,"idle",0.2,undefined,undefined,undefined);
+		scripts\asm\asm::func_2388(var_04,var_02,var_03,var_03.var_116FB);
+		scripts\asm\asm::func_238A(var_04,"idle",0.2,undefined,undefined,undefined);
 	}
 }
 
@@ -176,7 +176,7 @@ func_50EF() {
 }
 
 func_AEB0() {
-	level._effect["ghost_explosion_death_green"] = loadfx("vfx/iw7/core/zombie/vfx_zmb_ghost_imp.vfx");
+	level._effect["ghost_explosion_death_green"] = loadfx("vfx\iw7\core\zombie\vfx_zmb_ghost_imp.vfx");
 }
 
 func_C536(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08,param_09,param_0A,param_0B) {

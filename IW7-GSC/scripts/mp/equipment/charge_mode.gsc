@@ -1,11 +1,11 @@
-/********************************************************
+/************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\equipment\charge_mode.gsc
-********************************************************/
+ * Script: scripts\mp\equipment\charge_mode.gsc
+************************************************/
 
 func_3CED() {
-	level._effect["chargemode_expl"] = loadfx("vfx/iw7/_requests/mp/super/vfx_chargemode_expl.vfx");
+	level._effect["chargemode_expl"] = loadfx("vfx\iw7\_requests\mp\super\vfx_chargemode_expl.vfx");
 }
 
 func_3D0E() {}
@@ -19,17 +19,17 @@ func_3D19() {
 
 func_3D1A() {
 	self.chargemode_epicimpactents = [];
-	scripts\mp\_utility::_enablecollisionnotifies(1);
+	scripts\mp\utility::_enablecollisionnotifies(1);
 	scripts\engine\utility::allow_usability(0);
-	scripts\mp\_utility::blockperkfunction("specialty_lightweight");
-	scripts\mp\_utility::giveperk("specialty_stun_resistance");
+	scripts\mp\utility::blockperkfunction("specialty_lightweight");
+	scripts\mp\utility::giveperk("specialty_stun_resistance");
 	var_00 = self getcurrentweapon();
 	if(issubstr(var_00,"iw7_nunchucks") || issubstr(var_00,"iw7_katana")) {
 		if(!self.loadoutprimary == "iw7_fists" || self.loadoutsecondary == "iw7_fists") {
-			scripts\mp\_utility::_giveweapon("iw7_fists_mp");
+			scripts\mp\utility::_giveweapon("iw7_fists_mp");
 		}
 
-		scripts\mp\_utility::_switchtoweaponimmediate("iw7_fists_mp");
+		scripts\mp\utility::_switchtoweaponimmediate("iw7_fists_mp");
 		self.savedbullchargeweapon = var_00;
 	}
 
@@ -43,8 +43,8 @@ func_3D1A() {
 	thread func_3CFB();
 	thread func_3D02();
 	thread func_3CF9();
-	if(!scripts\mp\_utility::isanymlgmatch()) {
-		thread scripts\mp\_supers::watchobjuse(125);
+	if(!scripts\mp\utility::isanymlgmatch()) {
+		thread scripts\mp\supers::watchobjuse(125);
 	}
 
 	return 1;
@@ -65,12 +65,12 @@ func_3CDD(param_00) {
 	self.var_3CEC = undefined;
 	self.var_3CEB = undefined;
 	self.chargemode_epicimpactents = undefined;
-	if(!scripts\mp\_utility::istrue(param_00)) {
+	if(!scripts\mp\utility::istrue(param_00)) {
 		self setscriptablepartstate("chargeMode","activeEnd",0);
-		scripts\mp\_utility::_enablecollisionnotifies(0);
+		scripts\mp\utility::_enablecollisionnotifies(0);
 		scripts\engine\utility::allow_usability(1);
-		scripts\mp\_utility::unblockperkfunction("specialty_lightweight");
-		scripts\mp\_utility::removeperk("specialty_stun_resistance");
+		scripts\mp\utility::unblockperkfunction("specialty_lightweight");
+		scripts\mp\utility::removeperk("specialty_stun_resistance");
 		if(isdefined(var_01)) {
 			foreach(var_03 in var_01) {
 				if(isdefined(var_03)) {
@@ -82,10 +82,10 @@ func_3CDD(param_00) {
 		func_3CD7();
 		if(isdefined(self.savedbullchargeweapon)) {
 			if(!self.loadoutprimary == "iw7_fists" || self.loadoutsecondary == "iw7_fists") {
-				scripts\mp\_utility::_takeweapon("iw7_fists_mp");
+				scripts\mp\utility::_takeweapon("iw7_fists_mp");
 			}
 
-			scripts\mp\_utility::_switchtoweaponimmediate(self.savedbullchargeweapon);
+			scripts\mp\utility::_switchtoweaponimmediate(self.savedbullchargeweapon);
 			self.savedbullchargeweapon = undefined;
 			return;
 		}
@@ -161,8 +161,8 @@ func_3CFD(param_00) {
 	self endon("death");
 	self endon("disconnect");
 	self endon("chargeMode_monitorKnockbackEnded_" + var_01);
-	scripts\mp\_utility::_enablecollisionnotifies(1);
-	if(scripts\mp\_utility::istrue(level.tactical)) {
+	scripts\mp\utility::_enablecollisionnotifies(1);
+	if(scripts\mp\utility::istrue(level.tactical)) {
 		scripts\engine\utility::allow_doublejump(0);
 	}
 
@@ -190,7 +190,7 @@ func_3CFD(param_00) {
 		scripts\engine\utility::allow_doublejump(1);
 	}
 
-	scripts\mp\_utility::_enablecollisionnotifies(0);
+	scripts\mp\utility::_enablecollisionnotifies(0);
 	self notify("chargeMode_monitorKnockbackEnded_" + var_01);
 }
 
@@ -204,7 +204,7 @@ func_3CFE(param_00) {
 		scripts\engine\utility::allow_doublejump(1);
 	}
 
-	scripts\mp\_utility::_enablecollisionnotifies(0);
+	scripts\mp\utility::_enablecollisionnotifies(0);
 	self notify("chargeMode_monitorKnockbackEnded_" + var_01);
 }
 
@@ -213,11 +213,11 @@ func_3CF7() {
 	self endon("disconnect");
 	self endon("chargeMode_end");
 	self waittill("bullChargeEnd",var_00,var_01);
-	if(scripts\mp\_utility::istrue(var_01) || var_00 && func_3CDF()) {
+	if(scripts\mp\utility::istrue(var_01) || var_00 && func_3CDF()) {
 		thread func_3CE9();
 	}
 
-	scripts\mp\_supers::func_DE3B(9999);
+	scripts\mp\supers::func_DE3B(9999);
 }
 
 chargemode_monitorkillstreakusage() {
@@ -254,8 +254,8 @@ chargemode_monitorarmor() {
 	self endon("death");
 	self endon("disconnect");
 	chargemode_monitorarmorendearly();
-	if(isdefined(self) && scripts\mp\_utility::isreallyalive(self)) {
-		scripts\mp\_lightarmor::setlightarmorvalue(self,0,1,0);
+	if(isdefined(self) && scripts\mp\utility::isreallyalive(self)) {
+		scripts\mp\lightarmor::setlightarmorvalue(self,0,1,0);
 	}
 }
 
@@ -268,14 +268,14 @@ chargemode_monitorarmorendearly() {
 			return;
 		}
 
-		if(!isdefined(self.ball_carried) && !scripts\mp\_utility::istrue(self.spawnprotection)) {
+		if(!isdefined(self.ball_carried) && !scripts\mp\utility::istrue(self.spawnprotection)) {
 			break;
 		}
 
 		scripts\engine\utility::waitframe();
 	}
 
-	scripts\mp\_lightarmor::setlightarmorvalue(self,19,1,0);
+	scripts\mp\lightarmor::setlightarmorvalue(self,19,1,0);
 	var_02 = int(ceil(0.95));
 	scripts\engine\utility::waitframe();
 	for(;;) {
@@ -283,8 +283,8 @@ chargemode_monitorarmorendearly() {
 			return;
 		}
 
-		var_03 = scripts\mp\_lightarmor::getlightarmorvalue(self);
-		scripts\mp\_lightarmor::setlightarmorvalue(self,var_03 + var_02,1,0);
+		var_03 = scripts\mp\lightarmor::getlightarmorvalue(self);
+		scripts\mp\lightarmor::setlightarmorvalue(self,var_03 + var_02,1,0);
 		scripts\engine\utility::waitframe();
 	}
 
@@ -313,22 +313,22 @@ func_3CFA() {
 	childthread func_3CE5(var_00);
 	self waittill("gracePeriodRaceBegin");
 	waittillframeend;
-	if(!scripts\mp\_utility::istrue(var_00._meth_8462)) {
-		if(scripts\mp\_utility::istrue(var_00.var_E6) || scripts\mp\_utility::istrue(var_00.var_6ABF)) {
-			scripts\mp\_supers::refundsuper();
+	if(!scripts\mp\utility::istrue(var_00._meth_8462)) {
+		if(scripts\mp\utility::istrue(var_00.var_E6) || scripts\mp\utility::istrue(var_00.var_6ABF)) {
+			scripts\mp\supers::refundsuper();
 		}
 		else
 		{
 			var_01 = getsubstr(self.loadoutarchetype,10,self.loadoutarchetype.size);
-			scripts\mp\_missions::func_D991("ch_" + var_01 + "_super");
-			scripts\mp\_supers::combatrecordsuperuse("super_chargemode");
+			scripts\mp\missions::func_D991("ch_" + var_01 + "_super");
+			scripts\mp\supers::combatrecordsuperuse("super_chargemode");
 		}
 	}
 	else
 	{
 		var_01 = getsubstr(self.loadoutarchetype,10,self.loadoutarchetype.size);
-		scripts\mp\_missions::func_D991("ch_" + var_01 + "_super");
-		scripts\mp\_supers::combatrecordsuperuse("super_chargemode");
+		scripts\mp\missions::func_D991("ch_" + var_01 + "_super");
+		scripts\mp\supers::combatrecordsuperuse("super_chargemode");
 	}
 
 	self notify("gracePeriodRaceEnd");
@@ -354,7 +354,7 @@ func_3CE4(param_00) {
 
 func_3CE3(param_00) {
 	self waittill("bullChargeEnd",var_01,var_02,var_03);
-	if(scripts\mp\_utility::istrue(var_03)) {
+	if(scripts\mp\utility::istrue(var_03)) {
 		param_00.var_6ABF = 1;
 	}
 	else if(var_01 && !func_3CDF()) {
@@ -393,7 +393,7 @@ func_3D07(param_00) {
 			var_05 = self.origin + anglestoup(self.angles) * 36;
 			var_06 = var_05 + var_03 * 40;
 			var_07 = scripts\common\trace::create_contents(0,1,1,0,1,0);
-			var_08 = function_0287(var_05,var_06,var_07,undefined,0,"physicsquery_closest");
+			var_08 = physics_raycast(var_05,var_06,var_07,undefined,0,"physicsquery_closest");
 			if(isdefined(var_08) && var_08.size > 0) {
 				var_06 = var_08[0]["position"];
 			}
@@ -417,7 +417,7 @@ func_3D06(param_00) {
 			continue;
 		}
 
-		if(!scripts/mp/equipment/phase_shift::areentitiesinphase(var_01,self)) {
+		if(!scripts\mp\equipment\phase_shift::areentitiesinphase(var_01,self)) {
 			continue;
 		}
 
@@ -426,7 +426,7 @@ func_3D06(param_00) {
 		}
 
 		var_02 = scripts\engine\utility::ter_op(isdefined(var_01.triggerportableradarping),var_01.triggerportableradarping,var_01);
-		if(!level.friendlyfire && var_02 != self && !scripts\mp\_utility::istrue(scripts\mp\_utility::playersareenemies(var_02,self))) {
+		if(!level.friendlyfire && var_02 != self && !scripts\mp\utility::istrue(scripts\mp\utility::playersareenemies(var_02,self))) {
 			continue;
 		}
 
@@ -434,7 +434,7 @@ func_3D06(param_00) {
 			continue;
 		}
 
-		if(!isplayer(var_01) && !scripts\mp\_utility::func_9F22(var_01)) {
+		if(!isplayer(var_01) && !scripts\mp\utility::func_9F22(var_01)) {
 			continue;
 		}
 
@@ -443,7 +443,7 @@ func_3D06(param_00) {
 }
 
 func_3D18(param_00,param_01) {
-	if(!scripts\mp\_utility::isreallyalive(param_01)) {
+	if(!scripts\mp\utility::isreallyalive(param_01)) {
 		return;
 	}
 
@@ -458,7 +458,7 @@ func_3D18(param_00,param_01) {
 	}
 
 	var_02 = scripts\common\trace::create_contents(0,1,1,0,1,0);
-	var_03 = function_0287(self geteye(),param_01 geteye(),var_02,undefined,0,"physicsquery_closest");
+	var_03 = physics_raycast(self geteye(),param_01 geteye(),var_02,undefined,0,"physicsquery_closest");
 	if(isdefined(var_03) && var_03.size > 0) {
 		return;
 	}
@@ -466,7 +466,7 @@ func_3D18(param_00,param_01) {
 	var_04 = self getvelocity();
 	var_05 = vectortoangles(var_04);
 	var_06 = anglestoforward(var_05);
-	if(scripts\mp\_utility::func_9F22(param_01)) {
+	if(scripts\mp\utility::func_9F22(param_01)) {
 		var_07 = vectornormalize(param_01.origin - self.origin * (1,1,0));
 		var_08 = vectornormalize(var_06 * (1,1,0));
 		var_09 = scripts\engine\utility::anglebetweenvectorsunit(var_07,var_08);
@@ -484,7 +484,7 @@ func_3D18(param_00,param_01) {
 	}
 
 	thread func_3D14(param_00,param_01);
-	thread scripts\mp\_gamescore::func_11ACF(self,param_01,"chargemode_mp",5);
+	thread scripts\mp\gamescore::func_11ACF(self,param_01,"chargemode_mp",5);
 	if(!chargemode_isqueuedforepicimpact(param_01)) {
 		if(param_01 _meth_84CA() && func_3CE8(param_01)) {
 			if(param_01 func_3CE8(self)) {
@@ -539,12 +539,12 @@ chargemode_monitortriggerinteractionmanual(param_00) {
 				continue;
 			}
 
-			if(!scripts/mp/equipment/phase_shift::areentitiesinphase(var_07,self)) {
+			if(!scripts\mp\equipment\phase_shift::areentitiesinphase(var_07,self)) {
 				continue;
 			}
 
 			var_08 = scripts\engine\utility::ter_op(isdefined(var_07.triggerportableradarping),var_07.triggerportableradarping,var_07);
-			if(!level.friendlyfire && var_08 != self && !scripts\mp\_utility::istrue(scripts\mp\_utility::playersareenemies(var_08,self))) {
+			if(!level.friendlyfire && var_08 != self && !scripts\mp\utility::istrue(scripts\mp\utility::playersareenemies(var_08,self))) {
 				continue;
 			}
 
@@ -558,13 +558,13 @@ chargemode_monitortriggerinteractionmanual(param_00) {
 				continue;
 			}
 
-			var_0B = function_0287(var_04,var_07.origin,var_03,[var_07],0,"physicsquery_closest",1);
+			var_0B = physics_raycast(var_04,var_07.origin,var_03,[var_07],0,"physicsquery_closest",1);
 			if(isdefined(var_0B) && var_0B.size > 0) {
 				continue;
 			}
 
-			if(var_07 scripts/mp/equipment/exploding_drone::isexplodingdrone()) {
-				var_07 scripts/mp/equipment/exploding_drone::explodingdrone_makedamageimmune(self);
+			if(var_07 scripts\mp\equipment\exploding_drone::isexplodingdrone()) {
+				var_07 scripts\mp\equipment\exploding_drone::explodingdrone_makedamageimmune(self);
 			}
 			else if(var_07 scripts\mp\killstreaks\_venom::isvenom()) {
 				var_07 scripts\mp\killstreaks\_venom::makedamageimmune(self);
@@ -643,7 +643,7 @@ func_3CF5(param_00,param_01) {
 func_3CE9() {
 	thread chargemode_monitordestructibleimpactimmunity();
 	self radiusdamage(self.origin,256,140,70,self,"MOD_EXPLOSIVE","chargemode_mp");
-	scripts\mp\_shellshock::grenade_earthquakeatposition(self.origin);
+	scripts\mp\shellshock::grenade_earthquakeatposition(self.origin);
 	playfx(scripts\engine\utility::getfx("chargemode_expl"),self.origin);
 	self playsound("heavy_charge_impact_wall");
 	self setclientomnvar("ui_hud_shake",1);
@@ -830,7 +830,7 @@ chargemode_isdamageimmunedestructibleimpact(param_00,param_01,param_02,param_03)
 		return 0;
 	}
 
-	if(!scripts\mp\_utility::istrue(param_01.chargemode_destructibleimpactimmune)) {
+	if(!scripts\mp\utility::istrue(param_01.chargemode_destructibleimpactimmune)) {
 		return 0;
 	}
 

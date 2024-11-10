@@ -1,8 +1,8 @@
-/***********************************************************
+/***************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\zombies\_powerup_ability.gsc
-***********************************************************/
+ * Script: scripts\cp\zombies\_powerup_ability.gsc
+***************************************************/
 
 powershud_init() {
 	var_00 = spawnstruct();

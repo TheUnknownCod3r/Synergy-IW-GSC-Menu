@@ -1,8 +1,8 @@
-/***************************************************************
+/*******************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\zombies\interaction_fishtrap.gsc
-***************************************************************/
+ * Script: scripts\cp\zombies\interaction_fishtrap.gsc
+*******************************************************/
 
 init_fishtrap() {
 	var_00 = scripts\engine\utility::getstructarray("trap_electric","script_noteworthy");

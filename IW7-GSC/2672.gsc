@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2672.gsc
+ * Script: 2672.gsc
 ***************************************/
 
 init() {
@@ -9,16 +9,16 @@ init() {
   var_00 = 0;
 
   for (;;) {
-  var_01 = int(tablelookuprownum("mp/weaponRankTable.csv", 0, var_00));
+  var_01 = int(tablelookuprownum("mp\weaponRankTable.csv", 0, var_00));
 
   if (!isdefined(var_01) || var_01 < 0)
   break;
 
   var_02 = spawnstruct();
   level.weaponranktable.rankinfo[var_00] = var_02;
-  var_2.minxp = int(tablelookupbyrow("mp/weaponRankTable.csv", var_00, 1));
-  var_2.xptonextrank = int(tablelookupbyrow("mp/weaponRankTable.csv", var_00, 2));
-  var_2.maxxp = int(tablelookupbyrow("mp/weaponRankTable.csv", var_00, 3));
+  var_2.minxp = int(tablelookupbyrow("mp\weaponRankTable.csv", var_00, 1));
+  var_2.xptonextrank = int(tablelookupbyrow("mp\weaponRankTable.csv", var_00, 2));
+  var_2.maxxp = int(tablelookupbyrow("mp\weaponRankTable.csv", var_00, 3));
   var_0++;
   }
 
@@ -27,13 +27,13 @@ init() {
   var_03 = 1;
 
   for (;;) {
-  var_01 = int(tablelookuprownum("mp/statstable.csv", 0, var_03));
+  var_01 = int(tablelookuprownum("mp\statstable.csv", 0, var_03));
 
   if (!isdefined(var_01) || var_01 < 0)
   break;
 
-  var_04 = tablelookupbyrow("mp/statstable.csv", var_01, 4);
-  var_05 = tablelookupbyrow("mp/statstable.csv", var_01, 42);
+  var_04 = tablelookupbyrow("mp\statstable.csv", var_01, 4);
+  var_05 = tablelookupbyrow("mp\statstable.csv", var_01, 42);
 
   if (!isdefined(var_04) || var_04 == "" || !isdefined(var_05) || var_05 == "") {} else {
   var_05 = int(var_05);
@@ -47,7 +47,7 @@ init() {
 }
 
 init_weapon_rank_events() {
-  var_00 = "scripts/cp/maps/cp_zmb/cp_zmb_weaponrank_event.csv";
+  var_00 = "scripts\cp\maps\cp_zmb\cp_zmb_weaponrank_event.csv";
 
   if (isdefined(level.weapon_rank_event_table))
   var_00 = level.weapon_rank_event_table;
@@ -74,7 +74,7 @@ try_give_player_weapon_xp(var_00, var_01, var_02, var_03) {
   if (isai(var_00) || !isplayer(var_00) || !weapon_progression_enabled() || !is_weapon_unlocked(var_00, var_01))
   return;
 
-  var_04 = scripts/cp/utility::getbaseweaponname(var_01);
+  var_04 = scripts\cp\utility::getbaseweaponname(var_01);
 
   if (!weapon_should_get_xp(var_04))
   return;
@@ -101,7 +101,7 @@ give_player_weapon_xp(var_00, var_01, var_02) {
   var_00 setrankedplayerdata("common", "sharedProgression", "weaponLevel", var_01, "cpXP", var_10);
 
   if (var_06 < var_13)
-  var_00 scripts/cp/cp_hud_message::showsplash("ranked_up_weapon_" + var_01, var_13 + 1);
+  var_00 scripts\cp\cp_hud_message::showsplash("ranked_up_weapon_" + var_01, var_13 + 1);
 }
 
 weapon_progression_enabled() {
@@ -112,9 +112,9 @@ weapon_progression_enabled() {
 }
 
 is_weapon_unlocked(var_00, var_01) {
-  var_02 = var_00 scripts/cp/cp_persistence::get_player_rank();
-  var_03 = scripts/cp/utility::getbaseweaponname(var_01);
-  var_04 = int(tablelookup("mp/unlocks/CPWeaponUnlocks.csv", 0, var_03, 7));
+  var_02 = var_00 scripts\cp\cp_persistence::get_player_rank();
+  var_03 = scripts\cp\utility::getbaseweaponname(var_01);
+  var_04 = int(tablelookup("mp\unlocks\CPWeaponUnlocks.csv", 0, var_03, 7));
 
   if (var_02 >= var_04)
   return 1;
@@ -189,7 +189,7 @@ try_give_weapon_xp_zombie_killed(var_00, var_01, var_02, var_03, var_04) {
 }
 
 get_zombie_killed_weapon_xp_multiplier_type(var_00, var_01, var_02, var_03) {
-  if (scripts/cp/utility::isheadshot(var_00, var_01, var_02, var_03))
+  if (scripts\cp\utility::isheadshot(var_00, var_01, var_02, var_03))
   return "headshot";
 
   return undefined;

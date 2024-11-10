@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\2831.gsc
-****************************/
+ * Script: 2831.gsc
+************************/
 
 func_9543() {
 	setdvarifuninitialized("skyambient_off",0);
@@ -672,11 +672,11 @@ func_1E09(param_00,param_01) {
 			param_01.angles = (0,0,0);
 		}
 
-		thread scripts/sp/anim::func_1EC2(self,var_02,param_01.origin,param_01.angles);
+		thread scripts\sp\anim::func_1EC2(self,var_02,param_01.origin,param_01.angles);
 	}
 	else
 	{
-		param_01 thread scripts/sp/anim::func_1ECC(self,var_02);
+		param_01 thread scripts\sp\anim::func_1ECC(self,var_02);
 	}
 
 	self show();

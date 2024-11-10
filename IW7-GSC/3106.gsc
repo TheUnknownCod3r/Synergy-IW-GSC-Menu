@@ -1,18 +1,18 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\3106.gsc
+ * Script: 3106.gsc
 ***************************************/
 
 func_DF13() {
   func_0C23::func_BE5C();
 
-  if (scripts\aitypes\bt_util::bt_istreeregistered("jackal/jackal"))
+  if (scripts\aitypes\bt_util::bt_istreeregistered("jackal\jackal"))
   return;
 
   scripts\aitypes\bt_util::init();
   var_00 = func_0070();
   var_0.func_71AD = ::bt_initroot;
-  scripts\aitypes\bt_util::bt_registertree("jackal/jackal", var_00);
+  scripts\aitypes\bt_util::bt_registertree("jackal\jackal", var_00);
 }
 
 bt_initroot() {
@@ -22,8 +22,8 @@ bt_initroot() {
   var_0.func_4B1B = 0;
   var_0.func_C21E = 8;
   var_0.func_273F = 0;
-  self.bt.func_E6E5 = var_00;
-  self.bt.func_BE5D = self _meth_84B1("jackal/jackal_native_api");
+  self.var_3135.func_E6E5 = var_00;
+  self.var_3135.func_BE5D = self _meth_84B1("jackal\jackal_native_api");
 }
 
 func_0070() {

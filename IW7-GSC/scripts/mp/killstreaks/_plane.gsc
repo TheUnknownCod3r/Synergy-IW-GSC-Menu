@@ -1,8 +1,8 @@
-/*****************************************************
+/*********************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\killstreaks\_plane.gsc
-*****************************************************/
+ * Script: scripts\mp\killstreaks\_plane.gsc
+*********************************************/
 
 init() {
 	if(!isdefined(level.planes)) {
@@ -13,11 +13,11 @@ init() {
 		level.planeconfigs = [];
 	}
 
-	level.fighter_deathfx = loadfx("vfx/iw7/_requests/mp/vfx_debug_warning.vfx");
-	level.fx_airstrike_afterburner = loadfx("vfx/iw7/_requests/mp/vfx_debug_warning.vfx");
-	level.fx_airstrike_contrail = loadfx("vfx/iw7/_requests/mp/vfx_debug_warning.vfx");
-	level.fx_airstrike_wingtip_light_green = loadfx("vfx/iw7/_requests/mp/vfx_debug_warning.vfx");
-	level.fx_airstrike_wingtip_light_red = loadfx("vfx/iw7/_requests/mp/vfx_debug_warning.vfx");
+	level.fighter_deathfx = loadfx("vfx\iw7\_requests\mp\vfx_debug_warning.vfx");
+	level.fx_airstrike_afterburner = loadfx("vfx\iw7\_requests\mp\vfx_debug_warning.vfx");
+	level.fx_airstrike_contrail = loadfx("vfx\iw7\_requests\mp\vfx_debug_warning.vfx");
+	level.fx_airstrike_wingtip_light_green = loadfx("vfx\iw7\_requests\mp\vfx_debug_warning.vfx");
+	level.fx_airstrike_wingtip_light_red = loadfx("vfx\iw7\_requests\mp\vfx_debug_warning.vfx");
 }
 
 getflightpath(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07) {
@@ -150,20 +150,20 @@ handledeath() {
 
 handledamage() {
 	self endon("end_remote");
-	scripts\mp\_damage::monitordamage(800,"helicopter",::handledeathdamage,::modifydamage,1);
+	scripts\mp\damage::monitordamage(800,"helicopter",::handledeathdamage,::modifydamage,1);
 }
 
 modifydamage(param_00,param_01,param_02,param_03,param_04) {
 	var_05 = param_03;
-	var_05 = scripts\mp\_damage::handlemissiledamage(param_01,param_02,var_05);
-	var_05 = scripts\mp\_damage::handleapdamage(param_01,param_02,var_05);
+	var_05 = scripts\mp\damage::handlemissiledamage(param_01,param_02,var_05);
+	var_05 = scripts\mp\damage::handleapdamage(param_01,param_02,var_05);
 	return var_05;
 }
 
 handledeathdamage(param_00,param_01,param_02,param_03) {
 	var_04 = level.planeconfigs[self.streakname];
-	scripts\mp\_damage::onkillstreakkilled(self.streakname,param_00,param_01,param_02,param_03,var_04.scorepopup,var_04.var_52DA,var_04.callout);
-	scripts\mp\_missions::func_3DE3(param_00,self,param_01);
+	scripts\mp\damage::onkillstreakkilled(self.streakname,param_00,param_01,param_02,param_03,var_04.scorepopup,var_04.var_52DA,var_04.callout);
+	scripts\mp\missions::func_3DE3(param_00,self,param_01);
 }
 
 playplanefx() {
@@ -247,7 +247,7 @@ selectairstrikelocation(param_00,param_01,param_02) {
 		self playlocalsound(game["voice"][self.team] + var_04.selectlocationvo);
 	}
 
-	scripts\mp\_utility::_beginlocationselection(param_01,"map_artillery_selector",var_04.choosedirection,var_03);
+	scripts\mp\utility::_beginlocationselection(param_01,"map_artillery_selector",var_04.choosedirection,var_03);
 	self endon("stop_location_selection");
 	self waittill("confirm_location",var_05,var_06);
 	if(!var_04.choosedirection) {
@@ -284,7 +284,7 @@ setobjectiveicons(param_00,param_01) {
 		}
 
 		if(var_03 != -1) {
-			scripts\mp\objidpoolmanager::minimap_objective_team(var_03,scripts\mp\_utility::getotherteam(self.team));
+			scripts\mp\objidpoolmanager::minimap_objective_team(var_03,scripts\mp\utility::getotherteam(self.team));
 			return;
 		}
 

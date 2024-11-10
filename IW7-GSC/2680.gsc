@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\2680.gsc
-****************************/
+ * Script: 2680.gsc
+************************/
 
 frontend_camera_setup(param_00,param_01) {
 	level.camera_anchor = spawn("script_model",param_00);

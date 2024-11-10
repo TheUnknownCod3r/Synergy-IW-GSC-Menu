@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2847.gsc
+ * Script: 2847.gsc
 ***************************************/
 
 #using_animtree("script_model");
@@ -39,19 +39,19 @@ func_95B6() {
   var_2.func_5A57 = var_2.script_parameters;
   var_2.func_1FBB = "door";
   var_02 glinton(#animtree);
-  var_02 scripts/sp/utility::func_65E0("player_used_door");
-  var_02 scripts/sp/utility::func_65E0("player_at_door");
-  var_02 scripts/sp/utility::func_65E0("actor_at_door");
-  var_02 scripts/sp/utility::func_65E0("begin_opening");
-  var_02 scripts/sp/utility::func_65E0("door_opened");
-  var_02 scripts/sp/utility::func_65E0("door_sequence_complete");
-  var_02 scripts/sp/utility::func_65E0("no_anim_reach");
-  var_02 scripts/sp/utility::func_65E0("skip_reach_on_use");
+  var_02 scripts\sp\utility::func_65E0("player_used_door");
+  var_02 scripts\sp\utility::func_65E0("player_at_door");
+  var_02 scripts\sp\utility::func_65E0("actor_at_door");
+  var_02 scripts\sp\utility::func_65E0("begin_opening");
+  var_02 scripts\sp\utility::func_65E0("door_opened");
+  var_02 scripts\sp\utility::func_65E0("door_sequence_complete");
+  var_02 scripts\sp\utility::func_65E0("no_anim_reach");
+  var_02 scripts\sp\utility::func_65E0("skip_reach_on_use");
 
   if (isdefined(var_2.func_EDA0))
-  var_02 scripts/sp/utility::func_65E0(var_2.func_EDA0);
+  var_02 scripts\sp\utility::func_65E0(var_2.func_EDA0);
 
-  var_02 scripts/sp/utility::func_65E0("locked");
+  var_02 scripts\sp\utility::func_65E0("locked");
   var_02 thread door_think();
   }
 
@@ -60,10 +60,10 @@ func_95B6() {
 
 door_think() {
   if (self.func_5A57 == "airlock" && self.model == "sdf_door_airlock_01")
-  scripts/sp/anim::func_1EC3(self, "airlock_open_player");
+  scripts\sp\anim::func_1EC3(self, "airlock_open_player");
 
   if (isdefined(self.func_EDA0))
-  scripts/sp/utility::func_65E3(self.func_EDA0);
+  scripts\sp\utility::func_65E3(self.func_EDA0);
 
   switch (self.func_5A57) {
   case "no_power":
@@ -101,25 +101,25 @@ func_168A(var_00) {
 }
 
 func_AED6() {
-  if (!scripts/sp/utility::func_65DB("locked")) {
-  scripts/sp/utility::func_65E1("locked");
+  if (!scripts\sp\utility::func_65DB("locked")) {
+  scripts\sp\utility::func_65E1("locked");
   func_0E46::func_DFE3();
   }
 }
 
 func_12BD3() {
-  if (scripts/sp/utility::func_65DB("locked")) {
-  scripts/sp/utility::func_65DD("locked");
+  if (scripts\sp\utility::func_65DB("locked")) {
+  scripts\sp\utility::func_65DD("locked");
   func_0E46::func_48C4("tag_ui_front", (0, 0, -2));
   }
 }
 
 func_599E() {
-  return scripts/sp/utility::func_65DB("locked");
+  return scripts\sp\utility::func_65DB("locked");
 }
 
 func_1AB0() {
-  var_00 = scripts/sp/utility::func_7A8F();
+  var_00 = scripts\sp\utility::func_7A8F();
   scripts\engine\utility::array_call(var_00, ::linkto, self, "door_jnt");
 
   foreach (var_02 in var_00) {
@@ -135,15 +135,15 @@ func_1AB0() {
   self.func_DF3A = 1;
   func_0E46::func_48C4("tag_ui_front");
   self waittill("trigger", var_04);
-  scripts/sp/utility::func_65E1("player_at_door");
+  scripts\sp\utility::func_65E1("player_at_door");
   var_05 = func_D0A6("airlock_open_player");
-  scripts/sp/utility::func_65E1("begin_opening");
+  scripts\sp\utility::func_65E1("begin_opening");
   var_06 = [self, var_05];
 
   if (soundexists("airlock_exit_door_open"))
-  level.player thread scripts/sp/utility::play_sound_on_entity("airlock_exit_door_open");
+  level.player thread scripts\sp\utility::play_sound_on_entity("airlock_exit_door_open");
 
-  scripts/sp/anim::func_1F2C(var_06, "airlock_open_player");
+  scripts\sp\anim::func_1F2C(var_06, "airlock_open_player");
 
   if (scripts\engine\utility::is_true(self.func_DF3A)) {
   level.player func_5990();
@@ -153,20 +153,20 @@ func_1AB0() {
 
   self.func_C969 connectpaths();
   self.func_C969 disconnectpaths();
-  scripts/sp/utility::func_65E1("door_sequence_complete");
+  scripts\sp\utility::func_65E1("door_sequence_complete");
 }
 
 func_1AC1() {
   level.func_1AE3 = [];
   scripts\engine\utility::flag_init("airlocks_setup");
-  level._effect["vfx_airlock_light_green"] = loadfx("vfx/iw7/_requests/airlock/vfx_light_green.vfx");
-  level._effect["vfx_airlock_light_orange"] = loadfx("vfx/iw7/_requests/airlock/vfx_light_orange.vfx");
-  level._effect["vfx_airlock_light_red"] = loadfx("vfx/iw7/_requests/airlock/vfx_light_red.vfx");
-  level._effect["vfx_airlock_vent_xtrlrg_press"] = loadfx("vfx/iw7/core/mechanics/airlock/vfx_airlock_vent_xtrlrg_press.vfx");
-  level._effect["vfx_airlock_vents_air"] = loadfx("vfx/iw7/core/mechanics/airlock/vfx_airlock_vent_lrg_press.vfx");
-  level._effect["vfx_airlock_air_fill"] = loadfx("vfx/iw7/core/mechanics/airlock/vfx_airlock_roomcenter_press.vfx");
-  level._effect["vfx_airlock_camcentr_depress"] = loadfx("vfx/iw7/core/mechanics/airlock/vfx_airlock_camcentr_depress.vfx");
-  level._effect["vfx_airlock_vent_lrg_depress"] = loadfx("vfx/iw7/core/mechanics/airlock/vfx_airlock_vent_lrg_depress.vfx");
+  level._effect["vfx_airlock_light_green"] = loadfx("vfx\iw7\_requests\airlock\vfx_light_green.vfx");
+  level._effect["vfx_airlock_light_orange"] = loadfx("vfx\iw7\_requests\airlock\vfx_light_orange.vfx");
+  level._effect["vfx_airlock_light_red"] = loadfx("vfx\iw7\_requests\airlock\vfx_light_red.vfx");
+  level._effect["vfx_airlock_vent_xtrlrg_press"] = loadfx("vfx\iw7\core\mechanics\airlock\vfx_airlock_vent_xtrlrg_press.vfx");
+  level._effect["vfx_airlock_vents_air"] = loadfx("vfx\iw7\core\mechanics\airlock\vfx_airlock_vent_lrg_press.vfx");
+  level._effect["vfx_airlock_air_fill"] = loadfx("vfx\iw7\core\mechanics\airlock\vfx_airlock_roomcenter_press.vfx");
+  level._effect["vfx_airlock_camcentr_depress"] = loadfx("vfx\iw7\core\mechanics\airlock\vfx_airlock_camcentr_depress.vfx");
+  level._effect["vfx_airlock_vent_lrg_depress"] = loadfx("vfx\iw7\core\mechanics\airlock\vfx_airlock_vent_lrg_depress.vfx");
   func_1ACF();
   func_1AAF();
   thread func_1AD9();
@@ -202,8 +202,8 @@ func_1AD9() {
   }
 
   var_02 func_1AAE();
-  var_02 scripts/sp/utility::func_65E0("cycling");
-  var_02 scripts/sp/utility::func_65E0("cycling_complete");
+  var_02 scripts\sp\utility::func_65E0("cycling");
+  var_02 scripts\sp\utility::func_65E0("cycling_complete");
   thread scripts\engine\utility::play_loopsound_in_space("airlock_light_hum", var_2.origin);
 
   if (isdefined(var_2.targetname))
@@ -374,8 +374,8 @@ func_1AB2(var_00) {
 func_1AA9(var_00, var_01, var_02, var_03, var_04) {
   scripts\engine\utility::flag_wait("airlocks_setup");
   var_05 = scripts\engine\utility::getstruct(var_00, "targetname");
-  var_05 scripts/sp/utility::func_65DD("cycling_complete");
-  var_05 scripts/sp/utility::func_65E1("cycling");
+  var_05 scripts\sp\utility::func_65DD("cycling_complete");
+  var_05 scripts\sp\utility::func_65E1("cycling");
   var_06 = [];
 
   if (isdefined(var_02))
@@ -416,7 +416,7 @@ func_1AA9(var_00, var_01, var_02, var_03, var_04) {
   var_04 = 1;
 
   var_05 thread func_1AAD(var_04);
-  level.player scripts/sp/utility::play_sound_on_entity(var_15);
+  level.player scripts\sp\utility::play_sound_on_entity(var_15);
   var_5.func_4CD5 = 0;
   var_17 = "back";
 
@@ -455,14 +455,14 @@ func_1AA9(var_00, var_01, var_02, var_03, var_04) {
   var_03 func_1AB6("locked");
   }
 
-  var_05 scripts/sp/utility::func_65E1("cycling_complete");
-  var_05 scripts/sp/utility::func_65DD("cycling");
+  var_05 scripts\sp\utility::func_65E1("cycling_complete");
+  var_05 scripts\sp\utility::func_65DD("cycling");
 }
 
 func_1AAB(var_00, var_01, var_02, var_03) {
   var_04 = level.func_1AE3[var_00];
-  var_04 scripts/sp/utility::func_65DD("cycling_complete");
-  var_04 scripts/sp/utility::func_65E1("cycling");
+  var_04 scripts\sp\utility::func_65DD("cycling_complete");
+  var_04 scripts\sp\utility::func_65E1("cycling");
   var_05 = [];
 
   if (isdefined(var_02))
@@ -477,14 +477,14 @@ func_1AAB(var_00, var_01, var_02, var_03) {
   wait 8.408;
   var_4.func_4CD5 = 0;
   func_1AD8(var_00, 0, var_02, var_03);
-  var_04 scripts/sp/utility::func_65E1("cycling_complete");
-  var_04 scripts/sp/utility::func_65DD("cycling");
+  var_04 scripts\sp\utility::func_65E1("cycling_complete");
+  var_04 scripts\sp\utility::func_65DD("cycling");
 }
 
 func_1374E(var_00) {
   scripts\engine\utility::flag_wait("airlocks_setup");
   var_01 = level.func_1AE3[var_00];
-  var_01 scripts/sp/utility::func_65E3("cycling_complete");
+  var_01 scripts\sp\utility::func_65E3("cycling_complete");
 }
 
 func_1AAD(var_00) {
@@ -634,16 +634,16 @@ func_1AB6(var_00) {
   }
   }
   else if (var_00 != "unlocked") {
-  if (scripts/sp/utility::hastag(self.model, "tag_screen_locked"))
+  if (scripts\sp\utility::hastag(self.model, "tag_screen_locked"))
   self giveperk("tag_screen_locked", self.model);
 
-  if (scripts/sp/utility::hastag(self.model, "tag_screen_open"))
+  if (scripts\sp\utility::hastag(self.model, "tag_screen_open"))
   self hidepart("tag_screen_open", self.model);
   } else {
-  if (scripts/sp/utility::hastag(self.model, "tag_screen_locked"))
+  if (scripts\sp\utility::hastag(self.model, "tag_screen_locked"))
   self hidepart("tag_screen_locked", self.model);
 
-  if (scripts/sp/utility::hastag(self.model, "tag_screen_open"))
+  if (scripts\sp\utility::hastag(self.model, "tag_screen_open"))
   self giveperk("tag_screen_open", self.model);
   }
 
@@ -666,7 +666,7 @@ func_1AB4(var_00) {
 func_A852() {
   var_00 = undefined;
   var_01 = [];
-  var_02 = scripts/sp/utility::func_7A8F();
+  var_02 = scripts\sp\utility::func_7A8F();
 
   foreach (var_04 in var_02) {
   if (var_4.classname == "script_model") {
@@ -695,7 +695,7 @@ func_A852() {
   if (isdefined(var_1["player"]))
   thread func_A855();
 
-  scripts/sp/utility::func_65E3("door_sequence_complete");
+  scripts\sp\utility::func_65E3("door_sequence_complete");
 }
 
 func_A855() {
@@ -705,12 +705,12 @@ func_A855() {
   var_0["player"] waittill("trigger", var_01);
   var_02 = var_0["player"] func_D0A6("large_door_open_arrive");
   var_03 = [var_0["player"], var_02];
-  var_0["player"] scripts/sp/anim::func_1F2C(var_03, "large_door_open_arrive");
-  scripts/sp/utility::func_65E1("player_at_door");
-  var_0["player"] thread scripts/sp/anim::func_1EE7(var_03, "large_door_open_idle");
-  scripts/sp/utility::func_65E3("begin_opening");
+  var_0["player"] scripts\sp\anim::func_1F2C(var_03, "large_door_open_arrive");
+  scripts\sp\utility::func_65E1("player_at_door");
+  var_0["player"] thread scripts\sp\anim::func_1EE7(var_03, "large_door_open_idle");
+  scripts\sp\utility::func_65E3("begin_opening");
   var_0["player"] notify("stop_loop");
-  var_0["player"] scripts/sp/anim::func_1F2C(var_03, "large_door_open");
+  var_0["player"] scripts\sp\anim::func_1F2C(var_03, "large_door_open");
   var_01 func_5990();
   var_01 unlink();
   var_02 delete();
@@ -732,43 +732,43 @@ func_A854(var_00, var_01) {
   var_5.func_1FBB = "console_ai";
   var_4.func_A93B = var_4.func_1FBB;
   var_4.func_1FBB = "main";
-  var_04 scripts/sp/utility::func_178D(scripts/sp/utility::func_137AA, "actor_at_door");
+  var_04 scripts\sp\utility::func_178D(scripts\sp\utility::func_137AA, "actor_at_door");
   thread func_A853(var_04, var_05);
   }
 
   if (isdefined(self.func_454F["player"]))
-  scripts/sp/utility::func_178D(scripts/sp/utility::func_65E3, "player_at_door");
+  scripts\sp\utility::func_178D(scripts\sp\utility::func_65E3, "player_at_door");
 
-  scripts/sp/utility::func_57D5();
-  scripts/sp/utility::func_65E1("actor_at_door");
+  scripts\sp\utility::func_57D5();
+  scripts\sp\utility::func_65E1("actor_at_door");
 
   if (isdefined(self.func_D45A))
-  scripts/sp/utility::func_65E3("player_at_door");
+  scripts\sp\utility::func_65E3("player_at_door");
 
-  scripts/sp/utility::func_65E1("begin_opening");
-  wait(getanimlength(var_00 scripts/sp/utility::func_7DC1("large_door_open")));
+  scripts\sp\utility::func_65E1("begin_opening");
+  wait(getanimlength(var_00 scripts\sp\utility::func_7DC1("large_door_open")));
 
   foreach (var_04 in var_02)
   var_4.func_1FBB = var_4.func_A93B;
 
-  scripts/sp/utility::func_65E1("door_sequence_complete");
+  scripts\sp\utility::func_65E1("door_sequence_complete");
 }
 
 func_A853(var_00, var_01) {
   var_02 = [var_00, var_01];
-  var_01 scripts/sp/anim::func_1F17(var_00, "large_door_open_arrive");
-  var_01 scripts/sp/anim::func_1F2C(var_02, "large_door_open_arrive");
-  var_01 thread scripts/sp/anim::func_1EE7(var_02, "large_door_open_idle");
+  var_01 scripts\sp\anim::func_1F17(var_00, "large_door_open_arrive");
+  var_01 scripts\sp\anim::func_1F2C(var_02, "large_door_open_arrive");
+  var_01 thread scripts\sp\anim::func_1EE7(var_02, "large_door_open_idle");
   var_00 notify("actor_at_door");
-  scripts/sp/utility::func_65E3("begin_opening");
+  scripts\sp\utility::func_65E3("begin_opening");
   var_01 notify("stop_loop");
   var_00 func_0A1E::func_2386();
-  var_01 thread scripts/sp/anim::func_1F2C(var_02, "large_door_open");
+  var_01 thread scripts\sp\anim::func_1F2C(var_02, "large_door_open");
 }
 
 buddy_down_skip_post_clear() {
-  scripts/sp/utility::func_65E0("secondary_actors_going_through");
-  scripts/sp/utility::func_65E0("player_prying_open_door");
+  scripts\sp\utility::func_65E0("secondary_actors_going_through");
+  scripts\sp\utility::func_65E0("player_prying_open_door");
   thread buddy_down_trigger_damage_onflashbang();
 }
 
@@ -793,19 +793,19 @@ buddy_down_trigger_damage_onflashbang() {
   func_0E46::func_48C4(var_00, var_01, undefined, undefined, undefined, undefined, var_02);
   self setusefov(180);
   func_0E46::func_9016();
-  scripts/sp/utility::func_65E1("player_used_door");
+  scripts\sp\utility::func_65E1("player_used_door");
   var_03 = func_D0A6(func_5997("intro"));
 
   if (isdefined(self.func_9AEF))
-  level.player thread scripts/sp/utility::play_sound_on_entity(self.func_9AEF);
+  level.player thread scripts\sp\utility::play_sound_on_entity(self.func_9AEF);
 
   level notify("buddydoor_player_intro");
   func_59DE([self, var_03], func_5997("intro"));
   level notify("buddydoor_player_idle");
   thread func_59DE([self, var_03], func_5997("idle"), 1);
-  scripts/sp/utility::func_65E1("player_at_door");
-  scripts/sp/utility::func_65E3("actor_at_door");
-  scripts/sp/utility::func_65E1("begin_opening");
+  scripts\sp\utility::func_65E1("player_at_door");
+  scripts\sp\utility::func_65E3("actor_at_door");
+  scripts\sp\utility::func_65E1("begin_opening");
   var_04 = [self, var_03];
 
   foreach (var_06 in self.func_1684) {
@@ -817,19 +817,19 @@ buddy_down_trigger_damage_onflashbang() {
 
   level notify("buddydoor_player_pry_open");
   buddy_down_two_enemy_dead_thread(var_04);
-  scripts/sp/utility::func_65E1("door_opened");
+  scripts\sp\utility::func_65E1("door_opened");
   level notify("buddydoor_player_outro");
   self notify("buddydoor_outro");
 
   if (isdefined(self.func_427C))
-  level.player thread scripts/sp/utility::play_sound_on_entity(self.func_427C);
+  level.player thread scripts\sp\utility::play_sound_on_entity(self.func_427C);
 
   var_04 = [self, var_03];
   func_59DE(var_04, func_5997("outro"));
   level.player func_5990();
   level.player unlink();
   var_03 delete();
-  scripts/sp/utility::func_65E1("door_sequence_complete");
+  scripts\sp\utility::func_65E1("door_sequence_complete");
   level notify("buddydoor_player_done");
 }
 
@@ -841,7 +841,7 @@ buddy_down_two_enemy_dead_thread(var_00) {
   if (!isdefined(self.func_C633))
   self.func_C633 = 1;
 
-  var_01 = getanimlength(var_0[0] scripts/sp/utility::func_7DC1(func_5997("pull")));
+  var_01 = getanimlength(var_0[0] scripts\sp\utility::func_7DC1(func_5997("pull")));
   var_02 = var_01 / self.func_C633;
 
   if (self.func_10247)
@@ -850,7 +850,7 @@ buddy_down_two_enemy_dead_thread(var_00) {
   for (;;) {
   level.player waittill("bash_pressed");
   level notify("buddydoor_pry_open_start");
-  scripts/sp/utility::func_65E1("player_prying_open_door");
+  scripts\sp\utility::func_65E1("player_prying_open_door");
   level.player.func_2704 = 1;
   thread buddyspawn();
   var_03 = buddy_down_price_anim(0.5, 1);
@@ -863,7 +863,7 @@ buddy_down_two_enemy_dead_thread(var_00) {
   foreach (var_05 in var_00)
   var_05 givescorefortrophyblocks();
 
-  scripts/sp/anim::func_1EC1(var_00, func_5997("pull"));
+  scripts\sp\anim::func_1EC1(var_00, func_5997("pull"));
 
   foreach (var_05 in var_00) {
   if (isai(var_05)) {
@@ -871,7 +871,7 @@ buddy_down_two_enemy_dead_thread(var_00) {
   continue;
   }
 
-  var_08 = var_05 scripts/sp/utility::func_7DC1(func_5997("pull"));
+  var_08 = var_05 scripts\sp\utility::func_7DC1(func_5997("pull"));
   var_05 give_attacker_kill_rewards(var_08, 1, 0.2, self.func_C633);
   }
 
@@ -886,20 +886,20 @@ buddy_down_two_enemy_dead_thread(var_00) {
   level notify("buddydoor_pry_open_failed");
 
   if (isdefined(self.func_C62B))
-  level.player thread scripts/sp/utility::play_sound_on_entity(self.func_C62B);
+  level.player thread scripts\sp\utility::play_sound_on_entity(self.func_C62B);
 
   var_10 = 5;
-  var_11 = var_0[0] islegacyagent(var_0[0] scripts/sp/utility::func_7DC1(func_5997("pull")));
+  var_11 = var_0[0] islegacyagent(var_0[0] scripts\sp\utility::func_7DC1(func_5997("pull")));
   var_12 = var_01 * var_11;
   var_12 = var_12 / var_10;
 
   foreach (var_05 in var_00)
-  var_05 _meth_82B1(var_05 scripts/sp/utility::func_7DC1(func_5997("pull")), var_10 * -1);
+  var_05 _meth_82B1(var_05 scripts\sp\utility::func_7DC1(func_5997("pull")), var_10 * -1);
 
   wait(var_12);
   level.player playrumbleonentity("damage_heavy");
   self notify("stop_pry_anim");
-  scripts/sp/utility::func_65DD("player_prying_open_door");
+  scripts\sp\utility::func_65DD("player_prying_open_door");
   level.player.func_2704 = 0;
   thread func_59DE(var_00, func_5997("idle"), 1);
   }
@@ -908,11 +908,11 @@ buddy_down_two_enemy_dead_thread(var_00) {
   scripts\engine\utility::stop_loop_sound_on_entity(self.func_C62F);
 
   if (isdefined(self.func_C634))
-  thread scripts/sp/utility::play_sound_on_entity(self.func_C634);
+  thread scripts\sp\utility::play_sound_on_entity(self.func_C634);
 }
 
 func_2643() {
-  while (!scripts/sp/utility::func_65DB("door_opened")) {
+  while (!scripts\sp\utility::func_65DB("door_opened")) {
   level.player notify("bash_pressed");
   wait 0.05;
   }
@@ -921,7 +921,7 @@ func_2643() {
 buddyplayerid() {
   self endon("stop_pry_anim");
   self endon("buddydoor_pull_complete");
-  var_00 = scripts/sp/utility::func_7DC1(self.func_130FF func_5997("pull"));
+  var_00 = scripts\sp\utility::func_7DC1(self.func_130FF func_5997("pull"));
   var_01 = func_0A1E::func_2356("Knobs", "body");
   self aiclearanim(var_01, 0);
   self animmode("noclip");
@@ -1011,8 +1011,8 @@ buddy_down_gunner_damage_thread(var_00) {
   var_2.func_130FF = self;
   var_03 = var_2.func_1FBB + "_door_sequence_complete";
   var_04 = var_2.func_1FBB + "_at_door";
-  scripts/sp/utility::func_65E0(var_04);
-  scripts/sp/utility::func_65E0(var_03);
+  scripts\sp\utility::func_65E0(var_04);
+  scripts\sp\utility::func_65E0(var_03);
   }
 
   scripts\engine\utility::array_thread(var_00, ::func_598C);
@@ -1037,12 +1037,12 @@ buddy_down_gunner_death(var_00, var_01) {
   level notify("buddydoor_actors_intro");
   var_00 thread func_1162A(self);
 
-  if (var_00 scripts/sp/utility::func_65DB("skip_reach_on_use"))
+  if (var_00 scripts\sp\utility::func_65DB("skip_reach_on_use"))
   func_E9FF(var_00);
-  else if (!var_00 scripts/sp/utility::func_65DB("no_anim_reach"))
-  var_00 scripts/sp/anim::func_1F17(self, var_00 func_5997("intro"));
+  else if (!var_00 scripts\sp\utility::func_65DB("no_anim_reach"))
+  var_00 scripts\sp\anim::func_1F17(self, var_00 func_5997("intro"));
 
-  if (var_00 scripts/sp/utility::func_65DB("skip_reach_on_use")) {
+  if (var_00 scripts\sp\utility::func_65DB("skip_reach_on_use")) {
   func_E9FE(var_00);
   var_00 thread func_59DE(self, var_00 func_5997("idle"), 1);
   } else {
@@ -1051,19 +1051,19 @@ buddy_down_gunner_death(var_00, var_01) {
   }
 
   self.func_2412 = 1;
-  var_00 scripts/sp/utility::func_65E1(self.func_1FBB + "_at_door");
+  var_00 scripts\sp\utility::func_65E1(self.func_1FBB + "_at_door");
 
   foreach (var_03 in var_01) {
   if (!isdefined(var_3.func_2412))
   return;
   }
 
-  var_00 scripts/sp/utility::func_65E1("actor_at_door");
+  var_00 scripts\sp\utility::func_65E1("actor_at_door");
 }
 
 func_E9FF(var_00) {
   level.player endon("player_attached_to_door");
-  var_00 scripts/sp/anim::func_1F17(self, var_00 func_5997("intro"));
+  var_00 scripts\sp\anim::func_1F17(self, var_00 func_5997("intro"));
 }
 
 func_E9FE(var_00) {
@@ -1081,12 +1081,12 @@ buddy_down_gunner_flashed_thread(var_00) {
   var_0.func_2412 = undefined;
   var_00 func_598F();
   var_01 = var_0.func_1FBB + "_door_sequence_complete";
-  scripts/sp/utility::func_65E1(var_01);
+  scripts\sp\utility::func_65E1(var_01);
   level notify("buddydoor_actors_outro_done");
 }
 
 func_21E0() {
-  var_00 = scripts/sp/utility::func_7A97();
+  var_00 = scripts\sp\utility::func_7A97();
 
   if (isdefined(var_00)) {
   foreach (var_02 in var_00) {
@@ -1095,7 +1095,7 @@ func_21E0() {
   }
   }
 
-  self.collision = scripts/sp/utility::func_7A8E();
+  self.collision = scripts\sp\utility::func_7A8E();
 
   if (!isdefined(level.func_21E2))
   level.func_21E2 = 0;
@@ -1113,17 +1113,17 @@ func_21E9(var_00) {
   self.func_9026 func_0E46::func_48C4();
   self.func_9026 func_0E46::func_9016();
   level notify("armory_door_start_open");
-  scripts/sp/utility::func_65E1("player_at_door");
-  scripts/sp/utility::func_65E1("begin_opening");
+  scripts\sp\utility::func_65E1("player_at_door");
+  scripts\sp\utility::func_65E1("begin_opening");
   self notify("stop_loop");
   thread func_21E5();
   wait 0.7;
-  thread scripts/sp/utility::play_sound_on_entity("armory_door_open");
+  thread scripts\sp\utility::play_sound_on_entity("armory_door_open");
   func_0B09::func_489F(var_00);
 
   if (!func_0A2F::func_D9ED(var_00)) {
   func_0A2F::func_DA49(var_00, 1);
-  scripts/sp/utility::func_9145("fluff_messages_loot_room");
+  scripts\sp\utility::func_9145("fluff_messages_loot_room");
   }
 }
 
@@ -1140,19 +1140,19 @@ func_21E5() {
   self notify("stop_door");
   func_0E46::func_DFE3();
   self notify("stop_loop");
-  var_00 scripts/sp/anim::func_1EE0(var_00, "open_loot_door");
+  var_00 scripts\sp\anim::func_1EE0(var_00, "open_loot_door");
   self.collision connectpaths();
   self.position = "open";
 
-  if (scripts/sp/utility::hastag(self.model, "tag_locked"))
+  if (scripts\sp\utility::hastag(self.model, "tag_locked"))
   self hidepart("tag_locked", self.model);
 
-  if (scripts/sp/utility::hastag(self.model, "tag_unlocked"))
+  if (scripts\sp\utility::hastag(self.model, "tag_unlocked"))
   self giveperk("tag_unlocked", self.model);
   } else {
   var_01 = var_00 func_FA17("open_loot_door");
-  var_00 thread scripts/sp/anim::func_1F35(var_01, "open_loot_door", "tag_origin");
-  var_00 scripts/sp/anim::func_1F35(var_00, "open_loot_door", "tag_origin");
+  var_00 thread scripts\sp\anim::func_1F35(var_01, "open_loot_door", "tag_origin");
+  var_00 scripts\sp\anim::func_1F35(var_00, "open_loot_door", "tag_origin");
   self.collision connectpaths();
   var_01 delete();
   level.player func_5990();
@@ -1185,10 +1185,10 @@ func_13684(var_00) {
 
 func_FA17(var_00) {
   if (isdefined(level.func_E982) && level.func_E982 == 1)
-  var_01 = scripts/sp/utility::func_10639("player_rig_disguise");
+  var_01 = scripts\sp\utility::func_10639("player_rig_disguise");
   else
   {
-  var_01 = scripts/sp/utility::func_10639("player_arms");
+  var_01 = scripts\sp\utility::func_10639("player_arms");
   var_02 = level.player _meth_84C6("currentViewModel");
 
   if (isdefined(var_02))
@@ -1199,7 +1199,7 @@ func_FA17(var_00) {
   level.player getradiuspathsighttestnodes();
   level.player func_598D();
   var_03 = [var_01, self];
-  thread scripts/sp/anim::func_1EC3(var_01, var_00);
+  thread scripts\sp\anim::func_1EC3(var_01, var_00);
   var_04 = 0.4;
   level.player getweaponweight(var_01, "tag_player", var_04, 0.15, 0.15);
   wait(var_04);
@@ -1208,7 +1208,7 @@ func_FA17(var_00) {
 }
 
 func_3232() {
-  var_00 = scripts/sp/utility::func_7A8F();
+  var_00 = scripts\sp\utility::func_7A8F();
   scripts\engine\utility::array_call(var_00, ::linkto, self, "j_hinge2");
 
   foreach (var_02 in var_00) {
@@ -1223,24 +1223,24 @@ func_3232() {
 
   func_0E46::func_48C4(undefined, (20, -50, 55));
   self waittill("trigger", var_04);
-  scripts/sp/utility::func_65E1("player_at_door");
+  scripts\sp\utility::func_65E1("player_at_door");
   self.func_C969 connectpaths();
   var_05 = scripts\engine\utility::spawn_tag_origin(self.origin, self.angles + (0, 180, 0));
   var_06 = var_05 func_D0A6("bulkhead_open");
-  scripts/sp/utility::func_65E1("begin_opening");
+  scripts\sp\utility::func_65E1("begin_opening");
   var_07 = [self, var_06];
 
   if (soundexists("airlock_exit_door_open"))
-  level.player thread scripts/sp/utility::play_sound_on_entity("airlock_exit_door_open");
+  level.player thread scripts\sp\utility::play_sound_on_entity("airlock_exit_door_open");
 
-  var_05 scripts/sp/anim::func_1F2C(var_07, "bulkhead_open");
-  var_05 thread scripts/sp/anim::func_1F35(self, "bulkhead_open");
-  var_05 scripts/sp/anim::func_1F2A([self], "bulkhead_open", 0.99);
-  var_05 scripts/sp/anim::func_1F27([self], "bulkhead_open", 0);
+  var_05 scripts\sp\anim::func_1F2C(var_07, "bulkhead_open");
+  var_05 thread scripts\sp\anim::func_1F35(self, "bulkhead_open");
+  var_05 scripts\sp\anim::func_1F2A([self], "bulkhead_open", 0.99);
+  var_05 scripts\sp\anim::func_1F27([self], "bulkhead_open", 0);
   level.player func_5990();
   level.player unlink();
   var_06 delete();
-  scripts/sp/utility::func_65E1("door_sequence_complete");
+  scripts\sp\utility::func_65E1("door_sequence_complete");
 }
 
 func_5982(var_00, var_01, var_02) {
@@ -1279,7 +1279,7 @@ func_59EB(var_00, var_01, var_02, var_03, var_04) {
 
 func_598C() {
   if (isdefined(self.func_598E)) {
-  scripts/sp/utility::func_61C7();
+  scripts\sp\utility::func_61C7();
   self.func_598E = undefined;
   }
 }
@@ -1290,7 +1290,7 @@ func_598F() {
 }
 
 func_D0A6(var_00) {
-  var_01 = scripts/sp/utility::func_10639("door_player_rig");
+  var_01 = scripts\sp\utility::func_10639("door_player_rig");
 
   if (var_1.model == "viewmodel_base_viewhands_iw7") {
   var_02 = level.player _meth_84C6("currentViewModel");
@@ -1310,7 +1310,7 @@ func_D0A6(var_00) {
   if (!var_05 func_1FA3(var_00))
   continue;
 
-  thread scripts/sp/anim::func_1EC3(var_05, var_00);
+  thread scripts\sp\anim::func_1EC3(var_05, var_00);
   }
 
   var_07 = level.player scripts\engine\utility::spawn_tag_origin();
@@ -1341,7 +1341,7 @@ func_D0A6(var_00) {
 
 func_1162A(var_00) {
   var_00 endon("anim_reach_complete");
-  scripts/sp/utility::func_65E3("player_at_door");
+  scripts\sp\utility::func_65E3("player_at_door");
 
   if (isdefined(self.func_D83A))
   var_01 = self.func_D83A;
@@ -1400,7 +1400,7 @@ func_59DE(var_00, var_01, var_02) {
   continue;
 
   if (isdefined(var_02))
-  thread scripts/sp/anim::func_1EEA(var_05, var_01, "stop_loop_" + var_5.func_1FBB);
+  thread scripts\sp\anim::func_1EEA(var_05, var_01, "stop_loop_" + var_5.func_1FBB);
   else
   thread func_5981(var_05, var_01);
 
@@ -1409,14 +1409,14 @@ func_59DE(var_00, var_01, var_02) {
 
   if (!isdefined(var_02) && var_3.size > 0) {
   foreach (var_05 in var_03)
-  var_05 scripts/sp/utility::func_178D(scripts/sp/utility::func_137AA, var_01);
+  var_05 scripts\sp\utility::func_178D(scripts\sp\utility::func_137AA, var_01);
 
-  scripts/sp/utility::func_57D5();
+  scripts\sp\utility::func_57D5();
   }
 }
 
 func_5981(var_00, var_01) {
-  scripts/sp/anim::func_1F35(var_00, var_01);
+  scripts\sp\anim::func_1F35(var_00, var_01);
   var_00 notify(var_01);
 }
 

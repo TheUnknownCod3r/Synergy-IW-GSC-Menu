@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2783.gsc
+ * Script: 2783.gsc
 ***************************************/
 
 func_D446() {
@@ -9,10 +9,10 @@ func_D446() {
   self endon("player_trophy_unset");
 
   if (!isdefined(level._effect["pts_detonate"]))
-  level._effect["pts_detonate"] = loadfx("vfx/iw7/_requests/mp/vfx_generic_equipment_exp.vfx");
+  level._effect["pts_detonate"] = loadfx("vfx\iw7\_requests\mp\vfx_generic_equipment_exp.vfx");
 
   if (!isdefined(level._effect["pts_drone_drop"]))
-  level._effect["pts_drone_drop"] = loadfx("vfx/iw7/_requests/mp/vfx_pts_drone_drop.vfx");
+  level._effect["pts_drone_drop"] = loadfx("vfx\iw7\_requests\mp\vfx_pts_drone_drop.vfx");
 
   for (;;) {
   func_D447();

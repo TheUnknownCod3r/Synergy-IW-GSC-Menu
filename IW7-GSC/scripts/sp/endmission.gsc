@@ -1,8 +1,8 @@
-/*********************************************
+/*************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\sp\endmission.gsc
-*********************************************/
+ * Script: scripts\sp\endmission.gsc
+*************************************/
 
 main() {
 	level.var_B8D2 = func_49EF();
@@ -63,20 +63,20 @@ func_4F25() {
 
 func_1355(param_00) {
 	if(scripts\sp\_utility::func_93A6()) {
-		scripts/sp/specialist_MAYBE::hide_helmet_impacts();
+		scripts\sp\specialist_MAYBE::hide_helmet_impacts();
 		if(!level.console) {
 			wait(0.05);
 		}
 	}
 
 	if(scripts\sp\_utility::func_9BB7()) {
-		function_01C5("ui_nextMission","0");
+		setsaveddvar("ui_nextMission","0");
 		if(isdefined(level.var_BF96)) {
-			function_0039("",0,level.var_BF96);
+			changelevel("",0,level.var_BF96);
 		}
 		else
 		{
-			function_0039("",0);
+			changelevel("",0);
 		}
 
 		return;
@@ -92,7 +92,7 @@ func_1355(param_00) {
 	var_01 = func_7F6B(level.script);
 	scripts\sp\_gameskill::func_262C("aa_main_" + level.script);
 	if(!isdefined(var_01)) {
-		function_0144(level.script);
+		missionsuccess(level.script);
 		return;
 	}
 
@@ -101,10 +101,10 @@ func_1355(param_00) {
 	}
 
 	func_F77F(var_01);
-	scripts/sp/loadout::func_EB5B();
+	scripts\sp\loadout::func_EB5B();
 	var_02 = func_12F24();
 	lib_0A2F::func_12E18();
-	function_0229();
+	updategamerprofile();
 	if(func_8BBF(var_01)) {
 		scripts\sp\_utility::settimer(func_7D92(var_01));
 	}
@@ -149,9 +149,9 @@ func_1355(param_00) {
 		scripts\sp\_utility::settimer("ALL_JA");
 	}
 
-	level.player scripts/sp/analytics::func_B8CE(level.script);
+	level.player scripts\sp\analytics::func_B8CE(level.script);
 	if(level.script == "shipcrib_epilogue") {
-		function_0039("",0);
+		changelevel("",0);
 		var_04 = level.player _meth_84C6("missionStateData","ja_mining");
 		var_05 = level.player _meth_84C6("missionStateData","ja_titan");
 		if(isdefined(var_04) && var_04 == "locked") {
@@ -207,17 +207,17 @@ func_1355(param_00) {
 
 		level.player freezecontrols(1);
 		if(scripts\engine\utility::flag("nextmission_transition_bink_primed")) {
-			function_01C5("bg_cinematicAboveUI","0");
-			function_01C5("bg_cinematicFullScreen","1");
-			function_01C5("bg_cinematicCanPause","1");
-			function_0167(0);
+			setsaveddvar("bg_cinematicAboveUI","0");
+			setsaveddvar("bg_cinematicFullScreen","1");
+			setsaveddvar("bg_cinematicCanPause","1");
+			pausecinematicingame(0);
 		}
 		else
 		{
-			function_01C5("bg_cinematicAboveUI","0");
-			function_01C5("bg_cinematicFullScreen","1");
-			function_01C5("bg_cinematicCanPause","1");
-			function_003D(var_09,0,1,1);
+			setsaveddvar("bg_cinematicAboveUI","0");
+			setsaveddvar("bg_cinematicFullScreen","1");
+			setsaveddvar("bg_cinematicCanPause","1");
+			cinematicingame(var_09,0,1,1);
 		}
 	}
 
@@ -229,7 +229,7 @@ func_1355(param_00) {
 	level.player _meth_84C7("missionStateData",var_0C,"incomplete");
 	level.player _meth_84C7("opsmapMissionStateData",var_0C,"incomplete");
 	if(getdvarint("fastload",1) != 0) {
-		if(function_02B5()) {
+		if(waspreloadzonesstarted()) {
 			for(var_0D = 0;!ispreloadzonescomplete();var_0D--) {
 				if(var_0D == 0) {
 					var_0D = 60;
@@ -266,11 +266,11 @@ func_1355(param_00) {
 	}
 
 	if(isdefined(func_7EB2(var_04))) {
-		function_0039(func_7F6D(var_06),func_7F31(var_04),func_7EB2(var_04));
+		changelevel(func_7F6D(var_06),func_7F31(var_04),func_7EB2(var_04));
 		return;
 	}
 
-	function_0039(func_7F6D(var_06),func_7F31(var_04));
+	changelevel(func_7F6D(var_06),func_7F31(var_04));
 }
 
 func_12A9(param_00) {
@@ -441,7 +441,7 @@ func_1356(param_00,param_01,param_02) {
 	if(getdvarint("fastload",1) != 0) {
 		var_0A = func_7F6D(var_04);
 		if(var_0A == "phspace" && getdvarint("e3",0) == 1) {
-			function_027E([var_0A,"phspace_shared_tr","phspace_ground_tr","phspace_ground_lite_tr"]);
+			preloadzones([var_0A,"phspace_shared_tr","phspace_ground_tr","phspace_ground_lite_tr"]);
 		}
 		else
 		{
@@ -449,21 +449,21 @@ func_1356(param_00,param_01,param_02) {
 				case "full":
 					if(isdefined(var_07)) {
 						var_0B = scripts\engine\utility::array_add(var_07,var_0A);
-						function_027E(var_0B);
+						preloadzones(var_0B);
 					}
 					else
 					{
-						function_027E(var_0A);
+						preloadzones(var_0A);
 					}
 					break;
 
 				case "root":
-					function_027E(var_0A);
+					preloadzones(var_0A);
 					break;
 
 				case "transients":
 					if(isdefined(var_07)) {
-						function_027E(var_07);
+						preloadzones(var_07);
 					}
 					break;
 			}
@@ -552,7 +552,7 @@ func_1463(param_00,param_01) {
 	}
 
 	var_0B = lib_0A2F::func_DA17();
-	var_0C = function_0072();
+	var_0C = getaiarray();
 	var_0D = [];
 	foreach(var_0F in var_0C) {
 		var_10 = var_0F.var_394;
@@ -639,7 +639,7 @@ func_1463(param_00,param_01) {
 		level.player _meth_84C7("weaponsLoaded",var_19,1);
 		if(!scripts\engine\utility::array_contains(var_13,var_19)) {
 			var_26 = "weapon_" + var_19 + "_tr";
-			if(function_0119(var_26)) {
+			if(istransientloaded(var_26)) {
 				continue;
 			}
 
@@ -647,7 +647,7 @@ func_1463(param_00,param_01) {
 				scripts\engine\utility::flag_init(var_26 + "_loaded");
 			}
 
-			function_012F(var_26);
+			loadtransient(var_26);
 			var_13 = scripts\engine\utility::array_add(var_13,var_19);
 			var_1D = scripts\engine\utility::array_add(var_1D,var_19);
 		}
@@ -676,7 +676,7 @@ func_1463(param_00,param_01) {
 			var_24 = undefined;
 			var_22 = undefined;
 			var_26 = "weapon_" + var_19 + "_tr";
-			if(!function_0119(var_26)) {
+			if(!istransientloaded(var_26)) {
 				var_2D = 0;
 				break;
 			}
@@ -760,17 +760,17 @@ func_1357() {
 		}
 	}
 
-	function_01C5("bg_cinematicAboveUI","0");
-	function_01C5("bg_cinematicFullScreen","0");
-	function_01C5("bg_cinematicCanPause","1");
-	function_01F1();
+	setsaveddvar("bg_cinematicAboveUI","0");
+	setsaveddvar("bg_cinematicFullScreen","0");
+	setsaveddvar("bg_cinematicCanPause","1");
+	stopcinematicingame();
 	scripts\engine\utility::waitframe();
 	if(!isdefined(var_03)) {
 		var_03 = "default";
 	}
 
-	function_003D(var_03,1,1,1);
-	while(!function_0102()) {
+	cinematicingame(var_03,1,1,1);
+	while(!iscinematicplaying()) {
 		scripts\engine\utility::waitframe();
 	}
 
@@ -803,10 +803,10 @@ func_136A(param_00) {
 }
 
 func_CCA8(param_00,param_01,param_02,param_03) {
-	function_01C5("bg_cinematicFullScreen","1");
-	function_01C5("bg_cinematicCanPause","1");
-	function_003D(param_00);
-	while(!function_0102()) {
+	setsaveddvar("bg_cinematicFullScreen","1");
+	setsaveddvar("bg_cinematicCanPause","1");
+	cinematicingame(param_00);
+	while(!iscinematicplaying()) {
 		scripts\engine\utility::waitframe();
 	}
 
@@ -814,7 +814,7 @@ func_CCA8(param_00,param_01,param_02,param_03) {
 		scripts\engine\utility::waitframe();
 	}
 
-	while(function_0102() && !level.player gettimeremainingpercentage() && !level.player usebuttonpressed()) {
+	while(iscinematicplaying() && !level.player gettimeremainingpercentage() && !level.player usebuttonpressed()) {
 		scripts\engine\utility::waitframe();
 	}
 
@@ -845,7 +845,7 @@ func_CCA8(param_00,param_01,param_02,param_03) {
 	}
 
 	param_01 = param_01 * 0.05;
-	level thread scripts\engine\utility::noself_delaycall(param_01,::function_01F1);
+	level thread scripts\engine\utility::noself_delaycall(param_01,::stopcinematicingame);
 }
 
 func_12F24() {

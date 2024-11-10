@@ -1,8 +1,8 @@
-/**********************************************************
+/**************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\sp\maps\europa\europa_util.gsc
-**********************************************************/
+ * Script: scripts\sp\maps\europa\europa_util.gsc
+**************************************************/
 
 func_10690(param_00) {
 	if(!isdefined(param_00)) {
@@ -42,7 +42,7 @@ func_1068F() {
 		var_00 scripts\sp\_utility::func_86E4();
 	}
 
-	scripts/sp/anim::func_1EC3(var_00,self.animation);
+	scripts\sp\anim::func_1EC3(var_00,self.animation);
 	if(self.script_noteworthy == "base_exterior") {
 		var_00 linkto(level.var_CC5B);
 		return;
@@ -164,7 +164,7 @@ func_D2DC(param_00) {
 
 	for(;;) {
 		var_04 = distancesquared(level.player.origin,self.origin);
-		var_05 = scripts/sp/math::func_C097(0,var_01,var_04);
+		var_05 = scripts\sp\math::func_C097(0,var_01,var_04);
 		var_05 = clamp(var_05,var_03,1);
 		var_06 = var_05 - level.player.var_BCF5;
 		var_07 = var_06 * var_02;
@@ -176,7 +176,7 @@ func_D2DC(param_00) {
 }
 
 func_10181() {
-	function_01C5("player_sprintspeedscale",1.4);
+	setsaveddvar("player_sprintspeedscale",1.4);
 	level notify("stop_player_stay_behind");
 	thread scripts\sp\_utility::func_2B77(1);
 }
@@ -771,7 +771,7 @@ func_F5B1(param_00) {
 				level.var_EA2C _meth_80F1(var_03.origin,var_03.angles);
 				level.var_EA2C give_mp_super_weapon(var_03.origin);
 				if(isdefined(var_03.animation)) {
-					var_03 thread scripts/sp/anim::func_1EC7(level.var_EA2C,var_03.animation);
+					var_03 thread scripts\sp\anim::func_1EC7(level.var_EA2C,var_03.animation);
 				}
 	
 				if(isdefined(var_03.target)) {
@@ -784,7 +784,7 @@ func_F5B1(param_00) {
 				level.var_B4F1 _meth_80F1(var_03.origin,var_03.angles);
 				level.var_B4F1 give_mp_super_weapon(var_03.origin);
 				if(isdefined(var_03.animation)) {
-					var_03 thread scripts/sp/anim::func_1EC7(level.var_B4F1,var_03.animation);
+					var_03 thread scripts\sp\anim::func_1EC7(level.var_B4F1,var_03.animation);
 				}
 	
 				if(isdefined(var_03.target)) {
@@ -804,7 +804,7 @@ func_1F8A() {
 
 	scripts\sp\_utility::script_delay();
 	self glinton(#animtree);
-	thread scripts/sp/anim::func_1ECC(self,var_00);
+	thread scripts\sp\anim::func_1ECC(self,var_00);
 	if(isdefined(self.var_EE2C)) {
 		scripts\engine\utility::waitframe();
 		self _meth_82B1(scripts\sp\_utility::func_7DC3(var_00)[0],self.var_EE2C);
@@ -857,17 +857,17 @@ func_13865(param_00,param_01,param_02) {
 }
 
 func_1F38(param_00,param_01,param_02,param_03) {
-	scripts/sp/anim::func_1F35(param_00,param_01);
-	thread scripts/sp/anim::func_1EEA(param_00,param_02);
+	scripts\sp\anim::func_1F35(param_00,param_01);
+	thread scripts\sp\anim::func_1EEA(param_00,param_02);
 	if(isdefined(param_03)) {
 		self notify("sNotify");
 	}
 }
 
 func_1F15(param_00,param_01,param_02,param_03,param_04) {
-	scripts/sp/anim::func_1F17(param_00,param_01);
-	scripts/sp/anim::func_1F35(param_00,param_01);
-	thread scripts/sp/anim::func_1EEA(param_00,param_02,param_03);
+	scripts\sp\anim::func_1F17(param_00,param_01);
+	scripts\sp\anim::func_1F35(param_00,param_01);
+	thread scripts\sp\anim::func_1EEA(param_00,param_02,param_03);
 	if(isdefined(param_04)) {
 		self notify(param_04);
 	}
@@ -1203,12 +1203,12 @@ func_11690() {
 
 _meth_8578() {
 	setdvarifuninitialized("grenade_indicator",0);
-	function_01C5("r_hudoutlineEnable",1);
+	setsaveddvar("r_hudoutlineEnable",1);
 	if(getdvarint("grenade_indicator") != 1) {
 		return;
 	}
 
-	var_00 = function_00C8();
+	var_00 = getspawnerarray();
 	scripts\sp\_utility::func_22C7(var_00,::_meth_857A);
 }
 
@@ -1222,22 +1222,22 @@ _meth_857A() {
 
 _meth_8579() {
 	self hudoutlineenable(1,0,0);
-	function_020B(self);
-	function_0214(self,"hud_grenadethrowback");
+	target_set(self);
+	target_setshader(self,"hud_grenadethrowback");
 	var_00 = 0;
 	while(isdefined(self)) {
 		var_01 = distance(self.origin,level.player.origin);
 		if(var_01 > 250 && var_00 == 0) {
 			var_00 = 1;
 			self hudoutlinedisable();
-			function_0206(self,level.player);
+			target_hidefromplayer(self,level.player);
 			continue;
 		}
 
 		if(var_01 <= 250 && var_00 == 1) {
 			var_00 = 0;
 			self hudoutlineenable(1,0,0);
-			function_0215(self,level.player);
+			target_showtoplayer(self,level.player);
 		}
 
 		wait(0.1);
@@ -1301,7 +1301,7 @@ func_4EA2(param_00,param_01) {
 	for(;;) {
 		var_02 = level.var_13267["allies"];
 		var_02 = scripts\engine\utility::array_combine(var_02,level.var_13267["axis"]);
-		var_03 = function_0072();
+		var_03 = getaiarray();
 		param_00 settext("Vehicles : " + var_02.size);
 		param_01 settext("AI : " + var_03.size);
 		wait(0.05);
@@ -1395,7 +1395,7 @@ func_A764(param_00,param_01,param_02) {
 		self.angles = (0,0,0);
 	}
 
-	scripts/sp/anim::func_1EC3(var_03,"robot_power_on");
+	scripts\sp\anim::func_1EC3(var_03,"robot_power_on");
 	var_04 = undefined;
 	if(isdefined(self.target)) {
 		var_05 = getentarray(self.target,"targetname");
@@ -1425,7 +1425,7 @@ func_A764(param_00,param_01,param_02) {
 	var_03 notify("awaken");
 	if(isdefined(self.var_EDCF)) {
 		var_09 = self.var_EDCF;
-		var_0A = function_00B3(self.target,"targetname");
+		var_0A = getnode(self.target,"targetname");
 		if(isdefined(var_0A)) {
 			var_03 _meth_82F0(level.enableoffhandsecondaryweapons[var_09]);
 		}
@@ -1441,7 +1441,7 @@ func_A764(param_00,param_01,param_02) {
 
 	var_03 give_mp_super_weapon(var_03.origin);
 	var_03 func_A78D();
-	scripts/sp/anim::func_1F35(var_03,"robot_power_on");
+	scripts\sp\anim::func_1F35(var_03,"robot_power_on");
 }
 
 func_A762(param_00) {
@@ -1468,7 +1468,7 @@ func_E59D(param_00,param_01,param_02,param_03) {
 	self.var_AF1E = var_05;
 	self.var_6B53 = var_04;
 	var_06 = [var_05,var_04];
-	scripts/sp/anim::func_1EC1(var_06,"robot_locker_on");
+	scripts\sp\anim::func_1EC1(var_06,"robot_locker_on");
 	if(isdefined(self.script_noteworthy)) {
 		thread func_E59A();
 	}
@@ -1492,8 +1492,8 @@ func_E59C(param_00) {
 
 	var_01 = func_10752();
 	var_02 = [self.var_AF1E,var_01];
-	scripts/sp/anim::func_1EC3(self.var_AF1E,"robot_locker_on");
-	thread scripts/sp/anim::func_1EEA(var_01,"robot_locker_idle");
+	scripts\sp\anim::func_1EC3(self.var_AF1E,"robot_locker_on");
+	thread scripts\sp\anim::func_1EEA(var_01,"robot_locker_idle");
 	if(isdefined(self.var_6B53)) {
 		self.var_6B53 delete();
 	}
@@ -1505,7 +1505,7 @@ func_E59C(param_00) {
 	var_05 = 2.2;
 	var_06 = 1;
 	foreach(var_08 in self.doors) {
-		function_0178("robot_locker_open",self.origin);
+		playworldsound("robot_locker_open",self.origin);
 		var_09 = 45;
 		if(var_08.script_parameters == "left") {
 			var_09 = var_09 * -1;
@@ -1522,7 +1522,7 @@ func_E59C(param_00) {
 	wait(var_05 / 2);
 	self notify("stop_loop");
 	var_01 givescorefortrophyblocks();
-	scripts/sp/anim::func_1F2C(var_02,"robot_locker_on");
+	scripts\sp\anim::func_1F2C(var_02,"robot_locker_on");
 	var_03 = anglestoforward(self.angles);
 	var_0B = scripts\engine\utility::spawn_tag_origin(var_01.origin);
 	var_01 linkto(var_0B);
@@ -1555,7 +1555,7 @@ func_E59A() {
 			self.var_6B53 delete();
 			self.var_6B53 = func_10752();
 			var_01 = [self.var_AF1E,self.var_6B53];
-			thread scripts/sp/anim::func_1F2C(var_01,"robot_locker_on");
+			thread scripts\sp\anim::func_1F2C(var_01,"robot_locker_on");
 			scripts\engine\utility::waitframe();
 			var_02 = 2;
 			foreach(var_04 in var_01) {
@@ -1565,17 +1565,17 @@ func_E59A() {
 				var_04 _meth_82B0(var_05,var_07);
 			}
 	
-			scripts/sp/anim::func_1F27(var_01,"robot_locker_on",0);
+			scripts\sp\anim::func_1F27(var_01,"robot_locker_on",0);
 			var_00 = 1;
 			break;
 
 		case "open_empty":
 			self.var_6B53 delete();
 			var_01 = [self.var_AF1E];
-			thread scripts/sp/anim::func_1F2C(var_01,"robot_locker_on");
+			thread scripts\sp\anim::func_1F2C(var_01,"robot_locker_on");
 			scripts\engine\utility::waitframe();
-			scripts/sp/anim::func_1F2A(var_01,"robot_locker_on",0.6);
-			scripts/sp/anim::func_1F27(var_01,"robot_locker_on",0);
+			scripts\sp\anim::func_1F2A(var_01,"robot_locker_on",0.6);
+			scripts\sp\anim::func_1F27(var_01,"robot_locker_on",0);
 			var_00 = 1;
 			break;
 	}
@@ -2007,7 +2007,7 @@ func_10F49() {
 	self getnodeyawfromoffsettable("projectile_impact");
 	self getnodeyawfromoffsettable("explode");
 	self getnodeyawfromoffsettable("silenced_shot");
-	function_01C5("ai_eventdistsilencedshot",800);
+	setsaveddvar("ai_eventdistsilencedshot",800);
 	self.precacheleaderboards = 1;
 	childthread func_10F4D();
 	childthread func_10F4C();
@@ -2016,7 +2016,7 @@ func_10F49() {
 	self.var_10F49.var_2521 = 1;
 	func_10FC2();
 	self.precacheleaderboards = 0;
-	foreach(var_01 in function_0075("axis","soldier")) {
+	foreach(var_01 in getaiunittypearray("axis","soldier")) {
 		if(distance(self.origin,var_01.origin) < 800 && !var_01 func_10F4A()) {
 			var_01 thread scripts\sp\_utility::func_C12D("stealthlight_attack",randomfloatrange(0.4,2));
 		}
@@ -2024,7 +2024,7 @@ func_10F49() {
 
 	self _meth_8260("bulletwhizby");
 	self _meth_8260("explode");
-	function_01C5("ai_eventdistsilencedshot",128);
+	setsaveddvar("ai_eventdistsilencedshot",128);
 	self notify("shutdown_stealthlight");
 }
 
@@ -2116,7 +2116,7 @@ func_D988(param_00) {
 		return;
 	}
 
-	var_01 = scripts/sp/math::func_6A8E(-298,-376,param_00);
+	var_01 = scripts\sp\math::func_6A8E(-298,-376,param_00);
 	level.player setclientomnvar("ui_helmet_meter_temperature",int(var_01));
 }
 
@@ -2224,7 +2224,7 @@ func_BE3C(param_00,param_01,param_02,param_03,param_04) {
 	var_06 = 0;
 	var_07 = 0;
 	if(isarray(param_00[0])) {
-		if(function_02A6(param_00[0][0])) {
+		if(isent(param_00[0][0])) {
 			var_07 = 1;
 			var_08 = param_00[0][1];
 		}
@@ -2909,12 +2909,12 @@ func_E6EB(param_00,param_01,param_02) {
 }
 
 func_67B6(param_00,param_01,param_02,param_03) {
-	function_014E(param_00,param_01);
-	function_0164(param_00,param_02);
+	objective_add(param_00,param_01);
+	objective_string(param_00,param_02);
 	if(!isdefined(param_03)) {
 		return;
 	}
 
 	scripts\engine\utility::flag_wait(param_03);
-	function_0162(param_00,"done");
+	objective_state(param_00,"done");
 }

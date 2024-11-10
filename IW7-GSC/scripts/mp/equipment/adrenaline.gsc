@@ -1,8 +1,8 @@
-/*******************************************************
+/***********************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\equipment\adrenaline.gsc
-*******************************************************/
+ * Script: scripts\mp\equipment\adrenaline.gsc
+***********************************************/
 
 init() {}
 
@@ -16,7 +16,7 @@ useadrenaline() {
 	self playsoundtoteam("mp_adrenaline_on_npc","allies",self);
 	self playlocalsound("mp_adrenaline_pulse");
 	if(self.health < self.maxhealth) {
-		scripts\mp\_missions::func_D991("ch_tactical_adrenaline");
+		scripts\mp\missions::func_D991("ch_tactical_adrenaline");
 	}
 	else
 	{
@@ -25,13 +25,13 @@ useadrenaline() {
 	}
 
 	self.var_8BC2 = 1;
-	scripts\mp\_utility::giveperk("specialty_adrenaline");
+	scripts\mp\utility::giveperk("specialty_adrenaline");
 	thread func_E0C4();
 	thread func_E0C6();
 	thread func_E0C3();
 	thread func_13A85();
-	var_00 = scripts\mp\_powerloot::func_7FC1("power_adrenaline",5);
-	scripts\mp\_powers::func_4575(var_00,"power_adrenaline_update","removeAdrenaline");
+	var_00 = scripts\mp\powerloot::func_7FC1("power_adrenaline",5);
+	scripts\mp\powers::func_4575(var_00,"power_adrenaline_update","removeAdrenaline");
 	thread removeadrenaline();
 }
 
@@ -43,7 +43,7 @@ removeadrenaline(param_00) {
 	if(isdefined(self.var_8BC2) && self.var_8BC2) {
 		self notify("removeAdrenaline");
 		self.var_8BC2 = 0;
-		scripts\mp\_utility::removeperk("specialty_adrenaline");
+		scripts\mp\utility::removeperk("specialty_adrenaline");
 		self setscriptablepartstate("adrenaline","neutral",0);
 		self setscriptablepartstate("adrenalineHeal","neutral",0);
 		if(param_00 != "death") {

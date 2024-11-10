@@ -1,8 +1,8 @@
-/**********************************************************
+/**************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\killstreaks\_emp_common.gsc
-**********************************************************/
+ * Script: scripts\mp\killstreaks\_emp_common.gsc
+**************************************************/
 
 func_20C3() {
 	self notify("apply_player_emp");
@@ -24,7 +24,7 @@ func_E0F3() {
 }
 
 func_1181() {
-	if(scripts\mp\_utility::_hasperk("specialty_localjammer")) {
+	if(scripts\mp\utility::_hasperk("specialty_localjammer")) {
 		self clearscrambler();
 	}
 
@@ -34,13 +34,13 @@ func_1181() {
 }
 
 func_13B5() {
-	if(scripts\mp\_utility::_hasperk("specialty_localjammer")) {
+	if(scripts\mp\utility::_hasperk("specialty_localjammer")) {
 		self makescrambler();
 	}
 
 	self give_infinite_grenade(0);
 	scripts\engine\utility::allow_usability(1);
-	if(scripts\mp\_utility::isreallyalive(self)) {
+	if(scripts\mp\utility::isreallyalive(self)) {
 		thread func_1106A();
 	}
 	else
@@ -58,11 +58,11 @@ isemped() {
 }
 
 func_FFC5() {
-	if(scripts\mp\_utility::_hasperk("specialty_empimmune") || !scripts\mp\_utility::isreallyalive(self)) {
+	if(scripts\mp\utility::_hasperk("specialty_empimmune") || !scripts\mp\utility::isreallyalive(self)) {
 		return 0;
 	}
 
-	if(scripts\mp\_utility::func_9EF0(self)) {
+	if(scripts\mp\utility::func_9EF0(self)) {
 		return 0;
 	}
 
@@ -70,10 +70,10 @@ func_FFC5() {
 }
 
 func_20CD() {
-	function_0237("coup_sunblind",0.05);
+	visionsetnaked("coup_sunblind",0.05);
 	wait(0.05);
-	function_0237("coup_sunblind",0);
-	function_0237("",0.5);
+	visionsetnaked("coup_sunblind",0);
+	visionsetnaked("",0.5);
 }
 
 func_10D95() {
@@ -268,7 +268,7 @@ func_61C1(param_00) {
 	}
 
 	foreach(param_00 in level.players) {
-		if(isdefined(param_00) && scripts\mp\_utility::func_9EF0(param_00)) {
+		if(isdefined(param_00) && scripts\mp\utility::func_9EF0(param_00)) {
 			var_01[var_01.size] = param_00;
 		}
 	}

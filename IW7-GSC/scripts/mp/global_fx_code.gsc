@@ -1,8 +1,8 @@
-/*************************************************
+/*****************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\global_fx_code.gsc
-*************************************************/
+ * Script: scripts\mp\global_fx_code.gsc
+*****************************************/
 
 global_fx(param_00,param_01,param_02,param_03,param_04) {
 	var_05 = scripts\engine\utility::getstructarray(param_00,"targetname");

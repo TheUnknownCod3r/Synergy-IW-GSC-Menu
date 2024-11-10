@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\3476.gsc
+ * Script: 3476.gsc
 ***************************************/
 
 init() {
@@ -27,7 +27,7 @@ init() {
   var_0.usetime = 1000;
   var_0.maxhealth = 220;
   var_0.damagefeedback = "deployable_bag";
-  var_0.deathvfx = loadfx("vfx/core/mp/killstreaks/vfx_ballistic_vest_death");
+  var_0.deathvfx = loadfx("vfx\core\mp\killstreaks\vfx_ballistic_vest_death");
   var_0.allowmeleedamage = 1;
   var_0.allowhvtspawn = 0;
   var_0.maxuses = 4;

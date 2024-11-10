@@ -1,13 +1,13 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2649.gsc
+ * Script: 2649.gsc
 ***************************************/
 
 coop_interaction_pregame() {
   func_96E3();
   level thread func_23D8();
 
-  if (scripts/cp/utility::coop_mode_has("guided_interaction"))
+  if (scripts\cp\utility::coop_mode_has("guided_interaction"))
   level thread func_23CB();
 }
 
@@ -130,9 +130,9 @@ func_23CB() {
   var_02 setclientomnvar("zm_interaction_cost", -1);
   var_02 setclientomnvar("zm_interaction_ent", var_03);
 
-  if (scripts/cp/utility::isplayingsolo() || level.only_one_player) {
-  var_02 thread scripts/cp/zombies/interaction_magicwheel::magic_wheel_tutorial();
-  var_02 thread scripts/cp/zombies/zombie_doors::func_59FA();
+  if (scripts\cp\utility::isplayingsolo() || level.only_one_player) {
+  var_02 thread scripts\cp\zombies\interaction_magicwheel::magic_wheel_tutorial();
+  var_02 thread scripts\cp\zombies\zombie_doors::func_59FA();
   }
   }
   }
@@ -155,7 +155,7 @@ func_BC88(var_00) {
   var_01 = undefined;
   func_12E34(var_00, -1, undefined, undefined);
   }
-  else if (!var_00 scripts/cp/utility::areinteractionsenabled()) {
+  else if (!var_00 scripts\cp\utility::areinteractionsenabled()) {
   var_01 = undefined;
   func_12E34(var_00, -1, undefined, undefined);
   } else {
@@ -291,9 +291,9 @@ func_7A48(var_00, var_01) {
   var_03 = int(level.interactions[var_0.script_noteworthy].cost);
 
   if (interaction_is_weapon_buy(var_00)) {
-  if (var_01 scripts/cp/cp_weapon::has_weapon_variation(var_0.script_noteworthy)) {
-  var_04 = scripts/cp/utility::getrawbaseweaponname(var_0.script_noteworthy);
-  var_05 = var_01 scripts/cp/cp_weapon::get_weapon_level(var_04);
+  if (var_01 scripts\cp\cp_weapon::has_weapon_variation(var_0.script_noteworthy)) {
+  var_04 = scripts\cp\utility::getrawbaseweaponname(var_0.script_noteworthy);
+  var_05 = var_01 scripts\cp\cp_weapon::get_weapon_level(var_04);
 
   if (var_05 > 1)
   var_03 = 4500;
@@ -309,8 +309,8 @@ func_7A48(var_00, var_01) {
   else if (interaction_is_weapon_upgrade(var_00)) {
   var_06 = var_01 getcurrentweapon();
 
-  if (var_01 scripts/cp/cp_weapon::can_upgrade(var_06)) {
-  var_05 = var_01 scripts/cp/cp_weapon::get_weapon_level(var_06);
+  if (var_01 scripts\cp\cp_weapon::can_upgrade(var_06)) {
+  var_05 = var_01 scripts\cp\cp_weapon::get_weapon_level(var_06);
   var_03 = scripts\engine\utility::ter_op(var_05 > 1, 10000, 5000);
   }
   else
@@ -322,7 +322,7 @@ func_7A48(var_00, var_01) {
   else if (func_9CDB(var_00)) {
   if (isdefined(var_0.name) && !var_01 can_use_perk(var_00))
   var_03 = 0;
-  else if ((scripts/cp/utility::isplayingsolo() || level.only_one_player) && isdefined(var_0.name) && var_0.name == "perk_machine_revive")
+  else if ((scripts\cp\utility::isplayingsolo() || level.only_one_player) && isdefined(var_0.name) && var_0.name == "perk_machine_revive")
   var_03 = 500;
   else
   var_03 = get_perk_machine_cost(var_00);
@@ -334,7 +334,7 @@ func_7A48(var_00, var_01) {
   var_03 = level.fortune_visit_cost_1;
   }
 
-  if (var_01 scripts/cp/utility::is_consumable_active("next_purchase_free"))
+  if (var_01 scripts\cp\utility::is_consumable_active("next_purchase_free"))
   var_03 = 0;
 
   return var_03;
@@ -391,7 +391,7 @@ func_9C64(var_00, var_01, var_02) {
   if (isdefined(var_1.perk_type) && var_1.perk_type == "perk_machine_revive" && var_0.self_revives_purchased >= var_0.max_self_revive_machine_use)
   return 0;
 
-  if (!scripts/cp/utility::coop_mode_has("wall_buys")) {
+  if (!scripts\cp\utility::coop_mode_has("wall_buys")) {
   if (interaction_is_weapon_buy(var_01) || interaction_is_grenade_wall_buy(var_01) || interaction_is_ticket_buy(var_01) || interaction_is_chi_door(var_01) || isdefined(var_1.script_parameters) && var_1.script_parameters == "tickets")
   return 0;
   }
@@ -495,7 +495,7 @@ get_spawn_volumes_player_is_in(var_00, var_01, var_02) {
 
   var_07 = 0;
 
-  if (isdefined(var_01) && !var_02 scripts/cp/utility::is_valid_player())
+  if (isdefined(var_01) && !var_02 scripts\cp\utility::is_valid_player())
   continue;
 
   if (var_02 istouching(var_06))
@@ -691,7 +691,7 @@ can_use_interaction(var_00) {
   if (scripts\engine\utility::is_true(self.iscarrying))
   return 0;
 
-  if (scripts\engine\utility::is_true(var_0.disabled) || !scripts/cp/utility::areinteractionsenabled() || self isinphase())
+  if (scripts\engine\utility::is_true(var_0.disabled) || !scripts\cp\utility::areinteractionsenabled() || self isinphase())
   return 0;
 
   if (self secondaryoffhandbuttonpressed() || self isthrowinggrenade() || self fragbuttonpressed())
@@ -711,7 +711,7 @@ can_use_interaction(var_00) {
 
 reset_interaction() {
   if (isdefined(self.interaction_trigger.name))
-  scripts/cp/zombies/zombie_analytics::func_AF74(self.interaction_trigger.name, 0);
+  scripts\cp\zombies\zombie_analytics::func_AF74(self.interaction_trigger.name, 0);
 
   wait 0.2;
   self notify("stop_interaction_logic");
@@ -735,18 +735,18 @@ set_interaction_point(var_00, var_01) {
   var_03 = level.interactions[var_0.script_noteworthy].spend_type;
   var_04 = undefined;
 
-  if (scripts/cp/utility::isplayingsolo() || level.only_one_player) {
+  if (scripts\cp\utility::isplayingsolo() || level.only_one_player) {
   if (var_03 == "wall_buy")
-  var_04 = scripts/cp/cp_hud_message::get_has_seen_tutorial("wall_buy");
+  var_04 = scripts\cp\cp_hud_message::get_has_seen_tutorial("wall_buy");
 
   if (!scripts\engine\utility::is_true(var_04)) {
   if (isdefined(level.interactions[var_0.script_noteworthy].tutorial))
-  thread scripts/cp/cp_hud_message::tutorial_lookup_func(var_03);
+  thread scripts\cp\cp_hud_message::tutorial_lookup_func(var_03);
   }
   }
 
   if (interaction_is_weapon_buy(var_00)) {
-  if (!scripts/cp/cp_weapon::has_weapon_variation(var_0.script_noteworthy)) {
+  if (!scripts\cp\cp_weapon::has_weapon_variation(var_0.script_noteworthy)) {
   var_05 = _meth_8228(var_0.script_noteworthy);
   var_06 = _meth_8220(var_0.script_noteworthy);
   self.interaction_trigger sethintstringparams(var_05, var_06);
@@ -756,9 +756,9 @@ set_interaction_point(var_00, var_01) {
   var_07 = self getcurrentweapon();
   var_05 = _meth_8228(var_07);
 
-  if (scripts/cp/cp_weapon::can_upgrade(var_07)) {
+  if (scripts\cp\cp_weapon::can_upgrade(var_07)) {
   if (isdefined(var_05)) {
-  var_08 = scripts/cp/cp_weapon::get_weapon_level(var_07);
+  var_08 = scripts\cp\cp_weapon::get_weapon_level(var_07);
   var_06 = scripts\engine\utility::ter_op(var_08 > 1, int(10000), int(5000));
   self.interaction_trigger sethintstringparams(var_05, var_06);
   }
@@ -772,8 +772,8 @@ set_interaction_point(var_00, var_01) {
   interaction_post_activate_update(var_00);
   self notify("new_power", "souvenir_pickup");
 
-  if (scripts/cp/utility::map_check(0))
-  thread scripts/cp/cp_vo::add_to_nag_vo("nag_use_souvenircoin", "zmb_comment_vo", 60, 180, 6, 1);
+  if (scripts\cp\utility::map_check(0))
+  thread scripts\cp\cp_vo::add_to_nag_vo("nag_use_souvenircoin", "zmb_comment_vo", 60, 180, 6, 1);
 
   return;
   }
@@ -805,7 +805,7 @@ _meth_8228(var_00) {
   if (!isdefined(var_00))
   return undefined;
 
-  var_01 = scripts/cp/utility::getbaseweaponname(var_00);
+  var_01 = scripts\cp\utility::getbaseweaponname(var_00);
 
   if (!isdefined(var_01))
   return undefined;
@@ -937,8 +937,8 @@ func_F422(var_00, var_01) {
 
   if (interaction_is_weapon_buy(var_01)) {
   if (isdefined(var_02) && !isstring(var_02) && var_02 == &"COOP_INTERACTIONS_PURCHASE_AMMO") {
-  var_03 = scripts/cp/utility::getrawbaseweaponname(var_1.script_noteworthy);
-  var_04 = scripts/cp/cp_weapon::get_weapon_level(var_03);
+  var_03 = scripts\cp\utility::getrawbaseweaponname(var_1.script_noteworthy);
+  var_04 = scripts\cp\cp_weapon::get_weapon_level(var_03);
   var_05 = _meth_8228(var_1.script_noteworthy);
 
   if (var_04 > 1)
@@ -984,7 +984,7 @@ func_F474(var_00) {
   var_01 = [];
 
   foreach (var_03 in var_0.lost_and_found_primary_count) {
-  if (scripts/cp/utility::isstrstart(var_03, "alt_"))
+  if (scripts\cp\utility::isstrstart(var_03, "alt_"))
   continue;
 
   if (!scripts\engine\utility::array_contains(var_01, var_03))
@@ -1013,7 +1013,7 @@ func_7A49(var_00, var_01) {
   return &"COOP_INTERACTIONS_REQUIRES_POWER";
 
   if (interaction_is_weapon_buy(var_00)) {
-  if (!scripts/cp/utility::coop_mode_has("wall_buys"))
+  if (!scripts\cp\utility::coop_mode_has("wall_buys"))
   return undefined;
   }
 
@@ -1033,7 +1033,7 @@ func_C00C() {
 
   for (;;) {
   level waittill("player_accessed_nonpowered_interaction", var_00);
-  var_00 thread scripts/cp/cp_vo::try_to_play_vo("no_power", "zmb_comment_vo", "high", 30, 0, 0, 1, 50);
+  var_00 thread scripts\cp\cp_vo::try_to_play_vo("no_power", "zmb_comment_vo", "high", 30, 0, 0, 1, 50);
   }
 }
 
@@ -1042,7 +1042,7 @@ func_4616() {
 
   for (;;) {
   level waittill("player_accessed_interaction_on_cooldown", var_00);
-  var_00 thread scripts/cp/cp_vo::try_to_play_vo("round_cooldown", "zmb_comment_vo", "high", 30, 0, 0, 1, 50);
+  var_00 thread scripts\cp\cp_vo::try_to_play_vo("round_cooldown", "zmb_comment_vo", "high", 30, 0, 0, 1, 50);
   }
 }
 
@@ -1057,16 +1057,16 @@ play_weapon_purchase_vo(var_00, var_01) {
 
   switch (var_03) {
   case "iw7_cutie_zm":
-  var_01 thread scripts/cp/cp_vo::try_to_play_vo("player_purchase_wonder", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
+  var_01 thread scripts\cp\cp_vo::try_to_play_vo("player_purchase_wonder", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
   break;
   case "iw7_nunchucks_zm":
-  var_01 thread scripts/cp/cp_vo::try_to_play_vo("magicwheel_nunchucks", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
+  var_01 thread scripts\cp\cp_vo::try_to_play_vo("magicwheel_nunchucks", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
   break;
   case "iw7_katana_zm":
   if (randomint(100) > 50)
-  var_01 thread scripts/cp/cp_vo::try_to_play_vo("player_purchase_wonder", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
+  var_01 thread scripts\cp\cp_vo::try_to_play_vo("player_purchase_wonder", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
   else
-  var_01 thread scripts/cp/cp_vo::try_to_play_vo("magicwheel_katana", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
+  var_01 thread scripts\cp\cp_vo::try_to_play_vo("magicwheel_katana", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
 
   break;
   case "iw7_harpoon4_zm":
@@ -1074,130 +1074,130 @@ play_weapon_purchase_vo(var_00, var_01) {
   case "iw7_harpoon2_zm":
   case "iw7_harpoon1_zm":
   case "iw7_harpoon_zm":
-  var_01 thread scripts/cp/cp_vo::try_to_play_vo("player_purchase_wonder", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
+  var_01 thread scripts\cp\cp_vo::try_to_play_vo("player_purchase_wonder", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
   break;
   case "iw7_ake_zml":
   case "iw7_ake_zm":
-  var_01 thread scripts/cp/cp_vo::try_to_play_vo("player_purchase_assault", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
+  var_01 thread scripts\cp\cp_vo::try_to_play_vo("player_purchase_assault", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
   break;
   case "iw7_lmg03_zm":
   case "iw7_ameli_zm":
-  var_01 thread scripts/cp/cp_vo::try_to_play_vo("purchase_weapon", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
+  var_01 thread scripts\cp\cp_vo::try_to_play_vo("purchase_weapon", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
   break;
   case "iw7_ar57_zm":
-  var_01 thread scripts/cp/cp_vo::try_to_play_vo("player_purchase_assault", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
+  var_01 thread scripts\cp\cp_vo::try_to_play_vo("player_purchase_assault", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
   break;
   case "iw7_axe_zm_pap2":
   case "iw7_axe_zm_pap1":
   case "iw7_axe_zm":
-  var_01 thread scripts/cp/cp_vo::try_to_play_vo("purchase_weapon", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
+  var_01 thread scripts\cp\cp_vo::try_to_play_vo("purchase_weapon", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
   break;
   case "iw7_chargeshot_zm":
-  var_01 thread scripts/cp/cp_vo::try_to_play_vo("player_purchase_launcher", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
+  var_01 thread scripts\cp\cp_vo::try_to_play_vo("player_purchase_launcher", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
   break;
   case "iw7_cheytac_zm":
-  var_01 thread scripts/cp/cp_vo::try_to_play_vo("player_purchase_sniper", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
+  var_01 thread scripts\cp\cp_vo::try_to_play_vo("player_purchase_sniper", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
   break;
   case "iw7_crb_zml":
   case "iw7_crb_zm":
-  var_01 thread scripts/cp/cp_vo::try_to_play_vo("player_purchase_smg", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
+  var_01 thread scripts\cp\cp_vo::try_to_play_vo("player_purchase_smg", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
   break;
   case "iw7_devastator_zm":
-  var_01 thread scripts/cp/cp_vo::try_to_play_vo("player_purchase_shotgun", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
+  var_01 thread scripts\cp\cp_vo::try_to_play_vo("player_purchase_shotgun", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
   break;
   case "iw7_dischord_zm_pap1":
   case "iw7_dischord_zm":
-  var_01 thread scripts/cp/cp_vo::try_to_play_vo("player_purchase_wonder", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
+  var_01 thread scripts\cp\cp_vo::try_to_play_vo("player_purchase_wonder", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
   break;
   case "iw7_emc_zm":
-  var_01 thread scripts/cp/cp_vo::try_to_play_vo("player_purchase_pistol", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
+  var_01 thread scripts\cp\cp_vo::try_to_play_vo("player_purchase_pistol", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
   break;
   case "iw7_erad_zm":
-  var_01 thread scripts/cp/cp_vo::try_to_play_vo("player_purchase_smg", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
+  var_01 thread scripts\cp\cp_vo::try_to_play_vo("player_purchase_smg", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
   break;
   case "iw7_facemelter_zm_pap1":
   case "iw7_facemelter_zm":
-  var_01 thread scripts/cp/cp_vo::try_to_play_vo("player_purchase_wonder", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
+  var_01 thread scripts\cp\cp_vo::try_to_play_vo("player_purchase_wonder", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
   break;
   case "iw7_fhr_zm":
-  var_01 thread scripts/cp/cp_vo::try_to_play_vo("player_purchase_smg", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
+  var_01 thread scripts\cp\cp_vo::try_to_play_vo("player_purchase_smg", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
   break;
   case "iw7_fmg_zm":
-  var_01 thread scripts/cp/cp_vo::try_to_play_vo("player_purchase_smg", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
+  var_01 thread scripts\cp\cp_vo::try_to_play_vo("player_purchase_smg", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
   break;
   case "iw7_forgefreeze_zm_pap2":
   case "iw7_forgefreeze_zm_pap1":
   case "iw7_forgefreeze_zm":
-  var_01 thread scripts/cp/cp_vo::try_to_play_vo("player_purchase_wonder", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
+  var_01 thread scripts\cp\cp_vo::try_to_play_vo("player_purchase_wonder", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
   break;
   case "iw7_g18_zmr":
   case "iw7_g18_zm":
-  var_01 thread scripts/cp/cp_vo::try_to_play_vo("player_purchase_pistol", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
+  var_01 thread scripts\cp\cp_vo::try_to_play_vo("player_purchase_pistol", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
   break;
   case "iw7_lockon_zm":
-  var_01 thread scripts/cp/cp_vo::try_to_play_vo("player_purchase_launcher", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
+  var_01 thread scripts\cp\cp_vo::try_to_play_vo("player_purchase_launcher", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
   break;
   case "iw7_glprox_zm":
-  var_01 thread scripts/cp/cp_vo::try_to_play_vo("player_purchase_launcher", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
+  var_01 thread scripts\cp\cp_vo::try_to_play_vo("player_purchase_launcher", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
   break;
   case "iw7_headcutter_zm_pap1":
   case "iw7_headcutter_zm":
-  var_01 thread scripts/cp/cp_vo::try_to_play_vo("player_purchase_wonder", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
+  var_01 thread scripts\cp\cp_vo::try_to_play_vo("player_purchase_wonder", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
   break;
   case "iw7_kbs_zm":
-  var_01 thread scripts/cp/cp_vo::try_to_play_vo("player_purchase_sniper", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
+  var_01 thread scripts\cp\cp_vo::try_to_play_vo("player_purchase_sniper", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
   break;
   case "iw7_m1c_zm":
   case "iw7_m1_zm":
-  var_01 thread scripts/cp/cp_vo::try_to_play_vo("player_purchase_sniper", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
+  var_01 thread scripts\cp\cp_vo::try_to_play_vo("player_purchase_sniper", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
   break;
   case "iw7_m4_zm":
-  var_01 thread scripts/cp/cp_vo::try_to_play_vo("player_purchase_assault", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
+  var_01 thread scripts\cp\cp_vo::try_to_play_vo("player_purchase_assault", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
   break;
   case "iw7_m8_zm":
-  var_01 thread scripts/cp/cp_vo::try_to_play_vo("player_purchase_assault", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
+  var_01 thread scripts\cp\cp_vo::try_to_play_vo("player_purchase_assault", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
   break;
   case "iw7_mauler_zm":
-  var_01 thread scripts/cp/cp_vo::try_to_play_vo("purchase_weapon", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
+  var_01 thread scripts\cp\cp_vo::try_to_play_vo("purchase_weapon", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
   break;
   case "iw7_nrg_zm":
-  var_01 thread scripts/cp/cp_vo::try_to_play_vo("player_purchase_pistol", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
+  var_01 thread scripts\cp\cp_vo::try_to_play_vo("player_purchase_pistol", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
   break;
   case "iw7_revolver_zm":
-  var_01 thread scripts/cp/cp_vo::try_to_play_vo("player_purchase_pistol", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
+  var_01 thread scripts\cp\cp_vo::try_to_play_vo("player_purchase_pistol", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
   break;
   case "iw7_ripper_zm":
   case "iw7_ripper_zmr":
-  var_01 thread scripts/cp/cp_vo::try_to_play_vo("player_purchase_smg", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
+  var_01 thread scripts\cp\cp_vo::try_to_play_vo("player_purchase_smg", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
   break;
   case "iw7_sdfar_zm":
-  var_01 thread scripts/cp/cp_vo::try_to_play_vo("player_purchase_assault", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
+  var_01 thread scripts\cp\cp_vo::try_to_play_vo("player_purchase_assault", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
   break;
   case "iw7_sdflmg_zm":
-  var_01 thread scripts/cp/cp_vo::try_to_play_vo("purchase_weapon", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
+  var_01 thread scripts\cp\cp_vo::try_to_play_vo("purchase_weapon", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
   break;
   case "iw7_sdfshotty_zm":
-  var_01 thread scripts/cp/cp_vo::try_to_play_vo("player_purchase_shotgun", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
+  var_01 thread scripts\cp\cp_vo::try_to_play_vo("player_purchase_shotgun", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
   break;
   case "iw7_shredder_zm_pap1":
   case "iw7_shredder_zm":
-  var_01 thread scripts/cp/cp_vo::try_to_play_vo("player_purchase_wonder", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
+  var_01 thread scripts\cp\cp_vo::try_to_play_vo("player_purchase_wonder", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
   break;
   case "iw7_sonic_zmr":
   case "iw7_sonic_zm":
-  var_01 thread scripts/cp/cp_vo::try_to_play_vo("player_purchase_shotgun", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
+  var_01 thread scripts\cp\cp_vo::try_to_play_vo("player_purchase_shotgun", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
   break;
   case "iw7_spas_zm":
-  var_01 thread scripts/cp/cp_vo::try_to_play_vo("player_purchase_shotgun", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
+  var_01 thread scripts\cp\cp_vo::try_to_play_vo("player_purchase_shotgun", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
   break;
   case "iw7_steeldragon_zm":
-  var_01 thread scripts/cp/cp_vo::try_to_play_vo("player_purchase_wonder", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
+  var_01 thread scripts\cp\cp_vo::try_to_play_vo("player_purchase_wonder", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
   break;
   case "iw7_ump45_zml":
-  var_01 thread scripts/cp/cp_vo::try_to_play_vo("player_purchase_smg", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
+  var_01 thread scripts\cp\cp_vo::try_to_play_vo("player_purchase_smg", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
   break;
   case "iw7_spasc_zm":
-  var_01 thread scripts/cp/cp_vo::try_to_play_vo("player_purchase_shotgun", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
+  var_01 thread scripts\cp\cp_vo::try_to_play_vo("player_purchase_shotgun", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
   break;
   }
 }
@@ -1206,10 +1206,10 @@ can_purchase_ammo(var_00) {
   var_01 = self getweaponslistall();
   var_02 = undefined;
   var_03 = undefined;
-  var_04 = scripts/cp/utility::getrawbaseweaponname(var_00);
+  var_04 = scripts\cp\utility::getrawbaseweaponname(var_00);
 
   foreach (var_06 in var_01) {
-  var_03 = scripts/cp/utility::getrawbaseweaponname(var_06);
+  var_03 = scripts\cp\utility::getrawbaseweaponname(var_06);
 
   if (var_03 == var_04) {
   var_02 = var_06;
@@ -1220,7 +1220,7 @@ can_purchase_ammo(var_00) {
   if (isdefined(var_02)) {
   var_08 = self getweaponammostock(var_02);
   var_09 = weaponmaxammo(var_02);
-  var_10 = scripts/cp/perks/prestige::prestige_getminammo();
+  var_10 = scripts\cp\perks\prestige::prestige_getminammo();
   var_11 = int(var_10 * var_09);
 
   if (var_08 < var_11)
@@ -1243,11 +1243,11 @@ interaction_post_activate_delay(var_00) {
   if (func_9A15(var_00))
   return;
 
-  scripts/cp/utility::allow_player_interactions(0);
+  scripts\cp\utility::allow_player_interactions(0);
   wait 1.5;
 
-  if (!scripts/cp/utility::areinteractionsenabled())
-  scripts/cp/utility::allow_player_interactions(1);
+  if (!scripts\cp\utility::areinteractionsenabled())
+  scripts\cp\utility::allow_player_interactions(1);
 }
 
 delayed_trigger_unset() {
@@ -1277,7 +1277,7 @@ can_purchase_interaction(var_00, var_01, var_02, var_03) {
   if (isdefined(var_0.script_location) && var_0.script_location == "afterlife")
   return 1;
 
-  if (scripts/cp/powers/coop_phaseshift::isentityphaseshifted(self))
+  if (scripts\cp\powers\coop_phaseshift::isentityphaseshifted(self))
   return 0;
 
   if (isdefined(var_01))
@@ -1295,14 +1295,14 @@ can_purchase_interaction(var_00, var_01, var_02, var_03) {
   break;
   }
   }
-  else if (interaction_is_weapon_upgrade(var_00) && !scripts/cp/cp_weapon::can_upgrade(self getcurrentweapon())) {
+  else if (interaction_is_weapon_upgrade(var_00) && !scripts\cp\cp_weapon::can_upgrade(self getcurrentweapon())) {
   if (scripts\engine\utility::is_true(level.has_picked_up_fuses) && !isdefined(level.placed_alien_fuses))
   return 1;
   else
   return 0;
   }
   else if (interaction_is_perk(var_00)) {
-  if ((scripts/cp/utility::isplayingsolo() || level.only_one_player) && var_0.perk_type == "perk_machine_revive" && !scripts/cp/utility::has_zombie_perk("perk_machine_revive") && self.self_revives_purchased >= self.max_self_revive_machine_use)
+  if ((scripts\cp\utility::isplayingsolo() || level.only_one_player) && var_0.perk_type == "perk_machine_revive" && !scripts\cp\utility::has_zombie_perk("perk_machine_revive") && self.self_revives_purchased >= self.max_self_revive_machine_use)
   return 0;
   }
   else if (interaction_is_special_door_buy(var_00)) {
@@ -1368,11 +1368,11 @@ can_purchase_interaction(var_00, var_01, var_02, var_03) {
 
   self.itempicked = var_0.script_noteworthy;
   level.transactionid = randomint(100);
-  scripts/cp/zombies/zombie_analytics::log_item_purchase_with_tickets(level.wave_num, self.itempicked, level.transactionid);
+  scripts\cp\zombies\zombie_analytics::log_item_purchase_with_tickets(level.wave_num, self.itempicked, level.transactionid);
   }
 
   var_07 = weaponmaxammo(var_0.script_noteworthy);
-  var_08 = scripts/cp/perks/prestige::prestige_getminammo();
+  var_08 = scripts\cp\perks\prestige::prestige_getminammo();
   var_09 = int(var_08 * var_07);
   var_10 = self getweaponammostock(var_06);
 
@@ -1387,14 +1387,14 @@ can_purchase_interaction(var_00, var_01, var_02, var_03) {
   return 0;
   }
 
-  if (scripts/cp/cp_persistence::player_has_enough_currency(var_04, var_02))
+  if (scripts\cp\cp_persistence::player_has_enough_currency(var_04, var_02))
   return 1;
 
   return 0;
 }
 
 take_player_money(var_00, var_01) {
-  scripts/cp/cp_persistence::take_player_currency(var_00, 1, var_01);
+  scripts\cp\cp_persistence::take_player_currency(var_00, 1, var_01);
 }
 
 should_interaction_fill_consumable_meter(var_00) {
@@ -1414,19 +1414,19 @@ func_5030(var_00, var_01) {}
 
 func_7DBA(var_00, var_01) {
   var_02 = level.interactions[var_0.script_noteworthy].cost;
-  var_03 = scripts/cp/utility::getrawbaseweaponname(var_0.script_noteworthy);
+  var_03 = scripts\cp\utility::getrawbaseweaponname(var_0.script_noteworthy);
   var_04 = var_01 getcurrentweapon();
-  var_05 = scripts/cp/utility::getbaseweaponname(var_04);
+  var_05 = scripts\cp\utility::getbaseweaponname(var_04);
   var_06 = weaponmaxammo(var_04);
-  var_07 = var_01 scripts/cp/perks/prestige::prestige_getminammo();
+  var_07 = var_01 scripts\cp\perks\prestige::prestige_getminammo();
   var_08 = int(var_07 * var_06);
   var_09 = var_01 getweaponammostock(var_04);
   var_10 = self getweaponslistall();
 
   foreach (var_12 in var_10) {
-  var_13 = scripts/cp/utility::getrawbaseweaponname(var_12);
+  var_13 = scripts\cp\utility::getrawbaseweaponname(var_12);
 
-  if (var_13 == scripts/cp/utility::getrawbaseweaponname(var_0.script_noteworthy)) {
+  if (var_13 == scripts\cp\utility::getrawbaseweaponname(var_0.script_noteworthy)) {
   var_14 = var_12;
   var_09 = self getweaponammostock(var_14);
   var_06 = weaponmaxammo(var_14);
@@ -1451,7 +1451,7 @@ func_7DBA(var_00, var_01) {
 }
 
 func_502F(var_00, var_01) {
-  if (var_01 scripts/cp/cp_weapon::has_weapon_variation(var_0.script_noteworthy))
+  if (var_01 scripts\cp\cp_weapon::has_weapon_variation(var_0.script_noteworthy))
   return func_7DBA(var_00, var_01);
 
   return undefined;
@@ -1572,7 +1572,7 @@ interaction_post_activate_update(var_00) {
   if (isdefined(var_0.souvenir_fx))
   var_0.souvenir_fx delete();
 
-  if (scripts/cp/utility::is_valid_player())
+  if (scripts\cp\utility::is_valid_player())
   self playlocalsound("zmb_item_pickup");
 
   var_0.souvenir = undefined;
@@ -1739,11 +1739,11 @@ func_9A1F(var_00) {
 }
 
 func_D0C3(var_00) {
-  return scripts/cp/powers/coop_powers::hasequipment(var_0.power_name);
+  return scripts\cp\powers\coop_powers::hasequipment(var_0.power_name);
 }
 
 can_use_perk(var_00) {
-  if (scripts/cp/utility::has_zombie_perk(var_0.perk_type))
+  if (scripts\cp\utility::has_zombie_perk(var_0.perk_type))
   return 0;
   else if (self.self_revives_purchased >= self.max_self_revive_machine_use && var_0.perk_type == "perk_machine_revive")
   return 0;
@@ -1772,7 +1772,7 @@ disable_linked_interactions(var_00) {
 
   foreach (var_03 in var_01) {
   if (var_3.target == var_0.target) {
-  scripts/cp/zombies/zombie_analytics::func_AF74(var_3.name, 0);
+  scripts\cp\zombies\zombie_analytics::func_AF74(var_3.name, 0);
   remove_from_current_interaction_list(var_03);
   }
   }
@@ -1783,7 +1783,7 @@ enable_linked_interactions(var_00) {
 
   foreach (var_03 in var_01) {
   if (var_3.target == var_0.target) {
-  scripts/cp/zombies/zombie_analytics::func_AF74(var_3.name, 1);
+  scripts\cp\zombies\zombie_analytics::func_AF74(var_3.name, 1);
   add_to_current_interaction_list(var_03);
   }
   }
@@ -1793,7 +1793,7 @@ disable_like_interactions(var_00) {
   var_01 = scripts\engine\utility::getstructarray(var_0.script_noteworthy, "script_noteworthy");
 
   foreach (var_03 in var_01) {
-  scripts/cp/zombies/zombie_analytics::func_AF74(var_3.name, 0);
+  scripts\cp\zombies\zombie_analytics::func_AF74(var_3.name, 0);
   remove_from_current_interaction_list(var_03);
   }
 }
@@ -1802,7 +1802,7 @@ enable_like_interactions(var_00) {
   var_01 = scripts\engine\utility::getstructarray(var_0.script_noteworthy, "script_noteworthy");
 
   foreach (var_03 in var_01) {
-  scripts/cp/zombies/zombie_analytics::func_AF74(var_3.name, 1);
+  scripts\cp\zombies\zombie_analytics::func_AF74(var_3.name, 1);
   add_to_current_interaction_list(var_03);
   }
 }
@@ -1851,7 +1851,7 @@ get_linked_interactions(var_00) {
 
 refresh_interaction() {
   if (isdefined(self.interaction_trigger.name))
-  scripts/cp/zombies/zombie_analytics::func_AF74(self.interaction_trigger.name, 0);
+  scripts\cp\zombies\zombie_analytics::func_AF74(self.interaction_trigger.name, 0);
 
   self notify("stop_interaction_logic");
   self.last_interaction_point = undefined;
@@ -1869,7 +1869,7 @@ func_55A2() {
   foreach (var_02 in var_00) {
   if (interaction_is_weapon_buy(var_02) || interaction_is_grenade_wall_buy(var_02) || interaction_is_ticket_buy(var_02) || isdefined(var_2.script_parameters) && var_2.script_parameters == "tickets") {
   var_2.disabled = 1;
-  scripts/cp/zombies/zombie_analytics::func_AF74(var_2.name, 0);
+  scripts\cp\zombies\zombie_analytics::func_AF74(var_2.name, 0);
   continue;
   }
   }
@@ -1880,7 +1880,7 @@ func_55A3(var_00) {
 
   foreach (var_03 in var_01) {
   if (interaction_is_weapon_buy(var_03) || interaction_is_grenade_wall_buy(var_03) || interaction_is_ticket_buy(var_03) || isdefined(var_3.script_parameters) && var_3.script_parameters == "tickets") {
-  scripts/cp/zombies/zombie_analytics::func_AF74(var_3.name, 0);
+  scripts\cp\zombies\zombie_analytics::func_AF74(var_3.name, 0);
   remove_from_current_interaction_list_for_player(var_03, var_00);
   continue;
   }
@@ -1892,7 +1892,7 @@ func_6255(var_00) {
 
   foreach (var_03 in var_01) {
   if (interaction_is_weapon_buy(var_03) || interaction_is_grenade_wall_buy(var_03) || interaction_is_ticket_buy(var_03) || isdefined(var_3.script_parameters) && var_3.script_parameters == "tickets") {
-  scripts/cp/zombies/zombie_analytics::func_AF74(var_3.name, 1);
+  scripts\cp\zombies\zombie_analytics::func_AF74(var_3.name, 1);
   add_to_current_interaction_list_for_player(var_03, var_00);
   continue;
   }
@@ -1901,7 +1901,7 @@ func_6255(var_00) {
 
 souvenir_team_splash(var_00, var_01) {
   foreach (var_03 in level.players) {
-  var_03 thread scripts/cp/cp_hud_message::showsplash(var_00, undefined, var_01);
+  var_03 thread scripts\cp\cp_hud_message::showsplash(var_00, undefined, var_01);
   wait 0.1;
   }
 }

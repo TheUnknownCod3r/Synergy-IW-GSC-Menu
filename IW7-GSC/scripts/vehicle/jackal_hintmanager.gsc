@@ -1,8 +1,8 @@
-/**********************************************************
+/**************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\vehicle\jackal_hintmanager.gsc
-**********************************************************/
+ * Script: scripts\vehicle\jackal_hintmanager.gsc
+**************************************************/
 
 hintmanager_init() {
 	scripts\engine\utility::flag_init("flag_jackal_hintmanaged_hint");

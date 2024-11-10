@@ -1,8 +1,8 @@
-/********************************************
+/************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\gamescore.gsc
-********************************************/
+ * Script: scripts\mp\gamescore.gsc
+************************************/
 
 gethighestscoringplayer() {
 	updateplacement();
@@ -127,7 +127,7 @@ checkffascorejip() {
 	if(level.roundscorelimit > 0) {
 		var_00 = self.destroynavrepulsor / level.roundscorelimit * 100;
 		if(var_00 > level.var_EC3F) {
-			function_01BC(1);
+			setnojipscore(1);
 			level.nojip = 1;
 		}
 	}
@@ -173,7 +173,7 @@ giveteamscoreforobjective(param_00,param_01,param_02) {
 		var_06 = var_04 / var_05 * 100;
 		if(!scripts\mp\utility::isroundbased() && isdefined(level.nojip) && !level.nojip) {
 			if(var_06 > level.var_EC3F) {
-				function_01BC(1);
+				setnojipscore(1);
 				level.nojip = 1;
 				return;
 			}

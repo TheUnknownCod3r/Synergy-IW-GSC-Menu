@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2961.gsc
+ * Script: 2961.gsc
 ***************************************/
 
 func_7CCC(var_00) {
@@ -168,7 +168,7 @@ func_65E6(var_00, var_01) {
   if (gettime() >= var_02 + var_01 * 1000)
   break;
 
-  scripts/sp/utility_code::func_65FA(var_00, var_01);
+  scripts\sp\utility_code::func_65FA(var_00, var_01);
   }
 }
 
@@ -315,7 +315,7 @@ func_6E49(var_00, var_01, var_02) {
   if (!isdefined(var_02))
   var_02 = 0;
 
-  var_01 thread scripts/sp/utility_code::func_1287(var_00, var_02);
+  var_01 thread scripts\sp\utility_code::func_1287(var_00, var_02);
   return var_01;
 }
 
@@ -326,7 +326,7 @@ func_6E4A(var_00, var_01, var_02) {
   var_02 = 0;
 
   for (var_03 = 0; var_03 < var_1.size; var_3++)
-  var_1[var_03] thread scripts/sp/utility_code::func_1287(var_00, 0);
+  var_1[var_03] thread scripts\sp\utility_code::func_1287(var_00, 0);
 
   return var_01;
 }
@@ -375,8 +375,8 @@ func_2678() {
 }
 
 func_2679() {
-  scripts/sp/utility_code::func_2680();
-  thread scripts/sp/utility_code::func_267F();
+  scripts\sp\utility_code::func_2680();
+  thread scripts\sp\utility_code::func_267F();
 }
 
 func_2669(var_00) {
@@ -391,8 +391,8 @@ func_266B(var_00, var_01, var_02, var_03) {
   if (!isdefined(level.func_4B18))
   level.func_4B18 = 1;
 
-  var_04 = "levelshots/autosave/autosave_" + level.script + level.func_4B18;
-  var_05 = level scripts/sp/autosave::func_12891(level.func_4B18, "autosave", var_04, var_01, var_02, var_03);
+  var_04 = "levelshots\autosave\autosave_" + level.script + level.func_4B18;
+  var_05 = level scripts\sp\autosave::func_12891(level.func_4B18, "autosave", var_04, var_01, var_02, var_03);
 
   if (isdefined(var_05) && var_05)
   level.func_4B18++;
@@ -455,7 +455,7 @@ func_4295(var_00, var_01) {
 }
 
 func_7E33(var_00, var_01, var_02) {
-  return scripts/sp/utility_code::func_4461(var_00, var_01, var_02, ::func_4295);
+  return scripts\sp\utility_code::func_4461(var_00, var_01, var_02, ::func_4295);
 }
 
 func_79B3(var_00, var_01) {
@@ -936,7 +936,7 @@ play_sound_on_tag(var_00, var_01, var_02, var_03, var_04) {
 
   var_05 = spawn("script_origin", self.origin);
   var_05 endon("death");
-  thread scripts/sp/utility_code::func_517B(var_05, "sounddone");
+  thread scripts\sp\utility_code::func_517B(var_05, "sounddone");
 
   if (isdefined(var_01))
   var_05 linkto(self, var_01, (0, 0, 0), (0, 0, 0));
@@ -950,7 +950,7 @@ play_sound_on_tag(var_00, var_01, var_02, var_03, var_04) {
   var_05 playsound(var_00, "sounddone");
 
   if (isdefined(var_02)) {
-  if (!isdefined(scripts/sp/utility_code::func_1362A(var_05)))
+  if (!isdefined(scripts\sp\utility_code::func_1362A(var_05)))
   var_05 stopsounds();
 
   wait 0.05;
@@ -974,7 +974,7 @@ func_CE48(var_00, var_01, var_02, var_03, var_04, var_05) {
   if (!isdefined(var_01))
   var_01 = "dirt";
 
-  thread scripts/sp/utility_code::func_517B(var_06, "sounddone");
+  thread scripts\sp\utility_code::func_517B(var_06, "sounddone");
 
   if (isdefined(var_02))
   var_06 linkto(self, var_02, (0, 0, 0), (0, 0, 0));
@@ -988,7 +988,7 @@ func_CE48(var_00, var_01, var_02, var_03, var_04, var_05) {
   var_06 _meth_824E(var_00, var_01, "sounddone");
 
   if (isdefined(var_03)) {
-  if (!isdefined(scripts/sp/utility_code::func_1362A(var_06)))
+  if (!isdefined(scripts\sp\utility_code::func_1362A(var_06)))
   var_06 stopsounds();
 
   wait 0.05;
@@ -1276,7 +1276,7 @@ func_13753(var_00, var_01, var_02) {
 
   if (isdefined(var_02)) {
   var_10 endon("thread_timed_out");
-  var_10 thread scripts/sp/utility_code::func_13758(var_02);
+  var_10 thread scripts\sp\utility_code::func_13758(var_02);
   }
 
   var_10.count = var_0.size;
@@ -1284,7 +1284,7 @@ func_13753(var_00, var_01, var_02) {
   if (isdefined(var_01) && var_01 < var_10.count)
   var_10.count = var_01;
 
-  scripts\engine\utility::array_thread(var_00, scripts/sp/utility_code::func_13757, var_10);
+  scripts\engine\utility::array_thread(var_00, scripts\sp\utility_code::func_13757, var_10);
 
   while (var_10.count > 0)
   var_10 waittill("waittill_dead guy died");
@@ -1303,7 +1303,7 @@ func_13754(var_00, var_01, var_02) {
 
   if (isdefined(var_02)) {
   var_07 endon("thread_timed_out");
-  var_07 thread scripts/sp/utility_code::func_13758(var_02);
+  var_07 thread scripts\sp\utility_code::func_13758(var_02);
   }
 
   var_7.count = var_0.size;
@@ -1311,7 +1311,7 @@ func_13754(var_00, var_01, var_02) {
   if (isdefined(var_01) && var_01 < var_7.count)
   var_7.count = var_01;
 
-  scripts\engine\utility::array_thread(var_00, scripts/sp/utility_code::func_13756, var_07);
+  scripts\engine\utility::array_thread(var_00, scripts\sp\utility_code::func_13756, var_07);
 
   while (var_7.count > 0)
   var_07 waittill("waittill_dead_guy_dead_or_dying");
@@ -1697,7 +1697,7 @@ func_28D7(var_00) {
   if (!var_5.func_9F6B)
   continue;
 
-  var_05 scripts/sp/utility_code::func_1368E();
+  var_05 scripts\sp\utility_code::func_1368E();
   anim.func_29B7 = 0;
   }
 
@@ -1713,7 +1713,7 @@ func_28D7(var_00) {
 }
 
 func_28D8(var_00) {
-  thread scripts/sp/utility_code::func_28D9(var_00);
+  thread scripts\sp\utility_code::func_28D9(var_00);
 }
 
 func_F2DA(var_00) {
@@ -2135,12 +2135,12 @@ func_11164(var_00) {
 }
 
 func_11167(var_00, var_01) {
-  var_00 scripts/sp/utility_code::func_11166(var_0.func_2274[var_0.lastindex - 1], var_01);
+  var_00 scripts\sp\utility_code::func_11166(var_0.func_2274[var_0.lastindex - 1], var_01);
 }
 
 func_11165(var_00, var_01) {
   for (var_02 = 0; var_02 < var_01; var_2++)
-  var_00 scripts/sp/utility_code::func_11166(var_0.func_2274[var_02], var_0.func_2274[randomint(var_0.lastindex)]);
+  var_00 scripts\sp\utility_code::func_11166(var_0.func_2274[var_02], var_0.func_2274[randomint(var_0.lastindex)]);
 }
 
 func_4C39(var_00) {
@@ -2182,7 +2182,7 @@ func_B8D1() {
   if (func_93AB()) {
   level.player _meth_8591(1);
   _updategamerprofile();
-  scripts/sp/endmission::func_41ED();
+  scripts\sp\endmission::func_41ED();
   }
 
   level.func_B8D0 = 1;
@@ -2300,8 +2300,8 @@ func_54F7() {
   return;
 
   self.func_C3BE = self.func_EDAD;
-  level.func_22E0[scripts/sp/colors::func_7CE4()][self.func_EDAD] = scripts\engine\utility::array_remove(level.func_22E0[scripts/sp/colors::func_7CE4()][self.func_EDAD], self);
-  scripts/sp/colors::func_AB3A();
+  level.func_22E0[scripts\sp\colors::func_7CE4()][self.func_EDAD] = scripts\engine\utility::array_remove(level.func_22E0[scripts\sp\colors::func_7CE4()][self.func_EDAD], self);
+  scripts\sp\colors::func_AB3A();
   self.func_EDAD = undefined;
   self.func_4BDF = undefined;
 }
@@ -2337,7 +2337,7 @@ func_F3B5(var_00) {
   self.func_ED34 = undefined;
   self.func_ED33 = undefined;
   self.func_C3BE = undefined;
-  var_02 = scripts/sp/colors::func_7CE4();
+  var_02 = scripts\sp\colors::func_7CE4();
 
   if (isdefined(self.func_EDAD))
   level.func_22E0[var_02][self.func_EDAD] = scripts\engine\utility::array_remove(level.func_22E0[var_02][self.func_EDAD], self);
@@ -2345,7 +2345,7 @@ func_F3B5(var_00) {
   self.func_EDAD = var_01;
   level.func_22E0[var_02][var_01] = func_22B9(level.func_22E0[var_02][var_01]);
   level.func_22E0[var_02][self.func_EDAD] = scripts\engine\utility::array_add(level.func_22E0[var_02][self.func_EDAD], self);
-  thread scripts/sp/utility_code::func_BF01(var_01);
+  thread scripts\sp\utility_code::func_BF01(var_01);
 }
 
 func_F3B7(var_00) {
@@ -2458,23 +2458,23 @@ func_9326(var_00) {
 }
 
 func_131CC() {
-  scripts/sp/vehicle_code::func_13219();
+  scripts\sp\vehicle_code::func_13219();
 }
 
 func_13221() {
-  thread scripts/sp/vehicle_paths::func_13222();
+  thread scripts\sp\vehicle_paths::func_13222();
 }
 
 func_131FF(var_00) {
-  scripts/sp/vehicle_code::func_13201(var_00);
+  scripts\sp\vehicle_code::func_13201(var_00);
 }
 
 func_13206(var_00) {
-  scripts/sp/vehicle_code::func_13207(var_00);
+  scripts\sp\vehicle_code::func_13207(var_00);
 }
 
 func_131D5(var_00, var_01) {
-  scripts/sp/vehicle::func_1321A(var_00, var_01);
+  scripts\sp\vehicle::func_1321A(var_00, var_01);
 }
 
 func_864C(var_00, var_01) {
@@ -2500,13 +2500,13 @@ maymovetopoint(var_00, var_01) {
 }
 
 melee(var_00, var_01) {
-  return scripts/sp/vehicle_code::func_12B8(var_00, var_01);
+  return scripts\sp\vehicle_code::func_12B8(var_00, var_01);
 }
 
 func_1749(var_00, var_01, var_02, var_03, var_04, var_05, var_06) {
-  scripts/sp/starts::func_174A();
+  scripts\sp\starts::func_174A();
   var_00 = tolower(var_00);
-  var_07 = scripts/sp/starts::func_174B(var_00, var_01, var_02, var_03, var_04, var_05, var_06);
+  var_07 = scripts\sp\starts::func_174B(var_00, var_01, var_02, var_03, var_04, var_05, var_06);
   level.func_10C58[level.func_10C58.size] = var_07;
   level.func_10BA8[var_00] = var_07;
 }
@@ -2560,12 +2560,12 @@ func_29C0() {
 
 func_5480(var_00) {
   func_29C0();
-  scripts/sp/anim::func_1F32(self, var_00);
+  scripts\sp\anim::func_1F32(self, var_00);
 }
 
 func_7749(var_00, var_01) {
   func_29C0();
-  scripts/sp/anim::func_1ECD(self, var_00, undefined, undefined, var_01);
+  scripts\sp\anim::func_1ECD(self, var_00, undefined, undefined, var_01);
 }
 
 func_DBEF(var_00, var_01) {
@@ -2619,18 +2619,18 @@ func_DBF4(var_00) {
 }
 
 func_10350(var_00, var_01) {
-  scripts/sp/utility_code::func_1778(var_00);
+  scripts\sp\utility_code::func_1778(var_00);
   func_DBEF(var_00, var_01);
 }
 
 func_10352(var_00) {
-  scripts/sp/utility_code::func_1778(var_00);
+  scripts\sp\utility_code::func_1778(var_00);
   func_DBF5();
   func_DBF1(var_00);
 }
 
 func_10353(var_00) {
-  scripts/sp/utility_code::func_1778(var_00);
+  scripts\sp\utility_code::func_1778(var_00);
   func_DBF2(var_00);
 }
 
@@ -2673,7 +2673,7 @@ func_1369(var_00, var_01, var_02, var_03, var_04) {
   if (var_01 > 0)
   wait(var_01);
 
-  if (!isdefined(scripts/sp/utility_code::func_1362A(var_05, level.player)))
+  if (!isdefined(scripts\sp\utility_code::func_1362A(var_05, level.player)))
   var_05 stopsounds();
 
   wait 0.05;
@@ -2725,27 +2725,27 @@ func_D01F(var_00) {
 }
 
 func_1034D(var_00, var_01) {
-  scripts/sp/utility_code::func_1773(var_00);
+  scripts\sp\utility_code::func_1773(var_00);
   func_D01B(var_00, var_01);
 }
 
 func_1034F(var_00) {
-  scripts/sp/utility_code::func_1773(var_00);
+  scripts\sp\utility_code::func_1773(var_00);
   func_D01F(var_00);
 }
 
 func_1034E(var_00, var_01, var_02, var_03, var_04, var_05) {
-  scripts/sp/utility_code::func_1773(var_00);
+  scripts\sp\utility_code::func_1773(var_00);
   func_D01E(var_00, var_01, var_02, var_03, var_04, var_05);
 }
 
 func_10346(var_00) {
-  scripts/sp/utility_code::func_175F(var_00);
+  scripts\sp\utility_code::func_175F(var_00);
   func_5480(var_00);
 }
 
 func_10347(var_00) {
-  scripts/sp/utility_code::func_1760(var_00);
+  scripts\sp\utility_code::func_1760(var_00);
   func_7749(var_00);
 }
 
@@ -2900,11 +2900,11 @@ func_F5C3(var_00, var_01) {
 }
 
 func_E198() {
-  scripts/sp/colors::func_43AA();
+  scripts\sp\colors::func_43AA();
 }
 
 func_107B3(var_00, var_01) {
-  scripts/sp/colors::func_43AC(var_00, var_01);
+  scripts\sp\colors::func_43AC(var_00, var_01);
 }
 
 func_F55D(var_00, var_01) {
@@ -3124,11 +3124,11 @@ func_9933(var_00, var_01) {
 }
 
 func_13624(var_00) {
-  scripts/sp/utility_code::func_13634(var_00, "script_noteworthy");
+  scripts\sp\utility_code::func_13634(var_00, "script_noteworthy");
 }
 
 func_13630(var_00) {
-  scripts/sp/utility_code::func_13634(var_00, "targetname");
+  scripts\sp\utility_code::func_13634(var_00, "targetname");
 }
 
 func_135D5(var_00, var_01) {
@@ -3156,7 +3156,7 @@ func_135CA(var_00, var_01) {
   var_03 = scripts\engine\utility::array_combine(var_03, getentarray(var_01, "targetname"));
 
   for (var_04 = 0; var_04 < var_3.size; var_4++)
-  var_02 thread scripts/sp/utility_code::func_65FB(var_3[var_04]);
+  var_02 thread scripts\sp\utility_code::func_65FB(var_3[var_04]);
 
   var_02 waittill("done");
 }
@@ -3311,7 +3311,7 @@ func_4793(var_00) {
 
 func_13861(var_00, var_01, var_02) {
   if (var_00 == "on") {
-  self._blackboard.func_13863 = 1;
+  self.var_1198.func_13863 = 1;
 
   if (isdefined(var_02)) {
   if (var_02 == "right")
@@ -3331,7 +3331,7 @@ func_13861(var_00, var_01, var_02) {
   }
   }
   else
-  self._blackboard.func_13863 = 0;
+  self.var_1198.func_13863 = 0;
 }
 
 func_DC45(var_00) {
@@ -3718,7 +3718,7 @@ func_417A() {
 
   if (getdvarint("ai_iw7", 0) == 1) {
   var_00 = "combat";
-  self._blackboard.alwaysrunforward = 0;
+  self.var_1198.alwaysrunforward = 0;
   func_4169(var_00);
   self.func_E80C = undefined;
   return;
@@ -3792,12 +3792,12 @@ func_15F1(var_00, var_01, var_02) {
 func_15F2(var_00) {
   if (isdefined(self.func_ED33)) {
   self.activated_color_trigger = 1;
-  scripts/sp/colors::func_159B("allies");
+  scripts\sp\colors::func_159B("allies");
   }
 
   if (isdefined(self.func_ED34)) {
   self.activated_color_trigger = 1;
-  scripts/sp/colors::func_159B("axis");
+  scripts\sp\colors::func_159B("axis");
   }
 
   self notify("trigger", var_00);
@@ -3808,7 +3808,7 @@ func_F1DE() {
 }
 
 func_8B6C() {
-  if (scripts/sp/colors::func_7CE4() == "axis")
+  if (scripts\sp\colors::func_7CE4() == "axis")
   return isdefined(self.func_ED34) || isdefined(self.func_EDAD);
 
   return isdefined(self.func_ED33) || isdefined(self.func_EDAD);
@@ -3921,8 +3921,8 @@ func_D1FD(var_00) {
 
 func_13763(var_00, var_01, var_02, var_03) {
   var_04 = spawnstruct();
-  thread scripts/sp/utility_code::func_13764(var_04, var_00, var_01);
-  thread scripts/sp/utility_code::func_13764(var_04, var_02, var_03);
+  thread scripts\sp\utility_code::func_13764(var_04, var_00, var_01);
+  thread scripts\sp\utility_code::func_13764(var_04, var_02, var_03);
   var_04 waittill("done");
 }
 
@@ -3937,10 +3937,10 @@ func_56BA(var_00, var_01, var_02, var_03) {
   if (var_04 [[level.func_1274F[var_00]]]())
   return;
 
-  var_04 thread scripts/sp/utility_code::func_9021(level.func_12750[var_00], level.func_1274F[var_00], var_01, var_02, var_03);
+  var_04 thread scripts\sp\utility_code::func_9021(level.func_12750[var_00], level.func_1274F[var_00], var_01, var_02, var_03);
   }
   else
-  var_04 thread scripts/sp/utility_code::func_9021(level.func_12750[var_00]);
+  var_04 thread scripts\sp\utility_code::func_9021(level.func_12750[var_00]);
 }
 
 func_56BE(var_00, var_01, var_02, var_03, var_04) {
@@ -3950,7 +3950,7 @@ func_56BE(var_00, var_01, var_02, var_03, var_04) {
   return;
 
   var_01 = scripts\engine\utility::ter_op(isdefined(var_01), var_01, 6);
-  var_05 thread scripts/sp/utility_code::func_9021(level.func_12750[var_00], level.func_1274F[var_00], var_02, var_03, var_04, var_01);
+  var_05 thread scripts\sp\utility_code::func_9021(level.func_12750[var_00], level.func_1274F[var_00], var_02, var_03, var_04, var_01);
 }
 
 func_56BF(var_00, var_01, var_02, var_03, var_04, var_05) {
@@ -3960,34 +3960,34 @@ func_56BF(var_00, var_01, var_02, var_03, var_04, var_05) {
   return;
 
   var_01 = scripts\engine\utility::ter_op(isdefined(var_01), var_01, 6);
-  var_06 thread scripts/sp/utility_code::func_9021(level.func_12750[var_00], level.func_1274F[var_00], var_03, var_04, var_05, var_01, var_02);
+  var_06 thread scripts\sp\utility_code::func_9021(level.func_12750[var_00], level.func_1274F[var_00], var_03, var_04, var_05, var_01, var_02);
 }
 
 func_56BB(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08, var_09) {
   if (!isdefined(var_06))
   var_06 = 0;
 
-  var_10 = scripts/sp/utility_code::func_900D(var_00, var_01, var_02, var_03, var_04, var_05, var_06);
+  var_10 = scripts\sp\utility_code::func_900D(var_00, var_01, var_02, var_03, var_04, var_05, var_06);
   func_56BA(var_10, var_07, var_08, var_09);
-  thread scripts/sp/utility_code::func_900E(var_00, var_01, var_02, var_03, var_04, var_05, var_06);
+  thread scripts\sp\utility_code::func_900E(var_00, var_01, var_02, var_03, var_04, var_05, var_06);
 }
 
 func_56BC(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08, var_09, var_10) {
   if (!isdefined(var_07))
   var_07 = 0;
 
-  var_11 = scripts/sp/utility_code::func_900D(var_00, var_02, var_03, var_04, var_05, var_06, var_07);
+  var_11 = scripts\sp\utility_code::func_900D(var_00, var_02, var_03, var_04, var_05, var_06, var_07);
   thread func_56BE(var_11, var_01, var_08, var_09, var_10);
-  thread scripts/sp/utility_code::func_900E(var_00, var_02, var_03, var_04, var_05, var_06, var_07);
+  thread scripts\sp\utility_code::func_900E(var_00, var_02, var_03, var_04, var_05, var_06, var_07);
 }
 
 func_56BD(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08, var_09, var_10, var_11) {
   if (!isdefined(var_08))
   var_08 = 0;
 
-  var_12 = scripts/sp/utility_code::func_900D(var_00, var_03, var_04, var_05, var_06, var_07, var_08);
+  var_12 = scripts\sp\utility_code::func_900D(var_00, var_03, var_04, var_05, var_06, var_07, var_08);
   thread func_56BF(var_12, var_01, var_02, var_09, var_10, var_11);
-  thread scripts/sp/utility_code::func_900E(var_00, var_03, var_04, var_05, var_06, var_07, var_08);
+  thread scripts\sp\utility_code::func_900E(var_00, var_03, var_04, var_05, var_06, var_07, var_08);
 }
 
 func_7ECF(var_00) {
@@ -4061,16 +4061,16 @@ func_10619(var_00, var_01) {
 
 func_74D7(var_00, var_01, var_02, var_03, var_04, var_05) {
   var_06 = spawnstruct();
-  var_06 thread scripts/sp/utility_code::func_74DB(self, var_00, var_01, var_02, var_03, var_04, var_05);
-  return scripts/sp/utility_code::func_74DF(var_06);
+  var_06 thread scripts\sp\utility_code::func_74DB(self, var_00, var_01, var_02, var_03, var_04, var_05);
+  return scripts\sp\utility_code::func_74DF(var_06);
 }
 
 func_74DD(var_00, var_01, var_02, var_03, var_04, var_05, var_06) {
   var_07 = spawnstruct();
-  var_07 thread scripts/sp/utility_code::func_74DB(self, var_01, var_02, var_03, var_04, var_05, var_06);
+  var_07 thread scripts\sp\utility_code::func_74DB(self, var_01, var_02, var_03, var_04, var_05, var_06);
 
   if (isdefined(var_7.func_74DA) || var_07 scripts\engine\utility::waittill_any_timeout(var_00, "function_stack_func_begun") != "timeout")
-  return scripts/sp/utility_code::func_74DF(var_07);
+  return scripts\sp\utility_code::func_74DF(var_07);
   else
   {
   var_07 notify("death");
@@ -4215,7 +4215,7 @@ func_22C6(var_00, var_01, var_02) {
   var_06 = var_05 func_10808();
 
   if (isdefined(var_6.target) && !isdefined(var_6.func_EE2B))
-  var_06 thread scripts/sp/vehicle_paths::setsuit();
+  var_06 thread scripts\sp\vehicle_paths::setsuit();
 
   var_3[var_3.size] = var_06;
   continue;
@@ -4332,7 +4332,7 @@ func_16C5(var_00, var_01, var_02) {
   }
   }
 
-  var_05 = scripts/sp/hud_util::createfontstring("default", 1);
+  var_05 = scripts\sp\hud_util::createfontstring("default", 1);
   var_06 = level.func_545A.size;
   level.func_545A[var_06] = var_05;
   var_5.foreground = 1;
@@ -4426,11 +4426,11 @@ func_9BEE() {
 }
 
 func_266F(var_00) {
-  return scripts/sp/autosave::func_1190(var_00);
+  return scripts\sp\autosave::func_1190(var_00);
 }
 
 func_2670() {
-  return scripts/sp/autosave::func_1190(1);
+  return scripts\sp\autosave::func_1190(1);
 }
 
 func_F3C7(var_00) {
@@ -4521,7 +4521,7 @@ func_22D8(var_00, var_01, var_02) {
   var_06 = var_3[var_05];
   var_4[var_06] = spawnstruct();
   var_4[var_06].func_1187 = 1;
-  var_4[var_06] thread scripts/sp/utility_code::func_22D9(var_0[var_06], var_01, var_02);
+  var_4[var_06] thread scripts\sp\utility_code::func_22D9(var_0[var_06], var_01, var_02);
   }
 
   for (var_05 = 0; var_05 < var_3.size; var_5++) {
@@ -4871,8 +4871,8 @@ func_57D5(var_00) {
   level.func_13711.func_E7E0 = [];
   level.func_13711.func_E80A = [];
   var_1.count = var_2.size;
-  var_01 scripts\engine\utility::array_levelthread(var_02, scripts/sp/utility_code::func_13774, var_03);
-  var_01 thread scripts/sp/utility_code::func_5767(var_07);
+  var_01 scripts\engine\utility::array_levelthread(var_02, scripts\sp\utility_code::func_13774, var_03);
+  var_01 thread scripts\sp\utility_code::func_5767(var_07);
   var_01 endon("any_funcs_aborted");
 
   for (;;) {
@@ -4883,9 +4883,9 @@ func_57D5(var_00) {
   }
 
   var_01 notify("all_funcs_ended");
-  scripts\engine\utility::array_levelthread(var_04, scripts/sp/utility_code::func_68CE, []);
-  scripts\engine\utility::array_levelthread(var_05, scripts/sp/utility_code::func_68CC);
-  scripts\engine\utility::array_levelthread(var_06, scripts/sp/utility_code::func_68CD);
+  scripts\engine\utility::array_levelthread(var_04, scripts\sp\utility_code::func_68CE, []);
+  scripts\engine\utility::array_levelthread(var_05, scripts\sp\utility_code::func_68CC);
+  scripts\engine\utility::array_levelthread(var_06, scripts\sp\utility_code::func_68CD);
 }
 
 func_578A() {
@@ -4894,7 +4894,7 @@ func_578A() {
   level.func_13711.func_E7F9 = [];
 
   foreach (var_03 in var_01)
-  level scripts/sp/utility_code::func_68CE(var_03, []);
+  level scripts\sp\utility_code::func_68CE(var_03, []);
 
   var_00 notify("all_funcs_ended");
 }
@@ -4912,7 +4912,7 @@ func_9BB5() {
   if (isdefined(level.func_5018))
   return level.func_10CDA == "default";
 
-  if (scripts/sp/starts::func_ABDA())
+  if (scripts\sp\starts::func_ABDA())
   return level.func_10CDA == level.func_10C58[0]["name"];
 
   return level.func_10CDA == "default";
@@ -4975,7 +4975,7 @@ func_B317(var_00, var_01) {
 }
 
 func_BF95(var_00) {
-  scripts/sp/endmission::func_1355(var_00);
+  scripts\sp\endmission::func_1355(var_00);
 }
 
 func_BF97(var_00, var_01, var_02) {
@@ -4983,41 +4983,41 @@ func_BF97(var_00, var_01, var_02) {
   scripts\engine\utility::flag_init("nextmission_preload_complete");
 
   scripts\engine\utility::flag_clear("nextmission_preload_complete");
-  scripts/sp/endmission::func_1356(var_00, var_01, var_02);
+  scripts\sp\endmission::func_1356(var_00, var_01, var_02);
   scripts\engine\utility::flag_set("nextmission_preload_complete");
 }
 
 func_BF98() {
-  scripts/sp/endmission::func_1357();
+  scripts\sp\endmission::func_1357();
 }
 
 func_CE6D(var_00) {}
 
 func_7F6E(var_00) {
-  return scripts/sp/endmission::func_12B0(var_00);
+  return scripts\sp\endmission::func_12B0(var_00);
 }
 
 func_7E2C(var_00) {
-  return scripts/sp/endmission::func_12AF(var_00);
+  return scripts\sp\endmission::func_12AF(var_00);
 }
 
 func_7F70(var_00) {
-  return scripts/sp/endmission::func_12B1(var_00);
+  return scripts\sp\endmission::func_12B1(var_00);
 }
 
 func_13705(var_00) {
   if (!isdefined(var_00))
   var_00 = level.script;
 
-  scripts/sp/endmission::func_1455(var_00);
+  scripts\sp\endmission::func_1455(var_00);
 }
 
 func_13C3C(var_00) {
-  scripts/sp/endmission::func_1463(var_00);
+  scripts\sp\endmission::func_1463(var_00);
 }
 
 func_13C60() {
-  scripts/sp/endmission::func_1464();
+  scripts\sp\endmission::func_1464();
 }
 
 func_B263(var_00, var_01, var_02, var_03, var_04) {
@@ -5215,16 +5215,16 @@ func_BDF2(var_00, var_01, var_02) {
 }
 
 func_BDDF(var_00, var_01, var_02, var_03, var_04) {
-  thread scripts/sp/utility_code::func_BDE1(var_00, var_01, var_02, var_03, var_04);
+  thread scripts\sp\utility_code::func_BDE1(var_00, var_01, var_02, var_03, var_04);
 }
 
 func_BDE3(var_00, var_01, var_02, var_03, var_04) {
-  thread scripts/sp/utility_code::func_BDE1(var_00, var_01, var_02, var_03, var_04, 1);
+  thread scripts\sp\utility_code::func_BDE1(var_00, var_01, var_02, var_03, var_04, 1);
 }
 
 func_BDE5(var_00, var_01, var_02, var_03) {
   if (isdefined(var_01) && var_01 > 0) {
-  thread scripts/sp/utility_code::func_BDE6(var_00, var_01, var_02, var_03);
+  thread scripts\sp\utility_code::func_BDE6(var_00, var_01, var_02, var_03);
   return;
   }
 
@@ -5383,7 +5383,7 @@ func_12687() {
   if (isdefined(self.entity))
   var_0[var_0.size] = self.entity;
 
-  scripts\engine\utility::array_levelthread(var_00, scripts/sp/utility_code::func_12688);
+  scripts\engine\utility::array_levelthread(var_00, scripts\sp\utility_code::func_12688);
 }
 
 func_C621(var_00, var_01, var_02, var_03, var_04, var_05, var_06) {
@@ -5500,7 +5500,7 @@ func_61F1(var_00, var_01, var_02, var_03, var_04, var_05) {
   var_05 = 0;
 
   self.func_5953 = var_05;
-  thread scripts/sp/utility_code::func_5F8E(var_00, var_01, var_02, var_03, var_04);
+  thread scripts\sp\utility_code::func_5F8E(var_00, var_01, var_02, var_03, var_04);
 }
 
 func_5523() {
@@ -5669,14 +5669,14 @@ func_D2D1(var_00, var_01) {
   if (!isdefined(level.player.func_764D))
   level.player.func_764D = var_02;
 
-  var_03 = scripts/sp/utility_code::func_764E;
-  var_04 = scripts/sp/utility_code::func_764F;
+  var_03 = scripts\sp\utility_code::func_764E;
+  var_04 = scripts\sp\utility_code::func_764F;
   level.player thread func_D2CE(var_00, var_01, var_03, var_04, "player_speed_set");
 }
 
 func_CF97(var_00, var_01) {
-  var_02 = scripts/sp/utility_code::func_7647;
-  var_03 = scripts/sp/utility_code::func_7648;
+  var_02 = scripts\sp\utility_code::func_7647;
+  var_03 = scripts\sp\utility_code::func_7648;
   level.player thread func_D2CE(var_00, var_01, var_02, var_03, "player_bob_scale_set");
 }
 
@@ -5689,8 +5689,8 @@ func_2B76(var_00, var_01) {
   if (!isdefined(var_2.func_BCF5))
   var_2.func_BCF5 = 1.0;
 
-  var_03 = scripts/sp/utility_code::func_BCF0;
-  var_04 = scripts/sp/utility_code::func_BCF3;
+  var_03 = scripts\sp\utility_code::func_BCF0;
+  var_04 = scripts\sp\utility_code::func_BCF3;
   var_02 thread func_D2CE(var_00, var_01, var_03, var_04, "blend_movespeedscale");
 }
 
@@ -5870,7 +5870,7 @@ func_2A75(var_00, var_01, var_02) {
   var_03 scripts\engine\utility::allow_prone(0);
   var_03 scripts\engine\utility::allow_stances(0);
   var_03 scripts\engine\utility::allow_reload(0);
-  var_03 thread scripts/sp/utility_code::func_5AAD(var_05, var_01, var_02);
+  var_03 thread scripts\sp\utility_code::func_5AAD(var_05, var_01, var_02);
   var_03 thread play_loop_sound_on_tag("foot_slide_plr_loop");
 }
 
@@ -5949,7 +5949,7 @@ func_2A76(var_00, var_01, var_02) {
   var_03 getnumownedactiveagents(0);
   var_03 getnumberoffrozenticksfromwave(1);
   var_03 getnumownedjackals(0);
-  var_03 thread scripts/sp/utility_code::func_5AAD(var_05, var_01, var_02);
+  var_03 thread scripts\sp\utility_code::func_5AAD(var_05, var_01, var_02);
 }
 
 func_638A() {
@@ -5970,11 +5970,11 @@ func_638A() {
 }
 
 func_10808() {
-  return scripts/sp/vehicle::func_13237(self);
+  return scripts\sp\vehicle::func_13237(self);
 }
 
 func_7E9C(var_00) {
-  var_01 = scripts/sp/trigger::func_7AA4();
+  var_01 = scripts\sp\trigger::func_7AA4();
   var_02 = [];
 
   foreach (var_06, var_04 in var_01) {
@@ -5985,7 +5985,7 @@ func_7E9C(var_00) {
   var_02 = scripts\engine\utility::array_combine(var_02, var_05);
   }
 
-  var_07 = scripts/sp/trigger::func_7AA5();
+  var_07 = scripts\sp\trigger::func_7AA5();
 
   foreach (var_09, var_04 in var_07) {
   if (!issubstr(var_09, "flag"))
@@ -6004,7 +6004,7 @@ func_7E9C(var_00) {
 }
 
 func_7E99(var_00) {
-  var_01 = scripts/sp/trigger::func_7AA4();
+  var_01 = scripts\sp\trigger::func_7AA4();
   var_02 = [];
 
   foreach (var_06, var_04 in var_01) {
@@ -6015,7 +6015,7 @@ func_7E99(var_00) {
   var_02 = scripts\engine\utility::array_combine(var_02, var_05);
   }
 
-  var_07 = scripts/sp/trigger::func_7AA5();
+  var_07 = scripts\sp\trigger::func_7AA5();
 
   foreach (var_09, var_04 in var_07) {
   if (!issubstr(var_09, "flag"))
@@ -6063,7 +6063,7 @@ func_7C23(var_00) {
 
   var_02 = spawn("script_origin", var_01 geteye());
   var_2.func_99E5 = 1;
-  var_02 thread scripts/sp/utility_code::func_12E1F(var_01, var_00);
+  var_02 thread scripts\sp\utility_code::func_12E1F(var_01, var_00);
   return var_02;
 }
 
@@ -6199,10 +6199,10 @@ func_8FE1(var_00, var_01, var_02) {
   level endon("clearing_hints");
 
   if (isdefined(level.func_9019))
-  level.func_9019 scripts/sp/hud_util::destroyelem();
+  level.func_9019 scripts\sp\hud_util::destroyelem();
 
-  level.func_9019 = scripts/sp/hud_util::createfontstring("default", 1.5);
-  level.func_9019 scripts/sp/hud_util::setpoint("MIDDLE", undefined, 0, 30 + var_02);
+  level.func_9019 = scripts\sp\hud_util::createfontstring("default", 1.5);
+  level.func_9019 scripts\sp\hud_util::setpoint("MIDDLE", undefined, 0, 30 + var_02);
   level.func_9019.color = (1, 1, 1);
   level.func_9019 give_zap_perk(var_00);
   level.func_9019.alpha = 0;
@@ -6219,7 +6219,7 @@ func_8FE1(var_00, var_01, var_02) {
   level.func_9019 fadeovertime(var_03);
   level.func_9019.alpha = 0;
   wait(var_03);
-  level.func_9019 scripts/sp/hud_util::destroyelem();
+  level.func_9019 scripts\sp\hud_util::destroyelem();
 }
 
 func_8FF8() {
@@ -6243,7 +6243,7 @@ func_A5CE(var_00, var_01) {
   foreach (var_03 in level.func_4E3F[var_00]) {
   foreach (var_05 in var_03) {
   if (isalive(var_05)) {
-  var_05 thread scripts/sp/utility_code::func_A5CF(var_01);
+  var_05 thread scripts\sp\utility_code::func_A5CF(var_01);
   continue;
   }
 
@@ -6272,7 +6272,7 @@ func_7BB6(var_00, var_01, var_02, var_03) {
 
 func_48AA(var_00, var_01, var_02, var_03) {
   var_04 = spawnstruct();
-  var_04 childthread scripts/sp/utility_code::func_D961(var_00, self, var_01, var_02, var_03);
+  var_04 childthread scripts\sp\utility_code::func_D961(var_00, self, var_01, var_02, var_03);
   return var_04;
 }
 
@@ -6759,7 +6759,7 @@ func_D0F4() {
 func_CFAA() {
   level.player func_65DD("player_zero_attacker_accuracy");
   level.player.ignorerandombulletdamage = 0;
-  level.player scripts/sp/gameskill::func_12E0B();
+  level.player scripts\sp\gameskill::func_12E0B();
 }
 
 func_CFB8() {
@@ -6771,7 +6771,7 @@ func_CFB8() {
 func_F520(var_00) {
   var_01 = func_7B92();
   var_1.gs.func_CF81 = var_00;
-  var_01 scripts/sp/gameskill::func_12E0B();
+  var_01 scripts\sp\gameskill::func_12E0B();
 }
 
 func_2298(var_00) {
@@ -6804,7 +6804,7 @@ func_2299(var_00) {
 }
 
 func_78D5() {
-  var_00 = scripts/sp/utility_code::func_78D1();
+  var_00 = scripts\sp\utility_code::func_78D1();
   var_01 = var_0["team"];
 
   foreach (var_03 in var_0["codes"]) {
@@ -6818,7 +6818,7 @@ func_78D5() {
 }
 
 func_78D3() {
-  var_00 = scripts/sp/utility_code::func_78D1();
+  var_00 = scripts\sp\utility_code::func_78D1();
   var_01 = var_0["team"];
 
   foreach (var_03 in var_0["codes"]) {
@@ -6854,7 +6854,7 @@ func_7C9B(var_00) {
 }
 
 grenade_earthquake() {
-  thread scripts/sp/utility_code::endondeath();
+  thread scripts\sp\utility_code::endondeath();
   self endon("end_explode");
   self waittill("explode", var_00);
   func_7751(var_00);
@@ -6894,7 +6894,7 @@ dirteffect(var_00, var_01) {
   var_02 = func_ECC4(var_00);
 
   foreach (var_05, var_04 in var_02)
-  thread scripts/sp/gameskill::forcehidegrenadehudwarning(var_05);
+  thread scripts\sp\gameskill::forcehidegrenadehudwarning(var_05);
 }
 
 func_2BC6(var_00) {
@@ -6904,7 +6904,7 @@ func_2BC6(var_00) {
   var_01 = func_ECC4(self.damageattacker.origin);
 
   foreach (var_04, var_03 in var_01)
-  thread scripts/sp/gameskill::func_2BC1(var_04);
+  thread scripts\sp\gameskill::func_2BC1(var_04);
 }
 
 func_ECC4(var_00) {
@@ -7034,14 +7034,14 @@ func_11905(var_00) {
 }
 
 func_50E4(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07) {
-  childthread scripts/sp/utility_code::func_50E5(var_01, var_00, var_02, var_03, var_04, var_05, var_06, var_07);
+  childthread scripts\sp\utility_code::func_50E5(var_01, var_00, var_02, var_03, var_04, var_05, var_06, var_07);
 }
 
 func_6E7C(var_00, var_01, var_02, var_03, var_04, var_05, var_06) {
   if (!isarray(var_00))
   var_00 = [var_00, 0];
 
-  thread scripts/sp/utility_code::func_6E7D(var_01, var_00, var_02, var_03, var_04, var_05, var_06);
+  thread scripts\sp\utility_code::func_6E7D(var_01, var_00, var_02, var_03, var_04, var_05, var_06);
 }
 
 func_13843(var_00, var_01, var_02, var_03, var_04, var_05, var_06) {
@@ -7050,7 +7050,7 @@ func_13843(var_00, var_01, var_02, var_03, var_04, var_05, var_06) {
   if (!isarray(var_00))
   var_00 = [var_00, 0];
 
-  thread scripts/sp/utility_code::func_13844(var_01, var_00, var_02, var_03, var_04, var_05, var_06);
+  thread scripts\sp\utility_code::func_13844(var_01, var_00, var_02, var_03, var_04, var_05, var_06);
 }
 
 func_61EB(var_00) {
@@ -7076,12 +7076,12 @@ func_E1F2(var_00) {
 
 func_F323(var_00) {
   level.func_4C53 = var_00;
-  thread scripts/sp/gameskill::func_E26C();
+  thread scripts\sp\gameskill::func_E26C();
 }
 
 func_4140() {
   level.func_4C53 = undefined;
-  thread scripts/sp/gameskill::func_E26C();
+  thread scripts\sp\gameskill::func_E26C();
 }
 
 func_11147(var_00) {
@@ -7108,7 +7108,7 @@ func_11147(var_00) {
 
 func_F2DC(var_00, var_01) {
   level.func_28CF[var_00] = var_01;
-  scripts/sp/utility_code::func_12D95();
+  scripts\sp\utility_code::func_12D95();
 }
 
 func_C27B(var_00) {
@@ -7259,7 +7259,7 @@ func_7617(var_00, var_01) {
   var_02 notify("new_volume_command");
   var_02 endon("new_volume_command");
   wait 0.05;
-  scripts/sp/utility_code::func_7615(var_02, var_01);
+  scripts\sp\utility_code::func_7615(var_02, var_01);
 }
 
 func_7619(var_00) {
@@ -7332,7 +7332,7 @@ func_4075(var_00) {
 
 func_178A(var_00) {
   if (!isdefined(self.func_1274A))
-  thread scripts/sp/utility_code::func_1789();
+  thread scripts\sp\utility_code::func_1789();
 
   self.func_1274A[self.func_1274A.size] = var_00;
 }
@@ -7838,13 +7838,13 @@ func_7229(var_00) {
   self notify("follow_path_new_goal");
 
   if (isdefined(var_0.animation)) {
-  var_00 scripts/sp/anim::func_1ECE(self, var_0.animation);
+  var_00 scripts\sp\anim::func_1ECE(self, var_0.animation);
   self notify("starting_anim", var_0.animation);
 
   if (isdefined(var_0.script_parameters) && issubstr(var_0.script_parameters, "gravity"))
-  var_00 scripts/sp/anim::func_1ECB(self, var_0.animation);
+  var_00 scripts\sp\anim::func_1ECB(self, var_0.animation);
   else
-  var_00 scripts/sp/anim::func_1ED1(self, var_0.animation);
+  var_00 scripts\sp\anim::func_1ED1(self, var_0.animation);
 
   self give_mp_super_weapon(self.origin);
   }
@@ -7856,13 +7856,13 @@ func_7228(var_00) {
   self notify("follow_path_new_goal");
 
   if (isdefined(var_0.animation)) {
-  var_00 scripts/sp/anim::func_1ECE(self, var_0.animation);
+  var_00 scripts\sp\anim::func_1ECE(self, var_0.animation);
   self notify("starting_anim", var_0.animation);
 
   if (isdefined(var_0.script_parameters) && issubstr(var_0.script_parameters, "gravity"))
-  var_00 scripts/sp/anim::func_1ECB(self, var_0.animation);
+  var_00 scripts\sp\anim::func_1ECB(self, var_0.animation);
   else
-  var_00 scripts/sp/anim::func_1ED1(self, var_0.animation);
+  var_00 scripts\sp\anim::func_1ED1(self, var_0.animation);
 
   self give_mp_super_weapon(self.origin);
   }
@@ -7874,14 +7874,14 @@ func_722A(var_00) {
   self notify("follow_path_new_goal");
 
   if (isdefined(var_0.animation)) {
-  var_00 scripts/sp/anim::func_1ECE(self, var_0.animation);
+  var_00 scripts\sp\anim::func_1ECE(self, var_0.animation);
   self notify("starting_anim", var_0.animation);
   func_5528();
 
   if (isdefined(var_0.script_parameters) && issubstr(var_0.script_parameters, "gravity"))
-  var_00 scripts/sp/anim::func_1ECB(self, var_0.animation);
+  var_00 scripts\sp\anim::func_1ECB(self, var_0.animation);
   else
-  var_00 scripts/sp/anim::func_1ED1(self, var_0.animation);
+  var_00 scripts\sp\anim::func_1ED1(self, var_0.animation);
 
   scripts\engine\utility::delaythread(0.05, ::func_61F7);
   self give_mp_super_weapon(self.origin);
@@ -7958,12 +7958,12 @@ func_1119E(var_00, var_01, var_02, var_03) {
   var_06 = [];
 
   foreach (var_10, var_08 in var_00) {
-  var_09 = scripts/sp/introscreen::func_111A0(var_08, var_01, var_04, var_05 + var_10 * 20, "center", var_02, var_03);
+  var_09 = scripts\sp\introscreen::func_111A0(var_08, var_01, var_04, var_05 + var_10 * 20, "center", var_02, var_03);
   var_06 = scripts\engine\utility::array_combine(var_09, var_06);
   }
 
   wait(var_01);
-  scripts/sp/introscreen::func_1119F(var_06, var_04, var_05, var_0.size);
+  scripts\sp\introscreen::func_1119F(var_06, var_04, var_05, var_0.size);
 }
 
 func_97A2() {
@@ -8438,11 +8438,11 @@ func_77B8(var_00, var_01, var_02, var_03) {
   self endon("death");
   self endon("gesture_stop");
   var_04 = squared(var_01);
-  scripts/sp/interaction_manager::func_168F();
+  scripts\sp\interaction_manager::func_168F();
   var_05 = distance2dsquared(self.origin, var_2.origin);
 
   for (;;) {
-  if (var_05 < var_04 && scripts/sp/interaction_manager::func_3838(var_01 * 3.0))
+  if (var_05 < var_04 && scripts\sp\interaction_manager::func_3838(var_01 * 3.0))
   break;
 
   var_05 = distance2dsquared(self.origin, var_2.origin);
@@ -8459,7 +8459,7 @@ func_77B8(var_00, var_01, var_02, var_03) {
   func_77B7(var_00);
 
   wait 2.0;
-  scripts/sp/interaction_manager::func_DFB5();
+  scripts\sp\interaction_manager::func_DFB5();
   self.func_D4A4 = 0;
 }
 
@@ -8473,7 +8473,7 @@ func_D123() {
 }
 
 func_7B9D() {
-  return level.func_D127.func_B154 / scripts/sp/gameskill::func_7A59();
+  return level.func_D127.func_B154 / scripts\sp\gameskill::func_7A59();
 }
 
 func_A1A8(var_00) {
@@ -8900,37 +8900,37 @@ func_78E4() {
 }
 
 func_9187(var_00, var_01, var_02) {
-  scripts/sp/outline::func_9188(var_00, var_01, var_02);
+  scripts\sp\outline::func_9188(var_00, var_01, var_02);
 }
 
 func_9189(var_00, var_01, var_02) {
-  scripts/sp/outline::func_918A(var_00, var_01, var_02);
+  scripts\sp\outline::func_918A(var_00, var_01, var_02);
 }
 
 func_9199(var_00, var_01) {
-  scripts/sp/outline::func_919A(var_00, var_01);
+  scripts\sp\outline::func_919A(var_00, var_01);
 }
 
 func_9196(var_00, var_01, var_02, var_03) {
-  scripts/sp/outline::func_9197(var_03, var_00, var_01, var_02, 0);
+  scripts\sp\outline::func_9197(var_03, var_00, var_01, var_02, 0);
 }
 
 func_9198(var_00, var_01, var_02, var_03) {
-  scripts/sp/outline::func_9197(var_03, var_00, var_01, var_02, 1);
+  scripts\sp\outline::func_9197(var_03, var_00, var_01, var_02, 1);
 }
 
 func_9193(var_00) {
-  scripts/sp/outline::func_9194(var_00);
+  scripts\sp\outline::func_9194(var_00);
 }
 
 func_918D(var_00, var_01) {
-  scripts/sp/outline::func_CC8D(var_00, var_01);
+  scripts\sp\outline::func_CC8D(var_00, var_01);
   level notify("hudoutline_anim_complete");
   level notify("hudoutline_anim_complete" + var_00);
 }
 
 func_918E(var_00, var_01) {
-  thread scripts/sp/outline::func_CC8E(var_00, var_01);
+  thread scripts\sp\outline::func_CC8E(var_00, var_01);
 }
 
 func_91A9(var_00) {
@@ -9294,7 +9294,7 @@ func_B2FC() {
   for (var_00 = 0; var_00 < 3; var_0++) {
   if (self.script_rotation_max[var_00] != 0) {
   if (self.script_rotation_speed[var_00] > 0) {
-  self.func_E746[var_00] = scripts/sp/math::func_10AB0(self.script_rotation_speed[var_00] * 10, 0, self.func_10BA1[var_00] + self.script_rotation_max[var_00], 0);
+  self.func_E746[var_00] = scripts\sp\math::func_10AB0(self.script_rotation_speed[var_00] * 10, 0, self.func_10BA1[var_00] + self.script_rotation_max[var_00], 0);
   continue;
   }
   }
@@ -9314,7 +9314,7 @@ func_B2FC() {
   for (var_00 = 0; var_00 < 3; var_0++) {
   if (self.func_EEE9[var_00] != 0) {
   if (self.func_EEEA[var_00] > 0) {
-  self.func_12689[var_00] = scripts/sp/math::func_10AB0(self.func_EEEA[var_00] * 10, 0, self.func_10CCA[var_00] + self.func_EEE9[var_00], 0);
+  self.func_12689[var_00] = scripts\sp\math::func_10AB0(self.func_EEEA[var_00] * 10, 0, self.func_10CCA[var_00] + self.func_EEE9[var_00], 0);
   continue;
   }
   }
@@ -9349,7 +9349,7 @@ func_12686() {
   }
 
   if (self.func_EEEA[var_01] > 0 && self.func_EEE9[var_01] != 0)
-  var_0[var_01] = scripts/sp/math::func_10AB4(self.func_12689[var_01], self.func_10CCA[var_01]);
+  var_0[var_01] = scripts\sp\math::func_10AB4(self.func_12689[var_01], self.func_10CCA[var_01]);
   }
 
   self.origin = (var_0[0], var_0[1], var_0[2]);
@@ -9379,7 +9379,7 @@ func_E702() {
   }
 
   if (self.script_rotation_speed[var_01] > 0 && self.script_rotation_max[var_01] != 0)
-  var_0[var_01] = scripts/sp/math::func_10AB4(self.func_E746[var_01], self.func_10BA1[var_01]);
+  var_0[var_01] = scripts\sp\math::func_10AB4(self.func_E746[var_01], self.func_10BA1[var_01]);
   }
 
   self.angles = (var_0[0], var_0[1], var_0[2]);
@@ -9405,12 +9405,12 @@ func_B2FA() {
 
   if (isdefined(self.func_E746)) {
   foreach (var_01 in self.func_E746)
-  scripts/sp/math::func_10AAA(var_01);
+  scripts\sp\math::func_10AAA(var_01);
   }
 
   if (isdefined(self.func_12689)) {
   foreach (var_01 in self.func_12689)
-  scripts/sp/math::func_10AAA(var_01);
+  scripts\sp\math::func_10AAA(var_01);
   }
 }
 
@@ -9772,11 +9772,11 @@ func_CE10(var_00, var_01, var_02) {
   _setsaveddvar("bg_cinematicFullScreen", "1");
   _setsaveddvar("bg_cinematicCanPause", "1");
   _cinematicingame(var_00);
-  thread scripts/sp/gameskill::func_E080();
+  thread scripts\sp\gameskill::func_E080();
   func_E006();
 
   if (func_93A6())
-  scripts/sp/specialist_MAYBE::hide_helmet_impacts();
+  scripts\sp\specialist_MAYBE::hide_helmet_impacts();
 
   level.player scripts\engine\utility::allow_weapon(0);
   level.player getroundswon(1);
@@ -9796,14 +9796,14 @@ func_CE10(var_00, var_01, var_02) {
   func_3F72(var_02);
 
   if (func_93A6())
-  scripts/sp/specialist_MAYBE::show_helmet_impacts();
+  scripts\sp\specialist_MAYBE::show_helmet_impacts();
 
   level.player scripts\engine\utility::allow_weapon(1);
   level.player _meth_80A1();
   level.player getroundswon(0);
   level.player _meth_8475();
   level.player _meth_8559(1);
-  level.player thread scripts/sp/gameskill::func_8CBA();
+  level.player thread scripts\sp\gameskill::func_8CBA();
   setomnvar("ui_hide_hud", 0);
   level.player func_1C3E(1);
   setomnvar("ui_hide_weapon_info", 0);
@@ -9826,14 +9826,14 @@ func_CE10(var_00, var_01, var_02) {
   _stopcinematicingame();
 
   if (func_93A6())
-  scripts/sp/specialist_MAYBE::show_helmet_impacts();
+  scripts\sp\specialist_MAYBE::show_helmet_impacts();
 
   level.player scripts\engine\utility::allow_weapon(1);
   level.player _meth_80A1();
   level.player getroundswon(0);
   level.player _meth_8475();
   level.player _meth_8559(1);
-  level.player thread scripts/sp/gameskill::func_8CBA();
+  level.player thread scripts\sp\gameskill::func_8CBA();
   setomnvar("ui_hide_hud", 0);
   level.player func_1C3E(1);
   setomnvar("ui_hide_weapon_info", 0);
@@ -9910,7 +9910,7 @@ func_E006(var_00, var_01, var_02, var_03, var_04, var_05, var_06) {
   thread func_0E21::func_DFBA();
 
   if (var_03)
-  thread scripts/sp/coverwall::func_DFBD();
+  thread scripts\sp\coverwall::func_DFBD();
 
   if (var_04)
   thread func_0B1D::func_DFBF();
@@ -9962,8 +9962,8 @@ dyndof(var_00, var_01) {
   if (isdefined(level.dyndof))
   level.dyndof = undefined;
 
-  level.dyndof = scripts/sp/utility_code::create_dyndof();
-  level thread scripts/sp/utility_code::dyndof_thread();
+  level.dyndof = scripts\sp\utility_code::create_dyndof();
+  level thread scripts\sp\utility_code::dyndof_thread();
 }
 
 dyndof_farsettings(var_00, var_01, var_02) {
@@ -9979,7 +9979,7 @@ dyndof_farsettings(var_00, var_01, var_02) {
 
 dyndof_disable() {
   level notify("stop_dyndof");
-  scripts/sp/utility_code::destroy_dyndof();
+  scripts\sp\utility_code::destroy_dyndof();
   func_0B0A::func_583D(1);
 }
 

@@ -1,8 +1,8 @@
-/***********************************************************
+/***************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\zombies\zombie_entrances.gsc
-***********************************************************/
+ * Script: scripts\cp\zombies\zombie_entrances.gsc
+***************************************************/
 
 init_zombie_entrances() {
 	level.var_13D37 = [];
@@ -96,7 +96,7 @@ func_97A8() {
 func_7D7E(param_00) {
 	var_01 = getentarray("spawn_volume","targetname");
 	foreach(var_03 in var_01) {
-		if(function_010F(param_00.origin,var_03)) {
+		if(ispointinvolume(param_00.origin,var_03)) {
 			return var_03.destroynavobstacle;
 		}
 	}
@@ -291,7 +291,7 @@ func_7A29(param_00) {
 	if(param_00.var_130C8 > 1) {
 		var_02 = param_00 func_36CF();
 		var_03 = anglestoright(param_00.angles);
-		var_04 = function_02D3(param_00.angles);
+		var_04 = anglestoleft(param_00.angles);
 		if(self == var_02) {
 			return param_00;
 		}

@@ -1,19 +1,19 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\3461.gsc
+ * Script: 3461.gsc
 ***************************************/
 
 init() {
-  level._effect["airdrop_crate_destroy"] = loadfx("vfx/iw7/core/mp/killstreaks/vfx_dp_pickup_dust.vfx");
-  level._effect["airdrop_dust_kickup"] = loadfx("vfx/iw7/core/mp/killstreaks/vfx_dp_pickup_dust.vfx");
-  level._effect["drone_explode"] = loadfx("vfx/iw7/core/mp/killstreaks/vfx_dp_exp.vfx");
-  level._effect["crate_explode"] = loadfx("vfx/iw7/_requests/mp/killstreak/vfx_drone_pkg_exp_vari.vfx");
+  level._effect["airdrop_crate_destroy"] = loadfx("vfx\iw7\core\mp\killstreaks\vfx_dp_pickup_dust.vfx");
+  level._effect["airdrop_dust_kickup"] = loadfx("vfx\iw7\core\mp\killstreaks\vfx_dp_pickup_dust.vfx");
+  level._effect["drone_explode"] = loadfx("vfx\iw7\core\mp\killstreaks\vfx_dp_exp.vfx");
+  level._effect["crate_explode"] = loadfx("vfx\iw7\_requests\mp\killstreak\vfx_drone_pkg_exp_vari.vfx");
   precachempanim("juggernaut_carepackage");
   setairdropcratecollision("airdrop_crate");
   setairdropcratecollision("care_package");
   scripts\mp\killstreaks\killstreaks::registerkillstreak("dronedrop", ::func_1AA2, undefined, undefined, ::tryuseairdrop, undefined, ::func_1A9F);
   var_00 = ["passive_bomb_trap", "passive_decreased_cost", "passive_increased_cost", "passive_reroll", "passive_high_roller", "passive_low_roller"];
-  scripts/mp/killstreak_loot::func_DF07("dronedrop", var_00);
+  scripts\mp\killstreak_loot::func_DF07("dronedrop", var_00);
   level.numdropcrates = 0;
   level.littlebirds = [];
   level.cratetypes = [];
@@ -1178,7 +1178,7 @@ func_581F(var_00, var_01, var_02, var_03, var_04) {
   var_21 = "used_dronedrop";
 
   if (isdefined(var_04)) {
-  var_20 = scripts/mp/killstreak_loot::getrarityforlootitem(var_4.variantid);
+  var_20 = scripts\mp\killstreak_loot::getrarityforlootitem(var_4.variantid);
   var_21 = "used_" + var_4.streakname;
   }
 
@@ -1200,19 +1200,19 @@ func_5CC7(var_00, var_01, var_02, var_03, var_04, var_05) {
   var_08 = "";
 
   if (isdefined(var_05))
-  var_08 = scripts/mp/killstreak_loot::getrarityforlootitem(var_5.variantid);
+  var_08 = scripts\mp\killstreak_loot::getrarityforlootitem(var_5.variantid);
 
   if (var_08 != "")
   var_07 = var_07 + "_" + var_08;
 
   if (isdefined(var_05)) {
-  if (scripts/mp/killstreaks/utility::func_A69F(var_05, "passive_bomb_trap"))
+  if (scripts\mp\killstreaks\utility::func_A69F(var_05, "passive_bomb_trap"))
   var_03 = "dronedrop_trap";
 
-  if (scripts/mp/killstreaks/utility::func_A69F(var_05, "passive_reroll"))
+  if (scripts\mp\killstreaks\utility::func_A69F(var_05, "passive_reroll"))
   var_03 = "dronedrop_reroll";
 
-  if (scripts/mp/killstreaks/utility::func_A69F(var_05, "passive_high_roller"))
+  if (scripts\mp\killstreaks\utility::func_A69F(var_05, "passive_high_roller"))
   var_03 = "dronedrop_highroll";
   }
 
@@ -1236,7 +1236,7 @@ func_5CC7(var_00, var_01, var_02, var_03, var_04, var_05) {
   var_09 _meth_84E0(1);
   var_9.streakinfo = var_05;
   var_9.helitype = "dronedrop";
-  var_09 scripts/mp/killstreaks/utility::func_1843(var_9.helitype, "Killstreak_Air", var_00, 1);
+  var_09 scripts\mp\killstreaks\utility::func_1843(var_9.helitype, "Killstreak_Air", var_00, 1);
   var_10 = getcratetypefordroptype(var_03);
   var_11 = var_09 createairdropcrate(var_00, var_03, var_10, var_9.origin);
   var_11 linkto(var_09, "tag_origin", (0, 0, 5), (0, 0, 0));
@@ -1315,7 +1315,7 @@ watchempdamage() {
   var_00 scripts\mp\missions::func_D991("ch_tactical_emp_eqp");
   }
 
-  scripts/mp/killstreaks/utility::dodamagetokillstreak(100, var_00, var_00, self.team, var_02, var_04, var_03);
+  scripts\mp\killstreaks\utility::dodamagetokillstreak(100, var_00, var_00, self.team, var_02, var_04, var_03);
   }
 }
 
@@ -1849,7 +1849,7 @@ helisetup(var_00, var_01, var_02) {
   var_05 setmaxpitchroll(45, 85);
   var_05 vehicle_setspeed(250, 175);
   var_5.helitype = "airdrop";
-  var_05 scripts/mp/killstreaks/utility::func_1843(var_5.helitype, "Killstreak_Air", var_00, 1);
+  var_05 scripts\mp\killstreaks\utility::func_1843(var_5.helitype, "Killstreak_Air", var_00, 1);
   var_05 hidepart("tag_wings");
   return var_05;
 }
@@ -2147,12 +2147,12 @@ killstreakcratethink(var_00) {
   var_05 = undefined;
 
   if (scripts\mp\utility\game::istrue(level.enablevariantdrops))
-  var_05 = scripts/mp/killstreak_loot::getrandomvariantfrombaseref(self.cratetype);
+  var_05 = scripts\mp\killstreak_loot::getrandomvariantfrombaseref(self.cratetype);
 
   if (isdefined(var_05)) {
-  var_06 = scripts/mp/killstreak_loot::getpassiveperk(var_05);
+  var_06 = scripts\mp\killstreak_loot::getpassiveperk(var_05);
   var_04 thread scripts\mp\killstreaks\killstreaks::awardkillstreak(self.cratetype, self.owner, var_06, var_05);
-  var_07 = scripts/mp/killstreak_loot::getrarityforlootitem(var_05);
+  var_07 = scripts\mp\killstreak_loot::getrarityforlootitem(var_05);
   var_08 = self.cratetype + "_" + var_07;
   var_04 scripts\mp\hud_message::showkillstreaksplash(var_08, undefined, 1);
   } else {

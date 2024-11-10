@@ -1,20 +1,20 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\3506.gsc
+ * Script: 3506.gsc
 ***************************************/
 
 init() {
   level.rockets = [];
-  level.remotekillstreaks["explode"] = loadfx("vfx/core/expl/aerial_explosion");
+  level.remotekillstreaks["explode"] = loadfx("vfx\core\expl\aerial_explosion");
   scripts\mp\killstreaks\killstreaks::registerkillstreak("orbital_deployment", ::func_128F2);
-  level._effect["odin_clouds"] = loadfx("vfx/core/mp/killstreaks/odin/odin_parallax_clouds");
-  level._effect["odin_fisheye"] = loadfx("vfx/code/screen/vfx_scrnfx_odin_fisheye.vfx");
-  level._effect["odin_targeting"] = loadfx("vfx/core/mp/killstreaks/odin/vfx_marker_good_target");
-  level._effect["odin_targeting_bad"] = loadfx("vfx/core/mp/killstreaks/odin/vfx_marker_bad_target");
-  level._effect["phase_out_friendly"] = loadfx("vfx/core/mp/killstreaks/vfx_phase_orbital_deployment_friendly");
-  level._effect["phase_out_enemy"] = loadfx("vfx/core/mp/killstreaks/vfx_phase_orbital_deployment_enemy");
-  level._effect["drop_pod_atmo"] = loadfx("vfx/core/expl/emp_flash_mp");
-  level._effect["drop_pod_fx"] = loadfx("vfx/core/mp/killstreaks/odin/vfx_odin_flash_small");
+  level._effect["odin_clouds"] = loadfx("vfx\core\mp\killstreaks\odin\odin_parallax_clouds");
+  level._effect["odin_fisheye"] = loadfx("vfx\code\screen\vfx_scrnfx_odin_fisheye.vfx");
+  level._effect["odin_targeting"] = loadfx("vfx\core\mp\killstreaks\odin\vfx_marker_good_target");
+  level._effect["odin_targeting_bad"] = loadfx("vfx\core\mp\killstreaks\odin\vfx_marker_bad_target");
+  level._effect["phase_out_friendly"] = loadfx("vfx\core\mp\killstreaks\vfx_phase_orbital_deployment_friendly");
+  level._effect["phase_out_enemy"] = loadfx("vfx\core\mp\killstreaks\vfx_phase_orbital_deployment_enemy");
+  level._effect["drop_pod_atmo"] = loadfx("vfx\core\expl\emp_flash_mp");
+  level._effect["drop_pod_fx"] = loadfx("vfx\core\mp\killstreaks\odin\vfx_odin_flash_small");
   level.func_C6D7 = [];
   level.func_C6D7["orbital_deployment"] = spawnstruct();
   level.func_C6D7["orbital_deployment"].timeout = 60.0;
@@ -82,7 +82,7 @@ func_10DD3(var_00, var_01) {
   } else {
   scripts\engine\utility::allow_usability(0);
   scripts\engine\utility::allow_weapon_switch(0);
-  var_03 = scripts/mp/killstreaks/mapselect::_meth_8112(var_00);
+  var_03 = scripts\mp\killstreaks\mapselect::_meth_8112(var_00);
 
   if (!isdefined(var_03)) {
   func_C6C4();
@@ -419,7 +419,7 @@ func_1285(var_00, var_01, var_02, var_03) {
   var_09 setotherent(var_08);
   var_9.team = var_2.team;
   var_9.owner = var_02;
-  var_09 scripts/mp/killstreaks/utility::func_1843(var_03, "Killstreak_Air", var_9.owner, 1);
+  var_09 scripts\mp\killstreaks\utility::func_1843(var_03, "Killstreak_Air", var_9.owner, 1);
 
   if (scripts\mp\utility\game::isreallyalive(var_02))
   var_02 func_10DD8();

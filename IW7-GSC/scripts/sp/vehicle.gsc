@@ -1,8 +1,8 @@
-/******************************************
+/**********************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\sp\vehicle.gsc
-******************************************/
+ * Script: scripts\sp\vehicle.gsc
+**********************************/
 
 func_979A() {
 	if(isdefined(level.var_5619) && level.var_5619) {
@@ -37,7 +37,7 @@ func_979B() {
 }
 
 func_1321A(param_00,param_01,param_02) {
-	return scripts/sp/vehicle_paths::func_1442(param_00,param_01,param_02);
+	return scripts\sp\vehicle_paths::func_1442(param_00,param_01,param_02);
 }
 
 func_13237(param_00) {
@@ -93,14 +93,14 @@ func_1080C(param_00) {
 
 func_1080D(param_00) {
 	var_01 = func_1080E(param_00);
-	thread scripts/sp/vehicle_paths::setsuit(var_01[0]);
+	thread scripts\sp\vehicle_paths::setsuit(var_01[0]);
 	return var_01[0];
 }
 
 func_1080F(param_00) {
 	var_01 = func_1080E(param_00);
 	foreach(var_03 in var_01) {
-		thread scripts/sp/vehicle_paths::setsuit(var_03);
+		thread scripts\sp\vehicle_paths::setsuit(var_03);
 	}
 
 	return var_01;
@@ -138,7 +138,7 @@ func_1080B() {
 		}
 	}
 
-	thread scripts/sp/vehicle_paths::setsuit(var_00);
+	thread scripts\sp\vehicle_paths::setsuit(var_00);
 	return var_00;
 }
 
@@ -160,7 +160,7 @@ func_2471(param_00) {
 	}
 
 	thread func_1321A(param_00);
-	scripts/sp/vehicle_paths::setsuit(self);
+	scripts\sp\vehicle_paths::setsuit(self);
 }
 
 func_131DF(param_00) {
@@ -231,11 +231,11 @@ func_1320C(param_00,param_01) {
 		param_00 = "all";
 	}
 
-	scripts/sp/vehicle_lights::lights_on(param_00,param_01);
+	scripts\sp\vehicle_lights::lights_on(param_00,param_01);
 }
 
 func_1320B(param_00,param_01) {
-	scripts/sp/vehicle_lights::lights_off(param_00,param_01);
+	scripts\sp\vehicle_lights::lights_off(param_00,param_01);
 }
 
 func_13245(param_00,param_01) {
@@ -245,11 +245,11 @@ func_13245(param_00,param_01) {
 }
 
 func_13244(param_00,param_01,param_02) {
-	return scripts/sp/vehicle_paths::func_1445(param_00,param_01,param_02);
+	return scripts\sp\vehicle_paths::func_1445(param_00,param_01,param_02);
 }
 
 func_13220(param_00) {
-	return scripts/sp/vehicle_paths::func_1443(param_00);
+	return scripts\sp\vehicle_paths::func_1443(param_00);
 }
 
 func_9E2C() {

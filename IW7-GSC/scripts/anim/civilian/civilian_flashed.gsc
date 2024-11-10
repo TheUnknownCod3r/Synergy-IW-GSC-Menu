@@ -1,7 +1,7 @@
-/**************************************************************
+/******************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\anim\civilian\civilian_flashed.gsc
-**************************************************************/
+ * Script: scripts\anim\civilian\civilian_flashed.gsc
+******************************************************/
 
 main() {}

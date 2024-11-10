@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2706.gsc
+ * Script: 2706.gsc
 ***************************************/
 
 init() {
@@ -37,7 +37,7 @@ init() {
   level.classmap["default4"] = 3;
   level.classmap["default5"] = 4;
   level.defaultclass = "CLASS_ASSAULT";
-  level.classtablename = "mp/classTable.csv";
+  level.classtablename = "mp\classTable.csv";
   level thread onplayerconnecting();
 }
 
@@ -107,12 +107,12 @@ cac_getextracharge2(var_00) {
 
 cac_getpowerid(var_00) {
   var_01 = self getrankedplayerdata(level.loadoutsgroup, "squadMembers", "loadouts", var_00, "powerSetups", 0, "lootItemID");
-  return scripts/mp/powerloot::getpassiveperk(var_01);
+  return scripts\mp\powerloot::getpassiveperk(var_01);
 }
 
 cac_getpower2id(var_00) {
   var_01 = self getrankedplayerdata(level.loadoutsgroup, "squadMembers", "loadouts", var_00, "powerSetups", 1, "lootItemID");
-  return scripts/mp/powerloot::getpassiveperk(var_01);
+  return scripts\mp\powerloot::getpassiveperk(var_01);
 }
 
 cac_getsuper() {
@@ -158,7 +158,7 @@ cac_getloadoutarchetypeperk() {
 
 cac_getkillstreaklootid(var_00, var_01) {
   var_02 = self getrankedplayerdata(level.loadoutsgroup, "squadMembers", "killstreakSetups", var_01, "lootItemID");
-  return scripts/mp/killstreak_loot::getpassiveperk(var_02);
+  return scripts\mp\killstreak_loot::getpassiveperk(var_02);
 }
 
 cac_getkillstreakvariantid(var_00) {
@@ -315,8 +315,8 @@ loadout_clearweapons() {
   self takeallweapons();
   scripts\mp\perks\weaponpassives::resetmodeswitchkillweapons(self);
   _detachall();
-  scripts/mp/powers::func_110C2();
-  scripts/mp/powers::clearpowers();
+  scripts\mp\powers::func_110C2();
+  scripts\mp\powers::clearpowers();
 
   if (isdefined(self.loadoutarchetype))
   clearscriptable();
@@ -930,31 +930,31 @@ loadout_updateplayerarchetype(var_00) {
   case "archetype_heavy":
   var_05 = "armor_mp";
   var_06 = var_01 | var_02 | var_03;
-  var_07 = scripts/mp/archetypes/archheavy::applyarchetype;
+  var_07 = scripts\mp\archetypes\archheavy::applyarchetype;
   var_08 = "vestheavy";
   break;
   case "archetype_scout":
   var_05 = "scout_mp";
   var_06 = var_01 | var_02 | var_03;
-  var_07 = scripts/mp/archetypes/archscout::applyarchetype;
+  var_07 = scripts\mp\archetypes\archscout::applyarchetype;
   var_08 = "c6servo";
   break;
   case "archetype_assassin":
   var_05 = "assassin_mp";
   var_06 = var_01 | var_02 | var_03;
-  var_07 = scripts/mp/archetypes/archassassin::applyarchetype;
+  var_07 = scripts\mp\archetypes\archassassin::applyarchetype;
   var_08 = "vestftl";
   break;
   case "archetype_engineer":
   var_05 = "engineer_mp";
   var_06 = var_01 | var_02 | var_03;
-  var_07 = scripts/mp/archetypes/archengineer::applyarchetype;
+  var_07 = scripts\mp\archetypes\archengineer::applyarchetype;
   var_08 = "vestlight";
   break;
   case "archetype_sniper":
   var_05 = "sniper_mp";
   var_06 = var_01 | var_02 | var_03;
-  var_07 = scripts/mp/archetypes/archsniper::applyarchetype;
+  var_07 = scripts\mp\archetypes\archsniper::applyarchetype;
   var_08 = "vestghost";
   break;
   default:
@@ -1119,8 +1119,8 @@ loadout_updateplayerpowers_MAYBE(var_00) {
   self.powers = [];
   self.func_AE7B = var_0.func_AE7B;
   self.func_AE7D = var_0.func_AE7D;
-  scripts/mp/powers::givepower(var_0.func_AE7B, "primary", 0, var_0.func_AE7C, var_0.loadoutextrapowerprimary);
-  scripts/mp/powers::givepower(var_0.func_AE7D, "secondary", 0, var_0.func_AE7E, var_0.loadoutextrapowersecondary);
+  scripts\mp\powers::givepower(var_0.func_AE7B, "primary", 0, var_0.func_AE7C, var_0.loadoutextrapowerprimary);
+  scripts\mp\powers::givepower(var_0.func_AE7D, "secondary", 0, var_0.func_AE7E, var_0.loadoutextrapowersecondary);
 }
 
 loadout_updateplayersuper(var_00) {
@@ -1315,9 +1315,9 @@ setmlgspectatorclientloadoutdata(var_00, var_01) {
   var_00 endon("setMLGSpectatorClientLoadoutData()");
   var_00 setclientweaponinfo(0, var_1.loadoutprimaryfullname);
   var_00 setclientweaponinfo(1, var_1.loadoutsecondaryfullname);
-  var_02 = scripts/mp/powers::func_D738(var_1.func_AE7B);
+  var_02 = scripts\mp\powers::func_D738(var_1.func_AE7B);
   var_00 getrandomindex("primaryPower", var_02);
-  var_03 = scripts/mp/powers::func_D738(var_1.func_AE7D);
+  var_03 = scripts\mp\powers::func_D738(var_1.func_AE7D);
   var_00 getrandomindex("secondaryPower", var_03);
   var_04 = scripts\mp\supers::_meth_8186(var_1.loadoutsuper);
   var_00 getrandomindex("super", var_04);
@@ -1530,7 +1530,7 @@ _detachall() {
 }
 
 func_9EE1(var_00) {
-  var_01 = tablelookup("mp/perktable.csv", 1, var_00, 8);
+  var_01 = tablelookup("mp\perktable.csv", 1, var_00, 8);
 
   if (var_01 == "" || var_01 == "specialty_null")
   return 0;
@@ -1542,7 +1542,7 @@ func_9EE1(var_00) {
 }
 
 canplayerplacesentry(var_00) {
-  var_01 = tablelookup("mp/perktable.csv", 1, var_00, 8);
+  var_01 = tablelookup("mp\perktable.csv", 1, var_00, 8);
 
   if (var_01 == "" || var_01 == "specialty_null")
   return "specialty_null";
@@ -1990,15 +1990,15 @@ buildweaponnamecamo(var_00, var_01, var_02) {
   var_03 = -1;
 
   if (isholidayweapon(var_00, var_02)) {
-  var_03 = int(tablelookup("mp/camoTable.csv", 1, "camo89", scripts\engine\utility::getcamotablecolumnindex("weapon_index")));
+  var_03 = int(tablelookup("mp\camoTable.csv", 1, "camo89", scripts\engine\utility::getcamotablecolumnindex("weapon_index")));
   return var_00 + "+camo" + var_03;
   }
   else if (issummerholidayweapon(var_00, var_02)) {
-  var_03 = int(tablelookup("mp/camoTable.csv", 1, "camo230", scripts\engine\utility::getcamotablecolumnindex("weapon_index")));
+  var_03 = int(tablelookup("mp\camoTable.csv", 1, "camo230", scripts\engine\utility::getcamotablecolumnindex("weapon_index")));
   return var_00 + "+camo" + var_03;
   }
   else if (ishalloweenholidayweapon(var_00, var_02)) {
-  var_03 = int(tablelookup("mp/camoTable.csv", 1, "camo242", scripts\engine\utility::getcamotablecolumnindex("weapon_index")));
+  var_03 = int(tablelookup("mp\camoTable.csv", 1, "camo242", scripts\engine\utility::getcamotablecolumnindex("weapon_index")));
   return var_00 + "+camo" + var_03;
   }
   else if ((!isdefined(var_01) || var_01 == "none") && ismark2weapon(var_02)) {
@@ -2022,14 +2022,14 @@ buildweaponnamecamo(var_00, var_01, var_02) {
   break;
   }
 
-  var_03 = int(tablelookup("mp/camoTable.csv", 1, var_05, scripts\engine\utility::getcamotablecolumnindex("weapon_index")));
+  var_03 = int(tablelookup("mp\camoTable.csv", 1, var_05, scripts\engine\utility::getcamotablecolumnindex("weapon_index")));
   return var_00 + "+camo" + var_03;
   }
 
   if (!isdefined(var_01))
   var_03 = 0;
   else
-  var_03 = int(tablelookup("mp/camoTable.csv", 1, var_01, scripts\engine\utility::getcamotablecolumnindex("weapon_index")));
+  var_03 = int(tablelookup("mp\camoTable.csv", 1, var_01, scripts\engine\utility::getcamotablecolumnindex("weapon_index")));
 
   if (var_03 <= 0) {
   var_04 = scripts\mp\loot::getweaponqualitybyid(var_00, var_02);
@@ -2050,7 +2050,7 @@ buildweaponnamecamo(var_00, var_01, var_02) {
   }
 
   if (isdefined(var_05))
-  var_03 = int(tablelookup("mp/camoTable.csv", 1, var_05, scripts\engine\utility::getcamotablecolumnindex("weapon_index")));
+  var_03 = int(tablelookup("mp\camoTable.csv", 1, var_05, scripts\engine\utility::getcamotablecolumnindex("weapon_index")));
   else
   return var_00;
   }
@@ -2062,7 +2062,7 @@ buildweaponnamereticle(var_00, var_01) {
   if (!isdefined(var_01))
   return var_00;
 
-  var_02 = int(tablelookup("mp/reticleTable.csv", 1, var_01, 5));
+  var_02 = int(tablelookup("mp\reticleTable.csv", 1, var_01, 5));
 
   if (!isdefined(var_02) || var_02 == 0)
   return var_00;
@@ -2281,16 +2281,16 @@ resetfunctionality() {
   self.prematchlook = undefined;
   scripts\mp\damage::resetattackerlist();
   scripts\mp\damage::clearcorpsetablefuncs();
-  scripts/mp/killstreaks/chill_common::chill_resetdata();
+  scripts\mp\killstreaks\chill_common::chill_resetdata();
   scripts\mp\perks\weaponpassives::passivecolddamageresetdata(self);
   scripts\mp\utility\game::_resetenableignoreme();
 }
 
 clearscriptable() {
   self setscriptablepartstate("CompassIcon", "defaultIcon");
-  scripts/mp/killstreaks/chill_common::chill_resetscriptable();
+  scripts\mp\killstreaks\chill_common::chill_resetscriptable();
   scripts\mp\perks\weaponpassives::passivecolddamageresetscriptable(self);
-  scripts/mp/archetypes/archscout::func_B946();
+  scripts\mp\archetypes\archscout::func_B946();
   scripts\mp\equipment\cloak::func_E26A();
 }
 

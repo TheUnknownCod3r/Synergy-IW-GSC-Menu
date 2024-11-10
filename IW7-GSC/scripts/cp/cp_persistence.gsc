@@ -1,8 +1,8 @@
-/*************************************************
+/*****************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\cp_persistence.gsc
-*************************************************/
+ * Script: scripts\cp\cp_persistence.gsc
+*****************************************/
 
 set_perk(param_00) {
 	self [[level.coop_perk_callbacks[param_00].set]]();
@@ -50,8 +50,8 @@ give_player_currency(param_00,param_01,param_02,param_03,param_04) {
 	}
 
 	if(!scripts\engine\utility::istrue(param_03)) {
-		param_00 = int(param_00 * scripts/cp/perks/prestige::prestige_getmoneyearnedscalar());
-		param_00 = scripts/cp/cp_gamescore::round_up_to_nearest(param_00,5);
+		param_00 = int(param_00 * scripts\cp\perks\prestige::prestige_getmoneyearnedscalar());
+		param_00 = scripts\cp\cp_gamescore::round_up_to_nearest(param_00,5);
 	}
 
 	if(isdefined(level.currency_scale_func)) {
@@ -475,7 +475,7 @@ update_weaponstats_hits(param_00,param_01,param_02) {
 		var_03 = level.personal_score_component_name;
 	}
 
-	scripts/cp/cp_gamescore::update_personal_encounter_performance(var_03,"shots_hit",param_01);
+	scripts\cp\cp_gamescore::update_personal_encounter_performance(var_03,"shots_hit",param_01);
 }
 
 is_valid_weapon_hit(param_00,param_01) {
@@ -535,7 +535,7 @@ update_weaponstats_shots(param_00,param_01) {
 		var_02 = level.personal_score_component_name;
 	}
 
-	scripts/cp/cp_gamescore::update_personal_encounter_performance(var_02,"shots_fired",param_01);
+	scripts\cp\cp_gamescore::update_personal_encounter_performance(var_02,"shots_fired",param_01);
 }
 
 update_weaponstats_kills(param_00,param_01) {
@@ -585,7 +585,7 @@ player_weaponstats_track_shots() {
 
 rank_init() {
 	if(!isdefined(level.zombie_ranks_table)) {
-		level.zombie_ranks_table = "cp/zombies/rankTable.csv";
+		level.zombie_ranks_table = "cp\zombies\rankTable.csv";
 	}
 
 	level.zombie_ranks = [];
@@ -892,7 +892,7 @@ update_deployable_box_performance(param_00) {
 		return;
 	}
 
-	param_00 scripts/cp/cp_gamescore::update_personal_encounter_performance(scripts/cp/cp_gamescore::get_team_score_component_name(),"team_support_deploy");
+	param_00 scripts\cp\cp_gamescore::update_personal_encounter_performance(scripts\cp\cp_gamescore::get_team_score_component_name(),"team_support_deploy");
 }
 
 update_lb_aliensession_challenge(param_00) {

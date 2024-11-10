@@ -1,8 +1,8 @@
-/*************************************************************
+/*****************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\maps\cp_zmb\cp_zmb_coaster.gsc
-*************************************************************/
+ * Script: scripts\cp\maps\cp_zmb\cp_zmb_coaster.gsc
+*****************************************************/
 
 init_coaster() {
 	scripts\engine\utility::flag_init("coaster_active");
@@ -120,7 +120,7 @@ coaster_usage_monitor(param_00) {
 	for(;;) {
 		var_01 = level scripts\engine\utility::waittill_any_return("coaster_started","regular_wave_starting","event_wave_starting");
 		if(var_01 == "coaster_started") {
-			level.var_11922++;
+			level.times_coaster_ridden++;
 			if(level.times_coaster_ridden >= 2 || level.players.size == 1) {
 				param_00.out_of_order = 1;
 				param_00 close_gates();
@@ -234,7 +234,7 @@ use_coaster(param_00,param_01) {
 		var_02.linked_players = 0;
 	}
 
-	var_02.var_AD27++;
+	var_02.linked_players++;
 	if(var_02.linked_players >= 2) {
 		scripts\cp\cp_interaction::remove_from_current_interaction_list(param_00);
 	}
@@ -294,7 +294,7 @@ track_ride_time(param_00) {
 	param_00 endon("ride_finished");
 	for(;;) {
 		wait(1);
-		param_00.var_6009++;
+		param_00.elapsed_time++;
 	}
 }
 
@@ -419,7 +419,7 @@ coaster_last_stand_monitor(param_00) {
 		param_00 scripts\cp\utility::allow_player_interactions(1);
 	}
 
-	param_00.linked_coaster.var_AD27--;
+	param_00.linked_coaster.linked_players--;
 	if(param_00.linked_coaster.linked_players <= 0) {
 		param_00.linked_coaster.linked_players = undefined;
 	}
@@ -710,7 +710,7 @@ freeze_players() {
 
 chill_scrnfx() {
 	self endon("disconnect");
-	self.scrnfx = function_01E1(level._effect["coaster_full_screen"],self geteye(),self);
+	self.scrnfx = spawnfxforclient(level._effect["coaster_full_screen"],self geteye(),self);
 	wait(0.1);
 	triggerfx(self.scrnfx);
 	scripts\engine\utility::waittill_any_timeout_1(5,"last_stand");
@@ -915,7 +915,7 @@ target_wait_for_damage() {
 		if(var_0B == "iw7_zm1coaster_zm") {
 			var_03 setclientomnvar("damage_feedback_kill",1);
 			var_03 setclientomnvar("damage_feedback_notify",gettime());
-			var_03.var_11580++;
+			var_03.targets_hit++;
 			var_03.tickets_earned = var_03.targets_hit * var_01;
 			scripts\engine\utility::waitframe();
 			var_03 thread scripts\cp\cp_vo::try_to_play_vo("coaster_ride_shot","zmb_comment_vo","low",10,0,0,1,10);

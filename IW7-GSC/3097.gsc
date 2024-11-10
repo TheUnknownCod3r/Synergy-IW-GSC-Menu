@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\3097.gsc
+ * Script: 3097.gsc
 ***************************************/
 
 func_5CC5() {

@@ -1,8 +1,8 @@
-/*****************************************************************
+/*********************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\asm\zombie_dlc3\zipline_traversal.gsc
-*****************************************************************/
+ * Script: scripts\asm\zombie_dlc3\zipline_traversal.gsc
+*********************************************************/
 
 playtraversezipline(param_00,param_01,param_02,param_03) {
 	self endon(param_01 + "_finished");
@@ -53,7 +53,7 @@ attach_to_zipline_and_go() {
 	var_01 = self.zipline.var_13EFB.origin + (0,0,-84);
 	var_02 = distance(var_00,var_01);
 	var_03 = 500;
-	var_04 = int(var_02 \ var_03);
+	var_04 = int(var_02 / var_03);
 	self.zipline_ent moveto(var_01,var_04,2);
 	self.zipline.var_6393 = gettime() + int(var_04 * 1000);
 }
@@ -65,7 +65,7 @@ playtraverseziplineloop(param_00,param_01,param_02,param_03) {
 	self setanimstate(param_01,var_04,1);
 	var_06 = self.zipline.var_6393 - gettime();
 	if(var_06 > 0) {
-		wait(var_06 \ 1000);
+		wait(var_06 / 1000);
 	}
 
 	scripts\asm\asm::asm_fireevent(param_01,"loop_finished");

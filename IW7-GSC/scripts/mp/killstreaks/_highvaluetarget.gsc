@@ -1,8 +1,8 @@
-/***************************************************************
+/*******************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\killstreaks\_highvaluetarget.gsc
-***************************************************************/
+ * Script: scripts\mp\killstreaks\_highvaluetarget.gsc
+*******************************************************/
 
 init() {
 	scripts\mp\killstreaks\_killstreaks::registerkillstreak("high_value_target",::func_128E9);
@@ -27,7 +27,7 @@ func_DD18() {
 }
 
 usehighvaluetarget(param_00,param_01) {
-	if(!scripts\mp\_utility::isreallyalive(param_00)) {
+	if(!scripts\mp\utility::isreallyalive(param_00)) {
 		return 0;
 	}
 
@@ -41,7 +41,7 @@ usehighvaluetarget(param_00,param_01) {
 	}
 
 	param_00 thread func_F745();
-	level thread scripts\mp\_utility::teamplayercardsplash("used_hvt",param_00,param_00.team);
+	level thread scripts\mp\utility::teamplayercardsplash("used_hvt",param_00,param_00.team);
 	return 1;
 }
 
@@ -51,13 +51,13 @@ func_F745() {
 	var_00 = self.team;
 	func_93F0();
 	thread func_13AA6(var_00);
-	scripts\mp\_hostmigration::waitlongdurationwithhostmigrationpause(10);
+	scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(10);
 	if(level.teambased) {
-		scripts\mp\_utility::leaderdialog("hvt_gone",var_00);
+		scripts\mp\utility::leaderdialog("hvt_gone",var_00);
 	}
 	else
 	{
-		scripts\mp\_utility::leaderdialogonplayer("hvt_gone");
+		scripts\mp\utility::leaderdialogonplayer("hvt_gone");
 	}
 
 	if(level.teambased) {

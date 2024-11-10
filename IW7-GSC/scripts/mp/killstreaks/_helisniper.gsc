@@ -1,8 +1,8 @@
-/**********************************************************
+/**************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\killstreaks\_helisniper.gsc
-**********************************************************/
+ * Script: scripts\mp\killstreaks\_helisniper.gsc
+**************************************************/
 
 init() {
 	scripts\mp\killstreaks\_helicopter_guard::func_AADA();
@@ -38,7 +38,7 @@ func_128E8(param_00,param_01) {
 		return 0;
 	}
 
-	if(scripts\mp\_utility::currentactivevehiclecount() >= scripts\mp\_utility::maxvehiclesallowed() || level.fauxvehiclecount + var_05 >= scripts\mp\_utility::maxvehiclesallowed()) {
+	if(scripts\mp\utility::currentactivevehiclecount() >= scripts\mp\utility::maxvehiclesallowed() || level.fauxvehiclecount + var_05 >= scripts\mp\utility::maxvehiclesallowed()) {
 		self iprintlnbold(&"KILLSTREAKS_TOO_MANY_VEHICLES");
 		return 0;
 	}
@@ -92,12 +92,12 @@ func_49D1(param_00,param_01,param_02,param_03,param_04,param_05) {
 		return;
 	}
 
-	var_0B = scripts\mp\_utility::gethelipilottraceoffset();
-	var_0C = var_07 + scripts\mp\_utility::gethelipilotmeshoffset() + var_0B;
-	var_0D = var_07 + scripts\mp\_utility::gethelipilotmeshoffset() - var_0B;
+	var_0B = scripts\mp\utility::gethelipilottraceoffset();
+	var_0C = var_07 + scripts\mp\utility::gethelipilotmeshoffset() + var_0B;
+	var_0D = var_07 + scripts\mp\utility::gethelipilotmeshoffset() - var_0B;
 	var_0E = bullettrace(var_0C,var_0D,0,0,0,0,1);
 	if(isdefined(var_0E["entity"]) && var_0E["normal"][2] > 0.1) {
-		var_07 = var_0E["position"] - scripts\mp\_utility::gethelipilotmeshoffset() + (0,0,384);
+		var_07 = var_0E["position"] - scripts\mp\utility::gethelipilotmeshoffset() + (0,0,384);
 	}
 
 	var_0A scripts\mp\killstreaks\_helicopter::addtolittlebirdlist("lbSniper");
@@ -239,7 +239,7 @@ helipathmemory(param_00,param_01) {
 	param_00 endon("owner_disconnected");
 	param_00 endon("killstreakExit");
 	var_02 = func_7E37(self.origin);
-	level thread scripts\mp\_utility::teamplayercardsplash("used_heli_sniper",self,self.team);
+	level thread scripts\mp\utility::teamplayercardsplash("used_heli_sniper",self,self.team);
 	if(isdefined(var_02.angles)) {
 		var_03 = var_02.angles;
 	}
@@ -309,7 +309,7 @@ func_5820(param_00) {
 	param_00 vehicle_setspeed(60);
 	param_00 givelastonteamwarning(180,180,180,0.3);
 	wait(1);
-	if(!scripts\mp\_utility::isreallyalive(self)) {
+	if(!scripts\mp\utility::isreallyalive(self)) {
 		return;
 	}
 
@@ -320,15 +320,15 @@ func_5820(param_00) {
 	self.onhelisniper = 0;
 	self.var_8DD6 = undefined;
 	param_00.var_C834 = 0;
-	scripts\mp\_utility::_takeweapon("iw6_gm6helisnipe_mp_gm6scope");
+	scripts\mp\utility::_takeweapon("iw6_gm6helisnipe_mp_gm6scope");
 	self enableweaponswitch();
-	scripts\mp\_utility::setrecoilscale();
+	scripts\mp\utility::setrecoilscale();
 	var_01 = scripts\engine\utility::getlastweapon();
 	if(!self hasweapon(var_01)) {
 		var_01 = scripts\mp\killstreaks\_utility::getfirstprimaryweapon();
 	}
 
-	scripts\mp\_utility::func_1136C(var_01);
+	scripts\mp\utility::func_1136C(var_01);
 	wait(1);
 	if(isdefined(param_00)) {
 		param_00 thread heliisfacing();
@@ -345,9 +345,9 @@ watchearlyexit(param_00) {
 func_BCD7(param_00) {
 	self endon("disconnect");
 	self visionsetnakedforplayer("black_bw",0.5);
-	scripts\mp\_utility::set_visionset_for_watching_players("black_bw",0.5,1);
+	scripts\mp\utility::set_visionset_for_watching_players("black_bw",0.5,1);
 	var_01 = scripts\engine\utility::waittill_any_timeout_1(0.5,"death");
-	scripts\mp\_hostmigration::waittillhostmigrationdone();
+	scripts\mp\hostmigration::waittillhostmigrationdone();
 	if(var_01 == "death") {
 		thread scripts\mp\killstreaks\_killstreaks::clearrideintro(1);
 		return "fail";
@@ -446,7 +446,7 @@ func_8DD1() {
 		}
 	}
 
-	if(scripts\mp\_utility::getmapname() == "mp_chasm") {
+	if(scripts\mp\utility::getmapname() == "mp_chasm") {
 		if(var_01.origin == (-224,-1056,2376)) {
 			var_01.origin = (-304,-896,2376);
 		}
@@ -556,12 +556,12 @@ func_B31F(param_00) {
 	var_03 = var_01 + var_02;
 	var_04 = 256;
 	var_05 = self.origin + var_03;
-	var_06 = scripts\mp\_utility::gethelipilottraceoffset();
-	var_07 = var_05 + scripts\mp\_utility::gethelipilotmeshoffset() + var_06;
-	var_08 = var_05 + scripts\mp\_utility::gethelipilotmeshoffset() - var_06;
+	var_06 = scripts\mp\utility::gethelipilottraceoffset();
+	var_07 = var_05 + scripts\mp\utility::gethelipilotmeshoffset() + var_06;
+	var_08 = var_05 + scripts\mp\utility::gethelipilotmeshoffset() - var_06;
 	var_09 = bullettrace(var_07,var_08,0,0,0,0,1);
 	if(isdefined(var_09["entity"]) && var_09["normal"][2] > 0.1) {
-		var_05 = var_09["position"] - scripts\mp\_utility::gethelipilotmeshoffset() + (0,0,var_04);
+		var_05 = var_09["position"] - scripts\mp\utility::gethelipilotmeshoffset() + (0,0,var_04);
 		var_0A = var_05[2] - self.origin[2];
 		if(var_0A > 1000) {
 			return;
@@ -592,15 +592,15 @@ heliisfacing() {
 	}
 
 	if(isdefined(self.var_BD6D)) {
-		self.var_BD6D scripts\mp\_hud_util::destroyelem();
+		self.var_BD6D scripts\mp\hud_util::destroyelem();
 	}
 
 	if(isdefined(self.var_1137A)) {
-		self.var_1137A scripts\mp\_hud_util::destroyelem();
+		self.var_1137A scripts\mp\hud_util::destroyelem();
 	}
 
 	if(isdefined(self.var_BCCF)) {
-		self.var_BCCF scripts\mp\_hud_util::destroyelem();
+		self.var_BCCF scripts\mp\hud_util::destroyelem();
 	}
 
 	self getplayerkillstreakcombatmode();
@@ -627,7 +627,7 @@ func_8DB4(param_00) {
 	level endon("game_ended");
 	self endon("leaving");
 	self waittill("death");
-	scripts\mp\_hostmigration::waittillhostmigrationdone();
+	scripts\mp\hostmigration::waittillhostmigrationdone();
 	thread scripts\mp\killstreaks\_helicopter::lbonkilled();
 	if(isdefined(self.var_A79F)) {
 		self.var_A79F delete();
@@ -642,15 +642,15 @@ func_8DB4(param_00) {
 	}
 
 	if(isdefined(self.var_BD6D)) {
-		self.var_BD6D scripts\mp\_hud_util::destroyelem();
+		self.var_BD6D scripts\mp\hud_util::destroyelem();
 	}
 
 	if(isdefined(self.var_1137A)) {
-		self.var_1137A scripts\mp\_hud_util::destroyelem();
+		self.var_1137A scripts\mp\hud_util::destroyelem();
 	}
 
 	if(isdefined(self.var_BCCF)) {
-		self.var_BCCF scripts\mp\_hud_util::destroyelem();
+		self.var_BCCF scripts\mp\hud_util::destroyelem();
 	}
 
 	if(isdefined(self.triggerportableradarping) && isalive(self.triggerportableradarping) && self.var_C834 == 1) {
@@ -669,7 +669,7 @@ func_8DB4(param_00) {
 
 		if(isdefined(var_01)) {
 			foreach(var_08 in level.participants) {
-				if(var_08 scripts\mp\_utility::getuniqueid() == var_01) {
+				if(var_08 scripts\mp\utility::getuniqueid() == var_01) {
 					var_02 = var_08;
 				}
 			}
@@ -682,7 +682,7 @@ func_8DB4(param_00) {
 		else if(isdefined(var_02) && var_0A != 2) {
 			radiusdamage(self.triggerportableradarping.origin,200,2600,2600,var_02);
 		}
-		else if(var_0A == 2 && isdefined(var_02) && scripts\mp\_utility::attackerishittingteam(var_02,self.triggerportableradarping)) {
+		else if(var_0A == 2 && isdefined(var_02) && scripts\mp\utility::attackerishittingteam(var_02,self.triggerportableradarping)) {
 			radiusdamage(self.triggerportableradarping.origin,200,2600,2600,var_02);
 			radiusdamage(self.triggerportableradarping.origin,200,2600,2600);
 		}
@@ -697,13 +697,13 @@ func_8DB4(param_00) {
 }
 
 func_F881() {
-	if(!scripts\mp\_utility::_hasperk("specialty_falldamage")) {
+	if(!scripts\mp\utility::_hasperk("specialty_falldamage")) {
 		level endon("game_ended");
 		self endon("death");
 		self endon("disconnect");
-		scripts\mp\_utility::giveperk("specialty_falldamage");
+		scripts\mp\utility::giveperk("specialty_falldamage");
 		wait(2);
-		scripts\mp\_utility::removeperk("specialty_falldamage");
+		scripts\mp\utility::removeperk("specialty_falldamage");
 	}
 }
 
@@ -717,7 +717,7 @@ func_DE3E() {
 	var_00 = 0;
 	for(;;) {
 		wait(0.05);
-		if(!isdefined(self.triggerportableradarping.lightarmorhp) && !self.triggerportableradarping scripts\mp\_utility::isjuggernaut()) {
+		if(!isdefined(self.triggerportableradarping.lightarmorhp) && !self.triggerportableradarping scripts\mp\utility::isjuggernaut()) {
 			self.triggerportableradarping scripts\mp\perks\_perkfunctions::setlightarmor();
 			var_00++;
 			if(var_00 >= 2) {
@@ -756,9 +756,9 @@ _meth_835D() {
 
 		if(self.triggerportableradarping getcurrentprimaryweapon() != "iw6_gm6helisnipe_mp_gm6scope") {
 			self.triggerportableradarping giveweapon("iw6_gm6helisnipe_mp_gm6scope");
-			self.triggerportableradarping scripts\mp\_utility::_switchtoweaponimmediate("iw6_gm6helisnipe_mp_gm6scope");
+			self.triggerportableradarping scripts\mp\utility::_switchtoweaponimmediate("iw6_gm6helisnipe_mp_gm6scope");
 			self.triggerportableradarping getraidspawnpoint();
-			self.triggerportableradarping scripts\mp\_utility::setrecoilscale(0,100);
+			self.triggerportableradarping scripts\mp\utility::setrecoilscale(0,100);
 			self.triggerportableradarping givemaxammo("iw6_gm6helisnipe_mp_gm6scope");
 		}
 		else

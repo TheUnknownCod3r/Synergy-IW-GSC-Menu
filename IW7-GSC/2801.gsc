@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2801.gsc
+ * Script: 2801.gsc
 ***************************************/
 
 func_109B8() {
@@ -163,7 +163,7 @@ func_13B54(var_00, var_01) {
   foreach (var_04 in level.func_109BE)
   var_02 scripts\mp\utility\game::giveperk(var_04);
 
-  if (!(isdefined(var_2.powers) && var_02 scripts/mp/powers::hasequipment("power_speedBoost") && var_2.powers["power_speedBoost"].active)) {
+  if (!(isdefined(var_2.powers) && var_02 scripts\mp\powers::hasequipment("power_speedBoost") && var_2.powers["power_speedBoost"].active)) {
   var_2.speedstripmod = 0.2;
   var_02 scripts\mp\weapons::updatemovespeedscale();
   var_02 thread func_13B53();

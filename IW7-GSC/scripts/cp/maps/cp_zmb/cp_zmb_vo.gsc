@@ -1,8 +1,8 @@
-/********************************************************
+/************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\maps\cp_zmb\cp_zmb_vo.gsc
-********************************************************/
+ * Script: scripts\cp\maps\cp_zmb\cp_zmb_vo.gsc
+************************************************/
 
 zmb_vo_init() {
 	level.recent_vo = [];
@@ -230,7 +230,7 @@ announcer_vo(param_00,param_01,param_02,param_03,param_04,param_05,param_06) {
 is_vo_in_pap(param_00) {
 	if(isdefined(level.vo_alias_data[param_00].pap_approval)) {
 		if(level.vo_alias_data[param_00].pap_approval == 1) {
-			if(scripts/cp/zombies/zombie_fast_travel::is_in_pap_room(self)) {
+			if(scripts\cp\zombies\zombie_fast_travel::is_in_pap_room(self)) {
 				return 1;
 			}
 

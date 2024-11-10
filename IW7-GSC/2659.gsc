@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2659.gsc
+ * Script: 2659.gsc
 ***************************************/
 
 set_perk(var_00) {
@@ -47,8 +47,8 @@ give_player_currency(var_00, var_01, var_02, var_03, var_04) {
   return;
 
   if (!scripts\engine\utility::is_true(var_03)) {
-  var_00 = int(var_00 * scripts/cp/perks/prestige::prestige_getmoneyearnedscalar());
-  var_00 = scripts/cp/cp_gamescore::round_up_to_nearest(var_00, 5);
+  var_00 = int(var_00 * scripts\cp\perks\prestige::prestige_getmoneyearnedscalar());
+  var_00 = scripts\cp\cp_gamescore::round_up_to_nearest(var_00, 5);
   }
 
   if (isdefined(level.currency_scale_func))
@@ -84,16 +84,16 @@ give_player_currency(var_00, var_01, var_02, var_03, var_04) {
   return;
 
   if (!level.gameended) {
-  scripts/cp/utility::setlowermessage("maxmoney", &"COOP_GAME_PLAY_MONEY_MAX", 4);
+  scripts\cp\utility::setlowermessage("maxmoney", &"COOP_GAME_PLAY_MONEY_MAX", 4);
   self.next_maxmoney_hint_time = var_09 + var_08;
   }
   }
 
   if (is_valid_give_type(var_04))
-  thread scripts/cp/utility::add_to_notify_queue("player_earned_money", var_00);
+  thread scripts\cp\utility::add_to_notify_queue("player_earned_money", var_00);
 
   self notify("currency_earned", var_00);
-  scripts/cp/utility::bufferednotify("currency_earned_buffered", var_00);
+  scripts\cp\utility::bufferednotify("currency_earned_buffered", var_00);
   eog_player_update_stat("score", int(self.total_currency_earned), 1);
 }
 
@@ -125,8 +125,8 @@ take_player_currency(var_00, var_01, var_02, var_03) {
   if (isdefined(level.chaos_update_spending_currency_event))
   [[level.chaos_update_spending_currency_event]](self, var_02, var_03);
 
-  if (scripts/cp/utility::is_consumable_active("next_purchase_free") && var_00 >= 1 && var_02 != "atm" && var_02 != "laststand" && var_02 != "bleedoutPenalty")
-  scripts/cp/utility::notify_used_consumable("next_purchase_free");
+  if (scripts\cp\utility::is_consumable_active("next_purchase_free") && var_00 >= 1 && var_02 != "atm" && var_02 != "laststand" && var_02 != "bleedoutPenalty")
+  scripts\cp\utility::notify_used_consumable("next_purchase_free");
   else
   set_player_currency(var_05);
 
@@ -134,22 +134,22 @@ take_player_currency(var_00, var_01, var_02, var_03) {
   return;
 
   if (isdefined(var_02))
-  scripts/cp/cp_analytics::update_spending_type(var_06, var_02);
+  scripts\cp\cp_analytics::update_spending_type(var_06, var_02);
 
   eog_player_update_stat("currencyspent", var_06);
 
-  if (scripts/cp/utility::is_consumable_active("door_buy_refund") && var_00 > 0) {
+  if (scripts\cp\utility::is_consumable_active("door_buy_refund") && var_00 > 0) {
   if (var_02 != "atm" && var_02 != "laststand" && var_02 != "bleedoutPenalty") {
   give_player_currency(int(var_06 * 0.3), undefined, undefined, 1, "bonus");
-  scripts/cp/utility::notify_used_consumable("door_buy_refund");
+  scripts\cp\utility::notify_used_consumable("door_buy_refund");
   }
   }
 
-  if (scripts/cp/cp_interaction::should_interaction_fill_consumable_meter(var_02))
+  if (scripts\cp\cp_interaction::should_interaction_fill_consumable_meter(var_02))
   self notify("consumable_charge", var_00 * 0.07);
 
   if (var_02 != "atm" && var_02 != "laststand" && var_02 != "bleedoutPenalty")
-  scripts/cp/utility::bufferednotify("currency_spent_buffered", var_00);
+  scripts\cp\utility::bufferednotify("currency_spent_buffered", var_00);
 
   if (isdefined(var_01) && var_01)
   return;
@@ -157,7 +157,7 @@ take_player_currency(var_00, var_01, var_02, var_03) {
 
 player_has_enough_currency(var_00, var_01) {
   if (!isdefined(var_01) || isdefined(var_01) && var_01 != "atm" && var_01 != "laststand" && var_01 != "bleedoutPenalty") {
-  if (scripts/cp/utility::is_consumable_active("next_purchase_free"))
+  if (scripts\cp\utility::is_consumable_active("next_purchase_free"))
   var_00 = 0;
   }
 
@@ -347,7 +347,7 @@ reset_eog_stats(var_00) {
 }
 
 eog_update_on_player_disconnect(var_00) {
-  if (scripts/cp/cp_gamelogic::gamealreadyended())
+  if (scripts\cp\cp_gamelogic::gamealreadyended())
   return;
 
   var_01 = var_00 getentitynumber();
@@ -451,7 +451,7 @@ update_weaponstats_hits(var_00, var_01, var_02) {
   if (isdefined(level.personal_score_component_name))
   var_03 = level.personal_score_component_name;
 
-  scripts/cp/cp_gamescore::update_personal_encounter_performance(var_03, "shots_hit", var_01);
+  scripts\cp\cp_gamescore::update_personal_encounter_performance(var_03, "shots_hit", var_01);
 }
 
 is_valid_weapon_hit(var_00, var_01) {
@@ -506,7 +506,7 @@ update_weaponstats_shots(var_00, var_01) {
   if (isdefined(level.personal_score_component_name))
   var_02 = level.personal_score_component_name;
 
-  scripts/cp/cp_gamescore::update_personal_encounter_performance(var_02, "shots_fired", var_01);
+  scripts\cp\cp_gamescore::update_personal_encounter_performance(var_02, "shots_fired", var_01);
 }
 
 update_weaponstats_kills(var_00, var_01) {
@@ -555,7 +555,7 @@ player_weaponstats_track_shots() {
 
 rank_init() {
   if (!isdefined(level.zombie_ranks_table))
-  level.zombie_ranks_table = "cp/zombies/rankTable.csv";
+  level.zombie_ranks_table = "cp\zombies\rankTable.csv";
 
   level.zombie_ranks = [];
   level.zombie_max_rank = int(tablelookup(level.zombie_ranks_table, 0, "maxrank", 1));
@@ -759,7 +759,7 @@ give_player_xp(var_00, var_01) {
 
   if (isdefined(self.totalxpearned)) {
   self.totalxpearned = self.totalxpearned + var_00;
-  scripts/cp/zombies/zombie_analytics::log_session_xp_earned(var_00, self.totalxpearned, self, level.wave_num);
+  scripts\cp\zombies\zombie_analytics::log_session_xp_earned(var_00, self.totalxpearned, self, level.wave_num);
   }
 
   thread give_player_session_xp(var_00);
@@ -785,7 +785,7 @@ give_player_xp(var_00, var_01) {
   if (var_02 == 0) {
   var_07 = var_06 + 1;
   var_08 = get_splash_by_id(var_06);
-  thread scripts/cp/cp_hud_message::showsplash(var_08, var_07);
+  thread scripts\cp\cp_hud_message::showsplash(var_08, var_07);
   self notify("ranked_up", var_06);
   update_player_session_rankup();
   }
@@ -796,34 +796,34 @@ give_player_xp(var_00, var_01) {
 }
 
 process_rank_merits(var_00) {
-  scripts/cp/cp_merits::processmerit("mt_prestige_1");
+  scripts\cp\cp_merits::processmerit("mt_prestige_1");
 
   if (var_00 >= 40)
-  scripts/cp/cp_merits::processmerit("mt_prestige_2");
+  scripts\cp\cp_merits::processmerit("mt_prestige_2");
 
   if (var_00 >= 60)
-  scripts/cp/cp_merits::processmerit("mt_prestige_3");
+  scripts\cp\cp_merits::processmerit("mt_prestige_3");
 
   if (var_00 >= 80)
-  scripts/cp/cp_merits::processmerit("mt_prestige_4");
+  scripts\cp\cp_merits::processmerit("mt_prestige_4");
 
   if (var_00 >= 100)
-  scripts/cp/cp_merits::processmerit("mt_prestige_5");
+  scripts\cp\cp_merits::processmerit("mt_prestige_5");
 
   if (var_00 >= 120)
-  scripts/cp/cp_merits::processmerit("mt_prestige_6");
+  scripts\cp\cp_merits::processmerit("mt_prestige_6");
 
   if (var_00 >= 140)
-  scripts/cp/cp_merits::processmerit("mt_prestige_7");
+  scripts\cp\cp_merits::processmerit("mt_prestige_7");
 
   if (var_00 >= 160)
-  scripts/cp/cp_merits::processmerit("mt_prestige_8");
+  scripts\cp\cp_merits::processmerit("mt_prestige_8");
 
   if (var_00 >= 180)
-  scripts/cp/cp_merits::processmerit("mt_prestige_9");
+  scripts\cp\cp_merits::processmerit("mt_prestige_9");
 
   if (var_00 >= 200)
-  scripts/cp/cp_merits::processmerit("mt_prestige_10");
+  scripts\cp\cp_merits::processmerit("mt_prestige_10");
 }
 
 inc_stat(var_00, var_01, var_02) {
@@ -852,7 +852,7 @@ update_deployable_box_performance(var_00) {
   if (isdefined(level.update_deployable_box_performance_func))
   var_00 [[level.update_deployable_box_performance_func]]();
   else
-  var_00 scripts/cp/cp_gamescore::update_personal_encounter_performance(scripts/cp/cp_gamescore::get_team_score_component_name(), "team_support_deploy");
+  var_00 scripts\cp\cp_gamescore::update_personal_encounter_performance(scripts\cp\cp_gamescore::get_team_score_component_name(), "team_support_deploy");
 }
 
 update_lb_aliensession_challenge(var_00) {
@@ -882,7 +882,7 @@ update_alien_kill_sessionstats(var_00, var_01) {
   if (!isdefined(var_01) || !isplayer(var_01))
   return;
 
-  if (scripts/cp/utility::is_trap(var_00))
+  if (scripts\cp\utility::is_trap(var_00))
   var_01 lb_player_update_stat("trapKills", 1);
 }
 
@@ -936,7 +936,7 @@ play_time_monitor() {
 }
 
 record_player_kills(var_00, var_01, var_02, var_03) {
-  if (scripts/cp/utility::isheadshot(var_00, var_01, var_02, var_03))
+  if (scripts\cp\utility::isheadshot(var_00, var_01, var_02, var_03))
   increment_player_career_headshot_kills(var_03);
 
   var_03 increment_player_career_kills(var_03);

@@ -1,8 +1,8 @@
-/*****************************************************
+/*********************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\bots\gametype_conf.gsc
-*****************************************************/
+ * Script: scripts\mp\bots\gametype_conf.gsc
+*********************************************/
 
 main() {
 	setup_callbacks();
@@ -44,7 +44,7 @@ bot_conf_think() {
 					var_01 = 1;
 				}
 			}
-			else if(scripts\mp\bots\_bots_strategy::bot_has_tactical_goal("kill_tag") && self.tag_getting scripts\mp\_gameobjects::caninteractwith(self.team)) {
+			else if(scripts\mp\bots\_bots_strategy::bot_has_tactical_goal("kill_tag") && self.tag_getting scripts\mp\gameobjects::caninteractwith(self.team)) {
 				self.tag_getting = undefined;
 				var_00 = 0;
 			}
@@ -242,7 +242,7 @@ bot_find_visible_tags(param_00,param_01,param_02) {
 	var_05 = [];
 	if(isdefined(var_03) && isdefined(level.dogtags)) {
 		foreach(var_07 in level.dogtags) {
-			if(var_07 scripts\mp\_gameobjects::caninteractwith(self.team)) {
+			if(var_07 scripts\mp\gameobjects::caninteractwith(self.team)) {
 				var_08 = 0;
 				if(!param_00) {
 					if(!isdefined(var_07.calculations_in_progress)) {
@@ -306,7 +306,7 @@ bot_find_best_tag_from_array(param_00,param_01) {
 bot_remove_invalid_tags(param_00) {
 	var_01 = [];
 	foreach(var_03 in param_00) {
-		if(var_03.physics_setgravitydynentscalar scripts\mp\_gameobjects::caninteractwith(self.team) && scripts\mp\bots\_bots_util::bot_vectors_are_equal(var_03.physics_setgravitydynentscalar.curorigin,var_03.origin)) {
+		if(var_03.physics_setgravitydynentscalar scripts\mp\gameobjects::caninteractwith(self.team) && scripts\mp\bots\_bots_util::bot_vectors_are_equal(var_03.physics_setgravitydynentscalar.curorigin,var_03.origin)) {
 			if(!func_2D2E(var_03.physics_setgravitydynentscalar) && var_03.physics_setgravitydynentscalar.on_path_grid) {
 				var_01 = scripts\engine\utility::array_add(var_01,var_03);
 			}

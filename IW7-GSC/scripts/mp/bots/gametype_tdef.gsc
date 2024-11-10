@@ -1,8 +1,8 @@
-/*****************************************************
+/*********************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\bots\gametype_tdef.gsc
-*****************************************************/
+ * Script: scripts\mp\bots\gametype_tdef.gsc
+*********************************************/
 
 main() {
 	scripts\mp\bots\gametype_ball::main();
@@ -14,7 +14,7 @@ setup_callbacks() {
 }
 
 setup_bot_war() {
-	if(scripts\mp\_utility::bot_is_fireteam_mode()) {
+	if(scripts\mp\utility::bot_is_fireteam_mode()) {
 		level.bot_team_tdm_personality = "default";
 		level.bot_fireteam_buddy_up = 0;
 	}

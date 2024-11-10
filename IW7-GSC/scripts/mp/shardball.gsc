@@ -1,13 +1,13 @@
-/********************************************
+/************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\shardball.gsc
-********************************************/
+ * Script: scripts\mp\shardball.gsc
+************************************/
 
 func_FC58() {
-	level._effect["shard_ball_rocket_trail"] = loadfx("vfx/iw7/_requests/mp/vfx_shard_ball_launch_trail.vfx");
-	level._effect["shard_ball_explosion_shards"] = loadfx("vfx/iw7/_requests/mp/vfx_shard_ball_proj_exp.vfx");
-	level._effect["shard_ball_explosion_rocket"] = loadfx("vfx/iw7/_requests/mp/vfx_shard_ball_launch_exp.vfx");
+	level._effect["shard_ball_rocket_trail"] = loadfx("vfx\iw7\_requests\mp\vfx_shard_ball_launch_trail.vfx");
+	level._effect["shard_ball_explosion_shards"] = loadfx("vfx\iw7\_requests\mp\vfx_shard_ball_proj_exp.vfx");
+	level._effect["shard_ball_explosion_rocket"] = loadfx("vfx\iw7\_requests\mp\vfx_shard_ball_launch_exp.vfx");
 	scripts\mp\powerloot::func_DF06("power_shardBall",["passive_increased_radius","passive_increased_entities","passive_grenade_to_mine"]);
 }
 
@@ -86,7 +86,7 @@ func_7EA8(param_00,param_01,param_02,param_03) {
 	var_09 = param_01 + var_06;
 	if(!isdefined(param_03) || !param_03) {
 		var_0A = physics_createcontents(["physicscontents_solid","physicscontents_glass","physicscontents_vehicleclip","physicscontents_missileclip","physicscontents_clipshot"]);
-		var_0B = function_0287(param_01,var_08,var_0A,undefined,0,"physicsquery_closest");
+		var_0B = physics_raycast(param_01,var_08,var_0A,undefined,0,"physicsquery_closest");
 		if(var_0B.size > 0) {
 			var_0C = var_0B[0]["position"];
 			var_09 = param_01 + var_0C / 2;

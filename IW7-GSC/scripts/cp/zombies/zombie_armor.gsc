@@ -1,8 +1,8 @@
-/*******************************************************
+/***********************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\zombies\zombie_armor.gsc
-*******************************************************/
+ * Script: scripts\cp\zombies\zombie_armor.gsc
+***********************************************/
 
 func_97AF() {
 	level.var_13F0F = [];
@@ -155,7 +155,7 @@ func_782B() {
 }
 
 func_381A(param_00) {
-	if(param_00 scripts/asm/zombie/zombie::func_9E0F()) {
+	if(param_00 scripts\asm\zombie\zombie::func_9E0F()) {
 		return 0;
 	}
 

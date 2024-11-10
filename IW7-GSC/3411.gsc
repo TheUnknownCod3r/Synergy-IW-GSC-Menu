@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\3411.gsc
+ * Script: 3411.gsc
 ***************************************/
 
 applyzombiescriptablestate(var_00, var_01) {

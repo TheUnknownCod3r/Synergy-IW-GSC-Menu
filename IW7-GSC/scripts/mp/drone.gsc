@@ -1,8 +1,8 @@
-/****************************************
+/********************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\drone.gsc
-****************************************/
+ * Script: scripts\mp\drone.gsc
+********************************/
 
 init() {
 	thread func_13962();

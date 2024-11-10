@@ -1,8 +1,8 @@
-/************************************************
+/****************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\behaviortree\alien_rhino.gsc
-************************************************/
+ * Script: behaviortree\alien_rhino.gsc
+****************************************/
 
 func_2AD0() {
 	if(isdefined(level.var_119E["alien_rhino"])) {

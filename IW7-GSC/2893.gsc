@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\2893.gsc
-****************************/
+ * Script: 2893.gsc
+************************/
 
 func_AB6F(param_00,param_01,param_02) {
 	return param_00 + param_01 - param_00 * param_02;

@@ -1,11 +1,11 @@
-/***************************************************
+/*******************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\anim\utility_common.gsc
-***************************************************/
+ * Script: scripts\anim\utility_common.gsc
+*******************************************/
 
 print3dtime(param_00,param_01,param_02,param_03,param_04,param_05) {
-	var_06 = param_00 \ 0.05;
+	var_06 = param_00 / 0.05;
 	for(var_07 = 0;var_07 < var_06;var_07++) {
 		wait(0.05);
 	}
@@ -14,7 +14,7 @@ print3dtime(param_00,param_01,param_02,param_03,param_04,param_05) {
 print3drise(param_00,param_01,param_02,param_03,param_04) {
 	var_05 = 100;
 	var_06 = 0;
-	param_00 = param_00 + scripts\common\utility::randomvector(30);
+	param_00 = param_00 + scripts\engine\utility::randomvector(30);
 	for(var_07 = 0;var_07 < var_05;var_07++) {
 		var_06 = var_06 + 0.5;
 		wait(0.05);
@@ -103,7 +103,7 @@ isinset(param_00,param_01) {
 }
 
 weapon_pump_action_shotgun() {
-	return self.var_394 != "none" && function_0246(self.var_394) && weaponclass(self.var_394) == "spread";
+	return self.var_394 != "none" && weaponisboltaction(self.var_394) && weaponclass(self.var_394) == "spread";
 }
 
 isshotgun(param_00) {
@@ -248,11 +248,11 @@ cheatammoifnecessary() {
 		return 0;
 	}
 
-	if(!self getpersstat(self.isnodeoccupied) && distancesquared(self.origin,self.var_10C.origin) > 65536) {
+	if(!self getpersstat(self.isnodeoccupied) && distancesquared(self.origin,self.isnodeoccupied.origin) > 65536) {
 		return 0;
 	}
 
-	self.bulletsinclip = int(weaponclipsize(self.var_394) \ 2);
+	self.bulletsinclip = int(weaponclipsize(self.var_394) / 2);
 	if(self.bulletsinclip > weaponclipsize(self.var_394)) {
 		self.bulletsinclip = weaponclipsize(self.var_394);
 	}
@@ -332,11 +332,11 @@ shootenemywrapper(param_00) {
 
 getnodeyawtoorigin(param_00) {
 	if(isdefined(self.target_getindexoftarget)) {
-		var_01 = self.var_205.angles[1] - scripts\common\utility::getyaw(param_00);
+		var_01 = self.target_getindexoftarget.angles[1] - scripts\engine\utility::getyaw(param_00);
 	}
 	else
 	{
-		var_01 = self.angles[1] - scripts\common\utility::getyaw(var_01);
+		var_01 = self.angles[1] - scripts\engine\utility::getyaw(var_01);
 	}
 
 	var_01 = angleclamp180(var_01);
@@ -346,12 +346,12 @@ getnodeyawtoorigin(param_00) {
 getnodeyawtoenemy() {
 	var_00 = undefined;
 	if(isdefined(self.isnodeoccupied)) {
-		var_00 = self.var_10C.origin;
+		var_00 = self.isnodeoccupied.origin;
 	}
 	else
 	{
 		if(isdefined(self.target_getindexoftarget)) {
-			var_01 = anglestoforward(self.var_205.angles);
+			var_01 = anglestoforward(self.target_getindexoftarget.angles);
 		}
 		else
 		{
@@ -363,11 +363,11 @@ getnodeyawtoenemy() {
 	}
 
 	if(isdefined(self.target_getindexoftarget)) {
-		var_02 = self.var_205.angles[1] - scripts\common\utility::getyaw(var_00);
+		var_02 = self.target_getindexoftarget.angles[1] - scripts\engine\utility::getyaw(var_00);
 	}
 	else
 	{
-		var_02 = self.angles[1] - scripts\common\utility::getyaw(var_02);
+		var_02 = self.angles[1] - scripts\engine\utility::getyaw(var_02);
 	}
 
 	var_02 = angleclamp180(var_02);
@@ -377,7 +377,7 @@ getnodeyawtoenemy() {
 getyawtoenemy() {
 	var_00 = undefined;
 	if(isdefined(self.isnodeoccupied)) {
-		var_00 = self.var_10C.origin;
+		var_00 = self.isnodeoccupied.origin;
 	}
 	else
 	{
@@ -386,7 +386,7 @@ getyawtoenemy() {
 		var_00 = self.origin + var_01;
 	}
 
-	var_02 = self.angles[1] - scripts\common\utility::getyaw(var_00);
+	var_02 = self.angles[1] - scripts\engine\utility::getyaw(var_00);
 	var_02 = angleclamp180(var_02);
 	return var_02;
 }
@@ -397,7 +397,7 @@ getyaw2d(param_00) {
 }
 
 absyawtoenemy() {
-	var_00 = self.angles[1] - scripts\common\utility::getyaw(self.var_10C.origin);
+	var_00 = self.angles[1] - scripts\engine\utility::getyaw(self.isnodeoccupied.origin);
 	var_00 = angleclamp180(var_00);
 	if(var_00 < 0) {
 		var_00 = -1 * var_00;
@@ -407,7 +407,7 @@ absyawtoenemy() {
 }
 
 absyawtoenemy2d() {
-	var_00 = self.angles[1] - getyaw2d(self.var_10C.origin);
+	var_00 = self.angles[1] - getyaw2d(self.isnodeoccupied.origin);
 	var_00 = angleclamp180(var_00);
 	if(var_00 < 0) {
 		var_00 = -1 * var_00;
@@ -417,7 +417,7 @@ absyawtoenemy2d() {
 }
 
 absyawtoorigin(param_00) {
-	var_01 = self.angles[1] - scripts\common\utility::getyaw(param_00);
+	var_01 = self.angles[1] - scripts\engine\utility::getyaw(param_00);
 	var_01 = angleclamp180(var_01);
 	if(var_01 < 0) {
 		var_01 = -1 * var_01;
@@ -442,18 +442,18 @@ getyawfromorigin(param_00,param_01) {
 }
 
 getgrenademodel() {
-	return function_00EA(self.objective_team);
+	return getweaponmodel(self.objective_team);
 }
 
 getenemyeyepos() {
 	if(isdefined(self.isnodeoccupied)) {
-		self.var_1491.lastenemypos = self.isnodeoccupied getshootatpos();
-		self.var_1491.lastenemytime = gettime();
-		return self.var_1491.lastenemypos;
+		self.a.lastenemypos = self.isnodeoccupied getshootatpos();
+		self.a.lastenemytime = gettime();
+		return self.a.lastenemypos;
 	}
 
-	if(isdefined(self.var_1491.lastenemytime) && isdefined(self.var_1491.lastenemypos) && self.var_1491.lastenemytime + 3000 < gettime()) {
-		return self.var_1491.lastenemypos;
+	if(isdefined(self.a.lastenemytime) && isdefined(self.a.lastenemypos) && self.a.lastenemytime + 3000 < gettime()) {
+		return self.a.lastenemypos;
 	}
 
 	var_00 = self getshootatpos();
@@ -478,17 +478,17 @@ gettruenodeangles(param_00) {
 }
 
 getyawtoorigin(param_00) {
-	if(isdefined(self.type) && scripts\common\utility::isnode3d(self)) {
+	if(isdefined(self.type) && scripts\engine\utility::isnode3d(self)) {
 		var_01 = gettruenodeangles(self);
 		var_02 = anglestoforward(var_01);
 		var_03 = rotatepointaroundvector(var_02,param_00 - self.origin,var_01[2] * -1);
 		var_03 = var_03 + self.origin;
-		var_04 = scripts\common\utility::getyaw(var_03) - var_01[1];
+		var_04 = scripts\engine\utility::getyaw(var_03) - var_01[1];
 		var_04 = angleclamp180(var_04);
 		return var_04;
 	}
 
-	var_04 = scripts\common\utility::getyaw(var_04) - self.angles[1];
+	var_04 = scripts\engine\utility::getyaw(var_04) - self.angles[1];
 	var_04 = angleclamp180(var_04);
 	return var_04;
 }
@@ -499,11 +499,11 @@ canseepointfromexposedatcorner(param_00,param_01) {
 		return 0;
 	}
 
-	if(scripts\common\utility::isnodecoverleft(param_01) && var_02 < -14) {
+	if(scripts\engine\utility::isnodecoverleft(param_01) && var_02 < -14) {
 		return 0;
 	}
 
-	if(scripts\common\utility::isnodecoverright(param_01) && var_02 > 12) {
+	if(scripts\engine\utility::isnodecoverright(param_01) && var_02 > 12) {
 		return 0;
 	}
 
@@ -598,7 +598,7 @@ calculatenodeoffset(param_00,param_01,param_02,param_03) {
 }
 
 canseepointfromexposedatnode(param_00,param_01) {
-	if(scripts\common\utility::isnodecoverleft(param_01) || scripts\common\utility::isnodecoverright(param_01)) {
+	if(scripts\engine\utility::isnodecoverleft(param_01) || scripts\engine\utility::isnodecoverright(param_01)) {
 		if(!canseepointfromexposedatcorner(param_00,param_01)) {
 			return 0;
 		}
@@ -611,7 +611,7 @@ canseepointfromexposedatnode(param_00,param_01) {
 	}
 
 	if(!sighttracepassed(var_03,param_00,0,undefined)) {
-		if(scripts\common\utility::isnodecovercrouch(param_01)) {
+		if(scripts\engine\utility::isnodecovercrouch(param_01)) {
 			var_03 = (0,0,64) + param_01.origin;
 			return sighttracepassed(var_03,param_00,0,undefined);
 		}
@@ -639,10 +639,10 @@ canseeenemyfromexposed() {
 	if(!isdefined(self.target_getindexoftarget)) {
 		var_01 = self getpersstat(self.isnodeoccupied);
 	}
-	else if(scripts\common\utility::actor_is3d() && scripts\common\utility::isnode3d(self.target_getindexoftarget)) {
+	else if(scripts\engine\utility::actor_is3d() && scripts\engine\utility::isnode3d(self.target_getindexoftarget)) {
 		var_01 = canseepointfromexposedatnode(var_01,self.target_getindexoftarget);
 		if(!var_01) {
-			var_00 = self.var_10C.origin + var_00 \ 2;
+			var_00 = self.isnodeoccupied.origin + var_00 / 2;
 			var_01 = canseepointfromexposedatnode(var_00,self.target_getindexoftarget);
 		}
 	}
@@ -666,8 +666,8 @@ checkpitchvisibility(param_00,param_01,param_02) {
 	var_03 = self.var_368 - level.var_1A44;
 	var_04 = self.isbot + level.var_1A44;
 	var_05 = param_01 - param_00;
-	if(scripts\common\utility::actor_is3d()) {
-		if(isdefined(param_02) && scripts\common\utility::isnode3d(param_02)) {
+	if(scripts\engine\utility::actor_is3d()) {
+		if(isdefined(param_02) && scripts\engine\utility::isnode3d(param_02)) {
 			var_06 = param_02.angles;
 		}
 		else
@@ -684,7 +684,7 @@ checkpitchvisibility(param_00,param_01,param_02) {
 	}
 
 	if(var_07 > var_04) {
-		if(isdefined(param_02) && !scripts\common\utility::isnodecovercrouch(param_02)) {
+		if(isdefined(param_02) && !scripts\engine\utility::isnodecovercrouch(param_02)) {
 			return 0;
 		}
 
@@ -697,7 +697,7 @@ checkpitchvisibility(param_00,param_01,param_02) {
 }
 
 dontgiveuponsuppressionyet() {
-	self.var_1491.shouldresetgiveuponsuppressiontimer = 1;
+	self.a.shouldresetgiveuponsuppressiontimer = 1;
 }
 
 cansuppressenemy() {
@@ -719,13 +719,13 @@ cansuppressenemy() {
 }
 
 updategiveuponsuppressiontimer() {
-	if(!isdefined(self.var_1491.shouldresetgiveuponsuppressiontimer)) {
-		self.var_1491.shouldresetgiveuponsuppressiontimer = 1;
+	if(!isdefined(self.a.shouldresetgiveuponsuppressiontimer)) {
+		self.a.shouldresetgiveuponsuppressiontimer = 1;
 	}
 
-	if(self.var_1491.shouldresetgiveuponsuppressiontimer) {
-		self.var_1491.giveuponsuppressiontime = gettime() + randomintrange(15000,30000);
-		self.var_1491.shouldresetgiveuponsuppressiontimer = 0;
+	if(self.a.shouldresetgiveuponsuppressiontimer) {
+		self.a.giveuponsuppressiontime = gettime() + randomintrange(15000,30000);
+		self.a.shouldresetgiveuponsuppressiontimer = 0;
 	}
 }
 
@@ -739,7 +739,7 @@ hassuppressableenemy() {
 	}
 
 	updategiveuponsuppressiontimer();
-	if(gettime() > self.var_1491.giveuponsuppressiontime) {
+	if(gettime() > self.a.giveuponsuppressiontime) {
 		return 0;
 	}
 
@@ -756,9 +756,9 @@ aisuppressai() {
 	}
 
 	var_00 = undefined;
-	if(isdefined(self.var_10C.target_getindexoftarget)) {
-		var_01 = getnodeoffset(self.var_10C.target_getindexoftarget);
-		var_00 = self.var_10C.var_205.origin + var_01;
+	if(isdefined(self.isnodeoccupied.target_getindexoftarget)) {
+		var_01 = getnodeoffset(self.isnodeoccupied.target_getindexoftarget);
+		var_00 = self.isnodeoccupied.target_getindexoftarget.origin + var_01;
 	}
 	else
 	{
@@ -784,7 +784,7 @@ canseeandshootpoint(param_00) {
 		return 0;
 	}
 
-	if(self.var_1491.weaponpos["right"] == "none") {
+	if(self.a.weaponpos["right"] == "none") {
 		return 0;
 	}
 
@@ -801,7 +801,7 @@ needrecalculatesuppressspot() {
 }
 
 findgoodsuppressspot(param_00) {
-	if(isdefined(self.isnodeoccupied) && distancesquared(self.origin,self.var_10C.origin) > squared(self.var_10C.setturretnode)) {
+	if(isdefined(self.isnodeoccupied) && distancesquared(self.origin,self.isnodeoccupied.origin) > squared(self.isnodeoccupied.setturretnode)) {
 		self.goodshootpos = undefined;
 		return 0;
 	}
@@ -821,7 +821,7 @@ findgoodsuppressspot(param_00) {
 		var_05 = vectornormalize(self.setignoremegroup - param_00);
 		var_04 = var_04 - var_05 * vectordot(var_04,var_05);
 		var_06 = 20;
-		var_07 = int(length(var_04) \ var_06 + 0.5);
+		var_07 = int(length(var_04) / var_06 + 0.5);
 		if(var_07 < 1) {
 			var_07 = 1;
 		}
@@ -831,7 +831,7 @@ findgoodsuppressspot(param_00) {
 		}
 
 		var_08 = self.setignoremegroup - var_03;
-		var_08 = (var_08[0] \ var_07,var_08[1] \ var_07,var_08[2] \ var_07);
+		var_08 = (var_08[0] / var_07,var_08[1] / var_07,var_08[2] / var_07);
 		var_07++;
 		var_09 = var_03;
 		self.goodshootpos = undefined;
@@ -875,14 +875,14 @@ cansuppressenemyfromexposed() {
 	}
 
 	if(isdefined(self.target_getindexoftarget)) {
-		if(scripts\common\utility::isnodecoverleft(self.target_getindexoftarget) || scripts\common\utility::isnodecoverright(self.target_getindexoftarget)) {
+		if(scripts\engine\utility::isnodecoverleft(self.target_getindexoftarget) || scripts\engine\utility::isnodecoverright(self.target_getindexoftarget)) {
 			if(!canseepointfromexposedatcorner(getenemyeyepos(),self.target_getindexoftarget)) {
 				return 0;
 			}
 		}
 
 		var_00 = getnodeoffset(self.target_getindexoftarget);
-		var_01 = self.var_205.origin + var_00;
+		var_01 = self.target_getindexoftarget.origin + var_00;
 	}
 	else
 	{
@@ -935,12 +935,12 @@ enemyishiding() {
 		return 0;
 	}
 
-	if(self.isnodeoccupied scripts\common\utility::isflashed()) {
+	if(self.isnodeoccupied scripts\engine\utility::isflashed()) {
 		return 1;
 	}
 
 	if(isplayer(self.isnodeoccupied)) {
-		if(isdefined(self.var_10C.health) && self.var_10C.health < self.var_10C.maxhealth) {
+		if(isdefined(self.isnodeoccupied.health) && self.isnodeoccupied.health < self.isnodeoccupied.maxhealth) {
 			return 1;
 		}
 	}
@@ -948,7 +948,7 @@ enemyishiding() {
 		return 1;
 	}
 
-	if(isdefined(self.var_10C.isreloading) && self.var_10C.isreloading) {
+	if(isdefined(self.isnodeoccupied.isreloading) && self.isnodeoccupied.isreloading) {
 		return 1;
 	}
 

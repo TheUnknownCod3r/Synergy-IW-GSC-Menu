@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\3487.gsc
+ * Script: 3487.gsc
 ***************************************/
 
 init() {
@@ -33,26 +33,26 @@ init() {
   level.heli_angle_offset = 90;
   level.func_8D56 = 0;
   level func_D80F();
-  level.chopper_fx["damage"]["light_smoke"] = loadfx("vfx/core/smktrail/smoke_trail_white_heli_emitter");
-  level.chopper_fx["damage"]["heavy_smoke"] = loadfx("vfx/core/mp/killstreaks/vfx_helo_damage.vfx");
-  level.chopper_fx["damage"]["on_fire"] = loadfx("vfx/core/expl/fire_smoke_trail_l_emitter");
-  level.chopper_fx["light"]["left"] = loadfx("vfx/iw7/_requests/mp/vfx_debug_warning.vfx");
-  level.chopper_fx["light"]["right"] = loadfx("vfx/iw7/_requests/mp/vfx_debug_warning.vfx");
-  level.chopper_fx["light"]["belly"] = loadfx("vfx/iw7/_requests/mp/vfx_debug_warning.vfx");
-  level.chopper_fx["light"]["tail"] = loadfx("vfx/iw7/_requests/mp/vfx_debug_warning.vfx");
-  level.chopper_fx["explode"]["medium"] = loadfx("vfx/core/expl/aerial_explosion");
-  level.chopper_fx["explode"]["large"] = loadfx("vfx/core/expl/helicopter_explosion_secondary_small");
-  level.chopper_fx["smoke"]["trail"] = loadfx("vfx/core/smktrail/smoke_trail_white_heli");
+  level.chopper_fx["damage"]["light_smoke"] = loadfx("vfx\core\smktrail\smoke_trail_white_heli_emitter");
+  level.chopper_fx["damage"]["heavy_smoke"] = loadfx("vfx\core\mp\killstreaks\vfx_helo_damage.vfx");
+  level.chopper_fx["damage"]["on_fire"] = loadfx("vfx\core\expl\fire_smoke_trail_l_emitter");
+  level.chopper_fx["light"]["left"] = loadfx("vfx\iw7\_requests\mp\vfx_debug_warning.vfx");
+  level.chopper_fx["light"]["right"] = loadfx("vfx\iw7\_requests\mp\vfx_debug_warning.vfx");
+  level.chopper_fx["light"]["belly"] = loadfx("vfx\iw7\_requests\mp\vfx_debug_warning.vfx");
+  level.chopper_fx["light"]["tail"] = loadfx("vfx\iw7\_requests\mp\vfx_debug_warning.vfx");
+  level.chopper_fx["explode"]["medium"] = loadfx("vfx\core\expl\aerial_explosion");
+  level.chopper_fx["explode"]["large"] = loadfx("vfx\core\expl\helicopter_explosion_secondary_small");
+  level.chopper_fx["smoke"]["trail"] = loadfx("vfx\core\smktrail\smoke_trail_white_heli");
   level.chopper_fx["explode"]["death"] = [];
-  level.chopper_fx["explode"]["death"]["apache"] = loadfx("vfx/iw7/_requests/mp/vfx_debug_warning.vfx");
-  level.chopper_fx["explode"]["air_death"]["apache"] = loadfx("vfx/iw7/_requests/mp/vfx_debug_warning.vfx");
+  level.chopper_fx["explode"]["death"]["apache"] = loadfx("vfx\iw7\_requests\mp\vfx_debug_warning.vfx");
+  level.chopper_fx["explode"]["air_death"]["apache"] = loadfx("vfx\iw7\_requests\mp\vfx_debug_warning.vfx");
   level.lightfxfunc["apache"] = ::defaultlightfx;
   level.lightfxfunc["cobra"] = ::defaultlightfx;
-  level.chopper_fx["explode"]["death"]["littlebird"] = loadfx("vfx/iw7/_requests/mp/vfx_debug_warning.vfx");
-  level.chopper_fx["explode"]["air_death"]["littlebird"] = loadfx("vfx/iw7/_requests/mp/vfx_debug_warning.vfx");
+  level.chopper_fx["explode"]["death"]["littlebird"] = loadfx("vfx\iw7\_requests\mp\vfx_debug_warning.vfx");
+  level.chopper_fx["explode"]["air_death"]["littlebird"] = loadfx("vfx\iw7\_requests\mp\vfx_debug_warning.vfx");
   level.lightfxfunc["littlebird"] = ::defaultlightfx;
-  level._effect["vehicle_flares"] = loadfx("vfx/iw7/core/mp/killstreaks/vfx_warden_em_flares.vfx");
-  level.chopper_fx["fire"]["trail"]["medium"] = loadfx("vfx/core/expl/fire_smoke_trail_l_emitter");
+  level._effect["vehicle_flares"] = loadfx("vfx\iw7\core\mp\killstreaks\vfx_warden_em_flares.vfx");
+  level.chopper_fx["fire"]["trail"]["medium"] = loadfx("vfx\core\expl\fire_smoke_trail_l_emitter");
   scripts\mp\killstreaks\killstreaks::registerkillstreak("helicopter", ::usehelicopter);
   level.func_8DB6["tracking"][0] = "ac130_fco_moreenemy";
   level.func_8DB6["tracking"][1] = "ac130_fco_getthatguy";
@@ -142,7 +142,7 @@ tryusehelicopter(var_00, var_01) {
   var_06 = undefined;
 
   if (!self hasweapon(scripts\engine\utility::getlastweapon()))
-  var_06 = scripts/mp/killstreaks/utility::getfirstprimaryweapon();
+  var_06 = scripts\mp\killstreaks\utility::getfirstprimaryweapon();
   else
   var_06 = scripts\engine\utility::getlastweapon();
 
@@ -310,7 +310,7 @@ func_8D9B(var_00, var_01, var_02, var_03, var_04) {
   var_9.empgrenaded = 0;
 
   if (var_04 == "flares" || var_04 == "minigun")
-  var_09 thread scripts/mp/killstreaks/flares::flares_monitor(1);
+  var_09 thread scripts\mp\killstreaks\flares::flares_monitor(1);
 
   var_09 thread heli_leave_on_disconnect(var_01);
   var_09 thread heli_leave_on_changeteams(var_01);
@@ -531,7 +531,7 @@ modifydamage(var_00, var_01, var_02, var_03, var_04) {
   var_08 = 2;
   }
 
-  var_05 = scripts/mp/killstreaks/utility::getmodifiedantikillstreakdamage(var_00, var_01, var_02, var_05, self.maxhealth, var_06, var_07, var_08);
+  var_05 = scripts\mp\killstreaks\utility::getmodifiedantikillstreakdamage(var_00, var_01, var_02, var_05, self.maxhealth, var_06, var_07, var_08);
   thread addrecentdamage(var_05);
   self notify("heli_damage_fx");
 
@@ -547,7 +547,7 @@ handledeathdamage(var_00, var_01, var_02, var_03) {
   var_05 = "";
 
   if (isdefined(self.streakinfo))
-  var_05 = scripts/mp/killstreak_loot::getrarityforlootitem(self.streakinfo.variantid);
+  var_05 = scripts\mp\killstreak_loot::getrarityforlootitem(self.streakinfo.variantid);
 
   var_06 = var_4.callout;
 

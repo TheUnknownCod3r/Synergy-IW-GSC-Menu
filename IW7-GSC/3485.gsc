@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\3485.gsc
+ * Script: 3485.gsc
 ***************************************/
 
 init() {
@@ -25,7 +25,7 @@ init() {
   var_0.func_5703 = 350;
   var_0.func_5FEF = 200;
   var_0.func_5FEA = 120;
-  var_0.func_5FF4 = loadfx("vfx/core/smktrail/poisonous_gas_linger_medium_thick_killer_instant");
+  var_0.func_5FF4 = loadfx("vfx\core\smktrail\poisonous_gas_linger_medium_thick_killer_instant");
   var_0.func_5FEE = 0.25;
   var_0.func_5FED = 0.5;
   var_0.func_5FEC = 13;

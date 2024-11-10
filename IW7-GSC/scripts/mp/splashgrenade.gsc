@@ -1,11 +1,11 @@
-/************************************************
+/****************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\splashgrenade.gsc
-************************************************/
+ * Script: scripts\mp\splashgrenade.gsc
+****************************************/
 
 splashgrenadeinit() {
-	level._effect["base_plasma_smoke"] = loadfx("vfx/iw7/_requests/mp/vfx_plasma_smoke");
+	level._effect["base_plasma_smoke"] = loadfx("vfx\iw7\_requests\mp\vfx_plasma_smoke");
 	scripts\mp\powerloot::func_DF06("power_splashGrenade",["passive_smoke","passive_increased_duration","passive_increased_spread","passive_increased_radius","passive_increased_entities"]);
 }
 
@@ -95,7 +95,7 @@ setinteractwithethereal(param_00,param_01,param_02,param_03) {
 			continue;
 		}
 
-		var_0F = function_0287(param_00,var_0D.origin,var_0B,undefined,0,"physicsquery_closest");
+		var_0F = physics_raycast(param_00,var_0D.origin,var_0B,undefined,0,"physicsquery_closest");
 		if(!isdefined(var_0F) || var_0F.size > 0) {
 			continue;
 		}

@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2647.gsc
+ * Script: 2647.gsc
 ***************************************/
 
 init() {
@@ -34,12 +34,12 @@ showchallengesplash(var_00, var_01) {
   if (isdefined(var_01))
   var_02 = var_01;
   else
-  var_02 = scripts/cp/cp_hud_util::mt_getstate(var_00) - 1;
+  var_02 = scripts\cp\cp_hud_util::mt_getstate(var_00) - 1;
 
   var_03 = level.meritinfo[var_00]["displayParam"];
 
   if (!isdefined(var_03)) {
-  var_03 = scripts/cp/cp_hud_util::mt_gettarget(var_00, var_02);
+  var_03 = scripts\cp\cp_hud_util::mt_gettarget(var_00, var_02);
 
   if (var_03 == 0)
   var_03 = 1;
@@ -164,15 +164,15 @@ lowermessagethink() {
   var_03 = var_03 * 1.5;
   }
 
-  self.lowermessage = scripts/cp/utility::createfontstring(var_00, var_02);
+  self.lowermessage = scripts\cp\utility::createfontstring(var_00, var_02);
   self.lowermessage give_zap_perk("");
   self.lowermessage.archived = 0;
   self.lowermessage.sort = 10;
   self.lowermessage.showinkillcam = 0;
-  self.lowermessage scripts/cp/utility::setpoint("CENTER", level.lowertextyalign, 0, var_01);
-  self.lowertimer = scripts/cp/utility::createfontstring("default", var_03);
-  self.lowertimer scripts/cp/utility::setparent(self.lowermessage);
-  self.lowertimer scripts/cp/utility::setpoint("TOP", "BOTTOM", 0, 0);
+  self.lowermessage scripts\cp\utility::setpoint("CENTER", level.lowertextyalign, 0, var_01);
+  self.lowertimer = scripts\cp\utility::createfontstring("default", var_03);
+  self.lowertimer scripts\cp\utility::setparent(self.lowermessage);
+  self.lowertimer scripts\cp\utility::setpoint("TOP", "BOTTOM", 0, 0);
   self.lowertimer give_zap_perk("");
   self.lowertimer.archived = 0;
   self.lowertimer.sort = 10;
@@ -184,7 +184,7 @@ isdoingsplash() {
 }
 
 getsplashtablename() {
-  return "cp/zombies/zombie_splashtable.csv";
+  return "cp\zombies\zombie_splashtable.csv";
 }
 
 cleanuplocalplayersplashlist() {
@@ -218,7 +218,7 @@ splashshownthink() {
 onkillstreaksplashshown(var_00) {}
 
 showerrormessage(var_00, var_01) {
-  var_02 = tablelookuprownum("mp/errorMessages.csv", 0, var_00);
+  var_02 = tablelookuprownum("mp\errorMessages.csv", 0, var_00);
 
   if (isdefined(var_01))
   self setclientomnvar("ui_mp_error_message_param", var_01);
@@ -240,8 +240,8 @@ showerrormessagetoallplayers(var_00, var_01) {
 }
 
 showmiscmessage(var_00) {
-  var_01 = tablelookuprownum("mp/miscMessages.csv", 0, var_00);
-  var_02 = tablelookupbyrow("mp/miscMessages.csv", var_01, 3);
+  var_01 = tablelookuprownum("mp\miscMessages.csv", 0, var_00);
+  var_02 = tablelookupbyrow("mp\miscMessages.csv", var_01, 3);
 
   if (isdefined(var_02) && var_02 != "")
   self playlocalsound(var_02);
@@ -262,7 +262,7 @@ hintmessagedeaththink() {
   self waittill("death");
 
   if (isdefined(self.hintmessage))
-  self.hintmessage scripts/cp/utility::destroyelem();
+  self.hintmessage scripts\cp\utility::destroyelem();
   }
 }
 
@@ -279,8 +279,8 @@ check_for_more_players() {
   if (!isdefined(level.tutorial_interaction_1) || !isdefined(level.tutorial_interaction_2))
   return;
 
-  scripts/cp/cp_interaction::remove_from_current_interaction_list(level.tutorial_interaction_1);
-  scripts/cp/cp_interaction::remove_from_current_interaction_list(level.tutorial_interaction_2);
+  scripts\cp\cp_interaction::remove_from_current_interaction_list(level.tutorial_interaction_1);
+  scripts\cp\cp_interaction::remove_from_current_interaction_list(level.tutorial_interaction_2);
 }
 
 tutorial_interaction() {
@@ -301,7 +301,7 @@ tutorial_interaction() {
 }
 
 tutorial_lookup_func(var_00) {
-  if (!(scripts/cp/utility::isplayingsolo() || level.only_one_player))
+  if (!(scripts\cp\utility::isplayingsolo() || level.only_one_player))
   return;
 
   var_01 = level.players[0];

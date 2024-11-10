@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3614.gsc
-****************************/
+ * Script: 3614.gsc
+************************/
 
 func_5374() {
 	precacheitem("car_grenade");

@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\3441.gsc
+ * Script: 3441.gsc
 ***************************************/
 
 bot_fireteam_setup_callbacks() {}
@@ -384,8 +384,8 @@ fireteam_tdm_find_hunt_zone(var_00) {
   var_10 = distance2d(getzoneorigin(var_09), level.fireteam_hunt_leader[var_00].origin);
 
   if (var_10 > var_07) {
-    var_07 = var_10;
-    var_08 = var_09;
+  var_07 = var_10;
+  var_08 = var_09;
   }
   }
 
@@ -395,11 +395,11 @@ fireteam_tdm_find_hunt_zone(var_00) {
   if (isdefined(var_06)) {
   if (!isdefined(level.fireteam_hunt_target_zone[var_00]) || level.fireteam_hunt_target_zone[var_00] != var_06) {
   foreach (var_12 in level.players) {
-    if (isbot(var_12) && var_12.team == var_00) {
-    var_12 botclearscriptgoal();
-    var_12.fireteam_hunt_goalpos = undefined;
-    var_12 thread bot_fireteam_hunt_zone_find_node();
-    }
+  if (isbot(var_12) && var_12.team == var_00) {
+  var_12 botclearscriptgoal();
+  var_12.fireteam_hunt_goalpos = undefined;
+  var_12 thread bot_fireteam_hunt_zone_find_node();
+  }
   }
   }
 

@@ -1,14 +1,14 @@
-/*****************************************
+/*********************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\anim\init.gsc
-*****************************************/
+ * Script: scripts\anim\init.gsc
+*********************************/
 
 func_98E1(param_00) {
 	self.var_39B[param_00] = spawnstruct();
 	self.var_39B[param_00].weaponisauto = "none";
 	self.var_39B[param_00].var_8BDE = 1;
-	if(function_00E6(param_00) != "") {
+	if(getweaponclipmodel(param_00) != "") {
 		self.var_39B[param_00].var_13053 = 1;
 		return;
 	}
@@ -48,7 +48,7 @@ func_68BD() {
 
 func_FAFB() {
 	self endon("death");
-	scripts\common\utility::flag_wait("load_finished");
+	scripts\engine\utility::flag_wait("load_finished");
 	if(isdefined(level.var_13CC8) && isdefined(level.var_13CC8[self.unittype])) {
 		self [[level.var_13CC8[self.unittype]]]();
 		return;
@@ -59,11 +59,11 @@ func_FAFB() {
 
 main() {
 	self.a = spawnstruct();
-	self.var_1491.laseron = 0;
+	self.a.laseron = 0;
 	self.primaryweapon = self.var_394;
 	func_6DE9();
-	if(!scripts\common\utility::flag_exist("load_finished")) {
-		scripts\common\utility::flag_init("load_finished");
+	if(!scripts\engine\utility::flag_exist("load_finished")) {
+		scripts\engine\utility::flag_init("load_finished");
 	}
 
 	if(self.primaryweapon == "") {
@@ -79,40 +79,40 @@ main() {
 	}
 
 	self.var_E6E6 = %root;
-	self.var_1491.var_2C13 = %body;
+	self.a.var_2C13 = %body;
 	thread begingrenadetracking();
-	self.var_1491.pose = "stand";
-	self.var_1491.var_85E2 = "stand";
-	self.var_1491.movement = "stop";
-	self.var_1491.state = "stop";
-	self.var_1491.var_10930 = "none";
-	self.var_1491.var_870D = "none";
-	self.var_1491.var_D8BD = -1;
+	self.a.pose = "stand";
+	self.a.var_85E2 = "stand";
+	self.a.movement = "stop";
+	self.a.state = "stop";
+	self.a.var_10930 = "none";
+	self.a.var_870D = "none";
+	self.a.var_D8BD = -1;
 	self.iscinematicplaying = 1;
 	self.var_B781 = 750;
 	thread func_FAFB();
-	self.var_1491.needstorechamber = 0;
-	self.var_1491.combatendtime = gettime();
-	self.var_1491.lastenemytime = gettime();
-	self.var_1491.var_112CB = 0;
-	self.var_1491.disablelongdeath = !self gettargetchargepos();
-	self.var_1491.var_AFFF = 0;
-	self.var_1491.var_C888 = 0;
-	self.var_1491.var_A9ED = 0;
-	self.var_1491.nextgrenadetrytime = 0;
-	self.var_1491.reacttobulletchance = 0.8;
-	self.var_1491.var_D707 = undefined;
-	self.var_1491.var_10B53 = "stand";
+	self.a.needstorechamber = 0;
+	self.a.combatendtime = gettime();
+	self.a.lastenemytime = gettime();
+	self.a.var_112CB = 0;
+	self.a.disablelongdeath = !self gettargetchargepos();
+	self.a.var_AFFF = 0;
+	self.a.var_C888 = 0;
+	self.a.var_A9ED = 0;
+	self.a.nextgrenadetrytime = 0;
+	self.a.reacttobulletchance = 0.8;
+	self.a.var_D707 = undefined;
+	self.a.var_10B53 = "stand";
 	self.var_3EF3 = ::scripts\anim\utility::func_3EF2;
 	self.var_117C = 0;
 	self.var_1300 = 0;
 	thread func_6568();
 	self.var_2894 = 1;
-	self.var_1491.var_B8D6 = 0;
-	self.var_1491.nodeath = 0;
-	self.var_1491.var_B8D6 = 0;
-	self.var_1491.var_B8D8 = 0;
-	self.var_1491.var_5605 = 0;
+	self.a.var_B8D6 = 0;
+	self.a.nodeath = 0;
+	self.a.var_B8D6 = 0;
+	self.a.var_B8D8 = 0;
+	self.a.var_5605 = 0;
 	self.var_154E = 1;
 	self.var_3D4B = 0;
 	self.var_101E7 = 0;
@@ -120,7 +120,7 @@ main() {
 	self.var_BE8B = 1;
 	self.var_504E = 55;
 	scripts\sp\_utility::func_F6FE("asm");
-	self.var_1491.var_BFAF = 0;
+	self.a.var_BFAF = 0;
 	if(!isdefined(self.script_forcegrenade)) {
 		self.script_forcegrenade = 0;
 	}
@@ -159,7 +159,7 @@ main() {
 	self.exception["corner_normal"] = 1;
 	var_00 = getarraykeys(self.exception);
 	for(var_01 = 0;var_01 < var_00.size;var_01++) {
-		scripts\common\utility::clear_exception(var_00[var_01]);
+		scripts\engine\utility::clear_exception(var_00[var_01]);
 	}
 
 	self.var_DD23 = 0;
@@ -190,7 +190,7 @@ func_100B4(param_00,param_01) {
 		return 1;
 	}
 
-	var_02 = int(gettime() \ 50) % 2;
+	var_02 = int(gettime() / 50) % 2;
 	return param_01 == var_02;
 }
 
@@ -223,9 +223,9 @@ func_19F7() {
 			scripts\asm\asm::func_2314();
 		}
 
-		if(isdefined(self.var_2303.var_10E23)) {
-			scripts\asm\asm::asm_clearevents(self.var_2303.var_10E23);
-			self.var_2303.var_10E23 = undefined;
+		if(isdefined(self.asm.var_10E23)) {
+			scripts\asm\asm::asm_clearevents(self.asm.var_10E23);
+			self.asm.var_10E23 = undefined;
 		}
 
 		scripts\asm\asm::func_2389();
@@ -541,7 +541,7 @@ func_1B08() {
 	var_00 = 0;
 	var_01 = 3;
 	for(;;) {
-		var_02 = function_0072();
+		var_02 = getaiarray();
 		if(var_02.size == 0) {
 			wait(0.05);
 			var_00 = 0;
@@ -565,8 +565,8 @@ func_1B08() {
 
 func_F7B3() {
 	waittillframeend;
-	if(isdefined(self.var_86A9.var_D397)) {
-		var_00 = int(self.var_86A9.var_D397 * 0.7);
+	if(isdefined(self.gs.var_D397)) {
+		var_00 = int(self.gs.var_D397 * 0.7);
 		if(var_00 < 1) {
 			var_00 = 1;
 		}
@@ -576,9 +576,9 @@ func_F7B3() {
 		self.grenadetimers["seeker"] = randomintrange(0,var_00);
 	}
 
-	if(isdefined(self.var_86A9.var_D382)) {
-		var_00 = int(self.var_86A9.var_D382);
-		var_01 = int(var_00 \ 2);
+	if(isdefined(self.gs.var_D382)) {
+		var_00 = int(self.gs.var_D382);
+		var_01 = int(var_00 / 2);
 		if(var_00 <= var_01) {
 			var_00 = var_01 + 1;
 		}
@@ -595,7 +595,7 @@ begingrenadetracking() {
 	self endon("death");
 	for(;;) {
 		self waittill("grenade_fire",var_00,var_01);
-		if(isdefined(var_00) && scripts\common\utility::istrue(var_00._meth_8589)) {
+		if(isdefined(var_00) && scripts\engine\utility::istrue(var_00._meth_8589)) {
 			continue;
 		}
 
@@ -649,8 +649,8 @@ ondeath_clearscriptedanim() {
 
 	self waittill("death");
 	if(!isdefined(self)) {
-		if(isdefined(self.var_1491.usingworldspacehitmarkers)) {
-			self.var_1491.usingworldspacehitmarkers delete();
+		if(isdefined(self.a.usingworldspacehitmarkers)) {
+			self.a.usingworldspacehitmarkers delete();
 		}
 	}
 }
@@ -719,7 +719,7 @@ func_6DEA() {
 	anim.var_2759 = [];
 	anim.var_2755 = 0;
 	if(!isdefined(level.var_3D4B)) {
-		if(scripts\common\utility::player_is_in_jackal()) {
+		if(scripts\engine\utility::player_is_in_jackal()) {
 			anim.player = level.var_D127;
 		}
 		else
@@ -743,23 +743,23 @@ func_5031() {
 	func_98E1(self.secondaryweapon);
 	func_98E1(self.var_101B4);
 	self _meth_82D0();
-	self.var_1491.weaponpos["left"] = "none";
-	self.var_1491.weaponpos["right"] = "none";
-	self.var_1491.weaponpos["chest"] = "none";
-	self.var_1491.weaponpos["back"] = "none";
-	self.var_1491.weaponposdropping["left"] = "none";
-	self.var_1491.weaponposdropping["right"] = "none";
-	self.var_1491.weaponposdropping["chest"] = "none";
-	self.var_1491.weaponposdropping["back"] = "none";
+	self.a.weaponpos["left"] = "none";
+	self.a.weaponpos["right"] = "none";
+	self.a.weaponpos["chest"] = "none";
+	self.a.weaponpos["back"] = "none";
+	self.a.weaponposdropping["left"] = "none";
+	self.a.weaponposdropping["right"] = "none";
+	self.a.weaponposdropping["chest"] = "none";
+	self.a.weaponposdropping["back"] = "none";
 	self.lastweapon = self.var_394;
 	var_00 = scripts\anim\utility_common::usingrocketlauncher();
-	self.var_1491.var_BEF9 = var_00;
+	self.a.var_BEF9 = var_00;
 	if(var_00) {
 		thread scripts\anim\shared::func_E775();
 	}
 
-	self.var_1491.rockets = 3;
-	self.var_1491.rocketvisible = 1;
+	self.a.rockets = 3;
+	self.a.rocketvisible = 1;
 	scripts\anim\shared::placeweaponon(self.primaryweapon,"right");
 	if(scripts\anim\utility_common::isshotgun(self.secondaryweapon)) {
 		scripts\anim\shared::placeweaponon(self.secondaryweapon,"back");

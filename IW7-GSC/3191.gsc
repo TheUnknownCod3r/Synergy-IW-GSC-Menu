@@ -1,11 +1,11 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3191.gsc
-****************************/
+ * Script: 3191.gsc
+************************/
 
 func_13F64() {
-	if(scripts/asm/asm_bb::bb_movetyperequested("fly")) {
+	if(scripts\asm\asm_bb::bb_movetyperequested("fly")) {
 		return 1;
 	}
 
@@ -13,7 +13,7 @@ func_13F64() {
 }
 
 func_13F66() {
-	if(scripts/asm/asm_bb::bb_meleerequested()) {
+	if(scripts\asm\asm_bb::bb_meleerequested()) {
 		return 1;
 	}
 
@@ -21,7 +21,7 @@ func_13F66() {
 }
 
 func_13F67() {
-	if(scripts/asm/asm_bb::bb_movetyperequested("entangled")) {
+	if(scripts\asm\asm_bb::bb_movetyperequested("entangled")) {
 		return 1;
 	}
 
@@ -29,7 +29,7 @@ func_13F67() {
 }
 
 func_13F68() {
-	if(scripts/aitypes/zombie_ghost/behaviors::getghostnavmode() == "launched") {
+	if(scripts\aitypes\zombie_ghost\behaviors::getghostnavmode() == "launched") {
 		return 1;
 	}
 
@@ -41,7 +41,7 @@ func_13F65() {
 		return 0;
 	}
 
-	if(scripts/aitypes/zombie_ghost/behaviors::getghostnavmode() == "entangled") {
+	if(scripts\aitypes\zombie_ghost\behaviors::getghostnavmode() == "entangled") {
 		return 0;
 	}
 
@@ -78,7 +78,7 @@ func_13F63(param_00,param_01,param_02,param_03) {
 			return;
 		}
 
-		if(scripts/mp/agents/zombie/zombie_util::shouldignoreent(self.zombie_ghost_target)) {
+		if(scripts\mp\agents\zombie\zombie_util::shouldignoreent(self.zombie_ghost_target)) {
 			return;
 		}
 
@@ -105,9 +105,9 @@ _meth_826A(param_00,param_01,param_02,param_03,param_04) {
 	}
 
 	self.currentanimstate = param_01;
-	var_05 = scripts/asm/asm_mp::asm_getanim(param_00,param_01);
+	var_05 = scripts\asm\asm_mp::asm_getanim(param_00,param_01);
 	self.currentanimindex = var_05;
-	var_06 = scripts/asm/asm::func_2341(param_00,param_01);
+	var_06 = scripts\asm\asm::func_2341(param_00,param_01);
 	for(;;) {
 		self setanimstate(param_01,var_05,param_03);
 		scripts\mp\agents\_scriptedagents::func_1384C(param_01,"end",param_01,var_05,var_06);
@@ -171,8 +171,8 @@ func_1299A(param_00) {
 
 func_CECF(param_00,param_01,param_02,param_03) {
 	self endon(param_01 + "_finished");
-	var_04 = scripts/asm/asm_mp::asm_getanim(param_00,param_01);
-	var_05 = scripts/asm/asm::func_2341(param_00,param_01);
+	var_04 = scripts\asm\asm_mp::asm_getanim(param_00,param_01);
+	var_05 = scripts\asm\asm::func_2341(param_00,param_01);
 	self.currentanimstate = param_01;
 	self.currentanimindex = var_04;
 	scripts\mp\agents\_scriptedagents::func_CED2(param_01,var_04,self.animplaybackrate,param_01,"end",var_05);

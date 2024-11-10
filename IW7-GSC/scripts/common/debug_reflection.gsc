@@ -1,8 +1,8 @@
-/*******************************************************
+/***********************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\common\debug_reflection.gsc
-*******************************************************/
+ * Script: scripts\common\debug_reflection.gsc
+***********************************************/
 
 func_9707(param_00) {
 	precachemodel("test_sphere_silver");

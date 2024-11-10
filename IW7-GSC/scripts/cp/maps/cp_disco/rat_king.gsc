@@ -1,8 +1,8 @@
-/*********************************************************
+/*************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\maps\cp_disco\rat_king.gsc
-*********************************************************/
+ * Script: scripts\cp\maps\cp_disco\rat_king.gsc
+*************************************************/
 
 rat_king_init() {
 	var_00 = scripts\engine\utility::getstructarray("rat_king_spawner","targetname");
@@ -96,32 +96,32 @@ rkaudiomonitor() {
 		var_00 = randomintrange(4,10);
 		switch(var_01) {
 			case "spawn":
-				level thread scripts/cp/zombies/zombies_vo::play_zombie_vo(self,"spawn",0);
+				level thread scripts\cp\zombies\zombies_vo::play_zombie_vo(self,"spawn",0);
 				break;
 	
 			case "summon":
-				level thread scripts/cp/zombies/zombies_vo::play_zombie_vo(self,"summon",0);
+				level thread scripts\cp\zombies\zombies_vo::play_zombie_vo(self,"summon",0);
 				break;
 	
 			case "pain":
-				level thread scripts/cp/zombies/zombies_vo::play_zombie_vo(self,"pain",0);
+				level thread scripts\cp\zombies\zombies_vo::play_zombie_vo(self,"pain",0);
 				break;
 	
 			case "under":
-				level thread scripts/cp/zombies/zombies_vo::play_zombie_vo(self,"melee",0);
+				level thread scripts\cp\zombies\zombies_vo::play_zombie_vo(self,"melee",0);
 				break;
 	
 			case "shield_throw":
-				level thread scripts/cp/zombies/zombies_vo::play_zombie_vo(self,"shield_throw",0);
+				level thread scripts\cp\zombies\zombies_vo::play_zombie_vo(self,"shield_throw",0);
 				break;
 	
 			case "stomp":
-				level thread scripts/cp/zombies/zombies_vo::play_zombie_vo(self,"staff_stomp",0);
+				level thread scripts\cp\zombies\zombies_vo::play_zombie_vo(self,"staff_stomp",0);
 				break;
 	
 			case "timeout":
-				level thread scripts/cp/zombies/zombies_vo::play_zombie_vo(self,"staff_over",0);
-				level thread scripts/cp/zombies/zombies_vo::play_zombie_vo(self,"staff_under",0);
+				level thread scripts\cp\zombies\zombies_vo::play_zombie_vo(self,"staff_over",0);
+				level thread scripts\cp\zombies\zombies_vo::play_zombie_vo(self,"staff_under",0);
 				break;
 		}
 	}

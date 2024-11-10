@@ -1,25 +1,25 @@
-/*********************************************************
+/*************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\equipment\fear_grenade.gsc
-*********************************************************/
+ * Script: scripts\mp\equipment\fear_grenade.gsc
+*************************************************/
 
 init() {
 	level.var_6BBA = spawnstruct();
 	level.var_6BBA.var_451D = [];
-	level._effect["vfx_haywire_scrn"] = loadfx("vfx/iw7/_requests/mp/vfx_haywire_scrn.vfx");
-	level._effect["haywire_smoke_friendly"] = loadfx("vfx/old/_requests/mp_weapons/vfx_haywire_gas_friendly");
-	level._effect["haywire_smoke_enemy"] = loadfx("vfx/old/_requests/mp_weapons/vfx_haywire_gas_enemy");
-	level._effect["vfx_fear_grenade_explode_frag"] = loadfx("vfx/core/expl/grenadeexp_default");
-	level._effect["vfx_fear_grenade_explode_plasma"] = loadfx("vfx/iw7/_requests/mp/vfx_plasma_large_explosion_enemy");
-	level._effect["vfx_fear_grenade_explode_blackhole"] = loadfx("vfx/iw7/_requests/mp/vfx_blackhole_grenade_enemy");
-	level._effect["fear_mine_vanish"] = loadfx("vfx/core/mp/equipment/vfx_motionsensor_exp");
+	level._effect["vfx_haywire_scrn"] = loadfx("vfx\iw7\_requests\mp\vfx_haywire_scrn.vfx");
+	level._effect["haywire_smoke_friendly"] = loadfx("vfx\old\_requests\mp_weapons\vfx_haywire_gas_friendly");
+	level._effect["haywire_smoke_enemy"] = loadfx("vfx\old\_requests\mp_weapons\vfx_haywire_gas_enemy");
+	level._effect["vfx_fear_grenade_explode_frag"] = loadfx("vfx\core\expl\grenadeexp_default");
+	level._effect["vfx_fear_grenade_explode_plasma"] = loadfx("vfx\iw7\_requests\mp\vfx_plasma_large_explosion_enemy");
+	level._effect["vfx_fear_grenade_explode_blackhole"] = loadfx("vfx\iw7\_requests\mp\vfx_blackhole_grenade_enemy");
+	level._effect["fear_mine_vanish"] = loadfx("vfx\core\mp\equipment\vfx_motionsensor_exp");
 	func_49CF("projectile_m67fraggrenade","vfx_fear_grenade_explode_frag","grenade_explode_scr",undefined,2);
 	func_49CF("projectile_m67fraggrenade","vfx_fear_grenade_explode_plasma","grenade_explode_scr",undefined,2);
 	func_49CF("projectile_m67fraggrenade","vfx_fear_grenade_explode_blackhole","blackhole_grenade_explode_default",75,0.5);
 	level.var_6BBA._meth_8283 = ["mp_fullbody_synaptic_1"];
 	level.var_6BBA.var_3251 = ["drone_ak12_fire_npc"];
-	scripts\mp\_powerloot::func_DF06("power_fearGrenade",["passive_increased_duration","passive_increased_damage","passive_increased_radius"]);
+	scripts\mp\powerloot::func_DF06("power_fearGrenade",["passive_increased_duration","passive_increased_damage","passive_increased_radius"]);
 }
 
 func_49CF(param_00,param_01,param_02,param_03,param_04) {
@@ -48,10 +48,10 @@ func_6BBB() {
 		self.var_76CF moveto(var_01 + (0,0,72),0.5);
 	}
 
-	var_02 = var_00 scripts\mp\_powerloot::func_7FC4("power_fearGrenade",160);
+	var_02 = var_00 scripts\mp\powerloot::func_7FC4("power_fearGrenade",160);
 	var_03 = spawn("trigger_radius",var_01,0,var_02,160);
 	var_03.triggerportableradarping = var_00;
-	var_04 = scripts\mp\_utility::func_108CB(var_00,var_01,"haywire_smoke_friendly","haywire_smoke_enemy",0);
+	var_04 = scripts\mp\utility::func_108CB(var_00,var_01,"haywire_smoke_friendly","haywire_smoke_enemy",0);
 	var_00 thread func_13A3E(var_03,self.var_76CF);
 	wait(5);
 	foreach(var_06 in var_04) {
@@ -67,7 +67,7 @@ func_13A3E(param_00,param_01) {
 	self endon("disconnect");
 	for(;;) {
 		param_00 waittill("trigger",var_02);
-		if(!scripts/mp/equipment/phase_shift::areentitiesinphase(param_00,var_02)) {
+		if(!scripts\mp\equipment\phase_shift::areentitiesinphase(param_00,var_02)) {
 			continue;
 		}
 
@@ -86,7 +86,7 @@ func_370F(param_00,param_01) {
 	var_02 = spawnstruct();
 	var_02.attackerendzone = 0;
 	var_02.var_13378 = 0;
-	var_03 = scripts\mp\_powerloot::func_7FC1("power_fearGrenade",2.5);
+	var_03 = scripts\mp\powerloot::func_7FC1("power_fearGrenade",2.5);
 	if(level.teambased && param_00.team == param_01.team && param_00 != param_01) {
 		if(level.friendlyfire == 0) {
 		}
@@ -124,7 +124,7 @@ func_2A67(param_00,param_01,param_02) {
 	self.var_6BB9 = spawnstruct();
 	func_F703(param_00);
 	thread func_E84C();
-	var_03 = scripts\mp\_powerloot::func_7FC0("power_fearGrenade",8);
+	var_03 = scripts\mp\powerloot::func_7FC0("power_fearGrenade",8);
 	self dodamage(var_03,self.origin,param_01,param_02,"MOD_EXPLOSIVE","fear_grenade_mp");
 	for(;;) {
 		var_04 = self.var_6BB9.var_6393 - gettime() / 1000;
@@ -144,7 +144,7 @@ func_E84C() {
 	self endon("stop_fear_effects");
 	self endon("death");
 	self endon("disconnect");
-	var_00 = function_01E1(scripts\engine\utility::getfx("vfx_haywire_scrn"),(0,0,0),self);
+	var_00 = spawnfxforclient(scripts\engine\utility::getfx("vfx_haywire_scrn"),(0,0,0),self);
 	triggerfx(var_00);
 	thread func_4115(var_00);
 	thread watchfordeath();
@@ -286,7 +286,7 @@ func_40F9() {
 
 func_108CE(param_00,param_01,param_02) {
 	var_03 = randomfloatrange(0.4,1.25);
-	var_04 = param_00 scripts\mp\_utility::_launchgrenade("fear_ghost_grenade_mp",param_01,param_02,var_03);
+	var_04 = param_00 scripts\mp\utility::_launchgrenade("fear_ghost_grenade_mp",param_01,param_02,var_03);
 	var_04 hide();
 	var_04 showtoplayer(param_00);
 	var_04 thread func_13A3D();
@@ -324,7 +324,7 @@ func_108CF() {
 			var_02 = var_03 * var_00.var_763E;
 		}
 
-		var_01 = function_01E1(var_00.var_1336D,self.origin + var_02,self.triggerportableradarping);
+		var_01 = spawnfxforclient(var_00.var_1336D,self.origin + var_02,self.triggerportableradarping);
 		triggerfx(var_01);
 	}
 

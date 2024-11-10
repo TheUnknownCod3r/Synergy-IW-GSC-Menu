@@ -1,8 +1,8 @@
-/*****************************************************
+/*********************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\asm\ratking\mp\states.gsc
-*****************************************************/
+ * Script: scripts\asm\ratking\mp\states.gsc
+*********************************************/
 
 func_2371() {
 	if(scripts\asm\asm::func_232E("ratking")) {
@@ -160,9 +160,9 @@ trans_pass_run_in_to_run_start2(param_00,param_01,param_02,param_03) {
 }
 
 trans_decide_idle_to_platform_idle0(param_00,param_01,param_02,param_03) {
-	return scripts\common\utility::istrue(self.isonplatform);
+	return scripts\engine\utility::istrue(self.isonplatform);
 }
 
 trans_platform_idle_to_decide_idle0(param_00,param_01,param_02,param_03) {
-	return !scripts\common\utility::istrue(self.isonplatform);
+	return !scripts\engine\utility::istrue(self.isonplatform);
 }

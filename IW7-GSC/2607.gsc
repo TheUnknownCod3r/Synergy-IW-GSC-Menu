@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\2607.gsc
-****************************/
+ * Script: 2607.gsc
+************************/
 
 func_7AF1(param_00,param_01) {
 	var_02 = ["yard","mars","heist","prisoner","rogue","titan","sa_moon","moon_port","pearlharbor","europa"];
@@ -494,9 +494,9 @@ func_DA3E(param_00) {
 			var_04 = 1;
 		}
 
-		var_07 = strtok(tablelookup("sp/progression_unlocks.csv",0,var_06,2),", ");
+		var_07 = strtok(tablelookup("sp\progression_unlocks.csv",0,var_06,2),", ");
 		var_03 = scripts\engine\utility::array_combine(var_03,var_07);
-		var_08 = strtok(tablelookup("sp/progression_unlocks.csv",0,var_06,3),", ");
+		var_08 = strtok(tablelookup("sp\progression_unlocks.csv",0,var_06,3),", ");
 		var_03 = scripts\engine\utility::array_combine(var_03,var_08);
 	}
 
@@ -526,7 +526,7 @@ func_DA1D() {
 }
 
 func_DA22(param_00) {
-	var_01 = int(tablelookup("sp/progression_unlocks.csv",0,param_00,7));
+	var_01 = int(tablelookup("sp\progression_unlocks.csv",0,param_00,7));
 	return var_01;
 }
 
@@ -606,43 +606,43 @@ func_DA2E(param_00) {
 		param_00 = "heist";
 	}
 
-	var_02 = strtok(tablelookup("sp/progression_unlocks.csv",0,param_00,8),", ");
+	var_02 = strtok(tablelookup("sp\progression_unlocks.csv",0,param_00,8),", ");
 	var_02 = scripts\engine\utility::array_remove(var_02,"");
 	return var_02;
 }
 
 func_DA2A(param_00) {
-	var_01 = strtok(tablelookup("sp/progression_unlocks.csv",0,param_00,9),", ");
+	var_01 = strtok(tablelookup("sp\progression_unlocks.csv",0,param_00,9),", ");
 	var_01 = scripts\engine\utility::array_remove(var_01,"");
 	return var_01;
 }
 
 func_DA2B(param_00) {
-	var_01 = strtok(tablelookup("sp/progression_unlocks.csv",0,param_00,10),", ");
+	var_01 = strtok(tablelookup("sp\progression_unlocks.csv",0,param_00,10),", ");
 	var_01 = scripts\engine\utility::array_remove(var_01,"");
 	return var_01;
 }
 
 func_DA2C(param_00) {
-	var_01 = strtok(tablelookup("sp/progression_unlocks.csv",0,param_00,11),", ");
+	var_01 = strtok(tablelookup("sp\progression_unlocks.csv",0,param_00,11),", ");
 	var_01 = scripts\engine\utility::array_remove(var_01,"");
 	return var_01;
 }
 
 func_DA29(param_00) {
-	var_01 = strtok(tablelookup("sp/progression_unlocks.csv",0,param_00,12),", ");
+	var_01 = strtok(tablelookup("sp\progression_unlocks.csv",0,param_00,12),", ");
 	var_01 = scripts\engine\utility::array_remove(var_01,"");
 	return var_01;
 }
 
 func_DA1A(param_00) {
-	var_01 = strtok(tablelookup("sp/progression_unlocks.csv",0,param_00,13),", ");
+	var_01 = strtok(tablelookup("sp\progression_unlocks.csv",0,param_00,13),", ");
 	var_01 = scripts\engine\utility::array_remove(var_01,"");
 	return var_01;
 }
 
 func_DA30(param_00) {
-	return strtok(tablelookup("sp/progression_unlocks.csv",0,param_00,14),", ");
+	return strtok(tablelookup("sp\progression_unlocks.csv",0,param_00,14),", ");
 }
 
 func_DA2F(param_00) {
@@ -657,17 +657,17 @@ func_DA2F(param_00) {
 		else if(!var_04) {
 			var_04 = 1;
 			if(var_06 != "all_weapons") {
-				var_07 = strtok(tablelookup("sp/progression_unlocks.csv",0,var_06,2),", ");
+				var_07 = strtok(tablelookup("sp\progression_unlocks.csv",0,var_06,2),", ");
 				var_02 = scripts\engine\utility::array_combine(var_02,var_07);
-				var_08 = strtok(tablelookup("sp/progression_unlocks.csv",0,var_06,3),", ");
+				var_08 = strtok(tablelookup("sp\progression_unlocks.csv",0,var_06,3),", ");
 				var_02 = scripts\engine\utility::array_combine(var_02,var_08);
 				continue;
 			}
 		}
 
-		var_09 = strtok(tablelookup("sp/progression_unlocks.csv",0,var_06,2),", ");
+		var_09 = strtok(tablelookup("sp\progression_unlocks.csv",0,var_06,2),", ");
 		var_03 = scripts\engine\utility::array_combine(var_03,var_09);
-		var_0A = strtok(tablelookup("sp/progression_unlocks.csv",0,var_06,3),", ");
+		var_0A = strtok(tablelookup("sp\progression_unlocks.csv",0,var_06,3),", ");
 		var_03 = scripts\engine\utility::array_combine(var_03,var_0A);
 	}
 
@@ -683,7 +683,7 @@ func_DA2F(param_00) {
 }
 
 func_DA32(param_00) {
-	var_01 = strtok(tablelookup("sp/progression_unlocks.csv",0,param_00,4),", ");
+	var_01 = strtok(tablelookup("sp\progression_unlocks.csv",0,param_00,4),", ");
 	var_01 = func_D9E7(var_01);
 	if(param_00 != "europa" && param_00 != "pearlharbor") {
 		var_02 = level.player _meth_84C6("weaponsScanned","iw7_steeldragon");
@@ -782,7 +782,7 @@ func_DA31(param_00) {
 		}
 	}
 	else if(param_00 == "all_weapons") {
-		var_03 = strtok(tablelookup("sp/progression_unlocks.csv",0,param_00,5),", ");
+		var_03 = strtok(tablelookup("sp\progression_unlocks.csv",0,param_00,5),", ");
 		for(var_07 = 0;var_07 < var_03.size;var_07++) {
 			if(var_03[var_07] != "") {
 				var_01 = scripts\engine\utility::array_add(var_01,var_03[var_07]);
@@ -801,7 +801,7 @@ func_DA31(param_00) {
 				var_09 = 1;
 			}
 
-			var_03 = strtok(tablelookup("sp/progression_unlocks.csv",0,var_0B,5),", ");
+			var_03 = strtok(tablelookup("sp\progression_unlocks.csv",0,var_0B,5),", ");
 			for(var_07 = 0;var_07 < var_03.size;var_07++) {
 				if(var_03[var_07] != "") {
 					var_01 = scripts\engine\utility::array_add(var_01,var_03[var_07]);
@@ -825,7 +825,7 @@ func_DA24(param_00) {
 		}
 	}
 	else if(param_00 == "all_weapons") {
-		var_03 = strtok(tablelookup("sp/progression_unlocks.csv",0,param_00,6),", ");
+		var_03 = strtok(tablelookup("sp\progression_unlocks.csv",0,param_00,6),", ");
 		for(var_07 = 0;var_07 < var_03.size;var_07++) {
 			if(var_03[var_07] != "") {
 				var_01 = scripts\engine\utility::array_add(var_01,var_03[var_07]);
@@ -844,7 +844,7 @@ func_DA24(param_00) {
 				var_09 = 1;
 			}
 
-			var_03 = strtok(tablelookup("sp/progression_unlocks.csv",0,var_0B,6),", ");
+			var_03 = strtok(tablelookup("sp\progression_unlocks.csv",0,var_0B,6),", ");
 			for(var_07 = 0;var_07 < var_03.size;var_07++) {
 				if(var_03[var_07] != "") {
 					var_01 = scripts\engine\utility::array_add(var_01,var_03[var_07]);
@@ -912,18 +912,18 @@ func_DA38() {
 	var_00 = [];
 	var_01 = 0;
 	for(;;) {
-		var_02 = tablelookupbyrow("sp/scrap_unlocks.csv",var_01,0);
+		var_02 = tablelookupbyrow("sp\scrap_unlocks.csv",var_01,0);
 		if(!isdefined(var_02) || var_02 == "") {
 			break;
 		}
 
-		var_03 = tablelookupbyrow("sp/scrap_unlocks.csv",var_01,2);
+		var_03 = tablelookupbyrow("sp\scrap_unlocks.csv",var_01,2);
 		if(!isdefined(var_00[var_03])) {
 			var_00[var_03] = [];
 		}
 
-		var_04 = tablelookupbyrow("sp/scrap_unlocks.csv",var_01,1);
-		var_05 = tablelookupbyrow("sp/scrap_unlocks.csv",var_01,3);
+		var_04 = tablelookupbyrow("sp\scrap_unlocks.csv",var_01,1);
+		var_05 = tablelookupbyrow("sp\scrap_unlocks.csv",var_01,3);
 		var_00[var_03][var_04] = var_05;
 		var_01++;
 	}
@@ -935,8 +935,8 @@ func_DA1E() {
 	var_00 = func_D9F2(0);
 	var_01 = func_D9F1();
 	foreach(var_03 in var_01) {
-		var_04 = tablelookuprownum("sp/attachmenttable.csv",4,var_03);
-		var_05 = tablelookupbyrow("sp/attachmenttable.csv",var_04,8);
+		var_04 = tablelookuprownum("sp\attachmenttable.csv",4,var_03);
+		var_05 = tablelookupbyrow("sp\attachmenttable.csv",var_04,8);
 		if(isdefined(var_05) && var_05 != "") {
 			precachemodel(var_05);
 		}
@@ -1115,9 +1115,9 @@ func_492B(param_00) {
 		level.player _meth_84C8("loadouts",1,"name","MENU_SP_LOADOUT_1");
 		level.player _meth_84C8("loadouts",2,"name","MENU_SP_LOADOUT_2");
 		level.player _meth_84C8("loadouts",3,"name","MENU_SP_LOADOUT_3");
-		scripts/sp/loadout::func_F56D("loadout1",0,1);
-		scripts/sp/loadout::func_F56D("loadout2",0,2);
-		scripts/sp/loadout::func_F56D("loadout3",0,3);
+		scripts\sp\loadout::func_F56D("loadout1",0,1);
+		scripts\sp\loadout::func_F56D("loadout2",0,2);
+		scripts\sp\loadout::func_F56D("loadout3",0,3);
 		level.player _meth_84C7("missionStateData","europa","incomplete");
 	}
 
@@ -1290,7 +1290,7 @@ func_DA18(param_00,param_01,param_02,param_03,param_04) {
 
 			if(!isdefined(param_04) || isdefined(param_04) && !param_04) {
 				var_0E = scripts\sp\_utility::func_22A2(var_0E,var_0D);
-				var_1F = strtok(tablelookup("sp/progression_unlocks.csv",0,param_00,5),", ");
+				var_1F = strtok(tablelookup("sp\progression_unlocks.csv",0,param_00,5),", ");
 				level.var_D9E5["mandatoryunlocks"] = scripts\engine\utility::array_combine(level.var_D9E5["mandatoryunlocks"],var_1F);
 				foreach(var_09, var_21 in level.var_D9E5["weaponstates"]) {
 					if(func_9B49(var_09)) {
@@ -1797,27 +1797,27 @@ func_DA52(param_00) {
 
 	var_04 = 1;
 	for(;;) {
-		var_05 = tablelookupbyrow("sp/attachmenttable.csv",var_04,4);
-		var_06 = tablelookupbyrow("sp/attachmenttable.csv",var_04,5);
+		var_05 = tablelookupbyrow("sp\attachmenttable.csv",var_04,4);
+		var_06 = tablelookupbyrow("sp\attachmenttable.csv",var_04,5);
 		if(var_05 != "" && var_06 != "") {
-			var_07 = strtok(tablelookupbyrow("sp/attachmenttable.csv",var_04,12),",");
+			var_07 = strtok(tablelookupbyrow("sp\attachmenttable.csv",var_04,12),",");
 			foreach(var_09 in var_07) {
-				var_0A = strtok(tablelookupbyrow("sp/attachmenttable.csv",var_04,13),",");
+				var_0A = strtok(tablelookupbyrow("sp\attachmenttable.csv",var_04,13),",");
 				if(var_0A.size == 0) {
 					var_0A[0] = "";
 				}
 
 				foreach(var_0C in var_0A) {
 					var_0D = spawnstruct();
-					var_0D.location = tablelookupbyrow("sp/attachmenttable.csv",var_04,2);
-					var_0D.name = tablelookupbyrow("sp/attachmenttable.csv",var_04,3);
+					var_0D.location = tablelookupbyrow("sp\attachmenttable.csv",var_04,2);
+					var_0D.name = tablelookupbyrow("sp\attachmenttable.csv",var_04,3);
 					var_0D.var_24A2 = var_05;
-					var_0D.var_9338 = tablelookupbyrow("sp/attachmenttable.csv",var_04,6);
-					var_0D.var_9337 = tablelookupbyrow("sp/attachmenttable.csv",var_04,20);
+					var_0D.var_9338 = tablelookupbyrow("sp\attachmenttable.csv",var_04,6);
+					var_0D.var_9337 = tablelookupbyrow("sp\attachmenttable.csv",var_04,20);
 					var_0D.type = var_06;
-					var_0D.var_9ECE = int(tablelookupbyrow("sp/attachmenttable.csv",var_04,9));
-					var_0D.var_657B = int(tablelookupbyrow("sp/attachmenttable.csv",var_04,10));
-					var_0D.baseangles = tablelookupbyrow("sp/attachmenttable.csv",var_04,5);
+					var_0D.var_9ECE = int(tablelookupbyrow("sp\attachmenttable.csv",var_04,9));
+					var_0D.var_657B = int(tablelookupbyrow("sp\attachmenttable.csv",var_04,10));
+					var_0D.baseangles = tablelookupbyrow("sp\attachmenttable.csv",var_04,5);
 					var_0D.var_13CDE = var_09;
 					var_0D.var_13CCE = var_0C;
 					var_01[var_09][var_0D.type][var_0C][var_0D.var_657B] = var_0D;
@@ -3282,19 +3282,19 @@ func_D9E8(param_00) {
 }
 
 func_7808() {
-	var_00 = strtok(tablelookup("sp/progression_unlocks.csv",0,"all_weapons",2),", ");
-	var_01 = strtok(tablelookup("sp/progression_unlocks.csv",0,"all_weapons",3),", ");
+	var_00 = strtok(tablelookup("sp\progression_unlocks.csv",0,"all_weapons",2),", ");
+	var_01 = strtok(tablelookup("sp\progression_unlocks.csv",0,"all_weapons",3),", ");
 	var_02 = scripts\engine\utility::array_combine(var_00,var_01);
 	return var_02;
 }
 
 func_7807() {
-	var_00 = strtok(tablelookup("sp/progression_unlocks.csv",0,"all_weapons",5),", ");
+	var_00 = strtok(tablelookup("sp\progression_unlocks.csv",0,"all_weapons",5),", ");
 	return var_00;
 }
 
 func_7806() {
-	var_00 = strtok(tablelookup("sp/progression_unlocks.csv",0,"all_weapons",6),", ");
+	var_00 = strtok(tablelookup("sp\progression_unlocks.csv",0,"all_weapons",6),", ");
 	return var_00;
 }
 

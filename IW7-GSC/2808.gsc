@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2808.gsc
+ * Script: 2808.gsc
 ***************************************/
 
 gettweakabledvarvalue(var_00, var_01) {

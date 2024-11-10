@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2915.gsc
+ * Script: 2915.gsc
 ***************************************/
 
 func_9768() {
@@ -113,7 +113,7 @@ func_FF05() {
   self waittill("weapon_fired");
   var_00 = self getcurrentweapon();
 
-  if (!isdefined(var_00) || !scripts/sp/utility::isprimaryweapon(var_00))
+  if (!isdefined(var_00) || !scripts\sp\utility::isprimaryweapon(var_00))
   continue;
 
   self.func_10E53["shots_fired"]++;

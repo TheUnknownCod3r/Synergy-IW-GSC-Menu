@@ -1,8 +1,8 @@
-/*********************************************************
+/*************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\anim\grenade_return_throw.gsc
-*********************************************************/
+ * Script: scripts\anim\grenade_return_throw.gsc
+*************************************************/
 
 main() {
 	if(getdvarint("ai_iw7",0) == 1) {
@@ -19,7 +19,7 @@ main() {
 	var_00 = undefined;
 	var_01 = 1000;
 	if(isdefined(self.isnodeoccupied)) {
-		var_01 = distance(self.origin,self.var_10C.origin);
+		var_01 = distance(self.origin,self.isnodeoccupied.origin);
 	}
 
 	var_02 = [];

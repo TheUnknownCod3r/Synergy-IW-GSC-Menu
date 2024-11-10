@@ -1,13 +1,13 @@
-/************************************************************************
+/****************************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\zombies\craftables\_zm_soul_collector.gsc
-************************************************************************/
+ * Script: scripts\cp\zombies\craftables\_zm_soul_collector.gsc
+****************************************************************/
 
 init() {
-	level._effect["medusa_death"] = loadfx("vfx/core/base/vfx_alien_soul_fly.vfx");
-	level._effect["medusa_crawler_death"] = loadfx("vfx/iw7/core/zombie/vfx_alien_soul_fly_crawler.vfx");
-	level._effect["medusa_blast_lg"] = loadfx("vfx/core/base/vfx_alien_cortex_blast_01.vfx");
+	level._effect["medusa_death"] = loadfx("vfx\core\base\vfx_alien_soul_fly.vfx");
+	level._effect["medusa_crawler_death"] = loadfx("vfx\iw7\core\zombie\vfx_alien_soul_fly_crawler.vfx");
+	level._effect["medusa_blast_lg"] = loadfx("vfx\core\base\vfx_alien_cortex_blast_01.vfx");
 	level.var_B548 = [];
 	var_00 = spawnstruct();
 	var_00.timeout = 300;

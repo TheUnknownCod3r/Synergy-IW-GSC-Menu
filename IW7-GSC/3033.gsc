@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\3033.gsc
+ * Script: 3033.gsc
 ***************************************/
 
 func_622B() {
@@ -30,7 +30,7 @@ func_DEDD() {
 
 func_D161(var_00) {
   level.func_D127 = self;
-  level.player scripts/sp/utility::func_65E1("jackal_enemy_homing_missile_allowed");
+  level.player scripts\sp\utility::func_65E1("jackal_enemy_homing_missile_allowed");
   level.func_A056.func_432C = [];
   func_D17F();
   thread func_D133();
@@ -63,7 +63,7 @@ func_D161(var_00) {
   else
   thread func_D185();
 
-  level.player scripts/sp/utility::func_65E1("flag_player_has_jackal");
+  level.player scripts\sp\utility::func_65E1("flag_player_has_jackal");
   level.player thread func_58B4();
 }
 
@@ -95,7 +95,7 @@ func_A318(var_00) {
   else
   setomnvar("ui_jackal_show_horizon", 1);
 
-  if (scripts/sp/utility::func_D123())
+  if (scripts\sp\utility::func_D123())
   level.func_D127 func_A31B();
 
   func_F383();
@@ -118,7 +118,7 @@ func_A1E7() {
   else
   var_02 = "";
 
-  if (scripts/sp/utility::func_D15B("thrusters"))
+  if (scripts\sp\utility::func_D15B("thrusters"))
   var_03 = "_thrustperk";
   else
   var_03 = "";
@@ -209,7 +209,7 @@ func_F380() {
   _setsaveddvar("spaceshipScaleHoverPitchClampForce", 1.0);
   _setsaveddvar("spaceshipScaleFlyPitchClampForce", 0.0);
 
-  if (level.player scripts/sp/utility::func_65DB("disable_jackal_roll")) {
+  if (level.player scripts\sp\utility::func_65DB("disable_jackal_roll")) {
   _setsaveddvar("spaceshipAutoLevelHoverParams", var_00);
   _setsaveddvar("spaceshipAutoLevelFlyParams", var_00);
   } else {
@@ -226,7 +226,7 @@ func_F380() {
   _setsaveddvar("spaceshipScaleHoverPitchClampForce", 0.0);
   _setsaveddvar("spaceshipScaleFlyPitchClampForce", 0.0);
 
-  if (level.player scripts/sp/utility::func_65DB("disable_jackal_roll")) {
+  if (level.player scripts\sp\utility::func_65DB("disable_jackal_roll")) {
   _setsaveddvar("spaceshipAutoLevelHoverParams", var_00);
   _setsaveddvar("spaceshipAutoLevelFlyParams", var_00);
   } else {
@@ -273,9 +273,9 @@ func_D185() {
   var_08 = rotatevectorinverted(self.spaceship_vel, self.angles);
   var_09 = var_8[0];
 
-  if (!level.player scripts/sp/utility::func_65DB("jackal_force_mode")) {
+  if (!level.player scripts\sp\utility::func_65DB("jackal_force_mode")) {
   if (!self.spaceship_boosting) {
-  if (!level.player scripts/sp/utility::func_65DB("disable_jackal_mode_switch")) {
+  if (!level.player scripts\sp\utility::func_65DB("disable_jackal_mode_switch")) {
   if (var_06 == "hover") {
   if (var_09 > var_07 && var_02 == 0)
   var_03 = 1;
@@ -332,7 +332,7 @@ func_D185() {
 }
 
 func_A1D8(var_00) {
-  if (level.player scripts/sp/utility::func_65DB("disable_jackal_roll")) {
+  if (level.player scripts\sp\utility::func_65DB("disable_jackal_roll")) {
   _setsaveddvar("spaceshipAutoLevelDelayTime", 0);
   _setsaveddvar("spaceshiproll", 2);
   }
@@ -358,7 +358,7 @@ func_D15A() {
   var_00 = self.spaceship_mode;
 
   for (;;) {
-  if (!level.player scripts/sp/utility::func_65DB("disable_jackal_mode_switch") && !level.player scripts/sp/utility::func_65DB("jackal_force_mode")) {
+  if (!level.player scripts\sp\utility::func_65DB("disable_jackal_mode_switch") && !level.player scripts\sp\utility::func_65DB("jackal_force_mode")) {
   if (!level.player buttonpressed("button_ltrig")) {
   if (var_00 != "fly") {
   self notify("switchmode");
@@ -367,7 +367,7 @@ func_D15A() {
   var_00 = "fly";
   level.func_D127 _meth_8491("fly");
 
-  if (!level.player scripts/sp/utility::func_65DB("disable_jackal_pilot_assist"))
+  if (!level.player scripts\sp\utility::func_65DB("disable_jackal_pilot_assist"))
   level.player _meth_8490("disable_pilot_aim_assist", 0);
   }
   }
@@ -403,7 +403,7 @@ func_D14F() {
   thread func_B8A7();
 
   for (;;) {
-  while (!level.player secondaryoffhandbuttonpressed() || level.player scripts/sp/utility::func_65DB("disable_jackal_guns") || level.player scripts/sp/utility::func_65DB("disable_jackal_flares"))
+  while (!level.player secondaryoffhandbuttonpressed() || level.player scripts\sp\utility::func_65DB("disable_jackal_guns") || level.player scripts\sp\utility::func_65DB("disable_jackal_flares"))
   wait 0.05;
 
   if (self.func_6E9C.count == self.func_6E9C.func_B417) {
@@ -559,10 +559,10 @@ func_D181(var_00, var_01) {
   var_32 = rotatevector(var_31, self.angles);
   var_27 = var_27 - var_32;
   var_27 = var_27 + var_24;
-  var_33 = scripts/sp/math::func_C097(0, var_02, var_03);
-  var_33 = scripts/sp/math::func_C09A(var_33);
-  var_33 = scripts/sp/math::func_6A8E(0.1, 1, var_33);
-  var_34 = scripts/sp/math::func_6A8E(var_27, var_26, var_33);
+  var_33 = scripts\sp\math::func_C097(0, var_02, var_03);
+  var_33 = scripts\sp\math::func_C09A(var_33);
+  var_33 = scripts\sp\math::func_6A8E(0.1, 1, var_33);
+  var_34 = scripts\sp\math::func_6A8E(var_27, var_26, var_33);
 
   if (isdefined(level.func_D127.func_6E8A) && level.func_D127.func_6E8A)
   var_18["fraction"] = 1;
@@ -654,7 +654,7 @@ func_B8A5() {
   wait 0.05;
 
   scripts\engine\utility::flag_set("jackal_flare_hint");
-  scripts/sp/utility::func_56BA("jackal_flare_hint");
+  scripts\sp\utility::func_56BA("jackal_flare_hint");
 
   while (self.func_6E9C.func_12B86.size == 0 && self.func_93D2.size > 0)
   wait 0.05;
@@ -746,11 +746,11 @@ func_D14C() {
   else
   var_25 = 0.3;
 
-  var_14 = scripts/sp/math::func_AB6F(var_14, var_22, var_15);
+  var_14 = scripts\sp\math::func_AB6F(var_14, var_22, var_15);
 
   if (self.spaceship_mode == "fly") {
   var_26 = length(var_14 - var_22);
-  var_26 = scripts/sp/math::func_C097(10, 80, var_26);
+  var_26 = scripts\sp\math::func_C097(10, 80, var_26);
   var_26 = var_26 * var_04 * var_25;
   }
   else
@@ -761,10 +761,10 @@ func_D14C() {
   else
   var_27 = var_09;
 
-  var_05 = scripts/sp/math::func_AB6F(var_05, var_26, var_27);
+  var_05 = scripts\sp\math::func_AB6F(var_05, var_26, var_27);
   var_28 = anglestoforward(level.func_D127.angles);
   var_29 = vectornormalize(var_23);
-  var_30 = 1 - scripts/sp/math::func_C097(0.5, 1, vectordot(var_28, var_29));
+  var_30 = 1 - scripts\sp\math::func_C097(0.5, 1, vectordot(var_28, var_29));
   var_30 = var_30 * var_03;
 
   if (var_30 > var_06)
@@ -772,7 +772,7 @@ func_D14C() {
   else
   var_27 = var_11;
 
-  var_06 = scripts/sp/math::func_AB6F(var_06, var_30, var_27);
+  var_06 = scripts\sp\math::func_AB6F(var_06, var_30, var_27);
   var_31 = length(var_01);
 
   if (var_24 > var_31)
@@ -781,7 +781,7 @@ func_D14C() {
   var_32 = 0.8;
 
   var_33 = abs(var_24 - var_31);
-  var_34 = scripts/sp/math::func_C097(2 * level.func_A056.func_EBAD, 30 * level.func_A056.func_EBAD, var_33);
+  var_34 = scripts\sp\math::func_C097(2 * level.func_A056.func_EBAD, 30 * level.func_A056.func_EBAD, var_33);
   var_34 = var_34 * var_02;
   var_34 = var_34 * var_32;
 
@@ -793,16 +793,16 @@ func_D14C() {
   else
   var_27 = var_13;
 
-  var_07 = scripts/sp/math::func_AB6F(var_07, var_34, var_27);
-  var_35 = scripts/sp/math::func_C097(100 * level.func_A056.func_EBAD, 500 * level.func_A056.func_EBAD, var_24);
-  var_35 = scripts/sp/math::func_6A8E(0.2, 1.3, var_35);
+  var_07 = scripts\sp\math::func_AB6F(var_07, var_34, var_27);
+  var_35 = scripts\sp\math::func_C097(100 * level.func_A056.func_EBAD, 500 * level.func_A056.func_EBAD, var_24);
+  var_35 = scripts\sp\math::func_6A8E(0.2, 1.3, var_35);
 
   if (var_35 > var_18)
   var_27 = var_16;
   else
   var_27 = var_17;
 
-  var_18 = scripts/sp/math::func_AB6F(var_18, var_35, var_27);
+  var_18 = scripts\sp\math::func_AB6F(var_18, var_35, var_27);
 
   if (level.func_D127.spaceship_mode == "fly")
   var_36 = 1;
@@ -814,10 +814,10 @@ func_D14C() {
   else
   var_27 = var_21;
 
-  var_19 = scripts/sp/math::func_AB6F(var_19, var_36, var_27);
-  var_37 = scripts/sp/math::func_C09B(var_19);
+  var_19 = scripts\sp\math::func_AB6F(var_19, var_36, var_27);
+  var_37 = scripts\sp\math::func_C09B(var_19);
   level.func_A056.func_67D9 = clamp(var_07 + (var_06 + var_05) * var_18, 0, 1) * var_37;
-  level.func_A056.func_67D9 = scripts/sp/math::func_6A8E(-1, 1, level.func_A056.func_67D9);
+  level.func_A056.func_67D9 = scripts\sp\math::func_6A8E(-1, 1, level.func_A056.func_67D9);
   var_00 = var_22;
   var_01 = var_23;
   wait 0.05;
@@ -843,10 +843,10 @@ func_F360(var_00) {
   return;
 
   if (isdefined(self.bt))
-  self.bt.func_5870 = var_00;
+  self.var_3135.func_5870 = var_00;
 
-  if (isdefined(self._blackboard))
-  self._blackboard.func_9DC2 = var_00;
+  if (isdefined(self.var_1198))
+  self.var_1198.func_9DC2 = var_00;
 }
 
 func_D17D() {
@@ -856,7 +856,7 @@ func_D17D() {
 }
 
 func_D17E() {
-  if (scripts/sp/utility::func_D15B("weapons"))
+  if (scripts\sp\utility::func_D15B("weapons"))
   var_00 = "_weapupgrade";
   else
   var_00 = "";
@@ -890,7 +890,7 @@ func_4EED() {
   for (;;) {
   wait 0.5;
 
-  if (!scripts/sp/utility::func_D123())
+  if (!scripts\sp\utility::func_D123())
   continue;
 
   var_01 = getdvar("scr_givejackal");
@@ -971,14 +971,14 @@ func_D19E() {
   for (;;) {
   level.player waittill("jackal_switch_weapons");
 
-  if (!level.player scripts/sp/utility::func_65DB("disable_jackal_guns") && !level.player scripts/sp/utility::func_65DB("disable_jackal_weapon_switch")) {
+  if (!level.player scripts\sp\utility::func_65DB("disable_jackal_guns") && !level.player scripts\sp\utility::func_65DB("disable_jackal_weapon_switch")) {
   func_D178();
 
   if (self.func_4C15 == self.func_13BF7) {
   self.func_4C15 = self.func_13BF8;
   self.func_110CA = self.func_13BF7;
 
-  if (!level.player scripts/sp/utility::func_65DB("disable_jackal_overheat"))
+  if (!level.player scripts\sp\utility::func_65DB("disable_jackal_overheat"))
   setomnvar("ui_jackal_weapon_secondary", 1);
 
   thread func_5D09(0, 1.15);
@@ -986,7 +986,7 @@ func_D19E() {
   self.func_4C15 = self.func_13BF7;
   self.func_110CA = self.func_13BF8;
 
-  if (!level.player scripts/sp/utility::func_65DB("disable_jackal_overheat"))
+  if (!level.player scripts\sp\utility::func_65DB("disable_jackal_overheat"))
   setomnvar("ui_jackal_weapon_secondary", 0);
 
   thread func_5D09(0, 1.0);
@@ -1149,7 +1149,7 @@ func_D19F() {
   while (!level.player _meth_853A())
   wait 0.05;
 
-  if (!level.player scripts/sp/utility::func_65DB("disable_jackal_ads"))
+  if (!level.player scripts\sp\utility::func_65DB("disable_jackal_ads"))
   level.player allowads(1);
 }
 
@@ -1177,7 +1177,7 @@ func_D19B() {
   childthread func_D137();
   var_00 = -1 * var_00 + 1;
 
-  if (!level.player scripts/sp/utility::func_65DB("disable_jackal_overheat")) {
+  if (!level.player scripts\sp\utility::func_65DB("disable_jackal_overheat")) {
   if (var_01) {
   if (var_00) {
   self.func_4C15.func_2841 = self.func_4C15.func_2841 + func_7CF0();
@@ -1208,7 +1208,7 @@ func_D19B() {
 }
 
 func_7CF0() {
-  if (scripts/sp/utility::func_D15B("weapons"))
+  if (scripts\sp\utility::func_D15B("weapons"))
   return self.func_4C15.func_116B3 * 0.8;
   else
   return self.func_4C15.func_116B3;
@@ -1302,7 +1302,7 @@ func_D173() {
   wait 0.05;
 
   scripts\engine\utility::flag_set("jackal_weapon_switch_hint");
-  scripts/sp/utility::func_56BA("jackal_weapon_switch");
+  scripts\sp\utility::func_56BA("jackal_weapon_switch");
 }
 
 func_D137() {
@@ -1331,7 +1331,7 @@ func_D19C() {
 func_D19D() {
   level.player endon("jackal_switch_weapons");
 
-  while (level.player attackbuttonpressed() && !level.player scripts/sp/utility::func_65DB("disable_jackal_guns"))
+  while (level.player attackbuttonpressed() && !level.player scripts\sp\utility::func_65DB("disable_jackal_guns"))
   wait 0.05;
 }
 
@@ -1406,7 +1406,7 @@ func_DBA4() {
   self.engine_master_volume = 0;
   self.func_FB88 = scripts\engine\utility::array_add(self.func_FB88, self.func_74BD.func_FB87);
 
-  if (level.player scripts/sp/utility::func_65DB("disable_jackal_quickturn"))
+  if (level.player scripts\sp\utility::func_65DB("disable_jackal_quickturn"))
   self.func_DBA2.func_B3D1 = 0;
   else
   self.func_DBA2.func_B3D1 = 1;
@@ -1430,15 +1430,15 @@ func_10239() {
   self.func_10239.func_E7BA func_0BDC::func_F2FF();
   }
 
-  var_01 = scripts/sp/math::func_C097(100, 500, length(self.spaceship_vel));
+  var_01 = scripts\sp\math::func_C097(100, 500, length(self.spaceship_vel));
   var_02 = level.player getsplashtablename();
-  var_03 = scripts/sp/math::func_6A8E(0.35, 1, abs(var_2[1]));
+  var_03 = scripts\sp\math::func_6A8E(0.35, 1, abs(var_2[1]));
   var_04 = var_01 * var_03;
   var_05 = 0.6;
   var_06 = 0.9;
   thread func_1023E(var_04, var_05, var_06);
   thread func_1023F(var_04, var_05, var_06);
-  var_07 = scripts/sp/math::func_6A8E(1, var_00, var_01 * var_03);
+  var_07 = scripts\sp\math::func_6A8E(1, var_00, var_01 * var_03);
   func_0BDC::func_A302(var_07, var_05, "skid");
   wait(var_05);
   func_0BDC::func_A302(1, var_06, "skid");
@@ -1490,30 +1490,30 @@ func_DBA3() {
   var_28 = var_26[0];
 
   if (var_28 > 0)
-  var_29 = scripts/sp/math::func_6A8E(0.5, 0, var_28);
+  var_29 = scripts\sp\math::func_6A8E(0.5, 0, var_28);
   else
-  var_29 = scripts/sp/math::func_6A8E(0.5, 1, abs(var_28));
+  var_29 = scripts\sp\math::func_6A8E(0.5, 1, abs(var_28));
 
   var_30 = abs(var_25[1] - var_26[1]) * 0.5;
   var_30 = var_30 * abs(var_25[1]);
-  var_18 = scripts/sp/math::func_AB6F(var_18, var_30, var_20);
-  var_19 = scripts/sp/math::func_AB6F(var_19, var_29, var_20);
-  var_31 = scripts/sp/math::func_C097(150 * var_24, 450 * var_24, var_27);
+  var_18 = scripts\sp\math::func_AB6F(var_18, var_30, var_20);
+  var_19 = scripts\sp\math::func_AB6F(var_19, var_29, var_20);
+  var_31 = scripts\sp\math::func_C097(150 * var_24, 450 * var_24, var_27);
 
   if (var_31 > var_14)
-  var_14 = scripts/sp/math::func_AB6F(var_14, var_31, 0.35);
+  var_14 = scripts\sp\math::func_AB6F(var_14, var_31, 0.35);
   else
-  var_14 = scripts/sp/math::func_AB6F(var_14, var_31, 0.1);
+  var_14 = scripts\sp\math::func_AB6F(var_14, var_31, 0.1);
 
   var_32 = var_19 * self.func_DBA2.func_B3D1 * abs(var_18) * var_14 * var_24;
-  var_33 = scripts/sp/math::func_6A8E(1, var_00, var_32);
+  var_33 = scripts\sp\math::func_6A8E(1, var_00, var_32);
   level.func_A056.func_BBB9["turn"].func_3C66["quickturn_scale"] = var_33;
   var_34 = var_27;
   var_35 = var_32;
   var_35 = clamp(var_35, 0, 1) * self.func_DBA2.func_B3D1;
-  var_36 = scripts/sp/math::func_6A8E(0, var_07, var_35);
-  var_37 = scripts/sp/math::func_6A8E(1.1, 0.8, var_35);
-  var_38 = scripts/sp/math::func_6A8E(0.0, var_03, var_35);
+  var_36 = scripts\sp\math::func_6A8E(0, var_07, var_35);
+  var_37 = scripts\sp\math::func_6A8E(1.1, 0.8, var_35);
+  var_38 = scripts\sp\math::func_6A8E(0.0, var_03, var_35);
   var_39 = var_35 * var_05;
   var_36 = var_36 * self.engine_master_volume;
 
@@ -1530,20 +1530,20 @@ func_DBA3() {
   }
 
   self.func_DBA2.func_FB87 _meth_8277(var_37, 0.05);
-  var_40 = scripts/sp/math::func_C097(0, 1, var_26[0]);
+  var_40 = scripts\sp\math::func_C097(0, 1, var_26[0]);
 
   if (var_10 < var_40)
   var_41 = var_01;
   else
   var_41 = var_02;
 
-  var_10 = scripts/sp/math::func_AB6F(var_10, var_40, var_41);
-  var_11 = scripts/sp/math::func_AB6F(var_11, var_34, 0.1);
-  var_31 = scripts/sp/math::func_C097(175, 330, var_11);
-  var_31 = scripts/sp/math::func_6A8E(1, 0.4, var_31);
+  var_10 = scripts\sp\math::func_AB6F(var_10, var_40, var_41);
+  var_11 = scripts\sp\math::func_AB6F(var_11, var_34, 0.1);
+  var_31 = scripts\sp\math::func_C097(175, 330, var_11);
+  var_31 = scripts\sp\math::func_6A8E(1, 0.4, var_31);
   var_42 = var_10 * var_31 * self.func_DBA2.func_B3D1;
-  var_36 = scripts/sp/math::func_6A8E(0, var_08, var_42);
-  var_37 = scripts/sp/math::func_6A8E(0.8, 1.4, var_42);
+  var_36 = scripts\sp\math::func_6A8E(0, var_08, var_42);
+  var_37 = scripts\sp\math::func_6A8E(0.8, 1.4, var_42);
   var_36 = var_36 * self.engine_master_volume;
 
   if (var_22 == 1) {
@@ -1585,7 +1585,7 @@ func_DBA3() {
   }
   }
 
-  var_47 = scripts/sp/math::func_6A8E(1000, 0, var_45);
+  var_47 = scripts\sp\math::func_6A8E(1000, 0, var_45);
   self.func_DBA2.func_E7BA.origin = level.func_D127.origin + (0, 0, var_47);
 
   if (isdefined(self.func_2CD0))
@@ -1651,7 +1651,7 @@ func_D12D() {
   self endon("boost_fx_off");
   self notify("boost_fx_on");
   self endon("player_exit_jackal");
-  scripts/sp/utility::func_75C4("jackal_boost_speed", "tag_origin");
+  scripts\sp\utility::func_75C4("jackal_boost_speed", "tag_origin");
   thread func_DC5E();
 
   if (!scripts\engine\utility::is_true(level.func_D127.func_6ADB))
@@ -1674,7 +1674,7 @@ func_DC5E() {
 func_D12C() {
   self endon("boost_fx_on");
   self notify("boost_fx_off");
-  scripts/sp/utility::func_75F8("jackal_boost_speed", "tag_origin");
+  scripts\sp\utility::func_75F8("jackal_boost_speed", "tag_origin");
   self.func_2CD0 = undefined;
 
   if (!scripts\engine\utility::is_true(level.func_D127.func_6ADB))
@@ -1696,7 +1696,7 @@ func_1023A() {
   self.func_10239.func_FB87 ghostattack(0, var_00);
 
   for (var_01 = var_00; var_01 > 0; var_01 = var_01 - 0.05) {
-  var_02 = scripts/sp/math::func_6A8E(0, 1, var_01 / var_00);
+  var_02 = scripts\sp\math::func_6A8E(0, 1, var_01 / var_00);
   var_03 = 1 - var_02;
   var_03 = var_03 * 1000;
   self.func_10239.func_E7BA.origin = level.func_D127.origin + (0, 0, var_03);
@@ -1719,18 +1719,18 @@ func_1023E(var_00, var_01, var_02) {
   self notify("start_skid");
   self endon("stop_skid");
   self endon("player_exit_jackal");
-  var_03 = scripts/sp/math::func_6A8E(0.08, 0.32, var_00);
+  var_03 = scripts\sp\math::func_6A8E(0.08, 0.32, var_00);
   var_04 = var_00;
   var_05 = var_01 + var_02;
 
   for (var_06 = 0.05; var_05 > 0; var_05 = var_05 - var_06) {
   if (var_05 > var_02)
-  var_07 = 1 - scripts/sp/math::func_C097(0, var_01, var_05 - var_02);
+  var_07 = 1 - scripts\sp\math::func_C097(0, var_01, var_05 - var_02);
   else
-  var_07 = scripts/sp/math::func_C097(0, var_02, var_05);
+  var_07 = scripts\sp\math::func_C097(0, var_02, var_05);
 
-  var_08 = scripts/sp/math::func_6A8E(0, var_03, var_07);
-  var_09 = scripts/sp/math::func_6A8E(0, var_04, var_07);
+  var_08 = scripts\sp\math::func_6A8E(0, var_03, var_07);
+  var_09 = scripts\sp\math::func_6A8E(0, var_04, var_07);
   earthquake(var_08, 0.1, level.func_D127.origin, 5000);
   var_10 = 1 - var_09;
   var_10 = var_10 * 1000;
@@ -1741,8 +1741,8 @@ func_1023E(var_00, var_01, var_02) {
 
 func_1023F(var_00, var_01, var_02) {
   var_03 = 0.3;
-  var_04 = scripts/sp/math::func_6A8E(0.2, 1.0, var_00);
-  var_05 = scripts/sp/math::func_6A8E(0.6, 1.1, var_00);
+  var_04 = scripts\sp\math::func_6A8E(0.2, 1.0, var_00);
+  var_05 = scripts\sp\math::func_6A8E(0.6, 1.1, var_00);
   self.func_10239.func_FB87 ghostattack(var_04, 0.1);
   self.func_10239.func_FB87 _meth_8277(var_05, 0.1);
   self.func_10239.func_FB87 playsound("jackal_skid");
@@ -1973,7 +1973,7 @@ func_D133() {
   foreach (var_01 in self.func_4074)
   var_01 delete();
 
-  objective_delete(scripts/sp/utility::func_C264("jackal_dogfight"));
+  objective_delete(scripts\sp\utility::func_C264("jackal_dogfight"));
 
   if (isdefined(level.player.func_A178)) {
   stopfxontag(scripts\engine\utility::getfx("jackal_dogfight_cam"), level.player, "tag_origin");
@@ -2288,7 +2288,7 @@ func_D18C() {
   var_01 = 1;
   }
   }
-  else if (var_3.size > 0 && scripts/sp/utility::func_7B9D() < 0.5) {
+  else if (var_3.size > 0 && scripts\sp\utility::func_7B9D() < 0.5) {
   if (!var_01) {
   thread func_90E7();
   var_01 = 1;
@@ -2365,7 +2365,7 @@ func_90E7() {
 }
 
 func_90E9() {
-  if (gettime() - self._blackboard.func_90ED > 3000) {
+  if (gettime() - self.var_1198.func_90ED > 3000) {
   var_00 = self.origin - level.func_D127.origin;
   var_01 = vectornormalize(var_00);
   var_02 = rotatevectorinverted(var_01, level.func_D127.angles);
@@ -2382,19 +2382,19 @@ func_90E9() {
   } else {
   var_01 = "rear";
 
-  if (self._blackboard.func_90EC != var_01)
+  if (self.var_1198.func_90EC != var_01)
   func_90E6(var_01);
   }
   }
   else if (var_2[1] < 0) {
   var_01 = "right";
 
-  if (self._blackboard.func_90EC != var_01)
+  if (self.var_1198.func_90EC != var_01)
   func_90E6(var_01);
   } else {
   var_01 = "left";
 
-  if (self._blackboard.func_90EC != var_01)
+  if (self.var_1198.func_90EC != var_01)
   func_90E6(var_01);
   }
   }
@@ -2420,15 +2420,15 @@ func_90E6(var_00) {
 
   func_0BDC::func_A112(var_01, 1);
   var_02 = gettime();
-  self._blackboard.func_90EC = var_00;
-  self._blackboard.func_90ED = var_02;
+  self.var_1198.func_90EC = var_00;
+  self.var_1198.func_90ED = var_02;
   level.func_D127.func_D41F = var_02;
 }
 
 func_9B0D() {
-  if (isdefined(self._blackboard)) {
-  self._blackboard.func_90EE = undefined;
-  self._blackboard.func_A9D1 = gettime();
+  if (isdefined(self.var_1198)) {
+  self.var_1198.func_90EE = undefined;
+  self.var_1198.func_A9D1 = gettime();
   }
 }
 
@@ -2540,7 +2540,7 @@ func_D174() {
   var_01 = 0.04;
 
   for (;;) {
-  while (level.player scripts/sp/utility::func_65DB("disable_jackal_lockon"))
+  while (level.player scripts\sp\utility::func_65DB("disable_jackal_lockon"))
   wait 0.05;
 
   level.func_A056.func_C93E = scripts\engine\utility::array_removeundefined(level.func_A056.func_C93E);
@@ -2560,8 +2560,8 @@ func_D174() {
   var_10 = vectordot(var_02, var_08);
 
   if (var_10 > 0.96 && var_09 < 30000) {
-  var_11 = scripts/sp/math::func_C097(0.96, 0.995, var_10);
-  var_12 = 1 - scripts/sp/math::func_C097(0, 30000, var_09);
+  var_11 = scripts\sp\math::func_C097(0.96, 0.995, var_10);
+  var_12 = 1 - scripts\sp\math::func_C097(0, 30000, var_09);
   var_7.func_377E = var_11 * var_12;
   }
   else
@@ -2623,7 +2623,7 @@ func_13930(var_00) {
   self endon("fd_notify_ace_mode_disengaged");
   var_00 endon("death");
 
-  while (self adsbuttonpressed() && !level.player scripts/sp/utility::func_65DB("disable_jackal_dogfight"))
+  while (self adsbuttonpressed() && !level.player scripts\sp\utility::func_65DB("disable_jackal_dogfight"))
   wait 0.05;
 
   self _meth_8464(undefined);
@@ -2823,7 +2823,7 @@ func_58B4() {
   if (isdefined(var_12)) {
   var_10 = gettime();
 
-  if (!level.player scripts/sp/utility::func_65DB("disable_jackal_dogfight")) {
+  if (!level.player scripts\sp\utility::func_65DB("disable_jackal_dogfight")) {
   var_13 = self _meth_848A();
 
   if (isdefined(var_13) && var_13[0] func_3815()) {
@@ -2992,12 +2992,12 @@ func_587B() {
   wait 0.05;
   }
 
-  if (!level.player scripts/sp/utility::func_65DB("disable_jackal_ads")) {
+  if (!level.player scripts\sp\utility::func_65DB("disable_jackal_ads")) {
   level.player _meth_8490("disable_ads", 0);
   level.player allowads(1);
   }
 
-  if (!level.player scripts/sp/utility::func_65DB("disable_jackal_lockon"))
+  if (!level.player scripts\sp\utility::func_65DB("disable_jackal_lockon"))
   level.player _meth_8490("disable_lockon", 0);
 }
 
@@ -3063,13 +3063,13 @@ func_D189() {
   for (;;) {
   wait 0.05;
 
-  if (removeteamheadicononnotify(level.player scripts/sp/utility::func_65DB("disable_jackal_lockon")))
+  if (removeteamheadicononnotify(level.player scripts\sp\utility::func_65DB("disable_jackal_lockon")))
   continue;
 
-  if (removeteamheadicononnotify(level.player scripts/sp/utility::func_65DB("disable_jackal_guns")))
+  if (removeteamheadicononnotify(level.player scripts\sp\utility::func_65DB("disable_jackal_guns")))
   continue;
 
-  if (removeteamheadicononnotify(level.player scripts/sp/utility::func_65DB("disable_jackal_targetAid")))
+  if (removeteamheadicononnotify(level.player scripts\sp\utility::func_65DB("disable_jackal_targetAid")))
   continue;
 
   if (removeteamheadicononnotify(level.func_A056.func_933B.size > 0))
@@ -3084,7 +3084,7 @@ func_D189() {
   if (gettime() - level.func_A056.func_A91D < level.func_A056.func_118DF)
   continue;
 
-  if (scripts/sp/utility::func_7B9D() <= 0.5)
+  if (scripts\sp\utility::func_7B9D() <= 0.5)
   continue;
 
   func_114F4();
@@ -3092,7 +3092,7 @@ func_D189() {
 }
 
 func_114F4() {
-  if (level.player scripts/sp/utility::func_65DB("disable_jackal_targetAid_update"))
+  if (level.player scripts\sp\utility::func_65DB("disable_jackal_targetAid_update"))
   return;
 
   if (isdefined(level.func_A056.func_4C2C) && isdefined(level.func_A056.func_4C2C[0]))
@@ -3277,14 +3277,14 @@ func_D39E() {
 func_FA4F() {
   level.func_D127.func_10A0D = 0;
   func_1095F();
-  thread scripts/sp/specialist_MAYBE::func_F530(1);
+  thread scripts\sp\specialist_MAYBE::func_F530(1);
 }
 
 func_10960() {
   level.player notify("jackal_note_hud_off");
   level.player endon("jackal_note_hud_on");
   level.player endon("jackal_note_hud_off");
-  level.player scripts/sp/utility::func_65DD("jackal_hud_on");
+  level.player scripts\sp\utility::func_65DD("jackal_hud_on");
   setomnvar("ui_jackal_bootup", 0);
   setomnvar("ui_jackal_callouts_enabled", 0);
   setomnvar("ui_hide_hud", 0);
@@ -3293,7 +3293,7 @@ func_10960() {
 
 func_1095F() {
   level.func_A056.targets = scripts\engine\utility::array_removeundefined(level.func_A056.targets);
-  level.player scripts/sp/utility::func_65E1("disable_jackal_lockon");
+  level.player scripts\sp\utility::func_65E1("disable_jackal_lockon");
 
   foreach (var_01 in level.func_A056.targets)
   var_01 func_0BDC::func_105D9();

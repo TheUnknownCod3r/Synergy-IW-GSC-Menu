@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3080.gsc
-****************************/
+ * Script: 3080.gsc
+************************/
 
 func_7FD3() {
 	if(isdefined(self.var_10AB7) && self.var_10AB7) {
@@ -13,7 +13,7 @@ func_7FD3() {
 		return self.var_527B;
 	}
 
-	return scripts/aitypes/bt_util::func_75();
+	return scripts\aitypes\bt_util::func_75();
 }
 
 func_12E90(param_00) {
@@ -21,7 +21,7 @@ func_12E90(param_00) {
 		return level.failure;
 	}
 
-	scripts/asm/asm_bb::bb_requestmovetype(func_7FD3());
+	scripts\asm\asm_bb::bb_requestmovetype(func_7FD3());
 	return level.success;
 }
 
@@ -42,7 +42,7 @@ func_351D(param_00,param_01) {
 		param_01 = 1;
 	}
 
-	self.bt.var_13C83[param_00] = param_01;
+	self.var_3135.var_13C83[param_00] = param_01;
 }
 
 func_357A() {
@@ -74,7 +74,7 @@ func_357D() {
 	var_01 = func_3596();
 	foreach(var_03 in var_01) {
 		if(func_8C3C(var_03) && func_9F5B(var_03)) {
-			var_04 = self._blackboard.shootparams.var_13CC3[var_03];
+			var_04 = self.var_1198.shootparams.var_13CC3[var_03];
 			if(isdefined(var_04) && isdefined(var_04.var_3124) && var_04.var_3124 && isdefined(var_04.var_2AB9) && var_04.var_2AB9) {
 				var_00[var_00.size] = var_03;
 			}
@@ -89,7 +89,7 @@ func_8C3C(param_00) {
 }
 
 func_9F5B(param_00) {
-	if(!self.bt.var_13C83[param_00]) {
+	if(!self.var_3135.var_13C83[param_00]) {
 		return 0;
 	}
 
@@ -133,23 +133,23 @@ func_97EB(param_00) {
 
 	var_01.var_A98F = gettime();
 	var_01.var_A993 = gettime();
-	self._blackboard.shootparams = var_01;
+	self.var_1198.shootparams = var_01;
 	self.setthermalbodymaterial = 1024;
-	if(!isdefined(self.bt.lasttimefired)) {
-		self.bt.lasttimefired = 0;
+	if(!isdefined(self.var_3135.lasttimefired)) {
+		self.var_3135.lasttimefired = 0;
 	}
 
 	return level.success;
 }
 
 func_40E9(param_00) {
-	if(isdefined(self._blackboard.shootparams) && isdefined(self._blackboard.shootparams.var_13CC3) && !isdefined(self.var_EF6D)) {
+	if(isdefined(self.var_1198.shootparams) && isdefined(self.var_1198.shootparams.var_13CC3) && !isdefined(self.var_EF6D)) {
 		var_01 = func_3596();
 		foreach(var_03 in var_01) {
-			self._blackboard.shootparams.var_13CC3[var_03] = undefined;
+			self.var_1198.shootparams.var_13CC3[var_03] = undefined;
 		}
 
-		self._blackboard.shootparams = undefined;
+		self.var_1198.shootparams = undefined;
 	}
 
 	return level.success;
@@ -157,23 +157,23 @@ func_40E9(param_00) {
 
 func_12E77(param_00) {
 	if(isdefined(self.vehicle_getspawnerarray)) {
-		self.bt.lasttimefired = gettime();
+		self.var_3135.lasttimefired = gettime();
 	}
 
 	return level.success;
 }
 
 func_FB1E(param_00,param_01) {
-	if(!isdefined(self._blackboard.shootparams)) {
+	if(!isdefined(self.var_1198.shootparams)) {
 		return level.failure;
 	}
 
-	self._blackboard.shootparams.var_12F1C = param_01;
+	self.var_1198.shootparams.var_12F1C = param_01;
 	return level.success;
 }
 
 func_7E30(param_00) {
-	if(!isdefined(self._blackboard.shootparams)) {
+	if(!isdefined(self.var_1198.shootparams)) {
 		return undefined;
 	}
 
@@ -181,7 +181,7 @@ func_7E30(param_00) {
 	var_02 = undefined;
 	var_03 = 999999999;
 	foreach(var_05 in func_357A()) {
-		var_06 = self._blackboard.shootparams.var_13CC3[var_05];
+		var_06 = self.var_1198.shootparams.var_13CC3[var_05];
 		if(isdefined(var_06.ent)) {
 			if(var_06.var_3124 || isdefined(param_00) && var_01 - var_06.var_A9AB <= param_00) {
 				var_07 = distancesquared(self.origin,var_06.ent.origin);
@@ -215,7 +215,7 @@ func_FE5F(param_00,param_01) {
 }
 
 canseetarget(param_00) {
-	var_01 = self._blackboard.shootparams;
+	var_01 = self.var_1198.shootparams;
 	var_02 = var_01.var_13CC3[param_00];
 	if(!isdefined(var_02)) {
 		return 0;
@@ -241,7 +241,7 @@ func_8C27(param_00,param_01) {
 		return 1;
 	}
 
-	var_02 = self._blackboard.shootparams;
+	var_02 = self.var_1198.shootparams;
 	var_03 = var_02.var_13CC3[param_00];
 	if(!isdefined(var_03)) {
 		return 0;
@@ -294,7 +294,7 @@ shouldshoot(param_00) {
 }
 
 func_FE7B(param_00,param_01) {
-	var_02 = self._blackboard.shootparams;
+	var_02 = self.var_1198.shootparams;
 	if(!isdefined(var_02.var_13CC3[param_00])) {
 		return;
 	}
@@ -320,7 +320,7 @@ func_FE8B(param_00) {
 	var_01 = func_3596();
 	var_02 = undefined;
 	foreach(var_04 in var_01) {
-		if(self._blackboard.shootparams.var_13CC3[var_04] == param_00) {
+		if(self.var_1198.shootparams.var_13CC3[var_04] == param_00) {
 			var_02 = var_04;
 			break;
 		}
@@ -368,7 +368,7 @@ func_FE8B(param_00) {
 }
 
 func_FE8C(param_00) {
-	var_01 = self._blackboard.shootparams;
+	var_01 = self.var_1198.shootparams;
 	if(isdefined(self.var_7212) && gettime() < self.var_7212) {
 		if(func_9F5B("left")) {
 			var_02 = level.player;
@@ -444,11 +444,11 @@ func_FE8C(param_00) {
 
 func_FE7A(param_00) {
 	if(isdefined(param_00)) {
-		self._blackboard.shootparams.var_BFB6 = param_00;
+		self.var_1198.shootparams.var_BFB6 = param_00;
 		return;
 	}
 
-	self._blackboard.shootparams.var_BFB6 = gettime() + randomintrange(1000,1500);
+	self.var_1198.shootparams.var_BFB6 = gettime() + randomintrange(1000,1500);
 }
 
 func_3873(param_00) {
@@ -461,7 +461,7 @@ func_3873(param_00) {
 		return 0;
 	}
 
-	var_01 = self._blackboard.shootparams;
+	var_01 = self.var_1198.shootparams;
 	var_02 = ["left","right"];
 	var_03 = undefined;
 	foreach(var_05 in var_02) {
@@ -480,7 +480,7 @@ func_3873(param_00) {
 		var_07 = "right";
 	}
 
-	if(!scripts/asm/asm_bb::ispartdismembered(var_07 + "_arm")) {
+	if(!scripts\asm\asm_bb::ispartdismembered(var_07 + "_arm")) {
 		return 0;
 	}
 
@@ -493,7 +493,7 @@ func_3873(param_00) {
 }
 
 func_FE79() {
-	var_00 = self._blackboard.shootparams;
+	var_00 = self.var_1198.shootparams;
 	if(isdefined(var_00)) {
 		var_00.var_BF71 = gettime() + randomintrange(10000,20000);
 	}
@@ -538,7 +538,7 @@ func_FE68(param_00) {
 }
 
 func_FE62() {
-	var_00 = self._blackboard.shootparams;
+	var_00 = self.var_1198.shootparams;
 	var_01 = 0;
 	var_02 = undefined;
 	var_03 = func_357C();
@@ -568,7 +568,7 @@ func_FE8E(param_00) {
 }
 
 func_FE8D(param_00) {
-	var_01 = self._blackboard.shootparams;
+	var_01 = self.var_1198.shootparams;
 	if(isdefined(self.var_9DD2) && self.var_9DD2) {
 		return func_FE63();
 	}
@@ -626,7 +626,7 @@ func_FE8D(param_00) {
 }
 
 func_FE8A(param_00) {
-	var_01 = self._blackboard.shootparams;
+	var_01 = self.var_1198.shootparams;
 	var_02 = func_357A();
 	foreach(var_04 in var_02) {
 		if(!func_9F5B(var_04) && isdefined(var_01.var_13CC3[var_04])) {
@@ -686,7 +686,7 @@ func_FE8A(param_00) {
 }
 
 func_10079(param_00) {
-	var_01 = self._blackboard.shootparams.var_13CC3[param_00];
+	var_01 = self.var_1198.shootparams.var_13CC3[param_00];
 	if(!isdefined(var_01)) {
 		return 0;
 	}
@@ -695,7 +695,7 @@ func_10079(param_00) {
 }
 
 func_9F7B(param_00) {
-	var_01 = self._blackboard.shootparams.var_13CC3[param_00];
+	var_01 = self.var_1198.shootparams.var_13CC3[param_00];
 	if(!isdefined(var_01)) {
 		return 0;
 	}
@@ -708,7 +708,7 @@ func_1391C(param_00) {
 }
 
 func_A004(param_00) {
-	var_01 = self._blackboard.shootparams.var_13CC3[param_00];
+	var_01 = self.var_1198.shootparams.var_13CC3[param_00];
 	if(!isdefined(var_01)) {
 		return 0;
 	}
@@ -717,8 +717,8 @@ func_A004(param_00) {
 }
 
 func_A005(param_00) {
-	var_01 = self._blackboard.shootparams.var_12F1C;
-	var_02 = self._blackboard.shootparams.var_13CC3[var_01];
+	var_01 = self.var_1198.shootparams.var_12F1C;
+	var_02 = self.var_1198.shootparams.var_13CC3[var_01];
 	if(!isdefined(var_02)) {
 		return level.failure;
 	}
@@ -731,7 +731,7 @@ func_A005(param_00) {
 }
 
 func_A006(param_00,param_01) {
-	var_02 = self._blackboard.shootparams.var_12F1C;
+	var_02 = self.var_1198.shootparams.var_12F1C;
 	if(func_A007(var_02,param_01)) {
 		return level.success;
 	}
@@ -756,7 +756,7 @@ func_FE66(param_00) {
 		return undefined;
 	}
 
-	var_01 = self._blackboard.shootparams;
+	var_01 = self.var_1198.shootparams;
 	var_02 = var_01.var_13CC3[param_00];
 	var_03 = self.var_13CC3[param_00] == "rocket";
 	return func_FE67(var_02,var_03);
@@ -801,7 +801,7 @@ func_FE67(param_00,param_01) {
 		var_09 = func_3596();
 		var_0A = undefined;
 		foreach(var_0C in var_09) {
-			if(self._blackboard.shootparams.var_13CC3[var_0C] == var_07) {
+			if(self.var_1198.shootparams.var_13CC3[var_0C] == var_07) {
 				var_0A = var_0C;
 				break;
 			}
@@ -849,8 +849,8 @@ func_FE69(param_00,param_01) {
 }
 
 func_FEE6(param_00) {
-	var_01 = self._blackboard.shootparams;
-	var_02 = self._blackboard.shootparams.var_12F1C;
+	var_01 = self.var_1198.shootparams;
+	var_02 = self.var_1198.shootparams.var_12F1C;
 	var_01.var_11590[param_00] = var_02;
 	var_03 = var_01.var_13CC3[var_02];
 	var_03.var_1158D = param_00;
@@ -903,7 +903,7 @@ func_FEE5(param_00,param_01) {
 }
 
 func_FEE3(param_00) {
-	var_01 = self._blackboard.shootparams;
+	var_01 = self.var_1198.shootparams;
 	var_02 = var_01.var_12F1C;
 	var_03 = var_01.var_13CC3[var_02];
 	if(!func_8BEC(var_03)) {
@@ -976,7 +976,7 @@ func_FEE3(param_00) {
 }
 
 func_FEE4(param_00) {
-	var_01 = self._blackboard.shootparams;
+	var_01 = self.var_1198.shootparams;
 	if(!isdefined(var_01)) {
 		return;
 	}
@@ -1010,7 +1010,7 @@ func_FEE9(param_00,param_01) {
 }
 
 func_FEEA(param_00) {
-	var_01 = self._blackboard.shootparams;
+	var_01 = self.var_1198.shootparams;
 	var_02 = var_01.var_12F1C;
 	var_01.var_11590[param_00] = var_02;
 	var_03 = var_01.var_13CC3[var_02];
@@ -1030,10 +1030,10 @@ func_FEEA(param_00) {
 }
 
 func_FEE7(param_00) {
-	var_01 = self._blackboard.shootparams;
+	var_01 = self.var_1198.shootparams;
 	var_02 = var_01.var_12F1C;
-	var_03 = self._blackboard.shootparams.var_13CC3[var_02];
-	if(scripts/asm/asm::asm_ephemeraleventfired("rocket_shoot_complete",var_02)) {
+	var_03 = self.var_1198.shootparams.var_13CC3[var_02];
+	if(scripts\asm\asm::asm_ephemeraleventfired("rocket_shoot_complete",var_02)) {
 		func_FE7A();
 		if(isdefined(var_03)) {
 			var_03.var_2720 = undefined;
@@ -1083,7 +1083,7 @@ func_FEE7(param_00) {
 }
 
 func_FEE8(param_00) {
-	var_01 = self._blackboard.shootparams;
+	var_01 = self.var_1198.shootparams;
 	if(!isdefined(var_01)) {
 		return;
 	}
@@ -1093,7 +1093,7 @@ func_FEE8(param_00) {
 		return;
 	}
 
-	var_03 = self._blackboard.shootparams.var_13CC3[var_02];
+	var_03 = self.var_1198.shootparams.var_13CC3[var_02];
 	if(var_03.var_1158D == param_00) {
 		var_03.state = 0;
 	}
@@ -1157,7 +1157,7 @@ func_8C23(param_00) {
 }
 
 func_FE90(param_00) {
-	var_01 = self._blackboard.shootparams;
+	var_01 = self.var_1198.shootparams;
 	var_02 = var_01.var_13CC3[param_00];
 	func_FE8B(var_02);
 	if(isdefined(var_01.var_BFB6)) {
@@ -1193,10 +1193,10 @@ func_FE90(param_00) {
 }
 
 func_FE8F(param_00) {
-	var_01 = self._blackboard.shootparams;
+	var_01 = self.var_1198.shootparams;
 	if(!isdefined(var_01)) {
 		func_97EB(undefined);
-		var_01 = self._blackboard.shootparams;
+		var_01 = self.var_1198.shootparams;
 	}
 
 	var_02 = func_357A();
@@ -1206,7 +1206,7 @@ func_FE8F(param_00) {
 			continue;
 		}
 
-		var_05 = self._blackboard.shootparams.var_13CC3[var_04];
+		var_05 = self.var_1198.shootparams.var_13CC3[var_04];
 		if(isdefined(var_05)) {
 			func_FE5F(var_05,0);
 		}
@@ -1232,7 +1232,7 @@ func_1383A(param_00) {
 }
 
 func_3906(param_00) {
-	var_01 = self._blackboard.shootparams;
+	var_01 = self.var_1198.shootparams;
 	var_02 = func_357C();
 	foreach(var_04 in var_02) {
 		var_05 = var_01.var_13CC3[var_04];
@@ -1259,7 +1259,7 @@ func_3906(param_00) {
 }
 
 func_8C25(param_00,param_01) {
-	var_02 = self._blackboard.shootparams;
+	var_02 = self.var_1198.shootparams;
 	var_03 = func_357C();
 	foreach(var_05 in var_03) {
 		var_06 = var_02.var_13CC3[var_05];
@@ -1288,7 +1288,7 @@ func_8C25(param_00,param_01) {
 func_2CD6(param_00) {
 	var_01 = 6000;
 	var_02 = gettime();
-	if(var_02 - self.bt.lasttimefired > var_01) {
+	if(var_02 - self.var_3135.lasttimefired > var_01) {
 		return level.success;
 	}
 
@@ -1296,7 +1296,7 @@ func_2CD6(param_00) {
 }
 
 func_7FCB() {
-	var_00 = self._blackboard.shootparams;
+	var_00 = self.var_1198.shootparams;
 	var_01 = [];
 	var_02 = func_357C();
 	foreach(var_04 in var_02) {
@@ -1338,7 +1338,7 @@ func_B4EA(param_00) {
 		return level.failure;
 	}
 
-	if(gettime() - self.bt.lasttimefired < 1000) {
+	if(gettime() - self.var_3135.lasttimefired < 1000) {
 		return level.failure;
 	}
 
@@ -1436,7 +1436,7 @@ func_F814(param_00) {
 		if(isdefined(var_02)) {
 			self.var_6D = 128;
 			self _meth_8481(var_02);
-			self._blackboard.var_C974 = var_01;
+			self.var_1198.var_C974 = var_01;
 			return level.success;
 		}
 	}
@@ -1469,7 +1469,7 @@ func_9E1B(param_00) {
 		return 0;
 	}
 
-	var_01 = self._blackboard.shootparams;
+	var_01 = self.var_1198.shootparams;
 	var_02 = func_357C();
 	foreach(var_04 in var_02) {
 		var_05 = var_01.var_13CC3[var_04];
@@ -1484,7 +1484,7 @@ func_9E1B(param_00) {
 }
 
 func_213A() {
-	var_00 = self._blackboard.shootparams;
+	var_00 = self.var_1198.shootparams;
 	var_01 = 0;
 	var_02 = anglestoforward(self.angles);
 	var_03 = func_357C();
@@ -1511,11 +1511,11 @@ func_1382A(param_00) {
 		return level.success;
 	}
 
-	if(!isdefined(self._blackboard.var_C974)) {
+	if(!isdefined(self.var_1198.var_C974)) {
 		return level.success;
 	}
 
-	if(!func_9E1B(self._blackboard.var_C974)) {
+	if(!func_9E1B(self.var_1198.var_C974)) {
 		return level.success;
 	}
 
@@ -1538,11 +1538,11 @@ func_41B3(param_00) {
 }
 
 func_128A9(param_00) {
-	if(!self.bt.var_E5FA) {
+	if(!self.var_3135.var_E5FA) {
 		return level.failure;
 	}
 
-	if(scripts/asm/asm_bb::bb_isrodeorequested()) {
+	if(scripts\asm\asm_bb::bb_isrodeorequested()) {
 		return level.success;
 	}
 
@@ -1571,10 +1571,10 @@ func_128A9(param_00) {
 	}
 
 	var_01 = undefined;
-	if(scripts/asm/asm_bb::bb_canrodeo("left")) {
+	if(scripts\asm\asm_bb::bb_canrodeo("left")) {
 		var_01 = "left";
 	}
-	else if(scripts/asm/asm_bb::bb_canrodeo("right")) {
+	else if(scripts\asm\asm_bb::bb_canrodeo("right")) {
 		var_01 = "right";
 	}
 
@@ -1621,7 +1621,7 @@ func_128A9(param_00) {
 		self notify("asm_stop_grabtargetthread");
 	}
 
-	scripts/asm/asm_bb::bb_setrodeorequest(var_01);
+	scripts\asm\asm_bb::bb_setrodeorequest(var_01);
 	return level.success;
 }
 
@@ -1668,43 +1668,43 @@ func_4F3F(param_00,param_01,param_02) {}
 func_4F43() {}
 
 func_E602(param_00) {
-	if(isdefined(self._blackboard.var_E5FD) && !self._blackboard.var_E5FD) {
-		if(isdefined(self.bt.var_E5FB)) {
-			self.bt.var_E5FB = undefined;
+	if(isdefined(self.var_1198.var_E5FD) && !self.var_1198.var_E5FD) {
+		if(isdefined(self.var_3135.var_E5FB)) {
+			self.var_3135.var_E5FB = undefined;
 			self.var_6D = 32;
 			self _meth_8481(self.origin);
 		}
 
 		if(isdefined(self.var_30EA)) {
-			scripts/asm/asm_bb::bb_setcanrodeo(self._blackboard.rodeorequested,0);
+			scripts\asm\asm_bb::bb_setcanrodeo(self.var_1198.rodeorequested,0);
 		}
 
-		self._blackboard.rodeorequested = undefined;
-		self._blackboard.var_E5FD = undefined;
+		self.var_1198.rodeorequested = undefined;
+		self.var_1198.var_E5FD = undefined;
 		return level.failure;
 	}
 
-	if(!isdefined(self.bt.var_E5FB)) {
+	if(!isdefined(self.var_3135.var_E5FB)) {
 		var_01 = scripts\engine\utility::getstructarray("c12_rodeo_struct","targetname");
 		if(var_01.size == 0) {
-			self.bt.var_E5FB = self.origin;
+			self.var_3135.var_E5FB = self.origin;
 			self.var_6D = 32;
 		}
 		else
 		{
 			var_02 = sortbydistance(var_01,self.origin)[0];
-			self.bt.var_E5FB = getclosestpointonnavmesh(var_02.origin,self);
+			self.var_3135.var_E5FB = getclosestpointonnavmesh(var_02.origin,self);
 			self.var_6D = max(var_02.fgetarg - 180,32);
 		}
 
-		self _meth_8481(self.bt.var_E5FB);
+		self _meth_8481(self.var_3135.var_E5FB);
 	}
 
 	return level.running;
 }
 
 func_12F13(param_00) {
-	if(isdefined(self.bt.var_F1F8)) {
+	if(isdefined(self.var_3135.var_F1F8)) {
 		return level.running;
 	}
 
@@ -1718,7 +1718,7 @@ func_F1F8() {
 	self endon("death");
 	createnavrepulsor("c12_selfdestruct",-1,self,1024,1);
 	self.ignoreme = 1;
-	self.bt.var_F1F8 = 1;
+	self.var_3135.var_F1F8 = 1;
 	wait(0.2);
 	playfxontag(level.var_7649["c12_selfdestruct_buildup"],self,"j_spineupper");
 	self playsound("c12_selfdestruct_1beep","beep_done",1);
@@ -1764,11 +1764,11 @@ func_F1FB() {
 }
 
 func_35AD(param_00,param_01) {
-	if(scripts/asm/asm_bb::ispartdismembered("right_arm") || scripts/asm/asm_bb::ispartdismembered("right_leg") || scripts/asm/asm_bb::ispartdismembered("left_leg")) {
+	if(scripts\asm\asm_bb::ispartdismembered("right_arm") || scripts\asm\asm_bb::ispartdismembered("right_leg") || scripts\asm\asm_bb::ispartdismembered("left_leg")) {
 		return 0;
 	}
 
-	if(scripts/asm/asm_bb::bb_isrodeorequested()) {
+	if(scripts\asm\asm_bb::bb_isrodeorequested()) {
 		return 0;
 	}
 
@@ -1790,7 +1790,7 @@ func_35AD(param_00,param_01) {
 }
 
 func_128AE(param_00,param_01) {
-	var_02 = self._blackboard.shootparams;
+	var_02 = self.var_1198.shootparams;
 	var_03 = gettime();
 	if(isdefined(self.asm.var_2AD2)) {
 		var_02.var_A993 = var_03;

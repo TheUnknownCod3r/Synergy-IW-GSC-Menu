@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\3026.gsc
+ * Script: 3026.gsc
 ***************************************/
 
 init() {
@@ -26,7 +26,7 @@ func_8CDF() {
   for (;;) {
   wait 0.5;
 
-  if (!isdefined(level.func_D127) || !isdefined(level.func_D127.team) || !scripts/sp/utility::func_D123())
+  if (!isdefined(level.func_D127) || !isdefined(level.func_D127.team) || !scripts\sp\utility::func_D123())
   continue;
 
   var_03 = func_0BDC::func_77D8();
@@ -94,19 +94,19 @@ func_8CDF() {
 
 func_1105E(var_00) {
   foreach (var_02 in var_00) {
-  var_2._blackboard.func_7002 = undefined;
-  var_2._blackboard.func_90EE = undefined;
+  var_2.var_1198.func_7002 = undefined;
+  var_2.var_1198.func_90EE = undefined;
   }
 }
 
 func_1105F(var_00) {
   foreach (var_02 in var_00)
-  var_2._blackboard.func_90EE = undefined;
+  var_2.var_1198.func_90EE = undefined;
 }
 
 func_1105D(var_00) {
   foreach (var_02 in var_00)
-  var_2._blackboard.func_7002 = undefined;
+  var_2.var_1198.func_7002 = undefined;
 }
 
 func_F661(var_00, var_01) {
@@ -118,9 +118,9 @@ func_F661(var_00, var_01) {
   var_05 = var_1[var_03];
   var_2[var_03] = 0;
 
-  if (isdefined(var_5._blackboard.func_90EE)) {
+  if (isdefined(var_5.var_1198.func_90EE)) {
   var_2[var_03] = var_2[var_03] + 1.0;
-  var_5._blackboard.func_90EE = undefined;
+  var_5.var_1198.func_90EE = undefined;
   }
 
   var_06 = distance(var_4.origin, var_5.origin);
@@ -134,22 +134,22 @@ func_F661(var_00, var_01) {
   var_10 = func_1042E(var_02);
 
   for (var_03 = 0; var_03 < var_00 && var_03 < var_1.size; var_3++)
-  var_1[var_03]._blackboard.func_90EE = var_04;
+  var_1[var_03].var_1198.func_90EE = var_04;
 }
 
 func_11ADF() {
-  if (isdefined(self._blackboard.func_90EE) && isdefined(level.func_D127) && self._blackboard.func_90EE == level.func_D127) {
+  if (isdefined(self.var_1198.func_90EE) && isdefined(level.func_D127) && self.var_1198.func_90EE == level.func_D127) {
   if (!scripts\engine\utility::array_contains(level.func_A056.func_90E3, self))
   level.func_A056.func_90E3 = scripts\engine\utility::array_add(level.func_A056.func_90E3, self);
   }
   else if (scripts\engine\utility::array_contains(level.func_A056.func_90E3, self)) {
   level.func_A056.func_90E3 = scripts\engine\utility::array_remove(level.func_A056.func_90E3, self);
-  self._blackboard.func_90EC = "";
+  self.var_1198.func_90EC = "";
   }
 }
 
 func_11AD9() {
-  if (isdefined(self._blackboard.func_7002) && isdefined(level.func_D127) && self._blackboard.func_7002 == level.func_D127) {
+  if (isdefined(self.var_1198.func_7002) && isdefined(level.func_D127) && self.var_1198.func_7002 == level.func_D127) {
   if (!scripts\engine\utility::array_contains(level.func_A056.func_7001, self))
   level.func_A056.func_7001 = scripts\engine\utility::array_add(level.func_A056.func_7001, self);
   }
@@ -167,9 +167,9 @@ func_F660(var_00, var_01) {
   var_06 = var_1[var_03];
   var_2[var_03] = 0;
 
-  if (isdefined(var_6._blackboard.func_7002)) {
+  if (isdefined(var_6.var_1198.func_7002)) {
   var_2[var_03] = var_2[var_03] + 2.0;
-  var_6._blackboard.func_7002 = undefined;
+  var_6.var_1198.func_7002 = undefined;
   }
 
   var_07 = distance(var_4.origin, var_6.origin);
@@ -186,7 +186,7 @@ func_F660(var_00, var_01) {
   var_12 = func_1042E(var_02);
 
   for (var_03 = 0; var_03 < var_00 && var_03 < var_1.size; var_3++)
-  var_1[var_03]._blackboard.func_7002 = var_04;
+  var_1[var_03].var_1198.func_7002 = var_04;
 }
 
 func_1042E(var_00) {
@@ -221,7 +221,7 @@ func_11ADE() {
   for (;;) {
   wait(var_00);
 
-  if (!scripts/sp/utility::func_D123())
+  if (!scripts\sp\utility::func_D123())
   continue;
 
   var_05 = gettime();
@@ -274,7 +274,7 @@ func_7E6E(var_00) {
 }
 
 func_7E6C(var_00) {
-  if (scripts/sp/utility::func_7B9D() < 0.4)
+  if (scripts\sp\utility::func_7B9D() < 0.4)
   return 0;
 
   return int(min(level.func_7000 * 10.0, var_00 * level.func_7000));
@@ -301,16 +301,16 @@ func_100B6() {
 }
 
 func_10022() {
-  if (!self._blackboard.func_90EA)
+  if (!self.var_1198.func_90EA)
   return 0;
 
-  if (self._blackboard.func_9DC2)
+  if (self.var_1198.func_9DC2)
   return 0;
 
-  if (isdefined(self._blackboard.func_A9D1) && self._blackboard.func_A9D1 + 5000 < gettime())
+  if (isdefined(self.var_1198.func_A9D1) && self.var_1198.func_A9D1 + 5000 < gettime())
   return 0;
 
-  if (isdefined(self._blackboard.func_90EE) && self._blackboard.func_90EE != level.func_D127)
+  if (isdefined(self.var_1198.func_90EE) && self.var_1198.func_90EE != level.func_D127)
   return 0;
 
   if (!isenemyteam(level.func_D127.team, self.team))

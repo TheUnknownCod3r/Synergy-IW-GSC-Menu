@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2671.gsc
+ * Script: 2671.gsc
 ***************************************/
 
 func_DEE0() {
@@ -91,13 +91,13 @@ init_passive_random_attachment(var_00) {
   var_02 = [];
 
   foreach (var_04 in var_01) {
-  var_05 = scripts/cp/utility::getrawbaseweaponname(var_04);
-  var_06 = scripts/cp/utility::getweaponrootname(var_04);
-  var_07 = scripts/cp/utility::getweaponcamo(var_06);
-  var_08 = scripts/cp/utility::getweaponcosmeticattachment(var_06);
-  var_09 = scripts/cp/utility::getweaponreticle(var_06);
-  var_10 = scripts/cp/utility::getweaponpaintjobid(var_06);
-  var_0.weapon_build_models[var_05] = scripts/cp/utility::mpbuildweaponname(var_06, var_02, var_07, var_09, scripts/cp/utility::get_weapon_variant_id(var_00, var_04), self getentitynumber(), self.clientid, var_10, var_08);
+  var_05 = scripts\cp\utility::getrawbaseweaponname(var_04);
+  var_06 = scripts\cp\utility::getweaponrootname(var_04);
+  var_07 = scripts\cp\utility::getweaponcamo(var_06);
+  var_08 = scripts\cp\utility::getweaponcosmeticattachment(var_06);
+  var_09 = scripts\cp\utility::getweaponreticle(var_06);
+  var_10 = scripts\cp\utility::getweaponpaintjobid(var_06);
+  var_0.weapon_build_models[var_05] = scripts\cp\utility::mpbuildweaponname(var_06, var_02, var_07, var_09, scripts\cp\utility::get_weapon_variant_id(var_00, var_04), self getentitynumber(), self.clientid, var_10, var_08);
   }
 }
 
@@ -173,31 +173,31 @@ func_12C0B(var_00) {
 init_passive_empty_reload_speed(var_00) {}
 
 set_passive_empty_reload_speed(var_00) {
-  var_00 scripts/cp/utility::_setperk("specialty_fastreload_empty");
+  var_00 scripts\cp\utility::_setperk("specialty_fastreload_empty");
 }
 
 unset_passive_empty_reload_speed(var_00) {
-  var_00 scripts/cp/utility::_unsetperk("specialty_fastreload_empty");
+  var_00 scripts\cp\utility::_unsetperk("specialty_fastreload_empty");
 }
 
 init_passive_increased_scope_breath(var_00) {}
 
 set_passive_increased_scope_breath(var_00) {
-  var_00 scripts/cp/utility::_setperk("specialty_holdbreath");
+  var_00 scripts\cp\utility::_setperk("specialty_holdbreath");
 }
 
 unset_passive_increased_scope_breath(var_00) {
-  var_00 scripts/cp/utility::_unsetperk("specialty_holdbreath");
+  var_00 scripts\cp\utility::_unsetperk("specialty_holdbreath");
 }
 
 func_974D(var_00) {}
 
 func_F5A3(var_00) {
-  var_00 scripts/cp/utility::_setperk("specialty_autoaimhead");
+  var_00 scripts\cp\utility::_setperk("specialty_autoaimhead");
 }
 
 func_12C62(var_00) {
-  var_00 scripts/cp/utility::_unsetperk("specialty_autoaimhead");
+  var_00 scripts\cp\utility::_unsetperk("specialty_autoaimhead");
 }
 
 func_96B5(var_00) {
@@ -206,7 +206,7 @@ func_96B5(var_00) {
 
 func_F4BB(var_00) {
   self endon("passive_hunter_killer_cancel");
-  var_01 = scripts/cp/cp_agent_utils::getaliveagentsofteam("axis");
+  var_01 = scripts\cp\cp_agent_utils::getaliveagentsofteam("axis");
   thread func_12EAE(var_01);
   thread func_91EA();
 
@@ -221,7 +221,7 @@ func_12C08(var_00) {
 
   foreach (var_02 in self.func_91E9) {
   var_00 = self.func_91E8[var_02];
-  scripts/cp/cp_outline::disable_outline_for_players(var_00, level.players);
+  scripts\cp\cp_outline::disable_outline_for_players(var_00, level.players);
   }
 
   self.func_91E9 = undefined;
@@ -244,7 +244,7 @@ func_12EAE(var_00) {
   if (level.teambased && self.team != var_2.team && var_2.health / var_2.maxhealth <= 0.5 && var_2.health > 0) {
   if (var_03 < 0) {
   self.func_91EE++;
-  scripts/cp/cp_outline::enable_outline_for_player(var_02, self, 1, 0, 1, "high");
+  scripts\cp\cp_outline::enable_outline_for_player(var_02, self, 1, 0, 1, "high");
   var_04 = self.func_91EE;
   self.func_91E9[self.func_91E9.size] = var_04;
   self.func_91E8[var_04] = var_02;
@@ -257,7 +257,7 @@ func_12EAE(var_00) {
   if (var_03 >= 0) {
   var_05 = [];
   var_06 = [];
-  scripts/cp/cp_outline::disable_outline_for_player(var_02, self);
+  scripts\cp\cp_outline::disable_outline_for_player(var_02, self);
 
   foreach (var_04 in self.func_91E9) {
   var_08 = self.func_91E8[var_04];
@@ -350,7 +350,7 @@ func_89D1(var_00, var_01, var_02, var_03, var_04, var_05) {
   var_1.func_BFA0++;
 
   if (var_1.func_BFA0 >= 50) {
-  var_01 scripts/cp/powers/coop_powers::power_adjustcharges(undefined, "primary", 1);
+  var_01 scripts\cp\powers\coop_powers::power_adjustcharges(undefined, "primary", 1);
   var_1.func_BFA0 = 0;
   }
 }
@@ -544,7 +544,7 @@ func_96BC(var_00) {}
 
 func_F4C2(var_00) {
   var_0.cash_scalar = var_0.cash_scalar + 0.1;
-  var_0.cash_scalar_weapon = scripts/cp/utility::getrawbaseweaponname(var_00 getcurrentweapon());
+  var_0.cash_scalar_weapon = scripts\cp\utility::getrawbaseweaponname(var_00 getcurrentweapon());
 }
 
 func_12C0F(var_00) {
@@ -563,7 +563,7 @@ func_12C07(var_00) {
 }
 
 func_89B3(var_00, var_01, var_02, var_03, var_04, var_05) {
-  if (!isdefined(var_01) || !scripts/cp/utility::isreallyalive(var_01) || !isdefined(var_02))
+  if (!isdefined(var_01) || !scripts\cp\utility::isreallyalive(var_01) || !isdefined(var_02))
   return;
 
   if (!isdefined(var_1.func_903C))
@@ -626,7 +626,7 @@ func_11AF4(var_00, var_01, var_02, var_03, var_04, var_05) {
 
   if (var_1.func_C944 >= 150 && var_1.func_A9CA + 3 <= level.wave_num) {
   var_1.func_C944 = 0;
-  level scripts/cp/loot::drop_loot(var_1.origin, var_01, "kill_50", 1);
+  level scripts\cp\loot::drop_loot(var_1.origin, var_01, "kill_50", 1);
   }
 }
 
@@ -654,7 +654,7 @@ func_89AE(var_00, var_01, var_02, var_03, var_04, var_05) {
   if (!isdefined(var_01) || !isdefined(var_00))
   return;
 
-  if (!scripts/cp/utility::isheadshot(var_00, var_04, var_03, var_01))
+  if (!scripts\cp\utility::isheadshot(var_00, var_04, var_03, var_01))
   return;
 
   var_06 = weaponclipsize(var_00);
@@ -737,7 +737,7 @@ handleninjaonlastshot(var_00, var_01, var_02) {
 }
 
 set_player_stealthed(var_00, var_01) {
-  var_00 scripts/cp/utility::allow_player_ignore_me(1);
+  var_00 scripts\cp\utility::allow_player_ignore_me(1);
   playfx(level._effect["stimulus_glow_burst"], scripts\engine\utility::drop_to_ground(var_0.origin) - (0, 0, 30));
   scripts\engine\utility::play_sound_in_space("zmb_fnf_stimulus", scripts\engine\utility::drop_to_ground(var_0.origin) - (0, 0, 30));
   var_0.stealth_used = scripts\engine\utility::add_to_array(var_0.stealth_used, var_01);
@@ -751,7 +751,7 @@ set_player_stealthed(var_00, var_01) {
   var_0.stealth_stacks--;
 
   if (var_0.stealth_stacks <= 0)
-  var_00 scripts/cp/utility::allow_player_ignore_me(0);
+  var_00 scripts\cp\utility::allow_player_ignore_me(0);
 
   var_0.stealth_stacks = 0;
 }
@@ -822,14 +822,14 @@ unset_passive_sonic(var_00) {
 handlepassivesonic(var_00, var_01, var_02) {
   var_03 = gettime();
 
-  if (var_02 scripts/cp/utility::agentisfnfimmune())
+  if (var_02 scripts\cp\utility::agentisfnfimmune())
   return;
 
   if (var_03 <= var_0.sonictimer)
   return;
 
   if (distance2dsquared(var_0.origin, var_2.origin) <= 62500)
-  thread scripts/cp/cp_weapon::fx_stun_damage(var_02, var_00);
+  thread scripts\cp\cp_weapon::fx_stun_damage(var_02, var_00);
 
   var_0.sonictimer = var_03 + 1000;
 }
@@ -870,12 +870,12 @@ adjust_move_speed_while_crouched(var_00, var_01) {
 func_96B6(var_00) {}
 
 func_F4BC(var_00) {
-  var_00 scripts/cp/utility::enable_infinite_ammo(1);
+  var_00 scripts\cp\utility::enable_infinite_ammo(1);
   var_0.func_C5C9["passive_infinite_ammo"] = 1;
 }
 
 func_12C09(var_00) {
-  var_00 scripts/cp/utility::enable_infinite_ammo(0);
+  var_00 scripts\cp\utility::enable_infinite_ammo(0);
   var_0.func_C5C9["passive_infinite_ammo"] = 0;
 }
 
@@ -976,7 +976,7 @@ handlepassivescrambler(var_00) {
 
   for (;;) {
   if (randomint(100) > 85) {
-  var_01 = scripts/cp/cp_agent_utils::getaliveagentsofteam("axis");
+  var_01 = scripts\cp\cp_agent_utils::getaliveagentsofteam("axis");
   var_02 = scripts\engine\utility::get_array_of_closest(var_0.origin, var_01, undefined, 24, 256);
   var_03 = 0;
 
@@ -1003,7 +1003,7 @@ scrambler_stun_damage(var_00, var_01) {
 
   if (isdefined(var_0.stun_hit_time)) {
   if (gettime() > var_0.stun_hit_time) {
-  if (var_00 scripts/mp/agents/zombie/zombie_util::iscrawling()) {
+  if (var_00 scripts\mp\agents\zombie\zombie_util::iscrawling()) {
   var_0.scripted_mode = 1;
   var_0.ignoreall = 1;
   var_00 give_mp_super_weapon(var_0.origin);
@@ -1016,7 +1016,7 @@ scrambler_stun_damage(var_00, var_01) {
   else
   return;
   } else {
-  if (var_00 scripts/mp/agents/zombie/zombie_util::iscrawling()) {
+  if (var_00 scripts\mp\agents\zombie\zombie_util::iscrawling()) {
   var_0.scripted_mode = 1;
   var_0.ignoreall = 1;
   var_00 give_mp_super_weapon(var_0.origin);
@@ -1031,7 +1031,7 @@ scrambler_stun_damage(var_00, var_01) {
   var_00 thread addhealthback(var_00);
   wait 1;
 
-  if (var_00 scripts/mp/agents/zombie/zombie_util::iscrawling()) {
+  if (var_00 scripts\mp\agents\zombie\zombie_util::iscrawling()) {
   var_0.scripted_mode = 0;
   var_0.ignoreall = 0;
   }
@@ -1081,8 +1081,8 @@ trackkillsforrandomperks(var_00, var_01, var_02, var_03, var_04, var_05) {
   for (;;) {
   var_07 = scripts\engine\utility::random(var_06);
 
-  if (!var_01 scripts/cp/utility::has_zombie_perk(var_07)) {
-  var_01 scripts/cp/zombies/zombies_perk_machines::give_zombies_perk(var_07, 0);
+  if (!var_01 scripts\cp\utility::has_zombie_perk(var_07)) {
+  var_01 scripts\cp\zombies\zombies_perk_machines::give_zombies_perk(var_07, 0);
   break;
   }
   else
@@ -1122,7 +1122,7 @@ init_passive_jump_super(var_00) {}
 
 set_passive_jump_super(var_00) {
   var_0.func_C54A["passive_jump_super"] = 1;
-  var_0.current_weapon_jump_super = scripts/cp/utility::getrawbaseweaponname(var_00 getcurrentweapon());
+  var_0.current_weapon_jump_super = scripts\cp\utility::getrawbaseweaponname(var_00 getcurrentweapon());
 }
 
 unset_passive_jump_super(var_00) {
@@ -1134,7 +1134,7 @@ handleairbornesuper(var_00, var_01, var_02, var_03, var_04, var_05) {
   level endon("game_ended");
   var_01 endon("disconnect");
 
-  if (!var_01 isonground() && (isdefined(var_1.current_weapon_jump_super) && scripts/cp/utility::getrawbaseweaponname(var_00) == var_1.current_weapon_jump_super))
+  if (!var_01 isonground() && (isdefined(var_1.current_weapon_jump_super) && scripts\cp\utility::getrawbaseweaponname(var_00) == var_1.current_weapon_jump_super))
   var_01 notify("consumable_charge", 75);
 }
 
@@ -1142,7 +1142,7 @@ init_passive_double_kill_super(var_00) {}
 
 set_passive_double_kill_super(var_00) {
   var_0.func_C54A["passive_double_kill_super"] = 1;
-  var_0.current_weapon_double_super = scripts/cp/utility::getrawbaseweaponname(var_00 getcurrentweapon());
+  var_0.current_weapon_double_super = scripts\cp\utility::getrawbaseweaponname(var_00 getcurrentweapon());
 }
 
 unset_passive_double_kill_super(var_00) {
@@ -1154,7 +1154,7 @@ handledoublekillssuper(var_00, var_01, var_02, var_03, var_04, var_05) {
   level endon("game_ended");
   var_01 endon("disconnect");
 
-  if (isdefined(var_1.func_DDC2) && (isdefined(var_1.current_weapon_double_super) && scripts/cp/utility::getrawbaseweaponname(var_00) == var_1.current_weapon_double_super)) {
+  if (isdefined(var_1.func_DDC2) && (isdefined(var_1.current_weapon_double_super) && scripts\cp\utility::getrawbaseweaponname(var_00) == var_1.current_weapon_double_super)) {
   if (var_1.func_DDC2 == 2)
   var_01 notify("consumable_charge", 125);
   }
@@ -1164,7 +1164,7 @@ init_passive_mode_switch_score(var_00) {}
 
 set_passive_mode_switch_score(var_00) {
   var_0.alt_mode_passive = 1;
-  var_0.cash_scalar_alt_weapon = scripts/cp/utility::getrawbaseweaponname(var_00 getcurrentweapon());
+  var_0.cash_scalar_alt_weapon = scripts\cp\utility::getrawbaseweaponname(var_00 getcurrentweapon());
   var_0.cash_scalar = var_0.cash_scalar + 0.1;
 }
 
@@ -1188,7 +1188,7 @@ handlevisordetonation(var_00, var_01, var_02, var_03, var_04, var_05) {
   if (!scripts\engine\utility::isbulletdamage(var_03))
   return 0;
 
-  if (!scripts/cp/utility::isheadshot(var_00, var_04, var_03, var_01))
+  if (!scripts\cp\utility::isheadshot(var_00, var_04, var_03, var_01))
   return 0;
 
   if (isdefined(var_2.agent_type) && (var_2.agent_type == "zombie_brute" || var_2.agent_type == "zombie_grey" || var_2.agent_type == "slasher" || var_2.agent_type == "superslasher" || var_2.agent_type == "zombie_sasquatch" || var_2.agent_type == "lumberjack"))
@@ -1202,7 +1202,7 @@ handlevisordetonation(var_00, var_01, var_02, var_03, var_04, var_05) {
 
   foreach (var_01 in level.players) {
   if (distance(var_1.origin, var_07) <= 350)
-  var_01 thread scripts/cp/zombies/zombies_weapons::showonscreenbloodeffects();
+  var_01 thread scripts\cp\zombies\zombies_weapons::showonscreenbloodeffects();
   }
 
   if (isdefined(var_2.headmodel))
@@ -1311,19 +1311,19 @@ handlemeleeconeexplode(var_00, var_01, var_02, var_03, var_04, var_05) {
   var_10 = var_06 - var_08 * 128;
   var_11 = 384;
   playfx(level._effect["cone_expl_fx"], var_06 + (0, 2, 0), var_08, var_09);
-  var_12 = scripts/cp/cp_agent_utils::get_alive_enemies();
+  var_12 = scripts\cp\cp_agent_utils::get_alive_enemies();
 
   foreach (var_14 in var_12) {
   if (isdefined(var_14.flung) || isdefined(var_14.agent_type) && (var_14.agent_type == "zombie_brute" || var_14.agent_type == "zombie_ghost" || var_14.agent_type == "zombie_grey" || var_14.agent_type == "slasher" || var_14.agent_type == "superslasher"))
   continue;
 
-  if (!scripts/cp/utility::pointvscone(var_14 gettagorigin("tag_origin"), var_10, var_08, var_09, var_11, 128, 12))
+  if (!scripts\cp\utility::pointvscone(var_14 gettagorigin("tag_origin"), var_10, var_08, var_09, var_11, 128, 12))
   continue;
 
   if (var_14 damageconetrace(var_06, var_01) <= 0)
   continue;
 
-  var_15 = int(1500 * var_01 scripts/cp/cp_weapon::get_weapon_level(var_00));
+  var_15 = int(1500 * var_01 scripts\cp\cp_weapon::get_weapon_level(var_00));
   wait 0.05;
   var_14 getrandomarmkillstreak(var_15, var_06, var_01, var_01, "MOD_EXPLOSIVE", var_00);
   }
@@ -1391,7 +1391,7 @@ unset_outline_passive_minimap_damage(var_00) {
   if (!isdefined(var_00))
   return;
 
-  scripts/cp/cp_outline::disable_outline_for_players(var_00, level.players);
+  scripts\cp\cp_outline::disable_outline_for_players(var_00, level.players);
 }
 
 activate_adrenaline_boost(var_00) {
@@ -1399,11 +1399,11 @@ activate_adrenaline_boost(var_00) {
   var_00 endon("disconnect");
   var_00 endon("last_stand");
   var_00 endon("death");
-  var_00 scripts/cp/utility::adddamagemodifier("health_boost", 0.2, 0);
+  var_00 scripts\cp\utility::adddamagemodifier("health_boost", 0.2, 0);
   var_00 notify("force_regeneration");
   var_00 playlocalsound("breathing_heartbeat_alt");
   wait 5;
-  var_00 scripts/cp/utility::removedamagemodifier("health_boost", 0);
+  var_00 scripts\cp\utility::removedamagemodifier("health_boost", 0);
   var_00 playlocalsound("breathing_limp");
 }
 
@@ -1466,7 +1466,7 @@ updatepassivecolddamage(var_00, var_01, var_02) {
   return;
 
   if (isdefined(var_0.cold_weapon)) {
-  if (scripts/cp/utility::getrawbaseweaponname(var_0.cold_weapon) == scripts/cp/utility::getrawbaseweaponname(var_01)) {
+  if (scripts\cp\utility::getrawbaseweaponname(var_0.cold_weapon) == scripts\cp\utility::getrawbaseweaponname(var_01)) {
   var_2.movemode = "slow_walk";
   var_02 scripts\asm\asm_bb::bb_requestmovetype("slow_walk");
   }
@@ -1547,7 +1547,7 @@ scoperadar_executeping(var_00, var_01, var_02) {
   var_00 endon("death");
   var_00 endon("scope_radar_ads_out");
   var_03 = 0;
-  var_04 = scripts/cp/cp_agent_utils::getaliveagentsofteam("axis");
+  var_04 = scripts\cp\cp_agent_utils::getaliveagentsofteam("axis");
   var_05 = scripts\engine\utility::get_array_of_closest(var_0.origin, var_04, undefined, 24, var_02);
   var_0.closestenemies = var_05;
   var_06 = 0;
@@ -1639,7 +1639,7 @@ scoperadar_executevisuals(var_00, var_01) {
 }
 
 remove_visuals(var_00) {
-  var_01 = scripts/cp/cp_agent_utils::getaliveagentsofteam("axis");
+  var_01 = scripts\cp\cp_agent_utils::getaliveagentsofteam("axis");
 
   foreach (var_03 in var_01) {
   if (isdefined(var_03)) {
@@ -1666,7 +1666,7 @@ cleanup_outlines(var_00) {
   var_00 endon("disconnect");
   var_00 endon("last_stand");
   var_00 endon("death");
-  var_01 = scripts/cp/cp_agent_utils::getaliveagentsofteam("axis");
+  var_01 = scripts\cp\cp_agent_utils::getaliveagentsofteam("axis");
 
   foreach (var_03 in var_01) {
   if (isdefined(var_03)) {
@@ -1696,7 +1696,7 @@ updatescoutping(var_00) {
   var_02 = 0.1;
 
   for (;;) {
-  var_03 = scripts/cp/cp_agent_utils::getaliveagentsofteam("axis");
+  var_03 = scripts\cp\cp_agent_utils::getaliveagentsofteam("axis");
   var_04 = var_01;
   var_05 = var_02;
   var_04 = int(var_04);
@@ -1705,7 +1705,7 @@ updatescoutping(var_00) {
 
   if (var_6.size >= 1) {
   foreach (var_08 in var_06) {
-  scripts/cp/cp_outline::enable_outline_for_players(var_08, level.players, 7, 0, 0, "low");
+  scripts\cp\cp_outline::enable_outline_for_players(var_08, level.players, 7, 0, 0, "low");
   wait(var_05);
   }
 
@@ -1776,7 +1776,7 @@ func_13C36(var_00) {
   var_00 func_94F1(var_00);
 
   for (;;) {
-  if (!isdefined(var_01) || isdefined(var_01) && !scripts/cp/utility::is_melee_weapon(getweaponbasename(var_01), 1)) {
+  if (!isdefined(var_01) || isdefined(var_01) && !scripts\cp\utility::is_melee_weapon(getweaponbasename(var_01), 1)) {
   var_02 = var_00 getcurrentprimaryweapon();
 
   if (!isdefined(var_02)) {
@@ -1822,7 +1822,7 @@ func_94F1(var_00) {
 }
 
 func_12C64(var_00, var_01) {
-  var_01 = scripts/cp/utility::getweaponrootname(var_01);
+  var_01 = scripts\cp\utility::getweaponrootname(var_01);
 
   if (!isdefined(var_0.func_13C38[var_01]))
   return;
@@ -1842,7 +1842,7 @@ func_12C64(var_00, var_01) {
 }
 
 func_F616(var_00, var_01) {
-  var_01 = scripts/cp/utility::getweaponrootname(var_01);
+  var_01 = scripts\cp\utility::getweaponrootname(var_01);
 
   if (!isdefined(var_0.func_13C38[var_01]))
   return;
@@ -1871,13 +1871,13 @@ func_DEDF(var_00, var_01, var_02, var_03) {
 }
 
 func_7D6C(var_00, var_01) {
-  var_02 = scripts/cp/utility::get_weapon_variant_id(var_00, var_01);
+  var_02 = scripts\cp\utility::get_weapon_variant_id(var_00, var_01);
   var_03 = [];
 
   if (!isdefined(var_02) || var_02 == -1)
   return var_03;
 
-  var_04 = "mp/loot/weapon/" + var_01 + ".csv";
+  var_04 = "mp\loot\weapon\" + var_01 + ".csv";
   var_05 = tablelookuprownum(var_04, 0, var_02);
 
   for (var_06 = 0; var_06 < 3; var_6++) {

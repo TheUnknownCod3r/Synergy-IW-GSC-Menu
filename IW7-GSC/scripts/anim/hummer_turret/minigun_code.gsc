@@ -1,8 +1,8 @@
-/***************************************************************
+/*******************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\anim\hummer_turret\minigun_code.gsc
-***************************************************************/
+ * Script: scripts\anim\hummer_turret\minigun_code.gsc
+*******************************************************/
 
 main(param_00) {
 	param_00.var_6D6F = 0.1;

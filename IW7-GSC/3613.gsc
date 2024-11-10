@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3613.gsc
-****************************/
+ * Script: 3613.gsc
+************************/
 
 func_2840(param_00,param_01,param_02,param_03,param_04,param_05,param_06) {
 	if(!isdefined(level.var_CAF7)) {

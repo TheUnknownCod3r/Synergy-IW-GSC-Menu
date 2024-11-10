@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2702.gsc
+ * Script: 2702.gsc
 ***************************************/
 
 blackholegrenadeinit() {
@@ -243,7 +243,7 @@ bhg_handledamage(var_00, var_01, var_02, var_03, var_04) {
   else if (var_03 >= scripts\mp\weapons::minegettwohitthreshold())
   var_06 = 2;
 
-  scripts/mp/powers::equipmenthit(self.owner, var_00, var_01, var_02);
+  scripts\mp\powers::equipmenthit(self.owner, var_00, var_01, var_02);
   return var_06 * var_05;
 }
 

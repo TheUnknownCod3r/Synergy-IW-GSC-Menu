@@ -1,13 +1,13 @@
-/*******************************************************
+/***********************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\cp_weapon_autosentry.gsc
-*******************************************************/
+ * Script: scripts\cp\cp_weapon_autosentry.gsc
+***********************************************/
 
 init() {
-	level._effect["sentry_overheat_mp"] = loadfx("vfx/core/mp/killstreaks/vfx_sg_overheat_smoke");
-	level._effect["sentry_explode_mp"] = loadfx("vfx/core/mp/killstreaks/vfx_ims_explosion");
-	level._effect["sentry_smoke_mp"] = loadfx("vfx/core/mp/killstreaks/vfx_sg_damage_blacksmoke");
+	level._effect["sentry_overheat_mp"] = loadfx("vfx\core\mp\killstreaks\vfx_sg_overheat_smoke");
+	level._effect["sentry_explode_mp"] = loadfx("vfx\core\mp\killstreaks\vfx_ims_explosion");
+	level._effect["sentry_smoke_mp"] = loadfx("vfx\core\mp\killstreaks\vfx_sg_damage_blacksmoke");
 	level.sentrysettings = [];
 	level.sentrysettings["crafted_autosentry"] = spawnstruct();
 	level.sentrysettings["crafted_autosentry"].health = 999999;

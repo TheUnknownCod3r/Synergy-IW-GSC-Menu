@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\3468.gsc
+ * Script: 3468.gsc
 ***************************************/
 
 chill_init() {

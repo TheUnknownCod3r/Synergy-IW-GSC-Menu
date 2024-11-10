@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\3527.gsc
+ * Script: 3527.gsc
 ***************************************/
 
 init() {
@@ -12,9 +12,9 @@ init() {
   scripts\mp\killstreaks\killstreaks::registerkillstreak("directional_uav", ::func_1290B);
   scripts\mp\killstreaks\killstreaks::registerkillstreak("uav_3dping", ::func_128B2);
   var_00 = ["passive_increased_duration", "passive_decreased_duration", "passive_decreased_health", "passive_increased_armor", "passive_increased_cost", "passive_extra_assist", "passive_stealth_vehicle", "passive_vision_sweep", "passive_disable_hud", "passive_emp_blast", "passive_duration_health", "passive_armor_speed", "passive_stealth_speed"];
-  scripts/mp/killstreak_loot::func_DF07("uav", var_00);
-  scripts/mp/killstreak_loot::func_DF07("counter_uav", var_00);
-  scripts/mp/killstreak_loot::func_DF07("directional_uav", var_00);
+  scripts\mp\killstreak_loot::func_DF07("uav", var_00);
+  scripts\mp\killstreak_loot::func_DF07("counter_uav", var_00);
+  scripts\mp\killstreak_loot::func_DF07("directional_uav", var_00);
   level.uavsettings = [];
   level.uavsettings["uav"] = spawnstruct();
   level.uavsettings["uav"].timeout = level.radarviewtime;
@@ -22,9 +22,9 @@ init() {
   level.uavsettings["uav"].maxhealth = 800;
   level.uavsettings["uav"].streakname = "uav";
   level.uavsettings["uav"].modelbase = "veh_mil_air_un_uav";
-  level.uavsettings["uav"].fxid_explode = loadfx("vfx/iw7/core/mp/killstreaks/vfx_veh_exp_uav.vfx");
-  level.uavsettings["uav"].func_7631 = loadfx("vfx/misc/jet_engine_ac130");
-  level.uavsettings["uav"].func_7637 = loadfx("vfx/core/mp/killstreaks/vfx_3d_world_ping_large");
+  level.uavsettings["uav"].fxid_explode = loadfx("vfx\iw7\core\mp\killstreaks\vfx_veh_exp_uav.vfx");
+  level.uavsettings["uav"].func_7631 = loadfx("vfx\misc\jet_engine_ac130");
+  level.uavsettings["uav"].func_7637 = loadfx("vfx\core\mp\killstreaks\vfx_3d_world_ping_large");
   level.uavsettings["uav"].fx_leave_tag = "tag_origin";
   level.uavsettings["uav"].fxid_contrail = undefined;
   level.uavsettings["uav"].func_7566 = undefined;
@@ -40,8 +40,8 @@ init() {
   level.uavsettings["counter_uav"].maxhealth = 800;
   level.uavsettings["counter_uav"].streakname = "counter_uav";
   level.uavsettings["counter_uav"].modelbase = "veh_mil_air_un_cuav";
-  level.uavsettings["counter_uav"].fxid_explode = loadfx("vfx/iw7/core/mp/killstreaks/vfx_veh_exp_uav.vfx");
-  level.uavsettings["counter_uav"].func_7631 = loadfx("vfx/misc/jet_engine_ac130");
+  level.uavsettings["counter_uav"].fxid_explode = loadfx("vfx\iw7\core\mp\killstreaks\vfx_veh_exp_uav.vfx");
+  level.uavsettings["counter_uav"].func_7631 = loadfx("vfx\misc\jet_engine_ac130");
   level.uavsettings["counter_uav"].fx_leave_tag = "tag_origin";
   level.uavsettings["counter_uav"].fxid_contrail = undefined;
   level.uavsettings["counter_uav"].func_7566 = undefined;
@@ -57,8 +57,8 @@ init() {
   level.uavsettings["directional_uav"].maxhealth = 2000;
   level.uavsettings["directional_uav"].streakname = "directional_uav";
   level.uavsettings["directional_uav"].modelbase = "veh_mil_air_un_auav";
-  level.uavsettings["directional_uav"].fxid_explode = loadfx("vfx/iw7/core/mp/killstreaks/vfx_veh_exp_uav.vfx");
-  level.uavsettings["directional_uav"].func_7631 = loadfx("vfx/misc/jet_engine_ac130");
+  level.uavsettings["directional_uav"].fxid_explode = loadfx("vfx\iw7\core\mp\killstreaks\vfx_veh_exp_uav.vfx");
+  level.uavsettings["directional_uav"].func_7631 = loadfx("vfx\misc\jet_engine_ac130");
   level.uavsettings["directional_uav"].fx_leave_tag = "tag_origin";
   level.uavsettings["directional_uav"].fxid_contrail = undefined;
   level.uavsettings["directional_uav"].func_7566 = "tag_jet_trail";
@@ -73,7 +73,7 @@ init() {
   level.uavsettings["uav_3dping"].streakname = "uav_3dping";
   level.uavsettings["uav_3dping"].func_8EF7 = 1.5;
   level.uavsettings["uav_3dping"].func_CB9A = 10.0;
-  level.uavsettings["uav_3dping"].func_7636 = loadfx("vfx/core/mp/killstreaks/vfx_3d_world_ping");
+  level.uavsettings["uav_3dping"].func_7636 = loadfx("vfx\core\mp\killstreaks\vfx_3d_world_ping");
   level.uavsettings["uav_3dping"].func_1046A = "oracle_radar_pulse_plr";
   level.uavsettings["uav_3dping"].func_10469 = "oracle_radar_pulse_npc";
   level.uavsettings["uav_3dping"].votimeout = "oracle_gone";
@@ -154,7 +154,7 @@ onplayerconnect() {
 
   for (;;) {
   level waittill("connected", var_01);
-  scripts/mp/killstreaks/utility::func_12F51();
+  scripts\mp\killstreaks\utility::func_12F51();
   level.activeuavs[var_1.guid] = 0;
   level.activeuavs[var_1.guid + "_radarStrength"] = var_00;
   level.func_164F[var_1.guid] = 0;
@@ -258,7 +258,7 @@ launchuav(var_00, var_01, var_02) {
   var_07 = level.uavsettings[var_01].timeout;
   var_08 = level.uavsettings[var_01].maxhealth;
   var_09 = level.uavsettings[var_01].teamsplash;
-  var_10 = scripts/mp/killstreak_loot::getrarityforlootitem(var_2.variantid);
+  var_10 = scripts\mp\killstreak_loot::getrarityforlootitem(var_2.variantid);
 
   if (var_10 != "") {
   var_06 = var_06 + "_" + var_10;
@@ -268,29 +268,29 @@ launchuav(var_00, var_01, var_02) {
   level thread scripts\mp\utility\game::teamplayercardsplash(var_09, var_00);
 
   if (var_01 == "uav") {
-  if (scripts/mp/killstreaks/utility::func_A69F(var_02, "passive_duration_health")) {
+  if (scripts\mp\killstreaks\utility::func_A69F(var_02, "passive_duration_health")) {
   var_07 = var_07 + 5;
   var_08 = var_08 - 200;
   }
 
-  if (scripts/mp/killstreaks/utility::func_A69F(var_02, "passive_armor_speed"))
+  if (scripts\mp\killstreaks\utility::func_A69F(var_02, "passive_armor_speed"))
   var_07 = var_07 - 5;
   }
   else if (var_01 == "counter_uav") {
-  if (scripts/mp/killstreaks/utility::func_A69F(var_02, "passive_duration_health")) {
+  if (scripts\mp\killstreaks\utility::func_A69F(var_02, "passive_duration_health")) {
   var_07 = var_07 + 5;
   var_08 = var_08 - 200;
   }
 
-  if (scripts/mp/killstreaks/utility::func_A69F(var_02, "passive_disable_hud"))
+  if (scripts\mp\killstreaks\utility::func_A69F(var_02, "passive_disable_hud"))
   var_07 = var_07 - 10;
   } else {
-  if (scripts/mp/killstreaks/utility::func_A69F(var_02, "passive_duration_health")) {
+  if (scripts\mp\killstreaks\utility::func_A69F(var_02, "passive_duration_health")) {
   var_07 = var_07 + 5;
   var_08 = var_08 - 500;
   }
 
-  if (scripts/mp/killstreaks/utility::func_A69F(var_02, "passive_vision_sweep"))
+  if (scripts\mp\killstreaks\utility::func_A69F(var_02, "passive_vision_sweep"))
   var_07 = var_07 - 5;
   }
 
@@ -305,7 +305,7 @@ launchuav(var_00, var_01, var_02) {
   var_05 setotherent(var_00);
   var_05 _meth_8549();
   var_05 _meth_8594();
-  var_05 scripts/mp/killstreaks/utility::func_1843(var_01, "Killstreak_Air", var_00);
+  var_05 scripts\mp\killstreaks\utility::func_1843(var_01, "Killstreak_Air", var_00);
   var_05 thread damagetracker();
   var_05 thread func_89B7();
   var_05 thread func_CA50();
@@ -313,7 +313,7 @@ launchuav(var_00, var_01, var_02) {
   var_05 thread func_E2E4();
   var_05 setscriptablepartstate("lights", "on", 0);
 
-  if (scripts/mp/killstreaks/utility::func_A69F(var_02, "passive_stealth_vehicle"))
+  if (scripts\mp\killstreaks\utility::func_A69F(var_02, "passive_stealth_vehicle"))
   var_05 setscriptablepartstate("stealth", "active", 0);
 
   var_11 = randomintrange(5250, 5500);
@@ -365,10 +365,10 @@ launchuav(var_00, var_01, var_02) {
 
   var_05 thread handlewiretap();
 
-  if (scripts/mp/killstreaks/utility::func_A69F(var_02, "passive_disable_hud"))
+  if (scripts\mp\killstreaks\utility::func_A69F(var_02, "passive_disable_hud"))
   var_05 thread startsystemshutdown();
 
-  if (scripts/mp/killstreaks/utility::func_A69F(var_02, "passive_emp_blast"))
+  if (scripts\mp\killstreaks\utility::func_A69F(var_02, "passive_emp_blast"))
   var_05 thread startemppulse();
 
   level notify("uav_update");
@@ -510,26 +510,26 @@ damagetracker() {
   var_16 = 6;
   var_17 = 7;
 
-  if (scripts/mp/killstreaks/utility::func_A69F(self.streakinfo, "passive_duration_health")) {
+  if (scripts\mp\killstreaks\utility::func_A69F(self.streakinfo, "passive_duration_health")) {
   var_15--;
   var_16--;
   var_17--;
   }
   }
 
-  if (scripts/mp/killstreaks/utility::func_A69F(self.streakinfo, "passive_armor_speed")) {
+  if (scripts\mp\killstreaks\utility::func_A69F(self.streakinfo, "passive_armor_speed")) {
   var_15++;
   var_16++;
   var_17++;
   }
 
   if (isdefined(var_09)) {
-  if (scripts/mp/killstreaks/utility::func_A69F(self.streakinfo, "passive_armor_speed")) {
-  if (scripts/mp/killstreaks/utility::isexplosiveantikillstreakweapon(var_09))
+  if (scripts\mp\killstreaks\utility::func_A69F(self.streakinfo, "passive_armor_speed")) {
+  if (scripts\mp\killstreaks\utility::isexplosiveantikillstreakweapon(var_09))
   var_01 scripts\mp\damagefeedback::updatedamagefeedback("hitblastshield");
   }
 
-  var_14 = scripts/mp/killstreaks/utility::getmodifiedantikillstreakdamage(var_01, var_09, var_04, var_14, self.maxhealth, var_15, var_16, var_17);
+  var_14 = scripts\mp\killstreaks\utility::getmodifiedantikillstreakdamage(var_01, var_09, var_04, var_14, self.maxhealth, var_15, var_16, var_17);
   scripts\mp\killstreaks\killstreaks::killstreakhit(var_01, var_09, self, var_04);
   scripts\mp\damage::logattackerkillstreak(self, var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08, var_09);
   }
@@ -538,7 +538,7 @@ damagetracker() {
 
   if (self.damagetaken >= self.maxhealth) {
   if (isplayer(var_01) && (!isdefined(self.owner) || var_01 != self.owner)) {
-  var_18 = scripts/mp/killstreak_loot::getrarityforlootitem(self.streakinfo.variantid);
+  var_18 = scripts\mp\killstreak_loot::getrarityforlootitem(self.streakinfo.variantid);
   var_19 = level.uavsettings[self.uavtype].calloutdestroyed;
 
   if (var_18 != "")
@@ -576,7 +576,7 @@ func_12AF9() {
   if (level.teambased) {
   func_12F3F("allies");
   func_12F3F("axis");
-  scripts/mp/killstreaks/utility::func_12F51();
+  scripts\mp\killstreaks\utility::func_12F51();
   continue;
   }
 
@@ -820,7 +820,7 @@ setradarmode(var_00, var_01, var_02) {
   continue;
   }
 
-  if (scripts/mp/killstreaks/utility::func_A69F(var_5.streakinfo, "passive_vision_sweep")) {
+  if (scripts\mp\killstreaks\utility::func_A69F(var_5.streakinfo, "passive_vision_sweep")) {
   self.radarmode = "constant_radar";
   break;
   }
@@ -1123,7 +1123,7 @@ _meth_81E8(var_00, var_01) {
   case "directional_uav":
   var_02 = level.func_18D2;
 
-  if (scripts/mp/killstreaks/utility::func_A69F(var_01, "passive_stealth_vehicle"))
+  if (scripts\mp\killstreaks\utility::func_A69F(var_01, "passive_stealth_vehicle"))
   var_02 = level.advanceduavrigslow;
 
   break;
@@ -1325,7 +1325,7 @@ func_52C5(var_00, var_01) {
   if (isdefined(var_05)) {
   foreach (var_07 in var_05) {
   if (isdefined(var_07))
-  var_07 scripts/mp/killstreaks/utility::dodamagetokillstreak(10000, var_01, var_01, var_00, var_7.origin, "MOD_EXPLOSIVE", var_02);
+  var_07 scripts\mp\killstreaks\utility::dodamagetokillstreak(10000, var_01, var_01, var_00, var_7.origin, "MOD_EXPLOSIVE", var_02);
   }
   }
 }

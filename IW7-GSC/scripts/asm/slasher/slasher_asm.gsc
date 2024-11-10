@@ -1,8 +1,8 @@
-/*******************************************************
+/***********************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\asm\slasher\slasher_asm.gsc
-*******************************************************/
+ * Script: scripts\asm\slasher\slasher_asm.gsc
+***********************************************/
 
 slasherinit(param_00,param_01,param_02,param_03) {
 	scripts\asm\zombie\zombie::func_13F9A(param_00,param_01,param_02,param_03);
@@ -161,7 +161,7 @@ meleenotehandler(param_00,param_01,param_02,param_03) {
 			}
 		}
 
-		if(!scripts\common\utility::istrue(self.bmovingmelee)) {
+		if(!scripts\engine\utility::istrue(self.bmovingmelee)) {
 			self notify("stop_melee_face_enemy");
 			return;
 		}
@@ -219,7 +219,7 @@ grenadethrownotehandler(param_00,param_01,param_02,param_03) {
 			break;
 
 		case "grenade_throw":
-			if(scripts\common\utility::istrue(self.grenade_thrown)) {
+			if(scripts\engine\utility::istrue(self.grenade_thrown)) {
 				return;
 			}
 	
@@ -256,7 +256,7 @@ grenadethrowterminate(param_00,param_01,param_02) {
 }
 
 shouldabortaction(param_00,param_01,param_02,param_03) {
-	if(scripts\common\utility::istrue(self.btraversalteleport)) {
+	if(scripts\engine\utility::istrue(self.btraversalteleport)) {
 		return 0;
 	}
 
@@ -337,7 +337,7 @@ hide_and_show_blade() {
 	level endon("game_ended");
 	self endon("death");
 	foreach(var_01 in level.players) {
-		if(!scripts\common\utility::istrue(var_01.rave_mode)) {
+		if(!scripts\engine\utility::istrue(var_01.rave_mode)) {
 			self hidefromplayer(var_01);
 		}
 	}
@@ -368,11 +368,11 @@ playblockanim(param_00,param_01,param_02,param_03) {
 func_BEA0(param_00,param_01,param_02,param_03) {
 	var_04 = undefined;
 	var_05 = scripts\mp\agents\slasher\slasher_agent::getenemy();
-	if(isdefined(self.var_1198.shootparams) && isdefined(self.var_1198.var_FECD.ent)) {
-		var_04 = self.var_1198.var_FECD.var_65D3.origin;
+	if(isdefined(self.var_1198.shootparams) && isdefined(self.var_1198.shootparams.ent)) {
+		var_04 = self.var_1198.shootparams.ent.origin;
 	}
-	else if(isdefined(self.var_1198.shootparams) && isdefined(self.var_1198.var_FECD.pos)) {
-		var_04 = self.var_1198.var_FECD.pos;
+	else if(isdefined(self.var_1198.shootparams) && isdefined(self.var_1198.shootparams.pos)) {
+		var_04 = self.var_1198.shootparams.pos;
 	}
 	else if(isdefined(var_05)) {
 		var_04 = var_05.origin;
@@ -387,7 +387,7 @@ func_BEA0(param_00,param_01,param_02,param_03) {
 	if(var_07 < 65536) {
 		var_08 = sqrt(var_07);
 		if(var_08 > 3) {
-			var_06 = var_06 + asin(-3 \ var_08);
+			var_06 = var_06 + asin(-3 / var_08);
 		}
 	}
 
@@ -403,11 +403,11 @@ _meth_81DE() {
 	var_01 = undefined;
 	var_02 = undefined;
 	if(isdefined(self.var_1198.shootparams)) {
-		if(isdefined(self.var_1198.var_FECD.ent)) {
-			var_01 = self.var_1198.var_FECD.ent;
+		if(isdefined(self.var_1198.shootparams.ent)) {
+			var_01 = self.var_1198.shootparams.ent;
 		}
-		else if(isdefined(self.var_1198.var_FECD.pos)) {
-			var_02 = self.var_1198.var_FECD.pos;
+		else if(isdefined(self.var_1198.shootparams.pos)) {
+			var_02 = self.var_1198.shootparams.pos;
 		}
 	}
 
@@ -422,7 +422,7 @@ _meth_81DE() {
 		var_00 = 1.5;
 	}
 
-	var_04 = scripts\common\utility::getpredictedaimyawtoshootentorpos(var_00,var_01,var_02);
+	var_04 = scripts\engine\utility::getpredictedaimyawtoshootentorpos(var_00,var_01,var_02);
 	return var_04;
 }
 
@@ -475,7 +475,7 @@ func_D56A(param_00,param_01,param_02,param_03) {
 
 doramattackdamage(param_00) {
 	param_00 endon("death");
-	if(scripts\common\utility::istrue(self.bramattackdamageoccured)) {
+	if(scripts\engine\utility::istrue(self.bramattackdamageoccured)) {
 		return;
 	}
 
@@ -484,7 +484,7 @@ doramattackdamage(param_00) {
 	self.bramattackdamageoccured = 1;
 	param_00 _meth_84DC(var_01,var_02.ram_attack_push);
 	wait(0.2);
-	var_03 = int(var_02.ram_attack_damage \ 100 * param_00.maxhealth);
+	var_03 = int(var_02.ram_attack_damage / 100 * param_00.maxhealth);
 	scripts\asm\zombie\melee::domeleedamage(param_00,var_03,"MOD_IMPACT");
 }
 
@@ -492,7 +492,7 @@ ramattacknotehandler(param_00,param_01,param_02,param_03) {
 	if(param_00 == "hit") {
 		if(isdefined(self.curmeleetarget)) {
 			var_04 = scripts\mp\agents\slasher\slasher_tunedata::gettunedata();
-			var_05 = distancesquared(self.origin,self.var_4B26.origin);
+			var_05 = distancesquared(self.origin,self.curmeleetarget.origin);
 			if(var_05 < var_04.ram_attack_melee_dist_sq && scripts\asm\zombie\melee::isenemyinfrontofme(self.curmeleetarget,var_04.ram_attack_dot)) {
 				thread doramattackdamage(self.curmeleetarget);
 				return;
@@ -532,7 +532,7 @@ handleramattackprocessing(param_00,param_01,param_02) {
 			}
 		}
 
-		scripts\common\utility::waitframe();
+		scripts\engine\utility::waitframe();
 		if(!isdefined(param_01) || !isalive(param_01)) {
 			break;
 		}
@@ -614,7 +614,7 @@ startspinattackdamage(param_00) {
 			scripts\asm\zombie\melee::domeleedamage(var_06,var_02.slasher_spin_damage_amt,"MOD_IMPACT");
 		}
 
-		scripts\common\utility::waitframe();
+		scripts\engine\utility::waitframe();
 	}
 }
 
@@ -689,12 +689,12 @@ playteleportout(param_00,param_01,param_02,param_03) {
 	self ghostskulls_complete_status(self.origin);
 	self clearpath();
 	thread showmelater();
-	if(!scripts\common\utility::istrue(self.btraversalteleport)) {
+	if(!scripts\engine\utility::istrue(self.btraversalteleport)) {
 		scripts\mp\agents\slasher\slasher_agent::lookatslasherenemy();
 	}
 
 	scripts\asm\asm_mp::func_2365(param_00,param_01,param_02,var_04,1.5);
-	if(scripts\common\utility::istrue(self.btraversalteleport)) {
+	if(scripts\engine\utility::istrue(self.btraversalteleport)) {
 		self.is_traversing = undefined;
 		self.btraversalteleport = undefined;
 		self notify("traverse_end");
@@ -714,7 +714,7 @@ showmelater() {
 
 play_teleport_sound_to_players(param_00) {
 	foreach(var_02 in level.players) {
-		if(!self isethereal() || scripts\common\utility::istrue(var_02.rave_mode)) {
+		if(!self isethereal() || scripts\engine\utility::istrue(var_02.rave_mode)) {
 			self playsoundtoplayer(param_00,var_02);
 		}
 	}

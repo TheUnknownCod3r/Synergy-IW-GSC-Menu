@@ -1,17 +1,17 @@
-/*********************************************************
+/*************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\anim\hummer_turret\common.gsc
-*********************************************************/
+ * Script: scripts\anim\hummer_turret\common.gsc
+*************************************************/
 
 func_91E0(param_00,param_01) {
 	self endon("killanimscript");
 	scripts\anim\utility::func_9832(param_01);
 	self.var_BFDC = 1;
 	self.var_C05C = 1;
-	self.var_1491.movement = "stop";
-	self.var_1491.var_10930 = param_01;
-	self.var_1491.usingworldspacehitmarkers = param_00;
+	self.a.movement = "stop";
+	self.a.var_10930 = param_01;
+	self.a.usingworldspacehitmarkers = param_00;
 	self.ignoreme = 1;
 	if(isdefined(self.var_B79F)) {
 		self.ignoreme = self.var_B79F;
@@ -67,8 +67,8 @@ func_8903(param_00,param_01) {
 	param_00 endon("jumping_out");
 	for(;;) {
 		var_02 = "flashbang";
-		var_03 = param_00 scripts\common\utility::waittill_any_return("damage",var_02);
-		var_04 = scripts\common\utility::random(param_00.var_12A7F);
+		var_03 = param_00 scripts\engine\utility::waittill_any_return("damage",var_02);
+		var_04 = scripts\engine\utility::random(param_00.var_12A7F);
 		if(var_03 == var_02) {
 			var_04 = param_00.var_12A66;
 			param_00 scripts\anim\face::saygenericdialogue("flashbang");
@@ -100,8 +100,8 @@ func_129D3() {
 		self.var_BFDC = undefined;
 		self.var_C05C = undefined;
 		self.ignoreme = 0;
-		self.var_1491.var_10930 = "none";
-		self.var_1491.usingworldspacehitmarkers = undefined;
+		self.a.var_10930 = "none";
+		self.a.usingworldspacehitmarkers = undefined;
 		self.var_4E2A = undefined;
 		func_8714();
 		self.var_9DA6 = undefined;
@@ -601,7 +601,7 @@ func_129BF(param_00,param_01) {
 func_129F3(param_00) {
 	var_01 = vectortoyaw(param_00.origin - self.origin);
 	var_02 = self gettagangles("tag_flash")[1];
-	var_03 = scripts\common\utility::absangleclamp180(var_02 - var_01);
+	var_03 = scripts\engine\utility::absangleclamp180(var_02 - var_01);
 	return var_03;
 }
 

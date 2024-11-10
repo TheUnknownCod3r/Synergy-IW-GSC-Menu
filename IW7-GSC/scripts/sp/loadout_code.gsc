@@ -1,8 +1,8 @@
-/***********************************************
+/***************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\sp\loadout_code.gsc
-***********************************************/
+ * Script: scripts\sp\loadout_code.gsc
+***************************************/
 
 func_EB77(param_00,param_01) {
 	if(!isdefined(param_01)) {

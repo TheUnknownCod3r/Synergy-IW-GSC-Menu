@@ -1,8 +1,8 @@
-/**********************************************
+/**************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\anim\saw\stand.gsc
-**********************************************/
+ * Script: scripts\anim\saw\stand.gsc
+**************************************/
 
 main() {
 	if(getdvarint("ai_iw7",0) == 1) {

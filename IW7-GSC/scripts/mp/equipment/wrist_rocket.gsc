@@ -1,12 +1,12 @@
-/*********************************************************
+/*************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\equipment\wrist_rocket.gsc
-*********************************************************/
+ * Script: scripts\mp\equipment\wrist_rocket.gsc
+*************************************************/
 
 wristrocketinit() {
-	level._effect["wristrocket_explode"] = loadfx("vfx/iw7/_requests/mp/power/vfx_wrist_rocket_exp.vfx");
-	level._effect["wristrocket_thruster"] = loadfx("vfx/iw7/_requests/mp/power/vfx_wrist_rocket_thruster");
+	level._effect["wristrocket_explode"] = loadfx("vfx\iw7\_requests\mp\power\vfx_wrist_rocket_exp.vfx");
+	level._effect["wristrocket_thruster"] = loadfx("vfx\iw7\_requests\mp\power\vfx_wrist_rocket_thruster");
 }
 
 wristrocket_set() {
@@ -24,7 +24,7 @@ wristrocketused(param_00) {
 
 	var_01 = wristrocket_createrocket(param_00);
 	var_01.objective_position = param_00;
-	param_00 = scripts\mp\_utility::_launchgrenade("wristrocket_mp",self.origin,(0,0,0),100,1,param_00);
+	param_00 = scripts\mp\utility::_launchgrenade("wristrocket_mp",self.origin,(0,0,0),100,1,param_00);
 	param_00 forcehidegrenadehudwarning(1);
 	param_00 linkto(var_01);
 	param_00 thread wristrocket_cleanuponparentdeath(var_01);
@@ -48,7 +48,7 @@ wristrocket_watchstuck() {
 	self playloopsound("wrist_rocket_fire_tail");
 	self waittill("missile_stuck",var_00);
 	if(isplayer(var_00)) {
-		self.triggerportableradarping scripts\mp\_weapons::grenadestuckto(self,var_00);
+		self.triggerportableradarping scripts\mp\weapons::grenadestuckto(self,var_00);
 	}
 
 	self stoploopsound();
@@ -71,7 +71,7 @@ wristrocket_delete() {
 }
 
 wristrocket_createrocket(param_00) {
-	var_01 = scripts\mp\_utility::_magicbullet("wristrocket_proj_mp",param_00.origin,param_00.origin + anglestoforward(self getgunangles()),self);
+	var_01 = scripts\mp\utility::_magicbullet("wristrocket_proj_mp",param_00.origin,param_00.origin + anglestoforward(self getgunangles()),self);
 	var_01.triggerportableradarping = self;
 	var_01.team = self.team;
 	var_01.weapon_name = "wristrocket_proj_mp";
@@ -104,12 +104,12 @@ wristrocket_watcheffects() {
 		var_00 = 0;
 		self waittill("wristRocket_watchEffectsRaceStart");
 		waittillframeend;
-		var_02 = scripts\mp\_utility::istrue(var_01.grenadepullback);
-		var_03 = scripts\mp\_utility::istrue(var_01.grenadefire);
-		var_04 = scripts\mp\_utility::istrue(var_01.superstarted);
-		var_05 = scripts\mp\_utility::istrue(var_01.var_E6);
-		var_06 = scripts\mp\_utility::istrue(var_01.unset);
-		var_07 = scripts\mp\_utility::istrue(var_01.heldoffhandbreak);
+		var_02 = scripts\mp\utility::istrue(var_01.grenadepullback);
+		var_03 = scripts\mp\utility::istrue(var_01.grenadefire);
+		var_04 = scripts\mp\utility::istrue(var_01.superstarted);
+		var_05 = scripts\mp\utility::istrue(var_01.var_E6);
+		var_06 = scripts\mp\utility::istrue(var_01.unset);
+		var_07 = scripts\mp\utility::istrue(var_01.heldoffhandbreak);
 		if(var_05) {
 			self notify("wristRocket_watchEffectsRaceEnd");
 			thread wristrocket_endeffects();
@@ -229,7 +229,7 @@ wristrocketcooksuicideexplodecheck(param_00,param_01,param_02,param_03,param_04)
 
 	var_05 = param_02 gettagorigin("tag_weapon_left");
 	radiusdamage(var_05,175,200,70,param_01,"MOD_EXPLOSIVE","wristrocket_mp");
-	scripts\mp\_shellshock::grenade_earthquakeatposition(var_05,0.6);
+	scripts\mp\shellshock::grenade_earthquakeatposition(var_05,0.6);
 	playsoundatpos(var_05,"wrist_rocket_explode");
 	playfx(scripts\engine\utility::getfx("wristrocket_explode"),var_05);
 }

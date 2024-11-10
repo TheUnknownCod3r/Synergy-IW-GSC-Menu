@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\1202.gsc
-****************************/
+ * Script: 1202.gsc
+************************/
 
 main() {
 	self setmodel("robot_c12_normal_torso");
@@ -11,7 +11,7 @@ main() {
 	self.voice = "unitednations";
 	self give_explosive_touch_on_revived("c12servo");
 	if(issentient(self)) {
-		self sethitlocdamagetable("locdmgtable/ai_lochit_dmgtable");
+		self sethitlocdamagetable("locdmgtable\ai_lochit_dmgtable");
 	}
 
 	if(issentient(self)) {

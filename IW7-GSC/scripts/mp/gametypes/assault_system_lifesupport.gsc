@@ -1,8 +1,8 @@
-/***********************************************************************
+/***************************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\gametypes\assault_system_lifesupport.gsc
-***********************************************************************/
+ * Script: scripts\mp\gametypes\assault_system_lifesupport.gsc
+***************************************************************/
 
 init() {
 	if(!isdefined(level.var_23AB)) {
@@ -38,7 +38,7 @@ func_AC73(param_00) {
 
 	var_01.health = 99999;
 	param_00.visuals = var_01;
-	var_02 = scripts\mp\_gameobjects::createuseobject("axis",param_00,[var_01],(0,0,64));
+	var_02 = scripts\mp\gameobjects::createuseobject("axis",param_00,[var_01],(0,0,64));
 	var_02.label = "lifesupport_" + param_00.var_336;
 	var_02.id = "use";
 	var_02 func_113A7(undefined);
@@ -60,11 +60,11 @@ func_113A7(param_00) {
 }
 
 func_113AB() {
-	scripts\mp\_gameobjects::allowuse("friendly");
-	scripts\mp\_gameobjects::setusetime(1);
-	scripts\mp\_gameobjects::setwaitweaponchangeonuse(1);
-	scripts\mp\_gameobjects::setusetext(&"MP_BREACH_OPERATE_SYSTEM_ON_ACTION");
-	scripts\mp\_gameobjects::setusehinttext(&"MP_BREACH_OPERATE_LIFESUPPORT_ON");
+	scripts\mp\gameobjects::allowuse("friendly");
+	scripts\mp\gameobjects::setusetime(1);
+	scripts\mp\gameobjects::setwaitweaponchangeonuse(1);
+	scripts\mp\gameobjects::setusetext(&"MP_BREACH_OPERATE_SYSTEM_ON_ACTION");
+	scripts\mp\gameobjects::setusehinttext(&"MP_BREACH_OPERATE_LIFESUPPORT_ON");
 	self.onbeginuse = ::func_113A5;
 	self.onenduse = ::func_113A6;
 	self.onuse = ::func_113A7;
@@ -81,11 +81,11 @@ func_113A4(param_00) {
 }
 
 func_113AA() {
-	scripts\mp\_gameobjects::allowuse("enemy");
-	scripts\mp\_gameobjects::setusetime(2);
-	scripts\mp\_gameobjects::setwaitweaponchangeonuse(1);
-	scripts\mp\_gameobjects::setusetext(&"MP_BREACH_OPERATE_SYSTEM_OFF_ACTION");
-	scripts\mp\_gameobjects::setusehinttext(&"MP_BREACH_OPERATE_LIFESUPPORT_OFF");
+	scripts\mp\gameobjects::allowuse("enemy");
+	scripts\mp\gameobjects::setusetime(2);
+	scripts\mp\gameobjects::setwaitweaponchangeonuse(1);
+	scripts\mp\gameobjects::setusetext(&"MP_BREACH_OPERATE_SYSTEM_OFF_ACTION");
+	scripts\mp\gameobjects::setusehinttext(&"MP_BREACH_OPERATE_LIFESUPPORT_OFF");
 	self.onbeginuse = ::func_113A2;
 	self.onenduse = ::func_113A3;
 	self.onuse = ::func_113A4;
@@ -127,7 +127,7 @@ func_12F4E(param_00) {
 	self endon("stop_trigger_monitor");
 	for(;;) {
 		foreach(var_03, var_02 in self.var_D41E) {
-			if(isdefined(var_02) && scripts\mp\_utility::isreallyalive(var_02) && var_02 istouching(self.var_1157D)) {
+			if(isdefined(var_02) && scripts\mp\utility::isreallyalive(var_02) && var_02 istouching(self.var_1157D)) {
 				if(isdefined(self.var_C5B8)) {
 					[[self.var_C5B8]](self,var_02);
 				}

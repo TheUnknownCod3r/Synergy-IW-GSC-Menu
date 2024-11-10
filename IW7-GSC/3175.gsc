@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3175.gsc
-****************************/
+ * Script: 3175.gsc
+************************/
 
 func_C97D(param_00,param_01,param_02,param_03) {
 	if(self.var_527B != "patrol") {
@@ -74,7 +74,7 @@ func_CEBF(param_00,param_01,param_02,param_03) {
 	self.var_10E6D.var_C995 = undefined;
 	var_05 = lib_0A1E::func_235B(param_01,var_04);
 	if(!isdefined(var_05)) {
-		scripts/asm/asm::asm_fireevent(param_01,"end");
+		scripts\asm\asm::asm_fireevent(param_01,"end");
 		return;
 	}
 
@@ -151,11 +151,11 @@ func_D4DF(param_00,param_01,param_02,param_03) {
 
 func_D4DE(param_00,param_01,param_02,param_03,param_04) {
 	self endon(param_01 + "_finished");
-	var_05 = scripts/asm/asm::asm_getmoveplaybackrate();
+	var_05 = scripts\asm\asm::asm_getmoveplaybackrate();
 	self _meth_84F1(var_05);
 	var_06 = lib_0A1E::asm_getbodyknob();
 	self aiclearanim(var_06,param_02);
-	if(scripts/asm/asm::asm_hasalias("Knobs","move")) {
+	if(scripts\asm\asm::asm_hasalias("Knobs","move")) {
 		var_07 = lib_0A1E::func_2356("Knobs","move");
 		self _meth_84F2(var_07);
 	}
@@ -168,7 +168,7 @@ func_D4DE(param_00,param_01,param_02,param_03,param_04) {
 
 		lib_0A1E::func_2369(param_00,param_01,param_04);
 		var_08 = param_04;
-		lib_0A1E::func_2320(param_00,param_01,param_04,scripts/asm/asm::func_2341(param_00,param_01));
+		lib_0A1E::func_2320(param_00,param_01,param_04,scripts\asm\asm::func_2341(param_00,param_01));
 	}
 }
 
@@ -176,7 +176,7 @@ func_C99F(param_00,param_01,param_02,param_03) {
 	self.a.var_C984 = undefined;
 	var_04 = "";
 	if(isdefined(param_03)) {
-		var_04 = scripts/asm/asm_bb::func_2928(param_03);
+		var_04 = scripts\asm\asm_bb::func_2928(param_03);
 	}
 
 	var_05 = lib_0A1E::func_235D(param_02,var_04,1);
@@ -223,7 +223,7 @@ func_C99F(param_00,param_01,param_02,param_03) {
 		return 0;
 	}
 
-	self.a.var_C984 = scripts/asm/asm::asm_lookupanimfromalias(param_02,var_05);
+	self.a.var_C984 = scripts\asm\asm::asm_lookupanimfromalias(param_02,var_05);
 	return isdefined(self.a.var_C984);
 }
 

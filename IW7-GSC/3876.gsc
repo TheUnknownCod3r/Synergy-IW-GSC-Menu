@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3876.gsc
-****************************/
+ * Script: 3876.gsc
+************************/
 
 main() {
 	if(isdefined(self.var_10E6D)) {

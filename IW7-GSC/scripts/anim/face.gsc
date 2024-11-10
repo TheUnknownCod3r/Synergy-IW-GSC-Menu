@@ -1,8 +1,8 @@
-/*****************************************
+/*********************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\anim\face.gsc
-*****************************************/
+ * Script: scripts\anim\face.gsc
+*********************************/
 
 saygenericdialogue(param_00) {
 	if(self.unittype != "soldier" && self.unittype != "c6") {
@@ -113,8 +113,8 @@ sayspecificdialogue(param_00,param_01) {
 
 playfacethread(param_00,param_01) {
 	if(isai(self)) {
-		self.var_1491.facialanimdone = 1;
-		self.var_1491.facialsounddone = 1;
+		self.a.facialanimdone = 1;
+		self.a.facialsounddone = 1;
 	}
 
 	if(isdefined(param_01)) {

@@ -1,7 +1,7 @@
-/******************************************
+/***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\aitype\villain_hvr.gsc
-******************************************/
+ * Script: aitype\villain_hvr.gsc
+***************************************/
 
 main() {
   self.func_17DB = "";

@@ -1,24 +1,24 @@
-/********************************************************
+/************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\maps\cp_zmb\cp_zmb_dj.gsc
-********************************************************/
+ * Script: scripts\cp\maps\cp_zmb\cp_zmb_dj.gsc
+************************************************/
 
 init_dj_quests() {
 	level.played_dj_vos = [];
 	level.played_dj_vos[""] = 0;
-	scripts/cp/zombies/zombie_quest::register_quest_step("ufo",0,::init_fetch_quest,::do_fetch_quest,::complete_fetch_quest,::debug_beat_fetch_quest);
-	scripts/cp/zombies/zombie_quest::register_quest_step("ufo",1,::blank,::wait_use_pap_portal,::blank,::debug_use_pap_portal);
-	scripts/cp/zombies/zombie_quest::register_quest_step("ufo",2,::init_first_speaker_defense,::do_first_speaker_defend,::blank,::debug_beat_speaker_defense);
-	scripts/cp/zombies/zombie_quest::register_quest_step("ufo",3,::init_second_speaker_defense,::do_second_speaker_defend,::blank,::debug_beat_speaker_defense);
-	scripts/cp/zombies/zombie_quest::register_quest_step("ufo",4,::init_third_speaker_defense,::do_third_speaker_defend,::complete_all_speaker_defense,::debug_beat_speaker_defense);
-	scripts/cp/zombies/zombie_quest::register_quest_step("ufo",5,::blank,::wait_one_wave,::blank,::debug_beat_wait_one_wave);
-	scripts/cp/zombies/zombie_quest::register_quest_step("ufo",6,::init_get_tone_generator,::get_tone_generator,::complete_get_tone_generator,::debug_get_tone_generator);
-	scripts/cp/zombies/zombie_quest::register_quest_step("ufo",7,::init_place_tone_generator,::place_tone_generator,::complete_place_tone_generator,::debug_place_tone_generator);
-	scripts/cp/zombies/zombie_quest::register_quest_step("ufo",8,::init_match_ufo_tone,::match_ufo_tone,::complete_match_ufo_tone,::debug_match_ufo_tone);
-	scripts/cp/zombies/zombie_quest::register_quest_step("ufo",9,::blank,::ufo_suicide_bomber,::blank,::debug_beat_ufo_suicide_bomber);
-	scripts/cp/zombies/zombie_quest::register_quest_step("ufo",10,::init_alien_grey_fight,::alien_grey_fight,::complete_grey_fight,::debug_beat_alien_grey_fight);
-	scripts/cp/zombies/zombie_quest::register_quest_step("ufo",11,::init_ufo_projectile_attack,::ufo_projectile_attack,::complete_ufo_projectile_attack,::debug_beat_ufo_projectile_attack);
+	scripts\cp\zombies\zombie_quest::register_quest_step("ufo",0,::init_fetch_quest,::do_fetch_quest,::complete_fetch_quest,::debug_beat_fetch_quest);
+	scripts\cp\zombies\zombie_quest::register_quest_step("ufo",1,::blank,::wait_use_pap_portal,::blank,::debug_use_pap_portal);
+	scripts\cp\zombies\zombie_quest::register_quest_step("ufo",2,::init_first_speaker_defense,::do_first_speaker_defend,::blank,::debug_beat_speaker_defense);
+	scripts\cp\zombies\zombie_quest::register_quest_step("ufo",3,::init_second_speaker_defense,::do_second_speaker_defend,::blank,::debug_beat_speaker_defense);
+	scripts\cp\zombies\zombie_quest::register_quest_step("ufo",4,::init_third_speaker_defense,::do_third_speaker_defend,::complete_all_speaker_defense,::debug_beat_speaker_defense);
+	scripts\cp\zombies\zombie_quest::register_quest_step("ufo",5,::blank,::wait_one_wave,::blank,::debug_beat_wait_one_wave);
+	scripts\cp\zombies\zombie_quest::register_quest_step("ufo",6,::init_get_tone_generator,::get_tone_generator,::complete_get_tone_generator,::debug_get_tone_generator);
+	scripts\cp\zombies\zombie_quest::register_quest_step("ufo",7,::init_place_tone_generator,::place_tone_generator,::complete_place_tone_generator,::debug_place_tone_generator);
+	scripts\cp\zombies\zombie_quest::register_quest_step("ufo",8,::init_match_ufo_tone,::match_ufo_tone,::complete_match_ufo_tone,::debug_match_ufo_tone);
+	scripts\cp\zombies\zombie_quest::register_quest_step("ufo",9,::blank,::ufo_suicide_bomber,::blank,::debug_beat_ufo_suicide_bomber);
+	scripts\cp\zombies\zombie_quest::register_quest_step("ufo",10,::init_alien_grey_fight,::alien_grey_fight,::complete_grey_fight,::debug_beat_alien_grey_fight);
+	scripts\cp\zombies\zombie_quest::register_quest_step("ufo",11,::init_ufo_projectile_attack,::ufo_projectile_attack,::complete_ufo_projectile_attack,::debug_beat_ufo_projectile_attack);
 }
 
 dj_quest_dialogue_vo() {
@@ -961,7 +961,7 @@ startspeakereventspawning(param_00) {
 	}
 
 	foreach(var_09 in var_01) {
-		if(function_010F(param_00.origin,var_09)) {
+		if(ispointinvolume(param_00.origin,var_09)) {
 			var_02 = var_09;
 			foreach(var_0B in var_03) {
 				var_0B thread sendzombietospeaker(var_0B,var_02);
@@ -1065,7 +1065,7 @@ set_up_and_start_speaker(param_00,param_01) {
 	level.frequency_device_clip.origin = var_03.origin + (0,0,48);
 	level.frequency_device_clip.special_case_ignore = 1;
 	level.frequency_device_clip makeentitysentient("allies",0);
-	level.frequency_device_clip.navrepulsor = function_0277("speaker_nav_repulsor",0,var_03.origin,72,1);
+	level.frequency_device_clip.navrepulsor = createnavrepulsor("speaker_nav_repulsor",0,var_03.origin,72,1);
 	var_03 thread damage_monitor(var_03,level.frequency_device_clip);
 	level thread destroyspeakerifonlyoneplayer(var_03);
 	var_03 thread assign_zombie_attacker_logic(var_03,level.frequency_device_clip);
@@ -1097,7 +1097,7 @@ adjustmovespeed(param_00,param_01) {
 	}
 
 	param_00.synctransients = "sprint";
-	param_00 scripts/asm/asm_bb::bb_requestmovetype("sprint");
+	param_00 scripts\asm\asm_bb::bb_requestmovetype("sprint");
 }
 
 get_speaker_icon_shader(param_00) {
@@ -1139,7 +1139,7 @@ damage_monitor(param_00,param_01) {
 		var_07 = gettime();
 		if(var_07 >= param_00.nextdamagetime) {
 			param_00.nextdamagetime = var_07 + 1000;
-			param_00.var_902E--;
+			param_00.hit_point_left--;
 		}
 
 		if(param_00.hit_point_left == 0) {
@@ -1217,7 +1217,7 @@ exit_defense_sequence(param_00) {
 
 	param_00 makeunusable();
 	if(isdefined(level.frequency_device_clip.navrepulsor)) {
-		function_0278(level.frequency_device_clip.navrepulsor);
+		destroynavrepulsor(level.frequency_device_clip.navrepulsor);
 	}
 
 	param_00 delete();
@@ -1267,7 +1267,7 @@ assign_zombie_attacker_logic(param_00,param_01) {
 attack_speaker(param_00,param_01) {
 	param_00.loadstartpointtransients = param_01;
 	param_00.active_speaker_attacker = 1;
-	level.var_C1F3++;
+	level.num_of_active_zombie_attacker++;
 	param_00 thread death_monitor(param_00,param_01);
 }
 
@@ -1277,7 +1277,7 @@ attack_monitor(param_00,param_01) {
 	param_00 waittill("speaker_attacked");
 	param_00.loadstartpointtransients = scripts\engine\utility::getclosest(param_00.origin,level.players);
 	param_00.active_speaker_attacker = undefined;
-	level.var_C1F3--;
+	level.num_of_active_zombie_attacker--;
 	wait(3);
 	get_new_zombie_to_attack_speaker(param_01,param_00);
 }
@@ -1286,7 +1286,7 @@ death_monitor(param_00,param_01) {
 	param_01 endon("death");
 	param_00 waittill("death");
 	wait(3);
-	level.var_C1F3--;
+	level.num_of_active_zombie_attacker--;
 	get_new_zombie_to_attack_speaker(param_01);
 }
 
@@ -1377,7 +1377,7 @@ defense_sequence_fail(param_00) {
 
 	param_00 makeunusable();
 	if(isdefined(level.frequency_device_clip.navrepulsor)) {
-		function_0278(level.frequency_device_clip.navrepulsor);
+		destroynavrepulsor(level.frequency_device_clip.navrepulsor);
 	}
 
 	level.use_dj_door_func = ::use_dj_door_after_fail_speaker_defense;
@@ -1480,7 +1480,7 @@ place_tone_generator_on(param_00) {
 play_tone(param_00,param_01,param_02) {
 	playsoundatpos(param_00.origin,param_00.tone);
 	var_03 = strtok(param_00.tone,"_");
-	param_01 thread scripts/cp/zombies/zombies_pillage::gesture_activate("ges_devil_horns_zm",undefined,0,0.5);
+	param_01 thread scripts\cp\zombies\zombies_pillage::gesture_activate("ges_devil_horns_zm",undefined,0,0.5);
 	level notify("tone_played",var_03[3],param_00);
 	if(scripts\engine\utility::istrue(param_02)) {
 		level thread waitforallplayerstriggered(param_00);

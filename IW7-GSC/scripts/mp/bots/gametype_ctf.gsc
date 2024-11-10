@@ -1,8 +1,8 @@
-/****************************************************
+/********************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\bots\gametype_ctf.gsc
-****************************************************/
+ * Script: scripts\mp\bots\gametype_ctf.gsc
+********************************************/
 
 main() {
 	setup_callbacks();
@@ -25,12 +25,12 @@ setup_bot_ctf() {
 	scripts\mp\bots\_bots_util::func_2D18(var_00,var_01);
 	var_02 = getzonenearest(level.teamflags["allies"].curorigin);
 	if(isdefined(var_02)) {
-		function_002B(var_02,"allies");
+		botzonesetteam(var_02,"allies");
 	}
 
 	var_02 = getzonenearest(level.teamflags["axis"].curorigin);
 	if(isdefined(var_02)) {
-		function_002B(var_02,"axis");
+		botzonesetteam(var_02,"axis");
 	}
 
 	level.bot_gametype_precaching_done = 1;
@@ -45,7 +45,7 @@ crate_can_use(param_00) {
 		return 0;
 	}
 
-	if(!level.teamflags[self.team] scripts\mp\_gameobjects::ishome()) {
+	if(!level.teamflags[self.team] scripts\mp\gameobjects::ishome()) {
 		return 0;
 	}
 
@@ -63,7 +63,7 @@ func_46BE() {
 			continue;
 		}
 
-		if(scripts\mp\_utility::isteamparticipant(var_02) && var_02.team == self.team) {
+		if(scripts\mp\utility::isteamparticipant(var_02) && var_02.team == self.team) {
 			var_00++;
 		}
 	}
@@ -141,7 +141,7 @@ bot_ctf_think() {
 			continue;
 		}
 
-		if(!level.teamflags[self.team] scripts\mp\_gameobjects::ishome()) {
+		if(!level.teamflags[self.team] scripts\mp\gameobjects::ishome()) {
 			if(!isdefined(level.var_6E28[level.otherteam[self.team]])) {
 				clear_defend();
 				self botsetscriptgoal(level.teamflags[self.team].curorigin,16,"critical");

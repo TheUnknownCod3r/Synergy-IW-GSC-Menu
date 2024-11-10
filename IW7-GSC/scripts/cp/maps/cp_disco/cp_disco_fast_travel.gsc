@@ -1,8 +1,8 @@
-/*********************************************************************
+/*************************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\maps\cp_disco\cp_disco_fast_travel.gsc
-*********************************************************************/
+ * Script: scripts\cp\maps\cp_disco\cp_disco_fast_travel.gsc
+*************************************************************/
 
 init_teleport_portals() {
 	wait(5);
@@ -224,7 +224,7 @@ move_player_through_portal_tube(param_00) {
 	}
 
 	if(scripts\engine\utility::istrue(param_00.wor_phase_shift)) {
-		param_00 scripts/cp/powers/coop_phaseshift::exitphaseshift(1);
+		param_00 scripts\cp\powers\coop_phaseshift::exitphaseshift(1);
 		param_00.wor_phase_shift = 0;
 	}
 

@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2638.gsc
+ * Script: 2638.gsc
 ***************************************/
 
 createfx() {
@@ -37,7 +37,7 @@ callback_playerconnect() {
   if (!isdefined(level.player)) {
   var_00 = getentarray("mp_global_intermission", "classname");
   self spawn(var_0[0].origin, var_0[0].angles);
-  scripts/cp/utility::updatesessionstate("playing", "");
+  scripts\cp\utility::updatesessionstate("playing", "");
   self.maxhealth = 10000000;
   self.health = 10000000;
   level.player = self;

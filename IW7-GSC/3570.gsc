@@ -1,12 +1,12 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3570.gsc
-****************************/
+ * Script: 3570.gsc
+************************/
 
 init() {
-	level.var_C7E4 = loadfx("vfx/core/mp/ability/vfx_aslt_overcharge_scrn");
-	level.var_C7E5 = loadfx("vfx/core/mp/ability/vfx_aslt_overcharge_world_view");
+	level.var_C7E4 = loadfx("vfx\core\mp\ability\vfx_aslt_overcharge_scrn");
+	level.var_C7E5 = loadfx("vfx\core\mp\ability\vfx_aslt_overcharge_world_view");
 }
 
 func_F7AB() {
@@ -102,7 +102,7 @@ func_20D0() {
 	self thermalvisionon();
 	thread func_20CE();
 	if(!self.var_8BD7) {
-		scripts\mp\_utility::giveperk("specialty_detectexplosive");
+		scripts\mp\utility::giveperk("specialty_detectexplosive");
 	}
 
 	self.var_8BD7 = 1;
@@ -125,7 +125,7 @@ func_20DB(param_00) {
 	self endon("disconnect");
 	self endon("removeMultiVisor");
 	if(!self.var_8BD7) {
-		scripts\mp\_utility::giveperk("specialty_detectexplosive");
+		scripts\mp\utility::giveperk("specialty_detectexplosive");
 	}
 
 	self.var_8BD7 = 1;
@@ -150,7 +150,7 @@ func_E88F() {
 
 	while(self.powers["power_multiVisor"].var_1348E == 4) {
 		foreach(var_01 in level.players) {
-			if(scripts/mp/equipment/phase_shift::isentityphaseshifted(var_01)) {
+			if(scripts\mp\equipment\phase_shift::isentityphaseshifted(var_01)) {
 				var_01 showtoplayer(self);
 			}
 		}
@@ -159,7 +159,7 @@ func_E88F() {
 	}
 
 	foreach(var_01 in level.players) {
-		if(scripts/mp/equipment/phase_shift::isentityphaseshifted(var_01)) {
+		if(scripts\mp\equipment\phase_shift::isentityphaseshifted(var_01)) {
 			var_01 hidefromplayer(self);
 		}
 	}
@@ -170,7 +170,7 @@ func_E27F(param_00,param_01) {
 		self thermalvisionoff();
 		self visionsetnakedforplayer("",0);
 		if(self.var_8BD7) {
-			scripts\mp\_utility::removeperk("specialty_detectexplosive");
+			scripts\mp\utility::removeperk("specialty_detectexplosive");
 			self.var_8BD7 = 0;
 		}
 

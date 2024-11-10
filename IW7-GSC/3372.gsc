@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3372.gsc
-****************************/
+ * Script: 3372.gsc
+************************/
 
 init() {
 	level.var_138A1 = [];
@@ -40,7 +40,7 @@ func_C906() {
 	}
 	else
 	{
-		var_01 = "cp/cp_weapontable.csv";
+		var_01 = "cp\cp_weapontable.csv";
 	}
 
 	for(;;) {
@@ -93,17 +93,17 @@ func_FA1D(param_00) {
 	param_00.rofweaponslist = [];
 	param_00.var_13C38 = [];
 	if(scripts\cp\utility::map_check(2)) {
-		var_06 = "cp/cp_disco_wall_buy_models.csv";
+		var_06 = "cp\cp_disco_wall_buy_models.csv";
 	}
 	else if(scripts\cp\utility::map_check(3)) {
-		var_06 = "cp/cp_town_wall_buy_models.csv";
+		var_06 = "cp\cp_town_wall_buy_models.csv";
 	}
 	else if(scripts\cp\utility::map_check(4)) {
-		var_06 = "cp/cp_final_wall_buy_models.csv";
+		var_06 = "cp\cp_final_wall_buy_models.csv";
 	}
 	else
 	{
-		var_06 = "cp/cp_wall_buy_models.csv";
+		var_06 = "cp\cp_wall_buy_models.csv";
 	}
 
 	var_07 = 0;
@@ -162,17 +162,17 @@ func_FA1D(param_00) {
 
 func_23DA() {
 	if(scripts\cp\utility::map_check(2)) {
-		var_00 = "cp/cp_disco_wall_buy_models.csv";
+		var_00 = "cp\cp_disco_wall_buy_models.csv";
 	}
 	else if(scripts\cp\utility::map_check(3)) {
-		var_00 = "cp/cp_town_wall_buy_models.csv";
+		var_00 = "cp\cp_town_wall_buy_models.csv";
 	}
 	else if(scripts\cp\utility::map_check(4)) {
-		var_00 = "cp/cp_final_wall_buy_models.csv";
+		var_00 = "cp\cp_final_wall_buy_models.csv";
 	}
 	else
 	{
-		var_00 = "cp/cp_wall_buy_models.csv";
+		var_00 = "cp\cp_wall_buy_models.csv";
 	}
 
 	if(!scripts\engine\utility::flag_exist("wall_buy_setup_done")) {
@@ -545,7 +545,7 @@ _meth_834A(param_00) {
 		}
 
 		var_1B = weaponmaxammo(var_17);
-		var_1C = scripts/cp/perks/prestige::prestige_getminammo();
+		var_1C = scripts\cp\perks\prestige::prestige_getminammo();
 		var_1D = int(var_1C * var_1B);
 		var_1E = self getweaponammostock(var_17);
 		if(var_1E < var_1D) {
@@ -554,7 +554,7 @@ _meth_834A(param_00) {
 
 		if(self hasweapon("alt_" + var_17)) {
 			var_1B = weaponmaxammo("alt_" + var_17);
-			var_1C = scripts/cp/perks/prestige::prestige_getminammo();
+			var_1C = scripts\cp\perks\prestige::prestige_getminammo();
 			var_1D = int(var_1C * var_1B);
 			var_1E = self getweaponammostock("alt_" + var_17);
 			if(var_1E < var_1D) {
@@ -594,7 +594,7 @@ func_E229(param_00) {
 }
 
 setgrenadethrowscale() {
-	if(scripts/cp/perks/prestige::prestige_getnodeployables() == 1) {
+	if(scripts\cp\perks\prestige::prestige_getnodeployables() == 1) {
 		var_00 = self getweaponslistprimaries();
 		foreach(var_02 in var_00) {
 			var_03 = scripts\cp\utility::coop_getweaponclass(var_02);
@@ -780,7 +780,7 @@ interaction_purchase_weapon(param_00,param_01) {
 
 			param_00 func_A02D(param_01);
 			param_01.last_interaction_point = undefined;
-			param_01 scripts/cp/zombies/achievement::update_achievement("EGG_SLAYER",1);
+			param_01 scripts\cp\zombies\achievement::update_achievement("EGG_SLAYER",1);
 			scripts\cp\cp_interaction::remove_from_current_interaction_list_for_player(param_00,param_01);
 			return;
 		}

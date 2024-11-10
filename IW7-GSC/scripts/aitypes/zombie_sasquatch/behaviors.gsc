@@ -1,8 +1,8 @@
-/******************************************************************
+/**********************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\aitypes\zombie_sasquatch\behaviors.gsc
-******************************************************************/
+ * Script: scripts\aitypes\zombie_sasquatch\behaviors.gsc
+**********************************************************/
 
 sasquatch_init(param_00) {
 	var_01 = gettime();
@@ -42,7 +42,7 @@ shouldthrowrock(param_00) {
 		return level.failure;
 	}
 
-	var_01 = distance2dsquared(self.var_3135.var_10C.origin,self.origin);
+	var_01 = distance2dsquared(self.var_3135.isnodeoccupied.origin,self.origin);
 	if(var_01 > 360000) {
 		return level.failure;
 	}
@@ -319,7 +319,7 @@ rush_charge(param_00) {
 		return level.success;
 	}
 
-	var_07 = self.var_3135.var_B64D.origin - self.origin;
+	var_07 = self.var_3135.meleetarget.origin - self.origin;
 	if(length2dsquared(var_07) < 20736) {
 		self.var_3135.instancedata[param_00].bsuccess = 1;
 		return level.success;
@@ -356,13 +356,13 @@ rush_charge(param_00) {
 			}
 			else
 			{
-				self ghostskulls_complete_status(self.var_3135.var_B64D.origin);
+				self ghostskulls_complete_status(self.var_3135.meleetarget.origin);
 				self ghostskulls_total_waves(24);
 			}
 		}
 		else
 		{
-			self ghostskulls_complete_status(self.var_3135.var_B64D.origin);
+			self ghostskulls_complete_status(self.var_3135.meleetarget.origin);
 			self ghostskulls_total_waves(24);
 		}
 	}
@@ -461,7 +461,7 @@ getclosestplayer() {
 			continue;
 		}
 
-		if(var_03.ignoreme || isdefined(var_03.triggerportableradarping) && var_03.var_222.ignoreme) {
+		if(var_03.ignoreme || isdefined(var_03.triggerportableradarping) && var_03.triggerportableradarping.ignoreme) {
 			continue;
 		}
 
@@ -480,15 +480,15 @@ getclosestplayer() {
 }
 
 wander(param_00) {
-	if(isdefined(self.var_3135.isnodeoccupied) && !scripts\common\utility::istrue(self.var_3135.var_10C.ignoreme)) {
-		var_01 = self.var_3135.var_10C.origin;
+	if(isdefined(self.var_3135.isnodeoccupied) && !scripts\engine\utility::istrue(self.var_3135.isnodeoccupied.ignoreme)) {
+		var_01 = self.var_3135.isnodeoccupied.origin;
 		if(!isdefined(self.vehicle_getspawnerarray) || distance2dsquared(var_01,self.var_3135.instancedata[param_00].curtargetpos) > 1296) {
 			self.var_3135.instancedata[param_00].curtargetpos = var_01;
 			var_02 = getclosestpointonnavmesh(var_01,self);
 			self ghostskulls_complete_status(var_02);
 		}
 	}
-	else if(gettime() >= self.var_3135.instancedata[param_00].nextchecktime || isdefined(self.var_3135.isnodeoccupied) && scripts\common\utility::istrue(self.var_3135.var_10C.ignoreme)) {
+	else if(gettime() >= self.var_3135.instancedata[param_00].nextchecktime || isdefined(self.var_3135.isnodeoccupied) && scripts\engine\utility::istrue(self.var_3135.isnodeoccupied.ignoreme)) {
 		var_03 = getclosestplayer();
 		if(isdefined(var_03)) {
 			self.var_3135.instancedata[param_00].curtargetpos = var_03.origin;

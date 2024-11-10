@@ -1,8 +1,8 @@
-/***************************************************************
+/*******************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\asm\alien_rhino\alien_rhino_asm.gsc
-***************************************************************/
+ * Script: scripts\asm\alien_rhino\alien_rhino_asm.gsc
+*******************************************************/
 
 asminit(param_00,param_01,param_02,param_03) {
 	scripts\asm\zombie\zombie::func_13F9A(param_00,param_01,param_02,param_03);
@@ -121,7 +121,7 @@ dochargedamageoncontact(param_00,param_01) {
 			}
 		}
 
-		scripts\common\utility::waitframe();
+		scripts\engine\utility::waitframe();
 	}
 }
 
@@ -135,7 +135,7 @@ choosechargeintroanim(param_00,param_01,param_02) {
 
 choosechargeoutroanim(param_00,param_01,param_02) {
 	var_03 = "charge_miss";
-	if(scripts\common\utility::istrue(self.bchargehit)) {
+	if(scripts\engine\utility::istrue(self.bchargehit)) {
 		var_03 = "charge_hit";
 	}
 

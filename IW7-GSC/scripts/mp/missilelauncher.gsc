@@ -1,8 +1,8 @@
-/**************************************************
+/******************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\missilelauncher.gsc
-**************************************************/
+ * Script: scripts\mp\missilelauncher.gsc
+******************************************/
 
 func_98D5() {
 	self.var_10FA9 = undefined;
@@ -376,7 +376,7 @@ stingtargstruct_getinlos() {
 		for(var_04 = 0;var_04 < self.inreticlesortedids.size;var_04++) {
 			var_05 = self.inreticlesortedids[var_04];
 			var_06 = self.origins[var_05];
-			var_07 = function_0287(var_00,var_06,var_01,var_02,0,"physicsquery_closest",1);
+			var_07 = physics_raycast(var_00,var_06,var_01,var_02,0,"physicsquery_closest",1);
 			if(!isdefined(var_07) || var_07.size == 0) {
 				self.inlosid = var_05;
 				return;

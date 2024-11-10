@@ -1,8 +1,8 @@
-/************************************************************************
+/****************************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\maps\cp_town\cp_town_crab_boss_escort.gsc
-************************************************************************/
+ * Script: scripts\cp\maps\cp_town\cp_town_crab_boss_escort.gsc
+****************************************************************/
 
 start_escort_sequence() {
 	precachempanim("iw7_cp_bosscrab_emerge_slingshot_nuke_01");
@@ -433,31 +433,31 @@ players_exit_bomb_push() {
 }
 
 load_escort_vfx() {
-	level._effect["egg_sac_bomb_landing_sand"] = loadfx("vfx/iw7/levels/cp_town/boss_proj/vfx_bomb_landing_explosion.vfx");
-	level._effect["egg_sac_bomb_landing_non_sand"] = loadfx("vfx/iw7/levels/cp_town/boss_proj/vfx_bomb_explosion_smoky.vfx");
-	level._effect["egg_sac_spawn_landing"] = loadfx("vfx/iw7/levels/cp_town/boss_proj/vfx_eggsack_landing.vfx");
-	level._effect["egg_sac_spawn_aerial_explosion"] = loadfx("vfx/iw7/levels/cp_town/boss_proj/vfx_eggsack_aerial_explode.vfx");
-	level._effect["egg_sac_bomb_aerial_explosion"] = loadfx("vfx/iw7/levels/cp_town/boss_proj/vfx_bomb_aerial_explosion.vfx");
-	level._effect["egg_sac_hatching"] = loadfx("vfx/iw7/levels/cp_town/boss_proj/vfx_eggsack_hatching.vfx");
-	level._effect["egg_sac_bomb_muzzleflash"] = loadfx("vfx/iw7/levels/cp_town/crog/vfx_bomb_muzzleflash.vfx");
-	level._effect["egg_sac_spawn_muzzleflash"] = loadfx("vfx/iw7/levels/cp_town/boss_proj/vfx_eggsack_muzzleflash.vfx");
-	level._effect["lure_glow"] = loadfx("vfx/iw7/levels/cp_town/crog/vfx_lure_glow.vfx");
-	level._effect["lure_glow_burst"] = loadfx("vfx/iw7/levels/cp_town/crog/vfx_lure_glow_burst.vfx");
-	level._effect["lure_glow_charge"] = loadfx("vfx/iw7/levels/cp_town/crog/vfx_lure_glow_charge.vfx");
-	level._effect["mouth_buildup"] = loadfx("vfx/iw7/levels/cp_town/crog/vfx_mouth_buildup.vfx");
-	level._effect["mouth_spray"] = loadfx("vfx/iw7/levels/cp_town/crog/vfx_mouth_spray.vfx");
-	level._effect["mouth_roar_bits"] = loadfx("vfx/iw7/levels/cp_town/crog/vfx_mouth_roar_bits.vfx");
-	level._effect["crog_emerge"] = loadfx("vfx/iw7/levels/cp_town/crog/vfx_crog_emerge.vfx");
-	level._effect["crog_submerge"] = loadfx("vfx/iw7/levels/cp_town/crog/vfx_crog_submerge.vfx");
-	level._effect["crog_submerge_idle"] = loadfx("vfx/iw7/levels/cp_town/crog/vfx_crog_submerge_idle.vfx");
-	level._effect["leg_splashes"] = loadfx("vfx/iw7/levels/cp_town/crog/vfx_bc_leg_splashes.vfx");
-	level._effect["leg_splashes_heavy"] = loadfx("vfx/iw7/levels/cp_town/crog/vfx_bc_leg_splashes_heavy.vfx");
-	level._effect["crog_flashbang"] = loadfx("vfx/iw7/levels/cp_town/crog/vfx_crog_flashbang.vfx");
-	level._effect["claw_trail"] = loadfx("vfx/iw7/levels/cp_town/crog/vfx_claw_smash_trail.vfx");
-	level._effect["claw_trail_sand"] = loadfx("vfx/iw7/levels/cp_town/crog/vfx_claw_smash_imp_sch.vfx");
-	level._effect["lure_glow_burst_ricochet"] = loadfx("vfx/iw7/levels/cp_town/crog/vfx_lg_burst_rico.vfx");
-	level._effect["lure_glow_ricochet"] = loadfx("vfx/iw7/levels/cp_town/crog/vfx_lg_charge_ricochet.vfx");
-	level._effect["food_search_debris"] = loadfx("vfx/iw7/levels/cp_town/crog/vfx_bc_tanker_debris.vfx");
+	level._effect["egg_sac_bomb_landing_sand"] = loadfx("vfx\iw7\levels\cp_town\boss_proj\vfx_bomb_landing_explosion.vfx");
+	level._effect["egg_sac_bomb_landing_non_sand"] = loadfx("vfx\iw7\levels\cp_town\boss_proj\vfx_bomb_explosion_smoky.vfx");
+	level._effect["egg_sac_spawn_landing"] = loadfx("vfx\iw7\levels\cp_town\boss_proj\vfx_eggsack_landing.vfx");
+	level._effect["egg_sac_spawn_aerial_explosion"] = loadfx("vfx\iw7\levels\cp_town\boss_proj\vfx_eggsack_aerial_explode.vfx");
+	level._effect["egg_sac_bomb_aerial_explosion"] = loadfx("vfx\iw7\levels\cp_town\boss_proj\vfx_bomb_aerial_explosion.vfx");
+	level._effect["egg_sac_hatching"] = loadfx("vfx\iw7\levels\cp_town\boss_proj\vfx_eggsack_hatching.vfx");
+	level._effect["egg_sac_bomb_muzzleflash"] = loadfx("vfx\iw7\levels\cp_town\crog\vfx_bomb_muzzleflash.vfx");
+	level._effect["egg_sac_spawn_muzzleflash"] = loadfx("vfx\iw7\levels\cp_town\boss_proj\vfx_eggsack_muzzleflash.vfx");
+	level._effect["lure_glow"] = loadfx("vfx\iw7\levels\cp_town\crog\vfx_lure_glow.vfx");
+	level._effect["lure_glow_burst"] = loadfx("vfx\iw7\levels\cp_town\crog\vfx_lure_glow_burst.vfx");
+	level._effect["lure_glow_charge"] = loadfx("vfx\iw7\levels\cp_town\crog\vfx_lure_glow_charge.vfx");
+	level._effect["mouth_buildup"] = loadfx("vfx\iw7\levels\cp_town\crog\vfx_mouth_buildup.vfx");
+	level._effect["mouth_spray"] = loadfx("vfx\iw7\levels\cp_town\crog\vfx_mouth_spray.vfx");
+	level._effect["mouth_roar_bits"] = loadfx("vfx\iw7\levels\cp_town\crog\vfx_mouth_roar_bits.vfx");
+	level._effect["crog_emerge"] = loadfx("vfx\iw7\levels\cp_town\crog\vfx_crog_emerge.vfx");
+	level._effect["crog_submerge"] = loadfx("vfx\iw7\levels\cp_town\crog\vfx_crog_submerge.vfx");
+	level._effect["crog_submerge_idle"] = loadfx("vfx\iw7\levels\cp_town\crog\vfx_crog_submerge_idle.vfx");
+	level._effect["leg_splashes"] = loadfx("vfx\iw7\levels\cp_town\crog\vfx_bc_leg_splashes.vfx");
+	level._effect["leg_splashes_heavy"] = loadfx("vfx\iw7\levels\cp_town\crog\vfx_bc_leg_splashes_heavy.vfx");
+	level._effect["crog_flashbang"] = loadfx("vfx\iw7\levels\cp_town\crog\vfx_crog_flashbang.vfx");
+	level._effect["claw_trail"] = loadfx("vfx\iw7\levels\cp_town\crog\vfx_claw_smash_trail.vfx");
+	level._effect["claw_trail_sand"] = loadfx("vfx\iw7\levels\cp_town\crog\vfx_claw_smash_imp_sch.vfx");
+	level._effect["lure_glow_burst_ricochet"] = loadfx("vfx\iw7\levels\cp_town\crog\vfx_lg_burst_rico.vfx");
+	level._effect["lure_glow_ricochet"] = loadfx("vfx\iw7\levels\cp_town\crog\vfx_lg_charge_ricochet.vfx");
+	level._effect["food_search_debris"] = loadfx("vfx\iw7\levels\cp_town\crog\vfx_bc_tanker_debris.vfx");
 }
 
 egg_sac_spawn_attacks() {
@@ -848,13 +848,13 @@ escort_nav_obstacle_monitor() {
 	var_01 = 25;
 	var_02 = 80;
 	var_03 = level.escort_vehicle;
-	var_04 = function_027A(var_03.origin,(var_00,var_01,var_02),var_03.angles);
+	var_04 = createnavobstaclebybounds(var_03.origin,(var_00,var_01,var_02),var_03.angles);
 	var_05 = var_03.origin;
 	for(;;) {
 		wait(0.5);
 		if(var_03.origin != var_05) {
 			destroynavobstacle(var_04);
-			var_04 = function_027A(var_03.origin,(var_00,var_01,var_02),var_03.angles);
+			var_04 = createnavobstaclebybounds(var_03.origin,(var_00,var_01,var_02),var_03.angles);
 			var_05 = var_03.origin;
 		}
 
@@ -864,5 +864,5 @@ escort_nav_obstacle_monitor() {
 	}
 
 	destroynavobstacle(var_04);
-	var_04 = function_027A(var_03.origin,(var_00,var_01,var_02),var_03.angles);
+	var_04 = createnavobstaclebybounds(var_03.origin,(var_00,var_01,var_02),var_03.angles);
 }

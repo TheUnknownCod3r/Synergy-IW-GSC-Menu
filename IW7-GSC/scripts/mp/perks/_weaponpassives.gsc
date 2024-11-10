@@ -1,19 +1,19 @@
-/********************************************************
+/************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\perks\_weaponpassives.gsc
-********************************************************/
+ * Script: scripts\mp\perks\_weaponpassives.gsc
+************************************************/
 
 weaponpassivesinit() {
 	level thread func_13B0C();
-	level._effect["loot_mo_money_kill"] = loadfx("vfx/iw7/_requests/mp/vfx_mo_money_cash_exp");
-	level._effect["player_plasma_friendly"] = loadfx("vfx/iw7/_requests/mp/vfx_debug_warning.vfx");
-	level._effect["player_plasma_enemy"] = loadfx("vfx/iw7/_requests/mp/vfx_debug_warning.vfx");
-	level._effect["player_plasma_friendly"] = loadfx("vfx/iw7/_requests/mp/vfx_debug_warning.vfx");
-	level._effect["player_plasma_enemy"] = loadfx("vfx/iw7/_requests/mp/vfx_debug_warning.vfx");
-	level._effect["player_plasma_screen_stand"] = loadfx("vfx/iw7/_requests/mp/vfx_debug_warning.vfx");
-	level._effect["passive_gore"] = loadfx("vfx/iw7/_requests/mp/vfx_meatbag_large.vfx");
-	level._effect["passive_gore_robot"] = loadfx("vfx/iw7/core/impact/robot/vfx_mp_c6_melee.vfx");
+	level._effect["loot_mo_money_kill"] = loadfx("vfx\iw7\_requests\mp\vfx_mo_money_cash_exp");
+	level._effect["player_plasma_friendly"] = loadfx("vfx\iw7\_requests\mp\vfx_debug_warning.vfx");
+	level._effect["player_plasma_enemy"] = loadfx("vfx\iw7\_requests\mp\vfx_debug_warning.vfx");
+	level._effect["player_plasma_friendly"] = loadfx("vfx\iw7\_requests\mp\vfx_debug_warning.vfx");
+	level._effect["player_plasma_enemy"] = loadfx("vfx\iw7\_requests\mp\vfx_debug_warning.vfx");
+	level._effect["player_plasma_screen_stand"] = loadfx("vfx\iw7\_requests\mp\vfx_debug_warning.vfx");
+	level._effect["passive_gore"] = loadfx("vfx\iw7\_requests\mp\vfx_meatbag_large.vfx");
+	level._effect["passive_gore_robot"] = loadfx("vfx\iw7\core\impact\robot\vfx_mp_c6_melee.vfx");
 }
 
 func_13B0C() {
@@ -32,7 +32,7 @@ watchweaponchanged() {
 		if(isdefined(var_00) && var_00 != "none") {
 			setmodeswitchkillweapon(self,var_00);
 			giveweaponpassives(var_00);
-			scripts\mp\_weapons::func_12F5D(var_00);
+			scripts\mp\weapons::func_12F5D(var_00);
 		}
 
 		scripts\engine\utility::waittill_any_3("weapon_change","giveLoadout");
@@ -41,7 +41,7 @@ watchweaponchanged() {
 
 giveweaponpassives(param_00) {
 	clearpassives();
-	var_01 = scripts\mp\_loot::getpassivesforweapon(param_00);
+	var_01 = scripts\mp\loot::getpassivesforweapon(param_00);
 	if(isdefined(var_01)) {
 		foreach(var_03 in var_01) {
 			giveplayerpassive(var_03);
@@ -52,14 +52,14 @@ giveweaponpassives(param_00) {
 }
 
 giveplayerpassive(param_00) {
-	scripts\mp\_utility::giveperk(param_00);
+	scripts\mp\utility::giveperk(param_00);
 	self.weaponpassives[self.weaponpassives.size] = param_00;
 }
 
 clearpassives() {
 	if(isdefined(self.weaponpassives)) {
 		foreach(var_01 in self.weaponpassives) {
-			scripts\mp\_utility::removeperk(var_01);
+			scripts\mp\utility::removeperk(var_01);
 		}
 	}
 
@@ -99,11 +99,11 @@ teamsmatch(param_00,param_01) {
 }
 
 updateweaponpassivesonuse(param_00,param_01) {
-	if(param_00 scripts\mp\_utility::_hasperk("passive_backfire")) {
+	if(param_00 scripts\mp\utility::_hasperk("passive_backfire")) {
 		param_00 thread func_8978(param_00,param_01);
 	}
 
-	if(param_00 scripts\mp\_utility::_hasperk("passive_sonar")) {
+	if(param_00 scripts\mp\utility::_hasperk("passive_sonar")) {
 		param_00 thread func_89E5(param_00,param_01);
 	}
 }
@@ -124,33 +124,33 @@ func_12EB2(param_00) {
 }
 
 updateweaponpassivesondamage(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08,param_09) {
-	if(param_00 scripts\mp\_utility::_hasperk("passive_infinite_ammo")) {
+	if(param_00 scripts\mp\utility::_hasperk("passive_infinite_ammo")) {
 		param_00 thread func_12EB2(param_00 getcurrentweapon());
 	}
 
-	if(param_01 scripts\mp\_utility::_hasperk("passive_minimap_damage") && isdefined(param_00) && !param_00 scripts\mp\_utility::_hasperk("specialty_gpsjammer")) {
+	if(param_01 scripts\mp\utility::_hasperk("passive_minimap_damage") && isdefined(param_00) && !param_00 scripts\mp\utility::_hasperk("specialty_gpsjammer")) {
 		param_01 thread func_89C5(param_01,param_00);
 	}
 
-	if(param_01 scripts\mp\_utility::_hasperk("passive_fire_damage")) {
+	if(param_01 scripts\mp\utility::_hasperk("passive_fire_damage")) {
 		param_01 thread func_89A2(param_01,param_00,param_04);
 	}
 
-	if(param_01 scripts\mp\_utility::_hasperk("passive_cold_damage")) {
+	if(param_01 scripts\mp\utility::_hasperk("passive_cold_damage")) {
 		param_01 thread func_8986(param_01,param_00,param_04);
 	}
 
-	if(param_01 scripts\mp\_utility::_hasperk("passive_critical_sequential_damage")) {
+	if(param_01 scripts\mp\utility::_hasperk("passive_critical_sequential_damage")) {
 		param_01 thread func_898A(param_01,param_00,param_04);
 	}
 
-	if(param_01 scripts\mp\_utility::_hasperk("passive_sonic")) {
+	if(param_01 scripts\mp\utility::_hasperk("passive_sonic")) {
 		param_01 thread func_89E6(param_01,param_00);
 	}
 }
 
 loadoutweapongiven(param_00) {
-	var_01 = scripts\mp\_utility::getweaponrootname(param_00);
+	var_01 = scripts\mp\utility::getweaponrootname(param_00);
 	checkprestigeextraclassicammo(param_00,var_01);
 }
 
@@ -158,7 +158,7 @@ checkprestigeextraclassicammo(param_00,param_01) {
 	var_02 = param_01 + "_extra_ammo";
 	if(isdefined(level.prestigeextras[var_02])) {
 		if(self isitemunlocked(var_02,"prestigeExtras",1)) {
-			var_03 = function_0249(param_00);
+			var_03 = weaponmaxammo(param_00);
 			var_04 = self getweaponammostock(param_00);
 			var_05 = var_03 - var_04 * 0.5;
 			self setweaponammostock(param_00,int(min(var_04 + var_05,var_03)));
@@ -183,12 +183,12 @@ func_89C5(param_00,param_01) {
 }
 
 func_89E5(param_00,param_01) {
-	if(!scripts\mp\_utility::isstrstart(param_01,"alt")) {
+	if(!scripts\mp\utility::isstrstart(param_01,"alt")) {
 		return;
 	}
 
 	var_02 = self getweaponammoclip(param_01);
-	function_02A1(param_00.origin,param_00.team,500,500);
+	triggerportableradarpingteam(param_00.origin,param_00.team,500,500);
 }
 
 func_898A(param_00,param_01,param_02) {
@@ -219,7 +219,7 @@ passivecolddamagewatchvictim(param_00,param_01,param_02,param_03,param_04) {
 
 	var_07.speedmods[var_05] = param_02;
 	var_07.endtimes[var_05] = var_06;
-	param_01 setscriptablepartstate(scripts\engine\utility::ter_op(scripts\mp\_utility::istrue(param_04),"weaponPassiveColdGLDamage","weaponPassiveColdDamage"),"active");
+	param_01 setscriptablepartstate(scripts\engine\utility::ter_op(scripts\mp\utility::istrue(param_04),"weaponPassiveColdGLDamage","weaponPassiveColdDamage"),"active");
 	var_08 = var_07.curspeedmod;
 	var_09 = var_08;
 	for(;;) {
@@ -239,7 +239,7 @@ passivecolddamagewatchvictim(param_00,param_01,param_02,param_03,param_04) {
 
 		var_07.curspeedmod = var_09;
 		if(var_07.curspeedmod != var_08) {
-			param_01 scripts\mp\_weapons::updatemovespeedscale();
+			param_01 scripts\mp\weapons::updatemovespeedscale();
 		}
 
 		if(var_07.speedmods.size <= 0) {
@@ -267,12 +267,12 @@ passivecolddamageresetscriptable(param_00) {
 
 passivecolddamageresetdata(param_00) {
 	param_00.passivecolddamage = undefined;
-	param_00 scripts\mp\_weapons::updatemovespeedscale();
+	param_00 scripts\mp\weapons::updatemovespeedscale();
 }
 
 cryogl_watchforexplode(param_00) {
 	self waittill("explode",var_01);
-	var_02 = scripts\mp\_utility::clearscrambler(var_01,256);
+	var_02 = scripts\mp\utility::clearscrambler(var_01,256);
 	foreach(var_04 in var_02) {
 		if(var_04 == param_00) {
 			continue;
@@ -282,23 +282,23 @@ cryogl_watchforexplode(param_00) {
 			continue;
 		}
 
-		if(!scripts\mp\_utility::isreallyalive(var_04)) {
+		if(!scripts\mp\utility::isreallyalive(var_04)) {
 			continue;
 		}
 
-		if(!scripts/mp/equipment/phase_shift::areentitiesinphase(var_04,self)) {
+		if(!scripts\mp\equipment\phase_shift::areentitiesinphase(var_04,self)) {
 			continue;
 		}
 
-		if(var_04 != param_00 && scripts\mp\_utility::func_9E05(param_00.team,var_04)) {
+		if(var_04 != param_00 && scripts\mp\utility::func_9E05(param_00.team,var_04)) {
 			continue;
 		}
 
-		if(var_04 scripts\mp\_utility::_hasperk("specialty_stun_resistance")) {
+		if(var_04 scripts\mp\utility::_hasperk("specialty_stun_resistance")) {
 			continue;
 		}
 
-		if(scripts\mp\_utility::istrue(var_04.var_9F72)) {
+		if(scripts\mp\utility::istrue(var_04.var_9F72)) {
 			continue;
 		}
 
@@ -311,7 +311,7 @@ func_89A2(param_00,param_01,param_02) {
 	if(isdefined(param_00) && isdefined(param_01)) {
 		var_03 = param_01 getpassivevalue("passive_fire_damage");
 		param_01 setscriptablepartstate("burning","active",0);
-		var_04 = scripts\engine\utility::ter_op(param_01 scripts\mp\_utility::_hasperk("specialty_blastshield"),2,5);
+		var_04 = scripts\engine\utility::ter_op(param_01 scripts\mp\utility::_hasperk("specialty_blastshield"),2,5);
 		if(var_03 <= 0) {
 			param_01 thread startdamageovertime(param_02,param_00,var_04,0.5,2.5,"passive_fire_damage");
 			return;
@@ -332,7 +332,7 @@ func_AD68(param_00,param_01) {
 }
 
 func_10D9E(param_00,param_01,param_02,param_03,param_04,param_05,param_06) {
-	var_07 = function_01E1(scripts\engine\utility::getfx(param_06),self geteye(),self);
+	var_07 = spawnfxforclient(scripts\engine\utility::getfx(param_06),self geteye(),self);
 	foreach(var_09 in level.players) {
 		if(var_09 == self) {
 			triggerfx(var_07);
@@ -399,95 +399,95 @@ func_11067(param_00) {
 }
 
 func_12F61(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07) {
-	if(!scripts\mp\_utility::playersareenemies(param_01,param_02)) {
+	if(!scripts\mp\utility::playersareenemies(param_01,param_02)) {
 		return;
 	}
 
-	if(param_01 scripts\mp\_utility::_hasperk("passive_berserk") || param_01 scripts\mp\_utility::_hasperk("passive_berserk_silent")) {
+	if(param_01 scripts\mp\utility::_hasperk("passive_berserk") || param_01 scripts\mp\utility::_hasperk("passive_berserk_silent")) {
 		param_01 thread quadfeederon();
 	}
 
-	if(param_01 scripts\mp\_utility::_hasperk("passive_headshot_ammo")) {
+	if(param_01 scripts\mp\utility::_hasperk("passive_headshot_ammo")) {
 		param_01 thread func_89AE(param_05,param_01,param_02,param_04,param_06);
 	}
 
-	if(param_01 scripts\mp\_utility::_hasperk("passive_last_shots_ammo") || param_01 scripts\mp\_utility::_hasperk("passive_last_shots_ammo_kbs")) {
+	if(param_01 scripts\mp\utility::_hasperk("passive_last_shots_ammo") || param_01 scripts\mp\utility::_hasperk("passive_last_shots_ammo_kbs")) {
 		param_01 thread func_89C2(param_05,param_01,param_02);
 	}
 
-	if(param_01 scripts\mp\_utility::_hasperk("passive_extra_xp")) {
+	if(param_01 scripts\mp\utility::_hasperk("passive_extra_xp")) {
 		param_01 thread func_89A0(param_01,param_02);
 	}
 
-	if(param_01 scripts\mp\_utility::_hasperk("passive_nuke")) {
+	if(param_01 scripts\mp\utility::_hasperk("passive_nuke")) {
 		param_01 thread func_89CC(param_01,param_02,param_05);
 	}
 
-	if(param_01 scripts\mp\_utility::_hasperk("passive_streak_ammo")) {
+	if(param_01 scripts\mp\utility::_hasperk("passive_streak_ammo")) {
 		param_01 thread func_89EB(param_01,param_05);
 	}
 
-	if(param_01 scripts\mp\_utility::_hasperk("passive_move_speed_on_kill")) {
+	if(param_01 scripts\mp\utility::_hasperk("passive_move_speed_on_kill")) {
 		param_01 thread func_89C8(param_01,param_02);
 	}
 
-	if(param_01 scripts\mp\_utility::_hasperk("passive_cooldown_on_kill")) {
+	if(param_01 scripts\mp\utility::_hasperk("passive_cooldown_on_kill")) {
 		param_01 thread func_8988(param_01);
 	}
 
-	if(param_01 scripts\mp\_utility::_hasperk("passive_health_regen_on_kill")) {
+	if(param_01 scripts\mp\utility::_hasperk("passive_health_regen_on_kill")) {
 		param_01 thread func_89B1(param_01);
 	}
 
-	if(param_01 scripts\mp\_utility::_hasperk("passive_refresh")) {
+	if(param_01 scripts\mp\utility::_hasperk("passive_refresh")) {
 		param_01 thread func_89DB(param_01,param_02);
 	}
 
-	if(param_01 scripts\mp\_utility::_hasperk("passive_fire_kill")) {
+	if(param_01 scripts\mp\utility::_hasperk("passive_fire_kill")) {
 		param_01 thread func_89A3(param_01,param_02,param_05);
 	}
 
-	if(param_01 scripts\mp\_utility::_hasperk("passive_random_perks")) {
+	if(param_01 scripts\mp\utility::_hasperk("passive_random_perks")) {
 		param_01 thread func_89D9(param_01,param_02);
 	}
 
-	if(param_01 scripts\mp\_utility::_hasperk("passive_mini_specialist")) {
+	if(param_01 scripts\mp\utility::_hasperk("passive_mini_specialist")) {
 		param_01 thread handlespecialistpassive(param_01,param_02);
 	}
 
-	if(param_01 scripts\mp\_utility::_hasperk("passive_headshot_super")) {
+	if(param_01 scripts\mp\utility::_hasperk("passive_headshot_super")) {
 		param_01 thread func_89B0(param_05,param_01,param_02,param_04,param_06);
 	}
 
-	if(param_01 scripts\mp\_utility::_hasperk("passive_hitman")) {
+	if(param_01 scripts\mp\utility::_hasperk("passive_hitman")) {
 		param_01 thread func_89B3(param_01,param_02);
 	}
 
-	if(param_01 scripts\mp\_utility::_hasperk("passive_scorestreak_pack")) {
+	if(param_01 scripts\mp\utility::_hasperk("passive_scorestreak_pack")) {
 		param_01 thread func_89E0(param_01,param_02);
 	}
 
-	if(param_01 scripts\mp\_utility::_hasperk("passive_sonic")) {
+	if(param_01 scripts\mp\utility::_hasperk("passive_sonic")) {
 		param_01 thread func_89E7(param_01,param_02);
 	}
 
-	if(param_01 scripts\mp\_utility::_hasperk("passive_headshot")) {
+	if(param_01 scripts\mp\utility::_hasperk("passive_headshot")) {
 		param_01 thread func_89AF(param_05,param_01,param_02,param_04,param_06,param_07);
 	}
 
-	if((param_01 scripts\mp\_utility::_hasperk("passive_meleekill") || param_01 scripts\mp\_utility::_hasperk("passive_meleekill_silent")) && param_04 == "MOD_MELEE") {
+	if((param_01 scripts\mp\utility::_hasperk("passive_meleekill") || param_01 scripts\mp\utility::_hasperk("passive_meleekill_silent")) && param_04 == "MOD_MELEE") {
 		param_01 thread func_89AB(param_01,param_02);
 	}
 
-	if(param_01 scripts\mp\_utility::_hasperk("passive_gore")) {
+	if(param_01 scripts\mp\utility::_hasperk("passive_gore")) {
 		param_01 thread func_89AB(param_01,param_02);
 	}
 
-	if(param_01 scripts\mp\_utility::_hasperk("passive_visor_detonation")) {
+	if(param_01 scripts\mp\utility::_hasperk("passive_visor_detonation")) {
 		param_01 thread handlevisordetonationpassive(param_05,param_01,param_02,param_04,param_06);
 	}
 
-	if(param_01 scripts\mp\_utility::_hasperk("passive_railgun_overload") || param_01 scripts\mp\_utility::_hasperk("passive_overkill")) {
+	if(param_01 scripts\mp\utility::_hasperk("passive_railgun_overload") || param_01 scripts\mp\utility::_hasperk("passive_overkill")) {
 		param_01 thread handleoverloadpassive(param_05,param_01,param_02,param_04,param_06,param_03);
 	}
 
@@ -495,27 +495,27 @@ func_12F61(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_
 		param_01 thread handlemark2xpbonus(param_01,param_05);
 	}
 
-	if(param_01 scripts\mp\_utility::_hasperk("passive_double_kill_reload")) {
+	if(param_01 scripts\mp\utility::_hasperk("passive_double_kill_reload")) {
 		param_01 thread handledoublekillreload(param_05);
 	}
 
-	if(param_01 scripts\mp\_utility::_hasperk("passive_jump_super")) {
+	if(param_01 scripts\mp\utility::_hasperk("passive_jump_super")) {
 		thread handlejumpsuperonkillpassive(param_01,param_02);
 	}
 
-	if(param_01 scripts\mp\_utility::_hasperk("passive_melee_super")) {
+	if(param_01 scripts\mp\utility::_hasperk("passive_melee_super")) {
 		thread handlemeleesuperonkillpassive(param_01,param_02,param_04);
 	}
 
-	if(param_01 scripts\mp\_utility::_hasperk("passive_double_kill_super")) {
+	if(param_01 scripts\mp\utility::_hasperk("passive_double_kill_super")) {
 		thread handledoublekillsuperpassive(param_01,param_02);
 	}
 
-	if(param_01 scripts\mp\_utility::_hasperk("passive_melee_cone_expl")) {
+	if(param_01 scripts\mp\utility::_hasperk("passive_melee_cone_expl")) {
 		thread handlemeleeconeexplodeonkillpassive(param_01,param_02,param_05,param_04);
 	}
 
-	if(param_01 scripts\mp\_utility::_hasperk("passive_leader_kill_score")) {
+	if(param_01 scripts\mp\utility::_hasperk("passive_leader_kill_score")) {
 		thread handleleaderkillscorepassive(param_01,param_02,param_05);
 	}
 
@@ -547,7 +547,7 @@ func_49ED() {
 	self endon("stop_minimap_decoys");
 	childthread func_B7B0();
 	for(;;) {
-		thread func_49EC(self.origin,scripts\mp\_utility::getotherteam(self.team));
+		thread func_49EC(self.origin,scripts\mp\utility::getotherteam(self.team));
 		wait(0.25);
 	}
 }
@@ -561,7 +561,7 @@ func_B7B0() {
 
 func_49EC(param_00,param_01) {
 	wait(randomfloatrange(0,0.1));
-	if(!isdefined(self) || !scripts\mp\_utility::isreallyalive(self)) {
+	if(!isdefined(self) || !scripts\mp\utility::isreallyalive(self)) {
 		return;
 	}
 
@@ -583,11 +583,11 @@ func_F73F() {}
 func_12CCE() {}
 
 func_89AE(param_00,param_01,param_02,param_03,param_04) {
-	if(!isdefined(param_01) || !isdefined(param_00) || !param_01 scripts\mp\_utility::_hasperk("passive_headshot_ammo")) {
+	if(!isdefined(param_01) || !isdefined(param_00) || !param_01 scripts\mp\utility::_hasperk("passive_headshot_ammo")) {
 		return;
 	}
 
-	if(!scripts\mp\_utility::isheadshot(param_00,param_04,param_03,param_01)) {
+	if(!scripts\mp\utility::isheadshot(param_00,param_04,param_03,param_01)) {
 		return;
 	}
 
@@ -609,11 +609,11 @@ handlevisordetonationpassive(param_00,param_01,param_02,param_03,param_04) {
 	param_01 endon("joined_spectator");
 	param_01 endon("disconnect");
 	level endon("game_ended");
-	if(!isdefined(param_01) || !isdefined(param_00) || !param_01 scripts\mp\_utility::_hasperk("passive_visor_detonation")) {
+	if(!isdefined(param_01) || !isdefined(param_00) || !param_01 scripts\mp\utility::_hasperk("passive_visor_detonation")) {
 		return;
 	}
 
-	if(!scripts\mp\_utility::isheadshot(param_00,param_04,param_03,param_01)) {
+	if(!scripts\mp\utility::isheadshot(param_00,param_04,param_03,param_01)) {
 		return;
 	}
 
@@ -639,7 +639,7 @@ handleoverloadpassive(param_00,param_01,param_02,param_03,param_04,param_05) {
 	param_01 endon("joined_spectator");
 	param_01 endon("disconnect");
 	level endon("game_ended");
-	if(!isdefined(param_01) || !isdefined(param_00) || !param_01 scripts\mp\_utility::_hasperk("passive_railgun_overload") && !param_01 scripts\mp\_utility::_hasperk("passive_overkill")) {
+	if(!isdefined(param_01) || !isdefined(param_00) || !param_01 scripts\mp\utility::_hasperk("passive_railgun_overload") && !param_01 scripts\mp\utility::_hasperk("passive_overkill")) {
 		return;
 	}
 
@@ -667,13 +667,13 @@ activateoverloadpassive(param_00,param_01,param_02,param_03) {
 }
 
 ismark2weapon(param_00) {
-	var_01 = function_02C4(param_00);
+	var_01 = getweaponvariantindex(param_00);
 	return isdefined(var_01) && var_01 >= 32;
 }
 
 handlemark2xpbonus(param_00,param_01) {
 	var_02 = getdvarfloat("mk2_bonus",0.15);
-	var_03 = scripts\mp\_utility::getweapongroup(param_01);
+	var_03 = scripts\mp\utility::getweapongroup(param_01);
 	var_04 = var_03 + "_mk_ii_bonus";
 	if(isdefined(level.prestigeextras[var_04])) {
 		if(self isitemunlocked(var_04,"prestigeExtras",1)) {
@@ -681,8 +681,8 @@ handlemark2xpbonus(param_00,param_01) {
 		}
 	}
 
-	var_05 = scripts\mp\_rank::getscoreinfovalue("kill");
-	param_00 scripts\mp\_rank::giverankxp("kill",int(var_05 * var_02));
+	var_05 = scripts\mp\rank::getscoreinfovalue("kill");
+	param_00 scripts\mp\rank::giverankxp("kill",int(var_05 * var_02));
 }
 
 testpassivemessage(param_00,param_01) {
@@ -691,11 +691,11 @@ testpassivemessage(param_00,param_01) {
 	}
 
 	var_02 = 0;
-	var_03 = scripts\mp\_passives::getpassivedeathwatching(param_00);
+	var_03 = scripts\mp\passives::getpassivedeathwatching(param_00);
 	var_04 = "";
 	if(isdefined(var_03)) {
 		var_04 = var_03 + param_01;
-		var_02 = scripts\mp\_hud_message::testmiscmessage(var_04);
+		var_02 = scripts\mp\hud_message::testmiscmessage(var_04);
 	}
 
 	if(var_02) {
@@ -707,14 +707,14 @@ checkpassivemessage(param_00,param_01) {
 		param_01 = "";
 	}
 
-	var_02 = scripts\mp\_passives::getpassivedeathwatching(param_00);
+	var_02 = scripts\mp\passives::getpassivedeathwatching(param_00);
 	if(isdefined(var_02)) {
 		if(isendstr(param_01,"_camo")) {
-			var_03 = scripts\mp\_utility::strip_suffix(param_01,"_camo");
+			var_03 = scripts\mp\utility::strip_suffix(param_01,"_camo");
 			param_01 = var_03;
 		}
 
-		scripts\mp\_hud_message::showmiscmessage(var_02 + param_01);
+		scripts\mp\hud_message::showmiscmessage(var_02 + param_01);
 	}
 }
 
@@ -766,7 +766,7 @@ unsetkineticwave() {
 }
 
 func_89C2(param_00,param_01,param_02) {
-	if(!isdefined(param_01) || !isdefined(param_00) || !param_01 scripts\mp\_utility::_hasperk("passive_last_shots_ammo") && !param_01 scripts\mp\_utility::_hasperk("passive_last_shots_ammo_kbs")) {
+	if(!isdefined(param_01) || !isdefined(param_00) || !param_01 scripts\mp\utility::_hasperk("passive_last_shots_ammo") && !param_01 scripts\mp\utility::_hasperk("passive_last_shots_ammo_kbs")) {
 		return;
 	}
 
@@ -779,7 +779,7 @@ func_89C2(param_00,param_01,param_02) {
 	}
 
 	if(var_05) {
-		param_01 scripts\mp\_hud_message::showmiscmessage("scavenger");
+		param_01 scripts\mp\hud_message::showmiscmessage("scavenger");
 	}
 }
 
@@ -833,7 +833,7 @@ func_12CA7() {}
 handledoublekillreload(param_00) {
 	var_01 = self.var_DDC2 + 1;
 	if(var_01 % 2 == 0) {
-		scripts\mp\_hud_message::showmiscmessage("scavenger");
+		scripts\mp\hud_message::showmiscmessage("scavenger");
 		var_02 = weaponclipsize(param_00);
 		var_03 = self getweaponammostock(param_00);
 		var_04 = self getweaponammoclip(param_00);
@@ -878,8 +878,8 @@ func_6A02(param_00) {
 }
 
 func_9E84(param_00,param_01,param_02,param_03,param_04) {
-	if(isalive(param_00) && !param_00 scripts\mp\_utility::isusingremote() && param_02 == "MOD_RIFLE_BULLET" || param_02 == "MOD_PISTOL_BULLET" || param_02 == "MOD_HEAD_SHOT" && !scripts\mp\_utility::iskillstreakweapon(param_01) && !isdefined(param_00.assistedsuicide)) {
-		var_05 = scripts\mp\_utility::getweapongroup(param_01);
+	if(isalive(param_00) && !param_00 scripts\mp\utility::isusingremote() && param_02 == "MOD_RIFLE_BULLET" || param_02 == "MOD_PISTOL_BULLET" || param_02 == "MOD_HEAD_SHOT" && !scripts\mp\utility::iskillstreakweapon(param_01) && !isdefined(param_00.assistedsuicide)) {
+		var_05 = scripts\mp\utility::getweapongroup(param_01);
 		switch(var_05) {
 			case "weapon_pistol":
 				var_06 = 800;
@@ -930,7 +930,7 @@ func_582E(param_00,param_01) {
 func_F79B() {
 	var_00 = self getcurrentweapon();
 	if(doesshareammo(var_00)) {
-		var_00 = scripts\mp\_utility::func_E0CF(var_00);
+		var_00 = scripts\mp\utility::func_E0CF(var_00);
 	}
 
 	thread func_B8D5(var_00);
@@ -956,27 +956,27 @@ func_B8D5(param_00) {
 }
 
 doesshareammo(param_00) {
-	return scripts\mp\_weapons::isaltmodeweapon(param_00) && !issubstr(param_00,"+gl") && !issubstr(param_00,"+shotgun");
+	return scripts\mp\weapons::isaltmodeweapon(param_00) && !issubstr(param_00,"+gl") && !issubstr(param_00,"+shotgun");
 }
 
 func_F7AA() {
 	self.weaponpassivespeedmod = 0.03;
-	scripts\mp\_weapons::updatemovespeedscale();
+	scripts\mp\weapons::updatemovespeedscale();
 }
 
 func_12CF5() {
 	self.weaponpassivespeedmod = undefined;
-	scripts\mp\_weapons::updatemovespeedscale();
+	scripts\mp\weapons::updatemovespeedscale();
 }
 
 setrechambermovespeedpassive() {
 	self.weaponpassivefastrechamberspeedmod = -0.05;
-	scripts\mp\_weapons::updatemovespeedscale();
+	scripts\mp\weapons::updatemovespeedscale();
 }
 
 unsetrechambermovespeedpassive() {
 	self.weaponpassivefastrechamberspeedmod = undefined;
-	scripts\mp\_weapons::updatemovespeedscale();
+	scripts\mp\weapons::updatemovespeedscale();
 }
 
 func_F6FD() {}
@@ -989,7 +989,7 @@ func_89A0(param_00,param_01) {
 	}
 
 	param_00 checkpassivemessage("passive_extra_xp");
-	scripts\mp\_awards::givemidmatchaward("mo_money");
+	scripts\mp\awards::givemidmatchaward("mo_money");
 }
 
 getpassivedeathwatching(param_00,param_01) {
@@ -1033,7 +1033,7 @@ updatenukepassive(param_00) {
 	self endon("disconnect");
 	for(;;) {
 		self waittill("weapon_passives_given");
-		if((scripts\mp\_utility::_hasperk("passive_nuke") || hasnukepassiveinloadout() || isdefined(self.pers["passive_nuke_key"]) && self.pers["passive_nuke_key"] > 0) && !getpassivedeathwatching(self,"passive_nuke_key")) {
+		if((scripts\mp\utility::_hasperk("passive_nuke") || hasnukepassiveinloadout() || isdefined(self.pers["passive_nuke_key"]) && self.pers["passive_nuke_key"] > 0) && !getpassivedeathwatching(self,"passive_nuke_key")) {
 			thread func_C1C7();
 			setpassivedeathwatching(self,"passive_nuke_key",1);
 		}
@@ -1044,7 +1044,7 @@ hasnukepassiveinloadout() {
 	var_00 = 0;
 	var_01 = self getweaponslistprimaries();
 	foreach(var_03 in var_01) {
-		var_04 = scripts\mp\_loot::getpassivesforweapon(var_03);
+		var_04 = scripts\mp\loot::getpassivesforweapon(var_03);
 		if(isdefined(var_04) && var_04.size > 0) {
 			foreach(var_06 in var_04) {
 				if(var_06 == "passive_nuke") {
@@ -1053,7 +1053,7 @@ hasnukepassiveinloadout() {
 				}
 			}
 
-			if(scripts\mp\_utility::istrue(var_00)) {
+			if(scripts\mp\utility::istrue(var_00)) {
 				break;
 			}
 		}
@@ -1064,11 +1064,11 @@ hasnukepassiveinloadout() {
 
 func_89CC(param_00,param_01,param_02) {
 	self endon("disconnect");
-	if(!isdefined(param_00) || !scripts\mp\_utility::isreallyalive(param_00) && !scripts\mp\_utility::issimultaneouskillenabled() || !isdefined(param_02) || !isdefined(param_01)) {
+	if(!isdefined(param_00) || !scripts\mp\utility::isreallyalive(param_00) && !scripts\mp\utility::issimultaneouskillenabled() || !isdefined(param_02) || !isdefined(param_01)) {
 		return;
 	}
 
-	var_03 = !scripts\mp\_utility::isreallyalive(param_00) && scripts\mp\_utility::issimultaneouskillenabled();
+	var_03 = !scripts\mp\utility::isreallyalive(param_00) && scripts\mp\utility::issimultaneouskillenabled();
 	var_04 = undefined;
 	if(level.gametype == "infect") {
 		var_05 = [];
@@ -1076,8 +1076,8 @@ func_89CC(param_00,param_01,param_02) {
 	}
 	else
 	{
-		var_05 = scripts\mp\_loot::getpassivesforweapon(var_03);
-		if(issubstr(param_02,"iw7_vr_mpl_range") && param_00 scripts\mp\_utility::_hasperk("passive_nuke")) {
+		var_05 = scripts\mp\loot::getpassivesforweapon(var_03);
+		if(issubstr(param_02,"iw7_vr_mpl_range") && param_00 scripts\mp\utility::_hasperk("passive_nuke")) {
 			var_05[var_05.size] = "passive_nuke";
 			var_04 = 1;
 		}
@@ -1101,7 +1101,7 @@ func_89CC(param_00,param_01,param_02) {
 
 	if(var_03) {
 		waittillframeend;
-		if(!scripts\mp\_utility::istrue(self.simultaneouskill)) {
+		if(!scripts\mp\utility::istrue(self.simultaneouskill)) {
 			return;
 		}
 	}
@@ -1120,15 +1120,15 @@ func_89CC(param_00,param_01,param_02) {
 
 	if(param_00.pers["passive_nuke_key"] >= 25) {
 		param_00 checkpassivemessage("passive_nuke");
-		param_00 thread scripts\mp\_hud_message::showkillstreaksplash("nuke");
+		param_00 thread scripts\mp\hud_message::showkillstreaksplash("nuke");
 		param_00 scripts\mp\killstreaks\_killstreaks::awardkillstreak("nuke",param_00);
 		param_00.pers["passive_nuke_key"] = 0;
-		param_00 scripts\mp\_missions::func_D991("ch_darkops_nuke");
+		param_00 scripts\mp\missions::func_D991("ch_darkops_nuke");
 		return;
 	}
 
 	if(param_00.pers["passive_nuke_key"] == 24) {
-		param_00 thread scripts\mp\_hud_message::showsplash("nuke_kill_single");
+		param_00 thread scripts\mp\hud_message::showsplash("nuke_kill_single");
 		return;
 	}
 
@@ -1154,13 +1154,13 @@ func_89CC(param_00,param_01,param_02) {
 
 func_C1C8() {
 	var_00 = 25 - self.pers["passive_nuke_key"];
-	thread scripts\mp\_hud_message::showsplash("nuke_kill",var_00);
+	thread scripts\mp\hud_message::showsplash("nuke_kill",var_00);
 }
 
 func_C1C7() {
 	self endon("disconnect");
 	self waittill("death");
-	if(scripts\mp\_utility::issimultaneouskillenabled()) {
+	if(scripts\mp\utility::issimultaneouskillenabled()) {
 		scripts\engine\utility::waitframe();
 	}
 
@@ -1171,10 +1171,10 @@ func_C1C7() {
 setquadfeederpassive() {}
 
 quadfeederon() {
-	if(!scripts\mp\_utility::istrue(self.quadfeeder)) {
+	if(!scripts\mp\utility::istrue(self.quadfeeder)) {
 		self.quadfeeder = 1;
 		setpassivevalue("passive_berserk",1);
-		scripts\mp\_utility::giveperk("specialty_overcharge");
+		scripts\mp\utility::giveperk("specialty_overcharge");
 		self _meth_85C1(65);
 		var_00 = self _meth_85C0();
 		if(var_00 < 0) {
@@ -1208,10 +1208,10 @@ listencancelquadfeeder() {
 }
 
 unsetquadfeedereffect() {
-	if(scripts\mp\_utility::istrue(self.quadfeeder)) {
+	if(scripts\mp\utility::istrue(self.quadfeeder)) {
 		self.quadfeeder = 0;
 		setpassivevalue("passive_berserk",undefined);
-		scripts\mp\_utility::removeperk("specialty_overcharge");
+		scripts\mp\utility::removeperk("specialty_overcharge");
 		self _meth_85C2();
 		var_00 = self _meth_85C0();
 		var_00 = min(var_00 + 20,100);
@@ -1232,7 +1232,7 @@ func_12D3B() {}
 
 func_F82A() {
 	var_00 = self getcurrentweapon();
-	scripts\mp\_utility::func_1824("kill",0.1,var_00);
+	scripts\mp\utility::func_1824("kill",0.1,var_00);
 	thread func_4112(var_00);
 }
 
@@ -1243,7 +1243,7 @@ func_12D23() {
 func_4112(param_00) {
 	self endon("disconnect");
 	self waittill("score_bonus_kills_removed");
-	scripts\mp\_utility::func_E165("kill",0.1,param_00);
+	scripts\mp\utility::func_E165("kill",0.1,param_00);
 }
 
 func_F82B() {
@@ -1258,7 +1258,7 @@ func_F82B() {
 	}
 
 	foreach(var_08 in var_00) {
-		scripts\mp\_utility::func_1824(var_08.var_67E5,var_08.var_2C80,var_08.var_394);
+		scripts\mp\utility::func_1824(var_08.var_67E5,var_08.var_2C80,var_08.var_394);
 	}
 
 	thread func_4113(var_00);
@@ -1280,7 +1280,7 @@ func_4113(param_00) {
 	self endon("disconnect");
 	self waittill("score_bonus_objectives_removed");
 	foreach(var_02 in param_00) {
-		scripts\mp\_utility::func_E165(var_02.var_67E5,var_02.var_2C80,var_02.var_394);
+		scripts\mp\utility::func_E165(var_02.var_67E5,var_02.var_2C80,var_02.var_394);
 	}
 }
 
@@ -1294,7 +1294,7 @@ func_F746() {
 func_12CD1() {
 	foreach(var_01 in self.var_905B) {
 		var_02 = self.var_905A[var_01];
-		scripts\mp\_utility::outlinedisable(var_01,var_02);
+		scripts\mp\utility::outlinedisable(var_01,var_02);
 	}
 
 	self.var_905B = undefined;
@@ -1328,7 +1328,7 @@ func_12EAA(param_00) {
 					continue;
 				}
 
-				var_04 = scripts\mp\_utility::outlineenableforplayer(var_02,"cyan",self,0,1,"level_script");
+				var_04 = scripts\mp\utility::outlineenableforplayer(var_02,"cyan",self,0,1,"level_script");
 				self.var_905B[self.var_905B.size] = var_04;
 				self.var_905A[var_04] = var_02;
 				thread func_905D(var_02);
@@ -1342,7 +1342,7 @@ func_12EAA(param_00) {
 		if(var_03 >= 0) {
 			var_05 = [];
 			var_06 = [];
-			scripts\mp\_utility::outlinedisable(var_03,var_02);
+			scripts\mp\utility::outlinedisable(var_03,var_02);
 			foreach(var_04 in self.var_905B) {
 				var_08 = self.var_905A[var_04];
 				if(var_08 == var_02) {
@@ -1431,7 +1431,7 @@ func_12CD4() {
 	self notify("passive_hunter_killer_cancel");
 	foreach(var_01 in self.var_91E9) {
 		var_02 = self.var_91E8[var_01];
-		scripts\mp\_utility::outlinedisable(var_01,var_02);
+		scripts\mp\utility::outlinedisable(var_01,var_02);
 	}
 
 	self.var_91E9 = undefined;
@@ -1514,8 +1514,8 @@ func_12EAE(param_00) {
 		var_04 = var_02.maxhealth / 2;
 		var_05 = var_02.health;
 		if(level.teambased && self.team != var_02.team && var_05 <= var_04 && var_05 > 0) {
-			if(var_03 < 0 && !var_02 scripts\mp\_utility::_hasperk("specialty_empimmune")) {
-				var_06 = scripts\mp\_utility::outlineenableforplayer(var_02,"red",self,1,0,"level_script");
+			if(var_03 < 0 && !var_02 scripts\mp\utility::_hasperk("specialty_empimmune")) {
+				var_06 = scripts\mp\utility::outlineenableforplayer(var_02,"red",self,1,0,"level_script");
 				self.var_91E9[self.var_91E9.size] = var_06;
 				self.var_91E8[var_06] = var_02;
 				thread func_91ED(var_02);
@@ -1527,7 +1527,7 @@ func_12EAE(param_00) {
 		if(var_03 >= 0) {
 			var_07 = [];
 			var_08 = [];
-			scripts\mp\_utility::outlinedisable(var_03,var_02);
+			scripts\mp\utility::outlinedisable(var_03,var_02);
 			foreach(var_06 in self.var_91E9) {
 				var_0A = self.var_91E8[var_06];
 				if(var_0A == var_02) {
@@ -1561,16 +1561,16 @@ setwallrunquieterpassive() {
 	thread wallrunquieterwatchfordeath();
 	for(;;) {
 		if(self gold_teeth_hint_func() || !self isonground()) {
-			if(!scripts\mp\_utility::istrue(getpassivevalue("passive_wallrun_quieter"))) {
+			if(!scripts\mp\utility::istrue(getpassivevalue("passive_wallrun_quieter"))) {
 				setpassivevalue("passive_wallrun_quieter",1);
 				checkpassivemessage("passive_wallrun_quieter","_start");
-				scripts\mp\_utility::giveperk("specialty_quieter");
+				scripts\mp\utility::giveperk("specialty_quieter");
 			}
 		}
-		else if(scripts\mp\_utility::istrue(getpassivevalue("passive_wallrun_quieter"))) {
+		else if(scripts\mp\utility::istrue(getpassivevalue("passive_wallrun_quieter"))) {
 			setpassivevalue("passive_wallrun_quieter",undefined);
 			checkpassivemessage("passive_wallrun_quieter","_end");
-			scripts\mp\_utility::removeperk("specialty_quieter");
+			scripts\mp\utility::removeperk("specialty_quieter");
 		}
 
 		scripts\engine\utility::waitframe();
@@ -1586,10 +1586,10 @@ wallrunquieterwatchfordeath() {
 
 unsetwallrunquieterpassive() {
 	self notify("unsetWallrunQuieter");
-	if(scripts\mp\_utility::istrue(getpassivevalue("passive_wallrun_quieter"))) {
+	if(scripts\mp\utility::istrue(getpassivevalue("passive_wallrun_quieter"))) {
 		setpassivevalue("passive_wallrun_quieter",undefined);
 		checkpassivemessage("passive_wallrun_quieter","_end");
-		scripts\mp\_utility::removeperk("specialty_quieter");
+		scripts\mp\utility::removeperk("specialty_quieter");
 	}
 }
 
@@ -1603,20 +1603,20 @@ setslideblastshield() {
 		var_01 = self getstance();
 		if(self issprintsliding() || (var_01 == "crouch" || var_01 == "prone") && self isonground()) {
 			var_00 = undefined;
-			if(!scripts\mp\_utility::istrue(getpassivevalue("passive_slide_blastshield"))) {
+			if(!scripts\mp\utility::istrue(getpassivevalue("passive_slide_blastshield"))) {
 				setpassivevalue("passive_slide_blastshield",1);
 				checkpassivemessage("passive_slide_blastshield","_start");
-				scripts\mp\_utility::giveperk("specialty_blastshield");
+				scripts\mp\utility::giveperk("specialty_blastshield");
 			}
 		}
 		else if(!isdefined(var_00)) {
 			var_00 = gettime() + 250;
 		}
 		else if(gettime() >= var_00) {
-			if(scripts\mp\_utility::istrue(getpassivevalue("passive_slide_blastshield"))) {
+			if(scripts\mp\utility::istrue(getpassivevalue("passive_slide_blastshield"))) {
 				setpassivevalue("passive_slide_blastshield",undefined);
 				checkpassivemessage("passive_slide_blastshield","_end");
-				scripts\mp\_utility::removeperk("specialty_blastshield");
+				scripts\mp\utility::removeperk("specialty_blastshield");
 			}
 		}
 
@@ -1633,10 +1633,10 @@ slideblastshieldwatchfordeath() {
 
 unsetslideblastshield() {
 	self notify("unsetSlideBlastShield");
-	if(scripts\mp\_utility::istrue(getpassivevalue("passive_slide_blastshield"))) {
+	if(scripts\mp\utility::istrue(getpassivevalue("passive_slide_blastshield"))) {
 		setpassivevalue("passive_slide_blastshield",undefined);
 		checkpassivemessage("passive_slide_blastshield","_end");
-		scripts\mp\_utility::removeperk("specialty_blastshield");
+		scripts\mp\utility::removeperk("specialty_blastshield");
 	}
 }
 
@@ -1652,20 +1652,20 @@ setproneblindeye() {
 				var_00 = gettime() + 600;
 			}
 			else if(gettime() >= var_00) {
-				if(!scripts\mp\_utility::istrue(getpassivevalue("passive_prone_blindeye"))) {
+				if(!scripts\mp\utility::istrue(getpassivevalue("passive_prone_blindeye"))) {
 					setpassivevalue("passive_prone_blindeye",1);
 					checkpassivemessage("passive_prone_blindeye","_start");
-					scripts\mp\_utility::giveperk("specialty_blindeye");
+					scripts\mp\utility::giveperk("specialty_blindeye");
 				}
 			}
 		}
 		else
 		{
 			var_00 = undefined;
-			if(scripts\mp\_utility::istrue(getpassivevalue("passive_prone_blindeye"))) {
+			if(scripts\mp\utility::istrue(getpassivevalue("passive_prone_blindeye"))) {
 				setpassivevalue("passive_prone_blindeye",undefined);
 				checkpassivemessage("passive_prone_blindeye","_end");
-				scripts\mp\_utility::removeperk("specialty_blindeye");
+				scripts\mp\utility::removeperk("specialty_blindeye");
 			}
 		}
 
@@ -1682,10 +1682,10 @@ proneblindeyewatchfordeath() {
 
 unsetproneblindeye() {
 	self notify("unsetProneBlindEye");
-	if(scripts\mp\_utility::istrue(getpassivevalue("passive_prone_blindeye"))) {
+	if(scripts\mp\utility::istrue(getpassivevalue("passive_prone_blindeye"))) {
 		setpassivevalue("passive_prone_blindeye",undefined);
 		checkpassivemessage("passive_prone_blindeye","_end");
-		scripts\mp\_utility::removeperk("specialty_blindeye");
+		scripts\mp\utility::removeperk("specialty_blindeye");
 	}
 }
 
@@ -1702,20 +1702,20 @@ setstationaryengineer() {
 				var_00 = gettime() + 750;
 			}
 			else if(gettime() > var_00) {
-				if(!scripts\mp\_utility::istrue(getpassivevalue("passive_stationary_engineer"))) {
+				if(!scripts\mp\utility::istrue(getpassivevalue("passive_stationary_engineer"))) {
 					setpassivevalue("passive_stationary_engineer",1);
 					checkpassivemessage("passive_stationary_engineer","_start");
-					scripts\mp\_utility::giveperk("specialty_engineer");
+					scripts\mp\utility::giveperk("specialty_engineer");
 				}
 			}
 		}
 		else
 		{
 			var_00 = undefined;
-			if(scripts\mp\_utility::istrue(getpassivevalue("passive_stationary_engineer"))) {
+			if(scripts\mp\utility::istrue(getpassivevalue("passive_stationary_engineer"))) {
 				setpassivevalue("passive_stationary_engineer",undefined);
 				checkpassivemessage("passive_stationary_engineer","_end");
-				scripts\mp\_utility::removeperk("specialty_engineer");
+				scripts\mp\utility::removeperk("specialty_engineer");
 			}
 		}
 
@@ -1725,10 +1725,10 @@ setstationaryengineer() {
 
 unsetstationaryengineer() {
 	self notify("unsetStationaryEngineer");
-	if(scripts\mp\_utility::istrue(getpassivevalue("passive_stationary_engineer"))) {
+	if(scripts\mp\utility::istrue(getpassivevalue("passive_stationary_engineer"))) {
 		setpassivevalue("passive_stationary_engineer",undefined);
 		checkpassivemessage("passive_stationary_engineer","_end");
-		scripts\mp\_utility::removeperk("specialty_engineer");
+		scripts\mp\utility::removeperk("specialty_engineer");
 	}
 }
 
@@ -1756,10 +1756,10 @@ dopplegangerwatchfordeath() {
 
 unsetdoppleganger() {
 	self notify("unsetDoppleganger");
-	if(scripts\mp\_utility::istrue(getpassivevalue("passive_doppleganger"))) {
+	if(scripts\mp\utility::istrue(getpassivevalue("passive_doppleganger"))) {
 		setpassivevalue("passive_doppleganger",undefined);
 		checkpassivemessage("passive_doppleganger","_end");
-		scripts\mp\_utility::removeperk("specialty_doppleganger");
+		scripts\mp\utility::removeperk("specialty_doppleganger");
 	}
 }
 
@@ -1775,7 +1775,7 @@ unsetcollatstreak() {
 collatstreakgive() {
 	if(!isdefined(self.lastcollattime) || self.lastcollattime < gettime()) {
 		scripts\mp\killstreaks\_killstreaks::awardkillstreak("venom",self);
-		scripts\mp\_hud_message::showkillstreaksplash("venom");
+		scripts\mp\hud_message::showkillstreaksplash("venom");
 		self.lastcollattime = gettime();
 	}
 }
@@ -1830,7 +1830,7 @@ func_89EB(param_00,param_01) {
 		var_04 = int(max(var_03 * 0.2,1));
 		var_05 = param_00 getweaponammostock(param_01);
 		param_00 setweaponammostock(param_01,var_05 + var_04);
-		param_00 scripts\mp\_hud_message::showmiscmessage("scavenger");
+		param_00 scripts\mp\hud_message::showmiscmessage("scavenger");
 	}
 }
 
@@ -1840,7 +1840,7 @@ func_89C8(param_00,param_01) {
 	param_00 endon(var_02);
 	if(!isdefined(param_00.weaponpassivespeedonkillmod) || param_00.weaponpassivespeedonkillmod != 0.04) {
 		param_00.weaponpassivespeedonkillmod = 0.04;
-		param_00 scripts\mp\_weapons::updatemovespeedscale();
+		param_00 scripts\mp\weapons::updatemovespeedscale();
 	}
 
 	param_00 scripts\engine\utility::waittill_any_timeout_1(3.5,"death","disconnect");
@@ -1849,12 +1849,12 @@ func_89C8(param_00,param_01) {
 	}
 
 	param_00.weaponpassivespeedonkillmod = 0;
-	param_00 scripts\mp\_weapons::updatemovespeedscale();
+	param_00 scripts\mp\weapons::updatemovespeedscale();
 	param_00 checkpassivemessage("passive_move_speed_on_kill");
 }
 
 func_8988(param_00) {
-	param_00 scripts\mp\_utility::func_DE39(2.5);
+	param_00 scripts\mp\utility::func_DE39(2.5);
 	param_00 checkpassivemessage("passive_cooldown_on_kill");
 }
 
@@ -1864,7 +1864,7 @@ func_89B1(param_00) {
 }
 
 func_89DB(param_00,param_01) {
-	if(!isdefined(param_00) || !scripts\mp\_utility::isreallyalive(param_00) || !isdefined(param_01)) {
+	if(!isdefined(param_00) || !scripts\mp\utility::isreallyalive(param_00) || !isdefined(param_01)) {
 		return;
 	}
 
@@ -1883,14 +1883,14 @@ func_89DB(param_00,param_01) {
 
 	if(param_00.pers["passive_refresh_key"] >= 5) {
 		param_00 checkpassivemessage("passive_refresh");
-		param_00 thread scripts\mp\_hud_message::showkillstreaksplash("refresh");
-		param_00 scripts\mp\_powers::func_1813(1);
+		param_00 thread scripts\mp\hud_message::showkillstreaksplash("refresh");
+		param_00 scripts\mp\powers::func_1813(1);
 		param_00.pers["passive_refresh_key"] = 0;
 		return;
 	}
 
 	if(param_00.pers["passive_refresh_key"] == 4) {
-		param_00 thread scripts\mp\_hud_message::showsplash("refresh_kill_single");
+		param_00 thread scripts\mp\hud_message::showsplash("refresh_kill_single");
 		return;
 	}
 
@@ -1902,7 +1902,7 @@ func_89DB(param_00,param_01) {
 
 func_DE77() {
 	var_00 = 5 - self.pers["passive_refresh_key"];
-	thread scripts\mp\_hud_message::showsplash("refresh_kill",var_00);
+	thread scripts\mp\hud_message::showsplash("refresh_kill",var_00);
 }
 
 func_DE76() {
@@ -1913,7 +1913,7 @@ func_DE76() {
 }
 
 func_89B3(param_00,param_01) {
-	if(!isdefined(param_00) || !scripts\mp\_utility::isreallyalive(param_00) || !isdefined(param_01)) {
+	if(!isdefined(param_00) || !scripts\mp\utility::isreallyalive(param_00) || !isdefined(param_01)) {
 		return;
 	}
 
@@ -1965,7 +1965,7 @@ func_89B3(param_00,param_01) {
 
 		var_0B = var_0A * var_04;
 		param_00 checkpassivemessage("passive_hitman");
-		param_00 thread scripts\mp\_supers::stopshellshock(var_0B);
+		param_00 thread scripts\mp\supers::stopshellshock(var_0B);
 		param_00.var_903C = [];
 	}
 }
@@ -1988,15 +1988,15 @@ func_903E(param_00) {
 	param_00 = int(max(0,param_00));
 	switch(param_00) {
 		case 0:
-			thread scripts\mp\_hud_message::showkillstreaksplash("hitman_kill_all");
+			thread scripts\mp\hud_message::showkillstreaksplash("hitman_kill_all");
 			break;
 
 		case 1:
-			thread scripts\mp\_hud_message::showsplash("hitman_kill_single");
+			thread scripts\mp\hud_message::showsplash("hitman_kill_single");
 			break;
 
 		default:
-			thread scripts\mp\_hud_message::showsplash("hitman_kill",param_00);
+			thread scripts\mp\hud_message::showsplash("hitman_kill",param_00);
 			break;
 	}
 }
@@ -2011,7 +2011,7 @@ func_89E0(param_00,param_01) {
 	level endon("game_ended");
 	self endon("disconnect");
 	param_01 endon("diconnect");
-	param_00 scripts/mp/archetypes/archengineer::createentityeventdata(param_00,param_01,"scorestreak");
+	param_00 scripts\mp\archetypes\archengineer::createentityeventdata(param_00,param_01,"scorestreak");
 	param_00 checkpassivemessage("passive_scorestreak_pack");
 	checkpassivemessage("passive_scorestreak_pack");
 }
@@ -2042,7 +2042,7 @@ handlegoreeffect(param_00) {
 	}
 
 	playsoundatpos(var_01,"gib_fullbody");
-	scripts\mp\_shellshock::_earthquake(0.5,1.5,var_01,120);
+	scripts\mp\shellshock::_earthquake(0.5,1.5,var_01,120);
 }
 
 func_89E7(param_00,param_01) {
@@ -2052,12 +2052,12 @@ func_89E7(param_00,param_01) {
 func_89E6(param_00,param_01) {}
 
 func_89AF(param_00,param_01,param_02,param_03,param_04,param_05) {
-	if(!scripts\mp\_utility::isheadshot(param_00,param_04,param_03,param_01)) {
+	if(!scripts\mp\utility::isheadshot(param_00,param_04,param_03,param_01)) {
 	}
 }
 
 func_89D9(param_00,param_01) {
-	if(!isdefined(param_00) || !scripts\mp\_utility::isreallyalive(param_00) || !isdefined(param_01)) {
+	if(!isdefined(param_00) || !scripts\mp\utility::isreallyalive(param_00) || !isdefined(param_01)) {
 		return;
 	}
 
@@ -2093,7 +2093,7 @@ func_89D9(param_00,param_01) {
 			}
 
 			param_00 checkpassivemessage("passive_random_perks","_" + var_04);
-			param_00 scripts\mp\_utility::giveperk(var_04);
+			param_00 scripts\mp\utility::giveperk(var_04);
 			var_05 = scripts\engine\utility::ter_op(isdefined(param_00.var_DCC2),param_00.var_DCC2.size,0);
 			param_00.var_DCC2[var_05] = var_04;
 		}
@@ -2116,7 +2116,7 @@ func_DCC3() {
 	self waittill("death");
 	if(isdefined(self.var_DCC2)) {
 		foreach(var_01 in self.var_DCC2) {
-			scripts\mp\_utility::removeperk(var_01);
+			scripts\mp\utility::removeperk(var_01);
 		}
 	}
 
@@ -2126,7 +2126,7 @@ func_DCC3() {
 }
 
 handlespecialistpassive(param_00,param_01) {
-	if(!isdefined(param_00) || !scripts\mp\_utility::isreallyalive(param_00) || !isdefined(param_01)) {
+	if(!isdefined(param_00) || !scripts\mp\utility::isreallyalive(param_00) || !isdefined(param_01)) {
 		return;
 	}
 
@@ -2148,14 +2148,14 @@ handlespecialistpassive(param_00,param_01) {
 		param_00.pers["passive_mini_specialist_key"]++;
 	}
 
-	var_02 = scripts\engine\utility::ter_op(param_00 scripts\mp\_utility::_hasperk("specialty_hardline"),1,0);
+	var_02 = scripts\engine\utility::ter_op(param_00 scripts\mp\utility::_hasperk("specialty_hardline"),1,0);
 	if(!isdefined(param_00.minispecialistkillperks)) {
 		param_00.minispecialistkillperks = [];
 	}
 
 	var_03 = undefined;
-	if(param_00.pers["passive_mini_specialist_key"] >= 14 && !param_00 scripts\mp\_utility::_hasperk("passive_nuke")) {
-		param_00 scripts\mp\_utility::giveperk("passive_nuke");
+	if(param_00.pers["passive_mini_specialist_key"] >= 14 && !param_00 scripts\mp\utility::_hasperk("passive_nuke")) {
+		param_00 scripts\mp\utility::giveperk("passive_nuke");
 		if(isdefined(param_00.pers["passive_nuke_key"])) {
 			param_00.pers["passive_nuke_key"] = param_00.pers["passive_nuke_key"] + 14;
 		}
@@ -2164,23 +2164,23 @@ handlespecialistpassive(param_00,param_01) {
 			param_00.pers["passive_nuke_key"] = 14;
 		}
 	}
-	else if(param_00.pers["passive_mini_specialist_key"] >= 8 - var_02 && !param_00 scripts\mp\_utility::_hasperk("passive_double_kill_reload") && !param_00 scripts\mp\_utility::_hasperk("passive_stationary_engineer") && !param_00 scripts\mp\_utility::_hasperk("passive_jump_super")) {
-		param_00 scripts\mp\_utility::giveperk("passive_double_kill_reload");
-		param_00 scripts\mp\_utility::giveperk("passive_stationary_engineer");
-		param_00 scripts\mp\_utility::giveperk("passive_jump_super");
-		param_00 thread scripts\mp\_hud_message::showsplash("specialty_specialist");
+	else if(param_00.pers["passive_mini_specialist_key"] >= 8 - var_02 && !param_00 scripts\mp\utility::_hasperk("passive_double_kill_reload") && !param_00 scripts\mp\utility::_hasperk("passive_stationary_engineer") && !param_00 scripts\mp\utility::_hasperk("passive_jump_super")) {
+		param_00 scripts\mp\utility::giveperk("passive_double_kill_reload");
+		param_00 scripts\mp\utility::giveperk("passive_stationary_engineer");
+		param_00 scripts\mp\utility::giveperk("passive_jump_super");
+		param_00 thread scripts\mp\hud_message::showsplash("specialty_specialist");
 	}
-	else if(param_00.pers["passive_mini_specialist_key"] >= 6 - var_02 && !param_00 scripts\mp\_utility::_hasperk("specialty_silentkill")) {
+	else if(param_00.pers["passive_mini_specialist_key"] >= 6 - var_02 && !param_00 scripts\mp\utility::_hasperk("specialty_silentkill")) {
 		var_03 = "specialty_silentkill";
-		param_00 scripts\mp\_utility::giveperk(var_03);
+		param_00 scripts\mp\utility::giveperk(var_03);
 	}
-	else if(param_00.pers["passive_mini_specialist_key"] >= 4 - var_02 && !param_00 scripts\mp\_utility::_hasperk("passive_wallrun_quieter")) {
+	else if(param_00.pers["passive_mini_specialist_key"] >= 4 - var_02 && !param_00 scripts\mp\utility::_hasperk("passive_wallrun_quieter")) {
 		var_03 = "passive_wallrun_quieter";
-		param_00 scripts\mp\_utility::giveperk(var_03);
+		param_00 scripts\mp\utility::giveperk(var_03);
 	}
-	else if(param_00.pers["passive_mini_specialist_key"] >= 2 - var_02 && !param_00 scripts\mp\_utility::_hasperk("passive_move_speed")) {
+	else if(param_00.pers["passive_mini_specialist_key"] >= 2 - var_02 && !param_00 scripts\mp\utility::_hasperk("passive_move_speed")) {
 		var_03 = "passive_move_speed";
-		param_00 scripts\mp\_utility::giveperk(var_03);
+		param_00 scripts\mp\utility::giveperk(var_03);
 	}
 
 	if(isdefined(var_03)) {
@@ -2193,7 +2193,7 @@ specialistpassivedeathwatcher() {
 	self waittill("death");
 	if(isdefined(self.minispecialistkillperks)) {
 		foreach(var_01 in self.minispecialistkillperks) {
-			scripts\mp\_utility::removeperk(var_01);
+			scripts\mp\utility::removeperk(var_01);
 		}
 	}
 
@@ -2203,22 +2203,22 @@ specialistpassivedeathwatcher() {
 }
 
 func_89B0(param_00,param_01,param_02,param_03,param_04) {
-	if(!isdefined(param_01) || !isdefined(param_00) || !param_01 scripts\mp\_utility::_hasperk("passive_headshot_super")) {
+	if(!isdefined(param_01) || !isdefined(param_00) || !param_01 scripts\mp\utility::_hasperk("passive_headshot_super")) {
 		return;
 	}
 
-	if(!scripts\mp\_utility::isheadshot(param_00,param_04,param_03,param_01)) {
+	if(!scripts\mp\utility::isheadshot(param_00,param_04,param_03,param_01)) {
 		return;
 	}
 
-	param_01 thread scripts\mp\_supers::stopshellshock(100);
+	param_01 thread scripts\mp\supers::stopshellshock(100);
 	param_01 checkpassivemessage("passive_headshot_super");
 }
 
 func_89A3(param_00,param_01,param_02) {
 	var_03 = spawn("trigger_radius",param_01.origin,0,50,100);
 	var_03.triggerportableradarping = param_00;
-	scripts\mp\_utility::playteamfxforclient(param_00.team,param_01.origin,"player_plasma_friendly","player_plasma_enemy",5);
+	scripts\mp\utility::playteamfxforclient(param_00.team,param_01.origin,"player_plasma_friendly","player_plasma_enemy",5);
 	var_03 thread func_AD70(param_02);
 	var_03 thread func_AD71();
 	param_00 checkpassivemessage("passive_fire_kill");
@@ -2262,16 +2262,16 @@ func_AD71() {
 }
 
 func_3E01() {
-	if(scripts\mp\_utility::_hasperk("passive_critical_chance_damage")) {
+	if(scripts\mp\utility::_hasperk("passive_critical_chance_damage")) {
 		if(randomintrange(1,10) == 1) {
-			scripts\mp\_utility::giveperk("specialty_moredamage");
+			scripts\mp\utility::giveperk("specialty_moredamage");
 		}
 	}
 
-	if(scripts\mp\_utility::_hasperk("passive_critical_sequential_damage")) {
+	if(scripts\mp\utility::_hasperk("passive_critical_sequential_damage")) {
 		if(getpassivevalue("passive_critical_sequential_damage") >= 4) {
 			setpassivevalue("passive_critical_sequential_damage",-1);
-			scripts\mp\_utility::giveperk("specialty_moredamage");
+			scripts\mp\utility::giveperk("specialty_moredamage");
 		}
 	}
 }
@@ -2304,7 +2304,7 @@ func_1174D() {
 		}
 
 		var_10 = var_0A + var_0B * var_09;
-		scripts\mp\_utility::playteamfxforclient(self.team,var_0F,"player_plasma_friendly","player_plasma_enemy",var_10);
+		scripts\mp\utility::playteamfxforclient(self.team,var_0F,"player_plasma_friendly","player_plasma_enemy",var_10);
 	}
 }
 
@@ -2338,7 +2338,7 @@ func_11749(param_00,param_01) {
 
 func_11755(param_00,param_01) {
 	var_02 = scripts\common\trace::create_contents(0,1,1,1,1,0,0);
-	var_03 = function_0287(param_00,param_01,var_02,[self],0,"physicsquery_closest");
+	var_03 = physics_raycast(param_00,param_01,var_02,[self],0,"physicsquery_closest");
 	if(isdefined(var_03) && var_03.size > 0) {
 		return var_03[0]["position"];
 	}
@@ -2347,14 +2347,14 @@ func_11755(param_00,param_01) {
 }
 
 func_8974(param_00,param_01) {
-	if(!isdefined(param_00) || !scripts\mp\_utility::isreallyalive(param_00) || !isdefined(param_01) || param_00.var_2049) {
+	if(!isdefined(param_00) || !scripts\mp\utility::isreallyalive(param_00) || !isdefined(param_01) || param_00.var_2049) {
 		return;
 	}
 
 	if(param_00.var_204A == 0 && level.gametype != "infect" && isdefined(level.aonrules) && level.aonrules == 1) {
 		param_00.var_204A = 1;
-		param_00 thread scripts\mp\_hud_message::showsplash("specialty_scavenger");
-		param_00 scripts\mp\_utility::giveperk("specialty_scavenger");
+		param_00 thread scripts\mp\hud_message::showsplash("specialty_scavenger");
+		param_00 scripts\mp\utility::giveperk("specialty_scavenger");
 	}
 	else
 	{
@@ -2363,24 +2363,24 @@ func_8974(param_00,param_01) {
 
 	if(param_00.var_204A == 3) {
 		if(isdefined(level.aonrules) && level.aonrules > 2) {
-			param_00 scripts\mp\_utility::giveperk("specialty_scavenger");
+			param_00 scripts\mp\utility::giveperk("specialty_scavenger");
 		}
 
-		param_00 thread scripts\mp\_hud_message::showsplash("specialty_quickdraw");
-		param_00 scripts\mp\_utility::giveperk("specialty_quickdraw");
+		param_00 thread scripts\mp\hud_message::showsplash("specialty_quickdraw");
+		param_00 scripts\mp\utility::giveperk("specialty_quickdraw");
 	}
 
 	if(param_00.var_204A == 5) {
-		param_00 thread scripts\mp\_hud_message::showsplash("specialty_bulletaccuracy");
-		param_00 scripts\mp\_utility::giveperk("specialty_bulletaccuracy");
+		param_00 thread scripts\mp\hud_message::showsplash("specialty_bulletaccuracy");
+		param_00 scripts\mp\utility::giveperk("specialty_bulletaccuracy");
 	}
 
 	if(param_00.var_204A == 7) {
-		param_00 thread scripts\mp\_hud_message::showsplash("specialty_specialist");
-		param_00 scripts\mp\_utility::giveperk("specialty_lightweight");
-		param_00 scripts\mp\_utility::giveperk("specialty_quieter");
-		param_00 scripts\mp\_utility::giveperk("specialty_selectivehearing");
-		param_00 scripts\mp\_utility::giveperk("specialty_gung_ho");
+		param_00 thread scripts\mp\hud_message::showsplash("specialty_specialist");
+		param_00 scripts\mp\utility::giveperk("specialty_lightweight");
+		param_00 scripts\mp\utility::giveperk("specialty_quieter");
+		param_00 scripts\mp\utility::giveperk("specialty_selectivehearing");
+		param_00 scripts\mp\utility::giveperk("specialty_gung_ho");
 		param_00.var_2049 = 1;
 	}
 }
@@ -2394,7 +2394,7 @@ handlejumpsuperonkillpassive(param_00,param_01) {
 		return;
 	}
 
-	param_00 scripts\mp\_supers::stopshellshock(100);
+	param_00 scripts\mp\supers::stopshellshock(100);
 	param_00 checkpassivemessage("passive_jump_super");
 }
 
@@ -2403,7 +2403,7 @@ handlemeleesuperonkillpassive(param_00,param_01,param_02) {
 		return;
 	}
 
-	param_00 scripts\mp\_supers::stopshellshock(500);
+	param_00 scripts\mp\supers::stopshellshock(500);
 	param_00 checkpassivemessage("passive_melee_super");
 }
 
@@ -2413,13 +2413,13 @@ handledoublekillsuperpassive(param_00,param_01) {
 	param_00 endon("unset_passive_double_kill_super");
 	param_00 notify("watchDoubleKillSuperPassive");
 	param_00 endon("watchDoubleKillSuperPassive");
-	if(!scripts\mp\_utility::istrue(param_00.passivedoublekillpending)) {
+	if(!scripts\mp\utility::istrue(param_00.passivedoublekillpending)) {
 		param_00.passivedoublekillpending = 1;
 	}
 	else
 	{
 		param_00.passivedoublekillpending = undefined;
-		param_00 scripts\mp\_supers::stopshellshock(200);
+		param_00 scripts\mp\supers::stopshellshock(200);
 		param_00 checkpassivemessage("passive_double_kill_super");
 		return;
 	}
@@ -2429,7 +2429,7 @@ handledoublekillsuperpassive(param_00,param_01) {
 }
 
 setmodeswitchkillweapon(param_00,param_01) {
-	if(!scripts\mp\_class::weaponhaspassive(param_01,function_02C4(param_01),"passive_mode_switch_score") || scripts\mp\_class::weaponhaspassive(param_01,function_02C4(param_01),"passive_mode_switch_score_epic")) {
+	if(!scripts\mp\class::weaponhaspassive(param_01,getweaponvariantindex(param_01),"passive_mode_switch_score") || scripts\mp\class::weaponhaspassive(param_01,getweaponvariantindex(param_01),"passive_mode_switch_score_epic")) {
 		return;
 	}
 
@@ -2477,8 +2477,8 @@ watchmodeswitchkillweaponsdrop(param_00) {
 		var_04 = [];
 		for(var_05 = 0;var_05 < var_02.size;var_05++) {
 			var_06 = var_02[var_05];
-			var_03[var_05] = scripts\mp\_utility::getweaponrootname(var_06);
-			var_04[var_05] = function_02C4(var_06);
+			var_03[var_05] = scripts\mp\utility::getweaponrootname(var_06);
+			var_04[var_05] = getweaponvariantindex(var_06);
 		}
 
 		var_07 = getarraykeys(var_01.arr);
@@ -2516,12 +2516,12 @@ updatemodeswitchweaponkills(param_00,param_01,param_02) {
 		return;
 	}
 
-	if(scripts\mp\_utility::_meth_8238(param_02) != "primary") {
+	if(scripts\mp\utility::_meth_8238(param_02) != "primary") {
 		return;
 	}
 
-	var_04 = scripts\mp\_utility::getweaponrootname(param_02);
-	var_05 = function_02C4(param_02);
+	var_04 = scripts\mp\utility::getweaponrootname(param_02);
+	var_05 = getweaponvariantindex(param_02);
 	if(!isdefined(var_05)) {
 		return;
 	}
@@ -2534,7 +2534,7 @@ updatemodeswitchweaponkills(param_00,param_01,param_02) {
 
 	var_08 = param_00 _meth_8519(param_02);
 	if(!isdefined(var_07.killinaltmode) || var_07.killinaltmode == var_08) {
-		var_07.var_C234++;
+		var_07.numkills++;
 		if(var_07.numkills >= 2) {
 			var_09 = var_07.numkills - 2;
 			if(scripts\engine\utility::mod(var_09,2) == 0) {
@@ -2545,7 +2545,7 @@ updatemodeswitchweaponkills(param_00,param_01,param_02) {
 	else
 	{
 		var_07.numkills = 1;
-		if(param_00 scripts\mp\_utility::_hasperk("passive_mode_switch_score_epic")) {
+		if(param_00 scripts\mp\utility::_hasperk("passive_mode_switch_score_epic")) {
 			var_0A = "mode_switch_kill_epic";
 		}
 		else
@@ -2553,9 +2553,9 @@ updatemodeswitchweaponkills(param_00,param_01,param_02) {
 			var_0A = "mode_switch_kill";
 		}
 
-		param_00 thread scripts\mp\_rank::scoreeventpopup(var_0A);
-		var_0B = scripts\mp\_rank::getscoreinfovalue(var_0A);
-		param_00 thread scripts\mp\_rank::scorepointspopup(var_0B);
+		param_00 thread scripts\mp\rank::scoreeventpopup(var_0A);
+		var_0B = scripts\mp\rank::getscoreinfovalue(var_0A);
+		param_00 thread scripts\mp\rank::scorepointspopup(var_0B);
 		param_00 scripts\mp\killstreaks\_killstreaks::_meth_83A7(var_0A,var_0B);
 	}
 
@@ -2563,7 +2563,7 @@ updatemodeswitchweaponkills(param_00,param_01,param_02) {
 }
 
 getmodeswitchkillweaponkey(param_00) {
-	return scripts\mp\_utility::getweaponrootname(param_00) + "_" + function_02C4(param_00);
+	return scripts\mp\utility::getweaponrootname(param_00) + "_" + getweaponvariantindex(param_00);
 }
 
 handlemeleeconeexplodeonkillpassive(param_00,param_01,param_02,param_03) {
@@ -2583,27 +2583,27 @@ handlemeleeconeexplodeonkillpassive(param_00,param_01,param_02,param_03) {
 	var_09 = 453;
 	thread meleeconeexplodeworldfx(var_04,var_05,param_00);
 	thread meleeconeexplodeattackerfx(param_00);
-	param_01 thread scripts\mp\_damage::enqueuecorpsetablefunc("passive_melee_cone_expl",::meleeconeexplodevictimcorpsefx);
+	param_01 thread scripts\mp\damage::enqueuecorpsetablefunc("passive_melee_cone_expl",::meleeconeexplodevictimcorpsefx);
 	foreach(var_0B in level.players) {
 		if(var_0B == param_00) {
 			continue;
 		}
 
-		if(!scripts\mp\_utility::isreallyalive(var_0B)) {
+		if(!scripts\mp\utility::isreallyalive(var_0B)) {
 			continue;
 		}
 
-		if(!scripts/mp/equipment/phase_shift::areentitiesinphase(param_00,var_0B)) {
+		if(!scripts\mp\equipment\phase_shift::areentitiesinphase(param_00,var_0B)) {
 			continue;
 		}
 
-		if(level.friendlyfire == 0 && !scripts\mp\_utility::istrue(scripts\mp\_utility::playersareenemies(param_00,var_0B))) {
+		if(level.friendlyfire == 0 && !scripts\mp\utility::istrue(scripts\mp\utility::playersareenemies(param_00,var_0B))) {
 			continue;
 		}
 
-		if(!scripts\mp\_utility::pointvscone(var_0B gettagorigin("tag_eye"),var_08,var_06,var_07,var_09,128,18)) {
-			if(!scripts\mp\_utility::pointvscone(var_0B gettagorigin("tag_origin"),var_08,var_06,var_07,var_09,128,18)) {
-				if(!scripts\mp\_utility::pointvscone(var_0B gettagorigin("j_mainroot"),var_08,var_06,var_07,var_09,128,18)) {
+		if(!scripts\mp\utility::pointvscone(var_0B gettagorigin("tag_eye"),var_08,var_06,var_07,var_09,128,18)) {
+			if(!scripts\mp\utility::pointvscone(var_0B gettagorigin("tag_origin"),var_08,var_06,var_07,var_09,128,18)) {
+				if(!scripts\mp\utility::pointvscone(var_0B gettagorigin("j_mainroot"),var_08,var_06,var_07,var_09,128,18)) {
 					continue;
 				}
 			}
@@ -2617,12 +2617,12 @@ handlemeleeconeexplodeonkillpassive(param_00,param_01,param_02,param_03) {
 		var_0D = 1 - var_0C / 325;
 		var_0E = 80 + var_0D * 60;
 		var_0B dodamage(var_0E,var_04,param_00,param_00,"MOD_EXPLOSIVE",param_02);
-		if(scripts\mp\_utility::isreallyalive(var_0B)) {
+		if(scripts\mp\utility::isreallyalive(var_0B)) {
 			thread meleeconeexplodevictimfx(var_0B);
 			continue;
 		}
 
-		var_0B thread scripts\mp\_damage::enqueuecorpsetablefunc("passive_melee_cone_expl",::meleeconeexplodevictimcorpsefx);
+		var_0B thread scripts\mp\damage::enqueuecorpsetablefunc("passive_melee_cone_expl",::meleeconeexplodevictimcorpsefx);
 	}
 }
 
@@ -2634,7 +2634,7 @@ meleeconeexplodeworldfx(param_00,param_01,param_02) {
 	var_04 setotherent(param_02);
 	var_04 setentityowner(param_02);
 	var_04 setmodel("passive_mp_meleeConeExpl");
-	if(scripts/mp/equipment/phase_shift::isentityphaseshifted(param_02)) {
+	if(scripts\mp\equipment\phase_shift::isentityphaseshifted(param_02)) {
 		var_04 setscriptablepartstate("effects","activePhase");
 	}
 	else
@@ -2675,7 +2675,7 @@ meleeconeexplodevictimcorpsefx(param_00) {
 }
 
 handleleaderkillscorepassive(param_00,param_01,param_02) {
-	if(scripts\mp\_utility::getweaponbasedsmokegrenadecount(param_02) != scripts\mp\_utility::getweaponbasedsmokegrenadecount(param_00 getcurrentprimaryweapon())) {
+	if(scripts\mp\utility::getweaponbasedsmokegrenadecount(param_02) != scripts\mp\utility::getweaponbasedsmokegrenadecount(param_00 getcurrentprimaryweapon())) {
 		return;
 	}
 
@@ -2685,7 +2685,7 @@ handleleaderkillscorepassive(param_00,param_01,param_02) {
 	}
 	else
 	{
-		var_03 = scripts\mp\_utility::getteamarray(scripts\mp\_utility::getotherteam(param_00.team));
+		var_03 = scripts\mp\utility::getteamarray(scripts\mp\utility::getotherteam(param_00.team));
 	}
 
 	var_04 = 1;
@@ -2703,9 +2703,9 @@ handleleaderkillscorepassive(param_00,param_01,param_02) {
 	}
 
 	var_08 = "leader_kill_" + int(min(var_03.size,5));
-	param_00 thread scripts\mp\_rank::scoreeventpopup(var_08);
-	var_09 = scripts\mp\_rank::getscoreinfovalue(var_08);
-	param_00 thread scripts\mp\_rank::scorepointspopup(var_09);
+	param_00 thread scripts\mp\rank::scoreeventpopup(var_08);
+	var_09 = scripts\mp\rank::getscoreinfovalue(var_08);
+	param_00 thread scripts\mp\rank::scorepointspopup(var_09);
 	param_00 scripts\mp\killstreaks\_killstreaks::_meth_83A7(var_08,var_09);
 }
 

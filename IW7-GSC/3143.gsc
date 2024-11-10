@@ -1,14 +1,14 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3143.gsc
-****************************/
+ * Script: 3143.gsc
+************************/
 
 func_351B() {
 	self endon("death");
 	thread func_D310();
 	self notify("begin_rodeo");
-	if(self._blackboard.rodeorequested == "left") {
+	if(self.var_1198.rodeorequested == "left") {
 		var_00 = "right";
 	}
 	else
@@ -63,7 +63,7 @@ func_351B() {
 	self.var_D461 = level.player _meth_8525();
 	level.player getrankinfoxpamt();
 	self setcandamage(0);
-	self._blackboard.var_E5FD = 1;
+	self.var_1198.var_E5FD = 1;
 	lib_0C08::func_351D(var_00,0);
 	func_361A(var_00);
 	var_06 = "rodeo_left";
@@ -131,7 +131,7 @@ func_351B() {
 	}
 
 	thread func_E245();
-	self._blackboard.var_E5FD = 0;
+	self.var_1198.var_E5FD = 0;
 	self.var_7212 = gettime() + 10000;
 	lib_0C08::func_351D(var_00,1);
 	level.player.inrodeo = undefined;
@@ -140,9 +140,9 @@ func_351B() {
 
 func_E245() {
 	self endon("death");
-	self._blackboard.var_E5F9 = 1;
+	self.var_1198.var_E5F9 = 1;
 	wait(0.75);
-	self._blackboard.var_E5F9 = undefined;
+	self.var_1198.var_E5F9 = undefined;
 }
 
 func_361A(param_00) {
@@ -271,7 +271,7 @@ func_35F2(param_00) {
 	wait(0.4);
 	self setscriptablepartstate("head","rodeofinal");
 	thread scripts\sp\_utility::play_sound_on_tag("c12_rodeo_head_explo","j_neck");
-	scripts/asm/asm_bb::bb_setselfdestruct(1);
+	scripts\asm\asm_bb::bb_setselfdestruct(1);
 	level.player viewkick(40,self gettagorigin("j_neck"),0);
 	earthquake(0.4,0.5,self gettagorigin("j_neck"),256);
 	param_00 stoprumble("steady_rumble");

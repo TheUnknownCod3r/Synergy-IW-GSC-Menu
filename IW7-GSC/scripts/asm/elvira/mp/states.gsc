@@ -1,8 +1,8 @@
-/****************************************************
+/********************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\asm\elvira\mp\states.gsc
-****************************************************/
+ * Script: scripts\asm\elvira\mp\states.gsc
+********************************************/
 
 func_2371() {
 	if(scripts\asm\asm::func_232E("elvira")) {

@@ -1,11 +1,11 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2677.gsc
+ * Script: 2677.gsc
 ***************************************/
 
 init() {
-  level._effect["revocator_idle"] = loadfx("vfx/iw7/core/zombie/vfx_zmb_revocator_idle.vfx");
-  level._effect["revocator_activate"] = loadfx("vfx/iw7/_requests/coop/vfx_revocator_use.vfx");
+  level._effect["revocator_idle"] = loadfx("vfx\iw7\core\zombie\vfx_zmb_revocator_idle.vfx");
+  level._effect["revocator_activate"] = loadfx("vfx\iw7\_requests\coop\vfx_revocator_use.vfx");
   var_00 = spawnstruct();
   var_0.timeout = 30.0;
   var_0.modelbase = "revocator";
@@ -28,8 +28,8 @@ give_crafted_revocator(var_00, var_01) {
   var_01 thread watch_dpad();
   var_01 notify("new_power", "crafted_revocator");
   var_01 setclientomnvar("zom_crafted_weapon", 6);
-  var_01 thread scripts/cp/utility::usegrenadegesture(var_01, "iw7_pickup_zm");
-  scripts/cp/utility::set_crafted_inventory_item("crafted_revocator", ::give_crafted_revocator, var_01);
+  var_01 thread scripts\cp\utility::usegrenadegesture(var_01, "iw7_pickup_zm");
+  scripts\cp\utility::set_crafted_inventory_item("crafted_revocator", ::give_crafted_revocator, var_01);
 }
 
 watch_dpad() {
@@ -51,7 +51,7 @@ watch_dpad() {
   if (isdefined(self.allow_carry) && self.allow_carry == 0)
   continue;
 
-  if (scripts/cp/utility::is_valid_player())
+  if (scripts\cp\utility::is_valid_player())
   break;
   }
 
@@ -60,7 +60,7 @@ watch_dpad() {
 
 _meth_8329(var_00, var_01, var_02) {
   self endon("disconnect");
-  scripts/cp/utility::clearlowermessage("msg_power_hint");
+  scripts\cp\utility::clearlowermessage("msg_power_hint");
   var_03 = func_4A08(self, var_02);
   self.itemtype = var_3.name;
   removeperks();
@@ -115,7 +115,7 @@ func_F687(var_00, var_01, var_02) {
   if (var_03 != "force_cancel_placement")
   thread watch_dpad();
   else if (var_01)
-  scripts/cp/utility::remove_crafted_item_from_inventory(self);
+  scripts\cp\utility::remove_crafted_item_from_inventory(self);
 
   return 0;
   }
@@ -124,7 +124,7 @@ func_F687(var_00, var_01, var_02) {
   continue;
 
   if (var_01)
-  scripts/cp/utility::remove_crafted_item_from_inventory(self);
+  scripts\cp\utility::remove_crafted_item_from_inventory(self);
 
   var_00 func_E4B9(var_02, self);
   scripts\engine\utility::allow_weapon(1);
@@ -133,15 +133,15 @@ func_F687(var_00, var_01, var_02) {
 }
 
 removeperks() {
-  if (scripts/cp/utility::_hasperk("specialty_explosivebullets")) {
+  if (scripts\cp\utility::_hasperk("specialty_explosivebullets")) {
   self.restoreperk = "specialty_explosivebullets";
-  scripts/cp/utility::_unsetperk("specialty_explosivebullets");
+  scripts\cp\utility::_unsetperk("specialty_explosivebullets");
   }
 }
 
 restoreperks() {
   if (isdefined(self.restoreperk)) {
-  scripts/cp/utility::giveperk(self.restoreperk);
+  scripts\cp\utility::giveperk(self.restoreperk);
   self.restoreperk = undefined;
   }
 }
@@ -196,7 +196,7 @@ func_E4B1(var_00) {
   if (isdefined(self.zap_model))
   self.zap_model delete();
 
-  scripts/cp/utility::removefromtraplist();
+  scripts\cp\utility::removefromtraplist();
 
   if (isdefined(self))
   self delete();
@@ -237,10 +237,10 @@ func_E4B7(var_00, var_01) {
   self setcandamage(0);
   self.carriedby = var_00;
   var_0.iscarrying = 1;
-  var_00 thread scripts/cp/utility::update_trap_placement_internal(self, self.carriedrevocator, level.func_47B1["crafted_revocator"]);
-  thread scripts/cp/utility::item_oncarrierdeath(var_00);
-  thread scripts/cp/utility::item_oncarrierdisconnect(var_00);
-  thread scripts/cp/utility::item_ongameended(var_00);
+  var_00 thread scripts\cp\utility::update_trap_placement_internal(self, self.carriedrevocator, level.func_47B1["crafted_revocator"]);
+  thread scripts\cp\utility::item_oncarrierdeath(var_00);
+  thread scripts\cp\utility::item_oncarrierdisconnect(var_00);
+  thread scripts\cp\utility::item_ongameended(var_00);
   func_E4B8();
   self notify("carried");
 }
@@ -254,11 +254,11 @@ func_E4B5(var_00) {
   self setusefov(120);
   self setuserange(96);
   thread func_E4B1(self.owner);
-  thread scripts/cp/utility::item_handleownerdisconnect("elecrevocator_handleOwner");
-  thread scripts/cp/utility::item_timeout(var_00, level.func_47B1["crafted_revocator"].timeout);
+  thread scripts\cp\utility::item_handleownerdisconnect("elecrevocator_handleOwner");
+  thread scripts\cp\utility::item_timeout(var_00, level.func_47B1["crafted_revocator"].timeout);
   thread func_E4B2();
   thread func_E4BA();
-  scripts/cp/utility::addtotraplist();
+  scripts\cp\utility::addtotraplist();
   wait 1;
   self setscriptablepartstate("base", "idle");
 }
@@ -270,7 +270,7 @@ func_E4B2() {
   for (;;) {
   self waittill("trigger", var_00);
 
-  if (!var_00 scripts/cp/utility::is_valid_player())
+  if (!var_00 scripts\cp\utility::is_valid_player())
   continue;
 
   if (scripts\engine\utility::is_true(var_0.iscarrying))
@@ -282,14 +282,14 @@ func_E4B2() {
   if (isdefined(self.charge_fx))
   self.charge_fx delete();
 
-  scripts/cp/utility::removefromtraplist();
+  scripts\cp\utility::removefromtraplist();
   self delete();
   }
 }
 
 func_E4B8() {
   self makeunusable();
-  scripts/cp/utility::removefromtraplist();
+  scripts\cp\utility::removefromtraplist();
 }
 
 func_E4BA() {
@@ -298,7 +298,7 @@ func_E4BA() {
   var_01 = 1600;
 
   while (self.func_130D2 > 0) {
-  var_02 = scripts/cp/cp_agent_utils::getaliveagents();
+  var_02 = scripts\cp\cp_agent_utils::getaliveagents();
   var_02 = scripts\engine\utility::get_array_of_closest(self.origin, var_02);
 
   foreach (var_04 in var_02) {
@@ -354,7 +354,7 @@ turn_zombie(var_00) {
   var_1.scripted_mode = 0;
   }
 
-  var_1.melee_damage_amt = int(scripts/cp/zombies/zombies_spawning::calculatezombiehealth("generic_zombie") * 0.5);
+  var_1.melee_damage_amt = int(scripts\cp\zombies\zombies_spawning::calculatezombiehealth("generic_zombie") * 0.5);
   level.spawned_enemies = scripts\engine\utility::array_remove(level.spawned_enemies, var_01);
   level.current_enemy_deaths++;
   level.current_num_spawned_enemies--;
@@ -364,7 +364,7 @@ turn_zombie(var_00) {
   var_01 thread remove_zombie_from_turned_list_on_death();
 
   if (isdefined(var_00))
-  var_00 scripts/cp/cp_merits::processmerit("mt_turned_zombies");
+  var_00 scripts\cp\cp_merits::processmerit("mt_turned_zombies");
 
   func_B2EB(var_01);
 }
@@ -396,5 +396,5 @@ kill_turned_zombie_after_time(var_00) {
 remove_zombie_from_turned_list_on_death() {
   self waittill("death");
   level.turned_zombies = scripts\engine\utility::array_remove(level.turned_zombies, self);
-  scripts/cp/zombies/zombies_spawning::decrease_reserved_spawn_slots(1);
+  scripts\cp\zombies\zombies_spawning::decrease_reserved_spawn_slots(1);
 }

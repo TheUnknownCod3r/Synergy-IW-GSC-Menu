@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2830.gsc
+ * Script: 2830.gsc
 ***************************************/
 
 main() {
@@ -30,7 +30,7 @@ func_3D54() {
   for (;;) {
   if (getdvarint("scr_savetest") > 0) {
   setdvar("scr_savetest", "0");
-  scripts/sp/utility::func_2669("cheat_save");
+  scripts\sp\utility::func_2669("cheat_save");
   wait 1;
   }
 
@@ -57,13 +57,13 @@ func_2A6D() {
 }
 
 immediatelevelstartsave() {
-  var_00 = scripts/sp/utility::func_7F6E(level.script);
+  var_00 = scripts\sp\utility::func_7F6E(level.script);
 
   if (!isdefined(var_00))
   var_00 = 0;
 
   var_00 = var_00 * 0.05;
-  var_01 = scripts/sp/utility::func_7E2C(level.script);
+  var_01 = scripts\sp\utility::func_7E2C(level.script);
 
   if (!isdefined(var_01))
   var_01 = 0;
@@ -137,12 +137,12 @@ func_2A6E() {
 
 func_12726(var_00) {
   var_00 waittill("trigger");
-  scripts/sp/utility::func_2677();
+  scripts\sp\utility::func_2677();
 }
 
 func_12727(var_00) {
   var_00 waittill("trigger");
-  scripts/sp/utility::func_2679();
+  scripts\sp\utility::func_2679();
 }
 
 func_12724(var_00) {
@@ -169,7 +169,7 @@ func_268E(var_00) {
 }
 
 func_268B(var_00) {
-  if (scripts/sp/starts::func_9C4B())
+  if (scripts\sp\starts::func_9C4B())
   return;
 
   wait 1;
@@ -186,7 +186,7 @@ func_268B(var_00) {
   return;
   }
 
-  scripts/sp/utility::func_2669(var_01);
+  scripts\sp\utility::func_2669(var_01);
 }
 
 func_268D(var_00, var_01, var_02) {}
@@ -278,7 +278,7 @@ func_1190(var_00, var_01) {
 
 func_2671(var_00) {
   var_00 waittill("trigger");
-  scripts/sp/utility::func_266F();
+  scripts\sp\utility::func_266F();
 }
 
 func_12878(var_00) {
@@ -348,7 +348,7 @@ func_12891(var_00, var_01, var_02, var_03, var_04, var_05) {
 
   var_10++;
 
-  if (scripts/sp/utility::func_93A6()) {
+  if (scripts\sp\utility::func_93A6()) {
   if (var_10 == 3)
   break;
 
@@ -520,7 +520,7 @@ func_268C(var_00, var_01) {
   if (isdefined(self.func_FC69) && self.func_FC69)
   return 0;
 
-  if (!self getteamflagcount() && !scripts\engine\utility::player_is_in_jackal() && !scripts/sp/utility::func_93AC() && !self isonground()) {
+  if (!self getteamflagcount() && !scripts\engine\utility::player_is_in_jackal() && !scripts\sp\utility::func_93AC() && !self isonground()) {
   if (bullettracepassed(level.player.origin + (0, 0, 5), level.player.origin + (0, 0, -200), 0, self))
   return 0;
   }
@@ -567,7 +567,7 @@ func_2688(var_00) {
   if (var_01 < 0.5)
   return 0;
 
-  if (scripts/sp/utility::func_65DB("player_has_red_flashing_overlay"))
+  if (scripts\sp\utility::func_65DB("player_has_red_flashing_overlay"))
   return 0;
 
   return 1;
@@ -577,7 +577,7 @@ func_2689(var_00) {
   if (isdefined(self.func_5F6F))
   return 0;
 
-  var_01 = scripts/sp/utility::func_7B9D();
+  var_01 = scripts\sp\utility::func_7B9D();
 
   if (var_01 < 0.5)
   return 0;
@@ -585,7 +585,7 @@ func_2689(var_00) {
   if (isdefined(self.func_93D2) && self.func_93D2.size > 0)
   return 0;
 
-  if (scripts/sp/utility::func_A1A8("enemy_lockon"))
+  if (scripts\sp\utility::func_A1A8("enemy_lockon"))
   return 0;
 
   if (func_268A())
@@ -656,7 +656,7 @@ func_268F(var_00, var_01) {
   return 0;
   }
 
-  if (scripts/sp/utility::func_D121())
+  if (scripts\sp\utility::func_D121())
   return 0;
 
   if (isdefined(level.func_CAF7)) {
@@ -720,7 +720,7 @@ func_2674(var_00) {
 }
 
 specialistsavecheck() {
-  if (!scripts/sp/utility::func_93A6())
+  if (!scripts\sp\utility::func_93A6())
   return 1;
 
   if (specialistinjackal())
@@ -739,7 +739,7 @@ specialistsavecheck() {
 }
 
 specialistinjackal() {
-  if (scripts/sp/specialist_MAYBE::func_2C97())
+  if (scripts\sp\specialist_MAYBE::func_2C97())
   return 1;
 
   if (scripts\engine\utility::player_is_in_jackal())

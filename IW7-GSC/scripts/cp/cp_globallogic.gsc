@@ -1,8 +1,8 @@
-/*************************************************
+/*****************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\cp_globallogic.gsc
-*************************************************/
+ * Script: scripts\cp\cp_globallogic.gsc
+*****************************************/
 
 init() {
 	scripts\engine\utility::struct_class_init();
@@ -23,7 +23,7 @@ init() {
 	func_9817();
 	func_988B();
 	scripts\common\fx::initfx();
-	scripts\mp\_callbacksetup::setupdamageflags();
+	scripts\mp\callbacksetup::setupdamageflags();
 	scripts\cp\cp_movers::init();
 	scripts\cp\cp_fx::main();
 	scripts\cp\cp_merits::buildmeritinfo();
@@ -114,7 +114,7 @@ setupcallbacks() {
 }
 
 func_AE18() {
-	level._effect["slide_dust"] = loadfx("vfx/core/screen/vfx_scrnfx_tocam_slidedust_m");
+	level._effect["slide_dust"] = loadfx("vfx\core\screen\vfx_scrnfx_tocam_slidedust_m");
 }
 
 func_5044(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08,param_09,param_0A,param_0B) {}
@@ -227,8 +227,8 @@ func_4631() {
 	[[level.onprecachegametype]]();
 	func_E256();
 	func_E255();
-	scripts/cp/perks/perkmachines::func_98B1();
-	scripts/cp/perks/prestige::initprestige();
+	scripts\cp\perks\perkmachines::func_98B1();
+	scripts\cp\perks\prestige::initprestige();
 	scripts\cp\cp_weaponrank::init();
 	scripts\cp\cp_relics::init();
 	thread scripts\cp\powers\coop_powers::init();
@@ -338,8 +338,8 @@ func_5043() {
 	setupsavedactionslots();
 	func_98B9();
 	func_988E();
-	scripts/cp/perks/prestige::initplayerprestige();
-	scripts/cp/perks/perk_utility::func_95C1();
+	scripts\cp\perks\prestige::initplayerprestige();
+	scripts\cp\perks\perk_utility::func_95C1();
 	self.no_team_outlines = 0;
 	self.no_outline = 0;
 	if(scripts\cp\utility::coop_mode_has("outline")) {

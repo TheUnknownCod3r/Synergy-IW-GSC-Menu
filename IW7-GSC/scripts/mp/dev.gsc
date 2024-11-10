@@ -1,8 +1,8 @@
-/**************************************
+/******************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\dev.gsc
-**************************************/
+ * Script: scripts\mp\dev.gsc
+******************************/
 
 init() {}
 
@@ -212,7 +212,7 @@ devprintweaponlist(param_00,param_01,param_02) {
 		foreach(var_04 in param_00) {
 			var_05 = self getweaponammoclip(var_04);
 			var_06 = self getweaponammostock(var_04);
-			var_07 = "  " + var_04 + " " + var_05 + "/" + var_06;
+			var_07 = "  " + var_04 + " " + var_05 + "\" + var_06;
 			if(param_02) {
 				iprintlnbold(var_07);
 			}

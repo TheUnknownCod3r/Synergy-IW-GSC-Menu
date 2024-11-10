@@ -1,8 +1,8 @@
-/****************************************************************
+/********************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave.gsc
-****************************************************************/
+ * Script: scripts\cp\maps\cp_zmb\cp_zmb_ghost_wave.gsc
+********************************************************/
 
 init() {
 	init_ghost_related_vfx();
@@ -13,7 +13,7 @@ init() {
 	init_available_formations();
 	init_formation_movements();
 	init_moving_target_waves();
-	scripts/mp/agents/zombie_ghost/zombie_ghost_agent::registerscriptedagent();
+	scripts\mp\agents\zombie_ghost\zombie_ghost_agent::registerscriptedagent();
 }
 
 init_available_formations() {
@@ -100,8 +100,8 @@ entangler_hit_monitor(param_00) {
 				var_01 = var_01 + 0.2;
 				var_03 = min(var_01 / get_entangler_track_time(),1);
 				record_entangler_progress_percent(param_00,var_03);
-				if(var_03 == 1 && isalive(param_00.current_entangler_target) && !scripts/aitypes/zombie_ghost/behaviors::isentangled(param_00.current_entangler_target) && !isdefined(param_00.ghost_in_entanglement)) {
-					param_00.current_entangler_target scripts/aitypes/zombie_ghost/behaviors::entangleghost(param_00.current_entangler_target,param_00);
+				if(var_03 == 1 && isalive(param_00.current_entangler_target) && !scripts\aitypes\zombie_ghost\behaviors::isentangled(param_00.current_entangler_target) && !isdefined(param_00.ghost_in_entanglement)) {
+					param_00.current_entangler_target scripts\aitypes\zombie_ghost\behaviors::entangleghost(param_00.current_entangler_target,param_00);
 				}
 
 				continue;
@@ -169,7 +169,7 @@ use_scu(param_00) {
 	param_00 thread scu_vfx_manager(param_00,var_01);
 	for(;;) {
 		scripts\engine\utility::waitframe();
-		if(isdefined(var_01.current_entangler_target) && scripts/aitypes/zombie_ghost/behaviors::isentangled(var_01.current_entangler_target)) {
+		if(isdefined(var_01.current_entangler_target) && scripts\aitypes\zombie_ghost\behaviors::isentangled(var_01.current_entangler_target)) {
 			var_03 = var_01.current_entangler_target;
 			if(ghost_can_be_contained(var_03,param_00)) {
 				level thread ghost_trail_to_scu(var_03.origin + (0,0,40),var_01.deployed_scu.origin,var_01);
@@ -231,12 +231,12 @@ ghost_can_be_contained(param_00,param_01) {
 }
 
 init_ghost_related_vfx() {
-	level._effect["zombie_ghost_trail"] = loadfx("vfx/iw7/_requests/coop/zmb_ghost_soultrail");
-	level._effect["zombie_ghost_scu"] = loadfx("vfx/iw7/_requests/coop/vfx_ghost_scu");
-	level._effect["moving_target_explode"] = loadfx("vfx/iw7/core/zombie/powerups/vfx_zom_powerup_pickup.vfx");
-	level._effect["moving_target_portal"] = loadfx("vfx/iw7/core/zombie/vfx_zmb_ghost_portal_green.vfx");
-	level._effect["GnS_activation"] = loadfx("vfx/iw7/core/zombie/vfx_zmb_GnS_game_elec_bolts.vfx");
-	level._effect["skull_discovered"] = loadfx("vfx/iw7/core/zombie/vfx_zmb_ghost_exp.vfx");
+	level._effect["zombie_ghost_trail"] = loadfx("vfx\iw7\_requests\coop\zmb_ghost_soultrail");
+	level._effect["zombie_ghost_scu"] = loadfx("vfx\iw7\_requests\coop\vfx_ghost_scu");
+	level._effect["moving_target_explode"] = loadfx("vfx\iw7\core\zombie\powerups\vfx_zom_powerup_pickup.vfx");
+	level._effect["moving_target_portal"] = loadfx("vfx\iw7\core\zombie\vfx_zmb_ghost_portal_green.vfx");
+	level._effect["GnS_activation"] = loadfx("vfx\iw7\core\zombie\vfx_zmb_GnS_game_elec_bolts.vfx");
+	level._effect["skull_discovered"] = loadfx("vfx\iw7\core\zombie\vfx_zmb_ghost_exp.vfx");
 }
 
 init_ghost_spawn_loc() {
@@ -291,7 +291,7 @@ can_be_attacked_by_ghost(param_00) {
 		return 0;
 	}
 
-	if(scripts/mp/agents/zombie/zombie_util::isplayerteleporting(param_00)) {
+	if(scripts\mp\agents\zombie\zombie_util::isplayerteleporting(param_00)) {
 		return 0;
 	}
 
@@ -324,11 +324,11 @@ can_attack() {
 	}
 
 	var_00 = self;
-	if(scripts/aitypes/zombie_ghost/behaviors::isentangled(var_00)) {
+	if(scripts\aitypes\zombie_ghost\behaviors::isentangled(var_00)) {
 		return 0;
 	}
 
-	if(var_00 scripts/aitypes/zombie_ghost/behaviors::getghostnavmode() == "attack") {
+	if(var_00 scripts\aitypes\zombie_ghost\behaviors::getghostnavmode() == "attack") {
 		return 0;
 	}
 
@@ -370,12 +370,12 @@ time_since_last_attack(param_00) {
 attack(param_00) {
 	var_01 = self;
 	set_ghost_attack_records(var_01,param_00);
-	var_01 thread scripts/aitypes/zombie_ghost/behaviors::ghostattack(param_00);
+	var_01 thread scripts\aitypes\zombie_ghost\behaviors::ghostattack(param_00);
 }
 
 set_ghost_attack_records(param_00,param_01) {
 	var_02 = gettime();
-	param_01.var_C1F5++;
+	param_01.num_of_ghosts_attacking_me++;
 	param_01.last_ghost_attack_time = var_02;
 	param_00.last_attack_time = var_02;
 }
@@ -403,7 +403,7 @@ start_ghost_wave() {
 
 	level.gns_active = 1;
 	scripts\cp\zombies\zombie_analytics::log_activate_enter_ghostskulls_game(level.wave_num);
-	scripts/cp/zombies/coop_wall_buys::set_weapon_purchase_disabled(1);
+	scripts\cp\zombies\coop_wall_buys::set_weapon_purchase_disabled(1);
 	disable_pistol_during_laststand();
 	start_death_trigger_monitor();
 	play_start_ghost_vo_to_players();
@@ -505,7 +505,7 @@ ghost_death_trigger_monitor(param_00) {
 }
 
 end_ghost_wave() {
-	scripts/cp/zombies/coop_wall_buys::set_weapon_purchase_disabled(0);
+	scripts\cp\zombies\coop_wall_buys::set_weapon_purchase_disabled(0);
 	enable_pistol_during_laststand();
 	stop_moving_targets_sequence();
 	stop_ghosts_attack_logic();
@@ -593,7 +593,7 @@ moving_targets_sequence() {
 	for(var_00 = 1;var_00 <= level.gns_num_of_wave;var_00++) {
 		var_01 = scripts\engine\utility::getstructarray("ghost_formation_" + get_formationfunc_for_wave(var_00),"targetname");
 		if(var_01.size > 0) {
-			level.var_8287++;
+			level.ghostskulls_total_waves++;
 			run_moving_target_wave(var_00,var_01);
 			if(isdefined(level.complete_one_gns_wave_func)) {
 				level thread [[level.complete_one_gns_wave_func]]();
@@ -1030,7 +1030,7 @@ store_and_take_perks(param_00) {
 	foreach(var_03, var_02 in param_00.zombies_perks) {
 		if(scripts\engine\utility::istrue(param_00.zombies_perks[var_03]) && should_be_removed_for_gns(var_03)) {
 			param_00.pre_ghost_perks = scripts\engine\utility::array_add(param_00.pre_ghost_perks,var_03);
-			param_00 scripts/cp/zombies/zombies_perk_machines::take_zombies_perk(var_03);
+			param_00 scripts\cp\zombies\zombies_perk_machines::take_zombies_perk(var_03);
 			gns_take_perks_handler(param_00,var_03);
 		}
 	}
@@ -1039,7 +1039,7 @@ store_and_take_perks(param_00) {
 gns_take_perks_handler(param_00,param_01) {
 	switch(param_01) {
 		case "perk_machine_revive":
-			param_00.var_F1E7--;
+			param_00.self_revives_purchased--;
 			break;
 
 		default:
@@ -1059,7 +1059,7 @@ should_be_removed_for_gns(param_00) {
 
 restore_all_previous_perks(param_00) {
 	foreach(var_02 in param_00.pre_ghost_perks) {
-		param_00 scripts/cp/zombies/zombies_perk_machines::give_zombies_perk(var_02,0);
+		param_00 scripts\cp\zombies\zombies_perk_machines::give_zombies_perk(var_02,0);
 	}
 }
 
@@ -1185,7 +1185,7 @@ fly_back_into_portal(param_00) {
 	var_01 = scripts\engine\utility::getstruct("ghost_wave_start_pos","targetname");
 	param_00 moveto(var_01.origin,6);
 	param_00 waittill("movedone");
-	level.var_C1F0++;
+	level.num_moving_target_escaped++;
 	display_target_escaped_message();
 	determine_game_fail();
 	remove_undefined_from_moving_target_array(param_00);
@@ -1609,7 +1609,7 @@ earn_all_perks(param_00) {
 		}
 
 		wait(0.5);
-		param_00 scripts/cp/zombies/zombies_perk_machines::give_zombies_perk(var_03,0);
+		param_00 scripts\cp\zombies\zombies_perk_machines::give_zombies_perk(var_03,0);
 	}
 }
 

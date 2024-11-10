@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3885.gsc
-****************************/
+ * Script: 3885.gsc
+************************/
 
 func_1355D() {
 	precachemodel("vr_unfold_left_rig");
@@ -175,14 +175,14 @@ func_9AD6() {
 
 func_E539(param_00) {
 	level endon("reset_vr");
-	thread scripts/sp/anim::func_1EC3(self,"vr_intro_part1");
+	thread scripts\sp\anim::func_1EC3(self,"vr_intro_part1");
 	func_E53E("passive",1,undefined,1);
 	foreach(var_02 in self.var_466A) {
 		var_02 show();
 	}
 
 	wait(0.5);
-	thread scripts/sp/anim::func_1F35(self,"vr_intro_part1");
+	thread scripts\sp\anim::func_1F35(self,"vr_intro_part1");
 	level waittill("vr_ring" + self.var_EDD5 + "_intro_show_geo");
 	foreach(var_05 in self.segments) {
 		if(isdefined(var_05.var_6E86)) {
@@ -483,7 +483,7 @@ func_12B95(param_00,param_01,param_02,param_03,param_04) {
 	var_09.var_CBFA linkto(var_07,"tag_corner_bottom",(0,0,0),(0,0,0));
 	func_E53E("active");
 	scripts\sp\_utility::func_65E1("ring_unfolding");
-	var_07 scripts/sp/anim::func_1F35(var_07,"vr_unfold");
+	var_07 scripts\sp\anim::func_1F35(var_07,"vr_unfold");
 	func_E53E("passive");
 	if(isdefined(var_09.var_1078F)) {
 		var_09.var_1078F.var_A534 = param_00;
@@ -823,7 +823,7 @@ func_A646() {
 	}
 
 	scripts\sp\_utility::func_65E1("killcounter_animating");
-	scripts/sp/anim::func_1F35(self,"update");
+	scripts\sp\anim::func_1F35(self,"update");
 	scripts\sp\_utility::func_65DD("killcounter_animating");
 }
 
@@ -919,8 +919,8 @@ func_F60F() {
 	var_00 = level.player _meth_84C6("selectedLoadout");
 	var_01 = level.player _meth_84C6("loadouts",var_00,"weaponSetups",0,"weapon");
 	var_02 = level.player _meth_84C6("loadouts",var_00,"weaponSetups",1,"weapon");
-	var_03 = scripts/sp/loadout::func_31CE(0,var_00);
-	var_04 = scripts/sp/loadout::func_31CE(1,var_00);
+	var_03 = scripts\sp\loadout::func_31CE(0,var_00);
+	var_04 = scripts\sp\loadout::func_31CE(1,var_00);
 	if(isdefined(var_03) || isdefined(var_04)) {
 		level.var_13563.var_46C6 = func_78E8(var_03);
 		level.var_13563.var_46C7 = func_78E8(var_04);

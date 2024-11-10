@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3399.gsc
-****************************/
+ * Script: 3399.gsc
+************************/
 
 init_ark_quest() {
 	level.ark_quest_pieces = [];
@@ -281,7 +281,7 @@ add_white_ark_to_weapon(param_00,param_01) {
 	param_01.has_white_ark = 1;
 	scripts\cp\zombies\zombie_analytics::log_pink_ark_obtained(level.wave_num);
 	level thread play_exquisite_essence_vo(param_01);
-	param_01 scripts/cp/zombies/achievement::update_achievement("BATTERIES_NOT_INCLUDED",1);
+	param_01 scripts\cp\zombies\achievement::update_achievement("BATTERIES_NOT_INCLUDED",1);
 	param_01 thread watchforplayerdeath(param_01);
 	param_01 thread watchforattachmentremoved(param_01);
 }

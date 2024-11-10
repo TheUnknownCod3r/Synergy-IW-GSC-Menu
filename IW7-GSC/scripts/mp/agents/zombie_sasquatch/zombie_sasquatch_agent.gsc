@@ -1,15 +1,15 @@
-/*********************************************************************************
+/*************************************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\agents\zombie_sasquatch\zombie_sasquatch_agent.gsc
-*********************************************************************************/
+ * Script: scripts\mp\agents\zombie_sasquatch\zombie_sasquatch_agent.gsc
+*************************************************************************/
 
 zombiesasquatchagentinit() {
 	registerscriptedagent();
 }
 
 registerscriptedagent() {
-	scripts/aitypes/bt_util::init();
+	scripts\aitypes\bt_util::init();
 	behaviortree\zombie_sasquatch::func_DEE8();
 	scripts\asm\zombie_sasquatch\mp\states::func_2371();
 	thread func_FAB0();
@@ -35,7 +35,7 @@ func_FAB0() {
 }
 
 func_AE11() {
-	level._effect["sasquatch_rock_hit"] = loadfx("vfx/iw7/levels/cp_rave/sasquatch/vfx_rave_sas_projectile_impact.vfx");
+	level._effect["sasquatch_rock_hit"] = loadfx("vfx\iw7\levels\cp_rave\sasquatch\vfx_rave_sas_projectile_impact.vfx");
 }
 
 setupagent() {
@@ -129,8 +129,8 @@ func_899C() {
 	var_00 = self.var_164D[self.asmname];
 	var_01 = var_00.var_4BC0;
 	var_02 = level.asm[self.asmname].states[var_01];
-	scripts/asm/asm::func_2388(self.asmname,var_01,var_02,var_02.var_116FB);
-	scripts/asm/asm::func_238A(self.asmname,"idle",0.2,undefined,undefined,undefined);
+	scripts\asm\asm::func_2388(self.asmname,var_01,var_02,var_02.var_116FB);
+	scripts\asm\asm::func_238A(self.asmname,"idle",0.2,undefined,undefined,undefined);
 }
 
 onsasquatchkilled(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08) {

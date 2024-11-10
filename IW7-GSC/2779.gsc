@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2779.gsc
+ * Script: 2779.gsc
 ***************************************/
 
 init() {
@@ -55,7 +55,7 @@ initbufferedstats() {
 }
 
 initbestscorestatstable() {
-  var_00 = "mp/bestscorestatsTable.csv";
+  var_00 = "mp\bestscorestatsTable.csv";
   self.bestscorestats = [];
   self.bufferedbestscorestats = [];
   var_01 = 0;

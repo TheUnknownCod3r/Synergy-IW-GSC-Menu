@@ -1,15 +1,15 @@
-/*************************************************************************
+/*****************************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\agents\superslasher\superslasher_agent.gsc
-*************************************************************************/
+ * Script: scripts\mp\agents\superslasher\superslasher_agent.gsc
+*****************************************************************/
 
 superslasheragentinit() {
 	registerscriptedagent();
 }
 
 registerscriptedagent() {
-	scripts/aitypes/bt_util::init();
+	scripts\aitypes\bt_util::init();
 	behaviortree\superslasher::func_DEE8();
 	scripts\asm\superslasher\mp\states::func_2371();
 	thread func_FAB0();
@@ -28,12 +28,12 @@ loadsuperslasherscriptmodelanim() {
 }
 
 loadsuperslashervfx() {
-	level._effect["super_slasher_death_base"] = loadfx("vfx/iw7/levels/cp_rave/superslasher/vfx_ss_death_base_start.vfx");
-	level._effect["super_slasher_death_hand"] = loadfx("vfx/iw7/levels/cp_rave/superslasher/vfx_ss_death_hands_glow.vfx");
-	level._effect["super_slasher_death_limb"] = loadfx("vfx/iw7/levels/cp_rave/superslasher/vfx_ss_death_limbs_glow.vfx");
-	level._effect["super_slasher_shield_hit"] = loadfx("vfx/iw7/levels/cp_rave/superslasher/vfx_ss_shield_hit.vfx");
-	level._effect["super_slasher_saw_shark_hit"] = loadfx("vfx/iw7/levels/cp_rave/superslasher/vfx_rave_superslasher_stomp_attack.vfx");
-	level._effect["super_slasher_saw_shark_spark"] = loadfx("vfx/iw7/levels/cp_rave/superslasher/vfx_rave_superslasher_saw_spark.vfx");
+	level._effect["super_slasher_death_base"] = loadfx("vfx\iw7\levels\cp_rave\superslasher\vfx_ss_death_base_start.vfx");
+	level._effect["super_slasher_death_hand"] = loadfx("vfx\iw7\levels\cp_rave\superslasher\vfx_ss_death_hands_glow.vfx");
+	level._effect["super_slasher_death_limb"] = loadfx("vfx\iw7\levels\cp_rave\superslasher\vfx_ss_death_limbs_glow.vfx");
+	level._effect["super_slasher_shield_hit"] = loadfx("vfx\iw7\levels\cp_rave\superslasher\vfx_ss_shield_hit.vfx");
+	level._effect["super_slasher_saw_shark_hit"] = loadfx("vfx\iw7\levels\cp_rave\superslasher\vfx_rave_superslasher_stomp_attack.vfx");
+	level._effect["super_slasher_saw_shark_spark"] = loadfx("vfx\iw7\levels\cp_rave\superslasher\vfx_rave_superslasher_saw_spark.vfx");
 }
 
 func_FAB0() {
@@ -138,7 +138,7 @@ func_FACE(param_00) {
 func_899C() {
 	self endon("death");
 	level waittill("game_ended");
-	self._blackboard.bgameended = 1;
+	self.var_1198.bgameended = 1;
 }
 
 onsuperslasherkilled(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08) {
@@ -161,7 +161,7 @@ onsuperslasherkilled(param_00,param_01,param_02,param_03,param_04,param_05,param
 	var_0F = self.asmname;
 	var_10 = self.var_164D[var_0F].var_4BC0;
 	var_11 = level.asm[var_0F].states[var_10];
-	scripts/asm/asm::func_2388(var_0F,var_10,var_11,undefined);
+	scripts\asm\asm::func_2388(var_0F,var_10,var_11,undefined);
 	scripts\mp\mp_agent::default_on_killed(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08);
 }
 
@@ -222,7 +222,7 @@ onsuperslasherdamaged(param_00,param_01,param_02,param_03,param_04,param_05,para
 		return;
 	}
 
-	if(isdefined(self._blackboard.binair)) {
+	if(isdefined(self.var_1198.binair)) {
 		param_02 = int(min(param_02,self.health - 1));
 		if(param_02 == 0) {
 			return;

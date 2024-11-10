@@ -1,19 +1,19 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3592.gsc
-****************************/
+ * Script: 3592.gsc
+************************/
 
 init() {
-	level._effect["transponder"] = loadfx("vfx/iw7/_requests/mp/vfx_smokewall");
-	level._effect["transponder_activate"] = loadfx("vfx/iw7/_requests/mp/vfx_transponder_activate");
-	level._effect["direction_indicator_close"] = loadfx("vfx/iw7/_requests/mp/vfx_transponder_direction_indicator_close");
-	level._effect["direction_indicator_mid"] = loadfx("vfx/iw7/_requests/mp/vfx_transponder_direction_indicator_mid");
-	level._effect["direction_indicator_far"] = loadfx("vfx/iw7/_requests/mp/vfx_transponder_direction_indicator_far");
+	level._effect["transponder"] = loadfx("vfx\iw7\_requests\mp\vfx_smokewall");
+	level._effect["transponder_activate"] = loadfx("vfx\iw7\_requests\mp\vfx_transponder_activate");
+	level._effect["direction_indicator_close"] = loadfx("vfx\iw7\_requests\mp\vfx_transponder_direction_indicator_close");
+	level._effect["direction_indicator_mid"] = loadfx("vfx\iw7\_requests\mp\vfx_transponder_direction_indicator_mid");
+	level._effect["direction_indicator_far"] = loadfx("vfx\iw7\_requests\mp\vfx_transponder_direction_indicator_far");
 	self.var_E561 = 0;
 	self.var_9F2F = 0;
 	self.var_9FB0 = 0;
-	scripts\mp\_powerloot::func_DF06("power_transponder",["passive_increased_range","passive_spot_enemies","passive_ripper"]);
+	scripts\mp\powerloot::func_DF06("power_transponder",["passive_increased_range","passive_spot_enemies","passive_ripper"]);
 }
 
 func_F5D3() {}
@@ -32,8 +32,8 @@ transponder_place(param_00) {
 }
 
 transponder_use(param_00) {
-	self.var_9F2F = scripts\mp\_powerloot::func_D779("power_transponder","passive_ripper");
-	self.var_9FB0 = scripts\mp\_powerloot::func_D779("power_transponder","passive_spot_enemies");
+	self.var_9F2F = scripts\mp\powerloot::func_D779("power_transponder","passive_ripper");
+	self.var_9FB0 = scripts\mp\powerloot::func_D779("power_transponder","passive_spot_enemies");
 	transponder_throw(param_00);
 }
 
@@ -44,23 +44,23 @@ transponder_throw(param_00) {
 	var_01 = "power_transponder";
 	self setclientomnvar("ui_transponder_range_finder",0);
 	self setclientomnvar("ui_show_transponder_outofrange",0);
-	if(!scripts\mp\_utility::isreallyalive(self)) {
+	if(!scripts\mp\utility::isreallyalive(self)) {
 		param_00 delete();
 		return;
 	}
 
-	param_00 thread scripts\mp\_weapons::ondetonateexplosive();
+	param_00 thread scripts\mp\weapons::ondetonateexplosive();
 	thread watchtransponderdetonation(param_00);
 	param_00 setotherent(self);
 	param_00.activated = 0;
-	scripts\mp\_weapons::ontacticalequipmentplanted(param_00,"power_transponder");
+	scripts\mp\weapons::ontacticalequipmentplanted(param_00,"power_transponder");
 	thread transponderrangefinder(param_00);
 	param_00 thread transponderactivate();
-	param_00 thread scripts\mp\_weapons::func_3343();
+	param_00 thread scripts\mp\weapons::func_3343();
 	param_00 thread transponderdamage();
-	param_00 thread scripts\mp\_weapons::func_66B4(1);
+	param_00 thread scripts\mp\weapons::func_66B4(1);
 	param_00 thread scripts\mp\perks\_perk_equipmentping::runequipmentping();
-	level thread scripts\mp\_weapons::monitordisownedequipment(self,param_00);
+	level thread scripts\mp\weapons::monitordisownedequipment(self,param_00);
 }
 
 watchtransponderdetonation(param_00) {
@@ -72,7 +72,7 @@ watchtransponderdetonation(param_00) {
 	for(;;) {
 		self setclientomnvar("ui_show_transponder_outofrange",0);
 		self waittillmatch("transponder_mp","detonate");
-		var_01 = scripts\mp\_powerloot::func_7FC5("power_transponder",1801);
+		var_01 = scripts\mp\powerloot::func_7FC5("power_transponder",1801);
 		if(isdefined(param_00) && param_00.activated && length2d(param_00.origin - self.origin) <= var_01) {
 			transponder_teleportplayer(param_00);
 			transponderdetonateallcharges();
@@ -97,7 +97,7 @@ transponderdamage() {
 transponderdetonateallcharges() {
 	foreach(var_01 in self.plantedtacticalequip) {
 		if(isdefined(var_01) && var_01.weapon_name == "transponder_mp") {
-			var_01 scripts\mp\_weapons::deleteexplosive();
+			var_01 scripts\mp\weapons::deleteexplosive();
 			scripts\engine\utility::array_remove(self.plantedtacticalequip,var_01);
 		}
 	}
@@ -165,7 +165,7 @@ watchtransponderaltdetonate(param_00) {
 			}
 
 			if(isdefined(self.var_9FF6)) {
-				scripts/mp/archetypes/archsniper::func_639B();
+				scripts\mp\archetypes\archsniper::func_639B();
 			}
 
 			self notify("transponder_alt_detonate");
@@ -187,8 +187,8 @@ transponderactivate() {
 	self notify("activated");
 	self.activated = 1;
 	self.triggerportableradarping func_5616(self);
-	scripts\mp\_weapons::makeexplosiveusable();
-	scripts\mp\_weapons::explosivehandlemovers(var_00);
+	scripts\mp\weapons::makeexplosiveusable();
+	scripts\mp\weapons::explosivehandlemovers(var_00);
 }
 
 transponder_teleportplayer(param_00) {
@@ -257,7 +257,7 @@ transponderwatchfordisuse(param_00) {
 
 checkvalidposition() {
 	var_00 = getclosestpointonnavmesh(self.origin);
-	var_01 = self.triggerportableradarping scripts\mp\_powerloot::func_7FC5("power_transponder",256);
+	var_01 = self.triggerportableradarping scripts\mp\powerloot::func_7FC5("power_transponder",256);
 	if(distance(self.origin,var_00) > var_01) {
 		return 0;
 	}
@@ -292,7 +292,7 @@ func_897B(param_00) {
 }
 
 func_5616(param_00) {
-	scripts\mp\_powers::func_D727("power_transponder");
+	scripts\mp\powers::func_D727("power_transponder");
 	thread func_5617(param_00);
 }
 
@@ -301,7 +301,7 @@ func_5617(param_00) {
 	self endon("disconnect");
 	self endon("remove_transponder");
 	param_00 waittill("death");
-	scripts\mp\_powers::func_D72D("power_transponder");
+	scripts\mp\powers::func_D72D("power_transponder");
 }
 
 func_12694() {
@@ -313,15 +313,15 @@ func_12694() {
 	var_03 = 650;
 	self.var_E561 = 0;
 	foreach(var_05 in level.participants) {
-		if(!scripts\mp\_utility::isreallyalive(var_05)) {
+		if(!scripts\mp\utility::isreallyalive(var_05)) {
 			continue;
 		}
 
-		if(!scripts\mp\_utility::isenemy(var_05)) {
+		if(!scripts\mp\utility::isenemy(var_05)) {
 			continue;
 		}
 
-		if(var_05 scripts\mp\_utility::_hasperk("specialty_noplayertarget") || var_05 scripts\mp\_utility::_hasperk("specialty_noscopeoutline")) {
+		if(var_05 scripts\mp\utility::_hasperk("specialty_noplayertarget") || var_05 scripts\mp\utility::_hasperk("specialty_noscopeoutline")) {
 			continue;
 		}
 
@@ -343,8 +343,8 @@ func_12694() {
 
 func_12695(param_00,param_01,param_02) {
 	wait(param_02 * param_01);
-	var_03 = scripts\mp\_utility::outlineenableforplayer(param_00,"orange",self,0,0,"level_script");
-	param_00 scripts\mp\_hud_message::showmiscmessage("spotted");
+	var_03 = scripts\mp\utility::outlineenableforplayer(param_00,"orange",self,0,0,"level_script");
+	param_00 scripts\mp\hud_message::showmiscmessage("spotted");
 	var_04 = 3;
 	func_13AA0(var_03,param_00,var_04);
 }
@@ -354,22 +354,22 @@ func_13AA0(param_00,param_01,param_02) {
 	level endon("game_ended");
 	scripts\engine\utility::waittill_any_timeout_no_endon_death_2(param_02,"leave");
 	if(isdefined(param_01)) {
-		scripts\mp\_utility::outlinedisable(param_00,param_01);
+		scripts\mp\utility::outlinedisable(param_00,param_01);
 	}
 }
 
 func_12691() {
-	level._effect["reaper_fisheye"] = loadfx("vfx/code/screen/vfx_scrnfx_reaper_fisheye");
+	level._effect["reaper_fisheye"] = loadfx("vfx\code\screen\vfx_scrnfx_reaper_fisheye");
 	self.var_12697 = ["specialty_fastermelee","specialty_extendedmelee","specialty_stun_resistance","specialty_detectexplosive"];
 	foreach(var_01 in self.var_12697) {
-		scripts\mp\_utility::giveperk(var_01);
+		scripts\mp\utility::giveperk(var_01);
 	}
 
 	var_03 = self.maxhealth;
 	self setsuit("reaper_mp");
 	self.maxhealth = 170;
 	self.health = self.maxhealth;
-	level._effect["reaper_swipe_trail"] = loadfx("vfx/iw7/_requests/mp/vfx_swipe_trail");
+	level._effect["reaper_swipe_trail"] = loadfx("vfx\iw7\_requests\mp\vfx_swipe_trail");
 	self.var_B62A = spawn("script_model",self.origin);
 	self.var_B62A setmodel("tag_origin");
 	thread func_13ACC();
@@ -429,7 +429,7 @@ func_E164(param_00) {
 	self.var_9FB0 = 0;
 	self.var_E561 = 0;
 	foreach(var_02 in self.var_12697) {
-		scripts\mp\_utility::removeperk(var_02);
+		scripts\mp\utility::removeperk(var_02);
 	}
 
 	self.var_12697 = undefined;

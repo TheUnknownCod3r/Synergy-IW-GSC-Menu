@@ -1,8 +1,8 @@
-/*******************************************************
+/***********************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\killstreaks\_harrier.gsc
-*******************************************************/
+ * Script: scripts\mp\killstreaks\_harrier.gsc
+***********************************************/
 
 func_2A6A(param_00,param_01,param_02) {
 	var_03 = getent("airstrikeheight","targetname");
@@ -148,7 +148,7 @@ func_8B5A() {
 
 func_8B61() {
 	self endon("death");
-	scripts\mp\_hostmigration::waitlongdurationwithhostmigrationpause(90);
+	scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(90);
 	func_8B5E();
 }
 
@@ -672,7 +672,7 @@ istarget(param_00) {
 		return 0;
 	}
 
-	if(param_00 scripts\mp\_utility::_hasperk("specialty_blindeye")) {
+	if(param_00 scripts\mp\utility::_hasperk("specialty_blindeye")) {
 		return 0;
 	}
 
@@ -745,7 +745,7 @@ firemissile(param_00) {
 		return;
 	}
 
-	self.var_B898--;
+	self.missiles--;
 	self giveflagassistedcapturepoints("aamissile_projectile_mp");
 	if(isdefined(param_00.var_1155F)) {
 		var_02 = self fireweapon("tag_flash",param_00.var_1155F,(0,0,-250));
@@ -796,7 +796,7 @@ func_3758(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_0
 		return;
 	}
 
-	param_02 = scripts\mp\_damage::handleapdamage(param_05,param_04,param_02);
+	param_02 = scripts\mp\damage::handleapdamage(param_05,param_04,param_02);
 	switch(param_05) {
 		case "iw6_rocketmutli_mp":
 		case "iw6_rocketplyr_mp":
@@ -839,24 +839,24 @@ func_3758(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_0
 	}
 
 	scripts\mp\killstreaks\_killstreaks::killstreakhit(param_01,param_05,self);
-	param_01 scripts\mp\_damagefeedback::updatedamagefeedback("");
-	if(isplayer(param_01) && param_01 scripts\mp\_utility::_hasperk("specialty_armorpiercing")) {
+	param_01 scripts\mp\damagefeedback::updatedamagefeedback("");
+	if(isplayer(param_01) && param_01 scripts\mp\utility::_hasperk("specialty_armorpiercing")) {
 		var_0C = int(param_02 * level.armorpiercingmod);
 		param_02 = param_02 + var_0C;
 	}
 
 	if(self.health <= param_02) {
 		if(isplayer(param_01) && !isdefined(self.triggerportableradarping) || param_01 != self.triggerportableradarping) {
-			thread scripts\mp\_utility::teamplayercardsplash("callout_destroyed_harrier",param_01);
-			param_01 thread scripts\mp\_utility::giveunifiedpoints("kill",param_05);
+			thread scripts\mp\utility::teamplayercardsplash("callout_destroyed_harrier",param_01);
+			param_01 thread scripts\mp\utility::giveunifiedpoints("kill",param_05);
 			param_01 notify("destroyed_killstreak");
 		}
 
 		if(param_05 == "heli_pilot_turret_mp") {
-			param_01 scripts\mp\_missions::processchallenge("ch_enemy_down");
+			param_01 scripts\mp\missions::processchallenge("ch_enemy_down");
 		}
 
-		scripts\mp\_missions::func_3DE3(param_01,self,param_05);
+		scripts\mp\missions::func_3DE3(param_01,self,param_05);
 		self notify("death");
 	}
 

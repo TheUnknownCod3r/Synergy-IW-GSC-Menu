@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\4324.gsc
-****************************/
+ * Script: 4324.gsc
+************************/
 
 main() {
 	var_00 = scripts\engine\utility::createoneshoteffect("vfx_metro_amb_motes");

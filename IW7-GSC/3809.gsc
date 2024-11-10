@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\3809.gsc
+ * Script: 3809.gsc
 ***************************************/
 
 #using_animtree("script_model");
@@ -99,8 +99,8 @@ func_25C6() {
 
 func_25C7() {
   wait 0.8;
-  level.func_A2E5 scripts/sp/utility::func_10460(0.2, 1);
-  level.func_A2E6 scripts/sp/utility::func_10460(0.2, 1);
+  level.func_A2E5 scripts\sp\utility::func_10460(0.2, 1);
+  level.func_A2E6 scripts\sp\utility::func_10460(0.2, 1);
 }
 
 func_6C94() {
@@ -209,7 +209,7 @@ func_E3D1(var_00, var_01, var_02, var_03, var_04) {
   break;
 
   func_E3CB();
-  level scripts/sp/endmission::func_CCA8("sc_assault_maptrans_jackal_return", 15);
+  level scripts\sp\endmission::func_CCA8("sc_assault_maptrans_jackal_return", 15);
   case "airlock":
   level.func_E35D.func_A2E8[var_00] thread func_E3CC(var_02, 1);
   level.func_E35D.func_A2E8[var_00] moveto(level.func_E35D.func_A2E8[var_00].func_1AE0, var_02);
@@ -230,13 +230,13 @@ func_E3D1(var_00, var_01, var_02, var_03, var_04) {
 
   if (var_00 == "a") {
   level scripts\engine\utility::flag_set_delayed("jackal_elevator_finished", 1);
-  level scripts/sp/utility::func_C12D("jackal_elevator_finished", 1);
-  level.func_E35D.func_A2E8[var_00].func_A056 scripts/sp/utility::func_C12D("player_dismount", 1);
+  level scripts\sp\utility::func_C12D("jackal_elevator_finished", 1);
+  level.func_E35D.func_A2E8[var_00].func_A056 scripts\sp\utility::func_C12D("player_dismount", 1);
 
   if (level.script == "shipcrib_rogue" || level.script == "shipcrib_prisoner") {
   if (isdefined(scripts\engine\utility::getstruct("jackal_return_a_exit", "targetname"))) {
   level.player scripts\engine\utility::delaycall(4.5, ::unlink);
-  level scripts\engine\utility::delaythread(4.5, scripts/sp/utility::func_11633, scripts\engine\utility::getstruct("jackal_return_a_exit", "targetname"));
+  level scripts\engine\utility::delaythread(4.5, scripts\sp\utility::func_11633, scripts\engine\utility::getstruct("jackal_return_a_exit", "targetname"));
   }
   }
   }

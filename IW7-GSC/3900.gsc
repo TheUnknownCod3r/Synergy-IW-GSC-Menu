@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3900.gsc
-****************************/
+ * Script: 3900.gsc
+************************/
 
 func_5AC0() {
 	self endon("killanimscript");
@@ -17,7 +17,7 @@ func_3E96(param_00,param_01,param_02) {
 		return func_3EF4(param_00,param_01,param_02);
 	}
 
-	return scripts/asm/asm::asm_lookupanimfromalias(param_01,param_02);
+	return scripts\asm\asm::asm_lookupanimfromalias(param_01,param_02);
 }
 
 func_3EB8(param_00,param_01,param_02) {
@@ -38,11 +38,11 @@ func_3EB6(param_00,param_01,param_02) {
 }
 
 func_CEA8(param_00,param_01,param_02,param_03) {
-	scripts/asm/asm_mp::func_2364(param_00,param_01,param_02,param_03);
+	scripts\asm\asm_mp::func_2364(param_00,param_01,param_02,param_03);
 }
 
 func_B050(param_00,param_01,param_02,param_03) {
-	scripts/asm/asm_mp::func_235F(param_00,param_01,param_02,1);
+	scripts\asm\asm_mp::func_235F(param_00,param_01,param_02,1);
 }
 
 func_136B4(param_00,param_01,param_02) {
@@ -50,7 +50,7 @@ func_136B4(param_00,param_01,param_02) {
 	self _meth_84BD();
 	self waittill("stop_soon");
 	self.var_20EE = self _meth_813A();
-	scripts/asm/asm::asm_fireevent(param_01,"cover_approach",self.var_20EE);
+	scripts\asm\asm::asm_fireevent(param_01,"cover_approach",self.var_20EE);
 }
 
 func_136CC(param_00,param_01,param_02) {
@@ -58,7 +58,7 @@ func_136CC(param_00,param_01,param_02) {
 	self waittill("path_set");
 	var_03 = self _meth_813A();
 	var_04 = [var_03,1];
-	scripts/asm/asm::asm_fireevent(param_01,"sharp_turn",var_04);
+	scripts\asm\asm::asm_fireevent(param_01,"sharp_turn",var_04);
 	thread func_136CC(param_00,param_01,param_02);
 }
 
@@ -66,7 +66,7 @@ func_136E7(param_00,param_01,param_02) {
 	self endon(param_01 + "_finished");
 	self waittill("path_dir_change",var_03);
 	var_04 = [var_03,1];
-	scripts/asm/asm::asm_fireevent(param_01,"sharp_turn",var_04);
+	scripts\asm\asm::asm_fireevent(param_01,"sharp_turn",var_04);
 	thread func_136E7(param_00,param_01,param_02);
 }
 
@@ -82,7 +82,7 @@ func_D4DD(param_00,param_01,param_02,param_03) {
 		var_04 = self.moveplaybackrate;
 	}
 
-	scripts/asm/asm_mp::func_235F(param_00,param_01,param_02,var_04);
+	scripts\asm\asm_mp::func_235F(param_00,param_01,param_02,var_04);
 }
 
 func_FFB6(param_00,param_01,param_02,param_03) {
@@ -90,11 +90,11 @@ func_FFB6(param_00,param_01,param_02,param_03) {
 		return 1;
 	}
 
-	if(!scripts/asm/asm_bb::bb_movetyperequested("combat")) {
+	if(!scripts\asm\asm_bb::bb_movetyperequested("combat")) {
 		return 1;
 	}
 
-	if(scripts/asm/asm_bb::bb_meleechargerequested(param_00,param_01,param_02,param_03)) {
+	if(scripts\asm\asm_bb::bb_meleechargerequested(param_00,param_01,param_02,param_03)) {
 		return 1;
 	}
 
@@ -103,20 +103,20 @@ func_FFB6(param_00,param_01,param_02,param_03) {
 
 func_100A3(param_00,param_01,param_02,param_03) {
 	if(isdefined(param_03)) {
-		if(!scripts/asm/asm_bb::func_2949(param_00,param_01,param_02,param_03)) {
+		if(!scripts\asm\asm_bb::func_2949(param_00,param_01,param_02,param_03)) {
 			return 0;
 		}
 	}
 
-	if(self._blackboard.alwaysrunforward) {
+	if(self.var_1198.alwaysrunforward) {
 		return 0;
 	}
 
-	if(!scripts/asm/asm_bb::bb_movetyperequested("combat")) {
+	if(!scripts\asm\asm_bb::bb_movetyperequested("combat")) {
 		return 0;
 	}
 
-	if(!scripts/asm/asm_bb::bb_wantstostrafe()) {
+	if(!scripts\asm\asm_bb::bb_wantstostrafe()) {
 		return 0;
 	}
 
@@ -153,7 +153,7 @@ func_9FFF() {
 }
 
 shouldshoot(param_00,param_01,param_02,param_03) {
-	if(!scripts/asm/asm_bb::func_291C()) {
+	if(!scripts\asm\asm_bb::func_291C()) {
 		return 0;
 	}
 
@@ -171,9 +171,9 @@ shouldshoot(param_00,param_01,param_02,param_03) {
 }
 
 func_3EB3(param_00,param_01,param_02) {
-	var_03 = scripts/asm/asm::asm_getdemeanor();
-	if(scripts/asm/asm::asm_hasdemeanoranimoverride(var_03,"idle")) {
-		var_04 = scripts/asm/asm::asm_getdemeanoranimoverride(var_03,"idle");
+	var_03 = scripts\asm\asm::asm_getdemeanor();
+	if(scripts\asm\asm::asm_hasdemeanoranimoverride(var_03,"idle")) {
+		var_04 = scripts\asm\asm::asm_getdemeanoranimoverride(var_03,"idle");
 		if(isarray(var_04)) {
 			return var_04[randomint(var_04.size)];
 		}
@@ -193,15 +193,15 @@ func_3EAB(param_00,param_01,param_02) {
 		var_03 = "none";
 	}
 
-	if(!scripts/asm/asm::asm_hasalias(param_01,var_03 + param_02)) {
+	if(!scripts\asm\asm::asm_hasalias(param_01,var_03 + param_02)) {
 		var_03 = "rifle";
 	}
 
-	return scripts/asm/asm::asm_lookupanimfromalias(param_01,var_03 + param_02);
+	return scripts\asm\asm::asm_lookupanimfromalias(param_01,var_03 + param_02);
 }
 
 func_138E2() {
-	if(scripts/asm/asm_bb::func_292C() == "crouch") {
+	if(scripts\asm\asm_bb::func_292C() == "crouch") {
 		return 1;
 	}
 
@@ -209,14 +209,14 @@ func_138E2() {
 }
 
 _meth_811E(param_00) {
-	if(!isdefined(self._blackboard.shootparams)) {
+	if(!isdefined(self.var_1198.shootparams)) {
 		return undefined;
 	}
-	else if(isdefined(self._blackboard.shootparams.ent)) {
-		return self._blackboard.shootparams.ent getshootatpos();
+	else if(isdefined(self.var_1198.shootparams.ent)) {
+		return self.var_1198.shootparams.ent getshootatpos();
 	}
-	else if(isdefined(self._blackboard.shootparams.pos)) {
-		return self._blackboard.shootparams.pos;
+	else if(isdefined(self.var_1198.shootparams.pos)) {
+		return self.var_1198.shootparams.pos;
 	}
 	else if(isdefined(self.isnodeoccupied)) {
 		return self.isnodeoccupied getshootatpos();
@@ -235,7 +235,7 @@ _meth_811C() {
 }
 
 isaimedataimtarget() {
-	if(!isdefined(self._blackboard.shootparams.pos) && !isdefined(self._blackboard.shootparams.ent)) {
+	if(!isdefined(self.var_1198.shootparams.pos) && !isdefined(self.var_1198.shootparams.ent)) {
 		return 1;
 	}
 

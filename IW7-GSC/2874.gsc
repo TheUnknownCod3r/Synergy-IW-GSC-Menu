@@ -1,12 +1,12 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2874.gsc
+ * Script: 2874.gsc
 ***************************************/
 
 global_fx(var_00, var_01, var_02, var_03, var_04) {
   init();
   level.global_fx[var_00] = var_03;
-  var_05 = scripts/sp/utility::_meth_8181(var_00, "targetname");
+  var_05 = scripts\sp\utility::_meth_8181(var_00, "targetname");
 
   if (!isdefined(var_05))
   return;

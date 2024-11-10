@@ -1,14 +1,14 @@
-/*******************************************************
+/***********************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\asm\ratking\ratking_asm.gsc
-*******************************************************/
+ * Script: scripts\asm\ratking\ratking_asm.gsc
+***********************************************/
 
 ratkinginit(param_00,param_01,param_02,param_03) {
 	scripts\asm\zombie\zombie::func_13F9A(param_00,param_01,param_02,param_03);
 	self.var_71D0 = ::scripts\mp\agents\ratking\ratking_agent::shouldratkingplaypainanim;
 	self.var_1198.requestedshieldstate = "equipped";
-	self.var_2303.shieldstate = "equipped";
+	self.asm.shieldstate = "equipped";
 }
 
 isvalidaction(param_00) {
@@ -92,7 +92,7 @@ dosummonspawn() {
 }
 
 damagezombies(param_00,param_01) {
-	var_02 = scripts\mp\_mp_agent::getactiveagentsoftype("generic_zombie");
+	var_02 = scripts\mp\mp_agent::getactiveagentsoftype("generic_zombie");
 	var_03 = param_01 * param_01;
 	foreach(var_05 in var_02) {
 		var_06 = distancesquared(var_05.origin,param_00);
@@ -116,7 +116,7 @@ dostaffstompdamage(param_00,param_01) {
 	var_02 = scripts\mp\agents\ratking\ratking_tunedata::gettunedata();
 	self setscriptablepartstate("attacks","staff_stomp");
 	self radiusdamage(self.origin,var_02.staff_stomp_damage_radius,var_02.staff_stomp_max_damage,var_02.staff_stomp_min_damage,self,"MOD_IMPACT");
-	if(scripts\common\utility::istrue(self.battackzombies)) {
+	if(scripts\engine\utility::istrue(self.battackzombies)) {
 		damagezombies(self.origin,var_02.staff_stomp_damage_radius);
 	}
 }
@@ -165,7 +165,7 @@ meleenotehandler(param_00,param_01,param_02,param_03) {
 		if(isdefined(var_04)) {
 			if(distancesquared(var_04.origin,self.origin) < -25536) {
 				self notify("attack_hit",var_04);
-				if(var_04.team == "axis" && scripts\common\utility::istrue(self.battackzombies)) {
+				if(var_04.team == "axis" && scripts\engine\utility::istrue(self.battackzombies)) {
 					scripts\asm\zombie\melee::domeleedamage(var_04,var_04.health * 10,"MOD_IMPACT");
 				}
 				else
@@ -179,7 +179,7 @@ meleenotehandler(param_00,param_01,param_02,param_03) {
 			}
 		}
 
-		if(!scripts\common\utility::istrue(self.bmovingmelee)) {
+		if(!scripts\engine\utility::istrue(self.bmovingmelee)) {
 			self notify("stop_melee_face_enemy");
 		}
 	}
@@ -238,7 +238,7 @@ aimatenemy(param_00,param_01) {
 	self endon(param_00 + "_finished");
 	while(isdefined(param_01) && isalive(param_01)) {
 		self.setplayerignoreradiusdamage = param_01 getshootatpos();
-		scripts\common\utility::waitframe();
+		scripts\engine\utility::waitframe();
 	}
 }
 
@@ -255,7 +255,7 @@ doshieldthrow(param_00,param_01,param_02,param_03) {
 }
 
 shouldabortaction(param_00,param_01,param_02,param_03) {
-	if(scripts\common\utility::istrue(self.btraversalteleport)) {
+	if(scripts\engine\utility::istrue(self.btraversalteleport)) {
 		return 0;
 	}
 
@@ -303,11 +303,11 @@ playblockanim(param_00,param_01,param_02,param_03) {
 func_BEA0(param_00,param_01,param_02,param_03) {
 	var_04 = undefined;
 	var_05 = scripts\mp\agents\ratking\ratking_agent::getenemy();
-	if(isdefined(self.var_1198.shootparams) && isdefined(self.var_1198.var_FECD.ent)) {
-		var_04 = self.var_1198.var_FECD.var_65D3.origin;
+	if(isdefined(self.var_1198.shootparams) && isdefined(self.var_1198.shootparams.ent)) {
+		var_04 = self.var_1198.shootparams.ent.origin;
 	}
-	else if(isdefined(self.var_1198.shootparams) && isdefined(self.var_1198.var_FECD.pos)) {
-		var_04 = self.var_1198.var_FECD.pos;
+	else if(isdefined(self.var_1198.shootparams) && isdefined(self.var_1198.shootparams.pos)) {
+		var_04 = self.var_1198.shootparams.pos;
 	}
 	else if(isdefined(var_05)) {
 		var_04 = var_05.origin;
@@ -322,7 +322,7 @@ func_BEA0(param_00,param_01,param_02,param_03) {
 	if(var_07 < 65536) {
 		var_08 = sqrt(var_07);
 		if(var_08 > 3) {
-			var_06 = var_06 + asin(-3 \ var_08);
+			var_06 = var_06 + asin(-3 / var_08);
 		}
 	}
 
@@ -338,11 +338,11 @@ _meth_81DE() {
 	var_01 = undefined;
 	var_02 = undefined;
 	if(isdefined(self.var_1198.shootparams)) {
-		if(isdefined(self.var_1198.var_FECD.ent)) {
-			var_01 = self.var_1198.var_FECD.ent;
+		if(isdefined(self.var_1198.shootparams.ent)) {
+			var_01 = self.var_1198.shootparams.ent;
 		}
-		else if(isdefined(self.var_1198.var_FECD.pos)) {
-			var_02 = self.var_1198.var_FECD.pos;
+		else if(isdefined(self.var_1198.shootparams.pos)) {
+			var_02 = self.var_1198.shootparams.pos;
 		}
 	}
 
@@ -357,12 +357,12 @@ _meth_81DE() {
 		var_00 = 1.5;
 	}
 
-	var_04 = scripts\common\utility::getpredictedaimyawtoshootentorpos(var_00,var_01,var_02);
+	var_04 = scripts\engine\utility::getpredictedaimyawtoshootentorpos(var_00,var_01,var_02);
 	return var_04;
 }
 
 choosestaffornostaffanim(param_00,param_01,param_02) {
-	if(scripts\common\utility::istrue(self.nostaff)) {
+	if(scripts\engine\utility::istrue(self.nostaff)) {
 		return scripts\asm\asm::asm_lookupanimfromalias(param_01,"nostaff");
 	}
 
@@ -370,7 +370,7 @@ choosestaffornostaffanim(param_00,param_01,param_02) {
 }
 
 chooseshieldornoshieldanim(param_00,param_01,param_02) {
-	if(self.var_2303.shieldstate == "equipped") {
+	if(self.asm.shieldstate == "equipped") {
 		return scripts\asm\asm::asm_lookupanimfromalias(param_01,"shield");
 	}
 
@@ -474,7 +474,7 @@ playteleportin(param_00,param_01,param_02,param_03) {
 terminate_teleportout(param_00,param_01,param_02) {}
 
 shouldconsiderabortingteleport(param_00,param_01,param_02,param_03) {
-	if(scripts\common\utility::istrue(self.ishidden)) {
+	if(scripts\engine\utility::istrue(self.ishidden)) {
 		return 0;
 	}
 
@@ -490,7 +490,7 @@ playteleportout(param_00,param_01,param_02,param_03) {
 	wait(0.1);
 	self dontinterpolate();
 	self hide();
-	if(scripts\common\utility::istrue(self.fake_death)) {
+	if(scripts\engine\utility::istrue(self.fake_death)) {
 		scripts\mp\agents\ratking\ratking_agent::executefakedeath();
 	}
 
@@ -510,12 +510,12 @@ playteleportout(param_00,param_01,param_02,param_03) {
 	self ghostskulls_complete_status(self.origin);
 	self clearpath();
 	thread showmelater(var_06);
-	if(!scripts\common\utility::istrue(self.btraversalteleport)) {
+	if(!scripts\engine\utility::istrue(self.btraversalteleport)) {
 		scripts\mp\agents\ratking\ratking_agent::lookatenemy();
 	}
 
 	scripts\asm\asm_mp::func_2365(param_00,param_01,param_02,var_04,1);
-	if(scripts\common\utility::istrue(self.btraversalteleport)) {
+	if(scripts\engine\utility::istrue(self.btraversalteleport)) {
 		self.is_traversing = undefined;
 		self.btraversalteleport = undefined;
 		self notify("traverse_end");
@@ -552,7 +552,7 @@ gibnearbyzombies(param_00) {
 		wait(param_00);
 	}
 
-	var_01 = scripts\mp\_mp_agent::getaliveagents();
+	var_01 = scripts\mp\mp_agent::getaliveagents();
 	var_02 = scripts\mp\agents\ratking\ratking_agent::getenemy();
 	var_03 = scripts\mp\agents\ratking\ratking_tunedata::gettunedata();
 	foreach(var_05 in var_01) {
@@ -585,7 +585,7 @@ gibthyself() {
 
 play_teleport_sound_to_players(param_00) {
 	foreach(var_02 in level.players) {
-		if(!self isethereal() || scripts\common\utility::istrue(var_02.rave_mode)) {
+		if(!self isethereal() || scripts\engine\utility::istrue(var_02.rave_mode)) {
 			self playsoundtoplayer(param_00,var_02);
 		}
 	}
@@ -605,7 +605,7 @@ platformfaceenemy(param_00) {
 			self orientmode("face angle abs",(0,vectortoyaw(var_01.origin - self.origin),0));
 		}
 
-		scripts\common\utility::waitframe();
+		scripts\engine\utility::waitframe();
 	}
 }
 
@@ -632,7 +632,7 @@ dostaffprojectiledamage(param_00,param_01,param_02,param_03) {
 			continue;
 		}
 
-		if(var_08.ignoreme || isdefined(var_08.triggerportableradarping) && var_08.var_222.ignoreme) {
+		if(var_08.ignoreme || isdefined(var_08.triggerportableradarping) && var_08.triggerportableradarping.ignoreme) {
 			continue;
 		}
 
@@ -656,9 +656,9 @@ dostaffprojectiledamage(param_00,param_01,param_02,param_03) {
 handlestaffprojectile() {
 	var_00 = scripts\mp\agents\ratking\ratking_tunedata::gettunedata();
 	var_01 = anglestoforward(self.angles);
-	var_02 = var_00.staff_projectile_range \ var_00.staff_projectile_speed;
+	var_02 = var_00.staff_projectile_range / var_00.staff_projectile_speed;
 	var_03 = var_00.staff_projectile_speed * var_00.staff_projectile_interval;
-	var_04 = var_03 \ 2;
+	var_04 = var_03 / 2;
 	var_05 = self.origin + var_01 * var_04;
 	var_06 = gettime() + var_02 * 1000;
 	var_07 = spawn("script_model",var_05);
@@ -682,7 +682,7 @@ handlestaffprojectile() {
 delayprojectileloopsound(param_00,param_01) {
 	level endon("game_ended");
 	wait(param_01);
-	param_00 scripts\common\utility::play_loop_sound_on_entity("rk_fissure_ground_lp",(0,0,12));
+	param_00 scripts\engine\utility::play_loop_sound_on_entity("rk_fissure_ground_lp",(0,0,12));
 }
 
 staffprojectilenotehandler(param_00,param_01,param_02,param_03) {
@@ -692,7 +692,7 @@ staffprojectilenotehandler(param_00,param_01,param_02,param_03) {
 }
 
 lostorfoundstaff(param_00,param_01,param_02,param_03) {
-	if(scripts\common\utility::istrue(self.bstaffchanged)) {
+	if(scripts\engine\utility::istrue(self.bstaffchanged)) {
 		self.bstaffchanged = undefined;
 		return 1;
 	}
@@ -701,19 +701,19 @@ lostorfoundstaff(param_00,param_01,param_02,param_03) {
 }
 
 lostorfoundshield(param_00,param_01,param_02,param_03) {
-	if(self.var_1198.requestedshieldstate == self.var_2303.shieldstate) {
+	if(self.var_1198.requestedshieldstate == self.asm.shieldstate) {
 		return 0;
 	}
 
-	if(self.var_1198.requestedshieldstate == "equipped" && self.var_2303.shieldstate != "equipped") {
+	if(self.var_1198.requestedshieldstate == "equipped" && self.asm.shieldstate != "equipped") {
 		return 1;
 	}
 
-	if(self.var_1198.requestedshieldstate == "dropped" && self.var_2303.shieldstate == "equipped") {
+	if(self.var_1198.requestedshieldstate == "dropped" && self.asm.shieldstate == "equipped") {
 		return 1;
 	}
 
-	self.var_2303.shieldstate = self.var_1198.requestedshieldstate;
+	self.asm.shieldstate = self.var_1198.requestedshieldstate;
 	return 0;
 }
 
@@ -731,7 +731,7 @@ playshieldlostandfound(param_00,param_01,param_02,param_03) {
 			break;
 	}
 
-	self.var_2303.shieldstate = self.var_1198.requestedshieldstate;
+	self.asm.shieldstate = self.var_1198.requestedshieldstate;
 	lib_0F3C::func_CEA8(param_00,param_01,param_02,param_03);
 }
 

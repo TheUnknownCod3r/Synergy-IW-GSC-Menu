@@ -1,8 +1,8 @@
-/****************************
+/****************************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\4290.gsc
-****************************/
+ * Script: scripts\mp\maps\mp_breakneck\gen\mp_breakneck_fx.gsc
+****************************************************************/
 
 main() {
 	var_00 = scripts\engine\utility::createoneshoteffect("vfx_breakneck_debris_zerog");

@@ -1,8 +1,8 @@
-/**********************************************************
+/**************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\anim\init_move_transitions.gsc
-**********************************************************/
+ * Script: scripts\anim\init_move_transitions.gsc
+**************************************************/
 
 func_968D() {
 	if(isdefined(level.var_BC99)) {

@@ -1,8 +1,8 @@
-/*********************************************
+/*************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\spectating.gsc
-*********************************************/
+ * Script: scripts\mp\spectating.gsc
+*************************************/
 
 init() {
 	level.spectateoverride["allies"] = spawnstruct();
@@ -49,7 +49,7 @@ func_7F6C() {
 		wait(0.05);
 	}
 
-	var_00 = "mp/CameraPositions";
+	var_00 = "mp\CameraPositions";
 	var_01 = var_00 + "_" + level.gametype + ".csv";
 	var_00 = var_00 + ".csv";
 	level.cameramapobjs = [];
@@ -249,7 +249,7 @@ updatemlgspectator() {
 					self.codcasterballcamfollow = spawn("script_model",var_03);
 					self.codcasterballcamfollow.angles = vectortoangles(var_02);
 					self.codcasterballcamfollow setmodel("tag_origin");
-					function_0321(self getentitynumber());
+					stopspectateplayer(self getentitynumber());
 					self cameraunlink();
 					thread linkcameratoball(var_02);
 				}

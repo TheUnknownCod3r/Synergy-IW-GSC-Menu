@@ -1,11 +1,11 @@
-/*****************************************************
+/*********************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\agents\c6\c6_agent.gsc
-*****************************************************/
+ * Script: scripts\mp\agents\c6\c6_agent.gsc
+*********************************************/
 
 registerscriptedagent() {
-	scripts/aitypes/bt_util::init();
+	scripts\aitypes\bt_util::init();
 	lib_03A9::func_DEE8();
 	lib_0F37::func_2371();
 	if(level.gametype != "zombie") {

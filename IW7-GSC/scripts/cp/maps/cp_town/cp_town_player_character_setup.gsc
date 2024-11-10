@@ -1,8 +1,8 @@
-/******************************************************************************
+/**********************************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\maps\cp_town\cp_town_player_character_setup.gsc
-******************************************************************************/
+ * Script: scripts\cp\maps\cp_town\cp_town_player_character_setup.gsc
+**********************************************************************/
 
 init_player_characters() {
 	register_player_character(1,"yes","body_zmb_hero_schoolgirl","viewmodel_arms_zmb_hero_schoolgirl","head_zmb_hero_schoolgirl",undefined,"p1_","_p1","iw7_pap_zm_school_girl","ges_zombies_revive_nerd",0,"iw7_schoolgirlcard_zm","mus_zombies_valley_girl","iw7_loadoutschoolgirl_zm","iw7_knife_zm_schoolgirl");
@@ -43,7 +43,7 @@ register_player_character(param_00,param_01,param_02,param_03,param_04,param_05,
 }
 
 post_elvira_setup_func(param_00) {
-	param_00 scripts/cp/zombies/achievement::update_achievement("MISTRESS_OF_DARK",1);
+	param_00 scripts\cp\zombies\achievement::update_achievement("MISTRESS_OF_DARK",1);
 	if(!isdefined(level.special_character_count)) {
 		level.special_character_count = 1;
 		return;

@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\6.gsc
+ * Script: 6.gsc
 ***************************************/
 
 initstructs() {

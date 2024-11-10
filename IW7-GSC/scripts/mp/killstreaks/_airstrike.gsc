@@ -1,19 +1,19 @@
-/*********************************************************
+/*************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\killstreaks\_airstrike.gsc
-*********************************************************/
+ * Script: scripts\mp\killstreaks\_airstrike.gsc
+*************************************************/
 
 init() {
-	level.airstrikefx = loadfx("vfx/iw7/_requests/mp/vfx_debug_warning.vfx");
-	level.airstrikessfx = loadfx("vfx/iw7/_requests/mp/vfx_debug_warning.vfx");
-	level.var_1AF6 = loadfx("vfx/iw7/_requests/mp/vfx_debug_warning.vfx");
-	level.var_A87D = loadfx("vfx/iw7/_requests/mp/vfx_debug_warning.vfx");
-	level.var_BB68 = loadfx("vfx/iw7/_requests/mp/vfx_debug_warning.vfx");
-	level.bombstrike = loadfx("vfx/iw7/_requests/mp/vfx_debug_warning.vfx");
-	level.var_1A8D = loadfx("vfx/iw7/_requests/mp/vfx_debug_warning.vfx");
-	level.var_A3BA = loadfx("vfx/iw7/core/vehicle/jackal/vfx_jackal_death_01_cheap.vfx");
-	level._effect["jackal_explosion"] = loadfx("vfx/iw7/core/mp/killstreaks/vfx_veh_exp_warden.vfx");
+	level.airstrikefx = loadfx("vfx\iw7\_requests\mp\vfx_debug_warning.vfx");
+	level.airstrikessfx = loadfx("vfx\iw7\_requests\mp\vfx_debug_warning.vfx");
+	level.var_1AF6 = loadfx("vfx\iw7\_requests\mp\vfx_debug_warning.vfx");
+	level.var_A87D = loadfx("vfx\iw7\_requests\mp\vfx_debug_warning.vfx");
+	level.var_BB68 = loadfx("vfx\iw7\_requests\mp\vfx_debug_warning.vfx");
+	level.bombstrike = loadfx("vfx\iw7\_requests\mp\vfx_debug_warning.vfx");
+	level.var_1A8D = loadfx("vfx\iw7\_requests\mp\vfx_debug_warning.vfx");
+	level.var_A3BA = loadfx("vfx\iw7\core\vehicle\jackal\vfx_jackal_death_01_cheap.vfx");
+	level._effect["jackal_explosion"] = loadfx("vfx\iw7\core\mp\killstreaks\vfx_veh_exp_warden.vfx");
 	level.jackals = [];
 	level.dangermaxradius["precision_airstrike"] = 550;
 	level.dangerminradius["precision_airstrike"] = 300;
@@ -23,15 +23,15 @@ init() {
 	scripts\mp\killstreaks\_killstreaks::registerkillstreak("precision_airstrike",::func_128D4,undefined,undefined,undefined,::func_13C8A);
 	scripts\mp\killstreaks\_killstreaks::registerkillstreak("jackal",::func_128D4,undefined,undefined,::triggerjackalweapon,::func_13C8A);
 	var_00 = ["passive_precision_strike","passive_increased_speed","passive_decreased_damage","passive_split_strike","passive_increased_cost","passive_one_plane","passive_speed_cost"];
-	scripts\mp\_killstreak_loot::func_DF07("precision_airstrike",var_00);
+	scripts\mp\killstreak_loot::func_DF07("precision_airstrike",var_00);
 	var_01 = ["passive_extra_flare","passive_decreased_duration","passive_moving_fortress","passive_no_cannon","passive_slow_turret","passive_support_drop"];
-	scripts\mp\_killstreak_loot::func_DF07("jackal",var_01);
+	scripts\mp\killstreak_loot::func_DF07("jackal",var_01);
 	level.planes = [];
 	level thread func_7DE9();
 }
 
 func_7DE9() {
-	var_00 = scripts\mp\_spawnlogic::getspawnpointarray("mp_tdm_spawn_allies_start");
+	var_00 = scripts\mp\spawnlogic::getspawnpointarray("mp_tdm_spawn_allies_start");
 	var_01 = 0;
 	var_02 = 0;
 	foreach(var_04 in var_00) {
@@ -45,8 +45,8 @@ func_7DE9() {
 func_13C8A(param_00) {
 	var_01 = undefined;
 	if(param_00.streakname == "precision_airstrike") {
-		if(scripts\mp\_utility::istrue(level.var_1AF9)) {
-			scripts\mp\_hud_message::showerrormessage("KILLSTREAKS_AIR_SPACE_TOO_CROWDED");
+		if(scripts\mp\utility::istrue(level.var_1AF9)) {
+			scripts\mp\hud_message::showerrormessage("KILLSTREAKS_AIR_SPACE_TOO_CROWDED");
 			return 0;
 		}
 
@@ -62,7 +62,7 @@ func_13C8A(param_00) {
 
 func_128D4(param_00) {
 	if(param_00.streakname == "jackal" && isdefined(level.var_A22D) || level.jackals.size > 0) {
-		scripts\mp\_hud_message::showerrormessage("KILLSTREAKS_AIR_SPACE_TOO_CROWDED");
+		scripts\mp\hud_message::showerrormessage("KILLSTREAKS_AIR_SPACE_TOO_CROWDED");
 		if(scripts\mp\killstreaks\_utility::func_A69F(param_00,"passive_support_drop")) {
 			if(isdefined(param_00.var_394) && param_00.var_394 != "none") {
 				self notify("killstreak_finished_with_weapon_" + param_00.var_394);
@@ -94,7 +94,7 @@ func_57DD(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_0
 	var_0A.streakname = param_05;
 	var_0A.team = param_04;
 	callstrike(param_00,param_03,var_09,param_02,param_05,param_06,param_07);
-	scripts\mp\_hostmigration::waitlongdurationwithhostmigrationpause(7.5);
+	scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(7.5);
 	var_0B = 0;
 	var_0C = [];
 	if(param_05 == "precision_airstrike") {
@@ -103,7 +103,7 @@ func_57DD(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_0
 
 	self notify("airstrike_finished");
 	if(param_05 == "precision_airstrike") {
-		scripts\mp\_utility::printgameaction("killstreak ended - precision_airstrike",param_03);
+		scripts\mp\utility::printgameaction("killstreak ended - precision_airstrike",param_03);
 	}
 }
 
@@ -111,7 +111,7 @@ func_1399E() {
 	self endon("airstrike_finished");
 	level endon("game_ended");
 	scripts\engine\utility::waittill_any_3("disconnect","joined_team");
-	if(scripts\mp\_utility::istrue(level.var_1AF9)) {
+	if(scripts\mp\utility::istrue(level.var_1AF9)) {
 		level.var_1AF9 = undefined;
 	}
 }
@@ -134,7 +134,7 @@ getairstrikedanger(param_00) {
 }
 
 getsingleairstrikedanger(param_00,param_01,param_02,param_03) {
-	if(scripts\mp\_utility::func_9F0F(param_03)) {
+	if(scripts\mp\utility::func_9F0F(param_03)) {
 		if(distancesquared(param_00,param_01) < level.dangermaxradius[param_03]) {
 			return 1;
 		}
@@ -169,8 +169,8 @@ pointisinairstrikearea(param_00,param_01,param_02,param_03) {
 }
 
 losradiusdamage(param_00,param_01,param_02,param_03,param_04,param_05,param_06) {
-	var_07 = scripts\mp\_weapons::getdamageableents(param_00,param_01,1);
-	function_00F3(param_00,param_01,param_02,param_03);
+	var_07 = scripts\mp\weapons::getdamageableents(param_00,param_01,1);
+	glassradiusdamage(param_00,param_01,param_02,param_03);
 	for(var_08 = 0;var_08 < var_07.size;var_08++) {
 		if(var_07[var_08].issplitscreen == self) {
 			continue;
@@ -195,7 +195,7 @@ losradiusdamage(param_00,param_01,param_02,param_03,param_04,param_05,param_06) 
 		var_07[var_08].damageowner = param_04;
 		var_07[var_08].einflictor = param_05;
 		level.airstrikedamagedents[level.airstrikedamagedentscount] = var_07[var_08];
-		level.var_1AF3++;
+		level.airstrikedamagedentscount++;
 	}
 
 	thread airstrikedamageentsthread(param_06);
@@ -215,7 +215,7 @@ airstrikedamageentsthread(param_00) {
 		}
 
 		if(!var_01.isplayer || isalive(var_01.issplitscreen)) {
-			var_01 scripts\mp\_weapons::damageent(var_01.einflictor,var_01.damageowner,var_01.var_DA,"MOD_PROJECTILE_SPLASH",param_00,var_01.pos,vectornormalize(var_01.damagecenter - var_01.pos));
+			var_01 scripts\mp\weapons::damageent(var_01.einflictor,var_01.damageowner,var_01.var_DA,"MOD_PROJECTILE_SPLASH",param_00,var_01.pos,vectornormalize(var_01.damagecenter - var_01.pos));
 			level.airstrikedamagedents[level.airstrikedamagedentsindex] = undefined;
 			if(var_01.isplayer) {
 				wait(0.05);
@@ -225,7 +225,7 @@ airstrikedamageentsthread(param_00) {
 		}
 
 		level.airstrikedamagedents[level.airstrikedamagedentsindex] = undefined;
-		level.var_1AF4++;
+		level.airstrikedamagedentsindex++;
 	}
 }
 
@@ -264,7 +264,7 @@ artilleryshellshock(param_00,param_01) {
 }
 
 func_3786(param_00,param_01,param_02,param_03) {
-	if(!isdefined(param_01) || param_01 scripts\mp\_utility::iskillstreakdenied()) {
+	if(!isdefined(param_01) || param_01 scripts\mp\utility::iskillstreakdenied()) {
 		self notify("stop_bombing");
 		return;
 	}
@@ -280,17 +280,17 @@ func_3786(param_00,param_01,param_02,param_03) {
 	}
 
 	wait(0.85 * var_08 / 2000);
-	if(!isdefined(param_01) || param_01 scripts\mp\_utility::iskillstreakdenied()) {
+	if(!isdefined(param_01) || param_01 scripts\mp\utility::iskillstreakdenied()) {
 		self notify("stop_bombing");
 		return;
 	}
 
 	if(param_03) {
 		playfx(level.var_BB68,var_06);
-		level thread scripts\mp\_shellshock::func_10F44(var_06);
+		level thread scripts\mp\shellshock::func_10F44(var_06);
 	}
 
-	thread scripts\mp\_utility::playsoundinspace("exp_airstrike_bomb",var_06);
+	thread scripts\mp\utility::playsoundinspace("exp_airstrike_bomb",var_06);
 	radiusartilleryshellshock(var_06,512,8,4,param_01.team);
 	losradiusdamage(var_06 + (0,0,16),896,300,50,param_01,self,"stealth_bomb_mp");
 }
@@ -305,7 +305,7 @@ func_5A60(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_0
 	var_0E = param_04;
 	var_0F = param_05;
 	var_10 = "veh_mil_air_ca_jackal_drone_atmos_periph_mp";
-	var_11 = scripts\mp\_killstreak_loot::getrarityforlootitem(param_0B.variantid);
+	var_11 = scripts\mp\killstreak_loot::getrarityforlootitem(param_0B.variantid);
 	if(var_11 != "") {
 		var_10 = var_10 + "_" + var_11;
 	}
@@ -428,7 +428,7 @@ removeplanefromlist(param_00) {
 callstrike_bombeffect(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07) {
 	param_00 endon("death");
 	wait(param_03);
-	if(!isdefined(param_04) || param_04 scripts\mp\_utility::iskillstreakdenied()) {
+	if(!isdefined(param_04) || param_04 scripts\mp\utility::iskillstreakdenied()) {
 		return;
 	}
 
@@ -490,8 +490,8 @@ callstrike_bombeffect(param_00,param_01,param_02,param_03,param_04,param_05,para
 		playfx(level.var_1AF6,var_17);
 		thread losradiusdamage(var_17 + (0,0,16),512,200,30,param_04,var_09,"artillery_mp");
 		if(var_13 % 3 == 0) {
-			thread scripts\mp\_utility::playsoundinspace("jackal_missile_impact",var_17);
-			level thread scripts\mp\_shellshock::airstrike_earthquake(var_17);
+			thread scripts\mp\utility::playsoundinspace("jackal_missile_impact",var_17);
+			level thread scripts\mp\shellshock::airstrike_earthquake(var_17);
 		}
 
 		wait(0.05);
@@ -514,7 +514,7 @@ spawnbomb(param_00,param_01) {
 func_3788(param_00,param_01,param_02,param_03,param_04) {
 	param_00 endon("death");
 	wait(param_03);
-	if(!isdefined(param_04) || param_04 scripts\mp\_utility::iskillstreakdenied()) {
+	if(!isdefined(param_04) || param_04 scripts\mp\utility::iskillstreakdenied()) {
 		return;
 	}
 
@@ -603,7 +603,7 @@ playplanefx() {
 callstrike_explosivebullets(param_00,param_01,param_02,param_03,param_04) {
 	param_00 endon("death");
 	wait(param_03);
-	if(!isdefined(param_04) || param_04 scripts\mp\_utility::iskillstreakdenied()) {
+	if(!isdefined(param_04) || param_04 scripts\mp\utility::iskillstreakdenied()) {
 		return;
 	}
 
@@ -710,10 +710,10 @@ callstrike(param_00,param_01,param_02,param_03,param_04,param_05,param_06) {
 			level thread func_5A60(param_00,param_01,var_0D,param_02,var_0E["startPoint"],var_0E["endPoint"],var_0E["bombTime"],var_0E["flyTime"],var_09,param_04,param_05,param_06);
 			playsoundatpos(var_0E["startPoint"],"ks_scorchers_init");
 			wait(randomfloatrange(0.8,1));
-			scripts\mp\_hostmigration::waittillhostmigrationdone();
+			scripts\mp\hostmigration::waittillhostmigrationdone();
 			level thread func_5A60(param_00,param_01,var_0D,param_02,var_0E["startPoint"],var_0E["endPoint"],var_0E["bombTime"],var_0E["flyTime"],var_09,param_04,param_05,param_06);
 			wait(randomfloatrange(0.8,1));
-			scripts\mp\_hostmigration::waittillhostmigrationdone();
+			scripts\mp\hostmigration::waittillhostmigrationdone();
 			level thread func_5A60(param_00,param_01,var_0D,param_02,var_0E["startPoint"],var_0E["endPoint"],var_0E["bombTime"],var_0E["flyTime"],var_09,param_04,param_05,param_06);
 			return;
 		}
@@ -727,10 +727,10 @@ callstrike(param_00,param_01,param_02,param_03,param_04,param_05,param_06) {
 		level thread func_5A60(param_00,param_01,var_0D,param_02,var_0E["startPoint"],var_0E["endPoint"],var_0E["bombTime"],var_0E["flyTime"],var_09,param_04,param_05,param_06);
 		playsoundatpos(var_0E["startPoint"],"ks_scorchers_init");
 		wait(randomfloatrange(0.5,0.7));
-		scripts\mp\_hostmigration::waittillhostmigrationdone();
+		scripts\mp\hostmigration::waittillhostmigrationdone();
 		level thread func_5A60(param_00,param_01,var_0D,param_02,var_0E["startPoint"] + var_0F * 175,var_0E["endPoint"] + var_0F * 175,var_0E["bombTime"],var_0E["flyTime"],var_09,param_04,param_05,param_06);
 		wait(randomfloatrange(0.5,0.7));
-		scripts\mp\_hostmigration::waittillhostmigrationdone();
+		scripts\mp\hostmigration::waittillhostmigrationdone();
 		level thread func_5A60(param_00,param_01,var_0D,param_02,var_0E["startPoint"] - var_0F * 175,var_0E["endPoint"] - var_0F * 175,var_0E["bombTime"],var_0E["flyTime"],var_09,param_04,param_05,param_06);
 		return;
 	}
@@ -738,14 +738,14 @@ callstrike(param_00,param_01,param_02,param_03,param_04,param_05,param_06) {
 	var_0E = getflightpath(param_03,var_0A,var_0B,var_08,var_0D,var_0C,var_09,param_05);
 	level thread func_5A60(param_00,param_01,var_0D,param_02,var_0E["startPoint"] + (0,0,randomint(500)),var_0E["endPoint"] + (0,0,randomint(500)),var_0E["bombTime"],var_0E["flyTime"],var_09,param_04,param_05,param_06);
 	wait(randomfloatrange(1.5,2.5));
-	scripts\mp\_hostmigration::waittillhostmigrationdone();
+	scripts\mp\hostmigration::waittillhostmigrationdone();
 	level thread func_5A60(param_00,param_01,var_0D,param_02,var_0E["startPoint"] + (0,0,randomint(200)),var_0E["endPoint"] + (0,0,randomint(200)),var_0E["bombTime"],var_0E["flyTime"],var_09,param_04,param_05,param_06);
 	wait(randomfloatrange(1.5,2.5));
-	scripts\mp\_hostmigration::waittillhostmigrationdone();
+	scripts\mp\hostmigration::waittillhostmigrationdone();
 	level thread func_5A60(param_00,param_01,var_0D,param_02,var_0E["startPoint"] + (0,0,randomint(200)),var_0E["endPoint"] + (0,0,randomint(200)),var_0E["bombTime"],var_0E["flyTime"],var_09,param_04,param_05,param_06);
 	if(param_04 == "super_airstrike") {
 		wait(randomfloatrange(2.5,3.5));
-		scripts\mp\_hostmigration::waittillhostmigrationdone();
+		scripts\mp\hostmigration::waittillhostmigrationdone();
 		level thread func_5A60(param_00,param_01,var_0D,param_02,var_0E["startPoint"] + (0,0,randomint(200)),var_0E["endPoint"] + (0,0,randomint(200)),var_0E["bombTime"],var_0E["flyTime"],var_09,param_04,param_05,param_06);
 		return;
 	}
@@ -858,7 +858,7 @@ selectairstrikelocation(param_00,param_01,param_02) {
 
 	var_09 = spawn("script_origin",self.origin);
 	var_0A = "used_" + param_01;
-	var_0B = scripts\mp\_killstreak_loot::getrarityforlootitem(param_02.variantid);
+	var_0B = scripts\mp\killstreak_loot::getrarityforlootitem(param_02.variantid);
 	if(var_0B != "") {
 		var_0A = var_0A + "_" + var_0B;
 	}
@@ -887,7 +887,7 @@ selectairstrikelocation(param_00,param_01,param_02) {
 	}
 	else if(param_01 == "jackal" && isdefined(level.var_A056) || level.jackals.size > 1) {
 		self notify("cancel_location");
-		scripts\mp\_hud_message::showerrormessage("KILLSTREAKS_AIR_SPACE_TOO_CROWDED");
+		scripts\mp\hud_message::showerrormessage("KILLSTREAKS_AIR_SPACE_TOO_CROWDED");
 		if(isdefined(var_09)) {
 			var_09 stoploopsound("");
 			var_09 delete();
@@ -898,8 +898,8 @@ selectairstrikelocation(param_00,param_01,param_02) {
 	}
 
 	if(isdefined(var_04)) {
-		if(scripts\mp\_utility::istrue(level.var_1AF9)) {
-			scripts\mp\_hud_message::showerrormessage("KILLSTREAKS_AIR_SPACE_TOO_CROWDED");
+		if(scripts\mp\utility::istrue(level.var_1AF9)) {
+			scripts\mp\hud_message::showerrormessage("KILLSTREAKS_AIR_SPACE_TOO_CROWDED");
 			return 0;
 		}
 
@@ -907,7 +907,7 @@ selectairstrikelocation(param_00,param_01,param_02) {
 		self playlocalsound("bombardment_killstreak_shutdown");
 		self clearsoundsubmix();
 	}
-	else if(!isdefined(var_04) && scripts\mp\_utility::func_9E90(param_01)) {
+	else if(!isdefined(var_04) && scripts\mp\utility::func_9E90(param_01)) {
 		if(isdefined(var_09)) {
 			var_09 stoploopsound("");
 			var_09 delete();
@@ -921,7 +921,7 @@ selectairstrikelocation(param_00,param_01,param_02) {
 	{
 		if(param_01 == "jackal") {
 			if(scripts\mp\killstreaks\_jackal::getnumownedjackals(self) >= 1) {
-				scripts\mp\_hud_message::showerrormessage("KILLSTREAKS_AIR_SPACE_TOO_CROWDED");
+				scripts\mp\hud_message::showerrormessage("KILLSTREAKS_AIR_SPACE_TOO_CROWDED");
 				if(isdefined(var_09)) {
 					var_09 stoploopsound("");
 					var_09 delete();
@@ -946,8 +946,8 @@ selectairstrikelocation(param_00,param_01,param_02) {
 		var_09 delete();
 	}
 
-	thread scripts\mp\_utility::teamplayercardsplash(var_0A,self);
-	scripts\mp\_matchdata::logkillstreakevent(param_01,var_03);
+	thread scripts\mp\utility::teamplayercardsplash(var_0A,self);
+	scripts\mp\matchdata::logkillstreakevent(param_01,var_03);
 	return 1;
 }
 
@@ -955,7 +955,7 @@ func_6CDD(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_0
 	self endon("disconnect");
 	foreach(var_0A, var_09 in param_00) {
 		param_03 = var_09.location;
-		if(scripts\mp\_utility::istrue(param_01)) {
+		if(scripts\mp\utility::istrue(param_01)) {
 			param_04 = var_09.angles;
 		}
 

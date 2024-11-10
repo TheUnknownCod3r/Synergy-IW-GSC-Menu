@@ -1,8 +1,8 @@
-/**********************************************************
+/**************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\maps\cp_rave\cp_rave_vo.gsc
-**********************************************************/
+ * Script: scripts\cp\maps\cp_rave\cp_rave_vo.gsc
+**************************************************/
 
 rave_vo_init() {
 	level.recent_vo = [];

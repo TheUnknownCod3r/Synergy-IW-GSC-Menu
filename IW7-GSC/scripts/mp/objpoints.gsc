@@ -1,8 +1,8 @@
-/********************************************
+/************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\objpoints.gsc
-********************************************/
+ * Script: scripts\mp\objpoints.gsc
+************************************/
 
 init() {
 	precacheshader("objpoint_default");

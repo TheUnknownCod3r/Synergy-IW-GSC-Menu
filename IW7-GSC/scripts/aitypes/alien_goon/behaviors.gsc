@@ -1,8 +1,8 @@
-/************************************************************
+/****************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\aitypes\alien_goon\behaviors.gsc
-************************************************************/
+ * Script: scripts\aitypes\alien_goon\behaviors.gsc
+****************************************************/
 
 initbehaviors(param_00) {
 	setupbehaviorstates();
@@ -29,9 +29,9 @@ updateeveryframe(param_00) {
 
 teleport_begin(param_00) {
 	scripts\aitypes\dlc4\behavior_utils::facepoint(self.var_AAFD);
-	self._blackboard.jumpdestinationpos = self.var_AAFD;
-	self._blackboard.jumpdestinationangles = vectortoangles(self.var_AAFD - self.origin * (1,1,0));
-	self._blackboard.jumpnextpos = undefined;
+	self.var_1198.jumpdestinationpos = self.var_AAFD;
+	self.var_1198.jumpdestinationangles = vectortoangles(self.var_AAFD - self.origin * (1,1,0));
+	self.var_1198.jumpnextpos = undefined;
 	scripts\asm\dlc4\dlc4_asm::setasmaction("jump");
 	scripts\aitypes\dlc4\bt_state_api::asm_wait_state_setup(param_00,"jump","jump");
 	scripts\aitypes\dlc4\bt_state_api::btstate_transitionstate(param_00,"jump");
@@ -50,7 +50,7 @@ teleport_tick(param_00) {
 teleport_end(param_00) {
 	var_01 = scripts\asm\dlc4\dlc4_asm::gettunedata();
 	self.nextjumpattack = gettime() + var_01.jump_attack_min_interval;
-	self._blackboard.jumpdestinationpos = undefined;
+	self.var_1198.jumpdestinationpos = undefined;
 	scripts\asm\dlc4\dlc4_asm::clearasmaction();
 	self.bteleporting = undefined;
 }
@@ -217,7 +217,7 @@ updatestumble(param_00) {
 		return 0;
 	}
 
-	if(isdefined(self._blackboard.requested_dodge_dir)) {
+	if(isdefined(self.var_1198.requested_dodge_dir)) {
 		return 0;
 	}
 
@@ -247,9 +247,9 @@ updatestumble(param_00) {
 
 updatedodge(param_00) {
 	var_01 = gettime();
-	if(isdefined(self._blackboard.requested_dodge_dir)) {
+	if(isdefined(self.var_1198.requested_dodge_dir)) {
 		if(self.lastdodgetime - var_01 > 150) {
-			self._blackboard.requested_dodge_dir = undefined;
+			self.var_1198.requested_dodge_dir = undefined;
 		}
 		else
 		{
@@ -312,8 +312,8 @@ updatedodge(param_00) {
 		}
 
 		if(isdefined(var_05)) {
-			self._blackboard.requested_dodge_dir = var_06;
-			self._blackboard.requested_dodge_scale = var_05;
+			self.var_1198.requested_dodge_dir = var_06;
+			self.var_1198.requested_dodge_scale = var_05;
 			return 1;
 		}
 	}
@@ -323,7 +323,7 @@ updatedodge(param_00) {
 }
 
 followenemy_begin(param_00) {
-	self.bt.instancedata[param_00] = spawnstruct();
+	self.var_3135.instancedata[param_00] = spawnstruct();
 }
 
 followenemy_tick(param_00) {
@@ -358,7 +358,7 @@ followenemy_tick(param_00) {
 }
 
 followenemy_end(param_00) {
-	self.bt.instancedata[param_00] = undefined;
+	self.var_3135.instancedata[param_00] = undefined;
 }
 
 jumpback(param_00) {

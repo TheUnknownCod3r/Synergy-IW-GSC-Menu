@@ -1,11 +1,11 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3560.gsc
-****************************/
+ * Script: 3560.gsc
+************************/
 
 init() {
-	level._effect["sonicPulseImpact"] = loadfx("vfx/iw7/_requests/mp_effects/vfx_force_push_distortion");
+	level._effect["sonicPulseImpact"] = loadfx("vfx\iw7\_requests\mp_effects\vfx_force_push_distortion");
 }
 
 func_72D3() {

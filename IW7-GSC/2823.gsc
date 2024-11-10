@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2823.gsc
+ * Script: 2823.gsc
 ***************************************/
 
 func_C0E1(var_00, var_01, var_02, var_03, var_04, var_05) {
@@ -108,9 +108,9 @@ func_C0DB(var_00) {
   var_03 = strtok(var_02, ",");
 
   if (var_3.size < 2)
-  thread scripts/sp/utility::play_sound_on_tag(var_02, undefined, 1);
+  thread scripts\sp\utility::play_sound_on_tag(var_02, undefined, 1);
   else
-  thread scripts/sp/utility::play_sound_on_tag(var_3[0], var_3[1], 1);
+  thread scripts\sp\utility::play_sound_on_tag(var_3[0], var_3[1], 1);
   }
 
   return 1;
@@ -122,7 +122,7 @@ func_C0DB(var_00) {
   if (isdefined(self.func_1EFF))
   self thread [[self.func_1EFF]](var_02, "j_head", 1);
   else if (!issentient(self))
-  thread scripts/sp/utility::play_sound_on_tag(var_02, "j_head", 1, var_02);
+  thread scripts\sp\utility::play_sound_on_tag(var_02, "j_head", 1, var_02);
   else
   self getyawtoenemy(var_02, "sounddone", 1);
 
@@ -131,13 +131,13 @@ func_C0DB(var_00) {
 
   if (var_01 == "sd_") {
   var_02 = getsubstr(var_00, 3);
-  thread scripts/sp/utility::func_10346(var_02);
+  thread scripts\sp\utility::func_10346(var_02);
   return 1;
   }
 
   if (var_01 == "sr_") {
   var_02 = getsubstr(var_00, 3);
-  level thread scripts/sp/utility::func_10350(var_02);
+  level thread scripts\sp\utility::func_10350(var_02);
   return 1;
   }
 
@@ -171,7 +171,7 @@ func_C0DB(var_00) {
   return 1;
   }
   else if (var_6[0] == "stop_exploder") {
-  scripts/sp/utility::func_10FEC(var_6[1]);
+  scripts\sp\utility::func_10FEC(var_6[1]);
   return 1;
   } else {
   playfxontag(level._effect[var_6[0]], self, var_6[1]);
@@ -211,7 +211,7 @@ func_C0DB(var_00) {
 
   if (var_01 == "psr_") {
   var_02 = getsubstr(var_00, 4);
-  scripts/sp/utility::func_DBEF(var_02);
+  scripts\sp\utility::func_DBEF(var_02);
   return 1;
   }
 
@@ -221,14 +221,14 @@ func_C0DB(var_00) {
   if (isdefined(self.func_1EFF))
   self thread [[self.func_1EFF]](var_02, "j_head", 1);
   else
-  thread scripts/sp/pip_util::func_CBA5(var_02);
+  thread scripts\sp\pip_util::func_CBA5(var_02);
 
   return 1;
   }
 
   if (var_01 == "pvo_") {
   var_02 = getsubstr(var_00, 4);
-  thread scripts/sp/utility::func_1034D(var_02);
+  thread scripts\sp\utility::func_1034D(var_02);
   return 1;
   }
 
@@ -280,19 +280,19 @@ func_7729(var_00, var_01) {
   var_0.func_7245 = 0;
   break;
   case "lookat_plr_head_on":
-  var_00 thread scripts/sp/utility::func_7799(level.player, 0.15, 0.7);
+  var_00 thread scripts\sp\utility::func_7799(level.player, 0.15, 0.7);
   break;
   case "lookat_plr_eyes_on":
-  var_00 thread scripts/sp/utility::func_7798(level.player, 4.0, 0.1);
+  var_00 thread scripts\sp\utility::func_7798(level.player, 4.0, 0.1);
   break;
   case "lookat_plr_off":
-  var_00 thread scripts/sp/utility::func_77B9(0.7);
+  var_00 thread scripts\sp\utility::func_77B9(0.7);
   break;
   case "lookat_plr_eyes_off":
-  var_00 thread scripts/sp/utility::func_7793(0.1);
+  var_00 thread scripts\sp\utility::func_7793(0.1);
   break;
   case "lookat_plr_head_off":
-  var_00 thread scripts/sp/utility::func_779E(0.7);
+  var_00 thread scripts\sp\utility::func_779E(0.7);
   break;
   case "bc_vo_start":
   var_00 notify("bc_vochat_start");
@@ -346,12 +346,12 @@ func_7729(var_00, var_01) {
   break;
   case "opsmap_scene_start":
   if (isdefined(var_0.func_9A30))
-  var_00 thread scripts/sp/interaction::func_CD50(var_0.func_9A30, var_0.func_C6B8);
+  var_00 thread scripts\sp\interaction::func_CD50(var_0.func_9A30, var_0.func_C6B8);
 
   break;
   case "opsmap_scene_end":
   if (isdefined(var_0.func_9A30))
-  var_00 thread scripts/sp/interaction::func_9A0F();
+  var_00 thread scripts\sp\interaction::func_9A0F();
 
   break;
   case "vr_npc_switch_fire_rate":
@@ -415,14 +415,14 @@ func_1ED8(var_00, var_01, var_02, var_03) {
   if (isdefined(var_0["sound_on_tag"]))
   var_05 = var_0["sound_on_tag"];
 
-  var_01 thread scripts/sp/utility::play_sound_on_tag(var_0["sound"], var_05, var_04);
+  var_01 thread scripts\sp\utility::play_sound_on_tag(var_0["sound"], var_05, var_04);
   }
 
   if (isdefined(var_0["playersound"]))
   level.player playsound(var_0["playersound"]);
 
   if (isdefined(var_0["playerdialogue"]))
-  level.player thread scripts/sp/utility::func_1034D(var_0["playerdialogue"]);
+  level.player thread scripts\sp\utility::func_1034D(var_0["playerdialogue"]);
 
   if (!var_2.func_54A9) {
   if (isdefined(var_0["dialog"]) && isdefined(var_2.func_53F2[var_0["dialog"]])) {
@@ -569,7 +569,7 @@ func_11A80(var_00, var_01, var_02, var_03) {
   while (isdefined(self) && !var_7.func_9032) {
   scripts\engine\utility::lock(var_04);
   func_1173F(var_07);
-  scripts/sp/utility::func_12BDD(var_04);
+  scripts\sp\utility::func_12BDD(var_04);
 
   if (var_7.func_10E51 == 1 && gettime() - var_7.func_A8EE > 3000)
   return;
@@ -752,7 +752,7 @@ func_6A85(var_00, var_01, var_02) {
   var_07 = getsubstr(var_05, 3);
 
   if (!issentient(self))
-  thread scripts/sp/utility::play_sound_on_tag(var_07, "j_head", 1, var_07);
+  thread scripts\sp\utility::play_sound_on_tag(var_07, "j_head", 1, var_07);
   else
   self getyawtoenemy(var_07, "face_sounddone", 1);
 
@@ -761,7 +761,7 @@ func_6A85(var_00, var_01, var_02) {
 
   if (var_06 == "pvo") {
   var_07 = getsubstr(var_05, 4);
-  thread scripts/sp/utility::func_1034D(var_07);
+  thread scripts\sp\utility::func_1034D(var_07);
   }
   }
   }

@@ -1,8 +1,8 @@
-/*******************************************************************
+/***********************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\maps\cp_disco\kung_fu_mode_crane.gsc
-*******************************************************************/
+ * Script: scripts\cp\maps\cp_disco\kung_fu_mode_crane.gsc
+***********************************************************/
 
 setup_kung_fu_crane_powers() {
 	crane_kill_fx();
@@ -15,7 +15,7 @@ setup_kung_fu_crane_powers() {
 }
 
 crane_kill_fx() {
-	level._effect["screen_blood"] = loadfx("vfx/iw7/levels/cp_disco/abilities/vfx_kf_crane_screen_blood.vfx");
+	level._effect["screen_blood"] = loadfx("vfx\iw7\levels\cp_disco\abilities\vfx_kf_crane_screen_blood.vfx");
 }
 
 crane_super_use(param_00) {

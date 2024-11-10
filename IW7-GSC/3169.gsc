@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3169.gsc
-****************************/
+ * Script: 3169.gsc
+************************/
 
 func_D490(param_00,param_01,param_02,param_03) {
 	self endon(param_01 + "_finished");
@@ -55,7 +55,7 @@ func_D490(param_00,param_01,param_02,param_03) {
 }
 
 func_116F6(param_00,param_01,param_02) {
-	scripts/asm/asm::asm_fireephemeralevent("grenade response","return throw complete");
+	scripts\asm\asm::asm_fireephemeralevent("grenade response","return throw complete");
 	scripts\anim\shared::placeweaponon(self.var_394,"right");
 	if(isdefined(self.var_C3F2)) {
 		self.objective_team = self.var_C3F2;
@@ -79,15 +79,15 @@ func_3EDB(param_00,param_01,param_02) {
 	var_05 = [];
 	if(var_04 < 600 && func_9E8C()) {
 		if(var_04 < 300) {
-			return scripts/asm/asm::asm_lookupanimfromalias(param_01,"throw_short");
+			return scripts\asm\asm::asm_lookupanimfromalias(param_01,"throw_short");
 		}
 		else
 		{
-			return scripts/asm/asm::asm_lookupanimfromalias(param_01,"throw_long");
+			return scripts\asm\asm::asm_lookupanimfromalias(param_01,"throw_long");
 		}
 	}
 
-	return scripts/asm/asm::asm_lookupanimfromalias(param_01,"throw_default");
+	return scripts\asm\asm::asm_lookupanimfromalias(param_01,"throw_default");
 }
 
 func_D48F(param_00,param_01,param_02,param_03) {

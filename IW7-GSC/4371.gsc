@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\4371.gsc
-****************************/
+ * Script: 4371.gsc
+************************/
 
 main() {
 	var_00 = scripts\engine\utility::createoneshoteffect("vfx_eu_cloud_camcentric_whiteoutclouds");

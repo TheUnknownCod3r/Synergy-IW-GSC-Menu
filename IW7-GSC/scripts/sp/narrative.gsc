@@ -1,8 +1,8 @@
-/********************************************
+/************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\sp\narrative.gsc
-********************************************/
+ * Script: scripts\sp\narrative.gsc
+************************************/
 
 func_BE57(param_00,param_01,param_02) {
 	setdvarifuninitialized("narrative_debug",0);

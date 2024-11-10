@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\4011.gsc
-****************************/
+ * Script: 4011.gsc
+************************/
 
 main() {
 	precachempanim("IW7_cp_frontend_feeding_walk_off_civ");
@@ -50,15 +50,15 @@ main() {
 	precachemodel("head_bg_var_head_male_bc_02_head_male_bc_05");
 	precachemodel("head_bg_var_head_male_bc_02_head_male_bc_07");
 	precachemodel("weapon_revolver_wm");
-	level._effect["zombie_attack"] = loadfx("vfx/iw7/core/zombie/blood/vfx_zmb_blood_frontend.vfx");
-	level._effect["shot_impact"] = loadfx("vfx/iw7/core/zombie/blood/vfx_zmb_blood_frontend.vfx");
-	level._effect["vfx_zb_sj_smk"] = loadfx("vfx/iw7/core/zombie/pack_a_punch/vfx_zb_sj_smk.vfx");
-	level._effect["yellow_eye_glow"] = loadfx("vfx/iw7/core/zombie/vfx_zombie_yellow_eye_loop.vfx");
-	level._effect["fnfeyes"] = loadfx("vfx/iw7/core/zombie/vfx_fnf_gloweyes.vfx");
-	level._effect["muzzleflash"] = loadfx("vfx/iw7/core/zombie/vfx_frontend_muzzle_flash.vfx");
-	level._effect["vfx_zb_pack_grd_d"] = loadfx("vfx/iw7/core/zombie/frontend/vfx_zb_d.vfx");
-	level._effect["vfx_zb_pack_grd_e"] = loadfx("vfx/iw7/core/zombie/frontend/vfx_zb_e.vfx");
-	level._effect["vfx_zb_pack_grd_c"] = loadfx("vfx/iw7/core/zombie/frontend/vfx_zb_c.vfx");
-	level._effect["vfx_zb_pack_grd_b"] = loadfx("vfx/iw7/core/zombie/frontend/vfx_zb_b.vfx");
-	level._effect["vfx_zb_pack_grd_a"] = loadfx("vfx/iw7/core/zombie/frontend/vfx_zb_a.vfx");
+	level._effect["zombie_attack"] = loadfx("vfx\iw7\core\zombie\blood\vfx_zmb_blood_frontend.vfx");
+	level._effect["shot_impact"] = loadfx("vfx\iw7\core\zombie\blood\vfx_zmb_blood_frontend.vfx");
+	level._effect["vfx_zb_sj_smk"] = loadfx("vfx\iw7\core\zombie\pack_a_punch\vfx_zb_sj_smk.vfx");
+	level._effect["yellow_eye_glow"] = loadfx("vfx\iw7\core\zombie\vfx_zombie_yellow_eye_loop.vfx");
+	level._effect["fnfeyes"] = loadfx("vfx\iw7\core\zombie\vfx_fnf_gloweyes.vfx");
+	level._effect["muzzleflash"] = loadfx("vfx\iw7\core\zombie\vfx_frontend_muzzle_flash.vfx");
+	level._effect["vfx_zb_pack_grd_d"] = loadfx("vfx\iw7\core\zombie\frontend\vfx_zb_d.vfx");
+	level._effect["vfx_zb_pack_grd_e"] = loadfx("vfx\iw7\core\zombie\frontend\vfx_zb_e.vfx");
+	level._effect["vfx_zb_pack_grd_c"] = loadfx("vfx\iw7\core\zombie\frontend\vfx_zb_c.vfx");
+	level._effect["vfx_zb_pack_grd_b"] = loadfx("vfx\iw7\core\zombie\frontend\vfx_zb_b.vfx");
+	level._effect["vfx_zb_pack_grd_a"] = loadfx("vfx\iw7\core\zombie\frontend\vfx_zb_a.vfx");
 }

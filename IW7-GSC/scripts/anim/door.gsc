@@ -1,8 +1,8 @@
-/*****************************************
+/*********************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\anim\door.gsc
-*****************************************/
+ * Script: scripts\anim\door.gsc
+*********************************/
 
 func_5A09() {
 	self endon("killanimscript");
@@ -59,7 +59,7 @@ func_5817(param_00) {
 	self notify("move_interrupt");
 	self.var_12DEF = undefined;
 	self aiclearanim(%combatrun,0.2);
-	self.var_1491.movement = "stop";
+	self.a.movement = "stop";
 	self waittill("done_grenade_throw");
 	self orientmode("face default");
 	self.var_B7B5 = gettime() + 5000;
@@ -104,7 +104,7 @@ func_5A08(param_00,param_01,param_02,param_03,param_04) {
 			return;
 		}
 
-		if(!self seerecently(self.isnodeoccupied,0.2) && self.var_1491.pose == "stand" && func_56F2(self.var_10C.origin - param_00.origin,360000,16384)) {
+		if(!self seerecently(self.isnodeoccupied,0.2) && self.a.pose == "stand" && func_56F2(self.isnodeoccupied.origin - param_00.origin,360000,16384)) {
 			if(isdefined(param_00.var_BF7D) && param_00.var_BF7D > gettime()) {
 				return;
 			}
@@ -192,7 +192,7 @@ func_56F2(param_00,param_01,param_02) {
 
 func_C586(param_00,param_01) {
 	var_02 = param_00.origin - self.origin;
-	var_03 = param_00.origin - self.var_10C.origin;
+	var_03 = param_00.origin - self.isnodeoccupied.origin;
 	return vectordot(var_02,param_01) * vectordot(var_03,param_01) > 0;
 }
 

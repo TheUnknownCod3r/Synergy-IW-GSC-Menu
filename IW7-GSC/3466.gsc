@@ -1,12 +1,12 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\3466.gsc
+ * Script: 3466.gsc
 ***************************************/
 
 init() {
   scripts\mp\killstreaks\killstreaks::registerkillstreak("ball_drone_radar", ::tryuseballdrone);
   scripts\mp\killstreaks\killstreaks::registerkillstreak("ball_drone_backup", ::tryuseballdrone);
-  level._effect["kamikaze_drone_explode"] = loadfx("vfx/iw7/_requests/mp/killstreak/vfx_vulture_exp_vari.vfx");
+  level._effect["kamikaze_drone_explode"] = loadfx("vfx\iw7\_requests\mp\killstreak\vfx_vulture_exp_vari.vfx");
   level.balldronesettings = [];
   level.balldronesettings["ball_drone_radar"] = spawnstruct();
   level.balldronesettings["ball_drone_radar"].timeout = 60.0;
@@ -16,8 +16,8 @@ init() {
   level.balldronesettings["ball_drone_radar"].vehicleinfo = "ball_drone_mp";
   level.balldronesettings["ball_drone_radar"].modelbase = "veh_mil_air_un_pocketdrone_mp";
   level.balldronesettings["ball_drone_radar"].teamsplash = "used_ball_drone_radar";
-  level.balldronesettings["ball_drone_radar"].fxid_sparks = loadfx("vfx/core/mp/killstreaks/vfx_ims_sparks");
-  level.balldronesettings["ball_drone_radar"].fxid_explode = loadfx("vfx/core/expl/vehicle/ball/vfx_exp_ball_drone.vfx");
+  level.balldronesettings["ball_drone_radar"].fxid_sparks = loadfx("vfx\core\mp\killstreaks\vfx_ims_sparks");
+  level.balldronesettings["ball_drone_radar"].fxid_explode = loadfx("vfx\core\expl\vehicle\ball\vfx_exp_ball_drone.vfx");
   level.balldronesettings["ball_drone_radar"].sound_explode = "ball_drone_explode";
   level.balldronesettings["ball_drone_radar"].vodestroyed = "nowl_destroyed";
   level.balldronesettings["ball_drone_radar"].votimedout = "nowl_gone";
@@ -27,14 +27,14 @@ init() {
   level.balldronesettings["ball_drone_radar"].fxid_light2 = [];
   level.balldronesettings["ball_drone_radar"].fxid_light3 = [];
   level.balldronesettings["ball_drone_radar"].fxid_light4 = [];
-  level.balldronesettings["ball_drone_radar"].fxid_light1["enemy"] = loadfx("vfx/core/mp/killstreaks/vfx_light_detonator_blink");
-  level.balldronesettings["ball_drone_radar"].fxid_light2["enemy"] = loadfx("vfx/core/mp/killstreaks/vfx_light_detonator_blink");
-  level.balldronesettings["ball_drone_radar"].fxid_light3["enemy"] = loadfx("vfx/core/mp/killstreaks/vfx_light_detonator_blink");
-  level.balldronesettings["ball_drone_radar"].fxid_light4["enemy"] = loadfx("vfx/core/mp/killstreaks/vfx_light_detonator_blink");
-  level.balldronesettings["ball_drone_radar"].fxid_light1["friendly"] = loadfx("vfx/misc/light_mine_blink_friendly");
-  level.balldronesettings["ball_drone_radar"].fxid_light2["friendly"] = loadfx("vfx/misc/light_mine_blink_friendly");
-  level.balldronesettings["ball_drone_radar"].fxid_light3["friendly"] = loadfx("vfx/misc/light_mine_blink_friendly");
-  level.balldronesettings["ball_drone_radar"].fxid_light4["friendly"] = loadfx("vfx/misc/light_mine_blink_friendly");
+  level.balldronesettings["ball_drone_radar"].fxid_light1["enemy"] = loadfx("vfx\core\mp\killstreaks\vfx_light_detonator_blink");
+  level.balldronesettings["ball_drone_radar"].fxid_light2["enemy"] = loadfx("vfx\core\mp\killstreaks\vfx_light_detonator_blink");
+  level.balldronesettings["ball_drone_radar"].fxid_light3["enemy"] = loadfx("vfx\core\mp\killstreaks\vfx_light_detonator_blink");
+  level.balldronesettings["ball_drone_radar"].fxid_light4["enemy"] = loadfx("vfx\core\mp\killstreaks\vfx_light_detonator_blink");
+  level.balldronesettings["ball_drone_radar"].fxid_light1["friendly"] = loadfx("vfx\misc\light_mine_blink_friendly");
+  level.balldronesettings["ball_drone_radar"].fxid_light2["friendly"] = loadfx("vfx\misc\light_mine_blink_friendly");
+  level.balldronesettings["ball_drone_radar"].fxid_light3["friendly"] = loadfx("vfx\misc\light_mine_blink_friendly");
+  level.balldronesettings["ball_drone_radar"].fxid_light4["friendly"] = loadfx("vfx\misc\light_mine_blink_friendly");
   level.balldronesettings["ball_drone_radar"].func_10B83 = 110;
   level.balldronesettings["ball_drone_radar"].func_4AB0 = 70;
   level.balldronesettings["ball_drone_radar"].func_DA90 = 36;
@@ -48,7 +48,7 @@ init() {
   level.balldronesettings["ball_drone_backup"].vehicleinfo = "backup_drone_mp";
   level.balldronesettings["ball_drone_backup"].modelbase = "veh_mil_air_un_pocketdrone_mp";
   level.balldronesettings["ball_drone_backup"].teamsplash = "used_ball_drone_backup";
-  level.balldronesettings["ball_drone_backup"].fxid_explode = loadfx("vfx/iw7/core/mp/killstreaks/vfx_apex_dest_exp.vfx");
+  level.balldronesettings["ball_drone_backup"].fxid_explode = loadfx("vfx\iw7\core\mp\killstreaks\vfx_apex_dest_exp.vfx");
   level.balldronesettings["ball_drone_backup"].sound_explode = "ball_drone_explode";
   level.balldronesettings["ball_drone_backup"].vodestroyed = "ball_drone_backup_destroy";
   level.balldronesettings["ball_drone_backup"].votimedout = "ball_drone_backup_timeout";
@@ -68,8 +68,8 @@ init() {
   level.balldronesettings["ball_drone_backup"].lockontime = 0.075;
   level.balldronesettings["ball_drone_backup"].playfxcallback = ::func_273C;
   level.balldronesettings["ball_drone_backup"].fxid_light1 = [];
-  level.balldronesettings["ball_drone_backup"].fxid_light1["enemy"] = loadfx("vfx/core/mp/killstreaks/vfx_light_detonator_blink");
-  level.balldronesettings["ball_drone_backup"].fxid_light1["friendly"] = loadfx("vfx/misc/light_mine_blink_friendly");
+  level.balldronesettings["ball_drone_backup"].fxid_light1["enemy"] = loadfx("vfx\core\mp\killstreaks\vfx_light_detonator_blink");
+  level.balldronesettings["ball_drone_backup"].fxid_light1["friendly"] = loadfx("vfx\misc\light_mine_blink_friendly");
   level.balldronesettings["ball_drone_backup"].func_10B83 = 110;
   level.balldronesettings["ball_drone_backup"].func_4AB0 = 70;
   level.balldronesettings["ball_drone_backup"].func_DA90 = 36;
@@ -83,8 +83,8 @@ init() {
   level.balldronesettings["ball_drone_ability_pet"].vehicleinfo = "ball_drone_ability_pet_mp";
   level.balldronesettings["ball_drone_ability_pet"].modelbase = "veh_mil_air_un_pocketdrone_mp";
   level.balldronesettings["ball_drone_ability_pet"].teamsplash = undefined;
-  level.balldronesettings["ball_drone_ability_pet"].fxid_sparks = loadfx("vfx/core/mp/killstreaks/vfx_ims_sparks");
-  level.balldronesettings["ball_drone_ability_pet"].fxid_explode = loadfx("vfx/core/expl/vehicle/ball/vfx_exp_ball_drone.vfx");
+  level.balldronesettings["ball_drone_ability_pet"].fxid_sparks = loadfx("vfx\core\mp\killstreaks\vfx_ims_sparks");
+  level.balldronesettings["ball_drone_ability_pet"].fxid_explode = loadfx("vfx\core\expl\vehicle\ball\vfx_exp_ball_drone.vfx");
   level.balldronesettings["ball_drone_ability_pet"].sound_explode = "ball_drone_explode";
   level.balldronesettings["ball_drone_ability_pet"].vodestroyed = undefined;
   level.balldronesettings["ball_drone_ability_pet"].votimedout = undefined;
@@ -95,14 +95,14 @@ init() {
   level.balldronesettings["ball_drone_ability_pet"].fxid_light2 = [];
   level.balldronesettings["ball_drone_ability_pet"].fxid_light3 = [];
   level.balldronesettings["ball_drone_ability_pet"].fxid_light4 = [];
-  level.balldronesettings["ball_drone_ability_pet"].fxid_light1["enemy"] = loadfx("vfx/core/mp/killstreaks/vfx_ball_drone_ability_1");
-  level.balldronesettings["ball_drone_ability_pet"].fxid_light2["enemy"] = loadfx("vfx/core/mp/killstreaks/vfx_ball_drone_ability_2");
-  level.balldronesettings["ball_drone_ability_pet"].fxid_light3["enemy"] = loadfx("vfx/core/mp/killstreaks/vfx_ball_drone_ability_3");
-  level.balldronesettings["ball_drone_ability_pet"].fxid_light4["enemy"] = loadfx("vfx/core/mp/killstreaks/vfx_ball_drone_ability_4");
-  level.balldronesettings["ball_drone_ability_pet"].fxid_light1["friendly"] = loadfx("vfx/core/mp/killstreaks/vfx_ball_drone_ability_1");
-  level.balldronesettings["ball_drone_ability_pet"].fxid_light2["friendly"] = loadfx("vfx/core/mp/killstreaks/vfx_ball_drone_ability_2");
-  level.balldronesettings["ball_drone_ability_pet"].fxid_light3["friendly"] = loadfx("vfx/core/mp/killstreaks/vfx_ball_drone_ability_3");
-  level.balldronesettings["ball_drone_ability_pet"].fxid_light4["friendly"] = loadfx("vfx/core/mp/killstreaks/vfx_ball_drone_ability_4");
+  level.balldronesettings["ball_drone_ability_pet"].fxid_light1["enemy"] = loadfx("vfx\core\mp\killstreaks\vfx_ball_drone_ability_1");
+  level.balldronesettings["ball_drone_ability_pet"].fxid_light2["enemy"] = loadfx("vfx\core\mp\killstreaks\vfx_ball_drone_ability_2");
+  level.balldronesettings["ball_drone_ability_pet"].fxid_light3["enemy"] = loadfx("vfx\core\mp\killstreaks\vfx_ball_drone_ability_3");
+  level.balldronesettings["ball_drone_ability_pet"].fxid_light4["enemy"] = loadfx("vfx\core\mp\killstreaks\vfx_ball_drone_ability_4");
+  level.balldronesettings["ball_drone_ability_pet"].fxid_light1["friendly"] = loadfx("vfx\core\mp\killstreaks\vfx_ball_drone_ability_1");
+  level.balldronesettings["ball_drone_ability_pet"].fxid_light2["friendly"] = loadfx("vfx\core\mp\killstreaks\vfx_ball_drone_ability_2");
+  level.balldronesettings["ball_drone_ability_pet"].fxid_light3["friendly"] = loadfx("vfx\core\mp\killstreaks\vfx_ball_drone_ability_3");
+  level.balldronesettings["ball_drone_ability_pet"].fxid_light4["friendly"] = loadfx("vfx\core\mp\killstreaks\vfx_ball_drone_ability_4");
   level.balldronesettings["ball_drone_ability_pet"].func_E192 = 1;
   level.balldronesettings["ball_drone_ability_pet"].func_10B83 = 95;
   level.balldronesettings["ball_drone_ability_pet"].func_4AB0 = 60;
@@ -112,7 +112,7 @@ init() {
   level.balldrones = [];
   level.balldronepathnodes = getallnodes();
   var_00 = ["passive_guard", "passive_no_radar", "passive_self_destruct", "passive_decreased_health", "passive_seeker", "passive_decreased_speed"];
-  scripts/mp/killstreak_loot::func_DF07("ball_drone_backup", var_00);
+  scripts\mp\killstreak_loot::func_DF07("ball_drone_backup", var_00);
 }
 
 tryuseballdrone(var_00) {
@@ -154,7 +154,7 @@ useballdrone(var_00, var_01) {
   thread startballdrone(var_03);
   self.balldrone thread func_CA50();
   var_04 = level.balldronesettings[var_00].teamsplash;
-  var_05 = scripts/mp/killstreak_loot::getrarityforlootitem(var_1.variantid);
+  var_05 = scripts\mp\killstreak_loot::getrarityforlootitem(var_1.variantid);
 
   if (var_05 != "")
   var_04 = var_04 + "_" + var_05;
@@ -203,15 +203,15 @@ createballdrone(var_00, var_01) {
   var_10 = level.balldronesettings[var_00].modelbase;
   var_11 = level.balldronesettings[var_00].maxhealth;
   var_12 = &"KILLSTREAKS_HINTS_VULTURE_SUPPORT";
-  var_13 = scripts/mp/killstreak_loot::getrarityforlootitem(var_1.variantid);
+  var_13 = scripts\mp\killstreak_loot::getrarityforlootitem(var_1.variantid);
 
   if (var_13 != "")
   var_10 = var_10 + "_" + var_13;
 
-  if (scripts/mp/killstreaks/utility::func_A69F(var_01, "passive_self_destruct"))
+  if (scripts\mp\killstreaks\utility::func_A69F(var_01, "passive_self_destruct"))
   var_11 = int(var_11 / 1.1);
 
-  if (scripts/mp/killstreaks/utility::func_A69F(var_01, "passive_guard"))
+  if (scripts\mp\killstreaks\utility::func_A69F(var_01, "passive_guard"))
   var_12 = &"KILLSTREAKS_HINTS_VULTURE_GUARD";
 
   var_14 = spawnhelicopter(self, var_04, var_02, level.balldronesettings[var_00].vehicleinfo, var_10);
@@ -243,7 +243,7 @@ createballdrone(var_00, var_01) {
   var_14 _meth_84E0(1);
   var_14.useobj = spawn("script_model", var_14.origin);
   var_14.useobj linkto(var_14, "tag_origin");
-  var_14 scripts/mp/killstreaks/utility::func_1843(var_14.balldronetype, "Killstreak_Ground", var_14.owner, 1);
+  var_14 scripts\mp\killstreaks\utility::func_1843(var_14.balldronetype, "Killstreak_Ground", var_14.owner, 1);
 
   if (level.teambased)
   var_14 scripts\mp\entityheadicons::setteamheadicon(var_14.team, (0, 0, 25));
@@ -556,7 +556,7 @@ startballdrone(var_00) {
   var_00 vehicle_setspeed(var_0.speed, 10, 10);
 
   if (var_0.balldronetype == "ball_drone_backup") {
-  if (scripts/mp/killstreaks/utility::func_A69F(var_0.streakinfo, "passive_seeker")) {
+  if (scripts\mp\killstreaks\utility::func_A69F(var_0.streakinfo, "passive_seeker")) {
   var_00 thread balldrone_patrollevel();
   var_00 thread balldrone_watchfornearbytargets();
   } else {
@@ -954,7 +954,7 @@ balldrone_watchmodeswitch() {
   self endon("leaving");
   self.owner endon("disconnect");
   self endon("owner_gone");
-  self.useobj scripts/mp/killstreaks/utility::func_F774(self.owner, self.func_4C08, 360, 360, 30000, 30000, 3);
+  self.useobj scripts\mp\killstreaks\utility::func_F774(self.owner, self.func_4C08, 360, 360, 30000, 30000, 3);
 
   for (;;) {
   self.useobj waittill("trigger", var_00);
@@ -985,7 +985,7 @@ balldrone_watchmodeswitch() {
   if (self.combatmode == "ASSAULT") {
   var_02 = &"KILLSTREAKS_HINTS_VULTURE_SUPPORT";
 
-  if (scripts/mp/killstreaks/utility::func_A69F(self.streakinfo, "passive_guard"))
+  if (scripts\mp\killstreaks\utility::func_A69F(self.streakinfo, "passive_guard"))
   var_02 = &"KILLSTREAKS_HINTS_VULTURE_GUARD";
 
   self getplayerkillstreakcombatmode();
@@ -998,7 +998,7 @@ balldrone_watchmodeswitch() {
   } else {
   var_02 = &"KILLSTREAKS_HINTS_VULTURE_ASSAULT";
 
-  if (scripts/mp/killstreaks/utility::func_A69F(self.streakinfo, "passive_guard")) {
+  if (scripts\mp\killstreaks\utility::func_A69F(self.streakinfo, "passive_guard")) {
   self getplayerkillstreakcombatmode();
   self.func_2525 = undefined;
   balldrone_guardlocation();
@@ -1016,7 +1016,7 @@ balldrone_watchmodeswitch() {
   self.useobj makeunusable();
   scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(1);
   self.func_4C08 = var_02;
-  self.useobj scripts/mp/killstreaks/utility::func_F774(self.owner, self.func_4C08, 360, 360, 30000, 30000, 3);
+  self.useobj scripts\mp\killstreaks\utility::func_F774(self.owner, self.func_4C08, 360, 360, 30000, 30000, 3);
   break;
   }
 
@@ -1031,7 +1031,7 @@ getothermode(var_00, var_01) {
   if (var_00 == "ASSAULT") {
   var_00 = "SUPPORT";
 
-  if (scripts/mp/killstreaks/utility::func_A69F(var_01, "passive_guard"))
+  if (scripts\mp\killstreaks\utility::func_A69F(var_01, "passive_guard"))
   var_00 = "GUARD";
   }
   else
@@ -1245,12 +1245,12 @@ balldrone_backup_turret_handledamage() {
 
 modifydamage(var_00, var_01, var_02, var_03, var_04) {
   var_05 = var_03;
-  var_05 = scripts/mp/killstreaks/utility::getmodifiedantikillstreakdamage(var_00, var_01, var_02, var_05, self.maxhealth, 1, 1, 2);
+  var_05 = scripts\mp\killstreaks\utility::getmodifiedantikillstreakdamage(var_00, var_01, var_02, var_05, self.maxhealth, 1, 1, 2);
   return var_05;
 }
 
 handledeathdamage(var_00, var_01, var_02, var_03) {
-  if (scripts/mp/killstreaks/utility::func_A69F(self.streakinfo, "passive_self_destruct")) {
+  if (scripts\mp\killstreaks\utility::func_A69F(self.streakinfo, "passive_self_destruct")) {
   self notify("stop_monitor_damage");
   var_04 = 2.5;
   self.inactive = 1;
@@ -1279,7 +1279,7 @@ handledeathdamage(var_00, var_01, var_02, var_03) {
 
   var_06 = level.balldronesettings[self.balldronetype];
   var_07 = "callout_destroyed_ball_drone";
-  var_08 = scripts/mp/killstreak_loot::getrarityforlootitem(self.streakinfo.variantid);
+  var_08 = scripts\mp\killstreak_loot::getrarityforlootitem(self.streakinfo.variantid);
 
   if (var_08 != "")
   var_07 = var_07 + "_" + var_08;
@@ -1307,7 +1307,7 @@ watchempdamage() {
 
   for (;;) {
   self waittill("emp_damage", var_00, var_01, var_02, var_03, var_04);
-  scripts/mp/killstreaks/utility::dodamagetokillstreak(100, var_00, var_00, self.team, var_02, var_04, var_03);
+  scripts\mp\killstreaks\utility::dodamagetokillstreak(100, var_00, var_00, self.team, var_02, var_04, var_03);
 
   if (!scripts\mp\utility\game::istrue(self.stunned))
   thread balldrone_stunned(var_01);

@@ -1,8 +1,8 @@
-/*********************************************************
+/*************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\agents\gametype_mugger.gsc
-*********************************************************/
+ * Script: scripts\mp\agents\gametype_mugger.gsc
+*************************************************/
 
 main() {
 	setup_callbacks();

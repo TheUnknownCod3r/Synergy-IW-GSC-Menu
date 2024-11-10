@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\2822.gsc
-****************************/
+ * Script: 2822.gsc
+************************/
 
 init() {
 	if(!isdefined(level.var_EC8D)) {
@@ -185,7 +185,7 @@ func_1ECE(param_00,param_01,param_02) {
 func_1ED0(param_00,param_01,param_02,param_03) {
 	var_04 = [];
 	var_04[0] = param_00;
-	if(scripts/sp/interaction::func_9C26(self) || scripts/sp/interaction::func_9CD7(self)) {
+	if(scripts\sp\interaction::func_9C26(self) || scripts\sp\interaction::func_9CD7(self)) {
 		foreach(param_00 in var_04) {
 			if(isdefined(self.var_EE92)) {
 				param_00.asm.var_4C86.interaction = self.var_EE92;
@@ -195,14 +195,14 @@ func_1ED0(param_00,param_01,param_02,param_03) {
 			param_00.asm.var_4C86.interaction = self.script_noteworthy;
 		}
 
-		var_07 = scripts/sp/interaction::func_7A45(param_00.asm.var_4C86.interaction);
+		var_07 = scripts\sp\interaction::func_7A45(param_00.asm.var_4C86.interaction);
 		if(!isdefined(var_07)) {
-			var_07 = scripts/sp/interaction::func_7CA7(param_00.asm.var_4C86.interaction);
+			var_07 = scripts\sp\interaction::func_7CA7(param_00.asm.var_4C86.interaction);
 		}
 
 		param_00.asm.var_4C86.var_22F1 = undefined;
 		if(isdefined(var_07)) {
-			param_00.asm.var_4C86.var_22F1 = param_00 scripts/sp/interaction::func_7837(var_07);
+			param_00.asm.var_4C86.var_22F1 = param_00 scripts\sp\interaction::func_7837(var_07);
 		}
 
 		if(isdefined(param_00.asm.var_4C86.var_22F1)) {
@@ -1061,7 +1061,7 @@ modify_moveplaybackrate_together(param_00) {
 				var_0B = var_01 * -1;
 			}
 
-			var_05 scripts/asm/asm::func_237B(1 + var_0B);
+			var_05 scripts\asm\asm::func_237B(1 + var_0B);
 		}
 
 		wait(0.05);
@@ -1069,7 +1069,7 @@ modify_moveplaybackrate_together(param_00) {
 
 	foreach(var_05 in param_00) {
 		if(isalive(var_05)) {
-			var_05 scripts/asm/asm::func_237B(1);
+			var_05 scripts\asm\asm::func_237B(1);
 		}
 	}
 }
@@ -1090,7 +1090,7 @@ func_1F13(param_00,param_01) {
 }
 
 func_1F0A(param_00,param_01,param_02,param_03) {
-	if(scripts/sp/interaction::func_9C26(self)) {
+	if(scripts\sp\interaction::func_9C26(self)) {
 		foreach(var_05 in param_00) {
 			if(isdefined(self.var_EE92)) {
 				var_05.asm.var_4C86.interaction = self.var_EE92;
@@ -1315,14 +1315,14 @@ func_DD0F(param_00,param_01) {
 	self.var_C3B9 = self.disablearrivals;
 	self.disablearrivals = 0;
 	self.var_DD0B = undefined;
-	var_02 = scripts/sp/interaction::func_7A45(self.asm.var_4C86.interaction);
+	var_02 = scripts\sp\interaction::func_7A45(self.asm.var_4C86.interaction);
 	if(!isdefined(var_02)) {
-		var_02 = scripts/sp/interaction::func_7CA7(self.asm.var_4C86.interaction);
+		var_02 = scripts\sp\interaction::func_7CA7(self.asm.var_4C86.interaction);
 	}
 
-	self.asm.var_4C86.var_22F1 = scripts/sp/interaction::func_7837(var_02);
+	self.asm.var_4C86.var_22F1 = scripts\sp\interaction::func_7837(var_02);
 	self.asm.var_4C86.var_22E3 = param_01;
-	self.asm.var_4C86.var_92FA = scripts/sp/interaction::func_7A30(var_02);
+	self.asm.var_4C86.var_92FA = scripts\sp\interaction::func_7A30(var_02);
 	self.asm.var_4C86.var_22F6 = 1;
 	if(isdefined(var_02.var_22E1)) {
 		self.asm.var_4C86.var_4C38 = var_02.var_22E1;
@@ -1364,12 +1364,12 @@ func_DD10() {
 	self.vectortoyaw = self.var_C3FD;
 	self.vehicle_getarray = self.var_C3FE;
 	self.disablearrivals = self.var_C3B9;
-	var_00 = scripts/sp/interaction::func_7A45(self.asm.var_4C86.interaction);
+	var_00 = scripts\sp\interaction::func_7A45(self.asm.var_4C86.interaction);
 	if(!isdefined(var_00)) {
-		var_00 = scripts/sp/interaction::func_7CA7(self.asm.var_4C86.interaction);
+		var_00 = scripts\sp\interaction::func_7CA7(self.asm.var_4C86.interaction);
 	}
 
-	self.asm.var_4C86.var_697F = scripts/sp/interaction::func_79A5(var_00);
+	self.asm.var_4C86.var_697F = scripts\sp\interaction::func_79A5(var_00);
 	self.asm.var_4C86.interaction = undefined;
 	self.asm.var_4C86.var_22F1 = undefined;
 	self.asm.var_4C86.var_22E3 = undefined;
@@ -1508,7 +1508,7 @@ func_1F0C(param_00,param_01,param_02,param_03,param_04) {
 
 func_1F0B(param_00,param_01,param_02,param_03) {
 	self endon("death");
-	if(scripts/sp/interaction::func_9C26(self)) {
+	if(scripts\sp\interaction::func_9C26(self)) {
 		foreach(var_05 in param_00) {
 			if(isdefined(self.script_noteworthy)) {
 				var_05.asm.var_4C86.interaction = self.script_noteworthy;

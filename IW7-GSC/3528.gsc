@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\3528.gsc
+ * Script: 3528.gsc
 ***************************************/
 
 init() {
@@ -13,7 +13,7 @@ init() {
   level.func_4418["removeComExpBenefits"] = ::func_E0DF;
   level.func_4418["getRadarStrengthForTeam"] = ::disableusability;
   level.func_4418["getRadarStrengthForPlayer"] = ::_meth_80A7;
-  level._effect["uav_beam"] = loadfx("vfx/old/_requests/mp_gameplay/vfx_energy_beam");
+  level._effect["uav_beam"] = loadfx("vfx\old\_requests\mp_gameplay\vfx_energy_beam");
   unblockteamradar("axis");
   unblockteamradar("allies");
   level thread func_12F82();
@@ -51,7 +51,7 @@ init() {
   var_0.func_C55B = ::func_12F80;
   var_0.ondeathdelegate = ::ondeath_clearscriptedanim;
   var_0.func_C4F3 = ::func_C4F2;
-  var_0.deathvfx = loadfx("vfx/core/mp/killstreaks/vfx_ballistic_vest_death");
+  var_0.deathvfx = loadfx("vfx\core\mp\killstreaks\vfx_ballistic_vest_death");
   level.placeableconfigs["uplink"] = var_00;
   level.placeableconfigs["uplink_support"] = var_00;
 }

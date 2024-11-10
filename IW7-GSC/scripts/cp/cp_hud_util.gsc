@@ -1,8 +1,8 @@
-/**********************************************
+/**************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\cp_hud_util.gsc
-**********************************************/
+ * Script: scripts\cp\cp_hud_util.gsc
+**************************************/
 
 mt_getprogress(param_00) {
 	return self getplayerdata("cp","meritProgress",param_00);
@@ -31,7 +31,7 @@ mt_setstate(param_00,param_01) {
 }
 
 mt_gettarget(param_00,param_01) {
-	return int(tablelookup("cp/allMeritsTable.csv",0,param_00,10 + param_01 * 3));
+	return int(tablelookup("cp\allMeritsTable.csv",0,param_00,10 + param_01 * 3));
 }
 
 playpainoverlay(param_00,param_01,param_02) {

@@ -1,16 +1,16 @@
-/*********************************************************
+/*************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\maps\mp_depot\mp_depot.gsc
-*********************************************************/
+ * Script: scripts\mp\maps\mp_depot\mp_depot.gsc
+*************************************************/
 
 main() {
 	scripts\mp\maps\mp_depot\mp_depot_precache::main();
 	scripts\mp\maps\mp_depot\gen\mp_depot_art::main();
 	scripts\mp\maps\mp_depot\mp_depot_fx::main();
-	scripts\mp\_load::main();
+	scripts\mp\load::main();
 	level.var_C7B3 = getentarray("OutOfBounds","targetname");
-	scripts\mp\_compass::func_FACD("compass_map_mp_depot");
+	scripts\mp\compass::setupminimap("compass_map_mp_depot");
 	setdvar("r_lightGridEnableTweaks",1);
 	setdvar("r_lightGridIntensity",1.33);
 	setdvar("r_umbraMinObjectContribution",8);
@@ -19,8 +19,8 @@ main() {
 	game["defenders"] = "axis";
 	game["allies_outfit"] = "urban";
 	game["axis_outfit"] = "woodland";
-	level._effect["train_move_FX"] = loadfx("vfx/iw7/levels/mp_depot/vfx_train_sparks.vfx");
-	thread scripts\mp\_animation_suite::func_1FAA();
+	level._effect["train_move_FX"] = loadfx("vfx\iw7\levels\mp_depot\vfx_train_sparks.vfx");
+	thread scripts\mp\animation_suite::animationsuite();
 	thread setuptrain();
 	thread fix_collision();
 	fix_broshot();
@@ -105,7 +105,7 @@ setuptrain() {
 	var_01.killtrigger enablelinkto();
 	var_01.killtrigger linkto(var_01);
 	var_01.var_9EAC = 0;
-	var_01.initialstruct = scripts\common\utility::getstruct("trainStartPos_01","targetname");
+	var_01.initialstruct = scripts\engine\utility::getstruct("trainStartPos_01","targetname");
 	var_01 moveto(var_01.initialstruct.origin,1,0,0);
 	var_01 rotateto(var_01.initialstruct.angles,1,0,0);
 	var_01.car02 = getent("trainCar_02","targetname");
@@ -118,10 +118,10 @@ setuptrain() {
 		}
 	}
 
-	var_01.car02.initialstruct = scripts\common\utility::getstruct("trainStartPos_02","targetname");
+	var_01.car02.initialstruct = scripts\engine\utility::getstruct("trainStartPos_02","targetname");
 	var_01.car02 moveto(var_01.car02.initialstruct.origin,1,0,0);
 	var_01.car02 rotateto(var_01.car02.initialstruct.angles,1,0,0);
-	var_01.car02.var_12BE7 = ::traincollision;
+	var_01.car02.unresolved_collision_func = ::traincollision;
 	var_01.car03 = getent("trainCar_03","targetname");
 	var_01.car03.var_BE1C = var_00;
 	var_01.car03.var_BE19 = getentarray(var_01.car03.target,"targetname");
@@ -132,7 +132,7 @@ setuptrain() {
 		}
 	}
 
-	var_01.car03.initialstruct = scripts\common\utility::getstruct("trainStartPos_03","targetname");
+	var_01.car03.initialstruct = scripts\engine\utility::getstruct("trainStartPos_03","targetname");
 	var_01.car03 moveto(var_01.car03.initialstruct.origin,1,0,0);
 	var_01.car03 rotateto(var_01.car03.initialstruct.angles,1,0,0);
 	var_09 = getent("trainCar_04","targetname");
@@ -149,7 +149,7 @@ setuptrain() {
 	var_09.killtrigger enablelinkto();
 	var_09.killtrigger linkto(var_09);
 	var_09.var_9EAC = 0;
-	var_09.initialstruct = scripts\common\utility::getstruct("trainStartPos_01","targetname");
+	var_09.initialstruct = scripts\engine\utility::getstruct("trainStartPos_01","targetname");
 	var_09 moveto(var_09.initialstruct.origin,1,0,0);
 	var_09 rotateto(var_09.initialstruct.angles,1,0,0);
 	var_09.car02 = getent("trainCar_05","targetname");
@@ -162,10 +162,10 @@ setuptrain() {
 		}
 	}
 
-	var_09.car02.initialstruct = scripts\common\utility::getstruct("trainStartPos_02","targetname");
+	var_09.car02.initialstruct = scripts\engine\utility::getstruct("trainStartPos_02","targetname");
 	var_09.car02 moveto(var_09.car02.initialstruct.origin,1,0,0);
 	var_09.car02 rotateto(var_09.car02.initialstruct.angles,1,0,0);
-	var_09.car02.var_12BE7 = ::traincollision;
+	var_09.car02.unresolved_collision_func = ::traincollision;
 	var_09.car03 = getent("trainCar_06","targetname");
 	var_09.car03.var_BE1C = var_00;
 	var_09.car03.var_BE19 = getentarray(var_09.car03.target,"targetname");
@@ -176,7 +176,7 @@ setuptrain() {
 		}
 	}
 
-	var_09.car03.initialstruct = scripts\common\utility::getstruct("trainStartPos_03","targetname");
+	var_09.car03.initialstruct = scripts\engine\utility::getstruct("trainStartPos_03","targetname");
 	var_09.car03 moveto(var_09.car03.initialstruct.origin,1,0,0);
 	var_09.car03 rotateto(var_09.car03.initialstruct.angles,1,0,0);
 	thread trackmanger(var_01,var_09);
@@ -196,13 +196,13 @@ trainkilltrigger(param_00) {
 			}
 
 			if(isdefined(var_01.classname) && var_01.classname == "script_vehicle") {
-				if(isdefined(var_01.var_110EA)) {
-					if(var_01.var_110EA == "minijackal") {
+				if(isdefined(var_01.streakname)) {
+					if(var_01.streakname == "minijackal") {
 						var_01 notify("minijackal_end");
 						continue;
 					}
 
-					if(var_01.var_110EA == "venom") {
+					if(var_01.streakname == "venom") {
 						var_01 notify("venom_end",var_01.origin);
 					}
 				}
@@ -240,28 +240,28 @@ trackmanger(param_00,param_01) {
 	for(;;) {
 		param_01 waittill("approaching_station");
 		thread trainkilltrigger(param_01);
-		scripts\common\utility::exploder(15);
+		scripts\engine\utility::exploder(15);
 		thread trainmovelogic(param_00);
-		scripts\common\utility::func_136F7();
+		scripts\engine\utility::waitframe();
 		thread trainmovelogic(param_00.car02);
-		scripts\common\utility::func_136F7();
+		scripts\engine\utility::waitframe();
 		thread trainmovelogic(param_00.car03);
 		wait(3.5);
-		scripts\common\utility::exploder(10);
+		scripts\engine\utility::exploder(10);
 		wait(3.25);
-		scripts\common\utility::exploder(5);
+		scripts\engine\utility::exploder(5);
 		param_00 waittill("approaching_station");
 		thread trainkilltrigger(param_00);
-		scripts\common\utility::exploder(15);
+		scripts\engine\utility::exploder(15);
 		thread trainmovelogic(param_01);
-		scripts\common\utility::func_136F7();
+		scripts\engine\utility::waitframe();
 		thread trainmovelogic(param_01.car02);
-		scripts\common\utility::func_136F7();
+		scripts\engine\utility::waitframe();
 		thread trainmovelogic(param_01.car03);
 		wait(3.5);
-		scripts\common\utility::exploder(10);
+		scripts\engine\utility::exploder(10);
 		wait(3.25);
-		scripts\common\utility::exploder(5);
+		scripts\engine\utility::exploder(5);
 	}
 }
 
@@ -272,7 +272,7 @@ trainmovelogic(param_00) {
 	}
 
 	param_00.var_4C09 = param_00.initialstruct;
-	param_00.nextstruct = scripts\common\utility::getstruct(param_00.initialstruct.target,"targetname");
+	param_00.nextstruct = scripts\engine\utility::getstruct(param_00.initialstruct.target,"targetname");
 	var_01 = 2;
 	var_02 = 1.5;
 	if(param_00.var_336 == "trainCar_01" || param_00.var_336 == "trainCar_04") {
@@ -286,7 +286,7 @@ trainmovelogic(param_00) {
 	param_00 rotateto(param_00.nextstruct.angles,var_01,var_02,0);
 	wait(var_01);
 	param_00.var_4C09 = param_00.nextstruct;
-	param_00.nextstruct = scripts\common\utility::getstruct(param_00.var_4C09.target,"targetname");
+	param_00.nextstruct = scripts\engine\utility::getstruct(param_00.var_4C09.target,"targetname");
 	while(param_00.nextstruct.var_336 != param_00.initialstruct.var_336) {
 		if(param_00.var_4C09.var_336 == "trainTeleport") {
 			if(isdefined(param_00.fx_loc)) {
@@ -317,7 +317,7 @@ trainmovelogic(param_00) {
 
 			param_00 thread play_train_arrive_sfx(param_00);
 			param_00.var_4C09 = param_00.nextstruct;
-			param_00.nextstruct = scripts\common\utility::getstruct(param_00.var_4C09.target,"targetname");
+			param_00.nextstruct = scripts\engine\utility::getstruct(param_00.var_4C09.target,"targetname");
 			continue;
 		}
 
@@ -330,7 +330,7 @@ trainmovelogic(param_00) {
 		param_00 rotateto(param_00.nextstruct.angles,param_00.mymovetime,0,0);
 		wait(param_00.mymovetime);
 		param_00.var_4C09 = param_00.nextstruct;
-		param_00.nextstruct = scripts\common\utility::getstruct(param_00.var_4C09.target,"targetname");
+		param_00.nextstruct = scripts\engine\utility::getstruct(param_00.var_4C09.target,"targetname");
 	}
 
 	param_00 moveto(param_00.nextstruct.origin,var_01,0,var_02);
@@ -345,7 +345,7 @@ trainmovelogic(param_00) {
 	}
 
 	param_00.var_4C09 = param_00.nextstruct;
-	param_00.nextstruct = scripts\common\utility::getstruct(param_00.var_4C09.target,"targetname");
+	param_00.nextstruct = scripts\engine\utility::getstruct(param_00.var_4C09.target,"targetname");
 }
 
 play_train_arrive_sfx(param_00) {

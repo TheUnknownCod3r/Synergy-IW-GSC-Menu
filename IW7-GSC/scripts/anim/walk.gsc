@@ -1,8 +1,8 @@
-/*****************************************
+/*********************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\anim\walk.gsc
-*****************************************/
+ * Script: scripts\anim\walk.gsc
+*********************************/
 
 func_BD2B() {
 	var_00 = undefined;
@@ -38,7 +38,7 @@ func_BD2B() {
 				return;
 			}
 	
-			self.var_1491.movement = "walk";
+			self.a.movement = "walk";
 			func_5AEB(movegravity("prone"));
 			break;
 	}
@@ -50,7 +50,7 @@ func_5AEC(param_00) {
 	self _meth_82A5(%combatrun,%body,1,0.5,self.moveplaybackrate);
 	if(isarray(self.var_13872)) {
 		if(isdefined(self.var_13871)) {
-			var_01 = scripts\common\utility::choose_from_weighted_array(self.var_13872,self.var_13871);
+			var_01 = scripts\engine\utility::choose_from_weighted_array(self.var_13872,self.var_13871);
 		}
 		else
 		{
@@ -89,7 +89,7 @@ func_5AEB(param_00) {
 		var_01 = var_01 * 0.6;
 	}
 
-	if(self.var_1491.pose == "stand") {
+	if(self.a.pose == "stand") {
 		if(isdefined(self.isnodeoccupied)) {
 			scripts\anim\cqb::func_479B();
 			self _meth_82E3("walkanim",scripts\anim\cqb::func_53C3(),%walk_and_run_loops,1,1,var_01,1);
@@ -102,7 +102,7 @@ func_5AEB(param_00) {
 		scripts\anim\run::func_F7A9(scripts\anim\utility::func_7FCC("move_b"),scripts\anim\utility::func_7FCC("move_l"),scripts\anim\utility::func_7FCC("move_r"));
 		thread scripts\anim\run::setcombatstandmoveanimweights("walk");
 	}
-	else if(self.var_1491.pose == "prone") {
+	else if(self.a.pose == "prone") {
 		self give_left_powers("walkanim",scripts\anim\utility::func_7FCC("prone"),1,0.3,self.moveplaybackrate);
 	}
 	else

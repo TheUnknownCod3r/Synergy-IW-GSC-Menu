@@ -1,8 +1,8 @@
-/***********************************************
+/***************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\cp_analytics.gsc
-***********************************************/
+ * Script: scripts\cp\cp_analytics.gsc
+***************************************/
 
 start_game_type(param_00,param_01,param_02) {
 	init(param_02);

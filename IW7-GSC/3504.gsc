@@ -1,18 +1,18 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\3504.gsc
+ * Script: 3504.gsc
 ***************************************/
 
 init() {
   level.func_C1D0 = "aftermath_post";
-  level._effect["mons_warp_flash"] = loadfx("vfx/iw7/_requests/mp/vfx_vehicle_nuke_warp_flash.vfx");
-  level._effect["mons_warp_in"] = loadfx("vfx/iw7/_requests/mp/vfx_vehicle_nuke_warp_in.vfx");
-  level._effect["mons_warp_out"] = loadfx("vfx/iw7/_requests/mp/vfx_vehicle_nuke_warp_out.vfx");
-  level._effect["mons_laser_charge"] = loadfx("vfx/iw7/_requests/mp/vfx_nuke_build_lgt_ship_belly.vfx");
-  level._effect["mons_laser"] = loadfx("vfx/iw7/_requests/mp/vfx_nuke_laser.vfx");
-  level._effect["mons_laser_flash"] = loadfx("vfx/iw7/_requests/mp/vfx_nuke_initial_flash.vfx");
-  level._effect["mons_laser_smoke"] = loadfx("vfx/iw7/_requests/mp/vfx_nuke_dust_wave.vfx");
-  level._effect["mons_screen_ash"] = loadfx("vfx/iw7/_requests/mp/vfx_nuke_cam_att_ashfall.vfx");
+  level._effect["mons_warp_flash"] = loadfx("vfx\iw7\_requests\mp\vfx_vehicle_nuke_warp_flash.vfx");
+  level._effect["mons_warp_in"] = loadfx("vfx\iw7\_requests\mp\vfx_vehicle_nuke_warp_in.vfx");
+  level._effect["mons_warp_out"] = loadfx("vfx\iw7\_requests\mp\vfx_vehicle_nuke_warp_out.vfx");
+  level._effect["mons_laser_charge"] = loadfx("vfx\iw7\_requests\mp\vfx_nuke_build_lgt_ship_belly.vfx");
+  level._effect["mons_laser"] = loadfx("vfx\iw7\_requests\mp\vfx_nuke_laser.vfx");
+  level._effect["mons_laser_flash"] = loadfx("vfx\iw7\_requests\mp\vfx_nuke_initial_flash.vfx");
+  level._effect["mons_laser_smoke"] = loadfx("vfx\iw7\_requests\mp\vfx_nuke_dust_wave.vfx");
+  level._effect["mons_screen_ash"] = loadfx("vfx\iw7\_requests\mp\vfx_nuke_cam_att_ashfall.vfx");
   scripts\mp\killstreaks\killstreaks::registerkillstreak("nuke", ::func_128F0);
   setdvarifuninitialized("scr_nukeTimer", 10);
   setdvarifuninitialized("scr_nukeCancelMode", 0);
@@ -526,7 +526,7 @@ func_52C5(var_00) {
   if (isdefined(var_04)) {
   foreach (var_06 in var_04) {
   if (isdefined(var_06))
-  var_06 scripts/mp/killstreaks/utility::dodamagetokillstreak(10000, level.func_C1C5.player, level.func_C1C5.player, var_00, var_6.origin, "MOD_EXPLOSIVE", var_01);
+  var_06 scripts\mp\killstreaks\utility::dodamagetokillstreak(10000, level.func_C1C5.player, level.func_C1C5.player, var_00, var_6.origin, "MOD_EXPLOSIVE", var_01);
   }
   }
 }

@@ -1,23 +1,23 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3056.gsc
-****************************/
+ * Script: 3056.gsc
+************************/
 
 main(param_00,param_01,param_02) {
-	scripts/sp/vehicle_build::func_31C5("support_drone",param_00,param_01,param_02);
-	scripts/sp/vehicle_build::func_31A6(::init_location);
-	scripts/sp/vehicle_build::func_3186(param_00);
-	scripts/sp/vehicle_build::func_3187(0.3,1.6,2048);
-	scripts/sp/vehicle_build::func_31A3(1500);
-	scripts/sp/vehicle_build::func_31C4("allies");
+	scripts\sp\vehicle_build::func_31C5("support_drone",param_00,param_01,param_02);
+	scripts\sp\vehicle_build::func_31A6(::init_location);
+	scripts\sp\vehicle_build::func_3186(param_00);
+	scripts\sp\vehicle_build::func_3187(0.3,1.6,2048);
+	scripts\sp\vehicle_build::func_31A3(1500);
+	scripts\sp\vehicle_build::func_31C4("allies");
 	var_03 = randomfloatrange(0,1);
-	scripts/sp/vehicle_build::func_31C8("pocket_drone_turret","tag_turret","veh_mil_air_un_pocketdrone_gun",undefined,"manual",undefined,0);
-	level._effect["_mini_drone_spark"] = loadfx("vfx/core/expl/generator_sparks_a.vfx");
-	level._effect["_mini_drone_smoke"] = loadfx("vfx/core/smktrail/smoke_trail_black_heli.vfx");
-	level._effect["_support_drone_spawn"] = loadfx("vfx/core/expl/grenade_flash.vfx");
-	level._effect["drone_damage_sparks"] = loadfx("vfx/core/expl/generator_sparks_a.vfx");
-	scripts/sp/vehicle_build::func_31A0();
+	scripts\sp\vehicle_build::func_31C8("pocket_drone_turret","tag_turret","veh_mil_air_un_pocketdrone_gun",undefined,"manual",undefined,0);
+	level._effect["_mini_drone_spark"] = loadfx("vfx\core\expl\generator_sparks_a.vfx");
+	level._effect["_mini_drone_smoke"] = loadfx("vfx\core\smktrail\smoke_trail_black_heli.vfx");
+	level._effect["_support_drone_spawn"] = loadfx("vfx\core\expl\grenade_flash.vfx");
+	level._effect["drone_damage_sparks"] = loadfx("vfx\core\expl\generator_sparks_a.vfx");
+	scripts\sp\vehicle_build::func_31A0();
 }
 
 init_location() {

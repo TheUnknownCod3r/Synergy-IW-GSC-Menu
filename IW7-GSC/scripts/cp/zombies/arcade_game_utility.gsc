@@ -1,8 +1,8 @@
-/**************************************************************
+/******************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\zombies\arcade_game_utility.gsc
-**************************************************************/
+ * Script: scripts\cp\zombies\arcade_game_utility.gsc
+******************************************************/
 
 update_player_tickets_earned(param_00) {
 	if(param_00.tickets_earned > 0) {
@@ -81,7 +81,7 @@ give_player_tickets(param_00,param_01,param_02,param_03) {
 	}
 
 	param_00 scripts\cp\cp_persistence::eog_player_update_stat("tickettotal",int(param_00.num_tickets),1);
-	scripts/cp/zombies/zombies_gamescore::update_tickets_earned_performance(param_00,param_01);
+	scripts\cp\zombies\zombies_gamescore::update_tickets_earned_performance(param_00,param_01);
 }
 
 arcade_game_hint_func(param_00,param_01) {

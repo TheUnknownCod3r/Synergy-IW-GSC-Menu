@@ -1,11 +1,11 @@
-/*******************************************
+/***********************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\aitype\enemy_c6_smg.gsc
-*******************************************/
+ * Script: aitype\enemy_c6_smg.gsc
+***********************************/
 
 main() {
-	self.var_17DB = "ai//c6_assets.csv";
+	self.var_17DB = "ai\\c6_assets.csv";
 	self.team = "axis";
 	self.type = "human";
 	self.unittype = "C6";

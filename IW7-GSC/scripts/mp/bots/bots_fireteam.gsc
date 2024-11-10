@@ -1,8 +1,8 @@
-/*****************************************************
+/*********************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\bots\bots_fireteam.gsc
-*****************************************************/
+ * Script: scripts\mp\bots\bots_fireteam.gsc
+*********************************************/
 
 bot_fireteam_setup_callbacks() {}
 
@@ -300,7 +300,7 @@ fireteam_tdm_hunt_most_dangerous_zone(param_00,param_01) {
 
 			var_07 = undefined;
 			if(var_06 == var_02) {
-				var_07 = function_00F2(param_00,var_05);
+				var_07 = getzonepath(param_00,var_05);
 				if(!isdefined(var_07)) {
 					continue;
 				}
@@ -451,13 +451,13 @@ bot_fireteam_hunt_zone_find_node() {
 	var_00 = 0;
 	var_01 = undefined;
 	if(isdefined(level.fireteam_hunt_target_zone[self.team])) {
-		var_02 = function_00EF(level.fireteam_hunt_target_zone[self.team],0);
+		var_02 = getzonenodes(level.fireteam_hunt_target_zone[self.team],0);
 		if(var_02.size <= 18) {
-			var_02 = function_00EF(level.fireteam_hunt_target_zone[self.team],1);
+			var_02 = getzonenodes(level.fireteam_hunt_target_zone[self.team],1);
 			if(var_02.size <= 18) {
-				var_02 = function_00EF(level.fireteam_hunt_target_zone[self.team],2);
+				var_02 = getzonenodes(level.fireteam_hunt_target_zone[self.team],2);
 				if(var_02.size <= 18) {
-					var_02 = function_00EF(level.fireteam_hunt_target_zone[self.team],3);
+					var_02 = getzonenodes(level.fireteam_hunt_target_zone[self.team],3);
 				}
 			}
 		}
@@ -508,7 +508,7 @@ bot_fireteam_monitor_killstreak_earned() {
 	self endon("bot_fireteam_monitor_killstreak_earned");
 	for(;;) {
 		self waittill("bot_killstreak_earned",var_00,var_01);
-		if(scripts\mp\_utility::bot_is_fireteam_mode()) {
+		if(scripts\mp\utility::bot_is_fireteam_mode()) {
 			if(isdefined(self) && isbot(self)) {
 				if(isdefined(self.fireteam_commander)) {
 					var_02 = undefined;
@@ -521,7 +521,7 @@ bot_fireteam_monitor_killstreak_earned() {
 					}
 
 					if(!isdefined(var_02) || var_02 != self) {
-						self.fireteam_commander thread scripts\mp\_hud_message::showsplash(var_00,var_01,self);
+						self.fireteam_commander thread scripts\mp\hud_message::showsplash(var_00,var_01,self);
 					}
 				}
 			}

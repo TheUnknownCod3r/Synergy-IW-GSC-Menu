@@ -1,11 +1,11 @@
-/*********************************************************************
+/*************************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\agents\crab_brute\crab_brute_agent.gsc
-*********************************************************************/
+ * Script: scripts\mp\agents\crab_brute\crab_brute_agent.gsc
+*************************************************************/
 
 registerscriptedagent() {
-	scripts/aitypes/bt_util::init();
+	scripts\aitypes\bt_util::init();
 	behaviortree\crab_brute::func_DEE8();
 	scripts\asm\crab_brute\mp\states::func_2371();
 	scripts\mp\agents\crab_brute\crab_brute_tunedata::setuptunedata();
@@ -192,7 +192,7 @@ lookatenemy() {
 }
 
 crab_brute_special_damage_func(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08,param_09,param_0A,param_0B) {
-	if(scripts/asm/asm::asm_isinstate("burrow_loop")) {
+	if(scripts\asm\asm::asm_isinstate("burrow_loop")) {
 		return 0;
 	}
 
@@ -257,7 +257,7 @@ shouldignoreenemy(param_00) {
 		return 1;
 	}
 
-	if(scripts/mp/agents/zombie/zombie_util::shouldignoreent(param_00)) {
+	if(scripts\mp\agents\zombie\zombie_util::shouldignoreent(param_00)) {
 		return 1;
 	}
 

@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2807.gsc
+ * Script: 2807.gsc
 ***************************************/
 
 func_12813() {
@@ -180,7 +180,7 @@ func_12811(var_00, var_01, var_02, var_03, var_04) {
   var_05 = var_03;
   var_05 = scripts\mp\damage::handlemeleedamage(var_01, var_02, var_05);
   var_05 = scripts\mp\damage::handleapdamage(var_01, var_02, var_05);
-  scripts/mp/powers::equipmenthit(self.owner, var_00, var_01, var_02);
+  scripts\mp\powers::equipmenthit(self.owner, var_00, var_01, var_02);
   return var_05;
 }
 
@@ -206,7 +206,7 @@ trophy_destroyongameend() {
 }
 
 func_12818() {
-  if (self.owner scripts/mp/powers::hasequipment("power_trophy"))
+  if (self.owner scripts\mp\powers::hasequipment("power_trophy"))
   self.owner func_12803(self.func_1E2D);
 }
 
@@ -315,7 +315,7 @@ trophy_checkignorelist(var_00) {
 
 func_12821(var_00) {
   if (getdvarint("showArchetypes", 0) > 0)
-  var_00 scripts/mp/powers::func_C179();
+  var_00 scripts\mp\powers::func_C179();
 }
 
 func_12817(var_00, var_01, var_02) {
@@ -413,14 +413,14 @@ func_12806() {
 }
 
 func_1281A() {
-  var_00 = scripts/mp/powers::func_D736("power_trophy");
+  var_00 = scripts\mp\powers::func_D736("power_trophy");
 
   for (var_01 = 0; var_01 < var_00; var_1++)
   func_12803();
 }
 
 func_12814() {
-  return scripts/mp/powers::func_D736("power_trophy");
+  return scripts\mp\powers::func_D736("power_trophy");
 }
 
 trophy_modifieddamage(var_00, var_01, var_02, var_03, var_04) {

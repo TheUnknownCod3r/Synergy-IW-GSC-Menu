@@ -1,19 +1,19 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\2598.gsc
-****************************/
+ * Script: 2598.gsc
+************************/
 
 func_3ED1(param_00,param_01,param_02) {
-	if(!scripts/asm/asm::asm_hasalias(param_01,self.a.pose)) {
-		return scripts/asm/asm::asm_lookupanimfromalias(param_01,"default");
+	if(!scripts\asm\asm::asm_hasalias(param_01,self.a.pose)) {
+		return scripts\asm\asm::asm_lookupanimfromalias(param_01,"default");
 	}
 
-	return scripts/asm/asm::asm_lookupanimfromalias(param_01,self.a.pose);
+	return scripts\asm\asm::asm_lookupanimfromalias(param_01,self.a.pose);
 }
 
 func_10073(param_00,param_01,param_02,param_03) {
-	if(scripts/asm/asm_bb::bb_selfdestructnow()) {
+	if(scripts\asm\asm_bb::bb_selfdestructnow()) {
 		return 1;
 	}
 
@@ -21,7 +21,7 @@ func_10073(param_00,param_01,param_02,param_03) {
 }
 
 func_C875(param_00,param_01,param_02,param_03) {
-	return scripts/asm/asm::func_232B(param_01,"end") && scripts/asm/asm_bb::bb_isselfdestruct();
+	return scripts\asm\asm::func_232B(param_01,"end") && scripts\asm\asm_bb::bb_isselfdestruct();
 }
 
 func_337F(param_00,param_01,param_02,param_03) {

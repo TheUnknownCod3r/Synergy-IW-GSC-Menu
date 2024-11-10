@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2910.gsc
+ * Script: 2910.gsc
 ***************************************/
 
 func_CBAA() {
@@ -109,7 +109,7 @@ func_CBAC() {
 
 func_CBA5(var_00) {
   func_6A67();
-  scripts/sp/utility::func_10347(var_00);
+  scripts\sp\utility::func_10347(var_00);
   func_CBA3();
 }
 

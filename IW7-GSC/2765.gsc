@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2765.gsc
+ * Script: 2765.gsc
 ***************************************/
 
 init() {
@@ -9,13 +9,13 @@ init() {
   var_00 = 0;
 
   for (;;) {
-  var_01 = tablelookupbyrow("mp/loot/iw7_weapon_loot_master.csv", var_00, 0);
+  var_01 = tablelookupbyrow("mp\loot\iw7_weapon_loot_master.csv", var_00, 0);
 
   if (!isdefined(var_01) || var_01 == "")
   break;
 
   var_01 = int(var_01);
-  var_02 = tablelookupbyrow("mp/loot/iw7_weapon_loot_master.csv", var_00, 1);
+  var_02 = tablelookupbyrow("mp\loot\iw7_weapon_loot_master.csv", var_00, 1);
   level.lootweaponrefs[var_01] = var_02;
   var_0++;
   }
@@ -55,13 +55,13 @@ getlootinfoforweapon(var_00) {
 }
 
 getweaponassetfromrootweapon(var_00, var_01) {
-  var_02 = "mp/loot/weapon/" + var_00 + ".csv";
+  var_02 = "mp\loot\weapon\" + var_00 + ".csv";
   var_03 = tablelookup(var_02, 0, var_01, 3);
   return var_03;
 }
 
 lookupvariantref(var_00, var_01) {
-  var_02 = "mp/loot/weapon/" + var_00 + ".csv";
+  var_02 = "mp\loot\weapon\" + var_00 + ".csv";
   var_03 = tablelookup(var_02, 0, var_01, 1);
   return var_03;
 }

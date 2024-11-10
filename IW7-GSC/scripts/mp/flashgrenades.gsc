@@ -1,8 +1,8 @@
-/************************************************
+/****************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\flashgrenades.gsc
-************************************************/
+ * Script: scripts\mp\flashgrenades.gsc
+****************************************/
 
 main() {}
 

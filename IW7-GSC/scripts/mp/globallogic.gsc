@@ -1,12 +1,12 @@
-/**********************************************
+/**************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\globallogic.gsc
-**********************************************/
+ * Script: scripts\mp\globallogic.gsc
+**************************************/
 
 init() {
 	setdvar("match_running",1);
-	level.splitscreen = function_0114();
+	level.splitscreen = issplitscreen();
 	scripts\mp\utility::func_F305();
 	level.onlinegame = getdvarint("onlinegame");
 	level.rankedmatch = (level.onlinegame && !getdvarint("xblive_privatematch")) || getdvarint("force_ranking");
@@ -120,11 +120,11 @@ setupcallbacks() {
 	level.var_9994 = ::scripts\mp\intel::init;
 	level.matchrecording_init = ::scripts\mp\matchrecording::init;
 	level.weaponmapfunc = ::scripts\mp\utility::func_13CA1;
-	level.initagentscriptvariables = ::scripts/mp/agents/agent_utility::initagentscriptvariables;
-	level.setagentteam = ::scripts/mp/agents/agent_utility::set_agent_team;
+	level.initagentscriptvariables = ::scripts\mp\agents\agent_utility::initagentscriptvariables;
+	level.setagentteam = ::scripts\mp\agents\agent_utility::set_agent_team;
 	level.agentvalidateattacker = ::scripts\mp\utility::_validateattacker;
-	level.agentfunc = ::scripts/mp/agents/agent_utility::agentfunc;
-	level.getfreeagent = ::scripts/mp/agents/agent_utility::getfreeagent;
+	level.agentfunc = ::scripts\mp\agents\agent_utility::agentfunc;
+	level.getfreeagent = ::scripts\mp\agents\agent_utility::getfreeagent;
 	level.addtocharactersarray = ::scripts\mp\spawnlogic::addtocharactersarray;
 }
 

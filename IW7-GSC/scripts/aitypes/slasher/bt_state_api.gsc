@@ -1,8 +1,8 @@
-/************************************************************
+/****************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\aitypes\slasher\bt_state_api.gsc
-************************************************************/
+ * Script: scripts\aitypes\slasher\bt_state_api.gsc
+****************************************************/
 
 btstate_getinstancedata(param_00) {
 	return self.var_3135.instancedata[param_00];
@@ -32,7 +32,7 @@ btstate_getcurrentstatename(param_00) {
 		return undefined;
 	}
 
-	return var_01.var_4C07.name;
+	return var_01.currentstate.name;
 }
 
 btstate_tickstates(param_00) {
@@ -41,10 +41,10 @@ btstate_tickstates(param_00) {
 		return 0;
 	}
 
-	if(isdefined(var_01.var_4C07.fntick)) {
-		var_02 = var_01.var_4C07.name;
-		var_03 = self [[var_01.var_4C07.fntick]](param_00);
-		if(isdefined(var_01.currentstate) && var_01.var_4C07.name != var_02) {
+	if(isdefined(var_01.currentstate.fntick)) {
+		var_02 = var_01.currentstate.name;
+		var_03 = self [[var_01.currentstate.fntick]](param_00);
+		if(isdefined(var_01.currentstate) && var_01.currentstate.name != var_02) {
 			return btstate_tickstates(param_00);
 		}
 
@@ -56,8 +56,8 @@ btstate_tickstates(param_00) {
 
 btstate_endstates(param_00) {
 	var_01 = btstate_getinstancedata(param_00);
-	if(isdefined(var_01.currentstate) && isdefined(var_01.var_4C07.fnend)) {
-		[[var_01.var_4C07.fnend]](param_00,undefined);
+	if(isdefined(var_01.currentstate) && isdefined(var_01.currentstate.fnend)) {
+		[[var_01.currentstate.fnend]](param_00,undefined);
 		var_01.currentstate = undefined;
 	}
 }
@@ -68,8 +68,8 @@ btstate_destroystates() {
 
 btstate_endcurrentstate(param_00) {
 	var_01 = btstate_getinstancedata(param_00);
-	if(isdefined(var_01.currentstate) && isdefined(var_01.var_4C07.fnend)) {
-		self [[var_01.var_4C07.fnend]](param_00,undefined);
+	if(isdefined(var_01.currentstate) && isdefined(var_01.currentstate.fnend)) {
+		self [[var_01.currentstate.fnend]](param_00,undefined);
 	}
 
 	var_01.currentstate = undefined;
@@ -79,9 +79,9 @@ btstate_transitionstate(param_00,param_01) {
 	var_02 = btstate_getinstancedata(param_00);
 	var_03 = undefined;
 	if(isdefined(var_02.currentstate)) {
-		var_03 = var_02.var_4C07.name;
-		if(isdefined(var_02.var_4C07.fnend)) {
-			[[var_02.var_4C07.fnend]](param_00,param_01);
+		var_03 = var_02.currentstate.name;
+		if(isdefined(var_02.currentstate.fnend)) {
+			[[var_02.currentstate.fnend]](param_00,param_01);
 		}
 	}
 

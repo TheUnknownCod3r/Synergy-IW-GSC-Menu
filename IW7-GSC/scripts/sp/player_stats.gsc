@@ -1,8 +1,8 @@
-/***********************************************
+/***************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\sp\player_stats.gsc
-***********************************************/
+ * Script: scripts\sp\player_stats.gsc
+***************************************/
 
 func_9768() {
 	self.var_10E53["kills"] = 0;
@@ -86,7 +86,7 @@ func_DEBD(param_00,param_01,param_02,param_03) {
 
 	if(issubstr(tolower(param_01),"melee")) {
 		var_04.var_10E53["kills_melee"]++;
-		if(function_0244(param_02) == "primary") {
+		if(weaponinventorytype(param_02) == "primary") {
 			return;
 		}
 	}
@@ -95,7 +95,7 @@ func_DEBD(param_00,param_01,param_02,param_03) {
 		var_04 func_DEC5(param_02);
 	}
 
-	var_04.var_10E53["weapon"][param_02].var_1AB++;
+	var_04.var_10E53["weapon"][param_02].setculldist++;
 }
 
 func_DED8() {

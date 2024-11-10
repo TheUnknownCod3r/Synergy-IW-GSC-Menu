@@ -1,8 +1,8 @@
-/*****************************************************
+/*********************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\contractchallenges.gsc
-*****************************************************/
+ * Script: scripts\mp\contractchallenges.gsc
+*********************************************/
 
 registercontractchallenges() {
 	level.contractchallenges = [];
@@ -155,7 +155,7 @@ contractkills(param_00) {
 		
 				if(self _meth_8519(var_02)) {
 					var_06 = scripts\mp\utility::getweaponrootname(var_02);
-					var_07 = function_02C4(var_02);
+					var_07 = getweaponvariantindex(var_02);
 					if(var_06 == "iw7_longshot") {
 						var_05 = 1;
 					}
@@ -212,7 +212,7 @@ contractkills(param_00) {
 				break;
 	
 			case "con_kills_variant":
-				var_05 = isdefined(function_02C4(var_02));
+				var_05 = isdefined(getweaponvariantindex(var_02));
 				break;
 	
 			case "con_kills_oneshot":

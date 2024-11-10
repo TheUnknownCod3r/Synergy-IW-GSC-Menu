@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3877.gsc
-****************************/
+ * Script: 3877.gsc
+************************/
 
 func_11408() {
 	if(!isdefined(self.var_11400)) {

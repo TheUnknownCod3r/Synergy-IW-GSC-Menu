@@ -1,13 +1,13 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3612.gsc
-****************************/
+ * Script: 3612.gsc
+************************/
 
 func_200A() {
-	level._effect["impact_shock"] = loadfx("vfx/iw7/core/impact/custom/vfx_imp_cstm_antigrav_barrel.vfx");
-	level._effect["fuse_shock"] = loadfx("vfx/iw7/_requests/equipment/antigrav/antigrav_barrel_buildup.vfx");
-	level._effect["antigrav_explosion"] = loadfx("vfx/iw7/_requests/equipment/antigrav/antigrav_barrel_blow.vfx");
+	level._effect["impact_shock"] = loadfx("vfx\iw7\core\impact\custom\vfx_imp_cstm_antigrav_barrel.vfx");
+	level._effect["fuse_shock"] = loadfx("vfx\iw7\_requests\equipment\antigrav\antigrav_barrel_buildup.vfx");
+	level._effect["antigrav_explosion"] = loadfx("vfx\iw7\_requests\equipment\antigrav\antigrav_barrel_blow.vfx");
 	var_00 = getentarray("phys_antigrav_destructible","targetname");
 	foreach(var_02 in var_00) {
 		var_02 thread func_2007();

@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2614.gsc
+ * Script: 2614.gsc
 ***************************************/
 
 func_9707(var_00) {

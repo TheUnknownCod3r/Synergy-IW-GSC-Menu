@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3549.gsc
-****************************/
+ * Script: 3549.gsc
+************************/
 
 c4_set(param_00) {
 	thread c4_watchforaltdetonation();
@@ -11,33 +11,33 @@ c4_set(param_00) {
 c4_used(param_00) {
 	self endon("disconnect");
 	param_00 endon("death");
-	scripts\mp\_utility::printgameaction("c4 spawn",param_00.triggerportableradarping);
+	scripts\mp\utility::printgameaction("c4 spawn",param_00.triggerportableradarping);
 	param_00.throwtime = gettime();
 	c4_addtoarray(param_00);
 	thread c4_watchfordetonation();
 	thread c4_watchforaltdetonation();
-	if(scripts\mp\_utility::_hasperk("specialty_rugged_eqp")) {
+	if(scripts\mp\utility::_hasperk("specialty_rugged_eqp")) {
 		param_00.hasruggedeqp = 1;
 	}
 
-	param_00 thread scripts\mp\_weapons::minedamagemonitor();
+	param_00 thread scripts\mp\weapons::minedamagemonitor();
 	param_00 thread c4_explodeonnotify();
 	param_00 thread c4_destroyongameend();
-	thread scripts\mp\_weapons::monitordisownedgrenade(self,param_00);
+	thread scripts\mp\weapons::monitordisownedgrenade(self,param_00);
 	param_00 waittill("missile_stuck");
 	param_00 setotherent(self);
 	param_00 give_player_tickets(1);
-	scripts\mp\_weapons::onlethalequipmentplanted(param_00,"power_c4");
-	thread scripts\mp\_weapons::monitordisownedequipment(self,param_00);
-	param_00 thread scripts\mp\_weapons::makeexplosiveusabletag("tag_use",1);
+	scripts\mp\weapons::onlethalequipmentplanted(param_00,"power_c4");
+	thread scripts\mp\weapons::monitordisownedequipment(self,param_00);
+	param_00 thread scripts\mp\weapons::makeexplosiveusabletag("tag_use",1);
 	param_00 scripts\mp\sentientpoolmanager::registersentient("Lethal_Static",param_00.triggerportableradarping,1);
 	param_00 thread c4_destroyonemp();
 	param_00 thread scripts\mp\perks\_perk_equipmentping::runequipmentping();
 	param_00 setscriptablepartstate("plant","active",0);
-	thread scripts\mp\_weapons::outlineequipmentforowner(param_00,self);
+	thread scripts\mp\weapons::outlineequipmentforowner(param_00,self);
 	param_00 missilethermal();
 	param_00 missileoutline();
-	param_00 thread scripts\mp\_entityheadicons::setheadicon_factionimage(self,(0,0,20),0.1);
+	param_00 thread scripts\mp\entityheadicons::setheadicon_factionimage(self,(0,0,20),0.1);
 }
 
 c4_detonate() {
@@ -48,7 +48,7 @@ c4_detonate() {
 }
 
 c4_explode(param_00) {
-	scripts\mp\_utility::printgameaction("c4 triggered",self.triggerportableradarping);
+	scripts\mp\utility::printgameaction("c4 triggered",self.triggerportableradarping);
 	thread c4_delete(0.1);
 	self setentityowner(param_00);
 	self _meth_8593();
@@ -66,7 +66,7 @@ c4_delete(param_00) {
 	self notify("death");
 	level.mines[self getentitynumber()] = undefined;
 	self setcandamage(0);
-	scripts\mp\_weapons::makeexplosiveunusuabletag();
+	scripts\mp\weapons::makeexplosiveunusuabletag();
 	self.exploding = 1;
 	var_01 = self.triggerportableradarping;
 	if(isdefined(self.triggerportableradarping)) {
@@ -97,23 +97,23 @@ c4_destroyonemp() {
 	self.triggerportableradarping endon("disconnect");
 	self waittill("emp_damage",var_00,var_01,var_02,var_03,var_04);
 	if(isdefined(var_03) && var_03 == "emp_grenade_mp") {
-		if(scripts\mp\_utility::istrue(scripts\mp\_utility::playersareenemies(self.triggerportableradarping,var_00))) {
-			var_00 scripts\mp\_missions::func_D991("ch_tactical_emp_eqp");
+		if(scripts\mp\utility::istrue(scripts\mp\utility::playersareenemies(self.triggerportableradarping,var_00))) {
+			var_00 scripts\mp\missions::func_D991("ch_tactical_emp_eqp");
 		}
 	}
 
-	if(scripts\mp\_utility::istrue(scripts\mp\_utility::playersareenemies(self.triggerportableradarping,var_00))) {
+	if(scripts\mp\utility::istrue(scripts\mp\utility::playersareenemies(self.triggerportableradarping,var_00))) {
 		var_00 notify("destroyed_equipment");
 		var_00 scripts\mp\killstreaks\_killstreaks::_meth_83A0();
 	}
 
 	var_05 = "";
-	if(scripts\mp\_utility::istrue(self.hasruggedeqp)) {
+	if(scripts\mp\utility::istrue(self.hasruggedeqp)) {
 		var_05 = "hitequip";
 	}
 
 	if(isplayer(var_00)) {
-		var_00 scripts\mp\_damagefeedback::updatedamagefeedback(var_05);
+		var_00 scripts\mp\damagefeedback::updatedamagefeedback(var_05);
 	}
 
 	thread c4_destroy();
@@ -126,19 +126,19 @@ c4_destroyongameend() {
 }
 
 c4_validdetonationstate() {
-	if(!scripts\mp\_utility::isreallyalive(self)) {
+	if(!scripts\mp\utility::isreallyalive(self)) {
 		return 0;
 	}
 
-	if(scripts\mp\_utility::isusingremote()) {
+	if(scripts\mp\utility::isusingremote()) {
 		return 0;
 	}
 
-	if(scripts/mp/equipment/phase_shift::isentityphaseshifted(self)) {
+	if(scripts\mp\equipment\phase_shift::isentityphaseshifted(self)) {
 		return 0;
 	}
 
-	if(scripts/mp/supers/super_reaper::isusingreaper()) {
+	if(scripts\mp\supers\super_reaper::isusingreaper()) {
 		return 0;
 	}
 
@@ -224,7 +224,7 @@ c4_detonateall() {
 }
 
 c4_resetaltdetonpickup() {
-	if(scripts\mp\_powers::hasequipment("power_c4")) {
+	if(scripts\mp\powers::hasequipment("power_c4")) {
 		thread c4_watchforaltdetonation();
 	}
 }

@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\2870.gsc
-****************************/
+ * Script: 2870.gsc
+************************/
 
 func_12764(param_00) {
 	if(!isdefined(level.var_BCDB)) {

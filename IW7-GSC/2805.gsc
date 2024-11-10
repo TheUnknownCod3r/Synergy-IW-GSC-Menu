@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2805.gsc
+ * Script: 2805.gsc
 ***************************************/
 
 init() {
@@ -481,8 +481,8 @@ getcustomization() {
   var_04 = getplayerheadmodel();
   self.bodyindex = var_03;
   self.headindex = var_04;
-  var_00 = tablelookupbyrow("mp/cac/bodies.csv", var_03, 1);
-  var_01 = tablelookupbyrow("mp/cac/heads.csv", var_04, 1);
+  var_00 = tablelookupbyrow("mp\cac\bodies.csv", var_03, 1);
+  var_01 = tablelookupbyrow("mp\cac\heads.csv", var_04, 1);
   var_2["body"] = var_00;
   var_2["head"] = var_01;
   return var_02;
@@ -519,11 +519,11 @@ getplayerheadmodel() {
 }
 
 clearclienttriggeraudiozone(var_00) {
-  return tablelookup("mp/cac/bodies.csv", 0, var_00, 5);
+  return tablelookup("mp\cac\bodies.csv", 0, var_00, 5);
 }
 
 getplayermodelname(var_00) {
-  return tablelookup("mp/cac/bodies.csv", 0, var_00, 1);
+  return tablelookup("mp\cac\bodies.csv", 0, var_00, 1);
 }
 
 func_FADC() {
@@ -779,81 +779,81 @@ onplayerspawned() {
 }
 
 func_BD73(var_00) {
-  return tablelookupistring("mp/MTTable.csv", 0, var_00, 1);
+  return tablelookupistring("mp\MTTable.csv", 0, var_00, 1);
 }
 
 func_BD72(var_00) {
-  return tablelookup("mp/MTTable.csv", 0, var_00, 2);
+  return tablelookup("mp\MTTable.csv", 0, var_00, 2);
 }
 
 func_BD71(var_00) {
-  return tablelookup("mp/MTTable.csv", 0, var_00, 3);
+  return tablelookup("mp\MTTable.csv", 0, var_00, 3);
 }
 
 isonladder(var_00) {
-  return tablelookupistring("mp/factionTable.csv", 0, game[var_00], 1);
+  return tablelookupistring("mp\factionTable.csv", 0, game[var_00], 1);
 }
 
 _meth_81B7(var_00) {
-  return tablelookupistring("mp/factionTable.csv", 0, game[var_00], 2);
+  return tablelookupistring("mp\factionTable.csv", 0, game[var_00], 2);
 }
 
 ismlgspectator(var_00) {
-  return tablelookupistring("mp/factionTable.csv", 0, game[var_00], 4);
+  return tablelookupistring("mp\factionTable.csv", 0, game[var_00], 4);
 }
 
 _meth_81A8(var_00) {
-  return tablelookupistring("mp/factionTable.csv", 0, game[var_00], 3);
+  return tablelookupistring("mp\factionTable.csv", 0, game[var_00], 3);
 }
 
 _meth_81B2(var_00) {
-  return tablelookup("mp/factionTable.csv", 0, game[var_00], 5);
+  return tablelookup("mp\factionTable.csv", 0, game[var_00], 5);
 }
 
 _meth_81B1(var_00) {
-  return tablelookup("mp/factionTable.csv", 0, game[var_00], 6);
+  return tablelookup("mp\factionTable.csv", 0, game[var_00], 6);
 }
 
 _meth_81B0(var_00) {
-  return tablelookup("mp/factionTable.csv", 0, game[var_00], 17);
+  return tablelookup("mp\factionTable.csv", 0, game[var_00], 17);
 }
 
 getteamvoiceprefix(var_00) {
-  return tablelookup("mp/factionTable.csv", 0, game[var_00], 7);
+  return tablelookup("mp\factionTable.csv", 0, game[var_00], 7);
 }
 
 getteamspawnmusic(var_00) {
-  return tablelookup("mp/factionTable.csv", 0, game[var_00], 8);
+  return tablelookup("mp\factionTable.csv", 0, game[var_00], 8);
 }
 
 issprinting(var_00) {
-  return tablelookup("mp/factionTable.csv", 0, game[var_00], 9);
+  return tablelookup("mp\factionTable.csv", 0, game[var_00], 9);
 }
 
 ismeleeing(var_00) {
-  return tablelookup("mp/factionTable.csv", 0, game[var_00], 10);
+  return tablelookup("mp\factionTable.csv", 0, game[var_00], 10);
 }
 
 _meth_81AA(var_00) {
-  return tablelookup("mp/factionTable.csv", 0, game[var_00], 11);
+  return tablelookup("mp\factionTable.csv", 0, game[var_00], 11);
 }
 
 ismantling(var_00) {
-  return tablelookup("mp/factionTable.csv", 0, game[var_00], 12);
+  return tablelookup("mp\factionTable.csv", 0, game[var_00], 12);
 }
 
 _meth_81AC(var_00) {
-  return tablelookup("mp/factionTable.csv", 0, game[var_00], 13);
+  return tablelookup("mp\factionTable.csv", 0, game[var_00], 13);
 }
 
 _meth_81A4(var_00) {
-  return (scripts\mp\utility\game::func_1114F(tablelookup("mp/factionTable.csv", 0, game[var_00], 14)), scripts\mp\utility\game::func_1114F(tablelookup("mp/factionTable.csv", 0, game[var_00], 15)), scripts\mp\utility\game::func_1114F(tablelookup("mp/factionTable.csv", 0, game[var_00], 16)));
+  return (scripts\mp\utility\game::func_1114F(tablelookup("mp\factionTable.csv", 0, game[var_00], 14)), scripts\mp\utility\game::func_1114F(tablelookup("mp\factionTable.csv", 0, game[var_00], 15)), scripts\mp\utility\game::func_1114F(tablelookup("mp\factionTable.csv", 0, game[var_00], 16)));
 }
 
 _meth_81A5(var_00) {
-  return tablelookup("mp/factionTable.csv", 0, game[var_00], 18);
+  return tablelookup("mp\factionTable.csv", 0, game[var_00], 18);
 }
 
 _meth_81A6(var_00) {
-  return tablelookup("mp/factionTable.csv", 0, game[var_00], 19);
+  return tablelookup("mp\factionTable.csv", 0, game[var_00], 19);
 }

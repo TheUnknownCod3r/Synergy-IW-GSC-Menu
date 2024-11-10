@@ -1,8 +1,8 @@
-/**************************************************
+/******************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\entityheadicons.gsc
-**************************************************/
+ * Script: scripts\mp\entityheadicons.gsc
+******************************************/
 
 init() {
 	if(isdefined(level.var_9801)) {

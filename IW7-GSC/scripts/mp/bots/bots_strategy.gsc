@@ -1,8 +1,8 @@
-/*****************************************************
+/*********************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\bots\bots_strategy.gsc
-*****************************************************/
+ * Script: scripts\mp\bots\bots_strategy.gsc
+*********************************************/
 
 bot_defend_get_random_entrance_point_for_current_area() {
 	var_00 = bot_defend_get_precalc_entrances_for_current_area(self.cur_defend_stance);
@@ -35,7 +35,7 @@ bot_setup_bot_targets(param_00) {
 	foreach(var_02 in param_00) {
 		if(!isdefined(var_02.bottargets)) {
 			var_02.bottargets = [];
-			var_03 = function_00B7(var_02.trigger);
+			var_03 = getnodesintrigger(var_02.trigger);
 			foreach(var_05 in var_03) {
 				if(!var_05 getweaponbarsize()) {
 					var_02.bottargets = scripts\engine\utility::array_add(var_02.bottargets,var_05);
@@ -266,7 +266,7 @@ bot_defend_think(param_00,param_01,param_02,param_03) {
 		self.bot_defending_trigger = undefined;
 	}
 
-	if(scripts\mp\_utility::isgameparticipant(param_00)) {
+	if(scripts\mp\utility::isgameparticipant(param_00)) {
 		self.bot_defend_player_guarding = param_00;
 		childthread monitor_defend_player();
 	}
@@ -757,7 +757,7 @@ monitor_cautious_approach_dangerous_locations() {
 					}
 
 					if(var_04) {
-						self.locations_to_investigate[var_03].var_735E++;
+						self.locations_to_investigate[var_03].frames_visible++;
 						if(self.locations_to_investigate[var_03].frames_visible >= 18) {
 							self.locations_to_investigate[var_03] = self.locations_to_investigate[self.locations_to_investigate.size - 1];
 							self.locations_to_investigate[self.locations_to_investigate.size - 1] = undefined;
@@ -865,7 +865,7 @@ defense_watch_entrances_at_goal() {
 	else if(scripts\mp\bots\_bots_util::bot_is_protecting() || scripts\mp\bots\_bots_util::bot_is_bodyguarding()) {
 		var_01 = defense_get_initial_entrances();
 		if(isdefined(var_00) && !issubstr(self getcurrentweapon(),"riotshield")) {
-			if(!scripts\mp\_utility::istrue(var_00.ishacknode) && !scripts\mp\_utility::istrue(self.node_closest_to_defend_center.ishacknode)) {
+			if(!scripts\mp\utility::istrue(var_00.ishacknode) && !scripts\mp\utility::istrue(self.node_closest_to_defend_center.ishacknode)) {
 				if(nodesvisible(var_00,self.node_closest_to_defend_center,1)) {
 					var_01 = scripts\engine\utility::array_add(var_01,self.node_closest_to_defend_center);
 				}
@@ -1069,7 +1069,7 @@ bot_get_teammates_in_radius(param_00,param_01) {
 	var_03 = [];
 	for(var_04 = 0;var_04 < level.participants.size;var_04++) {
 		var_05 = level.participants[var_04];
-		if(var_05 != self && isdefined(var_05.team) && var_05.team == self.team && scripts\mp\_utility::isteamparticipant(var_05)) {
+		if(var_05 != self && isdefined(var_05.team) && var_05.team == self.team && scripts\mp\utility::isteamparticipant(var_05)) {
 			if(distancesquared(param_00,var_05.origin) < var_02) {
 				var_03 = scripts\engine\utility::array_add(var_03,var_05);
 			}

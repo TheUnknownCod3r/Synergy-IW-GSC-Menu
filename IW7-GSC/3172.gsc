@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3172.gsc
-****************************/
+ * Script: 3172.gsc
+************************/
 
 func_9D87(param_00,param_01,param_02,param_03) {
 	return isdefined(self.melee) && isdefined(self.melee.var_2FB1);
@@ -11,7 +11,7 @@ func_9D87(param_00,param_01,param_02,param_03) {
 func_D4CD(param_00) {
 	self endon(param_00 + "_finished");
 	var_01 = 4900;
-	var_02 = scripts/asm/asm_bb::bb_getmeleetarget();
+	var_02 = scripts\asm\asm_bb::bb_getmeleetarget();
 	for(;;) {
 		if(!isdefined(var_02)) {
 			break;
@@ -43,7 +43,7 @@ donotetracks_vsplayer(param_00,param_01) {
 					break;
 	
 				case "stop":
-					var_05 = scripts/asm/asm_bb::bb_getmeleetarget();
+					var_05 = scripts\asm\asm_bb::bb_getmeleetarget();
 					if(!isdefined(var_05)) {
 						return;
 					}
@@ -63,7 +63,7 @@ donotetracks_vsplayer(param_00,param_01) {
 					break;
 	
 				case "fire":
-					var_05 = scripts/asm/asm_bb::bb_getmeleetarget();
+					var_05 = scripts\asm\asm_bb::bb_getmeleetarget();
 					if(!isdefined(var_05)) {
 						return;
 					}
@@ -219,7 +219,7 @@ melee_shouldabort(param_00,param_01,param_02,param_03) {
 
 	if(isdefined(self.melee.var_2720)) {
 		if(isdefined(self.melee.var_3321)) {
-			var_04 = scripts/asm/asm::func_232B(param_01,"melee_stop");
+			var_04 = scripts\asm\asm::func_232B(param_01,"melee_stop");
 			if(var_04) {
 				self.melee.var_312C = 1;
 			}
@@ -227,7 +227,7 @@ melee_shouldabort(param_00,param_01,param_02,param_03) {
 			return var_04;
 		}
 		else if(isdefined(self.melee.var_11095)) {
-			var_05 = scripts/asm/asm::func_233F(param_02,"melee_stop");
+			var_05 = scripts\asm\asm::func_233F(param_02,"melee_stop");
 			if(!isdefined(var_05)) {
 				self.melee.var_3321 = 1;
 				return 0;
@@ -272,7 +272,7 @@ func_B5B8(param_00,param_01,param_02,param_03) {
 }
 
 func_B59B(param_00,param_01,param_02,param_03) {
-	var_04 = self.melee.target scripts/asm/asm_bb::bb_getcovernode();
+	var_04 = self.melee.target scripts\asm\asm_bb::bb_getcovernode();
 	return var_04.type == param_03;
 }
 
@@ -368,9 +368,9 @@ func_D4D6(param_00) {
 	self endon(param_00 + "_finished");
 	self waittill("melee_exit");
 	self unlink();
-	if(scripts/asm/asm::func_232B(param_00,"melee_interact") && !scripts/asm/asm::func_232B(param_00,"melee_death")) {
+	if(scripts\asm\asm::func_232B(param_00,"melee_interact") && !scripts\asm\asm::func_232B(param_00,"melee_death")) {
 		if(isdefined(self.melee.var_9A08)) {
-			self.melee.var_112E2 = !scripts/asm/asm::func_232B(param_00,"drop");
+			self.melee.var_112E2 = !scripts\asm\asm::func_232B(param_00,"drop");
 		}
 		else
 		{

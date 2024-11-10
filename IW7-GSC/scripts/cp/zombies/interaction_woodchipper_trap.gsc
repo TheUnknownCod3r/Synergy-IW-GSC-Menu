@@ -1,8 +1,8 @@
-/***********************************************************************
+/***************************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\zombies\interaction_woodchipper_trap.gsc
-***********************************************************************/
+ * Script: scripts\cp\zombies\interaction_woodchipper_trap.gsc
+***************************************************************/
 
 init_woodchipper_trap() {
 	level.blackholetrapuses = 0;
@@ -125,7 +125,7 @@ kill_zombies(param_00) {
 
 		var_01.flung = 1;
 		var_01 thread suck_zombie(param_00,self);
-		level thread scripts/cp/zombies/zombies_vo::play_zombie_vo(var_01,"death_blackhole",0);
+		level thread scripts\cp\zombies\zombies_vo::play_zombie_vo(var_01,"death_blackhole",0);
 	}
 }
 

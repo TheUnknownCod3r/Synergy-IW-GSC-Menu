@@ -1,8 +1,8 @@
-/*****************************************
+/*********************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\common\fx.gsc
-*****************************************/
+ * Script: scripts\common\fx.gsc
+*********************************/
 
 initfx() {
 	if(!scripts\engine\utility::add_init_script("fx",::initfx)) {
@@ -93,7 +93,7 @@ loopfx(param_00,param_01,param_02,param_03,param_04,param_05,param_06) {
 }
 
 create_looper() {
-	self.looper = function_0173(level._effect[self.v["fxid"]],self.v["delay"],self.v["origin"],0,self.v["forward"],self.v["up"]);
+	self.looper = playloopedfx(level._effect[self.v["fxid"]],self.v["delay"],self.v["origin"],0,self.v["forward"],self.v["up"]);
 	create_loopsound();
 }
 

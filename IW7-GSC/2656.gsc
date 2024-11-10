@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2656.gsc
+ * Script: 2656.gsc
 ***************************************/
 
 main() {
@@ -655,7 +655,7 @@ mover_suicide() {
   if (isdefined(level.func_9E36) && !isagent(self))
   return;
 
-  scripts/cp/utility::_suicide();
+  scripts\cp\utility::_suicide();
 }
 
 player_pushed_kill(var_00) {

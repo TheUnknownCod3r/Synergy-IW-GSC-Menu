@@ -1,8 +1,8 @@
-/*****************************************************
+/*********************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\aitype\enemy_sdf_snow_iced_ar.gsc
-*****************************************************/
+ * Script: aitype\enemy_sdf_snow_iced_ar.gsc
+*********************************************/
 
 main() {
 	self.var_17DB = "";

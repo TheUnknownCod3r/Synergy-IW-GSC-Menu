@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2809.gsc
+ * Script: 2809.gsc
 ***************************************/
 
 func_69B1() {
@@ -83,7 +83,7 @@ func_6388() {
 }
 
 func_9D54(var_00) {
-  var_01 = tablelookup("mp/attachmentTable.csv", 4, var_00, 0);
+  var_01 = tablelookup("mp\attachmentTable.csv", 4, var_00, 0);
 
   if (isdefined(var_01) && var_01 != "")
   return 1;
@@ -92,7 +92,7 @@ func_9D54(var_00) {
 }
 
 getattachmenttype(var_00) {
-  var_01 = tablelookup("mp/attachmentTable.csv", 4, var_00, 2);
+  var_01 = tablelookup("mp\attachmentTable.csv", 4, var_00, 2);
   return var_01;
 }
 
@@ -789,7 +789,7 @@ leaderdialogonplayer_internal(var_00, var_01, var_02, var_03, var_04) {
   var_06 = self getrankedplayerdata("common", "mp_announcer_type");
 
   if (var_06 > 0) {
-  var_07 = _tablelookupistringbyrow("mp/announcervoicedata.csv", var_06, 3);
+  var_07 = _tablelookupistringbyrow("mp\announcervoicedata.csv", var_06, 3);
   var_08 = var_07 + "_1mc_" + game["dialog"][var_00];
   }
   else
@@ -2224,7 +2224,7 @@ _meth_8238(var_00) {
   if (iskillstreakweapon(var_00))
   return "killstreak";
 
-  if (scripts/mp/powers::func_9F0A(var_00))
+  if (scripts\mp\powers::func_9F0A(var_00))
   return "power";
 
   if (issuperweapon(var_00))
@@ -2515,7 +2515,7 @@ getweaponattachmentarrayfromstats(var_00) {
   var_01 = [];
 
   for (var_02 = 0; var_02 <= 19; var_2++) {
-  var_03 = tablelookup("mp/statsTable.csv", 4, var_00, 10 + var_02);
+  var_03 = tablelookup("mp\statsTable.csv", 4, var_00, 10 + var_02);
 
   if (var_03 == "")
   break;
@@ -2543,7 +2543,7 @@ getweaponbarsize(var_00, var_01) {
 
 getweaponattachmentfromstats(var_00, var_01) {
   var_00 = getweaponrootname(var_00);
-  return tablelookup("mp/statsTable.csv", 4, var_00, 10 + var_01);
+  return tablelookup("mp\statsTable.csv", 4, var_00, 10 + var_01);
 }
 
 attachmentscompatible(var_00, var_01) {
@@ -2561,9 +2561,9 @@ attachmentscompatible(var_00, var_01) {
   var_02 = !isdefined(level.attachmentmap_conflicts[var_3[0] + "_" + var_3[1]]);
   }
   else if (var_00 != "none" && var_01 != "none") {
-  var_04 = tablelookuprownum("mp/attachmentcombos.csv", 0, var_01);
+  var_04 = tablelookuprownum("mp\attachmentcombos.csv", 0, var_01);
 
-  if (tablelookup("mp/attachmentcombos.csv", 0, var_00, var_04) == "no")
+  if (tablelookup("mp\attachmentcombos.csv", 0, var_00, var_04) == "no")
   var_02 = 0;
   }
 
@@ -3365,8 +3365,8 @@ getattachmentlistbasenames() {
   var_00 = [];
   var_01 = 0;
 
-  for (var_02 = tablelookup("mp/attachmentTable.csv", 0, var_01, 5); var_02 != ""; var_02 = tablelookup("mp/attachmentTable.csv", 0, var_01, 5)) {
-  var_03 = tablelookup("mp/attachmentTable.csv", 0, var_01, 2);
+  for (var_02 = tablelookup("mp\attachmentTable.csv", 0, var_01, 5); var_02 != ""; var_02 = tablelookup("mp\attachmentTable.csv", 0, var_01, 5)) {
+  var_03 = tablelookup("mp\attachmentTable.csv", 0, var_01, 2);
 
   if (var_03 != "none" && !scripts\engine\utility::array_contains(var_00, var_02))
   var_0[var_0.size] = var_02;
@@ -4063,11 +4063,11 @@ isflyingkillstreak(var_00) {
 }
 
 func_7F4D(var_00) {
-  return tablelookuprownum("mp/killstreakTable.csv", 1, var_00);
+  return tablelookuprownum("mp\killstreakTable.csv", 1, var_00);
 }
 
 getkillstreakindex(var_00) {
-  var_01 = tablelookup("mp/killstreakTable.csv", 1, var_00, 0);
+  var_01 = tablelookup("mp\killstreakTable.csv", 1, var_00, 0);
 
   if (var_01 == "")
   var_02 = -1;
@@ -4078,24 +4078,24 @@ getkillstreakindex(var_00) {
 }
 
 func_7F4B(var_00) {
-  return tablelookup("mp/killstreakTable.csv", 0, var_00, 1);
+  return tablelookup("mp\killstreakTable.csv", 0, var_00, 1);
 }
 
 func_7F4C(var_00) {
-  return tablelookup("mp/killstreakTable.csv", 12, var_00, 1);
+  return tablelookup("mp\killstreakTable.csv", 12, var_00, 1);
 }
 
 func_7F47(var_00) {
-  return tablelookupistring("mp/killstreakTable.csv", 1, var_00, 2);
+  return tablelookupistring("mp\killstreakTable.csv", 1, var_00, 2);
 }
 
 func_7F38(var_00) {
-  return tablelookupistring("mp/killstreakTable.csv", 1, var_00, 3);
+  return tablelookupistring("mp\killstreakTable.csv", 1, var_00, 3);
 }
 
 func_7F46(var_00) {
   var_01 = scripts\engine\utility::ter_op(_hasperk("specialty_support_killstreaks"), 5, 4);
-  return tablelookup("mp/killstreakTable.csv", 1, var_00, var_01);
+  return tablelookup("mp\killstreakTable.csv", 1, var_00, var_01);
 }
 
 getenemyinfo(var_00) {
@@ -4104,55 +4104,55 @@ getenemyinfo(var_00) {
 }
 
 func_7F3C(var_00) {
-  return tablelookupistring("mp/killstreakTable.csv", 1, var_00, 6);
+  return tablelookupistring("mp\killstreakTable.csv", 1, var_00, 6);
 }
 
 func_7F51(var_00) {
-  return tablelookup("mp/killstreakTable.csv", 1, var_00, 7);
+  return tablelookup("mp\killstreakTable.csv", 1, var_00, 7);
 }
 
 func_7F3B(var_00) {
-  return tablelookup("mp/killstreakTable.csv", 1, var_00, 8);
+  return tablelookup("mp\killstreakTable.csv", 1, var_00, 8);
 }
 
 func_7F34(var_00) {
-  return tablelookup("mp/killstreakTable.csv", 1, var_00, 9);
+  return tablelookup("mp\killstreakTable.csv", 1, var_00, 9);
 }
 
 func_7F3E(var_00) {
-  return tablelookup("mp/killstreakTable.csv", 1, var_00, 10);
+  return tablelookup("mp\killstreakTable.csv", 1, var_00, 10);
 }
 
 func_7F40(var_00) {
-  return int(tablelookup("mp/killstreakTable.csv", 1, var_00, 11));
+  return int(tablelookup("mp\killstreakTable.csv", 1, var_00, 11));
 }
 
 getkillstreakweapon(var_00) {
-  return tablelookup("mp/killstreakTable.csv", 1, var_00, 12);
+  return tablelookup("mp\killstreakTable.csv", 1, var_00, 12);
 }
 
 func_7F4E(var_00) {
-  return int(tablelookup("mp/killstreakTable.csv", 1, var_00, 13));
+  return int(tablelookup("mp\killstreakTable.csv", 1, var_00, 13));
 }
 
 func_7F43(var_00) {
-  return tablelookup("mp/killstreakTable.csv", 1, var_00, 14);
+  return tablelookup("mp\killstreakTable.csv", 1, var_00, 14);
 }
 
 getkillstreakoverheadicon(var_00) {
-  return tablelookup("mp/killstreakTable.csv", 1, var_00, 15);
+  return tablelookup("mp\killstreakTable.csv", 1, var_00, 15);
 }
 
 func_7F39(var_00) {
-  return tablelookup("mp/killstreakTable.csv", 1, var_00, 16);
+  return tablelookup("mp\killstreakTable.csv", 1, var_00, 16);
 }
 
 func_7F53(var_00) {
-  return tablelookup("mp/killstreakTable.csv", 1, var_00, 17);
+  return tablelookup("mp\killstreakTable.csv", 1, var_00, 17);
 }
 
 func_7F4F(var_00) {
-  return tablelookup("mp/killstreakTable.csv", 1, var_00, 18);
+  return tablelookup("mp\killstreakTable.csv", 1, var_00, 18);
 }
 
 currentactivevehiclecount(var_00) {
@@ -4220,7 +4220,7 @@ allowteamassignment() {
   if (level.gametype == "cranked" || level.gametype == "mp_zomb")
   return level.teambased;
 
-  var_00 = int(tablelookup("mp/gametypesTable.csv", 0, level.gametype, 4));
+  var_00 = int(tablelookup("mp\gametypesTable.csv", 0, level.gametype, 4));
   return var_00;
 }
 
@@ -4228,7 +4228,7 @@ allowclasschoice() {
   if (getdvarint("scr_skipclasschoice", 0) > 0 || skiploadout())
   return 0;
 
-  var_00 = int(tablelookup("mp/gametypesTable.csv", 0, level.gametype, 5));
+  var_00 = int(tablelookup("mp\gametypesTable.csv", 0, level.gametype, 5));
   return var_00;
 }
 
@@ -4248,7 +4248,7 @@ func_F6FF(var_00, var_01) {
   var_03 = getweaponattachments(var_00);
 
   if (isdefined(var_02))
-  var_04 = tablelookuprownum("mp/statsTable.csv", 4, var_02);
+  var_04 = tablelookuprownum("mp\statsTable.csv", 4, var_02);
   else
   {}
 
@@ -4257,7 +4257,7 @@ func_F6FF(var_00, var_01) {
 
   if (isdefined(var_3[var_05])) {
   if (!func_9D55(var_00, var_3[var_05]))
-  var_06 = tablelookuprownum("mp/attachmentTable.csv", 4, var_3[var_05]);
+  var_06 = tablelookuprownum("mp\attachmentTable.csv", 4, var_3[var_05]);
   }
   }
 }
@@ -4655,7 +4655,7 @@ func_1136C(var_00, var_01) {
   var_00 = scripts\engine\utility::getlastweapon();
 
   if (!self hasweapon(var_00))
-  var_00 = scripts/mp/killstreaks/utility::getfirstprimaryweapon();
+  var_00 = scripts\mp\killstreaks\utility::getfirstprimaryweapon();
 
   func_1136C(var_00, var_01);
   }
@@ -5259,7 +5259,7 @@ _meth_85C6(var_00, var_01, var_02, var_03) {
   if (!isdefined(var_0.ticks) && isdefined(var_0.tickpercent))
   var_0.ticks = roundup(4 * var_02);
 
-  var_04 = scripts/mp/powers::func_D737(var_01);
+  var_04 = scripts\mp\powers::func_D737(var_01);
 
   if (isdefined(var_04)) {
   var_0.power = var_04;
@@ -6248,7 +6248,7 @@ func_DE38(var_00, var_01) {
   if (var_05 >= var_04)
   var_05 = var_04;
 
-  scripts/mp/powers::func_D74F(var_00, var_05);
+  scripts\mp\powers::func_D74F(var_00, var_05);
 }
 
 pointvscone(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07) {
@@ -6595,7 +6595,7 @@ placeequipmentfailed(var_00, var_01, var_02, var_03) {
 }
 
 func_CC18() {
-  level._effect["placeEquipmentFailed"] = loadfx("vfx/core/mp/killstreaks/vfx_ballistic_vest_death");
+  level._effect["placeEquipmentFailed"] = loadfx("vfx\core\mp\killstreaks\vfx_ballistic_vest_death");
 }
 
 placeequipmentfailedcleanup(var_00) {

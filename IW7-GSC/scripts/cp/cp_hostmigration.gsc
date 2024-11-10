@@ -1,8 +1,8 @@
-/***************************************************
+/*******************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\cp_hostmigration.gsc
-***************************************************/
+ * Script: scripts\cp\cp_hostmigration.gsc
+*******************************************/
 
 hostmigrationwait() {
 	level endon("game_ended");

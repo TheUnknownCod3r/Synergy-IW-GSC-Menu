@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\2968.gsc
-****************************/
+ * Script: 2968.gsc
+************************/
 
 setsuit(param_00) {
 	if(!isdefined(param_00)) {
@@ -406,11 +406,11 @@ func_1321C(param_00) {
 		}
 
 		if(isdefined(var_04.var_EF03)) {
-			thread scripts/sp/vehicle_lights::lights_off(var_04.var_EF03);
+			thread scripts\sp\vehicle_lights::lights_off(var_04.var_EF03);
 		}
 
 		if(isdefined(var_04.var_EF04)) {
-			thread scripts/sp/vehicle_lights::lights_on(var_04.var_EF04);
+			thread scripts\sp\vehicle_lights::lights_on(var_04.var_EF04);
 		}
 
 		if(isdefined(var_04.var_EDAD)) {
@@ -530,11 +530,11 @@ func_1321B(param_00,param_01,param_02) {
 		}
 
 		if(isdefined(var_07.var_EF03)) {
-			thread scripts/sp/vehicle_lights::lights_off(var_07.var_EF03);
+			thread scripts\sp\vehicle_lights::lights_off(var_07.var_EF03);
 		}
 
 		if(isdefined(var_07.var_EF04)) {
-			thread scripts/sp/vehicle_lights::lights_on(var_07.var_EF04);
+			thread scripts\sp\vehicle_lights::lights_on(var_07.var_EF04);
 		}
 
 		if(isdefined(var_07.var_EDAD)) {

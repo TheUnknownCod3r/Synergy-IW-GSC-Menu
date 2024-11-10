@@ -1,8 +1,8 @@
-/*******************************************************
+/***********************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\aitypes\dlc4\alien_jump.gsc
-*******************************************************/
+ * Script: scripts\aitypes\dlc4\alien_jump.gsc
+***********************************************/
 
 setupjumpattackbtaction(param_00,param_01,param_02) {
 	if(!isdefined(param_00)) {
@@ -96,10 +96,10 @@ tryjumpattack(param_00,param_01) {
 	}
 
 	var_06 = distance2d(param_01.origin,self.origin);
-	var_07 = var_06 \ var_02.avg_leap_speed;
+	var_07 = var_06 / var_02.avg_leap_speed;
 	var_08 = scripts\aitypes\dlc4\behavior_utils::getpredictedenemypos(param_01,var_07);
 	var_06 = distance2d(var_08,self.origin);
-	var_07 = var_06 \ var_02.avg_leap_speed;
+	var_07 = var_06 / var_02.avg_leap_speed;
 	var_09 = scripts\aitypes\dlc4\behavior_utils::getpredictedenemypos(param_01,var_07);
 	var_0A = distancesquared(var_09,self.origin);
 	if(var_0A < var_02.min_leap_distance_sq) {

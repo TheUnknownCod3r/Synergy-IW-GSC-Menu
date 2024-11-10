@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\3467.gsc
+ * Script: 3467.gsc
 ***************************************/
 
 init() {
@@ -8,13 +8,13 @@ init() {
   scripts\mp\killstreaks\killstreaks::registerkillstreak("bombardment", ::func_128DC, undefined, undefined, ::triggeredbombardmentweapon, ::func_13C8B);
   level.dangermaxradius["bombardment"] = 160000;
   var_00 = ["passive_fast_launch", "passive_decreased_explosions", "passive_extra_selection", "passive_increased_cost", "passive_impulse_explosion", "passive_single_explosion"];
-  scripts/mp/killstreak_loot::func_DF07("bombardment", var_00);
+  scripts\mp\killstreak_loot::func_DF07("bombardment", var_00);
 }
 
 func_FAB1() {
-  level._effect["spike_charge"] = loadfx("vfx/iw7/_requests/mp/vfx_bombard_blast_source.vfx");
-  level._effect["spike_fire"] = loadfx("vfx/iw7/_requests/mp/vfx_bombardment_aerial_blast.vfx");
-  level._effect["spike_trail"] = loadfx("vfx/iw7/_requests/mp/vfx_bombard_projectile_trail.vfx");
+  level._effect["spike_charge"] = loadfx("vfx\iw7\_requests\mp\vfx_bombard_blast_source.vfx");
+  level._effect["spike_fire"] = loadfx("vfx\iw7\_requests\mp\vfx_bombardment_aerial_blast.vfx");
+  level._effect["spike_trail"] = loadfx("vfx\iw7\_requests\mp\vfx_bombard_projectile_trail.vfx");
 }
 
 func_13C8B(var_00) {
@@ -23,7 +23,7 @@ func_13C8B(var_00) {
   return 0;
   }
 
-  scripts/mp/killstreaks/mapselect::func_10DC2(0, 0, undefined);
+  scripts\mp\killstreaks\mapselect::func_10DC2(0, 0, undefined);
 }
 
 func_128DC(var_00) {
@@ -41,15 +41,15 @@ func_F1AC(var_00, var_01, var_02) {
   var_03 = 3;
   var_04 = "Multi-Strike";
   var_05 = "used_bombardment";
-  var_06 = scripts/mp/killstreak_loot::getrarityforlootitem(var_2.variantid);
+  var_06 = scripts\mp\killstreak_loot::getrarityforlootitem(var_2.variantid);
 
   if (var_06 != "")
   var_05 = var_05 + "_" + var_06;
 
-  if (scripts/mp/killstreaks/utility::func_A69F(var_02, "passive_extra_selection"))
+  if (scripts\mp\killstreaks\utility::func_A69F(var_02, "passive_extra_selection"))
   var_03 = 4;
 
-  if (scripts/mp/killstreaks/utility::func_A69F(var_02, "passive_impulse_explosion")) {
+  if (scripts\mp\killstreaks\utility::func_A69F(var_02, "passive_impulse_explosion")) {
   var_04 = "Single-Strike";
   var_07 = undefined;
   } else {
@@ -57,7 +57,7 @@ func_F1AC(var_00, var_01, var_02) {
   self playlocalsound("bombardment_killstreak_bootup");
   var_08 playloopsound("bombardment_killstreak_hud_loop");
   self setsoundsubmix("mp_killstreak_overlay");
-  var_07 = scripts/mp/killstreaks/mapselect::_meth_8112(var_01, var_03);
+  var_07 = scripts\mp\killstreaks\mapselect::_meth_8112(var_01, var_03);
   self playlocalsound("bombardment_killstreak_shutdown");
   self clearsoundsubmix();
   var_08 stoploopsound("");
@@ -155,7 +155,7 @@ func_6CD4(var_00, var_01, var_02, var_03) {
   var_22 = func_7DBB(var_21.location, var_05, 500, var_03);
   thread func_6D7D(var_22, var_05, var_01, var_6[var_19], var_03);
 
-  if (scripts/mp/killstreaks/utility::func_A69F(var_03, "passive_fast_launch"))
+  if (scripts\mp\killstreaks\utility::func_A69F(var_03, "passive_fast_launch"))
   wait 0.1;
   else
   wait 0.2;
@@ -180,7 +180,7 @@ sfx_bombardment_designator(var_00, var_01) {
   var_03 = "active";
   var_04 = 5;
 
-  if (scripts/mp/killstreaks/utility::func_A69F(var_01, "passive_fast_launch")) {
+  if (scripts\mp\killstreaks\utility::func_A69F(var_01, "passive_fast_launch")) {
   var_03 = "active_fast";
   var_04 = 5;
   }
@@ -277,7 +277,7 @@ func_7DBB(var_00, var_01, var_02, var_03) {
   var_04 = [];
   var_05 = 7;
 
-  if (scripts/mp/killstreaks/utility::func_A69F(var_03, "passive_fast_launch"))
+  if (scripts\mp\killstreaks\utility::func_A69F(var_03, "passive_fast_launch"))
   var_05 = 4;
 
   for (var_06 = 0; var_06 < var_05; var_6++) {
@@ -309,7 +309,7 @@ func_6D7D(var_00, var_01, var_02, var_03, var_04) {
   var_08 = var_06;
   var_09 = randomfloatrange(0.3, 0.5);
 
-  if (scripts/mp/killstreaks/utility::func_A69F(var_04, "passive_fast_launch"))
+  if (scripts\mp\killstreaks\utility::func_A69F(var_04, "passive_fast_launch"))
   var_09 = randomfloatrange(0.1, 0.3);
 
   var_10 = spawnstruct();
@@ -333,14 +333,14 @@ func_6D84(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07) {
   var_8.streakinfo = var_07;
   var_8.killcament = var_05;
 
-  if (scripts/mp/killstreaks/utility::func_A69F(var_07, "passive_fast_launch"))
+  if (scripts\mp\killstreaks\utility::func_A69F(var_07, "passive_fast_launch"))
   var_08 setscriptablepartstate("target", "active_fast");
   else
   var_08 setscriptablepartstate("target", "active");
 
   var_09 = 2;
 
-  if (scripts/mp/killstreaks/utility::func_A69F(var_07, "passive_fast_launch"))
+  if (scripts\mp\killstreaks\utility::func_A69F(var_07, "passive_fast_launch"))
   var_09 = 1.5;
 
   scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(var_09);
@@ -366,7 +366,7 @@ func_511A(var_00, var_01, var_02) {
 }
 
 triggeredbombardmentweapon(var_00) {
-  if (scripts/mp/killstreaks/utility::func_A69F(var_00, "passive_impulse_explosion")) {
+  if (scripts\mp\killstreaks\utility::func_A69F(var_00, "passive_impulse_explosion")) {
   var_0.func_EF88 = "gesture_script_weapon";
   var_0.weapon = "ks_gesture_generic_mp";
   var_0.func_6D6B = "offhand_fired";

@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2769.gsc
+ * Script: 2769.gsc
 ***************************************/
 
 init() {
@@ -346,7 +346,7 @@ setteam(var_00) {
   thread scripts\mp\playerlogic::spawnclient();
   }
 
-  thread scripts/mp/spectating::setspectatepermissions();
+  thread scripts\mp\spectating::setspectatepermissions();
   }
 
   self notify("okToSpawn");
@@ -434,7 +434,7 @@ beginclasschoice(var_00) {
   thread scripts\mp\playerlogic::spawnclient();
   }
 
-  thread scripts/mp/spectating::setspectatepermissions();
+  thread scripts\mp\spectating::setspectatepermissions();
   }
 
   self.connecttime = gettime();
@@ -540,7 +540,7 @@ menuclass(var_00) {
   thread scripts\mp\playerlogic::spawnclient();
   }
 
-  thread scripts/mp/spectating::setspectatepermissions();
+  thread scripts\mp\spectating::setspectatepermissions();
 }
 
 addtoteam(var_00, var_01, var_02) {

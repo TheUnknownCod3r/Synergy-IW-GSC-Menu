@@ -1,8 +1,8 @@
-/**********************************************
+/**************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\persistence.gsc
-**********************************************/
+ * Script: scripts\mp\persistence.gsc
+**************************************/
 
 init() {
 	level.persistentdatainfo = [];
@@ -54,7 +54,7 @@ initbufferedstats() {
 }
 
 initbestscorestatstable() {
-	var_00 = "mp/bestscorestatsTable.csv";
+	var_00 = "mp\bestscorestatsTable.csv";
 	self.bestscorestats = [];
 	self.bufferedbestscorestats = [];
 	var_01 = 0;
@@ -423,9 +423,9 @@ func_12F5E() {
 		return;
 	}
 
-	var_08 = function_02C4(var_00);
+	var_08 = getweaponvariantindex(var_00);
 	func_CA73(var_01,var_08);
-	var_03 = function_00E3(var_00);
+	var_03 = getweaponattachments(var_00);
 	foreach(var_05 in var_03) {
 		var_0A = scripts\mp\utility::attachmentmap_tobase(var_05);
 		if(!scripts\mp\utility::func_2490(var_0A)) {
@@ -527,7 +527,7 @@ func_12F85() {
 		var_05 = var_05 + var_07.timeplayed["total"];
 	}
 
-	function_00F5("global_minutes",int(var_05 / 60));
+	incrementcounter("global_minutes",int(var_05 / 60));
 	if(scripts\mp\utility::isroundbased() && !scripts\mp\utility::waslastround()) {
 		return;
 	}
@@ -541,10 +541,10 @@ func_12F85() {
 		var_04 = var_04 + var_07.suicides;
 	}
 
-	function_00F5("global_headshots",var_03);
-	function_00F5("global_suicides",var_04);
-	function_00F5("global_games",1);
+	incrementcounter("global_headshots",var_03);
+	incrementcounter("global_suicides",var_04);
+	incrementcounter("global_games",1);
 	if(!isdefined(level.assists_disabled)) {
-		function_00F5("global_assists",var_02);
+		incrementcounter("global_assists",var_02);
 	}
 }

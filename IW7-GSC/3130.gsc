@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3130.gsc
-****************************/
+ * Script: 3130.gsc
+************************/
 
 func_D55D(param_00,param_01,param_02,param_03) {}
 
@@ -90,8 +90,8 @@ func_11701(param_00,param_01) {
 		var_03 = var_02.var_116FB;
 	}
 
-	scripts/asm/asm::func_2388(param_00,param_01,var_02,var_02.var_116FB);
-	scripts/asm/asm::func_238A(param_00,var_03,0.2,undefined,undefined,undefined);
+	scripts\asm\asm::func_2388(param_00,param_01,var_02,var_02.var_116FB);
+	scripts\asm\asm::func_238A(param_00,var_03,0.2,undefined,undefined,undefined);
 	self notify("killanimscript");
 }
 

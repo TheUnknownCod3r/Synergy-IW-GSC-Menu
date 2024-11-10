@@ -1,8 +1,8 @@
-/***********************************************************
+/***************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\maps\cp_disco\phonebooth.gsc
-***********************************************************/
+ * Script: scripts\cp\maps\cp_disco\phonebooth.gsc
+***************************************************/
 
 hint_phonebooth(param_00,param_01) {
 	if(scripts\engine\utility::istrue(param_01.kung_fu_mode)) {

@@ -1,8 +1,8 @@
-/*********************************************
+/*************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\tweakables.gsc
-*********************************************/
+ * Script: scripts\mp\tweakables.gsc
+*************************************/
 
 gettweakabledvarvalue(param_00,param_01) {
 	switch(param_00) {

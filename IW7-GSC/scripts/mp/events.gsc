@@ -1,8 +1,8 @@
-/*****************************************
+/*********************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\events.gsc
-*****************************************/
+ * Script: scripts\mp\events.gsc
+*********************************/
 
 init() {
 	var_00 = [];
@@ -32,12 +32,12 @@ init() {
 
 	var_02 = 0;
 	for(;;) {
-		var_03 = tablelookupbyrow("mp/score_event_table.csv",var_02,0);
+		var_03 = tablelookupbyrow("mp\score_event_table.csv",var_02,0);
 		if(!isdefined(var_03) || var_03 == "") {
 			break;
 		}
 
-		var_04 = tablelookupbyrow("mp/score_event_table.csv",var_02,var_00[var_01]);
+		var_04 = tablelookupbyrow("mp\score_event_table.csv",var_02,var_00[var_01]);
 		if(!isdefined(var_04) || var_04 == "") {
 			var_02++;
 			continue;
@@ -55,18 +55,18 @@ init() {
 			scripts\mp\rank::registerscoreinfo(var_03,"value",var_04);
 		}
 
-		var_05 = tablelookuprownum("mp/score_event_table.csv",0,var_03);
+		var_05 = tablelookuprownum("mp\score_event_table.csv",0,var_03);
 		scripts\mp\rank::registerscoreinfo(var_03,"eventID",var_05);
-		var_05 = tablelookupbyrow("mp/score_event_table.csv",var_02,1);
+		var_05 = tablelookupbyrow("mp\score_event_table.csv",var_02,1);
 		scripts\mp\rank::registerscoreinfo(var_03,"text",var_05);
-		var_06 = tablelookuprownum("mp/splashTable.csv",0,var_03);
+		var_06 = tablelookuprownum("mp\splashTable.csv",0,var_03);
 		if(isdefined(var_06) && var_06 != -1) {
 			scripts\mp\rank::registerscoreinfo(var_03,"splashID",var_06);
 		}
 
-		var_07 = tablelookupbyrow("mp/score_event_table.csv",var_02,3);
+		var_07 = tablelookupbyrow("mp\score_event_table.csv",var_02,3);
 		scripts\mp\rank::registerscoreinfo(var_03,"group",var_07);
-		var_08 = tablelookupbyrow("mp/score_event_table.csv",var_02,2);
+		var_08 = tablelookupbyrow("mp\score_event_table.csv",var_02,2);
 		if(isdefined(var_08) && tolower(var_08) == "true") {
 			scripts\mp\rank::registerscoreinfo(var_03,"allowBonus",1);
 		}
@@ -74,7 +74,7 @@ init() {
 		var_02++;
 	}
 
-	level._effect["money"] = loadfx("vfx/props/cash_player_drop");
+	level._effect["money"] = loadfx("vfx\props\cash_player_drop");
 	level.numkills = 0;
 	level thread onplayerconnect();
 }
@@ -181,7 +181,7 @@ func_A651(param_00,param_01,param_02,param_03,param_04,param_05) {
 	}
 
 	self.modifiers = [];
-	level.var_C234++;
+	level.numkills++;
 	self.damagedplayers[var_06] = undefined;
 	func_3E24(param_02,param_03);
 	var_0A = scripts\mp\utility::getweapongroup(param_02);
@@ -704,14 +704,14 @@ func_3E50(param_00,param_01,param_02,param_03) {
 				break;
 
 			case "super_visionpulse":
-				if(scripts/mp/supers/super_visionpulse::func_9EF9(param_00)) {
+				if(scripts\mp\supers\super_visionpulse::func_9EF9(param_00)) {
 					var_08 = "super_wallhack_kill";
 					var_0A = 1;
 				}
 				break;
 
 			case "super_kineticpulse":
-				if(scripts/mp/equipment/kinetic_pulse::isplayertaggedbykineticpulse(param_00)) {
+				if(scripts\mp\equipment\kinetic_pulse::isplayertaggedbykineticpulse(param_00)) {
 					var_08 = "super_kineticpulse_kill";
 					var_0A = 1;
 				}
@@ -751,7 +751,7 @@ func_3E51(param_00,param_01,param_02) {
 			break;
 
 		case "super_visionpulse":
-			if(param_00 scripts/mp/supers/super_visionpulse::func_9EF9(self)) {
+			if(param_00 scripts\mp\supers\super_visionpulse::func_9EF9(self)) {
 				thread supershutdown(param_00);
 			}
 			break;
@@ -775,7 +775,7 @@ func_3E51(param_00,param_01,param_02) {
 			break;
 
 		case "super_kineticpulse":
-			if(param_00 scripts/mp/equipment/kinetic_pulse::isplayertaggedbykineticpulse(self)) {
+			if(param_00 scripts\mp\equipment\kinetic_pulse::isplayertaggedbykineticpulse(self)) {
 				thread supershutdown(param_00);
 			}
 			break;
@@ -803,7 +803,7 @@ func_A655(param_00,param_01,param_02,param_03) {
 	else
 	{
 		var_06 = scripts\mp\supers::getcurrentsuper();
-		var_06.var_C234++;
+		var_06.numkills++;
 	}
 
 	scripts\mp\missions::func_12F33(param_02,param_01);
@@ -824,7 +824,7 @@ superkill(param_00,param_01) {
 	}
 
 	var_04 = scripts\mp\supers::getcurrentsuper();
-	var_04.var_C234++;
+	var_04.numkills++;
 	scripts\mp\missions::updatesuperkills(param_00,param_01,var_04.numkills);
 	self.modifiers["super_kill_medal"] = param_00;
 }

@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\11.gsc
+ * Script: 11.gsc
 ***************************************/
 
 main() {
@@ -12,7 +12,7 @@ main() {
   level.badplace_cylinder_func = ::badplace_cylinder;
   level.badplace_delete_func = ::badplace_delete;
   scripts\mp\bots\bots_killstreaks::bot_killstreak_setup();
-  scripts/mp/bots/bots_powers::func_2E53();
+  scripts\mp\bots\bots_powers::func_2E53();
   scripts\mp\bots\bots_loadout::init();
   level thread init();
 }
@@ -63,7 +63,7 @@ setup_callbacks() {
   scripts\mp\bots\gametype_war::setup_callbacks();
 
   if (scripts\mp\utility\game::bot_is_fireteam_mode())
-  scripts/mp/bots/bots_fireteam::bot_fireteam_setup_callbacks();
+  scripts\mp\bots\bots_fireteam::bot_fireteam_setup_callbacks();
 }
 
 codecallback_leaderdialog(var_00, var_01) {
@@ -86,7 +86,7 @@ init() {
   setmatchdata("hasBots", 1);
 
   if (scripts\mp\utility\game::bot_is_fireteam_mode()) {
-  level thread scripts/mp/bots/bots_fireteam::bot_fireteam_init();
+  level thread scripts\mp\bots\bots_fireteam::bot_fireteam_init();
   level thread scripts\mp\bots\bots_fireteam_commander::init();
   }
   else
@@ -1099,7 +1099,7 @@ bot_restart_think_threads() {
   thread bot_think_level_acrtions();
   thread bot_think_crate();
   thread scripts\mp\bots\bots_supers::bot_think_supers();
-  thread scripts/mp/bots/bots_powers::bot_think_powers();
+  thread scripts\mp\bots\bots_powers::bot_think_powers();
   thread bot_think_crate_blocking_path();
   thread scripts\mp\bots\bots_killstreaks::bot_think_killstreak();
   thread scripts\mp\bots\bots_killstreaks::bot_think_watch_aerial_killstreak();

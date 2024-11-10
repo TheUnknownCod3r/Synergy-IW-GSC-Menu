@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2894.gsc
+ * Script: 2894.gsc
 ***************************************/
 
 func_8715(var_00) {
@@ -13,7 +13,7 @@ func_8715(var_00) {
   self.func_381C = 1;
   self.func_138DC = 0;
 
-  if (!scripts/sp/mgturret::func_13030(var_00)) {
+  if (!scripts\sp\mgturret::func_13030(var_00)) {
   self notify("continue_cover_script");
   return;
   }

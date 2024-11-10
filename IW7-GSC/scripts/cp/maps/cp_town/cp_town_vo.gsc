@@ -1,8 +1,8 @@
-/**********************************************************
+/**************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\maps\cp_town\cp_town_vo.gsc
-**********************************************************/
+ * Script: scripts\cp\maps\cp_town\cp_town_vo.gsc
+**************************************************/
 
 town_vo_init() {
 	level.recent_vo = [];

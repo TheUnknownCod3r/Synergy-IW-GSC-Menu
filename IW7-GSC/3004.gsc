@@ -1,42 +1,42 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3004.gsc
-****************************/
+ * Script: 3004.gsc
+************************/
 
 main(param_00,param_01,param_02) {
-	scripts/sp/vehicle_build::func_31C5("dropship",param_00,param_01,param_02);
-	scripts/sp/vehicle_build::func_31A6(::init_location);
-	scripts/sp/vehicle_build::func_3186(param_00,param_00);
+	scripts\sp\vehicle_build::func_31C5("dropship",param_00,param_01,param_02);
+	scripts\sp\vehicle_build::func_31A6(::init_location);
+	scripts\sp\vehicle_build::func_3186(param_00,param_00);
 	lib_0BBE::func_774E(param_02);
-	var_03 = "vfx/code/tread/heli_dust_default.vfx";
+	var_03 = "vfx\code\tread\heli_dust_default.vfx";
 	if(!isdefined(level.plant_anims) || level.plant_anims == "earth") {
-		var_03 = "vfx/code/tread/heli_dust_default.vfx";
+		var_03 = "vfx\code\tread\heli_dust_default.vfx";
 	}
 	else if(level.plant_anims == "titan") {
-		var_03 = "vfx/iw7/core/tread/tread_airship_small_titan.vfx";
+		var_03 = "vfx\iw7\core\tread\tread_airship_small_titan.vfx";
 	}
 
-	scripts/sp/vehicle_build::func_31C6(param_02,"default",var_03,0);
-	scripts/sp/vehicle_build::func_3184("vfx/iw7/core/vehicle/jackal/vfx_jackal_dying_01.vfx","j_frontlandinggear","dropship_helicopter_dying_loop",undefined,undefined,1,undefined,undefined,undefined,10,5);
-	scripts/sp/vehicle_build::func_3184("vfx/iw7/core/vehicle/dropship/vfx_dropship_hit_damage.vfx","tag_back_thruster_1_ri","dropship_helicopter_hit",undefined,undefined,undefined,undefined,undefined,undefined,10,5);
-	scripts/sp/vehicle_build::func_3184("vfx/iw7/core/vehicle/dropship/vfx_dropship_hit_damage.vfx","tag_frontsidethrsuter_ri","dropship_helicopter_secondary_exp",undefined,undefined,undefined,0.45,undefined,undefined,10,5);
-	scripts/sp/vehicle_build::func_3184("vfx/iw7/core/vehicle/dropship/vfx_dropship_hit_damage.vfx","j_frontlandinggear","dropship_helicopter_secondary_exp",undefined,undefined,undefined,1.5,undefined,undefined,10,5);
-	scripts/sp/vehicle_build::func_3184("vfx/iw7/core/vehicle/dropship/vfx_dropship_hit_damage.vfx","tag_back_thruster_1_le","dropship_helicopter_secondary_exp",undefined,undefined,undefined,3,undefined,undefined,10,5);
-	scripts/sp/vehicle_build::func_3184("vfx/iw7/core/vehicle/dropship/vfx_dropship_hit_damage.vfx","tag_frontsidethruster_le","dropship_helicopter_secondary_exp",undefined,undefined,undefined,5,undefined,undefined,10,5);
-	scripts/sp/vehicle_build::func_3184("vfx/iw7/core/vehicle/dropship/vfx_dropship_death_01.vfx",undefined,"dropship_helicopter_crash",undefined,undefined,undefined,-1,undefined,"stop_crash_loop_sound",10,5);
-	scripts/sp/vehicle_build::func_31B7("vfx/iw7/core/vehicle/dropship/vfx_dropship_death_01.vfx","tag_body","dropship_helicopter_crash",undefined,undefined,undefined,undefined,1,undefined,0);
-	scripts/sp/vehicle_build::func_31A3(3000,2800,3100);
-	scripts/sp/vehicle_build::func_31C4("allies");
-	scripts/sp/vehicle_build::func_31A2(::func_F77B);
-	scripts/sp/vehicle_build::build_ace(::func_F8A1,::func_F5FC);
-	scripts/sp/vehicle_build::func_31CC(::func_12BBD);
+	scripts\sp\vehicle_build::func_31C6(param_02,"default",var_03,0);
+	scripts\sp\vehicle_build::func_3184("vfx\iw7\core\vehicle\jackal\vfx_jackal_dying_01.vfx","j_frontlandinggear","dropship_helicopter_dying_loop",undefined,undefined,1,undefined,undefined,undefined,10,5);
+	scripts\sp\vehicle_build::func_3184("vfx\iw7\core\vehicle\dropship\vfx_dropship_hit_damage.vfx","tag_back_thruster_1_ri","dropship_helicopter_hit",undefined,undefined,undefined,undefined,undefined,undefined,10,5);
+	scripts\sp\vehicle_build::func_3184("vfx\iw7\core\vehicle\dropship\vfx_dropship_hit_damage.vfx","tag_frontsidethrsuter_ri","dropship_helicopter_secondary_exp",undefined,undefined,undefined,0.45,undefined,undefined,10,5);
+	scripts\sp\vehicle_build::func_3184("vfx\iw7\core\vehicle\dropship\vfx_dropship_hit_damage.vfx","j_frontlandinggear","dropship_helicopter_secondary_exp",undefined,undefined,undefined,1.5,undefined,undefined,10,5);
+	scripts\sp\vehicle_build::func_3184("vfx\iw7\core\vehicle\dropship\vfx_dropship_hit_damage.vfx","tag_back_thruster_1_le","dropship_helicopter_secondary_exp",undefined,undefined,undefined,3,undefined,undefined,10,5);
+	scripts\sp\vehicle_build::func_3184("vfx\iw7\core\vehicle\dropship\vfx_dropship_hit_damage.vfx","tag_frontsidethruster_le","dropship_helicopter_secondary_exp",undefined,undefined,undefined,5,undefined,undefined,10,5);
+	scripts\sp\vehicle_build::func_3184("vfx\iw7\core\vehicle\dropship\vfx_dropship_death_01.vfx",undefined,"dropship_helicopter_crash",undefined,undefined,undefined,-1,undefined,"stop_crash_loop_sound",10,5);
+	scripts\sp\vehicle_build::func_31B7("vfx\iw7\core\vehicle\dropship\vfx_dropship_death_01.vfx","tag_body","dropship_helicopter_crash",undefined,undefined,undefined,undefined,1,undefined,0);
+	scripts\sp\vehicle_build::func_31A3(3000,2800,3100);
+	scripts\sp\vehicle_build::func_31C4("allies");
+	scripts\sp\vehicle_build::func_31A2(::func_F77B);
+	scripts\sp\vehicle_build::build_ace(::func_F8A1,::func_F5FC);
+	scripts\sp\vehicle_build::func_31CC(::func_12BBD);
 	if(issubstr(param_02,"plane")) {
-		scripts/sp/vehicle_build::func_319F();
+		scripts\sp\vehicle_build::func_319F();
 	}
 	else
 	{
-		scripts/sp/vehicle_build::func_31A0();
+		scripts\sp\vehicle_build::func_31A0();
 	}
 
 	if(!issubstr(param_02,"cheap")) {
@@ -96,22 +96,22 @@ init_location() {
 		self.var_4D94.var_EF3C["cabin_lights"] = [];
 		var_04 = ["tag_light_le_01","tag_light_le_02","tag_light_le_03","tag_light_le_04","tag_light_le_05","tag_light_ri_01","tag_light_ri_02","tag_light_ri_03","tag_light_ri_04","tag_light_ri_05"];
 		foreach(var_06 in var_04) {
-			var_07 = scripts/sp/anim::func_1EE5("veh_mil_air_un_dropship_hero_interior_light",var_06);
+			var_07 = scripts\sp\anim::func_1EE5("veh_mil_air_un_dropship_hero_interior_light",var_06);
 			var_07.var_336 = "dropship_cabin_lights_" + self.var_6A0B;
 			self.var_4D94.var_EF3C["cabin_lights"][self.var_4D94.var_EF3C["cabin_lights"].size] = var_07;
 		}
 
 		self.var_4D94.var_9A62 = [];
-		self.var_4D94.var_9A62[self.var_4D94.var_9A62.size] = scripts/sp/anim::func_1EE5("veh_mil_air_un_dropship_hero_interior","tag_connect");
-		self.var_4D94.var_9A62[self.var_4D94.var_9A62.size] = scripts/sp/anim::func_1EE5("veh_mil_air_un_dropship_hero_interior_cockpit_dash","TAG_COCKPIT_DASH");
-		self.var_4D94.var_9A62[self.var_4D94.var_9A62.size] = scripts/sp/anim::func_1EE5("veh_mil_air_un_dropship_hero_interior_pilot_seat","TAG_PILOT_SEAT_LE");
-		self.var_4D94.var_9A62[self.var_4D94.var_9A62.size] = scripts/sp/anim::func_1EE5("veh_mil_air_un_dropship_hero_interior_pilot_seat","TAG_PILOT_SEAT_RI");
-		self.var_4D94.var_9A62[self.var_4D94.var_9A62.size] = scripts/sp/anim::func_1EE5("veh_mil_air_un_dropship_hero_interior_screens","TAG_COCKPIT_SCREENS");
-		self.var_4D94.var_9A62[self.var_4D94.var_9A62.size] = scripts/sp/anim::func_1EE5("veh_mil_air_un_dropship_hero_interior_props_rear","TAG_PROPS_REAR");
-		self.var_4D94.var_9A62[self.var_4D94.var_9A62.size] = scripts/sp/anim::func_1EE5("veh_mil_air_un_dropship_hero_interior_props_cockpit","TAG_PROPS_COCKPIT");
-		self.var_4D94.var_9A62[self.var_4D94.var_9A62.size] = scripts/sp/anim::func_1EE5("veh_mil_air_un_dropship_hero_interior_metal_beams_rear","TAG_METAL_BEAMS_REAR");
-		self.var_4D94.var_9A62[self.var_4D94.var_9A62.size] = scripts/sp/anim::func_1EE5("veh_mil_air_un_dropship_hero_interior_seat_bays_le","TAG_SEAT_BAYS_LE");
-		self.var_4D94.var_9A62[self.var_4D94.var_9A62.size] = scripts/sp/anim::func_1EE5("veh_mil_air_un_dropship_hero_interior_seat_bays_ri","TAG_SEAT_BAYS_RI");
+		self.var_4D94.var_9A62[self.var_4D94.var_9A62.size] = scripts\sp\anim::func_1EE5("veh_mil_air_un_dropship_hero_interior","tag_connect");
+		self.var_4D94.var_9A62[self.var_4D94.var_9A62.size] = scripts\sp\anim::func_1EE5("veh_mil_air_un_dropship_hero_interior_cockpit_dash","TAG_COCKPIT_DASH");
+		self.var_4D94.var_9A62[self.var_4D94.var_9A62.size] = scripts\sp\anim::func_1EE5("veh_mil_air_un_dropship_hero_interior_pilot_seat","TAG_PILOT_SEAT_LE");
+		self.var_4D94.var_9A62[self.var_4D94.var_9A62.size] = scripts\sp\anim::func_1EE5("veh_mil_air_un_dropship_hero_interior_pilot_seat","TAG_PILOT_SEAT_RI");
+		self.var_4D94.var_9A62[self.var_4D94.var_9A62.size] = scripts\sp\anim::func_1EE5("veh_mil_air_un_dropship_hero_interior_screens","TAG_COCKPIT_SCREENS");
+		self.var_4D94.var_9A62[self.var_4D94.var_9A62.size] = scripts\sp\anim::func_1EE5("veh_mil_air_un_dropship_hero_interior_props_rear","TAG_PROPS_REAR");
+		self.var_4D94.var_9A62[self.var_4D94.var_9A62.size] = scripts\sp\anim::func_1EE5("veh_mil_air_un_dropship_hero_interior_props_cockpit","TAG_PROPS_COCKPIT");
+		self.var_4D94.var_9A62[self.var_4D94.var_9A62.size] = scripts\sp\anim::func_1EE5("veh_mil_air_un_dropship_hero_interior_metal_beams_rear","TAG_METAL_BEAMS_REAR");
+		self.var_4D94.var_9A62[self.var_4D94.var_9A62.size] = scripts\sp\anim::func_1EE5("veh_mil_air_un_dropship_hero_interior_seat_bays_le","TAG_SEAT_BAYS_LE");
+		self.var_4D94.var_9A62[self.var_4D94.var_9A62.size] = scripts\sp\anim::func_1EE5("veh_mil_air_un_dropship_hero_interior_seat_bays_ri","TAG_SEAT_BAYS_RI");
 		self.var_4D94.parts = [];
 		self.var_4D94.parts["straps"] = [];
 		foreach(var_06 in ["TAG_CARABINER_HANDLE_LE_1","TAG_CARABINER_HANDLE_LE_2","TAG_CARABINER_HANDLE_RI_1","TAG_CARABINER_HANDLE_RI_2"]) {

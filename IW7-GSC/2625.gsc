@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2625.gsc
+ * Script: 2625.gsc
 ***************************************/
 
 func_EF33(var_00) {

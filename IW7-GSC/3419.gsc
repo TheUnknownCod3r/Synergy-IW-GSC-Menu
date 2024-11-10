@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3419.gsc
-****************************/
+ * Script: 3419.gsc
+************************/
 
 init() {
 	level.available_player_characters = [];
@@ -60,7 +60,7 @@ givedefaultloadout(param_00,param_01) {
 	var_02 scripts\cp\utility::giveperk("specialty_pistoldeath");
 	var_02 scripts\cp\utility::giveperk("specialty_sprintreload");
 	var_02 scripts\cp\utility::giveperk("specialty_gung_ho");
-	var_02.movespeedscaler = var_02 scripts/cp/perks/prestige::prestige_getmoveslowscalar();
+	var_02.movespeedscaler = var_02 scripts\cp\perks\prestige::prestige_getmoveslowscalar();
 	if(isdefined(param_00) && param_00) {
 		return;
 	}
@@ -417,7 +417,7 @@ getplayermodelindex() {
 }
 
 clearclienttriggeraudiozone(param_00) {
-	return tablelookup("mp/cac/bodies.csv",0,param_00,5);
+	return tablelookup("mp\cac\bodies.csv",0,param_00,5);
 }
 
 updatemovespeedscale() {
@@ -601,7 +601,7 @@ func_EBA1(param_00) {
 }
 
 func_3D8F() {
-	return scripts/cp/perks/prestige::prestige_getminammo();
+	return scripts\cp\perks\prestige::prestige_getminammo();
 }
 
 func_1358A(param_00) {
@@ -794,7 +794,7 @@ func_23C6() {
 
 _allowbattleslide(param_00) {
 	if(param_00) {
-		thread scripts/cp/perks/perkfunctions::setbattleslide();
+		thread scripts\cp\perks\perkfunctions::setbattleslide();
 		return;
 	}
 

@@ -1,8 +1,8 @@
-/************************************************************
+/****************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\equipment\exploding_drone.gsc
-************************************************************/
+ * Script: scripts\mp\equipment\exploding_drone.gsc
+****************************************************/
 
 func_69D5() {
 	level.var_69D6 = [];
@@ -18,15 +18,15 @@ func_69D3() {
 }
 
 func_69D4(param_00,param_01) {
-	param_01 = scripts\mp\_utility::istrue(param_01);
+	param_01 = scripts\mp\utility::istrue(param_01);
 	param_00.issmokeversion = param_01;
 	param_00.throwtime = gettime();
 	if(!param_01) {
 		thread func_69CD();
 		thread func_69CC();
-		scripts\mp\_utility::printgameaction("exploding drone spawn",param_00.triggerportableradarping);
+		scripts\mp\utility::printgameaction("exploding drone spawn",param_00.triggerportableradarping);
 	}
-	else if(scripts/mp/equipment/phase_shift::isentityphaseshifted(self)) {
+	else if(scripts\mp\equipment\phase_shift::isentityphaseshifted(self)) {
 		return;
 	}
 
@@ -55,7 +55,7 @@ func_69C8(param_00) {
 	self setscriptablepartstate("secondaryThrusters","neutral",0);
 	var_02 = undefined;
 	if(!self.issmokeversion) {
-		scripts\mp\_utility::printgameaction("exploding drone exploded",var_01);
+		scripts\mp\utility::printgameaction("exploding drone exploded",var_01);
 		self setscriptablepartstate("explode","active",0);
 		var_02 = 0.1;
 	}
@@ -76,7 +76,7 @@ func_69C2(param_00) {
 
 	explodingdrone_awardpointsfordeath(param_00,var_01);
 	if(!self.issmokeversion) {
-		scripts\mp\_utility::printgameaction("exploding drone destroyed",var_01);
+		scripts\mp\utility::printgameaction("exploding drone destroyed",var_01);
 	}
 
 	self _meth_8593();
@@ -104,7 +104,7 @@ func_69BF(param_00) {
 }
 
 explodingdrone_transform() {
-	scripts\mp\_utility::_launchgrenade(scripts\engine\utility::ter_op(self.issmokeversion,"power_smoke_drone_transform_mp","power_exploding_drone_transform_mp"),self.origin,(0,0,0),100,1,self);
+	scripts\mp\utility::_launchgrenade(scripts\engine\utility::ter_op(self.issmokeversion,"power_smoke_drone_transform_mp","power_exploding_drone_transform_mp"),self.origin,(0,0,0),100,1,self);
 	thread explodingdrone_transforminternal();
 }
 
@@ -153,7 +153,7 @@ func_69C5() {
 	var_03 = isdefined(var_01) && var_01 == "tag_weapon";
 	if(!self.issmokeversion) {
 		if(isdefined(var_00) && isplayer(var_00) || isagent(var_00) && !var_03 && !var_02) {
-			if(scripts/mp/equipment/phase_shift::areentitiesinphase(var_00,self)) {
+			if(scripts\mp\equipment\phase_shift::areentitiesinphase(var_00,self)) {
 				var_00 dodamage(35,self.origin,self.triggerportableradarping,self,"MOD_IMPACT",scripts\engine\utility::ter_op(self.issmokeversion,"power_smoke_drone_mp","power_exploding_drone_mp"));
 			}
 		}
@@ -185,14 +185,14 @@ func_69D1() {
 	self setotherent(var_00);
 	var_00 func_69BC(self);
 	thread func_69D2();
-	var_06 = var_00 scripts\mp\_utility::_hasperk("specialty_rugged_eqp");
+	var_06 = var_00 scripts\mp\utility::_hasperk("specialty_rugged_eqp");
 	if(var_06) {
 		self.hasruggedeqp = 1;
 	}
 
 	var_07 = scripts\engine\utility::ter_op(var_06,57,38);
 	var_08 = scripts\engine\utility::ter_op(var_06,"hitequip","");
-	thread scripts\mp\_damage::monitordamage(var_07,var_08,::func_69CA,::explodingdrone_handledamage,0,0);
+	thread scripts\mp\damage::monitordamage(var_07,var_08,::func_69CA,::explodingdrone_handledamage,0,0);
 	self missilethermal();
 	self missileoutline();
 	if(!self.issmokeversion) {
@@ -203,7 +203,7 @@ func_69D1() {
 	thread func_69C3();
 	thread func_69C4();
 	thread scripts\mp\perks\_perk_equipmentping::runequipmentping();
-	thread scripts\mp\_weapons::outlineequipmentforowner(self,var_00);
+	thread scripts\mp\weapons::outlineequipmentforowner(self,var_00);
 	var_09 = scripts\engine\utility::spawn_tag_origin();
 	var_09 thread func_69C1(self);
 	self linkto(var_09);
@@ -229,7 +229,7 @@ func_69C9(param_00) {
 	var_01 = vectornormalize(param_00 - self.origin);
 	var_02 = scripts\common\trace::create_contents(1,1,1,0,1,1,0);
 	for(;;) {
-		if(function_0288(self.origin,self.origin + var_01 * 12,6,var_02,[self,self.triggerportableradarping],"physicsquery_any")) {
+		if(physics_spherecast(self.origin,self.origin + var_01 * 12,6,var_02,[self,self.triggerportableradarping],"physicsquery_any")) {
 			thread func_69C8();
 		}
 
@@ -242,8 +242,8 @@ func_69C3() {
 	self.triggerportableradarping endon("disconnect");
 	self waittill("emp_damage",var_00,var_01,var_02,var_03,var_04);
 	if(isdefined(var_03) && var_03 == "emp_grenade_mp") {
-		if(scripts\mp\_utility::istrue(scripts\mp\_utility::playersareenemies(self.triggerportableradarping,var_00))) {
-			var_00 scripts\mp\_missions::func_D991("ch_tactical_emp_eqp");
+		if(scripts\mp\utility::istrue(scripts\mp\utility::playersareenemies(self.triggerportableradarping,var_00))) {
+			var_00 scripts\mp\missions::func_D991("ch_tactical_emp_eqp");
 		}
 	}
 
@@ -259,15 +259,15 @@ func_69C4() {
 }
 
 explodingdrone_validdetonationstate() {
-	if(!scripts\mp\_utility::isreallyalive(self)) {
+	if(!scripts\mp\utility::isreallyalive(self)) {
 		return 0;
 	}
 
-	if(scripts\mp\_utility::isusingremote()) {
+	if(scripts\mp\utility::isusingremote()) {
 		return 0;
 	}
 
-	if(scripts/mp/equipment/phase_shift::isentityphaseshifted(self)) {
+	if(scripts\mp\equipment\phase_shift::isentityphaseshifted(self)) {
 		return 0;
 	}
 
@@ -335,7 +335,7 @@ func_69CC() {
 				continue;
 			}
 
-			if(!scripts/mp/equipment/phase_shift::isentityphaseshifted(self) && !scripts\mp\_utility::isusingremote()) {
+			if(!scripts\mp\equipment\phase_shift::isentityphaseshifted(self) && !scripts\mp\utility::isusingremote()) {
 				func_69C7();
 			}
 		}
@@ -405,24 +405,24 @@ isexplodingdrone() {
 
 explodingdrone_givedamagefeedback(param_00) {
 	var_01 = "";
-	if(scripts\mp\_utility::istrue(self.hasruggedeqp)) {
+	if(scripts\mp\utility::istrue(self.hasruggedeqp)) {
 		var_01 = "hitequip";
 	}
 
 	if(isplayer(param_00)) {
-		param_00 scripts\mp\_damagefeedback::updatedamagefeedback(var_01);
+		param_00 scripts\mp\damagefeedback::updatedamagefeedback(var_01);
 	}
 }
 
 explodingdrone_awardpointsfordeath(param_00,param_01) {
-	if(scripts\mp\_utility::istrue(scripts\mp\_utility::playersareenemies(param_01,param_00))) {
+	if(scripts\mp\utility::istrue(scripts\mp\utility::playersareenemies(param_01,param_00))) {
 		self setentityowner(param_00);
 		param_00 notify("destroyed_equipment");
 		if(!self.issmokeversion) {
 			param_00 notify("killed_exploding_drone",param_01);
 		}
 
-		param_00 thread scripts\mp\_utility::giveunifiedpoints("destroyed_equipment");
+		param_00 thread scripts\mp\utility::giveunifiedpoints("destroyed_equipment");
 	}
 }
 
@@ -457,7 +457,7 @@ explodingdrone_modifieddamage(param_00,param_01,param_02,param_03,param_04) {
 }
 
 explodingdrone_handledamage(param_00,param_01,param_02,param_03,param_04) {
-	if(!scripts/mp/equipment/phase_shift::areentitiesinphase(param_00,self)) {
+	if(!scripts\mp\equipment\phase_shift::areentitiesinphase(param_00,self)) {
 		return 0;
 	}
 
@@ -475,11 +475,11 @@ explodingdrone_handledamage(param_00,param_01,param_02,param_03,param_04) {
 
 				default:
 					var_06 = 1;
-					if(param_03 >= scripts\mp\_weapons::minegettwohitthreshold()) {
+					if(param_03 >= scripts\mp\weapons::minegettwohitthreshold()) {
 						var_06 = var_06 + 1;
 					}
 	
-					if(scripts\mp\_utility::isfmjdamage(param_01,param_02)) {
+					if(scripts\mp\utility::isfmjdamage(param_01,param_02)) {
 						var_06 = var_06 * 2;
 					}
 					param_03 = var_06 * 19;
@@ -488,7 +488,7 @@ explodingdrone_handledamage(param_00,param_01,param_02,param_03,param_04) {
 		}
 	}
 
-	scripts\mp\_powers::equipmenthit(self.triggerportableradarping,param_00,param_01,param_02);
+	scripts\mp\powers::equipmenthit(self.triggerportableradarping,param_00,param_01,param_02);
 	return param_03;
 }
 
@@ -514,7 +514,7 @@ isusingreaper() {
 		return 0;
 	}
 
-	if(!scripts\mp\_utility::isreallyalive(self)) {
+	if(!scripts\mp\utility::isreallyalive(self)) {
 		return 0;
 	}
 
@@ -524,7 +524,7 @@ isusingreaper() {
 			return 0;
 		}
 
-		return scripts\mp\_utility::istrue(self.super.isinuse);
+		return scripts\mp\utility::istrue(self.super.isinuse);
 	}
 
 	return 0;

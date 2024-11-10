@@ -1,8 +1,8 @@
-/******************************************************************************
+/**********************************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\anim\traverse\c6worker_jumpacross_rail_to_rail.gsc
-******************************************************************************/
+ * Script: scripts\anim\traverse\c6worker_jumpacross_rail_to_rail.gsc
+**********************************************************************/
 
 main() {
 	self waittill("killanimscript");

@@ -1,14 +1,14 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\3505.gsc
+ * Script: 3505.gsc
 ***************************************/
 
 init() {
   scripts\mp\killstreaks\killstreaks::registerkillstreak("odin_support", ::func_128F1);
   scripts\mp\killstreaks\killstreaks::registerkillstreak("odin_assault", ::func_128F1);
-  level._effect["odin_clouds"] = loadfx("vfx/core/mp/killstreaks/odin/odin_parallax_clouds");
-  level._effect["odin_fisheye"] = loadfx("vfx/code/screen/vfx_scrnfx_odin_fisheye.vfx");
-  level._effect["odin_targeting"] = loadfx("vfx/core/mp/killstreaks/odin/vfx_marker_odin_cyan");
+  level._effect["odin_clouds"] = loadfx("vfx\core\mp\killstreaks\odin\odin_parallax_clouds");
+  level._effect["odin_fisheye"] = loadfx("vfx\code\screen\vfx_scrnfx_odin_fisheye.vfx");
+  level._effect["odin_targeting"] = loadfx("vfx\core\mp\killstreaks\odin\vfx_marker_odin_cyan");
   level.func_C321 = [];
   level.func_C321["odin_support"] = spawnstruct();
   level.func_C321["odin_support"].timeout = 60.0;

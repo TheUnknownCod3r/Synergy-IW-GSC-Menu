@@ -1,8 +1,8 @@
-/************************************************************
+/****************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\aitype\civilian_facility_worker_dead.gsc
-************************************************************/
+ * Script: aitype\civilian_facility_worker_dead.gsc
+****************************************************/
 
 main() {
 	self.var_17DB = "";

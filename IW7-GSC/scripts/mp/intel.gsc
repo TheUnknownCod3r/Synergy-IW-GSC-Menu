@@ -1,8 +1,8 @@
-/****************************************
+/********************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\intel.gsc
-****************************************/
+ * Script: scripts\mp\intel.gsc
+********************************/
 
 init() {
 	scripts\mp\intelchallenges::func_DEF9();
@@ -115,7 +115,7 @@ func_AE1D(param_00) {
 }
 
 func_B02D(param_00) {
-	var_01 = tablelookup("mp/intelChallenges.csv",0,param_00,1);
+	var_01 = tablelookup("mp\intelChallenges.csv",0,param_00,1);
 	if(!isdefined(var_01) || var_01 == "") {
 		return undefined;
 	}
@@ -124,7 +124,7 @@ func_B02D(param_00) {
 }
 
 func_B02E(param_00,param_01) {
-	var_02 = tablelookup("mp/intelChallenges.csv",0,param_00,5 + param_01 * 2);
+	var_02 = tablelookup("mp\intelChallenges.csv",0,param_00,5 + param_01 * 2);
 	if(!isdefined(var_02) || var_02 == "") {
 		return undefined;
 	}

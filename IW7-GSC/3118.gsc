@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3118.gsc
-****************************/
+ * Script: 3118.gsc
+************************/
 
 zombiegreymayshoot(param_00) {
 	if(!isdefined(self.var_394)) {
@@ -63,7 +63,7 @@ isgreymeleeallowed(param_00) {
 		return 0;
 	}
 
-	if(isdefined(self.bt.cannotmelee)) {
+	if(isdefined(self.var_3135.cannotmelee)) {
 		return 0;
 	}
 
@@ -75,7 +75,7 @@ isgreymeleeallowed(param_00) {
 		return 0;
 	}
 
-	if(isdefined(self._stealth) && !scripts/aitypes/melee::canmeleeduringstealth()) {
+	if(isdefined(self._stealth) && !scripts\aitypes\melee::canmeleeduringstealth()) {
 		return 0;
 	}
 
@@ -169,7 +169,7 @@ zombiegreyshouldduplicatingattack(param_00) {
 
 setduplicatingattackdata(param_00,param_01) {
 	param_00 setscriptablepartstate("health_light","no_light");
-	scripts/asm/zombie_grey/zombie_grey_asm::set_grey_clone(param_00);
+	scripts\asm\zombie_grey\zombie_grey_asm::set_grey_clone(param_00);
 	param_00.doing_duplicating_attack = 1;
 	param_00.num_of_clones = param_01;
 	level.clone_health = int(param_00.maxhealth / param_01);
@@ -456,15 +456,15 @@ ismeleevalid(param_00,param_01) {
 		return 0;
 	}
 
-	if(scripts/asm/asm_bb::bb_ismissingaleg()) {
+	if(scripts\asm\asm_bb::bb_ismissingaleg()) {
 		return 0;
 	}
 
-	if(!scripts/aitypes/melee::ismeleevalid_common(param_00,param_01)) {
+	if(!scripts\aitypes\melee::ismeleevalid_common(param_00,param_01)) {
 		return 0;
 	}
 
-	var_02 = scripts/aitypes/melee::gettargetchargepos(param_00);
+	var_02 = scripts\aitypes\melee::gettargetchargepos(param_00);
 	if(!isdefined(var_02)) {
 		return 0;
 	}
@@ -565,7 +565,7 @@ regen_health_internal(param_00) {
 		[[level.pre_grey_regen_func]](param_00);
 	}
 
-	scripts/asm/zombie_grey/zombie_grey_asm::drop_max_ammo();
+	scripts\asm\zombie_grey\zombie_grey_asm::drop_max_ammo();
 	param_00.health = param_00.maxhealth;
 	param_00 notify("update_health_light");
 	var_01 = scripts\engine\utility::waittill_any_timeout_1(6,"stop_regen_health");
@@ -661,7 +661,7 @@ greymeleevsplayer_init(param_00) {
 		self [[self.fnmeleevsplayer_init]](param_00);
 	}
 
-	thread scripts/aitypes/melee::meleedeathhandler(self.isnodeoccupied);
+	thread scripts\aitypes\melee::meleedeathhandler(self.isnodeoccupied);
 }
 
 melee_init(param_00,param_01) {
@@ -670,21 +670,21 @@ melee_init(param_00,param_01) {
 	}
 
 	if(isdefined(self.melee)) {
-		scripts/aitypes/melee::melee_destroy();
+		scripts\aitypes\melee::melee_destroy();
 	}
 
-	scripts/asm/asm_bb::bb_setmeleetarget(param_01);
+	scripts\asm\asm_bb::bb_setmeleetarget(param_01);
 	self.melee.taskid = param_00;
 	param_01.melee.taskid = param_00;
 	return level.success;
 }
 
 greymeleevsplayer_update(param_00) {
-	return scripts/aitypes/melee::meleevsplayer_update(param_00);
+	return scripts\aitypes\melee::meleevsplayer_update(param_00);
 }
 
 greymeleevsplayer_terminate(param_00) {
-	scripts/aitypes/melee::meleevsplayer_terminate(param_00);
+	scripts\aitypes\melee::meleevsplayer_terminate(param_00);
 }
 
 set_can_do_teleport_attack(param_00,param_01) {

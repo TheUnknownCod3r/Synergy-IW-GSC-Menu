@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3429.gsc
-****************************/
+ * Script: 3429.gsc
+************************/
 
 agentfunc(param_00) {
 	return level.agent_funcs[self.agent_type][param_00];
@@ -67,7 +67,7 @@ initplayerscriptvariables(param_00) {
 	{
 		self.movespeedscaler = 1;
 		self.avoidkillstreakonspawntimer = 4;
-		self.guid = scripts\mp\_utility::getuniqueid();
+		self.guid = scripts\mp\utility::getuniqueid();
 		self.name = self.guid;
 		self.sessionteam = self.team;
 		self.sessionstate = "playing";
@@ -75,11 +75,11 @@ initplayerscriptvariables(param_00) {
 		self.var_FC95 = 0;
 		self.recentshieldxp = 0;
 		self.agent_gameparticipant = 1;
-		scripts\mp\_playerlogic::setupsavedactionslots();
+		scripts\mp\playerlogic::setupsavedactionslots();
 		thread scripts\mp\perks\_perks::onplayerspawned();
-		if(scripts\mp\_utility::isgameparticipant(self)) {
+		if(scripts\mp\utility::isgameparticipant(self)) {
 			self.objectivescaler = 1;
-			scripts\mp\_gameobjects::init_player_gameobjects();
+			scripts\mp\gameobjects::init_player_gameobjects();
 			self.disabledweapon = 0;
 			self.disabledweaponswitch = 0;
 			self.disabledoffhandweapons = 0;
@@ -123,11 +123,11 @@ deactivateagent() {
 deactivateagentdelayed() {
 	self notify("deactivateAgentDelayed");
 	self endon("deactivateAgentDelayed");
-	if(scripts\mp\_utility::isgameparticipant(self)) {
-		scripts\mp\_spawnlogic::removefromparticipantsarray();
+	if(scripts\mp\utility::isgameparticipant(self)) {
+		scripts\mp\spawnlogic::removefromparticipantsarray();
 	}
 
-	scripts\mp\_spawnlogic::removefromcharactersarray();
+	scripts\mp\spawnlogic::removefromcharactersarray();
 	wait(0.05);
 	self.isactive = 0;
 	self.hasdied = 0;
@@ -238,7 +238,7 @@ getvalidspawnpathnodenearplayer(param_00,param_01) {
 
 	var_07 = anglestoforward(self.angles);
 	var_08 = -10;
-	var_09 = scripts\mp\_spawnlogic::getplayertraceheight(self);
+	var_09 = scripts\mp\spawnlogic::getplayertraceheight(self);
 	var_0A = (0,0,var_09);
 	if(!isdefined(param_00)) {
 		param_00 = 0;

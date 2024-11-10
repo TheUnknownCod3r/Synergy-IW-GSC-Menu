@@ -1,8 +1,8 @@
-/*******************************************
+/***********************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\sp\pip_util.gsc
-*******************************************/
+ * Script: scripts\sp\pip_util.gsc
+***********************************/
 
 func_CBAA() {}
 
@@ -66,28 +66,28 @@ func_2ADF(param_00) {
 	level.player playsound("ui_pip_on_hud_right");
 	setomnvar("ui_pip_message_text_top","script_pip_default_top");
 	setomnvar("ui_pip_message_text_bottom","script_pip_default_bottom");
-	function_01F1();
-	function_01C5("bg_cinematicFullScreen","0");
-	function_01C5("bg_cinematicCanPause","1");
+	stopcinematicingame();
+	setsaveddvar("bg_cinematicFullScreen","0");
+	setsaveddvar("bg_cinematicCanPause","1");
 	setomnvar("ui_show_pip",1);
 	wait(0.05);
 	setomnvar("ui_show_pip",0);
 	wait(0.05);
 	setomnvar("ui_show_pip",1);
-	function_003D(param_00);
-	while(!function_0102()) {
+	cinematicingame(param_00);
+	while(!iscinematicplaying()) {
 		wait(0.05);
 	}
 
-	while(function_0102()) {
+	while(iscinematicplaying()) {
 		wait(0.05);
 	}
 
-	function_01F1();
+	stopcinematicingame();
 	setomnvar("ui_show_pip",0);
 	level.player playsound("ui_pip_off_hud_right");
-	function_01C5("bg_cinematicFullScreen","1");
-	function_01C5("bg_cinematicCanPause","1");
+	setsaveddvar("bg_cinematicFullScreen","1");
+	setsaveddvar("bg_cinematicCanPause","1");
 }
 
 func_CBC3(param_00) {

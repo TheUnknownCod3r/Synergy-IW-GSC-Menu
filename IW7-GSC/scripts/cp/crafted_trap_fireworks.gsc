@@ -1,8 +1,8 @@
-/*********************************************************
+/*************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\crafted_trap_fireworks.gsc
-*********************************************************/
+ * Script: scripts\cp\crafted_trap_fireworks.gsc
+*************************************************/
 
 init() {
 	level.var_6DA3 = [];

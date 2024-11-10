@@ -1,19 +1,19 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2812.gsc
+ * Script: 2812.gsc
 ***************************************/
 
 func_248C(var_00) {
-  return tablelookup("mp/attachmentTable.csv", 4, var_00, 2);
+  return tablelookup("mp\attachmentTable.csv", 4, var_00, 2);
 }
 
 init() {
   level.func_EBCF = 1;
   level.func_EBD0 = 1;
-  level._effect["item_fx_legendary"] = loadfx("vfx/iw7/_requests/mp/vfx_weap_loot_legendary.vfx");
-  level._effect["item_fx_rare"] = loadfx("vfx/iw7/_requests/mp/vfx_weap_loot_rare.vfx");
-  level._effect["item_fx_common"] = loadfx("vfx/iw7/_requests/mp/vfx_weap_loot_common.vfx");
-  level._effect["shield_metal_impact"] = loadfx("vfx/iw7/core/impact/weapon/md/vfx_imp_md_metal.vfx");
+  level._effect["item_fx_legendary"] = loadfx("vfx\iw7\_requests\mp\vfx_weap_loot_legendary.vfx");
+  level._effect["item_fx_rare"] = loadfx("vfx\iw7\_requests\mp\vfx_weap_loot_rare.vfx");
+  level._effect["item_fx_common"] = loadfx("vfx\iw7\_requests\mp\vfx_weap_loot_common.vfx");
+  level._effect["shield_metal_impact"] = loadfx("vfx\iw7\core\impact\weapon\md\vfx_imp_md_metal.vfx");
   level.maxperplayerexplosives = max(scripts\mp\utility\game::getintproperty("scr_maxPerPlayerExplosives", 2), 1);
   level.riotshieldxpbullets = scripts\mp\utility\game::getintproperty("scr_riotShieldXPBullets", 15);
   createthreatbiasgroup("DogsDontAttack");
@@ -38,24 +38,24 @@ init() {
   func_97DD();
   buildattachmentmaps();
   func_3222();
-  level._effect["weap_blink_friend"] = loadfx("vfx/core/mp/killstreaks/vfx_detonator_blink_cyan");
-  level._effect["weap_blink_enemy"] = loadfx("vfx/core/mp/killstreaks/vfx_detonator_blink_orange");
-  level._effect["emp_stun"] = loadfx("vfx/core/mp/equipment/vfx_emp_grenade");
-  level._effect["equipment_explode"] = loadfx("vfx/iw7/_requests/mp/vfx_generic_equipment_exp.vfx");
-  level._effect["equipment_smoke"] = loadfx("vfx/core/mp/killstreaks/vfx_sg_damage_blacksmoke");
-  level._effect["equipment_sparks"] = loadfx("vfx/core/mp/killstreaks/vfx_sentry_gun_explosion");
-  level._effect["vfx_sensor_grenade_ping"] = loadfx("vfx/old/_requests/future_weapons/vfx_sensor_grenade_ping");
-  level._effect["plasmablast_muz_w"] = loadfx("vfx/old/_requests/mp_weapons/vfx_muz_plasma_blast_w");
-  level._effect["vfx_trail_plyr_knife_tele"] = loadfx("vfx/old/_requests/mp_weapons/vfx_trail_plyr_knife_tele");
-  level._effect["case_bomb"] = loadfx("vfx/old/_requests/mp_weapons/expl_plasma_blast");
-  level._effect["corpse_pop"] = loadfx("vfx/iw7/_requests/mp/vfx_body_expl");
-  level._effect["sniper_glint"] = loadfx("vfx/iw7/core/mechanics/sniper_glint/vfx_sniper_glint");
-  level._effect["vfx_sonic_sensor_pulse"] = loadfx("vfx/iw7/_requests/mp/vfx_sonic_sensor_pulse");
-  level._effect["distortion_field_cloud"] = loadfx("vfx/iw7/_requests/mp/vfx_distortion_field_volume");
-  level._effect["penetration_railgun_impact"] = loadfx("vfx/iw7/_requests/mp/vfx_penetration_railgun_impact");
-  level._effect["penetration_railgun_pin"] = loadfx("vfx/iw7/_requests/mp/vfx_penetration_railgun_pin");
-  level._effect["vfx_penetration_railgun_impact"] = loadfx("vfx/iw7/_requests/mp/vfx_penetration_railgun_impact.vfx");
-  level._effect["vfx_emp_grenade_underbarrel"] = loadfx("vfx/iw7/_requests/mp/vfx_pulse_grenade_friendly.vfx");
+  level._effect["weap_blink_friend"] = loadfx("vfx\core\mp\killstreaks\vfx_detonator_blink_cyan");
+  level._effect["weap_blink_enemy"] = loadfx("vfx\core\mp\killstreaks\vfx_detonator_blink_orange");
+  level._effect["emp_stun"] = loadfx("vfx\core\mp\equipment\vfx_emp_grenade");
+  level._effect["equipment_explode"] = loadfx("vfx\iw7\_requests\mp\vfx_generic_equipment_exp.vfx");
+  level._effect["equipment_smoke"] = loadfx("vfx\core\mp\killstreaks\vfx_sg_damage_blacksmoke");
+  level._effect["equipment_sparks"] = loadfx("vfx\core\mp\killstreaks\vfx_sentry_gun_explosion");
+  level._effect["vfx_sensor_grenade_ping"] = loadfx("vfx\old\_requests\future_weapons\vfx_sensor_grenade_ping");
+  level._effect["plasmablast_muz_w"] = loadfx("vfx\old\_requests\mp_weapons\vfx_muz_plasma_blast_w");
+  level._effect["vfx_trail_plyr_knife_tele"] = loadfx("vfx\old\_requests\mp_weapons\vfx_trail_plyr_knife_tele");
+  level._effect["case_bomb"] = loadfx("vfx\old\_requests\mp_weapons\expl_plasma_blast");
+  level._effect["corpse_pop"] = loadfx("vfx\iw7\_requests\mp\vfx_body_expl");
+  level._effect["sniper_glint"] = loadfx("vfx\iw7\core\mechanics\sniper_glint\vfx_sniper_glint");
+  level._effect["vfx_sonic_sensor_pulse"] = loadfx("vfx\iw7\_requests\mp\vfx_sonic_sensor_pulse");
+  level._effect["distortion_field_cloud"] = loadfx("vfx\iw7\_requests\mp\vfx_distortion_field_volume");
+  level._effect["penetration_railgun_impact"] = loadfx("vfx\iw7\_requests\mp\vfx_penetration_railgun_impact");
+  level._effect["penetration_railgun_pin"] = loadfx("vfx\iw7\_requests\mp\vfx_penetration_railgun_pin");
+  level._effect["vfx_penetration_railgun_impact"] = loadfx("vfx\iw7\_requests\mp\vfx_penetration_railgun_impact.vfx");
+  level._effect["vfx_emp_grenade_underbarrel"] = loadfx("vfx\iw7\_requests\mp\vfx_pulse_grenade_friendly.vfx");
   throwingknifec4init();
   scripts\mp\utility\game::func_CC18();
   level.weaponconfigs = [];
@@ -81,14 +81,14 @@ init() {
   level.minedamagemax = 210;
   level.minedamagehalfheight = 46;
   level.mineselfdestructtime = 120;
-  level.mine_launch = loadfx("vfx/core/impacts/bouncing_betty_launch_dirt");
-  level.mine_explode = loadfx("vfx/iw7/core/mp/killstreaks/vfx_apex_dest_exp");
+  level.mine_launch = loadfx("vfx\core\impacts\bouncing_betty_launch_dirt");
+  level.mine_explode = loadfx("vfx\iw7\core\mp\killstreaks\vfx_apex_dest_exp");
   var_02 = spawnstruct();
   var_2.model = "projectile_bouncing_betty_grenade";
   var_2.bombsquadmodel = "projectile_bouncing_betty_grenade_bombsquad";
-  var_2.mine_beacon["enemy"] = loadfx("vfx/core/equipment/light_c4_blink.vfx");
-  var_2.mine_beacon["friendly"] = loadfx("vfx/misc/light_mine_blink_friendly");
-  var_2.mine_spin = loadfx("vfx/misc/bouncing_betty_swirl");
+  var_2.mine_beacon["enemy"] = loadfx("vfx\core\equipment\light_c4_blink.vfx");
+  var_2.mine_beacon["friendly"] = loadfx("vfx\misc\light_mine_blink_friendly");
+  var_2.mine_spin = loadfx("vfx\misc\bouncing_betty_swirl");
   var_2.armtime = 2;
   var_2.ontriggeredsfx = "mine_betty_click";
   var_2.onlaunchsfx = "mine_betty_spin";
@@ -102,8 +102,8 @@ init() {
   var_02 = spawnstruct();
   var_2.model = "weapon_semtex_grenade_iw6";
   var_2.bombsquadmodel = "weapon_semtex_grenade_iw6_bombsquad";
-  var_2.mine_beacon["enemy"] = loadfx("vfx/core/equipment/light_c4_blink.vfx");
-  var_2.mine_beacon["friendly"] = loadfx("vfx/misc/light_mine_blink_friendly");
+  var_2.mine_beacon["enemy"] = loadfx("vfx\core\equipment\light_c4_blink.vfx");
+  var_2.mine_beacon["friendly"] = loadfx("vfx\misc\light_mine_blink_friendly");
   var_2.armtime = 2;
   var_2.ontriggeredsfx = "mine_betty_click";
   var_2.onexplodesfx = "frag_grenade_explode";
@@ -115,7 +115,7 @@ init() {
   var_2.bombsquadmodel = "weapon_motion_sensor_bombsquad";
   var_2.mine_beacon["enemy"] = scripts\engine\utility::getfx("weap_blink_enemy");
   var_2.mine_beacon["friendly"] = scripts\engine\utility::getfx("weap_blink_friend");
-  var_2.mine_spin = loadfx("vfx/misc/bouncing_betty_swirl");
+  var_2.mine_spin = loadfx("vfx\misc\bouncing_betty_swirl");
   var_2.armtime = 2;
   var_2.ontriggeredsfx = "motion_click";
   var_2.ontriggeredfunc = ::minesensorbounce;
@@ -124,7 +124,7 @@ init() {
   var_2.launchheight = 64;
   var_2.launchtime = 0.65;
   var_2.onexplodesfx = "motion_explode_default";
-  var_2.onexplodevfx = loadfx("vfx/core/mp/equipment/vfx_motionsensor_exp");
+  var_2.onexplodevfx = loadfx("vfx\core\mp\equipment\vfx_motionsensor_exp");
   var_2.headiconoffset = 25;
   var_2.func_B371 = 4.0;
   level.weaponconfigs["motion_sensor_mp"] = var_02;
@@ -133,7 +133,7 @@ init() {
   var_2.bombsquadmodel = "weapon_mobile_radar_bombsquad";
   var_2.mine_beacon["enemy"] = scripts\engine\utility::getfx("weap_blink_enemy");
   var_2.mine_beacon["friendly"] = scripts\engine\utility::getfx("weap_blink_friend");
-  var_2.mine_spin = loadfx("vfx/misc/bouncing_betty_swirl");
+  var_2.mine_spin = loadfx("vfx\misc\bouncing_betty_swirl");
   var_2.armtime = 2;
   var_2.ontriggeredsfx = "motion_click";
   var_2.ontriggeredfunc = ::func_B8F5;
@@ -142,8 +142,8 @@ init() {
   var_2.launchheight = 40;
   var_2.launchtime = 0.35;
   var_2.onexplodesfx = "motion_explode_default";
-  var_2.onexplodevfx = loadfx("vfx/core/mp/equipment/vfx_motionsensor_exp");
-  var_2.func_C4C5 = loadfx("vfx/core/mp/equipment/vfx_motionsensor_exp");
+  var_2.onexplodevfx = loadfx("vfx\core\mp\equipment\vfx_motionsensor_exp");
+  var_2.func_C4C5 = loadfx("vfx\core\mp\equipment\vfx_motionsensor_exp");
   var_2.headiconoffset = 25;
   var_2.func_B371 = 4.0;
   level.weaponconfigs["mobile_radar_mp"] = var_02;
@@ -160,7 +160,7 @@ init() {
   var_04 = 200;
   var_2.radius_max_sq = var_03 * var_03;
   var_2.radius_min_sq = var_04 * var_04;
-  var_2.onexplodevfx = loadfx("vfx/core/mp/equipment/vfx_flashbang.vfx");
+  var_2.onexplodevfx = loadfx("vfx\core\mp\equipment\vfx_flashbang.vfx");
   var_2.onexplodesfx = "flashbang_explode_default";
   var_2.vfxradius = 72;
   level.weaponconfigs["flash_grenade_mp"] = var_02;
@@ -169,9 +169,9 @@ init() {
   var_04 = 200;
   var_2.radius_max_sq = var_03 * var_03;
   var_2.radius_min_sq = var_04 * var_04;
-  var_2.onexplodevfx = loadfx("vfx/core/mp/equipment/vfx_flashbang.vfx");
-  var_2.func_C523 = loadfx("vfx/iw7/_requests/mp/vfx_disruptor_charge");
-  var_2.func_D828 = loadfx("vfx/iw7/_requests/mp/vfx_disruptor_laser");
+  var_2.onexplodevfx = loadfx("vfx\core\mp\equipment\vfx_flashbang.vfx");
+  var_2.func_C523 = loadfx("vfx\iw7\_requests\mp\vfx_disruptor_charge");
+  var_2.func_D828 = loadfx("vfx\iw7\_requests\mp\vfx_disruptor_laser");
   var_2.onexplodesfx = "flashbang_explode_default";
   var_2.vfxradius = 72;
   level.weaponconfigs["throwingknifedisruptor_mp"] = var_02;
@@ -180,7 +180,7 @@ init() {
   var_2.bombsquadmodel = "weapon_motion_sensor_bombsquad";
   var_2.mine_beacon["enemy"] = scripts\engine\utility::getfx("weap_blink_enemy");
   var_2.mine_beacon["friendly"] = scripts\engine\utility::getfx("weap_blink_friend");
-  var_2.mine_spin = loadfx("vfx/misc/bouncing_betty_swirl");
+  var_2.mine_spin = loadfx("vfx\misc\bouncing_betty_swirl");
   var_2.armtime = 2;
   var_2.ontriggeredsfx = "motion_click";
   var_2.onlaunchsfx = "motion_spin";
@@ -188,23 +188,23 @@ init() {
   var_2.launchheight = 64;
   var_2.launchtime = 0.65;
   var_2.onexplodesfx = "motion_explode_default";
-  var_2.onexplodevfx = loadfx("vfx/core/mp/equipment/vfx_motionsensor_exp");
+  var_2.onexplodevfx = loadfx("vfx\core\mp\equipment\vfx_motionsensor_exp");
   var_2.headiconoffset = 25;
   var_2.func_B371 = 4.0;
   level.weaponconfigs["sonic_sensor_mp"] = var_02;
   var_02 = spawnstruct();
   var_2.model = "weapon_mobile_radar";
   var_2.bombsquadmodel = "weapon_mobile_radar_bombsquad";
-  var_2.mine_beacon["enemy"] = loadfx("vfx/core/equipment/light_c4_blink.vfx");
-  var_2.mine_beacon["friendly"] = loadfx("vfx/misc/light_mine_blink_friendly");
-  var_2.mine_spin = loadfx("vfx/misc/bouncing_betty_swirl");
+  var_2.mine_beacon["enemy"] = loadfx("vfx\core\equipment\light_c4_blink.vfx");
+  var_2.mine_beacon["friendly"] = loadfx("vfx\misc\light_mine_blink_friendly");
+  var_2.mine_spin = loadfx("vfx\misc\bouncing_betty_swirl");
   var_2.armtime = 0.05;
   var_2.minedamagemin = 0;
   var_2.minedamagemax = 0;
   var_2.ontriggeredsfx = "motion_click";
   var_2.onlaunchsfx = "motion_spin";
   var_2.onexplodesfx = "motion_explode_default";
-  var_2.onexplodevfx = loadfx("vfx/core/mp/equipment/vfx_motionsensor_exp");
+  var_2.onexplodevfx = loadfx("vfx\core\mp\equipment\vfx_motionsensor_exp");
   var_2.launchheight = 64;
   var_2.launchtime = 0.65;
   var_2.ontriggeredfunc = scripts\mp\equipment\fear_grenade::func_6BBC;
@@ -250,23 +250,23 @@ init() {
   var_2.minedetectionheight = 100;
   level.weaponconfigs["shard_ball_mp"] = var_02;
   var_02 = spawnstruct();
-  var_2.mine_beacon["enemy"] = loadfx("vfx/core/equipment/light_c4_blink.vfx");
-  var_2.mine_beacon["friendly"] = loadfx("vfx/misc/light_mine_blink_friendly");
+  var_2.mine_beacon["enemy"] = loadfx("vfx\core\equipment\light_c4_blink.vfx");
+  var_2.mine_beacon["friendly"] = loadfx("vfx\misc\light_mine_blink_friendly");
   level.weaponconfigs["c4_mp"] = var_02;
   var_02 = spawnstruct();
-  var_2.mine_beacon["enemy"] = loadfx("vfx/core/equipment/light_c4_blink.vfx");
-  var_2.mine_beacon["friendly"] = loadfx("vfx/misc/light_mine_blink_friendly");
+  var_2.mine_beacon["enemy"] = loadfx("vfx\core\equipment\light_c4_blink.vfx");
+  var_2.mine_beacon["friendly"] = loadfx("vfx\misc\light_mine_blink_friendly");
   level.weaponconfigs["claymore_mp"] = var_02;
   level.delayminetime = 3.0;
-  level.func_F240 = loadfx("vfx/core/muzflash/shotgunflash");
-  level.func_10FA1 = loadfx("vfx/iw7/_requests/mp/power/vfx_wrist_rocket_exp.vfx");
+  level.func_F240 = loadfx("vfx\core\muzflash\shotgunflash");
+  level.func_10FA1 = loadfx("vfx\iw7\_requests\mp\power\vfx_wrist_rocket_exp.vfx");
   level.func_D8D4 = [];
   level.func_101AE = [];
   level._meth_857E = [];
   level.func_B7E0 = [];
   level.func_9B16 = [];
   level.mines = [];
-  level._effect["glow_stick_glow_red"] = loadfx("vfx/misc/glow_stick_glow_red");
+  level._effect["glow_stick_glow_red"] = loadfx("vfx\misc\glow_stick_glow_red");
   scripts\mp\protoricochet::func_E4E3();
   scripts\mp\bulletstorm::func_3258();
   scripts\mp\shardball::func_FC58();
@@ -996,7 +996,7 @@ func_B4E0(var_00) {
   if (func_9D6D(var_00))
   return 0;
 
-  if (scripts/mp/powers::func_9F0A(var_00))
+  if (scripts\mp\powers::func_9F0A(var_00))
   return 0;
 
   if (issubstr(var_00, "ac130"))
@@ -1325,7 +1325,7 @@ func_89DF(var_00, var_01) {
   self waittill("scavenger", var_02);
   var_02 notify("scavenger_pickup");
   func_EBD2(var_02);
-  scripts/mp/powers::func_EBD4(var_02);
+  scripts\mp\powers::func_EBD4(var_02);
   var_02 scripts\mp\damagefeedback::hudicontype("scavenger");
 }
 
@@ -1737,7 +1737,7 @@ watchgrenadethrows() {
   var_00 thread watchgasgrenadeexplode();
   break;
   case "concussion_grenade_mp":
-  thread scripts/mp/concussion::func_44EE(var_00);
+  thread scripts\mp\concussion::func_44EE(var_00);
   break;
   case "alientrophy_mp":
   case "trophy_mp":
@@ -1800,7 +1800,7 @@ watchgrenadethrows() {
   case "speed_strip_mp":
   break;
   case "shard_ball_mp":
-  if (scripts/mp/powerloot::func_D779(var_0.power, "passive_grenade_to_mine"))
+  if (scripts\mp\powerloot::func_D779(var_0.power, "passive_grenade_to_mine"))
   thread mineused(var_00, ::func_1090D, scripts\mp\shardball::placementfailed);
   else
   thread scripts\mp\shardball::func_FC5B(var_00);
@@ -1987,10 +1987,10 @@ func_11825(var_00, var_01) {
 }
 
 throwingknifeused_trygiveknife(var_00, var_01) {
-  if (var_00 scripts/mp/powers::func_D734(var_01) == var_00 scripts/mp/powers::func_D736(var_01))
+  if (var_00 scripts\mp\powers::func_D734(var_01) == var_00 scripts\mp\powers::func_D736(var_01))
   return 0;
 
-  var_00 scripts/mp/powers::func_D74C(var_01);
+  var_00 scripts\mp\powers::func_D74C(var_01);
   var_00 scripts\mp\hud_message::showmiscmessage("throwingknife");
   return 1;
 }
@@ -2061,7 +2061,7 @@ throwingknife_getdudknifeweapon(var_00) {
 }
 
 throwingknifec4init() {
-  level._effect["throwingknifec4_explode"] = loadfx("vfx/iw7/_requests/mp/power/vfx_bio_spike_exp.vfx");
+  level._effect["throwingknifec4_explode"] = loadfx("vfx\iw7\_requests\mp\power\vfx_bio_spike_exp.vfx");
 }
 
 throwingknifec4detonate(var_00, var_01, var_02) {
@@ -2403,7 +2403,7 @@ watchmissileusage() {
   break;
   case "iw7_tacburst_mpl":
   case "iw7_tacburst_mp":
-  var_00 thread scripts/mp/emp_debuff_mp::func_13A12();
+  var_00 thread scripts\mp\emp_debuff_mp::func_13A12();
   break;
   default:
   break;
@@ -3368,10 +3368,10 @@ isplantedequipment(var_00) {
 
 func_7F9A(var_00) {
   var_01 = 0;
-  var_02 = scripts/mp/powers::getcurrentequipment("primary");
+  var_02 = scripts\mp\powers::getcurrentequipment("primary");
 
   if (isdefined(var_02)) {
-  var_01 = var_01 + scripts/mp/powers::func_D736(var_02);
+  var_01 = var_01 + scripts\mp\powers::func_D736(var_02);
 
   if (scripts\mp\utility\game::_hasperk("specialty_rugged_eqp"))
   var_1++;
@@ -3382,10 +3382,10 @@ func_7F9A(var_00) {
 
 func_7FA3(var_00) {
   var_01 = 0;
-  var_02 = scripts/mp/powers::getcurrentequipment("secondary");
+  var_02 = scripts\mp\powers::getcurrentequipment("secondary");
 
   if (isdefined(var_02)) {
-  var_01 = var_01 + scripts/mp/powers::func_D736(var_02);
+  var_01 = var_01 + scripts\mp\powers::func_D736(var_02);
 
   if (scripts\mp\utility\game::_hasperk("specialty_rugged_eqp"))
   var_1++;
@@ -4063,7 +4063,7 @@ onweapondamage(var_00, var_01, var_02, var_03, var_04) {
   break;
   case "concussion_grenade_mp":
   if (var_03 > 0)
-  thread scripts/mp/concussion::onweapondamage(var_00, var_01, var_02, var_03, var_04);
+  thread scripts\mp\concussion::onweapondamage(var_00, var_01, var_02, var_03, var_04);
 
   break;
   case "blackout_grenade_mp":
@@ -4079,7 +4079,7 @@ onweapondamage(var_00, var_01, var_02, var_03, var_04) {
   if (var_02 != "MOD_IMPACT") {
   if (isdefined(var_00)) {
   if (isdefined(var_0.streakinfo)) {
-  if (scripts/mp/killstreaks/utility::func_A69F(var_0.streakinfo, "passive_increased_frost"))
+  if (scripts\mp\killstreaks\utility::func_A69F(var_0.streakinfo, "passive_increased_frost"))
   scripts\mp\equipment\cryo_mine::func_4ACF(var_04, 3);
   else
   scripts\mp\equipment\cryo_mine::func_4ACF(var_04);
@@ -4110,7 +4110,7 @@ onweapondamage(var_00, var_01, var_02, var_03, var_04) {
   case "gltacburst_big":
   case "gltacburst":
   if (var_03 > 0)
-  thread scripts/mp/emp_debuff_mp::onweapondamage(var_00, var_01, var_02, var_03, var_04);
+  thread scripts\mp\emp_debuff_mp::onweapondamage(var_00, var_01, var_02, var_03, var_04);
 
   break;
   default:
@@ -4919,7 +4919,7 @@ minedamagemonitor() {
 
   var_17 = scripts\engine\utility::ter_op(scripts\mp\utility\game::isfmjdamage(var_12, var_07) || var_04 >= 80, 2, 1);
   var_02 = var_02 - var_17;
-  scripts/mp/powers::equipmenthit(self.owner, var_00, var_12, var_07);
+  scripts\mp\powers::equipmenthit(self.owner, var_00, var_12, var_07);
 
   if (var_02 <= 0)
   break;
@@ -5535,7 +5535,7 @@ func_51CE() {
 }
 
 deletedisparateplacedequipment() {
-  var_00 = scripts/mp/powers::getcurrentequipment("primary");
+  var_00 = scripts\mp\powers::getcurrentequipment("primary");
 
   foreach (var_02 in self.plantedlethalequip) {
   if (isdefined(var_02)) {
@@ -5544,7 +5544,7 @@ deletedisparateplacedequipment() {
   }
   }
 
-  var_04 = scripts/mp/powers::getcurrentequipment("secondary");
+  var_04 = scripts\mp\powers::getcurrentequipment("secondary");
 
   foreach (var_02 in self.plantedtacticalequip) {
   if (isdefined(var_02)) {
@@ -5670,12 +5670,12 @@ buildattachmentmaps() {
   level.attachmentextralist = [];
 
   foreach (var_02 in var_00) {
-  var_03 = tablelookup("mp/attachmenttable.csv", 4, var_02, 5);
+  var_03 = tablelookup("mp\attachmenttable.csv", 4, var_02, 5);
 
   if (var_02 != var_03)
   level.attachmentmap_uniquetobase[var_02] = var_03;
 
-  var_04 = tablelookup("mp/attachmenttable.csv", 4, var_02, 13);
+  var_04 = tablelookup("mp\attachmenttable.csv", 4, var_02, 13);
 
   if (var_04 != "") {
   level.attachmentmap_uniquetoextra[var_02] = var_04;
@@ -5686,7 +5686,7 @@ buildattachmentmaps() {
   var_06 = [];
   var_07 = 1;
 
-  for (var_08 = tablelookupbyrow("mp/attachmentmap.csv", var_07, 0); var_08 != ""; var_08 = tablelookupbyrow("mp/attachmentmap.csv", var_07, 0)) {
+  for (var_08 = tablelookupbyrow("mp\attachmentmap.csv", var_07, 0); var_08 != ""; var_08 = tablelookupbyrow("mp\attachmentmap.csv", var_07, 0)) {
   var_6[var_6.size] = var_08;
   var_7++;
   }
@@ -5694,7 +5694,7 @@ buildattachmentmaps() {
   var_09 = [];
   var_10 = 1;
 
-  for (var_11 = tablelookupbyrow("mp/attachmentmap.csv", 0, var_10); var_11 != ""; var_11 = tablelookupbyrow("mp/attachmentmap.csv", 0, var_10)) {
+  for (var_11 = tablelookupbyrow("mp\attachmentmap.csv", 0, var_10); var_11 != ""; var_11 = tablelookupbyrow("mp\attachmentmap.csv", 0, var_10)) {
   var_9[var_11] = var_10;
   var_10++;
   }
@@ -5703,7 +5703,7 @@ buildattachmentmaps() {
 
   foreach (var_08 in var_06) {
   foreach (var_16, var_14 in var_09) {
-  var_15 = tablelookup("mp/attachmentmap.csv", 0, var_08, var_14);
+  var_15 = tablelookup("mp\attachmentmap.csv", 0, var_08, var_14);
 
   if (var_15 == "")
   continue;
@@ -5718,7 +5718,7 @@ buildattachmentmaps() {
   level.attachmentmap_attachtoperk = [];
 
   foreach (var_19 in var_00) {
-  var_20 = tablelookup("mp/attachmenttable.csv", 4, var_19, 12);
+  var_20 = tablelookup("mp\attachmenttable.csv", 4, var_19, 12);
 
   if (var_20 == "")
   continue;
@@ -5729,12 +5729,12 @@ buildattachmentmaps() {
   level.attachmentmap_conflicts = [];
   var_22 = 1;
 
-  for (var_23 = tablelookupbyrow("mp/attachmentcombos.csv", var_22, 0); var_23 != ""; var_23 = tablelookupbyrow("mp/attachmentcombos.csv", var_22, 0)) {
+  for (var_23 = tablelookupbyrow("mp\attachmentcombos.csv", var_22, 0); var_23 != ""; var_23 = tablelookupbyrow("mp\attachmentcombos.csv", var_22, 0)) {
   var_24 = 1;
 
-  for (var_25 = tablelookupbyrow("mp/attachmentcombos.csv", 0, var_24); var_25 != ""; var_25 = tablelookupbyrow("mp/attachmentcombos.csv", 0, var_24)) {
+  for (var_25 = tablelookupbyrow("mp\attachmentcombos.csv", 0, var_24); var_25 != ""; var_25 = tablelookupbyrow("mp\attachmentcombos.csv", 0, var_24)) {
   if (var_23 != var_25) {
-  var_26 = tablelookupbyrow("mp/attachmentcombos.csv", var_22, var_24);
+  var_26 = tablelookupbyrow("mp\attachmentcombos.csv", var_22, var_24);
   var_27 = scripts\engine\utility::alphabetize([var_23, var_25]);
   var_28 = var_27[0] + "_" + var_27[1];
 
@@ -5753,7 +5753,7 @@ getattachmentlistuniquenames() {
   var_00 = [];
   var_01 = 0;
 
-  for (var_02 = tablelookup("mp/attachmentTable.csv", 0, var_01, 4); var_02 != ""; var_02 = tablelookup("mp/attachmentTable.csv", 0, var_01, 4)) {
+  for (var_02 = tablelookup("mp\attachmentTable.csv", 0, var_01, 4); var_02 != ""; var_02 = tablelookup("mp\attachmentTable.csv", 0, var_01, 4)) {
   var_0[var_02] = var_02;
   var_1++;
   }
@@ -5764,32 +5764,32 @@ getattachmentlistuniquenames() {
 func_3222() {
   level.weaponmapdata = [];
 
-  for (var_00 = 1; tablelookup("mp/statstable.csv", 0, var_00, 0) != ""; var_0++) {
-  var_01 = tablelookup("mp/statstable.csv", 0, var_00, 4);
+  for (var_00 = 1; tablelookup("mp\statstable.csv", 0, var_00, 0) != ""; var_0++) {
+  var_01 = tablelookup("mp\statstable.csv", 0, var_00, 4);
 
   if (var_01 != "") {
   level.weaponmapdata[var_01] = spawnstruct();
-  var_02 = tablelookup("mp/statstable.csv", 0, var_00, 0);
+  var_02 = tablelookup("mp\statstable.csv", 0, var_00, 0);
 
   if (var_02 != "")
   level.weaponmapdata[var_01].number = var_02;
 
-  var_03 = tablelookup("mp/statstable.csv", 0, var_00, 1);
+  var_03 = tablelookup("mp\statstable.csv", 0, var_00, 1);
 
   if (var_03 != "")
   level.weaponmapdata[var_01].group = var_03;
 
-  var_04 = tablelookup("mp/statstable.csv", 0, var_00, 5);
+  var_04 = tablelookup("mp\statstable.csv", 0, var_00, 5);
 
   if (var_04 != "")
   level.weaponmapdata[var_01].func_23B0 = var_04;
 
-  var_05 = tablelookup("mp/statstable.csv", 0, var_00, 44);
+  var_05 = tablelookup("mp\statstable.csv", 0, var_00, 44);
 
   if (var_05 != "")
   level.weaponmapdata[var_01].perk = var_05;
 
-  var_06 = tablelookup("mp/statstable.csv", 0, var_00, 9);
+  var_06 = tablelookup("mp\statstable.csv", 0, var_00, 9);
 
   if (var_06 != "")
   level.weaponmapdata[var_01].attachdefaults = strtok(var_06, " ");
@@ -5798,7 +5798,7 @@ func_3222() {
   level.weaponmapdata[var_01].selectableattachmentmap = [];
 
   for (var_07 = 0; var_07 < 20; var_7++) {
-  var_08 = tablelookup("mp/statstable.csv", 0, var_00, 10 + var_07);
+  var_08 = tablelookup("mp\statstable.csv", 0, var_00, 10 + var_07);
 
   if (isdefined(var_08) && var_08 != "") {
   var_09 = level.weaponmapdata[var_01].selectableattachmentlist.size;
@@ -5808,9 +5808,9 @@ func_3222() {
   }
 
   if (level.tactical)
-  var_10 = tablelookup("mp/statstable.csv", 0, var_00, 50);
+  var_10 = tablelookup("mp\statstable.csv", 0, var_00, 50);
   else
-  var_10 = tablelookup("mp/statstable.csv", 0, var_00, 8);
+  var_10 = tablelookup("mp\statstable.csv", 0, var_00, 8);
 
   if (var_10 != "") {
   var_10 = float(var_10);
@@ -5884,8 +5884,8 @@ func_464D(var_00) {
   if (isdefined(var_22) && var_22 != "none") {
   var_01 notify("corpse_steal");
   var_01 notify("start_copycat");
-  var_01 scripts/mp/powers::removepower(var_17);
-  var_01 scripts/mp/powers::givepower(var_22, var_16, 1);
+  var_01 scripts\mp\powers::removepower(var_17);
+  var_01 scripts\mp\powers::givepower(var_22, var_16, 1);
   var_01 thread func_139D7(var_22, var_16);
   }
   }
@@ -5899,8 +5899,8 @@ func_139D7(var_00, var_01) {
   self endon("corpse_steal");
   self waittill("copycat_reset");
   self notify("start_copycat");
-  scripts/mp/powers::removepower(var_00);
-  scripts/mp/powers::givepower(self.func_AE7B, var_01, 1);
+  scripts\mp\powers::removepower(var_00);
+  scripts\mp\powers::givepower(self.func_AE7B, var_01, 1);
   self setclientomnvar("ui_juggernaut", 0);
 }
 
@@ -5908,22 +5908,22 @@ func_464E() {
   self endon("disconnect");
   self endon("death");
   var_00 = gettime() + 5000.0;
-  scripts/mp/powers::power_modifycooldownrate(0.0);
+  scripts\mp\powers::power_modifycooldownrate(0.0);
 
   if (isdefined(self.func_38A1) && self.func_38A1)
-  scripts/mp/powers::func_12C9F();
+  scripts\mp\powers::func_12C9F();
 
-  thread scripts/mp/powers::func_D729();
+  thread scripts\mp\powers::func_D729();
 
   while (gettime() < var_00)
   wait 0.1;
 
-  scripts/mp/powers::func_D74E();
+  scripts\mp\powers::func_D74E();
 
   if (isdefined(self.func_38A1) && !self.func_38A1)
-  scripts/mp/powers::func_F6B1();
+  scripts\mp\powers::func_F6B1();
 
-  thread scripts/mp/powers::func_D72F();
+  thread scripts\mp\powers::func_D72F();
 }
 
 grenadestuckto(var_00, var_01, var_02) {
@@ -5980,7 +5980,7 @@ func_85DE(var_00, var_01) {
 }
 
 func_66A5(var_00, var_01) {
-  if (var_00 scripts/mp/powers::func_D734(var_01) > 0)
+  if (var_00 scripts\mp\powers::func_D734(var_01) > 0)
   return 0;
 
   var_02 = undefined;
@@ -6317,9 +6317,9 @@ func_13AB5(var_00, var_01, var_02) {
   self notify("watchLethalDelayPlayer_" + var_02);
   self endon("watchLethalDelayPlayer_" + var_02);
   self endon("power_removed_" + var_01);
-  var_00 scripts/mp/powers::func_D727(var_01);
+  var_00 scripts\mp\powers::func_D727(var_01);
   func_13AB4(var_00, var_02);
-  var_00 scripts/mp/powers::func_D72D(var_01);
+  var_00 scripts\mp\powers::func_D72D(var_01);
 }
 
 func_13AB4(var_00, var_01) {

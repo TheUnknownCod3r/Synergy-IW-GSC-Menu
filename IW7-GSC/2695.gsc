@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2695.gsc
+ * Script: 2695.gsc
 ***************************************/
 
 animationsuite() {

@@ -1,11 +1,11 @@
-/********************************************************************
+/************************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\agents\slasher\slasher_agent_dlc4.gsc
-********************************************************************/
+ * Script: scripts\mp\agents\slasher\slasher_agent_dlc4.gsc
+************************************************************/
 
 registerscriptedagent() {
-	scripts/aitypes/bt_util::init();
+	scripts\aitypes\bt_util::init();
 	behaviortree\slasher::func_DEE8();
 	scripts\asm\slasher_dlc4\mp\states::func_2371();
 	scripts\mp\agents\slasher\slasher_tunedata::setuptunedata();

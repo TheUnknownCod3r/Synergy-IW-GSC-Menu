@@ -1,26 +1,26 @@
-/**************************************************
+/******************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\gametypes\grind.gsc
-**************************************************/
+ * Script: scripts\mp\gametypes\grind.gsc
+******************************************/
 
 main() {
-	scripts\mp\_globallogic::init();
-	scripts\mp\_globallogic::setupcallbacks();
-	if(function_011C()) {
+	scripts\mp\globallogic::init();
+	scripts\mp\globallogic::setupcallbacks();
+	if(isusingmatchrulesdata()) {
 		level.initializematchrules = ::initializematchrules;
 		[[level.initializematchrules]]();
-		level thread scripts\mp\_utility::reinitializematchrulesonmigration();
+		level thread scripts\mp\utility::reinitializematchrulesonmigration();
 	}
 	else
 	{
-		scripts\mp\_utility::registerroundswitchdvar(level.gametype,0,0,9);
-		scripts\mp\_utility::registertimelimitdvar(level.gametype,10);
-		scripts\mp\_utility::registerscorelimitdvar(level.gametype,85);
-		scripts\mp\_utility::registerroundlimitdvar(level.gametype,1);
-		scripts\mp\_utility::registerwinlimitdvar(level.gametype,1);
-		scripts\mp\_utility::registernumlivesdvar(level.gametype,0);
-		scripts\mp\_utility::registerhalftimedvar(level.gametype,0);
+		scripts\mp\utility::registerroundswitchdvar(level.gametype,0,0,9);
+		scripts\mp\utility::registertimelimitdvar(level.gametype,10);
+		scripts\mp\utility::registerscorelimitdvar(level.gametype,85);
+		scripts\mp\utility::registerroundlimitdvar(level.gametype,1);
+		scripts\mp\utility::registerwinlimitdvar(level.gametype,1);
+		scripts\mp\utility::registernumlivesdvar(level.gametype,0);
+		scripts\mp\utility::registerhalftimedvar(level.gametype,0);
 	}
 
 	updategametypedvars();
@@ -33,18 +33,18 @@ main() {
 	level.getspawnpoint = ::getspawnpoint;
 	level.onnormaldeath = ::onnormaldeath;
 	level.onspawnplayer = ::onspawnplayer;
-	level.conf_fx["vanish"] = loadfx("vfx/core/impacts/small_snowhit");
+	level.conf_fx["vanish"] = loadfx("vfx\core\impacts\small_snowhit");
 }
 
 initializematchrules() {
-	scripts\mp\_utility::setcommonrulesfrommatchdata();
+	scripts\mp\utility::setcommonrulesfrommatchdata();
 	setdynamicdvar("scr_grind_bankTime",getmatchrulesdata("grindData","bankTime"));
 	setdynamicdvar("scr_grind_bankRate",getmatchrulesdata("grindData","bankRate"));
 	setdynamicdvar("scr_grind_bankCaptureTime",getmatchrulesdata("grindData","bankCaptureTime"));
 	setdynamicdvar("scr_grind_megaBankLimit",getmatchrulesdata("grindData","megaBankLimit"));
 	setdynamicdvar("scr_grind_bankBonus",getmatchrulesdata("grindData","megaBankBonus"));
 	setdynamicdvar("scr_grind_halftime",0);
-	scripts\mp\_utility::registerhalftimedvar("grind",0);
+	scripts\mp\utility::registerhalftimedvar("grind",0);
 	setdynamicdvar("scr_grind_promode",0);
 }
 
@@ -54,26 +54,26 @@ onstartgametype() {
 		game["switchedsides"] = 0;
 	}
 
-	scripts\mp\_utility::setobjectivetext("allies",&"OBJECTIVES_WAR");
-	scripts\mp\_utility::setobjectivetext("axis",&"OBJECTIVES_WAR");
+	scripts\mp\utility::setobjectivetext("allies",&"OBJECTIVES_WAR");
+	scripts\mp\utility::setobjectivetext("axis",&"OBJECTIVES_WAR");
 	if(level.splitscreen) {
-		scripts\mp\_utility::setobjectivescoretext("allies",&"OBJECTIVES_WAR");
-		scripts\mp\_utility::setobjectivescoretext("axis",&"OBJECTIVES_WAR");
+		scripts\mp\utility::setobjectivescoretext("allies",&"OBJECTIVES_WAR");
+		scripts\mp\utility::setobjectivescoretext("axis",&"OBJECTIVES_WAR");
 	}
 	else
 	{
-		scripts\mp\_utility::setobjectivescoretext("allies",&"OBJECTIVES_WAR_SCORE");
-		scripts\mp\_utility::setobjectivescoretext("axis",&"OBJECTIVES_WAR_SCORE");
+		scripts\mp\utility::setobjectivescoretext("allies",&"OBJECTIVES_WAR_SCORE");
+		scripts\mp\utility::setobjectivescoretext("axis",&"OBJECTIVES_WAR_SCORE");
 	}
 
-	scripts\mp\_utility::setobjectivehinttext("allies",&"OBJECTIVES_WAR_HINT");
-	scripts\mp\_utility::setobjectivehinttext("axis",&"OBJECTIVES_WAR_HINT");
+	scripts\mp\utility::setobjectivehinttext("allies",&"OBJECTIVES_WAR_HINT");
+	scripts\mp\utility::setobjectivehinttext("axis",&"OBJECTIVES_WAR_HINT");
 	initspawns();
 	createtags();
 	level.dogtagallyonusecb = ::dogtagallyonusecb;
 	var_00[0] = level.gametype;
 	var_00[1] = "dom";
-	scripts\mp\_gameobjects::main(var_00);
+	scripts\mp\gameobjects::main(var_00);
 	createzones();
 	level thread onplayerconnect();
 	level thread removetagsongameended();
@@ -81,11 +81,11 @@ onstartgametype() {
 
 updategametypedvars() {
 	scripts\mp\gametypes\common::updategametypedvars();
-	level.banktime = scripts\mp\_utility::dvarfloatvalue("bankTime",2,0,10);
-	level.bankrate = scripts\mp\_utility::dvarintvalue("bankRate",1,1,10);
-	level.bankcapturetime = scripts\mp\_utility::dvarintvalue("bankCaptureTime",0,0,10);
-	level.megabanklimit = scripts\mp\_utility::dvarintvalue("megaBankLimit",5,5,15);
-	level.megabankbonus = scripts\mp\_utility::dvarintvalue("megaBankBonus",150,0,750);
+	level.banktime = scripts\mp\utility::dvarfloatvalue("bankTime",2,0,10);
+	level.bankrate = scripts\mp\utility::dvarintvalue("bankRate",1,1,10);
+	level.bankcapturetime = scripts\mp\utility::dvarintvalue("bankCaptureTime",0,0,10);
+	level.megabanklimit = scripts\mp\utility::dvarintvalue("megaBankLimit",5,5,15);
+	level.megabankbonus = scripts\mp\utility::dvarintvalue("megaBankBonus",150,0,750);
 }
 
 onspawnplayer() {
@@ -119,7 +119,7 @@ createtags() {
 		var_03.offset3d = (0,0,16);
 		var_03.trigger = var_02;
 		var_03.triggertype = "proximity";
-		var_03 scripts\mp\_gameobjects::allowuse("none");
+		var_03 scripts\mp\gameobjects::allowuse("none");
 		level.dogtags[level.dogtags.size] = var_03;
 	}
 }
@@ -144,7 +144,7 @@ gettag() {
 	}
 
 	var_00 notify("reset");
-	var_00 scripts\mp\_gameobjects::initializetagpathvariables();
+	var_00 scripts\mp\gameobjects::initializetagpathvariables();
 	var_00.lastusedtime = gettime();
 	return var_00;
 }
@@ -162,8 +162,8 @@ spawntag(param_00,param_01) {
 	var_07.visuals[0].origin = var_02;
 	var_07.visuals[1].origin = var_02;
 	var_07.trigger show();
-	var_07 scripts\mp\_gameobjects::allowuse("any");
-	var_07.visuals[0] thread showtoteam(var_07,scripts\mp\_utility::getotherteam(param_01));
+	var_07 scripts\mp\gameobjects::allowuse("any");
+	var_07.visuals[0] thread showtoteam(var_07,scripts\mp\utility::getotherteam(param_01));
 	var_07.visuals[1] thread showtoteam(var_07,param_01);
 	var_07.visuals[0] setasgametypeobjective();
 	var_07.visuals[1] setasgametypeobjective();
@@ -209,7 +209,7 @@ showtoteam(param_00,param_01) {
 }
 
 playercanusetags(param_00) {
-	if(scripts/mp/equipment/phase_shift::isentityphaseshifted(param_00)) {
+	if(scripts\mp\equipment\phase_shift::isentityphaseshifted(param_00)) {
 		return 0;
 	}
 
@@ -222,11 +222,11 @@ func_BA31(param_00) {
 	param_00 endon("reset");
 	for(;;) {
 		param_00.trigger waittill("trigger",var_01);
-		if(!scripts\mp\_utility::isreallyalive(var_01)) {
+		if(!scripts\mp\utility::isreallyalive(var_01)) {
 			continue;
 		}
 
-		if(var_01 scripts\mp\_utility::isusingremote() || isdefined(var_01.spawningafterremotedeath)) {
+		if(var_01 scripts\mp\utility::isusingremote() || isdefined(var_01.spawningafterremotedeath)) {
 			continue;
 		}
 
@@ -238,7 +238,7 @@ func_BA31(param_00) {
 			var_01 = var_01.triggerportableradarping;
 		}
 
-		if(!scripts/mp/equipment/phase_shift::areentitiesinphase(param_00,var_01)) {
+		if(!scripts\mp\equipment\phase_shift::areentitiesinphase(param_00,var_01)) {
 			continue;
 		}
 
@@ -249,20 +249,20 @@ func_BA31(param_00) {
 		param_00.trigger.origin = (0,0,1000);
 		param_00.visuals[0].origin = (0,0,1000);
 		param_00.visuals[1].origin = (0,0,1000);
-		param_00 scripts\mp\_gameobjects::allowuse("none");
+		param_00 scripts\mp\gameobjects::allowuse("none");
 		if(param_00.team != var_01.team) {
 			var_01 playersettagcount(var_01.tagscarried + 1);
-			var_01 thread scripts\mp\_utility::giveunifiedpoints("tag_collected");
+			var_01 thread scripts\mp\utility::giveunifiedpoints("tag_collected");
 		}
 
 		var_01 playsound("mp_killconfirm_tags_pickup");
 		if(isdefined(level.supportcranked) && level.supportcranked) {
 			if(isdefined(var_01.cranked) && var_01.cranked) {
-				var_01 scripts\mp\_utility::setcrankedplayerbombtimer("kill");
+				var_01 scripts\mp\utility::setcrankedplayerbombtimer("kill");
 			}
 			else
 			{
-				var_01 scripts\mp\_utility::oncranked(undefined,var_01);
+				var_01 scripts\mp\utility::oncranked(undefined,var_01);
 			}
 		}
 
@@ -329,7 +329,7 @@ createzones() {
 }
 
 isinzone(param_00,param_01) {
-	if(scripts\mp\_utility::isreallyalive(param_00) && param_00 istouching(param_01.trigger) && param_01.ownerteam == param_00.team) {
+	if(scripts\mp\utility::isreallyalive(param_00) && param_00 istouching(param_01.trigger) && param_01.ownerteam == param_00.team) {
 		return 1;
 	}
 
@@ -382,10 +382,10 @@ processscoring(param_00,param_01) {
 		param_00 playsoundtoplayer("mp_grind_token_banked",param_00);
 		if(param_00.tagscarried >= level.megabanklimit) {
 			scoreamount(param_00,level.megabanklimit);
-			var_02 = scripts\mp\_rank::getscoreinfovalue("tag_score");
+			var_02 = scripts\mp\rank::getscoreinfovalue("tag_score");
 			var_02 = var_02 * level.megabanklimit;
-			param_00 thread scripts\mp\_utility::giveunifiedpoints("mega_bank",param_00.var_394,var_02 + level.megabankbonus);
-			param_00 scripts\mp\_missions::func_D991("ch_mega_bank");
+			param_00 thread scripts\mp\utility::giveunifiedpoints("mega_bank",param_00.var_394,var_02 + level.megabankbonus);
+			param_00 scripts\mp\missions::func_D991("ch_mega_bank");
 		}
 		else
 		{
@@ -396,15 +396,15 @@ processscoring(param_00,param_01) {
 
 			scoreamount(param_00,var_03);
 			for(var_04 = 0;var_04 < var_03;var_04++) {
-				param_00 thread scripts\mp\_utility::giveunifiedpoints("tag_score");
+				param_00 thread scripts\mp\utility::giveunifiedpoints("tag_score");
 			}
 		}
 
 		if(isdefined(level.supportcranked) && level.supportcranked && isdefined(param_00.cranked) && param_00.cranked) {
-			param_00 scripts\mp\_utility::setcrankedplayerbombtimer("kill");
+			param_00 scripts\mp\utility::setcrankedplayerbombtimer("kill");
 		}
 
-		param_00 scripts\mp\_missions::processchallenge("ch_grinder");
+		param_00 scripts\mp\missions::processchallenge("ch_grinder");
 		wait(level.banktime);
 	}
 
@@ -414,38 +414,38 @@ processscoring(param_00,param_01) {
 
 scoreamount(param_00,param_01) {
 	param_00 playersettagcount(param_00.tagscarried - param_01);
-	scripts\mp\_gamescore::giveteamscoreforobjective(param_00.team,param_01,0);
-	param_00 scripts\mp\_utility::incperstat("confirmed",param_01);
-	param_00 scripts\mp\_persistence::statsetchild("round","confirmed",param_00.pers["confirmed"]);
-	param_00 scripts\mp\_utility::setextrascore0(param_00.pers["confirmed"]);
+	scripts\mp\gamescore::giveteamscoreforobjective(param_00.team,param_01,0);
+	param_00 scripts\mp\utility::incperstat("confirmed",param_01);
+	param_00 scripts\mp\persistence::statsetchild("round","confirmed",param_00.pers["confirmed"]);
+	param_00 scripts\mp\utility::setextrascore0(param_00.pers["confirmed"]);
 }
 
 initspawns() {
-	scripts\mp\_spawnlogic::setactivespawnlogic("TDM");
+	scripts\mp\spawnlogic::setactivespawnlogic("TDM");
 	level.spawnmins = (0,0,0);
 	level.spawnmaxs = (0,0,0);
-	scripts\mp\_spawnlogic::addstartspawnpoints("mp_tdm_spawn_allies_start");
-	scripts\mp\_spawnlogic::addstartspawnpoints("mp_tdm_spawn_axis_start");
-	scripts\mp\_spawnlogic::addspawnpoints("allies","mp_tdm_spawn");
-	scripts\mp\_spawnlogic::addspawnpoints("axis","mp_tdm_spawn");
-	level.mapcenter = scripts\mp\_spawnlogic::findboxcenter(level.spawnmins,level.spawnmaxs);
-	function_01B4(level.mapcenter);
+	scripts\mp\spawnlogic::addstartspawnpoints("mp_tdm_spawn_allies_start");
+	scripts\mp\spawnlogic::addstartspawnpoints("mp_tdm_spawn_axis_start");
+	scripts\mp\spawnlogic::addspawnpoints("allies","mp_tdm_spawn");
+	scripts\mp\spawnlogic::addspawnpoints("axis","mp_tdm_spawn");
+	level.mapcenter = scripts\mp\spawnlogic::findboxcenter(level.spawnmins,level.spawnmaxs);
+	setmapcenter(level.mapcenter);
 }
 
 getspawnpoint() {
 	var_00 = self.pers["team"];
 	if(game["switchedsides"]) {
-		var_00 = scripts\mp\_utility::getotherteam(var_00);
+		var_00 = scripts\mp\utility::getotherteam(var_00);
 	}
 
-	if(scripts\mp\_spawnlogic::shoulduseteamstartspawn()) {
-		var_01 = scripts\mp\_spawnlogic::getspawnpointarray("mp_tdm_spawn_" + var_00 + "_start");
-		var_02 = scripts\mp\_spawnlogic::getspawnpoint_startspawn(var_01);
+	if(scripts\mp\spawnlogic::shoulduseteamstartspawn()) {
+		var_01 = scripts\mp\spawnlogic::getspawnpointarray("mp_tdm_spawn_" + var_00 + "_start");
+		var_02 = scripts\mp\spawnlogic::getspawnpoint_startspawn(var_01);
 	}
 	else
 	{
-		var_01 = scripts\mp\_spawnlogic::getteamspawnpoints(var_02);
-		var_02 = scripts\mp\_spawnscoring::getspawnpoint(var_02);
+		var_01 = scripts\mp\spawnlogic::getteamspawnpoints(var_02);
+		var_02 = scripts\mp\spawnscoring::getspawnpoint(var_02);
 	}
 
 	return var_02;
@@ -488,7 +488,7 @@ droptags(param_00,param_01) {
 
 dogtagallyonusecb(param_00) {
 	if(isplayer(param_00)) {
-		param_00 scripts\mp\_utility::setextrascore1(param_00.pers["denied"]);
+		param_00 scripts\mp\utility::setextrascore1(param_00.pers["denied"]);
 	}
 }
 
@@ -500,14 +500,14 @@ removepoint() {
 			foreach(var_02 in level.var_13FC1) {
 				if(isdefined(var_02.useobj.label) && var_02.useobj.label == var_00) {
 					var_02.useobj notify("stop_trigger" + var_02.useobj.label);
-					var_02.useobj scripts\mp\_gameobjects::allowuse("none");
+					var_02.useobj scripts\mp\gameobjects::allowuse("none");
 					var_02.useobj.trigger = undefined;
 					var_02.useobj notify("deleted");
 					var_02.useobj.visibleteam = "none";
-					var_02.useobj scripts\mp\_gameobjects::set2dicon("friendly",undefined);
-					var_02.useobj scripts\mp\_gameobjects::set3dicon("friendly",undefined);
-					var_02.useobj scripts\mp\_gameobjects::set2dicon("enemy",undefined);
-					var_02.useobj scripts\mp\_gameobjects::set3dicon("enemy",undefined);
+					var_02.useobj scripts\mp\gameobjects::set2dicon("friendly",undefined);
+					var_02.useobj scripts\mp\gameobjects::set3dicon("friendly",undefined);
+					var_02.useobj scripts\mp\gameobjects::set2dicon("enemy",undefined);
+					var_02.useobj scripts\mp\gameobjects::set3dicon("enemy",undefined);
 					var_03 = [];
 					for(var_04 = 0;var_04 < level.objectives.size;var_04++) {
 						if(level.objectives[var_04].script_label != var_00) {
@@ -564,19 +564,19 @@ placepoint() {
 			var_0A = spawn("trigger_radius",var_01.origin,0,90,128);
 			var_0A.script_label = var_01.script_label;
 			var_01 = var_0A;
-			var_0B = scripts\mp\_gameobjects::createuseobject("neutral",var_01,var_09,(0,0,100));
+			var_0B = scripts\mp\gameobjects::createuseobject("neutral",var_01,var_09,(0,0,100));
 			var_0C = var_00;
 			var_0B.label = var_0C;
 			var_0B thread runzonethink();
-			var_0B scripts\mp\_gameobjects::allowuse("enemy");
-			var_0B scripts\mp\_gameobjects::setusetime(level.bankcapturetime);
-			var_0B scripts\mp\_gameobjects::setusetext(&"MP_SECURING_POSITION");
-			var_0B scripts\mp\_gameobjects::set2dicon("friendly","waypoint_defend" + var_0C);
-			var_0B scripts\mp\_gameobjects::set3dicon("friendly","waypoint_defend" + var_0C);
-			var_0B scripts\mp\_gameobjects::set2dicon("enemy","waypoint_captureneutral" + var_0C);
-			var_0B scripts\mp\_gameobjects::set3dicon("enemy","waypoint_captureneutral" + var_0C);
-			var_0B scripts\mp\_gameobjects::setvisibleteam("any");
-			var_0B scripts\mp\_gameobjects::cancontestclaim(1);
+			var_0B scripts\mp\gameobjects::allowuse("enemy");
+			var_0B scripts\mp\gameobjects::setusetime(level.bankcapturetime);
+			var_0B scripts\mp\gameobjects::setusetext(&"MP_SECURING_POSITION");
+			var_0B scripts\mp\gameobjects::set2dicon("friendly","waypoint_defend" + var_0C);
+			var_0B scripts\mp\gameobjects::set3dicon("friendly","waypoint_defend" + var_0C);
+			var_0B scripts\mp\gameobjects::set2dicon("enemy","waypoint_captureneutral" + var_0C);
+			var_0B scripts\mp\gameobjects::set3dicon("enemy","waypoint_captureneutral" + var_0C);
+			var_0B scripts\mp\gameobjects::setvisibleteam("any");
+			var_0B scripts\mp\gameobjects::cancontestclaim(1);
 			var_0B.onuse = ::scripts\mp\gametypes\obj_grindzone::zone_onuse;
 			var_0B.onbeginuse = ::scripts\mp\gametypes\obj_grindzone::zone_onusebegin;
 			var_0B.onunoccupied = ::scripts\mp\gametypes\obj_grindzone::zone_onunoccupied;

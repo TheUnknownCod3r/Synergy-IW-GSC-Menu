@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2792.gsc
+ * Script: 2792.gsc
 ***************************************/
 
 func_BC86() {
@@ -60,7 +60,7 @@ move_to_grey_background_side_on() {
 }
 
 func_11452(var_00) {
-  var_01 = tablelookup("mp/weaponScreenshotList.csv", 0, var_00, 1);
+  var_01 = tablelookup("mp\weaponScreenshotList.csv", 0, var_00, 1);
   func_BC86();
   wait 2;
   wait 2;

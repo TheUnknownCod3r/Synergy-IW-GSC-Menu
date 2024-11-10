@@ -1,17 +1,17 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3178.gsc
-****************************/
+ * Script: 3178.gsc
+************************/
 
 func_100AD(param_00,param_01,param_02,param_03) {
-	if(!scripts/asm/asm_bb::bb_throwgrenaderequested()) {
+	if(!scripts\asm\asm_bb::bb_throwgrenaderequested()) {
 		return 0;
 	}
 
-	var_04 = scripts/asm/asm_bb::bb_getthrowgrenadetarget();
+	var_04 = scripts\asm\asm_bb::bb_getthrowgrenadetarget();
 	if(!isdefined(var_04) || !isdefined(self.isnodeoccupied) || var_04 != self.isnodeoccupied) {
-		scripts/asm/asm::asm_fireephemeralevent("throwgrenade","end");
+		scripts\asm\asm::asm_fireephemeralevent("throwgrenade","end");
 		return 0;
 	}
 
@@ -42,13 +42,13 @@ func_100AD(param_00,param_01,param_02,param_03) {
 				var_0A.var_6BA0 = 0;
 				var_0A.var_13D8F = func_FFCE(self.objective_team);
 				var_0A.time = gettime();
-				self._blackboard.var_1180C = var_0A;
+				self.var_1198.var_1180C = var_0A;
 				return 1;
 			}
 		}
 	}
 
-	scripts/asm/asm::asm_fireephemeralevent("throwgrenade","end");
+	scripts\asm\asm::asm_fireephemeralevent("throwgrenade","end");
 	return 0;
 }
 
@@ -127,12 +127,12 @@ func_3EA9(param_00,param_01,param_02) {
 }
 
 func_CEC6(param_00,param_01,param_02,param_03) {
-	var_04 = self._blackboard.var_1180C;
+	var_04 = self.var_1198.var_1180C;
 	var_05 = trygrenadethrow(param_00,param_01,var_04,param_02);
 	if(!var_05) {
 		self endon(param_01 + "_finished");
 		wait(0.2);
-		scripts/asm/asm::asm_fireevent(param_01,"end");
+		scripts\asm\asm::asm_fireevent(param_01,"end");
 	}
 }
 
@@ -150,8 +150,8 @@ func_CEFF(param_00,param_01,param_02) {
 }
 
 func_CEC7(param_00,param_01,param_02) {
-	self._blackboard.var_1180C = undefined;
-	scripts/asm/asm::asm_fireephemeralevent("throwgrenade","end");
+	self.var_1198.var_1180C = undefined;
+	scripts\asm\asm::asm_fireephemeralevent("throwgrenade","end");
 }
 
 func_FFCE(param_00) {
@@ -171,7 +171,7 @@ func_CEC8(param_00,param_01,param_02,param_03) {
 	var_07 = lib_0A1E::asm_getallanimsforstate(param_00,param_01);
 	self endon("killanimscript");
 	self endon(param_01 + "_finished");
-	scripts/asm/asm::asm_fireephemeralevent("throwSeeker","start");
+	scripts\asm\asm::asm_fireephemeralevent("throwSeeker","start");
 	self.var_C3F3 = self.objective_state_nomessage;
 	var_08 = lib_0A1E::asm_getbodyknob();
 	scripts\anim\battlechatter_ai::func_67CF(self.objective_team);
@@ -252,7 +252,7 @@ func_CEC8(param_00,param_01,param_02,param_03) {
 	self waittillmatch("end",param_01);
 	self notify("done_grenade_throw");
 	self notify("weapon_switch_done");
-	scripts/asm/asm::asm_fireephemeralevent("throwSeeker","end");
+	scripts\asm\asm::asm_fireephemeralevent("throwSeeker","end");
 }
 
 _meth_810E(param_00) {
@@ -396,8 +396,8 @@ func_DE37(param_00,param_01) {
 func_58BA(param_00,param_01,param_02,param_03,param_04,param_05,param_06) {
 	self endon("killanimscript");
 	self endon(param_01 + "_finished");
-	scripts/asm/asm::asm_fireephemeralevent("throwgrenade","start");
-	var_07 = scripts/asm/asm_bb::bb_getcovernode();
+	scripts\asm\asm::asm_fireephemeralevent("throwgrenade","start");
+	var_07 = scripts\asm\asm_bb::bb_getcovernode();
 	if(!isdefined(var_07) || var_07.type == "Exposed" || var_07.type == "Path") {
 		self orientmode("face direction",param_03);
 	}
@@ -475,12 +475,12 @@ func_58BA(param_00,param_01,param_02,param_03,param_04,param_05,param_06) {
 }
 
 func_11810(param_00,param_01,param_02,param_03) {
-	if(!scripts/asm/asm_bb::bb_throwgrenaderequested()) {
-		if(scripts/asm/asm::func_232B(param_01,"grenade_throw") || scripts/asm/asm::func_232B(param_01,"grenade throw")) {
+	if(!scripts\asm\asm_bb::bb_throwgrenaderequested()) {
+		if(scripts\asm\asm::func_232B(param_01,"grenade_throw") || scripts\asm\asm::func_232B(param_01,"grenade throw")) {
 			return 0;
 		}
 
-		if(scripts/asm/asm::func_232B(param_01,"grenade_right") || scripts/asm/asm::func_232B(param_01,"grenade_left")) {
+		if(scripts\asm\asm::func_232B(param_01,"grenade_right") || scripts\asm\asm::func_232B(param_01,"grenade_left")) {
 			return 0;
 		}
 

@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3377.gsc
-****************************/
+ * Script: 3377.gsc
+************************/
 
 init_bfp_game() {
 	var_00 = scripts\engine\utility::getstructarray("bowling_for_planets","script_noteworthy");

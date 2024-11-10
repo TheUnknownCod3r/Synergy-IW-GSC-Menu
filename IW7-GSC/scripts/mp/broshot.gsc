@@ -1,16 +1,16 @@
-/******************************************
+/**********************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\broshot.gsc
-******************************************/
+ * Script: scripts\mp\broshot.gsc
+**********************************/
 
 initbroshotfx() {
-	level._effect["FX_BRO_LIGHT"] = loadfx("vfx/iw7/_requests/mp/broshot/vfx_bs_light_fill.vfx");
-	level._effect["vfx_taunt_steel_dragon"] = loadfx("vfx/iw7/_requests/mp/frontend/vfx_taunt_steel_dragon.vfx");
-	level._effect["vfx_bombard_antigrav_pre_expl"] = loadfx("vfx/iw7/_requests/mp/vfx_bombard_antigrav_pre_expl.vfx");
-	level._effect["vfx_bombard_projectile_trail"] = loadfx("vfx/iw7/_requests/mp/vfx_bombard_projectile_trail.vfx");
-	level._effect["vfx_bombardment_strike_explosion"] = loadfx("vfx/iw7/_requests/mp/vfx_bombardment_strike_explosion.vfx");
-	level._effect["vfx_tnt_crate_smk"] = loadfx("vfx/iw7/levels/mp_frontend/vfx_tnt_crate_smk.vfx");
+	level._effect["FX_BRO_LIGHT"] = loadfx("vfx\iw7\_requests\mp\broshot\vfx_bs_light_fill.vfx");
+	level._effect["vfx_taunt_steel_dragon"] = loadfx("vfx\iw7\_requests\mp\frontend\vfx_taunt_steel_dragon.vfx");
+	level._effect["vfx_bombard_antigrav_pre_expl"] = loadfx("vfx\iw7\_requests\mp\vfx_bombard_antigrav_pre_expl.vfx");
+	level._effect["vfx_bombard_projectile_trail"] = loadfx("vfx\iw7\_requests\mp\vfx_bombard_projectile_trail.vfx");
+	level._effect["vfx_bombardment_strike_explosion"] = loadfx("vfx\iw7\_requests\mp\vfx_bombardment_strike_explosion.vfx");
+	level._effect["vfx_tnt_crate_smk"] = loadfx("vfx\iw7\levels\mp_frontend\vfx_tnt_crate_smk.vfx");
 }
 
 forceinitbroshot() {
@@ -53,12 +53,12 @@ initbroshot(param_00) {
 	}
 
 	level.camera_bro_shot.myfov = 40;
-	level.camera_bro_shot.char_loc[0].origin = level.camera_bro_shot.char_loc[0].origin + function_02D3(level.camera_bro_shot.char_loc[0].angles) * 6;
-	level.camera_bro_shot.char_loc[2].origin = level.camera_bro_shot.char_loc[2].origin + function_02D3(level.camera_bro_shot.char_loc[2].angles) * 20;
-	level.camera_bro_shot.char_loc[1].origin = level.camera_bro_shot.char_loc[1].origin + function_02D3(level.camera_bro_shot.char_loc[1].angles) * 12;
-	level.camera_bro_shot.char_loc[4].origin = level.camera_bro_shot.char_loc[4].origin + function_02D3(level.camera_bro_shot.char_loc[4].angles) * 6;
+	level.camera_bro_shot.char_loc[0].origin = level.camera_bro_shot.char_loc[0].origin + anglestoleft(level.camera_bro_shot.char_loc[0].angles) * 6;
+	level.camera_bro_shot.char_loc[2].origin = level.camera_bro_shot.char_loc[2].origin + anglestoleft(level.camera_bro_shot.char_loc[2].angles) * 20;
+	level.camera_bro_shot.char_loc[1].origin = level.camera_bro_shot.char_loc[1].origin + anglestoleft(level.camera_bro_shot.char_loc[1].angles) * 12;
+	level.camera_bro_shot.char_loc[4].origin = level.camera_bro_shot.char_loc[4].origin + anglestoleft(level.camera_bro_shot.char_loc[4].angles) * 6;
 	level.camera_bro_shot.char_loc[3].origin = level.camera_bro_shot.char_loc[3].origin + anglestoright(level.camera_bro_shot.char_loc[3].angles) * 0;
-	level.camera_bro_shot.char_loc[5].origin = level.camera_bro_shot.char_loc[5].origin + function_02D3(level.camera_bro_shot.char_loc[5].angles) * 18;
+	level.camera_bro_shot.char_loc[5].origin = level.camera_bro_shot.char_loc[5].origin + anglestoleft(level.camera_bro_shot.char_loc[5].angles) * 18;
 	level.camera_bro_shot.char_loc[4].origin = level.camera_bro_shot.char_loc[4].origin + anglestoforward(level.camera_bro_shot.char_loc[4].angles) * -46;
 	level.camera_bro_shot.char_loc[3].origin = level.camera_bro_shot.char_loc[3].origin + anglestoforward(level.camera_bro_shot.char_loc[3].angles) * -46;
 	level.camera_bro_shot.char_loc[5].origin = level.camera_bro_shot.char_loc[5].origin + anglestoforward(level.camera_bro_shot.char_loc[5].angles) * -46;
@@ -75,7 +75,7 @@ initbroshot(param_00) {
 		}
 
 		var_07 = scripts\common\trace::create_contents(0,1,1,1,1,0,0);
-		var_08 = function_0287(var_06,var_05,var_07,undefined,1,"physicsquery_closest");
+		var_08 = physics_raycast(var_06,var_05,var_07,undefined,1,"physicsquery_closest");
 		var_09 = isdefined(var_08) && var_08.size > 0;
 		if(var_09) {
 			var_0A = var_08[0]["position"];
@@ -112,7 +112,7 @@ func_10D73(param_00) {
 		var_03 getweaponrankxpmultiplier();
 	}
 
-	function_031E();
+	removeallcorpses();
 	level.var_1623 = var_01;
 	level.camera_anchor = spawn("script_model",var_01.origin);
 	level.camera_anchor setmodel("tag_origin");
@@ -177,14 +177,14 @@ func_10D73(param_00) {
 			var_0B = level.topplayers[var_0A].loadoutarchetype;
 		}
 
-		var_0C = tablelookuprownum("mp/battleRigTable.csv",1,var_0B);
+		var_0C = tablelookuprownum("mp\battleRigTable.csv",1,var_0B);
 		if(isbot(level.topplayers[var_0A]) || isdefined(level.topplayers[var_0A].lastarchetypeinfo)) {
 			var_0D = level.topplayers[var_0A] getcustomizationbody();
 			var_0E = level.topplayers[var_0A] getcustomizationhead();
-			var_0F = tablelookuprownum("mp/cac/heads.csv",1,var_0E);
-			var_10 = tablelookuprownum("mp/cac/bodies.csv",1,var_0D);
+			var_0F = tablelookuprownum("mp\cac\heads.csv",1,var_0E);
+			var_10 = tablelookuprownum("mp\cac\bodies.csv",1,var_0D);
 			if(isdefined(level.topplayers[var_0A].lastarchetypeinfo)) {
-				var_0C = tablelookuprownum("mp/battleRigTable.csv",1,level.topplayers[var_0A].lastarchetypeinfo.archetype);
+				var_0C = tablelookuprownum("mp\battleRigTable.csv",1,level.topplayers[var_0A].lastarchetypeinfo.archetype);
 			}
 		}
 		else
@@ -225,7 +225,7 @@ func_10D73(param_00) {
 	level.camera_anchor scriptmodelplayanimdeltamotion("iw7_mp_brodium_cam");
 	thread tauntinputlisten(level.topplayers);
 	level thread onplayerconnect();
-	function_030D(-1,self.mvparray);
+	startpodium(-1,self.mvparray);
 	return 13.5;
 }
 
@@ -488,20 +488,20 @@ dotaunt(param_00,param_01) {
 	}
 
 	if(isdefined(level.overridetaunt)) {
-		var_03 = tablelookup("mp/cac/taunts.csv",0,level.overridetaunt,1);
+		var_03 = tablelookup("mp\cac\taunts.csv",0,level.overridetaunt,1);
 	}
 
-	var_04 = tablelookuprownum("mp/cac/taunts.csv",1,var_03);
-	var_05 = tablelookup("mp/cac/taunts.csv",0,var_04,5);
+	var_04 = tablelookuprownum("mp\cac\taunts.csv",1,var_03);
+	var_05 = tablelookup("mp\cac\taunts.csv",0,var_04,5);
 	if(var_05 == "") {
 		return;
 	}
 
-	var_06 = tablelookup("mp/cac/taunts.csv",0,var_04,19);
-	var_07 = tablelookup("mp/cac/taunts.csv",0,var_04,20);
-	var_08 = tablelookup("mp/cac/taunts.csv",0,var_04,21);
-	var_09 = tablelookup("mp/cac/taunts.csv",0,var_04,12) == "Y";
-	var_0A = tablelookup("mp/cac/taunts.csv",0,var_04,9);
+	var_06 = tablelookup("mp\cac\taunts.csv",0,var_04,19);
+	var_07 = tablelookup("mp\cac\taunts.csv",0,var_04,20);
+	var_08 = tablelookup("mp\cac\taunts.csv",0,var_04,21);
+	var_09 = tablelookup("mp\cac\taunts.csv",0,var_04,12) == "Y";
+	var_0A = tablelookup("mp\cac\taunts.csv",0,var_04,9);
 	var_0B = "ui_broshot_anim_" + param_00;
 	if(isdefined(level.interruptabletaunts[param_00]) && level.interruptabletaunts[param_00] == var_0A) {
 		self notify("taunt_end");
@@ -526,8 +526,8 @@ dotaunt(param_00,param_01) {
 		level.supergunout[var_0B] = 1;
 	}
 
-	var_0D = tablelookup("mp/cac/taunts.csv",0,var_04,17);
-	var_0E = tablelookup("mp/cac/taunts.csv",0,var_04,18);
+	var_0D = tablelookup("mp\cac\taunts.csv",0,var_04,17);
+	var_0E = tablelookup("mp\cac\taunts.csv",0,var_04,18);
 	if(param_00 > 0 && var_0D != "" && var_0E != "") {
 		if(param_00 == 1) {
 			var_0A = var_0D;
@@ -703,7 +703,7 @@ setguntypeforui(param_00) {
 putgunaway(param_00) {
 	var_01 = getgunanimstring();
 	var_02 = var_01 + "_put_away" + getaltgunanimstring();
-	var_03 = tablelookuprownum("mp/cac/taunts.csv",1,var_02);
+	var_03 = tablelookuprownum("mp\cac\taunts.csv",1,var_02);
 	setomnvar(param_00,-1);
 	var_04 = getgunputawayduration(var_01);
 	wait(var_04);
@@ -711,7 +711,7 @@ putgunaway(param_00) {
 
 takesupergunout(param_00,param_01) {
 	var_02 = getrigtransstringfromref(param_01) + "transout_0";
-	var_03 = tablelookuprownum("mp/cac/taunts.csv",1,var_02);
+	var_03 = tablelookuprownum("mp\cac\taunts.csv",1,var_02);
 	setomnvar(param_00,var_03 + 30000);
 	var_04 = getrigsupertakeoutdurationfromref(param_01);
 	wait(var_04);
@@ -877,7 +877,7 @@ startlatejoinpodium(param_00) {
 	wait(0.25);
 	param_00 cameralinkto(level.camera_anchor,"tag_origin",1);
 	var_01 = param_00 getentitynumber();
-	function_030D(var_01,self.mvparray);
+	startpodium(var_01,self.mvparray);
 }
 
 changetestrig(param_00,param_01) {
@@ -949,7 +949,7 @@ changetestrig(param_00,param_01) {
 	}
 
 	wait(0.05);
-	function_030D(-1,self.mvparray);
+	startpodium(-1,self.mvparray);
 }
 
 changetesttaunt(param_00) {

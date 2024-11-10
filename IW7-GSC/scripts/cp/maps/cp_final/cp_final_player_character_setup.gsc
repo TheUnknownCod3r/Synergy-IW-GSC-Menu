@@ -1,8 +1,8 @@
-/********************************************************************************
+/************************************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\maps\cp_final\cp_final_player_character_setup.gsc
-********************************************************************************/
+ * Script: scripts\cp\maps\cp_final\cp_final_player_character_setup.gsc
+************************************************************************/
 
 init_player_characters() {
 	register_player_character(1,"yes","body_zmb_hero_sally_dlc4","viewmodel_zmb_hero_sally_dlc4","head_zmb_hero_sally_dlc4",undefined,"p1_","_p1","iw7_dlc4pap_zm","ges_zombies_revive_nerd",0,"iw7_dlc4card_zm","mus_zombies_generic_char","iw7_dlc4loadin_zm","iw7_knife_zm_rapper");

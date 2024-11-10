@@ -1,7 +1,7 @@
-/*******************************************************
+/***********************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\agents\gametype_sotf.gsc
-*******************************************************/
+ * Script: scripts\mp\agents\gametype_sotf.gsc
+***********************************************/
 
 main() {}

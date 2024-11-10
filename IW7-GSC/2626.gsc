@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2626.gsc
+ * Script: 2626.gsc
 ***************************************/
 
 noself_func(var_00, var_01, var_02, var_03, var_04) {

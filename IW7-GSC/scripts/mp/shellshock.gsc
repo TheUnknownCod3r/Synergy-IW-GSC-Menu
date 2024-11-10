@@ -1,14 +1,14 @@
-/*********************************************
+/*************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\shellshock.gsc
-*********************************************/
+ * Script: scripts\mp\shellshock.gsc
+*************************************/
 
 init() {
-	level._effect["slide_dust"] = loadfx("vfx/core/screen/vfx_scrnfx_tocam_slidedust_m");
-	level._effect["hit_left"] = loadfx("vfx/core/screen/vfx_blood_hit_left");
-	level._effect["hit_right"] = loadfx("vfx/core/screen/vfx_blood_hit_right");
-	level._effect["melee_spray"] = loadfx("vfx/core/screen/vfx_melee_blood_spray");
+	level._effect["slide_dust"] = loadfx("vfx\core\screen\vfx_scrnfx_tocam_slidedust_m");
+	level._effect["hit_left"] = loadfx("vfx\core\screen\vfx_blood_hit_left");
+	level._effect["hit_right"] = loadfx("vfx\core\screen\vfx_blood_hit_right");
+	level._effect["melee_spray"] = loadfx("vfx\core\screen\vfx_melee_blood_spray");
 }
 
 shellshockondamage(param_00,param_01) {
@@ -131,7 +131,7 @@ activateaxeblood(param_00) {
 
 play_fx_with_entity(param_00,param_01,param_02) {
 	self endon("disconnect");
-	var_03 = function_01E1(param_00,self geteye(),self);
+	var_03 = spawnfxforclient(param_00,self geteye(),self);
 	triggerfx(var_03);
 	var_03 setfxkilldefondelete();
 	scripts\engine\utility::waittill_any_in_array_or_timeout(param_01,param_02);
@@ -266,7 +266,7 @@ _earthquake(param_00,param_01,param_02,param_03,param_04) {
 			continue;
 		}
 
-		var_07 = scripts/mp/equipment/phase_shift::isentityphaseshifted(var_06);
+		var_07 = scripts\mp\equipment\phase_shift::isentityphaseshifted(var_06);
 		if((var_07 && param_04) || !var_07 && !param_04) {
 			var_06 earthquakeforplayer(param_00,param_01,param_02,param_03);
 		}
@@ -283,7 +283,7 @@ func_13B9(param_00,param_01,param_02) {
 			continue;
 		}
 
-		var_05 = scripts/mp/equipment/phase_shift::isentityphaseshifted(var_04);
+		var_05 = scripts\mp\equipment\phase_shift::isentityphaseshifted(var_04);
 		if((var_05 && param_02) || !var_05 && !param_02) {
 			var_04 getyaw(param_00,param_01);
 		}
@@ -305,7 +305,7 @@ _screenshakeonposition(param_00,param_01,param_02) {
 			continue;
 		}
 
-		var_06 = scripts/mp/equipment/phase_shift::isentityphaseshifted(var_05);
+		var_06 = scripts\mp\equipment\phase_shift::isentityphaseshifted(var_05);
 		if((var_06 && param_02) || !var_06 && !param_02) {
 			if(distancesquared(param_00,var_05.origin) <= var_03) {
 				var_05 setclientomnvar("ui_hud_shake",1);

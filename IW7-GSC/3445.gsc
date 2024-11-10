@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\3445.gsc
+ * Script: 3445.gsc
 ***************************************/
 
 init() {
@@ -15,7 +15,7 @@ init() {
 }
 
 init_class_table() {
-  var_00 = "mp/botClassTable.csv";
+  var_00 = "mp\botClassTable.csv";
   level.botloadoutsets = [];
   var_01 = bot_loadout_fields();
   var_02 = 0;
@@ -61,7 +61,7 @@ init_class_table() {
 }
 
 init_template_table() {
-  var_00 = "mp/botTemplateTable.csv";
+  var_00 = "mp\botTemplateTable.csv";
   level.botloadouttemplates = [];
   var_01 = bot_loadout_fields();
   var_02 = 0;
@@ -275,7 +275,7 @@ bot_validate_weapon(var_00, var_01, var_02, var_03) {
   if (!isdefined(level.bot_invalid_attachment_combos)) {
   level.bot_invalid_attachment_combos = [];
   level.allowable_double_attachments = [];
-  var_05 = "mp/attachmentcombos.csv";
+  var_05 = "mp\attachmentcombos.csv";
   var_06 = 0;
 
   for (;;) {
@@ -362,12 +362,12 @@ init_perktable() {
   var_00 = 1;
 
   for (;;) {
-  var_01 = tablelookupbyrow("mp/perktable.csv", var_00, 1);
+  var_01 = tablelookupbyrow("mp\perktable.csv", var_00, 1);
 
   if (var_01 == "")
   break;
 
-  level.perktable_costs[var_01] = int(tablelookupbyrow("mp/perktable.csv", var_00, 10));
+  level.perktable_costs[var_01] = int(tablelookupbyrow("mp\perktable.csv", var_00, 10));
   var_0++;
   }
 
@@ -377,11 +377,11 @@ init_perktable() {
   level.bot_perktypes = [];
   var_00 = 1;
 
-  for (var_02 = "ability_null"; isdefined(var_02) && var_02 != ""; var_02 = tablelookupbyrow("mp/cacabilitytable.csv", var_00, 1)) {
+  for (var_02 = "ability_null"; isdefined(var_02) && var_02 != ""; var_02 = tablelookupbyrow("mp\cacabilitytable.csv", var_00, 1)) {
   var_02 = getsubstr(var_02, 8);
 
   for (var_03 = 4; var_03 <= 13; var_3++) {
-  var_01 = tablelookupbyrow("mp/cacabilitytable.csv", var_00, var_03);
+  var_01 = tablelookupbyrow("mp\cacabilitytable.csv", var_00, var_03);
 
   if (var_01 != "")
   perktable_add(var_01, var_02);
@@ -392,7 +392,7 @@ init_perktable() {
 }
 
 init_bot_weap_statstable() {
-  var_00 = "mp/statstable.csv";
+  var_00 = "mp\statstable.csv";
   var_01 = 4;
   var_02 = 38;
   var_03 = 39;
@@ -595,7 +595,7 @@ bot_loadout_choose_from_default_class(var_00, var_01, var_02, var_03, var_04, va
 
   var_09 = int(getsubstr(var_08, 0, 1));
   var_10 = int(getsubstr(var_08, 1, 2));
-  var_11 = tablelookupbyrow("mp/cacabilitytable.csv", var_09 + 1, var_10 + 3);
+  var_11 = tablelookupbyrow("mp\cacabilitytable.csv", var_09 + 1, var_10 + 3);
   return var_11;
   }
 
@@ -603,7 +603,7 @@ bot_loadout_choose_from_default_class(var_00, var_01, var_02, var_03, var_04, va
 }
 
 init_bot_attachmenttable() {
-  var_00 = "mp/attachmenttable.csv";
+  var_00 = "mp\attachmenttable.csv";
   var_01 = 5;
   var_02 = 19;
   var_03 = 11;
@@ -656,7 +656,7 @@ bot_loadout_choose_from_attachmenttable(var_00, var_01, var_02, var_03, var_04) 
 }
 
 init_bot_camotable() {
-  var_00 = "mp/camotable.csv";
+  var_00 = "mp\camotable.csv";
   level.func_2D1E = [];
   var_01 = 0;
 

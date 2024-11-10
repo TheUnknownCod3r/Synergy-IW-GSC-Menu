@@ -1,8 +1,8 @@
-/**********************************************************************
+/**************************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\maps\cp_town\cp_town_crab_boss_bomb.gsc
-**********************************************************************/
+ * Script: scripts\cp\maps\cp_town\cp_town_crab_boss_bomb.gsc
+**************************************************************/
 
 start_detonate_bomb() {
 	level thread detonate_bomb_timer();
@@ -33,9 +33,9 @@ exit_early_from_all_active_consumables(param_00) {
 }
 
 refill_fnf_cards_after_bomb_explosion(param_00) {
-	param_00 scripts/cp/zombies/zombies_consumables::reset_meter();
-	param_00 thread scripts/cp/zombies/zombies_consumables::turn_on_cards();
-	param_00 thread scripts/cp/zombies/zombies_consumables::meter_fill_up();
+	param_00 scripts\cp\zombies\zombies_consumables::reset_meter();
+	param_00 thread scripts\cp\zombies\zombies_consumables::turn_on_cards();
+	param_00 thread scripts\cp\zombies\zombies_consumables::meter_fill_up();
 }
 
 enter_bomb_code(param_00,param_01) {
@@ -251,14 +251,14 @@ delay_give_rewards() {
 		var_01 scripts\cp\cp_merits::processmerit("mt_dlc3_boss_killed");
 		var_01 setplayerdata("cp","haveSoulKeys","any_soul_key",1);
 		var_01 setplayerdata("cp","haveSoulKeys","soul_key_4",1);
-		var_01 scripts/cp/zombies/achievement::update_achievement("SOUL_LESS",1);
+		var_01 scripts\cp\zombies\achievement::update_achievement("SOUL_LESS",1);
 		var_01 thread refill_fnf_cards_after_bomb_explosion(var_01);
 		if(!var_01 scripts\cp\utility::isteleportenabled()) {
 			var_01 scripts\cp\utility::allow_player_teleport(1);
 		}
 
 		if(var_01.vo_prefix == "p5_") {
-			var_01 scripts/cp/zombies/achievement::update_achievement("UNPLEASANT_DREAMS",1);
+			var_01 scripts\cp\zombies\achievement::update_achievement("UNPLEASANT_DREAMS",1);
 		}
 	}
 
@@ -345,7 +345,7 @@ store_and_take_perks(param_00) {
 	foreach(var_03, var_02 in param_00.zombies_perks) {
 		if(scripts\engine\utility::istrue(param_00.zombies_perks[var_03]) && should_be_removed_for_bomb_sequence(var_03)) {
 			param_00.pre_ghost_perks = scripts\engine\utility::array_add(param_00.pre_ghost_perks,var_03);
-			param_00 scripts/cp/zombies/zombies_perk_machines::take_zombies_perk(var_03);
+			param_00 scripts\cp\zombies\zombies_perk_machines::take_zombies_perk(var_03);
 			bomb_sequence_take_perks_handler(param_00,var_03);
 		}
 	}
@@ -354,7 +354,7 @@ store_and_take_perks(param_00) {
 bomb_sequence_take_perks_handler(param_00,param_01) {
 	switch(param_01) {
 		case "perk_machine_revive":
-			param_00.var_F1E7--;
+			param_00.self_revives_purchased--;
 			break;
 
 		default:
@@ -374,7 +374,7 @@ should_be_removed_for_bomb_sequence(param_00) {
 
 restore_all_previous_perks(param_00) {
 	foreach(var_02 in param_00.pre_ghost_perks) {
-		param_00 scripts/cp/zombies/zombies_perk_machines::give_zombies_perk(var_02,0);
+		param_00 scripts\cp\zombies\zombies_perk_machines::give_zombies_perk(var_02,0);
 	}
 }
 
@@ -566,7 +566,7 @@ nuclear_bomb_armed_sequence() {
 	level notify("nuclear_bomb_armed");
 	foreach(var_01 in level.players) {
 		if(level.bomb_detonation_attempts == 1) {
-			var_01 scripts/cp/zombies/achievement::update_achievement("BELLY_OF_BEAST",1);
+			var_01 scripts\cp\zombies\achievement::update_achievement("BELLY_OF_BEAST",1);
 		}
 	}
 

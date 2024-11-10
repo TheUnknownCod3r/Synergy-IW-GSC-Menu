@@ -1,8 +1,8 @@
-/***********************************************
+/***************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\aitype\ally_mdf_ar_male.gsc
-***********************************************/
+ * Script: aitype\ally_mdf_ar_male.gsc
+***************************************/
 
 main() {
 	self.var_17DB = "";

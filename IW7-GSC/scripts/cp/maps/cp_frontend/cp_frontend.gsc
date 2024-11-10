@@ -1,8 +1,8 @@
-/***************************************************************
+/*******************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\maps\cp_frontend\cp_frontend.gsc
-***************************************************************/
+ * Script: scripts\cp\maps\cp_frontend\cp_frontend.gsc
+*******************************************************/
 
 func_CDA4(param_00) {
 	wait(param_00);
@@ -324,7 +324,7 @@ func_375B() {
 	level.playerviewowner = self;
 	func_F41D();
 	level.shuffle_songs = [];
-	thread scripts/cp_mp/frontendutils::frontend_camera_watcher(::func_37BA);
+	thread scripts\cp_mp\frontendutils::frontend_camera_watcher(::func_37BA);
 	thread zm_map_select_watcher();
 	thread init_soul_key();
 	thread play_lobby_music();
@@ -343,7 +343,7 @@ play_lobby_music() {
 			if(var_02 != "shuffle") {
 				level notify("shuffle_changed");
 				level.shuffle_playing = 0;
-				function_01BA(var_02);
+				setmusicstate(var_02);
 			}
 			else
 			{
@@ -504,7 +504,7 @@ run_shuffle_music() {
 		var_02 = randomintrange(1,var_00 + 1);
 		if(var_02 != var_01) {
 			var_01 = var_02;
-			var_03 = int(tablelookup("cp/zombies/lobby_music_shuffle.csv",0,var_02,2));
+			var_03 = int(tablelookup("cp\zombies\lobby_music_shuffle.csv",0,var_02,2));
 			if(var_03 != 0) {
 				var_04 = scripts\engine\utility::istrue(level.shuffle_songs[var_03]);
 			}
@@ -514,12 +514,12 @@ run_shuffle_music() {
 			}
 
 			if(var_04) {
-				var_05 = tablelookup("cp/zombies/lobby_music_shuffle.csv",0,var_02,1);
-				var_06 = int(tablelookup("cp/zombies/lobby_music_shuffle.csv",0,var_02,3));
+				var_05 = tablelookup("cp\zombies\lobby_music_shuffle.csv",0,var_02,1);
+				var_06 = int(tablelookup("cp\zombies\lobby_music_shuffle.csv",0,var_02,3));
 				var_06 = var_06 / 1000;
-				function_01BA(var_05);
+				setmusicstate(var_05);
 				wait(var_06);
-				function_01BA("");
+				setmusicstate("");
 			}
 		}
 	}
@@ -1255,24 +1255,24 @@ func_13EFE() {
 func_13EFF(param_00,param_01,param_02,param_03) {
 	level endon("camera_position_requested");
 	var_04 = getent(param_00,"targetname");
-	scripts/cp_mp/frontendutils::frontend_camera_move(var_04,param_01,1,0,param_02);
+	scripts\cp_mp\frontendutils::frontend_camera_move(var_04,param_01,1,0,param_02);
 }
 
 main() {
 	setdvar("r_umbraMinObjectContribution",10);
-	scripts/mp/maps/mp_frontend/mp_frontend_precache_cp::main();
-	scripts/cp/maps/cp_frontend/cp_frontend_precache::main();
+	scripts\mp\maps\mp_frontend\mp_frontend_precache_cp::main();
+	scripts\cp\maps\cp_frontend\cp_frontend_precache::main();
 	scripts\cp\maps\cp_frontend\gen\cp_frontend_art::main();
-	scripts/cp/maps/cp_frontend/cp_frontend_fx::main();
+	scripts\cp\maps\cp_frontend\cp_frontend_fx::main();
 	setdvar("r_lightGridEnableTweaks",1);
 	setdvar("r_lightGridIntensity",1.33);
 	level.callbackplayerconnect = ::func_375B;
 	update_theater_signs();
-	scripts/cp_mp/frontendutils::frontend_camera_setup((0,0,0),(0,0,0));
+	scripts\cp_mp\frontendutils::frontend_camera_setup((0,0,0),(0,0,0));
 	level setup_interact();
 	level.power_setup_init = ::blank;
 	setup_fnf_machine();
-	function_026C("MatchStarted: Completed");
+	sysprint("MatchStarted: Completed");
 }
 
 update_theater_signs() {

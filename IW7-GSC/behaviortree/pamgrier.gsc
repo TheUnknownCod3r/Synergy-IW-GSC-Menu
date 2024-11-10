@@ -1,8 +1,8 @@
-/*********************************************
+/*************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\behaviortree\pamgrier.gsc
-*********************************************/
+ * Script: behaviortree\pamgrier.gsc
+*************************************/
 
 func_2AD0() {
 	if(isdefined(level.var_119E["pamgrier"])) {

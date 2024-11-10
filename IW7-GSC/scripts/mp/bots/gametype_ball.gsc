@@ -1,8 +1,8 @@
-/*****************************************************
+/*********************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\bots\gametype_ball.gsc
-*****************************************************/
+ * Script: scripts\mp\bots\gametype_ball.gsc
+*********************************************/
 
 main() {
 	setup_callbacks();
@@ -404,7 +404,7 @@ ball_bot_defender_limit_for_team(param_00) {
 ball_get_num_players_on_team(param_00) {
 	var_01 = 0;
 	foreach(var_03 in level.participants) {
-		if(scripts\mp\_utility::isteamparticipant(var_03) && isdefined(var_03.team) && var_03.team == param_00) {
+		if(scripts\mp\utility::isteamparticipant(var_03) && isdefined(var_03.team) && var_03.team == param_00) {
 			var_01++;
 		}
 	}
@@ -493,7 +493,7 @@ get_players_by_role(param_00,param_01) {
 			continue;
 		}
 
-		if(isalive(var_04) && scripts\mp\_utility::isteamparticipant(var_04) && var_04.team == param_01 && isdefined(var_04.role) && var_04.role == param_00) {
+		if(isalive(var_04) && scripts\mp\utility::isteamparticipant(var_04) && var_04.team == param_01 && isdefined(var_04.role) && var_04.role == param_00) {
 			var_02[var_02.size] = var_04;
 		}
 	}

@@ -1,13 +1,13 @@
-/*********************************************
+/*************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\minefields.gsc
-*********************************************/
+ * Script: scripts\mp\minefields.gsc
+*************************************/
 
 minefields() {
 	var_00 = getentarray("minefield","targetname");
 	if(var_00.size > 0) {
-		level._effect["mine_explosion"] = loadfx("vfx/core/expl/weap/gre/vfx_exp_gre_dirt_cg");
+		level._effect["mine_explosion"] = loadfx("vfx\core\expl\weap\gre\vfx_exp_gre_dirt_cg");
 	}
 
 	for(var_01 = 0;var_01 < var_00.size;var_01++) {

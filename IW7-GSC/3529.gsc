@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\3529.gsc
+ * Script: 3529.gsc
 ***************************************/
 
 func_1843(var_00, var_01, var_02, var_03, var_04) {
@@ -717,10 +717,10 @@ func_CF1D(var_00, var_01) {
   self endon("death");
 
   if (!isdefined(level._effect["dlight_large"]))
-  level._effect["dlight_large"] = loadfx("vfx/iw7/_requests/mp/vfx_killstreak_dlight");
+  level._effect["dlight_large"] = loadfx("vfx\iw7\_requests\mp\vfx_killstreak_dlight");
 
   if (!isdefined(level._effect["dlight_small"]))
-  level._effect["dlight_small"] = loadfx("vfx/iw7/_requests/mp/vfx_killstreak_dlight_small");
+  level._effect["dlight_small"] = loadfx("vfx\iw7\_requests\mp\vfx_killstreak_dlight_small");
 
   if (!isdefined(var_00))
   var_00 = (0, 0, 0);

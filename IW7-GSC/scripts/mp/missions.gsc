@@ -1,8 +1,8 @@
-/*******************************************
+/***********************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\missions.gsc
-*******************************************/
+ * Script: scripts\mp\missions.gsc
+***********************************/
 
 init() {
 	if(!func_B4E8()) {
@@ -39,7 +39,7 @@ onroundended() {
 getweaponweight(param_00) {
 	for(var_01 = 0;var_01 < 3;var_01++) {
 		var_02 = self getplayerdata("mp","weeklyChallengeId",var_01);
-		var_03 = tablelookupbyrow("mp/weeklyChallengesTable.csv",var_02,0);
+		var_03 = tablelookupbyrow("mp\weeklyChallengesTable.csv",var_02,0);
 		if(var_03 == param_00) {
 			return "ch_weekly_" + var_01;
 		}
@@ -51,7 +51,7 @@ getweaponweight(param_00) {
 func_7E57(param_00) {
 	for(var_01 = 0;var_01 < 3;var_01++) {
 		var_02 = self getplayerdata("mp","dailyChallengeId",var_01);
-		var_03 = tablelookupbyrow("mp/dailyChallengesTable.csv",var_02,0);
+		var_03 = tablelookupbyrow("mp\dailyChallengesTable.csv",var_02,0);
 		if(var_03 == param_00) {
 			return "ch_daily_" + var_01;
 		}
@@ -61,7 +61,7 @@ func_7E57(param_00) {
 }
 
 func_3BF8(param_00) {
-	if(!function_02D9("mp","Challenge",param_00)) {
+	if(!isenumvaluevalid("mp","Challenge",param_00)) {
 		return 0;
 	}
 
@@ -79,7 +79,7 @@ func_3BF8(param_00) {
 }
 
 func_3BF9(param_00) {
-	if(!function_02D9("mp","Challenge",param_00)) {
+	if(!isenumvaluevalid("mp","Challenge",param_00)) {
 		return 0;
 	}
 
@@ -130,11 +130,11 @@ func_3BFA(param_00,param_01) {
 	}
 
 	if(level.var_3C2C[param_00]["type"] == 1) {
-		return int(tablelookup("mp/dailyChallengesTable.csv",0,param_00,9 + param_01 * 3));
+		return int(tablelookup("mp\dailyChallengesTable.csv",0,param_00,9 + param_01 * 3));
 	}
 
 	if(level.var_3C2C[param_00]["type"] == 2) {
-		return int(tablelookup("mp/weeklyChallengesTable.csv",0,param_00,9 + param_01 * 3));
+		return int(tablelookup("mp\weeklyChallengesTable.csv",0,param_00,9 + param_01 * 3));
 	}
 }
 
@@ -981,7 +981,7 @@ func_12F33(param_00,param_01) {
 				}
 				else
 				{
-					param_01.var_1AB++;
+					param_01.setculldist++;
 				}
 	
 				if(func_9EBC(param_01.setculldist,2)) {
@@ -1271,7 +1271,7 @@ func_9E4B(param_00) {
 
 		case "grnd":
 		case "koth":
-			var_01 = function_010F(param_00,level.zone.gameobject.trigger);
+			var_01 = ispointinvolume(param_00,level.zone.gameobject.trigger);
 			break;
 	}
 
@@ -1329,7 +1329,7 @@ func_9DBA(param_00) {
 			break;
 
 		case "koth":
-			var_01 = function_010F(self.origin,level.zone.gameobject.trigger) || function_010F(param_00,level.zone.gameobject.trigger);
+			var_01 = ispointinvolume(self.origin,level.zone.gameobject.trigger) || ispointinvolume(param_00,level.zone.gameobject.trigger);
 			break;
 	}
 
@@ -1397,7 +1397,7 @@ func_D98F(param_00) {
 func_3BF6(param_00,param_01,param_02,param_03,param_04,param_05) {
 	var_06 = self;
 	if(isplayer(param_01)) {
-		if(function_0107(param_03)) {
+		if(isexplosivedamagemod(param_03)) {
 			if(param_02 < var_06.health) {
 				if(isdefined(var_06)) {
 					var_06.var_6A06[param_01.guid] = param_01;
@@ -1455,7 +1455,7 @@ func_3BFF(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_0
 		}
 		else
 		{
-			param_00.var_1AB++;
+			param_00.setculldist++;
 		}
 
 		if(func_9EBC(param_00.setculldist,2)) {
@@ -1479,7 +1479,7 @@ func_3BFF(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_0
 			}
 			else
 			{
-				param_01.var_A6A5[param_00.var_1653].var_1AB++;
+				param_01.var_A6A5[param_00.var_1653].setculldist++;
 				if(func_9E4B(param_00.origin)) {
 					param_01.var_A6A5[param_00.var_1653].var_C2A4++;
 				}
@@ -1758,7 +1758,7 @@ func_D9D8(param_00,param_01) {
 	if(isdefined(param_00.var_24F3)) {
 		var_03 = 0;
 		foreach(var_07, var_05 in param_00.var_24F3) {
-			var_06 = function_02C4(var_07);
+			var_06 = getweaponvariantindex(var_07);
 			if(!isdefined(var_06)) {
 				continue;
 			}
@@ -2000,7 +2000,7 @@ func_D9C8(param_00,param_01,param_02,param_03) {
 	if(param_00.smeansofdeath == "MOD_PISTOL_BULLET" || param_00.smeansofdeath == "MOD_RIFLE_BULLET" || param_00.smeansofdeath == "MOD_HEAD_SHOT") {
 		func_D990(param_00,param_02,param_01,var_06,var_05);
 	}
-	else if(function_0107(param_00.smeansofdeath)) {
+	else if(isexplosivedamagemod(param_00.smeansofdeath)) {
 		func_D99E(param_00,param_02,param_01,var_06,var_05);
 	}
 	else if(issubstr(param_00.smeansofdeath,"MOD_MELEE") && !scripts\mp\weapons::isriotshield(param_00.sweapon)) {
@@ -2110,7 +2110,7 @@ func_D990(param_00,param_01,param_02,param_03,param_04) {
 			break;
 	}
 
-	if(scripts\mp\utility::istrue(function_02D4(param_00.sweapon))) {
+	if(scripts\mp\utility::istrue(weaponusesenergybullets(param_00.sweapon))) {
 		param_01 func_D991("ch_lifetime_energy_kills");
 	}
 
@@ -2127,7 +2127,7 @@ func_D990(param_00,param_01,param_02,param_03,param_04) {
 
 	var_06 = scripts\mp\utility::getweaponrootname(param_00.sweapon);
 	var_07 = issubstr(param_00.sweapon,"alt_");
-	var_08 = function_02C4(param_00.sweapon);
+	var_08 = getweaponvariantindex(param_00.sweapon);
 	var_09 = (var_06 == "iw7_fmg" && var_07) || var_06 == "iw7_ump45" && isdefined(var_08) && var_08 == 3 || var_08 == 35 || var_06 == "iw7_minilmg" && isdefined(var_08) && var_08 == 3 || var_08 == 35;
 	if(var_09) {
 		if(!isdefined(param_01.akimbokills)) {
@@ -2147,7 +2147,7 @@ func_D98E(param_00,param_01,param_02,param_03,param_04) {
 		return 0;
 	}
 
-	if(function_00E5(param_00.sweapon) != "camo0") {
+	if(getweaponcamoname(param_00.sweapon) != "camo0") {
 		param_01 func_D991("ch_outfitter_camo");
 	}
 
@@ -2295,7 +2295,7 @@ func_D98E(param_00,param_01,param_02,param_03,param_04) {
 
 	if(var_05) {
 		param_03 = scripts\mp\utility::getweapongroup(param_00.sweapon);
-		if(param_03 == "weapon_assault" && scripts\mp\utility::istrue(function_02D4(param_00.sweapon))) {
+		if(param_03 == "weapon_assault" && scripts\mp\utility::istrue(weaponusesenergybullets(param_00.sweapon))) {
 			param_01 func_D991("ch_rvn_unlock");
 		}
 
@@ -2973,7 +2973,7 @@ playerkilled(param_00,param_01,param_02,param_03,param_04,param_05,param_06,para
 		var_09.var_2510 = param_01.tookweaponfrom;
 		var_09.var_24EE = param_01 getweaponslistall();
 		var_09.attackerhassupertrophyout = isdefined(param_01.supertrophies) && param_01.supertrophies.size > 0;
-		var_09.attackervisionpulsedvictim = param_01 scripts/mp/supers/super_visionpulse::func_9EF9(var_09.victim);
+		var_09.attackervisionpulsedvictim = param_01 scripts\mp\supers\super_visionpulse::func_9EF9(var_09.victim);
 		if(isdefined(param_01.var_6A06)) {
 			param_01.var_6A06[self.guid] = undefined;
 		}
@@ -3765,11 +3765,11 @@ func_12E71() {
 }
 
 func_7E20(param_00) {
-	return tablelookup("mp/allChallengesTable.csv",0,param_00,6);
+	return tablelookup("mp\allChallengesTable.csv",0,param_00,6);
 }
 
 func_7E21(param_00) {
-	var_01 = tablelookup("mp/allChallengesTable.csv",0,param_00,7);
+	var_01 = tablelookup("mp\allChallengesTable.csv",0,param_00,7);
 	if(isdefined(var_01) && var_01 == "") {
 		return undefined;
 	}
@@ -3778,7 +3778,7 @@ func_7E21(param_00) {
 }
 
 func_B029(param_00,param_01) {
-	return int(tablelookup("mp/allChallengesTable.csv",0,param_00,10 + param_01 * 3));
+	return int(tablelookup("mp\allChallengesTable.csv",0,param_00,10 + param_01 * 3));
 }
 
 func_9F27(param_00) {
@@ -3970,7 +3970,7 @@ validatemasterchallenges() {
 func_31D7() {
 	level.var_3C2C = [];
 	var_00 = 0;
-	var_00 = var_00 + func_31D8("mp/allChallengesTable.csv",0);
+	var_00 = var_00 + func_31D8("mp\allChallengesTable.csv",0);
 }
 
 func_BA08() {
@@ -4125,7 +4125,7 @@ func_BA3B() {
 			continue;
 		}
 
-		var_02 = function_0244(var_01);
+		var_02 = weaponinventorytype(var_01);
 		if(var_02 != "primary") {
 			continue;
 		}
@@ -4626,7 +4626,7 @@ func_3DFF(param_00,param_01) {
 
 func_3E59(param_00,param_01) {
 	if(scripts\mp\utility::istrue(self.modifiers["ads"])) {
-		var_02 = function_00E3(param_01);
+		var_02 = getweaponattachments(param_01);
 		foreach(var_04 in var_02) {
 			var_05 = scripts\mp\weapons::func_248C(var_04);
 			if(var_05 == "rail") {
@@ -4651,7 +4651,7 @@ func_3E2B(param_00,param_01,param_02,param_03) {
 
 func_3DEF(param_00,param_01,param_02) {
 	var_03 = 0;
-	foreach(var_05 in function_00E3(param_01)) {
+	foreach(var_05 in getweaponattachments(param_01)) {
 		var_06 = scripts\mp\utility::attachmentmap_tobase(var_05);
 		if(scripts\mp\weapons::func_9F3C(param_00,var_06)) {
 			var_03++;

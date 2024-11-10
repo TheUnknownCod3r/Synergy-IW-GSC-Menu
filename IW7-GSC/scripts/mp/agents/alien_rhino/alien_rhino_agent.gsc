@@ -1,12 +1,12 @@
-/***********************************************************************
+/***************************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\agents\alien_rhino\alien_rhino_agent.gsc
-***********************************************************************/
+ * Script: scripts\mp\agents\alien_rhino\alien_rhino_agent.gsc
+***************************************************************/
 
 registerscriptedagent() {
 	scripts\mp\agents\alien_rhino\alien_rhino_tunedata::setuptunedata();
-	scripts/aitypes/bt_util::init();
+	scripts\aitypes\bt_util::init();
 	behaviortree\alien_rhino::func_DEE8();
 	scripts\asm\alien_rhino\mp\states::func_2371();
 	thread func_FAB0();
@@ -21,7 +21,7 @@ func_FAB0() {
 	level.agent_definition["alien_rhino"]["setup_func"] = ::setupagent;
 	level.agent_definition["alien_rhino"]["setup_model_func"] = ::func_FACE;
 	level.agent_funcs["alien_rhino"]["on_damaged"] = ::func_C4E0;
-	level.agent_funcs["alien_rhino"]["gametype_on_damage_finished"] = ::scripts/cp/agents/gametype_zombie::onzombiedamagefinished;
+	level.agent_funcs["alien_rhino"]["gametype_on_damage_finished"] = ::scripts\cp\agents\gametype_zombie::onzombiedamagefinished;
 	level.agent_funcs["alien_rhino"]["gametype_on_killed"] = ::scripts\cp\maps\cp_final\cp_final_damage::cp_final_onzombiekilled;
 	level.agent_funcs["alien_rhino"]["on_damaged_finished"] = ::scripts\mp\agents\zombie\zmb_zombie_agent::onzombiedamagefinished;
 	level.agent_funcs["alien_rhino"]["on_killed"] = ::onrhinokilled;

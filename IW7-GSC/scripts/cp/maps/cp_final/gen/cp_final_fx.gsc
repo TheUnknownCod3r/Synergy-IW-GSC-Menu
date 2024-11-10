@@ -1,8 +1,8 @@
-/****************************************************************
+/********************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\maps\cp_final\gen\cp_final_fx.gsc
-****************************************************************/
+ * Script: scripts\cp\maps\cp_final\gen\cp_final_fx.gsc
+********************************************************/
 
 main() {
 	var_00 = scripts\engine\utility::createoneshoteffect("vfx_rotating_asteroids_03");

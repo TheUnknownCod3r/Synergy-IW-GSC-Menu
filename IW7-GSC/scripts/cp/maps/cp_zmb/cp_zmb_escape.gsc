@@ -1,14 +1,14 @@
-/************************************************************
+/****************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\maps\cp_zmb\cp_zmb_escape.gsc
-************************************************************/
+ * Script: scripts\cp\maps\cp_zmb\cp_zmb_escape.gsc
+****************************************************/
 
 cp_zmb_escape_init() {
 	level.interactions_disabled = 1;
 	scripts\cp\utility::coop_mode_enable(["loot"]);
 	level.initial_active_volumes = ["underground_route"];
-	level.escape_table = "scripts/cp/maps/cp_zmb/cp_zmb_escape.csv";
+	level.escape_table = "scripts\cp\maps\cp_zmb\cp_zmb_escape.csv";
 	level.escape_time = 90;
 	level.get_escape_exit_interactions = ::get_escape_exit_interactions;
 	level thread scripts\cp\zombies\zombies_spawning::escape_room_init();

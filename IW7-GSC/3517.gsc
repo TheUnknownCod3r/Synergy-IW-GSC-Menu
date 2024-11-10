@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\3517.gsc
+ * Script: 3517.gsc
 ***************************************/
 
 init() {
@@ -29,9 +29,9 @@ init() {
   level.func_12A8D["mg_turret"].vodestroyed = "remote_sentry_destroyed";
   level.func_12A8D["mg_turret"].func_A84D = "killstreak_remote_turret_laptop_mp";
   level.func_12A8D["mg_turret"].remotedetonatethink = "killstreak_remote_turret_remote_mp";
-  level._effect["sentry_explode_mp"] = loadfx("vfx/core/mp/killstreaks/vfx_sentry_gun_explosion");
-  level._effect["sentry_smoke_mp"] = loadfx("vfx/core/mp/killstreaks/vfx_sg_damage_blacksmoke");
-  level._effect["antenna_light_mp"] = loadfx("vfx/core/lights/light_detonator_blink");
+  level._effect["sentry_explode_mp"] = loadfx("vfx\core\mp\killstreaks\vfx_sentry_gun_explosion");
+  level._effect["sentry_smoke_mp"] = loadfx("vfx\core\mp\killstreaks\vfx_sg_damage_blacksmoke");
+  level._effect["antenna_light_mp"] = loadfx("vfx\core\lights\light_detonator_blink");
 }
 
 func_128FC(var_00, var_01) {

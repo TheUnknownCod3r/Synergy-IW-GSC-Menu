@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\3854.gsc
+ * Script: 3854.gsc
 ***************************************/
 
 func_D7F8() {
@@ -13,7 +13,7 @@ func_D7F8() {
   precacheshader("ac130_hud_friendly_vehicle_diamond_s_w");
   precacheshader("reticle_center_cook");
   precacheshader("hud_offscreenobjectivepointer");
-  __func_17C();
+  _func_17C();
 }
 
 func_F901() {
@@ -73,11 +73,11 @@ func_F900(var_00, var_01, var_02) {
   }
 
   if (!isdefined(level.func_3965)) {
-  var_04 = scripts/sp/vehicle::func_1080E(var_00);
+  var_04 = scripts\sp\vehicle::func_1080E(var_00);
   level.func_3965 = var_4[0];
   }
 
-  level.func_3965 scripts/sp/vehicle::playgestureviewmodel();
+  level.func_3965 scripts\sp\vehicle::playgestureviewmodel();
   level.func_3965.script_disconnectpaths = 0;
 
   if (!var_02)
@@ -158,7 +158,7 @@ func_88BD(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08
   }
 
   if (scripts\engine\utility::is_true(var_07))
-  var_11 = scripts/sp/vehicle::func_1080C(var_02);
+  var_11 = scripts\sp\vehicle::func_1080C(var_02);
   else
   var_11 = func_0BB8::func_398E(var_02, "idle", "heavy", "high");
 
@@ -169,7 +169,7 @@ func_88BD(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08
 
   if (isdefined(var_03)) {
   var_12 = getvehiclenode(var_03, "targetname");
-  var_11 scripts/sp/vehicle::func_2471(var_12);
+  var_11 scripts\sp\vehicle::func_2471(var_12);
   }
 
   wait 0.1;
@@ -222,7 +222,7 @@ func_88BE(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08
   }
 
   if (scripts\engine\utility::is_true(var_07))
-  var_12 = scripts/sp/vehicle::func_1080C(var_02);
+  var_12 = scripts\sp\vehicle::func_1080C(var_02);
   else
   var_12 = func_0BB8::func_398E(var_02, "idle", "heavy", "high");
 
@@ -233,7 +233,7 @@ func_88BE(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08
 
   if (isdefined(var_03)) {
   var_13 = getvehiclenode(var_03, "targetname");
-  var_12 scripts/sp/vehicle::func_2471(var_13);
+  var_12 scripts\sp\vehicle::func_2471(var_13);
   }
 
   wait 0.1;
@@ -309,7 +309,7 @@ func_FA4E(var_00, var_01, var_02, var_03, var_04, var_05) {
   else
   var_08 thread func_0BB6::func_129DD();
 
-  var_08 scripts/sp/utility::func_F40A("enemy", 0);
+  var_08 scripts\sp\utility::func_F40A("enemy", 0);
 }
 
 func_613D(var_00) {
@@ -338,7 +338,7 @@ func_B2DB(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08
   if (var_09 > var_02)
   func_13796(self.func_FE2D, self.func_FE2D.size);
 
-  var_10 = func_EF53(var_00 + scripts/sp/utility::string(var_09), var_01 + scripts/sp/utility::string(var_09));
+  var_10 = func_EF53(var_00 + scripts\sp\utility::string(var_09), var_01 + scripts\sp\utility::string(var_09));
 
   if (!isdefined(var_10))
   continue;
@@ -362,7 +362,7 @@ func_EF53(var_00, var_01, var_02, var_03) {
   if (!isdefined(var_04))
   return;
 
-  var_05 = var_04 scripts/sp/utility::func_10808();
+  var_05 = var_04 scripts\sp\utility::func_10808();
   var_05 func_0BDC::func_19A0(1);
 
   if (scripts\engine\utility::flag_exist("jackal_wait_launch")) {
@@ -370,7 +370,7 @@ func_EF53(var_00, var_01, var_02, var_03) {
   wait(randomfloat(0.25));
   }
 
-  var_05 thread func_0BDC::func_A1EF(scripts/sp/utility::func_7C9A(var_01));
+  var_05 thread func_0BDC::func_A1EF(scripts\sp\utility::func_7C9A(var_01));
   return var_05;
 }
 
@@ -381,7 +381,7 @@ func_EF54(var_00) {
 
 func_EF55(var_00, var_01) {
   var_00 waittill("end_spline");
-  var_02 = scripts/sp/utility::func_7C9A(var_01);
+  var_02 = scripts\sp\utility::func_7C9A(var_01);
   var_00 thread func_0BDC::func_A1EF(var_02);
 }
 
@@ -404,8 +404,8 @@ func_B2D9(var_00, var_01, var_02, var_03, var_04, var_05, var_06) {
   if (var_08 >= var_01)
   break;
 
-  var_10 scripts/sp/utility::func_1747(func_0BDC::func_19AB, 250);
-  var_11 = var_10 scripts/sp/utility::func_10808();
+  var_10 scripts\sp\utility::func_1747(func_0BDC::func_19AB, 250);
+  var_11 = var_10 scripts\sp\utility::func_10808();
   scripts\engine\utility::waitframe();
   func_8927(var_11, var_04, var_05);
   self.func_FE2D = scripts\engine\utility::array_add(self.func_FE2D, var_11);
@@ -428,8 +428,8 @@ func_B2D9(var_00, var_01, var_02, var_03, var_04, var_05, var_06) {
 
   if (self.func_FE2D.size < var_01 && var_08 < var_02) {
   foreach (var_10 in var_07) {
-  var_10 scripts/sp/utility::func_1747(func_0BDC::func_19AB, 250);
-  var_11 = var_10 scripts/sp/utility::func_10808();
+  var_10 scripts\sp\utility::func_1747(func_0BDC::func_19AB, 250);
+  var_11 = var_10 scripts\sp\utility::func_10808();
 
   if (var_02 != -1)
   var_8++;
@@ -496,20 +496,20 @@ func_A13D() {
   for (;;) {
   self waittill("start_death");
 
-  if (!(level.player scripts/sp/utility::func_65DF("player_inside_ship") && level.player scripts/sp/utility::func_65DB("player_inside_ship"))) {
+  if (!(level.player scripts\sp\utility::func_65DF("player_inside_ship") && level.player scripts\sp\utility::func_65DB("player_inside_ship"))) {
   var_00 = 4;
 
   if (isdefined(self.script_parameters) && float(self.script_parameters) > 0)
   var_00 = ceil(float(self.script_parameters));
 
   if (var_00 == 1)
-  scripts/sp/utility::func_54C6();
+  scripts\sp\utility::func_54C6();
   else
   {
   var_01 = randomintrange(1, var_00);
 
   if (var_01 == 1)
-  scripts/sp/utility::func_54C6();
+  scripts\sp\utility::func_54C6();
   }
   }
   }
@@ -531,7 +531,7 @@ func_A1C0(var_00) {
   var_02 = randomfloatrange(1, 3);
 
   while (gettime() - var_01 <= var_02) {
-  if (!(level.player scripts/sp/utility::func_65DF("player_inside_ship") && level.player scripts/sp/utility::func_65DB("player_inside_ship"))) {
+  if (!(level.player scripts\sp\utility::func_65DF("player_inside_ship") && level.player scripts\sp\utility::func_65DB("player_inside_ship"))) {
   var_03 = func_A365(var_00, 1);
   func_A1BD(var_03, "missile");
   }
@@ -552,7 +552,7 @@ func_A1C3(var_00) {
   var_02 = randomfloatrange(1, 3);
 
   while (gettime() - var_01 <= var_02) {
-  if (!(level.player scripts/sp/utility::func_65DF("player_inside_ship") && level.player scripts/sp/utility::func_65DB("player_inside_ship"))) {
+  if (!(level.player scripts\sp\utility::func_65DF("player_inside_ship") && level.player scripts\sp\utility::func_65DB("player_inside_ship"))) {
   var_03 = func_A365(var_00);
   func_A1BD(var_03, "bullet");
   }
@@ -669,7 +669,7 @@ func_13796(var_00, var_01, var_02) {
 
   if (isdefined(var_02)) {
   var_10 endon("thread_timed_out");
-  var_10 thread scripts/sp/utility_code::func_13758(var_02);
+  var_10 thread scripts\sp\utility_code::func_13758(var_02);
   }
 
   var_10.count = var_0.size;
@@ -677,7 +677,7 @@ func_13796(var_00, var_01, var_02) {
   if (isdefined(var_01) && var_01 < var_10.count)
   var_10.count = var_01;
 
-  scripts\engine\utility::array_thread(var_00, scripts/sp/utility_code::func_13757, var_10);
+  scripts\engine\utility::array_thread(var_00, scripts\sp\utility_code::func_13757, var_10);
 
   while (var_10.count > 0)
   var_10 waittill("waittill_dead guy died");
@@ -691,7 +691,7 @@ func_F3ED(var_00) {
 }
 
 func_A290(var_00) {
-  if (!isdefined(scripts/sp/utility::func_C264("OBJ_KILL_JACKALS"))) {
+  if (!isdefined(scripts\sp\utility::func_C264("OBJ_KILL_JACKALS"))) {
   func_963D();
   scripts\engine\utility::waitframe();
   }
@@ -700,7 +700,7 @@ func_A290(var_00) {
 }
 
 func_963D() {
-  _objective_add(scripts/sp/utility::func_C264("OBJ_KILL_JACKALS"), "current", "Kill the jackals");
+  _objective_add(scripts\sp\utility::func_C264("OBJ_KILL_JACKALS"), "current", "Kill the jackals");
 }
 
 func_F436() {
@@ -708,21 +708,21 @@ func_F436() {
   level.func_A40E = 0;
 
   var_00 = level.func_A40E;
-  _objective_additionalentity(scripts/sp/utility::func_C264("OBJ_KILL_JACKALS"), var_00, self, (0, 0, 60));
+  _objective_additionalentity(scripts\sp\utility::func_C264("OBJ_KILL_JACKALS"), var_00, self, (0, 0, 60));
   level.func_A40E++;
   thread func_F437(var_00);
   scripts\engine\utility::waittill_any("death", "remove_objective_marker");
   level notify("key_jackal_death");
-  _objective_additionalposition(scripts/sp/utility::func_C264("OBJ_KILL_JACKALS"), var_00, (0, 0, 0));
+  _objective_additionalposition(scripts\sp\utility::func_C264("OBJ_KILL_JACKALS"), var_00, (0, 0, 0));
 }
 
 func_F437(var_00) {
   level waittill("ship_infil_triggered");
-  _objective_additionalposition(scripts/sp/utility::func_C264("OBJ_KILL_JACKALS"), var_00, (0, 0, 0));
+  _objective_additionalposition(scripts\sp\utility::func_C264("OBJ_KILL_JACKALS"), var_00, (0, 0, 0));
 }
 
 func_13795() {
-  _objective_setpointertextoverride(scripts/sp/utility::func_C264("OBJ_KILL_JACKALS"), "KILL");
+  _objective_setpointertextoverride(scripts\sp\utility::func_C264("OBJ_KILL_JACKALS"), "KILL");
 
   while (level.func_A40E > 0) {
   level waittill("key_jackal_death");
@@ -731,7 +731,7 @@ func_13795() {
   }
 
   scripts\engine\utility::flag_set("jackalObjectiveDead");
-  scripts/sp/utility::func_C27C(scripts/sp/utility::func_C264("OBJ_KILL_JACKALS"));
+  scripts\sp\utility::func_C27C(scripts\sp\utility::func_C264("OBJ_KILL_JACKALS"));
 }
 
 func_F43B(var_00, var_01) {
@@ -743,9 +743,9 @@ func_F43B(var_00, var_01) {
   if (!isdefined(var_00))
   var_00 = (0, 0, 350);
 
-  if (scripts/sp/utility::hastag(self.model, "j_mainroot"))
+  if (scripts\sp\utility::hastag(self.model, "j_mainroot"))
   var_03 = "j_mainroot";
-  else if (scripts/sp/utility::hastag(self.model, "j_mainroot_ship"))
+  else if (scripts\sp\utility::hastag(self.model, "j_mainroot_ship"))
   var_03 = "j_mainroot_ship";
   else
   var_03 = "tag_origin";

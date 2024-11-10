@@ -1,8 +1,8 @@
-/******************************************
+/**********************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\zipline.gsc
-******************************************/
+ * Script: scripts\mp\zipline.gsc
+**********************************/
 
 init() {
 	var_00 = [];

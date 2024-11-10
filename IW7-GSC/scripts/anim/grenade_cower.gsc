@@ -1,8 +1,8 @@
-/**************************************************
+/******************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\anim\grenade_cower.gsc
-**************************************************/
+ * Script: scripts\anim\grenade_cower.gsc
+******************************************/
 
 main() {
 	if(getdvarint("ai_iw7",0) == 1) {
@@ -19,7 +19,7 @@ main() {
 		return;
 	}
 
-	if(self.var_1491.pose == "prone") {
+	if(self.a.pose == "prone") {
 		scripts\anim\stop::main();
 		return;
 	}
@@ -28,14 +28,14 @@ main() {
 	self orientmode("face angle",self.angles[1]);
 	var_00 = 0;
 	if(isdefined(self.objective_position)) {
-		var_00 = angleclamp180(vectortoangles(self.var_15F.origin - self.origin)[1] - self.angles[1]);
+		var_00 = angleclamp180(vectortoangles(self.objective_position.origin - self.origin)[1] - self.angles[1]);
 	}
 	else
 	{
 		var_00 = self.angles[1];
 	}
 
-	if(self.var_1491.pose == "stand") {
+	if(self.a.pose == "stand") {
 		if(isdefined(self.objective_position) && func_12895(var_00)) {
 			return;
 		}
@@ -44,8 +44,8 @@ main() {
 		scripts\anim\shared::donotetracks("cowerstart");
 	}
 
-	self.var_1491.pose = "crouch";
-	self.var_1491.movement = "stop";
+	self.a.pose = "crouch";
+	self.a.movement = "stop";
 	self _meth_82E4("cower",scripts\anim\utility::func_B027("grenade","cower_squat_idle"),%body,1,0.2);
 	scripts\anim\shared::donotetracks("cower");
 	self waittill("never");

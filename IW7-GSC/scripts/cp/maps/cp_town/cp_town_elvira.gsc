@@ -1,8 +1,8 @@
-/**************************************************************
+/******************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\maps\cp_town\cp_town_elvira.gsc
-**************************************************************/
+ * Script: scripts\cp\maps\cp_town\cp_town_elvira.gsc
+******************************************************/
 
 init_elvira() {
 	scripts\engine\utility::flag_init("spellbook_found");

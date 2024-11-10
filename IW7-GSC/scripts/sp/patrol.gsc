@@ -1,8 +1,8 @@
-/*****************************************
+/*********************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\sp\patrol.gsc
-*****************************************/
+ * Script: scripts\sp\patrol.gsc
+*********************************/
 
 func_C97C(param_00) {
 	if(isdefined(self.isnodeoccupied)) {
@@ -214,12 +214,12 @@ func_C97C(param_00) {
 					}
 
 					if(var_0F) {
-						var_07 scripts/sp/anim::func_1ECE(self,var_12);
-						var_07 scripts/sp/anim::func_1EC8(self,"gravity",var_12,undefined,var_0C);
+						var_07 scripts\sp\anim::func_1ECE(self,var_12);
+						var_07 scripts\sp\anim::func_1EC8(self,"gravity",var_12,undefined,var_0C);
 					}
 					else
 					{
-						scripts/sp/anim::func_1EC8(self,"gravity",var_12,undefined,var_0C);
+						scripts\sp\anim::func_1EC8(self,"gravity",var_12,undefined,var_0C);
 					}
 				}
 
@@ -236,7 +236,7 @@ func_C97C(param_00) {
 				func_C981("path_end_idle",var_0C,var_07);
 				for(;;) {
 					var_13 = self.var_C982[randomint(self.var_C982.size)];
-					scripts/sp/anim::func_1EC8(self,"gravity",var_13,undefined,var_0C);
+					scripts\sp\anim::func_1EC8(self,"gravity",var_13,undefined,var_0C);
 				}
 			}
 
@@ -257,30 +257,30 @@ func_C981(param_00,param_01,param_02) {
 	}
 
 	if(isdefined(self.var_C9A7) && isdefined(self.var_C9A7[param_00])) {
-		var_03 scripts/sp/anim::func_1EC8(self,"gravity",self.var_C9A7[param_00],undefined,param_01,var_04);
+		var_03 scripts\sp\anim::func_1EC8(self,"gravity",self.var_C9A7[param_00],undefined,param_01,var_04);
 		return;
 	}
 
 	if(isdefined(self.script_animation) && isdefined(level.var_EC85["generic"]["patrol_stop_" + self.script_animation])) {
-		scripts/sp/anim::func_1EC8(self,"gravity","patrol_stop_" + self.script_animation,undefined,param_01);
+		scripts\sp\anim::func_1EC8(self,"gravity","patrol_stop_" + self.script_animation,undefined,param_01);
 		return;
 	}
 
-	var_03 scripts/sp/anim::func_1EC8(self,"gravity","patrol_stop",undefined,param_01,var_04);
+	var_03 scripts\sp\anim::func_1EC8(self,"gravity","patrol_stop",undefined,param_01,var_04);
 }
 
 func_C980(param_00,param_01) {
 	if(isdefined(self.var_C9A3) && isdefined(self.var_C9A3[param_00])) {
-		scripts/sp/anim::func_1EC8(self,"gravity",self.var_C9A3[param_00],undefined,param_01);
+		scripts\sp\anim::func_1EC8(self,"gravity",self.var_C9A3[param_00],undefined,param_01);
 		return;
 	}
 
 	if(isdefined(self.script_animation) && isdefined(level.var_EC85["generic"]["patrol_start_" + self.script_animation])) {
-		scripts/sp/anim::func_1EC8(self,"gravity","patrol_start_" + self.script_animation,undefined,param_01);
+		scripts\sp\anim::func_1EC8(self,"gravity","patrol_start_" + self.script_animation,undefined,param_01);
 		return;
 	}
 
-	scripts/sp/anim::func_1EC8(self,"gravity","patrol_start",undefined,param_01);
+	scripts\sp\anim::func_1EC8(self,"gravity","patrol_start",undefined,param_01);
 }
 
 func_10B63() {
@@ -443,7 +443,7 @@ func_7CD9() {
 func_7CDB() {
 	var_00 = [];
 	if(isdefined(self.target)) {
-		var_00 = function_00B4(self.target,"targetname");
+		var_00 = getnodearray(self.target,"targetname");
 	}
 
 	return var_00;
@@ -463,7 +463,7 @@ func_7A92() {
 	if(isdefined(self.script_linkto)) {
 		var_01 = strtok(self.script_linkto," ");
 		for(var_02 = 0;var_02 < var_01.size;var_02++) {
-			var_03 = function_00B3(var_01[var_02],"script_linkname");
+			var_03 = getnode(var_01[var_02],"script_linkname");
 			if(isdefined(var_03)) {
 				var_00[var_00.size] = var_03;
 			}
@@ -488,7 +488,7 @@ func_AD3A() {
 	}
 
 	waittillframeend;
-	var_00 = function_0074(self.team,"dog");
+	var_00 = getaispeciesarray(self.team,"dog");
 	var_01 = undefined;
 	for(var_02 = 0;var_02 < var_00.size;var_02++) {
 		if(!isdefined(var_00[var_02].var_EE81)) {
@@ -684,7 +684,7 @@ func_CA86(param_00) {
 				continue;
 			}
 
-			scripts/sp/anim::func_1EC8(self,"gravity","patrol_dog_start");
+			scripts\sp\anim::func_1EC8(self,"gravity","patrol_dog_start");
 			scripts\sp\_utility::func_417A();
 			self.var_EE56 = 1;
 			continue;
@@ -692,7 +692,7 @@ func_CA86(param_00) {
 
 		if(self.a.movement != "walk") {
 			self notify("stopped_while_patrolling");
-			scripts/sp/anim::func_1EC8(self,"gravity","patrol_dog_stop");
+			scripts\sp\anim::func_1EC8(self,"gravity","patrol_dog_stop");
 			scripts\sp\_utility::func_F35F();
 		}
 	}

@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\3479.gsc
+ * Script: 3479.gsc
 ***************************************/
 
 init() {
@@ -11,7 +11,7 @@ init() {
   var_1.func_1155F = getent(var_1.target, "targetname");
 
   var_03 = ["passive_predator", "passive_no_missiles", "passive_implosion", "passive_rapid_missiles"];
-  scripts/mp/killstreak_loot::func_DF07("drone_hive", var_03);
+  scripts\mp\killstreak_loot::func_DF07("drone_hive", var_03);
 }
 
 func_13C8C(var_00) {
@@ -101,12 +101,12 @@ func_E846(var_00, var_01, var_02, var_03) {
   var_04 = "used_drone_hive";
   var_05 = "drone_hive_projectile_mp";
   var_06 = "switch_blade_child_mp";
-  var_07 = scripts/mp/killstreak_loot::getrarityforlootitem(var_3.variantid);
+  var_07 = scripts\mp\killstreak_loot::getrarityforlootitem(var_3.variantid);
 
   if (var_07 != "")
   var_04 = var_04 + "_" + var_07;
 
-  if (scripts/mp/killstreaks/utility::func_A69F(var_03, "passive_implosion")) {
+  if (scripts\mp\killstreaks\utility::func_A69F(var_03, "passive_implosion")) {
   var_05 = "drone_hive_impulse_mp";
   var_06 = "switch_blade_impulse_mp";
   }
@@ -143,18 +143,18 @@ func_E846(var_00, var_01, var_02, var_03) {
   var_00 setclientomnvar("ui_predator_missile", 1);
   var_11 thread func_13AA4(var_00);
   var_11 thread watchhostmigrationfinishedinit(var_00);
-  var_11 thread scripts/mp/killstreaks/utility::watchsupertrophynotify(var_00);
+  var_11 thread scripts\mp\killstreaks\utility::watchsupertrophynotify(var_00);
   var_00 scripts\mp\matchdata::logkillstreakevent(var_02, var_11.origin);
   var_12 = 0;
   var_11.missilesleft = 2;
 
-  if (scripts/mp/killstreaks/utility::func_A69F(var_03, "passive_predator")) {
+  if (scripts\mp\killstreaks\utility::func_A69F(var_03, "passive_predator")) {
   var_11.missilesleft = -1;
   var_11.singlefire = 1;
   var_11 getrankxpmultiplier();
   }
 
-  if (scripts/mp/killstreaks/utility::func_A69F(var_03, "passive_rapid_missiles"))
+  if (scripts\mp\killstreaks\utility::func_A69F(var_03, "passive_rapid_missiles"))
   var_11.func_12BA7 = 1;
 
   var_13 = 2;
@@ -242,7 +242,7 @@ func_B9EE() {
 
   for (;;) {
   var_02 = [];
-  var_00 = scripts/mp/killstreaks/utility::func_7E92();
+  var_00 = scripts\mp\killstreaks\utility::func_7E92();
 
   foreach (var_04 in var_00) {
   var_05 = self.owner worldpointinreticle_circle(var_4.origin, 65, 90);
@@ -282,7 +282,7 @@ spawnswitchblade(var_00, var_01, var_02, var_03) {
   var_12 = scripts\mp\utility\game::_magicbullet(var_03, var_10, var_11, var_0.owner);
   var_13 = var_00 getclosesttargetinview(var_0.owner, var_11);
 
-  if (isdefined(var_13) && !scripts/mp/killstreaks/utility::func_A69F(var_02, "passive_rapid_missiles"))
+  if (isdefined(var_13) && !scripts\mp\killstreaks\utility::func_A69F(var_02, "passive_rapid_missiles"))
   var_12 missile_settargetent(var_13);
 
   var_12 setcandamage(1);
@@ -300,12 +300,12 @@ spawnswitchblade(var_00, var_01, var_02, var_03) {
 }
 
 getclosesttargetinview(var_00, var_01) {
-  var_02 = scripts/mp/killstreaks/utility::func_7E92(var_00);
+  var_02 = scripts\mp\killstreaks\utility::func_7E92(var_00);
   var_03 = undefined;
   var_04 = undefined;
 
   foreach (var_06 in var_02) {
-  if (!scripts/mp/killstreaks/utility::manualmissilecantracktarget(var_06))
+  if (!scripts\mp\killstreaks\utility::manualmissilecantracktarget(var_06))
   continue;
 
   if (scripts\mp\utility\game::istrue(var_6.trinityrocketlocked))
@@ -349,7 +349,7 @@ watchtarget(var_00) {
   self endon("disconnect");
 
   for (;;) {
-  if (!scripts/mp/killstreaks/utility::manualmissilecantracktarget(self))
+  if (!scripts\mp\killstreaks\utility::manualmissilecantracktarget(self))
   break;
 
   if (!isdefined(var_00))
@@ -538,8 +538,8 @@ func_E474(var_00, var_01, var_02) {
 
 watchmissileextraeffect(var_00, var_01) {
   level endon("game_ended");
-  var_02 = scripts/mp/killstreaks/utility::func_A69F(var_00, "passive_predator");
-  var_03 = scripts/mp/killstreaks/utility::func_A69F(var_00, "passive_implosion");
+  var_02 = scripts\mp\killstreaks\utility::func_A69F(var_00, "passive_predator");
+  var_03 = scripts\mp\killstreaks\utility::func_A69F(var_00, "passive_implosion");
 
   if (!var_02 && !var_03)
   return;

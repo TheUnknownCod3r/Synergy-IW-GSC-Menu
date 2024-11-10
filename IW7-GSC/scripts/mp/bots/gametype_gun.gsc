@@ -1,8 +1,8 @@
-/****************************************************
+/********************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\bots\gametype_gun.gsc
-****************************************************/
+ * Script: scripts\mp\bots\gametype_gun.gsc
+********************************************/
 
 main() {
 	level.bot_funcs["gametype_think"] = ::bot_gun_think;

@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\3958.gsc
+ * Script: 3958.gsc
 ***************************************/
 
 registerscriptedagent() {
@@ -89,7 +89,7 @@ setupagent() {
   self.dismember_crawl = 0;
   self.func_B0FC = 1;
   self.full_gib = 0;
-  scripts/mp/agents/zombie/zombie_util::func_F794(self.func_B62E);
+  scripts\mp\agents\zombie\zombie_util::func_F794(self.func_B62E);
   self.meleeradiuswhentargetnotonnavmesh = 100;
   self.croc_chomp = 0;
   self.spawn_round_num = level.wave_num;
@@ -120,7 +120,7 @@ setupagent() {
 func_89C9() {
   scripts\engine\utility::waitframe();
   scripts\asm\asm_bb::bb_requestmovetype("run");
-  level thread scripts/cp/zombies/zombies_vo::play_zombie_vo(self, "run_grunt", 1);
+  level thread scripts\cp\zombies\zombies_vo::play_zombie_vo(self, "run_grunt", 1);
 }
 
 func_899C() {
@@ -157,7 +157,7 @@ func_50EF() {
 }
 
 func_AEB0() {
-  level._effect["laser_muzzle_flash"] = loadfx("vfx/iw7/core/zombie/vfx_zmb_brute_lensf.vfx");
+  level._effect["laser_muzzle_flash"] = loadfx("vfx\iw7\core\zombie\vfx_zmb_brute_lensf.vfx");
 }
 
 func_3110(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08, var_09, var_10, var_11) {
@@ -298,7 +298,7 @@ func_C4D0(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08
   }
 
   if (isplayer(var_01))
-  var_01 thread scripts/cp/cp_damage::updatedamagefeedback(var_13, undefined, var_02);
+  var_01 thread scripts\cp\cp_damage::updatedamagefeedback(var_13, undefined, var_02);
   }
   else if (var_08 == "helmet") {
   var_13 = "standard";
@@ -310,7 +310,7 @@ func_C4D0(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08
   self notify("helmet_damage");
 
   if (isplayer(var_01))
-  var_01 thread scripts/cp/cp_damage::updatedamagefeedback(var_13, undefined, var_02);
+  var_01 thread scripts\cp\cp_damage::updatedamagefeedback(var_13, undefined, var_02);
 
   var_02 = 0;
   }
@@ -325,10 +325,10 @@ func_C4D0(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08
 
 brute_killed_vo(var_00) {
   if (isplayer(var_00))
-  var_00 thread scripts/cp/cp_vo::try_to_play_vo("killfirm_brute", "zmb_comment_vo", "medium", 10, 0, 0, 0, 20);
+  var_00 thread scripts\cp\cp_vo::try_to_play_vo("killfirm_brute", "zmb_comment_vo", "medium", 10, 0, 0, 0, 20);
 
   wait 4;
-  level thread scripts/cp/cp_vo::try_to_play_vo("ww_brute_death", "zmb_ww_vo", "highest", 60, 0, 0, 1);
+  level thread scripts\cp\cp_vo::try_to_play_vo("ww_brute_death", "zmb_ww_vo", "highest", 60, 0, 0, 1);
 }
 
 func_C4D1(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08) {
@@ -341,15 +341,15 @@ func_C4D1(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08
   if (isdefined(var_09) && !isdefined(self.func_72AC)) {
   if (!isdefined(level.brute_loot_check[self.spawn_round_num])) {
   level.brute_loot_check[self.spawn_round_num] = 1;
-  level thread scripts/cp/loot::drop_loot(self.origin, var_01, var_09);
+  level thread scripts\cp\loot::drop_loot(self.origin, var_01, var_09);
   }
   }
 
   var_10 = 400;
 
   foreach (var_12 in level.players) {
-  var_12 scripts/cp/cp_persistence::give_player_currency(var_10);
-  var_12 scripts/cp/zombies/achievement::update_achievement("THE_BIGGER_THEY_ARE", 1);
+  var_12 scripts\cp\cp_persistence::give_player_currency(var_10);
+  var_12 scripts\cp\zombies\achievement::update_achievement("THE_BIGGER_THEY_ARE", 1);
   }
 }
 
@@ -518,7 +518,7 @@ func_3116() {
   var_00 = 0;
   self notify("no_path_to_targets");
   } else {
-  var_06 = scripts/cp/zombies/func_0D60::allowedstances(var_01);
+  var_06 = scripts\cp\zombies\func_0D60::allowedstances(var_01);
 
   if (var_06 == 0) {
   var_07 = 0;
@@ -526,7 +526,7 @@ func_3116() {
 
   if (isdefined(var_02)) {
   foreach (var_04 in var_02) {
-  var_06 = scripts/cp/zombies/func_0D60::allowedstances(var_04);
+  var_06 = scripts\cp\zombies\func_0D60::allowedstances(var_04);
 
   if (var_06 > 0) {
   var_07 = 1;
@@ -567,21 +567,21 @@ func_88BA() {
 }
 
 func_6CA4() {
-  var_00 = scripts/cp/zombies/zombies_spawning::get_scored_goon_spawn_location();
+  var_00 = scripts\cp\zombies\zombies_spawning::get_scored_goon_spawn_location();
   return var_00;
 }
 
 func_1164D() {
   var_00 = spawnstruct();
   var_0.origin = self.origin;
-  scripts/cp/zombies/zombies_spawning::func_3115(var_00);
+  scripts\cp\zombies\zombies_spawning::func_3115(var_00);
   self.ignoreall = 1;
   var_01 = scripts\engine\utility::getstruct("brute_hide_org", "targetname");
   self setorigin(var_1.origin, 1);
   self give_mp_super_weapon(self.origin);
   wait 3;
   var_02 = func_6CA4();
-  scripts/cp/zombies/zombies_spawning::func_3115(var_02);
+  scripts\cp\zombies\zombies_spawning::func_3115(var_02);
   self setorigin(var_2.origin + (0, 0, 3), 1);
   self.ignoreall = 0;
   wait 3;

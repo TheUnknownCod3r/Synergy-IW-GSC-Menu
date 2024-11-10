@@ -1,8 +1,8 @@
-/*****************************************************
+/*********************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\bots\gametype_sotf.gsc
-*****************************************************/
+ * Script: scripts\mp\bots\gametype_sotf.gsc
+*********************************************/
 
 main() {
 	setup_callbacks();
@@ -25,14 +25,14 @@ setup_bot_sotf() {
 
 sotf_should_stop_seeking_weapon(param_00) {
 	if(scripts\mp\bots\_bots_util::bot_get_total_gun_ammo() > 0) {
-		var_01 = scripts\mp\_utility::getweapongroup(self getcurrentweapon());
+		var_01 = scripts\mp\utility::getweapongroup(self getcurrentweapon());
 		if(isdefined(param_00.object)) {
 			var_02 = param_00.object.classname;
 			if(scripts\engine\utility::string_starts_with(var_02,"weapon_")) {
 				var_02 = getsubstr(var_02,7);
 			}
 
-			var_03 = scripts\mp\_utility::getweapongroup(var_02);
+			var_03 = scripts\mp\utility::getweapongroup(var_02);
 			if(!bot_weapon_is_better_class(var_01,var_03)) {
 				return 1;
 			}
@@ -70,14 +70,14 @@ sotf_bot_think_seek_dropped_weapons() {
 				if(var_02.size > 0) {
 					var_04 = self getnearestnode();
 					if(isdefined(var_04)) {
-						var_05 = scripts\mp\_utility::getweapongroup(self getcurrentweapon());
+						var_05 = scripts\mp\utility::getweapongroup(self getcurrentweapon());
 						foreach(var_03 in var_02) {
 							var_07 = var_03.classname;
 							if(scripts\engine\utility::string_starts_with(var_07,"weapon_")) {
 								var_07 = getsubstr(var_07,7);
 							}
 
-							var_08 = scripts\mp\_utility::getweapongroup(var_07);
+							var_08 = scripts\mp\utility::getweapongroup(var_07);
 							if(bot_weapon_is_better_class(var_05,var_08)) {
 								if(!isdefined(var_03.calculated_nearest_node) || !var_03.calculated_nearest_node) {
 									var_03.nearest_node = getclosestnodeinsight(var_03.origin);
@@ -166,7 +166,7 @@ sotf_crate_can_use(param_00) {
 			}
 		}
 
-		var_01 = scripts\mp\_utility::getweapongroup(self getcurrentweapon());
+		var_01 = scripts\mp\utility::getweapongroup(self getcurrentweapon());
 		if(bot_rank_weapon_class(var_01) <= 1) {
 			return 1;
 		}

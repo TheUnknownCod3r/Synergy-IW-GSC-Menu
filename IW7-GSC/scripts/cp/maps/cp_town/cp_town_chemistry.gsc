@@ -1,8 +1,8 @@
-/*****************************************************************
+/*********************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\maps\cp_town\cp_town_chemistry.gsc
-*****************************************************************/
+ * Script: scripts\cp\maps\cp_town\cp_town_chemistry.gsc
+*********************************************************/
 
 init() {
 	level.final_compounds = [];
@@ -370,7 +370,7 @@ parse_compounds_table() {
 	}
 	else
 	{
-		var_00 = "cp/zombies/compounds.csv";
+		var_00 = "cp\zombies\compounds.csv";
 	}
 
 	var_01 = 0;
@@ -412,7 +412,7 @@ parse_elements_table() {
 	}
 	else
 	{
-		var_00 = "cp/zombies/elements.csv";
+		var_00 = "cp\zombies\elements.csv";
 	}
 
 	var_01 = 0;
@@ -594,7 +594,7 @@ setup_radio_vo_from_elements() {
 	}
 	else
 	{
-		var_00 = "cp/zombies/elements.csv";
+		var_00 = "cp\zombies\elements.csv";
 	}
 
 	var_01 = 0;
@@ -951,14 +951,14 @@ play_failure_fx(param_00) {
 	level.computer_model setscriptablepartstate("redlight","on");
 	level.computer_model setscriptablepartstate("yellowlight","off");
 	wait(6);
-	function_0297(level._effect["fail_reaction_screenfx"],param_00,"tag_eye",param_00);
+	stopfxontagforclients(level._effect["fail_reaction_screenfx"],param_00,"tag_eye",param_00);
 	level.computer_model setscriptablepartstate("redlight","off");
 	level.computer_model setscriptablepartstate("yellowlight","on");
 }
 
 watch_for_disconnect_player() {
 	self waittill("disconnect");
-	function_0297(level._effect["fail_reaction_screenfx"],self,"tag_eye",self);
+	stopfxontagforclients(level._effect["fail_reaction_screenfx"],self,"tag_eye",self);
 	level.computer_model setscriptablepartstate("redlight","off");
 	level.computer_model setscriptablepartstate("yellowlight","on");
 }
@@ -969,7 +969,7 @@ play_success_fx(param_00) {
 	level.computer_model setscriptablepartstate("greenlight","on");
 	level.computer_model setscriptablepartstate("yellowlight","off");
 	wait(6);
-	function_0297(level._effect["success_reaction_screenfx"],param_00,"tag_eye",param_00);
+	stopfxontagforclients(level._effect["success_reaction_screenfx"],param_00,"tag_eye",param_00);
 	level.computer_model setscriptablepartstate("greenlight","off");
 	level.computer_model setscriptablepartstate("yellowlight","on");
 }
@@ -1073,33 +1073,33 @@ reaction_activation(param_00,param_01) {
 
 		switch(level.bomb_compound.choice) {
 			case 1:
-				var_05 = var_05 + int(tablelookup("cp/zombies/elements.csv",1,var_09.interaction.chemical_contained,8));
-				var_06 = var_06 + int(tablelookup("cp/zombies/elements.csv",1,var_09.interaction.chemical_contained,9));
+				var_05 = var_05 + int(tablelookup("cp\zombies\elements.csv",1,var_09.interaction.chemical_contained,8));
+				var_06 = var_06 + int(tablelookup("cp\zombies\elements.csv",1,var_09.interaction.chemical_contained,9));
 				break;
 
 			case 2:
-				var_05 = var_05 + int(tablelookup("cp/zombies/elements.csv",1,var_09.interaction.chemical_contained,10));
-				var_06 = var_06 + int(tablelookup("cp/zombies/elements.csv",1,var_09.interaction.chemical_contained,11));
+				var_05 = var_05 + int(tablelookup("cp\zombies\elements.csv",1,var_09.interaction.chemical_contained,10));
+				var_06 = var_06 + int(tablelookup("cp\zombies\elements.csv",1,var_09.interaction.chemical_contained,11));
 				break;
 
 			case 3:
-				var_05 = var_05 + int(tablelookup("cp/zombies/elements.csv",1,var_09.interaction.chemical_contained,12));
-				var_06 = var_06 + int(tablelookup("cp/zombies/elements.csv",1,var_09.interaction.chemical_contained,13));
+				var_05 = var_05 + int(tablelookup("cp\zombies\elements.csv",1,var_09.interaction.chemical_contained,12));
+				var_06 = var_06 + int(tablelookup("cp\zombies\elements.csv",1,var_09.interaction.chemical_contained,13));
 				break;
 
 			case 4:
-				var_05 = var_05 + int(tablelookup("cp/zombies/elements.csv",1,var_09.interaction.chemical_contained,14));
-				var_06 = var_06 + int(tablelookup("cp/zombies/elements.csv",1,var_09.interaction.chemical_contained,15));
+				var_05 = var_05 + int(tablelookup("cp\zombies\elements.csv",1,var_09.interaction.chemical_contained,14));
+				var_06 = var_06 + int(tablelookup("cp\zombies\elements.csv",1,var_09.interaction.chemical_contained,15));
 				break;
 
 			case 5:
-				var_05 = var_05 + int(tablelookup("cp/zombies/elements.csv",1,var_09.interaction.chemical_contained,16));
-				var_06 = var_06 + int(tablelookup("cp/zombies/elements.csv",1,var_09.interaction.chemical_contained,17));
+				var_05 = var_05 + int(tablelookup("cp\zombies\elements.csv",1,var_09.interaction.chemical_contained,16));
+				var_06 = var_06 + int(tablelookup("cp\zombies\elements.csv",1,var_09.interaction.chemical_contained,17));
 				break;
 
 			case 6:
-				var_05 = var_05 + int(tablelookup("cp/zombies/elements.csv",1,var_09.interaction.chemical_contained,18));
-				var_06 = var_06 + int(tablelookup("cp/zombies/elements.csv",1,var_09.interaction.chemical_contained,19));
+				var_05 = var_05 + int(tablelookup("cp\zombies\elements.csv",1,var_09.interaction.chemical_contained,18));
+				var_06 = var_06 + int(tablelookup("cp\zombies\elements.csv",1,var_09.interaction.chemical_contained,19));
 				break;
 		}
 
@@ -1479,7 +1479,7 @@ element_pickup_hint_func(param_00,param_01) {
 }
 
 init_beakers() {
-	level._effect["sb_quest_item_pickup"] = loadfx("vfx/iw7/core/zombie/vfx_zom_souvenir_pickup.vfx");
+	level._effect["sb_quest_item_pickup"] = loadfx("vfx\iw7\core\zombie\vfx_zom_souvenir_pickup.vfx");
 	var_00 = scripts\engine\utility::getstructarray("chemistry_container_model","script_noteworthy");
 	foreach(var_04, var_02 in var_00) {
 		var_03 = undefined;
@@ -1858,7 +1858,7 @@ add_chemical_to_beaker(param_00,param_01) {
 }
 
 display_elements_in_beakers(param_00,param_01,param_02) {
-	var_03 = tablelookup("cp/zombies/elements.csv",1,param_01,0);
+	var_03 = tablelookup("cp\zombies\elements.csv",1,param_01,0);
 	var_04 = "chem_container_01";
 	switch(param_00.name) {
 		case "chem_container_01":
@@ -2333,7 +2333,7 @@ select_constant_value() {
 	var_00 = [];
 	var_01 = 0;
 	for(;;) {
-		var_02 = tablelookupbyrow("cp/zombies/diapi_table.csv",var_01,1);
+		var_02 = tablelookupbyrow("cp\zombies\diapi_table.csv",var_01,1);
 		if(var_02 == "") {
 			break;
 		}
@@ -2576,13 +2576,13 @@ select_pi_value() {
 	var_00 = randomintrange(2,8);
 	var_01 = 0;
 	for(;;) {
-		var_02 = tablelookupbyrow("cp/zombies/diapi_table.csv",var_01,1);
+		var_02 = tablelookupbyrow("cp\zombies\diapi_table.csv",var_01,1);
 		if(var_02 == "") {
 			break;
 		}
 
 		if(int(var_02) == level.constant_value) {
-			level.constant_pi_value = int(tablelookupbyrow("cp/zombies/diapi_table.csv",var_01,var_00));
+			level.constant_pi_value = int(tablelookupbyrow("cp\zombies\diapi_table.csv",var_01,var_00));
 			break;
 		}
 
@@ -2618,7 +2618,7 @@ parse_compound_vo_table() {
 	}
 	else
 	{
-		var_02 = "cp/zombies/chem_vo.csv";
+		var_02 = "cp\zombies\chem_vo.csv";
 	}
 
 	level.intro_chem_vo = [];

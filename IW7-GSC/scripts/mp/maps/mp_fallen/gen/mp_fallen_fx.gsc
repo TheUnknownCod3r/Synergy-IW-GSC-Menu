@@ -1,8 +1,8 @@
-/****************************
+/**********************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\4301.gsc
-****************************/
+ * Script: scripts\mp\maps\mp_fallen\gen\mp_fallen_fx.gsc
+**********************************************************/
 
 main() {
 	var_00 = scripts\engine\utility::createoneshoteffect("vfx_fallen_steam_vent_med");

@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3435.gsc
-****************************/
+ * Script: 3435.gsc
+************************/
 
 applyarchetype() {
 	equipextras();
@@ -133,9 +133,9 @@ func_F6E8(param_00) {
 func_F6E7(param_00) {
 	param_00 endon("death");
 	self endon("death");
-	var_01 = scripts\mp\_utility::outlineenableforplayer(self,"cyan",param_00,1,0,"equipment");
-	scripts\mp\_hostmigration::waitlongdurationwithhostmigrationpause(30);
-	scripts\mp\_utility::outlinedisable(var_01,self);
+	var_01 = scripts\mp\utility::outlineenableforplayer(self,"cyan",param_00,1,0,"equipment");
+	scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(30);
+	scripts\mp\utility::outlinedisable(var_01,self);
 }
 
 func_90DE() {
@@ -178,7 +178,7 @@ func_13A1C(param_00) {
 			continue;
 		}
 
-		if(param_00.type == "super" && var_01 scripts\mp\_supers::issuperready() || var_01 scripts\mp\_supers::issuperinuse()) {
+		if(param_00.type == "super" && var_01 scripts\mp\supers::issuperready() || var_01 scripts\mp\supers::issuperinuse()) {
 			continue;
 		}
 
@@ -188,8 +188,8 @@ func_13A1C(param_00) {
 
 		var_01 _meth_8363(param_00);
 		var_01 playlocalsound("scavenger_pack_pickup");
-		if(var_01 scripts\mp\_utility::_hasperk("specialty_superpack")) {
-			var_01 scripts\mp\_missions::func_D991("ch_trait_super_pack");
+		if(var_01 scripts\mp\utility::_hasperk("specialty_superpack")) {
+			var_01 scripts\mp\missions::func_D991("ch_trait_super_pack");
 		}
 
 		param_00 delete();
@@ -198,28 +198,28 @@ func_13A1C(param_00) {
 
 _meth_8363(param_00) {
 	if(param_00.type == "battery") {
-		thread scripts\mp\_rank::scoreeventpopup("battery_pack");
-		scripts/mp/equipment/battery::func_E83B(param_00.triggerportableradarping);
+		thread scripts\mp\rank::scoreeventpopup("battery_pack");
+		scripts\mp\equipment\battery::func_E83B(param_00.triggerportableradarping);
 		return;
 	}
 
 	if(param_00.type == "scorestreak") {
-		thread scripts\mp\_rank::scoreeventpopup("scorestreak_pack");
-		var_01 = scripts\mp\_rank::getscoreinfovalue("scorestreak_pack");
-		thread scripts\mp\_rank::scorepointspopup(var_01);
+		thread scripts\mp\rank::scoreeventpopup("scorestreak_pack");
+		var_01 = scripts\mp\rank::getscoreinfovalue("scorestreak_pack");
+		thread scripts\mp\rank::scorepointspopup(var_01);
 		scripts\mp\killstreaks\_killstreaks::_meth_83A7("scorestreak_pack",var_01);
 		return;
 	}
 
 	if(param_00.type == "super") {
-		thread scripts\mp\_rank::scoreeventpopup("super_pack");
-		scripts\mp\_supers::stopshellshock(125);
+		thread scripts\mp\rank::scoreeventpopup("super_pack");
+		scripts\mp\supers::stopshellshock(125);
 		return;
 	}
 
 	if(param_00.type == "equipment") {
-		scripts\mp\_weapons::func_EBD3(self);
-		scripts\mp\_hud_message::showmiscmessage("scavenger_eqp");
+		scripts\mp\weapons::func_EBD3(self);
+		scripts\mp\hud_message::showmiscmessage("scavenger_eqp");
 		return;
 	}
 }
@@ -246,7 +246,7 @@ func_13A19(param_00) {
 
 func_13A1B(param_00,param_01) {
 	self endon("death");
-	scripts\mp\_hostmigration::waitlongdurationwithhostmigrationpause(param_00);
+	scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(param_00);
 	param_01 delete();
 	self delete();
 }

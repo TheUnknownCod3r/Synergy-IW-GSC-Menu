@@ -1,14 +1,14 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\3502.gsc
+ * Script: 3502.gsc
 ***************************************/
 
 init() {
-  level.func_114DD = loadfx("vfx/props/barrelexp.vfx");
-  level.func_114DC = loadfx("vfx/core/expl/large_vehicle_explosion.vfx");
-  level.func_114DE = loadfx("vfx/core/muzflash/ac130_105mm");
-  level.func_114DA = loadfx("vfx/core/smktrail/ground_smoke_launch_a");
-  level.func_114DB = loadfx("vfx/core/smktrail/ground_smoke_launch_a");
+  level.func_114DD = loadfx("vfx\props\barrelexp.vfx");
+  level.func_114DC = loadfx("vfx\core\expl\large_vehicle_explosion.vfx");
+  level.func_114DE = loadfx("vfx\core\muzflash\ac130_105mm");
+  level.func_114DA = loadfx("vfx\core\smktrail\ground_smoke_launch_a");
+  level.func_114DB = loadfx("vfx\core\smktrail\ground_smoke_launch_a");
   level.func_8638 = [];
   level.func_8638["mp_alpha"][0]["origin"] = (-2748.91, 2921.33, 125.394);
   level.func_8638["mp_alpha"][0]["angles"] = (0, 16, 0);

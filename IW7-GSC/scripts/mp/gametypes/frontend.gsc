@@ -1,8 +1,8 @@
-/*****************************************************
+/*********************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\gametypes\frontend.gsc
-*****************************************************/
+ * Script: scripts\mp\gametypes\frontend.gsc
+*********************************************/
 
 main() {
 	level.callbackstartgametype = ::callback_frontendstartgametype;

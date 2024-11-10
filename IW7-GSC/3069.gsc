@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3069.gsc
-****************************/
+ * Script: 3069.gsc
+************************/
 
 func_488D() {
 	self.meleerangesq = 9216;
@@ -27,7 +27,7 @@ func_9DA0(param_00) {
 		return 0;
 	}
 
-	if(isdefined(self._stealth) && !scripts/aitypes/melee::canmeleeduringstealth()) {
+	if(isdefined(self._stealth) && !scripts\aitypes\melee::canmeleeduringstealth()) {
 		return 0;
 	}
 
@@ -35,7 +35,7 @@ func_9DA0(param_00) {
 		return 1;
 	}
 
-	if(scripts/aitypes/melee::func_9DD1()) {
+	if(scripts\aitypes\melee::func_9DD1()) {
 		return 0;
 	}
 
@@ -43,7 +43,7 @@ func_9DA0(param_00) {
 }
 
 func_9D9F(param_00) {
-	if(!scripts/asm/asm_bb::bb_iscrawlmelee()) {
+	if(!scripts\asm\asm_bb::bb_iscrawlmelee()) {
 		return level.failure;
 	}
 
@@ -85,16 +85,16 @@ func_FFDD(param_00) {
 }
 
 func_4881(param_00) {
-	self.bt.instancedata[param_00] = spawnstruct();
-	self.bt.instancedata[param_00].var_3E30 = gettime() + 100;
-	self.bt.instancedata[param_00].timeout = gettime() + 4000;
-	self.bt.instancedata[param_00].var_6572 = self.isnodeoccupied.origin;
+	self.var_3135.instancedata[param_00] = spawnstruct();
+	self.var_3135.instancedata[param_00].var_3E30 = gettime() + 100;
+	self.var_3135.instancedata[param_00].timeout = gettime() + 4000;
+	self.var_3135.instancedata[param_00].var_6572 = self.isnodeoccupied.origin;
 	self.melee.var_2AC7 = 1;
 	self.melee.var_2AC6 = 1;
 	self.var_B651 = 1;
-	if(scripts/asm/asm_bb::bb_isselfdestruct() && isdefined(self.bt.var_F1F7)) {
-		self.bt.var_F1F7 stoploopsound();
-		self.bt.var_F1F7 playloopsound("c6_mvmt_crawl_loop_vocal");
+	if(scripts\asm\asm_bb::bb_isselfdestruct() && isdefined(self.var_3135.var_F1F7)) {
+		self.var_3135.var_F1F7 stoploopsound();
+		self.var_3135.var_F1F7 playloopsound("c6_mvmt_crawl_loop_vocal");
 		return;
 	}
 
@@ -108,8 +108,8 @@ func_487A(param_00) {
 
 func_488C(param_00) {
 	if(lib_0A0B::func_2EE1()) {
-		if(!isdefined(self.bt.var_487E)) {
-			self.bt.var_487E = 1;
+		if(!isdefined(self.var_3135.var_487E)) {
+			self.var_3135.var_487E = 1;
 			self.var_6D = 16;
 			self _meth_8481(self.origin);
 			thread lib_0BFE::func_F1F8();
@@ -122,7 +122,7 @@ func_488C(param_00) {
 }
 
 func_9DA2(param_00,param_01) {
-	if(scripts/aitypes/melee::ismeleevalid_common(param_00,param_01) == 0) {
+	if(scripts\aitypes\melee::ismeleevalid_common(param_00,param_01) == 0) {
 		return 0;
 	}
 

@@ -1,11 +1,11 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3573.gsc
-****************************/
+ * Script: 3573.gsc
+************************/
 
 init() {
-	scripts\mp\_powerloot::func_DF06("power_opticWave",["passive_increased_duration","passive_increased_range","passive_increased_speed"]);
+	scripts\mp\powerloot::func_DF06("power_opticWave",["passive_increased_duration","passive_increased_range","passive_increased_speed"]);
 }
 
 func_E145() {
@@ -16,7 +16,7 @@ func_C6AF() {
 	self endon("death");
 	self endon("disconnect");
 	self endon("remove_optic_wave");
-	var_00 = scripts\mp\_powerloot::func_7FC6("power_opticWave",0.8);
+	var_00 = scripts\mp\powerloot::func_7FC6("power_opticWave",0.8);
 	self.powers["power_opticWave"].var_19 = 1;
 	self playanimscriptevent("power_active","opticwave");
 	self playlocalsound("ghost_optic_wave");
@@ -38,17 +38,17 @@ func_C6AD(param_00) {
 	}
 
 	var_01 = 0;
-	var_02 = scripts\mp\_powerloot::func_7FC5("power_opticWave",1750);
+	var_02 = scripts\mp\powerloot::func_7FC5("power_opticWave",1750);
 	foreach(var_04 in level.participants) {
-		if(!scripts\mp\_utility::isreallyalive(var_04)) {
+		if(!scripts\mp\utility::isreallyalive(var_04)) {
 			continue;
 		}
 
-		if(!scripts\mp\_utility::isenemy(var_04)) {
+		if(!scripts\mp\utility::isenemy(var_04)) {
 			continue;
 		}
 
-		if(var_04 scripts\mp\_utility::_hasperk("specialty_noplayertarget") || var_04 scripts\mp\_utility::_hasperk("specialty_noscopeoutline")) {
+		if(var_04 scripts\mp\utility::_hasperk("specialty_noplayertarget") || var_04 scripts\mp\utility::_hasperk("specialty_noscopeoutline")) {
 			continue;
 		}
 
@@ -77,12 +77,12 @@ func_C6AD(param_00) {
 
 func_C7A7(param_00,param_01,param_02) {
 	wait(param_02 * param_01);
-	var_03 = scripts\mp\_utility::outlineenableforplayer(param_00,"orange",self,0,1,"level_script");
+	var_03 = scripts\mp\utility::outlineenableforplayer(param_00,"orange",self,0,1,"level_script");
 	if(!isai(param_00)) {
-		param_00 scripts\mp\_utility::_hudoutlineviewmodelenable(5);
+		param_00 scripts\mp\utility::_hudoutlineviewmodelenable(5);
 	}
 
-	var_04 = scripts\mp\_powerloot::func_7FC1("power_opticWave",1.35);
+	var_04 = scripts\mp\powerloot::func_7FC1("power_opticWave",1.35);
 	func_13AA0(var_03,param_00,var_04);
 }
 
@@ -91,9 +91,9 @@ func_13AA0(param_00,param_01,param_02) {
 	level endon("game_ended");
 	scripts\engine\utility::waittill_any_timeout_no_endon_death_2(param_02,"leave");
 	if(isdefined(param_01)) {
-		scripts\mp\_utility::outlinedisable(param_00,param_01);
+		scripts\mp\utility::outlinedisable(param_00,param_01);
 		if(!isai(param_01)) {
-			param_01 scripts\mp\_utility::_hudoutlineviewmodeldisable();
+			param_01 scripts\mp\utility::_hudoutlineviewmodeldisable();
 		}
 	}
 }

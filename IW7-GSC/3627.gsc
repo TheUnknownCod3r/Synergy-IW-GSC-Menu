@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3627.gsc
-****************************/
+ * Script: 3627.gsc
+************************/
 
 func_C32F() {
 	precacheitem("offhandshield");
@@ -14,7 +14,7 @@ func_C32F() {
 	level.player.var_C337.var_19 = 0;
 	level.player.var_C337.var_9936 = 0;
 	level.player.var_C337.var_B620 = 0;
-	level.var_7649["shield_ping"] = loadfx("vfx/iw7/core/equipment/offhandshield/vfx_shield_ping.vfx");
+	level.var_7649["shield_ping"] = loadfx("vfx\iw7\core\equipment\offhandshield\vfx_shield_ping.vfx");
 	scripts\sp\_utility::func_9187("shield",200,::func_FC8B);
 	level.player.var_C337.var_CB8F = spawnstruct();
 	level.player.var_C337.var_CB8F.queuedialog = 5;
@@ -298,8 +298,8 @@ func_CB95(param_00) {
 		return;
 	}
 
-	var_01 = scripts/sp/math::func_C097(0.1,1,param_00);
-	var_02 = scripts/sp/math::func_6A8E(1.1,0.8,var_01);
+	var_01 = scripts\sp\math::func_C097(0.1,1,param_00);
+	var_02 = scripts\sp\math::func_6A8E(1.1,0.8,var_01);
 	if(issentient(self)) {
 		var_03 = self geteye();
 	}

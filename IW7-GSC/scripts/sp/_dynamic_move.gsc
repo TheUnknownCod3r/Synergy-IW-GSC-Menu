@@ -1,8 +1,8 @@
-/************************************************
+/****************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\sp\_dynamic_move.gsc
-************************************************/
+ * Script: scripts\sp\_dynamic_move.gsc
+****************************************/
 
 func_5F84(param_00) {
 	self notify("disable_dynamic_move");
@@ -64,10 +64,10 @@ func_5557() {
 }
 
 func_F491(param_00,param_01) {
-	if(!scripts/asm/asm::asm_hasalias(param_00,param_01)) {
+	if(!scripts\asm\asm::asm_hasalias(param_00,param_01)) {
 		return;
 	}
 
-	var_02 = scripts/asm/asm::asm_lookupanimfromalias(param_00,param_01);
-	scripts/asm/asm::asm_setdemeanoranimoverride("sprint","move",var_02);
+	var_02 = scripts\asm\asm::asm_lookupanimfromalias(param_00,param_01);
+	scripts\asm\asm::asm_setdemeanoranimoverride("sprint","move",var_02);
 }

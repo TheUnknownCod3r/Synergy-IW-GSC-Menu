@@ -1,13 +1,13 @@
-/************************************************************
+/****************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\killstreaks\_remotemortar.gsc
-************************************************************/
+ * Script: scripts\mp\killstreaks\_remotemortar.gsc
+****************************************************/
 
 init() {
-	level.reminder_vo_init["laserTarget"] = loadfx("vfx/misc/laser_glow");
-	level.reminder_vo_init["missileExplode"] = loadfx("vfx/core/expl/bouncing_betty_explosion");
-	level.reminder_vo_init["deathExplode"] = loadfx("vfx/core/expl/uav_advanced_death");
+	level.reminder_vo_init["laserTarget"] = loadfx("vfx\misc\laser_glow");
+	level.reminder_vo_init["missileExplode"] = loadfx("vfx\core\expl\bouncing_betty_explosion");
+	level.reminder_vo_init["deathExplode"] = loadfx("vfx\core\expl\uav_advanced_death");
 	scripts\mp\killstreaks\_killstreaks::registerkillstreak("remote_mortar",::func_128FD);
 	level.reminder_reaction_pointat = undefined;
 }
@@ -18,22 +18,22 @@ func_128FD(param_00,param_01) {
 		return 0;
 	}
 
-	scripts\mp\_utility::setusingremote("remote_mortar");
+	scripts\mp\utility::setusingremote("remote_mortar");
 	var_02 = scripts\mp\killstreaks\_killstreaks::initridekillstreak("remote_mortar");
 	if(var_02 != "success") {
 		if(var_02 != "disconnect") {
-			scripts\mp\_utility::clearusingremote();
+			scripts\mp\utility::clearusingremote();
 		}
 
 		return 0;
 	}
 	else if(isdefined(level.reminder_reaction_pointat)) {
 		self iprintlnbold(&"KILLSTREAKS_AIR_SPACE_TOO_CROWDED");
-		scripts\mp\_utility::clearusingremote();
+		scripts\mp\utility::clearusingremote();
 		return 0;
 	}
 
-	scripts\mp\_matchdata::logkillstreakevent("remote_mortar",self.origin);
+	scripts\mp\matchdata::logkillstreakevent("remote_mortar",self.origin);
 	return func_10DE9(param_00);
 }
 
@@ -45,7 +45,7 @@ func_10DE9(param_00) {
 
 	level.reminder_reaction_pointat = var_01;
 	func_DF87(var_01);
-	thread scripts\mp\_utility::teamplayercardsplash("used_remote_mortar",self);
+	thread scripts\mp\utility::teamplayercardsplash("used_remote_mortar",self);
 	return 1;
 }
 
@@ -94,12 +94,12 @@ func_B011(param_00) {
 }
 
 func_DF87(param_00) {
-	scripts\mp\_utility::_giveweapon("mortar_remote_mp");
-	scripts\mp\_utility::_switchtoweapon("mortar_remote_mp");
+	scripts\mp\utility::_giveweapon("mortar_remote_mp");
+	scripts\mp\utility::_switchtoweapon("mortar_remote_mp");
 	thread waitsetthermal(1,param_00);
-	thread scripts\mp\_utility::reinitializethermal(param_00);
+	thread scripts\mp\utility::reinitializethermal(param_00);
 	if(getdvarint("camera_thirdPerson")) {
-		scripts\mp\_utility::setthirdpersondof(0);
+		scripts\mp\utility::setthirdpersondof(0);
 	}
 
 	self playerlinkweaponviewtodelta(param_00,"tag_player",1,40,40,25,40);
@@ -161,7 +161,7 @@ remotedetonateonset(param_00) {
 			var_05 = anglestoforward(self getplayerangles());
 			var_06 = anglestoright(self getplayerangles());
 			var_07 = var_04 + var_05 * 100 + var_06 * -100;
-			var_08 = scripts\mp\_utility::_magicbullet("remote_mortar_missile_mp",var_07,param_00.var_1155F.origin,self);
+			var_08 = scripts\mp\utility::_magicbullet("remote_mortar_missile_mp",var_07,param_00.var_1155F.origin,self);
 			var_08.type = "remote_mortar";
 			earthquake(0.3,0.5,var_04,256);
 			var_08 missile_settargetent(param_00.var_1155F);
@@ -231,15 +231,15 @@ func_DFB3(param_00) {
 	for(;;) {
 		if((!var_01 && self adsbuttonpressed()) || var_01 && self.remote_detonation_monitor) {
 			if(param_00.var_13FCA == 0) {
-				scripts\mp\_utility::_giveweapon("mortar_remote_zoom_mp");
-				scripts\mp\_utility::_switchtoweapon("mortar_remote_zoom_mp");
+				scripts\mp\utility::_giveweapon("mortar_remote_zoom_mp");
+				scripts\mp\utility::_switchtoweapon("mortar_remote_zoom_mp");
 				param_00.var_13FCA = 1;
 			}
 		}
 		else if((!var_01 && !self adsbuttonpressed()) || var_01 && !self.remote_detonation_monitor) {
 			if(param_00.var_13FCA == 1) {
-				scripts\mp\_utility::_giveweapon("mortar_remote_mp");
-				scripts\mp\_utility::_switchtoweapon("mortar_remote_mp");
+				scripts\mp\utility::_giveweapon("mortar_remote_mp");
+				scripts\mp\utility::_switchtoweapon("mortar_remote_mp");
 				param_00.var_13FCA = 0;
 			}
 		}
@@ -262,13 +262,13 @@ remotemissile_fx(param_00) {
 
 func_DF81(param_00) {
 	self endon("death");
-	scripts\mp\_hostmigration::waitlongdurationwithhostmigrationpause(6);
+	scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(6);
 	playfx(level.reminder_vo_init["missileExplode"],self.origin);
 	self delete();
 }
 
 remotedefusesetup(param_00) {
-	if(!scripts\mp\_utility::isusingremote()) {
+	if(!scripts\mp\utility::isusingremote()) {
 		return;
 	}
 
@@ -279,18 +279,18 @@ remotedefusesetup(param_00) {
 	self thermalvisionoff();
 	self thermalvisionfofoverlayoff();
 	self visionsetthermalforplayer(game["thermal_vision"],0);
-	scripts\mp\_utility::restorebasevisionset(0);
+	scripts\mp\utility::restorebasevisionset(0);
 	self unlink();
-	scripts\mp\_utility::clearusingremote();
+	scripts\mp\utility::clearusingremote();
 	if(getdvarint("camera_thirdPerson")) {
-		scripts\mp\_utility::setthirdpersondof(1);
+		scripts\mp\utility::setthirdpersondof(1);
 	}
 
-	scripts\mp\_utility::_switchtoweapon(scripts\engine\utility::getlastweapon());
-	var_01 = scripts\mp\_utility::getkillstreakweapon("remote_mortar");
-	scripts\mp\_utility::_takeweapon(var_01);
-	scripts\mp\_utility::_takeweapon("mortar_remote_zoom_mp");
-	scripts\mp\_utility::_takeweapon("mortar_remote_mp");
+	scripts\mp\utility::_switchtoweapon(scripts\engine\utility::getlastweapon());
+	var_01 = scripts\mp\utility::getkillstreakweapon("remote_mortar");
+	scripts\mp\utility::_takeweapon(var_01);
+	scripts\mp\utility::_takeweapon("mortar_remote_zoom_mp");
+	scripts\mp\utility::_takeweapon("mortar_remote_mp");
 	scripts\engine\utility::allow_weapon_switch(1);
 }
 
@@ -300,7 +300,7 @@ func_89F3(param_00) {
 	param_00 endon("removed_reaper_ammo");
 	self endon("death");
 	var_01 = 40;
-	scripts\mp\_hostmigration::waitlongdurationwithhostmigrationpause(var_01);
+	scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(var_01);
 	while(param_00.var_6DB6) {
 		wait(0.05);
 	}
@@ -373,9 +373,9 @@ remoteinfo() {
 	var_00 = self.origin + anglestoforward(self.angles) * 20000;
 	self moveto(var_00,30);
 	playfxontag(level._effect["ac130_engineeffect"],self,"tag_origin");
-	scripts\mp\_hostmigration::waitlongdurationwithhostmigrationpause(3);
+	scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(3);
 	self moveto(var_00,4,4,0);
-	scripts\mp\_hostmigration::waitlongdurationwithhostmigrationpause(4);
+	scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(4);
 	level thread func_E161(self,0);
 }
 
@@ -394,7 +394,7 @@ damagetracker() {
 	self.var_E1 = 0;
 	for(;;) {
 		self waittill("damage",var_00,var_01,var_02,var_03,var_04,var_05,var_06,var_07,var_08,var_09);
-		if(!scripts\mp\_weapons::friendlyfirecheck(self.triggerportableradarping,var_01)) {
+		if(!scripts\mp\weapons::friendlyfirecheck(self.triggerportableradarping,var_01)) {
 			continue;
 		}
 
@@ -413,9 +413,9 @@ damagetracker() {
 		self.wasdamaged = 1;
 		var_0A = var_00;
 		if(isplayer(var_01)) {
-			var_01 scripts\mp\_damagefeedback::updatedamagefeedback("");
+			var_01 scripts\mp\damagefeedback::updatedamagefeedback("");
 			if(var_04 == "MOD_RIFLE_BULLET" || var_04 == "MOD_PISTOL_BULLET") {
-				if(var_01 scripts\mp\_utility::_hasperk("specialty_armorpiercing")) {
+				if(var_01 scripts\mp\utility::_hasperk("specialty_armorpiercing")) {
 					var_0A = var_0A + var_00 * level.armorpiercingmod;
 				}
 			}
@@ -445,8 +445,8 @@ damagetracker() {
 		if(self.var_E1 >= self.maxhealth) {
 			if(isplayer(var_01) && !isdefined(self.triggerportableradarping) || var_01 != self.triggerportableradarping) {
 				var_01 notify("destroyed_killstreak",var_09);
-				thread scripts\mp\_utility::teamplayercardsplash("callout_destroyed_remote_mortar",var_01);
-				var_01 thread scripts\mp\_utility::giveunifiedpoints("kill",var_09,50);
+				thread scripts\mp\utility::teamplayercardsplash("callout_destroyed_remote_mortar",var_01);
+				var_01 thread scripts\mp\utility::giveunifiedpoints("kill",var_09,50);
 			}
 
 			if(isdefined(self.triggerportableradarping)) {
@@ -496,7 +496,7 @@ func_10FA8(param_00,param_01) {
 		var_03 = var_04;
 		var_05 = distance(self.origin,var_04);
 		if(var_05 < 3000 && param_00.numflares > 0) {
-			param_00.var_C22B--;
+			param_00.numflares--;
 			param_00 thread scripts\mp\killstreaks\_flares::func_6EAE();
 			var_06 = param_00 scripts\mp\killstreaks\_flares::func_6EA0();
 			self missile_settargetent(var_06);
@@ -584,7 +584,7 @@ func_EB18(param_00,param_01,param_02) {
 		while(var_06 < var_08.size) {
 			if(isdefined(var_08[var_06])) {
 				if(var_08[var_06] < 3000 && param_00.numflares > 0) {
-					param_00.var_C22B--;
+					param_00.numflares--;
 					param_00 thread scripts\mp\killstreaks\_flares::func_6EAE();
 					var_09 = param_00 scripts\mp\killstreaks\_flares::func_6EA0();
 					for(var_0A = 0;var_0A < param_02.size;var_0A++) {

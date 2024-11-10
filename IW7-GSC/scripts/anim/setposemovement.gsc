@@ -1,22 +1,22 @@
-/****************************************************
+/********************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\anim\setposemovement.gsc
-****************************************************/
+ * Script: scripts\anim\setposemovement.gsc
+********************************************/
 
 setposemovement(param_00,param_01) {
 	if(param_00 == "") {
-		if(self.var_1491.pose == "prone" && param_01 == "walk" || param_01 == "run") {
+		if(self.a.pose == "prone" && param_01 == "walk" || param_01 == "run") {
 			param_00 = "crouch";
 		}
 		else
 		{
-			param_00 = self.var_1491.pose;
+			param_00 = self.a.pose;
 		}
 	}
 
 	if(!isdefined(param_01) || param_01 == "") {
-		param_01 = self.var_1491.movement;
+		param_01 = self.a.movement;
 	}
 
 	[[level.setposemovementfnarray[param_00][param_01]]]();
@@ -35,9 +35,9 @@ func_98BF() {
 }
 
 func_10B7E() {
-	switch(self.var_1491.pose) {
+	switch(self.a.pose) {
 		case "stand":
-			switch(self.var_1491.movement) {
+			switch(self.a.movement) {
 				case "stop":
 					return 0;
 	
@@ -52,7 +52,7 @@ func_10B7E() {
 			break;
 
 		case "crouch":
-			switch(self.var_1491.movement) {
+			switch(self.a.movement) {
 				case "stop":
 					func_4AAD();
 					break;
@@ -68,7 +68,7 @@ func_10B7E() {
 			break;
 
 		default:
-			switch(self.var_1491.movement) {
+			switch(self.a.movement) {
 				case "stop":
 					func_DA8D();
 					break;
@@ -84,9 +84,9 @@ func_10B7E() {
 }
 
 func_10B84() {
-	switch(self.var_1491.pose) {
+	switch(self.a.pose) {
 		case "stand":
-			switch(self.var_1491.movement) {
+			switch(self.a.movement) {
 				case "stop":
 					func_2B92();
 					break;
@@ -101,7 +101,7 @@ func_10B84() {
 			break;
 
 		case "crouch":
-			switch(self.var_1491.movement) {
+			switch(self.a.movement) {
 				case "stop":
 					func_4AAF();
 					break;
@@ -125,9 +125,9 @@ func_10B84() {
 }
 
 func_10B76() {
-	switch(self.var_1491.pose) {
+	switch(self.a.pose) {
 		case "stand":
-			switch(self.var_1491.movement) {
+			switch(self.a.movement) {
 				case "walk":
 				case "stop":
 					return func_2B91();
@@ -138,7 +138,7 @@ func_10B76() {
 			break;
 
 		case "crouch":
-			switch(self.var_1491.movement) {
+			switch(self.a.movement) {
 				case "stop":
 					return func_4AAE();
 	
@@ -156,9 +156,9 @@ func_10B76() {
 }
 
 func_4AA7() {
-	switch(self.var_1491.pose) {
+	switch(self.a.pose) {
 		case "stand":
-			switch(self.var_1491.movement) {
+			switch(self.a.movement) {
 				case "stop":
 					func_10B7F();
 					break;
@@ -177,7 +177,7 @@ func_4AA7() {
 			break;
 
 		case "crouch":
-			switch(self.var_1491.movement) {
+			switch(self.a.movement) {
 				case "stop":
 					break;
 	
@@ -204,9 +204,9 @@ func_4AA7() {
 }
 
 func_4AB1() {
-	switch(self.var_1491.pose) {
+	switch(self.a.pose) {
 		case "stand":
-			switch(self.var_1491.movement) {
+			switch(self.a.movement) {
 				case "stop":
 					func_2B90();
 					break;
@@ -222,7 +222,7 @@ func_4AB1() {
 			break;
 
 		case "crouch":
-			switch(self.var_1491.movement) {
+			switch(self.a.movement) {
 				case "stop":
 					func_4AA9();
 					break;
@@ -245,9 +245,9 @@ func_4AB1() {
 }
 
 func_4A9E() {
-	switch(self.var_1491.pose) {
+	switch(self.a.pose) {
 		case "stand":
-			switch(self.var_1491.movement) {
+			switch(self.a.movement) {
 				case "stop":
 					func_2B8F();
 					break;
@@ -259,7 +259,7 @@ func_4A9E() {
 			break;
 
 		case "crouch":
-			switch(self.var_1491.movement) {
+			switch(self.a.movement) {
 				case "stop":
 					func_4AA8();
 					break;
@@ -282,9 +282,9 @@ func_4A9E() {
 }
 
 func_DA86() {
-	switch(self.var_1491.pose) {
+	switch(self.a.pose) {
 		case "stand":
-			switch(self.var_1491.movement) {
+			switch(self.a.movement) {
 				case "stop":
 					func_10B80();
 					break;
@@ -303,7 +303,7 @@ func_DA86() {
 			break;
 
 		case "crouch":
-			switch(self.var_1491.movement) {
+			switch(self.a.movement) {
 				case "stop":
 					func_4AAA();
 					break;
@@ -322,7 +322,7 @@ func_DA86() {
 			break;
 
 		case "prone":
-			switch(self.var_1491.movement) {
+			switch(self.a.movement) {
 				case "stop":
 					break;
 	
@@ -342,9 +342,9 @@ func_DA86() {
 }
 
 func_DA91() {
-	switch(self.var_1491.pose) {
+	switch(self.a.pose) {
 		case "stand":
-			switch(self.var_1491.movement) {
+			switch(self.a.movement) {
 				case "stop":
 					func_10B82();
 					break;
@@ -356,7 +356,7 @@ func_DA91() {
 			break;
 
 		case "crouch":
-			switch(self.var_1491.movement) {
+			switch(self.a.movement) {
 				case "stop":
 					func_4AAC();
 					break;
@@ -368,13 +368,13 @@ func_DA91() {
 			break;
 
 		default:
-			switch(self.var_1491.movement) {
+			switch(self.a.movement) {
 				case "stop":
 					func_DA8C();
 					break;
 	
 				default:
-					self.var_1491.movement = "walk";
+					self.a.movement = "walk";
 					return 0;
 			}
 			break;
@@ -384,9 +384,9 @@ func_DA91() {
 }
 
 func_DA84() {
-	switch(self.var_1491.pose) {
+	switch(self.a.pose) {
 		case "stand":
-			switch(self.var_1491.movement) {
+			switch(self.a.movement) {
 				case "stop":
 					func_10B81();
 					break;
@@ -398,7 +398,7 @@ func_DA84() {
 			break;
 
 		case "crouch":
-			switch(self.var_1491.movement) {
+			switch(self.a.movement) {
 				case "stop":
 					func_4AAB();
 					break;
@@ -410,13 +410,13 @@ func_DA84() {
 			break;
 
 		default:
-			switch(self.var_1491.movement) {
+			switch(self.a.movement) {
 				case "stop":
 					func_DA8C();
 					break;
 	
 				default:
-					self.var_1491.movement = "run";
+					self.a.movement = "run";
 					return 0;
 			}
 			break;
@@ -432,10 +432,10 @@ func_CEED(param_00,param_01,param_02,param_03) {
 	}
 
 	self _meth_82E3("blendTransition",param_00,%body,1,param_01,1);
-	scripts\anim\notetracks::donotetracksfortime(param_01 \ 2,"blendTransition");
-	self.var_1491.pose = param_02;
-	self.var_1491.movement = param_03;
-	var_05 = var_04 - gettime() \ 1000;
+	scripts\anim\notetracks::donotetracksfortime(param_01 / 2,"blendTransition");
+	self.a.pose = param_02;
+	self.a.movement = param_03;
+	var_05 = var_04 - gettime() / 1000;
 	if(var_05 < 0.05) {
 		var_05 = 0.05;
 	}
@@ -448,7 +448,7 @@ func_D557(param_00,param_01) {
 }
 
 func_10B86() {
-	self.var_1491.movement = "stop";
+	self.a.movement = "stop";
 }
 
 func_10B85() {
@@ -457,17 +457,17 @@ func_10B85() {
 }
 
 func_10B7D() {
-	self.var_1491.movement = "stop";
+	self.a.movement = "stop";
 }
 
 func_10B7C() {
-	self.var_1491.movement = "stop";
-	self.var_1491.pose = "crouch";
+	self.a.movement = "stop";
+	self.a.pose = "crouch";
 }
 
 func_CEEE(param_00) {
 	var_01 = 0.3;
-	if(self.var_1491.movement != "stop") {
+	if(self.a.movement != "stop") {
 		self endon("movemode");
 		var_01 = 1;
 	}
@@ -477,8 +477,8 @@ func_CEEE(param_00) {
 
 func_2B91() {
 	if(!self.livestreamingenable) {
-		self.var_1491.movement = "run";
-		self.var_1491.pose = "stand";
+		self.a.movement = "run";
+		self.a.pose = "stand";
 		return 0;
 	}
 
@@ -488,7 +488,7 @@ func_2B91() {
 	}
 
 	var_00 = 0.1;
-	if(self.var_1491.movement != "stop" && self.getcsplinepointtargetname == "none") {
+	if(self.a.movement != "stop" && self.getcsplinepointtargetname == "none") {
 		var_00 = 0.5;
 	}
 
@@ -508,16 +508,16 @@ func_2B91() {
 }
 
 func_2B92() {
-	if(self.var_1491.movement != "stop") {
+	if(self.a.movement != "stop") {
 		self endon("movemode");
 	}
 
-	if(!isdefined(self.alwaysrunforward) && self.var_1491.pose != "prone") {
+	if(!isdefined(self.alwaysrunforward) && self.a.pose != "prone") {
 		scripts\anim\run::func_F7A9(scripts\anim\utility::func_7FCC("move_b"),scripts\anim\utility::func_7FCC("move_l"),scripts\anim\utility::func_7FCC("move_r"));
 	}
 
-	self.var_1491.pose = "stand";
-	self.var_1491.movement = "walk";
+	self.a.pose = "stand";
+	self.a.movement = "walk";
 }
 
 func_4AAD() {
@@ -544,7 +544,7 @@ func_4AAF() {
 }
 
 func_4AB2() {
-	self.var_1491.movement = "stop";
+	self.a.movement = "stop";
 }
 
 func_4AB3() {
@@ -553,7 +553,7 @@ func_4AB3() {
 }
 
 func_4AA2() {
-	self.var_1491.movement = "stop";
+	self.a.movement = "stop";
 }
 
 func_4AA6() {
@@ -706,24 +706,24 @@ func_D555(param_00,param_01,param_02,param_03,param_04,param_05) {
 	}
 
 	if(param_05) {
-		thread func_13712(getanimlength(param_00) \ 2,"killtimerscript",param_01);
+		thread func_13712(getanimlength(param_00) / 2,"killtimerscript",param_01);
 	}
 
 	self _meth_82E4("transAnimDone2",param_00,%body,1,0.2,param_04);
-	if(!isdefined(self.var_1491.pose)) {
+	if(!isdefined(self.a.pose)) {
 		self.pose = "undefined";
 	}
 
-	if(!isdefined(self.var_1491.movement)) {
+	if(!isdefined(self.a.movement)) {
 		self.movement = "undefined";
 	}
 
 	var_06 = "";
 	scripts\anim\shared::donotetracks("transAnimDone2",undefined,var_06);
 	self notify("killtimerscript");
-	self.var_1491.pose = param_01;
+	self.a.pose = param_01;
 	self notify("entered_pose" + param_01);
-	self.var_1491.movement = param_02;
+	self.a.movement = param_02;
 	if(isdefined(param_03)) {
 		self _meth_82A5(param_03,%body,1,0.3,param_04);
 	}
@@ -733,7 +733,7 @@ func_13712(param_00,param_01,param_02) {
 	self endon("killanimscript");
 	self endon("death");
 	self endon(param_01);
-	var_03 = self.var_1491.pose;
+	var_03 = self.a.pose;
 	wait(param_00);
 	if(var_03 != "prone" && param_02 == "prone") {
 		scripts\anim\cover_prone::func_12EF6(0.1);

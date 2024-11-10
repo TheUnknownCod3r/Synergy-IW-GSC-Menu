@@ -1,8 +1,8 @@
-/******************************************
+/**********************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\outline.gsc
-******************************************/
+ * Script: scripts\mp\outline.gsc
+**********************************/
 
 init() {
 	level.outlineids = 0;
@@ -267,7 +267,7 @@ outlinegethighestinfoforplayer(param_00,param_01) {
 }
 
 outlinegenerateuniqueid() {
-	level.var_C79F++;
+	level.outlineids++;
 	return level.outlineids;
 }
 

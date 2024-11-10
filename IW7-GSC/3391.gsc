@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3391.gsc
-****************************/
+ * Script: 3391.gsc
+************************/
 
 init_arcade_counter_ammo_slot() {
 	var_00 = scripts\engine\utility::getstructarray("arcade_counter_ammo","script_noteworthy");

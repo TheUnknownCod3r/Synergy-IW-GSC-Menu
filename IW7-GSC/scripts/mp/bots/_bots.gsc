@@ -1,8 +1,8 @@
-/*********************************************
+/*************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\bots\_bots.gsc
-*********************************************/
+ * Script: scripts\mp\bots\_bots.gsc
+*************************************/
 
 main() {
 	if(isdefined(level.createfx_enabled) && level.createfx_enabled) {
@@ -63,7 +63,7 @@ setup_callbacks() {
 	level.bot_find_defend_node_func["bodyguard"] = ::scripts\mp\bots\_bots_strategy::find_defend_node_bodyguard;
 	level.bot_find_defend_node_func["patrol"] = ::scripts\mp\bots\_bots_strategy::find_defend_node_patrol;
 	scripts\mp\bots\gametype_war::setup_callbacks();
-	if(scripts\mp\_utility::bot_is_fireteam_mode()) {
+	if(scripts\mp\utility::bot_is_fireteam_mode()) {
 		scripts\mp\bots\_bots_fireteam::bot_fireteam_setup_callbacks();
 	}
 }
@@ -83,10 +83,10 @@ init() {
 	}
 
 	refresh_existing_bots();
-	var_00 = function_001F();
+	var_00 = botautoconnectenabled();
 	if(var_00 > 0) {
 		setmatchdata("hasBots",1);
-		if(scripts\mp\_utility::bot_is_fireteam_mode()) {
+		if(scripts\mp\utility::bot_is_fireteam_mode()) {
 			level thread scripts\mp\bots\_bots_fireteam::bot_fireteam_init();
 			level thread scripts\mp\bots\_bots_fireteam_commander::init();
 			return;
@@ -108,7 +108,7 @@ initbotlevelvariables() {
 	level.bot_out_of_combat_time = 3000;
 	level.bot_respawn_launcher_name = "iw6_panzerfaust3";
 	level.bot_fallback_weapon = "iw7_knife";
-	level.zonecount = function_00EC();
+	level.zonecount = getzonecount();
 	level.atk_bomber = undefined;
 	initbotmapextents();
 }
@@ -119,7 +119,7 @@ initbotmapextents() {
 	}
 	else
 	{
-		var_00 = function_0076();
+		var_00 = getallnodes();
 	}
 
 	level.bot_map_min_x = 0;
@@ -270,7 +270,7 @@ monitor_pause_spawning() {
 }
 
 bot_can_join_team(param_00) {
-	if(scripts\mp\_utility::matchmakinggame()) {
+	if(scripts\mp\utility::matchmakinggame()) {
 		return 1;
 	}
 
@@ -278,7 +278,7 @@ bot_can_join_team(param_00) {
 		return 1;
 	}
 
-	if(scripts\mp\_teams::getjointeampermissions(param_00)) {
+	if(scripts\mp\teams::getjointeampermissions(param_00)) {
 		return 1;
 	}
 
@@ -291,7 +291,7 @@ bot_connect_monitor(param_00,param_01) {
 	self endon("bot_connect_monitor");
 	level.pausing_bot_connect_monitor = 0;
 	childthread monitor_pause_spawning();
-	scripts\mp\_hostmigration::waitlongdurationwithhostmigrationpause(0.5);
+	scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(0.5);
 	var_02 = 1.5;
 	if(!isdefined(level.bot_cm_spawned_bots)) {
 		level.bot_cm_spawned_bots = 0;
@@ -307,21 +307,21 @@ bot_connect_monitor(param_00,param_01) {
 
 	for(;;) {
 		if(level.pausing_bot_connect_monitor) {
-			scripts\mp\_hostmigration::waitlongdurationwithhostmigrationpause(var_02);
+			scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(var_02);
 			continue;
 		}
 
 		var_03 = isdefined(level.bots_ignore_team_balance) || !level.teambased;
-		var_04 = function_0025(0);
-		var_05 = function_0025(1);
+		var_04 = botgetteamlimit(0);
+		var_05 = botgetteamlimit(1);
 		if(level.rankedmatch) {
 			var_06 = "default";
 			var_07 = "default";
 		}
 		else
 		{
-			var_06 = function_0024(0);
-			var_07 = function_0024(1);
+			var_06 = botgetteamdifficulty(0);
+			var_07 = botgetteamdifficulty(1);
 		}
 
 		var_08 = "allies";
@@ -330,9 +330,9 @@ bot_connect_monitor(param_00,param_01) {
 		var_0B = cat_array_get(var_0A,"humans");
 		if(var_0B > 1) {
 			var_0C = bot_get_host_team();
-			if(!scripts\mp\_utility::matchmakinggame() && isdefined(var_0C) && var_0C != "spectator") {
+			if(!scripts\mp\utility::matchmakinggame() && isdefined(var_0C) && var_0C != "spectator") {
 				var_08 = var_0C;
-				var_09 = scripts\mp\_utility::getotherteam(var_0C);
+				var_09 = scripts\mp\utility::getotherteam(var_0C);
 			}
 			else
 			{
@@ -351,7 +351,7 @@ bot_connect_monitor(param_00,param_01) {
 				var_10 = var_0F bot_get_player_team();
 				if(isdefined(var_10) && var_10 != "spectator") {
 					var_08 = var_10;
-					var_09 = scripts\mp\_utility::getotherteam(var_10);
+					var_09 = scripts\mp\utility::getotherteam(var_10);
 				}
 			}
 		}
@@ -415,10 +415,10 @@ bot_connect_monitor(param_00,param_01) {
 
 		if(var_1E) {
 			var_1F = !getdvarint("systemlink") && !getdvarint("onlinegame");
-			var_20 = !var_03 && var_05 != var_04 && !level.bot_cm_spawned_bots && level.bot_cm_waited_players_time < 10 || !scripts\mp\_utility::gameflag("prematch_done");
+			var_20 = !var_03 && var_05 != var_04 && !level.bot_cm_spawned_bots && level.bot_cm_waited_players_time < 10 || !scripts\mp\utility::gameflag("prematch_done");
 			if(var_1F || var_20) {
 				level.bot_cm_waited_players_time = level.bot_cm_waited_players_time + var_02;
-				scripts\mp\_hostmigration::waitlongdurationwithhostmigrationpause(var_02);
+				scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(var_02);
 				continue;
 			}
 		}
@@ -447,7 +447,7 @@ bot_connect_monitor(param_00,param_01) {
 		}
 
 		if(var_04 == var_05 && !var_03 && var_17 == 1 && var_18 == 0 && var_22 > 0) {
-			if(!isdefined(level.bot_prematchdonetime) && scripts\mp\_utility::gameflag("prematch_done")) {
+			if(!isdefined(level.bot_prematchdonetime) && scripts\mp\utility::gameflag("prematch_done")) {
 				level.bot_prematchdonetime = gettime();
 			}
 
@@ -479,7 +479,7 @@ bot_connect_monitor(param_00,param_01) {
 				var_28 = -1 * var_30 + var_27;
 			}
 		}
-		else if(!scripts\mp\_utility::matchmakinggame() && var_27 * var_28 < 0 && scripts\mp\_utility::gameflag("prematch_done") && !isdefined(level.bots_disable_team_switching)) {
+		else if(!scripts\mp\utility::matchmakinggame() && var_27 * var_28 < 0 && scripts\mp\utility::gameflag("prematch_done") && !isdefined(level.bots_disable_team_switching)) {
 			var_31 = int(min(abs(var_27),abs(var_28)));
 			if(var_27 > 0) {
 				move_bots_from_team_to_team(var_31,var_09,var_08,var_06);
@@ -524,7 +524,7 @@ bot_connect_monitor(param_00,param_01) {
 			bots_update_difficulty(var_08,var_06);
 		}
 
-		scripts\mp\_hostmigration::waitlongdurationwithhostmigrationpause(var_02);
+		scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(var_02);
 	}
 }
 
@@ -693,7 +693,7 @@ drop_bots(param_00,param_01) {
 			break;
 		}
 
-		if(!scripts\mp\_utility::isreallyalive(var_02[var_06])) {
+		if(!scripts\mp\utility::isreallyalive(var_02[var_06])) {
 			var_02[var_06] bot_drop();
 			var_02 = scripts\engine\utility::array_remove(var_02,var_02[var_06]);
 			param_00--;
@@ -742,7 +742,7 @@ spawn_bot_latent(param_00,param_01,param_02) {
 		}
 	}
 
-	scripts\mp\_hostmigration::waitlongdurationwithhostmigrationpause(randomfloatrange(0.25,2));
+	scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(randomfloatrange(0.25,2));
 	if(!isdefined(self)) {
 		param_02.abort = 1;
 		return;
@@ -788,20 +788,20 @@ spawn_bots(param_00,param_01,param_02,param_03,param_04,param_05) {
 	var_07 = [];
 	var_08 = var_07.size;
 	while(level.players.size < scripts\mp\bots\_bots_util::bot_get_client_limit() && var_07.size < param_00 && gettime() < var_06) {
-		scripts\mp\_hostmigration::waitlongdurationwithhostmigrationpause(0.05);
+		scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(0.05);
 		var_09 = undefined;
-		if(function_0280()) {
+		if(isbotmatchmakingenabled()) {
 			if(level.teambased) {
-				var_09 = function_0281(param_01);
+				var_09 = addmpbottoteam(param_01);
 			}
 			else
 			{
-				var_09 = function_0281("none");
+				var_09 = addmpbottoteam("none");
 			}
 		}
 		else
 		{
-			var_09 = function_0005("",0,0,0);
+			var_09 = addbot("",0,0,0);
 		}
 
 		if(!isdefined(var_09)) {
@@ -813,7 +813,7 @@ spawn_bots(param_00,param_01,param_02,param_03,param_04,param_05) {
 				return;
 			}
 
-			scripts\mp\_hostmigration::waitlongdurationwithhostmigrationpause(1);
+			scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(1);
 			continue;
 		}
 		else
@@ -949,7 +949,7 @@ respawn_watcher() {
 		wait(0.05);
 	}
 
-	if(scripts\mp\_playerlogic::needsbuttontorespawn()) {
+	if(scripts\mp\playerlogic::needsbuttontorespawn()) {
 		while(self.waitingtospawn) {
 			if(self.sessionstate == "spectator") {
 				if(getdvarint("numlives") == 0 || self.pers["lives"] > 0) {
@@ -963,7 +963,7 @@ respawn_watcher() {
 }
 
 bot_get_rank_xp() {
-	if(scripts\mp\_utility::bot_israndom() == 0) {
+	if(scripts\mp\utility::bot_israndom() == 0) {
 		if(!isdefined(self.pers["rankxp"])) {
 			self.pers["rankxp"] = 0;
 		}
@@ -980,8 +980,8 @@ bot_get_rank_xp() {
 	var_02 = bot_random_ranks_for_difficulty(var_00);
 	var_03 = var_02["rank"];
 	var_04 = var_02["prestige"];
-	var_05 = scripts\mp\_rank::getrankinfominxp(var_03);
-	var_06 = var_05 + scripts\mp\_rank::getrankinfoxpamt(var_03);
+	var_05 = scripts\mp\rank::getrankinfominxp(var_03);
+	var_06 = var_05 + scripts\mp\rank::getrankinfoxpamt(var_03);
 	var_07 = randomintrange(var_05,var_06 + 1);
 	self.pers[var_01] = var_07;
 	return var_07;
@@ -1119,7 +1119,7 @@ on_bot_killed(param_00,param_01,param_02,param_03,param_04,param_05,param_06,par
 	self getotherteam();
 	self botclearscriptgoal();
 	var_0A = scripts\mp\bots\_bots_util::bot_get_known_attacker(param_01,param_00);
-	if(!scripts\mp\_utility::bot_is_fireteam_mode() && isdefined(var_0A) && var_0A.classname == "script_vehicle" && isdefined(var_0A.helitype)) {
+	if(!scripts\mp\utility::bot_is_fireteam_mode() && isdefined(var_0A) && var_0A.classname == "script_vehicle" && isdefined(var_0A.helitype)) {
 		var_0B = self botgetdifficultysetting("launcherRespawnChance");
 		if(randomfloat(1) < var_0B) {
 			self.respawn_with_launcher = 1;
@@ -1128,7 +1128,7 @@ on_bot_killed(param_00,param_01,param_02,param_03,param_04,param_05,param_06,par
 }
 
 bot_should_do_killcam() {
-	if(scripts\mp\_utility::bot_is_fireteam_mode()) {
+	if(scripts\mp\utility::bot_is_fireteam_mode()) {
 		return 0;
 	}
 
@@ -1151,7 +1151,7 @@ bot_should_do_killcam() {
 }
 
 bot_should_pickup_weapons() {
-	if(scripts\mp\_utility::isjuggernaut()) {
+	if(scripts\mp\utility::isjuggernaut()) {
 		return 0;
 	}
 
@@ -1263,7 +1263,7 @@ bot_seek_dropped_weapon(param_00) {
 			var_02 = 1;
 			var_03 = self getweaponslistprimaries();
 			foreach(var_05 in var_03) {
-				if(param_00.model == function_00EA(var_05)) {
+				if(param_00.model == getweaponmodel(var_05)) {
 					var_02 = 0;
 				}
 			}
@@ -1452,7 +1452,7 @@ bot_think_level_acrtions(param_00) {
 
 bot_should_melee_level_damage_target(param_00) {
 	var_01 = self getcurrentweapon();
-	var_02 = scripts\mp\bots\_bots_util::bot_out_of_ammo() || self.hasriotshieldequipped || isdefined(self.isjuggernautmaniac) && self.isjuggernautmaniac == 1 || weaponclass(var_01) == "grenade" || scripts\mp\_weapons::isknifeonly(var_01);
+	var_02 = scripts\mp\bots\_bots_util::bot_out_of_ammo() || self.hasriotshieldequipped || isdefined(self.isjuggernautmaniac) && self.isjuggernautmaniac == 1 || weaponclass(var_01) == "grenade" || scripts\mp\weapons::isknifeonly(var_01);
 	return var_02;
 }
 
@@ -1715,7 +1715,7 @@ crate_calculate_on_path_grid(param_00) {
 		}
 		else
 		{
-			var_07 = function_0022(param_00.origin,var_04);
+			var_07 = botgetclosestnavigablepoint(param_00.origin,var_04);
 		}
 
 		if(isdefined(var_05) && !var_05 getweaponbarsize() && isdefined(var_07) && abs(var_05.origin[2] - var_06[2]) < 30) {
@@ -1741,7 +1741,7 @@ crate_get_nearest_valid_nodes(param_00) {
 	var_01[0] = getclosestnodeinsight(param_00.origin);
 	var_03 = undefined;
 	if(isdefined(param_00.forcedisconnectuntil)) {
-		var_03 = function_0076();
+		var_03 = getallnodes();
 	}
 
 	var_04 = [];
@@ -1869,7 +1869,7 @@ bot_think_crate() {
 			var_02 = scripts\engine\utility::array_combine(var_02,self.boxes);
 		}
 
-		if(isdefined(level.bot_scavenger_bags) && scripts\mp\_utility::_hasperk("specialty_scavenger")) {
+		if(isdefined(level.bot_scavenger_bags) && scripts\mp\utility::_hasperk("specialty_scavenger")) {
 			var_02 = scripts\engine\utility::array_combine(var_02,level.bot_scavenger_bags);
 		}
 
@@ -2028,12 +2028,12 @@ bot_should_use_ammo_crate(param_00) {
 }
 
 bot_post_use_ammo_crate(param_00) {
-	scripts\mp\_utility::_switchtoweapon(self.secondaryweapon);
+	scripts\mp\utility::_switchtoweapon(self.secondaryweapon);
 	wait(1);
 }
 
 bot_post_use_ammo_crate(param_00) {
-	scripts\mp\_utility::_switchtoweapon("none");
+	scripts\mp\utility::_switchtoweapon("none");
 	self.secondaryweapon = self getcurrentweapon();
 }
 
@@ -2197,7 +2197,7 @@ bot_think_crate_blocking_path() {
 			continue;
 		}
 
-		if(scripts\mp\_utility::isusingremote()) {
+		if(scripts\mp\utility::isusingremote()) {
 			continue;
 		}
 
@@ -2400,7 +2400,7 @@ bot_know_enemies_on_start() {
 		return;
 	}
 
-	while(!scripts\mp\_utility::gamehasstarted() || !scripts\mp\_utility::gameflag("prematch_done")) {
+	while(!scripts\mp\utility::gamehasstarted() || !scripts\mp\utility::gameflag("prematch_done")) {
 		wait(0.05);
 	}
 
@@ -2408,7 +2408,7 @@ bot_know_enemies_on_start() {
 	var_01 = undefined;
 	for(var_02 = 0;var_02 < level.players.size;var_02++) {
 		var_03 = level.players[var_02];
-		if(isdefined(var_03) && isdefined(self.team) && isdefined(var_03.team) && function_0106(self.team,var_03.team)) {
+		if(isdefined(var_03) && isdefined(self.team) && isdefined(var_03.team) && isenemyteam(self.team,var_03.team)) {
 			if(!isdefined(var_03.bot_start_known_by_enemy)) {
 				var_00 = var_03;
 			}
@@ -2446,7 +2446,7 @@ bot_think_gametype() {
 	self endon("death");
 	self endon("disconnect");
 	level endon("game_ended");
-	scripts\mp\_utility::gameflagwait("prematch_done");
+	scripts\mp\utility::gameflagwait("prematch_done");
 	self thread [[level.bot_funcs["gametype_think"]]]();
 }
 
@@ -2505,7 +2505,7 @@ bot_add_scavenger_bag(param_00) {
 	}
 
 	foreach(var_06 in level.participants) {
-		if(isai(var_06) && var_06 scripts\mp\_utility::_hasperk("specialty_scavenger")) {
+		if(isai(var_06) && var_06 scripts\mp\utility::_hasperk("specialty_scavenger")) {
 			var_06 notify("new_crate_to_take");
 		}
 	}
@@ -2526,7 +2526,7 @@ bot_flag_trigger(param_00) {
 	self endon("death");
 	for(;;) {
 		self waittill("trigger",var_01);
-		if(scripts\mp\_utility::isaigameparticipant(var_01)) {
+		if(scripts\mp\utility::isaigameparticipant(var_01)) {
 			var_01 notify("flag_trigger_set_" + param_00);
 			var_01 botsetflag(param_00,1);
 			var_01 thread bot_flag_trigger_clear(param_00);

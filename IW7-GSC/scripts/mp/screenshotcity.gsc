@@ -1,8 +1,8 @@
-/*************************************************
+/*****************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\screenshotcity.gsc
-*************************************************/
+ * Script: scripts\mp\screenshotcity.gsc
+*****************************************/
 
 func_BC86() {
 	var_00 = getent("weapon_loc_screenshot_1","targetname");
@@ -61,7 +61,7 @@ move_to_grey_background_side_on() {
 }
 
 func_11452(param_00) {
-	var_01 = tablelookup("mp/weaponScreenshotList.csv",0,param_00,1);
+	var_01 = tablelookup("mp\weaponScreenshotList.csv",0,param_00,1);
 	func_BC86();
 	wait(2);
 	wait(2);

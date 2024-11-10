@@ -1,11 +1,11 @@
-/******************************************************
+/**********************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\equipment\trip_mine.gsc
-******************************************************/
+ * Script: scripts\mp\equipment\trip_mine.gsc
+**********************************************/
 
 tripmine_init() {
-	level._effect["tripMineLaserFr"] = loadfx("vfx/iw7/_requests/mp/power/vfx_trip_mine_beam_friendly.vfx");
+	level._effect["tripMineLaserFr"] = loadfx("vfx\iw7\_requests\mp\power\vfx_trip_mine_beam_friendly.vfx");
 }
 
 tripmine_used(param_00) {
@@ -189,7 +189,7 @@ func_127F7() {
 		}
 
 		var_03 = scripts\engine\utility::ter_op(isplayer(var_02) || isagent(var_02),var_02 geteye(),var_02.origin);
-		var_04 = function_0287(self.origin,var_02 geteye(),var_01,self,0,"physicsquery_closest");
+		var_04 = physics_raycast(self.origin,var_02 geteye(),var_01,self,0,"physicsquery_closest");
 		if(isdefined(var_04) && var_04.size > 0) {
 			continue;
 		}
@@ -219,7 +219,7 @@ func_127E4(param_00,param_01) {
 	}
 
 	if(isplayer(param_00) || isagent(param_00)) {
-		if(scripts/cp/powers/coop_phaseshift::isentityphaseshifted(param_00)) {
+		if(scripts\cp\powers\coop_phaseshift::isentityphaseshifted(param_00)) {
 			return 0;
 		}
 
@@ -268,7 +268,7 @@ func_127E0(param_00,param_01) {
 
 		var_08 = var_07 getentitynumber();
 		self.var_41F6[var_08] = var_07;
-		self.var_41EF[var_08] = function_02DF(scripts\engine\utility::getfx("tripMineLaserFr"),self.var_10D97,"tag_origin",self.var_6316,"tag_origin",var_07);
+		self.var_41EF[var_08] = playfxontagsbetweenclients(scripts\engine\utility::getfx("tripMineLaserFr"),self.var_10D97,"tag_origin",self.var_6316,"tag_origin",var_07);
 	}
 
 	thread func_127F0();
@@ -307,7 +307,7 @@ func_127F0() {
 			self.var_41EF[var_03] delete();
 		}
 
-		self.var_41EF[var_03] = function_02DF(scripts\engine\utility::getfx("tripMineLaserFr"),self.var_10D97,"tag_origin",self.var_6316,"tag_origin",var_02);
+		self.var_41EF[var_03] = playfxontagsbetweenclients(scripts\engine\utility::getfx("tripMineLaserFr"),self.var_10D97,"tag_origin",self.var_6316,"tag_origin",var_02);
 	}
 }
 
@@ -341,7 +341,7 @@ func_127F1() {
 	for(;;) {
 		var_01 = self.var_10D97.origin;
 		var_02 = var_01 + anglestoup(self.angles) * 1000;
-		var_03 = function_0287(var_01,var_02,var_00,self,0,"physicsquery_closest");
+		var_03 = physics_raycast(var_01,var_02,var_00,self,0,"physicsquery_closest");
 		if(isdefined(var_03) && var_03.size > 0) {
 			var_02 = var_03[0]["position"];
 		}

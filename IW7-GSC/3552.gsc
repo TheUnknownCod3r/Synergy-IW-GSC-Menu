@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3552.gsc
-****************************/
+ * Script: 3552.gsc
+************************/
 
 init() {}
 
@@ -30,7 +30,7 @@ func_C799() {
 		}
 
 		if(var_01.team == self.team) {
-			var_02 = scripts\mp\_utility::outlineenableforplayer(var_01,"cyan",self,0,0,"killstreak");
+			var_02 = scripts\mp\utility::outlineenableforplayer(var_01,"cyan",self,0,0,"killstreak");
 			thread func_5604(var_02,var_01);
 		}
 	}
@@ -40,7 +40,7 @@ func_5604(param_00,param_01) {
 	self endon("disconnect");
 	level endon("game_ended");
 	scripts\engine\utility::waittill_any_timeout_no_endon_death_2(10,"death","joined_team");
-	scripts\mp\_utility::outlinedisable(param_00,param_01);
+	scripts\mp\utility::outlinedisable(param_00,param_01);
 }
 
 func_2652() {
@@ -64,11 +64,11 @@ func_2652() {
 				continue;
 			}
 
-			if(var_06 scripts\mp\_utility::_hasperk("specialty_gpsjammer")) {
+			if(var_06 scripts\mp\utility::_hasperk("specialty_gpsjammer")) {
 				continue;
 			}
 
-			if(!scripts\mp\_utility::isreallyalive(var_06)) {
+			if(!scripts\mp\utility::isreallyalive(var_06)) {
 				if(isdefined(var_06.var_2A3B)) {
 					var_06.var_2A3B delete();
 				}
@@ -92,7 +92,7 @@ func_2652() {
 				var_07 setmodel("tag_origin");
 				var_07.triggerportableradarping = var_06;
 				var_06.var_12AF1 = var_07;
-				var_06.var_12AF2 = var_07 scripts\mp\_entityheadicons::setheadicon(self,"headicon_enemy",(0,0,48),2,2,1,0.01,0,1,1,0);
+				var_06.var_12AF2 = var_07 scripts\mp\entityheadicons::setheadicon(self,"headicon_enemy",(0,0,48),2,2,1,0.01,0,1,1,0);
 				var_06.var_12AF2 setwaypointedgestyle_rotatingicon();
 				var_06.var_12AF2.alpha = 0.95;
 				var_06.var_12AF2 thread func_6AB8(var_01,var_03);
@@ -133,7 +133,7 @@ func_B37E() {
 		var_03 setmodel("tag_origin");
 		var_03.triggerportableradarping = self;
 		self.var_12AF1 = var_03;
-		self.var_12AF2 = var_03 scripts\mp\_entityheadicons::setheadicon(scripts\mp\_utility::getotherteam(self.team),"headicon_enemy",(0,0,48),14,14,1,0.01,0,1,1,0);
+		self.var_12AF2 = var_03 scripts\mp\entityheadicons::setheadicon(scripts\mp\utility::getotherteam(self.team),"headicon_enemy",(0,0,48),14,14,1,0.01,0,1,1,0);
 		self.var_12AF2.alpha = 0.95;
 		self.var_12AF2 thread func_6AB8(var_01,var_02);
 		self.var_12AF2 setwaypointedgestyle_rotatingicon();

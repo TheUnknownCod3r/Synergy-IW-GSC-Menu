@@ -1,11 +1,11 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2989.gsc
+ * Script: 2989.gsc
 ***************************************/
 
 main(var_00, var_01, var_02) {
-  scripts/sp/vehicle_build::func_31C5("capital_ship", var_00, var_01, var_02);
-  scripts/sp/vehicle_build::func_31A6(::init_location);
+  scripts\sp\vehicle_build::func_31C5("capital_ship", var_00, var_01, var_02);
+  scripts\sp\vehicle_build::func_31A6(::init_location);
   func_0BA9::func_39B3(var_00, "ca", var_02);
   precachemodel("veh_mil_air_ca_destroyer_rig");
   precachemodel("veh_mil_air_ca_destroyer_details");
@@ -15,9 +15,9 @@ main(var_00, var_01, var_02) {
   precachemodel("veh_mil_air_ca_destroyer_periph");
   precachemodel("ship_exterior_ca_cannon_a_rig");
   precacheturret("cap_turret_cannon_large_ca");
-  level._effect["capital_turret_muzzle_lg"] = loadfx("vfx/iw7/core/muzflash/cannon/vfx_mega_cannon_muzflash.vfx");
-  level._effect["capital_turret_sml_cheap"] = loadfx("vfx/iw7/core/muzflash/cannon/vfx_turret_small_cheap.vfx");
-  level._effect["capital_turret_flak_cheap"] = loadfx("vfx/iw7/core/muzflash/cannon/vfx_flack_cannon_cheap.vfx");
+  level._effect["capital_turret_muzzle_lg"] = loadfx("vfx\iw7\core\muzflash\cannon\vfx_mega_cannon_muzflash.vfx");
+  level._effect["capital_turret_sml_cheap"] = loadfx("vfx\iw7\core\muzflash\cannon\vfx_turret_small_cheap.vfx");
+  level._effect["capital_turret_flak_cheap"] = loadfx("vfx\iw7\core\muzflash\cannon\vfx_flack_cannon_cheap.vfx");
   return;
   }
 
@@ -26,10 +26,10 @@ main(var_00, var_01, var_02) {
   precachemodel("vfx_ftl_ca_destroyer");
   precacheturret("cap_turret_cannon_large_ca");
   precacheturret("cap_turret_cannon_large_ca_zerog");
-  level._effect["destroyer_ca_warp_pre"] = loadfx("vfx/iw7/core/vehicle/capship/ca/destroyer/vfx_ca_destroyer_warp_in_anticipation.vfx");
-  level._effect["destroyer_ca_warp_in"] = loadfx("vfx/iw7/core/vehicle/capship/ca/destroyer/vfx_ca_destroyer_warp_in.vfx");
-  level._effect["destroyer_ca_warp_out"] = loadfx("vfx/iw7/core/vehicle/capship/ca/vfx_capship_ca_destroyer_warp_out.vfx");
-  level._effect["destroyer_death"] = loadfx("vfx/iw7/core/expl/vehicle/vfx_destroyer_death_dps.vfx");
+  level._effect["destroyer_ca_warp_pre"] = loadfx("vfx\iw7\core\vehicle\capship\ca\destroyer\vfx_ca_destroyer_warp_in_anticipation.vfx");
+  level._effect["destroyer_ca_warp_in"] = loadfx("vfx\iw7\core\vehicle\capship\ca\destroyer\vfx_ca_destroyer_warp_in.vfx");
+  level._effect["destroyer_ca_warp_out"] = loadfx("vfx\iw7\core\vehicle\capship\ca\vfx_capship_ca_destroyer_warp_out.vfx");
+  level._effect["destroyer_death"] = loadfx("vfx\iw7\core\expl\vehicle\vfx_destroyer_death_dps.vfx");
   func_0BB6::func_12A89();
   func_317C(var_02);
 }
@@ -40,35 +40,35 @@ func_317C(var_00) {
   if (!isdefined(level.func_3979))
   level.func_3979 = [];
 
-  level._effect["capship_death_linger_sparks_bg"] = loadfx("vfx/iw7/core/vehicle/capship/ca/destroyer/vfx_ca_destroyer_damage_sparks_bg.vfx");
-  level._effect["capship_death_linger_sparks_md"] = loadfx("vfx/iw7/core/vehicle/capship/ca/destroyer/vfx_ca_destroyer_damage_sparks_md.vfx");
-  level._effect["capship_death_linger_sparks_sm"] = loadfx("vfx/iw7/core/vehicle/capship/ca/destroyer/vfx_ca_destroyer_damage_sparks_sm.vfx");
-  level._effect["capship_death_linger_steam_bg"] = loadfx("vfx/iw7/core/vehicle/capship/ca/destroyer/vfx_ca_destroyer_damage_steam_bg.vfx");
-  level._effect["capship_death_linger_steam_md"] = loadfx("vfx/iw7/core/vehicle/capship/ca/destroyer/vfx_ca_destroyer_damage_steam_md.vfx");
-  level._effect["capship_death_linger_steam_sm"] = loadfx("vfx/iw7/core/vehicle/capship/ca/destroyer/vfx_ca_destroyer_damage_steam_sm.vfx");
-  level._effect["capship_death_linger_debris_bg"] = loadfx("vfx/iw7/core/vehicle/capship/ca/destroyer/vfx_ca_destroyer_damage_debris_bg.vfx");
-  level._effect["capship_death_linger_debris_md"] = loadfx("vfx/iw7/core/vehicle/capship/ca/destroyer/vfx_ca_destroyer_damage_debris_md.vfx");
-  level._effect["capship_death_linger_debris_sm"] = loadfx("vfx/iw7/core/vehicle/capship/ca/destroyer/vfx_ca_destroyer_damage_debris_sm.vfx");
-  level._effect["capship_death_linger_explo_bg"] = loadfx("vfx/iw7/core/vehicle/capship/ca/destroyer/vfx_ca_destroyer_damage_explo_bg.vfx");
-  level._effect["capship_death_linger_explo_md"] = loadfx("vfx/iw7/core/vehicle/capship/ca/destroyer/vfx_ca_destroyer_damage_explo_md.vfx");
-  level._effect["capship_death_linger_explo_sm"] = loadfx("vfx/iw7/core/vehicle/capship/ca/destroyer/vfx_ca_destroyer_damage_explo_sm.vfx");
-  level._effect["capship_death_linger_fire_bg"] = loadfx("vfx/iw7/core/vehicle/capship/ca/destroyer/vfx_ca_destroyer_damage_fire_bg.vfx");
-  level._effect["capship_death_linger_fire_md"] = loadfx("vfx/iw7/core/vehicle/capship/ca/destroyer/vfx_ca_destroyer_damage_fire_md.vfx");
-  level._effect["capship_death_linger_fire_sm"] = loadfx("vfx/iw7/core/vehicle/capship/ca/destroyer/vfx_ca_destroyer_damage_fire_sm.vfx");
-  level._effect["capship_death_linger_meteor_bg"] = loadfx("vfx/iw7/core/vehicle/capship/ca/destroyer/vfx_ca_destroyer_damage_meteor_bg.vfx");
-  level._effect["capship_death_linger_meteor_md"] = loadfx("vfx/iw7/core/vehicle/capship/ca/destroyer/vfx_ca_destroyer_damage_meteor_md.vfx");
-  level._effect["capship_death_linger_meteor_sm"] = loadfx("vfx/iw7/core/vehicle/capship/ca/destroyer/vfx_ca_destroyer_damage_meteor_sm.vfx");
+  level._effect["capship_death_linger_sparks_bg"] = loadfx("vfx\iw7\core\vehicle\capship\ca\destroyer\vfx_ca_destroyer_damage_sparks_bg.vfx");
+  level._effect["capship_death_linger_sparks_md"] = loadfx("vfx\iw7\core\vehicle\capship\ca\destroyer\vfx_ca_destroyer_damage_sparks_md.vfx");
+  level._effect["capship_death_linger_sparks_sm"] = loadfx("vfx\iw7\core\vehicle\capship\ca\destroyer\vfx_ca_destroyer_damage_sparks_sm.vfx");
+  level._effect["capship_death_linger_steam_bg"] = loadfx("vfx\iw7\core\vehicle\capship\ca\destroyer\vfx_ca_destroyer_damage_steam_bg.vfx");
+  level._effect["capship_death_linger_steam_md"] = loadfx("vfx\iw7\core\vehicle\capship\ca\destroyer\vfx_ca_destroyer_damage_steam_md.vfx");
+  level._effect["capship_death_linger_steam_sm"] = loadfx("vfx\iw7\core\vehicle\capship\ca\destroyer\vfx_ca_destroyer_damage_steam_sm.vfx");
+  level._effect["capship_death_linger_debris_bg"] = loadfx("vfx\iw7\core\vehicle\capship\ca\destroyer\vfx_ca_destroyer_damage_debris_bg.vfx");
+  level._effect["capship_death_linger_debris_md"] = loadfx("vfx\iw7\core\vehicle\capship\ca\destroyer\vfx_ca_destroyer_damage_debris_md.vfx");
+  level._effect["capship_death_linger_debris_sm"] = loadfx("vfx\iw7\core\vehicle\capship\ca\destroyer\vfx_ca_destroyer_damage_debris_sm.vfx");
+  level._effect["capship_death_linger_explo_bg"] = loadfx("vfx\iw7\core\vehicle\capship\ca\destroyer\vfx_ca_destroyer_damage_explo_bg.vfx");
+  level._effect["capship_death_linger_explo_md"] = loadfx("vfx\iw7\core\vehicle\capship\ca\destroyer\vfx_ca_destroyer_damage_explo_md.vfx");
+  level._effect["capship_death_linger_explo_sm"] = loadfx("vfx\iw7\core\vehicle\capship\ca\destroyer\vfx_ca_destroyer_damage_explo_sm.vfx");
+  level._effect["capship_death_linger_fire_bg"] = loadfx("vfx\iw7\core\vehicle\capship\ca\destroyer\vfx_ca_destroyer_damage_fire_bg.vfx");
+  level._effect["capship_death_linger_fire_md"] = loadfx("vfx\iw7\core\vehicle\capship\ca\destroyer\vfx_ca_destroyer_damage_fire_md.vfx");
+  level._effect["capship_death_linger_fire_sm"] = loadfx("vfx\iw7\core\vehicle\capship\ca\destroyer\vfx_ca_destroyer_damage_fire_sm.vfx");
+  level._effect["capship_death_linger_meteor_bg"] = loadfx("vfx\iw7\core\vehicle\capship\ca\destroyer\vfx_ca_destroyer_damage_meteor_bg.vfx");
+  level._effect["capship_death_linger_meteor_md"] = loadfx("vfx\iw7\core\vehicle\capship\ca\destroyer\vfx_ca_destroyer_damage_meteor_md.vfx");
+  level._effect["capship_death_linger_meteor_sm"] = loadfx("vfx\iw7\core\vehicle\capship\ca\destroyer\vfx_ca_destroyer_damage_meteor_sm.vfx");
   var_01 = spawnstruct();
   var_1.func_E505 = "ph_mil_air_ca_destroyer_space_explosion_rig";
   var_1.func_CB56 = "veh_mil_air_ca_destroyer_dst_piece_big_";
   var_1.func_C1FB = 40;
   var_1.func_1FAF = %ph_mil_air_ca_destroyer_space_explosion;
-  var_1.func_7570 = loadfx("vfx/iw7/core/vehicle/capship/ca/destroyer/vfx_ca_destroyer_death_debris.vfx");
+  var_1.func_7570 = loadfx("vfx\iw7\core\vehicle\capship\ca\destroyer\vfx_ca_destroyer_death_debris.vfx");
 
   if (getdvarint("e3", 0))
-  var_1.func_7571 = loadfx("vfx/iw7/core/vehicle/capship/ca/destroyer/vfx_ca_destroyer_death_debris_e3.vfx");
+  var_1.func_7571 = loadfx("vfx\iw7\core\vehicle\capship\ca\destroyer\vfx_ca_destroyer_death_debris_e3.vfx");
 
-  var_1.func_7582 = loadfx("vfx/iw7/core/vehicle/capship/ca/destroyer/vfx_ca_destroyer_death_explosion.vfx");
+  var_1.func_7582 = loadfx("vfx\iw7\core\vehicle\capship\ca\destroyer\vfx_ca_destroyer_death_explosion.vfx");
   var_1.func_FB8C = "capital_ship_explo";
   var_1.func_7586["tag_fx_sparks_bg"] = "capship_death_linger_sparks_bg";
   var_1.func_7586["tag_fx_sparks_md"] = "capship_death_linger_sparks_md";
@@ -93,7 +93,7 @@ func_317C(var_00) {
 
 init_location() {
   thread func_0BA9::func_396E("ca");
-  scripts/sp/vehicle::playgestureviewmodel();
+  scripts\sp\vehicle::playgestureviewmodel();
   func_0BB8::func_7562("thrust_vert", "fx_thruster_v_s", "ca_thruster_down_sml", self.func_5020);
   func_0BB8::func_7562("thrust_vert", "fx_thruster_v_m", "ca_thruster_down_med", self.func_5020);
   func_0BB8::func_7562("thrust_vert", "fx_thruster_v_l", "ca_thruster_down_lrg", self.func_5020);
@@ -168,7 +168,7 @@ func_F030(var_00, var_01, var_02) {
   self.func_10250 = 1;
   self.func_D436 = 0;
 
-  if (scripts/sp/utility::func_B324())
+  if (scripts\sp\utility::func_B324())
   self [[level.func_A056.func_11543]]("capitalship", "JACKAL_SDF_DESTROYER", "none", "none", 0, 1, 1);
 
   self.team = "axis";

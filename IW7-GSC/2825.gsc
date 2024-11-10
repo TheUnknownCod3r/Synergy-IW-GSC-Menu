@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2825.gsc
+ * Script: 2825.gsc
 ***************************************/
 
 func_952F() {
@@ -227,7 +227,7 @@ func_AF05(var_00) {
   var_02 linkto(var_01, "j_door_r");
   var_03 linkto(var_01, "j_door_l");
   var_1.func_1FBB = "loot_locker";
-  var_01 scripts/sp/anim::func_1F35(var_01, "open_locker_doors");
+  var_01 scripts\sp\anim::func_1F35(var_01, "open_locker_doors");
 
   if (isdefined(var_04))
   var_04 delete();
@@ -241,12 +241,12 @@ func_AF0F(var_00, var_01) {
 
   foreach (var_04 in var_01) {
   if (var_02 < 2 && randomint(100) > 25) {
-  var_04 scripts/sp/lights::init_light_flicker(undefined, undefined, 0.1, 0.25, undefined, undefined, undefined, undefined, undefined, var_00, undefined);
+  var_04 scripts\sp\lights::init_light_flicker(undefined, undefined, 0.1, 0.25, undefined, undefined, undefined, undefined, undefined, var_00, undefined);
   var_2++;
   continue;
   }
 
-  var_04 scripts/sp/lights::init_light_generic_iw7(undefined, undefined, undefined, undefined, var_00);
+  var_04 scripts\sp\lights::init_light_generic_iw7(undefined, undefined, undefined, undefined, var_00);
   }
 }
 
@@ -272,7 +272,7 @@ func_B097(var_00) {
   var_05 = getweaponbasename(var_0.func_F1B8);
 
   if (scripts\engine\utility::array_contains(var_02, var_05)) {
-  var_04 scripts/sp/utility::func_9196(4, 1, 0, "new_weapon");
+  var_04 scripts\sp\utility::func_9196(4, 1, 0, "new_weapon");
   level.func_D9E5["armoryweapons"][level.func_D9E5["armoryweapons"].size] = var_04;
   }
   }
@@ -538,20 +538,20 @@ func_13C06(var_00, var_01) {
 
   if (isdefined(var_05) && var_05 == "extra_large") {
   foreach (var_11 in var_01) {
-  var_12 = var_11 scripts/sp/utility::func_7A97();
+  var_12 = var_11 scripts\sp\utility::func_7A97();
 
   if (var_12.size > 0) {
   foreach (var_14 in var_12) {
   if (isdefined(var_14.script_noteworthy)) {
-  var_15 = var_14 scripts/sp/utility::func_7A97();
+  var_15 = var_14 scripts\sp\utility::func_7A97();
 
   foreach (var_09 in var_15) {
   if (scripts\engine\utility::array_contains(var_01, var_14)) {
   if (scripts\engine\utility::array_contains(var_01, var_09)) {
-    if (isdefined(var_9.script_parameters) && var_9.script_parameters == "extra_large") {
-    var_03 = var_09;
-    break;
-    }
+  if (isdefined(var_9.script_parameters) && var_9.script_parameters == "extra_large") {
+  var_03 = var_09;
+  break;
+  }
   }
   }
   }
@@ -569,21 +569,21 @@ func_13C06(var_00, var_01) {
   var_22 = 0;
 
   if (isdefined(var_11.script_parameters) && var_11.script_parameters == "large") {
-  var_12 = var_11 scripts/sp/utility::func_7A97();
+  var_12 = var_11 scripts\sp\utility::func_7A97();
 
   if (var_12.size > 0) {
   foreach (var_14 in var_12) {
   if (!scripts\engine\utility::array_contains(var_01, var_14)) {
   if (isdefined(var_11.script_noteworthy) && var_11.script_noteworthy == "stacked") {
   if (isdefined(var_14.script_parameters) && var_14.script_parameters == "extra_large")
-    var_21 = 1;
+  var_21 = 1;
   }
   }
 
   if (!scripts\engine\utility::array_contains(var_01, var_14) && var_00 == "iw7_sdflmg") {
   if (!isdefined(var_11.script_noteworthy)) {
   if (isdefined(var_14.script_parameters) && var_14.script_parameters == "extra_large")
-    var_22 = 1;
+  var_22 = 1;
   }
   }
   }
@@ -679,7 +679,7 @@ func_116DD(var_00, var_01, var_02) {
   var_06 = var_04 func_0B1F::func_FA17("hack_terminal");
   thread func_8834(var_06);
   var_06 thread func_116DC("hack_terminal", var_00, var_01);
-  var_04 scripts/sp/anim::func_1F35(var_06, "hack_terminal");
+  var_04 scripts\sp\anim::func_1F35(var_06, "hack_terminal");
   func_0A2F::func_DA4D(var_01, var_02);
   var_06 delete();
   level.player func_0B1F::func_5990();
@@ -695,7 +695,7 @@ func_9C55(var_00) {
 
 func_116DC(var_00, var_01, var_02) {
   level.player notify("armory_terminal_start");
-  var_03 = getanimlength(scripts/sp/utility::func_7DC1(var_00));
+  var_03 = getanimlength(scripts\sp\utility::func_7DC1(var_00));
   var_04 = [];
   var_05 = ["frag", "antigrav", "emp", "seeker", "frag", "seeker", "offhandshield", "antigrav", "emp", "hackingdevice", "supportdrone", "coverwall"];
   level.player playsound("armory_terminal_tick");
@@ -732,7 +732,7 @@ func_116DC(var_00, var_01, var_02) {
 
   if (var_13 == "coverwall" && var_15 == "upgrade1") {
   if (level.player.func_4759.active.size > 0)
-  level.player thread scripts/sp/coverwall::func_B9C4();
+  level.player thread scripts\sp\coverwall::func_B9C4();
   }
 
   level.player _meth_84C7("equipmentState", var_13, var_15);
@@ -746,7 +746,7 @@ func_116DC(var_00, var_01, var_02) {
   level.player notify("armory_terminal_finish");
   func_0A2F::func_3D6E();
   var_16 = "armory" + var_02;
-  scripts/sp/utility::func_266A(var_16);
+  scripts\sp\utility::func_266A(var_16);
 }
 
 terminal_unlocks_ui(var_00, var_01) {
@@ -784,7 +784,7 @@ clearomnvaronautosave(var_00) {
 }
 
 func_FA17(var_00) {
-  var_01 = scripts/sp/utility::func_10639("player_arms");
+  var_01 = scripts\sp\utility::func_10639("player_arms");
   var_02 = level.player _meth_84C6("currentViewModel");
 
   if (isdefined(var_02))
@@ -792,7 +792,7 @@ func_FA17(var_00) {
 
   var_01 hide();
   var_03 = [var_01, self];
-  thread scripts/sp/anim::func_1EC3(var_01, var_00);
+  thread scripts\sp\anim::func_1EC3(var_01, var_00);
   var_04 = scripts\engine\utility::spawn_tag_origin(level.player.origin, level.player getplayerangles());
   level.player getweaponvarianttablename(var_04, "tag_origin");
   wait 0.05;
@@ -833,13 +833,13 @@ func_8835() {
 }
 
 func_87EC() {
-  level._effect["vfx_ui_terminal_press"] = loadfx("vfx/iw7/core/ui/vfx_ui_terminal_press.vfx");
-  level._effect["vfx_ui_terminal_off"] = loadfx("vfx/iw7/core/ui/vfx_ui_terminal_off.vfx");
-  level._effect["vfx_ui_terminal_on"] = loadfx("vfx/iw7/core/ui/vfx_ui_terminal_on.vfx");
-  level._effect["vfx_ui_terminal_firmware"] = loadfx("vfx/iw7/core/ui/vfx_ui_terminal_firmware.vfx");
-  level._effect["vfx_ui_terminal_hack"] = loadfx("vfx/iw7/core/ui/vfx_ui_terminal_hack.vfx");
-  level._effect["vfx_ui_terminal_success"] = loadfx("vfx/iw7/core/ui/vfx_ui_terminal_success.vfx");
-  level._effect["vfx_ui_terminal_suit"] = loadfx("vfx/iw7/core/ui/vfx_ui_terminal_suit.vfx");
+  level._effect["vfx_ui_terminal_press"] = loadfx("vfx\iw7\core\ui\vfx_ui_terminal_press.vfx");
+  level._effect["vfx_ui_terminal_off"] = loadfx("vfx\iw7\core\ui\vfx_ui_terminal_off.vfx");
+  level._effect["vfx_ui_terminal_on"] = loadfx("vfx\iw7\core\ui\vfx_ui_terminal_on.vfx");
+  level._effect["vfx_ui_terminal_firmware"] = loadfx("vfx\iw7\core\ui\vfx_ui_terminal_firmware.vfx");
+  level._effect["vfx_ui_terminal_hack"] = loadfx("vfx\iw7\core\ui\vfx_ui_terminal_hack.vfx");
+  level._effect["vfx_ui_terminal_success"] = loadfx("vfx\iw7\core\ui\vfx_ui_terminal_success.vfx");
+  level._effect["vfx_ui_terminal_suit"] = loadfx("vfx\iw7\core\ui\vfx_ui_terminal_suit.vfx");
 }
 
 func_8834(var_00) {

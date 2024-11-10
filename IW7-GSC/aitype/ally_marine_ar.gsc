@@ -1,7 +1,7 @@
-/*********************************************
+/***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\aitype\ally_marine_ar.gsc
-*********************************************/
+ * Script: aitype\ally_marine_ar.gsc
+***************************************/
 
 main() {
   self.func_17DB = "";
@@ -29,11 +29,11 @@ main() {
 
   switch (scripts\code\character::get_random_character(2, var_00, var_01)) {
   case 0:
-    func_08A3::main();
-    break;
+  func_08A3::main();
+  break;
   case 1:
-    func_08B0::main();
-    break;
+  func_08B0::main();
+  break;
   }
 }
 

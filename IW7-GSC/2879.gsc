@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2879.gsc
+ * Script: 2879.gsc
 ***************************************/
 
 setparent(var_00) {
@@ -662,7 +662,7 @@ func_48B7(var_00, var_01, var_02) {
 }
 
 func_48B8(var_00, var_01, var_02, var_03, var_04) {
-  var_05 = scripts/sp/utility::func_7B92();
+  var_05 = scripts\sp\utility::func_7B92();
   var_06 = newclienthudelem(var_05);
 
   if (!isdefined(var_04))
@@ -688,7 +688,7 @@ func_48B8(var_00, var_01, var_02, var_03, var_04) {
 }
 
 func_48B9(var_00, var_01, var_02, var_03, var_04) {
-  var_05 = scripts/sp/utility::func_7B92();
+  var_05 = scripts\sp\utility::func_7B92();
   var_06 = newclienthudelem(var_05);
 
   if (!isdefined(var_04))

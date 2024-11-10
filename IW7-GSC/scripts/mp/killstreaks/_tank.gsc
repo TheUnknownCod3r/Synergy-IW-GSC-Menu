@@ -1,8 +1,8 @@
-/****************************************************
+/********************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\killstreaks\_tank.gsc
-****************************************************/
+ * Script: scripts\mp\killstreaks\_tank.gsc
+********************************************/
 
 init() {}
 
@@ -333,8 +333,8 @@ func_114D9() {
 			}
 		}
 		else if(isplayer(var_06)) {
-			var_06 scripts\mp\_damagefeedback::updatedamagefeedback("hitHelicopter");
-			if(var_06 scripts\mp\_utility::_hasperk("specialty_armorpiercing")) {
+			var_06 scripts\mp\damagefeedback::updatedamagefeedback("hitHelicopter");
+			if(var_06 scripts\mp\utility::_hasperk("specialty_armorpiercing")) {
 				var_0A = var_05 * level.armorpiercingmod;
 				self.health = self.health - int(var_0A);
 			}
@@ -827,7 +827,7 @@ istarget(param_00) {
 		return 0;
 	}
 
-	if(param_00 scripts\mp\_utility::_hasperk("specialty_blindeye")) {
+	if(param_00 scripts\mp\utility::_hasperk("specialty_blindeye")) {
 		return 0;
 	}
 
@@ -841,7 +841,7 @@ func_12A8F(param_00,param_01) {
 	}
 
 	if(isdefined(param_01) && param_01) {
-		thread scripts\mp\_utility::drawline(param_00.origin,self gettagorigin("tag_turret"),10,(1,0,0));
+		thread scripts\mp\utility::drawline(param_00.origin,self gettagorigin("tag_turret"),10,(1,0,0));
 	}
 
 	return 1;

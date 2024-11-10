@@ -1,12 +1,12 @@
-/****************************************************
+/********************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\sp\_detonategrenades.gsc
-****************************************************/
+ * Script: scripts\sp\_detonategrenades.gsc
+********************************************/
 
 init() {
-	level.var_7649["c4_light_blink"] = loadfx("vfx/core/equipment/light_c4_blink.vfx");
-	level.var_7649["frag_tel_radius"] = loadfx("vfx/iw7/core/equipment/frag/vfx_frag_tel_radius.vfx");
+	level.var_7649["c4_light_blink"] = loadfx("vfx\core\equipment\light_c4_blink.vfx");
+	level.var_7649["frag_tel_radius"] = loadfx("vfx\iw7\core\equipment\frag\vfx_frag_tel_radius.vfx");
 	level.player scripts\sp\_utility::func_65E0("no_grenade_block_gesture");
 	scripts\engine\utility::array_thread(level.players,::watchgrenadeusage);
 	scripts\engine\utility::array_thread(level.players,::func_13B17);
@@ -46,7 +46,7 @@ func_13995() {
 		}
 
 		if(getweaponbasename(var_00) == "iw7_kbs" && scripts\sp\_utility::func_9FFE(var_00)) {
-			var_01 = function_0072("axis");
+			var_01 = getaiarray("axis");
 			foreach(var_03 in var_01) {
 				if(!isalive(var_03)) {
 					continue;
@@ -138,9 +138,9 @@ func_DBDB(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_0
 	var_09["r_mbRadialOverridePositionActive"] = getdvarint("r_mbRadialOverridePositionActive");
 	var_09["r_mbradialoverridestrength"] = getdvarfloat("r_mbradialoverridestrength");
 	var_09["r_mbradialoverrideradius"] = getdvarfloat("r_mbradialoverrideradius");
-	function_01C5("r_mbenable",1);
-	function_01C5("r_mbRadialOverridePosition",param_00);
-	function_01C5("r_mbRadialOverridePositionActive",1);
+	setsaveddvar("r_mbenable",1);
+	setsaveddvar("r_mbRadialOverridePosition",param_00);
+	setsaveddvar("r_mbRadialOverridePositionActive",1);
 	var_0A = scripts\engine\utility::ter_op(isdefined(param_02),param_02,270);
 	param_01 = scripts\engine\utility::ter_op(isdefined(param_01),param_01,0.135848);
 	var_0B = param_01 / 4;
@@ -148,8 +148,8 @@ func_DBDB(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_0
 	param_05 = scripts\engine\utility::ter_op(isdefined(param_05),param_05,0.05);
 	param_06 = scripts\engine\utility::ter_op(isdefined(param_06),param_06,0.5);
 	var_0C = distance2d(level.player.origin,param_00);
-	var_0D = scripts/sp/math::func_C097(var_08,var_0A,var_0C);
-	var_0E = scripts/sp/math::func_6A8E(param_01,var_0B,var_0D);
+	var_0D = scripts\sp\math::func_C097(var_08,var_0A,var_0C);
+	var_0E = scripts\sp\math::func_6A8E(param_01,var_0B,var_0D);
 	var_0E = clamp(var_0E,0,1);
 	if(!isdefined(param_07)) {
 		if(!scripts\common\trace::ray_trace_passed(param_00 + (0,0,12),level.player geteye())) {
@@ -158,15 +158,15 @@ func_DBDB(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_0
 		}
 	}
 
-	function_01C5("r_mbradialoverridestrength",var_0E);
-	function_01C5("r_mbradialoverrideradius",param_04);
+	setsaveddvar("r_mbradialoverridestrength",var_0E);
+	setsaveddvar("r_mbradialoverrideradius",param_04);
 	wait(param_05);
 	thread scripts\sp\_utility::func_AB9A("r_mbradialoverridestrength",var_09["r_mbradialoverridestrength"],param_06);
 	thread scripts\sp\_utility::func_AB9A("r_mbradialoverrideradius",var_09["r_mbradialoverrideradius"],param_06);
 	scripts\engine\utility::flag_wait_or_timeout("frag_force_delete",param_06);
-	function_01C5("r_mbenable",var_09["r_mbenable"]);
-	function_01C5("r_mbRadialOverridePosition",var_09["r_mbRadialOverridePosition"]);
-	function_01C5("r_mbRadialOverridePositionActive",var_09["r_mbRadialOverridePositionActive"]);
+	setsaveddvar("r_mbenable",var_09["r_mbenable"]);
+	setsaveddvar("r_mbRadialOverridePosition",var_09["r_mbRadialOverridePosition"]);
+	setsaveddvar("r_mbRadialOverridePositionActive",var_09["r_mbRadialOverridePositionActive"]);
 	level.var_58DB = undefined;
 }
 
@@ -285,7 +285,7 @@ func_DFBF() {
 func_734E() {
 	var_00 = [];
 	if(self == level.player) {
-		foreach(var_02 in function_0072("axis")) {
+		foreach(var_02 in getaiarray("axis")) {
 			var_03 = spawnstruct();
 			var_03.ent = var_02;
 			var_03.health = var_02.health;
@@ -385,7 +385,7 @@ func_129D(param_00) {
 func_7352(param_00,param_01) {
 	self endon("death");
 	var_02 = [];
-	foreach(var_04 in function_0072("axis")) {
+	foreach(var_04 in getaiarray("axis")) {
 		if(distance(var_04.origin,param_00) <= 256) {
 			if(scripts\common\trace::ray_trace_passed(var_04 gettagorigin("j_SpineUpper"),param_00,var_04,scripts\common\trace::create_solid_ai_contents(1))) {
 				var_02[var_02.size] = var_04;
@@ -454,13 +454,13 @@ func_1339D(param_00) {
 	var_03 = vectortoangles(level.player.origin - param_00);
 	var_04 = 40;
 	var_05 = 5;
-	var_06 = scripts/sp/math::func_C097(0,var_02,var_01);
-	var_07 = scripts/sp/math::func_6A8E(var_05,var_04,var_06);
+	var_06 = scripts\sp\math::func_C097(0,var_02,var_01);
+	var_07 = scripts\sp\math::func_6A8E(var_05,var_04,var_06);
 	level.player viewkick(int(var_07),param_00);
 }
 
 func_385C(param_00,param_01) {
-	if(function_02A6(self) || isai(self)) {
+	if(isent(self) || isai(self)) {
 		var_02 = [self,param_01,level.player];
 	}
 	else

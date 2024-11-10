@@ -1,30 +1,30 @@
-/*************************************************
+/*****************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\gametypes\grnd.gsc
-*************************************************/
+ * Script: scripts\mp\gametypes\grnd.gsc
+*****************************************/
 
 main() {
 	if(getdvar("mapname") == "mp_background") {
 		return;
 	}
 
-	scripts\mp\_globallogic::init();
-	scripts\mp\_globallogic::setupcallbacks();
-	if(function_011C()) {
+	scripts\mp\globallogic::init();
+	scripts\mp\globallogic::setupcallbacks();
+	if(isusingmatchrulesdata()) {
 		level.initializematchrules = ::initializematchrules;
 		[[level.initializematchrules]]();
-		level thread scripts\mp\_utility::reinitializematchrulesonmigration();
+		level thread scripts\mp\utility::reinitializematchrulesonmigration();
 	}
 	else
 	{
-		scripts\mp\_utility::registerroundswitchdvar(level.gametype,0,0,9);
-		scripts\mp\_utility::registertimelimitdvar(level.gametype,10);
-		scripts\mp\_utility::registerscorelimitdvar(level.gametype,7500);
-		scripts\mp\_utility::registerroundlimitdvar(level.gametype,1);
-		scripts\mp\_utility::registerwinlimitdvar(level.gametype,1);
-		scripts\mp\_utility::registernumlivesdvar(level.gametype,0);
-		scripts\mp\_utility::registerhalftimedvar(level.gametype,0);
+		scripts\mp\utility::registerroundswitchdvar(level.gametype,0,0,9);
+		scripts\mp\utility::registertimelimitdvar(level.gametype,10);
+		scripts\mp\utility::registerscorelimitdvar(level.gametype,7500);
+		scripts\mp\utility::registerroundlimitdvar(level.gametype,1);
+		scripts\mp\utility::registerwinlimitdvar(level.gametype,1);
+		scripts\mp\utility::registernumlivesdvar(level.gametype,0);
+		scripts\mp\utility::registerhalftimedvar(level.gametype,0);
 		level.matchrules_damagemultiplier = 0;
 		level.matchrules_vampirism = 0;
 	}
@@ -36,7 +36,7 @@ main() {
 	level.onplayerkilled = ::scripts\mp\gametypes\koth::onplayerkilled;
 	level.onrespawndelay = ::scripts\mp\gametypes\koth::getrespawndelay;
 	if(level.matchrules_damagemultiplier || level.matchrules_vampirism) {
-		level.modifyplayerdamage = ::scripts\mp\_damage::gamemodemodifyplayerdamage;
+		level.modifyplayerdamage = ::scripts\mp\damage::gamemodemodifyplayerdamage;
 	}
 
 	game["dialog"]["gametype"] = "dropzone";
@@ -63,7 +63,7 @@ main() {
 }
 
 initializematchrules() {
-	scripts\mp\_utility::setcommonrulesfrommatchdata();
+	scripts\mp\utility::setcommonrulesfrommatchdata();
 	setdynamicdvar("scr_grnd_dropTime",getmatchrulesdata("grndData","dropTime"));
 	setdynamicdvar("scr_grnd_enableVariantDZ",getmatchrulesdata("grndData","enableVariantDZ"));
 	setdynamicdvar("scr_grnd_zoneLifetime",getmatchrulesdata("kothData","zoneLifetime"));
@@ -75,7 +75,7 @@ initializematchrules() {
 	setdynamicdvar("scr_grnd_delayPlayer",getmatchrulesdata("kothData","delayPlayer"));
 	setdynamicdvar("scr_grnd_useHQRules",getmatchrulesdata("kothData","useHQRules"));
 	setdynamicdvar("scr_grnd_halftime",0);
-	scripts\mp\_utility::registerhalftimedvar("grnd",0);
+	scripts\mp\utility::registerhalftimedvar("grnd",0);
 	setdynamicdvar("scr_grnd_promode",0);
 }
 
@@ -85,24 +85,24 @@ onstartgametype() {
 		game["switchedsides"] = 0;
 	}
 
-	scripts\mp\_utility::setobjectivetext("allies",&"OBJECTIVES_GRND");
-	scripts\mp\_utility::setobjectivetext("axis",&"OBJECTIVES_GRND");
+	scripts\mp\utility::setobjectivetext("allies",&"OBJECTIVES_GRND");
+	scripts\mp\utility::setobjectivetext("axis",&"OBJECTIVES_GRND");
 	if(level.splitscreen) {
-		scripts\mp\_utility::setobjectivescoretext("allies",&"OBJECTIVES_GRND");
-		scripts\mp\_utility::setobjectivescoretext("axis",&"OBJECTIVES_GRND");
+		scripts\mp\utility::setobjectivescoretext("allies",&"OBJECTIVES_GRND");
+		scripts\mp\utility::setobjectivescoretext("axis",&"OBJECTIVES_GRND");
 	}
 	else
 	{
-		scripts\mp\_utility::setobjectivescoretext("allies",&"OBJECTIVES_GRND_SCORE");
-		scripts\mp\_utility::setobjectivescoretext("axis",&"OBJECTIVES_GRND_SCORE");
+		scripts\mp\utility::setobjectivescoretext("allies",&"OBJECTIVES_GRND_SCORE");
+		scripts\mp\utility::setobjectivescoretext("axis",&"OBJECTIVES_GRND_SCORE");
 	}
 
-	scripts\mp\_utility::setobjectivehinttext("allies",&"OBJECTIVES_DOM_HINT");
-	scripts\mp\_utility::setobjectivehinttext("axis",&"OBJECTIVES_DOM_HINT");
+	scripts\mp\utility::setobjectivehinttext("allies",&"OBJECTIVES_DOM_HINT");
+	scripts\mp\utility::setobjectivehinttext("axis",&"OBJECTIVES_DOM_HINT");
 	var_00[0] = level.gametype;
 	var_00[1] = "tdm";
 	var_00[2] = "hardpoint";
-	scripts\mp\_gameobjects::main(var_00);
+	scripts\mp\gameobjects::main(var_00);
 	level thread scripts\mp\gametypes\koth::setupzones();
 	level thread scripts\mp\gametypes\koth::setupzoneareabrushes();
 	scripts\mp\gametypes\koth::initspawns();
@@ -114,29 +114,29 @@ onstartgametype() {
 
 updategametypedvars() {
 	scripts\mp\gametypes\common::updategametypedvars();
-	level.droptime = scripts\mp\_utility::dvarfloatvalue("dropTime",15,0,60);
-	level.zoneduration = scripts\mp\_utility::dvarfloatvalue("zoneLifetime",60,0,300);
-	level.zonecapturetime = scripts\mp\_utility::dvarfloatvalue("zoneCaptureTime",0,0,30);
-	level.zoneactivationdelay = scripts\mp\_utility::dvarfloatvalue("zoneActivationDelay",0,0,60);
-	level.zonerandomlocationorder = scripts\mp\_utility::dvarintvalue("randomLocationOrder",0,0,1);
-	level.zoneadditivescoring = scripts\mp\_utility::dvarintvalue("additiveScoring",0,0,1);
-	level.pausemodetimer = scripts\mp\_utility::dvarintvalue("pauseTime",1,0,1);
-	level.delayplayer = scripts\mp\_utility::dvarintvalue("delayPlayer",0,0,1);
-	level.usehqrules = scripts\mp\_utility::dvarintvalue("useHQRules",0,0,1);
-	level.enablevariantdrops = scripts\mp\_utility::dvarintvalue("enableVariantDZ",0,0,1);
+	level.droptime = scripts\mp\utility::dvarfloatvalue("dropTime",15,0,60);
+	level.zoneduration = scripts\mp\utility::dvarfloatvalue("zoneLifetime",60,0,300);
+	level.zonecapturetime = scripts\mp\utility::dvarfloatvalue("zoneCaptureTime",0,0,30);
+	level.zoneactivationdelay = scripts\mp\utility::dvarfloatvalue("zoneActivationDelay",0,0,60);
+	level.zonerandomlocationorder = scripts\mp\utility::dvarintvalue("randomLocationOrder",0,0,1);
+	level.zoneadditivescoring = scripts\mp\utility::dvarintvalue("additiveScoring",0,0,1);
+	level.pausemodetimer = scripts\mp\utility::dvarintvalue("pauseTime",1,0,1);
+	level.delayplayer = scripts\mp\utility::dvarintvalue("delayPlayer",0,0,1);
+	level.usehqrules = scripts\mp\utility::dvarintvalue("useHQRules",0,0,1);
+	level.enablevariantdrops = scripts\mp\utility::dvarintvalue("enableVariantDZ",0,0,1);
 }
 
 randomdrops() {
 	level endon("game_ended");
-	scripts\mp\_utility::gameflagwait("prematch_done");
+	scripts\mp\utility::gameflagwait("prematch_done");
 	level.grnd_previouscratetypes = [];
 	for(;;) {
 		var_00 = getbestplayer();
 		var_01 = 1;
-		if(isdefined(var_00) && scripts\mp\_utility::currentactivevehiclecount() < scripts\mp\_utility::maxvehiclesallowed() && level.fauxvehiclecount + var_01 < scripts\mp\_utility::maxvehiclesallowed() && level.numdropcrates < 8) {
-			scripts\mp\_utility::playsoundonplayers("mp_dropzone_obj_taken",var_00.team);
-			scripts\mp\_utility::playsoundonplayers("mp_dropzone_obj_lost",level.otherteam[var_00.team]);
-			var_02 = function_00B7(level.zone.gameobject.trigger);
+		if(isdefined(var_00) && scripts\mp\utility::currentactivevehiclecount() < scripts\mp\utility::maxvehiclesallowed() && level.fauxvehiclecount + var_01 < scripts\mp\utility::maxvehiclesallowed() && level.numdropcrates < 8) {
+			scripts\mp\utility::playsoundonplayers("mp_dropzone_obj_taken",var_00.team);
+			scripts\mp\utility::playsoundonplayers("mp_dropzone_obj_lost",level.otherteam[var_00.team]);
+			var_02 = getnodesintrigger(level.zone.gameobject.trigger);
 			var_03 = randomintrange(0,var_02.size);
 			var_04 = var_02[var_03];
 			var_05 = getclosestpointonnavmesh3d(var_04.origin);
@@ -155,14 +155,14 @@ randomdrops() {
 			var_0C = 0.5;
 		}
 
-		scripts\mp\_hostmigration::waitlongdurationwithhostmigrationpause(var_0C);
+		scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(var_0C);
 	}
 }
 
 getbestplayer() {
 	var_00 = undefined;
 	var_01 = 0;
-	var_02 = level.zone.gameobject scripts\mp\_gameobjects::getownerteam();
+	var_02 = level.zone.gameobject scripts\mp\gameobjects::getownerteam();
 	if(var_02 == "neutral") {
 		return var_00;
 	}

@@ -1,8 +1,8 @@
-/***********************************************
+/***************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\spawnscoring.gsc
-***********************************************/
+ * Script: scripts\mp\spawnscoring.gsc
+***************************************/
 
 checkdynamicspawns(param_00) {
 	if(isdefined(level.dynamicspawns)) {

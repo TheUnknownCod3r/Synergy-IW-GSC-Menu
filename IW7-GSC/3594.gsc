@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3594.gsc
-****************************/
+ * Script: 3594.gsc
+************************/
 
 func_1342F() {}
 
@@ -16,8 +16,8 @@ func_13430() {
 
 func_10E0B(param_00,param_01) {
 	var_02 = [];
-	var_03 = scripts\mp\_utility::getotherteam(param_01.team);
-	var_02 = scripts\mp\_utility::clearscrambler(param_00,256);
+	var_03 = scripts\mp\utility::getotherteam(param_01.team);
+	var_02 = scripts\mp\utility::clearscrambler(param_00,256);
 	if(var_02.size > 0) {
 		foreach(var_05 in var_02) {
 			if(!isagent(var_05)) {
@@ -46,7 +46,7 @@ func_13431(param_00,param_01,param_02,param_03) {
 func_5AE9(param_00,param_01) {
 	thread func_13BA1();
 	if(isdefined(self.var_8C3B) && self.var_8C3B) {
-		scripts\mp\_utility::removeperk("specialty_block_health_regen");
+		scripts\mp\utility::removeperk("specialty_block_health_regen");
 		self notify("force_regen");
 		self notify("virus_complete");
 	}
@@ -57,7 +57,7 @@ func_5AE9(param_00,param_01) {
 	self.var_8C3B = 1;
 	var_02 = 10;
 	var_03 = 3;
-	scripts\mp\_utility::giveperk("specialty_block_health_regen");
+	scripts\mp\utility::giveperk("specialty_block_health_regen");
 	self iprintlnbold("Systems infected by Virus!");
 	thread func_D572();
 	thread func_D573();
@@ -72,7 +72,7 @@ func_5AE9(param_00,param_01) {
 	wait(var_02);
 	self iprintlnbold("Virus purged, rebooting systems...");
 	self.var_8C3B = 0;
-	scripts\mp\_utility::removeperk("specialty_block_health_regen");
+	scripts\mp\utility::removeperk("specialty_block_health_regen");
 	self notify("force_regen");
 	self notify("virus_complete");
 }
@@ -96,7 +96,7 @@ func_D573() {
 	for(;;) {
 		var_00 = spawnfxforclient(scripts\engine\utility::getfx("vfx_virus_particles_screen"),self geteye(),self);
 		triggerfx(var_00);
-		var_00 thread scripts\mp\_utility::deleteonplayerdeathdisconnect(self);
+		var_00 thread scripts\mp\utility::deleteonplayerdeathdisconnect(self);
 		wait(0.2);
 		var_00 delete();
 	}
@@ -104,7 +104,7 @@ func_D573() {
 
 func_10AA5(param_00,param_01) {
 	var_02 = self.origin + (0,0,32);
-	var_03 = scripts\mp\_utility::clearscrambler(var_02,256);
+	var_03 = scripts\mp\utility::clearscrambler(var_02,256);
 	if(var_03.size > 0) {
 		foreach(var_05 in var_03) {
 			if(!isagent(var_05)) {

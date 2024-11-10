@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2899.gsc
+ * Script: 2899.gsc
 ***************************************/
 
 func_B908(var_00, var_01, var_02) {

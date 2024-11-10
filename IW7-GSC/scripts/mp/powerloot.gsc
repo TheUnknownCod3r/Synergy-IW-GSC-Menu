@@ -1,8 +1,8 @@
-/********************************************
+/************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\powerloot.gsc
-********************************************/
+ * Script: scripts\mp\powerloot.gsc
+************************************/
 
 init() {
 	level.var_D77E = spawnstruct();
@@ -22,7 +22,7 @@ getpassiveperk(param_00) {
 
 	var_01 = level.var_D77E.passivestringref[param_00];
 	if(!isdefined(var_01)) {
-		var_02 = tablelookuprownum("mp/loot/iw7_power_loot_master.csv",0,param_00);
+		var_02 = tablelookuprownum("mp\loot\iw7_power_loot_master.csv",0,param_00);
 		var_03 = [8,9,10];
 		var_01 = [];
 		foreach(var_05 in var_03) {
@@ -41,7 +41,7 @@ getpassiveperk(param_00) {
 }
 
 func_B030(param_00,param_01) {
-	var_02 = tablelookupbyrow("mp/loot/iw7_power_loot_master.csv",param_00,param_01);
+	var_02 = tablelookupbyrow("mp\loot\iw7_power_loot_master.csv",param_00,param_01);
 	return scripts\engine\utility::ter_op(isdefined(var_02) && var_02 != "",var_02,undefined);
 }
 
@@ -158,7 +158,7 @@ func_7FC7(param_00,param_01) {
 	if(func_D779(param_00,"passive_increased_spread")) {
 		switch(param_00) {
 			default:
-				if(function_02A5(param_01)) {
+				if(isvector(param_01)) {
 					return param_01 * float(1.15);
 				}
 				else

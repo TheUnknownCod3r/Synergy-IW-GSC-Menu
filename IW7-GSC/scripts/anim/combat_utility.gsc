@@ -1,8 +1,8 @@
-/***************************************************
+/*******************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\anim\combat_utility.gsc
-***************************************************/
+ * Script: scripts\anim\combat_utility.gsc
+*******************************************/
 
 _meth_8197(param_00) {
 	var_01 = self getshootatpos() + (0,0,-3);
@@ -14,14 +14,14 @@ _meth_8197(param_00) {
 
 getjointype() {
 	if(isplayer(self.isnodeoccupied)) {
-		return randomfloatrange(self.var_10C.var_86A9.var_B750,self.var_10C.var_86A9.var_B461);
+		return randomfloatrange(self.isnodeoccupied.gs.var_B750,self.isnodeoccupied.gs.var_B461);
 	}
 
 	return randomfloatrange(level.var_B750,level.var_B461);
 }
 
 _meth_80E7() {
-	var_00 = gettime() - self.var_1491.var_A9ED \ 1000;
+	var_00 = gettime() - self.a.var_A9ED / 1000;
 	var_01 = func_7E12();
 	if(var_01 > var_00) {
 		return var_01 - var_00;
@@ -53,7 +53,7 @@ func_7E12() {
 func_32BE() {
 	if(self.bulletsinclip) {
 		if(self.var_FED7 == "full" && !self.var_6B92) {
-			if(self.var_1491.var_A9ED == gettime()) {
+			if(self.a.var_A9ED == gettime()) {
 				wait(0.05);
 			}
 
@@ -69,7 +69,7 @@ func_32BE() {
 
 func_1A39() {
 	for(var_00 = int(60);var_00 > 0;var_00--) {
-		if(isdefined(self.dontevershoot) || isdefined(self.isnodeoccupied) && isdefined(self.var_10C.var_5951)) {
+		if(isdefined(self.dontevershoot) || isdefined(self.isnodeoccupied) && isdefined(self.isnodeoccupied.var_5951)) {
 			wait(0.05);
 			continue;
 		}
@@ -84,7 +84,7 @@ func_FEDF() {
 	self endon("shoot_behavior_change");
 	self endon("stopShooting");
 	if(scripts\anim\utility_common::islongrangeai()) {
-		if(isdefined(self.isnodeoccupied) && isai(self.isnodeoccupied) && distancesquared(level.player.origin,self.var_10C.origin) < 147456) {
+		if(isdefined(self.isnodeoccupied) && isai(self.isnodeoccupied) && distancesquared(level.player.origin,self.isnodeoccupied.origin) < 147456) {
 			self.isnodeoccupied scripts\anim\battlechatter_ai::func_183F("infantry",self,1);
 		}
 
@@ -93,7 +93,7 @@ func_FEDF() {
 		}
 	}
 
-	if(isdefined(self.isnodeoccupied) && distancesquared(self.origin,self.var_10C.origin) > 160000) {
+	if(isdefined(self.isnodeoccupied) && distancesquared(self.origin,self.isnodeoccupied.origin) > 160000) {
 		var_00 = randomintrange(1,5);
 	}
 	else
@@ -147,7 +147,7 @@ _meth_81EB() {
 
 func_FA8C(param_00) {
 	self give_attacker_kill_rewards(%exposed_aiming,1,0.2);
-	if(scripts\common\utility::actor_is3d()) {
+	if(scripts\engine\utility::actor_is3d()) {
 		self _meth_82E5("exposed_aim",scripts\anim\utility::func_1F64("straight_level"),1,param_00);
 	}
 	else
@@ -163,7 +163,7 @@ func_FA8C(param_00) {
 }
 
 func_10D9A() {
-	if(!isdefined(self.var_1491.var_1A3E)) {
+	if(!isdefined(self.a.var_1A3E)) {
 		func_FA8C(0.2);
 		thread func_1A3E();
 		thread scripts\anim\track::func_11B07();
@@ -177,7 +177,7 @@ func_631A() {
 }
 
 func_10126() {
-	if(isdefined(self.var_1491.var_1A3E)) {
+	if(isdefined(self.a.var_1A3E)) {
 		self give_attacker_kill_rewards(%add_idle,0,0.2);
 	}
 
@@ -185,7 +185,7 @@ func_10126() {
 }
 
 func_8EBF() {
-	if(isdefined(self.var_1491.var_1A3E)) {
+	if(isdefined(self.a.var_1A3E)) {
 		self give_attacker_kill_rewards(%add_idle,1,0.2);
 	}
 
@@ -195,18 +195,18 @@ func_8EBF() {
 func_1A3E(param_00) {
 	self endon("killanimscript");
 	self endon("end_aim_idle_thread");
-	if(isdefined(self.var_1491.var_1A3E)) {
+	if(isdefined(self.a.var_1A3E)) {
 		return;
 	}
 
-	self.var_1491.var_1A3E = 1;
+	self.a.var_1A3E = 1;
 	wait(0.1);
 	self _meth_82AC(%add_idle,1,0.2);
 	var_01 = %add_idle;
 	var_02 = 0;
 	for(;;) {
 		var_03 = "idle" + var_02;
-		if(isdefined(self.var_1491.var_AAF2)) {
+		if(isdefined(self.a.var_AAF2)) {
 			var_04 = scripts\anim\utility::func_1F67("lean_idle");
 		}
 		else if(scripts\anim\utility::func_1F65("exposed_idle")) {
@@ -238,7 +238,7 @@ func_1A3E(param_00) {
 
 func_6309() {
 	self notify("end_aim_idle_thread");
-	self.var_1491.var_1A3E = undefined;
+	self.a.var_1A3E = undefined;
 	self aiclearanim(%add_idle,0.1);
 }
 
@@ -317,7 +317,7 @@ func_6D99(param_00,param_01,param_02,param_03) {
 
 	var_04 = 0;
 	var_05 = animhasnotetrack(param_01,"fire");
-	var_06 = scripts\common\utility::weaponclass(self.var_394) == "rocketlauncher";
+	var_06 = scripts\engine\utility::weaponclass(self.var_394) == "rocketlauncher";
 	thread func_6D98();
 	while(var_04 < param_03 && param_03 > 0) {
 		if(var_05) {
@@ -337,19 +337,19 @@ func_6D99(param_00,param_01,param_02,param_03) {
 		shootatshootentorpos();
 		if(isplayer(self.isnodeoccupied) && self.isnodeoccupied scripts\sp\_utility::func_65DB("player_is_invulnerable")) {
 			if(randomint(3) == 0) {
-				self.var_3250--;
+				self.bulletsinclip--;
 			}
 		}
 		else
 		{
-			self.var_3250--;
+			self.bulletsinclip--;
 		}
 
 		if(var_06) {
-			self.var_1491.var_E5DE--;
+			self.a.rockets--;
 			if(issubstr(tolower(self.var_394),"rpg") || issubstr(tolower(self.var_394),"panzerfaust")) {
 				self hidepart("tag_rocket");
-				self.var_1491.rocketvisible = 0;
+				self.a.rocketvisible = 0;
 			}
 		}
 
@@ -378,14 +378,14 @@ func_1A3B() {
 	var_00 = self getspawnpointdist();
 	var_01 = scripts\anim\shared::_meth_811C();
 	var_02 = vectortoangles(self.var_FECF - var_01);
-	var_03 = scripts\common\utility::absangleclamp180(var_00[1] - var_02[1]);
+	var_03 = scripts\engine\utility::absangleclamp180(var_00[1] - var_02[1]);
 	if(var_03 > level.var_1A52) {
 		if(distancesquared(self geteye(),self.var_FECF) > level.var_1A50 || var_03 > level.var_1A51) {
 			return 0;
 		}
 	}
 
-	return scripts\common\utility::absangleclamp180(var_00[0] - var_02[0]) <= level.var_1A44;
+	return scripts\engine\utility::absangleclamp180(var_00[0] - var_02[0]) <= level.var_1A44;
 }
 
 func_C168(param_00,param_01) {
@@ -396,10 +396,10 @@ func_C168(param_00,param_01) {
 }
 
 func_9F57() {
-	if(function_023C(self.var_394) > 0) {
+	if(weaponburstcount(self.var_394) > 0) {
 		return 0;
 	}
-	else if(function_0245(self.var_394) || function_02BE(self.var_394)) {
+	else if(weaponisauto(self.var_394) || weaponisbeam(self.var_394)) {
 		return 0;
 	}
 
@@ -421,7 +421,7 @@ shootatshootentorpos() {
 
 decrementbulletsinclip() {
 	if(self.bulletsinclip) {
-		self.var_3250--;
+		self.bulletsinclip--;
 	}
 }
 
@@ -520,7 +520,7 @@ func_7E6D() {
 	var_00 = undefined;
 	if(usingplayer()) {
 		var_01 = self.var_1652.player;
-		var_00 = gettime() + var_01.var_86A9.var_D396 + randomint(var_01.var_86A9.var_D397);
+		var_00 = gettime() + var_01.gs.var_D396 + randomint(var_01.gs.var_D397);
 	}
 	else
 	{
@@ -547,18 +547,18 @@ func_453D(param_00) {
 
 			var_01 = self getthreatbiasgroup();
 			var_02 = level.player getthreatbiasgroup();
-			if(var_01 != "" && var_02 != "" && function_00D7(var_02,var_01) < -10000) {
+			if(var_01 != "" && var_02 != "" && getthreatbias(var_02,var_01) < -10000) {
 				return param_00;
 			}
 
 			if(self getpersstat(level.player) || isai(param_00) && param_00 getpersstat(level.player)) {
 				if(isdefined(self.covernode)) {
 					var_03 = vectortoangles(level.player.origin - self.origin);
-					var_04 = angleclamp180(self.var_473C.angles[1] - var_03[1]);
+					var_04 = angleclamp180(self.covernode.angles[1] - var_03[1]);
 				}
 				else
 				{
-					var_04 = scripts\common\utility::getyawtospot(level.player.origin);
+					var_04 = scripts\engine\utility::getyawtospot(level.player.origin);
 				}
 
 				if(abs(var_04) < 60) {
@@ -577,7 +577,7 @@ func_B4EF(param_00) {
 		return 0;
 	}
 
-	if(!param_00.var_86A9.double_grenades_allowed) {
+	if(!param_00.gs.double_grenades_allowed) {
 		return 0;
 	}
 
@@ -598,7 +598,7 @@ func_B4EF(param_00) {
 }
 
 func_BE18() {
-	return gettime() >= self.var_1491.nextgrenadetrytime;
+	return gettime() >= self.a.nextgrenadetrytime;
 }
 
 _meth_85B5(param_00) {
@@ -689,7 +689,7 @@ trygrenadethrow(param_00,param_01,param_02,param_03,param_04,param_05,param_06) 
 func_DE37(param_00) {
 	self endon("dont_reduce_giptp_on_killanimscript");
 	self waittill("killanimscript");
-	param_00.var_C231--;
+	param_00.numgrenadesinprogresstowardsplayer--;
 }
 
 func_58BA(param_00,param_01,param_02,param_03) {
@@ -716,7 +716,7 @@ func_58BA(param_00,param_01,param_02,param_03) {
 		}
 
 		if(var_06 == "end") {
-			self.var_1652.player.var_C231--;
+			self.var_1652.player.numgrenadesinprogresstowardsplayer--;
 			self notify("dont_reduce_giptp_on_killanimscript");
 			return 0;
 		}
@@ -735,7 +735,7 @@ func_58BA(param_00,param_01,param_02,param_03) {
 	if(param_03) {
 		var_0D = self.var_1652.player;
 		if(var_0D.numgrenadesinprogresstowardsplayer > 1 || gettime() - var_0D.var_A990 < 2000) {
-			var_0D.grenadetimers["double_grenade"] = gettime() + min(5000,var_0D.var_86A9.var_D382);
+			var_0D.grenadetimers["double_grenade"] = gettime() + min(5000,var_0D.gs.var_D382);
 		}
 	}
 
@@ -761,7 +761,7 @@ func_58BA(param_00,param_01,param_02,param_03) {
 func_13A98(param_00,param_01) {
 	param_00 endon("death");
 	func_13A99(param_01);
-	param_00.var_C231--;
+	param_00.numgrenadesinprogresstowardsplayer--;
 }
 
 func_13A99(param_00) {
@@ -820,7 +820,7 @@ _meth_85C8(param_00,param_01) {
 	var_02 = self;
 	anim.var_11813 = undefined;
 	if(gettime() - var_02.var_A990 < 3000) {
-		var_02.grenadetimers["double_grenade"] = gettime() + var_02.var_86A9.var_D382;
+		var_02.grenadetimers["double_grenade"] = gettime() + var_02.gs.var_D382;
 	}
 
 	var_02.var_A990 = gettime();
@@ -959,7 +959,7 @@ func_10026() {
 		}
 
 		var_01 = isdefined(var_00) && distancesquared(self.origin,var_00.origin) < 65536;
-		if((var_01 || distancesquared(self.origin,level.var_A935[self.team]) < 65536) && !isdefined(self.isnodeoccupied) || distancesquared(self.var_10C.origin,level.var_A934[self.team]) < 262144) {
+		if((var_01 || distancesquared(self.origin,level.var_A935[self.team]) < 65536) && !isdefined(self.isnodeoccupied) || distancesquared(self.isnodeoccupied.origin,level.var_A934[self.team]) < 262144) {
 			return 1;
 		}
 	}
@@ -989,7 +989,7 @@ func_3DE5() {
 	}
 
 	var_00 = isdefined(self.var_18CC) && self.var_18CC;
-	if(!var_00 && function_0073(self.team) < function_0073(self.var_10C.team)) {
+	if(!var_00 && getaicount(self.team) < getaicount(self.isnodeoccupied.team)) {
 		return 0;
 	}
 
@@ -1009,7 +1009,7 @@ func_128AA(param_00) {
 		return 0;
 	}
 
-	if(!self _meth_81A5(self.var_10C.origin)) {
+	if(!self _meth_81A5(self.isnodeoccupied.origin)) {
 		return 0;
 	}
 
@@ -1029,14 +1029,14 @@ func_128AA(param_00) {
 	if(self _meth_8254()) {
 		self.sendmatchdata = 0;
 		self.sendclientmatchdata = 0;
-		self.var_1491.var_B168 = 1;
+		self.a.var_B168 = 1;
 		if(level.var_18D5[self.team] == 0) {
 			level.var_A936[self.team] = gettime();
 			level.var_A933[self.team] = self;
 		}
 
 		level.var_A935[self.team] = self.origin;
-		level.var_A934[self.team] = self.var_10C.origin;
+		level.var_A934[self.team] = self.isnodeoccupied.origin;
 		level.var_18D5[self.team]++;
 		return 1;
 	}
@@ -1079,7 +1079,7 @@ func_7EEC() {
 		return 0;
 	}
 
-	var_00 = self getspawnpointdist()[1] - scripts\common\utility::getyaw(self.var_FECF);
+	var_00 = self getspawnpointdist()[1] - scripts\engine\utility::getyaw(self.var_FECF);
 	var_00 = angleclamp180(var_00);
 	return var_00;
 }
@@ -1121,7 +1121,7 @@ _meth_8063(param_00,param_01) {
 		return 0;
 	}
 
-	if(isdefined(self) && scripts\common\utility::actor_is3d()) {
+	if(isdefined(self) && scripts\engine\utility::actor_is3d()) {
 		var_02 = anglestoforward(self.angles);
 		var_03 = rotatepointaroundvector(var_02,param_00 - self.origin,self.angles[2] * -1);
 		param_00 = var_03 + self.origin;
@@ -1172,7 +1172,7 @@ func_118EC(param_00,param_01) {
 }
 
 func_3E1C() {
-	var_00 = self.var_10C.origin - self.origin;
+	var_00 = self.isnodeoccupied.origin - self.origin;
 	var_01 = lengthsquared((var_00[0],var_00[1],0));
 	if(self.objective_team == "flash_grenade") {
 		return var_01 < 589824;
@@ -1219,7 +1219,7 @@ func_B9D9() {
 		}
 		else
 		{
-			var_00 = var_00 \ 1 - var_05;
+			var_00 = var_00 / 1 - var_05;
 		}
 
 		var_06 = 4.5 * var_00;
@@ -1250,9 +1250,9 @@ _meth_80B5(param_00) {
 		return param_00[0];
 	}
 
-	if(isdefined(self.var_1491.var_D892) && randomint(100) > 20) {
+	if(isdefined(self.a.var_D892) && randomint(100) > 20) {
 		foreach(var_03, var_02 in param_00) {
-			if(var_02 == self.var_1491.var_D892) {
+			if(var_02 == self.a.var_D892) {
 				if(var_03 < param_00.size - 1) {
 					param_00[var_03] = param_00[param_00.size - 1];
 				}
@@ -1283,7 +1283,7 @@ func_D285() {
 			continue;
 		}
 
-		if(scripts\common\utility::cointoss() && var_08 >= 0.996) {
+		if(scripts\engine\utility::cointoss() && var_08 >= 0.996) {
 			continue;
 		}
 

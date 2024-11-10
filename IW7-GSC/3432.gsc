@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3432.gsc
-****************************/
+ * Script: 3432.gsc
+************************/
 
 applyarchetype() {
 	equipextras();
@@ -41,17 +41,17 @@ auraquickswap_bestowaura(param_00) {
 	self endon("giveLoadout_start");
 	level endon("game_ended");
 	if(self != param_00) {
-		param_00 thread scripts\mp\_utility::giveunifiedpoints("buff_teammate");
+		param_00 thread scripts\mp\utility::giveunifiedpoints("buff_teammate");
 	}
 
 	self setclientomnvar("ui_aura_quickswap",1);
-	scripts\mp\_utility::giveperk("specialty_fastreload");
+	scripts\mp\utility::giveperk("specialty_fastreload");
 	self playlocalsound("mp_overcharge_on");
 	thread cleanupafterplayerdeath();
 	wait(5);
 	self playlocalsound("mp_overcharge_off");
 	self notify("removeAuraQuickswap");
-	scripts\mp\_utility::removeperk("specialty_fastreload");
+	scripts\mp\utility::removeperk("specialty_fastreload");
 	self setclientomnvar("ui_aura_quickswap",0);
 }
 

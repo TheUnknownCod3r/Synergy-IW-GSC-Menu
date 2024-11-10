@@ -1,8 +1,8 @@
-/*************************************************
+/*****************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\bots\bots_util.gsc
-*************************************************/
+ * Script: scripts\mp\bots\bots_util.gsc
+*****************************************/
 
 bot_get_nodes_in_cone(param_00,param_01,param_02) {
 	var_03 = self _meth_8533();
@@ -58,8 +58,8 @@ bot_set_difficulty(param_00) {
 
 	self botsetdifficulty(param_00);
 	if(isplayer(self)) {
-		self.pers["rankxp"] = scripts\mp\_utility::get_rank_xp_for_bot();
-		scripts\mp\_rank::playerupdaterank();
+		self.pers["rankxp"] = scripts\mp\utility::get_rank_xp_for_bot();
+		scripts\mp\rank::playerupdaterank();
 	}
 }
 
@@ -335,7 +335,7 @@ get_extended_path(param_00,param_01) {
 }
 
 func_get_path_dist(param_00,param_01) {
-	return function_00C0(param_00,param_01);
+	return getpathdist(param_00,param_01);
 }
 
 func_get_nodes_on_path(param_00,param_01) {
@@ -343,7 +343,7 @@ func_get_nodes_on_path(param_00,param_01) {
 }
 
 func_bot_get_closest_navigable_point(param_00,param_01,param_02) {
-	return function_0022(param_00,param_01,param_02);
+	return botgetclosestnavigablepoint(param_00,param_01,param_02);
 }
 
 node_is_on_path_from_labels(param_00,param_01) {
@@ -393,7 +393,7 @@ bot_waittill_bots_enabled(param_00) {
 }
 
 func_2D17(param_00) {
-	if(function_001F()) {
+	if(botautoconnectenabled()) {
 		return 1;
 	}
 
@@ -480,7 +480,7 @@ bots_exist(param_00) {
 	foreach(var_02 in level.participants) {
 		if(isai(var_02)) {
 			if(isdefined(param_00) && param_00) {
-				if(!scripts\mp\_utility::isteamparticipant(var_02)) {
+				if(!scripts\mp\utility::isteamparticipant(var_02)) {
 					continue;
 				}
 			}
@@ -709,13 +709,13 @@ defend_valid_center() {
 }
 
 bot_allowed_to_use_killstreaks() {
-	if(scripts\mp\_utility::bot_is_fireteam_mode()) {
+	if(scripts\mp\utility::bot_is_fireteam_mode()) {
 		if(isdefined(self.sidelinedbycommander) && self.sidelinedbycommander == 1) {
 			return 0;
 		}
 	}
 
-	if(scripts\mp\_utility::iskillstreakdenied()) {
+	if(scripts\mp\utility::iskillstreakdenied()) {
 		return 0;
 	}
 
@@ -1215,7 +1215,7 @@ bot_add_to_bot_use_targets(param_00) {
 		return;
 	}
 
-	var_01 = function_00B4(param_00.target,"targetname");
+	var_01 = getnodearray(param_00.target,"targetname");
 	if(var_01.size != 1) {
 		return;
 	}
@@ -1233,7 +1233,7 @@ bot_add_to_bot_damage_targets(param_00) {
 		return;
 	}
 
-	var_01 = function_00B4(param_00.target,"targetname");
+	var_01 = getnodearray(param_00.target,"targetname");
 	if(var_01.size != 2) {
 		return;
 	}
@@ -1378,7 +1378,7 @@ bot_queued_process(param_00,param_01,param_02,param_03,param_04,param_05) {
 }
 
 bot_is_remote_or_linked() {
-	return scripts\mp\_utility::isusingremote() || self islinked();
+	return scripts\mp\utility::isusingremote() || self islinked();
 }
 
 bot_get_low_on_ammo(param_00) {
@@ -1503,7 +1503,7 @@ bot_valid_camp_assassin() {
 		return 0;
 	}
 
-	if(!scripts\mp\_utility::isaiteamparticipant(self)) {
+	if(!scripts\mp\utility::isaiteamparticipant(self)) {
 		return 0;
 	}
 

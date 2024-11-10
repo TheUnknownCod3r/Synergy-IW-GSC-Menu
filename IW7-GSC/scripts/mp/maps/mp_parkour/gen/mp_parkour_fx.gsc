@@ -1,8 +1,8 @@
-/****************************
+/************************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\4327.gsc
-****************************/
+ * Script: scripts\mp\maps\mp_parkour\gen\mp_parkour_fx.gsc
+************************************************************/
 
 main() {
 	var_00 = scripts\engine\utility::createoneshoteffect("vfx_flurries_parkour");

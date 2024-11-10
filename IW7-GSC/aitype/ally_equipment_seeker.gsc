@@ -1,11 +1,11 @@
-/****************************************************
+/********************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\aitype\ally_equipment_seeker.gsc
-****************************************************/
+ * Script: aitype\ally_equipment_seeker.gsc
+********************************************/
 
 main() {
-	self.var_17DB = "ai//seeker_assets.csv";
+	self.var_17DB = "ai\\seeker_assets.csv";
 	self.team = "allies";
 	self.type = "human";
 	self.unittype = "seeker";

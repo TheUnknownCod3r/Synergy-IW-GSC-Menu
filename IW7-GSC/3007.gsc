@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3007.gsc
-****************************/
+ * Script: 3007.gsc
+************************/
 
 func_B1C7(param_00,param_01,param_02) {
 	lib_0BBC::main(param_00,param_01,param_02);
@@ -1613,7 +1613,7 @@ func_F4B3(param_00,param_01,param_02) {
 	foreach(var_04 in self.var_4D94.parts[param_00]) {
 		var_04.var_1FBD notify(param_00 + "idle");
 		var_04.var_1FBD notify("stop_delay_thread");
-		var_04.var_1FBD scripts/sp/anim::func_1F35(var_04,param_01,param_02);
+		var_04.var_1FBD scripts\sp\anim::func_1F35(var_04,param_01,param_02);
 		thread func_F4B4(param_00);
 	}
 }
@@ -2017,19 +2017,19 @@ func_10FDA() {
 }
 
 func_7598() {
-	level._effect["dropship_interior_light_a"] = loadfx("vfx/iw7/_requests/prisoner/pnr_dropship_interior_light_a");
-	level._effect["dropship_interior_light_red"] = loadfx("vfx/iw7/_requests/prisoner/pnr_dropship_interior_light_red");
-	level._effect["dropship_weapon_light"] = loadfx("vfx/iw7/_requests/prisoner/pnr_dropship_weapon_light_a");
-	level._effect["dropship_sparks_a"] = loadfx("vfx/level/las_vegas/vfx_dmg_heli_sparks");
-	level._effect["dropship_steam_a"] = loadfx("vfx/iw7/_requests/dropship/dsp_damage_steam");
-	level._effect["vfx_dropship_damage_debris_01"] = loadfx("vfx/iw7/core/vehicle/dropship/vfx_dropship_damage_debris_01.vfx");
-	level._effect["vfx_dropship_damage_light"] = loadfx("vfx/iw7/core/vehicle/dropship/vfx_dropship_damage_light.vfx");
-	level._effect["vfx_dropship_smoke_burst_01"] = loadfx("vfx/iw7/core/vehicle/dropship/vfx_dropship_smoke_burst_01.vfx");
-	level._effect["vfx_dropship_smoke_cabin_01"] = loadfx("vfx/iw7/core/vehicle/dropship/vfx_dropship_smoke_cabin_01.vfx");
-	level._effect["vfx_dropship_sparks"] = loadfx("vfx/iw7/core/vehicle/dropship/vfx_dropship_sparks.vfx");
-	level._effect["vfx_dropship_steamvent"] = loadfx("vfx/iw7/core/vehicle/dropship/vfx_dropship_steamvent.vfx");
-	level._effect["vfx_drpshp_reentry"] = loadfx("vfx/iw7/core/vehicle/dropship/reentry/vfx_drpshp_reentry.vfx");
-	level._effect["vfx_dsp_screen_glow"] = loadfx("vfx/iw7/core/vehicle/dropship/vfx_dsp_screen_glow.vfx");
+	level._effect["dropship_interior_light_a"] = loadfx("vfx\iw7\_requests\prisoner\pnr_dropship_interior_light_a");
+	level._effect["dropship_interior_light_red"] = loadfx("vfx\iw7\_requests\prisoner\pnr_dropship_interior_light_red");
+	level._effect["dropship_weapon_light"] = loadfx("vfx\iw7\_requests\prisoner\pnr_dropship_weapon_light_a");
+	level._effect["dropship_sparks_a"] = loadfx("vfx\level\las_vegas\vfx_dmg_heli_sparks");
+	level._effect["dropship_steam_a"] = loadfx("vfx\iw7\_requests\dropship\dsp_damage_steam");
+	level._effect["vfx_dropship_damage_debris_01"] = loadfx("vfx\iw7\core\vehicle\dropship\vfx_dropship_damage_debris_01.vfx");
+	level._effect["vfx_dropship_damage_light"] = loadfx("vfx\iw7\core\vehicle\dropship\vfx_dropship_damage_light.vfx");
+	level._effect["vfx_dropship_smoke_burst_01"] = loadfx("vfx\iw7\core\vehicle\dropship\vfx_dropship_smoke_burst_01.vfx");
+	level._effect["vfx_dropship_smoke_cabin_01"] = loadfx("vfx\iw7\core\vehicle\dropship\vfx_dropship_smoke_cabin_01.vfx");
+	level._effect["vfx_dropship_sparks"] = loadfx("vfx\iw7\core\vehicle\dropship\vfx_dropship_sparks.vfx");
+	level._effect["vfx_dropship_steamvent"] = loadfx("vfx\iw7\core\vehicle\dropship\vfx_dropship_steamvent.vfx");
+	level._effect["vfx_drpshp_reentry"] = loadfx("vfx\iw7\core\vehicle\dropship\reentry\vfx_drpshp_reentry.vfx");
+	level._effect["vfx_dsp_screen_glow"] = loadfx("vfx\iw7\core\vehicle\dropship\vfx_dsp_screen_glow.vfx");
 }
 
 func_1223() {

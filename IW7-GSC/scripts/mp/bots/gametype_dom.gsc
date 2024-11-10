@@ -1,8 +1,8 @@
-/****************************************************
+/********************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\bots\gametype_dom.gsc
-****************************************************/
+ * Script: scripts\mp\bots\gametype_dom.gsc
+********************************************/
 
 main() {
 	setup_callbacks();
@@ -60,7 +60,7 @@ crate_can_use(param_00) {
 		return 0;
 	}
 
-	if(!scripts\mp\_utility::isteamparticipant(self)) {
+	if(!scripts\mp\utility::isteamparticipant(self)) {
 		return 1;
 	}
 
@@ -129,7 +129,7 @@ bot_dom_apply_commander_tactics(param_00) {
 				continue;
 			}
 
-			if(scripts\mp\_utility::isaiteamparticipant(var_03) && var_03.team == self.team) {
+			if(scripts\mp\utility::isaiteamparticipant(var_03) && var_03.team == self.team) {
 				var_03.force_new_goal = 1;
 			}
 		}
@@ -143,11 +143,11 @@ monitor_zone_control() {
 	level endon("game_ended");
 	for(;;) {
 		wait(1);
-		var_00 = self.useobj scripts\mp\_gameobjects::getownerteam();
+		var_00 = self.useobj scripts\mp\gameobjects::getownerteam();
 		if(var_00 != "neutral") {
 			var_01 = getzonenearest(self.origin);
 			if(isdefined(var_01)) {
-				function_002B(var_01,var_00);
+				botzonesetteam(var_01,var_00);
 			}
 		}
 	}
@@ -158,9 +158,9 @@ monitor_flag_ownership() {
 	self endon("monitor_flag_ownership");
 	self endon("death");
 	level endon("game_ended");
-	var_00 = self.useobj scripts\mp\_gameobjects::getownerteam();
+	var_00 = self.useobj scripts\mp\gameobjects::getownerteam();
 	for(;;) {
-		var_01 = self.useobj scripts\mp\_gameobjects::getownerteam();
+		var_01 = self.useobj scripts\mp\gameobjects::getownerteam();
 		if(var_01 != var_00) {
 			level notify("flag_changed_ownership");
 		}
@@ -204,7 +204,7 @@ setup_bot_dom() {
 		if(var_03.script_label != "_a" && var_03.script_label != "_b" && var_03.script_label != "_c") {
 		}
 
-		var_03.nodes = function_00B7(var_03);
+		var_03.nodes = getnodesintrigger(var_03);
 		add_missing_nodes(var_03);
 	}
 
@@ -269,8 +269,8 @@ add_missing_nodes(param_00) {
 
 		var_01 = getnodesinradius(param_00.origin,var_04,0,100);
 		foreach(var_0A in var_01) {
-			if(!function_010F(var_0A.origin,param_00)) {
-				if(function_010F(var_0A.origin + (0,0,40),param_00) || function_010F(var_0A.origin + (0,0,80),param_00) || function_010F(var_0A.origin + (0,0,120),param_00)) {
+			if(!ispointinvolume(var_0A.origin,param_00)) {
+				if(ispointinvolume(var_0A.origin + (0,0,40),param_00) || ispointinvolume(var_0A.origin + (0,0,80),param_00) || ispointinvolume(var_0A.origin + (0,0,120),param_00)) {
 					param_00.nodes = scripts\engine\utility::array_add(param_00.nodes,var_0A);
 				}
 			}
@@ -280,7 +280,7 @@ add_missing_nodes(param_00) {
 
 should_start_cautious_approach_dom(param_00) {
 	if(param_00) {
-		if(self.current_flag.useobj scripts\mp\_gameobjects::getownerteam() == "neutral" && flag_has_never_been_captured(self.current_flag)) {
+		if(self.current_flag.useobj scripts\mp\gameobjects::getownerteam() == "neutral" && flag_has_never_been_captured(self.current_flag)) {
 			var_01 = get_closest_flag(self.lastspawnpoint.origin);
 			if(var_01 == self.current_flag) {
 				return 0;
@@ -357,7 +357,7 @@ should_delay_flag_decision() {
 		return 0;
 	}
 
-	if(self.current_flag.useobj scripts\mp\_gameobjects::getownerteam() == self.team) {
+	if(self.current_flag.useobj scripts\mp\gameobjects::getownerteam() == self.team) {
 		return 0;
 	}
 
@@ -406,7 +406,7 @@ bot_choose_flag() {
 	}
 
 	for(var_06 = 0;var_06 < var_05.size;var_06++) {
-		var_07 = var_05[var_06].useobj scripts\mp\_gameobjects::getownerteam();
+		var_07 = var_05[var_06].useobj scripts\mp\gameobjects::getownerteam();
 		if(var_03) {
 			if(flag_has_been_captured_before(var_05[var_06])) {
 				var_03 = 0;
@@ -575,7 +575,7 @@ bot_choose_flag() {
 						var_15[1 - var_09] = var_15[1 - var_09] - 15;
 					}
 
-					if(var_10[var_09].useobj scripts\mp\_gameobjects::getownerteam() == "neutral") {
+					if(var_10[var_09].useobj scripts\mp\gameobjects::getownerteam() == "neutral") {
 						var_15[var_09] = var_15[var_09] + 15;
 						var_15[1 - var_09] = var_15[1 - var_09] - 15;
 					}
@@ -609,7 +609,7 @@ bot_choose_flag() {
 						var_15[var_17] = var_15[var_17] - 8;
 					}
 
-					if(var_10[var_09].useobj scripts\mp\_gameobjects::getownerteam() == "neutral") {
+					if(var_10[var_09].useobj scripts\mp\gameobjects::getownerteam() == "neutral") {
 						var_15[var_09] = var_15[var_09] + 15;
 						var_15[var_16] = var_15[var_16] - 7;
 						var_15[var_17] = var_15[var_17] - 8;
@@ -688,8 +688,8 @@ bot_allowed_to_3_cap() {
 		return 1;
 	}
 
-	var_01 = scripts\mp\_gamescore::_getteamscore(scripts\engine\utility::get_enemy_team(self.team));
-	var_02 = scripts\mp\_gamescore::_getteamscore(self.team);
+	var_01 = scripts\mp\gamescore::_getteamscore(scripts\engine\utility::get_enemy_team(self.team));
+	var_02 = scripts\mp\gamescore::_getteamscore(self.team);
 	var_03 = 200 - var_01;
 	var_04 = 200 - var_02;
 	var_05 = var_04 * 0.5 > var_03;
@@ -814,7 +814,7 @@ monitor_flag_status(param_00) {
 	var_04 = 1;
 	while(var_04) {
 		var_05 = 0;
-		var_06 = param_00.useobj scripts\mp\_gameobjects::getownerteam();
+		var_06 = param_00.useobj scripts\mp\gameobjects::getownerteam();
 		var_07 = get_num_ally_flags(self.team);
 		var_08 = get_enemy_flags(self.team);
 		if(scripts\mp\bots\_bots_util::bot_is_capturing()) {
@@ -907,7 +907,7 @@ bot_dom_get_node_chance(param_00) {
 			var_01 = param_00 scripts\mp\bots\_bots_util::node_is_on_path_from_labels(var_02,get_flag_label(var_05));
 			if(var_01) {
 				var_06 = get_other_flag(self.current_flag,var_05);
-				var_07 = var_06.useobj scripts\mp\_gameobjects::getownerteam();
+				var_07 = var_06.useobj scripts\mp\gameobjects::getownerteam();
 				if(var_07 != self.team) {
 					if(param_00 scripts\mp\bots\_bots_util::node_is_on_path_from_labels(var_02,get_flag_label(var_06))) {
 						var_01 = 0;
@@ -973,7 +973,7 @@ get_num_allies_capturing_flag(param_00,param_01) {
 			continue;
 		}
 
-		if(var_05.team == self.team && var_05 != self && scripts\mp\_utility::isteamparticipant(var_05)) {
+		if(var_05.team == self.team && var_05 != self && scripts\mp\utility::isteamparticipant(var_05)) {
 			if(isai(var_05)) {
 				if(var_05 bot_is_capturing_flag(param_00)) {
 					var_02++;
@@ -1016,7 +1016,7 @@ bot_target_is_flag(param_00) {
 get_num_ally_flags(param_00) {
 	var_01 = 0;
 	for(var_02 = 0;var_02 < level.magicbullet.size;var_02++) {
-		var_03 = level.magicbullet[var_02].useobj scripts\mp\_gameobjects::getownerteam();
+		var_03 = level.magicbullet[var_02].useobj scripts\mp\gameobjects::getownerteam();
 		if(var_03 == param_00) {
 			var_01++;
 		}
@@ -1028,7 +1028,7 @@ get_num_ally_flags(param_00) {
 get_enemy_flags(param_00) {
 	var_01 = [];
 	for(var_02 = 0;var_02 < level.magicbullet.size;var_02++) {
-		var_03 = level.magicbullet[var_02].useobj scripts\mp\_gameobjects::getownerteam();
+		var_03 = level.magicbullet[var_02].useobj scripts\mp\gameobjects::getownerteam();
 		if(var_03 == scripts\engine\utility::get_enemy_team(param_00)) {
 			var_01 = scripts\engine\utility::array_add(var_01,level.magicbullet[var_02]);
 		}
@@ -1040,7 +1040,7 @@ get_enemy_flags(param_00) {
 get_ally_flags(param_00) {
 	var_01 = [];
 	for(var_02 = 0;var_02 < level.magicbullet.size;var_02++) {
-		var_03 = level.magicbullet[var_02].useobj scripts\mp\_gameobjects::getownerteam();
+		var_03 = level.magicbullet[var_02].useobj scripts\mp\gameobjects::getownerteam();
 		if(var_03 == param_00) {
 			var_01 = scripts\engine\utility::array_add(var_01,level.magicbullet[var_02]);
 		}
@@ -1070,7 +1070,7 @@ get_bots_defending_flag(param_00) {
 			continue;
 		}
 
-		if(var_04.team == self.team && var_04 != self && scripts\mp\_utility::isteamparticipant(var_04)) {
+		if(var_04.team == self.team && var_04 != self && scripts\mp\utility::isteamparticipant(var_04)) {
 			if(isai(var_04)) {
 				if(var_04 bot_is_protecting_flag(param_00)) {
 					var_02 = scripts\engine\utility::array_add(var_02,var_04);

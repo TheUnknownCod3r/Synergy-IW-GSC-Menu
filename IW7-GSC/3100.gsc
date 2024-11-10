@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\3100.gsc
+ * Script: 3100.gsc
 ***************************************/
 
 init() {
@@ -23,9 +23,9 @@ func_D96C(var_00) {
   self endon("death");
   self notify("pilot_remembers_attack");
   wait(randomfloatrange(0.2, 0.65));
-  self.bt.attackerdata.func_24D3 = 1;
-  self.bt.attackerdata.attacker = level.func_D127;
-  self.bt.attackerdata.func_2535 = gettime();
+  self.var_3135.attackerdata.func_24D3 = 1;
+  self.var_3135.attackerdata.attacker = level.func_D127;
+  self.var_3135.attackerdata.func_2535 = gettime();
   thread func_72F9();
 }
 
@@ -34,8 +34,8 @@ func_72F9() {
   self endon("pilot_remembers_attack");
   self endon("death");
   wait 4;
-  self.bt.attackerdata.func_24D3 = 0;
-  self.bt.attackerdata.attacker = undefined;
+  self.var_3135.attackerdata.func_24D3 = 0;
+  self.var_3135.attackerdata.attacker = undefined;
 }
 
 func_FF27() {
@@ -209,11 +209,11 @@ func_4CF9(var_00, var_01) {
 }
 
 func_4D34(var_00, var_01) {
-  scripts/sp/utility::func_75C4("fighter_spaceship_damaged", "j_mainroot_ship");
+  scripts\sp\utility::func_75C4("fighter_spaceship_damaged", "j_mainroot_ship");
   scripts\engine\utility::waittill_either("death", "stop_damaged_fx");
 
   if (isdefined(self))
-  scripts/sp/utility::func_75F8("fighter_spaceship_damaged", "j_mainroot_ship");
+  scripts\sp\utility::func_75F8("fighter_spaceship_damaged", "j_mainroot_ship");
 }
 
 #using_animtree("jackal");
@@ -254,7 +254,7 @@ death_monitor() {
   else
   var_09 = 0;
 
-  scripts/sp/utility::func_65E1("is_dying");
+  scripts\sp\utility::func_65E1("is_dying");
   thread func_646F();
 
   if (!isdefined(self))
@@ -428,8 +428,8 @@ func_7B23(var_00) {
 }
 
 func_4E11() {
-  if (!scripts/sp/utility::func_65DF("is_dying"))
-  scripts/sp/utility::func_65E0("is_dying");
+  if (!scripts\sp\utility::func_65DF("is_dying"))
+  scripts\sp\utility::func_65E0("is_dying");
 
   if (!isdefined(level.func_A8D7))
   level.func_A8D7 = 0;
@@ -495,7 +495,7 @@ func_6170() {
   self waittill("emp", var_03, var_04, var_05);
   self.func_4B43 = var_05;
   var_06 = var_02 * var_03;
-  var_07 = scripts/sp/math::func_6A8E(var_00, var_01, var_03);
+  var_07 = scripts\sp\math::func_6A8E(var_00, var_01, var_03);
   func_0BDC::func_19A0(1);
   var_08 = self.spaceship_mode;
 
@@ -534,7 +534,7 @@ func_6170() {
 func_614C(var_00) {
   var_01 = 2;
   var_02 = 0.5;
-  var_03 = scripts/sp/math::func_6A8E(var_02, var_01, var_00);
+  var_03 = scripts\sp\math::func_6A8E(var_02, var_01, var_00);
   thread func_0BDC::func_D527("jackal_enemy_emp", self.origin, var_03);
 }
 
@@ -582,7 +582,7 @@ func_6174(var_00, var_01, var_02) {
 }
 
 func_7D20(var_00) {
-  var_01 = scripts/sp/math::func_6A8E(4, 13, var_00);
+  var_01 = scripts\sp\math::func_6A8E(4, 13, var_00);
   var_02 = (randomfloatrange(0.1, 1), randomfloatrange(0.1, 1), randomfloatrange(0.1, 1));
   return vectornormalize(var_02) * var_01;
 }
@@ -601,9 +601,9 @@ func_10FF8() {
 
 func_56FF(var_00, var_01, var_02, var_03, var_04) {
   var_05 = distance(var_00, level.func_D127.origin);
-  var_06 = scripts/sp/math::func_C097(var_01, var_02, var_05);
-  var_07 = scripts/sp/math::func_6A8E(var_03, 0.02, var_06);
-  var_08 = scripts/sp/math::func_6A8E(var_04, 0.3, var_06);
+  var_06 = scripts\sp\math::func_C097(var_01, var_02, var_05);
+  var_07 = scripts\sp\math::func_6A8E(var_03, 0.02, var_06);
+  var_08 = scripts\sp\math::func_6A8E(var_04, 0.3, var_06);
   earthquake(var_07, 0.9, level.func_D127.origin, 8000);
 }
 

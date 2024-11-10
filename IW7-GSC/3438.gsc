@@ -1,11 +1,11 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3438.gsc
-****************************/
+ * Script: 3438.gsc
+************************/
 
 func_97D0() {
-	level._effect["swipe_trail"] = loadfx("vfx/iw7/_requests/mp/vfx_swipe_trail");
+	level._effect["swipe_trail"] = loadfx("vfx\iw7\_requests\mp\vfx_swipe_trail");
 	level.var_DDA0 = "prop_mp_reaper_shield";
 }
 
@@ -122,7 +122,7 @@ func_FCA5(param_00,param_01) {
 	self getradiuspathsighttestnodes();
 	self allowjump(0);
 	self allowprone(0);
-	scripts\mp\_utility::_magicbullet("iw7_erad_mp",self.origin + (0,0,4500),self.origin + (0,0,5500),self);
+	scripts\mp\utility::_magicbullet("iw7_erad_mp",self.origin + (0,0,4500),self.origin + (0,0,5500),self);
 }
 
 func_FC98(param_00,param_01,param_02) {
@@ -174,7 +174,7 @@ func_FC9C() {
 			playsoundatpos(self.var_FC9F.origin,"bs_shield_impact");
 		}
 
-		var_01 scripts\mp\_damagefeedback::updatedamagefeedback("hitbulletstorm");
+		var_01 scripts\mp\damagefeedback::updatedamagefeedback("hitbulletstorm");
 		wait(0.05);
 	}
 }
@@ -250,7 +250,7 @@ func_13ACC(param_00) {
 		var_02 = self.origin + var_01;
 		var_03 = anglestoforward(self.angles);
 		var_04 = anglestoright(self.angles);
-		scripts\mp\_utility::_magicbullet("iw7_erad_mp",self.origin + (0,0,4500),self.origin + (0,0,5500),self);
+		scripts\mp\utility::_magicbullet("iw7_erad_mp",self.origin + (0,0,4500),self.origin + (0,0,5500),self);
 		self playrumbleonentity("damage_light");
 		earthquake(0.2,0.1,self.origin,32);
 		var_05 = func_36DB(param_00);
@@ -322,7 +322,7 @@ func_11A83(param_00,param_01,param_02) {
 			return var_0A;
 		}
 
-		if(!scripts\mp\_utility::attackerishittingteam(var_06,self) && var_06 != self) {
+		if(!scripts\mp\utility::attackerishittingteam(var_06,self) && var_06 != self) {
 			var_06 thread [[level.callbackplayerdamage]](undefined,self,135,0,"MOD_MELEE","iw7_reaperblade_mp",self.origin,undefined,"none",0);
 		}
 	}
@@ -332,7 +332,7 @@ func_11A83(param_00,param_01,param_02) {
 			return var_0A;
 		}
 
-		if(!scripts\mp\_utility::attackerishittingteam(var_07,self) && var_07 != self) {
+		if(!scripts\mp\utility::attackerishittingteam(var_07,self) && var_07 != self) {
 			var_07 thread [[level.callbackplayerdamage]](undefined,self,135,0,"MOD_MELEE","iw7_reaperblade_mp",self.origin,undefined,"none",0);
 		}
 	}

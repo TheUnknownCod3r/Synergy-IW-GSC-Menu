@@ -1,8 +1,8 @@
-/**********************************************
+/**************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\aitype\ally_hero_gator.gsc
-**********************************************/
+ * Script: aitype\ally_hero_gator.gsc
+**************************************/
 
 main() {
 	self.var_17DB = "";

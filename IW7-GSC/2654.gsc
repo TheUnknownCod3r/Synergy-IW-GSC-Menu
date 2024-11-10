@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2654.gsc
+ * Script: 2654.gsc
 ***************************************/
 
 init() {
@@ -125,7 +125,7 @@ process_agent_on_killed_merits(var_00, var_01, var_02, var_03, var_04, var_05, v
   return;
   }
 
-  var_09 = scripts/cp/utility::getweaponclass(var_04);
+  var_09 = scripts\cp\utility::getweaponclass(var_04);
   var_10 = scripts\engine\utility::is_true(var_1.inlaststand);
   var_11 = scripts\engine\utility::isbulletdamage(var_03);
   var_12 = var_01 getstance();
@@ -141,14 +141,14 @@ process_agent_on_killed_merits(var_00, var_01, var_02, var_03, var_04, var_05, v
   var_22 = scripts\engine\utility::is_true(self.faf_burned_out);
 
   if (isdefined(var_0.owner))
-  var_23 = var_01 scripts/cp/utility::is_trap(var_00, var_04) && var_0.owner == var_01;
+  var_23 = var_01 scripts\cp\utility::is_trap(var_00, var_04) && var_0.owner == var_01;
   else
-  var_23 = var_01 scripts/cp/utility::is_trap(var_00, var_04);
+  var_23 = var_01 scripts\cp\utility::is_trap(var_00, var_04);
 
   var_24 = 0;
 
   foreach (var_26 in getarraykeys(level.all_magic_weapons)) {
-  if (scripts/cp/utility::getrawbaseweaponname(var_04) == var_26) {
+  if (scripts\cp\utility::getrawbaseweaponname(var_04) == var_26) {
   var_24 = 1;
   break;
   }
@@ -158,7 +158,7 @@ process_agent_on_killed_merits(var_00, var_01, var_02, var_03, var_04, var_05, v
   var_29 = undefined;
 
   if (isdefined(var_04))
-  var_29 = scripts/cp/utility::getrawbaseweaponname(var_04);
+  var_29 = scripts\cp\utility::getrawbaseweaponname(var_04);
 
   var_30 = isdefined(var_29) && (var_29 == "harpoon1" || var_29 == "harpoon2" || var_29 == "harpoon3" || var_29 == "harpoon4");
 
@@ -174,8 +174,8 @@ process_agent_on_killed_merits(var_00, var_01, var_02, var_03, var_04, var_05, v
   var_16 = 0;
   }
 
-  var_31 = var_01 scripts/cp/utility::coop_getweaponclass(var_04) == "weapon_sniper" && var_11;
-  var_32 = var_11 && scripts/cp/utility::isheadshot(var_04, var_06, var_03, var_01);
+  var_31 = var_01 scripts\cp\utility::coop_getweaponclass(var_04) == "weapon_sniper" && var_11;
+  var_32 = var_11 && scripts\cp\utility::isheadshot(var_04, var_06, var_03, var_01);
 
   if (!var_17) {
   switch (var_09) {
@@ -376,7 +376,7 @@ processmerit(var_00, var_01, var_02) {
   return;
   }
 
-  var_07 = scripts/cp/cp_hud_util::mt_getprogress(var_00);
+  var_07 = scripts\cp\cp_hud_util::mt_getprogress(var_00);
   var_08 = level.meritinfo[var_00]["targetval"][var_03];
 
   if (!isdefined(var_08))
@@ -398,16 +398,16 @@ processmerit(var_00, var_01, var_02) {
   var_11 = 0;
 
   if (var_07 < var_09)
-  scripts/cp/cp_hud_util::mt_setprogress(var_00, var_09);
+  scripts\cp\cp_hud_util::mt_setprogress(var_00, var_09);
 
   if (var_11) {
   thread giverankxpafterwait(var_00, var_03);
   storecompletedmerit(var_00);
   givemeritscore(level.meritinfo[var_00]["score"][var_03]);
   var_3++;
-  scripts/cp/cp_hud_util::mt_setstate(var_00, var_03);
+  scripts\cp\cp_hud_util::mt_setstate(var_00, var_03);
   self.meritdata[var_00] = var_03;
-  thread scripts/cp/cp_hud_message::showchallengesplash(var_00);
+  thread scripts\cp\cp_hud_message::showchallengesplash(var_00);
 
   if (areallmerittierscomplete(var_00))
   processmastermerit(var_00);
@@ -422,7 +422,7 @@ areallmerittierscomplete(var_00) {
 }
 
 get_table_name() {
-  return "cp/zombies/zombie_splashtable.csv";
+  return "cp\zombies\zombie_splashtable.csv";
 }
 
 storecompletedmerit(var_00) {
@@ -460,7 +460,7 @@ storecompletedoperation(var_00) {
 giverankxpafterwait(var_00, var_01) {
   self endon("disconnect");
   wait 0.25;
-  scripts/cp/cp_persistence::give_player_xp(int(level.meritinfo[var_00]["reward"][var_01]));
+  scripts\cp\cp_persistence::give_player_xp(int(level.meritinfo[var_00]["reward"][var_01]));
 }
 
 givemeritscore(var_00) {
@@ -485,13 +485,13 @@ updatemerits() {
 
   self.meritdata[var_05] = 0;
   var_03 = var_2["index"];
-  var_04 = scripts/cp/cp_hud_util::mt_getstate(var_05);
+  var_04 = scripts\cp\cp_hud_util::mt_getstate(var_05);
   self.meritdata[var_05] = var_04;
   }
 }
 
 getmeritfilter(var_00) {
-  return tablelookup("cp/allMeritsTable.csv", 0, var_00, 5);
+  return tablelookup("cp\allMeritsTable.csv", 0, var_00, 5);
 }
 
 isweaponmerit(var_00) {
@@ -517,7 +517,7 @@ isoperationmerit(var_00) {
   var_01 = getmeritfilter(var_00);
 
   if (isdefined(var_01)) {
-  if (var_01 == "perk_slot_0" || var_01 == "perk_slot_1" || var_01 == "perk_slot_2" || var_01 == "proficiency" || var_01 == "equipment" || var_01 == "special_equipment" || var_01 == "attachment" || var_01 == "prestige" || var_01 == "final_killcam" || var_01 == "basic" || var_01 == "humiliation" || var_01 == "precision" || var_01 == "revenge" || var_01 == "elite" || var_01 == "intimidation" || var_01 == "operations" || scripts/cp/utility::isstrstart(var_01, "killstreaks_"))
+  if (var_01 == "perk_slot_0" || var_01 == "perk_slot_1" || var_01 == "perk_slot_2" || var_01 == "proficiency" || var_01 == "equipment" || var_01 == "special_equipment" || var_01 == "attachment" || var_01 == "prestige" || var_01 == "final_killcam" || var_01 == "basic" || var_01 == "humiliation" || var_01 == "precision" || var_01 == "revenge" || var_01 == "elite" || var_01 == "intimidation" || var_01 == "operations" || scripts\cp\utility::isstrstart(var_01, "killstreaks_"))
   return 1;
   }
 
@@ -599,7 +599,7 @@ buildmerittableinfo(var_00, var_01) {
 buildmeritinfo() {
   level.meritinfo = [];
   var_00 = 0;
-  var_00 = var_00 + buildmerittableinfo("cp/allMeritsTable.csv", 0);
+  var_00 = var_00 + buildmerittableinfo("cp\allMeritsTable.csv", 0);
 }
 
 ismeritunlocked(var_00) {
@@ -616,7 +616,7 @@ havedataformerit(var_00) {
 }
 
 getmeritmasterchallenge(var_00) {
-  var_01 = tablelookup("cp/allMeritsTable.csv", 0, var_00, 7);
+  var_01 = tablelookup("cp\allMeritsTable.csv", 0, var_00, 7);
 
   if (isdefined(var_01) && var_01 == "")
   return undefined;

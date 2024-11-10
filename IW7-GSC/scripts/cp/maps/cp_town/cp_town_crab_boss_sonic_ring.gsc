@@ -1,8 +1,8 @@
-/****************************************************************************
+/********************************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\maps\cp_town\cp_town_crab_boss_sonic_ring.gsc
-****************************************************************************/
+ * Script: scripts\cp\maps\cp_town\cp_town_crab_boss_sonic_ring.gsc
+********************************************************************/
 
 do_sonic_ring() {
 	enable_linkto_on_all_triggers();
@@ -206,7 +206,7 @@ clean_up_controlling_ent(param_00) {
 }
 
 load_sonic_ring_vfx() {
-	level._effect["sonic_beam_ricochet_laser"] = loadfx("vfx/iw7/levels/cp_town/crog/vfx_lure_laser_sonic_beam.vfx");
+	level._effect["sonic_beam_ricochet_laser"] = loadfx("vfx\iw7\levels\cp_town\crog\vfx_lure_laser_sonic_beam.vfx");
 }
 
 sonic_ring_cleanup() {}
@@ -253,7 +253,7 @@ activate_vfx_along_path(param_00,param_01) {
 	for(var_02 = 0;var_02 <= param_01.size - 2;var_02++) {
 		param_00 = param_01[var_02];
 		var_03 = param_01[var_02 + 1];
-		function_02E0(level._effect["sonic_beam_ricochet_laser"],param_00,vectortoangles(var_03 - param_00),var_03);
+		playfxbetweenpoints(level._effect["sonic_beam_ricochet_laser"],param_00,vectortoangles(var_03 - param_00),var_03);
 		wait(0.4);
 	}
 }

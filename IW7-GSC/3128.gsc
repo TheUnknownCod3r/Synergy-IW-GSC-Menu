@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3128.gsc
-****************************/
+ * Script: 3128.gsc
+************************/
 
 func_33FF(param_00,param_01,param_02,param_03) {
 	self.asm.footsteps = spawnstruct();
@@ -30,7 +30,7 @@ func_98A7() {
 }
 
 func_10088(param_00,param_01,param_02,param_03) {
-	if(scripts/asm/asm_bb::bb_isincombat()) {
+	if(scripts\asm\asm_bb::bb_isincombat()) {
 		return 0;
 	}
 
@@ -42,20 +42,20 @@ func_10088(param_00,param_01,param_02,param_03) {
 }
 
 func_D46D(param_00,param_01,param_02,param_03) {
-	scripts/asm/asm_mp::func_2364(param_00,param_01,param_02);
+	scripts\asm\asm_mp::func_2364(param_00,param_01,param_02);
 }
 
 reload(param_00,param_01,param_02,param_03) {
 	self endon("reload_terminate");
 	self endon(param_01 + "_finished");
-	var_04 = scripts/asm/asm_mp::asm_getanim(param_00,param_01);
-	scripts/asm/asm_mp::func_2365(param_00,param_01,param_02,var_04);
+	var_04 = scripts\asm\asm_mp::asm_getanim(param_00,param_01);
+	scripts\asm\asm_mp::func_2365(param_00,param_01,param_02,var_04);
 	scripts\anim\weaponlist::refillclip();
-	scripts/asm/asm::asm_fireevent(param_01,"reload_finished");
+	scripts\asm\asm::asm_fireevent(param_01,"reload_finished");
 }
 
 func_100A9(param_00,param_01,param_02,param_03) {
-	var_04 = scripts/asm/asm_bb::bb_getrequestedweapon();
+	var_04 = scripts\asm\asm_bb::bb_getrequestedweapon();
 	if(!isdefined(var_04)) {
 		return 0;
 	}
@@ -69,11 +69,11 @@ func_100A9(param_00,param_01,param_02,param_03) {
 
 func_BEA0(param_00,param_01,param_02,param_03) {
 	var_04 = undefined;
-	if(isdefined(self._blackboard.shootparams) && isdefined(self._blackboard.shootparams.ent)) {
-		var_04 = self._blackboard.shootparams.ent.origin;
+	if(isdefined(self.var_1198.shootparams) && isdefined(self.var_1198.shootparams.ent)) {
+		var_04 = self.var_1198.shootparams.ent.origin;
 	}
-	else if(isdefined(self._blackboard.shootparams) && isdefined(self._blackboard.shootparams.pos)) {
-		var_04 = self._blackboard.shootparams.pos;
+	else if(isdefined(self.var_1198.shootparams) && isdefined(self.var_1198.shootparams.pos)) {
+		var_04 = self.var_1198.shootparams.pos;
 	}
 	else if(isdefined(self.isnodeoccupied)) {
 		var_04 = self.isnodeoccupied.origin;
@@ -103,12 +103,12 @@ _meth_81DE() {
 	var_00 = 0.25;
 	var_01 = undefined;
 	var_02 = undefined;
-	if(isdefined(self._blackboard.shootparams)) {
-		if(isdefined(self._blackboard.shootparams.ent)) {
-			var_01 = self._blackboard.shootparams.ent;
+	if(isdefined(self.var_1198.shootparams)) {
+		if(isdefined(self.var_1198.shootparams.ent)) {
+			var_01 = self.var_1198.shootparams.ent;
 		}
-		else if(isdefined(self._blackboard.shootparams.pos)) {
-			var_02 = self._blackboard.shootparams.pos;
+		else if(isdefined(self.var_1198.shootparams.pos)) {
+			var_02 = self.var_1198.shootparams.pos;
 		}
 	}
 
@@ -153,7 +153,7 @@ func_3F0A(param_00,param_01,param_02) {
 	}
 
 	var_06 = var_04 + "_" + var_05;
-	var_07 = scripts/asm/asm::asm_lookupanimfromalias(param_01,var_06);
+	var_07 = scripts\asm\asm::asm_lookupanimfromalias(param_01,var_06);
 	var_08 = self _meth_8101(param_01,var_07);
 	return var_07;
 }
@@ -162,21 +162,21 @@ func_116FF(param_00,param_01,param_02,param_03) {}
 
 func_D56A(param_00,param_01,param_02,param_03) {
 	self endon(param_01 + "_finished");
-	var_04 = scripts/asm/asm_mp::asm_getanim(param_00,param_01);
+	var_04 = scripts\asm\asm_mp::asm_getanim(param_00,param_01);
 	var_05 = self.vehicle_getspawnerarray;
 	self orientmode("face angle abs",self.angles);
 	self ghostlaunched("anim deltas");
-	scripts/asm/asm_mp::func_2365(param_00,param_01,param_02,var_04);
+	scripts\asm\asm_mp::func_2365(param_00,param_01,param_02,var_04);
 	if(!isdefined(var_05) && isdefined(self.vehicle_getspawnerarray)) {
 		self clearpath();
 	}
 
-	scripts/asm/asm_mp::func_237F("face current");
-	scripts/asm/asm_mp::func_237E("code_move");
+	scripts\asm\asm_mp::func_237F("face current");
+	scripts\asm\asm_mp::func_237E("code_move");
 }
 
 func_1007E(param_00,param_01,param_02,param_03) {
-	var_04 = !scripts/asm/asm_bb::bb_moverequested() && scripts\asm\shared_utility::isatcovernode();
+	var_04 = !scripts\asm\asm_bb::bb_moverequested() && scripts\asm\shared_utility::isatcovernode();
 	if(!var_04) {
 		return 0;
 	}
@@ -194,22 +194,22 @@ func_1007E(param_00,param_01,param_02,param_03) {
 
 func_CECB(param_00,param_01,param_02,param_03) {
 	self endon(param_01 + "finished");
-	var_04 = scripts/asm/asm_bb::bb_getrequestedweapon();
-	var_05 = scripts/asm/asm_mp::asm_getanim(param_00,param_01);
-	scripts/asm/asm_mp::func_2365(param_00,param_01,param_02,var_05);
+	var_04 = scripts\asm\asm_bb::bb_getrequestedweapon();
+	var_05 = scripts\asm\asm_mp::asm_getanim(param_00,param_01);
+	scripts\asm\asm_mp::func_2365(param_00,param_01,param_02,var_05);
 	self notify("switched_to_sidearm");
 }
 
 func_D4B2(param_00,param_01,param_02,param_03) {
 	self gib_fx_override("noclip");
-	var_04 = scripts/asm/asm_mp::asm_getanim(param_00,param_01);
-	scripts/asm/asm_mp::func_2365(param_00,param_01,param_02,var_04,1);
+	var_04 = scripts\asm\asm_mp::asm_getanim(param_00,param_01);
+	scripts\asm\asm_mp::func_2365(param_00,param_01,param_02,var_04,1);
 }
 
 func_D4B3(param_00,param_01,param_02,param_03) {
 	self gib_fx_override("noclip");
-	var_04 = scripts/asm/asm_mp::asm_getanim(param_00,param_01);
-	scripts/asm/asm_mp::func_2365(param_00,param_01,param_02,var_04,0.001);
+	var_04 = scripts\asm\asm_mp::asm_getanim(param_00,param_01);
+	scripts\asm\asm_mp::func_2365(param_00,param_01,param_02,var_04,0.001);
 }
 
 func_FFEF(param_00,param_01,param_02,param_03) {

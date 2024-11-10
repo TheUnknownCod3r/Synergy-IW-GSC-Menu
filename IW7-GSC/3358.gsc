@@ -1,14 +1,14 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3358.gsc
-****************************/
+ * Script: 3358.gsc
+************************/
 
 init() {
-	level._effect["transponder_activate"] = loadfx("vfx/iw7/_requests/mp/vfx_transponder_activate.vfx");
-	level._effect["direction_indicator_close"] = loadfx("vfx/iw7/_requests/mp/vfx_transponder_direction_indicator_close.vfx");
-	level._effect["direction_indicator_mid"] = loadfx("vfx/iw7/_requests/mp/vfx_transponder_direction_indicator_mid.vfx");
-	level._effect["direction_indicator_far"] = loadfx("vfx/iw7/_requests/mp/vfx_transponder_direction_indicator_far.vfx");
+	level._effect["transponder_activate"] = loadfx("vfx\iw7\_requests\mp\vfx_transponder_activate.vfx");
+	level._effect["direction_indicator_close"] = loadfx("vfx\iw7\_requests\mp\vfx_transponder_direction_indicator_close.vfx");
+	level._effect["direction_indicator_mid"] = loadfx("vfx\iw7\_requests\mp\vfx_transponder_direction_indicator_mid.vfx");
+	level._effect["direction_indicator_far"] = loadfx("vfx\iw7\_requests\mp\vfx_transponder_direction_indicator_far.vfx");
 }
 
 removetransponder() {

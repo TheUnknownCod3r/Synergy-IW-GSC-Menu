@@ -1,8 +1,8 @@
-/**************************************************
+/******************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\intelchallenges.gsc
-**************************************************/
+ * Script: scripts\mp\intelchallenges.gsc
+******************************************/
 
 func_DEF9() {
 	level.var_9979 = [];
@@ -910,20 +910,20 @@ func_99BA(param_00,param_01,param_02,param_03,param_04) {
 					break;
 
 				case "ch_intel_ballistic_kills":
-					if(((isdefined(param_02) && scripts\mp\utility::iscacprimaryweapon(param_02)) || scripts\mp\utility::iscacsecondaryweapon(param_02)) && !function_02D4(param_02)) {
+					if(((isdefined(param_02) && scripts\mp\utility::iscacprimaryweapon(param_02)) || scripts\mp\utility::iscacsecondaryweapon(param_02)) && !weaponusesenergybullets(param_02)) {
 						if(param_03 == "MOD_MELEE") {
 							var_0F = scripts\mp\utility::getweaponrootname(param_02);
 							if(var_0F == "iw7_devastator") {
-								var_10 = function_02C4(param_02);
+								var_10 = getweaponvariantindex(param_02);
 								if(isdefined(var_10) && var_10 == 4 || var_10 == 36) {
 									updatecurrentobjective();
 								}
 							}
 						}
-						else if(function_0107(param_03)) {
+						else if(isexplosivedamagemod(param_03)) {
 							var_0F = scripts\mp\utility::getweaponrootname(param_02);
 							if(var_0F == "iw7_kbs") {
-								var_10 = function_02C4(param_02);
+								var_10 = getweaponvariantindex(param_02);
 								if(isdefined(var_10) && var_10 == 6 || var_10 == 38) {
 									updatecurrentobjective();
 								}
@@ -936,7 +936,7 @@ func_99BA(param_00,param_01,param_02,param_03,param_04) {
 					break;
 
 				case "ch_intel_energy_kills":
-					if(((isdefined(param_02) && scripts\mp\utility::iscacprimaryweapon(param_02)) || scripts\mp\utility::iscacsecondaryweapon(param_02)) && function_02D4(param_02)) {
+					if(((isdefined(param_02) && scripts\mp\utility::iscacprimaryweapon(param_02)) || scripts\mp\utility::iscacsecondaryweapon(param_02)) && weaponusesenergybullets(param_02)) {
 						if(param_03 == "MOD_MELEE") {
 							var_0F = scripts\mp\utility::getweaponrootname(param_02);
 							if(var_0F == "iw7_rvn") {
@@ -945,10 +945,10 @@ func_99BA(param_00,param_01,param_02,param_03,param_04) {
 								}
 							}
 						}
-						else if(function_0107(param_03)) {
+						else if(isexplosivedamagemod(param_03)) {
 							var_0F = scripts\mp\utility::getweaponrootname(param_02);
 							if(var_0F == "iw7_rvn") {
-								var_10 = function_02C4(param_02);
+								var_10 = getweaponvariantindex(param_02);
 								if(isdefined(var_10) && var_10 == 3 || var_10 == 35) {
 									if(self _meth_8519(param_02)) {
 										updatecurrentobjective();
@@ -1124,7 +1124,7 @@ func_99E4(param_00) {
 intelattachmentcountchallenge(param_00,param_01,param_02) {
 	var_03 = scripts\mp\utility::getweaponrootname(param_00);
 	var_04 = 0;
-	foreach(var_06 in function_00E3(param_00)) {
+	foreach(var_06 in getweaponattachments(param_00)) {
 		var_07 = scripts\mp\utility::attachmentmap_tobase(var_06);
 		if(scripts\mp\weapons::func_9F3C(var_03,var_07)) {
 			var_04++;

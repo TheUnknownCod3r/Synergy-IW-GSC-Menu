@@ -1,27 +1,27 @@
-/********************************************
+/************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\anim\utility.gsc
-********************************************/
+ * Script: scripts\anim\utility.gsc
+************************************/
 
 func_97CF(param_00) {
 	self aiclearanim(%body,0.3);
 	self give_attacker_kill_rewards(%body,1,0);
 	if(param_00 != "pain" && param_00 != "death") {
-		self.var_1491.var_10930 = "none";
+		self.a.var_10930 = "none";
 	}
 
-	self.var_1491.var_1A4B = 1;
-	self.var_1491.var_1A4D = 1;
-	self.var_1491.var_1A4C = 1;
-	self.var_1491.var_1A4F = 0;
-	self.var_1491.var_1A4E = 0;
+	self.a.var_1A4B = 1;
+	self.a.var_1A4D = 1;
+	self.a.var_1A4C = 1;
+	self.a.var_1A4F = 0;
+	self.a.var_1A4E = 0;
 	func_12EB9();
 }
 
 func_12E5F() {
-	if(isdefined(self.var_5270) && self.var_5270 != self.var_1491.pose) {
-		if(self.var_1491.pose == "prone") {
+	if(isdefined(self.var_5270) && self.var_5270 != self.a.pose) {
+		if(self.a.pose == "prone") {
 			exitpronewrapper(0.5);
 		}
 
@@ -53,13 +53,13 @@ func_9832(param_00) {
 		}
 	}
 
-	if(isdefined(self.var_1491.var_B4E7) && param_00 != "death") {
+	if(isdefined(self.a.var_B4E7) && param_00 != "death") {
 		self _meth_81D0(self.origin);
 	}
 
-	if(isdefined(self.var_1491.var_D707)) {
-		var_01 = self.var_1491.var_D707;
-		self.var_1491.var_D707 = undefined;
+	if(isdefined(self.a.var_D707)) {
+		var_01 = self.a.var_D707;
+		self.a.var_D707 = undefined;
 		[[var_01]](param_00);
 	}
 
@@ -68,11 +68,11 @@ func_9832(param_00) {
 	}
 
 	if(param_00 != "combat" && param_00 != "move" && param_00 != "pain") {
-		self.var_1491.var_B168 = undefined;
+		self.a.var_B168 = undefined;
 	}
 
 	if(param_00 != "death") {
-		self.var_1491.nodeath = 0;
+		self.a.nodeath = 0;
 	}
 
 	if(isdefined(self.var_9E33) && param_00 == "pain" || param_00 == "death" || param_00 == "flashed") {
@@ -85,11 +85,11 @@ func_9832(param_00) {
 	self.var_112C8 = 0;
 	self.isreloading = 0;
 	self.var_3C60 = 0;
-	self.var_1491.var_1A3E = undefined;
-	self.var_1491.var_EF87 = gettime();
-	self.var_1491.var_2411 = 0;
-	if(isdefined(self.target_getindexoftarget) && self.var_205.type == "Conceal Prone" || self.var_205.type == "Conceal Crouch" || self.var_205.type == "Conceal Stand") {
-		self.var_1491.var_2411 = 1;
+	self.a.var_1A3E = undefined;
+	self.a.var_EF87 = gettime();
+	self.a.var_2411 = 0;
+	if(isdefined(self.target_getindexoftarget) && self.target_getindexoftarget.type == "Conceal Prone" || self.target_getindexoftarget.type == "Conceal Crouch" || self.target_getindexoftarget.type == "Conceal Stand") {
+		self.a.var_2411 = 1;
 	}
 
 	func_97CF(param_00);
@@ -137,12 +137,12 @@ func_9E40(param_00) {
 		return 1;
 	}
 
-	return self.var_1491.combatendtime > gettime();
+	return self.a.combatendtime > gettime();
 }
 
 func_12EB9() {
 	if(isdefined(self.isnodeoccupied)) {
-		self.var_1491.combatendtime = gettime() + level.combatidlepreventoverlappingplayer + randomint(level.combatmemorytimeconst);
+		self.a.combatendtime = gettime() + level.combatidlepreventoverlappingplayer + randomint(level.combatmemorytimeconst);
 	}
 }
 
@@ -153,7 +153,7 @@ _meth_824E(param_00,param_01) {
 }
 
 func_7EAD(param_00) {
-	var_01 = self gettagangles("TAG_EYE")[1] - scripts\common\utility::getyaw(param_00);
+	var_01 = self gettagangles("TAG_EYE")[1] - scripts\engine\utility::getyaw(param_00);
 	var_01 = angleclamp180(var_01);
 	return var_01;
 }
@@ -168,7 +168,7 @@ func_9F75(param_00) {
 
 func_3EF2(param_00) {
 	if(!isdefined(param_00)) {
-		param_00 = self.var_1491.pose;
+		param_00 = self.a.pose;
 	}
 
 	switch(param_00) {
@@ -267,7 +267,7 @@ func_10136(param_00) {
 		return;
 	}
 
-	if(self.var_10C.team == "allies") {
+	if(self.isnodeoccupied.team == "allies") {
 		var_01 = (0.4,0.7,1);
 	}
 	else
@@ -339,7 +339,7 @@ func_4F4E(param_00,param_01,param_02) {
 	var_03 = spawnstruct();
 	var_03 thread func_4F57();
 	var_03 endon("timeout");
-	if(self.var_10C.team == "allies") {
+	if(self.isnodeoccupied.team == "allies") {
 		var_04 = (0.4,0.7,1);
 	}
 	else
@@ -359,7 +359,7 @@ func_4F4F(param_00,param_01,param_02) {
 }
 
 func_4F38(param_00,param_01) {
-	var_02 = param_00 \ param_01;
+	var_02 = param_00 / param_01;
 	var_03 = undefined;
 	if(param_00 == self.bulletsinclip) {
 		var_03 = "all rounds";
@@ -405,11 +405,11 @@ func_1011B(param_00,param_01,param_02,param_03) {
 }
 
 func_FE9C(param_00) {
-	self.var_1491.var_A9ED = gettime();
+	self.a.var_A9ED = gettime();
 	scripts\sp\_gameskill::func_F288();
 	self notify("shooting");
-	if(scripts\anim\utility_common::isasniper() && isdefined(self.var_2303.shootparams) && isdefined(self.var_2303.var_FECD.pos)) {
-		self shoot(1,self.var_2303.var_FECD.pos,1,0,1);
+	if(scripts\anim\utility_common::isasniper() && isdefined(self.asm.shootparams) && isdefined(self.asm.shootparams.pos)) {
+		self shoot(1,self.asm.shootparams.pos,1,0,1);
 	}
 	else
 	{
@@ -423,7 +423,7 @@ func_FE9D(param_00) {
 }
 
 func_FED2(param_00,param_01) {
-	self.var_1491.var_A9ED = gettime();
+	self.a.var_A9ED = gettime();
 	if(!isdefined(param_01)) {
 		param_01 = 1;
 	}
@@ -434,7 +434,7 @@ func_FED2(param_00,param_01) {
 	}
 	else
 	{
-		var_02 = function_002C(self getmuzzlepos(),param_00,4);
+		var_02 = bulletspread(self getmuzzlepos(),param_00,4);
 		self shoot(1,var_02,param_01);
 	}
 }
@@ -492,7 +492,7 @@ func_CA76() {
 			break;
 		}
 
-		if(isdefined(self.var_1491.movement) && self.var_1491.movement == "stop") {
+		if(isdefined(self.a.movement) && self.a.movement == "stop") {
 			if(isdefined(self.var_9E45) && self.var_9E45 == 1) {
 				continue;
 			}
@@ -588,7 +588,7 @@ func_3928() {
 }
 
 func_13110() {
-	return function_0246(self.var_394);
+	return weaponisboltaction(self.var_394);
 }
 
 func_DCA3(param_00) {
@@ -697,10 +697,10 @@ func_662B(param_00) {
 	self endon("death");
 	self notify("anim_prone_change");
 	self endon("anim_prone_change");
-	self _meth_80DF(param_00,isdefined(self.var_1491.onback));
+	self _meth_80DF(param_00,isdefined(self.a.onback));
 	self waittill("killanimscript");
-	if(self.var_1491.pose != "prone" && !isdefined(self.var_1491.onback)) {
-		self.var_1491.pose = "prone";
+	if(self.a.pose != "prone" && !isdefined(self.a.onback)) {
+		self.a.pose = "prone";
 	}
 }
 
@@ -714,13 +714,13 @@ func_697C(param_00) {
 	self endon("anim_prone_change");
 	self _meth_80E0(param_00);
 	self waittill("killanimscript");
-	if(self.var_1491.pose == "prone") {
-		self.var_1491.pose = "crouch";
+	if(self.a.pose == "prone") {
+		self.a.pose = "crouch";
 	}
 }
 
 func_3875() {
-	if(self.var_1491.var_2411) {
+	if(self.a.var_2411) {
 		return 0;
 	}
 
@@ -749,7 +749,7 @@ func_38C0() {
 }
 
 func_7FCC(param_00) {
-	return self.var_1491.var_BCA5[param_00];
+	return self.a.var_BCA5[param_00];
 }
 
 func_DCA6(param_00,param_01) {
@@ -761,16 +761,16 @@ func_DCA6(param_00,param_01) {
 }
 
 func_1F64(param_00) {
-	return self.var_1491.var_2274[param_00];
+	return self.a.var_2274[param_00];
 }
 
 func_1F65(param_00) {
-	return isdefined(self.var_1491.var_2274[param_00]) && self.var_1491.var_2274[param_00].size > 0;
+	return isdefined(self.a.var_2274[param_00]) && self.a.var_2274[param_00].size > 0;
 }
 
 func_1F67(param_00) {
-	var_01 = randomint(self.var_1491.var_2274[param_00].size);
-	return self.var_1491.var_2274[param_00][var_01];
+	var_01 = randomint(self.a.var_2274[param_00].size);
+	return self.a.var_2274[param_00][var_01];
 }
 
 func_2274(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08,param_09,param_0A,param_0B,param_0C,param_0D) {
@@ -930,7 +930,7 @@ func_7DC6(param_00) {
 }
 
 func_10000(param_00) {
-	return isdefined(self.secondaryweapon) && self.secondaryweapon != "none" && param_00 < squared(512) || self.var_1491.rockets < 1;
+	return isdefined(self.secondaryweapon) && self.secondaryweapon != "none" && param_00 < squared(512) || self.a.rockets < 1;
 }
 
 func_DC1F(param_00) {
@@ -942,7 +942,7 @@ func_DC1F(param_00) {
 		var_03 = distance(self.origin,var_01);
 		var_01 = self.origin;
 		if(self.health == 1) {
-			self.var_1491.nodeath = 1;
+			self.a.nodeath = 1;
 			self giverankxp();
 			self aiclearanim(param_00,0.1);
 			wait(0.05);
@@ -966,7 +966,7 @@ func_9D9C() {
 }
 
 func_DCB7() {
-	self.var_1491.var_92F9 = randomint(2);
+	self.a.var_92F9 = randomint(2);
 }
 
 setclientextrasuper(param_00,param_01) {
@@ -1034,5 +1034,5 @@ func_B02B(param_00,param_01) {
 validatenotetracks(param_00,param_01,param_02) {}
 
 func_9DDB(param_00) {
-	return function_02D4(param_00);
+	return weaponusesenergybullets(param_00);
 }

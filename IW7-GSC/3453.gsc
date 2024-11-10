@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\3453.gsc
+ * Script: 3453.gsc
 ***************************************/
 
 bot_get_nodes_in_cone(var_00, var_01, var_02) {

@@ -1,10 +1,10 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\3000.gsc
+ * Script: 3000.gsc
 ***************************************/
 
 func_7561(var_00, var_01, var_02, var_03) {
-  scripts/sp/utility::func_75CE();
+  scripts\sp\utility::func_75CE();
 
   if (!isdefined(self.func_7560))
   self.func_7560 = [];
@@ -37,7 +37,7 @@ func_7562(var_00, var_01, var_02, var_03) {
   if (issubstr(var_01, "00"))
   var_05 = var_01 + var_04;
 
-  if (scripts/sp/utility::hastag(self.model, var_05)) {
+  if (scripts\sp\utility::hastag(self.model, var_05)) {
   func_7561(var_00, var_05, var_02, var_03);
   var_4++;
   continue;
@@ -94,17 +94,17 @@ func_119B9(var_00, var_01, var_02, var_03) {
 
   var_05 = self.func_7560[var_00][var_01].tag;
 
-  if (!scripts/sp/utility::hastag(self.model, var_05))
+  if (!scripts\sp\utility::hastag(self.model, var_05))
   return;
 
   if (var_02) {
-  thread scripts/sp/utility::func_75C4(var_04, var_05);
+  thread scripts\sp\utility::func_75C4(var_04, var_05);
   self.func_7560[var_00][var_01].on = 1;
   } else {
   if (scripts\engine\utility::is_true(var_03))
-  thread scripts/sp/utility::func_75A0(var_04, var_05);
+  thread scripts\sp\utility::func_75A0(var_04, var_05);
   else
-  thread scripts/sp/utility::func_75F8(var_04, var_05);
+  thread scripts\sp\utility::func_75F8(var_04, var_05);
 
   self.func_7560[var_00][var_01].on = 0;
   }
@@ -236,7 +236,7 @@ func_398C(var_00, var_01, var_02, var_03, var_04) {
   var_06 = var_3.angles;
   }
 
-  var_07 = scripts/sp/utility::func_10639("ftl_model", var_05, var_06);
+  var_07 = scripts\sp\utility::func_10639("ftl_model", var_05, var_06);
   var_08 = self.func_7482 + "_pre";
 
   if (isdefined(self.func_7483))
@@ -249,7 +249,7 @@ func_398C(var_00, var_01, var_02, var_03, var_04) {
   else
   {
   wait 2;
-  var_07 scripts/sp/anim::func_1F35(var_07, "ftl_in");
+  var_07 scripts\sp\anim::func_1F35(var_07, "ftl_in");
   wait 0.1;
   }
 
@@ -304,7 +304,7 @@ func_398E(var_00, var_01, var_02, var_03, var_04) {
 }
 
 func_3990(var_00, var_01, var_02, var_03) {
-  var_04 = scripts/sp/utility::func_10808();
+  var_04 = scripts\sp\utility::func_10808();
   var_04 func_39CD("off");
   var_04 func_39D0("off");
   var_04 func_39CE("off");
@@ -332,7 +332,7 @@ func_3991(var_00) {
   }
 
   self notify("ftl_out");
-  var_01 = scripts/sp/utility::func_10639("ftl_model", self.origin, self.angles);
+  var_01 = scripts\sp\utility::func_10639("ftl_model", self.origin, self.angles);
   var_01 linkto(self);
   var_02 = self.func_7482 + "_out";
   playfxontag(level._effect[var_02], self, "tag_origin");
@@ -411,7 +411,7 @@ func_398F(var_00, var_01) {
   if (!isdefined(var_01))
   var_01 = 0;
 
-  var_02 = scripts/sp/utility::func_10808();
+  var_02 = scripts\sp\utility::func_10808();
   var_02 func_39CD("off");
   var_02 func_39D0("off");
   var_02 func_39CE("off");

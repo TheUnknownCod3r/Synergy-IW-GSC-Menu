@@ -1,8 +1,8 @@
-/***************************************************
+/*******************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\anim\cover_behavior.gsc
-***************************************************/
+ * Script: scripts\anim\cover_behavior.gsc
+*******************************************/
 
 main(param_00) {
 	self.var_46A6 = self.origin;
@@ -13,9 +13,9 @@ main(param_00) {
 	func_E257();
 	func_E267();
 	self.var_F17F = gettime();
-	self.var_1491.var_A97A = var_01;
-	self.var_1491.var_9302 = 0;
-	self.var_1491.movement = "stop";
+	self.a.var_A97A = var_01;
+	self.a.var_9302 = 0;
+	self.a.movement = "stop";
 	self.var_B600 = var_01 + 3000;
 	thread func_13B72();
 	var_03 = gettime() > 2500;
@@ -51,12 +51,12 @@ main(param_00) {
 			}
 		}
 
-		if(scripts\common\utility::actor_is3d()) {
-			self ghost_target_position(self.var_473C.origin);
+		if(scripts\engine\utility::actor_is3d()) {
+			self ghost_target_position(self.covernode.origin);
 		}
 		else
 		{
-			self ghost_target_position(self.var_473C.origin,func_7E3D());
+			self ghost_target_position(self.covernode.origin,func_7E3D());
 		}
 
 		if(!var_03) {
@@ -87,7 +87,7 @@ main(param_00) {
 		}
 
 		if(var_05) {
-			if(self.var_1491.var_7E0C < gettime()) {
+			if(self.a.var_7E0C < gettime()) {
 				if(scripts\anim\combat_utility::func_B019()) {
 					return;
 				}
@@ -120,7 +120,7 @@ end_script(param_00) {
 	}
 
 	self.var_129B3 = undefined;
-	self.var_1491.var_D892 = undefined;
+	self.a.var_D892 = undefined;
 	if(isdefined(self.var_B600) && self.var_B600 <= gettime()) {
 		self.var_B5FF = gettime() + 5000;
 		self.var_B600 = undefined;
@@ -131,21 +131,21 @@ end_script(param_00) {
 }
 
 func_7E3D() {
-	if(scripts\common\utility::actor_is3d()) {
-		return self.var_473C.angles;
+	if(scripts\engine\utility::actor_is3d()) {
+		return self.covernode.angles;
 	}
 
-	var_00 = (self.var_473C.angles[0],scripts\asm\shared_utility::getnodeforwardyaw(self.covernode),self.var_473C.angles[2]);
+	var_00 = (self.covernode.angles[0],scripts\asm\shared_utility::getnodeforwardyaw(self.covernode),self.covernode.angles[2]);
 	return var_00;
 }
 
 func_E29E() {
-	if(self getobjectivescoretext() && self.var_1491.var_E29F < gettime()) {
+	if(self getobjectivescoretext() && self.a.var_E29F < gettime()) {
 		if(scripts\anim\combat_utility::func_B019()) {
 			return 1;
 		}
 
-		self.var_1491.var_E29F = gettime() + 30000;
+		self.a.var_E29F = gettime() + 30000;
 	}
 
 	return 0;
@@ -157,7 +157,7 @@ func_5927(param_00) {
 			func_E26B();
 		}
 
-		self.var_1491.var_A97A = gettime();
+		self.a.var_A97A = gettime();
 		return 1;
 	}
 
@@ -169,7 +169,7 @@ func_5927(param_00) {
 }
 
 func_2538(param_00) {
-	if(distancesquared(self.origin,self.var_10C.origin) > 562500) {
+	if(distancesquared(self.origin,self.isnodeoccupied.origin) > 562500) {
 		if(func_128AF(param_00,self.isnodeoccupied)) {
 			return;
 		}
@@ -177,7 +177,7 @@ func_2538(param_00) {
 
 	if(func_AB2D(param_00,"normal")) {
 		func_E26B();
-		self.var_1491.var_A97A = gettime();
+		self.a.var_A97A = gettime();
 		return;
 	}
 
@@ -202,7 +202,7 @@ func_2533(param_00,param_01) {
 		if(func_AB2D(param_00,var_02)) {
 			param_01.var_BF6F = gettime() + randomintrange(3000,20000);
 			if(func_9DDA()) {
-				self.var_1491.var_A97A = gettime();
+				self.a.var_A97A = gettime();
 			}
 
 			return;
@@ -234,7 +234,7 @@ func_252A(param_00,param_01) {
 		}
 	}
 
-	if(gettime() > self.var_1491.var_7E0C) {
+	if(gettime() > self.a.var_7E0C) {
 		if(func_3926()) {
 			return 1;
 		}
@@ -246,7 +246,7 @@ func_252A(param_00,param_01) {
 				func_E26B();
 			}
 
-			self.var_1491.var_A97A = gettime();
+			self.a.var_A97A = gettime();
 			param_01.var_BF6F = gettime() + randomintrange(6000,20000);
 			return 0;
 		}
@@ -261,7 +261,7 @@ func_9DDA() {
 		return 0;
 	}
 
-	if(distancesquared(self.var_10C.origin,self.var_46A6) < 256) {
+	if(distancesquared(self.isnodeoccupied.origin,self.var_46A6) < 256) {
 		return 0;
 	}
 
@@ -277,10 +277,10 @@ func_112C9(param_00) {
 	var_02 = 1;
 	while(scripts\anim\utility_common::issuppressedwrapper()) {
 		var_02 = 0;
-		self ghost_target_position(self.var_473C.origin);
+		self ghost_target_position(self.covernode.origin);
 		var_03 = 1;
 		if(isdefined(self.var_6BAB)) {
-			var_03 = scripts\common\utility::cointoss();
+			var_03 = scripts\engine\utility::cointoss();
 		}
 
 		if(var_03) {
@@ -290,7 +290,7 @@ func_112C9(param_00) {
 			}
 		}
 
-		if(self.var_1491.var_2411 && scripts\anim\utility_common::canseeenemy()) {
+		if(self.a.var_2411 && scripts\anim\utility_common::canseeenemy()) {
 			return 0;
 		}
 
@@ -429,11 +429,11 @@ func_AB2D(param_00,param_01) {
 }
 
 func_B01C(param_00) {
-	if(self.var_1491.var_2411 && scripts\anim\utility_common::canseeenemy()) {
+	if(self.a.var_2411 && scripts\anim\utility_common::canseeenemy()) {
 		return 0;
 	}
 
-	if(self.var_1491.var_A97A + 6000 > gettime()) {
+	if(self.a.var_A97A + 6000 > gettime()) {
 		return func_B018(param_00);
 	}
 
@@ -457,7 +457,7 @@ func_B018(param_00) {
 func_92CC(param_00,param_01) {
 	self.var_6F28 = 0;
 	if(isdefined(param_00.var_6F27)) {
-		if(!self.var_1491.var_9302 && gettime() - self.suppressionstart < 600) {
+		if(!self.a.var_9302 && gettime() - self.suppressionstart < 600) {
 			if([[param_00.var_6F27]]()) {
 				return 1;
 			}
@@ -468,9 +468,9 @@ func_92CC(param_00,param_01) {
 		}
 	}
 
-	if(!self.var_1491.var_9302) {
+	if(!self.a.var_9302) {
 		thread func_92FF(param_00.var_92CC);
-		self.var_1491.var_9302 = 1;
+		self.a.var_9302 = 1;
 	}
 
 	if(isdefined(param_01)) {
@@ -538,7 +538,7 @@ func_6335() {
 	}
 
 	self notify("end_idle");
-	self.var_1491.var_9302 = 0;
+	self.a.var_9302 = 0;
 }
 
 func_128AF(param_00,param_01) {
@@ -587,7 +587,7 @@ func_2FBF() {
 		}
 
 		if(!scripts\anim\utility_common::recentlysawenemy() && !scripts\anim\utility_common::cansuppressenemy()) {
-			if(gettime() > self.var_1491.var_7E0C) {
+			if(gettime() > self.a.var_7E0C) {
 				if(func_3926()) {
 					return;
 				}
@@ -597,33 +597,33 @@ func_2FBF() {
 }
 
 func_E267() {
-	self.var_1491.var_E29F = 0;
+	self.a.var_E29F = 0;
 }
 
 func_E257() {
 	var_00 = gettime();
-	if(isdefined(self.var_54C3) && var_00 > self.var_1491.var_7E0C) {
-		self.var_1491.var_7E0C = var_00 + randomintrange(2000,5000);
+	if(isdefined(self.var_54C3) && var_00 > self.a.var_7E0C) {
+		self.a.var_7E0C = var_00 + randomintrange(2000,5000);
 		return;
 	}
 
 	if(isdefined(self.isnodeoccupied)) {
-		var_01 = distance2d(self.origin,self.var_10C.origin);
+		var_01 = distance2d(self.origin,self.isnodeoccupied.origin);
 		if(var_01 < self.issentient) {
-			self.var_1491.var_7E0C = var_00 + randomintrange(5000,10000);
+			self.a.var_7E0C = var_00 + randomintrange(5000,10000);
 			return;
 		}
 
 		if(var_01 > self.issaverecentlyloaded && var_01 < self.objective_playermask_showto) {
-			self.var_1491.var_7E0C = var_00 + randomintrange(2000,5000);
+			self.a.var_7E0C = var_00 + randomintrange(2000,5000);
 			return;
 		}
 
-		self.var_1491.var_7E0C = var_00 + randomintrange(10000,15000);
+		self.a.var_7E0C = var_00 + randomintrange(10000,15000);
 		return;
 	}
 
-	self.var_1491.var_7E0C = var_00 + randomintrange(5000,15000);
+	self.a.var_7E0C = var_00 + randomintrange(5000,15000);
 }
 
 func_E26B() {
@@ -649,7 +649,7 @@ func_18D4() {
 	}
 
 	var_00 = 0;
-	if(!isdefined(self.isnodeoccupied) || !self.isnodeoccupied scripts\common\utility::isflashed()) {
+	if(!isdefined(self.isnodeoccupied) || !self.isnodeoccupied scripts\engine\utility::isflashed()) {
 		var_00 = scripts\anim\combat_utility::func_B019();
 	}
 
@@ -675,14 +675,14 @@ func_128B1(param_00) {
 func_F5AE() {
 	var_00 = scripts\anim\utility::func_B028("exposed_turn");
 	foreach(var_03, var_02 in var_00) {
-		self.var_1491.var_2274[var_03] = var_02;
+		self.a.var_2274[var_03] = var_02;
 	}
 }
 
 func_F318() {
 	var_00 = scripts\anim\utility::func_B028("exposed_turn_crouch");
 	foreach(var_03, var_02 in var_00) {
-		self.var_1491.var_2274[var_03] = var_02;
+		self.a.var_2274[var_03] = var_02;
 	}
 }
 
@@ -702,7 +702,7 @@ func_BD1C() {
 		return 0;
 	}
 
-	if(scripts\common\utility::isnodecover3d(self.target_getindexoftarget)) {
+	if(scripts\engine\utility::isnodecover3d(self.target_getindexoftarget)) {
 		return 0;
 	}
 
@@ -714,7 +714,7 @@ func_BD1C() {
 		return 0;
 	}
 
-	if(distancesquared(self.origin,self.var_205.origin) > 256) {
+	if(distancesquared(self.origin,self.target_getindexoftarget.origin) > 256) {
 		return 0;
 	}
 

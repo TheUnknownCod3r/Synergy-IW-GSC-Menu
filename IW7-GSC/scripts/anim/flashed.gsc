@@ -1,8 +1,8 @@
-/********************************************
+/************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\anim\flashed.gsc
-********************************************/
+ * Script: scripts\anim\flashed.gsc
+************************************/
 
 func_9514() {}
 
@@ -15,7 +15,7 @@ func_7FE4() {
 	level.var_6EC0[var_00]++;
 	if(level.var_6EC0[var_00] >= level.archetypes[var_00]["flashed"]["flashed"].size) {
 		level.var_6EC0[var_00] = 0;
-		level.archetypes[var_00]["flashed"]["flashed"] = scripts\common\utility::array_randomize(level.archetypes[var_00]["flashed"]["flashed"]);
+		level.archetypes[var_00]["flashed"]["flashed"] = scripts\engine\utility::array_randomize(level.archetypes[var_00]["flashed"]["flashed"]);
 	}
 
 	return level.archetypes[var_00]["flashed"]["flashed"][level.var_6EC0[var_00]];
@@ -49,11 +49,11 @@ main() {
 func_6EC2(param_00,param_01) {
 	self endon("death");
 	self endon("killanimscript");
-	if(self.var_1491.pose == "prone") {
+	if(self.a.pose == "prone") {
 		scripts\anim\utility::exitpronewrapper(1);
 	}
 
-	self.var_1491.pose = "stand";
+	self.a.pose = "stand";
 	self.opcode::OP_ClearLocalVariableFieldCached0 = 1;
 	thread func_6EC1(param_00);
 	wait(param_01);

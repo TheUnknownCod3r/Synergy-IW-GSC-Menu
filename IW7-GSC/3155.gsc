@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3155.gsc
-****************************/
+ * Script: 3155.gsc
+************************/
 
 func_B063(param_00,param_01,param_02,param_03) {
 	lib_0A1E::func_235F(param_00,param_01,param_02,self.moveplaybackrate);
@@ -31,8 +31,8 @@ func_11701(param_00,param_01) {
 		var_03 = var_02.var_116FB;
 	}
 
-	scripts/asm/asm::func_2388(param_00,param_01,var_02,var_02.var_116FB);
-	scripts/asm/asm::func_238A(param_00,var_03,0.2,undefined,undefined,undefined);
+	scripts\asm\asm::func_2388(param_00,param_01,var_02,var_02.var_116FB);
+	scripts\asm\asm::func_238A(param_00,var_03,0.2,undefined,undefined,undefined);
 	self notify("killanimscript");
 }
 
@@ -134,7 +134,7 @@ func_CF23(param_00,param_01,param_02,param_03) {
 	var_05 = scripts\engine\utility::drop_to_ground(var_05,50);
 	var_06 = 0;
 	func_A4E8(param_00,param_01,param_02,var_04,self.angles,var_05,var_06,1);
-	scripts/asm/asm::asm_fireevent(param_01,"end");
+	scripts\asm\asm::asm_fireevent(param_01,"end");
 }
 
 func_CF25(param_00,param_01,param_02,param_03) {
@@ -147,7 +147,7 @@ func_CF25(param_00,param_01,param_02,param_03) {
 }
 
 func_3EA3(param_00,param_01,param_02) {
-	return scripts/asm/asm::asm_lookupanimfromalias("traverse_external",param_02);
+	return scripts\asm\asm::asm_lookupanimfromalias("traverse_external",param_02);
 }
 
 func_D561(param_00,param_01,param_02,param_03) {
@@ -221,7 +221,7 @@ func_A4E8(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_0
 			var_1B = 1;
 		}
 
-		var_1D = scripts/sp/math::func_7BC5(var_0A,var_0B,var_0F,var_1A);
+		var_1D = scripts\sp\math::func_7BC5(var_0A,var_0B,var_0F,var_1A);
 		var_1A = var_1A + var_18;
 		self _meth_80F1(var_1D,self.angles,10000);
 		if(var_1A > 0.7 && !var_1C) {

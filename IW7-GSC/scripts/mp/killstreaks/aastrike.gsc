@@ -1,8 +1,8 @@
-/*******************************************************
+/***********************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\killstreaks\aastrike.gsc
-*******************************************************/
+ * Script: scripts\mp\killstreaks\aastrike.gsc
+***********************************************/
 
 init() {
 	precacheitem("aamissile_projectile_mp");
@@ -14,9 +14,9 @@ init() {
 }
 
 tryuseaastrike(param_00,param_01) {
-	scripts\mp\_matchdata::logkillstreakevent("aastrike",self.origin);
+	scripts\mp\matchdata::logkillstreakevent("aastrike",self.origin);
 	thread finishaastrike(param_00);
-	thread scripts\mp\_utility::teamplayercardsplash("used_aastrike",self,self.team);
+	thread scripts\mp\utility::teamplayercardsplash("used_aastrike",self,self.team);
 	return 1;
 }
 
@@ -55,7 +55,7 @@ findtargets() {
 		}
 	}
 
-	var_09 = scripts\mp\_utility::getotherteam(self.team);
+	var_09 = scripts\mp\utility::getotherteam(self.team);
 	if(isdefined(level.activeuavs[var_09])) {
 		foreach(var_0B in level.uavmodels[var_09]) {
 			var_02[var_02.size] = var_0B;
@@ -90,7 +90,7 @@ findtargets() {
 earlyabortwatcher() {
 	self endon("stopFindingTargets");
 	var_00 = self.team;
-	if(scripts\mp\_utility::bot_is_fireteam_mode()) {
+	if(scripts\mp\utility::bot_is_fireteam_mode()) {
 		self waittill("killstreak_disowned");
 	}
 	else
@@ -99,7 +99,7 @@ earlyabortwatcher() {
 	}
 
 	self notify("owner_gone");
-	level.teamairdenied[scripts\mp\_utility::getotherteam(var_00)] = 0;
+	level.teamairdenied[scripts\mp\utility::getotherteam(var_00)] = 0;
 	level.airdeniedplayer = undefined;
 }
 
@@ -107,7 +107,7 @@ finishaastrike(param_00) {
 	self endon("disconnect");
 	self endon("owner_gone");
 	self endon("game_ended");
-	level.teamairdenied[scripts\mp\_utility::getotherteam(self.team)] = 1;
+	level.teamairdenied[scripts\mp\utility::getotherteam(self.team)] = 1;
 	level.airdeniedplayer = self;
 	thread earlyabortwatcher();
 	thread cycletargets();
@@ -123,7 +123,7 @@ finishaastrike(param_00) {
 
 	wait(3);
 	self notify("stopFindingTargets");
-	level.teamairdenied[scripts\mp\_utility::getotherteam(self.team)] = 0;
+	level.teamairdenied[scripts\mp\utility::getotherteam(self.team)] = 0;
 	level.airdeniedplayer = undefined;
 }
 
@@ -142,10 +142,10 @@ fireattarget(param_00,param_01,param_02) {
 	var_09 = anglestoforward(var_08);
 	var_0A = param_00.origin + var_04 + var_09 * var_05 * -1;
 	var_0B = param_00.origin + var_04 + var_09 * var_06;
-	var_0C = scripts\mp\_utility::_magicbullet("aamissile_projectile_mp",var_0A + (0,0,-75),param_00.origin,self);
+	var_0C = scripts\mp\utility::_magicbullet("aamissile_projectile_mp",var_0A + (0,0,-75),param_00.origin,self);
 	var_0C missile_settargetent(param_00);
 	var_0C missile_setflightmodedirect();
-	var_0D = scripts\mp\_utility::_magicbullet("aamissile_projectile_mp",var_0A + (randomint(500),randomint(500),-75),param_00.origin,self);
+	var_0D = scripts\mp\utility::_magicbullet("aamissile_projectile_mp",var_0A + (randomint(500),randomint(500),-75),param_00.origin,self);
 	var_0D missile_settargetent(param_00);
 	var_0D missile_setflightmodedirect();
 	if(param_02) {

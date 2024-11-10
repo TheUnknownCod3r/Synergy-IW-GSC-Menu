@@ -1,8 +1,8 @@
-/********************************************************
+/************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\anim\traverse\jump_up_80.gsc
-********************************************************/
+ * Script: scripts\anim\traverse\jump_up_80.gsc
+************************************************/
 
 main() {
 	self endon("killanimscript");

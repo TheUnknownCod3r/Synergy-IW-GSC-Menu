@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2736.gsc
+ * Script: 2736.gsc
 ***************************************/
 
 main(var_00) {

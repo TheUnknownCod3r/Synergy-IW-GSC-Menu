@@ -1,8 +1,8 @@
-/********************************************************
+/************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\anim\traverse\step_up_12.gsc
-********************************************************/
+ * Script: scripts\anim\traverse\step_up_12.gsc
+************************************************/
 
 main() {
 	self endon("killanimscript");
@@ -11,7 +11,7 @@ main() {
 	var_01 = var_00.var_126D4 - var_00.origin[2];
 	var_02 = var_01;
 	var_03 = 7;
-	var_04 = (0,0,var_02 \ var_03);
+	var_04 = (0,0,var_02 / var_03);
 	var_05 = getdvarint("ai_iw7",0) != 0;
 	if(var_05) {
 		self animmode("noclip");

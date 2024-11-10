@@ -1,8 +1,8 @@
-/*******************************************************************
+/***********************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\zombies\zombie_scriptable_states.gsc
-*******************************************************************/
+ * Script: scripts\cp\zombies\zombie_scriptable_states.gsc
+***********************************************************/
 
 applyzombiescriptablestate(param_00,param_01) {
 	param_00 notify("applyZombieScriptableState");
@@ -191,20 +191,20 @@ adjustmovespeed(param_00,param_01) {
 			break;
 
 		case "walk":
-			param_00 scripts/asm/asm_bb::bb_requestmovetype("slow_walk");
+			param_00 scripts\asm\asm_bb::bb_requestmovetype("slow_walk");
 			break;
 
 		case "run":
-			param_00 scripts/asm/asm_bb::bb_requestmovetype("walk");
+			param_00 scripts\asm\asm_bb::bb_requestmovetype("walk");
 			break;
 
 		case "sprint":
-			param_00 scripts/asm/asm_bb::bb_requestmovetype("run");
+			param_00 scripts\asm\asm_bb::bb_requestmovetype("run");
 			break;
 	}
 
 	param_00 waittill("defrosted");
-	param_00 scripts/asm/asm_bb::bb_requestmovetype(var_02);
+	param_00 scripts\asm\asm_bb::bb_requestmovetype(var_02);
 }
 
 removefrozentickontimeout(param_00) {

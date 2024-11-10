@@ -1,8 +1,8 @@
-/********************************************
+/************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\common\flags.gsc
-********************************************/
+ * Script: scripts\common\flags.gsc
+************************************/
 
 init_flags() {
 	if(!scripts\engine\utility::add_init_script("init_flags",::init_flags)) {
@@ -19,5 +19,5 @@ init_flags() {
 
 assign_unique_id() {
 	self.unique_id = "generic" + level.generic_index;
-	level.var_7763++;
+	level.generic_index++;
 }

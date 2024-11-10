@@ -1,8 +1,8 @@
-/*********************************************************
+/*************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\maps\cp_zmb\cp_zmb_ufo.gsc
-*********************************************************/
+ * Script: scripts\cp\maps\cp_zmb\cp_zmb_ufo.gsc
+*************************************************/
 
 init_ufo_quest() {
 	level endon("game_ended");
@@ -32,15 +32,15 @@ init_ufo_anim() {
 }
 
 init_ufo_vfx() {
-	level._effect["ufo_explosion"] = loadfx("vfx/iw7/_requests/coop/vfx_ufo_explosion.vfx");
-	level._effect["ufo_small_explosion"] = loadfx("vfx/iw7/core/zombie/ufo/ufo_explosion/vfx_ufo_expl_sm_body.vfx");
-	level._effect["ufo_zombie_spawn_beam"] = loadfx("vfx/iw7/core/zombie/ufo/ufo_beam/vfx_ufo_beam_spawning.vfx");
-	level._effect["ufo_lazer_beam"] = loadfx("vfx/iw7/core/zombie/vfx_zmb_ufobeam.vfx");
-	level._effect["powernode_arc_small"] = loadfx("vfx/iw7/core/zombie/ufo/vfx_sentry_shock_arc_s.vfx");
-	level._effect["powernode_arc_medium"] = loadfx("vfx/iw7/core/zombie/ufo/vfx_sentry_shock_arc_m.vfx");
-	level._effect["powernode_arc_big"] = loadfx("vfx/iw7/core/zombie/ufo/vfx_sentry_shock_arc_b.vfx");
-	level._effect["ufo_elec_beam_impact"] = loadfx("vfx/iw7/core/zombie/ufo/vfx_ufo_elec_beam_impact.vfx");
-	level._effect["soul_key_glow"] = loadfx("vfx/iw7/core/zombie/vfx_zmb_soulkey_flames.vfx");
+	level._effect["ufo_explosion"] = loadfx("vfx\iw7\_requests\coop\vfx_ufo_explosion.vfx");
+	level._effect["ufo_small_explosion"] = loadfx("vfx\iw7\core\zombie\ufo\ufo_explosion\vfx_ufo_expl_sm_body.vfx");
+	level._effect["ufo_zombie_spawn_beam"] = loadfx("vfx\iw7\core\zombie\ufo\ufo_beam\vfx_ufo_beam_spawning.vfx");
+	level._effect["ufo_lazer_beam"] = loadfx("vfx\iw7\core\zombie\vfx_zmb_ufobeam.vfx");
+	level._effect["powernode_arc_small"] = loadfx("vfx\iw7\core\zombie\ufo\vfx_sentry_shock_arc_s.vfx");
+	level._effect["powernode_arc_medium"] = loadfx("vfx\iw7\core\zombie\ufo\vfx_sentry_shock_arc_m.vfx");
+	level._effect["powernode_arc_big"] = loadfx("vfx\iw7\core\zombie\ufo\vfx_sentry_shock_arc_b.vfx");
+	level._effect["ufo_elec_beam_impact"] = loadfx("vfx\iw7\core\zombie\ufo\vfx_ufo_elec_beam_impact.vfx");
+	level._effect["soul_key_glow"] = loadfx("vfx\iw7\core\zombie\vfx_zmb_soulkey_flames.vfx");
 }
 
 power_on_monitor() {
@@ -87,7 +87,7 @@ ufo_suicide_bomber_sequence() {
 	var_00 waittill("movedone");
 	foreach(var_02 in level.fast_travel_spots) {
 		var_02.disabled = undefined;
-		scripts/cp/zombies/zombie_fast_travel::turn_on_exit_portal_fx(0);
+		scripts\cp\zombies\zombie_fast_travel::turn_on_exit_portal_fx(0);
 	}
 
 	level.beam_trap_vfx = play_fx_with_delay(1,"ufo_lazer_beam",var_00.origin);
@@ -179,7 +179,7 @@ deactivateadjacentvolumes() {
 
 		var_03 scripts\cp\zombies\zombies_spawning::make_volume_inactive();
 		foreach(var_05 in var_01) {
-			if(function_010F(var_05.origin,var_03)) {
+			if(ispointinvolume(var_05.origin,var_03)) {
 				var_05 notify("detonateExplosive");
 			}
 		}
@@ -265,7 +265,7 @@ disableportals() {
 	foreach(var_01 in level.fast_travel_spots) {
 		var_01.disabled = 1;
 		var_01 turn_off_exit_portal_fx();
-		var_01 scripts/cp/zombies/zombie_fast_travel::portal_close_fx();
+		var_01 scripts\cp\zombies\zombie_fast_travel::portal_close_fx();
 	}
 }
 
@@ -668,7 +668,7 @@ delayed_move_mode(param_00) {
 
 death_track(param_00) {
 	self waittill("death");
-	level.var_C208++;
+	level.num_ufo_zombies_killed++;
 }
 
 make_grey_spawn_struct(param_00) {
@@ -710,11 +710,11 @@ start_grey_sequence() {
 				var_05 get_info_for_all_players(var_05);
 				var_05.favorite_target_player = level.players[var_03];
 				var_05.dont_scriptkill = 1;
-				scripts/asm/zombie_grey/zombie_grey_asm::set_up_grey(var_05);
+				scripts\asm\zombie_grey\zombie_grey_asm::set_up_grey(var_05);
 				break;
 			}
 
-			scripts/asm/zombie_grey/zombie_grey_asm::try_kill_off_zombies(1);
+			scripts\asm\zombie_grey\zombie_grey_asm::try_kill_off_zombies(1);
 			scripts\engine\utility::waitframe();
 		}
 
@@ -734,8 +734,8 @@ intro_anim_timer(param_00) {
 	param_00 endon("death");
 	var_02 = param_00 scripts\cp\utility::waittill_any_ents_or_timeout_return(var_01,param_00,"damage");
 	param_00.should_stop_intro_anim = 1;
-	scripts/aitypes/zombie_grey/behaviors::set_next_teleport_attack_time(param_00);
-	scripts/aitypes/zombie_grey/behaviors::set_can_do_teleport_attack(param_00,1);
+	scripts\aitypes\zombie_grey\behaviors::set_next_teleport_attack_time(param_00);
+	scripts\aitypes\zombie_grey\behaviors::set_can_do_teleport_attack(param_00,1);
 }
 
 play_start_grey_sequence_vo() {
@@ -912,7 +912,7 @@ fuse_pick_up_monitor(param_00,param_01) {
 		}
 	}
 
-	level.var_C1E5++;
+	level.num_fuse_in_possession++;
 	scripts\cp\cp_interaction::add_to_current_interaction_list(scripts\engine\utility::getstruct("pap_upgrade","script_noteworthy"));
 	scripts\cp\cp_interaction::remove_from_current_interaction_list(scripts\engine\utility::getstruct("weapon_upgrade","script_noteworthy"));
 	level thread scripts\cp\cp_vo::remove_from_nag_vo("nag_ufo_fusefail");
@@ -947,7 +947,7 @@ soul_key_pick_up_monitor(param_00,param_01) {
 				check_willard_pick_up_soul_key(var_03);
 				var_03 setplayerdata("cp","haveSoulKeys","any_soul_key",1);
 				var_03 setplayerdata("cp","haveSoulKeys","soul_key_1",1);
-				var_03 scripts/cp/zombies/achievement::update_achievement("SOUL_KEY",1);
+				var_03 scripts\cp\zombies\achievement::update_achievement("SOUL_KEY",1);
 			}
 
 			if(any_player_is_willard()) {
@@ -1044,7 +1044,7 @@ pap_upgrade_hintstring(param_00,param_01) {
 }
 
 upgrade_pap(param_00,param_01) {
-	level.var_C1E5--;
+	level.num_fuse_in_possession--;
 	scripts\cp\cp_interaction::remove_from_current_interaction_list(param_00);
 	insert_alien_fuses();
 	scripts\engine\utility::flag_set("fuses_inserted");
@@ -1200,7 +1200,7 @@ max_ufo_zombie_spawn_number_logic() {
 	for(var_01 = 0;var_01 < var_00;var_01++) {
 		var_02 = get_update_max_spawn_frequency();
 		wait(var_02);
-		level.var_B46B++;
+		level.max_ufo_zombie_spawn_number++;
 	}
 }
 
@@ -1475,7 +1475,7 @@ transform_wave_zombies_to_suicide_bombers() {
 	scripts\cp\zombies\zombie_analytics::log_suicide_bomber_sequence_activated(level.wave_num);
 	foreach(var_01 in level.spawned_enemies) {
 		if(isdefined(var_01.agent_type) && var_01.agent_type == "generic_zombie") {
-			var_01 scripts/asm/zombie/zombie::turnintosuicidebomber(1);
+			var_01 scripts\asm\zombie\zombie::turnintosuicidebomber(1);
 			var_01 setavoidanceradius(4);
 			wait(randomfloatrange(0.3,0.7));
 		}
@@ -1583,7 +1583,7 @@ play_arc_vfx_between_points(param_00,param_01,param_02,param_03) {
 	triggerfx(var_04);
 	triggerfx(var_05);
 	for(;;) {
-		function_02E0(scripts\engine\utility::getfx(param_00),param_01,vectortoangles(param_01 - param_02),param_02);
+		playfxbetweenpoints(scripts\engine\utility::getfx(param_00),param_01,vectortoangles(param_01 - param_02),param_02);
 		var_07 = scripts\engine\utility::waittill_any_timeout_1(1,param_03);
 		if(var_07 == param_03) {
 			break;

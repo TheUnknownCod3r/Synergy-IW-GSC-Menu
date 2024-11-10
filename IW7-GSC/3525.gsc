@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\3525.gsc
+ * Script: 3525.gsc
 ***************************************/
 
 func_98D7() {

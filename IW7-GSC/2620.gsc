@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2620.gsc
+ * Script: 2620.gsc
 ***************************************/
 
 initfx() {

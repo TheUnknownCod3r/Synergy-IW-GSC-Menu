@@ -1,11 +1,11 @@
-/*****************************************************
+/*********************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\powers\blink_knife.gsc
-*****************************************************/
+ * Script: scripts\mp\powers\blink_knife.gsc
+*********************************************/
 
 blinkknifeinit() {
-	scripts\mp\_utility::initarbitraryuptriggers();
+	scripts\mp\utility::initarbitraryuptriggers();
 }
 
 blinkknifedetonate(param_00,param_01,param_02) {
@@ -23,15 +23,15 @@ blinkknifedetonate(param_00,param_01,param_02) {
 		return 0;
 	}
 
-	var_07 = param_02 scripts\mp\_utility::isinarbitraryup();
-	var_08 = param_01 scripts\mp\_utility::isinarbitraryup();
+	var_07 = param_02 scripts\mp\utility::isinarbitraryup();
+	var_08 = param_01 scripts\mp\utility::isinarbitraryup();
 	if(var_07 && var_08) {
 		blinkknife_detonatefailed(param_02);
 		return 0;
 	}
 
 	if(var_08) {
-		var_09 = param_01 scripts\mp\_utility::getarbitraryuptriggerblinkloc();
+		var_09 = param_01 scripts\mp\utility::getarbitraryuptriggerblinkloc();
 		if(!isdefined(var_09)) {
 			blinkknife_detonatefailed(param_02);
 			return 0;
@@ -137,7 +137,7 @@ blinkknife_detonatesuccess(param_00,param_01,param_02,param_03) {
 		param_00 endon("death");
 		param_00 endon("disconnect");
 		waittillframeend;
-		if(scripts\mp\_weapons::throwingknifeused_trygiveknife(param_00,"power_blinkKnife")) {
+		if(scripts\mp\weapons::throwingknifeused_trygiveknife(param_00,"power_blinkKnife")) {
 			param_03 delete();
 		}
 	}
@@ -152,11 +152,11 @@ blinkknife_detonatefailed(param_00) {
 		return;
 	}
 
-	if(!scripts\mp\_utility::isreallyalive(param_00)) {
+	if(!scripts\mp\utility::isreallyalive(param_00)) {
 		return;
 	}
 
-	param_00 scripts\mp\_hud_message::showerrormessage("MP_BLINK_KNIFE_FAILED");
+	param_00 scripts\mp\hud_message::showerrormessage("MP_BLINK_KNIFE_FAILED");
 }
 
 blinkknife_watchteleport(param_00) {
@@ -175,11 +175,11 @@ blinkknife_validatestuckto(param_00) {
 		return 0;
 	}
 
-	if(scripts\mp\_utility::isreallyalive(param_00)) {
+	if(scripts\mp\utility::isreallyalive(param_00)) {
 		return 0;
 	}
 
-	if(scripts/mp/equipment/phase_shift::isentityphaseshifted(param_00)) {
+	if(scripts\mp\equipment\phase_shift::isentityphaseshifted(param_00)) {
 		return 0;
 	}
 
@@ -191,7 +191,7 @@ blinkknife_validatestuckto(param_00) {
 		return 0;
 	}
 
-	if(scripts\mp\_utility::istrue(param_00.blinkknife_teleporting)) {
+	if(scripts\mp\utility::istrue(param_00.blinkknife_teleporting)) {
 		return 0;
 	}
 
@@ -203,7 +203,7 @@ blinkknife_validateplayer(param_00) {
 		return 0;
 	}
 
-	if(!scripts\mp\_utility::isreallyalive(param_00)) {
+	if(!scripts\mp\utility::isreallyalive(param_00)) {
 		return 0;
 	}
 
@@ -211,11 +211,11 @@ blinkknife_validateplayer(param_00) {
 		return 0;
 	}
 
-	if(param_00 scripts/mp/supers/super_reaper::isusingreaper()) {
+	if(param_00 scripts\mp\supers\super_reaper::isusingreaper()) {
 		return 0;
 	}
 
-	if(scripts/mp/equipment/phase_shift::isentityphaseshifted(param_00)) {
+	if(scripts\mp\equipment\phase_shift::isentityphaseshifted(param_00)) {
 		return 0;
 	}
 
@@ -227,7 +227,7 @@ blinkknife_validateplayer(param_00) {
 		return 0;
 	}
 
-	if(scripts\mp\_utility::istrue(param_00.blinkknife_teleporting)) {
+	if(scripts\mp\utility::istrue(param_00.blinkknife_teleporting)) {
 		return 0;
 	}
 
@@ -236,7 +236,7 @@ blinkknife_validateplayer(param_00) {
 
 blinkknife_validatedestination(param_00,param_01) {
 	var_02 = physics_createcontents(["physicscontents_solid","physicscontents_glass","physicscontents_water","physicscontents_sky","physicscontents_vehicle","physicscontents_sky","physicscontents_playerclip"]);
-	var_03 = function_0299(param_01.origin,param_00,0,param_01.angles,0,var_02,[param_00],"physicsquery_closest",param_01.var_10B53);
+	var_03 = physics_getclosestpointtocharacter(param_01.origin,param_00,0,param_01.angles,0,var_02,[param_00],"physicsquery_closest",param_01.var_10B53);
 	if(isdefined(var_03) && var_03.size > 0) {
 		return 0;
 	}
@@ -245,15 +245,15 @@ blinkknife_validatedestination(param_00,param_01) {
 }
 
 blinkknife_dropball(param_00) {
-	if(param_00 scripts\mp\_utility::_hasperk("specialty_ballcarrier")) {
+	if(param_00 scripts\mp\utility::_hasperk("specialty_ballcarrier")) {
 		param_00 scripts\mp\gametypes\obj_ball::ball_drop_on_ability();
 	}
 }
 
 blinkknife_dropflag(param_00) {
 	if(isdefined(param_00.carryflag)) {
-		var_01 = level.teamflags[scripts\mp\_utility::getotherteam(param_00.team)];
-		var_01 thread scripts\mp\_gameobjects::setdropped();
+		var_01 = level.teamflags[scripts\mp\utility::getotherteam(param_00.team)];
+		var_01 thread scripts\mp\gameobjects::setdropped();
 	}
 }
 

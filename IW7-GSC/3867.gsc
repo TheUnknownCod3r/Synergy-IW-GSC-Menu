@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3867.gsc
-****************************/
+ * Script: 3867.gsc
+************************/
 
 main() {
 	func_9732();
@@ -17,7 +17,7 @@ main() {
 	lib_0F27::func_8682();
 	self.var_10E6D.beginusegas = "patrol";
 	self.var_527B = "patrol";
-	scripts/asm/asm_bb::func_2980("patrol","unaware");
+	scripts\asm\asm_bb::func_2980("patrol","unaware");
 	lib_0F27::func_F557(::func_D7DD);
 	lib_0F1C::func_6854();
 	thread func_B960(128,600);
@@ -286,7 +286,7 @@ func_7346() {
 	for(;;) {
 		self.getislosdatafileloaded = 0;
 		scripts\sp\_utility::func_65E3("stealth_enabled");
-		if(self.var_29 <= 2 && scripts/asm/asm::asm_isinstate("patrol_move")) {
+		if(self.var_29 <= 2 && scripts\asm\asm::asm_isinstate("patrol_move")) {
 			self.getislosdatafileloaded = 1;
 		}
 
@@ -352,7 +352,7 @@ func_F299(param_00) {
 	self.var_28 = lib_0F27::func_1B40(param_00);
 	var_01 = self.var_29 > 2;
 	lib_0F1C::func_6837(!var_01);
-	self.__func_182 = !var_01;
+	self._func_182 = !var_01;
 }
 
 func_F345() {
@@ -714,13 +714,13 @@ _meth_840C(param_00,param_01) {
 		}
 
 		var_02 = param_01.script_animation;
-		scripts/sp/anim::func_1EC8(self,"gravity",var_02);
+		scripts\sp\anim::func_1EC8(self,"gravity",var_02);
 	}
 	else if(isdefined(param_01.var_EDDE)) {
 		self [[level.var_92DE[param_01.var_EDDE]]](param_01);
 	}
 
 	if(isdefined(param_01.script_animation_exit)) {
-		scripts/sp/anim::func_1EC8(self,"gravity",param_01.script_animation_exit);
+		scripts\sp\anim::func_1EC8(self,"gravity",param_01.script_animation_exit);
 	}
 }

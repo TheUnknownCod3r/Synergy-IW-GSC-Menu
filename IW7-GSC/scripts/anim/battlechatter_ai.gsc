@@ -1,8 +1,8 @@
-/*****************************************************
+/*********************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\anim\battlechatter_ai.gsc
-*****************************************************/
+ * Script: scripts\anim\battlechatter_ai.gsc
+*********************************************/
 
 func_185D(param_00) {
 	self endon("death");
@@ -20,7 +20,7 @@ func_185D(param_00) {
 
 	self.var_6552 = "infantry";
 	self.var_376A = [];
-	if(isplayer(self) || scripts\common\utility::player_is_in_jackal() && self == level.var_D127) {
+	if(isplayer(self) || scripts\engine\utility::player_is_in_jackal() && self == level.var_D127) {
 		self.var_28CF = 0;
 		self.var_6EE9 = 0;
 		self.type = "human";
@@ -160,7 +160,7 @@ func_1B06() {
 
 	var_00 = 0.5;
 	wait(var_00);
-	if(!scripts\common\utility::player_is_in_jackal()) {
+	if(!scripts\engine\utility::player_is_in_jackal()) {
 		thread func_1A10();
 	}
 
@@ -210,7 +210,7 @@ func_F7BB() {
 
 func_C19E(param_00) {
 	level.var_13075[self.voice][param_00].var_C1++;
-	scripts\common\utility::waittill_either("death","removed from battleChatter");
+	scripts\engine\utility::waittill_either("death","removed from battleChatter");
 	if(!scripts\anim\battlechatter::func_29CA()) {
 		return;
 	}
@@ -314,7 +314,7 @@ func_94E5() {
 	scripts\anim\battlechatter::func_17A2("ai_contact_clock");
 	scripts\anim\battlechatter::func_17A2("ai_target_clock");
 	if(self.team == "allies") {
-		if(scripts\common\utility::array_contains(level.var_D3DD,self.voice)) {
+		if(scripts\engine\utility::array_contains(level.var_D3DD,self.voice)) {
 			scripts\anim\battlechatter::func_17A2("player_contact_clock");
 			scripts\anim\battlechatter::func_17A2("player_target_clock");
 			scripts\anim\battlechatter::func_17A2("player_cardinal");
@@ -401,7 +401,7 @@ func_1821(param_00,param_01,param_02,param_03,param_04,param_05) {
 	self endon("removed from battleChatter");
 	self endon("responseEvent_failsafe");
 	thread func_E2A1(param_02);
-	var_06 = param_02 scripts\common\utility::waittill_any_return("death","done speaking","cancel speaking");
+	var_06 = param_02 scripts\engine\utility::waittill_any_return("death","done speaking","cancel speaking");
 	if(var_06 == "cancel speaking") {
 		return;
 	}
@@ -515,7 +515,7 @@ isthrowinggrenade(param_00,param_01) {
 	}
 
 	var_03 = param_01 * 20;
-	var_04 = var_02 \ var_03;
+	var_04 = var_02 / var_03;
 	var_05 = [];
 	for(var_06 = 0;var_06 < var_02;var_06++) {
 		var_07 = param_00[var_06];
@@ -581,7 +581,7 @@ func_117E8(param_00) {
 	}
 
 	if(!level.player scripts\anim\battlechatter::func_6632(param_00)) {
-		if(scripts\common\utility::player_is_in_jackal() && isdefined(level.player.var_58B7) && level.player.var_58B7 == param_00) {
+		if(scripts\engine\utility::player_is_in_jackal() && isdefined(level.player.var_58B7) && level.player.var_58B7 == param_00) {
 			return 1;
 		}
 		else
@@ -609,11 +609,11 @@ func_10AFB() {
 				}
 				else
 				{
-					var_01 = isthrowinggrenade(function_0072("axis","team3"),0.5);
+					var_01 = isthrowinggrenade(getaiarray("axis","team3"),0.5);
 				}
 			}
 			else if(self.team == "team3") {
-				var_01 = isthrowinggrenade(function_0072("allies","axis"),0.5);
+				var_01 = isthrowinggrenade(getaiarray("allies","axis"),0.5);
 			}
 			else
 			{
@@ -624,7 +624,7 @@ func_10AFB() {
 				}
 				else
 				{
-					var_01 = function_0072("allies","team3");
+					var_01 = getaiarray("allies","team3");
 					var_01[var_01.size] = level.player;
 				}
 			}
@@ -654,7 +654,7 @@ func_10AFB() {
 				}
 
 				foreach(var_0C, var_06 in var_01) {
-					if(scripts\common\utility::player_is_in_jackal()) {
+					if(scripts\engine\utility::player_is_in_jackal()) {
 						if(var_06 == level.player) {
 							var_06 = level.var_D127;
 						}
@@ -680,7 +680,7 @@ func_10AFB() {
 					}
 
 					if(!var_04 func_29A2(var_06)) {
-						if((scripts\common\utility::player_is_in_jackal() && var_06 == level.var_D127) || !scripts\common\utility::player_is_in_jackal() && isplayer(var_06)) {
+						if((scripts\engine\utility::player_is_in_jackal() && var_06 == level.var_D127) || !scripts\engine\utility::player_is_in_jackal() && isplayer(var_06)) {
 							continue;
 						}
 
@@ -688,7 +688,7 @@ func_10AFB() {
 							continue;
 						}
 
-						if(!level.player func_29A2(var_06) && !scripts\common\utility::player_is_in_jackal()) {
+						if(!level.player func_29A2(var_06) && !scripts\engine\utility::player_is_in_jackal()) {
 							continue;
 						}
 					}
@@ -736,12 +736,12 @@ func_1A1B() {
 
 func_29A2(param_00) {
 	if(isdefined(level.var_D127)) {
-		if(!scripts\common\utility::player_is_in_jackal() && self == level.var_D127) {
+		if(!scripts\engine\utility::player_is_in_jackal() && self == level.var_D127) {
 			return 0;
 		}
 	}
 
-	if(func_1A1B() || scripts\common\utility::player_is_in_jackal() && self == level.var_D127) {
+	if(func_1A1B() || scripts\engine\utility::player_is_in_jackal() && self == level.var_D127) {
 		if(param_00 func_1A1B()) {
 			var_01 = vectornormalize(param_00.origin - self.origin);
 			var_02 = anglestoforward(self.angles);
@@ -873,7 +873,7 @@ func_1A0C() {
 		return;
 	}
 
-	scripts\common\utility::array_thread(self.var_10AC8.var_B661,::func_1A0B,self);
+	scripts\engine\utility::array_thread(self.var_10AC8.var_B661,::func_1A0B,self);
 	if(!isdefined(var_00.var_28CF)) {
 		return;
 	}
@@ -946,7 +946,7 @@ func_1A0A() {
 			var_03 = var_02;
 		}
 	}
-	else if(scripts\common\utility::player_is_in_jackal()) {
+	else if(scripts\engine\utility::player_is_in_jackal()) {
 		foreach(var_05 in level.var_10AF9["jackal_allies"].var_B661) {
 			if(isdefined(var_05.var_4BC7) && var_05.var_4BC7 == self) {
 				var_00 = var_05;
@@ -1058,7 +1058,7 @@ func_1A0E() {
 			continue;
 		}
 
-		if(gettime() < self.var_1491.var_C888 + 4000) {
+		if(gettime() < self.a.var_C888 + 4000) {
 			continue;
 		}
 
@@ -1081,7 +1081,7 @@ func_67D2(param_00) {
 		return;
 	}
 
-	if(distancesquared(self.origin,self.var_205.origin) < 23040) {
+	if(distancesquared(self.origin,self.target_getindexoftarget.origin) < 23040) {
 		return;
 	}
 

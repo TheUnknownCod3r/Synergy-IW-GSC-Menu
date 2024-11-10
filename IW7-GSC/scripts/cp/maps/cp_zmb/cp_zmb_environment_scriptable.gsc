@@ -1,8 +1,8 @@
-/****************************************************************************
+/********************************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\maps\cp_zmb\cp_zmb_environment_scriptable.gsc
-****************************************************************************/
+ * Script: scripts\cp\maps\cp_zmb\cp_zmb_environment_scriptable.gsc
+********************************************************************/
 
 front_gate(param_00) {
 	playsoundatpos((632,2357,334),"entrance_sign_power_on_build");

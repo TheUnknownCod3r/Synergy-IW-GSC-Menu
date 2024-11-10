@@ -1,8 +1,8 @@
-/****************************************
+/********************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\sp\debug.gsc
-****************************************/
+ * Script: scripts\sp\debug.gsc
+********************************/
 
 func_6636() {}
 
@@ -127,7 +127,7 @@ func_10418(param_00) {
 }
 
 func_4ED2(param_00) {
-	var_01 = function_0072();
+	var_01 = getaiarray();
 	for(var_02 = 0;var_02 < var_01.size;var_02++) {
 		if(var_01[var_02] getentitynumber() != param_00) {
 			continue;
@@ -139,7 +139,7 @@ func_4ED2(param_00) {
 }
 
 func_4F22(param_00) {
-	var_01 = function_0072();
+	var_01 = getaiarray();
 	for(var_02 = 0;var_02 < var_01.size;var_02++) {
 		if(var_01[var_02] getentitynumber() != param_00) {
 			continue;
@@ -167,7 +167,7 @@ func_4ED3() {
 }
 
 func_4ED4() {
-	var_00 = function_0072();
+	var_00 = getaiarray();
 	var_01 = undefined;
 	for(var_02 = 0;var_02 < var_00.size;var_02++) {
 		var_01 = var_00[var_02];
@@ -299,7 +299,7 @@ func_5B1D(param_00,param_01) {
 
 func_133A3(param_00,param_01) {
 	if(param_00 == "ai") {
-		var_02 = function_0072();
+		var_02 = getaiarray();
 		for(var_03 = 0;var_03 < var_02.size;var_03++) {
 			var_02[var_03] func_5B88(param_01);
 		}
@@ -308,7 +308,7 @@ func_133A3(param_00,param_01) {
 
 func_4EC1() {
 	level.player.ignoreme = 1;
-	var_00 = function_0076();
+	var_00 = getallnodes();
 	var_01 = [];
 	for(var_02 = 0;var_02 < var_00.size;var_02++) {
 		if(var_00[var_02].type == "Cover Left") {
@@ -320,12 +320,12 @@ func_4EC1() {
 		}
 	}
 
-	var_03 = function_0072();
+	var_03 = getaiarray();
 	for(var_02 = 0;var_02 < var_03.size;var_02++) {
 		var_03[var_02] delete();
 	}
 
-	level.var_4F54 = function_00C8();
+	level.var_4F54 = getspawnerarray();
 	level.var_1658 = [];
 	level.var_4484 = [];
 	for(var_02 = 0;var_02 < level.var_4F54.size;var_02++) {
@@ -573,9 +573,9 @@ func_4EBB() {
 
 		var_07 = getentarray("drone","targetname").size;
 		var_00 setvalue(var_07);
-		var_08 = function_0072("allies").size;
+		var_08 = getaiarray("allies").size;
 		var_01 setvalue(var_08);
-		var_09 = function_0072("bad_guys").size;
+		var_09 = getaiarray("bad_guys").size;
 		var_02 setvalue(var_09);
 		var_03 setvalue(getentarray("script_vehicle","classname").size);
 		var_04 setvalue(var_07 + var_08 + var_09);
@@ -606,7 +606,7 @@ func_37A5() {
 	}
 
 	for(;;) {
-		var_03 = function_0072("axis");
+		var_03 = getaiarray("axis");
 		if(!var_03.size) {
 			func_7370();
 			wait(0.5);
@@ -819,7 +819,7 @@ func_12ED1() {
 				var_09.origin = var_05 + (0,0,-62);
 				var_09.angles = (90,getnorthyaw(),0);
 				var_03 giveweapon("defaultweapon");
-				function_01C5("cg_fov",var_14);
+				setsaveddvar("cg_fov",var_14);
 				level.var_B7B3 = var_03;
 				level.var_B7B2 = var_09;
 				thread func_5B7E(var_05,var_07,var_06);
@@ -900,7 +900,7 @@ func_5B7E(param_00,param_01,param_02) {
 
 func_4EC0() {
 	wait(0.05);
-	var_00 = function_0072();
+	var_00 = getaiarray();
 	var_01 = [];
 	var_01["axis"] = [];
 	var_01["allies"] = [];
@@ -997,8 +997,8 @@ func_56E2(param_00,param_01) {
 	if(isdefined(param_01)) {
 		var_04 = self getthreatbiasgroup();
 		if(isdefined(var_04)) {
-			var_03 = var_03 + function_00D7(param_01,var_04);
-			var_02 = var_02 + function_00D7(var_04,param_01);
+			var_03 = var_03 + getthreatbias(param_01,var_04);
+			var_02 = var_02 + getthreatbias(var_04,param_01);
 		}
 	}
 
@@ -1253,7 +1253,7 @@ func_13C26() {
 	foreach(var_06 in var_01) {
 	}
 
-	var_08 = function_00C8();
+	var_08 = getspawnerarray();
 	var_09 = [];
 	foreach(var_0B in var_08) {
 		var_09[var_0B.var_9F] = 1;

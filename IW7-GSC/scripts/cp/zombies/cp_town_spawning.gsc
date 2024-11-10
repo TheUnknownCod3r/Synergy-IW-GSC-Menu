@@ -1,8 +1,8 @@
-/***********************************************************
+/***************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\zombies\cp_town_spawning.gsc
-***********************************************************/
+ * Script: scripts\cp\zombies\cp_town_spawning.gsc
+***************************************************/
 
 cp_town_spawning_init() {
 	if(!isdefined(level.zombie_spawn_override_func)) {
@@ -502,25 +502,25 @@ crab_mini_audio_monitor() {
 	level endon("game_ended");
 	self endon("death");
 	self.voprefix = "minion_crog_";
-	thread scripts/cp/zombies/zombies_vo::play_zombie_death_vo(self.voprefix,undefined,1);
+	thread scripts\cp\zombies\zombies_vo::play_zombie_death_vo(self.voprefix,undefined,1);
 	self.playing_stumble = 0;
 	for(;;) {
 		var_00 = scripts\engine\utility::waittill_any_timeout_1(6,"attack_hit","attack_miss","attack_charge");
 		switch(var_00) {
 			case "attack_hit":
-				level thread scripts/cp/zombies/zombies_vo::play_zombie_vo(self,"alert",0);
+				level thread scripts\cp\zombies\zombies_vo::play_zombie_vo(self,"alert",0);
 				break;
 	
 			case "attack_miss":
-				level thread scripts/cp/zombies/zombies_vo::play_zombie_vo(self,"alert",0);
+				level thread scripts\cp\zombies\zombies_vo::play_zombie_vo(self,"alert",0);
 				break;
 	
 			case "attack_charge":
-				level thread scripts/cp/zombies/zombies_vo::play_zombie_vo(self,"alert",0);
+				level thread scripts\cp\zombies\zombies_vo::play_zombie_vo(self,"alert",0);
 				break;
 	
 			case "timeout":
-				level thread scripts/cp/zombies/zombies_vo::play_zombie_vo(self,"idle",0);
+				level thread scripts\cp\zombies\zombies_vo::play_zombie_vo(self,"idle",0);
 				break;
 		}
 	}
@@ -561,7 +561,7 @@ _meth_8456(param_00) {
 	var_03 = 1;
 	var_04 = 5000;
 	foreach(var_06 in param_00) {
-		if(scripts/cp/zombies/func_0D60::allowedstances(var_06.volume)) {
+		if(scripts\cp\zombies\func_0D60::allowedstances(var_06.volume)) {
 			var_01[var_01.size] = var_06;
 			var_06.modifiedspawnpoints = var_02;
 			continue;
@@ -569,7 +569,7 @@ _meth_8456(param_00) {
 
 		if(isdefined(var_06.volume.var_186E)) {
 			foreach(var_08 in var_06.volume.var_186E) {
-				if(scripts/cp/zombies/func_0D60::allowedstances(var_08)) {
+				if(scripts\cp\zombies\func_0D60::allowedstances(var_08)) {
 					var_01[var_01.size] = var_06;
 					var_06.modifiedspawnpoints = var_03;
 					break;
@@ -1267,7 +1267,7 @@ func_51A5(param_00,param_01) {
 
 	self.died_poorly = 1;
 	if(scripts\engine\utility::istrue(self.marked_for_challenge) && isdefined(level.num_zombies_marked)) {
-		level.var_C20A--;
+		level.num_zombies_marked--;
 	}
 
 	if(scripts\engine\utility::istrue(self.isactive)) {
@@ -1322,7 +1322,7 @@ adjustmovespeed(param_00,param_01,param_02) {
 		wait(0.5);
 	}
 
-	param_00 scripts/asm/asm_bb::bb_requestmovetype(param_02);
+	param_00 scripts\asm\asm_bb::bb_requestmovetype(param_02);
 }
 
 disablespawnvolumes(param_00,param_01) {
@@ -1330,7 +1330,7 @@ disablespawnvolumes(param_00,param_01) {
 	var_02 = undefined;
 	var_03 = scripts\cp\cp_agent_utils::getaliveagentsofteam("axis");
 	foreach(var_05 in level.copy_active_spawn_volumes) {
-		if(function_010F(param_00,var_05)) {
+		if(ispointinvolume(param_00,var_05)) {
 			var_02 = var_05;
 			foreach(var_07 in var_03) {
 				var_07 thread sendzombietopos(var_07,param_00);
@@ -1555,21 +1555,21 @@ func_310F() {
 	level endon("game_ended");
 	self endon("death");
 	self.voprefix = "brute_crog_";
-	thread scripts/cp/zombies/zombies_vo::play_zombie_death_vo(self.voprefix);
+	thread scripts\cp\zombies\zombies_vo::play_zombie_death_vo(self.voprefix);
 	self.playing_stumble = 0;
 	for(;;) {
 		var_00 = scripts\engine\utility::waittill_any_timeout_1(6,"attack_hit","attack_miss");
 		switch(var_00) {
 			case "attack_hit":
-				level thread scripts/cp/zombies/zombies_vo::play_zombie_vo(self,"attack_pounding",0);
+				level thread scripts\cp\zombies\zombies_vo::play_zombie_vo(self,"attack_pounding",0);
 				break;
 	
 			case "attack_miss":
-				level thread scripts/cp/zombies/zombies_vo::play_zombie_vo(self,"attack_pounding",0);
+				level thread scripts\cp\zombies\zombies_vo::play_zombie_vo(self,"attack_pounding",0);
 				break;
 	
 			case "timeout":
-				level thread scripts/cp/zombies/zombies_vo::play_zombie_vo(self,"idle",0);
+				level thread scripts\cp\zombies\zombies_vo::play_zombie_vo(self,"idle",0);
 				break;
 		}
 	}

@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2699.gsc
+ * Script: 2699.gsc
 ***************************************/
 
 init() {
@@ -34,22 +34,22 @@ initawards() {
 initbaseaward(var_00, var_01) {
   level.awards[var_00] = spawnstruct();
   level.awards[var_00].type = var_01;
-  var_02 = tablelookup("mp/awardtable.csv", 1, var_00, 10);
+  var_02 = tablelookup("mp\awardtable.csv", 1, var_00, 10);
 
   if (isdefined(var_02) && var_02 != "")
   level.awards[var_00].xpscoreevent = var_02;
 
-  var_03 = tablelookup("mp/awardtable.csv", 1, var_00, 11);
+  var_03 = tablelookup("mp\awardtable.csv", 1, var_00, 11);
 
   if (isdefined(var_03) && var_03 != "")
   level.awards[var_00].gamescoreevent = var_03;
 
-  var_04 = tablelookup("mp/awardtable.csv", 1, var_00, 3);
+  var_04 = tablelookup("mp\awardtable.csv", 1, var_00, 3);
 
   if (isdefined(var_04) && var_04 != "")
   level.awards[var_00].category = var_04;
 
-  var_05 = tablelookup("mp/awardtable.csv", 1, var_00, 7);
+  var_05 = tablelookup("mp\awardtable.csv", 1, var_00, 7);
 
   if (isdefined(var_05) && var_05 != "") {
   var_06 = randomfloat(1.0);
@@ -69,12 +69,12 @@ initmidmatchawards() {
   var_00 = 0;
 
   for (;;) {
-  var_01 = tablelookupbyrow("mp/awardtable.csv", var_00, 1);
+  var_01 = tablelookupbyrow("mp\awardtable.csv", var_00, 1);
 
   if (!isdefined(var_01) || var_01 == "")
   break;
 
-  var_02 = tablelookupbyrow("mp/awardtable.csv", var_00, 9);
+  var_02 = tablelookupbyrow("mp\awardtable.csv", var_00, 9);
 
   if (isdefined(var_02) && var_02 != "")
   initmidmatchaward(var_01);

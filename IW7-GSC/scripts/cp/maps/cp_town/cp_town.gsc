@@ -1,8 +1,8 @@
-/*******************************************************
+/***********************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\maps\cp_town\cp_town.gsc
-*******************************************************/
+ * Script: scripts\cp\maps\cp_town\cp_town.gsc
+***********************************************/
 
 main() {
 	setdvar("sm_sunSampleSizeNear",0.97);
@@ -27,7 +27,7 @@ main() {
 
 	registerscriptedagents();
 	registerlevelenemyarrays();
-	level.coop_weapontable = "cp/cp_town_weapontable.csv";
+	level.coop_weapontable = "cp\cp_town_weapontable.csv";
 	scripts\cp\utility::coop_mode_enable(["pillage"]);
 	scripts\cp\maps\cp_town\cp_town_precache::main();
 	scripts\cp\maps\cp_town\gen\cp_town_art::main();
@@ -41,11 +41,11 @@ main() {
 	level.current_vision_sets = [];
 	level.current_vision_set = "cp_town_bw";
 	level.vision_set_override = level.current_vision_set;
-	scripts/cp/zombies/coop_wall_buys::init();
+	scripts\cp\zombies\coop_wall_buys::init();
 	level.map_interaction_func = ::scripts\cp\maps\cp_town\cp_town_interactions::register_interactions;
 	level.custom_onplayerconnect_func = ::onplayerconnect;
-	level.weapon_rank_event_table = "scripts/cp/maps/cp_town/cp_town_weaponrank_event.csv";
-	level.coop_weapontable = "cp/cp_town_weapontable.csv";
+	level.weapon_rank_event_table = "scripts\cp\maps\cp_town\cp_town_weaponrank_event.csv";
+	level.coop_weapontable = "cp\cp_town_weapontable.csv";
 	level.custom_onspawnplayer_func = ::onplayerspawned;
 	level.guidedinteractionexclusion = ::guidedinteractionsexclusions;
 	level.guided_interaction_offset_func = ::guidedinteractionoffsetfunc;
@@ -101,7 +101,7 @@ main() {
 	level.town_power_vo_func = ::town_power_on_vo;
 	scripts\cp\maps\cp_town\cp_town_player_character_setup::init_player_characters();
 	level scripts\engine\utility::delaythread(3,::colorize_sound_state_change,"fullblackandwhite",1);
-	function_02A9("color","bw");
+	setglobalsoundcontext("color","bw");
 	level.char_intro_music = ::play_char_intro_music;
 	level.char_intro_gesture = ::play_char_intro_gesture;
 	level.initial_active_volumes = ["morgue"];
@@ -125,7 +125,7 @@ main() {
 	scripts\engine\utility::flag_init("fuses_inserted");
 	level thread fix_doors();
 	level thread add_cutie_eggs();
-	function_026C("MatchStarted: Completed");
+	sysprint("MatchStarted: Completed");
 	thread scripts\cp\maps\cp_town\cp_town_chemistry::init();
 }
 
@@ -178,7 +178,7 @@ wait_for_pre_game_period() {
 	wait(0.2);
 	scripts\engine\utility::flag_set("zombie_drop_powerups");
 	scripts\engine\utility::flag_set("pillage_enabled");
-	scripts/cp/zombies/zombie_entrances::enable_windows_in_area("morgue");
+	scripts\cp\zombies\zombie_entrances::enable_windows_in_area("morgue");
 	level thread scripts\cp\maps\cp_town\cp_town_elvira::init_elvira();
 	level thread bink_test();
 	init_magic_wheel();
@@ -419,7 +419,7 @@ streamweaponsonzonechange(param_00) {
 }
 
 registerscriptedagents() {
-	scripts\mp\mp_agent::init_agent("mp/dlc3_agent_definition.csv");
+	scripts\mp\mp_agent::init_agent("mp\dlc3_agent_definition.csv");
 	scripts\mp\agents\zombie_dlc3\zombie_dlc3_agent::registerscriptedagent();
 	scripts\mp\agents\crab_brute\crab_brute_agent::registerscriptedagent();
 	scripts\mp\agents\crab_mini\crab_mini_agent::registerscriptedagent();
@@ -454,14 +454,14 @@ init_town_spawner_locations() {
 	foreach(var_03 in var_00) {
 		var_06 = 0;
 		foreach(var_08 in level.invalid_spawn_volume_array) {
-			if(function_010F(var_03.origin,var_08)) {
+			if(ispointinvolume(var_03.origin,var_08)) {
 				var_06 = 1;
 			}
 		}
 
 		if(!var_06) {
 			foreach(var_08 in level.spawn_volume_array) {
-				if(function_010F(var_03.origin,var_08)) {
+				if(ispointinvolume(var_03.origin,var_08)) {
 					if(!isdefined(var_03.angles)) {
 						var_03.angles = (0,0,0);
 					}
@@ -771,10 +771,10 @@ pillage_init() {
 	level.pillageinfo.explosive = 33;
 	level.pillageinfo.money = 34;
 	level.pillageinfo.var_28C2 = 0;
-	scripts/cp/zombies/zombies_pillage::register_zombie_pillageable("backpack_1","backpack","cp_rave_backpack_dropped","cp_rave_backpack","j_spine4");
-	scripts/cp/zombies/zombies_pillage::register_zombie_pillageable("backpack_2","backpack","cp_rave_backpack_dropped_green","cp_rave_backpack_green","j_spine4");
-	scripts/cp/zombies/zombies_pillage::register_zombie_pillageable("backpack_3","backpack","cp_rave_backpack_dropped_purple","cp_rave_backpack_purple","j_spine4");
-	scripts/cp/zombies/zombies_pillage::register_zombie_pillageable("backpack_4","backpack","cp_rave_backpack_dropped_red","cp_rave_backpack_red","j_spine4");
+	scripts\cp\zombies\zombies_pillage::register_zombie_pillageable("backpack_1","backpack","cp_rave_backpack_dropped","cp_rave_backpack","j_spine4");
+	scripts\cp\zombies\zombies_pillage::register_zombie_pillageable("backpack_2","backpack","cp_rave_backpack_dropped_green","cp_rave_backpack_green","j_spine4");
+	scripts\cp\zombies\zombies_pillage::register_zombie_pillageable("backpack_3","backpack","cp_rave_backpack_dropped_purple","cp_rave_backpack_purple","j_spine4");
+	scripts\cp\zombies\zombies_pillage::register_zombie_pillageable("backpack_4","backpack","cp_rave_backpack_dropped_red","cp_rave_backpack_red","j_spine4");
 	level.battery_drop_wave = randomintrange(7,11);
 	level thread rebalance_pillage_after_wave(level.battery_drop_wave);
 	level thread wait_for_radios_fixed();
@@ -875,7 +875,7 @@ watchforpowerontriggers() {
 	}
 
 	level thread colorize_sound_state_change("colorized",2.5);
-	function_02A9("color","full",3);
+	setglobalsoundcontext("color","full",3);
 	level.current_vision_set = "cp_town_color";
 	level.vision_set_override = level.current_vision_set;
 	scripts\cp\maps\cp_town\cp_town_interactions::applyvisionsettoallplayers("cp_town_color");
@@ -896,15 +896,15 @@ colorize_sound_state_change(param_00,param_01) {
 
 	switch(param_00) {
 		case "fullblackandwhite":
-			function_02AA("worldcolorstate","full_black_and_white",param_01);
+			setaudiotriggerstate("worldcolorstate","full_black_and_white",param_01);
 			break;
 
 		case "colorized":
-			function_02AA("worldcolorstate","color",param_01);
+			setaudiotriggerstate("worldcolorstate","color",param_01);
 			break;
 
 		default:
-			function_02AA("worldcolorstate","color",param_01);
+			setaudiotriggerstate("worldcolorstate","color",param_01);
 			break;
 	}
 }
@@ -1482,7 +1482,7 @@ is_in_active_volume(param_00) {
 
 	var_01 = sortbydistance(level.active_spawn_volumes,param_00);
 	foreach(var_03 in var_01) {
-		if(function_010F(param_00,var_03)) {
+		if(ispointinvolume(param_00,var_03)) {
 			return 1;
 		}
 	}
@@ -1904,7 +1904,7 @@ setupdamagetriggers(param_00) {
 	var_01 = getent("boundary_toxic_line","targetname");
 	var_02 = scripts\engine\utility::getstructarray("boundary_toxic_line_center","targetname");
 	for(;;) {
-		if(param_00 scripts\cp\utility::is_valid_player() && function_010F(param_00.origin,var_01)) {
+		if(param_00 scripts\cp\utility::is_valid_player() && ispointinvolume(param_00.origin,var_01)) {
 			if(!isdefined(param_00.geiger_counter)) {
 				param_00.geiger_counter = 1;
 				param_00 playlocalsound("town_geiger_counter_lvl4_plr");
@@ -2205,7 +2205,7 @@ get_closest_valid_water_respawn_spots(param_00) {
 }
 
 setup_pa_speakers() {
-	level.jukebox_table = "cp/zombies/cp_town_music_genre.csv";
+	level.jukebox_table = "cp\zombies\cp_town_music_genre.csv";
 	scripts\cp\zombies\zombie_jukebox::parse_music_genre_table();
 	wait(1.15);
 	disablepaspeaker("pa_town_icecream_out");

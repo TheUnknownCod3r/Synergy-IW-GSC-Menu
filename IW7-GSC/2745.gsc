@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2745.gsc
+ * Script: 2745.gsc
 ***************************************/
 
 addheavyarmor(var_00) {

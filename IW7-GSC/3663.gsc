@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3663.gsc
-****************************/
+ * Script: 3663.gsc
+************************/
 
 func_9755(param_00) {
 	if(!level.player scripts\sp\_utility::func_65DF("pressurized")) {
@@ -274,7 +274,7 @@ func_13E97() {
 		return;
 	}
 
-	self.var_13E97 = scripts/sp/player_rig::func_7B88();
+	self.var_13E97 = scripts\sp\player_rig::func_7B88();
 	self.var_13E97 _meth_81E4(self,"tag_origin",(-12,0,-58),(-4,0,0),1,0,0,0);
 	for(;;) {
 		var_00 = self getnormalizedmovement();

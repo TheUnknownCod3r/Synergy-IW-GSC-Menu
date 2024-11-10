@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\3102.gsc
+ * Script: 3102.gsc
 ***************************************/
 
 func_BE5C(var_00) {

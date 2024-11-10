@@ -1,8 +1,8 @@
-/***************************************************************
+/*******************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\perks\_perk_rearguard_shield.gsc
-***************************************************************/
+ * Script: scripts\mp\perks\_perk_rearguard_shield.gsc
+*******************************************************/
 
 func_E814() {
 	if(!isdefined(self.hasrearguardshield)) {
@@ -57,7 +57,7 @@ func_D415(param_00) {
 func_E168(param_00,param_01) {
 	level endon("game_ended");
 	self endon("death");
-	if(isdefined(param_01) && scripts\mp\_utility::istrue(param_01.hasrearguardshield) && param_00 == "damaged") {
+	if(isdefined(param_01) && scripts\mp\utility::istrue(param_01.hasrearguardshield) && param_00 == "damaged") {
 		param_01 detachshieldmodel("weapon_rearguard_shield_wm_mp","tag_shield_back");
 	}
 

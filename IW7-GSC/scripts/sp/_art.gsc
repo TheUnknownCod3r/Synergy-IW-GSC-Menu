@@ -1,8 +1,8 @@
-/***************************************
+/*******************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\sp\_art.gsc
-***************************************/
+ * Script: scripts\sp\_art.gsc
+*******************************/
 
 main() {
 	if(!isdefined(level.var_ABE6)) {
@@ -15,12 +15,12 @@ main() {
 	func_11715();
 	level.var_1094B = [];
 	level.var_32F7 = [];
-	function_01C5("r_umbraMinObjectContribution",8);
-	function_01C5("r_umbraShadowcasters",1);
-	function_01C5("r_usePrebuiltSunShadow",3);
-	function_01C5("r_mbEnable",1);
-	function_01C5("r_mbVelocityScale",0);
-	function_01C5("r_mbVelocityScaleViewModel",0.2);
+	setsaveddvar("r_umbraMinObjectContribution",8);
+	setsaveddvar("r_umbraShadowcasters",1);
+	setsaveddvar("r_usePrebuiltSunShadow",3);
+	setsaveddvar("r_mbEnable",1);
+	setsaveddvar("r_mbVelocityScale",0);
+	setsaveddvar("r_mbVelocityScaleViewModel",0.2);
 	if(!isdefined(level.var_11220)) {
 		level.var_11220 = [];
 	}
@@ -80,7 +80,7 @@ func_583A(param_00,param_01) {
 
 func_5843() {
 	if(getdvar("scr_dof_enable") == "") {
-		function_01C5("scr_dof_enable","1");
+		setsaveddvar("scr_dof_enable","1");
 	}
 
 	setdvar("ads_dof_tracedist",8192);
@@ -324,7 +324,7 @@ func_5845() {
 
 	var_0D = vectornormalize(anglestoforward(var_0C));
 	var_0E = bullettrace(var_0A,var_0A + var_0D * var_01,1,self,1,0,0,0,0);
-	var_0F = function_0072("axis");
+	var_0F = getaiarray("axis");
 	var_10 = self getcurrentweapon();
 	if(isdefined(level.var_1094B[var_10])) {
 		[[level.var_1094B[var_10]]](var_0E,var_0F,var_0A,var_0D,var_00);
@@ -503,8 +503,8 @@ func_11715() {
 	level.var_11714.var_4CA7 = getdvarfloat("r_tessellationCutoffFalloffBase",320);
 	level.var_11714.var_4CA8 = level.var_11714.var_4CA7;
 	level.var_11714.time_remaining = 0;
-	function_01C5("r_tessellationCutoffDistance",level.var_11714.var_4CA5);
-	function_01C5("r_tessellationCutoffFalloff",level.var_11714.var_4CA7);
+	setsaveddvar("r_tessellationCutoffDistance",level.var_11714.var_4CA5);
+	setsaveddvar("r_tessellationCutoffFalloff",level.var_11714.var_4CA7);
 	foreach(var_02 in level.players) {
 		var_02 thread func_11717();
 	}
@@ -536,11 +536,11 @@ func_11717() {
 		}
 
 		if(var_00 != level.var_11714.var_4CA5) {
-			function_01C5("r_tessellationCutoffDistance",level.var_11714.var_4CA5);
+			setsaveddvar("r_tessellationCutoffDistance",level.var_11714.var_4CA5);
 		}
 
 		if(var_01 != level.var_11714.var_4CA7) {
-			function_01C5("r_tessellationCutoffFalloff",level.var_11714.var_4CA7);
+			setsaveddvar("r_tessellationCutoffFalloff",level.var_11714.var_4CA7);
 		}
 	}
 }
@@ -563,45 +563,45 @@ func_1121E(param_00,param_01) {
 		var_07 = min(float(var_05 / var_03),1);
 		var_08 = var_04 + var_06 - var_04 * var_07;
 		setdvar("r_sunflare_position",var_08);
-		function_01C9(var_08);
+		setsunflareposition(var_08);
 		wait(0.05);
 		var_05 = gettime() - var_02;
 	}
 
 	setdvar("r_sunflare_position",level.var_11220[param_00].weaponisauto);
-	function_01C9(var_06);
+	setsunflareposition(var_06);
 }
 
 func_F5FD(param_00) {
 	switch(param_00) {
 		case 1:
-			function_01C5("r_veilFalloffWeight1","1 0.95 0.75");
-			function_01C5("r_veilFalloffWeight2","0.25 0.875 0.02");
+			setsaveddvar("r_veilFalloffWeight1","1 0.95 0.75");
+			setsaveddvar("r_veilFalloffWeight2","0.25 0.875 0.02");
 			break;
 
 		case 2:
-			function_01C5("r_veilFalloffWeight1","1 0.9 0.6");
-			function_01C5("r_veilFalloffWeight2","0.3 0.05 0.02");
+			setsaveddvar("r_veilFalloffWeight1","1 0.9 0.6");
+			setsaveddvar("r_veilFalloffWeight2","0.3 0.05 0.02");
 			break;
 
 		case 3:
-			function_01C5("r_veilFalloffWeight1","1 0.6875 0.375");
-			function_01C5("r_veilFalloffWeight2","0.1875 0.1013 0.02");
+			setsaveddvar("r_veilFalloffWeight1","1 0.6875 0.375");
+			setsaveddvar("r_veilFalloffWeight2","0.1875 0.1013 0.02");
 			break;
 
 		case 4:
-			function_01C5("r_veilFalloffWeight1","1 0.98 0.7");
-			function_01C5("r_veilFalloffWeight2","0.2 0.05 0.0");
+			setsaveddvar("r_veilFalloffWeight1","1 0.98 0.7");
+			setsaveddvar("r_veilFalloffWeight2","0.2 0.05 0.0");
 			break;
 
 		case 5:
-			function_01C5("r_veilFalloffWeight1","1 0.4 0.15");
-			function_01C5("r_veilFalloffWeight2","0.1 0.0750 0.15");
+			setsaveddvar("r_veilFalloffWeight1","1 0.4 0.15");
+			setsaveddvar("r_veilFalloffWeight2","0.1 0.0750 0.15");
 			break;
 
 		default:
-			function_01C5("r_veilFalloffWeight1","0.25 0.75 1.5");
-			function_01C5("r_veilFalloffWeight2","2 2.5 3");
+			setsaveddvar("r_veilFalloffWeight1","0.25 0.75 1.5");
+			setsaveddvar("r_veilFalloffWeight2","2 2.5 3");
 			break;
 	}
 }

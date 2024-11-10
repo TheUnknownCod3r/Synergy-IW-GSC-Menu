@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\2872.gsc
-****************************/
+ * Script: 2872.gsc
+************************/
 
 func_9606() {
 	scripts\engine\utility::array_thread(getentarray("window_poster","targetname"),::func_13D55);

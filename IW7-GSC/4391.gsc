@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\4391.gsc
+ * Script: 4391.gsc
 ***************************************/
 
 main() {

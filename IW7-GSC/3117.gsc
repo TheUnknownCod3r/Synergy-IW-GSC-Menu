@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3117.gsc
-****************************/
+ * Script: 3117.gsc
+************************/
 
 initzombieghost(param_00) {
 	self.bisghost = 1;
@@ -13,7 +13,7 @@ initzombieghost(param_00) {
 	self ghostskulls_total_waves(99999999);
 	self scragentsetscripted(1);
 	setghostnavmode("hover");
-	thread scripts/asm/zombie_ghost/zombie_ghost_asm::zombieghost_constantanglesadjust();
+	thread scripts\asm\zombie_ghost\zombie_ghost_asm::zombieghost_constantanglesadjust();
 	return level.success;
 }
 
@@ -68,7 +68,7 @@ get_ghost_entangled_dist_from_player() {
 ghosthover(param_00) {
 	if(getghostnavmode() == "hover") {
 		clearhidenode();
-		scripts/asm/asm_bb::bb_requestmovetype("fly");
+		scripts\asm\asm_bb::bb_requestmovetype("fly");
 		if(!isdefined(self.ghost_hover_node)) {
 			self.ghost_hover_node = scripts\engine\utility::getclosest(self.origin,level.zombie_ghost_hover_nodes);
 			self.ghost_target_position = self.ghost_hover_node.origin;
@@ -100,7 +100,7 @@ ghosthover(param_00) {
 ghosthide(param_00) {
 	if(getghostnavmode() == "hide") {
 		clearhovernode();
-		scripts/asm/asm_bb::bb_requestmovetype("fly");
+		scripts\asm\asm_bb::bb_requestmovetype("fly");
 		if(!isdefined(self.ghost_hide_node)) {
 			self.ghost_hide_node = scripts\engine\utility::getclosest(self.origin,level.zombie_ghost_hide_nodes);
 			self.ghost_target_position = self.ghost_hide_node.origin;
@@ -120,7 +120,7 @@ ghosthide(param_00) {
 }
 
 checkattack(param_00) {
-	scripts/asm/asm_bb::bb_clearmeleerequest();
+	scripts\asm\asm_bb::bb_clearmeleerequest();
 	if(!getghostnavmode() == "attack") {
 		return level.failure;
 	}
@@ -149,7 +149,7 @@ checkattack(param_00) {
 		return level.failure;
 	}
 
-	scripts/asm/asm_bb::bb_requestmelee(self.zombie_ghost_target);
+	scripts\asm\asm_bb::bb_requestmelee(self.zombie_ghost_target);
 	return level.failure;
 }
 
@@ -211,7 +211,7 @@ ghostattack(param_00) {
 		param_00.num_of_ghosts_attacking_me--;
 	}
 
-	var_01 scripts/asm/asm_bb::bb_clearmeleerequest();
+	var_01 scripts\asm\asm_bb::bb_clearmeleerequest();
 	var_01 clearhovernode();
 	var_01 setghostnavmode("hover");
 	var_01 waittill("ghost_reached_hover_node");
@@ -244,7 +244,7 @@ getaliveenemies() {
 			continue;
 		}
 
-		if(scripts/mp/agents/zombie/zombie_util::shouldignoreent(var_02)) {
+		if(scripts\mp\agents\zombie\zombie_util::shouldignoreent(var_02)) {
 			continue;
 		}
 
@@ -264,11 +264,11 @@ try_request_fly_type(param_00) {
 	}
 
 	if(isdefined(self.ghost_target_position) && distancesquared(self.ghost_target_position,self.origin) > param_00) {
-		scripts/asm/asm_bb::bb_requestmovetype("fly");
+		scripts\asm\asm_bb::bb_requestmovetype("fly");
 		return;
 	}
 
-	scripts/asm/asm_bb::bb_requestmovetype("");
+	scripts\asm\asm_bb::bb_requestmovetype("");
 }
 
 entangleghost(param_00,param_01) {
@@ -280,8 +280,8 @@ entangleghost(param_00,param_01) {
 	param_00 clearhidenode();
 	param_00 clearhovernode();
 	param_00 updateghostanimplaybackrate(1);
-	param_00 scripts/asm/asm_bb::bb_requestmovetype("entangled");
-	param_00 scripts/asm/asm_bb::bb_clearmeleerequest();
+	param_00 scripts\asm\asm_bb::bb_requestmovetype("entangled");
+	param_00 scripts\asm\asm_bb::bb_clearmeleerequest();
 	param_00 setmisttrailscriptable("off",param_00);
 	if(isdefined(level.fbd) && isdefined(level.fbd.fightstarted) && level.fbd.fightstarted) {
 		param_00 setscriptablepartstate("soul","captured");
@@ -292,7 +292,7 @@ escapefromentanglement(param_00) {
 	param_00 updateghostanimplaybackrate(1);
 	param_00 setisentangled(param_00,0);
 	param_00 setghostnavmode("hover");
-	param_00 scripts/asm/asm_bb::bb_requestmovetype("fly");
+	param_00 scripts\asm\asm_bb::bb_requestmovetype("fly");
 	param_00 setbeingentangledscriptable("off",param_00);
 	param_00 setmisttrailscriptable("active",param_00);
 }

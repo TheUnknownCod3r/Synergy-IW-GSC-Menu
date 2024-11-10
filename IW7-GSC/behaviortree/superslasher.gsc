@@ -1,8 +1,8 @@
-/*************************************************
+/*****************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\behaviortree\superslasher.gsc
-*************************************************/
+ * Script: behaviortree\superslasher.gsc
+*****************************************/
 
 superslasherfn0(param_00) {
 	return lib_0A09::func_5AEA(param_00,50);

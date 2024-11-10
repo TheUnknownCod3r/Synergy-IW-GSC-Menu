@@ -1,8 +1,8 @@
-/*****************************************************
+/*********************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\zombies\zombies_vo.gsc
-*****************************************************/
+ * Script: scripts\cp\zombies\zombies_vo.gsc
+*********************************************/
 
 play_zombie_vo(param_00,param_01,param_02) {
 	param_00 endon("death");

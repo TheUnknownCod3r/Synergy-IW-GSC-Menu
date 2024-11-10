@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\3473.gsc
+ * Script: 3473.gsc
 ***************************************/
 
 init() {
@@ -26,7 +26,7 @@ init() {
   var_0.maxhealth = 150;
   var_0.damagefeedback = "deployable_bag";
   var_0.deathweaponinfo = "deployable_grenades_mp";
-  var_0.deathvfx = loadfx("vfx/core/expl/grenadeexp_default");
+  var_0.deathvfx = loadfx("vfx\core\expl\grenadeexp_default");
   var_0.deathdamageradius = 256;
   var_0.deathdamagemax = 150;
   var_0.deathdamagemin = 50;

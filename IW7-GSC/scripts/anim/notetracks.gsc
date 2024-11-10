@@ -1,8 +1,8 @@
-/***********************************************
+/***************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\anim\notetracks.gsc
-***********************************************/
+ * Script: scripts\anim\notetracks.gsc
+***************************************/
 
 registernotetracks_init() {
 	if(isdefined(level.notetracks)) {
@@ -149,9 +149,9 @@ notetrackfire(param_00,param_01) {
 
 shootnotetrack() {
 	waittillframeend;
-	if(isdefined(self) && gettime() > self.var_1491.var_A9ED) {
-		if(isdefined(self.var_2303.shootparams)) {
-			var_00 = self.var_2303.var_FECD.var_FF0B == 1;
+	if(isdefined(self) && gettime() > self.a.var_A9ED) {
+		if(isdefined(self.asm.shootparams)) {
+			var_00 = self.asm.shootparams.var_FF0B == 1;
 		}
 		else
 		{
@@ -161,18 +161,18 @@ shootnotetrack() {
 		scripts\anim\utility_common::shootenemywrapper(var_00);
 		scripts\anim\combat_utility::decrementbulletsinclip();
 		if(weaponclass(self.var_394) == "rocketlauncher") {
-			self.var_1491.var_E5DE--;
+			self.a.rockets--;
 		}
 	}
 }
 
 notetracklaser(param_00,param_01) {
 	if(issubstr(param_00,"on")) {
-		self.var_1491.laseron = 1;
+		self.a.laseron = 1;
 	}
 	else
 	{
-		self.var_1491.laseron = 0;
+		self.a.laseron = 0;
 	}
 
 	scripts\anim\shared::updatelaserstatus();
@@ -200,7 +200,7 @@ notetrackstartragdoll(param_00,param_01) {
 		thread unlinknextframe();
 	}
 
-	if(isdefined(self._blackboard)) {
+	if(isdefined(self.var_1198)) {
 		if(isdefined(self.var_1198.var_26C6) && self.var_1198.var_26C6 == 1) {
 			scripts\anim\shared::func_5D19();
 			self.lastweapon = self.var_394;
@@ -229,7 +229,7 @@ notetrackragdollblendinit(param_00,param_01) {
 		thread unlinknextframe();
 	}
 
-	if(isdefined(self._blackboard)) {
+	if(isdefined(self.var_1198)) {
 		if(isdefined(self.var_1198.var_26C6) && self.var_1198.var_26C6 == 1) {
 			scripts\anim\shared::func_5D19();
 			self.lastweapon = self.var_394;
@@ -252,19 +252,19 @@ notetrackragdollblendrootanim(param_00,param_01) {}
 notetrackragdollblendrootragdoll(param_00,param_01) {}
 
 notetrackmovementstop(param_00,param_01) {
-	self.var_1491.movement = "stop";
+	self.a.movement = "stop";
 }
 
 notetrackmovementwalk(param_00,param_01) {
-	self.var_1491.movement = "walk";
+	self.a.movement = "walk";
 }
 
 notetrackmovementrun(param_00,param_01) {
-	self.var_1491.movement = "run";
+	self.a.movement = "run";
 }
 
 notetrackmovementgunposeoverride(param_00,param_01) {
-	self.var_2303.movementgunposeoverride = "run_gun_down";
+	self.asm.movementgunposeoverride = "run_gun_down";
 }
 
 notetrackalertnessaiming(param_00,param_01) {}
@@ -275,12 +275,12 @@ notetrackalertnessalert(param_00,param_01) {}
 
 stoponback() {
 	scripts\anim\utility::exitpronewrapper(1);
-	self.var_1491.onback = undefined;
+	self.a.onback = undefined;
 }
 
 setpose(param_00) {
-	self.var_1491.pose = param_00;
-	if(isdefined(self.var_1491.onback)) {
+	self.a.pose = param_00;
+	if(isdefined(self.a.onback)) {
 		stoponback();
 	}
 
@@ -289,7 +289,7 @@ setpose(param_00) {
 }
 
 notetrackposestand(param_00,param_01) {
-	if(self.var_1491.pose == "prone") {
+	if(self.a.pose == "prone") {
 		scripts\anim\utility::exitpronewrapper(1);
 	}
 
@@ -297,7 +297,7 @@ notetrackposestand(param_00,param_01) {
 }
 
 notetrackposecrouch(param_00,param_01) {
-	if(self.var_1491.pose == "prone") {
+	if(self.a.pose == "prone") {
 		scripts\anim\utility::exitpronewrapper(1);
 	}
 
@@ -312,12 +312,12 @@ notetrackposeprone(param_00,param_01) {
 	self give_run_perk(-45,45,%prone_legs_down,%exposed_aiming,%prone_legs_up);
 	scripts\anim\utility::enterpronewrapper(1);
 	setpose("prone");
-	if(isdefined(self.var_1491._meth_8445)) {
-		self.var_1491.proneaiming = 1;
+	if(isdefined(self.a._meth_8445)) {
+		self.a.proneaiming = 1;
 		return;
 	}
 
-	self.var_1491.proneaiming = undefined;
+	self.a.proneaiming = undefined;
 }
 
 notetrackposecrawl(param_00,param_01) {
@@ -328,7 +328,7 @@ notetrackposecrawl(param_00,param_01) {
 	self give_run_perk(-45,45,%prone_legs_down,%exposed_aiming,%prone_legs_up);
 	scripts\anim\utility::enterpronewrapper(1);
 	setpose("prone");
-	self.var_1491.proneaiming = undefined;
+	self.a.proneaiming = undefined;
 }
 
 notetrackposeback(param_00,param_01) {
@@ -337,8 +337,8 @@ notetrackposeback(param_00,param_01) {
 	}
 
 	setpose("crouch");
-	self.var_1491.onback = 1;
-	self.var_1491.movement = "stop";
+	self.a.onback = 1;
+	self.a.movement = "stop";
 	self give_run_perk(-90,90,%prone_legs_down,%exposed_aiming,%prone_legs_up);
 	scripts\anim\utility::enterpronewrapper(1);
 }
@@ -403,7 +403,7 @@ notetrackdropclip(param_00,param_01) {
 
 notetrackrefillclip(param_00,param_01) {
 	scripts\anim\weaponlist::refillclip();
-	self.var_1491.needstorechamber = 0;
+	self.a.needstorechamber = 0;
 }
 
 notetrackloadshell(param_00,param_01) {
@@ -434,8 +434,8 @@ notetrackfootstep(param_00,param_01) {
 	}
 
 	if(isai(self)) {
-		self.var_2303.var_7257.foot = var_04;
-		self.var_2303.var_7257.time = gettime();
+		self.asm.footsteps.foot = var_04;
+		self.asm.footsteps.time = gettime();
 	}
 
 	if(scripts\asm\asm_bb::ispartdismembered("left_leg") || scripts\asm\asm_bb::ispartdismembered("right_leg")) {
@@ -461,8 +461,8 @@ notetrackhandstep(param_00,param_01) {
 	}
 
 	if(isai(self)) {
-		self.var_2303.var_7257.foot = var_04;
-		self.var_2303.var_7257.time = gettime();
+		self.asm.footsteps.foot = var_04;
+		self.asm.footsteps.time = gettime();
 	}
 
 	func_D492(var_02,var_03);
@@ -474,7 +474,7 @@ get_notetrack_movement() {
 		var_00 = "sprint";
 	}
 
-	if(isdefined(self._blackboard)) {
+	if(isdefined(self.var_1198)) {
 		if(self.var_1198.movetype == "walk" || self.var_1198.movetype == "casual_gun" || self.var_1198.movetype == "patrol" || self.var_1198.movetype == "casual") {
 			var_00 = "walk";
 		}
@@ -484,14 +484,14 @@ get_notetrack_movement() {
 		}
 	}
 	else if(isdefined(self.a)) {
-		if(isdefined(self.var_1491.movement)) {
-			if(self.var_1491.movement == "walk") {
+		if(isdefined(self.a.movement)) {
+			if(self.a.movement == "walk") {
 				var_00 = "walk";
 			}
 		}
 
-		if(isdefined(self.var_1491.pose)) {
-			if(self.var_1491.pose == "prone") {
+		if(isdefined(self.a.pose)) {
+			if(self.a.pose == "prone") {
 				var_00 = "prone";
 			}
 		}
@@ -594,7 +594,7 @@ notetrackspacejet_proc(param_00,param_01) {
 			break;
 	}
 
-	if(scripts\common\utility::fxexists("space_jet_small") && isdefined(var_02)) {
+	if(scripts\engine\utility::fxexists("space_jet_small") && isdefined(var_02)) {
 		if(isdefined(var_02)) {
 			if(param_00 == "space_jet_random") {
 				for(var_04 = 0;var_04 < 6;var_04++) {
@@ -653,7 +653,7 @@ notetrackvisorraise(param_00,param_01) {
 		return;
 	}
 
-	self.var_2303.var_DC48 = 1;
+	self.asm.var_DC48 = 1;
 	lib_0A1E::func_236E();
 }
 
@@ -662,7 +662,7 @@ notetrackvisorlower(param_00,param_01) {
 		return;
 	}
 
-	self.var_2303.var_DC48 = 0;
+	self.asm.var_DC48 = 0;
 	lib_0A1E::func_236E();
 }
 
@@ -789,7 +789,7 @@ notetrackfaceenemy(param_00,param_01) {
 		return;
 	}
 
-	if(isdefined(self.isnodeoccupied) && distancesquared(self.var_10C.origin,self.getreflectionlocs) < 4096) {
+	if(isdefined(self.isnodeoccupied) && distancesquared(self.isnodeoccupied.origin,self.getreflectionlocs) < 4096) {
 		self orientmode("face enemy");
 		return;
 	}
@@ -855,12 +855,12 @@ notetrackrocketlauncherammodelete() {
 		self.rocketlauncherammo delete();
 	}
 
-	self.var_1491.rocketvisible = 1;
+	self.a.rocketvisible = 1;
 	if(isai(self) && !isalive(self)) {
 		return;
 	}
 
-	if(scripts\sp\_utility::hastag(function_00EA(self.var_394),"tag_rocket")) {
+	if(scripts\sp\_utility::hastag(getweaponmodel(self.var_394),"tag_rocket")) {
 		self giveperk("tag_rocket");
 	}
 }
@@ -893,11 +893,11 @@ handlenotetrack(param_00,param_01,param_02,param_03) {
 			break;
 
 		case "swish small":
-			thread scripts\common\utility::play_sound_in_space("melee_swing_small",self gettagorigin("TAG_WEAPON_RIGHT"));
+			thread scripts\engine\utility::play_sound_in_space("melee_swing_small",self gettagorigin("TAG_WEAPON_RIGHT"));
 			break;
 
 		case "swish large":
-			thread scripts\common\utility::play_sound_in_space("melee_swing_large",self gettagorigin("TAG_WEAPON_RIGHT"));
+			thread scripts\engine\utility::play_sound_in_space("melee_swing_large",self gettagorigin("TAG_WEAPON_RIGHT"));
 			break;
 
 		case "rechamber":
@@ -905,11 +905,11 @@ handlenotetrack(param_00,param_01,param_02,param_03) {
 				self playsound("weap_reload_shotgun_pump_npc");
 			}
 	
-			self.var_1491.needstorechamber = 0;
+			self.a.needstorechamber = 0;
 			break;
 
 		case "no death":
-			self.var_1491.nodeath = 1;
+			self.a.nodeath = 1;
 			break;
 
 		case "no pain":
@@ -922,12 +922,12 @@ handlenotetrack(param_00,param_01,param_02,param_03) {
 
 		case "anim_melee = \"right\":
 		case "anim_melee = right":
-			self.var_1491.meleestate = "right";
+			self.a.meleestate = "right";
 			break;
 
 		case "anim_melee = \"left\":
 		case "anim_melee = left":
-			self.var_1491.meleestate = "left";
+			self.a.meleestate = "left";
 			break;
 
 		case "swap taghelmet to tagleft":
@@ -990,7 +990,7 @@ handlenotetrack(param_00,param_01,param_02,param_03) {
 			break;
 
 		case "jetpack_death_fx":
-			playfxontag(scripts\common\utility::getfx("zerog_jetpack_death"),self,"tag_fx_bottom");
+			playfxontag(scripts\engine\utility::getfx("zerog_jetpack_death"),self,"tag_fx_bottom");
 			break;
 
 		case "start_drift":
@@ -1221,12 +1221,12 @@ playfootstep(param_00,param_01) {
 		}
 
 		self playrumbleonentity(var_07);
-		function_01A2(self.origin,var_09,var_09,var_09,0.3,0,-1,var_08,5,0.2,2);
+		screenshake(self.origin,var_09,var_09,var_09,0.3,0,-1,var_08,5,0.2,2);
 		var_0A = self gettagorigin(var_03);
 		var_0B = self.angles;
 		var_0C = anglestoup(var_0B);
 		var_0C = var_0C * 0.35;
-		function_016C(var_0A,50,25,var_0C);
+		physicsjolt(var_0A,50,25,var_0C);
 		var_0D = 100;
 		if(!level.player isjumping() && distancesquared(level.player.origin,var_0A) <= squared(var_0D)) {
 			level.player dodamage(level.player.maxhealth * 0.5,var_0A,self);
@@ -1331,7 +1331,7 @@ func_D480(param_00,param_01) {
 }
 
 fire_straight() {
-	if(self.var_1491.weaponpos["right"] == "none") {
+	if(self.a.weaponpos["right"] == "none") {
 		return;
 	}
 
@@ -1371,7 +1371,7 @@ notetrackfirespray(param_00,param_01) {
 		return;
 	}
 
-	if(self.var_1491.weaponpos["right"] == "none") {
+	if(self.a.weaponpos["right"] == "none") {
 		return;
 	}
 
@@ -1427,10 +1427,10 @@ func_CCAB(param_00,param_01) {
 
 	var_03 = undefined;
 	if(param_01 == "large") {
-		var_03 = scripts\common\utility::ter_op(isdefined(level.var_E977),level.var_13EE8,::func_CD6B);
+		var_03 = scripts\engine\utility::ter_op(isdefined(level.var_E977),level.var_13EE8,::func_CD6B);
 	}
 	else if(param_01 == "small") {
-		var_03 = scripts\common\utility::ter_op(isdefined(level.var_E977),level.var_13EE9,::func_CE13);
+		var_03 = scripts\engine\utility::ter_op(isdefined(level.var_E977),level.var_13EE9,::func_CE13);
 	}
 
 	foreach(var_05 in var_02) {
@@ -1459,13 +1459,13 @@ func_CE37(param_00,param_01,param_02) {
 
 	var_04 = undefined;
 	if(var_03 == "axis") {
-		var_04 = scripts\common\utility::getfx(param_00);
+		var_04 = scripts\engine\utility::getfx(param_00);
 	}
 	else if(var_03 == "allies") {
-		var_04 = scripts\common\utility::getfx(param_01);
+		var_04 = scripts\engine\utility::getfx(param_01);
 	}
 
-	var_05 = scripts\common\utility::ter_op(self.team == "axis","double_jump_boost_enemy","double_jump_boost_npc");
+	var_05 = scripts\engine\utility::ter_op(self.team == "axis","double_jump_boost_enemy","double_jump_boost_npc");
 	childthread scripts\sp\_utility::play_sound_on_entity(var_05);
 	playfxontag(var_04,self,param_02);
 	return [var_04,param_02];

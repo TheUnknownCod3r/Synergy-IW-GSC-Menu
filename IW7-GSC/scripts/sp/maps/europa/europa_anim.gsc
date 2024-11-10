@@ -1,8 +1,8 @@
-/**********************************************************
+/**************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\sp\maps\europa\europa_anim.gsc
-**********************************************************/
+ * Script: scripts\sp\maps\europa\europa_anim.gsc
+**************************************************/
 
 main() {
 	func_91DC();
@@ -21,8 +21,8 @@ func_91DC() {
 	level.var_EC85["generic"]["c6_hack"][0] = %europa_armory_eng_console_idle;
 	level.var_EC85["scar1"]["europa_dropship_intro"] = %europa_dropship_intro_scar01_scene;
 	level.var_EC85["scar2"]["europa_dropship_intro"] = %europa_dropship_intro_scar02_scene;
-	scripts/sp/anim::func_17FA("scar2","nt_door_open","dropship_door_open","europa_dropship_intro");
-	scripts/sp/anim::func_17FC("scar2","weapon_attach","scar2_stow_weapon","europa_dropship_intro");
+	scripts\sp\anim::func_17FA("scar2","nt_door_open","dropship_door_open","europa_dropship_intro");
+	scripts\sp\anim::func_17FC("scar2","weapon_attach","scar2_stow_weapon","europa_dropship_intro");
 	level.var_EC85["scar1"]["europa_dropship_idle"][0] = %europa_dropship_intro_scar01_idle;
 	level.var_EC85["scar2"]["europa_dropship_idle"][0] = %europa_dropship_intro_scar02_idle;
 	level.var_EC85["scar1"]["europa_dropship_halo_jump"] = %europa_dropship_intro_scar01_halo_jump;
@@ -42,19 +42,19 @@ func_91DC() {
 	level.var_EC85["player_enemy"]["cliffjumper_exit"] = %europa_landing_takedown_shoot_exit_a_enemy;
 	level.var_EC85["ally_enemy"]["cliffjumper"] = %europa_landing_takedown_b_enemy;
 	level.var_EC85["scar2"]["cliffjumper"] = %europa_landing_takedown_b_ally;
-	scripts/sp/anim::func_17F6("ally_enemy","helmet_pop",::func_8E1D,"cliffjumper");
-	scripts/sp/anim::func_17F6("player_enemy","die",::func_12920,"cliffjumper");
-	scripts/sp/anim::func_17F6("player_enemy","kick_impact",::func_12923,"cliffjumper");
+	scripts\sp\anim::func_17F6("ally_enemy","helmet_pop",::func_8E1D,"cliffjumper");
+	scripts\sp\anim::func_17F6("player_enemy","die",::func_12920,"cliffjumper");
+	scripts\sp\anim::func_17F6("player_enemy","kick_impact",::func_12923,"cliffjumper");
 	level.var_EC85["guy1"]["platform_scene"] = %europa_labs_eng_c12_walkby_pcap;
 	level.var_EC85["guy2"]["platform_scene"] = %europa_labs_xo_c12_walkby_pcap;
 	level.var_EC85["takedown_enemy"]["tunnel_takedown"] = %europa_ice_cavern_sdf_takedown_02;
 	level.var_EC85["scar1"]["tunnel_takedown"] = %europa_ice_cavern_scar_takedown_02;
-	scripts/sp/anim::func_17F6("takedown_enemy","die",::func_12920,"tunnel_takedown");
-	scripts/sp/anim::func_17F6("takedown_enemy","nt_interupt_end",::func_12924,"tunnel_takedown");
-	scripts/sp/anim::func_17FC("scar1","nt_interupt_check","interupt_check","tunnel_takedown");
-	scripts/sp/anim::func_17FC("scar1","nt_stab","scar_stab","tunnel_takedown");
-	scripts/sp/anim::func_17F6("scar1","knife_on",::func_12922,"tunnel_takedown");
-	scripts/sp/anim::func_17FC("scar1","knife_off","knife_off","tunnel_takedown");
+	scripts\sp\anim::func_17F6("takedown_enemy","die",::func_12920,"tunnel_takedown");
+	scripts\sp\anim::func_17F6("takedown_enemy","nt_interupt_end",::func_12924,"tunnel_takedown");
+	scripts\sp\anim::func_17FC("scar1","nt_interupt_check","interupt_check","tunnel_takedown");
+	scripts\sp\anim::func_17FC("scar1","nt_stab","scar_stab","tunnel_takedown");
+	scripts\sp\anim::func_17F6("scar1","knife_on",::func_12922,"tunnel_takedown");
+	scripts\sp\anim::func_17FC("scar1","knife_off","knife_off","tunnel_takedown");
 	level.var_EC85["scar1"]["hold_up"] = %europa_seeker_scar01_hold;
 	level.var_EC85["scar2"]["hold_up"] = %europa_seeker_scar01_hold;
 	level.var_EC85["generic"]["rummage1"] = %europa_airlock_locker_sdf01_scavenge;
@@ -70,8 +70,8 @@ func_91DC() {
 	level.var_EC85["generic"]["scripted_long_death_crawl"] = %hm_grnd_org_long_death_crawl01;
 	level.var_EC85["generic"]["scripted_long_death_die"] = %hm_grnd_org_long_death_crawl_death01;
 	level.var_EC85["scar1"]["antigrav_breach"] = %europa_airlock_scar01_grav_grenade_scene;
-	scripts/sp/anim::func_17FC("scar1","grenade_appear","grenade_appear","antigrav_breach");
-	scripts/sp/anim::func_17FC("scar1","grenade_toss","grenade_toss","antigrav_breach");
+	scripts\sp\anim::func_17FC("scar1","grenade_appear","grenade_appear","antigrav_breach");
+	scripts\sp\anim::func_17FC("scar1","grenade_toss","grenade_toss","antigrav_breach");
 	level.var_EC85["scar2"]["lab_airlock_close_intro"] = %europa_airlock_xo_door_intro;
 	level.var_EC85["scar2"]["lab_airlock_close_idle"][0] = %europa_airlock_xo_door_idle;
 	level.var_EC85["scar2"]["lab_airlock_close"] = %europa_airlock_xo_door_close;
@@ -86,51 +86,51 @@ func_91DC() {
 	level.var_EC85["scar1"]["office_enter_idle"][0] = %europa_office_enter_scar01_idle;
 	level.var_EC85["scar1"]["office_enter_go"] = %europa_office_enter_scar01_out;
 	level.var_EC85["scar2"]["office_enter_tapgo"] = %europa_office_enter_scar02_tap;
-	scripts/sp/anim::func_17FC("scar2","scar01_out_start","nt_notify_tapandgo","office_enter_tapgo");
+	scripts\sp\anim::func_17FC("scar2","scar01_out_start","nt_notify_tapandgo","office_enter_tapgo");
 	level.var_EC85["generic"]["sdf_seeker_pulltable_sc"] = %europa_gunrange_sdf01_pulltable;
 	level.var_EC85["scar1"]["cutter_entry_scars"] = %europa_armory_scar01_enter;
 	level.var_EC85["scar2"]["cutter_entry_scars"] = %europa_armory_scar02_enter;
 	level.var_EC85["scar1"]["armory_vault_reaction"] = %europa_armory_scar02_back_away;
 	level.var_EC85["scar2"]["selfdestruct"] = %europa_armory_scar01_self_destruct;
-	scripts/sp/anim::func_17F6("scar2","give_weapon",::func_C0D7,"selfdestruct");
+	scripts\sp\anim::func_17F6("scar2","give_weapon",::func_C0D7,"selfdestruct");
 	level.var_EC85["scar2"]["selfdestruct_alt"] = %europa_armory_scar01_self_destruct_alt;
-	scripts/sp/anim::func_17F6("scar2","give_weapon",::func_C0D7,"selfdestruct_alt");
+	scripts\sp\anim::func_17F6("scar2","give_weapon",::func_C0D7,"selfdestruct_alt");
 	level.var_EC85["scar1"]["fspar_boot_intro"] = %europa_armory_ally_starting_up_fspar_intro;
 	level.var_EC85["scar1"]["fspar_boot_idle"][0] = %europa_armory_ally_starting_up_fspar_idle;
 	level.var_EC85["scar1"]["fspar_boot_exit"] = %europa_armory_ally_starting_up_fspar_exit;
 	level.var_EC85["scar1"]["fspar_suckout"] = %europa_end_ally_suckout;
-	scripts/sp/anim::func_17FA("scar1","impact","decompress_blackout","fspar_suckout");
+	scripts\sp\anim::func_17FA("scar1","impact","decompress_blackout","fspar_suckout");
 	level.scr_sound["scar1"]["decompress_intro"] = "europa_tee_scramblingtofinds";
 	level.var_EC85["scar1"]["decompress_intro"] = %europa_end_tunnel_scar_02_hangon_intro;
 	level.var_EC85["scar1"]["decompress_loop"][0] = %europa_end_tunnel_scar_02_hangon_idle;
 	level.var_EC85["scar1"]["right_decompress"] = %europa_end_tunnel_scar_02_scene;
-	scripts/sp/anim::func_17FA("scar1","hit_player","decompress_blackout","right_decompress");
+	scripts\sp\anim::func_17FA("scar1","hit_player","decompress_blackout","right_decompress");
 	level.var_EC85["scar1"]["left_decompress"] = %europa_end_tunnel_scar_02_scene_left;
-	scripts/sp/anim::func_17FA("scar1","hit_player","decompress_blackout","left_decompress");
+	scripts\sp\anim::func_17FA("scar1","hit_player","decompress_blackout","left_decompress");
 	level.var_EC85["scar2"]["decompress"] = %europa_end_tunnel_scar_01_suckout;
 	level.scr_sound["scar2"]["decompress"] = "europa_sip_arrrhhhhhhgettings";
 	level.var_EC85["generic"]["decompress"][0] = %europa_end_tunnel_scar_01_suckout_rel;
 	level.var_EC85["scar1"]["outro"] = %europa_end_scar01_scene;
-	scripts/sp/anim::func_17F6("scar1","headsmash",::func_8CA1,"outro");
+	scripts\sp\anim::func_17F6("scar1","headsmash",::func_8CA1,"outro");
 	level.var_EC85["scar2"]["outro"] = %europa_end_scar02_scene;
-	scripts/sp/anim::func_17F6("scar2","headsmash",::func_8CA1,"outro");
+	scripts\sp\anim::func_17F6("scar2","headsmash",::func_8CA1,"outro");
 	level.var_EC85["sdf1"]["outro"] = %europa_end_sdf01_scene;
-	scripts/sp/anim::func_17F6("sdf1","kill_me",::func_C7C7,"outro");
+	scripts\sp\anim::func_17F6("sdf1","kill_me",::func_C7C7,"outro");
 	level.var_EC85["sdf2"]["outro"] = %europa_end_sdf02_scene;
-	scripts/sp/anim::func_17F6("sdf2","first_hit",::func_C7BF,"outro");
-	scripts/sp/anim::func_17F6("sdf2","hit",::func_C7C5,"outro");
-	scripts/sp/anim::func_17F6("sdf2","focus_on_me",::func_C7C4,"outro");
-	scripts/sp/anim::func_17F6("sdf2","raise_fist",::func_C7CE,"outro");
+	scripts\sp\anim::func_17F6("sdf2","first_hit",::func_C7BF,"outro");
+	scripts\sp\anim::func_17F6("sdf2","hit",::func_C7C5,"outro");
+	scripts\sp\anim::func_17F6("sdf2","focus_on_me",::func_C7C4,"outro");
+	scripts\sp\anim::func_17F6("sdf2","raise_fist",::func_C7CE,"outro");
 	level.var_EC85["sdf3"]["outro"] = %europa_end_sdf03_scene;
 	level.var_EC85["sdf4"]["outro"] = %europa_end_sdf04_scene;
 	level.var_EC85["kotch"]["outro"] = %europa_end_kotch_scene;
-	scripts/sp/anim::func_17FC("kotch","kotch_kneel","kotch_kneel","outro");
-	scripts/sp/anim::func_17FC("kotch","kotch_stands","kotch_stands","outro");
-	scripts/sp/anim::func_17FC("kotch","kotch_kneel2","kotch_kneel2","outro");
-	scripts/sp/anim::func_17F6("kotch","fire",::func_C7BE,"outro");
-	scripts/sp/anim::func_17F6("kotch","oxygen_in",::func_C7CB,"outro");
-	scripts/sp/anim::func_17F6("kotch","oxygen_out",::func_C7CC,"outro");
-	scripts/sp/anim::func_17F6("kotch","detach_canister",::func_C7BA,"outro");
+	scripts\sp\anim::func_17FC("kotch","kotch_kneel","kotch_kneel","outro");
+	scripts\sp\anim::func_17FC("kotch","kotch_stands","kotch_stands","outro");
+	scripts\sp\anim::func_17FC("kotch","kotch_kneel2","kotch_kneel2","outro");
+	scripts\sp\anim::func_17F6("kotch","fire",::func_C7BE,"outro");
+	scripts\sp\anim::func_17F6("kotch","oxygen_in",::func_C7CB,"outro");
+	scripts\sp\anim::func_17F6("kotch","oxygen_out",::func_C7CC,"outro");
+	scripts\sp\anim::func_17F6("kotch","detach_canister",::func_C7BA,"outro");
 	level.var_EC85["generic"]["generic_dead_civ_01"] = %generic_dead_civ_01;
 	level.var_EC85["generic"]["generic_dead_civ_02"] = %generic_dead_civ_02;
 	level.var_EC85["generic"]["generic_dead_civ_03"] = %generic_dead_civ_03;
@@ -359,13 +359,13 @@ player() {
 	level.var_EC8C["player_rig"] = "viewmodel_base_viewhands_iw7";
 	level.var_EC85["player_rig"]["europa_dropship_idle"][0] = %europa_dropship_intro_plr_idle;
 	level.var_EC85["player_rig"]["europa_dropship_intro"] = %europa_dropship_intro_plr_scene;
-	scripts/sp/anim::func_17FA("player_rig","vo_europa_rpr_warlordactual","nt_flag_warlordactual","europa_dropship_intro");
-	scripts/sp/anim::func_17FA("player_rig","vo_europa_rpr_goindark","nt_flag_going_dark","europa_dropship_intro");
-	scripts/sp/anim::func_17FA("player_rig","visor_lower","nt_flag_visor_lower","europa_dropship_intro");
-	scripts/sp/anim::func_17F6("player_rig","visor_lower",::func_67AF,"europa_dropship_intro");
-	scripts/sp/anim::func_17FA("player_rig","nt_thirty_seconds","nt_thirty_seconds","europa_dropship_intro");
-	scripts/sp/anim::func_17FA("player_rig","nt_twenty_seconds","nt_twenty_seconds","europa_dropship_intro");
-	scripts/sp/anim::func_17FA("player_rig","nt_ten_seconds","nt_ten_seconds","europa_dropship_intro");
+	scripts\sp\anim::func_17FA("player_rig","vo_europa_rpr_warlordactual","nt_flag_warlordactual","europa_dropship_intro");
+	scripts\sp\anim::func_17FA("player_rig","vo_europa_rpr_goindark","nt_flag_going_dark","europa_dropship_intro");
+	scripts\sp\anim::func_17FA("player_rig","visor_lower","nt_flag_visor_lower","europa_dropship_intro");
+	scripts\sp\anim::func_17F6("player_rig","visor_lower",::func_67AF,"europa_dropship_intro");
+	scripts\sp\anim::func_17FA("player_rig","nt_thirty_seconds","nt_thirty_seconds","europa_dropship_intro");
+	scripts\sp\anim::func_17FA("player_rig","nt_twenty_seconds","nt_twenty_seconds","europa_dropship_intro");
+	scripts\sp\anim::func_17FA("player_rig","nt_ten_seconds","nt_ten_seconds","europa_dropship_intro");
 	level.var_EC85["player_rig"]["europa_dropship_halo_jump"] = %europa_dropship_intro_plr_halo_jump_all;
 	level.var_EC85["player_rig"]["europa_dropship_halo_land"] = %europa_dropship_intro_plr_halo_land;
 	level.var_EC85["player_rig"]["europa_dropship_halo_land_rel"] = %europa_dropship_intro_plr_halo_land_rel;
@@ -375,34 +375,34 @@ player() {
 	level.var_EC85["player_rig"]["cliffjumper_loop"] = %europa_landing_takedown_melee_loop_a_plr;
 	level.var_EC85["player_rig"]["cliffjumper_kill"] = %europa_landing_takedown_melee_kill_a_plr;
 	level.var_EC85["player_rig"]["cliffjumper_exit"] = %europa_landing_takedown_shoot_exit_a_plr;
-	scripts/sp/anim::func_17F6("player_rig","knife_attach",::func_D1B0,"cliffjumper");
-	scripts/sp/anim::func_17F6("player_rig","head_crack",::func_8C5B,"cliffjumper");
-	scripts/sp/anim::func_17FA("player_rig","kick_done","cliffjump_kick_done","cliffjumper");
-	scripts/sp/anim::func_17FA("player_rig","boost_end","boost_required_end","cliffjumper");
-	scripts/sp/anim::func_17FC("player_rig","stab","stab","cliffjumper_kill");
+	scripts\sp\anim::func_17F6("player_rig","knife_attach",::func_D1B0,"cliffjumper");
+	scripts\sp\anim::func_17F6("player_rig","head_crack",::func_8C5B,"cliffjumper");
+	scripts\sp\anim::func_17FA("player_rig","kick_done","cliffjump_kick_done","cliffjumper");
+	scripts\sp\anim::func_17FA("player_rig","boost_end","boost_required_end","cliffjumper");
+	scripts\sp\anim::func_17FC("player_rig","stab","stab","cliffjumper_kill");
 	level.var_EC85["player_rig"]["antigrav_breach"] = %europa_airlock_plr_grav_grenade_scene;
-	scripts/sp/anim::func_17FA("player_rig","door_ajar","door_ajar","antigrav_breach");
-	scripts/sp/anim::func_17FA("player_rig","door_kick","door_kick","antigrav_breach");
+	scripts\sp\anim::func_17FA("player_rig","door_ajar","door_ajar","antigrav_breach");
+	scripts\sp\anim::func_17FA("player_rig","door_kick","door_kick","antigrav_breach");
 	level.var_EC85["player_rig"]["selfdestruct"] = %europa_armory_plr_self_destruct;
-	scripts/sp/anim::func_17F5("player_rig","attach_weapon","weapon_steeldragon_sp_wm","tag_accessory_right","selfdestruct");
-	scripts/sp/anim::func_17FA("player_rig","open_doors","open_armory_doors","selfdestruct");
-	scripts/sp/anim::func_17FA("player_rig","lookdown","armory_lookdown","selfdestruct");
-	scripts/sp/anim::func_17FA("player_rig","pvo_europa_plr_bootitupsipes","sipes_mount_fspar","selfdestruct");
-	scripts/sp/anim::func_17FC("player_rig","dof1","dof_change","selfdestruct");
-	scripts/sp/anim::func_17FC("player_rig","dof2","dof_change","selfdestruct");
-	scripts/sp/anim::func_17FC("player_rig","dof3","dof_change","selfdestruct");
+	scripts\sp\anim::func_17F5("player_rig","attach_weapon","weapon_steeldragon_sp_wm","tag_accessory_right","selfdestruct");
+	scripts\sp\anim::func_17FA("player_rig","open_doors","open_armory_doors","selfdestruct");
+	scripts\sp\anim::func_17FA("player_rig","lookdown","armory_lookdown","selfdestruct");
+	scripts\sp\anim::func_17FA("player_rig","pvo_europa_plr_bootitupsipes","sipes_mount_fspar","selfdestruct");
+	scripts\sp\anim::func_17FC("player_rig","dof1","dof_change","selfdestruct");
+	scripts\sp\anim::func_17FC("player_rig","dof2","dof_change","selfdestruct");
+	scripts\sp\anim::func_17FC("player_rig","dof3","dof_change","selfdestruct");
 	level.var_EC85["player_rig"]["decompress_loop"] = %europa_end_tunnel_plr_suckout_idle;
 	level.var_EC85["player_rig"]["right_decompress"] = %europa_end_tunnel_plr_suckout_scene;
 	level.var_EC85["player_rig"]["left_decompress"] = %europa_end_tunnel_plr_suckout_scene_left;
 	level.var_EC85["player_rig"]["fspar_suckout"] = %europa_plr_fires_large_steel_dragon_suckout;
 	level.var_EC85["player_rig"]["fspar_idle"][0] = %europa_plr_fires_large_steel_dragon_idle;
 	level.var_EC85["player_rig"]["fspar_fire"] = %europa_plr_fires_large_steel_dragon_button_press;
-	scripts/sp/anim::func_17FA("player_rig","holding_on","player_holding_on","fspar_suckout");
-	scripts/sp/anim::func_17F6("player_rig","player_scream",::func_D015,"decompress");
+	scripts\sp\anim::func_17FA("player_rig","holding_on","player_holding_on","fspar_suckout");
+	scripts\sp\anim::func_17F6("player_rig","player_scream",::func_D015,"decompress");
 	level.var_EC85["player_rig"]["outro"] = %europa_end_plr_scene;
 	level.var_C7D5 = getanimlength(level.var_EC85["player_rig"]["outro"]);
-	scripts/sp/anim::func_17F6("player_rig","oxygen_depleted",::func_C7CA,"outro");
-	scripts/sp/anim::func_17FC("player_rig","look_at_friendlies","look_at_friendlies","outro");
+	scripts\sp\anim::func_17F6("player_rig","oxygen_depleted",::func_C7CA,"outro");
+	scripts\sp\anim::func_17FC("player_rig","look_at_friendlies","look_at_friendlies","outro");
 	level.var_EC85["player_rig"]["fire_fspar"] = %europa_plr_fires_large_steel_dragon;
 }
 
@@ -461,7 +461,7 @@ func_D1B0(param_00) {
 }
 
 func_67AF(param_00) {
-	function_02A9("atmosphere","helmet",1);
+	setglobalsoundcontext("atmosphere","helmet",1);
 }
 
 func_D015(param_00) {
@@ -553,23 +553,23 @@ func_7348(param_00) {
 
 func_F1EC(param_00) {
 	setomnvar("ui_europa_selfdestruct",1);
-	function_01C5("bg_cinematicFullScreen","0");
-	function_01C5("bg_cinematicCanPause","1");
+	setsaveddvar("bg_cinematicFullScreen","0");
+	setsaveddvar("bg_cinematicCanPause","1");
 	level.player playsound("europa_armory_self_destruct_ui");
-	function_003D("europa_selfdestruct");
-	while(!function_0102()) {
+	cinematicingame("europa_selfdestruct");
+	while(!iscinematicplaying()) {
 		wait(0.05);
 	}
 
 	thread scripts\sp\_art::func_583F(0,4,10,5,15,150,0.5);
 	scripts\engine\utility::delaythread(3.5,::scripts\sp\_art::func_583D,1);
-	while(function_0102()) {
+	while(iscinematicplaying()) {
 		wait(0.05);
 	}
 
-	function_01F1();
-	function_01C5("bg_cinematicFullScreen","1");
-	function_01C5("bg_cinematicCanPause","1");
+	stopcinematicingame();
+	setsaveddvar("bg_cinematicFullScreen","1");
+	setsaveddvar("bg_cinematicCanPause","1");
 	setomnvar("ui_europa_selfdestruct",0);
 }
 

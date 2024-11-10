@@ -1,8 +1,8 @@
-/***********************************************
+/***************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\anim\snowmobile.gsc
-***********************************************/
+ * Script: scripts\anim\snowmobile.gsc
+***************************************/
 
 main() {
 	self.var_4B71 = "none";
@@ -18,7 +18,7 @@ main() {
 
 func_103C8() {
 	self.objective_state_nomessage = 0;
-	self.var_1491.pose = "crouch";
+	self.a.pose = "crouch";
 	scripts\sp\_utility::func_558D();
 	self.allowpain = 0;
 	self.var_6EC4 = 1;
@@ -34,7 +34,7 @@ func_103C7() {
 	self.var_C59B = undefined;
 	self._meth_8020 = undefined;
 	self.var_10957 = undefined;
-	self.var_1491.var_1096D = undefined;
+	self.a.var_1096D = undefined;
 	self.disablebulletwhizbyreaction = undefined;
 }
 
@@ -308,7 +308,7 @@ func_103D8() {
 func_103C3() {
 	self endon("killanimscript");
 	self endon("end_shoot_while_driving");
-	self.var_1491.var_1096D = ::func_103DE;
+	self.a.var_1096D = ::func_103DE;
 	func_103C4();
 	self.var_FE91 = undefined;
 }
@@ -328,7 +328,7 @@ func_103DE() {
 
 	self.var_FE9E = self.isnodeoccupied;
 	self.var_FECF = self.isnodeoccupied getshootatpos();
-	var_00 = distancesquared(self.origin,self.var_10C.origin);
+	var_00 = distancesquared(self.origin,self.isnodeoccupied.origin);
 	if(var_00 < 1000000) {
 		self.var_FED7 = "full";
 	}
@@ -340,7 +340,7 @@ func_103DE() {
 		self.var_FED7 = "single";
 	}
 
-	if(isdefined(self.var_10C.vehicle)) {
+	if(isdefined(self.isnodeoccupied.vehicle)) {
 		var_01 = 0.5;
 		var_02 = self.var_FE9E.vehicle;
 		var_03 = self.var_E500;
@@ -353,7 +353,7 @@ func_103DE() {
 			var_08 = var_08 * 17.6;
 			if(var_08 > 50) {
 				var_09 = vectordot(var_04,var_06);
-				var_09 = var_09 \ 3;
+				var_09 = var_09 / 3;
 				if(var_09 > 128) {
 					var_09 = 128;
 				}
@@ -494,13 +494,13 @@ func_103D9() {
 		{
 			var_0A = var_03 - var_02;
 			if(abs(var_0A) > var_01) {
-				var_03 = var_02 + var_01 * scripts\common\utility::sign(var_0A);
+				var_03 = var_02 + var_01 * scripts\engine\utility::sign(var_0A);
 			}
 		}
 
 		var_02 = var_03;
-		var_0B = min(max(var_03,0),90) \ 90 * self.var_1491.var_1A4B;
-		var_0C = min(max(0 - var_03,0),90) \ 90 * self.var_1491.var_1A4B;
+		var_0B = min(max(var_03,0),90) / 90 * self.a.var_1A4B;
+		var_0C = min(max(0 - var_03,0),90) / 90 * self.a.var_1A4B;
 		self _meth_82AC(%sm_aim_4,var_0B,var_00);
 		self _meth_82AC(%sm_aim_6,var_0C,var_00);
 		wait(0.05);
@@ -560,7 +560,7 @@ func_103DA() {
 			}
 
 			var_0E = var_07 - var_06;
-			var_0F = var_02 - var_01 * abs(var_0E) \ 180 + var_01;
+			var_0F = var_02 - var_01 * abs(var_0E) / 180 + var_01;
 			if(isdefined(self.var_10FB2)) {
 				var_0F = var_03;
 				if(abs(var_06) < 45) {
@@ -569,16 +569,16 @@ func_103DA() {
 			}
 
 			if(abs(var_0E) > var_0F) {
-				var_07 = var_06 + var_0F * scripts\common\utility::sign(var_0E);
+				var_07 = var_06 + var_0F * scripts\engine\utility::sign(var_0E);
 			}
 		}
 
 		var_06 = var_07;
-		var_10 = max(-90 + var_07,0) \ 90 * self.var_1491.var_1A4B;
-		var_11 = min(max(var_07,0),90) \ 90 * self.var_1491.var_1A4B;
-		var_12 = max(90 - abs(var_07),0) \ 90 * self.var_1491.var_1A4B;
-		var_13 = min(max(0 - var_07,0),90) \ 90 * self.var_1491.var_1A4B;
-		var_14 = max(-90 - var_07,0) \ 90 * self.var_1491.var_1A4B;
+		var_10 = max(-90 + var_07,0) / 90 * self.a.var_1A4B;
+		var_11 = min(max(var_07,0),90) / 90 * self.a.var_1A4B;
+		var_12 = max(90 - abs(var_07),0) / 90 * self.a.var_1A4B;
+		var_13 = min(max(0 - var_07,0),90) / 90 * self.a.var_1A4B;
+		var_14 = max(-90 - var_07,0) / 90 * self.a.var_1A4B;
 		self _meth_82AC(%sm_aim_1,var_10,var_00);
 		self _meth_82AC(%sm_aim_4_delta,var_11,var_00);
 		self _meth_82AC(%sm_aim_5_delta,var_12,var_00);
@@ -593,7 +593,7 @@ func_103C6(param_00,param_01,param_02) {
 	var_04 = undefined;
 	var_05 = 0;
 	for(var_06 = 0;var_06 < param_00.size;var_06++) {
-		var_07 = scripts\common\utility::absangleclamp180(param_02 - param_01[var_06]);
+		var_07 = scripts\engine\utility::absangleclamp180(param_02 - param_01[var_06]);
 		if(!isdefined(var_03) || var_07 < var_05) {
 			var_04 = var_03;
 			var_03 = param_00[var_06];
@@ -683,95 +683,95 @@ func_51D1() {
 }
 
 func_103D3(param_00) {
-	self.var_1491.var_2274["idle"] = level.var_EC85["snowmobile"][param_00]["idle"];
-	self.var_1491.var_2274["drive"] = level.var_EC85["snowmobile"][param_00]["drive"];
-	self.var_1491.var_2274["fire"] = level.var_EC85["snowmobile"][param_00]["fire"];
-	self.var_1491.var_2274["single"] = scripts\anim\utility::func_2274(level.var_EC85["snowmobile"][param_00]["single"]);
-	self.var_1491.var_2274["burst2"] = level.var_EC85["snowmobile"][param_00]["fire"];
-	self.var_1491.var_2274["burst3"] = level.var_EC85["snowmobile"][param_00]["fire"];
-	self.var_1491.var_2274["burst4"] = level.var_EC85["snowmobile"][param_00]["fire"];
-	self.var_1491.var_2274["burst5"] = level.var_EC85["snowmobile"][param_00]["fire"];
-	self.var_1491.var_2274["burst6"] = level.var_EC85["snowmobile"][param_00]["fire"];
-	self.var_1491.var_2274["semi2"] = level.var_EC85["snowmobile"][param_00]["fire"];
-	self.var_1491.var_2274["semi3"] = level.var_EC85["snowmobile"][param_00]["fire"];
-	self.var_1491.var_2274["semi4"] = level.var_EC85["snowmobile"][param_00]["fire"];
-	self.var_1491.var_2274["semi5"] = level.var_EC85["snowmobile"][param_00]["fire"];
+	self.a.var_2274["idle"] = level.var_EC85["snowmobile"][param_00]["idle"];
+	self.a.var_2274["drive"] = level.var_EC85["snowmobile"][param_00]["drive"];
+	self.a.var_2274["fire"] = level.var_EC85["snowmobile"][param_00]["fire"];
+	self.a.var_2274["single"] = scripts\anim\utility::func_2274(level.var_EC85["snowmobile"][param_00]["single"]);
+	self.a.var_2274["burst2"] = level.var_EC85["snowmobile"][param_00]["fire"];
+	self.a.var_2274["burst3"] = level.var_EC85["snowmobile"][param_00]["fire"];
+	self.a.var_2274["burst4"] = level.var_EC85["snowmobile"][param_00]["fire"];
+	self.a.var_2274["burst5"] = level.var_EC85["snowmobile"][param_00]["fire"];
+	self.a.var_2274["burst6"] = level.var_EC85["snowmobile"][param_00]["fire"];
+	self.a.var_2274["semi2"] = level.var_EC85["snowmobile"][param_00]["fire"];
+	self.a.var_2274["semi3"] = level.var_EC85["snowmobile"][param_00]["fire"];
+	self.a.var_2274["semi4"] = level.var_EC85["snowmobile"][param_00]["fire"];
+	self.a.var_2274["semi5"] = level.var_EC85["snowmobile"][param_00]["fire"];
 }
 
 func_103D4(param_00) {
-	self.var_1491.var_2274 = [];
+	self.a.var_2274 = [];
 	func_103D3("driver");
-	self.var_1491.var_2274["left2right"] = level.var_EC85["snowmobile"]["driver"]["left2right"];
-	self.var_1491.var_2274["right2left"] = level.var_EC85["snowmobile"]["driver"]["right2left"];
-	self.var_1491.var_2274["straight_level_left"] = level.var_EC85["snowmobile"]["driver"]["straight_level"]["left"];
-	self.var_1491.var_2274["straight_level_center"] = level.var_EC85["snowmobile"]["driver"]["straight_level"]["center"];
-	self.var_1491.var_2274["straight_level_right"] = level.var_EC85["snowmobile"]["driver"]["straight_level"]["right"];
-	self.var_1491.var_2274["add_aim_left_left"] = level.var_EC85["snowmobile"]["driver"]["add_aim_left"]["left"];
-	self.var_1491.var_2274["add_aim_left_center"] = level.var_EC85["snowmobile"]["driver"]["add_aim_left"]["center"];
-	self.var_1491.var_2274["add_aim_left_right"] = level.var_EC85["snowmobile"]["driver"]["add_aim_left"]["right"];
-	self.var_1491.var_2274["add_aim_right_left"] = level.var_EC85["snowmobile"]["driver"]["add_aim_right"]["left"];
-	self.var_1491.var_2274["add_aim_right_center"] = level.var_EC85["snowmobile"]["driver"]["add_aim_right"]["center"];
-	self.var_1491.var_2274["add_aim_right_right"] = level.var_EC85["snowmobile"]["driver"]["add_aim_right"]["right"];
+	self.a.var_2274["left2right"] = level.var_EC85["snowmobile"]["driver"]["left2right"];
+	self.a.var_2274["right2left"] = level.var_EC85["snowmobile"]["driver"]["right2left"];
+	self.a.var_2274["straight_level_left"] = level.var_EC85["snowmobile"]["driver"]["straight_level"]["left"];
+	self.a.var_2274["straight_level_center"] = level.var_EC85["snowmobile"]["driver"]["straight_level"]["center"];
+	self.a.var_2274["straight_level_right"] = level.var_EC85["snowmobile"]["driver"]["straight_level"]["right"];
+	self.a.var_2274["add_aim_left_left"] = level.var_EC85["snowmobile"]["driver"]["add_aim_left"]["left"];
+	self.a.var_2274["add_aim_left_center"] = level.var_EC85["snowmobile"]["driver"]["add_aim_left"]["center"];
+	self.a.var_2274["add_aim_left_right"] = level.var_EC85["snowmobile"]["driver"]["add_aim_left"]["right"];
+	self.a.var_2274["add_aim_right_left"] = level.var_EC85["snowmobile"]["driver"]["add_aim_right"]["left"];
+	self.a.var_2274["add_aim_right_center"] = level.var_EC85["snowmobile"]["driver"]["add_aim_right"]["center"];
+	self.a.var_2274["add_aim_right_right"] = level.var_EC85["snowmobile"]["driver"]["add_aim_right"]["right"];
 	if(param_00) {
-		self.var_1491.var_2274["event_jump"] = level.var_EC85["snowmobile"]["driver"]["shoot_jump"];
-		self.var_1491.var_2274["event_bump"] = level.var_EC85["snowmobile"]["driver"]["shoot_bump"];
-		self.var_1491.var_2274["event_bump_big"] = level.var_EC85["snowmobile"]["driver"]["shoot_bump_big"];
-		self.var_1491.var_2274["event_sway"] = [];
-		self.var_1491.var_2274["event_sway"]["left"] = level.var_EC85["snowmobile"]["driver"]["shoot_sway_left"];
-		self.var_1491.var_2274["event_sway"]["right"] = level.var_EC85["snowmobile"]["driver"]["shoot_sway_right"];
-		self.var_1491.var_2274["event_restore"] = %sm_aiming;
+		self.a.var_2274["event_jump"] = level.var_EC85["snowmobile"]["driver"]["shoot_jump"];
+		self.a.var_2274["event_bump"] = level.var_EC85["snowmobile"]["driver"]["shoot_bump"];
+		self.a.var_2274["event_bump_big"] = level.var_EC85["snowmobile"]["driver"]["shoot_bump_big"];
+		self.a.var_2274["event_sway"] = [];
+		self.a.var_2274["event_sway"]["left"] = level.var_EC85["snowmobile"]["driver"]["shoot_sway_left"];
+		self.a.var_2274["event_sway"]["right"] = level.var_EC85["snowmobile"]["driver"]["shoot_sway_right"];
+		self.a.var_2274["event_restore"] = %sm_aiming;
 		return;
 	}
 
-	self.var_1491.var_2274["event_jump"] = level.var_EC85["snowmobile"]["driver"]["drive_jump"];
-	self.var_1491.var_2274["event_bump"] = level.var_EC85["snowmobile"]["driver"]["drive_bump"];
-	self.var_1491.var_2274["event_bump_big"] = level.var_EC85["snowmobile"]["driver"]["drive_bump_big"];
-	self.var_1491.var_2274["event_sway"] = [];
-	self.var_1491.var_2274["event_sway"]["left"] = level.var_EC85["snowmobile"]["driver"]["drive_sway_left"];
-	self.var_1491.var_2274["event_sway"]["right"] = level.var_EC85["snowmobile"]["driver"]["drive_sway_right"];
-	self.var_1491.var_2274["event_restore"] = %sm_turn;
+	self.a.var_2274["event_jump"] = level.var_EC85["snowmobile"]["driver"]["drive_jump"];
+	self.a.var_2274["event_bump"] = level.var_EC85["snowmobile"]["driver"]["drive_bump"];
+	self.a.var_2274["event_bump_big"] = level.var_EC85["snowmobile"]["driver"]["drive_bump_big"];
+	self.a.var_2274["event_sway"] = [];
+	self.a.var_2274["event_sway"]["left"] = level.var_EC85["snowmobile"]["driver"]["drive_sway_left"];
+	self.a.var_2274["event_sway"]["right"] = level.var_EC85["snowmobile"]["driver"]["drive_sway_right"];
+	self.a.var_2274["event_restore"] = %sm_turn;
 }
 
 func_103D5(param_00) {
-	self.var_1491.var_2274 = [];
+	self.a.var_2274 = [];
 	func_103D3("passenger");
-	self.var_1491.var_2274["hide"] = level.var_EC85["snowmobile"]["passenger"]["hide"];
-	self.var_1491.var_2274["lean_left"] = level.var_EC85["snowmobile"]["passenger"]["add_lean"]["left"];
-	self.var_1491.var_2274["lean_right"] = level.var_EC85["snowmobile"]["passenger"]["add_lean"]["right"];
-	self.var_1491.var_2274["reload"] = level.var_EC85["snowmobile"]["passenger"]["reload"];
-	self.var_1491.var_2274["gun_up"] = level.var_EC85["snowmobile"]["passenger"]["gun_up"];
-	self.var_1491.var_2274["gun_down"] = level.var_EC85["snowmobile"]["passenger"]["gun_down"];
-	self.var_1491.var_2274["aim_left_left"] = level.var_EC85["snowmobile"]["passenger"]["aim_left"]["left"];
-	self.var_1491.var_2274["aim_left_center"] = level.var_EC85["snowmobile"]["passenger"]["aim_left"]["center"];
-	self.var_1491.var_2274["aim_left_right"] = level.var_EC85["snowmobile"]["passenger"]["aim_left"]["right"];
-	self.var_1491.var_2274["aim_right_left"] = level.var_EC85["snowmobile"]["passenger"]["aim_right"]["left"];
-	self.var_1491.var_2274["aim_right_center"] = level.var_EC85["snowmobile"]["passenger"]["aim_right"]["center"];
-	self.var_1491.var_2274["aim_right_right"] = level.var_EC85["snowmobile"]["passenger"]["aim_right"]["right"];
-	self.var_1491.var_2274["add_aim_backleft_left"] = level.var_EC85["snowmobile"]["passenger"]["add_aim_backleft"]["left"];
-	self.var_1491.var_2274["add_aim_backleft_center"] = level.var_EC85["snowmobile"]["passenger"]["add_aim_backleft"]["center"];
-	self.var_1491.var_2274["add_aim_backleft_right"] = level.var_EC85["snowmobile"]["passenger"]["add_aim_backleft"]["right"];
-	self.var_1491.var_2274["add_aim_backright_left"] = level.var_EC85["snowmobile"]["passenger"]["add_aim_backright"]["left"];
-	self.var_1491.var_2274["add_aim_backright_center"] = level.var_EC85["snowmobile"]["passenger"]["add_aim_backright"]["center"];
-	self.var_1491.var_2274["add_aim_backright_right"] = level.var_EC85["snowmobile"]["passenger"]["add_aim_backright"]["right"];
-	self.var_1491.var_2274["straight_level_left"] = level.var_EC85["snowmobile"]["passenger"]["straight_level"]["left"];
-	self.var_1491.var_2274["straight_level_center"] = level.var_EC85["snowmobile"]["passenger"]["straight_level"]["center"];
-	self.var_1491.var_2274["straight_level_right"] = level.var_EC85["snowmobile"]["passenger"]["straight_level"]["right"];
+	self.a.var_2274["hide"] = level.var_EC85["snowmobile"]["passenger"]["hide"];
+	self.a.var_2274["lean_left"] = level.var_EC85["snowmobile"]["passenger"]["add_lean"]["left"];
+	self.a.var_2274["lean_right"] = level.var_EC85["snowmobile"]["passenger"]["add_lean"]["right"];
+	self.a.var_2274["reload"] = level.var_EC85["snowmobile"]["passenger"]["reload"];
+	self.a.var_2274["gun_up"] = level.var_EC85["snowmobile"]["passenger"]["gun_up"];
+	self.a.var_2274["gun_down"] = level.var_EC85["snowmobile"]["passenger"]["gun_down"];
+	self.a.var_2274["aim_left_left"] = level.var_EC85["snowmobile"]["passenger"]["aim_left"]["left"];
+	self.a.var_2274["aim_left_center"] = level.var_EC85["snowmobile"]["passenger"]["aim_left"]["center"];
+	self.a.var_2274["aim_left_right"] = level.var_EC85["snowmobile"]["passenger"]["aim_left"]["right"];
+	self.a.var_2274["aim_right_left"] = level.var_EC85["snowmobile"]["passenger"]["aim_right"]["left"];
+	self.a.var_2274["aim_right_center"] = level.var_EC85["snowmobile"]["passenger"]["aim_right"]["center"];
+	self.a.var_2274["aim_right_right"] = level.var_EC85["snowmobile"]["passenger"]["aim_right"]["right"];
+	self.a.var_2274["add_aim_backleft_left"] = level.var_EC85["snowmobile"]["passenger"]["add_aim_backleft"]["left"];
+	self.a.var_2274["add_aim_backleft_center"] = level.var_EC85["snowmobile"]["passenger"]["add_aim_backleft"]["center"];
+	self.a.var_2274["add_aim_backleft_right"] = level.var_EC85["snowmobile"]["passenger"]["add_aim_backleft"]["right"];
+	self.a.var_2274["add_aim_backright_left"] = level.var_EC85["snowmobile"]["passenger"]["add_aim_backright"]["left"];
+	self.a.var_2274["add_aim_backright_center"] = level.var_EC85["snowmobile"]["passenger"]["add_aim_backright"]["center"];
+	self.a.var_2274["add_aim_backright_right"] = level.var_EC85["snowmobile"]["passenger"]["add_aim_backright"]["right"];
+	self.a.var_2274["straight_level_left"] = level.var_EC85["snowmobile"]["passenger"]["straight_level"]["left"];
+	self.a.var_2274["straight_level_center"] = level.var_EC85["snowmobile"]["passenger"]["straight_level"]["center"];
+	self.a.var_2274["straight_level_right"] = level.var_EC85["snowmobile"]["passenger"]["straight_level"]["right"];
 	if(param_00) {
-		self.var_1491.var_2274["event_jump"] = level.var_EC85["snowmobile"]["passenger"]["drive_jump"];
-		self.var_1491.var_2274["event_bump"] = level.var_EC85["snowmobile"]["passenger"]["drive_bump"];
-		self.var_1491.var_2274["event_bump_big"] = level.var_EC85["snowmobile"]["passenger"]["drive_bump_big"];
-		self.var_1491.var_2274["event_sway"] = [];
-		self.var_1491.var_2274["event_sway"]["left"] = level.var_EC85["snowmobile"]["passenger"]["drive_sway_left"];
-		self.var_1491.var_2274["event_sway"]["right"] = level.var_EC85["snowmobile"]["passenger"]["drive_sway_right"];
-		self.var_1491.var_2274["event_restore"] = %sm_aiming;
+		self.a.var_2274["event_jump"] = level.var_EC85["snowmobile"]["passenger"]["drive_jump"];
+		self.a.var_2274["event_bump"] = level.var_EC85["snowmobile"]["passenger"]["drive_bump"];
+		self.a.var_2274["event_bump_big"] = level.var_EC85["snowmobile"]["passenger"]["drive_bump_big"];
+		self.a.var_2274["event_sway"] = [];
+		self.a.var_2274["event_sway"]["left"] = level.var_EC85["snowmobile"]["passenger"]["drive_sway_left"];
+		self.a.var_2274["event_sway"]["right"] = level.var_EC85["snowmobile"]["passenger"]["drive_sway_right"];
+		self.a.var_2274["event_restore"] = %sm_aiming;
 		return;
 	}
 
-	self.var_1491.var_2274["event_jump"] = level.var_EC85["snowmobile"]["passenger"]["hide_jump"];
-	self.var_1491.var_2274["event_bump"] = level.var_EC85["snowmobile"]["passenger"]["hide_bump"];
-	self.var_1491.var_2274["event_bump_big"] = level.var_EC85["snowmobile"]["passenger"]["hide_bump_big"];
-	self.var_1491.var_2274["event_sway"] = [];
-	self.var_1491.var_2274["event_sway"]["left"] = level.var_EC85["snowmobile"]["passenger"]["hide_sway_left"];
-	self.var_1491.var_2274["event_sway"]["right"] = level.var_EC85["snowmobile"]["passenger"]["hide_sway_right"];
-	self.var_1491.var_2274["event_restore"] = %sm_turn;
+	self.a.var_2274["event_jump"] = level.var_EC85["snowmobile"]["passenger"]["hide_jump"];
+	self.a.var_2274["event_bump"] = level.var_EC85["snowmobile"]["passenger"]["hide_bump"];
+	self.a.var_2274["event_bump_big"] = level.var_EC85["snowmobile"]["passenger"]["hide_bump_big"];
+	self.a.var_2274["event_sway"] = [];
+	self.a.var_2274["event_sway"]["left"] = level.var_EC85["snowmobile"]["passenger"]["hide_sway_left"];
+	self.a.var_2274["event_sway"]["right"] = level.var_EC85["snowmobile"]["passenger"]["hide_sway_right"];
+	self.a.var_2274["event_restore"] = %sm_turn;
 }

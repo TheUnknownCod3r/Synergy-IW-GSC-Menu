@@ -1,8 +1,8 @@
-/***********************************************
+/***************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\anim\cover_wall.gsc
-***********************************************/
+ * Script: scripts\anim\cover_wall.gsc
+***************************************/
 
 func_950B() {}
 
@@ -10,7 +10,7 @@ func_470E(param_00) {
 	self endon("killanimscript");
 	self.covernode = self.target_getindexoftarget;
 	self.var_4757 = param_00;
-	if(!isdefined(self.var_205.turret)) {
+	if(!isdefined(self.target_getindexoftarget.turret)) {
 		scripts\anim\cover_behavior::func_129B4(0);
 	}
 
@@ -23,29 +23,29 @@ func_470E(param_00) {
 		func_F925("unknown");
 	}
 
-	self.var_1491.var_1A3E = undefined;
-	self orientmode("face angle",self.var_473C.angles[1]);
-	if(isdefined(self.target_getindexoftarget) && isdefined(self.var_205.turret)) {
+	self.a.var_1A3E = undefined;
+	self orientmode("face angle",self.covernode.angles[1]);
+	if(isdefined(self.target_getindexoftarget) && isdefined(self.target_getindexoftarget.turret)) {
 		func_130DF();
 	}
 
 	self animmode("normal");
-	if(param_00 == "crouch" && self.var_1491.pose == "stand") {
+	if(param_00 == "crouch" && self.a.pose == "stand") {
 		var_01 = scripts\anim\utility::func_1F64("stand_2_hide");
 		var_02 = getanimlength(var_01);
 		self give_boombox(var_01,%body,1,0.2,scripts\anim\combat_utility::func_6B9A());
 		thread scripts\anim\shared::func_BD1D(self.covernode,var_02);
 		wait(var_02);
-		self.var_1491.var_4727 = "hide";
+		self.a.var_4727 = "hide";
 	}
 	else
 	{
 		func_B05A(0.4);
-		if(distancesquared(self.origin,self.var_473C.origin) > 1) {
+		if(distancesquared(self.origin,self.covernode.origin) > 1) {
 			thread scripts\anim\shared::func_BD1D(self.covernode,0.4);
 			wait(0.2);
 			if(param_00 == "crouch") {
-				self.var_1491.pose = "crouch";
+				self.a.pose = "crouch";
 			}
 
 			wait(0.2);
@@ -58,19 +58,19 @@ func_470E(param_00) {
 
 	func_F6C0();
 	if(param_00 == "crouch") {
-		if(self.var_1491.pose == "prone") {
+		if(self.a.pose == "prone") {
 			scripts\anim\utility::exitpronewrapper(1);
 		}
 
-		self.var_1491.pose = "crouch";
+		self.a.pose = "crouch";
 	}
 
 	if(self.var_4757 == "stand") {
-		self.var_1491.var_10930 = "cover_stand";
+		self.a.var_10930 = "cover_stand";
 	}
 	else
 	{
-		self.var_1491.var_10930 = "cover_crouch";
+		self.a.var_10930 = "cover_crouch";
 	}
 
 	var_03 = spawnstruct();
@@ -140,7 +140,7 @@ func_D66A() {
 	if(isdefined(self.var_FECF)) {
 		var_00 = lengthsquared(self.origin - self.var_FECF);
 		if(scripts\anim\utility_common::usingrocketlauncher() && scripts\anim\utility::func_10000(var_00)) {
-			if(self.var_1491.pose == "stand") {
+			if(self.a.pose == "stand") {
 				scripts\anim\shared::func_1180E(scripts\anim\utility::func_B027("combat","drop_rpg_stand"));
 			}
 			else
@@ -210,11 +210,11 @@ func_DC57() {
 		return 0;
 	}
 
-	if(self.var_4757 == "crouch" && !self.var_473C.var_4A9D) {
+	if(self.var_4757 == "crouch" && !self.covernode.var_4A9D) {
 		return 0;
 	}
 
-	var_01 = _meth_811F(self.var_473C.origin + scripts\anim\utility_common::getnodeoffset(self.covernode));
+	var_01 = _meth_811F(self.covernode.origin + scripts\anim\utility_common::getnodeoffset(self.covernode));
 	if(var_01 > 15) {
 		return 0;
 	}
@@ -229,7 +229,7 @@ func_DC57() {
 	func_F6C0();
 	self.sendmatchdata = 1;
 	self.var_9F15 = 1;
-	self.var_1491.var_D892 = "rambo";
+	self.a.var_D892 = "rambo";
 	self.var_3C60 = 1;
 	thread scripts\anim\shared::func_DC59(0);
 	var_04 = scripts\anim\utility::func_1F67(var_00);
@@ -268,7 +268,7 @@ func_6F27() {
 
 	var_00 = anglestoforward(self.angles);
 	var_01 = self.origin + var_00 * -16;
-	if(!self maymovetopoint(var_01,!scripts\common\utility::actor_is3d())) {
+	if(!self maymovetopoint(var_01,!scripts\engine\utility::actor_is3d())) {
 		return 0;
 	}
 
@@ -290,12 +290,12 @@ func_D49E(param_00,param_01) {
 	}
 
 	func_470A(param_00);
-	self.var_1491.var_4727 = "hide";
+	self.a.var_4727 = "hide";
 	scripts\anim\shared::donotetracks("idle");
 }
 
 look(param_00) {
-	if(!isdefined(self.var_1491.var_2274["hide_to_look"])) {
+	if(!isdefined(self.a.var_2274["hide_to_look"])) {
 		return 0;
 	}
 
@@ -320,7 +320,7 @@ look(param_00) {
 }
 
 func_C9FC() {
-	if(isdefined(self.var_473C.var_ED6A)) {
+	if(isdefined(self.covernode.var_ED6A)) {
 		return 0;
 	}
 
@@ -340,7 +340,7 @@ func_6B9B() {
 }
 
 func_D65C() {
-	if(self.var_1491.var_4727 == "left" || self.var_1491.var_4727 == "right" || self.var_1491.var_4727 == "over") {
+	if(self.a.var_4727 == "left" || self.a.var_4727 == "right" || self.a.var_4727 == "over") {
 		return 1;
 	}
 
@@ -351,7 +351,7 @@ func_D65B() {
 	var_00 = func_7DFA();
 	var_01 = 0.1;
 	var_02 = scripts\anim\utility::func_1F64("hide_2_" + var_00);
-	var_03 = !scripts\common\utility::actor_is3d();
+	var_03 = !scripts\engine\utility::actor_is3d();
 	if(!self maymovetopoint(scripts\anim\utility::func_7DC6(var_02),var_03)) {
 		return 0;
 	}
@@ -368,14 +368,14 @@ func_D65B() {
 		func_F925(var_00);
 	}
 
-	self.var_1491.var_10930 = "none";
+	self.a.var_10930 = "none";
 	self.var_10957 = undefined;
 	if(self.var_4757 == "stand") {
-		self.var_1491.var_10930 = "cover_stand_aim";
+		self.a.var_10930 = "cover_stand_aim";
 	}
 	else
 	{
-		self.var_1491.var_10930 = "cover_crouch_aim";
+		self.a.var_10930 = "cover_crouch_aim";
 	}
 
 	self.var_3C60 = 1;
@@ -386,7 +386,7 @@ func_D65B() {
 	thread donotetracksforpopup("pop_up");
 	if(animhasnotetrack(var_02,"start_aim")) {
 		self waittillmatch("start_aim","pop_up");
-		var_01 = getanimlength(var_02) \ var_04 * 1 - self getscoreinfocategory(var_02);
+		var_01 = getanimlength(var_02) / var_04 * 1 - self getscoreinfocategory(var_02);
 	}
 	else
 	{
@@ -395,8 +395,8 @@ func_D65B() {
 	}
 
 	self aiclearanim(var_02,var_01 + 0.05);
-	self.var_1491.var_4727 = var_00;
-	self.var_1491.var_D892 = var_00;
+	self.a.var_4727 = var_00;
+	self.a.var_D892 = var_00;
 	func_F8A6(var_01);
 	thread scripts\anim\track::func_11B07();
 	wait(var_01);
@@ -417,12 +417,12 @@ donotetracksforpopup(param_00) {
 }
 
 func_F8A6(param_00) {
-	if(self.var_1491.var_4727 == "left" || self.var_1491.var_4727 == "right") {
+	if(self.a.var_4727 == "left" || self.a.var_4727 == "right") {
 		var_01 = "crouch";
 	}
 	else
 	{
-		var_01 = self.var_1491.var_4727;
+		var_01 = self.a.var_4727;
 	}
 
 	self _meth_82A5(scripts\anim\utility::func_1F64(var_01 + "_aim"),%body,1,param_00);
@@ -465,16 +465,16 @@ _meth_8405() {
 	self notify("done_changing_cover_pos");
 	scripts\anim\combat_utility::func_6309();
 	var_00 = func_D65C();
-	self _meth_82E3("go_to_hide",scripts\anim\utility::func_1F64(self.var_1491.var_4727 + "_2_hide"),%body,1,0.2,var_00);
+	self _meth_82E3("go_to_hide",scripts\anim\utility::func_1F64(self.a.var_4727 + "_2_hide"),%body,1,0.2,var_00);
 	self aiclearanim(%exposed_modern,0.2);
 	scripts\anim\shared::donotetracks("go_to_hide");
-	self.var_1491.var_4727 = "hide";
+	self.a.var_4727 = "hide";
 	if(self.var_4757 == "stand") {
-		self.var_1491.var_10930 = "cover_stand";
+		self.a.var_10930 = "cover_stand";
 	}
 	else
 	{
-		self.var_1491.var_10930 = "cover_crouch";
+		self.a.var_10930 = "cover_crouch";
 	}
 
 	self.var_3C60 = 0;
@@ -559,7 +559,7 @@ func_51B9(param_00) {
 }
 
 func_130DF() {
-	var_00 = self.var_205.turret;
+	var_00 = self.target_getindexoftarget.turret;
 	if(!var_00.var_9F46) {
 		return;
 	}
@@ -569,53 +569,53 @@ func_130DF() {
 }
 
 func_F92B(param_00) {
-	self.var_1491.var_2274 = scripts\anim\utility::func_B028("cover_crouch");
+	self.a.var_2274 = scripts\anim\utility::func_B028("cover_crouch");
 	if(scripts\anim\utility_common::weapon_pump_action_shotgun()) {
 		if(param_00 == "lean" || param_00 == "stand") {
-			self.var_1491.var_2274["single"] = scripts\anim\utility::func_B027("shotgun_stand","single");
+			self.a.var_2274["single"] = scripts\anim\utility::func_B027("shotgun_stand","single");
 		}
 		else
 		{
-			self.var_1491.var_2274["single"] = scripts\anim\utility::func_B027("shotgun_crouch","single");
+			self.a.var_2274["single"] = scripts\anim\utility::func_B027("shotgun_crouch","single");
 		}
 	}
 
 	if(isdefined(level.var_DC5B)) {
-		self.var_1491.var_2274["rambo"] = level.var_DC5B.var_4713;
-		self.var_1491.var_2274["rambo_fail"] = level.var_DC5B.var_4714;
-		self.var_1491.var_2274["grenade_rambo"] = level.var_DC5B.var_4715;
+		self.a.var_2274["rambo"] = level.var_DC5B.var_4713;
+		self.a.var_2274["rambo_fail"] = level.var_DC5B.var_4714;
+		self.a.var_2274["grenade_rambo"] = level.var_DC5B.var_4715;
 	}
 }
 
 func_FA52(param_00) {
-	self.var_1491.var_2274 = scripts\anim\utility::func_B028("cover_stand");
+	self.a.var_2274 = scripts\anim\utility::func_B028("cover_stand");
 	if(param_00 != "over") {
 		var_01 = scripts\anim\utility::func_B028("default_stand");
-		self.var_1491.var_2274["stand_aim"] = var_01["straight_level"];
-		self.var_1491.var_2274["fire"] = var_01["fire_corner"];
-		self.var_1491.var_2274["semi2"] = var_01["semi2"];
-		self.var_1491.var_2274["semi3"] = var_01["semi3"];
-		self.var_1491.var_2274["semi4"] = var_01["semi4"];
-		self.var_1491.var_2274["semi5"] = var_01["semi5"];
+		self.a.var_2274["stand_aim"] = var_01["straight_level"];
+		self.a.var_2274["fire"] = var_01["fire_corner"];
+		self.a.var_2274["semi2"] = var_01["semi2"];
+		self.a.var_2274["semi3"] = var_01["semi3"];
+		self.a.var_2274["semi4"] = var_01["semi4"];
+		self.a.var_2274["semi5"] = var_01["semi5"];
 		if(scripts\anim\utility_common::weapon_pump_action_shotgun()) {
-			self.var_1491.var_2274["single"] = scripts\anim\utility::func_B027("shotgun_stand","single");
+			self.a.var_2274["single"] = scripts\anim\utility::func_B027("shotgun_stand","single");
 		}
 		else
 		{
-			self.var_1491.var_2274["single"] = var_01["single"];
+			self.a.var_2274["single"] = var_01["single"];
 		}
 
-		self.var_1491.var_2274["burst2"] = var_01["burst2"];
-		self.var_1491.var_2274["burst3"] = var_01["burst3"];
-		self.var_1491.var_2274["burst4"] = var_01["burst4"];
-		self.var_1491.var_2274["burst5"] = var_01["burst5"];
-		self.var_1491.var_2274["burst6"] = var_01["burst6"];
+		self.a.var_2274["burst2"] = var_01["burst2"];
+		self.a.var_2274["burst3"] = var_01["burst3"];
+		self.a.var_2274["burst4"] = var_01["burst4"];
+		self.a.var_2274["burst5"] = var_01["burst5"];
+		self.a.var_2274["burst6"] = var_01["burst6"];
 	}
 
 	if(isdefined(level.var_DC5B)) {
-		self.var_1491.var_2274["rambo"] = level.var_DC5B.var_474A;
-		self.var_1491.var_2274["rambo_fail"] = level.var_DC5B.var_474B;
-		self.var_1491.var_2274["grenade_rambo"] = level.var_DC5B.var_474C;
+		self.a.var_2274["rambo"] = level.var_DC5B.var_474A;
+		self.a.var_2274["rambo_fail"] = level.var_DC5B.var_474B;
+		self.a.var_2274["grenade_rambo"] = level.var_DC5B.var_474C;
 	}
 }
 
@@ -625,7 +625,7 @@ func_B05A(param_00) {
 	}
 
 	self give_boombox(scripts\anim\utility::func_1F64("hide_idle"),%body,1,param_00);
-	self.var_1491.var_4727 = "hide";
+	self.a.var_4727 = "hide";
 }
 
 func_1E82() {
@@ -650,7 +650,7 @@ func_BE9D() {
 	}
 
 	var_00 = _meth_811F(self geteye());
-	if(self.var_1491.var_4727 == "lean") {
+	if(self.a.var_4727 == "lean") {
 		return var_00 < 10;
 	}
 
@@ -665,12 +665,12 @@ func_7DFA() {
 	}
 	else
 	{
-		var_01 = _meth_811F(self.var_473C.origin + scripts\anim\utility_common::getnodeoffset(self.covernode));
+		var_01 = _meth_811F(self.covernode.origin + scripts\anim\utility_common::getnodeoffset(self.covernode));
 		if(var_01 > 30) {
 			return "lean";
 		}
 
-		if(var_01 > 15 || !self.var_473C.var_4A9D) {
+		if(var_01 > 15 || !self.covernode.var_4A9D) {
 			return "stand";
 		}
 
@@ -679,7 +679,7 @@ func_7DFA() {
 	}
 
 	for(var_02 = 0;var_02 < var_00.size;var_02++) {
-		if(!isdefined(self.var_1491.var_2274["hide_2_" + var_00[var_02]])) {
+		if(!isdefined(self.a.var_2274["hide_2_" + var_00[var_02]])) {
 			var_00[var_02] = var_00[var_00.size - 1];
 			var_00[var_00.size - 1] = undefined;
 			continue;
@@ -695,7 +695,7 @@ _meth_811F(param_00) {
 }
 
 func_F6C0() {
-	if(scripts\common\utility::actor_is3d()) {
+	if(scripts\engine\utility::actor_is3d()) {
 		self animmode("nogravity");
 		return;
 	}

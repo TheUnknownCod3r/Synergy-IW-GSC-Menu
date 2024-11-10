@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3388.gsc
-****************************/
+ * Script: 3388.gsc
+************************/
 
 init_scrambler() {
 	level.scrambletrapuses = 0;

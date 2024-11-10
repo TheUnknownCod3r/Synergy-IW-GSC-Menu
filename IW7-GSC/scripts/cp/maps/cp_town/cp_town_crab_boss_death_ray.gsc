@@ -1,8 +1,8 @@
-/***************************************************************************
+/*******************************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\maps\cp_town\cp_town_crab_boss_death_ray.gsc
-***************************************************************************/
+ * Script: scripts\cp\maps\cp_town\cp_town_crab_boss_death_ray.gsc
+*******************************************************************/
 
 hit_weak_spot_with_death_ray_cannon() {
 	enable_all_death_ray_cannons();
@@ -269,20 +269,20 @@ enable_all_death_ray_cannons() {
 }
 
 load_death_ray_cannon_vfx() {
-	level._effect["death_ray_cannon_beam"] = loadfx("vfx/iw7/levels/cp_town/death_ray_cannon_beam.vfx");
-	level._effect["death_ray_cannon_muzzle_flash"] = loadfx("vfx/iw7/levels/cp_town/death_ray_cannon_muzzle_flash.vfx");
-	level._effect["death_ray_cannon_buildup"] = loadfx("vfx/iw7/levels/cp_town/cannon/vfx_cannon_buildup.vfx");
-	level._effect["death_ray_cannon_buildup_cancel"] = loadfx("vfx/iw7/levels/cp_town/cannon/vfx_cannon_build_cancel.vfx");
-	level._effect["death_ray_cannon_water_impact"] = loadfx("vfx/iw7/levels/cp_town/cannon/vfx_wtr_impact.vfx");
-	level._effect["death_ray_cannon_sand_impact"] = loadfx("vfx/iw7/levels/cp_town/cannon/vfx_sand_impact.vfx");
-	level._effect["death_ray_cannon_rock_impact"] = loadfx("vfx/iw7/levels/cp_town/cannon/vfx_rock_impact.vfx");
-	level._effect["death_ray_cannon_wood_impact"] = loadfx("vfx/iw7/levels/cp_town/cannon/vfx_wood_impact.vfx");
-	level._effect["death_ray_cannon_weak_spot_impact"] = loadfx("vfx/iw7/levels/cp_town/crog/vfx_bcrog_imp_blood.vfx");
-	level._effect["death_ray_cannon_ricochet"] = loadfx("vfx/iw7/levels/cp_town/crog/vfx_bcrog_imp_ricochet.vfx");
-	level._effect["crab_boss_smash_attack"] = loadfx("vfx/iw7/levels/cp_town/crog/vfx_claw_smash_imp.vfx");
-	level._effect["crab_boss_beam_attack"] = loadfx("vfx/iw7/levels/cp_town/crog/vfx_lure_laser_beam.vfx");
-	level._effect["crab_boss_beam_impact"] = loadfx("vfx/iw7/levels/cp_town/crog/vfx_laser_buildup_imp.vfx");
-	level._effect["crab_boss_beam_impact_buildup"] = loadfx("vfx/iw7/levels/cp_town/crog/vfx_beam_attack_buildup.vfx");
+	level._effect["death_ray_cannon_beam"] = loadfx("vfx\iw7\levels\cp_town\death_ray_cannon_beam.vfx");
+	level._effect["death_ray_cannon_muzzle_flash"] = loadfx("vfx\iw7\levels\cp_town\death_ray_cannon_muzzle_flash.vfx");
+	level._effect["death_ray_cannon_buildup"] = loadfx("vfx\iw7\levels\cp_town\cannon\vfx_cannon_buildup.vfx");
+	level._effect["death_ray_cannon_buildup_cancel"] = loadfx("vfx\iw7\levels\cp_town\cannon\vfx_cannon_build_cancel.vfx");
+	level._effect["death_ray_cannon_water_impact"] = loadfx("vfx\iw7\levels\cp_town\cannon\vfx_wtr_impact.vfx");
+	level._effect["death_ray_cannon_sand_impact"] = loadfx("vfx\iw7\levels\cp_town\cannon\vfx_sand_impact.vfx");
+	level._effect["death_ray_cannon_rock_impact"] = loadfx("vfx\iw7\levels\cp_town\cannon\vfx_rock_impact.vfx");
+	level._effect["death_ray_cannon_wood_impact"] = loadfx("vfx\iw7\levels\cp_town\cannon\vfx_wood_impact.vfx");
+	level._effect["death_ray_cannon_weak_spot_impact"] = loadfx("vfx\iw7\levels\cp_town\crog\vfx_bcrog_imp_blood.vfx");
+	level._effect["death_ray_cannon_ricochet"] = loadfx("vfx\iw7\levels\cp_town\crog\vfx_bcrog_imp_ricochet.vfx");
+	level._effect["crab_boss_smash_attack"] = loadfx("vfx\iw7\levels\cp_town\crog\vfx_claw_smash_imp.vfx");
+	level._effect["crab_boss_beam_attack"] = loadfx("vfx\iw7\levels\cp_town\crog\vfx_lure_laser_beam.vfx");
+	level._effect["crab_boss_beam_impact"] = loadfx("vfx\iw7\levels\cp_town\crog\vfx_laser_buildup_imp.vfx");
+	level._effect["crab_boss_beam_impact_buildup"] = loadfx("vfx\iw7\levels\cp_town\crog\vfx_beam_attack_buildup.vfx");
 }
 
 death_ray_player_use_monitor(param_00) {
@@ -392,7 +392,7 @@ fire_death_ray_cannon(param_00,param_01) {
 	playfxontag(level._effect["death_ray_cannon_muzzle_flash"],param_00,"tag_flash");
 	var_03 = get_death_ray_trace(param_01);
 	var_04 = get_death_ray_physics_trace(param_01);
-	function_02E0(level._effect["death_ray_cannon_beam"],var_02,vectortoangles(var_03["position"] - var_02),var_03["position"]);
+	playfxbetweenpoints(level._effect["death_ray_cannon_beam"],var_02,vectortoangles(var_03["position"] - var_02),var_03["position"]);
 	play_impact_vfx(var_03,var_04);
 	if(is_crab_boss_weak_spot(var_03)) {
 		level.crab_boss playsound("boss_crog_hit_gore");

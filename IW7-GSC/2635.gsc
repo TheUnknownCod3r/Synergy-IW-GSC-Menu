@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2635.gsc
+ * Script: 2635.gsc
 ***************************************/
 
 start_game_type(var_00, var_01, var_02) {
@@ -45,7 +45,7 @@ on_player_connect() {
   set_player_count();
   set_split_screen();
   set_join_in_progress();
-  setmatchdata("players", self.clientid, "playerID", "xuid", scripts/cp/utility::getuniqueid());
+  setmatchdata("players", self.clientid, "playerID", "xuid", scripts\cp\utility::getuniqueid());
   setmatchdata("players", self.clientid, "gamertag", self.name);
   setmatchdata("players", self.clientid, "waveStart", level.wave_num);
   setmatchdata("players", self.clientid, "quit", 0);
@@ -149,8 +149,8 @@ endgame(var_00, var_01) {
   log_matchdata_at_game_end();
 
   foreach (var_04, var_03 in level.players) {
-  scripts/cp/cp_persistence::increment_player_career_total_waves(var_03);
-  scripts/cp/cp_persistence::increment_player_career_total_score(var_03);
+  scripts\cp\cp_persistence::increment_player_career_total_waves(var_03);
+  scripts\cp\cp_persistence::increment_player_career_total_score(var_03);
   var_03 set_player_data(var_01);
   var_03 set_player_game_data();
   var_03 write_clientmatchdata_for_player(var_03, var_04);
@@ -490,7 +490,7 @@ write_global_clientmatchdata() {
 
 write_clientmatchdata_for_player(var_00, var_01) {
   setclientmatchdata("player", var_01, "username", var_0.name);
-  setclientmatchdata("player", var_01, "rank", var_00 scripts/cp/cp_persistence::get_player_rank());
+  setclientmatchdata("player", var_01, "rank", var_00 scripts\cp\cp_persistence::get_player_rank());
 
   if (!isdefined(var_0.player_character_index))
   return;

@@ -1,8 +1,8 @@
-/*************************************************
+/*****************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\sp\mg_penetration.gsc
-*************************************************/
+ * Script: scripts\sp\mg_penetration.gsc
+*****************************************/
 
 func_8715(param_00) {
 	if(!isdefined(level.var_FC5D)) {

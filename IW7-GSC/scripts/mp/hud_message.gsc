@@ -1,8 +1,8 @@
-/**********************************************
+/**************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\hud_message.gsc
-**********************************************/
+ * Script: scripts\mp\hud_message.gsc
+**************************************/
 
 init() {
 	game["round_end"]["draw"] = 1;
@@ -149,11 +149,11 @@ showsplashinternal(param_00,param_01,param_02,param_03,param_04) {
 	}
 	else
 	{
-		self.var_DDCD++;
+		self.recentsplashcount++;
 	}
 
 	thread cleanuplocalplayersplashlist();
-	self.var_BFAE++;
+	self.nextsplashlistindex++;
 	if(self.nextsplashlistindex >= 6) {
 		self.nextsplashlistindex = 0;
 		self.splashlisttoggle = !self.splashlisttoggle;
@@ -374,7 +374,7 @@ func_C752(param_00,param_01) {
 }
 
 getsplashtablename() {
-	return "mp/splashTable.csv";
+	return "mp\splashTable.csv";
 }
 
 getsplashtablemaxaltdisplays() {
@@ -417,7 +417,7 @@ onkillstreaksplashshown(param_00) {
 }
 
 showerrormessage(param_00,param_01) {
-	var_02 = tablelookuprownum("mp/errorMessages.csv",0,param_00);
+	var_02 = tablelookuprownum("mp\errorMessages.csv",0,param_00);
 	if(isdefined(param_01)) {
 		self setclientomnvar("ui_mp_error_message_param",param_01);
 	}
@@ -442,7 +442,7 @@ showerrormessagetoallplayers(param_00,param_01) {
 }
 
 testmiscmessage(param_00) {
-	var_01 = tablelookuprownum("mp/miscMessages.csv",0,param_00);
+	var_01 = tablelookuprownum("mp\miscMessages.csv",0,param_00);
 	if(isdefined(var_01) && var_01 >= 0) {
 		return 1;
 	}
@@ -451,8 +451,8 @@ testmiscmessage(param_00) {
 }
 
 showmiscmessage(param_00) {
-	var_01 = tablelookuprownum("mp/miscMessages.csv",0,param_00);
-	var_02 = tablelookupbyrow("mp/miscMessages.csv",var_01,3);
+	var_01 = tablelookuprownum("mp\miscMessages.csv",0,param_00);
+	var_02 = tablelookupbyrow("mp\miscMessages.csv",var_01,3);
 	if(isdefined(var_02) && var_02 != "") {
 		self playlocalsound(var_02);
 	}

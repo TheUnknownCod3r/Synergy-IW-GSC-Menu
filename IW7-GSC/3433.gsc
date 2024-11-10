@@ -1,26 +1,26 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3433.gsc
-****************************/
+ * Script: 3433.gsc
+************************/
 
 init() {
-	scripts/mp/archetypes/archassassin::func_97D0();
-	scripts/mp/archetypes/archsniper::func_97D0();
-	scripts/mp/archetypes/archengineer::func_97D0();
-	scripts/mp/archetypes/archscout::func_97D0();
-	scripts/mp/archetypes/archheavy::func_97D0();
+	scripts\mp\archetypes\archassassin::func_97D0();
+	scripts\mp\archetypes\archsniper::func_97D0();
+	scripts\mp\archetypes\archengineer::func_97D0();
+	scripts\mp\archetypes\archscout::func_97D0();
+	scripts\mp\archetypes\archheavy::func_97D0();
 	level.archetypes = [];
 	level.archetypeids = [];
 	var_00 = 0;
 	for(;;) {
-		var_01 = tablelookupbyrow("mp/battleRigTable.csv",var_00,0);
+		var_01 = tablelookupbyrow("mp\battleRigTable.csv",var_00,0);
 		if(!isdefined(var_01) || var_01 == "") {
 			break;
 		}
 
 		var_01 = int(var_01);
-		var_02 = tablelookupbyrow("mp/battleRigTable.csv",var_00,1);
+		var_02 = tablelookupbyrow("mp\battleRigTable.csv",var_00,1);
 		level.archetypes[var_01] = var_02;
 		level.archetypeids[var_02] = var_01;
 		var_00++;
@@ -35,27 +35,27 @@ removearchetype(param_00) {
 	var_01 = undefined;
 	switch(param_00) {
 		case "archetype_assault":
-			var_01 = ::scripts/mp/archetypes/archassault::removearchetype;
+			var_01 = ::scripts\mp\archetypes\archassault::removearchetype;
 			break;
 
 		case "archetype_heavy":
-			var_01 = ::scripts/mp/archetypes/archheavy::removearchetype;
+			var_01 = ::scripts\mp\archetypes\archheavy::removearchetype;
 			break;
 
 		case "archetype_scout":
-			var_01 = ::scripts/mp/archetypes/archscout::removearchetype;
+			var_01 = ::scripts\mp\archetypes\archscout::removearchetype;
 			break;
 
 		case "archetype_assassin":
-			var_01 = ::scripts/mp/archetypes/archassassin::removearchetype;
+			var_01 = ::scripts\mp\archetypes\archassassin::removearchetype;
 			break;
 
 		case "archetype_engineer":
-			var_01 = ::scripts/mp/archetypes/archengineer::removearchetype;
+			var_01 = ::scripts\mp\archetypes\archengineer::removearchetype;
 			break;
 
 		case "archetype_sniper":
-			var_01 = ::scripts/mp/archetypes/archsniper::removearchetype;
+			var_01 = ::scripts\mp\archetypes\archsniper::removearchetype;
 			break;
 
 		default:
@@ -69,7 +69,7 @@ removearchetype(param_00) {
 
 _allowbattleslide(param_00) {
 	if(param_00) {
-		scripts\mp\_utility::giveperk("specialty_battleslide");
+		scripts\mp\utility::giveperk("specialty_battleslide");
 		return;
 	}
 
@@ -78,11 +78,11 @@ _allowbattleslide(param_00) {
 
 func_1170(param_00) {
 	if(param_00) {
-		scripts/mp/equipment/ground_pound::func_8659();
+		scripts\mp\equipment\ground_pound::func_8659();
 		return;
 	}
 
-	scripts/mp/equipment/ground_pound::func_865A();
+	scripts\mp\equipment\ground_pound::func_865A();
 }
 
 func_EF38() {
@@ -94,12 +94,12 @@ func_EF38() {
 	self setscriptablepartstate("jet_pack","neutral",0);
 	for(;;) {
 		self waittill("doubleJumpBoostBegin");
-		if(scripts/mp/equipment/cloak::func_9FC1() == 0) {
+		if(scripts\mp\equipment\cloak::func_9FC1() == 0) {
 			self setscriptablepartstate("jet_pack","boost_on",0);
 		}
 
 		self waittill("doubleJumpBoostEnd");
-		if(scripts/mp/equipment/cloak::func_9FC1() == 0) {
+		if(scripts\mp\equipment\cloak::func_9FC1() == 0) {
 			self setscriptablepartstate("jet_pack","neutral",0);
 		}
 	}
@@ -121,12 +121,12 @@ func_EF41() {
 	thread func_139CF();
 	for(;;) {
 		self waittill("sprint_slide_begin");
-		if(scripts/mp/equipment/cloak::func_9FC1() == 0) {
+		if(scripts\mp\equipment\cloak::func_9FC1() == 0) {
 			self setscriptablepartstate("jet_pack","boost_slide_on",0);
 		}
 
 		self waittill("sprint_slide_end");
-		if(scripts/mp/equipment/cloak::func_9FC1() == 0) {
+		if(scripts\mp\equipment\cloak::func_9FC1() == 0) {
 			self setscriptablepartstate("jet_pack","neutral",0);
 		}
 	}

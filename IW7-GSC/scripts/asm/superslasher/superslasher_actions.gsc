@@ -1,8 +1,8 @@
-/*********************************************************************
+/*************************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\asm\superslasher\superslasher_actions.gsc
-*********************************************************************/
+ * Script: scripts\asm\superslasher\superslasher_actions.gsc
+*************************************************************/
 
 superslasher_domeleedamage() {
 	var_00 = 60;
@@ -90,7 +90,7 @@ dogenericsummons(param_00,param_01,param_02,param_03) {
 		var_07[var_07.size] = var_08;
 	}
 
-	var_09 = scripts\common\utility::array_randomize(var_07);
+	var_09 = scripts\engine\utility::array_randomize(var_07);
 	var_0A = var_09.size;
 	if(param_01 == "ground") {
 		var_0A = 8;
@@ -159,7 +159,7 @@ checkwallsummondamage(param_00,param_01,param_02,param_03,param_04,param_05,para
 	self endon("killWallSummon_" + param_00);
 	level endon("game_ended");
 	var_07 = 100;
-	var_08 = var_07 \ 1000;
+	var_08 = var_07 / 1000;
 	var_09 = param_05;
 	for(;;) {
 		var_09 = var_09 - var_07;
@@ -167,7 +167,7 @@ checkwallsummondamage(param_00,param_01,param_02,param_03,param_04,param_05,para
 			break;
 		}
 
-		var_0A = param_05 - var_09 \ param_05;
+		var_0A = param_05 - var_09 / param_05;
 		var_0B = param_01 + param_04 * var_0A * param_03;
 		foreach(var_0D in level.players) {
 			if(isalive(var_0D) && var_0D getstance() != "prone") {
@@ -228,24 +228,24 @@ domaskshockwave(param_00) {
 	var_06 = 3;
 	playsoundatpos((-6061,4944,596),"superslasher_shockwave_wind_build");
 	playsoundatpos((-4818,4858,13),"superslasher_shockwave_plr_build");
-	scripts\common\utility::exploder(101);
-	scripts\common\utility::exploder(102);
+	scripts\engine\utility::exploder(101);
+	scripts\engine\utility::exploder(102);
 	scripts\cp\maps\cp_rave\cp_rave_super_slasher_fight::set_zombie_spawning_parameters("continuous",999999,2,0.05,"shockwave","skeleton");
 	wait(var_06);
-	var_07 = thread scripts\common\utility::play_loopsound_in_space("superslasher_shockwave_plr_lp",(-4818,4858,13));
+	var_07 = thread scripts\engine\utility::play_loopsound_in_space("superslasher_shockwave_plr_lp",(-4818,4858,13));
 	var_08 = shock_wave_wind_sfx();
 	scripts\cp\maps\cp_rave\cp_rave_super_slasher_fight::kill_off_existing_zombies();
-	var_09 = int(var_03 \ var_04);
-	var_0A = int(var_04 \ var_05);
+	var_09 = int(var_03 / var_04);
+	var_0A = int(var_04 / var_05);
 	for(var_0B = 0;var_0B < var_09;var_0B++) {
-		scripts\common\utility::exploder(100);
+		scripts\engine\utility::exploder(100);
 		for(var_0C = 0;var_0C < var_0A;var_0C++) {
 			foreach(var_0E in level.players) {
 				if(playerinanysafearea(var_0E)) {
 					continue;
 				}
 
-				if(scripts\cp\_laststand::player_in_laststand(var_0E)) {
+				if(scripts\cp\cp_laststand::player_in_laststand(var_0E)) {
 					continue;
 				}
 
@@ -281,7 +281,7 @@ shock_wave_wind_sfx() {
 	var_01[9] = (-3543,5167,-99);
 	var_01[10] = (-4076,6086,-99);
 	foreach(var_03 in var_01) {
-		var_04 = scripts\common\utility::play_loopsound_in_space("superslasher_shockwave_wind_lp",var_03);
+		var_04 = scripts\engine\utility::play_loopsound_in_space("superslasher_shockwave_wind_lp",var_03);
 		var_00[var_00.size] = var_04;
 		var_04 playsound("superslasher_shockwave_wind_start");
 	}
@@ -310,7 +310,7 @@ playerinanysafearea(param_00) {
 		if(distance2dsquared(var_01[var_03],param_00.origin) <= var_02[var_03]) {
 			var_04 = getentarray("superslasher_shockwave_safe_area","targetname");
 			foreach(var_06 in var_04) {
-				if(function_010F(var_01[var_03],var_06)) {
+				if(ispointinvolume(var_01[var_03],var_06)) {
 					param_00.super_slasher_shockwave_safe_area = var_06;
 					return 1;
 				}
@@ -387,7 +387,7 @@ superslasher_dosummonedsawblades() {
 
 superslasher_dosawfan() {
 	var_00 = 12;
-	var_01 = 360 \ var_00;
+	var_01 = 360 / var_00;
 	var_02 = 1500;
 	for(var_03 = 0;var_03 < var_00;var_03++) {
 		var_04 = rotatevector((1,0,0),(0,var_01 * var_03,0));
@@ -436,8 +436,8 @@ superslasher_dostompattack(param_00) {
 		var_03 = param_00;
 	}
 
-	var_04 = int(var_03 \ var_01 * 2);
-	var_05 = var_03 - var_01 * 2 \ var_04 - 1;
+	var_04 = int(var_03 / var_01 * 2);
+	var_05 = var_03 - var_01 * 2 / var_04 - 1;
 	var_06 = anglestoforward(self.angles);
 	var_07 = 50 + var_01;
 	var_08 = self.origin + var_06 * var_07;
@@ -453,7 +453,7 @@ dosticks(param_00,param_01,param_02) {
 	var_0F = allocattackent();
 	var_0F setattackentorigin(param_00);
 	var_0F setscriptablepartstate("attack","punjisticks");
-	wait(param_02 \ 1000);
+	wait(param_02 / 1000);
 	if(isdefined(var_0F)) {
 		var_0F setscriptablepartstate("attack","off");
 		freeattackent(var_0F);
@@ -495,7 +495,7 @@ dosawsharks(param_00) {
 	var_07 = (90,0,0);
 	var_08 = -25536;
 	for(var_09 = 0;var_09 < var_01;var_09++) {
-		var_0A = var_09 * 360 \ var_01;
+		var_0A = var_09 * 360 / var_01;
 		var_0B = self.origin + rotatevector(var_07,(0,var_0A,0));
 		var_0C = spawnsawshark(var_0B);
 		self.sawsharks[self.sawsharks.size] = var_0C;
@@ -507,7 +507,7 @@ dosawsharks(param_00) {
 			thread dosawshark_followowner(var_0C,var_03,var_0A,var_08);
 		}
 
-		scripts\common\utility::waitframe();
+		scripts\engine\utility::waitframe();
 	}
 }
 

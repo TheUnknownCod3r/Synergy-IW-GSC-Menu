@@ -1,10 +1,10 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\3397.gsc
+ * Script: 3397.gsc
 ***************************************/
 
 init() {
-  scripts/cp/cp_analytics::start_game_type("mp/zombieMatchdata.ddl", "mp/zombieclientmatchdata.ddl", "cp/zombies/zombie_analytics.csv");
+  scripts\cp\cp_analytics::start_game_type("mp\zombieMatchdata.ddl", "mp\zombieclientmatchdata.ddl", "cp\zombies\zombie_analytics.csv");
   level.timesitemspicked = 0;
   level.timesitemstimedout = 0;
   level.timeslfused = 0;
@@ -43,13 +43,13 @@ init() {
 }
 
 func_13F51(var_00) {
-  scripts/cp/cp_analytics::func_AF6A("revived_another_player", 1, [var_0.clientid], [var_0.clientid], [var_0.clientid]);
+  scripts\cp\cp_analytics::func_AF6A("revived_another_player", 1, [var_0.clientid], [var_0.clientid], [var_0.clientid]);
 }
 
 func_97A4(var_00) {
   var_00 endon("disconnect");
-  var_0.achievement_registration_func = scripts/cp/zombies/achievement::register_default_achievements;
-  scripts/cp/zombies/achievement::init_player_achievement(var_00);
+  var_0.achievement_registration_func = scripts\cp\zombies\achievement::register_default_achievements;
+  scripts\cp\zombies\achievement::init_player_achievement(var_00);
 
   while (!isdefined(var_0.pers))
   wait 1;
@@ -160,7 +160,7 @@ func_97A4(var_00) {
 
   if (isdefined(var_05)) {
   foreach (var_07 in var_05) {
-  var_0.weapon_name_log = scripts/cp/utility::getbaseweaponname(var_07);
+  var_0.weapon_name_log = scripts\cp\utility::getbaseweaponname(var_07);
 
   if (!isdefined(var_0.aggregateweaponkills[var_0.weapon_name_log]))
   var_0.aggregateweaponkills[var_0.weapon_name_log] = 0;
@@ -172,16 +172,16 @@ func_AF67(var_00, var_01) {
   if (isdefined(var_0.score_earned))
   var_0.score_earned = var_0.score_earned + var_01;
 
-  scripts/cp/cp_analytics::func_AF6A("currency_earned", var_01, [var_01], [var_0.clientid], [var_0.clientid]);
+  scripts\cp\cp_analytics::func_AF6A("currency_earned", var_01, [var_01], [var_0.clientid], [var_0.clientid]);
 }
 
 log_zombiedeath(var_00, var_01, var_02, var_03, var_04, var_05) {
   if (isdefined(var_03) && var_03 != "none")
-  scripts/cp/cp_analytics::func_AF6A("zombie_death", var_00, [var_01, var_2.clientid, var_03, var_04, "" + var_05], [var_2.clientid, var_03], [var_2.clientid]);
+  scripts\cp\cp_analytics::func_AF6A("zombie_death", var_00, [var_01, var_2.clientid, var_03, var_04, "" + var_05], [var_2.clientid, var_03], [var_2.clientid]);
 }
 
 func_AF90(var_00, var_01, var_02, var_03) {
-  scripts/cp/cp_analytics::func_AF6A("wave_complete", 1, [level.script, var_00, var_01, var_02, var_03], [level.script]);
+  scripts\cp\cp_analytics::func_AF6A("wave_complete", 1, [level.script, var_00, var_01, var_02, var_03], [level.script]);
 
   foreach (var_05 in level.players)
   var_5.logevent = "wave_complete";
@@ -193,7 +193,7 @@ func_AF68(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07) {
   else
   var_08 = "";
 
-  scripts/cp/cp_analytics::func_AF6A("dropped_to_last_stand", var_00, [var_1.clientid, var_03, var_08, "" + var_05, var_06, var_07], [var_1.clientid, var_02], [var_1.clientid]);
+  scripts\cp\cp_analytics::func_AF6A("dropped_to_last_stand", var_00, [var_1.clientid, var_03, var_08, "" + var_05, var_06, var_07], [var_1.clientid, var_02], [var_1.clientid]);
 
   if (!isdefined(var_1.logevent))
   var_1.logevent = "droppedToLastStand";
@@ -202,7 +202,7 @@ func_AF68(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07) {
 }
 
 log_enteringafterlifearcade(var_00, var_01, var_02, var_03, var_04) {
-  scripts/cp/cp_analytics::func_AF6A("entering_afterlife_arcade", var_00, [var_1.clientid, var_02, var_03, var_04], [var_1.clientid, var_03], [var_1.clientid]);
+  scripts\cp\cp_analytics::func_AF6A("entering_afterlife_arcade", var_00, [var_1.clientid, var_02, var_03, var_04], [var_1.clientid, var_03], [var_1.clientid]);
 }
 
 func_45F3(var_00) {
@@ -218,37 +218,37 @@ func_45F3(var_00) {
 
 log_exitingafterlifearcade(var_00, var_01, var_02, var_03, var_04) {
   var_05 = func_45F3(var_03);
-  scripts/cp/cp_analytics::func_AF6A("exiting_afterlife_arcade", var_00, [var_1.clientid, var_02, var_05, var_04], [var_1.clientid, var_05]);
+  scripts\cp\cp_analytics::func_AF6A("exiting_afterlife_arcade", var_00, [var_1.clientid, var_02, var_05, var_04], [var_1.clientid, var_05]);
 }
 
 func_AF8E(var_00, var_01) {
-  scripts/cp/cp_analytics::func_AF6A("turning_on_the_power", 1, [level.script, var_00, var_01], [level.script]);
+  scripts\cp\cp_analytics::func_AF6A("turning_on_the_power", 1, [level.script, var_00, var_01], [level.script]);
 }
 
 func_AF7E(var_00, var_01, var_02, var_03, var_04) {
-  scripts/cp/cp_persistence::increment_player_career_doors_opened(var_01);
-  scripts/cp/cp_analytics::func_AF6A("opening_the_doors", var_00, [var_1.clientid, var_02, var_03, var_04], [var_1.clientid, var_02]);
+  scripts\cp\cp_persistence::increment_player_career_doors_opened(var_01);
+  scripts\cp\cp_analytics::func_AF6A("opening_the_doors", var_00, [var_1.clientid, var_02, var_03, var_04], [var_1.clientid, var_02]);
 }
 
 log_purchasingforateamdoor(var_00, var_01, var_02, var_03, var_04) {
-  scripts/cp/cp_analytics::func_AF6A("purchasing_for_a_team_door", var_00, [var_1.clientid, var_02, var_03, var_04], [var_1.clientid, var_02]);
+  scripts\cp\cp_analytics::func_AF6A("purchasing_for_a_team_door", var_00, [var_1.clientid, var_02, var_03, var_04], [var_1.clientid, var_02]);
 }
 
 func_AF62(var_00, var_01) {
   if (var_00 != "next_challenge")
-  scripts/cp/cp_analytics::func_AF6A("challenge_activated", 1, [level.script, var_00, var_01], [level.script]);
+  scripts\cp\cp_analytics::func_AF6A("challenge_activated", 1, [level.script, var_00, var_01], [level.script]);
 }
 
 func_AF63(var_00, var_01, var_02) {
-  scripts/cp/cp_analytics::func_AF6A("challenge_completed", 1, [level.script, var_00, var_01, var_02], [level.script]);
+  scripts\cp\cp_analytics::func_AF6A("challenge_completed", 1, [level.script, var_00, var_01, var_02], [level.script]);
 }
 
 func_AF64(var_00, var_01, var_02, var_03) {
-  scripts/cp/cp_analytics::func_AF6A("challenge_failed", 1, [level.script, var_00, var_01, int(var_02), var_03], [level.script]);
+  scripts\cp\cp_analytics::func_AF6A("challenge_failed", 1, [level.script, var_00, var_01, int(var_02), var_03], [level.script]);
 }
 
 func_AF79(var_00) {
-  scripts/cp/cp_analytics::func_AF6A("magic_box_used", 1, [level.script, var_00], [level.script]);
+  scripts\cp\cp_analytics::func_AF6A("magic_box_used", 1, [level.script, var_00], [level.script]);
 }
 
 log_purchasingaweapon(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08) {
@@ -284,154 +284,154 @@ log_purchasingaweapon(var_00, var_01, var_02, var_03, var_04, var_05, var_06, va
   var_10 = var_1.downsperweaponlog[var_03];
   }
 
-  scripts/cp/cp_analytics::func_AF6A("purchasing_weapon", var_00, [var_1.clientid, var_02, var_03, var_04, var_05, var_06, var_09, var_10], [var_1.clientid, var_09]);
+  scripts\cp\cp_analytics::func_AF6A("purchasing_weapon", var_00, [var_1.clientid, var_02, var_03, var_04, var_05, var_06, var_09, var_10], [var_1.clientid, var_09]);
 }
 
 log_atmused(var_00, var_01, var_02) {
-  scripts/cp/cp_analytics::func_AF6A("atm_used", var_00, [var_01, var_2.clientid], [var_2.clientid, var_01]);
+  scripts\cp\cp_analytics::func_AF6A("atm_used", var_00, [var_01, var_2.clientid], [var_2.clientid, var_01]);
 }
 
 func_AF85(var_00, var_01) {
-  scripts/cp/cp_analytics::func_AF6A("portal_used", 1, [level.script, var_00, var_01], [level.script]);
+  scripts\cp\cp_analytics::func_AF6A("portal_used", 1, [level.script, var_00, var_01], [level.script]);
 }
 
 log_itemcrafted(var_00, var_01) {
-  scripts/cp/cp_analytics::func_AF6A("souvenir_item_crafted", 1, [level.script, var_00, var_01], [level.script]);
+  scripts\cp\cp_analytics::func_AF6A("souvenir_item_crafted", 1, [level.script, var_00, var_01], [level.script]);
 }
 
 log_lostandfound(var_00, var_01, var_02) {
-  scripts/cp/cp_analytics::func_AF6A("lost_and_found", 1, [level.script, var_00, var_01, var_02], [level.script]);
+  scripts\cp\cp_analytics::func_AF6A("lost_and_found", 1, [level.script, var_00, var_01, var_02], [level.script]);
 }
 
 log_fafcardused(var_00, var_01, var_02, var_03) {
-  scripts/cp/cp_analytics::func_AF6A("faf_card_used", var_00, [var_01, var_02, var_3.clientid], [var_3.clientid, var_02]);
+  scripts\cp\cp_analytics::func_AF6A("faf_card_used", var_00, [var_01, var_02, var_3.clientid], [var_3.clientid, var_02]);
 }
 
 log_fafrefill(var_00, var_01, var_02) {
-  scripts/cp/cp_analytics::func_AF6A("faf_card_refill", var_00, [var_01, var_2.clientid], [var_2.clientid, var_01]);
+  scripts\cp\cp_analytics::func_AF6A("faf_card_refill", var_00, [var_01, var_2.clientid], [var_2.clientid, var_01]);
 }
 
 log_papused(var_00, var_01, var_02) {
-  var_03 = scripts/cp/utility::getbaseweaponname(var_01);
-  scripts/cp/cp_analytics::func_AF6A("pack_a_punch_used", 1, [level.script, var_00, var_03, var_02], [level.script]);
+  var_03 = scripts\cp\utility::getbaseweaponname(var_01);
+  scripts\cp\cp_analytics::func_AF6A("pack_a_punch_used", 1, [level.script, var_00, var_03, var_02], [level.script]);
 }
 
 log_souvenircoindeposited(var_00, var_01) {
-  scripts/cp/cp_analytics::func_AF6A("souvenir_coin_used", 1, [level.script, var_00, var_01], [level.script]);
+  scripts\cp\cp_analytics::func_AF6A("souvenir_coin_used", 1, [level.script, var_00, var_01], [level.script]);
 }
 
 func_AF66(var_00, var_01, var_02, var_03, var_04, var_05) {
-  scripts/cp/cp_analytics::func_AF6A("crafted_item_placed", var_00, [var_1.clientid, var_02, var_03, var_04, var_05], [var_1.clientid, var_03]);
+  scripts\cp\cp_analytics::func_AF6A("crafted_item_placed", var_00, [var_1.clientid, var_02, var_03, var_04, var_05], [var_1.clientid, var_03]);
 }
 
 func_AF74(var_00, var_01) {
-  scripts/cp/cp_analytics::func_AF6A("interaction_status", 1, [level.script, var_00, var_01], [level.script]);
+  scripts\cp\cp_analytics::func_AF6A("interaction_status", 1, [level.script, var_00, var_01], [level.script]);
 }
 
 log_perk_machine_used(var_00, var_01) {
-  scripts/cp/cp_analytics::func_AF6A("perk_machine_used", 1, [level.script, var_00, var_01], [level.script]);
+  scripts\cp\cp_analytics::func_AF6A("perk_machine_used", 1, [level.script, var_00, var_01], [level.script]);
 }
 
 log_perk_returned(var_00, var_01) {
-  scripts/cp/cp_analytics::func_AF6A("perk_returned", 1, [level.script, var_00, var_01], [level.script]);
+  scripts\cp\cp_analytics::func_AF6A("perk_returned", 1, [level.script, var_00, var_01], [level.script]);
 }
 
 log_finished_mini_game(var_00, var_01, var_02, var_03, var_04, var_05, var_06) {
-  var_01 scripts/cp/zombies/achievement::update_achievement_arcade(var_01, var_03, var_02);
+  var_01 scripts\cp\zombies\achievement::update_achievement_arcade(var_01, var_03, var_02);
 
   if (var_05 > 0 && var_03 != "coaster")
-  var_01 thread scripts/cp/cp_vo::try_to_play_vo("arcade_complete", "zmb_comment_vo", "low", 10, 0, 0, 0, 45);
+  var_01 thread scripts\cp\cp_vo::try_to_play_vo("arcade_complete", "zmb_comment_vo", "low", 10, 0, 0, 0, 45);
 
-  scripts/cp/cp_analytics::func_AF6A("finished_mini_game", var_00, [var_1.clientid, var_02, var_03, var_04, var_05, var_06], [var_1.clientid, var_03]);
+  scripts\cp\cp_analytics::func_AF6A("finished_mini_game", var_00, [var_1.clientid, var_02, var_03, var_04, var_05, var_06], [var_1.clientid, var_03]);
 }
 
 func_AF82(var_00, var_01, var_02, var_03, var_04, var_05) {
-  scripts/cp/cp_analytics::func_AF6A("pillage_event", var_00, [var_1.clientid, var_02, var_03, var_04, var_05], [var_1.clientid, var_03]);
+  scripts\cp\cp_analytics::func_AF6A("pillage_event", var_00, [var_1.clientid, var_02, var_03, var_04, var_05], [var_1.clientid, var_03]);
 }
 
 log_item_purchase_with_tickets(var_00, var_01, var_02) {
-  scripts/cp/cp_analytics::func_AF6A("item_purchase_with_tickets", 1, [level.script, var_00, var_01, var_02], [level.script]);
+  scripts\cp\cp_analytics::func_AF6A("item_purchase_with_tickets", 1, [level.script, var_00, var_01, var_02], [level.script]);
 }
 
 func_AF76(var_00, var_01) {
-  scripts/cp/cp_analytics::func_AF6A("item_replaced", 1, [level.script, var_00, var_01], [level.script]);
+  scripts\cp\cp_analytics::func_AF6A("item_replaced", 1, [level.script, var_00, var_01], [level.script]);
 }
 
 func_AF7D(var_00, var_01) {
-  scripts/cp/cp_analytics::func_AF6A("neil_head_found", var_00, [level.script, var_00], [level.script]);
-  scripts/cp/cp_analytics::func_AF6A("neil_head_placed", var_01, [level.script, var_01], [level.script]);
+  scripts\cp\cp_analytics::func_AF6A("neil_head_found", var_00, [level.script, var_00], [level.script]);
+  scripts\cp\cp_analytics::func_AF6A("neil_head_placed", var_01, [level.script, var_01], [level.script]);
 }
 
 func_AF7B(var_00, var_01) {
-  scripts/cp/cp_analytics::func_AF6A("neil_battery", var_00, [level.script, var_00, var_01], [level.script]);
+  scripts\cp\cp_analytics::func_AF6A("neil_battery", var_00, [level.script, var_00, var_01], [level.script]);
 }
 
 func_AF7C(var_00, var_01) {
-  scripts/cp/cp_analytics::func_AF6A("neil_floppy", var_00, [level.script, var_00, var_01], [level.script]);
+  scripts\cp\cp_analytics::func_AF6A("neil_floppy", var_00, [level.script, var_00, var_01], [level.script]);
 }
 
 log_balloons_popped(var_00) {
-  scripts/cp/cp_analytics::func_AF6A("balloons_popped", var_00, [level.script, var_00], [level.script]);
+  scripts\cp\cp_analytics::func_AF6A("balloons_popped", var_00, [level.script, var_00], [level.script]);
 }
 
 log_shooting_icemonster_coaster(var_00) {
-  scripts/cp/cp_analytics::func_AF6A("shot_icemonster", var_00, [level.script, var_00], [level.script]);
+  scripts\cp\cp_analytics::func_AF6A("shot_icemonster", var_00, [level.script, var_00], [level.script]);
 }
 
 log_ghost_spelled(var_00) {
-  scripts/cp/cp_analytics::func_AF6A("ghost_spelled", var_00, [level.script, var_00], [level.script]);
+  scripts\cp\cp_analytics::func_AF6A("ghost_spelled", var_00, [level.script, var_00], [level.script]);
 }
 
 log_1984_kills(var_00) {
-  scripts/cp/cp_analytics::func_AF6A("1984_kills", undefined, [var_00], undefined);
+  scripts\cp\cp_analytics::func_AF6A("1984_kills", undefined, [var_00], undefined);
 }
 
 log_beating_arcade_games(var_00) {
-  scripts/cp/cp_analytics::func_AF6A("beating_arcade_games", var_00, [level.script, var_00], [level.script]);
+  scripts\cp\cp_analytics::func_AF6A("beating_arcade_games", var_00, [level.script, var_00], [level.script]);
 }
 
 log_brute_hits_cabinet(var_00) {
-  scripts/cp/cp_analytics::func_AF6A("brute_hits_cabinet", var_00, [level.script, var_00], [level.script]);
+  scripts\cp\cp_analytics::func_AF6A("brute_hits_cabinet", var_00, [level.script, var_00], [level.script]);
 }
 
 log_activate_enter_ghostskulls_game(var_00) {
-  scripts/cp/cp_analytics::func_AF6A("activate_enter_ghostskulls_game", var_00, [level.script, var_00], [level.script]);
+  scripts\cp\cp_analytics::func_AF6A("activate_enter_ghostskulls_game", var_00, [level.script, var_00], [level.script]);
 }
 
 log_player_exits_ghostskulls_games(var_00, var_01, var_02) {
-  scripts/cp/cp_analytics::func_AF6A("player_exits_ghostskulls_games", var_00, [level.script, var_00, var_01, int(var_02)], [level.script]);
+  scripts\cp\cp_analytics::func_AF6A("player_exits_ghostskulls_games", var_00, [level.script, var_00, var_01, int(var_02)], [level.script]);
 }
 
 log_frequency_device_collected(var_00, var_01, var_02) {
-  scripts/cp/cp_analytics::func_AF6A("frequency_device_collected", var_00, [level.script, var_00, var_01, var_02], [level.script]);
+  scripts\cp\cp_analytics::func_AF6A("frequency_device_collected", var_00, [level.script, var_00, var_01, var_02], [level.script]);
 }
 
 log_frequency_device_crafted_dj(var_00, var_01) {
-  scripts/cp/cp_analytics::func_AF6A("frequency_device_crafted_dj", var_00, [level.script, var_00, var_01], [level.script]);
+  scripts\cp\cp_analytics::func_AF6A("frequency_device_crafted_dj", var_00, [level.script, var_00, var_01], [level.script]);
 }
 
 log_speaker_defence_sequence_ends(var_00, var_01, var_02, var_03) {
-  scripts/cp/cp_analytics::func_AF6A("speaker_defence_sequence_ends", var_00, [level.script, var_00, "" + var_01, var_02, var_03], [level.script]);
+  scripts\cp\cp_analytics::func_AF6A("speaker_defence_sequence_ends", var_00, [level.script, var_00, "" + var_01, var_02, var_03], [level.script]);
 }
 
 log_tone_sequence_activated(var_00) {
-  scripts/cp/cp_analytics::func_AF6A("tone_sequence_activated", var_00, [level.script, var_00], [level.script]);
+  scripts\cp\cp_analytics::func_AF6A("tone_sequence_activated", var_00, [level.script, var_00], [level.script]);
 }
 
 log_suicide_bomber_sequence_activated(var_00) {
-  scripts/cp/cp_analytics::func_AF6A("suicide_bomber_sequence_activated", var_00, [level.script, var_00], [level.script]);
+  scripts\cp\cp_analytics::func_AF6A("suicide_bomber_sequence_activated", var_00, [level.script, var_00], [level.script]);
 }
 
 log_grey_sequence_activated(var_00) {
-  scripts/cp/cp_analytics::func_AF6A("grey_sequence_activated", var_00, [level.script, var_00], [level.script]);
+  scripts\cp\cp_analytics::func_AF6A("grey_sequence_activated", var_00, [level.script, var_00], [level.script]);
 }
 
 log_ufo_destroyed(var_00) {
-  scripts/cp/cp_analytics::func_AF6A("ufo_destroyed", var_00, [level.script, var_00], [level.script]);
+  scripts\cp\cp_analytics::func_AF6A("ufo_destroyed", var_00, [level.script, var_00], [level.script]);
 }
 
 log_session_xp_earned(var_00, var_01, var_02, var_03) {
-  scripts/cp/cp_analytics::func_AF6A("xp_earned", var_00, [var_01, var_2.clientid, var_03], [var_2.clientid, var_01]);
+  scripts\cp\cp_analytics::func_AF6A("xp_earned", var_00, [var_01, var_2.clientid, var_03], [var_2.clientid, var_01]);
 }
 
 func_AF73(var_00, var_01) {
@@ -439,7 +439,7 @@ func_AF73(var_00, var_01) {
   if (var_06 == "none" || var_06 == "" || var_03 == 0 || !scripts\engine\utility::array_contains(level.func_AE60, var_06))
   continue;
 
-  var_04 = scripts/cp/utility::getbaseweaponname(var_06);
+  var_04 = scripts\cp\utility::getbaseweaponname(var_06);
   setclientmatchdata("player", var_00, "headShots", var_04, var_03);
   var_05 = var_01 getrankedplayerdata("cp", "headShots", var_04);
   var_01 setrankedplayerdata("cp", "headShots", var_04, var_05 + var_03);
@@ -475,19 +475,19 @@ func_AF91(var_00, var_01) {
   if (var_08 == "none" || var_08 == "" || var_06 == 0 || !scripts\engine\utility::array_contains(level.func_AE60, var_08))
   continue;
 
-  setclientmatchdata("player", var_00, "killsPerWeapon", scripts/cp/utility::getbaseweaponname(var_08), var_06);
-  var_07 = var_01 getrankedplayerdata("cp", "killsPerWeapon", scripts/cp/utility::getbaseweaponname(var_08));
-  var_01 setrankedplayerdata("cp", "killsPerWeapon", scripts/cp/utility::getbaseweaponname(var_08), var_07 + var_06);
+  setclientmatchdata("player", var_00, "killsPerWeapon", scripts\cp\utility::getbaseweaponname(var_08), var_06);
+  var_07 = var_01 getrankedplayerdata("cp", "killsPerWeapon", scripts\cp\utility::getbaseweaponname(var_08));
+  var_01 setrankedplayerdata("cp", "killsPerWeapon", scripts\cp\utility::getbaseweaponname(var_08), var_07 + var_06);
 
   if (var_1.aggregateweaponkills[var_08] > 0 && var_02 == 0) {
   var_03 = var_1.aggregateweaponkills[var_08];
   var_02 = 1;
-  var_04 = scripts/cp/utility::getbaseweaponname(var_08);
+  var_04 = scripts\cp\utility::getbaseweaponname(var_08);
   }
 
   if (var_1.aggregateweaponkills[var_08] > var_03) {
   var_03 = var_1.aggregateweaponkills[var_08];
-  var_04 = scripts/cp/utility::getbaseweaponname(var_08);
+  var_04 = scripts\cp\utility::getbaseweaponname(var_08);
   }
   }
 
@@ -541,7 +541,7 @@ func_13F5C() {
 func_AF84(var_00, var_01) {}
 
 log_playershotsontarget(var_00, var_01, var_02) {
-  scripts/cp/cp_analytics::func_AF6A("shots_on_target", var_00, [var_1.clientid, var_02], [var_1.clientid, var_02]);
+  scripts\cp\cp_analytics::func_AF6A("shots_on_target", var_00, [var_1.clientid, var_02], [var_1.clientid, var_02]);
 }
 
 log_times_per_wave(var_00, var_01) {
@@ -558,29 +558,29 @@ log_times_per_wave(var_00, var_01) {
 }
 
 log_hidden_song_one_found(var_00) {
-  scripts/cp/cp_analytics::func_AF6A("hidden_song_one_discovered", undefined, [var_00], undefined);
+  scripts\cp\cp_analytics::func_AF6A("hidden_song_one_discovered", undefined, [var_00], undefined);
 }
 
 log_hidden_song_two_found(var_00) {
-  scripts/cp/cp_analytics::func_AF6A("hidden_song_two_discovered", undefined, [var_00], undefined);
+  scripts\cp\cp_analytics::func_AF6A("hidden_song_two_discovered", undefined, [var_00], undefined);
 }
 
 log_crafted_wor_facemelter(var_00) {
-  scripts/cp/cp_analytics::func_AF6A("crafted_wor_facemelter", undefined, [var_00], undefined);
+  scripts\cp\cp_analytics::func_AF6A("crafted_wor_facemelter", undefined, [var_00], undefined);
 }
 
 log_crafted_wor_headcutter(var_00) {
-  scripts/cp/cp_analytics::func_AF6A("crafted_wor_headcutter", undefined, [var_00], undefined);
+  scripts\cp\cp_analytics::func_AF6A("crafted_wor_headcutter", undefined, [var_00], undefined);
 }
 
 log_crafted_wor_dischord(var_00) {
-  scripts/cp/cp_analytics::func_AF6A("crafted_wor_dischord", undefined, [var_00], undefined);
+  scripts\cp\cp_analytics::func_AF6A("crafted_wor_dischord", undefined, [var_00], undefined);
 }
 
 log_crafted_wor_shredder(var_00) {
-  scripts/cp/cp_analytics::func_AF6A("crafted_wor_shredder", undefined, [var_00], undefined);
+  scripts\cp\cp_analytics::func_AF6A("crafted_wor_shredder", undefined, [var_00], undefined);
 }
 
 log_pink_ark_obtained(var_00) {
-  scripts/cp/cp_analytics::func_AF6A("pink_ark_obtained", undefined, [var_00], undefined);
+  scripts\cp\cp_analytics::func_AF6A("pink_ark_obtained", undefined, [var_00], undefined);
 }

@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3173.gsc
-****************************/
+ * Script: 3173.gsc
+************************/
 
 func_CEB5(param_00,param_01,param_02,param_03) {
 	var_04 = lib_0A1E::asm_getallanimsforstate(param_00,param_01);
@@ -13,10 +13,10 @@ func_CEB5(param_00,param_01,param_02,param_03) {
 	}
 
 	if(!isdefined(var_04)) {
-		scripts/asm/asm::asm_fireevent(param_01,"abort");
-		scripts/asm/asm::asm_fireevent(param_01,"code_move",undefined);
-		scripts/asm/asm::asm_fireevent(param_01,"end",undefined);
-		scripts/asm/asm::asm_fireevent(param_01,"finish",undefined);
+		scripts\asm\asm::asm_fireevent(param_01,"abort");
+		scripts\asm\asm::asm_fireevent(param_01,"code_move",undefined);
+		scripts\asm\asm::asm_fireevent(param_01,"end",undefined);
+		scripts\asm\asm::asm_fireevent(param_01,"finish",undefined);
 		return;
 	}
 
@@ -40,10 +40,10 @@ func_3E9F(param_00,param_01,param_02) {
 	}
 
 	if(isdefined(param_02) && isarray(param_02) && isdefined(param_02[0])) {
-		var_03 = func_53CA(param_01,scripts/asm/asm_bb::func_2928(param_02[0]),var_04);
+		var_03 = func_53CA(param_01,scripts\asm\asm_bb::func_2928(param_02[0]),var_04);
 	}
 	else if(isdefined(param_02) && !isarray(param_02)) {
-		var_03 = func_53CA(param_01,scripts/asm/asm_bb::func_2928(param_02),var_04);
+		var_03 = func_53CA(param_01,scripts\asm\asm_bb::func_2928(param_02),var_04);
 	}
 	else
 	{
@@ -62,49 +62,49 @@ _meth_8162(param_00,param_01) {
 
 	var_04 = "";
 	if(isdefined(self.asm.var_13CAF) && self.asm.var_13CAF) {
-		if(scripts/asm/asm::asm_hasalias(param_00,var_03 + "2_2h")) {
+		if(scripts\asm\asm::asm_hasalias(param_00,var_03 + "2_2h")) {
 			var_04 = "_2h";
 		}
 	}
 
-	if(scripts/asm/asm::asm_hasalias(param_00,var_03 + "1" + var_04)) {
-		var_02[7] = scripts/asm/asm::asm_lookupanimfromalias(param_00,var_03 + "1" + var_04);
+	if(scripts\asm\asm::asm_hasalias(param_00,var_03 + "1" + var_04)) {
+		var_02[7] = scripts\asm\asm::asm_lookupanimfromalias(param_00,var_03 + "1" + var_04);
 	}
 
-	if(scripts/asm/asm::asm_hasalias(param_00,var_03 + "2" + var_04)) {
-		var_02[0] = scripts/asm/asm::asm_lookupanimfromalias(param_00,var_03 + "2" + var_04);
+	if(scripts\asm\asm::asm_hasalias(param_00,var_03 + "2" + var_04)) {
+		var_02[0] = scripts\asm\asm::asm_lookupanimfromalias(param_00,var_03 + "2" + var_04);
 		var_02[8] = var_02[0];
 	}
 
-	if(scripts/asm/asm::asm_hasalias(param_00,var_03 + "3" + var_04)) {
-		var_02[1] = scripts/asm/asm::asm_lookupanimfromalias(param_00,var_03 + "3" + var_04);
+	if(scripts\asm\asm::asm_hasalias(param_00,var_03 + "3" + var_04)) {
+		var_02[1] = scripts\asm\asm::asm_lookupanimfromalias(param_00,var_03 + "3" + var_04);
 	}
 
-	if(scripts/asm/asm::asm_hasalias(param_00,var_03 + "4" + var_04)) {
-		var_02[6] = scripts/asm/asm::asm_lookupanimfromalias(param_00,var_03 + "4" + var_04);
+	if(scripts\asm\asm::asm_hasalias(param_00,var_03 + "4" + var_04)) {
+		var_02[6] = scripts\asm\asm::asm_lookupanimfromalias(param_00,var_03 + "4" + var_04);
 	}
 
-	if(scripts/asm/asm::asm_hasalias(param_00,var_03 + "6" + var_04)) {
-		var_02[2] = scripts/asm/asm::asm_lookupanimfromalias(param_00,var_03 + "6" + var_04);
+	if(scripts\asm\asm::asm_hasalias(param_00,var_03 + "6" + var_04)) {
+		var_02[2] = scripts\asm\asm::asm_lookupanimfromalias(param_00,var_03 + "6" + var_04);
 	}
 
-	if(scripts/asm/asm::asm_hasalias(param_00,var_03 + "7" + var_04)) {
-		var_02[5] = scripts/asm/asm::asm_lookupanimfromalias(param_00,var_03 + "7" + var_04);
+	if(scripts\asm\asm::asm_hasalias(param_00,var_03 + "7" + var_04)) {
+		var_02[5] = scripts\asm\asm::asm_lookupanimfromalias(param_00,var_03 + "7" + var_04);
 	}
 
-	if(scripts/asm/asm::asm_hasalias(param_00,var_03 + "8" + var_04)) {
-		var_02[4] = scripts/asm/asm::asm_lookupanimfromalias(param_00,var_03 + "8" + var_04);
+	if(scripts\asm\asm::asm_hasalias(param_00,var_03 + "8" + var_04)) {
+		var_02[4] = scripts\asm\asm::asm_lookupanimfromalias(param_00,var_03 + "8" + var_04);
 	}
 
-	if(scripts/asm/asm::asm_hasalias(param_00,var_03 + "9" + var_04)) {
-		var_02[3] = scripts/asm/asm::asm_lookupanimfromalias(param_00,var_03 + "9" + var_04);
+	if(scripts\asm\asm::asm_hasalias(param_00,var_03 + "9" + var_04)) {
+		var_02[3] = scripts\asm\asm::asm_lookupanimfromalias(param_00,var_03 + "9" + var_04);
 	}
 
 	return var_02;
 }
 
 getthreatbiasgroup() {
-	var_00 = scripts/asm/asm::asm_getdemeanor();
+	var_00 = scripts\asm\asm::asm_getdemeanor();
 	if(var_00 == "casual" || var_00 == "casual_gun") {
 		return 75;
 	}
@@ -294,8 +294,8 @@ func_3E57() {
 	}
 
 	var_00 = 10000;
-	var_01 = scripts/asm/asm::asm_getdemeanor();
-	if(scripts/asm/asm::asm_getdemeanor() == "casual" || scripts/asm/asm::asm_getdemeanor() == "casual_gun") {
+	var_01 = scripts\asm\asm::asm_getdemeanor();
+	if(scripts\asm\asm::asm_getdemeanor() == "casual" || scripts\asm\asm::asm_getdemeanor() == "casual_gun") {
 		var_00 = 2500;
 	}
 
@@ -307,7 +307,7 @@ func_3E57() {
 }
 
 func_3B1F(param_00,param_01,param_02,param_03) {
-	var_04 = scripts/asm/asm::asm_getdemeanor();
+	var_04 = scripts\asm\asm::asm_getdemeanor();
 	if(!isdefined(param_03[2]) || param_03[2] != var_04) {
 		return 0;
 	}
@@ -330,7 +330,7 @@ func_FFF8(param_00,param_01,param_02,param_03) {
 	}
 
 	var_04 = self.var_164D[param_00].var_4BC0;
-	var_05 = scripts/asm/asm::func_233F(var_04,"sharp_turn");
+	var_05 = scripts\asm\asm::func_233F(var_04,"sharp_turn");
 	if(!isdefined(var_05)) {
 		return 0;
 	}
@@ -356,7 +356,7 @@ func_FFF8(param_00,param_01,param_02,param_03) {
 		}
 
 		if(param_03.size > 2) {
-			var_0B = scripts/asm/asm_bb::func_2928(param_03[2]);
+			var_0B = scripts\asm\asm_bb::func_2928(param_03[2]);
 		}
 	}
 
@@ -380,10 +380,10 @@ func_371C(param_00,param_01,param_02,param_03,param_04,param_05) {
 	}
 
 	if(param_04) {
-		if(scripts/asm/asm::func_232C(param_00,"pass_left")) {
+		if(scripts\asm\asm::func_232C(param_00,"pass_left")) {
 			var_07 = param_05 + "left";
 		}
-		else if(scripts/asm/asm::func_232C(param_01,"pass_right")) {
+		else if(scripts\asm\asm::func_232C(param_01,"pass_right")) {
 			var_07 = var_06 + "right";
 		}
 		else if(self.asm.footsteps.foot == "right") {
@@ -407,7 +407,7 @@ func_371C(param_00,param_01,param_02,param_03,param_04,param_05) {
 		var_08 = -1;
 	}
 
-	var_09 = self _meth_8546(self.asm.archetype,param_01,scripts/asm/asm::asm_getdemeanor(),param_02,param_03,var_06,var_08,var_07,param_05);
+	var_09 = self _meth_8546(self.asm.archetype,param_01,scripts\asm\asm::asm_getdemeanor(),param_02,param_03,var_06,var_08,var_07,param_05);
 	var_0A = var_09[0];
 	var_0B = var_09[1];
 	if(isdefined(self.asm.var_13CAF) && self.asm.var_13CAF && isdefined(var_0B)) {
@@ -502,7 +502,7 @@ func_98C6(param_00,param_01,param_02,param_03) {
 
 func_11088(param_00,param_01,param_02) {
 	if(isdefined(self.var_E873)) {
-		self aiclearanim(scripts/asm/asm::asm_lookupanimfromalias(param_01,"run_n_gun"),0.2);
+		self aiclearanim(scripts\asm\asm::asm_lookupanimfromalias(param_01,"run_n_gun"),0.2);
 		self.var_E873 = undefined;
 	}
 
@@ -530,7 +530,7 @@ func_1006E(param_00,param_01,param_02,param_03) {
 	}
 
 	var_04 = func_E875();
-	return self.livestreamingenable && isdefined(var_04) && scripts\anim\move::func_B4EC() && scripts/asm/asm_bb::bb_movetyperequested("combat");
+	return self.livestreamingenable && isdefined(var_04) && scripts\anim\move::func_B4EC() && scripts\asm\asm_bb::bb_movetyperequested("combat");
 }
 
 func_10070(param_00,param_01,param_02,param_03) {
@@ -589,12 +589,12 @@ detach(param_00) {
 
 func_E877(param_00,param_01,param_02,param_03) {
 	self endon(param_01 + "_finished");
-	var_04 = scripts/asm/asm::asm_lookupanimfromalias(param_01,"F");
-	var_05 = scripts/asm/asm::asm_lookupanimfromalias(param_01,"L");
-	var_06 = scripts/asm/asm::asm_lookupanimfromalias(param_01,"R");
-	var_07 = scripts/asm/asm::asm_lookupanimfromalias(param_01,"LB");
-	var_08 = scripts/asm/asm::asm_lookupanimfromalias(param_01,"RB");
-	var_09 = scripts/asm/asm::asm_lookupanimfromalias(param_01,"run_n_gun");
+	var_04 = scripts\asm\asm::asm_lookupanimfromalias(param_01,"F");
+	var_05 = scripts\asm\asm::asm_lookupanimfromalias(param_01,"L");
+	var_06 = scripts\asm\asm::asm_lookupanimfromalias(param_01,"R");
+	var_07 = scripts\asm\asm::asm_lookupanimfromalias(param_01,"LB");
+	var_08 = scripts\asm\asm::asm_lookupanimfromalias(param_01,"RB");
+	var_09 = scripts\asm\asm::asm_lookupanimfromalias(param_01,"run_n_gun");
 	var_0A = self.var_B4C3;
 	var_0B = self.var_E878;
 	var_0C = self.var_E876;
@@ -725,31 +725,31 @@ giveachievement(param_00) {
 
 func_3F03(param_00,param_01,param_02) {
 	var_03 = [];
-	var_03[0] = scripts/asm/asm::asm_lookupanimfromalias(param_01,"0");
-	var_03[1] = scripts/asm/asm::asm_lookupanimfromalias(param_01,"1");
-	var_03[2] = scripts/asm/asm::asm_lookupanimfromalias(param_01,"2");
-	var_03[3] = scripts/asm/asm::asm_lookupanimfromalias(param_01,"3");
-	var_03[4] = scripts/asm/asm::asm_lookupanimfromalias(param_01,"4");
-	var_03[5] = scripts/asm/asm::asm_lookupanimfromalias(param_01,"5");
-	var_03[6] = scripts/asm/asm::asm_lookupanimfromalias(param_01,"6");
-	var_03[7] = scripts/asm/asm::asm_lookupanimfromalias(param_01,"7");
-	var_03[8] = scripts/asm/asm::asm_lookupanimfromalias(param_01,"8");
+	var_03[0] = scripts\asm\asm::asm_lookupanimfromalias(param_01,"0");
+	var_03[1] = scripts\asm\asm::asm_lookupanimfromalias(param_01,"1");
+	var_03[2] = scripts\asm\asm::asm_lookupanimfromalias(param_01,"2");
+	var_03[3] = scripts\asm\asm::asm_lookupanimfromalias(param_01,"3");
+	var_03[4] = scripts\asm\asm::asm_lookupanimfromalias(param_01,"4");
+	var_03[5] = scripts\asm\asm::asm_lookupanimfromalias(param_01,"5");
+	var_03[6] = scripts\asm\asm::asm_lookupanimfromalias(param_01,"6");
+	var_03[7] = scripts\asm\asm::asm_lookupanimfromalias(param_01,"7");
+	var_03[8] = scripts\asm\asm::asm_lookupanimfromalias(param_01,"8");
 	return var_03;
 }
 
 func_3F0C(param_00,param_01,param_02) {
 	var_03 = spawnstruct();
 	var_04 = [];
-	var_04[0] = scripts/asm/asm::asm_lookupanimfromalias(param_01,"0");
-	var_04[1] = scripts/asm/asm::asm_lookupanimfromalias(param_01,"1");
-	var_04[2] = scripts/asm/asm::asm_lookupanimfromalias(param_01,"2");
+	var_04[0] = scripts\asm\asm::asm_lookupanimfromalias(param_01,"0");
+	var_04[1] = scripts\asm\asm::asm_lookupanimfromalias(param_01,"1");
+	var_04[2] = scripts\asm\asm::asm_lookupanimfromalias(param_01,"2");
 	var_03.var_47 = var_04;
-	var_03.var_7332 = scripts/asm/asm::asm_lookupanimfromalias(param_01,"forward");
+	var_03.var_7332 = scripts\asm\asm::asm_lookupanimfromalias(param_01,"forward");
 	return var_03;
 }
 
 func_100BD() {
-	return scripts/asm/asm_bb::bb_moverequested() && isdefined(self._blackboard.var_13863) && self._blackboard.var_13863;
+	return scripts\asm\asm_bb::bb_moverequested() && isdefined(self.var_1198.var_13863) && self.var_1198.var_13863;
 }
 
 func_13874(param_00,param_01) {
@@ -761,10 +761,10 @@ func_BD2C(param_00,param_01,param_02,param_03) {
 	self endon(param_01 + "_finished");
 	thread lib_0F3D::func_136B4(param_00,param_01,param_03);
 	thread lib_0F3D::func_136E7(param_00,param_01,param_03);
-	var_04 = scripts/asm/asm::asm_getmoveplaybackrate();
-	scripts/asm/asm::asm_updatefrantic();
+	var_04 = scripts\asm\asm::asm_getmoveplaybackrate();
+	scripts\asm\asm::asm_updatefrantic();
 	self _meth_84F1(var_04);
-	scripts/asm/asm::asm_updatefrantic();
+	scripts\asm\asm::asm_updatefrantic();
 	var_05 = lib_0A1E::asm_getallanimsforstate(param_00,param_01);
 	var_06 = var_05.var_47;
 	var_07 = var_05.var_7332;
@@ -774,7 +774,7 @@ func_BD2C(param_00,param_01,param_02,param_03) {
 	var_08 = 0;
 	var_09 = 20;
 	for(;;) {
-		var_0A = scripts/asm/asm::func_232B(param_01,"cover_approach");
+		var_0A = scripts\asm\asm::func_232B(param_01,"cover_approach");
 		var_0B = self pathdisttogoal();
 		if(var_0A && var_0B < 150) {
 			var_0C = func_1E80();
@@ -975,14 +975,14 @@ func_D4E5(param_00,param_01,param_02,param_03) {
 
 func_98A2(param_00,param_01,param_02,param_03) {
 	var_04 = 1;
-	if(isdefined(param_03) && scripts/asm/asm::asm_getdemeanor() != "frantic") {
+	if(isdefined(param_03) && scripts\asm\asm::asm_getdemeanor() != "frantic") {
 		var_04 = param_03;
 	}
 
-	var_05 = scripts/asm/asm::asm_lookupanimfromalias(param_01,"F");
-	var_06 = scripts/asm/asm::asm_lookupanimfromalias(param_01,"L");
-	var_07 = scripts/asm/asm::asm_lookupanimfromalias(param_01,"R");
-	var_08 = scripts/asm/asm::asm_lookupanimfromalias(param_01,"B");
+	var_05 = scripts\asm\asm::asm_lookupanimfromalias(param_01,"F");
+	var_06 = scripts\asm\asm::asm_lookupanimfromalias(param_01,"L");
+	var_07 = scripts\asm\asm::asm_lookupanimfromalias(param_01,"R");
+	var_08 = scripts\asm\asm::asm_lookupanimfromalias(param_01,"B");
 	self _meth_82A9(var_05,1,0.1,var_04,1);
 	self _meth_82A9(var_08,1,0.1,var_04,1);
 	self _meth_82A9(var_07,1,0.1,var_04,1);
@@ -997,10 +997,10 @@ func_BCFC(param_00,param_01,param_02,param_03) {
 	}
 
 	self _meth_84F1(var_04);
-	var_05 = scripts/asm/asm::asm_lookupanimfromalias(param_01,"f_knob");
-	var_06 = scripts/asm/asm::asm_lookupanimfromalias(param_01,"l_knob");
-	var_07 = scripts/asm/asm::asm_lookupanimfromalias(param_01,"r_knob");
-	var_08 = scripts/asm/asm::asm_lookupanimfromalias(param_01,"b_knob");
+	var_05 = scripts\asm\asm::asm_lookupanimfromalias(param_01,"f_knob");
+	var_06 = scripts\asm\asm::asm_lookupanimfromalias(param_01,"l_knob");
+	var_07 = scripts\asm\asm::asm_lookupanimfromalias(param_01,"r_knob");
+	var_08 = scripts\asm\asm::asm_lookupanimfromalias(param_01,"b_knob");
 	for(;;) {
 		var_09 = scripts\anim\utility_common::quadrantanimweights(self getspawnpoint_searchandrescue());
 		self give_attacker_kill_rewards(var_05,var_09["front"],0.2,1,1);
@@ -1014,11 +1014,11 @@ func_BCFC(param_00,param_01,param_02,param_03) {
 
 func_3EFF(param_00,param_01,param_02) {
 	if(isdefined(self.objective_position)) {
-		return scripts/asm/asm::asm_lookupanimfromalias(param_01,"sprint_short");
+		return scripts\asm\asm::asm_lookupanimfromalias(param_01,"sprint_short");
 	}
 
-	if(scripts/asm/asm::asm_hasdemeanoranimoverride("sprint","move")) {
-		var_03 = scripts/asm/asm::asm_getdemeanoranimoverride("sprint","move");
+	if(scripts\asm\asm::asm_hasdemeanoranimoverride("sprint","move")) {
+		var_03 = scripts\asm\asm::asm_getdemeanoranimoverride("sprint","move");
 		if(isarray(var_03)) {
 			return var_03[randomint(var_03.size)];
 		}
@@ -1026,7 +1026,7 @@ func_3EFF(param_00,param_01,param_02) {
 		return var_03;
 	}
 
-	return scripts/asm/asm::asm_lookupanimfromalias(param_02,"sprint");
+	return scripts\asm\asm::asm_lookupanimfromalias(param_02,"sprint");
 }
 
 func_FFF5(param_00,param_01,param_02,param_03) {
@@ -1034,7 +1034,7 @@ func_FFF5(param_00,param_01,param_02,param_03) {
 		return 0;
 	}
 
-	var_04 = scripts/asm/asm_bb::bb_getrequestedwhizby();
+	var_04 = scripts\asm\asm_bb::bb_getrequestedwhizby();
 	if(!isdefined(var_04)) {
 		return 0;
 	}
@@ -1051,21 +1051,21 @@ func_FFF5(param_00,param_01,param_02,param_03) {
 }
 
 func_BCF9(param_00) {
-	var_01 = scripts/asm/asm::asm_getdemeanor();
+	var_01 = scripts\asm\asm::asm_getdemeanor();
 	if(var_01 == "frantic" || var_01 == "combat" || var_01 == "sprint") {
 		scripts\anim\battlechatter_ai::func_67D2(param_00);
 	}
 }
 
 shouldreload(param_00,param_01,param_02,param_03) {
-	if(!scripts/asm/asm_bb::bb_reloadrequested()) {
+	if(!scripts\asm\asm_bb::bb_reloadrequested()) {
 		return 0;
 	}
 
-	if(scripts/asm/asm::asm_getdemeanor()) {
+	if(scripts\asm\asm::asm_getdemeanor()) {
 		var_04 = 400;
 	}
-	else if(scripts/asm/asm_bb::bb_movetyperequested("cqb")) {
+	else if(scripts\asm\asm_bb::bb_movetyperequested("cqb")) {
 		var_04 = 500;
 	}
 	else
@@ -1088,7 +1088,7 @@ func_D506(param_00,param_01,param_02,param_03) {
 }
 
 func_116FE(param_00,param_01,param_02) {
-	if(!scripts/asm/asm::func_232B(param_01,"reload done")) {
+	if(!scripts\asm\asm::func_232B(param_01,"reload done")) {
 		scripts\anim\weaponlist::refillclip();
 	}
 
@@ -1097,13 +1097,13 @@ func_116FE(param_00,param_01,param_02) {
 
 func_10B4F(param_00,param_01,param_02) {
 	if(isdefined(param_02)) {
-		var_03 = scripts/asm/asm_bb::func_2928(param_02);
+		var_03 = scripts\asm\asm_bb::func_2928(param_02);
 		if(isdefined(var_03)) {
 			param_01 = var_03 + param_01;
 		}
 	}
 
-	return scripts\engine\utility::istrue(scripts/asm/asm::asm_hasalias(param_00,param_01));
+	return scripts\engine\utility::istrue(scripts\asm\asm::asm_hasalias(param_00,param_01));
 }
 
 func_9EC3(param_00,param_01,param_02,param_03) {
@@ -1127,7 +1127,7 @@ func_9EC9(param_00,param_01,param_02,param_03) {
 }
 
 _meth_8157() {
-	var_00 = scripts/asm/asm::asm_getdemeanor();
+	var_00 = scripts\asm\asm::asm_getdemeanor();
 	switch(var_00) {
 		case "casual":
 			return 23;
@@ -1200,7 +1200,7 @@ func_10005(param_00,param_01,param_02,param_03) {
 }
 
 _meth_8158() {
-	var_00 = scripts/asm/asm::asm_getdemeanor();
+	var_00 = scripts\asm\asm::asm_getdemeanor();
 	switch(var_00) {
 		case "casual":
 			return 13;
@@ -1223,7 +1223,7 @@ _meth_8158() {
 }
 
 getpointinbounds() {
-	var_00 = scripts/asm/asm::asm_getdemeanor();
+	var_00 = scripts\asm\asm::asm_getdemeanor();
 	switch(var_00) {
 		case "casual":
 			return 24;
@@ -1254,7 +1254,7 @@ func_10030(param_00,param_01,param_02,param_03) {
 }
 
 func_1000E(param_00,param_01,param_02,param_03) {
-	if(isdefined(self._blackboard.disablestairsexits) && self._blackboard.disablestairsexits) {
+	if(isdefined(self.var_1198.disablestairsexits) && self.var_1198.disablestairsexits) {
 		return 0;
 	}
 
@@ -1286,7 +1286,7 @@ func_3EA5(param_00,param_01,param_02) {
 	}
 
 	if(isdefined(param_02)) {
-		var_04 = scripts/asm/asm_bb::func_2928(param_02);
+		var_04 = scripts\asm\asm_bb::func_2928(param_02);
 		if(isdefined(var_04)) {
 			var_03 = var_04 + var_03;
 		}

@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\3030.gsc
+ * Script: 3030.gsc
 ***************************************/
 
 func_621A() {
@@ -71,9 +71,9 @@ func_B35F() {
   scripts\engine\utility::flag_set("jackal_supply_drop_hint");
 
   if (isdefined(level.func_B833))
-  thread scripts/sp/utility::func_56BA("jackal_supply_drop");
+  thread scripts\sp\utility::func_56BA("jackal_supply_drop");
   else
-  thread scripts/sp/utility::func_56BE("jackal_supply_drop", 4);
+  thread scripts\sp\utility::func_56BE("jackal_supply_drop", 4);
 
   func_0BDC::func_A112("jackal_hud_missile_supply_available", 20);
   level.player notifyonplayercommand("callin_supply_drone", "+actionslot 2");
@@ -147,13 +147,13 @@ func_5D07(var_00, var_01) {
 
   while (isdefined(var_10)) {
   var_04 = level.player _meth_8473();
-  var_13 = scripts/sp/math::func_C097(0, var_02, var_12);
+  var_13 = scripts\sp\math::func_C097(0, var_02, var_12);
   var_06 = anglestoforward(var_4.angles);
   var_07 = anglestoforward(var_4.angles);
   var_08 = anglestoforward(var_4.angles);
   var_09 = var_03;
   var_14 = var_06 * var_0[0] + var_07 * var_0[1] + var_08 * var_0[2];
-  var_15 = scripts/sp/math::func_6A8E(var_14, var_09, var_13);
+  var_15 = scripts\sp\math::func_6A8E(var_14, var_09, var_13);
   var_10.origin = var_4.origin + var_15;
   var_12 = var_12 - 0.05;
 
@@ -229,7 +229,7 @@ func_5BFD(var_00, var_01) {
   var_1.func_FC28 = scripts\engine\utility::spawn_tag_origin();
   var_1.func_FC28 func_0BDC::func_F2FF();
   var_01 thread func_5C87();
-  var_01 scripts/sp/utility::func_75C4("landing_drone_light_top_blink", "j_mainroot");
+  var_01 scripts\sp\utility::func_75C4("landing_drone_light_top_blink", "j_mainroot");
   var_03 = 0;
   var_04 = (0, 0, 0);
   var_05 = [0, 0];
@@ -271,8 +271,8 @@ func_5BFD(var_00, var_01) {
   var_26 = 0.15;
   var_27 = 500;
   var_28 = 0.35;
-  var_29 = scripts/sp/math::func_C097(var_25, var_27, var_24);
-  var_30 = scripts/sp/math::func_6A8E(var_26, var_28, var_29);
+  var_29 = scripts\sp\math::func_C097(var_25, var_27, var_24);
+  var_30 = scripts\sp\math::func_6A8E(var_26, var_28, var_29);
   var_04 = var_04 - rotatevectorinverted(var_2.spaceship_vel, var_2.angles) * var_19;
   var_31 = var_2.spaceship_rotvel * 0.05;
   var_32 = rotatevectorinverted(var_1.origin - var_2.origin, var_2.angles);
@@ -287,13 +287,13 @@ func_5BFD(var_00, var_01) {
   if (!isdefined(var_15))
   var_15 = var_11;
 
-  var_35 = scripts/sp/math::func_C097(0, var_15, var_11);
-  var_35 = scripts/sp/math::func_C09B(var_35);
+  var_35 = scripts\sp\math::func_C097(0, var_15, var_11);
+  var_35 = scripts\sp\math::func_C09B(var_35);
   }
 
   var_36 = var_04 - var_16;
-  var_37 = scripts/sp/math::func_C097(0, var_07, length(var_04));
-  var_38 = scripts/sp/math::func_C097(0, var_08, length(var_36));
+  var_37 = scripts\sp\math::func_C097(0, var_07, length(var_04));
+  var_38 = scripts\sp\math::func_C097(0, var_08, length(var_36));
   var_39 = vectornormalize(var_04) * var_37;
   var_40 = vectornormalize(var_36) * var_38;
   var_05 = var_01 func_5C4D(var_39, var_05, 1, var_09, var_35);
@@ -308,8 +308,8 @@ func_5BFD(var_00, var_01) {
   var_13 = var_13 - 0.05;
   }
 
-  var_01 scripts/sp/utility::func_75A0("landing_drone_light_top_blink", "j_mainroot");
-  var_01 scripts/sp/utility::func_75C4("landing_drone_light_top", "j_mainroot");
+  var_01 scripts\sp\utility::func_75A0("landing_drone_light_top_blink", "j_mainroot");
+  var_01 scripts\sp\utility::func_75C4("landing_drone_light_top", "j_mainroot");
   var_1.func_FC28 delete();
 }
 
@@ -388,8 +388,8 @@ func_5BFC(var_00) {
   var_33 = 0.15;
   var_34 = 2500;
   var_35 = 0.25;
-  var_36 = scripts/sp/math::func_C097(var_32, var_34, var_30);
-  var_37 = scripts/sp/math::func_6A8E(var_33, var_35, var_36);
+  var_36 = scripts\sp\math::func_C097(var_32, var_34, var_30);
+  var_37 = scripts\sp\math::func_6A8E(var_33, var_35, var_36);
 
   if (!isdefined(var_00))
   var_05 = var_05 - rotatevectorinverted(var_2.spaceship_vel, var_2.angles) * var_25;
@@ -409,19 +409,19 @@ func_5BFC(var_00) {
   if (!isdefined(var_15))
   var_15 = var_21;
 
-  var_19 = scripts/sp/math::func_C097(0, var_15, var_21);
-  var_19 = scripts/sp/math::func_C09B(var_19);
+  var_19 = scripts\sp\math::func_C097(0, var_15, var_21);
+  var_19 = scripts\sp\math::func_C09B(var_19);
   }
 
   var_42 = var_05 - var_17;
-  var_43 = scripts/sp/math::func_C097(0, var_08, length(var_05));
-  var_44 = scripts/sp/math::func_C097(0, var_09, length(var_42));
+  var_43 = scripts\sp\math::func_C097(0, var_08, length(var_05));
+  var_44 = scripts\sp\math::func_C097(0, var_09, length(var_42));
   var_45 = vectornormalize(var_05) * var_43;
   var_46 = vectornormalize(var_42) * var_44;
   var_06 = var_01 func_5C4D(var_45, var_06, 1, var_10, var_19);
   var_07 = var_01 func_5C4D(var_46, var_07, 1, var_11, var_19);
-  var_47 = scripts/sp/math::func_C097(0, var_12, var_21);
-  var_48 = scripts/sp/math::func_6A8E(var_31, var_29, var_47);
+  var_47 = scripts\sp\math::func_C097(0, var_12, var_21);
+  var_48 = scripts\sp\math::func_6A8E(var_31, var_29, var_47);
   var_49 = var_29;
   var_05 = var_05 * (1 - var_37);
   var_50 = rotatevector(var_05, var_2.angles);
@@ -555,8 +555,8 @@ func_685D() {
   level.player playsound("landing_drone_stop");
   level.player playrumbleonentity("grenade_rumble");
   func_5C8E();
-  scripts/sp/utility::func_75A0("landing_drone_light_top", "j_mainroot");
-  scripts/sp/utility::func_75C4("landing_drone_light_top_off", "j_mainroot");
+  scripts\sp\utility::func_75A0("landing_drone_light_top", "j_mainroot");
+  scripts\sp\utility::func_75C4("landing_drone_light_top_off", "j_mainroot");
 }
 
 func_E095(var_00, var_01, var_02) {
@@ -636,46 +636,46 @@ func_5C8F() {
   self.func_FB5C playloopsound("landing_drone_counterthrust2");
   self.func_FB5C ghostattack(1, 0.2);
   self playsound("landing_drone_counterthrust2_init");
-  scripts/sp/utility::func_75C4("weapon_drone_counterthrust", "TAG_THRUST_8_RI");
-  scripts/sp/utility::func_75C4("weapon_drone_counterthrust", "TAG_THRUST_6_LE");
+  scripts\sp\utility::func_75C4("weapon_drone_counterthrust", "TAG_THRUST_8_RI");
+  scripts\sp\utility::func_75C4("weapon_drone_counterthrust", "TAG_THRUST_6_LE");
 }
 
 func_5C8E() {
   _playworldsound("landing_drone_counterthrust2_out", self.origin);
   self.func_FB5C func_EBA3("landing_drone_counterthrust2", 0.3);
-  scripts/sp/utility::func_75C4("weapon_drone_counterthrust_exhaust", "TAG_THRUST_8_RI");
-  scripts/sp/utility::func_75C4("weapon_drone_counterthrust_exhaust", "TAG_THRUST_6_LE");
-  scripts/sp/utility::func_75A0("weapon_drone_counterthrust", "TAG_THRUST_8_RI");
-  scripts/sp/utility::func_75A0("weapon_drone_counterthrust", "TAG_THRUST_6_LE");
+  scripts\sp\utility::func_75C4("weapon_drone_counterthrust_exhaust", "TAG_THRUST_8_RI");
+  scripts\sp\utility::func_75C4("weapon_drone_counterthrust_exhaust", "TAG_THRUST_6_LE");
+  scripts\sp\utility::func_75A0("weapon_drone_counterthrust", "TAG_THRUST_8_RI");
+  scripts\sp\utility::func_75A0("weapon_drone_counterthrust", "TAG_THRUST_6_LE");
 }
 
 func_5C91() {
   self.func_FB5B playloopsound("landing_drone_counterthrust");
   self.func_FB5B ghostattack(1, 0.3);
   self playsound("landing_drone_counterthrust_init");
-  scripts/sp/utility::func_75C4("weapon_drone_thrust_small", "TAG_THRUST_7_RI");
-  scripts/sp/utility::func_75C4("weapon_drone_thrust_small", "TAG_THRUST_8_LE");
+  scripts\sp\utility::func_75C4("weapon_drone_thrust_small", "TAG_THRUST_7_RI");
+  scripts\sp\utility::func_75C4("weapon_drone_thrust_small", "TAG_THRUST_8_LE");
 }
 
 func_5C90() {
   self.func_FB5B func_EBA2("landing_drone_counterthrust", 0.3);
-  scripts/sp/utility::func_75F8("weapon_drone_thrust_small", "TAG_THRUST_7_RI");
-  scripts/sp/utility::func_75F8("weapon_drone_thrust_small", "TAG_THRUST_8_LE");
+  scripts\sp\utility::func_75F8("weapon_drone_thrust_small", "TAG_THRUST_7_RI");
+  scripts\sp\utility::func_75F8("weapon_drone_thrust_small", "TAG_THRUST_8_LE");
 }
 
 func_5C96() {
-  scripts/sp/utility::func_75C4("weapon_drone_thrust_med", "tag_thrust_4_LE");
-  scripts/sp/utility::func_75C4("weapon_drone_thrust_med", "tag_thrust_4_RI");
+  scripts\sp\utility::func_75C4("weapon_drone_thrust_med", "tag_thrust_4_LE");
+  scripts\sp\utility::func_75C4("weapon_drone_thrust_med", "tag_thrust_4_RI");
 }
 
 func_5C95() {
-  scripts/sp/utility::func_75F8("weapon_drone_thrust_med", "tag_thrust_4_LE");
-  scripts/sp/utility::func_75F8("weapon_drone_thrust_med", "tag_thrust_4_RI");
+  scripts\sp\utility::func_75F8("weapon_drone_thrust_med", "tag_thrust_4_LE");
+  scripts\sp\utility::func_75F8("weapon_drone_thrust_med", "tag_thrust_4_RI");
 }
 
 func_5C87() {
-  scripts/sp/utility::func_75C4("weapon_drone_thrust_big", "TAG_THRUST_2_RI");
-  scripts/sp/utility::func_75C4("weapon_drone_thrust_big", "TAG_THRUST_2_LE");
+  scripts\sp\utility::func_75C4("weapon_drone_thrust_big", "TAG_THRUST_2_RI");
+  scripts\sp\utility::func_75C4("weapon_drone_thrust_big", "TAG_THRUST_2_LE");
   wait 0.5;
   self.func_FC28 ghostattack(0, 0.0);
   self.func_FC28 playsound("drone_engine_c");
@@ -686,14 +686,14 @@ func_5C3E() {
   self.func_FC28 ghostattack(0, 0.0);
   self.func_FC28 playsound("drone_engine_c");
   self.func_FC28 ghostattack(1, 0.2);
-  scripts/sp/utility::func_75C4("weapon_drone_thrust_big", "TAG_THRUST_2_RI");
-  scripts/sp/utility::func_75C4("weapon_drone_thrust_big", "TAG_THRUST_2_LE");
+  scripts\sp\utility::func_75C4("weapon_drone_thrust_big", "TAG_THRUST_2_RI");
+  scripts\sp\utility::func_75C4("weapon_drone_thrust_big", "TAG_THRUST_2_LE");
 }
 
 func_5C8D() {
   self.func_FC28 func_EBA2("drone_engine_c", 0.2);
-  scripts/sp/utility::func_75A0("weapon_drone_thrust_big", "TAG_THRUST_2_RI");
-  scripts/sp/utility::func_75A0("weapon_drone_thrust_big", "TAG_THRUST_2_LE");
+  scripts\sp\utility::func_75A0("weapon_drone_thrust_big", "TAG_THRUST_2_RI");
+  scripts\sp\utility::func_75A0("weapon_drone_thrust_big", "TAG_THRUST_2_LE");
 }
 
 func_13C0C() {
@@ -749,7 +749,7 @@ func_B7EC(var_00) {
 func_B7F1() {
   wait 2;
   scripts\engine\utility::flag_set("jackal_missile_hint");
-  scripts/sp/utility::func_56BA("jackal_missile");
+  scripts\sp\utility::func_56BA("jackal_missile");
   level.func_D127 waittill("missile_fired", var_00);
   scripts\engine\utility::flag_clear("jackal_missile_hint");
   scripts\engine\utility::flag_clear("jackal_missile_hint");
@@ -789,7 +789,7 @@ func_B7F3() {
 func_B7F0() {
   level.func_D127 endon("missile_fired");
   wait 2;
-  scripts/sp/utility::func_56BA("jackal_missile");
+  scripts\sp\utility::func_56BA("jackal_missile");
 }
 
 func_B7FC() {
@@ -797,7 +797,7 @@ func_B7FC() {
   scripts\engine\utility::flag_clear("jackal_missile_hint");
   wait 2;
   scripts\engine\utility::flag_set("jackal_missile_hint");
-  scripts/sp/utility::func_56BA("jackal_missile");
+  scripts\sp\utility::func_56BA("jackal_missile");
 }
 
 func_B7F2() {
@@ -813,7 +813,7 @@ func_B7F2() {
   if (isdefined(var_01) && isdefined(var_1[0]) && var_1[1] == 0 && !scripts\engine\utility::flag("jackal_missile_hint") && !scripts\engine\utility::flag("jackal_find_lockon")) {
   if (var_02 - var_00 > 1000.0) {
   scripts\engine\utility::flag_set("jackal_ads_hint");
-  scripts/sp/utility::func_56BA("jackal_ads");
+  scripts\sp\utility::func_56BA("jackal_ads");
   }
   }
   else if (scripts\engine\utility::flag("jackal_ads_hint")) {
@@ -824,7 +824,7 @@ func_B7F2() {
 
   if (isdefined(var_01) && isdefined(var_1[0]) && var_1[1] == 1 && !scripts\engine\utility::flag("jackal_ads_hint") && !scripts\engine\utility::flag("jackal_find_lockon")) {
   scripts\engine\utility::flag_set("jackal_missile_hint");
-  scripts/sp/utility::func_56BA("jackal_missile");
+  scripts\sp\utility::func_56BA("jackal_missile");
   }
   else if (scripts\engine\utility::flag("jackal_missile_hint")) {
   var_00 = var_02;
@@ -835,7 +835,7 @@ func_B7F2() {
   if (!isdefined(var_01) || !isdefined(var_1[0]) && !scripts\engine\utility::flag("jackal_ads_hint") && !scripts\engine\utility::flag("jackal_missile_hint")) {
   if (var_02 - var_00 > 3000.0) {
   scripts\engine\utility::flag_set("jackal_find_lockon");
-  scripts/sp/utility::func_56BA("jackal_find_lockon");
+  scripts\sp\utility::func_56BA("jackal_find_lockon");
   }
   }
   else if (scripts\engine\utility::flag("jackal_find_lockon")) {

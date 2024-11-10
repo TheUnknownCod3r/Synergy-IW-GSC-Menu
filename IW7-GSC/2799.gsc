@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2799.gsc
+ * Script: 2799.gsc
 ***************************************/
 
 checkdynamicspawns(var_00) {

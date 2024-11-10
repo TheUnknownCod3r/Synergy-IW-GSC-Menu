@@ -1,13 +1,13 @@
-/******************************************
+/**********************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\sp\outline.gsc
-******************************************/
+ * Script: scripts\sp\outline.gsc
+**********************************/
 
 func_918F() {
 	level.var_91AA = [];
 	func_9188("default",0,::func_9192);
-	function_01C5("r_hudoutlineEnable",1);
+	setsaveddvar("r_hudoutlineEnable",1);
 }
 
 func_9197(param_00,param_01,param_02,param_03,param_04) {
@@ -312,11 +312,11 @@ func_91A5(param_00) {
 	var_02 = [[level.var_91AA[param_00].var_F88E]]();
 	foreach(var_05, var_04 in var_01) {
 		if(isdefined(var_02[var_05])) {
-			function_01C5(var_05,var_02[var_05]);
+			setsaveddvar(var_05,var_02[var_05]);
 			continue;
 		}
 
-		function_01C5(var_05,var_04);
+		setsaveddvar(var_05,var_04);
 	}
 
 	if(isdefined(level.var_91AA[param_00].var_B05E)) {

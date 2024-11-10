@@ -1,31 +1,31 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3593.gsc
-****************************/
+ * Script: 3593.gsc
+************************/
 
 tripmine_used(param_00) {
 	self endon("disconnect");
 	param_00 endon("death");
-	scripts\mp\_utility::printgameaction("trip mine spawn",param_00.triggerportableradarping);
+	scripts\mp\utility::printgameaction("trip mine spawn",param_00.triggerportableradarping);
 	param_00 thread func_127D9();
-	thread scripts\mp\_weapons::monitordisownedgrenade(self,param_00);
+	thread scripts\mp\weapons::monitordisownedgrenade(self,param_00);
 	param_00 waittill("missile_stuck",var_01);
 	param_00 setotherent(self);
 	param_00 give_player_tickets(1);
-	if(scripts\mp\_utility::_hasperk("specialty_rugged_eqp")) {
+	if(scripts\mp\utility::_hasperk("specialty_rugged_eqp")) {
 		param_00.hasruggedeqp = 1;
 	}
 
 	param_00.var_ABC7 = func_127EB(param_00);
-	param_00 thread scripts\mp\_weapons::minedeletetrigger(param_00.var_ABC7);
+	param_00 thread scripts\mp\weapons::minedeletetrigger(param_00.var_ABC7);
 	param_00.var_ABC9 = func_127EC(param_00);
-	param_00 thread scripts\mp\_weapons::minedeletetrigger(param_00.var_ABC9);
-	scripts\mp\_weapons::onlethalequipmentplanted(param_00,"power_tripMine");
-	thread scripts\mp\_weapons::monitordisownedequipment(self,param_00);
-	param_00 thread scripts\mp\_weapons::minedamagemonitor();
+	param_00 thread scripts\mp\weapons::minedeletetrigger(param_00.var_ABC9);
+	scripts\mp\weapons::onlethalequipmentplanted(param_00,"power_tripMine");
+	thread scripts\mp\weapons::monitordisownedequipment(self,param_00);
+	param_00 thread scripts\mp\weapons::minedamagemonitor();
 	param_00 scripts\mp\sentientpoolmanager::registersentient("Lethal_Static",param_00.triggerportableradarping);
-	param_00 thread scripts\mp\_weapons::makeexplosiveusabletag("tag_use",1);
+	param_00 thread scripts\mp\weapons::makeexplosiveusabletag("tag_use",1);
 	param_00 thread func_127DC();
 	param_00 thread func_127D8();
 	param_00 thread func_127D1();
@@ -33,7 +33,7 @@ tripmine_used(param_00) {
 	param_00 setscriptablepartstate("plant","active",0);
 	param_00 missilethermal();
 	param_00 missileoutline();
-	thread scripts\mp\_weapons::outlineequipmentforowner(param_00,self);
+	thread scripts\mp\weapons::outlineequipmentforowner(param_00,self);
 }
 
 func_127EB(param_00) {
@@ -78,7 +78,7 @@ func_127DC() {
 	self waittill("detonateExplosive",var_01);
 	if(isdefined(var_01)) {
 		if(var_01 != var_00) {
-			var_00 thread scripts\mp\_utility::leaderdialogonplayer("mine_destroyed",undefined,undefined,self.origin);
+			var_00 thread scripts\mp\utility::leaderdialogonplayer("mine_destroyed",undefined,undefined,self.origin);
 		}
 
 		thread func_127DB(var_01);
@@ -92,21 +92,21 @@ func_127D8() {
 	self endon("death");
 	self.triggerportableradarping endon("disconnect");
 	self waittill("emp_damage",var_00,var_01,var_02,var_03,var_04);
-	if(scripts\mp\_utility::istrue(scripts\mp\_utility::playersareenemies(self.triggerportableradarping,var_00))) {
+	if(scripts\mp\utility::istrue(scripts\mp\utility::playersareenemies(self.triggerportableradarping,var_00))) {
 		var_00 notify("destroyed_equipment");
 		var_00 scripts\mp\killstreaks\_killstreaks::_meth_83A0();
 		if(isdefined(var_03) && var_03 == "emp_grenade_mp") {
-			var_00 scripts\mp\_missions::func_D991("ch_tactical_emp_eqp");
+			var_00 scripts\mp\missions::func_D991("ch_tactical_emp_eqp");
 		}
 	}
 
 	var_05 = "";
-	if(scripts\mp\_utility::istrue(self.hasruggedeqp)) {
+	if(scripts\mp\utility::istrue(self.hasruggedeqp)) {
 		var_05 = "hitequip";
 	}
 
 	if(isplayer(var_00)) {
-		var_00 scripts\mp\_damagefeedback::updatedamagefeedback(var_05);
+		var_00 scripts\mp\damagefeedback::updatedamagefeedback(var_05);
 	}
 
 	thread func_127D7();
@@ -273,7 +273,7 @@ tripmine_testlethaltriggerbeam(param_00,param_01,param_02) {
 		var_03 = param_02.origin + (0,0,12);
 		var_05 = 20;
 	}
-	else if(param_02 scripts/mp/equipment/exploding_drone::isexplodingdrone()) {
+	else if(param_02 scripts\mp\equipment\exploding_drone::isexplodingdrone()) {
 		var_04 = param_02.origin - (0,0,12);
 		var_03 = param_02.origin + (0,0,12);
 		var_05 = 14;
@@ -337,11 +337,11 @@ func_127E8(param_00,param_01) {
 	self endon("death");
 	self.triggerportableradarping endon("disconnect");
 	self notify("mine_triggered");
-	scripts\mp\_utility::printgameaction("trip mine triggered",self.triggerportableradarping);
+	scripts\mp\utility::printgameaction("trip mine triggered",self.triggerportableradarping);
 	self setscriptablepartstate("plant","neutral",0);
 	self setscriptablepartstate("arm","neutral",0);
 	self setscriptablepartstate("trigger","active",0);
-	scripts\mp\_weapons::explosivetrigger(param_00,0.3,"tripMine");
+	scripts\mp\weapons::explosivetrigger(param_00,0.3,"tripMine");
 	thread func_127E7(param_01);
 }
 
@@ -351,24 +351,24 @@ func_127E4(param_00,param_01) {
 		return 0;
 	}
 
-	if(scripts/mp/equipment/phase_shift::isentityphaseshifted(param_00)) {
+	if(scripts\mp\equipment\phase_shift::isentityphaseshifted(param_00)) {
 		return 0;
 	}
 
 	if(isplayer(param_00) || isagent(param_00)) {
-		if(scripts\mp\_utility::func_9F72(param_00)) {
+		if(scripts\mp\utility::func_9F72(param_00)) {
 			return 0;
 		}
 
-		if(scripts\mp\_utility::func_9F22(param_00)) {
+		if(scripts\mp\utility::func_9F22(param_00)) {
 			var_02 = param_00.triggerportableradarping;
 		}
 
-		if(!scripts\mp\_utility::isreallyalive(param_00)) {
+		if(!scripts\mp\utility::isreallyalive(param_00)) {
 			return 0;
 		}
 
-		if(!scripts\mp\_utility::istrue(scripts\mp\_utility::playersareenemies(self.triggerportableradarping,var_02))) {
+		if(!scripts\mp\utility::istrue(scripts\mp\utility::playersareenemies(self.triggerportableradarping,var_02))) {
 			return 0;
 		}
 
@@ -380,7 +380,7 @@ func_127E4(param_00,param_01) {
 	{
 		if(isdefined(param_00.streakname)) {
 			var_02 = param_00.triggerportableradarping;
-			if(!scripts\mp\_utility::istrue(scripts\mp\_utility::playersareenemies(self.triggerportableradarping,var_02))) {
+			if(!scripts\mp\utility::istrue(scripts\mp\utility::playersareenemies(self.triggerportableradarping,var_02))) {
 				return 0;
 			}
 
@@ -395,9 +395,9 @@ func_127E4(param_00,param_01) {
 				return 1;
 			}
 		}
-		else if(param_00 scripts/mp/equipment/exploding_drone::isexplodingdrone()) {
+		else if(param_00 scripts\mp\equipment\exploding_drone::isexplodingdrone()) {
 			var_02 = param_00.triggerportableradarping;
-			if(!scripts\mp\_utility::istrue(scripts\mp\_utility::playersareenemies(self.triggerportableradarping,var_02))) {
+			if(!scripts\mp\utility::istrue(scripts\mp\utility::playersareenemies(self.triggerportableradarping,var_02))) {
 				return 0;
 			}
 
@@ -414,7 +414,7 @@ func_127D6(param_00) {
 	self notify("death");
 	level.mines[self getentitynumber()] = undefined;
 	self setcandamage(0);
-	scripts\mp\_weapons::makeexplosiveunusuabletag();
+	scripts\mp\weapons::makeexplosiveunusuabletag();
 	self.exploding = 1;
 	var_01 = self.triggerportableradarping;
 	if(isdefined(self.triggerportableradarping)) {

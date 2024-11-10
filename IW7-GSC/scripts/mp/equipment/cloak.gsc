@@ -1,8 +1,8 @@
-/**************************************************
+/******************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\equipment\cloak.gsc
-**************************************************/
+ * Script: scripts\mp\equipment\cloak.gsc
+******************************************/
 
 func_97C5() {
 	level.var_1BBA = spawnstruct();

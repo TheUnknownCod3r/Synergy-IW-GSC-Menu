@@ -1,8 +1,8 @@
-/**********************************************************************
+/**************************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\character\character_sdf_army_heavy_3_snow_iced.gsc
-**********************************************************************/
+ * Script: character\character_sdf_army_heavy_3_snow_iced.gsc
+**************************************************************/
 
 main() {
 	self setmodel("body_sdf_army_heavy_3_snow");

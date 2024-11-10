@@ -1,8 +1,8 @@
-/************************************************************
+/****************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\killstreaks\_jammer_drone.gsc
-************************************************************/
+ * Script: scripts\mp\killstreaks\_jammer_drone.gsc
+****************************************************/
 
 init() {
 	level.teamemped["allies"] = 0;
@@ -22,11 +22,11 @@ init() {
 	level.var_A434["air_patrol"].var_A84D = "killstreak_remote_tank_laptop_mp";
 	level.var_A434["air_patrol"].remotedetonatethink = "killstreak_remote_tank_remote_mp";
 	level.var_A434["air_patrol"].var_12A72 = "sentry_shock_mp";
-	level._effect["jammer_drone_explode"] = loadfx("vfx/iw7/_requests/mp/vfx_jammer_drone_explosion");
-	level._effect["jammer_drone_spark"] = loadfx("vfx/core/impacts/large_metal_painted_hit");
-	level._effect["jammer_drone_pulse"] = loadfx("vfx/iw7/_requests/mp/vfx_jammer_drone_emp_pulse");
-	level._effect["jammer_drone_charge"] = loadfx("vfx/iw7/_requests/mp/vfx_jammer_drone_emp_charge");
-	level._effect["jammer_drone_shockwave"] = loadfx("vfx/iw7/_requests/mp/vfx_jammer_drone_emp_shockwave");
+	level._effect["jammer_drone_explode"] = loadfx("vfx\iw7\_requests\mp\vfx_jammer_drone_explosion");
+	level._effect["jammer_drone_spark"] = loadfx("vfx\core\impacts\large_metal_painted_hit");
+	level._effect["jammer_drone_pulse"] = loadfx("vfx\iw7\_requests\mp\vfx_jammer_drone_emp_pulse");
+	level._effect["jammer_drone_charge"] = loadfx("vfx\iw7\_requests\mp\vfx_jammer_drone_emp_charge");
+	level._effect["jammer_drone_shockwave"] = loadfx("vfx\iw7\_requests\mp\vfx_jammer_drone_emp_shockwave");
 	func_F764();
 	func_F765();
 }
@@ -45,16 +45,16 @@ func_618B(param_00) {
 	var_03 = func_6CBF(var_02);
 	var_04 = vectortoangles(var_03.origin - var_02.origin);
 	if(!isdefined(level.var_A433) || !isdefined(var_02) || !isdefined(var_03)) {
-		scripts\mp\_hud_message::showerrormessage("KILLSTREAKS_UNAVAILABLE_IN_LEVEL");
+		scripts\mp\hud_message::showerrormessage("KILLSTREAKS_UNAVAILABLE_IN_LEVEL");
 		return 0;
 	}
 
-	if(scripts\mp\_utility::currentactivevehiclecount() >= scripts\mp\_utility::maxvehiclesallowed() || level.fauxvehiclecount + var_01 >= scripts\mp\_utility::maxvehiclesallowed()) {
-		scripts\mp\_hud_message::showerrormessage("KILLSTREAKS_TOO_MANY_VEHICLES");
+	if(scripts\mp\utility::currentactivevehiclecount() >= scripts\mp\utility::maxvehiclesallowed() || level.fauxvehiclecount + var_01 >= scripts\mp\utility::maxvehiclesallowed()) {
+		scripts\mp\hud_message::showerrormessage("KILLSTREAKS_TOO_MANY_VEHICLES");
 		return 0;
 	}
 
-	scripts\mp\_utility::incrementfauxvehiclecount();
+	scripts\mp\utility::incrementfauxvehiclecount();
 	var_05 = func_49DE(self,var_02,var_03,var_04,"air_patrol",param_00.streakname,param_00.lifeid);
 	if(!isdefined(var_05)) {
 		return 0;
@@ -116,7 +116,7 @@ func_376F(param_00) {
 	param_00 endon("death");
 	var_01 = 1;
 	var_02 = undefined;
-	thread scripts\mp\_utility::teamplayercardsplash("used_jammer",self);
+	thread scripts\mp\utility::teamplayercardsplash("used_jammer",self);
 	for(;;) {
 		if(param_00.var_A435 && !isdefined(var_02)) {
 			playfxontag(scripts\engine\utility::getfx("jammer_drone_pulse"),param_00,"tag_origin");
@@ -178,7 +178,7 @@ func_3758(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_0
 		return;
 	}
 
-	if(!scripts\mp\_weapons::friendlyfirecheck(var_0C.triggerportableradarping,param_01)) {
+	if(!scripts\mp\weapons::friendlyfirecheck(var_0C.triggerportableradarping,param_01)) {
 		return;
 	}
 
@@ -205,24 +205,24 @@ func_3758(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_0
 
 	var_0D = param_02;
 	if(isplayer(param_01)) {
-		param_01 scripts\mp\_damagefeedback::updatedamagefeedback("");
+		param_01 scripts\mp\damagefeedback::updatedamagefeedback("");
 		if(param_04 == "MOD_RIFLE_BULLET" || param_04 == "MOD_PISTOL_BULLET") {
-			if(param_01 scripts\mp\_utility::_hasperk("specialty_armorpiercing")) {
+			if(param_01 scripts\mp\utility::_hasperk("specialty_armorpiercing")) {
 				var_0D = var_0D + param_02 * level.armorpiercingmod;
 			}
 		}
 
-		if(function_0107(param_04)) {
+		if(isexplosivedamagemod(param_04)) {
 			var_0D = var_0D + param_02;
 		}
 	}
 
-	if(function_0107(param_04) && isdefined(param_05) && param_05 == "destructible_car") {
+	if(isexplosivedamagemod(param_04) && isdefined(param_05) && param_05 == "destructible_car") {
 		var_0D = var_0C.maxhealth;
 	}
 
 	if(isdefined(param_01.triggerportableradarping) && isplayer(param_01.triggerportableradarping)) {
-		param_01.triggerportableradarping scripts\mp\_damagefeedback::updatedamagefeedback("");
+		param_01.triggerportableradarping scripts\mp\damagefeedback::updatedamagefeedback("");
 	}
 
 	if(isdefined(param_05)) {
@@ -265,7 +265,7 @@ func_3758(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_0
 	if(var_0C.var_E1 >= var_0C.maxhealth) {
 		if(isplayer(param_01) && !isdefined(var_0C.triggerportableradarping) || param_01 != var_0C.triggerportableradarping) {
 			var_0C.var_1D41 = 1;
-			var_0C scripts\mp\_damage::onkillstreakkilled("jammer",param_01,param_05,param_04,param_02,"destroyed_" + var_0C.streakname,var_0C.streakname + "_destroyed","callout_destroyed_" + var_0C.streakname,1);
+			var_0C scripts\mp\damage::onkillstreakkilled("jammer",param_01,param_05,param_04,param_02,"destroyed_" + var_0C.streakname,var_0C.streakname + "_destroyed","callout_destroyed_" + var_0C.streakname,1);
 		}
 
 		var_0C notify("death");
@@ -293,7 +293,7 @@ func_5C26() {
 func_5C2B() {
 	self endon("death");
 	var_00 = level.var_A434[self.var_A436].var_AC75;
-	scripts\mp\_hostmigration::waitlongdurationwithhostmigrationpause(var_00);
+	scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(var_00);
 	self notify("death");
 }
 
@@ -313,7 +313,7 @@ func_5C28() {
 	self waittill("death");
 	self playsound("sentry_explode");
 	playfx(level._effect["jammer_drone_explode"],self.origin);
-	scripts\mp\_utility::decrementfauxvehiclecount();
+	scripts\mp\utility::decrementfauxvehiclecount();
 	self delete();
 }
 
@@ -329,7 +329,7 @@ func_5C83(param_00) {
 	thread empremovecallback();
 	var_01 = param_00.pers["team"];
 	if(level.teambased) {
-		var_02 = scripts\mp\_utility::getotherteam(var_01);
+		var_02 = scripts\mp\utility::getotherteam(var_01);
 		thread func_6165(var_02,param_00);
 	}
 	else
@@ -337,7 +337,7 @@ func_5C83(param_00) {
 		thread func_6164(param_00);
 	}
 
-	param_00 scripts\mp\_matchdata::logkillstreakevent("jammer",self.origin);
+	param_00 scripts\mp\matchdata::logkillstreakevent("jammer",self.origin);
 	level notify("emp_used");
 	self notify("finished_emp_pulse");
 }
@@ -380,7 +380,7 @@ func_6165(param_00,param_01) {
 	level notify("emp_update");
 	level func_52C5(param_01,param_00);
 	level.teamemped[param_00] = 1;
-	scripts\mp\_hostmigration::waitlongdurationwithhostmigrationpause(60);
+	scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(60);
 	level.teamemped[param_00] = 0;
 	if(isdefined(self)) {
 		self.var_A435 = 0;
@@ -410,7 +410,7 @@ func_6164(param_00) {
 	level notify("emp_update");
 	level.empplayer thread empradarwatcher();
 	level func_52C5(param_00);
-	scripts\mp\_hostmigration::waitlongdurationwithhostmigrationpause(60);
+	scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(60);
 	if(isdefined(self)) {
 		self.var_A435 = 0;
 	}
@@ -426,7 +426,7 @@ func_A577() {
 	level.emptriggerholdonuse = int(level.empstuntime);
 	while(level.emptriggerholdonuse) {
 		wait(1);
-		level.var_61B6--;
+		level.emptriggerholdonuse--;
 	}
 }
 
@@ -484,7 +484,7 @@ func_52CA(param_00,param_01,param_02) {
 				continue;
 			}
 
-			if(scripts\mp\_utility::func_9EF0(var_0A)) {
+			if(scripts\mp\utility::func_9EF0(var_0A)) {
 				var_08[var_08.size] = var_0A;
 			}
 		}

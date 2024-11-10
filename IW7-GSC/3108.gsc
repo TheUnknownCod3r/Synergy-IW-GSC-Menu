@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\3108.gsc
+ * Script: 3108.gsc
 ***************************************/
 
 func_965D() {
@@ -128,7 +128,7 @@ func_0118() {
 }
 
 func_A50D(var_00) {
-  if (isdefined(self._blackboard) && !self._blackboard.animscriptedactive) {
+  if (isdefined(self.var_1198) && !self.var_1198.animscriptedactive) {
   self notify("spline_junction");
   return;
   }
@@ -144,7 +144,7 @@ func_A4F9(var_00) {
 }
 
 func_45A8(var_00) {
-  if (isdefined(self._blackboard) && !self._blackboard.animscriptedactive) {
+  if (isdefined(self.var_1198) && !self.var_1198.animscriptedactive) {
   self notify("spline_junction", "continue");
   return;
   }
@@ -160,7 +160,7 @@ func_6E48(var_00) {
   level scripts\engine\utility::flag_set(var_1[1]);
   return;
   case "ent_flag_set":
-  scripts/sp/utility::func_65E1(var_1[1]);
+  scripts\sp\utility::func_65E1(var_1[1]);
   return;
   default:
   scripts\engine\utility::error("Spline with label FLAG is not setup correctly.");

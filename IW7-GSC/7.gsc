@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\7.gsc
+ * Script: 7.gsc
 ***************************************/
 
 codecallback_startgametype() {

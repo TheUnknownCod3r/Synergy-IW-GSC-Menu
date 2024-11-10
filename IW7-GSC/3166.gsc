@@ -1,16 +1,16 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3166.gsc
-****************************/
+ * Script: 3166.gsc
+************************/
 
 func_FFD9() {
-	return scripts/asm/asm_bb::bb_getrequestedcoverstate() == "exposed" && isdefined(self.isnodeoccupied) && isdefined(self.target_getindexoftarget);
+	return scripts\asm\asm_bb::bb_getrequestedcoverstate() == "exposed" && isdefined(self.isnodeoccupied) && isdefined(self.target_getindexoftarget);
 }
 
 func_FFDA(param_00,param_01,param_02,param_03) {
-	if(isdefined(self.bt.var_C2) && isdefined(self.var_280A)) {
-		return scripts/asm/asm_bb::bb_reloadrequested();
+	if(isdefined(self.var_3135.var_C2) && isdefined(self.var_280A)) {
+		return scripts\asm\asm_bb::bb_reloadrequested();
 	}
 
 	return 0;
@@ -50,7 +50,7 @@ func_CF00(param_00,param_01,param_02,param_03) {
 }
 
 func_3F06(param_00,param_01,param_02) {
-	var_03 = scripts/asm/asm::asm_lookupanimfromalias(param_01,"2");
+	var_03 = scripts\asm\asm::asm_lookupanimfromalias(param_01,"2");
 	var_04 = getangledelta(var_03,0,1);
 	var_05 = angleclamp180(180 - var_04);
 	if(isdefined(self.vehicle_getspawnerarray) && self.livestreamingenable) {
@@ -67,14 +67,14 @@ func_3F06(param_00,param_01,param_02) {
 
 	var_0A = spawnstruct();
 	if(abs(var_08) > 135) {
-		var_0A.var_1299D = scripts/asm/asm::asm_lookupanimfromalias(param_01,"2");
+		var_0A.var_1299D = scripts\asm\asm::asm_lookupanimfromalias(param_01,"2");
 	}
 	else if(var_08 < 0) {
-		var_0A.var_1299D = scripts/asm/asm::asm_lookupanimfromalias(param_01,"6");
+		var_0A.var_1299D = scripts\asm\asm::asm_lookupanimfromalias(param_01,"6");
 	}
 	else
 	{
-		var_0A.var_1299D = scripts/asm/asm::asm_lookupanimfromalias(param_01,"4");
+		var_0A.var_1299D = scripts\asm\asm::asm_lookupanimfromalias(param_01,"4");
 	}
 
 	var_0A.var_D81F = var_07;
@@ -86,16 +86,16 @@ func_D559(param_00,param_01,param_02,param_03) {
 	var_04 = lib_0A1E::asm_getallanimsforstate(param_00,param_01);
 	self aiclearanim(lib_0A1E::asm_getbodyknob(),param_02);
 	var_05 = 1;
-	if((scripts/asm/asm_bb::bb_meleechargerequested(param_00,param_01,param_02,param_03) || scripts/asm/asm_bb::bb_meleerequested(param_00,param_01,param_02,param_03)) && isdefined(self.melee.target) && isplayer(self.melee.target)) {
+	if((scripts\asm\asm_bb::bb_meleechargerequested(param_00,param_01,param_02,param_03) || scripts\asm\asm_bb::bb_meleerequested(param_00,param_01,param_02,param_03)) && isdefined(self.melee.target) && isplayer(self.melee.target)) {
 		var_05 = 2;
 	}
 
 	self _meth_82E7(param_01,var_04.var_1299D,1,param_02,var_05);
 	lib_0A1E::func_2369(param_00,param_01,var_04.var_1299D);
 	thread func_D55A(param_01,var_04.var_1299D,var_04.var_D81F,param_02);
-	var_06 = lib_0A1E::func_231F(param_00,param_01,scripts/asm/asm::func_2341(param_00,param_01));
+	var_06 = lib_0A1E::func_231F(param_00,param_01,scripts\asm\asm::func_2341(param_00,param_01));
 	if(var_06 == "end") {
-		thread scripts/asm/asm::func_2310(param_00,param_01,0);
+		thread scripts\asm\asm::func_2310(param_00,param_01,0);
 	}
 }
 
@@ -121,7 +121,7 @@ func_D55A(param_00,param_01,param_02,param_03) {
 func_D558(param_00,param_01,param_02,param_03) {
 	var_04 = level.asm[param_00].states[param_01].var_71A5;
 	var_05 = self [[var_04]](param_00,param_01,param_03);
-	var_06 = scripts/asm/asm_bb::bb_getcovernode();
+	var_06 = scripts\asm\asm_bb::bb_getcovernode();
 	if(!isdefined(var_06)) {
 		if(isdefined(self.target_getindexoftarget) && distancesquared(self.origin,self.target_getindexoftarget.origin) < 4096) {
 			var_06 = self.target_getindexoftarget;
@@ -163,7 +163,7 @@ func_D558(param_00,param_01,param_02,param_03) {
 	self aiclearanim(lib_0A1E::asm_getbodyknob(),var_05);
 	self _meth_82E7(var_04,var_08,1,var_05,1);
 	lib_0A1E::func_2369(param_03,var_04,var_0A);
-	lib_0A1E::func_231F(param_03,var_04,scripts/asm/asm::func_2341(param_03,var_04));
+	lib_0A1E::func_231F(param_03,var_04,scripts\asm\asm::func_2341(param_03,var_04));
 }
 
 func_36D9(param_00,param_01,param_02,param_03) {
@@ -235,7 +235,7 @@ func_CEFC(param_00,param_01,param_02,param_03) {
 	childthread scripts\asm\shared_utility::setuseanimgoalweight(param_01,param_02);
 	var_04 = lib_0A1E::asm_getallanimsforstate(param_00,param_01);
 	self orientmode("face current");
-	var_05 = scripts/asm/asm_bb::bb_getcovernode();
+	var_05 = scripts\asm\asm_bb::bb_getcovernode();
 	if(isdefined(param_03)) {
 		if(isarray(param_03)) {
 			foreach(var_07 in param_03) {
@@ -248,7 +248,7 @@ func_CEFC(param_00,param_01,param_02,param_03) {
 		}
 	}
 
-	if(scripts/asm/asm::func_2384(param_00,param_01,"notetrackAim")) {
+	if(scripts\asm\asm::func_2384(param_00,param_01,"notetrackAim")) {
 		var_09 = getangledelta(var_04,0,1);
 		self.var_10F8C = self.angles[1] + var_09;
 	}
@@ -256,7 +256,7 @@ func_CEFC(param_00,param_01,param_02,param_03) {
 	self aiclearanim(lib_0A1E::asm_getbodyknob(),param_02);
 	self _meth_82E7(param_01,var_04,1,param_02,1);
 	lib_0A1E::func_2369(param_00,param_01,var_04);
-	lib_0A1E::func_231F(param_00,param_01,scripts/asm/asm::func_2341(param_00,param_01));
+	lib_0A1E::func_231F(param_00,param_01,scripts\asm\asm::func_2341(param_00,param_01));
 	self orientmode("face current");
 }
 
@@ -280,7 +280,7 @@ func_12675(param_00) {
 
 func_CF01(param_00,param_01,param_02,param_03) {
 	if(!isdefined(self.asm.var_A961)) {
-		var_04 = [scripts/asm/asm_bb::bb_getcovernode(),self.target_getindexoftarget];
+		var_04 = [scripts\asm\asm_bb::bb_getcovernode(),self.target_getindexoftarget];
 		for(var_05 = 0;!isdefined(self.asm.var_A961) && var_05 < var_04.size;var_05++) {
 			if(isdefined(var_04[var_05]) && distancesquared(self.origin,var_04[var_05].origin) < 256) {
 				self.asm.var_A961 = var_04[var_05];
@@ -295,7 +295,7 @@ func_CF02(param_00,param_01,param_02,param_03) {
 	self.sendmatchdata = 1;
 	if(isdefined(param_03)) {
 		if(param_03 == "stickToNode") {
-			var_04 = scripts/asm/asm_bb::bb_getcovernode();
+			var_04 = scripts\asm\asm_bb::bb_getcovernode();
 			if(isdefined(var_04)) {
 				if(distancesquared(var_04.origin,self.origin) < 16) {
 					self ghost_target_position(var_04.origin);
@@ -314,7 +314,7 @@ func_CF02(param_00,param_01,param_02,param_03) {
 	}
 
 	var_05 = archetypegetalias(self.asm.archetype,param_01,"conceal_add",0);
-	var_04 = scripts/asm/asm_bb::bb_getcovernode();
+	var_04 = scripts\asm\asm_bb::bb_getcovernode();
 	if(isdefined(var_05) && isdefined(var_04) && var_04.type == "Conceal Crouch" || var_04.type == "Conceal Stand") {
 		self give_attacker_kill_rewards(var_05.var_47,1,0.2,1,1);
 		thread func_4497(param_01);
@@ -356,12 +356,12 @@ func_CEC2(param_00,param_01,param_02,param_03) {
 	self _meth_82E7(param_01,var_04,1,param_02,1);
 	lib_0A1E::func_2369(param_00,param_01,var_04);
 	childthread scripts\asm\shared_utility::setuseanimgoalweight(param_01,param_02);
-	var_06 = lib_0A1E::func_2323(param_00,param_01,var_05,scripts/asm/asm::func_2341(param_00,param_01));
+	var_06 = lib_0A1E::func_2323(param_00,param_01,var_05,scripts\asm\asm::func_2341(param_00,param_01));
 	if(isdefined(var_06) && var_06 == "end") {
-		thread scripts/asm/asm::func_2310(param_00,param_01,0);
+		thread scripts\asm\asm::func_2310(param_00,param_01,0);
 	}
 
-	scripts/asm/asm::asm_fireevent(param_01,"end");
+	scripts\asm\asm::asm_fireevent(param_01,"end");
 }
 
 func_41A2(param_00,param_01,param_02) {
@@ -370,18 +370,18 @@ func_41A2(param_00,param_01,param_02) {
 	if(isdefined(param_02)) {
 		if(isarray(param_02)) {
 			foreach(var_04 in param_02) {
-				scripts/asm/asm::asm_fireephemeralevent(var_04,"end");
+				scripts\asm\asm::asm_fireephemeralevent(var_04,"end");
 			}
 
 			return;
 		}
 
-		scripts/asm/asm::asm_fireephemeralevent(param_02,"end");
+		scripts\asm\asm::asm_fireephemeralevent(param_02,"end");
 	}
 }
 
 func_116F2(param_00,param_01,param_02) {
-	scripts/asm/asm::asm_fireephemeralevent("reload","end");
+	scripts\asm\asm::asm_fireephemeralevent("reload","end");
 	lib_0C68::func_DF4F(param_00,param_01,param_02);
 }
 
@@ -392,7 +392,7 @@ func_CEFD(param_00,param_01,param_02,param_03) {
 	self aiclearanim(lib_0A1E::asm_getbodyknob(),param_02);
 	self _meth_82E7(param_01,var_04,1,param_02,1);
 	lib_0A1E::func_2369(param_00,param_01,var_04);
-	lib_0A1E::func_231F(param_00,param_01,scripts/asm/asm::func_2341(param_00,param_01));
+	lib_0A1E::func_231F(param_00,param_01,scripts\asm\asm::func_2341(param_00,param_01));
 }
 
 func_D51A(param_00,param_01,param_02,param_03) {
@@ -407,8 +407,8 @@ func_D51A(param_00,param_01,param_02,param_03) {
 	self aiclearanim(var_06,param_02);
 	self _meth_82EA(param_01,var_05,1,param_02,1);
 	lib_0A1E::func_2369(param_00,param_01,var_05);
-	if(isdefined(self._blackboard.shufflenode)) {
-		var_07 = self._blackboard.shufflenode.angles[1];
+	if(isdefined(self.var_1198.shufflenode)) {
+		var_07 = self.var_1198.shufflenode.angles[1];
 	}
 	else if(isdefined(self.target_getindexoftarget)) {
 		var_07 = self.target_getindexoftarget.angles[1];
@@ -428,15 +428,15 @@ func_D51A(param_00,param_01,param_02,param_03) {
 
 func_10054(param_00,param_01,param_02,param_03) {
 	var_04 = lib_0A1E::func_235D(param_02);
-	var_05 = scripts/asm/asm::asm_lookupanimfromalias(param_02,var_04);
+	var_05 = scripts\asm\asm::asm_lookupanimfromalias(param_02,var_04);
 	var_06 = getmovedelta(var_05);
 	var_07 = lengthsquared(var_06);
-	var_08 = distancesquared(self.origin,self._blackboard.shufflenode.origin);
+	var_08 = distancesquared(self.origin,self.var_1198.shufflenode.origin);
 	return var_07 <= var_08 + 1;
 }
 
 func_FFB5(param_00,param_01,param_02,param_03) {
-	if(!isdefined(self._blackboard.shufflenode)) {
+	if(!isdefined(self.var_1198.shufflenode)) {
 		return 1;
 	}
 
@@ -444,7 +444,7 @@ func_FFB5(param_00,param_01,param_02,param_03) {
 		return 1;
 	}
 
-	if(self._blackboard.shufflenode != self.target_getindexoftarget) {
+	if(self.var_1198.shufflenode != self.target_getindexoftarget) {
 		return 1;
 	}
 
@@ -452,19 +452,19 @@ func_FFB5(param_00,param_01,param_02,param_03) {
 }
 
 func_FFCA(param_00,param_01,param_02,param_03) {
-	if(isdefined(param_03) && self._blackboard.shufflenode.type != param_03) {
+	if(isdefined(param_03) && self.var_1198.shufflenode.type != param_03) {
 		return 0;
 	}
 
 	var_04 = lib_0A1E::func_235D(param_02);
-	var_05 = scripts/asm/asm::asm_lookupanimfromalias(param_02,var_04);
-	var_06 = self._blackboard.shufflenode.origin - self.origin;
+	var_05 = scripts\asm\asm::asm_lookupanimfromalias(param_02,var_04);
+	var_06 = self.var_1198.shufflenode.origin - self.origin;
 	var_07 = vectornormalize(var_06);
 	var_08 = getmovedelta(var_05,0,1);
 	var_09 = length(var_08);
-	var_0A = self._blackboard.shufflenode.origin - var_07 * var_09;
+	var_0A = self.var_1198.shufflenode.origin - var_07 * var_09;
 	var_06 = var_0A - self.origin;
-	var_0B = self._blackboard.shufflenode.origin - self._blackboard.var_1016B.origin;
+	var_0B = self.var_1198.shufflenode.origin - self.var_1198.var_1016B.origin;
 	var_0B = (var_0B[0],var_0B[1],0);
 	if(vectordot(var_0B,var_06) < 0) {
 		return 1;
@@ -482,8 +482,8 @@ func_D518(param_00,param_01,param_02,param_03) {
 	lib_0A1E::func_2369(param_00,param_01,var_04);
 	var_05 = getmovedelta(var_04);
 	var_06 = getangledelta3d(var_04);
-	if(isdefined(self._blackboard.shufflenode)) {
-		var_07 = self._blackboard.shufflenode;
+	if(isdefined(self.var_1198.shufflenode)) {
+		var_07 = self.var_1198.shufflenode;
 	}
 	else
 	{
@@ -506,8 +506,8 @@ func_D518(param_00,param_01,param_02,param_03) {
 }
 
 func_D519(param_00,param_01,param_02) {
-	self._blackboard.shufflenode = undefined;
-	self._blackboard.var_1016B = undefined;
+	self.var_1198.shufflenode = undefined;
+	self.var_1198.var_1016B = undefined;
 }
 
 func_4742(param_00,param_01,param_02,param_03) {
@@ -515,7 +515,7 @@ func_4742(param_00,param_01,param_02,param_03) {
 }
 
 func_4700(param_00,param_01,param_02,param_03) {
-	self.bt.var_C2.var_46FF = undefined;
+	self.var_3135.var_C2.var_46FF = undefined;
 	var_04 = self.isnodeoccupied.origin + scripts\anim\utility_common::getenemyeyepos() / 2;
 	var_05 = level.asm[param_00].states[param_02];
 	var_06 = scripts\engine\utility::array_randomize(var_05.transitions);
@@ -533,11 +533,11 @@ func_4700(param_00,param_01,param_02,param_03) {
 		}
 	}
 
-	self.bt.var_C2.var_46FF = param_00 + "_" + param_02 + "_" + var_07;
+	self.var_3135.var_C2.var_46FF = param_00 + "_" + param_02 + "_" + var_07;
 	return 1;
 }
 
 func_46FE(param_00,param_01,param_02,param_03) {
 	var_04 = param_00 + "_" + param_01 + "_" + param_03;
-	return var_04 == self.bt.var_C2.var_46FF;
+	return var_04 == self.var_3135.var_C2.var_46FF;
 }

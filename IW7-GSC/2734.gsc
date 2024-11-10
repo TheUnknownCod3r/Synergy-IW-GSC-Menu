@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2734.gsc
+ * Script: 2734.gsc
 ***************************************/
 
 script_print_fx() {

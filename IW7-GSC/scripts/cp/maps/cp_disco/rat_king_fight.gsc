@@ -1,8 +1,8 @@
-/***************************************************************
+/*******************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\maps\cp_disco\rat_king_fight.gsc
-***************************************************************/
+ * Script: scripts\cp\maps\cp_disco\rat_king_fight.gsc
+*******************************************************/
 
 rkfightinit() {
 	scripts\engine\utility::flag_init("rk_fight_ended");
@@ -193,7 +193,7 @@ perkbox_usefunc(param_00,param_01) {
 		return;
 	}
 
-	param_01 scripts/cp/zombies/zombies_perk_machines::give_zombies_perk(param_00.perk,0);
+	param_01 scripts\cp\zombies\zombies_perk_machines::give_zombies_perk(param_00.perk,0);
 	scripts\cp\cp_interaction::remove_from_current_interaction_list_for_player(param_00,param_01);
 	param_00.fx_struct.model hidefromplayer(param_01);
 	param_01 playlocalsound("part_pickup");
@@ -1066,7 +1066,7 @@ watchforstage7complete() {
 	foreach(var_02 in level.players) {
 		var_02 thread scripts\cp\cp_merits::processmerit("mt_dlc2_rat_king");
 		if(var_02.vo_prefix == "p5_") {
-			var_02 scripts/cp/zombies/achievement::update_achievement("EXTERMINATOR",1);
+			var_02 scripts\cp\zombies\achievement::update_achievement("EXTERMINATOR",1);
 		}
 
 		if(!var_02 scripts\cp\utility::isteleportenabled()) {
@@ -1214,7 +1214,7 @@ setplayerdataforplayers() {
 	foreach(var_01 in level.players) {
 		var_01 setplayerdata("cp","haveSoulKeys","any_soul_key",1);
 		var_01 setplayerdata("cp","haveSoulKeys","soul_key_3",1);
-		var_01 scripts/cp/zombies/achievement::update_achievement("PEST_CONTROL",1);
+		var_01 scripts\cp\zombies\achievement::update_achievement("PEST_CONTROL",1);
 	}
 }
 
@@ -2327,7 +2327,7 @@ open_sesame(param_00) {
 	}
 
 	foreach(var_02 in level.generators) {
-		thread scripts/cp/zombies/zombie_power::generic_generator(var_02);
+		thread scripts\cp\zombies\zombie_power::generic_generator(var_02);
 		wait(0.1);
 	}
 
@@ -2354,7 +2354,7 @@ open_sesame(param_00) {
 	level.triton_donations = 3;
 	if(isdefined(level.team_killdoors)) {
 		foreach(var_0F in level.team_killdoors) {
-			var_0F scripts/cp/zombies/zombie_doors::open_team_killdoor(level.players[0]);
+			var_0F scripts\cp\zombies\zombie_doors::open_team_killdoor(level.players[0]);
 		}
 	}
 
@@ -2395,20 +2395,20 @@ setupplayerloadouts() {
 		var_05 takeweapon(var_05 scripts\cp\utility::getvalidtakeweapon());
 		var_09 = scripts\cp\utility::getrawbaseweaponname(var_01[var_06]);
 		if(isdefined(var_05.weapon_build_models[var_09])) {
-			scripts/cp/zombies/coop_wall_buys::givevalidweapon(var_05,var_05.weapon_build_models[var_09]);
+			scripts\cp\zombies\coop_wall_buys::givevalidweapon(var_05,var_05.weapon_build_models[var_09]);
 		}
 		else
 		{
-			scripts/cp/zombies/coop_wall_buys::givevalidweapon(var_05,var_01[var_06]);
+			scripts\cp\zombies\coop_wall_buys::givevalidweapon(var_05,var_01[var_06]);
 		}
 
 		var_0A = scripts\cp\utility::getrawbaseweaponname(var_00[var_07]);
 		if(isdefined(var_05.weapon_build_models[var_0A])) {
-			scripts/cp/zombies/coop_wall_buys::givevalidweapon(var_05,var_05.weapon_build_models[var_0A]);
+			scripts\cp\zombies\coop_wall_buys::givevalidweapon(var_05,var_05.weapon_build_models[var_0A]);
 		}
 		else
 		{
-			scripts/cp/zombies/coop_wall_buys::givevalidweapon(var_05,var_01[var_06]);
+			scripts\cp\zombies\coop_wall_buys::givevalidweapon(var_05,var_01[var_06]);
 		}
 
 		var_05 thread scripts\cp\powers\coop_powers::givepower("power_rat_king_eye","secondary",undefined,undefined,undefined,1,1);
@@ -2450,12 +2450,12 @@ setupplayerloadouts() {
 		}
 
 		foreach(var_0D in var_03) {
-			var_05 thread scripts/cp/zombies/zombies_perk_machines::give_zombies_perk_immediate(var_0D,1);
+			var_05 thread scripts\cp\zombies\zombies_perk_machines::give_zombies_perk_immediate(var_0D,1);
 		}
 	}
 
 	if(isdefined(level.pap_max) && level.pap_max < 3) {
-		level.var_C8A4++;
+		level.pap_max++;
 	}
 
 	level [[level.upgrade_weapons_func]]();
@@ -2669,7 +2669,7 @@ katanahintfunc(param_00,param_01) {
 katanausefunc(param_00,param_01) {
 	if(scripts\engine\utility::flag("rk_fight_ended")) {
 		if(!param_01 hasanykatana(param_01)) {
-			scripts/cp/zombies/coop_wall_buys::givevalidweapon(param_01,"iw7_katana_zm");
+			scripts\cp\zombies\coop_wall_buys::givevalidweapon(param_01,"iw7_katana_zm");
 			param_01 thread scripts\cp\cp_vo::try_to_play_vo("magicwheel_katana","zmb_comment_vo","low",10,0,1,0,40);
 			return;
 		}
@@ -2679,7 +2679,7 @@ katanausefunc(param_00,param_01) {
 
 	if(scripts\engine\utility::istrue(param_01.has_disco_soul_key)) {
 		if(!param_01 hasanykatana(param_01)) {
-			scripts/cp/zombies/coop_wall_buys::givevalidweapon(param_01,"iw7_katana_zm");
+			scripts\cp\zombies\coop_wall_buys::givevalidweapon(param_01,"iw7_katana_zm");
 			param_01 thread scripts\cp\cp_vo::try_to_play_vo("magicwheel_katana","zmb_comment_vo","low",10,0,1,0,40);
 			return;
 		}

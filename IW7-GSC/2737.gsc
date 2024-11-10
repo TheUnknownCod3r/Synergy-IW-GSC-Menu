@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2737.gsc
+ * Script: 2737.gsc
 ***************************************/
 
 gethighestscoringplayer() {

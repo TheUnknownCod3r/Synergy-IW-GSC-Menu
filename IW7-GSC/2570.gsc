@@ -1,27 +1,27 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\2570.gsc
-****************************/
+ * Script: 2570.gsc
+************************/
 
 func_97EF(param_00) {
-	self.bt.var_C2 = spawnstruct();
-	self.bt.var_C2.var_4C28 = "none";
-	self.bt.var_C2.target_getindexoftarget = self.target_getindexoftarget;
-	self.bt.var_C2.starttime = gettime();
-	self.bt.var_C2.var_BF8A = gettime() + randomintrange(3000,7000);
-	self._blackboard.var_AA3D = self.target_getindexoftarget;
-	if(isdefined(self._blackboard.var_522F)) {
+	self.var_3135.var_C2 = spawnstruct();
+	self.var_3135.var_C2.var_4C28 = "none";
+	self.var_3135.var_C2.target_getindexoftarget = self.target_getindexoftarget;
+	self.var_3135.var_C2.starttime = gettime();
+	self.var_3135.var_C2.var_BF8A = gettime() + randomintrange(3000,7000);
+	self.var_1198.var_AA3D = self.target_getindexoftarget;
+	if(isdefined(self.var_1198.var_522F)) {
 	}
 
-	scripts/aitypes/combat::func_12F28(param_00);
+	scripts\aitypes\combat::func_12F28(param_00);
 	if(self.target_getindexoftarget.type == "Cover Prone" || self.target_getindexoftarget.type == "Conceal Prone") {
-		scripts/asm/asm_bb::bb_requestsmartobject("prone");
+		scripts\asm\asm_bb::bb_requestsmartobject("prone");
 	}
 
-	scripts/asm/asm_bb::bb_setcovernode(self.bt.var_C2.target_getindexoftarget);
+	scripts\asm\asm_bb::bb_setcovernode(self.var_3135.var_C2.target_getindexoftarget);
 	self.var_46A6 = self.origin;
-	if(!isdefined(self.bt.var_C2.var_BFA5) || !isdefined(self._blackboard.shufflenode)) {
+	if(!isdefined(self.var_3135.var_C2.var_BFA5) || !isdefined(self.var_1198.shufflenode)) {
 		func_F7B4();
 	}
 
@@ -30,23 +30,23 @@ func_97EF(param_00) {
 }
 
 func_41A3(param_00) {
-	if(scripts/asm/asm_bb::func_2932()) {
-		scripts/asm/asm_bb::bb_setcovernode(undefined);
-		scripts/asm/asm_bb::func_2961("hide");
-		self._blackboard.var_522F = undefined;
+	if(scripts\asm\asm_bb::func_2932()) {
+		scripts\asm\asm_bb::bb_setcovernode(undefined);
+		scripts\asm\asm_bb::func_2961("hide");
+		self.var_1198.var_522F = undefined;
 		if(isdefined(self.vehicle_getspawnerarray)) {
 			var_01 = "stand";
 			if(isdefined(self.var_71A6)) {
 				var_01 = self [[self.var_71A6]]();
 			}
 
-			scripts/asm/asm_bb::bb_requestsmartobject(var_01);
+			scripts\asm\asm_bb::bb_requestsmartobject(var_01);
 		}
 
-		scripts/asm/asm_bb::func_295E(undefined);
-		self.bt.var_C2 = undefined;
+		scripts\asm\asm_bb::func_295E(undefined);
+		self.var_3135.var_C2 = undefined;
 		self.var_BF7F = gettime() + 1000 + randomintrange(0,self.var_C4);
-		scripts/asm/asm_bb::bb_setshootparams(undefined);
+		scripts\asm\asm_bb::bb_setshootparams(undefined);
 	}
 
 	return level.success;
@@ -58,20 +58,20 @@ func_4746(param_00,param_01) {
 }
 
 func_F6A4(param_00) {
-	if(param_00 == "hide" && self.bt.var_C2.var_4C28 == "exposed" || self.bt.var_C2.var_4C28 == "none") {
+	if(param_00 == "hide" && self.var_3135.var_C2.var_4C28 == "exposed" || self.var_3135.var_C2.var_4C28 == "none") {
 		func_9815();
 	}
 
-	scripts/asm/asm_bb::func_2961(param_00);
-	self.bt.var_C2.var_4C28 = param_00;
+	scripts\asm\asm_bb::func_2961(param_00);
+	self.var_3135.var_C2.var_4C28 = param_00;
 }
 
 func_7E42() {
-	return self.bt.var_C2.var_4C28;
+	return self.var_3135.var_C2.var_4C28;
 }
 
 func_9D71(param_00) {
-	return gettime() > self.bt.var_BF89;
+	return gettime() > self.var_3135.var_BF89;
 }
 
 func_F7B0(param_00) {
@@ -85,33 +85,33 @@ func_F7B0(param_00) {
 		}
 
 		if(var_01) {
-			self.bt.var_BF89 = gettime() + randomintrange(6000,11000);
+			self.var_3135.var_BF89 = gettime() + randomintrange(6000,11000);
 			return;
 		}
 
-		self.bt.var_BF89 = gettime() + randomintrange(2000,3000);
+		self.var_3135.var_BF89 = gettime() + randomintrange(2000,3000);
 		return;
 	}
 
 	if(scripts\engine\utility::actor_is3d()) {
 		if(!isdefined(param_00)) {
-			if(isdefined(self.bt.var_C2) && isdefined(self.bt.var_C2.target_getindexoftarget)) {
-				if(scripts\asm\shared_utility::func_C04A(self.bt.var_C2.target_getindexoftarget)) {
+			if(isdefined(self.var_3135.var_C2) && isdefined(self.var_3135.var_C2.target_getindexoftarget)) {
+				if(scripts\asm\shared_utility::func_C04A(self.var_3135.var_C2.target_getindexoftarget)) {
 					param_00 = 1;
 				}
 			}
 		}
 
 		if(scripts\engine\utility::istrue(param_00)) {
-			self.bt.var_BF89 = gettime() + randomintrange(5000,9000);
+			self.var_3135.var_BF89 = gettime() + randomintrange(5000,9000);
 			return;
 		}
 
-		self.bt.var_BF89 = gettime() + randomintrange(7000,13000);
+		self.var_3135.var_BF89 = gettime() + randomintrange(7000,13000);
 		return;
 	}
 
-	self.bt.var_BF89 = gettime() + randomintrange(6000,11000);
+	self.var_3135.var_BF89 = gettime() + randomintrange(6000,11000);
 }
 
 func_BD18(param_00) {
@@ -159,7 +159,7 @@ func_470D() {
 		return 0;
 	}
 
-	if(gettime() < self.bt.var_BF89) {
+	if(gettime() < self.var_3135.var_BF89) {
 		return 0;
 	}
 
@@ -167,9 +167,9 @@ func_470D() {
 		return 0;
 	}
 
-	var_00 = self.bt.var_C2;
+	var_00 = self.var_3135.var_C2;
 	if(var_00.var_4C28 == "hide" || isdefined(self.var_280A)) {
-		if(!isdefined(self._blackboard.var_522F) || !func_9D96(self._blackboard.var_522F)) {
+		if(!isdefined(self.var_1198.var_522F) || !func_9D96(self.var_1198.var_522F)) {
 			return 1;
 		}
 	}
@@ -179,9 +179,9 @@ func_470D() {
 
 func_B019(param_00) {
 	if(func_470D()) {
-		var_01 = func_B01A(self.bt.var_C2.target_getindexoftarget);
+		var_01 = func_B01A(self.var_3135.var_C2.target_getindexoftarget);
 		if(var_01) {
-			self.bt.var_BF89 = gettime() + 1000;
+			self.var_3135.var_BF89 = gettime() + 1000;
 			thread scripts\anim\battlechatter_ai::func_67D2();
 		}
 		else
@@ -215,11 +215,11 @@ func_6A0D() {
 		return 0;
 	}
 
-	if(isdefined(self.bt.var_C2)) {
+	if(isdefined(self.var_3135.var_C2)) {
 		return 0;
 	}
 
-	if(!isdefined(self._blackboard.var_AA3D)) {
+	if(!isdefined(self.var_1198.var_AA3D)) {
 		return 0;
 	}
 
@@ -229,27 +229,27 @@ func_6A0D() {
 func_12E92(param_00) {
 	if(func_6A0D()) {
 		if(!scripts\engine\utility::actor_is3d() && isdefined(self.vehicle_getspawnerarray) && distancesquared(self.vehicle_getspawnerarray,self.origin) > 4) {
-			self._blackboard.var_AA3D = undefined;
-			self.bt.var_BF89 = undefined;
+			self.var_1198.var_AA3D = undefined;
+			self.var_3135.var_BF89 = undefined;
 		}
-		else if(isdefined(self.target_getindexoftarget) && self.target_getindexoftarget != self._blackboard.var_AA3D) {
-			self._blackboard.var_AA3D = undefined;
-			self.bt.var_BF89 = undefined;
+		else if(isdefined(self.target_getindexoftarget) && self.target_getindexoftarget != self.var_1198.var_AA3D) {
+			self.var_1198.var_AA3D = undefined;
+			self.var_3135.var_BF89 = undefined;
 		}
 		else
 		{
-			if(!isdefined(self.bt.var_BF89)) {
+			if(!isdefined(self.var_3135.var_BF89)) {
 				func_F7B0(1);
 			}
 
-			if(gettime() >= self.bt.var_BF89) {
-				var_01 = func_B01A(self._blackboard.var_AA3D);
+			if(gettime() >= self.var_3135.var_BF89) {
+				var_01 = func_B01A(self.var_1198.var_AA3D);
 				if(var_01) {
 					func_F7B0(1);
 				}
 				else
 				{
-					self.bt.var_BF89 = gettime() + 1000;
+					self.var_3135.var_BF89 = gettime() + 1000;
 				}
 			}
 		}
@@ -259,7 +259,7 @@ func_12E92(param_00) {
 }
 
 func_12D78(param_00) {
-	var_01 = self.bt.var_C2.target_getindexoftarget;
+	var_01 = self.var_3135.var_C2.target_getindexoftarget;
 	return level.success;
 }
 
@@ -282,12 +282,12 @@ func_389B(param_00) {
 }
 
 func_8BEB(param_00) {
-	return isdefined(self._blackboard.var_5D3B) && isdefined(self._blackboard.var_522F) && self._blackboard.var_522F == param_00;
+	return isdefined(self.var_1198.var_5D3B) && isdefined(self.var_1198.var_522F) && self.var_1198.var_522F == param_00;
 }
 
 func_FFE1(param_00) {
 	var_01 = isdefined(self.target_getindexoftarget) && func_8BEB(self.target_getindexoftarget) && func_389B(self.target_getindexoftarget);
-	var_02 = scripts\anim\utility_common::usingmg() || isdefined(scripts/asm/asm_bb::bb_getrequestedturret()) || var_01;
+	var_02 = scripts\anim\utility_common::usingmg() || isdefined(scripts\asm\asm_bb::bb_getrequestedturret()) || var_01;
 	if(var_02) {
 		return level.success;
 	}
@@ -322,7 +322,7 @@ func_9E43(param_00) {
 	else if(self.sendmatchdata) {
 		var_01 = 3600;
 	}
-	else if(isdefined(self._blackboard.var_522F) && self.target_getindexoftarget == self._blackboard.var_522F) {
+	else if(isdefined(self.var_1198.var_522F) && self.target_getindexoftarget == self.var_1198.var_522F) {
 		var_01 = 576;
 	}
 	else
@@ -347,19 +347,19 @@ func_9E43(param_00) {
 		return level.failure;
 	}
 
-	if(isdefined(self.bt.var_C2)) {
-		if(!isdefined(self.bt.var_C2.target_getindexoftarget)) {
+	if(isdefined(self.var_3135.var_C2)) {
+		if(!isdefined(self.var_3135.var_C2.target_getindexoftarget)) {
 			return level.failure;
 		}
 
-		if(self.bt.var_C2.target_getindexoftarget != self.target_getindexoftarget) {
+		if(self.var_3135.var_C2.target_getindexoftarget != self.target_getindexoftarget) {
 			return level.failure;
 		}
 
 		if(isdefined(self.isnodeoccupied)) {
 			var_03 = 0;
 			if(func_FFCB()) {
-				var_03 = func_9D99(self.bt.var_C2.target_getindexoftarget);
+				var_03 = func_9D99(self.var_3135.var_C2.target_getindexoftarget);
 			}
 			else
 			{
@@ -409,7 +409,7 @@ func_6E03() {
 }
 
 func_FFCB() {
-	return weaponclass(self.var_394) == "mg" || func_8BEB(self.bt.var_C2.target_getindexoftarget);
+	return weaponclass(self.var_394) == "mg" || func_8BEB(self.var_3135.var_C2.target_getindexoftarget);
 }
 
 func_9D99(param_00) {
@@ -446,22 +446,22 @@ func_98C1(param_00) {
 }
 
 func_4742(param_00) {
-	if(scripts/asm/asm::asm_ephemeraleventfired("reload","end")) {
+	if(scripts\asm\asm::asm_ephemeraleventfired("reload","end")) {
 		return level.failure;
 	}
 
-	scripts/asm/asm_bb::bb_requestreload(1);
+	scripts\asm\asm_bb::bb_requestreload(1);
 	func_F6A4("hide");
 	return level.running;
 }
 
 func_116FD(param_00) {
-	scripts/asm/asm_bb::bb_requestreload(0);
+	scripts\asm\asm_bb::bb_requestreload(0);
 }
 
 func_9814(param_00) {
 	func_F6A4("hide");
-	if(isdefined(self.isnodeoccupied) && !isdefined(self.bt.var_C2.var_3C5B)) {
+	if(isdefined(self.isnodeoccupied) && !isdefined(self.var_3135.var_C2.var_3C5B)) {
 		func_F6A2();
 	}
 }
@@ -469,7 +469,7 @@ func_9814(param_00) {
 func_4721(param_00) {
 	func_F6A4("hide");
 	if(isdefined(self.isnodeoccupied) && !func_9D98()) {
-		self.bt.var_BF89 = self.bt.var_BF89 - 1000;
+		self.var_3135.var_BF89 = self.var_3135.var_BF89 - 1000;
 	}
 
 	return level.success;
@@ -478,12 +478,12 @@ func_4721(param_00) {
 func_F7D9(param_00) {
 	var_01 = 2500;
 	var_02 = 3500;
-	self.bt.var_C2.var_C9FB = gettime() + randomintrange(var_01,var_02);
+	self.var_3135.var_C2.var_C9FB = gettime() + randomintrange(var_01,var_02);
 }
 
 func_9815() {
 	var_00 = gettime();
-	self.bt.var_C2.var_11934 = var_00;
+	self.var_3135.var_C2.var_11934 = var_00;
 	func_F7D9(1);
 }
 
@@ -535,15 +535,15 @@ func_10038(param_00) {
 		return level.failure;
 	}
 
-	if(!isdefined(self.bt.var_C2.var_11934)) {
+	if(!isdefined(self.var_3135.var_C2.var_11934)) {
 		return level.failure;
 	}
 
-	if(!isdefined(self.bt.var_C2.var_C9FB)) {
+	if(!isdefined(self.var_3135.var_C2.var_C9FB)) {
 		return level.failure;
 	}
 
-	if(gettime() < self.bt.var_C2.var_C9FB) {
+	if(gettime() < self.var_3135.var_C2.var_C9FB) {
 		return level.failure;
 	}
 
@@ -554,28 +554,28 @@ func_9894(param_00) {
 	var_01 = 500;
 	var_02 = 1500;
 	var_03 = gettime();
-	self.bt.var_C2.var_B026 = var_03;
-	self.bt.var_C2.var_B016 = randomintrange(var_01,var_02);
-	self.bt.var_C2.var_B012 = 3000;
+	self.var_3135.var_C2.var_B026 = var_03;
+	self.var_3135.var_C2.var_B016 = randomintrange(var_01,var_02);
+	self.var_3135.var_C2.var_B012 = 3000;
 }
 
 func_116F9(param_00) {
-	if(isdefined(self.bt.var_C2)) {
+	if(isdefined(self.var_3135.var_C2)) {
 		func_F7D9(0);
 	}
 }
 
 func_4726(param_00) {
 	func_F6A4("look");
-	var_01 = self.bt.var_C2.var_B026;
-	var_02 = self.bt.var_C2.var_B016;
-	var_03 = self.bt.var_C2.var_B012;
+	var_01 = self.var_3135.var_C2.var_B026;
+	var_02 = self.var_3135.var_C2.var_B016;
+	var_03 = self.var_3135.var_C2.var_B012;
 	if(isdefined(self.vehicle_getspawnerarray)) {
 		return level.success;
 	}
 
 	var_04 = gettime();
-	if(scripts/asm/asm::asm_ephemeraleventfired("cover_trans","end")) {
+	if(scripts\asm\asm::asm_ephemeraleventfired("cover_trans","end")) {
 		var_03 = var_04 - var_01;
 	}
 
@@ -622,7 +622,7 @@ func_38E8(param_00) {
 
 func_473E(param_00) {
 	func_F6A4("peek");
-	if(scripts/asm/asm::asm_ephemeraleventfired("cover_peek","end")) {
+	if(scripts\asm\asm::asm_ephemeraleventfired("cover_peek","end")) {
 		return level.success;
 	}
 
@@ -630,7 +630,7 @@ func_473E(param_00) {
 }
 
 func_116FC(param_00) {
-	if(isdefined(self.bt.var_C2)) {
+	if(isdefined(self.var_3135.var_C2)) {
 		func_F6A4("hide");
 		func_F7D9(0);
 	}
@@ -642,7 +642,7 @@ func_BDF3(param_00) {
 	}
 
 	if(self.target_getindexoftarget.type == "Conceal Prone" || self.target_getindexoftarget.type == "Cover Prone") {
-		if(self.a.pose != "prone" || scripts/asm/asm_bb::func_292C() != "prone") {
+		if(self.a.pose != "prone" || scripts\asm\asm_bb::func_292C() != "prone") {
 			return level.success;
 		}
 
@@ -662,7 +662,7 @@ func_BDF3(param_00) {
 	}
 
 	if(isdefined(var_01)) {
-		scripts/asm/asm_bb::bb_requestsmartobject(var_01);
+		scripts\asm\asm_bb::bb_requestsmartobject(var_01);
 	}
 
 	return level.failure;
@@ -693,11 +693,11 @@ func_FFD1(param_00) {
 		return level.failure;
 	}
 
-	if(!isdefined(self.bt.var_C2.var_3C5B)) {
+	if(!isdefined(self.var_3135.var_C2.var_3C5B)) {
 		func_F6A2();
 	}
 
-	if(gettime() < self.bt.var_C2.var_3C5B) {
+	if(gettime() < self.var_3135.var_C2.var_3C5B) {
 		return level.failure;
 	}
 
@@ -705,14 +705,14 @@ func_FFD1(param_00) {
 }
 
 func_F6A2() {
-	self.bt.var_C2.var_3C5B = gettime() + randomintrange(5000,20000);
+	self.var_3135.var_C2.var_3C5B = gettime() + randomintrange(5000,20000);
 }
 
 func_97E4(param_00) {
 	func_F6A2();
 	self.a.var_D892 = undefined;
 	var_01 = undefined;
-	if((self.a.pose != "prone" || scripts/asm/asm_bb::func_292C() != "prone") && isdefined(self.target_getindexoftarget) && self.target_getindexoftarget.type == "Conceal Prone" || self.target_getindexoftarget.type == "Cover Prone") {
+	if((self.a.pose != "prone" || scripts\asm\asm_bb::func_292C() != "prone") && isdefined(self.target_getindexoftarget) && self.target_getindexoftarget.type == "Conceal Prone" || self.target_getindexoftarget.type == "Cover Prone") {
 		var_01 = "prone";
 	}
 	else
@@ -727,22 +727,22 @@ func_97E4(param_00) {
 		}
 	}
 
-	scripts/asm/asm_bb::bb_requestsmartobject(var_01);
-	self.bt.var_C2.var_3C5C = gettime();
+	scripts\asm\asm_bb::bb_requestsmartobject(var_01);
+	self.var_3135.var_C2.var_3C5C = gettime();
 }
 
 func_4712(param_00) {
-	if(scripts/asm/asm::asm_ephemeraleventfired("cover_stance_trans","end")) {
+	if(scripts\asm\asm::asm_ephemeraleventfired("cover_stance_trans","end")) {
 		return level.success;
 	}
 
 	var_01 = 5000;
-	var_02 = self.bt.var_C2.var_3C5C;
+	var_02 = self.var_3135.var_C2.var_3C5C;
 	if(gettime() - var_02 > var_01) {
 		return level.success;
 	}
 
-	if(self.a.pose == scripts/asm/asm_bb::func_292C()) {
+	if(self.a.pose == scripts\asm\asm_bb::func_292C()) {
 		return level.success;
 	}
 
@@ -750,7 +750,7 @@ func_4712(param_00) {
 }
 
 func_116F1(param_00) {
-	scripts/asm/asm_bb::bb_requestsmartobject(self.a.pose);
+	scripts\asm\asm_bb::bb_requestsmartobject(self.a.pose);
 }
 
 func_7E40(param_00,param_01) {
@@ -859,26 +859,26 @@ func_4749(param_00) {
 
 func_9803(param_00) {
 	if(func_7E42() != "exposed") {
-		self.bt.var_C2.var_11933 = gettime() + 3000;
+		self.var_3135.var_C2.var_11933 = gettime() + 3000;
 	}
 
-	self.bt.shootparams = spawnstruct();
-	self.bt.shootparams.taskid = param_00;
-	self.bt.m_bfiring = 0;
+	self.var_3135.shootparams = spawnstruct();
+	self.var_3135.shootparams.taskid = param_00;
+	self.var_3135.m_bfiring = 0;
 	var_01 = scripts\anim\utility_common::isasniper();
 	if(var_01) {
-		scripts/aitypes/combat::func_FE5D(self.bt.shootparams);
+		scripts\aitypes\combat::func_FE5D(self.var_3135.shootparams);
 	}
 }
 
 func_116F4(param_00) {
-	if(isdefined(self.bt.shootparams) && self.bt.shootparams.taskid == param_00) {
-		self.bt.shootparams = undefined;
-		self.bt.m_bfiring = undefined;
+	if(isdefined(self.var_3135.shootparams) && self.var_3135.shootparams.taskid == param_00) {
+		self.var_3135.shootparams = undefined;
+		self.var_3135.m_bfiring = undefined;
 	}
 
-	scripts/asm/asm_bb::bb_requestfire(0);
-	scripts/asm/asm_bb::bb_setshootparams(undefined);
+	scripts\asm\asm_bb::bb_requestfire(0);
+	scripts\asm\asm_bb::bb_setshootparams(undefined);
 }
 
 func_38C5() {
@@ -894,8 +894,8 @@ func_4B0B(param_00,param_01) {
 	var_03 = [(0,0,46),(0,0,0),(0,0,0)];
 	var_04 = [(0,0,0),(0,32,36),(0,-32,36)];
 	var_05 = [(0,0,36),(0,0,0),(0,0,0)];
-	if(isdefined(self._blackboard.var_FEF0) && self._blackboard.var_FEF0 == param_00) {
-		return self._blackboard.var_FEEF;
+	if(isdefined(self.var_1198.var_FEF0) && self.var_1198.var_FEF0 == param_00) {
+		return self.var_1198.var_FEEF;
 	}
 
 	var_06 = [];
@@ -943,8 +943,8 @@ func_4B0B(param_00,param_01) {
 		}
 	}
 
-	self._blackboard.var_FEF0 = param_00;
-	self._blackboard.var_FEEF = var_06;
+	self.var_1198.var_FEF0 = param_00;
+	self.var_1198.var_FEEF = var_06;
 	return var_06;
 }
 
@@ -957,30 +957,30 @@ func_471E(param_00) {
 	var_02 = 8000 + var_01;
 	var_03 = 5000 + var_01;
 	var_04 = 1000;
-	if(scripts/asm/asm::asm_ephemeraleventfired("cover_trans","end")) {
-		self.bt.var_C2.var_11933 = gettime();
+	if(scripts\asm\asm::asm_ephemeraleventfired("cover_trans","end")) {
+		self.var_3135.var_C2.var_11933 = gettime();
 	}
 
-	var_05 = self.bt.var_C2.var_11933;
+	var_05 = self.var_3135.var_C2.var_11933;
 	var_06 = gettime() - var_05;
-	var_07 = self.bt.var_C2.target_getindexoftarget;
+	var_07 = self.var_3135.var_C2.target_getindexoftarget;
 	if(isdefined(self.var_280A)) {
 		func_4748(param_00);
 		if(scripts\engine\utility::isnodecoverleft(var_07) || scripts\engine\utility::isnodecoverright(var_07)) {
-			scripts/asm/asm_bb::func_295E("B");
+			scripts\asm\asm_bb::func_295E("B");
 		}
 		else
 		{
-			scripts/asm/asm_bb::func_295E("full exposed");
+			scripts\asm\asm_bb::func_295E("full exposed");
 		}
 
 		func_F6A4("exposed");
 		if(shouldrefundsuper(param_00,0) == level.success) {
-			scripts/asm/asm_bb::bb_requestreload(1);
+			scripts\asm\asm_bb::bb_requestreload(1);
 		}
 		else
 		{
-			scripts/asm/asm_bb::bb_requestreload(0);
+			scripts\asm\asm_bb::bb_requestreload(0);
 		}
 
 		return level.running;
@@ -1027,7 +1027,7 @@ func_471E(param_00) {
 	}
 
 	var_10 = func_4748(param_00);
-	if(!isdefined(self.bt.shootparams.var_29AF)) {
+	if(!isdefined(self.var_3135.shootparams.var_29AF)) {
 		if(!var_10) {
 			if(var_06 > var_03) {
 				return level.failure;
@@ -1039,7 +1039,7 @@ func_471E(param_00) {
 	}
 
 	if(scripts\engine\utility::isnodecoverleft(var_07) || scripts\engine\utility::isnodecoverright(var_07)) {
-		var_11 = scripts/asm/asm_bb::func_2929();
+		var_11 = scripts\asm\asm_bb::func_2929();
 		var_12 = func_7E42() == "exposed";
 		var_13 = !isdefined(var_11) || var_12;
 		if(!var_13) {
@@ -1050,7 +1050,7 @@ func_471E(param_00) {
 		var_15 = [];
 		if(func_38C5() && var_08[2] <= var_09 && var_09 <= var_08[3]) {
 			if(var_14) {
-				scripts/asm/asm_bb::func_295E("lean");
+				scripts\asm\asm_bb::func_295E("lean");
 				return level.running;
 			}
 			else if(!var_12 && var_13 || var_11 != "lean") {
@@ -1096,18 +1096,18 @@ func_471E(param_00) {
 			var_16 = var_15[randomint(var_15.size)];
 		}
 
-		scripts/asm/asm_bb::func_295E(var_16);
+		scripts\asm\asm_bb::func_295E(var_16);
 	}
 	else if(var_08.type == "Cover 3D") {
-		var_11 = scripts/asm/asm_bb::func_2929();
+		var_11 = scripts\asm\asm_bb::func_2929();
 		if(!isdefined(var_11) || func_7E42() != "exposed") {
-			scripts/asm/asm_bb::func_295E("exposed");
+			scripts\asm\asm_bb::func_295E("exposed");
 		}
 	}
 	else
 	{
-		var_11 = scripts/asm/asm_bb::func_2929();
-		var_17 = scripts/asm/asm_bb::bb_isshort();
+		var_11 = scripts\asm\asm_bb::func_2929();
+		var_17 = scripts\asm\asm_bb::bb_isshort();
 		if(!isdefined(var_11) || func_7E42() != "exposed") {
 			var_16 = undefined;
 			if(scripts\engine\utility::isnodecovercrouch(var_07)) {
@@ -1142,7 +1142,7 @@ func_471E(param_00) {
 				var_16 = var_15[randomint(var_15.size)];
 			}
 
-			scripts/asm/asm_bb::func_295E(var_16);
+			scripts\asm\asm_bb::func_295E(var_16);
 		}
 	}
 
@@ -1151,12 +1151,12 @@ func_471E(param_00) {
 }
 
 func_4748(param_00) {
-	var_01 = scripts/aitypes/combat::shouldshoot();
+	var_01 = scripts\aitypes\combat::shouldshoot();
 	if(!var_01) {
 		return 0;
 	}
 
-	var_02 = self.bt.shootparams;
+	var_02 = self.var_3135.shootparams;
 	if(self getpersstat(self.isnodeoccupied)) {
 		var_02.pos = self.isnodeoccupied getshootatpos();
 		var_02.ent = self.isnodeoccupied;
@@ -1171,29 +1171,29 @@ func_4748(param_00) {
 		var_02.objective = "normal";
 	}
 
-	scripts/asm/asm_bb::bb_setshootparams(var_02,self.isnodeoccupied);
-	if(scripts/aitypes/combat::isaimedataimtarget()) {
-		if(!self.bt.m_bfiring) {
-			scripts/aitypes/combat::resetmisstime_code();
-			scripts/aitypes/combat::chooseshootstyle(var_02);
-			scripts/aitypes/combat::choosenumshotsandbursts(var_02);
+	scripts\asm\asm_bb::bb_setshootparams(var_02,self.isnodeoccupied);
+	if(scripts\aitypes\combat::isaimedataimtarget()) {
+		if(!self.var_3135.m_bfiring) {
+			scripts\aitypes\combat::resetmisstime_code();
+			scripts\aitypes\combat::chooseshootstyle(var_02);
+			scripts\aitypes\combat::choosenumshotsandbursts(var_02);
 		}
 
-		scripts/aitypes/combat::func_3EF8(var_02);
-		self.bt.m_bfiring = 1;
+		scripts\aitypes\combat::func_3EF8(var_02);
+		self.var_3135.m_bfiring = 1;
 	}
 	else
 	{
-		self.bt.m_bfiring = 0;
+		self.var_3135.m_bfiring = 0;
 	}
 
 	if(!isdefined(var_02.pos) && !isdefined(var_02.ent)) {
-		self.bt.m_bfiring = 0;
-		scripts/asm/asm_bb::bb_requestfire(0);
+		self.var_3135.m_bfiring = 0;
+		scripts\asm\asm_bb::bb_requestfire(0);
 		return 0;
 	}
 
-	scripts/asm/asm_bb::bb_requestfire(self.bt.m_bfiring);
+	scripts\asm\asm_bb::bb_requestfire(self.var_3135.m_bfiring);
 	return 1;
 }
 
@@ -1214,8 +1214,8 @@ func_9DDA(param_00) {
 }
 
 func_F7B4() {
-	if(isdefined(self.bt.var_C2)) {
-		self.bt.var_C2.var_BFA5 = gettime() + randomintrange(3000,12000);
+	if(isdefined(self.var_3135.var_C2)) {
+		self.var_3135.var_C2.var_BFA5 = gettime() + randomintrange(3000,12000);
 	}
 }
 
@@ -1240,11 +1240,11 @@ func_3875() {
 		return 0;
 	}
 
-	if(isdefined(self.bt.var_C2.target_getindexoftarget.script_parameters) && self.bt.var_C2.target_getindexoftarget.script_parameters == "no_blindfire") {
+	if(isdefined(self.var_3135.var_C2.target_getindexoftarget.script_parameters) && self.var_3135.var_C2.target_getindexoftarget.script_parameters == "no_blindfire") {
 		return 0;
 	}
 
-	var_00 = self.bt.var_C2.target_getindexoftarget.type;
+	var_00 = self.var_3135.var_C2.target_getindexoftarget.type;
 	switch(var_00) {
 		case "Cover Right":
 			return self.a.pose == "stand";
@@ -1276,7 +1276,7 @@ func_FFCC(param_00) {
 		return level.failure;
 	}
 
-	if(gettime() < self.bt.var_C2.var_BFA5) {
+	if(gettime() < self.var_3135.var_C2.var_BFA5) {
 		return level.failure;
 	}
 
@@ -1288,16 +1288,16 @@ func_FFCC(param_00) {
 }
 
 func_4711(param_00) {
-	if(scripts/asm/asm::asm_ephemeraleventfired("cover_blindfire","end")) {
+	if(scripts\asm\asm::asm_ephemeraleventfired("cover_blindfire","end")) {
 		return level.success;
 	}
 
-	scripts/asm/asm_bb::func_295D(1);
+	scripts\asm\asm_bb::func_295D(1);
 	return level.running;
 }
 
 func_116F0(param_00) {
-	scripts/asm/asm_bb::func_295D(0);
+	scripts\asm\asm_bb::func_295D(0);
 	func_F7B4();
 }
 
@@ -1318,7 +1318,7 @@ func_100AD(param_00) {
 		return level.failure;
 	}
 
-	var_01 = self.bt.var_C2.target_getindexoftarget;
+	var_01 = self.var_3135.var_C2.target_getindexoftarget;
 	if(var_01.type == "Cover Prone" || var_01.type == "Conceal Prone") {
 		return level.failure;
 	}
@@ -1343,11 +1343,11 @@ func_100AD(param_00) {
 
 	var_08 = 0.4;
 	var_09 = gettime();
-	if(isdefined(self.bt.var_C2.var_A992) && var_09 < self.bt.var_C2.var_A992 + var_08) {
+	if(isdefined(self.var_3135.var_C2.var_A992) && var_09 < self.var_3135.var_C2.var_A992 + var_08) {
 		return level.failure;
 	}
 
-	self.bt.var_C2.var_A992 = var_09;
+	self.var_3135.var_C2.var_A992 = var_09;
 	if(self.var_FC && !scripts\anim\utility_common::recentlysawenemy()) {
 		return level.failure;
 	}
@@ -1381,21 +1381,21 @@ func_100AD(param_00) {
 }
 
 func_98DB(param_00) {
-	scripts/asm/asm_bb::bb_requestthrowgrenade(1,self.isnodeoccupied);
+	scripts\asm\asm_bb::bb_requestthrowgrenade(1,self.isnodeoccupied);
 	func_F6A4("hide");
-	self.bt.instancedata[param_00] = gettime() + 3000;
+	self.var_3135.instancedata[param_00] = gettime() + 3000;
 }
 
 func_474F(param_00) {
-	if(scripts/asm/asm::asm_ephemeraleventfired("throwgrenade","end")) {
+	if(scripts\asm\asm::asm_ephemeraleventfired("throwgrenade","end")) {
 		return level.success;
 	}
 
-	if(scripts/asm/asm::asm_ephemeraleventfired("throwgrenade","start",0)) {
-		self.bt.instancedata[param_00] = self.bt.instancedata[param_00] + 10000;
+	if(scripts\asm\asm::asm_ephemeraleventfired("throwgrenade","start",0)) {
+		self.var_3135.instancedata[param_00] = self.var_3135.instancedata[param_00] + 10000;
 	}
 
-	if(gettime() > self.bt.instancedata[param_00]) {
+	if(gettime() > self.var_3135.instancedata[param_00]) {
 		return level.failure;
 	}
 
@@ -1403,8 +1403,8 @@ func_474F(param_00) {
 }
 
 func_11700(param_00) {
-	scripts/asm/asm_bb::bb_requestthrowgrenade(0);
-	self.bt.instancedata[param_00] = undefined;
+	scripts\asm\asm_bb::bb_requestthrowgrenade(0);
+	self.var_3135.instancedata[param_00] = undefined;
 }
 
 func_6574(param_00) {
@@ -1453,7 +1453,7 @@ func_B4ED(param_00,param_01) {
 		return level.failure;
 	}
 
-	if(isdefined(self._blackboard.coverstate) && self._blackboard.coverstate != "hide") {
+	if(isdefined(self.var_1198.coverstate) && self.var_1198.coverstate != "hide") {
 		return level.failure;
 	}
 
@@ -1467,11 +1467,11 @@ func_B4ED(param_00,param_01) {
 	}
 
 	var_03 = gettime();
-	if(isdefined(self._blackboard.var_1016E) && var_03 < self._blackboard.var_1016E + 500) {
+	if(isdefined(self.var_1198.var_1016E) && var_03 < self.var_1198.var_1016E + 500) {
 		return level.failure;
 	}
 
-	if(var_03 < self.bt.var_C2.var_BF8A) {
+	if(var_03 < self.var_3135.var_C2.var_BF8A) {
 		return level.failure;
 	}
 
@@ -1490,7 +1490,7 @@ func_2546(param_00) {
 		return level.failure;
 	}
 
-	if(var_01 == self.target_getindexoftarget || var_01 == self.bt.var_C2.target_getindexoftarget) {
+	if(var_01 == self.target_getindexoftarget || var_01 == self.var_3135.var_C2.target_getindexoftarget) {
 		return level.failure;
 	}
 
@@ -1506,16 +1506,16 @@ func_2546(param_00) {
 		return level.failure;
 	}
 
-	self._blackboard.shufflenode = var_01;
-	self._blackboard.var_1016E = gettime();
-	self._blackboard.var_1016B = self.bt.var_C2.target_getindexoftarget;
+	self.var_1198.shufflenode = var_01;
+	self.var_1198.var_1016E = gettime();
+	self.var_1198.var_1016B = self.var_3135.var_C2.target_getindexoftarget;
 	return level.running;
 }
 
 func_453E(param_00) {
-	if(isdefined(self.bt.var_C2) && weaponclass(self.var_394) == "mg" && isdefined(self.isnodeoccupied) && distancesquared(self.origin,self.isnodeoccupied.origin) < 65536) {
+	if(isdefined(self.var_3135.var_C2) && weaponclass(self.var_394) == "mg" && isdefined(self.isnodeoccupied) && distancesquared(self.origin,self.isnodeoccupied.origin) < 65536) {
 		if(isdefined(self.var_101B4)) {
-			scripts/asm/asm_bb::bb_requestweapon(weaponclass(self.var_101B4));
+			scripts\asm\asm_bb::bb_requestweapon(weaponclass(self.var_101B4));
 		}
 	}
 
@@ -1527,7 +1527,7 @@ func_12E5D(param_00) {
 		if(self.health < self.maxhealth * 0.75) {
 			self.var_280A = undefined;
 		}
-		else if(isdefined(self._blackboard.scriptableparts) && self._blackboard.scriptableparts.size >= 2) {
+		else if(isdefined(self.var_1198.scriptableparts) && self.var_1198.scriptableparts.size >= 2) {
 			self.var_280A = undefined;
 		}
 	}

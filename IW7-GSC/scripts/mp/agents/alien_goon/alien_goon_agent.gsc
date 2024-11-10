@@ -1,12 +1,12 @@
-/*********************************************************************
+/*************************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\agents\alien_goon\alien_goon_agent.gsc
-*********************************************************************/
+ * Script: scripts\mp\agents\alien_goon\alien_goon_agent.gsc
+*************************************************************/
 
 registerscriptedagent() {
 	scripts\mp\agents\alien_goon\alien_goon_tunedata::setuptunedata();
-	scripts/aitypes/bt_util::init();
+	scripts\aitypes\bt_util::init();
 	behaviortree\alien_goon::func_DEE8();
 	scripts\asm\alien_goon\mp\states::func_2371();
 	scripts\asm\dlc4\alien_anim_utils::func_97C5();
@@ -23,7 +23,7 @@ func_FAB0() {
 	level.agent_definition["alien_goon"]["setup_func"] = ::setupagent;
 	level.agent_definition["alien_goon"]["setup_model_func"] = ::func_FACE;
 	level.agent_funcs["alien_goon"]["on_damaged"] = ::func_C4E0;
-	level.agent_funcs["alien_goon"]["gametype_on_damage_finished"] = ::scripts/cp/agents/gametype_zombie::onzombiedamagefinished;
+	level.agent_funcs["alien_goon"]["gametype_on_damage_finished"] = ::scripts\cp\agents\gametype_zombie::onzombiedamagefinished;
 	level.agent_funcs["alien_goon"]["gametype_on_killed"] = ::scripts\cp\maps\cp_final\cp_final_damage::cp_final_onzombiekilled;
 	level.agent_funcs["alien_goon"]["on_damaged_finished"] = ::scripts\mp\agents\zombie\zmb_zombie_agent::onzombiedamagefinished;
 	level.agent_funcs["alien_goon"]["on_killed"] = ::scripts\mp\agents\zombie\zmb_zombie_agent::onzombiekilled;
@@ -164,7 +164,7 @@ setupagent() {
 }
 
 func_AEB0() {
-	level._effect["alien_teleport_fx"] = loadfx("vfx/iw7/_requests/coop/zmb_fullbody_gib.vfx");
+	level._effect["alien_teleport_fx"] = loadfx("vfx\iw7\_requests\coop\zmb_fullbody_gib.vfx");
 }
 
 monitorwhizbys() {

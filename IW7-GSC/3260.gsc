@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3260.gsc
-****************************/
+ * Script: 3260.gsc
+************************/
 
 main() {
 	if(isdefined(level.createfx_enabled) && level.createfx_enabled) {
@@ -146,7 +146,7 @@ onzombiedamaged(param_00,param_01,param_02,param_03,param_04,param_05,param_06,p
 						playfx(level._effect["stimulus_shield"],var_25 gettagorigin("tag_eye"),anglestoforward(var_25.angles),anglestoup(var_25.angles),var_25);
 						if(param_02 >= self.health) {
 							if(scripts\engine\utility::istrue(var_25.inlaststand)) {
-								scripts/cp/zombies/zombies_consumables::revive_downed_entities(var_25);
+								scripts\cp\zombies\zombies_consumables::revive_downed_entities(var_25);
 							}
 						}
 
@@ -167,7 +167,7 @@ onzombiedamaged(param_00,param_01,param_02,param_03,param_04,param_05,param_06,p
 					playfx(level._effect["stimulus_shield"],var_25 gettagorigin("tag_eye"));
 					if(param_02 >= self.health) {
 						if(scripts\engine\utility::istrue(var_25.inlaststand)) {
-							scripts/cp/zombies/zombies_consumables::revive_downed_entities(var_25);
+							scripts\cp\zombies\zombies_consumables::revive_downed_entities(var_25);
 						}
 					}
 
@@ -315,7 +315,7 @@ onzombiedamaged(param_00,param_01,param_02,param_03,param_04,param_05,param_06,p
 		}
 
 		if(isdefined(param_02) && isdefined(param_08) && !var_1C && var_17) {
-			var_3B = scripts/cp/zombies/zombie_armor::process_damage_to_armor(var_0C,param_01,param_02,param_08,param_07);
+			var_3B = scripts\cp\zombies\zombie_armor::process_damage_to_armor(var_0C,param_01,param_02,param_08,param_07);
 			if(var_3B <= 0) {
 				return;
 			}
@@ -334,7 +334,7 @@ onzombiedamaged(param_00,param_01,param_02,param_03,param_04,param_05,param_06,p
 					param_02 = param_02 + int(1500 * param_01 scripts\cp\cp_weapon::get_weapon_level(param_05));
 				}
 
-				param_02 = int(param_02 * param_01 scripts/cp/perks/perk_utility::perk_getmeleescalar());
+				param_02 = int(param_02 * param_01 scripts\cp\perks\perk_utility::perk_getmeleescalar());
 				if(isdefined(param_01.passive_melee_kill_damage)) {
 					param_02 = param_02 + param_01.passive_melee_kill_damage;
 				}
@@ -460,7 +460,7 @@ onzombiedamaged(param_00,param_01,param_02,param_03,param_04,param_05,param_06,p
 		}
 
 		if(isdefined(self.has_backpack)) {
-			scripts/cp/zombies/zombies_pillage::pillageable_piece_lethal_monitor(self,self.has_backpack,param_01);
+			scripts\cp\zombies\zombies_pillage::pillageable_piece_lethal_monitor(self,self.has_backpack,param_01);
 		}
 
 		self getrandomhovernodesaroundtargetpos(0,0);
@@ -501,7 +501,7 @@ onzombiedamaged(param_00,param_01,param_02,param_03,param_04,param_05,param_06,p
 		}
 	}
 
-	scripts/cp/zombies/zombies_gamescore::update_agent_damage_performance(param_01,param_02,param_04);
+	scripts\cp\zombies\zombies_gamescore::update_agent_damage_performance(param_01,param_02,param_04);
 	if(!var_0E) {
 		scripts\cp\cp_agent_utils::process_damage_rewards(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08,param_09,var_0C);
 	}
@@ -818,7 +818,7 @@ onzombiekilled(param_00,param_01,param_02,param_03,param_04,param_05,param_06,pa
 		}
 	}
 
-	param_01 scripts/cp/zombies/zombies_consumables::headshot_reload_check(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08,self);
+	param_01 scripts\cp\zombies\zombies_consumables::headshot_reload_check(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08,self);
 	if(isdefined(level.spawnloopupdatefunc)) {
 		[[level.spawnloopupdatefunc]](param_01,param_04);
 	}
@@ -870,7 +870,7 @@ onzombiekilled(param_00,param_01,param_02,param_03,param_04,param_05,param_06,pa
 	}
 
 	if(isdefined(self.attack_spot)) {
-		scripts/cp/zombies/zombie_entrances::release_attack_spot(self.attack_spot);
+		scripts\cp\zombies\zombie_entrances::release_attack_spot(self.attack_spot);
 	}
 
 	self.closest_entrance = undefined;
@@ -896,7 +896,7 @@ onzombiekilled(param_00,param_01,param_02,param_03,param_04,param_05,param_06,pa
 	scripts\cp\cp_merits::process_agent_on_killed_merits(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08);
 	param_01 scripts\cp\utility::bufferednotify("kill_event_buffered",param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,self.agent_type);
 	scripts\cp\cp_agent_utils::deactivateagent();
-	scripts/cp/zombies/zombie_armor::clean_up_zombie_armor(self);
+	scripts\cp\zombies\zombie_armor::clean_up_zombie_armor(self);
 	level notify("zombie_killed",self.origin,param_04,param_03);
 }
 
@@ -934,7 +934,7 @@ func_107E1(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_
 		return;
 	}
 
-	if(scripts/asm/zombie/melee::isenemyinfrontofme(param_01,self.meleedot)) {
+	if(scripts\asm\zombie\melee::isenemyinfrontofme(param_01,self.meleedot)) {
 		if(isdefined(self.agent_type) && self.agent_type != "zombie_brute" && self.agent_type != "zombie_grey" && self.agent_type != "zombie_clown") {
 			self.var_10A57 = 1;
 			self setscriptablepartstate("spoon","active",1);
@@ -1058,7 +1058,7 @@ process_kill_rewards(param_00,param_01,param_02,param_03,param_04,param_05) {
 			{
 				if(isdefined(param_02.voprefix)) {
 					if(param_02.voprefix == "zmb_vo_clown_") {
-						level thread scripts/cp/zombies/zombies_vo::play_zombie_vo(param_02,"death",1);
+						level thread scripts\cp\zombies\zombies_vo::play_zombie_vo(param_02,"death",1);
 						var_07 thread scripts\cp\cp_vo::try_to_play_vo("killfirm_clown","zmb_comment_vo","low",10,0,0,0,20);
 					}
 				}
@@ -1100,7 +1100,7 @@ process_kill_rewards(param_00,param_01,param_02,param_03,param_04,param_05) {
 					}
 				}
 				else if(param_02.agent_type == "zombie_brute") {
-					level thread scripts/cp/zombies/zombies_vo::play_zombie_vo(param_02,"death",1);
+					level thread scripts\cp\zombies\zombies_vo::play_zombie_vo(param_02,"death",1);
 				}
 				else if(param_02.agent_type == "crab_mini") {
 					if(randomint(100) > 60) {
@@ -2026,7 +2026,7 @@ attack_nearby_player() {
 	self.var_2BE9 = undefined;
 	var_01 = scripts\engine\utility::getclosest(self.origin,level.current_interaction_structs);
 	if(is_player_near_interaction_point(self.closest_player_near_interaction_point,var_01)) {
-		scripts/asm/zombie/melee::domeleedamage(self.closest_player_near_interaction_point,scripts/asm/zombie/melee::get_melee_damage_dealt(),"MOD_IMPACT");
+		scripts\asm\zombie\melee::domeleedamage(self.closest_player_near_interaction_point,scripts\asm\zombie\melee::get_melee_damage_dealt(),"MOD_IMPACT");
 	}
 }
 
@@ -2049,13 +2049,13 @@ break_barrier_from_entrance(param_00) {
 		}
 	}
 
-	scripts/cp/zombies/zombie_entrances::remove_barrier_from_entrance(param_00);
-	if(!scripts/cp/zombies/zombie_entrances::entrance_has_barriers(param_00)) {
+	scripts\cp\zombies\zombie_entrances::remove_barrier_from_entrance(param_00);
+	if(!scripts\cp\zombies\zombie_entrances::entrance_has_barriers(param_00)) {
 		self.var_FFCF = 0;
 		self.curmeleetarget = undefined;
 		self.precacheleaderboards = 0;
 		self.ignoreme = 0;
-		scripts/cp/zombies/zombie_entrances::release_attack_spot(self.attack_spot);
+		scripts\cp\zombies\zombie_entrances::release_attack_spot(self.attack_spot);
 		self.attack_spot = undefined;
 	}
 }

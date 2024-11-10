@@ -1,15 +1,15 @@
-/*********************************************************
+/*************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\maps\mp_proto\mp_proto.gsc
-*********************************************************/
+ * Script: scripts\mp\maps\mp_proto\mp_proto.gsc
+*************************************************/
 
 main() {
-	lib_0FDB::main();
+	scripts\mp\maps\mp_proto\mp_proto_precache::main();
 	scripts\mp\maps\mp_proto\gen\mp_proto_art::main();
-	lib_0FDA::main();
-	scripts\mp\_load::main();
-	scripts\mp\_compass::func_FACD("compass_map_mp_proto");
+	scripts\mp\maps\mp_proto\mp_proto_fx::main();
+	scripts\mp\load::main();
+	scripts\mp\compass::setupminimap("compass_map_mp_proto");
 	setdvar("r_lightGridEnableTweaks",1);
 	setdvar("r_lightGridIntensity",1.33);
 	setdvar("r_drawsun",0);
@@ -21,7 +21,7 @@ main() {
 	game["axis_outfit"] = "woodland";
 	level.var_C7B3 = getentarray("OutOfBounds","targetname");
 	thread func_9284();
-	thread scripts\mp\_animation_suite::func_1FAA();
+	thread scripts\mp\animation_suite::animationsuite();
 	thread fix_collision();
 	thread spawn_oob_trigger();
 	thread runmodespecifictriggers();
@@ -63,7 +63,7 @@ fix_collision() {
 	var_0F.angles = (0,0,-82);
 	var_0F clonebrushmodeltoscriptmodel(var_0E);
 	var_10 = spawn("trigger_radius",(-2576,608,448),0,256,256);
-	var_10.var_257 = 256;
+	var_10.fgetarg = 256;
 	var_10.height = 256;
 	var_10 thread kill_trigger_loop("script_vehicle");
 	var_11 = spawn("script_model",(-2008,-188,676));
@@ -86,13 +86,13 @@ kill_trigger_loop(param_00) {
 	for(;;) {
 		self waittill("trigger",var_01);
 		if(isdefined(var_01) && isdefined(var_01.classname) && var_01.classname == param_00) {
-			if(isdefined(var_01.var_110EA)) {
-				if(var_01.var_110EA == "minijackal") {
+			if(isdefined(var_01.streakname)) {
+				if(var_01.streakname == "minijackal") {
 					var_01 notify("minijackal_end");
 					continue;
 				}
 
-				if(var_01.var_110EA == "venom") {
+				if(var_01.streakname == "venom") {
 					var_01 notify("venom_end",var_01.origin);
 				}
 			}

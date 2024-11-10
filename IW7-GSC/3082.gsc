@@ -1,12 +1,12 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3082.gsc
-****************************/
+ * Script: 3082.gsc
+************************/
 
 func_35A6(param_00) {
 	self.var_10264 = 1;
-	self.bt.var_E5FA = 1;
+	self.var_3135.var_E5FA = 1;
 	lib_0A16::func_98D2();
 	lib_0C09::func_97F9();
 	lib_0C0B::func_98DD();
@@ -28,10 +28,10 @@ func_35A6(param_00) {
 }
 
 func_170A() {
-	self.bt.var_ACB4 = [];
-	self.bt.var_ACB4[self.bt.var_ACB4.size] = func_4911("j_clavicle_inner_ri");
-	self.bt.var_ACB4[self.bt.var_ACB4.size] = func_4911("j_clavicle_inner_le");
-	self.bt.var_71C9 = ::func_E138;
+	self.var_3135.var_ACB4 = [];
+	self.var_3135.var_ACB4[self.var_3135.var_ACB4.size] = func_4911("j_clavicle_inner_ri");
+	self.var_3135.var_ACB4[self.var_3135.var_ACB4.size] = func_4911("j_clavicle_inner_le");
+	self.var_3135.var_71C9 = ::func_E138;
 }
 
 func_4911(param_00) {
@@ -50,8 +50,8 @@ func_4911(param_00) {
 }
 
 func_E138() {
-	if(isdefined(self.bt.var_ACB4)) {
-		foreach(var_01 in self.bt.var_ACB4) {
+	if(isdefined(self.var_3135.var_ACB4)) {
+		foreach(var_01 in self.var_3135.var_ACB4) {
 			if(isdefined(var_01)) {
 				var_01 delete();
 			}

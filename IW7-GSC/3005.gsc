@@ -1,41 +1,41 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3005.gsc
-****************************/
+ * Script: 3005.gsc
+************************/
 
 main(param_00,param_01,param_02) {
-	scripts/sp/vehicle_build::func_31C5("dropship",param_00,param_01,param_02);
-	scripts/sp/vehicle_build::func_31A6(::init_location);
-	scripts/sp/vehicle_build::func_31A3(3000,2800,3100);
-	scripts/sp/vehicle_build::func_31C4("axis");
+	scripts\sp\vehicle_build::func_31C5("dropship",param_00,param_01,param_02);
+	scripts\sp\vehicle_build::func_31A6(::init_location);
+	scripts\sp\vehicle_build::func_31A3(3000,2800,3100);
+	scripts\sp\vehicle_build::func_31C4("axis");
 	if(issubstr(param_02,"_space")) {
-		scripts/sp/vehicle_build::build_ace(::func_F8A2,::func_F5FC);
+		scripts\sp\vehicle_build::build_ace(::func_F8A2,::func_F5FC);
 	}
 	else
 	{
-		scripts/sp/vehicle_build::build_ace(::func_F8A1,::func_F5FC);
+		scripts\sp\vehicle_build::build_ace(::func_F8A1,::func_F5FC);
 	}
 
-	scripts/sp/vehicle_build::func_31CC(::func_12BBD);
-	scripts/sp/vehicle_build::func_3184("vfx/iw7/core/vehicle/dropship/vfx_dropship_death_01.vfx",undefined,"dropship_helicopter_crash",undefined,undefined,undefined,-1,undefined,"stop_crash_loop_sound",10,5);
-	scripts/sp/vehicle_build::func_31B7("vfx/iw7/core/vehicle/dropship/vfx_dropship_death_01.vfx","tag_body","dropship_helicopter_crash",undefined,undefined,undefined,undefined,1,undefined,0);
-	var_03 = "vfx/code/tread/heli_dust_default.vfx";
-	scripts/sp/vehicle_build::func_31C6(param_02,"default",var_03,0);
-	scripts/sp/vehicle_build::func_31B8("light_1s",0.12,0.15,3000,0.05,0.05);
+	scripts\sp\vehicle_build::func_31CC(::func_12BBD);
+	scripts\sp\vehicle_build::func_3184("vfx\iw7\core\vehicle\dropship\vfx_dropship_death_01.vfx",undefined,"dropship_helicopter_crash",undefined,undefined,undefined,-1,undefined,"stop_crash_loop_sound",10,5);
+	scripts\sp\vehicle_build::func_31B7("vfx\iw7\core\vehicle\dropship\vfx_dropship_death_01.vfx","tag_body","dropship_helicopter_crash",undefined,undefined,undefined,undefined,1,undefined,0);
+	var_03 = "vfx\code\tread\heli_dust_default.vfx";
+	scripts\sp\vehicle_build::func_31C6(param_02,"default",var_03,0);
+	scripts\sp\vehicle_build::func_31B8("light_1s",0.12,0.15,3000,0.05,0.05);
 	if(issubstr(param_02,"plane")) {
-		scripts/sp/vehicle_build::func_319F();
+		scripts\sp\vehicle_build::func_319F();
 	}
 	else
 	{
-		scripts/sp/vehicle_build::func_31A0();
+		scripts\sp\vehicle_build::func_31A0();
 	}
 
 	if(!issubstr(param_02,"cheap")) {
-		scripts/sp/vehicle_build::func_31C8("sdf_dropship_turret_energy","tag_chin_turret","veh_mil_air_ca_dropship_turret",undefined,"auto_nonai",0,20,-14,undefined);
-		scripts/sp/vehicle_build::func_31C8("sdf_mg_turret","tag_turret_attach_back","weapon_railgun_turret",undefined,"auto_nonai",0,0,0,undefined,"back");
-		scripts/sp/vehicle_build::func_31C8("sdf_mg_turret","tag_turret_attach_le","weapon_railgun_turret",undefined,"auto_nonai",0,0,0,undefined,"left");
-		scripts/sp/vehicle_build::func_31C8("sdf_mg_turret","tag_turret_attach_ri","weapon_railgun_turret",undefined,"auto_nonai",0,0,0,undefined,"right");
+		scripts\sp\vehicle_build::func_31C8("sdf_dropship_turret_energy","tag_chin_turret","veh_mil_air_ca_dropship_turret",undefined,"auto_nonai",0,20,-14,undefined);
+		scripts\sp\vehicle_build::func_31C8("sdf_mg_turret","tag_turret_attach_back","weapon_railgun_turret",undefined,"auto_nonai",0,0,0,undefined,"back");
+		scripts\sp\vehicle_build::func_31C8("sdf_mg_turret","tag_turret_attach_le","weapon_railgun_turret",undefined,"auto_nonai",0,0,0,undefined,"left");
+		scripts\sp\vehicle_build::func_31C8("sdf_mg_turret","tag_turret_attach_ri","weapon_railgun_turret",undefined,"auto_nonai",0,0,0,undefined,"right");
 		precachemodel("veh_mil_air_ca_dropship_dst_rr");
 		precachemodel("veh_mil_air_ca_dropship_dst_fr");
 		precachemodel("veh_mil_air_ca_dropship_personnel");
@@ -44,9 +44,9 @@ main(param_00,param_01,param_02) {
 	}
 
 	lib_0BBE::func_774E(param_02);
-	level.var_7649["engine_damage_feedback"] = loadfx("vfx/iw7/levels/pearl_harbor/dropship_down/vfx_ph_dropship_shoot_engine_impact_amped.vfx");
-	level.var_7649["enemy_dropship_engine_death"] = loadfx("vfx/iw7/levels/pearl_harbor/dropship_down/vfx_ph_dropship_shoot_engine_explode.vfx");
-	level.var_7649["enemy_dropship_engine_damaged"] = loadfx("vfx/iw7/levels/pearl_harbor/dropship_down/vfx_ph_dropship_shoot_engine_flaming.vfx");
+	level.var_7649["engine_damage_feedback"] = loadfx("vfx\iw7\levels\pearl_harbor\dropship_down\vfx_ph_dropship_shoot_engine_impact_amped.vfx");
+	level.var_7649["enemy_dropship_engine_death"] = loadfx("vfx\iw7\levels\pearl_harbor\dropship_down\vfx_ph_dropship_shoot_engine_explode.vfx");
+	level.var_7649["enemy_dropship_engine_damaged"] = loadfx("vfx\iw7\levels\pearl_harbor\dropship_down\vfx_ph_dropship_shoot_engine_flaming.vfx");
 }
 
 init_location() {
@@ -467,7 +467,7 @@ func_CD70(param_00,param_01,param_02) {
 	var_03 = undefined;
 	if(isstring(param_01)) {
 		var_03 = getanimlength(level.var_EC85[self.var_1FBB][param_01]);
-		self.var_1FEB thread scripts/sp/anim::func_1F35(self,param_01);
+		self.var_1FEB thread scripts\sp\anim::func_1F35(self,param_01);
 	}
 	else
 	{

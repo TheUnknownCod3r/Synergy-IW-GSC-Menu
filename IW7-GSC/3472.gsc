@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\3472.gsc
+ * Script: 3472.gsc
 ***************************************/
 
 init() {
@@ -26,7 +26,7 @@ init() {
   var_0.maxhealth = 150;
   var_0.damagefeedback = "deployable_bag";
   var_0.deathweaponinfo = "deployable_ammo_mp";
-  var_0.deathvfx = loadfx("vfx/iw7/_requests/mp/vfx_debug_warning.vfx");
+  var_0.deathvfx = loadfx("vfx\iw7\_requests\mp\vfx_debug_warning.vfx");
   var_0.deathdamageradius = 256;
   var_0.deathdamagemax = 130;
   var_0.deathdamagemin = 50;

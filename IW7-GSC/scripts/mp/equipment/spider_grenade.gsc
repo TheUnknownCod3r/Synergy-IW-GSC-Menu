@@ -1,8 +1,8 @@
-/***********************************************************
+/***************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\equipment\spider_grenade.gsc
-***********************************************************/
+ * Script: scripts\mp\equipment\spider_grenade.gsc
+***************************************************/
 
 spidergrenade_init() {
 	var_00 = spawnstruct();
@@ -50,11 +50,11 @@ spidergrenade_stuckground(param_00,param_01) {
 
 spidergrenade_stuckplayer(param_00,param_01) {
 	spidergrenade_proxyinitialize(param_00);
-	if(scripts\mp\_utility::isreallyalive(param_01)) {
+	if(scripts\mp\utility::isreallyalive(param_01)) {
 		param_00 linkto(param_01,"j_head",(3,-5,0),(0,0,90));
 	}
 
-	scripts\mp\_weapons::grenadestuckto(param_00,param_01);
+	scripts\mp\weapons::grenadestuckto(param_00,param_01);
 	param_00 thread spidergrenade_setstate(3,param_01);
 }
 
@@ -65,14 +65,14 @@ spidergrenade_destroy() {
 			self suicide();
 		}
 
-		if(isdefined(var_00) && !scripts\mp\_utility::istrue(var_00.exploding)) {
+		if(isdefined(var_00) && !scripts\mp\utility::istrue(var_00.exploding)) {
 			var_00 thread spidergrenade_destroy();
 		}
 
 		return;
 	}
 
-	scripts\mp\_utility::printgameaction("spider grenade destroy",self.triggerportableradarping);
+	scripts\mp\utility::printgameaction("spider grenade destroy",self.triggerportableradarping);
 	self show();
 	thread spidergrenade_delete(0.1);
 	self setscriptablepartstate("beacon","neutral",0);
@@ -87,14 +87,14 @@ spidergrenade_explode() {
 			self suicide();
 		}
 
-		if(isdefined(var_00) && !scripts\mp\_utility::istrue(var_00.exploding)) {
+		if(isdefined(var_00) && !scripts\mp\utility::istrue(var_00.exploding)) {
 			var_00 thread spidergrenade_explode();
 		}
 
 		return;
 	}
 
-	scripts\mp\_utility::printgameaction("spider grenade explode",self.triggerportableradarping);
+	scripts\mp\utility::printgameaction("spider grenade explode",self.triggerportableradarping);
 	self show();
 	thread spidergrenade_delete(0.1);
 	self setscriptablepartstate("beacon","neutral",0);
@@ -176,15 +176,15 @@ spidergrenade_destroyonemp() {
 	self.triggerportableradarping endon("disconnect");
 	self waittill("emp_damage",var_00,var_01,var_02,var_03,var_04);
 	if(isdefined(var_03) && var_03 == "emp_grenade_mp") {
-		if(scripts\mp\_utility::istrue(scripts\mp\_utility::playersareenemies(self.triggerportableradarping,var_00))) {
-			var_00 scripts\mp\_missions::func_D991("ch_tactical_emp_eqp");
+		if(scripts\mp\utility::istrue(scripts\mp\utility::playersareenemies(self.triggerportableradarping,var_00))) {
+			var_00 scripts\mp\missions::func_D991("ch_tactical_emp_eqp");
 		}
 	}
 
 	spidergrenade_awardpoints(var_00);
 	if(isplayer(var_00)) {
-		var_05 = scripts\engine\utility::ter_op(scripts\mp\_utility::istrue(self.hasruggedeqp),"hitequip","");
-		var_00 scripts\mp\_damagefeedback::updatedamagefeedback(var_05);
+		var_05 = scripts\engine\utility::ter_op(scripts\mp\utility::istrue(self.hasruggedeqp),"hitequip","");
+		var_00 scripts\mp\damagefeedback::updatedamagefeedback(var_05);
 	}
 
 	thread spidergrenade_destroy();
@@ -198,7 +198,7 @@ spidergrenade_destroyongameend() {
 }
 
 spidergrenadeproxy_handledamage(param_00,param_01,param_02,param_03,param_04) {
-	if(!scripts/mp/equipment/phase_shift::areentitiesinphase(param_00,self)) {
+	if(!scripts\mp\equipment\phase_shift::areentitiesinphase(param_00,self)) {
 		return 0;
 	}
 
@@ -208,14 +208,14 @@ spidergrenadeproxy_handledamage(param_00,param_01,param_02,param_03,param_04) {
 
 	var_05 = lib_0F6E::getseekermaxhealth();
 	var_06 = 1;
-	if(scripts\mp\_utility::isfmjdamage(param_01,param_02)) {
+	if(scripts\mp\utility::isfmjdamage(param_01,param_02)) {
 		var_06 = 2;
 	}
-	else if(param_03 >= scripts\mp\_weapons::minegettwohitthreshold()) {
+	else if(param_03 >= scripts\mp\weapons::minegettwohitthreshold()) {
 		var_06 = 2;
 	}
 
-	scripts\mp\_powers::equipmenthit(self.triggerportableradarping,param_00,param_01,param_02);
+	scripts\mp\powers::equipmenthit(self.triggerportableradarping,param_00,param_01,param_02);
 	return var_06 * var_05;
 }
 
@@ -233,16 +233,16 @@ spidergrenade_proxyinitialize(param_00) {
 	param_00 setotherent(self);
 	param_00 setentityowner(self);
 	param_00 give_player_tickets(1);
-	var_01 = param_00.triggerportableradarping scripts\mp\_utility::_hasperk("specialty_rugged_eqp");
+	var_01 = param_00.triggerportableradarping scripts\mp\utility::_hasperk("specialty_rugged_eqp");
 	param_00.hasruggedeqp = var_01;
 	var_02 = scripts\engine\utility::ter_op(var_01,lib_0F6E::getseekermaxhealthrugged(),lib_0F6E::getseekermaxhealth());
 	var_03 = scripts\engine\utility::ter_op(var_01,"hitequip","");
-	param_00 thread scripts\mp\_damage::monitordamage(var_02,var_03,::spidergrenadeproxy_handlefataldamage,::spidergrenadeproxy_handledamage);
+	param_00 thread scripts\mp\damage::monitordamage(var_02,var_03,::spidergrenadeproxy_handlefataldamage,::spidergrenadeproxy_handledamage);
 	param_00 thread spidergrenade_cleanuponownerdisconnect();
 	param_00 thread spidergrenade_destroyongameend();
 	param_00 thread spidergrenade_destroyonemp();
 	param_00 thread scripts\mp\perks\_perk_equipmentping::runequipmentping();
-	thread scripts\mp\_weapons::outlineequipmentforowner(param_00,self);
+	thread scripts\mp\weapons::outlineequipmentforowner(param_00,self);
 	spidergrenade_addtoproxyarray(param_00);
 }
 
@@ -266,13 +266,13 @@ spidergrenade_proxytoagent(param_00,param_01) {
 	param_01 scripts\mp\mp_agent::set_agent_health(var_02);
 	param_01.perks = [];
 	param_01.perksblocked = [];
-	param_01 scripts\mp\_utility::giveperk("specialty_blindeye");
+	param_01 scripts\mp\utility::giveperk("specialty_blindeye");
 	param_01 thread spidergrenade_cleanuponownerdisconnect();
 	param_01 thread spidergrenade_cleanuponparentdeath(param_00);
 	param_01 thread spidergrenade_destroyongameend();
 	param_01 thread spidergrenade_destroyonemp();
 	param_01 thread scripts\mp\perks\_perk_equipmentping::runequipmentping(undefined,var_03);
-	thread scripts\mp\_weapons::outlineequipmentforowner(param_01,param_01.triggerportableradarping);
+	thread scripts\mp\weapons::outlineequipmentforowner(param_01,param_01.triggerportableradarping);
 	var_04 = spawn("script_model",param_01.origin);
 	var_04 setmodel("tag_origin");
 	var_04 linkto(param_01);
@@ -291,13 +291,13 @@ spidergrenade_agenttoproxy(param_00,param_01) {
 	param_01.attackers = param_00.attackers;
 	param_01.var_A638 delete();
 	param_01 show();
-	var_04 = scripts\engine\utility::ter_op(scripts\mp\_utility::istrue(param_01.hasruggedeqp),"hitequip","");
-	param_01 thread scripts\mp\_damage::monitordamage(var_02,var_04,::spidergrenadeproxy_handlefataldamage,::spidergrenadeproxy_handledamage);
+	var_04 = scripts\engine\utility::ter_op(scripts\mp\utility::istrue(param_01.hasruggedeqp),"hitequip","");
+	param_01 thread scripts\mp\damage::monitordamage(var_02,var_04,::spidergrenadeproxy_handlefataldamage,::spidergrenadeproxy_handledamage);
 	param_01 thread scripts\mp\perks\_perk_equipmentping::runequipmentping(undefined,var_03);
-	thread scripts\mp\_weapons::outlineequipmentforowner(param_01,param_01.triggerportableradarping);
+	thread scripts\mp\weapons::outlineequipmentforowner(param_01,param_01.triggerportableradarping);
 	spidergrenade_addtoproxyarray(param_01);
 	param_01 thread spidergrenade_setstate(2);
-	if(isdefined(param_00.var_F181) && scripts\mp\_utility::isreallyalive(param_00.var_F181)) {
+	if(isdefined(param_00.var_F181) && scripts\mp\utility::isreallyalive(param_00.var_F181)) {
 		param_01 thread spidergrenade_trackdebuff(param_00,param_00.var_F181);
 	}
 
@@ -305,9 +305,9 @@ spidergrenade_agenttoproxy(param_00,param_01) {
 }
 
 spidergrenade_awardpoints(param_00) {
-	if(scripts\mp\_utility::istrue(scripts\mp\_utility::playersareenemies(self.triggerportableradarping,param_00))) {
+	if(scripts\mp\utility::istrue(scripts\mp\utility::playersareenemies(self.triggerportableradarping,param_00))) {
 		param_00 notify("destroyed_equipment");
-		param_00 thread scripts\mp\_utility::giveunifiedpoints("destroyed_equipment");
+		param_00 thread scripts\mp\utility::giveunifiedpoints("destroyed_equipment");
 	}
 }
 
@@ -322,11 +322,11 @@ spidergrenade_trackdebuff(param_00,param_01) {
 	}
 	else
 	{
-		scripts\mp\_gamescore::func_11ACE(var_02,param_01,"power_spider_grenade_mp");
+		scripts\mp\gamescore::func_11ACE(var_02,param_01,"power_spider_grenade_mp");
 	}
 
 	self waittill("death");
-	scripts\mp\_gamescore::untrackdebuffassist(var_02,param_01,"power_spider_grenade_mp");
+	scripts\mp\gamescore::untrackdebuffassist(var_02,param_01,"power_spider_grenade_mp");
 }
 
 spidergrenade_getplacementinfo(param_00,param_01,param_02,param_03) {
@@ -371,7 +371,7 @@ spidergrenade_getplacementinfo(param_00,param_01,param_02,param_03) {
 		var_11 = var_10 * (0,0,1);
 		var_0A = var_0E;
 		var_0B = var_0A + var_11;
-		var_12 = function_0287(var_0A,var_0B,var_0C,[param_00],1,"physicsquery_closest",1);
+		var_12 = physics_raycast(var_0A,var_0B,var_0C,[param_00],1,"physicsquery_closest",1);
 		if(isdefined(var_12) && var_12.size > 0) {
 			if(var_04) {
 				return param_02;
@@ -385,7 +385,7 @@ spidergrenade_getplacementinfo(param_00,param_01,param_02,param_03) {
 			var_11 = var_10 - var_11;
 			var_0A = var_0B;
 			var_0B = var_0F;
-			var_12 = function_0287(var_0A,var_0B,var_0C,[param_00],1,"physicsquery_closest",1);
+			var_12 = physics_raycast(var_0A,var_0B,var_0C,[param_00],1,"physicsquery_closest",1);
 			if(isdefined(var_12) && var_12.size > 0) {
 				if(var_04) {
 					return param_02;
@@ -401,7 +401,7 @@ spidergrenade_getplacementinfo(param_00,param_01,param_02,param_03) {
 				var_0A = var_0B;
 				var_0B = var_0A + var_11;
 				var_0C = spidergrenade_getfinalplacementcontents();
-				var_12 = function_0287(var_0A,var_0B,var_0C,[param_00],1,"physicsquery_closest",1);
+				var_12 = physics_raycast(var_0A,var_0B,var_0C,[param_00],1,"physicsquery_closest",1);
 				if(isdefined(var_12) && var_12.size > 0) {
 					var_13 = var_12[0]["position"];
 					if(vectordot(var_13 - var_06,(0,0,1)) > 32) {
@@ -426,7 +426,7 @@ spidergrenade_getplacementinfo(param_00,param_01,param_02,param_03) {
 	{
 		var_0D = var_08;
 		var_10 = var_0D + (0,0,10);
-		var_12 = function_0287(var_0D,var_10,var_11,[param_03],1,"physicsquery_closest",1);
+		var_12 = physics_raycast(var_0D,var_10,var_11,[param_03],1,"physicsquery_closest",1);
 		if(isdefined(var_12) && var_12.size > 0) {
 			return param_02;
 		}
@@ -436,7 +436,7 @@ spidergrenade_getplacementinfo(param_00,param_01,param_02,param_03) {
 			var_11 = var_10 * (1,1,0);
 			var_0A = var_0B;
 			var_0B = var_0A + var_11;
-			var_12 = function_0287(var_0A,var_0B,var_0C,[param_00],1,"physicsquery_closest",1);
+			var_12 = physics_raycast(var_0A,var_0B,var_0C,[param_00],1,"physicsquery_closest",1);
 			if(isdefined(var_12) && var_12.size > 0) {
 				return param_02;
 			}
@@ -447,7 +447,7 @@ spidergrenade_getplacementinfo(param_00,param_01,param_02,param_03) {
 				var_0A = var_0B;
 				var_0B = var_0A + var_11;
 				var_0C = spidergrenade_getfinalplacementcontents();
-				var_12 = function_0287(var_0A,var_0B,var_0C,[param_00],1,"physicsquery_closest",1);
+				var_12 = physics_raycast(var_0A,var_0B,var_0C,[param_00],1,"physicsquery_closest",1);
 				if(isdefined(var_12) && var_12.size > 0) {
 					var_13 = var_12[0]["position"];
 					if(vectordot(var_13 - var_06,(0,0,1)) > 32) {

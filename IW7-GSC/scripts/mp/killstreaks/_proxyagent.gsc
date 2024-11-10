@@ -1,13 +1,13 @@
-/**********************************************************
+/**************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\killstreaks\_proxyagent.gsc
-**********************************************************/
+ * Script: scripts\mp\killstreaks\_proxyagent.gsc
+**************************************************/
 
 func_45D0(param_00,param_01,param_02,param_03,param_04,param_05) {
 	self.var_DAD6 = undefined;
 	if(param_03 < 3) {
-		scripts\mp\_hud_message::showerrormessage("KILLSTREAKS_SCORESTREAK_ENDING");
+		scripts\mp\hud_message::showerrormessage("KILLSTREAKS_SCORESTREAK_ENDING");
 		return 0;
 	}
 
@@ -22,7 +22,7 @@ func_45D0(param_00,param_01,param_02,param_03,param_04,param_05) {
 		thread watchplayerkillstreakearlyexit(param_02);
 	}
 
-	if(isalive(param_00) && !scripts\mp\_utility::istrue(param_00.var_5F6F)) {
+	if(isalive(param_00) && !scripts\mp\utility::istrue(param_00.var_5F6F)) {
 		startcontrol(param_00,param_01.streakname,param_02,param_05);
 	}
 	else
@@ -41,10 +41,10 @@ func_13B01(param_00,param_01) {
 		self waittill("player_killstreak_death",var_02,var_03,var_04,var_05,var_06,var_07);
 		if(var_03 != self && isplayer(var_03)) {
 			var_03 notify("destroyed_killstreak",var_07);
-			var_03 scripts\mp\_utility::giveunifiedpoints("destroyed_" + param_01);
-			thread scripts\mp\_utility::teamplayercardsplash("callout_destroyed_" + param_01,var_03);
-			thread scripts\mp\_missions::killstreakkilled(param_01,self,self,undefined,var_03,var_04,var_06,var_07,"destroyed_" + param_01);
-			thread scripts\mp\_utility::leaderdialogonplayer(param_01 + "_destroyed",undefined,undefined,self.origin);
+			var_03 scripts\mp\utility::giveunifiedpoints("destroyed_" + param_01);
+			thread scripts\mp\utility::teamplayercardsplash("callout_destroyed_" + param_01,var_03);
+			thread scripts\mp\missions::killstreakkilled(param_01,self,self,undefined,var_03,var_04,var_06,var_07,"destroyed_" + param_01);
+			thread scripts\mp\utility::leaderdialogonplayer(param_01 + "_destroyed",undefined,undefined,self.origin);
 		}
 
 		self notify(param_00,1);
@@ -134,7 +134,7 @@ getplayerlookattarget(param_00) {
 
 stopcontrol() {
 	if(isdefined(self)) {
-		if(scripts\mp\_utility::iscontrollingproxyagent()) {
+		if(scripts\mp\utility::iscontrollingproxyagent()) {
 			self restorecontrolagent();
 			self visionsetnakedforplayer("",0);
 		}
@@ -146,7 +146,7 @@ stopcontrol() {
 }
 
 cleararchetype(param_00) {
-	scripts/mp/archetypes/archcommon::removearchetype(param_00.loadoutarchetype);
+	scripts\mp\archetypes\archcommon::removearchetype(param_00.loadoutarchetype);
 	scripts\mp\perks\_perks::_clearperks();
 }
 
@@ -154,31 +154,31 @@ func_DDA3(param_00) {
 	var_01 = undefined;
 	switch(param_00.loadoutarchetype) {
 		case "archetype_assault":
-			var_01 = ::scripts/mp/archetypes/archassault::applyarchetype;
+			var_01 = ::scripts\mp\archetypes\archassault::applyarchetype;
 			break;
 
 		case "archetype_heavy":
-			var_01 = ::scripts/mp/archetypes/archheavy::applyarchetype;
+			var_01 = ::scripts\mp\archetypes\archheavy::applyarchetype;
 			break;
 
 		case "archetype_scout":
-			var_01 = ::scripts/mp/archetypes/archscout::applyarchetype;
+			var_01 = ::scripts\mp\archetypes\archscout::applyarchetype;
 			break;
 
 		case "archetype_assassin":
-			var_01 = ::scripts/mp/archetypes/archassassin::applyarchetype;
+			var_01 = ::scripts\mp\archetypes\archassassin::applyarchetype;
 			break;
 
 		case "archetype_engineer":
-			var_01 = ::scripts/mp/archetypes/archengineer::applyarchetype;
+			var_01 = ::scripts\mp\archetypes\archengineer::applyarchetype;
 			break;
 
 		case "archetype_sniper":
-			var_01 = ::scripts/mp/archetypes/archsniper::applyarchetype;
+			var_01 = ::scripts\mp\archetypes\archsniper::applyarchetype;
 			break;
 	}
 
-	scripts\mp\_class::loadout_updateplayerperks(param_00);
+	scripts\mp\class::loadout_updateplayerperks(param_00);
 	if(isdefined(var_01)) {
 		self [[var_01]]();
 	}

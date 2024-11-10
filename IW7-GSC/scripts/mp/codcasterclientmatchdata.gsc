@@ -1,8 +1,8 @@
-/***********************************************************
+/***************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\codcasterclientmatchdata.gsc
-***********************************************************/
+ * Script: scripts\mp\codcasterclientmatchdata.gsc
+***************************************************/
 
 shouldlogcodcasterclientmatchdata() {
 	return getdvarint("com_codcasterEnabled",0) == 1 && getdvarint("systemlink");
@@ -44,7 +44,7 @@ checkcodcasterplayerdataexists(param_00) {
 }
 
 init() {
-	function_0310("map",level.script);
+	setcodcasterclientmatchdata("map",level.script);
 	var_00 = spawnstruct();
 	var_00.playerfields = [["damageDone",0],["longestKillstreak",0],["shutdowns",0],["gametypePoints",0]];
 	var_00.players = [];
@@ -53,10 +53,10 @@ init() {
 
 setddlfieldsforplayer(param_00) {
 	foreach(var_02 in level.codcastermatchdata.playerfields) {
-		function_0310("players",param_00.codcastermatchdataid,var_02[0],level.codcastermatchdata.players[param_00.clientid][var_02[0]]);
+		setcodcasterclientmatchdata("players",param_00.codcastermatchdataid,var_02[0],level.codcastermatchdata.players[param_00.clientid][var_02[0]]);
 	}
 
-	function_0310("players",param_00.codcastermatchdataid,"username",param_00.name);
+	setcodcasterclientmatchdata("players",param_00.codcastermatchdataid,"username",param_00.name);
 }
 
 sendcodcastermatchdata() {
@@ -68,7 +68,7 @@ sendcodcastermatchdata() {
 		var_00++;
 	}
 
-	function_0312();
+	sendcodcasterclientmatchdata();
 }
 
 setcodcasterplayervalue(param_00,param_01,param_02) {

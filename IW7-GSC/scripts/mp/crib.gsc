@@ -1,8 +1,8 @@
-/***************************************
+/*******************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\crib.gsc
-***************************************/
+ * Script: scripts\mp\crib.gsc
+*******************************/
 
 init() {
 	precacheshellshock("frag_grenade_mp");

@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\2578.gsc
-****************************/
+ * Script: 2578.gsc
+************************/
 
 func_C565(param_00) {
 	if(isdefined(self.var_C9B4)) {

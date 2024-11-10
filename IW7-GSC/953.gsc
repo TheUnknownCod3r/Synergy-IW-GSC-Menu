@@ -1,8 +1,8 @@
-/***************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\953.gsc
-***************************/
+ * Script: 953.gsc
+************************/
 
 main() {
 	self setmodel("robot_c6_red_scriptable");
@@ -11,7 +11,7 @@ main() {
 	self.voice = "c6";
 	self give_explosive_touch_on_revived("c6servo");
 	if(issentient(self)) {
-		self sethitlocdamagetable("locdmgtable/c6_lochit_dmgtable");
+		self sethitlocdamagetable("locdmgtable\c6_lochit_dmgtable");
 	}
 
 	if(issentient(self)) {

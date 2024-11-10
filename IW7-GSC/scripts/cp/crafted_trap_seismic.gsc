@@ -1,8 +1,8 @@
-/*******************************************************
+/***********************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\crafted_trap_seismic.gsc
-*******************************************************/
+ * Script: scripts\cp\crafted_trap_seismic.gsc
+***********************************************/
 
 init() {
 	level.seismic_trap_settings = [];

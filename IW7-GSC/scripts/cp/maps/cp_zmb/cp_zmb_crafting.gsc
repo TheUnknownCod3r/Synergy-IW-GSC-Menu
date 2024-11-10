@@ -1,8 +1,8 @@
-/**************************************************************
+/******************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\maps\cp_zmb\cp_zmb_crafting.gsc
-**************************************************************/
+ * Script: scripts\cp\maps\cp_zmb\cp_zmb_crafting.gsc
+******************************************************/
 
 init_crafting() {
 	level.max_crafting_drops = 1;
@@ -136,7 +136,7 @@ use_crafting_station(param_00,param_01) {
 		param_00.ingredient_list = scripts\engine\utility::array_add_safe(param_00.ingredient_list,param_01.current_crafting_struct.crafting_model);
 		param_01.last_interaction_point = undefined;
 		param_01.current_crafting_struct = undefined;
-		param_00.var_269F--;
+		param_00.available_ingredient_slots--;
 		param_01 scripts\cp\cp_merits::processmerit("mt_used_crafting");
 		if(param_00.available_ingredient_slots > 0) {
 			return;
@@ -240,7 +240,7 @@ zmb_crafting_item_debug_drop(param_00,param_01) {
 }
 
 spawn_crafting_item(param_00,param_01) {
-	level.var_C1E2++;
+	level.num_crafting_drops++;
 	level.last_crafting_item_drop_time = gettime();
 	level.next_crafting_item_drop_time = level.last_crafting_item_drop_time + 30000 + randomintrange(level.crafting_item_min_drop_time,level.crafting_item_max_drop_time);
 	var_02 = spawn("script_model",param_00 + (0,0,45));
@@ -337,7 +337,7 @@ crafting_item_pickup(param_00,param_01) {
 	}
 
 	param_01 playlocalsound("zmb_coin_pickup");
-	level.var_C1E2--;
+	level.num_crafting_drops--;
 	param_01.current_crafting_struct = param_00;
 	param_01 thread scripts\cp\cp_vo::try_to_play_vo("pillage_craft","zmb_comment_vo","low",10,0,1,0,40);
 	param_01 create_player_crafting_item_icon(param_00);
@@ -387,7 +387,7 @@ crafting_item_timeout(param_00) {
 
 	playsoundatpos(self.origin,"zmb_coin_disappear");
 	playfx(level._effect["souvenir_pickup"],self.origin);
-	level.var_C1E2--;
+	level.num_crafting_drops--;
 	if(level.num_crafting_drops < 0) {
 		level.num_crafting_drops = 0;
 	}
@@ -544,7 +544,7 @@ table_look_up(param_00,param_01,param_02) {
 }
 
 get_icon_index_based_on_model(param_00) {
-	return tablelookup("scripts/cp/maps/cp_zmb/cp_zmb_crafting.csv",1,param_00,0);
+	return tablelookup("scripts\cp\maps\cp_zmb\cp_zmb_crafting.csv",1,param_00,0);
 }
 
 souvenir_impact_sounds(param_00,param_01,param_02,param_03,param_04,param_05,param_06,param_07,param_08) {

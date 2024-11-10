@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\3481.gsc
+ * Script: 3481.gsc
 ***************************************/
 
 func_20C3() {

@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3879.gsc
-****************************/
+ * Script: 3879.gsc
+************************/
 
 func_79F5(param_00) {
 	if(!isdefined(level.var_10E6D.group.groups[param_00])) {
@@ -295,7 +295,7 @@ func_F4C8(param_00,param_01,param_02) {
 		case "seek":
 		case "run":
 			self.var_527B = "patrol";
-			scripts/asm/asm_bb::func_2980("patrol",param_00);
+			scripts\asm\asm_bb::func_2980("patrol",param_00);
 			self.var_10E6D.var_C9A8 = param_00;
 			break;
 
@@ -549,11 +549,11 @@ func_92CF(param_00,param_01,param_02,param_03,param_04,param_05,param_06) {
 
 	param_00.var_10E6D.var_92CC = 1;
 	if(!isdefined(param_05)) {
-		thread scripts/sp/anim::func_1EC9(param_00,"gravity",param_01,param_04);
+		thread scripts\sp\anim::func_1EC9(param_00,"gravity",param_01,param_04);
 	}
 	else
 	{
-		thread scripts/sp/anim::func_1ECC(param_00,param_01,undefined,param_04);
+		thread scripts\sp\anim::func_1ECC(param_00,param_01,undefined,param_04);
 	}
 
 	param_00.target_alloc = 0;
@@ -619,11 +619,11 @@ func_CCD3(param_00) {
 	var_02 notify("stop_loop");
 	if(param_00 != "doFlashBanged") {
 		if(isdefined(var_03)) {
-			var_02 scripts/sp/anim::func_1EC7(self,var_04,var_03);
+			var_02 scripts\sp\anim::func_1EC7(self,var_04,var_03);
 		}
 		else
 		{
-			var_02 scripts/sp/anim::func_1EC8(self,"gravity",var_04,var_03);
+			var_02 scripts\sp\anim::func_1EC8(self,"gravity",var_04,var_03);
 		}
 	}
 
@@ -641,11 +641,11 @@ func_CCD4(param_00,param_01,param_02) {
 
 	self.var_10E6D.var_4C70.target_getindexoftarget notify("stop_loop");
 	if(!isdefined(param_01)) {
-		self.var_10E6D.var_4C70.target_getindexoftarget scripts/sp/anim::func_1EC7(self,var_04);
+		self.var_10E6D.var_4C70.target_getindexoftarget scripts\sp\anim::func_1EC7(self,var_04);
 	}
 	else
 	{
-		self.var_10E6D.var_4C70.target_getindexoftarget scripts/sp/anim::func_1EC8(self,"gravity",var_04,param_02);
+		self.var_10E6D.var_4C70.target_getindexoftarget scripts\sp\anim::func_1EC8(self,"gravity",var_04,param_02);
 	}
 
 	self.var_10E6D.var_92CC = undefined;
@@ -1283,13 +1283,13 @@ func_CD58(param_00,param_01) {
 					self.var_10E6D.var_C994 = 1;
 				}
 
-				var_03 scripts/sp/anim::func_1ECE(self,param_01);
+				var_03 scripts\sp\anim::func_1ECE(self,param_01);
 			}
 		}
 	}
 
 	if(var_06 == "goal" && var_0B) {
-		var_03 scripts/sp/anim::func_1F35(self,param_01);
+		var_03 scripts\sp\anim::func_1F35(self,param_01);
 		var_0C = getclosestpointonnavmesh(self.origin,self);
 		if(distance2dsquared(self.origin,var_0C) > 0.0001) {
 			self _meth_80F1(var_0C,self.angles);

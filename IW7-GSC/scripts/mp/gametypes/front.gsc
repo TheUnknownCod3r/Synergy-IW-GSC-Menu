@@ -1,30 +1,30 @@
-/**************************************************
+/******************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\gametypes\front.gsc
-**************************************************/
+ * Script: scripts\mp\gametypes\front.gsc
+******************************************/
 
 main() {
 	if(getdvar("mapname") == "mp_background") {
 		return;
 	}
 
-	scripts\mp\_globallogic::init();
-	scripts\mp\_globallogic::setupcallbacks();
-	if(function_011C()) {
+	scripts\mp\globallogic::init();
+	scripts\mp\globallogic::setupcallbacks();
+	if(isusingmatchrulesdata()) {
 		level.initializematchrules = ::initializematchrules;
 		[[level.initializematchrules]]();
-		level thread scripts\mp\_utility::reinitializematchrulesonmigration();
+		level thread scripts\mp\utility::reinitializematchrulesonmigration();
 	}
 	else
 	{
-		scripts\mp\_utility::registerroundswitchdvar(level.gametype,0,0,9);
-		scripts\mp\_utility::registertimelimitdvar(level.gametype,10);
-		scripts\mp\_utility::registerscorelimitdvar(level.gametype,100);
-		scripts\mp\_utility::registerroundlimitdvar(level.gametype,2);
-		scripts\mp\_utility::registerwinlimitdvar(level.gametype,0);
-		scripts\mp\_utility::registernumlivesdvar(level.gametype,0);
-		scripts\mp\_utility::registerhalftimedvar(level.gametype,0);
+		scripts\mp\utility::registerroundswitchdvar(level.gametype,0,0,9);
+		scripts\mp\utility::registertimelimitdvar(level.gametype,10);
+		scripts\mp\utility::registerscorelimitdvar(level.gametype,100);
+		scripts\mp\utility::registerroundlimitdvar(level.gametype,2);
+		scripts\mp\utility::registerwinlimitdvar(level.gametype,0);
+		scripts\mp\utility::registernumlivesdvar(level.gametype,0);
+		scripts\mp\utility::registerhalftimedvar(level.gametype,0);
 		level.matchrules_damagemultiplier = 0;
 		level.matchrules_vampirism = 0;
 	}
@@ -36,7 +36,7 @@ main() {
 	level.onnormaldeath = ::onnormaldeath;
 	level.onspawnplayer = ::onspawnplayer;
 	if(level.matchrules_damagemultiplier || level.matchrules_vampirism) {
-		level.modifyplayerdamage = ::scripts\mp\_damage::gamemodemodifyplayerdamage;
+		level.modifyplayerdamage = ::scripts\mp\damage::gamemodemodifyplayerdamage;
 	}
 
 	game["dialog"]["gametype"] = "frontline";
@@ -58,7 +58,7 @@ main() {
 }
 
 initializematchrules() {
-	scripts\mp\_utility::setcommonrulesfrommatchdata();
+	scripts\mp\utility::setcommonrulesfrommatchdata();
 	setdynamicdvar("scr_front_enemyBaseKillReveal",getmatchrulesdata("frontData","enemyBaseKillReveal"));
 	setdynamicdvar("scr_front_friendlyBaseScore",getmatchrulesdata("frontData","friendlyBaseScore"));
 	setdynamicdvar("scr_front_midfieldScore",getmatchrulesdata("frontData","midfieldScore"));
@@ -79,25 +79,25 @@ onstartgametype() {
 		game["defenders"] = var_00;
 	}
 
-	scripts\mp\_utility::setobjectivetext("allies",&"OBJECTIVES_FRONT");
-	scripts\mp\_utility::setobjectivetext("axis",&"OBJECTIVES_FRONT");
+	scripts\mp\utility::setobjectivetext("allies",&"OBJECTIVES_FRONT");
+	scripts\mp\utility::setobjectivetext("axis",&"OBJECTIVES_FRONT");
 	if(level.splitscreen) {
-		scripts\mp\_utility::setobjectivescoretext("allies",&"OBJECTIVES_FRONT");
-		scripts\mp\_utility::setobjectivescoretext("axis",&"OBJECTIVES_FRONT");
+		scripts\mp\utility::setobjectivescoretext("allies",&"OBJECTIVES_FRONT");
+		scripts\mp\utility::setobjectivescoretext("axis",&"OBJECTIVES_FRONT");
 	}
 	else
 	{
-		scripts\mp\_utility::setobjectivescoretext("allies",&"OBJECTIVES_FRONT_SCORE");
-		scripts\mp\_utility::setobjectivescoretext("axis",&"OBJECTIVES_FRONT_SCORE");
+		scripts\mp\utility::setobjectivescoretext("allies",&"OBJECTIVES_FRONT_SCORE");
+		scripts\mp\utility::setobjectivescoretext("axis",&"OBJECTIVES_FRONT_SCORE");
 	}
 
-	scripts\mp\_utility::setobjectivehinttext("allies",&"OBJECTIVES_FRONT_HINT");
-	scripts\mp\_utility::setobjectivehinttext("axis",&"OBJECTIVES_FRONT_HINT");
+	scripts\mp\utility::setobjectivehinttext("allies",&"OBJECTIVES_FRONT_HINT");
+	scripts\mp\utility::setobjectivehinttext("axis",&"OBJECTIVES_FRONT_HINT");
 	level.iconkill3d = "waypoint_capture_kill";
 	level.iconkill2d = "waypoint_capture_kill";
 	initspawns();
 	var_02[0] = level.gametype;
-	scripts\mp\_gameobjects::main(var_02);
+	scripts\mp\gameobjects::main(var_02);
 	base_setupvfx();
 	thread setupbases();
 	thread setupbaseareabrushes();
@@ -106,20 +106,20 @@ onstartgametype() {
 
 updategametypedvars() {
 	scripts\mp\gametypes\common::updategametypedvars();
-	level.var_654C = scripts\mp\_utility::dvarfloatvalue("enemyBaseKillReveal",5,0,60);
-	level.friendlybasescore = scripts\mp\_utility::dvarfloatvalue("friendlyBaseScore",1,0,25);
-	level.midfieldscore = scripts\mp\_utility::dvarfloatvalue("midfieldScore",2,0,25);
-	level.enemybasescore = scripts\mp\_utility::dvarfloatvalue("enemyBaseScore",1,0,25);
+	level.var_654C = scripts\mp\utility::dvarfloatvalue("enemyBaseKillReveal",5,0,60);
+	level.friendlybasescore = scripts\mp\utility::dvarfloatvalue("friendlyBaseScore",1,0,25);
+	level.midfieldscore = scripts\mp\utility::dvarfloatvalue("midfieldScore",2,0,25);
+	level.enemybasescore = scripts\mp\utility::dvarfloatvalue("enemyBaseScore",1,0,25);
 }
 
 initspawns() {
 	level.spawnmins = (0,0,0);
 	level.spawnmaxs = (0,0,0);
-	scripts\mp\_spawnlogic::setactivespawnlogic("TDM");
-	scripts\mp\_spawnlogic::addspawnpoints("allies","mp_front_spawn_allies");
-	scripts\mp\_spawnlogic::addspawnpoints("axis","mp_front_spawn_axis");
-	level.mapcenter = scripts\mp\_spawnlogic::findboxcenter(level.spawnmins,level.spawnmaxs);
-	function_01B4(level.mapcenter);
+	scripts\mp\spawnlogic::setactivespawnlogic("TDM");
+	scripts\mp\spawnlogic::addspawnpoints("allies","mp_front_spawn_allies");
+	scripts\mp\spawnlogic::addspawnpoints("axis","mp_front_spawn_axis");
+	level.mapcenter = scripts\mp\spawnlogic::findboxcenter(level.spawnmins,level.spawnmaxs);
+	setmapcenter(level.mapcenter);
 }
 
 onspawnplayer() {
@@ -130,7 +130,7 @@ onspawnplayer() {
 		self.infriendlybase = 0;
 		self.outlinetime = 0;
 		if(isdefined(self.outlineid)) {
-			scripts\mp\_utility::outlinedisable(self.outlineid,self);
+			scripts\mp\utility::outlinedisable(self.outlineid,self);
 		}
 
 		self.useoutline = 0;
@@ -146,18 +146,18 @@ onspawnplayer() {
 getspawnpoint() {
 	var_00 = self.pers["team"];
 	if(game["switchedsides"]) {
-		var_00 = scripts\mp\_utility::getotherteam(var_00);
+		var_00 = scripts\mp\utility::getotherteam(var_00);
 	}
 
-	if(scripts\mp\_spawnlogic::shoulduseteamstartspawn()) {
-		var_01 = scripts\mp\_spawnlogic::getteamspawnpoints(var_00);
-		var_02 = scripts\mp\_spawnscoring::getspawnpoint(var_01);
+	if(scripts\mp\spawnlogic::shoulduseteamstartspawn()) {
+		var_01 = scripts\mp\spawnlogic::getteamspawnpoints(var_00);
+		var_02 = scripts\mp\spawnscoring::getspawnpoint(var_01);
 	}
 	else
 	{
-		var_01 = scripts\mp\_spawnlogic::getteamspawnpoints(var_02);
-		var_03 = scripts\mp\_spawnlogic::getteamfallbackspawnpoints(var_01);
-		var_02 = scripts\mp\_spawnscoring::getspawnpoint(var_01,var_03);
+		var_01 = scripts\mp\spawnlogic::getteamspawnpoints(var_02);
+		var_03 = scripts\mp\spawnlogic::getteamfallbackspawnpoints(var_01);
+		var_02 = scripts\mp\spawnscoring::getspawnpoint(var_01,var_03);
 	}
 
 	return var_02;
@@ -167,16 +167,16 @@ onnormaldeath(param_00,param_01,param_02,param_03,param_04) {
 	scripts\mp\gametypes\common::onnormaldeath(param_00,param_01,param_02,param_03,param_04);
 	var_05 = 0;
 	if(param_00.infriendlybase || param_01.inenemybase) {
-		param_01 thread scripts\mp\_utility::giveunifiedpoints("enemy_base_kill",param_04);
+		param_01 thread scripts\mp\utility::giveunifiedpoints("enemy_base_kill",param_04);
 		var_05 = level.enemybasescore;
 	}
 	else if(param_01.infriendlybase || param_00.inenemybase) {
-		param_01 thread scripts\mp\_utility::giveunifiedpoints("friendly_base_kill",param_04);
+		param_01 thread scripts\mp\utility::giveunifiedpoints("friendly_base_kill",param_04);
 		var_05 = level.friendlybasescore;
 	}
 	else
 	{
-		param_01 thread scripts\mp\_utility::giveunifiedpoints("midfield_kill",param_04);
+		param_01 thread scripts\mp\utility::giveunifiedpoints("midfield_kill",param_04);
 		var_05 = level.midfieldscore;
 	}
 
@@ -187,8 +187,8 @@ onnormaldeath(param_00,param_01,param_02,param_03,param_04) {
 	}
 
 	if(var_05 > 0) {
-		scripts\mp\_gamescore::giveteamscoreforobjective(param_01.pers["team"],var_05,0);
-		param_01 thread scripts\mp\_rank::scoreeventpopup("teamscore_notify_" + var_05);
+		scripts\mp\gamescore::giveteamscoreforobjective(param_01.pers["team"],var_05,0);
+		param_01 thread scripts\mp\rank::scoreeventpopup("teamscore_notify_" + var_05);
 	}
 }
 
@@ -198,18 +198,18 @@ func_654C() {
 	self notify("EnemyBaseKillReveal");
 	self endon("EnemyBaseKillReveal");
 	if(isdefined(self.var_28A5)) {
-		scripts\mp\_utility::outlinedisable(self.var_28A5,self);
+		scripts\mp\utility::outlinedisable(self.var_28A5,self);
 	}
 
-	self.var_28A5 = scripts\mp\_utility::outlineenableforteam(self,"orange",scripts\mp\_utility::getotherteam(self.team),0,0,"perk");
+	self.var_28A5 = scripts\mp\utility::outlineenableforteam(self,"orange",scripts\mp\utility::getotherteam(self.team),0,0,"perk");
 	if(!isbot(self)) {
-		scripts\mp\_utility::_hudoutlineviewmodelenable(5,0,0);
+		scripts\mp\utility::_hudoutlineviewmodelenable(5,0,0);
 	}
 
 	self sethudtutorialmessage(&"MP_FRONT_REVEALED");
 	wait(level.var_654C);
-	scripts\mp\_utility::outlinedisable(self.var_28A5,self);
-	scripts\mp\_utility::_hudoutlineviewmodeldisable();
+	scripts\mp\utility::outlinedisable(self.var_28A5,self);
+	scripts\mp\utility::_hudoutlineviewmodeldisable();
 	self clearhudtutorialmessage(0);
 }
 
@@ -353,8 +353,8 @@ friendlybasetriggerwatcher(param_00) {
 			}
 		}
 
-		if(!self.infriendlybase || scripts\mp\_utility::isinarbitraryup()) {
-			if(scripts\mp\_utility::istrue(self.spawnprotection)) {
+		if(!self.infriendlybase || scripts\mp\utility::isinarbitraryup()) {
+			if(scripts\mp\utility::istrue(self.spawnprotection)) {
 				scripts\mp\gametypes\common::removespawnprotection();
 			}
 
@@ -383,13 +383,13 @@ func_654F() {
 func_654E(param_00) {
 	self endon("death");
 	level endon("game_ended");
-	if(scripts\mp\_utility::istrue(self.useoutline)) {
+	if(scripts\mp\utility::istrue(self.useoutline)) {
 		return;
 	}
 
 	for(;;) {
 		if(isdefined(self) && self istouching(param_00)) {
-			if(!scripts\mp\_utility::istrue(self.useoutline)) {
+			if(!scripts\mp\utility::istrue(self.useoutline)) {
 				thread enableenemybaseoutline();
 			}
 		}
@@ -411,20 +411,20 @@ func_654E(param_00) {
 enableenemybaseoutline() {
 	self.useoutline = 1;
 	self.outlinetime = gettime();
-	self.outlineid = scripts\mp\_utility::outlineenableforteam(self,"orange",scripts\mp\_utility::getotherteam(self.team),0,1,"perk");
+	self.outlineid = scripts\mp\utility::outlineenableforteam(self,"orange",scripts\mp\utility::getotherteam(self.team),0,1,"perk");
 	if(!isbot(self)) {
 		if(isplayer(self)) {
-			scripts\mp\_utility::_hudoutlineviewmodelenable(5,0,0);
+			scripts\mp\utility::_hudoutlineviewmodelenable(5,0,0);
 		}
 	}
 }
 
 disableenemybaseoutline() {
 	self.useoutline = 0;
-	scripts\mp\_utility::outlinedisable(self.outlineid,self);
+	scripts\mp\utility::outlinedisable(self.outlineid,self);
 	self.outlineid = undefined;
 	if(!isbot(self) && isplayer(self)) {
-		scripts\mp\_utility::_hudoutlineviewmodeldisable();
+		scripts\mp\utility::_hudoutlineviewmodeldisable();
 	}
 }
 
@@ -454,7 +454,7 @@ handleoutlinesforstreaks(param_00) {
 
 	if(param_00 istouching(self)) {
 		if(!isdefined(param_00.outlineid)) {
-			param_00.outlineid = scripts\mp\_utility::outlineenableforteam(param_00,"orange",self.team,0,0,"lowest");
+			param_00.outlineid = scripts\mp\utility::outlineenableforteam(param_00,"orange",self.team,0,0,"lowest");
 			return;
 		}
 
@@ -462,7 +462,7 @@ handleoutlinesforstreaks(param_00) {
 	}
 
 	if(isdefined(param_00.outlineid)) {
-		scripts\mp\_utility::outlinedisable(param_00.outlineid,param_00);
+		scripts\mp\utility::outlinedisable(param_00.outlineid,param_00);
 		param_00.outlineid = undefined;
 		return;
 	}
@@ -543,8 +543,8 @@ spawnfxarray() {
 }
 
 base_setupvfx() {
-	level.basefxid["friendly"] = loadfx("vfx/core/mp/core/vfx_front_border_cyan.vfx");
-	level.basefxid["enemy"] = loadfx("vfx/core/mp/core/vfx_front_border_orng.vfx");
+	level.basefxid["friendly"] = loadfx("vfx\core\mp\core\vfx_front_border_cyan.vfx");
+	level.basefxid["enemy"] = loadfx("vfx\core\mp\core\vfx_front_border_orng.vfx");
 }
 
 onplayerconnect() {

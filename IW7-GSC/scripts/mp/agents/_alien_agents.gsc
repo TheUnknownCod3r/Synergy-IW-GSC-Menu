@@ -1,8 +1,8 @@
-/*******************************************************
+/***********************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\agents\_alien_agents.gsc
-*******************************************************/
+ * Script: scripts\mp\agents\_alien_agents.gsc
+***********************************************/
 
 main() {
 	if(isdefined(level.createfx_enabled) && level.createfx_enabled) {

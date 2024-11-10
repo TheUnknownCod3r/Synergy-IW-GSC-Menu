@@ -1,8 +1,8 @@
-/****************************************************
+/********************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\anim\traverse\shared.gsc
-****************************************************/
+ * Script: scripts\anim\traverse\shared.gsc
+********************************************/
 
 func_18D1(param_00,param_01) {
 	self.var_5270 = "crouch";
@@ -44,7 +44,7 @@ func_11661(param_00) {
 	self notify("endTeleportThread");
 	self endon("endTeleportThread");
 	var_01 = 5;
-	var_02 = (0,0,param_00 \ var_01);
+	var_02 = (0,0,param_00 / var_01);
 	for(var_03 = 0;var_03 < var_01;var_03++) {
 		self _meth_80F1(self.origin + var_02);
 		wait(0.05);
@@ -63,7 +63,7 @@ func_11662(param_00,param_01,param_02,param_03) {
 		wait(param_01);
 	}
 
-	var_04 = (0,0,param_00 \ param_02);
+	var_04 = (0,0,param_00 / param_02);
 	if(isdefined(param_03) && param_03 < 1) {
 		self _meth_82E3("traverseAnim",self.var_126DB,self.var_126DD,1,0.2,param_03);
 	}
@@ -110,8 +110,8 @@ func_5AC3(param_00) {
 	}
 
 	var_06 = 0;
-	if(isdefined(var_05) && isdefined(self.target_getindexoftarget) && self.var_205.type == param_00["coverType"] && distancesquared(self.var_205.origin,var_03.origin) < 625) {
-		if(scripts\common\utility::absangleclamp180(self.var_205.angles[1] - var_03.angles[1]) > 160) {
+	if(isdefined(var_05) && isdefined(self.target_getindexoftarget) && self.target_getindexoftarget.type == param_00["coverType"] && distancesquared(self.target_getindexoftarget.origin,var_03.origin) < 625) {
+		if(scripts\engine\utility::absangleclamp180(self.target_getindexoftarget.angles[1] - var_03.angles[1]) > 160) {
 			var_06 = 1;
 			var_04 = var_05;
 		}
@@ -157,17 +157,17 @@ func_5AC3(param_00) {
 		return;
 	}
 
-	self.var_1491.nodeath = 0;
-	if(var_06 && isdefined(self.target_getindexoftarget) && distancesquared(self.origin,self.var_205.origin) < 256) {
-		self.var_1491.movement = "stop";
-		self _meth_83B9(self.var_205.origin);
+	self.a.nodeath = 0;
+	if(var_06 && isdefined(self.target_getindexoftarget) && distancesquared(self.origin,self.target_getindexoftarget.origin) < 256) {
+		self.a.movement = "stop";
+		self _meth_83B9(self.target_getindexoftarget.origin);
 	}
 	else if(isdefined(param_00["traverseStopsAtEnd"])) {
-		self.var_1491.movement = "stop";
+		self.a.movement = "stop";
 	}
 	else
 	{
-		self.var_1491.movement = "run";
+		self.a.movement = "run";
 		self aiclearanim(var_04,0.2);
 	}
 
@@ -229,14 +229,14 @@ func_89F7() {
 	var_07 = 0 - var_05[2];
 	var_08 = var_07 - var_03;
 	if(var_07 < var_03) {
-		var_09 = var_07 \ var_03;
+		var_09 = var_07 / var_03;
 	}
 	else
 	{
 		var_09 = 1;
 	}
 
-	var_0A = var_06 - var_04 \ 3;
+	var_0A = var_06 - var_04 / 3;
 	var_0B = ceil(var_0A * 20);
 	thread func_11662(var_08,0,var_0B,var_09);
 	thread func_6CE5(var_01[2]);
@@ -451,7 +451,7 @@ func_F163() {
 }
 
 func_F9C6() {
-	foreach(var_01 in function_00B4("traverse","targetname")) {
+	foreach(var_01 in getnodearray("traverse","targetname")) {
 		var_01 thread func_126ED();
 	}
 }
@@ -459,7 +459,7 @@ func_F9C6() {
 func_D999(param_00) {
 	self.var_5AE2 = param_00.origin;
 	self.var_10DCE = self.angles;
-	if(function_02A6(param_00)) {
+	if(isent(param_00)) {
 		param_00 delete();
 		return;
 	}
@@ -470,7 +470,7 @@ func_D999(param_00) {
 func_D9BD(param_00) {
 	var_01 = getent(param_00.target,"targetname");
 	if(!isdefined(var_01)) {
-		var_01 = scripts\common\utility::getstruct(param_00.target,"targetname");
+		var_01 = scripts\engine\utility::getstruct(param_00.target,"targetname");
 	}
 
 	self.var_138A6 = spawnstruct();
@@ -481,13 +481,13 @@ func_D9BD(param_00) {
 	while(isdefined(var_03)) {
 		self.var_138A6.var_C050[var_04] = var_03.origin - self.origin;
 		var_04++;
-		var_07 = scripts\common\utility::getstruct(var_03.target,"targetname");
+		var_07 = scripts\engine\utility::getstruct(var_03.target,"targetname");
 		scripts\sp\_utility::func_51D4(var_03);
 		var_03 = var_07;
 		self.var_138A6.var_C050[var_04] = var_03.origin - self.origin;
 		var_04++;
 		if(isdefined(var_03.target)) {
-			var_0A = scripts\common\utility::getstruct(var_03.target,"targetname");
+			var_0A = scripts\engine\utility::getstruct(var_03.target,"targetname");
 		}
 		else
 		{
@@ -519,7 +519,7 @@ func_D9BD(param_00) {
 func_126ED() {
 	var_00 = getent(self.target,"targetname");
 	if(!isdefined(var_00)) {
-		var_00 = scripts\common\utility::getstruct(self.target,"targetname");
+		var_00 = scripts\engine\utility::getstruct(self.target,"targetname");
 	}
 
 	switch(self.opcode::OP_ScriptMethodCallPointer) {
@@ -552,7 +552,7 @@ func_126ED() {
 
 	self.var_126D4 = var_00.origin[2];
 	self.var_126D5 = var_00.origin[2] - self.origin[2];
-	if(function_02A6(var_00)) {
+	if(isent(var_00)) {
 		var_00 delete();
 		return;
 	}

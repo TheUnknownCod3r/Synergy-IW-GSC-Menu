@@ -1,11 +1,11 @@
-/*******************************************************************
+/***********************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\agents\crab_boss\crab_boss_agent.gsc
-*******************************************************************/
+ * Script: scripts\mp\agents\crab_boss\crab_boss_agent.gsc
+***********************************************************/
 
 registerscriptedagent() {
-	scripts/aitypes/bt_util::init();
+	scripts\aitypes\bt_util::init();
 	behaviortree\crab_boss::func_DEE8();
 	scripts\asm\crab_boss\mp\states::func_2371();
 	scripts\mp\agents\crab_boss\crab_boss_tunedata::setuptunedata();
@@ -29,7 +29,7 @@ func_FACE(param_00) {
 }
 
 func_AEB0() {
-	level._effect["boss_crab_beam_start_fx"] = loadfx("vfx/iw7/levels/cp_town/crog/vfx_lure_glow_charge.vfx");
+	level._effect["boss_crab_beam_start_fx"] = loadfx("vfx\iw7\levels\cp_town\crog\vfx_lure_glow_charge.vfx");
 }
 
 setupzombiegametypevars() {

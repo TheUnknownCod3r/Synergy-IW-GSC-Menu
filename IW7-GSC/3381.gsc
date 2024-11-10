@@ -1,11 +1,11 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3381.gsc
-****************************/
+ * Script: 3381.gsc
+************************/
 
 init_knifethrow_game() {
-	level._effect["shot_impact"] = loadfx("vfx/iw7/core/zombie/blood/vfx_zmb_blood_frontend.vfx");
+	level._effect["shot_impact"] = loadfx("vfx\iw7\core\zombie\blood\vfx_zmb_blood_frontend.vfx");
 	load_animation();
 	var_00 = scripts\engine\utility::getstructarray("interaction_knife_throw","script_noteworthy");
 	foreach(var_02 in var_00) {
@@ -280,7 +280,7 @@ func_6955(param_00,param_01,param_02) {
 	turn_off_knife_throw_light(param_00);
 	if(isdefined(param_01) && isalive(param_01)) {
 		param_01 takeweapon("iw7_cpknifethrow_mp");
-		param_01 scripts/cp/zombies/interaction_shooting_gallery::func_FEBF(param_01);
+		param_01 scripts\cp\zombies\interaction_shooting_gallery::func_FEBF(param_01);
 		param_01 setclientomnvar("zombie_ca_widget",0);
 		param_01.playing_game = undefined;
 		param_01 scripts\engine\utility::allow_weapon_switch(1);

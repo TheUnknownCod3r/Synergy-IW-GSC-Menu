@@ -1,21 +1,21 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\3501.gsc
+ * Script: 3501.gsc
 ***************************************/
 
 init() {
   scripts\mp\killstreaks\killstreaks::registerkillstreak("minijackal", ::func_12889, undefined, undefined, undefined, ::func_13C16, undefined, ::invalid_use_minijackal);
-  level._effect["miniJackal_eyeglow"] = loadfx("vfx/iw7/_requests/mp/vfx_venom_glint");
-  level._effect["miniJackal_explosion"] = loadfx("vfx/iw7/core/mp/killstreaks/vfx_apex_dest_exp.vfx");
-  level._effect["miniJackal_hover_thrusters"] = loadfx("vfx/iw7/core/mp/killstreaks/vfx_apex_thrusters.vfx");
-  level._effect["miniJackal_antenna_enemy"] = loadfx("vfx/iw7/core/mp/killstreaks/vfx_apex_light_ping_en.vfx");
-  level._effect["miniJackal_antenna_friendly"] = loadfx("vfx/iw7/core/mp/killstreaks/vfx_apex_light_ping_fr.vfx");
-  level._effect["miniJackal_boost_thrusters"] = loadfx("vfx/iw7/core/mp/killstreaks/vfx_apex_thrusters_boost.vfx");
-  level._effect["miniJackal_hover_thrusters_light"] = loadfx("vfx/iw7/core/mp/killstreaks/vfx_apex_thrusters_light.vfx");
-  level._effect["miniJackal_boost_thrusters_light"] = loadfx("vfx/iw7/core/mp/killstreaks/vfx_apex_thrusters_boost_light.vfx");
+  level._effect["miniJackal_eyeglow"] = loadfx("vfx\iw7\_requests\mp\vfx_venom_glint");
+  level._effect["miniJackal_explosion"] = loadfx("vfx\iw7\core\mp\killstreaks\vfx_apex_dest_exp.vfx");
+  level._effect["miniJackal_hover_thrusters"] = loadfx("vfx\iw7\core\mp\killstreaks\vfx_apex_thrusters.vfx");
+  level._effect["miniJackal_antenna_enemy"] = loadfx("vfx\iw7\core\mp\killstreaks\vfx_apex_light_ping_en.vfx");
+  level._effect["miniJackal_antenna_friendly"] = loadfx("vfx\iw7\core\mp\killstreaks\vfx_apex_light_ping_fr.vfx");
+  level._effect["miniJackal_boost_thrusters"] = loadfx("vfx\iw7\core\mp\killstreaks\vfx_apex_thrusters_boost.vfx");
+  level._effect["miniJackal_hover_thrusters_light"] = loadfx("vfx\iw7\core\mp\killstreaks\vfx_apex_thrusters_light.vfx");
+  level._effect["miniJackal_boost_thrusters_light"] = loadfx("vfx\iw7\core\mp\killstreaks\vfx_apex_thrusters_boost_light.vfx");
   level.func_B7AD = [];
   var_00 = ["passive_increased_armor", "passive_decreased_duration", "passive_auto_missiles", "passive_long_reload", "passive_twin_dragons", "passive_armor_duration"];
-  scripts/mp/killstreak_loot::func_DF07("minijackal", var_00);
+  scripts\mp\killstreak_loot::func_DF07("minijackal", var_00);
   level.minijackalsincoming = [];
 }
 
@@ -128,17 +128,17 @@ func_12889(var_00) {
   var_06 = 60;
   var_07 = "minijackal_strike_mp";
   var_08 = 1;
-  var_09 = scripts/mp/killstreak_loot::getrarityforlootitem(var_0.variantid);
+  var_09 = scripts\mp\killstreak_loot::getrarityforlootitem(var_0.variantid);
 
   if (var_09 != "") {
   var_03 = var_03 + "_" + var_09;
   var_05 = var_05 + "_" + var_09;
   }
 
-  if (scripts/mp/killstreaks/utility::func_A69F(var_00, "passive_armor_duration"))
+  if (scripts\mp\killstreaks\utility::func_A69F(var_00, "passive_armor_duration"))
   var_06 = var_06 - 5;
 
-  if (scripts/mp/killstreaks/utility::func_A69F(var_00, "passive_twin_dragons")) {
+  if (scripts\mp\killstreaks\utility::func_A69F(var_00, "passive_twin_dragons")) {
   var_07 = "minijackal_assault_mp";
   var_04 = "veh_minijackal_beam_mp";
   var_08 = 2;
@@ -173,8 +173,8 @@ func_12889(var_00) {
   var_10.func_B8B0 = 4;
   var_10.streakinfo = var_00;
   self.func_B7AA = var_10;
-  var_10 scripts/mp/killstreaks/utility::func_1843(var_0.streakname, "Killstreak_Ground", var_10.owner, 1);
-  var_10 scripts/mp/killstreaks/utility::func_FAE4("minijackal_end", "apex_mp");
+  var_10 scripts\mp\killstreaks\utility::func_1843(var_0.streakname, "Killstreak_Ground", var_10.owner, 1);
+  var_10 scripts\mp\killstreaks\utility::func_FAE4("minijackal_end", "apex_mp");
   var_10 thread func_B9A4(self);
   var_10 thread func_B9A5(self);
   var_10 thread func_B97F(self);
@@ -279,7 +279,7 @@ func_B97F(var_00) {
   var_01 = ["tag_missile1", "tag_missile2", "tag_missile3", "tag_missile4"];
   var_02 = "ui_minijackal_reload";
 
-  if (scripts/mp/killstreaks/utility::func_A69F(self.streakinfo, "passive_auto_missiles"))
+  if (scripts\mp\killstreaks\utility::func_A69F(self.streakinfo, "passive_auto_missiles"))
   var_02 = "ui_minijackal_reload_long";
 
   for (;;) {
@@ -298,12 +298,12 @@ func_B97F(var_00) {
   var_7.streakinfo = self.streakinfo;
   var_07 setentityowner(self);
 
-  if (scripts/mp/killstreaks/utility::func_A69F(self.streakinfo, "passive_auto_missiles"))
+  if (scripts\mp\killstreaks\utility::func_A69F(self.streakinfo, "passive_auto_missiles"))
   var_07 trackmissiletargetinview(var_05, self);
 
   self setscriptablepartstate("missile_pod_" + (var_04 + 1), "fire", 0);
   var_07 thread func_13A22();
-  var_07 thread scripts/mp/killstreaks/utility::watchsupertrophynotify(var_00);
+  var_07 thread scripts\mp\killstreaks\utility::watchsupertrophynotify(var_00);
   self.func_B8B0--;
   scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(0.2);
   }
@@ -313,7 +313,7 @@ func_B97F(var_00) {
 }
 
 trackmissiletargetinview(var_00, var_01) {
-  var_02 = scripts/mp/killstreaks/utility::func_7E92(var_1.owner);
+  var_02 = scripts\mp\killstreaks\utility::func_7E92(var_1.owner);
   var_03 = undefined;
   var_04 = 999999999;
   var_05 = var_00;
@@ -322,7 +322,7 @@ trackmissiletargetinview(var_00, var_01) {
   var_08 = physics_createcontents(["physicscontents_solid", "physicscontents_glass", "physicscontents_water", "physicscontents_vehicle", "physicscontents_item"]);
 
   foreach (var_10 in var_02) {
-  if (!scripts/mp/killstreaks/utility::manualmissilecantracktarget(var_10))
+  if (!scripts\mp\killstreaks\utility::manualmissilecantracktarget(var_10))
   continue;
 
   if (scripts\mp\utility\game::istrue(var_10.apextargetted))
@@ -351,7 +351,7 @@ watchtarget(var_00) {
   self endon("disconnect");
 
   for (;;) {
-  if (!scripts/mp/killstreaks/utility::manualmissilecantracktarget(self))
+  if (!scripts\mp\killstreaks\utility::manualmissilecantracktarget(self))
   break;
 
   if (!isdefined(var_00))
@@ -379,7 +379,7 @@ func_B894(var_00) {
   var_01 = 0.8;
   var_02 = "ui_minijackal_reload";
 
-  if (scripts/mp/killstreaks/utility::func_A69F(self.streakinfo, "passive_auto_missiles")) {
+  if (scripts\mp\killstreaks\utility::func_A69F(self.streakinfo, "passive_auto_missiles")) {
   var_01 = 1.05;
   var_02 = "ui_minijackal_reload_long";
   }
@@ -402,7 +402,7 @@ func_B95F(var_00) {
   var_02 = 4;
   var_03 = 5;
 
-  if (scripts/mp/killstreaks/utility::func_A69F(self.streakinfo, "passive_armor_duration")) {
+  if (scripts\mp\killstreaks\utility::func_A69F(self.streakinfo, "passive_armor_duration")) {
   var_1++;
   var_2++;
   var_3++;
@@ -424,10 +424,10 @@ func_B95F(var_00) {
   continue;
 
   if (isdefined(var_13)) {
-  var_04 = scripts/mp/killstreaks/utility::getmodifiedantikillstreakdamage(var_05, var_13, var_08, var_04, self.max_health, var_01, var_02, var_03, 1);
+  var_04 = scripts\mp\killstreaks\utility::getmodifiedantikillstreakdamage(var_05, var_13, var_08, var_04, self.max_health, var_01, var_02, var_03, 1);
 
-  if (scripts/mp/killstreaks/utility::func_A69F(self.streakinfo, "passive_armor_duration")) {
-  if (scripts/mp/killstreaks/utility::isexplosiveantikillstreakweapon(var_13))
+  if (scripts\mp\killstreaks\utility::func_A69F(self.streakinfo, "passive_armor_duration")) {
+  if (scripts\mp\killstreaks\utility::isexplosiveantikillstreakweapon(var_13))
   var_05 scripts\mp\damagefeedback::updatedamagefeedback("hitblastshield");
   }
   }
@@ -451,7 +451,7 @@ func_B95F(var_00) {
   if (self.func_EDD7 <= 0) {
   var_05 notify("destroyed_killstreak", var_13);
   var_18 = "callout_destroyed_" + self.streakname;
-  var_19 = scripts/mp/killstreak_loot::getrarityforlootitem(self.streakinfo.variantid);
+  var_19 = scripts\mp\killstreak_loot::getrarityforlootitem(self.streakinfo.variantid);
 
   if (var_19 != "")
   var_18 = var_18 + "_" + var_19;
@@ -599,7 +599,7 @@ func_B9A9(var_00) {
   level endon("game_ended");
   self endon("host_migration_lifetime_update");
   self endon("minijackal_end");
-  thread scripts/mp/killstreaks/utility::watchhostmigrationlifetime("minijackal_end", var_00, ::func_B9A9);
+  thread scripts\mp\killstreaks\utility::watchhostmigrationlifetime("minijackal_end", var_00, ::func_B9A9);
   scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(var_00);
   self.owner scripts\mp\utility\game::playkillstreakdialogonplayer("minijackal_timeout", undefined, undefined, self.owner.origin);
   self notify("minijackal_end");
@@ -627,7 +627,7 @@ func_B969(var_00) {
 
   for (;;) {
   self waittill("emp_damage", var_01, var_02, var_03, var_04, var_05);
-  scripts/mp/killstreaks/utility::dodamagetokillstreak(100, var_01, var_01, self.team, var_03, var_05, var_04);
+  scripts\mp\killstreaks\utility::dodamagetokillstreak(100, var_01, var_01, self.team, var_03, var_05, var_04);
 
   if (!scripts\mp\utility\game::istrue(self.disabled))
   thread disable_minijackal(var_02);

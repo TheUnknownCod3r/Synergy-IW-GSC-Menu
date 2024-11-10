@@ -1,8 +1,8 @@
-/**********************************************
+/**************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\bulletstorm.gsc
-**********************************************/
+ * Script: scripts\mp\bulletstorm.gsc
+**************************************/
 
 func_3258() {
 	level.bulletstormshield = [];
@@ -163,7 +163,7 @@ func_10112(param_00,param_01,param_02) {
 			continue;
 		}
 
-		if(!scripts/mp/equipment/phase_shift::isentityphaseshifted(var_04)) {
+		if(!scripts\mp\equipment\phase_shift::isentityphaseshifted(var_04)) {
 			var_04 func_12E6B(param_00.team,param_01,param_02);
 		}
 	}
@@ -377,7 +377,7 @@ getcustomizationhead(param_00,param_01,param_02,param_03,param_04,param_05) {
 			var_08[var_08.size] = "physicscontents_vehicle";
 			var_09 = physics_createcontents(var_08);
 			var_0A = [];
-			var_0B = function_0287(param_01,param_04.origin,var_09,var_0A,0,"physicsquery_any");
+			var_0B = physics_raycast(param_01,param_04.origin,var_09,var_0A,0,"physicsquery_any");
 			if(!var_0B) {
 				var_06.var_38BF = 1;
 			}

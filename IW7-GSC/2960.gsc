@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2960.gsc
+ * Script: 2960.gsc
 ***************************************/
 
 func_7AA4() {
@@ -20,7 +20,7 @@ func_7AA4() {
   var_0["trigger_multiple_compass"] = ::func_12769;
   var_0["trigger_multiple_fx_volume"] = ::func_1276E;
   var_0["trigger_multiple_kleenex"] = ::func_12770;
-  var_0["trigger_multiple_light_sunshadow"] = scripts/sp/lights::func_11203;
+  var_0["trigger_multiple_light_sunshadow"] = scripts\sp\lights::func_11203;
   var_0["trigger_multiple_jackal_boundary_autoturn"] = ::func_12759;
   var_0["trigger_multiple_jackal_boundary_warning"] = ::func_1275B;
   var_0["trigger_multiple_jackal_boundary_push"] = ::func_1275A;
@@ -29,8 +29,8 @@ func_7AA4() {
   var_0["trigger_multiple_arbitrary_up"] = ::func_12723;
   var_0["trigger_multiple_spacejump"] = ::func_12794;
 
-  if (!scripts/sp/starts::func_9C4B()) {
-  var_0["trigger_multiple_autosave"] = scripts/sp/autosave::func_12724;
+  if (!scripts\sp\starts::func_9C4B()) {
+  var_0["trigger_multiple_autosave"] = scripts\sp\autosave::func_12724;
   var_0["trigger_multiple_spawn"] = func_0B77::func_12797;
   var_0["trigger_multiple_spawn_reinforcement"] = func_0B77::func_12798;
   }
@@ -46,14 +46,14 @@ func_7AA4() {
   var_0["trigger_multiple_friendly_stop_respawn"] = ::trigger_friendly_stop_respawn;
   var_0["trigger_multiple_physics"] = ::func_1277E;
   var_0["trigger_multiple_fx_watersheeting"] = ::func_1276F;
-  var_0["trigger_multiple_fakeactor_move"] = scripts/sp/fakeactor::func_12735;
-  var_0["trigger_multiple_fakeactor_node_disable"] = scripts/sp/fakeactor::func_12736;
-  var_0["trigger_multiple_fakeactor_node_enable"] = scripts/sp/fakeactor::func_12738;
-  var_0["trigger_multiple_fakeactor_node_disablegroup"] = scripts/sp/fakeactor::func_12737;
-  var_0["trigger_multiple_fakeactor_node_enablegroup"] = scripts/sp/fakeactor::func_12739;
-  var_0["trigger_multiple_fakeactor_node_passthrough"] = scripts/sp/fakeactor::func_1273B;
-  var_0["trigger_multiple_fakeactor_node_lock"] = scripts/sp/fakeactor::func_1273A;
-  var_0["trigger_multiple_geo_mover"] = scripts/sp/geo_mover::func_12764;
+  var_0["trigger_multiple_fakeactor_move"] = scripts\sp\fakeactor::func_12735;
+  var_0["trigger_multiple_fakeactor_node_disable"] = scripts\sp\fakeactor::func_12736;
+  var_0["trigger_multiple_fakeactor_node_enable"] = scripts\sp\fakeactor::func_12738;
+  var_0["trigger_multiple_fakeactor_node_disablegroup"] = scripts\sp\fakeactor::func_12737;
+  var_0["trigger_multiple_fakeactor_node_enablegroup"] = scripts\sp\fakeactor::func_12739;
+  var_0["trigger_multiple_fakeactor_node_passthrough"] = scripts\sp\fakeactor::func_1273B;
+  var_0["trigger_multiple_fakeactor_node_lock"] = scripts\sp\fakeactor::func_1273A;
+  var_0["trigger_multiple_geo_mover"] = scripts\sp\geo_mover::func_12764;
   var_0["trigger_multiple_transient"] = ::func_12773;
   var_0["trigger_multiple_fire"] = ::func_1273C;
   var_0["trigger_radius_fire"] = ::func_1273C;
@@ -80,20 +80,20 @@ func_7AA5() {
   var_00 = [];
   var_0["friendly_mgTurret"] = func_0B77::func_73D9;
 
-  if (!scripts/sp/starts::func_9C4B()) {
+  if (!scripts\sp\starts::func_9C4B()) {
   var_0["camper_spawner"] = func_0B77::camper_trigger_think;
   var_0["flood_spawner"] = func_0B77::func_6F5D;
   var_0["trigger_spawner"] = func_0B77::func_12797;
-  var_0["trigger_autosave"] = scripts/sp/autosave::func_12724;
+  var_0["trigger_autosave"] = scripts\sp\autosave::func_12724;
   var_0["trigger_spawngroup"] = ::func_1279A;
   var_0["trigger_vehicle_spline_spawn"] = ::func_127AC;
   var_0["trigger_vehicle_spawn"] = func_0B77::func_12797;
   var_0["random_spawn"] = func_0B77::func_DC9B;
   }
 
-  var_0["autosave_now"] = scripts/sp/autosave::func_2671;
-  var_0["trigger_autosave_tactical"] = scripts/sp/autosave::func_12727;
-  var_0["trigger_autosave_stealth"] = scripts/sp/autosave::func_12726;
+  var_0["autosave_now"] = scripts\sp\autosave::func_2671;
+  var_0["trigger_autosave_tactical"] = scripts\sp\autosave::func_12727;
+  var_0["trigger_autosave_stealth"] = scripts\sp\autosave::func_12726;
   var_0["trigger_unlock"] = ::func_127A8;
   var_0["trigger_lookat"] = ::func_12760;
   var_0["trigger_looking"] = ::func_12762;
@@ -119,16 +119,16 @@ func_7AA5() {
   var_0["trigger_slide"] = ::func_12792;
   var_0["trigger_dooropen"] = ::func_12734;
   var_0["stealth_shadow"] = ::func_1279C;
-  var_0["geo_mover"] = scripts/sp/geo_mover::func_12764;
+  var_0["geo_mover"] = scripts\sp\geo_mover::func_12764;
   var_0["no_crouch_or_prone"] = ::func_12775;
   var_0["no_prone"] = ::func_12776;
   return var_00;
 }
 
 func_9726() {
-  scripts/sp/colors::init_colors();
+  scripts\sp\colors::init_colors();
   func_0B0B::init_audio();
-  scripts/sp/utility::func_228A(getentarray("trigger_multiple_softlanding", "classname"));
+  scripts\sp\utility::func_228A(getentarray("trigger_multiple_softlanding", "classname"));
   var_00 = func_7AA4();
   var_01 = func_7AA5();
 
@@ -139,13 +139,13 @@ func_9726() {
 
   var_06 = getentarray("trigger_multiple", "classname");
   var_07 = getentarray("trigger_radius", "classname");
-  var_04 = scripts/sp/utility::func_22A2(var_06, var_07);
+  var_04 = scripts\sp\utility::func_22A2(var_06, var_07);
   var_08 = getentarray("trigger_disk", "classname");
-  var_04 = scripts/sp/utility::func_22A2(var_04, var_08);
+  var_04 = scripts\sp\utility::func_22A2(var_04, var_08);
   var_09 = getentarray("trigger_once", "classname");
-  var_04 = scripts/sp/utility::func_22A2(var_04, var_09);
+  var_04 = scripts\sp\utility::func_22A2(var_04, var_09);
 
-  if (!scripts/sp/starts::func_9C4B()) {
+  if (!scripts\sp\starts::func_9C4B()) {
   for (var_10 = 0; var_10 < var_4.size; var_10++) {
   if (var_4[var_10].spawnflags & 32)
   thread func_0B77::func_12797(var_4[var_10]);
@@ -165,16 +165,16 @@ func_9726() {
   level thread func_1278E(var_15);
 
   if (isdefined(var_15.func_ED0E) || isdefined(var_15.func_ED0D))
-  level thread scripts/sp/autosave::func_268B(var_15);
+  level thread scripts\sp\autosave::func_268B(var_15);
 
   if (isdefined(var_15.func_EE17))
-  level thread scripts/sp/mgturret::func_B6BE(var_15);
+  level thread scripts\sp\mgturret::func_B6BE(var_15);
 
   if (isdefined(var_15.func_EDF7))
   level thread func_0B77::func_A617(var_15);
 
   if (isdefined(var_15.func_EDF5))
-  level thread scripts/sp/vehicle_code::func_A629(var_15);
+  level thread scripts\sp\vehicle_code::func_A629(var_15);
 
   if (isdefined(var_15.script_emptyspawner))
   level thread func_0B77::func_61BD(var_15);
@@ -257,15 +257,15 @@ func_12773(var_00) {
   var_00 waittill("trigger");
 
   if (isdefined(var_03))
-  scripts/sp/utility::func_12651(var_03);
+  scripts\sp\utility::func_12651(var_03);
 
   if (isdefined(var_02))
-  scripts/sp/utility::func_12643(var_02);
+  scripts\sp\utility::func_12643(var_02);
   }
 }
 
 func_1272F(var_00) {
-  var_01 = var_00 scripts/sp/utility::func_7D1E();
+  var_01 = var_00 scripts\sp\utility::func_7D1E();
 
   if (!isdefined(level.flag[var_01]))
   scripts\engine\utility::flag_init(var_01);
@@ -279,26 +279,26 @@ func_1272F(var_00) {
   if (!isplayer(var_02))
   continue;
 
-  var_00 scripts/sp/utility::script_delay();
+  var_00 scripts\sp\utility::script_delay();
   scripts\engine\utility::flag_set(var_01, var_02);
   }
 }
 
 func_1273D(var_00) {
-  var_01 = var_00 scripts/sp/utility::func_7D1E();
+  var_01 = var_00 scripts\sp\utility::func_7D1E();
 
   if (!isdefined(level.flag[var_01]))
   scripts\engine\utility::flag_init(var_01);
 
   for (;;) {
   var_00 waittill("trigger");
-  var_00 scripts/sp/utility::script_delay();
+  var_00 scripts\sp\utility::script_delay();
   scripts\engine\utility::flag_clear(var_01);
   }
 }
 
 func_1273E(var_00) {
-  var_01 = var_00 scripts/sp/utility::func_7D1E();
+  var_01 = var_00 scripts\sp\utility::func_7D1E();
 
   if (!isdefined(level.flag[var_01]))
   scripts\engine\utility::flag_init(var_01);
@@ -344,14 +344,14 @@ func_733E() {
 }
 
 func_1273F(var_00) {
-  var_01 = var_00 scripts/sp/utility::func_7D1E();
+  var_01 = var_00 scripts\sp\utility::func_7D1E();
 
   if (!isdefined(level.flag[var_01]))
   scripts\engine\utility::flag_init(var_01);
 
   for (;;) {
   var_00 waittill("trigger", var_02);
-  var_00 scripts/sp/utility::script_delay();
+  var_00 scripts\sp\utility::script_delay();
   scripts\engine\utility::flag_set(var_01, var_02);
 
   if (!isdefined(var_00))
@@ -381,7 +381,7 @@ trigger_friendly_respawn(var_00) {
 }
 
 func_1275E(var_00) {
-  var_01 = var_00 scripts/sp/utility::func_7D1E();
+  var_01 = var_00 scripts\sp\utility::func_7D1E();
 
   if (!isdefined(level.flag[var_01]))
   scripts\engine\utility::flag_init(var_01);
@@ -442,14 +442,14 @@ func_12723(var_00) {
 }
 
 func_12744(var_00) {
-  var_01 = var_00 scripts/sp/utility::func_7D1E();
+  var_01 = var_00 scripts\sp\utility::func_7D1E();
 
   if (!isdefined(level.flag[var_01]))
   scripts\engine\utility::flag_init(var_01);
 
   for (;;) {
   var_00 waittill("trigger", var_02);
-  var_00 scripts/sp/utility::script_delay();
+  var_00 scripts\sp\utility::script_delay();
 
   if (isalive(var_02) && isdefined(var_00) && var_02 istouching(var_00))
   scripts\engine\utility::flag_set(var_01);
@@ -519,7 +519,7 @@ func_1277E(var_00) {
 
   var_0.func_C6EA = var_2[0].origin;
   var_00 waittill("trigger");
-  var_00 scripts/sp/utility::script_delay();
+  var_00 scripts\sp\utility::script_delay();
 
   foreach (var_06 in var_02) {
   var_09 = var_6.radius;
@@ -593,7 +593,7 @@ func_1279A(var_00) {
   var_02 = scripts\engine\utility::random(level.func_10727[var_01]);
 
   foreach (var_05, var_04 in var_02)
-  var_04 scripts/sp/utility::func_10619();
+  var_04 scripts\sp\utility::func_10619();
 }
 
 func_1279E(var_00) {
@@ -623,7 +623,7 @@ func_127AC(var_00) {
   var_01 = getentarray(var_0.target, "targetname");
 
   foreach (var_03 in var_01) {
-  var_03 thread scripts/sp/vehicle_code::func_10809(70);
+  var_03 thread scripts\sp\vehicle_code::func_10809(70);
   wait 0.05;
   }
 }
@@ -685,7 +685,7 @@ func_12761(var_00, var_01) {
   var_07 = undefined;
 
   if (var_06) {
-  var_07 = var_00 scripts/sp/utility::func_7D1E();
+  var_07 = var_00 scripts\sp\utility::func_7D1E();
 
   if (!isdefined(level.flag[var_07]))
   scripts\engine\utility::flag_init(var_07);
@@ -723,7 +723,7 @@ func_12761(var_00, var_01) {
   var_14 = vectordot(var_13, var_11);
 
   if (var_14 >= var_02) {
-  scripts\engine\utility::array_thread(var_04, scripts/sp/utility::func_F225, "trigger");
+  scripts\engine\utility::array_thread(var_04, scripts\sp\utility::func_F225, "trigger");
 
   if (var_06)
   scripts\engine\utility::flag_set(var_07, var_09);
@@ -756,7 +756,7 @@ func_1272B(var_00) {
   var_05 = undefined;
 
   if (var_04) {
-  var_05 = var_00 scripts/sp/utility::func_7D1E();
+  var_05 = var_00 scripts\sp\utility::func_7D1E();
 
   if (!isdefined(level.flag[var_05]))
   scripts\engine\utility::flag_init(var_05);
@@ -791,7 +791,7 @@ func_1272B(var_00) {
   if (var_04)
   scripts\engine\utility::flag_set(var_05);
 
-  scripts\engine\utility::array_thread(var_01, scripts/sp/utility::func_F225, "trigger");
+  scripts\engine\utility::array_thread(var_01, scripts\sp\utility::func_F225, "trigger");
   wait 0.5;
   }
   }
@@ -820,7 +820,7 @@ func_127A8(var_00) {
   var_00 waittill("trigger");
   scripts\engine\utility::array_thread(var_02, scripts\engine\utility::trigger_on);
   func_135AA(var_02, var_01);
-  scripts/sp/utility::func_22A4(var_02, "relock");
+  scripts\sp\utility::func_22A4(var_02, "relock");
   }
 }
 
@@ -898,7 +898,7 @@ func_12729(var_00) {
   if (func_28D5())
   return;
 
-  var_10 = var_04 scripts/sp/utility::func_4C39(var_0.func_ED18);
+  var_10 = var_04 scripts\sp\utility::func_4C39(var_0.func_ED18);
 
   if (!var_10)
   level scripts\engine\utility::delaythread(0.25, ::func_12729, var_00);
@@ -993,7 +993,7 @@ func_5169() {
 func_127A5(var_00) {
   var_00 endon("death");
   var_00 waittill("trigger");
-  scripts/sp/utility::func_11813();
+  scripts\sp\utility::func_11813();
 }
 
 func_1274E(var_00) {
@@ -1008,7 +1008,7 @@ func_1274E(var_00) {
   return;
 
   level.func_56D9[var_01] = 1;
-  var_02 scripts/sp/utility::func_56BA(var_01);
+  var_02 scripts\sp\utility::func_56BA(var_01);
 }
 
 func_12731(var_00) {
@@ -1034,11 +1034,11 @@ func_127A6(var_00) {
 }
 
 func_12752(var_00) {
-  thread func_1278D(var_00, scripts/sp/utility::func_F416, scripts/sp/utility::func_7A31);
+  thread func_1278D(var_00, scripts\sp\utility::func_F416, scripts\sp\utility::func_7A31);
 }
 
 func_1277C(var_00) {
-  thread func_1278D(var_00, scripts/sp/utility::func_F4B2, scripts/sp/utility::func_7B61);
+  thread func_1278D(var_00, scripts\sp\utility::func_F4B2, scripts\sp\utility::func_7B61);
 }
 
 func_1278D(var_00, var_01, var_02) {
@@ -1071,11 +1071,11 @@ func_11A40(var_00, var_01) {
 
 func_12787(var_00) {
   var_00 waittill("trigger");
-  scripts/sp/utility::func_DBEF(var_0.script_noteworthy);
+  scripts\sp\utility::func_DBEF(var_0.script_noteworthy);
 }
 
 func_12741(var_00) {
-  var_01 = var_00 scripts/sp/utility::func_7D1E();
+  var_01 = var_00 scripts\sp\utility::func_7D1E();
 
   if (!isdefined(level.flag[var_01]))
   scripts\engine\utility::flag_init(var_01);
@@ -1086,7 +1086,7 @@ func_12741(var_00) {
   if (!isplayer(var_02))
   continue;
 
-  var_00 scripts/sp/utility::script_delay();
+  var_00 scripts\sp\utility::script_delay();
   scripts\engine\utility::flag_set(var_01);
   }
 }
@@ -1163,7 +1163,7 @@ func_102ED(var_00) {
   if (isdefined(self.vehicle))
   return;
 
-  if (scripts/sp/utility::func_9F59() || self isjumping() || scripts/sp/utility::func_9C11() || func_0E4F::func_9C7B())
+  if (scripts\sp\utility::func_9F59() || self isjumping() || scripts\sp\utility::func_9C11() || func_0E4F::func_9C7B())
   return;
 
   if (isdefined(self.func_D323))
@@ -1182,9 +1182,9 @@ func_102ED(var_00) {
   self endon("cancel_sliding");
 
   if (getdvarint("use_legacy_slide") > 0)
-  thread scripts/sp/utility::func_2A76();
+  thread scripts\sp\utility::func_2A76();
   else
-  thread scripts/sp/utility::func_2A75(undefined, var_01);
+  thread scripts\sp\utility::func_2A75(undefined, var_01);
 
   for (;;) {
   if (!self istouching(var_00))
@@ -1197,9 +1197,9 @@ func_102ED(var_00) {
   wait(level.func_62F7);
 
   if (getdvarint("use_legacy_slide") > 0)
-  scripts/sp/utility::func_638A();
+  scripts\sp\utility::func_638A();
   else
-  scripts/sp/utility::func_6389();
+  scripts\sp\utility::func_6389();
 }
 
 func_1276E(var_00) {
@@ -1236,7 +1236,7 @@ func_1276D(var_00) {
   self waittill("trigger");
 
   if (!var_0.func_75AD)
-  scripts\engine\utility::array_thread(var_0.fx, scripts/sp/utility::func_E2B0);
+  scripts\engine\utility::array_thread(var_0.fx, scripts\sp\utility::func_E2B0);
 
   wait 1;
   }
@@ -1275,7 +1275,7 @@ func_12769(var_00) {
   var_00 waittill("trigger");
 
   if (level.func_B7AE != var_01)
-  scripts/sp/compass::setupminimap(var_01);
+  scripts\sp\compass::setupminimap(var_01);
   }
 }
 
@@ -1319,7 +1319,7 @@ func_1275A(var_00) {
   if (!isdefined(level.func_D127) || var_01 != level.func_D127)
   continue;
 
-  if (level.player scripts/sp/utility::func_65DB("disable_jackal_map_boundary_push"))
+  if (level.player scripts\sp\utility::func_65DB("disable_jackal_map_boundary_push"))
   continue;
 
   var_00 thread [[level.func_A056.trigger_func.func_A0E2]]();
@@ -1355,12 +1355,12 @@ func_1275B(var_00) {
   if (!isdefined(level.func_D127) || var_04 != level.func_D127)
   continue;
 
-  if (level.player scripts/sp/utility::func_65DB("disable_jackal_map_boundary_warning")) {
-  while (isalive(var_04) && isdefined(var_00) && var_04 istouching(var_00) && isdefined(level.func_D127) && level.player scripts/sp/utility::func_65DB("disable_jackal_map_boundary_warning"))
+  if (level.player scripts\sp\utility::func_65DB("disable_jackal_map_boundary_warning")) {
+  while (isalive(var_04) && isdefined(var_00) && var_04 istouching(var_00) && isdefined(level.func_D127) && level.player scripts\sp\utility::func_65DB("disable_jackal_map_boundary_warning"))
   wait 0.05;
   }
 
-  if (level.player scripts/sp/utility::func_65DB("disable_jackal_map_boundary_warning"))
+  if (level.player scripts\sp\utility::func_65DB("disable_jackal_map_boundary_warning"))
   continue;
 
   if (!scripts\engine\utility::flag(var_01)) {
@@ -1441,12 +1441,12 @@ func_12759(var_00) {
   if (!isdefined(level.func_D127) || var_04 != level.func_D127 || scripts\engine\utility::flag(var_01))
   continue;
 
-  if (level.player scripts/sp/utility::func_65DB("disable_jackal_map_boundary_autoturn")) {
-  while (isalive(var_04) && isdefined(var_00) && var_04 istouching(var_00) && isdefined(level.func_D127) && level.player scripts/sp/utility::func_65DB("disable_jackal_map_boundary_autoturn"))
+  if (level.player scripts\sp\utility::func_65DB("disable_jackal_map_boundary_autoturn")) {
+  while (isalive(var_04) && isdefined(var_00) && var_04 istouching(var_00) && isdefined(level.func_D127) && level.player scripts\sp\utility::func_65DB("disable_jackal_map_boundary_autoturn"))
   wait 0.05;
   }
 
-  if (level.player scripts/sp/utility::func_65DB("disable_jackal_map_boundary_autoturn"))
+  if (level.player scripts\sp\utility::func_65DB("disable_jackal_map_boundary_autoturn"))
   continue;
 
   if (!scripts\engine\utility::flag(var_01)) {
@@ -1533,14 +1533,14 @@ exploder_load(var_00) {
   var_00 waittill("trigger");
 
   if (isdefined(var_0.script_chance) && randomfloat(1) > var_0.script_chance) {
-  if (!var_00 scripts/sp/utility::script_delay())
+  if (!var_00 scripts\sp\utility::script_delay())
   wait 4;
 
   level thread exploder_load(var_00);
   return;
   }
 
-  if (!var_00 scripts/sp/utility::script_delay() && isdefined(var_0.func_ED85))
+  if (!var_00 scripts\sp\utility::script_delay() && isdefined(var_0.func_ED85))
   wait(var_0.func_ED85);
 
   scripts\engine\utility::exploder(var_0.targetname);
@@ -1552,7 +1552,7 @@ func_12770(var_00) {
   return;
 
   var_00 waittill("trigger");
-  scripts/sp/utility::func_A6F2();
+  scripts\sp\utility::func_A6F2();
 }
 
 func_1279C(var_00) {
@@ -1562,10 +1562,10 @@ func_1279C(var_00) {
   for (;;) {
   var_00 waittill("trigger", var_02);
 
-  if (!var_02 scripts/sp/utility::func_65DF(var_01))
+  if (!var_02 scripts\sp\utility::func_65DF(var_01))
   continue;
 
-  if (var_02 scripts/sp/utility::func_65DB(var_01))
+  if (var_02 scripts\sp\utility::func_65DB(var_01))
   continue;
 
   var_02 thread func_93A4(var_00, var_01);
@@ -1574,12 +1574,12 @@ func_1279C(var_00) {
 
 func_93A4(var_00, var_01) {
   self endon("death");
-  scripts/sp/utility::func_65E1(var_01);
+  scripts\sp\utility::func_65E1(var_01);
 
   while (isdefined(var_00) && self istouching(var_00))
   wait 0.05;
 
-  scripts/sp/utility::func_65DD(var_01);
+  scripts\sp\utility::func_65DD(var_01);
 }
 
 func_1273C(var_00) {
@@ -1635,6 +1635,6 @@ func_1273C(var_00) {
   else
   var_04 playrumbleonentity("damage_heavy");
 
-  var_00 scripts/sp/utility::script_delay();
+  var_00 scripts\sp\utility::script_delay();
   }
 }

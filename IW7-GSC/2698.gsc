@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2698.gsc
+ * Script: 2698.gsc
 ***************************************/
 
 init_audio() {

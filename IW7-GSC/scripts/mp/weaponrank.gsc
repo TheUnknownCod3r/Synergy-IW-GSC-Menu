@@ -1,8 +1,8 @@
-/*********************************************
+/*************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\weaponrank.gsc
-*********************************************/
+ * Script: scripts\mp\weaponrank.gsc
+*************************************/
 
 init() {
 	loadweaponranktable();
@@ -31,16 +31,16 @@ loadweaponranktable() {
 	level.weaponranktable.rankinfo = [];
 	var_00 = 0;
 	for(;;) {
-		var_01 = int(tablelookuprownum("mp/weaponRankTable.csv",0,var_00));
+		var_01 = int(tablelookuprownum("mp\weaponRankTable.csv",0,var_00));
 		if(!isdefined(var_01) || var_01 < 0) {
 			break;
 		}
 
 		var_02 = spawnstruct();
 		level.weaponranktable.rankinfo[var_00] = var_02;
-		var_02.minxp = int(tablelookupbyrow("mp/weaponRankTable.csv",var_00,1));
-		var_02.xptonextrank = int(tablelookupbyrow("mp/weaponRankTable.csv",var_00,2));
-		var_02.maxxp = int(tablelookupbyrow("mp/weaponRankTable.csv",var_00,3));
+		var_02.minxp = int(tablelookupbyrow("mp\weaponRankTable.csv",var_00,1));
+		var_02.xptonextrank = int(tablelookupbyrow("mp\weaponRankTable.csv",var_00,2));
+		var_02.maxxp = int(tablelookupbyrow("mp\weaponRankTable.csv",var_00,3));
 		var_00++;
 	}
 
@@ -48,13 +48,13 @@ loadweaponranktable() {
 	level.weaponranktable.maxweaponranks = [];
 	var_03 = 1;
 	for(;;) {
-		var_01 = int(tablelookuprownum("mp/statstable.csv",0,var_03));
+		var_01 = int(tablelookuprownum("mp\statstable.csv",0,var_03));
 		if(!isdefined(var_01) || var_01 < 0) {
 			break;
 		}
 
-		var_04 = tablelookupbyrow("mp/statstable.csv",var_01,4);
-		var_05 = tablelookupbyrow("mp/statstable.csv",var_01,42);
+		var_04 = tablelookupbyrow("mp\statstable.csv",var_01,4);
+		var_05 = tablelookupbyrow("mp\statstable.csv",var_01,42);
 		if(!isdefined(var_04) || var_04 == "" || !isdefined(var_05) || var_05 == "") {
 		}
 		else
@@ -209,7 +209,7 @@ _meth_8394(param_00,param_01,param_02) {
 	var_10 = int(min(getweaponrankforxp(var_0D),var_0E));
 	scripts\mp\analyticslog::logevent_givempweaponxp(param_00,var_0F,var_10,param_02,param_01);
 	self setplayerdata("common","sharedProgression","weaponLevel",var_03,"mpXP",var_0C);
-	var_11 = function_02C4(param_00);
+	var_11 = getweaponvariantindex(param_00);
 	scripts\mp\matchdata::func_AFDC(var_03,"xp",param_02,var_11);
 	if(var_09 < var_10) {
 		scripts\mp\hud_message::showsplash("ranked_up_weapon_" + var_03,var_10 + 1);

@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3871.gsc
-****************************/
+ * Script: 3871.gsc
+************************/
 
 main() {
 	level.var_92DE["desk_lean"] = ::func_5281;

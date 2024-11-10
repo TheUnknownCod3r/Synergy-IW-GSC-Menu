@@ -1,8 +1,8 @@
-/*********************************************************
+/*************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\maps\cp_disco\cp_disco.gsc
-*********************************************************/
+ * Script: scripts\cp\maps\cp_disco\cp_disco.gsc
+*************************************************/
 
 main() {
 	setdvar("sm_sunSampleSizeNear",0.85);
@@ -34,7 +34,7 @@ main() {
 		level.species_funcs = [];
 	}
 
-	level.power_table = "cp/zombies/disco_powertable.csv";
+	level.power_table = "cp\zombies\disco_powertable.csv";
 	scripts\cp\maps\cp_disco\cp_disco_precache::main();
 	scripts\cp\maps\cp_disco\gen\cp_disco_art::main();
 	scripts\cp\maps\cp_disco\cp_disco_fx::main();
@@ -90,8 +90,8 @@ main() {
 	level.auto_melee_agent_type_check = ::cp_disco_auto_melee_agent_type_check;
 	level.patch_update_spawners = ::disco_patch_update_spawners;
 	adjuststructs();
-	level.weapon_rank_event_table = "scripts/cp/maps/cp_disco/cp_disco_weaponrank_event.csv";
-	level.coop_weapontable = "cp/cp_disco_weapontable.csv";
+	level.weapon_rank_event_table = "scripts\cp\maps\cp_disco\cp_disco_weaponrank_event.csv";
+	level.coop_weapontable = "cp\cp_disco_weapontable.csv";
 	level.customhostmigrationend = ::discohostmigrationfunc;
 	level.perks = ["perk_machine_tough","perk_machine_revive","perk_machine_flash","perk_machine_more","perk_machine_rat_a_tat","perk_machine_run","perk_machine_fwoosh","perk_machine_deadeye","perk_machine_zap","perk_machine_boom"];
 	level.additional_laststand_weapon_exclusion = ["iw7_cpbasketball_mp","iw7_cpskeeball_mp","iw7_cpclowntoothball_mp","iw7_horseracepistol_zm_blue","iw7_horseracepistol_zm_yellow","iw7_horseracepistol_zm_red","iw7_horseracepistol_zm_green","iw7_shootgallery_zm","iw7_blackholegun_mp","iw7_penetrationrail_mp","iw7_atomizer_mp","iw7_glr_mp","iw7_claw_mp","iw7_steeldragon_zm","iw7_fists_zm_tiger","iw7_fists_zm_monkey","iw7_fists_zm_snake","iw7_fists_zm_crane","iw7_fists_zm_dragon","iw7_shootgallery_zm_blue","iw7_shootgallery_zm_yellow","iw7_shootgallery_zm_red","iw7_lawnmower_zm","iw7_shootgallery_zm_green","iw7_gunless_zm"];
@@ -164,7 +164,7 @@ main() {
 		drop_afterlife_start_points_to_ground();
 	}
 
-	function_026C("MatchStarted: Completed");
+	sysprint("MatchStarted: Completed");
 	level.no_auto_pap_upgrade = 1;
 }
 
@@ -418,7 +418,7 @@ setuppamgrierchillinspot(param_00,param_01) {
 }
 
 registerscriptedagents() {
-	scripts\mp\mp_agent::init_agent("mp/dlc2_agent_definition.csv");
+	scripts\mp\mp_agent::init_agent("mp\dlc2_agent_definition.csv");
 	scripts\mp\agents\zombie_dlc2\zombie_dlc2_agent::registerscriptedagent();
 	scripts\mp\agents\ratking\ratking_agent::registerscriptedagent();
 	scripts\mp\agents\skater\skater_agent::registerscriptedagent();
@@ -494,7 +494,7 @@ wait_for_pre_game_period() {
 	wait(0.2);
 	scripts\engine\utility::flag_set("zombie_drop_powerups");
 	scripts\engine\utility::flag_set("pillage_enabled");
-	scripts/cp/zombies/zombie_entrances::enable_windows_in_area("subway_start");
+	scripts\cp\zombies\zombie_entrances::enable_windows_in_area("subway_start");
 	init_magic_wheel();
 	level thread add_additional_map_spawners();
 }
@@ -533,12 +533,12 @@ pillage_init() {
 	level.pillageinfo.clip = 33;
 	level.pillageinfo.explosive = 33;
 	level.pillageinfo.money = 34;
-	scripts/cp/zombies/zombies_pillage::register_zombie_pillageable("backpack_1","backpack","cp_rave_backpack_dropped","cp_rave_backpack","j_spine4");
-	scripts/cp/zombies/zombies_pillage::register_zombie_pillageable("backpack_2","backpack","cp_rave_backpack_dropped_green","cp_rave_backpack_green","j_spine4");
-	scripts/cp/zombies/zombies_pillage::register_zombie_pillageable("backpack_3","backpack","cp_rave_backpack_dropped_purple","cp_rave_backpack_purple","j_spine4");
-	scripts/cp/zombies/zombies_pillage::register_zombie_pillageable("backpack_4","backpack","cp_rave_backpack_dropped_red","cp_rave_backpack_red","j_spine4");
-	scripts/cp/zombies/zombies_pillage::register_zombie_pillageable("fanny_pack_1","backpack","zombies_fanny_pack_dropped","zombies_fanny_pack","J_HipTwist_LE");
-	scripts/cp/zombies/zombies_pillage::register_zombie_pillageable("fanny_pack_3","backpack","zombies_fanny_pack_dropped_purple","zombies_fanny_pack_purple","J_HipTwist_LE");
+	scripts\cp\zombies\zombies_pillage::register_zombie_pillageable("backpack_1","backpack","cp_rave_backpack_dropped","cp_rave_backpack","j_spine4");
+	scripts\cp\zombies\zombies_pillage::register_zombie_pillageable("backpack_2","backpack","cp_rave_backpack_dropped_green","cp_rave_backpack_green","j_spine4");
+	scripts\cp\zombies\zombies_pillage::register_zombie_pillageable("backpack_3","backpack","cp_rave_backpack_dropped_purple","cp_rave_backpack_purple","j_spine4");
+	scripts\cp\zombies\zombies_pillage::register_zombie_pillageable("backpack_4","backpack","cp_rave_backpack_dropped_red","cp_rave_backpack_red","j_spine4");
+	scripts\cp\zombies\zombies_pillage::register_zombie_pillageable("fanny_pack_1","backpack","zombies_fanny_pack_dropped","zombies_fanny_pack","J_HipTwist_LE");
+	scripts\cp\zombies\zombies_pillage::register_zombie_pillageable("fanny_pack_3","backpack","zombies_fanny_pack_dropped_purple","zombies_fanny_pack_purple","J_HipTwist_LE");
 }
 
 init_weapon_change_funcs() {
@@ -573,7 +573,7 @@ katana_damage_cone() {
 
 katana_damage(param_00,param_01,param_02,param_03,param_04,param_05,param_06) {
 	param_00 endon("death");
-	if(param_00 scripts/cp/agents/gametype_zombie::is_non_standard_zombie()) {
+	if(param_00 scripts\cp\agents\gametype_zombie::is_non_standard_zombie()) {
 		param_00.allowpain = 1;
 	}
 
@@ -729,14 +729,14 @@ achievement_watcher() {
 			var_08 = self getplayerdata("cp","alienSession","escapedRank3");
 			if(isdefined(var_05) && isdefined(var_06) && isdefined(var_07) && isdefined(var_08)) {
 				if(var_05 == 1 && var_06 == 1 && var_07 == 1 && var_08 == 1) {
-					scripts/cp/zombies/achievement::update_achievement("BOOK_WORM",1);
+					scripts\cp\zombies\achievement::update_achievement("BOOK_WORM",1);
 					var_01 = 1;
 				}
 			}
 		}
 
 		if(isdefined(self.craftables) && self.craftables.size == 0 && !scripts\engine\utility::istrue(var_02)) {
-			scripts/cp/zombies/achievement::update_achievement("SOME_ASSEMBLY_REQUIRED",1);
+			scripts\cp\zombies\achievement::update_achievement("SOME_ASSEMBLY_REQUIRED",1);
 			var_02 = 1;
 		}
 
@@ -750,7 +750,7 @@ achievement_watcher() {
 
 		if(var_03 && var_04) {
 			foreach(var_0A in level.players) {
-				var_0A scripts/cp/zombies/achievement::update_achievement("SOUL_BROTHER",1);
+				var_0A scripts\cp\zombies\achievement::update_achievement("SOUL_BROTHER",1);
 			}
 		}
 
@@ -1158,7 +1158,7 @@ is_in_active_volume(param_00) {
 
 	var_01 = sortbydistance(level.active_spawn_volumes,param_00);
 	foreach(var_03 in var_01) {
-		if(function_010F(param_00,var_03)) {
+		if(ispointinvolume(param_00,var_03)) {
 			return 1;
 		}
 	}
@@ -1338,18 +1338,18 @@ cleanup_ent_on_player_disconnect(param_00) {
 }
 
 cp_kung_fu_punch_fx() {
-	level._effect["afterlife_portal_fx"] = loadfx("vfx/iw7/levels/cp_disco/vfx_disco_portal_afterlife.vfx");
+	level._effect["afterlife_portal_fx"] = loadfx("vfx\iw7\levels\cp_disco\vfx_disco_portal_afterlife.vfx");
 	level.centhub_portal_fx = level._effect["afterlife_portal_fx"];
-	level._effect["chi_pulse"] = loadfx("vfx/iw7/core/zombie/weapon/vfx_proj_trail_hp4.vfx");
-	level._effect["chi_screen_fx"] = loadfx("vfx/core/mp/core/vfx_battle_slide_camera");
-	level._effect["chi_ghost_death"] = loadfx("vfx/iw7/core/zombie/vfx_zmb_ghost_imp.vfx");
-	level._effect["chi_ghost_death_blue"] = loadfx("vfx/iw7/levels/cp_rave/vfx_rave_soul_punch_explode.vfx");
-	level._effect["chi_ghost_hit_blue"] = loadfx("vfx/iw7/levels/cp_disco/vfx_disco_soul_punch_hit_crane.vfx");
-	level._effect["chi_ghost_hit_green"] = loadfx("vfx/iw7/levels/cp_disco/vfx_disco_soul_punch_hit_snake.vfx");
-	level._effect["chi_ghost_hit_red"] = loadfx("vfx/iw7/levels/cp_disco/vfx_disco_soul_punch_hit_tiger.vfx");
-	level._effect["chi_ghost_hit_yellow"] = loadfx("vfx/iw7/levels/cp_disco/vfx_disco_soul_punch_hit_dragon.vfx");
-	level._effect["blood_fountain"] = loadfx("vfx/iw7/levels/cp_disco/fnf/vfx_zb_headoff_bld.vfx");
-	level._effect["dragon_slice"] = loadfx("vfx/iw7/levels/cp_disco/vfx_kfc_dragon.vfx");
+	level._effect["chi_pulse"] = loadfx("vfx\iw7\core\zombie\weapon\vfx_proj_trail_hp4.vfx");
+	level._effect["chi_screen_fx"] = loadfx("vfx\core\mp\core\vfx_battle_slide_camera");
+	level._effect["chi_ghost_death"] = loadfx("vfx\iw7\core\zombie\vfx_zmb_ghost_imp.vfx");
+	level._effect["chi_ghost_death_blue"] = loadfx("vfx\iw7\levels\cp_rave\vfx_rave_soul_punch_explode.vfx");
+	level._effect["chi_ghost_hit_blue"] = loadfx("vfx\iw7\levels\cp_disco\vfx_disco_soul_punch_hit_crane.vfx");
+	level._effect["chi_ghost_hit_green"] = loadfx("vfx\iw7\levels\cp_disco\vfx_disco_soul_punch_hit_snake.vfx");
+	level._effect["chi_ghost_hit_red"] = loadfx("vfx\iw7\levels\cp_disco\vfx_disco_soul_punch_hit_tiger.vfx");
+	level._effect["chi_ghost_hit_yellow"] = loadfx("vfx\iw7\levels\cp_disco\vfx_disco_soul_punch_hit_dragon.vfx");
+	level._effect["blood_fountain"] = loadfx("vfx\iw7\levels\cp_disco\fnf\vfx_zb_headoff_bld.vfx");
+	level._effect["dragon_slice"] = loadfx("vfx\iw7\levels\cp_disco\vfx_kfc_dragon.vfx");
 }
 
 cp_disco_event_wave_init() {
@@ -1375,14 +1375,14 @@ init_disco_spawner_locations() {
 	foreach(var_03 in var_00) {
 		var_06 = 0;
 		foreach(var_08 in level.invalid_spawn_volume_array) {
-			if(function_010F(var_03.origin,var_08)) {
+			if(ispointinvolume(var_03.origin,var_08)) {
 				var_06 = 1;
 			}
 		}
 
 		if(!var_06) {
 			foreach(var_08 in level.spawn_volume_array) {
-				if(function_010F(var_03.origin,var_08)) {
+				if(ispointinvolume(var_03.origin,var_08)) {
 					if(!isdefined(var_03.angles)) {
 						var_03.angles = (0,0,0);
 					}
@@ -2035,7 +2035,7 @@ discohostmigrationfunc() {
 }
 
 setup_pa_speakers() {
-	level.jukebox_table = "cp/zombies/cp_disco_music_genre.csv";
+	level.jukebox_table = "cp\zombies\cp_disco_music_genre.csv";
 	scripts\cp\zombies\zombie_jukebox::parse_music_genre_table();
 	wait(1.15);
 	disablepaspeaker("pa_punk_street");
@@ -2124,7 +2124,7 @@ enableratkingpas() {
 	wait(3.5);
 	level.ratking_playlist = 1;
 	level.jukebox_table_old = level.jukebox_table;
-	level.jukebox_table = "cp/zombies/cp_disco_music_genre_ratking.csv";
+	level.jukebox_table = "cp\zombies\cp_disco_music_genre_ratking.csv";
 	scripts\cp\zombies\zombie_jukebox::parse_music_genre_table();
 	level thread scripts\cp\zombies\zombie_jukebox::jukebox_start((1785,-2077,211),undefined,0);
 	wait(0.5);
@@ -2579,7 +2579,7 @@ hidden_room_exit_tube(param_00) {
 	wait(0.1);
 	var_01 delete();
 	if(scripts\engine\utility::istrue(param_00.wor_phase_shift)) {
-		param_00 scripts/cp/powers/coop_phaseshift::exitphaseshift(1);
+		param_00 scripts\cp\powers\coop_phaseshift::exitphaseshift(1);
 		param_00.wor_phase_shift = 0;
 	}
 
@@ -2892,7 +2892,7 @@ train_zap_spot(param_00) {
 			var_03 = scripts\engine\utility::getclosest(var_02.origin,getentarray("place_fuse","targetname"));
 			var_04 = getentarray(var_03.target,"targetname");
 			foreach(var_06 in var_04) {
-				function_02E0(level._effect["electric_trap_attack"],var_02.origin,vectortoangles(var_02.origin - var_06.origin),var_06.origin);
+				playfxbetweenpoints(level._effect["electric_trap_attack"],var_02.origin,vectortoangles(var_02.origin - var_06.origin),var_06.origin);
 				wait(randomfloat(1));
 			}
 
@@ -3291,7 +3291,7 @@ watchkatanapap2usage(param_00) {
 				var_05 = param_00 getplayerangles();
 				var_06 = rotatepointaroundvector(anglestoup(var_05),anglestoforward(var_05),0);
 				var_07 = var_04 + var_06 * 512;
-				var_08 = scripts/cp/zombies/zombies_consumables::_magicbullet("iw7_katana_windforce_zm",var_04,var_07,param_00);
+				var_08 = scripts\cp\zombies\zombies_consumables::_magicbullet("iw7_katana_windforce_zm",var_04,var_07,param_00);
 				if(isdefined(var_08)) {
 					param_00 thread dual_katana_windforce(var_08);
 				}
@@ -3890,7 +3890,7 @@ should_drop_pillage(param_00,param_01) {
 		return 0;
 	}
 
-	if(!scripts/cp/zombies/zombies_pillage::is_in_active_volume(param_01)) {
+	if(!scripts\cp\zombies\zombies_pillage::is_in_active_volume(param_01)) {
 		return 0;
 	}
 
@@ -4183,24 +4183,24 @@ add_turntable_songs(param_00) {
 	level notify("force_new_song");
 	wait(3.5);
 	if(param_00 == "punk_and_disco") {
-		level.jukebox_table = "cp/zombies/cp_disco_music_genre_funkdiscopunk.csv";
+		level.jukebox_table = "cp\zombies\cp_disco_music_genre_funkdiscopunk.csv";
 		level scripts\cp\zombies\zombie_jukebox::force_song((1785,-2077,211),"mus_pa_i_wanna_be_your_dog",undefined,undefined,undefined,undefined,1);
 	}
 
 	if(param_00 == "disco_and_punk") {
-		level.jukebox_table = "cp/zombies/cp_disco_music_genre_funkdiscopunk.csv";
+		level.jukebox_table = "cp\zombies\cp_disco_music_genre_funkdiscopunk.csv";
 		level scripts\cp\zombies\zombie_jukebox::force_song((1785,-2077,211),"mus_pa_disco_inferno",undefined,undefined,undefined,undefined,1);
 		return;
 	}
 
 	if(param_00 == "punk_only") {
-		level.jukebox_table = "cp/zombies/cp_disco_music_genre_funkpunk.csv";
+		level.jukebox_table = "cp\zombies\cp_disco_music_genre_funkpunk.csv";
 		level scripts\cp\zombies\zombie_jukebox::force_song((1785,-2077,211),"mus_pa_i_wanna_be_your_dog",undefined,undefined,undefined,undefined,1);
 		return;
 	}
 
 	if(param_00 == "disco_only") {
-		level.jukebox_table = "cp/zombies/cp_disco_music_genre_funkdisco.csv";
+		level.jukebox_table = "cp\zombies\cp_disco_music_genre_funkdisco.csv";
 		level scripts\cp\zombies\zombie_jukebox::force_song((1785,-2077,211),"mus_pa_disco_inferno",undefined,undefined,undefined,undefined,1);
 		return;
 	}

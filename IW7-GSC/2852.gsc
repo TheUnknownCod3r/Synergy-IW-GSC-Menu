@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2852.gsc
+ * Script: 2852.gsc
 ***************************************/
 
 func_5C21() {
@@ -13,7 +13,7 @@ func_5C21() {
   self.moveplaybackrate = 1;
 
   if (self.team == "allies") {
-  scripts/sp/names::func_7B05();
+  scripts\sp\names::func_7B05();
   self _meth_8307(self.name, &"");
   }
 
@@ -21,7 +21,7 @@ func_5C21() {
   self thread [[level.func_5CA7]]();
 
   if (!isdefined(self.func_EDB7))
-  level thread scripts/sp/friendlyfire::func_73B1(self);
+  level thread scripts\sp\friendlyfire::func_73B1(self);
 
   if (!isdefined(level.func_193D))
   func_1177B();

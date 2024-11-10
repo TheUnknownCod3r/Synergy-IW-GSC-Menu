@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\2857.gsc
-****************************/
+ * Script: 2857.gsc
+************************/
 
 init() {
 	level.var_66A3 = [];
@@ -110,18 +110,18 @@ func_135F() {
 	level.var_D79A = [];
 	var_00 = 0;
 	for(;;) {
-		var_01 = tablelookupbyrow("sp/powertable.csv",var_00,0);
+		var_01 = tablelookupbyrow("sp\powertable.csv",var_00,0);
 		if(var_01 == "") {
 			break;
 		}
 
-		var_02 = tablelookupbyrow("sp/powertable.csv",var_00,1);
+		var_02 = tablelookupbyrow("sp\powertable.csv",var_00,1);
 		level.var_D79A[var_02] = spawnstruct();
 		level.var_D79A[var_02].id = var_01;
-		level.var_D79A[var_02].cooldown = tablelookupbyrow("sp/powertable.csv",var_00,6);
-		level.var_D79A[var_02].maxcharges = tablelookupbyrow("sp/powertable.csv",var_00,7);
-		level.var_D79A[var_02].var_1030F = tablelookupbyrow("sp/powertable.csv",var_00,8);
-		level.var_D79A[var_02].var_1E4E = tablelookupbyrow("sp/powertable.csv",var_00,9);
+		level.var_D79A[var_02].cooldown = tablelookupbyrow("sp\powertable.csv",var_00,6);
+		level.var_D79A[var_02].maxcharges = tablelookupbyrow("sp\powertable.csv",var_00,7);
+		level.var_D79A[var_02].var_1030F = tablelookupbyrow("sp\powertable.csv",var_00,8);
+		level.var_D79A[var_02].var_1E4E = tablelookupbyrow("sp\powertable.csv",var_00,9);
 		var_00++;
 	}
 }

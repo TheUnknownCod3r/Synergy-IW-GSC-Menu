@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3081.gsc
-****************************/
+ * Script: 3081.gsc
+************************/
 
 func_97F9() {
 	self.var_71A1 = ::func_5673;
@@ -26,14 +26,14 @@ func_4D6D(param_00) {
 	}
 
 	lib_0A0B::func_98C9(param_00.updategamerprofileall);
-	if(self._blackboard.scriptableparts[param_00.updategamerprofileall].state == "dismember") {
+	if(self.var_1198.scriptableparts[param_00.updategamerprofileall].state == "dismember") {
 		return;
 	}
 
 	var_02 = "dmg_" + param_00.spawnscriptitem;
 	var_03 = 0;
 	if(var_01) {
-		if(self._blackboard.scriptableparts[param_00.updategamerprofileall].state == "dmg_upper" || self._blackboard.scriptableparts[param_00.updategamerprofileall].state == "dmg_lower") {
+		if(self.var_1198.scriptableparts[param_00.updategamerprofileall].state == "dmg_upper" || self.var_1198.scriptableparts[param_00.updategamerprofileall].state == "dmg_lower") {
 			var_03 = 1;
 		}
 	}
@@ -108,7 +108,7 @@ func_5674(param_00,param_01) {
 		return;
 	}
 
-	if(isdefined(self.bt.var_55CF)) {
+	if(isdefined(self.var_3135.var_55CF)) {
 		return;
 	}
 
@@ -120,17 +120,17 @@ func_5674(param_00,param_01) {
 	thread lib_0A0B::func_F592(param_00,"dismember",var_02);
 	lib_0A0B::func_F6C9(param_00);
 	thread func_3544(param_00);
-	if(isdefined(self.bt.var_55CE)) {
+	if(isdefined(self.var_3135.var_55CE)) {
 		return;
 	}
 
 	if(param_01) {
-		scripts/asm/asm::asm_setstate("dismember");
+		scripts\asm\asm::asm_setstate("dismember");
 	}
 }
 
 func_5666() {
-	scripts/asm/asm_bb::bb_setselfdestruct(1);
+	scripts\asm\asm_bb::bb_setselfdestruct(1);
 	playrumbleonposition("light_1s",self gettagorigin("j_neck"));
 }
 
@@ -141,7 +141,7 @@ func_5668() {
 	}
 
 	lib_0A05::func_3555(var_00,0);
-	scripts/asm/asm_bb::bb_setcanrodeo(var_00);
+	scripts\asm\asm_bb::bb_setcanrodeo(var_00);
 	if(getdvarint("c12_slowturn")) {
 		lib_0A05::func_3609(0.05);
 	}
@@ -160,7 +160,7 @@ func_5675() {
 	}
 
 	lib_0A05::func_3555(var_00,0);
-	scripts/asm/asm_bb::bb_setcanrodeo(var_00);
+	scripts\asm\asm_bb::bb_setcanrodeo(var_00);
 	if(getdvarint("c12_slowturn")) {
 		lib_0A05::func_3609(0.05);
 	}
@@ -200,7 +200,7 @@ func_9D45(param_00) {
 	var_01 = ["left_arm","right_arm","left_leg","right_leg"];
 	var_01 = scripts\engine\utility::array_remove(var_01,param_00);
 	foreach(var_03 in var_01) {
-		if(scripts/asm/asm_bb::ispartdismembered(var_03)) {
+		if(scripts\asm\asm_bb::ispartdismembered(var_03)) {
 			return 1;
 		}
 	}
@@ -209,7 +209,7 @@ func_9D45(param_00) {
 }
 
 func_5678() {
-	scripts/asm/asm_bb::bb_setselfdestruct(1);
+	scripts\asm\asm_bb::bb_setselfdestruct(1);
 	if(!isdefined(self.script_noteworthy) || self.script_noteworthy != "enemy_hill_intro_c12") {
 		lib_0A05::func_3634("c12AchievementSelfdestruct");
 	}

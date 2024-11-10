@@ -1,11 +1,11 @@
-/***************************************************************
+/*******************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\bots\bots_fireteam_commander.gsc
-***************************************************************/
+ * Script: scripts\mp\bots\bots_fireteam_commander.gsc
+*******************************************************/
 
 init() {
-	if(scripts\mp\_utility::bot_is_fireteam_mode()) {
+	if(scripts\mp\utility::bot_is_fireteam_mode()) {
 		level.tactic_notifies = [];
 		level.tactic_notifies[0] = "tactics_exit";
 		level.tactic_notifies[1] = "tactic_none";
@@ -57,8 +57,8 @@ commander_aggregate_score_on_game_end() {
 
 		level.fireteam_commander["axis"].pers["score"] = var_00;
 		level.fireteam_commander["axis"].destroynavrepulsor = var_00;
-		level.fireteam_commander["axis"] scripts\mp\_persistence::statadd("score",var_00);
-		level.fireteam_commander["axis"] scripts\mp\_persistence::statsetchild("round","score",var_00);
+		level.fireteam_commander["axis"] scripts\mp\persistence::statadd("score",var_00);
+		level.fireteam_commander["axis"] scripts\mp\persistence::statsetchild("round","score",var_00);
 	}
 
 	if(isdefined(level.fireteam_commander["allies"])) {
@@ -71,8 +71,8 @@ commander_aggregate_score_on_game_end() {
 
 		level.fireteam_commander["allies"].pers["score"] = var_00;
 		level.fireteam_commander["allies"].destroynavrepulsor = var_00;
-		level.fireteam_commander["allies"] scripts\mp\_persistence::statadd("score",var_00);
-		level.fireteam_commander["allies"] scripts\mp\_persistence::statsetchild("round","score",var_00);
+		level.fireteam_commander["allies"] scripts\mp\persistence::statadd("score",var_00);
+		level.fireteam_commander["allies"] scripts\mp\persistence::statsetchild("round","score",var_00);
 	}
 }
 
@@ -285,7 +285,7 @@ commander_order_ack() {
 		if(isdefined(var_02)) {
 			var_09 = var_02.pers["voicePrefix"];
 			var_0A = var_09 + level.bcsounds["callout_response_generic"];
-			var_02 thread scripts\mp\_battlechatter_mp::dosound(var_0A,1,1);
+			var_02 thread scripts\mp\battlechatter_mp::dosound(var_0A,1,1);
 			return;
 		}
 	}
@@ -310,7 +310,7 @@ commander_hint_fade(param_00) {
 			wait(param_00);
 		}
 
-		var_01 scripts\mp\_hud_util::destroyelem();
+		var_01 scripts\mp\hud_util::destroyelem();
 	}
 }
 
@@ -323,7 +323,7 @@ commander_hint() {
 		return;
 	}
 
-	self.commanderhintelem = scripts\mp\_hud_util::createfontstring("default",3);
+	self.commanderhintelem = scripts\mp\hud_util::createfontstring("default",3);
 	self.commanderhintelem.color = (1,1,1);
 	self.commanderhintelem settext(&"MPUI_COMMANDER_HINT");
 	self.commanderhintelem.x = 0;
@@ -353,7 +353,7 @@ hud_monitorplayerownership() {
 	self endon("disconnect");
 	self.ownershipstring = [];
 	for(var_00 = 0;var_00 < 16;var_00++) {
-		self.ownershipstring[var_00] = scripts\mp\_hud_util::createfontstring("default",1);
+		self.ownershipstring[var_00] = scripts\mp\hud_util::createfontstring("default",1);
 		self.ownershipstring[var_00].color = (1,1,1);
 		self.ownershipstring[var_00].x = 0;
 		self.ownershipstring[var_00].y = 30 + var_00 * 12;
@@ -446,9 +446,9 @@ commander_wait_connect() {
 					}
 				}
 
-				var_01 scripts\mp\_menus::addtoteam(var_02);
+				var_01 scripts\mp\menus::addtoteam(var_02);
 				level.fireteam_commander[var_01.team] = var_01;
-				var_01 scripts\mp\_menus::bypassclasschoice();
+				var_01 scripts\mp\menus::bypassclasschoice();
 				var_01.class_num = 0;
 				var_01.waitingtoselectclass = 0;
 				var_01 thread onfirstspawnedplayer();
@@ -520,7 +520,7 @@ monitor_enter_commander_mode() {
 	}
 
 	if(!var_01) {
-		thread scripts\mp\_playerlogic::spawnspectator();
+		thread scripts\mp\playerlogic::spawnspectator();
 	}
 }
 
@@ -677,7 +677,7 @@ spectator_takeover_other(param_00) {
 	self.health = param_00.health;
 	self.var_381 = param_00.var_381;
 	store_weapons_status(param_00);
-	param_00 thread scripts\mp\_playerlogic::spawnspectator();
+	param_00 thread scripts\mp\playerlogic::spawnspectator();
 	if(isbot(param_00)) {
 		param_00.sidelinedbycommander = 1;
 		param_00 bot_free_to_move();
@@ -689,10 +689,10 @@ spectator_takeover_other(param_00) {
 	{
 	}
 
-	thread scripts\mp\_playerlogic::spawnclient();
+	thread scripts\mp\playerlogic::spawnclient();
 	self setplayerangles(var_01);
 	apply_weapons_status();
-	function_0027(self,param_00);
+	botsentientswap(self,param_00);
 	if(isbot(self)) {
 		param_00 thread commander_spectate_bot(self);
 		param_00 playlocalsound(undefined);
@@ -807,7 +807,7 @@ commander_loadout_class_callback(param_00) {
 commander_or_bot_change_class(param_00) {
 	self.pers["class"] = param_00;
 	self.class = param_00;
-	scripts\mp\_class::setclass(param_00);
+	scripts\mp\class::setclass(param_00);
 	self.weaponispreferreddrop = undefined;
 	self.tag_stowed_hip = undefined;
 }
@@ -831,7 +831,7 @@ apply_weapons_status() {
 	var_03 = self getweaponslistall();
 	foreach(var_01 in var_03) {
 		if(!scripts\engine\utility::array_contains(self.copy_fullweaponlist,var_01)) {
-			scripts\mp\_utility::_takeweapon(var_01);
+			scripts\mp\utility::_takeweapon(var_01);
 		}
 	}
 
@@ -844,6 +844,6 @@ apply_weapons_status() {
 	}
 
 	if(self getcurrentweapon() != self.copy_weapon_current) {
-		scripts\mp\_utility::_switchtoweapon(self.copy_weapon_current);
+		scripts\mp\utility::_switchtoweapon(self.copy_weapon_current);
 	}
 }

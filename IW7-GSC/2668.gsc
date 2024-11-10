@@ -1,12 +1,12 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2668.gsc
+ * Script: 2668.gsc
 ***************************************/
 
 init() {
-  level._effect["sentry_overheat_mp"] = loadfx("vfx/core/mp/killstreaks/vfx_sg_overheat_smoke");
-  level._effect["sentry_explode_mp"] = loadfx("vfx/core/mp/killstreaks/vfx_ims_explosion");
-  level._effect["sentry_smoke_mp"] = loadfx("vfx/core/mp/killstreaks/vfx_sg_damage_blacksmoke");
+  level._effect["sentry_overheat_mp"] = loadfx("vfx\core\mp\killstreaks\vfx_sg_overheat_smoke");
+  level._effect["sentry_explode_mp"] = loadfx("vfx\core\mp\killstreaks\vfx_ims_explosion");
+  level._effect["sentry_smoke_mp"] = loadfx("vfx\core\mp\killstreaks\vfx_sg_damage_blacksmoke");
   level.sentrysettings = [];
   level.sentrysettings["crafted_autosentry"] = spawnstruct();
   level.sentrysettings["crafted_autosentry"].health = 999999;
@@ -37,8 +37,8 @@ give_crafted_sentry(var_00, var_01) {
   var_01 thread watch_dpad();
   var_01 notify("new_power", "crafted_autosentry");
   var_01 setclientomnvar("zom_crafted_weapon", 1);
-  var_01 thread scripts/cp/utility::usegrenadegesture(var_01, "iw7_pickup_zm");
-  scripts/cp/utility::set_crafted_inventory_item("crafted_autosentry", ::give_crafted_sentry, var_01);
+  var_01 thread scripts\cp\utility::usegrenadegesture(var_01, "iw7_pickup_zm");
+  scripts\cp\utility::set_crafted_inventory_item("crafted_autosentry", ::give_crafted_sentry, var_01);
 }
 
 watch_dpad() {
@@ -60,7 +60,7 @@ watch_dpad() {
   if (isdefined(self.allow_carry) && self.allow_carry == 0)
   continue;
 
-  if (scripts/cp/utility::is_valid_player())
+  if (scripts\cp\utility::is_valid_player())
   break;
   }
 
@@ -70,14 +70,14 @@ watch_dpad() {
 givesentry(var_00) {
   self endon("disconnect");
   self.last_sentry = var_00;
-  scripts/cp/utility::clearlowermessage("msg_power_hint");
+  scripts\cp\utility::clearlowermessage("msg_power_hint");
   var_01 = createsentryforplayer(var_00, self);
   self.itemtype = var_00;
-  scripts/cp/utility::remove_player_perks();
+  scripts\cp\utility::remove_player_perks();
   self.carriedsentry = var_01;
   var_02 = setcarryingsentry(var_01, 1);
   self.carriedsentry = undefined;
-  thread scripts/cp/utility::wait_restore_player_perk();
+  thread scripts\cp\utility::wait_restore_player_perk();
   self.iscarrying = 0;
 
   if (isdefined(var_01))
@@ -121,7 +121,7 @@ setcarryingsentry(var_00, var_01) {
   if (var_02 != "force_cancel_placement")
   thread watch_dpad();
   else if (var_01)
-  scripts/cp/utility::remove_crafted_item_from_inventory(self);
+  scripts\cp\utility::remove_crafted_item_from_inventory(self);
 
   return 0;
   }
@@ -130,7 +130,7 @@ setcarryingsentry(var_00, var_01) {
   continue;
 
   if (var_01)
-  scripts/cp/utility::remove_crafted_item_from_inventory(self);
+  scripts\cp\utility::remove_crafted_item_from_inventory(self);
 
   var_00 sentry_setplaced();
   scripts\engine\utility::allow_weapon(1);
@@ -172,7 +172,7 @@ sentry_initsentry(var_00, var_01) {
   sentry_setinactive();
   sentry_setowner(var_01);
   thread sentry_handledeath(var_01);
-  thread scripts/cp/utility::item_timeout(undefined, level.sentrysettings[self.sentrytype].timeout);
+  thread scripts\cp\utility::item_timeout(undefined, level.sentrysettings[self.sentrytype].timeout);
   thread sentry_handleuse();
   thread sentry_attacktargets();
   thread sentry_beepsounds();
@@ -205,7 +205,7 @@ func_F23F() {
   if (isdefined(self.inuseby)) {
   playfxontag(scripts\engine\utility::getfx("sentry_explode_mp"), self, "tag_origin");
   playfxontag(scripts\engine\utility::getfx("sentry_smoke_mp"), self, "tag_aim");
-  self.inuseby scripts/cp/utility::restore_player_perk();
+  self.inuseby scripts\cp\utility::restore_player_perk();
   self notify("deleting");
   self _meth_83D3(self.inuseby);
   wait 1.0;
@@ -232,7 +232,7 @@ sentry_handleuse() {
   for (;;) {
   self waittill("trigger", var_00);
 
-  if (!var_00 scripts/cp/utility::is_valid_player())
+  if (!var_00 scripts\cp\utility::is_valid_player())
   continue;
 
   if (scripts\engine\utility::is_true(var_0.iscarrying))
@@ -251,7 +251,7 @@ sentry_setowner(var_00) {
   self setsentryowner(self.owner);
   self.team = self.owner.team;
   self setturretteam(self.team);
-  thread scripts/cp/utility::item_handleownerdisconnect("sentry_handleOwner");
+  thread scripts\cp\utility::item_handleownerdisconnect("sentry_handleOwner");
 }
 
 sentry_setplaced() {
@@ -269,7 +269,7 @@ sentry_setplaced() {
   self.owner.iscarrying = 0;
 
   if (level.sentrysettings[self.sentrytype].func_9F43)
-  scripts/cp/utility::make_entity_sentient_cp(self.owner.team);
+  scripts\cp\utility::make_entity_sentient_cp(self.owner.team);
 
   self.owner notify("new_sentry", self);
   }
@@ -298,9 +298,9 @@ sentry_setcarried(var_00, var_01) {
   self.carriedby = var_00;
   var_0.iscarrying = 1;
   var_00 thread updatesentryplacement(self, var_01);
-  thread scripts/cp/utility::item_oncarrierdeath(var_00);
-  thread scripts/cp/utility::item_oncarrierdisconnect(var_00);
-  thread scripts/cp/utility::item_ongameended(var_00);
+  thread scripts\cp\utility::item_oncarrierdeath(var_00);
+  thread scripts\cp\utility::item_oncarrierdisconnect(var_00);
+  thread scripts\cp\utility::item_ongameended(var_00);
   self freeentitysentient();
   self setdefaultdroppitch(-89.0);
   sentry_setinactive();
@@ -343,7 +343,7 @@ func_3834(var_00) {
   var_0.origin = var_1["origin"];
   var_0.angles = var_1["angles"];
 
-  if (scripts/cp/utility::ent_is_near_equipment(var_00))
+  if (scripts\cp\utility::ent_is_near_equipment(var_00))
   return 0;
 
   return self isonground() && var_1["result"] && abs(var_0.origin[2] - self.origin[2]) < 10;

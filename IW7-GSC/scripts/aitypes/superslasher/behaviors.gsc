@@ -1,8 +1,8 @@
-/**************************************************************
+/******************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\aitypes\superslasher\behaviors.gsc
-**************************************************************/
+ * Script: scripts\aitypes\superslasher\behaviors.gsc
+******************************************************/
 
 superslasher_isonroof() {
 	return self.var_3135.locationstate == 0;
@@ -104,7 +104,7 @@ isvalidtarget(param_00) {
 		return 0;
 	}
 
-	if(param_00.ignoreme || isdefined(param_00.triggerportableradarping) && param_00.var_222.ignoreme) {
+	if(param_00.ignoreme || isdefined(param_00.triggerportableradarping) && param_00.triggerportableradarping.ignoreme) {
 		return 0;
 	}
 
@@ -130,7 +130,7 @@ updatetarget() {
 	if(var_00) {
 		var_02 = level.players;
 		if(isdefined(self.var_3135.target)) {
-			var_02 = scripts\common\utility::array_remove(var_02,self.var_3135.target);
+			var_02 = scripts\engine\utility::array_remove(var_02,self.var_3135.target);
 		}
 
 		var_03 = [];
@@ -610,7 +610,7 @@ domelee(param_00) {
 	}
 
 	if(isdefined(self.var_3135.meleetarget)) {
-		var_02 = getclosestpointonnavmesh(self.var_3135.var_B64D.origin,self);
+		var_02 = getclosestpointonnavmesh(self.var_3135.meleetarget.origin,self);
 		self ghostskulls_complete_status(var_02);
 		self ghostskulls_total_waves(24);
 	}
@@ -818,7 +818,7 @@ shouldstomp(param_00) {
 			continue;
 		}
 
-		var_09 = vectordot(var_02,var_07 \ var_08);
+		var_09 = vectordot(var_02,var_07 / var_08);
 		if(var_09 > var_03) {
 			var_03 = var_09;
 			var_04 = var_06;
@@ -1149,12 +1149,12 @@ setupshield(param_00,param_01) {
 	var_02 = 96;
 	var_03 = 120;
 	var_04 = -90;
-	var_05 = angleclamp180(param_00 * 360 \ param_01);
+	var_05 = angleclamp180(param_00 * 360 / param_01);
 	var_06 = (var_02,0,var_03);
 	var_07 = spawn("script_model",self.origin + rotatevector(var_06,(0,var_05,0)));
 	var_07 setmodel("superslasher_trophy_system");
 	var_07.angles = (0,self.angles[1] + var_04,0);
-	var_07.halfrange = 180 \ param_01;
+	var_07.halfrange = 180 / param_01;
 	var_07.midrange = var_05;
 	var_07.offset = var_06;
 	var_07.lastdamagetime = 0;
@@ -1178,7 +1178,7 @@ updateshield(param_00) {
 		var_04 = 1;
 	}
 
-	if(self.var_A964.size > 0) {
+	if(self.lastdamagedir.size > 0) {
 		foreach(var_06 in self.lastdamagedir) {
 			var_07 = vectortoyaw(var_06);
 			if(abs(angleclamp180(var_07 - param_00.midrange)) < param_00.halfrange) {

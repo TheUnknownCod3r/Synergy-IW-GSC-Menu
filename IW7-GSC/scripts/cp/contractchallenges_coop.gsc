@@ -1,8 +1,8 @@
-/**********************************************************
+/**************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\contractchallenges_coop.gsc
-**********************************************************/
+ * Script: scripts\cp\contractchallenges_coop.gsc
+**************************************************/
 
 registercontractchallenges() {
 	level.contractchallenges = [];
@@ -155,7 +155,7 @@ contractkills(param_00) {
 				if(var_04 != "MOD_MELEE" && var_0B == "weapon_assault") {
 					var_0A = 1;
 				}
-				else if(var_04 != "MOD_MELEE" && var_0B == "weapon_sniper" && var_11 && !scripts/cp/agents/gametype_zombie::checkaltmodestatus(var_05)) {
+				else if(var_04 != "MOD_MELEE" && var_0B == "weapon_sniper" && var_11 && !scripts\cp\agents\gametype_zombie::checkaltmodestatus(var_05)) {
 					var_0A = 1;
 				}
 				break;
@@ -170,7 +170,7 @@ contractkills(param_00) {
 				if(var_04 != "MOD_MELEE" && var_0B == "weapon_shotgun" && !var_10) {
 					var_0A = 1;
 				}
-				else if(var_04 != "MOD_MELEE" && var_0B == "weapon_sniper" && var_10 && !scripts/cp/agents/gametype_zombie::checkaltmodestatus(var_05)) {
+				else if(var_04 != "MOD_MELEE" && var_0B == "weapon_sniper" && var_10 && !scripts\cp\agents\gametype_zombie::checkaltmodestatus(var_05)) {
 					var_0A = 1;
 				}
 				break;
@@ -179,10 +179,10 @@ contractkills(param_00) {
 				if(var_04 != "MOD_MELEE" && var_0B == "weapon_sniper" && !var_10 && !var_11) {
 					var_0A = 1;
 				}
-				else if(var_04 != "MOD_MELEE" && var_0B == "weapon_sniper" && var_10 && scripts/cp/agents/gametype_zombie::checkaltmodestatus(var_05)) {
+				else if(var_04 != "MOD_MELEE" && var_0B == "weapon_sniper" && var_10 && scripts\cp\agents\gametype_zombie::checkaltmodestatus(var_05)) {
 					var_0A = 1;
 				}
-				else if(var_04 != "MOD_MELEE" && var_0B == "weapon_sniper" && var_11 && scripts/cp/agents/gametype_zombie::checkaltmodestatus(var_05)) {
+				else if(var_04 != "MOD_MELEE" && var_0B == "weapon_sniper" && var_11 && scripts\cp\agents\gametype_zombie::checkaltmodestatus(var_05)) {
 					var_0A = 1;
 				}
 				break;

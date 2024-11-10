@@ -1,8 +1,8 @@
-/**********************************************
+/**************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\playerlogic.gsc
-**********************************************/
+ * Script: scripts\mp\playerlogic.gsc
+**************************************/
 
 timeuntilwavespawn(param_00) {
 	if(!self.hasspawned) {
@@ -464,7 +464,7 @@ spawningclientthisframereset() {
 	self notify("spawningClientThisFrameReset");
 	self endon("spawningClientThisFrameReset");
 	wait(0.05);
-	level.var_C23D--;
+	level.numplayerswaitingtospawn--;
 }
 
 getplayerassets(param_00,param_01) {
@@ -548,7 +548,7 @@ spawnplayer(param_00) {
 	self.killsteakvariantattackerinfo = undefined;
 	self.cratemantle = undefined;
 	if(!level.ingraceperiod && !self.hasdonecombat) {
-		level.var_C23D++;
+		level.numplayerswaitingtospawn++;
 		if(level.numplayerswaitingtospawn > 1) {
 			self.waitingtospawnamortize = 1;
 			wait(0.05 * level.numplayerswaitingtospawn - 1);
@@ -1553,7 +1553,7 @@ callback_playerdisconnect(param_00) {
 		}
 	}
 
-	setmatchdata("players",self.clientid,"utcDisconnectTimeSeconds",function_00D2());
+	setmatchdata("players",self.clientid,"utcDisconnectTimeSeconds",getsystemtime());
 	setmatchdata("players",self.clientid,"disconnectReason",param_00);
 	self logplayerendmatchdatamatchresult(self.clientid,param_00);
 	var_01 = getmatchdata("commonMatchData","playerCountLeft");
@@ -1603,7 +1603,7 @@ callback_playerdisconnect(param_00) {
 
 	var_05 = self getentitynumber();
 	var_06 = self.guid;
-	function_0131("Q;" + var_06 + ";" + var_05 + ";" + self.name + "\n");
+	logprint("Q;" + var_06 + ";" + var_05 + ";" + self.name + "\n");
 	thread scripts\mp\events::disconnected();
 	if(level.gameended) {
 		scripts\mp\gamescore::removedisconnectedplayerfromplacement();
@@ -1878,7 +1878,7 @@ callback_playerconnect() {
 				var_04 = getmatchdata("commonMatchData","playerCountReconnected");
 				var_04++;
 				setmatchdata("commonMatchData","playerCountReconnected",var_04);
-				setmatchdata("players",var_02,"utcReconnectTimeSeconds",function_00D2());
+				setmatchdata("players",var_02,"utcReconnectTimeSeconds",getsystemtime());
 				break;
 			}
 		}
@@ -1923,7 +1923,7 @@ callback_playerconnect() {
 
 	self.clientid = self.pers["clientid"];
 	self.pers["teamKillPunish"] = 0;
-	function_0131("J;" + self.guid + ";" + self getentitynumber() + ";" + self.name + "\n");
+	logprint("J;" + self.guid + ";" + self getentitynumber() + ";" + self.name + "\n");
 	self logstatmatchguid();
 	var_05 = getmatchdata("commonMatchData","playerCount");
 	if(game["clientid"] <= 30 && game["clientid"] != var_05) {
@@ -1941,7 +1941,7 @@ callback_playerconnect() {
 		setmatchdata("players",self.clientid,"skill",self getskill());
 		setmatchclientip(self,self.clientid);
 		if(var_00 && !var_01) {
-			setmatchdata("players",self.clientid,"utcConnectTimeSeconds",function_00D2());
+			setmatchdata("players",self.clientid,"utcConnectTimeSeconds",getsystemtime());
 		}
 
 		if(scripts\mp\utility::rankingenabled()) {
@@ -2059,14 +2059,14 @@ callback_playerconnect() {
 			return;
 		}
 
-		if((scripts\mp\utility::matchmakinggame() || scripts\mp\utility::lobbyteamselectenabled() || function_0303()) && self.sessionteam != "none") {
+		if((scripts\mp\utility::matchmakinggame() || scripts\mp\utility::lobbyteamselectenabled() || isgamebattlematch()) && self.sessionteam != "none") {
 			thread spawnspectator();
 			thread scripts\mp\menus::setteam(self.sessionteam);
 			if(scripts\mp\utility::allowclasschoice() || scripts\mp\utility::showfakeloadout() && !isai(self)) {
 				self setclientomnvar("ui_options_menu",2);
 			}
 
-			if(!function_0303()) {
+			if(!isgamebattlematch()) {
 				thread kickifdontspawn();
 			}
 
@@ -2142,7 +2142,7 @@ callback_playermigrated() {
 	}
 
 	if(!isdefined(self.pers["isBot"]) || self.pers["isBot"] == 0) {
-		level.var_90A8++;
+		level.hostmigrationreturnedplayercount++;
 		if(level.hostmigrationreturnedplayercount >= var_00 * 2 / 3) {
 			level notify("hostmigration_enoughplayers");
 		}
@@ -2240,7 +2240,7 @@ monitorvotekick() {
 	self.votestokick = 0;
 	while(self.votestokick < 2) {
 		self waittill("voteToKick");
-		self.var_13552++;
+		self.votestokick++;
 	}
 
 	kick(self getentitynumber(),"EXE_PLAYERKICKED_TEAMKILLS");
@@ -2671,7 +2671,7 @@ func_13B76() {
 		var_03 = var_00 + var_02 * 10000;
 		var_04 = bullettrace(var_00,var_03,1,self,0,0,0,0,0);
 		var_05 = var_04["entity"];
-		if(isdefined(var_05) && isplayer(var_05) && var_05.team != self.team && scripts/mp/equipment/phase_shift::areentitiesinphase(self,var_05)) {
+		if(isdefined(var_05) && isplayer(var_05) && var_05.team != self.team && scripts\mp\equipment\phase_shift::areentitiesinphase(self,var_05)) {
 			if(isdefined(var_05)) {
 				func_12F36("ui_target_health",var_05.health);
 			}

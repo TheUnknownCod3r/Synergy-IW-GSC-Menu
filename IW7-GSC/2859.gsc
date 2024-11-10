@@ -1,13 +1,13 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\2859.gsc
-****************************/
+ * Script: 2859.gsc
+************************/
 
 func_6B44() {
 	setdvarifuninitialized("debug_fakeactor",0);
 	setdvarifuninitialized("debug_fakeactor_accuracy",0);
-	level._effect["fakeactor_muzflash"] = loadfx("vfx/core/muzflash/ak47_flash_wv");
+	level._effect["fakeactor_muzflash"] = loadfx("vfx\core\muzflash\ak47_flash_wv");
 	if(!isdefined(level.var_B438)) {
 		level.var_B438 = [];
 	}
@@ -220,7 +220,7 @@ func_6B15() {
 	self _meth_839E();
 	if(isdefined(self.target)) {
 		var_00 = scripts\engine\utility::getstruct(self.target,"targetname");
-		if(isdefined(var_00) && var_00 scripts/sp/fakeactor_node_MAYBE::func_9BE0()) {
+		if(isdefined(var_00) && var_00 scripts\sp\fakeactor_node_MAYBE::func_9BE0()) {
 			if(func_9B69()) {
 				func_1164B(var_00);
 				return;
@@ -298,7 +298,7 @@ func_3DBA() {
 		return 0;
 	}
 
-	return self.var_4B94 scripts/sp/fakeactor_node_MAYBE::func_6B2B(self);
+	return self.var_4B94 scripts\sp\fakeactor_node_MAYBE::func_6B2B(self);
 }
 
 func_3C4D(param_00) {
@@ -360,7 +360,7 @@ func_92D9() {
 		return 1;
 	}
 
-	if(self.var_4B94 scripts/sp/fakeactor_node_MAYBE::func_6B2B(self)) {
+	if(self.var_4B94 scripts\sp\fakeactor_node_MAYBE::func_6B2B(self)) {
 		return 1;
 	}
 
@@ -439,7 +439,7 @@ func_6BDE() {
 }
 
 func_126D0() {
-	if(isdefined(self.var_4B94) && self.var_4B94 scripts/sp/fakeactor_node_MAYBE::func_6B2B(self) && self.var_4B94 scripts/sp/fakeactor_node_MAYBE::func_6B32()) {
+	if(isdefined(self.var_4B94) && self.var_4B94 scripts\sp\fakeactor_node_MAYBE::func_6B2B(self) && self.var_4B94 scripts\sp\fakeactor_node_MAYBE::func_6B32()) {
 		return 1;
 	}
 
@@ -455,7 +455,7 @@ func_126D9() {
 }
 
 func_12944() {
-	if(self.var_4B94 scripts/sp/fakeactor_node_MAYBE::func_6B2B(self) && self.var_4B94 scripts/sp/fakeactor_node_MAYBE::func_6B33()) {
+	if(self.var_4B94 scripts\sp\fakeactor_node_MAYBE::func_6B2B(self) && self.var_4B94 scripts\sp\fakeactor_node_MAYBE::func_6B33()) {
 		return 1;
 	}
 
@@ -465,14 +465,14 @@ func_12944() {
 func_12999() {
 	self endon("death");
 	func_F30A(1);
-	var_00 = self.var_4B94 scripts/sp/fakeactor_node_MAYBE::func_6B20();
+	var_00 = self.var_4B94 scripts\sp\fakeactor_node_MAYBE::func_6B20();
 	func_CE00(func_7D21(self.angles,self.origin,var_00.origin));
 	func_F30A(0);
 	func_F613(1);
 }
 
 func_CC86() {
-	if(isdefined(self.var_4B94) && self.var_4B94 scripts/sp/fakeactor_node_MAYBE::func_6B2B(self) && self.var_4B94 scripts/sp/fakeactor_node_MAYBE::func_6B2A()) {
+	if(isdefined(self.var_4B94) && self.var_4B94 scripts\sp\fakeactor_node_MAYBE::func_6B2B(self) && self.var_4B94 scripts\sp\fakeactor_node_MAYBE::func_6B2A()) {
 		if(!isdefined(self.var_4B94.var_A880) || self.var_4B94.var_A880 != self) {
 			return 1;
 		}
@@ -484,7 +484,7 @@ func_CC86() {
 func_CC8A() {
 	self endon("death");
 	func_F30A(1);
-	self.var_4B94.var_1EEF scripts/sp/anim::func_1ED1(self,self.var_4B94.animation);
+	self.var_4B94.var_1EEF scripts\sp\anim::func_1ED1(self,self.var_4B94.animation);
 	self.var_4B94.var_A880 = self;
 	func_F30A(0);
 	func_F613(1);
@@ -519,12 +519,12 @@ func_BC1C() {
 	var_00 = func_582B();
 	var_01 = undefined;
 	if(!isdefined(self.current_state) && isdefined(self.var_4B94)) {
-		var_01 = scripts/sp/fakeactor_node_MAYBE::func_6B21(self.var_4B94,self.origin,func_9BE8(),var_00);
+		var_01 = scripts\sp\fakeactor_node_MAYBE::func_6B21(self.var_4B94,self.origin,func_9BE8(),var_00);
 	}
 
-	if(self.var_4B94 scripts/sp/fakeactor_node_MAYBE::func_6B2B(self) && !self.var_4B94 scripts/sp/fakeactor_node_MAYBE::func_6B2D(var_00)) {
-		var_02 = self.var_4B94 scripts/sp/fakeactor_node_MAYBE::func_6B20();
-		var_01 = scripts/sp/fakeactor_node_MAYBE::func_6B21(var_02,self.origin,func_9BE8(),var_00);
+	if(self.var_4B94 scripts\sp\fakeactor_node_MAYBE::func_6B2B(self) && !self.var_4B94 scripts\sp\fakeactor_node_MAYBE::func_6B2D(var_00)) {
+		var_02 = self.var_4B94 scripts\sp\fakeactor_node_MAYBE::func_6B20();
+		var_01 = scripts\sp\fakeactor_node_MAYBE::func_6B21(var_02,self.origin,func_9BE8(),var_00);
 	}
 
 	if(isdefined(var_01)) {
@@ -568,7 +568,7 @@ func_BC82() {
 	if(self.var_C039.size == 0) {
 	}
 
-	self.var_4B94 scripts/sp/fakeactor_node_MAYBE::func_6B36(self);
+	self.var_4B94 scripts\sp\fakeactor_node_MAYBE::func_6B36(self);
 	var_02 = func_7AFA();
 	var_03 = func_7816(var_02);
 	var_04 = var_03.var_E81C;
@@ -593,7 +593,7 @@ func_BC82() {
 			self.var_4B94 = var_06["node"];
 		}
 
-		self.var_4B94 scripts/sp/fakeactor_node_MAYBE::func_6B37(self);
+		self.var_4B94 scripts\sp\fakeactor_node_MAYBE::func_6B37(self);
 		func_6B12(self.var_4B94);
 		func_F613(0);
 		self notify("arrive_node");
@@ -622,8 +622,8 @@ func_BC82() {
 	}
 
 	var_10 = undefined;
-	var_11 = scripts\engine\utility::random(var_08["node"] scripts/sp/fakeactor_node_MAYBE::func_6B1F());
-	if(func_FF2C() && !var_08["node"] scripts/sp/fakeactor_node_MAYBE::func_6B32() && !var_08["node"] scripts/sp/fakeactor_node_MAYBE::func_6B33() && var_08["node"] scripts/sp/fakeactor_node_MAYBE::func_6B18()) {
+	var_11 = scripts\engine\utility::random(var_08["node"] scripts\sp\fakeactor_node_MAYBE::func_6B1F());
+	if(func_FF2C() && !var_08["node"] scripts\sp\fakeactor_node_MAYBE::func_6B32() && !var_08["node"] scripts\sp\fakeactor_node_MAYBE::func_6B33() && var_08["node"] scripts\sp\fakeactor_node_MAYBE::func_6B18()) {
 		var_12 = self;
 		if(isdefined(self.var_C039[self.var_C039.size - 2]["node"])) {
 			var_12 = self.var_C039[self.var_C039.size - 2]["node"];
@@ -733,10 +733,10 @@ func_BC82() {
 				else
 				{
 					self.angles = var_06["angles"];
-					func_F2C3(self.var_4B94 scripts/sp/fakeactor_node_MAYBE::func_6B1F());
+					func_F2C3(self.var_4B94 scripts\sp\fakeactor_node_MAYBE::func_6B1F());
 				}
 
-				self.var_4B94 scripts/sp/fakeactor_node_MAYBE::func_6B37(self);
+				self.var_4B94 scripts\sp\fakeactor_node_MAYBE::func_6B37(self);
 				func_6B12(self.var_4B94);
 				self notify("stop_running_anim");
 				func_F613(0);
@@ -747,7 +747,7 @@ func_BC82() {
 			}
 			else if(self.var_4B94 != self.var_C039[var_18]["node"]) {
 				self.var_4B94 = self.var_C039[var_18]["node"];
-				func_F2C3(self.var_4B94 scripts/sp/fakeactor_node_MAYBE::func_6B1F());
+				func_F2C3(self.var_4B94 scripts\sp\fakeactor_node_MAYBE::func_6B1F());
 				func_6B12(self.var_4B94);
 			}
 		}
@@ -935,28 +935,28 @@ func_AEE8(param_00) {
 
 func_F31D(param_00) {
 	if(isdefined(self.var_4B94)) {
-		self.var_4B94 scripts/sp/fakeactor_node_MAYBE::func_6B36(self);
+		self.var_4B94 scripts\sp\fakeactor_node_MAYBE::func_6B36(self);
 	}
 
 	self.var_72A9 = undefined;
 	self.var_4B94 = param_00;
-	func_F2C3(self.var_4B94 scripts/sp/fakeactor_node_MAYBE::func_6B1F());
+	func_F2C3(self.var_4B94 scripts\sp\fakeactor_node_MAYBE::func_6B1F());
 }
 
 func_1164B(param_00) {
 	func_F31D(param_00);
-	self.var_4B94 scripts/sp/fakeactor_node_MAYBE::func_6B37(self);
+	self.var_4B94 scripts\sp\fakeactor_node_MAYBE::func_6B37(self);
 	func_6B12(self.var_4B94);
 	self dontinterpolate();
 	self.origin = self.var_4B94.origin;
-	self.angles = self.var_4B94 scripts/sp/fakeactor_node_MAYBE::func_6B1E(func_9BE8());
+	self.angles = self.var_4B94 scripts\sp\fakeactor_node_MAYBE::func_6B1E(func_9BE8());
 }
 
 func_416B() {
 	if(isdefined(self.var_C039)) {
 		foreach(var_01 in self.var_C039) {
 			if(isdefined(var_01["node"])) {
-				var_01["node"] scripts/sp/fakeactor_node_MAYBE::func_6B36(self);
+				var_01["node"] scripts\sp\fakeactor_node_MAYBE::func_6B36(self);
 			}
 		}
 	}
@@ -1753,7 +1753,7 @@ func_57AD() {
 	func_416B();
 	func_CE00(func_7B62());
 	self.current_state = "";
-	self.var_72A9 = scripts/sp/fakeactor_node_MAYBE::func_6B21(self.var_4B94,self.origin,func_9BE8(),1);
+	self.var_72A9 = scripts\sp\fakeactor_node_MAYBE::func_6B21(self.var_4B94,self.origin,func_9BE8(),1);
 }
 
 func_4EC6() {}
@@ -2198,7 +2198,7 @@ func_12736(param_00) {
 	for(;;) {
 		param_00 waittill("trigger",var_02);
 		foreach(var_04 in var_01) {
-			var_04 scripts/sp/fakeactor_node_MAYBE::func_6B38(1);
+			var_04 scripts\sp\fakeactor_node_MAYBE::func_6B38(1);
 		}
 	}
 }
@@ -2216,7 +2216,7 @@ func_12738(param_00) {
 	for(;;) {
 		param_00 waittill("trigger",var_02);
 		foreach(var_04 in var_01) {
-			var_04 scripts/sp/fakeactor_node_MAYBE::func_6B38(0);
+			var_04 scripts\sp\fakeactor_node_MAYBE::func_6B38(0);
 		}
 	}
 }
@@ -2228,7 +2228,7 @@ func_12739(param_00) {
 
 	for(;;) {
 		param_00 waittill("trigger",var_01);
-		scripts/sp/fakeactor_node_MAYBE::func_6B24(param_00.script_parameters,0);
+		scripts\sp\fakeactor_node_MAYBE::func_6B24(param_00.script_parameters,0);
 	}
 }
 
@@ -2239,7 +2239,7 @@ func_12737(param_00) {
 
 	for(;;) {
 		param_00 waittill("trigger",var_01);
-		scripts/sp/fakeactor_node_MAYBE::func_6B24(param_00.script_parameters,1);
+		scripts\sp\fakeactor_node_MAYBE::func_6B24(param_00.script_parameters,1);
 	}
 }
 
@@ -2256,7 +2256,7 @@ func_1273B(param_00) {
 	for(;;) {
 		param_00 waittill("trigger",var_02);
 		foreach(var_04 in var_01) {
-			var_04 scripts/sp/fakeactor_node_MAYBE::func_6B3A();
+			var_04 scripts\sp\fakeactor_node_MAYBE::func_6B3A();
 		}
 	}
 }
@@ -2274,7 +2274,7 @@ func_1273A(param_00) {
 	for(;;) {
 		param_00 waittill("trigger",var_02);
 		foreach(var_04 in var_01) {
-			var_04 scripts/sp/fakeactor_node_MAYBE::func_6B39();
+			var_04 scripts\sp\fakeactor_node_MAYBE::func_6B39();
 		}
 	}
 }

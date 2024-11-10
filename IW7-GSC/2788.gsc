@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2788.gsc
+ * Script: 2788.gsc
 ***************************************/
 
 init() {
@@ -13,13 +13,13 @@ init() {
   addglobalrankxpmultiplier(var_00, "online_mp_xpscale");
   level.ranktable = [];
   level.weaponranktable = [];
-  level.maxrank = int(tablelookup("mp/rankTable.csv", 0, "maxrank", 1));
+  level.maxrank = int(tablelookup("mp\rankTable.csv", 0, "maxrank", 1));
 
   for (var_01 = 0; var_01 <= level.maxrank; var_1++) {
-  level.ranktable[var_01]["minXP"] = tablelookup("mp/rankTable.csv", 0, var_01, 2);
-  level.ranktable[var_01]["xpToNext"] = tablelookup("mp/rankTable.csv", 0, var_01, 3);
-  level.ranktable[var_01]["maxXP"] = tablelookup("mp/rankTable.csv", 0, var_01, 7);
-  level.ranktable[var_01]["splash"] = tablelookup("mp/rankTable.csv", 0, var_01, 15);
+  level.ranktable[var_01]["minXP"] = tablelookup("mp\rankTable.csv", 0, var_01, 2);
+  level.ranktable[var_01]["xpToNext"] = tablelookup("mp\rankTable.csv", 0, var_01, 3);
+  level.ranktable[var_01]["maxXP"] = tablelookup("mp\rankTable.csv", 0, var_01, 7);
+  level.ranktable[var_01]["splash"] = tablelookup("mp\rankTable.csv", 0, var_01, 15);
   }
 
   scripts\mp\weaponrank::init();
@@ -28,7 +28,7 @@ init() {
   var_02 = 0;
 
   for (;;) {
-  var_03 = tablelookupbyrow("mp/unlocks/prestigeExtrasUnlocks.csv", var_02, 0);
+  var_03 = tablelookupbyrow("mp\unlocks\prestigeExtrasUnlocks.csv", var_02, 0);
 
   if (!isdefined(var_03) || var_03 == "")
   break;
@@ -99,15 +99,15 @@ _meth_80D0(var_00) {
 }
 
 getrankinfofull(var_00) {
-  return tablelookupistring("mp/rankTable.csv", 0, var_00, 16);
+  return tablelookupistring("mp\rankTable.csv", 0, var_00, 16);
 }
 
 getrankinfoicon(var_00, var_01) {
-  return tablelookup("mp/rankIconTable.csv", 0, var_00, var_01 + 1);
+  return tablelookup("mp\rankIconTable.csv", 0, var_00, var_01 + 1);
 }
 
 getrankinfolevel(var_00) {
-  return int(tablelookup("mp/rankTable.csv", 0, var_00, 13));
+  return int(tablelookup("mp\rankTable.csv", 0, var_00, 13));
 }
 
 onplayerconnect() {

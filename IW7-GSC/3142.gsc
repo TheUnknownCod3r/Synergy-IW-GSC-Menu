@@ -1,17 +1,17 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3142.gsc
-****************************/
+ * Script: 3142.gsc
+************************/
 
 func_3535() {
 	self endon("death");
 	self endon("terminate_ai_threads");
 	for(;;) {
 		self waittill("damage");
-		if(!isdefined(self._blackboard.var_2ABA) && self.var_DE != "MOD_IMPACT") {
+		if(!isdefined(self.var_1198.var_2ABA) && self.var_DE != "MOD_IMPACT") {
 			var_00 = 1;
-			self._blackboard.var_2ABA = 1;
+			self.var_1198.var_2ABA = 1;
 		}
 		else
 		{
@@ -49,9 +49,9 @@ func_3620() {
 			}
 		}
 
-		if(!isdefined(self._blackboard.var_2ABA) && var_04) {
+		if(!isdefined(self.var_1198.var_2ABA) && var_04) {
 			var_08 = 1;
-			self._blackboard.var_2ABA = 1;
+			self.var_1198.var_2ABA = 1;
 		}
 		else
 		{
@@ -73,7 +73,7 @@ func_3559(param_00) {
 		return;
 	}
 
-	if(gettime() < self._blackboard.timeoff + 5000) {
+	if(gettime() < self.var_1198.timeoff + 5000) {
 		return;
 	}
 
@@ -87,11 +87,11 @@ func_3559(param_00) {
 
 			var_05 = level.asm[var_06].states[var_04.var_C87F];
 			if(param_00) {
-				self._blackboard.var_A983 = gettime();
+				self.var_1198.var_A983 = gettime();
 			}
 
-			self._blackboard.timeoff = gettime();
-			scripts/asm/asm::asm_setstate(var_04.var_C87F);
+			self.var_1198.timeoff = gettime();
+			scripts\asm\asm::asm_setstate(var_04.var_C87F);
 			break;
 		}
 	}
@@ -110,7 +110,7 @@ func_4109(param_00,param_01,param_02) {
 }
 
 func_3EE4(param_00,param_01,param_02) {
-	var_03 = self._blackboard.var_A983 == gettime();
+	var_03 = self.var_1198.var_A983 == gettime();
 	var_04 = lib_0A1E::func_7E5A();
 	if(var_03) {
 		var_05 = var_04;
@@ -120,7 +120,7 @@ func_3EE4(param_00,param_01,param_02) {
 		var_05 = var_05 + "_small";
 	}
 
-	var_06 = scripts/asm/asm::asm_lookupanimfromalias(param_01,var_05);
+	var_06 = scripts\asm\asm::asm_lookupanimfromalias(param_01,var_05);
 	if(!var_03 || func_8C21(var_06)) {
 		return var_06;
 	}
@@ -148,19 +148,19 @@ func_CF37(param_00,param_01,param_02,param_03) {
 		wait(var_06);
 	}
 
-	scripts/asm/asm::asm_fireevent(param_01,"end");
+	scripts\asm\asm::asm_fireevent(param_01,"end");
 }
 
 func_CF1C(param_00,param_01,param_02,param_03) {
 	self endon(param_01 + "_finished");
 	self.asm.var_2AD2 = 1;
-	if(!scripts/asm/asm_bb::bb_isselfdestruct() && !isdefined(self.var_30E9) || !self.var_30E9) {
+	if(!scripts\asm\asm_bb::bb_isselfdestruct() && !isdefined(self.var_30E9) || !self.var_30E9) {
 		self aiclearanim(lib_0A1E::asm_getbodyknob(),param_02);
 		self _meth_82AB(lib_0A1E::func_2356(param_01,"stun"),1,param_02);
 		wait(level.var_3546);
 	}
 
-	scripts/asm/asm::asm_fireevent(param_01,"end");
+	scripts\asm\asm::asm_fireevent(param_01,"end");
 }
 
 func_411A(param_00,param_01,param_02) {
@@ -181,17 +181,17 @@ func_8C21(param_00) {
 
 func_3527(param_00,param_01,param_02) {
 	if(isdefined(param_02)) {
-		return scripts/asm/asm::asm_lookupanimfromalias(param_01,param_02);
+		return scripts\asm\asm::asm_lookupanimfromalias(param_01,param_02);
 	}
 
 	var_03 = lib_0A1E::func_7E5A();
-	return scripts/asm/asm::asm_lookupanimfromalias(param_01,var_03);
+	return scripts\asm\asm::asm_lookupanimfromalias(param_01,var_03);
 }
 
 func_35D7(param_00,param_01,param_02,param_03) {
 	self stoploopsound();
-	if(isdefined(self.bt.var_71C9)) {
-		[[self.bt.var_71C9]]();
+	if(isdefined(self.var_3135.var_71C9)) {
+		[[self.var_3135.var_71C9]]();
 	}
 
 	if(isdefined(self.var_E601)) {
@@ -253,8 +253,8 @@ func_F1FD() {
 	playfx(level.var_7649["c12_selfdestruct_explosion"],var_00);
 	func_35FD();
 	scripts\engine\utility::waitframe();
-	if(isdefined(self.bt.var_71C9)) {
-		[[self.bt.var_71C9]]();
+	if(isdefined(self.var_3135.var_71C9)) {
+		[[self.var_3135.var_71C9]]();
 	}
 
 	var_00 = self.origin + (0,0,60);

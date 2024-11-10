@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2624.gsc
+ * Script: 2624.gsc
 ***************************************/
 
 main() {
@@ -276,7 +276,7 @@ precachefx() {
   }
 
   if (var_00) {
-  level._pipes._effect["steam"] = loadfx("vfx/core/impacts/pipe_steam");
+  level._pipes._effect["steam"] = loadfx("vfx\core\impacts\pipe_steam");
   level._pipes._sound["steam_hit"] = "mtl_steam_pipe_hit";
   level._pipes._sound["steam_loop"] = "mtl_steam_pipe_hiss_loop";
   level._pipes._sound["steam_end"] = "mtl_steam_pipe_hiss_loop_end";
@@ -286,7 +286,7 @@ precachefx() {
   }
 
   if (var_02) {
-  level._pipes._effect["steam_small"] = loadfx("vfx/core/impacts/pipe_steam_small");
+  level._pipes._effect["steam_small"] = loadfx("vfx\core\impacts\pipe_steam_small");
   level._pipes._sound["steam_small_hit"] = "mtl_steam_pipe_hit";
   level._pipes._sound["steam_small_loop"] = "mtl_steam_pipe_hiss_loop";
   level._pipes._sound["steam_small_end"] = "mtl_steam_pipe_hiss_loop_end";
@@ -296,7 +296,7 @@ precachefx() {
   }
 
   if (var_01) {
-  level._pipes._effect["fire"] = loadfx("vfx/core/impacts/pipe_fire");
+  level._pipes._effect["fire"] = loadfx("vfx\core\impacts\pipe_fire");
   level._pipes._sound["fire_hit"] = "mtl_gas_pipe_hit";
   level._pipes._sound["fire_loop"] = "mtl_gas_pipe_flame_loop";
   level._pipes._sound["fire_end"] = "mtl_gas_pipe_flame_end";
@@ -306,7 +306,7 @@ precachefx() {
   }
 
   if (var_03) {
-  level._pipes._effect["oil_leak"] = loadfx("vfx/core/impacts/pipe_oil_barrel_spill");
+  level._pipes._effect["oil_leak"] = loadfx("vfx\core\impacts\pipe_oil_barrel_spill");
   level._pipes._sound["oil_leak_hit"] = "mtl_oil_barrel_hit";
   level._pipes._sound["oil_leak_loop"] = "mtl_oil_barrel_hiss_loop";
   level._pipes._sound["oil_leak_end"] = "mtl_oil_barrel_hiss_loop_end";
@@ -316,7 +316,7 @@ precachefx() {
   }
 
   if (var_04) {
-  level._pipes._effect["oil_cap"] = loadfx("vfx/core/impacts/pipe_oil_barrel_squirt");
+  level._pipes._effect["oil_cap"] = loadfx("vfx\core\impacts\pipe_oil_barrel_squirt");
   level._pipes._sound["oil_cap_hit"] = "mtl_steam_pipe_hit";
   level._pipes._sound["oil_cap_loop"] = "mtl_steam_pipe_hiss_loop";
   level._pipes._sound["oil_cap_end"] = "mtl_steam_pipe_hiss_loop_end";

@@ -1,8 +1,8 @@
-/***************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\945.gsc
-***************************/
+ * Script: 945.gsc
+************************/
 
 func_2AD0() {
 	if(isdefined(level.var_119E["seeker_mp"])) {

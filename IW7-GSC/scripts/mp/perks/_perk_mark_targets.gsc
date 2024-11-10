@@ -1,18 +1,18 @@
-/***********************************************************
+/***************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\perks\_perk_mark_targets.gsc
-***********************************************************/
+ * Script: scripts\mp\perks\_perk_mark_targets.gsc
+***************************************************/
 
 marktarget_init() {
-	level._effect["marked_target"] = loadfx("vfx/iw7/_requests/mp/vfx_marked_target_z.vfx");
+	level._effect["marked_target"] = loadfx("vfx\iw7\_requests\mp\vfx_marked_target_z.vfx");
 }
 
 marktarget_run(param_00,param_01) {
 	self endon("death");
 	self endon("disconnect");
 	level endon("game_ended");
-	if(scripts\engine\utility::isbulletdamage(param_01) && isplayer(param_00) && param_00.team != self.team && !param_00 scripts\mp\_utility::_hasperk("specialty_empimmune") && !isdefined(param_00.ismarkedtarget)) {
+	if(scripts\engine\utility::isbulletdamage(param_01) && isplayer(param_00) && param_00.team != self.team && !param_00 scripts\mp\utility::_hasperk("specialty_empimmune") && !isdefined(param_00.ismarkedtarget)) {
 		thread marktarget_execute(param_00);
 	}
 }
@@ -36,11 +36,11 @@ marktarget_execute(param_00) {
 tagmarkedplayer(param_00,param_01) {
 	self endon("death");
 	self endon("disconnect");
-	scripts\mp\_missions::func_D991("ch_trait_marked_target");
+	scripts\mp\missions::func_D991("ch_trait_marked_target");
 	var_02 = gettime() + 3000;
 	while(isalive(param_00) && gettime() < var_02) {
 		if(level.gametype != "dm") {
-			var_03 = function_029A(scripts\engine\utility::getfx("marked_target"),param_01,"tag_origin",self.team);
+			var_03 = playfxontagforteam(scripts\engine\utility::getfx("marked_target"),param_01,"tag_origin",self.team);
 			continue;
 		}
 
@@ -60,6 +60,6 @@ func_13AA0(param_00,param_01,param_02) {
 	level endon("game_ended");
 	scripts\engine\utility::waittill_any_timeout_no_endon_death_2(param_02,"leave");
 	if(isdefined(param_01)) {
-		scripts\mp\_utility::outlinedisable(param_00,param_01);
+		scripts\mp\utility::outlinedisable(param_00,param_01);
 	}
 }

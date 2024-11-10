@@ -1,8 +1,8 @@
-/*************************************************
+/*****************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\contracts_coop.gsc
-*************************************************/
+ * Script: scripts\cp\contracts_coop.gsc
+*****************************************/
 
 init() {
 	if(!mayprocesscontracts()) {
@@ -15,7 +15,7 @@ init() {
 	var_00.numchallenges = 0;
 	var_01 = 0;
 	for(;;) {
-		var_02 = tablelookupbyrow("cp/contractChallengesZM.csv",var_01,0);
+		var_02 = tablelookupbyrow("cp\contractChallengesZM.csv",var_01,0);
 		if(!isdefined(var_02) || var_02 == "") {
 			break;
 		}
@@ -90,7 +90,7 @@ givecontractchallenge(param_00,param_01) {
 }
 
 lookupcontractchallengeref(param_00) {
-	var_01 = tablelookup("cp/contractChallengesZM.csv",0,param_00,1);
+	var_01 = tablelookup("cp\contractChallengesZM.csv",0,param_00,1);
 	if(!isdefined(var_01) || var_01 == "") {
 		return undefined;
 	}
@@ -99,7 +99,7 @@ lookupcontractchallengeref(param_00) {
 }
 
 lookupcontractchallengetarget(param_00) {
-	var_01 = tablelookup("cp/contractChallengesZM.csv",0,param_00,3);
+	var_01 = tablelookup("cp\contractChallengesZM.csv",0,param_00,3);
 	if(!isdefined(var_01) || var_01 == "") {
 		return undefined;
 	}
@@ -108,7 +108,7 @@ lookupcontractchallengetarget(param_00) {
 }
 
 lookupcontractchallengeteam(param_00) {
-	var_01 = tablelookup("cp/contractChallengesZM.csv",0,param_00,2);
+	var_01 = tablelookup("cp\contractChallengesZM.csv",0,param_00,2);
 	if(!isdefined(var_01) || var_01 == "") {
 		return undefined;
 	}

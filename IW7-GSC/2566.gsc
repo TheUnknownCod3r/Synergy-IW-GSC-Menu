@@ -1,28 +1,28 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\2566.gsc
-****************************/
+ * Script: 2566.gsc
+************************/
 
 func_12E91(param_00) {
-	scripts/asm/asm_bb::bb_requestweapon(weaponclass(self.primaryweapon));
+	scripts\asm\asm_bb::bb_requestweapon(weaponclass(self.primaryweapon));
 	func_12F28(param_00);
-	var_01 = scripts/asm/asm::func_233E("ai_notify","bulletwhizby");
+	var_01 = scripts\asm\asm::func_233E("ai_notify","bulletwhizby");
 	if(isdefined(var_01)) {
 		if(!isdefined(self.disablebulletwhizbyreaction)) {
 			var_02 = var_01.params[0];
 			var_03 = isdefined(var_02) && distancesquared(self.origin,var_02.origin) < 160000;
 			if(var_03 || scripts\engine\utility::cointoss()) {
-				scripts/asm/asm_bb::bb_requestwhizby(var_01);
+				scripts\asm\asm_bb::bb_requestwhizby(var_01);
 			}
 		}
 	}
 	else
 	{
 		var_04 = 100;
-		var_01 = scripts/asm/asm_bb::bb_getrequestedwhizby();
+		var_01 = scripts\asm\asm_bb::bb_getrequestedwhizby();
 		if(!isdefined(var_01) || gettime() > var_01.var_7686 + var_04) {
-			scripts/asm/asm_bb::bb_requestwhizby(undefined);
+			scripts\asm\asm_bb::bb_requestwhizby(undefined);
 		}
 	}
 
@@ -44,13 +44,13 @@ func_12E90(param_00) {
 		return level.failure;
 	}
 
-	scripts/asm/asm_bb::bb_setisincombat(func_8BEC(undefined) == level.success);
+	scripts\asm\asm_bb::bb_setisincombat(func_8BEC(undefined) == level.success);
 	if(scripts\anim\utility_common::isasniper()) {
-		self._blackboard.var_32D2 = 1;
+		self.var_1198.var_32D2 = 1;
 	}
 	else
 	{
-		self._blackboard.var_32D2 = undefined;
+		self.var_1198.var_32D2 = undefined;
 	}
 
 	if(weaponclass(self.var_394) == "pistol") {
@@ -58,14 +58,14 @@ func_12E90(param_00) {
 	}
 
 	var_01 = func_7FD3();
-	scripts/asm/asm_bb::bb_requestmovetype(var_01);
-	if(scripts/asm/asm_bb::bb_moverequested()) {
+	scripts\asm\asm_bb::bb_requestmovetype(var_01);
+	if(scripts\asm\asm_bb::bb_moverequested()) {
 		self.a.state = "move";
 	}
-	else if(isdefined(scripts/asm/asm_bb::bb_getcovernode())) {
+	else if(isdefined(scripts\asm\asm_bb::bb_getcovernode())) {
 		self.a.state = "cover";
 	}
-	else if(scripts/asm/asm_bb::bb_isincombat()) {
+	else if(scripts\asm\asm_bb::bb_isincombat()) {
 		self.a.state = "combat";
 	}
 	else
@@ -77,18 +77,18 @@ func_12E90(param_00) {
 }
 
 func_12F64(param_00) {
-	var_01 = scripts/asm/asm::func_233E("ai_notify","bulletwhizby");
+	var_01 = scripts\asm\asm::func_233E("ai_notify","bulletwhizby");
 	if(isdefined(var_01) && isdefined(self.a)) {
 		if(randomfloat(1) < self.a.reacttobulletchance) {
-			scripts/asm/asm_bb::bb_requestwhizby(var_01);
+			scripts\asm\asm_bb::bb_requestwhizby(var_01);
 		}
 	}
 	else
 	{
 		var_02 = 100;
-		var_01 = scripts/asm/asm_bb::bb_getrequestedwhizby();
+		var_01 = scripts\asm\asm_bb::bb_getrequestedwhizby();
 		if(!isdefined(var_01) || gettime() > var_01.var_7686 + var_02) {
-			scripts/asm/asm_bb::bb_requestwhizby(undefined);
+			scripts\asm\asm_bb::bb_requestwhizby(undefined);
 		}
 	}
 
@@ -97,12 +97,12 @@ func_12F64(param_00) {
 
 func_12F28(param_00) {
 	var_01 = self [[self.var_71A6]]();
-	var_02 = scripts/asm/asm_bb::func_292C();
+	var_02 = scripts\asm\asm_bb::func_292C();
 	var_03 = [];
 	var_03["prone"] = 0;
 	var_03["crouch"] = 1;
 	var_03["stand"] = 2;
-	var_04 = scripts/aitypes/bt_util::func_75();
+	var_04 = scripts\aitypes\bt_util::func_75();
 	if(isdefined(self.vehicle_getspawnerarray)) {
 		var_02 = "stand";
 	}
@@ -112,10 +112,10 @@ func_12F28(param_00) {
 	}
 
 	if(var_04 == "casual" || var_04 == "casual_gun") {
-		scripts/asm/asm_bb::bb_requestsmartobject("stand");
+		scripts\asm\asm_bb::bb_requestsmartobject("stand");
 	}
 	else if(var_01 == "prone" && self.unittype == "c6") {
-		scripts/asm/asm_bb::bb_requestsmartobject("crouch");
+		scripts\asm\asm_bb::bb_requestsmartobject("crouch");
 	}
 	else
 	{
@@ -123,12 +123,12 @@ func_12F28(param_00) {
 			var_02 = var_01;
 		}
 		else if(var_02 == "crouch" && var_03[var_01] > var_03["crouch"]) {
-			if(scripts/asm/asm_bb::bb_isinbadcrouchspot()) {
+			if(scripts\asm\asm_bb::bb_isinbadcrouchspot()) {
 				var_02 = "stand";
 			}
 		}
 
-		scripts/asm/asm_bb::bb_requestsmartobject(var_02);
+		scripts\asm\asm_bb::bb_requestsmartobject(var_02);
 	}
 
 	return level.success;
@@ -264,28 +264,28 @@ func_FE5D(param_00) {
 }
 
 func_FE6E(param_00) {
-	self.bt.shootparams = spawnstruct();
-	self.bt.shootparams.taskid = param_00;
-	self.bt.shootparams.starttime = gettime();
-	self.bt.m_bfiring = 0;
+	self.var_3135.shootparams = spawnstruct();
+	self.var_3135.shootparams.taskid = param_00;
+	self.var_3135.shootparams.starttime = gettime();
+	self.var_3135.m_bfiring = 0;
 	self.doentitiessharehierarchy = self.isnodeoccupied;
 	self.var_299D = self.isnodeoccupied;
 	var_01 = scripts\anim\utility_common::isasniper();
 	if(var_01) {
-		func_FE5D(self.bt.shootparams);
+		func_FE5D(self.var_3135.shootparams);
 		self.var_103BF = 0;
 		self.var_103BA = 0;
 	}
 }
 
 func_FE83(param_00) {
-	if(isdefined(self.bt.shootparams) && self.bt.shootparams.taskid == param_00) {
-		self.bt.shootparams = undefined;
+	if(isdefined(self.var_3135.shootparams) && self.var_3135.shootparams.taskid == param_00) {
+		self.var_3135.shootparams = undefined;
 	}
 
-	self.bt.m_bfiring = 0;
+	self.var_3135.m_bfiring = 0;
 	self.var_299D = undefined;
-	scripts/asm/asm_bb::bb_requestfire(0);
+	scripts\asm\asm_bb::bb_requestfire(0);
 }
 
 isaimedataimtarget() {
@@ -319,11 +319,11 @@ _meth_81E2(param_00) {
 }
 
 func_FE88(param_00) {
-	if(scripts/asm/asm::asm_ephemeraleventfired("shoot","shoot_finished")) {
+	if(scripts\asm\asm::asm_ephemeraleventfired("shoot","shoot_finished")) {
 		return level.success;
 	}
 
-	var_01 = self.bt.shootparams;
+	var_01 = self.var_3135.shootparams;
 	var_02 = makescrambler();
 	if(isdefined(self.isnodeoccupied) && !isplayer(self.isnodeoccupied) && var_01.starttime < gettime()) {
 		var_03 = int(gettime() / 50);
@@ -357,27 +357,27 @@ func_FE88(param_00) {
 		var_01.objective = "normal";
 	}
 
-	scripts/asm/asm_bb::bb_setshootparams(var_01,self.isnodeoccupied);
+	scripts\asm\asm_bb::bb_setshootparams(var_01,self.isnodeoccupied);
 	if(isaimedataimtarget()) {
-		if(!self.bt.m_bfiring) {
+		if(!self.var_3135.m_bfiring) {
 			resetmisstime_code();
 			chooseshootstyle(var_01);
 			choosenumshotsandbursts(var_01);
 		}
 
 		func_3EF8(var_01);
-		self.bt.m_bfiring = 1;
+		self.var_3135.m_bfiring = 1;
 	}
 	else
 	{
-		self.bt.m_bfiring = 0;
+		self.var_3135.m_bfiring = 0;
 	}
 
 	if(!isdefined(var_01.pos) && !isdefined(var_01.ent)) {
 		return level.success;
 	}
 
-	scripts/asm/asm_bb::bb_requestfire(self.bt.m_bfiring);
+	scripts\asm\asm_bb::bb_requestfire(self.var_3135.m_bfiring);
 	return level.running;
 }
 
@@ -438,15 +438,15 @@ func_43EB(param_00) {
 }
 
 func_DF53(param_00) {
-	scripts/asm/asm_bb::bb_requestreload(1);
-	self.bt.instancedata[param_00] = spawnstruct();
-	self.bt.instancedata[param_00].var_2AB1 = isdefined(self.vehicle_getspawnerarray);
-	self.bt.instancedata[param_00].timeout = gettime() + 5000;
+	scripts\asm\asm_bb::bb_requestreload(1);
+	self.var_3135.instancedata[param_00] = spawnstruct();
+	self.var_3135.instancedata[param_00].var_2AB1 = isdefined(self.vehicle_getspawnerarray);
+	self.var_3135.instancedata[param_00].timeout = gettime() + 5000;
 }
 
 func_DF55(param_00) {
-	scripts/asm/asm_bb::bb_requestreload(0);
-	self.bt.instancedata[param_00] = undefined;
+	scripts\asm\asm_bb::bb_requestreload(0);
+	self.var_3135.instancedata[param_00] = undefined;
 }
 
 func_DF4E() {
@@ -456,16 +456,16 @@ func_DF4E() {
 }
 
 func_DF56(param_00) {
-	if(scripts/asm/asm::asm_ephemeraleventfired("reload","end")) {
+	if(scripts\asm\asm::asm_ephemeraleventfired("reload","end")) {
 		return level.success;
 	}
 
-	if(gettime() > self.bt.instancedata[param_00].timeout) {
+	if(gettime() > self.var_3135.instancedata[param_00].timeout) {
 		return level.success;
 	}
 
 	var_01 = weaponclipsize(self.var_394);
-	var_02 = isdefined(self._blackboard.var_32D2);
+	var_02 = isdefined(self.var_1198.var_32D2);
 	if(!var_02 && self.bulletsinclip == var_01) {
 		return level.success;
 	}
@@ -480,7 +480,7 @@ func_DF56(param_00) {
 		return level.success;
 	}
 
-	var_03 = self.bt.instancedata[param_00].var_2AB1;
+	var_03 = self.var_3135.instancedata[param_00].var_2AB1;
 	if(!var_03 && isdefined(self.vehicle_getspawnerarray)) {
 		func_DF4E();
 		return level.success;
@@ -496,13 +496,13 @@ chooseshootstyle(param_00) {
 	var_04 = weaponclass(self.var_394);
 	var_05 = makescrambler();
 	var_06 = isdefined(var_05);
-	if(isdefined(self.bt.var_FEDB)) {
+	if(isdefined(self.var_3135.var_FEDB)) {
 		var_07 = 0;
-		if(isdefined(self.bt.var_FED8)) {
-			var_07 = self.bt.var_FED8;
+		if(isdefined(self.var_3135.var_FED8)) {
+			var_07 = self.var_3135.var_FED8;
 		}
 
-		return func_F840(param_00,self.bt.var_FEDB,var_07);
+		return func_F840(param_00,self.var_3135.var_FEDB,var_07);
 	}
 
 	if(var_05 == "mg" || var_07) {
@@ -850,7 +850,7 @@ func_FFC2() {
 		return 0;
 	}
 
-	if(isdefined(self.bt.var_C2)) {
+	if(isdefined(self.var_3135.var_C2)) {
 		return 0;
 	}
 
@@ -872,7 +872,7 @@ func_FFC2() {
 }
 
 func_2544(param_00) {
-	self.bt.instancedata[param_00] = 0;
+	self.var_3135.instancedata[param_00] = 0;
 }
 
 func_2542(param_00) {
@@ -884,7 +884,7 @@ func_2542(param_00) {
 }
 
 func_2545(param_00) {
-	self.bt.instancedata[param_00] = undefined;
+	self.var_3135.instancedata[param_00] = undefined;
 }
 
 func_93B6(param_00) {
@@ -896,14 +896,14 @@ func_93B6(param_00) {
 }
 
 func_2753(param_00) {
-	if(scripts/asm/asm_bb::bb_moverequested()) {
+	if(scripts\asm\asm_bb::bb_moverequested()) {
 		return level.failure;
 	}
 
 	var_01 = self _meth_8530(128);
 	if(isdefined(var_01)) {
 		self _meth_8481(var_01);
-		self._blackboard.var_2754 = gettime();
+		self.var_1198.var_2754 = gettime();
 		return level.success;
 	}
 
@@ -912,11 +912,11 @@ func_2753(param_00) {
 
 func_1384E(param_00) {
 	var_01 = gettime();
-	if(var_01 > self._blackboard.var_2754 + 100 && !isdefined(self.vehicle_getspawnerarray)) {
+	if(var_01 > self.var_1198.var_2754 + 100 && !isdefined(self.vehicle_getspawnerarray)) {
 		return level.failure;
 	}
 
-	if(var_01 > self._blackboard.var_2754 + 5000) {
+	if(var_01 > self.var_1198.var_2754 + 5000) {
 		return level.failure;
 	}
 
@@ -925,7 +925,7 @@ func_1384E(param_00) {
 
 func_275A(param_00) {
 	self _meth_8484();
-	self._blackboard.var_2754 = undefined;
+	self.var_1198.var_2754 = undefined;
 }
 
 func_24D4(param_00) {
@@ -956,7 +956,7 @@ func_E84E(param_00) {
 	self.loadstartpointtransients = self.var_F126;
 	self.doentitiessharehierarchy = self.var_F126;
 	self.var_299D = self.var_F126;
-	self.var_F126.bt.var_1152B = 1;
+	self.var_F126.var_3135.var_1152B = 1;
 }
 
 func_13132(param_00) {
@@ -1005,7 +1005,7 @@ func_E84D(param_00) {
 		return level.running;
 	}
 
-	var_05 = self.bt.shootparams;
+	var_05 = self.var_3135.shootparams;
 	if(self getpersstat(self.isnodeoccupied)) {
 		var_05.pos = self.isnodeoccupied getshootatpos();
 		var_05.ent = self.isnodeoccupied;
@@ -1031,27 +1031,27 @@ func_E84D(param_00) {
 		var_05.objective = "normal";
 	}
 
-	scripts/asm/asm_bb::bb_setshootparams(var_05,self.isnodeoccupied);
+	scripts\asm\asm_bb::bb_setshootparams(var_05,self.isnodeoccupied);
 	if(isaimedataimtarget()) {
-		if(!self.bt.m_bfiring) {
+		if(!self.var_3135.m_bfiring) {
 			resetmisstime_code();
 			chooseshootstyle(var_05);
 			choosenumshotsandbursts(var_05);
 		}
 
 		func_3EF8(var_05);
-		self.bt.m_bfiring = 1;
+		self.var_3135.m_bfiring = 1;
 	}
 	else
 	{
-		self.bt.m_bfiring = 0;
+		self.var_3135.m_bfiring = 0;
 	}
 
 	if(!isdefined(var_05.pos) && !isdefined(var_05.ent)) {
 		return level.success;
 	}
 
-	scripts/asm/asm_bb::bb_requestfire(self.bt.m_bfiring);
+	scripts\asm\asm_bb::bb_requestfire(self.var_3135.m_bfiring);
 	return level.running;
 }
 
@@ -1066,7 +1066,7 @@ func_E84F(param_00) {
 }
 
 func_12A82(param_00) {
-	if(isdefined(scripts/asm/asm_bb::bb_getrequestedturret())) {
+	if(isdefined(scripts\asm\asm_bb::bb_getrequestedturret())) {
 		return level.success;
 	}
 
@@ -1144,9 +1144,9 @@ func_12F1D(param_00) {
 		return level.success;
 	}
 
-	if(scripts/asm/asm_bb::func_2985() && isdefined(self._blackboard.shootparams.pos)) {
+	if(scripts\asm\asm_bb::func_2985() && isdefined(self.var_1198.shootparams.pos)) {
 		var_03 = self _meth_853C();
-		var_04 = vectornormalize(self._blackboard.shootparams.pos - self geteye());
+		var_04 = vectornormalize(self.var_1198.shootparams.pos - self geteye());
 		var_05 = vectordot(var_03,var_04);
 		if(var_05 < 0.906) {
 			self.var_BF5C = undefined;

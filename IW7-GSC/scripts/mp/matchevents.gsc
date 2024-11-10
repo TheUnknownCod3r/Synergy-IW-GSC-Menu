@@ -1,13 +1,13 @@
-/**********************************************
+/**************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\matchevents.gsc
-**********************************************/
+ * Script: scripts\mp\matchevents.gsc
+**************************************/
 
 init() {
-	level.var_B3DA["smoke"] = loadfx("vfx/iw7/_requests/mp/vfx_debug_warning.vfx");
-	level.var_B3DA["tracer"] = loadfx("vfx/iw7/_requests/mp/vfx_debug_warning.vfx");
-	level.var_B3DA["explosion"] = loadfx("vfx/iw7/_requests/mp/vfx_debug_warning.vfx");
+	level.var_B3DA["smoke"] = loadfx("vfx\iw7\_requests\mp\vfx_debug_warning.vfx");
+	level.var_B3DA["tracer"] = loadfx("vfx\iw7\_requests\mp\vfx_debug_warning.vfx");
+	level.var_B3DA["explosion"] = loadfx("vfx\iw7\_requests\mp\vfx_debug_warning.vfx");
 	level.var_B3E6["mortar"] = ::func_5915;
 	level.var_B3E6["smoke"] = ::func_5AAF;
 	level.var_B3E6["airstrike"] = ::func_57DD;

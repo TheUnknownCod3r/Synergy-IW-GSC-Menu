@@ -1,8 +1,8 @@
-/*****************************************
+/*********************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\sp\lights.gsc
-*****************************************/
+ * Script: scripts\sp\lights.gsc
+*********************************/
 
 init() {
 	var_00 = getentarray("script_light","targetname");
@@ -1129,9 +1129,9 @@ func_F5B8(param_00) {
 	var_05 = getdvarint("sm_sunenable",1);
 	var_06 = getdvarfloat("sm_sunshadowscale",1);
 	var_07 = getdvarint("sm_qualityspotshadow",1);
-	function_01C5("sm_sunenable",var_01);
-	function_01C5("sm_sunshadowscale",var_02);
-	function_01C5("sm_qualityspotshadow",var_04);
+	setsaveddvar("sm_sunenable",var_01);
+	setsaveddvar("sm_sunshadowscale",var_02);
+	setsaveddvar("sm_qualityspotshadow",var_04);
 	func_ABA0(var_03,param_00);
 }
 
@@ -1150,12 +1150,12 @@ func_ABA0(param_00,param_01) {
 		var_06 = var_02;
 		for(var_07 = 0;var_07 < var_04;var_07++) {
 			var_06 = var_06 + var_05;
-			function_01C5("sm_sunSampleSizeNear",var_06);
+			setsaveddvar("sm_sunSampleSizeNear",var_06);
 			wait(0.05);
 		}
 	}
 
-	function_01C5("sm_sunSampleSizeNear",param_00);
+	setsaveddvar("sm_sunSampleSizeNear",param_00);
 }
 
 func_AB83(param_00,param_01) {

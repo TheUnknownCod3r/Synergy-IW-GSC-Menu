@@ -1,8 +1,8 @@
-/*************************************************************
+/*****************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\anim\hummer_turret\dshk_stand.gsc
-*************************************************************/
+ * Script: scripts\anim\hummer_turret\dshk_stand.gsc
+*****************************************************/
 
 main() {
 	var_00 = self _meth_8164();

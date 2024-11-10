@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2709.gsc
+ * Script: 2709.gsc
 ***************************************/
 
 shouldlogcodcasterclientmatchdata() {

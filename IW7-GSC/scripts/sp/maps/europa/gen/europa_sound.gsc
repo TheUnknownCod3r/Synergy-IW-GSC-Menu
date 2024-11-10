@@ -1,8 +1,8 @@
-/***************************************************************
+/*******************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\sp\maps\europa\gen\europa_sound.gsc
-***************************************************************/
+ * Script: scripts\sp\maps\europa\gen\europa_sound.gsc
+*******************************************************/
 
 main() {
 	var_00 = scripts\common\createfx::createloopsound();

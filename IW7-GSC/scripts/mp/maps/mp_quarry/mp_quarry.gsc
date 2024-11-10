@@ -1,15 +1,15 @@
-/***********************************************************
+/***************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\maps\mp_quarry\mp_quarry.gsc
-***********************************************************/
+ * Script: scripts\mp\maps\mp_quarry\mp_quarry.gsc
+***************************************************/
 
 main() {
-	lib_0FE1::main();
+	scripts\mp\maps\mp_quarry\mp_quarry_precache::main();
 	scripts\mp\maps\mp_quarry\gen\mp_quarry_art::main();
-	lib_0FE0::main();
-	scripts\mp\_load::main();
-	scripts\mp\_compass::func_FACD("compass_map_mp_quarry");
+	scripts\mp\maps\mp_quarry\mp_quarry_fx::main();
+	scripts\mp\load::main();
+	scripts\mp\compass::setupminimap("compass_map_mp_quarry");
 	setdvar("r_lightGridEnableTweaks",1);
 	setdvar("r_lightGridIntensity",1.33);
 	setdvar("r_tessellationCutoffDistance",2200);
@@ -19,7 +19,7 @@ main() {
 	game["allies_outfit"] = "urban";
 	game["axis_outfit"] = "woodland";
 	level.var_C7B3 = getentarray("OutOfBounds","targetname");
-	thread scripts\mp\_animation_suite::func_1FAA();
+	thread scripts\mp\animation_suite::animationsuite();
 	thread fix_collision();
 	thread patchoutofboundstrigger();
 	thread spawn_oob_trigger();
@@ -28,7 +28,7 @@ main() {
 
 func_CDA4(param_00) {
 	wait(30);
-	function_030E(param_00);
+	playcinematicforalllooping(param_00);
 }
 
 fix_collision() {

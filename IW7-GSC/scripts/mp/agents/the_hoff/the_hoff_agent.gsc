@@ -1,11 +1,11 @@
-/*****************************************************************
+/*********************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\agents\the_hoff\the_hoff_agent.gsc
-*****************************************************************/
+ * Script: scripts\mp\agents\the_hoff\the_hoff_agent.gsc
+*********************************************************/
 
 registerscriptedagent() {
-	scripts/aitypes/bt_util::init();
+	scripts\aitypes\bt_util::init();
 	lib_03A9::func_DEE8();
 	lib_0F37::func_2371();
 	thread func_FAB0();

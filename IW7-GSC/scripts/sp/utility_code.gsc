@@ -1,8 +1,8 @@
-/***********************************************
+/***************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\sp\utility_code.gsc
-***********************************************/
+ * Script: scripts\sp\utility_code.gsc
+***************************************/
 
 func_11166(param_00,param_01) {
 	var_02 = param_00.var_11159;
@@ -124,7 +124,7 @@ func_900D(param_00,param_01,param_02,param_03,param_04,param_05,param_06) {
 }
 
 func_12DB(param_00,param_01,param_02,param_03,param_04,param_05) {
-	var_06 = function_00D0();
+	var_06 = getsticksconfig();
 	if(level.player scripts\engine\utility::is_player_gamepad_enabled()) {
 		if((isdefined(level.var_DADB) && level.var_DADB) || isdefined(level.var_DADC) && level.var_DADC) {
 			if(issubstr(var_06,"southpaw") || param_05 && issubstr(var_06,"legacy")) {
@@ -748,11 +748,11 @@ func_5F8F() {
 	scripts\sp\_utility::func_65E1("dynamic_run_speed_stopped");
 	self endon("dynamic_run_speed_stopped");
 	var_00 = "DRS_run_2_stop";
-	scripts/sp/anim::func_1EC8(self,"gravity",var_00);
+	scripts\sp\anim::func_1EC8(self,"gravity",var_00);
 	scripts\sp\_utility::func_65DD("dynamic_run_speed_stopping");
 	while(scripts\sp\_utility::func_65DB("dynamic_run_speed_stopped")) {
 		var_01 = "DRS_stop_idle";
-		thread scripts/sp/anim::func_1ECC(self,var_01);
+		thread scripts\sp\anim::func_1ECC(self,var_01);
 		if(isdefined(level.var_EC85["generic"]["signal_go"])) {
 			func_8A0B("go");
 		}
@@ -808,7 +808,7 @@ func_8A0B(param_00,param_01,param_02,param_03) {
 		return;
 	}
 
-	scripts/sp/anim::func_1EC7(self,var_05);
+	scripts\sp\anim::func_1EC7(self,var_05);
 }
 
 func_764E() {
@@ -816,7 +816,7 @@ func_764E() {
 }
 
 func_764F(param_00) {
-	function_01C5("g_speed",int(param_00));
+	setsaveddvar("g_speed",int(param_00));
 }
 
 func_7647() {
@@ -843,9 +843,9 @@ func_2680() {
 
 	scripts\engine\utility::flag_init("autosave_tactical_player_nade");
 	level.var_267E = 0;
-	function_014C("autosave_player_nade","+frag");
-	function_014C("autosave_player_nade","-smoke");
-	function_014C("autosave_player_nade","+smoke");
+	notifyoncommand("autosave_player_nade","+frag");
+	notifyoncommand("autosave_player_nade","-smoke");
+	notifyoncommand("autosave_player_nade","+smoke");
 	scripts\engine\utility::array_thread(level.players,::func_267A);
 }
 
@@ -894,7 +894,7 @@ func_267F() {
 		}
 	}
 
-	var_00 = function_0072("axis");
+	var_00 = getaiarray("axis");
 	foreach(var_02 in var_00) {
 		if(isdefined(var_02.isnodeoccupied) && isplayer(var_02.isnodeoccupied)) {
 			return;
@@ -949,7 +949,7 @@ func_BDE1(param_00,param_01,param_02,param_03,param_04,param_05) {
 func_BDE4(param_00,param_01,param_02) {
 	level endon("stop_music");
 	scripts\engine\utility::flag_wait("_stealth_spotted");
-	function_0146(0.5);
+	musicstop(0.5);
 	while(scripts\engine\utility::flag("_stealth_spotted")) {
 		scripts\engine\utility::flag_waitopen("_stealth_spotted");
 		wait(1);
@@ -1301,7 +1301,7 @@ func_28D9(param_00) {
 	wait(1.5);
 	if(isdefined(param_00)) {
 		scripts\sp\_utility::func_F2DC(param_00,1);
-		var_01 = function_0072(param_00);
+		var_01 = getaiarray(param_00);
 	}
 	else
 	{
@@ -1309,7 +1309,7 @@ func_28D9(param_00) {
 			scripts\sp\_utility::func_F2DC(param_00,1);
 		}
 
-		var_01 = function_0072();
+		var_01 = getaiarray();
 	}
 
 	if(isdefined(level.var_A056) && isdefined(level.var_A056.var_1630)) {
@@ -1431,7 +1431,7 @@ dyndof_trace_internal(param_00) {
 	param_00 = combineangles(dyndof_getplayerangles(),param_00);
 	var_01 = dyndof_getplayerorigin();
 	var_02 = dyndof_getplayerorigin() + anglestoforward(param_00) * level.dyndof.maxfocusdist;
-	return function_0287(var_01,var_02,level.dyndof.var_457D,[level.player],1,"physicsquery_closest",0);
+	return physics_raycast(var_01,var_02,level.dyndof.var_457D,[level.player],1,"physicsquery_closest",0);
 }
 
 dyndof_getplayerorigin() {

@@ -1,10 +1,10 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\3500.gsc
+ * Script: 3500.gsc
 ***************************************/
 
 func_B337() {
-  level._effect["map_target_mark"] = loadfx("vfx/iw7/_requests/mp/vfx_marker_map_target");
+  level._effect["map_target_mark"] = loadfx("vfx\iw7\_requests\mp\vfx_marker_map_target");
 }
 
 _meth_8112(var_00, var_01, var_02) {

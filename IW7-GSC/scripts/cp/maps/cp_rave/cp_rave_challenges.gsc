@@ -1,8 +1,8 @@
-/******************************************************************
+/**********************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\maps\cp_rave\cp_rave_challenges.gsc
-******************************************************************/
+ * Script: scripts\cp\maps\cp_rave\cp_rave_challenges.gsc
+**********************************************************/
 
 register_default_challenges() {
 	scripts\engine\utility::flag_init("pause_challenges");
@@ -306,7 +306,7 @@ add_to_completed_challenges(param_00) {
 
 	self.completed_challenges = scripts\engine\utility::array_add_safe(self.completed_challenges,param_00);
 	if(self.completed_challenges.size == level.challenge_list.size) {
-		scripts/cp/zombies/achievement::update_achievement("TOP_CAMPER",1);
+		scripts\cp\zombies\achievement::update_achievement("TOP_CAMPER",1);
 	}
 
 	self.current_challenge_kiosk.interaction.power hudoutlineenableforclient(self,3,1,1);
@@ -534,7 +534,7 @@ wait_for_marked_zombies(param_00) {
 						scripts\cp\cp_outline::disable_outline_for_player(var_02,var_04);
 					}
 
-					level.var_C20A--;
+					level.num_zombies_marked--;
 					var_02.marked_for_challenge = undefined;
 				}
 			}
@@ -555,7 +555,7 @@ wait_for_marked_zombies(param_00) {
 			var_02.marked_for_challenge = 1;
 			scripts\cp\cp_outline::enable_outline(var_02,0,1,0);
 			var_02 thread remove_outline_on_death();
-			level.var_C20A++;
+			level.num_zombies_marked++;
 			while(level.num_zombies_marked >= param_00.objective_icon) {
 				if(scripts\engine\utility::flag("pause_challenges")) {
 					foreach(var_02 in scripts\mp\mp_agent::getaliveagentsofteam("axis")) {
@@ -564,7 +564,7 @@ wait_for_marked_zombies(param_00) {
 								scripts\cp\cp_outline::disable_outline_for_player(var_02,var_04);
 							}
 
-							level.var_C20A--;
+							level.num_zombies_marked--;
 							var_02.marked_for_challenge = undefined;
 						}
 					}

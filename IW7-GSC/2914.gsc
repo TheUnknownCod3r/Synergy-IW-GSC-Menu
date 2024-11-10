@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\2914.gsc
-****************************/
+ * Script: 2914.gsc
+************************/
 
 func_96E9(param_00,param_01,param_02) {
 	if(isdefined(param_00)) {

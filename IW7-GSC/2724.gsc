@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2724.gsc
+ * Script: 2724.gsc
 ***************************************/
 
 func_13A12() {

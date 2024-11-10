@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\2497.gsc
-****************************/
+ * Script: 2497.gsc
+************************/
 
 main() {
 	var_00[0] = "head_sc_kloos";

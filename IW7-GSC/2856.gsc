@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2856.gsc
+ * Script: 2856.gsc
 ***************************************/
 
 main() {
@@ -62,14 +62,14 @@ func_4F25() {
 }
 
 func_1355(var_00) {
-  if (scripts/sp/utility::func_93A6()) {
-  scripts/sp/specialist_MAYBE::hide_helmet_impacts();
+  if (scripts\sp\utility::func_93A6()) {
+  scripts\sp\specialist_MAYBE::hide_helmet_impacts();
 
   if (!level.console)
   wait 0.05;
   }
 
-  if (scripts/sp/utility::func_9BB7()) {
+  if (scripts\sp\utility::func_9BB7()) {
   _setsaveddvar("ui_nextMission", "0");
 
   if (isdefined(level.func_BF96))
@@ -85,7 +85,7 @@ func_1355(var_00) {
   setdvar("ui_prev_map", level.script);
   game["previous_map"] = undefined;
   var_01 = func_7F6B(level.script);
-  scripts/sp/gameskill::func_262C("aa_main_" + level.script);
+  scripts\sp\gameskill::func_262C("aa_main_" + level.script);
 
   if (!isdefined(var_01)) {
   _missionsuccess(level.script);
@@ -93,16 +93,16 @@ func_1355(var_00) {
   }
 
   if (level.script != "shipcrib_epilogue")
-  scripts/sp/utility::func_ABD2();
+  scripts\sp\utility::func_ABD2();
 
   func_F77F(var_01);
-  scripts/sp/loadout::func_EB5B();
+  scripts\sp\loadout::func_EB5B();
   var_02 = func_12F24();
   func_0A2F::func_12E18();
   _updategamerprofile();
 
   if (func_8BBF(var_01))
-  scripts/sp/utility::settimer(func_7D92(var_01));
+  scripts\sp\utility::settimer(func_7D92(var_01));
 
   if (func_7F6A(var_01)) {
   if (func_3DEA(var_01, 1, 0)) {
@@ -114,7 +114,7 @@ func_1355(var_00) {
 
   if (var_03 >= 4) {
   if (func_3DEA(var_01, 4, 1)) {
-  scripts/sp/utility::settimer("VETERAN");
+  scripts\sp\utility::settimer("VETERAN");
   func_0A2F::func_EBB3("veh_mil_air_un_jackal_livery_shell_21");
   }
   }
@@ -138,12 +138,12 @@ func_1355(var_00) {
   }
 
   if (getitemfromcache(var_01) && func_3DEB(var_01))
-  scripts/sp/utility::settimer("ALL_SA");
+  scripts\sp\utility::settimer("ALL_SA");
 
   if (getitemdroporiginandangles(var_01) && func_3DE8(var_01))
-  scripts/sp/utility::settimer("ALL_JA");
+  scripts\sp\utility::settimer("ALL_JA");
 
-  level.player scripts/sp/analytics::func_B8CE(level.script);
+  level.player scripts\sp\analytics::func_B8CE(level.script);
 
   if (level.script == "shipcrib_epilogue") {
   _changelevel("", 0);
@@ -408,7 +408,7 @@ func_1356(var_00, var_01, var_02) {
   }
 
   if (var_02)
-  level thread scripts/sp/utility::func_BF98();
+  level thread scripts\sp\utility::func_BF98();
 
   if (getdvarint("fastload", 1) != 0) {
   var_10 = func_7F6D(var_04);
@@ -554,8 +554,8 @@ func_1463(var_00, var_01) {
   if (!scripts\engine\utility::array_contains(var_13, var_23[var_33])) {
   if (issubstr(scripts\engine\utility::get_template_script_MAYBE(), "crib")) {
   if (!scripts\engine\utility::array_contains(var_02, var_23[var_33])) {
-    var_32 = var_23[var_33];
-    break;
+  var_32 = var_23[var_33];
+  break;
   }
   } else {
   var_32 = var_23[var_33];
@@ -580,7 +580,7 @@ func_1463(var_00, var_01) {
   }
 
   var_19 = scripts\engine\utility::array_remove(var_19, var_32);
-  thread scripts/sp/utility::func_1264E("weapon_" + var_32 + "_tr");
+  thread scripts\sp\utility::func_1264E("weapon_" + var_32 + "_tr");
   var_30 = scripts\engine\utility::array_add(var_30, "weapon_" + var_32 + "_tr");
   level.func_D9E5["loaded_weapons"] = scripts\engine\utility::array_remove(level.func_D9E5["loaded_weapons"], var_32);
   var_23 = scripts\engine\utility::array_remove(var_23, var_32);
@@ -675,7 +675,7 @@ func_1464() {
   }
   }
 
-  scripts/sp/utility::func_12651(var_01);
+  scripts\sp\utility::func_12651(var_01);
 }
 
 func_1357() {
@@ -935,9 +935,9 @@ func_F77F(var_00) {
   var_01 = level.player _meth_8139("missionHighestDifficulty");
   var_02 = level.func_7683 + 1;
 
-  if (scripts/sp/utility::func_93AB())
+  if (scripts\sp\utility::func_93AB())
   var_02 = 6;
-  else if (scripts/sp/utility::func_93A6())
+  else if (scripts\sp\utility::func_93A6())
   var_02 = 5;
 
   var_03 = "";

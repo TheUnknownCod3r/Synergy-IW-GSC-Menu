@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3621.gsc
-****************************/
+ * Script: 3621.gsc
+************************/
 
 func_7977() {
 	var_00 = level.var_612D.var_A925;
@@ -60,28 +60,28 @@ func_95C4() {
 	level.var_612D.var_A8C6 = undefined;
 	scripts\engine\utility::flag_init("emp_force_delete");
 	scripts\engine\utility::flag_init("emp_dof_enabled");
-	level.var_7649["c12_impact"] = loadfx("vfx/core/equipment/emp_grenade/vfx_iw7_equip_emp_gren_mini_exp.vfx");
-	level.var_7649["player_shock"] = loadfx("vfx/iw7/core/equipment/emp/vfx_equip_emp_gren_hit_inplayerface.vfx");
-	level.var_7649["emp_energy_strand_ptp"] = loadfx("vfx/iw7/core/equipment/emp/vfx_equip_emp_gren_pointbeam.vfx");
-	level.var_7649["c12_shock"] = loadfx("vfx/iw7/core/equipment/emp/vfx_equip_emp_gren_hit_c12_peeloff.vfx");
-	level.var_7649["c12_death"] = loadfx("vfx/iw7/core/equipment/emp/vfx_equip_emp_gren_hit_c12_kill.vfx");
-	level.var_7649["c8_shock"] = loadfx("vfx/iw7/core/equipment/emp/vfx_equip_emp_gren_hit_c6_peeloff.vfx");
-	level.var_7649["c8_death"] = loadfx("vfx/iw7/core/equipment/emp/vfx_equip_emp_gren_hit_c12_kill.vfx");
-	level.var_7649["seeker_shock"] = loadfx("vfx/iw7/core/equipment/emp/vfx_equip_emp_gren_hit_c6_peeloff.vfx");
-	level.var_7649["seeker_death"] = loadfx("vfx/iw7/core/equipment/emp/vfx_equip_emp_gren_hit_c6_kill.vfx");
-	level.var_7649["c6_shock"] = loadfx("vfx/iw7/core/equipment/emp/vfx_equip_emp_gren_hit_c6_peeloff.vfx");
-	level.var_7649["c6_death"] = loadfx("vfx/iw7/core/equipment/emp/vfx_equip_emp_gren_hit_c6_kill.vfx");
-	level.var_7649["c6i_shock"] = loadfx("vfx/iw7/core/equipment/emp/vfx_equip_emp_gren_hit_c6_peeloff.vfx");
-	level.var_7649["c6i_death"] = loadfx("vfx/iw7/core/equipment/emp/vfx_equip_emp_gren_hit_c6_kill.vfx");
-	level.var_7649["soldier_shock"] = loadfx("vfx/iw7/core/equipment/emp/vfx_equip_emp_gren_hit_human.vfx");
-	level.var_7649["soldier_death"] = loadfx("vfx/iw7/core/equipment/emp/vfx_equip_emp_gren_hit_human_kill.vfx");
-	level.var_7649["vfx_equip_emp_a2_thegreatzapper"] = loadfx("vfx/iw7/core/equipment/emp/vfx_equip_emp_a2_thegreatzapper.vfx");
-	level.var_7649["vfx_equip_emp_a2_satellite"] = loadfx("vfx/iw7/core/equipment/emp/vfx_equip_emp_a2_satellite.vfx");
-	level.var_7649["vfx_equip_emp_a2_hitbyzapper"] = loadfx("vfx/iw7/core/equipment/emp/vfx_equip_emp_a2_hitbyzapper.vfx");
-	level.var_7649["vfx_equip_emp_a2_groundcov"] = loadfx("vfx/iw7/core/equipment/emp/vfx_equip_emp_a2_groundcov.vfx");
-	level.var_7649["vfx_equip_emp_a2_dud"] = loadfx("vfx/iw7/core/equipment/emp/vfx_equip_emp_a2_dud.vfx");
-	level.var_7649["vfx_equip_emp_a2_centerblast"] = loadfx("vfx/iw7/core/equipment/emp/vfx_equip_emp_a2_centerblast.vfx");
-	level.var_7649["vfx_equip_emp_a2_centerblast_cheap"] = loadfx("vfx/iw7/core/equipment/emp/vfx_equip_emp_a2_centerblast_cheap.vfx");
+	level.var_7649["c12_impact"] = loadfx("vfx\core\equipment\emp_grenade\vfx_iw7_equip_emp_gren_mini_exp.vfx");
+	level.var_7649["player_shock"] = loadfx("vfx\iw7\core\equipment\emp\vfx_equip_emp_gren_hit_inplayerface.vfx");
+	level.var_7649["emp_energy_strand_ptp"] = loadfx("vfx\iw7\core\equipment\emp\vfx_equip_emp_gren_pointbeam.vfx");
+	level.var_7649["c12_shock"] = loadfx("vfx\iw7\core\equipment\emp\vfx_equip_emp_gren_hit_c12_peeloff.vfx");
+	level.var_7649["c12_death"] = loadfx("vfx\iw7\core\equipment\emp\vfx_equip_emp_gren_hit_c12_kill.vfx");
+	level.var_7649["c8_shock"] = loadfx("vfx\iw7\core\equipment\emp\vfx_equip_emp_gren_hit_c6_peeloff.vfx");
+	level.var_7649["c8_death"] = loadfx("vfx\iw7\core\equipment\emp\vfx_equip_emp_gren_hit_c12_kill.vfx");
+	level.var_7649["seeker_shock"] = loadfx("vfx\iw7\core\equipment\emp\vfx_equip_emp_gren_hit_c6_peeloff.vfx");
+	level.var_7649["seeker_death"] = loadfx("vfx\iw7\core\equipment\emp\vfx_equip_emp_gren_hit_c6_kill.vfx");
+	level.var_7649["c6_shock"] = loadfx("vfx\iw7\core\equipment\emp\vfx_equip_emp_gren_hit_c6_peeloff.vfx");
+	level.var_7649["c6_death"] = loadfx("vfx\iw7\core\equipment\emp\vfx_equip_emp_gren_hit_c6_kill.vfx");
+	level.var_7649["c6i_shock"] = loadfx("vfx\iw7\core\equipment\emp\vfx_equip_emp_gren_hit_c6_peeloff.vfx");
+	level.var_7649["c6i_death"] = loadfx("vfx\iw7\core\equipment\emp\vfx_equip_emp_gren_hit_c6_kill.vfx");
+	level.var_7649["soldier_shock"] = loadfx("vfx\iw7\core\equipment\emp\vfx_equip_emp_gren_hit_human.vfx");
+	level.var_7649["soldier_death"] = loadfx("vfx\iw7\core\equipment\emp\vfx_equip_emp_gren_hit_human_kill.vfx");
+	level.var_7649["vfx_equip_emp_a2_thegreatzapper"] = loadfx("vfx\iw7\core\equipment\emp\vfx_equip_emp_a2_thegreatzapper.vfx");
+	level.var_7649["vfx_equip_emp_a2_satellite"] = loadfx("vfx\iw7\core\equipment\emp\vfx_equip_emp_a2_satellite.vfx");
+	level.var_7649["vfx_equip_emp_a2_hitbyzapper"] = loadfx("vfx\iw7\core\equipment\emp\vfx_equip_emp_a2_hitbyzapper.vfx");
+	level.var_7649["vfx_equip_emp_a2_groundcov"] = loadfx("vfx\iw7\core\equipment\emp\vfx_equip_emp_a2_groundcov.vfx");
+	level.var_7649["vfx_equip_emp_a2_dud"] = loadfx("vfx\iw7\core\equipment\emp\vfx_equip_emp_a2_dud.vfx");
+	level.var_7649["vfx_equip_emp_a2_centerblast"] = loadfx("vfx\iw7\core\equipment\emp\vfx_equip_emp_a2_centerblast.vfx");
+	level.var_7649["vfx_equip_emp_a2_centerblast_cheap"] = loadfx("vfx\iw7\core\equipment\emp\vfx_equip_emp_a2_centerblast_cheap.vfx");
 }
 
 func_618D() {
@@ -392,13 +392,13 @@ func_5781(param_00) {
 		return;
 	}
 
-	if(scripts/asm/asm_bb::bb_isanimscripted() || self _meth_81A6() || isdefined(self.script) && self.script == "pain" || scripts\sp\_utility::isactorwallrunning()) {
+	if(scripts\asm\asm_bb::bb_isanimscripted() || self _meth_81A6() || isdefined(self.script) && self.script == "pain" || scripts\sp\_utility::isactorwallrunning()) {
 		return;
 	}
 
 	if(self.asmname == "soldier") {
 		if(self.allowpain) {
-			scripts/asm/asm::asm_setstate("shocked");
+			scripts\asm\asm::asm_setstate("shocked");
 		}
 
 		return;
@@ -450,8 +450,8 @@ func_36E9(param_00,param_01) {
 	}
 
 	var_04 = distance2d(self.origin,param_00);
-	var_05 = scripts/sp/math::func_C097(0,param_01,var_04);
-	var_06 = scripts/sp/math::func_6A8E(var_03,var_02,var_05) * 0.5;
+	var_05 = scripts\sp\math::func_C097(0,param_01,var_04);
+	var_06 = scripts\sp\math::func_6A8E(var_03,var_02,var_05) * 0.5;
 	return var_06;
 }
 
@@ -538,8 +538,8 @@ func_F388() {
 	var_01 = distance2d(self.origin,var_00);
 	var_02 = func_7977();
 	var_03 = scripts\engine\utility::ter_op(isdefined(self.team) && self.team == "allies",2,4);
-	var_04 = scripts/sp/math::func_C097(var_02,level.player.var_612D.fgetarg,var_01);
-	self.empstartcallback = scripts/sp/math::func_6A8E(var_03,1.5,var_04);
+	var_04 = scripts\sp\math::func_C097(var_02,level.player.var_612D.fgetarg,var_01);
+	self.empstartcallback = scripts\sp\math::func_6A8E(var_03,1.5,var_04);
 }
 
 func_36EA() {
@@ -574,8 +574,8 @@ func_36EA() {
 	}
 
 	var_02 = distance2d(self.origin,level.var_612D.var_4BF1);
-	var_03 = scripts/sp/math::func_C097(0,level.player.var_612D.fgetarg,var_02);
-	var_04 = scripts/sp/math::func_6A8E(var_01,var_00,var_03);
+	var_03 = scripts\sp\math::func_C097(0,level.player.var_612D.fgetarg,var_02);
+	var_04 = scripts\sp\math::func_6A8E(var_01,var_00,var_03);
 	return var_04;
 }
 
@@ -607,8 +607,8 @@ func_D044(param_00) {
 	scripts\sp\_utility::func_54EF(var_01);
 	self.var_9DD2 = 1;
 	var_03 = func_7977();
-	var_04 = scripts/sp/math::func_C097(var_03,level.player.var_612D.fgetarg,var_02);
-	var_05 = scripts/sp/math::func_6A8E(level.var_612D.var_B44E,level.var_612D.var_B74B,var_04);
+	var_04 = scripts\sp\math::func_C097(var_03,level.player.var_612D.fgetarg,var_02);
+	var_05 = scripts\sp\math::func_6A8E(level.var_612D.var_B44E,level.var_612D.var_B74B,var_04);
 	if(var_02 < var_03) {
 		if(!scripts\engine\utility::flag_exist("in_vr_mode") || scripts\engine\utility::flag_exist("in_vr_mode") && !scripts\engine\utility::flag("in_vr_mode")) {
 			playworldsound("gravity_explode_default",self.origin);
@@ -622,7 +622,7 @@ func_D044(param_00) {
 		thread func_613C(var_05,param_00);
 	}
 
-	level.var_612D.var_CF96 = scripts/sp/math::func_6A8E(50,10,var_04);
+	level.var_612D.var_CF96 = scripts\sp\math::func_6A8E(50,10,var_04);
 	var_06 = isdefined(self.var_764D) && self.var_764D != 1;
 	if(var_06) {
 		var_07 = self.var_764D;
@@ -756,7 +756,7 @@ func_3453(param_00) {
 	var_02 = distance2d(self.origin,param_00);
 	var_03 = func_7977();
 	var_04 = isdefined(self.dontevershoot);
-	scripts/asm/asm::asm_setstate("pain_shock");
+	scripts\asm\asm::asm_setstate("pain_shock");
 	if(!var_04) {
 		childthread func_FEC5(self.empstartcallback);
 	}
@@ -782,7 +782,7 @@ func_354C(param_00) {
 		var_04 = "left";
 	}
 
-	scripts/asm/asm::asm_setstate("pain_emp_" + var_04);
+	scripts\asm\asm::asm_setstate("pain_emp_" + var_04);
 	var_05 = isdefined(self.dontevershoot);
 	if(!var_05) {
 		childthread func_FEC5(self.empstartcallback);

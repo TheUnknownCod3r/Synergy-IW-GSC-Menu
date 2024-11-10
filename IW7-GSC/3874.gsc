@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3874.gsc
-****************************/
+ * Script: 3874.gsc
+************************/
 
 func_9B1E(param_00,param_01) {
 	self endon("death");
@@ -18,7 +18,7 @@ func_9B1E(param_00,param_01) {
 
 	wait(param_01);
 	for(var_02 = 0;var_02 < 10;var_02 = var_02 + var_03) {
-		if(scripts/asm/asm::asm_isinstate("patrol_move")) {
+		if(scripts\asm\asm::asm_isinstate("patrol_move")) {
 			if(isdefined(self.a.var_C98E) && gettime() - self.a.var_C98E >= 1500) {
 				self _meth_84F7("reset",self,self.origin);
 				return;

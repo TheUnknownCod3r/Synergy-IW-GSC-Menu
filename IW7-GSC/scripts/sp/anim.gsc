@@ -1,8 +1,8 @@
-/***************************************
+/*******************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\sp\anim.gsc
-***************************************/
+ * Script: scripts\sp\anim.gsc
+*******************************/
 
 func_C0E1(param_00,param_01,param_02,param_03,param_04,param_05) {
 	param_00 endon("stop_sequencing_notetracks");
@@ -388,13 +388,13 @@ func_7729(param_00,param_01) {
 
 		case "opsmap_scene_start":
 			if(isdefined(param_00.var_9A30)) {
-				param_00 thread scripts/sp/interaction::func_CD50(param_00.var_9A30,param_00.var_C6B8);
+				param_00 thread scripts\sp\interaction::func_CD50(param_00.var_9A30,param_00.var_C6B8);
 			}
 			break;
 
 		case "opsmap_scene_end":
 			if(isdefined(param_00.var_9A30)) {
-				param_00 thread scripts/sp/interaction::func_9A0F();
+				param_00 thread scripts\sp\interaction::func_9A0F();
 			}
 			break;
 

@@ -1,13 +1,13 @@
-/******************************************
+/**********************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\anim\death.gsc
-******************************************/
+ * Script: scripts\anim\death.gsc
+**********************************/
 
 func_9510() {}
 
 func_95A2() {
-	scripts\common\utility::add_fx("deathfx_bloodpool_generic","vfx\core\impacts\deathfx_bloodpool_generic.vfx");
+	scripts\engine\utility::add_fx("deathfx_bloodpool_generic","vfx\core\impacts\deathfx_bloodpool_generic.vfx");
 }
 
 main() {
@@ -20,7 +20,7 @@ main() {
 	var_00 = 0.3;
 	self aiclearanim(%scripted_talking,var_00);
 	scripts\sp\anim::func_55C7(0);
-	if(self.var_1491.nodeath == 1) {
+	if(self.a.nodeath == 1) {
 		return;
 	}
 
@@ -61,7 +61,7 @@ main() {
 	}
 
 	self aiclearanim(%root,0.3);
-	if(!scripts\common\utility::damagelocationisany("head","helmet")) {
+	if(!scripts\engine\utility::damagelocationisany("head","helmet")) {
 		if(self.var_EF) {
 		}
 		else
@@ -92,7 +92,7 @@ func_58CB() {
 	scripts\anim\shared::func_5D1A();
 	self.var_10265 = 1;
 	var_00 = 10;
-	var_01 = scripts\common\utility::getdamagetype(self.var_DE);
+	var_01 = scripts\engine\utility::getdamagetype(self.var_DE);
 	if(isdefined(self.opcode::OP_EvalLocalVariableRefCached) && self.opcode::OP_EvalLocalVariableRefCached == level.player && var_01 == "melee") {
 		var_00 = 5;
 	}
@@ -245,7 +245,7 @@ play_blood_pool(param_00,param_01) {
 }
 
 func_10956() {
-	if(self.var_1491.var_10930 == "none") {
+	if(self.a.var_10930 == "none") {
 		return 0;
 	}
 
@@ -253,16 +253,16 @@ func_10956() {
 		return 0;
 	}
 
-	switch(self.var_1491.var_10930) {
+	switch(self.a.var_10930) {
 		case "cover_right":
-			if(self.var_1491.pose == "stand") {
+			if(self.a.pose == "stand") {
 				var_00 = scripts\anim\utility::func_B027("death","cover_right_stand");
 				func_57FC(var_00);
 			}
 			else
 			{
 				var_00 = [];
-				if(scripts\common\utility::damagelocationisany("head","neck")) {
+				if(scripts\engine\utility::damagelocationisany("head","neck")) {
 					var_00 = scripts\anim\utility::func_B027("death","cover_right_crouch_head");
 				}
 				else
@@ -275,7 +275,7 @@ func_10956() {
 			return 1;
 
 		case "cover_left":
-			if(self.var_1491.pose == "stand") {
+			if(self.a.pose == "stand") {
 				var_00 = scripts\anim\utility::func_B027("death","cover_left_stand");
 				func_57FC(var_00);
 			}
@@ -293,7 +293,7 @@ func_10956() {
 
 		case "cover_crouch":
 			var_00 = [];
-			if(scripts\common\utility::damagelocationisany("head","neck") && self.var_E3 > 135 || self.var_E3 <= -45) {
+			if(scripts\engine\utility::damagelocationisany("head","neck") && self.var_E3 > 135 || self.var_E3 <= -45) {
 				var_00[var_00.size] = scripts\anim\utility::func_B027("death","cover_crouch_head");
 			}
 	
@@ -306,10 +306,10 @@ func_10956() {
 			return 1;
 
 		case "saw":
-			if(self.var_1491.pose == "stand") {
+			if(self.a.pose == "stand") {
 				func_57FC(scripts\anim\utility::func_B027("death","saw_stand"));
 			}
-			else if(self.var_1491.pose == "crouch") {
+			else if(self.a.pose == "crouch") {
 				func_57FC(scripts\anim\utility::func_B027("death","saw_crouch"));
 			}
 			else
@@ -319,7 +319,7 @@ func_10956() {
 			return 1;
 
 		case "dying_crawl":
-			if(isdefined(self.var_1491.onback) && self.var_1491.pose == "crouch") {
+			if(isdefined(self.a.onback) && self.a.pose == "crouch") {
 				var_00 = scripts\anim\utility::func_B027("death","dying_crawl_crouch");
 				func_57FC(var_00);
 			}
@@ -331,7 +331,7 @@ func_10956() {
 			return 1;
 
 		case "stumbling_pain":
-			func_CF0E(self.var_1491.var_11188[self.var_1491.var_11188.size - 1]);
+			func_CF0E(self.a.var_11188[self.a.var_11188.size - 1]);
 			return 1;
 	}
 
@@ -366,7 +366,7 @@ func_8E17() {
 		return;
 	}
 
-	var_00 = function_00BF(self.hatmodel,0);
+	var_00 = getpartname(self.hatmodel,0);
 	var_01 = spawn("script_model",self.origin + (0,0,64));
 	var_01 setmodel(self.hatmodel);
 	var_01.origin = self gettagorigin(var_00);
@@ -424,7 +424,7 @@ func_41DC(param_00) {
 }
 
 func_FFF4() {
-	if(self.var_1491.movement != "run") {
+	if(self.a.movement != "run") {
 		return 0;
 	}
 
@@ -440,11 +440,11 @@ func_FFF4() {
 }
 
 func_FFFA(param_00,param_01,param_02,param_03) {
-	if(isdefined(self.var_1491.var_58DA)) {
+	if(isdefined(self.a.var_58DA)) {
 		return 0;
 	}
 
-	if(self.var_1491.pose == "prone" || isdefined(self.var_1491.onback)) {
+	if(self.a.pose == "prone" || isdefined(self.a.onback)) {
 		return 0;
 	}
 
@@ -460,7 +460,7 @@ func_FFFA(param_00,param_01,param_02,param_03) {
 		return 0;
 	}
 
-	if(self.var_1491.movement == "run" && !func_9D59(param_03,275)) {
+	if(self.a.movement == "run" && !func_9D59(param_03,275)) {
 		if(randomint(100) < 65) {
 			return 0;
 		}
@@ -509,8 +509,8 @@ func_7E5F() {
 		}
 	}
 
-	if(isdefined(self.var_1491.onback)) {
-		if(self.var_1491.pose == "crouch") {
+	if(isdefined(self.a.onback)) {
+		if(self.a.pose == "crouch") {
 			return func_7DF1();
 		}
 		else
@@ -519,7 +519,7 @@ func_7E5F() {
 		}
 	}
 
-	if(self.var_1491.pose == "stand") {
+	if(self.a.pose == "stand") {
 		if(func_FFF4()) {
 			return getsafeanimmovedeltapercentage();
 		}
@@ -527,11 +527,11 @@ func_7E5F() {
 		return getspectatingplayer();
 	}
 
-	if(self.var_1491.pose == "crouch") {
+	if(self.a.pose == "crouch") {
 		return func_7E45();
 	}
 
-	if(self.var_1491.pose == "prone") {
+	if(self.a.pose == "prone") {
 		return _meth_809F();
 	}
 }
@@ -543,7 +543,7 @@ giveweapon() {
 	}
 
 	if(var_00 > 150) {
-		if(scripts\common\utility::damagelocationisany("left_leg_upper","left_leg_lower","right_leg_upper","right_leg_lower","left_foot","right_foot")) {
+		if(scripts\engine\utility::damagelocationisany("left_leg_upper","left_leg_lower","right_leg_upper","right_leg_lower","left_foot","right_foot")) {
 			var_01 = scripts\anim\utility::func_B027("death","strong_legs");
 		}
 		else if(self.var_DD == "torso_lower") {
@@ -639,18 +639,18 @@ gettagangles() {
 		}
 
 		if(self.var_DD == "torso_upper") {
-			var_00 = scripts\common\utility::array_combine(scripts\anim\utility::func_B027("death","stand_pistol_torso_upper"),var_00);
+			var_00 = scripts\engine\utility::array_combine(scripts\anim\utility::func_B027("death","stand_pistol_torso_upper"),var_00);
 		}
-		else if(scripts\common\utility::damagelocationisany("torso_lower","left_leg_upper","left_leg_lower","right_leg_upper","right_leg_lower")) {
-			var_00 = scripts\common\utility::array_combine(scripts\anim\utility::func_B027("death","stand_pistol_torso_upper"),var_00);
-		}
-
-		if(!scripts\common\utility::damagelocationisany("head","neck","helmet","left_foot","right_foot","left_hand","right_hand","gun") && randomint(2) == 0) {
-			var_00 = scripts\common\utility::array_combine(scripts\anim\utility::func_B027("death","stand_pistol_upper_body"),var_00);
+		else if(scripts\engine\utility::damagelocationisany("torso_lower","left_leg_upper","left_leg_lower","right_leg_upper","right_leg_lower")) {
+			var_00 = scripts\engine\utility::array_combine(scripts\anim\utility::func_B027("death","stand_pistol_torso_upper"),var_00);
 		}
 
-		if(var_00.size == 0 || scripts\common\utility::damagelocationisany("torso_lower","torso_upper","neck","head","helmet","right_arm_upper","left_arm_upper")) {
-			var_00 = scripts\common\utility::array_combine(scripts\anim\utility::func_B027("death","stand_pistol_default"),var_00);
+		if(!scripts\engine\utility::damagelocationisany("head","neck","helmet","left_foot","right_foot","left_hand","right_hand","gun") && randomint(2) == 0) {
+			var_00 = scripts\engine\utility::array_combine(scripts\anim\utility::func_B027("death","stand_pistol_upper_body"),var_00);
+		}
+
+		if(var_00.size == 0 || scripts\engine\utility::damagelocationisany("torso_lower","torso_upper","neck","head","helmet","right_arm_upper","left_arm_upper")) {
+			var_00 = scripts\engine\utility::array_combine(scripts\anim\utility::func_B027("death","stand_pistol_default"),var_00);
 		}
 	}
 
@@ -680,47 +680,47 @@ getspectatingplayer() {
 	}
 	else
 	{
-		if(scripts\common\utility::damagelocationisany("torso_lower","left_leg_upper","left_leg_lower","right_leg_lower","right_leg_lower")) {
+		if(scripts\engine\utility::damagelocationisany("torso_lower","left_leg_upper","left_leg_lower","right_leg_lower","right_leg_lower")) {
 			var_00 = scripts\anim\utility::func_B027("death","stand_lower_body");
 			var_01 = scripts\anim\utility::func_B027("death","stand_lower_body_extended");
 		}
-		else if(scripts\common\utility::damagelocationisany("head","helmet")) {
+		else if(scripts\engine\utility::damagelocationisany("head","helmet")) {
 			var_00 = scripts\anim\utility::func_B027("death","stand_head");
 		}
-		else if(scripts\common\utility::damagelocationisany("neck")) {
+		else if(scripts\engine\utility::damagelocationisany("neck")) {
 			var_00 = scripts\anim\utility::func_B027("death","stand_neck");
 		}
-		else if(scripts\common\utility::damagelocationisany("torso_upper","left_arm_upper")) {
+		else if(scripts\engine\utility::damagelocationisany("torso_upper","left_arm_upper")) {
 			var_00 = scripts\anim\utility::func_B027("death","stand_left_shoulder");
 		}
 
-		if(scripts\common\utility::damagelocationisany("torso_upper")) {
-			var_00 = scripts\common\utility::array_combine(var_00,scripts\anim\utility::func_B027("death","stand_torso_upper"));
-			var_01 = scripts\common\utility::array_combine(var_01,scripts\anim\utility::func_B027("death","stand_torso_upper_extended"));
+		if(scripts\engine\utility::damagelocationisany("torso_upper")) {
+			var_00 = scripts\engine\utility::array_combine(var_00,scripts\anim\utility::func_B027("death","stand_torso_upper"));
+			var_01 = scripts\engine\utility::array_combine(var_01,scripts\anim\utility::func_B027("death","stand_torso_upper_extended"));
 		}
 
 		if(self.var_E3 > 135 || self.var_E3 <= -135) {
-			if(scripts\common\utility::damagelocationisany("neck","head","helmet")) {
-				var_00 = scripts\common\utility::array_combine(var_00,scripts\anim\utility::func_B027("death","stand_front_torso"));
-				var_01 = scripts\common\utility::array_combine(var_01,scripts\anim\utility::func_B027("death","stand_front_torso_extended"));
+			if(scripts\engine\utility::damagelocationisany("neck","head","helmet")) {
+				var_00 = scripts\engine\utility::array_combine(var_00,scripts\anim\utility::func_B027("death","stand_front_torso"));
+				var_01 = scripts\engine\utility::array_combine(var_01,scripts\anim\utility::func_B027("death","stand_front_torso_extended"));
 			}
 
-			if(scripts\common\utility::damagelocationisany("torso_upper")) {
-				var_00 = scripts\common\utility::array_combine(var_00,scripts\anim\utility::func_B027("death","stand_front_torso"));
-				var_01 = scripts\common\utility::array_combine(var_01,scripts\anim\utility::func_B027("death","stand_front_torso_extended"));
+			if(scripts\engine\utility::damagelocationisany("torso_upper")) {
+				var_00 = scripts\engine\utility::array_combine(var_00,scripts\anim\utility::func_B027("death","stand_front_torso"));
+				var_01 = scripts\engine\utility::array_combine(var_01,scripts\anim\utility::func_B027("death","stand_front_torso_extended"));
 			}
 		}
 		else if(self.var_E3 > -45 && self.var_E3 <= 45) {
-			var_00 = scripts\common\utility::array_combine(var_00,scripts\anim\utility::func_B027("death","stand_back"));
+			var_00 = scripts\engine\utility::array_combine(var_00,scripts\anim\utility::func_B027("death","stand_back"));
 		}
 
 		var_02 = var_00.size > 0;
 		if(!var_02 || randomint(100) < 15) {
-			var_00 = scripts\common\utility::array_combine(var_00,scripts\anim\utility::func_B027("death","stand_default"));
+			var_00 = scripts\engine\utility::array_combine(var_00,scripts\anim\utility::func_B027("death","stand_default"));
 		}
 
 		if(randomint(100) < 10 && func_6DB2()) {
-			var_00 = scripts\common\utility::array_combine(var_00,scripts\anim\utility::func_B027("death","stand_default_firing"));
+			var_00 = scripts\engine\utility::array_combine(var_00,scripts\anim\utility::func_B027("death","stand_default_firing"));
 			var_00 = func_E184(var_00);
 		}
 	}
@@ -729,7 +729,7 @@ getspectatingplayer() {
 		var_00[var_00.size] = scripts\anim\utility::func_B027("death","stand_backup_default");
 	}
 
-	if(!self.var_1491.disablelongdeath && self.getcsplinepointtargetname == "none" && !isdefined(self.var_1491.var_C87B)) {
+	if(!self.a.disablelongdeath && self.getcsplinepointtargetname == "none" && !isdefined(self.a.var_C87B)) {
 		var_03 = randomint(var_00.size + var_01.size);
 		if(var_03 < var_00.size) {
 			return var_00[var_03];
@@ -762,20 +762,20 @@ func_7E45() {
 	}
 	else
 	{
-		if(scripts\common\utility::damagelocationisany("head","neck")) {
+		if(scripts\engine\utility::damagelocationisany("head","neck")) {
 			var_00 = scripts\anim\utility::func_B027("death","crouch_head");
 		}
 
-		if(scripts\common\utility::damagelocationisany("torso_upper","torso_lower","left_arm_upper","right_arm_upper","neck")) {
-			var_00 = scripts\common\utility::array_combine(var_00,scripts\anim\utility::func_B027("death","crouch_torso"));
+		if(scripts\engine\utility::damagelocationisany("torso_upper","torso_lower","left_arm_upper","right_arm_upper","neck")) {
+			var_00 = scripts\engine\utility::array_combine(var_00,scripts\anim\utility::func_B027("death","crouch_torso"));
 		}
 
 		if(var_00.size < 2) {
-			var_00 = scripts\common\utility::array_combine(var_00,scripts\anim\utility::func_B027("death","crouch_default1"));
+			var_00 = scripts\engine\utility::array_combine(var_00,scripts\anim\utility::func_B027("death","crouch_default1"));
 		}
 
 		if(var_00.size < 2) {
-			var_00 = scripts\common\utility::array_combine(var_00,scripts\anim\utility::func_B027("death","crouch_default2"));
+			var_00 = scripts\engine\utility::array_combine(var_00,scripts\anim\utility::func_B027("death","crouch_default2"));
 		}
 	}
 
@@ -787,11 +787,11 @@ _meth_809F() {}
 func_7DF1() {}
 
 func_6DB2() {
-	if(!isdefined(self.var_394) || !scripts\anim\utility_common::usingriflelikeweapon() || !function_0245(self.var_394) || !function_02BE(self.var_394) || self.var_EF) {
+	if(!isdefined(self.var_394) || !scripts\anim\utility_common::usingriflelikeweapon() || !weaponisauto(self.var_394) || !weaponisbeam(self.var_394) || self.var_EF) {
 		return 0;
 	}
 
-	if(self.var_1491.weaponpos["right"] == "none") {
+	if(self.a.weaponpos["right"] == "none") {
 		return 0;
 	}
 

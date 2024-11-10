@@ -1,13 +1,13 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2795.gsc
+ * Script: 2795.gsc
 ***************************************/
 
 init() {
-  level._effect["slide_dust"] = loadfx("vfx/core/screen/vfx_scrnfx_tocam_slidedust_m");
-  level._effect["hit_left"] = loadfx("vfx/core/screen/vfx_blood_hit_left");
-  level._effect["hit_right"] = loadfx("vfx/core/screen/vfx_blood_hit_right");
-  level._effect["melee_spray"] = loadfx("vfx/core/screen/vfx_melee_blood_spray");
+  level._effect["slide_dust"] = loadfx("vfx\core\screen\vfx_scrnfx_tocam_slidedust_m");
+  level._effect["hit_left"] = loadfx("vfx\core\screen\vfx_blood_hit_left");
+  level._effect["hit_right"] = loadfx("vfx\core\screen\vfx_blood_hit_right");
+  level._effect["melee_spray"] = loadfx("vfx\core\screen\vfx_melee_blood_spray");
 }
 
 shellshockondamage(var_00, var_01) {

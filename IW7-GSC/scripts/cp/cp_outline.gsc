@@ -1,8 +1,8 @@
-/*********************************************
+/*************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\cp_outline.gsc
-*********************************************/
+ * Script: scripts\cp\cp_outline.gsc
+*************************************/
 
 outline_monitor_think() {
 	self endon("disconnect");

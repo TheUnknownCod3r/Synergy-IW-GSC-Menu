@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2735.gsc
+ * Script: 2735.gsc
 ***************************************/
 
 func_C530(var_00) {
@@ -1738,7 +1738,7 @@ callback_startgametype() {
   level.func_B4A0 = 32;
   level.usestartspawns = 1;
   level.maxallowedteamkills = scripts\mp\utility\game::botgetworldsize("scr_" + level.gametype + "_ffPunishLimit", "scr_game_ffPunishLimit");
-  thread scripts/mp/powerloot::init();
+  thread scripts\mp\powerloot::init();
   thread scripts\mp\healthoverlay::init();
   thread scripts\mp\killcam::init();
   thread scripts\mp\finalkillcam::func_9807();
@@ -1760,17 +1760,17 @@ callback_startgametype() {
   thread scripts\mp\deathicons::init();
   thread scripts\mp\damagefeedback::init();
   thread scripts\mp\lightarmor::init();
-  thread scripts/mp/killstreaks/chill_common::chill_init();
+  thread scripts\mp\killstreaks\chill_common::chill_init();
   thread scripts\mp\objpoints::init();
   thread scripts\mp\gameobjects::init();
-  thread scripts/mp/spectating::init();
+  thread scripts\mp\spectating::init();
   thread scripts\mp\spawnlogic::init();
   thread scripts\mp\matchdata::init();
   thread scripts\mp\clientmatchdata::init();
   thread scripts\mp\awards::init();
   thread scripts\mp\areas::init();
-  thread scripts/mp/func_0A83::init();
-  thread scripts/mp/killstreak_loot::init();
+  thread scripts\mp\func_0A83::init();
+  thread scripts\mp\killstreak_loot::init();
   thread [[level.func_A6A2]]();
   thread scripts\mp\passives::init();
   thread scripts\mp\perks::init();
@@ -1779,8 +1779,8 @@ callback_startgametype() {
   thread [[level.func_B3E7]]();
   thread scripts\mp\zipline::init();
   thread scripts\mp\archetypes\archcommon::init();
-  thread scripts/mp/powers::init();
-  thread scripts/mp/drone::init();
+  thread scripts\mp\powers::init();
+  thread scripts\mp\drone::init();
   thread scripts\mp\whizby::init();
   thread scripts\mp\analyticslog::init();
   thread scripts\mp\loot::init();
@@ -3430,7 +3430,7 @@ func_3E0C() {
   self setrankedplayerdata("mp", "bestWeapon", "hits", var_08);
   self setrankedplayerdata("mp", "bestWeapon", "deaths", var_09);
   self setrankedplayerdata("mp", "bestWeaponXP", var_10);
-  var_11 = int(tablelookup("mp/statstable.csv", 4, var_01, 0));
+  var_11 = int(tablelookup("mp\statstable.csv", 4, var_01, 0));
   self setrankedplayerdata("mp", "bestWeaponIndex", var_11);
 }
 

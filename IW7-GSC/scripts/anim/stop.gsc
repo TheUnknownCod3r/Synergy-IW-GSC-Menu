@@ -1,8 +1,8 @@
-/*****************************************
+/*********************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\anim\stop.gsc
-*****************************************/
+ * Script: scripts\anim\stop.gsc
+*********************************/
 
 func_9518() {}
 
@@ -32,7 +32,7 @@ main() {
 	thread scripts\anim\reactions::func_DD51();
 	var_00 = isdefined(self.var_4C8C);
 	if(!var_00) {
-		if(self.var_1491.weaponpos["right"] == "none" && self.var_1491.weaponpos["left"] == "none") {
+		if(self.a.weaponpos["right"] == "none" && self.a.weaponpos["left"] == "none") {
 			var_00 = 1;
 		}
 		else if(angleclamp180(self getspawnpointdist()[0]) > 20) {
@@ -48,19 +48,19 @@ main() {
 			continue;
 		}
 
-		if(self.var_1491.pose != var_01) {
+		if(self.a.pose != var_01) {
 			self aiclearanim(%root,0.3);
 			var_00 = 0;
 		}
 
 		scripts\anim\setposemovement::setposemovement(var_01,"stop");
 		if(!var_00) {
-			transitiontoidle(var_01,self.var_1491.var_92F9);
+			transitiontoidle(var_01,self.a.var_92F9);
 			var_00 = 1;
 			continue;
 		}
 
-		func_D49C(var_01,self.var_1491.var_92F9);
+		func_D49C(var_01,self.a.var_92F9);
 	}
 }
 
@@ -116,7 +116,7 @@ func_7E6F() {
 }
 
 transitiontoidle(param_00,param_01) {
-	if(scripts\anim\utility::func_9D9B() && self.var_1491.pose == "stand") {
+	if(scripts\anim\utility::func_9D9B() && self.a.pose == "stand") {
 		param_00 = "stand_cqb";
 	}
 
@@ -129,7 +129,7 @@ transitiontoidle(param_00,param_01) {
 }
 
 func_D49C(param_00,param_01) {
-	if(scripts\anim\utility::func_9D9B() && self.var_1491.pose == "stand") {
+	if(scripts\anim\utility::func_9D9B() && self.a.pose == "stand") {
 		param_00 = "stand_cqb";
 	}
 
@@ -159,7 +159,7 @@ func_D49C(param_00,param_01) {
 	}
 
 	var_07 = 0.2;
-	if(gettime() == self.var_1491.var_EF87) {
+	if(gettime() == self.a.var_EF87) {
 		var_07 = 0.5;
 	}
 
@@ -177,7 +177,7 @@ func_D49C(param_00,param_01) {
 }
 
 func_DA85() {
-	if(self.var_1491.pose != "prone") {
+	if(self.a.pose != "prone") {
 		return;
 	}
 

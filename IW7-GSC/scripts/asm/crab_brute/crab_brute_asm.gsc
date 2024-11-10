@@ -1,8 +1,8 @@
-/*************************************************************
+/*****************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\asm\crab_brute\crab_brute_asm.gsc
-*************************************************************/
+ * Script: scripts\asm\crab_brute\crab_brute_asm.gsc
+*****************************************************/
 
 asminit(param_00,param_01,param_02,param_03) {
 	scripts\asm\zombie\zombie::func_13F9A(param_00,param_01,param_02,param_03);
@@ -98,13 +98,13 @@ crabbrutenotehandler(param_00,param_01,param_02,param_03) {
 
 starting_burrow_sfx(param_00) {
 	if(param_00 == "burrow_intro") {
-		thread scripts\common\utility::play_sound_in_space("brute_burrow_in_ground",self.origin + (0,0,30));
+		thread scripts\engine\utility::play_sound_in_space("brute_burrow_in_ground",self.origin + (0,0,30));
 		var_01 = 1;
 	}
 }
 
 starting_flash_sfx() {
-	thread scripts\common\utility::play_sound_in_space("brute_crog_build_up_to_flash",self.origin + (0,0,80));
+	thread scripts\engine\utility::play_sound_in_space("brute_crog_build_up_to_flash",self.origin + (0,0,80));
 }
 
 dosummonfromfakecrabboss(param_00) {
@@ -127,7 +127,7 @@ doflash() {
 			continue;
 		}
 
-		if(scripts\common\utility::istrue(var_02.isfasttravelling)) {
+		if(scripts\engine\utility::istrue(var_02.isfasttravelling)) {
 			continue;
 		}
 
@@ -199,14 +199,14 @@ meleenotehandler(param_00,param_01,param_02,param_03) {
 			}
 		}
 
-		if(!scripts\common\utility::istrue(self.bmovingmelee)) {
+		if(!scripts\engine\utility::istrue(self.bmovingmelee)) {
 			self notify("stop_melee_face_enemy");
 		}
 	}
 }
 
 shouldabortaction(param_00,param_01,param_02,param_03) {
-	if(scripts\common\utility::istrue(self.btraversalteleport)) {
+	if(scripts\engine\utility::istrue(self.btraversalteleport)) {
 		return 0;
 	}
 
@@ -404,7 +404,7 @@ domeleedamageoncontact(param_00,param_01) {
 			}
 		}
 
-		scripts\common\utility::waitframe();
+		scripts\engine\utility::waitframe();
 	}
 }
 
@@ -420,7 +420,7 @@ playchargeloop(param_00,param_01,param_02,param_03) {
 
 choosechargeoutroanim(param_00,param_01,param_02) {
 	var_03 = "charge_miss";
-	if(scripts\common\utility::istrue(self.bchargehit)) {
+	if(scripts\engine\utility::istrue(self.bchargehit)) {
 		var_03 = "charge_hit";
 	}
 
@@ -496,7 +496,7 @@ playchargeintro(param_00,param_01,param_02,param_03) {
 		}
 	}
 	else if(isdefined(self.curmeleetarget)) {
-		var_05 = vectornormalize(self.var_4B26.origin - self.origin) * (1,1,0);
+		var_05 = vectornormalize(self.curmeleetarget.origin - self.origin) * (1,1,0);
 		var_06 = vectortoangles(var_05);
 		self orientmode("face angle abs",var_06);
 	}
@@ -517,7 +517,7 @@ play_burrow_outro_sfx() {
 		thread stop_burrow_loop();
 	}
 
-	thread scripts\common\utility::play_sound_in_space("brute_burrow_out_of_ground",self.origin + (0,0,30));
+	thread scripts\engine\utility::play_sound_in_space("brute_burrow_out_of_ground",self.origin + (0,0,30));
 }
 
 stop_burrow_loop() {

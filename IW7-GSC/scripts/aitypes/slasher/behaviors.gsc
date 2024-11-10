@@ -1,8 +1,8 @@
-/*********************************************************
+/*************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\aitypes\slasher\behaviors.gsc
-*********************************************************/
+ * Script: scripts\aitypes\slasher\behaviors.gsc
+*************************************************/
 
 initslasher(param_00) {
 	setupslasherstates();
@@ -84,7 +84,7 @@ updateenemy() {
 			continue;
 		}
 
-		if(var_03.ignoreme || isdefined(var_03.triggerportableradarping) && var_03.var_222.ignoreme) {
+		if(var_03.ignoreme || isdefined(var_03.triggerportableradarping) && var_03.triggerportableradarping.ignoreme) {
 			continue;
 		}
 
@@ -150,7 +150,7 @@ calcenemytargetpos(param_00,param_01) {
 	var_02 = scripts\mp\agents\slasher\slasher_agent::getenemy();
 	var_03 = var_02 getvelocity();
 	var_04 = distance(var_02.origin,self.origin);
-	var_05 = var_04 \ 1500;
+	var_05 = var_04 / 1500;
 	var_06 = var_02 getshootatpos();
 	var_07 = randomfloatrange(-20,-8);
 	var_06 = var_06 + (0,0,var_07);
@@ -581,7 +581,7 @@ trysawbladeattack(param_00) {
 	var_08 = [];
 	var_09 = var_03 geteye();
 	var_0A = self geteye() - (0,0,12);
-	var_0B = function_0288(var_0A,var_09,10,var_07,var_08,"physicsquery_closest");
+	var_0B = physics_spherecast(var_0A,var_09,10,var_07,var_08,"physicsquery_closest");
 	if(isdefined(var_0B) && var_0B.size > 0) {
 		if(var_0B[0]["fraction"] < 0.8) {
 			self.nextsawbladeattacktime = var_02 + 500;
@@ -634,7 +634,7 @@ trytaunt(param_00) {
 		self.nexttaunttime = gettime() + randomintrange(var_01.min_taunt_interval,var_01.max_taunt_interval);
 	}
 
-	if(!scripts\common\utility::istrue(self.brecentlyteleported)) {
+	if(!scripts\engine\utility::istrue(self.brecentlyteleported)) {
 		if(param_00 < var_01.min_dist_to_enemy_for_taunt_sq) {
 			return 0;
 		}
@@ -700,7 +700,7 @@ tryblock() {
 		}
 		else
 		{
-			self.damageaccumulator.accumulateddamage = self.damageaccumulator.accumulateddamage - var_00.need_to_block_damage_threshold \ 2;
+			self.damageaccumulator.accumulateddamage = self.damageaccumulator.accumulateddamage - var_00.need_to_block_damage_threshold / 2;
 		}
 	}
 
@@ -937,7 +937,7 @@ trygrenadethrow(param_00,param_01) {
 		return 0;
 	}
 
-	var_04 = scripts\common\utility::getyawtospot(param_01);
+	var_04 = scripts\engine\utility::getyawtospot(param_01);
 	if(abs(var_04) > 60) {
 		return 0;
 	}
@@ -1002,7 +1002,7 @@ decideslasheraction(param_00) {
 
 	if(var_02 - self.lastenemysighttime < 500) {
 		var_03 = distancesquared(var_01.origin,self.origin);
-		if(scripts\common\utility::istrue(self.brecentlyteleported)) {
+		if(scripts\engine\utility::istrue(self.brecentlyteleported)) {
 			if(trytaunt(var_03)) {
 				self.brecentlyteleported = 0;
 				return level.success;
@@ -1029,7 +1029,7 @@ decideslasheraction(param_00) {
 			return level.success;
 		}
 
-		if(!scripts\common\utility::istrue(self.brecentlyteleported)) {
+		if(!scripts\engine\utility::istrue(self.brecentlyteleported)) {
 			if(trytaunt(var_03)) {
 				return level.success;
 			}
@@ -1143,7 +1143,7 @@ findjumpscareteleportpos(param_00,param_01,param_02) {
 	self endon("Abort_FindJumpScareTeleportPos");
 	if(!isdefined(level.slasherteleportpoints)) {
 		level.slasherteleportpoints = [];
-		foreach(var_04 in function_00B4("slasher_teleport","targetname")) {
+		foreach(var_04 in getnodearray("slasher_teleport","targetname")) {
 			level.slasherteleportpoints[level.slasherteleportpoints.size] = var_04.origin;
 		}
 	}
@@ -1177,26 +1177,26 @@ findjumpscareteleportpos(param_00,param_01,param_02) {
 		return;
 	}
 
-	scripts\common\utility::array_randomize(var_09);
+	scripts\engine\utility::array_randomize(var_09);
 	foreach(var_0B in var_09) {
 		var_0F = getclosestpointonnavmesh(var_0B);
 		var_10 = self findpath(var_08,var_0F);
 		if(!isdefined(var_10) || var_10.size < 2) {
-			scripts\common\utility::waitframe();
+			scripts\engine\utility::waitframe();
 			continue;
 		}
 
 		var_11 = vectornormalize(var_10[1] - var_08);
 		var_12 = vectordot(var_11,var_07);
 		if(var_12 < 0.707) {
-			scripts\common\utility::waitframe();
+			scripts\engine\utility::waitframe();
 			continue;
 		}
 
 		var_13 = calcpathdist(var_10);
 		var_14 = distance(var_10[0],var_10[var_10.size - 1]);
 		if(var_13 > var_14 * 3) {
-			scripts\common\utility::waitframe();
+			scripts\engine\utility::waitframe();
 			continue;
 		}
 

@@ -1,8 +1,8 @@
-/****************************
+/****************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\4277.gsc
-****************************/
+ * Script: scripts\cp\maps\cp_zmb\gen\cp_zmb_fx.gsc
+****************************************************/
 
 main() {
 	var_00 = scripts\engine\utility::createoneshoteffect("vfx_zmb_trash_drift_01");

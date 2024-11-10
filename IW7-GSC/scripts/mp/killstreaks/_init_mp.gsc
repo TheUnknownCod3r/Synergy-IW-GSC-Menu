@@ -1,8 +1,8 @@
-/*******************************************************
+/***********************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\killstreaks\_init_mp.gsc
-*******************************************************/
+ * Script: scripts\mp\killstreaks\_init_mp.gsc
+***********************************************/
 
 init() {
 	scripts\mp\killstreaks\_killstreaks::func_9888();
@@ -124,7 +124,7 @@ init() {
 		[[level.var_B334]]();
 	}
 
-	level.var_A6AA = scripts\mp\_utility::getintproperty("scr_game_killstreakdelay",12);
+	level.var_A6AA = scripts\mp\utility::getintproperty("scr_game_killstreakdelay",12);
 	level thread scripts\mp\killstreaks\_killstreaks::onplayerconnect();
 	scripts\mp\killstreaks\_mapselect::func_B337();
 }

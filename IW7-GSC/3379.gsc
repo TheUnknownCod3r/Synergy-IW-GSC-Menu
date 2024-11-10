@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3379.gsc
-****************************/
+ * Script: 3379.gsc
+************************/
 
 init_clowntooth_game() {
 	var_00 = 4;
@@ -252,7 +252,7 @@ func_D09E(param_00,param_01) {
 func_6946(param_00,param_01,param_02) {
 	if(isdefined(param_01) && isalive(param_01)) {
 		param_01 takeweapon("iw7_cpclowntoothball_mp");
-		param_01 scripts/cp/zombies/interaction_shooting_gallery::func_FEBF(param_01);
+		param_01 scripts\cp\zombies\interaction_shooting_gallery::func_FEBF(param_01);
 		param_01 setclientomnvar("zombie_arcade_game_time",-1);
 		param_01 setclientomnvar("zombie_arcade_game_ticket_earned",0);
 		param_01 setclientomnvar("zombie_ca_widget",0);

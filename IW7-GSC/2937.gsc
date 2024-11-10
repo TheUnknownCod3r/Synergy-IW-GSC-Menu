@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\2937.gsc
-****************************/
+ * Script: 2937.gsc
+************************/
 
 func_9766() {
 	scripts\engine\utility::flag_init("start_is_set");
@@ -41,7 +41,7 @@ func_57A1() {
 		level [[level.var_4C63]]();
 	}
 
-	scripts/sp/loadout::func_12867();
+	scripts\sp\loadout::func_12867();
 	lib_0A2F::func_96FD();
 	scripts\sp\_audio::init_audio();
 	scripts\sp\_global_fx::main();
@@ -367,7 +367,7 @@ func_8960() {
 		}
 	}
 
-	scripts/sp/loadout::func_12867();
+	scripts\sp\loadout::func_12867();
 	lib_0A2F::func_96FD();
 	lib_0A2F::_meth_82FF();
 	lib_0A2F::_meth_8315();

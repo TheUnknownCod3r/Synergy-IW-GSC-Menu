@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3650.gsc
-****************************/
+ * Script: 3650.gsc
+************************/
 
 init() {
 	level.perksetfuncs = [];
@@ -228,11 +228,11 @@ func_12F9(param_00) {
 }
 
 cameraunlink(param_00) {
-	return tablelookup("sp/perkTable.csv",1,param_00,3);
+	return tablelookup("sp\perkTable.csv",1,param_00,3);
 }
 
 cancelmantle(param_00) {
-	return tablelookupistring("sp/perkTable.csv",1,param_00,2);
+	return tablelookupistring("sp\perkTable.csv",1,param_00,2);
 }
 
 blockperkfunction(param_00) {

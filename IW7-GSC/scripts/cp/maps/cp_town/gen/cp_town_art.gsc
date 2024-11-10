@@ -1,8 +1,8 @@
-/***************************************************************
+/*******************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\maps\cp_town\gen\cp_town_art.gsc
-***************************************************************/
+ * Script: scripts\cp\maps\cp_town\gen\cp_town_art.gsc
+*******************************************************/
 
 main() {
 	level.tweakfile = 1;

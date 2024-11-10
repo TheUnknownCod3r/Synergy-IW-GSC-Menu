@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3423.gsc
-****************************/
+ * Script: 3423.gsc
+************************/
 
 func_9758() {
 	if(!isdefined(level.var_10680)) {

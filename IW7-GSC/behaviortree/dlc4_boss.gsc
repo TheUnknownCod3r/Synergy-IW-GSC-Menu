@@ -1,8 +1,8 @@
-/**********************************************
+/**************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\behaviortree\dlc4_boss.gsc
-**********************************************/
+ * Script: behaviortree\dlc4_boss.gsc
+**************************************/
 
 func_2AD0() {
 	if(isdefined(level.var_119E["dlc4_boss"])) {

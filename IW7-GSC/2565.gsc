@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\2565.gsc
-****************************/
+ * Script: 2565.gsc
+************************/
 
 func_360D(param_00,param_01,param_02,param_03) {
 	if(isarray(param_01)) {
@@ -107,7 +107,7 @@ func_3609(param_00) {
 }
 
 func_35AC() {
-	return scripts/asm/asm_bb::ispartdismembered("right_leg") || scripts/asm/asm_bb::ispartdismembered("left_leg");
+	return scripts\asm\asm_bb::ispartdismembered("right_leg") || scripts\asm\asm_bb::ispartdismembered("left_leg");
 }
 
 func_3554(param_00) {

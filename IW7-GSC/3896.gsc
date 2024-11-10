@@ -1,13 +1,13 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3896.gsc
-****************************/
+ * Script: 3896.gsc
+************************/
 
 func_B063(param_00,param_01,param_02,param_03) {
 	self setscriptablepartstate("run","active",0);
 	self gib_fx_override("gravity");
-	scripts/asm/asm_mp::func_2364(param_00,param_01,param_02,1.3);
+	scripts\asm\asm_mp::func_2364(param_00,param_01,param_02,1.3);
 }
 
 func_F173(param_00,param_01,param_02,param_03) {
@@ -97,8 +97,8 @@ func_11701(param_00,param_01) {
 		var_03 = var_02.var_116FB;
 	}
 
-	scripts/asm/asm::func_2388(param_00,param_01,var_02,var_02.var_116FB);
-	scripts/asm/asm::func_238A(param_00,var_03,0,undefined,undefined,undefined);
+	scripts\asm\asm::func_2388(param_00,param_01,var_02,var_02.var_116FB);
+	scripts\asm\asm::func_238A(param_00,var_03,0,undefined,undefined,undefined);
 	self notify("killanimscript");
 }
 

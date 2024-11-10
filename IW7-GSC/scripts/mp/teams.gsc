@@ -1,8 +1,8 @@
-/****************************************
+/********************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\teams.gsc
-****************************************/
+ * Script: scripts\mp\teams.gsc
+********************************/
 
 init() {
 	level.teambalance = getdvarint("scr_teambalance");
@@ -506,8 +506,8 @@ getcustomization() {
 	var_04 = getplayerheadmodel();
 	self.var_6A = var_03;
 	self.playfxontag = var_04;
-	var_00 = tablelookupbyrow("mp/cac/bodies.csv",var_03,1);
-	var_01 = tablelookupbyrow("mp/cac/heads.csv",var_04,1);
+	var_00 = tablelookupbyrow("mp\cac\bodies.csv",var_03,1);
+	var_01 = tablelookupbyrow("mp\cac\heads.csv",var_04,1);
 	var_02["body"] = var_00;
 	var_02["head"] = var_01;
 	return var_02;
@@ -546,19 +546,19 @@ getplayerheadmodel() {
 }
 
 clearclienttriggeraudiozone(param_00) {
-	return tablelookup("mp/cac/bodies.csv",0,param_00,5);
+	return tablelookup("mp\cac\bodies.csv",0,param_00,5);
 }
 
 getplayermodelname(param_00) {
-	return tablelookup("mp/cac/bodies.csv",0,param_00,1);
+	return tablelookup("mp\cac\bodies.csv",0,param_00,1);
 }
 
 func_FADC() {
 	if(isai(self) || level.gametype == "infect" && self.team == "allies" && isdefined(self.infected_archtype) && self.infected_archtype == "archetype_scout") {
-		var_00 = scripts/mp/archetypes/archcommon::getrigindexfromarchetyperef(self.loadoutarchetype) + 1;
+		var_00 = scripts\mp\archetypes\archcommon::getrigindexfromarchetyperef(self.loadoutarchetype) + 1;
 	}
 	else if(isdefined(self.changedarchetypeinfo)) {
-		var_00 = scripts/mp/archetypes/archcommon::getrigindexfromarchetyperef(self.changedarchetypeinfo.archetype) + 1;
+		var_00 = scripts\mp\archetypes\archcommon::getrigindexfromarchetyperef(self.changedarchetypeinfo.archetype) + 1;
 	}
 	else
 	{
@@ -779,7 +779,7 @@ checkforafk() {
 		}
 	}
 
-	if(var_01 && !function_0303()) {
+	if(var_01 && !isgamebattlematch()) {
 		kick(self getentitynumber(),"EXE_PLAYERKICKED_INACTIVE",1);
 	}
 }
@@ -819,7 +819,7 @@ getjointeampermissions(param_00) {
 		wait(1.5);
 	}
 
-	function_01BD(1);
+	setnojiptime(1);
 	level.nojip = 1;
 	kick(self getentitynumber(),"EXE_PLAYERKICKED_INVALIDTEAM");
 	return 0;
@@ -831,81 +831,81 @@ onplayerspawned() {
 }
 
 func_BD73(param_00) {
-	return tablelookupistring("mp/MTTable.csv",0,param_00,1);
+	return tablelookupistring("mp\MTTable.csv",0,param_00,1);
 }
 
 func_BD72(param_00) {
-	return tablelookup("mp/MTTable.csv",0,param_00,2);
+	return tablelookup("mp\MTTable.csv",0,param_00,2);
 }
 
 func_BD71(param_00) {
-	return tablelookup("mp/MTTable.csv",0,param_00,3);
+	return tablelookup("mp\MTTable.csv",0,param_00,3);
 }
 
 isonladder(param_00) {
-	return tablelookupistring("mp/factionTable.csv",0,game[param_00],1);
+	return tablelookupistring("mp\factionTable.csv",0,game[param_00],1);
 }
 
 _meth_81B7(param_00) {
-	return tablelookupistring("mp/factionTable.csv",0,game[param_00],2);
+	return tablelookupistring("mp\factionTable.csv",0,game[param_00],2);
 }
 
 ismlgspectator(param_00) {
-	return tablelookupistring("mp/factionTable.csv",0,game[param_00],4);
+	return tablelookupistring("mp\factionTable.csv",0,game[param_00],4);
 }
 
 _meth_81A8(param_00) {
-	return tablelookupistring("mp/factionTable.csv",0,game[param_00],3);
+	return tablelookupistring("mp\factionTable.csv",0,game[param_00],3);
 }
 
 _meth_81B2(param_00) {
-	return tablelookup("mp/factionTable.csv",0,game[param_00],5);
+	return tablelookup("mp\factionTable.csv",0,game[param_00],5);
 }
 
 _meth_81B1(param_00) {
-	return tablelookup("mp/factionTable.csv",0,game[param_00],6);
+	return tablelookup("mp\factionTable.csv",0,game[param_00],6);
 }
 
 _meth_81B0(param_00) {
-	return tablelookup("mp/factionTable.csv",0,game[param_00],17);
+	return tablelookup("mp\factionTable.csv",0,game[param_00],17);
 }
 
 getteamvoiceprefix(param_00) {
-	return tablelookup("mp/factionTable.csv",0,game[param_00],7);
+	return tablelookup("mp\factionTable.csv",0,game[param_00],7);
 }
 
 getteamspawnmusic(param_00) {
-	return tablelookup("mp/factionTable.csv",0,game[param_00],8);
+	return tablelookup("mp\factionTable.csv",0,game[param_00],8);
 }
 
 issprinting(param_00) {
-	return tablelookup("mp/factionTable.csv",0,game[param_00],9);
+	return tablelookup("mp\factionTable.csv",0,game[param_00],9);
 }
 
 ismeleeing(param_00) {
-	return tablelookup("mp/factionTable.csv",0,game[param_00],10);
+	return tablelookup("mp\factionTable.csv",0,game[param_00],10);
 }
 
 _meth_81AA(param_00) {
-	return tablelookup("mp/factionTable.csv",0,game[param_00],11);
+	return tablelookup("mp\factionTable.csv",0,game[param_00],11);
 }
 
 ismantling(param_00) {
-	return tablelookup("mp/factionTable.csv",0,game[param_00],12);
+	return tablelookup("mp\factionTable.csv",0,game[param_00],12);
 }
 
 _meth_81AC(param_00) {
-	return tablelookup("mp/factionTable.csv",0,game[param_00],13);
+	return tablelookup("mp\factionTable.csv",0,game[param_00],13);
 }
 
 _meth_81A4(param_00) {
-	return (scripts\mp\utility::func_1114F(tablelookup("mp/factionTable.csv",0,game[param_00],14)),scripts\mp\utility::func_1114F(tablelookup("mp/factionTable.csv",0,game[param_00],15)),scripts\mp\utility::func_1114F(tablelookup("mp/factionTable.csv",0,game[param_00],16)));
+	return (scripts\mp\utility::func_1114F(tablelookup("mp\factionTable.csv",0,game[param_00],14)),scripts\mp\utility::func_1114F(tablelookup("mp\factionTable.csv",0,game[param_00],15)),scripts\mp\utility::func_1114F(tablelookup("mp\factionTable.csv",0,game[param_00],16)));
 }
 
 _meth_81A5(param_00) {
-	return tablelookup("mp/factionTable.csv",0,game[param_00],18);
+	return tablelookup("mp\factionTable.csv",0,game[param_00],18);
 }
 
 _meth_81A6(param_00) {
-	return tablelookup("mp/factionTable.csv",0,game[param_00],19);
+	return tablelookup("mp\factionTable.csv",0,game[param_00],19);
 }

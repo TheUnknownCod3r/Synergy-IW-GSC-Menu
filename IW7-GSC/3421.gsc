@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3421.gsc
-****************************/
+ * Script: 3421.gsc
+************************/
 
 register_interactions() {
 	level.interaction_hintstrings["perk_machine_revive"] = &"COOP_PERK_MACHINES_1500";
@@ -32,27 +32,27 @@ register_interactions() {
 }
 
 register_zombie_perks() {
-	level._effect["fire_cloud_1st"] = loadfx("vfx/iw7/core/zombie/vfx_zmb_fire_trail_1st.vfx");
-	level._effect["fire_cloud_3rd"] = loadfx("vfx/iw7/core/zombie/vfx_zmb_fire_trail_3rd.vfx");
-	level._effect["fire_trail"] = loadfx("vfx/iw7/core/zombie/vfx_zmb_fire_trail_ground_line.vfx");
-	level._effect["repulsor_wave_red"] = loadfx("vfx/iw7/_requests/coop/zmb_repulsor_wave_red");
-	level._effect["repulsor_view_red"] = loadfx("vfx/iw7/_requests/coop/zmb_repulsor_wave_view_red");
-	level._effect["reload_zap_s"] = loadfx("vfx/iw7/core/zombie/weapon/zap/vfx_zmb_zap_radial_s.vfx");
-	level._effect["reload_zap_m"] = loadfx("vfx/iw7/core/zombie/weapon/zap/vfx_zmb_zap_radial_m.vfx");
-	level._effect["reload_zap_l"] = loadfx("vfx/iw7/core/zombie/weapon/zap/vfx_zmb_zap_radial_l.vfx");
-	level._effect["reload_zap_screen"] = loadfx("vfx/iw7/core/zombie/weapon/zap/vfx_zmb_zap_radial_sreen.vfx");
-	scripts/cp/perks/perkmachines::register_perk_callback("perk_machine_tough",::give_tough_perk,::take_tough_perk);
-	scripts/cp/perks/perkmachines::register_perk_callback("perk_machine_revive",::give_revive_perk,::take_revive_perk);
-	scripts/cp/perks/perkmachines::register_perk_callback("perk_machine_flash",::give_flash_perk,::take_flash_perk);
-	scripts/cp/perks/perkmachines::register_perk_callback("perk_machine_more",::give_more_perk,::take_more_perk);
-	scripts/cp/perks/perkmachines::register_perk_callback("perk_machine_rat_a_tat",::give_rat_a_tat_perk,::take_rat_a_tat_perk);
-	scripts/cp/perks/perkmachines::register_perk_callback("perk_machine_run",::give_run_perk,::take_run_perk);
-	scripts/cp/perks/perkmachines::register_perk_callback("perk_machine_fwoosh",::give_fwoosh_perk,::take_fwoosh_perk);
-	scripts/cp/perks/perkmachines::register_perk_callback("perk_machine_smack",::give_smack_perk,::take_smack_perk);
-	scripts/cp/perks/perkmachines::register_perk_callback("perk_machine_zap",::give_zap_perk,::take_zap_perk);
-	scripts/cp/perks/perkmachines::register_perk_callback("perk_machine_boom",::give_boom_perk,::take_boom_perk);
-	scripts/cp/perks/perkmachines::register_perk_callback("perk_machine_deadeye",::give_deadeye_perk,::take_deadeye_perk);
-	scripts/cp/perks/perkmachines::register_perk_callback("perk_machine_change",::give_change_perk,::take_change_perk);
+	level._effect["fire_cloud_1st"] = loadfx("vfx\iw7\core\zombie\vfx_zmb_fire_trail_1st.vfx");
+	level._effect["fire_cloud_3rd"] = loadfx("vfx\iw7\core\zombie\vfx_zmb_fire_trail_3rd.vfx");
+	level._effect["fire_trail"] = loadfx("vfx\iw7\core\zombie\vfx_zmb_fire_trail_ground_line.vfx");
+	level._effect["repulsor_wave_red"] = loadfx("vfx\iw7\_requests\coop\zmb_repulsor_wave_red");
+	level._effect["repulsor_view_red"] = loadfx("vfx\iw7\_requests\coop\zmb_repulsor_wave_view_red");
+	level._effect["reload_zap_s"] = loadfx("vfx\iw7\core\zombie\weapon\zap\vfx_zmb_zap_radial_s.vfx");
+	level._effect["reload_zap_m"] = loadfx("vfx\iw7\core\zombie\weapon\zap\vfx_zmb_zap_radial_m.vfx");
+	level._effect["reload_zap_l"] = loadfx("vfx\iw7\core\zombie\weapon\zap\vfx_zmb_zap_radial_l.vfx");
+	level._effect["reload_zap_screen"] = loadfx("vfx\iw7\core\zombie\weapon\zap\vfx_zmb_zap_radial_sreen.vfx");
+	scripts\cp\perks\perkmachines::register_perk_callback("perk_machine_tough",::give_tough_perk,::take_tough_perk);
+	scripts\cp\perks\perkmachines::register_perk_callback("perk_machine_revive",::give_revive_perk,::take_revive_perk);
+	scripts\cp\perks\perkmachines::register_perk_callback("perk_machine_flash",::give_flash_perk,::take_flash_perk);
+	scripts\cp\perks\perkmachines::register_perk_callback("perk_machine_more",::give_more_perk,::take_more_perk);
+	scripts\cp\perks\perkmachines::register_perk_callback("perk_machine_rat_a_tat",::give_rat_a_tat_perk,::take_rat_a_tat_perk);
+	scripts\cp\perks\perkmachines::register_perk_callback("perk_machine_run",::give_run_perk,::take_run_perk);
+	scripts\cp\perks\perkmachines::register_perk_callback("perk_machine_fwoosh",::give_fwoosh_perk,::take_fwoosh_perk);
+	scripts\cp\perks\perkmachines::register_perk_callback("perk_machine_smack",::give_smack_perk,::take_smack_perk);
+	scripts\cp\perks\perkmachines::register_perk_callback("perk_machine_zap",::give_zap_perk,::take_zap_perk);
+	scripts\cp\perks\perkmachines::register_perk_callback("perk_machine_boom",::give_boom_perk,::take_boom_perk);
+	scripts\cp\perks\perkmachines::register_perk_callback("perk_machine_deadeye",::give_deadeye_perk,::take_deadeye_perk);
+	scripts\cp\perks\perkmachines::register_perk_callback("perk_machine_change",::give_change_perk,::take_change_perk);
 	if(isdefined(level.perk_registration_func)) {
 		[[level.perk_registration_func]]();
 	}
@@ -619,7 +619,7 @@ play_perk_machine_deny_sound(param_00,param_01) {
 }
 
 set_ui_omnvar_for_perks(param_00) {
-	var_01 = tablelookup("cp/zombies/zombie_perks_bit_mask_table.csv",1,param_00,0);
+	var_01 = tablelookup("cp\zombies\zombie_perks_bit_mask_table.csv",1,param_00,0);
 	var_02 = int(var_01);
 	self setclientomnvarbit("zm_active_perks",var_02 - 1,1);
 }
@@ -703,7 +703,7 @@ take_zombies_perk(param_00) {
 
 	scripts\cp\zombies\zombie_analytics::log_perk_returned(level.wave_num,param_00);
 	self [[level.coop_perk_callbacks[param_00].unset]]();
-	var_02 = tablelookup("cp/zombies/zombie_perks_bit_mask_table.csv",1,var_01,0);
+	var_02 = tablelookup("cp\zombies\zombie_perks_bit_mask_table.csv",1,var_01,0);
 	var_03 = int(var_02);
 	self setclientomnvarbit("zm_active_perks",var_03 - 1,0);
 	if(isdefined(level.take_perks_func)) {
@@ -730,7 +730,7 @@ take_zombies_perk_immediate(param_00) {
 		var_01 = self.sub_perks[param_00];
 	}
 
-	var_02 = tablelookup("cp/zombies/zombie_perks_bit_mask_table.csv",1,var_01,0);
+	var_02 = tablelookup("cp\zombies\zombie_perks_bit_mask_table.csv",1,var_01,0);
 	var_03 = int(var_02);
 	self setclientomnvarbit("zm_active_perks",var_03 - 1,0);
 	return 1;
@@ -938,7 +938,7 @@ wait_for_change_chews_update() {
 
 		if(isdefined(self.sub_perks) && isdefined(self.sub_perks["perk_machine_change"])) {
 			var_02 = self.sub_perks["perk_machine_change"];
-			var_03 = tablelookup("cp/zombies/zombie_perks_bit_mask_table.csv",1,var_02,0);
+			var_03 = tablelookup("cp\zombies\zombie_perks_bit_mask_table.csv",1,var_02,0);
 			var_04 = int(var_03);
 			self setclientomnvarbit("zm_active_perks",var_04 - 1,0);
 		}

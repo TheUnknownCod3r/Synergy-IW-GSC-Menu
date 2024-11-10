@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3189.gsc
-****************************/
+ * Script: 3189.gsc
+************************/
 
 func_13F9A(param_00,param_01,param_02,param_03) {
 	self.asm.footsteps = spawnstruct();
@@ -34,11 +34,11 @@ func_3EFC(param_00,param_01,param_02) {
 				break;
 		}
 
-		if(scripts/asm/asm_mp::func_2347(param_01,self.spawner.script_animation + var_03)) {
-			return scripts/asm/asm::asm_lookupanimfromalias(param_01,self.spawner.script_animation + var_03);
+		if(scripts\asm\asm_mp::func_2347(param_01,self.spawner.script_animation + var_03)) {
+			return scripts\asm\asm::asm_lookupanimfromalias(param_01,self.spawner.script_animation + var_03);
 		}
-		else if(scripts/asm/asm_mp::func_2347(param_01,self.spawner.script_animation)) {
-			return scripts/asm/asm::asm_lookupanimfromalias(param_01,self.spawner.script_animation);
+		else if(scripts\asm\asm_mp::func_2347(param_01,self.spawner.script_animation)) {
+			return scripts\asm\asm::asm_lookupanimfromalias(param_01,self.spawner.script_animation);
 		}
 	}
 
@@ -46,7 +46,7 @@ func_3EFC(param_00,param_01,param_02) {
 		return lib_0F3C::func_3EF4(param_00,param_01,param_02);
 	}
 
-	return scripts/asm/asm::asm_lookupanimfromalias(param_01,param_02);
+	return scripts\asm\asm::asm_lookupanimfromalias(param_01,param_02);
 }
 
 func_3EFB(param_00,param_01,param_02) {
@@ -67,11 +67,11 @@ func_3EFB(param_00,param_01,param_02) {
 				break;
 		}
 
-		if(scripts/asm/asm_mp::func_2347(param_01,self.spawner.script_animation + var_03)) {
-			return scripts/asm/asm::asm_lookupanimfromalias(param_01,self.spawner.script_animation + var_03);
+		if(scripts\asm\asm_mp::func_2347(param_01,self.spawner.script_animation + var_03)) {
+			return scripts\asm\asm::asm_lookupanimfromalias(param_01,self.spawner.script_animation + var_03);
 		}
-		else if(scripts/asm/asm_mp::func_2347(param_01,self.spawner.script_animation)) {
-			return scripts/asm/asm::asm_lookupanimfromalias(param_01,self.spawner.script_animation);
+		else if(scripts\asm\asm_mp::func_2347(param_01,self.spawner.script_animation)) {
+			return scripts\asm\asm::asm_lookupanimfromalias(param_01,self.spawner.script_animation);
 		}
 	}
 
@@ -79,7 +79,7 @@ func_3EFB(param_00,param_01,param_02) {
 		return lib_0F3C::func_3EF4(param_00,param_01,param_02);
 	}
 
-	return scripts/asm/asm::asm_lookupanimfromalias(param_01,param_02);
+	return scripts\asm\asm::asm_lookupanimfromalias(param_01,param_02);
 }
 
 func_3EE0(param_00,param_01,param_02) {
@@ -87,7 +87,7 @@ func_3EE0(param_00,param_01,param_02) {
 		return lib_0F3C::func_3EF4(param_00,param_01,param_02);
 	}
 
-	return scripts/asm/asm::asm_lookupanimfromalias(param_01,param_02);
+	return scripts\asm\asm::asm_lookupanimfromalias(param_01,param_02);
 }
 
 func_3EE1(param_00,param_01,param_02) {
@@ -111,16 +111,16 @@ func_3EE1(param_00,param_01,param_02) {
 
 func_3EF1(param_00,param_01,param_02,param_03) {
 	var_04 = self getanimentrycount(param_01);
-	var_05 = scripts/mp/agents/zombie/zombie_util::func_4D52(self.var_4D62,self.var_DC);
+	var_05 = scripts\mp\agents\zombie\zombie_util::func_4D52(self.var_4D62,self.var_DC);
 	var_06 = angleclamp180(var_05 - self.angles[1]);
-	var_07 = scripts/mp/agents/zombie/zombie_util::botmemoryevent(var_06,var_04);
+	var_07 = scripts\mp\agents\zombie\zombie_util::botmemoryevent(var_06,var_04);
 	return var_07;
 }
 
 func_D4F5(param_00,param_01,param_02,param_03) {
 	self endon("death");
 	self endon("terminate_ai_threads");
-	var_04 = scripts/asm/asm_mp::asm_getanim(param_00,param_01);
+	var_04 = scripts\asm\asm_mp::asm_getanim(param_00,param_01);
 	if(isdefined(self.vehicle_getspawnerarray)) {
 		self ghostlaunched("code_move");
 		self orientmode("face motion");
@@ -142,19 +142,19 @@ func_D4F5(param_00,param_01,param_02,param_03) {
 func_D4F3(param_00,param_01,param_02,param_03) {
 	self endon("death");
 	self endon(param_01 + "_finished");
-	if(scripts/asm/asm_mp::func_2347(param_01,self.asm.var_BCD3)) {
-		var_04 = scripts/asm/asm_mp::func_235A(param_01,self.asm.var_BCD3);
+	if(scripts\asm\asm_mp::func_2347(param_01,self.asm.var_BCD3)) {
+		var_04 = scripts\asm\asm_mp::func_235A(param_01,self.asm.var_BCD3);
 	}
 	else
 	{
 		var_04 = lib_0F3C::func_3EF4(param_01,param_02,var_04);
 	}
 
-	var_05 = scripts/asm/asm::func_2341(param_00,param_01);
+	var_05 = scripts\asm\asm::func_2341(param_00,param_01);
 	thread scripts\mp\agents\_scriptedagents::func_CED5(param_01,var_04,param_01,"end",var_05);
 	self.var_BF9E = gettime() + 10000;
 	wait(0.35);
-	scripts/asm/asm::asm_fireevent(param_01,"end");
+	scripts\asm\asm::asm_fireevent(param_01,"end");
 }
 
 func_9DB2(param_00,param_01,param_02,param_03) {
@@ -180,7 +180,7 @@ func_9DB1(param_00,param_01,param_02,param_03) {
 }
 
 func_4D41() {
-	var_00 = scripts/mp/agents/zombie/zombie_util::func_4D52(self.var_4D62,self.var_DC);
+	var_00 = scripts\mp\agents\zombie\zombie_util::func_4D52(self.var_4D62,self.var_DC);
 	var_01 = angleclamp180(var_00 - self.angles[1]);
 	return var_01;
 }
@@ -205,8 +205,8 @@ func_6CE0(param_00,param_01,param_02) {
 		var_04 = "choose_idle";
 	}
 
-	scripts/asm/asm::func_2388(param_00,param_01,var_03,var_03.var_116FB);
-	scripts/asm/asm::func_238A(param_00,var_04,0.2,undefined,undefined,undefined);
+	scripts\asm\asm::func_2388(param_00,param_01,var_03,var_03.var_116FB);
+	scripts\asm\asm::func_238A(param_00,var_04,0.2,undefined,undefined,undefined);
 }
 
 func_1004F() {
@@ -231,11 +231,11 @@ func_1004F() {
 	}
 
 	if(!scripts\engine\utility::istrue(self.stunned)) {
-		if(scripts/asm/asm_bb::bb_meleerequested()) {
+		if(scripts\asm\asm_bb::bb_meleerequested()) {
 			return 0;
 		}
 
-		if(scripts/asm/asm_bb::bb_meleeinprogress()) {
+		if(scripts\asm\asm_bb::bb_meleeinprogress()) {
 			return 0;
 		}
 	}
@@ -259,7 +259,7 @@ func_9E89(param_00) {
 }
 
 func_9EAB(param_00,param_01,param_02,param_03) {
-	return !scripts/asm/asm_bb::bb_moverequested();
+	return !scripts\asm\asm_bb::bb_moverequested();
 }
 
 func_BE92() {
@@ -271,7 +271,7 @@ func_BE92() {
 }
 
 func_BE99(param_00,param_01,param_02,param_03) {
-	return scripts/asm/asm_bb::bb_movetyperequested("run");
+	return scripts\asm\asm_bb::bb_movetyperequested("run");
 }
 
 func_BE9A(param_00,param_01,param_02,param_03) {
@@ -279,7 +279,7 @@ func_BE9A(param_00,param_01,param_02,param_03) {
 		return 1;
 	}
 
-	return scripts/asm/asm_bb::bb_movetyperequested("sprint");
+	return scripts\asm\asm_bb::bb_movetyperequested("sprint");
 }
 
 func_BE9B() {
@@ -323,7 +323,7 @@ func_BCCD() {
 		return 0;
 	}
 
-	var_00 = isdefined(self.asm.cur_move_mode) && self.asm.cur_move_mode != self._blackboard.movetype;
+	var_00 = isdefined(self.asm.cur_move_mode) && self.asm.cur_move_mode != self.var_1198.movetype;
 	if(var_00) {
 		return 1;
 	}
@@ -428,9 +428,9 @@ func_D532(param_00,param_01,param_02,param_03) {
 	self endon(param_01 + "_finished");
 	self.scripted_mode = 1;
 	self gib_fx_override("noclip");
-	var_04 = scripts/asm/asm_mp::asm_getanim(param_00,param_01);
+	var_04 = scripts\asm\asm_mp::asm_getanim(param_00,param_01);
 	var_05 = 0.01;
-	thread scripts/asm/asm_mp::func_2365(param_00,param_01,param_02,var_04,var_05);
+	thread scripts\asm\asm_mp::func_2365(param_00,param_01,param_02,var_04,var_05);
 	if(isdefined(level.spawn_fx_func)) {
 		self [[level.spawn_fx_func]]();
 	}
@@ -461,11 +461,11 @@ func_D571(param_00,param_01,param_02,param_03) {
 		thread func_C3C6(param_00,param_01);
 	}
 
-	var_04 = scripts/asm/asm_mp::asm_getanim(param_00,param_01);
+	var_04 = scripts\asm\asm_mp::asm_getanim(param_00,param_01);
 	var_05 = 1;
 	var_06 = self.do_immediate_ragdoll;
 	self.do_immediate_ragdoll = 1;
-	scripts/asm/asm_mp::func_2365(param_00,param_01,param_02,var_04,var_05);
+	scripts\asm\asm_mp::func_2365(param_00,param_01,param_02,var_04,var_05);
 	self.do_immediate_ragdoll = var_06;
 	self gib_fx_override("gravity");
 	self.scripted_mode = 0;
@@ -486,7 +486,7 @@ func_11702(param_00,param_01,param_02) {
 
 func_ABA5(param_00,param_01) {
 	self endon(param_01 + "_finished");
-	var_02 = scripts/asm/asm_mp::asm_getanim(param_00,param_01);
+	var_02 = scripts\asm\asm_mp::asm_getanim(param_00,param_01);
 	var_03 = self getsafecircleorigin(param_01,var_02);
 	var_04 = getanimlength(var_03);
 	var_05 = getnotetracktimes(var_03,"fall");
@@ -519,7 +519,7 @@ func_ABA5(param_00,param_01) {
 
 func_C3C6(param_00,param_01) {
 	self endon(param_01 + "_finished");
-	var_02 = scripts/asm/asm_mp::asm_getanim(param_00,param_01);
+	var_02 = scripts\asm\asm_mp::asm_getanim(param_00,param_01);
 	var_03 = self getsafecircleorigin(param_01,var_02);
 	var_04 = getanimlength(var_03);
 	var_05 = getnotetracktimes(var_03,"fall");
@@ -571,7 +571,7 @@ turnintosuicidebomber(param_00) {
 	var_01 = ["park_clown_zombie","park_clown_zombie_blue","park_clown_zombie_green","park_clown_zombie_orange","park_clown_zombie_yellow"];
 	var_02 = scripts\engine\utility::random(var_01);
 	self setmodel(var_02);
-	scripts/asm/asm_bb::bb_requestmovetype("sprint");
+	scripts\asm\asm_bb::bb_requestmovetype("sprint");
 	if(isdefined(level.suicider_avoidance_radius)) {
 		self setavoidanceradius(level.suicider_avoidance_radius);
 	}
@@ -670,8 +670,8 @@ func_10092(param_00,param_01,param_02,param_03) {
 		return 0;
 	}
 
-	var_04 = scripts/asm/asm::asm_getcurrentstate(param_00);
-	if(!scripts/asm/asm::func_232B(var_04,"cover_approach")) {
+	var_04 = scripts\asm\asm::asm_getcurrentstate(param_00);
+	if(!scripts\asm\asm::func_232B(var_04,"cover_approach")) {
 		return 0;
 	}
 
@@ -806,7 +806,7 @@ func_3F08(param_00,param_01,param_02) {
 		return lib_0F3C::func_3EF4(param_00,param_01,param_02);
 	}
 
-	switch(self._blackboard.movetype) {
+	switch(self.var_1198.movetype) {
 		case "walk":
 		case "slow_walk":
 			param_02 = param_02 + "_walk";
@@ -822,7 +822,7 @@ func_3F08(param_00,param_01,param_02) {
 			break;
 	}
 
-	return scripts/asm/asm::asm_lookupanimfromalias(param_01,param_02);
+	return scripts\asm\asm::asm_lookupanimfromalias(param_01,param_02);
 }
 
 func_D567(param_00,param_01,param_02,param_03) {
@@ -868,7 +868,7 @@ func_5AC4(param_00,param_01,param_02,param_03) {
 	}
 
 	self.is_traversing = 1;
-	var_07 = scripts/asm/asm_mp::asm_getanim(param_00,var_06);
+	var_07 = scripts\asm\asm_mp::asm_getanim(param_00,var_06);
 	var_08 = var_05 - var_04.origin;
 	var_09 = (var_08[0],var_08[1],0);
 	var_0A = vectortoangles(var_09);
@@ -1116,7 +1116,7 @@ func_126D8(param_00,param_01,param_02) {
 			break;
 		}
 
-		var_06 = scripts/mp/agents/zombie/zombie_util::func_AB6F(var_05,param_00,param_01);
+		var_06 = scripts\mp\agents\zombie\zombie_util::func_AB6F(var_05,param_00,param_01);
 		self setorigin((self.origin[0],self.origin[1],var_06),0);
 		wait(0.05);
 	}
@@ -1157,17 +1157,17 @@ func_11701(param_00,param_01) {
 		}
 	}
 
-	scripts/asm/asm::func_2388(param_00,param_01,var_02,var_02.var_116FB);
-	scripts/asm/asm::func_238A(param_00,var_03,0.2,undefined,undefined,undefined);
+	scripts\asm\asm::func_2388(param_00,param_01,var_02,var_02.var_116FB);
+	scripts\asm\asm::func_238A(param_00,var_03,0.2,undefined,undefined,undefined);
 	self notify("killanimscript");
 }
 
 func_D4E3(param_00,param_01,param_02,param_03) {
 	self endon(param_01 + "_finished");
-	scripts/asm/asm::func_237B(self.moveratescale);
+	scripts\asm\asm::func_237B(self.moveratescale);
 	self.asm.cur_move_mode = param_03;
 	lib_0F3C::func_D4DD(param_00,param_01,param_02,param_03);
-	scripts/asm/asm::func_237B(1);
+	scripts\asm\asm::func_237B(1);
 }
 
 func_CEAE(param_00,param_01,param_02,param_03) {
@@ -1177,29 +1177,29 @@ func_CEAE(param_00,param_01,param_02,param_03) {
 
 func_CEB7(param_00,param_01,param_02,param_03) {
 	self endon(param_01 + "_finished");
-	scripts/asm/asm::func_237B(self.moveratescale);
+	scripts\asm\asm::func_237B(self.moveratescale);
 	lib_0F3B::func_CEB5(param_00,param_01,param_02,param_03);
-	scripts/asm/asm::func_237B(1);
+	scripts\asm\asm::func_237B(1);
 }
 
 func_D515(param_00,param_01,param_02,param_03) {
 	self endon(param_01 + "_finished");
-	scripts/asm/asm::func_237B(self.moveratescale);
+	scripts\asm\asm::func_237B(self.moveratescale);
 	lib_0F3B::func_D514(param_00,param_01,param_02,param_03);
-	scripts/asm/asm::func_237B(self.moveratescale);
+	scripts\asm\asm::func_237B(self.moveratescale);
 }
 
 func_D538(param_00,param_01,param_02,param_03) {
 	self endon(param_01 + "_finished");
-	scripts/asm/asm::func_237B(self.moveratescale);
-	if(scripts/mp/agents/zombie/zombie_util::_meth_8252() < 2) {
+	scripts\asm\asm::func_237B(self.moveratescale);
+	if(scripts\mp\agents\zombie\zombie_util::_meth_8252() < 2) {
 		var_04 = level.var_BCE6["run"][1];
 		var_04 = var_04 + self.moveratescale - level.var_BCE6["sprint"][0];
-		scripts/asm/asm::func_237B(var_04);
+		scripts\asm\asm::func_237B(var_04);
 	}
 
 	lib_0F3B::func_D514(param_00,param_01,param_02,param_03);
-	scripts/asm/asm::func_237B(self.moveratescale);
+	scripts\asm\asm::func_237B(self.moveratescale);
 }
 
 func_13FAE(param_00,param_01,param_02,param_03) {
@@ -1216,18 +1216,18 @@ func_13FAE(param_00,param_01,param_02,param_03) {
 func_7389(param_00,param_01,param_02,param_03) {
 	param_01 = self.var_7387;
 	level thread [[level.frozenzombiefunc]](self);
-	var_04 = scripts/asm/asm_mp::asm_getanim(param_00,param_01);
+	var_04 = scripts\asm\asm_mp::asm_getanim(param_00,param_01);
 	if(scripts\engine\utility::istrue(self.activated_slomo_sphere)) {
-		scripts/asm/asm_mp::func_2365(param_00,param_01,0.1,var_04,0.2);
+		scripts\asm\asm_mp::func_2365(param_00,param_01,0.1,var_04,0.2);
 		return;
 	}
 
 	if(scripts\engine\utility::istrue(self.activated_venomx_sphere)) {
-		scripts/asm/asm_mp::func_2365(param_00,param_01,0.1,var_04,0.2);
+		scripts\asm\asm_mp::func_2365(param_00,param_01,0.1,var_04,0.2);
 		return;
 	}
 
-	scripts/asm/asm_mp::func_2365(param_00,param_01,0.1,var_04,0.001);
+	scripts\asm\asm_mp::func_2365(param_00,param_01,0.1,var_04,0.001);
 }
 
 func_3E12(param_00,param_01,param_02,param_03) {
@@ -1237,7 +1237,7 @@ func_3E12(param_00,param_01,param_02,param_03) {
 		}
 		else
 		{
-			self.var_7387 = scripts/asm/asm::asm_getcurrentstate(param_00);
+			self.var_7387 = scripts\asm\asm::asm_getcurrentstate(param_00);
 		}
 
 		return 1;
@@ -1332,7 +1332,7 @@ isdoublejumpanimdone(param_00,param_01,param_02,param_03) {
 
 func_CEF3(param_00,param_01,param_02,param_03) {
 	self orientmode("face angle abs",self.desired_dance_angles);
-	scripts/asm/asm_mp::func_235F(param_00,param_01,param_02,1,0);
+	scripts\asm\asm_mp::func_235F(param_00,param_01,param_02,1,0);
 }
 
 func_3EBE(param_00,param_01,param_02) {
@@ -1342,22 +1342,22 @@ func_3EBE(param_00,param_01,param_02) {
 
 	if(self.dismember_crawl) {
 		func_F2E5();
-		self.var_2CA7 = scripts/asm/asm::asm_lookupanimfromalias(param_01,"boombox_dance_crawl_" + level.var_2C9A);
+		self.var_2CA7 = scripts\asm\asm::asm_lookupanimfromalias(param_01,"boombox_dance_crawl_" + level.var_2C9A);
 		return self.var_2CA7;
 	}
 
 	if(scripts\engine\utility::istrue(self.var_9B6E)) {
-		self.var_2CA7 = scripts/asm/asm::asm_lookupanimfromalias(param_01,"disco_dance_center_" + randomintrange(0,4));
+		self.var_2CA7 = scripts\asm\asm::asm_lookupanimfromalias(param_01,"disco_dance_center_" + randomintrange(0,4));
 		return self.var_2CA7;
 	}
 
 	if(scripts\engine\utility::istrue(self.fridge_trap_marked)) {
-		self.var_2CA7 = scripts/asm/asm::asm_lookupanimfromalias(param_01,"fridge_lured_anim_" + randomintrange(0,4));
+		self.var_2CA7 = scripts\asm\asm::asm_lookupanimfromalias(param_01,"fridge_lured_anim_" + randomintrange(0,4));
 		return self.var_2CA7;
 	}
 
 	func_F2E6();
-	self.var_2CA7 = scripts/asm/asm::asm_lookupanimfromalias(param_01,"boombox_dance_" + level.var_2C9B);
+	self.var_2CA7 = scripts\asm\asm::asm_lookupanimfromalias(param_01,"boombox_dance_" + level.var_2C9B);
 	return self.var_2CA7;
 }
 
@@ -1389,10 +1389,10 @@ func_BE8D(param_00,param_01,param_02,param_03) {
 
 func_3EFE(param_00,param_01,param_02) {
 	if(scripts\engine\utility::istrue(self.upgraded_dischord_spin)) {
-		return scripts/asm/asm::asm_lookupanimfromalias(param_01,"upgraded");
+		return scripts\asm\asm::asm_lookupanimfromalias(param_01,"upgraded");
 	}
 
-	return scripts/asm/asm::asm_lookupanimfromalias(param_01,"normal");
+	return scripts\asm\asm::asm_lookupanimfromalias(param_01,"normal");
 }
 
 func_98DC(param_00,param_01,param_02,param_03) {
@@ -1419,8 +1419,8 @@ func_BE94(param_00,param_01,param_02,param_03) {
 			return 0;
 		}
 	}
-	else if(!scripts/asm/asm_bb::bb_moverequested()) {
-		self.var_429D = scripts/cp/zombies/zombie_entrances::func_7B14(self.origin,self.var_429D);
+	else if(!scripts\asm\asm_bb::bb_moverequested()) {
+		self.var_429D = scripts\cp\zombies\zombie_entrances::func_7B14(self.origin,self.var_429D);
 		if(!isdefined(self.var_429D)) {
 			self.died_poorly = 1;
 			self dodamage(self.health + 950,self.origin,self,self,"MOD_SUICIDE");
@@ -1430,7 +1430,7 @@ func_BE94(param_00,param_01,param_02,param_03) {
 
 	self ghostskulls_total_waves(4);
 	self ghostskulls_complete_status(self.var_429D.origin);
-	if(!scripts/asm/asm_bb::bb_moverequested()) {
+	if(!scripts\asm\asm_bb::bb_moverequested()) {
 		return 0;
 	}
 
@@ -1458,7 +1458,7 @@ func_3ED7(param_00,param_01,param_02) {
 		var_04 = var_04 + "_extended";
 	}
 
-	self.var_662F = scripts/asm/asm::asm_lookupanimfromalias(param_01,var_04);
+	self.var_662F = scripts\asm\asm::asm_lookupanimfromalias(param_01,var_04);
 	return self.var_662F;
 }
 
@@ -1477,14 +1477,14 @@ func_3EBA(param_00,param_01,param_02) {
 		var_04 = var_04 + var_03.script_label;
 	}
 
-	return scripts/asm/asm::asm_lookupanimfromalias(param_01,var_04);
+	return scripts\asm\asm::asm_lookupanimfromalias(param_01,var_04);
 }
 
 func_116E8(param_00,param_01,param_02) {
 	if(isdefined(self.var_BF2F)) {
-		var_03 = scripts/cp/zombies/zombie_entrances::func_7872(self.var_6658,self.var_BF2F - 1);
+		var_03 = scripts\cp\zombies\zombie_entrances::func_7872(self.var_6658,self.var_BF2F - 1);
 		if(var_03 == "destroying") {
-			scripts/cp/zombies/zombie_entrances::func_F2E3(self.var_6658,self.var_BF2F - 1,"boarded");
+			scripts\cp\zombies\zombie_entrances::func_F2E3(self.var_6658,self.var_BF2F - 1,"boarded");
 		}
 
 		self.var_BF2F = undefined;
@@ -1495,7 +1495,7 @@ func_3ECF(param_00,param_01,param_02) {
 	var_03 = self.attack_spot;
 	if(scripts\engine\utility::istrue(self.isfrozen)) {
 		if(isdefined(self.var_BF2F)) {
-			scripts/cp/zombies/zombie_entrances::func_F2E3(self.var_6658,self.var_BF2F - 1,"boarded");
+			scripts\cp\zombies\zombie_entrances::func_F2E3(self.var_6658,self.var_BF2F - 1,"boarded");
 			self.var_BF2F = undefined;
 		}
 
@@ -1504,18 +1504,18 @@ func_3ECF(param_00,param_01,param_02) {
 
 	if(self.dismember_crawl) {
 		if(!isdefined(var_03.script_label)) {
-			self.var_A93A = scripts/asm/asm::asm_lookupanimfromalias(param_01,"crawling");
+			self.var_A93A = scripts\asm\asm::asm_lookupanimfromalias(param_01,"crawling");
 			return self.var_A93A;
 		}
 
 		var_04 = func_F496();
 		var_05 = "crawling_" + var_03.script_label + "_" + var_04;
-		self.var_A93A = scripts/asm/asm::asm_lookupanimfromalias(param_01,var_05);
+		self.var_A93A = scripts\asm\asm::asm_lookupanimfromalias(param_01,var_05);
 		return self.var_A93A;
 	}
 
 	if(!isdefined(var_05.script_label)) {
-		self.var_A93A = scripts/asm/asm::asm_lookupanimfromalias(var_03,"standing");
+		self.var_A93A = scripts\asm\asm::asm_lookupanimfromalias(var_03,"standing");
 		return self.var_A93A;
 	}
 
@@ -1525,23 +1525,23 @@ func_3ECF(param_00,param_01,param_02) {
 
 	var_04 = func_F496();
 	var_05 = "standing_" + var_04.script_label + "_" + var_05;
-	self.var_A93A = scripts/asm/asm::asm_lookupanimfromalias(param_01,var_05);
+	self.var_A93A = scripts\asm\asm::asm_lookupanimfromalias(param_01,var_05);
 	return self.var_A93A;
 }
 
 func_F496() {
-	var_00 = scripts/cp/zombies/zombie_entrances::func_7B12(self.var_6658);
+	var_00 = scripts\cp\zombies\zombie_entrances::func_7B12(self.var_6658);
 	self.var_BF2F = var_00;
-	scripts/cp/zombies/zombie_entrances::func_F2E3(self.var_6658,self.var_BF2F - 1,"destroying");
+	scripts\cp\zombies\zombie_entrances::func_F2E3(self.var_6658,self.var_BF2F - 1,"destroying");
 	return var_00;
 }
 
 func_3F13(param_00,param_01,param_02) {
 	if(self.dismember_crawl) {
-		return scripts/asm/asm::asm_lookupanimfromalias(param_01,"crawling");
+		return scripts\asm\asm::asm_lookupanimfromalias(param_01,"crawling");
 	}
 
-	return scripts/asm/asm::asm_lookupanimfromalias(param_01,"standing");
+	return scripts\asm\asm::asm_lookupanimfromalias(param_01,"standing");
 }
 
 func_532D(param_00,param_01,param_02,param_03) {
@@ -1552,8 +1552,8 @@ func_532D(param_00,param_01,param_02,param_03) {
 
 		var_04 = self.var_BF2F;
 		self.var_BF2F = undefined;
-		scripts/cp/zombies/zombie_entrances::func_F2E3(self.var_6658,var_04 - 1,"destroyed");
-		scripts/cp/zombies/zombie_entrances::remove_barrier_from_entrance(self.var_6658,var_04);
+		scripts\cp\zombies\zombie_entrances::func_F2E3(self.var_6658,var_04 - 1,"destroyed");
+		scripts\cp\zombies\zombie_entrances::remove_barrier_from_entrance(self.var_6658,var_04);
 	}
 }
 
@@ -1566,7 +1566,7 @@ func_252C(param_00,param_01,param_02,param_03) {
 	if(param_00 == "hit") {
 		var_04 = scripts\engine\utility::getclosest(self.origin,level.current_interaction_structs);
 		if(is_player_near_interaction_point(self.closest_player_near_interaction_point,var_04)) {
-			scripts/asm/zombie/melee::domeleedamage(self.closest_player_near_interaction_point,45,"MOD_IMPACT");
+			scripts\asm\zombie\melee::domeleedamage(self.closest_player_near_interaction_point,45,"MOD_IMPACT");
 		}
 	}
 }
@@ -1574,13 +1574,13 @@ func_252C(param_00,param_01,param_02,param_03) {
 func_CEE3(param_00,param_01,param_02,param_03) {
 	self endon(param_01 + "_finished");
 	self orientmode("face angle abs",self.attack_spot.angles);
-	scripts/asm/asm_mp::func_2364(param_00,param_01,param_02,param_03);
+	scripts\asm\asm_mp::func_2364(param_00,param_01,param_02,param_03);
 }
 
 func_CF19(param_00,param_01,param_02,param_03) {
 	self endon(param_01 + "_finished");
 	self orientmode("face angle abs",self.attack_spot.angles);
-	scripts/asm/asm_mp::func_2364(param_00,param_01,param_02,param_03);
+	scripts\asm\asm_mp::func_2364(param_00,param_01,param_02,param_03);
 }
 
 func_662E(param_00,param_01,param_02,param_03) {
@@ -1600,7 +1600,7 @@ func_662E(param_00,param_01,param_02,param_03) {
 		self setorigin(self.origin + var_04,0);
 	}
 
-	scripts/asm/asm_mp::func_2365(param_00,param_01,param_02,scripts/asm/asm_mp::asm_getanim(param_00,param_01),self.traverseratescale);
+	scripts\asm\asm_mp::func_2365(param_00,param_01,param_02,scripts\asm\asm_mp::asm_getanim(param_00,param_01),self.traverseratescale);
 	self.do_immediate_ragdoll = 0;
 	self.full_gib = 0;
 	self.nocorpse = undefined;
@@ -1614,7 +1614,7 @@ func_662E(param_00,param_01,param_02,param_03) {
 	self.is_traversing = undefined;
 	self ghostskulls_total_waves(4);
 	self ghostskulls_complete_status(self.origin);
-	scripts/cp/zombies/zombie_entrances::release_attack_spot(self.attack_spot);
+	scripts\cp\zombies\zombie_entrances::release_attack_spot(self.attack_spot);
 	self.attack_spot = undefined;
 }
 
@@ -1634,7 +1634,7 @@ func_BA3E() {
 	self.var_6659 = undefined;
 	self.var_6658 = undefined;
 	self.var_BF2F = undefined;
-	scripts/cp/zombies/zombie_entrances::release_attack_spot(self.attack_spot);
+	scripts\cp\zombies\zombie_entrances::release_attack_spot(self.attack_spot);
 	self.attack_spot = undefined;
 }
 
@@ -1671,18 +1671,18 @@ func_BA3D() {
 	self.despawncovernode = 200;
 	self _meth_84BD();
 	self waittill("stop_soon");
-	self.attack_spot = scripts/cp/zombies/zombie_entrances::get_open_attack_spot(self.var_6658);
-	if(!scripts/cp/zombies/zombie_entrances::func_9CD3(self.attack_spot)) {
-		scripts/cp/zombies/zombie_entrances::func_3FF0(self.attack_spot);
+	self.attack_spot = scripts\cp\zombies\zombie_entrances::get_open_attack_spot(self.var_6658);
+	if(!scripts\cp\zombies\zombie_entrances::func_9CD3(self.attack_spot)) {
+		scripts\cp\zombies\zombie_entrances::func_3FF0(self.attack_spot);
 	}
 	else
 	{
 		self ghostskulls_complete_status(self.origin);
 		while(func_BE93()) {
-			var_00 = scripts/cp/zombies/zombie_entrances::get_open_attack_spot(self.var_6658);
-			if(isdefined(var_00) && !scripts/cp/zombies/zombie_entrances::func_9CD3(var_00)) {
+			var_00 = scripts\cp\zombies\zombie_entrances::get_open_attack_spot(self.var_6658);
+			if(isdefined(var_00) && !scripts\cp\zombies\zombie_entrances::func_9CD3(var_00)) {
 				self.attack_spot = var_00;
-				scripts/cp/zombies/zombie_entrances::func_3FF0(self.attack_spot);
+				scripts\cp\zombies\zombie_entrances::func_3FF0(self.attack_spot);
 				break;
 			}
 
@@ -1700,13 +1700,13 @@ func_BA3D() {
 	var_03 = (self.attack_spot.origin[0],self.attack_spot.origin[1],self.origin[2]);
 	self setorigin(var_03,0);
 	self.noturnanims = 0;
-	scripts/cp/zombies/zombie_entrances::func_E005(self.var_6658);
+	scripts\cp\zombies\zombie_entrances::func_E005(self.var_6658);
 	self.var_6659 = 1;
 }
 
 func_5AEE(param_00,param_01,param_02,param_03) {
 	self.var_6659 = 0;
-	scripts/cp/zombies/zombie_entrances::func_16D1(self.var_6658);
+	scripts\cp\zombies\zombie_entrances::func_16D1(self.var_6658);
 	self ghostskulls_total_waves(4);
 	self ghostskulls_complete_status(self.var_6658.origin);
 	thread func_BA3D();
@@ -1722,7 +1722,7 @@ func_DD1E(param_00,param_01,param_02,param_03) {
 }
 
 func_BE93(param_00,param_01,param_02,param_03) {
-	var_04 = scripts/cp/zombies/zombie_entrances::func_7B12(self.var_6658);
+	var_04 = scripts\cp\zombies\zombie_entrances::func_7B12(self.var_6658);
 	if(!isdefined(var_04)) {
 		return 0;
 	}
@@ -1731,7 +1731,7 @@ func_BE93(param_00,param_01,param_02,param_03) {
 }
 
 func_13F9B(param_00,param_01,param_02,param_03) {
-	scripts/asm/asm_bb::bb_clearmeleerequestcomplete();
+	scripts\asm\asm_bb::bb_clearmeleerequestcomplete();
 	return 1;
 }
 
@@ -1797,16 +1797,16 @@ func_3F0B(param_00,param_01,param_02) {
 		var_03 = "crawling";
 	}
 
-	return scripts/asm/asm::asm_lookupanimfromalias(param_01,var_03);
+	return scripts\asm\asm::asm_lookupanimfromalias(param_01,var_03);
 }
 
 func_1002F(param_00,param_01,param_02,param_03) {
-	return scripts/asm/zombie/melee::func_138E4() && !scripts\engine\utility::istrue(self.stunned);
+	return scripts\asm\zombie\melee::func_138E4() && !scripts\engine\utility::istrue(self.stunned);
 }
 
 func_1003A(param_00,param_01,param_02,param_03) {
 	if(self.hasplayedvignetteanim) {
-		if(scripts/asm/asm_bb::bb_moverequested()) {
+		if(scripts\asm\asm_bb::bb_moverequested()) {
 			return 1;
 		}
 

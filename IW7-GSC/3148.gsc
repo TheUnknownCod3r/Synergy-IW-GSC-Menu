@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3148.gsc
-****************************/
+ * Script: 3148.gsc
+************************/
 
 func_3DF2(param_00,param_01,param_02,param_03) {
 	if(isdefined(self.isnodeoccupied)) {
@@ -12,7 +12,7 @@ func_3DF2(param_00,param_01,param_02,param_03) {
 		}
 
 		if(isai(self.isnodeoccupied)) {
-			if(!isdefined(self.isnodeoccupied scripts/asm/asm_bb::bb_getcovernode()) || self.isnodeoccupied scripts/asm/asm_bb::bb_getrequestedcoverstate() != "hide") {
+			if(!isdefined(self.isnodeoccupied scripts\asm\asm_bb::bb_getcovernode()) || self.isnodeoccupied scripts\asm\asm_bb::bb_getrequestedcoverstate() != "hide") {
 				return 0;
 			}
 		}
@@ -21,8 +21,8 @@ func_3DF2(param_00,param_01,param_02,param_03) {
 		}
 	}
 
-	if(isdefined(self._blackboard.var_28D0)) {
-		if(self._blackboard.var_28D0 == param_03) {
+	if(isdefined(self.var_1198.var_28D0)) {
+		if(self.var_1198.var_28D0 == param_03) {
 			return 1;
 		}
 
@@ -34,8 +34,8 @@ func_3DF2(param_00,param_01,param_02,param_03) {
 
 func_3EBB(param_00,param_01,param_02) {
 	var_03 = undefined;
-	if(isdefined(self._blackboard.var_28DE)) {
-		var_03 = self._blackboard.var_28DE.origin;
+	if(isdefined(self.var_1198.var_28DE)) {
+		var_03 = self.var_1198.var_28DE.origin;
 	}
 	else
 	{
@@ -47,7 +47,7 @@ func_3EBB(param_00,param_01,param_02) {
 	}
 	else
 	{
-		var_05 = scripts/asm/asm_bb::bb_getcovernode();
+		var_05 = scripts\asm\asm_bb::bb_getcovernode();
 		if(isdefined(var_05)) {
 			var_06 = var_05.angles;
 		}
@@ -70,14 +70,14 @@ func_3EBB(param_00,param_01,param_02) {
 func_CEE9(param_00,param_01,param_02,param_03) {
 	self endon(param_01 + "_finished");
 	var_04 = lib_0A1E::asm_getallanimsforstate(param_00,param_01);
-	self._blackboard.var_28D1 = 1;
+	self.var_1198.var_28D1 = 1;
 	self aiclearanim(lib_0A1E::asm_getbodyknob(),param_02);
 	self _meth_82E7(param_01,var_04,1,param_02,1);
 	lib_0A1E::func_2369(param_00,param_01,var_04);
-	lib_0A1E::func_231F(param_00,param_01,scripts/asm/asm::func_2341(param_00,param_01));
+	lib_0A1E::func_231F(param_00,param_01,scripts\asm\asm::func_2341(param_00,param_01));
 	self aiclearanim(var_04,param_02);
-	self._blackboard.var_28D0 = undefined;
-	self._blackboard.var_28D1 = undefined;
+	self.var_1198.var_28D0 = undefined;
+	self.var_1198.var_28D1 = undefined;
 }
 
 func_980D(param_00,param_01,param_02,param_03) {}
@@ -87,7 +87,7 @@ func_D48B(param_00,param_01,param_02,param_03) {}
 func_3EDA(param_00,param_01,param_02,param_03) {}
 
 func_195F() {
-	if(isdefined(self._blackboard.var_778B) && self._blackboard.var_778B) {
+	if(isdefined(self.var_1198.var_778B) && self.var_1198.var_778B) {
 		return 1;
 	}
 
@@ -95,7 +95,7 @@ func_195F() {
 }
 
 func_19D2() {
-	if(isdefined(self._blackboard.var_D636) && self._blackboard.var_D636) {
+	if(isdefined(self.var_1198.var_D636) && self.var_1198.var_D636) {
 		return 1;
 	}
 
@@ -387,7 +387,7 @@ func_1955(param_00,param_01,param_02) {
 	self endon("gesture_stop");
 	self notify("start_gesture_lookat");
 	if(isai(self)) {
-		var_03 = scripts/asm/asm::asm_getcurrentstate(self.asmname);
+		var_03 = scripts\asm\asm::asm_getcurrentstate(self.asmname);
 	}
 	else
 	{
@@ -497,7 +497,7 @@ func_1959(param_00,param_01) {
 	self endon("entitydeleted");
 	self notify("start_gesture_torso_lookat");
 	if(isai(self)) {
-		var_02 = scripts/asm/asm::asm_getcurrentstate(self.asmname);
+		var_02 = scripts\asm\asm::asm_getcurrentstate(self.asmname);
 	}
 	else
 	{
@@ -672,13 +672,13 @@ func_1951() {
 		self _meth_82AC(var_06,var_16,self.var_778E);
 		self _meth_82AC(var_04,var_14 + 0.005,self.var_778E);
 		if(var_18) {
-			var_09 = scripts/sp/math::func_AB6F(var_09,var_17,0.1);
-			var_0A = scripts/sp/math::func_AB6F(var_0A,0.005,0.1);
+			var_09 = scripts\sp\math::func_AB6F(var_09,var_17,0.1);
+			var_0A = scripts\sp\math::func_AB6F(var_0A,0.005,0.1);
 		}
 		else
 		{
-			var_09 = scripts/sp/math::func_AB6F(var_09,0.005,0.1);
-			var_0A = scripts/sp/math::func_AB6F(var_0A,var_17,0.1);
+			var_09 = scripts\sp\math::func_AB6F(var_09,0.005,0.1);
+			var_0A = scripts\sp\math::func_AB6F(var_0A,var_17,0.1);
 		}
 
 		self _meth_82AC(var_07,var_09,self.var_778E);
@@ -931,13 +931,13 @@ func_1966() {
 		self _meth_82AC(var_04,var_12,0.2);
 		self _meth_82AC(var_02,var_10 + 0.005,0.2);
 		if(var_14) {
-			var_07 = scripts/sp/math::func_AB6F(var_07,var_13,0.1);
-			var_08 = scripts/sp/math::func_AB6F(var_08,0,0.1);
+			var_07 = scripts\sp\math::func_AB6F(var_07,var_13,0.1);
+			var_08 = scripts\sp\math::func_AB6F(var_08,0,0.1);
 		}
 		else
 		{
-			var_07 = scripts/sp/math::func_AB6F(var_07,0,0.1);
-			var_08 = scripts/sp/math::func_AB6F(var_08,var_13,0.1);
+			var_07 = scripts\sp\math::func_AB6F(var_07,0,0.1);
+			var_08 = scripts\sp\math::func_AB6F(var_08,var_13,0.1);
 		}
 
 		self _meth_82AC(var_05,var_07,0.2);
@@ -998,9 +998,9 @@ func_195D(param_00) {
 	self.var_D63D = undefined;
 	self.var_D635 = undefined;
 	self.var_C00A = 0;
-	self._blackboard.var_D636 = 1;
-	var_01 = scripts/asm/asm::asm_getdemeanor();
-	var_02 = scripts/asm/asm::asm_getcurrentstate(self.asmname);
+	self.var_1198.var_D636 = 1;
+	var_01 = scripts\asm\asm::asm_getdemeanor();
+	var_02 = scripts\asm\asm::asm_getcurrentstate(self.asmname);
 	lib_0A1E::func_2381(self.asmname,var_02);
 	if(var_01 != "casual" && var_01 != "casual_gun") {
 		self.var_77AD = %gesture_partials;
@@ -1010,7 +1010,7 @@ func_195D(param_00) {
 		self.var_77AD = %point_at_without_head;
 	}
 
-	if(!scripts/asm/asm::func_231B(self.asmname,"gesture")) {
+	if(!scripts\asm\asm::func_231B(self.asmname,"gesture")) {
 		return;
 	}
 	else if(var_01 == "casual" || var_01 == "combat" || var_01 == "casual_gun" || var_01 == "frantic") {
@@ -1116,7 +1116,7 @@ func_195D(param_00) {
 	wait(var_19);
 	self aiclearanim(self.var_77AD,0.25);
 	self _meth_82AC(self.var_778D,1,0.25);
-	self._blackboard.var_D636 = 0;
+	self.var_1198.var_D636 = 0;
 }
 
 func_1960(param_00) {
@@ -1128,9 +1128,9 @@ func_1960(param_00) {
 	var_01 = "casual";
 	var_02 = undefined;
 	if(isai(self)) {
-		self._blackboard.var_778B = 1;
-		var_01 = scripts/asm/asm::asm_getdemeanor();
-		var_02 = scripts/asm/asm::asm_getcurrentstate(self.asmname);
+		self.var_1198.var_778B = 1;
+		var_01 = scripts\asm\asm::asm_getdemeanor();
+		var_02 = scripts\asm\asm::asm_getcurrentstate(self.asmname);
 	}
 
 	var_03 = ["shrug","cross","nod","salute","wave","wait","fallback_up"];
@@ -1145,7 +1145,7 @@ func_1960(param_00) {
 		return;
 	}
 
-	if(isai(self) && !scripts/asm/asm::func_231B(self.asmname,"gesture")) {
+	if(isai(self) && !scripts\asm\asm::func_231B(self.asmname,"gesture")) {
 		return;
 	}
 	else if(isai(self)) {
@@ -1330,7 +1330,7 @@ func_1960(param_00) {
 
 	self.var_9C5F = 0;
 	if(isai(self)) {
-		self._blackboard.var_778B = undefined;
+		self.var_1198.var_778B = undefined;
 	}
 }
 
@@ -1501,7 +1501,7 @@ func_192F(param_00,param_01) {
 	var_02 = %add_gesture;
 	var_03 = 0;
 	var_04 = "single anim";
-	thread scripts/sp/anim::func_10CBF(self,var_04,undefined,undefined,param_00);
+	thread scripts\sp\anim::func_10CBF(self,var_04,undefined,undefined,param_00);
 	if(isdefined(param_01) && param_01) {
 		var_02 = %gesture_partials;
 		var_03 = 1;
@@ -1795,13 +1795,13 @@ func_2B8A() {
 
 		var_00 _meth_82AC(var_00.var_7540,var_12 + 0.005,0.2);
 		if(var_16) {
-			var_07 = scripts/sp/math::func_AB6F(var_07,var_15,0.1);
-			var_08 = scripts/sp/math::func_AB6F(var_08,0,0.1);
+			var_07 = scripts\sp\math::func_AB6F(var_07,var_15,0.1);
+			var_08 = scripts\sp\math::func_AB6F(var_08,0,0.1);
 		}
 		else
 		{
-			var_07 = scripts/sp/math::func_AB6F(var_07,0,0.1);
-			var_08 = scripts/sp/math::func_AB6F(var_08,var_15,0.1);
+			var_07 = scripts\sp\math::func_AB6F(var_07,0,0.1);
+			var_08 = scripts\sp\math::func_AB6F(var_08,var_15,0.1);
 		}
 
 		if(isdefined(var_00.var_E52E)) {
@@ -1977,13 +1977,13 @@ func_2B86() {
 
 		var_00 _meth_82AC(var_00.var_7540,var_14 + 0.005,0.2);
 		if(var_18) {
-			var_07 = scripts/sp/math::func_AB6F(var_07,var_17,0.1);
-			var_08 = scripts/sp/math::func_AB6F(var_08,0,0.1);
+			var_07 = scripts\sp\math::func_AB6F(var_07,var_17,0.1);
+			var_08 = scripts\sp\math::func_AB6F(var_08,0,0.1);
 		}
 		else
 		{
-			var_07 = scripts/sp/math::func_AB6F(var_07,0,0.1);
-			var_08 = scripts/sp/math::func_AB6F(var_08,var_17,0.1);
+			var_07 = scripts\sp\math::func_AB6F(var_07,0,0.1);
+			var_08 = scripts\sp\math::func_AB6F(var_08,var_17,0.1);
 		}
 
 		if(isdefined(var_00.var_E52E)) {

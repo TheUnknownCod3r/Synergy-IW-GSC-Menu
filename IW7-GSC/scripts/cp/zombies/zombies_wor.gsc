@@ -1,8 +1,8 @@
-/******************************************************
+/**********************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\cp\zombies\zombies_wor.gsc
-******************************************************/
+ * Script: scripts\cp\zombies\zombies_wor.gsc
+**********************************************/
 
 init() {
 	scripts\engine\utility::flag_init("dischord_glasses_pickedup");
@@ -1004,7 +1004,7 @@ wait_for_crystal_to_charge(param_00,param_01,param_02,param_03) {
 		}
 
 		thread crytsal_capture_killed_essense(var_06,param_02);
-		param_02.var_E866++;
+		param_02.runner_count++;
 		var_04++;
 	}
 
@@ -1054,7 +1054,7 @@ crytsal_capture_killed_essense(param_00,param_01) {
 	param_01 setscriptablepartstate("sparks","sparks");
 	wait(0.25);
 	param_01 setscriptablepartstate("sparks","neutral");
-	param_01.var_E866--;
+	param_01.runner_count--;
 	var_02 delete();
 }
 
@@ -1649,7 +1649,7 @@ listen_for_mouth_explosion(param_00,param_01,param_02) {
 
 	self waittill("explode",var_03);
 	var_04 = getent("headcutter_grenade_vol","targetname");
-	if(function_010F(var_03,var_04)) {
+	if(ispointinvolume(var_03,var_04)) {
 		param_01 notify("cryo_hit");
 		if(isdefined(param_02)) {
 			param_02 thread scripts\cp\cp_vo::try_to_play_vo("quest_icemonster_grenade","zmb_comment_vo","highest",10,1,0,0,100);
@@ -1669,7 +1669,7 @@ wor_change_portal(param_00) {
 	}
 
 	while(level.wor_portal_change_time > 0) {
-		level.var_13DB5--;
+		level.wor_portal_change_time--;
 		wait(1);
 	}
 }
@@ -1746,7 +1746,7 @@ dischord_target_listener(param_00) {
 	while(!var_01) {
 		param_00 waittill("damage",var_02,var_03);
 		if(isplayer(var_03) && scripts\engine\utility::istrue(var_03.wearing_dischord_glasses) || level.debug_dischord_targets) {
-			level.var_5629++;
+			level.dischord_targets_hit++;
 			var_01 = 1;
 			if(level.dischord_targets_hit >= 5) {
 				level notify("ww_iw7_dischord_zm_battery_dropped",param_00.origin - (0,0,50));
@@ -2130,7 +2130,7 @@ listen_for_cryo_kills() {
 	while(var_00 < var_01) {
 		self waittill("headcutter_cryo_kill",var_02,var_03);
 		var_00++;
-		level.var_11A20++;
+		level.total_cryo_kills++;
 	}
 
 	var_04 = getent("main_street_monster","targetname");
@@ -2258,7 +2258,7 @@ wor_give_weapon(param_00,param_01,param_02) {
 		scripts\cp\zombies\zombie_analytics::log_crafted_wor_headcutter(level.wave_num);
 	}
 
-	param_00 scripts/cp/zombies/achievement::update_achievement("ROCK_ON",1);
+	param_00 scripts\cp\zombies\achievement::update_achievement("ROCK_ON",1);
 	level thread scripts\cp\cp_vo::remove_from_nag_vo("dj_wor_use_nag");
 	var_08 = spawnstruct();
 	var_08.lvl = 1;

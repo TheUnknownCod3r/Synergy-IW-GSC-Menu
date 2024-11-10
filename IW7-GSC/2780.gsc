@@ -1,11 +1,11 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2780.gsc
+ * Script: 2780.gsc
 ***************************************/
 
 func_D41B() {
-  level._effect["shoulder_cannon_charge"] = loadfx("vfx/old/misc/shoulder_cannon_charge");
-  level._effect["shoulder_cannon_view_flash"] = loadfx("vfx/core/muzflash/minigun_flash_view");
+  level._effect["shoulder_cannon_charge"] = loadfx("vfx\old\misc\shoulder_cannon_charge");
+  level._effect["shoulder_cannon_view_flash"] = loadfx("vfx\core\muzflash\minigun_flash_view");
 }
 
 func_E89C() {
@@ -319,7 +319,7 @@ func_1000B(var_00) {
   self endon("disconnect");
   level endon("game_ended");
   var_01 = 1;
-  var_02 = scripts/mp/powers::func_D735("power_shoulderCannon");
+  var_02 = scripts\mp\powers::func_D735("power_shoulderCannon");
 
   for (;;) {
   if (var_02 == "+frag")

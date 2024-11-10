@@ -1,8 +1,8 @@
-/********************************************************************
+/************************************************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\scripts\mp\killstreaks\_portableaoegenerator.gsc
-********************************************************************/
+ * Script: scripts\mp\killstreaks\_portableaoegenerator.gsc
+************************************************************/
 
 init() {
 	if(!isdefined(level.var_D671)) {
@@ -14,7 +14,7 @@ init() {
 func_FB16(param_00) {
 	var_01 = level.var_D671[param_00];
 	self give_player_xp("flash");
-	scripts\mp\_utility::_giveweapon(var_01.var_39C,0);
+	scripts\mp\utility::_giveweapon(var_01.var_39C,0);
 	self givestartammo(var_01.var_39C);
 	if(!isdefined(self.var_522E)) {
 		self.var_522E = [];
@@ -127,25 +127,25 @@ func_108EA(param_00,param_01) {
 	var_03 setcandamage(1);
 	var_03 setmodel(var_02.placedmodel);
 	if(level.teambased) {
-		var_03 scripts\mp\_entityheadicons::setteamheadicon(self.team,(0,0,var_02.var_8C79));
+		var_03 scripts\mp\entityheadicons::setteamheadicon(self.team,(0,0,var_02.var_8C79));
 	}
 	else
 	{
-		var_03 scripts\mp\_entityheadicons::setplayerheadicon(self,(0,0,var_02.var_8C79));
+		var_03 scripts\mp\entityheadicons::setplayerheadicon(self,(0,0,var_02.var_8C79));
 	}
 
 	var_03 thread func_13AE2(self,param_00);
 	var_03 thread func_139E5(self,param_00);
 	var_03 thread func_13B9C(self,param_00);
-	var_03 thread scripts\mp\_utility::notusableforjoiningplayers(self);
+	var_03 thread scripts\mp\utility::notusableforjoiningplayers(self);
 	if(isdefined(var_02.ondeploycallback)) {
 		var_03 [[var_02.ondeploycallback]](self,param_00);
 	}
 
-	var_03 thread scripts\mp\_weapons::createbombsquadmodel(var_02.bombsquadmodel,"tag_origin",self);
+	var_03 thread scripts\mp\weapons::createbombsquadmodel(var_02.bombsquadmodel,"tag_origin",self);
 	func_DEF2(var_03,param_00,1);
 	wait(0.05);
-	if(isdefined(var_03) && var_03 scripts\mp\_utility::touchingbadtrigger()) {
+	if(isdefined(var_03) && var_03 scripts\mp\utility::touchingbadtrigger()) {
 		var_03 notify("death");
 	}
 
@@ -155,7 +155,7 @@ func_108EA(param_00,param_01) {
 func_13AE2(param_00,param_01) {
 	self endon("death");
 	level endon("game_ended");
-	if(scripts\mp\_utility::bot_is_fireteam_mode()) {
+	if(scripts\mp\utility::bot_is_fireteam_mode()) {
 		param_00 waittill("killstreak_disowned");
 	}
 	else
@@ -169,16 +169,16 @@ func_13AE2(param_00,param_01) {
 func_139E5(param_00,param_01) {
 	self.var_773C = param_01;
 	var_02 = level.var_D671[param_01];
-	scripts\mp\_damage::monitordamage(var_02.health,var_02.damagefeedback,::handledeathdamage,::modifydamage,0);
+	scripts\mp\damage::monitordamage(var_02.health,var_02.damagefeedback,::handledeathdamage,::modifydamage,0);
 }
 
 modifydamage(param_00,param_01,param_02,param_03,param_04) {
 	var_05 = param_03;
-	var_05 = scripts\mp\_damage::handlemeleedamage(param_01,param_02,var_05);
-	var_05 = scripts\mp\_damage::handleempdamage(param_01,param_02,var_05);
-	var_05 = scripts\mp\_damage::handlemissiledamage(param_01,param_02,var_05);
-	var_05 = scripts\mp\_damage::handlegrenadedamage(param_01,param_02,var_05);
-	var_05 = scripts\mp\_damage::handleapdamage(param_01,param_02,var_05);
+	var_05 = scripts\mp\damage::handlemeleedamage(param_01,param_02,var_05);
+	var_05 = scripts\mp\damage::handleempdamage(param_01,param_02,var_05);
+	var_05 = scripts\mp\damage::handlemissiledamage(param_01,param_02,var_05);
+	var_05 = scripts\mp\damage::handlegrenadedamage(param_01,param_02,var_05);
+	var_05 = scripts\mp\damage::handleapdamage(param_01,param_02,var_05);
 	return var_05;
 }
 
@@ -203,11 +203,11 @@ func_13B9C(param_00,param_01) {
 	var_02 = level.var_D671[param_01];
 	self setcursorhint("HINT_NOICON");
 	self sethintstring(var_02.usehintstring);
-	scripts\mp\_utility::setselfusable(param_00);
+	scripts\mp\utility::setselfusable(param_00);
 	for(;;) {
 		self waittill("trigger",var_03);
 		var_03 playlocalsound(var_02.var_130D9);
-		if(var_03 getrunningforwardpainanim(var_02.var_39C) == 0 && !var_03 scripts\mp\_utility::isjuggernaut()) {
+		if(var_03 getrunningforwardpainanim(var_02.var_39C) == 0 && !var_03 scripts\mp\utility::isjuggernaut()) {
 			var_03 func_FB16(param_01);
 		}
 
@@ -240,7 +240,7 @@ func_3DE7(param_00) {
 		var_03 = var_02.var_2044 * var_02.var_2044;
 		var_04 = undefined;
 		foreach(var_06 in var_01) {
-			if(isdefined(var_06) && scripts\mp\_utility::isreallyalive(var_06)) {
+			if(isdefined(var_06) && scripts\mp\utility::isreallyalive(var_06)) {
 				if((level.teambased && func_B3E5(var_06.team,self.team,var_02.var_11589)) || !level.teambased && func_B3E4(var_06.triggerportableradarping,self,var_02.var_11589)) {
 					var_07 = distancesquared(var_06.origin,self.origin);
 					if(var_07 < var_03) {

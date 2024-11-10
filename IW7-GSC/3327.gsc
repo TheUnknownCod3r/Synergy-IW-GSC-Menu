@@ -1,8 +1,8 @@
-/****************************
+/************************
  * Decompiled by Bog
  * Edited by SyndiShanX
- * Script: scripts\3327.gsc
-****************************/
+ * Script: 3327.gsc
+************************/
 
 initprestige() {
 	var_00 = [];
@@ -21,7 +21,7 @@ initprestige() {
 	level.prestige_nerf_func = var_00;
 	var_01 = [];
 	for(var_02 = 0;var_02 < 10;var_02++) {
-		var_03 = tablelookupbyrow("cp/alien/prestige_nerf.csv",var_02,1);
+		var_03 = tablelookupbyrow("cp\alien\prestige_nerf.csv",var_02,1);
 		if(!isdefined(var_03) || var_03 == "") {
 			break;
 		}

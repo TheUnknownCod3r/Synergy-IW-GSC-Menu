@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2811.gsc
+ * Script: 2811.gsc
 ***************************************/
 
 init() {
@@ -32,16 +32,16 @@ loadweaponranktable() {
   var_00 = 0;
 
   for (;;) {
-  var_01 = int(tablelookuprownum("mp/weaponRankTable.csv", 0, var_00));
+  var_01 = int(tablelookuprownum("mp\weaponRankTable.csv", 0, var_00));
 
   if (!isdefined(var_01) || var_01 < 0)
   break;
 
   var_02 = spawnstruct();
   level.weaponranktable.rankinfo[var_00] = var_02;
-  var_2.minxp = int(tablelookupbyrow("mp/weaponRankTable.csv", var_00, 1));
-  var_2.xptonextrank = int(tablelookupbyrow("mp/weaponRankTable.csv", var_00, 2));
-  var_2.maxxp = int(tablelookupbyrow("mp/weaponRankTable.csv", var_00, 3));
+  var_2.minxp = int(tablelookupbyrow("mp\weaponRankTable.csv", var_00, 1));
+  var_2.xptonextrank = int(tablelookupbyrow("mp\weaponRankTable.csv", var_00, 2));
+  var_2.maxxp = int(tablelookupbyrow("mp\weaponRankTable.csv", var_00, 3));
   var_0++;
   }
 
@@ -50,13 +50,13 @@ loadweaponranktable() {
   var_03 = 1;
 
   for (;;) {
-  var_01 = int(tablelookuprownum("mp/statstable.csv", 0, var_03));
+  var_01 = int(tablelookuprownum("mp\statstable.csv", 0, var_03));
 
   if (!isdefined(var_01) || var_01 < 0)
   break;
 
-  var_04 = tablelookupbyrow("mp/statstable.csv", var_01, 4);
-  var_05 = tablelookupbyrow("mp/statstable.csv", var_01, 42);
+  var_04 = tablelookupbyrow("mp\statstable.csv", var_01, 4);
+  var_05 = tablelookupbyrow("mp\statstable.csv", var_01, 42);
 
   if (!isdefined(var_04) || var_04 == "" || !isdefined(var_05) || var_05 == "") {} else {
   var_05 = int(var_05);

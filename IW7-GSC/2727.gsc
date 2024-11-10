@@ -1,6 +1,6 @@
 /***************************************
  * Decompiled and Edited by SyndiShanX
- * Script: scripts\2727.gsc
+ * Script: 2727.gsc
 ***************************************/
 
 init() {
@@ -32,12 +32,12 @@ init() {
   var_02 = 0;
 
   for (;;) {
-  var_03 = tablelookupbyrow("mp/score_event_table.csv", var_02, 0);
+  var_03 = tablelookupbyrow("mp\score_event_table.csv", var_02, 0);
 
   if (!isdefined(var_03) || var_03 == "")
   break;
 
-  var_04 = tablelookupbyrow("mp/score_event_table.csv", var_02, var_0[var_01]);
+  var_04 = tablelookupbyrow("mp\score_event_table.csv", var_02, var_0[var_01]);
 
   if (!isdefined(var_04) || var_04 == "") {
   var_2++;
@@ -52,18 +52,18 @@ init() {
   if (var_04 != -1)
   scripts\mp\rank::registerscoreinfo(var_03, "value", var_04);
 
-  var_05 = tablelookuprownum("mp/score_event_table.csv", 0, var_03);
+  var_05 = tablelookuprownum("mp\score_event_table.csv", 0, var_03);
   scripts\mp\rank::registerscoreinfo(var_03, "eventID", var_05);
-  var_05 = tablelookupbyrow("mp/score_event_table.csv", var_02, 1);
+  var_05 = tablelookupbyrow("mp\score_event_table.csv", var_02, 1);
   scripts\mp\rank::registerscoreinfo(var_03, "text", var_05);
-  var_06 = tablelookuprownum("mp/splashTable.csv", 0, var_03);
+  var_06 = tablelookuprownum("mp\splashTable.csv", 0, var_03);
 
   if (isdefined(var_06) && var_06 != -1)
   scripts\mp\rank::registerscoreinfo(var_03, "splashID", var_06);
 
-  var_07 = tablelookupbyrow("mp/score_event_table.csv", var_02, 3);
+  var_07 = tablelookupbyrow("mp\score_event_table.csv", var_02, 3);
   scripts\mp\rank::registerscoreinfo(var_03, "group", var_07);
-  var_08 = tablelookupbyrow("mp/score_event_table.csv", var_02, 2);
+  var_08 = tablelookupbyrow("mp\score_event_table.csv", var_02, 2);
 
   if (isdefined(var_08) && tolower(var_08) == "true")
   scripts\mp\rank::registerscoreinfo(var_03, "allowBonus", 1);
@@ -71,7 +71,7 @@ init() {
   var_2++;
   }
 
-  level._effect["money"] = loadfx("vfx/props/cash_player_drop");
+  level._effect["money"] = loadfx("vfx\props\cash_player_drop");
   level.numkills = 0;
   level thread onplayerconnect();
 }
