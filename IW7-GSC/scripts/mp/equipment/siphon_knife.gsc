@@ -1,17 +1,29 @@
-/*************************************************
- * Decompiled by Bog
- * Edited by SyndiShanX
- * Script: scripts\mp\equipment\siphon_knife.gsc
-*************************************************/
+/*******************************************************************
+ * Decompiled By: Bog
+ * Decompiled File: 3585.gsc
+ * Game: Call of Duty: Infinite Warfare
+ * Platform: PC
+ * Function Count: 5
+ * Decompile Time: 1 ms
+ * Timestamp: 10/27/2023 12:30:48 AM
+*******************************************************************/
 
-func_10218() {}
+//Function Number: 1
+func_10218()
+{
+}
 
-func_1181D(param_00,param_01,param_02) {
-	if(isdefined(param_02) && isdefined(param_01)) {
-		if(isplayer(param_01) && param_01 != param_02) {
-			if(!level.teambased || param_02.team != param_01.team) {
+//Function Number: 2
+func_1181D(param_00,param_01,param_02)
+{
+	if(isdefined(param_02) && isdefined(param_01))
+	{
+		if(isplayer(param_01) && param_01 != param_02)
+		{
+			if(!level.teambased || param_02.team != param_01.team)
+			{
 				param_02 thread func_10219(param_02);
-				scripts\mp\lightarmor::setlightarmorvalue(param_02,param_02.maxhealth,0);
+				scripts\mp\_lightarmor::setlightarmorvalue(param_02,param_02.maxhealth,0);
 			}
 		}
 	}
@@ -20,35 +32,44 @@ func_1181D(param_00,param_01,param_02) {
 	param_00 delete();
 }
 
-func_10219(param_00) {
+//Function Number: 3
+func_10219(param_00)
+{
 	param_00 endon("death");
 	param_00 endon("disconnect");
 	param_00 thread func_1021A(param_00);
 	param_00 notify("adrenaline_used");
-	param_00 scripts\mp\utility::giveperk("specialty_adrenaline");
+	param_00 scripts\mp\_utility::giveperk("specialty_adrenaline");
 	wait(2);
-	param_00 scripts\mp\utility::removeperk("specialty_adrenaline");
+	param_00 scripts\mp\_utility::removeperk("specialty_adrenaline");
 	param_00 notify("siphonKnife_regen_end");
 }
 
-func_1021A(param_00) {
+//Function Number: 4
+func_1021A(param_00)
+{
 	self endon("death");
 	self endon("disconnect");
 	self endon("siphonKnife_regen_end");
-	if(!isdefined(param_00)) {
+	if(!isdefined(param_00))
+	{
 		return;
 	}
 
 	self playlocalsound("mp_overcharge_on");
-	for(;;) {
+	for(;;)
+	{
 		var_01 = playfx(scripts\engine\utility::getfx("siphonKnife_regenWorld"),self.origin + (0,0,25),anglestoforward(self.angles),anglestoup(self.angles));
 		var_01 hidefromplayer(self);
 		wait(0.1);
 	}
 }
 
-func_10217(param_00,param_01) {
-	if(isdefined(param_00)) {
+//Function Number: 5
+func_10217(param_00,param_01)
+{
+	if(isdefined(param_00))
+	{
 		param_00 playlocalsound("bs_shield_explo");
 	}
 
