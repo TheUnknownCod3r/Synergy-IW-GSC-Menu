@@ -28,6 +28,8 @@ If you have any Issues/Suggestions, please Submit them in [Issues](https://githu
 
 * Open `Synergy_MP.gsc` with a Text Editor and Replace `Username` on Line 5 with your Username
 
+* You have to play with other Players or Bots, so the best option is to play Combat Training in the Public Match Section
+
 ## Credits
 
 This menu is based on [M203](https://github.com/Xeirh/M203) by [Xeirh](https://github.com/Xeirh)
